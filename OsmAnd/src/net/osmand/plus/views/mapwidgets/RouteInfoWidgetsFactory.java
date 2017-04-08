@@ -672,7 +672,7 @@ public class RouteInfoWidgetsFactory {
 				Location myLocation = getOsmandApplication().getLocationProvider().getLastKnownLocation();
 				LatLon l = getPointToNavigate();
 				if (l == null) {
-					List<MapMarker> markers = getOsmandApplication().getMapMarkersHelper().getSortedMapMarkers();
+					List<MapMarker> markers = getOsmandApplication().getMapMarkersHelper().getMapMarkers();
 					if (markers.size() > 0) {
 						l = markers.get(0).point;
 					}

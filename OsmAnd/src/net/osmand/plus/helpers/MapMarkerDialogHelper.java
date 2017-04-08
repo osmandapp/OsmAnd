@@ -100,7 +100,7 @@ public class MapMarkerDialogHelper {
 	}
 
 	public boolean hasActiveMarkers() {
-		return markersHelper.getActiveMapMarkers().size() > 0;
+		return markersHelper.getMapMarkers().size() > 0;
 	}
 
 	public void setSelectionMode(boolean selectionMode) {
@@ -166,7 +166,7 @@ public class MapMarkerDialogHelper {
 		List<Object> activeObjects = getActiveObjects(objects);
 
 		allSelected = true;
-		List<MapMarker> activeMarkers = new ArrayList<>(markersHelper.getActiveMapMarkers());
+		List<MapMarker> activeMarkers = new ArrayList<>(markersHelper.getMapMarkers());
 		for (MapMarker m : activeMarkers) {
 			if (!m.selected) {
 				allSelected = false;
@@ -290,7 +290,7 @@ public class MapMarkerDialogHelper {
 								public void onClick(DialogInterface dialog, int which) {
 									listAdapter.notifyDataSetInvalidated();
 									markersHelper.removeMarkersHistory();
-									if (markersHelper.getActiveMapMarkers().size() == 0) {
+									if (markersHelper.getMapMarkers().size() == 0) {
 										mapActivity.getDashboard().hideDashboard();
 									} else if (helperCallbacks != null) {
 										helperCallbacks.reloadAdapter();
@@ -318,7 +318,7 @@ public class MapMarkerDialogHelper {
 				btn.setOnClickListener(new View.OnClickListener() {
 					@Override
 					public void onClick(View v) {
-						List<MapMarker> markers = markersHelper.getActiveMapMarkers();
+						List<MapMarker> markers = markersHelper.getMapMarkers();
 						for (MapMarker marker : markers) {
 							marker.selected = !allSelected;
 						}
@@ -371,7 +371,7 @@ public class MapMarkerDialogHelper {
 							}
 						});
 
-						if (!sorted && markersHelper.getActiveMapMarkers().size() > 1) {
+						if (!sorted && markersHelper.getMapMarkers().size() > 1) {
 							item = optionsMenu.getMenu().add(R.string.shared_string_reverse_order).setIcon(
 									iconsCache.getThemedIcon(R.drawable.ic_action_undo_dark));
 							item.setOnMenuItemClickListener(new MenuItem.OnMenuItemClickListener() {
@@ -393,7 +393,7 @@ public class MapMarkerDialogHelper {
 						item.setOnMenuItemClickListener(new MenuItem.OnMenuItemClickListener() {
 							@Override
 							public boolean onMenuItemClick(MenuItem item) {
-								generateGPX(markersHelper.getActiveMapMarkers());
+								generateGPX(markersHelper.getMapMarkers());
 								return true;
 							}
 						});
@@ -745,7 +745,7 @@ public class MapMarkerDialogHelper {
 		LatLon mapLocation =
 				new LatLon(mapActivity.getMapView().getLatitude(), mapActivity.getMapView().getLongitude());
 
-		List<MapMarker> activeMarkers = new ArrayList<>(markersHelper.getActiveMapMarkers());
+		List<MapMarker> activeMarkers = new ArrayList<>(markersHelper.getMapMarkers());
 		calcDistance(mapLocation, activeMarkers);
 		if (sorted) {
 			Collections.sort(activeMarkers, new Comparator<MapMarker>() {
@@ -899,7 +899,7 @@ public class MapMarkerDialogHelper {
 			fout = new File(dir, fileName + "_" + (++ind) + ".gpx");
 		}
 		GPXFile file = new GPXFile();
-		for (MapMarker marker : markersHelper.getActiveMapMarkers()) {
+		for (MapMarker marker : markersHelper.getMapMarkers()) {
 			WptPt wpt = new WptPt();
 			wpt.lat = marker.getLatitude();
 			wpt.lon = marker.getLongitude();

@@ -93,7 +93,7 @@ public class MapMarkersWidgetsFactory {
 		});
 
 		IconsCache iconsCache = map.getMyApplication().getIconsCache();
-		if (isLandscapeLayout() && helper.getSortedMapMarkers().size() > 1) {
+		if (isLandscapeLayout() && helper.getMapMarkers().size() > 1) {
 			moreButton.setVisibility(View.GONE);
 		} else {
 			moreButton.setImageDrawable(iconsCache.getIcon(R.drawable.ic_overflow_menu_white, R.color.marker_top_2nd_line_color));
@@ -132,16 +132,16 @@ public class MapMarkersWidgetsFactory {
 	}
 
 	private void removeMarker(int index) {
-		if (helper.getSortedMapMarkers().size() > index) {
-			MapMarker marker = helper.getSortedMapMarkers().get(index);
+		if (helper.getMapMarkers().size() > index) {
+			MapMarker marker = helper.getMapMarkers().get(index);
 			helper.removeMapMarker(marker.index);
 			helper.addMapMarkerHistory(marker);
 		}
 	}
 
 	private void showMarkerOnMap(int index) {
-		if (helper.getSortedMapMarkers().size() > index) {
-			MapMarker marker = helper.getSortedMapMarkers().get(index);
+		if (helper.getMapMarkers().size() > index) {
+			MapMarker marker = helper.getMapMarkers().get(index);
 			AnimateDraggingMapThread thread = map.getMapView().getAnimatedDraggingThread();
 			LatLon pointToNavigate = marker.point;
 			if (pointToNavigate != null) {
@@ -195,7 +195,7 @@ public class MapMarkersWidgetsFactory {
 			}
 		}
 
-		List<MapMarker> markers = helper.getSortedMapMarkers();
+		List<MapMarker> markers = helper.getMapMarkers();
 		if (zoom < 3 || markers.size() == 0
 				|| !map.getMyApplication().getSettings().MAP_MARKERS_MODE.get().isToolbar()
 				|| map.getMyApplication().getRoutingHelper().isFollowingMode()
@@ -385,7 +385,7 @@ public class MapMarkersWidgetsFactory {
 		}
 
 		private MapMarker getMarker() {
-			List<MapMarker> markers = helper.getSortedMapMarkers();
+			List<MapMarker> markers = helper.getMapMarkers();
 			if (firstMarker) {
 				if (markers.size() > 0) {
 					return markers.get(0);

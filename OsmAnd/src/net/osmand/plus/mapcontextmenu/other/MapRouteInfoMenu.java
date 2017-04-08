@@ -458,7 +458,7 @@ public class MapRouteInfoMenu implements IRouteInformationListener {
 
 	private void selectMapMarker(final int index, final boolean target) {
 		if (index != -1) {
-			MapMarker m = mapActivity.getMyApplication().getMapMarkersHelper().getActiveMapMarkers().get(index);
+			MapMarker m = mapActivity.getMyApplication().getMapMarkersHelper().getMapMarkers().get(index);
 			LatLon point = new LatLon(m.getLatitude(), m.getLongitude());
 			if (target) {
 				getTargets().navigateToPoint(point, true, -1, m.getPointDescription(mapActivity));
@@ -794,7 +794,7 @@ public class MapRouteInfoMenu implements IRouteInformationListener {
 
 	private void addMarkersToSpinner(List<RouteSpinnerRow> actions) {
 		MapMarkersHelper markersHelper = mapActivity.getMyApplication().getMapMarkersHelper();
-		List<MapMarker> markers = markersHelper.getActiveMapMarkers();
+		List<MapMarker> markers = markersHelper.getMapMarkers();
 		if (markers.size() > 0) {
 			MapMarker m = markers.get(0);
 			actions.add(new RouteSpinnerRow(SPINNER_MAP_MARKER_1_ID,

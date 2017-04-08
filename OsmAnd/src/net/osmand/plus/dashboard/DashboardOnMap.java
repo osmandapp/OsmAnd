@@ -90,7 +90,6 @@ import net.osmand.plus.views.controls.SwipeDismissListViewTouchListener;
 import net.osmand.plus.views.controls.SwipeDismissListViewTouchListener.DismissCallbacks;
 import net.osmand.plus.views.controls.SwipeDismissListViewTouchListener.Undoable;
 import net.osmand.plus.views.mapwidgets.MapWidgetRegistry;
-import net.osmand.search.core.ObjectType;
 
 import java.lang.ref.WeakReference;
 import java.util.ArrayList;
@@ -509,7 +508,7 @@ public class DashboardOnMap implements ObservableScrollViewCallbacks, DynamicLis
 		}
 
 		if (visibleType == DashboardType.MAP_MARKERS || visibleType == DashboardType.MAP_MARKERS_SELECTION
-				&& getMyApplication().getMapMarkersHelper().getActiveMapMarkers().size() > 0) {
+				&& getMyApplication().getMapMarkersHelper().getMapMarkers().size() > 0) {
 			sort.setVisibility(View.VISIBLE);
 			sort.setOnClickListener(new View.OnClickListener() {
 				@Override
