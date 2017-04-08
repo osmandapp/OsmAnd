@@ -79,6 +79,6 @@ public class AddOSMBugAction extends QuickAction {
 		getParams().put(KEY_SHO_DIALOG, String.valueOf(showDialog.isChecked()));
 		getParams().put(KEY_MESSAGE, message.getText().toString());
 
-		return !(Boolean.valueOf(getParams().get(KEY_SHO_DIALOG)) && getParams().get(KEY_MESSAGE).isEmpty());
+		return true;
 	}
 }
