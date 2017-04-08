@@ -3058,9 +3058,9 @@ OsmAnd 是開放原始碼，而且正在積極的開發。應用程式從報告�
     <string name="hillshade_purchase_header">要在地圖上看到地形陰影，您需要購買並安裝外掛元件</string>
     <string name="hide_from_zoom_level">從縮放級別來隱藏</string>
     <string name="sorted_by_distance">按距離排序</string>
-    <string name="quick_action_showhide_osmbugs_title">顯示/隱藏 OSM 注解</string>
-    <string name="quick_action_osmbugs_show">顯示 OSM 注解</string>
-    <string name="quick_action_osmbugs_hide">隱藏 OSM 注解</string>
+    <string name="quick_action_showhide_osmbugs_title">顯示/隱藏 OSM 註解</string>
+    <string name="quick_action_osmbugs_show">顯示 OSM 註解</string>
+    <string name="quick_action_osmbugs_hide">隱藏 OSM 註解</string>
     <string name="search_favorites">搜尋我的收藏</string>
     <string name="quick_action_showhide_osmbugs_descr">輕點動作按鈕會在地圖上顯示或隱藏 OSM 註解。</string>
     </resources>
