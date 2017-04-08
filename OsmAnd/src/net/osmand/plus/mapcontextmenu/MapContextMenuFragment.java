@@ -256,12 +256,16 @@ public class MapContextMenuFragment extends Fragment implements DownloadEvents {
 
 			private float velocityY;
 			private float maxVelocityY;
+			private boolean hasMoved;
 
 			@Override
 			public boolean onTouch(View v, MotionEvent event) {
 
 				if (singleTapDetector.onTouchEvent(event)) {
 					moving = false;
+					if (hasMoved) {
+						applyPosY(getViewY(), false, false, 0, 0);
+					}
 					openMenuHalfScreen();
 					return true;
 				}
@@ -275,6 +279,7 @@ public class MapContextMenuFragment extends Fragment implements DownloadEvents {
 
 				switch (event.getAction()) {
 					case MotionEvent.ACTION_DOWN:
+						hasMoved = false;
 						dy = event.getY();
 						dyMain = getViewY();
 						velocity = VelocityTracker.obtain();
@@ -286,6 +291,7 @@ public class MapContextMenuFragment extends Fragment implements DownloadEvents {
 
 					case MotionEvent.ACTION_MOVE:
 						if (moving) {
+							hasMoved = true;
 							float y = event.getY();
 							float newY = getViewY() + (y - dy);
 							setViewY((int) newY, false, false);
@@ -885,34 +891,39 @@ public class MapContextMenuFragment extends Fragment implements DownloadEvents {
 		return zoom;
 	}
 
-	private void showOnMap(LatLon latLon, boolean updateCoords, boolean needMove, boolean alreadyAdjusted) {
-		AnimateDraggingMapThread thread = map.getAnimatedDraggingThread();
-		int fZoom = getZoom();
+	private LatLon calculateCenterLatLon(LatLon latLon, int zoom, boolean updateOrigXY) {
 		double flat = latLon.getLatitude();
 		double flon = latLon.getLongitude();
 
 		RotatedTileBox cp = map.getCurrentRotatedTileBox().copy();
 		cp.setCenterLocation(0.5f, map.getMapPosition() == OsmandSettings.BOTTOM_CONSTANT ? 0.15f : 0.5f);
 		cp.setLatLonCenter(flat, flon);
-		cp.setZoom(fZoom);
+		cp.setZoom(zoom);
 		flat = cp.getLatFromPixel(cp.getPixWidth() / 2, cp.getPixHeight() / 2);
 		flon = cp.getLonFromPixel(cp.getPixWidth() / 2, cp.getPixHeight() / 2);
 
-		if (updateCoords) {
-			mapCenter = new LatLon(flat, flon);
-			menu.setMapCenter(mapCenter);
+		if (updateOrigXY) {
 			origMarkerX = cp.getCenterPixelX();
 			origMarkerY = cp.getCenterPixelY();
 		}
+		return new LatLon(flat, flon);
+	}
+
+	private void showOnMap(LatLon latLon, boolean updateCoords, boolean needMove, boolean alreadyAdjusted) {
+		AnimateDraggingMapThread thread = map.getAnimatedDraggingThread();
+		int fZoom = getZoom();
+		LatLon calcLatLon = calculateCenterLatLon(latLon, fZoom, updateCoords);
+		if (updateCoords) {
+			mapCenter = calcLatLon;
+			menu.setMapCenter(mapCenter);
+		}
 
 		if (!alreadyAdjusted) {
-			LatLon adjustedLatLon = getAdjustedMarkerLocation(getPosY(), new LatLon(flat, flon), true, fZoom);
-			flat = adjustedLatLon.getLatitude();
-			flon = adjustedLatLon.getLongitude();
+			calcLatLon = getAdjustedMarkerLocation(getPosY(), calcLatLon, true, fZoom);
 		}
 
 		if (needMove) {
-			thread.startMoving(flat, flon, fZoom, true);
+			thread.startMoving(calcLatLon.getLatitude(), calcLatLon.getLongitude(), fZoom, true);
 		}
 	}
 
@@ -1263,6 +1274,7 @@ public class MapContextMenuFragment extends Fragment implements DownloadEvents {
 					zoomIn = true;
 				}
 			}
+			calculateCenterLatLon(menu.getLatLon(), getZoom(), true);
 		}
 	}
 
