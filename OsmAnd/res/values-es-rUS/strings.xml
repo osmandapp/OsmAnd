@@ -2871,4 +2871,10 @@ Algunas de las principales funciones:
     <string name="hillshade_menu_download_descr">Para ver el sombreado en el mapa, debes descargar el mapa especial de esta región.</string>
     <string name="hillshade_purchase_header">Para ver el sombreado en el mapa, debes comprar e instalar el complemento</string>
     <string name="hide_from_zoom_level">Ocultar desde el nivel de ampliación</string>
+    <string name="quick_action_showhide_osmbugs_title">Alternar vista de problemas OSM en el mapa</string>
+    <string name="quick_action_osmbugs_show">Mostrar problemas OSM en el mapa</string>
+    <string name="quick_action_osmbugs_hide">Ocultar problemas OSM en el mapa</string>
+    <string name="quick_action_showhide_osmbugs_descr">Al pulsar el botón de acción se mostrarán u ocultarán los informes de problemas en el mapa.</string>
+    <string name="sorted_by_distance">Ordenados por distancia</string>
+    <string name="search_favorites">Buscar favoritos</string>
     </resources>
