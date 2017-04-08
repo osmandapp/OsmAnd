@@ -614,4 +614,10 @@
 	<string name="poi_cuisine_australian">Australsk</string>
 	<string name="poi_outdoor_seating">Uteservering</string>
 	<string name="poi_microbrewery">Mikrobryggeri</string>
+	<string name="poi_cuisine_sausage">Pølse</string>
+	<string name="poi_cuisine_tea">Te</string>
+	<string name="poi_cuisine_pie">Pai</string>
+	<string name="poi_cuisine_salad">Salat</string>
+	<string name="poi_cuisine_frozen_yogurt">Yoghurtis
+</string>
 	</resources>
