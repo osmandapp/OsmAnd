@@ -3119,4 +3119,8 @@ Tidligere destination bliver sidste mellemliggende punkt.</string>
     <string name="hide_from_zoom_level">Skjul fra zoom-niveau</string>
     <string name="sorted_by_distance">Sorteret efter afstand</string>
     <string name="search_favorites">Søg blandt favoritter</string>
+    <string name="quick_action_showhide_osmbugs_title">Vis/skjul OSM noter</string>
+    <string name="quick_action_osmbugs_show">Vis OSM noter</string>
+    <string name="quick_action_osmbugs_hide">Skjule OSM noter</string>
+    <string name="quick_action_showhide_osmbugs_descr">Tryk på genvejsknappen vil vise eller skjule OSM noter på kortet.</string>
     </resources>
