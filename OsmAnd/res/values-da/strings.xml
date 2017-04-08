@@ -55,7 +55,7 @@ De globale data (mellem 70 grader nord og 70 grader syd) er baseret på målinge
 
     <string name="intermediate_points_change_order">Ændre rækkefølge</string>
     <string name="av_video_format">Videoformat</string>
-    <string name="rendering_attr_noAdminboundaries_description">Undertryk visning af regionale administrative grænser (niveau 5–9)</string>
+    <string name="rendering_attr_noAdminboundaries_description">Undertryk visning af regionalegrænser (niveau 5–9)</string>
 
 
     <string name="map_widget_max_speed">Hastighedsgrænse</string>
@@ -284,9 +284,9 @@ Både placering og tid er synlige på betjeningspanel samt i modul på kortskær
     <string name="unknown_location">Position endnu ikke kendt</string>
     <string name="modify_transparency">Ændre gennemsigtighed (0 - gennemsigtig, 255 - ugennemsigtig)</string>
     <string name="confirm_interrupt_download">Annuller filhentning?</string>
-    <string name="first_time_msg">Til mange af funktionerne i programmet skal der bruges nogle regionale offline data som kan hentes via \'Indstillinger\' → \'Administrer kortfiler\'. Bagefter kan man se kort, søge adresser, finde interessepunkter (IP) og kolllektivtrafik.</string>
+    <string name="first_time_msg">Til mange af funktionerne i programmet skal der bruges nogle område offline data som kan hentes via \'Indstillinger\' → \'Administrer kortfiler\'. Bagefter kan man se kort, søge adresser, finde interessepunkter (IP) og kolllektivtrafik.</string>
     <string name="basemap_was_selected_to_download">Grundkort er nødvendige for korrekt programfunktion og blev automatisk valgt.</string>
-    <string name="select_index_file_to_download">Fandt intet. Hvis man ikke kan finde sin region kan man lave den selv (se http://osmand.net).</string>
+    <string name="select_index_file_to_download">Fandt intet. Hvis man ikke kan finde sit område kan man lave den selv (se http://osmand.net).</string>
     <string name="local_indexes_cat_tile">Onlinekort og cachelagrede kortfliser</string>
     <string name="local_indexes_cat_map">Standardkort (vektor)</string>
 
@@ -516,7 +516,7 @@ Kortfliser kan hentes direkte via online-kilder, eller kan fremstilles til offli
 Nogle af hovedfunktionerne:
  - Komplet offline funktionalitet (gemme hentede vektor eller kortfliser i enhedens lager)
  - Kompakt offline vektorkort for hele verden er tilgængelig
- - Kort for enkelte lande eller regioner kan hentes direkte fra OsmAnd
+ - Kort for enkelte lande eller områder kan hentes direkte fra OsmAnd
  - Overlejring af flere kort lag er muligt, som f.eks. GPX eller navigationsspor, Interessepunkter (IP), favoritter, konturlinjer, Kollektivtrafik stoppesteder og flere kort med modificerebar gennemsigtighed
  - Offline søgning af adresser og steder interessepunkter (IP)
  - Offline ruteplanlægning for medium afstande
@@ -616,7 +616,7 @@ OsmAnd+ er den betalte programversion, ved at købe den støtter man projektet, 
 Nogle af hovedfunktionerne:
  - Komplet offline funktionalitet (gem hentede vektor eller kortfliser i enhedens hukommelsseskort)
  - Kompakte offline vektorkort for hele verden tilgængelig
- - Ubegrænset hentning af lande- eller regionskort direkte fra OsmAnd
+ - Ubegrænset hentning af lande- eller områdekort direkte fra OsmAnd
  - Offline Wikipedia funktioner (hent Wikipedia Interessepunkter (IP)), fantastisk til sightseeing
  - Overlejring af flere kortlag mulige, såsom GPX eller navigationsspor, seværdigheder, favoritter, højdekurver, stoppesteder for kollektivtrafik , ekstra kort med brugerdefinerbar gennemsigtighed
  - Offline søgning efter adresser og steder (IP)
@@ -917,7 +917,7 @@ Liste over understøttede lande (dybest set hele verden!): Afghanistan, Albanien
 
     <string name="error_occurred_loading_gpx">Der skete en fejl under indlæsning af GPX</string>
     <string name="send_report">Send rapport</string>
-    <string name="none_region_found">Ingen offline-data for regionen er fundet på SD-kortet. Hent regioner fra internettet.</string>
+    <string name="none_region_found">Ingen offline-data for områderne er fundet på SD-kortet. Hent områder fra internettet.</string>
     <string name="poi_namefinder_query_empty">Angiv søgetekst for at finde interessepunkt</string>
     <string name="any_poi">Alle</string>
     
@@ -997,7 +997,7 @@ Liste over understøttede lande (dybest set hele verden!): Afghanistan, Albanien
     <string name="route_tsll">Drej en smule til venstre og kør</string>
     <string name="route_tu">Foretag U-vending og kør</string>
     <string name="first_time_continue">Senere</string>
-    <string name="first_time_download">Hent regioner</string>
+    <string name="first_time_download">Hent områder</string>
     <string name="search_poi_location">Søger efter signal…</string>
     <string name="search_near_map">Søg i nærheden af nuværende midte på kortet</string>
     <string name="search_nearby">Søg i nærheden</string>
@@ -1086,8 +1086,8 @@ Liste over understøttede lande (dybest set hele verden!): Afghanistan, Albanien
     <string name="address">Adresse</string>
 
 
-    <string name="downloading_list_indexes">Henter liste over tilgængelige regioner…</string>
-    <string name="list_index_files_was_not_loaded">Listen over regioner blev ikke hentet fra osmand.net.</string>
+    <string name="downloading_list_indexes">Henter liste over tilgængelige områder…</string>
+    <string name="list_index_files_was_not_loaded">Listen over områder blev ikke hentet fra osmand.net.</string>
 
     <string name="fav_points_edited">Favoritpunkt blev redigeret</string>
     <string name="fav_points_not_exist">Der eksisterer ingen favoritpunkter</string>
@@ -1173,7 +1173,7 @@ Liste over understøttede lande (dybest set hele verden!): Afghanistan, Albanien
     <string name="search_activity">Søg</string>
     <string name="searchpoi_activity">Vælg interessepunkt</string>
     <string name="search_POI_level_btn">Find flere</string>
-    <string name="choose_available_region">Vælg region fra liste</string>
+    <string name="choose_available_region">Vælg område fra listen</string>
     <string name="choose_intersected_street">Vælg krydsende gade</string>
     <string name="app_mode_car">Bil</string>
     <string name="app_mode_bicycle">Cykel</string>
@@ -1186,7 +1186,7 @@ Liste over understøttede lande (dybest set hele verden!): Afghanistan, Albanien
     <string name="navigate_point_format_D">DDD.DD</string>
     <string name="navigate_point_format_DM">DDD MM.MM</string>
 
-    <string name="search_address_region">Region</string>
+    <string name="search_address_region">Område</string>
     
     <string name="add_favorite_dialog_favourite_added_template">Favoritpunkt \'{0}\' blev tilføjet.</string>
     
@@ -1310,8 +1310,8 @@ Liste over understøttede lande (dybest set hele verden!): Afghanistan, Albanien
     <string name="driving_region_canada">Canada</string>
     <string name="driving_region_europe_asia">Europa, Asien, Latinamerika og og tilsvarende</string>
     <string name="driving_region_uk">Storbritannien, Indien og lignende</string>
-    <string name="driving_region">Område</string>
-    <string name="driving_region_descr">Vælg kørselregion: USA, Europa, Storbritannien, Asien og andre</string>
+    <string name="driving_region">Køremråde</string>
+    <string name="driving_region_descr">Vælg køreområde: USA, Europa, Storbritannien, Asien og andre</string>
     <string name="map_widget_fps_info">FPS-fejlsøgningssinfo</string>
     <string name="local_index_tile_data_expire">Udløber (minutter): %1$s</string>
     <string name="local_index_tile_data_maxzoom">Maks zoomniveau: %1$s</string>
@@ -1984,7 +1984,7 @@ Lon %2$s</string>
     <string name="mark_to_delete">Marker for at slette</string>
     <string name="current_route">Aktuel rute</string>
     <string name="welmode_download_maps">Korthåndtering</string>
-    <string name="welcome_select_region">For korrekt at afspejle trafikskilte og regler, vælg region:</string>
+    <string name="welcome_select_region">For korrekt at afspejle trafikskilte og regler, vælg område:</string>
     <string name="welcome_header">Velkommen</string>
     <string name="welcome_text">OsmAnd giver globale offline kortvisninger, og global offline navigation!</string>
     <string name="confirm_usage_speed_cameras">I mange lande (Tyskland, Frankrig, Italien og andre) er anvendelse af fartkamera advarsler ikke tilladt ved lov. OsmAnd påtager sig ikke ansvaret, hvis loven overtrædes. Klik kun på Ja, hvis det er berettiget at bruge denne funktion.</string>
@@ -2182,9 +2182,9 @@ Lon %2$s</string>
     <string name="activate_srtm_plugin">Aktiver SRTM udvidelsen</string>
     <string name="later">Senere</string>
     <string name="get_full_version">Fuldversion</string>
-    <string name="regions">Regioner</string>
+    <string name="regions">Områder</string>
 
-    <string name="region_maps">Regionskort</string>
+    <string name="region_maps">Områdekort</string>
     <string name="world_maps">Verdenskort</string>
 
     <string name="downloads">Filhentninger</string>
@@ -2289,7 +2289,7 @@ Lon %2$s</string>
  • Forbigå betjeningspanel hvis der ønskes menuebaserede kontrol
 
 
- • Hent kort, regioner ved at trykke direkte på verdenskortet
+ • Hent kort, områder ved at trykke direkte på verdenskortet
 
 
  • IP søgning understøtter nu mere specifikke forespørgsler
@@ -2478,7 +2478,7 @@ Brug for hjælp med OsmAnd, kontakt supportteamet: support@osmand.net.
     <string name="osm_live_email_desc">Skal bruges til at give oplysninger om bidrag</string>
     <string name="osm_live_user_public_name">Offentligt navn</string>
     <string name="osm_live_hide_user_name">Vis ikke navn i rapporter</string>
-    <string name="osm_live_support_region">Support region</string>
+    <string name="osm_live_support_region">Understøttet område</string>
     <string name="osm_live_month_cost">Månedlige omkostninger</string>
     <string name="osm_live_month_cost_desc">Månedlig betaling</string>
     <string name="osm_live_active">Aktiv</string>
@@ -2486,7 +2486,7 @@ Brug for hjælp med OsmAnd, kontakt supportteamet: support@osmand.net.
     <string name="osm_live_enter_email">Angiv en gyldig e-mail adresse</string>
     <string name="osm_live_enter_user_name">Angiv offentligt navn</string>
     <string name="osm_live_thanks">Tak for at abonnere på live opdateringer!</string>
-    <string name="osm_live_region_desc">En del af donationen vil blive sendt til OSM brugere, som indsender ændringer til kortet i den pågældende region</string>
+    <string name="osm_live_region_desc">En del af donationen vil blive sendt til OSM brugere, som indsender ændringer til kortet i det pågældende område</string>
     <string name="osm_live_subscription_settings">Indstillinger for abonnement</string>
     <string name="osm_live_ask_for_purchase">Køb først OSM Live-abonnement</string>
 
@@ -2634,9 +2634,9 @@ Hvis du  ønsker at støtte OsmAnd og OSM, er dette en god måde at gøre det p�
     <string name="search_my_location">Søg efter placering</string>
     <string name="skip_map_downloading">Spring over hentning af kort</string>
     <string name="skip_map_downloading_desc">Der ikke nogen offline kort installeret. Vælg et kort fra listen eller hent senere via Menu - %1$s.</string>
-    <string name="search_another_country">Vælg en anden region</string>
+    <string name="search_another_country">Vælg et andet område</string>
     <string name="search_map">Søger på kort…</string>
-    <string name="first_usage_wizard_desc">Lad OsmAnd bestemme placeringen og foreslå at hente kort for regionen.</string>
+    <string name="first_usage_wizard_desc">Lad OsmAnd bestemme placeringen og foreslå at hente kort for området.</string>
     <string name="location_not_found">Placering ikke fundet</string>
     <string name="no_inet_connection">Ingen internetforbindelse</string>
     <string name="no_inet_connection_desc_map">Nødvendig for at hente kort.</string>
@@ -2727,7 +2727,7 @@ Hvis du  ønsker at støtte OsmAnd og OSM, er dette en god måde at gøre det p�
     <string name="route_calculation">Ruteberegning</string>
     <string name="upload_poi">Overfør IP</string>
     <string name="route_roundabout_short">Tag %1$d afkørsel og forsæt</string>
-    <string name="search_map_hint">Søg efter by eller region</string>
+    <string name="search_map_hint">Søg efter by eller område</string>
     <string name="wiki_around">Wikipedia artikler i nærheden</string>
     <string name="routing_attr_allow_motorway_name">Tillad motorveje</string>
     <string name="routing_attr_allow_motorway_description">Tillad motorveje</string>
@@ -3025,12 +3025,12 @@ Repræsenterer område: %1$s x %2$s</string>
     <string name="osmand_plus_extended_description_part4">"
  Brug OSM og Wikipedia data
   • Information af høj kvalitet fra de bedste samarbejdsprojekter i verden
-  • OSM data til hvert land eller region
+  • OSM data til hvert land eller område
   • Wikipedia IP\'er, fantastisk til sightseeing
   • Ubegrænset gratis hentning, direkte fra OsmAnd
   • Kompakte offline vektorkort opdateret mindst en gang om måneden
 
-  • Vælg mellem komplette regionsdata eller kun veje (Eksempel: hele Japan er 700 MB og kun 200 MB for vejnettet)
+  • Vælg mellem komplette områdedata eller kun veje (Eksempel: hele Japan er 700 MB og kun 200 MB for vejnettet)
  "</string>
     <string name="osmand_plus_extended_description_part5">"
  Sikkerhedsfunktioner
