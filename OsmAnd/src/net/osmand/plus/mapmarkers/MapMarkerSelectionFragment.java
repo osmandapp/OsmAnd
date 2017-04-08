@@ -89,7 +89,7 @@ public class MapMarkerSelectionFragment extends BaseOsmAndDialogFragment {
 
 		ListView listView = (ListView) view.findViewById(android.R.id.list);
 		final ArrayAdapter<MapMarker> adapter = new MapMarkersListAdapter();
-		List<MapMarker> markers = getMyApplication().getMapMarkersHelper().getActiveMapMarkers();
+		List<MapMarker> markers = getMyApplication().getMapMarkersHelper().getMapMarkers();
 		if (markers.size() > 0) {
 			for (MapMarker marker : markers) {
 				adapter.add(marker);

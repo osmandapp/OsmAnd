@@ -258,7 +258,7 @@ public class MapMarkersLayer extends OsmandMapLayer implements IContextMenuProvi
 			canvas.drawPath(path, paint);
 		}
 
-		List<MapMarker> activeMapMarkers = markersHelper.getActiveMapMarkers();
+		List<MapMarker> activeMapMarkers = markersHelper.getMapMarkers();
 		for (MapMarker marker : activeMapMarkers) {
 			if (isLocationVisible(tileBox, marker) && !overlappedByWaypoint(marker)
 					&& !isInMotion(marker)) {
@@ -282,9 +282,9 @@ public class MapMarkersLayer extends OsmandMapLayer implements IContextMenuProvi
 				loc = tileBox.getCenterLatLon();
 			}
 			if (loc != null) {
-				List<MapMarker> sortedMapMarkers = markersHelper.getSortedMapMarkers();
+				List<MapMarker> mapMarkers = markersHelper.getMapMarkers();
 				int i = 0;
-				for (MapMarker marker : sortedMapMarkers) {
+				for (MapMarker marker : mapMarkers) {
 					if (!isLocationVisible(tileBox, marker) && !isInMotion(marker)) {
 						canvas.save();
 						net.osmand.Location.distanceBetween(loc.getLatitude(), loc.getLongitude(),
@@ -432,7 +432,7 @@ public class MapMarkersLayer extends OsmandMapLayer implements IContextMenuProvi
 		}
 
 		MapMarkersHelper markersHelper = map.getMyApplication().getMapMarkersHelper();
-		List<MapMarker> markers = markersHelper.getActiveMapMarkers();
+		List<MapMarker> markers = markersHelper.getMapMarkers();
 		int r = getRadiusPoi(tileBox);
 		for (int i = 0; i < markers.size(); i++) {
 			MapMarker marker = markers.get(i);
@@ -495,12 +495,12 @@ public class MapMarkersLayer extends OsmandMapLayer implements IContextMenuProvi
 		if (o instanceof MapMarker) {
 			MapMarkersHelper markersHelper = map.getMyApplication().getMapMarkersHelper();
 			MapMarker marker = (MapMarker) o;
-			List<MapMarker> sortedMarkers = markersHelper.getSortedMapMarkers();
-			int i = sortedMarkers.indexOf(marker);
+			List<MapMarker> mapMarkers = markersHelper.getMapMarkers();
+			int i = mapMarkers.indexOf(marker);
 			if (i != -1) {
-				sortedMarkers.remove(i);
-				sortedMarkers.add(0, marker);
-				markersHelper.normalizePositions();
+				mapMarkers.remove(i);
+				mapMarkers.add(0, marker);
+				markersHelper.saveMapMarkers(mapMarkers, null);
 			}
 		}
 	}
@@ -525,9 +525,9 @@ public class MapMarkersLayer extends OsmandMapLayer implements IContextMenuProvi
 
 			marker.getOriginalPointDescription().setName(PointDescription.getSearchAddressStr(map));
 			markersHelper.moveMapMarker(marker, position);
-			int index = markersHelper.getActiveMapMarkers().indexOf(marker);
+			int index = markersHelper.getMapMarkers().indexOf(marker);
 			if (index != -1) {
-				newObject = markersHelper.getActiveMapMarkers().get(index);
+				newObject = markersHelper.getMapMarkers().get(index);
 			}
 			result = true;
 		}
