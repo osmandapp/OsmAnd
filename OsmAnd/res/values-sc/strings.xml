@@ -2825,7 +2825,7 @@ Pro praghere iscrie su còdighe intreu</string>
     <string name="points_delete_multiple">As a iscantzellare %1$d puntu/os. Seguru ses?</string>
     <string name="track_points_category_name">Puntos importantes in custa àndala</string>
     <string name="add_new_folder">Annanghe una cartella noa</string>
-    <string name="route_points_category_name">Puntos in s\'àndala imbeniente</string>
+    <string name="route_points_category_name">Puntos de colare in cust\'àndala</string>
     <string name="shared_string_slope">Caladòrgia</string>
     <string name="lang_ber">Bèrberu</string>
     <string name="relief_smoothness_factor_descr">Prioridade a sos terrinos in paris o a sos cùcuros</string>
@@ -3007,12 +3007,12 @@ Pro praghere iscrie su còdighe intreu</string>
     <string name="no_underlay">Perunu istratu inferiore</string>
     <string name="subscribe_email_error">Errore</string>
     <string name="subscribe_email_desc">Iscrie·ti a sa listra de posta eletrònica nostra a pitzu de sos iscontos pro s\'aplicatzione e as a tènnere 3 iscarrigamentos de mapas in prus!</string>
-    <string name="depth_contour_descr">Grupu de mapas chi ti permitint de bìdere sas curvas e sos puntos de livellu marinos (fatos sighinde una griglia de 30 arcu-segundos).</string>
-    <string name="sea_depth_thanks">Gràtzias pro àere comporadu sas curvas de livellu marinas!</string>
-    <string name="index_item_depth_contours_osmand_ext">Curvas de livellu marinas</string>
+    <string name="depth_contour_descr">Grupu de mapas chi cuntenint sas curvas e sos puntos de livellu de profondidade marinos (fatos sighinde una griglia de 30 arcu-segundos).</string>
+    <string name="sea_depth_thanks">Gràtzias pro àere comporadu sas curvas de livellu nàuticas!</string>
+    <string name="index_item_depth_contours_osmand_ext">Curvas de livellu nàuticas</string>
     <string name="index_item_depth_points_southern_hemisphere">Puntos suta de su livellu de su mare in s\'emisferu australe</string>
     <string name="index_item_depth_points_northern_hemisphere">Puntos suta de su livellu de su mare in s\'emisferu boreale</string>
-    <string name="download_depth_countours">Curvas de livellu marinas</string>
+    <string name="download_depth_countours">Curvas de livellu nàuticas</string>
     <string name="nautical_maps">Mapas nàuticas</string>
     <string name="shared_string_paused">In pàusa</string>
     <string name="nearest_cities">Tzitades a curtzu</string>
@@ -3025,7 +3025,7 @@ Pro praghere iscrie su còdighe intreu</string>
     <string name="shared_string_in_name">in %1$s</string>
     <string name="shared_string_overview">Vista generale</string>
     <string name="animate_my_location">Ànima sa positzione mea</string>
-    <string name="animate_my_location_desc">Allughe s\'animatzione de sa positzione mea in sa mapa</string>
+    <string name="animate_my_location_desc">Allughe s\'estrapolatzione de sa positzione mea in sa mapa cando b\'est una pèrdida temporànea de sa positzione</string>
     <string name="favorite_group_name">Nùmene de su grupu</string>
     <string name="change_color">Càmbia colore</string>
     <string name="edit_name">Acontza su nùmene</string>
@@ -3036,12 +3036,16 @@ Pro praghere iscrie su còdighe intreu</string>
     <string name="show_from_zoom_level">Ammustra dae su livellu de ismanniamentu</string>
     <string name="routing_attr_allow_private_name">Permiti s\'atzessu privadu</string>
     <string name="routing_attr_allow_private_name_description">Permiti s\'atzessu a sas àreas privadas</string>
-    <string name="hillshade_menu_download_descr">Pro bìdere sas umbraduras de sos rilievos in sa mapa depes iscarrigare una mapa ispetziale de custa regione.</string>
-    <string name="hillshade_purchase_header">Pro bìdere sas umbraduras de sos rilievos in sa mapa depes comporare e installare s\'estensione</string>
+    <string name="hillshade_menu_download_descr">Pro bìdere sas umbraduras de sos rilievos in sa mapa depes iscarrigare sa mapa de sas umbraduras de custa regione.</string>
+    <string name="hillshade_purchase_header">Pro bìdere sas umbraduras de sos rilievos in sa mapa depes comporare e installare s\'estensione Curvas de Livellu</string>
     <string name="hide_from_zoom_level">Cua dae su livellu de ismanniamentu</string>
     <string name="srtm_menu_download_descr">Pro bìdere sas lìnias de livellu in sa mapa depes iscarrigare sa mapa de sas curvas de livellu de custa regione.</string>
     <string name="shared_string_plugin">Estensione</string>
-    <string name="srtm_purchase_header">Pro bìdere sas curvas de livellu in sa mapa depes comporare e installare s\'estensione</string>
+    <string name="srtm_purchase_header">Pro bìdere sas curvas de livellu in sa mapa depes comporare e installare s\'estensione Curvas de Livellu</string>
     <string name="search_favorites">Chirca preferidos</string>
     <string name="sorted_by_distance">Ordinados pro distàntzia</string>
+    <string name="quick_action_showhide_osmbugs_title">Ammustra/cua sas notas OSM</string>
+    <string name="quick_action_osmbugs_show">Ammustra sas notas OSM</string>
+    <string name="quick_action_osmbugs_hide">Cua sas notas OSM</string>
+    <string name="quick_action_showhide_osmbugs_descr">Incarchende su butone pro s\'atzione as a cuare o ammustrare sas notas OSM in sa mapa.</string>
     </resources>
