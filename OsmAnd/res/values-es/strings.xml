@@ -2854,4 +2854,7 @@ Algunas de las características principales:
     <string name="routing_attr_allow_private_name_description">Permite acceder a áreas privadas</string>
     <string name="display_zoom_level">Nivel de acercamiento de la pantalla: %1$s</string>
     <string name="route_is_too_long_v2">Esta ruta puede ser muy larga para calcular. Añade destinos intermedios si no se encuentran resultado dentro de los 10 minutos.</string>
+    <string name="quick_action_showhide_osmbugs_title">Mostrar/ocultar notas OSM</string>
+    <string name="quick_action_osmbugs_show">Mostrar notas OSM</string>
+    <string name="quick_action_osmbugs_hide">Ocultar notas OSM</string>
     </resources>
