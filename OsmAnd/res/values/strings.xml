@@ -68,7 +68,7 @@
     <string name="right_side_navigation">Right-hand driving</string>
     <string name="driving_region_automatic">Automatic</string>
     <string name="do_not_send_anonymous_app_usage">Do not send anonymous app usage statistics</string>
-    <string name="do_not_send_anonymous_app_usage_desc">OsmAnd collects information about which parts of the app you open. Your location is never sent, nor is anything you enter into the app or details of areas you view, search, or download."</string>
+    <string name="do_not_send_anonymous_app_usage_desc">OsmAnd collects information about which parts of the app you open. Your location is never sent, nor is anything you enter into the app or details of areas you view, search, or download.</string>
     <string name="do_not_show_startup_messages">Do not show messages at startup</string>
     <string name="do_not_show_startup_messages_desc">It displays app discounts &amp; special local events messages</string>
     <string name="parking_options">Parking options</string>
