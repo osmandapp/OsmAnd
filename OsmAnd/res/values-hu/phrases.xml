@@ -3356,4 +3356,20 @@
 
 	<string name="poi_cuisine_doner">Döner kebab (savarma)</string>
 	<string name="poi_cuisine_ramen">Ramen (tészta)</string>
+	<string name="poi_cuisine_beef_bowl">Gyūdon (japán marhahústál)</string>
+	<string name="poi_cuisine_diner">Diner (USA)</string>
+	<string name="poi_cuisine_soba">Szo-ba (japán tészta)</string>
+	<string name="poi_cuisine_piadina">Piadina (észak-olasz lepény)</string>
+	<string name="poi_cuisine_empanada">Empanada</string>
+	<string name="poi_cuisine_yakiniku">Jakiniku (japán grillezett hús)</string>
+	<string name="poi_cuisine_udon">Udon (japán tészta)</string>
+	<string name="poi_cuisine_yakitori">Jakitori (japán grillezett csirke)</string>
+	<string name="poi_cuisine_sagardotegia">Sagardotegia (baszk almaborház)</string>
+	<string name="poi_cuisine_waffle">Waffel</string>
+	<string name="poi_cuisine_pastel">Pastel</string>
+	<string name="poi_cuisine_teriyaki">Terijaki (japán)</string>
+	<string name="poi_cuisine_shawarma">Savarma (kelet-mediterrán)</string>
+
+	<string name="poi_energy_supplier">Energiaszolgáltató irodája</string>
+
 	</resources>
