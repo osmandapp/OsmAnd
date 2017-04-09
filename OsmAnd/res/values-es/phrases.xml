@@ -1358,7 +1358,7 @@
 	<string name="poi_piste_difficulty_advanced">Avanzada</string>
 	<string name="poi_piste_difficulty_novice">Principiante</string>
 	<string name="poi_piste_difficulty_expert">Experto</string>
-	<string name="poi_piste_difficulty_freeride">Freeride</string>
+	<string name="poi_piste_difficulty_freeride">Estilo libre (freeride)</string>
 	<string name="poi_piste_grooming_classic">Clásico</string>
 	<string name="poi_piste_grooming_classic_skating">Clásico + patinaje</string>
 	<string name="poi_piste_grooming_backcountry">Fuera de pista</string>
