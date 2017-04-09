@@ -656,4 +656,9 @@
 	<string name="poi_cuisine_egyptian">Egyptisk</string>
 	<string name="poi_cuisine_senegalese">Senegalesisk</string>
 	<string name="poi_cuisine_bulgarian">Bulgarsk</string>
+	<string name="poi_additional_type">Ytterligere</string>
+	<string name="poi_covered">Tak over</string>
+	<string name="poi_clock_option">Ytterligere</string>
+	<string name="poi_covered_no">Ikke tak over</string>
+
 	</resources>
