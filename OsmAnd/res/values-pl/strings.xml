@@ -2973,9 +2973,9 @@ Reprezentuje obszar: %1$s x %2$s</string>
     <string name="hillshade_purchase_header">Aby wyświetlić cieniowanie rzeźby terenu, należy zakupić i zainstalować wtyczkę.</string>
     <string name="hillshade_menu_download_descr">Aby wyświetlić cieniowanie rzeźby terenu, należy pobrać specjalną mapę tego obszaru.</string>
     <string name="srtm_purchase_header">Aby wyświetlić poziomice na mapie, należy zakupić i zainstalować wtyczkę.</string>
-    <string name="quick_action_showhide_osmbugs_title">Pokaż/Ukryj Notatki OSM</string>
-    <string name="quick_action_osmbugs_show">Pokaż Notatki OSM</string>
-    <string name="quick_action_osmbugs_hide">Ukryj Notatki OSM</string>
+    <string name="quick_action_showhide_osmbugs_title">Przełącz wyświetlanie uwag OSM</string>
+    <string name="quick_action_osmbugs_show">Pokaż uwagi OSM</string>
+    <string name="quick_action_osmbugs_hide">Ukryj uwagi OSM</string>
     <string name="osmand_plus_extended_description_part8">"
  Przybliżona jakość mapy:
 • Europa Zachodnia: ****
@@ -2992,5 +2992,6 @@ Reprezentuje obszar: %1$s x %2$s</string>
 Jest możliwe pobranie map większości krajów na świecie!
 Od Afganistanu po Zimbabwe, przez Australię po USA. Argentyna, Brazylia, Kanada, Francja, Niemcy, Polska, Meksyk, Wielka Brytania, Hiszpania, ...
  "</string>
-    <string name="sorted_by_distance">Posortowane po odległości</string>
+    <string name="sorted_by_distance">Posortowane wg odległości</string>
+    <string name="quick_action_showhide_osmbugs_descr">Przełącza wyświetlanie uwag OSM na mapie.</string>
     </resources>
