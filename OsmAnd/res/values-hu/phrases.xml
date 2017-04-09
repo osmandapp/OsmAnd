@@ -2037,7 +2037,7 @@
 	<string name="poi_medical_system">Gyógyászati tradíció</string>
 	<string name="poi_home_visit">Otthoni látogatás</string>
 	<string name="poi_waterway_fuel">Hajóüzemanyag-töltő állomás</string>
-	<string name="poi_bunker_silo"/>
+	<string name="poi_bunker_silo">Falközi siló</string>
 	<string name="poi_ice_hockey">Jégkorong</string>
 	<string name="poi_denomination_united">Egyesült</string>
 	<string name="poi_denomination_united_reformed">Egyesült református</string>
@@ -3309,4 +3309,46 @@
 	<string name="poi_payment_coinkite_no">Coinkite-ot nem fogad el</string>
 	<string name="poi_payment_roadrunner_yes">Roadrunner</string>
 	<string name="poi_payment_roadrunner_no">Roadrunner kártyát nem fogad el</string>
+	<string name="poi_kent_carriage_gap">Kenti lovaskocsi-áteresztő kapu</string>
+	<string name="poi_rescue_station">Mentési központ</string>
+
+	<string name="poi_payment_svg_yes">SVG</string>
+	<string name="poi_payment_svg_no">SVG kártyát nem fogad el</string>
+	<string name="poi_payment_ov_chipkaart_yes">OV-chipkaart</string>
+	<string name="poi_payment_ov_chipkaart_no">OV-chipkaartot nem fogad el</string>
+	<string name="poi_payment_oyster_yes">Oyster</string>
+	<string name="poi_payment_oyster_no">Oyster kártyát nem fogad el</string>
+	<string name="poi_payment_sube_yes">SUBE</string>
+	<string name="poi_payment_sube_no">SUBE kártyát nem fogad el</string>
+	<string name="poi_payment_via_verde_yes">Via Verde</string>
+	<string name="poi_payment_via_verde_no">Via Verdét nem fogad el</string>
+	<string name="poi_payment_u_key_yes">U-Key</string>
+	<string name="poi_payment_u_key_no">U-Keyt nem fogad el</string>
+	<string name="poi_payment_token_yes">Zseton</string>
+	<string name="poi_payment_token_no">Zsetont nem fogad el</string>
+	<string name="poi_payment_golden_crown_yes">Zolotaya Korona</string>
+	<string name="poi_payment_golden_crown_no">Zolotaya Koronát nem fogad el</string>
+	<string name="poi_payment_pro100_yes">"PRO100 "</string>
+	<string name="poi_payment_pro100_no">PRO100 kártyát nem fogad el</string>
+	<string name="poi_payment_union_card_yes">Union kártya</string>
+	<string name="poi_payment_union_card_no">Union kártyát nem fogad el</string>
+	<string name="poi_payment_mtsmoney_yes">MTS-Money</string>
+	<string name="poi_payment_mtsmoney_no">MTS-Moneyt nem fogad el</string>
+	<string name="poi_payment_yandexmoney_yes">Yandex.Money</string>
+	<string name="poi_payment_yandexmoney_no">Yandex.Moneyt nem fogad el</string>
+	<string name="poi_wetland_string_bog">Dagadóláp (aapa-láp)</string>
+	<string name="poi_wetland_palsa_bog">Dagadóláp (palsa-láp)</string>
+	<string name="poi_fuel_100ll">Avgas 100LL repülőbenzin</string>
+	<string name="poi_fuel_jeta1">Jet A-1 kerozin</string>
+	<string name="poi_fuel_adblue">AdBlue adalékanyag</string>
+
+	<string name="poi_social_facility_outreach">Szolgáltatóközpont hátrányos helyzetűeknek</string>
+	<string name="poi_fortification_type_sconce">Erődítmény típusa: földsánc</string>
+	<string name="poi_fortification_type_ring_ditch">Erődítmény típusa: újkőkori körárok</string>
+
+	<string name="poi_disc_golf">Disc golf</string>
+	<string name="poi_in_service_yes">Működik</string>
+
+	<string name="poi_bicycle_parking_streetpod">Keréktok</string>
+
 	</resources>
