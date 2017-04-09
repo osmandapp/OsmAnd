@@ -2659,7 +2659,7 @@ Representa el área: %1$s x %2$s</string>
     <string name="lang_ber">Bereber (amazig)</string>
     <string name="routing_attr_relief_smoothness_factor_hills_name">Montañoso</string>
     <string name="routing_attr_relief_smoothness_factor_plains_name">Poco montañoso</string>
-    <string name="routing_attr_relief_smoothness_factor_more_plains_name">Plano</string>
+    <string name="routing_attr_relief_smoothness_factor_more_plains_name">Plano (llanura)</string>
     <string name="routing_attr_driving_style_speed_name">Velocidad</string>
     <string name="routing_attr_driving_style_balance_name">Equilibrado</string>
     <string name="routing_attr_driving_style_safety_name">Seguridad</string>
