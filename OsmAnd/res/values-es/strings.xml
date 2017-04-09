@@ -2857,4 +2857,7 @@ Algunas de las características principales:
     <string name="quick_action_showhide_osmbugs_title">Mostrar/ocultar notas OSM</string>
     <string name="quick_action_osmbugs_show">Mostrar notas OSM</string>
     <string name="quick_action_osmbugs_hide">Ocultar notas OSM</string>
+    <string name="quick_action_showhide_osmbugs_descr">Tocando el botón de acción mostrará u ocultará 
+notas de OSM en el mapa.</string>
+    <string name="sorted_by_distance">Ordenado por distancia</string>
     </resources>
