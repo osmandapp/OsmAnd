@@ -119,7 +119,7 @@
 	\u2022 Support TTS for regional language variants (and accents)\n\n
 	\u2022 Visibility enhancements in several map styles and wikipedia\n\n
 	\u2022 Support Open Location Code (OLC)\n\n
-	\u2022 Display elevation and slope profile for recorded GPX (also speed) and calculated route\n\n
+	\u2022 Display elevation, slope, and speed profile for recorded GPX tracks and calculated routes\n\n
 	\u2022 \"Driving style\" setting and logic improvements in bicycle routing\n\n
 	\u2022 Settings for using altitude data in bicycle routing\n\n
 	\u2022 Several other improvements and bug fixes\n\n
