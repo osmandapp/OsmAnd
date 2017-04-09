@@ -2841,7 +2841,7 @@ représentant la zone : %1$s x %2$s</string>
     <string name="shared_string_time_moving">Durée de déplacement</string>
     <string name="shared_string_time_span">Amplitude horaire</string>
     <string name="gpx_track">Trace</string>
-    <string name="points_delete_multiple_succesful">Les points ont été supprimés.</string>
+    <string name="points_delete_multiple_succesful">Point(s) supprimé(s) avec succès.</string>
     <string name="points_delete_multiple">Souhaitez-vous vraiment supprimer %1$d point(s) ?</string>
     <string name="add_new_folder">Créer un dossier</string>
     <string name="route_points_category_name">Points de passage sur la route</string>
@@ -2854,11 +2854,11 @@ représentant la zone : %1$s x %2$s</string>
     <string name="relief_smoothness_factor_plains">Plaines</string>
     <string name="driving_style_balance">Compromis</string>
     <string name="relief_smoothness_factor_descr">Priorité sur les plaines ou les collines</string>
-    <string name="routing_attr_relief_smoothness_factor_hills_name">Collines</string>
+    <string name="routing_attr_relief_smoothness_factor_hills_name">Vallonné</string>
     <string name="routing_attr_relief_smoothness_factor_plains_name">Plaines</string>
     <string name="routing_attr_relief_smoothness_factor_more_plains_name">Plus de plaines</string>
     <string name="routing_attr_driving_style_speed_name">Rapide</string>
-    <string name="routing_attr_driving_style_balance_name">Compromis</string>
+    <string name="routing_attr_driving_style_balance_name">Équilibré</string>
     <string name="routing_attr_driving_style_safety_name">Sûre</string>
     <string name="full_version_thanks">Merci d\'avoir acheté la version complète d\'OsmAnd !</string>
     <string name="routing_attr_relief_smoothness_factor_name">Facteur de relief</string>
@@ -2924,13 +2924,13 @@ représentant la zone : %1$s x %2$s</string>
 
 Fonctionnalités principales :
  "</string>
-    <string name="sea_depth_thanks">Merci d\'avoir acheté le greffon Lignes de sonde !</string>
-    <string name="index_item_depth_contours_osmand_ext">Lignes de sonde</string>
-    <string name="index_item_depth_points_southern_hemisphere">Lignes de sonde pour l\'hémisphère sud</string>
-    <string name="index_item_depth_points_northern_hemisphere">Lignes de sonde pour l\'hémisphère nord</string>
-    <string name="download_depth_countours">Lignes de sonde</string>
+    <string name="sea_depth_thanks">Merci d\'avoir acheté le greffon Lignes de sonde marines !</string>
+    <string name="index_item_depth_contours_osmand_ext">Lignes de sonde marines</string>
+    <string name="index_item_depth_points_southern_hemisphere">Lignes de sonde marines pour l\'hémisphère sud</string>
+    <string name="index_item_depth_points_northern_hemisphere">Lignes de sonde marines pour l\'hémisphère nord</string>
+    <string name="download_depth_countours">Lignes de sonde marines</string>
     <string name="nautical_maps">Cartes marines</string>
-    <string name="depth_contour_descr">Certaines cartes permettent de visualiser la profondeur d\'eau grâce à des lignes et des points de sonde.</string>
+    <string name="depth_contour_descr">Cartes contenant des lignes et des points de sonde indiquant la profondeur d\'eau.</string>
     <string name="subscribe_email_error">Erreur</string>
     <string name="subscribe_email_desc">Inscrivez-vous à notre lettre d\'informations sur les applications et téléchargez 3 cartes supplémentaires gratuitement !</string>
     <string name="no_overlay">Sans sur-couche</string>
@@ -2955,7 +2955,7 @@ Fonctionnalités principales :
     <string name="select_street">Sélectionnez les rues</string>
     <string name="shared_string_in_name">dans %1$s</string>
     <string name="shared_string_overview">Vue d\'ensemble</string>
-    <string name="animate_my_location_desc">Activer l\'animation de ma position sur la carte</string>
+    <string name="animate_my_location_desc">Activer l\'extrapolation de votre position en cas de perte temporaire du signal GPS</string>
     <string name="animate_my_location">Animer ma position</string>
     <string name="osmand_plus_extended_description_part6">"
  Fonctionnalités adaptées aux cyclistes et piétons
@@ -2978,10 +2978,10 @@ Fonctionnalités principales :
     <string name="route_is_too_long_v2">Cet itinéraire risque d\'être très long à calculer. Merci d\'ajouter des points de passage intermédiaires.</string>
     <string name="srtm_menu_download_descr">Pour afficher les courbes de niveaux sur la carte, vous devez télécharger la carte courbes de niveaux de cette région.</string>
     <string name="shared_string_plugin">Greffon</string>
-    <string name="srtm_purchase_header">Pour afficher les courbes de niveaux sur une carte, vous devez acheter puis installer le greffon</string>
-    <string name="hillshade_purchase_header">Pour afficher les ombrages du relief sur la carte, vous devez acheter et installer un greffon</string>
+    <string name="srtm_purchase_header">Pour afficher les courbes de niveaux sur une carte, vous devez acheter puis installer le greffon Courbes de niveaux</string>
+    <string name="hillshade_purchase_header">Pour afficher les ombrages du relief sur la carte, vous devez acheter et installer le greffon Courbes de niveaux</string>
     <string name="hide_from_zoom_level">Masquer depuis le niveau de zoom</string>
-    <string name="hillshade_menu_download_descr">Pour afficher le relief sur la carte, vous devez télécharger une carte supplémentaire de la région.</string>
+    <string name="hillshade_menu_download_descr">Pour afficher les ombrages du relief sur la carte, vous devez télécharger une sur-couche supplémentaire pour la carte de cette région.</string>
     <string name="quick_action_showhide_osmbugs_title">Afficher / Masquer les notes OSM</string>
     <string name="quick_action_osmbugs_show">Afficher les notes OSM</string>
     <string name="quick_action_osmbugs_hide">Masquer les notes OSM</string>
