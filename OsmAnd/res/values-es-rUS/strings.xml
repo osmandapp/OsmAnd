@@ -2610,7 +2610,7 @@ Representa el área: %1$s x %2$s</string>
 
  • Soporte para «Código de Ubicación Abierto» (Open Location Code)
 
- • Visualización del perfil de elevación y pendiente para los GPX grabados (también velocidad) y la ruta calculada
+ • Visualización del perfil de elevación, pendiente y velocidad para las trazas GPX grabadas y la ruta calculada
 
  • Opción de \"Estilo de conducción\" y mejoras lógicas en el cálculo de rutas para bicicleta
 
@@ -2621,7 +2621,7 @@ Representa el área: %1$s x %2$s</string>
  y más…
  "</string>
 	<string name="rendering_attr_depthContours_description">Mostrar curvas y puntos de profundidad</string>
-    <string name="rendering_attr_depthContours_name">Curvas de profundidad</string>
+    <string name="rendering_attr_depthContours_name">Curvas de profundidad náuticas</string>
 	<string name="route_altitude">Elevación de la ruta</string>
     <string name="altitude_descent">Descenso</string>
     <string name="altitude_ascent">Ascenso</string>
