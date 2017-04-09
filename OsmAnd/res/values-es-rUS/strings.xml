@@ -2600,11 +2600,11 @@ Representa el área: %1$s x %2$s</string>
     <string name="release_2_6">"
  • Nueva función: Botón de acción rápida
 
- • Mejorada la respuesta de gestos táctiles
+ • Mejorada la respuesta de gestos táctiles (p.e. panorámicas y ampliaciones simultáneas)
 
  • El tipo de letra del nuevo mapa abarca más regiones
 
- • Soporte TTS para idiomas regionales
+ • Soporte TTS para idiomas regionales (y acentos)
 
  • Mejorada la visibilidad en varios estilos de mapas y Wikipedia
 
@@ -2622,7 +2622,7 @@ Representa el área: %1$s x %2$s</string>
  "</string>
 	<string name="rendering_attr_depthContours_description">Mostrar curvas y puntos de profundidad</string>
     <string name="rendering_attr_depthContours_name">Curvas de profundidad</string>
-	<string name="route_altitude">Altitud de la ruta</string>
+	<string name="route_altitude">Elevación de la ruta</string>
     <string name="altitude_descent">Descenso</string>
     <string name="altitude_ascent">Ascenso</string>
     <string name="altitude_range">Rango de altitud</string>
@@ -2649,27 +2649,27 @@ Representa el área: %1$s x %2$s</string>
     <string name="max_speed">Velocidad máxima</string>
     <string name="average_speed">Velocidad media</string>
     <string name="gpx_track">Traza</string>
-    <string name="points_delete_multiple_succesful">Punto(s) borrados exitosamente.</string>
+    <string name="points_delete_multiple_succesful">Punto(s) borrados con éxito.</string>
     <string name="points_delete_multiple">¿Seguro que quieres borrar %1$d punto(s)?</string>
-    <string name="route_points_category_name">Puntos en la ruta a pasar</string>
-    <string name="track_points_category_name">Puntos importantes en esta ruta</string>
+    <string name="route_points_category_name">Giros en la ruta a pasar</string>
+    <string name="track_points_category_name">Puntos destacados en esta ruta</string>
     <string name="add_new_folder">Añadir nueva carpeta</string>
     <string name="shared_string_slope">Pendiente</string>
     <string name="lang_ber">Bereber (amazig)</string>
-    <string name="routing_attr_relief_smoothness_factor_hills_name">Colinas</string>
-    <string name="routing_attr_relief_smoothness_factor_plains_name">Llanuras</string>
-    <string name="routing_attr_relief_smoothness_factor_more_plains_name">Más llanuras</string>
+    <string name="routing_attr_relief_smoothness_factor_hills_name">Montañoso</string>
+    <string name="routing_attr_relief_smoothness_factor_plains_name">Nivelado</string>
+    <string name="routing_attr_relief_smoothness_factor_more_plains_name">Muy nivelado</string>
     <string name="routing_attr_driving_style_speed_name">Velocidad</string>
     <string name="routing_attr_driving_style_balance_name">Equilibrado</string>
     <string name="routing_attr_driving_style_safety_name">Seguridad</string>
-    <string name="relief_smoothness_factor_descr">Prioridad a llanuras o colinas</string>
+    <string name="relief_smoothness_factor_descr">Prioriza entre nivelado o montañoso</string>
     <string name="do_not_send_anonymous_app_usage">No enviar estadísticas de uso anónimas de la aplicación</string>
-    <string name="do_not_send_anonymous_app_usage_desc">La aplicación de OsmAnd, envía información general acerca de la pantalla utilizada durante la sesión. No recopilamos ningún dato de geolocalización o ingreso de datos relacionados al usuario.</string>
+    <string name="do_not_send_anonymous_app_usage_desc">La aplicación de OsmAnd, recolecta información general acerca de la pantalla utilizada durante una sesión. No recopilamos ningún dato de geolocalización o ingreso de datos relacionados al usuario.</string>
     <string name="do_not_show_startup_messages">Ocultar los mensajes al inicio</string>
     <string name="do_not_show_startup_messages_desc">Muestra descuentos de la aplicación y mensajes especiales de eventos locales</string>
     <string name="parking_options">Opciones de estacionamiento</string>
     <string name="full_version_thanks">¡Gracias por comprar la versión completa de OsmAnd!</string>
-    <string name="routing_attr_relief_smoothness_factor_name">Factor de suavidad del relieve</string>
+    <string name="routing_attr_relief_smoothness_factor_name">Elegir la fluctuación de elevación</string>
     <string name="right_side_navigation">Conducir por la derecha</string>
     <string name="driving_region_automatic">Automático</string>
     <string name="osmand_extended_description_part1">"
@@ -2822,13 +2822,13 @@ Algunas de las principales funciones:
     <string name="restore_purchases">Restaurar compras</string>
     <string name="analyze_on_map">Analizar en el mapa</string>
     <string name="shared_string_visible">Visible</string>
-    <string name="sea_depth_thanks">¡Gracias por comprar las curvas de profundidad marinas!</string>
-    <string name="index_item_depth_contours_osmand_ext">Curvas de profundidad</string>
-    <string name="index_item_depth_points_southern_hemisphere">Puntos de profundidad del hemisferio sur</string>
-    <string name="index_item_depth_points_northern_hemisphere">Puntos de profundidad del hemisferio norte</string>
-    <string name="download_depth_countours">Curvas de profundidad</string>
+    <string name="sea_depth_thanks">¡Gracias por comprar las curvas de profundidad náuticas!</string>
+    <string name="index_item_depth_contours_osmand_ext">Curvas de profundidad náuticas</string>
+    <string name="index_item_depth_points_southern_hemisphere">Puntos de profundidad náuticos del hemisferio sur</string>
+    <string name="index_item_depth_points_northern_hemisphere">Puntos de profundidad náuticos del hemisferio norte</string>
+    <string name="download_depth_countours">Curvas de profundidad náuticas</string>
     <string name="nautical_maps">Mapas náuticos</string>
-    <string name="depth_contour_descr">Conjunto de mapas que le permiten ver las curvas y puntos de profundidad marinas (según una grilla de 30 arcosegundos).</string>
+    <string name="depth_contour_descr">Conjunto de mapas que contienen las curvas y puntos de profundidad náuticas (según una grilla de 30 arco-segundos).</string>
     <string name="subscribe_email_error">Error</string>
     <string name="subscribe_email_desc">¡Suscríbete a nuestra lista de correo electrónico para recibir descuentos de la aplicación y obtener 3 descargas de mapas más!</string>
     <string name="no_overlay">Sin superposición</string>
@@ -2854,7 +2854,7 @@ Algunas de las principales funciones:
     <string name="shared_string_in_name">en %1$s</string>
     <string name="shared_string_overview">Resumen</string>
     <string name="animate_my_location">Animar mi ubicación</string>
-    <string name="animate_my_location_desc">Activa la animación de mi ubicación en el mapa</string>
+    <string name="animate_my_location_desc">Activa la extrapolación de la ubicación al perder temporalmente la ubicación</string>
     <string name="favorite_group_name">Nombre del grupo</string>
     <string name="change_color">Cambiar color</string>
     <string name="edit_name">Editar nombre</string>
@@ -2867,9 +2867,9 @@ Algunas de las principales funciones:
     <string name="route_is_too_long_v2">Esta ruta puede ser muy larga para calcular. Añade destinos intermedios si no se encuentran resultados dentro de los 10 minutos.</string>
     <string name="srtm_menu_download_descr">Para ver las curvas de nivel en el mapa, debes descargar el mapa de curvas de nivel de esta región.</string>
     <string name="shared_string_plugin">Complemento</string>
-    <string name="srtm_purchase_header">Para ver las curvas de nivel en el mapa, debes comprar e instalar el complemento</string>
-    <string name="hillshade_menu_download_descr">Para ver el sombreado en el mapa, debes descargar el mapa especial de esta región.</string>
-    <string name="hillshade_purchase_header">Para ver el sombreado en el mapa, debes comprar e instalar el complemento</string>
+    <string name="srtm_purchase_header">Para ver las curvas de nivel en el mapa, debes comprar e instalar el complemento \"Curvas de nivel\"</string>
+    <string name="hillshade_menu_download_descr">Para ver el sombreado del relieve en el mapa, debes descargar la superposición del sombreado de esta región.</string>
+    <string name="hillshade_purchase_header">Para ver el sombreado del relieve en el mapa, debes comprar e instalar el complemento \"Curvas de nivel\"</string>
     <string name="hide_from_zoom_level">Ocultar desde el nivel de ampliación</string>
     <string name="quick_action_showhide_osmbugs_title">Alternar vista de problemas OSM en el mapa</string>
     <string name="quick_action_osmbugs_show">Mostrar problemas OSM en el mapa</string>
