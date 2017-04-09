@@ -2845,7 +2845,7 @@ OsmAndとOSMをサポートする方法として現状最適な方法である�
     <string name="lang_ber">ベルベル諸語</string>
     <string name="route_is_too_long_v2">現在のルートは計算するのに長すぎます。10分経ってもルート設定がされない場合、中間の目的地を設定してください。</string>
     <string name="osmand_extended_description_part1">"
- OsmAnd(OSM Automated Navigation Directions～自動ナビ案内)は、無料、ワールドワイド対応、高品質のOpenStreetMap(OSM)データを使用した、地図＆ナビゲーションアプリです。
+ OsmAnd(OSM Automated Navigation Directions～自動ナビ案内)は、『無償利用可、ワールドワイド対応、高品質のOpenStreetMap(OSM)データ』を使用した、地図＆ナビゲーションアプリです。
 
 音声と視覚による案内、POI(Point Of Interest～興味的地点)表示、GPX経路の作成と管理、等高線を使った地形情報(要プラグイン)、ドライブ、サイクリング、徒歩移動各移動手段別のモード、OSMの編集等々に対応。
  "</string>
@@ -2864,7 +2864,7 @@ OsmAndとOSMをサポートする方法として現状最適な方法である�
  "</string>
     <string name="osmand_extended_description_part3">"
  マップ機能
- • 周囲のPOI(Point Of Interests～興味のあるポイン)を表示できます
+ • 周囲のPOI(Point Of Interests～興味を引く施設)を表示できます
  • 進行方向に応じてマップの表示向きの変更も出来ます(コンパスを基本にも出来ます)
  • あなたがいる場所やあなたが見ている場所も表示できます
  • 友人があなたを見つけることが出来るように、あなたの場所を共有することができます
@@ -2892,4 +2892,99 @@ OsmAndとOSMをサポートする方法として現状最適な方法である�
  • 歩行者モードでのGPSナビゲーションは、徒歩移動向け経路を使用してルートを構築します。
  • ルートや記録を含んだGPXファイルをアップロードしたり、フォローしたり、自分自身で共有することができます
  "</string>
+    <string name="osmand_extended_description_part7">"
+ OSMに寄与
+ • データ、バグの報告ができます
+ • GPX経路情報をアプリから直接OSMにアップロードできます
+ • POIを追加してOSMに直接アップロードできます(オフラインの場合は後で行うことができます)
+ "</string>
+    <string name="osmand_extended_description_part8">"
+ OsmAndはオープンソースで積極的に開発されています。バグを報告したり、翻訳を改善したり、新しい機能をコーディングすることで、誰もがアプリケーションの開発に貢献できます。このような開発者とユーザーとのやりとりによって、プロジェクトは継続的に改善されています。プロジェクトの進捗状況は、資金調達と新しい機能のテストに大きく左右されますしています。
+
+地図のおおよそのエリアとその品質(※注 *の数が多いほど充実しています):
+ • 西ヨーロッパ: ****
+ • 東ヨーロッパ: ***
+ • ロシア: ***
+ • 北米: ***
+ • 南アメリカ: **
+ • アジア: **
+ • 日韓: ***
+ • 中東: **
+ • アフリカ: **
+ • 南極: *
+
+ 世界中のほとんどの国の地図がダウンロード可能です！
+ フランス、ドイツ、メキシコ、英国、スペイン、オランダ、米国、ロシア、ブラジルなどの国の便利なナビゲーターを入手しましょう。
+ "</string>
+    <string name="osmand_plus_extended_description_part1">"
+ OsmAnd(OSM Automated Navigation Directions～自動ナビ案内)は、『無償利用可、ワールドワイド対応、高品質のOpenStreetMap(OSM)』データを使用した、地図＆ナビゲーションアプリです。
+
+音声と視覚による案内、POI(Point Of Interest～興味的地点)表示、GPX経路の作成と管理、等高線を使った地形情報(要プラグイン)、ドライブ、サイクリング、徒歩移動各移動手段別のモード、OSMの編集等々に対応。
+ 
+ OsmAnd+は有料のアプリケーションです。購入することで同プロジェクトの資金、新機能開発への援助となり、最新アップデートも利用可能になります。
+
+いくつかの主な機能:
+ "</string>
+    <string name="osmand_plus_extended_description_part2">"
+ ナビゲーション
+ • オンライン（高速）またはオフライン(海外の場合はローミング料金が不要に）どちらでも動作可能です
+ • ターンバイターンの音声案内（録音された音声と合成音声）が可能です
+ • 車線案内、道路名、到着予定時刻等の様々なオプションが利用できます
+ • 旅程上の中間経由地点をサポートしています
+ • ルートから大きく外れると自動的に再ルート検索します
+ • 住所別、種類別（例：レストラン、ホテル、ガソリンスタンド、博物館）、または座標の数値で場所を検索可能です
+ "</string>
+    <string name="osmand_plus_extended_description_part3">"
+ マップ表示
+ • 現在地と現在の方向を表示できます
+ • オプションで、コンパスまたは動きの方向に応じてマップの向きを変更できます
+ • 大事な場所は『お気に入り』として保存できます
+ • 周囲のPOI(Point Of Interests～興味を引く施設)を表示できます
+ • 特殊なオンラインタイル、衛星写真(Bingを利用)、ツーリング/ナビゲーションGPX経路などを異なるレイヤーに、またカスタマイズ可能な透明度などを追加レイヤーに指定可能
+ • オプションで、地名を英語、現地語、または表音つづりで表示可能
+ "</string>
+    <string name="osmand_plus_extended_description_part4">"
+ OSMとWikipediaデータを使用
+ • 世界最高峰の共有プロジェクトからの高品質な情報を得られます
+ • 国または地域ごとにOSMデータが利用できます
+ • 観光に最適なウィキペディアのPOI
+ • マップや音声などはアプリからの回数の制限無く無料ダウンロードができます
+ • コンパクトなオフラインベクターマップが少なくとも1か月に1回更新されます
+
+ • 完全な地域データと道路網のみのデータの選択が可能です（例：施設などを含んだデータ 700MB、道路網のみ 200MB）
+ "</string>
+    <string name="osmand_plus_extended_description_part5">"
+ 安全機能
+ • オプションで昼/夜モードマップ自動表示切り替えができます
+ • 制限速度の表示が出来ます(オプション)
+ • 速度に応じたマップの表示拡縮ができます
+ • 友人があなたを見つけることができるようにあなたの場所を共有する昨日もあります
+ "</string>
+    <string name="osmand_plus_extended_description_part6">"
+ 自転車と徒歩モードの特徴
+ • アウトドアアクティビティ向けに徒歩移動、ハイキング、自転車向けルートを見られます
+ • 自転車と徒歩のための特別なルート検索と表示モードがあります
+ • 路線名を含む公共交通機関の停留所(バス、路面電車、電車)
+ • ローカル内のGPXファイル内記録経路またはオンラインサービスからの経路利用ができます
+ • オプションで速度と標高表示ができます
+ • 等高線と山陰の表示(要追加プラグイン）
+ "</string>
+    <string name="quick_action_showhide_osmbugs_title">OSMメモの表示/非表示</string>
+    <string name="quick_action_osmbugs_show">OSMメモを表示</string>
+    <string name="quick_action_osmbugs_hide">OSMメモを非表示</string>
+    <string name="quick_action_showhide_osmbugs_descr">アクションボタンをタップするとマップ画面でのOSMメモの表示、非表示の切替が出来ます。</string>
+    <string name="sorted_by_distance">距離順で並べ替え</string>
+    <string name="search_favorites">お気に入りを検索</string>
+    <string name="hillshade_menu_download_descr">陰影起伏図をマップに表示するには、その地域用特殊マップのダウンロードが必要です。</string>
+    <string name="hillshade_purchase_header">陰影起伏図をマップ上で見るには、プラグインの購入とインストールが必要です</string>
+    <string name="hide_from_zoom_level">非表示ズームレベル</string>
+    <string name="srtm_menu_download_descr">等高線をマップ上に表示するには、その地域用等高線マップのダウンロードが必要です。</string>
+    <string name="shared_string_plugin">プラグイン</string>
+    <string name="srtm_purchase_header">等高線をマップ上で見るには、プラグインの購入とインストールが必要です</string>
+    <string name="show_from_zoom_level">表示ズームレベル</string>
+    <string name="routing_attr_allow_private_name">プライベートアクセスを許可</string>
+    <string name="routing_attr_allow_private_name_description">プライベートエリアにアクセスを許可</string>
+    <string name="display_zoom_level">表示ズームレベル: %1$s</string>
+    <string name="index_item_depth_points_southern_hemisphere">南半球の深度マップ</string>
+    <string name="index_item_depth_points_northern_hemisphere">北半球の深度マップ</string>
     </resources>
