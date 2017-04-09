@@ -2869,4 +2869,5 @@ Ja jums ir vajadzīga palīdzība ar OsmAnd aplikāciju, lūdzu kontaktējieties
     <string name="quick_action_showhide_osmbugs_descr">Nospiežot pogu, tiks rādītas vai slēptas OEM piezīmes uz kartes.</string>
     <string name="sorted_by_distance">Sakārtots pēc distances</string>
     <string name="search_favorites">Izlases meklēšana</string>
+    <string name="hillshade_menu_download_descr">Lai attēlotu reljefa griezumu kartē, ir nepieciešams lejupielādēt reljefa virsklāja karti šim reğionam.</string>
     </resources>
