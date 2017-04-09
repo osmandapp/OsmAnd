@@ -111,7 +111,7 @@
     <string name="routing_attr_height_obstacles_name">Use elevation data</string>
     <string name="routing_attr_height_obstacles_description">Use terrain elevation data provided by SRTM, ASTER and EU-DEM</string>
     <string name="rendering_attr_depthContours_description">Show depth contours and points</string>
-    <string name="rendering_attr_depthContours_name">Depth contours</string>
+    <string name="rendering_attr_depthContours_name">Nautical depth contours</string>
     <string name="release_2_6">
 	\u2022 New feature: Quick action button\n\n
 	\u2022 Improved touch screen gesture response (e.g. concurrent panning and zooming)\n\n
