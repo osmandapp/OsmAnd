@@ -2864,4 +2864,9 @@ Ja jums ir vajadzīga palīdzība ar OsmAnd aplikāciju, lūdzu kontaktējieties
     <string name="relief_smoothness_factor_hills">Kalnaini apvidi</string>
     <string name="relief_smoothness_factor_plains">Līdzenumi</string>
     <string name="relief_smoothness_factor_more_plains">Vairāk līdzenumu</string>
+    <string name="quick_action_osmbugs_show">Rādīt OSM piezīmes</string>
+    <string name="quick_action_osmbugs_hide">Nerādīt OSM piezīmes</string>
+    <string name="quick_action_showhide_osmbugs_descr">Nospiežot pogu, tiks rādītas vai slēptas OEM piezīmes uz kartes.</string>
+    <string name="sorted_by_distance">Sakārtots pēc distances</string>
+    <string name="search_favorites">Izlases meklēšana</string>
     </resources>
