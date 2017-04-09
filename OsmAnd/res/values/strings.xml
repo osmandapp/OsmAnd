@@ -114,9 +114,9 @@
     <string name="rendering_attr_depthContours_name">Depth contours</string>
     <string name="release_2_6">
 	\u2022 New feature: Quick action button\n\n
-	\u2022 Improved touch screen gesture response\n\n
+	\u2022 Improved touch screen gesture response (e.g. concurrent panning and zooming)\n\n
 	\u2022 New map fonts covering more locales\n\n
-	\u2022 Support TTS for regional language variants\n\n
+	\u2022 Support TTS for regional language variants (and accents)\n\n
 	\u2022 Visibility enhancements in several map styles and wikipedia\n\n
 	\u2022 Support Open Location Code (OLC)\n\n
 	\u2022 Display elevation and slope profile for recorded GPX (also speed) and calculated route\n\n
