@@ -2575,17 +2575,17 @@ El espacio de almacenamiento usado es {3} MB temporalmente y {1} MB permanenteme
 <string name="release_2_6">"
  • Nueva función: Botón de acción rápida
 
- • Mejorada la respuesta de gestos táctiles
+ • Mejorada la respuesta de gestos táctiles (p.e. panorámicas y acercamientos simultáneos)
 
  • El nuevo tipo de letra del mapa abarca más regiones
 
- • Soporte TTS para idiomas regionales
+ • Soporte TTS para idiomas regionales (y acentos)
 
  • Mejorada la visibilidad en varios estilos de mapas y Wikipedia
 
  • Soporte para «Código  de Ubicación Abierto» (Open Location Code)
 
- • Visualización del perfil de elevación y pendiente para los GPX grabados (también velocidad) y la ruta calculada
+ • Visualización del perfil de elevación, pendiente y velocidad para las trazas GPX grabadas y la ruta calculada
 
  • Opción \"Estilo de conducción\" y mejoras lógicas en el cálculo de rutas para bicicleta
 
@@ -2601,7 +2601,7 @@ El espacio de almacenamiento usado es {3} MB temporalmente y {1} MB permanenteme
     <string name="shared_string_tracks">Trazas</string>
     <string name="routing_attr_driving_style_name">Estilo de conducción</string>
     <string name="routing_attr_driving_style_description">Seguro, rápido o de conducción equilibrada</string>
-    <string name="route_altitude">Altitud de la ruta</string>
+    <string name="route_altitude">Elevación de la ruta</string>
     <string name="altitude_descent">Descenso</string>
     <string name="altitude_ascent">Ascenso</string>
     <string name="altitude_range">Rango de altitud</string>
@@ -2614,7 +2614,7 @@ El espacio de almacenamiento usado es {3} MB temporalmente y {1} MB permanenteme
     <string name="routing_attr_height_obstacles_description">Utilizar los datos de elevación del terreno proporcionados por SRTM, ASTER y UE-DEM</string>
 
     <string name="rendering_attr_depthContours_description">Muestra puntos y curvas de profundidad</string>
-    <string name="rendering_attr_depthContours_name">Curvas a nivel</string>
+    <string name="rendering_attr_depthContours_name">Curvas de profundidad náuticas</string>
 	<string name="auto_split_recording_title">Auto-dividir grabaciones después de la separación</string>
 	<string name="auto_split_recording_descr">Iniciar nuevo segmento después de un hueco de 6 min, nueva pista después de un hueco de 2 h, o nuevo archivo después de un hueco más largo si ha cambiado la fecha.</string>
     <string name="navigate_point_olc">Código de Ubicación Abierto (OLC)</string>
@@ -2631,8 +2631,8 @@ Por favor proporciona un código completo</string>
     <string name="add_new_folder">Añadir nueva carpeta</string>
     <string name="points_delete_multiple_succesful">Punto(s) eliminados con éxito.</string>
     <string name="points_delete_multiple">¿Seguro que quiere borrar %1$d punto(s)?</string>
-    <string name="route_points_category_name">Puntos en la ruta a pasar</string>
-    <string name="track_points_category_name">Puntos importantes en esta ruta</string>
+    <string name="route_points_category_name">Giros en la ruta a pasar</string>
+    <string name="track_points_category_name">Puntos destacados en esta ruta</string>
     <string name="gpx_track">Traza</string>
     <string name="max_speed">Velocidad máxima</string>
     <string name="average_speed">Velocidad media</string>
@@ -2642,13 +2642,13 @@ Por favor proporciona un código completo</string>
     <string name="shared_string_start_time">Hora de inicio</string>
     <string name="shared_string_end_time">Hora de fin</string>
     <string name="shared_string_color">Color</string>
-    <string name="routing_attr_relief_smoothness_factor_hills_name">Colinas</string>
-    <string name="routing_attr_relief_smoothness_factor_plains_name">Llanuras</string>
-    <string name="routing_attr_relief_smoothness_factor_more_plains_name">Más llanos</string>
+    <string name="routing_attr_relief_smoothness_factor_hills_name">Montañoso</string>
+    <string name="routing_attr_relief_smoothness_factor_plains_name">Poco montañoso</string>
+    <string name="routing_attr_relief_smoothness_factor_more_plains_name">Plano (llanura)</string>
     <string name="routing_attr_driving_style_speed_name">Velocidad</string>
-    <string name="routing_attr_driving_style_balance_name">Equilibrio</string>
+    <string name="routing_attr_driving_style_balance_name">Equilibrado</string>
     <string name="routing_attr_driving_style_safety_name">Seguridad</string>
-    <string name="relief_smoothness_factor_descr">Prioridad a llanuras o colinas</string>
+    <string name="relief_smoothness_factor_descr">Terreno preferido: llano o montañoso</string>
     <string name="lang_ber">Bereber</string>
     <string name="do_not_send_anonymous_app_usage">No enviar estadísticas de uso anónimas de la aplicación</string>
     <string name="do_not_send_anonymous_app_usage_desc">"La aplicación de OsmAnd, envía información general sobre la pantalla usada durante la sesión. No recopilamos datos de geolocalización o de entrada de  usuario."</string>
@@ -2656,7 +2656,7 @@ Por favor proporciona un código completo</string>
     <string name="do_not_show_startup_messages_desc">Muestra descuentos de la aplicación y mensajes de eventos locales</string>
     <string name="parking_options">Opciones de aparcamiento</string>
     <string name="full_version_thanks">¡Gracias por comprar la versión completa de OsmAnd!</string>
-    <string name="routing_attr_relief_smoothness_factor_name">Factor de suavizado de relieve</string>
+    <string name="routing_attr_relief_smoothness_factor_name">"Seleccionar  la fluctuación de elevación"</string>
     <string name="right_side_navigation">Conducción por la derecha</string>
     <string name="driving_region_automatic">Automático</string>
     <string name="osmand_extended_description_part1">"
@@ -2747,12 +2747,12 @@ Cobertura y calidad aproximadas del mapa:
     <string name="no_underlay">Sin subyacente</string>
     <string name="subscribe_email_error">Error</string>
     <string name="subscribe_email_desc">¡Suscríbete a nuestra lista de correo electrónico sobre descuentos de la aplicación y obtén 3 descargas de mapa adicionales!</string>
-    <string name="depth_contour_descr">Un conjunto de mapas que permiten ver curvas y puntos de profundidad marinas (basadas en una grilla de 30 arco-segundos).</string>
-    <string name="sea_depth_thanks">¡Gracias por adquirir las curvas de profundidad del mar!</string>
-    <string name="index_item_depth_contours_osmand_ext">Curvas de profundidad</string>
-    <string name="index_item_depth_points_southern_hemisphere">Curvas de profundidad del hemisferio sur</string>
-    <string name="index_item_depth_points_northern_hemisphere">Curvas de profundidad del hemisferio norte</string>
-    <string name="download_depth_countours">Curvas de profundidad</string>
+    <string name="depth_contour_descr">Conjunto de mapas que contienen las curvas y puntos de profundidad náuticas (según una grilla de 30 arco-segundos).</string>
+    <string name="sea_depth_thanks">¡Gracias por adquirir las curvas de profundidad náuticas!</string>
+    <string name="index_item_depth_contours_osmand_ext">Curvas de profundidad náuticas</string>
+    <string name="index_item_depth_points_southern_hemisphere">Curvas de profundidad náuticas del hemisferio sur</string>
+    <string name="index_item_depth_points_northern_hemisphere">Curvas de profundidad náuticas del hemisferio norte</string>
+    <string name="download_depth_countours">Curvas de profundidad náuticas</string>
     <string name="nautical_maps">Mapas náuticos</string>
     <string name="osmand_plus_extended_description_part1">"
  OsmAnd+ (OSM Automated Navigation Directions, Guía de Navegación Automatizada de OSM) es una aplicación de mapa y navegación con acceso a los datos libres, de ámbito mundial y de alta calidad de OpenStreetMap (OSM).
@@ -2775,7 +2775,7 @@ Algunas de las características principales:
     <string name="change_color">Cambiar color</string>
     <string name="edit_name">Editar nombre</string>
     <string name="animate_my_location">Animar mi ubicación</string>
-    <string name="animate_my_location_desc">Activa la animación de la ubicación en el mapa</string>
+    <string name="animate_my_location_desc">Activa la extrapolación de la ubicación al perder temporalmente la ubicación</string>
     <string name="shared_string_overview">Resumen</string>
     <string name="osmand_plus_extended_description_part2">"
  Navegación GPS
@@ -2847,7 +2847,7 @@ Algunas de las características principales:
     <string name="save_poi_too_many_uppercase">El nombre contiene demasiadas letras capitales. ¿Continuar?</string>
     <string name="srtm_menu_download_descr">Para ver las curvas de nivel en el mapa, debes descargar el mapa de curvas de nivel de esta región.</string>
     <string name="shared_string_plugin">Complemento</string>
-    <string name="srtm_purchase_header">Para ver las curvas de nivel en el mapa, debes comprar e instalar el complemento</string>
+    <string name="srtm_purchase_header">Para ver las curvas de nivel en el mapa, debes comprar e instalar el complemento \"Curvas de nivel\"</string>
     <string name="srtm_color_scheme">Esquema de color</string>
     <string name="show_from_zoom_level">Visualización del nivel de acercamiento</string>
     <string name="routing_attr_allow_private_name">Permitir el acceso privado</string>
@@ -2861,4 +2861,5 @@ Algunas de las características principales:
 notas de OSM en el mapa.</string>
     <string name="sorted_by_distance">Ordenado por distancia</string>
     <string name="search_favorites">Buscar favoritos</string>
+    <string name="hide_from_zoom_level">Ocultar desde el nivel de acercamiento</string>
     </resources>
