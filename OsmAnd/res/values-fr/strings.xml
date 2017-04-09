@@ -2813,7 +2813,7 @@ représentant la zone : %1$s x %2$s</string>
  • Et de nombreuses autres améliorations et corrections d\'anomalies…
  "</string>
 	<string name="rendering_attr_depthContours_description">Afficher les lignes de sonde</string>
-    <string name="rendering_attr_depthContours_name">Lignes de sonde</string>
+    <string name="rendering_attr_depthContours_name">Lignes de sonde maritimes</string>
 	<string name="routing_attr_height_obstacles_name">Utiliser les données d\'altitude</string>
     <string name="routing_attr_height_obstacles_description">Utiliser les données d\'altitude fournies par SRTM, ASTER et EU-DEM</string>
 
@@ -2844,8 +2844,8 @@ représentant la zone : %1$s x %2$s</string>
     <string name="points_delete_multiple_succesful">Point(s) supprimé(s) avec succès.</string>
     <string name="points_delete_multiple">Souhaitez-vous vraiment supprimer %1$d point(s) ?</string>
     <string name="add_new_folder">Créer un dossier</string>
-    <string name="route_points_category_name">Points de passage sur la route</string>
-    <string name="track_points_category_name">Points importants sur cette route</string>
+    <string name="route_points_category_name">Itinéraire pour emprunter cette route</string>
+    <string name="track_points_category_name">Points remarquables de cette route</string>
     <string name="shared_string_slope">Pente</string>
     <string name="lang_ber">Berbère</string>
     <string name="driving_style_speed">Rapide</string>
@@ -2853,10 +2853,10 @@ représentant la zone : %1$s x %2$s</string>
     <string name="relief_smoothness_factor_hills">Collines</string>
     <string name="relief_smoothness_factor_plains">Plaines</string>
     <string name="driving_style_balance">Compromis</string>
-    <string name="relief_smoothness_factor_descr">Priorité sur les plaines ou les collines</string>
+    <string name="relief_smoothness_factor_descr">Terrain préféré : plat ou vallonné</string>
     <string name="routing_attr_relief_smoothness_factor_hills_name">Vallonné</string>
-    <string name="routing_attr_relief_smoothness_factor_plains_name">Plaines</string>
-    <string name="routing_attr_relief_smoothness_factor_more_plains_name">Plus de plaines</string>
+    <string name="routing_attr_relief_smoothness_factor_plains_name">Moins vallonné</string>
+    <string name="routing_attr_relief_smoothness_factor_more_plains_name">Plat</string>
     <string name="routing_attr_driving_style_speed_name">Rapide</string>
     <string name="routing_attr_driving_style_balance_name">Équilibré</string>
     <string name="routing_attr_driving_style_safety_name">Sûre</string>
@@ -2868,7 +2868,7 @@ représentant la zone : %1$s x %2$s</string>
     <string name="do_not_show_startup_messages_desc">Ces messages concernent les offres spéciales d\'achat d\'applications</string>
     <string name="right_side_navigation">Conduite à droite</string>
     <string name="driving_region_automatic">Automatique</string>
-    <string name="do_not_send_anonymous_app_usage_desc">OsmAnd collecte des données sur les écrans affichés lors de l\'utilisation de l\'application mais en aucun cas des données de positionnement ou saisies par l\'utilisateur.</string>
+    <string name="do_not_send_anonymous_app_usage_desc">OsmAnd collecte des informations sur les écrans affichés lors de l\'utilisation de l\'application. Votre position n\'est jamais collectée, ni aucune des données saisies par l\'utilisateur dans l\'application comme les zones affichées, les recherches ou les téléchargements réalisés.</string>
     <string name="osmand_extended_description_part1">"
  OsmAnd (OSM Automated Navigation Directions) est une application de visualisation de cartes et de navigation utilisant les données gratuites couvrant le monde entier du projet OpenStreetMap (OSM).
 
