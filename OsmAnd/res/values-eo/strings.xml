@@ -2649,7 +2649,7 @@ Indikas lokon:  %1$s x %2$s"</string>
  • Subteno por \'Malferma pozicia kodo\' (OLC)
 
 
- • Montrado de terena profilo por registrita GPX-spuro (ankaŭ rapido) kaj por kalkulita kurso
+ • Montrado altitudo, de terena profilo por registrita GPX-spuro (ankaŭ rapido) kaj por kalkulita kurso
 
 
  • Agordo \'Veturada stilo\' kaj logikaj plibonigoj en bicikla difinado de vojo
@@ -2664,7 +2664,7 @@ Indikas lokon:  %1$s x %2$s"</string>
  kaj pli…
  "</string>
 	<string name="rendering_attr_depthContours_description">Montras punktojn kaj konturojn de profundo</string>
-    <string name="rendering_attr_depthContours_name">Profundec-kurboj</string>
+    <string name="rendering_attr_depthContours_name">Maraj profundec-kurboj</string>
 	<string name="routing_attr_height_relief_smoothness_factor_name">Glateca-faktoro de nivelombrumo</string>
     <string name="routing_attr_height_relief_smoothness_factor_description">Pli da ebenejoj aŭ pli da montetoj</string>
     <string name="routing_attr_height_obstacles_name">Uzi datumoj pri altitudo</string>
@@ -2695,22 +2695,22 @@ Indikas lokon:  %1$s x %2$s"</string>
     <string name="add_new_folder">Aldoni novan dosierujon</string>
     <string name="points_delete_multiple_succesful">Sukcese forigis punkto(j)n.</string>
     <string name="points_delete_multiple">%1$d punkto(j) estos forigitaj. Ĉu pluigi?</string>
-    <string name="route_points_category_name">Preterirendaj punktoj sur kurso</string>
-    <string name="track_points_category_name">Gravaj punktoj de tiu ĉi kurso</string>
+    <string name="route_points_category_name">Turniĝoj sur tiu ĉi kurso</string>
+    <string name="track_points_category_name">Gravaj punktoj sur tiu ĉi kurso</string>
     <string name="shared_string_slope">Klineco</string>
     <string name="lang_ber">Berbera</string>
-    <string name="relief_smoothness_factor_descr">Preferas aŭ ebenojn aŭ malebenojn</string>
+    <string name="relief_smoothness_factor_descr">Preferi terenon: ebenan aŭ malebenan</string>
     <string name="routing_attr_relief_smoothness_factor_hills_name">Malebena</string>
-    <string name="routing_attr_relief_smoothness_factor_plains_name">Ebena</string>
-    <string name="routing_attr_relief_smoothness_factor_more_plains_name">Pli ebena</string>
+    <string name="routing_attr_relief_smoothness_factor_plains_name">Malpli ebena</string>
+    <string name="routing_attr_relief_smoothness_factor_more_plains_name">Ebena</string>
     <string name="routing_attr_driving_style_speed_name">Rapida</string>
     <string name="routing_attr_driving_style_balance_name">Ekvilibra</string>
     <string name="routing_attr_driving_style_safety_name">Sekura</string>
-    <string name="routing_attr_relief_smoothness_factor_name">Nivel-ombruma glateco</string>
+    <string name="routing_attr_relief_smoothness_factor_name">Elektu nivel-ombruman glatecon</string>
     <string name="full_version_thanks">Dankon al ci por aĉeti la plenan version de OsmAnd!</string>
     <string name="parking_options">Parkumadaj agordoj</string>
     <string name="do_not_send_anonymous_app_usage">Ne sendi anoniman statistikon pri uzado</string>
-    <string name="do_not_send_anonymous_app_usage_desc">OsmAnd sendas ĝeneralajn informojn pri uzado de ekrano dum seanco. Ni ne kolektas iujn ajn datumojn pri pozicio aŭ datumojn entajpitajn de uzanto.</string>
+    <string name="do_not_send_anonymous_app_usage_desc">OsmAnd kolektas informojn pri kiuj uzataj partoj de aplikaĵo. Via pozicio neniam estas sendata, nek ion ajn, kiun vi entajpas en la aplikaĵo nek detaloj pri ejoj foliumada, serĉataj aŭ elŝutataj.</string>
     <string name="do_not_show_startup_messages">Ne montri mesaĝojn je starto</string>
     <string name="do_not_show_startup_messages_desc">Ne montras mesaĝojn pri rabatoj kaj specialaj lokaj okazoj</string>
     <string name="driving_region_automatic">Aŭtomata</string>
@@ -2864,13 +2864,13 @@ De Afganujo al Zimbabvo, de Aŭstralio al Usono, Argentino, Brazilo, Kanado, Fra
     <string name="restore_purchases">Restarigi aĉetaĵojn</string>
     <string name="shared_string_visible">Videbla</string>
     <string name="analyze_on_map">Analizi sur mapo</string>
-    <string name="sea_depth_thanks">Dankon al vi por aĉeti marajn profundec-kurbojn!</string>
-    <string name="index_item_depth_contours_osmand_ext">Profundec-kurbojn</string>
-    <string name="index_item_depth_points_southern_hemisphere">Profundec-kurboj de suda duonsfero</string>
-    <string name="index_item_depth_points_northern_hemisphere">Profundec-kurboj de norda duonsfero</string>
-    <string name="download_depth_countours">Profundec-kurboj</string>
+    <string name="sea_depth_thanks">Dankon al ci por aĉeti marajn profundec-kurbojn!</string>
+    <string name="index_item_depth_contours_osmand_ext">Maraj profundec-kurbojn</string>
+    <string name="index_item_depth_points_southern_hemisphere">Maraj profundec-kurboj de suda duonsfero</string>
+    <string name="index_item_depth_points_northern_hemisphere">Maraj profundec-kurboj de norda duonsfero</string>
+    <string name="download_depth_countours">Maraj profundec-kurboj</string>
     <string name="nautical_maps">Maraj mapoj</string>
-    <string name="depth_contour_descr">Kolekto da mapoj, kiu ebligas al vi vidi marajn profundec-kurbojn kaj punktojn (bazitajn sur 30-arksekunda krado).</string>
+    <string name="depth_contour_descr">Kolekto da mapoj reprezentantaj marajn profundec-kurbojn kaj punktojn (bazitajn sur 30-arksekunda krado).</string>
     <string name="quick_action_add_destination">Aldoni celon</string>
     <string name="quick_action_replace_destination">Anstataŭigi celon</string>
     <string name="quick_action_add_first_intermediate">Aldoni unuan interlokon</string>
@@ -2896,7 +2896,7 @@ De Afganujo al Zimbabvo, de Aŭstralio al Usono, Argentino, Brazilo, Kanado, Fra
     <string name="shared_string_in_name">en %1$s</string>
     <string name="shared_string_overview">Sumigo</string>
     <string name="animate_my_location">Animaciigi mian pozicion</string>
-    <string name="animate_my_location_desc">Aktivigas movbildon de mia pozicio sur la mapo</string>
+    <string name="animate_my_location_desc">Aktivigas eksterpoladon de la pozicio dum provizora perdo de pozici-determino</string>
     <string name="favorite_group_name">Grupa nomo</string>
     <string name="change_color">Ŝanĝi koloron</string>
     <string name="edit_name">Redakti nomon</string>
@@ -2909,9 +2909,9 @@ De Afganujo al Zimbabvo, de Aŭstralio al Usono, Argentino, Brazilo, Kanado, Fra
     <string name="save_poi_too_many_uppercase">Nomo enhavas tro multe da grandaj literoj? Ĉu vi volas pluigi?</string>
     <string name="srtm_menu_download_descr">Por vidi nivelkurbojn sur la mapo, vi devas elŝuti nivelkurban mapon por tiu ĉi regiono.</string>
     <string name="shared_string_plugin">Kromprogramo</string>
-    <string name="srtm_purchase_header">Por vidi nivelkurbojn sur la mapo, vi devas aĉeti kaj instali la kromprogramon</string>
-    <string name="hillshade_menu_download_descr">Por vidi nivel-ombrumon sub la mapo, vi devas elŝuti specialan mapon por tiu ĉi regiono.</string>
-    <string name="hillshade_purchase_header">Por vidi nivel-ombrumon sub la mapo, vi devas aĉeti kaj instali kromprogramon</string>
+    <string name="srtm_purchase_header">Por vidi nivelkurbojn sur la mapo, vi devas aĉeti kaj instali la kromprogramon \'Nivelkurboj\'</string>
+    <string name="hillshade_menu_download_descr">Por vidi nivel-ombrumon sub la mapo, vi devas elŝuti nivel-ombruman mapon de tiu ĉi regiono.</string>
+    <string name="hillshade_purchase_header">Por vidi nivel-ombrumon sub la mapo, vi devas aĉeti kaj instali kromprogramon \'Nivelkurboj\'</string>
     <string name="hide_from_zoom_level">Kaŝi de skal-nivelo</string>
     <string name="sorted_by_distance">Ordigitaj laŭ distanco</string>
     <string name="search_favorites">Serĉi en ŝatataj</string>
