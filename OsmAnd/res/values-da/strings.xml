@@ -2858,7 +2858,7 @@ Repræsenterer område: %1$s x %2$s</string>
   og mere…
  "</string>
 	<string name="rendering_attr_depthContours_description">Vis dybdekonturer og -punkter</string>
-    <string name="rendering_attr_depthContours_name">Dybdekonturer</string>
+    <string name="rendering_attr_depthContours_name">Havdybdekonturer</string>
 	<string name="routing_attr_height_relief_smoothness_factor_description">Flere sletter eller flere bakker</string>
     <string name="routing_attr_height_obstacles_name">Brug højdedata</string>
     <string name="routing_attr_height_obstacles_description">Brug terrænhøjdedata fra SRTM, ASTER og EU-DEM</string>
@@ -3060,11 +3060,11 @@ Repræsenterer område: %1$s x %2$s</string>
     <string name="restore_purchases">Gendan køb</string>
     <string name="shared_string_visible">Synlig</string>
     <string name="analyze_on_map">Analyser på kortet</string>
-    <string name="sea_depth_thanks">Tak for købet af nautiske dybdekonturer!</string>
-    <string name="index_item_depth_contours_osmand_ext">Nautiske dybdekonturer</string>
-    <string name="index_item_depth_points_southern_hemisphere">Nautiske dybdepunkter for den sydlige halvkugle</string>
-    <string name="index_item_depth_points_northern_hemisphere">Nautiske dybdepunkter for den nordlige halvkugle</string>
-    <string name="download_depth_countours">Nautiske dybdekonturer</string>
+    <string name="sea_depth_thanks">Tak for købet af havdybdekonturer!</string>
+    <string name="index_item_depth_contours_osmand_ext">Havdybdekonturer</string>
+    <string name="index_item_depth_points_southern_hemisphere">Havdybdepunkter for den sydlige halvkugle</string>
+    <string name="index_item_depth_points_northern_hemisphere">Havdybdepunkter for den nordlige halvkugle</string>
+    <string name="download_depth_countours">Havdybdekonturer</string>
     <string name="nautical_maps">Søkort</string>
     <string name="depth_contour_descr">Kortsæt der indeholder dybdekonturlinjer og -punkter (baseret på et 30 buesekunder gitter).</string>
     <string name="subscribe_email_error">Fejl</string>
@@ -3107,7 +3107,7 @@ Tidligere destination bliver sidste mellemliggende punkt.</string>
     <string name="srtm_menu_download_descr">For se højdekurver på kortet, hent højdekurvekort over området.</string>
     <string name="shared_string_plugin">Udvidelse</string>
     <string name="srtm_purchase_header">For at se højdekurver på kortet, køb og installer højdekurveudvidelsen</string>
-    <string name="hillshade_menu_download_descr">For at se reliefskygger på kortet, skal kort med reliefskyggeoverlejring hentes for området.</string>
+    <string name="hillshade_menu_download_descr">For at se reliefskygger på kortet, skal kort med reliefoverlejring for området hentes.</string>
     <string name="hillshade_purchase_header">For at se reliefskygger på kortet, køb og installer højdekurve udvidelsen</string>
     <string name="hide_from_zoom_level">Skjul fra zoom-niveau</string>
     <string name="sorted_by_distance">Sorteret efter afstand</string>
