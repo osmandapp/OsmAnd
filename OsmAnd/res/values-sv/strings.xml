@@ -2470,7 +2470,7 @@ med mera…
     <string name="quick_action_map_underlay_title">Kartunderlägg</string>
     <string name="quick_action_map_underlay">Ändra kartunderlägg</string>
     <string name="quick_action_map_underlay_switch">Kartunderlägget har ändrats till \"%s\".</string>
-    <string name="rendering_attr_depthContours_name">Djupkonturer</string>
+    <string name="rendering_attr_depthContours_name">Konturer för sjödjup</string>
 	<string name="rendering_value_fine_name">Fin</string>
     <string name="navigate_point_olc">Öppna platskod</string>
     <string name="navigate_point_olc_info_invalid">Ogiltig OLC
@@ -2517,7 +2517,7 @@ Vänligen tillhandahåll fullständig kod</string>
     <string name="add_new_folder">Lägg till ny mapp</string>
     <string name="points_delete_multiple_succesful">Punkt(er) togs bort utan problem.</string>
     <string name="points_delete_multiple">Du håller på att ta bort %1$d punkt(er). Är du säker?</string>
-    <string name="route_points_category_name">Punkter längs rutten att passera</string>
+    <string name="route_points_category_name">Kurvor att passera längs rutten</string>
     <string name="track_points_category_name">Viktiga punkter längs denna rutt</string>
     <string name="gpx_track">Spår</string>
     <string name="shared_string_action_name">Åtgärdsnamn</string>
@@ -2537,11 +2537,11 @@ Vänligen tillhandahåll fullständig kod</string>
     <string name="driving_style_speed">Hastighet</string>
     <string name="driving_style_balance">Balans</string>
     <string name="driving_style_safety">Säkerhet</string>
-    <string name="relief_smoothness_factor_descr">Prioritera slätt eller kuperat</string>
+    <string name="relief_smoothness_factor_descr">Favoritterräng: slätt eller kuperat</string>
     <string name="full_version_thanks">Tack för att du köpt den fullständiga versionen av OsmAnd!</string>
     <string name="routing_attr_relief_smoothness_factor_hills_name">Kuperat</string>
-    <string name="routing_attr_relief_smoothness_factor_plains_name">Slätt</string>
-    <string name="routing_attr_relief_smoothness_factor_more_plains_name">Mest slätt</string>
+    <string name="routing_attr_relief_smoothness_factor_plains_name">Mindre kuperat</string>
+    <string name="routing_attr_relief_smoothness_factor_more_plains_name">Slätt</string>
     <string name="routing_attr_driving_style_speed_name">Hastighet</string>
     <string name="routing_attr_driving_style_balance_name">Balanserat</string>
     <string name="routing_attr_driving_style_safety_name">Säkerhet</string>
@@ -2561,4 +2561,8 @@ Vänligen tillhandahåll fullständig kod</string>
     <string name="select_city">Välj stad</string>
     <string name="select_postcode">Välj postnummer</string>
     <string name="quick_action_auto_zoom">Autozoomning på/av</string>
+    <string name="quick_action_showhide_osmbugs_title">Visa/Dölj OSM-anteckningar</string>
+    <string name="quick_action_osmbugs_show">Visa OSM-anteckningar</string>
+    <string name="quick_action_osmbugs_hide">Dölj OSM-anteckningar</string>
+    <string name="quick_action_showhide_osmbugs_descr">Tryck på åtgärdsknappen visar eller döljer OSM-anteckningar på kartan.</string>
     </resources>
