@@ -1986,7 +1986,7 @@ Lon %2$s</string>
     <string name="osm_changes_added_to_local_edits">OSM ændringer tilføjet til lokale ændringer</string>
     <string name="mark_to_delete">Marker for at slette</string>
     <string name="current_route">Aktuel rute</string>
-    <string name="welmode_download_maps">Korthåndtering</string>
+    <string name="welmode_download_maps">Administrer kort</string>
     <string name="welcome_select_region">For korrekt at afspejle trafikskilte og regler, vælg område:</string>
     <string name="welcome_header">Velkommen</string>
     <string name="welcome_text">OsmAnd giver globale offline kortvisninger, og global offline navigation!</string>
@@ -2847,7 +2847,7 @@ Repræsenterer område: %1$s x %2$s</string>
 
   • Understøtter Open Location Code (OLC)
 
-  • Få vist højde-, hældningsprofil og hastighed for indspillet GPX og beregnet rute
+  • Få vist højde- og hældningsprofil samt hastighed for indspillet GPX og beregnet rute
 
   • Forbedret \"kørestil\" indstilling og logik i cykel ruteplanlægning
 
@@ -2893,14 +2893,14 @@ Repræsenterer område: %1$s x %2$s</string>
     <string name="add_new_folder">Tilføj ny mappe</string>
     <string name="shared_string_slope">Hældning</string>
     <string name="lang_ber">Berbisk</string>
-    <string name="routing_attr_relief_smoothness_factor_hills_name">Bakket</string>
+    <string name="routing_attr_relief_smoothness_factor_hills_name">Kuperet</string>
     <string name="routing_attr_relief_smoothness_factor_plains_name">Mindre kuperet</string>
     <string name="routing_attr_relief_smoothness_factor_more_plains_name">Fladt</string>
     <string name="routing_attr_driving_style_speed_name">Hurtig</string>
     <string name="routing_attr_driving_style_balance_name">Afbalanceret</string>
     <string name="routing_attr_driving_style_safety_name">Sikker</string>
     <string name="relief_smoothness_factor_descr">Foretruknet terræn: fladt eller kuperet</string>
-    <string name="routing_attr_relief_smoothness_factor_name">Vælg højde udsving</string>
+    <string name="routing_attr_relief_smoothness_factor_name">Vælg højdeudsving</string>
     <string name="full_version_thanks">Tak for købet af den fulde version af OsmAnd!</string>
     <string name="parking_options">Parkeringsmuligheder</string>
     <string name="do_not_send_anonymous_app_usage">Send ikke anonyme brugsstatistikker</string>
@@ -3111,7 +3111,7 @@ Tidligere destination bliver sidste mellemliggende punkt.</string>
     <string name="hillshade_purchase_header">For at se reliefskygger på kortet, køb og installer højdekurve udvidelsen</string>
     <string name="hide_from_zoom_level">Skjul fra zoom-niveau</string>
     <string name="sorted_by_distance">Sorteret efter afstand</string>
-    <string name="search_favorites">Søg blandt favoritter</string>
+    <string name="search_favorites">Søg i favoritter</string>
     <string name="quick_action_showhide_osmbugs_title">Vis/skjul OSM noter</string>
     <string name="quick_action_osmbugs_show">Vis OSM noter</string>
     <string name="quick_action_osmbugs_hide">Skjul OSM noter</string>
