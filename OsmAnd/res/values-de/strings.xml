@@ -2717,7 +2717,7 @@ Abgedeckte Fläche: %1$s x %2$s</string>
  • Unterstützung des Offenen Standortcodes (OLC)
 
 
- • Anzeige eines Höhen- und Steigungsprofils für aufgezeichnete GPX-Tracks (inkl. Geschwindigkeiten) und errechnete Routen
+ • Anzeige eines Höhen-, Steigungs- und Geschwindigkeitsprofils für aufgezeichnete GPX-Tracks und errechnete Routen
 
 
  • \"Fahrstil\"-Einstellungen und logische Verbesserungen bei der Rad-Wegführung
@@ -2736,7 +2736,7 @@ Abgedeckte Fläche: %1$s x %2$s</string>
     <string name="routing_attr_height_obstacles_name">Höhendaten verwenden</string>
     <string name="routing_attr_height_obstacles_description">Von SRTM, ASTER und EU-DEM bereitgestellte Geländeprofildaten verwenden</string>
 
-    <string name="rendering_attr_depthContours_name">Tiefenlinien</string>
+    <string name="rendering_attr_depthContours_name">Nautische Tiefenlinien</string>
 	<string name="rendering_attr_depthContours_description">Tiefenlinien und -punkte einblenden</string>
     <string name="route_altitude">Routenhöhe</string>
     <string name="altitude_descent">Abstieg</string>
@@ -2762,8 +2762,8 @@ Abgedeckte Fläche: %1$s x %2$s</string>
     <string name="gpx_track">Track</string>
     <string name="points_delete_multiple_succesful">Punkt(e) erfolgreich gelöscht.</string>
     <string name="points_delete_multiple">Es werden %1$d Punkt(e) gelöscht. Fortfahren?</string>
-    <string name="track_points_category_name">Wichtige Punkte auf dieser Route</string>
-    <string name="route_points_category_name">Zu passierende Punkte auf der Route</string>
+    <string name="track_points_category_name">Markante Punkte auf dieser Route</string>
+    <string name="route_points_category_name">Zu passierende Kehren auf dieser Route</string>
     <string name="add_new_folder">Neuen Ordner hinzufügen</string>
     <string name="shared_string_slope">Steigung</string>
     <string name="relief_smoothness_factor_hills">Berge</string>
@@ -2771,17 +2771,17 @@ Abgedeckte Fläche: %1$s x %2$s</string>
     <string name="relief_smoothness_factor_more_plains">Weitere Ebenen</string>
     <string name="driving_style_speed">Geschwindigkeit</string>
     <string name="driving_style_balance">Ausgewogenheit</string>
-    <string name="relief_smoothness_factor_descr">Gewichtung von Ebenen und Bergen</string>
+    <string name="relief_smoothness_factor_descr">Bevorzugte Geländeform: flach oder bergig</string>
     <string name="driving_style_safety">Sicherheit</string>
     <string name="lang_ber">Berber</string>
     <string name="do_not_send_anonymous_app_usage">Keine anonymen App-Nutzungsdaten versenden</string>
-    <string name="do_not_send_anonymous_app_usage_desc">OsmAnd versendet allgemeine Bildschirminformationen während einer Sitzung. Wir speichern keine Positionsdaten oder von Nutzereingaben abhängige Daten.</string>
+    <string name="do_not_send_anonymous_app_usage_desc">OsmAnd sammelt Informationen über durch Sie geöffnete App-Teile. Es wird niemals Ihre Position noch irgendeine Ihrer App-Eingaben oder Einzelheiten zu den von Ihnen betrachteten, gesuchten oder heruntergeladenen Gebieten versandt.</string>
     <string name="do_not_show_startup_messages">Keine Meldungen beim App-Start einblenden</string>
     <string name="do_not_show_startup_messages_desc">Es werden Meldungen zu App-Angeboten und besonderen lokalen Ereignissen angezeigt</string>
     <string name="parking_options">Parkmöglichkeiten</string>
     <string name="full_version_thanks">Vielen Dank, dass Sie die Vollversion von OsmAnd erworben haben!</string>
     <string name="routing_attr_relief_smoothness_factor_hills_name">Bergig</string>
-    <string name="routing_attr_relief_smoothness_factor_plains_name">Eher flach</string>
+    <string name="routing_attr_relief_smoothness_factor_plains_name">Hügelig</string>
     <string name="routing_attr_relief_smoothness_factor_more_plains_name">Flach</string>
     <string name="routing_attr_driving_style_speed_name">Schnell</string>
     <string name="routing_attr_driving_style_balance_name">Ausgewogen</string>
@@ -2947,12 +2947,12 @@ Abgedeckte Fläche: %1$s x %2$s</string>
     <string name="quick_action_add_first_intermediate_desc">Drücken der Aktionstaste fügt die zum Bildschirmmittelpunkt gehörende Position als ersten Zwischenstopp ein.</string>
     <string name="subscribe_email_error">Fehler</string>
     <string name="subscribe_email_desc">Tragen Sie sich in unsere Mail-Liste zu App-Angeboten ein, und erhalten Sie dafür 3 zusätzliche Karten-Downloads!</string>
-    <string name="depth_contour_descr">Der Kartensatz ermöglicht die Betrachtung von Meeresbodenkonturlinien und Meerestiefen (auf der Basis eines 30-Bogensekunden-Rasters).</string>
+    <string name="depth_contour_descr">Kartensatz enthält die Meeresbodenkonturlinien und Meerestiefen (auf der Basis eines 30-Bogensekunden-Rasters).</string>
     <string name="sea_depth_thanks">Vielen Dank, dass Sie die Meerestiefenkonturen erworben haben!</string>
-    <string name="index_item_depth_contours_osmand_ext">Tiefenkonturen</string>
-    <string name="index_item_depth_points_southern_hemisphere">Meerestiefen der Südhalbkugel</string>
-    <string name="index_item_depth_points_northern_hemisphere">Meerestiefen der Nordhalbkugel</string>
-    <string name="download_depth_countours">Tiefenkonturen</string>
+    <string name="index_item_depth_contours_osmand_ext">Nautische Tiefenkonturen</string>
+    <string name="index_item_depth_points_southern_hemisphere">Nautische Meerestiefen der Südhalbkugel</string>
+    <string name="index_item_depth_points_northern_hemisphere">Nautische Meerestiefen der Nordhalbkugel</string>
+    <string name="download_depth_countours">Nautische Tiefenkonturen</string>
     <string name="nautical_maps">Seekarten</string>
     <string name="analyze_on_map">Auf Karte auswerten</string>
     <string name="shared_string_visible">Sichtbar</string>
@@ -2973,7 +2973,7 @@ Abgedeckte Fläche: %1$s x %2$s</string>
     <string name="change_color">Farbe ändern</string>
     <string name="edit_name">Namen ändern</string>
     <string name="animate_my_location">Meine Position animieren</string>
-    <string name="animate_my_location_desc">Meine Position auf der Karte mit Animation abbilden</string>
+    <string name="animate_my_location_desc">Näherungsweise Fortschreibung meiner Position, wenn deren Bestimmung vorübergehend ausfällt</string>
     <string name="route_is_too_long_v2">Die Route ist für eine Berechnung unter Umständen zu lang. Fügen Sie bitte Zwischenstopps ein, wenn nach 10 Minuten kein Routenvorschlag erscheint.</string>
     <string name="save_poi_too_many_uppercase">Der Name enthält zu viele Großbuchstaben. Möchten Sie den Vorgang fortsetzen?</string>
     <string name="display_zoom_level">Bildschirm-Zoomstufe: %1$s</string>
@@ -2987,4 +2987,8 @@ Abgedeckte Fläche: %1$s x %2$s</string>
     <string name="sorted_by_distance">Nach Entfernung sortiert</string>
     <string name="search_favorites">Favoriten suchen</string>
     <string name="hillshade_menu_download_descr">Um die Geländeprofilschattierung auf der Karte zu sehen, müssen Sie das Geländerelief-Overlay zu dieser Region herunterladen.</string>
+    <string name="shared_string_plugin">Erweiterung</string>
+    <string name="srtm_purchase_header">Um Höhenlinien auf der Karte zu sehen, müssen Sie die Höhenlinien-Erweiterung erwerben und installieren.</string>
+    <string name="srtm_menu_download_descr">Um Höhenlinien auf der Karte zu sehen, müssen Sie die Höhenlinienkarte zu dieser Region herunterladen.</string>
+    <string name="hillshade_purchase_header">Um die Schattierung des Geländeprofils auf der Karte zu sehen, müssen Sie die Höhenlinien-Erweiterung erwerben und installieren.</string>
     </resources>
