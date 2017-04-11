@@ -2878,4 +2878,8 @@ Algunas de las principales funciones:
     <string name="quick_action_showhide_osmbugs_descr">Al pulsar el botón de acción se mostrarán u ocultarán los informes de problemas OSM en el mapa.</string>
     <string name="sorted_by_distance">Ordenados por distancia</string>
     <string name="search_favorites">Buscar favoritos</string>
+    <string name="restart_search">Reiniciar búsqueda</string>
+    <string name="increase_search_radius">Aumentar radio de búsqueda</string>
+    <string name="nothing_found">Nada encontrado :(</string>
+    <string name="nothing_found_descr">Intenta cambiar la consulta de búsqueda o aumentar el radio de búsqueda</string>
     </resources>
