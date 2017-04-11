@@ -3063,4 +3063,9 @@ OsmAnd 是開放原始碼，而且正在積極的開發。應用程式從報告�
     <string name="quick_action_osmbugs_hide">隱藏 OSM 註解</string>
     <string name="search_favorites">搜尋我的收藏</string>
     <string name="quick_action_showhide_osmbugs_descr">輕點動作按鈕會在地圖上顯示或隱藏 OSM 註解。</string>
+    <string name="private_access_routing_req">您的目的地位於私人通路的區域。您想為這次旅程進入這條路私人道路嗎？</string>
+    <string name="restart_search">重新開始搜尋</string>
+    <string name="increase_search_radius">增加搜尋半徑</string>
+    <string name="nothing_found">没有找到 :(</string>
+    <string name="nothing_found_descr">試著變更查找詢問或增加搜尋的半徑</string>
     </resources>
