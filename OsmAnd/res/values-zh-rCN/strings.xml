@@ -1285,7 +1285,7 @@
     <string name="do_not_send_anonymous_app_usage">不要发送匿名应用使用统计信息</string>
     <string name="restore_purchases">恢复购买内容</string>
     <string name="shared_string_visible">可见性</string>
-    <string name="do_not_send_anonymous_app_usage_desc">OsmAnd 应用会将会话中对屏幕使用的信息发送至服务器。我们不会搜集任何地理位置信息或者用户输入的相关信息。</string>
+    <string name="do_not_send_anonymous_app_usage_desc">OsmAnd 会搜集您打开应用的哪一部分的信息。您的位置永远不会被发送至服务器，您输入进应用的任何数据或者浏览的区域、搜索内容和下载内容同样不会被搜集。</string>
     <string name="do_not_show_startup_messages">不要在启动时显示信息</string>
     <string name="full_version_thanks">感谢您购买完整版本的 OsmAnd！</string>
     <string name="shared_string_action_name">操作名称</string>
@@ -1434,4 +1434,12 @@
     <string name="route_descr_select_destination">选择目的地</string>
     <string name="wake_on_voice_descr">（如果屏幕未点亮）在接近转弯地点时点亮屏幕</string>
     <string name="change_markers_position">改变记号位置</string>
+    <string name="private_access_routing_req">您的目的地似乎位于私人领地。您是否要允许在您的本次旅途中导航进入私人道路？</string>
+    <string name="restart_search">重新开始搜索</string>
+    <string name="increase_search_radius">增加搜索范围</string>
+    <string name="nothing_found">什么都没找到 :(</string>
+    <string name="nothing_found_descr">尝试改变搜索查询内容或增加搜索范围</string>
+    <string name="quick_action_showhide_osmbugs_title">显示/隐藏 OSM 笔记</string>
+    <string name="quick_action_osmbugs_show">显示 OSM 笔记</string>
+    <string name="quick_action_osmbugs_hide">隐藏 OSM 笔记</string>
     </resources>
