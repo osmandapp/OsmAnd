@@ -749,8 +749,8 @@ public class QuickSearchDialogFragment extends DialogFragment implements OsmAndC
 		paused = false;
 		hidden = false;
 		if (interruptedSearch) {
-			interruptedSearch = false;
 			addMoreButton();
+			interruptedSearch = false;
 		}
 	}
 
@@ -1002,6 +1002,11 @@ public class QuickSearchDialogFragment extends DialogFragment implements OsmAndC
 
 	public SearchResultCollection getResultCollection() {
 		return searchHelper.getResultCollection();
+	}
+
+	public boolean isResultEmpty() {
+		SearchResultCollection res = getResultCollection();
+		return res == null || res.getCurrentSearchResults().size() == 0;
 	}
 
 	public void onSearchListFragmentResume(QuickSearchListFragment searchListFragment) {
@@ -1675,19 +1680,20 @@ public class QuickSearchDialogFragment extends DialogFragment implements OsmAndC
 	}
 
 	private void addMoreButton() {
-		QuickSearchMoreListItem moreListItem =
-				new QuickSearchMoreListItem(app, app.getString(R.string.search_POI_level_btn).toUpperCase(), new OnClickListener() {
-					@Override
-					public void onClick(View v) {
-						if (!interruptedSearch) {
-							SearchSettings settings = searchUICore.getSearchSettings();
-							searchUICore.updateSettings(settings.setRadiusLevel(settings.getRadiusLevel() + 1));
-						}
-						runCoreSearch(searchQuery, false, true);
-					}
-				});
-
 		if (!paused && !cancelPrev && mainSearchFragment != null) {
+			QuickSearchMoreListItem moreListItem =
+					new QuickSearchMoreListItem(app, null, new OnClickListener() {
+						@Override
+						public void onClick(View v) {
+							if (!interruptedSearch) {
+								SearchSettings settings = searchUICore.getSearchSettings();
+								searchUICore.updateSettings(settings.setRadiusLevel(settings.getRadiusLevel() + 1));
+							}
+							runCoreSearch(searchQuery, false, true);
+						}
+					});
+			moreListItem.setInterruptedSearch(interruptedSearch);
+			moreListItem.setEmptySearch(isResultEmpty());
 			mainSearchFragment.addListItem(moreListItem);
 		}
 	}
