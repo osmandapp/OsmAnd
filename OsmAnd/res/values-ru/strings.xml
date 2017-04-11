@@ -1,5 +1,6 @@
 <?xml version='1.0' encoding='UTF-8'?>
 <resources>
+    <string name="private_access_routing_req">Пункт назначения находится в области с частным доступом. Вы хотите разрешить доступ к частным дорогам для этой поездки?</string>
     <string name="restart_search">Искать снова</string>
     <string name="increase_search_radius">Увеличить радиус поиска</string>
     <string name="nothing_found">Ничего не найдено :(</string>
