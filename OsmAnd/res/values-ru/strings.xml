@@ -1,5 +1,15 @@
 <?xml version='1.0' encoding='UTF-8'?>
 <resources>
+    <string name="restart_search">Искать снова</string>
+    <string name="increase_search_radius">Увеличить радиус поиска</string>
+    <string name="nothing_found">Ничего не найдено :(</string>
+    <string name="nothing_found_descr">Попробуйте изменить языковой запрос или увеличить радиус поиска</string>
+    <string name="quick_action_showhide_osmbugs_title">Показать/скрыть заметки OSM</string>
+    <string name="quick_action_osmbugs_show">Показать заметки OSM</string>
+    <string name="quick_action_osmbugs_hide">Скрыть заметки OSM</string>
+    <string name="quick_action_showhide_osmbugs_descr">Нажатие на кнопку действия отобразит/скроет заметки OSM с карты</string>
+    <string name="sorted_by_distance">Отсортировано по расстоянию</string>
+    <string name="search_favorites">Поиск в избранном</string>
     <string name="hillshade_menu_download_descr">Для того, чтобы отобразить затенение рельефа, вам нужно загрузить специальную карту для этой области</string>
     <string name="hillshade_purchase_header">Для того, чтобы отобразить затенение рельефа, вам нужно купить и установить плагин</string>
     <string name="srtm_menu_download_descr">Для того, чтобы отобразить линии контуров рельефа, вам нужно загрузить специальную карту для этой области</string>
