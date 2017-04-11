@@ -2868,4 +2868,5 @@ notas de OSM en el mapa.</string>
     <string name="nothing_found_descr">Intenta cambiar la consulta de búsqueda o aumentar el radio de búsqueda</string>
     <string name="hillshade_menu_download_descr">Para ver el sombreado del relieve en el mapa, debes descargar la superposición del sombreado de esta región.</string>
     <string name="hillshade_purchase_header">Para ver el sombreado del relieve en el mapa, debes comprar e instalar el complemento \"Curvas de nivel\"</string>
+    <string name="private_access_routing_req">El destino se ubica en un área de acceso privado. ¿Quieres acceder en este viaje a los caminos privados?</string>
     </resources>
