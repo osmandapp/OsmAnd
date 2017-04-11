@@ -2766,7 +2766,7 @@ Koda predstavlja območje: %1$s x %2$s</string>
 
  • Podpora OLC (Open Location Code)
 
- • Prikaz profila nadmorske višine za shranjene sledi GPX (poti in hitrosti) in preračunane poti
+ • Prikaz profila nadmorske višine, hitrosti in naklona za shranjene sledi GPX (poti in hitrosti) in preračunane poti
 
 • Nastavitev »sloga vožnje« in izboljšava preračunavanja kolesarskih poti 
 
@@ -2799,7 +2799,7 @@ Koda predstavlja območje: %1$s x %2$s</string>
     <string name="quick_action_showhide_poi_descr">S pritiskom na gumb dejanja bodo pokazane ali skrite točke POI na zemljevidu.</string>
     <string name="quick_action_btn_tutorial_descr">Z dolgim pritiskom in vlekom je mogoče postaviti gumb na poljubno mesto na zaslonu</string>
 	<string name="rendering_attr_depthContours_description">Pokaži točke in izohipse globine</string>
-    <string name="rendering_attr_depthContours_name">Izohipse globine</string>
+    <string name="rendering_attr_depthContours_name">Navtične globinske izohipse</string>
 	<string name="route_altitude">Nadmorska višina poti</string>
     <string name="altitude_descent">Spust</string>
     <string name="altitude_ascent">Vzpon</string>
@@ -2834,16 +2834,16 @@ Koda predstavlja območje: %1$s x %2$s</string>
     <string name="shared_string_slope">Pobočje</string>
     <string name="add_new_folder">Dodaj novo mapo</string>
     <string name="lang_ber">Berberščina</string>
-    <string name="routing_attr_relief_smoothness_factor_hills_name">Gričevje</string>
-    <string name="routing_attr_relief_smoothness_factor_plains_name">Ravnine</string>
-    <string name="routing_attr_relief_smoothness_factor_more_plains_name">Več ravnin</string>
+    <string name="routing_attr_relief_smoothness_factor_hills_name">Gričevnato</string>
+    <string name="routing_attr_relief_smoothness_factor_plains_name">Manj gričevnato</string>
+    <string name="routing_attr_relief_smoothness_factor_more_plains_name">Ravninsko</string>
     <string name="routing_attr_driving_style_speed_name">Hitro</string>
     <string name="routing_attr_driving_style_balance_name">Pretehtano</string>
     <string name="routing_attr_driving_style_safety_name">Varno</string>
-    <string name="relief_smoothness_factor_descr">Prednostna izbira ravnin ali gričevja</string>
-    <string name="routing_attr_relief_smoothness_factor_name">Določilo gladkosti izrisa reliefa</string>
+    <string name="relief_smoothness_factor_descr">Prednostna izbira terena: ravninsko ali gričevnato</string>
+    <string name="routing_attr_relief_smoothness_factor_name">Izbor razgibanosti terena</string>
     <string name="do_not_send_anonymous_app_usage">Ne pošiljaj statističnih podatkov uporabe programa</string>
-    <string name="do_not_send_anonymous_app_usage_desc">Pošiljajo se le splošni podatki o uporabi zaslona med sejo navigacije. Geolokacijski podatki in podatki uporabnika se nikoli ne shranjujejo na strežnikih.</string>
+    <string name="do_not_send_anonymous_app_usage_desc">Pošiljajo se le splošni podatki o načinu uporabe programa. Geolokacijski podatki, podatki shranjenih zemljevidov in vpisanih točk ter drugi podatki uporabnika se nikoli ne shranjujejo na strežnikih.</string>
     <string name="do_not_show_startup_messages">Ne prikazuj sporočil ob zagunu</string>
     <string name="do_not_show_startup_messages_desc">Pojavijo se lahko sporočila o popustih programa in posebna krajevna sporočila o dogodkih</string>
     <string name="parking_options">Možnosti parkiranja</string>
@@ -2902,4 +2902,14 @@ Koda predstavlja območje: %1$s x %2$s</string>
  Od Afganistana to Zimbabveja, od Avstralije do Združenih držav. Argentina, Brazilija, Kanada, Francija, Nemčija, Mehika, Združeno kraljestvo, Španija …
  "</string>
     <string name="save_poi_too_many_uppercase">V imenu je več velikih črk. Ali želite nadaljevati?</string>
+    <string name="restart_search">Ponovno začni iskanje</string>
+    <string name="increase_search_radius">Povečaj območje iskanja</string>
+    <string name="nothing_found">Ni najdenih zadetkov</string>
+    <string name="nothing_found_descr">Poskusite zamenjati iskalni niz ali pa povečajte obseg iskanja</string>
+    <string name="quick_action_showhide_osmbugs_title">Pokaži/Skrij Opombe OSM</string>
+    <string name="quick_action_osmbugs_show">Pokaži Opombe OSM</string>
+    <string name="quick_action_osmbugs_hide">Skrij Opombe OSM</string>
+    <string name="sorted_by_distance">Razvrščeno po razdalji</string>
+    <string name="search_favorites">Iskanje med priljubljenimi</string>
+    <string name="shared_string_plugin">Vstavek</string>
     </resources>
