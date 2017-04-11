@@ -57,6 +57,7 @@ public class GeneralRouter implements VehicleRouter {
 	private float maxDefaultSpeed = 10;
 	
 	private TLongHashSet impassableRoads;
+	private GeneralRouterProfile profile;
 	
 	
 	public enum RouteDataObjectAttribute {
@@ -97,6 +98,7 @@ public class GeneralRouter implements VehicleRouter {
 	}
 	
 	public GeneralRouter(GeneralRouterProfile profile, Map<String, String> attributes) {
+		this.profile = profile;
 		this.attributes = new LinkedHashMap<String, String>();
 		Iterator<Entry<String, String>> e = attributes.entrySet().iterator();
 		while(e.hasNext()){
@@ -115,6 +117,7 @@ public class GeneralRouter implements VehicleRouter {
 	}
 	
 	public GeneralRouter(GeneralRouter parent, Map<String, String> params) {
+		this.profile = parent.profile;
 		this.attributes = new LinkedHashMap<String, String>();
 		Iterator<Entry<String, String>> e = parent.attributes.entrySet().iterator();
 		while (e.hasNext()) {
@@ -140,6 +143,11 @@ public class GeneralRouter implements VehicleRouter {
 		}
 
 	}
+	
+	public GeneralRouterProfile getProfile() {
+		return profile;
+	}
+	
 
 	public Map<String, RoutingParameter> getParameters() {
 		return parameters;
