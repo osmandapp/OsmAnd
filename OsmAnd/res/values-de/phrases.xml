@@ -2096,12 +2096,12 @@
 	<string name="poi_bridge_structure_log">Brückenaufbau: Baumstamm</string>
 	<string name="poi_bridge_type_movable">Brückentyp: beweglich</string>
 	<string name="poi_bridge_movable_bascule">Beweglicher Brückentyp: Klappbrücke</string>
-	<string name="poi_bridge_movable_swing">Beweglicher Brückentyp: Schwenkbrücke</string>
-	<string name="poi_bridge_movable_lift">Beweglicher Brückentyp: Hebebrücke</string>
+	<string name="poi_bridge_movable_swing">Beweglicher Brückentyp: Drehbrücke</string>
+	<string name="poi_bridge_movable_lift">Beweglicher Brückentyp: Hubbrücke</string>
 	<string name="poi_bridge_movable_drawbridge">Beweglicher Brückentyp: Zugbrücke</string>
-	<string name="poi_bridge_movable_submersible">Beweglicher Brückentyp: Tauchbrücke</string>
-	<string name="poi_bridge_movable_transporter">Beweglicher Brückentyp: Transporter</string>
-	<string name="poi_bridge_movable_retractable">Beweglicher Brückentyp: einziehbar</string>
+	<string name="poi_bridge_movable_submersible">Beweglicher Brückentyp: Senkbrücke</string>
+	<string name="poi_bridge_movable_transporter">Beweglicher Brückentyp: Schwebefähre</string>
+	<string name="poi_bridge_movable_retractable">Beweglicher Brückentyp: Schubbrücke</string>
 
 	<string name="poi_lit_yes">Beleuchtung: ja</string>
 	<string name="poi_lit_no">Beleuchtung: nein</string>
