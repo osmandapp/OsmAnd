@@ -454,9 +454,9 @@
     <string name="lang_es">Hispana</string>
     <string name="about_version">Versio:</string>
     <string name="shared_string_about">Pri</string>
-    <string name="about_settings_descr">Informoj, permesiloj, kontribuistoj</string>
+    <string name="about_settings_descr">Informoj, permesiloj, kontribuintoj</string>
     <string name="choose_osmand_theme">Etoso</string>
-    <string name="choose_osmand_theme_descr">Elektu etoson por aplikaĵo</string>
+    <string name="choose_osmand_theme_descr">Elekti etoson por aplikaĵo</string>
     <string name="local_indexes_cat_srtm">Nivelkurboj</string>
     <string name="osmo_group_information_desc">"
  - Por krei grupon, bonvolu nomi kaj priskribi ĝin
@@ -691,7 +691,7 @@ Registritaj spuroj povas esti kunhavigataj kun viaj amikoj aŭ esti uzita por ko
     <string name="save_current_track_descr">Konservi aktualan kurson al memorkarto</string>
     <string name="save_current_track">Konservi aktualan GPX-kurson</string>
     <string name="save_track_to_gpx">Registri spuron al GPX-dosieron dum navigado</string>
-    <string name="save_track_to_gpx_descrp">Konservi spuron al dosierujo de spuroj dum navigado</string>
+    <string name="save_track_to_gpx_descrp">Konservas spuron al dosierujo de spuroj dum navigado</string>
     <string name="save_track_interval_globally">Registrada intervalo</string>
     <string name="save_track_interval">Registrada intervalo dum navigado</string>
     <string name="save_track_interval_descr">Elektu intervalo de registrado por spuroj dum navigado</string>
@@ -882,8 +882,8 @@ Premtenu por vidi sur la mapo</string>
     <string name="osmo_edit_device">Ŝanĝi ecojn de uzanto</string>
     <string name="osmo_edit_color">Vidiga koloro</string>
     <string name="osmo_group_info">Informoj</string>
-    <string name="osmo_group">Grupo OsMo</string>
-    <string name="osmo_group_share">Por konekti la grupon %2$s difinu grupan identigilon aŭ alklaku %3$s.</string>
+    <string name="osmo_group">OsMo-grupo</string>
+    <string name="osmo_group_share">Por konekti la grupon %2$s, difinu grupan identigilon aŭ alklaku %3$s.</string>
     <string name="osmo_share_connect_device">Permesu por permanenta spurado de tiu ĉi aparato</string>
     <string name="osmo_share_current_session">Kunhavigi nuntempan seancon per ret-foliumilo</string>
     <string name="osmo_share_session">Kunhavigi seancon</string>
@@ -922,7 +922,7 @@ Premtenu por vidi sur la mapo</string>
     <string name="osmo_mode_on">Ĉesigi OsMo seancon</string>
     <string name="osmo_mode_off">Ekigi OsMo seancon</string>
     <string name="osmo_settings_debug">Informoj pri senerarigo</string>
-    <string name="osmo_settings_descr">Agordu observadon kaj personan observadan kanalon</string>
+    <string name="osmo_settings_descr">Agordi observadon kaj personan observadan kanalon</string>
     <string name="osmo_settings">OsMo</string>
     <string name="always_center_position_on_map">Ĉiam montri centrigitan pozicion</string>
     <string name="localization_pref_title">Loko</string>
@@ -971,28 +971,28 @@ Premtenu por vidi sur la mapo</string>
     <string name="route_preferences">Kursaj agordoj</string>
     <string name="route_info">Informoj pri kurso</string>
     <string name="routing_attr_prefer_motorway_name">Preferi aŭtovojojn</string>
-    <string name="routing_attr_prefer_motorway_description">Preferas aŭtovojojn</string>
+    <string name="routing_attr_prefer_motorway_description">Preferi aŭtovojojn</string>
     
     
     <string name="routing_attr_avoid_toll_name">Eviti pagendajn vojojn</string>
-    <string name="routing_attr_avoid_toll_description">Evitas pagendajn vojojn</string>
+    <string name="routing_attr_avoid_toll_description">Eviti pagendajn vojojn</string>
     <string name="use_osm_live_routing">OSM Live navigado</string>
     <string name="use_osm_live_routing_description">Uzi OSM Live navigadon por aktualaj map-ŝanĝoj (Beta)</string>
 	<string name="routing_attr_avoid_unpaved_name">Eviti tervojojn</string>
-    <string name="routing_attr_avoid_unpaved_description">Evitas vojojn sen firma pavimo</string>
+    <string name="routing_attr_avoid_unpaved_description">Eviti vojojn sen firma pavimo</string>
     <string name="routing_attr_avoid_ferries_name">Eviti pramojn</string>
-    <string name="routing_attr_avoid_ferries_description">Evitas pramajn transveturojn</string>
+    <string name="routing_attr_avoid_ferries_description">Eviti pramajn transveturojn</string>
     <string name="routing_attr_avoid_motorway_name">Eviti aŭtovojojn</string>
-    <string name="routing_attr_avoid_motorway_description">Evitas aŭtovojojn</string>
+    <string name="routing_attr_avoid_motorway_description">Eviti aŭtovojojn</string>
     <string name="routing_attr_avoid_stairs_name">Eviti ŝtuparojn</string>
-    <string name="routing_attr_avoid_stairs_description">Evitas ŝtuparojn</string>
+    <string name="routing_attr_avoid_stairs_description">Eviti ŝtuparojn</string>
     <string name="routing_attr_avoid_borders_name">Eviti landlimajn trairejojn</string>
-    <string name="routing_attr_avoid_borders_description">Evitas landlimajn trairejojn al aliaj landoj</string>
+    <string name="routing_attr_avoid_borders_description">Eviti landlimajn trairejojn al aliaj landoj</string>
     <string name="routing_attr_weight_name">Pezlimo</string>
-    <string name="routing_attr_weight_description">Agordu maksimuman permesan pezon de veturilo</string>
+    <string name="routing_attr_weight_description">Agordi maksimuman permesan pezon de veturilo</string>
     <string name="routing_attr_height_name">Altlimo</string>
-    <string name="routing_attr_height_description">Agordu maksimuman permesan alton de veturilo</string>
-    <string name="android_19_location_disabled">Ekde versio 4.4 (KitKat) de Android, vi ne eblas elŝuti kaj ĝisdatigi mapojn en antaŭan dosierujon (%s). Ĉu vi volas ŝanĝi ĝin al permesa memoreja loko kaj kopii ĉiujn dosierojn de OsmAnd tie?
+    <string name="routing_attr_height_description">Agordi maksimuman permesan alton de veturilo</string>
+    <string name="android_19_location_disabled">Ekde versio 4.4 (KitKat) de Android, vi ne povas elŝuti kaj ĝisdatigi mapojn en antaŭan dosierujon (%s). Ĉu vi volas ŝanĝi ĝin al permesa memoreja loko kaj kopii ĉiujn dosierojn de OsmAnd tie?
 
  Rimarko 1: Viaj malnovaj dosieroj ne estos ŝanĝitaj (tamen vi povos forigi ilin permane).
 
@@ -1004,14 +1004,14 @@ Premtenu por vidi sur la mapo</string>
     <string name="app_mode_truck">Kamiono</string>
     <string name="guidance_preferences_descr">Navigadaj agordoj</string>
     <string name="routing_preferences_descr">Difinado de vojo</string>
-    <string name="speech_rate_descr">Agordu lud-rapidon por parolsintezitaj dialogaj helpoj</string>
+    <string name="speech_rate_descr">Agordi lud-rapidon por parolsintezitaj dialogaj helpoj</string>
     <string name="speech_rate">Voĉa rapido</string>
     <string name="complex_route_calculation_failed">Eraro dum rapida kalkulado de kurso (%s), retropaŝanta malrapidan kalkuladon.</string>
-    <string name="disable_complex_routing_descr">Malaktivigas 2-fazan difinadon de vojo por aŭt-navigado</string>
+    <string name="disable_complex_routing_descr">Malaktivigi 2-fazan difinadon de vojo por aŭt-navigado</string>
     <string name="disable_complex_routing">Malaktivigi komplikan difinadon de vojo</string>
     <string name="amenity_type_seamark">Mara navigadpunkto</string>
     <string name="app_modes_choose">Aplikaĵaj profiloj</string>
-    <string name="app_modes_choose_descr">Elektu profilojn de uzado montritajn en aplikaĵo</string>
+    <string name="app_modes_choose_descr">Elekti profilojn de uzado montritajn en aplikaĵo</string>
     <string name="map_widget_map_rendering">Map-bildigado</string>
     <string name="app_mode_hiking">Piedirado</string>
     <string name="app_mode_motorcycle">Motorciklo</string>
@@ -1025,7 +1025,7 @@ Premtenu por vidi sur la mapo</string>
     <string name="route_is_too_long">Eksterreta kalkulado de kurso povos okupi multe da tempo (aŭ eĉ ĝi povos malfunkcii) por punktoj pli malproksimaj ol 200km. Eble vi provos aldoni interajn celojn por plibonigi rendimenton.</string>
     <string name="auto_zoom_none">Sen aŭtomata skalado</string>
     <string name="auto_zoom_close">Pliproksime</string>
-    <string name="auto_zoom_far">Meza-skalado</string>
+    <string name="auto_zoom_far">Meza skalado</string>
     <string name="auto_zoom_farthest">Malproksime</string>
     <string name="base_world_map">Monda bazmapo</string>
     <string name="map_magnifier">Map-skalado</string>
@@ -1045,14 +1045,14 @@ Premtenu por vidi sur la mapo</string>
     <string name="maps_define_edit">Difini/redakti…</string>
     <string name="map_widget_fps_info">Montri kadrojn sekunde (senerarigo)</string>
     <string name="driving_region">Trafika regiono</string>
-    <string name="driving_region_descr">Elektu trafikan regionon: Usono, Eŭropo, Britujo, Azio kaj aliaj</string>
+    <string name="driving_region_descr">Elekti trafikan regionon: Usono, Eŭropo, Britujo, Azio kaj aliaj</string>
     <string name="speak_title">Anoncado…</string>
-    <string name="speak_descr">Agordu anoncojn pri strataj nomoj, trafikaj avertoj (endaj haltejoj, strat-ĝiboj), rapid-kontroliloj, rapidlimoj</string>
+    <string name="speak_descr">Agordi anoncojn pri strataj nomoj, trafikaj avertoj (endaj haltejoj, strat-ĝiboj), rapid-kontroliloj, rapidlimoj</string>
     <string name="speak_street_names">Nomoj de stratoj (parolsintezitaj)</string>
     <string name="speak_speed_limit">Rapidlimoj</string>
     <string name="speak_cameras">Rapid-kontroliloj</string>
     <string name="speak_traffic_warnings">Trafikaj avertoj</string>
-    <string name="osb_author_or_password_not_specified">Bonvolu entajpi uzantnomon kaj pasvorton por OSM en Agordoj</string>
+    <string name="osb_author_or_password_not_specified">Bonvolu entajpi uzantnomon kaj pasvorton por OSM en agordoj</string>
     <string name="clear_intermediate_points">Forviŝi intercelojn</string>
     <string name="keep_intermediate_points">Konservi intercelojn</string>
     <string name="new_directions_point_dialog">Vi jam precizigis intercelojn.</string>
@@ -1072,10 +1072,10 @@ Premtenu por vidi sur la mapo</string>
     <string name="context_menu_item_destination_point">Agordi kiel celon</string>
     <string name="please_select_address">Unue elektu urbon aŭ straton</string>
     <string name="search_street_in_neighborhood_cities">Serĉi straton en proksimaj urboj</string>
-    <string name="intermediate_items_sort_return">Inter-celoj estas reordigitaj de nuna pozicio al la celo.</string>
+    <string name="intermediate_items_sort_return">Interceloj estas reordigitaj de nuna pozicio al la celo.</string>
     <string name="intermediate_items_sort_by_distance">Ordigi de celo ĝis celo (laŭ la plej malgranda distanco)</string>
     <string name="local_osm_changes_backup_successful">OSM-a ŝanĝodosiero kreita sukcese %1$s</string>
-    <string name="local_osm_changes_backup_failed">Eraro kreanta sekurkopion de OSM-aj ŝanĝoj</string>
+    <string name="local_osm_changes_backup_failed">Eraro dum kreado de sekurkopio de OSM-aj ŝanĝoj</string>
     <string name="local_osm_changes_backup">Krei sekurkopion kiel OSM-an ŝanĝon</string>
     <string name="delete_point">Forigi punkton</string>
     <string name="plugin_distance_point_time">tempo</string>
@@ -1091,9 +1091,9 @@ Premtenu por vidi sur la mapo</string>
 
  * Premtenu punkton por vidi kaj aldoni priskribon.
 
- * Tuŝu mezur-fenestraĵon por vidi pli funkciojn.</string>
+ * Tuŝu mezur-fenestraĵon por vidi pliajn agojn.</string>
     <string name="distance_measurement_start_editing">Ekigi redaktadon</string>
-    <string name="distance_measurement_finish_editing">Finigi redaktadon</string>
+    <string name="distance_measurement_finish_editing">Fini redaktadon</string>
     <string name="distance_measurement_clear_route">Forviŝi ĉiujn punktojn</string>
     <string name="distance_measurement_finish_subtrack">Ekigi novan subkurson</string>
     <string name="distance_measurement_load_gpx">Malfermi GPX-dosieron</string>
@@ -1128,7 +1128,7 @@ Premtenu por vidi sur la mapo</string>
     <string name="item_unchecked">nemarkita(j)</string>
     <string name="prefer_motorways">Preferi aŭtovojojn</string>
     <string name="prefer_in_routing_title">Preferi…</string>
-    <string name="prefer_in_routing_descr">Preferas aŭtovojojn</string>
+    <string name="prefer_in_routing_descr">Preferi aŭtovojojn</string>
     <string name="max_speed_none">nenia</string>
     <string name="index_name_openmaps">OpenMaps EU</string>
     <string name="download_wikipedia_maps">Vikipedio</string>
