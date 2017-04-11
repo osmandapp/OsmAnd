@@ -2692,9 +2692,9 @@ i encara més…
     <string name="add_new_folder">Afegeix a una carpeta nova</string>
     <string name="shared_string_slope">Pista</string>
     <string name="lang_ber">Berber</string>
-    <string name="routing_attr_relief_smoothness_factor_hills_name">Turons</string>
-    <string name="routing_attr_relief_smoothness_factor_plains_name">Planes</string>
-    <string name="routing_attr_relief_smoothness_factor_more_plains_name">Encara més planes</string>
+    <string name="routing_attr_relief_smoothness_factor_hills_name">Aturonat</string>
+    <string name="routing_attr_relief_smoothness_factor_plains_name">Menys aturonat</string>
+    <string name="routing_attr_relief_smoothness_factor_more_plains_name">Pla</string>
     <string name="routing_attr_driving_style_speed_name">Ràpid</string>
     <string name="routing_attr_driving_style_balance_name">Equilibrat</string>
     <string name="routing_attr_driving_style_safety_name">Segur</string>
@@ -2702,7 +2702,7 @@ i encara més…
     <string name="routing_attr_relief_smoothness_factor_name">Factor de detall del relleu</string>
     <string name="full_version_thanks">Us agraïm la compra de la versió complerta d\'OsmAnd!</string>
     <string name="do_not_send_anonymous_app_usage">No enviïs anònimament les estadístiques d\'us de l\'aplicació</string>
-    <string name="do_not_send_anonymous_app_usage_desc">L\'aplicació OsmAnd envia informació general de les pantalles utilitzades durant la sessió. No recollim cap geolocalització ni dades relatives a les entrades de l\'usuari.</string>
+    <string name="do_not_send_anonymous_app_usage_desc">OsmAnd recull informació respecte com utilitzeu l\'aplicació. No s\'envia mai la vostra localització, tampoc les entrades que feu ni els detalls de les zones que consulteu, cerqueu o baixeu.</string>
     <string name="do_not_show_startup_messages">No mostris missatges en engegar</string>
     <string name="do_not_show_startup_messages_desc">Mostra descomptes de l\'aplicació i missatges de fets locals destacats</string>
     <string name="parking_options">Opcions d\'aparcament</string>
