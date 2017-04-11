@@ -55,6 +55,7 @@ import net.osmand.plus.views.BaseMapLayer;
 import net.osmand.plus.views.MapControlsLayer;
 import net.osmand.plus.views.MapTileLayer;
 import net.osmand.plus.views.OsmandMapTileView;
+import net.osmand.router.GeneralRouter;
 
 import org.apache.commons.logging.Log;
 
@@ -854,6 +855,13 @@ public class MapActivityActions implements DialogProvider {
 		getMyApplication().stopNavigation();
 		mapActivity.updateApplicationModeSettings();
 		mapActivity.getDashboard().clearDeletedPoints();
+		List<ApplicationMode> modes = ApplicationMode.values(settings);
+		for (ApplicationMode mode : modes) {
+			if (settings.FORCE_PRIVATE_ACCESS_ROUTING_ASKED.getModeValue(mode)) {
+				settings.FORCE_PRIVATE_ACCESS_ROUTING_ASKED.setModeValue(mode, false);
+				settings.getCustomRoutingBooleanProperty(GeneralRouter.ALLOW_PRIVATE, false).setModeValue(mode, false);
+			}
+		}
 	}
 
 	public AlertDialog stopNavigationActionConfirm() {

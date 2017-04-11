@@ -31,7 +31,8 @@ public class GeneralRouter implements VehicleRouter {
 	public static final String AVOID_MOTORWAY = "avoid_motorway";
 	public static final String AVOID_UNPAVED = "avoid_unpaved";
 	public static final String PREFER_MOTORWAYS = "prefer_motorway";
-	
+	public static final String ALLOW_PRIVATE = "allow_private";
+
 	private final RouteAttributeContext[] objectAttributes;
 	public final Map<String, String> attributes;
 	private final Map<String, RoutingParameter> parameters; 
@@ -41,7 +42,8 @@ public class GeneralRouter implements VehicleRouter {
 	private final ArrayList<Object> ruleToValue;
 	private boolean shortestRoute;
 	private boolean heightObstacles;
-	
+	private boolean allowPrivate;
+
 	private Map<RouteRegion, Map<Integer, Integer>> regionConvert = new LinkedHashMap<RouteRegion, Map<Integer,Integer>>();
 	
 	// cached values
@@ -130,6 +132,7 @@ public class GeneralRouter implements VehicleRouter {
 		for (int i = 0; i < objectAttributes.length; i++) {
 			objectAttributes[i] = new RouteAttributeContext(parent.objectAttributes[i], params);
 		}
+		allowPrivate = params.containsKey(ALLOW_PRIVATE) && parseSilentBoolean(params.get(ALLOW_PRIVATE), false);
 		shortestRoute = params.containsKey(USE_SHORTEST_WAY) && parseSilentBoolean(params.get(USE_SHORTEST_WAY), false);
 		heightObstacles = params.containsKey(USE_HEIGHT_OBSTACLES) && parseSilentBoolean(params.get(USE_HEIGHT_OBSTACLES), false); 
 		if(shortestRoute) {
@@ -195,7 +198,11 @@ public class GeneralRouter implements VehicleRouter {
 		}
 		return res >= 0;
 	}
-	
+
+	public boolean isAllowPrivate() {
+		return allowPrivate;
+	}
+
 	public long[] getImpassableRoadIds() {
 		if(impassableRoads == null) {
 			return new long[0];
