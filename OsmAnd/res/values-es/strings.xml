@@ -2651,7 +2651,7 @@ Por favor proporciona un código completo</string>
     <string name="relief_smoothness_factor_descr">Terreno preferido: llano o montañoso</string>
     <string name="lang_ber">Bereber</string>
     <string name="do_not_send_anonymous_app_usage">No enviar estadísticas de uso anónimas de la aplicación</string>
-    <string name="do_not_send_anonymous_app_usage_desc">"La aplicación de OsmAnd, envía información general sobre la pantalla usada durante la sesión. No recopilamos datos de geolocalización o de entrada de  usuario."</string>
+    <string name="do_not_send_anonymous_app_usage_desc">OsmAnd recopila información acerca de las secciones que abres en la aplicación. No recopilamos datos de ubicación, ingresos en la aplicación o datos relacionados con las áreas que visualizas, buscas o descargas.</string>
     <string name="do_not_show_startup_messages">No mostrar los mensajes en el inicio</string>
     <string name="do_not_show_startup_messages_desc">Muestra descuentos de la aplicación y mensajes de eventos locales</string>
     <string name="parking_options">Opciones de aparcamiento</string>
@@ -2862,4 +2862,10 @@ notas de OSM en el mapa.</string>
     <string name="sorted_by_distance">Ordenado por distancia</string>
     <string name="search_favorites">Buscar favoritos</string>
     <string name="hide_from_zoom_level">Ocultar desde el nivel de acercamiento</string>
+    <string name="restart_search">Reiniciar búsqueda</string>
+    <string name="increase_search_radius">Aumentar radio de búsqueda</string>
+    <string name="nothing_found">Nada encontrado :(</string>
+    <string name="nothing_found_descr">Intenta cambiar la consulta de búsqueda o aumentar el radio de búsqueda</string>
+    <string name="hillshade_menu_download_descr">Para ver el sombreado del relieve en el mapa, debes descargar la superposición del sombreado de esta región.</string>
+    <string name="hillshade_purchase_header">Para ver el sombreado del relieve en el mapa, debes comprar e instalar el complemento \"Curvas de nivel\"</string>
     </resources>
