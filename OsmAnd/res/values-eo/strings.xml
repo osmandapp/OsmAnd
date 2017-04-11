@@ -2919,4 +2919,8 @@ De Afganujo al Zimbabvo, de Aŭstralio al Usono, Argentino, Brazilo, Kanado, Fra
     <string name="quick_action_osmbugs_show">Montri OSM-rimarkojn</string>
     <string name="quick_action_osmbugs_hide">Kaŝi OSM-rimarkojn</string>
     <string name="quick_action_showhide_osmbugs_descr">Premado sur la ag-butono montros aŭ kaŝos OSM-rimarkojn sur la mapo.</string>
+    <string name="restart_search">Rekomenci serĉon</string>
+    <string name="increase_search_radius">Pliigi serĉan radiuson</string>
+    <string name="nothing_found">Trovis nenion :(</string>
+    <string name="nothing_found_descr">Bonvolu provi ŝanĝi serĉpeton aŭ pliigi radiuson de serĉo</string>
     </resources>
