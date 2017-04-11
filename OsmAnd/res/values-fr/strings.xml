@@ -2988,4 +2988,8 @@ Fonctionnalités principales :
     <string name="quick_action_showhide_osmbugs_descr">Appuyez sur le bouton d\'action affichera ou masquera les notes OSM sur la carte.</string>
     <string name="sorted_by_distance">Trier par distance</string>
     <string name="search_favorites">Rechercher des favoris</string>
+    <string name="restart_search">Relancer la recherche</string>
+    <string name="nothing_found">Aucun résultat</string>
+    <string name="increase_search_radius">Augmenter le rayon de recherche</string>
+    <string name="nothing_found_descr">Modifiez les critères de recherche ou augmentez le rayon de recherche</string>
     </resources>
