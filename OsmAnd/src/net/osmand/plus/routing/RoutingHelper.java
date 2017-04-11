@@ -956,6 +956,7 @@ public class RoutingHelper {
 	private void updateProgress(final RouteCalculationParams params) {
 		if(progressRoute != null ) {
 			app.runInUIThread(new Runnable() {
+
 				@Override
 				public void run() {
 					RouteCalculationProgress calculationProgress = params.calculationProgress;
@@ -971,9 +972,15 @@ public class RoutingHelper {
 							// different calculation started
 							return; 
 						} else {
+							if (calculationProgress.requestPrivateAccessRouting) {
+								progressRoute.requestPrivateAccessRouting();
+							}
 							updateProgress(params);
 						}
 					} else {
+						if (calculationProgress.requestPrivateAccessRouting) {
+							progressRoute.requestPrivateAccessRouting();
+						}
 						progressRoute.finish();
 					}
 				}
@@ -989,9 +996,8 @@ public class RoutingHelper {
 		
 		// set visibility
 		public void updateProgress(int progress);
-		
+		public void requestPrivateAccessRouting();
 		public void finish();
-		
 	}
 
 

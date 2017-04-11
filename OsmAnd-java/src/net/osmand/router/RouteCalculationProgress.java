@@ -16,5 +16,5 @@ public class RouteCalculationProgress {
 	public int visitedSegments = 0;
 	
 	public boolean isCancelled;
-	
+	public boolean requestPrivateAccessRouting;
 }
