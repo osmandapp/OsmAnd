@@ -413,6 +413,34 @@ public class TurnType {
 		}
 	}
 
+	public static int convertType(String lane) {
+		int turn;
+		if (lane.equals("none") || lane.equals("through")) {
+			turn = TurnType.C;
+		} else if (lane.equals("slight_right") || 
+				lane.equals("merge_to_right")) {
+			turn = TurnType.TSLR;
+		} else if (lane.equals("slight_left") || 
+				lane.equals("merge_to_left")) {
+			turn = TurnType.TSLL;
+		} else if (lane.equals("right")) {
+			turn = TurnType.TR;
+		} else if (lane.equals("left")) {
+			turn = TurnType.TL;
+		} else if (lane.equals("sharp_right")) {
+			turn = TurnType.TSHR;
+		} else if (lane.equals("sharp_left")) {
+			turn = TurnType.TSHL;
+		} else if (lane.equals("reverse")) {
+			turn = TurnType.TU;
+		} else {
+			// Unknown string
+			turn = TurnType.C;
+//			continue;
+		}
+		return turn;
+	}
+
 	
 
 }
