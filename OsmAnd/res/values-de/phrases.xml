@@ -2060,7 +2060,7 @@
 	<string name="poi_artwork_type_stele">Kunstart: Stele</string>
 	<string name="poi_artwork_type_fountain">Kunstart: Brunnen</string>
 
-	<string name="poi_architecture_stalinist_neoclassicism">Kunstart: Stalinistischer Neoklassizismus</string>
+	<string name="poi_architecture_stalinist_neoclassicism">Architektur: Stalinistischer Neoklassizismus</string>
 	<string name="poi_architecture_eclectic">Architektur: Eklektisch</string>
 	<string name="poi_architecture_new_objectivity">Architektur: Neue Sachlichkeit</string>
 	<string name="poi_architecture_contemporary">Architektur: Zeitgenössisch</string>
