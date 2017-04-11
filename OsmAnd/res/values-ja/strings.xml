@@ -654,7 +654,7 @@ POIの更新は利用できません</string>
     
     <string name="announce_gpx_waypoints">GPX経由地点</string>
     <string name="speak_title">音声アナウンス設定…</string>
-	<string name="speak_descr">通りの名称、トラフィック警告(通行に関する一般的な指示、強制停止、スピードバンプ等)、スピードカメラ(オービス)、法定速度の音声アナウンスの設定をします</string>
+	<string name="speak_descr">道路名、交通指示警告(強制停止、スピードバンプ等含む)、スピードカメラ、法定速度の音声アナウンスの設定をします</string>
 	<string name="speak_street_names">通りの名前 (TTS形式音声のみ)</string>
     <string name="speak_speed_limit">制限速度</string>
     <string name="speak_cameras">スピードカメラ(オービス)</string>
@@ -742,7 +742,7 @@ POIの更新は利用できません</string>
     <string name="shared_string_map">マップ</string>
     <string name="prefer_motorways">高速道路を優先</string>
 	<string name="prefer_in_routing_title">ルート検索時の優先道路設定…</string>
-	<string name="prefer_in_routing_descr">高速道路を優先します</string>
+	<string name="prefer_in_routing_descr">高速道路を優先する設定にします</string>
     <string name="max_speed_none">なし</string>
     
     <string name="download_hillshade_maps">陰影起伏図</string>
@@ -855,7 +855,7 @@ POIの更新は利用できません</string>
     <string name="poi_filter_sightseeing">観光(Sightseeing)</string>
     <string name="poi_filter_accomodation">収容施設(Accommodation)</string>
     <string name="show_warnings_title">警告の表示設定…</string>
-	<string name="show_warnings_descr">トラフィック警告(制限速度、強制停止、スピードバンプ)、スピードカメラ、車線等の通知を設定します</string>
+	<string name="show_warnings_descr">交通指示警告(法定速度、強制停止、スピードバンプ等含む)、スピードカメラ、車線等の通知を設定します</string>
 	<string name="use_compass_navigation_descr">方向が全く検出できない場合電子コンパスを使用します</string>
 	<string name="use_compass_navigation">電子コンパスを使用</string>
 	<string name="avoid_motorway">高速道路を使用しない</string>
@@ -1372,7 +1372,7 @@ OsmAnd+は最新の更新情報を受けとることが出来る、有料バー�
     <string name="route_preferences">ルート設定</string>
     <string name="route_info">ルート情報</string>
     <string name="routing_attr_prefer_motorway_name">高速道路を優先する</string>
-	<string name="routing_attr_prefer_motorway_description">高速道路を優先する</string>
+	<string name="routing_attr_prefer_motorway_description">高速道路を優先する設定にします</string>
 	
 	
 	<string name="routing_attr_avoid_toll_name">有料道路を使用しない</string>
@@ -1382,7 +1382,7 @@ OsmAnd+は最新の更新情報を受けとることが出来る、有料バー�
 	<string name="routing_attr_avoid_ferries_name">フェリーを使用しない</string>
 	<string name="routing_attr_avoid_ferries_description">フェリーを使用しない</string>
 	<string name="routing_attr_avoid_motorway_name">高速道路を使用しない</string>
-	<string name="routing_attr_avoid_motorway_description">高速道路を使用しない</string>
+	<string name="routing_attr_avoid_motorway_description">高速道路を使用しない設定にします</string>
 	<string name="routing_attr_weight_name">重量制限</string>
 	<string name="routing_attr_weight_description">ルート上で通行可能な車両重量を指定します</string>
     <string name="android_19_location_disabled">Androidのバージョン4.4(KitKat)以降では以前のデータ格納フォルダ(%s)にはダウンロードやマップ更新が出来ません。あなたが許可した新しい保存場所にOsmAndのファイル全てをコピーしますか？
@@ -1836,7 +1836,7 @@ OsmAnd+は最新の更新情報を受けとることが出来る、有料バー�
 	<string name="your_edits">あなたの編集</string>
     <string name="waypoint_visit_after">後で立ち寄る</string>
     <string name="waypoint_visit_before">先に立ち寄る</string>
-    <string name="simulate_your_location">経路シミュレーション</string>
+    <string name="simulate_your_location">移動シミュレーション</string>
     <string name="drawer">フラットリスト</string>
     <string name="short_location_on_map">緯度 %1$s\n経度 %2$s</string>
     <string name="tips_and_tricks_descr">よくある質問(FAQ)</string>
@@ -2113,8 +2113,8 @@ OsmAndの従来のマップスタイルに戻すには、このプラグイン�
     <string name="shared_string_navigation">ナビゲーション</string>
     <string name="osmand_running_in_background">バックグラウンドで実行</string>
     <string name="favourites_edit_dialog_title">お気に入りの情報</string>
-    <string name="simulate_your_location_stop_descr">位置シミュレーションの停止</string>
-    <string name="simulate_your_location_descr">GPXに記録されたルート、または計算されたルートを使用してシミュレートします</string>
+    <string name="simulate_your_location_stop_descr">移動シミュレーションの停止</string>
+    <string name="simulate_your_location_descr">計算されたルート、またはGPXに記録されたルートを使用して移動時のシミュレートをします</string>
     <string name="favourites_context_menu_add">お気に入りに追加</string>
 	<string name="are_you_sure">よろしいですか？</string>
 	<string name="unsaved_changes_will_be_lost">未保存の変更は失われます。続行しますか？</string>
@@ -2180,7 +2180,7 @@ OsmAndの従来のマップスタイルに戻すには、このプラグイン�
 	<string name="osn_add_dialog_error">例外事項の発生:メモは作成されませんでした</string>
 	<string name="osn_close_dialog_success">注釈は正常に閉じられました</string>
 	<string name="osn_close_dialog_error">例外事項の発生:注釈は閉じられませんでした</string>
-	<string name="shared_string_commit">ｺﾐｯﾄ</string>
+	<string name="shared_string_commit">情報の追加、返信等</string>
 	
     <string name="context_menu_item_delete_waypoint">GPX経由地点を削除しますか？</string>
     <string name="context_menu_item_edit_waypoint">GPX経由地点の編集</string>
@@ -2253,7 +2253,7 @@ OsmAndの従来のマップスタイルに戻すには、このプラグイン�
     <string name="shared_string_undo_all">すべて元に戻す</string>
     <string name="shared_string_type">タイプ</string>
     <string name="starting_point">出発地</string>
-    <string name="shared_string_not_selected">無選択</string>
+    <string name="shared_string_not_selected">指定しない</string>
     <string name="report">レポート</string>
     <string name="storage_permission_restart_is_required">外部ストレージへの書き込みが許可されました。手動でアプリケーションを再起動してください。</string>
     <string name="release_2_3">"
@@ -2320,7 +2320,7 @@ OsmAndの従来のマップスタイルに戻すには、このプラグイン�
     <string name="clear_markers_history_q">マップマーカーの履歴を消去しますか？</string>
     <string name="active_markers">アクティブマーカー</string>
     <string name="map_markers">マップマーカー</string>
-    <string name="map_marker">マップマーカー</string>
+    <string name="map_marker">マップマーカー表示位置</string>
     <string name="consider_turning_polygons_off">ポリゴンによる描画をオフにすることを推奨します。</string>
     <string name="rendering_attr_showMtbRoutes_name">MTB用ルートを表示</string>
     <string name="show_polygons">ポリゴンを表示</string>
@@ -2520,8 +2520,8 @@ OsmAndとOSMをサポートする方法として現状最適な方法である�
     <string name="legacy_search">レガシー検索</string>
     <string name="show_legacy_search">レガシー検索を表示</string>
     <string name="show_legacy_search_desc">ドロワーリスト型のレガシー(旧型)検索も使用できるようにします</string>
-    <string name="routing_attr_allow_motorway_name">高速道路を使用可能</string>
-    <string name="routing_attr_allow_motorway_description">高速道路を使用可能</string>
+    <string name="routing_attr_allow_motorway_name">高速道路を使用する</string>
+    <string name="routing_attr_allow_motorway_description">高速道路を使用可能とみなします</string>
     <string name="release_2_6">"
  • クイックアクションボタンの実装
 
@@ -2604,7 +2604,7 @@ OsmAndとOSMをサポートする方法として現状最適な方法である�
     <string name="storage_place_description">OsmAnd用 データ領域 (マップ、経路、その他): %1$s</string>
     <string name="give_permission">アクセス許可を与える</string>
     <string name="allow_access_location">場所へのアクセスを許可する</string>
-    <string name="first_usage_greeting">オフラインでもルート取得と行く先を見つけましょう</string>
+    <string name="first_usage_greeting">オフラインでも使えるナビで新たな場所を目指しましょう</string>
     <string name="search_map_hint">市町村名または地域名で検索</string>
     <string name="route_roundabout_short">%1$d番目の出口から出て進みます</string>
     <string name="route_calculation">ルート計算</string>
@@ -2630,8 +2630,8 @@ OsmAndとOSMをサポートする方法として現状最適な方法である�
 等々
  "</string>
     <string name="search_hint">市町村名、住所、POI名称を入力</string>
-    <string name="osm_live_banner_desc">毎月、毎週、毎日、毎時と設定された更新頻度に合わせた、マップの無制限ダウンロードが可能になります。</string>
-    <string name="osmand_plus_banner_desc">有料バージョンのOsmAndは毎月のマップ更新が得られ、マップのダウンロード数制限はありません。</string>
+    <string name="osm_live_banner_desc">マップのダウンロード数は無制限になり、設定した更新頻度(月、週、日、時間)での自動ダウンロードが可能になります。</string>
+    <string name="osmand_plus_banner_desc">有料バージョンのOsmAndはマップのダウンロード数制限はなく、月毎のマップ自動更新も使用できます。</string>
     <string name="location_not_found">場所が見つかりません</string>
     <string name="no_inet_connection_desc_map">マップのダウンロードにはインターネット接続が必要です。</string>
     <string name="search_my_location">現在地取得</string>
@@ -2802,11 +2802,11 @@ OsmAndとOSMをサポートする方法として現状最適な方法である�
     <string name="no_overlay">オーバーレイ無し</string>
     <string name="no_underlay">アンダーレイ無し</string>
     <string name="subscribe_email_error">エラー</string>
-    <string name="subscribe_email_desc">当社メーリングリストを購読契約すると、アプリの割引や３つ以上のマップダウンロードが可能になります！</string>
+    <string name="subscribe_email_desc">メーリングリストをご購読いただけると、アプリの割引やさらに３つのマップをダウンロード可能になります！</string>
     <string name="depth_contour_descr">点と等深線による海底地形図がマップに表示されます(角度単位30秒をベースとした角度表示)。</string>
-    <string name="sea_depth_thanks">海底地形図を購入していただき、ありがとうございます！</string>
-    <string name="index_item_depth_contours_osmand_ext">等深線</string>
-    <string name="download_depth_countours">等深線</string>
+    <string name="sea_depth_thanks">海洋等深線データを購入していただき、ありがとうございます！</string>
+    <string name="index_item_depth_contours_osmand_ext">海洋等深線データ</string>
+    <string name="download_depth_countours">海洋等深線データ</string>
     <string name="nautical_maps">航海マップ</string>
     <string name="analyze_on_map">マップ上の分析</string>
     <string name="shared_string_visible">表示</string>
@@ -2819,17 +2819,17 @@ OsmAndとOSMをサポートする方法として現状最適な方法である�
     <string name="do_not_show_startup_messages_desc">アプリ割引＆特別なローカルイベントメッセージが該当します</string>
     <string name="parking_options">駐車場オプション</string>
     <string name="full_version_thanks">OsmAndのフルバージョンのご購入、ありがとうございます！</string>
-    <string name="routing_attr_relief_smoothness_factor_hills_name">丘</string>
-    <string name="routing_attr_relief_smoothness_factor_plains_name">平野</string>
-    <string name="routing_attr_relief_smoothness_factor_more_plains_name">平原</string>
+    <string name="routing_attr_relief_smoothness_factor_hills_name">丘陵可</string>
+    <string name="routing_attr_relief_smoothness_factor_plains_name">丘陵の少ない地形</string>
+    <string name="routing_attr_relief_smoothness_factor_more_plains_name">平坦優先</string>
     <string name="routing_attr_driving_style_speed_name">速度</string>
     <string name="routing_attr_driving_style_balance_name">バランス</string>
     <string name="routing_attr_driving_style_safety_name">安全性</string>
-    <string name="relief_smoothness_factor_descr">平原や丘の優先順位</string>
+    <string name="relief_smoothness_factor_descr">平原から丘陵まで、経路設定時優先したい地形を設定します</string>
     <string name="route_points_category_name">通過するためのルート上地点</string>
-    <string name="routing_attr_relief_smoothness_factor_name">凹凸の滑らかさに関する要素</string>
+    <string name="routing_attr_relief_smoothness_factor_name">標高の変動許容選択</string>
     <string name="rendering_attr_depthContours_description">等深線や深度を表示します</string>
-    <string name="rendering_attr_depthContours_name">等深線</string>
+    <string name="rendering_attr_depthContours_name">海洋等深線データ</string>
     <string name="shared_string_paused">一時停止</string>
     <string name="save_track_min_speed">ログに記録する最低速度</string>
     <string name="save_track_min_speed_descr">ログに記録を許可する最低速度を設定します</string>
@@ -2839,7 +2839,7 @@ OsmAndとOSMをサポートする方法として現状最適な方法である�
     <string name="save_track_precision_descr">ログに記録を許可する最低精度を設定します</string>
     <string name="restore_purchases">購入情報の復元</string>
     <string name="get_for">%1$sで入手</string>
-    <string name="first_usage_wizard_desc">OsmAndで現在地を取得すると、あなたの地域近辺マップのダウンロードが提案されます。</string>
+    <string name="first_usage_wizard_desc">位置情報(GPS)機能が有効でOsmAndで現在地を取得できれば、ダウンロードすべき地域のマップが表示されます。</string>
     <string name="coords_search">座標検索</string>
     <string name="advanced_coords_search">高度な座標検索</string>
     <string name="lang_ber">ベルベル諸語</string>
@@ -2982,9 +2982,12 @@ OsmAndとOSMをサポートする方法として現状最適な方法である�
     <string name="shared_string_plugin">プラグイン</string>
     <string name="srtm_purchase_header">等高線をマップ上で見るには、プラグインの購入とインストールが必要です</string>
     <string name="show_from_zoom_level">表示ズームレベル</string>
-    <string name="routing_attr_allow_private_name">プライベートアクセスを許可</string>
-    <string name="routing_attr_allow_private_name_description">プライベートエリアにアクセスを許可</string>
+    <string name="routing_attr_allow_private_name">専有通路を通行許可</string>
+    <string name="routing_attr_allow_private_name_description">専有エリア(業者用通路、私有地など)を通行可能と見なします</string>
     <string name="display_zoom_level">表示ズームレベル: %1$s</string>
     <string name="index_item_depth_points_southern_hemisphere">南半球の深度マップ</string>
     <string name="index_item_depth_points_northern_hemisphere">北半球の深度マップ</string>
+    <string name="rendering_attr_surfaceIntegrity_name">路面状態</string>
+    <string name="translit_name_if_miss">%1$sの名前が欠落している場合、(他の文字で)翻字します</string>
+    <string name="translit_names">名称を翻字</string>
     </resources>
