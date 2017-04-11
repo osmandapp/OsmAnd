@@ -115,7 +115,10 @@ public class RoutePlannerFrontEnd {
 		boolean res = false;
 		GeneralRouter router = (GeneralRouter) ctx.getRouter();
 		if (router != null && !router.isAllowPrivate()) {
-			ctx.setRouter(new GeneralRouter(GeneralRouterProfile.CAR, new LinkedHashMap<String, String>()));
+			ctx.unloadAllData();
+			LinkedHashMap<String, String> mp = new LinkedHashMap<String, String>();
+			mp.put(GeneralRouter.ALLOW_PRIVATE, "true");
+			ctx.setRouter(new GeneralRouter(router.getProfile(), mp));
 			for (LatLon latLon : points) {
 				RouteSegmentPoint rp = findRouteSegment(latLon.getLatitude(), latLon.getLongitude(), ctx, null);
 				if (rp != null && rp.road != null) {
@@ -125,6 +128,7 @@ public class RoutePlannerFrontEnd {
 					}
 				}
 			}
+			ctx.unloadAllData();
 			ctx.setRouter(router);
 		}
 		return res;
