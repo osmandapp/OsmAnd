@@ -90,9 +90,7 @@ public class QuickActionFactory {
         }
 
         if (OsmandPlugin.getEnabledPlugin(OsmEditingPlugin.class) != null) {
-
             quickActions.add(new AddPOIAction());
-			quickActions.add(new ShowHideOSMBugAction());
             quickActions.add(new AddOSMBugAction());
         }
 
@@ -108,14 +106,20 @@ public class QuickActionFactory {
         quickActions.add(new QuickAction(0, R.string.quick_action_add_configure_map));
 
         QuickAction favorites = new ShowHideFavoritesAction();
-
         if (!favorites.hasInstanceInList(active)) {
             quickActions.add(favorites);
         }
 
         quickActions.add(new ShowHidePoiAction());
 
-        quickActions.add(new MapStyleAction());
+		if (OsmandPlugin.getEnabledPlugin(OsmEditingPlugin.class) != null) {
+			QuickAction showHideOSMBugAction = new ShowHideOSMBugAction();
+			if (!showHideOSMBugAction.hasInstanceInList(active)) {
+				quickActions.add(showHideOSMBugAction);
+			}
+		}
+
+		quickActions.add(new MapStyleAction());
 
         if (OsmandPlugin.getEnabledPlugin(OsmandRasterMapsPlugin.class) != null) {
 
