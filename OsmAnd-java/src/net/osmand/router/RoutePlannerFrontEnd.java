@@ -114,7 +114,8 @@ public class RoutePlannerFrontEnd {
 	private boolean needRequestPrivateAccessRouting(RoutingContext ctx, List<LatLon> points) throws IOException {
 		boolean res = false;
 		GeneralRouter router = (GeneralRouter) ctx.getRouter();
-		if (router != null && !router.isAllowPrivate()) {
+		if (router != null && !router.isAllowPrivate() && 
+				router.getParameters().containsKey(GeneralRouter.ALLOW_PRIVATE)) {
 			ctx.unloadAllData();
 			LinkedHashMap<String, String> mp = new LinkedHashMap<String, String>();
 			mp.put(GeneralRouter.ALLOW_PRIVATE, "true");
