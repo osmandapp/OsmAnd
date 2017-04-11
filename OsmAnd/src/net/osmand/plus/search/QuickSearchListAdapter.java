@@ -22,7 +22,6 @@ import net.osmand.data.LatLon;
 import net.osmand.plus.OsmandApplication;
 import net.osmand.plus.R;
 import net.osmand.plus.dashboard.DashLocationFragment;
-import net.osmand.plus.search.listitems.QuickSearchButtonListItem;
 import net.osmand.plus.search.listitems.QuickSearchHeaderListItem;
 import net.osmand.plus.search.listitems.QuickSearchListItem;
 import net.osmand.plus.search.listitems.QuickSearchListItemType;
@@ -224,6 +223,14 @@ public class QuickSearchListAdapter extends ArrayAdapter<QuickSearchListItem> {
 				((TextView) view.findViewById(R.id.title)).setText(listItem.getSpannableName());
 			} else {
 				((TextView) view.findViewById(R.id.title)).setText(listItem.getName());
+			}
+			QuickSearchMoreListItem searchMoreListItem = (QuickSearchMoreListItem) listItem;
+			if (searchMoreListItem.isEmptySearch() && !searchMoreListItem.isInterruptedSearch()) {
+				view.findViewById(R.id.empty_search).setVisibility(View.VISIBLE);
+				view.findViewById(R.id.more_divider).setVisibility(View.VISIBLE);
+			} else {
+				view.findViewById(R.id.empty_search).setVisibility(View.GONE);
+				view.findViewById(R.id.more_divider).setVisibility(View.GONE);
 			}
 		} else if (type == QuickSearchListItemType.BUTTON) {
 			if (convertView == null) {

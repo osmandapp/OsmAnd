@@ -9,6 +9,10 @@
          3. All your modified/created strings are in the top of the file (to make easier find what\'s translated).
     PLEASE: Have a look at http://code.google.com/p/osmand/wiki/UIConsistency, it may really improve your and our work  :-)  Thx - Hardy
     -->
+    <string name="restart_search">Restart search</string>
+    <string name="increase_search_radius">Increase search radius</string>
+    <string name="nothing_found">Nothing found :(</string>
+    <string name="nothing_found_descr">Try to change search query or increase radius of search</string>
     <string name="quick_action_showhide_osmbugs_title">Show/hide OSM Notes</string>
     <string name="quick_action_osmbugs_show">Show OSM Notes</string>
     <string name="quick_action_osmbugs_hide">Hide OSM Notes</string>
