@@ -2778,7 +2778,7 @@ Pro praghere iscrie su còdighe intreu</string>
  • Suportu pro su \"Còdighe Abertu pro sa Positzione\" (Open Location Code  - OLC)
 
 
- • Visualizatzione basilare pro sos profilos de s\'artària e de sa pendèntzia e de lestresa pro sas rastas GPX registradas e sas àndalas calculadas
+ • Visualizatzione basilare pro sos profilos de s\'artària, de sa pendèntzia e de lestresa pro sas rastas GPX registradas e sas àndalas calculadas
 
 
  • Impostatzione \"Istile de ghia\" emegioramentos lògicos in su càlculu de sas àndalas pro bitzicletas
@@ -2792,7 +2792,7 @@ Pro praghere iscrie su còdighe intreu</string>
 
  e àteru…
  "</string>
-	<string name="rendering_attr_depthContours_name">Lìnias de profondidade</string>
+	<string name="rendering_attr_depthContours_name">Lìnias nàuticas de profondidade</string>
 	<string name="rendering_attr_depthContours_description">Ammustra sas lìnias de profondidade</string>
     <string name="routing_attr_height_relief_smoothness_factor_description">Prus terrinu paris o prus cùcuros</string>
     <string name="routing_attr_height_obstacles_name">Imprea sos datos de s\'artària</string>
@@ -2828,17 +2828,17 @@ Pro praghere iscrie su còdighe intreu</string>
     <string name="route_points_category_name">Puntos de colare in cust\'àndala</string>
     <string name="shared_string_slope">Caladòrgia</string>
     <string name="lang_ber">Bèrberu</string>
-    <string name="relief_smoothness_factor_descr">Prioridade a sos terrinos in paris o a sos cùcuros</string>
+    <string name="relief_smoothness_factor_descr">Terrinos preferidos: in paris o cun cùcuros</string>
     <string name="routing_attr_relief_smoothness_factor_hills_name">Cùcuros/montigros</string>
-    <string name="routing_attr_relief_smoothness_factor_plains_name">Terrinu in paris</string>
-    <string name="routing_attr_relief_smoothness_factor_more_plains_name">Prus in paris</string>
+    <string name="routing_attr_relief_smoothness_factor_plains_name">Pagos cùcuros</string>
+    <string name="routing_attr_relief_smoothness_factor_more_plains_name">Terrinu in paris</string>
     <string name="routing_attr_driving_style_speed_name">Lestru</string>
     <string name="routing_attr_driving_style_balance_name">Bilantziadu</string>
     <string name="routing_attr_driving_style_safety_name">Seguru</string>
-    <string name="routing_attr_relief_smoothness_factor_name">Valore de ispitadura rilievos</string>
+    <string name="routing_attr_relief_smoothness_factor_name">Valore de variatzione de s\'artària</string>
     <string name="full_version_thanks">Gràtzias pro àere comporadu sa versione intrea de OsmAnd!</string>
     <string name="do_not_send_anonymous_app_usage">No imbies informatziones anònimas a pitzu de s\'impreu de s\'aplicatzione</string>
-    <string name="do_not_send_anonymous_app_usage_desc">OsmAnd imbiat informatziones generales a pitzu de s\'ischermu impreadu in su mentres de sa sessione. Non retzimus perunu datu de geolocalizatzione o chi pertochet datos insertados dae s\'impreadore.</string>
+    <string name="do_not_send_anonymous_app_usage_desc">OsmAnd imbiat informatziones generales a pitzu de sas partes de s\'aplicatzione impreadas. Non retzimus perunu datu de geolocalizatzione, chi pertochet datos insertados dae s\'impreadore o a pitzu de sas àreas chi bides, chircas o iscàrrigas.</string>
     <string name="do_not_show_startup_messages">No ammustres messàgios a s\'alluìngiu</string>
     <string name="do_not_show_startup_messages_desc">Ammustra sos iscontos pro sas aplicatziones e messàgios a pitzu de sos eventos locales</string>
     <string name="parking_options">Issèberos pro sos parchègios</string>
@@ -3048,4 +3048,9 @@ Pro praghere iscrie su còdighe intreu</string>
     <string name="quick_action_osmbugs_show">Ammustra sas notas OSM</string>
     <string name="quick_action_osmbugs_hide">Cua sas notas OSM</string>
     <string name="quick_action_showhide_osmbugs_descr">Incarchende su butone pro s\'atzione as a cuare o ammustrare sas notas OSM in sa mapa.</string>
+    <string name="restart_search">Torra a incumintzare sa chirca</string>
+    <string name="increase_search_radius">Ismànnia su raju de chirca</string>
+    <string name="nothing_found">Nudda de agatadu :(</string>
+    <string name="nothing_found_descr">Proa a mudare sos critèrios de chirca o a ismanniare su raju de chirca</string>
+    <string name="private_access_routing_req">Sa destinatzione tua est positzionada in un\'àrea cun atzessu privadu. Boles abilitare s\'atzessu a sas istradas privadas pro custu biàgiu?</string>
     </resources>
