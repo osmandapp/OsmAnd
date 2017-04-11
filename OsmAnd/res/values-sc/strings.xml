@@ -2807,7 +2807,7 @@ Pro praghere iscrie su còdighe intreu</string>
     <string name="altitude_range">Intervallu de artària</string>
     <string name="average_altitude">Artària mèdia</string>
     <string name="total_distance">Distàntzia totale</string>
-    <string name="shared_string_time">Ora</string>
+    <string name="shared_string_time">Tempus</string>
     <string name="shared_string_tracks">Rastas</string>
     <string name="select_gpx_folder">Icherta sa cartella de sas rastas</string>
     <string name="file_can_not_be_moved">Su documentu non podet èssere mòidu.</string>
@@ -3025,7 +3025,7 @@ Pro praghere iscrie su còdighe intreu</string>
     <string name="shared_string_in_name">in %1$s</string>
     <string name="shared_string_overview">Vista generale</string>
     <string name="animate_my_location">Ànima sa positzione mea</string>
-    <string name="animate_my_location_desc">Allughe s\'estrapolatzione de sa positzione mea in sa mapa cando b\'est una pèrdida temporànea de sa positzione</string>
+    <string name="animate_my_location_desc">Abìlita s\'estrapolatzione de sa positzione mea cando b\'est una pèrdida temporànea de su sinnale GPS</string>
     <string name="favorite_group_name">Nùmene de su grupu</string>
     <string name="change_color">Càmbia colore</string>
     <string name="edit_name">Acontza su nùmene</string>
@@ -3034,7 +3034,7 @@ Pro praghere iscrie su còdighe intreu</string>
     <string name="display_zoom_level">Livellu ismmaniamentu ischermu: %1$s</string>
     <string name="srtm_color_scheme">Ischema de colores</string>
     <string name="show_from_zoom_level">Ammustra dae su livellu de ismanniamentu</string>
-    <string name="routing_attr_allow_private_name">Permiti s\'atzessu privadu</string>
+    <string name="routing_attr_allow_private_name">Permiti sos atzessos privados</string>
     <string name="routing_attr_allow_private_name_description">Permiti s\'atzessu a sas àreas privadas</string>
     <string name="hillshade_menu_download_descr">Pro bìdere sas umbraduras de sos rilievos in sa mapa depes iscarrigare sa mapa de sas umbraduras de custa regione.</string>
     <string name="hillshade_purchase_header">Pro bìdere sas umbraduras de sos rilievos in sa mapa depes comporare e installare s\'estensione Curvas de Livellu</string>
