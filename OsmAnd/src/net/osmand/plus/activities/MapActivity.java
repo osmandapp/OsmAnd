@@ -111,6 +111,7 @@ import net.osmand.plus.views.corenative.NativeCoreContext;
 import net.osmand.plus.views.mapwidgets.MapInfoWidgetsFactory.TopToolbarController;
 import net.osmand.plus.views.mapwidgets.MapInfoWidgetsFactory.TopToolbarControllerType;
 import net.osmand.render.RenderingRulesStorage;
+import net.osmand.router.GeneralRouter;
 import net.osmand.util.Algorithms;
 
 import org.apache.commons.logging.Log;
@@ -381,6 +382,37 @@ public class MapActivity extends OsmandActionBarActivity implements DownloadEven
 					pbExtView.setVisibility(View.VISIBLE);
 					pbExt.setProgress(progress);
 					pbExt.requestLayout();
+				}
+			}
+
+			@Override
+			public void requestPrivateAccessRouting() {
+				if (!settings.FORCE_PRIVATE_ACCESS_ROUTING_ASKED.getModeValue(getRoutingHelper().getAppMode())) {
+					final OsmandSettings.CommonPreference<Boolean> allowPrivate
+							= settings.getCustomRoutingBooleanProperty(GeneralRouter.ALLOW_PRIVATE, false);
+					final List<ApplicationMode> modes = ApplicationMode.values(settings);
+					for (ApplicationMode mode : modes) {
+						if (!allowPrivate.getModeValue(mode)) {
+							settings.FORCE_PRIVATE_ACCESS_ROUTING_ASKED.setModeValue(mode, true);
+						}
+					}
+					if (!allowPrivate.getModeValue(getRoutingHelper().getAppMode())) {
+						AlertDialog.Builder dlg = new AlertDialog.Builder(MapActivity.this);
+						dlg.setMessage(R.string.private_access_routing_req);
+						dlg.setPositiveButton(R.string.shared_string_yes, new DialogInterface.OnClickListener() {
+							@Override
+							public void onClick(DialogInterface dialog, int which) {
+								for (ApplicationMode mode : modes) {
+									if (!allowPrivate.getModeValue(mode)) {
+										allowPrivate.setModeValue(mode, true);
+									}
+								}
+								getRoutingHelper().recalculateRouteDueToSettingsChange();
+							}
+						});
+						dlg.setNegativeButton(R.string.shared_string_no, null);
+						dlg.show();
+					}
 				}
 			}
 

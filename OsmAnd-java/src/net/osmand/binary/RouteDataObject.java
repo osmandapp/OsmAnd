@@ -517,6 +517,22 @@ public class RouteDataObject {
 		return getHighway(types, region);
 	}
 
+	public boolean hasPrivateAccess() {
+		int sz = types.length;
+		for (int i = 0; i < sz; i++) {
+			RouteTypeRule r = region.quickGetEncodingRule(types[i]);
+			if ("motorcar".equals(r.getTag())
+					|| "motor_vehicle".equals(r.getTag())
+					|| "vehicle".equals(r.getTag())
+					|| "access".equals(r.getTag())) {
+				if (r.getValue().equals("private")) {
+					return true;
+				}
+			}
+		}
+		return false;
+	}
+
 	public String getValue(String tag) {
 		for (int i = 0; i < types.length; i++) {
 			RouteTypeRule r = region.quickGetEncodingRule(types[i]);
