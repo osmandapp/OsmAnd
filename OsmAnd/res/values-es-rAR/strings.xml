@@ -2882,4 +2882,5 @@ Algunas de las principales funciones:
     <string name="increase_search_radius">Aumentar radio de búsqueda</string>
     <string name="nothing_found">Nada encontrado :(</string>
     <string name="nothing_found_descr">Intenta cambiar la consulta de búsqueda o aumentar el radio de búsqueda</string>
+    <string name="private_access_routing_req">El destino se ubica en un área de acceso privado. ¿Quieres acceder en este viaje a los caminos privados?</string>
     </resources>
