@@ -3116,4 +3116,8 @@ Tidligere destination bliver sidste mellemliggende punkt.</string>
     <string name="quick_action_osmbugs_show">Vis OSM noter</string>
     <string name="quick_action_osmbugs_hide">Skjul OSM noter</string>
     <string name="quick_action_showhide_osmbugs_descr">Tryk på genvejsknappen vil vise eller skjule OSM noter på kortet.</string>
+    <string name="restart_search">Genstart søgning</string>
+    <string name="increase_search_radius">Øg søgeradius</string>
+    <string name="nothing_found">Fandt intet :(</string>
+    <string name="nothing_found_descr">Prøv at ændre søgekriterier eller øg radius af søgning</string>
     </resources>
