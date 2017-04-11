@@ -251,7 +251,7 @@ public class QuickActionListFragment extends BaseOsmAndFragment implements Quick
         }
 
         public void deleteItem(int position) {
-            if (position == -1)
+            if (position == -1 || position >= itemsList.size())
                 return;
 
             itemsList.remove(position);
