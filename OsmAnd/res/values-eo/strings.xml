@@ -225,7 +225,7 @@
     <string name="shared_string_move_down">Movi suben</string>
     <string name="finish_navigation">Fini navigadon</string>
     <string name="avoid_road">Eviti vojon</string>
-    <string name="storage_directory_readonly_desc">Nuntempa elektita datum-konservada dosierujo estas nurlega. La konservada dosierujo estas provizore agordita en interna memorejo. Bonvolu elekti ĝustan konservadan dosierujon.</string>
+    <string name="storage_directory_readonly_desc">Nuntempe elektita datum-konservada dosierujo estas nurlega. La konservada dosierujo estas provizore agordita en interna memorejo. Bonvolu elekti ĝustan konservadan dosierujon.</string>
     <string name="storage_directory_shared">Komuna memoro</string>
     <string name="osm_live_month_cost_desc">Monata elspezo</string>
     <string name="map_marker_1st">Unua mapmarko</string>
@@ -523,16 +523,16 @@ Vi povas spuri ĉiujn aparatojn de partoprenanta grupo realtempe. Ankaŭ vi pova
     <string name="action_modify">Modifi</string>
     <string name="action_delete">Forigi</string>
     <string name="osm_edits">OSM-aj redaktoj</string>
-    <string name="parking_place_limited">Parkuma tempo limigita ĝis</string>
+    <string name="parking_place_limited">Parkumada tempo limigita ĝis</string>
     <string name="osmand_parking_time_left">ankoraŭ</string>
     <string name="your_edits">Viaj redaktoj</string>
     <string name="waypoint_visit_after">Viziti poste</string>
     <string name="waypoint_visit_before">Viziti antaŭe</string>
-    <string name="simulate_your_location">Simuli vian pozicion</string>
+    <string name="simulate_your_location">Simuli pozicion</string>
     <string name="drawer">Plata listo</string>
-    <string name="short_location_on_map">Lat %1$s
-Lon %2$s</string>
-    <string name="tips_and_tricks_descr">Oftaj demandoj, lastaj ŝanĝoj, kaj aliaj</string>
+    <string name="short_location_on_map">Lat: %1$s
+Lon: %2$s</string>
+    <string name="tips_and_tricks_descr">Oftaj demandoj, lastaj ŝanĝoj kaj aliaj</string>
     <string name="shared_string_do_not_use">Ne uzi</string>
     <string name="shared_string_selected_lowercase">elektitaj</string>
     <string name="shared_string_none">Nenia</string>
@@ -2441,7 +2441,7 @@ Se vi bezonas helpon pri OsmAnd aplikaĵo, bonvolu kontakti nian helpantaron: su
     <string name="storage_place_description">Datum-memorejo de OsmAnd (por mapoj, kursoj, ktp.): %1$s.</string>
     <string name="give_permission">Permesi</string>
     <string name="allow_access_location">Permesi aliron al pozicio</string>
-    <string name="first_usage_greeting">Navigi kaj esplori novajn lokojn eksterrete</string>
+    <string name="first_usage_greeting">Navigi kaj esplori novajn lokojn sen Interreta konekto</string>
     <string name="search_my_location">Serĉi mian pozicion</string>
     <string name="no_update_info">Ne montri ĝisdatigojn</string>
     <string name="no_update_info_desc">Ne serĉi informojn pri novaj versioj kaj rabatoj rilataj al OsmAnd</string>
