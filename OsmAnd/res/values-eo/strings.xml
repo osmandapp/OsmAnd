@@ -535,9 +535,9 @@ Lon: %2$s</string>
     <string name="tips_and_tricks_descr">Oftaj demandoj, lastaj ŝanĝoj kaj aliaj</string>
     <string name="shared_string_do_not_use">Ne uzi</string>
     <string name="shared_string_selected_lowercase">elektitaj</string>
-    <string name="shared_string_none">Nenia</string>
-    <string name="shared_string_save_as_gpx">Konservi kiel GPX-kurson</string>
-    <string name="shared_string_more_actions">Pli da agoj</string>
+    <string name="shared_string_none">Neniu</string>
+    <string name="shared_string_save_as_gpx">Konservi kiel GPX-spuron</string>
+    <string name="shared_string_more_actions">Pliaj agoj</string>
     <string name="shared_string_do_not_show_again">Ne montri plue</string>
     <string name="shared_string_remember_my_choice">Memori mian elekton</string>
     <string name="shared_string_refresh">Aktualigi</string>
@@ -2923,4 +2923,5 @@ De Afganujo al Zimbabvo, de Aŭstralio al Usono, Argentino, Brazilo, Kanado, Fra
     <string name="increase_search_radius">Pliigi serĉan radiuson</string>
     <string name="nothing_found">Trovis nenion :(</string>
     <string name="nothing_found_descr">Bonvolu provi ŝanĝi serĉpeton aŭ pliigi radiuson de serĉo</string>
+    <string name="private_access_routing_req">Via celloko troviĝas en privata tereno. Ĉu vi volas permesi aliron al privataj vojoj por tiu ĉi kurso?</string>
     </resources>
