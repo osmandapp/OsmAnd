@@ -795,7 +795,7 @@ Elŝutado de speciala mapo ne endas, la vido estas kreita de normalaj mapoj.
 
 Tiu ĉi vido oni povas nuligi per malaktivigi ĝin tie ĉi, aŭ per ŝanĝi la \'Mapaspekto\'-n en \'Agordi mapon\' menuo.
  "</string>
-    <string name="show_zoom_buttons_navigation_descr">Montras butonojn por pligrandigo kaj malgrandigo dum navigado</string>
+    <string name="show_zoom_buttons_navigation_descr">Montri butonojn por pligrandigo kaj malgrandigo dum navigado</string>
     <string name="show_zoom_buttons_navigation">Montri butonojn de skalado</string>
     <string name="save_as_favorites_points">Konservi kiel grupon da ŝatatoj</string>
     <string name="select_destination_and_intermediate_points">Elekti celojn</string>
@@ -844,10 +844,10 @@ Tiu ĉi vido oni povas nuligi per malaktivigi ĝin tie ĉi, aŭ per ŝanĝi la \
     <string name="selected_gpx_info_show">
 
 Premtenu por vidi sur la mapo</string>
-    <string name="delay_navigation_start">Ekigi turnon-post-turno navigadon aŭtomate</string>
+    <string name="delay_navigation_start">Ekigi navigadon turnon-post-turno aŭtomate</string>
     <string name="local_index_gpx_info_show">\n\nPremtenu por montri agordojn</string>
     <string name="gpx_info_waypoints">"Navigadpunktoj: %1$s "</string>
-    <string name="gpx_info_subtracks">"Subkursoj: %1$s "</string>
+    <string name="gpx_info_subtracks">"Subspuroj: %1$s "</string>
     <string name="gpx_info_distance">"Distanco: %1$s (%1$s punktoj) "</string>
     <string name="gpx_info_start_time">"Komenco je: %1$tF, %1$tT "</string>
     <string name="gpx_info_end_time">"Fino je: %1$tF, %1$tT "</string>
@@ -858,19 +858,19 @@ Premtenu por vidi sur la mapo</string>
     <string name="gpx_timespan">Tempa intervalo: %1$s</string>
     <string name="gpx_info_asc_altitude">Desupro/alsupro: %1$s</string>
     <string name="gpx_timemoving">Tempo movante: %1$s</string>
-    <string name="gpx_selection_segment_title">Sekcio</string>
+    <string name="gpx_selection_segment_title">Segmento</string>
     <string name="gpx_selection_number_of_points">" %1$s punktoj"</string>
     <string name="gpx_selection_point">Punkto %1$s</string>
     <string name="gpx_selection_route_points">%1$s\nPunktoj de kurso: %2$s</string>
     <string name="gpx_selection_points">%1$s\nPunktoj</string>
     <string name="gpx_selection_track">%1$s\nKurso %2$s</string>
-    <string name="gpx_file_is_empty">GPX-kursdosiero estas malplena</string>
-    <string name="osmo_user_joined">Uzanto %1$s aniĝis grupon %2$s</string>
+    <string name="gpx_file_is_empty">GPX-spur-dosiero estas malplena</string>
+    <string name="osmo_user_joined">Uzanto %1$s aniĝis la grupo %2$s</string>
     <string name="osmo_user_left">Uzanto %1$s forlasis grupon %2$s</string>
-    <string name="osmo_show_group_notifications_descr">Montras atentigojn kiam uzanto aniĝas aŭ forlasas la grupon</string>
+    <string name="osmo_show_group_notifications_descr">Montri atentigojn kiam uzanto aniĝas aŭ forlasas la grupon</string>
     <string name="osmo_follow">Sekvi</string>
     <string name="osmo_sign_in">Registri</string>
-    <string name="osmo_create_groups_confirm">Por krei grupojn vi devas registri sin kiel uzanton de OsMo.</string>
+    <string name="osmo_create_groups_confirm">Por krei grupojn, vi devas registriĝi kiel uzanto de OsMo.</string>
     <string name="osmo_credentials_not_valid">Viaj ensalutiloj al OsMo estas eraraj.</string>
     <string name="osmo_regenerate_login_ids_confirm">Ĉu vi certe volas rekrei personan identigilon? Ĉiuj aparatoj kiuj konektas al vi, ne povos plue spuri vin.</string>
     <string name="osmo_regenerate_login_ids">Rekrei identigilon de uzanto</string>
