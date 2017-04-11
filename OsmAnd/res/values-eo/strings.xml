@@ -421,7 +421,7 @@
     <string name="shared_string_download">Elŝuti</string>
     <string name="shared_string_downloading">Elŝutado</string>
     <string name="shared_string_close">Fermi</string>
-    <string name="shared_string_exit">Forlasi</string>
+    <string name="shared_string_exit">Eliri</string>
     <string name="shared_string_show">Montri</string>
     <string name="shared_string_show_all">Montri ĉiujn</string>
     <string name="shared_string_map">Mapo</string>
@@ -430,7 +430,7 @@
     <string name="shared_string_address">Adreso</string>
     <string name="shared_string_add">Aldoni</string>
     <string name="shared_string_my_places">Miaj ejoj</string>
-    <string name="shared_string_my_tracks">Miaj kursoj</string>
+    <string name="shared_string_my_tracks">Miaj spuroj</string>
     <string name="shared_string_audio">Sono</string>
     <string name="shared_string_video">Video</string>
     <string name="shared_string_photo">Foto</string>
@@ -550,7 +550,7 @@ Lon: %2$s</string>
     <string name="shared_string_add_to_favorites">Aldoni al ŝatataj</string>
     <string name="shared_string_my_location">Mia pozicio</string>
     <string name="shared_string_my_favorites">Miaj ŝatataj</string>
-    <string name="shared_string_currently_recording_track">Aktuale registrata kurso</string>
+    <string name="shared_string_currently_recording_track">Aktuale registrata spuro</string>
     <string name="route_points">Punktoj de kurso</string>
     <string name="track_segments">Kurs-sekcioj</string>
     <string name="track_points">Punktoj de kurso</string>
@@ -569,35 +569,35 @@ Lon: %2$s</string>
     <string name="gps_status">GPS-a stato</string>
     <string name="osmand_plus_play_title_30_chars">OsmAnd+ Mapoj kaj Navigado</string>
     <string name="map_widget_show_ruler">Mezurilo</string>
-    <string name="osmand_rastermaps_plugin_description">"Per tiu ĉi kromprogramo vi povas atingi multajn enretajn (ankaŭ nomitaj kiel kahelajn aŭ rastrumajn) mapojn, ekzemple: antaŭgeneritaj OpenStreetMap kaheloj (kiel Mapnik), sputnik-fotoj kaj mapoj por specialaj uzoj: veteraj, klimataj, tersciencaj mapoj, tavoloj de nivel-ombrumo, ktp.
+    <string name="osmand_rastermaps_plugin_description">"Per tiu ĉi kromprogramo vi povas atingi multajn enretajn (ankaŭ nomitaj kiel kahelajn aŭ rastrumajn) mapojn, ekzemple: antaŭgeneritaj OpenStreetMap kaheloj (kiel Mapnik), satelitaj fotoj kaj mapoj por specialaj uzoj: veteraj, klimataj, tersciencaj mapoj, tavoloj de nivel-ombrumo, ktp.
 
 
-Ĉiuj de tiuj mapoj oni eblas uzi kiel ĉefan (bazan) mapon por OsmAnd, aŭ kiel supran aŭ malsupran tavolon por alia bazmapo (ekz. por norma OsmAnd-a eksterreta mapo). Por fari malsupran tavolon de mapo pli klara, kelkaj elementoj de vektoraj OSM-aj mapoj oni eblas facile kaŝi uzante \'Agordi mapon\' menuon.
+Ĉiuj de tiuj mapoj oni eblas uzi kiel ĉefan (bazan) mapon por OsmAnd, aŭ kiel supran aŭ malsupran tavolon por alia bazmapo (ekz. por norma OsmAnd-a eksterreta mapo). Por fari malsupran tavolon de mapo pli klara, kelkaj elementoj de vektoraj OSM-aj mapoj oni eblas facile kaŝi per menuo \'Agordi mapon\'.
 
 
-Kahelajn mapojn oni povas elŝuti senpere de interreto, aŭ prepari por eksterreta uzado (kaj permane kopii al OSM-a datum-dosierujo) kiel SQLite-an datumbazon kiu povas esti farita uzante diversajn eksterajn ilojn por prepari mapojn.
+Kahelajn mapojn oni povas elŝuti senpere de Interreto, aŭ prepari por eksterreta uzado (kaj permane kopii al OSM-a datum-dosierujo) kiel SQLite-an datumbazon kiu povas esti farita uzante diversajn eksterajn ilojn por prepari mapojn.
  "</string>
     <string name="shared_string_accessibility">Alirebleco</string>
     <string name="device_memory">Aparata memoro</string>
     <string name="edit_group">Redakti grupon</string>
     <string name="parking_place">Parkumejo</string>
     <string name="rendering_attr_pisteGrooming_name">Skivoja prepar-speco</string>
-    <string name="world_ski_missing">Por montri skiadajn mapojn, oni povas elŝuti specialan eksterretan mapon</string>
-    <string name="nautical_maps_missing">Por montri ŝipveturadajn mapojn, oni povas elŝuti specialan eksterretan mapon</string>
-    <string name="remove_the_tag">FORIGI LA MARKON</string>
+    <string name="world_ski_missing">Por montri skiadajn mapojn, speciala eksterreta mapo devas esti elŝutita</string>
+    <string name="nautical_maps_missing">Por montri ŝipveturadajn mapojn, speciala eksterreta mapo devas esti elŝutita</string>
+    <string name="remove_the_tag">FORIGI LA ETIKEDON</string>
     <string name="version_settings">Kompilaĵoj</string>
     <string name="version_settings_descr">Elŝutas antaŭ-alfajn versiojn</string>
     <string name="rendering_attr_streetLighting_name">Stratlumigado</string>
     <string name="proxy_pref_title">Prokurilo</string>
-    <string name="proxy_pref_descr">Agordu prokurilan servilon (ang. proxy server)</string>
+    <string name="proxy_pref_descr">Agordi prokurilan servilon (ang. proxy server)</string>
     <string name="points">Punktoj</string>
-    <string name="navigation_over_track">Ĉu ekigi navigadon laŭlonge de vojo?</string>
+    <string name="navigation_over_track">Ĉu ekigi navigadon laŭlonge de spuro?</string>
     <string name="avoid_roads_msg">Vi povas vidi alternativan kurson per elekti vojojn evitindajn</string>
     <string name="speak_pedestrian">Pasejoj zebrostriaj</string>
-    <string name="rendering_attr_roadStyle_name">Voja montrmaniero</string>
-    <string name="rendering_attr_roadStyle_description">Kiamaniere montri vojojn</string>
-    <string name="rendering_value__name">Implicita</string>
-    <string name="rendering_value_default_name">Implicita</string>
+    <string name="rendering_attr_roadStyle_name">Voja stilo</string>
+    <string name="rendering_attr_roadStyle_description">Kiel vidigi vojojn</string>
+    <string name="rendering_value__name">Norma</string>
+    <string name="rendering_value_default_name">Norma</string>
     <string name="rendering_value_germanRoadAtlas_name">Germana voja maparo</string>
     <string name="rendering_value_highContrastRoads_name">Kontrastegaj vojoj</string>
     <string name="traffic_warning_railways">Traknivela pasejo</string>
@@ -606,7 +606,7 @@ Kahelajn mapojn oni povas elŝuti senpere de interreto, aŭ prepari por eksterre
     <string name="show_pedestrian_warnings">Zebrostriaj pasejoj</string>
     <string name="rendering_value_americanRoadAtlas_name">Usona voja maparo</string>
     <string name="routing_attr_no_new_routing_name">Sen v1.9 kursaj reguloj</string>
-    <string name="routing_attr_no_new_routing_description">Ne uzas regulojn por difini vojojn enkondukitajn je v1.9</string>
+    <string name="routing_attr_no_new_routing_description">Ne uzas regulojn por difini vojojn enkondukitajn en v1.9</string>
     <string name="dash_download_msg_none">Ĉu vi volas elŝuti eksterretajn mapojn?</string>
     <string name="dash_download_msg">Vi elŝutis %1$s mapojn</string>
     <string name="dash_download_new_one">Elŝuti novan mapon</string>
@@ -619,28 +619,28 @@ Kahelajn mapojn oni povas elŝuti senpere de interreto, aŭ prepari por eksterre
     <string name="download_tab_downloads">Ĉiuj</string>
     <string name="download_tab_local">Lokaj</string>
     <string name="no_internet_connection">Elŝutado ne eblas, bonvolu kontroli vian retkonekton.</string>
-    <string name="record_plugin_name">Registrado de kurso</string>
-	<string name="record_plugin_description">"Tiu ĉi kromprogramo ebligas al vi registri kaj konservi viajn kursojn per permana elektado de GPX-registrada fenestraĵo sur la mapekrano, aŭ ankaŭ aŭtomate registri ĉiujn viajn navigadajn kursojn al GPX-dosiero.
+    <string name="record_plugin_name">Registrado de spuroj</string>
+	<string name="record_plugin_description">"Tiu ĉi kromprogramo ebligas al vi registri kaj konservi viajn spurojn per permane elekti GPX-registradan fenestraĵon sur la mapekrano, aŭ ankaŭ aŭtomate registri ĉiujn viajn navigadajn kursojn al GPX-dosiero.
 
 
-Registritaj kursoj povas esti kunhavigitaj kun viaj amikoj aŭ esti uzita por kontribui la OSM-on. Atletoj povas uzi registritajn kursojn por spuri siajn ekzercojn. Kelkaj bazaj ecoj oni povas analizi senpere per OsmAnd, kiel: tempojn de ĉirkaŭoj, mezumajn rapidojn, ktp, kaj kursoj oni povas poste analizi uzante specialajn eksterajn programojn.
+Registritaj spuroj povas esti kunhavigataj kun viaj amikoj aŭ esti uzita por kontribui al OSM. Atletoj povas uzi registritajn spurojn por kontroli siajn ekzercojn. Kelkaj bazaj ecoj oni povas analizi senpere per OsmAnd, kiel: tempoj de ĉirkaŭoj, mezumaj rapidoj, ktp; kaj kursoj oni povas poste analizi per specialaj eksteraj programoj.
  "</string>
     <string name="use_opengl_render">Uzi OpenGL-bildigadon</string>
-    <string name="use_opengl_render_descr">Uzas aparatan plirapidigan OpenGL-bildigadon (povas ne funkcii je iuj aparatoj)</string>
+    <string name="use_opengl_render_descr">Uzi aparatan plirapidigan OpenGL-bildigadon (povas ne funkcii je iuj aparatoj)</string>
     <string name="error_avoid_specific_road">Ne trovis ĉirkaŭvojon</string>
     <string name="home_button">Ĉefekrano</string>
     <string name="map_update">Ĝisdatigoj disponeblaj por %1$s mapoj</string>
     <string name="search_for">Serĉilo</string>
     <string name="coordinates">Koordinatoj</string>
     <string name="rendering_attr_publicTransportMode_name">Busaj, trolebusaj, pramaj kursoj</string>
-    <string name="rendering_attr_tramTrainRoutes_name">Tramaj kaj vagonaraj kursoj</string>
+    <string name="rendering_attr_tramTrainRoutes_name">Tramaj kaj fervojaj kursoj</string>
     <string name="rendering_attr_subwayMode_name">Metroaj kursoj</string>
-    <string name="lock_screen_request_explanation">%1$s bezonas tiun ĉi permeson por malŝalti ekranon por energiŝparan funkcion.</string>
+    <string name="lock_screen_request_explanation">%1$s bezonas tiun ĉi permeson por malŝalti ekranon por energi-ŝparan funkcion.</string>
     <string name="wake_on_voice">Ŝalti ekranon</string>
-    <string name="wake_on_voice_descr">Ŝaltas aparatan ekranon dum proksimigado al kurbiĝo</string>
+    <string name="wake_on_voice_descr">Ŝalti aparatan ekranon dum proksimigado al kurbiĝo</string>
     <string name="impassable_road">Eviti vojojn…</string>
     <string name="rendering_attr_tramRoutes_name">Tramaj kursoj</string>
-    <string name="rendering_attr_trainLightrailRoutes_name">Vagonaraj kursoj</string>
+    <string name="rendering_attr_trainLightrailRoutes_name">Fervojaj kursoj</string>
     <string name="rendering_attr_shareTaxiRoutes_name">Kunhavigi taksiajn kursojn</string>
     <string name="rendering_attr_trolleybusRoutes_name">Trolebusaj kursoj</string>
     <string name="rendering_attr_busRoutes_name">Aŭtobusaj kursoj</string>
@@ -662,12 +662,12 @@ Registritaj kursoj povas esti kunhavigitaj kun viaj amikoj aŭ esti uzita por ko
     <string name="speed_limit_exceed">Tolerado de rapidlimo</string>
     <string name="traffic_warning_speed_limit">Rapidlimo</string>
     <string name="speak_favorites">Proksimaj ŝatataj</string>
-    <string name="speed_limit_exceed_message">Elektu rango de tolerado de rapidlimo, supre kiu vi ricevos sonajn avertojn.</string>
+    <string name="speed_limit_exceed_message">Elekti rango de tolerado de rapidlimo, supre kiu vi ricevos sonajn avertojn.</string>
     <string name="fav_point_emoticons_message">La nomo de ŝatata punkto estas ŝanĝita al %1$s por plifaciligi seneraran konservadon de tekstoĉeno kun miensimboloj al dosiero.</string>
     <string name="print_route">Presi kurson</string>
     <string name="fav_point_dublicate">Duplikata nomo de ŝatata punkto</string>
     <string name="fav_point_dublicate_message">Difinita nomo de ŝatata punkto estas jam uzata, ĝi estas ŝanĝita al %1$s por eviti duplikatadon.</string>
-    <string name="text_size_descr">Agordu grandon de teksto sur la mapo.</string>
+    <string name="text_size_descr">Agordi grandon de teksto sur la mapo.</string>
     <string name="text_size">Teksta grando</string>
     <string name="traffic_warning_border_control">Landlima kontrolado</string>
     <string name="traffic_warning_payment">Vojpagejo</string>
@@ -682,35 +682,35 @@ Registritaj kursoj povas esti kunhavigitaj kun viaj amikoj aŭ esti uzita por ko
     <string name="stop_navigation_service">Ĉesigi</string>
     <string name="confirm_every_run">Demandi ĉiam</string>
     <string name="save_global_track_interval">Ĝenerala registrada intervalo</string>
-    <string name="save_global_track_interval_descr">Elektu intervalon de registrado por ĝenerala registrado de kurso (aktivigita per la GPX-registrada fenestraĵo sur la mapo)</string>
+    <string name="save_global_track_interval_descr">Elekti intervalon de registrado por ĝenerala registrado de kurso (aktivigita per la GPX-registrada fenestraĵo sur la mapo)</string>
     <string name="background_service_int">GPS-a vekintervalo</string>
     <string name="enable_sleep_mode">Aktivigi GPS-an fonan reĝimon</string>
-    <string name="save_track_to_gpx_globally">Registri kurson al GPX-dosiero</string>
-    <string name="save_track_to_gpx_globally_headline">Registri kurson laŭpete</string>
-    <string name="save_track_to_gpx_globally_descr">Ĝeneralan registradon de pozicio al GPX-dosiero oni povas mal-/aktivigi uzante GPX-registradan fenestraĵon sur mapekrano</string>
-    <string name="save_current_track_descr">Konservas aktualan kurson al memorkarto</string>
+    <string name="save_track_to_gpx_globally">Registri spuron al GPX-dosiero</string>
+    <string name="save_track_to_gpx_globally_headline">Registri spuron laŭpete</string>
+    <string name="save_track_to_gpx_globally_descr">Ĝeneralan registradon de pozicio al GPX-dosiero oni povas mal-/aktivigi per GPX-registrada fenestraĵo sur la mapekrano</string>
+    <string name="save_current_track_descr">Konservi aktualan kurson al memorkarto</string>
     <string name="save_current_track">Konservi aktualan GPX-kurson</string>
-    <string name="save_track_to_gpx">Registri kurson al GPX-dosieron dum navigado</string>
-    <string name="save_track_to_gpx_descrp">Konservas kurson al dosierujo de kursoj dum navigado</string>
+    <string name="save_track_to_gpx">Registri spuron al GPX-dosieron dum navigado</string>
+    <string name="save_track_to_gpx_descrp">Konservi spuron al dosierujo de spuroj dum navigado</string>
     <string name="save_track_interval_globally">Registrada intervalo</string>
     <string name="save_track_interval">Registrada intervalo dum navigado</string>
-    <string name="save_track_interval_descr">Elektu intervalo de registrado por kursoj dum navigado</string>
+    <string name="save_track_interval_descr">Elektu intervalo de registrado por spuroj dum navigado</string>
     <string name="voice_provider_descr">Elektu gvidadan voĉon por navigado</string>
     <string name="voice_provider">Gvidada voĉo</string>
 
     <string name="enable_proxy_title">Aktivigi HTTP-prokurilon</string>
-    <string name="enable_proxy_descr">Agordu HTTP-prokurilon por ĉiuj retpetoj</string>
+    <string name="enable_proxy_descr">Agordi HTTP-prokurilon por ĉiuj retpetoj</string>
     <string name="proxy_host_title">Prokurila komputil-nomo</string>
-    <string name="proxy_host_descr">Agordu komputil-nomon de via prokurilo (ekz. 127.0.0.1)</string>
+    <string name="proxy_host_descr">Agordi komputil-nomon de via prokurilo (ekz. 127.0.0.1)</string>
     <string name="proxy_port_title">Prokurila pordo</string>
-    <string name="proxy_port_descr">Agordu pordan numeron de via prokurilo (ekz. 8118)</string>
-    <string name="monitoring_settings">Registrado de kurso</string>
-    <string name="monitoring_settings_descr">Agordu kiamaniere registri viajn kursojn</string>
+    <string name="proxy_port_descr">Agordi pordan numeron de via prokurilo (ekz. 8118)</string>
+    <string name="monitoring_settings">Registrado de spuro</string>
+    <string name="monitoring_settings_descr">Agordi kiel registri spurojn</string>
     <string name="duration">Daŭro</string>
     <string name="distance">Distanco</string>
     <string name="announce_gpx_waypoints">GPX-aj navigadpunktoj</string>
     <string name="download_additional_maps">Ĉu elŝuti mankajn mapojn de %1$s (%2$d MB)?</string>
-    <string name="rendering_value_browse_map_name">Esplori mapon</string>
+    <string name="rendering_value_browse_map_name">Foliumi mapon</string>
     <string name="rendering_value_car_name">Aŭto</string>
     <string name="rendering_value_bicycle_name">Biciklo</string>
     <string name="rendering_value_pedestrian_name">Piediranto</string>
@@ -718,20 +718,20 @@ Registritaj kursoj povas esti kunhavigitaj kun viaj amikoj aŭ esti uzita por ko
     <string name="rendering_attr_coloredBuildings_name">Kolor-kodigi domojn laŭspece</string>
     <string name="osmo_leave_confirmation_msg">Ĉu vi volas forlasi grupon %1$s?</string>
     <string name="continue_navigation">Pluigi navigadon</string>
-    <string name="pause_navigation">Paŭzi navigadon</string>
+    <string name="pause_navigation">Paŭzigi navigadon</string>
     <string name="keep_navigation_service">Daŭrigi</string>
-    <string name="map_preferred_locale_descr">Preferata lingvo por etikedoj sur la mapo (se neakirebla, oni elektos anglan aŭ lokan nomon)</string>
+    <string name="map_preferred_locale_descr">Preferata lingvo por etikedoj sur la mapo (se neakirebla, oni elektos lokan nomon)</string>
     <string name="map_preferred_locale">Preferata lingvo de mapoj</string>
     <string name="local_map_names">Lokaj nomoj</string>
     <string name="forward">Antaŭen</string>
     <string name="home">Stirpanelo</string>
-    <string name="live_monitoring_m">Enreta kurs-registrado (GPX bezonata)</string>
-    <string name="live_monitoring_m_descr">Sendas datumojn de kursoj al difinita retservo se GPX-registrado estas aktiva.</string>
+    <string name="live_monitoring_m">Enreta spur-registrado (GPX bezonata)</string>
+    <string name="live_monitoring_m_descr">Sendas datumojn de spuroj al difinita retservo se GPX-registrado estas aktiva.</string>
     <string name="live_monitoring_start">Ekigi enretan kurs-registradon</string>
     <string name="gpx_monitoring_start">Ekigi GPX-registradon</string>
     <string name="live_monitoring_stop">Ĉesigi enretan kurs-registradon</string>
     <string name="gpx_monitoring_stop">Ĉesigi GPX-registradon</string>
-    <string name="gpx_start_new_segment">Ekigi novan sekcion</string>
+    <string name="gpx_start_new_segment">Ekigi novan segmenton</string>
     <string name="rendering_attr_hideBuildings_name">Konstruaĵoj</string>
     <string name="rendering_attr_hideNonVehicleHighways_name">Vojoj ne por aŭtoj</string>
     <string name="rendering_attr_hideText_name">Priskriboj</string>
@@ -761,14 +761,14 @@ Registritaj kursoj povas esti kunhavigitaj kun viaj amikoj aŭ esti uzita por ko
     <string name="srtm_paid_version_title">Nivelkurba kromprogramo</string>
     <string name="osmand_srtm_short_description_80_chars">OsmAnd-kromprogramo por desegni nivelkurbojn eksterrete</string>
 	<string name="srtm_plugin_name">Nivelkurboj</string>
-	<string name="osmand_srtm_long_description_1000_chars">"Tiu ĉi kromprogramo ebligas vidigi kaj tavolon de nivelkurboj kaj tavolon de nivel-ombrumo (reliefo) supre normaj OsmAnd-mapoj. Tiu ĉi eblo estas dezirata de atletoj, migrantoj, turistoj, kaj ĉiuj scivolaj en reliefa strukturo de lando.
+	<string name="osmand_srtm_long_description_1000_chars">"Tiu ĉi kromprogramo ebligas vidigi kaj tavolon de nivelkurboj kaj tavolon de nivel-ombrumo (reliefo) supre normaj OsmAnd-mapoj. Tiu ĉi eblo estas dezirata de atletoj, migrantoj, turistoj kaj ĉiuj scivolaj en reliefa strukturo de tero.
 
 
-La mondaj datumoj (inter 70-a norda kaj 70-a suda grado de latitudo) estas bazitaj sur mezuroj de la SRTM (Shuttle Radar Topography Mission) kaj de la ASTER (Advanced Spaceborne Thermal Emission and Reflection Radiometer), bildiga aparato en la Terra - ĉefa sputniko de Sistemo de Tera Observado de NASA. ASTER estas kunlaboraĵo de NASA, de Japana Ministerio pri Ekonomio, Komerco kaj Industrio (METI) kaj de Japanaj Spacaj Sistemoj (J-spacesystems).
+La mondaj datumoj (inter 70-a norda kaj 70-a suda grado de latitudo) estas bazitaj sur mezuroj de SRTM (Shuttle Radar Topography Mission) kaj de ASTER (Advanced Spaceborne Thermal Emission and Reflection Radiometer), bildiga aparato en la Terra - ĉefa satelito de Sistemo de Tera Observado de NASA. ASTER estas kunlaboraĵo de NASA, de Japana Ministerio pri Ekonomio, Komerco kaj Industrio (METI) kaj de Japanaj Spacaj Sistemoj (J-spacesystems).
  "</string>
-    <string name="srtm_plugin_description">"Tiu ĉi kromprogramo ebligas vidigi kaj tavolon de nivelkurboj kaj tavolon de nivel-ombrumo (reliefo) supre normaj OsmAnd-mapoj. Tiu ĉi eblo estas dezirata de atletoj, migrantoj, turistoj, kaj ĉiuj scivolaj en reliefa strukturo de lando. (Bonvolu rimarki, ke datumoj de nivelkurboj kaj nivel-ombrumo estas elŝuteblaj aparte post instalado de kromprogramo.)
+    <string name="srtm_plugin_description">"Tiu ĉi kromprogramo ebligas vidigi kaj tavolon de nivelkurboj kaj tavolon de nivel-ombrumo (reliefo) supre normaj OsmAnd-mapoj. Tiu ĉi eblo estas dezirata de atletoj, migrantoj, turistoj, kaj ĉiuj scivolaj en reliefa strukturo de tero. (Bonvolu rimarki, ke datumoj de nivelkurboj kaj nivel-ombrumo estas elŝuteblaj aparte post instalado de kromprogramo.)
 
-La mondaj datumoj (inter 70-a norda kaj 70-a suda grado de latitudo) estas bazitaj sur mezuroj de la SRTM (Shuttle Radar Topography Mission) kaj de la ASTER (Advanced Spaceborne Thermal Emission and Reflection Radiometer), bildiga aparato en la Terra - ĉefa sputniko de Sistemo de Tera Observado de NASA. ASTER estas kunlaboraĵo de NASA, de Japana Ministerio pri Ekonomio, Komerco kaj Industrio (METI) kaj de Japanaj Spacaj Sistemoj (J-spacesystems).
+La mondaj datumoj (inter 70-a norda kaj 70-a suda grado de latitudo) estas bazitaj sur mezuroj de la SRTM (Shuttle Radar Topography Mission) kaj de la ASTER (Advanced Spaceborne Thermal Emission and Reflection Radiometer), bildiga aparato en la Terra - ĉefa satelito de Sistemo de Tera Observado de NASA. ASTER estas kunlaboraĵo de NASA, de Japana Ministerio pri Ekonomio, Komerco kaj Industrio (METI) kaj de Japanaj Spacaj Sistemoj (J-spacesystems).
  "</string>
     <string name="no_index_file_to_download">Elŝutoj ne trovitaj, bonvolu kontroli vian retkonekton.</string>
     <string name="select_index_file_to_download">Trovis nenion. Se vi ne povas trovi vian regionon, vi povas fari ĝin mem (rigardu http://osmand.net).</string>
@@ -777,7 +777,7 @@ La mondaj datumoj (inter 70-a norda kaj 70-a suda grado de latitudo) estas bazit
     <string name="gpx_split_interval">Divid-intervalo</string>
     <string name="sort_by_distance">Ordigi laŭ distanco</string>
     <string name="sort_by_name">Ordigi laŭ nomo</string>
-    <string name="plugin_touringview_name">Turisma mapa vido</string>
+    <string name="plugin_touringview_name">Turisma map-vido</string>
 	<string name="plugin_touringview_descr">"Aktivigo de tiu ĉi ŝanĝas OsmAnd-an mapan vidmanieron al \'Turisma vido\', tiu ĉi estas speciala altdetala vido por vojaĝantoj kaj aŭtistoj.
 
 
@@ -885,7 +885,7 @@ Premtenu por vidi sur la mapo</string>
     <string name="osmo_group">Grupo OsMo</string>
     <string name="osmo_group_share">Por konekti la grupon %2$s difinu grupan identigilon aŭ alklaku %3$s.</string>
     <string name="osmo_share_connect_device">Permesu por permanenta spurado de tiu ĉi aparato</string>
-    <string name="osmo_share_current_session">Kunhavigi nuntempan seancon per retumilo</string>
+    <string name="osmo_share_current_session">Kunhavigi nuntempan seancon per ret-foliumilo</string>
     <string name="osmo_share_session">Kunhavigi seancon</string>
     <string name="osmo_session_not_available">Seanco ne disponebla, bonvolu kontroli ĉu \'Sendi poziciojn\' estas ŝaltita.</string>
     <string name="osmo_show_group_notifications">Montri atentigojn pri grupo</string>
@@ -1065,7 +1065,7 @@ Premtenu por vidi sur la mapo</string>
     <string name="route_via">Tra:</string>
     <string name="route_from">El:</string>
 
-    <string name="app_mode_default">Esplori mapon</string>
+    <string name="app_mode_default">Foliumi mapon</string>
     <string name="settings_preset">Ĉefa profilo</string>
     <string name="settings_preset_descr">Map-vido kaj navigadaj agordoj estas memoritaj aparte por ia profilo de uzado. Agordu vian implicitan profilon tie ĉi.</string>
     <string name="destination_point">Celo %1$s</string>
@@ -1117,7 +1117,7 @@ Premtenu por vidi sur la mapo</string>
     <string name="osmand_background_plugin_description">Montras agordojn pri aktivigi spuradon kaj navigadon fone (malaktiva ekrano) per periode aktivanta GPS-on.</string>
     <string name="contribution_activity">Instaleblaj versioj</string>
     <string name="accessibility_options">Alireblecaj agordoj</string>
-    <string name="osmand_accessibility_description">Tiu ĉi kromprogramo ebligas uzi alireblecajn ilojn senpere en OsmAnd. Ĝi plifaciligas ekz. agordi rapidon de parolsintezitaj dialogaj helpoj, uzi montrilo-butonojn por navigado sur ekrano, uzi stirglobon por skalado, aŭ uzi teksto-al-parolajn sciigojn ekz. por aŭtomate anonci vian pozicion.</string>
+    <string name="osmand_accessibility_description">Tiu ĉi kromprogramo ebligas uzi alireblecajn ilojn senpere en OsmAnd. Ĝi plifaciligas ekz. agordi rapidon de parolsintezitaj dialogaj helpoj, uzi montril-butonojn por navigado sur ekrano, uzi stirglobon por skalado, aŭ uzi teksto-al-parolajn sciigojn ekz. por aŭtomate anonci vian pozicion.</string>
     <string name="select_address_activity">Elekti adreson</string>
     <string name="favourites_list_activity">Elekti ŝatatan</string>
     <string name="local_openstreetmap_act_title">Modifoj de OSM</string>
@@ -1176,7 +1176,7 @@ Premtenu por vidi sur la mapo</string>
     <string name="recording_default_name">Registraĵo</string>
     <string name="map_widget_av_notes">Sonaj/videaj notoj</string>
     <string name="audionotes_plugin_name">Sonaj/videaj notoj</string>
-    <string name="audionotes_plugin_description">La Sonaj/videaj notoj kromprogramo ebligas fari bildajn/sonajn/videajn notojn dum ekskurso, uzante aŭ butonon sur la mapekrano, aŭ senpere kuntekstan menuon por iu ajn pozicio sur la mapo.</string>
+    <string name="audionotes_plugin_description">Tiu ĉi kromprogramo ebligas krei bildajn/sonajn/videajn notojn dum ekskurso, uzante aŭ butonon sur la mapekrano, aŭ senpere kuntekstan menuon por ajna pozicio sur la mapo.</string>
     <string name="map_widget_distancemeasurement">Mezuro de distanco</string>
     <string name="map_widget_audionotes">Sonaj notoj</string>
     <string name="index_srtm_parts">partoj</string>
@@ -1699,7 +1699,7 @@ Proporcia memoro %4$s MB (Limito de Android %5$s MB, Dalvik %6$s MB).</string>
     <string name="access_direction_haptic_feedback_descr">Montri direkton al celo per vibrado</string>
     <string name="lang_ast">Asturia</string>
     <string name="plugin_nautical_name">Mara map-vido</string>
-	<string name="plugin_nautical_descr">"Tiu ĉi kromprogramo ebligas uzi marajn mapojn por boatado, velado, kaj aliaj akvosportoj.
+	<string name="plugin_nautical_descr">"Tiu ĉi kromprogramo ebligas uzi marajn mapojn por boatado, velado kaj aliaj akvosportoj.
 
 
 Speciala map-aldonaĵo al OsmAnd aldonas navigadajn punktojn kaj markojn por enlanda kaj apudborda navigado. Priskribo por iu ajn navigadpunkto liveras detalojn bezonatajn por identigi ilin kiel: kategorio, formo, koloro, vicsekvo, referenco, ktp.
@@ -1714,9 +1714,9 @@ Por reveni al unu de normaj mapaj aspektoj de OsmAnd, simple aŭ malaktivigi la 
 Aktivigo de tiu ĉi map-vido ŝanĝas map-aspekton al \'Vintro kaj skiado\', montranta ĉiun terenon kovritan de neĝo. La vido oni povas malaktivigi, per malaktivigo la kromprogramon tie ĉi, aŭ per ŝanĝo de \'Map-aspekto\' en \'Agordi mapon\'.
  "</string>
     <string name="osmand_parking_plugin_name">Parkumeja pozicio</string>
-	<string name="osmand_parking_plugin_description">La Parkumeja pozicio kromprogramo plifaciligas al vi memori kie via aŭto estas parkumata kaj kiom da parkumeja tempo restas (se ĝi estas limigita).
+	<string name="osmand_parking_plugin_description">Tiu ĉi kromprogramo plifaciligas al vi memori kie via aŭto estas parkumata kaj kiom da parkumeja tempo restas (se ĝi estas limigita).
 
-Kaj la loko kaj tempo estas montrataj ĉe la OsmAnd stirpanelo, kaj ĉe la fenestraĵo sur la mapekrano. Memorigo povas esti aldonita al la androida kalendaro.</string>
+Kaj la loko kaj tempo estas montrataj en la OsmAnd-a stirpanelo, kaj sur la fenestraĵo sur la mapekrano. Memorigo povas esti aldonita al la Androida kalendaro.</string>
     <string name="osmand_distance_planning_plugin_name">Kalkulilo de distanco kaj planilo</string>
     <string name="osmand_distance_planning_plugin_description">Tiu ĉi kromprogramo liveras mapekranan fenestraĵon por krei kursojn tuŝante sur la mapo, aŭ por uzi aŭ modifi ekzistajn GPX-dosierojn por plani ekskurson aŭ mezuri distancon inter punktoj. Rezultoj povas esti konservitaj kiel GPX-dosieroj, kiuj oni povas estonte uzi por gvidado.</string>
     <string name="osm_settings">OSM redaktado</string>
@@ -1742,7 +1742,7 @@ Kaj la loko kaj tempo estas montrataj ĉe la OsmAnd stirpanelo, kaj ĉe la fenes
     <string name="mile">mi</string>
     <string name="send_location_way_choose_title">Kunhavigi lokon per</string>
     <string name="send_location_sms_pattern">Loko: %1$s\n%2$s</string>
-    <string name="send_location_email_pattern">Por vidi lokon, malfermu retumilan ligilon %1$s aŭ androidan ligilon %2$s</string>
+    <string name="send_location_email_pattern">Por vidi lokon, malfermu ret-foliumilan ligilon %1$s aŭ Androidan ligilon %2$s</string>
     <string name="send_location">Sendi lokon</string>
     <string name="context_menu_item_share_location">Kunhavigi lokon</string>
     <string name="add_waypoint_dialog_added">GPX-navigadpunkto \"{0}\" aldonita sukcese</string>
@@ -2624,7 +2624,7 @@ kaj pli…
     <string name="navigate_point_olc_info_invalid">Erara OLC
 </string>
     <string name="navigate_point_olc_info_short">Mallonga OLC
-Bonvolo enigi plenan kodon</string>
+Bonvolu enigi plenan kodon</string>
     <string name="navigate_point_olc_info_area">"Ĝusta plena OLC
 Indikas lokon:  %1$s x %2$s"</string>
     <string name="quick_action_page_list_descr">Premado sur la ag-butono foliumos tra la jena listo.</string>
