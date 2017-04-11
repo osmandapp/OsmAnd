@@ -1124,7 +1124,7 @@ public class RouteResultPreparation {
 			List<int[]> lanesInfo, int roads, int addRoads) {
 		int activeStartIndex = -1;
 		boolean lookupSlightTurn = addRoads > 0;
-		Set<String> addedTurns = new TreeSet<String>();
+		TIntHashSet addedTurns = new TIntHashSet();
 		// if we have information increase number of roads per each turn direction
 		int diffTurnRoads = roads;
 		int increaseTurnRoads = 0;
@@ -1145,7 +1145,7 @@ public class RouteResultPreparation {
 				String[] laneTurns = splitLaneOptions[ind].split(";");
 				int cnt = 0;
 				for(String lTurn : laneTurns) {
-					boolean added = addedTurns.add(lTurn);
+					boolean added = addedTurns.add(TurnType.convertType(lTurn));
 					if(added) {
 						cnt++;
 						diffTurnRoads --;
@@ -1361,31 +1361,7 @@ public class RouteResultPreparation {
 			String[] laneOptions = splitLaneOptions[i].split(";");
 			boolean isTertiaryTurn = false;
 			for (int j = 0; j < laneOptions.length; j++) {
-				int turn;
-				if (laneOptions[j].equals("none") || laneOptions[j].equals("through")) {
-					turn = TurnType.C;
-					
-				} else if (laneOptions[j].equals("slight_right") || 
-						laneOptions[j].equals("merge_to_right")) {
-					turn = TurnType.TSLR;
-				} else if (laneOptions[j].equals("slight_left") || 
-						laneOptions[j].equals("merge_to_left")) {
-					turn = TurnType.TSLL;
-				} else if (laneOptions[j].equals("right")) {
-					turn = TurnType.TR;
-				} else if (laneOptions[j].equals("left")) {
-					turn = TurnType.TL;
-				} else if (laneOptions[j].equals("sharp_right")) {
-					turn = TurnType.TSHR;
-				} else if (laneOptions[j].equals("sharp_left")) {
-					turn = TurnType.TSHL;
-				} else if (laneOptions[j].equals("reverse")) {
-					turn = TurnType.TU;
-				} else {
-					// Unknown string
-					turn = TurnType.C;
-//					continue;
-				}
+				int turn = TurnType.convertType(laneOptions[j]);
 
 				final int primary = TurnType.getPrimaryTurn(lanes[i]);
 				if (primary == 0) {
