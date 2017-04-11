@@ -2101,7 +2101,7 @@
 	<string name="poi_shoes_orthopedic">矯形鞋</string>
 
 	<string name="poi_historic_manor">歷史上著名宅邸</string>
-	<string name="poi_castle_type_stately">城堡型式：莊嚴的</string>
+	<string name="poi_castle_type_stately">城堡型式：莊嚴</string>
 	<string name="poi_castle_type_defensive">城堡型式：防禦</string>
 	<string name="poi_castle_type_fortress">城堡型式：堡壘</string>
 	<string name="poi_castle_type_palace">城堡型式：宮殿</string>
@@ -2459,11 +2459,11 @@
 	<string name="poi_massage_type">按摩類型</string>
 	<string name="poi_payment_transport_type">支付型式（運輸）</string>
 	<string name="poi_social_facility_type">類型</string>
-	<string name="poi_megalith_type_menhir">巨石類別︰巨柱</string>
-	<string name="poi_megalith_type_dolmen">巨石類別︰桌形石</string>
-	<string name="poi_megalith_type_nuraghe">巨石類別︰塔狀</string>
-	<string name="poi_megalith_type_stone_circle">巨石類別︰石環</string>
-	<string name="poi_megalith_type_passage_grave">巨石類別︰走廊墳墓</string>
+	<string name="poi_megalith_type_menhir">巨石類型︰巨柱</string>
+	<string name="poi_megalith_type_dolmen">巨石類型︰桌形石</string>
+	<string name="poi_megalith_type_nuraghe">巨石類型︰塔狀</string>
+	<string name="poi_megalith_type_stone_circle">巨石類型︰石環</string>
+	<string name="poi_megalith_type_passage_grave">巨石類型︰走廊墳墓</string>
 	<string name="poi_city_capital">首都</string>
 	<string name="poi_pharmacy_dispensing">配藥</string>
 	<string name="poi_healthcare_alternative_types">專門的</string>
@@ -2483,9 +2483,9 @@
 	<string name="poi_smoking">吸煙</string>
 	<string name="poi_delivery">遞送</string>
 	<string name="poi_gambling_type">類別</string>
-	<string name="poi_pump_type_gravity">泵浦的類別︰重力</string>
-	<string name="poi_public_bookcase_type_phone_box">類別︰電話亭</string>
-	<string name="poi_public_bookcase_type_reading_box">類別︰讀本盒</string>
+	<string name="poi_pump_type_gravity">泵浦類型︰重力</string>
+	<string name="poi_public_bookcase_type_phone_box">類型︰電話亭</string>
+	<string name="poi_public_bookcase_type_reading_box">類型︰讀本盒</string>
 	<string name="poi_drive_in">免下車服務</string>
 	<string name="poi_drive_through">得來速</string>
 	<string name="poi_takeaway">外帶</string>
@@ -2548,25 +2548,25 @@
 	<string name="poi_site_type_necropolis">大型墓地</string>
 	<string name="poi_site_type_petroglyph">岩石畫</string>
 	<string name="poi_site_type_earthwork">土木工程</string>
-	<string name="poi_fortification_type_hill_fort">防禦類別︰土堡</string>
-	<string name="poi_fortification_type_limes">防禦類別︰邊防線</string>
-	<string name="poi_fortification_type_sconce">防禦類別︰掩蔽物</string>
-	<string name="poi_fortification_type_ring_ditch">防禦類別︰環狀溝</string>
+	<string name="poi_fortification_type_hill_fort">防禦類型︰土堡</string>
+	<string name="poi_fortification_type_limes">防禦類型︰邊防線</string>
+	<string name="poi_fortification_type_sconce">防禦類型︰掩蔽物</string>
+	<string name="poi_fortification_type_ring_ditch">防禦類型︰環狀溝</string>
 
 	<string name="poi_historic_farm">歷史農場</string>
 	<string name="poi_square">廣場</string>
 	<string name="poi_artist_name">藝術家</string>
 	<string name="poi_sculptor">雕刻家</string>
 
-	<string name="poi_building_type_church">建築類別︰教堂</string>
-	<string name="poi_building_type_chapel">建築類別︰小教堂</string>
-	<string name="poi_building_type_mosque">建築類別︰清真寺</string>
-	<string name="poi_building_type_temple">建築類別︰寺廟</string>
-	<string name="poi_building_type_cathedral">建築類別︰主教堂</string>
-	<string name="poi_building_type_monastery">建築類別︰修道院</string>
-	<string name="poi_building_type_basilica">建築類別︰大教堂</string>
-	<string name="poi_building_type_synagogue">建築類別︰猶太教堂</string>
-	<string name="poi_building_type_shrine">建築類別︰聖陵</string>
+	<string name="poi_building_type_church">建築類型︰教堂</string>
+	<string name="poi_building_type_chapel">建築類型︰小教堂</string>
+	<string name="poi_building_type_mosque">建築類型︰清真寺</string>
+	<string name="poi_building_type_temple">建築類型︰寺廟</string>
+	<string name="poi_building_type_cathedral">建築類型︰主教堂</string>
+	<string name="poi_building_type_monastery">建築類型︰修道院</string>
+	<string name="poi_building_type_basilica">建築類型︰大教堂</string>
+	<string name="poi_building_type_synagogue">建築類型︰猶太教堂</string>
+	<string name="poi_building_type_shrine">建築類型︰聖陵</string>
 
 	<string name="poi_cross">十字架</string>
 	<string name="poi_summit_cross">山頂十字架︰是的</string>
@@ -2576,11 +2576,11 @@
 
 <string name="poi_electronics_repair_computer">電子維修︰電腦</string>
 	<string name="poi_electronics_repair_appliance">電子維修︰裝置</string>
-	<string name="poi_concentration_camp">類別︰集中營</string>
-	<string name="poi_pow_camp">類別︰戰俘營</string>
-	<string name="poi_labor_camp">類別︰勞改營</string>
-	<string name="poi_concentration_camp_nazism">類別︰納粹</string>
-	<string name="poi_concentration_camp_gulag">類別︰古拉格</string>
+	<string name="poi_concentration_camp">類型︰集中營</string>
+	<string name="poi_pow_camp">類型︰戰俘營</string>
+	<string name="poi_labor_camp">類型︰勞改營</string>
+	<string name="poi_concentration_camp_nazism">類型︰納粹</string>
+	<string name="poi_concentration_camp_gulag">類型︰古拉格</string>
 
 	<string name="poi_temperature">温度</string>
 	<string name="poi_bathing_yes">沐浴︰是的</string>
@@ -2627,4 +2627,21 @@
 
 	<string name="poi_drink_wine_yes">酒︰是的</string>
 	<string name="poi_drink_wine_retail">酒︰零售</string>
+	<string name="poi_building_type_pyramid">建築類型︰金字塔</string>
+
+	<string name="poi_parking_surface">類型︰外表</string>
+	<string name="poi_nuclear_explosion_type_underground_shaft">爆炸類型︰地下、礦井</string>
+	<string name="poi_nuclear_explosion_type_underground_tunnel">爆炸類型︰地下，隧道</string>
+	<string name="poi_nuclear_explosion_type_atmospheric">爆炸類型︰大氣中</string>
+	<string name="poi_nuclear_explosion_type_atmospheric_airdrop">爆炸類型︰大氣中，空投</string>
+	<string name="poi_nuclear_explosion_type_atmospheric_surface_tower">爆炸類型︰大氣中，表面，塔</string>
+	<string name="poi_pump_type_beam_pump">泵浦類型︰搖臂泵浦</string>
+	<string name="poi_pump_type_india_mk_2_3">泵浦類型︰印度 Mk II 或 III&gt;</string>
+	<string name="poi_public_bookcase_type_wooden_cabinet">類型︰木製櫥櫃</string>
+	<string name="poi_public_bookcase_type_metal_cabinet">類型︰金屬櫥櫃</string>
+	<string name="poi_public_bookcase_type_shelf">類型︰架子</string>
+
+	<string name="poi_animal_keeping_type_paddock">類型︰圍場</string>
+	<string name="poi_animal_keeping_type_open_stable">類型︰ 開放馬廄</string>
+
 	</resources>
