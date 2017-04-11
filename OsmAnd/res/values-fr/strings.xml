@@ -2992,4 +2992,5 @@ Fonctionnalités principales :
     <string name="nothing_found">Aucun résultat</string>
     <string name="increase_search_radius">Augmenter le rayon de recherche</string>
     <string name="nothing_found_descr">Modifiez les critères de recherche ou augmentez le rayon de recherche</string>
+    <string name="private_access_routing_req">Votre destination se situe dans une zone privée. Souhaitez-vous autoriser l\'accès aux zones privées pour cet itinéraire ?</string>
     </resources>
