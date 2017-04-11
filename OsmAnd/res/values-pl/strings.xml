@@ -2994,4 +2994,8 @@ Od Afganistanu po Zimbabwe, przez Australię po USA. Argentyna, Brazylia, Kanada
  "</string>
     <string name="sorted_by_distance">Posortowane wg odległości</string>
     <string name="quick_action_showhide_osmbugs_descr">Przełącza wyświetlanie uwag OSM na mapie.</string>
+    <string name="restart_search">Rozpocznij ponownie wyszukiwanie</string>
+    <string name="increase_search_radius">Zwiększ promień wyszukiwania</string>
+    <string name="nothing_found">Nic nie odnaleziono :(</string>
+    <string name="nothing_found_descr">Proszę spróbować zmienić zapytanie lub zwiększyć promień wyszukiwania</string>
     </resources>
