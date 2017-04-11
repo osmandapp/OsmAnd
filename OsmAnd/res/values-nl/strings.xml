@@ -3039,4 +3039,5 @@ Van bijna alle landen is een kaart te downloaden: van Afghanistan tot Zimbabwe, 
     <string name="quick_action_osmbugs_show">Toon OSM-opmerkingen</string>
     <string name="quick_action_osmbugs_hide">Verberg OSM-opmerkingen</string>
     <string name="quick_action_showhide_osmbugs_descr">Een druk op de sneltoets toont of verbergt OSM-opmerkingen.</string>
+    <string name="sorted_by_distance">Gesorteerd op afstand</string>
     </resources>
