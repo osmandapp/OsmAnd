@@ -386,7 +386,7 @@ public class QuickSearchListItem {
 						iconId = app.getResources().getIdentifier(iconName, "drawable", app.getPackageName());
 					}
 				}
-				if (iconId <= 0) {
+				if (iconId <= 1) {
 					return app.getIconsCache().getIcon(SearchHistoryFragment.getItemIcon(entry.getName()),
 							app.getSettings().isLightContent() ? R.color.osmand_orange : R.color.osmand_orange_dark);
 				} else {
