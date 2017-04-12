@@ -397,7 +397,7 @@
     <string name="live_monitoring_interval">Интервал онлайн слежения</string>
     <string name="live_monitoring_url_descr">Укажите веб-адрес со следующими параметрами: lat={0}, lon={1}, timestamp={2}, hdop={3}, altitude={4}, speed={5}, bearing={6}</string>
     <string name="live_monitoring_url">Web адрес онлайн слежения</string>
-    <string name="gpx_monitoring_disabled_warn">Записывать треки используя GPX виджет или выбрав \"Запись поездки\" в Настройках.</string>
+    <string name="gpx_monitoring_disabled_warn">Записать трек можно с помощью GPX виджета или выбрав \"Запись поездки\" в Настройках.</string>
     <string name="show_current_gpx_title">Показывать текущий путь</string>
     <string name="free_version_message">Бесплатная версия OsmAnd ограничена %1$s загрузками и не поддерживает геостатьи из wikipedia.</string>
     <string name="free_version_title">Бесплатная версия</string>
