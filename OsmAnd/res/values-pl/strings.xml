@@ -2836,7 +2836,7 @@ Reprezentuje obszar: %1$s x %2$s</string>
  • Obsługa otwartych kodów lokalizacyjnych (OLC)
 
 
- • Wyświetlanie profilu terenu dla nagranego śladu GPX (także prędkość) i dla wytyczonych tras
+ • Wyświetlanie wysokości, nachylenia i profilu prędkości dla nagranych śladów GPX i wyznaczonych tras
 
 
  • Ustawienie \'Styl jazdy\' i logiczne ulepszenia w wytyczaniu tras rowerowych
@@ -2882,20 +2882,20 @@ Reprezentuje obszar: %1$s x %2$s</string>
     <string name="points_delete_multiple_succesful">Usunięto punkty.</string>
     <string name="points_delete_multiple">Zostanie usuniętych %1$d punktów. Kontynuować?</string>
     <string name="track_points_category_name">Ważne punkty tej trasy</string>
-    <string name="route_points_category_name">Punkty na trasie do zaliczenia</string>
+    <string name="route_points_category_name">Zakręty na tej trasie</string>
     <string name="add_new_folder">Dodaj nowy katalog</string>
     <string name="shared_string_slope">Nachylenie</string>
     <string name="lang_ber">Berberyjski</string>
-    <string name="relief_smoothness_factor_descr">Preferuj wzgórza lub równiny</string>
+    <string name="relief_smoothness_factor_descr">Preferuj teren: płaski lub górzysty</string>
     <string name="routing_attr_relief_smoothness_factor_hills_name">Górzysty</string>
-    <string name="routing_attr_relief_smoothness_factor_plains_name">Płaski</string>
-    <string name="routing_attr_relief_smoothness_factor_more_plains_name">Bardziej płaski</string>
+    <string name="routing_attr_relief_smoothness_factor_plains_name">Mniej górzysty</string>
+    <string name="routing_attr_relief_smoothness_factor_more_plains_name">Płaski</string>
     <string name="routing_attr_driving_style_speed_name">Szybki</string>
     <string name="routing_attr_driving_style_balance_name">Zrównoważony</string>
     <string name="routing_attr_driving_style_safety_name">Bezpieczny</string>
-    <string name="routing_attr_relief_smoothness_factor_name">Współczynnik gładkości cieniowania terenu</string>
+    <string name="routing_attr_relief_smoothness_factor_name">Wybierz gładkość cieniowanie rzeźby terenu</string>
     <string name="do_not_send_anonymous_app_usage">Nie wysyłaj anonimowych statystyk użytkowania</string>
-    <string name="do_not_send_anonymous_app_usage_desc">OsmAnd wysyła ogólne informacje dotyczące użytkowania ekranu podczas sesji. Nie zbieramy jakichkolwiek danych lokalizacyjnych i danych wpisywanych przez użytkownika.</string>
+    <string name="do_not_send_anonymous_app_usage_desc">OsmAnd zbiera informacje o tym, z których części aplikacji korzysta użytkownik. Twoja lokalizacja nie jest nigdy wysyłana, tak jak teksty wpisywane w aplikacji i szczegóły dotyczące przeglądanych, wyszukiwanych i pobieranych obszarów.</string>
     <string name="do_not_show_startup_messages">Nie pokazuj wiadomości przy starcie</string>
     <string name="do_not_show_startup_messages_desc">Wyświetla wiadomości dotyczące rabatów i specjalnych wydarzeń lokalnych</string>
     <string name="parking_options">Opcje parkowania</string>
@@ -2970,9 +2970,9 @@ Reprezentuje obszar: %1$s x %2$s</string>
     <string name="shared_string_plugin">Wtyczka</string>
     <string name="srtm_menu_download_descr">Aby wyświetlić poziomice na mapie, należy pobrać mapę poziomic tego obszaru.</string>
     <string name="hide_from_zoom_level">Ukrywanie od stopnia przybliżenia</string>
-    <string name="hillshade_purchase_header">Aby wyświetlić cieniowanie rzeźby terenu, należy zakupić i zainstalować wtyczkę.</string>
-    <string name="hillshade_menu_download_descr">Aby wyświetlić cieniowanie rzeźby terenu, należy pobrać specjalną mapę tego obszaru.</string>
-    <string name="srtm_purchase_header">Aby wyświetlić poziomice na mapie, należy zakupić i zainstalować wtyczkę.</string>
+    <string name="hillshade_purchase_header">Aby wyświetlić cieniowanie rzeźby terenu, należy zakupić i zainstalować wtyczkę \'Poziomice\'</string>
+    <string name="hillshade_menu_download_descr">Aby wyświetlić cieniowanie rzeźby terenu, należy pobrać specjalny podkład dla tego regionu.</string>
+    <string name="srtm_purchase_header">Aby wyświetlić poziomice na mapie, należy zakupić i zainstalować wtyczkę \'Poziomice\'</string>
     <string name="quick_action_showhide_osmbugs_title">Przełącz wyświetlanie uwag OSM</string>
     <string name="quick_action_osmbugs_show">Pokaż uwagi OSM</string>
     <string name="quick_action_osmbugs_hide">Ukryj uwagi OSM</string>
