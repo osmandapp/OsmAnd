@@ -2998,4 +2998,5 @@ Od Afganistanu po Zimbabwe, przez Australię po USA. Argentyna, Brazylia, Kanada
     <string name="increase_search_radius">Zwiększ promień wyszukiwania</string>
     <string name="nothing_found">Nic nie odnaleziono :(</string>
     <string name="nothing_found_descr">Proszę spróbować zmienić zapytanie lub zwiększyć promień wyszukiwania</string>
+    <string name="private_access_routing_req">Cel podróży jest położony na obszarze o charakterze prywatnym. Umożliwić dostęp do prywatnych dróg dla tej trasy?</string>
     </resources>
