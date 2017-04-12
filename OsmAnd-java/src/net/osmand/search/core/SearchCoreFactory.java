@@ -10,6 +10,7 @@ import net.osmand.binary.BinaryMapAddressReaderAdapter;
 import net.osmand.binary.BinaryMapIndexReader;
 import net.osmand.binary.BinaryMapIndexReader.SearchPoiTypeFilter;
 import net.osmand.binary.BinaryMapIndexReader.SearchRequest;
+import net.osmand.binary.CommonWords;
 import net.osmand.data.Amenity;
 import net.osmand.data.Building;
 import net.osmand.data.City;
@@ -131,6 +132,9 @@ public class SearchCoreFactory {
 			phrase.countUnknownWordsMatch(res);
 			int cnt = resultMatcher.getCount();
 			List<String> ws = phrase.getUnknownSearchWords(res.otherWordsMatch);
+			if(!res.firstUnknownWordMatches) {
+				ws.add(phrase.getUnknownSearchWord());
+			}
 			if (!ws.isEmpty() && api != null && api.isSearchAvailable(phrase)) {
 				SearchPhrase nphrase = phrase.selectWord(res, ws,
 						phrase.isLastUnknownSearchWordComplete());
@@ -323,6 +327,8 @@ public class SearchCoreFactory {
 				final int priority = phrase.isNoSelectedType() ?
 						SEARCH_ADDRESS_BY_NAME_PRIORITY : SEARCH_ADDRESS_BY_NAME_PRIORITY_RADIUS2;
 				final BinaryMapIndexReader[] currentFile = new BinaryMapIndexReader[1];
+				
+				
 				ResultMatcher<MapObject> rm = new ResultMatcher<MapObject>() {
 					int limit = 0;
 					@Override
@@ -422,12 +428,45 @@ public class SearchCoreFactory {
 				};
 				Iterator<BinaryMapIndexReader> offlineIterator = phrase.getRadiusOfflineIndexes(DEFAULT_ADDRESS_BBOX_RADIUS * 5,
 						SearchPhraseDataType.ADDRESS);
-				while (offlineIterator.hasNext()) {
+				List<String> unknownSearchWords = phrase.getUnknownSearchWords();
+				
+				String wordToSearch = "";
+				if (phrase.getUnknownSearchWordLength() > 1) {
+					List<String> searchWords = new ArrayList<>(unknownSearchWords);
+					searchWords.add(0, phrase.getUnknownSearchWord());
+					Collections.sort(searchWords, new Comparator<String>() {
+
+						private int lengthWithoutNumbers(String s) {
+							int len = 0;
+							for(int k = 0; k < s.length(); k++) {
+								if(s.charAt(k) >= '0' && s.charAt(k) <= '9') {
+									
+								} else {
+									len++;
+								}
+							}
+							return len;
+						}
+						
+						@Override
+						public int compare(String o1, String o2) {
+							int i1 = CommonWords.getCommonSearch(o1);
+							int i2 = CommonWords.getCommonSearch(o2);
+							if (i1 != i2) {
+								return icompare(i1, i2);
+							}
+							// compare length without numbers to not include house numbers
+							return -icompare(lengthWithoutNumbers(o1), lengthWithoutNumbers(o2));
+						}
+					});						
+					wordToSearch = searchWords.get(0);
+				}
+				
+				while (offlineIterator.hasNext() && wordToSearch.length() > 0) {
 					BinaryMapIndexReader r = offlineIterator.next();
 					currentFile[0] = r;
 					immediateResults.clear();
-					SearchRequest<MapObject> req = BinaryMapIndexReader.buildAddressByNameRequest(rm, phrase
-									.getUnknownSearchWord().toLowerCase(),
+					SearchRequest<MapObject> req = BinaryMapIndexReader.buildAddressByNameRequest(rm, wordToSearch.toLowerCase(),
 							phrase.isUnknownSearchWordComplete() ? StringMatcherMode.CHECK_EQUALS_FROM_SPACE
 									: StringMatcherMode.CHECK_STARTS_FROM_SPACE);
 					if (locSpecified) {
@@ -436,9 +475,11 @@ public class SearchCoreFactory {
 					}
 					r.searchAddressDataByName(req);
 					for (SearchResult res : immediateResults) {
+						res.firstUnknownWordMatches = wordToSearch.equals(phrase.getUnknownSearchWord());
 						if (res.objectType == ObjectType.STREET) {
 							City ct = ((Street) res.object).getCity();
-							phrase.countUnknownWordsMatch(res, ct.getName(phrase.getSettings().getLang(), phrase.getSettings().isTransliterate()),
+							phrase.countUnknownWordsMatch(res, 
+									ct.getName(phrase.getSettings().getLang(), phrase.getSettings().isTransliterate()),
 									ct.getAllNames(true));
 							subSearchApiOrPublish(phrase, resultMatcher, res, streetsApi);
 						} else {
@@ -1406,4 +1447,8 @@ public class SearchCoreFactory {
 			return SEARCH_LOCATION_PRIORITY;
 		}
 	}
+	
+	public static int icompare(int x, int y) {
+        return (x < y) ? -1 : ((x == y) ? 0 : 1);
+    }
 }
