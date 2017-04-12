@@ -2642,7 +2642,7 @@ Abasta l\'àrea: %1$s x %2$s</string>
  • Suport al codi de posicionament obert (OLC)
 
 
- • Mostra la elevació i el perfil de pendents a una traça GPX enregistrada (també velocitats) i a una ruta calculada.
+ • Mostra els perfils d\'elevació, pendent i velocitat de les traces GPX enregistrades i de les rutes calculades.
 
 
  • Configuració del \"estil de conducció\" i millores lògiques en el càlcul de rutes per bicicleta.
@@ -2913,4 +2913,9 @@ OsmAnd és de codi obert i es desenvolupa activament . Tothom pot recolzar l\'ap
     <string name="quick_action_showhide_osmbugs_descr">Prement el botó d\'acció es mostraran o ocultaran notes OSM al mapa.</string>
     <string name="sorted_by_distance">Ordenat per distància</string>
     <string name="search_favorites">Cerca a preferits</string>
+    <string name="private_access_routing_req">La vostra destinació és dins una zona amb accés privat. Voleu admetre l\'accés a vies privades en aquest trajecte?</string>
+    <string name="restart_search">Reprèn la cerca</string>
+    <string name="increase_search_radius">Augmenta el radi de cerca</string>
+    <string name="nothing_found">No s\'ha trobat res :(</string>
+    <string name="nothing_found_descr">Proveu canviant la consulta de cerca o augmentant el radi de cerca</string>
     </resources>
