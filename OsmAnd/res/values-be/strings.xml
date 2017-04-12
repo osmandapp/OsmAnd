@@ -2790,7 +2790,7 @@ OsmAnd мае адкрыты зыходны код і актыўна разві�
     <string name="quick_action_navigation_voice_off">Голас прыглушаны</string>
     <string name="quick_action_navigation_voice_on">Голас актыўны</string>
     <string name="rendering_attr_depthContours_description">Паказваць контуры і пункты глыбіні</string>
-    <string name="rendering_attr_depthContours_name">Контуры глыбінь</string>
+    <string name="rendering_attr_depthContours_name">Контуры марскіх глыбінь</string>
 	<string name="release_2_6">"
  • Новая функцыя: кнопка хуткага дзеяння
 
@@ -2810,7 +2810,7 @@ OsmAnd мае адкрыты зыходны код і актыўна разві�
  • Падтрымка Open Location Code (OLC)
 
 
- • Адлюставанне профілю вышыні і ўхілу для запіснага GPX (таксама хуткасць) і разлічанага маршруту
+ • Адлюставанне профілю вышыні, ўхілу і хуткасці для запісных GPX-трэкаў і разлічаных маршрутаў
 
 
  • Налады «Стыль кіравання» і паляпшэнне логікі ў роварнай маршрутызацыі
@@ -2822,13 +2822,13 @@ OsmAnd мае адкрыты зыходны код і актыўна разві�
  • Мноства іншых паляпшэнняў і выпраўленняў памылак
 
 
- і шмат другога…
+ і шмат іншага…
  "</string>
 	<string name="shared_string_slope">Ухіл</string>
     <string name="add_new_folder">Дадаць новую тэчку</string>
     <string name="points_delete_multiple_succesful">Кропка(і) паспяхова выдалена.</string>
     <string name="points_delete_multiple">Вы збіраецеся выдаліць %1$d кропак. Вы ўпэўнены?</string>
-    <string name="track_points_category_name">Важныя кропкі маршрута</string>
+    <string name="track_points_category_name">Значныя кропкі маршрута</string>
     <string name="gpx_track">Трэк</string>
     <string name="max_speed">Макс. хуткасць</string>
     <string name="average_speed">Сярэдняя хуткасць</string>
@@ -2893,20 +2893,20 @@ OsmAnd мае адкрыты зыходны код і актыўна разві�
     <string name="quick_action_map_source">Змяніць крыніцу мапы</string>
     <string name="quick_action_btn_tutorial_descr">Доўгі націск і перацягванне дазвальці перамясціць кропку</string>
 	<string name="route_points_category_name">Кропкі на маршруце</string>
-    <string name="relief_smoothness_factor_descr">Прыярытэт раўнінам ці ўзгоркам</string>
-    <string name="routing_attr_relief_smoothness_factor_hills_name">Узгоркі</string>
-    <string name="routing_attr_relief_smoothness_factor_plains_name">Раўніны</string>
-    <string name="routing_attr_relief_smoothness_factor_more_plains_name">Больш раўнін</string>
+    <string name="relief_smoothness_factor_descr">Пераважны рэльеф: раўнінны ці гарысты</string>
+    <string name="routing_attr_relief_smoothness_factor_hills_name">Гарысты</string>
+    <string name="routing_attr_relief_smoothness_factor_plains_name">Пагорысты</string>
+    <string name="routing_attr_relief_smoothness_factor_more_plains_name">Раўнінны</string>
     <string name="routing_attr_driving_style_speed_name">Швыдкі</string>
     <string name="routing_attr_driving_style_balance_name">Збалансаваны</string>
     <string name="routing_attr_driving_style_safety_name">Бяспечны</string>
     <string name="do_not_send_anonymous_app_usage">На адсылаць ананімнай статыстыкі выкарыстання</string>
-    <string name="do_not_send_anonymous_app_usage_desc">OsmAnd адсылае агульную інфармацыю аб выкарыстанні экрана падчас сессіі. Мы не збіраем дадзеных датычнах месцазнаходжання і ўводу.</string>
+    <string name="do_not_send_anonymous_app_usage_desc">OsmAnd збірае інфармацыю аб тым, які часткі праграмы выкарыстоўваюцца вамі. Ваша месцазнаходжанне ніколі не адпраўляецца, як і ўсё, што вы ўводзіце, якія вобласці праглядаеце, што шукаеце ці спампоўваеце.</string>
     <string name="do_not_show_startup_messages">Не паказваць паведамленні пры старце</string>
     <string name="do_not_show_startup_messages_desc">Паказвае паведамленні пра зніжкі і спецыяльныя лакальныя падзеі</string>
     <string name="parking_options">Опцыі паркоўкі</string>
     <string name="full_version_thanks">Дякуй вам за набыццё поўнай версіі OsmAnd!</string>
-    <string name="routing_attr_relief_smoothness_factor_name">Ступень перасечанасці мясцовасці</string>
+    <string name="routing_attr_relief_smoothness_factor_name">Абраць перасечанасць мясцовасці</string>
     <string name="right_side_navigation">Правабаковы рух</string>
     <string name="driving_region_automatic">Аўтаматычны</string>
     <string name="restore_purchases">Аднаўленне пакупак</string>
@@ -2933,12 +2933,12 @@ OsmAnd мае адкрыты зыходны код і актыўна разві�
     <string name="no_overlay">Няма пакрыцця</string>
     <string name="no_underlay">Няма падкладкі</string>
     <string name="subscribe_email_desc">Падпішыцеся на нашу рассылку аб зніжках на праграму і атрымайце 3 дадатковыя мапы!</string>
-    <string name="depth_contour_descr">Набор мап, якія дазваляюць убачыць контуры і кропкі глыбінь (на аснове сеткі ў 30 вуглавых секунд).</string>
+    <string name="depth_contour_descr">Набор мап, якія змяшчаюць контуры і кропкі марскіх глыбінь (на аснове сеткі ў 30 вуглавых секунд).</string>
     <string name="sea_depth_thanks">Дзякуй за пакупку контураў марскіх глыбінь!</string>
-    <string name="index_item_depth_contours_osmand_ext">Контуры глыбінь</string>
-    <string name="index_item_depth_points_southern_hemisphere">Кропкі глыбінь паўднёвага паўшар\'я</string>
-    <string name="index_item_depth_points_northern_hemisphere">Кропкі глыбінь паўночнага паўшар\'я</string>
-    <string name="download_depth_countours">Контуры глыбінь</string>
+    <string name="index_item_depth_contours_osmand_ext">Контуры марскіх глыбінь</string>
+    <string name="index_item_depth_points_southern_hemisphere">Кропкі марскіх глыбінь паўднёвага паўшар\'я</string>
+    <string name="index_item_depth_points_northern_hemisphere">Кропкі марскіх глыбінь паўночнага паўшар\'я</string>
+    <string name="download_depth_countours">Контуры марскіх глыбінь</string>
     <string name="nautical_maps">Марскія мапы</string>
     <string name="analyze_on_map">Аналізуй на мапе</string>
     <string name="shared_string_visible">Бачны</string>
@@ -2965,8 +2965,24 @@ OsmAnd мае адкрыты зыходны код і актыўна разві�
  Ад Аўганістана да Зімбабвэ, ад Аўстраліі да ЗША. Аргенціна, Бразілія, Канада, Францыя, Германія, Мексіка, Вялікабрытанія, Гіспанія, …
  "</string>
     <string name="animate_my_location">Анімаваць маю пазіцыю</string>
-    <string name="animate_my_location_desc">Уключае анімацыю маёй пазіцыі на мапе</string>
+    <string name="animate_my_location_desc">Уключае экстрапаляцыю маёй пазіцыі на мапе падчас часовай страты сігналу</string>
     <string name="favorite_group_name">Назва групы</string>
     <string name="change_color">Змяніць колер</string>
     <string name="edit_name">Рэдагаваць назву</string>
+    <string name="private_access_routing_req">Ваш пункт прызначэння знаходзіцца на прыватнай тэрыторыі. Вы хочаце дазволіць доступ да прыватных дарог для гэтай паездкі?</string>
+    <string name="restart_search">Перазапусціць пошук</string>
+    <string name="increase_search_radius">Павялічыць радыус пошуку</string>
+    <string name="nothing_found">Нічога не знойдзена :(</string>
+    <string name="nothing_found_descr">Паспрабуйце змяніць запыт ці павялічыць радыус пошуку</string>
+    <string name="quick_action_showhide_osmbugs_title">Паказаць/схаваць нататкі OSM</string>
+    <string name="quick_action_osmbugs_show">Паказаць нататкі OSM</string>
+    <string name="quick_action_osmbugs_hide">Схаваць нататкі OSM</string>
+    <string name="quick_action_showhide_osmbugs_descr">Націск на кнопку дзеяння пакажа/схавае нататкі OSM на мапе.</string>
+    <string name="sorted_by_distance">Адсартавана па адлегласці</string>
+    <string name="search_favorites">Пошук ва ўлюблёных</string>
+    <string name="shared_string_plugin">Дадатак</string>
+    <string name="srtm_purchase_header">Для прагляду контурных ліній на мапе, вам неабходна набыць і ўсталяваць дадатак «Contour Lines»</string>
+    <string name="srtm_color_scheme">Каляровая схема</string>
+    <string name="routing_attr_allow_private_name">Дазволіць прыватны доступ</string>
+    <string name="routing_attr_allow_private_name_description">Дазволіць доступ на прыватную тэрыторыю</string>
     </resources>
