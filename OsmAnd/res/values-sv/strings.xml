@@ -2572,4 +2572,8 @@ Vänligen tillhandahåll fullständig kod</string>
     <string name="sorted_by_distance">Sorterat efter avstånd</string>
     <string name="search_favorites">Sökfavoriter</string>
     <string name="shared_string_plugin">Insticksmodul</string>
+    <string name="srtm_color_scheme">Färgschema</string>
+    <string name="favorite_group_name">Gruppnamn</string>
+    <string name="change_color">Ändra färg</string>
+    <string name="edit_name">Redigera namn</string>
     </resources>
