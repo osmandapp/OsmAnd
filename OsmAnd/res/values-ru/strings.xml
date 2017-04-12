@@ -4,7 +4,7 @@
     <string name="restart_search">Искать снова</string>
     <string name="increase_search_radius">Увеличить радиус поиска</string>
     <string name="nothing_found">Ничего не найдено :(</string>
-    <string name="nothing_found_descr">Попробуйте изменить языковой запрос или увеличить радиус поиска</string>
+    <string name="nothing_found_descr">Попробуйте изменить запрос или увеличить радиус поиска</string>
     <string name="quick_action_showhide_osmbugs_title">Показать/скрыть заметки OSM</string>
     <string name="quick_action_osmbugs_show">Показать заметки OSM</string>
     <string name="quick_action_osmbugs_hide">Скрыть заметки OSM</string>
