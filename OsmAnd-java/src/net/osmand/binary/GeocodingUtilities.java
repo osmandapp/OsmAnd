@@ -49,28 +49,6 @@ public class GeocodingUtilities {
 	public static final float THRESHOLD_MULTIPLIER_SKIP_BUILDINGS_AFTER = 1.5f;
 	public static final float DISTANCE_BUILDING_PROXIMITY = 100;
 
-	public static final String[] SUFFIXES = new String[]{
-			"av.", "avenue", "просп.", "пер.", "пр.", "заул.", "проспект", "переул.", "бул.", "бульвар", "тракт"};
-	public static final String[] DEFAULT_SUFFIXES = new String[]{
-			"str.", "street", "улица", "ул.", "вулица", "вул.", "вулиця"};
-	private static Set<String> SET_DEF_SUFFIXES = null;
-	private static Set<String> SET_SUFFIXES = null;
-
-	public static Set<String> getDefSuffixesSet() {
-		if (SET_DEF_SUFFIXES == null) {
-			SET_DEF_SUFFIXES = new TreeSet<String>();
-			SET_DEF_SUFFIXES.addAll(Arrays.asList(DEFAULT_SUFFIXES));
-		}
-		return SET_DEF_SUFFIXES;
-	}
-
-	public static Set<String> getSuffixesSet() {
-		if (SET_SUFFIXES == null) {
-			SET_SUFFIXES = new TreeSet<String>();
-			SET_SUFFIXES.addAll(Arrays.asList(SUFFIXES));
-		}
-		return SET_SUFFIXES;
-	}
 
 	public static final Comparator<GeocodingResult> DISTANCE_COMPARATOR = new Comparator<GeocodingResult>() {
 
@@ -201,15 +179,15 @@ public class GeocodingUtilities {
 		return lst;
 	}
 
-	public List<String> prepareStreetName(String s) {
+	public List<String> prepareStreetName(String s, boolean addCommonWords) {
 		List<String> ls = new ArrayList<String>();
 		int beginning = 0;
 		for (int i = 1; i < s.length(); i++) {
 			if (s.charAt(i) == ' ') {
-				addWord(ls, s.substring(beginning, i));
+				addWord(ls, s.substring(beginning, i), addCommonWords);
 				beginning = i;
 			} else if (s.charAt(i) == '(') {
-				addWord(ls, s.substring(beginning, i));
+				addWord(ls, s.substring(beginning, i), addCommonWords);
 				while (i < s.length()) {
 					char c = s.charAt(i);
 					i++;
@@ -222,15 +200,18 @@ public class GeocodingUtilities {
 		}
 		if (beginning < s.length()) {
 			String lastWord = s.substring(beginning, s.length());
-			addWord(ls, lastWord);
+			addWord(ls, lastWord, addCommonWords);
 		}
 		Collections.sort(ls, Collator.getInstance());
 		return ls;
 	}
 
-	private void addWord(List<String> ls, String word) {
+	private void addWord(List<String> ls, String word, boolean addCommonWords) {
 		String w = word.trim().toLowerCase();
-		if (!Algorithms.isEmpty(w) && !getDefSuffixesSet().contains(w)) {
+		if (!Algorithms.isEmpty(w)) {
+			if(!addCommonWords && CommonWords.getCommonGeocoding(word) != -1) {
+				return;
+			}
 			ls.add(w);
 		}
 	}
@@ -239,25 +220,24 @@ public class GeocodingUtilities {
 			double knownMinBuildingDistance, final ResultMatcher<GeocodingResult> result) throws IOException {
 		// test address index search
 		final List<GeocodingResult> streetsList = new ArrayList<GeocodingResult>();
-		final List<String> streetNamePacked = prepareStreetName(road.streetName);
-		if (streetNamePacked.size() > 0) {
-			log.info("Search street by name " + road.streetName + " " + streetNamePacked);
+		final List<String> streetNamesUsed = prepareStreetName(road.streetName, true);
+		final List<String> streetNamesPacked = streetNamesUsed.size() == 0 ? 
+				prepareStreetName(road.streetName, false) : streetNamesUsed;
+		if (streetNamesPacked.size() > 0) {
+			log.info("Search street by name " + road.streetName + " " + streetNamesPacked);
 			String mainWord = "";
-			for (int i = 0; i < streetNamePacked.size(); i++) {
-				String s = streetNamePacked.get(i);
-				if (!getSuffixesSet().contains(s) && s.length() > mainWord.length()) {
+			for (int i = 0; i < streetNamesPacked.size(); i++) {
+				String s = streetNamesPacked.get(i);
+				if (s.length() > mainWord.length()) {
 					mainWord = s;
 				}
-			}
-			if (Algorithms.isEmpty(mainWord)) {
-				mainWord = streetNamePacked.get(0);
 			}
 			SearchRequest<MapObject> req = BinaryMapIndexReader.buildAddressByNameRequest(
 					new ResultMatcher<MapObject>() {
 						@Override
 						public boolean publish(MapObject object) {
 							if (object instanceof Street
-									&& prepareStreetName(object.getName()).equals(streetNamePacked)) {
+									&& prepareStreetName(object.getName(), true).equals(streetNamesUsed)) {
 								double d = MapUtils.getDistance(object.getLocation(), road.searchPoint.getLatitude(),
 										road.searchPoint.getLongitude());
 								// double check to suport old format
