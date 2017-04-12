@@ -2092,8 +2092,8 @@
 	<string name="poi_bridge_structure_boardwalk">Brückenkonstruktion: Promenade</string>
 	<string name="poi_bridge_structure_simple_wooden">Brückenkonstruktion: Holz</string>
 	<string name="poi_bridge_structure_viaduct">Brückenkonstruktion: Viadukt</string>
-	<string name="poi_bridge_structure_aqueduct">Brückenaufbau: Aquädukt</string>
-	<string name="poi_bridge_structure_log">Brückenaufbau: Baumstamm</string>
+	<string name="poi_bridge_structure_aqueduct">Brückenkonstruktion: Aquädukt</string>
+	<string name="poi_bridge_structure_log">Brückenkonstruktion: Baumstamm</string>
 	<string name="poi_bridge_type_movable">Brückentyp: beweglich</string>
 	<string name="poi_bridge_movable_bascule">Beweglicher Brückentyp: Klappbrücke</string>
 	<string name="poi_bridge_movable_swing">Beweglicher Brückentyp: Drehbrücke</string>
