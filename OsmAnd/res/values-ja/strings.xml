@@ -1014,7 +1014,7 @@ POIの更新は利用できません</string>
 	<string name="support_new_features">新機能をサポート</string>
 	<string name="support_new_features_descr">アプリケーションに実装された新機能を見てから寄付します</string>
 	<string name="show_ruler_level">尺度を表示</string>	
-	<string name="info_button">アプリケーション情報</string>
+	<string name="info_button">概要</string>
 	<string name="back_to_location">現在位置に戻す</string>
 	<string name="shared_string_help">ヘルプ</string>
 	
@@ -1950,7 +1950,7 @@ OsmAndの従来のマップスタイルに戻すには、このプラグイン�
 	<string name="copying_osmand_file_failed">ファイルのコピーに失敗しました</string>    
     <string name="storage_directory_external">外部ストレージ</string>
     <string name="storage_directory_multiuser">マルチユーザーストレージ</string>
-    <string name="storage_directory_internal_app">内部アプリケーションメモリ</string>
+    <string name="storage_directory_internal_app">アプリの専用記憶域</string>
     <string name="storage_directory_manual">手動で指定</string>
     <string name="storage_directory_default">内部メモリ</string>
     <string name="storage_directory">マップストレージ</string>
@@ -2274,7 +2274,7 @@ OsmAndの従来のマップスタイルに戻すには、このプラグイン�
     <string name="finish_navigation">ナビゲーションの終了</string>
     <string name="avoid_road">使用しない道路として指定</string>
     <string name="storage_directory_readonly_desc">現在選択されているデータ保存フォルダーは読み取り専用です。保存フォルダーは一時的に内部メモリに設定されました。書き込み可能なストレージのフォルダを選択してください。</string>
-    <string name="storage_directory_shared">共有メモリ</string>
+    <string name="storage_directory_shared">共有記憶域</string>
     <string name="full_report">より詳細なレポートは以下サイトにて</string>
     <string name="recalculate_route">ルートの再計算</string>
     <string name="open_street_map_login_and_pass">OpenStreetMapのログイン名とパスワード</string>
@@ -2641,7 +2641,7 @@ OsmAndとOSMをサポートする方法として現状最適な方法である�
     <string name="replace_favorite_confirmation">お気に入り %1$sを置き換えてよろしいですか？</string>
     <string name="rendering_attr_hideOverground_name">地上建造物</string>
     <string name="shared_string_change">変更</string>
-    <string name="get_started">始めましょう</string>
+    <string name="get_started">スタート</string>
     <string name="lang_kab">カビル語</string>
     <string name="lang_sr_latn">セルビア語 (ラテン)</string>
     <string name="lang_zh_hk">中国語 (香港)</string>
