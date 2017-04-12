@@ -286,7 +286,7 @@
     <string name="gps_wake_up_timer">Vek-intervalo de GPS</string>
     <string name="favourites_edit_dialog_title">Ŝatataj informoj</string>
     <string name="simulate_your_location_stop_descr">Ĉesigas simuladon de pozicio</string>
-    <string name="simulate_your_location_descr">Simuli uzante komputitan kurson aŭ registritan GPX-on</string>
+    <string name="simulate_your_location_descr">Simuli uzante komputitan kurson aŭ registritan GPX-spuron</string>
     <string name="looking_up_address">Serĉado de adreso</string>
     <string name="av_locations_descr">GPX-dosiero kun notoj pri lokoj</string>
     <string name="av_locations">Lokoj</string>
@@ -456,7 +456,7 @@
     <string name="shared_string_about">Pri</string>
     <string name="about_settings_descr">Informoj, permesiloj, kontribuintoj</string>
     <string name="choose_osmand_theme">Etoso</string>
-    <string name="choose_osmand_theme_descr">Elekti etoson por aplikaĵo</string>
+    <string name="choose_osmand_theme_descr">Elekti etoson de aplikaĵo</string>
     <string name="local_indexes_cat_srtm">Nivelkurboj</string>
     <string name="osmo_group_information_desc">"
  - Por krei grupon, bonvolu nomi kaj priskribi ĝin
@@ -619,7 +619,7 @@ Kahelajn mapojn oni povas elŝuti senpere de Interreto, aŭ prepari por eksterre
     <string name="download_tab_downloads">Ĉiuj</string>
     <string name="download_tab_local">Lokaj</string>
     <string name="no_internet_connection">Elŝutado ne eblas, bonvolu kontroli vian retkonekton.</string>
-    <string name="record_plugin_name">Registrado de spuroj</string>
+    <string name="record_plugin_name">Spur-registrilo</string>
 	<string name="record_plugin_description">"Tiu ĉi kromprogramo ebligas al vi registri kaj konservi viajn spurojn per permane elekti GPX-registradan fenestraĵon sur la mapekrano, aŭ ankaŭ aŭtomate registri ĉiujn viajn navigadajn kursojn al GPX-dosiero.
 
 
@@ -691,10 +691,10 @@ Registritaj spuroj povas esti kunhavigataj kun viaj amikoj aŭ esti uzita por ko
     <string name="save_current_track_descr">Konservi aktualan kurson al memorkarto</string>
     <string name="save_current_track">Konservi aktualan GPX-kurson</string>
     <string name="save_track_to_gpx">Registri spuron al GPX-dosieron dum navigado</string>
-    <string name="save_track_to_gpx_descrp">Konservas spuron al dosierujo de spuroj dum navigado</string>
+    <string name="save_track_to_gpx_descrp">Konservi spuron al dosierujo de spuroj dum navigado</string>
     <string name="save_track_interval_globally">Registrada intervalo</string>
     <string name="save_track_interval">Registrada intervalo dum navigado</string>
-    <string name="save_track_interval_descr">Elektu intervalo de registrado por spuroj dum navigado</string>
+    <string name="save_track_interval_descr">Elekti intervalon de registrado por spuroj dum navigado</string>
     <string name="voice_provider_descr">Elektu gvidadan voĉon por navigado</string>
     <string name="voice_provider">Gvidada voĉo</string>
 
@@ -726,7 +726,7 @@ Registritaj spuroj povas esti kunhavigataj kun viaj amikoj aŭ esti uzita por ko
     <string name="forward">Antaŭen</string>
     <string name="home">Stirpanelo</string>
     <string name="live_monitoring_m">Enreta spur-registrado (GPX bezonata)</string>
-    <string name="live_monitoring_m_descr">Sendas datumojn de spuroj al difinita retservo se GPX-registrado estas aktiva.</string>
+    <string name="live_monitoring_m_descr">Sendi datumojn de spuroj al difinita retservo, se GPX-registrado estas aktiva.</string>
     <string name="live_monitoring_start">Ekigi enretan kurs-registradon</string>
     <string name="gpx_monitoring_start">Ekigi GPX-registradon</string>
     <string name="live_monitoring_stop">Ĉesigi enretan kurs-registradon</string>
@@ -1011,7 +1011,7 @@ Premtenu por vidi sur la mapo</string>
     <string name="disable_complex_routing">Malaktivigi komplikan difinadon de vojo</string>
     <string name="amenity_type_seamark">Mara navigadpunkto</string>
     <string name="app_modes_choose">Aplikaĵaj profiloj</string>
-    <string name="app_modes_choose_descr">Elekti profilojn de uzado montritajn en aplikaĵo</string>
+    <string name="app_modes_choose_descr">Elekti profilojn de uzado montratajn en aplikaĵo</string>
     <string name="map_widget_map_rendering">Map-bildigado</string>
     <string name="app_mode_hiking">Piedirado</string>
     <string name="app_mode_motorcycle">Motorciklo</string>
@@ -1067,7 +1067,7 @@ Premtenu por vidi sur la mapo</string>
 
     <string name="app_mode_default">Foliumi mapon</string>
     <string name="settings_preset">Ĉefa profilo</string>
-    <string name="settings_preset_descr">Map-vido kaj navigadaj agordoj estas memoritaj aparte por ia profilo de uzado. Agordu vian implicitan profilon tie ĉi.</string>
+    <string name="settings_preset_descr">Map-vido kaj navigadaj agordoj estas memoritaj aparte por iu profilo de uzado. Agordu vian implicitan profilon tie ĉi.</string>
     <string name="destination_point">Celo %1$s</string>
     <string name="context_menu_item_destination_point">Agordi kiel celon</string>
     <string name="please_select_address">Unue elektu urbon aŭ straton</string>
@@ -1101,7 +1101,7 @@ Premtenu por vidi sur la mapo</string>
     <string name="use_kalman_filter_compass">Uzi filtrilon de Kalman</string>
     <string name="use_kalman_filter_compass_descr">Etigas bruojn en legoj de kompaso sed egigas inertecon</string>
     <string name="use_magnetic_sensor">Uzi magnet-sentilon</string>
-    <string name="use_magnetic_sensor_descr">Uzas magnet-sentilon anstataŭ orientiĝ-sentilon por legi kompasan direkton</string>
+    <string name="use_magnetic_sensor_descr">Uzi magnet-sentilon anstataŭ orientiĝ-sentilon por legi kompasan direkton</string>
     <string name="other_location">Alia</string>
     <string name="files_limit">Ankoraŭ %1$d dosieroj</string>
     <string name="available_downloads_left">%1$d dosieroj disponeblaj por elŝuto</string>
@@ -1122,7 +1122,7 @@ Premtenu por vidi sur la mapo</string>
     <string name="favourites_list_activity">Elekti ŝatatan</string>
     <string name="local_openstreetmap_act_title">Modifoj de OSM</string>
     <string name="layer_hillshade">Tavolo de nivel-ombrumo</string>
-    <string name="map_widget_gps_info">GPS-informo</string>
+    <string name="map_widget_gps_info">GPS-informoj</string>
     <string name="access_arrival_time">Alvena tempo</string>
     <string name="item_checked">markita(j)</string>
     <string name="item_unchecked">nemarkita(j)</string>
@@ -1166,8 +1166,8 @@ Premtenu por vidi sur la mapo</string>
     <string name="recording_open_external_player">Malfermi eksteran ludilon</string>
     <string name="recording_delete_confirm">Ĉu vi volas forigi tiun ĉi registraĵon?</string>
     <string name="recording_unavailable">nedisponebla</string>
-    <string name="recording_context_menu_arecord">Fari sonnoton</string>
-    <string name="recording_context_menu_vrecord">Fari videonoton</string>
+    <string name="recording_context_menu_arecord">Krei son-noton</string>
+    <string name="recording_context_menu_vrecord">Krei video-noton</string>
     <string name="layer_recordings">Tavolo de registrado</string>
     <string name="recording_can_not_be_played">Ne povas ludi registraĵon</string>
     <string name="recording_context_menu_delete">Forigi registraĵon</string>
@@ -1202,7 +1202,7 @@ Premtenu por vidi sur la mapo</string>
     <string name="rendering_attr_showRoadMaps_name">Nur-vojaj mapoj</string>
     <string name="rendering_attr_showRoadMaps_description">Elektu kiam montri nur-vojajn mapojn:</string>
     <string name="safe_mode">Sendanĝera reĝimo</string>
-    <string name="safe_mode_description">Lanĉas la aplikaĵon en sendanĝera reĝimo (uzante pli malrapidan androidan kodon anstataŭ indiĝenan).</string>
+    <string name="safe_mode_description">Lanĉi la aplikaĵon en sendanĝera reĝimo (uzante pli malrapidan Androidan kodon anstataŭ indiĝenan).</string>
     <string name="native_library_not_running">La aplikaĵo funkcias en sendanĝera reĝimo (malaktivigi ĝin en agordoj).</string>
     <string name="close_changeset">Fermi ŝanĝaron</string>
     <string name="zxing_barcode_scanner_not_found">ZXing Barcode Scanner ne estas instalita. Ĉu serĉi ĝin en Google Play?</string>
@@ -1346,7 +1346,7 @@ Proporcia memoro %4$s MB (limito de Android %5$s MB, Dalvik %6$s MB).</string>
     <string name="osmand_parking_lim_text">Temp-limigita</string>
     <string name="osmand_parking_no_lim_text">Sen templimo</string>
     <string name="osmand_parking_add_event">Aldoni averton al kalendara aplikaĵo</string>
-    <string name="osmand_parking_time_limit">Tempo-limigita parkumejo</string>
+    <string name="osmand_parking_time_limit">Temp-limigita parkumejo</string>
     <string name="osmand_parking_time_no_limit">Sen-templima parkumejo</string>
     <string name="osmand_parking_position_description">La pozicio de via parkumata aŭto. %1$s</string>
     <string name="osmand_parking_position_description_add">Reprenu la aŭton je:</string>
@@ -1530,7 +1530,7 @@ Proporcia memoro %4$s MB (limito de Android %5$s MB, Dalvik %6$s MB).</string>
     <string name="choose_auto_follow_route">Aŭtomate centrigi mapon</string>
     <string name="choose_auto_follow_route_descr">Tempo antaŭ map-vido samtempigos kun aktuala pozicio</string>
     <string name="keep_informing_never">Nur permane (tuŝu sageton)</string>
-    <string name="keep_informing_descr">Reanoncas sciigojn pri navigado je regulaj temp-intervaloj</string>
+    <string name="keep_informing_descr">Reanonci sciigojn pri navigado je regulaj temp-intervaloj</string>
     <string name="keep_informing">Reanonci navigadajn sciigojn</string>
     <string name="auto_follow_route_navigation">Aŭtomate centrigi nur navigade</string>
     <string name="auto_follow_route_navigation_descr">Aŭtomate centrigas map-vidon nur dum navigado.</string>
@@ -1605,8 +1605,8 @@ Proporcia memoro %4$s MB (limito de Android %5$s MB, Dalvik %6$s MB).</string>
     <string name="search_offline_clear_search">Nova serĉo</string>
     <string name="map_text_size">Teksta grando</string>
     <string name="map_text_size_descr">Elekti grandon de teksto por nomoj sur la mapo</string>
-    <string name="trace_rendering">Bildigadaj senerarigadaj informoj</string>
-    <string name="trace_rendering_descr">Montras informojn pri efikeco de bildigado</string>
+    <string name="trace_rendering">Senerarigaj informoj pri bildigado</string>
+    <string name="trace_rendering_descr">Montri informojn pri efikeco de bildigado</string>
     <string name="installing_new_resources">Elpakado de novaj datumoj…</string>
     <string name="internet_connection_required_for_online_route">Servo de enreta navigado estas elektita, sed vi ne estas konektita al Interreto.</string>
     <string name="tts_language_not_supported_title">Lingvo ne subtenata</string>
@@ -1618,9 +1618,9 @@ Proporcia memoro %4$s MB (limito de Android %5$s MB, Dalvik %6$s MB).</string>
     <string name="gpx_option_from_start_point">Iri laŭ tuta kurso</string>
     <string name="switch_to_vector_map_to_see">Eksterreta vektora mapo disponebla por tiu ĉi loko.
 \n\t\n\tPor uzi ĝin, elektu \'Menuo\' → \'Agordi mapon\' → \'Map-fontoj…\' → \'Eksterretaj vektoraj mapoj\'.</string>
-    <string name="choose_audio_stream">Eligo de gvidata voĉo</string>
+    <string name="choose_audio_stream">Eligo de gvidada voĉo</string>
     <string name="voice_stream_voice_call">Voĉa aŭd-kanalo (ankaŭ paŭzas muzikon de laŭtparoliloj de aŭto)</string>
-    <string name="choose_audio_stream_descr">Elekti laŭtparolilon por ludi gvidatan voĉon</string>
+    <string name="choose_audio_stream_descr">Elekti laŭtparolilon por ludi gvidadan voĉon</string>
     <string name="voice_stream_notification">Sciiga aŭd-kanalo</string>
     <string name="voice_stream_music">Aŭdvidaĵa/muzika kanalo</string>
     <string name="warning_tile_layer_not_downloadable">Programo ne povas elŝuti map-tavolon %1$s, bonvolu provi reinstali ĝin.</string>
@@ -1711,7 +1711,7 @@ Por reveni al unu de normaj mapaj aspektoj de OsmAnd, simple aŭ malaktivigi la 
 	<string name="plugin_ski_descr">"Tiu ĉi kromprogramo aldonas al OsmAnd detalojn pri descendejoj, skivojoj, montaraj skivojoj, kablovojoj kaj skiliftoj. Kursoj kaj vojoj estas kolorigitaj laŭ facileco kaj montrataj kiel speciala \'Vintra\' map-aspekto kiu ŝajnas kiel neĝ-kovrita landvidaĵo.
 
 
-Aktivigo de tiu ĉi map-vido ŝanĝas map-aspekton al \'Vintro kaj skiado\', montranta ĉiun terenon kovritan de neĝo. La vido oni povas malaktivigi, per malaktivigo la kromprogramon tie ĉi, aŭ per ŝanĝo de \'Map-aspekto\' en \'Agordi mapon\'.
+Aktivigo de tiu ĉi map-vido ŝanĝas map-aspekton al \'Vintro kaj skiado\', montranta ĉiun terenon kovritan de neĝo. La vidon oni povas malaktivigi, per malaktivigi la kromprogramon tie ĉi, aŭ per ŝanĝi de \'Map-aspekto\' en \'Agordi mapon\'.
  "</string>
     <string name="osmand_parking_plugin_name">Parkumeja pozicio</string>
 	<string name="osmand_parking_plugin_description">Tiu ĉi kromprogramo plifaciligas al vi memori kie via aŭto estas parkumata kaj kiom da parkumeja tempo restas (se ĝi estas limigita).
@@ -1724,8 +1724,8 @@ Kaj la loko kaj tempo estas montrataj en la OsmAnd-a stirpanelo, kaj sur la fene
     <string name="debugging_and_development">OsmAnd programado</string>
     <string name="osmand_development_plugin_description">Montras agordojn por programado kaj senerarigado kiel testado aŭ simulado de kurso, efikeco de ekran-bildigado, aŭ voĉaj sciigoj. Tiuj ĉi agordoj taŭgas por programistoj kaj ne estas bezonataj por norma uzanto.</string>
     <string name="lang_en_gb">Angla (Brita)</string>
-    <string name="level_to_switch_vector_raster_descr">Minimuma skalado por uzi ĉe vektoraj mapoj</string>
-    <string name="level_to_switch_vector_raster">Minimuma vektora skalado</string>
+    <string name="level_to_switch_vector_raster_descr">Minimuma skal-nivelo por uzi ĉe vektoraj mapoj</string>
+    <string name="level_to_switch_vector_raster">Minimuma vektora skal-nivelo</string>
     <string name="create_poi_link_to_osm_doc"><u>Enreta OSM</u> map-klasigo kun bildoj</string>
     <string name="error_doing_search">Eraro okazis dum eksterreta serĉado</string>
     <string name="search_offline_geo_error">Ne povis interpreti \'%s\'</string>
@@ -1791,9 +1791,9 @@ Provizore estas uzata enreta servo CloudMade.</string>
     <string name="gps_status_app_not_found">Aplikaĵo por GPS-stato ne instalita. Ĉu serĉi ĝin en Market?</string>
     <string name="unzipping_file">Elarĥivigado de dosiero…</string>
     <string name="voice_is_not_available_title">Gvidada voĉo ne elektita</string>
-    <string name="voice_is_not_available_msg">Neniu gvidado voĉo elektita, bonvolu iri al \'Agordoj\' → \'Ĝeneralaj\' → \'Gvidata voĉo\' kaj elektu kaj elŝutu pakaĵon de voĉaj sciigoj.</string>
-    <string name="tiles_to_download_estimated_size">Elŝuti {1} kahelojn ĉe skalo {0} ({2} MB)</string>
-    <string name="select_max_zoom_preload_area">Elekti maksimuman skalon por elŝuti</string>
+    <string name="voice_is_not_available_msg">Neniu gvidada voĉo elektita, bonvolu iri al \'Agordoj\' → \'Ĝeneralaj\' → \'Gvidada voĉo\' kaj elektu kaj elŝutu pakaĵon de voĉaj sciigoj.</string>
+    <string name="tiles_to_download_estimated_size">Elŝuti {1} kahelojn ĉe skal-nivelo {0} ({2} MB)</string>
+    <string name="select_max_zoom_preload_area">Elekti maksimuman skal-nivelon por elŝuti</string>
     <string name="maps_could_not_be_downloaded">Tiu ĉi mapo ne povas esti elŝutita</string>
     <string name="continuous_rendering">Konstanta bildigado</string>
     <string name="continuous_rendering_descr">Bildigas konstante anstataŭ bildigi po unu bildo en unu fojo</string>
@@ -2067,7 +2067,7 @@ Provizore estas uzata enreta servo CloudMade.</string>
     <string name="navigation_intent_invalid">Erara formo: %s</string>
     <string name="plugin_install_needs_network">Vi bezonas retkonekton por instali tiun ĉi kromprogramon.</string>
     <string name="use_fast_recalculation">Inteligenta rekalkulado de kurso</string>
-    <string name="use_fast_recalculation_desc">Rekalkulas nur komencan parton de kurso por longaj vojaĝoj</string>
+    <string name="use_fast_recalculation_desc">Rekalkuli nur komencan parton de kurso por longaj vojaĝoj</string>
     <string name="rate_this_app">Taksi tiun ĉi aplikaĵon</string>
     <string name="we_really_care_about_your_opinion">Cia opinio pri programo estas tre grava por ni kaj ni volus ekkoni ĝin.</string>
     <string name="rate_this_app_long">Bonvolu taksi OsmAnd ĉe Google Play</string>
@@ -2108,7 +2108,7 @@ Provizore estas uzata enreta servo CloudMade.</string>
     <string name="roads">Vojoj</string>
     <string name="downloading_number_of_files">Elŝutado - %1$s dosiero</string>
     <string name="show_free_version_banner">Montri reklamaĵon de senpaga versio</string>
-    <string name="show_free_version_banner_description">Montras reklamaĵon de senpaga versio, eĉ se vi havas pagan version</string>
+    <string name="show_free_version_banner_description">Montri reklamaĵon de senpaga versio, eĉ se vi havas pagan version</string>
     <string name="activate_seamarks_plugin">Bonvolu aktivigi Lumturojn kromprogramon</string>
     <string name="activate_srtm_plugin">Bonvolu aktivigi SRTM kromprogramon</string>
     <string name="later">Poste</string>
@@ -2554,9 +2554,9 @@ kaj pli…
     <string name="quick_action_add_poi">Aldoni interesejon</string>
     <string name="quick_action_map_style">Ŝanĝi map-stilon</string>
     <string name="quick_action_map_style_switch">Map-stilo ŝanĝita al \"%s\".</string>
-    <string name="quick_action_take_audio_note">Fari son-noton</string>
-    <string name="quick_action_take_video_note">Fari video-noton</string>
-    <string name="quick_action_take_photo_note">Fari fot-noton</string>
+    <string name="quick_action_take_audio_note">Krei son-noton</string>
+    <string name="quick_action_take_video_note">Krei video-noton</string>
+    <string name="quick_action_take_photo_note">Krei fot-noton</string>
     <string name="quick_action_add_osm_bug">Aldoni OSM-rimarkon</string>
     <string name="quick_action_navigation_voice">Voĉo ek/for</string>
     <string name="quick_action_navigation_voice_off">Voĉo malaktiva</string>
