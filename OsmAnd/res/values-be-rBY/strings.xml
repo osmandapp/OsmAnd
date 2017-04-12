@@ -2608,4 +2608,7 @@ Moduli:
     <string name="lang_hsb">vierchniełužyckaja</string>
     <string name="lang_en_gb">anhielskaja (Vialikabrytanіja)</string>
     <string name="lang_kn">kanada (Іndyja)</string>
+    <string name="restart_search">Pierazapuscić pošuk</string>
+    <string name="increase_search_radius">Pavialičyć radyus pošuku</string>
+    <string name="nothing_found">Ničoha nie znojdziena :(</string>
     </resources>
