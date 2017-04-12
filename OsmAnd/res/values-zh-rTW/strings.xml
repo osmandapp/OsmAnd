@@ -3067,5 +3067,5 @@ OsmAnd 是開放原始碼，而且正在積極的開發。應用程式從報告�
     <string name="restart_search">重新開始搜尋</string>
     <string name="increase_search_radius">增加搜尋半徑</string>
     <string name="nothing_found">没有找到 :(</string>
-    <string name="nothing_found_descr">試著變更查找詢問或增加搜尋的半徑</string>
+    <string name="nothing_found_descr">試著變更搜尋的查詢或增加搜尋的半徑</string>
     </resources>
