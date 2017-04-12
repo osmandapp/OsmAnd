@@ -1139,8 +1139,8 @@
 	<string name="poi_traffic_signals_sound">音声(Sound)</string>
 	<string name="poi_tactile_paving">視覚障害者誘導用ブロック(Tactile paving)</string>
 	<string name="poi_self_service">セルフサービス(Self service)</string>
-	<string name="poi_automated">自動(Automated)</string>
-	<string name="poi_subway_station_filter">地下鉄駅(Subway station)</string>
+	<string name="poi_automated">自動化(Automated)</string>
+	<string name="poi_subway_station_filter">地下鉄駅も対象(Subway station)</string>
 	<string name="poi_ferry_terminal_cargo">貨物(Cargo)</string>
 	<string name="poi_aerialway_bicycle">自転車交通(Bicycle transportation)</string>
 	<string name="poi_fee">料金(Fee)</string>
@@ -1821,4 +1821,50 @@
 	<string name="poi_tactile_paving_yes">有り</string>
 	<string name="poi_tactile_paving_no">無し</string>
 	<string name="poi_cuisine_sagardotegia">バスク伝統サイダー(リンゴ酒・ワイン)ハウス(Sagardotegia)</string>
+	<string name="poi_automated_yes">肯定</string>
+	<string name="poi_automated_no">非自動化</string>
+	<string name="poi_brushless">非回転ブラシ洗車の有無（Brushless)</string>
+	<string name="poi_brushless_yes">肯定</string>
+	<string name="poi_brushless_no">否定</string>
+	<string name="poi_capacity_disabled">障害者専用コーナーの有無(Dedicated places for disabled)</string>
+	<string name="poi_capacity_women_yes">有り</string>
+	<string name="poi_capacity_women_no">無し</string>
+	<string name="poi_capacity_women">女性専用コーナー(Dedicated places for women)</string>
+	<string name="poi_capacity_pupils">学生専用コーナー(Dedicated places for students)</string>
+	<string name="poi_capacity_teachers">教師専用のコーナー(Dedicated places for teachers)</string>
+	<string name="poi_capacity_parent_yes">親専用コーナー(Dedicated places for parents)</string>
+	<string name="poi_capacity_parent_no">無し</string>
+	<string name="poi_capacity_parent">親専用コーナー(Dedicated places for parents)</string>
+
+	<string name="poi_capacity_disabled_yes">有り</string>
+	<string name="poi_capacity_disabled_no">無し</string>
+	<string name="poi_parking_carports">覆い付き駐車スペース(Carports)</string>
+
+	<string name="poi_parking_garage_boxes">個別駐車場・車庫(Garage boxes)</string>
+	<string name="poi_parking_type">駐車場種別</string>
+	<string name="poi_bicycle_parking_type">駐輪場種別</string>
+	<string name="poi_parking_underground">地下駐車場</string>
+	<string name="poi_parking_multi_storey">立体駐車場</string>
+
+	<string name="poi_vending_parking_tickets">駐車場発券機</string>
+	<string name="poi_parking_surface">駐車場舗装種別</string>
+	<string name="poi_service_car">提供可能サービス(Service)</string>
+	<string name="poi_cafeteria">カフェテリア・セルフ形式</string>
+
+<string name="poi_fast_food_cafeteria">肯定</string>
+
+	<string name="poi_cocktails">カクテル取り扱い</string>
+	<string name="poi_cocktails_yes">肯定</string>
+
+	<string name="poi_pump">ポンプ式井戸</string>
+	<string name="poi_pump_manual">手動</string>
+	<string name="poi_pump_powered">電動</string>
+	<string name="poi_pump_no">無し</string>
+	<string name="poi_pump_yes">有り</string>
+
+	<string name="poi_water_characteristic">水質（Water characteristic)</string>
+	<string name="poi_water_characteristic_mud">泥水</string>
+	<string name="poi_water_characteristic_mineral">鉱物含む</string>
+	<string name="poi_water_characteristic_sulfuric">硫黄含む</string>
+
 	</resources>
