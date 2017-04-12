@@ -18,6 +18,11 @@ public class CommonWords {
 		return i == null ? -1 : i.intValue();
 	}
 	
+	public static int getCommonSearch(String name) {
+		Integer i = commonWordsDictionary.get(name);
+		return i == null ? -1 : i.intValue();
+	}
+	
 	public static int getCommonGeocoding(String name) {
 		Integer i = commonWordsDictionary.get(name);
 		return i == null ? -1 : i.intValue();
