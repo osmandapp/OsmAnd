@@ -35,6 +35,9 @@ public class SearchResult {
 		if(otherWordsMatch != null) {
 			inc += otherWordsMatch.size();
 		}
+		if(parentSearchResult != null) {
+			inc += parentSearchResult.getFoundWordCount();
+		}
 		return inc;
 	}
 
