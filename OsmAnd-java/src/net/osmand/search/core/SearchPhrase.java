@@ -639,7 +639,7 @@ public class SearchPhrase {
 		List<String> unknownSearchWords = getUnknownSearchWords();
 		
 		String wordToSearch = "";
-		if (getUnknownSearchWordLength() > 1) {
+		if (unknownSearchWords.size() > 0) {
 			List<String> searchWords = new ArrayList<>(unknownSearchWords);
 			searchWords.add(0, getUnknownSearchWord());
 			Collections.sort(searchWords, new Comparator<String>() {
