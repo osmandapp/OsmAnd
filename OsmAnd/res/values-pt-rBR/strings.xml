@@ -1503,7 +1503,7 @@ Pôr do Sol: %2$s</string>
 	<string name="search_online_address">Pesquisa on-line</string>
 	<string name="max_level_download_tile">Max. zoom on-line</string>
 	<string name="max_level_download_tile_descr">Escolher o nível de zoom máximo para baixar quadrículas de mapa on-line</string>
-	<string name="route_general_information">Distância total %1$s, tempo de viagem %2$d h %3$d m.</string>
+	<string name="route_general_information">Distância total %1$s, tempo de viagem %2$d h %3$d min.</string>
 	<string name="router_service_descr">Escolher um serviço de navegação on-line ou off-line</string>
 	<string name="router_service">Serviço de navegação</string>
 	<string name="sd_dir_not_accessible">O diretório de armazenamento de dados no cartão SD não está acessível!</string>
@@ -2096,4 +2096,12 @@ Pôr do Sol: %2$s</string>
     <string name="rendering_value_medium_name">Médio</string>
     <string name="report">Reportar</string>
     <string name="shared_string_is_open_24_7">Aberto 24 horas</string>
+    <string name="average_speed">Velocidade média</string>
+    <string name="average_altitude">Altitude média</string>
+    <string name="altitude_ascent">Subida</string>
+    <string name="altitude_descent">Descida</string>
+    <string name="altitude_range">Faixa de altitude</string>
+    <string name="shared_string_time">Tempo</string>
+    <string name="total_distance">Distância total</string>
+    <string name="shared_string_slope">Inclinação</string>
     </resources>
