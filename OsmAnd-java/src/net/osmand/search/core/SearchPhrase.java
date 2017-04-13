@@ -5,6 +5,7 @@ import net.osmand.CollatorStringMatcher;
 import net.osmand.CollatorStringMatcher.StringMatcherMode;
 import net.osmand.StringMatcher;
 import net.osmand.binary.BinaryMapIndexReader;
+import net.osmand.binary.CommonWords;
 import net.osmand.binary.BinaryMapIndexReader.SearchRequest;
 import net.osmand.data.LatLon;
 import net.osmand.data.QuadRect;
@@ -421,11 +422,16 @@ public class SearchPhrase {
 		if(sm != null) {
 			return sm;
 		}
-		sm = new NameStringMatcher(unknownSearchWordTrim, 
-				(lastUnknownSearchWordComplete ?  
+		sm = getNameStringMatcher(unknownSearchWordTrim, lastUnknownSearchWordComplete);
+		return sm;
+	}
+	
+	
+	public NameStringMatcher getNameStringMatcher(String word, boolean complete) {
+		return new NameStringMatcher(word, 
+				(complete ?  
 					StringMatcherMode.CHECK_EQUALS_FROM_SPACE : 
 					StringMatcherMode.CHECK_STARTS_FROM_SPACE));
-		return sm;
 	}
 	
 	public boolean hasObjectType(ObjectType p) {
@@ -611,6 +617,60 @@ public class SearchPhrase {
 	}
 	public int getRadiusSearch(int meters) {
 		return (1 << (getRadiusLevel() - 1)) * meters;
+	}
+
+	public static int icompare(int x, int y) {
+        return (x < y) ? -1 : ((x == y) ? 0 : 1);
+    }
+	
+	public String getUnknownWordToSearchBuilding() {
+		List<String> unknownSearchWords = getUnknownSearchWords();
+		if(unknownSearchWords.size() > 0 && Algorithms.extractFirstIntegerNumber(getUnknownSearchWord()) == 0) {
+			for(String wrd : unknownSearchWords) {
+				if(Algorithms.extractFirstIntegerNumber(wrd) != 0) {
+					return wrd;
+				}
+			}
+		}
+		return getUnknownSearchWord();
+	}
+	
+	public String getUnknownWordToSearch() {
+		List<String> unknownSearchWords = getUnknownSearchWords();
+		
+		String wordToSearch = "";
+		if (getUnknownSearchWordLength() > 1) {
+			List<String> searchWords = new ArrayList<>(unknownSearchWords);
+			searchWords.add(0, getUnknownSearchWord());
+			Collections.sort(searchWords, new Comparator<String>() {
+
+				private int lengthWithoutNumbers(String s) {
+					int len = 0;
+					for(int k = 0; k < s.length(); k++) {
+						if(s.charAt(k) >= '0' && s.charAt(k) <= '9') {
+							
+						} else {
+							len++;
+						}
+					}
+					return len;
+				}
+				
+				@Override
+				public int compare(String o1, String o2) {
+					int i1 = CommonWords.getCommonSearch(o1);
+					int i2 = CommonWords.getCommonSearch(o2);
+					if (i1 != i2) {
+						return icompare(i1, i2);
+					}
+					// compare length without numbers to not include house numbers
+					return -icompare(lengthWithoutNumbers(o1), lengthWithoutNumbers(o2));
+				}
+			});						
+			wordToSearch = searchWords.get(0);
+		}
+
+		return wordToSearch;
 	}
 
 	

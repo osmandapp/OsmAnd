@@ -135,6 +135,8 @@ public class SearchCoreFactory {
 			if(!res.firstUnknownWordMatches) {
 				ws.add(phrase.getUnknownSearchWord());
 			}
+			// publish result to set parentSearchResult before search
+			resultMatcher.publish(res);
 			if (!ws.isEmpty() && api != null && api.isSearchAvailable(phrase)) {
 				SearchPhrase nphrase = phrase.selectWord(res, ws,
 						phrase.isLastUnknownSearchWordComplete());
@@ -143,9 +145,9 @@ public class SearchCoreFactory {
 				api.search(nphrase, resultMatcher);
 				resultMatcher.setParentSearchResult(prev);
 			}
-			if (resultMatcher.getCount() == cnt) {
-				resultMatcher.publish(res);
-			}
+//			if (resultMatcher.getCount() == cnt) {
+//				resultMatcher.publish(res);
+//			}
 		}
 	}
 
@@ -428,40 +430,8 @@ public class SearchCoreFactory {
 				};
 				Iterator<BinaryMapIndexReader> offlineIterator = phrase.getRadiusOfflineIndexes(DEFAULT_ADDRESS_BBOX_RADIUS * 5,
 						SearchPhraseDataType.ADDRESS);
-				List<String> unknownSearchWords = phrase.getUnknownSearchWords();
 				
-				String wordToSearch = "";
-				if (phrase.getUnknownSearchWordLength() > 1) {
-					List<String> searchWords = new ArrayList<>(unknownSearchWords);
-					searchWords.add(0, phrase.getUnknownSearchWord());
-					Collections.sort(searchWords, new Comparator<String>() {
-
-						private int lengthWithoutNumbers(String s) {
-							int len = 0;
-							for(int k = 0; k < s.length(); k++) {
-								if(s.charAt(k) >= '0' && s.charAt(k) <= '9') {
-									
-								} else {
-									len++;
-								}
-							}
-							return len;
-						}
-						
-						@Override
-						public int compare(String o1, String o2) {
-							int i1 = CommonWords.getCommonSearch(o1);
-							int i2 = CommonWords.getCommonSearch(o2);
-							if (i1 != i2) {
-								return icompare(i1, i2);
-							}
-							// compare length without numbers to not include house numbers
-							return -icompare(lengthWithoutNumbers(o1), lengthWithoutNumbers(o2));
-						}
-					});						
-					wordToSearch = searchWords.get(0);
-				}
-				
+				String wordToSearch = phrase.getUnknownWordToSearch();
 				while (offlineIterator.hasNext() && wordToSearch.length() > 0) {
 					BinaryMapIndexReader r = offlineIterator.next();
 					currentFile[0] = r;
@@ -475,7 +445,9 @@ public class SearchCoreFactory {
 					}
 					r.searchAddressDataByName(req);
 					for (SearchResult res : immediateResults) {
-						res.firstUnknownWordMatches = wordToSearch.equals(phrase.getUnknownSearchWord());
+						res.firstUnknownWordMatches = wordToSearch.equals(phrase.getUnknownSearchWord()) ||
+								phrase.getNameStringMatcher().matches(res.localeName) || 
+								phrase.getNameStringMatcher().matches(res.otherNames);
 						if (res.objectType == ObjectType.STREET) {
 							City ct = ((Street) res.object).getCity();
 							phrase.countUnknownWordsMatch(res, 
@@ -879,10 +851,13 @@ public class SearchCoreFactory {
 					sw.getResult().file.preloadStreets(c, null);
 				}
 				int limit = 0;
-				NameStringMatcher nm = phrase.getNameStringMatcher();
+				String wordToSearch = phrase.getUnknownWordToSearch();
+				boolean firstUnknownWordMatches = wordToSearch.equals(phrase.getUnknownSearchWord());
+				NameStringMatcher nm = phrase.getNameStringMatcher(wordToSearch, phrase.isUnknownSearchWordComplete());
 				for (Street object : c.getStreets()) {
 
 					SearchResult res = new SearchResult(phrase);
+					
 					res.localeName = object.getName(phrase.getSettings().getLang(), phrase.getSettings().isTransliterate());
 					res.otherNames = object.getAllNames(true);
 					if (object.getName().startsWith("<")) {
@@ -893,6 +868,9 @@ public class SearchCoreFactory {
 							&& !(nm.matches(res.localeName) || nm.matches(res.otherNames))) {
 						continue;
 					}
+					res.firstUnknownWordMatches = firstUnknownWordMatches ||
+							phrase.getNameStringMatcher().matches(res.localeName) || 
+							phrase.getNameStringMatcher().matches(res.otherNames);
 					res.localeRelatedObjectName = c.getName(phrase.getSettings().getLang(), phrase.getSettings().isTransliterate());
 					res.object = object;
 					res.preferredZoom = 17;
@@ -969,8 +947,7 @@ public class SearchCoreFactory {
 
 			if (s != null) {
 				BinaryMapIndexReader file = phrase.getLastSelectedWord().getResult().file;
-				String lw = phrase.getUnknownSearchWord();
-				NameStringMatcher sm = phrase.getNameStringMatcher();
+				
 				if (cacheBuilding != s) {
 					cacheBuilding = s;
 					SearchRequest<Building> sr = BinaryMapIndexReader
@@ -1001,10 +978,12 @@ public class SearchCoreFactory {
 						}
 					});
 				}
+				String lw = phrase.getUnknownWordToSearchBuilding();
+				NameStringMatcher buildingMatch = phrase.getNameStringMatcher(lw, phrase.isLastUnknownSearchWordComplete());
 				for (Building b : s.getBuildings()) {
 					SearchResult res = new SearchResult(phrase);
 					boolean interpolation = b.belongsToInterpolation(lw);
-					if ((!sm.matches(b.getName()) && !interpolation)
+					if ((!buildingMatch.matches(b.getName()) && !interpolation)
 							|| !phrase.isSearchTypeAllowed(ObjectType.HOUSE)) {
 						continue;
 					}
@@ -1026,10 +1005,14 @@ public class SearchCoreFactory {
 					res.preferredZoom = 17;
 					resultMatcher.publish(res);
 				}
-				if (Algorithms.isEmpty(lw) || !Character.isDigit(lw.charAt(0))) {
+				String streetIntersection = phrase.getUnknownWordToSearch();
+				NameStringMatcher streetMatch = phrase.getNameStringMatcher(streetIntersection, phrase.isLastUnknownSearchWordComplete());
+				if (Algorithms.isEmpty(streetIntersection) || 
+						(!Character.isDigit(streetIntersection.charAt(0)) && 
+								CommonWords.getCommonSearch(streetIntersection) == -1) ) {
 					for (Street street : s.getIntersectedStreets()) {
 						SearchResult res = new SearchResult(phrase);
-						if ((!sm.matches(street.getName()) && !sm.matches(street.getAllNames(true)))
+						if ((!streetMatch.matches(street.getName()) && !streetMatch.matches(street.getAllNames(true)))
 								|| !phrase.isSearchTypeAllowed(ObjectType.STREET_INTERSECTION)) {
 							continue;
 						}
@@ -1448,7 +1431,5 @@ public class SearchCoreFactory {
 		}
 	}
 	
-	public static int icompare(int x, int y) {
-        return (x < y) ? -1 : ((x == y) ? 0 : 1);
-    }
+	
 }
