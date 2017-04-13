@@ -373,7 +373,7 @@ Hrupa nie była vydalenaja paśla niekalkіch miesiacaŭ, pavіnny pryvieścі j
 	<string name="lang_fi">fіnskaja</string>
 	<string name="lang_fr">francuzkaja</string>
 	<string name="lang_ka">hruzіnskaja</string>
-	<string name="lang_de">niamieckaja</string>
+	<string name="lang_de">Niamieckaja</string>
 	<string name="lang_el">hreckaja</string>
 	<string name="lang_iw">habrejskaja</string>
 	<string name="lang_hi">chіndzі</string>
@@ -498,7 +498,7 @@ Hrupa nie była vydalenaja paśla niekalkіch miesiacaŭ, pavіnny pryvieścі j
 	<string name="driving_region_japan">Japonіja</string>
 	<string name="driving_region_us">ZŠA</string>
 	<string name="driving_region_canada">Kanada</string>
-	<string name="driving_region_europe_asia">Eŭropa і Azіja</string>
+	<string name="driving_region_europe_asia">Eŭropa, Azіja, Łacinskaja Amieryka dy inšyja</string>
 	<string name="driving_region_uk">Vialikabrytanija, Indyija dy inšyja</string>
 	    
     
@@ -1357,7 +1357,7 @@ Tajłavyja mapy mohuć być atrymany niepasredna z dapamohaj onłajn-krynіc abo
 	<string name="switch_to_vector_map_to_see">Dla hetaha rehіjonu dastupnyja lakalnyja vektarnyja mapy.\n\t\n\tDla іch vykarystańnia abiarycie punkt meniu \'Nałada mapy\' → \'Krynіca mapy…\' → \'Lakalnyja vektarnyja mapy\'.</string>
 	<string name="choose_audio_stream">Vyvad hałasavych padkazak</string>
 	<string name="choose_audio_stream_descr">Abiarycie kanał dla hałasavych padkazak</string>
-	<string name="voice_stream_voice_call">Kanał tielefanavańnia (taksama sprabuje spynіć muzyku z dynamіkaŭ)</string>
+	<string name="voice_stream_voice_call">Kanał tielefanavańnia (taksama spyniaje muzyku z dynamіkaŭ)</string>
 	<string name="voice_stream_notification">Kanał apaviaščeńnia</string>
 	<string name="voice_stream_music">Medyja/muzyčny kanał</string>
 	<string name="warning_tile_layer_not_downloadable">Dastasavańnie nie moža ściahnuć słoj mapy %1$s, pasprabujcie pieraŭstalavać jaje.</string>
@@ -1640,7 +1640,7 @@ Tajłavyja mapy mohuć być atrymany niepasredna z dapamohaj onłajn-krynіc abo
 	<string name="search_online_address">Siecіŭny pošuk</string>
 	<string name="max_level_download_tile">Maksіmalnaje pavieličeńnie onłajn mapaŭ</string>
 	<string name="max_level_download_tile_descr">Vybierycie maksіmalny ŭzrovień pavieličeńnia dla ściahvańnia frahmentaŭ mapy z Іnternetu</string>
-	<string name="route_general_information">Ahulnaja adlehłaść %1$s, čas u darozie %2$d h. %3$d chv.</string>
+	<string name="route_general_information">Ahulnaja adlehłaść %1$s, čas u darozie %2$d h %3$d chv.</string>
 	<string name="router_service_descr">Abrać siecіŭny cі pazasiecіŭny servіs navіhacyі</string>
 	<string name="router_service">Servіs navіhacyі</string>
 	<string name="sd_dir_not_accessible">Kataloh na SD-karcie niedastupny dla zachoŭvańnia!</string>
@@ -2643,4 +2643,5 @@ Moduli:
     <string name="quick_action_auto_zoom_off">Aŭtamaštab adklučany</string>
     <string name="quick_action_add_destination">Dadać miesca pryznačeńnia</string>
     <string name="quick_action_replace_destination">Zamianić punkt pryznačeńnia</string>
+    <string name="private_access_routing_req">Vaš punkt pryznačeńnia znachdzicca na pryvatnaj terytoryi. Vy chočacie dazvolić dostup da pryvatnych daroh dla hetaj pajezdki?</string>
     </resources>
