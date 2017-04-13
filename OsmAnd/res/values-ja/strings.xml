@@ -758,7 +758,7 @@ POIの更新は利用できません</string>
     <string name="recording_photo_description">写真 %1$s %2$s</string>
     <string name="av_def_action_picture">写真を撮影</string>
     <string name="recording_context_menu_precord">写真を撮影</string>
-    <string name="dropbox_plugin_description">Dropboxプラグインはあなたの経路と音声/ビデオメモをあなたのDropboxアカウントと同期することを可能にします。</string>
+    <string name="dropbox_plugin_description">Dropboxプラグインはあなたの経路と音声/動画メモをあなたのDropboxアカウントと同期することを可能にします。</string>
     <string name="dropbox_plugin_name">Dropboxプラグイン</string>
     
     <string name="intermediate_points_change_order">順序を変更</string>
@@ -794,7 +794,7 @@ POIの更新は利用できません</string>
     <string name="recording_default_name">記録中</string>
     <string name="shared_string_control_stop">停止</string>
     <string name="shared_string_control_start">記録</string>
-    <string name="map_widget_av_notes">音声/ビデオメモ</string>
+    <string name="map_widget_av_notes">音声/動画メモ</string>
     <string name="osmand_srtm_short_description_80_chars">オフライン等高線のためのOsmAndプラグイン</string>
     <string name="map_widget_distancemeasurement">距離の測定</string>
     <string name="map_online_data_descr">オンラインマップを使用します(SDカードにダウンロードしたタイルのキャッシュを使用)</string>
@@ -1103,8 +1103,8 @@ POIの更新は利用できません</string>
  "</string>
     <string name="audionotes_location_not_defined">メモを取る地点が指定されていません。マップ上を長押しでメニューを開き、右端のボタン『その他のアクション』から任意の形式のメモを取ることが出来ます。</string>
     <string name="map_widget_audionotes">音声メモ</string>
-    <string name="audionotes_plugin_description">音声/ビデオメモプラグインは、旅行中の音声/写真/ビデオに関するメモ機能を提供します。マップ画面上のボタンまたはコンテキストメニューから使用出来ます。</string>
-    <string name="audionotes_plugin_name">音声/ビデオメモ</string>
+    <string name="audionotes_plugin_description">音声/動画メモプラグインは、旅行中の音声/写真/動画に関するメモ機能を提供します。マップ画面上のボタンまたはコンテキストメニューから使用出来ます。</string>
+    <string name="audionotes_plugin_name">音声/動画メモ</string>
     <string name="index_srtm_parts">パート</string>
     <string name="index_srtm_ele">等高線</string>
     <string name="srtm_plugin_description">"このプラグインは、等高線のオーバーレイ表示と陰影起伏図(浮き彫り表示)の両方がOsmAndの標準マップ上に表示出来るように用意されています。
@@ -1918,7 +1918,7 @@ OsmAndの従来のマップスタイルに戻すには、このプラグイン�
 	<string name="plugin_description_title">説明</string>
 	<string name="plugin_install_needs_network">このプラグインのインストールには、インターネット接続が必要です。</string>
 	<string name="get_plugin">取得</string>
-<string name="osm_changes_added_to_local_edits">OSMにローカルで変更された項目を追加します</string>
+<string name="osm_changes_added_to_local_edits">OSMへの変更をストレージ内変更候補に追加しました</string>
    	<string name="mark_to_delete">削除用にマーク</string>
 	<string name="osmo_grop_name_length_alert">グループ名は、少なくとも3文字以上にする必要があります！</string>
 	<string name="welmode_download_maps">マップダウンロード</string>
@@ -2703,7 +2703,7 @@ OsmAndとOSMをサポートする方法として現状最適な方法である�
     <string name="quick_action_map_style">マップスタイルの変更</string>
     <string name="quick_action_map_style_switch">マップスタイルが\"%s\"に変更されました。</string>
     <string name="quick_action_take_audio_note">音声メモを取る</string>
-    <string name="quick_action_take_video_note">ビデオメモを取る</string>
+    <string name="quick_action_take_video_note">動画メモを取る</string>
     <string name="quick_action_take_photo_note">写真メモを取る</string>
     <string name="quick_action_add_osm_bug">OSMのバグを追加</string>
     <string name="quick_action_navigation_voice">音声のon/off</string>
@@ -2719,18 +2719,18 @@ OsmAndとOSMをサポートする方法として現状最適な方法である�
     <string name="quick_actions_delete_text">クイックアクション\"%s\"を削除してもよろしいですか？</string>
     <string name="quick_favorites_show_favorites_dialog">お気に入りダイアログを表示</string>
     <string name="quick_favorites_name_preset">プリセットに名前を付ける</string>
-    <string name="quick_action_add_marker_descr">アクションボタンをタップすると、画面中心にマップマーカーが追加されます。</string>
-    <string name="quick_action_add_gpx_descr">アクションボタンをタップすると、画面中央の地点をGPX経由地点として追加します。</string>
-    <string name="quick_action_take_audio_note_descr">アクションボタンをタップすると画面中央の地点に音声メモを追加します。</string>
-    <string name="quick_action_take_video_note_descr">アクションボタンをタップすると画面中央の地点に動画メモが追加されます。</string>
-    <string name="quick_action_take_photo_note_descr">アクションボタンをタップすると画面中央の地点に写真メモが追加されます。</string>
-    <string name="quick_action_add_osm_bug_descr">アクションボタンをタップすると画面中央の地点にOSMバグ注記が追加されます。</string>
-    <string name="quick_action_add_poi_descr">アクションボタンをタップすると画面中央の地点にPOIが追加されます。</string>
+    <string name="quick_action_add_marker_descr">アクションボタンをタップすると、画面中央アイコンの位置にマップマーカーが追加されます。</string>
+    <string name="quick_action_add_gpx_descr">アクションボタンをタップすると、画面中央アイコンの地点をGPX経由地点として追加します。</string>
+    <string name="quick_action_take_audio_note_descr">アクションボタンをタップすると画面中央アイコンの地点に音声メモを追加します。</string>
+    <string name="quick_action_take_video_note_descr">アクションボタンをタップすると画面中央アイコンの地点に動画メモが追加されます。</string>
+    <string name="quick_action_take_photo_note_descr">アクションボタンをタップすると画面中央アイコンの地点に写真メモが追加されます。</string>
+    <string name="quick_action_add_osm_bug_descr">アクションボタンをタップすると画面中央アイコンの地点にOSMバグ注記が追加されます。</string>
+    <string name="quick_action_add_poi_descr">アクションボタンをタップすると画面中央アイコンの地点にPOIが追加されます。</string>
     <string name="quick_action_navigation_voice_descr">アクションボタンをタップするとナビゲーション中の案内音声on/off切替が出来ます。</string>
-    <string name="quick_action_add_parking_descr">アクションボタンをタップすると画面中央の地点に駐車場所が追加されます。</string>
+    <string name="quick_action_add_parking_descr">アクションボタンをタップすると画面中央アイコンの地点を駐車場所として設定します。</string>
     <string name="quick_action_interim_dialog">住所＆カテゴリー入力ダイアログを表示</string>
     <string name="favorite_empty_place_name">場所</string>
-    <string name="quick_action_duplicates">指定されたクイックアクション名はすでに使われています。重複を避けるために%1$sに変更されました。</string>
+    <string name="quick_action_duplicates">指定されたクイックアクション名はすでに使われています。重複を避けるために[%1$s]に変更されました。</string>
     <string name="quick_action_duplicate">クイックアクション名の重複</string>
     <string name="quick_action_showhide_favorites_descr">アクションボタンをタップするとマップ画面でのお気に入り地点の表示、非表示の切替が出来ます。</string>
     <string name="quick_action_showhide_poi_descr">アクションボタンをタップするとマップ画面でのPOIの表示、非表示の切替が出来ます。</string>
@@ -2773,7 +2773,7 @@ OsmAndとOSMをサポートする方法として現状最適な方法である�
     <string name="add_new_folder">新しいフォルダーを追加</string>
     <string name="points_delete_multiple_succesful">ポイントは正常に削除されました。</string>
     <string name="points_delete_multiple">%1$d個のポイントを削除します。よろしいですか？</string>
-    <string name="track_points_category_name">このルートで重要なポイント</string>
+    <string name="track_points_category_name">このルートで重要な場所</string>
     <string name="gpx_track">経路</string>
     <string name="get_for_month">月額</string>
     <string name="favorite_group_name">グループ名</string>
@@ -2796,9 +2796,9 @@ OsmAndとOSMをサポートする方法として現状最適な方法である�
     <string name="quick_action_add_destination">目的地を追加</string>
     <string name="quick_action_replace_destination">目的地を置き換え</string>
     <string name="quick_action_add_first_intermediate">最初の中間地点を追加</string>
-    <string name="quick_action_add_destination_desc">アクションボタンをタップすると、画面中央を目的地として追加します。それ以前にセットした目的地は最後に寄る中間地点として置き換わります。</string>
-    <string name="quick_action_replace_destination_desc">アクションボタンをタップすると、画面中央の地点を新しい目的地として置き換えます。</string>
-    <string name="quick_action_add_first_intermediate_desc">アクションボタンをタップすると、画面中央の地点を最初の中間地点として追加します。</string>
+    <string name="quick_action_add_destination_desc">アクションボタンをタップすると、画面中央アイコンを目的地として追加します。それ以前にセットした目的地は最後に寄る中間地点として置き換わります。</string>
+    <string name="quick_action_replace_destination_desc">アクションボタンをタップすると、画面中央アイコンの地点を新しい目的地として置き換えます。</string>
+    <string name="quick_action_add_first_intermediate_desc">アクションボタンをタップすると、画面中央アイコンの地点を最初の中間地点として追加します。</string>
     <string name="no_overlay">オーバーレイ無し</string>
     <string name="no_underlay">アンダーレイ無し</string>
     <string name="subscribe_email_error">エラー</string>
@@ -2826,7 +2826,7 @@ OsmAndとOSMをサポートする方法として現状最適な方法である�
     <string name="routing_attr_driving_style_balance_name">バランス</string>
     <string name="routing_attr_driving_style_safety_name">安全性</string>
     <string name="relief_smoothness_factor_descr">平原から丘陵まで、経路設定時優先したい地形を設定します</string>
-    <string name="route_points_category_name">通過するためのルート上地点</string>
+    <string name="route_points_category_name">このルートで通過が必要な場所</string>
     <string name="routing_attr_relief_smoothness_factor_name">標高の変動許容選択</string>
     <string name="rendering_attr_depthContours_description">等深線や深度を表示します</string>
     <string name="rendering_attr_depthContours_name">海洋等深線データ</string>
@@ -2990,4 +2990,6 @@ OsmAndとOSMをサポートする方法として現状最適な方法である�
     <string name="rendering_attr_surfaceIntegrity_name">路面状態</string>
     <string name="translit_name_if_miss">%1$sの名前が欠落している場合、(他の文字で)翻字します</string>
     <string name="translit_names">名称を翻字</string>
+    <string name="private_access_routing_req">目的地の位置が専有エリア内にあります。専有道路あるいは私道を通ることを許可しますか？</string>
+    <string name="quick_action_page_list_descr">アクションボタンをタップすると以下のリスト順にマップスタイルを変更します。</string>
     </resources>
