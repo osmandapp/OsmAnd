@@ -154,7 +154,7 @@
   <string name="live_monitoring_interval_descr">Вкажіть інтервал надсилання даних</string>
   <string name="live_monitoring_interval">Інтервал надсилання даних</string>
   <string name="live_monitoring_url_descr">Вкажіть веб-адресу з наступними параметрами: lat={0}, lon={1}, timestamp={2}, hdop={3}, altitude={4}, speed={5}, bearing={6}</string>
-  <string name="live_monitoring_url">Live tracking web address</string>
+  <string name="live_monitoring_url">Онлайн-відстеження веб-адрес</string>
   <string name="gpx_monitoring_disabled_warn">Записувати треки, використовуючи GPX віджет або вибравши «Запис подорожей» в Налаштуваннях.</string>
   <string name="show_current_gpx_title">Відображати пройдений шлях</string>
   <string name="free_version_message">Безкоштовна версія OsmAnd обмежена %1$s завантаженнями і не підтримує геостатті з Вікіпедії.</string>
@@ -681,7 +681,7 @@
   <string name="data_settings_descr">Налаштування даних: мова, оновлення даних</string>
   <string name="data_settings">Дані</string>
   
-  <string name="osm_settings">OSM редагування</string>
+  <string name="osm_settings">OSM-редагування</string>
   <string name="auto_zoom_map_descr">Автомасштабування мапи відповідно до вашої швидкості (доки мапу синхронізовано із поточним місцезнаходженням)</string>
   <string name="auto_zoom_map">Автомасштабування</string>
   <string name="additional_settings">Додаткові налаштування</string>
@@ -914,7 +914,7 @@
     <string name="recording_photo_description">Фото %1$s %2$s</string>
     <string name="av_def_action_picture">Сфотографувати</string>
     <string name="recording_context_menu_precord">Сфотографувати</string>
-    <string name="dropbox_plugin_description">Втулок Dropbox дає Вам можливість синхронізувати треки і відео/аудіо замітки з вашим обліковим записом Dropbox.</string>
+    <string name="dropbox_plugin_description">Втулок Dropbox дає Вам можливість синхронізувати треки та відео/аудіо-нотатки з вашим обліковим записом Dropbox.</string>
     <string name="dropbox_plugin_name">Втулок Dropbox</string>
     
     <string name="intermediate_points_change_order">Змінити порядок</string>
@@ -935,7 +935,7 @@
     <string name="recording_unavailable">недоступно</string>
     <string name="shared_string_control_stop">Стоп</string>
     <string name="shared_string_control_start">Запис</string>
-    <string name="map_widget_av_notes">Аудіо/відео замітки</string>
+    <string name="map_widget_av_notes">Аудіо/відео-нотатки</string>
     <string name="osmand_srtm_short_description_80_chars">Втулок OsmAnd для відображення рельєфу</string>
     
     <string name="av_use_external_camera">Використовувати програму Камера</string>
@@ -946,8 +946,8 @@
     <string name="recording_default_name">Запис</string>
     <string name="av_def_action_choose">Обрати за запитом</string>
     <string name="recording_is_recorded">Аудіо/відео зараз записується. Для зупинки натисніть на АВ віджет.</string>
-    <string name="recording_context_menu_arecord">Створити аудіо замітку</string>
-    <string name="recording_context_menu_vrecord">Створити відео замітку</string>
+    <string name="recording_context_menu_arecord">Створити аудіо-нотатку</string>
+    <string name="recording_context_menu_vrecord">Створити відео-нотатку</string>
     <string name="recording_context_menu_delete">Вилучити запис</string>
     <string name="recording_context_menu_play">Грати</string>
     
@@ -967,9 +967,9 @@
     
     
     <string name="map_widget_distancemeasurement">Вимірювання відстаней</string>
-    <string name="map_widget_audionotes">Аудіо замітки</string>
+    <string name="map_widget_audionotes">Аудіо-нотатки</string>
     <string name="audionotes_plugin_description">Втулок для створення аудіо/відео заміток під час подорожей, за допомогою використання кнопки на екрані мапи або через контекстне меню на будь-якому місці на мапі.</string>
-    <string name="audionotes_plugin_name">Аудіо/відео замітки</string>
+    <string name="audionotes_plugin_name">Аудіо/відео-нотатки</string>
     <string name="index_srtm_parts">частин</string>
     <string name="index_srtm_ele">Ізолінії висот</string>
     <string name="srtm_plugin_description">"Цей втулок показує як ізолінії висот так і рельєф на стандартних мапах OsmAnd. Ці можливості стануть в нагоді для спортсменів, туристів, мандрівників та для будь-кого, хто цікавиться структурою рельєфу місцевості.
@@ -998,7 +998,7 @@
     <string name="safe_mode_description">Запустити програму в безпечному режимі (сповільнює роботу програми, використовуючи тільки Android-функції).</string>
     <string name="safe_mode">Безпечний режим</string>
     <string name="native_library_not_running">Програму запущено в безпечному режимі (вимикається в Налаштуваннях).</string>
-    <string name="audionotes_location_not_defined">Поточне місцезнаходження для замітки не визначено. Використовуйте контекстне меню для прив\'язки замітки до даної точки.</string>
+    <string name="audionotes_location_not_defined">Поточне місцезнаходження для нотатки не визначено. Використовуйте контекстне меню для прив\'язки нотатки до даної точки.</string>
     
     
     <string name="monitoring_control_start">старт</string>
@@ -1333,7 +1333,7 @@ OsmAnd має відкриті сирці і активно розвиваєть
        * Натисніть та утримуйте мапу для вилучення попередньої точки.\n
        * Натисніть та утримуйте точку для перегляду та додавання опису.\n
        * Натисніть на масштабну лінійку, щоб побачити більше дій.</string>
-    <string name="use_magnetic_sensor_descr">Використовувати магнітометр для визначення сторін світу замість, датчику орієнтації</string>
+    <string name="use_magnetic_sensor_descr">Використовувати магнітометр для визначення сторін світу замість датчика орієнтації</string>
     
 	<string name="destination_point">Пункт призначення %1$s</string>
     
@@ -2088,7 +2088,7 @@ OsmAnd має відкриті сирці і активно розвиваєть
     
     <string name="local_indexes_cat_wiki">Вікіпедія</string>
     <string name="shared_string_show_details">Показати деталі</string>
-    <string name="osm_edit_context_menu_delete">Видалити OSM редагування</string>
+    <string name="osm_edit_context_menu_delete">Видалити OSM-редагування</string>
     <string name="rendering_value_disabled_name">Вимкнено</string>
     <string name="rendering_value_walkingRoutesScopeOSMC_name">Забарвлення згідно приналежності мережі</string>
     <string name="rendering_value_walkingRoutesOSMC_name">Розмальовування відповідно пішохідній символіці OSMC</string>
@@ -2118,20 +2118,20 @@ OsmAnd має відкриті сирці і активно розвиваєть
     <string name="osm_save_offline">Зберегти локально</string>
     <string name="osm_edit_modified_poi">OSM POI відредаговано</string>
     <string name="osm_edit_deleted_poi">OSM POI видалено</string>
-    <string name="context_menu_item_open_note">Відкрити OSM замітку</string>
-    <string name="osm_edit_reopened_note">Відкрити заново OSM замітку</string>
-    <string name="osm_edit_commented_note">До замітки OSM додано коментар</string>
-    <string name="osm_edit_removed_note">Замітку OSM видалено</string>
-    <string name="osm_edit_created_note">Замітку OSM створено</string>
-    <string name="osn_bug_name">Замітка OSM</string>
-    <string name="osn_add_dialog_title">Створити замітку</string>
+    <string name="context_menu_item_open_note">Відкрити OSM-нотатку</string>
+    <string name="osm_edit_reopened_note">Відкрити заново OSM-нотатку</string>
+    <string name="osm_edit_commented_note">До OSM-нотатки додано коментар</string>
+    <string name="osm_edit_removed_note">Вилучено OSM-нотатку</string>
+    <string name="osm_edit_created_note">Створено OSM-нотатку</string>
+    <string name="osn_bug_name">OSM-нотатка</string>
+    <string name="osn_add_dialog_title">Створити нотатку</string>
     <string name="osn_comment_dialog_title">Додати коментар</string>
-    <string name="osn_reopen_dialog_title">Відкрити заново замітку</string>
-    <string name="osn_close_dialog_title">Закрити замітку</string>
-    <string name="osn_add_dialog_success">Замітку успішно створено</string>
-    <string name="osn_add_dialog_error">Трапилась помилка: замітку не створено</string>
-    <string name="osn_close_dialog_success">Замітку успішно закрито</string>
-    <string name="osn_close_dialog_error">Трапилась помилка: замітку не закрито</string>
+    <string name="osn_reopen_dialog_title">Відкрити заново нотатку</string>
+    <string name="osn_close_dialog_title">Закрити нотатку</string>
+    <string name="osn_add_dialog_success">Нотатку успішно створено</string>
+    <string name="osn_add_dialog_error">Трапилась помилка: нотатку не створено</string>
+    <string name="osn_close_dialog_success">Нотатку успішно закрито</string>
+    <string name="osn_close_dialog_error">Трапилась помилка: нотатку не закрито</string>
     <string name="shared_string_commit">Підтвердити</string>
 
     <string name="context_menu_item_delete_waypoint">Вилучити GPX точку?</string>
@@ -2466,7 +2466,7 @@ Facebook: https://www.facebook.com/osmandapp
     <string name="upload_anonymously">Вивантажено анонімно</string>
     <string name="show_transparency_seekbar">Показати прозору пошукову панель</string>
     <string name="report">Звіт</string>
-    <string name="use_osm_live_routing_description">Увімкнути навігацію для змін OSM Live (Beta)</string>
+    <string name="use_osm_live_routing_description">Увімкнути навігацію для змін OSM Live (бета)</string>
 	<string name="use_osm_live_routing">Навігація OSM Live</string>
     <string name="access_no_destination">Пункт призначення не встановлено</string>
     <string name="map_widget_magnetic_bearing">Магнітний пеленг</string>
@@ -2501,9 +2501,19 @@ Facebook: https://www.facebook.com/osmandapp
     <string name="no_map_markers_found">Додайте позначки на мапі</string>
     <string name="no_waypoints_found">Точки шляху не знайдені</string>
     <string name="storage_permission_restart_is_required">Тепер застосунок має можливість записувати у зовнішнє сховище. Потрібне ручне перезавантаження.</string>
-    <string name="release_2_3">" • OSM Live. Підтримка маперів та розробників; надає щогодинне оновлення даних.
-\n\n • Позначки. Новий спосіб швидко позначити місце на мапі.\n\n • Більш деталізовані мапи OSM з позначками доріг в залежності від країни та великою кількістю нових обʼєктів.\n\n • Оновлений зовнішній вигляд та підготовка маршрутів.
-\n\n • Багато покращень в контекстному меню мапи, наприклад контекстний пошук адрес.\n\nта багато іншого… "</string>
+    <string name="release_2_3">"
+ • OSM Live. Підтримка маперів та розробників; надає щогодинне оновлення даних.
+
+ • Позначки. Новий спосіб швидко позначити місце на мапі.
+
+ • Більш деталізовані мапи OSM з позначками доріг в залежності від країни та великою кількістю нових обʼєктів.
+
+ • Оновлений зовнішній вигляд та підготовка маршрутів.
+
+ • Багато покращень в контекстному меню мапи, наприклад контекстний пошук адрес.
+
+та багато іншого…
+ "</string>
     <string name="shared_string_move_up">Вгору</string>
     <string name="shared_string_move_down">Вниз</string>
     <string name="finish_navigation">Закінчити навігацію</string>
@@ -2794,10 +2804,10 @@ Facebook: https://www.facebook.com/osmandapp
  • Показ профілю висоти, та ухилу для записаного GPX (а також швидкості) та побудованого маршруту
 
 
- • Параметр \"Стиль водіння\" та покращення логіки для побудови маршруту для велосипеда
+ • Параметр „Стиль водіння“ та покращення логіки для побудови маршруту для велосипеда
 
 
- • Настройки для використання даних о висотах в побудові велосипедного маршруту
+ • Налаштування для використання даних про висоти в побудові велосипедного маршруту
 
 
  • Кілька інших поліпшень й виправлень помилок
@@ -2869,4 +2879,18 @@ Facebook: https://www.facebook.com/osmandapp
     <string name="routing_attr_driving_style_balance_name">Збалансований</string>
     <string name="routing_attr_driving_style_safety_name">Безпечний</string>
     <string name="routing_attr_driving_style_speed_name">Швидкісний</string>
+    <string name="animate_my_location">Анімувати моє місце розташування</string>
+    <string name="animate_my_location_desc">Включити екстраполяцію мого місця розташування при тимчасовій втраті фіксації розташування</string>
+    <string name="do_not_show_startup_messages">Не показувати повідомлення при запуску</string>
+    <string name="subscribe_email_desc">Підпишіться на наше email-розсилання про знижки на OsmAnd та отримаєте 3 додаткові завантаження мап!</string>
+    <string name="do_not_show_startup_messages_desc">Відображаються знижки та спеціальні повідомлення про місцеві події</string>
+    <string name="restart_search">Шукати знову</string>
+    <string name="increase_search_radius">Збільшити радіус пошуку</string>
+    <string name="nothing_found">Нічого не знайдено :(</string>
+    <string name="private_access_routing_req">"Пункт призначення знаходиться в області з приватним доступом.  Ви хочете дозволити доступ по приватних дорогах для цієї поїздки?"</string>
+    <string name="nothing_found_descr">Спробуйте змінити запит або збільшити радіус пошуку</string>
+    <string name="quick_action_showhide_osmbugs_title">Показати/приховати нотатки OSM</string>
+    <string name="quick_action_osmbugs_show">Показати OSM-нотатки</string>
+    <string name="quick_action_osmbugs_hide">Приховати OSM-нотатки</string>
+    <string name="quick_action_showhide_osmbugs_descr">Натискання на кнопку дії відобразить чи приховає OSM-нотатки на мапі.</string>
     </resources>
