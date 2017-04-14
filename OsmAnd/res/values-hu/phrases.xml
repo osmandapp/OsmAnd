@@ -1192,7 +1192,7 @@
 	<string name="poi_toll_no">Nem fizetős</string>
 	<string name="poi_toll_hgv_yes">Tehergépkocsinak fizetős</string>
 	<string name="poi_tactile_paving_yes">Van</string>
-	<string name="poi_tactile_paving_no">Vakvezető sáv nincs</string>
+	<string name="poi_tactile_paving_no">Vakvezető burkolat nincs</string>
 	<string name="poi_traffic_signals_sound_yes">Van</string>
 	<string name="poi_traffic_signals_sound_no">Nincs</string>
 	<string name="poi_traffic_signals_sound_walk">Csak amikor zöld</string>
@@ -1855,7 +1855,7 @@
 	<string name="poi_payment_toll_type">Fizetési mód</string>
 	<string name="poi_traffic_signals_sound">Hangjelzés</string>
 	<string name="poi_highway_crossing_type">Típus</string>
-	<string name="poi_tactile_paving">Vakvezető sáv</string>
+	<string name="poi_tactile_paving">Vakvezető burkolat</string>
 	<string name="poi_payment_fuel_type">Üzemanyagkártyák</string>
 	<string name="poi_automated">Automatizált</string>
 	<string name="poi_fee">Díj</string>
