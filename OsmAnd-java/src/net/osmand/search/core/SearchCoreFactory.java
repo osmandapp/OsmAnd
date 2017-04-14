@@ -287,7 +287,9 @@ public class SearchCoreFactory {
 			if (phrase.isNoSelectedType() && bbox != null
 					&& (phrase.isUnknownSearchWordPresent() || phrase.isEmptyQueryAllowed())
 					&& phrase.isSearchTypeAllowed(ObjectType.CITY)) {
-				NameStringMatcher nm = phrase.getNameStringMatcher();
+				String wrd = phrase.getUnknownWordToSearch();
+				NameStringMatcher nm = phrase.getNameStringMatcher(wrd, phrase.isUnknownSearchWordComplete());
+				// NameStringMatcher nm = phrase.getNameStringMatcher();
 				resArray.clear();
 				resArray = townCitiesQR.queryInBox(bbox, resArray);
 				int limit = 0;
