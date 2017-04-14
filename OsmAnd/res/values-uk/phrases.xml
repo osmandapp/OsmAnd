@@ -949,4 +949,6 @@
 	<string name="poi_craft_caterer">Кейтерінг</string>
 	<string name="poi_craft_clockmaker">Годинникар</string>
 	<string name="poi_craft_dressmaker">Пошиття, ремонт одягу</string>
+	<string name="poi_memorial_plaque">Табличка</string>
+	<string name="poi_memorial_blue_plaque">Синя табличка</string>
 	</resources>
