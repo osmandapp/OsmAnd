@@ -638,7 +638,7 @@ public class SearchPhrase {
 	public String getUnknownWordToSearch() {
 		List<String> unknownSearchWords = getUnknownSearchWords();
 		
-		String wordToSearch = "";
+		String wordToSearch = getUnknownSearchWord();
 		if (unknownSearchWords.size() > 0) {
 			List<String> searchWords = new ArrayList<>(unknownSearchWords);
 			searchWords.add(0, getUnknownSearchWord());
