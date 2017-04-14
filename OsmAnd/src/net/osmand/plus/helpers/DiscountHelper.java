@@ -39,6 +39,7 @@ public class DiscountHelper {
 	private static String mUrl;
 	private static boolean mBannerVisible;
 	private static final String URL = "http://osmand.net/api/motd";
+	private static final String INAPP_PREFIX = "osmand-in-app:";
 
 
 	public static void checkAndDisplay(final MapActivity mapActivity) {
@@ -105,6 +106,13 @@ public class DiscountHelper {
 			int maxTotalShow = obj.getInt("max_total_show");
 			JSONObject application = obj.getJSONObject("application");
 
+			if (url.startsWith(INAPP_PREFIX) && url.length() > INAPP_PREFIX.length()) {
+				String inAppSku = url.substring(INAPP_PREFIX.length());
+				if (InAppHelper.isPurchased(app, inAppSku)) {
+					return;
+				}
+			}
+
 			String appName = app.getPackageName();
 			Date date = new Date();
 			if (application.has(appName) && application.getBoolean(appName)
@@ -113,7 +121,7 @@ public class DiscountHelper {
 				OsmandSettings settings = app.getSettings();
 				int discountId = getDiscountId(message, description, start, end);
 				boolean discountChanged = settings.DISCOUNT_ID.get() != discountId;
-				if(discountChanged) {
+				if (discountChanged) {
 					settings.DISCOUNT_TOTAL_SHOW.set(0);
 				}
 				if (discountChanged
@@ -200,7 +208,7 @@ public class DiscountHelper {
 	}
 
 	private static void openUrl(final MapActivity mapActivity, String url) {
-		if (url.startsWith("osmand-in-app:")) {
+		if (url.startsWith(INAPP_PREFIX)) {
 			if (url.contains(InAppHelper.SKU_FULL_VERSION_PRICE)) {
 				mapActivity.execInAppTask(new InAppHelper.InAppRunnable() {
 					@Override
