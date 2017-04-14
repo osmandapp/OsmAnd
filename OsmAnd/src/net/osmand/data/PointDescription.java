@@ -178,7 +178,12 @@ public class PointDescription {
 			return pnt.zone_number + "" + pnt.zone_letter + " " + ((long) pnt.easting) + " "
 					+ ((long) pnt.northing);
 		} else if (f == PointDescription.OLC_FORMAT) {
-			return getLocationOlcName(lat, lon);
+			try {
+				return getLocationOlcName(lat, lon);
+			} catch(RuntimeException e) {
+				e.printStackTrace();
+				return "0, 0";
+			}
 		} else {
 			try {
 				return LocationConvert.convert(lat, f) + ", " + LocationConvert.convert(lon, f);
