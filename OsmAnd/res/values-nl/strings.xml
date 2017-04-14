@@ -3040,4 +3040,8 @@ Van bijna alle landen is een kaart te downloaden: van Afghanistan tot Zimbabwe, 
     <string name="quick_action_osmbugs_hide">Verberg OSM-opmerkingen</string>
     <string name="quick_action_showhide_osmbugs_descr">Een druk op de sneltoets toont of verbergt OSM-opmerkingen.</string>
     <string name="sorted_by_distance">Gesorteerd op afstand</string>
+    <string name="private_access_routing_req">Uw bestemming ligt in een gebied wat particulier eigendom is. Wilt u gebruik van particuliere wegen voor deze route toestaan?</string>
+    <string name="restart_search">Opnieuw zoeken</string>
+    <string name="increase_search_radius">Zoekbereik vergroten</string>
+    <string name="nothing_found">Niets gevonden :(</string>
     </resources>
