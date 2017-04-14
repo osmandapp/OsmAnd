@@ -173,6 +173,18 @@ public class InAppHelper {
 		return lastValidationCheckTime != 0;
 	}
 
+	public static boolean isPurchased(OsmandApplication ctx, String inAppSku) {
+		OsmandSettings settings = ctx.getSettings();
+		if (inAppSku.equals(SKU_FULL_VERSION_PRICE)) {
+			return settings.FULL_VERSION_PURCHASED.get();
+		} else if (inAppSku.equals(SKU_LIVE_UPDATES_FULL) || inAppSku.equals(SKU_LIVE_UPDATES_FREE)) {
+			return settings.LIVE_UPDATES_PURCHASED.get();
+		} else if (inAppSku.equals(SKU_DEPTH_CONTOURS_FULL) || inAppSku.equals(SKU_DEPTH_CONTOURS_FREE)) {
+			return settings.DEPTH_CONTOURS_PURCHASED.get();
+		}
+		return false;
+	}
+
 	public void exec(final @NonNull InAppRunnable runnable) {
 		this.stopAfterResult = true;
 
