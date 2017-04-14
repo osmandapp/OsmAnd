@@ -2831,7 +2831,7 @@ Kérlek adj meg egy teljes kódot</string>
     <string name="routing_attr_height_obstacles_description">SRMT, ASTER és EU-DEM domborzatmodellek használata</string>
 
     <string name="rendering_attr_depthContours_description">Mélységvonalak és pontok megjelenítése</string>
-    <string name="rendering_attr_depthContours_name">Mélységvonalak</string>
+    <string name="rendering_attr_depthContours_name">Tengeri mélységvonalak</string>
 	<string name="release_2_6">"
  • Új funkció: Gyors művelet gomb
 
@@ -2915,10 +2915,10 @@ Kérlek adj meg egy teljes kódot</string>
     <string name="subscribe_email_desc">Iratkozz fel az alkalmazás akciókról szóló hírlevelünkre és kapsz további 3 térképletöltést!</string>
     <string name="depth_contour_descr">Térképkészlet, amely tartalmazza a tengeri mélységvonalakat és -pontokat (30 szögperces háló alapján).</string>
     <string name="sea_depth_thanks">Köszönjük, hogy megvásároltad a tengeri mélységvonalakat!</string>
-    <string name="index_item_depth_contours_osmand_ext">Mélységvonalak</string>
-    <string name="index_item_depth_points_southern_hemisphere">Mélységpontok, déli félteke</string>
-    <string name="index_item_depth_points_northern_hemisphere">Mélységpontok, északi félteke</string>
-    <string name="download_depth_countours">Mélységvonalak</string>
+    <string name="index_item_depth_contours_osmand_ext">Tengeri mélységvonalak</string>
+    <string name="index_item_depth_points_southern_hemisphere">Tengeri mélységpontok, déli félteke</string>
+    <string name="index_item_depth_points_northern_hemisphere">Tengeri mélységpontok, északi félteke</string>
+    <string name="download_depth_countours">Tengeri mélységvonalak</string>
     <string name="nautical_maps">Hajózási térképek</string>
     <string name="analyze_on_map">Elemzés a térképen</string>
     <string name="shared_string_visible">Látható</string>
@@ -2960,4 +2960,9 @@ Kérlek adj meg egy teljes kódot</string>
  Élvezze a hangalapú és vizuális navigációs szolgáltatást, tekintsen meg érdekes pontokat (POI-kat), hozzon létre és kezeljen GPX-útvonalakat szintvonalak és magasságinformációk használatával (egy plugin segítségével), válasszon az autós, kerékpáros és gyalogos üzemmód közül és használjon ki számos egyéb lehetőséget.
  "</string>
     <string name="save_poi_too_many_uppercase">A név túl sok nagybetűt tartalmaz. Folytatja?</string>
+    <string name="private_access_routing_req">A célpont korlátozott hozzáférésű területen található. Engedélyezed a magánutak használatát ennél az útvonaltrvnél?</string>
+    <string name="restart_search">Keresés újraindítása</string>
+    <string name="increase_search_radius">Keresett terület szélesítése</string>
+    <string name="nothing_found">Nincs találat :(</string>
+    <string name="nothing_found_descr">Próbálkozz a keresőkifejezés módosításával vagy a keresett terület szélesítésével</string>
     </resources>
