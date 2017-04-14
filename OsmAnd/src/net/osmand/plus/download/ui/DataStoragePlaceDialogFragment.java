@@ -103,7 +103,7 @@ public class DataStoragePlaceDialogFragment extends BottomSheetDialogFragment {
 		View deviceStorageRow = view.findViewById(R.id.deviceMemoryRow);
 		deviceStorageRow.setOnClickListener(deviceMemoryOnClickListener);
 		ImageView deviceStorageImageView = (ImageView) view.findViewById(R.id.deviceMemoryImageView);
-		deviceStorageImageView.setImageDrawable(getContentIcon(R.drawable.ic_sdcard));
+		deviceStorageImageView.setImageDrawable(getContentIcon(R.drawable.ic_action_phone));
 		TextView deviceStorageDescription = (TextView) view.findViewById(R.id.deviceMemoryDescription);
 		deviceStorageDescription.setText(deviceStorageName);
 		deviceStorageDescription.setText(getFreeSpace(deviceStorage));
@@ -112,7 +112,7 @@ public class DataStoragePlaceDialogFragment extends BottomSheetDialogFragment {
 		if (hasExternalStoragePermission && sharedStorage != null) {
 			sharedMemoryRow.setOnClickListener(sharedMemoryOnClickListener);
 			ImageView sharedMemoryImageView = (ImageView) view.findViewById(R.id.sharedMemoryImageView);
-			sharedMemoryImageView.setImageDrawable(getContentIcon(R.drawable.ic_sdcard));
+			sharedMemoryImageView.setImageDrawable(getContentIcon(R.drawable.ic_action_phone));
 			TextView sharedMemoryDescription = (TextView) view.findViewById(R.id.sharedMemoryDescription);
 			sharedMemoryDescription.setText(getFreeSpace(sharedStorage));
 		} else {
