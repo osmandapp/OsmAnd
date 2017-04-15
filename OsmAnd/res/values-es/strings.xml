@@ -71,7 +71,7 @@
     <string name="osmand_service">Modo en segundo plano</string>
     <string name="osmand_service_descr">OsmAnd se ejecuta en segundo plano mientras la pantalla está apagada</string>
     <string name="switch_to_raster_map_to_see">No hay ningún mapa vectorial descargado para esta ubicación. Puede descargar uno en Ajustes (Gestionar mapas), o cambiar al mapa con conexión (para esto active el complemento mapas con conexión).</string>
-    <string name="download_files_not_enough_space">No hay suficiente espacio para descargar %1$s MB (disponible: %2$s).</string>
+    <string name="download_files_not_enough_space">No hay suficiente espacio libre para descargar %1$s MB (disponible: %2$s).</string>
     <string name="download_files_question_space">¿Descargar {0} archivo(s)?
 El espacio de almacenamiento usado es {1} MB.
  (El espacio disponible es {2} MB.)</string>
@@ -723,7 +723,7 @@ Las teselas de mapas, se pueden obtener directamente a través de fuentes con co
     <string name="rendering_attr_hmRendered_description">Aumentar el detalle que se muestra del mapa</string>
     <string name="rendering_attr_hmRendered_name">Mostrar más detalle del mapa</string>
     <string name="route_roundabout">Rotonda: Tome la %1$dª salida en dirección a</string>
-    <string name="route_kl">Manténgase a la izquierda y continúe</string>
+    <string name="route_kl">Mantente a la izquierda y continúa</string>
     <string name="route_kr">Manténgase a la derecha y continúe</string>
     <string name="asap">Lo antes posible</string>
     <string name="gpxup_public">Público</string>
@@ -1937,7 +1937,7 @@ Lon %2$s</string>
     <string name="favourites">Favoritos</string>
     <string name="poi_action_delete">borrar</string>
     <string name="saved_at_time">Guardado exitosamente en: %1$s</string>
-    <string name="poi_deleted_localy">El PDI se eliminará una vez subido los cambios</string>
+    <string name="poi_deleted_localy">El PDI se eliminará cuando subas los cambios</string>
     <string name="show_gpx">Mostrar GPX</string>
     <string name="count_of_lines">Número de líneas</string>
     <string name="show_on_start">Mostrar al inicio</string>
@@ -2459,7 +2459,7 @@ El espacio de almacenamiento usado es {3} MB temporalmente y {1} MB permanenteme
     <string name="shared_string_recorded">Grabado</string>
     <string name="shared_string_record">Grabar</string>
     <string name="rendering_attr_contourColorScheme_description">Esquema de color de las curvas de nivel</string>
-    <string name="save_track_min_speed">Velocidad mínima pata registro</string>
+    <string name="save_track_min_speed">Velocidad mínima para registro</string>
     <string name="save_track_min_speed_descr">Establece la velocidad mínima para que un punto se registre</string>
     <string name="save_track_min_distance">Detección de movimiento para registro</string>
     <string name="save_track_min_distance_descr">Establece la distancia mínima desde la última posición para que un punto se registre</string>
@@ -2528,7 +2528,7 @@ El espacio de almacenamiento usado es {3} MB temporalmente y {1} MB permanenteme
     <string name="quick_action_take_audio_note_descr">Pulsar el botón de acción agregará una nota de audio en la ubicación del centro de la pantalla.</string>
     <string name="quick_action_take_video_note_descr">Pulsar el botón de acción agregará una nota de video en la ubicación del centro de la pantalla.</string>
     <string name="quick_action_take_photo_note_descr">Pulsar el botón de acción agregará una nota de la foto en el lugar del centro de la pantalla.</string>
-    <string name="quick_action_add_osm_bug_descr">Pulsar el botón de acción agregará una nota de error OSM en la ubicación del centro de la pantalla.</string>
+    <string name="quick_action_add_osm_bug_descr">Pulsando el botón de acción agregará una nota de error OSM en la ubicación del centro de la pantalla.</string>
     <string name="quick_action_add_poi_descr">Pulsar el botón de acción agregará un PDI en la ubicación del centro de la pantalla.</string>
     <string name="quick_action_navigation_voice_descr">Pulsar el botón de acción desactivará o activará las indicaciones de voz durante la navegación.</string>
     <string name="quick_action_add_parking_descr">Pulsar el botón de acción agregará un lugar de aparcamiento en la ubicación del centro de la pantalla.</string>
