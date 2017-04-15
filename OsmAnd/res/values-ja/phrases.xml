@@ -1142,7 +1142,7 @@
 	<string name="poi_automated">自動化(Automated)</string>
 	<string name="poi_subway_station_filter">地下鉄駅(Subway station)</string>
 	<string name="poi_ferry_terminal_cargo">貨物(Cargo)</string>
-	<string name="poi_aerialway_bicycle">自転車交通(Bicycle transportation)</string>
+	<string name="poi_aerialway_bicycle">自転車輸送(Bicycle transportation)</string>
 	<string name="poi_fee">料金(Fee)</string>
 	<string name="poi_site_type_megalith">巨石建造物(Megalith)</string>
 	<string name="poi_site_type_tumulus">古墳(Tumulus)</string>
@@ -1876,9 +1876,9 @@
 	<string name="poi_bicycle_parking_bollard">杭式</string>
 	<string name="poi_bicycle_parking_informal">簡易駐輪所</string>
 
-	<string name="poi_aerialway_bicycle_yes">許可</string>
-	<string name="poi_aerialway_bicycle_no">不許可</string>
-	<string name="poi_aerialway_bicycle_summer">夏季のみ許可</string>
+	<string name="poi_aerialway_bicycle_yes">可</string>
+	<string name="poi_aerialway_bicycle_no">自転車持込不可</string>
+	<string name="poi_aerialway_bicycle_summer">夏季のみ可</string>
 	<string name="poi_vending_bicycle_tube">自転車チューブ</string>
 	<string name="poi_service_bicycle_retail_yes">小売(Retail)</string>
 	<string name="poi_service_bicycle_retail_no">自転車の小売:なし(Bicycle retail: no)</string>
@@ -1904,4 +1904,9 @@
 	<string name="poi_bicycle_parking_tree">ツリー式</string>
 	<string name="poi_bicycle_parking_streetpod">高セキュリティ駐輪所(Streetpod)</string>
 
+	<string name="poi_aerialway_heating">暖房</string>
+	<string name="poi_aerialway_heating_no">暖房無し</string>
+	<string name="poi_surface_unpaved">路面:未舗装</string>
+	<string name="poi_surface_paved">路面:舗装有り</string>
+	<string name="poi_surface_asphalt">路面:アスファルト</string>
 	</resources>
