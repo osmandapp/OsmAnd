@@ -2889,8 +2889,10 @@ Facebook: https://www.facebook.com/osmandapp
     <string name="nothing_found">Нічого не знайдено :(</string>
     <string name="private_access_routing_req">"Пункт призначення знаходиться в області з приватним доступом.  Ви хочете дозволити доступ по приватних дорогах для цієї поїздки?"</string>
     <string name="nothing_found_descr">Спробуйте змінити запит або збільшити радіус пошуку</string>
-    <string name="quick_action_showhide_osmbugs_title">Показати/приховати нотатки OSM</string>
+    <string name="quick_action_showhide_osmbugs_title">Показати/приховати OSM-нотатки</string>
     <string name="quick_action_osmbugs_show">Показати OSM-нотатки</string>
     <string name="quick_action_osmbugs_hide">Приховати OSM-нотатки</string>
     <string name="quick_action_showhide_osmbugs_descr">Натискання на кнопку дії відобразить чи приховає OSM-нотатки на мапі.</string>
+    <string name="sorted_by_distance">Відсортоване за відстанню</string>
+    <string name="search_favorites">Пошук у закладках</string>
     </resources>
