@@ -2644,4 +2644,13 @@
 	<string name="poi_animal_keeping_type_paddock">類型︰圍場</string>
 	<string name="poi_animal_keeping_type_open_stable">類型︰ 開放馬廄</string>
 
+	<string name="poi_street_cabinet_power">櫃子類型︰電源</string>
+	<string name="poi_street_cabinet_telecom">櫃子類型︰電信</string>
+	<string name="poi_street_cabinet_cable_tv">櫃子類型︰有線電視</string>
+	<string name="poi_street_cabinet_gas">櫃子類型︰瓦斯</string>
+	<string name="poi_street_cabinet_postal_service">櫃子類型︰郵政服務</string>
+	<string name="poi_street_cabinet_waste">櫃子類型︰廢棄物</string>
+	<string name="poi_street_cabinet_water_management">櫃子類型︰水資源管理</string>
+	<string name="poi_street_cabinet_street_lighting">櫃子類型︰馬路照明</string>
+
 	</resources>
