@@ -217,7 +217,7 @@ public class FileNameTranslationHelper {
 			return ctx.getString(R.string.index_item_world_basemap);
 		} else if (basename.equals("world_bitcoin_payments")) {
 			return ctx.getString(R.string.index_item_world_bitcoin_payments);
-		} else if (basename.equals("world_seamarks_basemap")) {
+		} else if (basename.equals("world_seamarks")) {
 			return ctx.getString(R.string.index_item_world_seamarks);
 		} else if (basename.equals("depth_contours_osmand_ext")) {
 			return ctx.getString(R.string.index_item_depth_contours_osmand_ext);

@@ -32,7 +32,7 @@ public class DownloadResources extends DownloadResourceGroup {
 	private List<IndexItem> rawResources;
 	private Map<WorldRegion, List<IndexItem> > groupByRegion;
 	private List<IndexItem> itemsToUpdate = new ArrayList<>();
-	public static final String WORLD_SEAMARKS_KEY = "world_seamarks_basemap";
+	public static final String WORLD_SEAMARKS_KEY = "world_seamarks";
 	
 	
 	public DownloadResources(OsmandApplication app) {
