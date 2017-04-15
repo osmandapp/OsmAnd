@@ -661,7 +661,7 @@
 	<string name="poi_funeral_directors">葬儀屋(Funeral directors)</string>
 	<string name="poi_craft_computer">コンピューター技師(Computer craft)</string>
 	<string name="poi_beauty">SPA・ネイル・総合美容店(Beauty salon)</string>
-	<string name="poi_beauty_salon_nails">ネイルサロン(Nail salon)</string>
+	<string name="poi_beauty_salon_nails">マニキュア(Manicure)</string>
 	<string name="poi_hairdresser">美容室(Hairdresser)</string>
 	<string name="poi_massage">マッサージ店・整体院(Massage salon)</string>
 	<string name="poi_tattoo">刺青・彫師(Tattoo salon)</string>
@@ -1908,5 +1908,36 @@
 	<string name="poi_aerialway_heating_no">暖房無し</string>
 	<string name="poi_surface_unpaved">路面:未舗装</string>
 	<string name="poi_surface_paved">路面:舗装有り</string>
-	<string name="poi_surface_asphalt">路面:アスファルト</string>
+	<string name="poi_surface_asphalt">路面:アスファルトコンクリート</string>
+	<string name="poi_surface_concrete">路面:セメントベースコンクリート</string>
+	<string name="poi_surface_sett">路面:敷石舗装</string>
+	<string name="poi_surface_cobblestone">路面:丸石舗装</string>
+	<string name="poi_surface_paving_stones">路面:(コンクリート製含む)敷石舗装</string>
+	<string name="poi_surface_pebblestone">路面:川砂利</string>
+	<string name="poi_surface_stone">路面:石</string>
+	<string name="poi_surface_metal">路面:鉄板</string>
+	<string name="poi_surface_wood">路面:木材</string>
+	<string name="poi_surface_gravel">路面:砕石</string>
+	<string name="poi_surface_fine_gravel">路面:砕石＋砂(複層構造)</string>
+	<string name="poi_surface_compacted">路面:砂利＋砂混合舗装</string>
+	<string name="poi_surface_sand">路面:砂</string>
+	<string name="poi_surface_grass">路面:草</string>
+	<string name="poi_surface_grass_paver">路面:水抜き穴有り舗装</string>
+	<string name="poi_surface_ground">路面:野道、獣道</string>
+	<string name="poi_surface_dirt">路面:土、ダート</string>
+	<string name="poi_surface_mud">路面:泥、湿地</string>
+	<string name="poi_surface_ice">路面:氷</string>
+	<string name="poi_surface_salt">路面:塩湖</string>
+	<string name="poi_surface_snow">路面:雪道</string>
+
+	<string name="poi_animal_training_horse">ホーストレーニング</string>
+
+	<string name="poi_animal_training_dog">ドッグトレーニング</string>
+	<string name="poi_beach_surface_type">海岸面</string>
+	<string name="poi_beach_sand">砂</string>
+	<string name="poi_beach_shingle">小石、砂利</string>
+	<string name="poi_beach_rocky">岩場</string>
+
+	<string name="poi_beauty_salon_service">美容サービス</string>
+	<string name="poi_city_capital">首都検索</string>
 	</resources>
