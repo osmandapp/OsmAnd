@@ -27,8 +27,8 @@
 	<string name="poi_transportation">交通機関(Transportation)</string>
 		<string name="poi_road_obstacle">道路障害物(Road obstacle)</string>
 		<string name="poi_filling_station">給油所</string>
-		<string name="poi_personal_transport">私設交通機関(Personal transport)</string>
-		<string name="poi_public_transport">公共交通</string>
+		<string name="poi_personal_transport">交通施設・駐車場や料金所等(Personal transport)</string>
+		<string name="poi_public_transport">公共交通機関</string>
 		<string name="poi_air_transport">空路</string>
 		<string name="poi_water_transport">水上交通(Water transport)</string>
 		<string name="poi_bicycle_transport">自転車交通(Bicycle transport)</string>
@@ -208,7 +208,7 @@
 	<string name="poi_railway_platform">鉄道プラットホーム(Railroad platform)</string>
 	<string name="poi_halt">鉄道停車位置(Railroad stop)</string>
 	<string name="poi_subway_entrance">地下鉄入り口(Subway entrance)</string>
-	<string name="poi_subway_station">地下鉄駅(Subway station)</string>
+	<string name="poi_subway_station">地下鉄駅も含む(Subway station)</string>
 	<string name="poi_railway_buffer_stop">鉄道用車止め(Railroad buffer stop)</string>
 	<string name="poi_helipad">ヘリポート(Helipad)</string>
 	<string name="poi_runway">滑走路(Runway)</string>
@@ -1140,7 +1140,7 @@
 	<string name="poi_tactile_paving">視覚障害者誘導用ブロック(Tactile paving)</string>
 	<string name="poi_self_service">セルフサービス(Self service)</string>
 	<string name="poi_automated">自動化(Automated)</string>
-	<string name="poi_subway_station_filter">地下鉄駅も対象(Subway station)</string>
+	<string name="poi_subway_station_filter">地下鉄駅(Subway station)</string>
 	<string name="poi_ferry_terminal_cargo">貨物(Cargo)</string>
 	<string name="poi_aerialway_bicycle">自転車交通(Bicycle transportation)</string>
 	<string name="poi_fee">料金(Fee)</string>
@@ -1159,9 +1159,9 @@
 	<string name="poi_wheelchair_accessibility">車椅子補助(Wheelchair accessibility)</string>
 	<string name="poi_wheelchair_designated">指定(Designated)</string>
 	<string name="poi_payment_coins_50c12">硬貨_50セント、1ユーロ、2ユーロ硬貨(50c, 1€, and 2€ coins)</string>
-	<string name="poi_payment_cash_yes">現金可(Cash)</string>
+	<string name="poi_payment_cash_yes">現金(Cash)</string>
 	<string name="poi_payment_ep_cash_yes">キャッシュカード(ゲルトカルテ)(Cash card (Geldkarte))</string>
-	<string name="poi_free_flying_characteristics">ジャンル(Characteristic)</string>
+	<string name="poi_free_flying_characteristics">飛行対応ジャンル(Characteristic)</string>
 	<string name="poi_free_flying_hanggliding_yes">ハンググライディング(Hanggliding)</string>
 	<string name="poi_free_flying_site_takeoff">離陸可(Takeoff)</string>
 	<string name="poi_free_flying_site_landing">着陸可(Landing)</string>
@@ -1194,13 +1194,13 @@
 
 	<string name="poi_massage_type">マッサージタイプ(Massage type)</string>
 	<string name="poi_massage_thai">タイ式</string>
-	<string name="poi_massage_sexual">性的・回春(Massage type)</string>
+	<string name="poi_massage_sexual">性的・回春(Sexual)</string>
 	<string name="poi_massage_chinese">中国式・ツボ押し(Chinese)</string>
 	<string name="poi_massage_therapeutic">セラピック・整体(Therapeutic)</string>
 
 	<string name="poi_massage_yes">マッサージサービス(Massage services)</string>
 	<string name="poi_piste_difficulty">ゲレンデ難易度(Piste difficulty)</string>
-	<string name="poi_piste_grooming">ゲレンデ状態・調整(Piste grooming)</string>
+	<string name="poi_piste_grooming">ゲレンデの対応種・状態(Piste grooming)</string>
 	<string name="poi_piste_difficulty_easy">簡単・初級者用(Easy)</string>
 	<string name="poi_piste_difficulty_intermediate">普通・中級者用(Intermediate)</string>
 	<string name="poi_piste_difficulty_advanced">上級者用(Advanced)</string>
@@ -1213,7 +1213,7 @@
 	<string name="poi_piste_grooming_scooter">スノースクート(Scooter)</string>
 	<string name="poi_piste_grooming_skating">スケート(Skating)</string>
 	<string name="poi_piste_grooming_no">無し(No)</string>
-	<string name="poi_piste_grooming_mogul">こぶ有り(Mogul)</string>
+	<string name="poi_piste_grooming_mogul">モーグル(Mogul)</string>
 
 	<string name="poi_smoking">喫煙(Smoking)</string>
 	<string name="poi_smoking_no">禁煙(Not allowed)</string>
@@ -1223,7 +1223,7 @@
 	<string name="poi_smoking_isolated">喫煙室のみ可(In a isolated room)</string>
 	<string name="poi_smoking_dedicated">喫煙者専用(Dedicated to smokers)</string>
 
-	<string name="poi_theatre_genre">ジャンル(Genre)</string>
+	<string name="poi_theatre_genre">上演ジャンル(Genre)</string>
 	<string name="poi_theatre_genre_philharmonic">交響楽団(Philharmonic)</string>
 	<string name="poi_theatre_genre_musical">ミュージカル(Musical)</string>
 	<string name="poi_theatre_genre_drama">演劇(Drama)</string>
@@ -1866,5 +1866,42 @@
 	<string name="poi_water_characteristic_mud">泥水</string>
 	<string name="poi_water_characteristic_mineral">鉱物含む</string>
 	<string name="poi_water_characteristic_sulfuric">硫黄含む</string>
+
+	<string name="poi_bicycle_parking_anchors">アンカー式</string>
+	<string name="poi_bicycle_parking_stands">スタンド式</string>
+	<string name="poi_bicycle_parking_wall_loops">車輪留め具式</string>
+	<string name="poi_bicycle_parking_rack">ラック式</string>
+	<string name="poi_bicycle_parking_building">風雨防護有り駐輪施設</string>
+	<string name="poi_bicycle_parking_shed">小屋式</string>
+	<string name="poi_bicycle_parking_bollard">杭式</string>
+	<string name="poi_bicycle_parking_informal">簡易駐輪所</string>
+
+	<string name="poi_aerialway_bicycle_yes">許可</string>
+	<string name="poi_aerialway_bicycle_no">不許可</string>
+	<string name="poi_aerialway_bicycle_summer">夏季のみ許可</string>
+	<string name="poi_vending_bicycle_tube">自転車チューブ</string>
+	<string name="poi_service_bicycle_retail_yes">小売(Retail)</string>
+	<string name="poi_service_bicycle_retail_no">自転車の小売:なし(Bicycle retail: no)</string>
+	<string name="poi_service_bicycle_repair_yes">修理可能</string>
+	<string name="poi_service_bicycle_repair_no">修理不可</string>
+	<string name="poi_service_bicycle_rental_yes">レンタル可</string>
+	<string name="poi_service_bicycle_rental_no">レンタル不可</string>
+	<string name="poi_service_bicycle_pump_yes">空気入れ有り</string>
+	<string name="poi_service_bicycle_pump_no">空気入れ無し</string>
+	<string name="poi_service_bicycle_diy_yes">修理用工具</string>
+	<string name="poi_service_bicycle_diy_no">修理用工具:無し</string>
+	<string name="poi_service_bicycle_cleaning_yes">手入れ・清掃</string>
+	<string name="poi_service_bicycle_cleaning_no">自転車クリーニング:無し</string>
+	<string name="poi_service_bicycle_chaintool_yes">チェーン整備工具</string>
+	<string name="poi_service_bicycle_chaintool_no">チェーン整備工具:無し</string>
+	<string name="poi_service_bicycle_second_hand_yes">中古自転車の小売販売</string>
+	<string name="poi_service_bicycle_second_hand_no">中古自転車の小売販売:無し</string>
+	<string name="poi_bicycle_repair_station">自転車セルフ修理所</string>
+
+	<string name="poi_ramp_bicycle_yes">自転車用ランプ:有り</string>
+	<string name="poi_ramp_bicycle_no">自転車用ランプ:無し</string>
+	<string name="poi_bicycle_parking_lockers">ロッカー式</string>
+	<string name="poi_bicycle_parking_tree">ツリー式</string>
+	<string name="poi_bicycle_parking_streetpod">高セキュリティ駐輪所(Streetpod)</string>
 
 	</resources>
