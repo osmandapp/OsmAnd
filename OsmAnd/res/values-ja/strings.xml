@@ -376,7 +376,7 @@ POIの更新は利用できません</string>
      <string name="shared_string_history">履歴</string>
      <string name="uploading_data">データをアップロード中…</string>
      <string name="uploading">アップロード中…</string>
-     <string name="search_nothing_found">何も見つかりません</string>
+     <string name="search_nothing_found">見つかりませんでした</string>
      <string name="searching">検索中…</string>
      <string name="searching_address">住所を検索中…</string>
      <string name="search_osm_nominatim">OSM Nominatimを使って住所を検索</string>
@@ -2992,4 +2992,6 @@ OsmAndとOSMをサポートする方法として現状最適な方法である�
     <string name="translit_names">名称を翻字</string>
     <string name="private_access_routing_req">目的地の位置が専有エリア内にあります。専有道路あるいは私道を通ることを許可しますか？</string>
     <string name="quick_action_page_list_descr">アクションボタンをタップすると以下のリスト順にマップスタイルを変更します。</string>
+    <string name="nothing_found">見つかりませんでした(´д｀)</string>
+    <string name="nothing_found_descr">検索単語を変更したり、検索の距離を広げてみてください</string>
     </resources>
