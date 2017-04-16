@@ -2971,7 +2971,7 @@ Fonctionnalités principales :
     <string name="edit_name">Modifier le nom</string>
     <string name="save_poi_too_many_uppercase">Le nom contient beaucoup de majuscules. Souhaitez-vous continuer ?</string>
     <string name="routing_attr_allow_private_name">Autoriser les accès privés</string>
-    <string name="routing_attr_allow_private_name_description">Autoriser l\'accès aux zones privées</string>
+    <string name="routing_attr_allow_private_description">Autoriser l\'accès aux zones privées</string>
     <string name="display_zoom_level">Niveau de zoom de l\'affichage : %1$s</string>
     <string name="srtm_color_scheme">Couleur du thème</string>
     <string name="show_from_zoom_level">Afficher à partir du niveau de zoom</string>

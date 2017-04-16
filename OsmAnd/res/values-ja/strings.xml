@@ -2983,7 +2983,7 @@ OsmAndとOSMをサポートする方法として現状最適な方法である�
     <string name="srtm_purchase_header">等高線をマップ上で見るには、プラグインの購入とインストールが必要です</string>
     <string name="show_from_zoom_level">表示ズームレベル</string>
     <string name="routing_attr_allow_private_name">プライベートアクセスを許可</string>
-    <string name="routing_attr_allow_private_name_description">プライベートエリアにアクセスを許可</string>
+    <string name="routing_attr_allow_private_description">プライベートエリアにアクセスを許可</string>
     <string name="display_zoom_level">表示ズームレベル: %1$s</string>
     <string name="index_item_depth_points_southern_hemisphere">南半球の深度マップ</string>
     <string name="index_item_depth_points_northern_hemisphere">北半球の深度マップ</string>

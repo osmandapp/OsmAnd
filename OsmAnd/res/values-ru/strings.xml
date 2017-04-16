@@ -26,7 +26,7 @@
     <string name="edit_name">Изменить имя</string>
     <string name="route_is_too_long_v2">Возможно, потребуется очень много времени для локального (оффлайн) расчёта маршрута. Пожалуйста, добавьте один или более промежуточных пунктов на маршруте, если расчет не закончен через 10 или более минут.</string>
     <string name="routing_attr_allow_private_name">Разрешить частный доступ</string>
-    <string name="routing_attr_allow_private_name_description">Разрешить доступ к частным владениям</string>
+    <string name="routing_attr_allow_private_description">Разрешить доступ к частным владениям</string>
     <string name="shared_string_overview">Обзор</string>
     <string name="select_street">Выберите улицу</string>
     <string name="shared_string_in_name">в %1$s</string>
