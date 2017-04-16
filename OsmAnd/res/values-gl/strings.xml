@@ -2498,7 +2498,7 @@ Pódese pechar esta vista desactivándoa aquí ou cambiando o «Estilo de mapa»
     <string name="srtm_purchase_header">Para ver as liñas de nivel no mapa hai que comprar e instalar un engadido</string>
     <string name="srtm_color_scheme">Esquema de cores</string>
     <string name="routing_attr_allow_private_name">Permitir acceso privado</string>
-    <string name="routing_attr_allow_private_name_description">Permitir acceso a zonas privadas</string>
+    <string name="routing_attr_allow_private_description">Permitir acceso a zonas privadas</string>
     <string name="change_color">Cambiar a cor</string>
     <string name="edit_name">Editar o nome</string>
     <string name="lang_fy">Frisón</string>

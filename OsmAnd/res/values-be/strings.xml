@@ -2984,5 +2984,5 @@ OsmAnd мае адкрыты зыходны код і актыўна разві�
     <string name="srtm_purchase_header">Для прагляду контурных ліній на мапе, вам неабходна набыць і ўсталяваць дадатак «Contour Lines»</string>
     <string name="srtm_color_scheme">Каляровая схема</string>
     <string name="routing_attr_allow_private_name">Дазволіць прыватны доступ</string>
-    <string name="routing_attr_allow_private_name_description">Дазволіць доступ на прыватную тэрыторыю</string>
+    <string name="routing_attr_allow_private_description">Дазволіць доступ на прыватную тэрыторыю</string>
     </resources>

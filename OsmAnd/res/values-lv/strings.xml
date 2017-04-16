@@ -2897,7 +2897,7 @@ Ja jums ir vajadzīga palīdzība ar OsmAnd aplikāciju, lūdzu kontaktējieties
     <string name="nothing_found">Neko neatradu :(</string>
     <string name="nothing_found_descr">Meklējiet pēc cita vārda vai palieliniet meklēšanas rādiusu, ietverot blakus teritorijas</string>
     <string name="quick_action_showhide_osmbugs_title">Rādīt/nerādīt OSM piezīmes</string>
-    <string name="routing_attr_allow_private_name_description">Atļaut piekļūšanu privātajām zemēm</string>
+    <string name="routing_attr_allow_private_description">Atļaut piekļūšanu privātajām zemēm</string>
     <string name="animate_my_location_desc">Atļaut manas lokācijas ekstrapolāciju īslaicīgas atrašanās vietas zuduma gadījumā</string>
     <string name="quick_action_auto_zoom_desc">Spiežot darbības pogu, tiks ieslēgta vai izslēgta automātiskā kartes mērogošana, atkarībā no kustības ātruma.</string>
     <string name="quick_action_add_destination">Pievienot mērķi</string>

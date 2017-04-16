@@ -2623,7 +2623,7 @@ Moduli:
     <string name="srtm_purchase_header">Dla prahladu konturnych linij na mapie, vam nieabchodna nabyć i ŭstalavać dadatak «Contour Lines»</string>
     <string name="srtm_color_scheme">Kalarovaja schiema</string>
     <string name="routing_attr_allow_private_name">Dazvolić pryvatny dostup</string>
-    <string name="routing_attr_allow_private_name_description">Dazvolić dostup na pryvatnuju terytoryju</string>
+    <string name="routing_attr_allow_private_description">Dazvolić dostup na pryvatnuju terytoryju</string>
     <string name="display_zoom_level">Maštab: %1$s</string>
     <string name="favorite_group_name">Nazva hrupy</string>
     <string name="change_color">Zmianić koler</string>
