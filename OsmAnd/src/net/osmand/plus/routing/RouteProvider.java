@@ -1092,7 +1092,8 @@ public class RouteProvider {
 		for (int i = cDirInfo; i < directionInfo.size(); i++) {
 			RouteDirectionInfo dirInfo = directionInfo.get(i);
 			if (dirInfo.routePointOffset - routePointOffsetAdjusted >= cRoute) {
-				if (dirInfo.getTurnType() != null && !dirInfo.getTurnType().isSkipToSpeak()) {
+				if (dirInfo.getTurnType() != null && !dirInfo.getTurnType().isSkipToSpeak() &&
+						dirInfo.routePointOffset - routePointOffsetAdjusted < routeNodes.size()) {
 					Location loc = routeNodes.get(dirInfo.routePointOffset - routePointOffsetAdjusted);
 					WptPt pt = new WptPt();
 					pt.lat = loc.getLatitude();
