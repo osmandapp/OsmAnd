@@ -714,7 +714,7 @@
     <string name="opening_hours_not_supported">開啟時間的格式不支援編輯</string>
     <string name="add_new_rule">新增新規則</string>
     <string name="transport_Routes">導航路線</string>
-    <string name="transport_Stop">停止</string>
+    <string name="transport_Stop">停靠點</string>
     <string name="transport_stops">站牌</string>
     <string name="transport_search_after">後續路線</string>
     <string name="transport_search_before">優先路線</string>
@@ -2682,7 +2682,7 @@ Facebook：https://www.facebook.com/osmandapp
     <string name="upload_poi">上傳 POI</string>
     <string name="route_roundabout_short">利用 %1$d 退出並離開</string>
     <string name="search_map_hint">查詢城市或地區</string>
-    <string name="wiki_around">近期維基百科文章</string>
+    <string name="wiki_around">附近維基百科條目</string>
     <string name="legacy_search">舊版搜尋</string>
     <string name="show_legacy_search">顯示舊版搜尋</string>
     <string name="show_legacy_search_desc">在拖曳清單中啟用舊版搜尋</string>
