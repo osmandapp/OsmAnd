@@ -1476,6 +1476,9 @@ public class QuickSearchDialogFragment extends DialogFragment implements OsmAndC
 						app.runInUIThread(new Runnable() {
 							@Override
 							public void run() {
+								if(paused) {
+									return;
+								}
 								searching = false;
 								if (resultListener == null || resultListener.searchFinished(object.requiredSearchPhrase)) {
 									hideProgressBar();
