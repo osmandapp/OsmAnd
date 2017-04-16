@@ -2843,7 +2843,7 @@ OsmAndとOSMをサポートする方法として現状最適な方法である�
     <string name="coords_search">座標検索</string>
     <string name="advanced_coords_search">高度な座標検索</string>
     <string name="lang_ber">ベルベル諸語</string>
-    <string name="route_is_too_long_v2">現在のルートは計算するのに長すぎます。10分経ってもルート設定がされない場合、中間の目的地を設定してください。</string>
+    <string name="route_is_too_long_v2">現在のルートが長すぎて計算できない可能性があります。10分以内にルートが決定されなければ、中間目的地を設定してください。</string>
     <string name="osmand_extended_description_part1">"
  OsmAnd(OSM Automated Navigation Directions～自動ナビ案内)は、『無償利用可、ワールドワイド対応、高品質のOpenStreetMap(OSM)データ』を使用した、地図＆ナビゲーションアプリです。
 
