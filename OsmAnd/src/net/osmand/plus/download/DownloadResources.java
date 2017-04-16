@@ -32,8 +32,10 @@ public class DownloadResources extends DownloadResourceGroup {
 	private List<IndexItem> rawResources;
 	private Map<WorldRegion, List<IndexItem> > groupByRegion;
 	private List<IndexItem> itemsToUpdate = new ArrayList<>();
-	public static final String WORLD_SEAMARKS_KEY = "world_seamarks_basemap";
-	
+	public static final String WORLD_SEAMARKS_KEY = "world_seamarks";
+	public static final String WORLD_SEAMARKS_NAME = "World_seamarks";
+	public static final String WORLD_SEAMARKS_OLD_KEY = "world_seamarks_basemap";
+	public static final String WORLD_SEAMARKS_OLD_NAME = "World_seamarks_basemap";
 	
 	public DownloadResources(OsmandApplication app) {
 		super(null, DownloadResourceGroupType.WORLD, "");
@@ -293,7 +295,8 @@ public class DownloadResources extends DownloadResourceGroup {
 				groupByRegion.get(wg).add(ii);
 			} else {
 				if (ii.getFileName().startsWith("World_")) {
-					if (ii.getFileName().toLowerCase().startsWith(WORLD_SEAMARKS_KEY)) {
+					if (ii.getFileName().toLowerCase().startsWith(WORLD_SEAMARKS_KEY) || 
+							ii.getFileName().toLowerCase().startsWith(WORLD_SEAMARKS_OLD_KEY)) {
 						nauticalMaps.addItem(ii);
 					} else {
 						worldMaps.addItem(ii);

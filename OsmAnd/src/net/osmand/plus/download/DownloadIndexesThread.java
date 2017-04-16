@@ -20,7 +20,6 @@ import android.support.v7.app.NotificationCompat;
 import android.support.v7.app.NotificationCompat.Builder;
 import android.view.View;
 import android.widget.Toast;
-
 import net.osmand.IndexConstants;
 import net.osmand.PlatformUtil;
 import net.osmand.map.WorldRegion;
@@ -515,6 +514,11 @@ public class DownloadIndexesThread {
 						if (result) {
 							if (DownloadActivityType.isCountedInDownloads(item)) {
 								downloads.set(downloads.get() + 1);
+							}
+							if(item.getBasename().toLowerCase().equals(DownloadResources.WORLD_SEAMARKS_KEY)) {
+								File oldFile = new File(app.getAppPath(IndexConstants.MAPS_PATH), DownloadResources.WORLD_SEAMARKS_OLD_NAME + 
+										IndexConstants.BINARY_MAP_INDEX_EXT); 
+								Algorithms.removeAllFiles(oldFile);
 							}
 							File bf = item.getBackupFile(app);
 							if (bf.exists()) {
