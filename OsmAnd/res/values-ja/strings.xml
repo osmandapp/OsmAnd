@@ -2541,7 +2541,7 @@ OsmAndとOSMをサポートする方法として現状最適な方法である�
  • オープンロケーションコード(OLC)をサポート
 
 
- • 記録されたGPXによる高度と勾配を表示
+ • 記録済みGPXトラックとルート計算後での標高、勾配、および速度プロファイルを表示
 
 
  • 自転車の\"運転スタイル\"の設定とそれに応じたルート検索の改善
@@ -2780,7 +2780,7 @@ OsmAndとOSMをサポートする方法として現状最適な方法である�
     <string name="change_color">色を変更</string>
     <string name="edit_name">名前の編集</string>
     <string name="animate_my_location">現在地をアニメーションさせる</string>
-    <string name="animate_my_location_desc">地図上で現在地をアニメーションさせて強調表示します</string>
+    <string name="animate_my_location_desc">現在地を見失った場合、現在地の修正が行われるまで位置を推定して表示させます</string>
     <string name="shared_string_overview">概要</string>
     <string name="select_street">道路を選択</string>
     <string name="type_address">住所を入力</string>
@@ -2813,7 +2813,7 @@ OsmAndとOSMをサポートする方法として現状最適な方法である�
     <string name="fonts_header">マップ用フォント</string>
     <string name="right_side_navigation">右側走行</string>
     <string name="driving_region_automatic">自動</string>
-    <string name="do_not_send_anonymous_app_usage_desc">OsmAndアプリケーションはセッション中に使用される画面内の一般的な情報を送信します。地理位置情報やユーザーから入力された情報を収集することはありません。</string>
+    <string name="do_not_send_anonymous_app_usage_desc">OsmAndは実行中のどのメニューを開いたかの情報を収集します。ユーザーの現在地、入力した地域、閲覧情報、検索、ダウンロードなどの情報を送信することはありません。</string>
     <string name="do_not_send_anonymous_app_usage">アプリケーションの匿名使用統計情報を送信しない</string>
     <string name="do_not_show_startup_messages">起動時にメッセージを表示しない</string>
     <string name="do_not_show_startup_messages_desc">アプリ割引＆特別なローカルイベントメッセージが該当します</string>
@@ -2976,17 +2976,17 @@ OsmAndとOSMをサポートする方法として現状最適な方法である�
     <string name="sorted_by_distance">距離順で並べ替え</string>
     <string name="search_favorites">お気に入りを検索</string>
     <string name="hillshade_menu_download_descr">陰影起伏図をマップに表示するには、その地域用特殊マップのダウンロードが必要です。</string>
-    <string name="hillshade_purchase_header">陰影起伏図をマップ上で見るには、プラグインの購入とインストールが必要です</string>
+    <string name="hillshade_purchase_header">陰影起伏図をマップ上で見るには、等高線プラグインの購入とインストールが必要です</string>
     <string name="hide_from_zoom_level">非表示ズームレベル</string>
     <string name="srtm_menu_download_descr">等高線をマップ上に表示するには、その地域用等高線マップのダウンロードが必要です。</string>
     <string name="shared_string_plugin">プラグイン</string>
-    <string name="srtm_purchase_header">等高線をマップ上で見るには、プラグインの購入とインストールが必要です</string>
+    <string name="srtm_purchase_header">等高線をマップ上で見るには、等高線プラグインの購入とインストールが必要です</string>
     <string name="show_from_zoom_level">表示ズームレベル</string>
     <string name="routing_attr_allow_private_name">専有通路を通行許可</string>
     <string name="routing_attr_allow_private_name_description">専有エリア(業者用通路、私有地など)を通行可能と見なします</string>
     <string name="display_zoom_level">表示ズームレベル: %1$s</string>
-    <string name="index_item_depth_points_southern_hemisphere">南半球の深度マップ</string>
-    <string name="index_item_depth_points_northern_hemisphere">北半球の深度マップ</string>
+    <string name="index_item_depth_points_southern_hemisphere">南半球の海洋深度マップ</string>
+    <string name="index_item_depth_points_northern_hemisphere">北半球の海洋深度マップ</string>
     <string name="rendering_attr_surfaceIntegrity_name">路面状態</string>
     <string name="translit_name_if_miss">%1$sの名前が欠落している場合、(他の文字で)翻字します</string>
     <string name="translit_names">名称を翻字</string>
@@ -2994,4 +2994,7 @@ OsmAndとOSMをサポートする方法として現状最適な方法である�
     <string name="quick_action_page_list_descr">アクションボタンをタップすると以下のリスト順にマップスタイルを変更します。</string>
     <string name="nothing_found">見つかりませんでした(´д｀)</string>
     <string name="nothing_found_descr">検索単語を変更したり、検索の距離を広げてみてください</string>
+    <string name="increase_search_radius">検索範囲を広げる</string>
+    <string name="restart_search">再検索</string>
+    <string name="srtm_color_scheme">カラーパターン</string>
     </resources>
