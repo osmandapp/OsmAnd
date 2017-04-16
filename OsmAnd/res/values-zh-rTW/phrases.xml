@@ -2653,4 +2653,8 @@
 	<string name="poi_street_cabinet_water_management">櫃子類型︰水資源管理</string>
 	<string name="poi_street_cabinet_street_lighting">櫃子類型︰馬路照明</string>
 
+	<string name="poi_health_facility_type_support_group_home">醫療機構類型︰支援團體家屋</string>
+
+	<string name="poi_health_facility_type_nursing_home">醫療機構類型︰安養院</string>
+	<string name="poi_health_facility_type_field_hospital">醫療機構類型︰野戰醫院</string>
 	</resources>
