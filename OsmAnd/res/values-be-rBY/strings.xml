@@ -2654,4 +2654,12 @@ Moduli:
     <string name="nautical_maps">Marskija mapy</string>
     <string name="shared_string_visible">Bačny</string>
     <string name="restore_purchases">Adnaŭleńnie pakupak</string>
+    <string name="fonts_header">Šryfty dła mapy</string>
+    <string name="right_side_navigation">Pravabakavy ruch</string>
+    <string name="driving_region_automatic">Aŭtamatyčny</string>
+    <string name="do_not_show_startup_messages">Nie pakazvać paviedamlieńni pry starcie</string>
+    <string name="parking_options">Opcyi parkoŭki</string>
+    <string name="full_version_thanks">Dziakuj Vam za nabyćcio poŭnaj versii OsmAnd!</string>
+    <string name="routing_attr_relief_smoothness_factor_hills_name">Ŭzhorysty</string>
+    <string name="routing_attr_relief_smoothness_factor_more_plains_name">Raŭninny</string>
     </resources>
