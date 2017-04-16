@@ -2657,4 +2657,22 @@
 
 	<string name="poi_health_facility_type_nursing_home">醫療機構類型︰安養院</string>
 	<string name="poi_health_facility_type_field_hospital">醫療機構類型︰野戰醫院</string>
+	<string name="poi_health_specialty_dermatovenereology_yes">皮膚科</string>
+	<string name="poi_health_specialty_biology_yes">臨床生物學</string>
+	<string name="poi_health_specialty_anaesthetics_yes">麻醉科</string>
+	<string name="poi_health_specialty_pulmonology_yes">呼吸醫學</string>
+	<string name="poi_health_specialty_dental_oral_maxillo_facial_surgery_yes">牙科、口腔和頜面外科</string>
+	<string name="poi_health_specialty_maternity_yes">產科</string>
+	<string name="poi_health_specialty_emergency_medicine_yes">急診醫學</string>
+	<string name="poi_health_specialty_emergency_medicine_no">急診醫療：無</string>
+	<string name="poi_health_specialty_orthodontics_yes">齒顎矯正科</string>
+	<string name="poi_health_specialty_physiotherapy_yes">物理治療</string>
+	<string name="poi_health_specialty_biochemistry_yes">生物化學</string>
+	<string name="poi_health_specialty_occupational_yes">職能治療</string>
+	<string name="poi_health_specialty_child_psychiatry_yes">兒童精神醫學</string>
+	<string name="poi_health_specialty_physiatry_yes">復建醫學</string>
+	<string name="poi_health_specialty_maxillofacial_surgery_yes">頜面外科</string>
+	<string name="poi_health_specialty_diagnostic_radiology_yes">放射診療科</string>
+	<string name="poi_health_specialty_gastroenterology_yes">胃腸科</string>
+	<string name="poi_health_specialty_dentistry_yes">牙科</string>
 	</resources>
