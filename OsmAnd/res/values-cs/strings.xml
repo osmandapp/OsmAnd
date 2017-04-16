@@ -2767,7 +2767,7 @@ Pokud potřebujete pomoci s aplikací OsmAnd, prosím kontaktujte naši podporu
     <string name="srtm_color_scheme">Barevné schéma</string>
     <string name="show_from_zoom_level">Zobrazit od úrovně přiblížení</string>
     <string name="routing_attr_allow_private_name">Povolit soukromý přístup</string>
-    <string name="routing_attr_allow_private_name_description">Umožnit přístup k soukromým oblastem</string>
+    <string name="routing_attr_allow_private_description">Umožnit přístup k soukromým oblastem</string>
     <string name="display_zoom_level">Zobrazit úrovně přiblížení: %1$s</string>
     <string name="favorite_group_name">Název skupiny</string>
     <string name="change_color">Změnit barvu</string>

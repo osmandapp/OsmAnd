@@ -2945,7 +2945,7 @@ Kérlek adj meg egy teljes kódot</string>
     <string name="srtm_color_scheme">Színséma</string>
     <string name="show_from_zoom_level">Megjelenítés a következő nagyítási fokozattól</string>
     <string name="routing_attr_allow_private_name">Magántulajdon használatának engedélyezése</string>
-    <string name="routing_attr_allow_private_name_description">Magánterület használatának engedélyezése</string>
+    <string name="routing_attr_allow_private_description">Magánterület használatának engedélyezése</string>
     <string name="display_zoom_level">Kijelző nagyítási szintje: %1$s</string>
     <string name="favorite_group_name">Csoport megnevezése</string>
     <string name="change_color">Szín módosítása</string>

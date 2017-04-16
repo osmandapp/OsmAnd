@@ -29,7 +29,7 @@
     <string name="srtm_color_scheme">Color scheme</string>
     <string name="show_from_zoom_level">Display from zoom level</string>
     <string name="routing_attr_allow_private_name">Allow private access</string>
-    <string name="routing_attr_allow_private_name_description">Allow access to private areas</string>
+    <string name="routing_attr_allow_private_description">Allow access to private areas</string>
     <string name="display_zoom_level">Display zoom level: %1$s</string>
     <string name="favorite_group_name">Group name</string>
     <string name="change_color">Change color</string>
