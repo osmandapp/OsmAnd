@@ -2675,4 +2675,28 @@
 	<string name="poi_health_specialty_diagnostic_radiology_yes">放射診療科</string>
 	<string name="poi_health_specialty_gastroenterology_yes">胃腸科</string>
 	<string name="poi_health_specialty_dentistry_yes">牙科</string>
+	<string name="poi_health_service_support_yes">醫療服務︰支援︰是的</string>
+	<string name="poi_health_service_support_no">醫療服務︰支援︰沒有</string>
+	<string name="poi_health_service_test_yes">醫療服務︰檢驗︰是的</string>
+	<string name="poi_health_service_test_no">醫療服務︰檢驗︰沒有</string>
+
+	<string name="poi_health_facility_type_office">醫療辦公室</string>
+	<string name="poi_health_facility_type_counselling_centre">醫療機構類型︰輔導中心</string>
+	<string name="poi_health_facility_type_laboratory">醫療機構類型︰實驗室</string>
+	<string name="poi_health_facility_type_therapy">醫療機構類型︰治療</string>
+	<string name="poi_health_facility_type_department">醫療機構類型︰科</string>
+	<string name="poi_health_facility_type_dispensary">醫療機構類型︰配藥處</string>
+	<string name="poi_health_facility_type_first_aid">醫療機構類型︰急救</string>
+	<string name="poi_suction_point">抽水點</string>
+
+	<string name="poi_fire_hydrant_type_underground">地下</string>
+	<string name="poi_fire_hydrant_type_pillar">消防栓</string>
+	<string name="poi_health_specialty_nephrology_yes">腎病學（腎臟病）</string>
+	<string name="poi_health_specialty_neurosurgery_yes">神經外科</string>
+	<string name="poi_health_specialty_neuropsychiatry_yes">神經精神病學</string>
+	<string name="poi_health_specialty_endocrinology_yes">內分泌學</string>
+	<string name="poi_health_specialty_nuclear_medicine_yes">核醫學</string>
+	<string name="poi_health_specialty_pathology_yes">病理解剖學</string>
+	<string name="poi_health_specialty_oncology_yes">腫瘤學</string>
+	<string name="poi_health_specialty_tropical_medicine_yes">熱帶醫學</string>
 	</resources>
