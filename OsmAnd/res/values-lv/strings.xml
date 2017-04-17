@@ -174,7 +174,7 @@
   <string name="city_type_suburb">Piepilsēta</string>
   <string name="city_type_hamlet">Ciems</string>
   <string name="city_type_village">Apdzīvota vieta</string>
-  <string name="city_type_town">Miests</string>
+  <string name="city_type_town">Maza pilsēta</string>
   <string name="city_type_city">Pilsēta</string>
   
   <string name="animate_route_off">Izslēgt animāciju</string>
@@ -1058,7 +1058,7 @@ OsmAnd ir atvērtā koda navigācijas aplikācija ar piekļuvi vispusīgiem Open
     <string name="route_from">No:</string>
 	<string name="destination_point">Galamērķis %1$s</string>
     <string name="context_menu_item_destination_point">Atzīmēt kā galamērķi</string>
-    <string name="please_select_address">Vispirms atzīmēt pilsētu vai ielu</string>
+    <string name="please_select_address">Vispirms izvēlieties pilsētu vai ielu</string>
     <string name="search_street_in_neighborhood_cities">Meklēt ielu nosaukumus blakus pilsētās</string>
     <string name="intermediate_items_sort_return">Starpposmi tika sakārtoti optimālā secībā maršrutam no tekošās pozīcijas līdz galamērķim.</string>
     <string name="intermediate_items_sort_by_distance">Kārtot pēc attāluma</string>
@@ -1085,7 +1085,7 @@ OsmAnd ir atvērtā koda navigācijas aplikācija ar piekļuvi vispusīgiem Open
     <string name="use_kalman_filter_compass">Lietot Kalmana filtru</string>
     <string name="use_magnetic_sensor_descr">Lietot magnētisko sensoru orientācijas sensora vietā, lai noteiktu kompasa stāvokli</string>
     <string name="use_magnetic_sensor">Lietot magnētisko sensoru</string>
-    <string name="other_location">Cits</string>
+    <string name="other_location">Citi</string>
     <string name="files_limit">%1$d faili palikuši</string>
     <string name="available_downloads_left">Lejupielādei pieejami %1$d faili</string>
     <string name="install_paid">Pilnā versija</string>
@@ -1851,7 +1851,7 @@ Vai gribat veikt jaunu reģistrāciju?</string>
 	<string name="shared_string_unexpected_error">Radās negaidīta kļūme</string>
 	<string name="shared_string_action_template">Darbība {0}</string>
 	<string name="shared_string_collapse">Kollapss</string>
-	<string name="shared_string_my_location">Mana pozīcija</string>
+	<string name="shared_string_my_location">Mana atrašanās vieta</string>
 	<string name="shared_string_currently_recording_track">Tiek ierakstīts treks</string>
 	<string name="shared_string_audio">Audio</string>
 	<string name="shared_string_video">Video</string>
@@ -2499,7 +2499,7 @@ Aktivizējot spraudni, kartes stils tiek nomainīts uz \"Ziema un slēpošana,\"
     <string name="skip_map_downloading_desc">Jums nav instalētas nevienas bezsaistes kartes. Izvēlieties kartes no saraksta vai lejuielādējiet tās caur izvēlni - %1$s.</string>
     <string name="search_another_country">Izvēlieties citu reģionu</string>
     <string name="search_map">Meklē karti…</string>
-    <string name="first_usage_wizard_desc">OsmAnd ieteiktās kartes lejupielādei.</string>
+    <string name="first_usage_wizard_desc">Nosakot jūsu atrašanās vietu, OsmAnd piedāvā sekojošas kartes lejupielādei.</string>
     <string name="location_not_found">Atrašanās vieta nav zināma</string>
     <string name="no_inet_connection">Nav interneta savienojuma</string>
     <string name="no_inet_connection_desc_map">Nepieciešams lejupielādēt kartes.</string>
@@ -2521,8 +2521,8 @@ Aktivizējot spraudni, kartes stils tiek nomainīts uz \"Ziema un slēpošana,\"
     <string name="shared_string_change">Mainīt</string>
     <string name="get_started">Sākt</string>
     <string name="route_stops_before">%1$s apstāšanās pirms</string>
-    <string name="coords_search">Meklēšana pēc koordinātēm</string>
-    <string name="advanced_coords_search">Padziļinātā meklēšana pēc koordinātēm</string>
+    <string name="coords_search">Meklēšana pēc koordinātām</string>
+    <string name="advanced_coords_search">Padziļinātā meklēšana pēc koordinātām</string>
     <string name="back_to_search">Atpakaļ uz meklēt</string>
     <string name="confirmation_to_delete_history_items">Vai vēlaties izdzēst atzīmētās vienības no vēstures?</string>
     <string name="show_something_on_map">Rādīt %1$s uz kartes</string>
@@ -3060,5 +3060,32 @@ Dažas no pamatiespējām:
  • Antarktīda: *
  Lejupielādei ir pieejamas kartes no gandrīz visām pasaules valstīm!
 No Afganistānas līdz Zimbabvei, no Austrālijas līdz ASV, Argentīna, Brazīlija, Kanāda, Francija, Vācija, Meksika, Apvienotā Karaliste, Spānija, ...
+ "</string>
+    <string name="osmand_plus_extended_description_part4">"
+ Lieto OSM un Wikipēdijas datus
+ • Augstas kvalitātes informācija no labākajiem sadarbības projektiem pasaulē
+ • OSM dati ir pieejami pēc valsts vai reģiona
+ • Wikipēdijas POIs, apskates vietu apmeklēšanai
+ • neierobežotas lejupielādes caur aplikāciju
+ • Kompaktās bezsaistes vektoru kartes tiek atjaunotas vismaz reizi mēnesī
+
+ • Izvēle starp pilna reģiona datiem vai tikai ceļa sazarojumu (piemērs: visa Japāna 700MB vai 200MB tikai ar ceļa sazarojumu)
+ "</string>
+    <string name="osmand_plus_extended_description_part6">"
+ Velosipēdistu un kājāmgājēju iespējas
+ • Skatīt gājēju, pārgājienu un baiku ceļus, ideāli ārpus mājas aktivitātēm
+ • Speciāli maršruta un ekrāna režīmi baikiem un kājāmgājējiem
+ • Optionāli sabiedriskā transporta pieturas, iekļaujot peronu nosaukumus
+ • Optionāli ceļa ierakstīšana lokālā GPX failā vai tiešsaistes servisā
+ • Optionāli ātruma un altitūtas rādīšana
+ • Konktūrlīniju un kalnu ēnojuma attēlošana (caur atsevišķu spraudni)
+ "</string>
+    <string name="osmand_plus_extended_description_part7">"
+ Piedalieties OSM veidošanā
+ • Ziņojiet par datu kļūdām
+ • Augšupielādējiet GPX trekus uz OSM caur aplikāciju
+ • Pievienojiet POIs un augšupielādējiet uzreiz uz OSM (vai vēlāk, ja esat bezsaistē)
+ • Optionāli ceļojuma ierakstīšana arī fona režīmā (kamēr ierīce atrodas miega režīmā)
+ OsmAnd ir atvērtā koda un aktīvā izstrādē esoša aplikācija. Ikviens var piedalīties tā veidošanā, ziņojot par kļūdām, uzlabojot tulkojumus vai kodējot jaunas iespējas. Projekts atrodas patstāvīgā mijiedarbībā starp izstrādātājiem un aplikācijas lietotājiem. Tāpat arī projekta progress balstās uz finansiālajiem ziedojumiem aplikācijas kodēšanai un jauno iespēju testēšanai
  "</string>
     </resources>
