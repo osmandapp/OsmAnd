@@ -21,7 +21,7 @@
      
      <string name="choose_audio_stream">音声案内ストリーム</string>
      <string name="choose_audio_stream_descr">音声案内を再生するチャンネルを選択します</string>
-     <string name="voice_stream_voice_call">通話ストリーム(BT接続カーステレオ含む)</string>
+     <string name="voice_stream_voice_call">通話ストリーム(BT接続カーステレオも中断)</string>
      <string name="voice_stream_notification">通知ストリーム</string>
      <string name="voice_stream_music">音楽ストリーム</string>
      <string name="warning_tile_layer_not_downloadable">アプリケーションはマップレイヤー %1$sをダウンロードできません、再度インストールしてみてください。</string>
@@ -298,7 +298,7 @@ MB)をダウンロードしますか?</string>
      <string name="background_router_service_descr">バックグラウンドサービスを有効化して 長期間位置を追跡します</string>
      <string name="background_router_service">OsmAndをバックグラウンドで実行</string>
      <string name="off_router_service_no_gps_available">バックグラウンドナビゲーション機能を有効にするには、位置取得機能(現在地、GPS、位置情報サービス等)をオンにする必要があります。</string>
-     <string name="routing_settings_descr">ルート計算方法、ナビゲーションに関する設定をします</string>
+     <string name="routing_settings_descr">ナビゲーションに関する設定をします</string>
      <string name="routing_settings">ナビゲーション設定</string>
      <string name="hide_poi_filter">フィルタを非表示</string>
      <string name="show_poi_filter">フィルタを表示</string>
@@ -2220,7 +2220,7 @@ OsmAndの従来のマップスタイルに戻すには、このプラグイン�
     <string name="faq_item">FAQ</string>
     <string name="faq_item_description">よくある質問</string>
     <string name="map_viewing_item">マップ表示</string>
-    <string name="search_on_the_map_item">マップ内検索方法</string>
+    <string name="search_on_the_map_item">マップ内検索</string>
     <string name="instalation_troubleshooting_item">インストールとトラブルシューティング</string>
     <string name="techical_articles_item">技術的項目</string>
     <string name="versions_item">バージョン履歴</string>
@@ -2899,7 +2899,7 @@ OsmAndとOSMをサポートする方法として現状最適な方法である�
  • POIを追加してOSMに直接アップロードできます(オフラインの場合は後で行うことができます)
  "</string>
     <string name="osmand_extended_description_part8">"
- OsmAndはオープンソースで積極的に開発されています。バグを報告したり、翻訳を改善したり、新しい機能をコーディングすることで、誰もがアプリケーションの開発に貢献できます。このような開発者とユーザーとのやりとりによって、プロジェクトは継続的に改善されています。プロジェクトの進捗状況は、資金調達と新しい機能のテストに大きく左右されますしています。
+ OsmAndはオープンソースで積極的に開発されています。バグを報告したり、翻訳を改善したり、新しい機能をコーディングすることで、誰もがアプリケーションの開発に貢献できます。このような開発者とユーザーとのやりとりによって、プロジェクトは継続的に改善されています。プロジェクトの進捗状況は、資金調達と新しい機能のテストに大きく左右されます。
 
 地図のおおよそのエリアとその品質(※注 *の数が多いほど充実しています):
  • 西ヨーロッパ: ****
@@ -2908,7 +2908,7 @@ OsmAndとOSMをサポートする方法として現状最適な方法である�
  • 北米: ***
  • 南アメリカ: **
  • アジア: **
- • 日韓: ***
+ • 日本、韓国: ***
  • 中東: **
  • アフリカ: **
  • 南極: *
@@ -2997,4 +2997,28 @@ OsmAndとOSMをサポートする方法として現状最適な方法である�
     <string name="increase_search_radius">検索範囲を広げる</string>
     <string name="restart_search">再検索</string>
     <string name="srtm_color_scheme">カラーパターン</string>
+    <string name="osmand_plus_extended_description_part8">"
+ 地図のおおよそのエリアとその品質(※注 *の数が多いほど充実しています):
+ • 西ヨーロッパ: ****
+ • 東ヨーロッパ: ***
+ • ロシア: ***
+ • 北米: ***
+ • 南アメリカ: **
+ • アジア: **
+ • 日本、韓国: ***
+ • 中東: **
+ • アフリカ: **
+ • 南極: *
+
+ 世界中のほとんどの国の地図がダウンロード可能です！
+ アフガニスタンからジンバブエ、オーストラリアからアメリカ、 アルゼンチン、ブラジル、カナダ、フランス、ドイツ、メキシコ、イギリス、スペイン、...
+ "</string>
+    <string name="osmand_plus_extended_description_part7">"
+ 直接OSMに寄与
+ • データ、バグの報告ができます
+ • GPX経路情報をアプリから直接OSMにアップロードできます
+ • POIを追加してOSMに直接アップロードできます(オフラインの場合は後で行うことができます)
+　 OsmAndはオープンソースで積極的に開発されています。バグを報告したり、翻訳を改善したり、新しい機能をコーディングすることで、誰もがアプリケーションの開発に貢献できます。このような開発者とユーザーとのやりとりによって、プロジェクトは継続的に改善されています。プロジェクトの進捗状況は、資金調達と新しい機能のテストに大きく左右されます。
+ "</string>
+    <string name="save_poi_too_many_uppercase">名前に大文字が多すぎます。 続行しますか？</string>
     </resources>
