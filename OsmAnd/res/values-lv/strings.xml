@@ -277,7 +277,7 @@
   <string name="switch_to_vector_map_to_see">Šai vietai ir pieejama bezsaistes vektoru karte. \n\t\n\tLai to lietotu, aktivizējiet \'Izvēlne\' -&gt; \'Definēt skatu\' -&gt; \'Kartes avots…\' -&gt; \'Bezsaistes vektoru kartes\'.</string>
   <string name="choose_audio_stream">Balss vadības kanāls</string>
   <string name="choose_audio_stream_descr">Izvēlieties balss vadības kanālu</string>
-  <string name="voice_stream_voice_call">Tālruņa skaļrunis</string>
+  <string name="voice_stream_voice_call">Tālruņa skaļrunis (ietverot auto bluetooth)</string>
   <string name="voice_stream_notification">Ziņojumu kanāls</string>
   <string name="voice_stream_music">Multimēdiju skaļrunis</string>
   <string name="warning_tile_layer_not_downloadable">Aplikācija nevar lejupielādēt kartes slāni %1$s, lūdzu mēģiniet to pārinstalēt.</string>
@@ -1030,12 +1030,12 @@ OsmAnd ir atvērtā koda navigācijas aplikācija ar piekļuvi vispusīgiem Open
     <string name="edit_tilesource_choose_existing">Izvēlēties esošo…</string>
     <string name="maps_define_edit">Definēt/labot…</string>
 	<string name="map_widget_fps_info">FPS atkļūdošana</string>
-	<string name="driving_region_descr">Izvēlieties braukšanas apgabalu: ASV, Eiropa, Apvienotā Karaliste, Āzija un citi</string>
+	<string name="driving_region_descr">Izvēlieties braukšanas apgabalu: ASV, Eiropa, Apvienotā Karaliste, Āzija u.c.</string>
 	<string name="driving_region">Apgabals</string>
 	<string name="driving_region_japan">Japāna</string>
 	<string name="driving_region_us">ASV</string>
 	<string name="driving_region_canada">Kanāda</string>
-	<string name="driving_region_europe_asia">Eiropa un Āzija</string>
+	<string name="driving_region_europe_asia">Eiropa, Āzija, Latīņamerika</string>
 	<string name="driving_region_uk">Apvienotā Karaliste, Indija un citas</string>
     <string name="announce_gpx_waypoints">GPX ceļapunkti</string>
     <string name="speak_title">Paziņot…</string>
@@ -2822,9 +2822,9 @@ Site: http://osmand.net
 Ja jums ir vajadzīga palīdzība ar OsmAnd aplikāciju, lūdzu kontaktējieties ar mūsu atbalsta komandu: support@osmand.net. 
  "</string>
     <string name="rendering_attr_depthContours_description">Rādīt dziļuma kontūras un punktus</string>
-    <string name="rendering_attr_depthContours_name">Dziļuma kontūras</string>
+    <string name="rendering_attr_depthContours_name">Jūras dziļuma kontūras</string>
 	<string name="add_new_folder">Pievienot jaunu mapi</string>
-    <string name="points_delete_multiple_succesful">Punkts(i) izdzēsts veiksmīgi.</string>
+    <string name="points_delete_multiple_succesful">Punkts(i) ir veiksmīgi izdzēsti.</string>
     <string name="points_delete_multiple">Jūs izdzēsīsiet %1$d punktu(us). Vai turpināt?</string>
     <string name="route_points_category_name">Punkti maršruta ceļā</string>
     <string name="track_points_category_name">Izceltie punkti maršrutā</string>
@@ -2858,7 +2858,7 @@ Ja jums ir vajadzīga palīdzība ar OsmAnd aplikāciju, lūdzu kontaktējieties
     <string name="driving_style_speed">Ātrais</string>
     <string name="driving_style_balance">Balancētais</string>
     <string name="driving_style_safety">Drošais</string>
-    <string name="relief_smoothness_factor_descr">Prioritāte līdzenam vai kalnainam reljefam</string>
+    <string name="relief_smoothness_factor_descr">Ieteicamais reljefs: līdzens vai kalnains</string>
     <string name="shared_string_slope">Slīpums</string>
     <string name="lang_ber">Berberu</string>
     <string name="relief_smoothness_factor_hills">Kalnaini apvidi</string>
@@ -2955,4 +2955,110 @@ Ja jums ir vajadzīga palīdzība ar OsmAnd aplikāciju, lūdzu kontaktējieties
  • Kopīgojiet savu atrašanās vietu, lai draugi var jūs atrast
  "</string>
     <string name="save_poi_too_many_uppercase">Nosaukumā ir par daudz lielo burtu. Vai turpināt?</string>
+    <string name="display_zoom_level">Mērogs: %1$s</string>
+    <string name="quick_action_auto_zoom_on">Autom. mērogošana ieslēgta</string>
+    <string name="quick_action_auto_zoom_off">Autom. mērogošana izslēgta</string>
+    <string name="index_item_depth_points_southern_hemisphere">Jūras dziļuma punkti dienvidu puslodē</string>
+    <string name="index_item_depth_points_northern_hemisphere">Jūras dziļuma punkti ziemeļu puslodē</string>
+    <string name="osmand_extended_description_part1">"
+ OsmAnd (OSM Automated Navigation Directions) ir karšu un navigācijas aplikācija ar brīvu piekļuvi augstas kvalitātes OpenStreetMap (OSM) datiem no visas pasaules.
+
+ Izbaudiet balss un vizuālo navigatoru, skatiet POIs (interešu punktus), veidojiet un pārvaldiet GPX trekus, lietojiet kontūrlīniju vizualizāciju and altitūdas informāciju (caur spraudni), izvēlieties auto, velobraucēju, kājāmgājēju režīmus, labojiet OSM datus un daudz vairāk.
+ "</string>
+    <string name="osmand_extended_description_part2">"
+ GPS navigācija
+ • Izvēlieties bezsaistes (bez viesabonēšanas maksas, kad esat ārvalstīs) vai tiešsaistes (ātrāks) režīmu
+ • Turn-by-turn balss vadība jūsu maršrutā (ierakstītās un sintizētās balsis)
+ • Maršruts tiks pārveidots, ja būsiet novirzījušies no tā
+ • Ceļa joslu vadība, ielu nosaukumi un aprēķinātais ierašanās laiks palīdzēs ceļa gaitā
+ • Lai padarītu ceļojumu drošāku, dienas/nakts režīmi pārslēdzas automātiski
+ • Jūs variet izvēlēties rādīt ātruma limitus un saņemt brīdinājumus, tos pārsniedzot
+ • Kartes mērogs autmātiski pielāgojas jūsu ātrumam
+ • Jūs variet meklēt objektus pēc adreses, tipa (parkingi, restorāni, viesnīcas, DUS, muzeji utt.) vai pēc ģeogrāfiskajām koordinātām
+ • Atbalsta starppunktu pievienošanu maršrutā
+ • Jūs variet ierakstīt pats savu vai augšupielādēt GPX treku un tam sekot
+ "</string>
+    <string name="osmand_extended_description_part3">"
+ Karte
+ • Rāda POIs (interešu punktus) jums apkārt
+ • Pielāgo karti kustības virzienā (vai pēc kompasa)
+ • Rāda, kur jūs atrodaties un uz kuru pusi esat pagriezies
+ • Dalās ar jūsu atrašanās vietu, tā lai jūsu draugi var jūs atrast
+ • Jūsu apmeklētās un svarīgās vietas tiek glabātas izlasē
+ • Ļauj izvēlēties kā rādīt nosaukumus kartē: angļu valodā, vietējā vai fonētiski izrunātus
+ • Rāda specializētas tiešsaistes bildes, satelīta attēlus (no Bing), dažādus virsklājus kā tūrisma/navigācijas GPX trekus un papildus klājumus ar maināmiem caurspīdīgumiem
+ "</string>
+    <string name="osmand_extended_description_part6">"
+ Pastaigas, pārgājieni, tūrisms
+ • Karte parāda pastaigu un pārgājienu takas
+ • Wikipēdija izvēlētajā valodā pastāstīs jums daudz kā kā jauna pilsētas pastaigās
+ • Sabiedriskā transorta pieturas, ieskaitot peronu nosaukumus, ļaus droši pārvietoties svešā pilsētā
+ • GPS navigācija kājāmgājēju režīmā veido maršrutus pa gājēju celiņiem
+ • Jūs varat augšupielādēt un sekot GPX maršrutam vai ierakstīt un kopīgot pats savu
+ "</string>
+    <string name="osmand_extended_description_part7">"
+ Piedalīties OSM izstrādē
+ • Ziņot par datu kļūdām
+ • Caur aplikāciju augšupielādēt GPX trases uz OSM
+ • Pievienot POIs un augšupielādēt tos uzreiz (vai vēlāk, ja esat bezsaistē) uz OSM
+ "</string>
+    <string name="osmand_extended_description_part8">"
+ OsmAnd ir atvērtā koda aplikācija, kas tiek aktīvi izstrādāta un pilnveidota. Ikviens var piedalīties tā izstrādē, ziņojot par kļūdām, uzlabojot tulkojumus vai kodējot jaunas papildiespējas. Šis projekts tiek nepārtraukti uzlabots, mijiedarbojoties aplikācijas izstrādātājiem ar tās lietotājiem. Projekta progress atkarīgs arī no finsansēm, lai atbalstītu kodēšanu un jaunas funkcionalitātes testēšanu.
+ Aptuvenais karšu pārklājums un detalizācija:
+ • Rietumeiropa: ****
+ • Austrumeiropa: ***
+ • Krievija: ***
+ • Ziemeļamerika: ***
+ • Dienvidamerika: **
+ • Āzija: **
+ • Japāna &amp; Koreja: ***
+ • Tuvie austrumi: **
+ • Āfrika: **
+ • Antarktīda: *
+ Lejupielādei ir pieejamas kartes no gandrīz visām pasaules valstīm!
+ Saņemiet uzticamu navigatoru jūsu valstij - vai tā būtu Francija, Vācija, Meksika, Apvienotā Karaliste, Spānija, Nīderlande, ASV, Krievija, Brazīlija vai kāda cita
+ "</string>
+    <string name="osmand_plus_extended_description_part1">"
+ OsmAnd+ (OSM Automated Navigation Directions) ir karšu un navigācijas aplikācija ar brīvu piekļuvi augstas kvalitātes OpenStreetMap (OSM) datiem no visas pasaules.
+
+ Izbaudiet balss un vizuālo navigatoru, skatiet POIs (interešu punktus), veidojiet un pārvaldiet GPX trekus, lietojiet kontūrlīniju vizualizāciju and altitūdas informāciju (caur spraudni), izvēlieties auto, velobraucēju, kājāmgājēju režīmus, labojiet OSM datus un daudz vairāk.
+
+Osmand+ ir maksas aplikācijas versija. To nopērkot, jūs atbalstīsiet projektu, nodrošināsiet jaunu iespēju izstrādi un saņemsiet jaunākos atjauninājumus
+
+Dažas no pamatiespējām:
+ "</string>
+    <string name="osmand_plus_extended_description_part2">"
+ Navigācija
+ • Darbojas tešsaistē (ātrāk) vai bezsaistē (bez viesabonēšanas maksas, kad esat ārvalstīs)
+ • Turn-by-turn balss vadība (ierakstītās un sintizētās balsis)
+ • optionāla ceļa joslu vadība, ielu nosaukumi un aprēķinātais ierašanās laiks
+ • Atbalsta starppunktu pievienošanu maršrutā
+ • Maršruts tiks pārveidots, ja būsiet novirzījušies no tā
+ • Jūs variet meklēt objektus pēc adreses, tipa (parkingi, restorāni, viesnīcas, DUS, muzeji utt.) vai pēc ģeogrāfiskajām koordinātām
+ "</string>
+    <string name="osmand_plus_extended_description_part3">"
+ Kartes skatīšana
+ • Rāda, kur jūs atrodaties un uz kuru pusi esat pagriezies
+ • optionāli pielāgo karti pēc kompasa vai jūsu kustības virzienā
+ • Saglabā izlasē jūsu izvēlētās vietas
+ • Rāda POIs (interešu punktus) jums apkārt
+ • Dalās ar jūsu atrašanās vietu, tā lai jūsu draugi var jūs atrast
+ • Rāda specializētas tiešsaistes bildes, satelīta attēlus (no Bing), dažādus virsklājus kā tūrisma/navigācijas GPX trekus un papildus klājumus ar maināmiem caurspīdīgumiem
+ • Optionāli rāda nosaukumus kartē angļu valodā, vietējā vai fonētiski izrunātus
+ "</string>
+    <string name="osmand_plus_extended_description_part8">"
+ Aptuvenais karšu pārklājums un detalizācija:
+ • Rietumeiropa: ****
+ • Austrumeiropa: ***
+ • Krievija: ***
+ • Ziemeļamerika: ***
+ • Dienvidamerika: **
+ • Āzija: **
+ • Japāna &amp; Koreja: ***
+ • Tuvie austrumi: **
+ • Āfrika: **
+ • Antarktīda: *
+ Lejupielādei ir pieejamas kartes no gandrīz visām pasaules valstīm!
+No Afganistānas līdz Zimbabvei, no Austrālijas līdz ASV, Argentīna, Brazīlija, Kanāda, Francija, Vācija, Meksika, Apvienotā Karaliste, Spānija, ...
+ "</string>
     </resources>
