@@ -401,10 +401,10 @@ public class QuickSearchCoordinatesFragment extends DialogFragment implements Os
 
 			PointDescription pointDescription =
 					new PointDescription(currentLatLon.getLatitude(), currentLatLon.getLongitude());
-			getMyApplication().getSettings().setMapLocationToShow(
+
+			QuickSearchListFragment.showOnMap(getMapActivity(), dialogFragment,
 					currentLatLon.getLatitude(), currentLatLon.getLongitude(),
-					15, pointDescription, true, currentLatLon);
-			MapActivity.launchMapActivityMoveToTop(getActivity());
+					15, pointDescription, currentLatLon);
 
 			dismiss();
 		}

@@ -29,6 +29,7 @@ import net.osmand.plus.activities.MapActivity;
 import net.osmand.plus.base.OsmAndListFragment;
 import net.osmand.plus.dashboard.DashLocationFragment;
 import net.osmand.plus.helpers.SearchHistoryHelper.HistoryEntry;
+import net.osmand.plus.search.QuickSearchDialogFragment.QuickSearchType;
 import net.osmand.plus.search.listitems.QuickSearchBottomShadowListItem;
 import net.osmand.plus.search.listitems.QuickSearchButtonListItem;
 import net.osmand.plus.search.listitems.QuickSearchListItem;
@@ -165,7 +166,7 @@ public abstract class QuickSearchListFragment extends OsmAndListFragment {
 		dialogFragment.onSearchListFragmentResume(this);
 	}
 
-	private void showResult(SearchResult searchResult) {
+	public void showResult(SearchResult searchResult) {
 		if (searchResult.location != null) {
 			OsmandApplication app = getMyApplication();
 			String lang = searchResult.requiredSearchPhrase.getSettings().getLang();
@@ -207,6 +208,18 @@ public abstract class QuickSearchListFragment extends OsmAndListFragment {
 					FavouritePoint fav = (FavouritePoint) object;
 					pointDescription = fav.getPointDescription();
 					break;
+				case CITY:
+					String cityName = searchResult.localeName;
+					String typeNameCity = QuickSearchListItem.getTypeName(app, searchResult);
+					pointDescription = new PointDescription(PointDescription.POINT_TYPE_ADDRESS, typeNameCity, cityName);
+					pointDescription.setIconName("ic_action_building_number");
+					break;
+				case STREET:
+					String streetName = searchResult.localeName;
+					String typeNameStreet = QuickSearchListItem.getTypeName(app, searchResult);
+					pointDescription = new PointDescription(PointDescription.POINT_TYPE_ADDRESS, typeNameStreet, streetName);
+					pointDescription.setIconName("ic_action_street_name");
+					break;
 				case HOUSE:
 					String typeNameHouse = null;
 					String name = searchResult.localeName;
@@ -245,34 +258,34 @@ public abstract class QuickSearchListFragment extends OsmAndListFragment {
 			dialogFragment.hideToolbar();
 			dialogFragment.hide();
 
+			showOnMap(getMapActivity(), dialogFragment,
+					searchResult.location.getLatitude(), searchResult.location.getLongitude(),
+					searchResult.preferredZoom, pointDescription, object);
+		}
+	}
+
+	public static void showOnMap(MapActivity mapActivity, QuickSearchDialogFragment dialogFragment,
+								 double latitude, double longitude, int zoom,
+								 PointDescription pointDescription, Object object) {
+		if (mapActivity != null) {
+			OsmandApplication app = mapActivity.getMyApplication();
 			switch (dialogFragment.getSearchType()) {
 				case REGULAR: {
-					getMyApplication().getSettings().setMapLocationToShow(
-							searchResult.location.getLatitude(), searchResult.location.getLongitude(),
-							searchResult.preferredZoom, pointDescription, true, object);
-
-					MapActivity.launchMapActivityMoveToTop(getActivity());
+					app.getSettings().setMapLocationToShow(latitude, longitude, zoom, pointDescription, true, object);
+					MapActivity.launchMapActivityMoveToTop(mapActivity);
 					dialogFragment.reloadHistory();
 					break;
 				}
 				case START_POINT: {
-					MapActivity mapActivity = getMapActivity();
-					if (mapActivity != null) {
-						mapActivity.getMapLayers().getMapControlsLayer().selectAddress(
-								pointDescription != null ? pointDescription.getName() : null,
-								searchResult.location.getLatitude(), searchResult.location.getLongitude(),
-								false);
-					}
+					mapActivity.getMapLayers().getMapControlsLayer().selectAddress(
+							pointDescription != null ? pointDescription.getName() : null,
+							latitude, longitude, false);
 					break;
 				}
 				case DESTINATION: {
-					MapActivity mapActivity = getMapActivity();
-					if (mapActivity != null) {
-						mapActivity.getMapLayers().getMapControlsLayer().selectAddress(
-								pointDescription != null ? pointDescription.getName() : null,
-								searchResult.location.getLatitude(), searchResult.location.getLongitude(),
-								true);
-					}
+					mapActivity.getMapLayers().getMapControlsLayer().selectAddress(
+							pointDescription != null ? pointDescription.getName() : null,
+							latitude, longitude, true);
 					break;
 				}
 			}
