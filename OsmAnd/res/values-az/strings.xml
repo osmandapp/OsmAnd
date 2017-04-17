@@ -1,3 +1,51 @@
-<?xml version="1.0" encoding="utf-8" standalone="no"?>
+<?xml version='1.0' encoding='UTF-8'?>
 <resources>
-</resources>
+<string name="nothing_found">Heç nə tapılmadı :(</string>
+    <string name="restart_search">Axtarışı yenidən başlat</string>
+    <string name="change_color">Rəngi dəyiş</string>
+    <string name="edit_name">Ada düzəliş et</string>
+    <string name="shared_string_in_name">%1$s-da</string>
+    <string name="type_address">Ünvan yaz</string>
+    <string name="subscribe_email_error">Səhv</string>
+    <string name="fonts_header">Xəritə üçün şriftlər</string>
+    <string name="driving_region_automatic">Avtomatik</string>
+    <string name="routing_attr_driving_style_speed_name">Sürət</string>
+    <string name="add_new_folder">Yeni qovluq əlavə et</string>
+    <string name="max_speed">Maksimum sürət</string>
+    <string name="shared_string_max">Maksimum</string>
+    <string name="shared_string_start_time">Başlama vaxtı</string>
+    <string name="shared_string_end_time">Bitmə vaxtı</string>
+    <string name="shared_string_color">Rəng</string>
+    <string name="file_can_not_be_moved">Fayl daşına bilmədi.</string>
+    <string name="shared_string_move">Daşı</string>
+    <string name="routing_attr_driving_style_name">Sürmə stili</string>
+    <string name="shared_string_time">Vaxt</string>
+    <string name="total_distance">Toplam məsafə</string>
+    <string name="rendering_value_high_name">Yüksək</string>
+    <string name="rendering_value_medium_w_name">Orta</string>
+    <string name="rendering_value_low_name">Aşağı</string>
+    <string name="rendering_attr_hideWaterPolygons_description">Su</string>
+    <string name="rendering_attr_hideWaterPolygons_name">Suyu gizlət</string>
+    <string name="osmo_share_location">Paylaş</string>
+    <string name="osmo_pause_location">Fasilə</string>
+    <string name="shared_string_notifications">Bildirişlər</string>
+    <string name="shared_string_continue">Davam et</string>
+    <string name="shared_string_pause">Fasilə</string>
+    <string name="gpx_logging_no_data">Məlumat yoxdur</string>
+    <string name="edit_filter">Kateqoriyalara düzəliş et</string>
+    <string name="selected_categories">Seçilən kateqoriyalar</string>
+    <string name="create_custom_poi">Xüsusi filtr yarat</string>
+    <string name="custom_search">Xüsusi axtarış</string>
+    <string name="shared_string_filters">Filtrlər</string>
+    <string name="apply_filters">Filtrləri tətbiq et</string>
+    <string name="save_filter">Filtri saxla</string>
+    <string name="delete_filter">Filtri sil</string>
+    <string name="new_filter">Yeni filtr</string>
+    <string name="get_it">Al</string>
+    <string name="si_mi_meters">Mil/metr</string>
+    <string name="search_map">Xəritələr axtarılır…</string>
+    <string name="no_inet_connection">İnternet bağlantısı yoxdur</string>
+    <string name="search_location">Məkan axtarılır…</string>
+    <string name="storage_free_space">Boş yaddaş</string>
+    <string name="no_update_info">Yeniləmələri göstərmə</string>
+    </resources>
