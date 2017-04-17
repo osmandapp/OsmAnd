@@ -170,6 +170,7 @@ public class QuickSearchDialogFragment extends DialogFragment implements OsmAndC
 	private boolean newSearch;
 	private boolean interruptedSearch;
 	private long hideTimeMs;
+	private boolean expired;
 	private boolean poiFilterApplied;
 	private boolean fabVisible;
 	private boolean runSearchFirstTime;
@@ -352,7 +353,12 @@ public class QuickSearchDialogFragment extends DialogFragment implements OsmAndC
 						} else {
 							SearchWord word = searchPhrase.getLastSelectedWord();
 							if (word != null) {
-								if (word.getLocation() != null) {
+								if ((searchType == QuickSearchType.START_POINT || searchType == QuickSearchType.DESTINATION)
+										&& word.getLocation() != null) {
+									if (mainSearchFragment != null) {
+										mainSearchFragment.showResult(word.getResult());
+									}
+								} else if (word.getLocation() != null) {
 									SearchResult searchResult = word.getResult();
 									String name = QuickSearchListItem.getName(app, searchResult);
 									String typeName = QuickSearchListItem.getTypeName(app, searchResult);
@@ -732,7 +738,7 @@ public class QuickSearchDialogFragment extends DialogFragment implements OsmAndC
 	}
 
 	public boolean isExpired() {
-		return hideTimeMs > 0 && System.currentTimeMillis() - hideTimeMs > EXPIRATION_TIME_MIN * 60 * 1000;
+		return expired || (hideTimeMs > 0 && System.currentTimeMillis() - hideTimeMs > EXPIRATION_TIME_MIN * 60 * 1000);
 	}
 
 	public void show() {
@@ -757,6 +763,7 @@ public class QuickSearchDialogFragment extends DialogFragment implements OsmAndC
 	public void hide() {
 		paused = true;
 		hidden = true;
+		expired = searchType != QuickSearchType.REGULAR;
 		hideTimeMs = System.currentTimeMillis();
 		interruptedSearch = searching;
 		searching = false;
@@ -784,10 +791,18 @@ public class QuickSearchDialogFragment extends DialogFragment implements OsmAndC
 		if (foundPartialLocation) {
 			buttonToolbarText.setText(app.getString(R.string.advanced_coords_search).toUpperCase());
 		} else if (searchEditText.getText().length() > 0) {
-			if (word != null && word.getResult() != null) {
-				buttonToolbarText.setText(app.getString(R.string.show_something_on_map, word.getResult().localeName).toUpperCase());
+			if (searchType == QuickSearchType.START_POINT || searchType == QuickSearchType.DESTINATION) {
+				if (word != null && word.getResult() != null) {
+					buttonToolbarText.setText(app.getString(R.string.shared_string_select).toUpperCase() + " " + word.getResult().localeName.toUpperCase());
+				} else {
+					buttonToolbarText.setText(app.getString(R.string.shared_string_select).toUpperCase());
+				}
 			} else {
-				buttonToolbarText.setText(app.getString(R.string.shared_string_show_on_map).toUpperCase());
+				if (word != null && word.getResult() != null) {
+					buttonToolbarText.setText(app.getString(R.string.show_something_on_map, word.getResult().localeName).toUpperCase());
+				} else {
+					buttonToolbarText.setText(app.getString(R.string.shared_string_show_on_map).toUpperCase());
+				}
 			}
 		} else {
 			buttonToolbarText.setText(app.getString(R.string.shared_string_show_on_map).toUpperCase());
@@ -891,6 +906,7 @@ public class QuickSearchDialogFragment extends DialogFragment implements OsmAndC
 		if (!useMapCenter) {
 			startLocationUpdate();
 		}
+		expired = false;
 		paused = false;
 	}
 
@@ -986,7 +1002,8 @@ public class QuickSearchDialogFragment extends DialogFragment implements OsmAndC
 			searchView.setVisibility(View.GONE);
 		} else if (!show && tabsView.getVisibility() == View.VISIBLE) {
 			tabToolbarView.setVisibility(View.GONE);
-			buttonToolbarView.setVisibility(searchUICore.getSearchSettings().isCustomSearch() ? View.GONE : View.VISIBLE);
+			buttonToolbarView.setVisibility(searchUICore.getSearchSettings().isCustomSearch()
+					? View.GONE : View.VISIBLE);
 			tabsView.setVisibility(View.GONE);
 			searchView.setVisibility(View.VISIBLE);
 		}
@@ -1647,7 +1664,11 @@ public class QuickSearchDialogFragment extends DialogFragment implements OsmAndC
 		searchQuery = txt;
 		searchEditText.setText(txt);
 		searchEditText.setSelection(txt.length());
-		buttonToolbarView.setVisibility(View.VISIBLE);
+		SearchWord lastWord = searchUICore.getPhrase().getLastSelectedWord();
+		boolean buttonToolbarVisible = lastWord == null || searchType == QuickSearchType.REGULAR ||
+				((searchType == QuickSearchType.START_POINT || searchType == QuickSearchType.DESTINATION)
+				&& ObjectType.isAddress(lastWord.getType()));
+		buttonToolbarView.setVisibility(buttonToolbarVisible ? View.VISIBLE : View.GONE);
 		updateToolbarButton();
 		SearchSettings settings = searchUICore.getSearchSettings();
 		if (settings.getRadiusLevel() != 1) {
