@@ -130,7 +130,11 @@ public class FirstUsageWizardFragment extends Fragment implements OsmAndLocation
 			@Override
 			public void onClick(View v) {
 				if (wizardType == WizardType.MAP_DOWNLOAD) {
-					closeWizard();
+					if (location != null) {
+						showOnMap(new LatLon(location.getLatitude(), location.getLongitude()), 13);
+					} else {
+						closeWizard();
+					}
 				} else {
 					AlertDialog.Builder builder = new AlertDialog.Builder(getContext());
 					builder.setTitle(getString(R.string.skip_map_downloading));
@@ -138,7 +142,11 @@ public class FirstUsageWizardFragment extends Fragment implements OsmAndLocation
 					builder.setNegativeButton(R.string.shared_string_skip, new DialogInterface.OnClickListener() {
 						@Override
 						public void onClick(DialogInterface dialog, int which) {
-							closeWizard();
+							if (location != null) {
+								showOnMap(new LatLon(location.getLatitude(), location.getLongitude()), 13);
+							} else {
+								closeWizard();
+							}
 						}
 					});
 					builder.setNeutralButton(R.string.shared_string_cancel, null);
@@ -234,10 +242,7 @@ public class FirstUsageWizardFragment extends Fragment implements OsmAndLocation
 					redownloadButton.setOnClickListener(new View.OnClickListener() {
 						@Override
 						public void onClick(View v) {
-							if (!downloadThread.isDownloading(item) && !item.isDownloaded() && firstMapDownloadCancelled) {
-								progressPadding.setVisibility(View.GONE);
-								progressLayout.setVisibility(View.VISIBLE);
-								redownloadButton.setVisibility(View.GONE);
+							if (!downloadThread.isDownloading(item) && !item.isDownloaded()) {
 								validationManager.startDownload(getActivity(), item);
 								firstMapDownloadCancelled = false;
 							}
@@ -246,19 +251,17 @@ public class FirstUsageWizardFragment extends Fragment implements OsmAndLocation
 					view.findViewById(R.id.map_download_progress_button).setOnClickListener(new View.OnClickListener() {
 						@Override
 						public void onClick(View v) {
-							downloadThread.cancelDownload(item);
 							firstMapDownloadCancelled = true;
+							downloadThread.cancelDownload(item);
 							mapDescriptionTextView.setText(item.getSizeDescription(getContext()));
 							progressPadding.setVisibility(View.VISIBLE);
 							progressLayout.setVisibility(View.GONE);
 							redownloadButton.setVisibility(View.VISIBLE);
 						}
 					});
-					if (item.isDownloaded() || firstMapDownloadCancelled) {
-						progressPadding.setVisibility(View.VISIBLE);
-						progressLayout.setVisibility(View.GONE);
-						redownloadButton.setVisibility(firstMapDownloadCancelled ? View.VISIBLE : View.GONE);
-					}
+					progressPadding.setVisibility(View.VISIBLE);
+					progressLayout.setVisibility(View.GONE);
+					redownloadButton.setVisibility(View.VISIBLE);
 					view.findViewById(R.id.map_downloading_layout).setVisibility(View.VISIBLE);
 				} else {
 					view.findViewById(R.id.map_downloading_layout).setVisibility(View.GONE);
@@ -277,10 +280,7 @@ public class FirstUsageWizardFragment extends Fragment implements OsmAndLocation
 					redownloadButton.setOnClickListener(new View.OnClickListener() {
 						@Override
 						public void onClick(View v) {
-							if (!downloadThread.isDownloading(item) && !item.isDownloaded() && secondMapDownloadCancelled) {
-								progressPadding.setVisibility(View.GONE);
-								progressLayout.setVisibility(View.VISIBLE);
-								redownloadButton.setVisibility(View.GONE);
+							if (!downloadThread.isDownloading(item) && !item.isDownloaded()) {
 								validationManager.startDownload(getActivity(), item);
 								secondMapDownloadCancelled = false;
 							}
@@ -289,19 +289,17 @@ public class FirstUsageWizardFragment extends Fragment implements OsmAndLocation
 					view.findViewById(R.id.map2_download_progress_button).setOnClickListener(new View.OnClickListener() {
 						@Override
 						public void onClick(View v) {
-							downloadThread.cancelDownload(item);
 							secondMapDownloadCancelled = true;
+							downloadThread.cancelDownload(item);
 							mapDescriptionTextView.setText(item.getSizeDescription(getContext()));
 							progressPadding.setVisibility(View.VISIBLE);
 							progressLayout.setVisibility(View.GONE);
 							redownloadButton.setVisibility(View.VISIBLE);
 						}
 					});
-					if (item.isDownloaded() || secondMapDownloadCancelled) {
-						progressPadding.setVisibility(View.VISIBLE);
-						progressLayout.setVisibility(View.GONE);
-						redownloadButton.setVisibility(secondMapDownloadCancelled ? View.VISIBLE : View.GONE);
-					}
+					progressPadding.setVisibility(View.VISIBLE);
+					progressLayout.setVisibility(View.GONE);
+					redownloadButton.setVisibility(View.VISIBLE);
 					view.findViewById(R.id.map2_downloading_layout).setVisibility(View.VISIBLE);
 				} else {
 					view.findViewById(R.id.map_downloading_divider).setVisibility(View.GONE);
@@ -554,12 +552,14 @@ public class FirstUsageWizardFragment extends Fragment implements OsmAndLocation
 
 	private void updateDownloadedItems() {
 		int i = 0;
+		final View firstRowLayout = view.findViewById(R.id.map_downloading_layout);
+		final View secondRowLayout = view.findViewById(R.id.map2_downloading_layout);
+		final View progressLayout = view.findViewById(R.id.map_download_progress_layout);
+		final View progressLayout2 = view.findViewById(R.id.map2_download_progress_layout);
+		final ImageButton redownloadButton = (ImageButton) view.findViewById(R.id.map_redownload_button);
+		final ImageButton redownloadButton2 = (ImageButton) view.findViewById(R.id.map2_redownload_button);
 		for (IndexItem indexItem : indexItems) {
 			if (indexItem.isDownloaded()) {
-				final View firstRowLayout = view.findViewById(R.id.map_downloading_layout);
-				final View secondRowLayout = view.findViewById(R.id.map2_downloading_layout);
-				final View progressLayout = view.findViewById(R.id.map_download_progress_layout);
-				final View progressLayout2 = view.findViewById(R.id.map2_download_progress_layout);
 				if (i == 0 && progressLayout.getVisibility() == View.VISIBLE) {
 					final TextView mapDescriptionTextView = (TextView) view.findViewById(R.id.map_downloading_desc);
 					mapDescriptionTextView.setText(indexItem.getSizeDescription(getContext()));
@@ -589,6 +589,25 @@ public class FirstUsageWizardFragment extends Fragment implements OsmAndLocation
 						}
 					});
 				}
+			} else {
+				if (downloadThread.isDownloading(indexItem)) {
+					if (i == 0 && !firstMapDownloadCancelled) {
+						if (progressLayout.getVisibility() == View.GONE) {
+							progressLayout.setVisibility(View.VISIBLE);
+						}
+						if (redownloadButton.getVisibility() == View.VISIBLE) {
+							redownloadButton.setVisibility(View.GONE);
+						}
+					}
+					if (i == 1 && !secondMapDownloadCancelled) {
+						if (progressLayout2.getVisibility() == View.GONE) {
+							progressLayout2.setVisibility(View.VISIBLE);
+						}
+						if (redownloadButton2.getVisibility() == View.VISIBLE) {
+							redownloadButton2.setVisibility(View.GONE);
+						}
+					}
+				}
 			}
 			i++;
 		}
@@ -616,8 +635,10 @@ public class FirstUsageWizardFragment extends Fragment implements OsmAndLocation
 
 	private void showOnMap(LatLon mapCenter, int mapZoom) {
 		MapActivity mapActivity = (MapActivity) getActivity();
-		mapActivity.setMapLocation(mapCenter.getLatitude(), mapCenter.getLongitude());
-		mapActivity.getMapView().setIntZoom(mapZoom);
+		if (mapActivity != null) {
+			mapActivity.setMapLocation(mapCenter.getLatitude(), mapCenter.getLongitude());
+			mapActivity.getMapView().setIntZoom(mapZoom);
+		}
 		closeWizard();
 	}
 
