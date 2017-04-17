@@ -2751,7 +2751,7 @@ Als je hulp nodig hebt met OsmAnd: neem contact op met ons support team: support
 
  • Ondersteunt Open Location Code (OLC)
 
- • Weergave van een hoogte- en hellingsprofiel van een berekende route of een opgenomen GPX-track (met snelheid) 
+ • Weergave van een hoogte- en hellings-en snelheidsprofiel van een berekende route of een opgenomen GPX-track
 
  • Extra fietsnavigarltie-instellingen met rijstijl en hoogtegegevens
 
@@ -2845,7 +2845,7 @@ voor Gebied: %1$s x %2$s</string>
     <string name="quick_action_btn_tutorial_descr">De Sneltoets lang indrukken en slepen om de positie te wijzigen</string>
 	<string name="shared_string_action_name">Titel voor de Actie (eventueel wijzigen)</string>
 <string name="rendering_attr_depthContours_description">Toon dieptelijnen en -punten</string>
-    <string name="rendering_attr_depthContours_name">Dieptelijnen</string>
+    <string name="rendering_attr_depthContours_name">Zeedieptelijnen</string>
 	<string name="select_gpx_folder">Kies map voor GPX-tracks</string>
     <string name="file_can_not_be_moved">Bestand kan niet verplaatst worden.</string>
     <string name="shared_string_move">Verplaatsen</string>
@@ -2876,7 +2876,8 @@ voor Gebied: %1$s x %2$s</string>
     <string name="right_side_navigation">Rechts rijdend</string>
     <string name="driving_region_automatic">Automatisch</string>
     <string name="do_not_send_anonymous_app_usage">Geen anonieme gebruiksgegevens versturen</string>
-    <string name="do_not_send_anonymous_app_usage_desc">OsmAnd verstuurt uitsluitend algemene gegevens over schermgebruik. We slaan geen locatiegegevens of gebruikersgegevens op.</string>
+    <string name="do_not_send_anonymous_app_usage_desc">OsmAnd verzamelt uitsluitend algemene gegevens over welke onderdelen van fe App je opent.
+We slaan geen locatiegegevens, zoektermen of andere gebruikersgegevens op.</string>
     <string name="do_not_show_startup_messages">Geen startmeldingen weergeven</string>
     <string name="shared_string_overview">Overzicht</string>
     <string name="select_street">Straat zoeken</string>
@@ -2902,11 +2903,11 @@ voor Gebied: %1$s x %2$s</string>
     <string name="subscribe_email_error">Foutmelding</string>
     <string name="subscribe_email_desc">Abonneer op de mailinglist voor aanbiedingen en ontvang 3 extra kaart-downloads!</string>
     <string name="depth_contour_descr">Deze kaarten tonen de dieptepunten en -contouren van de zeeën en oceanen (op basis van een 30 boogseconden-raster).</string>
-    <string name="sea_depth_thanks">Dank voor het aanschaffen van Zeediepten en -contouren!</string>
-    <string name="index_item_depth_contours_osmand_ext">Zeediepte contourlijnen</string>
+    <string name="sea_depth_thanks">Bedankt voor het aanschaffen van Zeediepten en -contouren!</string>
+    <string name="index_item_depth_contours_osmand_ext">Zeediepte-contourlijnen</string>
     <string name="index_item_depth_points_southern_hemisphere">Zeediepten Zuidelijk Halfrond</string>
     <string name="index_item_depth_points_northern_hemisphere">Zeediepten Noordelijk Halfrond</string>
-    <string name="download_depth_countours">Zeediepte contourlijnen</string>
+    <string name="download_depth_countours">Zeediepte-contourlijnen</string>
     <string name="nautical_maps">Zeekaarten</string>
     <string name="analyze_on_map">Op de kaart weergeven</string>
     <string name="shared_string_visible">Zichtbaar</string>
@@ -2916,8 +2917,8 @@ voor Gebied: %1$s x %2$s</string>
     <string name="parking_options">Parkeermogelijkheden</string>
     <string name="full_version_thanks">Dank voor het aanschaffen van de volledige versie van OsmAnd!</string>
     <string name="routing_attr_relief_smoothness_factor_hills_name">Heuvelachtige wegen</string>
-    <string name="routing_attr_relief_smoothness_factor_plains_name">Liever vlakke wegen</string>
-    <string name="routing_attr_relief_smoothness_factor_more_plains_name">Grote voorkeur voor vlakke wegen</string>
+    <string name="routing_attr_relief_smoothness_factor_plains_name">Minder heuvelachtig</string>
+    <string name="routing_attr_relief_smoothness_factor_more_plains_name">Voorkeur voor vlakke wegen</string>
     <string name="routing_attr_driving_style_speed_name">Snelheid</string>
     <string name="routing_attr_driving_style_balance_name">Er tussen in</string>
     <string name="routing_attr_driving_style_safety_name">Veiligheid</string>
@@ -2931,17 +2932,17 @@ voor Gebied: %1$s x %2$s</string>
     <string name="add_new_folder">Nieuwe map ttoevoegen</string>
     <string name="points_delete_multiple_succesful">Punt(en) met succes verwijderd.</string>
     <string name="points_delete_multiple">Er worden %1$d punt(en) verwijderd. Doorgaan ?</string>
-    <string name="route_points_category_name">Punten langs de route</string>
+    <string name="route_points_category_name">Afslagen op de route</string>
     <string name="track_points_category_name">Belangrijke punten op deze route</string>
-    <string name="routing_attr_relief_smoothness_factor_name">Reliëfvoorkeur</string>
+    <string name="routing_attr_relief_smoothness_factor_name">Kies voorkeur voor hoogteverschillen</string>
     <string name="shared_string_paused">In pauze</string>
     <string name="lang_ber">Berbers</string>
-    <string name="hillshade_menu_download_descr">"Download een speciale kaart  om de reliëfschaduw weer te geven."</string>
-    <string name="hillshade_purchase_header">Koop en installeer de plugin om reliëfschaduw op de kaart weer te geven.</string>
+    <string name="hillshade_menu_download_descr">Om reliëfschaduw weer te geven, moet je de reliëfschaduwkaart voor deze regio downloaden.</string>
+    <string name="hillshade_purchase_header">Om reliëfschaduw op de kaart weer te geven, moet je de Hoogtelijnen-plugin kopen en installeren.</string>
     <string name="hide_from_zoom_level">Niet tonen vanaf zoom-niveau</string>
     <string name="srtm_menu_download_descr">Download de hoogtelijnenkaart voor deze regio om hoogtelijnen te zien.</string>
     <string name="shared_string_plugin">Plugin</string>
-    <string name="srtm_purchase_header">Koop en installeer de plugin om hoogtelijnen weer te geven</string>
+    <string name="srtm_purchase_header">Om hoogtelijnen weer te geven, moet je de Hoogtelijnen-plugin kopen em installeren.</string>
     <string name="srtm_color_scheme">Kleurschema</string>
     <string name="show_from_zoom_level">Toon vanaf dit zoom-niveau</string>
     <string name="routing_attr_allow_private_name">Privé-wegen toestaan</string>
@@ -3044,4 +3045,5 @@ Van bijna alle landen is een kaart te downloaden: van Afghanistan tot Zimbabwe, 
     <string name="restart_search">Opnieuw zoeken</string>
     <string name="increase_search_radius">Zoekbereik vergroten</string>
     <string name="nothing_found">Niets gevonden :(</string>
+    <string name="nothing_found_descr">Probeer een andere zoekterm of vergroot de zoekcirkel</string>
     </resources>
