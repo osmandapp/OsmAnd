@@ -626,6 +626,24 @@
     "expectedResults": {
       "32486314": "C|C|+TSLR"
     }
+  },
+  {
+    "testName": "35.B 22 TR NEW 41",
+    "params": {
+      "vehicle": "car",
+      "short_way": "true",
+    },
+    "startPoint": {
+      "latitude": 45.61344391190965,
+      "longitude": 35.47873288392847
+    },
+    "endPoint": {
+      "latitude": 45.60452753118045,
+      "longitude": 35.47435551881617
+    },
+    "expectedResults": {
+      "84975049": "TL|+TR,C"
+    }
   }
 
 ]

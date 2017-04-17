@@ -247,7 +247,7 @@
     }
   },
   {
-    "testName": "19.Routing prblem: OsmAnd fails to use the nearest link between two halves of a highway https://github.com/osmandapp/Osmand/issues/1970#issuecomment-209651749",
+    "testName": "19.Routing problem: OsmAnd fails to use the nearest link between two halves of a highway https://github.com/osmandapp/Osmand/issues/1970#issuecomment-209651749",
     "params": {
       "vehicle": "car",
       "short_way": "true",
