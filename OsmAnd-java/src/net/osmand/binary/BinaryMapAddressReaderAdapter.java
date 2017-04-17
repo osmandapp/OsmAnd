@@ -684,7 +684,7 @@ public class BinaryMapAddressReaderAdapter {
 								codedIS.seek(contOffset);
 								int len = codedIS.readRawVarint32();
 								int old = codedIS.pushLimit(len);
-								obj = readCityHeader(null, contOffset, null);
+								obj = readCityHeader(null, contOffset, reg.attributeTagsTable);
 								codedIS.popLimit(old);
 							}
 							if (obj != null) {

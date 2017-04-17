@@ -614,6 +614,12 @@ public class SearchPhrase {
 				}
 			}
 		}
+		if(!sr.firstUnknownWordMatches) {
+			sr.firstUnknownWordMatches = localeName.equals(getUnknownSearchWord()) ||
+					getNameStringMatcher().matches(localeName) || 
+					getNameStringMatcher().matches(otherNames);	
+		}
+		
 	}
 	public int getRadiusSearch(int meters) {
 		return (1 << (getRadiusLevel() - 1)) * meters;
