@@ -664,8 +664,8 @@ public class SearchPhrase {
 				
 				@Override
 				public int compare(String o1, String o2) {
-					int i1 = CommonWords.getCommonSearch(o1);
-					int i2 = CommonWords.getCommonSearch(o2);
+					int i1 = CommonWords.getCommonSearch(o1.toLowerCase());
+					int i2 = CommonWords.getCommonSearch(o2.toLowerCase());
 					if (i1 != i2) {
 						return icompare(i1, i2);
 					}

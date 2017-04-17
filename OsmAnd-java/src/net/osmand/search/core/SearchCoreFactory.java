@@ -308,6 +308,7 @@ public class SearchCoreFactory {
 					if (phrase.isEmptyQueryAllowed() && phrase.isEmpty()) {
 						resultMatcher.publish(res);
 					} else if (nm.matches(res.localeName) || nm.matches(res.otherNames)) {
+						res.firstUnknownWordMatches = wrd.equals(phrase.getUnknownSearchWord());
 						subSearchApiOrPublish(phrase, resultMatcher, res, cityApi);
 					}
 					if (limit++ > LIMIT * phrase.getRadiusLevel()) {
@@ -447,9 +448,7 @@ public class SearchCoreFactory {
 					}
 					r.searchAddressDataByName(req);
 					for (SearchResult res : immediateResults) {
-						res.firstUnknownWordMatches = wordToSearch.equals(phrase.getUnknownSearchWord()) ||
-								phrase.getNameStringMatcher().matches(res.localeName) || 
-								phrase.getNameStringMatcher().matches(res.otherNames);
+						res.firstUnknownWordMatches = wordToSearch.equals(phrase.getUnknownSearchWord());
 						if (res.objectType == ObjectType.STREET) {
 							City ct = ((Street) res.object).getCity();
 							phrase.countUnknownWordsMatch(res, 
