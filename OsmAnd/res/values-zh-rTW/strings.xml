@@ -1797,7 +1797,7 @@ OsmAnd (Automated Navigation Directions) 是一個地圖和導航的應用程式
     <string name="remove_the_tag">移除標記</string>
     <string name="shared_string_disabled">已停用</string>
     <string name="shared_string_enabled">已啟用</string>
-    <string name="plugin_description_title">描述</string>
+    <string name="plugin_description_title">內容說明</string>
 
     <string name="edit_group">編輯群組</string>
     <string name="shared_string_enable">啟用</string>
