@@ -1395,8 +1395,8 @@ Le %2$s</string>
     <string name="share_menu_location">Del posisjon</string>
     <string name="shared_string_send">Send</string>
     <string name="map_downloaded">Kart lastet ned</string>
-    <string name="map_downloaded_descr">Kart over %1$s har blitt lastet ned. Gå tilbake til kartet for å begynne å bruke det.</string>
-    <string name="go_to_map">Gå til kartet</string>
+    <string name="map_downloaded_descr">Kartet over %1$s er lastet ned og kan nå brukes.</string>
+    <string name="go_to_map">Vis kartet</string>
     <string name="downloads">Nedlastinger</string>
     <string name="value_downloaded_of_max">%1$.1f av %2$.1f MB</string>
     <string name="file_size_in_mb">%.1f MB</string>
@@ -1979,7 +1979,7 @@ Representerer området: %1$s x %2$s</string>
     <string name="select_index_file_to_download">Fant ikke noe. Hvis du ikke finner din region, kan du lage den selv (se http://osmand.net).</string>
     <string name="none_selected_gpx">Ingen GPX-filer valgt. Trykk lenge for å velge et tilgjengelig spor.</string>
     <string name="gpx_split_interval">Oppdelingsintervall</string>
-    <string name="gpx_info_asc_altitude">Nedstiging/klatring: %1$s</string>
+    <string name="gpx_info_asc_altitude">Nedstigning/stigning: %1$s</string>
     <string name="gpx_timespan">Tidsrom: %1$s</string>
     <string name="gpx_timemoving">Tid i bevegelse: %1$s</string>
     <string name="osmo_user_left">Brukeren %1$s forlot gruppa %2$s</string>
@@ -2141,7 +2141,7 @@ Representerer området: %1$s x %2$s</string>
     <string name="context_menu_item_add_parking_point">Marker som parkeringsplass</string>
     <string name="route_roundabout">Rundkjøring: Ta avkjøring %1$d og fortsett</string>
     <string name="support_new_features">Støtt nye funksjoner</string>
-    <string name="max_speed">Maks fart</string>
+    <string name="max_speed">Maksimumshastighet</string>
     <string name="shared_string_start_time">Starttid</string>
     <string name="shared_string_end_time">Sluttid</string>
     <string name="shared_string_color">Farge</string>
@@ -2272,4 +2272,18 @@ Representerer området: %1$s x %2$s</string>
     <string name="quick_action_gpx_category_descr">Velg en valgfri kategori</string>
     <string name="quick_favorites_show_favorites_dialog">Vis favorittdialog</string>
     <string name="quick_actions_delete_text">Er du sikker på at du vil slette handlingen \"%s\"?</string>
+    <string name="subscribe_email_error">Feil</string>
+    <string name="shared_string_visible">Synlig</string>
+    <string name="fonts_header">Skrifttyper for kart</string>
+    <string name="driving_region_automatic">Automatisk</string>
+    <string name="do_not_show_startup_messages">Ikke vis meldinger ved oppstart</string>
+    <string name="routing_attr_relief_smoothness_factor_hills_name">Kupert</string>
+    <string name="routing_attr_relief_smoothness_factor_plains_name">Småkupert</string>
+    <string name="routing_attr_relief_smoothness_factor_more_plains_name">Flatt</string>
+    <string name="relief_smoothness_factor_descr">Foretrukket terreng: flatt eller kupert</string>
+    <string name="add_new_folder">Legg til ny mappe</string>
+    <string name="gpx_track">Spor</string>
+    <string name="routing_attr_height_obstacles_name">Bruk høydedata</string>
+    <string name="routing_attr_height_obstacles_description">Bruk terrenghøydedata fra SRTM, ASTER og EU-DEM</string>
+    <string name="quick_action_bug_message">Melding</string>
     </resources>
