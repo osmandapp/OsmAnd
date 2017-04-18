@@ -2930,4 +2930,5 @@ Facebook: https://www.facebook.com/osmandapp
     <string name="quick_action_add_first_intermediate_desc">Натискання на кнопку дії додасть в центр екрану першу проміжну точку маршруту.</string>
     <string name="no_overlay">Мапа покриття вимкнена</string>
     <string name="no_underlay">Підкладка вимкнена</string>
+    <string name="subscribe_email_error">Помилка</string>
     </resources>
