@@ -74,7 +74,6 @@ public class OsmandApplication extends MultiDexApplication {
 	public static final String EXCEPTION_PATH = "exception.log"; //$NON-NLS-1$
 	private static final org.apache.commons.logging.Log LOG = PlatformUtil.getLog(OsmandApplication.class);
 
-	public static final String SHOW_PLUS_VERSION_PARAM = "show_plus_version";
 	public static final String SHOW_PLUS_VERSION_INAPP_PARAM = "show_plus_version_inapp";
 
 	final AppInitializer appInitializer = new AppInitializer(this);
@@ -841,7 +840,7 @@ public class OsmandApplication extends MultiDexApplication {
 				Object inst = mm.invoke(null);
 				Method log = cl.getMethod("setDefaults", Map.class);
 				Map<String, Object> defaults = new HashMap<>();
-				defaults.put(SHOW_PLUS_VERSION_PARAM, Boolean.FALSE);
+				defaults.put(SHOW_PLUS_VERSION_INAPP_PARAM, Boolean.TRUE);
 				log.invoke(inst, defaults);
 			}
 		} catch (Exception e) {
