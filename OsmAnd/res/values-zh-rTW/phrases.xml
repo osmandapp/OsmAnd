@@ -20,7 +20,7 @@
 		<string name="poi_landuse">土地利用</string>
 	<string name="poi_education">教育</string>
 	<string name="poi_administrative">行政機關</string>
-	<string name="poi_healthcare">醫療</string>
+	<string name="poi_healthcare">醫療保健</string>
 	<string name="poi_office">公司行號</string>
 	<string name="poi_sport">運動</string>
 	<string name="poi_tourism">旅遊</string>
@@ -2499,7 +2499,7 @@
 	<string name="poi_beach_surface_type">表面</string>
 	<string name="poi_nudism">天體主義</string>
 	<string name="poi_diet">飲食</string>
-	<string name="poi_health_specialty">健康專業</string>
+	<string name="poi_health_specialty">醫療專業</string>
 	<string name="poi_tents">帳篷</string>
 	<string name="poi_washing_machine">洗衣機</string>
 	<string name="poi_caravans">露營拖車</string>
@@ -2664,7 +2664,7 @@
 	<string name="poi_health_specialty_dental_oral_maxillo_facial_surgery_yes">牙科、口腔和頜面外科</string>
 	<string name="poi_health_specialty_maternity_yes">產科</string>
 	<string name="poi_health_specialty_emergency_medicine_yes">急診醫學</string>
-	<string name="poi_health_specialty_emergency_medicine_no">急診醫療：無</string>
+	<string name="poi_health_specialty_emergency_medicine_no">醫療專業：意外事故和急救醫學：無</string>
 	<string name="poi_health_specialty_orthodontics_yes">齒顎矯正科</string>
 	<string name="poi_health_specialty_physiotherapy_yes">物理治療</string>
 	<string name="poi_health_specialty_biochemistry_yes">生物化學</string>
@@ -2699,4 +2699,9 @@
 	<string name="poi_health_specialty_pathology_yes">病理解剖學</string>
 	<string name="poi_health_specialty_oncology_yes">腫瘤學</string>
 	<string name="poi_health_specialty_tropical_medicine_yes">熱帶醫學</string>
+	<string name="poi_health_specialty_tropical_medicine_no">醫療專業：熱帶醫學︰無</string>
+	<string name="poi_health_specialty_obstetrics_postnatal_no">醫療專業：婦產科（產後）︰無</string>
+	<string name="poi_health_specialty_obstetrics_postnatal_yes">婦產科（產後）</string>
+	<string name="poi_health_specialty_obstetrics_antenatal_yes">婦產科（產前）</string>
+	<string name="poi_health_specialty_obstetrics_antenatal_no">醫療專業：婦產科（產前）︰無</string>
 	</resources>
