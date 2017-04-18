@@ -1308,20 +1308,20 @@ public class QuickSearchDialogFragment extends DialogFragment implements OsmAndC
 	}
 
 	private void reloadHistoryInternal() {
-		try {
-			LOG.info("+++ start loading history");
-			SearchResultCollection res = searchUICore.shallowSearch(SearchHistoryAPI.class, "", null);
- 			List<QuickSearchListItem> rows = new ArrayList<>();
-			if (res != null) {
-				for (SearchResult sr : res.getCurrentSearchResults()) {
-					rows.add(new QuickSearchListItem(app, sr));
+		if (historySearchFragment != null) {
+			try {
+				SearchResultCollection res = searchUICore.shallowSearch(SearchHistoryAPI.class, "", null);
+				List<QuickSearchListItem> rows = new ArrayList<>();
+				if (res != null) {
+					for (SearchResult sr : res.getCurrentSearchResults()) {
+						rows.add(new QuickSearchListItem(app, sr));
+					}
 				}
+				historySearchFragment.updateListAdapter(rows, false);
+			} catch (Exception e) {
+				e.printStackTrace();
+				app.showToastMessage(e.getMessage());
 			}
-			historySearchFragment.updateListAdapter(rows, false);
-			LOG.info("--- history loaded: count=" + rows.size());
-		} catch (IOException e) {
-			e.printStackTrace();
-			app.showToastMessage(e.getMessage());
 		}
 	}
 
