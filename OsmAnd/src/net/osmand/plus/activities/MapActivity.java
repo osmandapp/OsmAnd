@@ -791,6 +791,7 @@ public class MapActivity extends OsmandActionBarActivity implements DownloadEven
 		Object toShow = settings.getAndClearObjectToShow();
 		boolean editToShow = settings.getAndClearEditObjectToShow();
 		int status = settings.isRouteToPointNavigateAndClear();
+		String searchRequestToShow = settings.getAndClearSearchRequestToShow();
 		if (status != 0) {
 			// always enable and follow and let calculate it (i.e.GPS is not accessible in a garage)
 			Location loc = new Location("map");
@@ -800,6 +801,9 @@ public class MapActivity extends OsmandActionBarActivity implements DownloadEven
 			if (dashboardOnMap.isVisible()) {
 				dashboardOnMap.hideDashboard();
 			}
+		}
+		if (searchRequestToShow != null) {
+			showQuickSearch(searchRequestToShow);
 		}
 		if (latLonToShow != null) {
 			if (dashboardOnMap.isVisible()) {
@@ -1507,6 +1511,17 @@ public class MapActivity extends OsmandActionBarActivity implements DownloadEven
 		}
 		QuickSearchDialogFragment.showInstance(this, "", null,
 				QuickSearchType.REGULAR, QuickSearchTab.CATEGORIES, new LatLon(latitude, longitude));
+	}
+
+	public void showQuickSearch(String searchQuery) {
+		hideContextMenu();
+		QuickSearchDialogFragment fragment = getQuickSearchDialogFragment();
+		if (fragment != null) {
+			fragment.dismiss();
+			refreshMap();
+		}
+		QuickSearchDialogFragment.showInstance(this, searchQuery, null,
+				QuickSearchType.REGULAR, QuickSearchTab.CATEGORIES, null);
 	}
 
 	public void showQuickSearch(Object object) {

@@ -142,8 +142,8 @@ public class GeoIntentActivity extends OsmandListActivity {
 		@Override
 		protected void onPostExecute(GeoPointParserUtil.GeoParsedPoint p ) {
 			progress.dismiss();
+			OsmandSettings settings = getMyApplication().getSettings();
 			if (p != null && p.isGeoPoint()) {
-				OsmandSettings settings = getMyApplication().getSettings();
 				PointDescription pd = new PointDescription(p.getLatitude(), p.getLongitude());
 				if(!Algorithms.isEmpty(p.getLabel())) {
 					pd.setName(p.getLabel());
@@ -154,10 +154,8 @@ public class GeoIntentActivity extends OsmandListActivity {
 			}
 			Uri uri = intent.getData();
 			String searchString = p != null && p.isGeoAddress() ? p.getLabel() : uri.toString();
-			
-			// TODO
+			settings.setSearchRequestToShow(searchString);
 			MapActivity.launchMapActivityMoveToTop(GeoIntentActivity.this);
-
 		}
 
 	}
