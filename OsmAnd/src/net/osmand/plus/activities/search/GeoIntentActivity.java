@@ -153,7 +153,7 @@ public class GeoIntentActivity extends OsmandListActivity {
 				MapActivity.launchMapActivityMoveToTop(GeoIntentActivity.this);
 			}
 			Uri uri = intent.getData();
-			String searchString = p != null && p.isGeoAddress() ? p.getLabel() : uri.toString();
+			String searchString = p != null && p.isGeoAddress() ? p.getQuery() : uri.toString();
 			settings.setSearchRequestToShow(searchString);
 			MapActivity.launchMapActivityMoveToTop(GeoIntentActivity.this);
 		}
