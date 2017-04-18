@@ -2176,4 +2176,25 @@
     <string name="restart_search">Aramayı yeniden başlatın</string>
     <string name="increase_search_radius">Arama yarıçapını artır</string>
     <string name="nothing_found">Hiçbirşey Bulunamadı :(</string>
+    <string name="nothing_found_descr">Arama sorgusunu değiştirmeyi veya aramanın yarıçapını arttırmayı deneyin</string>
+    <string name="search_favorites">Favorileri ara</string>
+    <string name="hillshade_menu_download_descr">Ressamın dağınık tonlamasını harita üzerinde görmek için, bu bölgenin tepe çıkıntı yerpaylaşım haritasını indirmeniz gerekir.</string>
+    <string name="hillshade_purchase_header">Rahatlamanın dağınıklığını haritada görmek için, Contour Lines eklentisini satın almanız ve kurmanız gerekiyor.</string>
+    <string name="hide_from_zoom_level">Zum seviyesinden gizle</string>
+    <string name="srtm_menu_download_descr">Haritadaki kontur çizgileri için bu bölgenin kontur çizgisini indirmeniz gerekiyor.</string>
+    <string name="shared_string_plugin">Fişe takmak</string>
+    <string name="srtm_purchase_header">Kontur hatlarını harita üzerinde görmek için Contour Lines eklentisini satın almanız ve kurmanız gerekiyor.</string>
+    <string name="srtm_color_scheme">Renk uyumu</string>
+    <string name="show_from_zoom_level">Zum düzeyinden görüntüleme</string>
+    <string name="routing_attr_allow_private_name">Özel erişime izin ver</string>
+    <string name="routing_attr_allow_private_description">Özel alanlara erişime izin ver</string>
+    <string name="display_zoom_level">Yakınlaştırma düzeyini göster:% 1</string>
+    <string name="favorite_group_name">Grup ismi</string>
+    <string name="change_color">Rengi değiştir</string>
+    <string name="edit_name">Adı düzenle</string>
+    <string name="animate_my_location">Konumum animasyon</string>
+    <string name="animate_my_location_desc">Geçici konum kaybı düzeltmesi sırasında konumum dışa değerini kaldırmayı etkinleştir</string>
+    <string name="shared_string_overview">Genel bakış</string>
+    <string name="select_street">Sokağı seçin</string>
+    <string name="type_address">Adres yazın</string>
     </resources>
