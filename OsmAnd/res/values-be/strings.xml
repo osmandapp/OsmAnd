@@ -223,7 +223,7 @@
 	<string name="rendering_attr_roadColors_name">Схема колераў дарог</string>
     <string name="map_widget_show_destination_arrow">Паказваць напрамак да месца прызначэньня</string>
     <string name="enable_plugin_monitoring_services">Дазволіць модулю запісу падарожжа выкарыстоўваць сэрвісы запісу сьледу (запіс GPX, адсочваньне праз сетку)</string>
-    <string name="non_optimal_route_calculation">Разьлічваць прыблізны шлях на вялікія адлегласьці</string>
+    <string name="non_optimal_route_calculation">Разлічваць прыблізны шлях на вялікія адлегласьці</string>
 	<string name="gps_not_available">Калі ласка, уключыце GPS у наладах</string>
     
 	<string name="map_widget_monitoring_services">Службы адсочваньня</string>
@@ -1417,7 +1417,7 @@ OsmAnd мае адкрыты зыходны код і актыўна разві�
     <string name="calculate_osmand_route_gpx">Разьлічыць пазасеціўны маршрут OsmAnd</string>
     <string name="guidance_preferences_descr">Навігацыйныя настройкі</string>
     <string name="routing_preferences_descr">Настройкі маршрутызацыі</string>
-    <string name="complex_route_calculation_failed">Хуткі разьлік маршруту ня ўдаўся (%s), пераход на марудны разлік.</string>
+    <string name="complex_route_calculation_failed">Хуткі разлік маршруту ня ўдаўся (%s), пераход на марудны разлік.</string>
     <string name="disable_complex_routing_descr">Адключэньне дзьвюх фазнай маршрутызацыі для аўтамабільнай навігацыі</string>
     <string name="amenity_type_seamark">Навігацыйны знак</string>
     <string name="app_mode_hiking">Пешы турызм</string>
@@ -2684,7 +2684,7 @@ OsmAnd мае адкрыты зыходны код і актыўна разві�
     <string name="rendering_attr_surfaceIntegrity_name">Якасьць дарожнага пакрыцьця</string>
     <string name="search_hint">Увядзіце назву горада, адрас, POI</string>
     <string name="translit_name_if_miss">Транслітарацыя калі назва на %1$s адсутнічае</string>
-    <string name="route_calculation">Разьлік шляху</string>
+    <string name="route_calculation">Разлік шляху</string>
     <string name="gpx_no_tracks_title">У вас яшчэ няма сьлядоў</string>
     <string name="gpx_no_tracks_title_folder">Вы таксама можаце дадаць сьляды ў каталёг</string>
     <string name="route_roundabout_short">Збочце на %1$d зьезьдзе</string>
