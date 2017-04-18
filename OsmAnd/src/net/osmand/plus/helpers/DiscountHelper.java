@@ -213,6 +213,7 @@ public class DiscountHelper {
 				mapActivity.execInAppTask(new InAppHelper.InAppRunnable() {
 					@Override
 					public void run(InAppHelper helper) {
+						mapActivity.getMyApplication().logEvent(mapActivity, "in_app_purchase_redirect");
 						helper.purchaseFullVersion(mapActivity);
 					}
 				});

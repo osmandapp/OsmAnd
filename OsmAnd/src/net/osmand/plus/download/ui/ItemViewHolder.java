@@ -331,11 +331,10 @@ public class ItemViewHolder {
 				public void onClick(View v) {
 					switch (clickAction) {
 						case ASK_FOR_FULL_VERSION_PURCHASE:
-							context.getMyApplication().logEvent(context, "click_buy_plus_inapp");
+							context.getMyApplication().logEvent(context, "in_app_purchase_show_from_wiki_context_menu");
 							context.purchaseFullVersion();
 							break;
 						case ASK_FOR_DEPTH_CONTOURS_PURCHASE:
-							context.getMyApplication().logEvent(context, "click_buy_depth_contours_inapp");
 							context.purchaseDepthContours();
 							break;
 						case ASK_FOR_SEAMARKS_PLUGIN:

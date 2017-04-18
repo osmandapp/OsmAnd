@@ -130,7 +130,7 @@ public abstract class OsmandNotification {
 				Notification notification = notificationBuilder.build();
 				setupNotification(notification);
 				if (top) {
-					notificationManager.cancel(getOsmandNotificationId());
+					removeNotification();
 					notificationManager.notify(TOP_NOTIFICATION_SERVICE_ID, notification);
 
 					Builder wearNotificationBuilder = buildNotification(true);
@@ -144,10 +144,10 @@ public abstract class OsmandNotification {
 				}
 				return true;
 			} else {
-				notificationManager.cancel(getOsmandNotificationId());
+				removeNotification();
 			}
 		} else {
-			notificationManager.cancel(getOsmandNotificationId());
+			removeNotification();
 		}
 		return false;
 	}
