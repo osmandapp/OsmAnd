@@ -2847,7 +2847,7 @@ OsmAnd мае адкрыты зыходны код і актыўна разві�
     <string name="route_altitude">Вышыня маршруту</string>
     <string name="altitude_descent">Спуск</string>
     <string name="altitude_ascent">Пад\'ём</string>
-    <string name="altitude_range">Дыяпазон вышыні</string>
+    <string name="altitude_range">Дыяпазон вышынь</string>
     <string name="average_altitude">Сярэдняя вышыня</string>
     <string name="shared_string_time">Час</string>
     <string name="total_distance">Агульная даўжыня</string>
