@@ -1336,7 +1336,7 @@ public class GeoPointParserUtil {
 	}
 
 	public static class GeoParsedPoint {
-		private static final int NO_ZOOM = -1;
+		public static final int NO_ZOOM = -1;
 
 		private double lat = 0;
 		private double lon = 0;
