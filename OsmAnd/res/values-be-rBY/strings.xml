@@ -2688,4 +2688,10 @@ Moduli:
     <string name="average_altitude">Siaredniaja vyšynia</string>
     <string name="shared_string_time">Čas</string>
     <string name="total_distance">Ahulnaja adlehłasć</string>
+    <string name="rendering_attr_hideWaterPolygons_name">Schavać vadu</string>
+    <string name="routing_attr_allow_motorway_name">Dazvolić aŭtamahistrali</string>
+    <string name="routing_attr_allow_motorway_description">Dazvolić aŭtamahistrali</string>
+    <string name="search_map_hint">Pošuk horada ci krainy</string>
+    <string name="upload_poi">Vyhryzić POI</string>
+    <string name="route_calculation">Razlik maršrutu</string>
     </resources>
