@@ -990,13 +990,13 @@
 	<string name="poi_operator">Üzemeltető</string>
 	<string name="poi_brand">Márka</string>
 	<string name="poi_fee_yes">van</string>
-	<string name="poi_fee_no">Nincs</string>
+	<string name="poi_fee_no">nincs</string>
 	<string name="poi_drinking_water_yes">van</string>
-	<string name="poi_drinking_water_no">Nincs</string>
+	<string name="poi_drinking_water_no">nincs</string>
 	<string name="poi_supervised_yes">Felügyelt</string>
 	<string name="poi_supervised_no">Felügyelet nincs</string>
 	<string name="poi_seasonal_yes">igen</string>
-	<string name="poi_seasonal_no">Nem</string>
+	<string name="poi_seasonal_no">nem</string>
 	<string name="poi_seasonal_dry_season">Száraz évszakban</string>
 	<string name="poi_seasonal_wet_season">Esős évszakban</string>
 	<string name="poi_seasonal_spring">Tavasszal</string>
@@ -1008,7 +1008,7 @@
 	<string name="poi_crossing_unmarked">Jelzetlen</string>
 	<string name="poi_start_date">Kezdő dátum</string>
 	<string name="poi_wheelchair_yes">igen</string>
-	<string name="poi_wheelchair_no">Nem</string>
+	<string name="poi_wheelchair_no">nem</string>
 	<string name="poi_wheelchair_limited">Korlátozott</string>
 	<string name="poi_wholesale">Nagykereskedés</string>
 
@@ -1194,7 +1194,7 @@
 	<string name="poi_tactile_paving_yes">van</string>
 	<string name="poi_tactile_paving_no">Vakvezető burkolat nincs</string>
 	<string name="poi_traffic_signals_sound_yes">van</string>
-	<string name="poi_traffic_signals_sound_no">Nincs</string>
+	<string name="poi_traffic_signals_sound_no">nincs</string>
 	<string name="poi_traffic_signals_sound_walk">Csak amikor zöld</string>
 
 	<string name="poi_services">Pihenőhely</string>
@@ -1524,7 +1524,7 @@
 	<string name="poi_piste_grooming_backcountry">Kezeletlen</string>
 	<string name="poi_piste_grooming_scooter">Motoros szán</string>
 	<string name="poi_piste_grooming_skating">Szabad stílus</string>
-	<string name="poi_piste_grooming_no">Nincs</string>
+	<string name="poi_piste_grooming_no">nincs</string>
 	<string name="poi_piste_grooming_mogul">Buckasí</string>
 
 	<string name="poi_garden_type_residential">Kerttípus: udvar</string>
@@ -2312,7 +2312,7 @@
 	<string name="poi_openfire_yes">Tűzgyújtás engedélyezett</string>
 	<string name="poi_openfire_no">Tűzgyújtás tilos</string>
 	<string name="poi_backcountry_yes">igen</string>
-	<string name="poi_backcountry_no">Nem</string>
+	<string name="poi_backcountry_no">nem</string>
 	<string name="poi_group_only_yes">Csak csoportoknak</string>
 	<string name="poi_group_only_no">Nem csak csoportoknak</string>
 	<string name="poi_washing_machine_yes">van</string>
