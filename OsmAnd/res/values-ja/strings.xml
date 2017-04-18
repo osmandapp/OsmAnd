@@ -2122,7 +2122,7 @@ OsmAndの従来のマップスタイルに戻すには、このプラグイン�
 	<string name="roads">道路</string>
     <string name="downloading_number_of_files">%1$d のファイルをダウンロード中</string>
     <string name="show_free_version_banner">無料版のバナーを表示</string>
-    <string name="show_free_version_banner_description">有料版でも、ダウンロード画面の有料版広告見ることが出来ます</string>
+    <string name="show_free_version_banner_description">有料版でも、ダウンロード画面の無料版バナー広告を見ることが出来ます</string>
     <string name="buy">購入</string>
     <string name="activate_seamarks_plugin">水位線プラグインを有効にしてください</string>
     <string name="activate_srtm_plugin">SRTMプラグインを有効にしてください</string>
