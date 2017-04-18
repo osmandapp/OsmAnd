@@ -126,6 +126,11 @@ android {
 			dimension "version"
 			applicationId "net.osmand"
 		}
+		freeres {
+			dimension "version"
+			applicationId "net.osmand"
+			resConfig "en"
+		}
 		full {
 			dimension "version"
 			applicationId "net.osmand.plus"

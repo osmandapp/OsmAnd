@@ -1,10 +1,12 @@
 package net.osmand.plus.download;
 
 import android.Manifest;
+import android.content.ActivityNotFoundException;
 import android.content.Context;
 import android.content.DialogInterface;
 import android.content.Intent;
 import android.content.pm.PackageManager;
+import android.net.Uri;
 import android.os.AsyncTask;
 import android.os.Bundle;
 import android.os.StatFs;
@@ -76,6 +78,8 @@ import java.util.HashSet;
 import java.util.List;
 import java.util.Locale;
 import java.util.Set;
+
+import static net.osmand.plus.OsmandApplication.SHOW_PLUS_VERSION_INAPP_PARAM;
 
 public class DownloadActivity extends AbstractDownloadActivity implements DownloadEvents,
 		OnRequestPermissionsResultCallback, InAppListener {
@@ -231,13 +235,29 @@ public class DownloadActivity extends AbstractDownloadActivity implements Downlo
 	}
 
 	public void purchaseFullVersion() {
-		if (inAppHelper != null) {
-			inAppHelper.purchaseFullVersion(this);
+		OsmandApplication app = getMyApplication();
+		if (Version.isFreeVersion(app)) {
+			if (app.getRemoteBoolean(SHOW_PLUS_VERSION_INAPP_PARAM, true)) {
+				if (inAppHelper != null) {
+					app.logEvent(this, "in_app_purchase_redirect");
+					inAppHelper.purchaseFullVersion(this);
+				}
+			} else {
+				app.logEvent(this, "paid_version_redirect");
+				Intent intent = new Intent(Intent.ACTION_VIEW,
+						Uri.parse(Version.marketPrefix(app) + "net.osmand.plus"));
+				try {
+					startActivity(intent);
+				} catch (ActivityNotFoundException e) {
+					LOG.error("ActivityNotFoundException", e);
+				}
+			}
 		}
 	}
 
 	public void purchaseDepthContours() {
 		if (inAppHelper != null) {
+			getMyApplication().logEvent(this, "depth_contours_purchase_redirect");
 			inAppHelper.purchaseDepthContours(this);
 		}
 	}
@@ -533,8 +553,13 @@ public class DownloadActivity extends AbstractDownloadActivity implements Downlo
 			fullVersionButton.setOnClickListener(new OnClickListener() {
 				@Override
 				public void onClick(View v) {
-					ctx.getMyApplication().logEvent(ctx, "click_buy_plus");
-					ctx.inAppHelper.purchaseFullVersion(ctx);
+					OsmandApplication app = ctx.getMyApplication();
+					if (app.getRemoteBoolean(SHOW_PLUS_VERSION_INAPP_PARAM, true)) {
+						app.logEvent(ctx, "in_app_purchase_redirect_from_banner");
+					} else {
+						app.logEvent(ctx, "paid_version_redirect_from_banner");
+					}
+					ctx.purchaseFullVersion();
 					DialogFragment f = (DialogFragment) ctx.getSupportFragmentManager()
 							.findFragmentByTag(FreeVersionDialogFragment.TAG);
 					if (f != null) {
