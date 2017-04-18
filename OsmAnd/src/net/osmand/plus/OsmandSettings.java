@@ -1644,6 +1644,17 @@ public class OsmandSettings {
 
 	private Object objectToShow;
 	private boolean editObjectToShow;
+	private String searchRequestToShow;
+
+	public void setSearchRequestToShow(String request) {
+		this.searchRequestToShow = request;
+	}
+
+	public String getAndClearSearchRequestToShow() {
+		String searchRequestToShow = this.searchRequestToShow;
+		this.searchRequestToShow = null;
+		return searchRequestToShow;
+	}
 
 	public Object getAndClearObjectToShow() {
 		Object objectToShow = this.objectToShow;
