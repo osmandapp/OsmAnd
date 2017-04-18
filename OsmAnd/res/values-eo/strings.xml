@@ -1097,7 +1097,7 @@ Premtenu por vidi sur la mapo</string>
     <string name="distance_measurement_clear_route">Forviŝi ĉiujn punktojn</string>
     <string name="distance_measurement_finish_subtrack">Ekigi novan subkurson</string>
     <string name="distance_measurement_load_gpx">Malfermi GPX-dosieron</string>
-    <string name="wait_current_task_finished">Bonvolu atendi ĝis nuna tasko finos</string>
+    <string name="wait_current_task_finished">Bonvolu atendi ĝis la nuna tasko finiĝos</string>
     <string name="use_kalman_filter_compass">Uzi filtrilon de Kalman</string>
     <string name="use_kalman_filter_compass_descr">Etigi bruojn en legoj de kompaso, sed pliigi inertecon</string>
     <string name="use_magnetic_sensor">Uzi magnet-sentilon</string>
