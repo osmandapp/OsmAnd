@@ -2166,4 +2166,14 @@
     <string name="rendering_value_medium_w_name">Orta</string>
     <string name="rendering_value_low_name">Düşük</string>
     <string name="rendering_attr_hideWaterPolygons_description">Su</string>
+    <string name="shared_string_action_name">İşlem Adı</string>
+<string name="quick_action_showhide_osmbugs_title">OSM Notlarını Göster / Gizle</string>
+    <string name="quick_action_osmbugs_show">OSM Notlarını Göster</string>
+    <string name="quick_action_osmbugs_hide">OSM Notlarını Gizle</string>
+    <string name="quick_action_showhide_osmbugs_descr">Eylem düğmesine dokunulduğunda, OSM Notları haritada gösterilir veya gizlenir.</string>
+    <string name="sorted_by_distance">Mesafeye göre sırala</string>
+    <string name="quick_action_btn_tutorial_descr">Ekrandaki konumunu değiştirmek için düğmeye uzun dokunun ve sürükleyin.</string>
+    <string name="restart_search">Aramayı yeniden başlatın</string>
+    <string name="increase_search_radius">Arama yarıçapını artır</string>
+    <string name="nothing_found">Hiçbirşey Bulunamadı :(</string>
     </resources>
