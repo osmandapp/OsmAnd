@@ -2704,4 +2704,8 @@
 	<string name="poi_health_specialty_obstetrics_postnatal_yes">婦產科（產後）</string>
 	<string name="poi_health_specialty_obstetrics_antenatal_yes">婦產科（產前）</string>
 	<string name="poi_health_specialty_obstetrics_antenatal_no">醫療專業：婦產科（產前）︰無</string>
+	<string name="poi_health_specialty_social_paediatrics_yes">社會小兒科</string>
+	<string name="poi_health_specialty_social_paediatrics_no">醫療專業：社會小兒科：無</string>
+	<string name="poi_health_specialty_addiction_medicine_yes">成癮醫學</string>
+	<string name="poi_health_specialty_optometry_yes">驗光</string>
 	</resources>
