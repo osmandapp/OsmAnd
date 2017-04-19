@@ -2994,34 +2994,34 @@ Fonctionnalités principales :
     <string name="nothing_found_descr">Modifiez les critères de recherche ou augmentez le rayon de recherche</string>
     <string name="private_access_routing_req">Votre destination se situe dans une zone privée. Souhaitez-vous autoriser l\'accès aux zones privées pour cet itinéraire ?</string>
     <string name="osmand_extended_description_part2">"
- navigation GPS
- • Vous pouvez choisir entre le mode hors connexion (pour éviter les frais de connexion depuis l\'étranger) et mode connecté (plus rapide)
- • Guidage vocal pas-à-pas (voix enregistrées et synthétisées)
- • L\'itinéraire s\'adapte dès que vous vous en écartez
- • Indication des voies, noms de rues, et estimation de l\'horaire d\'arrivée faciliteront votre route
+ Navigation GPS
+ • Vous pouvez naviguer en mode hors connexion (sans aucun frais de communication) ou en mode connecté
+ • Guidage vocal pas-à-pas (voix enregistrées ou de synthèse)
+ • L\'itinéraire est recalculé si vous vous en écartez
+ • Indication des voies, des noms de rues et estimation de l\'horaire d\'arrivée faciliteront votre trajet
  • Pour rendre votre voyage plus sûr, le mode jour/nuit s\'active automatiquement
- • Vous pouvez choisir d\'afficher les limitations de vitesse et d\'être averti lors d\'un dépassement
- • La distance d\'affichage de la carte s\'adapte à votre vitesse
- • Vous pouvez chercher des destination par adresse, type (ex: parking, restaurant, hôtel, station service, musée), ou par coordonnées géographiques
- • Possibilité de mettre des points de passage au cours de l\'itinéraire
- • Possibilité d\'enregistrer votre tracé ou de charger un tracé GPX à suivre
+ • Vous pouvez choisir d\'afficher les limitations de vitesse et d\'être averti en cas de dépassement
+ • Le niveau de zoom de la carte s\'adapte à votre vitesse
+ • Vous pouvez rechercher des destination par adresse, type (par exemple : parking, restaurant, hôtel, station service, musée) ou par coordonnées géographiques
+ • Possibilité d\'ajouter des points de passage à votre itinéraire
+ • Vous pouvez enregistrer votre itinéraire au format GPX ou suivre une trace GPX existante
  "</string>
     <string name="osmand_extended_description_part3">"
  Carte
  • Affichage des points d’intérêt autour de vous
- • Orientation de la carte selon votre direction de déplacement (ou la boussole)
+ • Orientation de la carte selon votre direction de déplacement (ou selon la boussole)
  • Indication de votre position et de votre orientation
  • Partagez votre position pour que vos proches puissent vous trouver
- • Sauvez vos endroits préférés dans les Favoris
- • Vous pouvez choisir quels nom afficher sur la carte : Anglais, international, ou phonetique
- • Affichage des calques de vues spécialisées : vue satellite (Bing), ballades, navigation itinéraires GPX et calques additionnels avec transparence ajustable
+ • Enregistrez vos endroits préférés comme Favoris
+ • Sélectionnez les noms affichés sur la carte : en anglais, noms locaux ou phonétique
+ • Affichez des tuiles en lignes spécialisées, la vue satellite (source Bing), un itinéraires GPX et bien d\'autres couches avec transparence personnalisée
  "</string>
     <string name="osmand_extended_description_part5">"
  Cyclisme
  • Trouvez les pistes cyclables sur la carte
- • Le guidage GPS en mode vélo construit votre itinéraire selon les pistes cyclables
+ • Le guidage GPS en mode vélo calcule votre itinéraire en empruntant les pistes cyclables
  • Affichage de votre vitesse et de votre altitude
- • Enregistrement GPX optionnel pour sauver et partager votre itinéraire
- • Un plugin additionnel permet d\'afficher les lignes de dénivelé et les ombres du relief
+ • Enregistrement GPX optionnel pour enregistrer et partager votre itinéraire
+ • Un greffon additionnel permet d\'afficher les courbes de niveaux et les ombres du relief
  "</string>
     </resources>
