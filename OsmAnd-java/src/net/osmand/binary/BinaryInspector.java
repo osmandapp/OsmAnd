@@ -282,19 +282,19 @@ public class BinaryInspector {
 		ous.writeRawByte(v & 0xFF);
 		//written += 4;
 	}
-	
+
 	@SuppressWarnings("unchecked")
 	public  static List<Float> combineParts(File fileToExtract, Map<File, String> partsToExtractFrom) throws IOException {
 		BinaryMapIndexReader[] indexes = new BinaryMapIndexReader[partsToExtractFrom.size()];
 		RandomAccessFile[] rafs = new RandomAccessFile[partsToExtractFrom.size()];
-		
+
 		LinkedHashSet<Float>[] partsSet = new LinkedHashSet[partsToExtractFrom.size()];
 		int c = 0;
 		Set<String> addressNames = new LinkedHashSet<String>();
-		
-		
+
+
 		int version = -1;
-		// Go through all files and validate conistency 
+		// Go through all files and validate conistency
 		for(File f : partsToExtractFrom.keySet()){
 			if(f.getAbsolutePath().equals(fileToExtract.getAbsolutePath())){
 				System.err.println("Error : Input file is equal to output file " + f.getAbsolutePath());
@@ -311,7 +311,7 @@ public class BinaryInspector {
 					return null;
 				}
 			}
-			
+
 			LinkedHashSet<Float> temp = new LinkedHashSet<Float>();
 			String pattern = partsToExtractFrom.get(f);
 			boolean minus = true;
@@ -320,7 +320,7 @@ public class BinaryInspector {
 				BinaryIndexPart part = indexes[c].getIndexes().get(i);
 				if(part instanceof MapIndex){
 					List<MapRoot> roots = ((MapIndex) part).getRoots();
-					int rsize = roots.size(); 
+					int rsize = roots.size();
 					for(int j=0; j<rsize; j++){
 						partsSet[c].add((i + 1f) + (j + 1) / 10f);
 					}
@@ -350,17 +350,17 @@ public class BinaryInspector {
 
 			c++;
 		}
-		
-		// write files 
+
+		// write files
 		FileOutputStream fout = new FileOutputStream(fileToExtract);
 		CodedOutputStream ous = CodedOutputStream.newInstance(fout, BUFFER_SIZE);
 		List<Float> list = new ArrayList<Float>();
 		byte[] BUFFER_TO_READ = new byte[BUFFER_SIZE];
-		
+
 		ous.writeInt32(OsmandOdb.OsmAndStructure.VERSION_FIELD_NUMBER, version);
 		ous.writeInt64(OsmandOdb.OsmAndStructure.DATECREATED_FIELD_NUMBER, System.currentTimeMillis());
-		
-		
+
+
 		for (int k = 0; k < indexes.length; k++) {
 			LinkedHashSet<Float> partSet = partsSet[k];
 			BinaryMapIndexReader index = indexes[k];
@@ -373,7 +373,7 @@ public class BinaryInspector {
 
 				BinaryIndexPart part = index.getIndexes().get(i);
 				String map;
-				
+
 				if (part instanceof MapIndex) {
 					ous.writeTag(OsmandOdb.OsmAndStructure.MAPINDEX_FIELD_NUMBER, WireFormat.WIRETYPE_FIXED32_LENGTH_DELIMITED);
 					map = "Map";
@@ -401,15 +401,15 @@ public class BinaryInspector {
 				copyBinaryPart(ous, BUFFER_TO_READ, raf, part.getFilePointer(), part.getLength());
 				System.out.println(MessageFormat.format("{2} part {0} is extracted {1} bytes",
 						new Object[]{part.getName(), part.getLength(), map}));
-				
+
 			}
 		}
-		
+
 		ous.writeInt32(OsmandOdb.OsmAndStructure.VERSIONCONFIRM_FIELD_NUMBER, version);
 		ous.flush();
 		fout.close();
-		
-		
+
+
 		return list;
 	}
 
@@ -430,7 +430,7 @@ public class BinaryInspector {
 			toRead -= read;
 		}
 	}
-	
+
 
 	protected String formatBounds(int left, int right, int top, int bottom) {
 		double l = MapUtils.get31LongitudeX(left);
@@ -512,7 +512,7 @@ public class BinaryInspector {
 				} else if (p instanceof PoiRegion && (vInfo != null && vInfo.isVpoi())) {
 					printPOIDetailInfo(vInfo, index, (PoiRegion) p);
 				} else if (p instanceof TransportIndex && (vInfo != null && vInfo.isVtransport())) {
-					
+
 				} else if (p instanceof AddressRegion) {
 					List<CitiesBlock> cities = ((AddressRegion) p).cities;
 					for (CitiesBlock c : cities) {
@@ -557,12 +557,12 @@ public class BinaryInspector {
 					} catch (IOException e) {
 						throw new RuntimeException(e);
 					}
-				} 
+				}
 				b.setLength(0);
 				b.append("Road ");
 				b.append(obj.id);
 				b.append(" osmid ").append(obj.getId() >> (SHIFT_ID));
-				
+
 				for (int i = 0; i < obj.getTypes().length; i++) {
 					RouteTypeRule rr = obj.region.quickGetEncodingRule(obj.getTypes()[i]);
 					b.append(" ").append(rr.getTag()).append("='").append(rr.getValue()).append("'");
@@ -1070,7 +1070,7 @@ public class BinaryInspector {
 		name = name.replace("&", "&amp;");
 		return name;
 	}
-	
+
 	private void printOsmMapDetails(BinaryMapDataObject obj, StringBuilder b) {
 		boolean multipolygon = obj.getPolygonInnerCoordinates() != null && obj.getPolygonInnerCoordinates().length > 0;
 		boolean point = obj.getPointsLength() == 1;
@@ -1169,7 +1169,7 @@ public class BinaryInspector {
 		b.append("</way>\n");
 		return id;
 	}
-	
+
 	private void printTransportDetailInfo(VerboseInfo verbose, BinaryMapIndexReader index, TransportIndex p) throws IOException {
 		SearchRequest<TransportStop> sr = BinaryMapIndexReader.buildSearchTransportRequest(
 				MapUtils.get31TileNumberX(verbose.lonleft),
@@ -1245,10 +1245,10 @@ public class BinaryInspector {
 
 		index.initCategories(p);
 		println("\tRegion: " + p.name);
-		
-		println("\t\tBounds " + formatLatBounds(MapUtils.get31LongitudeX(p.left31), 
+
+		println("\t\tBounds " + formatLatBounds(MapUtils.get31LongitudeX(p.left31),
 				MapUtils.get31LongitudeX(p.right31),
-				MapUtils.get31LatitudeY(p.top31), 
+				MapUtils.get31LatitudeY(p.top31),
 				MapUtils.get31LatitudeY(p.bottom31)));
 		println("\t\tCategories:");
 		for (int i = 0; i < p.categories.size(); i++) {
@@ -1274,15 +1274,13 @@ public class BinaryInspector {
 		System.out.println("It allows print info about file, extract parts and merge indexes.");
 		System.out.println("\nUsage for print info : inspector [-vaddress] [-vcitynames] [-vstreetgroups] [-vstreets] [-vbuildings] [-vintersections] [-vmap] [-vmapobjects] [-vmapcoordinates] [-osm] [-vpoi] [-vrouting] [-vtransport] [-zoom=Zoom] [-bbox=LeftLon,TopLat,RightLon,BottomLat] [file]");
 		System.out.println("  Prints information about [file] binary index of OsmAnd.");
-		System.out.println("  -v.. more verbouse output (like all cities and their streets or all map objects with tags/values and coordinates)");
+		System.out.println("  -v.. more verbose output (like all cities and their streets or all map objects with tags/values and coordinates)");
 		System.out.println("\nUsage for combining indexes : inspector -c file_to_create (file_from_extract ((+|-)parts_to_extract)? )*");
 		System.out.println("\tCreate new file of extracted parts from input file. [parts_to_extract] could be parts to include or exclude.");
 		System.out.println("  Example : inspector -c output_file input_file +1,2,3\n\tExtracts 1, 2, 3 parts (could be find in print info)");
-		System.out.println("  Example : inspector -c output_file input_file -2,3\n\tExtracts all  parts excluding 2, 3");
+		System.out.println("  Example : inspector -c output_file input_file -2,3\n\tExtracts all parts excluding 2, 3");
 		System.out.println("  Example : inspector -c output_file input_file1 input_file2 input_file3\n\tSimply combine 3 files");
 		System.out.println("  Example : inspector -c output_file input_file1 input_file2 -4\n\tCombine all parts of 1st file and all parts excluding 4th part of 2nd file");
-
-		
 	}
 
 }
