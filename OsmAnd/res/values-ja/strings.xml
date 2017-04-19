@@ -2996,7 +2996,7 @@ OsmAndとOSMをサポートする方法として現状最適な方法である�
     <string name="nothing_found_descr">検索単語を変更したり、検索の距離を広げてみてください</string>
     <string name="increase_search_radius">検索範囲を広げる</string>
     <string name="restart_search">再検索</string>
-    <string name="srtm_color_scheme">カラーパターン</string>
+    <string name="srtm_color_scheme">配色</string>
     <string name="osmand_plus_extended_description_part8">"
  地図のおおよそのエリアとその品質(※注 *の数が多いほど充実しています):
  • 西ヨーロッパ: ****
