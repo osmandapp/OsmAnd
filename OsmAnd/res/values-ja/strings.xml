@@ -1898,13 +1898,13 @@ OsmAndの従来のマップスタイルに戻すには、このプラグイン�
 
 この表示を有効化すると、冬の景色をイメージした\'ウィンターアンドスキー\'のスタイルに変更されます。この表示はプラグインを無効化するか、必要に応じて\'マップ設定\'から\'マップスタイル \'を変更することで元に戻すことができます。
  "</string>
-	<string name="rename_failed">リネームが失敗しました。</string>
+	<string name="rename_failed">リネーム出来ませんでした</string>
 	<string name="days_behind">日前</string>
 	<string name="back_to_map">マップ画面に戻る</string>
 	<string name="share_note">メモを共有</string>
     <string name="location_on_map">位置:\n緯度 %1$s\n経度 %2$s</string>
 	<string name="watch">表示</string>
-	<string name="notes">メモ</string>
+	<string name="notes">メモ全部</string>
 	<string name="online_map">オンラインマップ</string>
 	<string name="roads_only">道路のみ</string>
     <string name="rendering_attr_pisteRoutes_name">スキー場</string>
