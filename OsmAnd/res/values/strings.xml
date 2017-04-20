@@ -957,8 +957,8 @@
     <string name="save_track_to_gpx_globally_descr">General position logging to a GPX file can be turned on or off using the GPX logging widget on the map screen</string>
     <string name="save_current_track_descr">Save current track to SD now</string>
     <string name="save_current_track">Save current GPX track</string>
-    <string name="save_track_to_gpx">Log track to GPX file during navigation</string>
-    <string name="save_track_to_gpx_descrp">Tracks will be saved to the tracks folder during navigation</string>
+    <string name="save_track_to_gpx">Auto-recording track during navigation</string>
+    <string name="save_track_to_gpx_descrp">Tracks will be automatically saved to the tracks folder during navigation in GPX format</string>
     <string name="save_track_interval_globally">Logging interval</string>
     <string name="save_track_interval">Logging interval during navigation</string>
     <string name="save_track_interval_descr">Choose logging interval for track recording during navigation</string>

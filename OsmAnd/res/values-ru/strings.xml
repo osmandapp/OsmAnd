@@ -836,8 +836,8 @@
     <string name="save_current_track">Сохранить текущий трек GPX</string>
     <string name="save_track_interval_descr">Выберите интервал для записи трека во время навигации</string>
     <string name="save_track_interval">Интервал записи во время навигации</string>
-    <string name="save_track_to_gpx_descrp">Треки будут сохранены в папку для треков во время навигации</string>
-    <string name="save_track_to_gpx">Запись трека в файл GPX во время навигации</string>
+    <string name="save_track_to_gpx_descrp">Во время навигации треки будут автоматически сохранены в папку с треками в формате GPX</string>
+    <string name="save_track_to_gpx">Автозапись трека во время навигации</string>
     <string name="update_tile">Обновить карту</string>
     <string name="reload_tile">Обновить часть карты</string>
     <string name="open_street_map_login_descr">Укажите имя пользователя (требуется для работы с OSM)</string>
