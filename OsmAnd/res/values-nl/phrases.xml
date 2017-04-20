@@ -976,8 +976,8 @@
 	<string name="poi_denomination_coptic_orthodox">Koptisch-orthodox</string>
 	<string name="poi_denomination_wesleyan">Wesleyan</string>
 	<string name="poi_denomination_shaktism">Shaktisme</string>
-	<string name="poi_internet_access_yes">Internettoegang: ja</string>
-	<string name="poi_internet_access_no">Internettoegang: nee</string>
+	<string name="poi_internet_access_yes">Internet: ja</string>
+	<string name="poi_internet_access_no">Internet: nee</string>
 
 	<string name="poi_piste">Piste</string>
 	<string name="poi_piste_nordic">Langlaufpiste</string>
@@ -1499,7 +1499,7 @@
 	<string name="poi_vending_ice_cream">IJs</string>
 	<string name="poi_cuisine_ice_cream">IJs</string>
 	<string name="poi_fuel_avia_type">Type</string>
-	<string name="poi_internet_access_type">Soort Internettoegang</string>
+	<string name="poi_internet_access_type">Internet</string>
 	<string name="poi_vending_type">Verkoop</string>
 	<string name="poi_bicycle_service">Fietsreparatie</string>
 	<string name="poi_clothes_type">Soort</string>
@@ -1510,4 +1510,6 @@
 	<string name="poi_payment_toll_type">Betalingswijze</string>
 	<string name="poi_traffic_signals_sound">Geluidssignaal</string>
 	<string name="poi_highway_crossing_type">Soort</string>
+	<string name="poi_tactile_paving">Blindengeleidestrook</string>
+	<string name="poi_service_car">Service</string>
 	</resources>
