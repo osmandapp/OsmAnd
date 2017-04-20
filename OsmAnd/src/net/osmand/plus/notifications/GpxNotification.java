@@ -26,7 +26,8 @@ public class GpxNotification extends OsmandNotification {
 	public final static String OSMAND_STOP_GPX_SERVICE_ACTION = "OSMAND_STOP_GPX_SERVICE_ACTION";
 	public final static String GROUP_NAME = "GPX";
 
-	private boolean wasDismissed;
+	private boolean wasNoDataDismissed;
+	private boolean lastBuiltNoData;
 
 	public GpxNotification(OsmandApplication app) {
 		super(app, GROUP_NAME);
@@ -98,7 +99,9 @@ public class GpxNotification extends OsmandNotification {
 
 	@Override
 	public void onNotificationDismissed() {
-		wasDismissed = true;
+		if (!wasNoDataDismissed) {
+			wasNoDataDismissed = lastBuiltNoData;
+		}
 	}
 
 	@Override
@@ -113,6 +116,7 @@ public class GpxNotification extends OsmandNotification {
 		boolean isGpxRecording = app.getSavingTrackHelper().getIsRecording();
 		float recordedDistance = app.getSavingTrackHelper().getDistance();
 		ongoing = true;
+        lastBuiltNoData = false;
 		if (isGpxRecording) {
 			color = app.getResources().getColor(R.color.osmand_orange);
 			notificationTitle = app.getString(R.string.shared_string_trip) + " • "
@@ -129,10 +133,11 @@ public class GpxNotification extends OsmandNotification {
 				ongoing = false;
 				notificationTitle = app.getString(R.string.shared_string_trip_recording);
 				notificationText = app.getString(R.string.gpx_logging_no_data);
+				lastBuiltNoData = true;
 			}
 		}
 
-		if ((wasDismissed || !app.getSettings().SHOW_TRIP_REC_NOTIFICATION.get()) && !ongoing) {
+		if ((wasNoDataDismissed || !app.getSettings().SHOW_TRIP_REC_NOTIFICATION.get()) && !ongoing) {
 			return null;
 		}
 

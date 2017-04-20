@@ -317,8 +317,8 @@ public class OsmandMonitoringPlugin extends OsmandPlugin {
 					SavingTrackHelper helper = app.getSavingTrackHelper();
 					helper.saveDataToGpx(app.getAppCustomization().getTracksDir());
 					helper.close();
-				} finally {
-					app.getNotificationHelper().showNotifications();
+				} catch (Exception e) {
+					e.printStackTrace();
 				}
 				return null;
 			}
@@ -326,6 +326,7 @@ public class OsmandMonitoringPlugin extends OsmandPlugin {
 			@Override
 			protected void onPostExecute(Void aVoid) {
 				isSaving = false;
+				app.getNotificationHelper().refreshNotifications();
 				updateControl();
 			}
 		}, (Void) null);
