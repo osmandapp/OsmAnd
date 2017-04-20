@@ -1140,8 +1140,8 @@ Liste over understøttede lande (dybest set hele verden!): Afghanistan, Albanien
     <string name="save_current_track">Gem aktuelle GPX-spor</string>
     <string name="save_track_interval">Logningsinterval under navigation</string>
     <string name="save_track_interval_descr">Vælg logningsinterval for optagelse af spor under navigation</string>
-    <string name="save_track_to_gpx_descrp">"Spor bliver automatisk  gemt i GPX-format i \'/track\' mappen under navigation"</string>
-    <string name="save_track_to_gpx">Auto-optagelse af spor under navigation</string>
+    <string name="save_track_to_gpx_descrp">Spor bliver automatisk gemt i GPX-format i \'/track\' mappen under navigation</string>
+    <string name="save_track_to_gpx">Automatisk optagelse af spor under navigation</string>
     <string name="update_tile">Opdater kort</string>
     <string name="reload_tile">Genindlæs kortfliser</string>
     <string name="mark_point">Mål</string>
