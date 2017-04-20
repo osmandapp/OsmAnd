@@ -2719,4 +2719,24 @@ Moduli:
     <string name="selected_categories">Abranyja katehoryi</string>
     <string name="lang_ber">bierbierskaja</string>
     <string name="lang_kab">kabilskaja</string>
+    <string name="shared_string_action_name">Nazva dziejańnia</string>
+<string name="quick_action_btn_tutorial_title">Zmianić stanovišča knopki</string>
+    <string name="quick_action_map_source_switch">Krynica mapy byla źmieniena na \"%s\".</string>
+    <string name="quick_action_map_source">Źmianić krynicu mapy</string>
+    <string name="quick_action_map_source_title">Krynicy mapaŭ</string>
+    <string name="quick_action_map_source_action">Dadać krynicu mapy</string>
+    <string name="quick_action_poi_list">Spis POI</string>
+    <string name="quick_action_new_action">Dadać dziejańnie</string>
+    <string name="configure_screen_quick_action">Chutkaje dziejańnie</string>
+    <string name="quick_action_item_action">Dziejańnie %d</string>
+    <string name="quick_action_item_screen">Ekran %d</string>
+    <string name="quick_action_add_marker">Dadać markier na mapu</string>
+    <string name="quick_action_add_poi">Dadać POI</string>
+    <string name="quick_action_map_style">Zmianić styl mapy</string>
+    <string name="quick_action_map_style_switch">Styl mapy byŭ zmienieny na \"%s\".</string>
+    <string name="quick_action_take_audio_note">Stvaryć aŭdyjo-natatku</string>
+    <string name="quick_action_take_video_note">Stvaryć videa-natatku</string>
+    <string name="quick_action_take_photo_note">Stvaryć fota-natatku</string>
+    <string name="quick_action_add_osm_bug">Dadać OSM-chibu</string>
+    <string name="quick_action_navigation_voice">Holas ukl/adkl</string>
     </resources>
