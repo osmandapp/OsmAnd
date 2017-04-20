@@ -68,10 +68,8 @@ public abstract class OsmandNotification {
 				.setPriority(top ? NotificationCompat.PRIORITY_HIGH : getPriority())
 				.setOngoing(ongoing && !wearable)
 				.setContentIntent(contentPendingIntent)
-				.setDeleteIntent(NotificationDismissReceiver.createIntent(app, getType()));
-		if (top) {
-			builder.setGroup(groupName).setGroupSummary(!wearable);
-		}
+				.setDeleteIntent(NotificationDismissReceiver.createIntent(app, getType()))
+				.setGroup(groupName).setGroupSummary(!wearable);
 
 		if (color != 0) {
 			builder.setColor(color);
@@ -101,6 +99,14 @@ public abstract class OsmandNotification {
 	public void onNotificationDismissed() {
 	}
 
+	private void notifyWearable(NotificationManagerCompat notificationManager) {
+		Builder wearNotificationBuilder = buildNotification(true);
+		if (wearNotificationBuilder != null) {
+			Notification wearNotification = wearNotificationBuilder.build();
+			notificationManager.notify(getOsmandWearableNotificationId(), wearNotification);
+		}
+	}
+
 	public boolean showNotification() {
 		NotificationManagerCompat notificationManager = NotificationManagerCompat.from(app);
 		if (isEnabled()) {
@@ -109,13 +115,7 @@ public abstract class OsmandNotification {
 				Notification notification = notificationBuilder.build();
 				setupNotification(notification);
 				notificationManager.notify(top ? TOP_NOTIFICATION_SERVICE_ID : getOsmandNotificationId(), notification);
-				if (top) {
-					Builder wearNotificationBuilder = buildNotification(true);
-					if (wearNotificationBuilder != null) {
-						Notification wearNotification = wearNotificationBuilder.build();
-						notificationManager.notify(getOsmandWearableNotificationId(), wearNotification);
-					}
-				}
+				notifyWearable(notificationManager);
 				return true;
 			}
 		}
@@ -130,24 +130,18 @@ public abstract class OsmandNotification {
 				Notification notification = notificationBuilder.build();
 				setupNotification(notification);
 				if (top) {
-					removeNotification();
+					notificationManager.cancel(getOsmandNotificationId());
 					notificationManager.notify(TOP_NOTIFICATION_SERVICE_ID, notification);
-
-					Builder wearNotificationBuilder = buildNotification(true);
-					if (wearNotificationBuilder != null) {
-						Notification wearNotification = wearNotificationBuilder.build();
-						notificationManager.notify(getOsmandWearableNotificationId(), wearNotification);
-					}
-
 				} else {
 					notificationManager.notify(getOsmandNotificationId(), notification);
 				}
+				notifyWearable(notificationManager);
 				return true;
 			} else {
-				removeNotification();
+				notificationManager.cancel(getOsmandNotificationId());
 			}
 		} else {
-			removeNotification();
+			notificationManager.cancel(getOsmandNotificationId());
 		}
 		return false;
 	}
