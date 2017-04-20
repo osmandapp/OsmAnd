@@ -127,7 +127,7 @@ Actuellement {2} Mo sont disponibles.</string>
     <string name="shared_string_save">Enregistrer</string>
 
     <string name="local_index_upload_gpx_description">Envoyer les fichiers GPX à la communauté OSM. Ils seront utilisés pour améliorer les cartes.</string>
-    <string name="local_index_items_uploaded">%1$d sur %2$d élément(s) envoyés avec succès.</string>
+    <string name="local_index_items_uploaded">%1$d sur %2$d élément(s) envoyé(s) avec succès.</string>
     <string name="local_index_mi_upload_gpx">Envoyer à OSM</string>
     <string name="show_more_map_detail">Afficher plus de détails</string>
     <string name="show_more_map_detail_descr">Afficher des détails des cartes vectorielles (routes, etc.) aux niveaux de zooms inférieurs</string>
