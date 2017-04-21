@@ -513,8 +513,8 @@ El servicio de navegación se ha cambiado temporalmente al servicio con conexió
     <string name="save_current_track">Guardar traza actual</string>
     <string name="save_track_interval">Intervalo de registro durante la navegación</string>
     <string name="save_track_interval_descr">Elige el intervalo de registro de trazas durante la navegación</string>
-    <string name="save_track_to_gpx_descrp">Las trazas se almacenarán en la carpeta de trazas durante la navegación</string>
-    <string name="save_track_to_gpx">Guardar traza en archivo GPX durante la navegación</string>
+    <string name="save_track_to_gpx_descrp">Una traza GPX se guardará automáticamente en la carpeta de trazas durante la navegación</string>
+    <string name="save_track_to_gpx">Guardar la traza automáticamente durante la navegación</string>
     <string name="update_tile">Actualizar mapa</string>
     <string name="reload_tile">Recargar tesela</string>
     <string name="mark_point">Objetivo</string>
