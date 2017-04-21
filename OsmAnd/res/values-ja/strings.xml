@@ -432,7 +432,7 @@ POIの更新は利用できません</string>
      <string name="empty_route_calculated">空のルートが計算されました</string>
      <string name="new_route_calculated_dist">新しいルートが計算されました、距離</string>
      <string name="arrived_at_destination">目的地に到着しました</string>
-     <string name="invalid_locations">位置が不適切です！</string>
+     <string name="invalid_locations">座標の値が不適切です！</string>
      <string name="go_back_to_osmand">OsmAnd マップに戻る</string>
      <string name="shared_string_close">閉じる</string>
      <string name="loading_data">データをロード中…</string>
@@ -2520,7 +2520,7 @@ OsmAndとOSMをサポートする方法として現状最適な方法である�
     <string name="legacy_search">レガシー検索</string>
     <string name="show_legacy_search">レガシー検索を表示</string>
     <string name="show_legacy_search_desc">ドロワーリスト型のレガシー(旧型)検索も使用できるようにします</string>
-    <string name="routing_attr_allow_motorway_name">高速道路を使用する</string>
+    <string name="routing_attr_allow_motorway_name">高速道路を許可</string>
     <string name="routing_attr_allow_motorway_description">高速道路を使用可能とみなします</string>
     <string name="release_2_6">"
  • クイックアクションボタンの実装
