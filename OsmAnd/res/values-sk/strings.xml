@@ -625,8 +625,8 @@ Dlaždicové mapy môžete získať priamo zo zdrojov na Internete, alebo ich m�
     <string name="save_current_track">Uložiť aktuálnu stopu</string>
     <string name="save_track_interval_descr">Zvoť interval zaznamenávania stopy počas navigácie</string>
     <string name="save_track_interval">Interval zaznamenávania pri navigácii</string>
-    <string name="save_track_to_gpx_descrp">Stopy budú počas navigácie ukladané do priečinku stôp</string>
-    <string name="save_track_to_gpx">Logovať stopu do GPX súboru počas navigácie</string>
+    <string name="save_track_to_gpx_descrp">GPX stopa bude počas navigácie automaticky ukladaná do priečinku stôp</string>
+    <string name="save_track_to_gpx">Automaticky zaznamenávať stopu počas navigácie</string>
     <string name="update_tile">Aktualizovať mapu</string>
     <string name="reload_tile">Znovu načítať dlaždicu</string>
     <string name="open_street_map_login_descr">Meno potrebné pre prispievanie do openstreetmap.org</string>
