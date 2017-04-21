@@ -1957,21 +1957,21 @@
 	<string name="poi_water_tank">非常用貯水槽</string>
 
 	<string name="poi_clothes_type">衣服種</string>
-	<string name="poi_clothes_women">女性用</string>
+	<string name="poi_clothes_women">婦人服</string>
 	<string name="poi_clothes_underwear">下着</string>
-	<string name="poi_clothes_men">男性用</string>
+	<string name="poi_clothes_men">紳士服</string>
 	<string name="poi_clothes_wedding">ウェディングドレス</string>
 	<string name="poi_clothes_sports">スポーツ用</string>
-	<string name="poi_clothes_babies">乳幼児用</string>
-	<string name="poi_clothes_denim">デニム生地</string>
+	<string name="poi_clothes_babies">ベビー服・子供服</string>
+	<string name="poi_clothes_denim">デニム製品</string>
 	<string name="poi_clothes_workwear">作業着</string>
 	<string name="poi_clothes_hats">帽子</string>
-	<string name="poi_clothes_fur">毛皮生地</string>
-	<string name="poi_clothes_leather">革生地</string>
+	<string name="poi_clothes_fur">毛皮製品</string>
+	<string name="poi_clothes_leather">革製品・レザーウェア</string>
 	<string name="poi_clothes_costumes">仮装・舞台衣装</string>
 	<string name="poi_clothes_traditional">伝統衣装</string>
 	<string name="poi_clothes_suits">スーツ</string>
-	<string name="poi_clothes_maternity">マタニティ</string>
+	<string name="poi_clothes_maternity">マタニティウェア・授乳服</string>
 	<string name="poi_clothes_vintage">ビンテージ</string>
 	<string name="poi_clothes_oversize">特大・キングサイズ</string>
 	<string name="poi_clothes_schoolwear">学生服</string>
@@ -1981,4 +1981,54 @@
 	<string name="poi_clothes_dance">ダンス衣装</string>
 	<string name="poi_clothes_military">ミリタリー</string>
 
+	<string name="poi_diplomatic_consulate">領事館</string>
+	<string name="poi_diplomatic_consulate_general">総領事館</string>
+	<string name="poi_diplomatic_honorary_consulate">名誉領事館</string>
+	<string name="poi_diplomatic_permanent_mission">国際機関(Permanent mission)</string>
+	<string name="poi_diplomatic_delegation">代表団・外交使節</string>
+	<string name="poi_diplomatic_ambassadors_residence">大使公邸</string>
+	<string name="poi_diplomatic_high_commission">高等弁務官</string>
+
+	<string name="poi_cargo_passengers">旅客</string>
+	<string name="poi_cargo_vehicle">車両</string>
+	<string name="poi_cargo_bicycle">自転車</string>
+	<string name="poi_cargo_container">コンテナ</string>
+	<string name="poi_cargo_hgv">重量積載物車両(HGV)</string>
+
+	<string name="poi_fire_hydrant_position">消火栓位置</string>
+	<string name="poi_fire_hydrant_position_sidewalk">消火栓の位置:歩道</string>
+	<string name="poi_fire_hydrant_position_green">消火栓の位置:草陰(green)</string>
+	<string name="poi_fire_hydrant_position_lane">消火栓の位置:レーン</string>
+	<string name="poi_fire_hydrant_position_parking_lot">消火栓の位置:駐車場</string>
+	<string name="poi_fire_hydrant_position_street">消火栓の位置:道路</string>
+	<string name="poi_fire_hydrant_position_underground">消火栓の位置:地下</string>
+	<string name="poi_fire_hydrant_type">消火栓タイプ</string>
+	<string name="poi_fire_hydrant_type_underground">地下</string>
+	<string name="poi_fire_hydrant_type_pillar">柱形</string>
+	<string name="poi_fire_hydrant_type_dry_barrel">消火栓</string>
+	<string name="poi_fire_hydrant_type_pond">貯水池</string>
+	<string name="poi_fire_hydrant_type_wall">壁面</string>
+
+	<string name="poi_fire_hydrant_style_water_source_pond">貯水池</string>
+	<string name="poi_fire_hydrant_style_water_source_stream">川・流水</string>
+	<string name="poi_fire_hydrant_style_water_source_cistern">水槽</string>
+	<string name="poi_fire_hydrant_style_water_source_main">配管(Main)</string>
+	<string name="poi_highway_crossing_type">交差点タイプ</string>
+	<string name="poi_crossing_bell_yes">踏切警告音:有り</string>
+	<string name="poi_crossing_bell_no">踏切警告音:無し</string>
+	<string name="poi_crossing_light_yes">踏切警告灯:有り</string>
+	<string name="poi_crossing_light_no">踏切警告灯:無し</string>
+	<string name="poi_crossing_barrier_no">踏切遮断機:無し</string>
+	<string name="poi_crossing_barrier_yes">踏切遮断機:有り</string>
+	<string name="poi_crossing_barrier_full">踏切遮断機:全幅</string>
+	<string name="poi_crossing_barrier_half">踏切遮断機:半幅</string>
+	<string name="poi_crossing_barrier_double_half">踏切遮断機:半幅2つ</string>
+	<string name="poi_crossing_activation_automatic">踏切操作:自動</string>
+	<string name="poi_crossing_activation_local">踏切操作:現地</string>
+	<string name="poi_crossing_activation_remote">踏切操作:遠隔</string>
+	<string name="poi_crossing_on_demand_no">踏切オンデマンド操作:否定</string>
+	<string name="poi_crossing_on_demand_yes">踏切オンデマンド操作:肯定</string>
+	<string name="poi_crossing_saltire_yes">踏切警標(標識):有り</string>
+	<string name="poi_crossing_saltire_no">踏切警標(標識):無し</string>
+	<string name="poi_crossing_supervision_yes">踏切警手:有り</string>
 	</resources>
