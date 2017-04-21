@@ -630,8 +630,8 @@ Er is nu {2} MB beschikbaar</string>
   <string name="save_current_track">Huidige GPX-track opslaan</string>
   <string name="save_track_interval">Registratie-interval bij navigatie</string>
   <string name="save_track_interval_descr">Kies logging-interval voor GPX-track-opname tijdens navigatie</string>
-  <string name="save_track_to_gpx_descrp">Tijdens het navigeren worden tracks gemaakt en opgeslagen</string>
-  <string name="save_track_to_gpx">Track registreren tijdens navigatie</string>
+  <string name="save_track_to_gpx_descrp">Tijdens het navigeren wordt automatisch een GPX-track gemaakt en opgeslagen</string>
+  <string name="save_track_to_gpx">GPX-Track automatisch opnemen tijdens navigatie</string>
   <string name="update_tile">Kaart bijwerken</string>
   <string name="reload_tile">Herlaad kaartsegment</string>
   <string name="mark_point">Doel</string>
@@ -2722,9 +2722,9 @@ Als je hulp nodig hebt met OsmAnd: neem contact op met ons support team: support
     <string name="route_roundabout_short">Neem %1$de afslag</string>
     <string name="upload_poi">POI Uploaden</string>
     <string name="wiki_around">Wikipedia artikelen in de buurt</string>
-    <string name="legacy_search">Adres Zoeken</string>
-    <string name="show_legacy_search">Adres Zoeken weergeven</string>
-    <string name="show_legacy_search_desc">"Adres Zoeken in het zijmenu weergeven,  hiërarchisch zoeken met Plaats,  Straat,  Huisnummer"</string>
+    <string name="legacy_search">Zoeken (oude manier 2.4)</string>
+    <string name="show_legacy_search">Zoeken (oude manier 2.4) weergeven</string>
+    <string name="show_legacy_search_desc">Zoeken (oude manier 2.4) in het zijmenu weergeven: zoeken volgens versie 2.4</string>
     <string name="routing_attr_allow_motorway_name">Autosnelwegen toestaan</string>
     <string name="routing_attr_allow_motorway_description">Autosnelwegen gebruiken bij navigatie</string>
     <string name="lang_sr_latn">Servisch (Latijns schrift)</string>
