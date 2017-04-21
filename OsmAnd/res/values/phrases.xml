@@ -3353,4 +3353,7 @@
 	<string name="poi_electronics_repair_phone">Electronics repair: phone</string>
 	<string name="poi_electronics_repair_tv">Electronics repair: tv</string>
 
+	<string name="poi_music_school">Music school</string>
+	<string name="poi_language_school">Language school</string>
+
 </resources>
