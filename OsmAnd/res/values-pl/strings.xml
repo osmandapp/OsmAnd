@@ -492,8 +492,8 @@
     <string name="save_track_interval_descr">Wybiera tempo rejestrowania śladów podczas nawigacji</string>
     <string name="save_track_interval">Częstość rejestrowania podczas nawigacji</string>
 
-    <string name="save_track_to_gpx_descrp">Zapisuje ślady do katalogu śladów podczas nawigacji</string>
-    <string name="save_track_to_gpx">Zapisywanie śladu do pliku GPX podczas nawigacji</string>
+    <string name="save_track_to_gpx_descrp">Ślad GPX zostanie automatycznie zapisany do katalogu śladów podczas nawigacji</string>
+    <string name="save_track_to_gpx">Automatycznie rejestruj ślad podczas nawigacji</string>
     <string name="update_tile">Uaktualnij mapę</string>
     <string name="reload_tile">Wczytaj ponownie kafelki</string>
     <string name="open_street_map_login_descr">Wprowadza dane uwierzytelniające wymagane do wysyłania zmian na openstreetmap.org</string>
