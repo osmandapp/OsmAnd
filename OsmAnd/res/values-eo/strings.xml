@@ -690,8 +690,8 @@ Registritaj spuroj povas esti kunhavigataj kun viaj amikoj aŭ esti uzita por ko
     <string name="save_track_to_gpx_globally_descr">Ĝeneralan registradon de pozicio al GPX-dosiero oni povas mal-/aktivigi per GPX-registrada fenestraĵo sur la mapekrano</string>
     <string name="save_current_track_descr">Konservi aktualan kurson al memorkarto</string>
     <string name="save_current_track">Konservi aktualan GPX-kurson</string>
-    <string name="save_track_to_gpx">Registri spuron al GPX-dosieron dum navigado</string>
-    <string name="save_track_to_gpx_descrp">Konservi spuron al dosierujo de spuroj dum navigado</string>
+    <string name="save_track_to_gpx">Aŭtomate registri spuron dum navigado</string>
+    <string name="save_track_to_gpx_descrp">GPX-spuro estas aŭtomate konservata al dosierujo de spuroj dum navigado</string>
     <string name="save_track_interval_globally">Registrada intervalo</string>
     <string name="save_track_interval">Registrada intervalo dum navigado</string>
     <string name="save_track_interval_descr">Elekti intervalon de registrado por spuroj dum navigado</string>
