@@ -31,7 +31,7 @@
 		<string name="poi_public_transport">公共交通機関</string>
 		<string name="poi_air_transport">空路</string>
 		<string name="poi_water_transport">水上交通(Water transport)</string>
-		<string name="poi_bicycle_transport">自転車交通(Bicycle transport)</string>
+		<string name="poi_bicycle_transport">自転車輸送(Bicycle transport)</string>
 		<string name="poi_aerialway_transport">索道・ロープウェイ(Aerialway transport)</string>
 	<string name="poi_man_made">人工物(Man made)</string>
 		<string name="poi_transport_construction">建設中の交通機関(Transport construction)</string>
@@ -94,7 +94,7 @@
 	<string name="poi_carpet">敷物店(Carpet store)</string>
 	<string name="poi_chemist">ドラッグストア・薬局(Drug store)</string>
 	<string name="poi_clothes">衣料品店(Apparel store)</string>
-	<string name="poi_clothes_children">子供用衣料品店(Childrens apparel)</string>
+	<string name="poi_clothes_children">子供用衣料品店(Children\'s apparel)</string>
 	<string name="poi_shoes">靴屋(Shoe store)</string>
 	<string name="poi_computer">パソコンショップ(Computer store)</string>
 	<string name="poi_copyshop">印刷、現像店(Copy shop)</string>
@@ -155,7 +155,7 @@
 
 	<string name="poi_police">警察(Police)</string>
 	<string name="poi_fire_station">消防署(Fire Station)</string>
-	<string name="poi_emergency_phone">非常電話(Emergency phone)</string>
+	<string name="poi_emergency_phone">非常用電話(Emergency phone)</string>
 	<string name="poi_fire_hydrant">消火栓(Fire hydrant)</string>
 	<string name="poi_fire_extinguisher">消火器(Fire extinguisher)</string>
 	<string name="poi_fire_flapper">火消し棒・消火用具(Fire flapper)</string>
@@ -1940,4 +1940,45 @@
 
 	<string name="poi_beauty_salon_service">美容サービス</string>
 	<string name="poi_city_capital">首都検索</string>
+	<string name="poi_xmas">クリスマス限定</string>
+	<string name="poi_xmas_event">クリスマスイベント</string>
+	<string name="poi_xmas_market">クリスマス市場</string>
+	<string name="poi_xmas_pyramid">クリスマスピラミッド</string>
+	<string name="poi_xmas_shop">クリスマスショップ</string>
+	<string name="poi_xmas_tree">クリスマスツリー</string>
+	<string name="poi_emergency_infrastructure">非常用施設・設備(Emergency infrastructure)</string>
+	<string name="poi_emergency_yes">非常用:肯定(Emergency: yes)</string>
+	<string name="poi_emergency_no">非常用:否定(Emergency: no)</string>
+	<string name="poi_defibrillator">自動体外式除細動器(AED)</string>
+	<string name="poi_defibrillator_yes">自動体外式除細動器:有り</string>
+
+	<string name="poi_suction_point">消火用給水地点</string>
+
+	<string name="poi_water_tank">非常用貯水槽</string>
+
+	<string name="poi_clothes_type">衣服種</string>
+	<string name="poi_clothes_women">女性用</string>
+	<string name="poi_clothes_underwear">下着</string>
+	<string name="poi_clothes_men">男性用</string>
+	<string name="poi_clothes_wedding">ウェディングドレス</string>
+	<string name="poi_clothes_sports">スポーツ用</string>
+	<string name="poi_clothes_babies">乳幼児用</string>
+	<string name="poi_clothes_denim">デニム生地</string>
+	<string name="poi_clothes_workwear">作業着</string>
+	<string name="poi_clothes_hats">帽子</string>
+	<string name="poi_clothes_fur">毛皮生地</string>
+	<string name="poi_clothes_leather">革生地</string>
+	<string name="poi_clothes_costumes">仮装・舞台衣装</string>
+	<string name="poi_clothes_traditional">伝統衣装</string>
+	<string name="poi_clothes_suits">スーツ</string>
+	<string name="poi_clothes_maternity">マタニティ</string>
+	<string name="poi_clothes_vintage">ビンテージ</string>
+	<string name="poi_clothes_oversize">特大・キングサイズ</string>
+	<string name="poi_clothes_schoolwear">学生服</string>
+	<string name="poi_clothes_swimwear">水着</string>
+	<string name="poi_clothes_socks">靴下</string>
+	<string name="poi_clothes_shirts">スカート</string>
+	<string name="poi_clothes_dance">ダンス衣装</string>
+	<string name="poi_clothes_military">ミリタリー</string>
+
 	</resources>
