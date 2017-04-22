@@ -750,7 +750,7 @@
 	<string name="poi_daymark">白晝標誌</string>
 	<string name="poi_distance_mark">距離標誌</string>
 	<string name="poi_dry_dock">乾船塢</string>
-	<string name="poi_dyke">堤</string>
+	<string name="poi_dyke">堤防</string>
 	<string name="poi_floating_dock">浮船塢</string>
 	<string name="poi_fog_signal">濃霧信號</string>
 	<string name="poi_harbour_basin">海港内灣</string>
@@ -2721,4 +2721,99 @@
 	<string name="poi_health_specialty_acupuncture_yes">針灸</string>
 	<string name="poi_health_specialty_homeopathy_yes">順勢療法</string>
 	<string name="poi_health_specialty_traditional_chinese_medicine_yes">中醫學</string>
+	<string name="poi_health_specialty_reiki_yes">靈氣療法</string>
+	<string name="poi_health_specialty_herbalism_yes">藥草醫學</string>
+	<string name="poi_health_specialty_chiropractic_yes">脊骨神經醫學</string>
+	<string name="poi_health_specialty_naturopathy_yes">自然療法</string>
+	<string name="poi_health_specialty_depth_psychology_yes">深度心理學</string>
+	<string name="poi_health_specialty_behavior_yes">行為療法</string>
+	<string name="poi_fitness_centre">健身中心</string>
+	<string name="poi_fitness">健身</string>
+
+	<string name="poi_billiards">台球運動</string>
+
+	<string name="poi_water_heater_yes">熱水器︰ 有</string>
+	<string name="poi_water_heater_no">熱水器︰ 無</string>
+
+	<string name="poi_parking_garage_boxes">車庫</string>
+	<string name="poi_parking_carports">有蓋停車場</string>
+
+	<string name="poi_dojo">道場</string>
+
+	<string name="poi_gaelic_games">蓋爾式運動</string>
+	<string name="poi_running">跑步</string>
+	<string name="poi_netball">籃網球運動</string>
+	<string name="poi_karting">卡丁車</string>
+	<string name="poi_badminton">羽毛球</string>
+	<string name="poi_judo">柔道</string>
+	<string name="poi_disc_golf">飛盤高爾夫</string>
+	<string name="poi_futsal">室内五人制足球</string>
+	<string name="poi_rc_car">遙控賽車</string>
+	<string name="poi_squash">壁球</string>
+	<string name="poi_shuffleboard">沙狐球</string>
+	<string name="poi_lacrosse">袋棍球</string>
+	<string name="poi_boxing">拳擊</string>
+
+	<string name="poi_official_name">正式名稱</string>
+
+	<string name="poi_construction_yes">工事中</string>
+	<string name="poi_additional_atm_yes">ATM︰ 有</string>
+	<string name="poi_atm_no">ATM︰ 無</string>
+
+	<string name="poi_firepit">火塘</string>
+	<string name="poi_street_cabinet">街道電箱</string>
+
+	<string name="poi_fair_trade_yes">公平貿易︰ 是</string>
+	<string name="poi_fair_trade_no">公平貿易︰ 否</string>
+	<string name="poi_fair_trade_only">只有公平貿易產品</string>
+
+
+	<string name="poi_bandy">班迪球</string>
+
+	<string name="poi_protected_area">保護區</string>
+	<string name="poi_protection_object_historic">保護對象︰ 歷史</string>
+	<string name="poi_protection_object_nature">保護對象︰ 自然</string>
+	<string name="poi_protection_object_habitat">保護對象︰動物棲息地</string>
+	<string name="poi_protection_object_water">保護對象︰水文</string>
+
+	<string name="poi_protection_title">保護對象名稱</string>
+	<string name="poi_nuclear_explosion_date_utc">爆炸日期 (UTC)</string>
+	<string name="poi_microwave_oven_yes">微波爐︰ 有</string>
+	<string name="poi_microwave_oven_no">微波爐︰ 無</string>
+	<string name="poi_medical_system_unani_yes">尤那尼醫學</string>
+
+	<string name="poi_medical_system_western_yes">西醫</string>
+	<string name="poi_medical_system_chinese_yes">中醫學</string>
+	<string name="poi_medical_system_ayurveeda_yes">阿育吠陀醫學</string>
+	<string name="poi_medical_system_kampo_yes">日本漢方醫學</string>
+	<string name="poi_medical_system_mongolian_yes">蒙醫學</string>
+	<string name="poi_medical_system_tibetan_yes">藏醫學</string>
+	<string name="poi_medical_system_sidda_yes">悉達醫學</string>
+	<string name="poi_tanning_salon">日光浴室</string>
+
+	<string name="poi_sanitary_dump_station">汚水排放點</string>
+
+	<string name="poi_plant_nursery">苗圃</string>
+
+	<string name="poi_compressed_air_yes">有</string>
+	<string name="poi_compressed_air_no">壓縮空氣︰ 無</string>
+
+	<string name="poi_car_wash_yes">有</string>
+
+	<string name="poi_vacuum_cleaner_yes">有</string>
+	<string name="poi_vacuum_cleaner_no">吸塵器: 無</string>
+	<string name="poi_amenity_vacuum_cleaner">吸塵器</string>
+
+	<string name="poi_sport_free_flying">自由飛行 (運動)</string>
+
+	<string name="poi_water_tap">水龍頭</string>
+	<string name="poi_button_operated_yes">按鈕操作: 是</string>
+	<string name="poi_button_operated_no">按鈕操作: 否</string>
+
+	<string name="poi_free_flying_site_takeoff">離陸</string>
+	<string name="poi_free_flying_site_landing">着陸</string>
+	<string name="poi_fire_hydrant_type_pond">陂塘</string>
+	<string name="poi_fire_hydrant_type_wall">牆面栓箱</string>
+
+	<string name="poi_health_amenity_type_first_aid_kit">急救藥箱</string>
 	</resources>
