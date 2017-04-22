@@ -714,6 +714,13 @@
 			</intent-filter>
 		</service>
 
+		<service android:name="net.osmand.aidl.OsmandAidlService" android:exported="true" >
+			<intent-filter>
+				<action android:name="net.osmand.aidl.OsmandAidlService"/>
+				<category android:name="android.intent.category.DEFAULT"/>
+			</intent-filter>
+		</service>
+
 		<receiver android:name="net.osmand.plus.OnNavigationServiceAlarmReceiver" />
 		<receiver android:name="net.osmand.plus.notifications.NotificationDismissReceiver" />
 

@@ -292,6 +292,8 @@ public class MapActivity extends OsmandActionBarActivity implements DownloadEven
 		screenOffReceiver = new ScreenOffReceiver();
 		registerReceiver(screenOffReceiver, filter);
 
+		app.getAidlApi().onCreateMapActivity(this);
+
 		mIsDestroyed = false;
 	}
 
@@ -964,6 +966,7 @@ public class MapActivity extends OsmandActionBarActivity implements DownloadEven
 	protected void onDestroy() {
 		super.onDestroy();
 		unregisterReceiver(screenOffReceiver);
+		app.getAidlApi().onDestroyMapActivity(this);
 		FailSafeFuntions.quitRouteRestoreDialog();
 		OsmandPlugin.onMapActivityDestroy(this);
 		getMyApplication().unsubscribeInitListener(initListener);
