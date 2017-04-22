@@ -17,7 +17,7 @@
     <string name="route_stops_before">%1$s ad yahbes uqbel</string>
     <string name="coords_search">Asemmezdi n unadi</string>
     <string name="advanced_coords_search">Asemmezdi asurif n unadi</string>
-    <string name="back_to_search">tuɣalin ɣer unadi</string>
+    <string name="back_to_search">Tuɣalin γer unadi</string>
     <string name="shared_string_location">adɣar</string>
     <string name="read_more">ɣer uggar</string>
     <string name="whats_new">dacu i d amaynut deg</string>
@@ -214,7 +214,7 @@
     <string name="dist_away_from_my_location">Gmi %1$s ɣef</string>
     <string name="search_categories">Taggayin</string>
     <string name="city_type_neighbourhood">Azniq</string>
-    <string name="map_widget_search">Gmi</string>
+    <string name="map_widget_search">Anadi</string>
 	<string name="shared_string_is_open_24_7">Taneldit 24/7</string>
     <string name="follow_us">Ḍfer aɣ</string>
     <string name="access_category_choice">Fren taggayt</string>
@@ -228,4 +228,11 @@
     <string name="no_inet_connection">Ulac tuqqna n Internet</string>
     <string name="no_update_info">Ur d skanay isdɣiten</string>
     <string name="shared_string_change">Senfel</string>
+    <string name="restart_search">Ɛiwed a nadi</string>
+    <string name="shared_string_search">Anadi</string>
+    <string name="search_for">Nadi γef</string>
+    <string name="address_search_desc">Anadi γef tansa</string>
+    <string name="poi_filter_by_name">Anadi s yisem</string>
+    <string name="search_offline_clear_search">Anadi Ajdid</string>
+    <string name="searching_address">Anadi n tansa …</string>
     </resources>
