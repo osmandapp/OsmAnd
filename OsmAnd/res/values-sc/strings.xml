@@ -1571,8 +1571,8 @@ Memòria in proportzione %4$s MB (lìmite de Android %5$s MB, Dalvik %6$s MB).</
     <string name="save_current_track">Sarba sa rasta currente</string>
     <string name="save_track_interval">Intervallu de sarbamentu durante su nàvigu</string>
     <string name="save_track_interval_descr">Issèbera s’intervallu de positzionamentu pro sa registratzione de sas rastas durante su nàvigu</string>
-    <string name="save_track_to_gpx_descrp">Sas rastas ant a èssere sarbadas in sa cartella apòsita durante su nàvigu</string>
-    <string name="save_track_to_gpx">Sarba rasta in GPX durante su nàvigu</string>
+    <string name="save_track_to_gpx_descrp">Una rasta GPX at a èssere sarbada in sa cartella apòsita durante su nàvigu</string>
+    <string name="save_track_to_gpx">Sarba automaticamente sa rasta in GPX durante su nàvigu</string>
     <string name="update_tile">Agiorna mapa</string>
     <string name="reload_tile">Torra a carrigare tasseddos</string>
     <string name="mark_point">Obietivu</string>
