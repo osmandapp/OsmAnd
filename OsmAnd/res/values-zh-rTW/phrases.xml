@@ -2816,4 +2816,6 @@
 	<string name="poi_fire_hydrant_type_wall">牆面栓箱</string>
 
 	<string name="poi_health_amenity_type_first_aid_kit">急救藥箱</string>
+	<string name="poi_health_amenity_type_scales">公秤</string>
+
 	</resources>
