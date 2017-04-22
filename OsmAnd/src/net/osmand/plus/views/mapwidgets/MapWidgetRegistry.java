@@ -159,6 +159,23 @@ public class MapWidgetRegistry {
 		return ii;
 	}
 
+	public MapWidgetRegInfo registerSideWidgetInternal(TextInfoWidget widget,
+													   @DrawableRes int drawableMenu,
+													   String message,
+													   String key, boolean left, int priorityOrder) {
+		MapWidgetRegInfo ii = new MapWidgetRegInfo(key, widget, drawableMenu,
+				message, priorityOrder, left);
+		processVisibleModes(key, ii);
+		if (widget != null) {
+			widget.setContentTitle(message);
+		}
+		if (left) {
+			this.leftWidgetSet.add(ii);
+		} else {
+			this.rightWidgetSet.add(ii);
+		}
+		return ii;
+	}
 
 	public MapWidgetRegInfo registerSideWidgetInternal(TextInfoWidget widget,
 													   @DrawableRes int drawableMenu,
@@ -221,7 +238,7 @@ public class MapWidgetRegistry {
 		return elements != null && elements.contains(key);
 	}
 
-	private void setVisibility(MapWidgetRegInfo m, boolean visible, boolean collapsed) {
+	public void setVisibility(MapWidgetRegInfo m, boolean visible, boolean collapsed) {
 		ApplicationMode mode = settings.APPLICATION_MODE.get();
 		defineDefaultSettingsElement(mode);
 		// clear everything
@@ -375,6 +392,9 @@ public class MapWidgetRegistry {
 	}
 
 	public String getText(Context ctx, final ApplicationMode mode, final MapWidgetRegInfo r) {
+		if (r.getMessage() != null) {
+			return (r.visibleCollapsed(mode) ? " + " : "  ") + r.getMessage();
+		}
 		return (r.visibleCollapsed(mode) ? " + " : "  ") + ctx.getString(r.getMessageId());
 	}
 
@@ -447,7 +467,7 @@ public class MapWidgetRegistry {
 
 			final boolean selected = r.visibleCollapsed(mode) || r.visible(mode);
 			final String desc = mapActivity.getString(R.string.shared_string_collapse);
-			contextMenuAdapter.addItem(new ContextMenuItem.ItemBuilder().setTitleId(r.getMessageId(), mapActivity)
+			ContextMenuItem.ItemBuilder itemBuilder = new ContextMenuItem.ItemBuilder()
 					.setIcon(r.getDrawableMenu())
 					.setSelected(selected)
 					.setColor(selected ? R.color.osmand_orange : ContextMenuItem.INVALID_ID)
@@ -519,7 +539,11 @@ public class MapWidgetRegistry {
 																}
 																ContextMenuItem item = adapter.getItem(pos);
 																item.setIcon(r.getDrawableMenu());
-																item.setTitle(mapActivity.getResources().getString(r.getMessageId()));
+																if (r.getMessage() != null) {
+																	item.setTitle(r.getMessage());
+																} else {
+																	item.setTitle(mapActivity.getResources().getString(r.getMessageId()));
+																}
 																adapter.notifyDataSetChanged();
 																return true;
 															}
@@ -555,7 +579,13 @@ public class MapWidgetRegistry {
 							item.setDescription(visible && collapsed ? desc : null);
 							adapter.notifyDataSetChanged();
 						}
-					}).createItem());
+					});
+			if (r.getMessage() != null) {
+				itemBuilder.setTitle(r.getMessage());
+			} else {
+				itemBuilder.setTitleId(r.getMessageId(), mapActivity);
+			}
+			contextMenuAdapter.addItem(itemBuilder.createItem());
 		}
 	}
 
@@ -566,6 +596,7 @@ public class MapWidgetRegistry {
 		private int drawableMenu;
 		@StringRes
 		private int messageId;
+		private String message;
 		private WidgetState widgetState;
 		public final String key;
 		public final boolean left;
@@ -580,6 +611,16 @@ public class MapWidgetRegistry {
 			this.widget = widget;
 			this.drawableMenu = drawableMenu;
 			this.messageId = messageId;
+			this.priorityOrder = priorityOrder;
+			this.left = left;
+		}
+
+		public MapWidgetRegInfo(String key, TextInfoWidget widget, @DrawableRes int drawableMenu,
+								String message, int priorityOrder, boolean left) {
+			this.key = key;
+			this.widget = widget;
+			this.drawableMenu = drawableMenu;
+			this.message = message;
 			this.priorityOrder = priorityOrder;
 			this.left = left;
 		}
@@ -599,6 +640,10 @@ public class MapWidgetRegistry {
 			} else {
 				return drawableMenu;
 			}
+		}
+
+		public String getMessage() {
+			return message;
 		}
 
 		public int getMessageId() {
@@ -667,6 +712,9 @@ public class MapWidgetRegistry {
 
 		@Override
 		public int hashCode() {
+			if (getMessage() != null) {
+				return getMessage().hashCode();
+			}
 			return getMessageId();
 		}
 
@@ -680,16 +728,27 @@ public class MapWidgetRegistry {
 				return false;
 			}
 			MapWidgetRegInfo other = (MapWidgetRegInfo) obj;
+			if (getMessageId() == 0 && other.getMessageId() == 0) {
+				return key.equals(other.key);
+			}
 			return getMessageId() == other.getMessageId();
 		}
 
 		@Override
 		public int compareTo(@NonNull MapWidgetRegInfo another) {
-			if (getMessageId() == another.getMessageId()) {
+			if (getMessageId() == 0 && another.getMessageId() == 0) {
+				if (key.equals(another.key)) {
+					return 0;
+				}
+			} else if (getMessageId() == another.getMessageId()) {
 				return 0;
 			}
 			if (priorityOrder == another.priorityOrder) {
-				return getMessageId() - another.getMessageId();
+				if (getMessageId() == 0 && another.getMessageId() == 0) {
+					return key.compareTo(key);
+				} else {
+					return getMessageId() - another.getMessageId();
+				}
 			}
 			return priorityOrder - another.priorityOrder;
 		}

@@ -27,6 +27,8 @@ import android.widget.Toast;
 import net.osmand.CallbackWithObject;
 import net.osmand.PlatformUtil;
 import net.osmand.access.AccessibilityPlugin;
+import net.osmand.aidl.OsmandAidlApi;
+import net.osmand.aidl.OsmandAidlService;
 import net.osmand.data.LatLon;
 import net.osmand.map.OsmandRegions;
 import net.osmand.map.WorldRegion;
@@ -85,7 +87,9 @@ public class OsmandApplication extends MultiDexApplication {
 	Handler uiHandler;
 
 	NavigationService navigationService;
-	
+
+	OsmandAidlApi aidlApi;
+
 	// start variables
 	ResourceManager resourceManager;
 	OsmAndLocationProvider locationProvider;
@@ -447,6 +451,10 @@ public class OsmandApplication extends MultiDexApplication {
 
 	public void setNavigationService(NavigationService navigationService) {
 		this.navigationService = navigationService;
+	}
+
+	public OsmandAidlApi getAidlApi() {
+		return aidlApi;
 	}
 
 	public void stopNavigation() {
