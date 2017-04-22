@@ -69,7 +69,7 @@
 	<string name="poi_public_transport_platform_tram">Villamosmegálló</string>
 	<string name="poi_subway_entrance">Metrólejárat</string>
 	<string name="poi_subway_station">Metróállomás</string>
-	<string name="poi_taxi">Taxidroszt</string>
+	<string name="poi_taxi">Taxiállomás</string>
 
 	<string name="poi_aerodrome">Repülőtér</string>
 	<string name="poi_runway">Kifutópálya</string>
@@ -95,7 +95,7 @@
 	<string name="poi_telephone">Telefon</string>
 	<string name="poi_communication_tower">Távközlési torony</string>
 	<string name="poi_recycling">Szelektív hulladékgyűjtő</string>
-	<string name="poi_landfill">Szeméttelep</string>
+	<string name="poi_landfill">Hulladéklerakó</string>
 	<string name="poi_pier">Móló</string>
 	<string name="poi_windmill">Szélmalom</string>
 	<string name="poi_quarry">Kőfejtő</string>
@@ -168,7 +168,7 @@
 	<string name="poi_geyser">Gejzír</string>
 	<string name="poi_cemetery">Temető</string>
 	<string name="poi_grave_yard">Templom körüli temető</string>
-	<string name="poi_shelter">Menedék</string>
+	<string name="poi_shelter">Esőbeálló</string>
 	<string name="poi_funicular">Sikló</string>
 	<string name="poi_library">Könyvtár</string>
 	<string name="poi_cinema">Mozi</string>
@@ -195,7 +195,7 @@
 	<string name="poi_craft_blacksmith">Kovács</string>
 	<string name="poi_craft_brewery">Sörfőzde</string>
 	<string name="poi_craft_bookbinder">Könyvkötő</string>
-	<string name="poi_craft_carpenter">Asztalos</string>
+	<string name="poi_craft_carpenter">Ács</string>
 	<string name="poi_craft_clockmaker">Órás (falióra)</string>
 	<string name="poi_craft_dressmaker">Nőiruha-készítő</string>
 	<string name="poi_craft_electrician">Villanyszerelő</string>
@@ -281,7 +281,7 @@
 	<string name="poi_shoes">Cipőbolt</string>
 	<string name="poi_computer">Számítástechnikai bolt</string>
 	<string name="poi_curtain">Függönybolt</string>
-	<string name="poi_fabric">Méteráru</string>
+	<string name="poi_fabric">Rövidáru, méteráru</string>
 	<string name="poi_bedding">Ágyneműbolt</string>
 	<string name="poi_dive">Búvárfelszerelés</string>
 	<string name="poi_doityourself">Barkácsáruház</string>
@@ -368,10 +368,10 @@
 	<string name="poi_dam">Völgyzáró gát</string>
 	<string name="poi_watermill">Vízimalom</string>
 
-	<string name="poi_power_substation">Alállomás</string>
+	<string name="poi_power_substation">Áramelosztó alállomás</string>
 	<string name="poi_power_transformer">Transzformátor</string>
 	<string name="poi_power_plant">Erőmű</string>
-	<string name="poi_power_generator">Generátor</string>
+	<string name="poi_power_generator">Áramfejlesztő</string>
 
 	<string name="poi_observation_tower">Kilátótorony</string>
 	<string name="poi_bell_tower">Harangtorony</string>
@@ -415,7 +415,7 @@
 	<string name="poi_neighbourhood">Környék</string>
 	<string name="poi_place_allotments">Kiskertes településrész</string>
 	<string name="poi_place_farm">Tanya</string>
-	<string name="poi_residential">Lakóterület</string>
+	<string name="poi_residential">Lakóövezet</string>
 
 	<string name="poi_first_aid">Elsősegély</string>
 	<string name="poi_nursing_home">Ápolóotthon</string>
@@ -547,7 +547,7 @@
 	<string name="poi_barbecue">Grillezőhely</string>
 
 	<string name="poi_craft_basket_maker">Kosárfonó</string>
-	<string name="poi_craft_boatbuilder">Csónakkészítő</string>
+	<string name="poi_craft_boatbuilder">Hajóács</string>
 	<string name="poi_funeral_directors">Temetkezési vállalkozó</string>
 	<string name="poi_beauty">Szépségszalon</string>
 	<string name="poi_beauty_salon_nails">Manikűr</string>
@@ -611,7 +611,7 @@
 	<string name="poi_entrance">Bejárat</string>
 	<string name="poi_entrance_exit">Kijárat</string>
 
-	<string name="poi_highway_crossing">Gyalogátkelő</string>
+	<string name="poi_highway_crossing">Gyalogosátkelő</string>
 
 <string name="poi_node_networks">Turistaút-/kerékpárút-hálózati csomópontok</string>
 		<string name="poi_hiking_routes">Turistautak</string>
@@ -638,7 +638,7 @@
 	<string name="poi_hifi">HiFi-bolt</string>
 	<string name="poi_newsagent">Újságárus</string>
 	<string name="poi_organic">Bioélelmiszer</string>
-	<string name="poi_outdoor">Túrabolt</string>
+	<string name="poi_outdoor">Túrafelszerelés-bolt</string>
 	<string name="poi_second_hand">Használtáru-bolt</string>
 	<string name="poi_scuba_diving_shop">Búvárfelszerelés-bolt</string>
 	<string name="poi_stationery">Papírbolt</string>
@@ -1201,7 +1201,7 @@
 	<string name="poi_mini_roundabout">Mini körforgalom</string>
 	<string name="poi_railway_crossing">Gyalogos vasúti átjáró</string>
 	<string name="poi_railway_level_crossing">Vasúti átjáró</string>
-	<string name="poi_bird_hide">Madármegfigyelő hely</string>
+	<string name="poi_bird_hide">Madárles</string>
 	<string name="poi_horse_riding">Lovaglás</string>
 	<string name="poi_houseware">Háztartási bolt</string>
 	<string name="poi_occupational_therapist">Foglalkozás-terapeuta</string>
@@ -1980,7 +1980,7 @@
 	<string name="poi_water_characteristic">Víz jellemzője</string>
 	<string name="poi_shoes_type">Cipőfajta</string>
 	<string name="poi_parking_type">Típus</string>
-	<string name="poi_parking_carports">Fedett parkolóhely</string>
+	<string name="poi_parking_carports">Fedett, oldalról nyitott parkolóhelyek</string>
 
 	<string name="poi_parking_garage_boxes">Garázsok</string>
 	<string name="poi_bicycle_parking_type">Típus</string>
@@ -2876,7 +2876,7 @@
 	<string name="poi_xmas_location">Karácsonyi helyszín</string>
 	<string name="poi_xmas_url">Karácsonyi weboldal</string>
 
-	<string name="poi_public_bookcase">Nyilvános könyvespolc</string>
+	<string name="poi_public_bookcase">Közösségi könyvespolc</string>
 	<string name="poi_public_bookcase_type_phone_box">Típus: telefonfülke</string>
 	<string name="poi_public_bookcase_type_shelf">Típus: polc</string>
 
