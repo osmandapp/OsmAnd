@@ -2818,4 +2818,11 @@
 	<string name="poi_health_amenity_type_first_aid_kit">急救藥箱</string>
 	<string name="poi_health_amenity_type_scales">公秤</string>
 
+	<string name="poi_cliff">懸崖</string>
+
+	<string name="poi_cuisine_fondue">融漿火鍋 (Fondue)</string>
+	<string name="poi_cuisine_baguette">法式長棍麵包 (Baguette)</string>
+	<string name="poi_cuisine_diner">輕食・簡餐</string>
+	<string name="poi_cuisine_sausage">香腸</string>
+	<string name="poi_cuisine_cake">蛋糕</string>
 	</resources>
