@@ -311,7 +311,7 @@
 	<string name="use_english_names">استخدام الاسماء الانجليزية في الخرائط</string>
 	<string name="app_settings">إعدادات التطبيق</string>
 	<string name="save_current_track">حفظ مسار GPX الحالي</string>
-	<string name="shared_string_settings">إعدادات</string>
+	<string name="shared_string_settings">الإعدادات</string>
 	
     
     
@@ -1248,7 +1248,7 @@ OsmAnd هو المصدر المفتوح و التي يجري تطويرها بن
 خط الطول %2$s</string>
     <string name="tips_and_tricks_descr">الأسئلة الشائعة، التغييرات الحديثة، وأخرى</string>
     <string name="routing_settings_2">إعدادات الملاحة</string>
-    <string name="general_settings_2">إعدادات عامة</string>
+    <string name="general_settings_2">الإعدادات العامة</string>
 	<string name="shared_string_ellipsis">…</string>
 	<string name="shared_string_ok">موافق</string>
 	<string name="shared_string_dismiss">تجاهل</string>
@@ -1684,7 +1684,7 @@ OsmAnd هو المصدر المفتوح و التي يجري تطويرها بن
 	<string name="off_router_service_no_gps_available">خدمة الملاحة في الخلفية تتطلب تفعيل مزود مواقع.</string>
 	<string name="first_time_download">تحميل المناطق</string>
 	<string name="transport_finish_search">إنهاء البحث</string>
-	<string name="search_nothing_found">لا شيء موجود</string>
+	<string name="search_nothing_found">لم يتم العثور على أي شيء</string>
 	<string name="searching">جاري البحث…</string>
 	<string name="search_online_address">بحث على الإنترنت</string>
 	<string name="search_offline_address">بحث بدون اتصال</string>
@@ -1808,7 +1808,7 @@ OsmAnd هو المصدر المفتوح و التي يجري تطويرها بن
     <string name="lang_nn">النرويجية (الحديثة )</string>
     <string name="lang_es_ar">الإسبانية (الأرجنتين)</string>
     <string name="si_nm">ميلا بحري</string>
-    <string name="dark_theme">مظلم</string>
+    <string name="dark_theme">داكن</string>
     <string name="routing_attr_height_name">تحديد الإرتفاع</string>
     <string name="default_speed_system_descr">تحديد وحدة السرعة</string>
     <string name="default_speed_system">وحدة السرعة</string>
@@ -2116,7 +2116,7 @@ OsmAnd هو المصدر المفتوح و التي يجري تطويرها بن
     <string name="rendering_value_green_name">أخضر</string>
     <string name="rendering_value_translucent_green_name">أخضر شفاف</string>
     <string name="rendering_value_purple_name">أرجواني</string>
-    <string name="light_theme">مضيئ</string>
+    <string name="light_theme">فاتح</string>
     <string name="lang_sh">الكرواتية-الصربية</string>
     <string name="lang_az">الأزيرية</string>
     <string name="lang_ta">التاميلية</string>
@@ -2772,4 +2772,79 @@ OsmAnd هو المصدر المفتوح و التي يجري تطويرها بن
     <string name="altitude_range">مدى الإرتفاع</string>
     <string name="average_altitude">متوسط الإرتفاع</string>
     <string name="routing_attr_height_obstacles_name">إستعمل بيانات الإرتفاع</string>
+    <string name="do_not_show_startup_messages">لا تعرض الرسائل عند بدء التشغيل</string>
+    <string name="routing_attr_allow_private_name">السماح بالدخول الخاص</string>
+    <string name="routing_attr_allow_private_description">السماح بالوصول إلى المساحات الخاصة</string>
+    <string name="type_address">اكتب عنواناً</string>
+    <string name="select_city">إختر مدينةً</string>
+    <string name="select_postcode">إختر رمزاً بريدياً</string>
+    <string name="nearest_cities">أقرب المدن</string>
+    <string name="type_city_town">اكتب إسم بلدة أو مدينة</string>
+    <string name="type_postcode">اكتب رمزاً بريدياً</string>
+    <string name="nothing_found">لم يتم العثور على أي شيء :(</string>
+    <string name="increase_search_radius">قم بتوسيع دائرة البحث</string>
+    <string name="search_favorites">ابحث في المفضلة</string>
+    <string name="shared_string_plugin">ملحق</string>
+    <string name="srtm_color_scheme">نظام الألوان</string>
+    <string name="favorite_group_name">إسم المجموعة</string>
+    <string name="change_color">تغيير اللون</string>
+    <string name="edit_name">تعديل الإسم</string>
+    <string name="select_street">إختر طريقاً</string>
+    <string name="shared_string_in_name">في %1$s</string>
+    <string name="quick_action_add_destination">إضافة وجهة</string>
+    <string name="quick_action_replace_destination">تبديل الوجهة</string>
+    <string name="subscribe_email_error">خطأ</string>
+    <string name="nautical_maps">الخرائط البحرية</string>
+    <string name="fonts_header">خطوط للخريطة</string>
+    <string name="right_side_navigation">القيادة اليمنى</string>
+    <string name="driving_region_automatic">آلي</string>
+    <string name="parking_options">خيارات مواقف السيارات</string>
+    <string name="full_version_thanks">شكرا لكم لاقتناء النسخة الكاملة من أوسماند !</string>
+    <string name="routing_attr_driving_style_speed_name">السرعة</string>
+    <string name="routing_attr_driving_style_safety_name">الأمان</string>
+    <string name="gpx_track">المسار</string>
+    <string name="select_gpx_folder">إختر مجلد المسار</string>
+    <string name="shared_string_tracks">المسارات</string>
+    <string name="shared_string_time">الزمن</string>
+    <string name="osmand_plus_extended_description_part8">"
+ التغطية التقريبية للخريطة و جودتها :
+  • أوروبا الغربية : ****
+  • أوروبا الشرقية : ***
+  • روسيا : ***
+  • أمريكا الشمالية : ***
+  • امريكا الجنوبية : **
+  • آسيا : **
+  • اليابان وكوريا : ***
+  • الشرق الأوسط : **
+  • إفريقيا : **
+  • أنتاركتيكا : *
+  معظم البلدان في جميع أنحاء العالم متاحة للتنزيل !
+  من أفغانستان إلى زيمبابوي، من أستراليا إلى الولايات المتحدة الأمريكية. الأرجنتين، البرازيل، كندا، فرنسا، ألمانيا، المكسيك، المملكة المتحدة، إسبانيا، ...
+ "</string>
+    <string name="restart_search">إعادة البحث</string>
+    <string name="osmand_extended_description_part7">"
+ المساهمة في خريطة الطريق المفتوحة
+  • الإبلاغ عن الأخطاء في البيانات
+  • تحميل مسارات جي بي إكس إلى خريطة الطريق المفتوحة مباشرة بواسطة التطبيق
+  • إضافة النقاط المهمة وتحميلها مباشرة إلى خريطة الطريق المفتوحة (أو في وقت لاحق إن كنت غير متصل)
+ "</string>
+    <string name="nothing_found_descr">حاول تغيير طلب البحث أو بتوسيع دائرة البحث</string>
+    <string name="quick_action_showhide_osmbugs_title">إظهار أو إخفاء ملاحظات الخريطة</string>
+    <string name="quick_action_osmbugs_show">أظهر ملاحظات الخريطة</string>
+    <string name="quick_action_osmbugs_hide">اخفي ملاحظات الخريطة</string>
+    <string name="sorted_by_distance">ترتيب حسب المسافة</string>
+    <string name="shared_string_overview">نظرة عامة</string>
+    <string name="quick_action_auto_zoom">التكبير الآلي للخريطة تفعيل/تعطيل</string>
+    <string name="quick_action_auto_zoom_on">التكبير الآلي للخريطة مفعل</string>
+    <string name="quick_action_auto_zoom_off">التكبير الآلي للخريطة معطل</string>
+    <string name="quick_action_add_first_intermediate">أضف وجهة وسيطة</string>
+    <string name="analyze_on_map">إفحص على الخريطة</string>
+    <string name="shared_string_visible">ظاهر</string>
+    <string name="restore_purchases">استعادة المشتريات</string>
+    <string name="do_not_send_anonymous_app_usage">لا ترسل إحصاءات مجهولة عن استخدام التطبيق</string>
+    <string name="routing_attr_relief_smoothness_factor_hills_name">هضابي</string>
+    <string name="shared_string_time_moving">زمن التنقل</string>
+    <string name="shared_string_time_span">الفترة الزمنية</string>
+    <string name="route_altitude">ارتفاع الطريق</string>
+    <string name="routing_attr_relief_smoothness_factor_name">تحديد تذبذب الإرتفاع</string>
     </resources>
