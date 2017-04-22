@@ -82,6 +82,7 @@ public class MapInfoLayer extends OsmandMapLayer {
 		expand = (ImageButton) map.findViewById(R.id.map_collapse_button);
 		// update and create controls
 		registerAllControls();
+		map.getMyApplication().getAidlApi().registerWidgetControls(map);
 		
 		recreateControls();
 	}
@@ -90,6 +91,13 @@ public class MapInfoLayer extends OsmandMapLayer {
 			int messageId, String key, boolean left, int priorityOrder) {
 		MapWidgetRegInfo reg = mapInfoControls.registerSideWidgetInternal(widget, drawableMenu, messageId, key, left, priorityOrder);
 		updateReg(calculateTextState(), reg);
+	}
+
+	public MapWidgetRegInfo registerSideWidget(TextInfoWidget widget, int drawableMenu,
+								   String message, String key, boolean left, int priorityOrder) {
+		MapWidgetRegInfo reg = mapInfoControls.registerSideWidgetInternal(widget, drawableMenu, message, key, left, priorityOrder);
+		updateReg(calculateTextState(), reg);
+		return reg;
 	}
 
 	public void registerSideWidget(TextInfoWidget widget, WidgetState widgetState, String key, boolean left, int priorityOrder) {

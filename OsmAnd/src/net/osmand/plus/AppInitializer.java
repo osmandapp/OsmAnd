@@ -13,6 +13,7 @@ import android.support.v7.app.AlertDialog;
 import net.osmand.IProgress;
 import net.osmand.IndexConstants;
 import net.osmand.PlatformUtil;
+import net.osmand.aidl.OsmandAidlApi;
 import net.osmand.binary.BinaryMapIndexReader;
 import net.osmand.map.OsmandRegions;
 import net.osmand.map.OsmandRegions.RegionTranslation;
@@ -363,6 +364,7 @@ public class AppInitializer implements IProgress {
 		app.gpxDatabase = startupInit(new GPXDatabase(app), GPXDatabase.class);
 		app.favorites = startupInit(new FavouritesDbHelper(app), FavouritesDbHelper.class);
 		app.waypointHelper = startupInit(new WaypointHelper(app), WaypointHelper.class);
+		app.aidlApi = startupInit(new OsmandAidlApi(app), OsmandAidlApi.class);
 
 		app.regions = startupInit(new OsmandRegions(), OsmandRegions.class);
 		updateRegionVars();
