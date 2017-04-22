@@ -526,8 +526,8 @@
 	<string name="poi_craft_sweep">Камінар</string>
 	<string name="poi_craft_tailor">Атэлье</string>
 	<string name="poi_craft_tiler">Пліткавыя працы</string>
-	<string name="poi_craft_tinsmith">Бляхар, лудзільшчык</string>
-	<string name="poi_craft_upholsterer">Драпавальшчык, абіўка мэблі</string>
+	<string name="poi_craft_tinsmith">Бляхар, лудзільнік</string>
+	<string name="poi_craft_upholsterer">Драпавальнік, абіўка мэблі</string>
 	<string name="poi_craft_watchmaker">Гадзіннікавы майстар</string>
 	<string name="poi_craft_window_construction">Выраб вокнаў</string>
 
@@ -1733,7 +1733,7 @@
 	<string name="poi_drive_through_yes">Так</string>
 	<string name="poi_drive_through_no">Кліенты, што сядзяць у аўтамабілі, не абслугоўваюцца</string>
 
-	<string name="poi_brewery_additional">Бровар пастаўшчык</string>
+	<string name="poi_brewery_additional">Назва бровару</string>
 	<string name="poi_microbrewery_yes">Уласны бровар</string>
 	<string name="poi_microbrewery_no">Няма ўласнага бровара</string>
 
@@ -2776,8 +2776,8 @@
 
 	<string name="poi_counselling_type_addiction_yes">Кансультацыя алка/нарказалежных: так</string>
 	<string name="poi_counselling_type_addiction_no">Кансультацыя алка/нарказалежных: не</string>
-	<string name="poi_counselling_type_antenatal_yes">Кансультацыя для будучых маці: так</string>
-	<string name="poi_counselling_type_antenatal_no">Кансультацыя для будучых маці: не</string>
+	<string name="poi_counselling_type_antenatal_yes">Кансультацыя для цяжарных: так</string>
+	<string name="poi_counselling_type_antenatal_no">Кансультацыя для цяжарных: не</string>
 	<string name="poi_counselling_type_child_guidance_yes">Кансультацыя па дзіцячым выхаваньні: так</string>
 	<string name="poi_counselling_type_child_guidance_no">Кансультацыя па дзіцячым выхаваньні: не</string>
 	<string name="poi_counselling_type_couple_yes">Кансультацыя для пар: так</string>
@@ -3394,7 +3394,7 @@
 	<string name="poi_drink_wine_retail">Віно: продаж</string>
 	<string name="poi_drink_wine_served">Віно: дэгустацыя</string>
 
-<string name="poi_energy_supplier">Офіс пастаўшчыка энергіі</string>
+<string name="poi_energy_supplier">Офіс пастаўніка энергіі</string>
 
 <string name="poi_electronics_repair_computer">Рамонт электронікі: кампутары</string>
 	<string name="poi_electronics_repair_appliance">Рамонт электронікі: бытавая тэхніка</string>
