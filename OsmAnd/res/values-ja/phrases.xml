@@ -1223,7 +1223,7 @@
 	<string name="poi_smoking_isolated">喫煙室のみ可(In a isolated room)</string>
 	<string name="poi_smoking_dedicated">喫煙者専用(Dedicated to smokers)</string>
 
-	<string name="poi_theatre_genre">上演ジャンル(Genre)</string>
+	<string name="poi_theatre_genre">上演種目(Genre)</string>
 	<string name="poi_theatre_genre_philharmonic">交響楽団(Philharmonic)</string>
 	<string name="poi_theatre_genre_musical">ミュージカル(Musical)</string>
 	<string name="poi_theatre_genre_drama">演劇(Drama)</string>
@@ -1271,7 +1271,7 @@
 	<string name="poi_fireplace_yes">有り(Yes)</string>
 	<string name="poi_fireplace_no">暖炉無し(No fireplace)</string>
 
-	<string name="poi_information_contents">情報コンテンツ(Contents)</string>
+	<string name="poi_information_contents">展示内容・コンテンツ(Contents)</string>
 	<string name="poi_board_type_astronomy">天文学(Astronomy)</string>
 
 	<string name="poi_board_type_notice">掲示板(Bulletin board)</string>
@@ -2092,4 +2092,20 @@
 	<string name="poi_vending_ice_cream">アイスクリーム</string>
 	<string name="poi_vending_sim_cards">SIMカード</string>
 
+	<string name="poi_traffic_signals_sound_yes">有り</string>
+	<string name="poi_traffic_signals_sound_no">無し</string>
+	<string name="poi_traffic_signals_sound_walk">歩行許可時のみ</string>
+
+	<string name="poi_resort_type">リゾート種別(Type)</string>
+	<string name="poi_telescope_type">望遠鏡の種類</string>
+	<string name="poi_telescope_type_optical">光学望遠鏡</string>
+	<string name="poi_telescope_type_radio">電波望遠鏡</string>
+	<string name="poi_telescope_type_gamma">ガンマ線望遠鏡</string>
+	<string name="poi_telescope_diameter">直径(メートル)</string>
+	<string name="poi_telescope_spectrum">周波数帯</string>
+	<string name="poi_telescope_usage_research">研究用途</string>
+
+	<string name="poi_telescope_usage_espionage">諜報用途</string>
+	<string name="poi_telescope_usage_education">教育用途</string>
+	<string name="poi_telescope">望遠鏡</string>
 	</resources>
