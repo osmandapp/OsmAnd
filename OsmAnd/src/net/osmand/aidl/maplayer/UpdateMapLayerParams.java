@@ -2,6 +2,7 @@ package net.osmand.aidl.maplayer;
 
 import android.os.Parcel;
 import android.os.Parcelable;
+import android.os.Parcelable.Creator;
 
 public class UpdateMapLayerParams implements Parcelable {
 	private AMapLayer layer;
@@ -14,8 +15,8 @@ public class UpdateMapLayerParams implements Parcelable {
 		readFromParcel(in);
 	}
 
-	public static final Parcelable.Creator<UpdateMapLayerParams> CREATOR = new
-			Parcelable.Creator<UpdateMapLayerParams>() {
+	public static final Creator<UpdateMapLayerParams> CREATOR = new
+			Creator<UpdateMapLayerParams>() {
 				public UpdateMapLayerParams createFromParcel(Parcel in) {
 					return new UpdateMapLayerParams(in);
 				}

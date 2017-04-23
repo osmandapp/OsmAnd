@@ -2,6 +2,7 @@ package net.osmand.aidl.maplayer;
 
 import android.os.Parcel;
 import android.os.Parcelable;
+import android.os.Parcelable.Creator;
 
 public class RemoveMapLayerParams implements Parcelable {
 	private String id;
@@ -14,8 +15,8 @@ public class RemoveMapLayerParams implements Parcelable {
 		readFromParcel(in);
 	}
 
-	public static final Parcelable.Creator<RemoveMapLayerParams> CREATOR = new
-			Parcelable.Creator<RemoveMapLayerParams>() {
+	public static final Creator<RemoveMapLayerParams> CREATOR = new
+			Creator<RemoveMapLayerParams>() {
 				public RemoveMapLayerParams createFromParcel(Parcel in) {
 					return new RemoveMapLayerParams(in);
 				}

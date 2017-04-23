@@ -6,6 +6,8 @@ import android.content.Intent;
 import android.content.IntentFilter;
 import android.view.View;
 
+import net.osmand.aidl.maplayer.AMapLayer;
+import net.osmand.aidl.maplayer.point.AMapPoint;
 import net.osmand.aidl.mapmarker.AMapMarker;
 import net.osmand.aidl.mapwidget.AMapWidget;
 import net.osmand.data.LatLon;
@@ -14,7 +16,9 @@ import net.osmand.plus.MapMarkersHelper;
 import net.osmand.plus.MapMarkersHelper.MapMarker;
 import net.osmand.plus.OsmandApplication;
 import net.osmand.plus.activities.MapActivity;
+import net.osmand.plus.views.AidlMapLayer;
 import net.osmand.plus.views.MapInfoLayer;
+import net.osmand.plus.views.OsmandMapLayer;
 import net.osmand.plus.views.OsmandMapLayer.DrawSettings;
 import net.osmand.plus.views.mapwidgets.MapWidgetRegistry.MapWidgetRegInfo;
 import net.osmand.plus.views.mapwidgets.TextInfoWidget;
@@ -27,17 +31,25 @@ import java.util.concurrent.ConcurrentHashMap;
 public class OsmandAidlApi {
 
 	private static final String AIDL_REFRESH_MAP = "aidl_refresh_map";
+	private static final String AIDL_OBJECT_ID = "aidl_object_id";
+
 	private static final String AIDL_ADD_MAP_WIDGET = "aidl_add_map_widget";
 	private static final String AIDL_REMOVE_MAP_WIDGET = "aidl_remove_map_widget";
-	private static final String AIDL_MAP_WIDGET_ID = "aidl_map_widget_id";
+
+	private static final String AIDL_ADD_MAP_LAYER = "aidl_add_map_layer";
+	private static final String AIDL_REMOVE_MAP_LAYER = "aidl_remove_map_layer";
 
 	private OsmandApplication app;
 	private Map<String, AMapWidget> widgets = new ConcurrentHashMap<>();
 	private Map<String, TextInfoWidget> widgetControls = new ConcurrentHashMap<>();
+	private Map<String, AMapLayer> layers = new ConcurrentHashMap<>();
+	private Map<String, OsmandMapLayer> mapLayers = new ConcurrentHashMap<>();
 
 	private BroadcastReceiver refreshMapReceiver;
 	private BroadcastReceiver addMapWidgetReceiver;
 	private BroadcastReceiver removeMapWidgetReceiver;
+	private BroadcastReceiver addMapLayerReceiver;
+	private BroadcastReceiver removeMapLayerReceiver;
 
 	public OsmandAidlApi(OsmandApplication app) {
 		this.app = app;
@@ -47,12 +59,15 @@ public class OsmandAidlApi {
 		registerRefreshMapReceiver(mapActivity);
 		registerAddMapWidgetReceiver(mapActivity);
 		registerRemoveMapWidgetReceiver(mapActivity);
+		registerAddMapLayerReceiver(mapActivity);
+		registerRemoveMapLayerReceiver(mapActivity);
 	}
 
 	public void onDestroyMapActivity(final MapActivity mapActivity) {
 		if (refreshMapReceiver != null) {
 			mapActivity.unregisterReceiver(refreshMapReceiver);
 		}
+
 		if (addMapWidgetReceiver != null) {
 			mapActivity.unregisterReceiver(addMapWidgetReceiver);
 		}
@@ -60,6 +75,13 @@ public class OsmandAidlApi {
 			mapActivity.unregisterReceiver(removeMapWidgetReceiver);
 		}
 		widgetControls.clear();
+
+		if (addMapLayerReceiver != null) {
+			mapActivity.unregisterReceiver(addMapLayerReceiver);
+		}
+		if (removeMapLayerReceiver != null) {
+			mapActivity.unregisterReceiver(removeMapLayerReceiver);
+		}
 	}
 
 	private void registerRefreshMapReceiver(final MapActivity mapActivity) {
@@ -84,7 +106,7 @@ public class OsmandAidlApi {
 		addMapWidgetReceiver = new BroadcastReceiver() {
 			@Override
 			public void onReceive(Context context, Intent intent) {
-				String widgetId = intent.getStringExtra(AIDL_MAP_WIDGET_ID);
+				String widgetId = intent.getStringExtra(AIDL_OBJECT_ID);
 				if (widgetId != null) {
 					AMapWidget widget = widgets.get(widgetId);
 					if (widget != null) {
@@ -112,7 +134,7 @@ public class OsmandAidlApi {
 		removeMapWidgetReceiver = new BroadcastReceiver() {
 			@Override
 			public void onReceive(Context context, Intent intent) {
-				String widgetId = intent.getStringExtra(AIDL_MAP_WIDGET_ID);
+				String widgetId = intent.getStringExtra(AIDL_OBJECT_ID);
 				if (widgetId != null) {
 					MapInfoLayer layer = mapActivity.getMapLayers().getMapInfoLayer();
 					TextInfoWidget widgetControl = widgetControls.get(widgetId);
@@ -144,13 +166,64 @@ public class OsmandAidlApi {
 		}
 	}
 
+	private void registerAddMapLayerReceiver(final MapActivity mapActivity) {
+		addMapLayerReceiver = new BroadcastReceiver() {
+			@Override
+			public void onReceive(Context context, Intent intent) {
+				String layerId = intent.getStringExtra(AIDL_OBJECT_ID);
+				if (layerId != null) {
+					AMapLayer layer = layers.get(layerId);
+					if (layer != null) {
+						OsmandMapLayer mapLayer = mapLayers.get(layerId);
+						if (mapLayer != null) {
+							mapActivity.getMapView().removeLayer(mapLayer);
+						}
+						mapLayer = new AidlMapLayer(mapActivity, layer);
+						mapActivity.getMapView().addLayer(mapLayer, layer.getZOrder());
+						mapLayers.put(layerId, mapLayer);
+					}
+				}
+			}
+		};
+		mapActivity.registerReceiver(addMapLayerReceiver, new IntentFilter(AIDL_ADD_MAP_LAYER));
+	}
+
+	private void registerRemoveMapLayerReceiver(final MapActivity mapActivity) {
+		removeMapLayerReceiver = new BroadcastReceiver() {
+			@Override
+			public void onReceive(Context context, Intent intent) {
+				String layerId = intent.getStringExtra(AIDL_OBJECT_ID);
+				if (layerId != null) {
+					OsmandMapLayer mapLayer = mapLayers.remove(layerId);
+					if (mapLayer != null) {
+						mapActivity.getMapView().removeLayer(mapLayer);
+						mapActivity.refreshMap();
+					}
+				}
+			}
+		};
+		mapActivity.registerReceiver(removeMapLayerReceiver, new IntentFilter(AIDL_REMOVE_MAP_LAYER));
+	}
+
+	public void registerMapLayers(MapActivity mapActivity) {
+		for (AMapLayer layer : layers.values()) {
+			OsmandMapLayer mapLayer = mapLayers.get(layer.getId());
+			if (mapLayer != null) {
+				mapActivity.getMapView().removeLayer(mapLayer);
+			}
+			mapLayer = new AidlMapLayer(mapActivity, layer);
+			mapActivity.getMapView().addLayer(mapLayer, layer.getZOrder());
+			mapLayers.put(layer.getId(), mapLayer);
+		}
+	}
+
 	private void refreshMap() {
 		Intent intent = new Intent();
 		intent.setAction(AIDL_REFRESH_MAP);
 		app.sendBroadcast(intent);
 	}
 
-	public TextInfoWidget createWidgetControl(final MapActivity mapActivity, final String widgetId) {
+	private TextInfoWidget createWidgetControl(final MapActivity mapActivity, final String widgetId) {
 		final TextInfoWidget control = new TextInfoWidget(mapActivity) {
 
 			@Override
@@ -248,7 +321,7 @@ public class OsmandAidlApi {
 				widgets.put(widget.getId(), widget);
 				Intent intent = new Intent();
 				intent.setAction(AIDL_ADD_MAP_WIDGET);
-				intent.putExtra(AIDL_MAP_WIDGET_ID, widget.getId());
+				intent.putExtra(AIDL_OBJECT_ID, widget.getId());
 				app.sendBroadcast(intent);
 			}
 			refreshMap();
@@ -263,7 +336,7 @@ public class OsmandAidlApi {
 			widgets.remove(widgetId);
 			Intent intent = new Intent();
 			intent.setAction(AIDL_REMOVE_MAP_WIDGET);
-			intent.putExtra(AIDL_MAP_WIDGET_ID, widgetId);
+			intent.putExtra(AIDL_OBJECT_ID, widgetId);
 			app.sendBroadcast(intent);
 			return true;
 		} else {
@@ -279,5 +352,70 @@ public class OsmandAidlApi {
 		} else {
 			return false;
 		}
+	}
+
+	boolean addMapLayer(AMapLayer layer) {
+		if (layer != null) {
+			if (layers.containsKey(layer.getId())) {
+				updateMapLayer(layer);
+			} else {
+				layers.put(layer.getId(), layer);
+				Intent intent = new Intent();
+				intent.setAction(AIDL_ADD_MAP_LAYER);
+				intent.putExtra(AIDL_OBJECT_ID, layer.getId());
+				app.sendBroadcast(intent);
+			}
+			refreshMap();
+			return true;
+		} else {
+			return false;
+		}
+	}
+
+	boolean removeMapLayer(String layerId) {
+		if (!Algorithms.isEmpty(layerId) && layers.containsKey(layerId)) {
+			layers.remove(layerId);
+			Intent intent = new Intent();
+			intent.setAction(AIDL_REMOVE_MAP_LAYER);
+			intent.putExtra(AIDL_OBJECT_ID, layerId);
+			app.sendBroadcast(intent);
+			return true;
+		} else {
+			return false;
+		}
+	}
+
+	boolean updateMapLayer(AMapLayer layer) {
+		if (layer != null && layers.containsKey(layer.getId())) {
+			layers.put(layer.getId(), layer);
+			refreshMap();
+			return true;
+		} else {
+			return false;
+		}
+	}
+
+	boolean putMapPoint(String layerId, AMapPoint point) {
+		if (point != null) {
+			AMapLayer layer = layers.get(layerId);
+			if (layer != null) {
+				layer.putPoint(point);
+				refreshMap();
+				return true;
+			}
+		}
+		return false;
+	}
+
+	boolean removeMapPoint(String layerId, String pointId) {
+		if (pointId != null) {
+			AMapLayer layer = layers.get(layerId);
+			if (layer != null) {
+				layer.removePoint(pointId);
+				refreshMap();
+				return true;
+			}
+		}
+		return false;
 	}
 }

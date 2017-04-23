@@ -187,6 +187,7 @@ public class MapActivityLayers {
 
 		OsmandPlugin.createLayers(mapView, activity);
 		app.getAppCustomization().createLayers(mapView, activity);
+		app.getAidlApi().registerMapLayers(activity);
 	}
 
 
