@@ -78,7 +78,7 @@
 	<string name="poi_supermarket">スーパーマーケット(Supermarket)</string>
 	<string name="poi_tea">ティーショップ(Tea shop)</string>
 	<string name="poi_dairy">乳製品店</string>
-	<string name="poi_vending_machine">自動販売機(Vending machine)</string>
+	<string name="poi_vending_machine">自動販売機</string>
 	<string name="poi_wine">ワインショップ(Wine store)</string>
 
 	<string name="poi_books">書店(Bookstore)</string>
@@ -1132,7 +1132,7 @@
 	<string name="poi_payment_fuel_type">燃料カード(Fuel cards)</string>
 	<string name="poi_additional_type">追加(Additional)</string>
 	<string name="poi_internet_access_type">インターネット接続の種類(Internet access type)</string>
-	<string name="poi_vending_type">自動販売機の種類(Vending type)</string>
+	<string name="poi_vending_type">自動販売機の種類</string>
 	<string name="poi_bicycle_service">自転車サービス(Bicycle service)</string>
 	<string name="poi_fire_hydrant_water_source">水源(Water Source)</string>
 	<string name="poi_payment_toll_type">支払いの種類(Payment type)</string>
@@ -1846,7 +1846,7 @@
 	<string name="poi_parking_underground">地下駐車場</string>
 	<string name="poi_parking_multi_storey">立体駐車場</string>
 
-	<string name="poi_vending_parking_tickets">駐車場発券機</string>
+	<string name="poi_vending_parking_tickets">駐車場のチケット</string>
 	<string name="poi_parking_surface">駐車場舗装種別</string>
 	<string name="poi_service_car">提供可能サービス(Service)</string>
 	<string name="poi_cafeteria">カフェテリア・セルフ形式</string>
@@ -2059,4 +2059,37 @@
 	<string name="poi_payment_troika_no">公共交通機関_Troikaカード使用不可</string>
 
 	<string name="poi_shoes_type">靴・履物種</string>
+	<string name="poi_vending_cigarettes">タバコ</string>
+	<string name="poi_vending_excrement_bags">ペットのフン処理袋</string>
+	<string name="poi_vending_public_transport_tickets">公共交通機関の切符</string>
+	<string name="poi_vending_drinks">飲み物</string>
+	<string name="poi_vending_sweets">菓子</string>
+	<string name="poi_vending_parcel_pickup_mail_in">郵便小包の受取りと投函可能場所</string>
+	<string name="poi_vending_condoms">コンドーム</string>
+	<string name="poi_vending_stamps">切手</string>
+	<string name="poi_vending_food">食べ物</string>
+	<string name="poi_vending_drinks_food">飲み物と食べ物</string>
+	<string name="poi_vending_fuel">自動車用燃料</string>
+	<string name="poi_vending_parcel_pickup">郵便小包の受取り</string>
+	<string name="poi_vending_parcel_mail_in">郵便小包の投函</string>
+	<string name="poi_vending_milk">牛乳</string>
+	<string name="poi_vending_elongated_coin">記念コイン</string>
+	<string name="poi_vending_bread">パン</string>
+	<string name="poi_vending_chewing_gums">チューイングガム</string>
+	<string name="poi_vending_parking_tickets_public_transport_tickets">駐車場チケット;公共交通機関切符</string>
+	<string name="poi_vending_coffee">コーヒー</string>
+	<string name="poi_vending_toll">有料道路支払機</string>
+	<string name="poi_vending_tickets">チケット</string>
+	<string name="poi_vending_water">飲料水</string>
+	<string name="poi_vending_telephone_vouchers">電話用プリペイドカード</string>
+	<string name="poi_vending_animal_food">ペットフード</string>
+	<string name="poi_vending_public_transport_plans">公共交通機関時刻表</string>
+	<string name="poi_vending_drinks_sweets">飲み物と菓子</string>
+	<string name="poi_vending_vouchers">引換券・バウチャー</string>
+	<string name="poi_vending_dvd">DVD</string>
+	<string name="poi_vending_candles">キャンドル、ロウソク</string>
+	<string name="poi_vending_toys">おもちゃ</string>
+	<string name="poi_vending_ice_cream">アイスクリーム</string>
+	<string name="poi_vending_sim_cards">SIMカード</string>
+
 	</resources>
