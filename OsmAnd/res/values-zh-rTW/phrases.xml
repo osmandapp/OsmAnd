@@ -2827,4 +2827,34 @@
 	<string name="poi_cuisine_cake">蛋糕</string>
 	<string name="poi_free_flying_official_yes">官方︰是的</string>
 	<string name="poi_free_flying_guest_guidelines_yes">顧客指導︰有</string>
+	<string name="poi_dolphin">海豚</string>
+
+	<string name="poi_language_school">語言學校</string>
+
+<string name="poi_resort_kids_camp">親子營</string>
+	<string name="poi_music_school">音樂學校</string>
+	<string name="poi_passenger_information_display_yes">旅客資訊系統: 有</string>
+	<string name="poi_passenger_information_display_no">旅客資訊系統:無</string>
+
+	<string name="poi_aquaculture">水產養殖</string>
+	<string name="poi_aquaculture_shrimp">水產養殖: 蝦</string>
+	<string name="poi_aquaculture_fish">水產養殖: 魚</string>
+	<string name="poi_aquaculture_mussels">水產養殖: 貽貝</string>
+
+	<string name="poi_min_age">最低年齡</string>
+
+	<string name="poi_organic_yes">有機食品: 有</string>
+	<string name="poi_organic_no">有機食品: 無</string>
+	<string name="poi_organic_only">祇提供有機食品</string>
+
+	<string name="poi_traffic_mirror">道路反射鏡</string>
+
+	<string name="poi_diplomatic_consulate">領事館</string>
+	<string name="poi_diplomatic_consulate_general">總領事館</string>
+	<string name="poi_diplomatic_honorary_consulate">名譽領事館</string>
+	<string name="poi_diplomatic_permanent_mission">常駐代表團</string>
+	<string name="poi_diplomatic_delegation">代表團・外交使節</string>
+	<string name="poi_diplomatic_ambassadors_residence">大使公邸</string>
+	<string name="poi_diplomatic_high_commission">高級專員</string>
+
 	</resources>
