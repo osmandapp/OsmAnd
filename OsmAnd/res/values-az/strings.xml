@@ -144,7 +144,7 @@
     <string name="world_maps">Dünya xəritələri</string>
     <string name="favorite_category_add_new">Yenisini əlavə et</string>
     <string name="favorite_category_select">Kateqoriya seç</string>
-    <string name="m_s">m/s</string>
+    <string name="m_s">m/san</string>
     <string name="looking_up_address">Ünvan axtarılır</string>
     <string name="rendering_value_default13_name">Standart (13)</string>
     <string name="rendering_attr_currentTrackColor_name">GPX rəngi</string>
@@ -789,4 +789,9 @@ Gün batır: %2$s</string>
     <string name="quick_action_poi_list">POI siyahısı</string>
     <string name="quick_action_map_style_action">Xəritə stili əlavə et</string>
     <string name="quick_action_map_styles">Xəritə stilləri</string>
+    <string name="increase_search_radius">Axtarış radiusunu artır</string>
+    <string name="nothing_found_descr">Axtarış sorğusunu dəyişərək və ya axtarış radiusunu artıraraq cəhd edin</string>
+    <string name="quick_action_showhide_osmbugs_title">OSM qeydlərini göstər/gizlət</string>
+    <string name="quick_action_osmbugs_show">OSM qeydlərini göstər</string>
+    <string name="quick_action_osmbugs_hide">OSM qeydlərini gizlət</string>
     </resources>
