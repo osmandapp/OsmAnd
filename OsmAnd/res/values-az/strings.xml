@@ -794,4 +794,21 @@ Gün batır: %2$s</string>
     <string name="quick_action_showhide_osmbugs_title">OSM qeydlərini göstər/gizlət</string>
     <string name="quick_action_osmbugs_show">OSM qeydlərini göstər</string>
     <string name="quick_action_osmbugs_hide">OSM qeydlərini gizlət</string>
+    <string name="quick_action_showhide_osmbugs_descr">Fəaliyyət düyməsinə toxunulduğunda, xəritədə OSM qeydləri göstərilir və ya gizlədilir.</string>
+    <string name="sorted_by_distance">Məsafəyə görə sırala</string>
+    <string name="search_favorites">Favoritləri axtar</string>
+    <string name="srtm_menu_download_descr">Xəritədə kontur xətlərini göstərmək üçün bu bölgənin kontur xətli xəritəsini endirməlisiniz.</string>
+    <string name="srtm_color_scheme">Rəng sxemi</string>
+    <string name="routing_attr_allow_private_name">Xüsusi girişə icazə ver</string>
+    <string name="routing_attr_allow_private_description">Xüsusi sahələrə girişə icazə ver</string>
+    <string name="favorite_group_name">Qrup adı</string>
+    <string name="shared_string_overview">Baxış</string>
+    <string name="select_street">Küçə seçin</string>
+    <string name="type_city_town">Şəhər və ya qəsəbə daxil edin</string>
+    <string name="type_postcode">Poçt kodu yazın</string>
+    <string name="nearest_cities">Yaxındakı şəhərlər</string>
+    <string name="select_city">Şəhər seçin</string>
+    <string name="select_postcode">Poçt kodu seçin</string>
+    <string name="quick_action_add_destination">Hədəf əlavə et</string>
+    <string name="quick_action_replace_destination">Hədəfi əvəz et</string>
     </resources>
