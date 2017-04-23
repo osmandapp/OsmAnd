@@ -1880,22 +1880,22 @@
 	<string name="poi_aerialway_bicycle_no">自転車持込不可</string>
 	<string name="poi_aerialway_bicycle_summer">夏季のみ可</string>
 	<string name="poi_vending_bicycle_tube">自転車チューブ</string>
-	<string name="poi_service_bicycle_retail_yes">小売(Retail)</string>
-	<string name="poi_service_bicycle_retail_no">自転車の小売:なし(Bicycle retail: no)</string>
-	<string name="poi_service_bicycle_repair_yes">修理可能</string>
+	<string name="poi_service_bicycle_retail_yes">販売</string>
+	<string name="poi_service_bicycle_retail_no">自転車の販売:無し</string>
+	<string name="poi_service_bicycle_repair_yes">修理</string>
 	<string name="poi_service_bicycle_repair_no">修理不可</string>
-	<string name="poi_service_bicycle_rental_yes">レンタル可</string>
+	<string name="poi_service_bicycle_rental_yes">レンタル</string>
 	<string name="poi_service_bicycle_rental_no">レンタル不可</string>
 	<string name="poi_service_bicycle_pump_yes">空気入れ有り</string>
 	<string name="poi_service_bicycle_pump_no">空気入れ無し</string>
 	<string name="poi_service_bicycle_diy_yes">修理用工具</string>
 	<string name="poi_service_bicycle_diy_no">修理用工具:無し</string>
-	<string name="poi_service_bicycle_cleaning_yes">手入れ・清掃</string>
-	<string name="poi_service_bicycle_cleaning_no">自転車クリーニング:無し</string>
+	<string name="poi_service_bicycle_cleaning_yes">自転車洗車</string>
+	<string name="poi_service_bicycle_cleaning_no">自転車洗車:無し</string>
 	<string name="poi_service_bicycle_chaintool_yes">チェーン整備工具</string>
 	<string name="poi_service_bicycle_chaintool_no">チェーン整備工具:無し</string>
-	<string name="poi_service_bicycle_second_hand_yes">中古自転車の小売販売</string>
-	<string name="poi_service_bicycle_second_hand_no">中古自転車の小売販売:無し</string>
+	<string name="poi_service_bicycle_second_hand_yes">中古自転車の販売</string>
+	<string name="poi_service_bicycle_second_hand_no">中古自転車の販売:無し</string>
 	<string name="poi_bicycle_repair_station">自転車セルフ修理所</string>
 
 	<string name="poi_ramp_bicycle_yes">自転車用ランプ:有り</string>
@@ -2108,4 +2108,15 @@
 	<string name="poi_telescope_usage_espionage">諜報用途</string>
 	<string name="poi_telescope_usage_education">教育用途</string>
 	<string name="poi_telescope">望遠鏡</string>
+	<string name="poi_observatory_designation">観測ドーム</string>
+	<string name="poi_animal_training_type">動物訓練施設の種類</string>
+	<string name="poi_embassy_type">外交関連施設(領事館、大使住居等)の種類</string>
+	<string name="poi_service_parts">部品</string>
+	<string name="poi_service_dealer">販売</string>
+	<string name="poi_service_repair">修理</string>
+	<string name="poi_service_repair_no">修理不可</string>
+	<string name="poi_service_electrical">電気自動車修理</string>
+	<string name="poi_full_service_yes">係員付きフルサービス(Full service)</string>
+	<string name="poi_service_bicycle_charging_yes">電動アシスト自転車充電可</string>
+	<string name="poi_service_bicycle_charging_no">電動アシスト自転車充電不可</string>
 	</resources>
