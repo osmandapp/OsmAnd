@@ -16,8 +16,8 @@ public class UpdateMapPointParams implements Parcelable {
 		readFromParcel(in);
 	}
 
-	public static final Parcelable.Creator<UpdateMapPointParams> CREATOR = new
-			Parcelable.Creator<UpdateMapPointParams>() {
+	public static final Creator<UpdateMapPointParams> CREATOR = new
+			Creator<UpdateMapPointParams>() {
 				public UpdateMapPointParams createFromParcel(Parcel in) {
 					return new UpdateMapPointParams(in);
 				}
