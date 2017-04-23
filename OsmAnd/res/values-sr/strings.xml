@@ -1309,7 +1309,7 @@
     <string name="rendering_value_bold_name">Дебело</string>
     <string name="report">Извештај</string>
     <string name="osmo_tracker_id_descr">Кликните за преглед ЛБ-а пратиоца</string>
-    <string name="storage_permission_restart_is_required">Са</string>
+    <string name="storage_permission_restart_is_required">Апликацији је сада дозвољен упис на спољно складиште. Неопходно је да ручно поново покренете апликацију.</string>
     <string name="dist_away_from_my_location">Тражи на растојању %1$s</string>
     <string name="shared_string_move_up">Помери навише</string>
     <string name="shared_string_move_down">Помери наниже</string>
