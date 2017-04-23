@@ -19,8 +19,8 @@
 
 	<string name="poi_books">Könyvesbolt</string>
 	<string name="poi_bicycle">Kerékpárbolt</string>
-	<string name="poi_anime">Animebolt</string>
-	<string name="poi_antiques">Antikvárius</string>
+	<string name="poi_anime">Anime képregényekkel kapcsolatos bolt</string>
+	<string name="poi_antiques">Régiségkereskedés</string>
 	<string name="poi_chemist">Drogéria</string>
 	<string name="poi_copyshop">Fénymásoló</string>
 	<string name="poi_florist">Virágárus</string>
@@ -274,10 +274,10 @@
 	<string name="poi_bag">Táskabolt</string>
 	<string name="poi_bathroom_furnishing">Fürdőszobabútor</string>
 	<string name="poi_bed">Hálószobafelszerelés-bolt</string>
-	<string name="poi_boutique">Divatszaküzlet</string>
+	<string name="poi_boutique">Butik</string>
 	<string name="poi_camera">Fényképezőgép és objektív</string>
 	<string name="poi_carpet">Szőnyegbolt</string>
-	<string name="poi_charity">Adománygyűjtőhely</string>
+	<string name="poi_charity">Adománybolt</string>
 	<string name="poi_shoes">Cipőbolt</string>
 	<string name="poi_computer">Számítástechnikai bolt</string>
 	<string name="poi_curtain">Függönybolt</string>
@@ -548,7 +548,7 @@
 
 	<string name="poi_craft_basket_maker">Kosárfonó</string>
 	<string name="poi_craft_boatbuilder">Hajóács</string>
-	<string name="poi_funeral_directors">Temetkezési vállalkozó</string>
+	<string name="poi_funeral_directors">Temetkezési iroda</string>
 	<string name="poi_beauty">Szépségszalon</string>
 	<string name="poi_beauty_salon_nails">Manikűr</string>
 	<string name="poi_massage">Masszázsszalon</string>
@@ -633,7 +633,7 @@
 	<string name="poi_fashion">Divatüzlet</string>
 	<string name="poi_furnace">Fűtéstechnikai szaküzlet</string>
 	<string name="poi_garden_furniture">Kertibútor-bolt</string>
-	<string name="poi_gas">Cseppfolyósgáz-bolt</string>
+	<string name="poi_gas">Palackozottgáz-bolt</string>
 	<string name="poi_herbalist">Gyógynövénybolt</string>
 	<string name="poi_hifi">HiFi-bolt</string>
 	<string name="poi_newsagent">Újságárus</string>
@@ -3102,10 +3102,10 @@
 	<string name="poi_dispensing_no">Vény nem váltható be</string>
 
 	<string name="poi_hygrometer_no">Páratartalom-mérő nincs</string>
-	<string name="poi_toilets_disposal_flush">WC: vízöblítéses</string>
-	<string name="poi_toilets_disposal_pitlatrine">WC: árnyékszék</string>
-	<string name="poi_toilets_disposal_chemical">WC: vegyi öblítéses</string>
-	<string name="poi_toilets_disposal_bucket">WC: vödör</string>
+	<string name="poi_toilets_disposal_flush">WC-kezelés: vízöblítéses</string>
+	<string name="poi_toilets_disposal_pitlatrine">WC-kezelés: árnyékszék</string>
+	<string name="poi_toilets_disposal_chemical">WC-kezelés: vegyi öblítéses</string>
+	<string name="poi_toilets_disposal_bucket">WC-kezelés: vödör</string>
 
 	<string name="poi_conveying_yes">Mozgólépcső vagy -járda</string>
 
