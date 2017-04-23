@@ -5,17 +5,26 @@ import android.os.Parcelable;
 
 import net.osmand.aidl.maplayer.point.AMapPoint;
 
-import java.util.HashMap;
+import java.util.ArrayList;
+import java.util.List;
+import java.util.Map;
+import java.util.concurrent.ConcurrentHashMap;
 
 public class AMapLayer implements Parcelable {
 	private String id;
 	private String name;
-	private HashMap<String, AMapPoint> points = new HashMap<>();
+	private float zOrder = 5.5f;
+	private Map<String, AMapPoint> points = new ConcurrentHashMap<>();
 
-	public AMapLayer(String id, String name, HashMap<String, AMapPoint> points) {
+	public AMapLayer(String id, String name, float zOrder, List<AMapPoint> pointList) {
 		this.id = id;
 		this.name = name;
-		this.points = points;
+		this.zOrder = zOrder;
+		if (pointList != null) {
+			for (AMapPoint p : pointList) {
+				this.points.put(p.getId(), p);
+			}
+		}
 	}
 
 	public AMapLayer(Parcel in) {
@@ -41,20 +50,42 @@ public class AMapLayer implements Parcelable {
 		return name;
 	}
 
-	public HashMap<String, AMapPoint> getPoints() {
-		return points;
+	public float getZOrder() {
+		return zOrder;
+	}
+
+	public List<AMapPoint> getPoints() {
+		return new ArrayList<>(points.values());
+	}
+
+	public boolean hasPoint(String pointId) {
+		return points.containsKey(pointId);
+	}
+
+	public void putPoint(AMapPoint point) {
+		points.put(point.getId(), point);
+	}
+
+	public void removePoint(String pointId) {
+		points.remove(pointId);
 	}
 
 	public void writeToParcel(Parcel out, int flags) {
 		out.writeString(id);
 		out.writeString(name);
-		out.writeMap(points);
+		out.writeFloat(zOrder);
+		out.writeTypedList(new ArrayList<>(points.values()));
 	}
 
 	private void readFromParcel(Parcel in) {
 		id = in.readString();
 		name = in.readString();
-		in.readMap(points, HashMap.class.getClassLoader());
+		zOrder = in.readFloat();
+		List<AMapPoint> pointList = new ArrayList<>();
+		in.readTypedList(pointList, AMapPoint.CREATOR);
+		for (AMapPoint p : pointList) {
+			this.points.put(p.getId(), p);
+		}
 	}
 
 	public int describeContents() {

@@ -94,32 +94,56 @@ public class OsmandAidlService extends Service {
 
 		@Override
 		public boolean addMapPoint(AddMapPointParams params) throws RemoteException {
-			return false;
+			try {
+				return params != null && getApi().putMapPoint(params.getLayerId(), params.getPoint());
+			} catch (Exception e) {
+				return false;
+			}
 		}
 
 		@Override
 		public boolean removeMapPoint(RemoveMapPointParams params) throws RemoteException {
-			return false;
+			try {
+				return params != null && getApi().removeMapPoint(params.getLayerId(), params.getPointId());
+			} catch (Exception e) {
+				return false;
+			}
 		}
 
 		@Override
 		public boolean updateMapPoint(UpdateMapPointParams params) throws RemoteException {
-			return false;
+			try {
+				return params != null && getApi().putMapPoint(params.getLayerId(), params.getPoint());
+			} catch (Exception e) {
+				return false;
+			}
 		}
 
 		@Override
 		public boolean addMapLayer(AddMapLayerParams params) throws RemoteException {
-			return false;
+			try {
+				return params != null && getApi().addMapLayer(params.getLayer());
+			} catch (Exception e) {
+				return false;
+			}
 		}
 
 		@Override
 		public boolean removeMapLayer(RemoveMapLayerParams params) throws RemoteException {
-			return false;
+			try {
+				return params != null && getApi().removeMapLayer(params.getId());
+			} catch (Exception e) {
+				return false;
+			}
 		}
 
 		@Override
 		public boolean updateMapLayer(UpdateMapLayerParams params) throws RemoteException {
-			return false;
+			try {
+				return params != null && getApi().updateMapLayer(params.getLayer());
+			} catch (Exception e) {
+				return false;
+			}
 		}
 
 		@Override

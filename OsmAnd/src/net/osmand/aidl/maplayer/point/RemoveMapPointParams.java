@@ -16,8 +16,8 @@ public class RemoveMapPointParams implements Parcelable {
 		readFromParcel(in);
 	}
 
-	public static final Parcelable.Creator<RemoveMapPointParams> CREATOR = new
-			Parcelable.Creator<RemoveMapPointParams>() {
+	public static final Creator<RemoveMapPointParams> CREATOR = new
+			Creator<RemoveMapPointParams>() {
 				public RemoveMapPointParams createFromParcel(Parcel in) {
 					return new RemoveMapPointParams(in);
 				}
