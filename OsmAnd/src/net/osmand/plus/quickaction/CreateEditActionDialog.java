@@ -155,6 +155,8 @@ public class CreateEditActionDialog extends DialogFragment {
                 R.drawable.abc_ic_ab_back_mtrl_am_alpha,
                 R.color.color_white));
 
+        toolbar.setNavigationContentDescription(R.string.access_shared_string_navigate_up);
+
         toolbar.setNavigationOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {

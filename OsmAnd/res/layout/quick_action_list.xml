@@ -29,6 +29,7 @@
         android:layout_alignParentRight="true"
         android:layout_margin="16dp"
         android:src="@drawable/ic_action_plus"
+        android:contentDescription="@string/quick_action_new_action"
         app:backgroundTint="@color/dashboard_blue"/>
 
 </RelativeLayout>
