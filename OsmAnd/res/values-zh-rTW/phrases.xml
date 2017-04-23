@@ -1229,7 +1229,7 @@
 	<string name="poi_rural">農村</string>
 
 	<string name="poi_seats">座位</string>
-	<string name="poi_backrest_yes">靠背：是的</string>
+	<string name="poi_backrest_yes">靠背：有</string>
 	<string name="poi_backrest_no">靠背：沒有</string>
 
 	<string name="poi_intermittent">間歇性</string>
@@ -1451,7 +1451,7 @@
 	<string name="poi_payment_maestro_no">不接受 Maestro 卡</string>
 	<string name="poi_payment_american_express_yes">接受‎美國運通卡 (AMEX)</string>
 	<string name="poi_payment_american_express_no">不接受‎美國運通卡 (AMEX)</string>
-	<string name="poi_internet_access_yes">網際網路存取：是</string>
+	<string name="poi_internet_access_yes">網際網路存取：有</string>
 	<string name="poi_internet_access_no">網際網路存取：無</string>
 
 	<string name="poi_payment_diners_club_yes">接受大來卡</string>
@@ -1618,7 +1618,7 @@
 	<string name="poi_delivery_no">沒外送</string>
 	<string name="poi_delivery_only">只有外送</string>
 
-	<string name="poi_outdoor_seating_yes">室外座位</string>
+	<string name="poi_outdoor_seating_yes">室外座位︰有</string>
 	<string name="poi_outdoor_seating_no">無室外座位</string>
 	<string name="poi_outdoor_seating_terrace">室外座位：露臺</string>
 	<string name="poi_outdoor_seating_sidewalk">室外座位：人行道</string>
@@ -2125,9 +2125,9 @@
 	<string name="poi_openfire_no">不允許用火</string>
 	<string name="poi_backcountry_yes">野外露營</string>
 	<string name="poi_backcountry_no">野外露營：否</string>
-	<string name="poi_scout_yes">偵察營：是</string>
+	<string name="poi_scout_yes">偵察營：是的</string>
 	<string name="poi_scout_no">偵察營：否</string>
-	<string name="poi_group_only_yes">只有群組：是</string>
+	<string name="poi_group_only_yes">只有群組：是的</string>
 	<string name="poi_group_only_no">只有群組：否</string>
 	<string name="poi_washing_machine_yes">清洗機：有</string>
 	<string name="poi_washing_machine_no">清洗機：無</string>
@@ -2152,7 +2152,7 @@
 	<string name="poi_dog_no">不允許狗入內</string>
 
 	<string name="poi_traffic_calming_island">安全島</string>
-	<string name="poi_impromptu_yes">即興：是</string>
+	<string name="poi_impromptu_yes">即興：是的</string>
 	<string name="poi_impromptu_no">即興：否</string>
 	<string name="poi_refugee_yes">為難民的福利設施</string>
 	<string name="poi_refugee_no">難民：無</string>
@@ -2216,13 +2216,13 @@
 	<string name="poi_handrail_no">扶手：無</string>
 	<string name="poi_ramp_yes">斜坡道：有</string>
 	<string name="poi_ramp_no">斜坡道：無</string>
-	<string name="poi_ramp_wheelchair_yes">供輪椅的斜坡道：有</string>
+	<string name="poi_ramp_wheelchair_yes">供輪椅使用的斜坡道：有</string>
 	<string name="poi_ramp_wheelchair_no">供輪椅的斜坡道：無</string>
 	<string name="poi_ramp_stroller_yes">斜坡道(折疊式)：有</string>
 	<string name="poi_ramp_stroller_no">斜坡道(折疊式)：無</string>
-	<string name="poi_ramp_bicycle_yes">供自行車的斜坡道：有</string>
+	<string name="poi_ramp_bicycle_yes">供自行車使用的斜坡道：有</string>
 	<string name="poi_ramp_bicycle_no">供自行車的斜坡道：無</string>
-	<string name="poi_ramp_luggage_yes">供行李的斜坡道：有</string>
+	<string name="poi_ramp_luggage_yes">供行李使用的斜坡道：有</string>
 	<string name="poi_ramp_luggage_no">供行李的斜坡道：無</string>
 	<string name="poi_step_count">步行計數</string>
 	<string name="poi_step_condition_even">步行條件：平坦</string>
@@ -2535,7 +2535,7 @@
 	<string name="poi_delivery_filter_yes">是的</string>
 	<string name="poi_outdoor_seating_filter_yes">是的</string>
 	<string name="poi_diaper_table_count">尿布更換台數量</string>
-	<string name="poi_service_bicycle_charging_yes">自行車充電︰是的</string>
+	<string name="poi_service_bicycle_charging_yes">自行車充電︰有</string>
 	<string name="poi_service_bicycle_charging_no">自行車充電︰沒有</string>
 	<string name="poi_bicycle_repair_station">自行車自行維修站</string>
 
@@ -2583,7 +2583,7 @@
 	<string name="poi_concentration_camp_gulag">類型︰古拉格</string>
 
 	<string name="poi_temperature">温度</string>
-	<string name="poi_bathing_yes">沐浴︰是的</string>
+	<string name="poi_bathing_yes">沐浴︰有</string>
 	<string name="poi_bathing_no">沐浴︰沒有</string>
 
 	<string name="poi_pa">Pa（毛利人強化的居地）</string>
@@ -2597,7 +2597,7 @@
 	<string name="poi_prison_camp">前監獄</string>
 	<string name="poi_boat_storage">船艇棧房</string>
 
-	<string name="poi_conveying_yes">運輸︰是的</string>
+	<string name="poi_conveying_yes">輸送裝置︰有</string>
 
 	<string name="poi_bridge_ref">橋梁參考</string>
 	<string name="poi_tunnel_ref">隧道參考</string>
@@ -2730,25 +2730,25 @@
 	<string name="poi_fitness_centre">健身中心</string>
 	<string name="poi_fitness">健身</string>
 
-	<string name="poi_billiards">台球運動</string>
+	<string name="poi_billiards">撞球</string>
 
-	<string name="poi_water_heater_yes">熱水器︰ 有</string>
-	<string name="poi_water_heater_no">熱水器︰ 無</string>
+	<string name="poi_water_heater_yes">熱水器︰有</string>
+	<string name="poi_water_heater_no">熱水器︰沒有</string>
 
 	<string name="poi_parking_garage_boxes">車庫</string>
-	<string name="poi_parking_carports">有蓋停車場</string>
+	<string name="poi_parking_carports">車棚</string>
 
 	<string name="poi_dojo">道場</string>
 
 	<string name="poi_gaelic_games">蓋爾式運動</string>
 	<string name="poi_running">跑步</string>
-	<string name="poi_netball">籃網球運動</string>
+	<string name="poi_netball">籃網球</string>
 	<string name="poi_karting">卡丁車</string>
 	<string name="poi_badminton">羽毛球</string>
 	<string name="poi_judo">柔道</string>
 	<string name="poi_disc_golf">飛盤高爾夫</string>
 	<string name="poi_futsal">室内五人制足球</string>
-	<string name="poi_rc_car">遙控賽車</string>
+	<string name="poi_rc_car">無線遙控賽車</string>
 	<string name="poi_squash">壁球</string>
 	<string name="poi_shuffleboard">沙狐球</string>
 	<string name="poi_lacrosse">袋棍球</string>
@@ -2757,13 +2757,13 @@
 	<string name="poi_official_name">正式名稱</string>
 
 	<string name="poi_construction_yes">工事中</string>
-	<string name="poi_additional_atm_yes">ATM︰ 有</string>
+	<string name="poi_additional_atm_yes">自動提款機︰有</string>
 	<string name="poi_atm_no">ATM︰ 無</string>
 
 	<string name="poi_firepit">火塘</string>
 	<string name="poi_street_cabinet">街道電箱</string>
 
-	<string name="poi_fair_trade_yes">公平貿易︰ 是</string>
+	<string name="poi_fair_trade_yes">公平交易︰是</string>
 	<string name="poi_fair_trade_no">公平貿易︰ 否</string>
 	<string name="poi_fair_trade_only">只有公平貿易產品</string>
 
@@ -2771,15 +2771,15 @@
 	<string name="poi_bandy">班迪球</string>
 
 	<string name="poi_protected_area">保護區</string>
-	<string name="poi_protection_object_historic">保護對象︰ 歷史</string>
-	<string name="poi_protection_object_nature">保護對象︰ 自然</string>
-	<string name="poi_protection_object_habitat">保護對象︰動物棲息地</string>
-	<string name="poi_protection_object_water">保護對象︰水文</string>
+	<string name="poi_protection_object_historic">保護對象︰古蹟</string>
+	<string name="poi_protection_object_nature">保護對象︰自然</string>
+	<string name="poi_protection_object_habitat">保護對象︰棲息地</string>
+	<string name="poi_protection_object_water">保護對象︰水域</string>
 
 	<string name="poi_protection_title">保護對象名稱</string>
 	<string name="poi_nuclear_explosion_date_utc">爆炸日期 (UTC)</string>
-	<string name="poi_microwave_oven_yes">微波爐︰ 有</string>
-	<string name="poi_microwave_oven_no">微波爐︰ 無</string>
+	<string name="poi_microwave_oven_yes">微波爐︰有</string>
+	<string name="poi_microwave_oven_no">微波爐︰沒有</string>
 	<string name="poi_medical_system_unani_yes">尤那尼醫學</string>
 
 	<string name="poi_medical_system_western_yes">西醫</string>
@@ -2807,11 +2807,11 @@
 	<string name="poi_sport_free_flying">自由飛行 (運動)</string>
 
 	<string name="poi_water_tap">水龍頭</string>
-	<string name="poi_button_operated_yes">按鈕操作: 是</string>
+	<string name="poi_button_operated_yes">按鈕操作︰是的</string>
 	<string name="poi_button_operated_no">按鈕操作: 否</string>
 
-	<string name="poi_free_flying_site_takeoff">離陸</string>
-	<string name="poi_free_flying_site_landing">着陸</string>
+	<string name="poi_free_flying_site_takeoff">起飛</string>
+	<string name="poi_free_flying_site_landing">降落</string>
 	<string name="poi_fire_hydrant_type_pond">陂塘</string>
 	<string name="poi_fire_hydrant_type_wall">牆面栓箱</string>
 
@@ -2825,4 +2825,6 @@
 	<string name="poi_cuisine_diner">輕食・簡餐</string>
 	<string name="poi_cuisine_sausage">香腸</string>
 	<string name="poi_cuisine_cake">蛋糕</string>
+	<string name="poi_free_flying_official_yes">官方︰是的</string>
+	<string name="poi_free_flying_guest_guidelines_yes">顧客指導︰有</string>
 	</resources>
