@@ -501,6 +501,7 @@ public class MapMarkersLayer extends OsmandMapLayer implements IContextMenuProvi
 				mapMarkers.remove(i);
 				mapMarkers.add(0, marker);
 				markersHelper.saveMapMarkers(mapMarkers, null);
+				marker.index = 0;
 			}
 		}
 	}
