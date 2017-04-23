@@ -377,8 +377,8 @@
 	<string name="poi_bell_tower">Harangtorony</string>
 	<string name="poi_telephone_exchange">Telefonközpont</string>
 
-	<string name="poi_waste_disposal">Szemétlerakó</string>
-	<string name="poi_waste_basket">Szemétkosár</string>
+	<string name="poi_waste_disposal">Szemeteskonténer</string>
+	<string name="poi_waste_basket">Szemeteskosár</string>
 
 	<string name="poi_industrial">Ipari terület</string>
 	<string name="poi_allotments">Kiskertek</string>
@@ -669,7 +669,7 @@
 	<string name="poi_recycling_batteries">Akkumulátor</string>
 	<string name="poi_recycling_plastic_bottles">Műanyag palack</string>
 	<string name="poi_recycling_green_waste">Zöldhulladék</string>
-	<string name="poi_recycling_waste">Maradékhulladék</string>
+	<string name="poi_recycling_waste">Maradékhulladék (lom)</string>
 	<string name="poi_recycling_plastic_packaging">Műanyag csomagolás</string>
 	<string name="poi_recycling_newspaper">Újságpapír</string>
 	<string name="poi_recycling_cartons">Karton</string>
@@ -756,7 +756,7 @@
 	<string name="poi_recycling_cars">Autó</string>
 	<string name="poi_recycling_bicycles">Kerékpár</string>
 
-	<string name="poi_landfill_waste_nuclear">Nukleáris hulladék</string>
+	<string name="poi_landfill_waste_nuclear">Radioaktívhulladék-lerakó</string>
 	<string name="poi_basin">Vízgyűjtő</string>
 	<string name="poi_conservation">Védett terület</string>
 
@@ -1385,7 +1385,7 @@
 
 	<string name="poi_bench_yes">van</string>
 	<string name="poi_bench_no">Pad nincs</string>
-	<string name="poi_bin_yes">Szemétkosár van</string>
+	<string name="poi_bin_yes">Szemeteskosár van</string>
 	<string name="poi_bin_no">Szemétkosár nincs</string>
 
 	<string name="poi_resource_antimony">Antimon</string>
@@ -1446,7 +1446,7 @@
 	<string name="poi_training">Képző intézmény</string>
 	<string name="poi_register_office">Anyakönyvi hivatal</string>
 	<string name="poi_bailiff">Végrehajtó</string>
-	<string name="poi_cabin">Hütte</string>
+	<string name="poi_cabin">Kis faház</string>
 	<string name="poi_denomination_church_of_scotland">Church of Scotland</string>
 	<string name="poi_denomination_iglesia_ni_cristo">Iglesia ni cristo</string>
 	<string name="poi_denomination_quaker">Kvéker</string>
@@ -3372,4 +3372,8 @@
 
 	<string name="poi_energy_supplier">Energiaszolgáltató irodája</string>
 
-	</resources>
+	<string name="poi_resort_kids_camp">Ifjúsági tábor</string>
+	<string name="poi_music_school">Zeneiskola</string>
+	<string name="poi_language_school">Nyelviskola</string>
+
+</resources>
