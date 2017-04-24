@@ -4,14 +4,21 @@ import android.content.BroadcastReceiver;
 import android.content.Context;
 import android.content.Intent;
 import android.content.IntentFilter;
+import android.net.Uri;
+import android.os.ParcelFileDescriptor;
 import android.view.View;
 
+import net.osmand.IndexConstants;
+import net.osmand.aidl.gpx.ASelectedGpxFile;
 import net.osmand.aidl.maplayer.AMapLayer;
 import net.osmand.aidl.maplayer.point.AMapPoint;
 import net.osmand.aidl.mapmarker.AMapMarker;
 import net.osmand.aidl.mapwidget.AMapWidget;
 import net.osmand.data.LatLon;
 import net.osmand.data.PointDescription;
+import net.osmand.plus.GPXUtilities;
+import net.osmand.plus.GPXUtilities.GPXFile;
+import net.osmand.plus.GpxSelectionHelper.SelectedGpxFile;
 import net.osmand.plus.MapMarkersHelper;
 import net.osmand.plus.MapMarkersHelper.MapMarker;
 import net.osmand.plus.OsmandApplication;
@@ -20,10 +27,18 @@ import net.osmand.plus.views.AidlMapLayer;
 import net.osmand.plus.views.MapInfoLayer;
 import net.osmand.plus.views.OsmandMapLayer;
 import net.osmand.plus.views.OsmandMapLayer.DrawSettings;
+import net.osmand.plus.views.OsmandMapTileView;
 import net.osmand.plus.views.mapwidgets.MapWidgetRegistry.MapWidgetRegInfo;
 import net.osmand.plus.views.mapwidgets.TextInfoWidget;
 import net.osmand.util.Algorithms;
 
+import java.io.ByteArrayInputStream;
+import java.io.File;
+import java.io.FileDescriptor;
+import java.io.FileInputStream;
+import java.io.FileOutputStream;
+import java.io.IOException;
+import java.io.InputStream;
 import java.util.List;
 import java.util.Map;
 import java.util.concurrent.ConcurrentHashMap;
@@ -31,6 +46,12 @@ import java.util.concurrent.ConcurrentHashMap;
 public class OsmandAidlApi {
 
 	private static final String AIDL_REFRESH_MAP = "aidl_refresh_map";
+	private static final String AIDL_SET_MAP_LOCATION = "aidl_set_map_location";
+	private static final String AIDL_LATITUDE = "aidl_latitude";
+	private static final String AIDL_LONGITUDE = "aidl_longitude";
+	private static final String AIDL_ZOOM = "aidl_zoom";
+	private static final String AIDL_ANIMATED = "aidl_animated";
+
 	private static final String AIDL_OBJECT_ID = "aidl_object_id";
 
 	private static final String AIDL_ADD_MAP_WIDGET = "aidl_add_map_widget";
@@ -46,6 +67,7 @@ public class OsmandAidlApi {
 	private Map<String, OsmandMapLayer> mapLayers = new ConcurrentHashMap<>();
 
 	private BroadcastReceiver refreshMapReceiver;
+	private BroadcastReceiver setMapLocationReceiver;
 	private BroadcastReceiver addMapWidgetReceiver;
 	private BroadcastReceiver removeMapWidgetReceiver;
 	private BroadcastReceiver addMapLayerReceiver;
@@ -57,6 +79,7 @@ public class OsmandAidlApi {
 
 	public void onCreateMapActivity(final MapActivity mapActivity) {
 		registerRefreshMapReceiver(mapActivity);
+		registerSetMapLocationReceiver(mapActivity);
 		registerAddMapWidgetReceiver(mapActivity);
 		registerRemoveMapWidgetReceiver(mapActivity);
 		registerAddMapLayerReceiver(mapActivity);
@@ -66,6 +89,9 @@ public class OsmandAidlApi {
 	public void onDestroyMapActivity(final MapActivity mapActivity) {
 		if (refreshMapReceiver != null) {
 			mapActivity.unregisterReceiver(refreshMapReceiver);
+		}
+		if (setMapLocationReceiver != null) {
+			mapActivity.unregisterReceiver(setMapLocationReceiver);
 		}
 
 		if (addMapWidgetReceiver != null) {
@@ -92,6 +118,35 @@ public class OsmandAidlApi {
 			}
 		};
 		mapActivity.registerReceiver(refreshMapReceiver, new IntentFilter(AIDL_REFRESH_MAP));
+	}
+
+	private void registerSetMapLocationReceiver(final MapActivity mapActivity) {
+		setMapLocationReceiver = new BroadcastReceiver() {
+			@Override
+			public void onReceive(Context context, Intent intent) {
+				double lat = intent.getDoubleExtra(AIDL_LATITUDE, Double.NaN);
+				double lon = intent.getDoubleExtra(AIDL_LONGITUDE, Double.NaN);
+				int zoom = intent.getIntExtra(AIDL_ZOOM, 0);
+				boolean animated = intent.getBooleanExtra(AIDL_ANIMATED, false);
+				if (!Double.isNaN(lat) && !Double.isNaN(lon)) {
+					OsmandMapTileView mapView = mapActivity.getMapView();
+					if (zoom == 0) {
+						zoom = mapView.getZoom();
+					} else {
+						zoom = zoom > mapView.getMaxZoom() ? mapView.getMaxZoom() : zoom;
+						zoom = zoom < mapView.getMinZoom() ? mapView.getMinZoom() : zoom;
+					}
+					if (animated) {
+						mapView.getAnimatedDraggingThread().startMoving(lat, lon, zoom, true);
+					} else {
+						mapView.setLatLon(lat, lon);
+						mapView.setIntZoom(zoom);
+					}
+				}
+				mapActivity.refreshMap();
+			}
+		};
+		mapActivity.registerReceiver(setMapLocationReceiver, new IntentFilter(AIDL_SET_MAP_LOCATION));
 	}
 
 	private int getDrawableId(String id) {
@@ -417,5 +472,136 @@ public class OsmandAidlApi {
 			}
 		}
 		return false;
+	}
+
+	boolean importGpxFromFile(File source, String destinationPath) {
+		if (source != null && !Algorithms.isEmpty(destinationPath)) {
+			if (source.exists() && source.canRead()) {
+				File destination = app.getAppPath(IndexConstants.GPX_INDEX_DIR + destinationPath);
+				if (destination.getParentFile().canWrite()) {
+					try {
+						Algorithms.fileCopy(source, destination);
+						return true;
+					} catch (IOException e) {
+						e.printStackTrace();
+					}
+				}
+			}
+		}
+		return false;
+	}
+
+	boolean importGpxFromUri(Uri gpxUri, String destinationPath) {
+		if (gpxUri != null && !Algorithms.isEmpty(destinationPath)) {
+			File destination = app.getAppPath(IndexConstants.GPX_INDEX_DIR + destinationPath);
+			ParcelFileDescriptor gpxParcelDescriptor = null;
+			try {
+				gpxParcelDescriptor = app.getContentResolver().openFileDescriptor(gpxUri, "r");
+				if (gpxParcelDescriptor != null) {
+					FileDescriptor fileDescriptor = gpxParcelDescriptor.getFileDescriptor();
+					InputStream is = new FileInputStream(fileDescriptor);
+					FileOutputStream fout = new FileOutputStream(destination);
+					try {
+						Algorithms.streamCopy(is, fout);
+					} finally {
+						try {
+							is.close();
+						} catch (IOException e) {
+							e.printStackTrace();
+						}
+						try {
+							fout.close();
+						} catch (IOException e) {
+							e.printStackTrace();
+						}
+					}
+					return true;
+				}
+			} catch (IOException e) {
+				e.printStackTrace();
+			}
+		}
+		return false;
+	}
+
+	boolean importGpxFromData(String sourceRawData, String destinationPath) {
+		if (!Algorithms.isEmpty(sourceRawData) && !Algorithms.isEmpty(destinationPath)) {
+			File destination = app.getAppPath(IndexConstants.GPX_INDEX_DIR + destinationPath);
+			try {
+				InputStream is = new ByteArrayInputStream(sourceRawData.getBytes());
+				FileOutputStream fout = new FileOutputStream(destination);
+				try {
+					Algorithms.streamCopy(is, fout);
+				} finally {
+					try {
+						is.close();
+					} catch (IOException e) {
+						e.printStackTrace();
+					}
+					try {
+						fout.close();
+					} catch (IOException e) {
+						e.printStackTrace();
+					}
+				}
+				return true;
+			} catch (IOException e) {
+				e.printStackTrace();
+			}
+		}
+		return false;
+	}
+
+	boolean showGpx(String fileName) {
+		if (!Algorithms.isEmpty(fileName)) {
+			File f = app.getAppPath(IndexConstants.GPX_INDEX_DIR + fileName);
+			if (f.exists()) {
+				GPXFile gpx = GPXUtilities.loadGPXFile(app, f);
+				app.getSelectedGpxHelper().selectGpxFile(gpx, true, false);
+				refreshMap();
+				return true;
+			}
+		}
+		return false;
+	}
+
+	boolean hideGpx(String fileName) {
+		if (!Algorithms.isEmpty(fileName)) {
+			SelectedGpxFile selectedGpxFile = app.getSelectedGpxHelper().getSelectedFileByName(fileName);
+			if (selectedGpxFile != null) {
+				app.getSelectedGpxHelper().selectGpxFile(selectedGpxFile.getGpxFile(), false, false);
+				refreshMap();
+			}
+		}
+		return false;
+	}
+
+	boolean getActiveGpx(List<ASelectedGpxFile> files) {
+		if (files != null) {
+			List<SelectedGpxFile> selectedGpxFiles = app.getSelectedGpxHelper().getSelectedGPXFiles();
+			String gpxPath = app.getAppPath(IndexConstants.GPX_INDEX_DIR).getAbsolutePath();
+			for (SelectedGpxFile selectedGpxFile : selectedGpxFiles) {
+				String path = selectedGpxFile.getGpxFile().path;
+				if (!Algorithms.isEmpty(path)) {
+					if (path.startsWith(gpxPath)) {
+						path = path.substring(gpxPath.length() + 1);
+					}
+					files.add(new ASelectedGpxFile(path));
+				}
+			}
+			return true;
+		}
+		return false;
+	}
+
+	boolean setMapLocation(double latitude, double longitude, int zoom, boolean animated) {
+		Intent intent = new Intent();
+		intent.setAction(AIDL_SET_MAP_LOCATION);
+		intent.putExtra(AIDL_LATITUDE, latitude);
+		intent.putExtra(AIDL_LONGITUDE, longitude);
+		intent.putExtra(AIDL_ZOOM, zoom);
+		intent.putExtra(AIDL_ANIMATED, animated);
+		app.sendBroadcast(intent);
+		return true;
 	}
 }

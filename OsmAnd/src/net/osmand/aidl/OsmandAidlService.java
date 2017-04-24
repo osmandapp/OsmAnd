@@ -2,10 +2,17 @@ package net.osmand.aidl;
 
 import android.app.Service;
 import android.content.Intent;
+import android.net.Uri;
+import android.os.Build;
 import android.os.IBinder;
 import android.os.RemoteException;
 
 import net.osmand.aidl.calculateroute.CalculateRouteParams;
+import net.osmand.aidl.gpx.ASelectedGpxFile;
+import net.osmand.aidl.gpx.HideGpxParams;
+import net.osmand.aidl.gpx.ImportGpxParams;
+import net.osmand.aidl.gpx.ShowGpxParams;
+import net.osmand.aidl.map.SetMapLocationParams;
 import net.osmand.aidl.maplayer.AddMapLayerParams;
 import net.osmand.aidl.maplayer.RemoveMapLayerParams;
 import net.osmand.aidl.maplayer.UpdateMapLayerParams;
@@ -19,6 +26,9 @@ import net.osmand.aidl.mapwidget.AddMapWidgetParams;
 import net.osmand.aidl.mapwidget.RemoveMapWidgetParams;
 import net.osmand.aidl.mapwidget.UpdateMapWidgetParams;
 import net.osmand.plus.OsmandApplication;
+import net.osmand.util.Algorithms;
+
+import java.util.List;
 
 public class OsmandAidlService extends Service {
 
@@ -144,6 +154,50 @@ public class OsmandAidlService extends Service {
 			} catch (Exception e) {
 				return false;
 			}
+		}
+
+		@Override
+		public boolean importGpx(ImportGpxParams params) throws RemoteException {
+			if (params != null && !Algorithms.isEmpty(params.getDestinationPath())) {
+				if (params.getGpxFile() != null) {
+					return getApi().importGpxFromFile(params.getGpxFile(), params.getDestinationPath());
+				} else if (params.getGpxUri() != null) {
+					return getApi().importGpxFromUri(params.getGpxUri(), params.getDestinationPath());
+				} else if (params.getSourceRawData() != null) {
+					return getApi().importGpxFromData(params.getSourceRawData(), params.getDestinationPath());
+				}
+			}
+			return false;
+		}
+
+		@Override
+		public boolean showGpx(ShowGpxParams params) throws RemoteException {
+			if (params != null && params.getFileName() != null) {
+				return getApi().showGpx(params.getFileName());
+			}
+			return false;
+		}
+
+		@Override
+		public boolean hideGpx(HideGpxParams params) throws RemoteException {
+			if (params != null && params.getFileName() != null) {
+				return getApi().hideGpx(params.getFileName());
+			}
+			return false;
+		}
+
+		@Override
+		public boolean getActiveGpx(List<ASelectedGpxFile> files) throws RemoteException {
+			return getApi().getActiveGpx(files);
+		}
+
+		@Override
+		public boolean setMapLocation(SetMapLocationParams params) throws RemoteException {
+			if (params != null) {
+				return getApi().setMapLocation(params.getLatitude(), params.getLongitude(),
+						params.getZoom(), params.isAnimated());
+			}
+			return false;
 		}
 
 		@Override
