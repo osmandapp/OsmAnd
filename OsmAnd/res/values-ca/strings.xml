@@ -801,7 +801,7 @@ Els mapes de tessel·les es poden obtenir directament de proveïdors en línia, 
     <string name="reading_indexes">S\'estan llegint les dades locals…</string>
     <string name="use_online_routing_descr">Utilitzeu Internet per calcular la ruta</string>
     <string name="save_current_track">Desa la traça GPX actual</string>
-    <string name="save_track_to_gpx_descrp">Les traces es desaran automàticament a la carpeta de traces durant la navegació en format GPX</string>
+    <string name="save_track_to_gpx_descrp">Durant la navegació es desa automàticament una traça GPX a la carpeta de traces</string>
     <string name="reload_tile">Torna a carregar la tessel·la</string>
     <string name="mark_point">Objectiu</string>
     <string name="edit_filter_delete_message">El filtre {0} s\'ha eliminat</string>
