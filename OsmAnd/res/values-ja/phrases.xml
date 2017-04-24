@@ -31,7 +31,7 @@
 		<string name="poi_public_transport">公共交通機関</string>
 		<string name="poi_air_transport">空路</string>
 		<string name="poi_water_transport">水上交通(Water transport)</string>
-		<string name="poi_bicycle_transport">自転車輸送(Bicycle transport)</string>
+		<string name="poi_bicycle_transport">自転車輸送・持込(Bicycle transport)</string>
 		<string name="poi_aerialway_transport">索道・ロープウェイ(Aerialway transport)</string>
 	<string name="poi_man_made">人工物(Man made)</string>
 		<string name="poi_transport_construction">建設中の交通機関(Transport construction)</string>
@@ -94,8 +94,8 @@
 	<string name="poi_carpet">敷物店(Carpet store)</string>
 	<string name="poi_chemist">ドラッグストア・薬局(Drug store)</string>
 	<string name="poi_clothes">衣料品店(Apparel store)</string>
-	<string name="poi_clothes_children">子供用衣料品店(Children\'s apparel)</string>
-	<string name="poi_shoes">靴屋(Shoe store)</string>
+	<string name="poi_clothes_children">子供用衣料(Children\'s apparel)</string>
+	<string name="poi_shoes">靴屋</string>
 	<string name="poi_computer">パソコンショップ(Computer store)</string>
 	<string name="poi_copyshop">印刷、現像店(Copy shop)</string>
 	<string name="poi_curtain">カーテンストア(Curtain store)</string>
@@ -823,8 +823,8 @@
 
 	<string name="poi_cooling_tower">冷却塔(Cooling tower)</string>
 	<string name="poi_lighting_tower">照明塔(Lighting tower)</string>
-	<string name="poi_recycling_centre">リサイクルセンター(Type: recycling center)</string>
-	<string name="poi_recycling_container">リサイクル用コンテナ(Type: container)</string>
+	<string name="poi_recycling_centre">リサイクルセンター</string>
+	<string name="poi_recycling_container">コンテナ</string>
 	<string name="poi_recycling_glass">ガラス製品(Glass)</string>
 	<string name="poi_recycling_paper">紙類(Paper)</string>
 	<string name="poi_recycling_clothes">衣類(Clothes)</string>
@@ -845,7 +845,7 @@
 	<string name="poi_recycling_small_appliances">小型家電製品(Small appliances)</string>
 	<string name="poi_recycling_wood">木材(Wood)</string>
 	<string name="poi_recycling_books">書籍(Books)</string>
-	<string name="poi_recycling_shoes">靴(Shoes)</string>
+	<string name="poi_recycling_shoes">靴</string>
 	<string name="poi_recycling_aluminium">アルミニウム(Aluminium)</string>
 	<string name="poi_recycling_organic">生ごみ(Organic)</string>
 	<string name="poi_recycling_beverage_cartons">飲食物の紙パック(Beverage cartons)</string>
@@ -1126,8 +1126,8 @@
 	<string name="poi_access_delivery">配達時のみ通行可(Delivery access)</string>
 	<string name="poi_access_agricultural">農業目的のみ通行可(Agricultural access)</string>
 
-	<string name="poi_fuel_type">燃料種(Type)</string>
-	<string name="poi_fuel_avia_type">航空燃料種(Type)</string>
+	<string name="poi_fuel_type">取り扱う燃料の種類</string>
+	<string name="poi_fuel_avia_type">取り扱う航空燃料の種類(Type)</string>
 	<string name="poi_payment_type">対応支払い方法(Payment type)</string>
 	<string name="poi_payment_fuel_type">燃料カード(Fuel cards)</string>
 	<string name="poi_additional_type">追加(Additional)</string>
@@ -1142,7 +1142,7 @@
 	<string name="poi_automated">自動化(Automated)</string>
 	<string name="poi_subway_station_filter">地下鉄駅(Subway station)</string>
 	<string name="poi_ferry_terminal_cargo">貨物(Cargo)</string>
-	<string name="poi_aerialway_bicycle">自転車輸送(Bicycle transportation)</string>
+	<string name="poi_aerialway_bicycle">自転車輸送・持込(Bicycle transportation)</string>
 	<string name="poi_fee">料金(Fee)</string>
 	<string name="poi_site_type_megalith">巨石建造物(Megalith)</string>
 	<string name="poi_site_type_tumulus">古墳(Tumulus)</string>
@@ -1185,7 +1185,7 @@
 	<string name="poi_nudism_customary">通例(Customary)</string>
 	<string name="poi_nudism_permissive">許容(Permissive)</string>
 
-	<string name="poi_gambling_type">賭博種(Type)</string>
+	<string name="poi_gambling_type">賭博の種類(Type)</string>
 	<string name="poi_gambling_lottery">宝くじ(Lottery)</string>
 	<string name="poi_gambling_pachinko">パチンコ(Pachinko)</string>
 	<string name="poi_gambling_slot_machines">スロットマシーン(Slot machines)</string>
@@ -1288,7 +1288,7 @@
 	<string name="poi_information_tactile_map">触地図(Tactile map)</string>
 	<string name="poi_information_board">看板(Board)</string>
 	<string name="poi_information_hikingmap">ハイキングマップ(Hiking map)</string>
-	<string name="poi_information_type">提供情報種別(Type)</string>
+	<string name="poi_information_type">案内方法の種類</string>
 	<string name="poi_information_guidepost">道標(Guidepost)</string>
 	<string name="poi_information_map">地図(Map)</string>
 	<string name="poi_information_office">事務所(Office)</string>
@@ -1664,7 +1664,7 @@
 	<string name="poi_social_facility_for_diseased">特定疾患者(Diseased)</string>
 	<string name="poi_social_facility_for_child_juvenile">子供;少年(Child;juvenile)</string>
 
-	<string name="poi_free_flying_characteristic">対応種(Characteristic)</string>
+	<string name="poi_free_flying_characteristic">スカイスポーツの対応施設(Characteristic)</string>
 	<string name="poi_seasonal">営業期(Seasonal)</string>
 	<string name="poi_drive_in">ドライブイン(Drive in)</string>
 	<string name="poi_drive_in_no">無し</string>
@@ -1933,10 +1933,10 @@
 	<string name="poi_animal_training_horse">ホーストレーニング</string>
 
 	<string name="poi_animal_training_dog">ドッグトレーニング</string>
-	<string name="poi_beach_surface_type">海岸面</string>
+	<string name="poi_beach_surface_type">浜の表面</string>
 	<string name="poi_beach_sand">砂</string>
-	<string name="poi_beach_shingle">小石、砂利</string>
-	<string name="poi_beach_rocky">岩場</string>
+	<string name="poi_beach_shingle">砂利</string>
+	<string name="poi_beach_rocky">丸石</string>
 
 	<string name="poi_beauty_salon_service">美容サービス</string>
 	<string name="poi_city_capital">首都検索</string>
@@ -1961,7 +1961,7 @@
 	<string name="poi_clothes_underwear">下着</string>
 	<string name="poi_clothes_men">紳士服</string>
 	<string name="poi_clothes_wedding">ウェディングドレス</string>
-	<string name="poi_clothes_sports">スポーツ用</string>
+	<string name="poi_clothes_sports">スポーツウェア</string>
 	<string name="poi_clothes_babies">ベビー服・子供服</string>
 	<string name="poi_clothes_denim">デニム製品</string>
 	<string name="poi_clothes_workwear">作業着</string>
@@ -2119,4 +2119,30 @@
 	<string name="poi_full_service_yes">係員付きフルサービス(Full service)</string>
 	<string name="poi_service_bicycle_charging_yes">電動アシスト自転車充電可</string>
 	<string name="poi_service_bicycle_charging_no">電動アシスト自転車充電不可</string>
+	<string name="poi_cuisine_suki">タイスキ・スキーヤキー(Suki)</string>
+	<string name="poi_observatory_type_gravitational">重力観測</string>
+
+	<string name="poi_observatory_type_meteorological">気象観測</string>
+	<string name="poi_recycling_accepted_waste">受け入れ廃棄物</string>
+	<string name="poi_recycling_type">リサイクル品受付方法</string>
+	<string name="poi_shelter_type">シェルタータイプ</string>
+	<string name="poi_shelter_type_basic_hut">避難小屋</string>
+	<string name="poi_shelter_type_lean_to">差し掛け小屋</string>
+	<string name="poi_shelter_type_picnic_shelter">東屋</string>
+	<string name="poi_shelter_type_public_transport">公共交通機関の待合所</string>
+	<string name="poi_shelter_type_weather_shelter">小さな避難小屋</string>
+	<string name="poi_shelter_type_rock_shelter">ロックシェルター(浅い洞窟)</string>
+	<string name="poi_shelter_type_sun_shelter">日除け</string>
+	<string name="poi_shelter_type_field_shelter">動物向け避難設備</string>
+	<string name="poi_shelter_type_tent">テント</string>
+	<string name="poi_shelter_type_abandoned">放棄された避難所</string>
+
+	<string name="poi_shelter_type_wildlife_hide">野生生物の隠れ家</string>
+	<string name="poi_shelter_type_building">建造物（Building）</string>
+	<string name="poi_shoes_children">子供向け</string>
+	<string name="poi_shoes_women">婦人向け</string>
+	<string name="poi_shoes_sport">スポーツ用</string>
+	<string name="poi_shoes_men">紳士向け</string>
+	<string name="poi_shoes_orthopedic">矯正用</string>
+
 	</resources>
