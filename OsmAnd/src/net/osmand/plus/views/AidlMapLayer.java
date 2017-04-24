@@ -4,19 +4,23 @@ import android.content.Context;
 import android.graphics.Canvas;
 import android.graphics.Color;
 import android.graphics.Paint;
+import android.graphics.PointF;
 import android.util.DisplayMetrics;
 import android.view.WindowManager;
 
-import net.osmand.aidl.ALatLon;
+import net.osmand.aidl.map.ALatLon;
 import net.osmand.aidl.maplayer.AMapLayer;
 import net.osmand.aidl.maplayer.point.AMapPoint;
+import net.osmand.data.LatLon;
+import net.osmand.data.PointDescription;
 import net.osmand.data.RotatedTileBox;
 import net.osmand.plus.R;
 import net.osmand.plus.activities.MapActivity;
+import net.osmand.plus.views.ContextMenuLayer.IContextMenuProvider;
 
 import java.util.List;
 
-public class AidlMapLayer extends OsmandMapLayer {
+public class AidlMapLayer extends OsmandMapLayer implements IContextMenuProvider {
 	private static int POINT_OUTER_COLOR = 0x88555555;
 	private static int PAINT_TEXT_ICON_COLOR = Color.BLACK;
 
@@ -106,6 +110,67 @@ public class AidlMapLayer extends OsmandMapLayer {
 	public void refresh() {
 		if (view != null) {
 			view.refreshMap();
+		}
+	}
+
+	@Override
+	public boolean disableSingleTap() {
+		return false;
+	}
+
+	@Override
+	public boolean disableLongPressOnMap() {
+		return false;
+	}
+
+	@Override
+	public boolean isObjectClickable(Object o) {
+		return o instanceof AMapPoint;
+	}
+
+	@Override
+	public void collectObjectsFromPoint(PointF point, RotatedTileBox tileBox, List<Object> o) {
+		getFromPoint(tileBox, point, o);
+	}
+
+	@Override
+	public LatLon getObjectLocation(Object o) {
+		if (o instanceof AMapPoint) {
+			ALatLon loc = ((AMapPoint) o).getLocation();
+			if (loc != null) {
+				return new LatLon(loc.getLatitude(), loc.getLongitude());
+			}
+		}
+		return null;
+	}
+
+	@Override
+	public PointDescription getObjectName(Object o) {
+		if (o instanceof AMapPoint) {
+			return new PointDescription(PointDescription.POINT_TYPE_MARKER, ((AMapPoint) o).getFullName());
+		} else {
+			return null;
+		}
+	}
+
+	private void getFromPoint(RotatedTileBox tb, PointF point, List<? super AMapPoint> points) {
+		if (view != null) {
+			int ex = (int) point.x;
+			int ey = (int) point.y;
+			final int rp = getRadiusPoi(tb);
+			int compare = rp;
+			int radius = rp * 3 / 2;
+			for (AMapPoint p : aidlLayer.getPoints()) {
+				ALatLon position = p.getLocation();
+				if (position != null) {
+					int x = (int) tb.getPixXFromLatLon(position.getLatitude(), position.getLongitude());
+					int y = (int) tb.getPixYFromLatLon(position.getLatitude(), position.getLongitude());
+					if (Math.abs(x - ex) <= compare && Math.abs(y - ey) <= compare) {
+						compare = radius;
+						points.add(p);
+					}
+				}
+			}
 		}
 	}
 }

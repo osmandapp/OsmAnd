@@ -1,4 +1,4 @@
-package net.osmand.aidl;
+package net.osmand.aidl.map;
 
 import android.os.Parcel;
 import android.os.Parcelable;

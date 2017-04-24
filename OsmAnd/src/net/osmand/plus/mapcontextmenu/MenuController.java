@@ -8,6 +8,7 @@ import android.widget.LinearLayout;
 
 import net.osmand.IndexConstants;
 import net.osmand.NativeLibrary.RenderedObject;
+import net.osmand.aidl.maplayer.point.AMapPoint;
 import net.osmand.binary.BinaryMapDataObject;
 import net.osmand.binary.BinaryMapIndexReader.TagValuePair;
 import net.osmand.binary.RouteDataObject;
@@ -33,6 +34,7 @@ import net.osmand.plus.download.DownloadIndexesThread;
 import net.osmand.plus.download.DownloadValidationManager;
 import net.osmand.plus.download.IndexItem;
 import net.osmand.plus.helpers.SearchHistoryHelper;
+import net.osmand.plus.mapcontextmenu.controllers.AMapPointMenuController;
 import net.osmand.plus.mapcontextmenu.controllers.AmenityMenuController;
 import net.osmand.plus.mapcontextmenu.controllers.FavouritePointMenuController;
 import net.osmand.plus.mapcontextmenu.controllers.GpxItemMenuController;
@@ -150,6 +152,8 @@ public abstract class MenuController extends BaseMenuController {
 				menuController = new TransportRouteController(mapActivity, pointDescription, (TransportStopRoute) object);
 			} else if (object instanceof TransportStop) {
 				menuController = new TransportStopController(mapActivity, pointDescription, (TransportStop) object);
+			} else if (object instanceof AMapPoint) {
+				menuController = new AMapPointMenuController(mapActivity, pointDescription, (AMapPoint) object);
 			} else if (object instanceof LatLon) {
 				if (pointDescription.isParking()) {
 					menuController = new ParkingPositionMenuController(mapActivity, pointDescription);
