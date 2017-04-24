@@ -2218,7 +2218,7 @@ Dĺžka %2$s</string>
     <string name="number_of_recipients">Počet príjemcov</string>
     <string name="osm_user_stat">Počet úprav %1$s, pozícia %2$s, celkový počet úprav %3$s</string>
     <string name="osm_editors_ranking">Pozícia medzi editormi OSM</string>
-    <string name="osm_live_subscription">Registrácia v OSM Naživo</string>
+    <string name="osm_live_subscription">Predplatné v OSM Naživo</string>
     <string name="osm_live_subscribe_btn">Registrovať</string>
     <string name="osm_live_email_desc">Potrebujeme to na poskytnutie informácií o príspevkoch</string>
     <string name="osm_live_user_public_name">Verejné meno</string>
@@ -2297,9 +2297,24 @@ Ak potrebuje pomoc s aplikáciou OsmAnd, kontaktuje podporu: support@osmand.net.
     <string name="no_waypoints_found">Nenašli sa žiadne body cesty</string>
     <string name="report">Hlásenie</string>
     <string name="storage_permission_restart_is_required">Aplikácia teraz má povolenie zapisovať do externého úložiska. Je potrebný reštart aplikácie.</string>
-    <string name="release_2_3">" • OSM Naživo. Podporte tvorcov mapy a vývojárov a získajte aktualizácie máp každú hodinu.
-\n\n • Mapové značky. Nový spôsob rýchleho výberu miest na mape.\n\n • Detailnejšie mapy z OSM s ikonami ciest pre príslušné krajiny a nové objekty na mape.\n\n • Vylepšený vzhľad a použitie tvorby trasy.
-\n\n • Vylepšenia v menu mapy, ako napríklad hľadanie adresy podľa kontextu.\n\n a ďalšie… "</string>
+    <string name="release_2_3">"
+ • OSM Naživo. Podporte tvorcov mapy a vývojárov a získajte aktualizácie máp každú hodinu.
+
+
+ • Mapové značky. Nový spôsob rýchleho výberu miest na mape.
+
+
+ • Detailnejšie mapy z OSM s ikonami ciest pre príslušné krajiny a nové objekty na mape.
+
+
+ • Vylepšený vzhľad a použitie tvorby trasy.
+
+
+ • Vylepšenia v menu mapy, ako napríklad hľadanie adresy podľa kontextu.
+
+
+ a ďalšie…
+ "</string>
     <string name="full_report">Plné hlásenie</string>
     <string name="open_street_map_login_and_pass">Meno a heslo pre OpenStreetMap</string>
     <string name="file_name_containes_illegal_char">Názov súboru obsahuje nepovolený znak</string>
@@ -2499,7 +2514,7 @@ Ak potrebuje pomoc s aplikáciou OsmAnd, kontaktuje podporu: support@osmand.net.
     <string name="route_roundabout_short">Použite výjazd %1$d a pokračujte</string>
     <string name="upload_poi">Odoslať POI</string>
     <string name="search_map_hint">Hľadať mesto alebo región</string>
-    <string name="wiki_around">Blízke články Wikipedie</string>
+    <string name="wiki_around">Články Wikipedie v okolí</string>
     <string name="legacy_search">Staršie vyhľadávanie</string>
     <string name="show_legacy_search">Zobraziť starší spôsob vyhľadávania</string>
     <string name="show_legacy_search_desc">Zapnúť staršie vyhľadávanie v úvodnom paneli</string>
