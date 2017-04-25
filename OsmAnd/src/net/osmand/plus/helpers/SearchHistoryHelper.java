@@ -40,10 +40,10 @@ public class SearchHistoryHelper {
 	};
 	
 	private static Comparator<HistoryEntry> historyEntryComparator = new Comparator<HistoryEntry>() {
-
+		long time = System.currentTimeMillis();
+		
 		@Override
 		public int compare(HistoryEntry lhs, HistoryEntry rhs) {
-			long time = System.currentTimeMillis();
 			double l = lhs.getRank(time);
 			double r = rhs.getRank(time);
 			return -Double.compare(l, r);
