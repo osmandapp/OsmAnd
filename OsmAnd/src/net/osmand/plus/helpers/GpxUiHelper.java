@@ -108,6 +108,7 @@ import static net.osmand.plus.OsmAndFormatter.YARDS_IN_ONE_METER;
 import static net.osmand.plus.dialogs.ConfigureMapMenu.CURRENT_TRACK_COLOR_ATTR;
 import static net.osmand.plus.dialogs.ConfigureMapMenu.CURRENT_TRACK_WIDTH_ATTR;
 import static net.osmand.plus.download.DownloadActivity.formatMb;
+import static net.osmand.plus.download.DownloadActivity.formatKb;
 
 public class GpxUiHelper {
 
@@ -727,10 +728,10 @@ public class GpxUiHelper {
 			String date = "";
 			String size = "";
 			if (info.getFileSize() >= 0) {
-				if (info.getFileSize() > 100) {
-					size = formatMb.format(new Object[]{(float) info.getFileSize() / (1 << 10)});
+				if (info.getFileSize() > (100 * (1 << 10))) {
+					size = formatMb.format(new Object[]{(float) info.getFileSize() / (1 << 20)});
 				} else {
-					size = info.getFileSize() + " kB";
+					size = formatKb.format(new Object[]{(float) info.getFileSize() / (1 << 10)});
 				}
 			}
 			DateFormat df = app.getResourceManager().getDateFormat();
