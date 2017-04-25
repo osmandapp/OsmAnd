@@ -104,6 +104,7 @@ public class DownloadActivity extends AbstractDownloadActivity implements Downlo
 	public static final String UPDATES_TAB = "updates";
 	public static final MessageFormat formatGb = new MessageFormat("{0, number,#.##} GB", Locale.US);
 	public static final MessageFormat formatMb = new MessageFormat("{0, number,##.#} MB", Locale.US);
+	public static final MessageFormat formatKb = new MessageFormat("{0, number,##.#} kB", Locale.US);
 	private static boolean SUGGESTED_TO_DOWNLOAD_BASEMAP = false;
 
 	private BannerAndDownloadFreeVersion visibleBanner;
