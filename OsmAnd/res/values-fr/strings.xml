@@ -549,7 +549,7 @@ Au-delà la navigation bascule automatiquement sur le service en ligne CloudMade
     <string name="save_current_track">Enregistrer la trace GPX</string>
     <string name="save_track_interval_descr">Sélectionnez l\'intervalle d\'enregistrement de la trace pendant la navigation</string>
     <string name="save_track_interval">Intervalle d\'enregistrement pendant la navigation</string>
-    <string name="save_track_to_gpx_descrp">Les traces seront enregistrées dans le dossier des traces durant l\'itinéraire</string>
+    <string name="save_track_to_gpx_descrp">Une trace GPX est enregistrée automatiquement dans le dossier des traces durant l\'itinéraire</string>
     <string name="save_track_to_gpx">Enregistrer automatiquement la trace en cours de navigation</string>
     <string name="update_tile">Mettre à jour la carte</string>
     <string name="reload_tile">Recharger carreau</string>
