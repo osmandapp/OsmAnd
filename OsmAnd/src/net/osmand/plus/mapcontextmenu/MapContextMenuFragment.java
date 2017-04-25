@@ -708,23 +708,26 @@ public class MapContextMenuFragment extends Fragment implements DownloadEvents {
 	}
 
 	private void buildHeader() {
-		IconsCache iconsCache = getMyApplication().getIconsCache();
+		OsmandApplication app = getMyApplication();
+		if (app != null) {
+			IconsCache iconsCache = app.getIconsCache();
 
-		final View iconLayout = view.findViewById(R.id.context_menu_icon_layout);
-		final ImageView iconView = (ImageView) view.findViewById(R.id.context_menu_icon_view);
-		Drawable icon = menu.getLeftIcon();
-		int iconId = menu.getLeftIconId();
-		if (icon != null) {
-			iconView.setImageDrawable(icon);
-			iconLayout.setVisibility(View.VISIBLE);
-		} else if (iconId != 0) {
-			iconView.setImageDrawable(iconsCache.getIcon(iconId,
-					!nightMode ? R.color.osmand_orange : R.color.osmand_orange_dark));
-			iconLayout.setVisibility(View.VISIBLE);
-		} else {
-			iconLayout.setVisibility(View.GONE);
+			final View iconLayout = view.findViewById(R.id.context_menu_icon_layout);
+			final ImageView iconView = (ImageView) view.findViewById(R.id.context_menu_icon_view);
+			Drawable icon = menu.getLeftIcon();
+			int iconId = menu.getLeftIconId();
+			if (icon != null) {
+				iconView.setImageDrawable(icon);
+				iconLayout.setVisibility(View.VISIBLE);
+			} else if (iconId != 0) {
+				iconView.setImageDrawable(iconsCache.getIcon(iconId,
+						!nightMode ? R.color.osmand_orange : R.color.osmand_orange_dark));
+				iconLayout.setVisibility(View.VISIBLE);
+			} else {
+				iconLayout.setVisibility(View.GONE);
+			}
+			setAddressLocation();
 		}
-		setAddressLocation();
 	}
 
 	private void buildBottomView() {
@@ -785,19 +788,22 @@ public class MapContextMenuFragment extends Fragment implements DownloadEvents {
 	}
 
 	public void rebuildMenu() {
-		IconsCache iconsCache = getMyApplication().getIconsCache();
-		final ImageButton buttonFavorite = (ImageButton) view.findViewById(R.id.context_menu_fav_button);
-		buttonFavorite.setImageDrawable(iconsCache.getIcon(menu.getFavActionIconId(),
-				!nightMode ? R.color.icon_color : R.color.dashboard_subheader_text_dark));
-		buttonFavorite.setContentDescription(getString(menu.getFavActionStringId()));
+		OsmandApplication app = getMyApplication();
+		if (app != null) {
+			IconsCache iconsCache = app.getIconsCache();
+			final ImageButton buttonFavorite = (ImageButton) view.findViewById(R.id.context_menu_fav_button);
+			buttonFavorite.setImageDrawable(iconsCache.getIcon(menu.getFavActionIconId(),
+					!nightMode ? R.color.icon_color : R.color.dashboard_subheader_text_dark));
+			buttonFavorite.setContentDescription(getString(menu.getFavActionStringId()));
 
-		buildHeader();
+			buildHeader();
 
-		LinearLayout bottomLayout = (LinearLayout) view.findViewById(R.id.context_menu_bottom_view);
-		bottomLayout.removeAllViews();
-		buildBottomView();
+			LinearLayout bottomLayout = (LinearLayout) view.findViewById(R.id.context_menu_bottom_view);
+			bottomLayout.removeAllViews();
+			buildBottomView();
 
-		runLayoutListener();
+			runLayoutListener();
+		}
 	}
 
 	@TargetApi(Build.VERSION_CODES.JELLY_BEAN)
@@ -961,28 +967,34 @@ public class MapContextMenuFragment extends Fragment implements DownloadEvents {
 	}
 
 	private void updateCompassVisibility() {
-		View compassView = view.findViewById(R.id.compass_layout);
-		Location ll = getMyApplication().getLocationProvider().getLastKnownLocation();
-		boolean gpsFixed = ll != null && System.currentTimeMillis() - ll.getTime() < 1000 * 60 * 60 * 20;
-		if (gpsFixed && menu.displayDistanceDirection() && menu.getCurrentMenuState() != MenuState.FULL_SCREEN) {
-			updateDistanceDirection();
-			compassView.setVisibility(View.VISIBLE);
-		} else {
-			if (!menu.displayDistanceDirection()) {
-				compassView.setVisibility(View.GONE);
+		OsmandApplication app = getMyApplication();
+		if (app != null) {
+			View compassView = view.findViewById(R.id.compass_layout);
+			Location ll = app.getLocationProvider().getLastKnownLocation();
+			boolean gpsFixed = ll != null && System.currentTimeMillis() - ll.getTime() < 1000 * 60 * 60 * 20;
+			if (gpsFixed && menu.displayDistanceDirection() && menu.getCurrentMenuState() != MenuState.FULL_SCREEN) {
+				updateDistanceDirection();
+				compassView.setVisibility(View.VISIBLE);
 			} else {
-				compassView.setVisibility(View.INVISIBLE);
+				if (!menu.displayDistanceDirection()) {
+					compassView.setVisibility(View.GONE);
+				} else {
+					compassView.setVisibility(View.INVISIBLE);
+				}
 			}
 		}
 	}
 
 	private void updateDistanceDirection() {
-		TextView distanceText = (TextView) view.findViewById(R.id.distance);
-		ImageView direction = (ImageView) view.findViewById(R.id.direction);
-
-		float myHeading = menu.getHeading() == null ? 0f : menu.getHeading();
-		DashLocationFragment.updateLocationView(false, menu.getMyLocation(), myHeading, direction, distanceText,
-				menu.getLatLon().getLatitude(), menu.getLatLon().getLongitude(), screenOrientation, getMyApplication(), getActivity());
+		OsmandApplication app = getMyApplication();
+		FragmentActivity activity = getActivity();
+		if (app != null && activity != null) {
+			TextView distanceText = (TextView) view.findViewById(R.id.distance);
+			ImageView direction = (ImageView) view.findViewById(R.id.direction);
+			float myHeading = menu.getHeading() == null ? 0f : menu.getHeading();
+			DashLocationFragment.updateLocationView(false, menu.getMyLocation(), myHeading, direction, distanceText,
+					menu.getLatLon().getLatitude(), menu.getLatLon().getLongitude(), screenOrientation, app, activity);
+		}
 	}
 
 	private int getPosY() {
