@@ -44,7 +44,7 @@
 	<string name="poi_healthcare">健康(Healthcare)</string>
 	<string name="poi_office">オフィス(Office)</string>
 	<string name="poi_sport">スポーツ(Sport)</string>
-	<string name="poi_tourism">観光(Tourism)</string>
+	<string name="poi_tourism">観光者向け施設(Tourism)</string>
 		<string name="poi_sightseeing">観光(Sightseeing)</string>
 		<string name="poi_accomodation">宿泊施設(Accommodation)</string>
 		<string name="poi_internet_access">インターネット有り(Internet access)</string>
@@ -1003,7 +1003,7 @@
 	<string name="poi_wiki_lang_de">ドイツ語 wiki(German wiki)</string>
 	<string name="poi_wiki_lang_el">ギリシャ語 wiki(Greek wiki)</string>
 	<string name="poi_wiki_lang_et">エストニア語 wiki(Estonian wiki)</string>
-	<string name="poi_wiki_lang_es">スペイン wiki(Spanish wiki)</string>
+	<string name="poi_wiki_lang_es">スペイン語 wiki(Spanish wiki)</string>
 	<string name="poi_wiki_lang_fi">フィンランド語 wiki(Finnish wiki)</string>
 	<string name="poi_wiki_lang_fr">フランス語 wiki(French wiki)</string>
 	<string name="poi_wiki_lang_gl">ガリシア語 wiki(Galician wiki)</string>
@@ -1113,9 +1113,9 @@
 	<string name="poi_crossing_uncontrolled">信号機なし横断歩道(Uncontrolled)</string>
 	<string name="poi_crossing_unmarked">信号及び表示なし横断歩道(Unmarked)</string>
 	<string name="poi_start_date">完成日(Start date)</string>
-	<string name="poi_wheelchair_yes">可(Yes)</string>
-	<string name="poi_wheelchair_no">不可(No)</string>
-	<string name="poi_wheelchair_limited">制限有り(Limited)</string>
+	<string name="poi_wheelchair_yes">可・問題なし</string>
+	<string name="poi_wheelchair_no">不可</string>
+	<string name="poi_wheelchair_limited">一部なら可・要介助</string>
 	<string name="poi_wholesale">卸売り(Wholesale)</string>
 
 	<string name="poi_access_private">要通行許可(Private access)</string>
@@ -1136,7 +1136,7 @@
 	<string name="poi_bicycle_service">自転車サービス(Bicycle service)</string>
 	<string name="poi_fire_hydrant_water_source">水源(Water Source)</string>
 	<string name="poi_payment_toll_type">支払いの種類(Payment type)</string>
-	<string name="poi_traffic_signals_sound">音声(Sound)</string>
+	<string name="poi_traffic_signals_sound">視覚障害者用信号機音声</string>
 	<string name="poi_tactile_paving">視覚障害者誘導用ブロック(Tactile paving)</string>
 	<string name="poi_self_service">セルフサービス(Self service)</string>
 	<string name="poi_automated">自動化(Automated)</string>
@@ -1156,8 +1156,8 @@
 	<string name="poi_internet_access_type_wlan">無線LAN有り(Wi-Fi)</string>
 	<string name="poi_internet_access_type_terminal">接続用PC有り(Terminal)</string>
 	<string name="poi_internet_access_type_wired">有線LAN有り(Wired)</string>
-	<string name="poi_wheelchair_accessibility">車椅子補助(Wheelchair accessibility)</string>
-	<string name="poi_wheelchair_designated">指定(Designated)</string>
+	<string name="poi_wheelchair_accessibility">車椅子用設備の有無(Wheelchair accessibility)</string>
+	<string name="poi_wheelchair_designated">専用通路、トイレなど完備</string>
 	<string name="poi_payment_coins_50c12">硬貨_50セント、1ユーロ、2ユーロ硬貨(50c, 1€, and 2€ coins)</string>
 	<string name="poi_payment_cash_yes">現金(Cash)</string>
 	<string name="poi_payment_ep_cash_yes">キャッシュカード(ゲルトカルテ)(Cash card (Geldkarte))</string>
@@ -1178,10 +1178,10 @@
 	<string name="poi_free_flying_guest_guidelines_yes">ゲストガイドライン有り(Guest guidelines: yes)</string>
 	<string name="poi_free_flying_guest_guidelines_no">ゲストガイドライン無し(Guest guidelines: no)</string>
 
-	<string name="poi_nudism">裸体主義(Nudism)</string>
+	<string name="poi_nudism">裸体主義実践の可否(Nudism)</string>
 	<string name="poi_nudism_yes">許可(Allowed)</string>
 	<string name="poi_nudism_no">禁止(Prohibited)</string>
-	<string name="poi_nudism_obligatory">義務(Obligatory)</string>
+	<string name="poi_nudism_obligatory">義務・必須(Obligatory)</string>
 	<string name="poi_nudism_customary">通例(Customary)</string>
 	<string name="poi_nudism_permissive">許容(Permissive)</string>
 
@@ -1238,8 +1238,8 @@
 
 	<string name="poi_toilets_yes">有り(Yes)</string>
 	<string name="poi_toilets_no">無し(Without toilets)</string>
-	<string name="poi_toilets_wheelchair_yes">車椅子用トイレ有り(Access to the toilets for wheelchairs: yes)</string>
-	<string name="poi_toilets_wheelchair_no">車椅子用トイレ無し(Access to the toilets for wheelchairs: no)</string>
+	<string name="poi_toilets_wheelchair_yes">車椅子用トイレ有り</string>
+	<string name="poi_toilets_wheelchair_no">車椅子用トイレ無し</string>
 	<string name="poi_toilets_access_customers">来客用トイレ(Toilets access: customers)</string>
 	<string name="poi_toilets_access_permissive">共用トイレ(Toilets access: permissive)</string>
 	<string name="poi_toilets_access_community">従業員用トイレ(Toilets access: community)</string>
@@ -1256,7 +1256,7 @@
 	<string name="poi_caravans">キャンピングカー・トレーラー(Caravans)</string>
 	<string name="poi_caravans_yes">可(Yes)</string>
 	<string name="poi_caravans_no">キャンピングカー:不可(Caravans: no)</string>
-	<string name="poi_clock_option">時計オプション(Additional)</string>
+	<string name="poi_clock_option">街頭時計の付属表示(Additional)</string>
 	<string name="poi_barometer_yes">気圧計・晴雨計(Barometer)</string>
 	<string name="poi_barometer_no">気圧計:無し(Barometer: no)</string>
 	<string name="poi_date_yes">日付表示(Date display)</string>
@@ -1565,7 +1565,7 @@
 	<string name="poi_takeaway_no">持ち帰り無し(No takeaway)</string>
 	<string name="poi_takeaway_only">テイクアウト・持ち帰りのみ(Takeaway only)</string>
 
-	<string name="poi_archaeological_site_type">遺跡種(Type)</string>
+	<string name="poi_archaeological_site_type">遺跡の種類</string>
 	<string name="poi_health_specialty">医療機関(Health specialty)</string>
 	<string name="poi_health_specialty_general_yes">総合診療医(General practitioner)</string>
 	<string name="poi_health_specialty_ophthalmology_yes">眼科(Ophthalmology)</string>
@@ -1664,7 +1664,7 @@
 	<string name="poi_social_facility_for_diseased">特定疾患者(Diseased)</string>
 	<string name="poi_social_facility_for_child_juvenile">子供;少年(Child;juvenile)</string>
 
-	<string name="poi_free_flying_characteristic">スカイスポーツの対応施設(Characteristic)</string>
+	<string name="poi_free_flying_characteristic">スカイスポーツの対応要素(Characteristic)</string>
 	<string name="poi_seasonal">営業期(Seasonal)</string>
 	<string name="poi_drive_in">ドライブイン(Drive in)</string>
 	<string name="poi_drive_in_no">無し</string>
@@ -1933,7 +1933,7 @@
 	<string name="poi_animal_training_horse">ホーストレーニング</string>
 
 	<string name="poi_animal_training_dog">ドッグトレーニング</string>
-	<string name="poi_beach_surface_type">浜の表面</string>
+	<string name="poi_beach_surface_type">浜(海岸)の表面</string>
 	<string name="poi_beach_sand">砂</string>
 	<string name="poi_beach_shingle">砂利</string>
 	<string name="poi_beach_rocky">丸石</string>
@@ -1956,7 +1956,7 @@
 
 	<string name="poi_water_tank">非常用貯水槽</string>
 
-	<string name="poi_clothes_type">衣服種</string>
+	<string name="poi_clothes_type">衣服の種類</string>
 	<string name="poi_clothes_women">婦人服</string>
 	<string name="poi_clothes_underwear">下着</string>
 	<string name="poi_clothes_men">紳士服</string>
@@ -2125,7 +2125,7 @@
 	<string name="poi_observatory_type_meteorological">気象観測</string>
 	<string name="poi_recycling_accepted_waste">受け入れ廃棄物</string>
 	<string name="poi_recycling_type">リサイクル品受付方法</string>
-	<string name="poi_shelter_type">シェルタータイプ</string>
+	<string name="poi_shelter_type">日除け、雨よけ小屋の種類</string>
 	<string name="poi_shelter_type_basic_hut">避難小屋</string>
 	<string name="poi_shelter_type_lean_to">差し掛け小屋</string>
 	<string name="poi_shelter_type_picnic_shelter">東屋</string>
@@ -2144,5 +2144,35 @@
 	<string name="poi_shoes_sport">スポーツ用</string>
 	<string name="poi_shoes_men">紳士向け</string>
 	<string name="poi_shoes_orthopedic">矯正用</string>
+
+	<string name="poi_wheelchair_description">車椅子利用者への説明</string>
+	<string name="poi_ramp_wheelchair_yes">車椅子用スロープ有り</string>
+	<string name="poi_ramp_wheelchair_no">車椅子用スロープ無し</string>
+	<string name="poi_aerialway_heating_yes">暖房有り</string>
+	<string name="poi_office_forestry">森林管理局(Forestry office)</string>
+	<string name="poi_office_camping">キャンプ管理事務所(Camping office)</string>
+	<string name="poi_office_physician">内科診療所(Physician office)</string>
+	<string name="poi_office_therapist">理学療法診療所・リハビリ科(Therapist office)</string>
+	<string name="poi_office_healer">治療士事務所(Healer office)</string>
+	<string name="poi_office_psychologist">心理学科・研究所(Psychologist office)</string>
+	<string name="poi_office_nursing_service">介護サービス</string>
+	<string name="poi_office_midwife">助産所・助産院(Midwife office)</string>
+
+	<string name="poi_consulting">コンサルタント事務所(Consulting office)</string>
+	<string name="poi_cooperative">協同組合事務所(Cooperative office)</string>
+	<string name="poi_energy_supplier">電力会社事務所(Energy supplier office)</string>
+
+	<string name="poi_guide">案内所</string>
+	<string name="poi_logistics">物流事務所</string>
+	<string name="poi_parish">教区事務所</string>
+	<string name="poi_publisher">出版社</string>
+
+	<string name="poi_quango">特殊法人(Quango)</string>
+	<string name="poi_animal_boarding">動物飼養施設・ペットホテル</string>
+	<string name="poi_animal_keeping">動物飼養地・放牧地(Animal keeping)</string>
+	<string name="poi_animal_keeping_horse">飼養:馬</string>
+	<string name="poi_animal_keeping_sheep">飼養:羊</string>
+	<string name="poi_animal_shelter">動物保護施設</string>
+	<string name="poi_coworking_space">コワーキングスペース・労働用共有空間(Coworking space)</string>
 
 	</resources>
