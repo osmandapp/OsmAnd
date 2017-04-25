@@ -3401,4 +3401,8 @@
 	<string name="poi_electronics_repair_phone">Рамонт электронікі: тэлефоны</string>
 	<string name="poi_electronics_repair_tv">Рамонт электронікі: тэлевізары</string>
 
+<string name="poi_resort_kids_camp">Дзіцячы лагер</string>
+	<string name="poi_music_school">Музычная школа</string>
+	<string name="poi_language_school">Школа моў</string>
+
 </resources>
