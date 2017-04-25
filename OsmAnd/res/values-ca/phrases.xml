@@ -3086,4 +3086,12 @@
 	<string name="poi_product_brick">Producte: maons</string>
 	<string name="poi_product_quicklime">Producte: calç viva</string>
 	<string name="poi_product_lime">Producte: calç</string>
+	<string name="poi_support_pole">Subjecció: asta</string>
+	<string name="poi_support_wall_mounted">Subjecció: paret</string>
+	<string name="poi_support_tree">Subjecció: arbre</string>
+	<string name="poi_support_pedestal">Subjecció: pedestal</string>
+	<string name="poi_support_ground">Subjecció: sòl</string>
+	<string name="poi_support_suspended">Subjecció: en suspensió</string>
+	<string name="poi_support_tower">Subjecció: torre</string>
+
 	</resources>
