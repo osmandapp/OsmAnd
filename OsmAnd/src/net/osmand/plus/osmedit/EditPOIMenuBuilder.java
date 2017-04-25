@@ -65,7 +65,8 @@ public class EditPOIMenuBuilder extends MenuBuilder {
 			}
 
 			for (Map.Entry<String, String> e : point.getEntity().getTags().entrySet()) {
-				if (EditPoiData.POI_TYPE_TAG.equals(e.getKey())) {
+				if (EditPoiData.POI_TYPE_TAG.equals(e.getKey()) || 
+						e.getKey().startsWith(EditPoiData.REMOVE_TAG_PREFIX)) {
 					continue;
 				}
 				String text = e.getKey() + "=" + e.getValue();
