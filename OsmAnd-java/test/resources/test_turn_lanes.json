@@ -631,7 +631,7 @@
     "testName": "35.B 22 TR NEW 41",
     "params": {
       "vehicle": "car",
-      "short_way": "true",
+      "short_way": "true"
     },
     "startPoint": {
       "latitude": 45.61344391190965,
