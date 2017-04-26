@@ -2576,4 +2576,11 @@ Vänligen tillhandahåll fullständig kod</string>
     <string name="favorite_group_name">Gruppnamn</string>
     <string name="change_color">Ändra färg</string>
     <string name="edit_name">Redigera namn</string>
+    <string name="quick_action_add_destination">Lägg till destination</string>
+    <string name="quick_action_replace_destination">Ersätt destination</string>
+    <string name="no_overlay">Inget överlägg</string>
+    <string name="no_underlay">Inget underlägg</string>
+    <string name="subscribe_email_error">Fel</string>
+    <string name="nautical_maps">Sjökort</string>
+    <string name="shared_string_visible">Synlig</string>
     </resources>
