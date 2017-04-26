@@ -146,7 +146,7 @@
      <string name="poi_filter_namefinder">オンラインNameFinder</string>
      <string name="reading_cached_tiles">キャッシュ済タイル読み込み中…</string>
      <string name="version_index_is_big_for_memory">\'\'{0}\'\' の項目はメモリ内に格納できませんでした</string>
-     <string name="version_index_is_not_supported">\'\'{0}\'\' は、このバージョンではサポートされていません</string>
+     <string name="version_index_is_not_supported">\'\'{0}\'\' は、この無料バージョンではサポートされていません</string>
 
      
      
