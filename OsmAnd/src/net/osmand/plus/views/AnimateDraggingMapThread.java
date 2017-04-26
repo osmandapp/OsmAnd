@@ -93,7 +93,7 @@ public class AnimateDraggingMapThread {
 		while(currentThread != null){
 			try {
 				currentThread.join();
-			} catch (InterruptedException e) {
+			} catch (Exception e) {
 			}
 		}
 	}
