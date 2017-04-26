@@ -284,7 +284,7 @@
 	<string name="poi_fuel_lh2">液体水素(Liquid hydrogen)</string>
 	<string name="poi_fuel_electricity">電気(Electricity)</string>
 	<string name="poi_junction">ジャンクション(Junction)</string>
-	<string name="poi_rest_area">PA・SA(Rest area)</string>
+	<string name="poi_rest_area">パーキングエリア・PA</string>
 
 	<string name="poi_post_office">郵便局(Post office)</string>
 	<string name="poi_post_box">郵便ポスト(Post box)</string>
@@ -408,13 +408,13 @@
 	<string name="poi_10pin">10ピンボーリング場(Ten pin bowling)</string>
 	<string name="poi_archery">アーチェリー(Archery)</string>
 	<string name="poi_athletics">陸上競技(Athletics)</string>
-	<string name="poi_american_football">アメリカンフットボール(American football)</string>
+	<string name="poi_american_football">アメリカンフットボール</string>
 	<string name="poi_australian_football">オーストラリアンフットボール(Australian football)</string>
 	<string name="poi_base">ベースジャンピング(Base jumping)</string>
-	<string name="poi_baseball">野球(Baseball)</string>
-	<string name="poi_basketball">バスケットボール(Basketball)</string>
-	<string name="poi_beachvolleyball">ビーチバレー(Beach volleyball)</string>
-	<string name="poi_bmx">BMX(BMX)</string>
+	<string name="poi_baseball">野球</string>
+	<string name="poi_basketball">バスケットボール</string>
+	<string name="poi_beachvolleyball">ビーチバレー</string>
+	<string name="poi_bmx">BMX（バイシクルモトクロス）</string>
 	<string name="poi_boules">ペタンク・ブール(Boules)</string>
 	<string name="poi_bowls">ローンボウルズ(Bowls)</string>
 	<string name="poi_canadian_football">カナディアンフットボール(Canadian football)</string>
@@ -431,12 +431,12 @@
 	<string name="poi_field_hockey">フィールドホッケー(Field hockey)</string>
 	<string name="poi_golf">ゴルフ(Golf)</string>
 	<string name="poi_gymnastics">体操競技(Gymnastics)</string>
-	<string name="poi_handball">ハンドボール(Handball)</string>
+	<string name="poi_handball">ハンドボール</string>
 	<string name="poi_hockey">ホッケー(Hockey)</string>
 	<string name="poi_horse_racing">競馬(Horse racing)</string>
 	<string name="poi_ice_skating">アイススケート(Ice skating)</string>
 	<string name="poi_ice_stock">アイスストック(Ice stock)</string>
-	<string name="poi_korfbal">コーフボール(Korfbal)</string>
+	<string name="poi_korfbal">コーフボール(Korfball)</string>
 	<string name="poi_sport_motor">モータースポーツ(Motor sport)</string>
 	<string name="poi_sport_multi">総合競技・複合競技(Multi sport)</string>
 	<string name="poi_orienteering">オリエンテーリング(Orienteering)</string>
@@ -459,7 +459,7 @@
 	<string name="poi_team_handball">チームハンドボール(曖昧につき使用非推奨・Team handball)</string>
 	<string name="poi_tennis">テニス(Tennis)</string>
 	<string name="poi_toboggan">トボガンぞり(Toboggan)</string>
-	<string name="poi_volleyball">バレーボール(Volleyball)</string>
+	<string name="poi_volleyball">バレーボール</string>
 
 	<string name="poi_museum">博物館(Museum)</string>
 	<string name="poi_memorial">記念碑(Memorial)</string>
@@ -793,7 +793,7 @@
 	<string name="poi_candles">ろうそく店・キャンドルショップ(Candles store)</string>
 	<string name="poi_doors">ドア店(Doors)</string>
 	<string name="poi_fashion">ファッション店(Fashion store)</string>
-	<string name="poi_free_flying">スカイダイビング／フリーフライ用具店(Free flying goods store)</string>
+	<string name="poi_free_flying">フリーフライング用品店(パラグライダー等のスカイスポーツ用品店)</string>
 	<string name="poi_furnace">暖房機器店(Heating units store)</string>
 	<string name="poi_garden_furniture">ガーデニングショップ(Garden furniture store)</string>
 	<string name="poi_leather">レザー製品店(Leather store)</string>
@@ -1233,7 +1233,7 @@
 	<string name="poi_theatre_genre_comedy">喜劇(Comedy)</string>
 	<string name="poi_theatre_genre_chamber_music">室内楽(Chamber music)</string>
 	<string name="poi_theatre_genre_marionette">糸繰り人形劇(Marionette)</string>
-	<string name="poi_theatre_genre_ballet">バレエ(Ballet)</string>
+	<string name="poi_theatre_genre_ballet">バレエ</string>
 	<string name="poi_theatre_genre_shadow_play">影絵芝居(Shadow play)</string>
 
 	<string name="poi_toilets_yes">有り(Yes)</string>
@@ -2175,4 +2175,46 @@
 	<string name="poi_animal_shelter">動物保護施設</string>
 	<string name="poi_coworking_space">コワーキングスペース・労働用共有空間(Coworking space)</string>
 
+	<string name="poi_electronics_repair_tv">電気製品修理:テレビ</string>
+
+	<string name="poi_electronics_repair_phone">電気製品修理:電話機</string>
+	<string name="poi_electronics_repair_appliance">電気製品修理:家電</string>
+	<string name="poi_electronics_repair_computer">電気製品修理:コンピューター</string>
+	<string name="poi_craft_electronics_repair">電気製品修理</string>
+	<string name="poi_hackerspace">PC・科学コミュニティラボ(Hackerspace)</string>
+
+
+	<string name="poi_motorcycle_repair">オートバイ修理</string>
+	<string name="poi_public_bath">公衆浴場</string>
+
+	<string name="poi_services">サービスエリア・SA</string>
+	<string name="poi_water_tap">水道の蛇口・給水栓</string>
+	<string name="poi_badminton">バドミントン</string>
+	<string name="poi_bandy">バンディ(Bandy)</string>
+
+	<string name="poi_billiards">ビリヤード</string>
+
+	<string name="poi_boxing">ボクシング</string>
+
+	<string name="poi_disc_golf">ディスクゴルフ</string>
+	<string name="poi_fitness">フィットネス(Fitness)</string>
+
+	<string name="poi_fitness_station">屋外フィットネス・屋外ジム</string>
+
+	<string name="poi_fitness_centre">フィットネスセンター・屋内ジム</string>
+	<string name="poi_sport_free_flying">フリーフライング(パラグライダー等のスカイスポーツ)</string>
+
+	<string name="poi_futsal">フットサル</string>
+	<string name="poi_gaelic_games">ゲーリック・ゲームズ(Gaelic games)</string>
+	<string name="poi_horse_riding">乗馬</string>
+	<string name="poi_ice_hockey">アイスホッケー</string>
+	<string name="poi_judo">柔道</string>
+	<string name="poi_karting">カート・カートレース</string>
+	<string name="poi_lacrosse">ラクロス</string>
+	<string name="poi_netball">ネットボール(Netball)</string>
+	<string name="poi_rc_car">ラジコンカーレーシング</string>
+	<string name="poi_running">ランニング</string>
+	<string name="poi_shuffleboard">シャフルボード</string>
+	<string name="poi_model_aerodrome">ラジコン模型飛行機</string>
+	<string name="poi_squash">スカッシュ</string>
 	</resources>
