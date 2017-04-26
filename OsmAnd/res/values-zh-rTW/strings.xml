@@ -242,7 +242,7 @@
 
     <string name="prefs_plugins_descr">啟動外掛元件進階的設定和更多的附加功能</string>
     <string name="prefs_plugins">外掛元件管理</string>
-    <string name="osm_editing_plugin_description">透過這個外掛元件 OsmAnd 可以用來對 OSM 作貢獻，如建立或修改 OSM POI 物件、開啟或評論 OSM 的錯誤和提供錄製的 GPX 檔案。OSM 是一個社群推動，相關的詳細資訊，請參閱 https://openstreetmap.org。如果您在應用程式中指定您個人的 OSM 帳號，可直接從 OsmAnd 進行貢獻，積極參與是令人感激的 。</string>
+    <string name="osm_editing_plugin_description">透過這個外掛元件 OsmAnd 可以用來對 OSM 作貢獻，如建立或修改 OSM POI 物件、開啟或評論 OSM 的註解和提供錄製的 GPX 檔案。OSM 是一個社群推動，相關的詳細資訊，請參閱 https://openstreetmap.org。如果您在應用程式中指定您個人的 OSM 帳號，可直接從 OsmAnd 進行貢獻，積極參與是令人感激的 。</string>
     <string name="vector_maps_may_display_faster_on_some_devices">向量地圖一般而言顯示速度更快，但可能在某些裝置上無法使用。</string>
     <string name="play_commands_of_currently_selected_voice">用所選擇的語音播放指令</string>
     <string name="debugging_and_development">OsmAnd 開發</string>
@@ -2707,7 +2707,7 @@ Facebook：https://www.facebook.com/osmandapp
     <string name="quick_action_take_audio_note">錄取音訊註解</string>
     <string name="quick_action_take_video_note">錄取視訊註解</string>
     <string name="quick_action_take_photo_note">拍攝註解</string>
-    <string name="quick_action_add_osm_bug">增加 OSM 的錯誤</string>
+    <string name="quick_action_add_osm_bug">增加 OSM 的註解</string>
     <string name="quick_action_navigation_voice">聲音開/關</string>
     <string name="quick_action_navigation_voice_off">聲音為關閉</string>
     <string name="quick_action_navigation_voice_on">聲音為開啟</string>
@@ -2764,7 +2764,7 @@ Facebook：https://www.facebook.com/osmandapp
     <string name="quick_action_take_audio_note_descr">輕點動作按鈕將會在螢幕中心的位置增加一個音訊注解。</string>
     <string name="quick_action_take_video_note_descr">輕點動作按鈕將會在螢幕中心的位置增加一個視訊注解。</string>
     <string name="quick_action_take_photo_note_descr">輕點動作按鈕將會在螢幕中心的位置增加一個照片注解。</string>
-    <string name="quick_action_add_osm_bug_descr">輕點動作按鈕將會在螢幕中心的位置增加一個 OSM 錯誤注解。</string>
+    <string name="quick_action_add_osm_bug_descr">輕點動作按鈕將會在螢幕中心的位置增加一個 OSM 註解。</string>
     <string name="quick_action_add_poi_descr">輕點動作按鈕將會在螢幕中心的位置增加一個 POI。</string>
     <string name="navigate_point_olc">打開位置編碼(OLC)</string>
     <string name="navigate_point_olc_info_invalid">無效的 OLC
