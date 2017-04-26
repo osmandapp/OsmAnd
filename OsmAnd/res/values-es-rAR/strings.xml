@@ -2523,7 +2523,7 @@ Si necesitas ayuda con la aplicación OsmAnd, contacte con nuestro equipo de sop
     <string name="quick_action_take_audio_note">Grabar nota de audio</string>
     <string name="quick_action_take_video_note">Grabar nota de video</string>
     <string name="quick_action_take_photo_note">Tomar nota fotográfica</string>
-    <string name="quick_action_add_osm_bug">Añadir error OSM</string>
+    <string name="quick_action_add_osm_bug">Añadir problema de OSM</string>
     <string name="quick_action_navigation_voice">Alternar activación de voz</string>
     <string name="quick_action_navigation_voice_off">Voz desactivada</string>
     <string name="quick_action_navigation_voice_on">Voz activada</string>
@@ -2543,7 +2543,7 @@ Si necesitas ayuda con la aplicación OsmAnd, contacte con nuestro equipo de sop
     <string name="quick_action_take_audio_note_descr">Pulsar el botón de acción añadirá una nota de audio en la ubicación central de la pantalla.</string>
     <string name="quick_action_take_video_note_descr">Pulsar el botón de acción añadirá una nota de video en la ubicación central de la pantalla.</string>
     <string name="quick_action_take_photo_note_descr">Pulsar el botón de acción añadirá una nota fotográfica en la ubicación central de la pantalla.</string>
-    <string name="quick_action_add_osm_bug_descr">Pulsar el botón de acción añadirá un informe de error OSM en la ubicación central de la pantalla.</string>
+    <string name="quick_action_add_osm_bug_descr">Pulsar el botón de acción añadirá un informe de problema en OSM, en la ubicación central de la pantalla.</string>
     <string name="quick_action_add_poi_descr">Pulsar el botón de acción añadirá un PDI en la ubicación central de la pantalla.</string>
     <string name="quick_action_navigation_voice_descr">Pulsar el botón de acción desactivará o activará las indicaciones por voz durante la navegación.</string>
     <string name="quick_action_add_parking_descr">Pulsar el botón de acción añadirá un lugar de estacionamiento en la ubicación central de la pantalla.</string>
@@ -2553,10 +2553,10 @@ Si necesitas ayuda con la aplicación OsmAnd, contacte con nuestro equipo de sop
     <string name="quick_action_duplicate">Nombre de la acción rápida duplicado</string>
     <string name="quick_action_showhide_favorites_descr">Pulsar el botón de acción mostrará u ocultará los favoritos en el mapa.</string>
     <string name="quick_action_showhide_poi_descr">Pulsar el botón de acción mostrará u ocultará los PDIs en el mapa.</string>
-    <string name="quick_action_showhide_favorites_title">Alternar visualización de favoritos</string>
+    <string name="quick_action_showhide_favorites_title">Alternar vista de favoritos</string>
     <string name="quick_action_favorites_show">Mostrar Favoritos</string>
     <string name="quick_action_favorites_hide">Ocultar Favoritos</string>
-    <string name="quick_action_showhide_poi_title">Alternar visualización de PDI</string>
+    <string name="quick_action_showhide_poi_title">Alternar vista de PDI</string>
     <string name="quick_action_poi_show">Mostrar %1$s</string>
     <string name="quick_action_poi_hide">Ocultar %1$s</string>
     <string name="quick_action_add_category">Añadir una categoría</string>
