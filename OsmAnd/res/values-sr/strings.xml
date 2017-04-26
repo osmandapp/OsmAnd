@@ -1369,7 +1369,7 @@
     <string name="lang_br">Бретонски</string>
     <string name="hillshade_menu_download_descr">Да бисте видели рељеф, потребно је да преузмете посебну мапу овог подручја.</string>
     <string name="hillshade_purchase_header">Да бисте видели рељеф, потребно је да купите и инсталирате додатак.</string>
-    <string name="shared_string_plugin">Додатак</string>
+    <string name="shared_string_plugin">Прикључак</string>
     <string name="display_zoom_level">Прриказ нивоа увеличања: %1$s</string>
     <string name="favorite_group_name">Име групе</string>
     <string name="change_color">Промени боју</string>
