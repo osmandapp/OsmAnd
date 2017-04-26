@@ -19,6 +19,7 @@ import net.osmand.plus.audionotes.AudioVideoNotesPlugin;
 import net.osmand.plus.dashboard.tools.DashFragmentData;
 import net.osmand.plus.development.OsmandDevelopmentPlugin;
 import net.osmand.plus.distancecalculator.DistanceCalculatorPlugin;
+import net.osmand.plus.mapillary.MapillaryPlugin;
 import net.osmand.plus.monitoring.OsmandMonitoringPlugin;
 import net.osmand.plus.myplaces.FavoritesActivity;
 import net.osmand.plus.openseamapsplugin.NauticalMapsPlugin;
@@ -55,6 +56,10 @@ public abstract class OsmandPlugin {
 
 	public abstract int getAssetResourceName();
 
+	public boolean isStationary() {
+		return false;
+	}
+
 	@DrawableRes
 	public int getLogoResourceId() {
 		return R.drawable.ic_extension_dark;
@@ -78,7 +83,7 @@ public abstract class OsmandPlugin {
 	}
 
 	public boolean isActive() {
-		return active;
+		return active || isStationary();
 	}
 
 	public boolean needsInstallation() {
@@ -103,6 +108,7 @@ public abstract class OsmandPlugin {
 	public static void initPlugins(OsmandApplication app) {
 		OsmandSettings settings = app.getSettings();
 		Set<String> enabledPlugins = settings.getEnabledPlugins();
+		allPlugins.add(new MapillaryPlugin(app));
 		allPlugins.add(new OsmandRasterMapsPlugin(app));
 		allPlugins.add(new OsmandMonitoringPlugin(app));
 		// allPlugins.add(new OsMoPlugin(app));
@@ -276,6 +282,16 @@ public abstract class OsmandPlugin {
 
 	public static List<OsmandPlugin> getAvailablePlugins() {
 		return allPlugins;
+	}
+
+	public static List<OsmandPlugin> getAdjustablePlugins() {
+		List<OsmandPlugin> res = new ArrayList<>();
+		for (OsmandPlugin plugin : allPlugins) {
+			if (!plugin.isStationary()) {
+				res.add(plugin);
+			}
+		}
+		return res;
 	}
 
 	public static List<OsmandPlugin> getEnabledPlugins() {
