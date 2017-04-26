@@ -479,9 +479,11 @@ Los datos globales (entre 70 grados norte y 70 grados sur) se basan en medicione
 Tanto la ubicación como el tiempo del estacionamiento se muestran en el menú principal y en el control del mapa. Puedes añadir una notificación al calendario, en el caso de que desees tener un recordatorio al respecto.</string>
     <string name="osmand_distance_planning_plugin_description">Este complemento proporciona un control en la pantalla del mapa, permitiendo crear carreteras pulsando en el mapa, o usar o modificar archivos GPX existentes, para planificar un viaje y medir la distancia entre puntos. Los resultados pueden guardarse como un archivo GPX y usarse luego para la orientación.</string>
     <string name="osmand_accessibility_description">Este complemento activa las funciones de accesibilidad del dispositivo, directamente en OsmAnd. Facilita por ejemplo, el ajuste de la velocidad de la voz para voces TTS, la configuración de navegación de pantalla con el panel direccional, usando la rueda de desplazamiento para el control de ampliación, o el uso de comentarios de conversión de texto a voz, o para el anuncio automático de tu ubicación.</string>
-    <string name="osm_editing_plugin_description">Este complemento se puede usar para hacer contribuciones en OSM, como el crear o modificar objetos PDI, abrir o comentar informes de problemas y contribuir con archivos de trazas GPX.
-\n\nOSM es un proyecto de mapeo impulsado por la comunidad y de dominio público mundial. Para más detalles, consulta https://openstreetmap.org/.
-\n\nSe aprecia la participación activa, y las contribuciones pueden hacerse directamente desde OsmAnd, especificando tus credenciales personales de OSM en la aplicación.</string>
+    <string name="osm_editing_plugin_description">Este complemento puede usarse para hacer contribuciones en OSM, como el crear o modificar objetos PDI, abrir o comentar informes de problemas de OSM y contribuir con archivos de trazas GPX.
+
+OSM es un proyecto de mapeo global impulsado por la comunidad y de dominio público. Para más detalles, consulta https://openstreetmap.org.
+
+Se aprecia la participación activa, y las contribuciones pueden hacerse directamente desde OsmAnd, especificando las credenciales personales de OSM en la aplicación.</string>
     <string name="osmand_development_plugin_description">Este complemento muestra los ajustes de funciones de desarrollo y depuración para probar la simulación de rutas, el rendimiento del renderizado en pantalla, o las indicaciones por voz. Estos ajustes están destinados para los desarrolladores y no son necesarios para el usuario general.</string>
     <string name="world_ski_missing">Para mostrar mapas de esquí, necesita descargarse el mapa especial sin conexión</string>
     <string name="nautical_maps_missing">Para mostrar mapas náuticos, necesita descargarse el mapa especial sin conexión</string>
@@ -2542,7 +2544,7 @@ Si amas a OsmAnd, OSM y quieres apoyarlos, esta es una perfecta manera de hacerl
     <string name="quick_action_take_audio_note_descr">Pulsar el botón de acción añadirá una nota de audio en la ubicación central de la pantalla.</string>
     <string name="quick_action_take_video_note_descr">Pulsar el botón de acción añadirá una nota de video en la ubicación central de la pantalla.</string>
     <string name="quick_action_take_photo_note_descr">Pulsar el botón de acción añadirá una nota fotográfica en la ubicación central de la pantalla.</string>
-    <string name="quick_action_add_osm_bug_descr">Pulsar el botón de acción añadirá un informe de problema en OSM, en la ubicación central de la pantalla.</string>
+    <string name="quick_action_add_osm_bug_descr">Pulsar el botón de acción añadirá un informe de problema de OSM, en la ubicación central de la pantalla.</string>
     <string name="quick_action_add_poi_descr">Pulsar el botón de acción añadirá un PDI en la ubicación central de la pantalla.</string>
     <string name="quick_action_navigation_voice_descr">Pulsar el botón de acción desactivará o activará las indicaciones por voz durante la navegación.</string>
     <string name="quick_action_add_parking_descr">Pulsar el botón de acción añadirá un lugar de estacionamiento en la ubicación central de la pantalla.</string>
@@ -2882,4 +2884,5 @@ Algunas de las principales funciones:
     <string name="nothing_found">Nada encontrado :(</string>
     <string name="nothing_found_descr">Intenta cambiar la consulta de búsqueda o aumentar el radio de búsqueda</string>
     <string name="private_access_routing_req">El destino se ubica en un área de acceso privado. ¿Quieres acceder en este viaje a las carreteras privadas?</string>
+    <string name="mapillary">Mapillary</string>
     </resources>
