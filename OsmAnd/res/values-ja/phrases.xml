@@ -2217,4 +2217,37 @@
 	<string name="poi_shuffleboard">シャフルボード</string>
 	<string name="poi_model_aerodrome">ラジコン模型飛行機</string>
 	<string name="poi_squash">スカッシュ</string>
+	<string name="poi_bandstand">野外音楽堂(Bandstand)</string>
+	<string name="poi_leisure_common">共有地(Common leisure area)</string>
+	<string name="poi_events_venue">イベント会場</string>
+
+	<string name="poi_firepit">たき火場所</string>
+	<string name="poi_gambling">ギャンブル場</string>
+
+	<string name="poi_garden">庭園</string>
+
+	<string name="poi_garden_type_residential">個人庭園</string>
+	<string name="poi_garden_style_french">フランス式庭園</string>
+	<string name="poi_garden_style_english">イギリス式庭園</string>
+	<string name="poi_garden_style_japanese">日本庭園</string>
+
+	<string name="poi_garden_style_rosarium">バラ園</string>
+	<string name="poi_garden_style_kitchen">家庭菜園</string>
+	<string name="poi_garden_type_botanical">植物園</string>
+
+	<string name="poi_garden_type_community">公園などのコミュニティガーデン</string>
+	<string name="poi_garden_type_private">プライベート庭園</string>
+	<string name="poi_love_hotel">ラブホテル</string>
+
+	<string name="poi_club_freemasonry">フリーメーソンのロッジ</string>
+	<string name="poi_feeding_place">牧場などの餌場</string>
+
+	<string name="poi_public_bookcase">街角文庫(Public bookcase)</string>
+	<string name="poi_club_sailing">ヨットクラブ(Sailing club)</string>
+	<string name="poi_solarium_yes">日焼けサロンサービス有り</string>
+
+	<string name="poi_tanning_salon">日焼けサロン</string>
+
+	<string name="poi_club_scout">スカウトグループの基地(Scout club)</string>
+
 	</resources>
