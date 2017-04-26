@@ -76,8 +76,8 @@ public class QuickSearchListItem {
 				}
 				break;
 			case LOCATION:
-				LatLon latLon = (LatLon) searchResult.object;
-				return PointDescription.getLocationNamePlain(app, latLon.getLatitude(), latLon.getLongitude());
+				return PointDescription.getLocationNamePlain(
+						app, searchResult.location.getLatitude(), searchResult.location.getLongitude());
 		}
 		return searchResult.localeName;
 	}
@@ -180,7 +180,7 @@ public class QuickSearchListItem {
 				}
 				return typeStr;
 			case LOCATION:
-				LatLon latLon = (LatLon) searchResult.object;
+				LatLon latLon = searchResult.location;
 				if (searchResult.localeRelatedObjectName == null) {
 					String locationCountry = app.getRegions().getCountryName(latLon);
 					searchResult.localeRelatedObjectName = locationCountry == null ? "" : locationCountry;

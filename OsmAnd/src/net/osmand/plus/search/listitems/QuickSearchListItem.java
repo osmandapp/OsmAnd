@@ -30,7 +30,6 @@ import net.osmand.plus.render.RenderingIcons;
 import net.osmand.search.core.CustomSearchPoiFilter;
 import net.osmand.search.core.SearchResult;
 import net.osmand.util.Algorithms;
-import net.osmand.util.GeoPointParserUtil.GeoParsedPoint;
 
 import java.io.File;
 
@@ -206,13 +205,7 @@ public class QuickSearchListItem {
 				}
 				return typeStr;
 			case LOCATION:
-				LatLon latLon = null;
-				if (searchResult.object instanceof LatLon) {
-					latLon = (LatLon) searchResult.object;
-				} else if (searchResult.object instanceof GeoParsedPoint) {
-					GeoParsedPoint geoParsedPoint = (GeoParsedPoint) searchResult.object;
-					latLon = new LatLon(geoParsedPoint.getLatitude(), geoParsedPoint.getLongitude());
-				}
+				LatLon latLon = searchResult.location;
 				if (latLon != null && searchResult.localeRelatedObjectName == null) {
 					String locationCountry = app.getRegions().getCountryName(latLon);
 					searchResult.localeRelatedObjectName = locationCountry == null ? "" : locationCountry;
