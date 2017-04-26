@@ -2978,4 +2978,24 @@
 
 <string name="poi_fast_food_cafeteria">Áno</string>
 
+	<string name="poi_in_service_yes">V prevádzke: áno</string>
+
+	<string name="poi_street_cabinet_power">Typ skrine: elektrina</string>
+	<string name="poi_street_cabinet_telecom">Typ skrine: telekomunikácie</string>
+	<string name="poi_street_cabinet_cable_tv">Typ skrine: káblová televízia</string>
+	<string name="poi_street_cabinet_gas">Typ skrine: plyn</string>
+	<string name="poi_street_cabinet_postal_service">Typ skrine: poštové služby</string>
+	<string name="poi_street_cabinet_waste">Typ skrine: odpad</string>
+	<string name="poi_street_cabinet_water_management">Typ skrine: distribúcia vody</string>
+	<string name="poi_street_cabinet_street_lighting">Typ skrine: verejné osvetlenie</string>
+
+	<string name="poi_public_bookcase_type_wooden_cabinet">Typ: drevená skriňa</string>
+	<string name="poi_public_bookcase_type_metal_cabinet">Typ: kovová skriňa</string>
+	<string name="poi_public_bookcase_type_phone_box">Typ: telefónna búdka</string>
+	<string name="poi_public_bookcase_type_reading_box">Typ: malá skrinka</string>
+	<string name="poi_public_bookcase_type_shelf">Typ: polica</string>
+
+	<string name="poi_animal_keeping_type_paddock">Typ: výbeh</string>
+	<string name="poi_animal_keeping_type_open_stable">Typ: otvorená stajňa</string>
+
 	</resources>
