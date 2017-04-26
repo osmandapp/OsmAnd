@@ -90,7 +90,7 @@ Dlaždicové mapy môžete získať priamo zo zdrojov na Internete, alebo ich m�
     <string name="plugins_screen">Zásuvné moduly</string>
     <string name="prefs_plugins_descr">Zásuvné moduly aktivujú pokročilé nastavenia a dodatočné funkcie</string>
     <string name="prefs_plugins">Zásuvné moduly</string>
-    <string name="osm_editing_plugin_description">Pomocou tohto modulu môže byť OsmAnd použitý na prispievanie do OSM, napr. vytváraním alebo úpravami OSM objektov záujmu, otváraním alebo komentovaním OSM chýb a prispievaním zaznamenanými GPX súbormi. OSM je celosvetový komunitný projekt. Pozri https://openstreetmap.org pre podrobnosti. Aktívna účasť je vítaná a príspevky môžu byť vytvárané priamo v OsmAnd, ak v aplikácii uvediete svoje registračné údaje do OSM.</string>
+    <string name="osm_editing_plugin_description">Pomocou tohto modulu môže byť OsmAnd použitý na prispievanie do OSM, napr. vytváraním alebo úpravami OSM objektov záujmu, otváraním alebo komentovaním OSM poznámok a prispievaním zaznamenanými GPX súbormi. OSM je celosvetový komunitný projekt. Pozri https://openstreetmap.org pre podrobnosti. Aktívna účasť je vítaná a príspevky môžu byť vytvárané priamo v OsmAnd, ak v aplikácii uvediete svoje registračné údaje do OSM.</string>
     <string name="vector_maps_may_display_faster_on_some_devices">Vektorové mapy môžu byť zobrazované rýchlejšie. Nemusí správne fungovať na niektorých zariadeniach.</string>
     <string name="play_commands_of_currently_selected_voice">Prehrať povely zvoleného hlasu</string>
     <string name="debugging_and_development">Vývoj OsmAndu</string>
@@ -2531,7 +2531,7 @@ Ak potrebuje pomoc s aplikáciou OsmAnd, kontaktuje podporu: support@osmand.net.
     <string name="rendering_value_medium_w_name">Stredná</string>
     <string name="rendering_value_low_name">Nízka</string>
     <string name="rendering_attr_hideWaterPolygons_name">Skryť vodu</string>
-    <string name="quick_action_add_osm_bug">Pridať OSM chybu</string>
+    <string name="quick_action_add_osm_bug">Pridať OSM poznámku</string>
     <string name="quick_action_navigation_voice">Hlas zapnúť/vypnúť</string>
     <string name="quick_action_navigation_voice_off">Hlas je vypnutý</string>
     <string name="quick_action_navigation_voice_on">Hlas je zapnutý</string>
@@ -2568,7 +2568,7 @@ Zodpovedá oblasti: %1$s x %2$s</string>
     <string name="quick_action_take_audio_note_descr">Aktivovaním tlačidla akcie sa pridá zvuková poznámka do stredu obrazovky.</string>
     <string name="quick_action_take_video_note_descr">Aktivovaním tlačidla akcie sa pridá video poznámka do stredu obrazovky.</string>
     <string name="quick_action_take_photo_note_descr">Aktivovaním tlačidla akcie sa pridá fotografická poznámka do stredu obrazovky.</string>
-    <string name="quick_action_add_osm_bug_descr">Aktivovaním tlačidla akcie sa pridá OSM chyba do stredu obrazovky.</string>
+    <string name="quick_action_add_osm_bug_descr">Aktivovaním tlačidla akcie sa pridá OSM poznámka do stredu obrazovky.</string>
     <string name="quick_action_add_poi_descr">Aktivovaním tlačidla akcie sa pridá bod záujmu (POI) do stredu obrazovky.</string>
     <string name="quick_action_navigation_voice_descr">Aktivovaním tlačidla akcie sa vypnú alebo zapnú hlasové pokyny počas navigácie.</string>
     <string name="quick_action_add_parking_descr">Aktivovaním tlačidla akcie sa pridá miesto zaparkovania do stredu obrazovky.</string>
@@ -2913,4 +2913,5 @@ Zodpovedá oblasti: %1$s x %2$s</string>
     <string name="increase_search_radius">Zväčšiť okruh hľadania</string>
     <string name="nothing_found">Nič sa nenašlo :(</string>
     <string name="nothing_found_descr">Skúste zmeniť vyhľadávacie kritérium alebo oblasť hľadania</string>
+    <string name="mapillary">Mapillary</string>
     </resources>
