@@ -524,7 +524,10 @@ public class MapMarkersLayer extends OsmandMapLayer implements IContextMenuProvi
 			MapMarkersHelper markersHelper = map.getMyApplication().getMapMarkersHelper();
 			MapMarker marker = (MapMarker) o;
 
-			marker.getOriginalPointDescription().setName(PointDescription.getSearchAddressStr(map));
+			PointDescription originalDescription = marker.getOriginalPointDescription();
+			if (originalDescription.isLocation()) {
+				originalDescription.setName(PointDescription.getSearchAddressStr(map));
+			}
 			markersHelper.moveMapMarker(marker, position);
 			int index = markersHelper.getMapMarkers().indexOf(marker);
 			if (index != -1) {
