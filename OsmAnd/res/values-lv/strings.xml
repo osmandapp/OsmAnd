@@ -668,7 +668,7 @@
   
   
   
-  <string name="show_view_angle">Rādīt redzamības virzienu</string>
+  <string name="show_view_angle">Rādīt skata virzienu</string>
   <string name="map_view_3d_descr">Ieslēgt kartes 3D skatu</string>
   <string name="map_view_3d">Kartes 3D skats</string>
   <string name="show_poi_over_map_description">Rādīt POI uz kartes (lietot pēdējo izvēlēto filtru)</string>
@@ -1030,7 +1030,7 @@ OsmAnd ir atvērtā koda navigācijas aplikācija ar piekļuvi vispusīgiem Open
     <string name="edit_tilesource_choose_existing">Izvēlēties esošo…</string>
     <string name="maps_define_edit">Definēt/labot…</string>
 	<string name="map_widget_fps_info">FPS atkļūdošana</string>
-	<string name="driving_region_descr">Izvēlieties braukšanas apgabalu: ASV, Eiropa, Apvienotā Karaliste, Āzija u.c.</string>
+	<string name="driving_region_descr">Izvēlieties braukšanas apgabalu: ASV, Eiropa, Apvienotā Karaliste, Āzija un citi</string>
 	<string name="driving_region">Apgabals</string>
 	<string name="driving_region_japan">Japāna</string>
 	<string name="driving_region_us">ASV</string>
@@ -2727,32 +2727,32 @@ Un vēl…
     <string name="auto_split_recording_descr">Sākt jaunu segmentu pēc 6 minūšu pārtraukuma, jaunu treku pēc 2 stundu pārtraukuma vai jaunu failu pēc ilgāka pārtraukuma, ja ir izmainīts datums.</string>
     <string name="auto_split_recording_title">Automātiski sadalīt ierakstus pēc pārtraukuma</string>
 	<string name="release_2_6">"
- • Jauna iespēja: ātrās rīcības poga
-
-
- • uzlabota žestu darbība skārienekrānā
-
-
- • Jauni kartes fonti vairākām valodām
-
-
- • TTS atbalsts reğionālo valodu variantiem
-
-
- • Redzamības uzlabojumi dažādos kartes stilos un vikipēdijā
-
-
- • Tiek atbalstīts Open Location Code (OLC)
-
-
- • Uzrāda pamata augstuma profilu GPX ierakstiem
-
-
- • Vēl dažādi uzlabojumi un kļūdu labojumi
-
-
- Un vēl…
- "</string>
+\n • Jauna iespēja: ātrās rīcības poga
+\n
+\n
+\n • uzlabota žestu darbība skārienekrānā
+\n
+\n
+\n • Jauni kartes fonti vēl vairāk valodām
+\n
+\n
+\n • TTS atbalsts reğionālajām valodām (arī akcentiem)
+\n
+\n
+\n • Vizuālie uzlabojumi dažādos kartes stilos un vikipēdijā
+\n
+\n
+\n • Pievienots Open Location Code (OLC) atbalsts
+\n
+\n
+\n • Uzrāda augstuma, slīpuma un ātruma profilus GPX ierakstiem un aprēķinātajiem maršrutiem
+\n
+\n
+\n • Vēl citi uzlabojumi un kļūdu labojumi
+\n
+\n
+\n Un vēl…
+\n "</string>
 	<string name="osmand_plus_long_description_1000_chars">"
  OsmAnd+ (OSM Automated Navigation Directions)
 
