@@ -515,8 +515,8 @@ La memoria utilizzata è  {1} MB.
     <string name="save_current_track">Salva la traccia corrente</string>
     <string name="save_track_interval_descr">Scegli l\'intervallo di registrazione per la traccia durante la navigazione</string>
     <string name="save_track_interval">Intervallo di registrazione durante la navigazione</string>
-    <string name="save_track_to_gpx_descrp">Le tracce saranno salvate durante la navigazione nella cartella tracce</string>
-    <string name="save_track_to_gpx">Durante la navigazione salva la traccia in un file GPX</string>
+    <string name="save_track_to_gpx_descrp">Le tracce saranno salvate automaticamente nella cartella tracce durante la navigazione</string>
+    <string name="save_track_to_gpx">Registrazione automatica della traccia durante la navigazione</string>
     <string name="update_tile">Aggiorna mappa</string>
     <string name="reload_tile">Ricarica tasselli</string>
     <string name="mark_point">Obiettivo</string>
@@ -657,7 +657,7 @@ La memoria utilizzata è  {1} MB.
     <string name="prefs_plugins_descr">I plugin abilitano funzionalità aggiuntive e impostazioni avanzate</string>
     <string name="prefs_plugins">Componenti aggiuntivi</string>
 
-    <string name="osm_editing_plugin_description">"Tramite questo plugin OsmAnd può essere utilizzato per contribuire a OSM con la creazione  o modifica dei PDI di OSM, aprendo o commentando errori di OSM oppure inviando i file GPX registrati. OSM è un progetto comunitario di mappatura di pubblico dominio globale. Per maggiori informazioni visita https://openstreetmap.org. La partecipazione attiva è apprezzata e si può contribuire direttamente da OsmAnd specificando nell\'app le proprie credenziali di accesso OSM."</string>
+    <string name="osm_editing_plugin_description">"Tramite questo plugin OsmAnd può essere utilizzato per contribuire a OSM con la creazione  o modifica dei PDI di OSM, aprendo o commentando le Note di OSM oppure inviando i file GPX registrati. OSM è un progetto comunitario di mappatura di pubblico dominio globale. Per maggiori informazioni visita https://openstreetmap.org. La partecipazione attiva è apprezzata e si può contribuire direttamente da OsmAnd specificando nell\'app le proprie credenziali di accesso OSM."</string>
     <string name="vector_maps_may_display_faster_on_some_devices">Le mappe vettoriali dovrebbero apparire più velocemente. Su certi dispositivi potrebbero non funzionare bene.</string>
 
     <string name="play_commands_of_currently_selected_voice">Riproduci i comandi della voce selezionata</string>
@@ -3004,4 +3004,10 @@ Copertura e qualità approssimativamente:
  • Carica tracce GPX in OSM direttamente dall\'app
  • Aggiungi PDI e caricali direttamente in OSM (o successivamente se sei offline)
  "</string>
+    <string name="mapillary">Mapillary</string>
+    <string name="osmand_extended_description_part1">"
+\n OsmAnd (OSM Automatica Navigazione Direzioni ) è un\'app di navigazione e mappe con accesso ai dati gratuiti, mondiali e di alta qualità di OpenStreetMap (OSM).
+\n
+\n Goditelo attraverso la navigazione vocale e visuale, visualizzando i PDI (punti di interesse), creando e gestendo tracce GPX, utilizzando la visualizzazione delle linee isoipse e delle informazioni di altitudine (attraverso un componente aggiuntivo), la scelta tra le modalità automobile, bici, a piedi, con le modifiche OSM e molto altro.
+\n "</string>
     </resources>
