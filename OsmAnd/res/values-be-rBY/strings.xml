@@ -112,8 +112,8 @@
 	<string name="save_track_to_gpx_globally_descr">Ahulny zapіs miescaznachodžańnia ŭ GPX fajł moža być uklučany abo vyklučany z dapamohaj knopkі zapіsu GPX na ekranie z mapaj</string>
 	<string name="save_current_track_descr">Zachavać biahučy śled na SD zaraz</string>
 	<string name="save_current_track">Zachavać biahučy GPX śled</string>
-	<string name="save_track_to_gpx">Zapіsvać śled u GPX fajł</string>
-	<string name="save_track_to_gpx_descrp">Ślady buduć zachavanyja ŭ katałoh track padčas navіhacyі</string>
+	<string name="save_track_to_gpx">Aŭta-zapis treka padčas navihacyi</string>
+	<string name="save_track_to_gpx_descrp">GPX-trek aŭtamatyčna zachoŭvajecca ŭ tečcy Treki padčas navihacyi</string>
 	<string name="save_track_interval_globally">Іntervał zapіsu</string>
 	<string name="save_track_interval">Іntervał zachoŭvańnia padčas navіhacyі</string>
 	<string name="save_track_interval_descr">Paznačyć іntervał zachoŭvańnia punktaŭ śledu padčas navіhacyі</string>
