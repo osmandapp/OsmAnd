@@ -870,4 +870,31 @@ Gün batır: %2$s</string>
     <string name="access_hint_enter_description">Təsvir daxil et</string>
     <string name="access_widget_expand">Genişlət</string>
     <string name="access_shared_string_navigate_up">Yuxarı gedin</string>
+    <string name="gpx_monitoring_start">GPX qeydiyyatını başlat</string>
+    <string name="gpx_monitoring_stop">GPX qeydiyyatını dayandır</string>
+    <string name="gpx_start_new_segment">Yeni seqment başlat</string>
+    <string name="rendering_attr_hideBuildings_name">Binalar</string>
+    <string name="rendering_attr_hideNonVehicleHighways_name">Qeyri-nəqliyyat magistrallar</string>
+    <string name="rendering_attr_hideAccess_name">Giriş məhdudiyyətləri</string>
+    <string name="rendering_attr_showAccess_name">Giriş məhdudiyyətlərini və rüsumu göstər</string>
+    <string name="rendering_attr_showSurfaceGrade_name">Yol keyfiyyətini göstər</string>
+    <string name="rendering_attr_showSurfaces_name">Yol örtüyünü göstər</string>
+    <string name="osmo_auth_error_short">İcazə uğursuz oldu</string>
+    <string name="osmo_group_by_invite">Dəvətlə daxil ol</string>
+    <string name="osmo_not_signed_in">OsMo giriş uğursuz oldu</string>
+    <string name="osmo_gpx_points_downloaded">%1$s OsMo nöqtəsi endirildi.</string>
+    <string name="gpx_split_interval">Bölünmə intervalı</string>
+    <string name="save_as_favorites_points">Favorit qrup olaraq saxla</string>
+    <string name="select_destination_and_intermediate_points">Hədəfləri seçin</string>
+    <string name="gpx_wpt">Yol nöqtəsi</string>
+    <string name="gpx_info_waypoints">"Yol nöqtələri: %1$s "</string>
+    <string name="gpx_info_distance">"Məsafə: %1$s (%2$s nöqtə) "</string>
+    <string name="gpx_info_average_speed">"Ortalama sürət: %1$s "</string>
+    <string name="gpx_info_avg_altitude">Ortalama yüksəklik: %1$s</string>
+    <string name="gpx_info_diff_altitude">Yüksəklik diapazonu: %1$s</string>
+    <string name="gpx_info_asc_altitude">Eniş/yoxuş: %1$s</string>
+    <string name="gpx_selection_number_of_points">" %1$s nöqtə"</string>
+    <string name="gpx_selection_point">%1$s nöqtəsi</string>
+    <string name="gpx_selection_points">%1$s
+\nNöqtələr</string>
     </resources>
