@@ -1727,7 +1727,7 @@ Afganistan, Afryka Południowa, Albania, Algieria, Andora, Angola, Anguilla, Ant
     <string name="rendering_value_car_name">Samochód</string>
     <string name="rendering_value_bicycle_name">Rower</string>
     <string name="rendering_value_pedestrian_name">Pieszy</string>
-    <string name="rendering_attr_coloredBuildings_name">Kolorowy kod typów budynków</string>
+    <string name="rendering_attr_coloredBuildings_name">Różne kolory typów budynków</string>
     <string name="osmo_invite">Zaproś…</string>
     <string name="osmo_leave_confirmation_msg">Opuścić grupę %1$s?</string>
     <string name="osmo_specify_tracker_id">Proszę określić identyfikator</string>
@@ -3000,4 +3000,5 @@ Od Afganistanu po Zimbabwe, przez Australię po USA. Argentyna, Brazylia, Kanada
     <string name="nothing_found_descr">Proszę spróbować zmienić zapytanie lub zwiększyć promień wyszukiwania</string>
     <string name="private_access_routing_req">Cel podróży jest położony na obszarze o charakterze prywatnym. Umożliwić dostęp do prywatnych dróg dla tej trasy?</string>
     <string name="search_favorites">Szukaj ulubionych</string>
+    <string name="mapillary">Mapillary</string>
     </resources>
