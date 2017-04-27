@@ -260,16 +260,16 @@
 	<string name="poi_power_generator">発電機(Power generator)</string>
 
 	<string name="poi_landuse">土地利用(Landuse)</string>
-	<string name="poi_fuel_diesel">ディーゼル(Diesel)</string>
+	<string name="poi_fuel_diesel">ディーゼル(軽油)</string>
 	<string name="poi_fuel_gtl_diesel">GTLディーゼル(GTL diesel)</string>
 	<string name="poi_fuel_hgv_diesel">HGVディーゼル(HGV diesel)</string>
 	<string name="poi_fuel_biodiesel">バイオディーゼル(Bio diesel)</string>
 	<string name="poi_fuel_lpg">液化石油ガス</string>
 	<string name="poi_fuel_octane_80">オクタン価80(Octane 80)</string>
-	<string name="poi_fuel_octane_91">オクタン価91(Octane 91)</string>
+	<string name="poi_fuel_octane_91">オクタン価91(レギュラーガソリン)</string>
 	<string name="poi_fuel_octane_92">オクタン価92(Octane 92)</string>
 	<string name="poi_fuel_octane_95">オクタン価95(Octane 95)</string>
-	<string name="poi_fuel_octane_98">オクタン価98(Octane 98)</string>
+	<string name="poi_fuel_octane_98">オクタン価98(ハイオクガソリン)</string>
 	<string name="poi_fuel_octane_100">オクタン価100(Octane 100)</string>
 	<string name="poi_fuel_cng">圧縮天然ガス</string>
 	<string name="poi_fuel_1_25">混合油 1:25(1:25 fuel)</string>
@@ -467,7 +467,7 @@
 	<string name="poi_archaeological_site">遺跡(Archaeological site)</string>
 	<string name="poi_battlefield">古戦場(Battlefield)</string>
 	<string name="poi_boundary_stone">境界標石(Boundary stone)</string>
-	<string name="poi_historic_cannon">歴史保存用大砲(Historic cannon)</string>
+	<string name="poi_historic_cannon">歴史的な大砲(Historic cannon)</string>
 	<string name="poi_castle">城(Castle)</string>
 	<string name="poi_city_gate">市壁・城壁門(City gate)</string>
 	<string name="poi_fort">砦(Fort)</string>
@@ -522,7 +522,7 @@
 	
 	<string name="poi_monastery">修道院(Monastery)</string>
 	<string name="poi_historic_monastery">歴史的修道院(Historic monastery)</string>
-	<string name="poi_wayside_cross">十字架(Wayside cross)</string>
+	<string name="poi_wayside_cross">道端の十字架(Wayside cross)</string>
 	<string name="poi_wayside_shrine">歴史的礼拝所・地蔵(Wayside shrine)</string>
 	<string name="poi_information">案内所(information)</string>
 	<string name="poi_clock">時計(Clock)</string>
@@ -2250,4 +2250,144 @@
 
 	<string name="poi_club_scout">スカウトグループの基地(Scout club)</string>
 
+	<string name="poi_cross">歴史的価値のある十字架</string>
+	<string name="poi_summit_cross">山頂の十字架</string>
+
+	<string name="poi_prison_camp">元刑務所収容所</string>
+	<string name="poi_historic_aircraft">展示飛行機</string>
+
+	<string name="poi_historic_farm">歴史のある農場</string>
+	<string name="poi_historic_gallows">歴史的な絞首台</string>
+	<string name="poi_historic_railway_station">歴史のある鉄道駅</string>
+
+	<string name="poi_historic_quarry">歴史的な採石場</string>
+
+	<string name="poi_historic_yes">歴史的なオブジェクト</string>
+	<string name="poi_historic_milestone">マイルストーン</string>
+
+	<string name="poi_historic_manor">荘園領主風住宅</string>
+	<string name="poi_historic_stone">歴史的な石</string>
+	<string name="poi_historic_threshing_floor">歴史的な脱穀場</string>
+	<string name="poi_historic_railway">歴史的な鉄道</string>
+
+	<string name="poi_iwn_ref">複数の国境を越える長いハイキングネットワークの交点</string>
+	<string name="poi_route_hiking_iwn_poi">複数の国境を越える長いハイキング経路</string>
+	<string name="poi_lwn_ref">地域内の小さなハイキングネットワークの交点</string>
+
+	<string name="poi_route_hiking_lwn_poi">地域内の小さなハイキング経路</string>
+	<string name="poi_locomotive">展示機関車(Locomotive)</string>
+
+	<string name="poi_nwn_ref">国を横断するような長距離にわたるハイキングネットワークの交点</string>
+	<string name="poi_route_hiking_nwn_poi">国を横断するような長距離にわたるハイキング経路</string>
+	<string name="poi_pa">Pa(マオリ族の要塞居留地)</string>
+
+	<string name="poi_bird_hide">野鳥観察舎</string>
+	<string name="poi_wildlife_hide">野生動物観察舎</string>
+
+	<string name="poi_rwn_ref">地域を越えるハイキングネットワークの交点</string>
+	<string name="poi_route_hiking_rwn_poi">地域を越えるハイキング経路</string>
+	<string name="poi_sanitary_dump_station_yes">トレーラーハウス等のタンク内排泄物処理所:有り</string>
+	<string name="poi_sanitary_dump_station_no">トレーラーハウス等のタンク内排泄物処理所:無し</string>
+	<string name="poi_sanitary_dump_station">トレーラーハウス等のタンク内排泄物処理所</string>
+
+	<string name="poi_summer_camp">サマーキャンプ用キャンプ場</string>
+	<string name="poi_technical_monument">技術的な記念物(Technical monument)</string>
+
+	<string name="poi_rescue_station">レスキュー隊事務所(Rescue station)</string>
+
+	<string name="poi_animal_training">動物訓練施設</string>
+	<string name="poi_dojo">道場</string>
+
+	<string name="poi_health_amenity_type_first_aid_kit">応急処置キット・救急箱</string>
+	<string name="poi_aeroway_fuel">航空機用給油所</string>
+	<string name="poi_waterway_fuel">船舶用給油所</string>
+	<string name="poi_fuel_coal">燃料:石炭</string>
+
+	<string name="poi_fuel_charcoal">燃料:木炭</string>
+	<string name="poi_fuel_wood">燃料:薪</string>
+	<string name="poi_content_fuel">燃料タンク(Content: fuel)</string>
+	<string name="poi_enforcement_traffic_signals">取締装置:信号機</string>
+	<string name="poi_enforcement_maxspeed">取締装置:最高速度</string>
+	<string name="poi_enforcement_maxheight">取締装置:車高</string>
+	<string name="poi_enforcement_mindistance">取締装置:車間距離</string>
+	<string name="poi_enforcement_toll">取締装置:料金</string>
+
+	<string name="poi_enforcement_access">取締装置:進入出</string>
+	<string name="poi_enforcement_check">取締装置：検問所</string>
+	<string name="poi_escape_lane">トラック等の非常用待避及び減速車線(Escape lane)</string>
+
+	<string name="poi_icn_ref">複数の国境を越える長いサイクリングネットワークの交点</string>
+	<string name="poi_ncn_ref">国を横断するような長距離にわたるサイクリングネットワークの交点</string>
+	<string name="poi_rcn_ref">地域を越えるサイクリングネットワークの交点</string>
+	<string name="poi_lcn_ref">地域内の小さなサイクリングネットワークの交点</string>
+	<string name="poi_node_networks">ハイキング／サイクリングに用いられるネットワークの交点</string>
+	<string name="poi_railway_yard">貨物駅・車両基地</string>
+
+	<string name="poi_military_checkpoint">軍の検問所</string>
+
+	<string name="poi_highway_steps">階段</string>
+	<string name="poi_traffic_mirror">カーブミラー・道路反射鏡</string>
+
+	<string name="poi_cliff">崖</string>
+
+	<string name="poi_grassland">草原</string>
+	<string name="poi_heath">低木の荒野</string>
+	<string name="poi_protected_area">保護区(国立公園など)</string>
+	<string name="poi_sand">砂地</string>
+
+	<string name="poi_resource_sand">砂</string>
+	<string name="poi_resource_sandstone">砂岩</string>
+	<string name="poi_material_sandstone">材質:砂岩</string>
+	<string name="poi_scrub">低木林</string>
+	<string name="poi_aquaculture">養殖場</string>
+	<string name="poi_aquaculture_shrimp">養殖場:エビ</string>
+	<string name="poi_aquaculture_fish">養殖場:魚</string>
+	<string name="poi_aquaculture_mussels">養殖場:貝</string>
+
+	<string name="poi_boat_storage">ボート保管場所(陸上)</string>
+
+	<string name="poi_building">建物</string>
+	<string name="poi_building_type_church">建物:教会</string>
+	<string name="poi_building_type_chapel">建物:簡易礼拝堂</string>
+	<string name="poi_building_type_mosque">建物:モスク・イスラム教寺院</string>
+	<string name="poi_building_type_temple">建物:聖堂、寺院</string>
+	<string name="poi_building_type_cathedral">建物:大聖堂</string>
+	<string name="poi_building_type_monastery">建物:修道院</string>
+	<string name="poi_building_type_basilica">建物:バシリカ聖堂</string>
+	<string name="poi_building_type_synagogue">建物:ユダヤ教礼拝堂・シナゴーグ</string>
+	<string name="poi_building_type_shrine">建物:神殿、神社</string>
+
+	<string name="poi_building_type_pyramid">建物:ピラミッド</string>
+
+	<string name="poi_trade_building_supplies">建築資材店</string>
+	<string name="poi_cairn">石の墳丘</string>
+
+	<string name="poi_commercial">商業用地</string>
+	<string name="poi_dolphin">係留施設(通称ドルフィン)</string>
+
+	<string name="poi_farmland">耕作・放牧地</string>
+	<string name="poi_grass">管理されている草地</string>
+	<string name="poi_greenhouse_horticulture">温室栽培地</string>
+
+	<string name="poi_kiln">窯</string>
+	<string name="poi_logging">伐採区域</string>
+	<string name="poi_mdf">主配線盤(Main Distribution Frame)</string>
+	<string name="poi_plant_nursery">苗床</string>
+
+	<string name="poi_pumping_station">ポンプ場</string>
+
+	<string name="poi_retail">店舗に付随する駐車場等の関連施設</string>
+
+	<string name="poi_forestry_compartment">識別看板:森林の区域管理標識</string>
+	<string name="poi_forestry_allotment">識別看板:貸し農園の管理標識</string>
+	<string name="poi_spoil_heap">採掘残土</string>
+	
+	<string name="poi_square">名前のある広場</string>
+	<string name="poi_street_cabinet">道端のキャビネット(工具や配線盤等)</string>
+
+	<string name="poi_ventilation_shaft">換気用シャフト</string>
+
+	<string name="poi_water_point">飲料水汲み場</string>
+
+	<string name="poi_watering_place">動物用水飲み場</string>
 	</resources>
