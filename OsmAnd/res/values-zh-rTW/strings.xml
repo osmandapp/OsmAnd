@@ -2182,7 +2182,7 @@ OsmAnd (Automated Navigation Directions) 是一個地圖和導航的應用程式
     <string name="faq_item">常見問題</string>
     <string name="faq_item_description">常見的問題</string>
     <string name="map_viewing_item">地圖檢視</string>
-    <string name="search_on_the_map_item">正在查詢地圖</string>
+    <string name="search_on_the_map_item">查詢地圖</string>
     <string name="planning_trip_item">規劃一次旅程</string>
 
     
@@ -3079,4 +3079,5 @@ OsmAnd 是開放原始碼，而且正在積極的開發。應用程式從報告�
     <string name="increase_search_radius">增加搜尋半徑</string>
     <string name="nothing_found">没有找到 :(</string>
     <string name="nothing_found_descr">試著變更搜尋的詢問或增加搜尋的半徑</string>
+    <string name="mapillary">Mapillary</string>
     </resources>
