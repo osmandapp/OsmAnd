@@ -159,7 +159,7 @@
   <string name="show_current_gpx_title">Відображати пройдений шлях</string>
   <string name="free_version_message">Безкоштовна версія OsmAnd обмежена %1$s завантаженнями і не підтримує геостатті з Вікіпедії.</string>
   <string name="free_version_title">Безкоштовна версія</string>
-  <string name="poi_context_menu_showdescription">Деталі POI</string>
+  <string name="poi_context_menu_showdescription">Подробиці POI</string>
   <string name="index_name_north_america">Північна Америка</string>
   <string name="index_name_us">Північна Америка - США</string>
   <string name="index_name_central_america">Центральна Америка</string>
@@ -1329,10 +1329,13 @@ OsmAnd має відкриті сирці і активно розвиваєть
     <string name="context_menu_item_destination_point">Встановити як пункт призначення</string>
     <string name="local_osm_changes_backup_failed">Збій резервного копіювання файлу змін OSM</string>
     <string name="local_osm_changes_backup">Резервне копіювання файлу змін OSM</string>
-    <string name="use_distance_measurement_help">* Натисніть, щоб позначити точку.\n
-       * Натисніть та утримуйте мапу для вилучення попередньої точки.\n
-       * Натисніть та утримуйте точку для перегляду та додавання опису.\n
-       * Натисніть на масштабну лінійку, щоб побачити більше дій.</string>
+    <string name="use_distance_measurement_help">* Натисніть, щоб позначити точку.
+\n
+\n * Натисніть та утримуйте мапу для вилучення попередньої точки.
+\n
+\n * Натисніть та утримуйте точку для перегляду та додавання опису.
+\n
+\n * Натисніть на масштабну лінійку, щоб побачити більше дій.</string>
     <string name="use_magnetic_sensor_descr">Використовувати магнітометр для визначення сторін світу замість датчика орієнтації</string>
     
 	<string name="destination_point">Пункт призначення %1$s</string>
@@ -1502,20 +1505,20 @@ OsmAnd має відкриті сирці і активно розвиваєть
  Бажаєте продовжити з новими реєстраційними даними?</string>
     <string name="osmo_group_by_invite">Увійти за запрошенням</string>
     <string name="osmo_group_information_desc">"
- - Створюючи групу вкажіть її назву та додайте опис
-
- - Тут ви можете створити лише Просту(Simple) групу, більш докладно - https://osmo.mobi/g/new
-
- - На веб-сайті ви можете керувати групою, додавати треки та точки, що будуть доступні усім
-
- - Ми не підтримуємо групи що складаються тільки з одного користувача, якщо це не група POI
-
- - Приватні групи мають обмеження у 8 осіб
-
- - Більш докладні умови та вимоги завжди є на сайті OsMo.mobi
-
- - Якщо вам потрібні особливі умови, ви можете звернутись за підтримкою: osmo.mobi@gmail.com
- "</string>
+\n - Створюючи групу вкажіть її назву та додайте опис
+\n
+\n - Тут ви можете створити лише Просту(Simple) групу, більш докладно — https://osmo.mobi/g/new
+\n
+\n - На веб-сайті ви можете керувати групою, додавати треки та точки, що будуть доступні усім
+\n
+\n - Ми не підтримуємо групи що складаються тільки з одного користувача, якщо це не група POI
+\n
+\n - Приватні групи мають обмеження у 8 осіб
+\n
+\n - Більш докладні умови та вимоги завжди є на сайті OsMo.mobi
+\n
+\n - Якщо вам потрібні особливі умови, ви можете звернутись за підтримкою: osmo.mobi@gmail.com
+\n "</string>
     <string name="osmo_group_information">Будь ласка, прочитайте перед створенням групи!</string>
     <string name="osmo_not_signed_in">Збій входу до OsMo</string>
     <string name="osmo_gpx_points_downloaded">Завантажено %1$s точок OsMo.</string>
@@ -1935,10 +1938,14 @@ OsmAnd має відкриті сирці і активно розвиваєть
 	
 	<string name="plugin_install_needs_network">Для встановлення цього втулку вам потрібне з’єднання з Інтернет.</string>
 	<string name="get_plugin">Отримати</string>
-	<string name="plugin_nautical_descr">Активація цього стилю змінює вигляд мапи на Морську, на якій показуються всі навігаційні знаки та символи.
-		\n\nФайл з даними містить всі навігаційні символи, у вигляди єдиного файлу з назвою \'World seamarks\'.
-		\n\nЦей стиль може бути скасовано шляхом його деактивації тут або зміною в пункті \'Стиль мапи\' меню \'Налаштування мапи\' на потрібний.
-	</string>
+	<string name="plugin_nautical_descr">"Активація цього стилю змінює вигляд мапи на Морську, на якій показуються усі навігаційні знаки та символи.
+\n 
+\n
+\nФайл з даними містить усі навігаційні символи у вигляді єдиного файлу з назвою „World seamarks“.
+\n 
+\n
+\nЦей стиль може бути скасовано шляхом його деактивації тут або зміною в пункті „Стиль мапи“ меню „Налаштування мапи“ на потрібний.
+\n "</string>
 <string name="osmand_parking_overdue">Застарілі</string>
 	<string name="action_create">Створити дію</string>
 	<string name="action_modify">Змінити дію</string>
@@ -2875,7 +2882,7 @@ Facebook: https://www.facebook.com/osmandapp
     <string name="shared_string_slope">Ухил</string>
     <string name="lang_ber">Берберська</string>
     <string name="fonts_header">Шрифти для мапи</string>
-    <string name="right_side_navigation"/>
+    <string name="right_side_navigation">Правосторонній рух</string>
     <string name="routing_attr_driving_style_balance_name">Збалансований</string>
     <string name="routing_attr_driving_style_safety_name">Безпечний</string>
     <string name="routing_attr_driving_style_speed_name">Швидкісний</string>
@@ -2931,4 +2938,32 @@ Facebook: https://www.facebook.com/osmandapp
     <string name="no_overlay">Мапа покриття вимкнена</string>
     <string name="no_underlay">Підкладка вимкнена</string>
     <string name="subscribe_email_error">Помилка</string>
+    <string name="mapillary">Mapillary</string>
+    <string name="depth_contour_descr">Набір мап із зазначенням точок контурних ліній і глибини морського дна (на основі сітки в 30 кутових секунд).</string>
+    <string name="sea_depth_thanks">Дякую за покупку контурів морських глибин!</string>
+    <string name="index_item_depth_contours_osmand_ext">Контури морських глибин</string>
+    <string name="index_item_depth_points_southern_hemisphere">Точки морських глибин південної півкулі</string>
+    <string name="index_item_depth_points_northern_hemisphere">Точки морських глибин північної півкулі</string>
+    <string name="download_depth_countours">Контури морських глибин</string>
+    <string name="nautical_maps">Морські мапи</string>
+    <string name="analyze_on_map">Аналізувати на мапі</string>
+    <string name="shared_string_visible">Видимі</string>
+    <string name="restore_purchases">Відновлення покупок</string>
+    <string name="driving_region_automatic">Автоматично</string>
+    <string name="do_not_send_anonymous_app_usage">На відсилати анонімну статистику використання</string>
+    <string name="do_not_send_anonymous_app_usage_desc">OsmAnd збирає інформацію про те, якій частині програми використовуються вами. Ваше місце розташування ніколи не відправляється, як і все, що ви вводите, які місця переглядаєте, що шукаєте чи звантажуєте.</string>
+    <string name="parking_options">Опції паркування</string>
+    <string name="full_version_thanks">Дякуємо за покупку повної версії OsmAnd!</string>
+    <string name="routing_attr_relief_smoothness_factor_hills_name">Горбисто</string>
+    <string name="routing_attr_relief_smoothness_factor_plains_name">Менш горбисте</string>
+    <string name="routing_attr_relief_smoothness_factor_more_plains_name">Рівнинно</string>
+    <string name="relief_smoothness_factor_descr">Переважний рельєф: рівнинний або гористий</string>
+    <string name="routing_attr_relief_smoothness_factor_name">Вибрати пересіченість місцевості</string>
+    <string name="shared_string_paused">Призупинено</string>
+    <string name="route_is_too_long_v2">Можливо, буде потрібно дуже багато часу для локального (оффлайн) розрахунку маршруту. Будь ласка, додайте один або більше проміжних пунктів на маршруті, якщо розрахунок не завершений через 10 чи більше хвилин.</string>
+    <string name="osmand_extended_description_part1">"
+\n OsmAnd (OSM Автоматична Навігація До цілі) — застосунок для мап і навігації з доступом до безкоштовних високоякісних глобальних даних OpenStreetMap (OSM).
+\n
+\nНасолоджуйтесь голосовою та візуальною навігацією, переглядайте точки інтересу (англ. POI), створюйте та керуйте GPX-треками, переглядайте контурні лінії та дані про висоту (за допомогою зовнішнього втулка), перемикайтеся  між режимами автомобіліста, велосипедиста й пішохода, редагуйте OSM та ще багато цікавого.
+\n "</string>
     </resources>
