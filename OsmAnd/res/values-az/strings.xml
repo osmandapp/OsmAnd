@@ -897,4 +897,32 @@ Gün batır: %2$s</string>
     <string name="gpx_selection_point">%1$s nöqtəsi</string>
     <string name="gpx_selection_points">%1$s
 \nNöqtələr</string>
+    <string name="osmo_user_left">İstifadəçi %1$s %2$s qrupunu tərk etdi</string>
+    <string name="osmo_show_group_notifications_descr">İstifadəçi qrupa qoşulanda və ya tərk edəndə xəbərdarlıq mesajlarını göstər</string>
+    <string name="osmo_create_groups_confirm">Qruplar yaratmaq üçün OsMo-nun qeydiyyatdan keçmiş istifadəçisi olmalısınız.</string>
+    <string name="osmo_credentials_not_valid">OsMo etimadnaməniz etibarlı deyil.</string>
+    <string name="osmo_cancel_moving_target">Hərəkətli hədəfi ləğv et</string>
+    <string name="osmo_set_moving_target">Hərəkətli hədəf kimi təyin et</string>
+    <string name="osmo_use_server_name">Qeydiyyatlı ad</string>
+    <string name="osmo_edit_device">İstifadəçi xüsusiyyətlərini dəyiş</string>
+    <string name="osmo_edit_color">Ekran rəngi</string>
+    <string name="osmo_share_current_session">Hazırki sessiyanı brauzerdə paylaş</string>
+    <string name="osmo_session_not_available">Sessiya mövcud deyil, “Məkan göndər”in açıq olub-olmadığını yoxlayın.</string>
+    <string name="osmo_share_session">Sessiyanı paylaş</string>
+    <string name="osmo_track_interval_descr">Məkan göndərmək üçün vaxt intervalı seçin</string>
+    <string name="osmo_group_policy">Qaydalar</string>
+    <string name="osmo_server_operation_failed">OsMo server əməliyyatı uğursuz oldu</string>
+    <string name="osmo_enable_tracker">Mövqelərimi göndər</string>
+    <string name="osmo_control">OsMo sürətli giriş</string>
+    <string name="osmo_auth_pending">İcazə gözlənilir…</string>
+    <string name="osmo_io_error">"OsMo qoşulma problemi: "</string>
+    <string name="osmo_mode_restart">OsMo sessiyanı yenidən başlat</string>
+    <string name="osmo_mode_on">OsMo sessiyanı dayandır</string>
+    <string name="osmo_mode_off">OsMo sessiyanı başlat</string>
+    <string name="always_center_position_on_map">Mövqeni hər zaman mərkəzdə göstər</string>
+    <string name="index_item_world_seamarks"/>
+    <string name="lang_en_gb">İngiliscə (Birləşmiş Krallıq)</string>
+    <string name="lang_af">Afrikaans</string>
+    <string name="lang_al">Albanca</string>
+    <string name="lang_eu">Bask dili</string>
     </resources>
