@@ -2872,4 +2872,6 @@
 	<string name="poi_nuclear_explosion_site">爆炸：地點</string>
 	<string name="poi_nuclear_explosion_type_atmospheric_balloon">爆炸類型：大氣層、氣球</string>
 	<string name="poi_nuclear_explosion_type_atmospheric_atmospheric_surface">爆炸類型：大氣層、地表</string>
+	<string name="poi_energy_supplier">電力公司辦事處</string>
+
 	</resources>
