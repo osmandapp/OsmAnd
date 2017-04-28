@@ -2955,7 +2955,7 @@ Fonctionnalités principales :
     <string name="select_street">Sélectionnez les rues</string>
     <string name="shared_string_in_name">dans %1$s</string>
     <string name="shared_string_overview">Vue d\'ensemble</string>
-    <string name="animate_my_location_desc">Activer l\'extrapolation de votre position en cas de perte temporaire du signal GPS</string>
+    <string name="animate_my_location_desc">Activer l\'animation de votre position pendant la navigation</string>
     <string name="animate_my_location">Animer ma position</string>
     <string name="osmand_plus_extended_description_part6">"
  Fonctionnalités adaptées aux cyclistes et piétons
