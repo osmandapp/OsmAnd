@@ -48,44 +48,10 @@
     <string name="snap_to_road_descr">導航過程中對齊道路位置</string>
     <string name="snap_to_road">對齊道路</string>
     <string name="osmand_short_description_80_chars">將離線與線上的 OSM 地圖，用在全球行動地圖檢視和導航</string>
-    <string name="osmand_long_description_1000_chars">"
- OsmAnd (OSM Automated Navigation Directions) 
-
- OsmAnd 是開放程式碼的導航應用程式，存取各式各樣的全球性 OpenStreetMap (簡稱 OSM 開放街道地圖) 資料。所有圖資(向量圖或地圖圖磚)可存放於手機的記憶卡上，可作離線與線上圖資導航，包含轉向建議(turn by turn)語音導航。
-
-一些主要功能：
- - 完整的離線功能(存放下載的向量圖或地圖圖磚於裝置存儲器)
- - 提供細致的全球離線向量圖資 - 直接從應用程式下載各國或區域圖資
- - 可疊加不同的多種地圖層於自訂的透明度，如 GPX 或導航軌跡、興趣點、我的收藏、公共運輸站
- - 離線查尋地址、場所(POI)
- - 中程距離的離線使用路線
- - 汽車、自行車、步行模式有下列選項：
- - 可選的自動日夜模式切換 - 可選的依據速度自動地圖比例尺縮放
- - 可選的地圖正北朝上或行進方向朝上 - 可選的車道引導、速限顯示、使用真人語音或 TTS 語音
-
- OsmAnd 免費版限制:
- - 地圖下載數量 
- - 無法使用離線維基百科的 POI
-
- OsmAnd 正在積極開發我們的專案，並且它的更進一步發展依賴於提供資金的捐助，用以資助發展和新功能的駕駛測試。請考慮購買 OsmAnd +，或資助特定的新功能或在 osmand.net 網站上一般捐贈。
- "</string>
+    <string name="osmand_long_description_1000_chars">" OsmAnd (OSM Automated Navigation Directions) 
+\n OsmAnd 是開放程式碼的導航應用程式，存取各式各樣的全球性 OpenStreetMap (簡稱 OSM 開放街道地圖) 資料。所有圖資(向量圖或地圖圖磚)可存放於手機的記憶卡上，可作離線與線上圖資導航，包含轉向建議(turn by turn)語音導航。一些主要功能： - 完整的離線功能(存放下載的向量圖或地圖圖磚於裝置存儲器) - 提供細致的全球離線向量圖資 - 直接從應用程式下載各國或區域圖資 - 可疊加不同的多種地圖層於自訂的透明度，如 GPX 或導航軌跡、興趣點、我的收藏、公共運輸站 - 離線查尋地址、場所(POI) - 中程距離的離線使用路線 - 汽車、自行車、步行模式有下列選項： - 可選擇自動日夜模式切換 - 可依據速度選擇地圖縮放 - 可依據羅盤或運動方向選擇地圖選擇對齊方式 - 可選的車道引導、速限顯示、使用真人語音或 TTS 語音 OsmAnd 免費版限制: - 地圖下載數量  - 無法使用離線維基百科的 POI OsmAnd 正在積極開發我們的專案，並且它的更進一步發展依賴於提供資金的捐助，用以資助發展和新功能的駕駛測試。請考慮購買 OsmAnd +，或資助特定的新功能或在 osmand.net 網站上一般捐贈。 "</string>
     <string name="osmand_plus_short_description_80_chars">將離線與線上的 OSM 地圖，用在全球行動地圖檢視和導航</string>
-    <string name="osmand_plus_long_description_1000_chars">"
- OsmAnd+ OsmAnd (OSM Automated Navigation Directions)
-
- OsmAnd 是開放源碼導航應用程式，可以使用各式各樣的全球性 OpenStreetMap (簡稱 OSM 開放街道地圖) 資料。所有圖資(向量圖或地圖圖磚)可存放於裝置的記憶卡上，可作離線與線上圖資導航，包含轉向建議(turn by turn)語音導航。
-
- 一些主要的功能：
- - 完整離線功能 (存放下載的向量圖或地圖圖磚於裝置存儲器)
- - 全球離線向量圖資 - 直接由手機下載各國或區域圖資
- - 可疊加不同的多種地圖層於自訂的透明度，如 GPX 或導航軌跡、興趣點、我的收藏、等高線、大眾運輸停靠站
- - 離線查尋地址、場所(POI)
- - 中程距離的離線路線
- - 汽車、自行車、步行模式有下列選項：
- - 自動日/夜模式切換選項 - 取決於速度的地圖縮放選項
- - 地圖正北朝上或行進方向朝上選項
- - 車道引導、速限顯示、使用真人語音或 TTS 語音選項
- "</string>
+    <string name="osmand_plus_long_description_1000_chars">" OsmAnd+ (OSM Automated Navigation Directions) OsmAnd+ 是開放源碼導航應用程式，可以使用各式各樣的全球性 OpenStreetMap (簡稱 OSM 開放街道地圖) 資料。所有圖資(向量圖或地圖圖磚)可存放於裝置的記憶卡上，可作離線與線上圖資導航，包含轉向建議(turn by turn)語音導航。 一些主要的功能： - 完整離線功能 (存放下載的向量圖或地圖圖磚於裝置存儲器) - 全球離線向量圖資 - 直接由手機下載各國或區域圖資 - 可疊加不同的多種地圖層於自訂的透明度，如 GPX 或導航軌跡、興趣點、我的收藏、等高線、大眾運輸停靠站 - 離線查尋地址、場所(POI) - 中程距離的離線路線 - 汽車、自行車、步行模式有下列選項： - 自動日/夜模式切換選項 - 取決於速度的地圖縮放選項 - 地圖正北朝上或行進方向朝上選項 - 車道引導、速限顯示、使用真人語音或 TTS 語音選項 "</string>
 
 
     <string name="filterpoi_activity">建立興趣點篩選</string>
@@ -227,12 +193,10 @@
 	
 	
 	<string name="osmand_rastermaps_plugin_description">"有了這個外掛元件，您可以存取多種類型的網上（所謂的圖磚或網格）地圖，從預設的 OpenStreetMap 圖磚（如 Mapnik）到衛星圖像和特殊用途的圖層，比如天氣地圖、氣候地圖、地質地圖、地形陰影層等。
-
-這些地圖可以被用來作為主要的（基本）地圖，以便在 OsmAnd 地圖螢幕上顯示，或作為上層又或另外基本地圖的底層（如 OsmAnd 標準的離線地圖）。為了使任何的底層地圖可以看見，OsmAnd 向量地圖可以容易的根據需要透過 \'組態地圖\' 選單來隱藏某些構成。
-
-
-地圖圖磚可以直接透過線上資料來源獲得，或者可以使用準備好的離線地圖（手動複製到 OsmAnd 的資料檔案夾中） 作為一個 SQLite 資料庫，可以透過各種的第三方地圖編制工具產生。
- "</string>
+\n
+\n這些地圖可以被用來作為主要的（基本）地圖，以便在 OsmAnd 地圖螢幕上顯示，或作為上層又或另外基本地圖的底層（如 OsmAnd 標準的離線地圖）。為了使任何的底層地圖可以看見，OsmAnd 向量地圖可以容易的根據需要透過 \'組態地圖\' 選單來隱藏某些構成。
+\n
+\n地圖圖磚可以直接透過線上資料來源獲得，或者可以使用準備好的離線地圖（手動複製到 OsmAnd 的資料檔案夾中） 作為一個 SQLite 資料庫，可以透過各種的第三方地圖編制工具產生。 "</string>
     <string name="osmand_background_plugin_description">透過週期性的喚醒 GPS 裝置，在背景模式下(螢幕關閉)顯示設定，以啟用追蹤與導航。</string>
     <string name="osmand_accessibility_description">這個外掛元件，讓裝置在 OsmAnd 可以便利的直接用無障礙功能，例如調整 TTS 語音的語音速率、組態螢幕導航方位、使用軌跡球為縮放控制，或使用文字轉語音的回應，如自動告知您的位置。</string>
 
@@ -1219,16 +1183,13 @@ OsmAnd (Automated Navigation Directions) 是一個地圖和導航的應用程式
     <string name="layer_recordings">記錄層</string>
     <string name="intermediate_items_sort_return">在目前的位置到達目的地之間的路途上，沿路的中轉地點已採取了最佳化排列。</string>
     <string name="osmand_srtm_long_description_1000_chars">"這個外掛元件同時提供了等高線上層和（地貌）地形陰影層，顯示在 OsmAnd 標準地圖的頂部。此功能會讓運動選手、健行旅遊者、背包客，和對起伏的地理構成感興趣的任何人。
-
-
-全球圖資（在北緯 70 度至南緯 70 度之間）的量測基礎在於 SRTM (Shuttle Radar Topography Mission)和 ASTER (Advanced Spaceborne Thermal Emission and Reflection Radiometer)，安裝在美國太空總署地球觀測系統的旗艦衛星 Terra 上的遙測儀器，ASTER 是美國太空總署、日本經濟產業省(METI)、日本太空系統 (J-spacesystems)之間的通力合作產物。
- "</string>
+\n
+\n
+\n全球圖資（在北緯 70 度至南緯 70 度之間）的量測基礎在於 SRTM (Shuttle Radar Topography Mission)和 ASTER (Advanced Spaceborne Thermal Emission and Reflection Radiometer)，安裝在美國太空總署地球觀測系統的旗艦衛星 Terra 上的遙測儀器，ASTER 是美國太空總署、日本經濟產業省(METI)、日本太空系統 (J-spacesystems)之間的通力合作產物。 "</string>
     <string name="audionotes_location_not_defined">以位置去關聯的附註尚未下定義。\"使用位置 …\"，把註解分配給指定的位置。</string>
     <string name="srtm_plugin_description">"這個外掛元件同時提供了等高線上層和（地貌）地形陰影層，顯示在 OsmAnd 標準地圖的頂部。此功能會讓運動選手、健行旅遊者、背包客，和對起伏的地理構成感興趣的任何人。（請注意，等高線和地貌資料是各自獨立的，在外掛元件啟用後可以追加下載。）
-
-
-全球圖資（在 70 度以北和 70 度以南之間）的量測基礎在於 SRTM（Shuttle Radar Topography Mission）和 ASTER（Advanced Spaceborne Thermal Emission and Reflection Radiometer），安裝在美國太空總署地球觀測系統的旗艦衛星 Terra 上的遙測儀器，ASTER 是美國太空總署、日本經濟產業省（METI）、日本太空系統（J-spacesystems）之間的通力合作的產物。
- "</string>
+\n
+\n全球圖資（在 70 度以北和 70 度以南之間）的量測基礎在於 SRTM（Shuttle Radar Topography Mission）和 ASTER（Advanced Spaceborne Thermal Emission and Reflection Radiometer），安裝在美國太空總署地球觀測系統的旗艦衛星 Terra 上的遙測儀器，ASTER 是美國太空總署、日本經濟產業省（METI）、日本太空系統（J-spacesystems）之間的通力合作的產物。 "</string>
 
 
     <string name="index_name_openmaps">OpenMaps EU</string>
@@ -1433,13 +1394,11 @@ OsmAnd (Automated Navigation Directions) 是一個地圖和導航的應用程式
     <string name="osmo_settings">OsMo</string>
     <string name="osmo_settings_descr">組態監控設定值和安裝個人監控頻道</string>
     <string name="osmo_plugin_description">"這個外掛元件部分提供了 OpenStreetMap 監控功能，請參閱 http://osmo.mobi。
-
-
-您可以即時追蹤所有參與群組的裝置。具有各種選項用於連線期間追蹤或持續的追蹤。您還可以查看上傳到您所屬群組的航點和軌跡。
-
-
-經過幾個月不移除該群組，使其符合您在 OsMo.mobi 網站上建立的群組規則
- "</string>
+\n
+\n
+\n您可以即時追蹤所有參與群組的裝置。具有各種選項用於連線期間追蹤或持續的追蹤。您還可以查看上傳到您所屬群組的航點和軌跡。
+\n
+\n經過幾個月不移除該群組，使其符合您在 OsMo.mobi 網站上建立的群組規則 "</string>
     <string name="keep_informing_never">只有手動（輕點箭頭）</string>
     <string name="keep_informing_descr">按照定期間隔重新通報導航指示</string>
     <string name="keep_informing">重複導航指示</string>
@@ -1575,21 +1534,13 @@ OsmAnd (Automated Navigation Directions) 是一個地圖和導航的應用程式
     <string name="osmo_start_service">OsMo 服務</string>
     <string name="osmo_gpx_track_downloaded">OsMo 軌跡 %1$s 已下載。</string>
     <string name="osmo_group_by_invite">輸入邀請</string>
-    <string name="osmo_group_information_desc">"
- - 建立一個群組，並請給它一個名稱和填寫說明
-
- - 從應用程式建立的群組只是簡單的類型，在網站 https://osmo.mobi/g/new 了解更多
-
- - 透過這個網站，您可以管理群組、地點追蹤和所有可用標點
-
- - 如果這不是 POI 群組，我們不贊同使用的群組只有一個使用者
-
- - 私人群組僅限於 8 人
-
- - 詳細的條款及條件永遠在網站 OsMo.mobi
-
- - 如果您需要特別的條件 - 請連絡支援︰osmo.mobi@gmail.com
- "</string>
+    <string name="osmo_group_information_desc">" - 建立一個群組，並請給它一個名稱和填寫說明
+\n - 從應用程式建立的群組只是簡單的類型，在網站 https://osmo.mobi/g/new 了解更多
+\n - 透過這個網站，您可以管理群組、地點追蹤和所有可用標點
+\n - 如果這不是 POI 群組，我們不贊同使用的群組只有一個使用者
+\n - 私人群組僅限於 8 人
+\n - 詳細的條款及條件一直在網站 OsMo.mobi 上
+\n - 如果您需要特別的條件 - 請連絡支援︰osmo.mobi@gmail.com "</string>
     <string name="osmo_group_information">請在建立群組之前，仔細閱讀！</string>
     <string name="osmo_not_signed_in">OsMo 登入失敗</string>
     <string name="osmo_auth_error_short">授權失敗</string>
@@ -1671,10 +1622,9 @@ OsmAnd (Automated Navigation Directions) 是一個地圖和導航的應用程式
     <string name="shared_string_all">全部</string>
     <string name="index_tours">旅遊</string>
     <string name="record_plugin_description">"這個外掛元件在地圖螢幕上，以手動點觸 GPX 記錄小工具，以啟動去錄製和儲存您軌跡的功能，或是自動記錄您所有的導航路線到 GPX 檔案。
-
-
-錄製的軌跡可以與您的朋友共享或用作為 OSM 的貢獻。運動選手可以使用錄製的軌跡，監看他們的訓練。一些基本的軌跡分析，可以直接在 OsmAnd 進行，如一圈的時間、平均速度等，而軌跡當然也可於事後在專門的第三方分析工具解析。
- "</string>
+\n
+\n
+\n錄製的軌跡可以與您的朋友共享或用作為 OSM 的貢獻。運動選手可以使用錄製的軌跡，監看他們的訓練。一些基本的軌跡分析，可以直接在 OsmAnd 進行，如一圈的時間、平均速度等，而軌跡當然也可於事後在專門的第三方分析工具解析。 "</string>
     <string name="record_plugin_name">旅程錄製</string>
     <string name="int_hour">小時</string>
     <string name="duration">持續時間</string>
@@ -1819,33 +1769,24 @@ OsmAnd (Automated Navigation Directions) 是一個地圖和導航的應用程式
     <string name="share_note">分享註解</string>
     <string name="plugin_touringview_name">旅遊地圖檢視</string>
     <string name="plugin_nautical_descr">"這個外掛元件豐富了 OsmAnd 地圖和導航應用，也為了划船、帆船、與其他類型的水上運動，產生了航海地圖。
-
-
-一個為 OsmAnd 附加的特有地圖，將提供用於所有內陸近岸航行的航海導航標誌和圖表符號。每個導航標誌描述提供需識別出它們和它們含義的詳細資訊（類別、形狀、顏色、序列、參考等）。
-
-
-要返回到 OsmAnd 慣用的地圖模式，再次取消這個外掛元件的啟動，或 \'組態地圖\' 下的 \'地圖樣式\'，在這兩者中的任何一個的更改都可輕易的回復。
- "</string>
+\n
+\n一個為 OsmAnd 附加的特有地圖，將提供用於所有內陸近岸航行的航海導航標誌和圖表符號。每個導航標誌描述提供需識別出它們和它們含義的詳細資訊（類別、形狀、顏色、序列、參考等）。
+\n
+\n要返回到 OsmAnd 慣用的地圖模式，再次取消這個外掛元件的啟動，或 \'組態地圖\' 下的 \'地圖樣式\'，在這兩者中的任何一個的更改都可輕易的回復。 "</string>
     <string name="plugin_ski_descr">"此外掛元件為 OsmAnd 所安置，讓您在全球滑雪斜坡、越野滑雪、阿爾卑斯山的滑雪路線、纜車和滑雪纜車上的詳細資訊瞭若指掌。以顏色編碼顯示路線和滑雪道的困難度，並且在特殊的 \'冬季\' 地圖樣式描畫出，哪個在冬季景觀變成雪色。
-
-
-啟動此檢視，會更改地圖樣式到 \'冬季和滑雪 \'，顯示出冬季的條件下，所有的景觀特徵。此檢視可以在這裡經由再次取消啟動，或透過 \'組態地圖\' 之下的 \'地圖樣式\' 這兩者中任何一個的更改而恢復它。
- "</string>
+\n
+\n啟動此檢視，會更改地圖樣式到 \'冬季和滑雪 \'，顯示出冬季的條件下，所有的景觀特徵。此檢視可以在這裡經由再次取消啟動，或透過 \'組態地圖\' 之下的 \'地圖樣式\' 這兩者中任何一個的更改而恢復它。 "</string>
 	<string name="plugin_touringview_descr">"啟動此檢視的地圖樣式更改為\'旅遊檢視\'，這是給旅客和職業司機的一種特殊的高細節檢視。
-
-
-此檢視提供了在任何給與的地圖縮放，（特別是公路、軌道、路徑和定位標記）在地圖資料中最大量可獲得的詳細行程。
-
-它也清楚地描繪了各類道路明確地色碼，例如駕駛大型車輛時，這是非常有用的。
-
-
-並提供了特別的旅遊選項，比如顯示自行車路線或高山的路線。
-
-此檢視是從我們的標準地圖所建立，不需要下載特殊的地圖。
-
-
-此檢視可以在這裡經由再次取消啟動，或透過 \'組態地圖\' 之下的 \'地圖樣式\' 這兩者中任何一個的更改而恢復它。
- "</string>
+\n
+\n此檢視提供了在任何給與的地圖縮放，（特別是公路、軌道、路徑和定位標記）在地圖資料中最大量可獲得的詳細行程。
+\n
+\n它也清楚地描繪了各類道路明確地色碼，例如駕駛大型車輛時，這是非常有用的。
+\n
+\n並提供了特別的旅遊選項，比如顯示自行車路線或高山的路線。
+\n
+\n此檢視是從我們的標準地圖所建立，不需要下載特殊的地圖。
+\n
+\n此檢視可以在這裡經由再次取消啟動，或透過 \'組態地圖\' 之下的 \'地圖樣式\' 這兩者中任何一個的更改而恢復它。 "</string>
     <string name="days_behind">天前</string>
     <string name="location_on_map">位置：\n 緯度 %1$s\n 經度 %2$s</string>
     <string name="rename_failed">重新命名失敗。</string>
@@ -2237,36 +2178,25 @@ OsmAnd (Automated Navigation Directions) 是一個地圖和導航的應用程式
     <string name="rendering_attr_roadStyle_description">道路樣式</string>
     <string name="poi_dialog_reopen">重新開啟</string>
 	<string name="osm_save_offline">離線儲存</string>
-    <string name="release_2_2">"
- • 在地圖上和其它螢幕上，為點擊位置做了新的敏捷內容選單使用者界面
-
-
- • 地圖螢幕上現在除了直接啟動外，還有\'在應用程式時啟動顯示儀表板\'可選
-
-
- • 組態哪些以及何種卡可以在儀表板上顯示
-
-
- • 如果您喜歡基本選單的應用程式控制，繞過儀表板方式
-
-
- • 要下載地圖，可以直接在全球地圖上點選區域
-
-
- • 更好的重新計算路線（現在引擎經過反復的嘗試，建議一條不同的路線）
-
-
- • 興趣點搜尋現在支援更具體的查詢
-
-
- • 改善過的興趣點和 OSM 編輯功能
-
-
- • 地圖資料下載結構和界面重新設計
-
-
- 還有更多…
- "</string>
+    <string name="release_2_2">" • 在地圖上和其它螢幕上，為點擊位置做了新的敏捷內容選單使用者界面
+\n
+\n • 地圖螢幕上現在除了直接啟動外，還有\'在應用程式時啟動顯示儀表板\'可選
+\n
+\n • 組態哪些以及何種卡可以在儀表板上顯示
+\n
+\n • 如果您喜歡基本選單的應用程式控制，繞過儀表板方式
+\n
+\n • 要下載地圖，可以直接在全球地圖上點選區域
+\n
+\n • 更好的重新計算路線（現在引擎經過反復的嘗試，建議一條不同的路線）
+\n
+\n • 興趣點搜尋現在支援更具體的查詢
+\n
+\n • 改善過的興趣點和 OSM 編輯功能
+\n
+\n • 地圖資料下載結構和界面重新設計
+\n
+\n 還有更多… "</string>
     <string name="copied_to_clipboard">複製到剪貼簿</string>
     
     
@@ -2463,24 +2393,17 @@ Facebook：https://www.facebook.com/osmandapp
     <string name="report">報告</string>
     <string name="file_name_containes_illegal_char">檔案名稱含有違反規則的字符</string>
 <string name="storage_permission_restart_is_required">現在應用程式允許寫入外部記憶體。應用程式需要手動重新啟動。</string>
-    <string name="release_2_3">"
- • OSM 即時。支援地圖貢獻者和開發者和每小時獲得地圖更新。
-
-
- • 地圖標記。一種新的方式以快速在地圖上選擇地點。
-
-
- • 更詳細的 OSM 地圖與國家具體的公路標誌和許多新的地圖功能。
-
-
- • 改善外觀和感覺的路線準備。
-
-
- • 在地圖下拉選單中有許多改善，如下拉地址查找。
-
-
-  以及更多…
- "</string>
+    <string name="release_2_3">" • OSM 即時。支援地圖貢獻者和開發者和每小時獲得地圖更新。
+\n
+\n • 地圖標記。一種新的方式以快速在地圖上選擇地點。
+\n
+\n • 更詳細的 OSM 地圖與國家具體的公路標誌和許多新的地圖功能。
+\n
+\n • 改善外觀和感覺的路線準備。
+\n
+\n • 在地圖下拉選單中有許多改善，如下拉地址查找。
+\n
+\n  以及更多… "</string>
     <string name="no_map_markers_found">請透過地圖增加地圖標記</string>
     <string name="no_waypoints_found">未發現任何航點</string>
     <string name="rendering_value_medium_name">中等</string>
@@ -2550,27 +2473,19 @@ Facebook：https://www.facebook.com/osmandapp
     <string name="show_something_on_map">在地圖上顯示 %1$s</string>
     <string name="dist_away_from_my_location">查詢 %1$s 路線</string>
     <string name="show_on_map">顯示在地圖上</string>
-    <string name="release_2_4">"
- • 新加入非常強大的自由文字查詢
-
-
- • 透過藍牙集成汽車音響系統 / 電話揚聲器
-
-
- • 改進的路線引導、 語音提示，和轉彎道指示
-
-
- • 改進了運輸層與路線繪製
-
-
- • 增加了更多的語言環境，現在支援區域的語言環境
-
-
- • 許多其它的改善和修正錯誤
-
-
- 以及更多...
- "</string>
+    <string name="release_2_4">" • 新加入非常強大的自由文字查詢
+\n
+\n • 透過藍牙集成汽車音響系統 / 電話揚聲器
+\n
+\n • 改進的路線引導、 語音提示，和轉彎道指示
+\n
+\n • 改進了運輸層與路線繪製
+\n
+\n • 增加了更多的語言環境，現在支援區域的語言環境
+\n
+\n • 許多其它的改善和修正錯誤
+\n
+\n 以及更多... "</string>
     <string name="coords_search">座標查詢</string>
     <string name="advanced_coords_search">進階座標查詢</string>
     <string name="route_stops_before">%1$s 之前停止</string>
@@ -2649,27 +2564,19 @@ Facebook：https://www.facebook.com/osmandapp
     <string name="osmo_pause_location">暫停</string>
     <string name="osmo_service_running">OsMo 服務正在運行</string>
     <string name="shared_string_notifications">通知</string>
-    <string name="release_2_5">"
- • 在地圖上可點擊圖示
-
-
-• 非常強大的 POI 篩選查詢：例如由餐館、或附有特定設施的露營場地
-
-
-• 新的地區地圖樣式給自行車和徒步旅行者
-
-
-• 加強的行程記錄
-
-
-• 改善了導航通知（Android Wear）
-
-
-• 許多其它的改善和錯誤修復
-
-
-和更多…
- "</string>
+    <string name="release_2_5">" • 在地圖上可點擊圖示
+\n
+\n• 非常強大的 POI 篩選查詢：例如由餐館、或附有特定設施的露營場地
+\n
+\n• 新的地區地圖樣式給自行車和徒步旅行者
+\n
+\n• 加強的行程記錄
+\n
+\n• 改善了導航通知（Android Wear）
+\n
+\n• 許多其它的改善和錯誤修復
+\n
+\n和更多… "</string>
     <string name="gpx_no_tracks_title">您尚未有軌跡</string>
     <string name="gpx_no_tracks_title_folder">您也可以增加軌跡到資料夾</string>
     <string name="gpx_add_track">增加軌跡</string>
@@ -2785,39 +2692,27 @@ Facebook：https://www.facebook.com/osmandapp
     <string name="quick_action_page_list_descr">輕點動作按鈕會直達下面的清單。</string>
     <string name="auto_split_recording_title">自動分割錄製之後的間隙</string>
 	<string name="auto_split_recording_descr">如果日期已更改，開始新區段在6分鐘後的間隙，新軌跡在2小時後的間隙，或新檔案在更長的間隙之後。</string>
-    <string name="release_2_6">"
- • 新功能：快速動作按鈕
-
-
- •  改進了觸控螢幕手勢的回應(同時平移和縮放)
-
-
- • 新的地圖字體覆蓋了更多的語言環境
-
-
- • 支援 TTS 不同版本的區域語言(和語法)
-
-
- • 在一些地圖樣式和維基百科的清晰度增強
-
-
- • 支援開放位置碼 (OLC)
-
-
- •  為記錄的 GPX 軌跡和預測的路線顯示海拔、坡度和速度的概貌
-
-
- •  在自行車路線中\"駕駛樣式\"設定和邏輯的改進
-
-
- •  在自行車路線中使用高度資料的設定
-
-
- •  一些其它的改進和錯誤修復
-
-
- 和更多…
- "</string>
+    <string name="release_2_6">" • 新功能：快速動作按鈕
+\n
+\n •  改進了觸控螢幕手勢的回應(同時平移和縮放)
+\n
+\n • 新的地圖字體覆蓋了更多的語言環境
+\n
+\n • 支援 TTS 不同版本的區域語言(和語法)
+\n
+\n • 在一些地圖樣式和維基百科的清晰度增強
+\n
+\n • 支援開放位置碼 (OLC)
+\n
+\n •  為記錄的 GPX 軌跡和預測的路線顯示海拔、坡度和速度的概貌
+\n
+\n •  在自行車路線中\"駕駛樣式\"設定和邏輯的改進
+\n
+\n •  在自行車路線中使用高度資料的設定
+\n
+\n •  一些其它的改進和錯誤修復
+\n
+\n 和更多… "</string>
 	<string name="rendering_attr_depthContours_description">顯示等深線和標記</string>
     <string name="rendering_attr_depthContours_name">航海等深線</string>
 	<string name="routing_attr_height_relief_smoothness_factor_name">地貌柔滑系數</string>
@@ -2896,37 +2791,10 @@ Facebook：https://www.facebook.com/osmandapp
     <string name="right_side_navigation">右側駕駛</string>
     <string name="driving_region_automatic">自動</string>
     <string name="shared_string_paused">暫停</string>
-    <string name="osmand_plus_extended_description_part8">"
- 大概的地圖覆蓋區域和品質：
- • 西歐： ****
- • 東歐： ***
- • 俄羅斯： ***
- • 北美洲： ***
- • 南美洲： **
- • 亞洲：**
- • 日本和韓國： ***
- • 中東： **
- • 非洲： **
- • 南極洲： *
- 全球大多數國家都可以下載！
- 從阿富汗到辛巴威，從澳大利亞到美國。 阿根廷、巴西、加拿大、法國、德國、墨西哥、英國、 西班牙 …
- "</string>
-    <string name="osmand_plus_extended_description_part5">"
- 安全功能
- • 任選的自動日/夜檢視切換
- • 任選的速限顯示功能，如果您超速了它會提醒
- • 取決於速度的地圖縮放選項
- • 分享您所在的位置的功能，這樣您的朋友能找到您
- "</string>
-    <string name="osmand_plus_extended_description_part6">"
- 自行車和步行功能
- • 地圖包括步行，健行旅遊者，自行車道，非常適合戶外活動
- • 特殊的自行車和行人的路線和顯示模式
- • 任選的大眾運輸停靠站 (公共汽車、 電車、火車）包括線路名稱
- • 任選的旅程錄製到裝置端 GPX 檔案或線上服務
- • 任選的速度和高度顯示
- • 顯示等高線和地形陰影（經由附加的外掛元件）
- "</string>
+    <string name="osmand_plus_extended_description_part8">" 大概的地圖覆蓋區域和品質： • 西歐： **** • 東歐： *** • 俄羅斯： *** • 北美洲： *** • 南美洲： ** • 亞洲：** • 日本和韓國： *** • 中東： ** • 非洲： ** • 南極洲： * 全球大多數國家都可以下載！ 從阿富汗到辛巴威，從澳大利亞到美國。 阿根廷、巴西、加拿大、法國、德國、墨西哥、英國、 西班牙 … "</string>
+    <string name="osmand_plus_extended_description_part5">" 安全功能 • 任選的自動日/夜檢視切換 • 任選的速限顯示功能，如果您超速了它會提醒 • 取決於速度的地圖縮放選項
+\n • 分享您所在的位置的功能，這樣您的朋友能找到您 "</string>
+    <string name="osmand_plus_extended_description_part6">" 自行車和步行功能 • 地圖包括步行，健行旅遊者，自行車道，非常適合戶外活動 • 特殊的自行車和行人的路線和顯示模式 • 任選的大眾運輸停靠站 (公共汽車、 電車、火車）包括線路名稱 • 任選的旅程錄製到裝置端 GPX 檔案或線上服務 • 任選的速度和高度顯示 • 顯示等高線和地形陰影（經由附加的外掛元件） "</string>
     <string name="osmand_plus_extended_description_part7">"
  直接提供給 OSM
  • 報告地圖錯誤
@@ -2935,114 +2803,22 @@ Facebook：https://www.facebook.com/osmandapp
  • 任選的旅程錄製而且在背景模式（當裝置處於休眠模式下）
 OsmAnd 是開放原始碼，而且正在積極的開發。應用程式從報告錯誤、改進翻譯或編寫新的功能，每個人都可以作出貢獻。透過所有的這些形成開發人員和使用者交互的作用下，讓該專案處於不斷改善的活絡狀態。專案的開發進度、編寫程式碼和測試新的功能，還是要依靠提供資金捐款資助。
  "</string>
-    <string name="osmand_extended_description_part1">"
- OsmAnd (Automated Navigation Directions) 是一個地圖和導航的應用程式可以免費的存取，有世界各地和高品質的OpenStreetMap（OSM）資料。
-
- 享有語音和視覺的導航，檢視 POI（興趣點），建立和管理 GPX 軌跡，使用視覺化的等高線和海拔資訊（透過外掛元件），能在汽車駕駛、騎自行車和步行模式之間選擇、OSM 編輯和更多。
- "</string>
-    <string name="osmand_extended_description_part2">"
- GPS 導航
- • 您可以在離線（當您在國外無需國際漫遊費用）或連線（快速）兩種模式間選擇
- • 轉向建議(turn by turn)語音導航（真人和合成語音）
- • 當您偏離了行駛路線，重建改道規劃
- • 車道導引、街道名稱和預計抵達時間會有一路的幫助
- • 為了讓您的行程安全，有日/夜模式自動切換
- • 您可以選擇顯示車速限制，如果超速了則可以獲得提醒
- • 依您的速度調整地圖縮放
- • 您可以按照地址、類別（如停車場、餐廳、旅店、加油站、博物館）或地理坐標搜尋目的地
- • 支援中轉點於您的旅程
- • 您可以錄製自己的或上傳一個 GPX 軌跡並跟隨它
- "</string>
-    <string name="osmand_plus_extended_description_part4">"
- 使用 OSM 和維基百科的資料
- • 來自世界最好的協作專案所得的高品質資訊
- • OSM 資料可用在每個國家或地區
- • 維基百科 POI 卓越的觀光景點
- • 直接從應用程式，無限制的免費下載
- • 密集的離線向量地圖更新，至少每月一次
-
- • 可在完整的區域資料還是只有公路網之間選擇（例如：光全日本就有700 MB或200 MB的公路網）
- "</string>
-    <string name="osmand_plus_extended_description_part2">"
- 導航
- • 在線上工作(快速)或是離線（當您在國外無需國際漫遊費用）
- • 轉向建議(turn by turn)語音導航（真人和合成語音）
- • 可任選的車道導引、街道名稱顯示和預計抵達時間
- • 支援您行程安排上的中轉點
- • 當您行駛路線改道，自動重新規劃
- • 查尋地點按照地址、類別（例如：餐廳、旅店、加油站、博物館）或以地理位置坐標
- "</string>
-    <string name="osmand_plus_extended_description_part3">"
- 地圖檢視
- • 顯示您的位置和方向
- • 可以選擇依照羅盤或您的運動方向對齊畫面
- • 將您最重要的地點，儲存為我的收藏
- • 顯示您周遭的 POI（興趣點）
- • 顯示專用的線上地圖圖磚、衛星視圖（來自 Bing）、不同的疊加層如旅遊/導航 GPX 軌跡以及可自定透明度的附加層
- • 可任選顯示地名於英文、裝置端或語言的拼寫
- "</string>
+    <string name="osmand_extended_description_part1">" OsmAnd (Automated Navigation Directions) 是一個地圖和導航的應用程式可以免費的存取，有世界各地和高品質的OpenStreetMap（OSM）資料。享有語音和視覺的導航，檢視 POI（興趣點），建立和管理 GPX 軌跡，使用視覺化的等高線和海拔資訊（透過外掛元件），能在汽車駕駛、騎自行車和步行模式之間選擇、OSM 編輯和更多。 "</string>
+    <string name="osmand_extended_description_part2">" GPS 導航 • 您可以在離線（當您在國外無需國際漫遊費用）或連線（快速）兩種模式間選擇 • 轉向建議(turn by turn)語音導航（真人和合成語音） • 當您偏離了行駛路線，重建改道規劃 • 車道導引、街道名稱和預計抵達時間會有一路的幫助 • 為了讓您的行程安全，有日/夜模式自動切換 • 您可以選擇顯示車速限制，如果超速了則可以獲得提醒 • 依您的速度調整地圖縮放 • 您可以按照地址、類別（如停車場、餐廳、旅店、加油站、博物館）或地理坐標搜尋目的地 • 支援中轉點於您的旅程 • 您可以錄製自己的或上傳一個 GPX 軌跡並跟隨它 "</string>
+    <string name="osmand_plus_extended_description_part4">" 使用 OSM 和維基百科的資料 • 來自世界最好的協作專案所得的高品質資訊 • OSM 資料可用在每個國家或地區 • 維基百科 POI 卓越的觀光景點 • 直接從應用程式，無限制的免費下載 • 密集的離線向量地圖更新，至少每月一次 • 可在完整的區域資料還是只有公路網之間選擇（例如：光全日本就有700 MB或200 MB的公路網） "</string>
+    <string name="osmand_plus_extended_description_part2">" 導航 • 在線上工作(快速)或是離線（當您在國外無需國際漫遊費用） • 轉向建議(turn by turn)語音導航（真人和合成語音） • 可任選的車道導引、街道名稱顯示和預計抵達時間 • 支援您行程安排上的中轉點 • 當您行駛路線改道，自動重新規劃 • 查尋地點按照地址、類別（例如：餐廳、旅店、加油站、博物館）或以地理位置坐標 "</string>
+    <string name="osmand_plus_extended_description_part3">" 地圖檢視 • 顯示您的位置和方向 • 可以選擇依照羅盤或您的運動方向對齊畫面 • 將您最重要的地點，儲存為我的收藏
+\n • 顯示您周遭的 POI（興趣點） • 顯示專用的線上地圖圖磚、衛星視圖（來自 Bing）、不同的疊加層如旅遊/導航 GPX 軌跡以及可自定透明度的附加層 • 可任選顯示地名於英文、裝置端或語言的拼寫 "</string>
     <string name="quick_action_add_first_intermediate">增加第一個中轉</string>
     <string name="shared_string_visible">可見的</string>
-    <string name="osmand_extended_description_part3">"
- 地圖
- • 顯示您週遭的 POI（興趣點）
- • 調整地圖到您的移動方向（或羅盤）
- • 顯示您在哪裡和您在看的地方
- • 分享您的位置，讓您的朋友能找到您
- • 保存您最重要的地點於我的收藏
- • 允許您去選擇怎樣在地圖上顯示名稱：於英文、裝置端或語言的拼寫
- • 顯示專用的線上地圖圖磚、衛星視圖（來自 Bing）、不同的疊加層如旅遊/導航 GPX 軌跡以及可自定透明度的附加層
- "</string>
-    <string name="osmand_extended_description_part5">"
- 自行車
- • 您可以在地圖找到自行車道
- • GPS 導航在自行車模式下，使用自行車道構建您的路線
- • 您能看到您的速度和海拔高度
- • GPX 錄製選項使您能去記錄您的旅程並且分享
- • 通過附加的外掛元件，您可以啟用顯示等高線和地形陰影
- "</string>
-    <string name="osmand_extended_description_part8">"
- OsmAnd 是開放原始碼，而且正在積極的開發。應用程式從記述註解、改進翻譯或編寫新的功能，每個人都可以作出貢獻。透過所有的這些形成開發人員和使用者交互的作用下，讓該專案處於不斷改善的活絡狀態。專案的開發進度、編寫程式碼和測試新的功能，還是要依靠提供資金捐款資助。
- 大概的地圖覆蓋區域和品質：
- • 西歐： ****
- • 東歐： ***
- • 俄羅斯： ***
- • 北美洲： ***
- • 南美洲： **
- • 亞洲： **
- • 日本和韓國： ***
- • 中東： **
- • 非洲： **
- • 南極洲： *
- 全球大多數國家都可以下載！
- 在您的國家獲得可靠的導航 - 無論是法國、德國、墨西哥、英國、西班牙、荷蘭、美國、俄羅斯、巴西或其他任何的國家。
- "</string>
-    <string name="osmand_extended_description_part7">"
- 為 OSM 做出貢獻
- • 報告資料錯誤
- • 從應用程式直接將 GPX 軌跡上傳到 OSM
- • 增加 POI 並直接將其上傳到 OSM（或如果離線則之後上傳）
- "</string>
-    <string name="osmand_extended_description_part4">"
- 滑雪
- OsmAnd 滑雪地圖外掛元件，使您能夠看到滑雪道與複雜程度和一些附加的資訊，如滑雪纜車和其它設施的位置。
- "</string>
-    <string name="osmand_extended_description_part6">"
- 步行、健行、市區旅遊
- • 地圖顯示您的步行和健行路徑
- • 維基百科以您喜好的語言在市區旅遊中可以告訴您很多事
- • 大眾運輸停靠站（公共汽車、電車、火車），包括路線名稱，有助於在新的城市裡導航
- • GPS 導航在行人模式下，使用步行路徑構建您的路線
- • 您可以上傳並且跟隨 GPX 路線或著記錄和分享您自己的路線
- "</string>
-    <string name="osmand_plus_extended_description_part1">"
- OsmAnd+ (OSM Automated Navigation Directions) 是一個地圖和導航應用程式，可以免費存取全球性且高品質的OpenStreetMap（OSM）圖資
- 享有語音和視覺的導航、檢視 POI（興趣點）、建立和管理 GPX 軌跡、使用視覺化的等高線和海拔資訊，能在汽車駕駛、騎自行車和步行模式之間選擇、OSM 編輯和更多。
-
- OsmAnd + 是付費應用程式版本。透過購買，您支援了該專案，資助新功能的開發並收到最新的更新。
-
- 一些主要特點：
- "</string>
+    <string name="osmand_extended_description_part3">" 地圖 • 顯示您週遭的 POI（興趣點） • 調整地圖到您的移動方向（或羅盤） • 顯示您在哪裡和您在看的地方 • 分享您的位置，讓您的朋友能找到您 • 保存您最重要的地點於我的收藏 • 允許您去選擇怎樣在地圖上顯示名稱：於英文、裝置端或語言的拼寫 • 顯示專用的線上地圖圖磚、衛星視圖（來自 Bing）、不同的疊加層如旅遊/導航 GPX 軌跡以及可自定透明度的附加層 "</string>
+    <string name="osmand_extended_description_part5">" 自行車 • 您可以在地圖找到自行車道 • GPS 導航在自行車模式下，使用自行車道構建您的路線 • 您能看到您的速度和海拔高度 • GPX 錄製選項使您能去記錄您的旅程並且分享 • 通過附加的外掛元件，您可以啟用顯示等高線和地形陰影 "</string>
+    <string name="osmand_extended_description_part8">" OsmAnd 是開放原始碼，而且正在積極的開發。應用程式從記述註解、改進翻譯或編寫新的功能，每個人都可以作出貢獻。透過所有的這些形成開發人員和使用者交互的作用下，讓該專案處於不斷改善的活絡狀態。專案的開發進度、編寫程式碼和測試新的功能，還是要依靠提供資金捐款資助。 大概的地圖覆蓋區域和品質： • 西歐： **** • 東歐： *** • 俄羅斯： *** • 北美洲： *** • 南美洲： ** • 亞洲： ** • 日本和韓國： *** • 中東： ** • 非洲： ** • 南極洲： *
+\n 全球大多數國家都可以下載！ 在您的國家獲得可靠的導航 - 無論是法國、德國、墨西哥、英國、西班牙、荷蘭、美國、俄羅斯、巴西或其他任何的國家。 "</string>
+    <string name="osmand_extended_description_part7">" 為 OSM 做出貢獻 • 報告資料錯誤 • 從應用程式直接將 GPX 軌跡上傳到 OSM • 增加 POI 並直接將其上傳到 OSM（或如果離線則之後上傳） "</string>
+    <string name="osmand_extended_description_part4">" 滑雪 OsmAnd 滑雪地圖外掛元件，使您能夠看到滑雪道與複雜程度和一些附加的資訊，如滑雪纜車和其它設施的位置。 "</string>
+    <string name="osmand_extended_description_part6">" 步行、健行、市區旅遊 • 地圖顯示您的步行和健行路徑 • 維基百科以您喜好的語言在市區旅遊中可以告訴您很多事 • 大眾運輸停靠站（公共汽車、電車、火車），包括路線名稱，有助於在新的城市裡導航 • GPS 導航在行人模式下，使用步行路徑構建您的路線 • 您可以上傳並且跟隨 GPX 路線或著記錄和分享您自己的路線 "</string>
+    <string name="osmand_plus_extended_description_part1">" OsmAnd+ (OSM Automated Navigation Directions) 是一個地圖和導航應用程式，可以免費存取全球性且高品質的OpenStreetMap（OSM）圖資。享有語音和視覺的導航、檢視 POI（興趣點）、建立和管理 GPX 軌跡、使用視覺化的等高線和海拔資訊，能在汽車駕駛、騎自行車和步行模式之間選擇、OSM 編輯和更多。 OsmAnd + 是付費應用程式版本。透過購買，您支援了該專案，資助新功能的開發並收到最新的更新。一些主要特點： "</string>
     <string name="quick_action_auto_zoom_desc">輕點動作按鈕開/關將會根據您的速度自動縮放地圖。</string>
     <string name="shared_string_overview">概要</string>
     <string name="quick_action_replace_destination_desc">輕點動作按鈕將把螢幕中心的位置更換為目的地。</string>
@@ -3051,7 +2827,7 @@ OsmAnd 是開放原始碼，而且正在積極的開發。應用程式從報告�
     <string name="quick_action_add_destination_desc">輕點動作按鈕將在螢幕中心位置增加一個目的地。以前設定的目的地成為最後的中轉點。</string>
     <string name="subscribe_email_desc">簽署我們有關應用程式折扣的電子郵件名單和獲得3次以上的地圖下載！</string>
     <string name="animate_my_location">動畫制作我的位置</string>
-    <string name="animate_my_location_desc">在啟用推測我的位置期間，暫時的遺失位置定位</string>
+    <string name="animate_my_location_desc">在導航的時候啟用我的位置動畫</string>
     <string name="favorite_group_name">群組名稱</string>
     <string name="change_color">更改顏色</string>
     <string name="edit_name">編輯名稱</string>
