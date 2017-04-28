@@ -558,8 +558,8 @@ Navigační služba je dočasně přepnuta na on-line CloudMade.</string>
     <string name="save_current_track">Uložit aktuální trasu GPX</string>
     <string name="save_track_interval_descr">Vyberte interval pro ukládání trasy během navigace</string>
     <string name="save_track_interval">Interval ukládání trasy během navigace</string>
-    <string name="save_track_to_gpx_descrp">Během navigace budou trasy ukládány do adresáře s trasami</string>
-    <string name="save_track_to_gpx">Zaznamenat trasu do GPX během navigace</string>
+    <string name="save_track_to_gpx_descrp">Během navigace budou GPX trasy automaticky ukládány do adresáře s trasami</string>
+    <string name="save_track_to_gpx">Automaticky zaznamenat trasu během navigace</string>
     <string name="update_tile">Aktualizovat mapu</string>
     <string name="reload_tile">Načíst znovu dlaždici</string>
     <string name="mark_point">Cíl</string>
@@ -693,7 +693,7 @@ Dlaždicové mapy můžete získat přímo z on-line zdrojů nebo si je můžete
     <string name="plugins_screen">Správce modulů</string>
     <string name="prefs_plugins_descr">Moduly umožňují zapnout pokročilé nastavení a přídavné funkce</string>
     <string name="prefs_plugins">Moduly</string>
-    <string name="osm_editing_plugin_description">Pomocí tohoto modulu může být OsmAnd použit na přispívání do OSM, například vytvářením nebo úpravami POI, vytvářením nebo komentováním OSM chyb a přispíváním zaznamenanými GPX soubory. OSM je celosvětový komunitní projekt mapování. Pro více detailů se podívejte na https://openstreetmap.org. Aktivní účast je vítaná a příspěvky mohou být vytvářené přímo v OsmAnd, jestliže zadáte své osobní přihlašovací údaje do OSM.</string>
+    <string name="osm_editing_plugin_description">Pomocí tohoto modulu může být OsmAnd použit na přispívání do OSM, například vytvářením nebo úpravami POI, vytvářením nebo komentováním OSM poznámek a přispíváním zaznamenanými GPX soubory. OSM je celosvětový komunitní projekt mapování. Pro více detailů se podívejte na https://openstreetmap.org. Aktivní účast je vítaná a příspěvky mohou být vytvářené přímo v OsmAnd, jestliže zadáte své osobní přihlašovací údaje do OSM.</string>
     <string name="vector_maps_may_display_faster_on_some_devices">Akcelerace vykreslování pomocí \'Android native\' knihovny. Vektorové mapy se zpravidla vykreslují rychleji, pokud je tato možnost zaškrtnuta. Avšak na některých zařízeních tato funkce nemusí fungovat.</string>
     <string name="play_commands_of_currently_selected_voice">Přehrát hlasové pokyny zvoleným hlasem</string>
     <string name="debugging_and_development">Vývoj a ladění OsmAnd</string>
@@ -2531,7 +2531,7 @@ Pokud máte rádi OsmAnd a OSM a chcete je podpořit, toto je výborný způsob,
     <string name="quick_action_take_audio_note">Vytvořit audio záznam</string>
     <string name="quick_action_take_video_note">Vytvořit video záznam</string>
     <string name="quick_action_take_photo_note">Vytvořit foto záznam</string>
-    <string name="quick_action_add_osm_bug">Přidat OSM chybu</string>
+    <string name="quick_action_add_osm_bug">Přidat OSM poznámku</string>
     <string name="quick_action_navigation_voice">Hlas zapnout/vypnout</string>
     <string name="quick_action_navigation_voice_off">Hlas je vypnut</string>
     <string name="quick_action_navigation_voice_on">Hlas je zapnut</string>
@@ -2550,7 +2550,7 @@ Pokud máte rádi OsmAnd a OSM a chcete je podpořit, toto je výborný způsob,
     <string name="quick_action_take_audio_note_descr">Klepnutím na tlačítko akce se přidá audio záznam do středu obrazovky.</string>
     <string name="quick_action_take_video_note_descr">Klepnutím na tlačítko akce se přidá video záznam do středu obrazovky.</string>
     <string name="quick_action_take_photo_note_descr">Klepnutím na tlačítko akce se přidá foto záznam do středu obrazovky.</string>
-    <string name="quick_action_add_osm_bug_descr">Klepnutím na tlačítko akce se přidá chyba OSM do středu obrazovky.</string>
+    <string name="quick_action_add_osm_bug_descr">Klepnutím na tlačítko akce se přidá OSM poznámka do středu obrazovky.</string>
     <string name="quick_action_add_poi_descr">Klepnutím na tlačítko akce se přidá POI do středu obrazovky.</string>
     <string name="quick_action_navigation_voice_descr">Klepnutím na tlačítko akce se vypnou nebo zapnou hlasové pokyny během navigace.</string>
     <string name="quick_action_add_parking_descr">Klepnutím na tlačítko akce se přidá parkovací místo do středu obrazovky.</string>
@@ -2606,42 +2606,42 @@ Zobrazená oblast: %1$s x %2$s</string>
     <string name="quick_action_interim_dialog">Zobrazit dočasné okno</string>
     <string name="quick_action_page_list_descr">Aktivace tlačítka akce posune seznam na další stranu.</string>
     <string name="rendering_attr_depthContours_description">Zobrazit hloubkové úrovně a body</string>
-    <string name="rendering_attr_depthContours_name">Úrovně hloubky</string>
+    <string name="rendering_attr_depthContours_name">Námořní hloubkové vrstevnice</string>
 	<string name="release_2_6">"
- • Nová funkce: Tlačítko rychlé akce
-
-
- • Vylepšená odezva dotykových gest
-
-
- • Nová mapová písma pokrývající více jazyků
-
-
- • Podpora TTS pro varianty jazykových regionů
-
-
- • Vylepšená viditelnost ve více mapových stylech a Wikipedii
-
-
- • Podpora Open Location Code (OLC)
-
-
- • Zobrazení nadmořské výšky a sklonu pro zaznamenané GPX (také rychlost) a vypočítanou rychlost
-
-
- • Nastavení \"Stylu jízdy\" a vylepšení logiky cyklistické navigace
-
-
- • Nastavení pro použití výškových údajů při cyklo-navigaci
-
-
- • Další vylepšení a opravy chyb
-
-
- a další…
- "</string>
+\n • Nová funkce: Tlačítko rychlé akce
+\n
+\n
+\n • Vylepšená odezva dotykových gest
+\n
+\n
+\n • Nová mapová písma pokrývající více jazyků
+\n
+\n
+\n • Podpora TTS pro varianty jazykových regionů
+\n
+\n
+\n • Vylepšená viditelnost ve více mapových stylech a Wikipedii
+\n
+\n
+\n • Podpora Open Location Code (OLC)
+\n
+\n
+\n • Zobrazení nadmořské výšky, sklonu a rychlosti pro zaznamenané GPX a vypočítané trasy
+\n
+\n
+\n • Nastavení \"Stylu jízdy\" a vylepšení logiky cyklistické navigace
+\n
+\n
+\n • Nastavení pro použití výškových údajů při cyklo-navigaci
+\n
+\n
+\n • Další vylepšení a opravy chyb
+\n
+\n
+\n a další…
+\n "</string>
 	<string name="navigate_point_olc">Open Location Code (OLC)</string>
-    <string name="route_altitude">Nadmořská výška trasy</string>
+    <string name="route_altitude">Stoupání trasy</string>
     <string name="altitude_descent">Klesání</string>
     <string name="altitude_ascent">Stoupání</string>
     <string name="altitude_range">Výškový rozdíl</string>
@@ -2717,25 +2717,25 @@ Pokud potřebujete pomoci s aplikací OsmAnd, prosím kontaktujte naši podporu
     <string name="add_new_folder">Přidat nový adresář</string>
     <string name="points_delete_multiple_succesful">Bod(y) úspěšně smazány.</string>
     <string name="points_delete_multiple">Chystáte se smazat %1$d bod(ů). Jste si jist?</string>
-    <string name="route_points_category_name">Průchozí body na trase</string>
+    <string name="route_points_category_name">Potřebné obraty na trase</string>
     <string name="track_points_category_name">Důležité body na této trase</string>
     <string name="gpx_track">Trasa</string>
-    <string name="routing_attr_relief_smoothness_factor_hills_name">Kopce</string>
-    <string name="routing_attr_relief_smoothness_factor_plains_name">Roviny</string>
-    <string name="routing_attr_relief_smoothness_factor_more_plains_name">Více rovin</string>
+    <string name="routing_attr_relief_smoothness_factor_hills_name">Kopcovitý</string>
+    <string name="routing_attr_relief_smoothness_factor_plains_name">Méně kopcovitý</string>
+    <string name="routing_attr_relief_smoothness_factor_more_plains_name">Rovinatý</string>
     <string name="routing_attr_driving_style_speed_name">Rychlý</string>
     <string name="routing_attr_driving_style_balance_name">Vyvážený</string>
     <string name="routing_attr_driving_style_safety_name">Bezpečný</string>
-    <string name="relief_smoothness_factor_descr">Priorita pro roviny nebo kopce</string>
+    <string name="relief_smoothness_factor_descr">Priorita terénu: rovinatý nebo kopcovitý</string>
     <string name="shared_string_slope">Svah</string>
     <string name="lang_ber">Berbersky</string>
     <string name="do_not_send_anonymous_app_usage">Neposílat anonymní statistiky používání aplikace</string>
-    <string name="do_not_send_anonymous_app_usage_desc">Odesílá všeobecné informace o obrazovce používané během sezení. Nesbíráme žádné informace o poloze ani data související s údaji zadávanými uživatelem.</string>
+    <string name="do_not_send_anonymous_app_usage_desc">OsmAnd sbírá informace o tom, které části aplikace otevíráte. Nikdy se neodesílá poloha, nic co je zapisováno do aplikace nebo detaily prohlížených oblastí, hledání nebo stahování.</string>
     <string name="do_not_show_startup_messages">Nezobrazovat zprávy při spuštění</string>
     <string name="do_not_show_startup_messages_desc">Zobrazuje slevy aplikace a mimořádné zprávy o lokálních událostech</string>
     <string name="parking_options">Možnosti parkování</string>
     <string name="full_version_thanks">Děkujeme vám za zakoupení plné verze OsmAnd!</string>
-    <string name="routing_attr_relief_smoothness_factor_name">Úroveň rovnosti reliéfu</string>
+    <string name="routing_attr_relief_smoothness_factor_name">Zvolte kolísání výšky</string>
     <string name="right_side_navigation">Jízda po pravé straně</string>
     <string name="driving_region_automatic">Automaticky</string>
     <string name="restore_purchases">Obnovit nákupy</string>
@@ -2759,11 +2759,11 @@ Pokud potřebujete pomoci s aplikací OsmAnd, prosím kontaktujte naši podporu
     <string name="sorted_by_distance">Seřazeno podle vzdálenosti</string>
     <string name="search_favorites">Vyhledávání oblíbených</string>
     <string name="hillshade_menu_download_descr">Pro zobrazení stínování na mapě, budete muset stáhnout speciální mapu tohoto regionu.</string>
-    <string name="hillshade_purchase_header">Chcete-li na mapě vidět stínování, musíte koupit a nainstalovat modul</string>
+    <string name="hillshade_purchase_header">Chcete-li na mapě vidět stínování, musíte koupit a nainstalovat modul Vrstevnice</string>
     <string name="hide_from_zoom_level">Skrýt od úrovně přiblížení</string>
     <string name="srtm_menu_download_descr">Pro zobrazení vrstevnic na mapě, budete muset stáhnout mapu vrstevnic tohoto regionu.</string>
     <string name="shared_string_plugin">Modul</string>
-    <string name="srtm_purchase_header">Chcete-li vidět vrstevnice na mapě, musíte koupit a nainstalovat modul</string>
+    <string name="srtm_purchase_header">Chcete-li vidět vrstevnice na mapě, musíte koupit a nainstalovat modul Vrstevnice</string>
     <string name="srtm_color_scheme">Barevné schéma</string>
     <string name="show_from_zoom_level">Zobrazit od úrovně přiblížení</string>
     <string name="routing_attr_allow_private_name">Povolit soukromý přístup</string>
@@ -2773,7 +2773,7 @@ Pokud potřebujete pomoci s aplikací OsmAnd, prosím kontaktujte naši podporu
     <string name="change_color">Změnit barvu</string>
     <string name="edit_name">Upravit název</string>
     <string name="animate_my_location">Animovat moji polohu</string>
-    <string name="animate_my_location_desc">Povolit animaci mojí polohy na mapě</string>
+    <string name="animate_my_location_desc">Povolit extrapolaci mojí polohy při dočasné ztrátě družicového signálu</string>
     <string name="shared_string_overview">Přehled</string>
     <string name="select_street">Vyberte ulici</string>
     <string name="shared_string_in_name">v %1$s</string>
@@ -2784,16 +2784,23 @@ Pokud potřebujete pomoci s aplikací OsmAnd, prosím kontaktujte naši podporu
     <string name="no_underlay">Bez podkladové vrstvy</string>
     <string name="subscribe_email_error">Chyba</string>
     <string name="subscribe_email_desc">Přihlaste se k odběru novinek o slevách aplikace a získejte 3 další stahování map!</string>
-    <string name="depth_contour_descr">"Sada map vám umožní vidět hloubkové vrstevnice a body v moři  (založené na mřížce po 30 úhlových sekundách)."</string>
-    <string name="sea_depth_thanks">Děkujeme vám za nákup hloubkových vrstevnic!</string>
-    <string name="index_item_depth_contours_osmand_ext">Hloubkové vrstevnice</string>
-    <string name="index_item_depth_points_southern_hemisphere">Hloubkové body jižní polokoule</string>
-    <string name="index_item_depth_points_northern_hemisphere">Hloubkové body severní polokoule</string>
-    <string name="download_depth_countours">Hloubkové vrstevnice</string>
+    <string name="depth_contour_descr">"Sada map obsahuje hloubkové vrstevnice a body v moři  (založené na mřížce po 30 úhlových sekundách)."</string>
+    <string name="sea_depth_thanks">Děkujeme vám za nákup námořních hloubkových vrstevnic!</string>
+    <string name="index_item_depth_contours_osmand_ext">Námořní hloubkové vrstevnice</string>
+    <string name="index_item_depth_points_southern_hemisphere">Námořní hloubkové body jižní polokoule</string>
+    <string name="index_item_depth_points_northern_hemisphere">Námořní hloubkové body severní polokoule</string>
+    <string name="download_depth_countours">Námořní hloubkové vrstevnice</string>
     <string name="nautical_maps">Námořní mapy</string>
     <string name="analyze_on_map">Analyzovat na mapě</string>
     <string name="shared_string_visible">Viditelné</string>
     <string name="shared_string_paused">Pozastaveno</string>
     <string name="route_is_too_long_v2">Tato cesta může být příliš dlouhá pro výpočet. Prosím, přidejte mezilehlé cíle, pokud není nalezen žádný výsledek do 10 minut.</string>
     <string name="save_poi_too_many_uppercase">Název obsahuje příliš mnoho velkých písmen. Chcete pokračovat?</string>
+    <string name="mapillary">Mapillary</string>
+    <string name="private_access_routing_req">Váš cíl se nachází v oblasti se soukromým přístupem. Chcete povolit přístup k soukromým silnicím pro tuto cestu?</string>
+    <string name="restart_search">Spustit hledání znovu</string>
+    <string name="increase_search_radius">Zvětšit okruh hledání</string>
+    <string name="nothing_found">Nic nalezeno :(</string>
+    <string name="nothing_found_descr">Zkuste změnit vyhledávací dotaz nebo zvýšit okruh hledání</string>
+    <string name="quick_action_showhide_osmbugs_title">Zobrazit/skrýt poznámky OSM</string>
     </resources>
