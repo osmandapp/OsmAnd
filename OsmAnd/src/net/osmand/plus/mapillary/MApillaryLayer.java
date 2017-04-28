@@ -1,8 +1,21 @@
 package net.osmand.plus.mapillary;
 
-/**
- * Created by admin on 27/04/2017.
- */
+import android.graphics.Canvas;
 
-public class MApillaryLayer {
+import net.osmand.data.RotatedTileBox;
+import net.osmand.plus.views.MapTileLayer;
+import net.osmand.plus.views.OsmandMapLayer;
+import net.osmand.plus.views.OsmandMapTileView;
+
+public class MapillaryLayer extends MapTileLayer {
+
+	public MapillaryLayer() {
+		super(false);
+	}
+
+	@Override
+	public void onPrepareBufferImage(Canvas canvas, RotatedTileBox tileBox, DrawSettings drawSettings) {
+		super.onPrepareBufferImage(canvas, tileBox, drawSettings);
+		// todo add 
+	}
 }

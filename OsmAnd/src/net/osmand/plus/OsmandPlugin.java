@@ -24,7 +24,6 @@ import net.osmand.plus.monitoring.OsmandMonitoringPlugin;
 import net.osmand.plus.myplaces.FavoritesActivity;
 import net.osmand.plus.openseamapsplugin.NauticalMapsPlugin;
 import net.osmand.plus.osmedit.OsmEditingPlugin;
-import net.osmand.plus.osmo.OsMoPlugin;
 import net.osmand.plus.parkingpoint.ParkingPositionPlugin;
 import net.osmand.plus.rastermaps.OsmandRasterMapsPlugin;
 import net.osmand.plus.skimapsplugin.SkiMapsPlugin;
@@ -56,10 +55,6 @@ public abstract class OsmandPlugin {
 
 	public abstract int getAssetResourceName();
 
-	public boolean isStationary() {
-		return false;
-	}
-
 	@DrawableRes
 	public int getLogoResourceId() {
 		return R.drawable.ic_extension_dark;
@@ -83,7 +78,7 @@ public abstract class OsmandPlugin {
 	}
 
 	public boolean isActive() {
-		return active || isStationary();
+		return active;
 	}
 
 	public boolean needsInstallation() {
@@ -282,16 +277,6 @@ public abstract class OsmandPlugin {
 
 	public static List<OsmandPlugin> getAvailablePlugins() {
 		return allPlugins;
-	}
-
-	public static List<OsmandPlugin> getAdjustablePlugins() {
-		List<OsmandPlugin> res = new ArrayList<>();
-		for (OsmandPlugin plugin : allPlugins) {
-			if (!plugin.isStationary()) {
-				res.add(plugin);
-			}
-		}
-		return res;
 	}
 
 	public static List<OsmandPlugin> getEnabledPlugins() {

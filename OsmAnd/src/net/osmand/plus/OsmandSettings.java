@@ -30,6 +30,7 @@ import net.osmand.plus.api.SettingsAPI;
 import net.osmand.plus.api.SettingsAPI.SettingsEditor;
 import net.osmand.plus.dialogs.RateUsBottomSheetDialog;
 import net.osmand.plus.helpers.SearchHistoryHelper;
+import net.osmand.plus.mapillary.MapillaryPlugin;
 import net.osmand.plus.render.RendererRegistry;
 import net.osmand.plus.routing.RouteProvider.RouteService;
 import net.osmand.render.RenderingRulesStorage;
@@ -604,7 +605,7 @@ public class OsmandSettings {
 	///////////// PREFERENCES classes ////////////////
 
 	// this value string is synchronized with settings_pref.xml preference name
-	private final OsmandPreference<String> PLUGINS = new StringPreference("enabled_plugins", "").makeGlobal();
+	private final OsmandPreference<String> PLUGINS = new StringPreference("enabled_plugins", MapillaryPlugin.ID).makeGlobal();
 
 	public Set<String> getEnabledPlugins() {
 		String plugs = PLUGINS.get();

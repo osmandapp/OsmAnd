@@ -76,7 +76,7 @@ public class PluginsActivity extends OsmandListActivity {
 	protected class PluginsListAdapter extends ArrayAdapter<OsmandPlugin> {
 		public PluginsListAdapter() {
 			super(PluginsActivity.this, R.layout.plugins_list_item,
-					OsmandPlugin.getAdjustablePlugins());
+					OsmandPlugin.getAvailablePlugins());
 		}
 
 		@Override

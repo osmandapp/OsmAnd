@@ -22,7 +22,7 @@ public class MapillaryPlugin extends OsmandPlugin {
 	private OsmandSettings settings;
 	private OsmandApplication app;
 
-	private MapTileLayer rasterLayer;
+	private MapillaryLayer rasterLayer;
 
 	public MapillaryPlugin(OsmandApplication app) {
 		this.app = app;
@@ -55,17 +55,12 @@ public class MapillaryPlugin extends OsmandPlugin {
 	}
 
 	@Override
-	public boolean isStationary() {
-		return true;
-	}
-
-	@Override
 	public void registerLayers(MapActivity activity) {
 		createLayers();
 	}
 
 	private void createLayers() {
-		rasterLayer = new MapTileLayer(false);
+		rasterLayer = new MapillaryLayer();
 	}
 
 	@Override
