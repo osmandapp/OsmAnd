@@ -386,7 +386,7 @@
   <string name="send_location_email_pattern">Для того, щоб побачити місцерозташування, натисніть на посилання %1$s або android посилання %2$s</string>
   <string name="send_location">Надіслати місцезнаходження</string>
   <string name="context_menu_item_share_location">Поділитись місцезнаходженням</string>
-  <string name="add_waypoint_dialog_added">Точка GPX \'\'{0}\'\' успішно додана</string>
+  <string name="add_waypoint_dialog_added">Додано GPX-точку „{0}“</string>
   <string name="add_waypoint_dialog_title">Додати точку до записаного треку</string>
   <string name="context_menu_item_add_waypoint">Додати точку до треку</string>
   <string name="amenity_type_administrative">Адміністративні</string>
@@ -1789,7 +1789,7 @@ OsmAnd має відкриті сирці і активно розвиваєть
     <string name="distance">Віддаль</string>
     <string name="index_tours">Подорожі</string>
     <string name="shared_string_all">Усі</string>
-    <string name="waypoints">Путьові точки</string>
+    <string name="waypoints">Шляхові точки</string>
     <string name="targets">Цілі</string>
     <string name="way_alarms">Перешкоди</string>
     <string name="speak_favorites">Закладки, що є поруч</string>
