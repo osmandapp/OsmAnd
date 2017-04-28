@@ -311,7 +311,7 @@
 	<string name="poi_pier">桟橋(Pier)</string>
 	<string name="poi_surveillance">監視区域(Surveillance)</string>
 	<string name="poi_observatory">観測台(Observatory)</string>
-	<string name="poi_astronomical_observatory">天文台(Astronomical observatory)</string>
+	<string name="poi_astronomical_observatory">天文台</string>
 	<string name="poi_tower">塔(Tower)</string>
 	<string name="poi_mast">柱(Mast)</string>
 	<string name="poi_radar">レーダー(Radar)</string>
@@ -524,7 +524,7 @@
 	<string name="poi_historic_monastery">歴史的修道院(Historic monastery)</string>
 	<string name="poi_wayside_cross">道端の十字架(Wayside cross)</string>
 	<string name="poi_wayside_shrine">歴史的礼拝所・地蔵(Wayside shrine)</string>
-	<string name="poi_information">案内所(information)</string>
+	<string name="poi_information">観光案内所</string>
 	<string name="poi_clock">時計(Clock)</string>
 	<string name="poi_travel_agent">旅行代理店(Travel agent)</string>
 	<string name="poi_viewpoint">展望台(Viewpoint)</string>
@@ -943,7 +943,7 @@
 	<string name="poi_denomination_reformed">改革派(Reformed)</string>
 	<string name="poi_denomination_seventh_day_adventist">セブンスデーアドベンチスト・安息日再臨派(Seventh day adventist)</string>
 	<string name="poi_denomination_new_apostolic">新使徒教会(New apostolic)</string>
-	<string name="poi_denomination_church_of_england">英国聖公会(Church of england)</string>
+	<string name="poi_denomination_church_of_england">英国聖公会(Church of England)</string>
 	<string name="poi_denomination_episcopal">米国聖公会(Episcopal)</string>
 	<string name="poi_denomination_shia">シーア派(Shia)</string>
 	<string name="poi_denomination_united">カナダ連合教会(United)</string>
@@ -2162,7 +2162,7 @@
 	<string name="poi_cooperative">協同組合事務所(Cooperative office)</string>
 	<string name="poi_energy_supplier">電力会社事務所(Energy supplier office)</string>
 
-	<string name="poi_guide">案内所</string>
+	<string name="poi_guide">ツアー、登山、ダイビング等のガイド事務所</string>
 	<string name="poi_logistics">物流事務所</string>
 	<string name="poi_parish">教区事務所</string>
 	<string name="poi_publisher">出版社</string>
@@ -2314,7 +2314,7 @@
 
 	<string name="poi_enforcement_access">取締装置:進入出</string>
 	<string name="poi_enforcement_check">取締装置：検問所</string>
-	<string name="poi_escape_lane">トラック等の非常用待避及び減速車線(Escape lane)</string>
+	<string name="poi_escape_lane">非常用避難及び強制減速車線(Escape lane)</string>
 
 	<string name="poi_icn_ref">複数の国境を越える長いサイクリングネットワークの交点</string>
 	<string name="poi_ncn_ref">国を横断するような長距離にわたるサイクリングネットワークの交点</string>
@@ -2390,4 +2390,90 @@
 	<string name="poi_water_point">飲料水汲み場</string>
 
 	<string name="poi_watering_place">動物用水飲み場</string>
+	<string name="poi_shop_craft">美術及び工芸用品店</string>
+	<string name="poi_e_cigarette">電子タバコ販売店</string>
+
+	<string name="poi_electrical">電子部品販売店</string>
+	<string name="poi_honey">蜂蜜販売店</string>
+	<string name="poi_lighting">照明器具販売店</string>
+	<string name="poi_locksmith">鍵屋・スペアキー作成</string>
+	<string name="poi_lottery">宝くじ販売店</string>
+	<string name="poi_nutrition_supplements">サプリメント販売店</string>
+	<string name="poi_party">パーティー・祭事用品店</string>
+	<string name="poi_photo_studio">フォトスタジオ・写真館</string>
+
+	<string name="poi_religion">宗教関連用品店</string>
+
+	<string name="poi_spices">香辛料販売店</string>
+	<string name="poi_internet_access_fee_yes">インターネット接続 - 通常は有料</string>
+	<string name="poi_internet_access_fee_no">インターネット接続 - 通常は無料</string>
+
+	<string name="poi_wiki_lang_af">アフリカーンス語 wiki</string>
+	<string name="poi_wiki_lang_als">アルザス語 wiki</string>
+	<string name="poi_wiki_lang_az">アゼルバイジャン語 wiki</string>
+	<string name="poi_wiki_lang_bn">ベンガル語 wiki</string>
+	<string name="poi_wiki_lang_bpy">ビシュヌプリヤ語 wiki</string>
+	<string name="poi_wiki_lang_br">ブルトン語 wiki</string>
+	<string name="poi_wiki_lang_bs">ボスニア語 wiki</string>
+	<string name="poi_wiki_lang_cy">ウェールズ語 wiki</string>
+	<string name="poi_wiki_lang_eo">エスペラント語 wiki</string>
+	<string name="poi_wiki_lang_eu">バスク語 wiki</string>
+	<string name="poi_wiki_lang_fa">ペルシア語 wiki</string>
+	<string name="poi_wiki_lang_fy">フリジア語 wiki</string>
+	<string name="poi_wiki_lang_ga">アイルランド語 wiki</string>
+	<string name="poi_wiki_lang_hy">アルメニア語 wiki</string>
+	<string name="poi_wiki_lang_is">アイスランド語 wiki</string>
+	<string name="poi_wiki_lang_ka">グルジア語 wiki</string>
+	<string name="poi_wiki_lang_la">ラテン語 wiki</string>
+	<string name="poi_wiki_lang_lb">ルクセンブルク語 wiki</string>
+	<string name="poi_wiki_lang_mk">マケドニア語 wiki</string>
+	<string name="poi_wiki_lang_ml">マラヤーラム語 Wiki</string>
+	<string name="poi_wiki_lang_mr">マラーティー語 wiki</string>
+	<string name="poi_wiki_lang_nv">ナバホ語 wiki</string>
+	<string name="poi_wiki_lang_nds">オランダ低ザクセン語 wiki</string>
+	<string name="poi_wiki_lang_os">オセット語 wiki</string>
+	<string name="poi_wiki_lang_sc">サルデーニャ語 wiki</string>
+	<string name="poi_wiki_lang_sh">セルボクロアチア語 wiki</string>
+	<string name="poi_wiki_lang_ta">タミル語 wiki</string>
+	<string name="poi_wiki_lang_tl">フィリピン語 wiki</string>
+	<string name="poi_wiki_lang_pms">ピエモンテ語 wiki</string>
+	<string name="poi_wiki_lang_sq">アルバニア語 wiki</string>
+	<string name="poi_wiki_lang_war">ワライ語 wiki</string>
+	<string name="poi_wiki_lang_min">ミナンカバウ語 wiki</string>
+	<string name="poi_wiki_lang_kk">カザフ語 wiki</string>
+	<string name="poi_wiki_lang_uz">ウズベク語 wiki</string>
+	<string name="poi_wiki_lang_ce">チェチェン語 wiki</string>
+	<string name="poi_wiki_lang_ur">ウルドゥー語 wiki</string>
+	<string name="poi_wiki_lang_oc">オック語 wiki</string>
+	<string name="poi_wiki_lang_zhminnan">閩南語(ビン南語) wiki</string>
+	<string name="poi_wiki_lang_mg">マダガスカル語 wiki</string>
+	<string name="poi_wiki_lang_tt">タタール語 wiki</string>
+	<string name="poi_wiki_lang_jv">ジャワ語 wiki</string>
+	<string name="poi_wiki_lang_ky">キルギス語 wiki</string>
+	<string name="poi_wiki_lang_zhyue">広東語 wiki</string>
+	<string name="poi_wiki_lang_ast">アストゥリアス語</string>
+	<string name="poi_wiki_lang_tg">タジク語 wiki</string>
+	<string name="poi_wiki_lang_ba">バシキール語 wiki</string>
+	<string name="poi_wiki_lang_sco">スコットランド語 wiki</string>
+	<string name="poi_wiki_lang_pnb">パンジャブ語 wiki</string>
+	<string name="poi_wiki_lang_cv">チュヴァシュ語 wiki</string>
+	<string name="poi_wiki_lang_lmo">ロンバルド語 wiki</string>
+	<string name="poi_wiki_lang_my">ビルマ語 wiki</string>
+	<string name="poi_wiki_lang_yo">ヨルバ語 wiki</string>
+	<string name="poi_wiki_lang_ne">ネパール語 wiki</string>
+	<string name="poi_wiki_lang_gu">グジャラート語 wiki</string>
+	<string name="poi_wiki_lang_scn">シチリア語 wiki</string>
+	<string name="poi_wiki_lang_bar">バイエルン方言 wiki</string>
+	<string name="poi_wiki_lang_mn">モンゴル語 wiki</string>
+	<string name="poi_wiki_lang_nap">ナポリ語 wiki</string>
+
+	<string name="poi_wiki_lang_an">アラゴン語 wiki</string>
+	<string name="poi_general_barrier">通行における一般的な障害(General barrier)</string>
+	<string name="poi_content_water">貯蔵:水</string>
+	<string name="poi_content_silage">貯蔵:生牧草</string>
+	<string name="poi_content_manure">貯蔵:肥料</string>
+	<string name="poi_content_slurry">貯蔵庫:懸濁液</string>
+	<string name="poi_content_oil">貯蔵:油・オイル</string>
+	<string name="poi_route_hiking_ref_poi">ハイキングルートの参照番号(Hiking route reference)</string>
+
 	</resources>
