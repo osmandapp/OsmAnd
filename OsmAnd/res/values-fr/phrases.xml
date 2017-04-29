@@ -1986,8 +1986,8 @@
 	<string name="poi_piste_grooming_classic">Classique</string>
 	<string name="poi_piste_grooming_classic_skating">Classique + skating</string>
 	<string name="poi_piste_grooming_skating">Skating</string>
-	<string name="poi_capacity_disabled_no">Pas de place réservée pour handicapés</string>
-	<string name="poi_capacity_women_no">Pas de place réservée pour femmes</string>
+	<string name="poi_capacity_disabled_no">Pas de place réservée aux handicapés</string>
+	<string name="poi_capacity_women_no">Pas de place réservée aux femmes</string>
 	<string name="poi_description_payment">Description de paiement</string>
 
 	<string name="poi_diet_lactose_free_only">Sans lactose uniquement</string>
@@ -2001,7 +2001,7 @@
 
 	<string name="poi_service_repair_no">Pas de réparation</string>
 	<string name="poi_vending_public_transport_tickets">Tickets de transport public</string>
-	<string name="poi_vending_parking_tickets_public_transport_tickets">Tickets de parking; tickets de transport en commun</string>
+	<string name="poi_vending_parking_tickets_public_transport_tickets">Tickets de parking ; tickets de transport en commun</string>
 	<string name="poi_industrial_intermodal_freight_terminal">Type : terminal multi-modal de marchandises</string>
 	<string name="poi_honey">Magasin de miel</string>
 
@@ -2924,5 +2924,64 @@
 	<string name="poi_xmas_shop_christmas_tree">Vente d\'arbres</string>
 	<string name="poi_xmas_day_date">Noël : période de l’événement</string>
 	<string name="poi_length">Longueur</string>
+
+	<string name="poi_windfall">Chablis</string>
+	<string name="poi_payment_pikepass_designated">PIKEPASS (dédié)</string>
+	<string name="poi_payment_prepaid_ticket_yes">Tickets prépayés</string>
+	<string name="poi_payment_ep_mep_yes">MEP</string>
+	<string name="poi_payment_bankaxess_yes">BankAxess</string>
+	<string name="poi_payment_bankaxess_no">BankAxess non acceptées</string>
+	<string name="poi_payment_coinkite_yes">Coinkite</string>
+	<string name="poi_payment_coinkite_no">Coinkite non acceptées</string>
+	<string name="poi_payment_ov_chipkaart_yes">OV-Chipkaart</string>
+	<string name="poi_payment_ov_chipkaart_no">OV-Chipkaart non acceptées</string>
+	<string name="poi_payment_via_verde_yes">Via Verde</string>
+	<string name="poi_payment_via_verde_no">Via Verde non acceptées</string>
+	<string name="poi_payment_u_key_yes">U-Key</string>
+	<string name="poi_payment_u_key_no">U-Key non acceptées</string>
+	<string name="poi_payment_mtsmoney_yes">MTS-Money</string>
+	<string name="poi_payment_mtsmoney_no">MTS-Money non acceptées</string>
+	<string name="poi_payment_yandexmoney_yes">Yandex.Money</string>
+	<string name="poi_payment_yandexmoney_no">Yandex.Money non acceptées</string>
+	<string name="poi_drive_through_no">Drive : non</string>
+
+	<string name="poi_vending_elongated_coin">Pièce écrasée</string>
+	<string name="poi_vending_parcel_mail_in">Dépôt de colis</string>
+	<string name="poi_vending_parcel_pickup">Retrait de colis</string>
+	<string name="poi_vending_parcel_pickup_mail_in">Dépôt et retrait de colis</string>
+	<string name="poi_diaper_table_count">Nombre de table à langer</string>
+	<string name="poi_vending_tickets">Vente de tickets</string>
+	<string name="poi_vending_vouchers">Coupons</string>
+	<string name="poi_branch">Filiale</string>
+
+	<string name="poi_vending_telephone_vouchers">Coupons téléphoniques</string>
+	<string name="poi_architecture_umgebinde">Architecture : umgebinde</string>
+	<string name="poi_bridge_structure_truss">Structure du pont : treillis</string>
+	<string name="poi_bridge_structure_humpback">Structure du pont : lune</string>
+	<string name="poi_bridge_structure_boardwalk">Structure du pont : boardwalk</string>
+	<string name="poi_bridge_movable_drawbridge">Type de pont mobile : pont-levis</string>
+	<string name="poi_lit_yes">Éclairé : oui</string>
+	<string name="poi_lit_no">Éclairé : non</string>
+
+	<string name="poi_route_light_rail_ref">Métro léger</string>
+	<string name="poi_industrial_wellsite"/>
+	<string name="poi_step_condition_rough">État des marches : rugueuses</string>
+
+	<string name="poi_step_condition_even">État des marches : régulières</string>
+	<string name="poi_step_condition_uneven">État des marches : irrégulières</string>
+	<string name="poi_step_count">Nombre de marches</string>
+	<string name="poi_ref">Réf</string>
+
+	<string name="poi_inscription_n">Inscription : N</string>
+	<string name="poi_inscription_nw">Inscription : NO</string>
+	<string name="poi_inscription_w">Inscription : O</string>
+	<string name="poi_inscription_sw">Inscription : SO</string>
+	<string name="poi_inscription_s">Inscription : S</string>
+	<string name="poi_inscription_se">Inscription : SE</string>
+	<string name="poi_inscription_e">Inscription : E</string>
+	<string name="poi_inscription_ne">Inscription : NE</string>
+
+	<string name="poi_additional_atm_yes">DAB : oui</string>
+	<string name="poi_atm_no">DAB : non</string>
 
 	</resources>
