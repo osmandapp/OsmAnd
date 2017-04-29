@@ -683,7 +683,7 @@ Lon: %2$s</string>
     <string name="rendering_value_bicycle_name">Biciklo</string>
     <string name="rendering_value_pedestrian_name">Piediranto</string>
     <string name="osmo_invite">Inviti…</string>
-    <string name="rendering_attr_coloredBuildings_name">Kolor-kodigi domojn laŭspece</string>
+    <string name="rendering_attr_coloredBuildings_name">Kolorigi konstruaĵojn laŭspece</string>
     <string name="osmo_leave_confirmation_msg">Ĉu vi volas forlasi grupon %1$s?</string>
     <string name="continue_navigation">Pluigi navigadon</string>
     <string name="pause_navigation">Paŭzigi navigadon</string>
@@ -2849,4 +2849,7 @@ De Afganujo al Zimbabvo, de Aŭstralio al Usono, Argentino, Brazilo, Kanado, Fra
     <string name="nothing_found_descr">Bonvolu provi ŝanĝi serĉpeton aŭ pliigi radiuson de serĉo</string>
     <string name="private_access_routing_req">Via celloko troviĝas en privata tereno. Ĉu vi volas permesi aliron al privataj vojoj por tiu ĉi kurso?</string>
     <string name="mapillary">Mapillary</string>
+    <string name="mapillary_widget">Mapillary-fenestraĵo</string>
+    <string name="mapillary_widget_descr">Ebligas al vi rapide kontribui al Mapillary</string>
+    <string name="mapillary_descr">Enretaj strat-bildoj por ĉiuj. Esplori lokojn, kunlabori kaj foti la mondon.</string>
     </resources>
