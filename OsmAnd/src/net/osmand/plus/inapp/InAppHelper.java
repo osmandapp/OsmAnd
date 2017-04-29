@@ -198,26 +198,33 @@ public class InAppHelper {
 		// Start setup. This is asynchronous and the specified listener
 		// will be called once setup completes.
 		logDebug("Starting setup.");
-		mHelper.startSetup(new IabHelper.OnIabSetupFinishedListener() {
-			public void onIabSetupFinished(IabResult result) {
-				logDebug("Setup finished.");
+		try {
+			mHelper.startSetup(new IabHelper.OnIabSetupFinishedListener() {
+				public void onIabSetupFinished(IabResult result) {
+					logDebug("Setup finished.");
 
-				if (!result.isSuccess()) {
-					// Oh noes, there was a problem.
-					complain("Problem setting up in-app billing: " + result);
-					notifyError(result.getMessage());
-					if (stopAfterResult) {
-						stop();
+					if (!result.isSuccess()) {
+						// Oh noes, there was a problem.
+						//complain("Problem setting up in-app billing: " + result);
+						notifyError(result.getMessage());
+						if (stopAfterResult) {
+							stop();
+						}
+						return;
 					}
-					return;
+
+					// Have we been disposed of in the meantime? If so, quit.
+					if (mHelper == null) return;
+
+					runnable.run(InAppHelper.this);
 				}
-
-				// Have we been disposed of in the meantime? If so, quit.
-				if (mHelper == null) return;
-
-				runnable.run(InAppHelper.this);
+			});
+		} catch (Exception e) {
+			logError("exec Error", e);
+			if (stopAfterResult) {
+				stop();
 			}
-		});
+		}
 	}
 
 	public void start(final boolean stopAfterResult) {
@@ -233,43 +240,58 @@ public class InAppHelper {
 		// Start setup. This is asynchronous and the specified listener
 		// will be called once setup completes.
 		logDebug("Starting setup.");
-		mHelper.startSetup(new IabHelper.OnIabSetupFinishedListener() {
-			public void onIabSetupFinished(IabResult result) {
-				logDebug("Setup finished.");
+		try {
+			mHelper.startSetup(new IabHelper.OnIabSetupFinishedListener() {
+				public void onIabSetupFinished(IabResult result) {
+					logDebug("Setup finished.");
 
-				if (!result.isSuccess()) {
-					// Oh noes, there was a problem.
-					complain("Problem setting up in-app billing: " + result);
-					notifyError(result.getMessage());
-					if (stopAfterResult) {
-						stop();
+					if (!result.isSuccess()) {
+						// Oh noes, there was a problem.
+						//complain("Problem setting up in-app billing: " + result);
+						notifyError(result.getMessage());
+						if (stopAfterResult) {
+							stop();
+						}
+						return;
 					}
-					return;
-				}
 
-				// Have we been disposed of in the meantime? If so, quit.
-				if (mHelper == null) return;
+					// Have we been disposed of in the meantime? If so, quit.
+					if (mHelper == null) return;
 
-				// IAB is fully set up. Now, let's get an inventory of stuff we own if needed.
-				if (forceRequestInventory || (!isDeveloperVersion &&
-						(!mSubscribedToLiveUpdates
-								|| !ctx.getSettings().BILLING_PURCHASE_TOKEN_SENT.get()
-								|| System.currentTimeMillis() - lastValidationCheckTime > PURCHASE_VALIDATION_PERIOD_MSEC))) {
+					// IAB is fully set up. Now, let's get an inventory of stuff we own if needed.
+					if (forceRequestInventory || (!isDeveloperVersion &&
+							(!mSubscribedToLiveUpdates
+									|| !ctx.getSettings().BILLING_PURCHASE_TOKEN_SENT.get()
+									|| System.currentTimeMillis() - lastValidationCheckTime > PURCHASE_VALIDATION_PERIOD_MSEC))) {
 
-					logDebug("Setup successful. Querying inventory.");
-					List<String> skus = new ArrayList<>();
-					skus.add(SKU_LIVE_UPDATES);
-					skus.add(SKU_DEPTH_CONTOURS);
-					skus.add(SKU_FULL_VERSION_PRICE);
-					mHelper.queryInventoryAsync(true, skus, mGotInventoryListener);
-				} else {
-					notifyDismissProgress();
-					if (stopAfterResult) {
-						stop();
+						logDebug("Setup successful. Querying inventory.");
+						List<String> skus = new ArrayList<>();
+						skus.add(SKU_LIVE_UPDATES);
+						skus.add(SKU_DEPTH_CONTOURS);
+						skus.add(SKU_FULL_VERSION_PRICE);
+						try {
+							mHelper.queryInventoryAsync(true, skus, mGotInventoryListener);
+						} catch (Exception e) {
+							logError("queryInventoryAsync Error", e);
+							notifyDismissProgress();
+							if (stopAfterResult) {
+								stop();
+							}
+						}
+					} else {
+						notifyDismissProgress();
+						if (stopAfterResult) {
+							stop();
+						}
 					}
 				}
+			});
+		} catch (Exception e) {
+			logError("start Error", e);
+			if (stopAfterResult) {
+				stop();
 			}
-		});
+		}
 	}
 
 	// Listener that's called when we finish querying the items and subscriptions we own
@@ -380,7 +402,7 @@ public class InAppHelper {
 
 	public void purchaseFullVersion(final Activity activity) {
 		if (mHelper == null) {
-			complain("In-app hepler is not initialized!");
+			//complain("In-app hepler is not initialized!");
 			notifyError("In-app hepler is not initialized!");
 			if (stopAfterResult) {
 				stop();
@@ -390,14 +412,22 @@ public class InAppHelper {
 
 		logDebug("Launching purchase flow for full version");
 		if (mHelper != null) {
-			mHelper.launchPurchaseFlow(activity,
-					SKU_FULL_VERSION_PRICE, RC_REQUEST, mPurchaseFinishedListener);
+			try {
+				mHelper.launchPurchaseFlow(activity,
+						SKU_FULL_VERSION_PRICE, RC_REQUEST, mPurchaseFinishedListener);
+			} catch (Exception e) {
+				complain("Cannot launch full version purchase!");
+				logError("purchaseFullVersion Error", e);
+				if (stopAfterResult) {
+					stop();
+				}
+			}
 		}
 	}
 
 	public void purchaseDepthContours(final Activity activity) {
 		if (mHelper == null) {
-			complain("In-app hepler is not initialized!");
+			//complain("In-app hepler is not initialized!");
 			notifyError("In-app hepler is not initialized!");
 			if (stopAfterResult) {
 				stop();
@@ -407,16 +437,32 @@ public class InAppHelper {
 
 		logDebug("Launching purchase flow for sea depth contours");
 		if (mHelper != null) {
-			mHelper.launchPurchaseFlow(activity,
-					SKU_DEPTH_CONTOURS, RC_REQUEST, mPurchaseFinishedListener);
+			try {
+				mHelper.launchPurchaseFlow(activity,
+						SKU_DEPTH_CONTOURS, RC_REQUEST, mPurchaseFinishedListener);
+			} catch (Exception e) {
+				complain("Cannot launch depth contours purchase!");
+				logError("purchaseDepthContours Error", e);
+				if (stopAfterResult) {
+					stop();
+				}
+			}
 		}
 	}
 
 	public void purchaseLiveUpdates(final Activity activity, final String email, final String userName,
 									final String countryDownloadName, final boolean hideUserName) {
-		if (mHelper == null || !mHelper.subscriptionsSupported()) {
-			complain("Subscriptions not supported on your device yet. Sorry!");
-			notifyError("Subscriptions not supported on your device yet. Sorry!");
+		try {
+			if (mHelper == null || !mHelper.subscriptionsSupported()) {
+				complain("Subscriptions not supported on your device yet. Sorry!");
+				notifyError("Subscriptions not supported on your device yet. Sorry!");
+				if (stopAfterResult) {
+					stop();
+				}
+				return;
+			}
+		} catch (Exception e) {
+			logError("purchaseLiveUpdates Error", e);
 			if (stopAfterResult) {
 				stop();
 			}
@@ -488,9 +534,16 @@ public class InAppHelper {
 					logDebug("Launching purchase flow for live updates subscription for userId=" + userId);
 					String payload = userId + " " + token;
 					if (mHelper != null) {
-						mHelper.launchPurchaseFlow(activity,
-								SKU_LIVE_UPDATES, IabHelper.ITEM_TYPE_SUBS,
-								RC_REQUEST, mPurchaseFinishedListener, payload);
+						try {
+							mHelper.launchPurchaseFlow(activity,
+									SKU_LIVE_UPDATES, IabHelper.ITEM_TYPE_SUBS,
+									RC_REQUEST, mPurchaseFinishedListener, payload);
+						} catch (Exception e) {
+							logError("launchPurchaseFlow Error", e);
+							if (stopAfterResult) {
+								stop();
+							}
+						}
 					}
 				} else {
 					notifyError("Empty userId");
