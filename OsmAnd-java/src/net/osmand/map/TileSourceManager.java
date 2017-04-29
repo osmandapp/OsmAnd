@@ -36,6 +36,13 @@ public class TileSourceManager {
 	public static final String RULE_YANDEX_TRAFFIC = "yandex_traffic";
 	private static final String RULE_WMS = "wms_tile";
 
+	private static final TileSourceTemplate MAPNIK_SOURCE =
+			new TileSourceTemplate("OsmAnd (online tiles)", "http://tile.osmand.net/hd/{0}/{1}/{2}.png", ".png", 19, 1, 512, 8, 18000);  //$NON-NLS-1$//$NON-NLS-2$ //$NON-NLS-3$
+	private static final TileSourceTemplate CYCLE_MAP_SOURCE =
+			new TileSourceTemplate("CycleMap", "http://b.tile.opencyclemap.org/cycle/{0}/{1}/{2}.png", ".png", 16, 1, 256, 32, 18000);  //$NON-NLS-1$//$NON-NLS-2$ //$NON-NLS-3$
+	private static final TileSourceTemplate MAPILLARY_SOURCE =
+			new TileSourceTemplate("Mapillary (raster tiles)", "https://d6a1v2w10ny40.cloudfront.net/v0.1/{0}/{1}/{2}.png", ".png", 17, 0, 256, 16, 32000);
+
 	public static class TileSourceTemplate implements ITileSource, Cloneable {
 		private int maxZoom;
 		private int minZoom;
@@ -413,20 +420,21 @@ public class TileSourceManager {
 		java.util.List<TileSourceTemplate> list = new ArrayList<TileSourceTemplate>();
 		list.add(getMapnikSource());
 		list.add(getCycleMapSource());
+		list.add(getMapillarySource());
 		return list;
 
 	}
 
 	public static TileSourceTemplate getMapnikSource(){
-		return new TileSourceTemplate("OsmAnd (online tiles)", "http://tile.osmand.net/hd/{0}/{1}/{2}.png", ".png", 19, 1, 512, 8, 18000);  //$NON-NLS-1$//$NON-NLS-2$ //$NON-NLS-3$
+		return MAPNIK_SOURCE;
 	}
 
 	public static TileSourceTemplate getCycleMapSource(){
-		return new TileSourceTemplate("CycleMap", "http://b.tile.opencyclemap.org/cycle/{0}/{1}/{2}.png", ".png", 16, 1, 256, 32, 18000);  //$NON-NLS-1$//$NON-NLS-2$ //$NON-NLS-3$
+		return CYCLE_MAP_SOURCE;
 	}
 
 	public static TileSourceTemplate getMapillarySource() {
-		return new TileSourceTemplate("Mapillary (raster tiles)", "https://d6a1v2w10ny40.cloudfront.net/v0.1/{0}/{1}/{2}.png", ".png", 17, 0, 256, 16, 32000);
+		return MAPILLARY_SOURCE;
 	}
 
 	public static List<TileSourceTemplate> downloadTileSourceTemplates(String versionAsUrl) {
