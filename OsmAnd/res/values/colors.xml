@@ -1,6 +1,7 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources>
 
+	<color name="mapillary_color">#3db878</color>
 	<color name="buy_button_color">#50ae55</color>
     <color name="buy_button_pressed_color">#b5e5b9</color>
 

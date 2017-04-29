@@ -1,10 +1,18 @@
 package net.osmand.plus.mapillary;
 
 import android.app.Activity;
+import android.os.Bundle;
+import android.support.annotation.NonNull;
+import android.support.v4.app.FragmentActivity;
+import android.support.v7.widget.SwitchCompat;
+import android.view.LayoutInflater;
+import android.view.View;
+import android.view.ViewGroup;
 import android.widget.ArrayAdapter;
 
 import net.osmand.map.ITileSource;
 import net.osmand.map.TileSourceManager;
+import net.osmand.plus.ApplicationMode;
 import net.osmand.plus.ContextMenuAdapter;
 import net.osmand.plus.ContextMenuItem;
 import net.osmand.plus.OsmandApplication;
@@ -13,9 +21,15 @@ import net.osmand.plus.OsmandSettings;
 import net.osmand.plus.R;
 import net.osmand.plus.activities.MapActivity;
 import net.osmand.plus.activities.MapActivityLayers;
+import net.osmand.plus.base.BottomSheetDialogFragment;
+import net.osmand.plus.views.MapInfoLayer;
 import net.osmand.plus.views.MapTileLayer;
 import net.osmand.plus.views.OsmandMapTileView;
+import net.osmand.plus.views.mapwidgets.MapWidgetRegistry.MapWidgetRegInfo;
+import net.osmand.plus.views.mapwidgets.TextInfoWidget;
 import net.osmand.util.Algorithms;
+
+import java.util.List;
 
 public class MapillaryPlugin extends OsmandPlugin {
 	public static final String ID = "osmand.mapillary";
@@ -23,6 +37,8 @@ public class MapillaryPlugin extends OsmandPlugin {
 	private OsmandApplication app;
 
 	private MapillaryLayer rasterLayer;
+	private TextInfoWidget mapillaryControl;
+	private MapWidgetRegInfo mapillaryWidgetRegInfo;
 
 	public MapillaryPlugin(OsmandApplication app) {
 		this.app = app;
@@ -57,6 +73,7 @@ public class MapillaryPlugin extends OsmandPlugin {
 	@Override
 	public void registerLayers(MapActivity activity) {
 		createLayers();
+		registerWidget(activity);
 	}
 
 	private void createLayers() {
@@ -137,5 +154,76 @@ public class MapillaryPlugin extends OsmandPlugin {
 				.setListener(listener)
 				.setPosition(11)
 				.createItem());
+	}
+
+	private void registerWidget(MapActivity activity) {
+		MapInfoLayer layer = activity.getMapLayers().getMapInfoLayer();
+		mapillaryControl = createMonitoringControl(activity);
+		mapillaryWidgetRegInfo = layer.registerSideWidget(mapillaryControl,
+				R.drawable.ic_action_mapillary, R.string.mapillary, "mapillary", false, 19);
+		layer.recreateControls();
+	}
+
+	private TextInfoWidget createMonitoringControl(final MapActivity map) {
+		mapillaryControl = new TextInfoWidget(map);
+		mapillaryControl.setText(map.getString(R.string.mapillary), "");
+		mapillaryControl.setIcons(R.drawable.widget_mapillary_day, R.drawable.widget_mapillary_night);
+		mapillaryControl.setOnClickListener(new View.OnClickListener() {
+			@Override
+			public void onClick(View v) {
+				// todo open mapillary app
+			}
+		});
+
+		return mapillaryControl;
+	}
+
+	public void setWidgetVisible(MapActivity mapActivity, boolean visible) {
+		if (mapillaryWidgetRegInfo != null) {
+			final List<ApplicationMode> allModes = ApplicationMode.allPossibleValues();
+			for (ApplicationMode mode : allModes) {
+				mapActivity.getMapLayers().getMapWidgetRegistry().setVisibility(mode, mapillaryWidgetRegInfo, visible, false);
+			}
+			MapInfoLayer mil = mapActivity.getMapLayers().getMapInfoLayer();
+			if (mil != null) {
+				mil.recreateControls();
+			}
+			mapActivity.refreshMap();
+		}
+	}
+
+	public static class MapillaryFirstDialogFragment extends BottomSheetDialogFragment {
+		public static final String TAG = "MapillaryFirstDialogFragment";
+
+		private static final String KEY_SHOW_WIDGET = "key_show_widget";
+		private boolean showWidget = true;
+
+		@Override
+		public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
+			if (savedInstanceState != null) {
+				showWidget = savedInstanceState.getBoolean(KEY_SHOW_WIDGET, true);
+			}
+
+			View view = inflater.inflate(R.layout.mapillary_first_dialog, container, false);
+			final SwitchCompat widgetSwitch = (SwitchCompat) view.findViewById(R.id.widget_switch);
+			widgetSwitch.setChecked(showWidget);
+			view.findViewById(R.id.actionButton).setOnClickListener(new View.OnClickListener() {
+				@Override
+				public void onClick(View v) {
+					FragmentActivity activity = getActivity();
+					MapillaryPlugin plugin = OsmandPlugin.getPlugin(MapillaryPlugin.class);
+					if (plugin != null && activity instanceof MapActivity) {
+						plugin.setWidgetVisible((MapActivity) activity, widgetSwitch.isChecked());
+					}
+					dismiss();
+				}
+			});
+			return view;
+		}
+
+		@Override
+		public void onSaveInstanceState(@NonNull Bundle outState) {
+			outState.putBoolean(KEY_SHOW_WIDGET, showWidget);
+		}
 	}
 }
