@@ -240,6 +240,10 @@ public class MapWidgetRegistry {
 
 	public void setVisibility(MapWidgetRegInfo m, boolean visible, boolean collapsed) {
 		ApplicationMode mode = settings.APPLICATION_MODE.get();
+		setVisibility(mode, m, visible, collapsed);
+	}
+
+	public void setVisibility(ApplicationMode mode, MapWidgetRegInfo m, boolean visible, boolean collapsed) {
 		defineDefaultSettingsElement(mode);
 		// clear everything
 		this.visibleElementsFromSettings.get(mode).remove(m.key);

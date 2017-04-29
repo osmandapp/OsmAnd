@@ -74,6 +74,8 @@ import net.osmand.plus.helpers.WaypointHelper.LocationPointWrapper;
 import net.osmand.plus.mapcontextmenu.other.MapRouteInfoMenu;
 import net.osmand.plus.mapcontextmenu.other.RoutePreferencesMenu;
 import net.osmand.plus.mapcontextmenu.other.RoutePreferencesMenu.LocalRoutingParameter;
+import net.osmand.plus.mapillary.MapillaryPlugin;
+import net.osmand.plus.mapillary.MapillaryPlugin.MapillaryFirstDialogFragment;
 import net.osmand.plus.rastermaps.OsmandRasterMapsPlugin;
 import net.osmand.plus.routing.RoutingHelper;
 import net.osmand.plus.routing.RoutingHelper.IRouteInformationListener;
@@ -865,6 +867,13 @@ public class DashboardOnMap implements ObservableScrollViewCallbacks, DynamicLis
 				if (df.get() != null) {
 					df.get().onCloseDash();
 				}
+			}
+
+			OsmandSettings settings = getMyApplication().getSettings();
+			if (settings.SHOW_MAPILLARY.get() && !settings.MAPILLARY_FIRST_DIALOG_SHOWN.get()) {
+				MapillaryFirstDialogFragment fragment = new MapillaryFirstDialogFragment();
+				fragment.show(mapActivity.getSupportFragmentManager(), MapillaryFirstDialogFragment.TAG);
+				settings.MAPILLARY_FIRST_DIALOG_SHOWN.set(true);
 			}
 		}
 	}

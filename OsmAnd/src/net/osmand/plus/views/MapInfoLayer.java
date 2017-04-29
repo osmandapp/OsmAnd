@@ -87,10 +87,11 @@ public class MapInfoLayer extends OsmandMapLayer {
 		recreateControls();
 	}
 	
-	public void registerSideWidget(TextInfoWidget widget, int drawableMenu,
+	public MapWidgetRegInfo registerSideWidget(TextInfoWidget widget, int drawableMenu,
 			int messageId, String key, boolean left, int priorityOrder) {
 		MapWidgetRegInfo reg = mapInfoControls.registerSideWidgetInternal(widget, drawableMenu, messageId, key, left, priorityOrder);
 		updateReg(calculateTextState(), reg);
+		return reg;
 	}
 
 	public MapWidgetRegInfo registerSideWidget(TextInfoWidget widget, int drawableMenu,
