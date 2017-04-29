@@ -827,9 +827,8 @@ public class LocalIndexesFragment extends OsmandExpandableListFragment implement
 		public LocalIndexesAdapter(DownloadActivity ctx) {
 			this.ctx = ctx;
 			warningColor = ContextCompat.getColor(ctx, R.color.color_warning);
-			okColor = ContextCompat.getColor(ctx, R.color.color_ok);
-			TypedArray ta = ctx.getTheme().obtainStyledAttributes(new int[]{android.R.attr.textColorPrimary});
-			ta.recycle();
+			boolean light = ctx.getMyApplication().getSettings().isLightContent();
+			okColor = ContextCompat.getColor(ctx, light ? R.color.primary_text_light : R.color.primary_text_dark);
 			corruptedColor = ContextCompat.getColor(ctx, R.color.color_invalid);
 		}
 
@@ -1108,9 +1107,8 @@ public class LocalIndexesFragment extends OsmandExpandableListFragment implement
 					nameTextView.setTextColor(warningColor);
 				} else if (child.isCorrupted()) {
 					nameTextView.setTextColor(corruptedColor);
-				} else if (child.isLoaded()) {
-					// users confused okColor here with "uptodate", so let's leave white (black in dark app theme) as "isLoaded"
-					//nameTextView.setTextColor(okColor);
+				} else {
+					nameTextView.setTextColor(okColor);
 				}
 				if (child.isBackupedData()) {
 					nameTextView.setTypeface(Typeface.DEFAULT, Typeface.ITALIC);
