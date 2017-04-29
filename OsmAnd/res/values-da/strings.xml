@@ -3058,4 +3058,7 @@ Tidligere destination bliver sidste mellemliggende punkt.</string>
     <string name="nothing_found_descr">Prøv at ændre søgekriterier eller øg søgeradius</string>
     <string name="private_access_routing_req">Destination ligger i et område med privat adgang. Giv adgang til de private veje for turen?</string>
     <string name="mapillary">Mapillary</string>
+    <string name="mapillary_widget">Mapillary modul</string>
+    <string name="mapillary_widget_descr">Giver mulighed for hurtigt at bidrage til Mapillary</string>
+    <string name="mapillary_descr">Online gade-billeder for alle. Oplev steder, samarbejde, indfang verden.</string>
     </resources>
