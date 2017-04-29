@@ -604,24 +604,24 @@ Anslået kortdækning og kvalitet:
 
 Liste over understøttede lande (stort set hele verden!): Afghanistan, Albanien, Algeriet, Andorra, Angola, Anguilla, Antigua og Barbuda, Argentina, Armenien, Aruba , Australien, Østrig, Azerbaijan, Bahamas, Bahrain, Bangladesh, Barbados, Belarus, Belgien, Belize, Benin, Bermuda, Bhutan, Bolivia, Bonaire, Bosnien-Hercegovina, Botswana, Brasilien, De Britiske Jomfruøer, Brunei, Bulgarien, Burkina Faso, Burundi, Cambodja, Cameroun, Canada, Kap Verde, Den Centralafrikanske Republik, Tchad, Chile, Kina, Colombia, Comorerne, Congo, Costa Rica, Elfenbenskysten, Kroatien, Cuba, Curaçao, Cypern, Tjekkiet, Danmark, Djibouti, Dominica, Dominikanske Republik, Ecuador, Egypten, El Salvador, Ækvatorial Guinea, Eritrea, Estland, Etiopien, Fiji, Finland, Frankrig, Fransk Guyana, Fransk Polynesien, Gabon, Gambia, Georgien, Tyskland, Ghana, Gibraltar, Grækenland, Grønland, Grenada, Guadeloupe , Guam, Guatemala, Guernsey, Guinea, Guinea-Bissau, Guyana, Haiti, Vatikanet, Honduras, Hong Kong, Ungarn, Island, Indien, Indonesien, Iran, Irak, Irland, Isle of Man, Israel, Italien, Jamaica, Japan, Jersey, Jordan, Kasakhstan, Kenya, Kiribati, Nordkorea og Sydkorea, Kuwait, Kirgisistan, Laos, Letland, Libanon, Lesotho, Liberia, Libyen, Liechtenstein, Litauen, Luxembourg, Macao, Makedonien, Madagaskar, Malawi, Malaysia, Maldiverne, Mali, Malta, Martinique, Mauretanien, Mauritius, Mayotte, Mexico, Mikronesien, Moldova, Monaco, Mongoliet, Montenegro, Montserrat, Marokko, Mozambique, Myanmar, Namibia, Nauru, Nepal, Holland, De Nederlandske Antiller, Ny Kaledonien, New Zealand, Nicaragua , Niger, Nigeria, Norge, Oman, Pakistan, Palau, Palæstina, Panama, Papua Ny Guinea, Paraguay, Peru, Filippinerne, Polen, Portugal, Puerto Rico, Qatar, Rumænien, Rusland, Rwanda, Saint Barthelemy, St. Helena, Saint Kitts og Nevis, Saint Lucia, Saint Martin, Saint Pierre og Miquelon, Saint Vincent og Grenadinerne, Samoa, San Marino, Saudi-Arabien, Senegal, Serbien, Seychellerne, Sierra Leone, Singapore, Slovakiet, Slovenien, Somalia, Sydafrika, Georgia, South Sudan, Spanien, Sri Lanka, Sudan, Surinam, Swaziland, Sverige, Schweiz, Syrien, Taiwan, Tadsjikistan, Tanzania, Thailand, Timor-Leste, Togo, Tokelau, Tonga, Trinidad og Tobago, Tunesien, Tyrkiet, Turkmenistan, Tuvalu, Uganda, Ukraine, Forenede Arabiske Emirater, Storbritannien (UK), USA (USA), Uruguay, Usbekistan, Vanuatu, Venezuela, Vietnam, Wallis-og Futuna, Western Sahara, Yemen, Zambia, Zimbabwe
  "</string>
-    <string name="osmand_plus_long_description_1000_chars">" OsmAnd+ (OSM Automated Navigation Directions)
-\n
+    <string name="osmand_plus_long_description_1000_chars">" OsmAnd+ (OSM Automated Navigation Directions) 
+\n 
 \nOsmAnd+ er et open source navigationsprogram med adgang til en bred vifte af globale OpenStreetMap (OSM) data. Alle kortdata (vektor eller kortfliser) kan gemmes på enhedens hukommelseskort til offline brug. OsmAnd tilbyder også offline og online ruteplanlægning funktionalitet, herunder sving-for-sving talevejledning. 
-\n
+\n 
 \nOsmAnd+ er den betalte programversion, ved at købe den støtter man projektet, finansiere udviklingen af nye funktioner, og modtager de seneste opdateringer. 
-\n
-\nNogle af hovedfunktionerne:
-\n - Komplet offline funktionalitet (gem hentede vektor eller kortfliser i enhedens hukommelsseskort)
-\n - Kompakte offline vektorkort for hele verden tilgængelig
-\n - Ubegrænset hentning af lande- eller områdekort direkte fra OsmAnd
-\n - Offline Wikipedia funktioner (hent Wikipedia Interessepunkter (IP)), fantastisk til sightseeing
-\n - Overlejring af flere kortlag mulige, såsom GPX eller navigationsspor, seværdigheder, favoritter, højdekurver, stoppesteder for kollektivtrafik , ekstra kort med brugerdefinerbar gennemsigtighed
-\n - Offline søgning efter adresser og steder (IP)
-\n - Offline ruteplanlægning til medium afstande
-\n  - Bil, cykel, og fodgængere tilstand med:
-\n - Valgfri automatisk dag/nat visning
-\n - Valgfri hastighedsafhængig kort zoom
-\n - Valgfri kort tilpasning i henhold til kompas eller bevægelsesretning
+\n 
+\nNogle af hovedfunktionerne: 
+\n - Komplet offline funktionalitet (gem hentede vektor eller kortfliser i enhedens hukommelsseskort) 
+\n - Kompakte offline vektorkort for hele verden tilgængelig 
+\n - Ubegrænset hentning af lande- eller områdekort direkte fra OsmAnd 
+\n - Offline Wikipedia funktioner (hent Wikipedia Interessepunkter (IP)), fantastisk til sightseeing 
+\n - Overlejring af flere kortlag mulige, såsom GPX eller navigationsspor, seværdigheder, favoritter, højdekurver, stoppesteder for kollektivtrafik , ekstra kort med brugerdefinerbar gennemsigtighed 
+\n - Offline søgning efter adresser og steder (IP) 
+\n - Offline ruteplanlægning til medium afstande 
+\n  - Bil, cykel, og fodgængere tilstand med: 
+\n - Valgfri automatisk dag/nat visning 
+\n - Valgfri hastighedsafhængig kort zoom 
+\n - Valgfri kort tilpasning i henhold til kompas eller bevægelsesretning 
 \n - Valgfri vognbane vejledning, visning af hastighedsgrænser,  optagede- eller TTS stemmer "</string>
     <string name="osmand_plus_extended_description_4000_chars">"
 OsmAnd (OSM Automated Navigation Directions)
@@ -3052,7 +3052,7 @@ Tidligere destination bliver sidste mellemliggende punkt.</string>
     <string name="quick_action_osmbugs_show">Vis OSM noter</string>
     <string name="quick_action_osmbugs_hide">Skjul OSM noter</string>
     <string name="quick_action_showhide_osmbugs_descr">Tryk på genvejsknappen vil vise eller skjule OSM noter på kortet.</string>
-    <string name="restart_search">Genstart søgning</string>
+    <string name="restart_search">Start søgning igen</string>
     <string name="increase_search_radius">Øg søgeradius</string>
     <string name="nothing_found">Fandt intet :(</string>
     <string name="nothing_found_descr">Prøv at ændre søgekriterier eller øg søgeradius</string>
@@ -3060,5 +3060,5 @@ Tidligere destination bliver sidste mellemliggende punkt.</string>
     <string name="mapillary">Mapillary</string>
     <string name="mapillary_widget">Mapillary modul</string>
     <string name="mapillary_widget_descr">Giver mulighed for hurtigt at bidrage til Mapillary</string>
-    <string name="mapillary_descr">Online gade-billeder for alle. Oplev steder, samarbejde, indfang verden.</string>
+    <string name="mapillary_descr">Online gade-billeder for alle. Oplev steder, samarbejd, indfang verden.</string>
     </resources>
