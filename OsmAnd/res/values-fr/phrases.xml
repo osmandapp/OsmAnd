@@ -1736,7 +1736,7 @@
 	<string name="poi_concentration_camp_gulag">Type : goulag</string>
 
 	<string name="poi_temperature">Température</string>
-	<string name="poi_wiki_link">Wiki</string>
+	<string name="poi_wiki_link">Wikipédia</string>
 
 
 <string name="poi_resource_gravel">Gravier</string>
@@ -2364,7 +2364,7 @@
 	<string name="poi_tactile_paving_no">Sans surface podotactile</string>
 	<string name="poi_railway_level_crossing">Passage à niveau</string>
 	<string name="poi_xmas">Noël</string>
-	<string name="poi_xmas_event">Evénement de Noël</string>
+	<string name="poi_xmas_event">Événement de Noël</string>
 	<string name="poi_xmas_market">Marché de Noël</string>
 	<string name="poi_xmas_pyramid">Pyramide de Noël</string>
 	<string name="poi_xmas_shop">Magasin de Noël</string>
@@ -2906,5 +2906,23 @@
 	<string name="poi_cuisine_jewish">Juif</string>
 	<string name="poi_cuisine_bulgarian">Bulgare</string>
 	<string name="poi_cuisine_tibetan">Tibétain</string>
+
+	<string name="poi_drink_wine_retail">Vin : vente</string>
+	<string name="poi_drink_wine_served">Vin : service</string>
+
+	<string name="poi_tower_construction_dome">Construction : dôme</string>
+	<string name="poi_tower_construction_concealed">Construction : dissimulé</string>
+
+	<string name="poi_tower_construction_dish">Construction : antenne parabolique</string>
+	<string name="poi_cuisine_pastel">Pastel</string>
+	<string name="poi_cuisine_sub">Sub</string>
+	<string name="poi_xmas_note">Noël : note</string>
+	<string name="poi_xmas_opening_hours">Noël : horaires d\'ouverture</string>
+	<string name="poi_xmas_location">Noël : emplacement</string>
+	<string name="poi_xmas_url">Noël : site web</string>
+
+	<string name="poi_xmas_shop_christmas_tree">Vente d\'arbres</string>
+	<string name="poi_xmas_day_date">Noël : période de l’événement</string>
+	<string name="poi_length">Longueur</string>
 
 	</resources>
