@@ -1101,4 +1101,41 @@
 	<string name="poi_signal_station_warning">Сигнал небезпеки</string>
 	<string name="poi_small_craft_facility">Човникова станція</string>
 	<string name="poi_topmark">Водяний знак: верхній знак</string>
+	<string name="poi_seamark_rock">Скала (навігаційний знак)</string>
+	<string name="poi_seamark_wreck">Корабельна аварія (навігаційний орієнтир)</string>
+
+	<string name="poi_military_landuse">Військова зона</string>
+	<string name="poi_military_airfield">Військовий аеродром</string>
+	<string name="poi_military_bunker">Військовий бункер</string>
+	<string name="poi_military_barracks">Казарми</string>
+	<string name="poi_military_danger_area">Небезпечна зона</string>
+	<string name="poi_military_range">Військовий полігон</string>
+	<string name="poi_military_office">Військкомат, комендатура</string>
+	<string name="poi_military_naval_base">Військово-морська база</string>
+	<string name="poi_military_nuclear_explosion_site">Місце ядерного вибуху</string>
+
+	<string name="poi_wiki_place">Вікіпедія</string>
+	<string name="poi_wiki_lang_en">Вікіпедія англійською</string>
+	<string name="poi_wiki_lang_ar">Вікіпедія арабською</string>
+	<string name="poi_wiki_lang_be">Вікіпедія білоруською</string>
+	<string name="poi_wiki_lang_bg">Вікіпедія болгарською</string>
+	<string name="poi_wiki_lang_ca">Вікіпедія каталонською</string>
+	<string name="poi_wiki_lang_ceb">Вікіпедія на кебуано</string>
+	<string name="poi_wiki_lang_cs">Вікіпедія чеською</string>
+	<string name="poi_wiki_lang_da">Вікіпедія датською</string>
+	<string name="poi_wiki_lang_de">Вікіпедія німецькою</string>
+	<string name="poi_wiki_lang_el">Вікіпедія грецькою</string>
+	<string name="poi_wiki_lang_et">Вікіпедія естонською</string>
+	<string name="poi_wiki_lang_es">Вікіпедія іспанською</string>
+	<string name="poi_wiki_lang_fi">Вікіпедія фінською</string>
+	<string name="poi_wiki_lang_fr">Вікіпедія французькою</string>
+	<string name="poi_wiki_lang_gl">Вікіпедія галісійською</string>
+	<string name="poi_wiki_lang_he">Вікіпедія на івриті</string>
+	<string name="poi_wiki_lang_hi">Вікіпедія на хінді</string>
+	<string name="poi_wiki_lang_hr">Вікіпедія хорватською</string>
+	<string name="poi_wiki_lang_ht">Вікіпедія гаїтянською</string>
+	<string name="poi_wiki_lang_hu">Вікіпедія угорською</string>
+	<string name="poi_wiki_lang_id">Вікіпедія індонезійською</string>
+	<string name="poi_wiki_lang_it">Вікіпедія італійською</string>
+	<string name="poi_wiki_lang_ja">Вікіпедія японською</string>
 	</resources>
