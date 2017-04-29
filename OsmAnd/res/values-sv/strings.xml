@@ -243,7 +243,7 @@ Du hittar din parkeringsplats och -tid på instrumentbrädan och i widgeten på 
     <string name="prefs_plugins_descr">Insticksmoduler aktiverar avancerade inställningar samt ger ytterligare funktionalitet</string>
     <string name="prefs_plugins">Insticksmoduler</string>
 
-    <string name="osm_editing_plugin_description">"Med denna modul kan OsmAnd användas för att göra bidrag till OSM såsom samlande/modifierande av OSM POI-objekt, öppnande/kommenterande av OSM-buggar, och bidragande med inspelade GPX-filer. OSM är ett globalt kartprojekt inom public domain, För mer info, se  https://openstreetmap.org. Aktivt deltagande uppskattas och bidrag kan ges direkt i OsmAnd om du anger dina personiga OSM-referenser i appen."</string>
+    <string name="osm_editing_plugin_description">"Med denna modul kan OsmAnd användas för att göra bidrag till OSM såsom samlande/modifierande av OSM POI-objekt, öppnande/kommenterande av OSM-anteckningar, och bidragande med inspelade GPX-filer. OSM är ett globalt kartprojekt inom public domain, För mer info, se  https://openstreetmap.org. Aktivt deltagande uppskattas och bidrag kan ges direkt i OsmAnd om du anger dina personiga OSM-referenser i appen."</string>
     <string name="vector_maps_may_display_faster_on_some_devices">Vektorkartor ritas sannolikt upp snabbare. Fungerar kanske inte så bra på vissa enheter.</string>
     <string name="play_commands_of_currently_selected_voice">Spela upp kommandon med vald röst</string>
     <string name="test_voice_prompts">Test av röstmeddelanden</string>
@@ -913,9 +913,8 @@ Nyttjat utrymme är {1} MB.
     <string name="recording_error">Ett fel uppstod under inspelningen </string>
     <string name="recording_camera_not_available">Ingen kamera tillgänglig</string>
     <string name="srtm_plugin_description">"Denna modul erbjuder överlägg med höjdkurvor som kan visas i kombination med OsmAnds standardkartor. Denna funktion kommer att uppskattas av idrottsmän, vandrare och alla som är intresserade av höjdskillnander i landskapet.
-
-Dessa globala data (mellan 70 grader norr och 70 grader syd) baseras på mätningar av SRTM (Shuttle Radar Topography Mission) och ASTER (Advanced Spaceborne Thermal Emission and Reflection Radiometer), ett bildinstrument ombord Terra, flaggskeppet i NASA:s Earth Observing System. ASTER är ett samprojekt mellan NASA, Japans Ministry of Economy, Trade and Industry (METI), and Japan Space Systems (J-spacesystems).
- "</string>
+\n
+\nDessa globala data (mellan 70 grader norr och 70 grader syd) baseras på mätningar av SRTM (Shuttle Radar Topography Mission) och ASTER (Advanced Spaceborne Thermal Emission and Reflection Radiometer), ett bildinstrument ombord Terra, flaggskeppet i NASA:s Earth Observing System. ASTER är ett samprojekt mellan NASA, Japans Ministry of Economy, Trade and Industry (METI), and Japan Space Systems (J-spacesystems). "</string>
     <string name="delete_target_point">Ta bort destination</string>
     <string name="intermediate_point">Mellanliggande destination %1$s</string>
     <string name="poi_filter_nominatim">Online Nominatim</string>
@@ -953,8 +952,8 @@ Dessa globala data (mellan 70 grader norr och 70 grader syd) baseras på mätnin
     <string name="save_current_track">Spara aktuellt GPX-spår</string>
     <string name="save_track_interval">Loggningsintervall under navigering</string>
     <string name="save_track_interval_descr">Välj loggningsintervall för inspelning av spår under navigering</string>
-    <string name="save_track_to_gpx_descrp">Spår kommer att sparas i spårmappen under navigering</string>
-    <string name="save_track_to_gpx">Logga spår till GPX-fil under navigering</string>
+    <string name="save_track_to_gpx_descrp">Ett GPX-spår sparas automatiskt i spårmappen under navigering</string>
+    <string name="save_track_to_gpx">Spela in spår automatiskt under navigering</string>
     <string name="update_tile">Uppdatera kartan</string>
     <string name="reload_tile">Läs om kartbit</string>
     <string name="mark_point">Mål</string>
@@ -1017,9 +1016,8 @@ Dessa globala data (mellan 70 grader norr och 70 grader syd) baseras på mätnin
 
     <string name="enable_plugin_monitoring_services">Aktivera Trippinspelningspluginen för att använda positionsloggningstjänster (GPX-loggning, online-spårning)</string>
     <string name="osmand_srtm_long_description_1000_chars">"Denna modul erbjuder både ett överlägg med konturlinjer och ett höjdkurvslager som kan visas ovanpå OsmAnds offline-kartor. Denna funktion kommer att uppskattas av idrottsmän, vandrare och alla som är intresserade av höjdskillnader i landskapet.
-
-Dessa globala data (mellan 70 grader norr och 70 grader syd) är baserade på SRTM (Shuttle Radar Topography Mission) och ASTER (Advanced Spaceborne Thermal Emission and Reflection Radiometer), ett bildinstrument på Terra, NASA:s Earth Observing Systems satellit. ASTER är ett samarbete mellan NASA, Japans finansdepartement, Trade and Industry (METI) och Japan Space Systems (J-spacesystems).
- "</string>
+\n
+\nDessa globala data (mellan 70 grader norr och 70 grader syd) är baserade på SRTM (Shuttle Radar Topography Mission) och ASTER (Advanced Spaceborne Thermal Emission and Reflection Radiometer), ett bildinstrument på Terra, NASA:s Earth Observing Systems satellit. ASTER är ett samarbete mellan NASA, Japans finansdepartement, Trade and Industry (METI) och Japan Space Systems (J-spacesystems). "</string>
     <string name="access_arrival_time">Ankomsttid</string>
     <string name="index_name_openmaps">OpenMaps EU</string>
 
@@ -2047,33 +2045,23 @@ Long %2$s</string>
     <string name="access_from_map">Tillgång från kartan</string>
     <string name="rendering_attr_currentTrackColor_description">GPX-färg</string>
     <string name="rendering_attr_currentTrackWidth_description">GPX-bredd</string>
-    <string name="release_2_2">"
- • Nytt kontextkänsligt gränssnitt för att peta på platser på kartan och på andra skärmar
-
-
- • Kartskärmen startar nu automatiskt om inte \'Visa panelen vid appstart\' är vald
-
-
- • Konfigurera vilka kort och hur de ska visas i panelen
-
-
- • Gå förbi panelen om du föredrar en menybaserad kontroll över appen
-
-
- • För att hämta kartor kan regioner väljas direkt genom att peta på världskartan
-
-
- • Sökning efter intressepunkter (POI) understöder nu mer specifika frågor
-
-
- • Förbättrad funktion för POI- och OSM-redigering
-
-
- • Strukturen för hämtning av kartdata och gränssnittet har omarbetats
-
-
- och mer …
- "</string>
+    <string name="release_2_2">" • Nytt kontextkänsligt gränssnitt för att peta på platser på kartan och på andra skärmar
+\n
+\n • Kartskärmen startar nu automatiskt om inte \'Visa panelen vid appstart\' är vald
+\n
+\n • Konfigurera vilka kort och hur de ska visas i panelen
+\n
+\n • Gå förbi panelen om du föredrar en menybaserad kontroll över appen
+\n
+\n • För att hämta kartor kan regioner väljas direkt genom att peta på världskartan
+\n
+\n • Sökning efter intressepunkter (POI) understöder nu mer specifika frågor
+\n
+\n • Förbättrad funktion för POI- och OSM-redigering
+\n
+\n • Strukturen för hämtning av kartdata och gränssnittet har omarbetats
+\n
+\n och mer … "</string>
     <string name="dashboard_or_drawer_description">Det finns ett nytt val att primärt kontrollera appen via den flexibla panelen eller via en statisk meny. Detta val kan du alltid ändra på under inställningarna i panelen.</string>
 <string name="use_dashboard_btn">Använd panelen</string>
     <string name="use_drawer_btn">Använd menyn</string>
@@ -2407,26 +2395,19 @@ Om du tycker om OsmAnd och OSM och vill stödja dem så är detta ett utmärkt s
     <string name="donation_to_osm_desc">En del av din donation kommer att skickas till OSM-användare som skickar in ändringar till OpenStreetMap. Prenumerationens kostnad fortsätter att vara densamma.</string>
     <string name="osm_live_subscription_desc">En prenumeration aktiverar uppdateringar varje timme, dag eller vecka och obegränsade nedladdningar av alla kartor globalt.</string>
     <string name="osm_live_banner_desc">Erhåll obegränsade nedladdningar av kartor samt kartuppdateringar oftare än en gång i månaden: varje vecka, varje dag eller varje timme.</string>
-    <string name="release_2_4">"
- • Ny mycket kraftfull fritextsökning
-
-
-• Ljudsystem för bil/högtalarintegrering via Blåtand
-
-
-• Förbättrad vägvisning, meddelanderöst och körfält för omdirigering
-
-
-• Förbättrat transportlager med vägrendering.
-
-
-• Fler språkversioner och nu stöd för regionala språk
-
-
-• Många fler förbättringar och felkorrigeringar
-
-med mera…
- "</string>
+    <string name="release_2_4">" • Ny mycket kraftfull fritextsökning
+\n
+\n• Ljudsystem för bil/högtalarintegrering via Blåtand
+\n
+\n• Förbättrad vägvisning, meddelanderöst och körfält för omdirigering
+\n
+\n• Förbättrat transportlager med vägrendering.
+\n
+\n• Fler språkversioner och nu stöd för regionala språk
+\n
+\n• Många fler förbättringar och felkorrigeringar
+\n
+\nmed mera… "</string>
     <string name="rendering_value_low_name">Låg</string>
     <string name="rendering_attr_contourWidth_description">Bredd på konturlinjer</string>
     <string name="rendering_value_high_name">Hög</string>
@@ -2441,7 +2422,7 @@ med mera…
     <string name="quick_action_add_poi">Lägg till POI</string>
     <string name="quick_action_map_style">Byt kartstil</string>
     <string name="quick_action_map_style_switch">Kartstilen har ändrats till \"%s\".</string>
-    <string name="quick_action_add_osm_bug">Lägg till OSM-bugg</string>
+    <string name="quick_action_add_osm_bug">Lägg till OSM-anteckning</string>
     <string name="quick_action_navigation_voice">Röst på/av</string>
     <string name="quick_action_navigation_voice_off">Röst är av</string>
     <string name="quick_action_navigation_voice_on">Röst är på</string>
