@@ -84,7 +84,7 @@ public class MapillaryPlugin extends OsmandPlugin {
 	public void updateLayer(OsmandMapTileView mapView, MapTileLayer layer, float layerOrder) {
 		ITileSource mapillarySource = null;
 		if (settings.SHOW_MAPILLARY.get()) {
-			mapillarySource = TileSourceManager.getMapillarySource();
+			mapillarySource = settings.getTileSourceByName(TileSourceManager.getMapillarySource().getName(), false);
 		}
 		if (!Algorithms.objectEquals(mapillarySource, layer.getMap())) {
 			if (mapillarySource == null) {
