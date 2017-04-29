@@ -59,7 +59,7 @@
 	<string name="poi_seamark">船舶(Nautical)</string>
 	<string name="poi_military">軍事施設(Military)</string>
 	<string name="poi_osmwiki">ウィキペディア(Wikipedia)</string>
-	<string name="poi_user_defined_other">ユーザー定義(User defined)</string>
+	<string name="poi_user_defined_other">ユーザー定義</string>
 	
 	<string name="poi_palaeontological_site">化石出土地(Palaeontological site)</string>
 
@@ -265,15 +265,15 @@
 	<string name="poi_fuel_hgv_diesel">HGVディーゼル(HGV diesel)</string>
 	<string name="poi_fuel_biodiesel">バイオディーゼル(Bio diesel)</string>
 	<string name="poi_fuel_lpg">液化石油ガス</string>
-	<string name="poi_fuel_octane_80">オクタン価80(Octane 80)</string>
+	<string name="poi_fuel_octane_80">オクタン価80</string>
 	<string name="poi_fuel_octane_91">オクタン価91(レギュラーガソリン)</string>
-	<string name="poi_fuel_octane_92">オクタン価92(Octane 92)</string>
-	<string name="poi_fuel_octane_95">オクタン価95(Octane 95)</string>
+	<string name="poi_fuel_octane_92">オクタン価92</string>
+	<string name="poi_fuel_octane_95">オクタン価95</string>
 	<string name="poi_fuel_octane_98">オクタン価98(ハイオクガソリン)</string>
-	<string name="poi_fuel_octane_100">オクタン価100(Octane 100)</string>
+	<string name="poi_fuel_octane_100">オクタン価100</string>
 	<string name="poi_fuel_cng">圧縮天然ガス</string>
-	<string name="poi_fuel_1_25">混合油 1:25(1:25 fuel)</string>
-	<string name="poi_fuel_1_50">混合油 1:50(1:50 fuel)</string>
+	<string name="poi_fuel_1_25">混合油 1:25</string>
+	<string name="poi_fuel_1_50">混合油 1:50</string>
 	<string name="poi_fuel_ethanol">エタノール(Ethanol)</string>
 	<string name="poi_fuel_methanol">メタノール(Methanol)</string>
 	<string name="poi_fuel_svo">植物油(SVO)</string>
@@ -281,7 +281,7 @@
 	<string name="poi_fuel_e20">E20・バイオエタノール20％混合ガソリン(E20)</string>
 	<string name="poi_fuel_e85">E85・バイオエタノール85％混合ガソリン(E85)</string>
 	<string name="poi_fuel_biogas">バイオガス(Biogas)</string>
-	<string name="poi_fuel_lh2">液体水素(Liquid hydrogen)</string>
+	<string name="poi_fuel_lh2">液体水素</string>
 	<string name="poi_fuel_electricity">電気(Electricity)</string>
 	<string name="poi_junction">ジャンクション(Junction)</string>
 	<string name="poi_rest_area">パーキングエリア・PA</string>
@@ -414,7 +414,7 @@
 	<string name="poi_baseball">野球</string>
 	<string name="poi_basketball">バスケットボール</string>
 	<string name="poi_beachvolleyball">ビーチバレー</string>
-	<string name="poi_bmx">BMX（バイシクルモトクロス）</string>
+	<string name="poi_bmx">BMX(バイシクルモトクロス)</string>
 	<string name="poi_boules">ペタンク・ブール(Boules)</string>
 	<string name="poi_bowls">ローンボウルズ(Bowls)</string>
 	<string name="poi_canadian_football">カナディアンフットボール(Canadian football)</string>
@@ -427,7 +427,7 @@
 	<string name="poi_diving">ダイビング(Diving)</string>
 	<string name="poi_scuba_diving">スキューバダイビング(Scuba diving)</string>
 	<string name="poi_dog_racing">ドッグレース(Dog racing)</string>
-	<string name="poi_equestrian">馬術・乗馬(Equestrian)</string>
+	<string name="poi_equestrian">乗馬・スポーツ馬術(Equestrian)</string>
 	<string name="poi_field_hockey">フィールドホッケー(Field hockey)</string>
 	<string name="poi_golf">ゴルフ(Golf)</string>
 	<string name="poi_gymnastics">体操競技(Gymnastics)</string>
@@ -1067,7 +1067,7 @@
 	<string name="poi_entrance">入り口(Entrance)</string>
 	<string name="poi_entrance_exit">出口(Exit)</string>
 
-	<string name="poi_highway_crossing">横断歩道(Highway crossing)</string>
+	<string name="poi_highway_crossing">高速道路の横断歩道(Highway crossing)</string>
 
 	<string name="poi_opening_hours">営業時間(Opening hours)</string>
 	<string name="poi_collection_times">収集時間(Collection times)</string>
@@ -1163,20 +1163,20 @@
 	<string name="poi_payment_ep_cash_yes">キャッシュカード(ゲルトカルテ)(Cash card (Geldkarte))</string>
 	<string name="poi_free_flying_characteristics">飛行対応ジャンル(Characteristic)</string>
 	<string name="poi_free_flying_hanggliding_yes">ハンググライディング(Hanggliding)</string>
-	<string name="poi_free_flying_site_takeoff">離陸可(Takeoff)</string>
-	<string name="poi_free_flying_site_landing">着陸可(Landing)</string>
-	<string name="poi_free_flying_site_toplanding">トップランディング(Toplanding)</string>
-	<string name="poi_free_flying_site_towing">曳航(Towing)</string>
-	<string name="poi_free_flying_site_training">トレーニング(Training)</string>
-	<string name="poi_free_flying_official_yes">公認準拠(Official: yes)</string>
-	<string name="poi_free_flying_official_no">公認非準拠(Official: no)</string>
+	<string name="poi_free_flying_site_takeoff">離陸場所(Takeoff)</string>
+	<string name="poi_free_flying_site_landing">着陸場所(Landing)</string>
+	<string name="poi_free_flying_site_toplanding">トップランディング場所(Toplanding)</string>
+	<string name="poi_free_flying_site_towing">飛行機による牽引離着陸場所(Towing)</string>
+	<string name="poi_free_flying_site_training">練習場(Training)</string>
+	<string name="poi_free_flying_official_yes">公的許可有り(Official: yes)</string>
+	<string name="poi_free_flying_official_no">公的許可無し(Official: no)</string>
 	<string name="poi_free_flying_paragliding_yes">パラグライディング(Paragliding)</string>
 	<string name="poi_free_flying_paragliding_no">パラグライディング不可(Paragliding: no)</string>
 	<string name="poi_free_flying_hanggliding_no">ハンググライディング不可(Hanggliding: no)</string>
 	<string name="poi_free_flying_rigid_yes">リジットウイング(Rigid)</string>
 	<string name="poi_free_flying_rigid_no">リジットウイング不可(Free flying rigid: no)</string>
-	<string name="poi_free_flying_guest_guidelines_yes">ゲストガイドライン有り(Guest guidelines: yes)</string>
-	<string name="poi_free_flying_guest_guidelines_no">ゲストガイドライン無し(Guest guidelines: no)</string>
+	<string name="poi_free_flying_guest_guidelines_yes">常連利用者以外への特別な注意事項:有り(Guest guidelines: yes)</string>
+	<string name="poi_free_flying_guest_guidelines_no">常連利用者以外への特別な注意事項:無し(Guest guidelines: no)</string>
 
 	<string name="poi_nudism">裸体主義実践の可否(Nudism)</string>
 	<string name="poi_nudism_yes">許可(Allowed)</string>
@@ -2206,7 +2206,7 @@
 
 	<string name="poi_futsal">フットサル</string>
 	<string name="poi_gaelic_games">ゲーリック・ゲームズ(Gaelic games)</string>
-	<string name="poi_horse_riding">乗馬</string>
+	<string name="poi_horse_riding">乗馬施設(Horse riding)</string>
 	<string name="poi_ice_hockey">アイスホッケー</string>
 	<string name="poi_judo">柔道</string>
 	<string name="poi_karting">カート・カートレース</string>
@@ -2313,7 +2313,7 @@
 	<string name="poi_enforcement_toll">取締装置:料金</string>
 
 	<string name="poi_enforcement_access">取締装置:進入出</string>
-	<string name="poi_enforcement_check">取締装置：検問所</string>
+	<string name="poi_enforcement_check">取締装置:検問所</string>
 	<string name="poi_escape_lane">非常用避難及び強制減速車線(Escape lane)</string>
 
 	<string name="poi_icn_ref">複数の国境を越える長いサイクリングネットワークの交点</string>
@@ -2476,4 +2476,104 @@
 	<string name="poi_content_oil">貯蔵:油・オイル</string>
 	<string name="poi_route_hiking_ref_poi">ハイキングルートの参照番号(Hiking route reference)</string>
 
+	<string name="poi_free_flying_site_orientation_n">離陸の方向指示:北</string>
+	<string name="poi_free_flying_site_orientation_ne">離陸の方向指示:北東</string>
+	<string name="poi_free_flying_site_orientation_e">離陸の方向指示:東</string>
+	<string name="poi_free_flying_site_orientation_se">離陸の方向指示:南東</string>
+	<string name="poi_free_flying_site_orientation_s">離陸の方向指示:南</string>
+	<string name="poi_free_flying_site_orientation_sw">離陸の方向指示:南西</string>
+	<string name="poi_free_flying_site_orientation_w">離陸の方向指示:西</string>
+	<string name="poi_free_flying_site_orientation_nw">離陸の方向指示:北西</string>
+	<string name="poi_free_flying_no_flight_time">フライト禁止時間</string>
+	<string name="poi_content_wine">貯蔵:ワイン</string>
+	<string name="poi_content_sewage">貯蔵:下水</string>
+	<string name="poi_content_gas">貯蔵:ガス</string>
+	<string name="poi_content_biomass">貯蔵:バイオマス</string>
+	<string name="poi_content_wastewater">貯蔵:汚水</string>
+	<string name="poi_content_crop">貯蔵:作物</string>
+	<string name="poi_content_fodder">貯蔵:飼料</string>
+	<string name="poi_content_beer">貯蔵:ビール</string>
+	<string name="poi_content_salt">貯蔵:塩</string>
+	<string name="poi_content_grain">貯蔵:穀物</string>
+
+	<string name="poi_trade_plumbing">配管用品</string>
+	<string name="poi_trade_agricultural_supplies">農業用品</string>
+	<string name="poi_trade_tile">タイル</string>
+
+	<string name="poi_trade_wood">木材</string>
+	<string name="poi_population">人口</string>
+	<string name="poi_leaf_type_needleleaved">針葉樹林</string>
+	<string name="poi_leaf_type_broadleaved">広葉樹林</string>
+	<string name="poi_leaf_type_mixed">混交林</string>
+	<string name="poi_leaf_type_leafless">葉の無い草木</string>
+	<string name="poi_species">化石</string>
+	<string name="poi_genus">属</string>
+	<string name="poi_taxon">分類</string>
+
+	<string name="poi_trees_olive">オリーブの木</string>
+	<string name="poi_trees_apple">リンゴの木</string>
+	<string name="poi_trees_oil">アブラヤシ</string>
+	<string name="poi_trees_orange">オレンジの木</string>
+	<string name="poi_trees_almond">アーモンドの木</string>
+	<string name="poi_trees_banana">バナナの木</string>
+	<string name="poi_trees_hazel">ハシバミ</string>
+	<string name="poi_trees_coconut">ココナッツの木</string>
+	<string name="poi_trees_persimmon">柿の木</string>
+	<string name="poi_trees_cherry">サクランボの木</string>
+	<string name="poi_trees_walnut">クルミの木</string>
+	<string name="poi_trees_plum">スモモの木</string>
+	<string name="poi_trees_peach">桃の木</string>
+	<string name="poi_trees_tea">茶畑</string>
+	<string name="poi_trees_coca">コカの木</string>
+	<string name="poi_trees_kiwi">キウイフルーツの木</string>
+	<string name="poi_trees_meadow_orchard">牧草地</string>
+	<string name="poi_trees_nectorine">ズバイモモの木</string>
+	<string name="poi_trees_mango">マンゴーの木</string>
+	<string name="poi_trees_rubber">ゴムの木</string>
+	<string name="poi_trees_date">ナツメヤシ</string>
+	<string name="poi_trees_pomegranate">ザクロの木</string>
+
+	<string name="poi_trees_coffea">コーヒーの木</string>
+	<string name="poi_urban">都市(Urban)</string>
+	<string name="poi_rural">農村(Rural)</string>
+
+	<string name="poi_animal_shelter_dog_cat">保護動物:犬、猫</string>
+	<string name="poi_animal_shelter_dog">保護動物:犬</string>
+	<string name="poi_animal_shelter_cat">保護動物:猫</string>
+	<string name="poi_animal_shelter_bird">保護動物:鳥</string>
+
+	<string name="poi_seats">座席数(Seats)</string>
+	<string name="poi_backrest_yes">背もたれ:有り</string>
+	<string name="poi_backrest_no">背もたれ:無し</string>
+
+	<string name="poi_intermittent">間欠性水路、湖(Intermittent)</string>
+
+	<string name="poi_deadlock">行き詰まり(Deadlock)</string>
+
+	<string name="poi_generator_source_coal">動力源:石炭</string>
+	<string name="poi_generator_source_gas">動力源:ガス</string>
+	<string name="poi_generator_source_nuclear">動力源:原子力</string>
+	<string name="poi_generator_source_solar">動力源:太陽</string>
+	<string name="poi_generator_source_hydro">動力源:水力</string>
+	<string name="poi_generator_source_wind">動力源:風力</string>
+	<string name="poi_generator_source_geothermal">動力源:地熱</string>
+	<string name="poi_generator_source_oil">動力源:石油</string>
+	<string name="poi_generator_source_diesel">動力源:ディーゼル(日本の場合A重油、軽油、灯油の内指定された物)</string>
+
+	<string name="poi_nat_name">国内での名前</string>
+	<string name="poi_loc_name">地元での名前</string>
+	<string name="poi_reg_name">地域的な名前</string>
+	<string name="poi_int_name">国際名</string>
+	<string name="poi_toll_yes">通行料金</string>
+	<string name="poi_alt_name">別名</string>
+
+	<string name="poi_old_name">古い名称</string>
+	<string name="poi_toll_no">無料</string>
+	<string name="poi_railway_level_crossing">踏切</string>
+	<string name="poi_railway_crossing">踏切(歩行者のみ横断可)</string>
+	<string name="poi_toll_hgv_yes">HGV(重量積載物車両)は有料</string>
+	<string name="poi_mini_roundabout">小さいラウンドアバウト(環状交差点)</string>
+	<string name="poi_dead_wood">枯れ木</string>
+
+	<string name="poi_windfall">風で落ちた果物(Windfall)</string>
 	</resources>
