@@ -2576,4 +2576,59 @@
 	<string name="poi_dead_wood">枯れ木</string>
 
 	<string name="poi_windfall">風で落ちた果物(Windfall)</string>
+	<string name="poi_passing_place">単車線道路の退避所</string>
+	<string name="poi_level">階数</string>
+	<string name="poi_rtsa_scale">RTSA(ロシア・ツーリスト・スポーツ協会)による難易度評価</string>
+
+	<string name="poi_capacity">収容能力</string>
+	<string name="poi_aerialway_capacity">1時間当たりの輸送人数</string>
+	<string name="poi_aerialway_occupancy">搬器あたりの定員(Cabin/chair/car capacity)</string>
+	<string name="poi_aerialway_duration">平均発進間隔(分)</string>
+	<string name="poi_aerialway_bubble_yes">フード付きリフト</string>
+	<string name="poi_aerialway_bubble_no">フード無しリフト</string>
+	<string name="poi_aerialway_access_entry">乗り場</string>
+	<string name="poi_aerialway_access_exit">降り場</string>
+	<string name="poi_aerialway_access_both">乗降場</string>
+	<string name="poi_aerialway_summer_access_entry">乗り場(夏期使用時)</string>
+	<string name="poi_aerialway_summer_access_exit">降り場(夏期使用時)</string>
+	<string name="poi_aerialway_summer_access_both">乗降場(夏期使用時)</string>
+
+	<string name="poi_rooms">部屋数</string>
+
+	<string name="poi_payment_account_cards_yes">口座・会員カード</string>
+	<string name="poi_payment_account_cards_no">口座・会員カード不可</string>
+	<string name="poi_description_payment">支払いの説明</string>
+
+	<string name="poi_second_hand_yes">中古品有り</string>
+	<string name="poi_second_hand_no">中古品取り扱い無し</string>
+	<string name="poi_brewery_additional">醸造所の名前</string>
+	<string name="poi_second_hand_only">中古品のみ</string>
+
+	<string name="poi_male_yes">男性用</string>
+	<string name="poi_male_no">男性禁止</string>
+	<string name="poi_female_yes">女性用</string>
+	<string name="poi_female_no">女性禁止</string>
+	<string name="poi_indoor_yes">屋内</string>
+	<string name="poi_indoor_no">屋外</string>
+	<string name="poi_diaper_table_count">おむつ交換台の数</string>
+	<string name="poi_diaper_yes">おむつ交換台有り</string>
+	<string name="poi_diaper_no">おむつ交換台無し</string>
+	<string name="poi_diaper_room">おむつ交換部屋</string>
+
+	<string name="poi_maxstay">最大駐車可能時間</string>
+
+	<string name="poi_branch">支店(Branch)</string>
+
+	<string name="poi_memorial_war">戦争記念碑</string>
+	<string name="poi_memorial_plaque">記念額(Plaque)</string>
+	<string name="poi_memorial_statue">記念像</string>
+	<string name="poi_memorial_stone">記念石</string>
+	<string name="poi_memorial_stele">ステラ(石碑)</string>
+	<string name="poi_memorial_bust">胸像</string>
+	<string name="poi_memorial_koshinto">古神道に関する物、場所</string>
+	<string name="poi_memorial_blue_plaque">ブループラーク(青色の記念プレート)</string>
+	<string name="poi_memorial_jizo">お地蔵様(Jizo)</string>
+	<string name="poi_memorial_cross">十字型記念碑(Cross-shaped)</string>
+	<string name="poi_memorial_vehicle">記念展示車両(Vehicle)</string>
+	<string name="poi_memorial_stolperstein">躓きの石(ナチズムの犠牲者らを弔う記念碑)</string>
 	</resources>
