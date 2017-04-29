@@ -593,7 +593,7 @@ Gün batır: %2$s</string>
     <string name="mile_per_hour">mil/s</string>
     <string name="mile">mil</string>
     <string name="send_location_sms_pattern">Məkan: %1$s
-%2$s</string>
+\n%2$s</string>
     <string name="send_location">Məkanı göndər</string>
     <string name="context_menu_item_share_location">Məkanı paylaş</string>
     <string name="amenity_type_education">Təhsil</string>
@@ -851,7 +851,7 @@ Gün batır: %2$s</string>
     <string name="location_not_found">Məkan tapılmadı</string>
     <string name="no_inet_connection_desc_map">Xəritələri endirmək üçün lazımdır.</string>
     <string name="allow_access_location">Məkana girişə icazə ver</string>
-    <string name="search_my_location">Məkanımı axtar</string>
+    <string name="search_my_location">Məkanımı xtar</string>
     <string name="update_all_maps_now">Bütün xəritələri indi yeniləmək istəyirsiniz?</string>
     <string name="replace_favorite_confirmation">%1$s favoritini əvəz etmək istəyirsiniz?</string>
     <string name="rendering_attr_hideOverground_name">Yerüstü obyektlər</string>
@@ -907,9 +907,9 @@ Gün batır: %2$s</string>
     <string name="osmo_edit_device">İstifadəçi xüsusiyyətlərini dəyiş</string>
     <string name="osmo_edit_color">Ekran rəngi</string>
     <string name="osmo_share_current_session">Hazırki sessiyanı brauzerdə paylaş</string>
-    <string name="osmo_session_not_available">Sessiya mövcud deyil, “Məkan göndər”in açıq olub-olmadığını yoxlayın.</string>
+    <string name="osmo_session_not_available">Sessiya mövcud deyil, “Məkanı göndər”in açıq olub-olmadığını yoxlayın.</string>
     <string name="osmo_share_session">Sessiyanı paylaş</string>
-    <string name="osmo_track_interval_descr">Məkan göndərmək üçün vaxt intervalı seçin</string>
+    <string name="osmo_track_interval_descr">Məkanı göndərmək üçün vaxt intervalı seçin</string>
     <string name="osmo_group_policy">Qaydalar</string>
     <string name="osmo_server_operation_failed">OsMo server əməliyyatı uğursuz oldu</string>
     <string name="osmo_enable_tracker">Mövqelərimi göndər</string>
@@ -927,4 +927,31 @@ Gün batır: %2$s</string>
     <string name="lang_eu">Bask dili</string>
     <string name="lang_hu_formal">Macarca (rəsmi)</string>
     <string name="lang_id">İndoneziya dili</string>
+    <string name="lang_ko">Koreya dili</string>
+    <string name="route_descr_select_destination">Hədəf seçin</string>
+    <string name="routing_attr_avoid_toll_description">Pullu yollardan yayın</string>
+    <string name="routing_attr_avoid_unpaved_name">Asfaltsız yollardan yayın</string>
+    <string name="routing_attr_avoid_unpaved_description">Asfaltsız yollardan yayın</string>
+    <string name="routing_attr_avoid_ferries_name">Bərələrdən yayın</string>
+    <string name="routing_attr_avoid_ferries_description">Bərələrdən yayın</string>
+    <string name="routing_attr_avoid_motorway_name">Avtomagistrallardan yayın</string>
+    <string name="routing_attr_avoid_motorway_description">Avtonagistrallardan yayın</string>
+    <string name="android_19_location_disabled">Android 4.4 (KitKat) versiyasından bu yana xəritələri əvvəlki saxlama qovluğuna (%s) endirə və yeniləyə bilməzsiniz. İcazə verilən saxlama yerinə keçmək və bütün OsmAnd fayllarını ora kopyalamaq istəyirsiniz?
+\n Qeyd 1: Köhnə fayllarınıza toxunulmayacaq (amma əllə silmək olar).
+\n Qeyd 2: Yeni saxlama yerində OsmAnd və OsmAnd+ arasında fayl paylaşmaq mümkün olmayacaq.</string>
+    <string name="copying_osmand_one_file_descr">Fayl (%s) yeni təyinat yerinə kopyalanır…</string>
+    <string name="copying_osmand_files_descr">OsmAnd məlumat faylları yeni təyinat yerinə kopyalanır (%s)…</string>
+    <string name="quick_action_btn_tutorial_title">Düymə yerini dəyiş</string>
+    <string name="road_blocked">Yol bağlanıb</string>
+    <string name="si_kmh">Saatda kilometr</string>
+    <string name="si_mph">Saatda mil</string>
+    <string name="si_m_s">Saniyədə metr</string>
+    <string name="si_min_km">Dəqiqədə kilometr</string>
+    <string name="si_min_m">Dəqiqədə mil</string>
+    <string name="shared_string_navigation">Naviqasiya</string>
+    <string name="osmand_running_in_background">Arxa fonda işləyir</string>
+    <string name="analyze_on_map">Xəritədə təhlil et</string>
+    <string name="shared_string_visible">Görünən</string>
+    <string name="restore_purchases">Alışları bərpa et</string>
+    <string name="full_version_thanks">OsmAnd-ın tam versiyasını aldığınız üçün təşəkkür edirik!</string>
     </resources>
