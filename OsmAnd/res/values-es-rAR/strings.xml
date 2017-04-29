@@ -2831,4 +2831,7 @@ Representa el área: %1$s x %2$s</string>
     <string name="nothing_found_descr">Intenta cambiar la consulta de búsqueda o aumentar el radio de búsqueda</string>
     <string name="private_access_routing_req">El destino se ubica en un área de acceso privado. ¿Quieres acceder en este viaje a los caminos privados?</string>
     <string name="mapillary">Mapillary</string>
+    <string name="mapillary_widget">Control de Mapillary</string>
+    <string name="mapillary_widget_descr">Permite contribuir rápidamente a Mapillary</string>
+    <string name="mapillary_descr">Fotos de calle en línea para todos. Descubre lugares, colabora, captura el mundo.</string>
     </resources>
