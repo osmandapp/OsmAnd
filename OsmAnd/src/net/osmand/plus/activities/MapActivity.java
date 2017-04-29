@@ -1629,34 +1629,38 @@ public class MapActivity extends OsmandActionBarActivity implements DownloadEven
 		if (inAppHelper != null) {
 			inAppHelper.stop();
 		}
-		inAppHelper = new InAppHelper(getMyApplication(), false);
-		inAppHelper.addListener(new InAppHelper.InAppListener() {
-			@Override
-			public void onError(String error) {
-				inAppHelper = null;
-			}
+		if (Version.isGooglePlayEnabled(app)) {
+			inAppHelper = new InAppHelper(getMyApplication(), false);
+			inAppHelper.addListener(new InAppHelper.InAppListener() {
+				@Override
+				public void onError(String error) {
+					inAppHelper = null;
+				}
 
-			@Override
-			public void onGetItems() {
-				inAppHelper = null;
-			}
+				@Override
+				public void onGetItems() {
+					inAppHelper = null;
+				}
 
-			@Override
-			public void onItemPurchased(String sku) {
-				inAppHelper = null;
-			}
+				@Override
+				public void onItemPurchased(String sku) {
+					inAppHelper = null;
+				}
 
-			@Override
-			public void showProgress() {
+				@Override
+				public void showProgress() {
 
-			}
+				}
 
-			@Override
-			public void dismissProgress() {
+				@Override
+				public void dismissProgress() {
 
-			}
-		});
-		inAppHelper.exec(runnable);
-		return inAppHelper;
+				}
+			});
+			inAppHelper.exec(runnable);
+			return inAppHelper;
+		} else {
+			return null;
+		}
 	}
 }

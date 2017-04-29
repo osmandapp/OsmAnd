@@ -223,9 +223,11 @@ public class DownloadActivity extends AbstractDownloadActivity implements Downlo
 	public void startInAppHelper() {
 		stopInAppHelper();
 
-		inAppHelper = new InAppHelper(getMyApplication(), true);
-		inAppHelper.addListener(this);
-		inAppHelper.start(false);
+		if (Version.isGooglePlayEnabled(getMyApplication())) {
+			inAppHelper = new InAppHelper(getMyApplication(), true);
+			inAppHelper.addListener(this);
+			inAppHelper.start(false);
+		}
 	}
 
 	public void stopInAppHelper() {
