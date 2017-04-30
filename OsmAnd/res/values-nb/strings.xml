@@ -469,7 +469,7 @@
     <string name="save_current_track">Lagre gjeldende GPX-spor</string>
     <string name="save_track_interval">Loggeintervall under navigering</string>
     <string name="save_track_interval_descr">Velg loggeintervall for sporregistrering under navigering</string>
-    <string name="save_track_to_gpx_descrp">Spor blir lagret i spor-mappen under navigering</string>
+    <string name="save_track_to_gpx_descrp">Et GPX-spor lagres automatisk i spor-mappen under navigering</string>
     <string name="save_track_to_gpx">Logg spor til GPX-fil under navigering</string>
     <string name="update_tile">Oppdater kart</string>
     <string name="reload_tile">Last kartdel på nytt</string>
@@ -596,7 +596,7 @@
     <string name="context_menu_item_directions_to">Anvisninger til</string>
     <string name="context_menu_item_directions_from">Anvisninger fra</string>
     <string name="route_descr_map_location">Kart: </string>
-    <string name="route_descr_lat_lon">Br %1$.3f, Le %2$.3f</string>
+    <string name="route_descr_lat_lon">B.gr. %1$.3f, L.gr. %2$.3f</string>
     
     <string name="route_to">Til:</string>
     <string name="route_via">Via:</string>
@@ -1107,7 +1107,9 @@ De globale dataene (mellom 70 grader nord og 70 grader sør) er basert på måli
     <string name="points">Punkter</string>
 
     <string name="gps_status">GPS-status</string>
-    <string name="location_on_map">Posisjon:\n Br %1$s\n Le %2$s</string>
+    <string name="location_on_map">Posisjon:
+\n B.gr. %1$s
+\n L.gr. %2$s</string>
     <string name="online_map">Nettbasert kart</string>
     <string name="roads_only">Bare veier</string>
     <string name="free">"Ledig %1$s "</string>
@@ -1210,8 +1212,8 @@ De globale dataene (mellom 70 grader nord og 70 grader sør) er basert på måli
     <string name="osmand_parking_minute">min</string>
     <string name="parking_place_limited">Parkeringstid begrenset til</string>
     <string name="simulate_your_location">Simuler din posisjon</string>
-    <string name="short_location_on_map">Br %1$s
-Le %2$s</string>
+    <string name="short_location_on_map">B.gr. %1$s
+\nL.gr. %2$s</string>
     <string name="general_settings_2">Generelle innstillinger</string>
     <string name="shared_string_deselect">Fravelg</string>
     <string name="shared_string_deselect_all">Fravelg alle</string>
