@@ -2631,4 +2631,118 @@
 	<string name="poi_memorial_cross">十字型記念碑(Cross-shaped)</string>
 	<string name="poi_memorial_vehicle">記念展示車両(Vehicle)</string>
 	<string name="poi_memorial_stolperstein">躓きの石(ナチズムの犠牲者らを弔う記念碑)</string>
+	<string name="poi_memorial_obelisk">オベリスク(石柱記念碑)</string>
+	<string name="poi_memorial_column">円柱記念碑(Column)</string>
+	<string name="poi_memorial_stupa">ストゥーパ・仏舎利塔</string>
+	<string name="poi_memorial_prasat">プラサート・神殿(Prasat)</string>
+	<string name="poi_inscription">銘文</string>
+	<string name="poi_memorial_fassade_decoration">ファサード(建造物の正面装飾)</string>
+
+	<string name="poi_resource_aggregate">細粒土壌・粘土、砂～砕石等(Aggregate)</string>
+	<string name="poi_resource_antimony">アンチモン</string>
+	<string name="poi_resource_asbestos">アスベスト</string>
+	<string name="poi_resource_barite">バライト</string>
+	<string name="poi_resource_basalt">玄武岩</string>
+	<string name="poi_resource_bauxite">ボーキサイト</string>
+	<string name="poi_resource_beryl">ベリル</string>
+	<string name="poi_resource_bismuth">ビスマス</string>
+	<string name="poi_resource_chromite">クロム鉄鉱</string>
+	<string name="poi_resource_clay">粘土</string>
+	<string name="poi_resource_coal">石炭</string>
+	<string name="poi_resource_copper">銅</string>
+	<string name="poi_resource_diamond">ダイヤモンド</string>
+	<string name="poi_resource_dimension_stone">建材用石(特定の寸法に従って切られた石)</string>
+	<string name="poi_resource_dolomite">ドロマイト</string>
+	<string name="poi_resource_gas">ガス</string>
+	<string name="poi_resource_gold">金</string>
+	<string name="poi_resource_graphite">石墨・グラファイト</string>
+	<string name="poi_resource_gravel">砂利</string>
+	<string name="poi_resource_gypsum">石膏</string>
+	<string name="poi_resource_iron_ore">鉄</string>
+	<string name="poi_resource_lead">鉛</string>
+	<string name="poi_resource_lignite">亜炭</string>
+	<string name="poi_resource_limestone">石灰岩</string>
+	<string name="poi_resource_marble">大理石</string>
+	<string name="poi_resource_mercury">水銀</string>
+	<string name="poi_resource_mica">雲母</string>
+	<string name="poi_resource_mineral_oil">鉱油</string>
+	<string name="poi_resource_nickel">ニッケル</string>
+	<string name="poi_resource_opal">オパール</string>
+	<string name="poi_resource_peat">泥炭</string>
+	<string name="poi_resource_platinum">白金</string>
+	<string name="poi_resource_radium">ラジウム</string>
+	<string name="poi_resource_ruby">ルビー</string>
+	<string name="poi_resource_rutile">ルチル</string>
+	<string name="poi_resource_silica">シリカ</string>
+	<string name="poi_resource_silver">銀</string>
+	<string name="poi_resource_salt">塩</string>
+	<string name="poi_resource_slate_iron_ore_copper">粘板岩;鉄;銅</string>
+	<string name="poi_resource_stone">石</string>
+	<string name="poi_resource_slate">粘板岩</string>
+	<string name="poi_resource_tin">錫</string>
+	<string name="poi_resource_tuff">凝灰岩</string>
+	<string name="poi_resource_uranium">ウラン</string>
+	<string name="poi_resource_vanadium">バナジウム</string>
+	<string name="poi_resource_water">水</string>
+	<string name="poi_resource_zircon">ジルコン</string>
+
+	<string name="poi_resource_zinc">亜鉛</string>
+	<string name="poi_wetland_reedbed">葦原</string>
+	<string name="poi_wetland_swamp">浸水林(淡水)</string>
+	<string name="poi_wetland_bog">泥炭のある湿原、沼地</string>
+	<string name="poi_wetland_fen">沼沢地</string>
+	<string name="poi_wetland_wet_meadow">一年の多くの時期に水で覆われる草地</string>
+	<string name="poi_wetland_saltern">塩田</string>
+	<string name="poi_wetland_saltmarsh">塩沼</string>
+	<string name="poi_wetland_marsh">木はなく草が生え周期的に冠水する沼地、湿地</string>
+	<string name="poi_wetland_tidalflat">干潟(海水)</string>
+	<string name="poi_wetland_mangrove">マングローブ林(海水)</string>
+	<string name="poi_wetland_string_bog">隆起と島のあるスゲで覆われている湿原</string>
+	<string name="poi_wetland_palsa_bog">永久凍土の湿原</string>
+	<string name="poi_wetland_mud">泥</string>
+
+	<string name="poi_resource_oil">石油</string>
+	<string name="poi_chimney">煙突</string>
+	<string name="poi_palm">ヤシ(Palm)</string>
+	<string name="poi_cypress">イトスギ</string>
+	<string name="poi_flagpole">掲揚ポール</string>
+
+	<string name="poi_bin_yes">ごみ箱有り</string>
+	<string name="poi_bin_no">ごみ箱無し</string>
+
+	<string name="poi_internet_access_type_public">インターネット接続:公衆用有り</string>
+	<string name="poi_internet_access_type_service">インターネット接続:サポート有り</string>
+	<string name="poi_internet_access_type_no">インターネット接続無し</string>
+	<string name="poi_internet_access_type_yes">インターネット接続有り</string>
+
+	<string name="poi_maxwidth">最大幅</string>
+	<string name="poi_iata">IATA 空港コード</string>
+	<string name="poi_icao">ICAO 空港コード</string>
+	<string name="poi_faa">FAA　空港コード</string>
+	
+	<string name="poi_artwork_type_sculpture">美術作品種類:彫刻</string>
+	<string name="poi_artwork_type_statue">美術作品種類:彫像</string>
+	<string name="poi_artwork_type_mural">美術作品種類:壁画</string>
+	<string name="poi_artwork_type_architecture">美術作品種類:建物、構造物</string>
+	<string name="poi_artwork_type_painting">美術作品種類:絵画</string>
+	<string name="poi_artwork_type_stone">美術作品種類:巨石</string>
+	<string name="poi_artwork_type_bust">美術作品種類:胸像</string>
+	<string name="poi_artwork_type_installation">美術作品種類:空間芸術</string>
+	<string name="poi_artwork_type_mosaic">美術作品種類:モザイク</string>
+	<string name="poi_artwork_type_relief">美術作品種類:浮彫</string>
+	<string name="poi_artwork_type_graffiti">美術作品種類:グラフィティ・落書きアート</string>
+	<string name="poi_artwork_type_stele">美術作品種類:石碑・ステラ</string>
+	<string name="poi_artwork_type_fountain">美術作品種類:噴水</string>
+
+	<string name="poi_width">幅(m)</string>
+
+	<string name="poi_architecture_modern">建築様式:モダニズム</string>
+	<string name="poi_architecture_stalinist_neoclassicism">建築様式:新古典主義</string>
+	<string name="poi_architecture_new_objectivity">建築様式:新即物主義</string>
+	<string name="poi_architecture_contemporary">建築様式:現代建築</string>
+	<string name="poi_architecture_constructivism">建築様式:ロシア構成主義</string>
+	<string name="poi_architecture_eclectic">建築様式:</string>
+	<string name="poi_architecture_umgebinde">建築様式:umgebinde</string>
+	<string name="poi_architect_name">建築家</string>
+
 	</resources>
