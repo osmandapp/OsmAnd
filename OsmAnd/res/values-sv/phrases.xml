@@ -14,4 +14,30 @@
 		<string name="poi_filling_station">Tankstation</string>
 		<string name="poi_aerialway_transport">Luftvägstransport</string>
 		<string name="poi_node_networks">Nätverksnoder för hajk/cykling</string>
-		</resources>
+		<string name="poi_fuel_type">Typ</string>
+	<string name="poi_fuel_avia_type">Typ</string>
+	<string name="poi_payment_type">Betalningsmetod</string>
+	<string name="poi_payment_fuel_type">Bränslekort</string>
+	<string name="poi_additional_type">Övriga</string>
+	<string name="poi_internet_access_type">Åtkomsttyp</string>
+	<string name="poi_vending_type">Försäljningstyp</string>
+	<string name="poi_bicycle_service">Cykelservice</string>
+	<string name="poi_clothes_type">Typ</string>
+	<string name="poi_shoes_type">Typ</string>
+	<string name="poi_fire_hydrant_type">Typ</string>
+	<string name="poi_fire_hydrant_position">Position</string>
+	<string name="poi_fire_hydrant_water_source">Vattenkälla</string>
+	<string name="poi_payment_toll_type">Betalningsmetod</string>
+	<string name="poi_traffic_signals_sound">Ljud</string>
+	<string name="poi_highway_crossing_type">Typ</string>
+	<string name="poi_tactile_paving">Taktil markering</string>
+	<string name="poi_service_car">Service</string>
+	<string name="poi_brushless">Borstlös</string>
+	<string name="poi_self_service">Självbetjäning</string>
+	<string name="poi_automated">Automatiserad</string>
+	<string name="poi_parking_type">Typ</string>
+	<string name="poi_covered">Övertäckt</string>
+	<string name="poi_subway_station_filter">Tunnelbanestation</string>
+	<string name="poi_ferry_terminal_cargo">Gods</string>
+	<string name="poi_bicycle_parking_type">Typ</string>
+	</resources>
