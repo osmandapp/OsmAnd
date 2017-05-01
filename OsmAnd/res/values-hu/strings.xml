@@ -2620,8 +2620,8 @@ Ha segítségre van szükséged az OsmAnd alkalmazással kapcsolatban, keresd a 
     <string name="osm_live_subscription_desc">Az előfizetés lehetővé teszi bármely térkép óránkénti, napi vagy heti frissítését, valamint korlátlan számú térkép letöltését globálisan.</string>
     <string name="get_it">Beszerzés</string>
     <string name="osm_live_banner_desc">Szerezz korlátlan térékpletöltési és havi egynél gyakoribb térképfrissítési lehetőséget: hetente, naponta vagy óránként.</string>
-    <string name="get_for_month">Beszerzés %1$s hónapra</string>
-    <string name="osmand_plus_banner_desc">Az OsmAnd teljes verziója körlátlan térképletöltéssel és havi térképfrissítéssel.</string>
+    <string name="get_for_month">Beszerzés havonta %1$s-ért</string>
+    <string name="osmand_plus_banner_desc">Az OsmAnd teljes verziója korlátlan térképletöltéssel és havi térképfrissítéssel.</string>
     <string name="si_mi_meters">Mérföld/méter</string>
     <string name="search_map">Térképek keresése…</string>
     <string name="first_usage_wizard_desc">Engedd az OsmAnd-nek a pozíciód meghatározását, hogy letölthető térképet javasolhasson a régióhoz.</string>
@@ -2642,7 +2642,7 @@ Ha segítségre van szükséged az OsmAnd alkalmazással kapcsolatban, keresd a 
     <string name="routing_attr_short_way_description">Üzemanyag-takarékos útvonal tervezése (általában rövidebb)</string>
     <string name="replace_favorite_confirmation">Le szeretnéd cserélni a(z) %1$s kedvenc helyet?</string>
     <string name="driving_region_australia">Ausztrália</string>
-    <string name="get_for">Beszerzés ennyi időre</string>
+    <string name="get_for">Beszerzés %1$s-ért</string>
     <string name="edit_filter">Kategóriák szerkesztése</string>
     <string name="subcategories">Alkategóriák</string>
     <string name="selected_categories">Kiválasztott kategóriák</string>
@@ -2692,24 +2692,17 @@ Ha segítségre van szükséged az OsmAnd alkalmazással kapcsolatban, keresd a 
     <string name="translit_name_if_miss">Átírás, ha a(z) %1$s név hiányzik</string>
     <string name="translit_names">Nevek átírása</string>
     <string name="rendering_value_fine_name">Finom</string>
-    <string name="release_2_5">"
- • Kattintható ikonok a térképen
-
-
- • Hatékony POI szűrő: pl. keress éttermeket konyha szerint, vagy kempingeket egy adott szolgáltatással
-
-
- • Új Topográfiai térképstílus kerékpárosoknak és kirándulóknak
-
-
- • Továbbfejlesztett útvonalrögzítés
-
-
- • Tökéletesített navigációs értesítések (Android Wear)
-
-
- • Sok egyéb fejlesztés és hibajavítás
- "</string>
+    <string name="release_2_5">" • Kattintható ikonok a térképen
+\n
+\n • Hatékony POI szűrő: pl. keress éttermeket konyha szerint, vagy kempingeket egy adott szolgáltatással
+\n
+\n • Új Topográfiai térképstílus kerékpárosoknak és kirándulóknak
+\n
+\n • Továbbfejlesztett útvonalrögzítés
+\n
+\n • Tökéletesített navigációs értesítések (Android Wear)
+\n
+\n • Sok egyéb fejlesztés és hibajavítás "</string>
     <string name="wiki_around">Közeli Wikipédia-cikkek</string>
     <string name="search_map_hint">Város, régió keresése</string>
     <string name="legacy_search">Régi kereső</string>
@@ -2951,7 +2944,7 @@ Kérlek adj meg egy teljes kódot</string>
     <string name="change_color">Szín módosítása</string>
     <string name="edit_name">Név szerkesztése</string>
     <string name="animate_my_location">Helyzetem animálása</string>
-    <string name="animate_my_location_desc">Helyzetem extrapolálásának engedélyezése, ha időszakosan eltűnnek a műholdjelek</string>
+    <string name="animate_my_location_desc">Helyzetem animálásának engedélyezése navigáció közben</string>
     <string name="shared_string_overview">Áttekintés</string>
     <string name="route_is_too_long_v2">Ennek az útnak a kiszámítása túl hosszú ideig tarthat. Ha 10 percen belül nem kap eredményt, kérjük, adjon hozzá köztes célpontokat.</string>
     <string name="osmand_extended_description_part1">"
