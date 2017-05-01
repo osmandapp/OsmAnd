@@ -2278,7 +2278,7 @@ El espacio de almacenamiento usado es {3} MB temporalmente y {1} MB permanenteme
  Parte de los ingresos va a la comunidad OSM y se paga por cada contribución a OSM.
  Si te gustan OsmAnd y OSM y quieres apoyarlos, ésta es la manera perfecta de hacerlo."</string>
     
-    <string name="show_transparency_seekbar">Mostrar transparencia de la barra de búsqueda</string>
+    <string name="show_transparency_seekbar">Mostrar barra de cambio de transparencia</string>
     <string name="storage_directory_readonly_desc">La carpeta de almacenamiento de datos seleccionada actualmente es de sólo lectura. La carpeta de almacenamiento fue cambiada temporalmente a la memoria interna. Por favor, elige directorio de almacenamiento válido.</string>
     <string name="storage_directory_shared">Memoria compartida</string>
     <string name="storage_permission_restart_is_required">Ahora la aplicación puede escribir en el almacenamiento externo. Se necesita un rearranque manual de la aplicación.</string>
