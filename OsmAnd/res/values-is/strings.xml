@@ -416,7 +416,7 @@
     <string name="driving_region_uk">Bretland, Indland og svipað</string>
     <string name="driving_region_australia">Ástralía</string>
     <string name="speak_title">Tilkynna…</string>
-    <string name="speak_speed_limit">Hraðtakmörk</string>
+    <string name="speak_speed_limit">Hraðatakmörk</string>
     <string name="route_descr_map_location">"Kort: "</string>
     <string name="route_descr_destination">Áfangastaður</string>
     <string name="route_to">Til:</string>
@@ -460,7 +460,7 @@
     <string name="recording_description">Tek upp %1$s %3$s %2$s</string>
     <string name="recording_default_name">Upptaka</string>
     <string name="index_srtm_parts">hlutar</string>
-    <string name="map_widget_max_speed">Hraðtakmörk</string>
+    <string name="map_widget_max_speed">Hraðatakmörk</string>
     <string name="target_points">Áfangastaðir</string>
     <string name="add_tag">Bæta við merki</string>
     <string name="btn_advanced_mode">Ítarlegri hamur…</string>
@@ -1599,7 +1599,7 @@ Len %2$s</string>
     <string name="wake_on_voice_descr">Kveikja á skjá (ef slökkt er á honum) þegar beygja nálgast</string>
     <string name="rendering_attr_trolleybusRoutes_name">Leiðir rafknúinna strætisvagna</string>
     <string name="map_widget_vector_attributes">Eigindi myndgerðar</string>
-    <string name="speed_limit_exceed">Þolvik hraðtakmarka</string>
+    <string name="speed_limit_exceed">Þolvik hraðatakmarka</string>
     <string name="text_size_descr">Stilla stærð texta á korti.</string>
     <string name="traffic_warning_calming">Hæging á umferð</string>
     <string name="traffic_warning">Aðvörun vegna umbefðar</string>
@@ -1849,7 +1849,7 @@ Punktar</string>
     <string name="use_fast_recalculation_desc">Einungis endurreikna upphafshluta leiðar fyrir langar ferðir</string>
     <string name="confirm_download_roadmaps">Ertu viss um að þú viljir sækja kort eingöngu með vegum, jafnvel þó þú sért þegar með staðlaða (fulla útgáfu) korts?</string>
     <string name="rendering_attr_depthContours_description">Birta dýptarlínur og punkta</string>
-    <string name="rendering_attr_depthContours_name">Dýptarlínur</string>
+    <string name="rendering_attr_depthContours_name">Dýptarlínur sjávar</string>
 	<string name="rendering_attr_contourDensity_description">Þéttleiki hæðarlína</string>
     <string name="rendering_attr_contourDensity_name">Þéttleiki hæðarlína</string>
     <string name="rendering_value_high_name">Hár</string>
@@ -1894,7 +1894,7 @@ Punktar</string>
     <string name="quick_action_take_audio_note">Taka minnispunkt sem hljóðupptöku</string>
     <string name="quick_action_take_video_note">Taka minnispunkt sem myndskeið</string>
     <string name="quick_action_take_photo_note">Taka minnispunkt sem ljósmynd</string>
-    <string name="quick_action_add_osm_bug">Bæta við galla í OSM</string>
+    <string name="quick_action_add_osm_bug">Bæta við OSM-minnispunkti</string>
     <string name="quick_action_navigation_voice">Tal af/á</string>
     <string name="quick_action_navigation_voice_off">Slökkt á tali</string>
     <string name="quick_action_navigation_voice_on">Kveikt á tali</string>
@@ -1946,14 +1946,14 @@ Punktar</string>
     <string name="snap_to_road_descr">Staðsetning grípi í vegi á meðan leiðsögn stendur</string>
     <string name="interrupt_music_descr">Gera hlé á tónlist á meðan raddskilaboð eru flutt (ekki bara lækka hljóðstyrk hennar)</string>
     <string name="do_not_send_anonymous_app_usage">Ekki senda nafnlausar upplýsingar um notkun forritsins</string>
-    <string name="do_not_send_anonymous_app_usage_desc">Sendir almennar upplýsingar um notkun skjásins á meðan setu stendur. Við söfnum ekki neinum gögnum um staðsetningar eða hegðun notenda.</string>
+    <string name="do_not_send_anonymous_app_usage_desc">OsmAnd sendir almennar upplýsingar um þá hluta forritsins sem þó opnar. Við söfnum ekki neinum gögnum um staðsetningar eða hegðun notenda, né heldur um neitt af því sem notendur setja inn til leitar eða skoðunar.</string>
     <string name="do_not_show_startup_messages">Ekki birta skilaboð í ræsingu</string>
     <string name="do_not_show_startup_messages_desc">Birtir skilaboð um aflætti og sérstaka viðburði í grenndinni</string>
     <string name="parking_options">Valkostir bílastæða</string>
     <string name="full_version_thanks">Takk fyrir að kaupa fulla útgáfu OsmAnd!</string>
-    <string name="routing_attr_relief_smoothness_factor_hills_name">Hæðir</string>
-    <string name="routing_attr_relief_smoothness_factor_plains_name">Sléttur</string>
-    <string name="routing_attr_relief_smoothness_factor_more_plains_name">Meiri sléttur</string>
+    <string name="routing_attr_relief_smoothness_factor_hills_name">Hæðótt</string>
+    <string name="routing_attr_relief_smoothness_factor_plains_name">Minna hæðótt</string>
+    <string name="routing_attr_relief_smoothness_factor_more_plains_name">Flatt</string>
     <string name="routing_attr_driving_style_speed_name">Hraði</string>
     <string name="routing_attr_driving_style_balance_name">Jafnvægi</string>
     <string name="routing_attr_driving_style_safety_name">Öryggi</string>
@@ -2027,7 +2027,7 @@ Punktar</string>
     <string name="action_delete">Aðgerðin eyða</string>
     <string name="simulate_your_location">Herma staðsetningu þína</string>
     <string name="tips_and_tricks_descr">Algengar spurningar, nýlegar breytingar og fleira</string>
-    <string name="osmand_distance_planning_plugin_name">Vegalengdareiknivél og skipulagstól</string>
+    <string name="osmand_distance_planning_plugin_name">Reikna vegalengdir og skipuleggja</string>
     <string name="world_ski_missing">Til að birta skíðakort, verður að ná í sérstakt kort til notkunar án nettengingar</string>
     <string name="nautical_maps_missing">Til að birta sjókort, verður að ná í sérstakt kort til notkunar án nettengingar</string>
     <string name="remove_the_tag">FJARLÆGJA MERKIÐ</string>
@@ -2040,7 +2040,7 @@ Punktar</string>
     <string name="loading_builds">Hleð inn OsmAnd útgáfusamsetningum…</string>
     <string name="select_build_to_install">Veldu OsmAnd útgáfusamsetningu til að setja upp</string>
     <string name="route_points_category_name">Punktar sem fara skal í gegnum á leiðinni</string>
-    <string name="routing_attr_relief_smoothness_factor_name">Óregluleikastuðull landslags</string>
+    <string name="routing_attr_relief_smoothness_factor_name">Veldu hæðarflökt landslags</string>
     <string name="route_stops_before">%1$s stopp á undan</string>
     <string name="access_disable_offroute_recalc">Ekki skipta um leið þegar farið er út af stefnu</string>
     <string name="access_disable_wrong_direction_recalc">Ekki skipta um leið þegar stefnt er í ranga átt</string>
@@ -2054,8 +2054,8 @@ Settu inn fullan kóða</string>
     <string name="navigate_point_olc_info_area">Gildur fullur OLC
 Stendur fyrir svæði: %1$s x %2$s</string>
     <string name="map_widget_appearance_rem">Atriði eftir</string>
-    <string name="save_track_to_gpx">Skrifa feril í GPX-skrá á meðan leiðsögn stendur</string>
-    <string name="save_track_to_gpx_descrp">Ferlar verða vistaðir í ferlamöppu á meðan leiðsögn stendur</string>
+    <string name="save_track_to_gpx">Skrifa feril sjálfkrafa í GPX-skrá á meðan leiðsögn stendur</string>
+    <string name="save_track_to_gpx_descrp">GPX-ferlar verða sjálfvirkt vistaðir í ferlamöppu á meðan leiðsögn stendur</string>
     <string name="save_track_interval">Millibil skráninga á meðan leiðsögn stendur</string>
     <string name="voice_provider_descr">Veldu raddleiðsögn fyrir leiðsögukerfið</string>
     <string name="none_selected_gpx">Engar GPX-skrár valdar. Til að velja, ýttu á tiltækan feril og haltu niðri.</string>
@@ -2097,7 +2097,7 @@ Stendur fyrir svæði: %1$s x %2$s</string>
     <string name="switch_to_vector_map_to_see">Ónettengt vektorkort til fyrir þessa staðsetningu. 
 \t
 \tTil að nota það virkjaðu \'Valmynd\' → \'Stilla kort\' → \'Uppruni korts…\' → \'Ónettengd vektorkort\'.</string>
-    <string name="voice_stream_voice_call">Hljóð símtala (reynir einnig að grípa inn í Bluetooth-hljómkerfi)</string>
+    <string name="voice_stream_voice_call">Hljóð símtala (reynir einnig að grípa inn í Bluetooth-hljómkerfi bifreiða)</string>
     <string name="install_selected_build">Viltu setja upp OsmAnd - {0} af {1} {2} MB ?</string>
     <string name="quick_action_map_overlay_switch">Yfirlagi kortsins var breytt yfir í \"%s\".</string>
     <string name="quick_action_map_underlay_switch">Undirlagi kortsins var breytt yfir í \"%s\".</string>
@@ -2126,36 +2126,11 @@ Stendur fyrir svæði: %1$s x %2$s</string>
     <string name="rendering_attr_showRoadMaps_description">Velja þegar birta á kort einungis með vegum:</string>
     <string name="show_warnings_descr">Stilla umferðaraðvaranir (hraðatakmarkanir, lokanir, umferðarhnúta, hraðahindranir), aðvaranir um hraðamyndavélar og upplýsingar um akreinaskiptingar</string>
     <string name="osmand_short_description_80_chars">Almenn skoðun landakorta í farsíma og flakk á ónettengdum sem nettengdum OSM-landakortum</string>
-	<string name="osmand_extended_description_part7">"
- Leggðu þitt fram til OSM
- • Tilkynntu um villur í gögnum
- • Sendu inn GPX-ferla til OSM beint úr forritinu
- • Bættu við merkisstöðum og sendu þá beint inn til OSM (eða síðar ef engin nettenging er til staðar)
- "</string>
-    <string name="osmand_extended_description_part8">"
- OsmAnd er opinn hugbúnaður og í stöðugri þróun. Hver sem er getur tekið þátt í gerð forritsins, til dæmis með því að tilkynna um hnökra, bæta þýðingar eða forrita nýja eiginleika. Lífleg staða verkefnisins og sífelldar endurbætur má þannig rekja til margra þátta samspils milli notenda og hönnuða. Verkefnið styðst líka við fjárhagslega styrki frá notendum sem nýtast til að fjármagna viðameiri forritun og prófanir.
- Gæði og áætluð þekja landakorta:
- • Vestur-Evrópa: ****
- • Austur-Evrópa: ***
- • Rússland: ***
- • Norður-Ameríka: ***
- • Suður-Ameríka: **
- • Asía: **
- • Japan &amp; Kórea: ***
- • Miðausturlönd: **
- • Afríka: **
- • Suðurskautslandið: *
- Hægt er að sækja kort frá flestum heimsins löndum á netinu!
- Frá Afghanistan til Zimbabwe, frá Ástralíu til BNA. Argentína, Brasilía, Kanada, Frakkland, Þýskaland, Mexíkó, Spánn, …
- "</string>
+	<string name="osmand_extended_description_part7">" Leggðu þitt fram til OSM • Tilkynntu um villur í gögnum • Sendu inn GPX-ferla til OSM beint úr forritinu • Bættu við merkisstöðum og sendu þá beint inn til OSM (eða síðar ef engin nettenging er til staðar) "</string>
+    <string name="osmand_extended_description_part8">" OsmAnd er opinn hugbúnaður og í stöðugri þróun. Hver sem er getur tekið þátt í gerð forritsins, til dæmis með því að tilkynna um hnökra, bæta þýðingar eða forrita nýja eiginleika. Lífleg staða verkefnisins og sífelldar endurbætur má þannig rekja til margra þátta samspils milli notenda og hönnuða. Verkefnið styðst líka við fjárhagslega styrki frá notendum sem nýtast til að fjármagna viðameiri forritun og prófanir.
+\n Gæði og áætluð þekja landakorta: • Vestur-Evrópa: **** • Austur-Evrópa: *** • Rússland: *** • Norður-Ameríka: *** • Suður-Ameríka: ** • Asía: ** • Japan &amp; Kórea: *** • Miðausturlönd: ** • Afríka: ** • Suðurskautslandið: * Hægt er að sækja kort frá flestum heimsins löndum á netinu! Frá Afghanistan til Zimbabwe, frá Ástralíu til BNA. Argentína, Brasilía, Kanada, Frakkland, Þýskaland, Mexíkó, Spánn, eða eitthvað annað. "</string>
     <string name="osmand_plus_short_description_80_chars">Almenn skoðun landakorta í farsíma og flakk á ónettengdum sem nettengdum OSM-landakortum</string>
-	<string name="osmand_plus_extended_description_part7">"
- Leggðu þitt fram til OSM
- • Tilkynntu um villur í gögnum
- • Sendu inn GPX-ferla til OSM beint úr forritinu
- • Bættu við merkisstöðum og sendu þá beint inn til OSM (eða síðar ef engin nettenging er til staðar)
- OsmAnd er opinn hugbúnaður og í stöðugri þróun. Hver sem er getur tekið þátt í gerð forritsins, til dæmis með því að tilkynna um hnökra, bæta þýðingar eða forrita nýja eiginleika. Lífleg staða verkefnisins og sífelldar endurbætur má þannig rekja til margra þátta samspils milli notenda og hönnuða. Verkefnið styðst líka við fjárhagslega styrki frá notendum sem nýtast til að fjármagna viðameiri forritun og prófanir.
- "</string>
+	<string name="osmand_plus_extended_description_part7">" Leggðu þitt fram til OSM • Tilkynntu um villur í gögnum • Sendu inn GPX-ferla til OSM beint úr forritinu • Bættu við merkisstöðum og sendu þá beint inn til OSM (eða síðar ef engin nettenging er til staðar) OsmAnd er opinn hugbúnaður og í stöðugri þróun. Hver sem er getur tekið þátt í gerð forritsins, til dæmis með því að tilkynna um hnökra, bæta þýðingar eða forrita nýja eiginleika. Lífleg staða verkefnisins og sífelldar endurbætur má þannig rekja til margra þátta samspils milli notenda og hönnuða. Verkefnið styðst líka við fjárhagslega styrki frá notendum sem nýtast til að fjármagna viðameiri forritun og prófanir.  "</string>
     <string name="search_offline_geo_error">Ekki tókst að þátta \'%s\' geo-virkniskipun (intent)</string>
     <string name="send_location_email_pattern">Til að sjá staðsetninguna, fylgdu veftenglinum %1$s eða Android-virkniskipunatenglinum %2$s</string>
     <string name="version_index_is_not_supported">Ekki er stuðningur við \'\'{0}\'\' útgáfu af vísi</string>
@@ -2164,12 +2139,36 @@ Stendur fyrir svæði: %1$s x %2$s</string>
     <string name="no_underlay">Ekkert undirlag</string>
     <string name="subscribe_email_error">Villa</string>
     <string name="sea_depth_thanks">Takk fyrir að kaupa sjódýptarlínur!</string>
-    <string name="index_item_depth_contours_osmand_ext">Dýptarlínur</string>
-    <string name="index_item_depth_points_southern_hemisphere">Dýptarpunktar á suðurhveli</string>
-    <string name="index_item_depth_points_northern_hemisphere">Dýptarpunktar á norðurhveli</string>
-    <string name="download_depth_countours">Dýptarlínur</string>
+    <string name="index_item_depth_contours_osmand_ext">Dýptarlínur sjávar</string>
+    <string name="index_item_depth_points_southern_hemisphere">Sjódýptarpunktar á suðurhveli</string>
+    <string name="index_item_depth_points_northern_hemisphere">Sjódýptarpunktar á norðurhveli</string>
+    <string name="download_depth_countours">Dýptarlínur sjávar</string>
     <string name="nautical_maps">Sjókort</string>
     <string name="osm_live_subscription">Áskrift að OSM Live</string>
     <string name="osm_live_support_region">Svæði sem stuðningur er við</string>
     <string name="rendering_value_walkingRoutesOSMC_name">Litur fer eftir OSMC göngutáknum</string>
+    <string name="settings_preset_descr">Kortasýn og leiðsagnarstillingar eru geymdar fyrir hvert notandasnið. Stilltu hér sjálfgefið notandasnið.</string>
+    <string name="use_kalman_filter_compass_descr">Minnkar truflanir í álestri áttavita en veldur vissri tregðu</string>
+    <string name="safe_mode_description">Keyra forritið í öryggisham (notar hægvirkari Android-kóða í stað þess innbyggða).</string>
+    <string name="shared_string_add_photos">Bæta við ljósmyndum</string>
+    <string name="restart_search">Byrja leit aftur</string>
+    <string name="increase_search_radius">Auka radíus leitar</string>
+    <string name="nothing_found">Ekkert fannst :(</string>
+    <string name="quick_action_showhide_osmbugs_title">Birta/fela OSM-minnispunkta</string>
+    <string name="quick_action_osmbugs_show">Birta OSM-minnispunkta</string>
+    <string name="quick_action_osmbugs_hide">Fela OSM-minnispunkta</string>
+    <string name="sorted_by_distance">Raðað eftir vegalengd</string>
+    <string name="search_favorites">Leita að eftirlætum</string>
+    <string name="shared_string_plugin">Viðbót</string>
+    <string name="srtm_color_scheme">Litastef</string>
+    <string name="favorite_group_name">Heiti hóps</string>
+    <string name="change_color">Breyta lit</string>
+    <string name="edit_name">Breyta heiti</string>
+    <string name="shared_string_overview">Yfirlit</string>
+    <string name="select_street">Veldu götu</string>
+    <string name="shared_string_in_name">í %1$s</string>
+    <string name="nearest_cities">Næstu borgir</string>
+    <string name="select_city">Veldu borg</string>
+    <string name="shared_string_paused">Í bið</string>
+    <string name="upload_osm_note">Senda inn OSM-minnispunkt</string>
     </resources>
