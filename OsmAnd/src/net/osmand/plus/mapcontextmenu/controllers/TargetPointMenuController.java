@@ -9,6 +9,7 @@ import net.osmand.plus.TargetPointsHelper.TargetPoint;
 import net.osmand.plus.activities.MapActivity;
 import net.osmand.plus.mapcontextmenu.MenuBuilder;
 import net.osmand.plus.mapcontextmenu.MenuController;
+import net.osmand.plus.mapillary.MapillaryPlugin;
 import net.osmand.plus.routing.RoutingHelper;
 import net.osmand.util.Algorithms;
 
@@ -19,6 +20,7 @@ public class TargetPointMenuController extends MenuController {
 	public TargetPointMenuController(MapActivity mapActivity, PointDescription pointDescription, TargetPoint targetPoint) {
 		super(new MenuBuilder(mapActivity), pointDescription, mapActivity);
 		this.targetPoint = targetPoint;
+		builder.addPluginMenuBuilder(MapillaryPlugin.class);
 		builder.setShowNearestWiki(true);
 		final TargetPointsHelper targetPointsHelper = getMapActivity().getMyApplication().getTargetPointsHelper();
 		final int intermediatePointsCount = targetPointsHelper.getIntermediatePoints().size();

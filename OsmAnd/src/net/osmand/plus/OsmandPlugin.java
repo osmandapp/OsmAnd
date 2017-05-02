@@ -7,8 +7,17 @@ import android.content.Intent;
 import android.content.pm.PackageManager.NameNotFoundException;
 import android.os.Build;
 import android.support.annotation.DrawableRes;
+import android.support.annotation.NonNull;
 import android.support.v4.app.Fragment;
+import android.view.Gravity;
+import android.view.LayoutInflater;
+import android.view.View;
+import android.view.ViewGroup;
+import android.widget.ImageView;
+import android.widget.LinearLayout;
+import android.widget.TextView;
 
+import net.osmand.AndroidUtils;
 import net.osmand.IProgress;
 import net.osmand.Location;
 import net.osmand.PlatformUtil;
@@ -19,6 +28,7 @@ import net.osmand.plus.audionotes.AudioVideoNotesPlugin;
 import net.osmand.plus.dashboard.tools.DashFragmentData;
 import net.osmand.plus.development.OsmandDevelopmentPlugin;
 import net.osmand.plus.distancecalculator.DistanceCalculatorPlugin;
+import net.osmand.plus.mapcontextmenu.MenuBuilder;
 import net.osmand.plus.mapillary.MapillaryPlugin;
 import net.osmand.plus.monitoring.OsmandMonitoringPlugin;
 import net.osmand.plus.myplaces.FavoritesActivity;
@@ -98,6 +108,9 @@ public abstract class OsmandPlugin {
 
 	public String getHelpFileName() {
 		return null;
+	}
+
+	public void buildContextMenuRows(@NonNull MenuBuilder menuBuilder, @NonNull View view) {
 	}
 
 	public static void initPlugins(OsmandApplication app) {

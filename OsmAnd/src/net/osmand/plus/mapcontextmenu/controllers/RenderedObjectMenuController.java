@@ -8,6 +8,7 @@ import net.osmand.plus.R;
 import net.osmand.plus.activities.MapActivity;
 import net.osmand.plus.mapcontextmenu.MenuBuilder;
 import net.osmand.plus.mapcontextmenu.MenuController;
+import net.osmand.plus.mapillary.MapillaryPlugin;
 import net.osmand.plus.osmedit.OsmEditingPlugin;
 import net.osmand.plus.render.RenderingIcons;
 import net.osmand.util.Algorithms;
@@ -18,6 +19,7 @@ public class RenderedObjectMenuController extends MenuController {
 
 	public RenderedObjectMenuController(MapActivity mapActivity, PointDescription pointDescription, final RenderedObject renderedObject) {
 		super(new MenuBuilder(mapActivity), pointDescription, mapActivity);
+		builder.addPluginMenuBuilder(MapillaryPlugin.class);
 		builder.setShowNearestWiki(true);
 		this.renderedObject = renderedObject;
 	}

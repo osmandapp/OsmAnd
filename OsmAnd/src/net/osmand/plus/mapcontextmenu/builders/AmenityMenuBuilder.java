@@ -30,6 +30,7 @@ import net.osmand.plus.OsmandSettings;
 import net.osmand.plus.R;
 import net.osmand.plus.activities.MapActivity;
 import net.osmand.plus.mapcontextmenu.MenuBuilder;
+import net.osmand.plus.mapillary.MapillaryPlugin;
 import net.osmand.plus.osmedit.OsmEditingPlugin;
 import net.osmand.plus.views.POIMapLayer;
 import net.osmand.util.Algorithms;
@@ -49,6 +50,7 @@ public class AmenityMenuBuilder extends MenuBuilder {
 	public AmenityMenuBuilder(MapActivity mapActivity, final Amenity amenity) {
 		super(mapActivity);
 		this.amenity = amenity;
+		addPluginMenuBuilder(MapillaryPlugin.class);
 		setShowNearestWiki(true, amenity.getId());
 	}
 

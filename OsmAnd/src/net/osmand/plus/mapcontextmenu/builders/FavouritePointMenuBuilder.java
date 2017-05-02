@@ -11,6 +11,7 @@ import net.osmand.data.TransportStop;
 import net.osmand.osm.PoiCategory;
 import net.osmand.plus.activities.MapActivity;
 import net.osmand.plus.mapcontextmenu.MenuBuilder;
+import net.osmand.plus.mapillary.MapillaryPlugin;
 import net.osmand.util.MapUtils;
 
 import java.util.List;
@@ -23,6 +24,7 @@ public class FavouritePointMenuBuilder extends MenuBuilder {
 	public FavouritePointMenuBuilder(MapActivity mapActivity, final FavouritePoint fav) {
 		super(mapActivity);
 		this.fav = fav;
+		addPluginMenuBuilder(MapillaryPlugin.class);
 		setShowNearestWiki(true);
 		acquireOriginObject();
 	}

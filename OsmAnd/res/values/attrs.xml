@@ -16,6 +16,7 @@
 		<attr name="expandable_list_background" format="color"/>
 		<attr name="bg_color" format="reference" />
 		<attr name="bg_card" format="reference" />
+        <attr name="context_menu_card" format="reference" />
         <attr name="bg_map_context_menu" format="reference" />
         <attr name="bg_point_editor_view" format="reference" />
         <attr name="ctx_menu_info_view_bg" format="reference" />

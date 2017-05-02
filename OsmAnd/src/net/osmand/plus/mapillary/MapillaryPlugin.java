@@ -22,6 +22,7 @@ import net.osmand.plus.R;
 import net.osmand.plus.activities.MapActivity;
 import net.osmand.plus.activities.MapActivityLayers;
 import net.osmand.plus.base.BottomSheetDialogFragment;
+import net.osmand.plus.mapcontextmenu.MenuBuilder;
 import net.osmand.plus.views.MapInfoLayer;
 import net.osmand.plus.views.MapTileLayer;
 import net.osmand.plus.views.OsmandMapTileView;
@@ -190,6 +191,22 @@ public class MapillaryPlugin extends OsmandPlugin {
 			}
 			mapActivity.refreshMap();
 		}
+	}
+
+	@Override
+	public void buildContextMenuRows(@NonNull MenuBuilder menuBuilder, @NonNull View view) {
+		if (!menuBuilder.getApp().getSettings().isInternetConnectionAvailable()) {
+			return;
+		}
+		/*
+		if (!menuBuilder.isFirstRow()) {
+			menuBuilder.buildRowDivider(view, false);
+		}
+		*/
+
+		new MapillaryImageRow(menuBuilder, view).build();
+
+		//menuBuilder.rowBuilt();
 	}
 
 	public static class MapillaryFirstDialogFragment extends BottomSheetDialogFragment {
