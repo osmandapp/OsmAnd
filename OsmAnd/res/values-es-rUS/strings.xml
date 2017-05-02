@@ -2840,4 +2840,5 @@ Representa el área: %1$s x %2$s</string>
     <string name="mapillary_descr">Fotos de calle en línea para todos. Descubre lugares, colabora, captura el mundo.</string>
     <string name="shared_string_add_photos">Añadir fotos</string>
     <string name="mapillary_action_descr">Contribuye con tus propias vistas a nivel de calle de esta ubicación con Mapillary.</string>
+    <string name="plugin_mapillary_descr">Fotos a nivel de calle para todos. Descubre lugares, colabora, captura el mundo.</string>
     </resources>
