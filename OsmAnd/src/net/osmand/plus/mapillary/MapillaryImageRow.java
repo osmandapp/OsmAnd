@@ -24,26 +24,49 @@ import org.json.JSONException;
 import org.json.JSONObject;
 
 import java.util.ArrayList;
-import java.util.Collections;
 import java.util.LinkedHashMap;
 import java.util.List;
 import java.util.Map;
 
 public class MapillaryImageRow {
 
+	private static final int IMAGES_LIMIT = 15;
+
 	private MenuBuilder menuBuilder;
 	private View view;
 	private OsmandApplication app;
 	private List<MapillaryImageInfo> imageInfoList = new ArrayList<>();
-	private boolean updating;
+	private boolean updatingInfo;
+	private boolean downloadingImages;
+	private boolean updatingInfoInterrupted;
+	private boolean downloadingImagesInterrupted;
 	private ViewsPagerAdapter pagerAdapter;
 	private int dp10;
+	private boolean updated;
 
 	public MapillaryImageRow(MenuBuilder menuBuilder, View view) {
 		this.menuBuilder = menuBuilder;
 		this.view = view;
 		this.app = menuBuilder.getApp();
 		this.dp10 = AndroidUtils.dpToPx(app, 10f);
+	}
+
+	public MapillaryImageRow(MapillaryImageRow imageRow, View view) {
+		this(imageRow.menuBuilder, view);
+		this.updatingInfo = imageRow.updatingInfo;
+		this.downloadingImages = imageRow.downloadingImages;
+		this.updatingInfoInterrupted = imageRow.updatingInfoInterrupted;
+		this.downloadingImagesInterrupted = imageRow.downloadingImagesInterrupted;
+		this.imageInfoList.addAll(imageRow.imageInfoList);
+		this.updated = true;
+	}
+
+	public MenuBuilder getMenuBuilder() {
+		return menuBuilder;
+	}
+
+	public View getView() {
+		return view;
 	}
 
 	public void build() {
@@ -59,20 +82,28 @@ public class MapillaryImageRow {
 		viewPager.setAdapter(pagerAdapter);
 		((LinearLayout) view).addView(viewPager);
 
-		new GetImageInfoTask().execute();
+		if (!updated) {
+			new GetImageInfoTask().execute();
+		} else {
+			update();
+		}
 	}
 
-	private void refreshScrollView() {
-
+	public void update() {
+		if (updatingInfoInterrupted || updatingInfo) {
+			new GetImageInfoTask().execute();
+		} else if ((downloadingImagesInterrupted || downloadingImages) && imageInfoList.size() > 0) {
+			new DownloadImagesTask().execute();
+		}
 	}
 
 	private int itemsCount() {
-		return updating ? 1 : imageInfoList.size() + 1;
+		return updatingInfo ? 1 : imageInfoList.size() + 1;
 	}
 
 	private View createPageView(ViewGroup container, int position) {
 		View v;
-		if (updating && position == 0) {
+		if (updatingInfo && position == 0) {
 			v = LayoutInflater.from(view.getContext()).inflate(R.layout.mapillary_context_menu_progress, null);
 		} else if (position == itemsCount() - 1) {
 			v = LayoutInflater.from(view.getContext()).inflate(R.layout.mapillary_context_menu_action, null);
@@ -151,17 +182,21 @@ public class MapillaryImageRow {
 		}
 	}
 
-	private class GetImageInfoTask extends AsyncTask<Void, MapillaryImageInfo, Void> {
+	private class GetImageInfoTask extends AsyncTask<Void, MapillaryImageInfo, List<MapillaryImageInfo>> {
 
 		@Override
 		protected void onPreExecute() {
-			updating = true;
-			pagerAdapter.notifyDataSetChanged();
+			updatingInfoInterrupted = false;
+			if (!menuBuilder.isHidden()) {
+				updatingInfo = true;
+				pagerAdapter.notifyDataSetChanged();
+			}
 		}
 
 		@Override
-		protected Void doInBackground(Void... params) {
+		protected List<MapillaryImageInfo> doInBackground(Void... params) {
 			// https://a.mapillary.com/v3/images/?lookat=12.9981086701,55.6075236275&closeto=13.0006076843,55.6089295863&radius=20&client_id=LXJVNHlDOGdMSVgxZG5mVzlHQ3ZqQTo0NjE5OWRiN2EzNTFkNDg4
+			List<MapillaryImageInfo> result = new ArrayList<>();
 			try {
 				final Map<String, String> pms = new LinkedHashMap<>();
 				//pms.put("lookat", Version.getFullVersion(app));
@@ -176,11 +211,17 @@ public class MapillaryImageRow {
 					JSONArray images = obj.getJSONArray("features");
 					if (images.length() > 0) {
 						for (int i = 0; i < images.length(); i++) {
+							if (menuBuilder.isHidden()) {
+								updatingInfoInterrupted = true;
+								break;
+							}
+							if (i > IMAGES_LIMIT) {
+								break;
+							}
 							try {
 								JSONObject imgObj = (JSONObject) images.get(i);
 								if (imgObj != JSONObject.NULL) {
-									MapillaryImageInfo imageInfo = new MapillaryImageInfo(imgObj);
-									publishProgress(imageInfo);
+									result.add(new MapillaryImageInfo(imgObj));
 								}
 							} catch (JSONException e) {
 								e.printStackTrace();
@@ -191,23 +232,18 @@ public class MapillaryImageRow {
 			} catch (Exception e) {
 				e.printStackTrace();
 			}
-			return null;
+			return result;
 		}
 
 		@Override
-		protected void onProgressUpdate(MapillaryImageInfo... values) {
-			if (values != null && values.length > 0) {
-				Collections.addAll(imageInfoList, values);
-			}
-		}
-
-		@Override
-		protected void onPostExecute(Void aVoid) {
-			updating = false;
-			if (imageInfoList.size() > 0) {
-				new DownloadImagesTask().execute();
-			} else {
+		protected void onPostExecute(List<MapillaryImageInfo> infoList) {
+			updatingInfo = false;
+			if (!menuBuilder.isHidden()) {
+				imageInfoList.addAll(infoList);
 				pagerAdapter.notifyDataSetChanged();
+				if (imageInfoList.size() > 0) {
+					new DownloadImagesTask().execute();
+				}
 			}
 		}
 	}
@@ -218,17 +254,25 @@ public class MapillaryImageRow {
 
 		@Override
 		protected void onPreExecute() {
-			for (MapillaryImageInfo imageInfo : imageInfoList) {
-				if (imageInfo.getBitmap() == null) {
-					imageInfo.setDownloading(true);
+			downloadingImagesInterrupted = false;
+			if (!menuBuilder.isHidden()) {
+				downloadingImages = true;
+				for (MapillaryImageInfo imageInfo : imageInfoList) {
+					if (imageInfo.getBitmap() == null) {
+						imageInfo.setDownloading(true);
+					}
 				}
+				pagerAdapter.notifyDataSetChanged();
 			}
-			pagerAdapter.notifyDataSetChanged();
 		}
 
 		@Override
 		protected Void doInBackground(Void... params) {
 			for (MapillaryImageInfo imageInfo : imageInfoList) {
+				if (menuBuilder.isHidden()) {
+					downloadingImagesInterrupted = true;
+					break;
+				}
 				if (imageInfo.isDownloading()) {
 					String url = urlTemplate.replace("{key}", imageInfo.getKey());
 					Bitmap bitmap = AndroidNetworkUtils.downloadImage(app, url);
@@ -242,12 +286,17 @@ public class MapillaryImageRow {
 
 		@Override
 		protected void onProgressUpdate(Void... values) {
-			pagerAdapter.notifyDataSetChanged();
+			if (!menuBuilder.isHidden()) {
+				pagerAdapter.notifyDataSetChanged();
+			}
 		}
 
 		@Override
 		protected void onPostExecute(Void aVoid) {
-			pagerAdapter.notifyDataSetChanged();
+			downloadingImages = false;
+			if (!menuBuilder.isHidden()) {
+				pagerAdapter.notifyDataSetChanged();
+			}
 		}
 	}
 }

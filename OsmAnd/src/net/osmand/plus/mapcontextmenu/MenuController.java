@@ -493,9 +493,15 @@ public abstract class MenuController extends BaseMenuController {
 	}
 
 	public void onHide() {
+		if (builder != null) {
+			builder.onHide();
+		}
 	}
 
 	public void onClose() {
+		if (builder != null) {
+			builder.onClose();
+		}
 		if (toolbarController != null) {
 			getMapActivity().hideTopToolbar(toolbarController);
 		}

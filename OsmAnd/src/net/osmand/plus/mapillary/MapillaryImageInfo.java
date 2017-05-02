@@ -1,9 +1,10 @@
 package net.osmand.plus.mapillary;
 
 import android.graphics.Bitmap;
-import android.graphics.BitmapFactory;
-import android.graphics.drawable.Drawable;
 
+import net.osmand.data.LatLon;
+
+import org.json.JSONArray;
 import org.json.JSONException;
 import org.json.JSONObject;
 
@@ -32,6 +33,8 @@ public class MapillaryImageInfo {
 	private String userKey;
 	// Username of who captured the bitmap.
 	private String userName;
+	// Image location
+	private LatLon coordinates;
 
 	private static final DateFormat DATE_FORMAT = SimpleDateFormat.getDateTimeInstance(FULL, FULL, Locale.US); //"yyyy-MM-dd'T'HH:mm:ss");
 	private boolean downloading;
@@ -68,6 +71,19 @@ public class MapillaryImageInfo {
 			if (props.has("username")) {
 				this.userName = props.getString("username");
 			}
+
+			if (imgObj.has("geometry")) {
+				JSONObject geometry = imgObj.getJSONObject("geometry");
+				if (geometry.has("coordinates")) {
+					JSONArray coordinates = geometry.getJSONArray("coordinates");
+					if (coordinates.length() == 2) {
+						double longitude = coordinates.getDouble(0);
+						double latitude = coordinates.getDouble(1);
+						this.coordinates = new LatLon(latitude, longitude);
+					}
+				}
+			}
+
 		} catch (JSONException e) {
 			e.printStackTrace();
 		}
@@ -105,6 +121,9 @@ public class MapillaryImageInfo {
 		return userName;
 	}
 
+	public LatLon getCoordinates() {
+		return coordinates;
+	}
 
 	public boolean isDownloading() {
 		return downloading;
