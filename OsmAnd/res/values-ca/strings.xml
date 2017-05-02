@@ -2748,4 +2748,6 @@ OsmAnd és de codi obert i es desenvolupa activament . Tothom pot recolzar l\'ap
     <string name="mapillary_widget_descr">Us permet fer aportacions a Mapillary de seguida</string>
     <string name="mapillary_descr">Fotografies dels carrers a la xarxa per tothom. Descobriu llocs, col·laboreu, enregistreu el món.</string>
     <string name="mapillary">Mapillary</string>
+    <string name="shared_string_add_photos">Afegeix fotos</string>
+    <string name="mapillary_action_descr">Col·labora amb Mapillary amb les vostres imatges d\'aquesta posició a nivell de carrer.</string>
     </resources>
