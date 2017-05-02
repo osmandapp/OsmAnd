@@ -407,7 +407,7 @@ OSM er et i fællesskab drevet, globalt offentligt domæne kortlægningsprojekt.
     <string name="gpx_monitoring_disabled_warn">Log spor med GPX modul eller via indstillinger \'Tur optagelse\'.</string>
     <string name="show_current_gpx_title">Vis aktuelt spor</string>
     <string name="free_version_message">Den gratis version af OsmAnd er begrænset til at hente %1$s kort og understøtter ikke offline Wikipedia artikler.</string>
-    <string name="free_version_title">Gratis version</string>
+    <string name="free_version_title">Gratisversion</string>
     <string name="poi_context_menu_showdescription">Vis IP beskrivelse</string>
     <string name="index_name_north_america">Nordamerika</string>
     <string name="index_name_us">Nordamerika - USA</string>
@@ -1816,7 +1816,7 @@ Liste over understøttede lande (dybest set hele verden!): Afghanistan, Albanien
     <string name="rendering_attr_streetLighting_name">Gadebelysning</string>
 
 
-    <string name="version_settings_descr">"Hent aktuelle  udviklingsversioner"</string>
+    <string name="version_settings_descr">Hent aktuelle udviklingsversioner</string>
     <string name="version_settings">Versioner</string>
     <string name="points">Punkter</string>
     <string name="gps_status">GPS status</string>
