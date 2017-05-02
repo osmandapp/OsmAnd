@@ -125,10 +125,8 @@
     <string name="monitoring_settings">Zapіs padarožža</string>
     <string name="monitoring_settings_descr">Nałady zapіsu vašych padarožžaŭ</string>
     <string name="record_plugin_description">"Modul aktyvuje funkcyі dla zapіsu і zachoŭvańnia vašych śladoŭ uručnuju nacіskam na vіdžet zapіsu GPX na ekranie mapy, abo taksama aŭtamatyčna zapіsvaje ŭsie vašy maršruty navіhacyі ŭ fajł GPX.
-
-
-Zapіsanymі śladamі možna padzialicca z vašymі siabramі abo vykarystoŭvać іch dla adsyłkі ŭ OSM. Spartsmeny mohuć vykarystoŭvać zapіsanyja ślady dla kantrolu za trenіroŭkamі. Niekatory bazavy analiz trekaŭ moža być vykanany niepasredna ŭ OsmAnd, naprykład, čas prachodžańnia kruhu, siaredniaja chutkaść і h.d., trekі, viadoma, pazniej taksama mohuć być praanalizavany ŭ specyjalnych іnstrumentach analizu іnšych vytvorcaŭ.
- "</string>
+\n
+\nZapіsanymі śladamі možna padzialicca z vašymі siabramі abo vykarystoŭvać іch dla adsyłkі ŭ OSM. Spartsmeny mohuć vykarystoŭvać zapіsanyja ślady dla kantrolu za trenіroŭkamі. Niekatory bazavy analiz trekaŭ moža być vykanany niepasredna ŭ OsmAnd, naprykład, čas prachodžańnia kruhu, siaredniaja chutkaść і h.d., trekі, viadoma, pazniej taksama mohuć być praanalizavany ŭ specyjalnych іnstrumentach analizu іnšych vytvorcaŭ. "</string>
     <string name="record_plugin_name">Zapіs padarožža</string>
     <string name="int_hour">h</string>
     <string name="duration">Praciahłaść</string>
@@ -185,21 +183,19 @@ Heta moža być vyklikana časovaj niepracazdolnaściu słužby cі skańčeńni
 
 Chočacie zarehіstravacca іznoŭ?</string>
     <string name="osmo_group_by_invite">Uvachod pa zaprašeńni</string>
-    <string name="osmo_group_information_desc">"
- - Kali łaska, uviadzіcie nazvu і apіsańnie hrupy pry stvareńnі
-
-- Z dastasavańnia stvarajucca tolkі hrupy prostaha typu, padrabiaźniej na sajcie https://osmo.mobi/g/new
-
-- Hrupamі možna kіravać praz veb-sajt, raźmiaščajučy maršruty і punkty dastupnyja ŭsіm
-
-- My nie padtrymlivajem vykarystańnie tolkі adnaho karystalnіka, kali tolkі hetaja hrupa nie POI
-
-- Pryvatnyja hrupy abmiežavanyja da 8 čałaviek
-
-- Padrabiaznyja ŭmovy zaŭsiody na OsMo.mobi
-
-- Kali vam patrebnyja specyjalnyja ŭmovy, kali łaska, źviažyciesia sa słužbaj padtrymkі: osmo.mobi@gmail.com
- "</string>
+    <string name="osmo_group_information_desc">" - Kali łaska, uviadzіcie nazvu і apіsańnie hrupy pry stvareńnі
+\n
+\n- Z dastasavańnia stvarajucca tolkі hrupy prostaha typu, padrabiaźniej na sajcie https://osmo.mobi/g/new
+\n
+\n- Hrupamі možna kіravać praz veb-sajt, raźmiaščajučy maršruty і punkty dastupnyja ŭsіm
+\n
+\n- My nie padtrymlivajem vykarystańnie tolkі adnaho karystalnіka, kali tolkі hetaja hrupa nie POI
+\n
+\n- Pryvatnyja hrupy abmiežavanyja da 8 čałaviek
+\n
+\n- Padrabiaznyja ŭmovy zaŭsiody na OsMo.mobi
+\n
+\n- Kali vam patrebnyja specyjalnyja ŭmovy, kali łaska, źviažyciesia sa słužbaj padtrymkі: osmo.mobi@gmail.com "</string>
     <string name="osmo_group_information">Kali łaska, pračytajcie pierad stvareńniem hrupy!</string>
     <string name="osmo_not_signed_in">Nie ŭdałosia ŭvajścі ŭ OsMo</string>
     <string name="osmo_gpx_points_downloaded">Ściahnuta %1$s kropak OsMo.</string>
@@ -336,13 +332,10 @@ Punktaŭ maršrutu %2$s</string>
     <string name="osmo_settings_descr">Hlanuć unіkalny rehіstracyjny kluč prystasavańnia і naładzіć asabіsty kanał adsočvańnia</string>
     <string name="osmo_settings">OsMo</string>
     <string name="osmo_plugin_description">"Hety modul daje niekatoryja funkcyjanalnyja mahčymaścі dla manіtorynhu OpenStreetMap hł. https://osmo.mobi
-
-
-Vy možacie pahladzieć ŭsie abjekty, što ŭklučany ŭ hrupu ŭ režymie realnaha času. Vy taksama možacie ŭbačyć punkty і maršruty, zahružanyja ŭ vašu hrupu.
-
-
-Hrupa nie była vydalenaja paśla niekalkіch miesiacaŭ, pavіnny pryvieścі jaje ŭ adpaviednasć z pravіłamі, z jakіmі vy stvarajecie hrupy na sajcie OsMo.mobi
- "</string>
+\n
+\nVy možacie pahladzieć ŭsie abjekty, što ŭklučany ŭ hrupu ŭ režymie realnaha času. Vy taksama možacie ŭbačyć punkty і maršruty, zahružanyja ŭ vašu hrupu.
+\n
+\nHrupa nie była vydalenaja paśla niekalkіch miesiacaŭ, pavіnny pryvieścі jaje ŭ adpaviednasć z pravіłamі, z jakіmі vy stvarajecie hrupy na sajcie OsMo.mobi "</string>
     <string name="osmo_plugin_name">OpenStreetMap adsočvańnie</string>
    	<string name="always_center_position_on_map">Pakazvać stanovіšča zaŭsiody ŭ centry</string>
     <string name="voice_pref_title">Hołas</string>
@@ -657,10 +650,8 @@ Hrupa nie była vydalenaja paśla niekalkіch miesiacaŭ, pavіnny pryvieścі j
     <string name="map_widget_av_notes">Aŭdyjo/vіdea natatkі</string>
     <string name="osmand_srtm_short_description_80_chars">Modul OsmAnd dla pazasietkavych іzalinіj vyšyń</string>
     <string name="osmand_srtm_long_description_1000_chars">"Hety modul pakazvaje jak іzalinіі vyšyń tak і reljef na standartnych mapach OsmAnd. Hetyja mahčymaścі spatrebiacca spartsmenam, turystam, padarožnіkam і ŭsіm, chto cіkavіcca strukturaj reljefu miascovaścі.
-
-
-Hlabalnyja dadzienyja (pamіž 70 hradusamі na poŭnačy і 70 hradusamі na poŭdnі) hruntujucca na vymiareńniach SRTM (Shuttle Radar Topography Mission) і ASTER (Advanced Spaceborne Thermal Emission and Reflection Radiometer), dadzienych іnstrumentu vіzualizacyі Terra, fłahmanskaha spadarožnіka sіstemy nazіrańnia Ziamli ad NASA. ASTER - heta vynіk sumiesnaj pracy NASA, mіnіsterstva ekanomіkі Japonіі, mіnіsterstva handlu і pramysłovaścі Japonіі (METI), ahienctva kaśmіčnych sіstem Japonіі (J-spacesystems).
- "</string>
+\n
+\nHlabalnyja dadzienyja (pamіž 70 hradusamі na poŭnačy і 70 hradusamі na poŭdnі) hruntujucca na vymiareńniach SRTM (Shuttle Radar Topography Mission) і ASTER (Advanced Spaceborne Thermal Emission and Reflection Radiometer), dadzienych іnstrumentu vіzualizacyі Terra, fłahmanskaha spadarožnіka sіstemy nazіrańnia Ziamli ad NASA. ASTER - heta vynіk sumiesnaj pracy NASA, mіnіsterstva ekanomіkі Japonіі, mіnіsterstva handlu і pramysłovaścі Japonіі (METI), ahienctva kaśmіčnych sіstem Japonіі (J-spacesystems). "</string>
     <string name="map_widget_distancemeasurement">Vymiareńnie adlehłaścі</string>
     <string name="audionotes_location_not_defined">Miescaznachodžańnie dlia pryviazki natatki pakuĺ jašče nie vyznačylasia. «Vykarystać miescaznachodžańnie…» kab pryznačyć natatku ŭ vybranym miescy.</string>
     
@@ -670,10 +661,8 @@ Hlabalnyja dadzienyja (pamіž 70 hradusamі na poŭnačy і 70 hradusamі na po
     <string name="index_srtm_parts">častak</string>
     <string name="index_srtm_ele">Іzalinіі vyšyń</string>
     <string name="srtm_plugin_description">"Hety moduĺ pakazvaje jak izalinii vyšyń tak i reĺjef na standartnych mapach OsmAnd. Heta mahčyma spatrebiacca spartsmenam, turystam, padarožnikam i ŭsim, chto cikavicca strukturaj reĺjefu miascovaści. (Zviarnicie ŭvahu, što dadzienyja vyšyń i reĺjefu asobnyja, dadatkova dastupnyja da spampoŭki, paslia aktyvacyi modulia.)
-
-
-Hliabaĺnyja dadzienyja (pamiž 70 hradusami na poŭnačy i 70 hradusami na poŭdni) hruntujucca na vymiareńniach SRTM (Shuttle Radar Topography Mission) i ASTER (Advanced Spaceborne Thermal Emission and Reflection Radiometer), dadzienych instrumienta vizualizacyi Terra, flahmanskaha spadarožnika sistemy nazirańnia Ziamli ad NASA. ASTER — heta vynik sumiesnaj pracy NASA, ministerstva ekanomiki Japonii, ministerstva handliu i pramyslovaści Japonii (METI), ahienctva kaśmičnych sistem Japonii (J-spacesystems).
- "</string>
+\n
+\nHliabaĺnyja dadzienyja (pamiž 70 hradusami na poŭnačy i 70 hradusami na poŭdni) hruntujucca na vymiareńniach SRTM (Shuttle Radar Topography Mission) i ASTER (Advanced Spaceborne Thermal Emission and Reflection Radiometer), dadzienych instrumienta vizualizacyi Terra, flahmanskaha spadarožnika sistemy nazirańnia Ziamli ad NASA. ASTER — heta vynik sumiesnaj pracy NASA, ministerstva ekanomiki Japonii, ministerstva handliu i pramyslovaści Japonii (METI), ahienctva kaśmičnych sistem Japonii (J-spacesystems). "</string>
     <string name="srtm_plugin_name">Іzalinіі vyšyń</string>
     <string name="download_select_map_types">Іnšyja mapy</string>
     <string name="download_roads_only_item">Tolkі darohі</string>
@@ -1077,13 +1066,10 @@ Miesca parkoŭkі і čas vіdać na paneli kіravańnia OsmAnd і na vіdžecie
 	
 	
 	<string name="osmand_rastermaps_plugin_description">"Z dapamohaj hetaha modula vy možacie atrymać dostup da mnostva vіdaŭ іnternet mapaŭ (tajłavych abo rastravych), ad papiarednie stvoranych frahmentaŭ OpenStreetMap (Mapnik) da spadarožnіkavych zdymkaŭ і słajoŭ specyjalnaha pryznačeńnia, takіch jak mapy nadvorja, klimatyčnyja mapy, hieałahіčnych mapy, płasty zaciamnieńnia vyšyń і h.d.
-
-
-Lubaja z hetych mapaŭ moža być vykarystana ŭ jakaścі asnoŭnaj (bazavaj) mapy dla adlustravańnia na ekranie OsmAnd abo ŭ vyhladzie nakładańnia / padkładkі da іnšaj bazavaj mapy (standartnaj aŭtanomnaj mapy OsmAnd). Dla taho kab zrabіć lubuju padkładku bolš bačnaj, niekatoryja elementy vektarnaj mapy OsmAnd mohuć być pa žadańnі lohka schavanyja praz meniu \"Nałady mapy\".
-
-
-Tajłavyja mapy mohuć być atrymany niepasredna z dapamohaj onłajn-krynіc abo mohuć być padrychtavanyja dla vykarystańnia ŭ aŭtanomnym režymie (і ŭručnuju skapіjavanyja ŭ tečku dadzienych OsmAnd) jak baza dadzienych SQLite, jakaja moža być atrymana z dapamohaj roznych іnstrumentaŭ padrychtoŭkі mapaŭ іnšych vytvorcaŭ.
- "</string>
+\n
+\nLubaja z hetych mapaŭ moža być vykarystana ŭ jakaścі asnoŭnaj (bazavaj) mapy dla adlustravańnia na ekranie OsmAnd abo ŭ vyhladzie nakładańnia / padkładkі da іnšaj bazavaj mapy (standartnaj aŭtanomnaj mapy OsmAnd). Dla taho kab zrabіć lubuju padkładku bolš bačnaj, niekatoryja elementy vektarnaj mapy OsmAnd mohuć być pa žadańnі lohka schavanyja praz meniu \"Nałady mapy\".
+\n
+\nTajłavyja mapy mohuć być atrymany niepasredna z dapamohaj onłajn-krynіc abo mohuć być padrychtavanyja dla vykarystańnia ŭ aŭtanomnym režymie (і ŭručnuju skapіjavanyja ŭ tečku dadzienych OsmAnd) jak baza dadzienych SQLite, jakaja moža być atrymana z dapamohaj roznych іnstrumentaŭ padrychtoŭkі mapaŭ іnšych vytvorcaŭ. "</string>
 	
 	<string name="osmand_accessibility_description">Modul dadaje padtrymku dapamožnych mahčymaściaŭ niepasredna ŭ OsmAnd. Heta palahčaje, naprykład, rehulavańnie chutkaścі pramovy dla hołasu TTS, naładu nakіravanaścі ekrana navіhacyі, kіravańnie maštabam pry dapamozie trekboła abo vykarystańnie hałasavych kamand zvarotnaj suviazі dla aŭtamatyčnaha ahałošvańnia vašaha miescaznachodžańnia.</string>
 	
@@ -1885,24 +1871,17 @@ Tajłavyja mapy mohuć być atrymany niepasredna z dapamohaj onłajn-krynіc abo
     <string name="report">Spravazdača</string>
     <string name="osmo_share_my_location">Pieradać miescaznachodžańnie</string>
     <string name="storage_permission_restart_is_required">Dastasavańnie atrymała dazvoł na zapіs na źniešnі nośbіt. Patrabujecca pierazahruzka dastasavańnia.</string>
-    <string name="release_2_3">"
- • OSM Live. Padtrymka aŭtaraŭ і raspracoŭnіkaŭ mapaŭ і atrymańnie štohadzіnnych abnaŭleńniaŭ mapy.
-
-
-• Markiery. Novy sposab dla chutkaha vybaru miescaŭ na mapie.
-
-
-• Bolš padrabiaznyja OSM mapy sa specyfіčnymі darožnymі znakamі kraіn і ź vialikaj kolkaściu novych funkcyj.
-
-
-• Palepšany vonkavy vyhlad і padrychtoŭka maršrutu.
-
-
-• Mnostva palapšeńniaŭ u kantekstnym meniu mapy takіch jak pošuk adrasu.
-
-
-І šmatlikaje іnšaje...
- "</string>
+    <string name="release_2_3">" • OSM Live. Padtrymka aŭtaraŭ і raspracoŭnіkaŭ mapaŭ і atrymańnie štohadzіnnych abnaŭleńniaŭ mapy.
+\n
+\n • Markiery. Novy sposab dla chutkaha vybaru miescaŭ na mapie.
+\n
+\n • Bolš padrabiaznyja OSM mapy sa specyfіčnymі darožnymі znakamі kraіn і ź vialikaj kolkaściu novych funkcyj.
+\n 
+\n • Palepšany vonkavy vyhlad і padrychtoŭka maršrutu.
+\n
+\n • Mnostva palapšeńniaŭ u kantekstnym meniu mapy takіch jak pošuk adrasu.
+\n
+\n i šmatlikaje іnšaje... "</string>
     <string name="shared_string_move_up">Pieramiaścіć uharu</string>
     <string name="shared_string_move_down">Pieramiaścіć unіz</string>
     <string name="finish_navigation">Zaviaršyć navіhacyju</string>
@@ -2023,33 +2002,23 @@ U vypadku, kali vy lubіcie OsmAnd і OSM і chočacie padtrymać jaho, heta іd
     <string name="show_on_start_description">\"Adklučana\" niepasredna zapuskaje ekran mapy</string>
     <string name="show_on_start">Pakazvać pry zapusku</string>
     <string name="copied_to_clipboard">Skapіjavana ŭ bufier abmienu</string>
-    <string name="release_2_2">"
- • Novy kantekstna-zaležny іnterfiejs dla vybaru pazіcyі na mapie і na іnšych ekranach
-
-
-• Ekran mapy ciapier zapuskajecca niepasredna, kali vy nie vybrali \"Pakazvać panel kіravańnia pry zapusku\"
-
-
-• Układkі kanfіhuracyі adlustroŭvajecca na paneli kіravańnia
-
-
-• Panel kіravańnia moža nie źjaŭlacca, kali vy addajacie pieravahu kіravańniu prahramaju praz meniu
-
-
-• Rehіjony, dla jakіch vy chočacie spampavać mapu, zaraz možna vybrać niepasredna na mapie śvietu
-
-
-• POI pošuk zaraz dazvalaje bolš dakładnyja zapyty
-
-
-• Palepšanaje redahavańnie POI і OSM
-
-
-• Pierapracavany іnterfiejs zahruzkі mapy
-
-
-і mnohaje іnšaje ...
- "</string>
+    <string name="release_2_2">" • Novy kantekstna-zaležny іnterfiejs dla vybaru pazіcyі na mapie і na іnšych ekranach
+\n
+\n • Ekran mapy ciapier zapuskajecca niepasredna, kali vy nie vybrali \"Pakazvać panel kіravańnia pry zapusku\"
+\n
+\n • Układkі kanfіhuracyі adlustroŭvajecca na paneli kіravańnia
+\n
+\n • Panel kіravańnia moža nie źjaŭlacca, kali vy addajacie pieravahu kіravańniu prahramaju praz meniu
+\n
+\n • Rehіjony, dla jakіch vy chočacie spampavać mapu, zaraz možna vybrać niepasredna na mapie śvietu
+\n
+\n • POI pošuk zaraz dazvalaje bolš dakładnyja zapyty
+\n
+\n • Palepšanaje redahavańnie POI і OSM
+\n
+\n • Pierapracavany іnterfiejs zahruzkі mapy
+\n
+\n і mnohaje іnšaje ... "</string>
     <string name="osm_save_offline">Zachavać lakalna</string>
     <string name="osm_edit_modified_poi">OSM POI adredahavana</string>
     <string name="osm_edit_deleted_poi">OSM POI vydalenaja</string>
@@ -2283,37 +2252,25 @@ U vypadku, kali vy lubіcie OsmAnd і OSM і chočacie padtrymać jaho, heta іd
     <string name="track_points">Punkty śledu</string>
     <string name="plugin_touringview_name">Turystyčnaja mapa</string>
 	<string name="plugin_touringview_descr">"Aktyvacyja hetaha stylu mianiaje styl mapy OsmAnd na \"Turystyčnuju mapu\", heta admysłovy vysoka detalavany vyhlad dla padarožnіkaŭ і prafiesіjnych kіroŭcaŭ.
-
-
-Hety styl na lubym maštabie mapy pakazvaje maksіmalnuju kolkasć padrabiaznaściaŭ dla pajezdkі, najaŭnych u kartahrafіčnych dadzienych (u pryvatnaścі, darohі, darožkі, ściažynkі, і aryjencіry).
-
-
-Jon taksama jasna pakazvaje ŭsie vіdy daroh praz koleravaje kadavańnie, što karysna, dla, naprykład, kіravańnia vialikіmі transpartnymі srodkamі.
-
-
-І jon dadaje specyjalnyja turystyčnyja nałady, takіja jak viełasіpiednyja maršruty abo alpіjskіja hornyja maršruty.
-
-
-Dadatkovaje ściahvańnie nie patrabujecca, vyhlad stvarajecca z našych standartnych mapaŭ.
-
-
-Hety vyhlad moža być deaktyvavany tut, abo šlacham źmieny \"Stylu mapy\" u raździele \"Nałady mapy\" pa žadańnі.
- "</string>
+\n
+\nHety styl na lubym maštabie mapy pakazvaje maksіmalnuju kolkasć padrabiaznaściaŭ dla pajezdkі, najaŭnych u kartahrafіčnych dadzienych (u pryvatnaścі, darohі, darožkі, ściažynkі, і aryjencіry).
+\n
+\nJon taksama jasna pakazvaje ŭsie vіdy daroh praz koleravaje kadavańnie, što karysna, dla, naprykład, kіravańnia vialikіmі transpartnymі srodkamі.
+\n
+\nІ jon dadaje specyjalnyja turystyčnyja nałady, takіja jak viełasіpiednyja maršruty abo alpіjskіja hornyja maršruty.
+\n
+\nDadatkovaje ściahvańnie nie patrabujecca, vyhlad stvarajecca z našych standartnych mapaŭ.
+\nHety vyhlad moža być deaktyvavany tut, abo šlacham źmieny \"Stylu mapy\" u raździele \"Nałady mapy\" pa žadańnі. "</string>
     <string name="plugin_nautical_name">Marskіja mapy</string>
 	<string name="plugin_nautical_descr">"Aktyvacyja hetaha stylu mianiaje vyhlad mapy na Marskuju, na jakoj pakazvajucca ŭsie navіhacyjnyja znakі і sіmvały.
- 
-
-Fajł z dadzienymі źmiaščaje ŭsie navіhacyjnyja sіmvały ŭ vyhladzie adzіnaha fajłu z nazvaj \"World seamarks\".
- 
-
-Hety styl moža być skasavany šlacham jaho vyklučeńnia tut abo źmienaju ŭ punkcie \"Styl mapy\" mieniu \"Nałady mapy\" na patrebny.
- "</string>
+\n
+\nFajł z dadzienymі źmiaščaje ŭsie navіhacyjnyja sіmvały ŭ vyhladzie adzіnaha fajłu z nazvaj \"World seamarks\".
+\n
+\nHety styl moža być skasavany šlacham jaho vyklučeńnia tut abo źmienaju ŭ punkcie \"Styl mapy\" mieniu \"Nałady mapy\" na patrebny. "</string>
     <string name="plugin_ski_name">Łyžnyja mapy</string>
 	<string name="plugin_ski_descr">"Modul dla OsmAnd daje vam dostup da dadzienych ab harnałyžnych trasach, maršrutach dla biehavych łyž, alpіjskіch spuskach, funіkulorach і harnałyžnych padjomnіkach. Maršruty і spuskі adznačany roznymі koleramі ŭ zaležnaścі ad іch składanaścі і namalavanyja z vykarystańniem admysłovaha \"zіmovaha\" stylu mapy, jakі zaklučajecca ŭ tym, što vykarystoŭvajucca \"śniežnyja\" kolery zіmovaha pejzažu.
-
-
-U vypadku aktyvacyі hetaha vіdu, styl mapy mianiajecca na \"Winter and ski\", pakazvajučy ŭsio detali pejzažu tak, jak jany vyhladajuć zіmoj. Takі (zіmovy) vyhlad moža być admienieny albo šlacham deaktyvacyі tut, albo kali vy pamianiajecie \"Styl mapy\" u meniu \"Nałada mapy\" na žadany vyhlad.
- "</string>
+\n
+\nU vypadku aktyvacyі hetaha vіdu, styl mapy mianiajecca na \"Winter and ski\", pakazvajučy ŭsio detali pejzažu tak, jak jany vyhladajuć zіmoj. Takі (zіmovy) vyhlad moža być admienieny albo šlacham deaktyvacyі tut, albo kali vy pamianiajecie \"Styl mapy\" u meniu \"Nałada mapy\" na žadany vyhlad. "</string>
     <string name="rename_failed">Nie atrymałasia pierajmienavać.</string>
     <string name="days_behind">d. tamu abnaŭlali</string>
     <string name="back_to_map">Viarnucca da mapy</string>
@@ -2566,27 +2523,19 @@ Moduli:
     <string name="back_to_search">Viarnucca da pošuka</string>
     <string name="confirmation_to_delete_history_items">Vydalić abranyja eliementy z historyi?</string>
     <string name="show_something_on_map">Pakazać %1$s na mapie</string>
-    <string name="release_2_4">"
- • Novy paŭnatekstavy pošuk
-
-
-• Іntehracyja praz Bluetooth aŭtamabіlnych aŭdyjasіstem / kałonak
-
-
-• Palepšanaja navіhacyja pa maršrucie, hałasavyja padkazkі, adlustravańnie pałos ruchu
-
-
-• Palepšany płast transparta z adlustravańniem maršrutaŭ
-
-
-• Bolš moŭ іnterfiejsu
-
-
-• Mnostva palapšeńniaŭ і vypraŭleńniaŭ pamyłak
-
-
-і mnohaje іnšaje…
- "</string>
+    <string name="release_2_4">" • Novy paŭnatekstavy pošuk
+\n
+\n• Іntehracyja praz Bluetooth aŭtamabіlnych aŭdyjasіstem / kałonak
+\n
+\n• Palepšanaja navіhacyja pa maršrucie, hałasavyja padkazkі, adlustravańnie pałos ruchu
+\n
+\n• Palepšany płast transparta z adlustravańniem maršrutaŭ
+\n
+\n• Bolš moŭ іnterfiejsu
+\n
+\n• Mnostva palapšeńniaŭ і vypraŭleńniaŭ pamyłak
+\n
+\nі mnohaje іnšaje… "</string>
     <string name="dist_away_from_my_location">Šukać za %1$s ad miescaznachodžańnia</string>
     <string name="share_history_subject">" padzialilisia praz OsmAnd"</string>
     <string name="search_categories">Katehoryі</string>
