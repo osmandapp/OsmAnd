@@ -2874,4 +2874,16 @@
 	<string name="poi_nuclear_explosion_type_atmospheric_atmospheric_surface">爆炸類型：大氣層、地表</string>
 	<string name="poi_energy_supplier">電力公司辦事處</string>
 
+	<string name="poi_nuclear_explosion_type_atmospheric_water_surface_barge">爆炸類型︰大氣中、水面、駁船</string>
+	<string name="poi_nuclear_explosion_type_underground">爆炸類型：地下</string>
+	<string name="poi_nuclear_explosion_type_cratering_burst">爆炸類型：火山口（淺層地下）</string>
+	<string name="poi_nuclear_explosion_type_atmospheric_rocket_or_missile">爆炸類型：大氣層、火箭或飛彈</string>
+	<string name="poi_nuclear_explosion_type_space">爆炸類型：太空 (超過海拔 80 公里)</string>
+	<string name="poi_nuclear_explosion_type_underwater">爆炸類型：水面下</string>
+	<string name="poi_nuclear_explosion_shot_name_en">射擊名稱</string>
+	<string name="poi_nuclear_explosion_series">爆炸系列</string>
+	<string name="poi_coworking_space">共同工作空間</string>
+
+	<string name="poi_railway_yard">調車場</string>
+
 	</resources>
