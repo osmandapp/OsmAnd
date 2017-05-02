@@ -1,4 +1,4 @@
-<?xml version='1.0' encoding='utf-8'?>
+<?xml version='1.0' encoding='UTF-8'?>
 <resources>
 
 <string name="poi_palaeontological_site">مرکز دیرینه شناسی</string>
@@ -646,4 +646,17 @@
 
 <string name="poi_shop">مغازه</string>
 		<string name="poi_shop_food">اغذیه فروشی</string>
+	<string name="poi_fuel_avia_type">نوع</string>
+	<string name="poi_payment_type">نوع پرداخت</string>
+	<string name="poi_payment_fuel_type">کارت سوخت</string>
+	<string name="poi_additional_type">اضافی</string>
+	<string name="poi_internet_access_type">نوع دسترسی اینترنت</string>
+	<string name="poi_vending_type">نوع داد و ستد</string>
+	<string name="poi_bicycle_service">خدمات دوچرخه</string>
+	<string name="poi_clothes_type">نوع</string>
+	<string name="poi_shoes_type">نوع</string>
+	<string name="poi_fire_hydrant_position">موقعیت</string>
+	<string name="poi_fire_hydrant_water_source">منبع آب</string>
+	<string name="poi_payment_toll_type">نوع پرداخت</string>
+	<string name="poi_traffic_signals_sound">صدا</string>
 	</resources>
