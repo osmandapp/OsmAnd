@@ -2830,4 +2830,6 @@ Pro praghere iscrie su còdighe intreu</string>
     <string name="mapillary_widget">Widget pro Mapillary</string>
     <string name="mapillary_widget_descr">Ti permitit de contribuire in manera lestra e fàtzile a Mapillary</string>
     <string name="mapillary_descr">Fotografias de sas istradas in lìnia pro totus. Iscoberi logos, agiuda, catura su mundu.</string>
+    <string name="shared_string_add_photos">Annanghe fotografias</string>
+    <string name="mapillary_action_descr">Contribui a Mapillary cun sas vistas tuas a livellu de s\'istrada.</string>
     </resources>
