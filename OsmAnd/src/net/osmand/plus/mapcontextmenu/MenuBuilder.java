@@ -31,6 +31,7 @@ import net.osmand.data.QuadRect;
 import net.osmand.osm.PoiCategory;
 import net.osmand.plus.IconsCache;
 import net.osmand.plus.OsmandApplication;
+import net.osmand.plus.OsmandPlugin;
 import net.osmand.plus.R;
 import net.osmand.plus.activities.MapActivity;
 import net.osmand.plus.render.RenderingIcons;
@@ -57,6 +58,7 @@ public class MenuBuilder {
 	private LatLon latLon;
 	private boolean showNearestWiki = false;
 	protected List<Amenity> nearestWiki = new ArrayList<>();
+	private List<Class<? extends OsmandPlugin>> pluginMenuBuilders = new ArrayList<>();
 
 	public class PlainMenuItem {
 		private int iconId;
@@ -100,6 +102,10 @@ public class MenuBuilder {
 		plainMenuItems = new LinkedList<>();
 	}
 
+	public OsmandApplication getApp() {
+		return app;
+	}
+
 	public LatLon getLatLon() {
 		return latLon;
 	}
@@ -121,12 +127,17 @@ public class MenuBuilder {
 		this.showNearestWiki = showNearestWiki;
 	}
 
+	public void addPluginMenuBuilder(Class<? extends OsmandPlugin> pluginClass) {
+		pluginMenuBuilders.add(pluginClass);
+	}
+
 	public void setLight(boolean light) {
 		this.light = light;
 	}
 
 	public void build(View view) {
 		firstRow = true;
+		buildPluginRows(view);
 		buildNearestWikiRow(view);
 		if (needBuildPlainMenuItems()) {
 			buildPlainMenuItems(view);
@@ -146,6 +157,15 @@ public class MenuBuilder {
 		return true;
 	}
 
+	protected void buildPluginRows(View view) {
+		for (Class<? extends OsmandPlugin> pluginClass : pluginMenuBuilders) {
+			OsmandPlugin plugin = OsmandPlugin.getEnabledPlugin(pluginClass);
+			if (plugin != null) {
+				plugin.buildContextMenuRows(this, view);
+			}
+		}
+	}
+
 	protected void buildNearestWikiRow(View view) {
 		if (processNearstWiki() && nearestWiki.size() > 0) {
 			buildRow(view, R.drawable.ic_action_wikipedia, app.getString(R.string.wiki_around) + " (" + nearestWiki.size()+")", 0,
@@ -161,7 +181,7 @@ public class MenuBuilder {
 		buildRowDivider(view, false);
 	}
 
-	protected boolean isFirstRow() {
+	public boolean isFirstRow() {
 		return firstRow;
 	}
 
@@ -354,7 +374,7 @@ public class MenuBuilder {
 		rowBuilt();
 	}
 
-	protected void buildRowDivider(View view, boolean matchWidth) {
+	public void buildRowDivider(View view, boolean matchWidth) {
 		View horizontalLine = new View(view.getContext());
 		LinearLayout.LayoutParams llHorLineParams = new LinearLayout.LayoutParams(ViewGroup.LayoutParams.MATCH_PARENT, dpToPx(1f));
 		llHorLineParams.gravity = Gravity.BOTTOM;

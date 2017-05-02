@@ -1,0 +1,36 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="@dimen/mapillary_card_width"
+    android:layout_height="@dimen/mapillary_card_height"
+    android:background="?attr/bg_card"
+    android:orientation="vertical">
+
+    <TextView
+        android:id="@+id/title"
+        android:layout_width="match_parent"
+        android:layout_height="100dp"
+        android:paddingLeft="24dp"
+        android:paddingRight="24dp"
+        android:maxLines="4"
+        android:gravity="center"
+        android:ellipsize="end"
+        android:textColor="?android:textColorPrimary"
+        android:textSize="@dimen/default_list_text_size"
+        android:text="@string/mapillary_action_descr"/>
+
+    <Button
+        android:id="@+id/button"
+        android:layout_width="wrap_content"
+        android:layout_height="40dp"
+        android:background="@drawable/mapillary_button"
+        android:layout_gravity="bottom|center_horizontal"
+        android:drawableLeft="@drawable/ic_action_mapillary"
+        android:drawableStart="@drawable/ic_action_mapillary"
+        android:drawablePadding="8dp"
+        android:paddingLeft="10dp"
+        android:paddingRight="14dp"
+        android:textColor="@color/color_white"
+        android:text="@string/shared_string_add_photos"/>
+
+</LinearLayout>

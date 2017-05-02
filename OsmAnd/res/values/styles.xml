@@ -96,6 +96,7 @@
         <item name="actionBarStyle">@style/Widget.Styled.ActionBarLight</item>
         <item name="bg_color">@color/bg_color_light</item>
         <item name="bg_card">@drawable/bg_card_light</item>
+        <item name="context_menu_card">@drawable/context_menu_card_light</item>
         <item name="bg_map_context_menu">@drawable/bg_map_context_menu_light</item>
         <item name="bottom_menu_view_bg">@drawable/bg_bottom_menu_light</item>
         <item name="left_menu_view_bg">@drawable/bg_left_menu_light</item>
@@ -266,6 +267,7 @@
         <item name="actionBarStyle">@style/Widget.Styled.ActionBarDark</item>
         <item name="bg_color">@color/bg_color_dark</item>
         <item name="bg_card">@drawable/bg_card_dark</item>
+        <item name="context_menu_card">@drawable/context_menu_card_dark</item>
         <item name="bg_map_context_menu">@drawable/bg_map_context_menu_dark</item>
         <item name="bottom_menu_view_bg">@drawable/bg_bottom_menu_dark</item>
         <item name="left_menu_view_bg">@drawable/bg_left_menu_dark</item>

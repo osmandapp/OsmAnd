@@ -7,6 +7,7 @@ import net.osmand.plus.OsmAndFormatter;
 import net.osmand.plus.R;
 import net.osmand.plus.activities.MapActivity;
 import net.osmand.plus.mapcontextmenu.MenuBuilder;
+import net.osmand.plus.mapillary.MapillaryPlugin;
 import net.osmand.plus.views.POIMapLayer;
 import net.osmand.util.Algorithms;
 
@@ -20,6 +21,7 @@ public class WptPtMenuBuilder extends MenuBuilder {
 	public WptPtMenuBuilder(MapActivity mapActivity, final WptPt wpt) {
 		super(mapActivity);
 		this.wpt = wpt;
+		addPluginMenuBuilder(MapillaryPlugin.class);
 		setShowNearestWiki(true);
 	}
 

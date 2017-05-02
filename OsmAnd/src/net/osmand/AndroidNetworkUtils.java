@@ -1,25 +1,40 @@
 package net.osmand;
 
+import android.graphics.Bitmap;
+import android.graphics.BitmapFactory;
 import android.os.AsyncTask;
 
 import net.osmand.osm.io.NetworkUtils;
 import net.osmand.plus.OsmandApplication;
 import net.osmand.plus.R;
+import net.osmand.plus.SQLiteTileSource;
 import net.osmand.plus.Version;
+import net.osmand.plus.resources.ResourceManager;
+import net.osmand.util.Algorithms;
 
+import org.apache.commons.logging.Log;
+
+import java.io.BufferedInputStream;
 import java.io.BufferedOutputStream;
 import java.io.BufferedReader;
+import java.io.ByteArrayOutputStream;
+import java.io.FileOutputStream;
 import java.io.IOException;
 import java.io.InputStream;
 import java.io.InputStreamReader;
 import java.io.OutputStream;
 import java.net.HttpURLConnection;
 import java.net.MalformedURLException;
+import java.net.URLConnection;
 import java.net.URLEncoder;
+import java.net.UnknownHostException;
 import java.text.MessageFormat;
 import java.util.Map;
 
 public class AndroidNetworkUtils {
+
+	private static final int CONNECTION_TIMEOUT = 15000;
+	private static final Log LOG = PlatformUtil.getLog(AndroidNetworkUtils.class);
 
 	public interface OnRequestResultListener {
 		void onResult(String result);
@@ -151,6 +166,27 @@ public class AndroidNetworkUtils {
 		}
 
 		return null;
+	}
+
+	public static Bitmap downloadImage(OsmandApplication ctx, String url) {
+		Bitmap res = null;
+		try {
+			URLConnection connection = NetworkUtils.getHttpURLConnection(url);
+			connection.setRequestProperty("User-Agent", Version.getFullVersion(ctx));
+			connection.setConnectTimeout(CONNECTION_TIMEOUT);
+			connection.setReadTimeout(CONNECTION_TIMEOUT);
+			BufferedInputStream inputStream = new BufferedInputStream(connection.getInputStream(), 8 * 1024);
+			try {
+				res = BitmapFactory.decodeStream(inputStream);
+			} finally {
+				Algorithms.closeStream(inputStream);
+			}
+		} catch (UnknownHostException e) {
+			LOG.error("UnknownHostException, cannot download image " + url + " " + e.getMessage());
+		} catch (Exception e) {
+			LOG.error("Cannot download image : " + url, e);
+		}
+		return res;
 	}
 
 	private static void showToast(OsmandApplication ctx, String message) {

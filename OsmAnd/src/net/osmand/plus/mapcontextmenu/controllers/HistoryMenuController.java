@@ -2,7 +2,6 @@ package net.osmand.plus.mapcontextmenu.controllers;
 
 import android.graphics.drawable.Drawable;
 
-import net.osmand.data.LatLon;
 import net.osmand.data.PointDescription;
 import net.osmand.plus.R;
 import net.osmand.plus.activities.MapActivity;
@@ -10,6 +9,7 @@ import net.osmand.plus.activities.search.SearchHistoryFragment;
 import net.osmand.plus.helpers.SearchHistoryHelper.HistoryEntry;
 import net.osmand.plus.mapcontextmenu.MenuBuilder;
 import net.osmand.plus.mapcontextmenu.MenuController;
+import net.osmand.plus.mapillary.MapillaryPlugin;
 import net.osmand.util.Algorithms;
 
 public class HistoryMenuController extends MenuController {
@@ -20,6 +20,7 @@ public class HistoryMenuController extends MenuController {
 	public HistoryMenuController(MapActivity mapActivity, PointDescription pointDescription, final HistoryEntry entry) {
 		super(new MenuBuilder(mapActivity), pointDescription, mapActivity);
 		this.entry = entry;
+		builder.addPluginMenuBuilder(MapillaryPlugin.class);
 		builder.setShowNearestWiki(true);
 		initData();
 	}
