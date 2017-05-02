@@ -2573,27 +2573,24 @@ Se ami OsmAnd e OSM e vuoi sostenerli, questo è un modo perfetto per farlo.</st
     <string name="back_to_search">Ritorna alla ricerca</string>
     <string name="confirmation_to_delete_history_items">Vuoi cancellare gli elementi della cronologia selezionati?</string>
     <string name="show_something_on_map">Mostra %1$s sulla mappa</string>
-    <string name="release_2_4">"
- • Nuova ricerca testuale molto potente
-
-
- • Integrazione attraverso Bluetooth con il sistema audio dell\'auto/speaker
-
-
- • Annunci vocali delle indicazioni vocali del percorso, cambio di corsia migliorati 
-
-
- • Mappa dei trasporti pubblici migliorata con calcolo del percorso
-
-
- • Aggiunte più lingue e ora sono supportati anche i dialetti
-
-
- • Molte altre migliorie e correzioni di errori
-
-
- e altro…
- "</string>
+    <string name="release_2_4">" • Nuova ricerca testuale molto potente
+\n
+\n • Integrazione attraverso Bluetooth con il sistema audio dell\'auto/speaker
+\n
+\n
+\n • Annunci vocali delle indicazioni vocali del percorso, cambio di corsia migliorati 
+\n
+\n
+\n • Mappa dei trasporti pubblici migliorata con calcolo del percorso
+\n
+\n
+\n • Aggiunte più lingue e ora sono supportati anche i dialetti
+\n
+\n
+\n • Molte altre migliorie e correzioni di errori
+\n
+\n
+\n e altro… "</string>
     <string name="dist_away_from_my_location">Cerca a %1$s di distanza</string>
     <string name="show_on_map">Mostra sulla mappa</string>
     <string name="share_history_subject">" condiviso attraverso OsmAnd"</string>
@@ -2673,27 +2670,25 @@ Se ami OsmAnd e OSM e vuoi sostenerli, questo è un modo perfetto per farlo.</st
     <string name="shared_string_recorded">Registrato</string>
     <string name="shared_string_record">Registra</string>
     <string name="gpx_logging_no_data">Nessun dato</string>
-    <string name="release_2_5">"
- • Icone sulla mappa cliccabili
-
-
- • Potente filtro di ricerca dei PDI: ricerca dei ristoranti per tipo di cucina, campeggi per esigenze specifiche
-
-
- • Nuovo stile Topo per ciclisti ed escursionisti
-
-
- • Registrazione viaggio migliorata
-
-
- • Notifiche di navigazione migliorate (Android Wear)
-
-
- • Molti altri miglioramenti e correzioni di bug
-
-
- e altro…
- "</string>
+    <string name="release_2_5">" • Icone sulla mappa cliccabili
+\n
+\n
+\n • Potente filtro di ricerca dei PDI: ricerca dei ristoranti per tipo di cucina, campeggi per esigenze specifiche
+\n
+\n
+\n • Nuovo stile Topo per ciclisti ed escursionisti
+\n
+\n
+\n • Registrazione viaggio migliorata
+\n
+\n
+\n • Notifiche di navigazione migliorate (Android Wear)
+\n
+\n
+\n • Molti altri miglioramenti e correzioni di bug
+\n
+\n
+\n e altro… "</string>
     <string name="rendering_attr_contourColorScheme_description">Schema del colore dei contorni</string>
     <string name="save_track_min_speed">Velocità minima di registrazione</string>
     <string name="translit_name_if_miss">Traslittera se manca il nome in %1$s</string>
@@ -2816,36 +2811,25 @@ Rappresenta l\'area: %1$s x %2$s</string>
 	<string name="auto_split_recording_title">Divisione automatica delle registrazioni dopo un periodo</string>
 	<string name="auto_split_recording_descr">Inizia un nuovo segmento dopo 6 minuti, una nuova traccia dopo 2 ore, o un nuovo file dopo un intervallo maggiore.</string>
     <string name="rendering_attr_depthContours_description">Mostra contorni e punti in profondità</string>
-    <string name="release_2_6">"
- • Nuove funzionalità: Pulsante azione veloce
-
-
- • Migliorata la risposta del touch screen ai gesti (es. zoommare e allargare)
-
-
- • Nuovi caratteri della mappa  mappa per estendere la copertura di più lingue 
-
-
- • Supporto TTS per le lingue locali (e accenti)
-
-
- • Miglioramento della visibilità in molti stili mappa e wikipedia
-
-
- • Supporto all\'Open Location Code (OLC)
-
-
- • Visualizzazione di un profilo altimetrico, pendenza, e velocità per i GPX registrati e percorsi calcolati
-
-
- • Impostazione e miglioramenti della logica dello \"Stile guida\" nella guida svolta per svolta in bicicletta
-
-
- • Molti altri miglioramenti e correzioni di errori
-
-
- e altro ancora…
- "</string>
+    <string name="release_2_6">" • Nuove funzionalità: Pulsante azione veloce
+\n
+\n • Migliorata la risposta del touch screen ai gesti (es. zoommare e allargare)
+\n
+\n • Nuovi caratteri della mappa  mappa per estendere la copertura di più lingue 
+\n
+\n • Supporto TTS per le lingue locali (e accenti)
+\n
+\n • Miglioramento della visibilità in molti stili mappa e wikipedia
+\n
+\n • Supporto all\'Open Location Code (OLC)
+\n
+\n • Visualizzazione di un profilo altimetrico, pendenza, e velocità per i GPX registrati e percorsi calcolati
+\n
+\n • Impostazione e miglioramenti della logica dello \"Stile guida\" nella guida svolta per svolta in bicicletta
+\n
+\n • Molti altri miglioramenti e correzioni di errori
+\n
+\n e altro ancora… "</string>
 	<string name="routing_attr_driving_style_name">Stile di guida</string>
     <string name="routing_attr_driving_style_description">Guida sicura, veloce o bilanciata</string>
     <string name="route_altitude">Profilo altimetrico del percorso</string>
@@ -3010,4 +2994,7 @@ Copertura e qualità approssimativamente:
 \n
 \n Goditelo attraverso la navigazione vocale e visuale, visualizzando i PDI (punti di interesse), creando e gestendo tracce GPX, utilizzando la visualizzazione delle linee isoipse e delle informazioni di altitudine (attraverso un componente aggiuntivo), la scelta tra le modalità automobile, bici, a piedi, con le modifiche OSM e molto altro.
 \n "</string>
+    <string name="mapillary_widget">Mapillary widget</string>
+    <string name="mapillary_widget_descr">Permette di contribuire facilmente a Mapillary</string>
+    <string name="mapillary_descr">Foto a livello stradale per tutti. Scopri luoghi, collabora, fotografa il mondo.</string>
     </resources>
