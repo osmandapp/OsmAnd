@@ -3021,4 +3021,5 @@ Fonctionnalités principales :
  • Enregistrement GPX optionnel pour enregistrer et partager votre itinéraire
  • Un greffon additionnel permet d\'afficher les courbes de niveaux et les ombres du relief
  "</string>
+    <string name="shared_string_add_photos">Ajouter des photos</string>
     </resources>
