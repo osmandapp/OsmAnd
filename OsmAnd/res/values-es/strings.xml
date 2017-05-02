@@ -2811,4 +2811,5 @@ Algunas de las características principales:
     <string name="shared_string_add_photos">Añadir fotos</string>
     <string name="mapillary_action_descr">Contribuye con Mapillary con tus propias vistas a pie de calle de esta ubicación.</string>
     <string name="mapillary_widget_descr">Te permite la rápida contribución a Mapillary</string>
+    <string name="plugin_mapillary_descr">Fotos a nivel de calle para todos. Descubre lugares, colabora, captura el mundo.</string>
     </resources>
