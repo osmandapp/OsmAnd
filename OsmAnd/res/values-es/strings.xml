@@ -2872,4 +2872,5 @@ notas de OSM en el mapa.</string>
     <string name="mapillary_widget">Widget de Mapillary</string>
     <string name="mapillary_descr">Fotos callejeras online para todos. Descubre lugares, colabora, captura el mundo.</string>
     <string name="mapillary">Mapillary</string>
+    <string name="shared_string_add_photos">Añadir fotos</string>
     </resources>
