@@ -214,7 +214,7 @@ public class MapillaryImageRow {
 
 	private class DownloadImagesTask extends AsyncTask<Void, Void, Void> {
 
-		private static final String urlTemplate = "https://d1cuyjsrcm0gby.cloudfront.net/{key}/thumb-320.jpg?origin=osmand";
+		private static final String urlTemplate = "https://d1cuyjsrcm0gby.cloudfront.net/{key}/thumb-640.jpg?origin=osmand";
 
 		@Override
 		protected void onPreExecute() {
