@@ -2917,4 +2917,7 @@ Koda predstavlja območje: %1$s x %2$s</string>
     <string name="no_overlay">Brez prekrivnih plasti</string>
     <string name="no_underlay">Brez podlog</string>
     <string name="shared_string_visible">Vidno</string>
+    <string name="shared_string_add_photos">Dodaj fotografije</string>
+    <string name="mapillary_widget">Gradnik Mapillary</string>
+    <string name="mapillary">Mapillary</string>
     </resources>
