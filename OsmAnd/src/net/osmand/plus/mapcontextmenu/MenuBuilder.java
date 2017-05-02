@@ -56,6 +56,7 @@ public class MenuBuilder {
 	protected boolean light;
 	private long objectId;
 	private LatLon latLon;
+	private boolean hidden;
 	private boolean showNearestWiki = false;
 	protected List<Amenity> nearestWiki = new ArrayList<>();
 	private List<Class<? extends OsmandPlugin>> pluginMenuBuilders = new ArrayList<>();
@@ -137,6 +138,7 @@ public class MenuBuilder {
 
 	public void build(View view) {
 		firstRow = true;
+		hidden = false;
 		buildPluginRows(view);
 		buildNearestWikiRow(view);
 		if (needBuildPlainMenuItems()) {
@@ -144,6 +146,18 @@ public class MenuBuilder {
 		}
 		buildInternal(view);
 		buildAfter(view);
+	}
+
+	void onHide() {
+		hidden = true;
+	}
+
+	void onClose() {
+		clearPluginRows();
+	}
+
+	public boolean isHidden() {
+		return hidden;
 	}
 
 	protected void buildPlainMenuItems(View view) {
@@ -162,6 +176,15 @@ public class MenuBuilder {
 			OsmandPlugin plugin = OsmandPlugin.getEnabledPlugin(pluginClass);
 			if (plugin != null) {
 				plugin.buildContextMenuRows(this, view);
+			}
+		}
+	}
+
+	protected void clearPluginRows() {
+		for (Class<? extends OsmandPlugin> pluginClass : pluginMenuBuilders) {
+			OsmandPlugin plugin = OsmandPlugin.getEnabledPlugin(pluginClass);
+			if (plugin != null) {
+				plugin.clearContextMenuRows();
 			}
 		}
 	}

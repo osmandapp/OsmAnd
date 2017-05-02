@@ -40,6 +40,7 @@ public class MapillaryPlugin extends OsmandPlugin {
 	private MapillaryLayer rasterLayer;
 	private TextInfoWidget mapillaryControl;
 	private MapWidgetRegInfo mapillaryWidgetRegInfo;
+	private MapillaryImageRow contextMenuImageRow;
 
 	public MapillaryPlugin(OsmandApplication app) {
 		this.app = app;
@@ -204,9 +205,20 @@ public class MapillaryPlugin extends OsmandPlugin {
 		}
 		*/
 
-		new MapillaryImageRow(menuBuilder, view).build();
+		if (contextMenuImageRow != null && contextMenuImageRow.getMenuBuilder() == menuBuilder) {
+			contextMenuImageRow = new MapillaryImageRow(contextMenuImageRow, view);
+			contextMenuImageRow.build();
+		} else {
+			contextMenuImageRow = new MapillaryImageRow(menuBuilder, view);
+			contextMenuImageRow.build();
+		}
 
 		//menuBuilder.rowBuilt();
+	}
+
+	@Override
+	public void clearContextMenuRows() {
+		contextMenuImageRow = null;
 	}
 
 	public static class MapillaryFirstDialogFragment extends BottomSheetDialogFragment {

@@ -113,6 +113,9 @@ public abstract class OsmandPlugin {
 	public void buildContextMenuRows(@NonNull MenuBuilder menuBuilder, @NonNull View view) {
 	}
 
+	public void clearContextMenuRows() {
+	}
+
 	public static void initPlugins(OsmandApplication app) {
 		OsmandSettings settings = app.getSettings();
 		Set<String> enabledPlugins = settings.getEnabledPlugins();
