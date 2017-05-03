@@ -224,7 +224,7 @@ Einige der Kernfunktionen:
 	<string name="rendering_attr_noPolygons_name">Flächen</string>
 	<string name="rendering_attr_appMode_description">Optimierung der Kartendarstellung für</string>
 	<string name="rendering_attr_appMode_name">Darstellungsmodus</string>
-	<string name="rendering_attr_contourLines_description">Zeige ab Vergrößerung (benötigt Höhenlinien-Datei):</string>
+	<string name="rendering_attr_contourLines_description">Darstellung (bei vorhandenen Höhenlinien-Daten) ab Zoomstufe:</string>
 	<string name="rendering_attr_contourLines_name">Höhenlinien anzeigen</string>
 	<string name="rendering_attr_hmRendered_description">Erhöht den dargestellten Detailgrad der Karte</string>
 	<string name="rendering_attr_hmRendered_name">Mehr Details in Karte</string>
@@ -279,7 +279,7 @@ Rasterkarten können direkt online bezogen werden, und werden im OsmAnd-Unterord
 	<string name="backToMenu">Zurück zum Menü</string>
 	<string name="zoomOut">Herauszoomen</string>
 	<string name="zoomIn">Hineinzoomen</string>
-	<string name="zoomIs">Zoom-Level ist</string>
+	<string name="zoomIs">Zoomstufe ist</string>
 	<string name="north">Nord</string>
 	<string name="north_north_east">Nord-Nord-Ost</string>
 	<string name="north_east">Nord-Ost</string>
@@ -535,8 +535,8 @@ Rasterkarten können direkt online bezogen werden, und werden im OsmAnd-Unterord
 	<string name="internet_not_available">Internet Verbindung erforderlich, aber nicht verfügbar!</string>
 	<string name="install_more">Weitere installieren…</string>
 
-	<string name="level_to_switch_vector_raster_descr">Minimaler Zoomlevel bis zu dem Offline-Vektor-Karten (statt Kacheln) verwendet werden sollen</string>
-	<string name="level_to_switch_vector_raster">Min. Vektor-Zoomlevel</string>
+	<string name="level_to_switch_vector_raster_descr">Niedrigste Zoomstufe mit der Vektorkarten (statt Kacheln) verwendet werden sollen</string>
+	<string name="level_to_switch_vector_raster">Min. Vektor-Zoomstufe</string>
 	
 	<string name="create_poi_link_to_osm_doc"> <u>Online OSM</u> Klassifizierung mit Bildern"</string>
 	<string name="error_doing_search">Fehler in der Offline-Suche aufgetreten</string>
@@ -2698,39 +2698,27 @@ Abgedeckte Fläche: %1$s x %2$s</string>
 	<string name="auto_split_recording_descr">Nach 6 min Pause neues Segment, nach 2 h neuen Track und nach Pause mit Datumsänderung neue Datei beginnen.</string>
     <string name="navigate_point_olc">Offener Standortcode (OLC)</string>
     <string name="quick_action_page_list_descr">Drücken der Aktionstaste blättert die untere Liste durch.</string>
-    <string name="release_2_6">"
- • Neue Funktion: Schnellaktionstaste
-
-
- • Verbessertes Ansprechen auf Bildschirmgesten
-
-
- • Neue Kartenschriftarten, die weitere Sprachen abdecken
-
-
- • TTS-Unterstützung regionaler Dialekte
-
-
- • Verbesserungen der Sichtbarkeit bei einigen Kartenstilen und Wikipedia
-
-
- • Unterstützung des Offenen Standortcodes (OLC)
-
-
- • Anzeige eines Höhen-, Steigungs- und Geschwindigkeitsprofils für aufgezeichnete GPX-Tracks und errechnete Routen
-
-
- • \"Fahrstil\"-Einstellungen und logische Verbesserungen bei der Rad-Wegführung
-
-
- • Einstellungen zur Verwendung von Höhendaten in der Rad-Wegführung
-
-
- • Verschiedene Verbesserungen und Fehlerbehebungen
-
-
- und mehr…
- "</string>
+    <string name="release_2_6">" • Neue Funktion: Schnellaktionstaste
+\n
+\n • Verbessertes Ansprechen auf Bildschirmgesten
+\n
+\n • Neue Kartenschriftarten, die weitere Sprachen abdecken
+\n
+\n • TTS-Unterstützung regionaler Dialekte
+\n
+\n • Verbesserungen der Sichtbarkeit bei einigen Kartenstilen und Wikipedia
+\n
+\n • Unterstützung des Offenen Standortcodes (OLC)
+\n
+\n • Anzeige eines Höhen-, Steigungs- und Geschwindigkeitsprofils für aufgezeichnete GPX-Tracks und errechnete Routen
+\n
+\n • \"Fahrstil\"-Einstellungen und logische Verbesserungen bei der Rad-Wegführung
+\n
+\n • Einstellungen zur Verwendung von Höhendaten in der Rad-Wegführung
+\n
+\n • Verschiedene Verbesserungen und Fehlerbehebungen
+\n
+\n und mehr… "</string>
 	<string name="routing_attr_height_relief_smoothness_factor_name">Reliefglättungsfaktor</string>
     <string name="routing_attr_height_relief_smoothness_factor_description">Ebenen oder Berge betonen</string>
     <string name="routing_attr_height_obstacles_name">Höhendaten verwenden</string>
@@ -2976,7 +2964,7 @@ Abgedeckte Fläche: %1$s x %2$s</string>
     <string name="animate_my_location_desc">Näherungsweise Fortschreibung meiner Position, wenn deren Bestimmung vorübergehend ausfällt</string>
     <string name="route_is_too_long_v2">Die Route ist für eine Berechnung unter Umständen zu lang. Fügen Sie bitte Zwischenstopps ein, wenn nach 10 Minuten kein Routenvorschlag erscheint.</string>
     <string name="save_poi_too_many_uppercase">Der Name enthält zu viele Großbuchstaben. Möchten Sie den Vorgang fortsetzen?</string>
-    <string name="display_zoom_level">Bildschirm-Zoomstufe: %1$s</string>
+    <string name="display_zoom_level">Darstellung ab Zoomstufe: %1$s</string>
     <string name="routing_attr_allow_private_name">Privatwege berücksichtigen</string>
     <string name="routing_attr_allow_private_description">Zufahrten zu Privatgrund erlauben</string>
     <string name="srtm_color_scheme">Farbschema</string>
@@ -2996,6 +2984,12 @@ Abgedeckte Fläche: %1$s x %2$s</string>
     <string name="increase_search_radius">Suchradius vergrößern</string>
     <string name="nothing_found">Kein Suchergebnis :(</string>
     <string name="nothing_found_descr">Bitte Suchkriterien ändern oder Suchradius vergrößern</string>
-    <string name="hide_from_zoom_level">in der Zoomstufe ausblenden</string>
-    <string name="show_from_zoom_level">in der Zoomstufe anzeigen</string>
+    <string name="hide_from_zoom_level">Ausblenden ab Zoomstufe</string>
+    <string name="show_from_zoom_level">Darstellen ab Zoomstufe</string>
+    <string name="shared_string_add_photos">Fotos hinzufügen</string>
+    <string name="mapillary_widget">Mapillary-Widget</string>
+    <string name="mapillary_widget_descr">Ermöglicht Ihnen auf schnelle Weise Mapillary-Beiträge</string>
+    <string name="mapillary_descr">Fotos von der Straße aus dem Netz für jedermann. Orte entdecken, mitwirken, die Welt in Bildern festhalten.</string>
+    <string name="mapillary">Mapillary</string>
+    <string name="mapillary_action_descr">Mit Mapillary Ihre ganz persönlichen Ansichten dieses Ortes beisteuern.</string>
     </resources>
