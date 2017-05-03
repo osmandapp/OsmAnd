@@ -1,4 +1,5 @@
-<?xml version="1.0" encoding="UTF-8" standalone="no"?><resources><string name="lang_es_ar">ಅರ್ಜಿಂಟಿನೆಯಾದ ಸ್ಪೇನಿಷ್</string>
+<?xml version='1.0' encoding='UTF-8'?>
+<resources><string name="lang_es_ar">ಅರ್ಜಿಂಟಿನೆಯಾದ ಸ್ಪೇನಿಷ್</string>
     <string name="lang_th">ಥಾಯಿ</string>
     <string name="lang_te">ತೆಲುಗು</string>
     <string name="lang_nn"/>
@@ -243,4 +244,17 @@
     <string name="lang_ta">ತಮಿಳು</string>
     <string name="lang_ml">ಮಲಯಾಳಂ</string>
     <string name="shared_string_import2osmand">ಒಸ್ಮಾಂಡ್‌ಗೆ ಆಮದುಮಾಡಿ</string>
+    <string name="shared_string_add_photos">ಚಿತ್ರಗಳನ್ನು ಸೇರಿಸಿ</string>
+    <string name="mapillary">ಮ್ಯಾಪಿಲರಿ</string>
+    <string name="nothing_found">ಏನೂ ಸಿಗಲಿಲ್ಲ :(</string>
+    <string name="quick_action_osmbugs_show">ಒಎಸ್ಎಂ ಟಿಪ್ಪಣಿಗಳನ್ನು ತೋರಿಸು</string>
+    <string name="quick_action_osmbugs_hide">ಒಎಸ್ಎಂ ಟಿಪ್ಪಣಿಗಳನ್ನು ಅಡಗಿಸು</string>
+    <string name="change_color">ಬಣ್ಣವನ್ನು ಬದಲಿಸು</string>
+    <string name="edit_name">ಹೆಸರನ್ನು ಸಂಪಾದಿಸು</string>
+    <string name="type_address">ವಿಳಾಸವನ್ನು ಟೈಪಿಸು</string>
+    <string name="type_city_town">ನಗರ ಅಥವ ಪಟ್ಟಣವನ್ನು ಟೈಪಿಸು</string>
+    <string name="type_postcode">ಅಂಚೆಸಂಖ್ಯೆಯನ್ನು ಟೈಪಿಸು</string>
+    <string name="nearest_cities">ಹತ್ತಿರದ ನಗರಗಳು</string>
+    <string name="select_city">ನಗರವನ್ನು ಆರಿಸು</string>
+    <string name="select_postcode">ಅಂಚೆಸಂಖ್ಯೆಯನ್ನು ಆರಿಸು</string>
     </resources>
