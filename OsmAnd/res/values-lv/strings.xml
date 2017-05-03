@@ -814,7 +814,7 @@ Bilžu kartes var lietot no tiešsaistes avotiem vai sagatavot bezsaistes lieto�
   <string name="favourites_search_desc">Meklēšana izlasē</string>
   
   <string name="rendering_attr_noPolygons_description">Padarīt visus zemes lietojuma apgabalus caurspīdīgus</string>
-  <string name="rendering_attr_noPolygons_name">Poligoni</string>
+  <string name="rendering_attr_noPolygons_name">Poligonus</string>
   <string name="rendering_attr_appMode_name">Renderēšanas režīms</string>
   <string name="rendering_attr_appMode_description">Kartes optimizēšana atbilstošam lietotāja profilam</string>
   <string name="rendering_attr_contourLines_description">Iestatīt minimālo mērogu kontūrlīniju attēlošanai (nepieciešams SRTM-fails):</string>
@@ -1666,7 +1666,7 @@ Ierakstītie treki vēlāk var tikt izmantoti treka analīzei, koplietošanai ar
     <string name="rendering_value_car_name">Auto</string>
     <string name="rendering_value_bicycle_name">Velobraucējs</string>
     <string name="rendering_value_pedestrian_name">Gājējs</string>
-    <string name="rendering_attr_coloredBuildings_name">Krāsas pēc būves tipa</string>
+    <string name="rendering_attr_coloredBuildings_name">Krāsas pēc apbūves tipa</string>
     <string name="osmo_invite">Ielūgt…</string>
     <string name="osmo_leave_confirmation_msg">Vai gribat atstāt grupu %1$s?</string>
     <string name="osmo_specify_tracker_id">Lūdzu norādiet ID</string>
@@ -1694,10 +1694,10 @@ Ierakstītie treki vēlāk var tikt izmantoti treka analīzei, koplietošanai ar
     <string name="rendering_attr_moreDetailed_name">Vairāk detaļu</string>
     <string name="rendering_attr_lessDetailed_name">Mazāk detaļu</string>
     <string name="rendering_attr_hideAccess_name">Pieejas ierobežojumi</string>
-    <string name="rendering_attr_showAccess_name">Pieejamības ierobežojumi un nodevas</string>
+    <string name="rendering_attr_showAccess_name">Rādīt ierobežotas pieejamības un maksas ceļus</string>
     <string name="rendering_attr_showSurfaceGrade_name">Rādīt ceļa kvalitāti</string>
     <string name="rendering_attr_showSurfaces_name">Rādīt ceļa segumu</string>
-    <string name="rendering_attr_showCycleRoutes_name">Rādīt veloceliņus</string>
+    <string name="rendering_attr_showCycleRoutes_name">Veloceliņi</string>
     <string name="osmo_auth_error">OsMo autorizācijas kļūda: %1$s↵
 
 Iespējams īslaicīgs sakaru pārtraukums vai reģistrācijai ir iztecējis termiņš↵
@@ -1766,7 +1766,7 @@ Vai gribat veikt jaunu reģistrāciju?</string>
     <string name="rendering_attr_shareTaxiRoutes_name">"Kopīgot  taksometru maršrutus"</string>
     <string name="rendering_attr_trolleybusRoutes_name">Trolejbusu maršruti</string>
     <string name="rendering_attr_busRoutes_name">Autobusu maršruti</string>
-    <string name="rendering_category_hide">Nerādīt</string>
+    <string name="rendering_category_hide">Paslēpt</string>
     <string name="rendering_category_routes">Maršruti</string>
     <string name="rendering_category_details">Detaļas</string>
     <string name="rendering_category_transport">Transports</string>
@@ -1913,7 +1913,7 @@ Vai gribat veikt jaunu reģistrāciju?</string>
 	<string name="lang_zh_cn">Ķīniešu (vienkāršotā)</string>
 	<string name="lang_zh_tw">Ķīniešu (tradicionālā)</string>
 	<string name="route_descr_destination">Galamērķis</string>
-    <string name="rendering_attr_hikingRoutesOSMC_name">Slēpošanas simbolu pārklājs</string>
+    <string name="rendering_attr_hikingRoutesOSMC_name">Slēpošanas trašu pārklājs</string>
     <string name="local_index_description">Nospiediet, lai redzētu detaļas, paturiet nospiestu, lai deaktivizētu vai dzēstu. Datu apjoms (%1$s brīvs):</string>
 	<string name="voices">Balss vadība</string>
 	<string name="av_camera_pic_size">Fotokameras bildes izmērs</string>
@@ -1945,7 +1945,7 @@ Vai gribat veikt jaunu reģistrāciju?</string>
 	<string name="shared_string_message">Ziņojums</string>
 	<string name="agps_data_last_downloaded">Pēdējie A-GPS dati lejuplādēti: %1$s</string>
     <string name="shared_string_do_not_use">Nelietot</string>
-	<string name="rendering_attr_hideHouseNumbers_name">Māju numuri</string>
+	<string name="rendering_attr_hideHouseNumbers_name">Māju numurus</string>
     <string name="index_name_netherlands">Eiropa - Nīderlande</string>
 	<string name="rendering_attr_hikingRoutesOSMC_description">Renderēt ceļus pēc OSMC trasēm</string>
 
@@ -2041,10 +2041,10 @@ Vai gribat veikt jaunu reģistrāciju?</string>
     <string name="map_markers">Marķieri</string>
     <string name="map_marker">Marķieris</string>
     <string name="consider_turning_polygons_off">Vēlams izslēgt poligonu renderēšanu.</string>
-    <string name="rendering_attr_showMtbRoutes_name">Rādīt MTB maršrutus</string>
+    <string name="rendering_attr_showMtbRoutes_name">Kalnu velosipēdu maršruti</string>
     <string name="show_polygons">Rādīt poligonus</string>
     <string name="find_parking">Atrast stāvvietu</string>
-    <string name="rendering_attr_hideUnderground_name">Pazemes objekti</string>
+    <string name="rendering_attr_hideUnderground_name">Pazemes objektus</string>
     <string name="data_is_not_available">Dati nav pieejami</string>
     <string name="add_time_span">Pievienot laika intervālu</string>
     <string name="switch_start_finish">Mainīt vietām sākuma punktu un galamērķi</string>
@@ -2069,7 +2069,7 @@ Vai gribat veikt jaunu reģistrāciju?</string>
     <string name="no_microphone_permission">Aplikācijai nav atļaujas izmantot mikrofonu.</string>
     <string name="route_distance">Distance:</string>
     <string name="route_duration">Laiks:</string>
-    <string name="rendering_attr_horseRoutes_name">Zirgu maršruti</string>
+    <string name="rendering_attr_horseRoutes_name">Zirgu pajūgu celiņi</string>
     <string name="no_address_found">Adrese nav atrasta</string>
     <string name="shared_string_near">Tuvumā</string>
     <string name="shared_string_hide">Paslēpt</string>
@@ -2114,7 +2114,7 @@ Vai gribat veikt jaunu reģistrāciju?</string>
     <string name="lang_als">Albāņu (tosku)</string>
     <string name="read_more">Lasīt vēl</string>
     <string name="whats_new">Kas jauns</string>
-    <string name="rendering_attr_hideProposed_name">Ieteiktie objekti</string>
+    <string name="rendering_attr_hideProposed_name">Piedāvātos objektus</string>
     <string name="shared_string_update">Atjauninājums</string>
     <string name="shared_string_upload">Augšupielādēt</string>
     <string name="osm_edit_created_poi">Izveidots OSM POI</string>
@@ -2211,8 +2211,8 @@ Vai gribat veikt jaunu reģistrāciju?</string>
     <string name="lang_ceb">Cebuanu</string>
     <string name="disable_recording_once_app_killed">Nerakstīt automātiski</string>
     <string name="rendering_value_disabled_name">Atslēgts</string>
-    <string name="rendering_value_walkingRoutesScopeOSMC_name">Krāsa pēc tīkla piederības</string>
-    <string name="rendering_value_walkingRoutesOSMC_name">Krāsa pēc OSMC pārgājienu simbola</string>
+    <string name="rendering_value_walkingRoutesScopeOSMC_name">Krāsas pēc infrastruktūras veida</string>
+    <string name="rendering_value_walkingRoutesOSMC_name">Krāsas pēc OSMC simbola</string>
     <string name="osmo_share_my_location">Sūtīt atrašanās vietu</string>
     <string name="local_recordings_delete_all_confirm">"Vai vēlaties izdzēst  %1$d ierakstus?"</string>
     <string name="rendering_attr_pisteRoutes_name">Slēpošanas trases</string>
@@ -2220,7 +2220,7 @@ Vai gribat veikt jaunu reģistrāciju?</string>
     <string name="routing_attr_avoid_stairs_name">Izvairīties no kāpnēm</string>
     <string name="routing_attr_avoid_stairs_description">Izvairīties no kāpnēm</string>
     <string name="routing_attr_avoid_borders_name">Izvairīties no robežu šķēršošanas</string>
-    <string name="rendering_attr_alpineHiking_name">Kalnu pārgājiena mērogs (SAC)</string>
+    <string name="rendering_attr_alpineHiking_name">Alpīnisms (pēc SAC skalas)</string>
     <string name="shared_string_release">Izlaists</string>
     <string name="favourites_context_menu_add">Pievienot izlasei</string>
     <string name="poi_action_delete">Izdzēst</string>
@@ -2517,7 +2517,7 @@ Aktivizējot spraudni, kartes stils tiek nomainīts uz \"Ziema un slēpošana,\"
     <string name="routing_attr_short_way_name">Ekonomiskais maršruts</string>
     <string name="routing_attr_short_way_description">Lietot ekonomisko maršrutu (parasti īsākais)</string>
     <string name="replace_favorite_confirmation">Vai nomainīt izlases vienību %1$s?</string>
-    <string name="rendering_attr_hideOverground_name">Virszemes objekti</string>
+    <string name="rendering_attr_hideOverground_name">Virszemes objektus</string>
     <string name="shared_string_change">Mainīt</string>
     <string name="get_started">Sākt</string>
     <string name="route_stops_before">%1$s apstāšanās pirms</string>
@@ -2665,9 +2665,9 @@ Apraksta laukumu: %1$s x %2$s</string>
     <string name="favorite_empty_place_name">Vieta</string>
     <string name="quick_action_showhide_favorites_descr">Spiežot darbības pogu, tiks rādīti vai slēpti favorīti.</string>
     <string name="quick_action_showhide_poi_descr">Spiežot darbības pogu, tiks rādīti vai slēpti POI.</string>
-    <string name="quick_action_showhide_favorites_title">Rādīt/nerādīt favorītus</string>
+    <string name="quick_action_showhide_favorites_title">Rādīt/nerādīt izlasi</string>
     <string name="quick_action_favorites_show">Rādīt favorītus</string>
-    <string name="quick_action_favorites_hide">Nerādīt favorītus</string>
+    <string name="quick_action_favorites_hide">Nerādīt izlasi</string>
     <string name="quick_action_showhide_poi_title">Rādīt/slēpt POI</string>
     <string name="quick_action_poi_show">Rādīt %1$s</string>
     <string name="quick_action_poi_hide">Paslēpt %1$s</string>
@@ -3088,4 +3088,10 @@ No Afganistānas līdz Zimbabvei, no Austrālijas līdz ASV, Argentīna, Brazīl
  • Optionāli ceļojuma ierakstīšana arī fona režīmā (kamēr ierīce atrodas miega režīmā)
  OsmAnd ir atvērtā koda un aktīvā izstrādē esoša aplikācija. Ikviens var piedalīties tā veidošanā, ziņojot par kļūdām, uzlabojot tulkojumus vai kodējot jaunas iespējas. Projekts atrodas patstāvīgā mijiedarbībā starp izstrādātājiem un aplikācijas lietotājiem. Tāpat arī projekta progress balstās uz finansiālajiem ziedojumiem aplikācijas kodēšanai un jauno iespēju testēšanai
  "</string>
+    <string name="shared_string_add_photos">Pievienot fotogrāfijas</string>
+    <string name="mapillary_action_descr">Pievienojiet savus ielas līmeņa attēlus ar Mapillary.</string>
+    <string name="mapillary_widget">Mapillary logrīks</string>
+    <string name="mapillary_widget_descr">Ātrā pieeja Mapillary</string>
+    <string name="mapillary_descr">Tiešsaistes ielas līmeņa fotoattēli jebkuram. Atklājiet vietas, līdzdaliet, iemūžiniet pasauli.</string>
+    <string name="mapillary">Mapillary</string>
     </resources>
