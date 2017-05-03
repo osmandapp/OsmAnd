@@ -2922,4 +2922,77 @@
 	<string name="poi_fire_hydrant_pressure">Hidranta spiediens</string>
 	<string name="poi_fire_hydrant_count">Hidrantu skaits</string>
 	<string name="poi_fire_hydrant_flow_capacity">Hidranta caurplūdes kapacitāte</string>
+	<string name="poi_fire_hydrant_position_sidewalk">Hidranta atrašanās vieta: uz trotuāra</string>
+	<string name="poi_fire_hydrant_position_green">Hidranta atrašanās vieta: mauriņš</string>
+	<string name="poi_fire_hydrant_position_lane">Hidranta atrašanās vieta: šoseja</string>
+	<string name="poi_fire_hydrant_position_parking_lot">Hidranta atrašanās vieta: parkings</string>
+	<string name="poi_fire_hydrant_position_street">Hidranta atrašanās vieta: iela</string>
+	<string name="poi_fire_hydrant_position_underground">"Hidranta atrašanās vieta:  zemē"</string>
+	<string name="poi_fire_hydrant_style_wsh">Hidranta stils: wsh</string>
+	<string name="poi_fire_hydrant_style_water_source_main">Galvenais</string>
+	<string name="poi_fire_hydrant_style_water_source_pond">Dīķis</string>
+	<string name="poi_fire_hydrant_style_water_source_stream">Caurplūde</string>
+	<string name="poi_fire_hydrant_style_water_source_cistern">Cisterna</string>
+	<string name="poi_in_service_yes">Lietošanā: jā</string>
+
+	<string name="poi_street_cabinet_power">Skapja tips: elektrība</string>
+	<string name="poi_street_cabinet_telecom">Skapja tips: telekomunikācijas</string>
+	<string name="poi_street_cabinet_cable_tv">Skapja tips: kabeļtelevīzija</string>
+	<string name="poi_street_cabinet_gas">Skapja tips: gāze</string>
+	<string name="poi_street_cabinet_postal_service">Skapja tips: pasts</string>
+	<string name="poi_street_cabinet_waste">Skapja tips: atkritumi</string>
+	<string name="poi_street_cabinet_water_management">Skapja tips: ūdens resursi</string>
+	<string name="poi_street_cabinet_street_lighting">Skapja tips: ielas apgaismojums</string>
+
+	<string name="poi_military_checkpoint">Militārais kontrolpunkts</string>
+
+	<string name="poi_bicycle_parking_lockers">Aizslēdzams</string>
+	<string name="poi_bicycle_parking_tree">Kokveida veloparkings</string>
+	<string name="poi_bicycle_parking_streetpod">Ielas novietne</string>
+
+	<string name="poi_depth">Dziļums</string>
+
+	<string name="poi_salt_yes">Sāls</string>
+	<string name="poi_salt_no">Sāls: nav</string>
+	<string name="poi_wheelchair_designated">Ar ratiņkrēsliem</string>
+	<string name="poi_spoil_heap">Raktuvju grēda</string>
+	
+	<string name="poi_summer_camp">Vasaras nometne</string>
+	<string name="poi_recreation_center">Atpūtas komplekss</string>
+
+	<string name="poi_crossing_activation_automatic">Šķērsošanas aktivizācija: automātiska</string>
+	<string name="poi_crossing_activation_local">Šķērsošanas aktivizācija: uz vietas</string>
+	<string name="poi_crossing_activation_remote">Šķērsošanas aktivizācija: no attāluma</string>
+	<string name="poi_crossing_barrier_no">Šķērsošanas barjera: nav</string>
+	<string name="poi_crossing_barrier_yes">Šķērsošanas barjera</string>
+	<string name="poi_crossing_barrier_full">Šķērsošanas barjera: pilna garuma</string>
+	<string name="poi_crossing_barrier_half">Šķērsošanas barjera: puse garuma</string>
+	<string name="poi_crossing_barrier_double_half">Šķērsošanas barjera: divas pusgaruma</string>
+	<string name="poi_crossing_bell_yes">Šķērsošanas skaņas signāls</string>
+	<string name="poi_crossing_bell_no">Šķērsošanas skaņas signāls: nav</string>
+	<string name="poi_crossing_light_yes">Šķērsošanas luksofors</string>
+	<string name="poi_crossing_light_no">Šķērsošanas luksofors: nav</string>
+	<string name="poi_crossing_on_demand_yes">Šķērsošana pēc pieprasījuma</string>
+	<string name="poi_crossing_on_demand_no">Šķērsošana pēc pieprasījuma: nav</string>
+	<string name="poi_crossing_saltire_yes">Šķērsošanas simbols</string>
+	<string name="poi_crossing_saltire_no">Šķērsošanas simbols: nav</string>
+	<string name="poi_crossing_supervision_yes">Šķērsošanas novērošana</string>
+	<string name="poi_crossing_supervision_no">Šķērsošanas novērošana: nav</string>
+	<string name="poi_crossing_supervision_attendant">Šķērsošanas novērošana: kārtībnieks</string>
+	<string name="poi_crossing_supervision_camera">Šķērsošanas novērošana: kamera</string>
+
+	<string name="poi_dispensing_yes">Jā</string>
+	<string name="poi_dispensing_no">Recepšu zāles: nav</string>
+
+	<string name="poi_aerodrome_type_international">Starptautiskā</string>
+	<string name="poi_aerodrome_type_regional">Reğionālā</string>
+	<string name="poi_aerodrome_type_public">Publiskā</string>
+	<string name="poi_aerodrome_type_military">Militārā</string>
+	<string name="poi_aerodrome_type_military_public">Militārā/publiskā</string>
+	<string name="poi_aerodrome_type_private">Privātā</string>
+
+	<string name="poi_valley_balka">Balkas ieleja</string>
+
+	<string name="poi_ventilation_shaft">Ventilācijas šahta</string>
+
 	</resources>
