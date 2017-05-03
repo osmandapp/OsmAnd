@@ -107,6 +107,10 @@ public class MenuBuilder {
 		return app;
 	}
 
+	public MapActivity getMapActivity() {
+		return mapActivity;
+	}
+
 	public LatLon getLatLon() {
 		return latLon;
 	}
