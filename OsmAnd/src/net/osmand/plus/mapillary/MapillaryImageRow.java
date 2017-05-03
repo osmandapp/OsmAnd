@@ -2,6 +2,7 @@ package net.osmand.plus.mapillary;
 
 import android.graphics.Bitmap;
 import android.os.AsyncTask;
+import android.support.annotation.NonNull;
 import android.support.v4.view.PagerAdapter;
 import android.support.v4.view.ViewPager;
 import android.view.LayoutInflater;
@@ -14,16 +15,22 @@ import android.widget.TextView;
 
 import net.osmand.AndroidNetworkUtils;
 import net.osmand.AndroidUtils;
+import net.osmand.data.LatLon;
+import net.osmand.data.RotatedTileBox;
+import net.osmand.plus.LockableViewPager;
 import net.osmand.plus.OsmandApplication;
 import net.osmand.plus.R;
 import net.osmand.plus.mapcontextmenu.MenuBuilder;
 import net.osmand.util.Algorithms;
+import net.osmand.util.MapUtils;
 
 import org.json.JSONArray;
 import org.json.JSONException;
 import org.json.JSONObject;
 
 import java.util.ArrayList;
+import java.util.Collections;
+import java.util.Comparator;
 import java.util.LinkedHashMap;
 import java.util.List;
 import java.util.Map;
@@ -40,6 +47,7 @@ public class MapillaryImageRow {
 	private boolean downloadingImages;
 	private boolean updatingInfoInterrupted;
 	private boolean downloadingImagesInterrupted;
+	private LockableViewPager viewPager;
 	private ViewsPagerAdapter pagerAdapter;
 	private int dp10;
 	private boolean updated;
@@ -57,8 +65,11 @@ public class MapillaryImageRow {
 		this.downloadingImages = imageRow.downloadingImages;
 		this.updatingInfoInterrupted = imageRow.updatingInfoInterrupted;
 		this.downloadingImagesInterrupted = imageRow.downloadingImagesInterrupted;
-		this.imageInfoList.addAll(imageRow.imageInfoList);
-		this.updated = true;
+		imageInfoList.addAll(imageRow.imageInfoList);
+		sortImagesInfo(imageInfoList,
+				menuBuilder.getMapActivity().getMapView().getCurrentRotatedTileBox().getRotate(),
+				menuBuilder.getLatLon());
+		updated = true;
 	}
 
 	public MenuBuilder getMenuBuilder() {
@@ -70,7 +81,7 @@ public class MapillaryImageRow {
 	}
 
 	public void build() {
-		ViewPager viewPager = new ViewPager(view.getContext());
+		viewPager = new LockableViewPager(view.getContext());
 		ViewPager.LayoutParams params = new ViewPager.LayoutParams();
 		params.width = ViewGroup.LayoutParams.MATCH_PARENT;
 		params.height = (int) app.getResources().getDimension(R.dimen.mapillary_card_height) + dp10 + dp10;
@@ -80,6 +91,7 @@ public class MapillaryImageRow {
 		viewPager.setClipToPadding(false);
 		pagerAdapter = new ViewsPagerAdapter();
 		viewPager.setAdapter(pagerAdapter);
+		viewPager.setSwipeLocked(imageInfoList.size() == 0);
 		((LinearLayout) view).addView(viewPager);
 
 		if (!updated) {
@@ -184,12 +196,17 @@ public class MapillaryImageRow {
 
 	private class GetImageInfoTask extends AsyncTask<Void, MapillaryImageInfo, List<MapillaryImageInfo>> {
 
+		private RotatedTileBox tb;
+		private LatLon menuLatLon;
+
 		@Override
 		protected void onPreExecute() {
 			updatingInfoInterrupted = false;
 			if (!menuBuilder.isHidden()) {
 				updatingInfo = true;
 				pagerAdapter.notifyDataSetChanged();
+				tb = menuBuilder.getMapActivity().getMapView().getCurrentRotatedTileBox().copy();
+				menuLatLon = menuBuilder.getLatLon();
 			}
 		}
 
@@ -198,10 +215,18 @@ public class MapillaryImageRow {
 			// https://a.mapillary.com/v3/images/?lookat=12.9981086701,55.6075236275&closeto=13.0006076843,55.6089295863&radius=20&client_id=LXJVNHlDOGdMSVgxZG5mVzlHQ3ZqQTo0NjE5OWRiN2EzNTFkNDg4
 			List<MapillaryImageInfo> result = new ArrayList<>();
 			try {
+				LatLon l1 = tb.getLatLonFromPixel(0, 0);
+				LatLon l2 = tb.getLatLonFromPixel(dp10 * 2, dp10 * 2);
+				int radius = Math.max(20, (int) MapUtils.getDistance(l1, l2));
+				radius = Math.min(500, radius);
+				//float mx = tb.getPixXFromLatLon(menuLatLon.getLatitude(), menuLatLon.getLongitude());
+				//float my = tb.getPixYFromLatLon(menuLatLon.getLatitude(), menuLatLon.getLongitude());
+				//LatLon lookAt = tb.getLatLonFromPixel(mx, my - dp10);
+
 				final Map<String, String> pms = new LinkedHashMap<>();
-				//pms.put("lookat", Version.getFullVersion(app));
-				pms.put("closeto", "" + menuBuilder.getLatLon().getLongitude() + "," + menuBuilder.getLatLon().getLatitude());
-				pms.put("radius", "20");
+				//pms.put("lookat", "" + lookAt.getLongitude() + "," + lookAt.getLatitude());
+				pms.put("closeto", "" + menuLatLon.getLongitude() + "," + menuLatLon.getLatitude());
+				pms.put("radius", "" + radius);
 				pms.put("client_id", "LXJVNHlDOGdMSVgxZG5mVzlHQ3ZqQTo0NjE5OWRiN2EzNTFkNDg4");
 				String response = AndroidNetworkUtils.sendRequest(app, "https://a.mapillary.com/v3/images", pms,
 						"Requesting mapillary images...", false, false);
@@ -232,6 +257,7 @@ public class MapillaryImageRow {
 			} catch (Exception e) {
 				e.printStackTrace();
 			}
+			sortImagesInfo(result, tb.getRotate(), menuLatLon);
 			return result;
 		}
 
@@ -241,11 +267,33 @@ public class MapillaryImageRow {
 			if (!menuBuilder.isHidden()) {
 				imageInfoList.addAll(infoList);
 				pagerAdapter.notifyDataSetChanged();
+				viewPager.setSwipeLocked(imageInfoList.size() == 0);
 				if (imageInfoList.size() > 0) {
 					new DownloadImagesTask().execute();
 				}
 			}
 		}
+	}
+
+	private void sortImagesInfo(List<MapillaryImageInfo> infoList, final float azimuth, final LatLon menuLatLon) {
+		Collections.sort(infoList, new Comparator<MapillaryImageInfo>() {
+
+			@Override
+			public int compare(MapillaryImageInfo i1, MapillaryImageInfo i2) {
+				int res = 0;
+				if (!Double.isNaN(i1.getCa()) && !Double.isNaN(i2.getCa()) && menuLatLon != null) {
+					float a1 = Math.abs(MapUtils.unifyRotationDiff(azimuth, (float) i1.getCa()));
+					float a2 = Math.abs(MapUtils.unifyRotationDiff(azimuth, (float) i2.getCa()));
+					res = a1 < a2 ? -1 : (a1 == a2 ? 0 : 1);
+				}
+				if (res == 0 && i1.getCoordinates() != null && i2.getCoordinates() != null) {
+					double d1 = MapUtils.getDistance(menuLatLon, i1.getCoordinates());
+					double d2 = MapUtils.getDistance(menuLatLon, i2.getCoordinates());
+					res = Double.compare(d1, d2);
+				}
+				return res;
+			}
+		});
 	}
 
 	private class DownloadImagesTask extends AsyncTask<Void, Void, Void> {
