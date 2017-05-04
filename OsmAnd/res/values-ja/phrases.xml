@@ -2745,4 +2745,91 @@
 	<string name="poi_architecture_umgebinde">建築様式:umgebinde</string>
 	<string name="poi_architect_name">建築家</string>
 
+	<string name="poi_architecture_timber_frame">建築様式:木造建築</string>
+	<string name="poi_architecture_art_nouveau">建築様式:アール・ヌーヴォー</string>
+	<string name="poi_architecture_neoclassicism">建築様式:スターリン主義建築</string>
+	<string name="poi_architecture_victorian">建築様式:ビクトリア朝建築</string>
+	<string name="poi_architecture_brutalism">建築様式:ブルータリズム</string>
+	<string name="poi_architecture_classicism">建築様式:新古典主義建築</string>
+	<string name="poi_architecture_gothic">建築様式:ゴシック建築</string>
+	<string name="poi_architecture_baroque">建築様式:バロック建築</string>
+	<string name="poi_architecture_postconstructivism">建築様式:ポストモダン構成主義</string>
+	<string name="poi_architecture_wilhelminian_style">建築様式:ヴィルヘルムスタイル建築</string>
+	<string name="poi_architecture_renaissance">建築様式:ネオルネッサンス建築</string>
+	<string name="poi_architecture_romanesque">建築様式:ロマネスク建築</string>
+
+	<string name="poi_architecture_oldrussian">建築様式:ロシア建築</string>
+	<string name="poi_tunnel_waterway">排水トンネル</string>
+	<string name="poi_tunnel_car">道路トンネル</string>
+	<string name="poi_tunnel_pedestrian">歩行者用トンネル</string>
+	<string name="poi_tunnel_railway">鉄道トンネル</string>
+	<string name="poi_bridge_pedestrian">歩行橋</string>
+	<string name="poi_bridge_car">道路橋</string>
+	<string name="poi_bridge_bicycle">自転車橋</string>
+	<string name="poi_bridge_railway">鉄道橋</string>
+	<string name="poi_bridge_waterway">水道橋</string>
+	<string name="poi_bridge_structure_beam">橋構造:桁橋</string>
+	<string name="poi_bridge_structure_simple_suspension">橋構造:簡易吊り橋</string>
+	<string name="poi_bridge_structure_arch">橋構造:アーチ式</string>
+	<string name="poi_bridge_structure_suspension">橋構造:吊り橋</string>
+	<string name="poi_bridge_structure_truss">橋構造:トラス式</string>
+	<string name="poi_bridge_structure_floating">橋構造:浮体橋</string>
+	<string name="poi_bridge_structure_simple_wooden">橋構造:簡易木造橋</string>
+	<string name="poi_bridge_structure_cable_stayed">橋構造:斜張橋</string>
+	<string name="poi_bridge_structure_viaduct">橋構造:高架橋</string>
+	<string name="poi_bridge_structure_humpback">橋構造:ハンプバック橋</string>
+	<string name="poi_bridge_structure_boardwalk">橋構造:木道橋</string>
+	<string name="poi_bridge_structure_aqueduct">橋構造:水道橋</string>
+	<string name="poi_bridge_structure_log">橋構造:丸太橋</string>
+	<string name="poi_bridge_type_movable">橋構造:可動橋</string>
+	<string name="poi_bridge_movable_bascule">可動橋種類:跳開橋(跳ね橋)</string>
+	<string name="poi_bridge_movable_swing">可動橋種類:旋回橋</string>
+	<string name="poi_bridge_movable_lift">可動橋種類:昇開橋</string>
+	<string name="poi_bridge_movable_drawbridge">可動橋種類:つり上げ橋</string>
+	<string name="poi_bridge_movable_submersible">可動橋種類:降開橋</string>
+	<string name="poi_bridge_movable_transporter">可動橋種類:運搬橋</string>
+	<string name="poi_bridge_movable_retractable">可動橋種類:引込橋</string>
+
+	<string name="poi_lit_yes">照明:有り</string>
+	<string name="poi_lit_no">照明:無し</string>
+
+	<string name="poi_route_bus_ref">バス</string>
+	<string name="poi_route_share_taxi_ref">共有タクシー(Share taxi)</string>
+	<string name="poi_route_trolleybus_ref">トロリーバス</string>
+	<string name="poi_route_tram_ref">路面電車</string>
+	<string name="poi_route_train_ref">鉄道</string>
+	<string name="poi_route_monorail_ref">モノレール</string>
+	<string name="poi_route_light_rail_ref">ライトレール</string>
+	<string name="poi_route_ferry_ref">フェリー</string>
+
+	<string name="poi_route_funicular_ref">ケーブルカー・登山鉄道</string>
+	<string name="poi_route_railway_ref">鉄道</string>
+
+	<string name="poi_surveillance_yes">監視装置:有り</string>
+	<string name="poi_training_language">教室:語学</string>
+	<string name="poi_training_music">教室:音楽</string>
+	<string name="poi_training_dance">教室:ダンス</string>
+	<string name="poi_training_sport">教室:スポーツ</string>
+	<string name="poi_training_art">教室:アート</string>
+	<string name="poi_training_cooking">教室:料理</string>
+	<string name="poi_training_computer">教室:コンピューター</string>
+	<string name="poi_training_yoga">教室:ヨガ</string>
+	<string name="poi_training_martial_art">教室:武術</string>
+	<string name="poi_training_aviation">教室:航空</string>
+	<string name="poi_training_hairdressing">教室:理髪</string>
+
+	<string name="poi_monument_yes">記念樹(Monumental object)</string>
+
+	<string name="poi_industrial_wellsite">種類:坑井現場</string>
+	<string name="poi_industrial_oil">種類:石油産業</string>
+	<string name="poi_industrial_factory">種類:</string>
+	<string name="poi_industrial_gas">種類:ガス産業</string>
+	<string name="poi_industrial_timber">種類:木材産業</string>
+	<string name="poi_industrial_refinery">種類:</string>
+	<string name="poi_industrial_warehouse">種類:倉庫</string>
+	<string name="poi_industrial_auto_wrecker">種類:ジャンクヤード(車両解体業)</string>
+	<string name="poi_industrial_brewery">種類:ビール工場</string>
+	<string name="poi_industrial_agriculture">種類:農業</string>
+	<string name="poi_industrial_brickyard">種類:レンガ工場</string>
+	<string name="poi_industrial_intermodal_freight_terminal">種類:複合輸送ターミナル</string>
 	</resources>
