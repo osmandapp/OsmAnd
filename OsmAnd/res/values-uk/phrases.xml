@@ -2441,4 +2441,19 @@
 	<string name="poi_cuisine_salad">Салат</string>
 	<string name="poi_gambling">Місце для азартних ігор</string>
 
+	<string name="poi_payment_paypal_yes">PayPal</string>
+	<string name="poi_payment_paypal_no">Оплата через PayPal не приймається</string>
+	<string name="poi_payment_u_key_yes">U-Key</string>
+	<string name="poi_payment_u_key_no">U-Key не приймається</string>
+	<string name="poi_vending_parcel_pickup_mail_in">Отримання і доставка посилок</string>
+	<string name="poi_bridge_structure_simple_wooden">Конструкція моста: простий дерев’яний</string>
+	<string name="poi_bridge_structure_viaduct">Конструкція моста: віадук</string>
+	<string name="poi_quango">Квазіавтономна неурядова організація</string>
+	<string name="poi_health_specialty_obstetrics_postnatal_no">Спеціалізація: акушерство (післяпологове): відсутнє</string>
+	<string name="poi_compressed_air_no">Без підкачки шин</string>
+
+	<string name="poi_telescope_usage_research">Призначення: дослідження</string>
+
+	<string name="poi_cuisine_frozen_yogurt">Заморожений йогурт</string>
+	<string name="poi_gambling_type">Тип</string>
 	</resources>
