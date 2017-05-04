@@ -2592,9 +2592,9 @@
 
 	<string name="poi_min_age">Minimalny wiek</string>
 
-	<string name="poi_organic_yes">Ekologiczna żywność: dostępna</string>
-	<string name="poi_organic_no">Ekologiczna żywność: brak</string>
-	<string name="poi_organic_only">Tylko ekologiczna żywność</string>
+	<string name="poi_organic_yes">dostępna</string>
+	<string name="poi_organic_no">brak</string>
+	<string name="poi_organic_only">tylko</string>
 
 	<string name="poi_diaper_table_count">Stołów do przewijania pieluch</string>
 
@@ -3389,5 +3389,7 @@
 <string name="poi_resort_kids_camp">Pensjonat kolonijny</string>
 	<string name="poi_music_school">Szkoła muzyczna</string>
 	<string name="poi_language_school">Szkoła językowa</string>
+
+<string name="poi_life_ring">Koło ratunkowe</string>
 
 </resources>
