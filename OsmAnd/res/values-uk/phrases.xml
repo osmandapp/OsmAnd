@@ -2456,4 +2456,26 @@
 
 	<string name="poi_cuisine_frozen_yogurt">Заморожений йогурт</string>
 	<string name="poi_gambling_type">Тип</string>
+	<string name="poi_payment_token_yes">Жетони</string>
+	<string name="poi_vending_condoms">Презервативи</string>
+	<string name="poi_bridge_structure_aqueduct">Конструкція мосту: акведук</string>
+	<string name="poi_consulting">Консультації</string>
+	<string name="poi_health_specialty_obstetrics_antenatal_yes">Акушерство (допологове)</string>
+	<string name="poi_car_wash_yes">Так</string>
+
+	<string name="poi_observatory_type_espionage">Призначення: шпигунство</string>
+	<string name="poi_cuisine_fried_food">Смажена їжа</string>
+	<string name="poi_gambling_lottery">Лотерея</string>
+	<string name="poi_payment_token_no">Жетони не приймаються</string>
+	<string name="poi_vending_stamps">Марки</string>
+	<string name="poi_bridge_structure_log">Конструкція моста: колода</string>
+	<string name="poi_cooperative">Офіс кооперативу</string>
+	<string name="poi_health_specialty_obstetrics_antenatal_no">Спеціалізація: акушерство (допологове): відсутнє</string>
+	<string name="poi_vacuum_cleaner_yes">Так</string>
+	<string name="poi_observatory_type_meteorological">Метеорологічна</string>
+	<string name="poi_cuisine_yogurt">Йогурт</string>
+	<string name="poi_gambling_pachinko">Пачинко</string>
+	<string name="poi_payment_gift_card_yes">Подарункові картки</string>
+	<string name="poi_vending_bicycle_tube">Велосипедні камери</string>
+	<string name="poi_bridge_type_movable">Тип моста: розвідний</string>
 	</resources>
