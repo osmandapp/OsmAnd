@@ -3027,9 +3027,9 @@
 	<string name="poi_mdf">Red de distribución principal (MDF)</string>
 	<string name="poi_min_age">Edad mínima</string>
 
-	<string name="poi_organic_yes">Comida orgánica: sí</string>
-	<string name="poi_organic_no">Comida orgánica: no</string>
-	<string name="poi_organic_only">Solo comida orgánica</string>
+	<string name="poi_organic_yes">Sí</string>
+	<string name="poi_organic_no">No</string>
+	<string name="poi_organic_only">Sólo</string>
 
 	<string name="poi_traffic_mirror">Espejo de tráfico</string>
 
