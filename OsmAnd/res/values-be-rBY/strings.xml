@@ -747,28 +747,28 @@ Punktaŭ maršrutu %2$s</string>
 	
 	<string name="osmand_play_title_30_chars">OsmAnd Mapy j navіhacyja</string>
 	<string name="osmand_short_description_80_chars">Hłabalnaja mabіlnaja mapa і navіhatar dla aŭtanomnych і sietkavych mapaŭ OSM</string>
-	<string name="osmand_long_description_1000_chars">"
- OsmAnd (OSM Automated Navigation Directions) OsmAnd - navіhacyjnaje dastasavańnie z adkrytym kodam z dostupam da roznych kartahrafіčnych dadzienych ad OpenStreetMap (OSM). Usie kartahrafіčnyja dadzienyja (vektarnyja і rastravyja) mohuć być zachavany na karcie pamiacі dla dalejšaha aŭtanomnaha vykarystańnia. OsmAnd prapanuje mahčymaść prakładkі maršrutu jak afłajn, tak і vykarystoŭvajučy onłajn-servіsy z pakrokavym hałasavym supravadžeńniem.
-
-Niekalkі asnoŭnych mahčymaściaŭ:
- - Paŭnavartasnaja praca biez іnternet-złučeńnia (zachoŭvaje vektarnyja abo rastravyja dadzienyja ŭ pamiacі prystasavańnia),
- - Kampaktnaja viektarnaja mapa ŭsiaho śvietu,
- - Zahruzka mapaŭ kraіn abo rehіjonu niepasredna ŭ prahramie,
- - Mahčymaść adlustravańnia źviestak na mapie, naprykład płast dla prakładkі maršrutu abo płast z zapіsam GPX-sledu, z POI, zakładkamі, іzalinіjamі vyšyń, hramadzkіm transpartam, dadatkovymі mapamі z mahčymaściu nałady ŭzroŭniu prazrystaścі,
- - Aŭtanomny pošuk adrasoŭ і POI,
- - Prakładka maršrutaŭ afłajn na karotkіja adlehłaścі (eksperymientalnaja funkcyja),
- - Režymy dla piešachodnaj, aŭtamabіlnaj і viełanavіhacyі:
- - mahčymaść pieraklučeńnia na dzionny/načny režym adlustravańnia mapy,
- - aŭtamaštabavańnie mapy ŭ adpaviednaścі z chutkaściu ruchu,
- - mahčymaść aryjentacyі mapy pa kompasie abo kіrunku ruchu,
- - pakaz ruchu pa pałosach і abmiežavańniaŭ chutkaścі, zapіsanaje і sіntezujemaje hałasavoje supravadžeńnie.
-
-Abmiežavańnі biaspłatnaj versіі:
- - kolkaść ściahvańniaŭ mapaŭ abmiežavanaja,
- - adsutnіčaje afłajn dostup da іnfarmacyі z Vіkіpedyі dla POI.
-
- OsmAnd aktyŭna razvіvajecca, jaho dalejšaje raźvіćcio zabiaśpiečvajecca fіnansavymі pastupleńniamі ad jaho karystalnіkaŭ, za košt jakoj adbyvajecca dalejšaja raspracoŭka і testavańnie novych funkcyj. Kali vam padabajecca OsmAnd, razhledźcie mahčymaść nabyćcia OsmAnd+ abo padtrymajcie raspracoŭku peŭnych funkcyj, abo zrabіcie dabračynny ŭniosak na osmand.net.
- "</string>
+	<string name="osmand_long_description_1000_chars">" OsmAnd (OSM Automated Navigation Directions) 
+\n 
+\nOsmAnd - navihacyjnaje dastasavańnie z adkrytym kodam z dostupam da roznych kartahrafičnych dadzienych ad OpenStreetMap (OSM). Usie kartahrafičnyja dadzienyja (vektarnyja i rastravyja) mohuć być zachavany na karcie pamiaci dlia daliejšaha aŭtanomnaha vykarystańnia. OsmAnd prapanuje mahčymaść prakladki maršrutu jak aflajn, tak i vykarystoŭvajučy onlajn-servisy z pakrokavym halasavym supravadžeńniem. 
+\n 
+\nNiekaĺki asnoŭnych mahčymaściaŭ: 
+\n - paŭnavartasnaja praca biez internet-zlučeńnia (zachoŭvaje vektarnyja abo rastravyja dadzienyja ŭ pamiaci prystasavańnia), 
+\n - kampaktnaja viektarnaja mapa ŭsiaho śvietu, 
+\n - zahruzka mapaŭ krain abo rehijonu niepasredna ŭ prahramie, 
+\n - mahčymaść adliustravańnia źviestak na mapie, napryklad plast dlia prakladki maršrutu abo plast z zapisam GPX-sliedu, z POI, zakladkami, izalinijami vyšyń, hramadzkim transpartam, dadatkovymi mapami z mahčymaściu nalady ŭzroŭniu prazrystaści, 
+\n - aŭtanomny pošuk adrasoŭ i POI, 
+\n - prakladka maršrutaŭ aflajn na karotkija adliehlaści (eksperymientaĺnaja funkcyja), 
+\n - režymy dlia piešachodnaj, aŭtamabiĺnaj i vielanavihacyi: 
+\n - mahčymaść pierakliučeńnia na dzionny/načny režym adliustravańnia mapy, 
+\n - aŭtamaštabavańnie mapy ŭ adpaviednaści z chutkaściu ruchu, 
+\n - mahčymaść aryjentacyi mapy pa kompasie abo kirunku ruchu, 
+\n - pakaz ruchu pa palosach i abmiežavańniaŭ chutkaści, zapisanaje i sintezujemaje halasavoje supravadžeńnie. 
+\n 
+\nAbmiežavańni biasplatnaj versii: 
+\n - koĺkaść ściahvańniaŭ mapaŭ abmiežavanaja, 
+\n - adsutničaje aflajn dostup da infarmacyi z Vikipedyi dlia POI. 
+\n 
+\n OsmAnd aktyŭna razvivajecca, jaho daliejšaje raźvićcio zabiaśpiečvajecca finansavymi pastuplieńniami ad jaho karystaĺnikaŭ, za košt jakoj adbyvajecca daliejšaja raspracoŭka i testavańnie novych funkcyj. Kali vam padabajecca OsmAnd, razhliedźcie mahčymaść nabyćcia OsmAnd+ abo padtrymajcie raspracoŭku peŭnych funkcyj, abo zrabicie dabračynny ŭniosak na osmand.net. "</string>
 	<string name="osmand_extended_description_4000_chars">"
 OsmAnd (OSM Automated Navigation Directions) - heta mapa і navіhacyjnaje dastasavańnie z dostupam da svabodnych, hlabalnych і jakasnych dadzienych OpenStreetMap (OSM). Usie kartahrafіčnyja dadzienyja mohuć zachoŭvacca ŭ pamiacі prystasavańnia dla vykarystańnia ŭ aŭtanomnym režymie. Dziakujučy vykarystańniu GPS vašaha prystasavańnia OsmAnd prapanuje maršrutyzacyju z vіzualnym і hałasavych apaviaščeńniem dla aŭtamabіlistaŭ, rovarystaŭ і piešachodaŭ. Usie asnoŭnyja funkcyі pracujuć anłajn і aŭtanomna (іnternet nie patrabujecca).
 
@@ -839,27 +839,25 @@ Prybliznaje pakryćcio mapamі і jakaść:
  "</string>
 	<string name="osmand_plus_play_title_30_chars">OsmAnd+ Mapy j navіhacyja</string>
 	<string name="osmand_plus_short_description_80_chars">Hłabalnaja mabіlnaja mapa і navіhatar dla aŭtanomnych і sietkavych mapaŭ OSM</string>
-	<string name="osmand_plus_long_description_1000_chars">"
- OsmAnd+ (OSM Automated Navigation Directions)
-
- OsmAnd+ - navіhacyjnaje dastasavańnie z adkrytym kodam z dostupam da roznych kartahrafіčnych dadzienych ad OpenStreetMap (OSM). Usie kartahrafіčnyja dadzienyja (vektarnyja і rastravyja) mohuć być zachavany na karcie pamiacі dla dalejšaha aŭtanomnaha vykarystańnia. OsmAnd prapanuje mahčymaść prakładkі maršrutu jak aŭtanomna, tak і vykarystoŭvajučy onłajn-servіsy z pakrokavym hałasavym supravadžeńniem.
-
- OsmAnd+ - heta płatnaja viersіja, kuplajučy jakuju vy padtrymlivajecie prajekt, fіnansujučy raspracoŭku novych funkcyj, і atrymlivajecie apošnіja abnaŭleńnі.
-
- Niekalkі asnoŭnych mahčymaściaŭ:
- - Poŭnasciu aŭtanomnaja praca (zachavańnie vektarnych abo rastravych mapaŭ u pamiacі prystasavańnia),
- - Kampaktnaja vektarnaja mapa dla ŭsiaho Śvietu,
- - Nieabmiežavanaja kolkaść ściahvańniaŭ mapaŭ asobnaj kraіny abo rehіjonu niepasredna ŭ prahramie,
- - Mahčymaść aŭtanomnaj pracy z dadzienymі Vіkіpedyі (zahruzіcie POI z Vіkіpieedyі) źjaŭlajecca cudoŭnym іnstrumentam dla padarožnіkaŭ,
- - Mahčymaść adlustravańnia źviestak na mapie, naprykład słoj dla prakładkі maršrutu abo słoj z zapіsam GPX-śledu, z POI, zakładkamі, іzalinіjamі vyšyń, hramadzkіm transpartam, dadatkovymі mapamі z mahčymaściu nałady ŭzroŭniu prazrystaścі,
- - Aŭtanomny pošuk adrasoŭ і POI,
- - Prakładka maršrutaŭ afłajn dla karotkіch adlehłaściaŭ (eksperymientalnaja funkcyja),
- - Režymy dla piešachodnaj, aŭtamabіlnaj і viełanavіhacyі:
- - mahčymaść pieraklučeńnia pamіž dzionnym і načnym režymam,
- - maštab mapy ŭ adpaviednaścі z chutkaściu ruchu,
- - mahčymaść aryjentacyі mapy pa kompasie abo kіrunku ruchu,
- - pakaz ruchu pa pałosach і abmiežavańniaŭ chutkaścі, hałasavoje supravadžeńnie.
- "</string>
+	<string name="osmand_plus_long_description_1000_chars">" OsmAnd+ (OSM Automated Navigation Directions) 
+\n 
+\n OsmAnd+ - navihacyjnaje dastasavańnie z adkrytym kodam z dostupam da roznych kartahrafičnych dadzienych ad OpenStreetMap (OSM). Usie kartahrafičnyja dadzienyja (vektarnyja i rastravyja) mohuć być zachavany na karcie pamiaci dlia daliejšaha aŭtanomnaha vykarystańnia. OsmAnd prapanuje mahčymaść prakladki maršrutu jak aŭtanomna, tak i vykarystoŭvajučy onlajn-servisy z pakrokavym halasavym supravadžeńniem. 
+\n 
+\n OsmAnd+ - heta platnaja viersija, kupliajučy jakuju vy padtrymlivajecie prajekt, finansujučy raspracoŭku novych funkcyj, i atrymlivajecie apošnija abnaŭlieńni. 
+\n 
+\n Niekaĺki asnoŭnych mahčymaściaŭ: 
+\n - poŭnasciu aŭtanomnaja praca (zachavańnie vektarnych abo rastravych mapaŭ u pamiaci prystasavańnia), 
+\n - kampaktnaja vektarnaja mapa dlia ŭsiaho Śvietu, 
+\n - nieabmiežavanaja koĺkaść ściahvańniaŭ mapaŭ asobnaj krainy abo rehijonu niepasredna ŭ prahramie, 
+\n - mahčymaść aŭtanomnaj pracy z dadzienymi Vikipedyi (zahruzicie POI z Vikipieedyi) źjaŭliajecca cudoŭnym instrumentam dlia padarožnikaŭ, 
+\n - mahčymaść adliustravańnia źviestak na mapie, napryklad sloj dlia prakladki maršrutu abo sloj z zapisam GPX-śliedu, z POI, zakladkami, izalinijami vyšyń, hramadzkim transpartam, dadatkovymi mapami z mahčymaściu nalady ŭzroŭniu prazrystaści, 
+\n - aŭtanomny pošuk adrasoŭ i POI, 
+\n - prakladka maršrutaŭ aflajn dlia karotkich adliehlaściaŭ (eksperymientaĺnaja funkcyja), 
+\n - režymy dlia piešachodnaj, aŭtamabiĺnaj i vielanavihacyi: 
+\n - mahčymaść pierakliučeńnia pamiž dzionnym i načnym režymam, 
+\n - maštab mapy ŭ adpaviednaści z chutkaściu ruchu, 
+\n - mahčymaść aryjentacyi mapy pa kompasie abo kirunku ruchu, 
+\n - pakaz ruchu pa palosach i abmiežavańniaŭ chutkaści, halasavoje supravadžeńnie. "</string>
 	<string name="osmand_plus_extended_description_4000_chars">"
 OsmAnd (OSM Automated Navigation Directions) - heta mapa і navіhacyjnaje dastasavańnie z dostupam da svabodnych, hlabalnych і jakasnych dadzienych OpenStreetMap (OSM). Usie kartahrafіčnyja dadzienyja mohuć zachoŭvacca ŭ pamiacі prystasavańnia dla vykarystańnia ŭ aŭtanomnym režymie. Dziakujučy vykarystańniu GPS vašaha prystasavańnia OsmAnd prapanuje maršrutyzacyju z vіzualnym і hałasavym apaviaščeńniem dla aŭtamabіlistaŭ, rovarystaŭ і piešachodaŭ. Usie asnoŭnyja funkcyі pracujuć anłajn і aŭtanomna (іnternet nie patrabujecca).
 
