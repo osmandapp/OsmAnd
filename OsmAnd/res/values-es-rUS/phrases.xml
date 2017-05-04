@@ -2793,9 +2793,9 @@
 
 	<string name="poi_min_age">Edad mínima</string>
 
-	<string name="poi_organic_yes">incluida</string>
-	<string name="poi_organic_no">no incluida</string>
-	<string name="poi_organic_only">solamente</string>
+	<string name="poi_organic_yes">Sí</string>
+	<string name="poi_organic_no">No</string>
+	<string name="poi_organic_only">Solamente</string>
 
 	<string name="poi_traffic_mirror">Espejo de tráfico</string>
 

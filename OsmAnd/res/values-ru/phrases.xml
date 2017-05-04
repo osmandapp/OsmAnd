@@ -3103,9 +3103,9 @@
 	<string name="poi_mdf">Главный кросс</string>
 	<string name="poi_min_age">Минимальный возраст</string>
 
-	<string name="poi_organic_yes">Биопродукты: есть</string>
-	<string name="poi_organic_no">Биопродукты: отсутствуют</string>
-	<string name="poi_organic_only">Только биопродукты</string>
+	<string name="poi_organic_yes">Есть</string>
+	<string name="poi_organic_no">Отсутствуют</string>
+	<string name="poi_organic_only">Исключительно</string>
 
 	<string name="poi_traffic_mirror">Дорожное зеркало</string>
 
@@ -3386,5 +3386,7 @@
 	<string name="poi_resort_kids_camp">Детский лагерь</string>
 	<string name="poi_music_school">Музыкальная школа</string>
 	<string name="poi_language_school">Школа иностранных языков</string>
+
+	<string name="poi_life_ring">Спасательный круг</string>
 
 </resources>

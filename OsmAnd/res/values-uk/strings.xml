@@ -3060,4 +3060,9 @@ Facebook: https://www.facebook.com/osmandapp
 \nОтримайте надійний навігатор у Вашій країні — будь то Україна, Франція, Німеччина, Мексика, Великобританія, Іспанія, Нідерланди, США, Росія, Бразилія чи будь-яка інша.
 \n "</string>
     <string name="save_poi_too_many_uppercase">Назва містить занадто багато заголовних букв. Ви хочете продовжити?</string>
+    <string name="shared_string_add_photos">Додати фотографії</string>
+    <string name="mapillary_action_descr">Поділитися своїми вуличними видами цієї місцевості з Mapillary.</string>
+    <string name="mapillary_widget">Віджет Mapillary</string>
+    <string name="mapillary_widget_descr">Дозволяє Вам швидко зробити внесок в Mapillary</string>
+    <string name="mapillary_descr">"Фотографії вулиць в онлайні для всіх.  Відкрийте для себе місця, діліться та знимкуйте весь світ."</string>
     </resources>

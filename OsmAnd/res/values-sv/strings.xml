@@ -1280,11 +1280,10 @@ Nyttjat utrymme är {1} MB.
     <string name="osmo_plugin_name">OpenStreetMap-spårning</string>
     <string name="osmo_settings">OsMo</string>
     <string name="osmo_plugin_description">"Det insticksprogrammet erbjuder delvis funktionaliteten för spårning med OpenStreetMap. Besök http://osmo.mobi.
-
-Du kan spåra alla enheter som är medlemmar i en grupp i realtid och ni kan kommunicera med varandra. Det finns olika alternativ för sessionsspårning eller permanent spårning.
-
-Anonyma grupper kan skapas för ett specificerat antal dagar och begränsas till bestämda funktioner, d.v.s. det finns ingen fjärrkontroll eller gruppadministratör. Helt fungerande grupper kan å andra sidan skapas på webbplatsen och endast registrerade användare har tillgång till dem.
- "</string>
+\n
+\nDu kan spåra alla enheter som är medlemmar i en grupp i realtid och ni kan kommunicera med varandra. Det finns olika alternativ för sessionsspårning eller permanent spårning.
+\n
+\nAnonyma grupper kan skapas för ett specificerat antal dagar och begränsas till bestämda funktioner, d.v.s. det finns ingen fjärrkontroll eller gruppadministratör. Helt fungerande grupper kan å andra sidan skapas på webbplatsen och endast registrerade användare har tillgång till dem. "</string>
     <string name="interrupt_music_descr">Avbryt all musik vid meddelanden (sänk inte endast volymen)</string>
     <string name="interrupt_music">Pausa musiken</string>
     <string name="share_route_as_gpx">Dela rutt som GPX-fil</string>
@@ -2367,27 +2366,19 @@ Om du tycker om OsmAnd och OSM och vill stödja dem så är detta ett utmärkt s
     <string name="osmo_pause_location">Pausa</string>
     <string name="osmo_service_running">OsMo-tjänsten är igång</string>
     <string name="trip_rec_notification_settings">Trippinspelning (inga data)</string>
-    <string name="release_2_5">"
- • Klickbara ikoner på kartan
-
-
- • Kraftfull sökning med POI-filter: Sök t.ex. restauranger efter kvalitet, eller campingplatser med speciellta faciliteter
-
-
- • Ny Topo Map-stil för cyklister och vandrare
-
-
- • Förbättrad trippinspelning
-
-
- • Förbättrade navigationsaviseringar (Android Wear)
-
-
- • Många andra förbättringar och felkorrigeringar
-
-
- och mer …
- "</string>
+    <string name="release_2_5">" • Klickbara ikoner på kartan
+\n
+\n • Kraftfull sökning med POI-filter: Sök t.ex. restauranger efter kvalitet, eller campingplatser med speciellta faciliteter
+\n
+\n • Ny Topo Map-stil för cyklister och vandrare
+\n
+\n • Förbättrad trippinspelning
+\n
+\n • Förbättrade navigationsaviseringar (Android Wear)
+\n
+\n • Många andra förbättringar och felkorrigeringar
+\n
+\n och mer … "</string>
     <string name="christmas_desc">Med tanke på den kommande julen och nyåret så kan du välja att visa POI som har med julen att göra: julgranar, julmarknader med mera.</string>
     <string name="rendering_attr_contourWidth_name">Bredd på konturlinjer</string>
     <string name="rendering_attr_hideWaterPolygons_description">Vatten</string>

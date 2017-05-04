@@ -2104,4 +2104,5 @@ Pôr do Sol: %2$s</string>
     <string name="shared_string_time">Tempo</string>
     <string name="total_distance">Distância total</string>
     <string name="shared_string_slope">Inclinação</string>
+    <string name="open_street_map_login_and_pass">Usuário e senha do OpenStreetMap</string>
     </resources>

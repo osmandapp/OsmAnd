@@ -2860,4 +2860,6 @@ OsmAnd 是開放原始碼，而且正在積極的開發。應用程式從報告�
     <string name="mapillary_widget_descr">讓您迅速的提供給 Mapillary</string>
     <string name="mapillary_descr">把線上街頭照片給每個人。發覺地點、協作、抓取世界。</string>
     <string name="shared_string_add_photos">新增照片</string>
+    <string name="mapillary_action_descr">在這個地點，用 Mapillary 貢獻您的線上街頭照片。</string>
+    <string name="plugin_mapillary_descr">將街頭照片給每個人。發覺地點、協作、抓取世界。</string>
     </resources>
