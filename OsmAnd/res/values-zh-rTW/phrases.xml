@@ -2157,8 +2157,8 @@
 	<string name="poi_refugee_yes">為難民的福利設施</string>
 	<string name="poi_refugee_no">難民：無</string>
 
-	<string name="poi_sanitary_dump_station_yes">衛生轉儲站：有</string>
-	<string name="poi_sanitary_dump_station_no">衛生轉儲站：無</string>
+	<string name="poi_sanitary_dump_station_yes">汚水排放點：有</string>
+	<string name="poi_sanitary_dump_station_no">汚水排放點：無</string>
 	<string name="poi_sanitary_dump_station_customers">衛生轉儲站：僅客戶</string>
 	<string name="poi_social_facility_group_home">社會設施：團體家屋</string>
 	<string name="poi_social_facility_assisted_living">社會設施：輔助生活</string>
@@ -2630,11 +2630,11 @@
 	<string name="poi_building_type_pyramid">建築類型︰金字塔</string>
 
 	<string name="poi_parking_surface">類型︰外表</string>
-	<string name="poi_nuclear_explosion_type_underground_shaft">爆炸類型︰地下、礦井</string>
+	<string name="poi_nuclear_explosion_type_underground_shaft">爆炸類型︰地下，礦井</string>
 	<string name="poi_nuclear_explosion_type_underground_tunnel">爆炸類型︰地下，隧道</string>
 	<string name="poi_nuclear_explosion_type_atmospheric">爆炸類型︰大氣中</string>
 	<string name="poi_nuclear_explosion_type_atmospheric_airdrop">爆炸類型︰大氣中，空投</string>
-	<string name="poi_nuclear_explosion_type_atmospheric_surface_tower">爆炸類型︰大氣中，表面，塔</string>
+	<string name="poi_nuclear_explosion_type_atmospheric_surface_tower">爆炸類型︰大氣中，地表，塔架</string>
 	<string name="poi_pump_type_beam_pump">泵浦類型︰搖臂泵浦</string>
 	<string name="poi_pump_type_india_mk_2_3">泵浦類型︰印度 Mk II 或 III&gt;</string>
 	<string name="poi_public_bookcase_type_wooden_cabinet">類型︰木製櫥櫃</string>
@@ -2642,16 +2642,16 @@
 	<string name="poi_public_bookcase_type_shelf">類型︰架子</string>
 
 	<string name="poi_animal_keeping_type_paddock">類型︰圍場</string>
-	<string name="poi_animal_keeping_type_open_stable">類型︰ 開放馬廄</string>
+	<string name="poi_animal_keeping_type_open_stable">類型︰開放馬廄</string>
 
-	<string name="poi_street_cabinet_power">櫃子類型︰電源</string>
-	<string name="poi_street_cabinet_telecom">櫃子類型︰電信</string>
-	<string name="poi_street_cabinet_cable_tv">櫃子類型︰有線電視</string>
-	<string name="poi_street_cabinet_gas">櫃子類型︰瓦斯</string>
-	<string name="poi_street_cabinet_postal_service">櫃子類型︰郵政服務</string>
-	<string name="poi_street_cabinet_waste">櫃子類型︰廢棄物</string>
-	<string name="poi_street_cabinet_water_management">櫃子類型︰水資源管理</string>
-	<string name="poi_street_cabinet_street_lighting">櫃子類型︰馬路照明</string>
+	<string name="poi_street_cabinet_power">箱櫃類型︰電力</string>
+	<string name="poi_street_cabinet_telecom">箱櫃類型︰電信</string>
+	<string name="poi_street_cabinet_cable_tv">箱櫃類型︰有線電視</string>
+	<string name="poi_street_cabinet_gas">箱櫃類型︰瓦斯</string>
+	<string name="poi_street_cabinet_postal_service">箱櫃類型︰郵政服務</string>
+	<string name="poi_street_cabinet_waste">箱櫃類型︰廢棄物</string>
+	<string name="poi_street_cabinet_water_management">箱櫃類型︰水資源管理</string>
+	<string name="poi_street_cabinet_street_lighting">箱櫃類型︰馬路照明</string>
 
 	<string name="poi_health_facility_type_support_group_home">醫療機構類型︰支援團體家屋</string>
 
@@ -2813,7 +2813,7 @@
 	<string name="poi_free_flying_site_takeoff">起飛</string>
 	<string name="poi_free_flying_site_landing">降落</string>
 	<string name="poi_fire_hydrant_type_pond">陂塘</string>
-	<string name="poi_fire_hydrant_type_wall">牆面栓箱</string>
+	<string name="poi_fire_hydrant_type_wall">牆</string>
 
 	<string name="poi_health_amenity_type_first_aid_kit">急救藥箱</string>
 	<string name="poi_health_amenity_type_scales">公秤</string>
@@ -2843,9 +2843,9 @@
 
 	<string name="poi_min_age">最低年齡</string>
 
-	<string name="poi_organic_yes">有機食品: 有</string>
+	<string name="poi_organic_yes">有機食品︰有</string>
 	<string name="poi_organic_no">有機食品: 無</string>
-	<string name="poi_organic_only">祇提供有機食品</string>
+	<string name="poi_organic_only">只提供有機食品</string>
 
 	<string name="poi_traffic_mirror">道路反射鏡</string>
 
@@ -2870,14 +2870,14 @@
 
 	<string name="poi_nuclear_explosion_country">爆炸：國家</string>
 	<string name="poi_nuclear_explosion_site">爆炸：地點</string>
-	<string name="poi_nuclear_explosion_type_atmospheric_balloon">爆炸類型：大氣層、氣球</string>
-	<string name="poi_nuclear_explosion_type_atmospheric_atmospheric_surface">爆炸類型：大氣層、地表</string>
+	<string name="poi_nuclear_explosion_type_atmospheric_balloon">爆炸類型：大氣層，氣球</string>
+	<string name="poi_nuclear_explosion_type_atmospheric_atmospheric_surface">爆炸類型：大氣層，地表</string>
 	<string name="poi_energy_supplier">電力公司辦事處</string>
 
 	<string name="poi_nuclear_explosion_type_atmospheric_water_surface_barge">爆炸類型︰大氣中、水面、駁船</string>
 	<string name="poi_nuclear_explosion_type_underground">爆炸類型：地下</string>
 	<string name="poi_nuclear_explosion_type_cratering_burst">爆炸類型：火山口（淺層地下）</string>
-	<string name="poi_nuclear_explosion_type_atmospheric_rocket_or_missile">爆炸類型：大氣層、火箭或飛彈</string>
+	<string name="poi_nuclear_explosion_type_atmospheric_rocket_or_missile">爆炸類型：大氣層，火箭或飛彈</string>
 	<string name="poi_nuclear_explosion_type_space">爆炸類型：太空 (超過海拔 80 公里)</string>
 	<string name="poi_nuclear_explosion_type_underwater">爆炸類型：水面下</string>
 	<string name="poi_nuclear_explosion_shot_name_en">射擊名稱</string>
@@ -2886,4 +2886,19 @@
 
 	<string name="poi_railway_yard">調車場</string>
 
+	<string name="poi_nuclear_explosion_purpose_nuclear_weapons_related">爆炸用途︰核武器相關</string>
+	<string name="poi_nuclear_explosion_purpose_weapons_effects">爆炸用途︰武器成效</string>
+	<string name="poi_nuclear_explosion_purpose_safety_experiment">爆炸用途︰安全試驗</string>
+	<string name="poi_nuclear_explosion_purpose_research_for_peaceful_applications">爆炸用途︰為和平應用的研究</string>
+	<string name="poi_nuclear_explosion_purpose_fundamental_science">爆炸用途︰基礎科學</string>
+	<string name="poi_nuclear_explosion_purpose_industrial_application_cavity_excavation">爆炸用途︰工業應用，洞穴挖掘</string>
+	<string name="poi_nuclear_explosion_purpose_industrial_application_seismic_sounding">爆炸用途︰工業應用，地震探測</string>
+	<string name="poi_nuclear_explosion_purpose_industrial_application_oil_stimulation">爆炸用途︰工業應用，原油增產</string>
+	<string name="poi_nuclear_explosion_purpose_industrial_application">爆炸用途︰工業應用</string>
+	<string name="poi_nuclear_explosion_purpose_industrial_application_earth_moving">爆炸用途︰工業應用，運土</string>
+	<string name="poi_nuclear_explosion_time_utc">爆炸時間 (UTC)</string>
+	<string name="poi_nuclear_explosion_yield">爆炸當量</string>
+	<string name="poi_nuclear_explosion_hole">爆炸洞穴</string>
+	<string name="poi_nuclear_explosion_height_of_burst">爆炸高度</string>
+	<string name="poi_nuclear_explosion_ground_zero_altitude">原爆點高度</string>
 	</resources>
