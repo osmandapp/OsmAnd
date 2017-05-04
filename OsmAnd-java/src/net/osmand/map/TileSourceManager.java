@@ -43,6 +43,10 @@ public class TileSourceManager {
 	private static final TileSourceTemplate MAPILLARY_SOURCE =
 			new TileSourceTemplate("Mapillary (raster tiles)", "https://d6a1v2w10ny40.cloudfront.net/v0.1/{0}/{1}/{2}.png", ".png", 17, 0, 256, 16, 32000);
 
+	static {
+		MAPILLARY_SOURCE.setExpirationTimeMinutes(60 * 24);
+	}
+
 	public static class TileSourceTemplate implements ITileSource, Cloneable {
 		private int maxZoom;
 		private int minZoom;

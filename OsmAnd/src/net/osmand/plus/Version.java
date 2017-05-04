@@ -93,7 +93,12 @@ public class Version {
 	
 	public static boolean isFreeVersion(OsmandApplication ctx){
 		return ctx.getPackageName().equals(FREE_VERSION_NAME) || ctx.getPackageName().equals(FREE_DEV_VERSION_NAME);
-		
+	}
+
+	public static boolean isPaidVersion(OsmandApplication ctx) {
+		return !isFreeVersion(ctx)
+				|| ctx.getSettings().FULL_VERSION_PURCHASED.get()
+				|| ctx.getSettings().LIVE_UPDATES_PURCHASED.get();
 	}
 	
 	public static boolean isDeveloperVersion(OsmandApplication ctx){
