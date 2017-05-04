@@ -203,7 +203,7 @@
 	<string name="poi_music">Muzikvendejo</string>
 	<string name="poi_musical_instrument">Muzikinstrument-vendejo</string>
 	<string name="poi_optician">Optikbutiko</string>
-	<string name="poi_organic">Ekologi-manĝaĵa vendejo</string>
+	<string name="poi_organic">Ekologia manĝaĵo</string>
 	<string name="poi_outdoor">Vojaĝil-vendejo</string>
 	<string name="poi_paint">Farbovendejo</string>
 	<string name="poi_pet">Dombest-vendejo</string>
@@ -2599,9 +2599,9 @@
 	<string name="poi_nuclear_explosion_body_wave_magnitude">Grando de unua eksplod-ondo</string>
 	<string name="poi_salt_yes">Sala</string>
 	<string name="poi_salt_no">Nesala</string>
-	<string name="poi_organic_yes">Ekologia manĝaĵo: jes</string>
-	<string name="poi_organic_no">Ekologia manĝaĵo: ne</string>
-	<string name="poi_organic_only">Nur ekologia manĝaĵo</string>
+	<string name="poi_organic_yes">jes</string>
+	<string name="poi_organic_no">ne</string>
+	<string name="poi_organic_only">nur</string>
 
 	<string name="poi_nuclear_explosion_salvo_first_detonation">Salvo-eksplodo: unua eksplodo de salvo-testo</string>
 	<string name="poi_nuclear_explosion_salvo_second_or_later_detonation">Salvo-eksplodo: dua aŭ posta eksplodo de salvo-testo</string>
@@ -3367,5 +3367,7 @@
 <string name="poi_resort_kids_camp">Infana kampadejo</string>
 	<string name="poi_music_school">Muzika lernejo</string>
 	<string name="poi_language_school">Lingva lernejo</string>
+
+<string name="poi_life_ring">Savoringo</string>
 
 </resources>
