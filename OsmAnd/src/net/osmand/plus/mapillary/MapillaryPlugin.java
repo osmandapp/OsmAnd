@@ -54,7 +54,7 @@ public class MapillaryPlugin extends OsmandPlugin {
 
 	@Override
 	public int getAssetResourceName() {
-		return R.drawable.online_maps;
+		return R.drawable.mapillary;
 	}
 
 	@Override
@@ -64,7 +64,7 @@ public class MapillaryPlugin extends OsmandPlugin {
 
 	@Override
 	public String getDescription() {
-		return app.getString(R.string.mapillary);
+		return app.getString(R.string.plugin_mapillary_descr);
 	}
 
 	@Override
