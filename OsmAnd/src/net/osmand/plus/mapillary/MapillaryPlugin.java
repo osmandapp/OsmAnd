@@ -9,6 +9,7 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.ArrayAdapter;
+import android.widget.CompoundButton;
 
 import net.osmand.map.ITileSource;
 import net.osmand.map.TileSourceManager;
@@ -23,6 +24,11 @@ import net.osmand.plus.activities.MapActivity;
 import net.osmand.plus.activities.MapActivityLayers;
 import net.osmand.plus.base.BottomSheetDialogFragment;
 import net.osmand.plus.mapcontextmenu.MenuBuilder;
+import net.osmand.plus.mapcontextmenu.MenuBuilder.CollapsableView;
+import net.osmand.plus.mapcontextmenu.builders.cards.AbstractCard;
+import net.osmand.plus.mapcontextmenu.builders.cards.CardsRowBuilder;
+import net.osmand.plus.mapcontextmenu.builders.cards.ImageCard;
+import net.osmand.plus.mapcontextmenu.builders.cards.ImageCard.GetImageCardsTask;
 import net.osmand.plus.views.MapInfoLayer;
 import net.osmand.plus.views.MapTileLayer;
 import net.osmand.plus.views.OsmandMapTileView;
@@ -30,6 +36,7 @@ import net.osmand.plus.views.mapwidgets.MapWidgetRegistry.MapWidgetRegInfo;
 import net.osmand.plus.views.mapwidgets.TextInfoWidget;
 import net.osmand.util.Algorithms;
 
+import java.util.ArrayList;
 import java.util.List;
 
 public class MapillaryPlugin extends OsmandPlugin {
@@ -40,7 +47,8 @@ public class MapillaryPlugin extends OsmandPlugin {
 	private MapillaryLayer rasterLayer;
 	private TextInfoWidget mapillaryControl;
 	private MapWidgetRegInfo mapillaryWidgetRegInfo;
-	private MapillaryImageRow contextMenuImageRow;
+	private CardsRowBuilder contextMenuCardsRow;
+	private List<AbstractCard> contextMenuCards;
 
 	public MapillaryPlugin(OsmandApplication app) {
 		this.app = app;
@@ -168,7 +176,7 @@ public class MapillaryPlugin extends OsmandPlugin {
 
 	private TextInfoWidget createMonitoringControl(final MapActivity map) {
 		mapillaryControl = new TextInfoWidget(map);
-		mapillaryControl.setText(map.getString(R.string.mapillary), "");
+		mapillaryControl.setText("", map.getString(R.string.mapillary));
 		mapillaryControl.setIcons(R.drawable.widget_mapillary_day, R.drawable.widget_mapillary_night);
 		mapillaryControl.setOnClickListener(new View.OnClickListener() {
 			@Override
@@ -195,30 +203,58 @@ public class MapillaryPlugin extends OsmandPlugin {
 	}
 
 	@Override
-	public void buildContextMenuRows(@NonNull MenuBuilder menuBuilder, @NonNull View view) {
-		if (!menuBuilder.getApp().getSettings().isInternetConnectionAvailable()) {
+	public void buildContextMenuRows(@NonNull final MenuBuilder menuBuilder, @NonNull View view) {
+		if (!menuBuilder.getApplication().getSettings().isInternetConnectionAvailable()) {
 			return;
 		}
-		/*
-		if (!menuBuilder.isFirstRow()) {
-			menuBuilder.buildRowDivider(view, false);
-		}
-		*/
 
-		if (contextMenuImageRow != null && contextMenuImageRow.getMenuBuilder() == menuBuilder) {
-			contextMenuImageRow = new MapillaryImageRow(contextMenuImageRow, view);
-			contextMenuImageRow.build();
-		} else {
-			contextMenuImageRow = new MapillaryImageRow(menuBuilder, view);
-			contextMenuImageRow.build();
-		}
+		boolean needUpdateOnly = contextMenuCardsRow != null && contextMenuCardsRow.getMenuBuilder() == menuBuilder;
+		contextMenuCardsRow = new CardsRowBuilder(menuBuilder, view);
+		contextMenuCardsRow.build();
+		CollapsableView collapsableView = new CollapsableView(contextMenuCardsRow.getViewPager(),
+				app.getSettings().MAPILLARY_MENU_COLLAPSED);
+		collapsableView.setOnCollExpListener(new CollapsableView.OnCollExpListener() {
+			@Override
+			public void onCollapseExpand(boolean collapsed) {
+				if (!collapsed && contextMenuCards == null) {
+					startLoadingImages(menuBuilder);
+				}
+			}
+		});
+		menuBuilder.buildRow(view, R.drawable.ic_action_photo_dark, "Online photos", 0, true,
+				collapsableView, false, 1, false, null);
 
-		//menuBuilder.rowBuilt();
+		if (needUpdateOnly && contextMenuCards != null) {
+			contextMenuCardsRow.setCards(contextMenuCards);
+		} else if (!collapsableView.isCollapsed()) {
+			startLoadingImages(menuBuilder);
+		}
+	}
+
+	private void startLoadingImages(final MenuBuilder menuBuilder) {
+		contextMenuCards = new ArrayList<>();
+		contextMenuCardsRow.setProgressCard();
+		ImageCard.execute(new GetImageCardsTask<>(
+				new MapillaryImageCard.MapillaryImageCardFactory(),
+				app, menuBuilder.getLatLon(),
+				new GetImageCardsTask.Listener<MapillaryImageCard>() {
+					@Override
+					public void onFinish(List<MapillaryImageCard> cardList) {
+						if (!menuBuilder.isHidden()) {
+							List<AbstractCard> cards = new ArrayList<>();
+							cards.addAll(cardList);
+							cards.add(new AddMapillaryPhotoCard());
+							contextMenuCardsRow.setCards(cards);
+							contextMenuCards = cards;
+						}
+					}
+				}));
 	}
 
 	@Override
 	public void clearContextMenuRows() {
-		contextMenuImageRow = null;
+		contextMenuCardsRow = null;
+		contextMenuCards = null;
 	}
 
 	public static class MapillaryFirstDialogFragment extends BottomSheetDialogFragment {
@@ -236,18 +272,28 @@ public class MapillaryPlugin extends OsmandPlugin {
 			View view = inflater.inflate(R.layout.mapillary_first_dialog, container, false);
 			final SwitchCompat widgetSwitch = (SwitchCompat) view.findViewById(R.id.widget_switch);
 			widgetSwitch.setChecked(showWidget);
+			widgetSwitch.setOnCheckedChangeListener(new CompoundButton.OnCheckedChangeListener() {
+				@Override
+				public void onCheckedChanged(CompoundButton buttonView, boolean isChecked) {
+					showWidget(isChecked);
+				}
+			});
 			view.findViewById(R.id.actionButton).setOnClickListener(new View.OnClickListener() {
 				@Override
 				public void onClick(View v) {
-					FragmentActivity activity = getActivity();
-					MapillaryPlugin plugin = OsmandPlugin.getPlugin(MapillaryPlugin.class);
-					if (plugin != null && activity instanceof MapActivity) {
-						plugin.setWidgetVisible((MapActivity) activity, widgetSwitch.isChecked());
-					}
+					showWidget(widgetSwitch.isChecked());
 					dismiss();
 				}
 			});
 			return view;
+		}
+
+		private void showWidget(boolean show) {
+			FragmentActivity activity = getActivity();
+			MapillaryPlugin plugin = OsmandPlugin.getPlugin(MapillaryPlugin.class);
+			if (plugin != null && activity instanceof MapActivity) {
+				plugin.setWidgetVisible((MapActivity) activity, show);
+			}
 		}
 
 		@Override

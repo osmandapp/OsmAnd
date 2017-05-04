@@ -2,8 +2,8 @@
 <LinearLayout
     xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:tools="http://schemas.android.com/tools"
-    android:layout_width="@dimen/mapillary_card_width"
-    android:layout_height="@dimen/mapillary_card_height"
+    android:layout_width="@dimen/context_img_card_width"
+    android:layout_height="@dimen/context_img_card_height"
     android:orientation="vertical">
 
     <FrameLayout
@@ -24,7 +24,9 @@
             android:layout_height="wrap_content"
             android:layout_marginTop="10dp"
             android:layout_marginLeft="10dp"
-            android:src="@drawable/ic_logo_mapillary"/>
+            android:visibility="gone"
+            tools:src="@drawable/ic_action_photo_dark"
+            tools:visibility="visible"/>
 
         <TextView
             android:id="@+id/watermark"
@@ -35,10 +37,12 @@
             android:paddingTop="4dp"
             android:paddingRight="8dp"
             android:paddingBottom="8dp"
-            android:background="@color/popup_bg_color"
+            android:background="@color/map_widget_dark"
             android:textColor="@color/color_white"
             android:textSize="@dimen/default_sub_text_size"
-            tools:text="\@user123 | mapillary.com"/>
+            android:visibility="gone"
+            tools:text="\@user123"
+            tools:visibility="visible"/>
 
         <ProgressBar
             android:id="@+id/progress"

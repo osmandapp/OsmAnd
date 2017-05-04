@@ -59,7 +59,7 @@ public class AmenityMenuBuilder extends MenuBuilder {
 	}
 
 	private void buildRow(View view, int iconId, String text, String textPrefix,
-						  boolean collapsable, final View collapsableView,
+						  boolean collapsable, final CollapsableView collapsableView,
 						  int textColor, boolean isWiki, boolean isText, boolean needLinks,
 						  boolean isPhoneNumber, boolean isUrl) {
 		buildRow(view, getRowIcon(iconId), text, textPrefix, collapsable, collapsableView, textColor,
@@ -67,7 +67,7 @@ public class AmenityMenuBuilder extends MenuBuilder {
 	}
 
 	protected void buildRow(final View view, Drawable icon, final String text, final String textPrefix,
-							boolean collapsable, final View collapsableView,
+							boolean collapsable, final CollapsableView collapsableView,
 							int textColor, boolean isWiki, boolean isText, boolean needLinks,
 							boolean isPhoneNumber, boolean isUrl) {
 
@@ -180,22 +180,28 @@ public class AmenityMenuBuilder extends MenuBuilder {
 			llIconCollapseParams.gravity = Gravity.CENTER_VERTICAL;
 			iconViewCollapse.setLayoutParams(llIconCollapseParams);
 			iconViewCollapse.setScaleType(ImageView.ScaleType.CENTER_INSIDE);
-			iconViewCollapse.setImageDrawable(app.getIconsCache().getThemedIcon(collapsableView.getVisibility() == View.GONE ?
+			iconViewCollapse.setImageDrawable(app.getIconsCache().getThemedIcon(collapsableView.getContenView().getVisibility() == View.GONE ?
 					R.drawable.ic_action_arrow_down : R.drawable.ic_action_arrow_up));
 			llIconCollapse.addView(iconViewCollapse);
 			ll.setOnClickListener(new View.OnClickListener() {
 				@Override
 				public void onClick(View v) {
-					if (collapsableView.getVisibility() == View.VISIBLE) {
-						collapsableView.setVisibility(View.GONE);
+					if (collapsableView.getContenView().getVisibility() == View.VISIBLE) {
+						collapsableView.setCollapsed(true);
+						collapsableView.getContenView().setVisibility(View.GONE);
 						iconViewCollapse.setImageDrawable(app.getIconsCache().getThemedIcon(R.drawable.ic_action_arrow_down));
 					} else {
-						collapsableView.setVisibility(View.VISIBLE);
+						collapsableView.setCollapsed(false);
+						collapsableView.getContenView().setVisibility(View.VISIBLE);
 						iconViewCollapse.setImageDrawable(app.getIconsCache().getThemedIcon(R.drawable.ic_action_arrow_up));
 					}
 				}
 			});
-			baseView.addView(collapsableView);
+			if (collapsableView.isCollapsed()) {
+				collapsableView.getContenView().setVisibility(View.GONE);
+				iconViewCollapse.setImageDrawable(app.getIconsCache().getThemedIcon(R.drawable.ic_action_arrow_down));
+			}
+			baseView.addView(collapsableView.getContenView());
 		}
 
 		if (isWiki) {
@@ -289,7 +295,7 @@ public class AmenityMenuBuilder extends MenuBuilder {
 			String vl = e.getValue();
 
 			String textPrefix = "";
-			View collapsableView = null;
+			CollapsableView collapsableView = null;
 			boolean collapsable  = false;
 			boolean isWiki = false;
 			boolean isText = false;
@@ -511,7 +517,7 @@ public class AmenityMenuBuilder extends MenuBuilder {
 		private int iconId;
 		private String textPrefix;
 		private String text;
-		private View collapsableView;
+		private CollapsableView collapsableView;
 		private boolean collapsable;
 		private int textColor;
 		private boolean isWiki;
@@ -523,7 +529,7 @@ public class AmenityMenuBuilder extends MenuBuilder {
 		private String name;
 
 		public AmenityInfoRow(String key, Drawable icon, String textPrefix, String text,
-							  boolean collapsable, View collapsableView,
+							  boolean collapsable, CollapsableView collapsableView,
 							  int textColor, boolean isWiki, boolean isText, boolean needLinks,
 							  int order, String name, boolean isPhoneNumber, boolean isUrl) {
 			this.key = key;
@@ -543,7 +549,7 @@ public class AmenityMenuBuilder extends MenuBuilder {
 		}
 
 		public AmenityInfoRow(String key, int iconId, String textPrefix, String text,
-							  boolean collapsable, View collapsableView,
+							  boolean collapsable, CollapsableView collapsableView,
 							  int textColor, boolean isWiki, boolean isText, boolean needLinks,
 							  int order, String name, boolean isPhoneNumber, boolean isUrl) {
 			this.key = key;
