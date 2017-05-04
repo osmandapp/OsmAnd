@@ -2478,4 +2478,67 @@
 	<string name="poi_payment_gift_card_yes">Подарункові картки</string>
 	<string name="poi_vending_bicycle_tube">Велосипедні камери</string>
 	<string name="poi_bridge_type_movable">Тип моста: розвідний</string>
+	<string name="poi_cuisine_jewish">Єврейська</string>
+	<string name="poi_cuisine_bulgarian">Болгарська</string>
+	<string name="poi_toilets_access_community">Туалет: громадський</string>
+	<string name="poi_resource_stone">Камінь (ресурс)</string>
+	<string name="poi_training_art">Навчання: мистецтво</string>
+	<string name="poi_clothes_schoolwear">Шкільна</string>
+	<string name="poi_official_name">Офіційне ім\'я</string>
+
+	<string name="poi_counselling_type_crisis_yes">Консультація кризова: так</string>
+	<string name="poi_passenger_information_display_yes">Інформаційний дисплей пасажира: є</string>
+	<string name="poi_cuisine_tibetan">Тибетська</string>
+
+	<string name="poi_toilets_access_public">Доступ в туалет: громадський</string>
+
+	<string name="poi_resource_tin">Олово</string>
+	<string name="poi_training_cooking">Навчання: приготування їжі</string>
+	<string name="poi_clothes_swimwear">Купальні костюми</string>
+	<string name="poi_clothes_socks">Шкарпетки</string>
+	<string name="poi_dyke">Насип для стримування потоку води</string>
+	<string name="poi_counselling_type_crisis_no">Консультація кризова: немає</string>
+	<string name="poi_passenger_information_display_no">Інформаційний дисплей пасажира: відсутній</string>
+
+	<string name="poi_cuisine_gyros">Гірос</string>
+	<string name="poi_feeding_place">Місце для годування тварин</string>
+
+	<string name="poi_diaper_table_count">Кількість сповивальних столиків</string>
+	<string name="poi_resource_tuff">Вулканічний туф</string>
+	<string name="poi_training_computer">Навчання: робота на комп\'ютері</string>
+	<string name="poi_clothes_shirts">Футболки</string>
+	<string name="poi_diaper_yes">Пеленальний столик</string>
+	<string name="poi_dolphin">Дельфінаріум</string>
+
+	<string name="poi_counselling_type_drugs_yes">Консультація наркозалежних: так</string>
+	<string name="poi_aquaculture">Аквакультура</string>
+	<string name="poi_cuisine_empanada">Емпанада</string>
+	<string name="poi_party">Товари для свята</string>
+	<string name="poi_diaper_no">Пеленальний столик відсутній</string>
+	<string name="poi_resource_uranium">Уран</string>
+	<string name="poi_training_yoga">Навчання: йога</string>
+	<string name="poi_clothes_dance">Для танців</string>
+	<string name="poi_forestry_compartment">Покажчик: квартальний стовп</string>
+	<string name="poi_aquaculture_shrimp">Розведення креветок</string>
+	<string name="poi_cuisine_crepes">Тонкі млинці</string>
+	<string name="poi_electrical">Електротовари</string>
+	<string name="poi_diaper_room">Пеленальна кімната</string>
+
+	<string name="poi_resource_vanadium">Ванадій</string>
+	<string name="poi_training_martial_art">Навчання: бойові мистецтва</string>
+	<string name="poi_clothes_military">Військова</string>
+
+	<string name="poi_counselling_type_drugs_no">Консультація наркозалежних: немає</string>
+	<string name="poi_forestry_allotment">Покажчик: діляночний стовп</string>
+	<string name="poi_aquaculture_fish">Розведення риби</string>
+	<string name="poi_cuisine_yakiniku">Якініку (японське м\'ясо на грилі)</string>
+	<string name="poi_payment_gift_card_no">Подарункові картки не приймаються</string>
+	<string name="poi_payment_golden_crown_yes">Золота Корона</string>
+	<string name="poi_maxstay">Максимальний час стоянки</string>
+
+	<string name="poi_resource_water">Вода (ресурс)</string>
+	<string name="poi_training_aviation">Навчання: авіація</string>
+	<string name="poi_historic_milestone">Історичний дистанційний стовп</string>
+
+	<string name="poi_construction_yes">В процесі будівництва</string>
 	</resources>
