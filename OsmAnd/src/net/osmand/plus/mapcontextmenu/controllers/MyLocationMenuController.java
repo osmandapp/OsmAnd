@@ -14,7 +14,6 @@ public class MyLocationMenuController  extends MenuController {
 
 	public MyLocationMenuController(MapActivity mapActivity, PointDescription pointDescription) {
 		super(new MenuBuilder(mapActivity), pointDescription, mapActivity);
-		builder.addPluginMenuBuilder(MapillaryPlugin.class);
 		builder.setShowNearestWiki(true);
 	}
 

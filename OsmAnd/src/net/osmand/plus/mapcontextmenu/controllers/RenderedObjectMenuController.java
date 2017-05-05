@@ -19,7 +19,6 @@ public class RenderedObjectMenuController extends MenuController {
 
 	public RenderedObjectMenuController(MapActivity mapActivity, PointDescription pointDescription, final RenderedObject renderedObject) {
 		super(new MenuBuilder(mapActivity), pointDescription, mapActivity);
-		builder.addPluginMenuBuilder(MapillaryPlugin.class);
 		builder.setShowNearestWiki(true);
 		this.renderedObject = renderedObject;
 	}

@@ -20,7 +20,6 @@ public class TargetPointMenuController extends MenuController {
 	public TargetPointMenuController(MapActivity mapActivity, PointDescription pointDescription, TargetPoint targetPoint) {
 		super(new MenuBuilder(mapActivity), pointDescription, mapActivity);
 		this.targetPoint = targetPoint;
-		builder.addPluginMenuBuilder(MapillaryPlugin.class);
 		builder.setShowNearestWiki(true);
 		final TargetPointsHelper targetPointsHelper = getMapActivity().getMyApplication().getTargetPointsHelper();
 		final int intermediatePointsCount = targetPointsHelper.getIntermediatePoints().size();

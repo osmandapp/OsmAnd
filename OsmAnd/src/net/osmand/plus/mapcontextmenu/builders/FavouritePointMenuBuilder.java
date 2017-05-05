@@ -24,7 +24,6 @@ public class FavouritePointMenuBuilder extends MenuBuilder {
 	public FavouritePointMenuBuilder(MapActivity mapActivity, final FavouritePoint fav) {
 		super(mapActivity);
 		this.fav = fav;
-		addPluginMenuBuilder(MapillaryPlugin.class);
 		setShowNearestWiki(true);
 		acquireOriginObject();
 	}

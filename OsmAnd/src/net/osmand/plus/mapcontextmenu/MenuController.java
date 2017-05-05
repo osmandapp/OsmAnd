@@ -23,6 +23,7 @@ import net.osmand.plus.GPXUtilities.WptPt;
 import net.osmand.plus.GpxSelectionHelper.GpxDisplayItem;
 import net.osmand.plus.MapMarkersHelper.MapMarker;
 import net.osmand.plus.OsmandApplication;
+import net.osmand.plus.OsmandPlugin;
 import net.osmand.plus.OsmandSettings;
 import net.osmand.plus.R;
 import net.osmand.plus.TargetPointsHelper.TargetPoint;
@@ -115,6 +116,11 @@ public abstract class MenuController extends BaseMenuController {
 	}
 
 	public void build(View rootView) {
+		for (OsmandPlugin plugin : OsmandPlugin.getEnabledPlugins()) {
+			if (plugin.isMenuControllerSupported(this.getClass())) {
+				builder.addMenuPlugin(plugin);
+			}
+		}
 		builder.build(rootView);
 	}
 

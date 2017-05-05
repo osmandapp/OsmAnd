@@ -79,6 +79,7 @@
         <item name="chart_marker_background">@drawable/chart_marker_background_light</item>
         <item name="routeParameterTitleColor">@color/color_myloc_distance</item>
         <item name="ctx_menu_info_divider">@color/ctx_menu_info_divider_light</item>
+        <item name="ctx_menu_card_btn">@color/ctx_menu_card_btn_light</item>
         <item name="searchbar_text">@color/searchbar_text_light</item>
         <item name="searchbar_text_hint">@color/searchbar_text_hint_light</item>
         <item name="list_divider">@color/list_divider_dark</item>
@@ -251,6 +252,7 @@
         <item name="chart_marker_background">@drawable/chart_marker_background_dark</item>
         <item name="routeParameterTitleColor">@color/osmand_orange</item>
         <item name="ctx_menu_info_divider">@color/ctx_menu_info_divider_dark</item>
+        <item name="ctx_menu_card_btn">@color/ctx_menu_card_btn_dark</item>
         <item name="searchbar_text">@color/searchbar_text_dark</item>
         <item name="searchbar_text_hint">@color/searchbar_text_hint_dark</item>
         <item name="list_divider">@color/list_divider_light</item>

@@ -23,6 +23,7 @@ import net.osmand.plus.dashboard.tools.DashFragmentData;
 import net.osmand.plus.development.OsmandDevelopmentPlugin;
 import net.osmand.plus.distancecalculator.DistanceCalculatorPlugin;
 import net.osmand.plus.mapcontextmenu.MenuBuilder;
+import net.osmand.plus.mapcontextmenu.MenuController;
 import net.osmand.plus.mapillary.MapillaryPlugin;
 import net.osmand.plus.monitoring.OsmandMonitoringPlugin;
 import net.osmand.plus.myplaces.FavoritesActivity;
@@ -104,9 +105,22 @@ public abstract class OsmandPlugin {
 		return null;
 	}
 
+	/*
+	 * Return true in case if plugin should fill the map context menu with buildContextMenuRows method.
+	 */
+	public boolean isMenuControllerSupported(Class<? extends MenuController> menuControllerClass) {
+		return false;
+	}
+
+	/*
+	 * Add menu rows to the map context menu.
+	 */
 	public void buildContextMenuRows(@NonNull MenuBuilder menuBuilder, @NonNull View view) {
 	}
 
+	/*
+	 * Clear resources after menu was closed
+	 */
 	public void clearContextMenuRows() {
 	}
 

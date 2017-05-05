@@ -20,7 +20,6 @@ public class MapMarkerMenuController extends MenuController {
 	public MapMarkerMenuController(MapActivity mapActivity, PointDescription pointDescription, MapMarker mapMarker) {
 		super(new MenuBuilder(mapActivity), pointDescription, mapActivity);
 		this.mapMarker = mapMarker;
-		builder.addPluginMenuBuilder(MapillaryPlugin.class);
 		builder.setShowNearestWiki(true);
 		final MapMarkersHelper markersHelper = mapActivity.getMyApplication().getMapMarkersHelper();
 		leftTitleButtonController = new TitleButtonController() {

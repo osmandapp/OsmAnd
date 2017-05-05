@@ -21,7 +21,6 @@ public class WptPtMenuBuilder extends MenuBuilder {
 	public WptPtMenuBuilder(MapActivity mapActivity, final WptPt wpt) {
 		super(mapActivity);
 		this.wpt = wpt;
-		addPluginMenuBuilder(MapillaryPlugin.class);
 		setShowNearestWiki(true);
 	}
 

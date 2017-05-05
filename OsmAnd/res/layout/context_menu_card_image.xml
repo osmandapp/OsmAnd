@@ -18,6 +18,18 @@
             android:layout_height="match_parent"
             android:scaleType="centerCrop"/>
 
+        <TextView
+            android:id="@+id/url"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:gravity="center"
+            android:padding="16dp"
+            android:textColor="?attr/color_dialog_buttons"
+            android:textSize="@dimen/default_list_text_size"
+            android:visibility="gone"
+            tools:text="http://osmand.net/images/123456789012.jpg"
+            tools:visibility="visible"/>
+
         <ImageView
             android:id="@+id/icon"
             android:layout_width="wrap_content"

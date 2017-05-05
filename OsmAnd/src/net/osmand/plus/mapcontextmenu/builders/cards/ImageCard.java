@@ -17,8 +17,8 @@ import net.osmand.data.LatLon;
 import net.osmand.plus.OsmandApplication;
 import net.osmand.plus.R;
 import net.osmand.plus.Version;
+import net.osmand.plus.mapillary.MapillaryImageCard;
 import net.osmand.util.Algorithms;
-import net.osmand.util.MapUtils;
 
 import org.json.JSONArray;
 import org.json.JSONException;
@@ -28,8 +28,6 @@ import java.text.DateFormat;
 import java.text.ParseException;
 import java.text.SimpleDateFormat;
 import java.util.ArrayList;
-import java.util.Collections;
-import java.util.Comparator;
 import java.util.Date;
 import java.util.LinkedHashMap;
 import java.util.List;
@@ -39,8 +37,6 @@ import java.util.Map;
 import static java.text.DateFormat.FULL;
 
 public abstract class ImageCard extends AbstractCard {
-
-	private static final int IMAGES_LIMIT = 15;
 
 	private String type;
 	// Image location
@@ -69,10 +65,6 @@ public abstract class ImageCard extends AbstractCard {
 	private Bitmap bitmap;
 	private float bearingDiff = Float.NaN;
 	private float distance = Float.NaN;
-
-	public interface ImageCardFactory<T> {
-		T createCard(OsmandApplication app, JSONObject imageObject);
-	}
 
 	public ImageCard(OsmandApplication app, JSONObject imageObject) {
 		super(app);
@@ -110,6 +102,23 @@ public abstract class ImageCard extends AbstractCard {
 		} catch (JSONException e) {
 			e.printStackTrace();
 		}
+	}
+
+	private static ImageCard createCard(OsmandApplication app, JSONObject imageObject) {
+		ImageCard imageCard = null;
+		try {
+			if (imageObject.has("type")) {
+				String type = imageObject.getString("type");
+				if ("mapillary-photo".equals(type)) {
+					imageCard = new MapillaryImageCard(app, imageObject);
+				} else {
+					imageCard = new UrlImageCard(app, imageObject);
+				}
+			}
+		} catch (JSONException e) {
+			e.printStackTrace();
+		}
+		return imageCard;
 	}
 
 	public double getCa() {
@@ -243,29 +252,26 @@ public abstract class ImageCard extends AbstractCard {
 		}
 	}
 
-	public static class GetImageCardsTask<I extends ImageCard> extends AsyncTask<Void, Void, List<I>> {
+	public static class GetImageCardsTask extends AsyncTask<Void, Void, List<ImageCard>> {
 
 		private OsmandApplication app;
 		private LatLon latLon;
-		private Listener<I> listener;
-		private ImageCardFactory<I> imageCardFactory;
-		private List<I> result;
+		private GetImageCardsListener listener;
+		private List<ImageCard> result;
 
-		public interface Listener<T extends ImageCard> {
-			void onFinish(List<T> cardList);
+		public interface GetImageCardsListener {
+			void onFinish(List<ImageCard> cardList);
 		}
 
-		public GetImageCardsTask(@NonNull ImageCardFactory<I> imageCardFactory,
-								 @NonNull OsmandApplication app, LatLon latLon, Listener<I> listener) {
-			this.imageCardFactory = imageCardFactory;
+		public GetImageCardsTask(@NonNull OsmandApplication app, LatLon latLon, GetImageCardsListener listener) {
 			this.app = app;
 			this.latLon = latLon;
 			this.listener = listener;
 		}
 
 		@Override
-		protected List<I> doInBackground(Void... params) {
-			List<I> result = new ArrayList<>();
+		protected List<ImageCard> doInBackground(Void... params) {
+			List<ImageCard> result = new ArrayList<>();
 			try {
 				final Map<String, String> pms = new LinkedHashMap<>();
 				pms.put("lat", "" + latLon.getLatitude());
@@ -286,7 +292,10 @@ public abstract class ImageCard extends AbstractCard {
 							try {
 								JSONObject imageObject = (JSONObject) images.get(i);
 								if (imageObject != JSONObject.NULL) {
-									result.add(imageCardFactory.createCard(app, imageObject));
+									ImageCard imageCard = ImageCard.createCard(app, imageObject);
+									if (imageCard != null) {
+										result.add(imageCard);
+									}
 								}
 							} catch (JSONException e) {
 								e.printStackTrace();
@@ -297,65 +306,16 @@ public abstract class ImageCard extends AbstractCard {
 			} catch (Exception e) {
 				e.printStackTrace();
 			}
-			final Location loc = new Location("");
-			loc.setLatitude(latLon.getLatitude());
-			loc.setLongitude(latLon.getLongitude());
-			sortImagesInfo(result, loc);
-			if (result.size() > IMAGES_LIMIT) {
-				result = result.subList(0, IMAGES_LIMIT);
-			}
 			return result;
 		}
 
 		@Override
-		protected void onPostExecute(List<I> cardList) {
+		protected void onPostExecute(List<ImageCard> cardList) {
 			result = cardList;
 			if (listener != null) {
 				listener.onFinish(result);
 			}
 		}
-	}
-
-	private static <T extends ImageCard> void sortImagesInfo(List<T> cardList, @NonNull final Location location) {
-		List<T> targetCards = new ArrayList<>();
-		List<T> otherCards = new ArrayList<>();
-		for (T c : cardList) {
-			if (c.getLocation() != null) {
-				Location l = new Location("");
-				l.setLatitude(c.getLocation().getLatitude());
-				l.setLongitude(c.getLocation().getLongitude());
-				c.setDistance(l.distanceTo(location));
-				if (!Double.isNaN(c.getCa())) {
-					float bearingDiff = Math.abs(MapUtils.unifyRotationDiff(
-							MapUtils.unifyRotationTo360((float) c.getCa()), l.bearingTo(location)));
-					c.setBearingDiff(bearingDiff);
-					if (bearingDiff < 30) {
-						targetCards.add(c);
-					} else {
-						otherCards.add(c);
-					}
-				} else {
-					otherCards.add(c);
-				}
-			}
-		}
-		Collections.sort(targetCards, new Comparator<ImageCard>() {
-
-			@Override
-			public int compare(ImageCard i1, ImageCard i2) {
-				return Float.compare(i1.bearingDiff, i2.bearingDiff);
-			}
-		});
-		Collections.sort(otherCards, new Comparator<ImageCard>() {
-
-			@Override
-			public int compare(ImageCard i1, ImageCard i2) {
-				return Float.compare(i1.distance, i2.distance);
-			}
-		});
-		cardList.clear();
-		cardList.addAll(targetCards);
-		cardList.addAll(otherCards);
 	}
 
 	private class DownloadImageTask extends AsyncTask<Void, Void, Bitmap> {

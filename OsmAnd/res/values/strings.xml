@@ -9,7 +9,9 @@
          3. All your modified/created strings are in the top of the file (to make easier find what\'s translated).
     PLEASE: Have a look at http://code.google.com/p/osmand/wiki/UIConsistency, it may really improve your and our work  :-)  Thx - Hardy
     -->
+    <string name="online_photos">Online photos</string>
     <string name="shared_string_add_photos">Add photos</string>
+    <string name="no_photos_descr">We don\'t have photos for this location</string>
     <string name="mapillary_action_descr">Contribute with your own street-level views of this location with Mapillary.</string>
     <string name="mapillary_widget">Mapillary widget</string>
     <string name="mapillary_widget_descr">Allow you to quick contribute to Mapillary</string>

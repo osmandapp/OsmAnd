@@ -20,7 +20,6 @@ public class HistoryMenuController extends MenuController {
 	public HistoryMenuController(MapActivity mapActivity, PointDescription pointDescription, final HistoryEntry entry) {
 		super(new MenuBuilder(mapActivity), pointDescription, mapActivity);
 		this.entry = entry;
-		builder.addPluginMenuBuilder(MapillaryPlugin.class);
 		builder.setShowNearestWiki(true);
 		initData();
 	}

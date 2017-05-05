@@ -50,7 +50,6 @@ public class AmenityMenuBuilder extends MenuBuilder {
 	public AmenityMenuBuilder(MapActivity mapActivity, final Amenity amenity) {
 		super(mapActivity);
 		this.amenity = amenity;
-		addPluginMenuBuilder(MapillaryPlugin.class);
 		setShowNearestWiki(true, amenity.getId());
 	}
 

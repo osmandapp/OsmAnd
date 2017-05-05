@@ -1,18 +1,6 @@
 <?xml version="1.0" encoding="utf-8"?>
 <layer-list xmlns:android="http://schemas.android.com/apk/res/android">
-    <item
-        android:bottom="-10dp"
-        android:left="-10dp"
-        android:right="-10dp"
-        android:top="-10dp">
-        <shape android:shape="rectangle">
-            <stroke
-                android:width="12dp"
-                android:color="@color/ctx_menu_info_view_bg_light" />
-            <corners android:radius="8dp" />
-        </shape>
-    </item>
     <item>
-        <nine-patch android:src="@drawable/bg_card_shadow" />
+        <nine-patch android:src="@drawable/bg_card_shadow_grey_day" />
     </item>
 </layer-list>

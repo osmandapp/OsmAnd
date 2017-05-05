@@ -6,15 +6,15 @@ import net.osmand.plus.OsmandApplication;
 import net.osmand.plus.R;
 import net.osmand.plus.mapcontextmenu.builders.cards.AbstractCard;
 
-class AddMapillaryPhotoCard extends AbstractCard {
+public class AddMapillaryImagesCard extends AbstractCard {
 
-	AddMapillaryPhotoCard(OsmandApplication app) {
+	public AddMapillaryImagesCard(OsmandApplication app) {
 		super(app);
 	}
 
 	@Override
 	public int getCardLayoutId() {
-		return R.layout.mapillary_context_menu_action;
+		return R.layout.context_menu_card_add_mapillary_images;
 	}
 
 	@Override
