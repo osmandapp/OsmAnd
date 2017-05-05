@@ -37,12 +37,11 @@ import net.osmand.plus.OsmandSettings.OsmandPreference;
 import net.osmand.plus.R;
 import net.osmand.plus.activities.MapActivity;
 import net.osmand.plus.mapcontextmenu.builders.cards.AbstractCard;
-import net.osmand.plus.mapcontextmenu.builders.cards.NoImagesCard;
 import net.osmand.plus.mapcontextmenu.builders.cards.CardsRowBuilder;
 import net.osmand.plus.mapcontextmenu.builders.cards.ImageCard;
 import net.osmand.plus.mapcontextmenu.builders.cards.ImageCard.GetImageCardsTask;
 import net.osmand.plus.mapcontextmenu.builders.cards.ImageCard.GetImageCardsTask.GetImageCardsListener;
-import net.osmand.plus.mapillary.AddMapillaryImagesCard;
+import net.osmand.plus.mapcontextmenu.builders.cards.NoImagesCard;
 import net.osmand.plus.render.RenderingIcons;
 import net.osmand.util.MapUtils;
 
@@ -312,8 +311,6 @@ public class MenuBuilder {
 							cards.addAll(cardList);
 							if (cardList.size() == 0) {
 								cards.add(new NoImagesCard(app));
-							} else {
-								cards.add(new AddMapillaryImagesCard(app));
 							}
 							onlinePhotoCardsRow.setCards(cards);
 							onlinePhotoCards = cards;
