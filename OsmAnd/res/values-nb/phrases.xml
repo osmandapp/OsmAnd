@@ -349,9 +349,9 @@
 
 	<string name="poi_car_wash_yes">Ja</string>
 
-	<string name="poi_organic_yes">Økologisk mat: ja</string>
-	<string name="poi_organic_no">Økologisk mat: nei</string>
-	<string name="poi_organic_only">Bare økologisk mat</string>
+	<string name="poi_organic_yes">Ja</string>
+	<string name="poi_organic_no">Nei</string>
+	<string name="poi_organic_only">Bare</string>
 
 	<string name="poi_traffic_mirror">Trafikkspeil</string>
 
