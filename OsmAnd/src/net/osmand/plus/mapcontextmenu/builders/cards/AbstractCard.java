@@ -25,7 +25,7 @@ public abstract class AbstractCard {
 
 	public abstract void update();
 
-	public OsmandApplication getOsmandApplication() {
+	public OsmandApplication getMyApplication() {
 		return app;
 	}
 }

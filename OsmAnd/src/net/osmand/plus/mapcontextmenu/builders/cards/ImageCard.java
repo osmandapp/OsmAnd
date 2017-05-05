@@ -368,7 +368,7 @@ public abstract class ImageCard extends AbstractCard {
 
 		@Override
 		protected Bitmap doInBackground(Void... params) {
-			return AndroidNetworkUtils.downloadImage(getOsmandApplication(), imageUrl);
+			return AndroidNetworkUtils.downloadImage(getMyApplication(), imageUrl);
 		}
 
 		@Override

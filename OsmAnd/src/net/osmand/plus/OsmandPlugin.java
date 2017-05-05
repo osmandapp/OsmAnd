@@ -3,21 +3,15 @@ package net.osmand.plus;
 
 import android.annotation.TargetApi;
 import android.app.Activity;
+import android.content.Context;
 import android.content.Intent;
 import android.content.pm.PackageManager.NameNotFoundException;
 import android.os.Build;
 import android.support.annotation.DrawableRes;
 import android.support.annotation.NonNull;
 import android.support.v4.app.Fragment;
-import android.view.Gravity;
-import android.view.LayoutInflater;
 import android.view.View;
-import android.view.ViewGroup;
-import android.widget.ImageView;
-import android.widget.LinearLayout;
-import android.widget.TextView;
 
-import net.osmand.AndroidUtils;
 import net.osmand.IProgress;
 import net.osmand.Location;
 import net.osmand.PlatformUtil;
@@ -456,13 +450,13 @@ public abstract class OsmandPlugin {
 		return collection;
 	}
 
-	public static boolean isPackageInstalled(String packageInfo, OsmandApplication app) {
+	public static boolean isPackageInstalled(String packageInfo, Context ctx) {
 		if (packageInfo == null) {
 			return false;
 		}
 		boolean installed = false;
 		try {
-			installed = app.getPackageManager().getPackageInfo(packageInfo, 0) != null;
+			installed = ctx.getPackageManager().getPackageInfo(packageInfo, 0) != null;
 		} catch (NameNotFoundException e) {
 		}
 		return installed;
