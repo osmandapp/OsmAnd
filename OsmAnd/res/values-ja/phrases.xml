@@ -1898,8 +1898,8 @@
 	<string name="poi_service_bicycle_second_hand_no">中古自転車の販売:無し</string>
 	<string name="poi_bicycle_repair_station">自転車セルフ修理所</string>
 
-	<string name="poi_ramp_bicycle_yes">自転車用ランプ:有り</string>
-	<string name="poi_ramp_bicycle_no">自転車用ランプ:無し</string>
+	<string name="poi_ramp_bicycle_yes">自転車用スロープ:有り</string>
+	<string name="poi_ramp_bicycle_no">自転車用スロープ:無し</string>
 	<string name="poi_bicycle_parking_lockers">ロッカー式</string>
 	<string name="poi_bicycle_parking_tree">ツリー式</string>
 	<string name="poi_bicycle_parking_streetpod">高セキュリティ駐輪所(Streetpod)</string>
@@ -2872,4 +2872,81 @@
 	<string name="poi_crop_cassava">作物:キャッサバ</string>
 	<string name="poi_crop_tobacco">作物:タバコ</string>
 	<string name="poi_crop_vegetables_flowers">作物:何らかの野菜、花</string>
+	<string name="poi_crop_cranberry">作物:クランベリー</string>
+	<string name="poi_crop_asparagus">作物:アスパラガス</string>
+	<string name="poi_crop_flowers">作物:装飾用の花卉類</string>
+
+	<string name="poi_surveillance_indoor">監視:屋内</string>
+	<string name="poi_surveillance_outdoor">監視:屋外の敷地内</string>
+	<string name="poi_surveillance_public">監視:公共のエリア</string>
+
+	<string name="poi_castle_type_stately">城の種類:軍事目的で無い象徴的な城</string>
+	<string name="poi_castle_type_defensive">城の種類:防衛のための城</string>
+	<string name="poi_castle_type_fortress">城の種類:要塞</string>
+	<string name="poi_castle_type_palace">城の種類:御殿・宮殿</string>
+	<string name="poi_castle_type_kremlin">城の種類:城塞</string>
+	<string name="poi_castle_type_defensive_stately">城の種類:防衛、象徴的な城</string>
+	<string name="poi_castle_type_castrum">城の種類:ローマの砦</string>
+	<string name="poi_castle_type_shiro">城の種類:城(日本)</string>
+
+	<string name="poi_sauna_yes">サウナ有り(Sauna services)</string>
+	<string name="poi_openfire_yes">火の使用を許可</string>
+	<string name="poi_openfire_no">火の使用は不可</string>
+	<string name="poi_group_only_yes">既定グループに所属している場合のみ使用を許可</string>
+	<string name="poi_group_only_no">所属に制限なく使用許可</string>
+	<string name="poi_shower_yes">シャワー:有り</string>
+	<string name="poi_shower_no">シャワー:無し</string>
+	<string name="poi_shower_hot">シャワー:温水</string>
+	<string name="poi_shower_outdoor">シャワー:屋外</string>
+	<string name="poi_shower_cold">シャワー:水(冷水)</string>
+	<string name="poi_shower_indoor">シャワー:屋内</string>
+	<string name="poi_impromptu_yes">即席キャンプ場(キャンプが可能なだけで設備等の無い場所)</string>
+	<string name="poi_impromptu_no">正式運営されている、あるいは非公式だが設備の揃ったキャンプ場</string>
+	<string name="poi_capacity_tents">最大テント数</string>
+	<string name="poi_payment_cibus_yes">その他_Cibusプリペイドカード</string>
+	<string name="poi_payment_cibus_no">その他_Cibusカード使用不可</string>
+	<string name="poi_diet_vegetarian_few">(少数派の)ベジタリアン</string>
+	<string name="poi_capacity_caravans">キャンピングトレーラー(移動住宅)最大収容数</string>
+	<string name="poi_dog_yes">犬の受け入れ許可</string>
+	<string name="poi_dog_no">犬の受け入れ不可</string>
+
+	<string name="poi_refugee_yes">難民受け入れ施設有り</string>
+	<string name="poi_refugee_no">難民の受け入れ施設:無し</string>
+
+	<string name="poi_product_brick">生産物:レンガ</string>
+	<string name="poi_product_quicklime">生産物:生石灰</string>
+	<string name="poi_product_leather">生産物:革</string>
+	<string name="poi_product_lime">生産物:石灰(lime)</string>
+	<string name="poi_product_beer">生産物:ビール</string>
+	<string name="poi_product_charcoal">生産物:木炭</string>
+	<string name="poi_product_meat">生産物:肉製品</string>
+
+	<string name="poi_blind_description">視覚障害者向けの説明</string>
+	<string name="poi_deaf_description">聴覚障害者向けの説明</string>
+
+	<string name="poi_handrail_yes">手すり:有り</string>
+	<string name="poi_handrail_no">手すり:無し</string>
+	<string name="poi_ramp_yes">スロープ:有り</string>
+	<string name="poi_ramp_no">スロープ:無し</string>
+	<string name="poi_ramp_stroller_yes">ベビーカー用スロープ:有り</string>
+	<string name="poi_ramp_stroller_no">ベビーカー用スロープ:無し</string>
+	<string name="poi_ramp_luggage_yes">荷物運搬用スロープ:有り</string>
+	<string name="poi_ramp_luggage_no">荷物運搬用スロープ:無し</string>
+	<string name="poi_step_count">階段の段数</string>
+	<string name="poi_step_condition_even">階段の状態:滑らかで均一</string>
+	<string name="poi_step_condition_uneven">階段の状態:元からやや不均一</string>
+	<string name="poi_step_condition_rough">階段の状態:作りが不均一でかなり荒い</string>
+
+	<string name="poi_tomb_war_grave">墓の種類:戦没者の墓</string>
+	<string name="poi_tomb_tumulus">墓の種類:古墳</string>
+	<string name="poi_tomb_rock_cut">墓の種類:岩山をくりぬいた墓(rock-cut)</string>
+	<string name="poi_tomb_hypogeum">墓の種類:地下墳墓</string>
+	<string name="poi_tomb_vault">墓の種類:地下墓地、地下納骨所</string>
+	<string name="poi_tomb_columbarium">墓の種類:遺骨安置所</string>
+	<string name="poi_tomb_mausoleum">墓の種類:霊廟</string>
+	<string name="poi_tomb_sarcophagus">墓の種類:石棺</string>
+	<string name="poi_tomb_crypt">墓の種類:教会などの地下聖堂</string>
+	<string name="poi_tomb_pyramid">墓の種類:ピラミッド</string>
+
+	<string name="poi_historic_civilization_ancient_roman">文明:古代ローマ (紀元前753年 – 西暦284)</string>
 	</resources>
