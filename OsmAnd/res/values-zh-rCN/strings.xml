@@ -17,7 +17,7 @@
     <string name="index_srtm_parts">部分</string>
     <string name="download_select_map_types">其它地图</string>
     <string name="map_widget_max_speed">速度限制</string>
-    <string name="monitoring_control_start">開始</string>
+    <string name="monitoring_control_start">GPX</string>
     
     <string name="safe_mode">“安全模式”</string>
     <string name="no_route">沒有路由</string>
@@ -70,9 +70,9 @@
     <string name="rendering_attr_noAdminboundaries_name">隐藏边界</string>
 	
     
-    <string name="no_buildings_found">没有建筑物。</string>
-    <string name="incremental_search_city">搜寻城市增量</string>
-    <string name="search_villages_and_postcodes">搜索村庄/邮政编码</string>
+    <string name="no_buildings_found">未找到建筑物。</string>
+    <string name="incremental_search_city">增量搜寻城市</string>
+    <string name="search_villages_and_postcodes">搜索更多村庄/邮政编码</string>
 	<string name="map_widget_show_destination_arrow">显示目标方向</string>
     <string name="enable_plugin_monitoring_services">启用跟踪插件使用日志位置服务（GPX记录，网上查询）</string>
     <string name="gps_not_available">请在设置中启用GPS</string>
@@ -350,7 +350,7 @@
 	<string name="data_settings">数据</string>
 	<string name="osm_settings">OSM编辑</string>
 	<string name="save_current_track">保存当前GPX轨迹</string>
-	<string name="save_track_to_gpx">日志跟踪GPX文件</string>
+	<string name="save_track_to_gpx">导航时自动记录轨迹</string>
 	
 	
 	
@@ -711,7 +711,7 @@
 	
 	<string name="error_doing_search">离线搜索中发生错误</string>
 	<string name="system_locale">系统</string>
-	<string name="preferred_locale_descr">选择显示语言</string>
+	<string name="preferred_locale_descr">选择显示语言（请在修改后重启 OsmAnd）</string>
 	<string name="preferred_locale">显示语言</string>
 	<string name="incomplete_locale">不完整</string>
 	
@@ -1231,27 +1231,19 @@
     <string name="osmo_share_location">分享</string>
     <string name="osmo_pause_location">暂停</string>
     <string name="shared_string_notifications">通知</string>
-    <string name="release_2_5">"
- • 地图上可点击的图标
-
-
- • 强大的兴趣点过滤搜索：例如，根据菜肴搜索餐馆，或者具有特定设施的场所
-
-
- • 新的 Topo 地图风格，为骑行爱好者和登山者设计
-
-
- • 增强的旅途记录功能
-
-
- • 改进了导航提醒功能（Android Wear）
-
-
- • 许多其它改进和缺陷修复
-
-
- 还有更多待你发现……
- "</string>
+    <string name="release_2_5">" • 地图上可点击的图标
+\n
+\n • 强大的兴趣点过滤搜索：例如，根据菜肴搜索餐馆，或者具有特定设施的场所
+\n
+\n • 新的 Topo 地图风格，为骑行爱好者和登山者设计
+\n
+\n • 增强的旅途记录功能
+\n
+\n • 改进了导航提醒功能（Android Wear）
+\n
+\n • 许多其它改进和缺陷修复
+\n
+\n 还有更多待你发现…… "</string>
     <string name="christmas_poi">圣诞兴趣点</string>
     <string name="christmas_desc_q">显示圣诞兴趣点？</string>
     <string name="search_hint">输入城市、地址、兴趣点名称</string>
@@ -1311,24 +1303,17 @@
     <string name="rendering_value_light_brown_name">浅棕色</string>
     <string name="rendering_value_dark_brown_name">深棕色</string>
     <string name="use_osm_live_routing">OSM 实时导航</string>
-    <string name="release_2_3">"
- • OSM 实时功能。支持地图贡献者和开发者获取每小时更新的地图。 
-
-
- • 地图标记。新的快速地图选点的方式。
-
-
- • 更多详细的国别特有的道路标志以及包含许多新地图功能的 OSM 地图。
-
-
- • 改进的导航准备界面外观显示。 
-
-
- • 上下文菜单的许多改进，例如上下文中的地址查找。
-
-
-还有更多……
- "</string>
+    <string name="release_2_3">" • OSM 实时功能。支持地图贡献者和开发者获取每小时更新的地图。 
+\n
+\n • 地图标记。新的快速地图选点的方式。
+\n
+\n • 更多详细的国别特有的道路标志以及包含许多新地图功能的 OSM 地图。
+\n
+\n • 改进的导航准备界面外观显示。 
+\n
+\n • 上下文菜单的许多改进，例如上下文中的地址查找。
+\n
+\n还有更多…… "</string>
     <string name="get_directions">导航</string>
     <string name="settings_privacy">隐私</string>
     <string name="proxy_pref_title">代理</string>
@@ -1442,4 +1427,52 @@
     <string name="quick_action_showhide_osmbugs_title">显示/隐藏 OSM 笔记</string>
     <string name="quick_action_osmbugs_show">显示 OSM 笔记</string>
     <string name="quick_action_osmbugs_hide">隐藏 OSM 笔记</string>
+    <string name="shared_string_add_photos">添加照片</string>
+    <string name="routing_attr_allow_private_description">允许进入私有土地</string>
+    <string name="download_tab_downloads">全部下载</string>
+    <string name="download_tab_local">本地</string>
+    <string name="download_tab_updates">可更新</string>
+    <string name="no_internet_connection">无法进行下载，请检查您的互联网连接。</string>
+    <string name="everything_up_to_date">所有文件均为最新</string>
+    <string name="use_opengl_render">使用 OpenGL 渲染</string>
+    <string name="use_opengl_render_descr">使用硬件加速 OpenGL 渲染（可能在某些设备上无法工作）</string>
+    <string name="rendering_attr_publicTransportMode_name">公交车、无轨电车、通勤巴士线路</string>
+    <string name="rendering_attr_tramTrainRoutes_name">电车和铁路线路</string>
+    <string name="rendering_attr_subwayMode_name">地铁线路</string>
+    <string name="dash_download_msg_none">您是否想要下载离线地图？</string>
+    <string name="lock_screen_request_explanation">%1$s 需要该项权限以关闭屏幕提供节能功能。</string>
+    <string name="dash_download_msg">您已下载 %1$s 份地图</string>
+    <string name="dash_download_new_one">下载新地图</string>
+    <string name="dash_download_manage">管理</string>
+    <string name="rendering_attr_trainLightrailRoutes_name">铁路线路</string>
+    <string name="rendering_category_hide">隐藏</string>
+    <string name="traffic_warning_pedestrian">人行橫道</string>
+    <string name="rendering_category_routes">线路</string>
+    <string name="show_railway_warnings">铁道交口</string>
+    <string name="rendering_category_details">详细信息</string>
+    <string name="show_pedestrian_warnings">人行横道</string>
+    <string name="rendering_attr_busRoutes_name">公交线路</string>
+    <string name="traffic_warning_railways">铁道交口</string>
+    <string name="routing_attr_driving_style_name">驾驶风格</string>
+    <string name="enable_proxy_title">启用 HTTP 代理</string>
+    <string name="enable_proxy_descr">为所有网络请求配置 HTTP 代理</string>
+    <string name="proxy_host_title">代理主机</string>
+    <string name="proxy_host_descr">配置您的代理主机名（例如 127.0.0.1）</string>
+    <string name="proxy_port_descr">配置您的代理端口号（例如 8118）</string>
+    <string name="proxy_port_title">代理端口</string>
+    <string name="si_mi_meters">英里/米</string>
+    <string name="profile_settings">选择设置对应场景</string>
+    <string name="routing_attr_allow_private_name">允许私有访问</string>
+    <string name="routing_attr_weight_name">重量限制</string>
+    <string name="routing_attr_avoid_stairs_name">避开阶梯</string>
+    <string name="routing_attr_avoid_stairs_description">避开阶梯</string>
+    <string name="routing_attr_avoid_borders_name">避开边界穿越</string>
+    <string name="routing_attr_avoid_borders_description">避免穿越边境线进入其它国家</string>
+    <string name="routing_attr_weight_description">指定路线上允许的车辆重量</string>
+    <string name="routing_attr_height_name">高度限制</string>
+    <string name="routing_attr_height_description">指定路线上允许的车辆高度</string>
+    <string name="android_19_location_disabled">Android 4.4 版（KitKat）之后，您无法使用先前的存储文件夹（%s）下载或更新地图。您是否想要修改为允许的存储位置并将所有 OsmAnd 文件复制到新位置？
+\n 注1：您的旧文件不会移动（但是可以稍后手动删除）。
+\n 注2：使用新的存储位置后，您无法将这些文件在 OsmAnd 和 OsmAnd+ 之间进行共享。</string>
+    <string name="copying_osmand_one_file_descr">正在将文件（%s）复制到新位置……</string>
     </resources>
