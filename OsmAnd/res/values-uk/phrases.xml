@@ -3155,4 +3155,160 @@
 	<string name="poi_health_specialty_reiki_yes">Рейки (японський фельдшер)</string>
 	<string name="poi_nuclear_explosion_purpose_safety_experiment">Мета вибуху: вивчення безпеки</string>
 	<string name="poi_provided_for_boy_yes">Послуги надаються хлопчикам: так</string>
+	<string name="poi_service_repair">Ремонт</string>
+	<string name="poi_resource_lignite">Буре вугілля</string>
+	<string name="poi_surface_snow">Поверхня: сніг (зимник)</string>
+
+	<string name="poi_crop_lavender">Вирощується культура: лаванда</string>
+	<string name="poi_health_specialty_herbalism_yes">Травознавство</string>
+	<string name="poi_nuclear_explosion_purpose_research_for_peaceful_applications">Мета вибуху: дослідження для мирних застосувань</string>
+	<string name="poi_provided_for_boy_no">Послуги надаються хлопчикам: ні</string>
+
+	<string name="poi_cuisine">Кухня</string>
+	<string name="poi_cuisine_pastel">Пастель (пиріжок)</string>
+	<string name="poi_animal_keeping_horse">Для коней</string>
+	<string name="poi_service_repair_no">Ремонт не проводиться</string>
+	<string name="poi_resource_limestone">Вапняк</string>
+	<string name="poi_route_bus_ref">Автобус</string>
+	<string name="poi_crop_tea">Вирощується культура: чай</string>
+	<string name="poi_health_specialty_chiropractic_yes">Хіропрактика, мануальна терапія</string>
+	<string name="poi_nuclear_explosion_purpose_fundamental_science">Мета вибуху: фундаментальна наука</string>
+	<string name="poi_capacity_beds">Кількість ліжок</string>
+
+	<string name="poi_cuisine_pizza">Піца</string>
+	<string name="poi_cuisine_burrito">Буріто (мексиканська м\'ясна страва)</string>
+	<string name="poi_animal_keeping_sheep">Для овець</string>
+	<string name="poi_service_electrical">Ремонт електротранспорту</string>
+	<string name="poi_resource_marble">Мармур</string>
+	<string name="poi_route_share_taxi_ref">Маршрутним таксі</string>
+	<string name="poi_crop_coffee">Вирощується культура: кава</string>
+	<string name="poi_health_specialty_naturopathy_yes">Натуропатія</string>
+	<string name="poi_nuclear_explosion_purpose_industrial_application_cavity_excavation">Мета вибуху: промислове застосування, створення порожнин</string>
+	<string name="poi_treat_inpatient_yes">Обслуговування в стаціонарі: так</string>
+	<string name="poi_cuisine_burger">Бургер</string>
+	<string name="poi_cuisine_teriyaki">Теріякі (солодке м\'ясо з соєю)</string>
+	<string name="poi_animal_keeping_type_paddock">Тип: загін</string>
+	<string name="poi_motorcycle_repair">Ремонт мотоциклів</string>
+	<string name="poi_resource_mercury">Ртуть</string>
+	<string name="poi_route_trolleybus_ref">Тролейбус</string>
+	<string name="poi_crop_poultry">Вирощується культура: кормова рослина</string>
+	<string name="poi_health_specialty_depth_psychology_yes">Глибинна психологія</string>
+	<string name="poi_nuclear_explosion_purpose_industrial_application_seismic_sounding">Мета вибуху: промислове застосування, сейсмічне зондування</string>
+	<string name="poi_treat_inpatient_no">Обслуговування в стаціонарі: ні</string>
+	<string name="poi_cuisine_coffee">Кава</string>
+	<string name="poi_cuisine_shawarma">Кебаб (шаурма)</string>
+
+	<string name="poi_animal_keeping_type_open_stable">Стайня відкритого типу</string>
+
+	<string name="poi_self_service_yes">Так</string>
+	<string name="poi_self_service_no">Самообслуговування: відсутнє</string>
+	<string name="poi_resource_mica">Слюда</string>
+	<string name="poi_route_tram_ref">Трамвай</string>
+	<string name="poi_crop_sunflower">Вирощується культура: соняшник</string>
+	<string name="poi_health_specialty_behavior_yes">Біхевіяральна (поведінкова) психотерапія</string>
+	<string name="poi_nuclear_explosion_purpose_industrial_application_oil_stimulation">Мета вибуху: промислове застосування, стимуляція припливу нафти</string>
+	<string name="poi_treat_inpatient_only">Обслуговування в стаціонарі: виключно</string>
+	<string name="poi_cuisine_sandwich">Сендвіч</string>
+	<string name="poi_cuisine_regional">Місцева</string>
+	<string name="poi_tower_construction_lattice">Конструкція: ґратчаста</string>
+	<string name="poi_automated_yes">Так</string>
+	<string name="poi_resource_mineral_oil">Мінеральне масло</string>
+	<string name="poi_route_train_ref">Поїзд</string>
+	<string name="poi_crop_raspberry">Вирощується культура: малина</string>
+	<string name="poi_health_specialty_palliative_medicine_yes">Спеціалізація: паліативна допомога</string>
+
+	<string name="poi_nuclear_explosion_purpose_industrial_application">Мета вибуху: промислове застосування</string>
+	<string name="poi_counselling_yes">Консультаційні послуги</string>
+	<string name="poi_cuisine_kebab">Кебаб</string>
+	<string name="poi_cuisine_italian">Італійська</string>
+	<string name="poi_tower_construction_freestanding">Конструкція: масивна без відтяжок</string>
+	<string name="poi_tower_construction_dish">Конструкція: параболічна тарілка</string>
+	<string name="poi_automated_no">Без автоматизації</string>
+	<string name="poi_resource_nickel">Нікель</string>
+	<string name="poi_route_light_rail_ref">Легкорейковий транспорт</string>
+	<string name="poi_crop_tobacco">Вирощується культура: тютюн</string>
+	<string name="poi_building_type_pyramid">Тип будівлі: піраміда</string>
+
+	<string name="poi_nuclear_explosion_purpose_industrial_application_earth_moving">Мета вибуху: промислове застосування, зрушення земляних пластів</string>
+	<string name="poi_counselling_no">Консультаційні послуги: немає</string>
+	<string name="poi_cuisine_doner">Донер кебаб (шаурма)</string>
+	<string name="poi_cuisine_chinese">Китайська</string>
+	<string name="poi_tower_construction_dome">Конструкція: купол</string>
+	<string name="poi_full_service_yes">Повний комплекс послуг</string>
+	<string name="poi_resource_oil">Сира нафта</string>
+	<string name="poi_route_monorail_ref">Монорельс</string>
+	<string name="poi_crop_strawberry">Вирощується культура: полуниця</string>
+	<string name="poi_fitness_centre">Фітнес-центр</string>
+	<string name="poi_nuclear_explosion_time_utc">Час вибуху (UTC)</string>
+	<string name="poi_cuisine_chicken">Курка</string>
+	<string name="poi_cuisine_mexican">Мексиканська</string>
+	<string name="poi_tower_construction_concealed">Конструкція: замаскована</string>
+
+	<string name="poi_brushless_yes">Так</string>
+	<string name="poi_wetland_marsh">Лісисте болото</string>
+	<string name="poi_emergency_yes">Крайня необхідність: так</string>
+	<string name="poi_route_funicular_ref">Фунікулер</string>
+	<string name="poi_fitness">Фітнес</string>
+
+	<string name="poi_nuclear_explosion_yield">Потужність вибуху</string>
+	<string name="poi_cuisine_ice_cream">Морозиво</string>
+	<string name="poi_crop_vegetables_flowers">Вирощується культура: овочі, квіти</string>
+	<string name="poi_cuisine_japanese">Японська</string>
+	<string name="poi_brushless_no">Контактна</string>
+	<string name="poi_wetland_reedbed">Очеретяні зарості</string>
+	<string name="poi_railway_yard">Вантажна станція</string>
+
+	<string name="poi_route_ferry_ref">Паром</string>
+
+	<string name="poi_billiards">Більярд</string>
+
+	<string name="poi_nuclear_explosion_hole">Кратер після вибуху</string>
+	<string name="poi_emergency_no">Крайня необхідність: немає</string>
+	<string name="poi_cuisine_sushi">Суші</string>
+	<string name="poi_crop_cassava">Вирощується культура: маніока</string>
+	<string name="poi_car_wash_no">Без автомийки</string>
+
+
+	<string name="poi_wetland_swamp">Відкрите болото</string>
+	<string name="poi_route_railway_ref">Маршрут залізниці</string>
+
+	<string name="poi_microwave_oven_yes">Мікрохвильова піч: присутня</string>
+	<string name="poi_nuclear_explosion_height_of_burst">Висота вибуху (від поверхні)</string>
+	<string name="poi_home_visit_yes">Так</string>
+	<string name="poi_cuisine_fish_and_chips">Риба і чіпси</string>
+	<string name="poi_cuisine_german">Німецька</string>
+	<string name="poi_coworking_space">Коворкінг</string>
+
+	<string name="poi_public_bath">Громадська лазня</string>
+
+	<string name="poi_wetland_saltern">Солеварня</string>
+	<string name="poi_crop_cranberry">Вирощується культура: журавлина</string>
+	<string name="poi_industrial_port">Тип: порт</string>
+	<string name="poi_microwave_oven_no">Мікрохвильова піч: відсутня</string>
+	<string name="poi_free_flying_site_orientation_n">Орієнтація майданчика для вільного польоту: N</string>
+	<string name="poi_home_visit_no">Виїзд на дім: ні</string>
+
+	<string name="poi_cuisine_seafood">Морепродукти</string>
+	<string name="poi_cuisine_indian">Індійська</string>
+	<string name="poi_fast_food_cafeteria">Так</string>
+
+	<string name="poi_vending_food">Продукти харчування</string>
+	<string name="poi_wetland_tidalflat">Ватти (прибережна мілина)</string>
+	<string name="poi_industrial_depot">Тип: депо</string>
+
+	<string name="poi_crop_asparagus">Вирощується культура: спаржа</string>
+	<string name="poi_water_heater_yes">Водонагрівач: присутній</string>
+	<string name="poi_free_flying_site_orientation_ne">Орієнтація майданчика для вільного польоту: NE</string>
+	<string name="poi_disease_malaria_yes">Малярія: так</string>
+	<string name="poi_cuisine_barbecue">Барбекю</string>
+	<string name="poi_cuisine_balkan">Балканська</string>
+	<string name="poi_drink_wine_yes">Вино: так</string>
+	<string name="poi_vending_drinks_food">Напої і закуски</string>
+	<string name="poi_wetland_saltmarsh">Болото, періодично затоплюване морською водою</string>
+	<string name="poi_note">Нотатка</string>
+	<string name="poi_crop_flowers">Вирощується культура: квіти</string>
+
+	<string name="poi_water_heater_no">Водонагрівач: відсутній</string>
+
+	<string name="poi_free_flying_site_orientation_e">Орієнтація майданчика для вільного польоту: схід (E)</string>
 	</resources>
