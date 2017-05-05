@@ -2823,4 +2823,6 @@ De Afganujo al Zimbabvo, de Aŭstralio al Usono, Argentino, Brazilo, Kanado, Fra
     <string name="shared_string_add_photos">Aldoni fotojn</string>
     <string name="mapillary_action_descr">Kontribui per viaj strat-nivelaj vidaĵoj de tiu ĉi loko per Mapillary.</string>
     <string name="plugin_mapillary_descr">Strat-nivelaj fotoj por ĉiuj. Esplori lokojn, kunlabori kaj foti la mondon.</string>
+    <string name="online_photos">Enretaj fotoj</string>
+    <string name="no_photos_descr">Ni ne havas fotojn pri tiu ĉi loko</string>
     </resources>
