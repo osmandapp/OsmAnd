@@ -2948,4 +2948,211 @@
 	<string name="poi_voltage">Напруга</string>
 	<string name="poi_cuisine_pasta">Макаронні вироби</string>
 	<string name="poi_cuisine_mongolian">Монгольська</string>
+	<string name="poi_takeaway_only">Лише на винос</string>
+
+	<string name="poi_vending_drinks_sweets">Напої та солодощі</string>
+	<string name="poi_surface_asphalt">Поверхня: асфальт</string>
+	<string name="poi_fuel_autogas">Автогаз</string>
+	<string name="poi_castle_type_castrum">Тип замку: римський форт</string>
+	<string name="poi_nuclear_explosion_type_underground_tunnel">Тип вибуху: підземний, тунель</string>
+	<string name="poi_counselling_type_violence_yes">Консультація з питань (домашнього) насильства: так</string>
+	<string name="poi_generator_output_electricity">Вихідна потужність</string>
+	<string name="poi_cuisine_juice">Соки</string>
+	<string name="poi_cuisine_middle_eastern">Близькосхідна</string>
+	<string name="poi_delivery_filter_yes">Так</string>
+	<string name="poi_vending_vouchers">Ваучери</string>
+	<string name="poi_surface_concrete">Поверхня: бетон</string>
+	<string name="poi_fuel_jeta1">Паливо Jet A-1</string>
+	<string name="poi_castle_type_shiro">Тип замку: сіро (японський замок)</string>
+
+	<string name="poi_nuclear_explosion_type_atmospheric">Тип вибуху: атмосферний</string>
+	<string name="poi_counselling_type_violence_no">Консультація з питань (домашнього) насильства: немає</string>
+
+	<string name="poi_generator_output_electricity_yes">Виробляє електрику</string>
+	<string name="poi_cuisine_soba">Соба (локшина з гречаного борошна)</string>
+	<string name="poi_cuisine_ukrainian">Українська</string>
+	<string name="poi_delivery_yes">Доставка</string>
+	<string name="poi_vending_dvd">DVD-диск</string>
+	<string name="poi_surface_sett">Поверхня: бруківка</string>
+	<string name="poi_fuel_adblue">Паливо AdBlue</string>
+
+	<string name="poi_massage_thai">Тайський</string>
+	<string name="poi_nuclear_explosion_type_atmospheric_airdrop">Тип вибуху: атмосферний, скидання з літака</string>
+	<string name="poi_provided_for_infant_yes">Послуги надаються немовлятам: так</string>
+	<string name="poi_generator_output_hot_water">Вихідна потужність гарячої води</string>
+	<string name="poi_cuisine_fine_dining">Вишукані страви</string>
+	<string name="poi_cuisine_afghan">Афганська</string>
+	<string name="poi_delivery_no">Немає доставки</string>
+	<string name="poi_vending_candles">Свічки</string>
+	<string name="poi_surface_cobblestone">Поверхня: покладений булижник</string>
+	<string name="poi_fuel_wood">Паливо: дрова</string>
+	<string name="poi_massage_sexual">Еротичний</string>
+	<string name="poi_nuclear_explosion_type_atmospheric_surface_tower">Тип вибуху: атмосферний, на поверхні (вежа)</string>
+	<string name="poi_provided_for_infant_no">Послуги надаються немовлятам: ні</string>
+	<string name="poi_generator_output_hot_water_yes">Виробляє гарячу воду</string>
+	<string name="poi_cuisine_tea">Чай</string>
+	<string name="poi_cuisine_belgian">Бельгійська</string>
+	<string name="poi_delivery_only">Лише з доставкою</string>
+
+	<string name="poi_outdoor_seating_filter_yes">Так</string>
+	<string name="poi_vending_toys">Продаж іграшок</string>
+	<string name="poi_surface_paving_stones">Поверхня: тротуарна плитка</string>
+	<string name="poi_fuel_charcoal">Паливо: деревне вугілля</string>
+	<string name="poi_massage_chinese">Китайський</string>
+	<string name="poi_nuclear_explosion_type_atmospheric_balloon">Тип вибуху: атмосферний, на повітряній кулі</string>
+	<string name="poi_provided_for_toddler_yes">Послуги надаються немовлятам: так</string>
+	<string name="poi_xmas_shop">Різдвяний магазин</string>
+	<string name="poi_cuisine_soup">Зупи</string>
+	<string name="poi_cuisine_basque">Баскська</string>
+	<string name="poi_outdoor_seating_yes">Місця на відкритому повітрі: є</string>
+	<string name="poi_vending_ice_cream">Продаж морозива</string>
+	<string name="poi_surface_pebblestone">Поверхня: галька</string>
+	<string name="poi_fuel_coal">Паливо: кам\'яне вугілля</string>
+
+	<string name="poi_health_specialty_obstetrics_caesarean_section_no">Спеціалізація: акушерство (кесарів розтин): відсутнє</string>
+	<string name="poi_nuclear_explosion_type_atmospheric_atmospheric_surface">Тип вибуху: атмосферний (на поверхні)</string>
+	<string name="poi_provided_for_toddler_no">Послуги надаються немовлятам: ні</string>
+	<string name="poi_xmas_shop_christmas_tree">Магазин ялинок</string>
+	<string name="poi_cuisine_pie">Пироги</string>
+	<string name="poi_cuisine_swiss">Швейцарська</string>
+	<string name="poi_outdoor_seating_no">Немає місць на відкритому повітрі</string>
+	<string name="poi_vending_sim_cards">SIM-картки</string>
+
+	<string name="poi_surface_stone">Поверхня: кам\'яниста</string>
+	<string name="poi_surface_metal">Поверхня: метал</string>
+	<string name="poi_street_lamp">Вуличний ліхтар</string>
+
+	<string name="poi_health_specialty_addiction_medicine_yes">Наркологія</string>
+	<string name="poi_nuclear_explosion_type_atmospheric_water_surface_barge">Тип вибуху: атмосферний (поверхня води, баржа)</string>
+	<string name="poi_provided_for_child_yes">Послуги надаються дітям: так</string>
+	<string name="poi_xmas_tree">Різдвяна ялинка</string>
+	<string name="poi_cuisine_sagardotegia">Сидр</string>
+	<string name="poi_cuisine_cantonese">Кантонська</string>
+	<string name="poi_outdoor_seating_terrace">Місця на відкритому повітрі: на терасі</string>
+	<string name="poi_branch">Відділення</string>
+
+	<string name="poi_surface_wood">Поверхня: дерево</string>
+	<string name="poi_escape_lane">Смуга аварійного гальмування</string>
+
+	<string name="poi_health_specialty_optometry_yes">Оптометрія</string>
+	<string name="poi_nuclear_explosion_type_underground">Тип вибуху: підземний</string>
+	<string name="poi_provided_for_child_no">Послуги надаються дітям: ні</string>
+	<string name="poi_xmas_day_date">Різдво: початок і закінчення події</string>
+	<string name="poi_cuisine_meat">М\'ясо</string>
+	<string name="poi_cuisine_swedish">Шведська</string>
+	<string name="poi_outdoor_seating_sidewalk">Місця на відкритому повітрі: на тротуарі</string>
+	<string name="poi_resource_copper">Мідь</string>
+	<string name="poi_surface_gravel">Поверхня: гравій</string>
+	<string name="poi_crop_rice">Вирощується культура: рис</string>
+	<string name="poi_nuclear_explosion_type_cratering_burst">Тип вибуху: неглибокого закладення</string>
+	<string name="poi_provided_for_adult_yes">Послуги надаються дорослим: так</string>
+	<string name="poi_xmas_note">Різдво: нотатка</string>
+	<string name="poi_cuisine_wings">Крильця</string>
+	<string name="poi_cuisine_jamaican">Ямайська</string>
+	<string name="poi_outdoor_seating_pedestrian_zone">Місця на відкритому повітрі: пішохідна зона</string>
+	<string name="poi_resource_diamond">Діаманти</string>
+	<string name="poi_surface_fine_gravel">Поверхня: багатошаровий гравій</string>
+	<string name="poi_crop_grass">Вирощується культура: трава</string>
+	<string name="poi_health_specialty_clinical_pathology_yes">Клінічна патологія</string>
+	<string name="poi_nuclear_explosion_type_atmospheric_rocket_or_missile">Тип вибуху: атмосферний (ракета)</string>
+	<string name="poi_provided_for_adult_no">Послуги надаються дорослим: ні</string>
+	<string name="poi_xmas_opening_hours">Різдво: години роботи</string>
+	<string name="poi_cuisine_waffle">Вафлі</string>
+	<string name="poi_gambling_slot_machines">Гральні автомати</string>
+	<string name="poi_outdoor_seating_garden">Місця на відкритому повітрі: в саду</string>
+	<string name="poi_resource_dimension_stone">Будівельний камінь</string>
+	<string name="poi_surface_compacted">Поверхня: утрамбований грунт і каміння</string>
+	<string name="poi_crop_corn">Вирощується культура: кукурудза</string>
+	<string name="poi_health_specialty_speech_therapy_yes">Логопед</string>
+	<string name="poi_nuclear_explosion_type_space">Тип вибуху: космічний (висота понад 80км)</string>
+	<string name="poi_provided_for_woman_yes">Послуги надаються жінкам: так</string>
+	<string name="poi_xmas_location">Різдво: місце проведення</string>
+	<string name="poi_cuisine_chocolate">Шоколад</string>
+	<string name="poi_gambling_betting">Ставки, парі</string>
+	<string name="poi_outdoor_seating_patio">Місця на відкритому повітрі: патіо</string>
+
+	<string name="poi_resource_dolomite">Доломіт</string>
+	<string name="poi_surface_sand">Поверхня: пісок</string>
+	<string name="poi_crop_cereal">Вирощується культура: зернова</string>
+	<string name="poi_health_specialty_manual_therapy_yes">Мануальна терапія</string>
+	<string name="poi_nuclear_explosion_type_underwater">Тип вибуху: підводний</string>
+	<string name="poi_provided_for_woman_no">Послуги надаються жінкам: ні</string>
+	<string name="poi_xmas_url">Різдво: вебсайт</string>
+
+	<string name="poi_cuisine_wine">Вино</string>
+	<string name="poi_gambling_bingo">Бінго</string>
+
+	<string name="poi_cocktails_yes">Так</string>
+
+	<string name="poi_resource_gas">Природний газ</string>
+	<string name="poi_surface_grass">Поверхня: трава</string>
+	<string name="poi_crop_sugarcane">Вирощується культура: цукрова тростина</string>
+	<string name="poi_health_specialty_sports_medicine_yes">Спортивна медицина</string>
+	<string name="poi_nuclear_explosion_date_utc">Дата вибуху (UTC)</string>
+	<string name="poi_provided_for_senior_yes">Послуги надаються людям похилого віку: так</string>
+	<string name="poi_public_bookcase">Громадська книжкова шафа</string>
+	<string name="poi_cuisine_potato">Картопля</string>
+	<string name="poi_e_cigarette">Електронні сигарети</string>
+
+	<string name="poi_second_hand_yes">Вживані товари</string>
+	<string name="poi_resource_gold"/>
+	<string name="poi_surface_grass_paver">Поверхня: нещільне мощення камінням</string>
+	<string name="poi_crop_wheat">Вирощується культура: пшениця</string>
+	<string name="poi_health_specialty_podology_yes">Подологія</string>
+	<string name="poi_provided_for_senior_no">Послуги надаються людям похилого віку: немає</string>
+	<string name="poi_public_bookcase_type_phone_box">Тип: телефонна будка</string>
+	<string name="poi_cuisine_brunch">Другий сніданок (бранч)</string>
+	<string name="poi_locomotive">Локомотив</string>
+
+	<string name="poi_second_hand_no">Немає вживаних товарів</string>
+	<string name="poi_resource_graphite">Графіт</string>
+	<string name="poi_surface_ground">Поверхня: голий грунт</string>
+	<string name="poi_crop_soy">Вирощується культура: соя</string>
+	<string name="poi_health_specialty_adult_psychiatry_yes">Психіатрія для дорослих</string>
+	<string name="poi_nuclear_explosion_shot_name_en">Кодове ім\'я (англ)</string>
+	<string name="poi_provided_for_girl_yes">Послуги надаються дівчаткам: так</string>
+	<string name="poi_public_bookcase_type_reading_box">Тип: шафа з книгами</string>
+	<string name="poi_cuisine_sub">Сендвіч в формі підводного човна</string>
+	<string name="poi_nutrition_supplements">Харчові добавки</string>
+	<string name="poi_second_hand_only">Лише вживані товари</string>
+
+	<string name="poi_resource_gravel">Гравій</string>
+	<string name="poi_surface_dirt">Поверхня: бруд</string>
+	<string name="poi_crop_barley">Вирощується культура: ячмінь</string>
+	<string name="poi_crop_vegetables">Вирощується культура: овочі</string>
+	<string name="poi_health_specialty_acupuncture_yes">Акупунктура (голковколювання)</string>
+	<string name="poi_nuclear_explosion_series">Серія</string>
+	<string name="poi_provided_for_girl_no">Послуги надаються дівчаткам: ні</string>
+	<string name="poi_public_bookcase_type_wooden_cabinet">Тип: дерев\'яна шафа</string>
+	<string name="poi_cuisine_pita">Піта (м\'які коржі)</string>
+	<string name="poi_photo_studio">Фотостудія</string>
+
+	<string name="poi_service_parts">Запчастини</string>
+	<string name="poi_resource_gypsum">Гіпс</string>
+	<string name="poi_surface_mud">Поверхня: бруд без твердого шару</string>
+	<string name="poi_crop_hop">Вирощується культура: хміль</string>
+	<string name="poi_health_specialty_homeopathy_yes">Гомеопатія</string>
+	<string name="poi_nuclear_explosion_purpose_nuclear_weapons_related">Мета вибуху: випробування ядерної зброї</string>
+	<string name="poi_provided_for_man_yes">Послуги надаються чоловікам: так</string>
+	<string name="poi_public_bookcase_type_metal_cabinet">Тип: металева шафа</string>
+	<string name="poi_cuisine_fondue">Фондю (сирне блюдо)</string>
+	<string name="poi_cliff">Скеля (прямовисна)</string>
+
+	<string name="poi_service_dealer">Дилер</string>
+	<string name="poi_resource_iron_ore">Залізна руда</string>
+	<string name="poi_surface_ice">Поверхня: лід</string>
+	<string name="poi_crop_rape">Вирощується культура: ріпак</string>
+	<string name="poi_health_specialty_traditional_chinese_medicine_yes">Традиційна китайська медицина</string>
+	<string name="poi_nuclear_explosion_purpose_weapons_effects">Мета вибуху: ефект зброї</string>
+	<string name="poi_provided_for_man_no">Послуги надаються чоловікам: ні</string>
+	<string name="poi_public_bookcase_type_shelf">Тип: шафа для одягу (в будівлі)</string>
+
+	<string name="poi_cuisine_baguette">Французький багет</string>
+	<string name="poi_animal_keeping">Місце утримання тварин</string>
+	<string name="poi_resource_lead">Свинець</string>
+	<string name="poi_surface_salt">Поверхня: сіль (соляні озера)</string>
+	<string name="poi_crop_beet">Вирощується культура: буряк</string>
+	<string name="poi_health_specialty_reiki_yes">Рейки (японський фельдшер)</string>
+	<string name="poi_nuclear_explosion_purpose_safety_experiment">Мета вибуху: вивчення безпеки</string>
+	<string name="poi_provided_for_boy_yes">Послуги надаються хлопчикам: так</string>
 	</resources>
