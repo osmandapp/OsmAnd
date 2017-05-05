@@ -2254,9 +2254,9 @@
 	<string name="poi_traffic_calming_island">Illot de tràfic</string>
 	<string name="poi_min_age">Edat mínima</string>
 
-	<string name="poi_organic_yes">Menjar orgànic: sí</string>
-	<string name="poi_organic_no">Menjar orgànic: no</string>
-	<string name="poi_organic_only">Només menjar orgànic</string>
+	<string name="poi_organic_yes">Sí</string>
+	<string name="poi_organic_no">No</string>
+	<string name="poi_organic_only">Exclusivament</string>
 
 	<string name="poi_diplomatic_consulate">Consolat</string>
 	<string name="poi_diplomatic_consulate_general">Consolat general</string>
