@@ -17,6 +17,7 @@ import net.osmand.data.LatLon;
 import net.osmand.plus.OsmandApplication;
 import net.osmand.plus.R;
 import net.osmand.plus.Version;
+import net.osmand.plus.mapillary.MapillaryContributeCard;
 import net.osmand.plus.mapillary.MapillaryImageCard;
 import net.osmand.util.Algorithms;
 
@@ -111,6 +112,8 @@ public abstract class ImageCard extends AbstractCard {
 				String type = imageObject.getString("type");
 				if ("mapillary-photo".equals(type)) {
 					imageCard = new MapillaryImageCard(app, imageObject);
+				} else if ("mapillary-contribute".equals(type)) {
+					imageCard = new MapillaryContributeCard(app, imageObject);
 				} else {
 					imageCard = new UrlImageCard(app, imageObject);
 				}
