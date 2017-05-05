@@ -22,14 +22,16 @@ public class CardsRowBuilder {
 	private MenuBuilder menuBuilder;
 	private View view;
 	private OsmandApplication app;
+	private boolean addToLayout;
 	private List<AbstractCard> cards = new ArrayList<>();
 	private LockableViewPager viewPager;
 	private ViewsPagerAdapter pagerAdapter;
 	private int dp10;
 
-	public CardsRowBuilder(MenuBuilder menuBuilder, View view) {
+	public CardsRowBuilder(MenuBuilder menuBuilder, View view, boolean addToLayout) {
 		this.menuBuilder = menuBuilder;
 		this.view = view;
+		this.addToLayout = addToLayout;
 		this.app = menuBuilder.getApplication();
 		this.dp10 = AndroidUtils.dpToPx(app, 10f);
 	}
@@ -38,7 +40,7 @@ public class CardsRowBuilder {
 		return menuBuilder;
 	}
 
-	public LockableViewPager getViewPager() {
+	public View getContentView() {
 		return viewPager;
 	}
 
@@ -58,7 +60,7 @@ public class CardsRowBuilder {
 	}
 
 	public void setProgressCard() {
-		setCards(new ProgressCard());
+		setCards(new ProgressCard(app));
 	}
 
 	public void build() {
@@ -73,7 +75,9 @@ public class CardsRowBuilder {
 		pagerAdapter = new ViewsPagerAdapter();
 		viewPager.setAdapter(pagerAdapter);
 		viewPager.setSwipeLocked(itemsCount() < 2);
-		//((LinearLayout) view).addView(viewPager);
+		if (addToLayout) {
+			((LinearLayout) view).addView(viewPager);
+		}
 	}
 
 	private int itemsCount() {

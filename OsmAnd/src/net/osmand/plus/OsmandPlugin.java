@@ -456,8 +456,7 @@ public abstract class OsmandPlugin {
 		return collection;
 	}
 
-	private static boolean isPackageInstalled(String packageInfo,
-											  OsmandApplication app) {
+	public static boolean isPackageInstalled(String packageInfo, OsmandApplication app) {
 		if (packageInfo == null) {
 			return false;
 		}

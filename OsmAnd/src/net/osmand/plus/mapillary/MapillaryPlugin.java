@@ -1,6 +1,9 @@
 package net.osmand.plus.mapillary;
 
 import android.app.Activity;
+import android.content.ActivityNotFoundException;
+import android.content.Intent;
+import android.net.Uri;
 import android.os.Bundle;
 import android.support.annotation.NonNull;
 import android.support.v4.app.FragmentActivity;
@@ -41,6 +44,7 @@ import java.util.List;
 
 public class MapillaryPlugin extends OsmandPlugin {
 	public static final String ID = "osmand.mapillary";
+	private static final String MAPILLARY_PACKAGE_ID = "app.mapillary";
 	private OsmandSettings settings;
 	private OsmandApplication app;
 
@@ -95,7 +99,7 @@ public class MapillaryPlugin extends OsmandPlugin {
 		updateMapLayers(mapView, activity.getMapLayers());
 	}
 
-	public void updateMapLayers(OsmandMapTileView mapView, final MapActivityLayers layers) {
+	private void updateMapLayers(OsmandMapTileView mapView, final MapActivityLayers layers) {
 		if (rasterLayer == null) {
 			createLayers();
 		}
@@ -108,7 +112,7 @@ public class MapillaryPlugin extends OsmandPlugin {
 		layers.updateMapSource(mapView, null);
 	}
 
-	public void updateLayer(OsmandMapTileView mapView, MapTileLayer layer, float layerOrder) {
+	private void updateLayer(OsmandMapTileView mapView, MapTileLayer layer, float layerOrder) {
 		ITileSource mapillarySource = null;
 		if (settings.SHOW_MAPILLARY.get()) {
 			mapillarySource = settings.getTileSourceByName(TileSourceManager.getMapillarySource().getName(), false);
@@ -181,14 +185,14 @@ public class MapillaryPlugin extends OsmandPlugin {
 		mapillaryControl.setOnClickListener(new View.OnClickListener() {
 			@Override
 			public void onClick(View v) {
-				// todo open mapillary app
+				openMapillary(app);
 			}
 		});
 
 		return mapillaryControl;
 	}
 
-	public void setWidgetVisible(MapActivity mapActivity, boolean visible) {
+	private void setWidgetVisible(MapActivity mapActivity, boolean visible) {
 		if (mapillaryWidgetRegInfo != null) {
 			final List<ApplicationMode> allModes = ApplicationMode.allPossibleValues();
 			for (ApplicationMode mode : allModes) {
@@ -209,9 +213,9 @@ public class MapillaryPlugin extends OsmandPlugin {
 		}
 
 		boolean needUpdateOnly = contextMenuCardsRow != null && contextMenuCardsRow.getMenuBuilder() == menuBuilder;
-		contextMenuCardsRow = new CardsRowBuilder(menuBuilder, view);
+		contextMenuCardsRow = new CardsRowBuilder(menuBuilder, view, false);
 		contextMenuCardsRow.build();
-		CollapsableView collapsableView = new CollapsableView(contextMenuCardsRow.getViewPager(),
+		CollapsableView collapsableView = new CollapsableView(contextMenuCardsRow.getContentView(),
 				app.getSettings().MAPILLARY_MENU_COLLAPSED);
 		collapsableView.setOnCollExpListener(new CollapsableView.OnCollExpListener() {
 			@Override
@@ -243,7 +247,7 @@ public class MapillaryPlugin extends OsmandPlugin {
 						if (!menuBuilder.isHidden()) {
 							List<AbstractCard> cards = new ArrayList<>();
 							cards.addAll(cardList);
-							cards.add(new AddMapillaryPhotoCard());
+							cards.add(new AddMapillaryPhotoCard(app));
 							contextMenuCardsRow.setCards(cards);
 							contextMenuCards = cards;
 						}
@@ -255,6 +259,34 @@ public class MapillaryPlugin extends OsmandPlugin {
 	public void clearContextMenuRows() {
 		contextMenuCardsRow = null;
 		contextMenuCards = null;
+	}
+
+	public static boolean openMapillary(OsmandApplication app) {
+		boolean success = false;
+		if (isPackageInstalled(MAPILLARY_PACKAGE_ID, app)) {
+			Intent launchIntent = app.getPackageManager().getLaunchIntentForPackage(MAPILLARY_PACKAGE_ID);
+			if (launchIntent != null) {
+				app.startActivity(launchIntent);
+				success = true;
+			}
+		} else {
+			success = execInstall(app, "market://search?q=pname:" + MAPILLARY_PACKAGE_ID);
+			if (!success) {
+				success = execInstall(app, "https://play.google.com/store/apps/details?id=" + MAPILLARY_PACKAGE_ID);
+			}
+		}
+		return success;
+	}
+
+	private static boolean execInstall(OsmandApplication app, String url) {
+		Intent intent = new Intent(Intent.ACTION_VIEW, Uri.parse(url));
+		try {
+			app.startActivity(intent);
+			return true;
+		} catch (ActivityNotFoundException e) {
+			e.printStackTrace();
+		}
+		return false;
 	}
 
 	public static class MapillaryFirstDialogFragment extends BottomSheetDialogFragment {

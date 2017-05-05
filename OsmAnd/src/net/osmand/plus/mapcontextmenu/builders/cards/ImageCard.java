@@ -58,7 +58,6 @@ public abstract class ImageCard extends AbstractCard {
 	// Image bitmap url
 	private String imageUrl;
 
-	private OsmandApplication app;
 	private int defaultImageLayoutId = R.layout.context_menu_card_image;
 
 	protected Drawable icon;
@@ -76,7 +75,7 @@ public abstract class ImageCard extends AbstractCard {
 	}
 
 	public ImageCard(OsmandApplication app, JSONObject imageObject) {
-		this.app = app;
+		super(app);
 		try {
 			if (imageObject.has("type")) {
 				this.type = imageObject.getString("type");
@@ -369,7 +368,7 @@ public abstract class ImageCard extends AbstractCard {
 
 		@Override
 		protected Bitmap doInBackground(Void... params) {
-			return AndroidNetworkUtils.downloadImage(app, imageUrl);
+			return AndroidNetworkUtils.downloadImage(getOsmandApplication(), imageUrl);
 		}
 
 		@Override

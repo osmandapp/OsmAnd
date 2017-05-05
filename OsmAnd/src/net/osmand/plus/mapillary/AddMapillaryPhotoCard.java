@@ -2,10 +2,15 @@ package net.osmand.plus.mapillary;
 
 import android.view.View;
 
+import net.osmand.plus.OsmandApplication;
 import net.osmand.plus.R;
 import net.osmand.plus.mapcontextmenu.builders.cards.AbstractCard;
 
-public class AddMapillaryPhotoCard extends AbstractCard {
+class AddMapillaryPhotoCard extends AbstractCard {
+
+	AddMapillaryPhotoCard(OsmandApplication app) {
+		super(app);
+	}
 
 	@Override
 	public int getCardLayoutId() {
@@ -18,7 +23,7 @@ public class AddMapillaryPhotoCard extends AbstractCard {
 			view.findViewById(R.id.button).setOnClickListener(new View.OnClickListener() {
 				@Override
 				public void onClick(View v) {
-					// todo open mapillary
+					MapillaryPlugin.openMapillary(getOsmandApplication());
 				}
 			});
 		}
