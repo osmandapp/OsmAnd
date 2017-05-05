@@ -239,8 +239,7 @@ public class MapillaryPlugin extends OsmandPlugin {
 		contextMenuCards = new ArrayList<>();
 		contextMenuCardsRow.setProgressCard();
 		ImageCard.execute(new GetImageCardsTask<>(
-				new MapillaryImageCard.MapillaryImageCardFactory(),
-				app, menuBuilder.getLatLon(),
+				new MapillaryImageCard.MapillaryImageCardFactory(), app, menuBuilder.getLatLon(),
 				new GetImageCardsTask.Listener<MapillaryImageCard>() {
 					@Override
 					public void onFinish(List<MapillaryImageCard> cardList) {
@@ -281,6 +280,7 @@ public class MapillaryPlugin extends OsmandPlugin {
 	private static boolean execInstall(OsmandApplication app, String url) {
 		Intent intent = new Intent(Intent.ACTION_VIEW, Uri.parse(url));
 		try {
+			intent.setFlags(Intent.FLAG_ACTIVITY_NEW_TASK);
 			app.startActivity(intent);
 			return true;
 		} catch (ActivityNotFoundException e) {

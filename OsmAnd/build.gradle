@@ -54,6 +54,7 @@ android {
 	aaptOptions {
 		// Don't compress any embedded resources
 		noCompress "qz"
+		cruncherEnabled = false
 	}
 
 	dexOptions {
