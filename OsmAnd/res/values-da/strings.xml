@@ -3064,4 +3064,5 @@ Tidligere destination bliver sidste mellemliggende punkt.</string>
     <string name="shared_string_add_photos">Tilføj fotos</string>
     <string name="mapillary_action_descr">Bidrag med visninger af placeringen på gadeniveau med Mapillary.</string>
     <string name="plugin_mapillary_descr">Billeder på gadeniveau for alle. Opdag steder, samarbejd, indfang verdenen.</string>
+    <string name="online_photos">Online fotos</string>
     </resources>
