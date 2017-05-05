@@ -2948,5 +2948,12 @@
 	<string name="poi_tomb_crypt">墓の種類:教会などの地下聖堂</string>
 	<string name="poi_tomb_pyramid">墓の種類:ピラミッド</string>
 
-	<string name="poi_historic_civilization_ancient_roman">文明:古代ローマ (紀元前753年 – 西暦284)</string>
+	<string name="poi_historic_civilization_ancient_roman">文明:古代ローマ (紀元前753年 – 西暦284年)</string>
+	<string name="poi_historic_civilization_nuragic">"文明:ヌラージック (紀元前18世紀  – 紀元２世紀)"</string>
+	<string name="poi_historic_civilization_etruscan">文明:エトルリア文明　(紀元前12世紀 – 6世紀)</string>
+	<string name="poi_historic_civilization_prehistoric">文明:有史以前、先史文明</string>
+	<string name="poi_historic_civilization_ancient_greek">文明:古代ギリシア</string>
+	<string name="poi_historic_civilization_roman">文明:ローマ文明</string>
+	<string name="poi_historic_civilization_byzantine">文明:ビザンティン文化 (西暦285年 – 1453年)</string>
+	<string name="poi_historic_civilization_imperial_chinese">文明:皇帝王朝 (紀元前221年 – 西暦1911年)</string>
 	</resources>
