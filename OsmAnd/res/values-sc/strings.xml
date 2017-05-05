@@ -2833,4 +2833,6 @@ Pro praghere iscrie su còdighe intreu</string>
     <string name="shared_string_add_photos">Annanghe fotografias</string>
     <string name="mapillary_action_descr">Contribui a Mapillary cun sas vistas tuas a livellu de s\'istrada.</string>
     <string name="plugin_mapillary_descr">Fotografias a livellu de s\'istrada pro totus. Iscoberi logos, collàbora, catura su mundu.</string>
+    <string name="online_photos">Fotografias in lìnia</string>
+    <string name="no_photos_descr">Non tenimus fotografias pro custu logu</string>
     </resources>
