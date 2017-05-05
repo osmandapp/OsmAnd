@@ -1135,9 +1135,9 @@
 	<string name="poi_crossing_uncontrolled">Sen trafiklumoj</string>
 	<string name="poi_crossing_unmarked">Nemarkita</string>
 	<string name="poi_start_date">Ekestis je</string>
-	<string name="poi_wheelchair_yes">Jes</string>
-	<string name="poi_wheelchair_no">Ne</string>
-	<string name="poi_wheelchair_limited">Parte</string>
+	<string name="poi_wheelchair_yes">jes</string>
+	<string name="poi_wheelchair_no">ne</string>
+	<string name="poi_wheelchair_limited">parta</string>
 	<string name="poi_wholesale">Pogranda komerco</string>
 
 	<string name="poi_access_private">Aliro nur laŭ privata permeso</string>
@@ -2700,7 +2700,7 @@
 	<string name="poi_bicycle_parking_tree">Bicikl-pendigilo</string>
 	<string name="poi_bicycle_parking_streetpod">Duon-ŝranketo</string>
 
-	<string name="poi_wheelchair_designated">Adaptita</string>
+	<string name="poi_wheelchair_designated">adaptita</string>
 	<string name="poi_spoil_heap">Skori-monto</string>
 	
 	<string name="poi_summer_camp">Kampadejo somera (por infanoj)</string>
