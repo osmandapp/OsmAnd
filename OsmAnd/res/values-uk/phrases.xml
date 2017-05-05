@@ -8,7 +8,7 @@
 	<string name="poi_beverages">Напої</string>
 	<string name="poi_butcher">М’ясо</string>
 	<string name="poi_deli">Делікатеси</string>
-	<string name="poi_farm">Продукти з села</string>
+	<string name="poi_farm">Фермерські продукти</string>
 	<string name="poi_greengrocer">Овочі, фрукти</string>
 	<string name="poi_seafood">Морепродукти</string>
 	<string name="poi_confectionery">Кондитерські вироби</string>
@@ -19,7 +19,7 @@
 	<string name="poi_vending_machine">Торговий автомат</string>
 
 	<string name="poi_books">Книжковий магазин</string>
-	<string name="poi_bicycle">Веломагазин</string>
+	<string name="poi_bicycle">Магазин велосипедів</string>
 	<string name="poi_anime">Магазин аніме</string>
 	<string name="poi_antiques">Антикваріат</string>
 	<string name="poi_art">Витвори мистецтва</string>
@@ -28,14 +28,14 @@
 	<string name="poi_bathroom_furnishing">Все для ванної кімнати</string>
 	<string name="poi_bed">Магазин постільної білизни</string>
 	<string name="poi_boutique">Бутік</string>
-	<string name="poi_carpet">Килими</string>
+	<string name="poi_carpet">Магазин килимових покриттів</string>
 	<string name="poi_chemist">Аптека</string>
 	<string name="poi_clothes">Магазин одягу</string>
 	<string name="poi_clothes_children">Дитячий одяг</string>
 	<string name="poi_shoes">Взуття</string>
 	<string name="poi_computer">Комп’ютерний магазин</string>
 	<string name="poi_copyshop">Копіювальні послуги, поліграфія</string>
-	<string name="poi_curtain">Салон штор</string>
+	<string name="poi_curtain">Штори, портьєри</string>
 	<string name="poi_fabric">Тканини</string>
 	<string name="poi_bedding">Постільна білизна</string>
 	<string name="poi_dive">Спорядження для пірнання</string>
@@ -68,12 +68,12 @@
 	<string name="poi_organic">Органічні продукти харчування</string>
 	<string name="poi_outdoor">Товари для активного відпочинку</string>
 	<string name="poi_paint">Фарби</string>
-	<string name="poi_pet">Зоомагазин</string>
+	<string name="poi_pet">Зоомагазин, товари для тварин</string>
 	<string name="poi_radiotechnics">Радіодеталі</string>
 	<string name="poi_second_hand">Секонд-хенд</string>
 	<string name="poi_ship_chandler">Яхти, запчастини, оснащення</string>
 	<string name="poi_sports">Спорттовари</string>
-	<string name="poi_stationery">Канцтовари</string>
+	<string name="poi_stationery">Канцелярські товари</string>
 	<string name="poi_tableware">Посуд</string>
 	<string name="poi_ticket">Продаж квитків</string>
 	<string name="poi_tobacco">Тютюн</string>
@@ -131,7 +131,7 @@
 	<string name="poi_osmwiki">Вікіпедія</string>
 	<string name="poi_user_defined_other">Визначено користувачем</string>
 	
-	<string name="poi_shop_food">Продовольчий магазин</string>
+	<string name="poi_shop_food">Продуктовий магазин і супермаркет</string>
 	<string name="poi_road_obstacle">Дорожні перешкоди</string>
 		<string name="poi_filling_station">АЗС</string>
 		<string name="poi_personal_transport">Особистий транспорт</string>
@@ -160,8 +160,8 @@
 	<string name="poi_traffic_calming_bump">Лежачий поліцейський</string>
 	<string name="poi_traffic_calming_hump">Горб</string>
 	<string name="poi_traffic_calming_chicane">Шикана</string>
-	<string name="poi_leather">Магазин шкіри</string>
-	<string name="poi_music">Музикальний магазин</string>
+	<string name="poi_leather">Магазин шкіри, галантарея</string>
+	<string name="poi_music">Музичний магазин</string>
 	<string name="poi_scuba_diving_shop">Магазин для плавання з масками</string>
 	<string name="poi_tyres">Магазин автомобільних шин</string>
 	<string name="poi_watches">Магазин годинників</string>
@@ -191,7 +191,7 @@
 	<string name="poi_fuel_lpg">Пропан</string>
 	<string name="poi_fuel_octane_80">А-80</string>
 	<string name="poi_fuel_octane_91">А-91</string>
-	<string name="poi_fuel_octane_92">А-92</string>
+	<string name="poi_fuel_octane_92">Бензин А92</string>
 	<string name="poi_fuel_octane_95">А-95</string>
 	<string name="poi_fuel_octane_98">А-98</string>
 	<string name="poi_fuel_octane_100">А-100</string>
@@ -232,12 +232,12 @@
 	<string name="poi_pastry">Кондитерський магазин</string>
 	<string name="poi_camera">Камери та лінзи</string>
 	<string name="poi_candles">Магазин свічок</string>
-	<string name="poi_fashion">Магазин моди</string>
+	<string name="poi_fashion">Модний одяг</string>
 	<string name="poi_free_flying">Магазин для стрибків з парашутом</string>
 	<string name="poi_furnace">Магазин обігрівачів</string>
 	<string name="poi_garden_furniture">Магазин садових меблів</string>
 	<string name="poi_fuel_biogas">Біогаз</string>
-	<string name="poi_halt">Зупинка поїздів</string>
+	<string name="poi_halt">Залізнична зупинка</string>
 	<string name="poi_subway_entrance">Вхід в метро</string>
 	<string name="poi_subway_station">Станція метро</string>
 	<string name="poi_taxi">Стоянка таксі</string>
@@ -270,7 +270,7 @@
 <string name="poi_energy">Енергетичний магазин</string>
 	<string name="poi_fuel_1_50">Суміш 1:50</string>
 	<string name="poi_doors">Двері</string>
-	<string name="poi_perfumery">Парфумерія</string>
+	<string name="poi_perfumery">Магазин парфумерії</string>
 
 	<string name="poi_lighthouse">Маяк</string>
 
@@ -305,8 +305,8 @@
 
 	<string name="poi_recycling">Переробка відходів</string>
 
-	<string name="poi_recycling_centre">Тип: приймальний пункт</string>
-	<string name="poi_recycling_container">Тип: контейнер</string>
+	<string name="poi_recycling_centre">Центр утилізації, приймальний пункт</string>
+	<string name="poi_recycling_container">Контейнер</string>
 	<string name="poi_recycling_glass">Скло</string>
 	<string name="poi_recycling_paper">Папір</string>
 	<string name="poi_recycling_clothes">Одяг</string>
@@ -341,10 +341,10 @@
 	<string name="poi_recycling_mobile_phones">Мобільні телефони</string>
 	<string name="poi_recycling_hydrargyrum">Ртуть</string>
 	<string name="poi_recycling_computers">Комп’ютери</string>
-	<string name="poi_recycling_tyres">Покришки</string>
+	<string name="poi_recycling_tyres">Шини</string>
 	<string name="poi_recycling_tv_monitor">Телевізори, монітори</string>
 	<string name="poi_node_networks">Вузли пішохідних/велосипедних маршрутів</string>
-		<string name="poi_railway_buffer_stop">Залізничний буфер</string>
+		<string name="poi_railway_buffer_stop">Залізничний буфер (тупиковий упор)</string>
 	<string name="poi_slipway">Суднопідіймальний елінг</string>
 	<string name="poi_aerialway_pylon">Опора канатної дороги</string>
 
@@ -3095,7 +3095,7 @@
 	<string name="poi_e_cigarette">Електронні сигарети</string>
 
 	<string name="poi_second_hand_yes">Вживані товари</string>
-	<string name="poi_resource_gold"/>
+	<string name="poi_resource_gold">Золото</string>
 	<string name="poi_surface_grass_paver">Поверхня: нещільне мощення камінням</string>
 	<string name="poi_crop_wheat">Вирощується культура: пшениця</string>
 	<string name="poi_health_specialty_podology_yes">Подологія</string>
@@ -3285,7 +3285,7 @@
 	<string name="poi_crop_cranberry">Вирощується культура: журавлина</string>
 	<string name="poi_industrial_port">Тип: порт</string>
 	<string name="poi_microwave_oven_no">Мікрохвильова піч: відсутня</string>
-	<string name="poi_free_flying_site_orientation_n">Орієнтація майданчика для вільного польоту: N</string>
+	<string name="poi_free_flying_site_orientation_n">Орієнтація майданчика для вільного польоту: північ (N)</string>
 	<string name="poi_home_visit_no">Виїзд на дім: ні</string>
 
 	<string name="poi_cuisine_seafood">Морепродукти</string>
@@ -3298,7 +3298,7 @@
 
 	<string name="poi_crop_asparagus">Вирощується культура: спаржа</string>
 	<string name="poi_water_heater_yes">Водонагрівач: присутній</string>
-	<string name="poi_free_flying_site_orientation_ne">Орієнтація майданчика для вільного польоту: NE</string>
+	<string name="poi_free_flying_site_orientation_ne">Орієнтація майданчика для вільного польоту: північний схід (NE)</string>
 	<string name="poi_disease_malaria_yes">Малярія: так</string>
 	<string name="poi_cuisine_barbecue">Барбекю</string>
 	<string name="poi_cuisine_balkan">Балканська</string>
@@ -3311,4 +3311,54 @@
 	<string name="poi_water_heater_no">Водонагрівач: відсутній</string>
 
 	<string name="poi_free_flying_site_orientation_e">Орієнтація майданчика для вільного польоту: схід (E)</string>
-	</resources>
+	<string name="poi_disease_malaria_no">Малярія: немає</string>
+	<string name="poi_cuisine_peruvian">Перуанська</string>
+	<string name="poi_cuisine_noodle">Локшина</string>
+	<string name="poi_drink_wine_retail">Вино: продаж (в пляшках)</string>
+	<string name="poi_free_flying_site_orientation_se">Орієнтація майданчика для вільного польоту: південний-схід (SE)</string>
+	<string name="poi_parking_surface">Тип: на поверхні</string>
+	<string name="poi_wetland_mangrove">Мангрові зарості</string>
+	<string name="poi_watering_place">Водопій</string>
+	<string name="poi_surveillance_indoor">Відеоспостереження: всередині</string>
+	<string name="poi_disease_ebola_yes">Лихоманка Ебола: так</string>
+	<string name="poi_cuisine_donut">Пончик</string>
+	<string name="poi_cuisine_croatian">Хорватська</string>
+	<string name="poi_drink_wine_served">Вино: дегустація</string>
+
+	<string name="poi_parking_garage_boxes">Гаражі</string>
+	<string name="poi_counselling_type_homeless_yes">Консультація для бездомних: так</string>
+	<string name="poi_wetland_string_bog">Аапа-болото</string>
+	<string name="poi_surveillance_outdoor">Відеоспостереження: зовні</string>
+	<string name="poi_disease_ebola_no">Лихоманка Ебола: немає</string>
+	<string name="poi_cuisine_bolivian">Болівійська</string>
+	<string name="poi_cuisine_ramen">Рамен</string>
+	<string name="poi_energy_supplier">Офіс постачальника енергії</string>
+
+	<string name="poi_counselling_type_homeless_no">Консультація для бездомних: немає</string>
+	<string name="poi_parking_carports">Навіси</string>
+
+	<string name="poi_cuisine_malagasy">Малагасійська</string>
+	<string name="poi_electronics_repair_computer">Ремонт електроніки: комп\'ютери</string>
+	<string name="poi_cuisine_crepe">Креп (тонкі млинці)</string>
+	<string name="poi_disease_autism_yes">Аутизм: так</string>
+	<string name="poi_counselling_type_immigrant_yes">Консультація для іммігрантів: так</string>
+	<string name="poi_dojo">Додзьо</string>
+
+	<string name="poi_cuisine_breakfast">Сніданок</string>
+	<string name="poi_cuisine_persian">Перська</string>
+	<string name="poi_electronics_repair_appliance">Ремонт електроніки: побутова техніка</string>
+	<string name="poi_disease_autism_no">Аутизм: ні</string>
+	<string name="poi_cuisine_beef_bowl">Гюдон</string>
+	<string name="poi_cuisine_moroccan">Мароканська</string>
+	<string name="poi_electronics_repair_phone">Ремонт електроніки: телефони</string>
+	<string name="poi_pump_style_historic">Стиль насоса: історичний</string>
+	<string name="poi_cuisine_austrian">Австрійська</string>
+	<string name="poi_electronics_repair_tv">Ремонт електроніки: телевізори</string>
+
+	<string name="poi_resort_kids_camp">Дитячий табір</string>
+	<string name="poi_music_school">Музична школа</string>
+	<string name="poi_language_school">Школа іноземних мов</string>
+
+	<string name="poi_life_ring">Рятувальний круг</string>
+
+</resources>
