@@ -2541,4 +2541,411 @@
 	<string name="poi_historic_milestone">Історичний дистанційний стовп</string>
 
 	<string name="poi_construction_yes">В процесі будівництва</string>
+	<string name="poi_counselling_type_education_yes">Консультація освітня: так</string>
+	<string name="poi_aquaculture_mussels">Розведення молюсків</string>
+
+	<string name="poi_cuisine_suki">Сукі (тайський гарячий горщик)</string>
+	<string name="poi_locksmith">Замки і ключі</string>
+	<string name="poi_payment_golden_crown_no">Картки Золота Корона не приймаються</string>
+	<string name="poi_vending_parking_tickets">Паркувальні талони</string>
+	<string name="poi_resource_zinc">Цинк</string>
+	<string name="poi_training_hairdressing">Навчання: перукар</string>
+
+	<string name="poi_shoes_children">Дитяча</string>
+	<string name="poi_additional_atm_yes">З банкоматом</string>
+	<string name="poi_counselling_type_education_no">Консультація освітня: немає</string>
+	<string name="poi_mdf">Головний крос</string>
+	<string name="poi_cuisine_udon">Удон (японська локшина)</string>
+	<string name="poi_vending_cigarettes">Сигарети</string>
+	<string name="poi_resource_zircon">Циркон</string>
+
+	<string name="poi_monument_yes">Монументальний об\'єкт</string>
+
+	<string name="poi_shoes_women">Жіноча</string>
+	<string name="poi_atm_no">Без банкомату</string>
+
+	<string name="poi_min_age">Мінімальний вік</string>
+
+	<string name="poi_cuisine_brasserie">Брассери (стейк і чіпси)</string>
+	<string name="poi_payment_pro100_yes">"ПРО100 "</string>
+	<string name="poi_vending_excrement_bags">Пакети для екскрементів тварин</string>
+	<string name="poi_wetland_wet_meadow">Заболочений луг</string>
+	<string name="poi_industrial_oil">Тип: нафтова промисловість</string>
+	<string name="poi_shoes_sport">Спортивна</string>
+	<string name="poi_firepit">Місце для розведення вогню</string>
+	<string name="poi_counselling_type_family_yes">Консультація сімейна: так</string>
+	<string name="poi_organic_yes">Так</string>
+	<string name="poi_cuisine_bubble_tea">Чай з кульками</string>
+	<string name="poi_payment_pro100_no">Картки ПРО100 не приймаються</string>
+	<string name="poi_wetland_bog">Торф\'яне болото</string>
+	<string name="poi_industrial_wellsite">Тип: буровий майданчик</string>
+	<string name="poi_shoes_men">Чоловіча</string>
+	<string name="poi_street_cabinet">Розподільна шафа</string>
+
+	<string name="poi_counselling_type_family_no">Консультація сімейна: немає</string>
+	<string name="poi_organic_no">Відсутні</string>
+	<string name="poi_cuisine_yakitori">Якіторі (смажена птиця)</string>
+	<string name="poi_historic_yes">Історичний об\'єкт</string>
+	<string name="poi_payment_union_card_yes">Union Card</string>
+	<string name="poi_memorial_war">Військовий меморіал</string>
+	<string name="poi_surveillance_yes">З відеоспостереженням</string>
+	<string name="poi_massage_therapeutic">Терапевтичний</string>
+
+	<string name="poi_nuclear_explosion_ground_zero_altitude">Висота епіцентру над рівнем моря</string>
+	<string name="poi_generator_output_steam_yes">Виробляє пару</string>
+	<string name="poi_cuisine_american">Американська</string>
+	<string name="poi_memorial_statue">Статуя</string>
+	<string name="poi_shop_additional_yes">З магазином</string>
+
+	<string name="poi_massage_yes">Надаються масажні послуги</string>
+	<string name="poi_nuclear_explosion_body_wave_magnitude">Магнітуда землетрусу</string>
+	<string name="poi_generator_output_hot_air_yes">Виробляє гаряче повітря</string>
+	<string name="poi_cuisine_asian">Азіатська</string>
+	<string name="poi_payment_union_card_no">Картки Union Card не приймаються</string>
+	<string name="poi_memorial_stone">Камінь</string>
+	<string name="poi_service_bicycle_retail_yes">Продаж</string>
+	<string name="poi_sauna_yes">Надаються послуги сауни</string>
+	<string name="poi_nuclear_explosion_salvo_first_detonation">Серія вибухів: перша детонація</string>
+	<string name="poi_generator_output_cold_water_yes">Виробляє: холодна вода</string>
+	<string name="poi_cuisine_french">Французька</string>
+	<string name="poi_payment_mtsmoney_yes">MТС-Гроші</string>
+	<string name="poi_memorial_stele">Стелла</string>
+	<string name="poi_service_bicycle_retail_no">Продаж велосипедів: відсутній</string>
+	<string name="poi_solarium_yes">Надаються послуги солярію</string>
+
+	<string name="poi_nuclear_explosion_salvo_second_or_later_detonation">Серія вибухів: друга або більш пізня детонація</string>
+	<string name="poi_generator_output_compressed_air">Вихідна потужність стисненого повітря</string>
+	<string name="poi_cuisine_greek">Грецька</string>
+	<string name="poi_payment_mtsmoney_no">Оплата через MТС-Гроші не приймається</string>
+	<string name="poi_memorial_bust">Бюст</string>
+	<string name="poi_service_bicycle_repair_yes">Ремонт</string>
+	<string name="poi_tents_yes">Дозволена</string>
+	<string name="poi_nuclear_explosion_crater_diameter">Діаметр кратера</string>
+	<string name="poi_organic_only">Виключно</string>
+
+	<string name="poi_cuisine_thai">Тайська</string>
+	<string name="poi_payment_yandexmoney_yes">Яндекс.Гроші</string>
+	<string name="poi_memorial_koshinto">Кошінто</string>
+	<string name="poi_memorial_jizo">Дзідзо</string>
+	<string name="poi_service_bicycle_repair_no">Ремонт велосипедів: відсутній</string>
+	<string name="poi_tents_no">Встановлення наметів заборонено</string>
+	<string name="poi_nuclear_explosion_warhead">Боєголовка</string>
+	<string name="poi_traffic_mirror">Дорожнє дзеркало</string>
+
+	<string name="poi_cuisine_international">Міжнародна</string>
+	<string name="poi_payment_yandexmoney_no">Оплата через Яндекс.Гроші не приймається</string>
+	<string name="poi_memorial_cross">У вигляді хреста</string>
+	<string name="poi_service_bicycle_rental_yes">Прокат</string>
+	<string name="poi_openfire_yes">Розведення відкритого вогню дозволено</string>
+	<string name="poi_nuclear_explosion_device">Пристрій</string>
+
+	<string name="poi_diplomatic_consulate">Консульство</string>
+	<string name="poi_cuisine_turkish">Турецька</string>
+	<string name="poi_events_venue">Місце проведення заходів</string>
+
+	<string name="poi_memorial_vehicle">Місце проведення заходів</string>
+	<string name="poi_service_bicycle_rental_no">Прокат велосипедів: відсутній</string>
+	<string name="poi_openfire_no">Розведення відкритого вогню заборонено</string>
+	<string name="poi_vacuum_cleaner_no">Без пилососа</string>
+	<string name="poi_diplomatic_consulate_general">Генеральне консульство</string>
+	<string name="poi_cuisine_spanish">Іспанська</string>
+	<string name="poi_cuisine_vietnamese">В\'єтнамська</string>
+	<string name="poi_diet_vegetarian_filter_yes">Для вегетаріанців</string>
+	<string name="poi_memorial_stolperstein">Камінь спотикання</string>
+	<string name="poi_service_bicycle_pump_yes">Підкачка шин</string>
+	<string name="poi_backcountry_yes">Так</string>
+	<string name="poi_amenity_vacuum_cleaner">Пилосос</string>
+
+	<string name="poi_diplomatic_honorary_consulate">Почесне консульство</string>
+	<string name="poi_cuisine_korean">Корейська</string>
+	<string name="poi_diet_vegetarian_few">Вегетаріанське харчування (невеликий вибір)</string>
+	<string name="poi_memorial_obelisk">Обеліск</string>
+	<string name="poi_service_bicycle_pump_no">Підкачка велосипедних шин: відсутня</string>
+	<string name="poi_backcountry_no">Ні</string>
+	<string name="poi_sport_free_flying">Вільний політ (спорт)</string>
+
+	<string name="poi_diplomatic_permanent_mission">Постійне представництво</string>
+	<string name="poi_cuisine_mediterranean">Середземноморська</string>
+	<string name="poi_diet_vegetarian_only">Лише вегетаріанське харчування</string>
+	<string name="poi_memorial_column">Колона</string>
+	<string name="poi_service_bicycle_diy_yes">Інструменти для самостійного ремонту</string>
+	<string name="poi_scout_yes">Скаутський табір: так</string>
+	<string name="poi_water_tap">Водопровідний кран</string>
+	<string name="poi_diplomatic_delegation">Делегація</string>
+	<string name="poi_cuisine_bavarian">Баварська</string>
+	<string name="poi_diet_vegetarian_yes">Вегетаріанська</string>
+	<string name="poi_memorial_stupa">Ступа</string>
+	<string name="poi_service_bicycle_diy_no">Інструменти для самостійного ремонту велосипеда: немає</string>
+	<string name="poi_scout_no">Скаутський табір: немає</string>
+	<string name="poi_button_operated_yes">Чи включається кнопкою: так</string>
+	<string name="poi_diplomatic_ambassadors_residence">Резиденції посла</string>
+	<string name="poi_cuisine_lebanese">Ліванська</string>
+	<string name="poi_diet_vegetarian_no">Вегетаріанське харчування не пропонується</string>
+	<string name="poi_memorial_prasat">Прасат</string>
+	<string name="poi_group_only_yes">Доступно лише для груп: так</string>
+	<string name="poi_service_bicycle_cleaning_yes">Мийка</string>
+	<string name="poi_button_operated_no">Чи включається кнопкою: ні</string>
+
+	<string name="poi_diplomatic_high_commission">Верховний комісаріат</string>
+
+	<string name="poi_cuisine_russian">Російська</string>
+	<string name="poi_diet_vegan_filter_yes">Для веганів</string>
+	<string name="poi_memorial_fassade_decoration">Фасадна декорація</string>
+
+	<string name="poi_service_bicycle_cleaning_no">Мийка велосипедів: відсутня</string>
+	<string name="poi_group_only_no">Доступно лише для груп: ні</string>
+	<string name="poi_free_flying_site_takeoff">Підйом</string>
+	<string name="poi_diet_vegan_only">Лише веганська</string>
+	<string name="poi_fire_operator">Пожежний оператор</string>
+
+	<string name="poi_cuisine_filipino">Філіппінська</string>
+	<string name="poi_historic_quarry">Історичний кар\'єр</string>
+
+	<string name="poi_industrial_factory">Тип: фабрика</string>
+	<string name="poi_washing_machine_yes">Так</string>
+	<string name="poi_free_flying_site_landing">Посадка</string>
+	<string name="poi_diet_vegan_yes">Веганська</string>
+	<string name="poi_resource_aggregate">Заповнювачі бетону</string>
+	<string name="poi_industrial_gas">Тип: газова промисловість</string>
+	<string name="poi_washing_machine_no">Пральна машина: немає</string>
+	<string name="poi_free_flying_site_toplanding">Посадка на вершині</string>
+	<string name="poi_water_tank">Пожежний резервуар з водою</string>
+
+	<string name="poi_cuisine_portuguese">Португальська</string>
+	<string name="poi_diet_vegan_no">Веганське харчування не пропонується</string>
+	<string name="poi_diet_gluten_free_filter_yes">Безглютенове харчування</string>
+	<string name="poi_resource_antimony">Сурма</string>
+	<string name="poi_industrial_timber">Тип: лісоматеріали</string>
+	<string name="poi_shower_filter_yes">Так</string>
+	<string name="poi_free_flying_site_towing">Буксирування</string>
+	<string name="poi_toilets_disposal_flush">Тип туалету: змивається водою</string>
+	<string name="poi_cuisine_georgian">Грузинська</string>
+	<string name="poi_diet_gluten_free_only">Лише безглютенова</string>
+	<string name="poi_resource_asbestos">Азбест</string>
+	<string name="poi_industrial_refinery">Тип: очисний завод</string>
+	<string name="poi_shower_yes">Душ</string>
+	<string name="poi_free_flying_site_training">Тренування</string>
+	<string name="poi_toilets_disposal_pitlatrine">Вигрібна яма</string>
+	<string name="poi_cuisine_polish">Польська</string>
+	<string name="poi_diet_gluten_free_yes">Безглютенова</string>
+	<string name="poi_resource_barite">Барит</string>
+	<string name="poi_industrial_warehouse">Тип: склад</string>
+	<string name="poi_health_specialty_neuropsychiatry_yes">Нейропсихіатрія</string>
+	<string name="poi_free_flying_official_yes">Офіційне місце для вільного польоту</string>
+	<string name="poi_toilets_disposal_chemical">Утилізація відходів: хімічна</string>
+	<string name="poi_cuisine_brazilian">Бразильська</string>
+	<string name="poi_diet_gluten_free_no">Безглютенове харчування не пропонується</string>
+	<string name="poi_resource_basalt">Базальт</string>
+	<string name="poi_industrial_auto_wrecker">Тип: утилізація машин</string>
+	<string name="poi_health_specialty_endocrinology_yes">Ендокринологія</string>
+	<string name="poi_free_flying_official_no">Офіційне місце: немає</string>
+	<string name="poi_toilets_disposal_bucket">Утилізація відходів: контейнер</string>
+
+	<string name="poi_cuisine_arab">Арабська</string>
+	<string name="poi_diet_kosher_filter_yes">Кошерне харчування</string>
+	<string name="poi_resource_bauxite">Боксити</string>
+	<string name="poi_industrial_agriculture">Тип: сільськогосподарська промисловість</string>
+	<string name="poi_health_specialty_nuclear_medicine_yes">Ядерна медицина</string>
+	<string name="poi_free_flying_paragliding_yes">Парапланеризм</string>
+	<string name="poi_length">Довжина</string>
+
+	<string name="poi_cuisine_danish">Датська</string>
+	<string name="poi_diet_kosher_only">Лише кошерна</string>
+	<string name="poi_resource_beryl">Берил</string>
+	<string name="poi_industrial_brewery">Тип: пивоварня</string>
+	<string name="poi_health_specialty_pathology_yes">Патологічна анатомія</string>
+	<string name="poi_free_flying_paragliding_no">Парапланеризм: немає</string>
+	<string name="poi_wiki_link">Вікіпедія</string>
+
+	<string name="poi_diet_kosher_yes">Кошерна</string>
+	<string name="poi_diet_kosher_no">Кошерне харчування не пропонується</string>
+	<string name="poi_resource_bismuth">Вісмут</string>
+	<string name="poi_industrial_brickyard">Тип: цегельний завод</string>
+	<string name="poi_health_specialty_oncology_yes">Онкологія</string>
+	<string name="poi_free_flying_hanggliding_yes">Дельтапланеризм</string>
+	<string name="poi_xmas">Різдво</string>
+	<string name="poi_cuisine_indonesian">Індонезійська</string>
+	<string name="poi_diet_halal_filter_yes">Халяль</string>
+	<string name="poi_resource_chromite">Хроміти, хромова руда</string>
+	<string name="poi_industrial_intermodal_freight_terminal">Тип: інтермодальний вантажний термінал</string>
+	<string name="poi_health_specialty_social_paediatrics_yes">Соціальна педіатрія</string>
+	<string name="poi_free_flying_hanggliding_no">Дельтапланеризм: немає</string>
+	<string name="poi_xmas_event">Різдвяна подія</string>
+	<string name="poi_cuisine_african">Африканська</string>
+	<string name="poi_diet_halal_only">Лише халяль</string>
+	<string name="poi_resource_clay">Глина</string>
+	<string name="poi_industrial_sawmill">Тип: пилорама</string>
+	<string name="poi_health_specialty_social_paediatrics_no">Спеціалізація: соціальна педіатрія: відсутня</string>
+	<string name="poi_free_flying_rigid_yes">Дельтаплан з жорстким крилом</string>
+	<string name="poi_xmas_market">Різдв\'яна ярмарка</string>
+	<string name="poi_cuisine_caribbean">Карибська</string>
+	<string name="poi_diet_halal_yes">Халяль</string>
+	<string name="poi_resource_coal">Вугілля</string>
+	<string name="poi_industrial_water_purification">Тип: очищення води</string>
+	<string name="poi_health_specialty_obstetrics_caesarean_section_yes">Акушерство (кесарів розтин)</string>
+	<string name="poi_free_flying_rigid_no">Дельтаплан з жорстким крилом: ні</string>
+	<string name="poi_xmas_pyramid">Різдвяна піраміда</string>
+	<string name="poi_cuisine_argentinian">Аргентинська</string>
+	<string name="poi_diet_halal_no">Халяльна їжа не пропонується</string>
+	<string name="poi_vending_fuel">Пальне</string>
+	<string name="poi_wetland_fen">Низинне болото</string>
+	<string name="poi_animal_boarding">Тимчасове утримання тварин</string>
+	<string name="poi_surveillance_public">Відеоспостереження: в громадських місцях</string>
+
+	<string name="poi_gaelic_games">Гельські ігри</string>
+	<string name="poi_diet_lactose_free_filter_yes">Безлактозні продукти</string>
+	<string name="poi_diet_lactose_free_only">Лише безлактозна</string>
+	<string name="poi_vending_parcel_pickup">Отримання посилок</string>
+	<string name="poi_wetland_palsa_bog">Пальза болото</string>
+	<string name="poi_animal_boarding_dog">Тип притулку: для собак</string>
+	<string name="poi_clothes_women">Жіноча</string>
+	<string name="poi_fair_trade_yes">Справедлива торгівля (Fairtrade): є</string>
+	<string name="poi_counselling_type_immigrant_no">Консультація для іммігрантів: немає</string>
+	<string name="poi_pump_status_ok">Стан насосу: працює</string>
+	<string name="poi_cuisine_steak">Стейк</string>
+	<string name="poi_cuisine_malaysian">Малайзійська</string>
+	<string name="poi_diet_lactose_free_yes">Безлактозна</string>
+	<string name="poi_vending_parcel_mail_in">Відправлення посилок</string>
+	<string name="poi_wetland_mud">Бруд</string>
+
+	<string name="poi_animal_boarding_cat">Тип притулку: для кішок</string>
+	<string name="poi_clothes_underwear">Нижня білизна</string>
+	<string name="poi_fair_trade_no">Справедлива торгівля (Fairtrade): немає</string>
+	<string name="poi_counselling_type_marriage_yes">Консультування (шлюб): так</string>
+	<string name="poi_pump_status_broken">Стан насоса: зламаний</string>
+	<string name="poi_cuisine_tapas">Тапас (іспанські закуски)</string>
+	<string name="poi_cuisine_irish">Ірландська</string>
+	<string name="poi_diet_lactose_free_no">Безлактозні продукти не пропонуються</string>
+	<string name="poi_vending_milk">Молоко</string>
+	<string name="poi_beach_sand">Пісок</string>
+	<string name="poi_animal_boarding_dog_cat">Тип притулку: для собак і кішок</string>
+	<string name="poi_clothes_men">Чоловіча</string>
+	<string name="poi_fair_trade_only">Лише товари з маркуванням Справедливої торгівлі (Fairtrade)</string>
+
+
+	<string name="poi_counselling_type_marriage_no">Консультування (шлюб): немає</string>
+	<string name="poi_pump_status_locked">Стан насоса: замкнутий</string>
+
+	<string name="poi_cuisine_gastropub">Гастропаб (вишукане пиво)</string>
+	<string name="poi_cuisine_ethiopian">Ефіопська</string>
+	<string name="poi_diet_pescetarian_yes">Пескетаріанська</string>
+
+	<string name="poi_vending_elongated_coin">Подовжені монети (сувеніри)</string>
+	<string name="poi_bridge_movable_bascule">Тип розвідного моста: підіймальний</string>
+	<string name="poi_animal_boarding_horse">Тип притулку: для коней</string>
+
+	<string name="poi_clothes_wedding">Весільні сукні</string>
+	<string name="poi_bandy">Хокей з м\'ячем</string>
+
+	<string name="poi_counselling_type_nutrition_yes">Консультація з питань харчування: так</string>
+	<string name="poi_payment_troika_yes">Трійка</string>
+	<string name="poi_cuisine_heuriger">Хойрігер</string>
+	<string name="poi_cuisine_hungarian">Угорська</string>
+	<string name="poi_drive_in_yes">Так</string>
+	<string name="poi_vending_bread">Хліб</string>
+	<string name="poi_bridge_movable_swing">Тип розвідного моста: поворотний</string>
+	<string name="poi_historic_aircraft">Історичний літак</string>
+
+	<string name="poi_protected_area">Природоохоронна природна/історична територія</string>
+	<string name="poi_clothes_sports">Спортивна</string>
+	<string name="poi_counselling_type_nutrition_nfire_hydo">Консультація з питань харчування: немає</string>
+	<string name="poi_payment_troika_no">Картки Трійка не приймаються</string>
+
+	<string name="poi_cuisine_curry">Каррі</string>
+	<string name="poi_cuisine_lao">Лаоська</string>
+	<string name="poi_drive_in_no">Клієнти, які сидять в автомобілі, не обслуговуються</string>
+	<string name="poi_vending_chewing_gums">Жувальна гумка</string>
+	<string name="poi_bridge_movable_lift">Тип розвідного моста: вертикально-підйомний</string>
+	<string name="poi_elevator_yes">З ліфтом</string>
+	<string name="poi_shoes_orthopedic">Ортопедична</string>
+
+	<string name="poi_protection_title">Тип об\'єкту, що охороняється</string>
+	<string name="poi_counselling_type_rehabilitation_yes">Консультація реабілітаційна: так</string>
+	<string name="poi_telescope">Телескоп</string>
+	<string name="poi_cuisine_buschenschank">Бушеншанк (вишукані австрійські вина)</string>
+	<string name="poi_cuisine_european">Європейська</string>
+	<string name="poi_drive_through_yes">Так</string>
+	<string name="poi_vending_parking_tickets_public_transport_tickets">"Паркувальні талони;  квитки на громадський транспорт"</string>
+	<string name="poi_bridge_movable_drawbridge">Тип розвідного моста: підйомний</string>
+	<string name="poi_elevator_no">Без ліфта</string>
+
+	<string name="poi_historic_manor">Історична садиба</string>
+	<string name="poi_protection_object_historic">Об\'єкт охорони: історичний</string>
+	<string name="poi_counselling_type_rehabilitation_no">Консультація реабілітаційна: немає</string>
+	<string name="poi_telescope_type_optical">Телескоп: оптичний</string>
+	<string name="poi_cuisine_grill">Гриль</string>
+	<string name="poi_cuisine_uzbek">Узбецька</string>
+	<string name="poi_drive_through_no">Клієнти, що сидять в автомобілі, не обслуговуються</string>
+
+	<string name="poi_vending_coffee">Кава</string>
+	<string name="poi_bridge_movable_submersible">Тип розвідного моста: затоплюваний</string>
+	<string name="poi_technical_monument">Технічний пам\'ятник</string>
+
+	<string name="poi_castle_type_stately">Тип замка: величний</string>
+	<string name="poi_protection_object_nature">Об\'єкт охорони: природа</string>
+	<string name="poi_counselling_type_sexual_yes">Консультація сексуальна: так</string>
+	<string name="poi_cuisine_bagel">Бейгл (єврейський бублик)</string>
+	<string name="poi_cuisine_czech">Чеська</string>
+	<string name="poi_telescope_type_radio">Телескопи: радіотелескоп</string>
+	<string name="poi_brewery_additional">Назва пивоварні</string>
+	<string name="poi_vending_toll">Оплата за проїзд</string>
+	<string name="poi_bridge_movable_transporter">Тип розвідного моста: літаючий паром</string>
+	<string name="poi_office_forestry">Офіс лісництва</string>
+	<string name="poi_castle_type_defensive">Тип замка: оборонний</string>
+	<string name="poi_protection_object_habitat">Об\'єкт охорони: середовище проживання</string>
+	<string name="poi_counselling_type_sexual_no">Консультація сексуальна: немає</string>
+	<string name="poi_telescope_type_gamma">Телескоп: гамма</string>
+	<string name="poi_cuisine_diner">Дайнер (американська дешева закусочна)</string>
+	<string name="poi_cuisine_cuban">Кубинська</string>
+	<string name="poi_microbrewery_yes">Власна пивоварня</string>
+	<string name="poi_vending_tickets">Квитки</string>
+	<string name="poi_bridge_movable_retractable">Тип розвідного моста: висувається</string>
+
+	<string name="poi_logistics">Офіс транспортно-логістичної компанії</string>
+	<string name="poi_castle_type_fortress">Тип замку: фортеця</string>
+	<string name="poi_protection_object_water">Об\'єкт охорони: вода</string>
+
+	<string name="poi_counselling_type_sexual_abuse_yes">Консультація для жертв сексуального домагання: так</string>
+	<string name="poi_telescope_diameter">Діаметр</string>
+	<string name="poi_cuisine_sausage">Ковбаса</string>
+	<string name="poi_cuisine_british">Британська</string>
+	<string name="poi_microbrewery_no">Немає власної броварні</string>
+
+	<string name="poi_vending_water">Продаж води</string>
+	<string name="poi_lit_yes">Об\'єкт освітлений: так</string>
+	<string name="poi_parish">Офіс парафії</string>
+	<string name="poi_castle_type_palace">Тип замку: палац</string>
+	<string name="poi_nuclear_explosion_country">Країна, яка спричинила вибух</string>
+	<string name="poi_counselling_type_sexual_abuse_no">Консультація для жертв сексуального домагання: немає</string>
+	<string name="poi_observatory_type_gravitational">Гравітаційна</string>
+
+	<string name="poi_cuisine_cake">Тістечко</string>
+	<string name="poi_cuisine_latin_american">Латиноамериканська</string>
+	<string name="poi_takeaway_filter_yes">Так</string>
+	<string name="poi_vending_telephone_vouchers">Телефонні картки</string>
+	<string name="poi_lit_no">Об\'єкт освітлений: ні</string>
+
+	<string name="poi_publisher">Видавництво</string>
+
+	<string name="poi_takeaway_yes">На винос</string>
+	<string name="poi_vending_animal_food">Корм для тварин</string>
+	<string name="poi_surface_unpaved">Поверхня: без покриття</string>
+	<string name="poi_fuel_91ul">Паливо 91UL</string>
+	<string name="poi_castle_type_kremlin">Тип замку: кремль</string>
+	<string name="poi_nuclear_explosion_site">Назва місця вибуху</string>
+	<string name="poi_counselling_type_victim_yes">Консультація для жертв насильства: так</string>
+	<string name="poi_greenhouse_horticulture">Парникове садівництво</string>
+
+	<string name="poi_cuisine_pancake">Налисники, млинці</string>
+	<string name="poi_cuisine_nepalese">Непальська</string>
+	<string name="poi_takeaway_no">На винос: немає</string>
+	<string name="poi_vending_public_transport_plans">Плани громадського транспорту</string>
+	<string name="poi_surface_paved">Поверхня: з покриттям</string>
+	<string name="poi_fuel_100ll">Паливо 100LL</string>
+	<string name="poi_castle_type_defensive_stately">Тип замку: захисний, величний</string>
+	<string name="poi_nuclear_explosion_type_underground_shaft">Тип вибуху: підземний, шахта</string>
+	<string name="poi_counselling_type_victim_no">Консультація для жертв насильства: немає</string>
+	<string name="poi_voltage">Напруга</string>
+	<string name="poi_cuisine_pasta">Макаронні вироби</string>
+	<string name="poi_cuisine_mongolian">Монгольська</string>
 	</resources>
