@@ -2686,4 +2686,18 @@ Moduli:
     <string name="quick_action_take_photo_note">Stvaryć fota-natatku</string>
     <string name="quick_action_add_osm_bug">Dadać OSM natatku</string>
     <string name="quick_action_navigation_voice">Holas ukl/adkl</string>
+    <string name="shared_string_add_photos">Dadać fatahrafii</string>
+    <string name="no_photos_descr">U nas pakul niama fatahrafij hetaha miesca</string>
+    <string name="mapillary_widget">Vidžet Mapillary</string>
+    <string name="mapillary">Мapillary</string>
+    <string name="quick_action_map_underlay_action">Dadać padkladku</string>
+    <string name="quick_action_navigation_voice_on">Holas aktyŭny</string>
+    <string name="quick_action_add_gpx">Dadać kropku GPX</string>
+    <string name="quick_action_add_parking">Dadać miesca parkoŭki</string>
+    <string name="quick_action_edit_action">Redahavać dziejańnie</string>
+    <string name="quick_action_add_favorite">Dadać lubimaje</string>
+    <string name="dialog_add_action_title">Dadać dziejańnie</string>
+    <string name="quick_actions_delete">Vydalić dziejańnie</string>
+    <string name="quick_actions_delete_text">Vy ŭpeŭnienyja, što chočacie vydalić dziejańnie \"%s\"?</string>
+    <string name="quick_action_navigation_voice_off">Holas vyklučany</string>
     </resources>
