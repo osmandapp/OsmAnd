@@ -2,14 +2,14 @@ package net.osmand.plus.mapcontextmenu.builders.cards;
 
 import android.view.View;
 
-import net.osmand.plus.OsmandApplication;
 import net.osmand.plus.R;
+import net.osmand.plus.activities.MapActivity;
 import net.osmand.plus.mapillary.MapillaryPlugin;
 
 public class NoImagesCard extends AbstractCard {
 
-	public NoImagesCard(OsmandApplication app) {
-		super(app);
+	public NoImagesCard(MapActivity mapActivity) {
+		super(mapActivity);
 	}
 
 	@Override

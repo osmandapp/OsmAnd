@@ -10,6 +10,7 @@ import net.osmand.AndroidUtils;
 import net.osmand.plus.LockableViewPager;
 import net.osmand.plus.OsmandApplication;
 import net.osmand.plus.R;
+import net.osmand.plus.activities.MapActivity;
 import net.osmand.plus.mapcontextmenu.MenuBuilder;
 
 import java.util.ArrayList;
@@ -21,6 +22,7 @@ public class CardsRowBuilder {
 
 	private MenuBuilder menuBuilder;
 	private View view;
+	private MapActivity mapActivity;
 	private OsmandApplication app;
 	private boolean addToLayout;
 	private List<AbstractCard> cards = new ArrayList<>();
@@ -32,6 +34,7 @@ public class CardsRowBuilder {
 		this.menuBuilder = menuBuilder;
 		this.view = view;
 		this.addToLayout = addToLayout;
+		this.mapActivity = menuBuilder.getMapActivity();
 		this.app = menuBuilder.getApplication();
 		this.dp10 = AndroidUtils.dpToPx(app, 10f);
 	}
@@ -60,7 +63,7 @@ public class CardsRowBuilder {
 	}
 
 	public void setProgressCard() {
-		setCards(new ProgressCard(app));
+		setCards(new ProgressCard(mapActivity));
 	}
 
 	public void build() {
