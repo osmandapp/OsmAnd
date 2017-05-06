@@ -2843,9 +2843,9 @@
 
 	<string name="poi_min_age">最低年齡</string>
 
-	<string name="poi_organic_yes">有機食品︰有</string>
-	<string name="poi_organic_no">有機食品: 無</string>
-	<string name="poi_organic_only">只提供有機食品</string>
+	<string name="poi_organic_yes">有</string>
+	<string name="poi_organic_no">無</string>
+	<string name="poi_organic_only">只有</string>
 
 	<string name="poi_traffic_mirror">道路反射鏡</string>
 
@@ -2901,4 +2901,19 @@
 	<string name="poi_nuclear_explosion_hole">爆炸洞穴</string>
 	<string name="poi_nuclear_explosion_height_of_burst">爆炸高度</string>
 	<string name="poi_nuclear_explosion_ground_zero_altitude">原爆點高度</string>
+	<string name="poi_nuclear_explosion_body_wave_magnitude">體波規模</string>
+	<string name="poi_nuclear_explosion_warhead">爆炸︰彈頭</string>
+	<string name="poi_nuclear_explosion_device">爆炸：裝置</string>
+
+	<string name="poi_addr_housename">房屋名稱</string>
+
+
+	<string name="poi_free_flying_site_towing">拖曳</string>
+	<string name="poi_free_flying_site_training">訓練</string>
+	<string name="poi_free_flying_official_no">官方︰無</string>
+	<string name="poi_free_flying_paragliding_yes">滑翔傘</string>
+	<string name="poi_free_flying_paragliding_no">滑翔傘︰無</string>
+	<string name="poi_free_flying_hanggliding_yes">滑翔翼</string>
+	<string name="poi_free_flying_hanggliding_no">滑翔翼︰無</string>
+	<string name="poi_free_flying_rigid_yes">硬式</string>
 	</resources>
