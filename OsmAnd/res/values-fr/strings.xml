@@ -3022,4 +3022,6 @@ Fonctionnalités principales :
  • Un greffon additionnel permet d\'afficher les courbes de niveaux et les ombres du relief
  "</string>
     <string name="shared_string_add_photos">Ajouter des photos</string>
+    <string name="online_photos">Photos en ligne</string>
+    <string name="no_photos_descr">Aucune photo pour ce lieu</string>
     </resources>
