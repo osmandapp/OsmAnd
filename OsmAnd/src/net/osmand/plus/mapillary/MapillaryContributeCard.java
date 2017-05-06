@@ -2,16 +2,16 @@ package net.osmand.plus.mapillary;
 
 import android.view.View;
 
-import net.osmand.plus.OsmandApplication;
 import net.osmand.plus.R;
+import net.osmand.plus.activities.MapActivity;
 import net.osmand.plus.mapcontextmenu.builders.cards.ImageCard;
 
 import org.json.JSONObject;
 
 public class MapillaryContributeCard extends ImageCard {
 
-	public MapillaryContributeCard(OsmandApplication app, JSONObject imageObject) {
-		super(app, imageObject);
+	public MapillaryContributeCard(MapActivity mapActivity, JSONObject imageObject) {
+		super(mapActivity, imageObject);
 	}
 
 	@Override

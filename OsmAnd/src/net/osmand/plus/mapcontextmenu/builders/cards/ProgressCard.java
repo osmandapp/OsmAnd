@@ -1,12 +1,12 @@
 package net.osmand.plus.mapcontextmenu.builders.cards;
 
-import net.osmand.plus.OsmandApplication;
 import net.osmand.plus.R;
+import net.osmand.plus.activities.MapActivity;
 
 public class ProgressCard extends AbstractCard {
 
-	public ProgressCard(OsmandApplication app) {
-		super(app);
+	public ProgressCard(MapActivity mapActivity) {
+		super(mapActivity);
 	}
 
 	@Override

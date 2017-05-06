@@ -1,10 +1,12 @@
 package net.osmand.plus.views.mapwidgets;
 
+import android.graphics.Color;
 import android.graphics.drawable.Drawable;
 import android.view.View;
 import android.view.View.OnClickListener;
 import android.widget.ImageButton;
 import android.widget.ImageView;
+import android.widget.LinearLayout;
 import android.widget.TextView;
 
 import net.osmand.Location;
@@ -40,6 +42,7 @@ public class MapInfoWidgetsFactory {
 		CONTEXT_MENU,
 		TRACK_DETAILS,
 		DISCOUNT,
+		ONLINE_IMAGE,
 	}
 
 	public TextInfoWidget createAltitudeControl(final MapActivity map) {
@@ -123,6 +126,7 @@ public class MapInfoWidgetsFactory {
 		int closeBtnIconDarkId = R.drawable.ic_action_remove_dark;
 		int closeBtnIconClrLightId = R.color.icon_color;
 		int closeBtnIconClrDarkId = 0;
+		boolean closeBtnVisible = true;
 
 		int refreshBtnIconLightId = R.drawable.ic_action_refresh_dark;
 		int refreshBtnIconDarkId = R.drawable.ic_action_refresh_dark;
@@ -147,6 +151,9 @@ public class MapInfoWidgetsFactory {
 		OnClickListener onCloseButtonClickListener;
 		OnClickListener onRefreshButtonClickListener;
 
+		Runnable onCloseToolbarListener;
+
+		View bottomView = null;
 
 		public TopToolbarController(TopToolbarControllerType type) {
 			this.type = type;
@@ -158,6 +165,10 @@ public class MapInfoWidgetsFactory {
 
 		public void setTitle(String title) {
 			this.title = title;
+		}
+
+		public void setBottomView(View bottomView) {
+			this.bottomView = bottomView;
 		}
 
 		public void setSingleLineTitle(boolean singleLineTitle) {
@@ -205,6 +216,10 @@ public class MapInfoWidgetsFactory {
 			this.refreshBtnIconClrDarkId = refreshBtnIconClrDarkId;
 		}
 
+		public void setCloseBtnVisible(boolean closeBtnVisible) {
+			this.closeBtnVisible = closeBtnVisible;
+		}
+
 		public void setRefreshBtnVisible(boolean visible) {
 			this.refreshBtnVisible = visible;
 		}
@@ -235,9 +250,14 @@ public class MapInfoWidgetsFactory {
 			this.onRefreshButtonClickListener = onRefreshButtonClickListener;
 		}
 
+		public void setOnCloseToolbarListener(Runnable onCloseToolbarListener) {
+			this.onCloseToolbarListener = onCloseToolbarListener;
+		}
+
 		public void updateToolbar(TopToolbarView view) {
 			TextView titleView = view.getTitleView();
 			TextView descrView = view.getDescrView();
+			LinearLayout bottomViewLayout = view.getBottomViewLayout();
 			if (title != null) {
 				titleView.setText(title);
 				view.updateVisibility(titleView, true);
@@ -249,6 +269,13 @@ public class MapInfoWidgetsFactory {
 				view.updateVisibility(descrView, true);
 			} else {
 				view.updateVisibility(descrView, false);
+			}
+			if (bottomView != null) {
+				bottomViewLayout.removeAllViews();
+				bottomViewLayout.addView(bottomView);
+				view.updateVisibility(bottomViewLayout, true);
+			} else {
+				view.updateVisibility(bottomViewLayout, false);
 			}
 			if (view.getShadowView() != null) {
 				view.getShadowView().setVisibility(View.VISIBLE);
@@ -262,6 +289,7 @@ public class MapInfoWidgetsFactory {
 		private TopToolbarController defaultController = new TopToolbarController(TopToolbarControllerType.CONTEXT_MENU);
 		private View topbar;
 		private View topBarLayout;
+		private View topBarBottomView;
 		private View topBarTitleLayout;
 		private ImageButton backButton;
 		private TextView titleView;
@@ -276,6 +304,7 @@ public class MapInfoWidgetsFactory {
 
 			topbar = map.findViewById(R.id.widget_top_bar);
 			topBarLayout = map.findViewById(R.id.widget_top_bar_layout);
+			topBarBottomView = map.findViewById(R.id.widget_top_bar_bottom_view);
 			topBarTitleLayout = map.findViewById(R.id.widget_top_bar_title_layout);
 			backButton = (ImageButton) map.findViewById(R.id.widget_top_bar_back_button);
 			refreshButton = (ImageButton) map.findViewById(R.id.widget_top_bar_refresh_button);
@@ -304,6 +333,10 @@ public class MapInfoWidgetsFactory {
 
 		public TextView getTitleView() {
 			return titleView;
+		}
+
+		public LinearLayout getBottomViewLayout() {
+			return (LinearLayout) topBarBottomView;
 		}
 
 		public TextView getDescrView() {
@@ -343,6 +376,9 @@ public class MapInfoWidgetsFactory {
 			for (Iterator ctrlIter = controllers.iterator(); ctrlIter.hasNext(); ) {
 				TopToolbarController ctrl = (TopToolbarController) ctrlIter.next();
 				if (ctrl.getType() == controller.getType()) {
+					if (controller.onCloseToolbarListener != null) {
+						controller.onCloseToolbarListener.run();
+					}
 					ctrlIter.remove();
 				}
 			}
@@ -352,6 +388,9 @@ public class MapInfoWidgetsFactory {
 		}
 
 		public void removeController(TopToolbarController controller) {
+			if (controller.onCloseToolbarListener != null) {
+				controller.onCloseToolbarListener.run();
+			}
 			controllers.remove(controller);
 			updateColors();
 			updateInfo();
@@ -443,6 +482,12 @@ public class MapInfoWidgetsFactory {
 				titleView.setSingleLine(true);
 			} else {
 				titleView.setSingleLine(false);
+			}
+
+			if (controller.closeBtnVisible && closeButton.getVisibility() == View.GONE) {
+				closeButton.setVisibility(View.VISIBLE);
+			} else {
+				closeButton.setVisibility(View.GONE);
 			}
 			if (controller.refreshBtnVisible && refreshButton.getVisibility() == View.GONE) {
 				refreshButton.setVisibility(View.VISIBLE);

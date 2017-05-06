@@ -6,17 +6,17 @@ import android.view.View;
 import android.widget.ImageView;
 import android.widget.TextView;
 
-import net.osmand.plus.OsmandApplication;
 import net.osmand.plus.R;
+import net.osmand.plus.activities.MapActivity;
 import net.osmand.util.Algorithms;
 
 import org.json.JSONObject;
 
 public class UrlImageCard extends ImageCard {
 
-	public UrlImageCard(OsmandApplication app, JSONObject imageObject) {
-		super(app, imageObject);
-		this.icon = app.getIconsCache().getIcon(R.drawable.ic_action_osmand_logo, R.color.osmand_orange);
+	public UrlImageCard(MapActivity mapActivity, JSONObject imageObject) {
+		super(mapActivity, imageObject);
+		this.icon = getMyApplication().getIconsCache().getIcon(R.drawable.ic_action_osmand_logo, R.color.osmand_orange);
 		if (!Algorithms.isEmpty(getImageUrl())) {
 			this.onClickListener = new View.OnClickListener() {
 				@Override

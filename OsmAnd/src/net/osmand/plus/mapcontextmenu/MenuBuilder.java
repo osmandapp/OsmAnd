@@ -180,6 +180,10 @@ public class MenuBuilder {
 		this.plainMenuItems = new LinkedList<>();
 	}
 
+	public MapActivity getMapActivity() {
+		return mapActivity;
+	}
+
 	public OsmandApplication getApplication() {
 		return app;
 	}
@@ -302,7 +306,7 @@ public class MenuBuilder {
 	private void startLoadingImages(final MenuBuilder menuBuilder) {
 		onlinePhotoCards = new ArrayList<>();
 		onlinePhotoCardsRow.setProgressCard();
-		ImageCard.execute(new GetImageCardsTask(app, menuBuilder.getLatLon(),
+		ImageCard.execute(new GetImageCardsTask(mapActivity, menuBuilder.getLatLon(),
 				new GetImageCardsListener() {
 					@Override
 					public void onFinish(List<ImageCard> cardList) {
@@ -310,7 +314,7 @@ public class MenuBuilder {
 							List<AbstractCard> cards = new ArrayList<>();
 							cards.addAll(cardList);
 							if (cardList.size() == 0) {
-								cards.add(new NoImagesCard(app));
+								cards.add(new NoImagesCard(mapActivity));
 							}
 							onlinePhotoCardsRow.setCards(cards);
 							onlinePhotoCards = cards;

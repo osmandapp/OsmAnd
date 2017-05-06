@@ -17,6 +17,7 @@ import net.osmand.data.LatLon;
 import net.osmand.plus.OsmandApplication;
 import net.osmand.plus.R;
 import net.osmand.plus.Version;
+import net.osmand.plus.activities.MapActivity;
 import net.osmand.plus.mapillary.MapillaryContributeCard;
 import net.osmand.plus.mapillary.MapillaryImageCard;
 import net.osmand.util.Algorithms;
@@ -67,8 +68,8 @@ public abstract class ImageCard extends AbstractCard {
 	private float bearingDiff = Float.NaN;
 	private float distance = Float.NaN;
 
-	public ImageCard(OsmandApplication app, JSONObject imageObject) {
-		super(app);
+	public ImageCard(MapActivity mapActivity, JSONObject imageObject) {
+		super(mapActivity);
 		try {
 			if (imageObject.has("type")) {
 				this.type = imageObject.getString("type");
@@ -105,17 +106,17 @@ public abstract class ImageCard extends AbstractCard {
 		}
 	}
 
-	private static ImageCard createCard(OsmandApplication app, JSONObject imageObject) {
+	private static ImageCard createCard(MapActivity mapActivity, JSONObject imageObject) {
 		ImageCard imageCard = null;
 		try {
 			if (imageObject.has("type")) {
 				String type = imageObject.getString("type");
 				if ("mapillary-photo".equals(type)) {
-					imageCard = new MapillaryImageCard(app, imageObject);
+					imageCard = new MapillaryImageCard(mapActivity, imageObject);
 				} else if ("mapillary-contribute".equals(type)) {
-					imageCard = new MapillaryContributeCard(app, imageObject);
+					imageCard = new MapillaryContributeCard(mapActivity, imageObject);
 				} else {
-					imageCard = new UrlImageCard(app, imageObject);
+					imageCard = new UrlImageCard(mapActivity, imageObject);
 				}
 			}
 		} catch (JSONException e) {
@@ -257,6 +258,7 @@ public abstract class ImageCard extends AbstractCard {
 
 	public static class GetImageCardsTask extends AsyncTask<Void, Void, List<ImageCard>> {
 
+		private MapActivity mapActivity;
 		private OsmandApplication app;
 		private LatLon latLon;
 		private GetImageCardsListener listener;
@@ -266,8 +268,9 @@ public abstract class ImageCard extends AbstractCard {
 			void onFinish(List<ImageCard> cardList);
 		}
 
-		public GetImageCardsTask(@NonNull OsmandApplication app, LatLon latLon, GetImageCardsListener listener) {
-			this.app = app;
+		public GetImageCardsTask(@NonNull MapActivity mapActivity, LatLon latLon, GetImageCardsListener listener) {
+			this.mapActivity = mapActivity;
+			this.app = mapActivity.getMyApplication();
 			this.latLon = latLon;
 			this.listener = listener;
 		}
@@ -295,7 +298,7 @@ public abstract class ImageCard extends AbstractCard {
 							try {
 								JSONObject imageObject = (JSONObject) images.get(i);
 								if (imageObject != JSONObject.NULL) {
-									ImageCard imageCard = ImageCard.createCard(app, imageObject);
+									ImageCard imageCard = ImageCard.createCard(mapActivity, imageObject);
 									if (imageCard != null) {
 										result.add(imageCard);
 									}

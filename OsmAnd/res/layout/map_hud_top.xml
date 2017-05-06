@@ -236,6 +236,13 @@
 
             </LinearLayout>
 
+            <LinearLayout
+                android:id="@+id/widget_top_bar_bottom_view"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:orientation="vertical"
+                android:visibility="gone"/>
+
             <FrameLayout
                 android:id="@+id/widget_top_bar_shadow"
                 android:layout_width="match_parent"
