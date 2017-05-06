@@ -3014,4 +3014,7 @@ Van bijna alle landen is een kaart te downloaden: van Afghanistan tot Zimbabwe, 
     <string name="nothing_found_descr">Probeer een andere zoekterm of vergroot de zoekcirkel</string>
     <string name="mapillary_widget">Mapillary-widget</string>
     <string name="mapillary">Mapillary</string>
+    <string name="online_photos">Online foto\'s</string>
+    <string name="shared_string_add_photos">Foto\'s toevoegen</string>
+    <string name="no_photos_descr">Geen foto\'s beschikbaar voor deze locatie</string>
     </resources>
