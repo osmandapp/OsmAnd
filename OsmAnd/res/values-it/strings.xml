@@ -2915,7 +2915,7 @@ Rappresenta l\'area: %1$s x %2$s</string>
     <string name="shared_string_in_name">in %1$s</string>
     <string name="type_address">Scrivi l\'indirizzo</string>
     <string name="animate_my_location">Anima la mia localizzazione</string>
-    <string name="animate_my_location_desc">Abilita l\'interpolazione della mia localizzazione nella mappa nei momenti di perdita del posizionamento GPS</string>
+    <string name="animate_my_location_desc">In navigazione abilita l\'interpolazione della mia localizzazione</string>
     <string name="shared_string_overview">Panoramica</string>
     <string name="show_from_zoom_level">Mostra dal livello di zoom</string>
     <string name="display_zoom_level">Mostra il livello dello zoom: %1$s</string>
@@ -3000,4 +3000,6 @@ Copertura e qualità approssimativamente:
     <string name="shared_string_add_photos">Aggiungi foto</string>
     <string name="mapillary_action_descr">Contribuisci con le tue foto stradali di questo luogo con Mapillary</string>
     <string name="plugin_mapillary_descr">Foto stradali per tutti. Scopri luoghi, collabora, fotografa il mondo.</string>
+    <string name="online_photos">Foto online</string>
+    <string name="no_photos_descr">Non ci sono foto per questa posizione</string>
     </resources>
