@@ -334,14 +334,14 @@
 	<string name="poi_aerialway_cable_car">Nagykabinos felvonó</string>
 	<string name="poi_aerialway_gondola">Gondolakabinos felvonó</string>
 	<string name="poi_aerialway_chair_lift">Ülőlift</string>
-	<string name="poi_aerialway_t_bar">Csákányos sílift</string>
-	<string name="poi_aerialway_j_bar">Csákányos egyszemélyes sílift</string>
-	<string name="poi_aerialway_platter">Tányéros sílift</string>
-	<string name="poi_aerialway_mixed_lift">Vegyes sílift</string>
-	<string name="poi_aerialway_drag_lift">Sífelvonó</string>
-	<string name="poi_aerialway_rope_tow">Kapaszkodó sílift</string>
+	<string name="poi_aerialway_t_bar">Csákányos sífelvonó</string>
+	<string name="poi_aerialway_j_bar">Egyszemélyes csákányos sífelvonó</string>
+	<string name="poi_aerialway_platter">Tányéros sífelvonó</string>
+	<string name="poi_aerialway_mixed_lift">Vegyes sífelvonó</string>
+	<string name="poi_aerialway_drag_lift">Húzólift</string>
+	<string name="poi_aerialway_rope_tow">Kapaszkodós sífelvonó</string>
 	<string name="poi_aerialway_goods">Áruszállító kötélpályás felvonó</string>
-	<string name="poi_aerialway_magic_carpet">Szállítószalagos sílift</string>
+	<string name="poi_aerialway_magic_carpet">Szállítószalagos sífelvonó</string>
 
 	<string name="poi_turning_circle">Megfordulóhely</string>
 	<string name="poi_junction">Csomópont</string>
@@ -648,7 +648,7 @@
 
 	<string name="poi_ford_stepping_stones">Lépőkövek</string>
 	<string name="poi_vehicle_inspection">Műszaki vizsgáló állomás</string>
-	<string name="poi_aerialway_pylon">Felvonó pilon</string>
+	<string name="poi_aerialway_pylon">Felvonóoszlop</string>
 
 	<string name="poi_breakwater">Hullámtörő</string>
 	<string name="poi_power_cable_distribution_cabinet">Villamos elosztószekrény</string>
@@ -714,7 +714,7 @@
 	<string name="poi_music">Hanglemezbolt</string>
 	<string name="poi_optician">Látszerész</string>
 	<string name="poi_paint">Festékbolt</string>
-	<string name="poi_pet">Kisállatkereskedés</string>
+	<string name="poi_pet">Kisállat-kereskedés</string>
 	<string name="poi_photo">Fotósbolt</string>
 	<string name="poi_radiotechnics">Rádiótechnikai bolt</string>
 	<string name="poi_ship_chandler">Hajózási felszerelések boltja</string>
@@ -2110,7 +2110,7 @@
 	<string name="poi_payment_prepaid_ticket_yes">Előre kifizetett jegy</string>
 	<string name="poi_payment_jcb_yes">JCB</string>
 	<string name="poi_payment_jcb_no">JCB kártyát nem fogad el</string>
-	<string name="poi_payment_laser_yes">Lézer</string>
+	<string name="poi_payment_laser_yes">Laser</string>
 	<string name="poi_payment_laser_no">Laser kártyát nem fogad el</string>
 	<string name="poi_payment_wire_transfer_no">Átutalást nem fogad el</string>
 	<string name="poi_payment_sms_yes">SMS-fizetés</string>
