@@ -2847,4 +2847,9 @@ Representa el área: %1$s x %2$s</string>
     <string name="plugin_mapillary_descr">Fotos a nivel de calle para todos. Descubre lugares, colabora, captura el mundo.</string>
     <string name="online_photos">Fotos en línea</string>
     <string name="no_photos_descr">No hay fotos de este lugar</string>
+    <string name="shared_string_install">Instalar</string>
+    <string name="improve_coverage_mapillary">Mejorar cobertura con Mapillary</string>
+    <string name="improve_coverage_install_mapillary_desc">Puedes tomar tus propias fotos o serie de fotos y añadirlas a esta ubicación del mapa.
+\n
+\nPara ello debes instalar la aplicación Mapillary desde Google Play.</string>
     </resources>
