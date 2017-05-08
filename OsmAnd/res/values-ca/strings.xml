@@ -2751,4 +2751,11 @@ OsmAnd és de codi obert i es desenvolupa activament . Tothom pot recolzar l\'ap
     <string name="shared_string_add_photos">Afegeix fotos</string>
     <string name="mapillary_action_descr">Col·labora amb Mapillary amb les vostres imatges d\'aquesta posició a nivell de carrer.</string>
     <string name="plugin_mapillary_descr">Fotografies a nivell de carrer per a tothom. Descobriu llocs, col·laboreu, captureu el món.</string>
+    <string name="shared_string_install">Instal·la</string>
+    <string name="improve_coverage_mapillary">Millora la cobertura amb Mapillary</string>
+    <string name="improve_coverage_install_mapillary_desc">Podeu afegir les vostres fotos o sèrie de fotos a aquesta ubicació de mapa.
+\n
+\nPer fer-ho cal que us instal·leu l\'aplicació Mapillary des de Google Play.</string>
+    <string name="online_photos">Fotos en línia</string>
+    <string name="no_photos_descr">No tenim fotos per aquesta ubicació</string>
     </resources>
