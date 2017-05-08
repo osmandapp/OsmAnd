@@ -2961,4 +2961,10 @@ Kérlek adj meg egy teljes kódot</string>
     <string name="mapillary_descr">Online utcaképek mindenkinek. Fedezz fel helyeket, vegyél benne részt, fotózd le a világot.</string>
     <string name="plugin_mapillary_descr">Utcaképek mindenkinek. Fedezz fel helyeket, vegyél benne részt, fotózd le a világot.</string>
     <string name="osmand_extended_description_part4">" Az OsmAnd sítérkép bővítménye lehetővé teszi a sípályák megjelenítését nehézség szerint, valamint további információkat, mint például a a felvonók helyét, és más berendezéseket. "</string>
+    <string name="online_photos">Online fotók</string>
+    <string name="improve_coverage_mapillary">Javítsd a lefedettséget a Mapillary-vel</string>
+    <string name="improve_coverage_install_mapillary_desc">Készíthetsz saját fotót, vagy fotósorozatot és hozzáadhatod a térképhez ezen a helyen.
+\n
+\nEhhez telepítened kell a Mapillary alkalmazást a Google Play-ről.</string>
+    <string name="shared_string_install">Telepítés</string>
     </resources>
