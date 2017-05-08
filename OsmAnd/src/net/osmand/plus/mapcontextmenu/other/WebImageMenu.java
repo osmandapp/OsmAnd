@@ -18,6 +18,7 @@ import net.osmand.plus.activities.MapActivity;
 import net.osmand.plus.helpers.AndroidUiHelper;
 import net.osmand.plus.mapillary.MapillaryLayer;
 import net.osmand.plus.views.OsmandMapTileView;
+import net.osmand.util.Algorithms;
 
 public class WebImageMenu {
 
@@ -29,6 +30,9 @@ public class WebImageMenu {
 	private static final String KEY_WEB_IMAGE_MENU_CA = "key_web_image_menu_ca";
 	private static final String KEY_WEB_IMAGE_MENU_TITLE = "key_web_image_menu_title";
 	private static final String KEY_WEB_IMAGE_MENU_DESCRIPTION = "key_web_image_menu_description";
+
+	private static final String MAPILLARY_VIEWER_URL_TEMPLATE =
+			"https://osmand.net/api/mapillary/photo-viewer.php?photo_id=";
 
 	private WebImageType type;
 	private String viewerUrl;
@@ -212,10 +216,15 @@ public class WebImageMenu {
 		}
 
 		@JavascriptInterface
-		public void onNodeChanged(double latitude, double longitude, double ca) {
+		public void onNodeChanged(double latitude, double longitude, double ca, String key) {
 			LatLon latLon = null;
 			if (!Double.isNaN(latitude) && !Double.isNaN(longitude)) {
 				latLon = new LatLon(latitude, longitude);
+				WebImageMenu.this.latLon = latLon;
+				WebImageMenu.this.ca = ca;
+				if (!Algorithms.isEmpty(key)) {
+					WebImageMenu.this.viewerUrl = MAPILLARY_VIEWER_URL_TEMPLATE + key;
+				}
 			}
 			setImageLocation(latLon, ca, false);
 		}
