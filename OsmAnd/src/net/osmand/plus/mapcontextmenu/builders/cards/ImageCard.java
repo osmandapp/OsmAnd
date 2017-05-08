@@ -55,6 +55,8 @@ public abstract class ImageCard extends AbstractCard {
 	private String url;
 	// Image bitmap url
 	private String imageUrl;
+	// Image high resolution bitmap url
+	private String imageHiresUrl;
 
 	private int defaultImageLayoutId = R.layout.context_menu_card_image;
 
@@ -100,6 +102,9 @@ public abstract class ImageCard extends AbstractCard {
 			}
 			if (imageObject.has("imageUrl")) {
 				this.imageUrl = imageObject.getString("imageUrl");
+			}
+			if (imageObject.has("imageHiresUrl")) {
+				this.imageHiresUrl = imageObject.getString("imageHiresUrl");
 			}
 		} catch (JSONException e) {
 			e.printStackTrace();
@@ -155,6 +160,10 @@ public abstract class ImageCard extends AbstractCard {
 
 	public String getImageUrl() {
 		return imageUrl;
+	}
+
+	public String getImageHiresUrl() {
+		return imageHiresUrl;
 	}
 
 	public int getDefaultImageLayoutId() {

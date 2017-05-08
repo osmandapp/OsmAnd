@@ -7,7 +7,7 @@
               android:background="@android:color/transparent">
 
     <LinearLayout
-        android:id="@+id/image_layout"
+        android:id="@+id/dialog_layout"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:minHeight="@dimen/dashboard_map_toolbar"
@@ -16,7 +16,7 @@
         android:orientation="horizontal">
 
         <android.support.v7.widget.AppCompatImageView
-            android:id="@+id/image_close_button"
+            android:id="@+id/close_button"
             style="@style/Widget.AppCompat.ActionButton"
             android:layout_width="56dp"
             android:layout_height="56dp"
@@ -26,7 +26,7 @@
             android:src="@drawable/ic_action_remove_dark"/>
 
         <LinearLayout
-            android:id="@+id/image_title_layout"
+            android:id="@+id/title_layout"
             android:layout_width="0dp"
             android:layout_height="wrap_content"
             android:layout_gravity="center_vertical"
@@ -36,7 +36,7 @@
             android:paddingTop="10dp">
 
             <TextView
-                android:id="@+id/image_title"
+                android:id="@+id/title"
                 android:layout_width="match_parent"
                 android:layout_height="match_parent"
                 android:background="@null"
@@ -49,7 +49,7 @@
                 tools:text="Title"/>
 
             <TextView
-                android:id="@+id/image_description"
+                android:id="@+id/description"
                 android:layout_width="match_parent"
                 android:layout_height="match_parent"
                 android:background="@null"
@@ -63,7 +63,7 @@
         </LinearLayout>
 
         <android.support.v7.widget.AppCompatImageView
-            android:id="@+id/image_refresh_button"
+            android:id="@+id/refresh_button"
             style="@style/Widget.AppCompat.ActionButton"
             android:layout_width="48dp"
             android:layout_height="56dp"
@@ -75,14 +75,14 @@
     </LinearLayout>
 
     <LinearLayout
-        android:id="@+id/image_viewer"
+        android:id="@+id/content"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:background="@color/map_widget_dark"
         android:orientation="vertical"/>
 
     <FrameLayout
-        android:id="@+id/image_shadow"
+        android:id="@+id/shadow"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:foreground="@drawable/bg_contextmenu_shadow"
