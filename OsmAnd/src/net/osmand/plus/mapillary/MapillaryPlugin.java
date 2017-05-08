@@ -258,6 +258,7 @@ public class MapillaryPlugin extends OsmandPlugin {
 					dismiss();
 				}
 			});
+			showWidget(showWidget);
 			return view;
 		}
 
