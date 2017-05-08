@@ -1883,9 +1883,9 @@
 	<string name="poi_compressed_air_yes">Áno</string>
 	<string name="poi_button_operated_yes">Dopytové tlačidlo: áno</string>
 	<string name="poi_free_flying_paragliding_yes">Paragliding</string>
-	<string name="poi_organic_yes">Biopotraviny: áno</string>
-	<string name="poi_organic_no">Biopotraviny: nie</string>
-	<string name="poi_organic_only">Len biopotraviny</string>
+	<string name="poi_organic_yes">Áno</string>
+	<string name="poi_organic_no">Nie</string>
+	<string name="poi_organic_only">Výhradne</string>
 
 	<string name="poi_wiki_link">Wikipédia</string>
 
@@ -2998,4 +2998,12 @@
 	<string name="poi_animal_keeping_type_paddock">Typ: výbeh</string>
 	<string name="poi_animal_keeping_type_open_stable">Typ: otvorená stajňa</string>
 
+	<string name="poi_social_facility_day_care">Denná starostlivosť</string>
+
+	<string name="poi_social_facility_group_home">Spoločné bývanie</string>
+	<string name="poi_social_facility_assisted_living">Asistované bývanie</string>
+	<string name="poi_social_facility_outreach">Nebytové zariadenie</string>
+	<string name="poi_social_facility_food_bank">Potravinová banka</string>
+	<string name="poi_social_facility_shelter">Útulok</string>
+	<string name="poi_social_facility_ambulatory_care">Ambulantná starostlivosť</string>
 	</resources>
