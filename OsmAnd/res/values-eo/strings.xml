@@ -2826,8 +2826,8 @@ De Afganujo al Zimbabvo, de Aŭstralio al Usono, Argentino, Brazilo, Kanado, Fra
     <string name="online_photos">Enretaj fotoj</string>
     <string name="no_photos_descr">Ni ne havas fotojn pri tiu ĉi loko</string>
     <string name="shared_string_install">Instali</string>
-    <string name="improve_coverage_mapillary">Plibonigi atingon per Mapillary</string>
-    <string name="improve_coverage_install_mapillary_desc">Vi povas fari viajn proprajn fotojn aŭ seriojn de fotoj kaj aldoni ilin al tiu ĉi map-loko.
+    <string name="improve_coverage_mapillary">Pliigi map-atingon de Mapillary</string>
+    <string name="improve_coverage_install_mapillary_desc">Vi povas fari viajn proprajn fotojn aŭ seriojn da fotoj kaj aldoni ilin al tiu ĉi map-loko.
 \n
 \nPor fari tion, vi devas instali aplikaĵon Mapillary el Google Play.</string>
     </resources>
