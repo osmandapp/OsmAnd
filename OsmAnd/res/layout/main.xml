@@ -73,6 +73,11 @@
         </FrameLayout>
 
         <FrameLayout
+            android:id="@+id/topFragmentContainer"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"/>
+
+        <FrameLayout
             android:id="@+id/routeMenuContainer"
             android:layout_width="match_parent"
             android:layout_height="match_parent"/>

@@ -108,10 +108,8 @@ public class MapillaryPlugin extends OsmandPlugin {
 		if (settings.SHOW_MAPILLARY.get()) {
 			mapillarySource = settings.getTileSourceByName(TileSourceManager.getMapillarySource().getName(), false);
 		}
-		if (!Algorithms.objectEquals(mapillarySource, layer.getMap())) {
-			if (mapillarySource == null) {
-				mapView.removeLayer(layer);
-			} else if (mapView.getMapRenderer() == null) {
+		if (!Algorithms.objectEquals(mapillarySource, layer.getMap()) || !mapView.isLayerVisible(layer)) {
+			if (mapView.getMapRenderer() == null && !mapView.isLayerVisible(layer)) {
 				mapView.addLayer(layer, layerOrder);
 			}
 			layer.setMap(mapillarySource);

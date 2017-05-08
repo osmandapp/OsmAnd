@@ -42,7 +42,6 @@ public class MapInfoWidgetsFactory {
 		CONTEXT_MENU,
 		TRACK_DETAILS,
 		DISCOUNT,
-		ONLINE_IMAGE,
 	}
 
 	public TextInfoWidget createAltitudeControl(final MapActivity map) {
