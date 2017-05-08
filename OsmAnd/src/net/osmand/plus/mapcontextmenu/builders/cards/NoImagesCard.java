@@ -23,7 +23,7 @@ public class NoImagesCard extends AbstractCard {
 			view.findViewById(R.id.button).setOnClickListener(new View.OnClickListener() {
 				@Override
 				public void onClick(View v) {
-					MapillaryPlugin.openMapillary(getMapActivity());
+					MapillaryPlugin.openMapillary(getMapActivity(), null);
 				}
 			});
 		}

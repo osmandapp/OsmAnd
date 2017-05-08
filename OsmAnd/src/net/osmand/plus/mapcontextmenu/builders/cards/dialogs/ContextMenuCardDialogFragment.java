@@ -4,6 +4,8 @@ import android.os.Bundle;
 import android.support.annotation.Nullable;
 import android.support.v4.app.Fragment;
 import android.support.v4.app.FragmentManager;
+import android.support.v7.widget.AppCompatImageView;
+import android.support.v7.widget.PopupMenu;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -13,6 +15,7 @@ import android.widget.TextView;
 
 import net.osmand.plus.R;
 import net.osmand.plus.activities.MapActivity;
+import net.osmand.plus.dialogs.DirectionsDialogs;
 import net.osmand.util.Algorithms;
 
 public class ContextMenuCardDialogFragment extends Fragment {
@@ -50,6 +53,21 @@ public class ContextMenuCardDialogFragment extends Fragment {
 		}
 		if (!Algorithms.isEmpty(dialog.getDescription())) {
 			((TextView) view.findViewById(R.id.description)).setText(dialog.getDescription());
+		}
+		AppCompatImageView moreButton = (AppCompatImageView) view.findViewById(R.id.more_button);
+		if (dialog.haveMenuItems()) {
+			moreButton.setVisibility(View.VISIBLE);
+			moreButton.setOnClickListener(new View.OnClickListener() {
+				@Override
+				public void onClick(View v) {
+					final PopupMenu optionsMenu = new PopupMenu(getContext(), v);
+					DirectionsDialogs.setupPopUpMenuIcon(optionsMenu);
+					dialog.createMenuItems(optionsMenu.getMenu());
+					optionsMenu.show();
+				}
+			});
+		} else {
+			moreButton.setVisibility(View.GONE);
 		}
 		return view;
 	}

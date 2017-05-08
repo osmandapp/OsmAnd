@@ -17,7 +17,7 @@ public class MapillaryImageCard extends ImageCard {
 			@Override
 			public void onClick(View v) {
 				getMapActivity().getContextMenu().hideMenues();
-				MapillaryImageDialog.show(getMapActivity(), getImageHiresUrl(), getUrl(), getLocation(),
+				MapillaryImageDialog.show(getMapActivity(), getKey(), getImageHiresUrl(), getUrl(), getLocation(),
 						getCa(), getMyApplication().getString(R.string.mapillary), null);
 			}
 		};

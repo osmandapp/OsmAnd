@@ -8,6 +8,8 @@ import android.os.AsyncTask;
 import android.os.Bundle;
 import android.support.annotation.NonNull;
 import android.view.Gravity;
+import android.view.Menu;
+import android.view.MenuItem;
 import android.view.View;
 import android.view.ViewGroup;
 import android.webkit.ConsoleMessage;
@@ -21,6 +23,7 @@ import android.widget.ProgressBar;
 import net.osmand.AndroidNetworkUtils;
 import net.osmand.AndroidUtils;
 import net.osmand.data.LatLon;
+import net.osmand.plus.R;
 import net.osmand.plus.activities.MapActivity;
 import net.osmand.plus.mapcontextmenu.builders.cards.ImageCard;
 import net.osmand.plus.mapcontextmenu.builders.cards.dialogs.ContextMenuCardDialog;
@@ -30,6 +33,7 @@ import net.osmand.util.Algorithms;
 
 public class MapillaryImageDialog extends ContextMenuCardDialog {
 
+	private static final String KEY_MAPILLARY_DIALOG_IMAGE_KEY = "key_mapillary_dialog_image_key";
 	private static final String KEY_MAPILLARY_DIALOG_IMAGE_URL = "key_mapillary_dialog_image_url";
 	private static final String KEY_MAPILLARY_DIALOG_VIEWER_URL = "key_mapillary_dialog_viewer_url";
 	private static final String KEY_MAPILLARY_DIALOG_LATLON = "key_mapillary_dialog_latlon";
@@ -42,6 +46,7 @@ public class MapillaryImageDialog extends ContextMenuCardDialog {
 
 	private static final String WEBGL_ERROR_MESSAGE = "Error creating WebGL context";
 
+	private String key;
 	private String imageUrl;
 	private String viewerUrl;
 	private LatLon latLon;
@@ -52,15 +57,20 @@ public class MapillaryImageDialog extends ContextMenuCardDialog {
 		restoreFields(bundle);
 	}
 
-	public MapillaryImageDialog(MapActivity mapActivity, String imageUrl, String viewerUrl, LatLon latLon, double ca,
+	public MapillaryImageDialog(MapActivity mapActivity, String key, String imageUrl, String viewerUrl, LatLon latLon, double ca,
 								String title, String description) {
 		super(mapActivity, CardDialogType.MAPILLARY);
 		this.title = title;
 		this.description = description;
+		this.key = key;
 		this.imageUrl = imageUrl;
 		this.viewerUrl = viewerUrl;
 		this.latLon = latLon;
 		this.ca = ca;
+	}
+
+	public String getKey() {
+		return key;
 	}
 
 	public String getViewerUrl() {
@@ -77,6 +87,7 @@ public class MapillaryImageDialog extends ContextMenuCardDialog {
 
 	public void saveMenu(Bundle bundle) {
 		super.saveMenu(bundle);
+		bundle.putSerializable(KEY_MAPILLARY_DIALOG_IMAGE_KEY, key);
 		bundle.putSerializable(KEY_MAPILLARY_DIALOG_IMAGE_URL, imageUrl);
 		bundle.putSerializable(KEY_MAPILLARY_DIALOG_VIEWER_URL, viewerUrl);
 		bundle.putSerializable(KEY_MAPILLARY_DIALOG_LATLON, latLon);
@@ -86,6 +97,7 @@ public class MapillaryImageDialog extends ContextMenuCardDialog {
 	@Override
 	protected void restoreFields(Bundle bundle) {
 		super.restoreFields(bundle);
+		this.key = bundle.getString(KEY_MAPILLARY_DIALOG_IMAGE_KEY);
 		this.imageUrl = bundle.getString(KEY_MAPILLARY_DIALOG_IMAGE_URL);
 		this.viewerUrl = bundle.getString(KEY_MAPILLARY_DIALOG_VIEWER_URL);
 		Object latLonObj = bundle.getSerializable(KEY_MAPILLARY_DIALOG_LATLON);
@@ -136,11 +148,31 @@ public class MapillaryImageDialog extends ContextMenuCardDialog {
 		}
 	}
 
+	@Override
+	protected boolean haveMenuItems() {
+		return true;
+	}
+
+	@Override
+	protected void createMenuItems(Menu menu) {
+		MenuItem item = menu.add(R.string.open_mapillary)
+				.setIcon(getMapActivity().getMyApplication().getIconsCache().getThemedIcon(
+						R.drawable.ic_action_mapillary));
+		item.setOnMenuItemClickListener(new MenuItem.OnMenuItemClickListener() {
+			@Override
+			public boolean onMenuItemClick(MenuItem item) {
+				MapillaryPlugin.openMapillary(getMapActivity(), key);
+				return true;
+			}
+		});
+	}
+
+
 	@SuppressLint({"SetJavaScriptEnabled", "AddJavascriptInterface"})
 	private WebView getWebView() {
 		final WebView webView = new WebView(getMapActivity());
 		webView.setBackgroundColor(Color.argb(1, 0, 0, 0));
-		webView.setLayerType(WebView.LAYER_TYPE_SOFTWARE, null);
+		//webView.setLayerType(WebView.LAYER_TYPE_SOFTWARE, null);
 		webView.setScrollContainer(false);
 		webView.getSettings().setJavaScriptEnabled(true);
 		webView.addJavascriptInterface(new MapillaryWebAppInterface(), "Android");
@@ -153,7 +185,7 @@ public class MapillaryImageDialog extends ContextMenuCardDialog {
 			public boolean onConsoleMessage(ConsoleMessage consoleMessage) {
 				if (!Algorithms.isEmpty(consoleMessage.message()) && consoleMessage.message().contains(WEBGL_ERROR_MESSAGE)) {
 					MapillaryPlugin.setWebGlSupported(false);
-					show(getMapActivity(), imageUrl, viewerUrl, getLatLon(), getCa(), getTitle(), getDescription());
+					show(getMapActivity(), key, imageUrl, viewerUrl, getLatLon(), getCa(), getTitle(), getDescription());
 				}
 				return false;
 			}
@@ -172,6 +204,7 @@ public class MapillaryImageDialog extends ContextMenuCardDialog {
 				MapillaryImageDialog.this.latLon = latLon;
 				MapillaryImageDialog.this.ca = ca;
 				if (!Algorithms.isEmpty(key)) {
+					MapillaryImageDialog.this.key = key;
 					MapillaryImageDialog.this.imageUrl = MAPILLARY_HIRES_IMAGE_URL_TEMPLATE + key;
 					MapillaryImageDialog.this.viewerUrl = MAPILLARY_VIEWER_URL_TEMPLATE + key;
 				}
@@ -182,6 +215,7 @@ public class MapillaryImageDialog extends ContextMenuCardDialog {
 
 	private View getStaticImageView() {
 		LinearLayout ll = new LinearLayout(getMapActivity());
+		ll.setClickable(true);
 		LinearLayout.LayoutParams lp = new LinearLayout.LayoutParams(
 				isPortrait() ? ViewGroup.LayoutParams.MATCH_PARENT : AndroidUtils.dpToPx(getMapActivity(), 360f),
 				isPortrait() ? AndroidUtils.dpToPx(getMapActivity(), 270f) : ViewGroup.LayoutParams.MATCH_PARENT);
@@ -205,9 +239,11 @@ public class MapillaryImageDialog extends ContextMenuCardDialog {
 	}
 
 
-	public static MapillaryImageDialog show(MapActivity mapActivity, String imageUrl, String viewerUrl, LatLon latLon, double ca,
-											 String title, String description) {
-		MapillaryImageDialog dialog = new MapillaryImageDialog(mapActivity, imageUrl, viewerUrl, latLon, ca, title, description);
+	public static MapillaryImageDialog show(MapActivity mapActivity, String key, String imageUrl,
+											String viewerUrl, LatLon latLon, double ca,
+											String title, String description) {
+		MapillaryImageDialog dialog = new MapillaryImageDialog(mapActivity, key, imageUrl, viewerUrl,
+				latLon, ca, title, description);
 		ContextMenuCardDialogFragment.showInstance(dialog);
 		return dialog;
 	}

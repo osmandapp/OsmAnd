@@ -184,7 +184,7 @@ public class MapillaryPlugin extends OsmandPlugin {
 		mapillaryControl.setOnClickListener(new View.OnClickListener() {
 			@Override
 			public void onClick(View v) {
-				openMapillary(map);
+				openMapillary(map, null);
 			}
 		});
 
@@ -205,12 +205,15 @@ public class MapillaryPlugin extends OsmandPlugin {
 		}
 	}
 
-	public static boolean openMapillary(FragmentActivity activity) {
+	public static boolean openMapillary(FragmentActivity activity, String imageKey) {
 		boolean success = false;
 		OsmandApplication app = (OsmandApplication) activity.getApplication();
 		if (isPackageInstalled(MAPILLARY_PACKAGE_ID, app)) {
 			Intent launchIntent = app.getPackageManager().getLaunchIntentForPackage(MAPILLARY_PACKAGE_ID);
 			if (launchIntent != null) {
+				if (imageKey != null) {
+					launchIntent.putExtra("photo_id", imageKey);
+				}
 				app.startActivity(launchIntent);
 				success = true;
 			}

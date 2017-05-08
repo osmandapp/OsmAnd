@@ -2,6 +2,8 @@ package net.osmand.plus.mapcontextmenu.builders.cards.dialogs;
 
 import android.os.Bundle;
 import android.support.annotation.NonNull;
+import android.view.Menu;
+import android.view.MenuItem;
 import android.view.View;
 
 import net.osmand.plus.OsmandSettings;
@@ -9,6 +11,8 @@ import net.osmand.plus.activities.MapActivity;
 import net.osmand.plus.helpers.AndroidUiHelper;
 import net.osmand.plus.mapillary.MapillaryImageDialog;
 import net.osmand.plus.views.OsmandMapTileView;
+
+import java.util.List;
 
 public abstract class ContextMenuCardDialog {
 
@@ -54,6 +58,13 @@ public abstract class ContextMenuCardDialog {
 
 	public String getDescription() {
 		return description;
+	}
+
+	protected boolean haveMenuItems() {
+		return false;
+	}
+
+	protected void createMenuItems(Menu menu) {
 	}
 
 	public void saveMenu(Bundle bundle) {

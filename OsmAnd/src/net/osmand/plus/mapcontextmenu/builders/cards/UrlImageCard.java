@@ -22,22 +22,10 @@ public class UrlImageCard extends ImageCard {
 				@Override
 				public void onClick(View v) {
 					Intent intent = new Intent(Intent.ACTION_VIEW);
-					intent.setData(Uri.parse(getImageUrl()));
+					intent.setData(Uri.parse(getUrl()));
 					v.getContext().startActivity(intent);
 				}
 			};
-		}
-	}
-
-	@Override
-	public void update() {
-		super.update();
-		if (view != null) {
-			ImageView image = (ImageView) view.findViewById(R.id.image);
-			image.setVisibility(View.GONE);
-			TextView urlText = (TextView) view.findViewById(R.id.url);
-			urlText.setText(getImageUrl());
-			urlText.setVisibility(View.VISIBLE);
 		}
 	}
 }

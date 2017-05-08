@@ -13,6 +13,7 @@
         android:minHeight="@dimen/dashboard_map_toolbar"
         android:background="@color/osmand_orange"
         android:gravity="center_vertical"
+        android:clickable="true"
         android:orientation="horizontal">
 
         <android.support.v7.widget.AppCompatImageView
@@ -63,13 +64,13 @@
         </LinearLayout>
 
         <android.support.v7.widget.AppCompatImageView
-            android:id="@+id/refresh_button"
+            android:id="@+id/more_button"
             style="@style/Widget.AppCompat.ActionButton"
             android:layout_width="48dp"
             android:layout_height="56dp"
             android:layout_gravity="top"
-            android:contentDescription="@string/shared_string_refresh"
-            android:src="@drawable/ic_action_refresh_dark"
+            android:contentDescription="@string/shared_string_more"
+            android:src="@drawable/ic_overflow_menu_white"
             android:visibility="gone"/>
 
     </LinearLayout>
