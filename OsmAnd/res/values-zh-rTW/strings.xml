@@ -2869,4 +2869,5 @@ OsmAnd 是開放原始碼，而且正在積極的開發。應用程式從報告�
     <string name="improve_coverage_install_mapillary_desc">您可以拍攝自己的照片或系列照片，並將其增加到此地圖位置。
 \n
 \n要做到點，您需要從 Google Play 安裝 Mapillary 應用程式。</string>
+    <string name="open_mapillary">開啟 Mapillary</string>
     </resources>
