@@ -174,7 +174,7 @@ public class MapillaryPlugin extends OsmandPlugin {
 		mapillaryControl.setOnClickListener(new View.OnClickListener() {
 			@Override
 			public void onClick(View v) {
-				openMapillary(app);
+				openMapillary(map);
 			}
 		});
 
@@ -195,8 +195,9 @@ public class MapillaryPlugin extends OsmandPlugin {
 		}
 	}
 
-	public static boolean openMapillary(OsmandApplication app) {
+	public static boolean openMapillary(FragmentActivity activity) {
 		boolean success = false;
+		OsmandApplication app = (OsmandApplication) activity.getApplication();
 		if (isPackageInstalled(MAPILLARY_PACKAGE_ID, app)) {
 			Intent launchIntent = app.getPackageManager().getLaunchIntentForPackage(MAPILLARY_PACKAGE_ID);
 			if (launchIntent != null) {
@@ -204,10 +205,15 @@ public class MapillaryPlugin extends OsmandPlugin {
 				success = true;
 			}
 		} else {
-			success = execInstall(app, "market://search?q=pname:" + MAPILLARY_PACKAGE_ID);
-			if (!success) {
-				success = execInstall(app, "https://play.google.com/store/apps/details?id=" + MAPILLARY_PACKAGE_ID);
-			}
+			new MapillaryInstallDialogFragment().show(activity.getSupportFragmentManager(), MapillaryInstallDialogFragment.TAG);
+		}
+		return success;
+	}
+
+	public static boolean installMapillary(OsmandApplication app) {
+		boolean success = execInstall(app, "market://search?q=pname:" + MAPILLARY_PACKAGE_ID);
+		if (!success) {
+			success = execInstall(app, "https://play.google.com/store/apps/details?id=" + MAPILLARY_PACKAGE_ID);
 		}
 		return success;
 	}
