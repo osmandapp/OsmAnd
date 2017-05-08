@@ -3066,4 +3066,9 @@ Tidligere destination bliver sidste mellemliggende punkt.</string>
     <string name="plugin_mapillary_descr">Billeder på gadeniveau for alle. Opdag steder, samarbejd, indfang verdenen.</string>
     <string name="online_photos">Online fotos</string>
     <string name="no_photos_descr">Ingen billeder til denne placering</string>
+    <string name="shared_string_install">Installer</string>
+    <string name="improve_coverage_mapillary">Forbedre dækningen med Mapillary</string>
+    <string name="improve_coverage_install_mapillary_desc">Tag egne fotos eller serier af fotos og føje dem til denne kortplacering.
+\n
+\nFor at gøre dette skal Mapillary installeres fra Google Play.</string>
     </resources>
