@@ -196,7 +196,7 @@ Lon %2$s</string>
     <string name="rendering_category_hide">Ocultar</string>
     <string name="rendering_category_routes">Rutas</string>
     <string name="rendering_category_details">Detalles</string>
-    <string name="rendering_category_transport">Transporte</string>
+    <string name="rendering_category_transport">Transporte público</string>
     <string name="rendering_category_others">Otros atributos del mapa</string>
     <string name="map_widget_top">Barra de estado</string>
     <string name="map_widget_right">Panel derecho</string>
@@ -788,7 +788,7 @@ Se aprecia la participación activa, y las contribuciones pueden hacerse directa
     <string name="download_srtm_maps">Curvas de nivel</string>
     <string name="download_regular_maps">Mapa estándar</string>
     <string name="download_roads_only_maps">Mapa sólo vial</string>
-    <string name="rendering_attr_alpineHiking_name">Escala de senderismo Alpino (SAC)</string>
+    <string name="rendering_attr_alpineHiking_name">Escala de senderismo alpino (SAC)</string>
     <string name="rendering_attr_alpineHiking_description">Dibujar senderos según la escala SAC</string>
     <string name="rendering_attr_hikingRoutesOSMC_name">Superponer símbolo de senderismo</string>
     <string name="rendering_attr_hikingRoutesOSMC_description">Dibujar senderos según trazas OSMC</string>
@@ -807,7 +807,7 @@ Se aprecia la participación activa, y las contribuciones pueden hacerse directa
     <string name="close_changeset">Cerrar conjunto de cambios</string>
     <string name="zxing_barcode_scanner_not_found">Aplicación ZXing Barcode Scanner no instalada. ¿Buscarla en Google Play?</string>
     <string name="rendering_attr_roadColors_description">Elige un esquema de color vial:</string>
-    <string name="rendering_attr_roadColors_name">Esquema de color de caminos</string>
+    <string name="rendering_attr_roadColors_name">Esquema de color del camino</string>
     <string name="map_widget_show_destination_arrow">Mostrar dirección de destino</string>
     <string name="enable_plugin_monitoring_services">Activa el complemento de rastreo para usar el servicio de registro de ubicación (grabación GPX, rastreo en línea)</string>
     <string name="non_optimal_route_calculation">Calcular ruta posiblemente no óptima en largas distancias</string>
@@ -849,8 +849,8 @@ Se aprecia la participación activa, y las contribuciones pueden hacerse directa
     <string name="avoid_motorway">Evitar autopistas</string>
     <string name="auto_zoom_map_descr">Ampliación automática del mapa, según la velocidad (mientras el mapa se sincroniza con la ubicación actual)</string>
     <string name="auto_zoom_map">Ampliación automática del mapa</string>
-    <string name="snap_to_road_descr">﻿Ajusta la ubicación a los caminos durante la navegación</string>
-    <string name="snap_to_road">Ajustar a caminos</string>
+    <string name="snap_to_road_descr">﻿Ajusta la ubicación al camino durante la navegación</string>
+    <string name="snap_to_road">Ajustar al camino</string>
     <string name="interrupt_music_descr">Pausa totalmente cualquier sonido al realizar anuncios (no sólo reduce el volumen)</string>
     <string name="interrupt_music">Pausar música</string>
     <string name="osmand_play_title_30_chars">Navegación y Mapas OsmAnd</string>
@@ -1457,7 +1457,7 @@ Afganistán, Albania, Alemania, Andorra, Angola, Anguila, Antigua y Barbuda, Ant
     <string name="amenity_type_sport">Deporte</string>
     <string name="amenity_type_sustenance">Sustento</string>
     <string name="amenity_type_tourism">Turismo</string>
-    <string name="amenity_type_transportation">Transporte</string>
+    <string name="amenity_type_transportation">Transporte público</string>
     <string name="indexing_address">Indexando direcciones…</string>
     <string name="indexing_map">Indexando mapa…</string>
     <string name="indexing_poi">Indexando PDI…</string>
@@ -2055,7 +2055,7 @@ Afganistán, Albania, Alemania, Andorra, Angola, Anguila, Antigua y Barbuda, Ant
     <string name="context_menu_item_edit_waypoint">Editar punto de ruta GPX</string>
     <string name="rendering_attr_currentTrackColor_description">Color del GPX</string>
     <string name="rendering_attr_currentTrackWidth_description">Ancho del GPX</string>
-    <string name="rendering_attr_roadStyle_description">Estilo de carretera</string>
+    <string name="rendering_attr_roadStyle_description">Estilo del camino</string>
     <string name="poi_dialog_reopen">Reabrir</string>
 	<string name="osm_save_offline">Guardar sin conexión</string>
     <string name="release_2_2">" • Nueva interfaz de usuario sensible al contexto para aprovechar lugares en el mapa y en otra pantallas.
@@ -2111,7 +2111,7 @@ Afganistán, Albania, Alemania, Andorra, Angola, Anguila, Antigua y Barbuda, Ant
 <string name="no_location_permission">La aplicación no tiene permiso de acceso a los datos de ubicación.</string>
     <string name="no_camera_permission">La aplicación no tiene permiso de acceso a la cámara.</string>
     <string name="no_microphone_permission">La aplicación no tiene permiso de acceso al micrófono.</string>
-    <string name="impassable_road_desc">Elige caminos a evitar durante la navegación</string>
+    <string name="impassable_road_desc">Elige los caminos a evitar durante la navegación</string>
     <string name="shared_string_sound">Sonido</string>
     <string name="select_voice_provider">Elige las indicaciones por voz</string>
     <string name="select_voice_provider_descr">Elige o descarga las indicaciones por voz para tu idioma</string>
@@ -2208,7 +2208,7 @@ Si necesitas ayuda con la aplicación OsmAnd, contacte con nuestro equipo de sop
     <string name="find_parking">Encontrar estacionamiento</string>
     <string name="show_polygons">Mostrar polígonos</string>
     
-    <string name="rendering_attr_showMtbRoutes_name">Rutas de BTT</string>
+    <string name="rendering_attr_showMtbRoutes_name">Rutas para bicicletas de montaña</string>
     <string name="shared_string_reverse_order">Invertir orden</string>
     
     <string name="show_map_markers_description">Activar función de marcadores del mapa</string>
@@ -2464,7 +2464,7 @@ Si necesitas ayuda con la aplicación OsmAnd, contacte con nuestro equipo de sop
     <string name="osmo_share_location">Compartir</string>
     <string name="osmo_pause_location">Pausar</string>
     <string name="osmo_service_running">El servicio de OsMo está ejecutándose</string>
-    <string name="gpx_no_tracks_title">No tienes trazas todavía</string>
+    <string name="gpx_no_tracks_title">Aún sin trazas</string>
     <string name="gpx_no_tracks_title_folder">También puedes añadir trazas a la carpeta</string>
     <string name="gpx_add_track">Añadir traza</string>
     <string name="gpx_appearance">Aspecto</string>
@@ -2516,7 +2516,7 @@ Si necesitas ayuda con la aplicación OsmAnd, contacte con nuestro equipo de sop
     <string name="quick_favorites_show_favorites_dialog">Mostrar diálogo de favoritos</string>
     <string name="quick_favorites_name_preset">Nombre predefinido</string>
     <string name="shared_string_action_name">Nombre de la acción</string>
-    <string name="quick_action_add_marker_descr">Pulsar el botón de acción añadirá un marcador de mapa en la ubicación central de la pantalla.</string>
+    <string name="quick_action_add_marker_descr">Pulsar el botón de acción añadirá un marcador en la ubicación central de la pantalla.</string>
     <string name="quick_action_add_gpx_descr">Pulsar el botón de acción añadirá un punto de ruta GPX en la ubicación central de la pantalla.</string>
     <string name="quick_action_take_audio_note_descr">Pulsar el botón de acción añadirá una nota de audio en la ubicación central de la pantalla.</string>
     <string name="quick_action_take_video_note_descr">Pulsar el botón de acción añadirá una nota de video en la ubicación central de la pantalla.</string>
@@ -2547,7 +2547,7 @@ Si necesitas ayuda con la aplicación OsmAnd, contacte con nuestro equipo de sop
     <string name="quick_action_category_descr">Marca la categoría para guardar el favorito en</string>
     <string name="quick_action_gpx_category_descr">Elige una categoría opcional</string>
     <string name="quick_action_poi_list">Lista de PDIs</string>
-    <string name="quick_action_sh_poi_descr">Puedes añadir una o mas categorías PDI a mostrar en el mapa.</string>
+    <string name="quick_action_sh_poi_descr">Puedes añadir una o más categorías PDI para mostrar en el mapa.</string>
     <string name="quick_action_map_style_action">Añadir un estilo de mapa</string>
     <string name="quick_action_empty_param_error">Los parámetros no deben estar vacíos</string>
     <string name="quick_action_map_styles">Estilos de mapa</string>
@@ -2609,9 +2609,9 @@ Representa el área: %1$s x %2$s</string>
     <string name="routing_attr_height_relief_smoothness_factor_name">Factor de suavidad de relieve</string>
     <string name="routing_attr_height_relief_smoothness_factor_description">Más llanuras o colinas</string>
     <string name="routing_attr_height_obstacles_name">Usar datos de elevación</string>
-    <string name="routing_attr_height_obstacles_description">Usa datos de elevación del terreno proporcionados por SRTM, ASTER y EU-DEM</string>
+    <string name="routing_attr_height_obstacles_description">Usa datos de elevación del terreno provistos por SRTM, ASTER y EU-DEM</string>
 
-    <string name="routing_attr_driving_style_name">Estilo de manejo</string>
+    <string name="routing_attr_driving_style_name">Estilo de conducción</string>
     <string name="routing_attr_driving_style_description">Estilo de manejo seguro, rápido o equilibrado</string>
     <string name="select_gpx_folder">Marcar carpeta de traza</string>
     <string name="file_can_not_be_moved">Archivo inamovible.</string>
@@ -2646,7 +2646,7 @@ Representa el área: %1$s x %2$s</string>
     <string name="do_not_show_startup_messages_desc">Muestra descuentos de la aplicación y mensajes especiales de eventos locales</string>
     <string name="parking_options">Opciones de estacionamiento</string>
     <string name="full_version_thanks">¡Gracias por comprar la versión completa de OsmAnd!</string>
-    <string name="routing_attr_relief_smoothness_factor_name">Eligir la fluctuación de elevación</string>
+    <string name="routing_attr_relief_smoothness_factor_name">Elegir la fluctuación de elevación</string>
     <string name="right_side_navigation">Conducir por la derecha</string>
     <string name="driving_region_automatic">Automático</string>
     <string name="osmand_extended_description_part1">" OsmAnd (OSM Automated Navigation Directions, y en español, Guía de Navegación Automatizada de OSM) es una aplicación de mapa y navegación con acceso a los datos libres de OpenStreetMap (OSM), en todo el mundo y de alta calidad. Disfruta del navegador por voz y óptico, la visualización de PDIs (puntos de interés), la creación y gestión de trazas GPX, utiliza la información de visualización y la altitud de las curvas de nivel (mediante un complemento), elige entre modos de automóvil, bicicleta o peatón, edita en OSM y mucho más. "</string>
@@ -2731,15 +2731,7 @@ Representa el área: %1$s x %2$s</string>
 \n • (Opcional) Muestra los límites de velocidad y obtén un aviso al excederte
 \n • (Opcional) Acercamiento del mapa dependiente a la velocidad
 \n • Comparte la ubicación para que tus amigos te encuentren "</string>
-    <string name="osmand_plus_extended_description_part6">"
- Funciones de ciclismo y peatón
-• Visualización de caminos para caminar, senderismo y ciclismo,ideal para actividades al aire libre
-• Navegación especial y modos de visualización para bicicletas y peatones
-• (Opcional) Paradas de transporte público (colectivo, tranvía, tren) incluyendo nombres de líneas
-• (Opcional) Graba el viaje en forma local en un archivo GPX o con un servicio en línea
-• (Opcional) Muestra la velocidad y altitud
-• Mediante un complemento adicional, puedes activar la visualización de las curvas de nivel y el sombreado de colinas
- "</string>
+    <string name="osmand_plus_extended_description_part6">" Funciones de ciclismo y peatón • Visualización de caminos para caminar, senderismo y ciclismo,ideal para actividades al aire libre • Navegación especial y modos de visualización para bicicletas y peatones • (Opcional) Paradas de transporte público (colectivo, tranvía, tren) incluyendo nombres de líneas • (Opcional) Graba el viaje en forma local en un archivo GPX o con un servicio en línea • (Opcional) Muestra la velocidad y altitud • Mediante un complemento adicional, puedes activar la visualización de las curvas de nivel y el sombreado de colinas "</string>
     <string name="osmand_plus_extended_description_part7">" Contribuye con OSM
 \n • Informa sobre problemas de datos en el mapa
 \n • Sube trazas GPX a OSM directamente desde la aplicación
