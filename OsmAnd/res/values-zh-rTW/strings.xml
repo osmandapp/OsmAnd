@@ -2864,4 +2864,9 @@ OsmAnd 是開放原始碼，而且正在積極的開發。應用程式從報告�
     <string name="plugin_mapillary_descr">將街頭照片給每個人。發覺地點、協作、抓取世界。</string>
     <string name="online_photos">線上照片</string>
     <string name="no_photos_descr">我們沒有在這個位置的照片</string>
+    <string name="shared_string_install">安裝</string>
+    <string name="improve_coverage_mapillary">提高 Mapillary 覆蓋範圍</string>
+    <string name="improve_coverage_install_mapillary_desc">您可以拍攝自己的照片或系列照片，並將其增加到此地圖位置。
+\n
+\n要做到點，您需要從 Google Play 安裝 Mapillary 應用程式。</string>
     </resources>
