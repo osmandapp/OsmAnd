@@ -2916,4 +2916,29 @@
 	<string name="poi_free_flying_hanggliding_yes">滑翔翼</string>
 	<string name="poi_free_flying_hanggliding_no">滑翔翼︰無</string>
 	<string name="poi_free_flying_rigid_yes">硬式</string>
+	<string name="poi_free_flying_site_toplanding">原降</string>
+	<string name="poi_free_flying_site_orientation_n">自由飛行場地朝向︰北</string>
+	<string name="poi_free_flying_site_orientation_ne">自由飛行場地朝向︰東北</string>
+	<string name="poi_free_flying_site_orientation_e">自由飛行場地朝向︰東</string>
+	<string name="poi_free_flying_site_orientation_se">自由飛行場地朝向︰東南</string>
+	<string name="poi_free_flying_site_orientation_s">自由飛行場地朝向︰南</string>
+	<string name="poi_free_flying_site_orientation_sw">自由飛行場地朝向︰西南</string>
+	<string name="poi_free_flying_site_orientation_w">自由飛行場地朝向︰西</string>
+	<string name="poi_free_flying_site_orientation_nw">自由飛行場地朝向︰西北</string>
+	<string name="poi_free_flying_guest_guidelines_no">顧客指導︰無</string>
+
+	<string name="poi_free_flying_no_flight_time">沒有飛行時間（自由飛行）</string>
+	<string name="poi_free_flying_rigid_no">自由飛行硬式︰無</string>
+	<string name="poi_health_service_nursing_yes">醫療服務︰看護︰有</string>
+	<string name="poi_health_service_nursing_no">醫療服務︰看護︰無</string>
+	<string name="poi_health_service_counselling_yes">醫療服務︰個別輔導︰有</string>
+	<string name="poi_health_service_counselling_no">醫療服務︰個別輔導︰無</string>
+	<string name="poi_health_service_examination_yes">醫療服務︰診察︰有</string>
+	<string name="poi_health_service_examination_no">醫療服務︰診察︰無</string>
+	<string name="poi_health_service_child_care_yes">醫療服務︰兒童保育︰有</string>
+	<string name="poi_health_service_child_care_no">醫療服務︰兒童保育︰無</string>
+	<string name="poi_health_service_prevention_yes">醫療服務︰預防︰有</string>
+	<string name="poi_health_service_prevention_no">醫療服務︰預防︰無</string>
+	<string name="poi_health_service_prevention_vaccination_yes">醫療服務︰疫苗接種︰有</string>
+	<string name="poi_health_service_prevention_vaccination_no">醫療服務︰疫苗接種︰無</string>
 	</resources>
