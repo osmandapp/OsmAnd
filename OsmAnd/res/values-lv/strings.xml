@@ -3094,4 +3094,15 @@ No Afganistānas līdz Zimbabvei, no Austrālijas līdz ASV, Argentīna, Brazīl
     <string name="mapillary_widget_descr">Ātrā pieeja Mapillary</string>
     <string name="mapillary_descr">Tiešsaistes ielas līmeņa fotoattēli jebkuram. Atklājiet vietas, līdzdaliet, iemūžiniet pasauli.</string>
     <string name="mapillary">Mapillary</string>
+    <string name="open_mapillary">Atvērt Mapillary</string>
+    <string name="shared_string_install">Instalēt</string>
+    <string name="improve_coverage_mapillary">Uzlabot vietu pārklājumu ar Mapillary</string>
+    <string name="improve_coverage_install_mapillary_desc">Jūs varat uzņemt fotoattēlus vai fotoattēlu sēriju un pievienot šai vietai uz kartes.
+\n
+\nDarbībai nepieciešama Mapillary aplikācija no Google Play.</string>
+    <string name="online_photos">Tiešsaistes fotoattēli</string>
+    <string name="no_photos_descr">Mums nav fotoattēlu, ko parādīt, šai vietai</string>
+    <string name="plugin_mapillary_descr">Ielas līmeņa fotoattēli ikvienam - atklājiet vietas, kopīgojiet, iemūžiniet pasauli.</string>
+    <string name="hide_from_zoom_level">Paslēpt no zoom līmeņa</string>
+    <string name="show_from_zoom_level">Rādīt no zoom līmeņa</string>
     </resources>
