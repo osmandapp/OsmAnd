@@ -1814,7 +1814,7 @@
 	<string name="poi_shelter_type_abandoned">Refugio abandonado</string>
 
 	<string name="poi_internet_access_type_wlan">Wi-Fi</string>
-	<string name="poi_internet_access_type_terminal">Terminal</string>
+	<string name="poi_internet_access_type_terminal">Terminal (PC con internet)</string>
 	<string name="poi_internet_access_type_wired">Cableado</string>
 	<string name="poi_internet_access_type_public">Tipo de Internet: Público</string>
 	<string name="poi_internet_access_type_service">Tipo de Internet: Servicio</string>
@@ -3193,21 +3193,21 @@
 	<string name="poi_cuisine_seafood">Marisco</string>
 	<string name="poi_cuisine_barbecue">Barbacoa</string>
 	<string name="poi_cuisine_noodle">Tallarines</string>
-	<string name="poi_cuisine_donut">Donut</string>
+	<string name="poi_cuisine_donut">Rosquilla</string>
 	<string name="poi_cuisine_ramen">Ramen</string>
-	<string name="poi_cuisine_crepe">Crepe</string>
+	<string name="poi_cuisine_crepe">Crepé</string>
 	<string name="poi_cuisine_breakfast">Desayuno</string>
-	<string name="poi_cuisine_beef_bowl">Gyudon</string>
+	<string name="poi_cuisine_beef_bowl">Gyudon (Bol de ternera)</string>
 	<string name="poi_cuisine_steak">Filete/bistec (carne roja)</string>
 	<string name="poi_cuisine_tapas">Tapas</string>
 	<string name="poi_cuisine_gastropub">Gastropub</string>
 	<string name="poi_cuisine_heuriger">Heuriger</string>
-	<string name="poi_cuisine_curry">Curry</string>
+	<string name="poi_cuisine_curry">Curri</string>
 	<string name="poi_cuisine_buschenschank">Buschenschank</string>
 	<string name="poi_cuisine_grill">Parrilla</string>
-	<string name="poi_cuisine_bagel">Bagel</string>
+	<string name="poi_cuisine_bagel">Bagel (rosca de pan)</string>
 	<string name="poi_cuisine_diner">Cena</string>
-	<string name="poi_cuisine_sausage">Embutido</string>
+	<string name="poi_cuisine_sausage">Salchicha</string>
 	<string name="poi_cuisine_cake">Pastel</string>
 	<string name="poi_cuisine_pancake">Panqueque</string>
 	<string name="poi_cuisine_pasta">Pasta</string>
@@ -3219,27 +3219,27 @@
 	<string name="poi_cuisine_soup">Sopa</string>
 	<string name="poi_cuisine_pie">Tarta</string>
 	<string name="poi_cuisine_hotdog">Perrito caliente</string>
-	<string name="poi_cuisine_deli">Deli</string>
+	<string name="poi_cuisine_deli">Delicatessen</string>
 	<string name="poi_cuisine_salad">Ensalada</string>
 	<string name="poi_cuisine_frozen_yogurt">Helado de yogur</string>
 	<string name="poi_cuisine_fried_food">Alimentos fritos</string>
 	<string name="poi_cuisine_savory_pancakes">Panqueques salados</string>
-	<string name="poi_cuisine_bistro">Bistro</string>
+	<string name="poi_cuisine_bistro">Bistró</string>
 	<string name="poi_cuisine_bakery">Panadería</string>
 	<string name="poi_cuisine_couscous">Cuscús</string>
 	<string name="poi_cuisine_fried_chicken">Pollo frito</string>
 	<string name="poi_cuisine_dessert">Postre</string>
 	<string name="poi_cuisine_canteen">Cantina</string>
 	<string name="poi_cuisine_tacos">Tacos</string>
-	<string name="poi_cuisine_piadina">Piadina</string>
-	<string name="poi_cuisine_falafel">Falafel</string>
+	<string name="poi_cuisine_piadina">Piadina romañola</string>
+	<string name="poi_cuisine_falafel">Faláfel</string>
 	<string name="poi_cuisine_smoothie">Batido de frutas</string>
 	<string name="poi_cuisine_souvlaki">Souvlaki</string>
 	<string name="poi_cuisine_snack">Bocado</string>
 	<string name="poi_cuisine_yogurt">Yogur</string>
 	<string name="poi_cuisine_gyros">Gyros</string>
 	<string name="poi_cuisine_empanada">Empanada</string>
-	<string name="poi_cuisine_crepes">Crepes</string>
+	<string name="poi_cuisine_crepes">Crepes (panqueques)</string>
 	<string name="poi_cuisine_yakiniku">Yakiniku</string>
 	<string name="poi_cuisine_suki">Suki</string>
 	<string name="poi_cuisine_brasserie">Brasserie</string>
@@ -3249,11 +3249,11 @@
 	<string name="poi_cuisine_chocolate">Chocolate</string>
 	<string name="poi_cuisine_wine">Vino</string>
 	<string name="poi_cuisine_potato">Patata</string>
-	<string name="poi_cuisine_brunch">Brunch</string>
-	<string name="poi_cuisine_sub">Sub</string>
-	<string name="poi_cuisine_pita">Pita</string>
+	<string name="poi_cuisine_brunch">Desayuno y almuerzo</string>
+	<string name="poi_cuisine_sub">Sándwich submarino</string>
+	<string name="poi_cuisine_pita">Pan Pita</string>
 	<string name="poi_cuisine_fondue">Fondue</string>
-	<string name="poi_cuisine_baguette">Baguette</string>
+	<string name="poi_cuisine_baguette">Baguette (pan francés)</string>
 	<string name="poi_cuisine_pastel">Pastel</string>
 	<string name="poi_cuisine_burrito">QBurrito</string>
 	<string name="poi_cuisine_teriyaki">Teriyaki</string>
@@ -3331,7 +3331,7 @@
 	<string name="poi_cuisine_english">Inglés</string>
 	<string name="poi_cuisine_pakistani">Paquistaní</string>
 	<string name="poi_cuisine_taiwanese">Taiwanés</string>
-	<string name="poi_cuisine_tex_mex">Tex-mex</string>
+	<string name="poi_cuisine_tex_mex">Comida mexicano-estadounidense (tex-mex)</string>
 	<string name="poi_cuisine_dutch">Holandés</string>
 	<string name="poi_cuisine_syrian">Sirio</string>
 	<string name="poi_cuisine_australian">Australiano</string>
@@ -3406,6 +3406,6 @@
 	<string name="poi_music_school">Escuela de música</string>
 	<string name="poi_language_school">Escuela de idiomas</string>
 
-<string name="poi_life_ring">Salvavidas</string>
+<string name="poi_life_ring">Aro salvavidas</string>
 
 </resources>
