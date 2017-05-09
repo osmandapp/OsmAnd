@@ -1108,9 +1108,8 @@ Proportionaler Speicher %4$s MB (Android Limit %5$s MB, Dalvik %6$s MB).</string
 	<string name="incomplete_locale">unvollständig</string>
 	<string name="srtm_plugin_name">Höhenlinien</string>
 	<string name="srtm_plugin_description">"Diese Erweiterung beinhaltet Höhenlinien und Relief-Schattierungen, die als Ergänzung zu den Standard-Offline-Karten von OsmAnd angezeigt werden können. Diese Funktionalität ist vor allem für Sportler, Wanderer, Radfahrer, Trekker und jeden interessant, der sich für das Geländerelief einer Landschaft interessiert. (Bitte beachten Sie, Höhen- und Reliefdaten müssen nach Aktivierung des Moduls getrennt, zusätzlich heruntergeladen werden.) 
-
-Die globalen Daten (zwischen 70° Nord und 70° Süd) basieren auf Messungen von SRTM (Shuttle Radar Topography Mission) und ASTER (Advanced Spaceborne Thermal Emission and Reflection Radiometer), einem bildgebenden System des Satelliten Terra, dem Flaggschiff des NASA-Erd-Beobachtungsprogramms. ASTER ist der Erfolg der Zusammenarbeit zwischen der NASA, dem japanischen Ministerium für Wirtschaft, Handel und Industrie und dem japanischen Raumfahrtprogramm (J-spacesystems).
- "</string>
+\n
+\nDie globalen Daten (zwischen 70° Nord und 70° Süd) basieren auf Messungen von SRTM (Shuttle Radar Topography Mission) und ASTER (Advanced Spaceborne Thermal Emission and Reflection Radiometer), einem bildgebenden System des Satelliten Terra, dem Flaggschiff des NASA-Erd-Beobachtungsprogramms. ASTER ist der Erfolg der Zusammenarbeit zwischen der NASA, dem japanischen Ministerium für Wirtschaft, Handel und Industrie und dem japanischen Raumfahrtprogramm (J-spacesystems). "</string>
 	<string name="srtm_paid_version_title">Höhenlinien-Modul</string>
 	<string name="srtm_paid_version_msg">Bitte ziehen Sie den Kauf des Höhenlinien-Modul im Play-Store in Erwägung, um die Weiterentwicklung zu fördern.</string>
 	<string name="download_select_map_types">Andere Karten</string>
@@ -1168,9 +1167,8 @@ Die globalen Daten (zwischen 70° Nord und 70° Süd) basieren auf Messungen von
 	<string name="audionotes_plugin_name">Audio-/Video-Notizen</string>
 	<string name="audionotes_location_not_defined">Es ist noch kein Ort angegeben, der mit der Notiz verbunden werden soll. Benutzen Sie \'Standort verwenden…\', um der Notiz einen Ort zuzuweisen.</string>
 	<string name="osmand_srtm_long_description_1000_chars">"Diese Erweiterung beinhaltet Höhenlinien und Relief-Schattierungen, die als Ergänzung zu den Standard-Offline-Karten von OsmAnd angezeigt werden können. Diese Funktionalität ist vor allem für Sportler, Wanderer, Radfahrer, Trekker und jeden interessant, der sich für das Geländerelief einer Landschaft interessiert.
-
-Die globalen Daten (zwischen 70° Nord und 70° Süd) basieren auf Messungen von SRTM (Shuttle Radar Topography Mission) und ASTER (Advanced Spaceborne Thermal Emission and Reflection Radiometer), einem bildgebenden System des Satelliten Terra, dem Flaggschiff des NASA-Erd-Beobachtungsprogramms. ASTER ist der Erfolg der Zusammenarbeit zwischen der NASA, dem japanischen Ministerium für Wirtschaft, Handel und Industrie und dem japanischen Raumfahrtprogramm (J-spacesystems).
- "</string>
+\n
+\nDie globalen Daten (zwischen 70° Nord und 70° Süd) basieren auf Messungen von SRTM (Shuttle Radar Topography Mission) und ASTER (Advanced Spaceborne Thermal Emission and Reflection Radiometer), einem bildgebenden System des Satelliten Terra, dem Flaggschiff des NASA-Erd-Beobachtungsprogramms. ASTER ist der Erfolg der Zusammenarbeit zwischen der NASA, dem japanischen Ministerium für Wirtschaft, Handel und Industrie und dem japanischen Raumfahrtprogramm (J-spacesystems). "</string>
 	<string name="stop_routing_confirm">Wollen Sie die Navigation wirklich beenden?</string>
 	<string name="clear_dest_confirm">Sind Sie sicher, dass Sie Ihr Ziel (und die Zwischenziele) löschen möchten?</string>
 	<string name="precise_routing_mode_descr">Aktivieren, um Routen fehlerfrei zu berechnen. Diese Funktion ist weiterhin auf kurze Entfernung begrenzt und langsam.</string>
@@ -1612,14 +1610,11 @@ Afghanistan, Ägypten, Albanien, Algerien, Andorra, Angola, Anguilla, Antigua un
 
 	<string name="osmo_settings_uuid">Geräte-ID</string>
 	<string name="osmo_settings_descr">Konfigurieren der Überwachungseinstellungen und des persönlichen Überwachungskanals</string>
-	<string name="osmo_plugin_description">"Diese Erweiterung bietet Teilfunktionen der sogenannten OsMo-Live-Überwachung, siehe http://osmo.mobi.
-
-
-Sie können damit in Echtzeit alle Geräte einer teilnehmenden Gruppe verfolgen. Außerdem können Sie zu Ihrer Gruppe hochgeladene Punkte und Tracks ansehen.
-
-
-Es können auch anonym Gruppen eingerichtet werden. Deren Möglichkeiten sind allerdings eingeschränkt: Die Gruppe besteht nur für einige Tage und es ist keine zentrale Steuerung der Gruppe möglich. Voll funktionsfähige Gruppen müssen auf der genannten Internetseite erstellt werden, auf sie haben nur registrierte Nutzer Zugriff.
- "</string>
+	<string name="osmo_plugin_description">"Diese Erweiterung bietet Teilfunktionen der sogenannten OsMo-Live-Überwachung, siehe https://osmo.mobi
+\n
+\nSie können damit in Echtzeit alle Geräte einer teilnehmenden Gruppe verfolgen. Außerdem können Sie zu Ihrer Gruppe hochgeladene Punkte und Tracks ansehen.
+\n
+\nEs können auch anonym Gruppen eingerichtet werden. Deren Möglichkeiten sind allerdings eingeschränkt: Die Gruppe besteht nur für einige Tage und es ist keine zentrale Steuerung der Gruppe möglich. Voll funktionsfähige Gruppen müssen auf der genannten Internetseite erstellt werden, auf sie haben nur registrierte Nutzer Zugriff. "</string>
 	<string name="osmo_plugin_name">OsMo (OSM Monitoring)</string>
 	<string name="osmo_settings">OsMo</string>
 	<string name="osmo_io_error">"OsMo-Verbindungsproblem: "</string>
@@ -1754,9 +1749,8 @@ Mit Neuanmeldung fortfahren?</string>
     <string name="targets">Ziele</string>
     <string name="way_alarms">Verkehrswarnungen</string>
     <string name="record_plugin_description">"Diese Erweiterung ermöglicht es, Tracks durch Drücken der GPX-Aufnahme-Schaltfläche auf dem Kartenbildschirm aufzunehmen bzw. alle navigierten Routen automatisch zu protokollieren und sie als lokale GPX-Datei (oder auch online über Web-Dienste) abzuspeichern.
-
-Aufgenommene Tracks können z. B. mit Bekannten geteilt oder als Beiträge zu OSM verwendet werden. Sportler können gespeicherte Tracks zur Überwachung ihres Trainings verwenden. Einige Basisauswertungen sind direkt in OsmAnd enthalten, wie Rundenzeiten, Durchschnittsgeschwindigkeit, usw.. Die Aufzeichnungen können natürlich auch mit speziellen Analyse-Tools von Drittanbietern nachbearbeitet werden.
- "</string>
+\n
+\nAufgenommene Tracks können z. B. mit Bekannten geteilt oder als Beiträge zu OSM verwendet werden. Sportler können gespeicherte Tracks zur Überwachung ihres Trainings verwenden. Einige Basisauswertungen sind direkt in OsmAnd enthalten, wie Rundenzeiten, Durchschnittsgeschwindigkeit, usw.. Die Aufzeichnungen können natürlich auch mit speziellen Analyse-Tools von Drittanbietern nachbearbeitet werden. "</string>
     <string name="route_descr_destination">Ziel</string>
     <string name="local_index_description">Ein Element antippen, um mehr Details zu erfahren oder antippen und halten zum Deaktivieren oder Löschen. Aktuell auf dem Gerät vorhandene Daten (%1$s frei):</string>
 	<string name="text_size_descr">Karten-Schriftgröße festlegen</string>
@@ -1887,27 +1881,24 @@ Aufgenommene Tracks können z. B. mit Bekannten geteilt oder als Beiträge zu OS
 	<string name="shared_string_currently_recording_track">Momentane Track-Aufzeichnung</string>
 	<string name="back_to_map">Zurück zur Karte</string>
 	<string name="plugin_nautical_descr">"Das Aktivieren dieser Ansicht ändert die Kartendarstellung auf See-Karte, es werden dann alle nautischen Navigationsmarken und Kartensymbole angezeigt.
-
-Eine Karten-Datei, die weltweit alle Seezeichen enthält, ist als einzelne Karte mit dem Namen \'Seezeichen (weltweit)\' herunterladbar.
-
-Diese Ansicht kann zurückgestellt werden indem sie hier wieder deaktiviert oder in dem der \'Kartendarstellung\' unter \'Karte konfigurieren\' wie gewünscht geändert wird.
- "</string>
+\n
+\nEine Karten-Datei, die weltweit alle Seezeichen enthält, ist als einzelne Karte mit dem Namen \'Seezeichen (weltweit)\' herunterladbar.
+\n
+\nDiese Ansicht kann zurückgestellt werden indem sie hier wieder deaktiviert oder in dem der \'Kartendarstellung\' unter \'Karte konfigurieren\' wie gewünscht geändert wird. "</string>
 	<string name="plugin_ski_descr">"Diese Erweiterung aktiviert die spezielle Kartendarstellung \'Winter- und Skikarte\', die global Skiabfahrten, Langlaufrouten, alpine Skirouten, Skilifte und Bergbahnen enthält. Routen und Pisten werden farbcodiert nach Schwierigkeit, Landschaftselemente nach winterlichen Gesichtspunkten (Assimilierung einer Schneedecke) angezeigt.
-
-Diese spezielle Kartendarstellung kann zurückgestellt werden, indem sie hier wieder deaktiviert oder indem die \'Kartendarstellung\' unter \'Karte konfigurieren\' wie gewünscht geändert wird.
- "</string>
+\n
+\nDiese spezielle Kartendarstellung kann zurückgestellt werden, indem sie hier wieder deaktiviert oder indem die \'Kartendarstellung\' unter \'Karte konfigurieren\' wie gewünscht geändert wird. "</string>
 	<string name="plugin_touringview_descr">"Bei Aktivierung dieser Ansicht wechselt die Kartendarstellung zur \'Tourenkarte\', einer besonders detaillierten Darstellung für Fernreisende und Berufsfahrer.
-
-Diese Darstellung liefert für jeden Maßstab den größtmöglichen Umfang an Details zu Fernreisen, die die Kartendaten enthalten  (insbesondere alle Straßen, Wege, Pfade und Orientierungspunkte). 
-
-Alle Straßenarten werden in der Darstellung farblich klar unterschieden, was speziell für Fahrer großer Fahrzeuge unabdingbar sein kann.
-
-Und sie bietet spezielle Touring-Optionen wie die Anzeige von Radrouten oder alpiner Bergrouten.
-
-Ein spezieller Kartendownload ist nicht notwendig, die Ansicht wird aus den Standardkarten generiert.
-
-Diese Ansicht kann zurückgestellt werden, indem Sie hier wieder deaktiviert oder indem die \'Kartendarstellung\' unter \'Karte konfigurieren\' wie gewünscht geändert wird.
- "</string>
+\n
+\nDiese Darstellung liefert für jeden Maßstab den größtmöglichen Umfang an Details zu Fernreisen, die die Kartendaten enthalten  (insbesondere alle Straßen, Wege, Pfade und Orientierungspunkte). 
+\n
+\nAlle Straßenarten werden in der Darstellung farblich klar unterschieden, was speziell für Fahrer großer Fahrzeuge unabdingbar sein kann.
+\n
+\nUnd sie bietet spezielle Touring-Optionen wie die Anzeige von Radrouten oder alpiner Bergrouten.
+\n
+\nEin spezieller Kartendownload ist nicht notwendig, die Ansicht wird aus den Standardkarten generiert.
+\n
+\nDiese Ansicht kann zurückgestellt werden, indem Sie hier wieder deaktiviert oder indem die \'Kartendarstellung\' unter \'Karte konfigurieren\' wie gewünscht geändert wird. "</string>
 	<string name="shared_string_audio">Audio</string>
 
     <string name="location_on_map">Standort:
@@ -2474,21 +2465,19 @@ Wenn Sie OsmAnd und OSM lieben und unterstützen wollen, so ist dies die perfekt
     <string name="back_to_search">Zurück zur Suche</string>
     <string name="confirmation_to_delete_history_items">Ausgewählte Elemente aus dem Verlauf löschen?</string>
     <string name="show_something_on_map">%1$s auf der Karte anzeigen</string>
-    <string name="release_2_4">"
- • Neue sehr leistungsfähige Freitextsuche
-
- • Audio-Integration mit Fahrzeug-Soundanlage / Freisprecheinrichtung über Bluetooth
-
- • Verbesserte Navigationsansagen, Sprachinformationen und Abbiegespurhinweise
-
- • Verbesserte Anzeige der ÖPNV Linien mit Routenanzeige
-
- • Mehr Sprachen hinzugefügt und Unterstützung für regionale Sprachen
-
- • Viele andere Verbesserungen und Problembehebungen
-
- und mehr…
- "</string>
+    <string name="release_2_4">" • Neue sehr leistungsfähige Freitextsuche
+\n
+\n • Audio-Integration mit Fahrzeug-Soundanlage / Freisprecheinrichtung über Bluetooth
+\n
+\n • Verbesserte Navigationsansagen, Sprachinformationen und Abbiegespurhinweise
+\n
+\n • Verbesserte Anzeige der ÖPNV Linien mit Routenanzeige
+\n
+\n • Mehr Sprachen hinzugefügt und Unterstützung für regionale Sprachen
+\n
+\n • Viele andere Verbesserungen und Problembehebungen
+\n
+\n und mehr… "</string>
     <string name="show_on_map">Zeige auf der Karte</string>
     <string name="share_history_subject">" geteilt über OsmAnd"</string>
     <string name="dist_away_from_my_location">Suche %1$s entfernt</string>
@@ -2566,22 +2555,19 @@ Wenn Sie OsmAnd und OSM lieben und unterstützen wollen, so ist dies die perfekt
     <string name="gpx_logging_no_data">Keine Daten</string>
     <string name="shared_string_trip">Strecke</string>
     <string name="shared_string_record">Aufzeichnen</string>
-    <string name="release_2_5">"
- • Anklickbare Symbole auf der Karte
-
-• leistungsstarke POI Filtersuche z.B. Restaurants nach Küchenart, Campingplätze nach spezifischen Bedürfnissen, ...
-
-• neue OsmAnd Topo Stil, für Radfahrer und Wanderer
-
-• verbesserte Streckenaufzeichnung (neue Einstellungen)
-
-• verbesserte Navigationsbenachrichtigungen (Android Wear)
-
-• viele weitere Verbesserungen und Fehlerbehebungen
-
-
-und vieles mehr ...
- "</string>
+    <string name="release_2_5">" • Anklickbare Symbole auf der Karte
+\n
+\n• leistungsstarke POI Filtersuche z.B. Restaurants nach Küchenart, Campingplätze nach spezifischen Bedürfnissen, ...
+\n
+\n• neue OsmAnd Topo Stil, für Radfahrer und Wanderer
+\n
+\n• verbesserte Streckenaufzeichnung (neue Einstellungen)
+\n
+\n• verbesserte Navigationsbenachrichtigungen (Android Wear)
+\n
+\n• viele weitere Verbesserungen und Fehlerbehebungen
+\n
+\nund vieles mehr ... "</string>
     <string name="trip_rec_notification_settings">Streckenaufzeichnung (keine Daten)</string>
     <string name="trip_rec_notification_settings_desc">Benachrichtigung einblenden, in der die Streckenaufzeichnung durch Betätigen der Taste \'Aufzeichnen\' gestartet werden kann.</string>
     <string name="shared_string_notifications">Benachrichtigungen</string>
@@ -2997,7 +2983,8 @@ Abgedeckte Fläche: %1$s x %2$s</string>
     <string name="no_photos_descr">Es gibt keine Fotos von diesem Ort</string>
     <string name="plugin_mapillary_descr">Fotos von der Straße für Jedermann. Plätze entdecken, mitwirken, die Welt im Bild festhalten.</string>
     <string name="improve_coverage_mapillary">Verbessern Sie die Berichterstattung mit Mapillary</string>
-    <string name="improve_coverage_install_mapillary_desc">Machen Sie Ihre eigenen Fotos oder eine Fotoserie und fügen Sie sie dieser Kartenposition hinzu.
-\n
+    <string name="improve_coverage_install_mapillary_desc">Machen Sie Ihre eigenes Foto oder eine Fotoserie und fügen Sie sie dieser Kartenposition hinzu. 
+\n 
 \nHierfür müssen Sie die App „Mapillary“ von Google Play installieren.</string>
+    <string name="open_mapillary">Mapillary öffnen</string>
     </resources>
