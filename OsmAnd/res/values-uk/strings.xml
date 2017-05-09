@@ -3068,4 +3068,10 @@ Facebook: https://www.facebook.com/osmandapp
     <string name="plugin_mapillary_descr">Вуличні фотографії для усіх. Відкривайте для себе місця, співпрацюйте, знімкуйте світ.</string>
     <string name="online_photos">Онлайн-фотографії</string>
     <string name="no_photos_descr">У нас немає фотографій для цього місця</string>
+    <string name="open_mapillary">Відкрити Mapillary</string>
+    <string name="shared_string_install">Встановити</string>
+    <string name="improve_coverage_mapillary">Покращити освітлення з Mapillary</string>
+    <string name="improve_coverage_install_mapillary_desc">"Ви можете зробити власні фотографії або добірку фотографій і додати їх до цього місця на мапі.  
+\n
+\nДля цього Вам необхідно встановити застосунок Mapillary з Google Play."</string>
     </resources>
