@@ -2941,4 +2941,13 @@
 	<string name="poi_health_service_prevention_no">醫療服務︰預防︰無</string>
 	<string name="poi_health_service_prevention_vaccination_yes">醫療服務︰疫苗接種︰有</string>
 	<string name="poi_health_service_prevention_vaccination_no">醫療服務︰疫苗接種︰無</string>
+	<string name="poi_fire_hydrant_type_dry_barrel">乾式</string>
+	<string name="poi_health_person_type_assistant">醫療工作者職務︰助手</string>
+	<string name="poi_health_person_type_healer">醫療工作者職務︰醫生</string>
+	<string name="poi_health_person_type_midwife">醫療工作者職務︰助產士</string>
+	<string name="poi_health_person_type_nurse">醫療工作者職務︰護士</string>
+	<string name="poi_health_person_type_paramedic">醫療工作者職務︰護理人員</string>
+	<string name="poi_health_person_type_physician">醫療工作者職務︰內科醫師</string>
+	<string name="poi_health_person_type_podologist">醫療工作者職務︰手足病醫生</string>
+	<string name="poi_health_person_type_psychologist">醫療工作者職務︰心理醫師</string>
 	</resources>
