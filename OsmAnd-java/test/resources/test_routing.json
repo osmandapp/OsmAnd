@@ -264,5 +264,24 @@
     "expectedResults": {
       "30783342": "false"
     }
+  },
+  {
+    "testName": "20.Maxheight is ignored in offline routing https://github.com/osmandapp/Osmand/issues/3744",
+    "params": {
+      "vehicle": "car",
+      "height": "4",
+      "planRoadDirection": "-1"
+    },
+    "startPoint": {
+      "latitude": 45.81900099233384,
+      "longitude": 35.22841852903369
+    },
+    "endPoint": {
+      "latitude": 45.81680264657811,
+      "longitude": 35.22845071554187
+    },
+    "expectedResults": {
+      "93556707": "false"
+    }
   }
 ]
