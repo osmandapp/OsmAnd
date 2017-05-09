@@ -2995,4 +2995,234 @@
 
 	<string name="poi_ventilation_shaft">Ventilācijas šahta</string>
 
+	<string name="poi_historic_milestone">Kilometru stabiņš</string>
+
+	<string name="poi_free_flying_rigid_yes">Deltaplāns ar cieto virsbūvi</string>
+	<string name="poi_free_flying_rigid_no">Deltaplāns ar cieto virsbūvi: nē</string>
+	<string name="poi_health_service_nursing_yes">Veselības aprūpe: kopšana: ir</string>
+	<string name="poi_health_service_nursing_no">Veselības aprūpe: kopšana: nav</string>
+	<string name="poi_health_facility_type_office">Veselības aprūpes offiss</string>
+	<string name="poi_fire_hydrant_type_dry_barrel">Sausais hidrants</string>
+	<string name="poi_pump_type_beam_pump">Pumpja tips: plecveida</string>
+	<string name="poi_pump_type_india_mk_2_3">Pumpja tips: India II vai III</string>
+	<string name="poi_pump_type_gravity">Pumpja tips: gravitātes</string>
+	<string name="poi_pump_style_modern">Pumpja stils: mūsdienīgs</string>
+	<string name="poi_pump_style_historic">Pumpja stils: veclaicīgs</string>
+	<string name="poi_pump_status_ok">Pumpja statuss: darbojas</string>
+	<string name="poi_pump_status_broken">Pumpja status: nedarbojas</string>
+	<string name="poi_pump_status_locked">Pumpja statuss: noslēgts</string>
+
+	<string name="poi_payment_troika_yes">Troika kartes</string>
+	<string name="poi_payment_troika_no">Troika kartes nepieņem</string>
+
+	<string name="poi_telescope">Teleskops</string>
+	<string name="poi_telescope_type_optical">Teleskops: optiskais</string>
+	<string name="poi_telescope_type_radio">Teleskops: radio</string>
+	<string name="poi_telescope_type_gamma">Teleskops: gamma</string>
+	<string name="poi_telescope_diameter">Diametrs</string>
+	<string name="poi_telescope_spectrum">Spektrs</string>
+	<string name="poi_telescope_usage_education">Izmantošana: izglītojošiem mērķiem</string>
+	<string name="poi_telescope_usage_espionage">Izmantošana: spiegošanai</string>
+	<string name="poi_telescope_usage_research">Izmantošana: zinātnei</string>
+
+	<string name="poi_observatory_type_espionage">Izmantošana: spiegošanai</string>
+	<string name="poi_observatory_type_meteorological">Meteoroloğiskā</string>
+	<string name="poi_observatory_type_gravitational">Gravitacionālā</string>
+
+	<string name="poi_voltage">Voltāža</string>
+	<string name="poi_generator_output_electricity">Izejas jauda</string>
+	<string name="poi_generator_output_electricity_yes">Ražo elektrību</string>
+	<string name="poi_pumping_station">Sūkņu stacija</string>
+
+	<string name="poi_display_yes">Ekrāns: ir</string>
+	<string name="poi_display_no">Ekrāns: nav</string>
+	<string name="poi_display_analog_yes">Analogais ekrāns</string>
+	<string name="poi_display_digital_yes">Digitālais ekrāns</string>
+	<string name="poi_display_sundial_yes">Saules pulkstenis</string>
+
+	<string name="poi_barometer_yes">Barometrs</string>
+	<string name="poi_barometer_no">Barometrs: nav</string>
+	<string name="poi_thermometer_yes">Termometrs</string>
+	<string name="poi_thermometer_no">Termometrs: nav</string>
+	<string name="poi_hygrometer_yes">Hidrometrs</string>
+	<string name="poi_hygrometer_no">Hidrometrs: nav</string>
+	<string name="poi_date_yes">Laika displejs</string>
+	<string name="poi_date_no">Laika displejs: nav</string>
+
+	<string name="poi_support_pole">Balsts: stabs</string>
+	<string name="poi_support_wall_mounted">Balsts: siena</string>
+	<string name="poi_support_tree">Balsts: koks</string>
+	<string name="poi_support_pedestal">Balsts: pedestāls</string>
+	<string name="poi_support_ground">Balsts: zeme</string>
+	<string name="poi_support_billboard">Balsts: reklāmstends</string>
+	<string name="poi_support_ceiling">Balsts: griesti</string>
+	<string name="poi_support_suspended">Balsts: piekārts</string>
+	<string name="poi_support_roof">Balsts: jumts</string>
+	<string name="poi_support_tower">Balsts: tornis</string>
+
+	<string name="poi_passenger_information_display_yes">Pasažieru informatīvais panelis: ir</string>
+	<string name="poi_passenger_information_display_no">Pasažieru informatīvais panelis: nav</string>
+
+	<string name="poi_aquaculture">Akvakultūra</string>
+	<string name="poi_aquaculture_shrimp">Akvakultūra: garneles</string>
+	<string name="poi_aquaculture_fish">Akvakultūra: zivis</string>
+	<string name="poi_aquaculture_mussels">Akvakultūra: mīdijas</string>
+
+	<string name="poi_min_age">Minimālais vecums</string>
+
+	<string name="poi_organic_yes">Ir</string>
+	<string name="poi_organic_no">Nav</string>
+	<string name="poi_organic_only">Tikai</string>
+
+	<string name="poi_traffic_mirror">Krustojuma spogulis</string>
+
+	<string name="poi_diplomatic_consulate">Konsulāts</string>
+	<string name="poi_diplomatic_consulate_general">Ğenerālkonsulāts</string>
+	<string name="poi_diplomatic_honorary_consulate">Goda konsulāts</string>
+	<string name="poi_diplomatic_permanent_mission">Patstāvīgais sūtnis</string>
+	<string name="poi_diplomatic_delegation">Delegācija</string>
+	<string name="poi_diplomatic_ambassadors_residence">Vēstniecības rezidence</string>
+	<string name="poi_water_tank">Ūdens cisterna</string>
+
+	<string name="poi_toilets_disposal_flush">Tualete ar ūdeni</string>
+	<string name="poi_toilets_disposal_pitlatrine">Sausā tualete</string>
+	<string name="poi_toilets_disposal_chemical">Biotualete</string>
+	<string name="poi_toilets_disposal_bucket">Pārvietojamā tualete</string>
+
+	<string name="poi_length">Garums</string>
+
+	<string name="poi_wiki_link">Vikipēdija</string>
+
+	<string name="poi_xmas">Ziemassvētki</string>
+	<string name="poi_xmas_event">Ziemassvētku pasākums</string>
+	<string name="poi_xmas_market">Ziemassvētku tirdziņš</string>
+	<string name="poi_xmas_pyramid">Ziemassvētku piramīda</string>
+	<string name="poi_xmas_shop">Ziemassvētku iepirkšanās</string>
+	<string name="poi_xmas_shop_christmas_tree">Eglīšu veikals</string>
+	<string name="poi_xmas_tree">Ziemassvētku eglīte</string>
+	<string name="poi_xmas_day_date">Ziemassvētki: periods no līdz</string>
+	<string name="poi_xmas_note">Ziemassvētki: piezīmes</string>
+	<string name="poi_xmas_opening_hours">Ziemassvētki: darba stundas</string>
+	<string name="poi_xmas_location">Ziemassvētki: vieta</string>
+	<string name="poi_xmas_url">Ziemassvētki: interneta adrese</string>
+
+	<string name="poi_public_bookcase_type_phone_box">Tips: telefonbūdiņa</string>
+	<string name="poi_cuisine_pizza">Picas</string>
+	<string name="poi_cuisine_coffee">Kafija</string>
+	<string name="poi_cuisine_burger">Burgeri</string>
+	<string name="poi_cuisine_sandwich">Sviestmaizes</string>
+	<string name="poi_cuisine_kebab">Kebabs</string>
+	<string name="poi_cuisine_doner">Doner kebabs (shawarma)</string>
+	<string name="poi_cuisine_chicken">Vista</string>
+	<string name="poi_cuisine_ice_cream">Saldējums</string>
+	<string name="poi_cuisine_sushi">Suši</string>
+	<string name="poi_cuisine_fish_and_chips">Zivis un čipsi</string>
+	<string name="poi_cuisine_seafood">Jūras produkti</string>
+	<string name="poi_cuisine_barbecue">Barbekjū</string>
+	<string name="poi_cuisine_noodle">Makaroni</string>
+	<string name="poi_cuisine_donut">Donati</string>
+	<string name="poi_cuisine_ramen">Ramena</string>
+	<string name="poi_cuisine_crepe">Krepes</string>
+	<string name="poi_cuisine_breakfast">Brokastis</string>
+	<string name="poi_cuisine_steak">Steiks</string>
+	<string name="poi_cuisine_grill">Grils</string>
+	<string name="poi_cuisine_diner">Pusdienas</string>
+	<string name="poi_cuisine_sausage">Desas</string>
+	<string name="poi_cuisine_cake">Kūkas</string>
+	<string name="poi_cuisine_pancake">Pankūkas</string>
+	<string name="poi_cuisine_pasta">Makaronu ēdieni (pasta)</string>
+	<string name="poi_cuisine_fast_food">Ātrās uzkodas</string>
+	<string name="poi_cuisine_juice">Sulas</string>
+	<string name="poi_cuisine_tea">Tēja</string>
+	<string name="poi_cuisine_tea_shop">Tējas veikals</string>
+	<string name="poi_cuisine_soup">Ziepes</string>
+	<string name="poi_cuisine_pie">Pīrāgi</string>
+	<string name="poi_cuisine_hotdog">Hotdogi</string>
+	<string name="poi_cuisine_deli">Delikateses</string>
+	<string name="poi_cuisine_salad">Salāti</string>
+	<string name="poi_cuisine_frozen_yogurt">Saldētais jogurts</string>
+	<string name="poi_cuisine_bistro">Bistro</string>
+	<string name="poi_cuisine_bakery">Beķereja</string>
+	<string name="poi_cuisine_couscous">Kuskus</string>
+	<string name="poi_cuisine_fried_chicken">Ceptas vistiņas</string>
+	<string name="poi_cuisine_dessert">Deserti</string>
+	<string name="poi_cuisine_canteen">Ēdnīca</string>
+	<string name="poi_cuisine_tacos">Takos</string>
+	<string name="poi_cuisine_smoothie">Smūtiji</string>
+	<string name="poi_cuisine_souvlaki">Suvlaki</string>
+	<string name="poi_cuisine_snack">Snaki</string>
+	<string name="poi_cuisine_yogurt">Jogurti</string>
+	<string name="poi_cuisine_gyros">Giross</string>
+	<string name="poi_cuisine_meat">Gaļa</string>
+	<string name="poi_cuisine_wings">Spārniņi</string>
+	<string name="poi_cuisine_waffle">Vafeles</string>
+	<string name="poi_cuisine_chocolate">Šokolāde</string>
+	<string name="poi_cuisine_wine">Vīni</string>
+	<string name="poi_cuisine_potato">Kartupeļi</string>
+	<string name="poi_cuisine_baguette">Bagetes</string>
+	<string name="poi_cuisine_pastel">Pastela</string>
+	<string name="poi_cuisine_regional">Vietējā</string>
+	<string name="poi_cuisine_italian">Itāļu</string>
+	<string name="poi_cuisine_chinese">Ķīniešu</string>
+	<string name="poi_cuisine_mexican">Meksikāņu</string>
+	<string name="poi_cuisine_japanese">Japāņu</string>
+	<string name="poi_cuisine_german">Vācu</string>
+	<string name="poi_cuisine_indian">Indiešu</string>
+	<string name="poi_cuisine_american">Amerikāņu</string>
+	<string name="poi_cuisine_asian">Aziātu</string>
+	<string name="poi_cuisine_french">Franču</string>
+	<string name="poi_cuisine_greek">Grieķu</string>
+	<string name="poi_cuisine_thai">Taizemes</string>
+	<string name="poi_cuisine_international">Starptautiskā</string>
+	<string name="poi_cuisine_turkish">Turku</string>
+	<string name="poi_cuisine_spanish">Spāņi</string>
+	<string name="poi_cuisine_vietnamese">Spāņu</string>
+	<string name="poi_cuisine_korean">Korejiešu</string>
+	<string name="poi_cuisine_bavarian">Bavāriešu</string>
+	<string name="poi_cuisine_lebanese">Libānas</string>
+	<string name="poi_cuisine_russian">Krievu</string>
+	<string name="poi_cuisine_filipino">Filipīnu</string>
+	<string name="poi_cuisine_portuguese">Portugāļu</string>
+	<string name="poi_cuisine_georgian">Gruzīņu</string>
+	<string name="poi_cuisine_polish">Poļu</string>
+	<string name="poi_cuisine_brazilian">Brazīliešu</string>
+	<string name="poi_cuisine_arab">Arābu</string>
+	<string name="poi_cuisine_danish">Dāņu</string>
+	<string name="poi_cuisine_indonesian">Indonēzijas</string>
+	<string name="poi_cuisine_african">Āfrikāņu</string>
+	<string name="poi_cuisine_argentinian">Argentīnas</string>
+	<string name="poi_cuisine_balkan">Balkānu</string>
+	<string name="poi_cuisine_croatian">Horvātijas</string>
+	<string name="poi_cuisine_bolivian">Bolīvijas</string>
+	<string name="poi_cuisine_persian">Persiešu</string>
+	<string name="poi_cuisine_malaysian">Malāzijas</string>
+	<string name="poi_cuisine_irish">Īru</string>
+	<string name="poi_cuisine_ethiopian">Etiopiešu</string>
+	<string name="poi_cuisine_hungarian">Hungāru</string>
+	<string name="poi_cuisine_european">Eiropiešu</string>
+	<string name="poi_cuisine_uzbek">Uzbeku</string>
+	<string name="poi_cuisine_czech">Čehu</string>
+	<string name="poi_cuisine_british">Britu</string>
+	<string name="poi_cuisine_latin_american">Latīņamerikāņu</string>
+	<string name="poi_cuisine_nepalese">Nepāliešu</string>
+	<string name="poi_cuisine_ukrainian">Ukrainiešu</string>
+	<string name="poi_cuisine_swiss">Šveiciešu</string>
+	<string name="poi_cuisine_swedish">Zviedru</string>
+	<string name="poi_cuisine_jamaican">Jamaikas</string>
+	<string name="poi_cuisine_armenian">Armēņu</string>
+	<string name="poi_cuisine_hawaiian">Havajiešu</string>
+	<string name="poi_cuisine_english">Angļu</string>
+	<string name="poi_cuisine_pakistani">Pakistānas</string>
+	<string name="poi_cuisine_taiwanese">Taivānas</string>
+	<string name="poi_cuisine_tex_mex">Teks-meks</string>
+	<string name="poi_cuisine_dutch">Holandiešu</string>
+	<string name="poi_cuisine_syrian">Sīriešu</string>
+	<string name="poi_cuisine_australian">Austrāliešu</string>
+	<string name="poi_cuisine_egyptian">Ēğiptiešu</string>
+	<string name="poi_cuisine_jewish">Ēbreju</string>
+	<string name="poi_cuisine_bulgarian">Bulgāru</string>
+	<string name="poi_cuisine_tibetan">Tibetiešu</string>
+
+	<string name="poi_feeding_place">Dzīvnieku barotava</string>
+
 	</resources>
