@@ -161,7 +161,7 @@
     <string name="lang_es_us">İspanca (Amerika)</string>
     <string name="lang_es_ar">İspanca (Argentina)</string>
     <string name="lang_th">Tayca</string>
-    <string name="download_wikipedia_files">Əlavə Vikipediya məlumatları entirmək istəyirsiniz (%1$s MB) ?</string>
+    <string name="download_wikipedia_files">Əlavə Vikipediya məlumatları endirmək istəyirsiniz (%1$s MB) ?</string>
     <string name="gps_network_not_enabled">Məkan xidməti aktiv deyil. Onu aktivləşdirmək istəyirsiniz?</string>
     <string name="shared_string_wikipedia">Vikipediya</string>
     <string name="local_indexes_cat_wiki">Vikipediya</string>
@@ -935,7 +935,7 @@ Gün batır: %2$s</string>
     <string name="routing_attr_avoid_ferries_name">Bərələrdən yayın</string>
     <string name="routing_attr_avoid_ferries_description">Bərələrdən yayın</string>
     <string name="routing_attr_avoid_motorway_name">Avtomagistrallardan yayın</string>
-    <string name="routing_attr_avoid_motorway_description">Avtonagistrallardan yayın</string>
+    <string name="routing_attr_avoid_motorway_description">Avtomagistrallardan yayın</string>
     <string name="android_19_location_disabled">Android 4.4 (KitKat) versiyasından bu yana xəritələri əvvəlki saxlama qovluğuna (%s) endirə və yeniləyə bilməzsiniz. İcazə verilən saxlama yerinə keçmək və bütün OsmAnd fayllarını ora kopyalamaq istəyirsiniz?
 \n Qeyd 1: Köhnə fayllarınıza toxunulmayacaq (amma əllə silmək olar).
 \n Qeyd 2: Yeni saxlama yerində OsmAnd və OsmAnd+ arasında fayl paylaşmaq mümkün olmayacaq.</string>
@@ -954,4 +954,13 @@ Gün batır: %2$s</string>
     <string name="shared_string_visible">Görünən</string>
     <string name="restore_purchases">Alışları bərpa et</string>
     <string name="full_version_thanks">OsmAnd-ın tam versiyasını aldığınız üçün təşəkkür edirik!</string>
+    <string name="shared_string_install">Quraşdır</string>
+    <string name="improve_coverage_install_mapillary_desc"/>
+    <string name="online_photos">Onlayn şəkillər</string>
+    <string name="shared_string_add_photos">Şəkillər əlavə et</string>
+    <string name="live_updates">Canlı yeniləmələr</string>
+    <string name="access_from_map_description"/>
+    <string name="lang_als">Albanca (Tosk)</string>
+    <string name="regions">Regionlar</string>
+    <string name="days_behind">gün əvvəl</string>
     </resources>
