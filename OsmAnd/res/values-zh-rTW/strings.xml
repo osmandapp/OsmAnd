@@ -2870,4 +2870,5 @@ OsmAnd 是開放原始碼，而且正在積極的開發。應用程式從報告�
 \n 
 \n要做到這些，您需要去 Google Play 安裝 Mapillary 應用程式。</string>
     <string name="open_mapillary">開啟 Mapillary</string>
+    <string name="mapillary_image">Mapillary 圖片</string>
     </resources>
