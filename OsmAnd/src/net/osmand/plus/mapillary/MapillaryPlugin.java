@@ -45,8 +45,6 @@ public class MapillaryPlugin extends OsmandPlugin {
 	private TextInfoWidget mapillaryControl;
 	private MapWidgetRegInfo mapillaryWidgetRegInfo;
 
-	private static boolean webGlSupported = true;
-
 	public MapillaryPlugin(OsmandApplication app) {
 		this.app = app;
 		settings = app.getSettings();
@@ -81,14 +79,6 @@ public class MapillaryPlugin extends OsmandPlugin {
 	public void registerLayers(MapActivity activity) {
 		createLayers();
 		registerWidget(activity);
-	}
-
-	public static boolean isWebGlSupported() {
-		return webGlSupported;
-	}
-
-	public static void setWebGlSupported(boolean webGlSupported) {
-		MapillaryPlugin.webGlSupported = webGlSupported;
 	}
 
 	private void createLayers() {
