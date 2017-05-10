@@ -74,6 +74,7 @@ public class MapQuickActionLayer extends OsmandMapLayer implements QuickActionRe
         setQuickActionButtonMargin();
         isLayerOn = quickActionRegistry.isQuickActionOn();
         quickActionButton.setImageResource(R.drawable.map_quick_action);
+        quickActionButton.setContentDescription(mapActivity.getString(R.string.configure_screen_quick_action));
         quickActionButton.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
@@ -114,7 +115,7 @@ public class MapQuickActionLayer extends OsmandMapLayer implements QuickActionRe
     }
 
     private boolean showTutorialIfNeeded() {
-        if (isLayerOn && !settings.IS_QUICK_ACTION_TUTORIAL_SHOWN.get() && android.os.Build.VERSION.SDK_INT >= 14) {
+        if (isLayerOn && !app.accessibilityEnabled() && !settings.IS_QUICK_ACTION_TUTORIAL_SHOWN.get() && android.os.Build.VERSION.SDK_INT >= 14) {
             TapTargetView.showFor(mapActivity,                 // `this` is an Activity
                     TapTarget.forView(quickActionButton, mapActivity.getString(R.string.quick_action_btn_tutorial_title), mapActivity.getString(R.string.quick_action_btn_tutorial_descr))
                             // All options below are optional
@@ -180,6 +181,7 @@ public class MapQuickActionLayer extends OsmandMapLayer implements QuickActionRe
             return false;
 
         quickActionButton.setImageResource(isClosed ? R.drawable.map_quick_action : R.drawable.map_action_cancel);
+        quickActionButton.setContentDescription(mapActivity.getString(isClosed ? R.string.configure_screen_quick_action : R.string.shared_string_cancel));
         quickActionsWidget.setVisibility(isClosed ? View.GONE : View.VISIBLE);
 
         if (isClosed) {

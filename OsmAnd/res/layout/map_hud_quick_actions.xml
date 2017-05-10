@@ -16,7 +16,7 @@
             android:layout_width="@dimen/map_button_size"
             android:layout_height="@dimen/map_button_size"
             android:background="@drawable/btn_circle_blue"
-            android:contentDescription="@string/zoomIn"
+            android:contentDescription="@string/configure_screen_quick_action"
             android:layout_gravity="bottom|right"
             android:visibility="gone"
             tools:visibility="visible"
