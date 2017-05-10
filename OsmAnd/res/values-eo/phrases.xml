@@ -1788,9 +1788,9 @@
 	<string name="poi_shelter_type_weather_shelter">Budo kontraŭ-vetera</string>
 	<string name="poi_shelter_type_basic_hut">Kabano</string>
 	<string name="poi_shelter_type_field_shelter">Besto-ŝirmejo</string>
-	<string name="poi_internet_access_type_wlan">Sendrata</string>
-	<string name="poi_internet_access_type_terminal">Terminalo</string>
-	<string name="poi_internet_access_type_wired">Drata</string>
+	<string name="poi_internet_access_type_wlan">sendrata</string>
+	<string name="poi_internet_access_type_terminal">terminalo</string>
+	<string name="poi_internet_access_type_wired">drata</string>
 	<string name="poi_internet_access_type_public">Interret-aliro: publika</string>
 	<string name="poi_internet_access_type_service">Interret-aliro: priservo</string>
 	<string name="poi_internet_access_type_no">Sen interret-aliro</string>
@@ -3022,7 +3022,7 @@
 
 <string name="poi_fuel_avia_type">Speco</string>
 	<string name="poi_payment_fuel_type">Brulaĵ-kartoj</string>
-	<string name="poi_internet_access_type">Speco de interret-aliro</string>
+	<string name="poi_internet_access_type">Interret-aliro</string>
 	<string name="poi_vending_type">Vendado de</string>
 	<string name="poi_bicycle_service">Bicikla servo</string>
 	<string name="poi_clothes_type">Vestaĵoj</string>
