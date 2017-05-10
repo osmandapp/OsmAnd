@@ -7,6 +7,8 @@ import android.content.res.Resources;
 import android.graphics.PorterDuff;
 import android.graphics.drawable.Drawable;
 import android.net.Uri;
+import android.os.AsyncTask;
+import android.os.Build;
 import android.support.annotation.NonNull;
 import android.support.v7.view.ContextThemeWrapper;
 import android.support.v7.widget.AppCompatButton;
@@ -306,7 +308,7 @@ public class MenuBuilder {
 	private void startLoadingImages(final MenuBuilder menuBuilder) {
 		onlinePhotoCards = new ArrayList<>();
 		onlinePhotoCardsRow.setProgressCard();
-		ImageCard.execute(new GetImageCardsTask(mapActivity, menuBuilder.getLatLon(),
+		execute(new GetImageCardsTask(mapActivity, menuBuilder.getLatLon(),
 				new GetImageCardsListener() {
 					@Override
 					public void onFinish(List<ImageCard> cardList) {
@@ -681,5 +683,14 @@ public class MenuBuilder {
 			return true;
 		}
 		return false;
+	}
+
+	@SuppressWarnings("unchecked")
+	public static <P> void execute(AsyncTask<P, ?, ?> task, P... requests) {
+		if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.HONEYCOMB) {
+			task.executeOnExecutor(AsyncTask.THREAD_POOL_EXECUTOR, requests);
+		} else {
+			task.execute(requests);
+		}
 	}
 }

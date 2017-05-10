@@ -77,6 +77,7 @@ public class SettingsDevelopmentActivity extends SettingsBaseActivity {
 				getMyApplication().getAppInitializer().resetFirstTimeRun();
 				getMyApplication().getSettings().FIRST_MAP_IS_DOWNLOADED.set(false);
 				getMyApplication().getSettings().MAPILLARY_FIRST_DIALOG_SHOWN.set(false);
+				getMyApplication().getSettings().WEBGL_SUPPORTED.set(true);
 				getMyApplication().showToastMessage(R.string.shared_string_ok);
 				return true;
 			}

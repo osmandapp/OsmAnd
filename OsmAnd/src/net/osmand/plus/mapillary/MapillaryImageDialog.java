@@ -25,7 +25,7 @@ import net.osmand.AndroidUtils;
 import net.osmand.data.LatLon;
 import net.osmand.plus.R;
 import net.osmand.plus.activities.MapActivity;
-import net.osmand.plus.mapcontextmenu.builders.cards.ImageCard;
+import net.osmand.plus.mapcontextmenu.MenuBuilder;
 import net.osmand.plus.mapcontextmenu.builders.cards.dialogs.ContextMenuCardDialog;
 import net.osmand.plus.mapcontextmenu.builders.cards.dialogs.ContextMenuCardDialogFragment;
 import net.osmand.plus.views.OsmandMapTileView;
@@ -141,7 +141,7 @@ public class MapillaryImageDialog extends ContextMenuCardDialog {
 	}
 
 	public View getContentView() {
-		if (MapillaryPlugin.isWebGlSupported()) {
+		if (getMapActivity().getMyApplication().getSettings().WEBGL_SUPPORTED.get()) {
 			return getWebView();
 		} else {
 			return getStaticImageView();
@@ -184,7 +184,7 @@ public class MapillaryImageDialog extends ContextMenuCardDialog {
 			@Override
 			public boolean onConsoleMessage(ConsoleMessage consoleMessage) {
 				if (!Algorithms.isEmpty(consoleMessage.message()) && consoleMessage.message().contains(WEBGL_ERROR_MESSAGE)) {
-					MapillaryPlugin.setWebGlSupported(false);
+					getMapActivity().getMyApplication().getSettings().WEBGL_SUPPORTED.set(false);
 					show(getMapActivity(), key, imageUrl, viewerUrl, getLatLon(), getCa(), getTitle(), getDescription());
 				}
 				return false;
@@ -233,7 +233,7 @@ public class MapillaryImageDialog extends ContextMenuCardDialog {
 		ll.addView(imageView);
 
 		if (!Algorithms.isEmpty(imageUrl)) {
-			ImageCard.execute(new DownloadImageTask(progressBar, imageView));
+			MenuBuilder.execute(new DownloadImageTask(progressBar, imageView));
 		}
 		return ll;
 	}

@@ -57,6 +57,21 @@
             tools:text="\@user123"
             tools:visibility="visible"/>
 
+        <android.support.v7.widget.AppCompatButton
+            android:id="@+id/button"
+            android:layout_width="wrap_content"
+            android:layout_height="40dp"
+            android:background="@drawable/blue_button_drawable"
+            android:layout_gravity="bottom|center_horizontal"
+            android:drawablePadding="8dp"
+            android:paddingLeft="14dp"
+            android:paddingRight="14dp"
+            android:layout_marginBottom="16dp"
+            android:textColor="@color/color_white"
+            android:visibility="gone"
+            tools:visibility="visible"
+            tools:text="Button"/>
+
         <ProgressBar
             android:id="@+id/progress"
             android:layout_width="wrap_content"
