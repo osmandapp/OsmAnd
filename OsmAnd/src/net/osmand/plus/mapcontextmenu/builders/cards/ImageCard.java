@@ -59,6 +59,8 @@ public abstract class ImageCard extends AbstractCard {
 	private String imageUrl;
 	// Image high resolution bitmap url
 	private String imageHiresUrl;
+	// true if external browser should to be opened, open webview otherwise
+	private boolean externalLink;
 
 	protected int topIconId;
 	protected int buttonIconId;
@@ -116,6 +118,9 @@ public abstract class ImageCard extends AbstractCard {
 			}
 			if (imageObject.has("imageHiresUrl")) {
 				this.imageHiresUrl = imageObject.getString("imageHiresUrl");
+			}
+			if (imageObject.has("externalLink") && !imageObject.isNull("externalLink")) {
+				this.externalLink = imageObject.getBoolean("externalLink");
 			}
 			if (imageObject.has("topIcon") && !imageObject.isNull("topIcon")) {
 				this.topIconId = getDrawableId(imageObject.getString("topIcon"));
@@ -213,6 +218,10 @@ public abstract class ImageCard extends AbstractCard {
 
 	public String getImageHiresUrl() {
 		return imageHiresUrl;
+	}
+
+	public boolean isExternalLink() {
+		return externalLink;
 	}
 
 	public int getTopIconId() {
