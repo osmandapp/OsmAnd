@@ -2956,4 +2956,47 @@
 	<string name="poi_historic_civilization_roman">文明:ローマ文明</string>
 	<string name="poi_historic_civilization_byzantine">文明:ビザンティン文化 (西暦285年 – 1453年)</string>
 	<string name="poi_historic_civilization_imperial_chinese">文明:皇帝王朝 (紀元前221年 – 西暦1911年)</string>
+	<string name="poi_historic_civilization_ancient_egyptian">文明:古代エジプト(紀元前332年まで)</string>
+	<string name="poi_historic_civilization_celtic">文明:ケルト文明</string>
+	<string name="poi_historic_civilization_western_roman">文明:西ローマ帝国(西暦285 – 476年)</string>
+	<string name="poi_historic_civilization_mycenaean">文明:ミケーネ文明</string>
+	<string name="poi_historic_civilization_dacian">文明:ダキア文化</string>
+	<string name="poi_historic_civilization_hernici">文明:ヘルニキ文化</string>
+	<string name="poi_historic_civilization_greek_egyptian">文明:プトレマイオス朝(紀元前332 – 紀元前30年)</string>
+	<string name="poi_historic_civilization_roman_and_byzantine_egyptian">文明:東ローマ帝国またはビザンツ帝国</string>
+	<string name="poi_historic_civilization_helladic">文明:ヘラディック文明</string>
+	<string name="poi_historic_civilization_cycladic">文明:キクラデス文明</string>
+	<string name="poi_historic_civilization_minoan">文明:ミノア文明</string>
+	<string name="poi_historic_civilization_tiahuanacota">文明:ティワナク帝国</string>
+
+	<string name="poi_horse_no">馬の通行不可</string>
+	<string name="poi_horse_yes">馬の通行可</string>
+	<string name="poi_animal_yes">動物同伴可</string>
+	<string name="poi_animal_no">動物同伴不可</string>
+
+	<string name="poi_historic_period_nuragic">文明期:ヌラーゲ(nuragic)</string>
+	<string name="poi_historic_period_stone_bronze_undetermined">文明期:石器時代 / 青銅器時代(未確定)</string>
+	<string name="poi_historic_period_bronze_age">文明期:青銅器時代</string>
+	<string name="poi_historic_period_principate">文明期:プリンキパトゥス(紀元前27 – 西暦284年)</string>
+	<string name="poi_historic_period_classical_greece">文明期:ギリシア・古典期(紀元前5 – 4世紀)</string>
+	<string name="poi_historic_period_archaic_greece">文明期:ギリシア・アルカイック期</string>
+	<string name="poi_historic_period_iron_age">文明期:鉄器時代</string>
+	<string name="poi_historic_period_roman_republic">文明期:共和政ローマ(紀元前508年 – 紀元前27年)</string>
+	<string name="poi_historic_period_hellenistic_greece">文明期:ギリシア・ヘレニズム時代</string>
+	<string name="poi_historic_period_new_kingdom">文明期:エジプト新王国(紀元前1550年 – 1069年)</string>
+	<string name="poi_historic_period_middle_kingdom">文明期:エジプト中王国(紀元前2055年 – 1650年)</string>
+	<string name="poi_historic_period_predynastic_egypt">文明期:エジプト先王朝時代</string>
+	<string name="poi_historic_period_early_dynastic_period">文明期:エジプト初期王朝時代(紀元前3100年 – 2686年)</string>
+	<string name="poi_historic_period_old_kingdom">文明期:エジプト古王国(紀元前2686年 – 2181年)</string>
+	<string name="poi_historic_period_first_intermediate_period">文明期:エジプト第1中間期(紀元前2181年 – 2055年)</string>
+	<string name="poi_historic_period_second_intermediate_period">文明期:エジプト第2中間期(紀元前1650年 – 1550年)</string>
+	<string name="poi_historic_period_third_intermediate_period">"文明期:エジプト第3中間期(紀元前1069年 – 664年) "</string>
+	<string name="poi_historic_period_first_persian_period">文明期:第1次ペルシア支配時代(エジプト第27王朝)</string>
+	<string name="poi_historic_period_late_period">文明期:エジプト末期王朝(紀元前664年 – 332年)</string>
+	<string name="poi_historic_period_second_persian_period">文明期:第2次ペルシア支配時代(エジプト第31王朝)</string>
+	<string name="poi_historic_period_alexander_the_great">文明期:アレクサンドロス大王</string>
+	<string name="poi_historic_period_ptolemaic_egypt">文明期:プトレマイオス朝(紀元前305年 – 30年)</string>
+	<string name="poi_historic_period_christian_egypt">文明期:アエギュプトゥス(キリスト教が伝播した時代)</string>
+	<string name="poi_historic_period_byzantine_egypt">文明期:ビザンチンエジプト・東ローマ帝国時代(紀元前30年 – 紀元後641年)</string>
+	<string name="poi_historic_period_persian_occupation">文明期:ペルシア属国(サーサーン朝)</string>
 	</resources>
