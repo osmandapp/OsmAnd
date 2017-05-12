@@ -62,10 +62,6 @@ public class OsmNotesPoint extends OsmPoint {
 
 	@Override
 	public String toString() {
-		return new StringBuffer("OsmBugs Point ").append(this.getAction()).append(" ").append(this.getText())
-			.append(" ").append(this.getAuthor())
-			.append(" (").append(this.getId()).append("): [")
-			.append(" (").append(this.getLatitude()).append(", ").append(this.getLongitude())
-			.append(")]").toString();
+		return "OsmBugs Point " + this.getAction() + " " + this.getText() + " " + this.getAuthor() + " (" + this.getId() + "): [" + " (" + this.getLatitude() + ", " + this.getLongitude() + ")]";
 	}
 }
