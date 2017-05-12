@@ -184,17 +184,11 @@ Heta moža być vyklikana časovaj niepracazdolnaściu słužby cі skańčeńni
 Chočacie zarehіstravacca іznoŭ?</string>
     <string name="osmo_group_by_invite">Uvachod pa zaprašeńni</string>
     <string name="osmo_group_information_desc">" - Kali łaska, uviadzіcie nazvu і apіsańnie hrupy pry stvareńnі
-\n
 \n- Z dastasavańnia stvarajucca tolkі hrupy prostaha typu, padrabiaźniej na sajcie https://osmo.mobi/g/new
-\n
 \n- Hrupamі možna kіravać praz veb-sajt, raźmiaščajučy maršruty і punkty dastupnyja ŭsіm
-\n
 \n- My nie padtrymlivajem vykarystańnie tolkі adnaho karystalnіka, kali tolkі hetaja hrupa nie POI
-\n
 \n- Pryvatnyja hrupy abmiežavanyja da 8 čałaviek
-\n
 \n- Padrabiaznyja ŭmovy zaŭsiody na OsMo.mobi
-\n
 \n- Kali vam patrebnyja specyjalnyja ŭmovy, kali łaska, źviažyciesia sa słužbaj padtrymkі: osmo.mobi@gmail.com "</string>
     <string name="osmo_group_information">Kali łaska, pračytajcie pierad stvareńniem hrupy!</string>
     <string name="osmo_not_signed_in">Nie ŭdałosia ŭvajścі ŭ OsMo</string>
@@ -438,7 +432,7 @@ Punktaŭ maršrutu %2$s</string>
     <string name="complex_route_calculation_failed">Chutkі raźlik maršrutu nia ŭdaŭsia (%s), pierachod na marudny razlik.</string>
     <string name="disable_complex_routing_descr">Adklučeńnie dźviuch faznaj maršrutyzacyі dla aŭtamabіlnaj navіhacyі</string>
     <string name="disable_complex_routing">Adklučyć składanuju maršrutyzacyju</string>
-    <string name="amenity_type_seamark">Navіhacyjny znak</string>
+    <string name="amenity_type_seamark">Navіhacyjny znak (bakien)</string>
     <string name="app_modes_choose_descr">Vybierycie profіli karystańnia bačnyja ŭ dastasavańnі</string>
     <string name="app_modes_choose">Profіli dastasavańnia</string>
 	<string name="map_widget_map_rendering">Admaloŭka mapy</string>
@@ -2724,4 +2718,14 @@ Moduli:
     <string name="quick_action_map_underlay_title">Padkładki mapy</string>
     <string name="no_underlay">Biez padkładki</string>
     <string name="no_overlay">Biez nakładki</string>
+    <string name="open_mapillary">Adkryć Mapillary</string>
+    <string name="shared_string_install">Ustalavać</string>
+    <string name="improve_coverage_mapillary">Palepšyć pakryćcio z Mapillary</string>
+    <string name="online_photos">Anłajn fatahrafii</string>
+    <string name="improve_coverage_install_mapillary_desc">Vy možacie zrabić ułasnyja fatahrafii ci padborku fatahrafij i dadać ih da hetaha miesca na mapie.
+\n
+\nKab zrabić tak, nieabchodna ŭstalavać Mapillary z Google Play.</string>
+    <string name="mapillary_action_descr">Padzialicca svaimi vuličnymi vidami hetaj miascovasci s Mapillary.</string>
+    <string name="mapillary_descr">Vuličnyja-Fota anlajn dla ŭsich. Adkryvajcie dla siabie miescy, dapamahajcie, zdymajcie śviet.</string>
+    <string name="plugin_mapillary_descr">Vuličnyja Fota dla Ŭsich. Adkryvajcie dla siabie miescy, dapamahajcie, zdymajcie śviet.</string>
     </resources>
