@@ -2967,4 +2967,5 @@ Kérlek adj meg egy teljes kódot</string>
 \n 
 \nEhhez először telepítened kell a Mapillary alkalmazást a Google Play-ről.</string>
     <string name="shared_string_install">Telepítés</string>
+    <string name="open_mapillary">Mapillary megnyitása</string>
     </resources>
