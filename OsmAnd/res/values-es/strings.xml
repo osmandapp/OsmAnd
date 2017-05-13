@@ -2604,13 +2604,13 @@ Por favor proporciona un código completo</string>
     <string name="shared_string_start_time">Hora de inicio</string>
     <string name="shared_string_end_time">Hora de fin</string>
     <string name="shared_string_color">Color</string>
-    <string name="routing_attr_relief_smoothness_factor_hills_name">Montañoso</string>
-    <string name="routing_attr_relief_smoothness_factor_plains_name">Poco montañoso</string>
-    <string name="routing_attr_relief_smoothness_factor_more_plains_name">Plano (llanura)</string>
+    <string name="routing_attr_relief_smoothness_factor_hills_name">Empinado</string>
+    <string name="routing_attr_relief_smoothness_factor_plains_name">Poco empinado</string>
+    <string name="routing_attr_relief_smoothness_factor_more_plains_name">Llano</string>
     <string name="routing_attr_driving_style_speed_name">Velocidad</string>
     <string name="routing_attr_driving_style_balance_name">Equilibrado</string>
     <string name="routing_attr_driving_style_safety_name">Seguridad</string>
-    <string name="relief_smoothness_factor_descr">Terreno preferido: llano o montañoso</string>
+    <string name="relief_smoothness_factor_descr">Terreno preferido: llano o empinado</string>
     <string name="lang_ber">Bereber</string>
     <string name="do_not_send_anonymous_app_usage">No enviar estadísticas de uso anónimas de la aplicación</string>
     <string name="do_not_send_anonymous_app_usage_desc">OsmAnd recopila información acerca de las secciones que abres en la aplicación. No recopilamos datos de ubicación, ingresos en la aplicación o datos relacionados con las áreas que visualizas, buscas o descargas.</string>
@@ -2618,7 +2618,7 @@ Por favor proporciona un código completo</string>
     <string name="do_not_show_startup_messages_desc">Muestra descuentos de la aplicación y mensajes de eventos locales</string>
     <string name="parking_options">Opciones de aparcamiento</string>
     <string name="full_version_thanks">¡Gracias por comprar la versión completa de OsmAnd!</string>
-    <string name="routing_attr_relief_smoothness_factor_name">"Seleccionar  la fluctuación de elevación"</string>
+    <string name="routing_attr_relief_smoothness_factor_name">Seleccionar la fluctuación de elevación</string>
     <string name="right_side_navigation">Conducción por la derecha</string>
     <string name="driving_region_automatic">Automático</string>
     <string name="osmand_extended_description_part1">" OsmAnd (OSM Automated Navigation Directions, Guía de Navegación Automatizada) es una aplicación de mapa y navegación con acceso a los datos abiertos, de todo el mundo y de alta calidad de OpenStreetMap (OSM). Disfruta del navegador por voz y  visual, visualización de PDIs (puntos de interés), creación y gestión de  trazas GPX, visualización de curvas de nivel y uso de la información de altitud (mediante un extra), elegir entre modos conducción, ciclismo o peatonal, edición de OSM y mucho más. "</string>
