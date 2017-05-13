@@ -2950,4 +2950,9 @@
 	<string name="poi_health_person_type_physician">醫療工作者職務︰內科醫師</string>
 	<string name="poi_health_person_type_podologist">醫療工作者職務︰手足病醫生</string>
 	<string name="poi_health_person_type_psychologist">醫療工作者職務︰心理醫師</string>
+	<string name="poi_health_person_type_therapist">醫療工作者職務︰治療師</string>
+	<string name="poi_health_person_type_physician_assitant">醫療工作者職務︰醫療助理</string>
+	<string name="poi_health_person_type_technician">醫療工作者職務︰技術人員</string>
+	<string name="poi_health_person_type_witchdoctor">醫療工作者職務︰巫醫</string>
+
 	</resources>
