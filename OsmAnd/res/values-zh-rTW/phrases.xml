@@ -2961,4 +2961,13 @@
 	<string name="poi_counselling_type_antenatal_no">諮商（產前）︰無</string>
 	<string name="poi_counselling_type_child_guidance_yes">諮商（兒童指導）︰有</string>
 	<string name="poi_counselling_type_child_guidance_no">諮商（兒童指導）︰無</string>
+	<string name="poi_life_ring">救生圈</string>
+
+<string name="poi_drink_wine_served">酒：提供服務</string>
+
+	<string name="poi_nuclear_explosion_salvo_first_detonation">爆炸齊射：首次引爆齊射</string>
+	<string name="poi_nuclear_explosion_salvo_second_or_later_detonation">爆炸齊射：第二次或之後引爆齊射</string>
+	<string name="poi_nuclear_explosion_crater_diameter">爆炸：爆炸範圍直徑</string>
+	<string name="poi_counselling_type_couple_yes">諮商（伴侶）：有</string>
+	<string name="poi_counselling_type_couple_no">諮商（伴侶）：無</string>
 	</resources>
