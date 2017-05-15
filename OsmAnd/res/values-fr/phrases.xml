@@ -422,7 +422,7 @@
 	<string name="poi_company">Entreprise</string>
 	<string name="poi_townhall">Mairie</string>
 	<string name="poi_educational_institution">Institution éducative</string>
-	<string name="poi_bicycle_track">Piste cycable</string>
+	<string name="poi_bicycle_track">Piste cyclable</string>
 	<string name="poi_australian_football">Football autralien</string>
 	<string name="poi_handball">Handball</string>
 	<string name="poi_horse_racing">Course hippique</string>
@@ -951,7 +951,7 @@
 	<string name="poi_recycling_polyester">Polyester</string>
 	<string name="poi_recycling_car_batteries">Batteries automobiles</string>
 	<string name="poi_recycling_cars">Automobiles</string>
-	<string name="poi_recycling_bicycles">Bicyclettes</string>
+	<string name="poi_recycling_bicycles">Vélos</string>
 
 	<string name="poi_shower">Douche</string>
 	<string name="poi_email">Email</string>
@@ -960,7 +960,7 @@
 	<string name="poi_drinking_water_yes">Oui</string>
 	<string name="poi_drinking_water_no">Non</string>
 	<string name="poi_seasonal_no">Permanent</string>
-	<string name="poi_seasonal_yes">Saisonnier</string>
+	<string name="poi_seasonal_yes">Oui</string>
 	<string name="poi_seasonal_wet_season">Saison humide</string>
 	<string name="poi_seasonal_dry_season">Saison sèche</string>
 	<string name="poi_seasonal_spring">Printemps</string>
@@ -1086,9 +1086,9 @@
 	<string name="poi_height">Hauteur</string>
 	<string name="poi_ele">Hauteur au dessus du niveau de la mer</string>
 	<string name="poi_start_date">Date de début</string>
-	<string name="poi_wheelchair_yes">Accessible en fauteuil roulant</string>
-	<string name="poi_wheelchair_no">Non accessible en fauteuil roulant</string>
-	<string name="poi_wheelchair_limited">Accessibilité en fauteuil roulant limitée</string>
+	<string name="poi_wheelchair_yes">Oui</string>
+	<string name="poi_wheelchair_no">Non</string>
+	<string name="poi_wheelchair_limited">Limitée</string>
 	<string name="poi_wholesale">Vente en gros</string>
 
 	<string name="poi_content_wine">Contenu : vin</string>
@@ -1147,7 +1147,7 @@
 
 	<string name="poi_pump_manual">Pompe manuelle</string>
 	<string name="poi_pump_no">Sans pompe</string>
-	<string name="poi_pump_yes">Pompe : Oui</string>
+	<string name="poi_pump_yes">Oui</string>
 
 	<string name="poi_pump_powered">Pompe automatique</string>
 	<string name="poi_water_point">Point d\'eau (pour caravane, camping car)</string>
@@ -1189,7 +1189,7 @@
 	<string name="poi_aerialway_heating_yes">Oui</string>
 	<string name="poi_aerialway_heating_no">Non chauffé</string>
 	<string name="poi_aerialway_bicycle_yes">Autorisés</string>
-	<string name="poi_aerialway_bicycle_no">Vélos interdits</string>
+	<string name="poi_aerialway_bicycle_no">Vélos : interdits</string>
 	<string name="poi_aerialway_bicycle_summer">Autorisés en été seulement</string>
 	<string name="poi_aerialway_access_entry">Entrée uniquement</string>
 	<string name="poi_aerialway_access_exit">Sortie uniquement</string>
@@ -1215,7 +1215,7 @@
 	<string name="poi_denomination_united_church_of_christ">Eglise unifée du Christ</string>
 	<string name="poi_denomination_georgian_orthodox">Orthodoxe georgien</string>
 	<string name="poi_internet_access_yes">Accès Internet : oui</string>
-	<string name="poi_internet_access_no">Accès Internet : Non</string>
+	<string name="poi_internet_access_no">Accès Internet : non</string>
 
 	<string name="poi_content_water">Contenu : eau</string>
 	<string name="poi_content_oil">Contenu : pétrole</string>
@@ -1354,9 +1354,9 @@
 	<string name="poi_toilets_no">Sans toilettes</string>
 	<string name="poi_toilets_wheelchair_yes">Accès aux toilettes en fauteuil roulant : oui</string>
 	<string name="poi_toilets_wheelchair_no">Accès aux toilettes en fauteuil roulant : non</string>
-	<string name="poi_toilets_access_customers">Accès aux toilettes : Clients</string>
-	<string name="poi_toilets_access_permissive">Accès aux toilettes : Autorisé</string>
-	<string name="poi_toilets_access_public">Accès aux toilettes : Public</string>
+	<string name="poi_toilets_access_customers">Accès aux toilettes : clientèle</string>
+	<string name="poi_toilets_access_permissive">Accès aux toilettes : autorisé</string>
+	<string name="poi_toilets_access_public">Accès aux toilettes : public</string>
 
 	<string name="poi_diaper_yes">Table à langer</string>
 	<string name="poi_diaper_no">Pas de table à langer</string>
@@ -1535,20 +1535,20 @@
 	<string name="poi_surface_gravel">Surface : gravier</string>
 	<string name="poi_surface_fine_gravel">Surface : gravier fin</string>
 	<string name="poi_route_monorail_ref">Monorail</string>
-	<string name="poi_service_bicycle_retail_no">Vente de cycles : non</string>
+	<string name="poi_service_bicycle_retail_no">Vente de vélos : non</string>
 	<string name="poi_service_bicycle_repair_yes">Réparation</string>
 	<string name="poi_service_bicycle_retail_yes">Vente</string>
-	<string name="poi_service_bicycle_repair_no">Réparation de cycles : non</string>
+	<string name="poi_service_bicycle_repair_no">Réparation de vélos : non</string>
 	<string name="poi_service_bicycle_rental_yes">Location</string>
-	<string name="poi_service_bicycle_rental_no">Location de cycles : non</string>
+	<string name="poi_service_bicycle_rental_no">Location de vélos : non</string>
 	<string name="poi_service_bicycle_pump_yes">Pompe à vélo</string>
 	<string name="poi_service_bicycle_pump_no">Pompe à vélo : non</string>
 	<string name="poi_service_bicycle_diy_yes">Outils en libre service</string>
 	<string name="poi_service_bicycle_diy_no">Outils en libre service : non</string>
 	<string name="poi_service_bicycle_cleaning_yes">Nettoyage</string>
-	<string name="poi_service_bicycle_cleaning_no">Nettoyage de cycles : non</string>
-	<string name="poi_service_bicycle_chaintool_yes">Dérive chaîne</string>
-	<string name="poi_service_bicycle_chaintool_no">Dérive chaine : non</string>
+	<string name="poi_service_bicycle_cleaning_no">Nettoyage de vélos : non</string>
+	<string name="poi_service_bicycle_chaintool_yes">Dérive-chaîne</string>
+	<string name="poi_service_bicycle_chaintool_no">Dérive-chaîne : non</string>
 	<string name="poi_training_language">Enseignement : langue</string>
 	<string name="poi_training_music">Enseignement : musique</string>
 	<string name="poi_training_dance">Enseignement : danse</string>
@@ -1609,14 +1609,14 @@
 	<string name="poi_group_only_no">Groupe seulement : non</string>
 	<string name="poi_washing_machine_yes">Oui</string>
 	<string name="poi_washing_machine_no">Machine à laver le linge : non</string>
-	<string name="poi_shower_yes">Oui</string>
+	<string name="poi_shower_yes">Douche : oui</string>
 	<string name="poi_shower_no">Douche : non</string>
 	<string name="poi_shower_hot">Douche : chaude</string>
 	<string name="poi_shower_outdoor">Douche : extérieur</string>
 	<string name="poi_shower_cold">Douche : froide</string>
 	<string name="poi_shower_indoor">Douche : intérieur</string>
 	<string name="poi_caravans_yes">Oui</string>
-	<string name="poi_caravans_no">Caravanes: non</string>
+	<string name="poi_caravans_no">Caravanes : non</string>
 	<string name="poi_power_supply_yes">Oui</string>
 	<string name="poi_power_supply_no">Alimentation électrique : non</string>
 	<string name="poi_capacity_tents">Nombre maximum de tentes</string>
@@ -2140,7 +2140,7 @@
 	<string name="poi_additional_type">Supplémentaire</string>
 	<string name="poi_internet_access_type">Type d\'accès Internet</string>
 	<string name="poi_vending_type">Type de vente</string>
-	<string name="poi_bicycle_service">Location de vélos</string>
+	<string name="poi_bicycle_service">Service vélo</string>
 	<string name="poi_clothes_type">Type</string>
 	<string name="poi_shoes_type">Type</string>
 	<string name="poi_fire_hydrant_type">Type</string>
@@ -2330,7 +2330,7 @@
 	<string name="poi_covered">Couvert</string>
 	<string name="poi_aerialway_bicycle">Transport de vélos</string>
 	<string name="poi_aerialway_heating">Chauffage</string>
-	<string name="poi_pharmacy_dispensing">Distribution</string>
+	<string name="poi_pharmacy_dispensing">Ordonnance</string>
 	<string name="poi_star_rating">Évaluation</string>
 	<string name="poi_power_supply">Prise de courant</string>
 	<string name="poi_retail">Zone commerciale</string>
@@ -2505,9 +2505,9 @@
 	<string name="poi_fast_food_cafeteria">Oui</string>
 
 	<string name="poi_drink_wine_yes">Vin : oui</string>
-	<string name="poi_organic_yes">Nourriture biologique : oui</string>
-	<string name="poi_organic_no">Nourriture biologique : non</string>
-	<string name="poi_organic_only">Nourriture biologique uniquement</string>
+	<string name="poi_organic_yes">Oui</string>
+	<string name="poi_organic_no">Non</string>
+	<string name="poi_organic_only">Uniquement</string>
 
 	<string name="poi_payment_visa_debit_yes">Cartes de débit Visa</string>
 	<string name="poi_health_specialty_cardiology_yes">Cardiologie</string>
@@ -2991,4 +2991,8 @@
 	<string name="poi_payment_troika_no">Carte Troika non acceptée</string>
 
 	<string name="poi_payment_ep_mep_no">MEP non accepté</string>
+	<string name="poi_bicycle_parking_tree">Arbre à vélos</string>
+	<string name="poi_life_ring">Bouée de sauvetage</string>
+
+<string name="poi_bicycle_parking_lockers">Consigne automatique</string>
 	</resources>
