@@ -2955,4 +2955,10 @@
 	<string name="poi_health_person_type_technician">醫療工作者職務︰技術人員</string>
 	<string name="poi_health_person_type_witchdoctor">醫療工作者職務︰巫醫</string>
 
+	<string name="poi_counselling_type_addiction_yes">諮商（成癮）︰有</string>
+	<string name="poi_counselling_type_addiction_no">諮商（成癮）︰無</string>
+	<string name="poi_counselling_type_antenatal_yes">諮商（產前）︰有</string>
+	<string name="poi_counselling_type_antenatal_no">諮商（產前）︰無</string>
+	<string name="poi_counselling_type_child_guidance_yes">諮商（兒童指導）︰有</string>
+	<string name="poi_counselling_type_child_guidance_no">諮商（兒童指導）︰無</string>
 	</resources>
