@@ -2996,4 +2996,14 @@ Fonctionnalités principales :
     <string name="no_photos_descr">Aucune photo pour ce lieu</string>
     <string name="shared_string_install">Installer</string>
     <string name="mapillary">Mapillary</string>
+    <string name="open_mapillary">Ouvrir Mapillary</string>
+    <string name="improve_coverage_mapillary">Améliorer la couverture avec Mapillary</string>
+    <string name="improve_coverage_install_mapillary_desc">Vous pouvez prendre des photos et les ajouter à la carte.
+\n
+\nPour cela, installez l\'application Mapillary depuis Google Play.</string>
+    <string name="mapillary_action_descr">Participez en ajoutant vos photos détaillées à Mapillary.</string>
+    <string name="mapillary_widget">Gadget Mapillary</string>
+    <string name="mapillary_widget_descr">Vous permet de contribuer facilement à Mapillary</string>
+    <string name="mapillary_descr">Des photos en-ligne détaillées pour tous. Découvrez des lieux, collaborez ... capturez le monde.</string>
+    <string name="plugin_mapillary_descr">Des photos détaillées pour tous. Découvrez des lieux, collaborez ... capturez le monde.</string>
     </resources>
