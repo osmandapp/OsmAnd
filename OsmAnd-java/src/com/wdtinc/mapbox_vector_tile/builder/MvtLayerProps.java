@@ -32,9 +32,17 @@ public final class MvtLayerProps {
      * @return index of the key
      */
     public int addKey(String key) {
-        Objects.requireNonNull(key);
+        if (key == null) {
+            throw new NullPointerException();
+        }
         int nextIndex = keys.size();
-        final Integer mapIndex = keys.putIfAbsent(key, nextIndex);
+		//final Integer mapIndex = keys.putIfAbsent(key, nextIndex);
+        final Integer mapIndex;
+        if (!keys.containsKey(key)) {
+			mapIndex = keys.put(key, nextIndex);
+		} else {
+			mapIndex = keys.get(key);
+		}
         return mapIndex == null ? nextIndex : mapIndex;
     }
 
@@ -48,13 +56,21 @@ public final class MvtLayerProps {
      * @see MvtValue#isValidPropValue(Object)
      */
     public int addValue(Object value) {
-        Objects.requireNonNull(value);
+        if (value == null) {
+            throw new NullPointerException();
+        }
         if(!MvtValue.isValidPropValue(value)) {
             return -1;
         }
 
         int nextIndex = vals.size();
-        final Integer mapIndex = vals.putIfAbsent(value, nextIndex);
+        //final Integer mapIndex = vals.putIfAbsent(value, nextIndex);
+		final Integer mapIndex;
+		if (!vals.containsKey(value)) {
+			mapIndex = vals.put(value, nextIndex);
+		} else {
+			mapIndex = vals.get(value);
+		}
         return mapIndex == null ? nextIndex : mapIndex;
     }
 
