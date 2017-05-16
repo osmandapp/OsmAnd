@@ -41,7 +41,8 @@ public class MapillaryPlugin extends OsmandPlugin {
 	private OsmandSettings settings;
 	private OsmandApplication app;
 
-	private MapillaryLayer rasterLayer;
+	private MapillaryRasterLayer rasterLayer;
+	private MapillaryVectorLayer vectorLayer;
 	private TextInfoWidget mapillaryControl;
 	private MapWidgetRegInfo mapillaryWidgetRegInfo;
 
@@ -82,7 +83,8 @@ public class MapillaryPlugin extends OsmandPlugin {
 	}
 
 	private void createLayers() {
-		rasterLayer = new MapillaryLayer();
+		rasterLayer = new MapillaryRasterLayer();
+		vectorLayer = new MapillaryVectorLayer();
 	}
 
 	@Override
@@ -91,23 +93,28 @@ public class MapillaryPlugin extends OsmandPlugin {
 	}
 
 	private void updateMapLayers(OsmandMapTileView mapView, final MapActivityLayers layers) {
-		if (rasterLayer == null) {
+		if (rasterLayer == null || vectorLayer == null) {
 			createLayers();
 		}
 		if (isActive()) {
-			updateLayer(mapView, rasterLayer, 0.6f);
+			ITileSource rasterSource = null;
+			ITileSource vectorSource = null;
+			if (settings.SHOW_MAPILLARY.get()) {
+				rasterSource = settings.getTileSourceByName(TileSourceManager.getMapillaryRasterSource().getName(), false);
+				vectorSource = settings.getTileSourceByName(TileSourceManager.getMapillaryVectorSource().getName(), false);
+			}
+			updateLayer(mapView, rasterSource, rasterLayer, 0.6f);
+			updateLayer(mapView, vectorSource, vectorLayer, 0.61f);
 		} else {
 			mapView.removeLayer(rasterLayer);
 			rasterLayer.setMap(null);
+			mapView.removeLayer(vectorLayer);
+			vectorLayer.setMap(null);
 		}
 		layers.updateMapSource(mapView, null);
 	}
 
-	private void updateLayer(OsmandMapTileView mapView, MapTileLayer layer, float layerOrder) {
-		ITileSource mapillarySource = null;
-		if (settings.SHOW_MAPILLARY.get()) {
-			mapillarySource = settings.getTileSourceByName(TileSourceManager.getMapillarySource().getName(), false);
-		}
+	private void updateLayer(OsmandMapTileView mapView, ITileSource mapillarySource, MapTileLayer layer, float layerOrder) {
 		if (!Algorithms.objectEquals(mapillarySource, layer.getMap()) || !mapView.isLayerVisible(layer)) {
 			if (mapView.getMapRenderer() == null && !mapView.isLayerVisible(layer)) {
 				mapView.addLayer(layer, layerOrder);

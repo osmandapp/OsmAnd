@@ -1,12 +1,6 @@
 package net.osmand.plus.resources;
 
 
-import java.io.ByteArrayOutputStream;
-import java.io.File;
-import java.io.IOException;
-import java.io.InputStream;
-import java.util.Stack;
-
 import net.osmand.PlatformUtil;
 import net.osmand.ResultMatcher;
 import net.osmand.data.RotatedTileBox;
@@ -16,6 +10,12 @@ import net.osmand.plus.SQLiteTileSource;
 import net.osmand.util.Algorithms;
 
 import org.apache.commons.logging.Log;
+
+import java.io.ByteArrayOutputStream;
+import java.io.File;
+import java.io.IOException;
+import java.io.InputStream;
+import java.util.Stack;
 
 /**
  * Thread to load map objects (POI, transport stops )async
@@ -44,7 +44,7 @@ public class AsyncLoadingThread extends Thread {
 					Object req = requests.pop();
 					if (req instanceof TileLoadDownloadRequest) {
 						TileLoadDownloadRequest r = (TileLoadDownloadRequest) req;
-						tileLoaded |= resourceManger.getRequestedImageTile(r) != null;
+						tileLoaded |= resourceManger.hasRequestedTile(r);
 					} else if (req instanceof MapLoadRequest) {
 						if (!mapLoaded) {
 							MapLoadRequest r = (MapLoadRequest) req;
@@ -69,7 +69,7 @@ public class AsyncLoadingThread extends Thread {
 		}
 	}
 
-	public void requestToLoadImage(TileLoadDownloadRequest req) {
+	public void requestToLoadTile(TileLoadDownloadRequest req) {
 		requests.push(req);
 	}
 

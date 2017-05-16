@@ -540,7 +540,7 @@ public class MapActivityActions implements DialogProvider {
 				for (int i = 0; i < width; i++) {
 					for (int j = 0; j < height; j++) {
 						((OsmandApplication) mapActivity.getApplication()).getResourceManager().
-								clearTileImageForMap(null, mapSource, i + left, j + top, zoom);
+								clearTileForMap(null, mapSource, i + left, j + top, zoom);
 					}
 				}
 

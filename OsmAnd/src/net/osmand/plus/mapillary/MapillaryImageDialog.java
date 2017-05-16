@@ -119,15 +119,8 @@ public class MapillaryImageDialog extends ContextMenuCardDialog {
 
 	private void setImageLocation(LatLon latLon, double ca, boolean animated) {
 		OsmandMapTileView mapView = getMapActivity().getMapView();
-		MapillaryLayer layer = mapView.getLayerByClass(MapillaryLayer.class);
-		if (layer != null) {
-			layer.setSelectedImageLocation(latLon);
-			if (!Double.isNaN(ca)) {
-				layer.setSelectedImageCameraAngle((float) ca);
-			} else {
-				layer.setSelectedImageCameraAngle(null);
-			}
-		}
+		updateLayer(mapView.getLayerByClass(MapillaryRasterLayer.class), latLon, ca);
+		updateLayer(mapView.getLayerByClass(MapillaryVectorLayer.class), latLon, ca);
 		if (latLon != null) {
 			if (animated) {
 				mapView.getAnimatedDraggingThread().startMoving(
@@ -137,6 +130,17 @@ public class MapillaryImageDialog extends ContextMenuCardDialog {
 			}
 		} else {
 			getMapActivity().refreshMap();
+		}
+	}
+
+	private void updateLayer(MapillaryLayer layer, LatLon latLon, double ca) {
+		if (layer != null) {
+			layer.setSelectedImageLocation(latLon);
+			if (!Double.isNaN(ca)) {
+				layer.setSelectedImageCameraAngle((float) ca);
+			} else {
+				layer.setSelectedImageCameraAngle(null);
+			}
 		}
 	}
 

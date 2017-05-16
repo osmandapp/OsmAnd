@@ -1,25 +1,21 @@
 package net.osmand.core.android;
 
-import android.graphics.Bitmap;
-
-import java.io.IOException;
-
 import net.osmand.IndexConstants;
 import net.osmand.core.jni.AlphaChannelPresence;
-import net.osmand.core.jni.IMapDataProvider;
+import net.osmand.core.jni.IMapTiledDataProvider;
+import net.osmand.core.jni.ImageMapLayerProvider;
 import net.osmand.core.jni.MapStubStyle;
 import net.osmand.core.jni.SWIGTYPE_p_QByteArray;
 import net.osmand.core.jni.SwigUtilities;
-import net.osmand.core.jni.TileId;
 import net.osmand.core.jni.ZoomLevel;
 import net.osmand.core.jni.interface_ImageMapLayerProvider;
-import net.osmand.core.jni.IMapTiledDataProvider;
-import net.osmand.core.jni.ImageMapLayerProvider;
 import net.osmand.map.ITileSource;
 import net.osmand.map.MapTileDownloader;
 import net.osmand.plus.OsmandApplication;
 import net.osmand.plus.resources.AsyncLoadingThread;
 import net.osmand.plus.resources.ResourceManager;
+
+import java.io.IOException;
 
 public class TileSourceProxyProvider extends interface_ImageMapLayerProvider {
 
@@ -62,7 +58,7 @@ public class TileSourceProxyProvider extends interface_ImageMapLayerProvider {
 			final TileReadyCallback tileReadyCallback = new TileReadyCallback(tileSource,
 					request.getTileId().getX(), request.getTileId().getY(), request.getZoom().swigValue());
 			rm.getMapTileDownloader().addDownloaderCallback(tileReadyCallback);
-			while (rm.getTileImageForMapAsync(tileFilename, tileSource, request.getTileId().getX(), request.getTileId().getY(),
+			while (rm.getBitmapTilesCache().getTileForMapAsync(tileFilename, tileSource, request.getTileId().getX(), request.getTileId().getY(),
 					request.getZoom().swigValue(), true) == null) {
 				synchronized (tileReadyCallback.getSync()) {
 					if (tileReadyCallback.isReady()) {
