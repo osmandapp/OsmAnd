@@ -1,11 +1,10 @@
 package com.wdtinc.mapbox_vector_tile.adapt.jts;
 
-import com.wdtinc.mapbox_vector_tile.build.MvtLayerProps;
+import com.wdtinc.mapbox_vector_tile.builder.MvtLayerProps;
 
 import net.osmand.binary.VectorTile;
 
 import java.util.Map;
-import java.util.Objects;
 
 /**
  * Convert simple user data {@link Map} where the keys are {@link String} and values are {@link Object}. Supports
