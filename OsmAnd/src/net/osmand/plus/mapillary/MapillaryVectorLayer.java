@@ -8,9 +8,9 @@ import android.graphics.PointF;
 import android.support.v4.content.ContextCompat;
 
 import com.vividsolutions.jts.geom.Coordinate;
-import com.vividsolutions.jts.geom.CoordinateSequence;
 import com.vividsolutions.jts.geom.Geometry;
 import com.vividsolutions.jts.geom.LineString;
+import com.vividsolutions.jts.geom.MultiLineString;
 import com.vividsolutions.jts.geom.Point;
 
 import net.osmand.AndroidUtils;
@@ -194,14 +194,14 @@ class MapillaryVectorLayer extends MapTileLayer implements MapillaryLayer, ICont
 		QuadRect tileBounds = tileBox.getTileBounds();
 		double px, py, tx, ty;
 		float x, y;
-		float lx = -1000f;
-		float ly = -1000f;
 		float pw = point.getWidth();
 		float ph = point.getHeight();
 		float pwd = pw / 2;
 		float phd = ph / 2;
-		float pwm = pw * 2;
-		float phm = ph * 2;
+		//float lx = -1000f;
+		//float ly = -1000f;
+		//float pwm = pw * 2;
+		//float phm = ph * 2;
 		canvas.rotate(-tileBox.getRotate(), tileBox.getCenterPixelX(), tileBox.getCenterPixelY());
 		for (List<Point> points : seqMap.values()) {
 			for (int i = 0; i < points.size(); i++) {
@@ -218,8 +218,8 @@ class MapillaryVectorLayer extends MapTileLayer implements MapillaryLayer, ICont
 					//if (!QuadRect.intersects(rLast, rNow) || i == points.size() - 1) {
 						canvas.drawBitmap(point, x - pwd, y - phd, paintPoint);
 						visiblePoints.put(new QuadPointDouble(tileX + px,  tileY + py), (Map) p.getUserData());
-						lx = x;
-						ly = y;
+						//lx = x;
+						//ly = y;
 					//}
 				}
 			}
@@ -232,20 +232,31 @@ class MapillaryVectorLayer extends MapTileLayer implements MapillaryLayer, ICont
 			if (g instanceof LineString && !g.isEmpty()) {
 				LineString l = (LineString) g;
 				if (l.getCoordinateSequence() != null && !l.isEmpty()) {
-					draw(l.getCoordinateSequence(), canvas, tileBox, tileX, tileY);
+					draw(l.getCoordinateSequence().toCoordinateArray(), canvas, tileBox, tileX, tileY);
+				}
+			} else if (g instanceof MultiLineString && !g.isEmpty()) {
+				MultiLineString ml = (MultiLineString) g;
+				for (int i = 0; i < ml.getNumGeometries(); i++) {
+					Geometry gm = ml.getGeometryN(i);
+					if (gm instanceof LineString && !gm.isEmpty()) {
+						LineString l = (LineString) gm;
+						if (l.getCoordinateSequence() != null && !l.isEmpty()) {
+							draw(l.getCoordinateSequence().toCoordinateArray(), canvas, tileBox, tileX, tileY);
+						}
+					}
 				}
 			}
 		}
 	}
 
-	protected void draw(CoordinateSequence points, Canvas canvas, RotatedTileBox tileBox, int tileX, int tileY) {
-		if (points.size() > 1) {
+	protected void draw(Coordinate[] points, Canvas canvas, RotatedTileBox tileBox, int tileX, int tileY) {
+		if (points.length > 1) {
 			int dzoom = tileBox.getZoom() - TILE_ZOOM;
 			int mult = (int) Math.pow(2.0, dzoom);
 			QuadRect tileBounds = tileBox.getTileBounds();
 
 			canvas.rotate(-tileBox.getRotate(), tileBox.getCenterPixelX(), tileBox.getCenterPixelY());
-			Coordinate lastPt = points.getCoordinate(0);
+			Coordinate lastPt = points[0];
 			float x;
 			float y;
 			float lastx = 0;
@@ -255,9 +266,9 @@ class MapillaryVectorLayer extends MapTileLayer implements MapillaryLayer, ICont
 			double ly = lastPt.y / EXTENT;
 			boolean reCalculateLastXY = true;
 
-			int size = points.size();
+			int size = points.length;
 			for (int i = 1; i < size; i++) {
-				Coordinate pt = points.getCoordinate(i);
+				Coordinate pt = points[i];
 				px = pt.x / EXTENT;
 				py = pt.y / EXTENT;
 				tpx = (tileX + px) * mult;
