@@ -2664,4 +2664,14 @@ Tai yra puikus būdas paremti OsmAnd ir OSM, jei jie jums patinka.</string>
     <string name="right_side_navigation">Vairavimas dešinėje</string>
     <string name="driving_region_automatic">Automatinis</string>
     <string name="do_not_send_anonymous_app_usage">Nesiųsti anoniminės programėlės naudojimo informacijos</string>
+    <string name="shared_string_install">Įdiegti</string>
+    <string name="improve_coverage_mapillary">Pagerinti padengimą su Mapillary</string>
+    <string name="shared_string_add_photos">Pridėti nuotrauką</string>
+    <string name="no_photos_descr">Mes neturime šios vietovės nuotraukų</string>
+    <string name="mapillary">Mapillary</string>
+    <string name="restart_search">Ieškoti iš naujo</string>
+    <string name="increase_search_radius">Padidinti paieškos spindulį</string>
+    <string name="nothing_found">Nepavyko nieko rasti :(</string>
+    <string name="nothing_found_descr">Pabandykite pakeisti paieškos užklausą arba padidinti paieškos spindulį</string>
+    <string name="quick_action_showhide_osmbugs_title">Rodyti/slėpti OSM Pastabas</string>
     </resources>
