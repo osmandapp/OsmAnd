@@ -2815,7 +2815,7 @@ Algunas de las características principales:
     <string name="no_photos_descr">No tenemos fotos para esta ubicación</string>
     <string name="open_mapillary">Abrir Mapillary</string>
     <string name="shared_string_install">Instalar</string>
-    <string name="improve_coverage_mapillary">Mejorar cobertura con Mapillary</string>
+    <string name="improve_coverage_mapillary">Mejorar la cobertura con Mapillary</string>
     <string name="improve_coverage_install_mapillary_desc">Puedes hacer tus propias fotos o serie de fotos y añadirlas a esta ubicación del mapa.
 \n
 \nPara ello debes instalar la aplicación Mapillary desde Google Play.</string>
