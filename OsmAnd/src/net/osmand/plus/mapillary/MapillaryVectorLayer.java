@@ -4,12 +4,20 @@ import android.graphics.Bitmap;
 import android.graphics.BitmapFactory;
 import android.graphics.Canvas;
 import android.graphics.Paint;
+import android.graphics.PointF;
+import android.support.v4.content.ContextCompat;
 
+import com.vividsolutions.jts.geom.Coordinate;
+import com.vividsolutions.jts.geom.CoordinateSequence;
 import com.vividsolutions.jts.geom.Geometry;
+import com.vividsolutions.jts.geom.LineString;
 import com.vividsolutions.jts.geom.Point;
 
+import net.osmand.AndroidUtils;
 import net.osmand.data.GeometryTile;
 import net.osmand.data.LatLon;
+import net.osmand.data.PointDescription;
+import net.osmand.data.QuadPointDouble;
 import net.osmand.data.QuadRect;
 import net.osmand.data.RotatedTileBox;
 import net.osmand.map.ITileSource;
@@ -17,23 +25,31 @@ import net.osmand.plus.OsmandPlugin;
 import net.osmand.plus.R;
 import net.osmand.plus.rastermaps.OsmandRasterMapsPlugin;
 import net.osmand.plus.resources.ResourceManager;
+import net.osmand.plus.views.ContextMenuLayer.IContextMenuProvider;
 import net.osmand.plus.views.MapTileLayer;
 import net.osmand.plus.views.OsmandMapTileView;
+import net.osmand.util.Algorithms;
 import net.osmand.util.MapUtils;
 
-import java.util.LinkedHashMap;
+import java.util.ArrayList;
+import java.util.HashMap;
+import java.util.List;
 import java.util.Map;
+import java.util.Map.Entry;
 
-class MapillaryVectorLayer extends MapTileLayer implements MapillaryLayer {
+class MapillaryVectorLayer extends MapTileLayer implements MapillaryLayer, IContextMenuProvider {
 
 	private static final int TILE_ZOOM = 14;
+	private static final double EXTENT = 4096.0;
 
 	private LatLon selectedImageLocation;
 	private Float selectedImageCameraAngle;
 	private Bitmap selectedImage;
 	private Bitmap headingImage;
-	private Paint paintIcon;
+	private Paint paintPoint;
+	private Paint paintLine;
 	private Bitmap point;
+	private Map<QuadPointDouble, Map> visiblePoints = new HashMap<>();
 
 	MapillaryVectorLayer() {
 		super(false);
@@ -42,9 +58,18 @@ class MapillaryVectorLayer extends MapTileLayer implements MapillaryLayer {
 	@Override
 	public void initLayer(OsmandMapTileView view) {
 		super.initLayer(view);
-		paintIcon = new Paint();
-		selectedImage = BitmapFactory.decodeResource(view.getResources(), R.drawable.map_default_location);
-		headingImage = BitmapFactory.decodeResource(view.getResources(), R.drawable.map_pedestrian_location_view_angle);
+
+		paintPoint = new Paint();
+		paintLine = new Paint();
+		paintLine.setStyle(Paint.Style.STROKE);
+		paintLine.setAntiAlias(true);
+		paintLine.setColor(ContextCompat.getColor(view.getContext(), R.color.mapillary_color));
+		paintLine.setStrokeWidth(AndroidUtils.dpToPx(view.getContext(), 4f));
+		//paintLine.setStrokeJoin(Paint.Join.ROUND);
+		paintLine.setStrokeCap(Paint.Cap.ROUND);
+
+		selectedImage = BitmapFactory.decodeResource(view.getResources(), R.drawable.map_mapillary_location);
+		headingImage = BitmapFactory.decodeResource(view.getResources(), R.drawable.map_mapillary_location_view_angle);
 		point = BitmapFactory.decodeResource(view.getResources(), R.drawable.map_note_small);
 	}
 
@@ -68,10 +93,10 @@ class MapillaryVectorLayer extends MapTileLayer implements MapillaryLayer {
 				canvas.save();
 				canvas.rotate(selectedImageCameraAngle - 180, x, y);
 				canvas.drawBitmap(headingImage, x - headingImage.getWidth() / 2,
-						y - headingImage.getHeight() / 2, paintIcon);
+						y - headingImage.getHeight() / 2, paintPoint);
 				canvas.restore();
 			}
-			canvas.drawBitmap(selectedImage, x - selectedImage.getWidth() / 2, y - selectedImage.getHeight() / 2, paintIcon);
+			canvas.drawBitmap(selectedImage, x - selectedImage.getWidth() / 2, y - selectedImage.getHeight() / 2, paintPoint);
 		}
 	}
 
@@ -102,7 +127,8 @@ class MapillaryVectorLayer extends MapTileLayer implements MapillaryLayer {
 		boolean useInternet = (OsmandPlugin.getEnabledPlugin(OsmandRasterMapsPlugin.class) != null || OsmandPlugin.getEnabledPlugin(MapillaryPlugin.class) != null) &&
 				settings.USE_INTERNET_TO_DOWNLOAD_TILES.get() && settings.isInternetConnectionAvailable() && map.couldBeDownloadedFromInternet();
 
-		Map<String, GeometryTile> tiles = new LinkedHashMap<>();
+		Map<String, GeometryTile> tiles = new HashMap<>();
+		Map<QuadPointDouble, Map> visiblePoints = new HashMap<>();
 		for (int i = 0; i < width; i++) {
 			for (int j = 0; j < height; j++) {
 				int leftPlusI = left + i;
@@ -118,7 +144,6 @@ class MapillaryVectorLayer extends MapTileLayer implements MapillaryLayer {
 				int tileX = leftPlusI;
 				int tileY = topPlusJ;
 
-				//String tileId = mgr.calculateTileId(map, tileX, tileY, nzoom);
 				int dzoom = nzoom - TILE_ZOOM;
 				int div = (int) Math.pow(2.0, dzoom);
 				tileX /= div;
@@ -134,27 +159,211 @@ class MapillaryVectorLayer extends MapTileLayer implements MapillaryLayer {
 					if (tile != null) {
 						tiles.put(tileId, tile);
 						if (tile.getData() != null) {
-							drawPoints(canvas, tileBox, tileX, tileY, tile);
+							drawLines(canvas, tileBox, tileX, tileY, tile);
+							if (nzoom > 15) {
+								drawPoints(canvas, tileBox, tileX, tileY, tile, visiblePoints);
+							}
 						}
+					}
+				}
+			}
+		}
+		this.visiblePoints = visiblePoints;
+	}
+
+	protected void drawPoints(Canvas canvas, RotatedTileBox tileBox, int tileX, int tileY,
+							  GeometryTile tile, Map<QuadPointDouble, Map> visiblePoints) {
+		Map<String, List<Point>> seqMap = new HashMap<>();
+		for (Geometry g : tile.getData()) {
+			if (g instanceof Point && !g.isEmpty() && g.getUserData() != null && g.getUserData() instanceof HashMap) {
+				HashMap userData = (HashMap) g.getUserData();
+				String seq = (String) userData.get("skey");
+				if (!Algorithms.isEmpty(seq)) {
+					List<Point> pointList = seqMap.get(seq);
+					if (pointList == null) {
+						pointList = new ArrayList<>();
+						seqMap.put(seq, pointList);
+					}
+					pointList.add((Point) g);
+				}
+			}
+		}
+
+		int dzoom = tileBox.getZoom() - TILE_ZOOM;
+		int mult = (int) Math.pow(2.0, dzoom);
+		QuadRect tileBounds = tileBox.getTileBounds();
+		double px, py, tx, ty;
+		float x, y;
+		float lx = -1000f;
+		float ly = -1000f;
+		float pw = point.getWidth();
+		float ph = point.getHeight();
+		float pwd = pw / 2;
+		float phd = ph / 2;
+		float pwm = pw * 2;
+		float phm = ph * 2;
+		canvas.rotate(-tileBox.getRotate(), tileBox.getCenterPixelX(), tileBox.getCenterPixelY());
+		for (List<Point> points : seqMap.values()) {
+			for (int i = 0; i < points.size(); i++) {
+				Point p = points.get(i);
+				px = p.getCoordinate().x / EXTENT;
+				py = p.getCoordinate().y / EXTENT;
+				tx = (tileX + px) * mult;
+				ty = (tileY + py) * mult;
+				if (tileBounds.contains(tx, ty, tx, ty)) {
+					x = tileBox.getPixXFromTile(tileX + px, tileY + py, TILE_ZOOM);
+					y = tileBox.getPixYFromTile(tileX + px, tileY + py, TILE_ZOOM);
+					//QuadRect rNow = calculateRect(x, y, pwm, phm);
+					//QuadRect rLast = calculateRect(lx, ly, pw, ph);
+					//if (!QuadRect.intersects(rLast, rNow) || i == points.size() - 1) {
+						canvas.drawBitmap(point, x - pwd, y - phd, paintPoint);
+						visiblePoints.put(new QuadPointDouble(tileX + px,  tileY + py), (Map) p.getUserData());
+						lx = x;
+						ly = y;
+					//}
+				}
+			}
+		}
+		canvas.rotate(tileBox.getRotate(), tileBox.getCenterPixelX(), tileBox.getCenterPixelY());
+	}
+
+	protected void drawLines(Canvas canvas, RotatedTileBox tileBox, int tileX, int tileY, GeometryTile tile) {
+		for (Geometry g : tile.getData()) {
+			if (g instanceof LineString && !g.isEmpty()) {
+				LineString l = (LineString) g;
+				if (l.getCoordinateSequence() != null && !l.isEmpty()) {
+					draw(l.getCoordinateSequence(), canvas, tileBox, tileX, tileY);
+				}
+			}
+		}
+	}
+
+	protected void draw(CoordinateSequence points, Canvas canvas, RotatedTileBox tileBox, int tileX, int tileY) {
+		if (points.size() > 1) {
+			int dzoom = tileBox.getZoom() - TILE_ZOOM;
+			int mult = (int) Math.pow(2.0, dzoom);
+			QuadRect tileBounds = tileBox.getTileBounds();
+
+			canvas.rotate(-tileBox.getRotate(), tileBox.getCenterPixelX(), tileBox.getCenterPixelY());
+			Coordinate lastPt = points.getCoordinate(0);
+			float x;
+			float y;
+			float lastx = 0;
+			float lasty = 0;
+			double px, py, tpx, tpy, tlx, tly;
+			double lx = lastPt.x / EXTENT;
+			double ly = lastPt.y / EXTENT;
+			boolean reCalculateLastXY = true;
+
+			int size = points.size();
+			for (int i = 1; i < size; i++) {
+				Coordinate pt = points.getCoordinate(i);
+				px = pt.x / EXTENT;
+				py = pt.y / EXTENT;
+				tpx = (tileX + px) * mult;
+				tpy = (tileY + py) * mult;
+				tlx = (tileX + lx) * mult;
+				tly = (tileY + ly) * mult;
+
+				if (tileBounds.contains(tpx, tpy, tpx, tpy) || tileBounds.contains(tlx, tly, tlx, tly)) {
+					if (reCalculateLastXY) {
+						lastx = tileBox.getPixXFromTile(tileX + lx, tileY + ly, TILE_ZOOM);
+						lasty = tileBox.getPixYFromTile(tileX + lx, tileY + ly, TILE_ZOOM);
+						reCalculateLastXY = false;
+					}
+
+					x = tileBox.getPixXFromTile(tileX + px, tileY + py, TILE_ZOOM);
+					y = tileBox.getPixYFromTile(tileX + px, tileY + py, TILE_ZOOM);
+
+					canvas.drawLine(lastx, lasty, x, y, paintLine);
+
+					lastx = x;
+					lasty = y;
+				} else {
+					reCalculateLastXY = true;
+				}
+				lx = px;
+				ly = py;
+			}
+			canvas.rotate(tileBox.getRotate(), tileBox.getCenterPixelX(), tileBox.getCenterPixelY());
+		}
+	}
+
+	@Override
+	public PointDescription getObjectName(Object o) {
+		if (o instanceof MapillaryImage) {
+			return new PointDescription(PointDescription.POINT_TYPE_MAPILLARY_IMAGE, view.getContext().getString(R.string.mapillary_image));
+		}
+		return null;
+	}
+
+	@Override
+	public boolean disableSingleTap() {
+		return false;
+	}
+
+	@Override
+	public boolean disableLongPressOnMap() {
+		return false;
+	}
+
+	@Override
+	public void collectObjectsFromPoint(PointF point, RotatedTileBox tileBox, List<Object> objects) {
+		if (map != null && tileBox.getZoom() >= map.getMinimumZoomSupported()) {
+			getImagesFromPoint(tileBox, point, objects);
+		}
+	}
+
+	@Override
+	public LatLon getObjectLocation(Object o) {
+		if (o instanceof MapillaryImage) {
+			MapillaryImage image = (MapillaryImage) o;
+			return new LatLon(image.getLatitude(), image.getLongitude());
+		}
+		return null;
+	}
+
+	@Override
+	public boolean isObjectClickable(Object o) {
+		return o instanceof MapillaryImage;
+	}
+
+	private void getImagesFromPoint(RotatedTileBox tb, PointF point, List<? super MapillaryImage> images) {
+		Map<QuadPointDouble, Map> points = this.visiblePoints;
+		if (points != null) {
+			int ex = (int) point.x;
+			int ey = (int) point.y;
+			final int rp = getRadius(tb);
+			int radius = rp * 3 / 2;
+			float x, y;
+			for (Entry<QuadPointDouble, Map> entry : points.entrySet()) {
+				x = tb.getPixXFromTile(entry.getKey().x, entry.getKey().y, TILE_ZOOM);
+				y = tb.getPixYFromTile(entry.getKey().x, entry.getKey().y, TILE_ZOOM);
+				if (Math.abs(x - ex) <= radius && Math.abs(y - ey) <= radius) {
+					MapillaryImage img = new MapillaryImage(MapUtils.getLatitudeFromTile(TILE_ZOOM, entry.getKey().y),
+							MapUtils.getLongitudeFromTile(TILE_ZOOM, entry.getKey().x));
+					if (img.setData(entry.getValue())) {
+						images.add(img);
 					}
 				}
 			}
 		}
 	}
 
-	private void drawPoints(Canvas canvas, RotatedTileBox tileBox, int tileX, int tileY, GeometryTile tile) {
-		for (Geometry g : tile.getData()) {
-			if (g instanceof Point && g.getCoordinate() != null) {
-				int x = (int) g.getCoordinate().x;
-				int y = (int) g.getCoordinate().y;
-				double lat = MapUtils.getLatitudeFromTile(TILE_ZOOM, tileY + y / 4096f);
-				double lon = MapUtils.getLongitudeFromTile(TILE_ZOOM, tileX + x / 4096f);
-				if (tileBox.containsLatLon(lat, lon)) {
-					float px = tileBox.getPixXFromLatLon(lat, lon);
-					float py = tileBox.getPixYFromLatLon(lat, lon);
-					canvas.drawBitmap(point, px - point.getWidth() / 2, py - point.getHeight() / 2, paintIcon);
-				}
-			}
+	public int getRadius(RotatedTileBox tb) {
+		int r;
+		final double zoom = tb.getZoom();
+		if (zoom < TILE_ZOOM) {
+			r = 0;
+		} else if (zoom <= 15) {
+			r = 10;
+		} else if (zoom <= 16) {
+			r = 14;
+		} else if (zoom <= 17) {
+			r = 16;
+		} else {
+			r = 18;
 		}
+		return (int) (r * view.getScaleCoefficient());
 	}
 }

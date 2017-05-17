@@ -28,8 +28,8 @@ class MapillaryRasterLayer extends MapTileLayer implements MapillaryLayer {
 	public void initLayer(OsmandMapTileView view) {
 		super.initLayer(view);
 		paintIcon = new Paint();
-		selectedImage = BitmapFactory.decodeResource(view.getResources(), R.drawable.map_default_location);
-		headingImage = BitmapFactory.decodeResource(view.getResources(), R.drawable.map_pedestrian_location_view_angle);
+		selectedImage = BitmapFactory.decodeResource(view.getResources(), R.drawable.map_mapillary_location);
+		headingImage = BitmapFactory.decodeResource(view.getResources(), R.drawable.map_mapillary_location_view_angle);
 	}
 
 	@Override
