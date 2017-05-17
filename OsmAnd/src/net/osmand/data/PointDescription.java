@@ -44,6 +44,7 @@ public class PointDescription {
 	public static final String POINT_TYPE_BLOCKED_ROAD = "blocked_road";
 	public static final String POINT_TYPE_TRANSPORT_ROUTE = "transport_route";
 	public static final String POINT_TYPE_TRANSPORT_STOP = "transport_stop";
+	public static final String POINT_TYPE_MAPILLARY_IMAGE = "mapillary_image";
 
 
 	public static final PointDescription LOCATION_POINT = new PointDescription(POINT_TYPE_LOCATION, "");

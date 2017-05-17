@@ -1407,7 +1407,11 @@ public class OsmandSettings {
 			}
 		}
 		for (TileSourceTemplate l : TileSourceManager.getKnownSourceTemplates()) {
-			map.put(l.getName(), l.getName());
+			if (!l.isHidden()) {
+				map.put(l.getName(), l.getName());
+			} else {
+				map.remove(l.getName());
+			}
 		}
 		return map;
 

@@ -41,13 +41,15 @@ public class TileSourceManager {
 	private static final TileSourceTemplate CYCLE_MAP_SOURCE =
 			new TileSourceTemplate("CycleMap", "http://b.tile.opencyclemap.org/cycle/{0}/{1}/{2}.png", ".png", 16, 1, 256, 32, 18000);  //$NON-NLS-1$//$NON-NLS-2$ //$NON-NLS-3$
 	private static final TileSourceTemplate MAPILLARY_RASTER_SOURCE =
-			new TileSourceTemplate("Mapillary (raster tiles)", "https://d6a1v2w10ny40.cloudfront.net/v0.1/{0}/{1}/{2}.png", ".png", 14, 0, 256, 16, 32000);
+			new TileSourceTemplate("Mapillary (raster tiles)", "https://d6a1v2w10ny40.cloudfront.net/v0.1/{0}/{1}/{2}.png", ".png", 13, 0, 256, 16, 32000);
 	private static final TileSourceTemplate MAPILLARY_VECTOR_SOURCE =
-			new TileSourceTemplate("Mapillary (vector tiles)", "https://d25uarhxywzl1j.cloudfront.net/v0.1/{0}/{1}/{2}.mvt", ".mvt", 21, 15, 256, 16, 3200);
+			new TileSourceTemplate("Mapillary (vector tiles)", "https://d25uarhxywzl1j.cloudfront.net/v0.1/{0}/{1}/{2}.mvt", ".mvt", 21, 14, 256, 16, 3200);
 
 	static {
 		MAPILLARY_RASTER_SOURCE.setExpirationTimeMinutes(60 * 24);
+		MAPILLARY_RASTER_SOURCE.setHidden(true);
 		MAPILLARY_VECTOR_SOURCE.setExpirationTimeMinutes(60 * 24);
+		MAPILLARY_VECTOR_SOURCE.setHidden(true);
 	}
 
 	public static class TileSourceTemplate implements ITileSource, Cloneable {
@@ -63,7 +65,8 @@ public class TileSourceManager {
 		private int expirationTimeMillis = -1;
 		private boolean ellipticYTile;
 		private String rule;
-		
+		private boolean hidden; // if hidden in configure map settings, for example mapillary sources
+
 		private boolean isRuleAcceptable = true;
 
 		public TileSourceTemplate(String name, String urlToLoad, String ext, int maxZoom, int minZoom, int tileSize, int bitDensity,
@@ -93,8 +96,15 @@ public class TileSourceManager {
 		public void setMaxZoom(int maxZoom) {
 			this.maxZoom = maxZoom;
 		}
-		
-		
+
+		public boolean isHidden() {
+			return hidden;
+		}
+
+		public void setHidden(boolean hidden) {
+			this.hidden = hidden;
+		}
+
 		public void setName(String name) {
 			this.name = name;
 		}
@@ -430,7 +440,6 @@ public class TileSourceManager {
 		list.add(getMapillaryRasterSource());
 		list.add(getMapillaryVectorSource());
 		return list;
-
 	}
 
 	public static TileSourceTemplate getMapnikSource(){
