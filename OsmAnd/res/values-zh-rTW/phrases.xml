@@ -2972,4 +2972,16 @@
 	<string name="poi_counselling_type_couple_no">諮商（伴侶）：無</string>
 	<string name="poi_counselling_type_crisis_yes">諮商（危險期）︰有</string>
 	<string name="poi_counselling_type_crisis_no">諮商（危險期）︰無</string>
+	<string name="poi_counselling_type_drugs_yes">諮商（藥物）︰有</string>
+	<string name="poi_counselling_type_drugs_no">諮商（藥物）︰無</string>
+	<string name="poi_counselling_type_education_yes">諮商（教育）︰有</string>
+	<string name="poi_counselling_type_education_no">諮商（教育）︰無</string>
+	<string name="poi_counselling_type_family_yes">諮商（家庭）︰有</string>
+	<string name="poi_counselling_type_family_no">諮商（家庭）︰無</string>
+	<string name="poi_counselling_type_homeless_yes">諮商（無家可歸者）︰有</string>
+	<string name="poi_counselling_type_homeless_no">諮商（無家可歸者）︰無</string>
+	<string name="poi_counselling_type_immigrant_yes">諮商（移民）︰有</string>
+	<string name="poi_counselling_type_immigrant_no">諮商（移民）︰無</string>
+	<string name="poi_counselling_type_marriage_yes">諮商（婚姻）︰有</string>
+	<string name="poi_counselling_type_marriage_no">諮商（婚姻）︰無</string>
 	</resources>
