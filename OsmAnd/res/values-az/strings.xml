@@ -1092,4 +1092,10 @@ Seçimlər üçün basıb saxlayın</string>
     <string name="direction_style_sidewise">Yan-yana (8 sektor)</string>
     <string name="direction_style_clockwise">Saat istiqamətində (12 sektor)</string>
     <string name="settings_direction_style">İstiqamət stili</string>
+    <string name="settings_direction_style_descr">Hərəkət zamanı nisbi istiqamətləri ifadə etmək üçün stil seçin</string>
+    <string name="accessibility_preferences_descr"/>
+    <string name="rendering_out_of_memory">Seçilən sahəni göstərmək üçün kifayət qədər proses yaddaşı yoxdur</string>
+    <string name="free_version_message">Bu pulsuz OsmAnd versiyası %1$s endirmə ilə məhdudlaşır və offlayn Vikipediya məqalələrini dəstəkləmir.</string>
+    <string name="index_name_other">Ümumdünya və mövzu xəritələri</string>
+    <string name="index_name_wiki">Ümumdünya Vikipediya POI-ləri</string>
     </resources>
