@@ -3006,4 +3006,5 @@ Fonctionnalités principales :
     <string name="mapillary_widget_descr">Vous permet de contribuer facilement à Mapillary</string>
     <string name="mapillary_descr">Des photos en-ligne détaillées pour tous. Découvrez des lieux, collaborez ... capturez le monde.</string>
     <string name="plugin_mapillary_descr">Des photos détaillées pour tous. Découvrez des lieux, collaborez ... capturez le monde.</string>
+    <string name="mapillary_image">Image Mapillary</string>
     </resources>
