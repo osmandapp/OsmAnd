@@ -1071,4 +1071,25 @@ Seçimlər üçün basıb saxlayın</string>
     <string name="west_south_west">qərb-cənub-qərb</string>
     <string name="west_north_west">qərb-şimal-qərb</string>
     <string name="front">irəli</string>
+    <string name="modify_transparency">Şəffaflığı dəyişdir (0 - şəffaf, 255 - qeyri-şəffaf)</string>
+    <string name="gpx_visibility_txt">Görünüş</string>
+    <string name="support_new_features">Yeni xüsusiyyətləri dəstəklə</string>
+    <string name="back_to_location">Mövqeyə qayıt</string>
+    <string name="oclock">saat</string>
+    <string name="arrival_distance_factor_at_last">Son metrlərdə</string>
+    <string name="back">geri</string>
+    <string name="front_right">sağ-irəli</string>
+    <string name="right">sağa</string>
+    <string name="back_right">sağ-geri</string>
+    <string name="back_left">sol-geri</string>
+    <string name="left">sola</string>
+    <string name="front_left">sol-irəli</string>
+    <string name="altitude">Yüksəklik</string>
+    <string name="altitude_range">Yüksəklik diapazonu</string>
+    <string name="average_altitude">Ortalama yüksəklik</string>
+    <string name="index_item_world_altitude_correction">Dünya yüksəklik düzəlişi</string>
+    <string name="map_widget_altitude">Yüksəklik</string>
+    <string name="direction_style_sidewise">Yan-yana (8 sektor)</string>
+    <string name="direction_style_clockwise">Saat istiqamətində (12 sektor)</string>
+    <string name="settings_direction_style">İstiqamət stili</string>
     </resources>
