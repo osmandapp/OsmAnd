@@ -252,6 +252,17 @@ public class MapillaryImageDialog extends ContextMenuCardDialog {
 		return dialog;
 	}
 
+	public static MapillaryImageDialog show(MapActivity mapActivity, double latitude, double longitude,
+											String key, double ca, String title, String description) {
+		String imageUrl = MAPILLARY_HIRES_IMAGE_URL_TEMPLATE + key;
+		String viewerUrl = MAPILLARY_VIEWER_URL_TEMPLATE + key;
+		LatLon latLon = new LatLon(latitude, longitude);
+		MapillaryImageDialog dialog = new MapillaryImageDialog(mapActivity, key, imageUrl, viewerUrl,
+				latLon, ca, title, description);
+		ContextMenuCardDialogFragment.showInstance(dialog);
+		return dialog;
+	}
+
 	private class DownloadImageTask extends AsyncTask<Void, Void, Bitmap> {
 
 		private ProgressBar progressBar;
