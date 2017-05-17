@@ -964,7 +964,7 @@ Os mapas en teselas pódense obter directamente a través de recursos na rede ou
 	<string name="index_name_us">Norteamérica - Estados Unidos</string>
 	<string name="index_name_central_america">América Central</string>
 	<string name="index_name_south_america">Sudamérica</string>
-	<string name="index_name_europe">Europ</string>
+	<string name="index_name_europe">Europa</string>
 	<string name="index_name_france">Europa - Francia</string>
 	<string name="index_name_germany">Europa - Alemaña</string>
 	<string name="index_name_russia">Rusia</string>
@@ -1757,7 +1757,7 @@ Os mapas en teselas pódense obter directamente a través de recursos na rede ou
 	<string name="shared_string_search">Buscar</string>
 	<string name="shared_string_show_description">Mostrar a descrición</string>
 	<string name="shared_string_message">Mensaxe</string>
-	<string name="confirm_usage_speed_cameras">En moitos países (Alemaña, Franza, Italia e outros) a lei non permite o uso de avisos de radares de velocidade. O OsmAnd non asume ningunha responsabilidade se vostede viola a lei. Prema si se ten dereito a empregar esta funcionalidade.</string>
+	<string name="confirm_usage_speed_cameras">En moitos países (Alemaña, Francia, Italia e outros) a lei non permite o uso de avisos de radares de velocidade. OsmAnd non asume ningunha responsabilidade se vostede viola a lei. Prema en «Si», se ten dereito a empregar esta funcionalidade.</string>
 	<string name="welmode_download_maps">Descargar mapas</string>
 	<string name="welcome_select_region">Para reflectir de maneira correcta os seus sinais de tráfico e as normas, indique a rexión pola que conduce:</string>
 	<string name="welcome_text">OsmAnd fornece mapas globais sen conexión e navegación global sen conexión!</string>
@@ -2505,4 +2505,11 @@ Pódese pechar esta vista desactivándoa aquí ou cambiando o «Estilo de mapa»
     <string name="favorite_category_add_new">Engadir novo</string>
     <string name="lang_ber">Bérber</string>
     <string name="lang_kn">Kannada</string>
+    <string name="shared_string_install">Instalar</string>
+    <string name="improve_coverage_mapillary">Mellorar a cobertura con Mapillary</string>
+    <string name="open_mapillary">Abrir Mapillary</string>
+    <string name="improve_coverage_install_mapillary_desc">Podes facer as túas propias fotos ou serie de fotos e engadilas a esta localización do mapa.
+\n
+\nPara facer isto, tes que instalar a aplicación Mapillary dende Google Play.</string>
+    <string name="online_photos">Fotos en liña</string>
     </resources>
