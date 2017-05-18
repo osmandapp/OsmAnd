@@ -4,6 +4,7 @@ package net.osmand.plus;
 import java.io.UnsupportedEncodingException;
 import java.net.URLEncoder;
 import android.content.pm.PackageInfo;
+import 	android.content.pm.PackageManager;
 
 public class Version {
 	
