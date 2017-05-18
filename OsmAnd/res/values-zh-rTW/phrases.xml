@@ -2984,4 +2984,17 @@
 	<string name="poi_counselling_type_immigrant_no">諮商（移民）︰無</string>
 	<string name="poi_counselling_type_marriage_yes">諮商（婚姻）︰有</string>
 	<string name="poi_counselling_type_marriage_no">諮商（婚姻）︰無</string>
+	<string name="poi_counselling_type_nutrition_yes">諮商（營養學）︰有</string>
+	<string name="poi_counselling_type_nutrition_nfire_hydo">諮商（營養學）︰無</string>
+	<string name="poi_counselling_type_rehabilitation_yes">諮商（復健）︰有</string>
+	<string name="poi_counselling_type_rehabilitation_no">諮商（復健）︰無</string>
+	<string name="poi_counselling_type_sexual_yes">諮商（性關係）︰有</string>
+	<string name="poi_counselling_type_sexual_no">諮商（性關係）︰無</string>
+	<string name="poi_counselling_type_sexual_abuse_yes">諮商（性虐待）︰有</string>
+	<string name="poi_counselling_type_sexual_abuse_no">諮商（性虐待）︰無</string>
+	<string name="poi_counselling_type_victim_yes">諮商（受害者）︰有</string>
+	<string name="poi_counselling_type_victim_no">諮商（受害者）︰無</string>
+	<string name="poi_counselling_type_violence_yes">諮商（暴力）︰有</string>
+	<string name="poi_counselling_type_violence_no">諮商（暴力）︰無</string>
+
 	</resources>
