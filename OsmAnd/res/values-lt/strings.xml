@@ -2729,7 +2729,7 @@ Tai yra puikus būdas paremti OsmAnd ir OSM, jei jie jums patinka.</string>
     <string name="navigate_point_olc_info_short">Trumpas OLC
 \nPrašome pateikti visą kodą</string>
     <string name="navigate_point_olc_info_area">Galiojantis visas OLC
-\nPadengiamas plotas: %1$ s x %2$ s</string>
+\nPadengiamas plotas: %1$s x %2$s</string>
     <string name="route_is_too_long_v2">Šis maršrutas gali būti per ilgas apskaičiuoti. Prašome pridėti tarpiniius taškus, jei nepavyko apskaičiuoti per 10 minučių.</string>
     <string name="save_poi_too_many_uppercase">Pavadinime yra per daug didžiųjų raidžių. Ar norite tęsti?</string>
     <string name="configure_screen_quick_action">Spartusis veiksmas</string>
