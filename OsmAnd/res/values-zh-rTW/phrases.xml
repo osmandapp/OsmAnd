@@ -2997,4 +2997,28 @@
 	<string name="poi_counselling_type_violence_yes">諮商（暴力）︰有</string>
 	<string name="poi_counselling_type_violence_no">諮商（暴力）︰無</string>
 
+	<string name="poi_provided_for_infant_yes">服務嬰兒：有</string>
+	<string name="poi_provided_for_infant_no">服務嬰兒：無</string>
+	<string name="poi_provided_for_toddler_yes">服務幼兒：有</string>
+	<string name="poi_provided_for_toddler_no">服務幼兒：無</string>
+	<string name="poi_provided_for_child_yes">服務小孩：有</string>
+	<string name="poi_provided_for_child_no">服務小孩：無</string>
+	<string name="poi_provided_for_adult_yes">服務成人：有</string>
+	<string name="poi_provided_for_adult_no">服務成人：無</string>
+	<string name="poi_provided_for_woman_yes">服務女人：有</string>
+	<string name="poi_provided_for_woman_no">服務女人：無</string>
+	<string name="poi_provided_for_senior_yes">服務老人：有</string>
+	<string name="poi_provided_for_senior_no">服務老人：無</string>
+	<string name="poi_provided_for_girl_yes">服務女孩：有</string>
+	<string name="poi_provided_for_girl_no">服務女孩：無</string>
+	<string name="poi_provided_for_man_yes">服務男人：有</string>
+	<string name="poi_provided_for_man_no">服務男人：無</string>
+	<string name="poi_provided_for_boy_yes">服務男孩：有</string>
+	<string name="poi_provided_for_boy_no">服務男孩：無</string>
+
+	<string name="poi_capacity_beds">容量 (床)</string>
+
+	<string name="poi_treat_inpatient_yes">住院護理：有</string>
+	<string name="poi_treat_inpatient_no">住院護理：無</string>
+	<string name="poi_treat_inpatient_only">住院護理：只有</string>
 	</resources>
