@@ -2003,4 +2003,40 @@
 	<string name="poi_power_generator">Aflgjafi</string>
 	<string name="poi_club_motorcycle">Mótorhjólaklúbbur</string>
 	<string name="poi_motorcycle_repair">Mótorhjólaviðgerðir</string>
+	<string name="poi_free_flying">Verslun með vörur fyrir frjálst flug</string>
+<string name="poi_window_blind">Rimlagluggatjöld</string>
+	<string name="poi_grit_bin">Sandkista</string>
+	<string name="poi_emergency_access_point">Neyðaraðgangur</string>
+
+	<string name="poi_works">Verksmiðja</string>
+	<string name="poi_cricket_nets">Krikket-æfingavöllur</string>
+	<string name="poi_bunker_silo">Gryfjusíló</string>
+	<string name="poi_social_facility">Félagsþjónusta</string>
+	<string name="poi_government">Stjórnsýsla</string>
+	<string name="poi_bailiff">Fógeti</string>
+	<string name="poi_tax_inspection">Skattaeftirlit</string>
+	<string name="poi_healthcare_centre">Læknamiðstöð</string>
+	<string name="poi_physiotherapist">Sjúkraþjálfari</string>
+	<string name="poi_podiatrist">Fótaaðgerðafræðingur</string>
+	<string name="poi_psychotherapist">Sálmeðferðarfræðingur</string>
+	<string name="poi_healthcare_rehabilitation">Endurhæfing</string>
+	<string name="poi_healthcare_yes">Lækningamiðstöð</string>
+	<string name="poi_paediatrics">Barnalæknir</string>
+
+	<string name="poi_ngo">Borgarasamtök (NGO)</string>
+	<string name="poi_townhall">Ráðhús</string>
+	<string name="poi_employment_agency">Atvinnumiðlun</string>
+	<string name="poi_architect">Arkítektastofa</string>
+	<string name="poi_educational_institution">Menntastofnun</string>
+	<string name="poi_pitch">Völlur</string>
+	<string name="poi_leisure_track">Hlaupabraut</string>
+	<string name="poi_bicycle_track">Hjólreiðabraut</string>
+	<string name="poi_raceway">Keppnisbraut</string>
+	<string name="poi_9pin">Níu-pinna keila</string>
+	<string name="poi_10pin">Tíu-pinna keila</string>
+	<string name="poi_athletics">Frjálsíþróttir</string>
+	<string name="poi_american_football">Amerískur ruðningsbolti</string>
+	<string name="poi_australian_football">Ástralskur fótbolti</string>
+	<string name="poi_equestrian">Hestaíþróttir</string>
+	<string name="poi_ice_skating">Skautar á ís</string>
 	</resources>
