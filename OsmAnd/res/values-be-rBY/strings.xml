@@ -2729,4 +2729,12 @@ Moduli:
     <string name="mapillary_descr">Vuličnyja-Fota anlajn dla ŭsich. Adkryvajcie dla siabie miescy, dapamahajcie, zdymajcie śviet.</string>
     <string name="plugin_mapillary_descr">Vuličnyja Fota dla Ŭsich. Adkryvajcie dla siabie miescy, dapamahajcie, zdymajcie śviet.</string>
     <string name="mapillary_image">Vyjava Mapillary</string>
+    <string name="mapillary_widget_descr">Dazvalaje chutka ŭniesci svoj układ u Mapillary</string>
+    <string name="relief_smoothness_factor_descr">Pieravažny reljef: raŭninny abo ŭzhorysty</string>
+    <string name="routing_attr_height_obstacles_description">Vykaryctoŭvać dadzienyja ab reljefu miascovaści, jakija pradstaŭlajucca SRTM, ASTER i EU-DEM</string>
+    <string name="rendering_attr_depthContours_description">Pakazvać kontury i punkty hlybini</string>
+    <string name="rendering_attr_contourDensity_description">Ščylnasć haryzantalaŭ</string>
+    <string name="rendering_attr_contourWidth_description">Šyrynia haryzantalaŭ</string>
+    <string name="rendering_attr_hideWaterPolygons_description">Vadu</string>
+    <string name="rendering_attr_contourColorScheme_description">Koleravaja schema haryzantalaŭ</string>
     </resources>
