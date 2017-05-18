@@ -2,8 +2,8 @@
 <manifest xmlns:android="http://schemas.android.com/apk/res/android"
 	xmlns:tools="http://schemas.android.com/tools"
 	android:installLocation="auto"
-	android:versionName="@string/app_version"
-	android:versionCode="240"
+	android:versionName="2.7.0"
+	android:versionCode="270"
 	package="net.osmand.plus">
 
 	<uses-permission android:name="android.permission.ACCESS_COARSE_LOCATION" />
