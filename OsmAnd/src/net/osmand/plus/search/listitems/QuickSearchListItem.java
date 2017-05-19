@@ -379,11 +379,14 @@ public class QuickSearchListItem {
 						iconId = app.getResources().getIdentifier(iconName, "drawable", app.getPackageName());
 					}
 				}
-				if (iconId <= 1) {
-					return app.getIconsCache().getIcon(SearchHistoryFragment.getItemIcon(entry.getName()),
-							app.getSettings().isLightContent() ? R.color.osmand_orange : R.color.osmand_orange_dark);
-				} else {
+				if (iconId <= 0) {
+					iconId = SearchHistoryFragment.getItemIcon(entry.getName());
+				}
+				try {
 					return app.getIconsCache().getIcon(iconId,
+							app.getSettings().isLightContent() ? R.color.osmand_orange : R.color.osmand_orange_dark);
+				} catch (Exception e) {
+					return app.getIconsCache().getIcon(SearchHistoryFragment.getItemIcon(entry.getName()),
 							app.getSettings().isLightContent() ? R.color.osmand_orange : R.color.osmand_orange_dark);
 				}
 			case WPT:
