@@ -108,7 +108,9 @@ public class MapMultiSelectionMenuFragment extends Fragment implements AdapterVi
 		if (mapActivity.isActivityDestroyed()) {
 			return;
 		}
-		mapActivity.getContextMenu().hideMenues();
+		if (mapActivity.getContextMenu().isVisible()) {
+			mapActivity.getContextMenu().hide();
+		}
 
 		MapMultiSelectionMenu menu = mapActivity.getContextMenu().getMultiSelectionMenu();
 
