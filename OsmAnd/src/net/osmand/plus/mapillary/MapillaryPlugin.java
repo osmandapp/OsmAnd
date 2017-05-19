@@ -103,8 +103,8 @@ public class MapillaryPlugin extends OsmandPlugin {
 				rasterSource = settings.getTileSourceByName(TileSourceManager.getMapillaryRasterSource().getName(), false);
 				vectorSource = settings.getTileSourceByName(TileSourceManager.getMapillaryVectorSource().getName(), false);
 			}
-			updateLayer(mapView, rasterSource, rasterLayer, 0.6f);
-			updateLayer(mapView, vectorSource, vectorLayer, 0.61f);
+			updateLayer(mapView, rasterSource, rasterLayer, 0.61f);
+			updateLayer(mapView, vectorSource, vectorLayer, 0.62f);
 		} else {
 			mapView.removeLayer(rasterLayer);
 			rasterLayer.setMap(null);
