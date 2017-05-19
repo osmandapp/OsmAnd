@@ -1207,4 +1207,11 @@ Seçimlər üçün basıb saxlayın</string>
     <string name="poi_error_io_error_template">{0}mə əməliyyatı zamanı I/O səhvi baş verdi.</string>
     <string name="poi_dialog_comment_default">POI dəyişdirmə</string>
     <string name="poi_dialog_other_tags_message">Bütün digər işarələr saxlanılır</string>
+    <string name="routing_settings">Naviqasiya</string>
+    <string name="routing_settings_descr">Naviqasiya üçün seçimlər təyin edin</string>
+    <string name="global_settings">Ümumi parametrlər</string>
+    <string name="osmand_service_descr">Ekran sönülü olduqda OsmAnd arxa fonda işləyir</string>
+    <string name="download_files_not_enough_space">%1$s MB endirmək üçün kifayət qədər yaddaş yoxdur (boş: %2$s).</string>
+    <string name="keep_informing_never">Yalnız əl ilə (oxa toxun)</string>
+    <string name="city_type_hamlet">Kənd</string>
     </resources>
