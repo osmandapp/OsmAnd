@@ -2953,20 +2953,32 @@ Kérlek adj meg egy teljes kódot</string>
     <string name="nothing_found">Nincs találat :(</string>
     <string name="nothing_found_descr">Próbálkozz a keresőkifejezés módosításával vagy a keresett terület szélesítésével</string>
     <string name="mapillary">Mapillary</string>
-    <string name="shared_string_add_photos">Fotók hozzáadása</string>
+    <string name="shared_string_add_photos">Fényképek hozzáadása</string>
     <string name="no_photos_descr">Itt nincsenek fényképeink</string>
-    <string name="mapillary_action_descr">Add hozzá a saját fotódat a hely utcanézetéről a Mapillary-n keresztül!</string>
+    <string name="mapillary_action_descr">Add hozzá a saját fényképedet a hely utcanézetéről a Mapillaryvel!</string>
     <string name="mapillary_widget">Mapillary vezérlőgomb</string>
-    <string name="mapillary_widget_descr">Segítségével gyorsan hozzá tudsz járulni a Mapillary-hez</string>
+    <string name="mapillary_widget_descr">Segítségével gyorsan hozzájárulhatsz a Mapillaryhez</string>
     <string name="mapillary_descr">Online utcaképek mindenkinek. Fedezz fel helyeket, vegyél benne részt, fotózd le a világot.</string>
     <string name="plugin_mapillary_descr">Utcaképek mindenkinek. Fedezz fel helyeket, vegyél benne részt, fotózd le a világot.</string>
     <string name="osmand_extended_description_part4">" Az OsmAnd sítérkép bővítménye lehetővé teszi a sípályák megjelenítését nehézség szerint, valamint további információkat, mint például a a felvonók helyét, és más berendezéseket. "</string>
-    <string name="online_photos">Online fotók</string>
-    <string name="improve_coverage_mapillary">Javítsd a lefedettséget a Mapillary-vel</string>
-    <string name="improve_coverage_install_mapillary_desc">Készíthetsz saját fotót, vagy fotósorozatot és hozzáadhatod a térképhez ezen a helyen. 
+    <string name="online_photos">Online fényképek</string>
+    <string name="improve_coverage_mapillary">Javítsd a lefedettséget a Mapillaryvel</string>
+    <string name="improve_coverage_install_mapillary_desc">Készíthetsz saját fényképet, vagy fényképsorozatot és hozzáadhatod a térképhez ezen a helyen. 
 \n 
 \nEhhez először telepítened kell a Mapillary alkalmazást a Google Play-ről.</string>
     <string name="shared_string_install">Telepítés</string>
     <string name="open_mapillary">Mapillary megnyitása</string>
     <string name="mapillary_image">Mapillary kép</string>
+    <string name="osmand_plus_extended_description_part8">" Hozzávetőleges lefedettség és térképminőség:
+\n • Nyugat-Európa: ****
+\n • Kelet-Euróa: ***
+\n • Oroszország: ***
+\n • Észak-Amerika: ***
+\n • Dél-Amerika: **
+\n • Ázsia: **
+\n • Japán és Korea: ***
+\n • Közel-Kelet: **
+\n • Afrika: **
+\n • Antarktisz: *
+\n A világ legtöbb országa letölthető. Afganisztántól Zimbabwéig, Ausztráliától az Egyesült Államokig. Magyarország, Szlovákia, Románia, Ausztria, Németország, Olaszország… "</string>
     </resources>
