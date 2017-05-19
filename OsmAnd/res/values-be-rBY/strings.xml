@@ -2737,4 +2737,13 @@ Moduli:
     <string name="rendering_attr_contourWidth_description">Šyrynia haryzantalaŭ</string>
     <string name="rendering_attr_hideWaterPolygons_description">Vadu</string>
     <string name="rendering_attr_contourColorScheme_description">Koleravaja schema haryzantalaŭ</string>
+    <string name="hillshade_menu_download_descr">Dlia taho, kab ubačyć zacianiennie reĺjefu, vam nieabchodna spampavać admyslovuju mapu dlia hetaha rehijona.</string>
+    <string name="hillshade_purchase_header">Dlia taho, kab ubačyć zacianiennie reĺjefu, vam nieabchodna nabyć i ŭstaliavać dadatak «Contour Lines»</string>
+    <string name="hide_from_zoom_level">Schavać ad uzroŭniu maštabavannia</string>
+    <string name="show_from_zoom_level">Pakazvać ad uzroŭniu maštabavannia</string>
+    <string name="animate_my_location_desc">Ukliučaje animacyju majoj pazicyi padčas navihacyi</string>
+    <string name="quick_action_auto_zoom_desc">Nacisk na knopku ŭkliučyć/adkliučyć aŭtamaštabavannie mapy ŭ zaliežnasci ad chutkasci.</string>
+    <string name="quick_action_add_destination_desc">Nacisk na knopku dadasć punkt pryznačennia pa centry ekrana. Papiaredni punkt pryznačennia stanie apošniaj pramiežkavaj kropkaj.</string>
+    <string name="quick_action_replace_destination_desc">Nacisk na knopku zamienić punkt pryznačennia pa centry ekrana.</string>
+    <string name="quick_action_add_first_intermediate_desc">Nacisk na knopku dadasć pieršuju pramiežkavuju kropku pa centry ekrana.</string>
     </resources>
