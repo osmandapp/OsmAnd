@@ -305,8 +305,7 @@ public class ResourceManager {
 	
 	public synchronized boolean tileExistOnFileSystem(String file, ITileSource map, int x, int y, int zoom) {
 		TilesCache cache = getTilesCache(map);
-		return cache != null && !cache.tilesOnFS.containsKey(file)
-				&& cache.tileExistOnFileSystem(file, map, x, y, zoom);
+		return cache != null && cache.tileExistOnFileSystem(file, map, x, y, zoom);
 	}
 	
 	public void clearTileForMap(String file, ITileSource map, int x, int y, int zoom){
