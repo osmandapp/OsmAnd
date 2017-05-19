@@ -922,7 +922,7 @@ POIの更新は利用できません</string>
 	<string name="route_updated_loc_found">現在位置が見つかるとルートを検索します</string>
 	<string name="osmand_parking_hours">時間</string>
 	<string name="osmand_parking_minutes">分</string>
-	<string name="osmand_parking_position_description_add_time">駐車時間</string>
+	<string name="osmand_parking_position_description_add_time">駐車時刻</string>
 	<string name="select_animate_speedup">ルートシミュレーションの速度を選択</string>
     	<string name="global_app_allocated_memory_descr">確保メモリ %1$s MB (Androidの制限値 %2$s MB, Dalvik %3$s MB).</string>
 	<string name="global_app_allocated_memory">割り当てメモリ</string>
@@ -932,10 +932,10 @@ POIの更新は利用できません</string>
 	
 	<string name="starting_point_too_far">出発地点が最寄りの道路から離れすぎています。</string>
 	<string name="shared_location">ロケーションの共有</string>
-	<string name="osmand_parking_event">駐車場から車を探す</string>
+	<string name="osmand_parking_event">駐車場へ車を取りに行く</string>
 	<string name="osmand_parking_warning">注意</string>
-	<string name="osmand_parking_warning_text">あなたが車の場所を探す予定をカレンダーアプリに追加した場合、カレンダーアプリの予定は手動で削除されるまで残ります。</string>    
-	<string name="osmand_parking_time_limit_title">駐車場の制限時間を設定する</string>
+	<string name="osmand_parking_warning_text">駐車場所に関する予定をカレンダーアプリに追加した場合、その予定は手動で削除されるまで残ります。</string>    
+	<string name="osmand_parking_time_limit_title">駐車時間を指定(例:2時間無料なら2:00)</string>
 	<string name="osmand_parking_delete_confirm">駐車位置マーカーを削除しますか？</string>
 	<string name="osmand_parking_delete">駐車マーカーを削除</string>
 	<string name="osmand_parking_choose_type">駐車場のタイプを選択</string>
@@ -945,7 +945,7 @@ POIの更新は利用できません</string>
 	<string name="osmand_parking_time_limit">時間制限ありの駐車場</string>
 	<string name="osmand_parking_time_no_limit">時間制限なしの駐車場</string>
 	<string name="osmand_parking_position_description">あなたの駐車位置:%1$s</string>
-	<string name="osmand_parking_position_description_add">車の場所を検索:</string>
+	<string name="osmand_parking_position_description_add">駐車時刻:</string>
 	<string name="osmand_parking_pm">午後</string>
 	<string name="osmand_parking_am">午前</string>
 	<string name="osmand_parking_position_name">駐車場</string>
@@ -1826,7 +1826,7 @@ OsmAnd+は最新の更新情報を受けとることが出来る、有料バー�
 	<string name="action_modify">アクションの変更</string>
 	<string name="action_delete">アクションの削除</string>
 	<string name="osm_edits">OSM の編集</string>
-	<string name="osmand_parking_hour">時間</string><string name="osmand_parking_minute">分</string><string name="osmand_parking_time_left">残り時間</string> <string name="parking_place_limited">駐車場の制限時間</string>
+	<string name="osmand_parking_hour">時間</string><string name="osmand_parking_minute">分</string><string name="osmand_parking_time_left">(残り時間)</string> <string name="parking_place_limited">駐車場の制限時間</string>
 	<string name="your_edits">あなたの編集</string>
     <string name="waypoint_visit_after">後で立ち寄る</string>
     <string name="waypoint_visit_before">先に立ち寄る</string>
@@ -2410,7 +2410,7 @@ OsmAndアプリについてのヘルプが必要な場合はサポートチー�
 購読収入の一部はOSMコミュニティに還元され、OSMに貢献した各ユーザーにも支払われます。
 OsmAndとOSMをサポートする方法として現状最適な方法であると思われます。</string>
     
-    <string name="no_address_found">未登録の住所</string>
+    <string name="no_address_found">登録住所外</string>
     <string name="number_of_contributors">貢献者数</string>
     <string name="number_of_edits">編集数</string>
     <string name="reports_for">表示レポート</string>
@@ -2736,8 +2736,8 @@ OsmAndとOSMをサポートする方法として現状最適な方法である�
     <string name="favorite_group_name">グループ名</string>
     <string name="change_color">色を変更</string>
     <string name="edit_name">名前の編集</string>
-    <string name="animate_my_location">現在地をアニメーションさせる</string>
-    <string name="animate_my_location_desc">現在地を見失った場合、現在地の修正が行われるまで位置を推定して表示させます</string>
+    <string name="animate_my_location">現在地を目立たせる</string>
+    <string name="animate_my_location_desc">ナビゲーション中も、現在地カーソルの周りを点滅させて目立たせます</string>
     <string name="shared_string_overview">概要</string>
     <string name="select_street">道路を選択</string>
     <string name="type_address">住所を入力</string>
