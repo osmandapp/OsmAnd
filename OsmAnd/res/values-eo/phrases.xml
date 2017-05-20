@@ -1117,20 +1117,20 @@
 	<string name="poi_disused">Neuzata</string>
 
 	<string name="poi_operator">Administranto</string>
-	<string name="poi_fee_yes">Jes</string>
-	<string name="poi_fee_no">Ne</string>
-	<string name="poi_drinking_water_yes">Jes</string>
-	<string name="poi_drinking_water_no">Ne</string>
+	<string name="poi_fee_yes">jes</string>
+	<string name="poi_fee_no">ne</string>
+	<string name="poi_drinking_water_yes">jes</string>
+	<string name="poi_drinking_water_no">ne</string>
 	<string name="poi_supervised_yes">Gardata</string>
 	<string name="poi_supervised_no">Ne-gardata</string>
-	<string name="poi_seasonal_yes">Jes</string>
-	<string name="poi_seasonal_no">Ne</string>
-	<string name="poi_seasonal_dry_season">Seka sezono</string>
-	<string name="poi_seasonal_wet_season">Pluva sezono</string>
-	<string name="poi_seasonal_spring">Printempo</string>
-	<string name="poi_seasonal_summer">Somero</string>
-	<string name="poi_seasonal_autumn">Aŭtuno</string>
-	<string name="poi_seasonal_winter">Vintro</string>
+	<string name="poi_seasonal_yes">jes</string>
+	<string name="poi_seasonal_no">ne</string>
+	<string name="poi_seasonal_dry_season">seka sezono</string>
+	<string name="poi_seasonal_wet_season">pluva sezono</string>
+	<string name="poi_seasonal_spring">printempo</string>
+	<string name="poi_seasonal_summer">somero</string>
+	<string name="poi_seasonal_autumn">aŭtuno</string>
+	<string name="poi_seasonal_winter">vintro</string>
 	<string name="poi_crossing_traffic_signals">Trafiklumoj</string>
 	<string name="poi_crossing_uncontrolled">Sen trafiklumoj</string>
 	<string name="poi_crossing_unmarked">Nemarkita</string>
@@ -1255,10 +1255,10 @@
 	<string name="poi_generator_source_oil">Energifonto: petrolo</string>
 	<string name="poi_generator_source_diesel">Energifonto: dizeloleo</string>
 
-	<string name="poi_pump_manual">Permana</string>
-	<string name="poi_pump_powered">Maŝina</string>
-	<string name="poi_pump_no">Sen pumpilo</string>
-	<string name="poi_pump_yes">Jes</string>
+	<string name="poi_pump_manual">permana</string>
+	<string name="poi_pump_powered">maŝina</string>
+	<string name="poi_pump_no">sen pumpilo</string>
+	<string name="poi_pump_yes">jes</string>
 
 	<string name="poi_water_characteristic_mineral">Minerala</string>
 	<string name="poi_water_characteristic_mud">Akvospeco: sediment-riĉa</string>
@@ -1290,8 +1290,8 @@
 	<string name="poi_board_type_astronomy">Astroscienco</string>
 
 	<string name="poi_commercial">Oficeja tereno</string>
-	<string name="poi_covered_yes">Jes</string>
-	<string name="poi_covered_no">Sen-tegmenta</string>
+	<string name="poi_covered_yes">jes</string>
+	<string name="poi_covered_no">sen-tegmenta</string>
 
 	<string name="poi_smoking_no">malpermesata</string>
 	<string name="poi_smoking_outside">permesata nur ekstere</string>
@@ -1303,11 +1303,11 @@
 	<string name="poi_toll_yes">Imposto</string>
 	<string name="poi_toll_no">Sen imposto</string>
 	<string name="poi_toll_hgv_yes">Imposto por kamionoj</string>
-	<string name="poi_tactile_paving_yes">Jes</string>
-	<string name="poi_tactile_paving_no">Sen reliefo por blinduloj</string>
-	<string name="poi_traffic_signals_sound_yes">Jes</string>
-	<string name="poi_traffic_signals_sound_no">Ne</string>
-	<string name="poi_traffic_signals_sound_walk">Tiam kiam irado permesata</string>
+	<string name="poi_tactile_paving_yes">jes</string>
+	<string name="poi_tactile_paving_no">sen reliefo por blinduloj</string>
+	<string name="poi_traffic_signals_sound_yes">jes</string>
+	<string name="poi_traffic_signals_sound_no">ne</string>
+	<string name="poi_traffic_signals_sound_walk">tiam, kiam irado permesata</string>
 
 	<string name="poi_leisure_common">Publika ripoza tereno</string>
 	<string name="poi_highway_steps">Ŝtuparo</string>
