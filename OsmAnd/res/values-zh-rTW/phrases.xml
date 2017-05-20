@@ -3021,4 +3021,26 @@
 	<string name="poi_treat_inpatient_yes">住院護理：有</string>
 	<string name="poi_treat_inpatient_no">住院護理：無</string>
 	<string name="poi_treat_inpatient_only">住院護理：只有</string>
+	<string name="poi_counselling_yes">諮商︰有</string>
+	<string name="poi_counselling_no">諮商︰無</string>
+	<string name="poi_emergency_yes">緊急情況︰有</string>
+	<string name="poi_emergency_no">緊急情況︰無</string>
+	<string name="poi_home_visit_yes">是的</string>
+	<string name="poi_home_visit_no">出診︰無</string>
+
+	<string name="poi_disease_malaria_yes">瘧疾︰有</string>
+	<string name="poi_disease_malaria_no">瘧疾︰無</string>
+	<string name="poi_disease_ebola_yes">伊波拉病毒︰有</string>
+	<string name="poi_disease_ebola_no">伊波拉病毒︰無</string>
+	<string name="poi_disease_autism_yes">自閉症︰有</string>
+	<string name="poi_disease_autism_no">自閉症︰無</string>
+	<string name="poi_disease_aids_yes">愛滋病︰有</string>
+	<string name="poi_disease_aids_no">愛滋病︰無</string>
+
+	<string name="poi_office_physician">醫師辦公室</string>
+	<string name="poi_office_therapist">治療辦公室</string>
+	<string name="poi_office_podologist">手足病辦公室</string>
+	<string name="poi_office_healer">治療辦公室</string>
+	<string name="poi_office_psychologist">心理學辦公室</string>
+	<string name="poi_office_nursing_service">護理服務</string>
 	</resources>
