@@ -1821,7 +1821,7 @@ OsmAnd+は最新の更新情報を受けとることが出来る、有料バー�
 	<string name="voices">音声指示</string>
 	<string name="shared_string_disabled">無効</string>
 	<string name="shared_string_enabled">有効</string>
-<string name="osmand_parking_overdue">期限切れ</string>
+<string name="osmand_parking_overdue">(超過時間)</string>
 	<string name="action_create">アクションの作成</string>
 	<string name="action_modify">アクションの変更</string>
 	<string name="action_delete">アクションの削除</string>
@@ -2969,4 +2969,19 @@ OsmAndとOSMをサポートする方法として現状最適な方法である�
  "</string>
     <string name="save_poi_too_many_uppercase">名前に大文字が多すぎます。 続行しますか？</string>
     <string name="shared_string_add_photos">写真を追加</string>
+    <string name="no_photos_descr">この近辺の写真はありません</string>
+    <string name="online_photos">近隣の写真(要オンライン)</string>
+    <string name="mapillary_descr">情報共有のためのストリート写真です(要オンライン)。新たな場所の発見に、協力しあい、この世界を写真で保存しましょう。</string>
+    <string name="improve_coverage_mapillary">Mapillaryの有効領域を広げましょう</string>
+    <string name="improve_coverage_install_mapillary_desc">自分自身の写真や、ストリートビューの様な連続写真をこの地点に追加することが出来ます。
+\n
+\nその為にはGoogle PlayからMapillaryというアプリのインストールが必要になります。</string>
+    <string name="open_mapillary">Mapillaryを開く</string>
+    <string name="mapillary">Mapillary</string>
+    <string name="mapillary_widget">Mapillaryウィジェット</string>
+    <string name="mapillary_image">Mapillary画像</string>
+    <string name="mapillary_action_descr">Mapillaryにて、この場所のストリートレベルビューに貢献します</string>
+    <string name="mapillary_widget_descr">Mapillaryへワンタッチ貢献を許可します</string>
+    <string name="plugin_mapillary_descr">皆で共有するストリートレベル写真です。新たな場所の発見に、協力しあい、この世界を写真で保存しましょう。</string>
+    <string name="shared_string_install">インストール</string>
     </resources>
