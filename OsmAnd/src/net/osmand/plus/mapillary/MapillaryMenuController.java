@@ -29,7 +29,7 @@ public class MapillaryMenuController extends MenuController {
 	public boolean setActive(boolean active) {
 		if (image != null && getMenuType() == MenuType.STANDARD) {
 			MapillaryImageDialog.show(getMapActivity(), image.getLatitude(), image.getLongitude(),
-					image.getKey(), image.getCa(), getMapActivity().getMyApplication().getString(R.string.mapillary), null);
+					image.getKey(), image.getSKey(), image.getCa(), getMapActivity().getMyApplication().getString(R.string.mapillary), null);
 			return false;
 		} else {
 			return super.setActive(active);
