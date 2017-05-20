@@ -2838,4 +2838,5 @@ Representa el área: %1$s x %2$s</string>
 \nPara ello debes instalar la aplicación Mapillary desde Google Play.</string>
     <string name="open_mapillary">Abrir Mapillary</string>
     <string name="mapillary_image">Imagen de Mapillary</string>
+    <string name="distance_moving">Distancia corregida</string>
     </resources>
