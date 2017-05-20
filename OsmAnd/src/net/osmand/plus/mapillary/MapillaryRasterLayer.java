@@ -42,10 +42,9 @@ class MapillaryRasterLayer extends MapTileLayer implements MapillaryLayer {
 		this.selectedImageCameraAngle = selectedImageCameraAngle;
 	}
 
-	@Override
-	public void onPrepareBufferImage(Canvas canvas, RotatedTileBox tileBox, DrawSettings drawSettings) {
-		super.onPrepareBufferImage(canvas, tileBox, drawSettings);
+	private void drawSelectedPoint(Canvas canvas, RotatedTileBox tileBox) {
 		if (selectedImageLocation != null) {
+			canvas.rotate(-tileBox.getRotate(), tileBox.getCenterPixelX(), tileBox.getCenterPixelY());
 			float x = tileBox.getPixXFromLatLon(selectedImageLocation.getLatitude(), selectedImageLocation.getLongitude());
 			float y = tileBox.getPixYFromLatLon(selectedImageLocation.getLatitude(), selectedImageLocation.getLongitude());
 			if (selectedImageCameraAngle != null) {
@@ -56,6 +55,7 @@ class MapillaryRasterLayer extends MapTileLayer implements MapillaryLayer {
 				canvas.restore();
 			}
 			canvas.drawBitmap(selectedImage, x - selectedImage.getWidth() / 2, y - selectedImage.getHeight() / 2, paintIcon);
+			canvas.rotate(tileBox.getRotate(), tileBox.getCenterPixelX(), tileBox.getCenterPixelY());
 		}
 	}
 
@@ -70,5 +70,6 @@ class MapillaryRasterLayer extends MapTileLayer implements MapillaryLayer {
 			return;
 		}
 		super.drawTileMap(canvas, tileBox);
+		drawSelectedPoint(canvas, tileBox);
 	}
 }

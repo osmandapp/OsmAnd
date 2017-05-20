@@ -82,8 +82,11 @@ class MapillaryVectorLayer extends MapTileLayer implements MapillaryLayer, ICont
 	}
 
 	@Override
-	public void onPrepareBufferImage(Canvas canvas, RotatedTileBox tileBox, DrawSettings drawSettings) {
-		super.onPrepareBufferImage(canvas, tileBox, drawSettings);
+	public boolean drawInScreenPixels() {
+		return true;
+	}
+
+	private void drawSelectedPoint(Canvas canvas, RotatedTileBox tileBox) {
 		if (selectedImageLocation != null) {
 			float x = tileBox.getPixXFromLatLon(selectedImageLocation.getLatitude(), selectedImageLocation.getLongitude());
 			float y = tileBox.getPixYFromLatLon(selectedImageLocation.getLatitude(), selectedImageLocation.getLongitude());
@@ -155,6 +158,7 @@ class MapillaryVectorLayer extends MapTileLayer implements MapillaryLayer, ICont
 			}
 		}
 		this.visiblePoints = visiblePoints;
+		drawSelectedPoint(canvas, tileBox);
 	}
 
 	protected void drawPoints(Canvas canvas, RotatedTileBox tileBox, int tileX, int tileY,
@@ -168,7 +172,6 @@ class MapillaryVectorLayer extends MapTileLayer implements MapillaryLayer, ICont
 		float ph = point.getHeight();
 		float pwd = pw / 2;
 		float phd = ph / 2;
-		canvas.rotate(-tileBox.getRotate(), tileBox.getCenterPixelX(), tileBox.getCenterPixelY());
 
 		for (Geometry g : tile.getData()) {
 			if (g instanceof Point && !g.isEmpty() && g.getUserData() != null && g.getUserData() instanceof HashMap) {
@@ -185,7 +188,6 @@ class MapillaryVectorLayer extends MapTileLayer implements MapillaryLayer, ICont
 				}
 			}
 		}
-		canvas.rotate(tileBox.getRotate(), tileBox.getCenterPixelX(), tileBox.getCenterPixelY());
 	}
 
 	protected void drawLines(Canvas canvas, RotatedTileBox tileBox, int tileX, int tileY, GeometryTile tile) {
@@ -216,7 +218,6 @@ class MapillaryVectorLayer extends MapTileLayer implements MapillaryLayer, ICont
 			int mult = (int) Math.pow(2.0, dzoom);
 			QuadRect tileBounds = tileBox.getTileBounds();
 
-			canvas.rotate(-tileBox.getRotate(), tileBox.getCenterPixelX(), tileBox.getCenterPixelY());
 			Coordinate lastPt = points[0];
 			float x;
 			float y;
@@ -257,7 +258,6 @@ class MapillaryVectorLayer extends MapTileLayer implements MapillaryLayer, ICont
 				lx = px;
 				ly = py;
 			}
-			canvas.rotate(tileBox.getRotate(), tileBox.getCenterPixelX(), tileBox.getCenterPixelY());
 		}
 	}
 
