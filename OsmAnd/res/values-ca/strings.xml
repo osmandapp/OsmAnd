@@ -2760,4 +2760,5 @@ OsmAnd és de codi obert i es desenvolupa activament . Tothom pot recolzar l\'ap
     <string name="no_photos_descr">No tenim fotos per aquesta ubicació</string>
     <string name="mapillary_image">Imatge Mapillary</string>
     <string name="open_mapillary">Inicia Mapillary</string>
+    <string name="distance_moving">Distància corregida</string>
     </resources>
