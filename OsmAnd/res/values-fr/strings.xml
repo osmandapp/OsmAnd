@@ -2443,36 +2443,36 @@ If you need help with OsmAnd application, please contact our support team: suppo
     <string name="storage_permission_restart_is_required">L\'application est maintenant autorisée à écrire sur le stockage externe. Redémarrez l\'application pour prendre en compte cette modification.</string>
     <string name="full_report">Rapport complet</string>
     <string name="open_street_map_login_and_pass">Identifiant et mot de passe OpenStreetMap</string>
-    <string name="release_2_3">" • OSM Live. Soutenez les contributeurs de carte et les développeurs pour obtenir des mises à jour horaires
-\n
-\n • Marqueurs : Une nouvelle façon de marquer des emplacements sur la carte
-\n
-\n • Cartes OSM plus détaillées avec des spécificités par pays et beaucoup de nouvelles fonctionnalités
-\n
-\n • Amélioration de l\'expérience utilisateur lors de la préparation d\'un itinéraire
-\n
-\n • Beaucoup d\'autres améliorations sur les menus contextuels comme la recherche d\'adresses
-\n
+    <string name="release_2_3">" • OSM Live. Soutenez les contributeurs de carte et les développeurs pour obtenir des mises à jour horaires 
+\n 
+\n • Marques : Une nouvelle façon de marquer des emplacements sur la carte 
+\n 
+\n • Cartes OSM plus détaillées avec des spécificités par pays et beaucoup de nouvelles fonctionnalités 
+\n 
+\n • Amélioration de l\'expérience utilisateur lors de la préparation d\'un itinéraire 
+\n 
+\n • Beaucoup d\'autres améliorations sur les menus contextuels comme la recherche d\'adresses 
+\n 
 \net bien plus encore... "</string>
     <string name="storage_directory_readonly_desc">L\'emplacement de stockage sélectionné est en lecture seule. L\'emplacement de stockage a donc été modifié pour utiliser la mémoire interne. Merci de sélectionner un dossier valide.</string>
     <string name="osm_user_stat">Modifications %1$s, classement %2$s, nombre total de modifications %3$s</string>
     <string name="osm_live_subscription">Abonnement à OSM Live</string>
-    <string name="no_map_markers_found">Ajoutez des marqueurs depuis la carte</string>
+    <string name="no_map_markers_found">Ajoutez des marques depuis la carte</string>
     <string name="no_waypoints_found">Aucune étape trouvée</string>
     <string name="report">Rapport</string>
-    <string name="select_map_marker">Sélectionner un marqueur</string>
-    <string name="map_markers_other">Autres marqueurs</string>
-    <string name="map_marker_1st">Premier marqueur</string>
-    <string name="map_marker_2nd">Second marqueur</string>
-    <string name="add_points_to_map_markers_q">Souhaitez-vous ajouter tous les points comme marqueurs ?</string>
-    <string name="shared_string_add_to_map_markers">Ajouter comme marqueur</string>
-    <string name="select_map_markers">Sélectionner les marqueurs</string>
-    <string name="show_map_markers_description">Activer la fonction marqueur</string>
-    <string name="clear_active_markers_q">Souhaitez-vous supprimer tous les marqueurs actifs ?</string>
-    <string name="clear_markers_history_q">Souhaitez-vous effacer l\'historique des marqueurs ?</string>
-    <string name="active_markers">Marqueurs actifs</string>
-    <string name="map_markers">Marqueurs</string>
-    <string name="map_marker">Marqueur</string>
+    <string name="select_map_marker">Sélectionner une marque</string>
+    <string name="map_markers_other">Autres marques</string>
+    <string name="map_marker_1st">Première marque</string>
+    <string name="map_marker_2nd">Seconde marque</string>
+    <string name="add_points_to_map_markers_q">Souhaitez-vous créer tous les points comme marques ?</string>
+    <string name="shared_string_add_to_map_markers">Ajouter comme marque</string>
+    <string name="select_map_markers">Sélectionner les marques</string>
+    <string name="show_map_markers_description">Activer la fonction marques</string>
+    <string name="clear_active_markers_q">Souhaitez-vous supprimer toutes les marques actives ?</string>
+    <string name="clear_markers_history_q">Souhaitez-vous effacer l\'historique des marques ?</string>
+    <string name="active_markers">Marques actives</string>
+    <string name="map_markers">Marques</string>
+    <string name="map_marker">Marque</string>
     <string name="file_name_containes_illegal_char">Le nom de fichier contient des caractères interdits</string>
 <string name="osm_live_header">Cet abonnement active les mises à jour horaires pour toutes les cartes.
 Les dons sont en partie reversés à la Communauté OSM.
@@ -2512,9 +2512,9 @@ Si vous appréciez OsmAnd et OSM et que vous souhaitez soutenir ces projets, c\'
     <!-- string name="lat_lon_pattern">Lat. : %1$.5f Lon. : %2$.5f</string -->
     <string name="map_widget_battery">Niveau de batterie</string>
     <string name="lang_hu_formal">Hongrois (formel)</string>
-    <string name="move_marker_bottom_sheet_title">Déplacez la carte pour modifier la position du marqueur</string>
+    <string name="move_marker_bottom_sheet_title">Déplacez la carte pour modifier la position de la marque</string>
     <string name="current_track">Trace courante</string>
-    <string name="change_markers_position">Modifier la position du marqueur</string>
+    <string name="change_markers_position">Modifier la position de la marque</string>
     <string name="lang_es_us">Espagnol (américain)</string>
     <string name="lang_en_gb">Anglais (Royaume-Uni)</string>
     <string name="access_direction_audio_feedback_descr">Indiquer la direction de la cible par des sons</string>
@@ -2545,7 +2545,7 @@ Si vous appréciez OsmAnd et OSM et que vous souhaitez soutenir ces projets, c\'
     <string name="confirmation_to_delete_history_items">Souhaitez-vous supprimer les éléments sélectionnés de l\'historique ?</string>
     <string name="show_something_on_map">Afficher %1$s sur la carte</string>
     <string name="route_stops_before">%1$s arrêts avant</string>
-    <string name="coords_search">Recherche de coordonnées</string>
+    <string name="coords_search">Recherche par coordonnées</string>
     <string name="advanced_coords_search">Recherche avancée de coordonnées</string>
     <string name="dist_away_from_my_location">Recherche %1$s autour</string>
     <string name="release_2_4">" • Nouveau moteur de recherche pour les lieux permettant la saisie d\'un texte libre
@@ -2682,7 +2682,7 @@ Si vous appréciez OsmAnd et OSM et que vous souhaitez soutenir ces projets, c\'
 
     <string name="quick_action_item_action">Action %d</string>
     <string name="quick_action_item_screen">Écran %d</string>
-    <string name="quick_action_add_marker">Ajouter un marqueur</string>
+    <string name="quick_action_add_marker">Ajouter une marque</string>
     <string name="quick_action_add_poi">Ajouter un point d\'intérêt</string>
     <string name="quick_action_map_style">Modifier le style de carte</string>
     <string name="quick_action_map_style_switch">Le style de carte est maintenant \"%s\".</string>
@@ -2738,7 +2738,7 @@ Si vous appréciez OsmAnd et OSM et que vous souhaitez soutenir ces projets, c\'
     <string name="quick_action_map_source_switch">La source de la carte a été modifiée pour \"%s\".</string>
     <string name="quick_action_btn_tutorial_title">Déplacer le bouton</string>
     <string name="quick_action_btn_tutorial_descr">Appui long pour déplacer le bouton sur l\'écran</string>
-<string name="quick_action_add_marker_descr">Appuyez sur le bouton d\'action pour ajouter un marqueur au centre de la carte.</string>
+<string name="quick_action_add_marker_descr">Appuyez sur le bouton d\'action pour ajouter une marque au centre de la carte.</string>
     <string name="quick_action_add_gpx_descr">Appuyez sur le bouton d\'action pour ajouter une étape GPX au centre de la carte.</string>
     <string name="quick_action_take_audio_note_descr">Appuyez sur le bouton d\'action pour ajouter une note Audio au centre de la carte.</string>
     <string name="quick_action_take_video_note_descr">Appuyez sur le bouton d\'action pour ajouter une note Vidéo au centre de la carte.</string>
@@ -2750,7 +2750,7 @@ Si vous appréciez OsmAnd et OSM et que vous souhaitez soutenir ces projets, c\'
     <string name="quick_action_showhide_favorites_descr">Appuyez sur le bouton pour afficher ou masquer les favoris sur la carte.</string>
     <string name="quick_action_showhide_poi_descr">Appuyez sur le bouton pour afficher ou masquer les points d\'intérêt sur la carte.</string>
     <string name="quick_action_interim_dialog">Afficher une fenêtre intermédiaire</string>
-    <string name="quick_action_add_create_items">Créer les éléments</string>
+    <string name="quick_action_add_create_items">Créer des éléments</string>
     <string name="quick_action_bug_descr">Ce texte sera renseigné automatiquement dans la zone de commentaire.</string>
     <string name="quick_action_map_overlay_switch">La sur-couche de la carte est désormais \"%s\".</string>
     <string name="quick_action_map_underlay_switch">La sous-couche de la carte est désormais \"%s\".</string>
