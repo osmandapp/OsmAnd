@@ -8,6 +8,7 @@ import net.osmand.plus.activities.MapActivity;
 import net.osmand.plus.mapcontextmenu.builders.cards.ImageCard;
 import net.osmand.util.Algorithms;
 
+import org.json.JSONException;
 import org.json.JSONObject;
 
 public class MapillaryImageCard extends ImageCard {

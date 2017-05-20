@@ -1,7 +1,5 @@
 package net.osmand.plus.mapillary;
 
-import net.osmand.util.Algorithms;
-
 import java.util.Map;
 
 public class MapillaryImage {
@@ -41,10 +39,10 @@ public class MapillaryImage {
 	public boolean setData(Map userData) {
 		boolean res = true;
 		try {
-			this.ca = (Double) userData.get("ca");
-			this.capturedAt = (Long) userData.get("captured_at");
+			this.ca = ((Number) userData.get("ca")).doubleValue();
+			this.capturedAt = ((Number) userData.get("captured_at")).longValue();
 			this.key = (String) userData.get("key");
-			this.pano = ((Long) userData.get("pano")) == 1;
+			this.pano = ((Number) userData.get("pano")).intValue() == 1;
 			this.sKey = (String) userData.get("skey");
 			this.userKey = (String) userData.get("userkey");
 
@@ -78,7 +76,7 @@ public class MapillaryImage {
 		return pano;
 	}
 
-	public String getsKey() {
+	public String getSKey() {
 		return sKey;
 	}
 
