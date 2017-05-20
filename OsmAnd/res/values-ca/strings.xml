@@ -2758,4 +2758,6 @@ OsmAnd és de codi obert i es desenvolupa activament . Tothom pot recolzar l\'ap
 \nPer fer-ho cal que us instal·leu l\'aplicació Mapillary des de Google Play.</string>
     <string name="online_photos">Fotos en línia</string>
     <string name="no_photos_descr">No tenim fotos per aquesta ubicació</string>
+    <string name="mapillary_image">Imatge Mapillary</string>
+    <string name="open_mapillary">Inicia Mapillary</string>
     </resources>
