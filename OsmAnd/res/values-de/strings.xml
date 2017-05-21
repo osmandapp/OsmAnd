@@ -2806,7 +2806,7 @@ Abgedeckte Fläche: %1$s x %2$s</string>
     <string name="change_color">Farbe ändern</string>
     <string name="edit_name">Namen ändern</string>
     <string name="animate_my_location">Meine Position animieren</string>
-    <string name="animate_my_location_desc">Näherungsweise Fortschreibung meiner Position, wenn deren Bestimmung vorübergehend ausfällt</string>
+    <string name="animate_my_location_desc">Animation meiner Position während der Navigation aktivieren</string>
     <string name="route_is_too_long_v2">Die Route ist für eine Berechnung unter Umständen zu lang. Fügen Sie bitte Zwischenstopps ein, wenn nach 10 Minuten kein Routenvorschlag erscheint.</string>
     <string name="save_poi_too_many_uppercase">Der Name enthält zu viele Großbuchstaben. Möchten Sie den Vorgang fortsetzen?</string>
     <string name="display_zoom_level">Darstellung ab Zoomstufe: %1$s</string>
