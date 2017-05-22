@@ -2956,4 +2956,142 @@
 	<string name="poi_historic_civilization_roman">文明:ローマ文明</string>
 	<string name="poi_historic_civilization_byzantine">文明:ビザンティン文化 (西暦285年 – 1453年)</string>
 	<string name="poi_historic_civilization_imperial_chinese">文明:皇帝王朝 (紀元前221年 – 西暦1911年)</string>
+	<string name="poi_historic_civilization_ancient_egyptian">文明:古代エジプト(紀元前332年まで)</string>
+	<string name="poi_historic_civilization_celtic">文明:ケルト文明</string>
+	<string name="poi_historic_civilization_western_roman">文明:西ローマ帝国(西暦285 – 476年)</string>
+	<string name="poi_historic_civilization_mycenaean">文明:ミケーネ文明</string>
+	<string name="poi_historic_civilization_dacian">文明:ダキア文化</string>
+	<string name="poi_historic_civilization_hernici">文明:ヘルニキ文化</string>
+	<string name="poi_historic_civilization_greek_egyptian">文明:プトレマイオス朝(紀元前332 – 紀元前30年)</string>
+	<string name="poi_historic_civilization_roman_and_byzantine_egyptian">文明:東ローマ帝国またはビザンツ帝国</string>
+	<string name="poi_historic_civilization_helladic">文明:ヘラディック文明</string>
+	<string name="poi_historic_civilization_cycladic">文明:キクラデス文明</string>
+	<string name="poi_historic_civilization_minoan">文明:ミノア文明</string>
+	<string name="poi_historic_civilization_tiahuanacota">文明:ティワナク帝国</string>
+
+	<string name="poi_horse_no">馬の通行不可</string>
+	<string name="poi_horse_yes">馬の通行可</string>
+	<string name="poi_animal_yes">動物同伴可</string>
+	<string name="poi_animal_no">動物同伴不可</string>
+
+	<string name="poi_historic_period_nuragic">文明期:ヌラーゲ(nuragic)</string>
+	<string name="poi_historic_period_stone_bronze_undetermined">文明期:石器時代 / 青銅器時代(未確定)</string>
+	<string name="poi_historic_period_bronze_age">文明期:青銅器時代</string>
+	<string name="poi_historic_period_principate">文明期:プリンキパトゥス(紀元前27 – 西暦284年)</string>
+	<string name="poi_historic_period_classical_greece">文明期:ギリシア・古典期(紀元前5 – 4世紀)</string>
+	<string name="poi_historic_period_archaic_greece">文明期:ギリシア・アルカイック期</string>
+	<string name="poi_historic_period_iron_age">文明期:鉄器時代</string>
+	<string name="poi_historic_period_roman_republic">文明期:共和政ローマ(紀元前508年 – 紀元前27年)</string>
+	<string name="poi_historic_period_hellenistic_greece">文明期:ギリシア・ヘレニズム時代</string>
+	<string name="poi_historic_period_new_kingdom">文明期:エジプト新王国(紀元前1550年 – 1069年)</string>
+	<string name="poi_historic_period_middle_kingdom">文明期:エジプト中王国(紀元前2055年 – 1650年)</string>
+	<string name="poi_historic_period_predynastic_egypt">文明期:エジプト先王朝時代</string>
+	<string name="poi_historic_period_early_dynastic_period">文明期:エジプト初期王朝時代(紀元前3100年 – 2686年)</string>
+	<string name="poi_historic_period_old_kingdom">文明期:エジプト古王国(紀元前2686年 – 2181年)</string>
+	<string name="poi_historic_period_first_intermediate_period">文明期:エジプト第1中間期(紀元前2181年 – 2055年)</string>
+	<string name="poi_historic_period_second_intermediate_period">文明期:エジプト第2中間期(紀元前1650年 – 1550年)</string>
+	<string name="poi_historic_period_third_intermediate_period">"文明期:エジプト第3中間期(紀元前1069年 – 664年) "</string>
+	<string name="poi_historic_period_first_persian_period">文明期:第1次ペルシア支配時代(エジプト第27王朝)</string>
+	<string name="poi_historic_period_late_period">文明期:エジプト末期王朝(紀元前664年 – 332年)</string>
+	<string name="poi_historic_period_second_persian_period">文明期:第2次ペルシア支配時代(エジプト第31王朝)</string>
+	<string name="poi_historic_period_alexander_the_great">文明期:アレクサンドロス大王</string>
+	<string name="poi_historic_period_ptolemaic_egypt">文明期:プトレマイオス朝(紀元前305年 – 30年)</string>
+	<string name="poi_historic_period_christian_egypt">文明期:アエギュプトゥス(キリスト教が伝播した時代)</string>
+	<string name="poi_historic_period_byzantine_egypt">文明期:ビザンチンエジプト・東ローマ帝国時代(紀元前30年 – 紀元後641年)</string>
+	<string name="poi_historic_period_persian_occupation">文明期:ペルシア属国(サーサーン朝)</string>
+	<string name="poi_historic_period_greek_dark_ages">文明期:ギリシア暗黒時代(紀元前1100年 – 800年)</string>
+	<string name="poi_historic_period_roman_greece">文明期:ギリシアのローマ帝国支配下時代(紀元前146年 – 西暦330年)</string>
+	<string name="poi_historic_period_roman_kingdom">文明期:王政ローマ時代(紀元前753年 – 509年)</string>
+	<string name="poi_historic_period_dominate">文明期:ローマ専制君主制・ドミナートゥス時代(西暦285年 – 476年)</string>
+	<string name="poi_historic_period_villager">文明期:ティワナク文化村民期・先史時代(I、II期 紀元前1580年 – 西暦133年)</string>
+	<string name="poi_historic_period_urban">文明期:ティワナク文化都市期(III期、西暦133年 – 374年)</string>
+	<string name="poi_historic_period_classical">文明期:ティワナク文化古典期(IV期、西暦374年 – 900年)</string>
+	<string name="poi_historic_period_imperial">文明期:ティワナク文化インカ帝国による征服時代(V期、西暦900年 – 1200年)</string>
+
+	<string name="poi_historic_era_paleolithic">"時代区分:旧石器時代（260万年 -  1万年代前）"</string>
+	<string name="poi_historic_era_mesolithic">時代区分:中石器時代</string>
+	<string name="poi_historic_era_neolithic">時代区分:新石器時代</string>
+	<string name="poi_historic_era_chalcolithic">時代区分:金石併用時代・銅器時代(紀元前4～3千年)</string>
+
+	<string name="poi_stone_type_conciliation_cross">追悼記念碑・慰霊碑</string>
+	<string name="poi_stone_type_coat_of_arms">紋章</string>
+
+	<string name="poi_material_wood">材質:木</string>
+	<string name="poi_material_metal">材質:金属</string>
+	<string name="poi_material_reinforced_concrete">材質:鉄筋コンクリート</string>
+	<string name="poi_material_concrete">材質:コンクリート</string>
+	<string name="poi_material_steel">材質:鉄鋼</string>
+	<string name="poi_material_stone">材質:石</string>
+	<string name="poi_material_masonry">材質:石積み</string>
+	<string name="poi_material_brick">材質:レンガ</string>
+	<string name="poi_material_plastic">材質:プラスチック</string>
+	<string name="poi_material_granite_stone">材質:花崗岩</string>
+	<string name="poi_material_metal_wood">材質:金属;木</string>
+	<string name="poi_material_glass">材質:ガラス</string>
+	<string name="poi_material_bronze">材質:青銅</string>
+	<string name="poi_material_earth">材質:地面、土</string>
+	<string name="poi_material_composite">材質:複合</string>
+	<string name="poi_material_limestone">材質：石灰岩</string>
+	<string name="poi_material_marble">材質：大理石</string>
+	<string name="poi_material_aluminium">材質：アルミニウム</string>
+
+	<string name="poi_megalith_type_menhir">巨石記念物の種類:立石・メンヒル</string>
+	<string name="poi_megalith_type_dolmen">巨石記念物の種類:支石墓・ドルメン</string>
+	<string name="poi_megalith_type_nuraghe">巨石記念物の種類:積み石建造物・ヌラーゲ</string>
+	<string name="poi_megalith_type_stone_circle">巨石記念物の種類:環状列石・ストーンサークル</string>
+	<string name="poi_megalith_type_passage_grave">巨石記念物の種類:羨道墳・パッセージグレーヴ</string>
+	<string name="poi_fortification_type_hill_fort">要塞の種類:土塁・ヒルフォート</string>
+	<string name="poi_fortification_type_limes">要塞の種類:古代ローマの国境防衛砦(limes)</string>
+	<string name="poi_fortification_type_sconce">要塞の種類:砲兵用防御要塞・スカンス</string>
+	<string name="poi_fortification_type_ring_ditch">要塞の種類:新石器時代の円形の囲い(ring ditch)</string>
+
+	<string name="poi_artist_name">作者名</string>
+	<string name="poi_sculptor">彫刻工房</string>
+
+	<string name="poi_concentration_camp">種類:強制収容所</string>
+	<string name="poi_pow_camp">種類:捕虜収容所</string>
+	<string name="poi_labor_camp">種類:強制労働収容所</string>
+	<string name="poi_concentration_camp_nazism">種類:ナチズム</string>
+	<string name="poi_concentration_camp_gulag">種類:(旧ソビエト)強制労働収容所・矯正収容所</string>
+
+	<string name="poi_temperature">温度</string>
+	<string name="poi_bathing_yes">入浴：可</string>
+	<string name="poi_bathing_no">入浴：不可</string>
+
+	<string name="poi_conveying_yes">エスカレーター・動く歩道</string>
+
+	<string name="poi_bridge_ref">橋の参照番号・記号</string>
+	<string name="poi_tunnel_ref">トンネルの参照番号・記号</string>
+
+	<string name="poi_ref">番号・記号</string>
+
+	<string name="poi_fireworks">花火屋</string>
+
+	<string name="poi_aerialway_length">長さ</string>
+
+	<string name="poi_microwave_oven_yes">オーブンレンジ:有り</string>
+	<string name="poi_microwave_oven_no">オーブンレンジ:無し</string>
+	<string name="poi_water_heater_yes">湯沸かし器:有り</string>
+	<string name="poi_water_heater_no">湯沸かし器:無し</string>
+
+	<string name="poi_official_name">公式名称</string>
+
+	<string name="poi_construction_yes">建設中</string>
+	<string name="poi_additional_atm_yes">ATM:有り</string>
+	<string name="poi_atm_no">ATM:無し</string>
+
+	<string name="poi_fair_trade_yes">フェアトレード製品:有り</string>
+	<string name="poi_fair_trade_no">フェアトレード製品:無し</string>
+	<string name="poi_fair_trade_only">フェアトレード製品のみ</string>
+
+
+	<string name="poi_protection_title">保護の種類(Protection title)</string>
+	<string name="poi_protection_object_historic">保護対象:歴史的な物</string>
+	<string name="poi_protection_object_nature">保護対象:自然物</string>
+	<string name="poi_protection_object_habitat">保護対象:生息地</string>
+	<string name="poi_protection_object_water">保護対象:水・水源</string>
+
+	<string name="poi_addr_housename">家名</string>
+
+
 	</resources>

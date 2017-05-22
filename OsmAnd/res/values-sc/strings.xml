@@ -2835,4 +2835,11 @@ Pro praghere iscrie su còdighe intreu</string>
     <string name="plugin_mapillary_descr">Fotografias a livellu de s\'istrada pro totus. Iscoberi logos, collàbora, catura su mundu.</string>
     <string name="online_photos">Fotografias in lìnia</string>
     <string name="no_photos_descr">Non tenimus fotografias pro custu logu</string>
+    <string name="open_mapillary">Aberi Mapillary</string>
+    <string name="shared_string_install">Installa</string>
+    <string name="improve_coverage_mapillary">Megiora sa cobertura cun Mapillary</string>
+    <string name="improve_coverage_install_mapillary_desc">Podes fàghere sas fotografias tuas (una sola o una sèrie) e las podes annànghere a custa positzione de sa mapa.
+\n
+\nPro lu fàghere depes installare s\'aplicatzione Mapillary dae Google Play.</string>
+    <string name="mapillary_image">Immàgine de Mapillary</string>
     </resources>

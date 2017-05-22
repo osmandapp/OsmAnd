@@ -112,7 +112,7 @@
 	<string name="poi_hifi">Garso aparatūros parduotuvė</string>
 	<string name="poi_houseware">Namų apyvokos daiktai</string>
 	<string name="poi_payment_type">Mokėjimo tipas</string>
-	<string name="poi_payment_fuel_type">Mokėjimo tipas</string>
+	<string name="poi_payment_fuel_type">Kuro kortelės</string>
 	<string name="poi_fuel_type">Tipas</string>
 	<string name="poi_fuel_avia_type">Tipas</string>
 	<string name="poi_internet_access_type">Interneto prieigos tipas</string>

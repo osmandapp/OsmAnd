@@ -2262,25 +2262,23 @@ Pour revenir à l’un des styles de carte classique de OsmAnd, désactivez simp
     <string name="routing_attr_avoid_stairs_name">Éviter les escaliers</string>
 	<string name="routing_attr_avoid_borders_name">Éviter le franchissement de frontières</string>
 	<string name="routing_attr_avoid_stairs_description">Éviter les escaliers</string>
-	<string name="release_2_2">"
- • Nouveaux menus contextuels sur un point de la carte
-
- • Choix de l\'affichage au démarrage (tableau de bord ou carte)
-
- • Personnalisation du contenu du tableau de bord
-
- • Possibilité d\'ignorer le tableau de bord et de n\'utiliser que les menus
-
- • Téléchargement des cartes des régions en appuyant directement sur la carte mondiale
-
- • Amélioration de la recherche des points d\'intérêt
-
- • Amélioration des points d\'intérêt et des contributions OSM (OpenStreetMap)
-
- • Refonte du téléchargement des cartes
-
- et bien plus encore …
- "</string>
+	<string name="release_2_2">" • Nouveaux menus contextuels sur un point de la carte
+\n
+\n • Choix de l\'affichage au démarrage (tableau de bord ou carte)
+\n
+\n • Personnalisation du contenu du tableau de bord
+\n
+\n • Possibilité d\'ignorer le tableau de bord et de n\'utiliser que les menus
+\n
+\n • Téléchargement des cartes des régions en appuyant directement sur la carte mondiale
+\n
+\n • Amélioration de la recherche des points d\'intérêt
+\n
+\n • Amélioration des points d\'intérêt et des contributions OSM
+\n
+\n • Refonte du téléchargement des cartes
+\n
+\n et bien plus encore … "</string>
     <string name="poi_context_menu_modify_osm_change">Modifier la contribution OSM</string>
     <string name="shared_string_near">Proche</string>
     <string name="shared_string_hide">Masquer</string>
@@ -2445,38 +2443,36 @@ If you need help with OsmAnd application, please contact our support team: suppo
     <string name="storage_permission_restart_is_required">L\'application est maintenant autorisée à écrire sur le stockage externe. Redémarrez l\'application pour prendre en compte cette modification.</string>
     <string name="full_report">Rapport complet</string>
     <string name="open_street_map_login_and_pass">Identifiant et mot de passe OpenStreetMap</string>
-    <string name="release_2_3">"
- • OSM Live. Soutenez les contributeurs de carte et les développeurs pour obtenir des mises à jour horaires
-
- • Marqueurs : Une nouvelle façon de marquer des emplacements sur la carte
-
- • Cartes OSM plus détaillées avec des spécificités par pays et beaucoup de nouvelles fonctionnalités
-
- • Amélioration de l\'expérience utilisateur lors de la préparation d\'un itinéraire
-
- • Beaucoup d\'autres améliorations sur les menus contextuels comme la recherche d\'adresses
-
-et bien plus encore...
- "</string>
+    <string name="release_2_3">" • OSM Live. Soutenez les contributeurs de carte et les développeurs pour obtenir des mises à jour horaires 
+\n 
+\n • Marques : Une nouvelle façon de marquer des emplacements sur la carte 
+\n 
+\n • Cartes OSM plus détaillées avec des spécificités par pays et beaucoup de nouvelles fonctionnalités 
+\n 
+\n • Amélioration de l\'expérience utilisateur lors de la préparation d\'un itinéraire 
+\n 
+\n • Beaucoup d\'autres améliorations sur les menus contextuels comme la recherche d\'adresses 
+\n 
+\net bien plus encore... "</string>
     <string name="storage_directory_readonly_desc">L\'emplacement de stockage sélectionné est en lecture seule. L\'emplacement de stockage a donc été modifié pour utiliser la mémoire interne. Merci de sélectionner un dossier valide.</string>
     <string name="osm_user_stat">Modifications %1$s, classement %2$s, nombre total de modifications %3$s</string>
     <string name="osm_live_subscription">Abonnement à OSM Live</string>
-    <string name="no_map_markers_found">Ajoutez des marqueurs depuis la carte</string>
+    <string name="no_map_markers_found">Ajoutez des marques depuis la carte</string>
     <string name="no_waypoints_found">Aucune étape trouvée</string>
     <string name="report">Rapport</string>
-    <string name="select_map_marker">Sélectionner un marqueur</string>
-    <string name="map_markers_other">Autres marqueurs</string>
-    <string name="map_marker_1st">Premier marqueur</string>
-    <string name="map_marker_2nd">Second marqueur</string>
-    <string name="add_points_to_map_markers_q">Souhaitez-vous ajouter tous les points comme marqueurs ?</string>
-    <string name="shared_string_add_to_map_markers">Ajouter comme marqueur</string>
-    <string name="select_map_markers">Sélectionner les marqueurs</string>
-    <string name="show_map_markers_description">Activer la fonction marqueur</string>
-    <string name="clear_active_markers_q">Souhaitez-vous supprimer tous les marqueurs actifs ?</string>
-    <string name="clear_markers_history_q">Souhaitez-vous effacer l\'historique des marqueurs ?</string>
-    <string name="active_markers">Marqueurs actifs</string>
-    <string name="map_markers">Marqueurs</string>
-    <string name="map_marker">Marqueur</string>
+    <string name="select_map_marker">Sélectionner une marque</string>
+    <string name="map_markers_other">Autres marques</string>
+    <string name="map_marker_1st">Première marque</string>
+    <string name="map_marker_2nd">Seconde marque</string>
+    <string name="add_points_to_map_markers_q">Souhaitez-vous créer tous les points comme marques ?</string>
+    <string name="shared_string_add_to_map_markers">Ajouter comme marque</string>
+    <string name="select_map_markers">Sélectionner les marques</string>
+    <string name="show_map_markers_description">Activer la fonction marques</string>
+    <string name="clear_active_markers_q">Souhaitez-vous supprimer toutes les marques actives ?</string>
+    <string name="clear_markers_history_q">Souhaitez-vous effacer l\'historique des marques ?</string>
+    <string name="active_markers">Marques actives</string>
+    <string name="map_markers">Marques</string>
+    <string name="map_marker">Marque</string>
     <string name="file_name_containes_illegal_char">Le nom de fichier contient des caractères interdits</string>
 <string name="osm_live_header">Cet abonnement active les mises à jour horaires pour toutes les cartes.
 Les dons sont en partie reversés à la Communauté OSM.
@@ -2516,9 +2512,9 @@ Si vous appréciez OsmAnd et OSM et que vous souhaitez soutenir ces projets, c\'
     <!-- string name="lat_lon_pattern">Lat. : %1$.5f Lon. : %2$.5f</string -->
     <string name="map_widget_battery">Niveau de batterie</string>
     <string name="lang_hu_formal">Hongrois (formel)</string>
-    <string name="move_marker_bottom_sheet_title">Déplacez la carte pour modifier la position du marqueur</string>
+    <string name="move_marker_bottom_sheet_title">Déplacez la carte pour modifier la position de la marque</string>
     <string name="current_track">Trace courante</string>
-    <string name="change_markers_position">Modifier la position du marqueur</string>
+    <string name="change_markers_position">Modifier la position de la marque</string>
     <string name="lang_es_us">Espagnol (américain)</string>
     <string name="lang_en_gb">Anglais (Royaume-Uni)</string>
     <string name="access_direction_audio_feedback_descr">Indiquer la direction de la cible par des sons</string>
@@ -2549,30 +2545,22 @@ Si vous appréciez OsmAnd et OSM et que vous souhaitez soutenir ces projets, c\'
     <string name="confirmation_to_delete_history_items">Souhaitez-vous supprimer les éléments sélectionnés de l\'historique ?</string>
     <string name="show_something_on_map">Afficher %1$s sur la carte</string>
     <string name="route_stops_before">%1$s arrêts avant</string>
-    <string name="coords_search">Recherche de coordonnées</string>
+    <string name="coords_search">Recherche par coordonnées</string>
     <string name="advanced_coords_search">Recherche avancée de coordonnées</string>
     <string name="dist_away_from_my_location">Recherche %1$s autour</string>
-    <string name="release_2_4">"
- • Nouveau moteur de recherche pour les lieux permettant la saisie d\'un texte libre
-
-
- • Diffusion des instructions vocales vers  le système audio d\'un véhicule ou tout autre appareil Bluetooth
-
-
- • Instructions de guidage, annonces vocales, et indications de voies directionnelles améliorées
-
-
- • Amélioration du calque de transport en commun et affichage de l\'itinéraire
-
-
- • Ajout de paramètres locaux et support de paramètres régionaux
-
-
- • Autres améliorations et corrections d\'anomalies
-
-
- Et bien plus encore…
- "</string>
+    <string name="release_2_4">" • Nouveau moteur de recherche pour les lieux permettant la saisie d\'un texte libre
+\n
+\n • Diffusion des instructions vocales vers  le système audio d\'un véhicule ou tout autre appareil Bluetooth
+\n
+\n • Instructions de guidage, annonces vocales, et indications de voies directionnelles améliorées
+\n
+\n • Amélioration du calque de transport en commun et affichage de l\'itinéraire
+\n
+\n • Ajout de paramètres locaux et support de paramètres régionaux
+\n
+\n • Autres améliorations et corrections d\'anomalies
+\n
+\n et bien plus encore… "</string>
     <string name="update_all_maps_now">Souhaitez-vous mettre à jour toutes les cartes maintenant ?</string>
     <string name="clear_tile_data">Supprimer toutes les tuiles</string>
     <string name="replace_favorite_confirmation">Êtes-vous sûr de vouloir remplacer le favori %1$s ?</string>
@@ -2644,27 +2632,19 @@ Si vous appréciez OsmAnd et OSM et que vous souhaitez soutenir ces projets, c\'
     <string name="shared_string_recorded">Enregistré</string>
     <string name="shared_string_record">Enregistrer</string>
     <string name="gpx_logging_no_data">Aucune donnée</string>
-    <string name="release_2_5">"
- • Icônes cliquables sur la carte
-
-
- • Recherche avancée des points d\'intérêt, exemple : recherche de restaurants par spécialité ...
-
-
- • Nouveau style OsmAnd Topo pour les cyclistes et les randonneurs
-
-
- • Amélioration de l’enregistrement de l\'itinéraire
-
-
- • Android Wear : amélioration des notifications de navigation
-
-
- • Nombreuses améliorations et corrections de bugs
-
-
- et bien plus…
- "</string>
+    <string name="release_2_5">" • Icônes cliquables sur la carte
+\n
+\n • Recherche avancée des points d\'intérêt, exemple : recherche de restaurants par spécialité ...
+\n
+\n • Nouveau style OsmAnd Topo pour les cyclistes et les randonneurs
+\n
+\n • Amélioration de l’enregistrement de l\'itinéraire
+\n
+\n • Android Wear : amélioration des notifications de navigation
+\n
+\n • Nombreuses améliorations et corrections de bugs
+\n
+\n et bien plus… "</string>
     <string name="shared_string_notifications">Notifications</string>
     <string name="trip_rec_notification_settings">Enregistrement de l\'itinéraire (aucune donnée)</string>
     <string name="trip_rec_notification_settings_desc">Afficher une notification contenant un bouton pour débuter l’Enregistrement de l\'itinéraire</string>
@@ -2702,7 +2682,7 @@ Si vous appréciez OsmAnd et OSM et que vous souhaitez soutenir ces projets, c\'
 
     <string name="quick_action_item_action">Action %d</string>
     <string name="quick_action_item_screen">Écran %d</string>
-    <string name="quick_action_add_marker">Ajouter un marqueur</string>
+    <string name="quick_action_add_marker">Ajouter une marque</string>
     <string name="quick_action_add_poi">Ajouter un point d\'intérêt</string>
     <string name="quick_action_map_style">Modifier le style de carte</string>
     <string name="quick_action_map_style_switch">Le style de carte est maintenant \"%s\".</string>
@@ -2758,7 +2738,7 @@ Si vous appréciez OsmAnd et OSM et que vous souhaitez soutenir ces projets, c\'
     <string name="quick_action_map_source_switch">La source de la carte a été modifiée pour \"%s\".</string>
     <string name="quick_action_btn_tutorial_title">Déplacer le bouton</string>
     <string name="quick_action_btn_tutorial_descr">Appui long pour déplacer le bouton sur l\'écran</string>
-<string name="quick_action_add_marker_descr">Appuyez sur le bouton d\'action pour ajouter un marqueur au centre de la carte.</string>
+<string name="quick_action_add_marker_descr">Appuyez sur le bouton d\'action pour ajouter une marque au centre de la carte.</string>
     <string name="quick_action_add_gpx_descr">Appuyez sur le bouton d\'action pour ajouter une étape GPX au centre de la carte.</string>
     <string name="quick_action_take_audio_note_descr">Appuyez sur le bouton d\'action pour ajouter une note Audio au centre de la carte.</string>
     <string name="quick_action_take_video_note_descr">Appuyez sur le bouton d\'action pour ajouter une note Vidéo au centre de la carte.</string>
@@ -2770,7 +2750,7 @@ Si vous appréciez OsmAnd et OSM et que vous souhaitez soutenir ces projets, c\'
     <string name="quick_action_showhide_favorites_descr">Appuyez sur le bouton pour afficher ou masquer les favoris sur la carte.</string>
     <string name="quick_action_showhide_poi_descr">Appuyez sur le bouton pour afficher ou masquer les points d\'intérêt sur la carte.</string>
     <string name="quick_action_interim_dialog">Afficher une fenêtre intermédiaire</string>
-    <string name="quick_action_add_create_items">Créer les éléments</string>
+    <string name="quick_action_add_create_items">Créer des éléments</string>
     <string name="quick_action_bug_descr">Ce texte sera renseigné automatiquement dans la zone de commentaire.</string>
     <string name="quick_action_map_overlay_switch">La sur-couche de la carte est désormais \"%s\".</string>
     <string name="quick_action_map_underlay_switch">La sous-couche de la carte est désormais \"%s\".</string>
@@ -2784,33 +2764,23 @@ représentant la zone : %1$s x %2$s</string>
     <string name="auto_split_recording_title">Découper automatiquement les enregistrements</string>
 	<string name="auto_split_recording_descr">Débuter un nouveau segment après une interruption de 6 min, une nouvelle trace après 2 h ou un nouveau fichier si l\'interruption est plus longue.</string>
     <string name="quick_action_page_list_descr">Appuyez sur le bouton d\'action pour faire défiler la liste ci-dessous.</string>
-    <string name="release_2_6">"
- • Nouveau : Bouton d\'action rapide
-
-
- • Réponses plus rapides aux gestes sur l\'écran
-
-
- • Nouveaux jeux de caractères permettant de gérer de nouvelles langues
-
-
- • Meilleure gestion des langues régionales avec TTS
-
-
- • Meilleure lisibilité de certains styles de cartes et de Wikipédia
-
-
- • Support d\'Open Location Code (OLC)
-
-
- • Affichage d\'un profil d’altitude, de pente et de vitesse pour les enregistrements GPX comme pour les itinéraires calculés
-
-
- • Améliorations des itinéraires à vélo : paramétrage du style de \"conduite\", possibilité d\'utiliser les données d\'altitude
-
-
- • Et de nombreuses autres améliorations et corrections d\'anomalies…
- "</string>
+    <string name="release_2_6">" • Nouveau : Bouton d\'action rapide
+\n
+\n • Réponses plus rapides aux gestes sur l\'écran
+\n
+\n • Nouveaux jeux de caractères permettant de gérer de nouvelles langues
+\n
+\n • Meilleure gestion des langues régionales avec TTS
+\n
+\n • Meilleure lisibilité de certains styles de cartes et de Wikipédia
+\n
+\n • Support d\'Open Location Code (OLC)
+\n
+\n • Affichage d\'un profil d’altitude, de pente et de vitesse pour les enregistrements GPX comme pour les itinéraires calculés
+\n
+\n • Améliorations des itinéraires à vélo : paramétrage du style de \"conduite\", possibilité d\'utiliser les données d\'altitude
+\n
+\n • Et de nombreuses autres améliorations et corrections d\'anomalies… "</string>
 	<string name="rendering_attr_depthContours_description">Afficher les lignes de sonde</string>
     <string name="rendering_attr_depthContours_name">Lignes de sonde maritimes</string>
 	<string name="routing_attr_height_obstacles_name">Utiliser les données d\'altitude</string>
@@ -3024,4 +2994,17 @@ Fonctionnalités principales :
     <string name="shared_string_add_photos">Ajouter des photos</string>
     <string name="online_photos">Photos en ligne</string>
     <string name="no_photos_descr">Aucune photo pour ce lieu</string>
+    <string name="shared_string_install">Installer</string>
+    <string name="mapillary">Mapillary</string>
+    <string name="open_mapillary">Ouvrir Mapillary</string>
+    <string name="improve_coverage_mapillary">Améliorer la couverture avec Mapillary</string>
+    <string name="improve_coverage_install_mapillary_desc">Vous pouvez prendre des photos et les ajouter à la carte.
+\n
+\nPour cela, installez l\'application Mapillary depuis Google Play.</string>
+    <string name="mapillary_action_descr">Participez en ajoutant vos photos détaillées à Mapillary.</string>
+    <string name="mapillary_widget">Gadget Mapillary</string>
+    <string name="mapillary_widget_descr">Vous permet de contribuer facilement à Mapillary</string>
+    <string name="mapillary_descr">Des photos en-ligne détaillées pour tous. Découvrez des lieux, collaborez ... capturez le monde.</string>
+    <string name="plugin_mapillary_descr">Des photos détaillées pour tous. Découvrez des lieux, collaborez ... capturez le monde.</string>
+    <string name="mapillary_image">Image Mapillary</string>
     </resources>

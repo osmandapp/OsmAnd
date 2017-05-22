@@ -4,8 +4,6 @@ package net.osmand.plus.resources;
 import android.content.Context;
 import android.content.res.AssetManager;
 import android.database.sqlite.SQLiteException;
-import android.graphics.Bitmap;
-import android.graphics.BitmapFactory;
 import android.os.HandlerThread;
 import android.text.format.DateFormat;
 import android.util.DisplayMetrics;
@@ -35,7 +33,6 @@ import net.osmand.plus.AppInitializer.InitEvents;
 import net.osmand.plus.OsmandApplication;
 import net.osmand.plus.OsmandPlugin;
 import net.osmand.plus.R;
-import net.osmand.plus.SQLiteTileSource;
 import net.osmand.plus.Version;
 import net.osmand.plus.render.MapRenderRepositories;
 import net.osmand.plus.render.NativeOsmandLibrary;
@@ -79,25 +76,18 @@ public class ResourceManager {
 
 	public static final String VECTOR_MAP = "#vector_map"; //$NON-NLS-1$
 	private static final String INDEXES_CACHE = "ind.cache";
-	
-	
+
 	private static final Log log = PlatformUtil.getLog(ResourceManager.class);
 	
-	
 	protected static ResourceManager manager = null;
-	
-	// it is not good investigated but no more than 64 (satellite images)
-	// Only 8 MB (from 16 Mb whole mem) available for images : image 64K * 128 = 8 MB (8 bit), 64 - 16 bit, 32 - 32 bit
-	// at least 3*9?
-	protected int maxImgCacheSize = 28;
-	
-	protected Map<String, Bitmap> cacheOfImages = new LinkedHashMap<String, Bitmap>();
-	protected Map<String, Boolean> imagesOnFS = new LinkedHashMap<String, Boolean>() ;
-	
-	protected File dirWithTiles ;
-	
-	private final OsmandApplication context;
 
+	protected File dirWithTiles ;
+
+	private List<TilesCache> tilesCacheList = new ArrayList<>();
+	private BitmapTilesCache bitmapTilesCache;
+	private GeometryTilesCache geometryTilesCache;
+
+	private final OsmandApplication context;
 	private List<ResourceListener> resourceListeners = new ArrayList<>();
 
 	public interface ResourceListener {
@@ -105,7 +95,6 @@ public class ResourceManager {
 		void onMapsIndexed();
 	}
 
-	
 	// Indexes
 	public enum BinaryMapReaderResourceType {
 		POI,
@@ -217,6 +206,12 @@ public class ResourceManager {
 		
 		this.context = context;
 		this.renderer = new MapRenderRepositories(context);
+
+		bitmapTilesCache = new BitmapTilesCache(asyncLoadingThread);
+		geometryTilesCache = new GeometryTilesCache(asyncLoadingThread);
+		tilesCacheList.add(bitmapTilesCache);
+		tilesCacheList.add(geometryTilesCache);
+
 		asyncLoadingThread.start();
 		renderingBufferImageThread = new HandlerThread("RenderingBaseImage");
 		renderingBufferImageThread.start();
@@ -224,16 +219,25 @@ public class ResourceManager {
 		tileDownloader = MapTileDownloader.getInstance(Version.getFullVersion(context));
 		dateFormat = DateFormat.getDateFormat(context);
 		resetStoreDirectory();
+
 		WindowManager mgr = (WindowManager) getContext().getSystemService(Context.WINDOW_SERVICE);
 		DisplayMetrics dm = new DisplayMetrics();
 		mgr.getDefaultDisplay().getMetrics(dm);
 		// Only 8 MB (from 16 Mb whole mem) available for images : image 64K * 128 = 8 MB (8 bit), 64 - 16 bit, 32 - 32 bit
 		// at least 3*9?
 		float tiles = (dm.widthPixels / 256 + 2) * (dm.heightPixels / 256 + 2) * 3;
-		log.info("Tiles to load in memory : " + tiles);
-		maxImgCacheSize = (int) (tiles) ;
+		log.info("Bitmap tiles to load in memory : " + tiles);
+		bitmapTilesCache.setMaxCacheSize((int) (tiles));
 	}
-	
+
+	public BitmapTilesCache getBitmapTilesCache() {
+		return bitmapTilesCache;
+	}
+
+	public GeometryTilesCache getGeometryTilesCache() {
+		return geometryTilesCache;
+	}
+
 	public MapTileDownloader getMapTileDownloader() {
 		return tileDownloader;
 	}
@@ -261,6 +265,9 @@ public class ResourceManager {
 			context.getAppPath(".nomedia").createNewFile(); //$NON-NLS-1$
 		} catch( Exception e ) {
 		}
+		for (TilesCache tilesCache : tilesCacheList) {
+			tilesCache.setDirWithTiles(dirWithTiles);
+		}
 	}
 	
 	public java.text.DateFormat getDateFormat() {
@@ -276,224 +283,61 @@ public class ResourceManager {
 	}
 
 	////////////////////////////////////////////// Working with tiles ////////////////////////////////////////////////
-	
-	public Bitmap getTileImageForMapAsync(String file, ITileSource map, int x, int y, int zoom, boolean loadFromInternetIfNeeded) {
-		return getTileImageForMap(file, map, x, y, zoom, loadFromInternetIfNeeded, false, true);
-	}
-	
-	
-	public synchronized Bitmap getTileImageFromCache(String file){
-		return cacheOfImages.get(file);
-	}
-	
-	public synchronized void putTileInTheCache(String file, Bitmap bmp) {
-		cacheOfImages.put(file, bmp);
-	}
-	
-	
-	public Bitmap getTileImageForMapSync(String file, ITileSource map, int x, int y, int zoom, boolean loadFromInternetIfNeeded) {
-		return getTileImageForMap(file, map, x, y, zoom, loadFromInternetIfNeeded, true, true);
-	}
-	
-	public synchronized void tileDownloaded(DownloadRequest request){
-		if(request instanceof TileLoadDownloadRequest){
-			TileLoadDownloadRequest req = ((TileLoadDownloadRequest) request);
-			imagesOnFS.put(req.tileId, Boolean.TRUE);
-/*			if(req.fileToSave != null && req.tileSource instanceof SQLiteTileSource){
-				try {
-					((SQLiteTileSource) req.tileSource).insertImage(req.xTile, req.yTile, req.zoom, req.fileToSave);
-				} catch (IOException e) {
-					log.warn("File "+req.fileToSave.getName() + " couldn't be read", e);  //$NON-NLS-1$//$NON-NLS-2$
-				}
-				req.fileToSave.delete();
-				String[] l = req.fileToSave.getParentFile().list();
-				if(l == null || l.length == 0){
-					req.fileToSave.getParentFile().delete();
-					l = req.fileToSave.getParentFile().getParentFile().list();
-					if(l == null || l.length == 0){
-						req.fileToSave.getParentFile().getParentFile().delete();
-					}
-				}
-			}*/
-		}
-		
-	}
-	
-	public synchronized boolean tileExistOnFileSystem(String file, ITileSource map, int x, int y, int zoom){
-		if(!imagesOnFS.containsKey(file)){
-			boolean ex = false;
-			if(map instanceof SQLiteTileSource){
-				if(((SQLiteTileSource) map).isLocked()){
-					return false;
-				}
-				ex = ((SQLiteTileSource) map).exists(x, y, zoom);
-			} else {
-				if(file == null){
-					file = calculateTileId(map, x, y, zoom);
-				}
-				ex = new File(dirWithTiles, file).exists();
-			}
-			if (ex) {
-				imagesOnFS.put(file, Boolean.TRUE);
-			} else {
-				imagesOnFS.put(file, null);
+
+	private TilesCache getTilesCache(ITileSource map) {
+		for (TilesCache tc : tilesCacheList) {
+			if (tc.isTileSourceSupported(map)) {
+				return tc;
 			}
 		}
-		return imagesOnFS.get(file) != null || cacheOfImages.get(file) != null;		
-	}
-	
-	public void clearTileImageForMap(String file, ITileSource map, int x, int y, int zoom){
-		getTileImageForMap(file, map, x, y, zoom, true, false, true, true);
-	}
-	
-	/**
-	 * @param file - null could be passed if you do not call very often with that param
-	 */
-	protected Bitmap getTileImageForMap(String file, ITileSource map, int x, int y, int zoom, 
-			boolean loadFromInternetIfNeeded, boolean sync, boolean loadFromFs) {
-		return getTileImageForMap(file, map, x, y, zoom, loadFromInternetIfNeeded, sync, loadFromFs, false);
+		return null;
 	}
 
-	// introduce cache in order save memory
+	public synchronized void tileDownloaded(DownloadRequest request){
+		if (request instanceof TileLoadDownloadRequest) {
+			TileLoadDownloadRequest req = ((TileLoadDownloadRequest) request);
+			TilesCache cache = getTilesCache(req.tileSource);
+			if (cache != null) {
+				cache.tilesOnFS.put(req.tileId, Boolean.TRUE);
+			}
+		}
+	}
 	
-	protected StringBuilder builder = new StringBuilder(40);
-	protected char[] tileId = new char[120];
+	public synchronized boolean tileExistOnFileSystem(String file, ITileSource map, int x, int y, int zoom) {
+		TilesCache cache = getTilesCache(map);
+		return cache != null && cache.tileExistOnFileSystem(file, map, x, y, zoom);
+	}
+	
+	public void clearTileForMap(String file, ITileSource map, int x, int y, int zoom){
+		TilesCache cache = getTilesCache(map);
+		if (cache != null) {
+			cache.getTileForMap(file, map, x, y, zoom, true, false, true, true);
+		}
+	}
+
 	private GeoidAltitudeCorrection geoidAltitudeCorrection;
 	private boolean searchAmenitiesInProgress;
 
 	public synchronized String calculateTileId(ITileSource map, int x, int y, int zoom) {
-		builder.setLength(0);
-		if (map == null) {
-			builder.append(IndexConstants.TEMP_SOURCE_TO_LOAD);
-		} else {
-			builder.append(map.getName());
+		TilesCache cache = getTilesCache(map);
+		if (cache != null) {
+			return cache.calculateTileId(map, x, y, zoom);
 		}
-
-		if (map instanceof SQLiteTileSource) {
-			builder.append('@');
-		} else {
-			builder.append('/');
-		}
-		builder.append(zoom).append('/').append(x).append('/').append(y).
-				append(map == null ? ".jpg" : map.getTileFormat()).append(".tile"); //$NON-NLS-1$ //$NON-NLS-2$
-		return builder.toString();
+		return null;
 	}
-	
 
-	protected synchronized Bitmap getTileImageForMap(String tileId, ITileSource map, int x, int y, int zoom,
-			boolean loadFromInternetIfNeeded, boolean sync, boolean loadFromFs, boolean deleteBefore) {
-		if (tileId == null) {
-			tileId = calculateTileId(map, x, y, zoom);
-			if(tileId == null){
-				return null;
-			}
-		}
-		
-		if(deleteBefore){
-			cacheOfImages.remove(tileId);
-			if (map instanceof SQLiteTileSource) {
-				((SQLiteTileSource) map).deleteImage(x, y, zoom);
-			} else {
-				File f = new File(dirWithTiles, tileId);
-				if (f.exists()) {
-					f.delete();
-				}
-			}
-			imagesOnFS.put(tileId, null);
-		}
-		
-		if (loadFromFs && cacheOfImages.get(tileId) == null && map != null) {
-			boolean locked = map instanceof SQLiteTileSource && ((SQLiteTileSource) map).isLocked();
-			if(!loadFromInternetIfNeeded && !locked && !tileExistOnFileSystem(tileId, map, x, y, zoom)){
-				return null;
-			}
-			String url = loadFromInternetIfNeeded ? map.getUrlToLoad(x, y, zoom) : null;
-			File toSave = null;
-			if (url != null) {
-				if (map instanceof SQLiteTileSource) {
-					toSave = new File(dirWithTiles, calculateTileId(((SQLiteTileSource) map).getBase(), x, y, zoom));
-				} else {
-					toSave = new File(dirWithTiles, tileId);
-				}
-			}
-			TileLoadDownloadRequest req = new TileLoadDownloadRequest(dirWithTiles, url, toSave, 
-					tileId, map, x, y, zoom, map.getReferer());
-			if(sync){
-				return getRequestedImageTile(req);
-			} else {
-				asyncLoadingThread.requestToLoadImage(req);
-			}
-		}
-		return cacheOfImages.get(tileId);
+	protected boolean hasRequestedTile(TileLoadDownloadRequest req) {
+		TilesCache cache = getTilesCache(req.tileSource);
+		return cache != null && cache.getRequestedTile(req) != null;
 	}
-	
-	
-	
-	protected Bitmap getRequestedImageTile(TileLoadDownloadRequest req){
-		if(req.tileId == null || req.dirWithTiles == null){
-			return null;
-		}
-		Bitmap cacheBmp = cacheOfImages.get(req.tileId);
-		if (cacheBmp != null) {
-			return cacheBmp;
-		}
-		if (cacheOfImages.size() > maxImgCacheSize) {
-			clearTiles();
-		}
-		if (req.dirWithTiles.canRead() && !asyncLoadingThread.isFileCurrentlyDownloaded(req.fileToSave)
-			&& !asyncLoadingThread.isFilePendingToDownload(req.fileToSave)) {
-			long time = System.currentTimeMillis();
-			if (log.isDebugEnabled()) {
-				log.debug("Start loaded file : " + req.tileId + " " + Thread.currentThread().getName()); //$NON-NLS-1$ //$NON-NLS-2$
-			}
-			Bitmap bmp = null;
-			if (req.tileSource instanceof SQLiteTileSource) {
-				try {
-					long[] tm = new long[1];
-					bmp = ((SQLiteTileSource) req.tileSource).getImage(req.xTile, req.yTile, req.zoom, tm);
-					if (tm[0] != 0) {
-						int ts = req.tileSource.getExpirationTimeMillis();
-						if (ts != -1 && req.url != null && time - tm[0] > ts) {
-							asyncLoadingThread.requestToDownload(req);
-						}
-					}
-				} catch (OutOfMemoryError e) {
-					log.error("Out of memory error", e); //$NON-NLS-1$
-					clearTiles();
-				}
-			} else {
-				File en = new File(req.dirWithTiles, req.tileId);
-				if (en.exists()) {
-					try {
-						bmp = BitmapFactory.decodeFile(en.getAbsolutePath());
-						int ts = req.tileSource.getExpirationTimeMillis();
-						if(ts != -1 && req.url != null && time - en.lastModified() > ts) {
-							asyncLoadingThread.requestToDownload(req);
-						}
-					} catch (OutOfMemoryError e) {
-						log.error("Out of memory error", e); //$NON-NLS-1$
-						clearTiles();
-					}
-				}
-			}
 
-			if (bmp != null) {
-				cacheOfImages.put(req.tileId, bmp);
-				if (log.isDebugEnabled()) {
-					log.debug("Loaded file : " + req.tileId + " " + -(time - System.currentTimeMillis()) + " ms " + cacheOfImages.size()); //$NON-NLS-1$ //$NON-NLS-2$ //$NON-NLS-3$
-				}
-			}
-
-			if (cacheOfImages.get(req.tileId) == null && req.url != null) {
-				asyncLoadingThread.requestToDownload(req);
-			}
-
-		}
-		return cacheOfImages.get(req.tileId);
+	public boolean hasTileForMapSync(String file, ITileSource map, int x, int y, int zoom, boolean loadFromInternetIfNeeded) {
+		TilesCache cache = getTilesCache(map);
+		return cache != null && cache.getTileForMapSync(file, map, x, y, zoom, loadFromInternetIfNeeded) != null;
 	}
 
 
-    ////////////////////////////////////////////// Working with indexes ////////////////////////////////////////////////
+	////////////////////////////////////////////// Working with indexes ////////////////////////////////////////////////
 
 	public List<String> reloadIndexesOnStart(AppInitializer progress, List<String> warnings){
 		close();
@@ -765,7 +609,7 @@ public class ResourceManager {
 				}
 				boolean wikiMap = (f.getName().contains("_wiki") || f.getName().contains(IndexConstants.BINARY_WIKI_MAP_INDEX_EXT));
 				boolean srtmMap = f.getName().contains(IndexConstants.BINARY_SRTM_MAP_INDEX_EXT);
-				if (mapReader == null || (Version.isFreeVersion(context) && wikiMap)) {
+				if (mapReader == null || (Version.isFreeVersion(context) && wikiMap && !context.getSettings().FULL_VERSION_PURCHASED.get())) {
 					warnings.add(MessageFormat.format(context.getString(R.string.version_index_is_not_supported), f.getName())); //$NON-NLS-1$
 				} else {
 					if (mapReader.isBasemap()) {
@@ -1077,7 +921,9 @@ public class ResourceManager {
 	}	
 
 	public synchronized void close(){
-		imagesOnFS.clear();
+		for (TilesCache tc : tilesCacheList) {
+			tc.close();
+		}
 		indexFileNames.clear();
 		basemapFileNames.clear();
 		renderer.clearAllResources();
@@ -1140,7 +986,7 @@ public class ResourceManager {
 			if (lf != null) {
 				for (File f : lf) {
 					if (f != null && f.getName().endsWith(IndexConstants.BINARY_MAP_INDEX_EXT)) {
-						map.put(f.getName(), AndroidUtils.formatDate(context, f.lastModified())); //$NON-NLS-1$		
+						map.put(f.getName(), AndroidUtils.formatDate(context, f.lastModified()));
 					}
 				}
 			}
@@ -1148,15 +994,17 @@ public class ResourceManager {
 		return map;
 	}
 	
-	public synchronized void reloadTilesFromFS(){
-		imagesOnFS.clear();
+	public synchronized void reloadTilesFromFS() {
+		for (TilesCache tc : tilesCacheList) {
+			tc.tilesOnFS.clear();
+		}
 	}
 	
 	/// On low memory method ///
 	public void onLowMemory() {
-		log.info("On low memory : cleaning tiles - size = " + cacheOfImages.size()); //$NON-NLS-1$
+		log.info("On low memory");
 		clearTiles();
-		for(RegionAddressRepository r : addressMap.values()){
+		for (RegionAddressRepository r : addressMap.values()) {
 			r.clearCache();
 		}
 		renderer.clearCache();
@@ -1171,14 +1019,11 @@ public class ResourceManager {
 	public OsmandRegions getOsmandRegions() {
 		return context.getRegions();
 	}
-	
-	
+
 	protected synchronized void clearTiles() {
-		log.info("Cleaning tiles - size = " + cacheOfImages.size()); //$NON-NLS-1$
-		ArrayList<String> list = new ArrayList<String>(cacheOfImages.keySet());
-		// remove first images (as we think they are older)
-		for (int i = 0; i < list.size() / 2; i++) {
-			cacheOfImages.remove(list.get(i));
+		log.info("Cleaning tiles...");
+		for (TilesCache tc : tilesCacheList) {
+			tc.clearTiles();
 		}
 	}
 	

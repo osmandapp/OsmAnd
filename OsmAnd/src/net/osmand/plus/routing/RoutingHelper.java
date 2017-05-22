@@ -66,7 +66,7 @@ public class RoutingHelper {
 	private Location lastFixedLocation;
 	
 	private static final int RECALCULATE_THRESHOLD_COUNT_CAUSING_FULL_RECALCULATE = 3;
-	private static final int RECALCULATE_THRESHOLD_CAUSING_FULL_RECALCULATE_INTERVAL = 120000;
+	private static final int RECALCULATE_THRESHOLD_CAUSING_FULL_RECALCULATE_INTERVAL = 2*60*1000;
 	private Thread currentRunningJob;
 	private long lastTimeEvaluatedRoute = 0;
 	private String lastRouteCalcError;

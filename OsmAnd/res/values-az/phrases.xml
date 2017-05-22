@@ -1,0 +1,14 @@
+<?xml version='1.0' encoding='UTF-8'?>
+<resources><string name="poi_office">Ofis</string>
+	<string name="poi_sport">İdman</string>
+	<string name="poi_tourism">Turizm</string>
+	<string name="poi_club">Klub</string>
+	<string name="poi_cafe_and_restaurant">Kafe və restoran</string>
+	<string name="poi_service">Xidmət</string>
+	<string name="poi_osmwiki">Vikipediya</string>
+	<string name="poi_doors">Qapılar</string>
+	<string name="poi_games">Oyunlar</string>
+	<string name="poi_video_games">Video oyunlar</string>
+	<string name="poi_police">Polis</string>
+	<string name="poi_music_school">Musiqi məktəbi</string>
+	</resources>

@@ -229,7 +229,7 @@
 	<string name="poi_bay">Öböl</string>
 	<string name="poi_fjord">Fjord</string>
 	<string name="poi_reef">Zátony</string>
-	<string name="poi_wetland">Láp</string>
+	<string name="poi_wetland">Vizenyős terület</string>
 	<string name="poi_nature_reserve">Természetvédelmi terület</string>
 	<string name="poi_island">Sziget</string>
 	<string name="poi_shop">Üzlet</string>
@@ -394,7 +394,7 @@
 	<string name="poi_tower">Torony</string>
 	<string name="poi_mast">Pózna</string>
 	<string name="poi_radar">Radar</string>
-	<string name="poi_works">Üzem</string>
+	<string name="poi_works">Gyár</string>
 	<string name="poi_mineshaft">Bányaakna (függőleges)</string>
 	<string name="poi_adit">Bányatárna (vízszintes)</string>
 	<string name="poi_petroleum_well">Olajkút</string>
@@ -1367,7 +1367,7 @@
 	<string name="poi_historic_quarry">Történelmi kőfejtő</string>
 
 	<string name="poi_wetland_wet_meadow">Láprét</string>
-	<string name="poi_wetland_swamp">Ingovány</string>
+	<string name="poi_wetland_swamp">Erdős mocsár</string>
 	<string name="poi_wetland_bog">Láp</string>
 	<string name="poi_wetland_marsh">Mocsár</string>
 	<string name="poi_wetland_reedbed">Nádas</string>

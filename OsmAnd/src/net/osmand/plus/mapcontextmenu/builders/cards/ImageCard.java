@@ -1,10 +1,11 @@
 package net.osmand.plus.mapcontextmenu.builders.cards;
 
+import android.content.res.ColorStateList;
 import android.graphics.Bitmap;
 import android.graphics.drawable.Drawable;
 import android.os.AsyncTask;
-import android.os.Build;
 import android.support.annotation.NonNull;
+import android.support.v7.widget.AppCompatButton;
 import android.view.View;
 import android.view.View.OnClickListener;
 import android.widget.ImageView;
@@ -18,6 +19,7 @@ import net.osmand.plus.OsmandApplication;
 import net.osmand.plus.R;
 import net.osmand.plus.Version;
 import net.osmand.plus.activities.MapActivity;
+import net.osmand.plus.mapcontextmenu.MenuBuilder;
 import net.osmand.plus.mapillary.MapillaryContributeCard;
 import net.osmand.plus.mapillary.MapillaryImageCard;
 import net.osmand.util.Algorithms;
@@ -55,11 +57,24 @@ public abstract class ImageCard extends AbstractCard {
 	private String url;
 	// Image bitmap url
 	private String imageUrl;
+	// Image high resolution bitmap url
+	private String imageHiresUrl;
+	// true if external browser should to be opened, open webview otherwise
+	private boolean externalLink;
 
-	private int defaultImageLayoutId = R.layout.context_menu_card_image;
+	protected int topIconId;
+	protected int buttonIconId;
+	protected String buttonText;
+	protected int buttonIconColor;
+	protected int buttonColor;
+	protected int buttonTextColor;
+
+	private int defaultCardLayoutId = R.layout.context_menu_card_image;
 
 	protected Drawable icon;
+	protected Drawable buttonIcon;
 	protected OnClickListener onClickListener;
+	protected OnClickListener onButtonClickListener;
 
 	private static final DateFormat DATE_FORMAT = SimpleDateFormat.getDateTimeInstance(FULL, FULL, Locale.US); //"yyyy-MM-dd'T'HH:mm:ss");
 	private boolean downloading;
@@ -101,8 +116,52 @@ public abstract class ImageCard extends AbstractCard {
 			if (imageObject.has("imageUrl")) {
 				this.imageUrl = imageObject.getString("imageUrl");
 			}
-		} catch (JSONException e) {
+			if (imageObject.has("imageHiresUrl")) {
+				this.imageHiresUrl = imageObject.getString("imageHiresUrl");
+			}
+			if (imageObject.has("externalLink") && !imageObject.isNull("externalLink")) {
+				this.externalLink = imageObject.getBoolean("externalLink");
+			}
+			if (imageObject.has("topIcon") && !imageObject.isNull("topIcon")) {
+				this.topIconId = getDrawableId(imageObject.getString("topIcon"));
+			}
+			if (imageObject.has("buttonIcon") && !imageObject.isNull("buttonIcon")) {
+				this.buttonIconId = getDrawableId(imageObject.getString("buttonIcon"));
+			}
+			if (imageObject.has("buttonText") && !imageObject.isNull("buttonText")) {
+				this.buttonText = imageObject.getString("buttonText");
+			}
+			if (imageObject.has("buttonIconColor") && !imageObject.isNull("buttonIconColor")) {
+				try {
+					this.buttonIconColor = Algorithms.parseColor(imageObject.getString("buttonIconColor"));
+				} catch (IllegalArgumentException e) {
+					e.printStackTrace();
+				}
+			}
+			if (imageObject.has("buttonColor") && !imageObject.isNull("buttonColor")) {
+				try {
+					this.buttonColor = Algorithms.parseColor(imageObject.getString("buttonColor"));
+				} catch (IllegalArgumentException e) {
+					e.printStackTrace();
+				}
+			}
+			if (imageObject.has("buttonTextColor") && !imageObject.isNull("buttonTextColor")) {
+				try {
+					this.buttonTextColor = Algorithms.parseColor(imageObject.getString("buttonTextColor"));
+				} catch (IllegalArgumentException e) {
+					e.printStackTrace();
+				}
+			}
+		} catch (Exception e) {
 			e.printStackTrace();
+		}
+	}
+
+	private int getDrawableId(String id) {
+		if (Algorithms.isEmpty(id)) {
+			return 0;
+		} else {
+			return getMyApplication().getResources().getIdentifier(id, "drawable", getMyApplication().getPackageName());
 		}
 	}
 
@@ -157,13 +216,45 @@ public abstract class ImageCard extends AbstractCard {
 		return imageUrl;
 	}
 
-	public int getDefaultImageLayoutId() {
-		return defaultImageLayoutId;
+	public String getImageHiresUrl() {
+		return imageHiresUrl;
+	}
+
+	public boolean isExternalLink() {
+		return externalLink;
+	}
+
+	public int getTopIconId() {
+		return topIconId;
+	}
+
+	public int getButtonIconId() {
+		return buttonIconId;
+	}
+
+	public String getButtonText() {
+		return buttonText;
+	}
+
+	public int getButtonIconColor() {
+		return buttonIconColor;
+	}
+
+	public int getButtonColor() {
+		return buttonColor;
+	}
+
+	public int getButtonTextColor() {
+		return buttonTextColor;
+	}
+
+	public int getDefaultCardLayoutId() {
+		return defaultCardLayoutId;
 	}
 
 	@Override
 	public int getCardLayoutId() {
-		return defaultImageLayoutId;
+		return defaultCardLayoutId;
 	}
 
 	public Drawable getIcon() {
@@ -213,6 +304,10 @@ public abstract class ImageCard extends AbstractCard {
 			ImageView iconImageView = (ImageView) view.findViewById(R.id.icon);
 			TextView watermarkTextView = (TextView) view.findViewById(R.id.watermark);
 			ProgressBar progress = (ProgressBar) view.findViewById(R.id.progress);
+			AppCompatButton button = (AppCompatButton) view.findViewById(R.id.button);
+			if (icon == null && topIconId != 0) {
+				icon = getMyApplication().getIconsCache().getIcon(topIconId);
+			}
 			if (icon == null) {
 				iconImageView.setVisibility(View.GONE);
 			} else {
@@ -229,7 +324,7 @@ public abstract class ImageCard extends AbstractCard {
 				progress.setVisibility(View.VISIBLE);
 				image.setImageBitmap(null);
 			} else if (!downloaded) {
-				execute(new DownloadImageTask());
+				MenuBuilder.execute(new DownloadImageTask());
 			} else {
 				progress.setVisibility(View.GONE);
 				image.setImageBitmap(bitmap);
@@ -244,15 +339,36 @@ public abstract class ImageCard extends AbstractCard {
 			} else {
 				view.findViewById(R.id.image_card).setOnClickListener(null);
 			}
-		}
-	}
 
-	@SuppressWarnings("unchecked")
-	public static <P> void execute(AsyncTask<P, ?, ?> task, P... requests) {
-		if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.HONEYCOMB) {
-			task.executeOnExecutor(AsyncTask.THREAD_POOL_EXECUTOR, requests);
-		} else {
-			task.execute(requests);
+			if (!Algorithms.isEmpty(buttonText)) {
+				button.setText(buttonText);
+			}
+			if (buttonIcon == null && buttonIconId != 0) {
+				if (buttonIconColor != 0) {
+					buttonIcon = getMyApplication().getIconsCache().getPaintedIcon(buttonIconId, buttonIconColor);
+				} else {
+					buttonIcon = getMyApplication().getIconsCache().getIcon(buttonIconId);
+				}
+			}
+			button.setCompoundDrawablesWithIntrinsicBounds(buttonIcon, null, null, null);
+			if (buttonColor != 0) {
+				button.setSupportBackgroundTintList(ColorStateList.valueOf(buttonColor));
+			}
+			if (buttonTextColor != 0) {
+				button.setTextColor(buttonTextColor);
+			}
+			if (onButtonClickListener != null) {
+				button.setVisibility(View.VISIBLE);
+				button.setOnClickListener(new OnClickListener() {
+					@Override
+					public void onClick(View v) {
+						onButtonClickListener.onClick(v);
+					}
+				});
+			} else {
+				button.setVisibility(View.GONE);
+				button.setOnClickListener(null);
+			}
 		}
 	}
 
@@ -287,6 +403,13 @@ public abstract class ImageCard extends AbstractCard {
 					pms.put("myLocation", "" + myLocation.getLatitude() + "," + myLocation.getLongitude());
 				}
 				pms.put("app", Version.isPaidVersion(app) ? "paid" : "free");
+				String preferredLang = app.getSettings().MAP_PREFERRED_LOCALE.get();
+				if (Algorithms.isEmpty(preferredLang)) {
+					preferredLang = app.getLanguage();
+				}
+				if (!Algorithms.isEmpty(preferredLang)) {
+					pms.put("lang", preferredLang);
+				}
 				String response = AndroidNetworkUtils.sendRequest(app, "http://osmand.net/api/cm_place.php", pms,
 						"Requesting location images...", false, false);
 

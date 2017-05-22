@@ -602,7 +602,7 @@
 	<string name="poi_leisure_fishing">Lugar de pesca</string>
 	<string name="poi_hunting_stand">Choza de caza</string>
 	<string name="poi_harbour">Puerto marítimo</string>
-	<string name="poi_marina">Marina/Puerto deportivo</string>
+	<string name="poi_marina">Puerto deportivo</string>
 	<string name="poi_miniature_golf">Minigolf</string>
 	<string name="poi_playground">Juegos infantiles</string>
 	<string name="poi_bench">Banco (asiento)</string>
@@ -697,7 +697,7 @@
 	<string name="poi_amenity_atm">Cajero automático</string>
 	<string name="poi_payment_terminal">Terminal de pago</string>
 	<string name="poi_money_lender">Prestamista</string>
-	<string name="poi_pawnbroker">Casa de empeños</string>
+	<string name="poi_pawnbroker">Prestamista (empeños)</string>
 	<string name="poi_bureau_de_change">Casa de cambio</string>
 	<string name="poi_accountant">Contador</string>
 	<string name="poi_bitcoin_yes">Pago de Bitcoin</string>
@@ -1205,7 +1205,7 @@
 	<string name="poi_trees_coca">Coca</string>
 	<string name="poi_trees_kiwi">Kiwi</string>
 	<string name="poi_trees_meadow_orchard">Huerto</string>
-	<string name="poi_trees_mango">Mango/Melocotón</string>
+	<string name="poi_trees_mango">Mango</string>
 	<string name="poi_trees_rubber">Caucho</string>
 	<string name="poi_trees_date">Fecha</string>
 	<string name="poi_trees_coffea">Café</string>
@@ -1936,21 +1936,21 @@
 	<string name="poi_shop_additional_yes">Con negocio</string>
 
 	<string name="poi_service_bicycle_retail_yes">Venta</string>
-	<string name="poi_service_bicycle_retail_no">No se venden bicicletas</string>
+	<string name="poi_service_bicycle_retail_no">Venden bicicletas: no</string>
 	<string name="poi_service_bicycle_repair_yes">Reparación</string>
-	<string name="poi_service_bicycle_repair_no">No se reparan bicicletas</string>
+	<string name="poi_service_bicycle_repair_no">Reparan bicicletas: no</string>
 	<string name="poi_service_bicycle_rental_yes">Alquiler</string>
-	<string name="poi_service_bicycle_rental_no">No se alquilan bicicletas</string>
-	<string name="poi_service_bicycle_pump_yes">Inflador</string>
-	<string name="poi_service_bicycle_pump_no">No se inflan bicicletas</string>
+	<string name="poi_service_bicycle_rental_no">Alquilan bicicletas: no</string>
+	<string name="poi_service_bicycle_pump_yes">Inflador de bicicletas</string>
+	<string name="poi_service_bicycle_pump_no">Inflan bicicletas: no</string>
 	<string name="poi_service_bicycle_diy_yes">Herramientas para autoreparación</string>
-	<string name="poi_service_bicycle_diy_no">Sin herramientas para autoreparación</string>
+	<string name="poi_service_bicycle_diy_no">Herramientas para autoreparación: no</string>
 	<string name="poi_service_bicycle_cleaning_yes">Limpieza</string>
-	<string name="poi_service_bicycle_cleaning_no">No se limpian bicicletas</string>
+	<string name="poi_service_bicycle_cleaning_no">Limpian bicicletas: no</string>
 	<string name="poi_service_bicycle_chaintool_yes">Herramientas para cadenas de bicicletas</string>
-	<string name="poi_service_bicycle_chaintool_no">Sin herramientas para cadenas de bicicletas</string>
+	<string name="poi_service_bicycle_chaintool_no">Herramientas para cadenas de bicicletas: no</string>
 	<string name="poi_service_bicycle_second_hand_yes">Venta de bicicletas usadas</string>
-	<string name="poi_service_bicycle_second_hand_no">No se venden bicicletas usadas</string>
+	<string name="poi_service_bicycle_second_hand_no">Venden bicicletas usadas: no</string>
 
 	<string name="poi_wildlife_hide">Observatorio de vida salvaje</string>
 
@@ -3067,8 +3067,8 @@
 	<string name="poi_additional_type">Adicional</string>
 <string name="poi_shop_craft">Artículos para arte y artesanías</string>
 
-	<string name="poi_service_bicycle_charging_yes">Con cargador eléctrico para bicicletas</string>
-	<string name="poi_service_bicycle_charging_no">Sin cargador eléctrico para bicicletas</string>
+	<string name="poi_service_bicycle_charging_yes">Cargador eléctrico para bicicletas: sí</string>
+	<string name="poi_service_bicycle_charging_no">Cargador eléctrico para bicicletas: no</string>
 
 <string name="poi_fuel_avia_type">Tipo de combustible (aviones)</string>
 	<string name="poi_payment_fuel_type">Tarjetas de combustible</string>
@@ -3094,7 +3094,7 @@
 	<string name="poi_bicycle_parking_type">Tipo de bicicletero</string>
 	<string name="poi_aerialway_bicycle">Transporte para bicicletas</string>
 	<string name="poi_aerialway_heating">Calefaccionado</string>
-	<string name="poi_pump">Bomba / Surtidor</string>
+	<string name="poi_pump">Bomba</string>
 	<string name="poi_observatory_designation">Designación</string>
 	<string name="poi_telescope_type">Tipo de telescopio</string>
 	<string name="poi_animal_training_type">Tipo de amaestramiento</string>

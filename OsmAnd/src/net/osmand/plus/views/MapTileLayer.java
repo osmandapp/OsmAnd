@@ -1,5 +1,14 @@
 package net.osmand.plus.views;
 
+import android.annotation.SuppressLint;
+import android.graphics.Bitmap;
+import android.graphics.Canvas;
+import android.graphics.Matrix;
+import android.graphics.Paint;
+import android.graphics.Rect;
+import android.graphics.RectF;
+import android.widget.Toast;
+
 import net.osmand.data.QuadRect;
 import net.osmand.data.RotatedTileBox;
 import net.osmand.map.ITileSource;
@@ -12,32 +21,24 @@ import net.osmand.plus.mapillary.MapillaryPlugin;
 import net.osmand.plus.rastermaps.OsmandRasterMapsPlugin;
 import net.osmand.plus.resources.ResourceManager;
 import net.osmand.util.MapUtils;
-import android.annotation.SuppressLint;
-import android.graphics.Bitmap;
-import android.graphics.Canvas;
-import android.graphics.Matrix;
-import android.graphics.Paint;
-import android.graphics.Rect;
-import android.graphics.RectF;
-import android.widget.Toast;
 
 public class MapTileLayer extends BaseMapLayer {
 
 	protected static final int emptyTileDivisor = 16;
 	public static final int OVERZOOM_IN = 2;
 	
-	private final boolean mainMap;
+	protected final boolean mainMap;
 	protected ITileSource map = null;
 	protected MapTileAdapter mapTileAdapter = null;
 	
-	Paint paintBitmap;
+	protected Paint paintBitmap;
 	protected RectF bitmapToDraw = new RectF();
 	protected Rect bitmapToZoom = new Rect();
 	
 
 	protected OsmandMapTileView view;
 	protected ResourceManager resourceManager;
-	private OsmandSettings settings;
+	protected OsmandSettings settings;
 	private boolean visible = true;
 
 	
@@ -175,7 +176,7 @@ public class MapTileLayer extends BaseMapLayer {
 				boolean imgExist = mgr.tileExistOnFileSystem(ordImgTile, map, tileX, tileY, nzoom);
 				boolean originalWillBeLoaded = useInternet && nzoom <= maxLevel;
 				if (imgExist || originalWillBeLoaded) {
-					bmp = mgr.getTileImageForMapAsync(ordImgTile, map, tileX, tileY, nzoom, useInternet);
+					bmp = mgr.getBitmapTilesCache().getTileForMapAsync(ordImgTile, map, tileX, tileY, nzoom, useInternet);
 				}
 				if (bmp == null) {
 					int div = 1;
@@ -188,14 +189,14 @@ public class MapTileLayer extends BaseMapLayer {
 						div *= 2;
 						String imgTileId = mgr.calculateTileId(map, tileX / div, tileY / div, nzoom - kzoom);
 						if (readFromCache) {
-							bmp = mgr.getTileImageFromCache(imgTileId);
+							bmp = mgr.getBitmapTilesCache().get(imgTileId);
 							if (bmp != null) {
 								break;
 							}
 						} else if (loadIfExists) {
 							if (mgr.tileExistOnFileSystem(imgTileId, map, tileX / div, tileY / div, nzoom - kzoom) 
 									|| (useInternet && nzoom - kzoom <= maxLevel)) {
-								bmp = mgr.getTileImageForMapAsync(imgTileId, map, tileX / div, tileY / div, nzoom
+								bmp = mgr.getBitmapTilesCache().getTileForMapAsync(imgTileId, map, tileX / div, tileY / div, nzoom
 										- kzoom, useInternet);
 								break;
 							}
@@ -243,7 +244,7 @@ public class MapTileLayer extends BaseMapLayer {
 									bitmapToZoom.width(), bitmapToZoom.height(), m, true);
 							bitmapToZoom.set(0, 0, tileSize, tileSize);
 							// very expensive that's why put in the cache
-							mgr.putTileInTheCache(ordImgTile, sampled);
+							mgr.getBitmapTilesCache().put(ordImgTile, sampled);
 							canvas.drawBitmap(sampled, bitmapToZoom, bitmapToDraw, paintBitmap);
 						}
 					}

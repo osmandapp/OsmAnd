@@ -686,7 +686,9 @@ public class OpeningHoursParser {
 					formatTime(stHour, stTime, b);
 					b.append("-"); //$NON-NLS-1$
 					formatTime(enHour, enTime, b);
-					
+				}
+				if(off) {
+					b.append(" off");
 				}
 			}
 			return b.toString();
@@ -864,7 +866,7 @@ public class OpeningHoursParser {
 					}
 				}
 			}
-			if (thisDay) {
+			if (thisDay && (startTimes == null || startTimes.isEmpty() || !off)) {
 				return -1;
 			}
 			return 0;
@@ -1032,7 +1034,7 @@ public class OpeningHoursParser {
 			if(t.type == TokenType.TOKEN_UNKNOWN) {
 				findInArray(t, holidayStr, TokenType.TOKEN_HOLIDAY);
 			}
-			if(t.type == TokenType.TOKEN_UNKNOWN && "off".equals(t.text)) {
+			if(t.type == TokenType.TOKEN_UNKNOWN && ("off".equals(t.text) || "closed".equals(t.text))) {
 				t.type = TokenType.TOKEN_OFF_ON;
 				t.mainNumber = 0;
 			}
@@ -1063,6 +1065,7 @@ public class OpeningHoursParser {
 			if(tokens.get(i).type == TokenType.TOKEN_HOUR_MINUTES || 
 					tokens.get(i).type == TokenType.TOKEN_OFF_ON) {
 				hoursSpecified = true;
+				break;
 			}
 		}
 		for(int i = 0; i < tokens.size(); i ++) {
@@ -1187,231 +1190,7 @@ public class OpeningHoursParser {
 	 * @return BasicRule if the String is successfully parsed and UnparseableRule otherwise
 	 */
 	public static OpeningHoursParser.OpeningHoursRule parseRule(String r) {
-		if(true) {
-			return parseRuleV2(r);
-		}
-		// replace words "sunrise" and "sunset" by real hours
-		r = r.toLowerCase();
-		final String[] daysStr = new String[]{"mo", "tu", "we", "th", "fr", "sa", "su"};
-		final String[] monthsStr = new String[]{"jan", "feb", "mar", "apr", "may", "jun", "jul", "aug", "sep", "oct", "nov", "dec"};
-		final String[] holidayStr = new String[]{"ph", "sh"};
-		final int daysInMonth = 31;
-		String sunrise = "07:00";
-		String sunset = "21:00";
-		String endOfDay = "24:00";
-
-		String localRuleString = r.replaceAll("sunset", sunset).replaceAll("sunrise", sunrise)
-				.replaceAll("\\+", "-" + endOfDay);
-		int startDay = -1;
-		int previousDay = -1;
-		int startMonth = -1;
-		int previousMonth = -1;
-		int startDayInMonth = -1;
-		int previousDayInMonth = -1;
-		int k = 0; // Position in opening_hours string
-
-		BasicOpeningHourRule basic = new BasicOpeningHourRule();
-		boolean[] days = basic.getDays();
-		boolean[] months = basic.getMonths();
-		boolean[] dayMonths = basic.getDayMonths();
-		// check 24/7
-		if ("24/7".equals(localRuleString)) {
-			Arrays.fill(days, true);
-			Arrays.fill(months, true);
-			Arrays.fill(dayMonths, true);
-			basic.addTimeRange(0, 24 * 60);
-			return basic;
-		}
-
-		for (; k < localRuleString.length(); k++) {
-			char ch = localRuleString.charAt(k);
-			if (Character.isDigit(ch)) {
-				// time starts
-				break;
-			}
-			if ((k + 2 < localRuleString.length())
-					&& localRuleString.substring(k, k + 3).equals("off")) {
-				// value "off" is found
-				break;
-			}
-			if (Character.isWhitespace(ch) || ch == ',') {
-			} else if (ch == '-') {
-				if (previousDay != -1) {
-					startDay = previousDay;
-				} else if (previousMonth != -1) {
-					startMonth = previousMonth;
-				} else {
-					return new UnparseableRule(r);
-				}
-			} else if (k < r.length() - 1) {
-				int i = 0;
-				for (String s : daysStr) {
-					if (s.charAt(0) == ch && s.charAt(1) == r.charAt(k + 1)) {
-						break;
-					}
-					i++;
-				}
-				if (i < daysStr.length) {
-					if (startDay != -1) {
-						for (int j = startDay; j <= i; j++) {
-							days[j] = true;
-						}
-						if (startDay > i) {// overflow handling, e.g. Su-We
-							for (int j = startDay; j <= 6; j++) {
-								days[j] = true;
-							}
-							for (int j = 0; j <= i; j++) {
-								days[j] = true;
-							}
-						}
-						startDay = -1;
-					} else {
-						days[i] = true;
-					}
-					previousDay = i;
-				} else {
-					// Read Month
-					int m = 0;
-					for (String s : monthsStr) {
-						if (s.charAt(0) == ch && s.charAt(1) == r.charAt(k + 1)
-								&& s.charAt(2) == r.charAt(k + 2)) {
-							break;
-						}
-						m++;
-					}
-					if (m < monthsStr.length) {
-						if (startMonth != -1) {
-							for (int j = startMonth; j <= m; j++) {
-								months[j] = true;
-							}
-							if (startMonth > m) {// overflow handling, e.g. Oct-Mar
-								for (int j = startMonth; j <= 11; j++) {
-									months[j] = true;
-								}
-								for (int j = 0; j <= m; j++) {
-									months[j] = true;
-								}
-							}
-							startMonth = -1;
-						} else {
-							months[m] = true;
-						}
-						previousMonth = m;
-					}
-					// Read days
-					m = 0;
-					int daysR = 1;
-					for(int t = 1; t <= daysInMonth; t++) {
-						String s = t +"";
-						if (s.charAt(0) == ch && (t < 10 || s.charAt(1) == r.charAt(k+1))) {
-							break;
-						}
-						daysR++;
-					}
-					if (daysR <= daysInMonth) {
-						if (startDayInMonth != -1) {
-							for (int j = startDayInMonth; j <= m; j++) {
-								dayMonths[j] = true;
-							}
-							if (startMonth > m) {// overflow handling, e.g. 25-2
-								for (int j = startDayInMonth; j <= daysInMonth; j++) {
-									dayMonths[j] = true;
-								}
-								for (int j = 0; j <= m; j++) {
-									dayMonths[j] = true;
-								}
-							}
-							startDayInMonth = -1;
-						} else {
-							dayMonths[m] = true;
-						}
-						previousDayInMonth = m;
-					}
-
-					
-					if (previousMonth == -1) {
-						if (ch == 'p' && r.charAt(k + 1) == 'h') {
-							basic.publicHoliday = true;
-						}
-						if (ch == 's' && r.charAt(k + 1) == 'h') {
-							basic.schoolHoliday = true;
-						}
-					}
-				}
-			} else {
-				return new UnparseableRule(r);
-			}
-		}
-		if (previousDay == -1 && !basic.publicHoliday && !basic.schoolHoliday) {
-			// no days given => take all days.
-			Arrays.fill(days, true);
-		}
-		if (previousMonth == -1) {
-			// no month given => take all months.
-			Arrays.fill(months, true);
-		}
-		if (previousDayInMonth == -1) {
-			// no days  given => take all days.
-			Arrays.fill(dayMonths, true);
-		}
-		String timeSubstr = localRuleString.substring(k);
-		String[] times = timeSubstr.split(",");
-		boolean timesExist = true;
-		for (int i = 0; i < times.length; i++) {
-			String time = times[i];
-			time = time.trim();
-			if (time.length() == 0) {
-				continue;
-			}
-			if (time.equals("off")) {
-				break; // add no time values
-			}
-			if (time.equals("24/7")) {
-				// for some reason, this is used. See tagwatch.
-				basic.addTimeRange(0, 24 * 60);
-				break;
-			}
-			String[] stEnd = time.split("-"); //$NON-NLS-1$
-			if (stEnd.length != 2) {
-				if (i == times.length - 1 && basic.getStartTime() == 0 && basic.getEndTime() == 0) {
-					return new UnparseableRule(r);
-				}
-				continue;
-			}
-			timesExist = true;
-			int st;
-			int end;
-			try {
-				int i1 = stEnd[0].indexOf(':');
-				int i2 = stEnd[1].indexOf(':');
-				int startHour, startMin, endHour, endMin;
-				if (i1 == -1) {
-					// if no minutes are given, try complete value as hour
-					startHour = Integer.parseInt(stEnd[0].trim());
-					startMin = 0;
-				} else {
-					startHour = Integer.parseInt(stEnd[0].substring(0, i1).trim());
-					startMin = Integer.parseInt(stEnd[0].substring(i1 + 1).trim());
-				}
-				if (i2 == -1) {
-					// if no minutes are given, try complete value as hour
-					endHour = Integer.parseInt(stEnd[1].trim());
-					endMin = 0;
-				} else {
-					endHour = Integer.parseInt(stEnd[1].substring(0, i2).trim());
-					endMin = Integer.parseInt(stEnd[1].substring(i2 + 1).trim());
-				}
-				st = startHour * 60 + startMin;
-				end = endHour * 60 + endMin;
-			} catch (NumberFormatException e) {
-				return new UnparseableRule(r);
-			}
-			basic.addTimeRange(st, end);
-		}
-		if (!timesExist) {
-			return new UnparseableRule(r);
-		}
-		return basic;
+		return parseRuleV2(r);
 	}
 
 	/**
@@ -1511,17 +1290,17 @@ public class OpeningHoursParser {
 	}
 
 	public static void main(String[] args) throws ParseException {
-		// FIXME bug
+		// 0. not supported MON DAY-MON DAY (only supported Feb 2-14 or Feb-Oct: 09:00-17:30)
 		// parseOpenedHours("Feb 16-Oct 15: 09:00-18:30; Oct 16-Nov 15: 09:00-17:30; Nov 16-Feb 15: 09:00-16:30");
 		
-		// not supported (,)
+		// 1. not supported (,)
 		// hours = parseOpenedHours("Mo-Su 07:00-23:00, Fr 08:00-20:00");
 		
+		// 2. not supported break properly
 		// parseOpenedHours("Sa-Su 10:00-17:00 || \"by appointment\"");
 		// comment is dropped
 		
-		
-		// not properly supported
+		// 3. not properly supported
 		// hours = parseOpenedHours("Mo-Su (sunrise-00:30)-(sunset+00:30)");
 		
 		// Test basic case
@@ -1551,6 +1330,7 @@ public class OpeningHoursParser {
 		hours = parseOpenedHours("Mo-Sa 08:30-14:40; Tu 08:00 - 14:00"); //$NON-NLS-1$
 		System.out.println(hours);
 		testOpened("07.08.2012 14:20", hours, false);
+		testOpened("07.08.2012 08:15", hours, true); // Tuesday
 
 		// test off value
 		hours = parseOpenedHours("Mo-Sa 09:00-18:25; Th off"); //$NON-NLS-1$
@@ -1692,6 +1472,15 @@ public class OpeningHoursParser {
 		testOpened("25.12.2015 14:00", hours, false);
 		testOpened("24.12.2015 08:00", hours, true);
 
+		// test time off (not days
+		hours = parseOpenedHours("Mo-Fr 08:30-17:00; 12:00-12:40 off;");
+		System.out.println(hours);
+		testOpened("07.05.2017 14:00", hours, false); // Sunday
+		testOpened("06.05.2017 12:15", hours, false); // Saturday
+		testOpened("05.05.2017 14:00", hours, true); // Friday
+		testOpened("05.05.2017 12:15", hours, false);
+		testOpened("05.05.2017 12:00", hours, false);
+		testOpened("05.05.2017 11:45", hours, true);
 		
 		// Test holidays
 		String hoursString = "mo-fr 11:00-21:00; PH off";
@@ -1699,5 +1488,6 @@ public class OpeningHoursParser {
 		testParsedAndAssembledCorrectly(hoursString, hours);
 		
 
+		
 	}
 }

@@ -305,7 +305,11 @@ public class MapContextMenu extends MenuTitleController implements StateChangedL
 		appModeChanged = false;
 
 		if (needAcquireMenuController) {
-			acquireMenuController(restorePrevious);
+			if (!acquireMenuController(restorePrevious)) {
+				active = false;
+				clearSelectedObject(object);
+				return false;
+			}
 		} else {
 			menuController.update(pointDescription, object);
 		}
@@ -510,7 +514,7 @@ public class MapContextMenu extends MenuTitleController implements StateChangedL
 		}
 	}
 
-	private void acquireMenuController(boolean restorePrevious) {
+	private boolean acquireMenuController(boolean restorePrevious) {
 		MapContextMenuData menuData = null;
 		if (menuController != null) {
 			if (menuController.isActive() && !restorePrevious) {
@@ -521,13 +525,17 @@ public class MapContextMenu extends MenuTitleController implements StateChangedL
 			menuController.onAcquireNewController(pointDescription, object);
 		}
 		menuController = MenuController.getMenuController(mapActivity, latLon, pointDescription, object, MenuType.STANDARD);
-		menuController.setActive(true);
-		if (menuData != null && (object != menuData.getObject())
-				&& (menuController.hasBackAction() || menuData.hasBackAction())) {
-			historyStack.add(menuData);
-		}
-		if (!(menuController instanceof MapDataMenuController)) {
-			menuController.buildMapDownloadButton(latLon);
+		if (menuController.setActive(true)) {
+			if (menuData != null && (object != menuData.getObject())
+					&& (menuController.hasBackAction() || menuData.hasBackAction())) {
+				historyStack.add(menuData);
+			}
+			if (!(menuController instanceof MapDataMenuController)) {
+				menuController.buildMapDownloadButton(latLon);
+			}
+			return true;
+		} else {
+			return false;
 		}
 	}
 

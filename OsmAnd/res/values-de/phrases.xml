@@ -2552,8 +2552,8 @@
 <string name="poi_seamark_dyke">Seezeichen Deich</string>
 	<string name="poi_dolphin">Dalbe</string>
 
-	<string name="poi_forestry_compartment">Schild: Forstabteilung</string>
-	<string name="poi_forestry_allotment">Schild: Forstparzelle</string>
+	<string name="poi_forestry_compartment">Wegweiser: Forstabteilung</string>
+	<string name="poi_forestry_allotment">Wegweiser: Forstparzelle</string>
 	<string name="poi_inscription_n">Beschriftung: N</string>
 	<string name="poi_inscription_nw">Beschriftung: NW</string>
 	<string name="poi_inscription_w">Beschriftung: W</string>
@@ -2856,7 +2856,7 @@
 
 	<string name="poi_bicycle_parking_lockers">Schließfächer</string>
 	<string name="poi_bicycle_parking_tree">Fahrrad-Baum</string>
-	<string name="poi_bicycle_parking_streetpod">Straßenschale</string>
+	<string name="poi_bicycle_parking_streetpod">Straßenunterstand</string>
 
 	<string name="poi_salt_yes">Salz</string>
 	<string name="poi_salt_no">Salz: Nein</string>
@@ -3365,5 +3365,7 @@
 <string name="poi_resort_kids_camp">Kinderferienlager</string>
 	<string name="poi_music_school">Musikschule</string>
 	<string name="poi_language_school">Sprachschule</string>
+
+<string name="poi_life_ring">Rettungsring</string>
 
 </resources>

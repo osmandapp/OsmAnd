@@ -183,13 +183,13 @@ def replaceNoTranslate(line) {
 	if (line.contains("\"app_edition\"") && System.getenv("APP_EDITION")) {
 		return line.replaceAll(">[^<]*<", ">" + System.getenv("APP_EDITION") + "<")
 	}
-	if (line.contains("\"app_version\"") && System.getenv("APK_VERSION")) {
-		return line.replaceAll(">[^<]*<", ">" + System.getenv("APK_VERSION") + "<")
-	}
-	if (line.contains("\"app_version\"") && System.getenv("APK_VERSION_SUFFIX")) {
+//	if (line.contains("\"app_version\"") && System.getenv("APK_VERSION")) {
+//		return line.replaceAll(">[^<]*<", ">" + System.getenv("APK_VERSION") + "<")
+//	}
+//	if (line.contains("\"app_version\"") && System.getenv("APK_VERSION_SUFFIX")) {
 		// appends build number to version number for dev builds
-		return line.replaceAll("</", System.getenv("APK_VERSION_SUFFIX") + "</")
-	}
+//		return line.replaceAll("</", System.getenv("APK_VERSION_SUFFIX") + "</")
+//	}
 	if (line.contains("\"versionFeatures\"") && System.getenv("APP_FEATURES")) {
 		return line.replaceAll(">[^<]*<", ">" + System.getenv("APP_FEATURES") + "<")
 	}

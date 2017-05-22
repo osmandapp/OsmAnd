@@ -166,7 +166,7 @@ public class DownloadTilesDialog {
 								if (rm.tileExistOnFileSystem(tileId, map, x, y, z)) {
 									progressDlg.setProgress(progressDlg.getProgress() + 1);
 								} else {
-									rm.getTileImageForMapSync(tileId, map, x, y, z, true);
+									rm.hasTileForMapSync(tileId, map, x, y, z, true);
 									requests++;
 								}
 								if (!cancel) {

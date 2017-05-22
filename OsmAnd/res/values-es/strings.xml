@@ -247,7 +247,7 @@ El espacio de almacenamiento usado es {1} MB.
     <string name="amenity_type_sport">Deporte</string>
     <string name="amenity_type_sustenance">Sustento</string>
     <string name="amenity_type_tourism">Turismo</string>
-    <string name="amenity_type_transportation">Transporte</string>
+    <string name="amenity_type_transportation">Transporte público</string>
     <string name="indexing_address">Indexando direcciones…</string>
     <string name="indexing_map">Indexando mapa…</string>
     <string name="indexing_poi">Indexando PDI…</string>
@@ -1601,7 +1601,7 @@ Afganistán, Albania, Alemania, Andorra, Angola, Anguila, Antigua y Barbuda, Ant
     <string name="anonymous_user">Usuario anónimo</string>
     <string name="logged_as">Iniciado la sesión como %1$s</string>
     <string name="rendering_category_details">Detalles</string>
-    <string name="rendering_category_transport">Transporte</string>
+    <string name="rendering_category_transport">Transporte público</string>
     <string name="rendering_category_others">Otros atributos del mapa</string>
     <string name="map_widget_appearance_rem">Elementos restantes</string>
     <string name="map_widget_top">Barra de estado</string>
@@ -1998,7 +1998,7 @@ Lon %2$s</string>
     <string name="faq_item">Preguntas Frecuentes</string>
     <string name="faq_item_description">Preguntas Frecuentes</string>
     <string name="map_viewing_item">Vista del mapa</string>
-    <string name="search_on_the_map_item">Buscando en el mapa</string>
+    <string name="search_on_the_map_item">Búsqueda en el mapa</string>
     <string name="planning_trip_item">Planeando un viaje</string>
     <string name="instalation_troubleshooting_item">Instalación y solución de problemas</string>
     <string name="techical_articles_item">Artículos técnicos</string>
@@ -2194,7 +2194,7 @@ OsmAnd Mapas y Navegación - encuentra ubicaciones en el mapa y calcula rutas si
     <string name="find_parking">Encontrar aparcamiento</string>
     <string name="show_polygons">Mostrar polígonos</string>
     
-    <string name="rendering_attr_showMtbRoutes_name">Mostrar rutas MTB</string>
+    <string name="rendering_attr_showMtbRoutes_name">Mostrar rutas para bicicletas de montaña</string>
     <string name="select_map_markers">Seleccionar marcadores de mapa</string>
     <string name="shared_string_reverse_order">Orden inverso</string>
     
@@ -2401,7 +2401,7 @@ El espacio de almacenamiento usado es {3} MB temporalmente y {1} MB permanenteme
     <string name="upload_poi">Subir Punto de Interés</string>
     <string name="route_calculation">Cálculo de rutas</string>
     <string name="search_map_hint">Buscar ciudad o región</string>
-    <string name="gpx_no_tracks_title">Aún no tienes ninguna traza</string>
+    <string name="gpx_no_tracks_title">Aún no tienes trazas</string>
     <string name="gpx_no_tracks_title_folder">También puedes añadir trazas a la carpeta</string>
     <string name="gpx_add_track">Añadir traza</string>
     <string name="gpx_appearance">Aspecto</string>
@@ -2604,13 +2604,13 @@ Por favor proporciona un código completo</string>
     <string name="shared_string_start_time">Hora de inicio</string>
     <string name="shared_string_end_time">Hora de fin</string>
     <string name="shared_string_color">Color</string>
-    <string name="routing_attr_relief_smoothness_factor_hills_name">Montañoso</string>
-    <string name="routing_attr_relief_smoothness_factor_plains_name">Poco montañoso</string>
-    <string name="routing_attr_relief_smoothness_factor_more_plains_name">Plano (llanura)</string>
+    <string name="routing_attr_relief_smoothness_factor_hills_name">Empinado</string>
+    <string name="routing_attr_relief_smoothness_factor_plains_name">Poco empinado</string>
+    <string name="routing_attr_relief_smoothness_factor_more_plains_name">Llano</string>
     <string name="routing_attr_driving_style_speed_name">Velocidad</string>
     <string name="routing_attr_driving_style_balance_name">Equilibrado</string>
     <string name="routing_attr_driving_style_safety_name">Seguridad</string>
-    <string name="relief_smoothness_factor_descr">Terreno preferido: llano o montañoso</string>
+    <string name="relief_smoothness_factor_descr">Terreno preferido: llano o empinado</string>
     <string name="lang_ber">Bereber</string>
     <string name="do_not_send_anonymous_app_usage">No enviar estadísticas de uso anónimas de la aplicación</string>
     <string name="do_not_send_anonymous_app_usage_desc">OsmAnd recopila información acerca de las secciones que abres en la aplicación. No recopilamos datos de ubicación, ingresos en la aplicación o datos relacionados con las áreas que visualizas, buscas o descargas.</string>
@@ -2618,7 +2618,7 @@ Por favor proporciona un código completo</string>
     <string name="do_not_show_startup_messages_desc">Muestra descuentos de la aplicación y mensajes de eventos locales</string>
     <string name="parking_options">Opciones de aparcamiento</string>
     <string name="full_version_thanks">¡Gracias por comprar la versión completa de OsmAnd!</string>
-    <string name="routing_attr_relief_smoothness_factor_name">"Seleccionar  la fluctuación de elevación"</string>
+    <string name="routing_attr_relief_smoothness_factor_name">Seleccionar la fluctuación de elevación</string>
     <string name="right_side_navigation">Conducción por la derecha</string>
     <string name="driving_region_automatic">Automático</string>
     <string name="osmand_extended_description_part1">" OsmAnd (OSM Automated Navigation Directions, Guía de Navegación Automatizada) es una aplicación de mapa y navegación con acceso a los datos abiertos, de todo el mundo y de alta calidad de OpenStreetMap (OSM). Disfruta del navegador por voz y  visual, visualización de PDIs (puntos de interés), creación y gestión de  trazas GPX, visualización de curvas de nivel y uso de la información de altitud (mediante un extra), elegir entre modos conducción, ciclismo o peatonal, edición de OSM y mucho más. "</string>
@@ -2813,4 +2813,12 @@ Algunas de las características principales:
     <string name="mapillary_widget_descr">Te permite la rápida contribución a Mapillary</string>
     <string name="plugin_mapillary_descr">Fotos a nivel de calle para todos. Descubre lugares, colabora, captura el mundo.</string>
     <string name="no_photos_descr">No tenemos fotos para esta ubicación</string>
+    <string name="open_mapillary">Abrir Mapillary</string>
+    <string name="shared_string_install">Instalar</string>
+    <string name="improve_coverage_mapillary">Mejorar la cobertura con Mapillary</string>
+    <string name="improve_coverage_install_mapillary_desc">Puedes hacer tus propias fotos o serie de fotos y añadirlas a esta ubicación del mapa.
+\n
+\nPara ello debes instalar la aplicación Mapillary desde Google Play.</string>
+    <string name="online_photos">Fotos en línea</string>
+    <string name="mapillary_image">Imagen de Mapillary</string>
     </resources>

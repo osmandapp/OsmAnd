@@ -3,6 +3,7 @@
     xmlns:android="http://schemas.android.com/apk/res/android"
     android:layout_width="@dimen/context_img_card_width"
     android:layout_height="@dimen/context_img_card_height"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
     android:background="?attr/bg_color"
     android:orientation="vertical">
 
@@ -20,11 +21,12 @@
         android:textSize="@dimen/default_list_text_size"
         android:text="@string/mapillary_action_descr"/>
 
-    <Button
+    <android.support.v7.widget.AppCompatButton
         android:id="@+id/button"
         android:layout_width="wrap_content"
         android:layout_height="40dp"
-        android:background="@drawable/mapillary_button"
+        android:background="@drawable/blue_button_drawable"
+        app:backgroundTint="@color/mapillary_color"
         android:layout_gravity="bottom|center_horizontal"
         android:drawableLeft="@drawable/ic_action_mapillary"
         android:drawableStart="@drawable/ic_action_mapillary"

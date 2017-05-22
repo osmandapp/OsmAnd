@@ -234,14 +234,11 @@ Einige der Kernfunktionen:
 	<string name="shared_string_online_maps">Online-Karten</string>
 	<string name="online_map_settings_descr">Online- oder zwischengespeicherte Kachelkartenquellen konfigurieren</string>
 
-	<string name="osmand_rastermaps_plugin_description">"Mit dieser Erweiterung erhalten Sie Zugang zu zahlreichen Online-Karten (Kachel- oder Rasterkarten), von vordefinierten Openstreetmap-Kacheln (wie Mapnik) über Satellitenbilder bis zu speziellen zweckgebundenen Overlays wie Wetterkarten, Klimakarten, geologischen Karten, Reliefkarten, usw.
-
-
-Alle Karten können sowohl als Hauptkarte wie auch als Überlagerung oder Unterlage für OsmAnds Standard-Offline-Karten verwendet werden. Um Kartenunterlagen sichtbarer zu machen, können bestimmte Elemente der OsmAnd-Vektorkarten im Menü \'Karte konfigurieren\' ausgeblendet werden.
-
-
-Rasterkarten können direkt online bezogen werden, und werden im OsmAnd-Unterordner \'tiles\' gespeichert. Sie können für die Offline-Verwendung auch von anderen Tools als SQLite-Datei vorbereitet und manuell in den OsmAnd-Unterordner \'tiles\' kopiert werden.
- "</string>
+	<string name="osmand_rastermaps_plugin_description">"Mit dieser Erweiterung erhalten Sie Zugang zu zahlreichen Online-Karten (so genannte Kachel- oder Rasterkarten), von vordefinierten OpenStreetMap-Kacheln (wie Mapnik) bis hin zu Satellitenbildern und speziellen, zweckgebundenen Kartenfolien zu Wetter, Klima, Geologie, Geländerelief, usw.
+\n
+\nAlle Karten können sowohl als Hauptkarte als auch als Auf- oder Unterlage einer anderen Basiskarte (wie OsmAnds Standard-Offline-Karten) dargestellt werden. Um Kartenunterlagen sichtbarer zu machen, können bestimmte Elemente der OsmAnd-Vektorkarten im Menü \'Karte konfigurieren\' ausgeblendet werden.
+\n
+\nRasterkarten können direkt online bezogen werden, oder zur Offline-Verwendung mit einer Vielzahl von Bearbeitungstools als SQLite-Datei aufbereitet und manuell in den OsmAnd-Unterordner \'tiles\' kopiert werden. "</string>
 	<string name="osmand_background_plugin_description">Zeigt die Einstellungen für die Standortaufzeichnung oder die Navigation während das Gerät im Standby-Modus ist (periodisches Aufwecken des GPS-Empfängers).</string>
 	<string name="osmand_accessibility_description">Diese Erweiterung verschafft den direkten Zugriff auf die System-Eingabehilfen in OsmAnd. Dadurch kann z.B. die Abspielgeschwindigkeit der Synthesizer-Stimme, die Bildschirmnavigation mittels Steuerkreuz, die Benutzung eines Trackballs zur Zoomsteuerung oder die Sprachausgabe, wie die automatische Ansage Ihrer Position, konfiguriert werden.</string>
 
@@ -1003,9 +1000,7 @@ Rasterkarten können direkt online bezogen werden, und werden im OsmAnd-Unterord
 	<string name="osmand_parking_pm">PM</string>
 	<string name="osmand_parking_am">AM</string>
 	<string name="osmand_parking_position_name">Parkposition</string>
-	<string name="osmand_parking_plugin_description">Die Erweiterung ermöglicht es, den Standort eines geparkten Fahrzeugs zu speichern sowie die restliche Parkzeit anzuzeigen (falls das Parken zeitlich begrenzt ist).
-
-Parkplatz und Restzeit werden sowohl auf dem OsmAnd Dashboard wie auch auf dem Kartenbildschirm dargestellt. Es kann ein Eintrag im Android-Kalender als Erinnerung hinzugefügt werden.</string>
+	<string name="osmand_parking_plugin_description">Die Erweiterung ermöglicht es, den Standort eines geparkten Fahrzeugs zu speichern sowie die restliche Parkzeit anzuzeigen (falls das Parken zeitlich begrenzt ist). Parkplatz und Restzeit werden sowohl auf dem OsmAnd Dashboard als auch auf dem Kartenbildschirm dargestellt. Es kann ein Eintrag im Android-Kalender als Erinnerung hinzugefügt werden.</string>
 	<string name="osmand_parking_plugin_name">Parkposition</string>
 	<string name="context_menu_item_add_parking_point">Parkposition festlegen</string>
 	<string name="context_menu_item_delete_parking_point">Parkplatz-Standort löschen</string>
@@ -1108,9 +1103,8 @@ Proportionaler Speicher %4$s MB (Android Limit %5$s MB, Dalvik %6$s MB).</string
 	<string name="incomplete_locale">unvollständig</string>
 	<string name="srtm_plugin_name">Höhenlinien</string>
 	<string name="srtm_plugin_description">"Diese Erweiterung beinhaltet Höhenlinien und Relief-Schattierungen, die als Ergänzung zu den Standard-Offline-Karten von OsmAnd angezeigt werden können. Diese Funktionalität ist vor allem für Sportler, Wanderer, Radfahrer, Trekker und jeden interessant, der sich für das Geländerelief einer Landschaft interessiert. (Bitte beachten Sie, Höhen- und Reliefdaten müssen nach Aktivierung des Moduls getrennt, zusätzlich heruntergeladen werden.) 
-
-Die globalen Daten (zwischen 70° Nord und 70° Süd) basieren auf Messungen von SRTM (Shuttle Radar Topography Mission) und ASTER (Advanced Spaceborne Thermal Emission and Reflection Radiometer), einem bildgebenden System des Satelliten Terra, dem Flaggschiff des NASA-Erd-Beobachtungsprogramms. ASTER ist der Erfolg der Zusammenarbeit zwischen der NASA, dem japanischen Ministerium für Wirtschaft, Handel und Industrie und dem japanischen Raumfahrtprogramm (J-spacesystems).
- "</string>
+\n
+\nDie globalen Daten (zwischen 70° Nord und 70° Süd) basieren auf Messungen von SRTM (Shuttle Radar Topography Mission) und ASTER (Advanced Spaceborne Thermal Emission and Reflection Radiometer), einem bildgebenden System des Satelliten Terra, dem Flaggschiff des NASA-Erd-Beobachtungsprogramms. ASTER ist der Erfolg der Zusammenarbeit zwischen der NASA, dem japanischen Ministerium für Wirtschaft, Handel und Industrie und dem japanischen Raumfahrtprogramm (J-spacesystems). "</string>
 	<string name="srtm_paid_version_title">Höhenlinien-Modul</string>
 	<string name="srtm_paid_version_msg">Bitte ziehen Sie den Kauf des Höhenlinien-Modul im Play-Store in Erwägung, um die Weiterentwicklung zu fördern.</string>
 	<string name="download_select_map_types">Andere Karten</string>
@@ -1168,9 +1162,8 @@ Die globalen Daten (zwischen 70° Nord und 70° Süd) basieren auf Messungen von
 	<string name="audionotes_plugin_name">Audio-/Video-Notizen</string>
 	<string name="audionotes_location_not_defined">Es ist noch kein Ort angegeben, der mit der Notiz verbunden werden soll. Benutzen Sie \'Standort verwenden…\', um der Notiz einen Ort zuzuweisen.</string>
 	<string name="osmand_srtm_long_description_1000_chars">"Diese Erweiterung beinhaltet Höhenlinien und Relief-Schattierungen, die als Ergänzung zu den Standard-Offline-Karten von OsmAnd angezeigt werden können. Diese Funktionalität ist vor allem für Sportler, Wanderer, Radfahrer, Trekker und jeden interessant, der sich für das Geländerelief einer Landschaft interessiert.
-
-Die globalen Daten (zwischen 70° Nord und 70° Süd) basieren auf Messungen von SRTM (Shuttle Radar Topography Mission) und ASTER (Advanced Spaceborne Thermal Emission and Reflection Radiometer), einem bildgebenden System des Satelliten Terra, dem Flaggschiff des NASA-Erd-Beobachtungsprogramms. ASTER ist der Erfolg der Zusammenarbeit zwischen der NASA, dem japanischen Ministerium für Wirtschaft, Handel und Industrie und dem japanischen Raumfahrtprogramm (J-spacesystems).
- "</string>
+\n
+\nDie globalen Daten (zwischen 70° Nord und 70° Süd) basieren auf Messungen von SRTM (Shuttle Radar Topography Mission) und ASTER (Advanced Spaceborne Thermal Emission and Reflection Radiometer), einem bildgebenden System des Satelliten Terra, dem Flaggschiff des NASA-Erd-Beobachtungsprogramms. ASTER ist der Erfolg der Zusammenarbeit zwischen der NASA, dem japanischen Ministerium für Wirtschaft, Handel und Industrie und dem japanischen Raumfahrtprogramm (J-spacesystems). "</string>
 	<string name="stop_routing_confirm">Wollen Sie die Navigation wirklich beenden?</string>
 	<string name="clear_dest_confirm">Sind Sie sicher, dass Sie Ihr Ziel (und die Zwischenziele) löschen möchten?</string>
 	<string name="precise_routing_mode_descr">Aktivieren, um Routen fehlerfrei zu berechnen. Diese Funktion ist weiterhin auf kurze Entfernung begrenzt und langsam.</string>
@@ -1612,14 +1605,11 @@ Afghanistan, Ägypten, Albanien, Algerien, Andorra, Angola, Anguilla, Antigua un
 
 	<string name="osmo_settings_uuid">Geräte-ID</string>
 	<string name="osmo_settings_descr">Konfigurieren der Überwachungseinstellungen und des persönlichen Überwachungskanals</string>
-	<string name="osmo_plugin_description">"Diese Erweiterung bietet Teilfunktionen der sogenannten OsMo-Live-Überwachung, siehe http://osmo.mobi.
-
-
-Sie können damit in Echtzeit alle Geräte einer teilnehmenden Gruppe verfolgen. Außerdem können Sie zu Ihrer Gruppe hochgeladene Punkte und Tracks ansehen.
-
-
-Es können auch anonym Gruppen eingerichtet werden. Deren Möglichkeiten sind allerdings eingeschränkt: Die Gruppe besteht nur für einige Tage und es ist keine zentrale Steuerung der Gruppe möglich. Voll funktionsfähige Gruppen müssen auf der genannten Internetseite erstellt werden, auf sie haben nur registrierte Nutzer Zugriff.
- "</string>
+	<string name="osmo_plugin_description">"Diese Erweiterung bietet Teilfunktionen der sogenannten OsMo-Live-Überwachung, siehe https://osmo.mobi
+\n
+\nSie können damit in Echtzeit alle Geräte einer teilnehmenden Gruppe verfolgen. Außerdem können Sie zu Ihrer Gruppe hochgeladene Punkte und Tracks ansehen.
+\n
+\nEs können auch anonym Gruppen eingerichtet werden. Deren Möglichkeiten sind allerdings eingeschränkt: Die Gruppe besteht nur für einige Tage und es ist keine zentrale Steuerung der Gruppe möglich. Voll funktionsfähige Gruppen müssen auf der genannten Internetseite erstellt werden, auf sie haben nur registrierte Nutzer Zugriff. "</string>
 	<string name="osmo_plugin_name">OsMo (OSM Monitoring)</string>
 	<string name="osmo_settings">OsMo</string>
 	<string name="osmo_io_error">"OsMo-Verbindungsproblem: "</string>
@@ -1754,9 +1744,8 @@ Mit Neuanmeldung fortfahren?</string>
     <string name="targets">Ziele</string>
     <string name="way_alarms">Verkehrswarnungen</string>
     <string name="record_plugin_description">"Diese Erweiterung ermöglicht es, Tracks durch Drücken der GPX-Aufnahme-Schaltfläche auf dem Kartenbildschirm aufzunehmen bzw. alle navigierten Routen automatisch zu protokollieren und sie als lokale GPX-Datei (oder auch online über Web-Dienste) abzuspeichern.
-
-Aufgenommene Tracks können z. B. mit Bekannten geteilt oder als Beiträge zu OSM verwendet werden. Sportler können gespeicherte Tracks zur Überwachung ihres Trainings verwenden. Einige Basisauswertungen sind direkt in OsmAnd enthalten, wie Rundenzeiten, Durchschnittsgeschwindigkeit, usw.. Die Aufzeichnungen können natürlich auch mit speziellen Analyse-Tools von Drittanbietern nachbearbeitet werden.
- "</string>
+\n
+\nAufgenommene Tracks können z. B. mit Bekannten geteilt oder als Beiträge zu OSM verwendet werden. Sportler können gespeicherte Tracks zur Überwachung ihres Trainings verwenden. Einige Basisauswertungen sind direkt in OsmAnd enthalten, wie Rundenzeiten, Durchschnittsgeschwindigkeit, usw.. Die Aufzeichnungen können natürlich auch mit speziellen Analyse-Tools von Drittanbietern nachbearbeitet werden. "</string>
     <string name="route_descr_destination">Ziel</string>
     <string name="local_index_description">Ein Element antippen, um mehr Details zu erfahren oder antippen und halten zum Deaktivieren oder Löschen. Aktuell auf dem Gerät vorhandene Daten (%1$s frei):</string>
 	<string name="text_size_descr">Karten-Schriftgröße festlegen</string>
@@ -1886,28 +1875,25 @@ Aufgenommene Tracks können z. B. mit Bekannten geteilt oder als Beiträge zu OS
     <string name="rename_failed">Umbenennen fehlgeschlagen.</string>
 	<string name="shared_string_currently_recording_track">Momentane Track-Aufzeichnung</string>
 	<string name="back_to_map">Zurück zur Karte</string>
-	<string name="plugin_nautical_descr">"Das Aktivieren dieser Ansicht ändert die Kartendarstellung auf See-Karte, es werden dann alle nautischen Navigationsmarken und Kartensymbole angezeigt.
-
-Eine Karten-Datei, die weltweit alle Seezeichen enthält, ist als einzelne Karte mit dem Namen \'Seezeichen (weltweit)\' herunterladbar.
-
-Diese Ansicht kann zurückgestellt werden indem sie hier wieder deaktiviert oder in dem der \'Kartendarstellung\' unter \'Karte konfigurieren\' wie gewünscht geändert wird.
- "</string>
+	<string name="plugin_nautical_descr">"Die Erweiterung bereichert OsmAnd um die zusätzliche Darstellungsmöglichkeit nautischer Karten für Bootfahrer, Segler oder andere Wassersportler. 
+\n
+\nEine spezielle Kartenergänzung für OsmAnd (\'Seezeichen (weltweit)\') enthält alle nautischen Navigationsmarken und Kartensymbole zur Navigation auf Binnengewässern und in Küstennähe. Die Beschreibung jeder Navigationsmarke liefert die notwendigen Einzelheiten zu deren Bestimmung und Bedeutung (Kategorie, Form, Farbe, Reihenfolge, Verweis usw.).
+\n
+\nUm zur herkömmlichen Kartendarstellung in OsmAnd zurückzukehren, kann diese Ansicht hier wieder deaktiviert oder die \'Kartendarstellung\' unter \'Karte konfigurieren\' wie gewünscht geändert werden. "</string>
 	<string name="plugin_ski_descr">"Diese Erweiterung aktiviert die spezielle Kartendarstellung \'Winter- und Skikarte\', die global Skiabfahrten, Langlaufrouten, alpine Skirouten, Skilifte und Bergbahnen enthält. Routen und Pisten werden farbcodiert nach Schwierigkeit, Landschaftselemente nach winterlichen Gesichtspunkten (Assimilierung einer Schneedecke) angezeigt.
-
-Diese spezielle Kartendarstellung kann zurückgestellt werden, indem sie hier wieder deaktiviert oder indem die \'Kartendarstellung\' unter \'Karte konfigurieren\' wie gewünscht geändert wird.
- "</string>
+\n
+\nDiese spezielle Kartendarstellung kann zurückgestellt werden, indem sie hier wieder deaktiviert oder indem die \'Kartendarstellung\' unter \'Karte konfigurieren\' wie gewünscht geändert wird. "</string>
 	<string name="plugin_touringview_descr">"Bei Aktivierung dieser Ansicht wechselt die Kartendarstellung zur \'Tourenkarte\', einer besonders detaillierten Darstellung für Fernreisende und Berufsfahrer.
-
-Diese Darstellung liefert für jeden Maßstab den größtmöglichen Umfang an Details zu Fernreisen, die die Kartendaten enthalten  (insbesondere alle Straßen, Wege, Pfade und Orientierungspunkte). 
-
-Alle Straßenarten werden in der Darstellung farblich klar unterschieden, was speziell für Fahrer großer Fahrzeuge unabdingbar sein kann.
-
-Und sie bietet spezielle Touring-Optionen wie die Anzeige von Radrouten oder alpiner Bergrouten.
-
-Ein spezieller Kartendownload ist nicht notwendig, die Ansicht wird aus den Standardkarten generiert.
-
-Diese Ansicht kann zurückgestellt werden, indem Sie hier wieder deaktiviert oder indem die \'Kartendarstellung\' unter \'Karte konfigurieren\' wie gewünscht geändert wird.
- "</string>
+\n
+\nDiese Darstellung liefert für jeden Maßstab den größtmöglichen Umfang an Details zu Fernreisen, die die Kartendaten enthalten (insbesondere alle Straßen, Wege, Pfade und Orientierungspunkte). 
+\n
+\nAlle Straßenarten werden in der Darstellung farblich klar unterschieden, was speziell für Fahrer großer Fahrzeuge unabdingbar sein kann.
+\n
+\nUnd sie bietet spezielle Touring-Optionen wie die Anzeige von Radrouten oder alpiner Bergrouten.
+\n
+\nEin spezieller Kartendownload ist nicht notwendig, die Ansicht wird aus den Standardkarten generiert.
+\n
+\nDiese Ansicht kann zurückgestellt werden, indem sie hier wieder deaktiviert oder indem die \'Kartendarstellung\' unter \'Karte konfigurieren\' wie gewünscht geändert wird. "</string>
 	<string name="shared_string_audio">Audio</string>
 
     <string name="location_on_map">Standort:
@@ -2186,33 +2172,23 @@ Lon %2$s</string>
     <string name="access_from_map_description">Menütaste zeigt Dashboard, nicht das Menü</string>
     <string name="show_on_start_description">\"Aus\" startet direkt die Kartenansicht</string>
     <string name="copied_to_clipboard">In die Zwischenablage kopiert</string>
-    <string name="release_2_2">"
- • Neue kontextbezogene Benutzeroberfläche bei Auswahl von Orten auf der Karte und anderen Ansichten
-
-
- • Kartenansicht wird nun direkt gestartet, außer bei Auswahl von \'Zeige Dashboard bei App-Start\'
-
-
- • Auswahl der anzuzeigenden Elemente im Dashboard möglich
-
-
- • Dashboard kann umgangen werden, falls menübasierte App-Steuerung gewünscht ist
-
-
- • Zum Herunterladen von Kartendateien können nun Regionen direkt durch Tippen auf der Weltkarte ausgewählt werden
-
-
- • Die POI-Suche ermöglicht nun speziellere Abfragen
-
-
- • Verbesserungen beim Editieren von POI- und OSM-Objekten
-
-
- • Oberfläche und Struktur zum Herunterladen der Karten wurden überarbeitet
-
-
- und mehr …
- "</string>
+    <string name="release_2_2">" • Neue kontextbezogene Benutzeroberfläche bei Auswahl von Orten auf der Karte und in anderen Ansichten
+\n
+\n • Kartenansicht wird nun direkt gestartet, wenn nicht \'Dashboard bei App-Start\' eingestellt ist
+\n
+\n • Auswahl der im Dashboard anzuzeigenden Elemente möglich
+\n
+\n • Dashboard kann umgangen werden, falls menübasierte App-Steuerung gewünscht ist
+\n
+\n • Zum Herunterladen von Karten können Regionen durch Antippen auf der Weltkarte direkt ausgewählt werden
+\n
+\n • Die POI-Suche unterstützt nun präzisere Abfragen
+\n
+\n • Verbesserungen beim Editieren von POI- und OSM-Objekten
+\n
+\n • Überarbeitete Download-Schnittstelle und -Struktur für Kartendaten
+\n
+\n und mehr … "</string>
     <string name="osm_save_offline">Offline speichern</string>
     <string name="osm_edit_modified_poi">Geänderter OSM-POI</string>
     <string name="osm_edit_deleted_poi">Gelöschter OSM-POI</string>
@@ -2474,21 +2450,19 @@ Wenn Sie OsmAnd und OSM lieben und unterstützen wollen, so ist dies die perfekt
     <string name="back_to_search">Zurück zur Suche</string>
     <string name="confirmation_to_delete_history_items">Ausgewählte Elemente aus dem Verlauf löschen?</string>
     <string name="show_something_on_map">%1$s auf der Karte anzeigen</string>
-    <string name="release_2_4">"
- • Neue sehr leistungsfähige Freitextsuche
-
- • Audio-Integration mit Fahrzeug-Soundanlage / Freisprecheinrichtung über Bluetooth
-
- • Verbesserte Navigationsansagen, Sprachinformationen und Abbiegespurhinweise
-
- • Verbesserte Anzeige der ÖPNV Linien mit Routenanzeige
-
- • Mehr Sprachen hinzugefügt und Unterstützung für regionale Sprachen
-
- • Viele andere Verbesserungen und Problembehebungen
-
- und mehr…
- "</string>
+    <string name="release_2_4">" • Neue sehr leistungsfähige Freitextsuche
+\n
+\n • Audio-Integration mit Fahrzeug-Soundanlage / Freisprecheinrichtung über Bluetooth
+\n
+\n • Verbesserte Navigationsansagen, Sprachinformationen und Abbiegespurhinweise
+\n
+\n • Verbesserte Anzeige der ÖPNV Linien mit Routenanzeige
+\n
+\n • Mehr Sprachen hinzugefügt und Unterstützung für regionale Sprachen
+\n
+\n • Viele andere Verbesserungen und Problembehebungen
+\n
+\n und mehr… "</string>
     <string name="show_on_map">Zeige auf der Karte</string>
     <string name="share_history_subject">" geteilt über OsmAnd"</string>
     <string name="dist_away_from_my_location">Suche %1$s entfernt</string>
@@ -2566,22 +2540,19 @@ Wenn Sie OsmAnd und OSM lieben und unterstützen wollen, so ist dies die perfekt
     <string name="gpx_logging_no_data">Keine Daten</string>
     <string name="shared_string_trip">Strecke</string>
     <string name="shared_string_record">Aufzeichnen</string>
-    <string name="release_2_5">"
- • Anklickbare Symbole auf der Karte
-
-• leistungsstarke POI Filtersuche z.B. Restaurants nach Küchenart, Campingplätze nach spezifischen Bedürfnissen, ...
-
-• neue OsmAnd Topo Stil, für Radfahrer und Wanderer
-
-• verbesserte Streckenaufzeichnung (neue Einstellungen)
-
-• verbesserte Navigationsbenachrichtigungen (Android Wear)
-
-• viele weitere Verbesserungen und Fehlerbehebungen
-
-
-und vieles mehr ...
- "</string>
+    <string name="release_2_5">" • Anklickbare Symbole auf der Karte
+\n
+\n• leistungsstarke POI Filtersuche z.B. Restaurants nach Küchenart, Campingplätze nach spezifischen Bedürfnissen, ...
+\n
+\n• neue OsmAnd Topo Stil, für Radfahrer und Wanderer
+\n
+\n• verbesserte Streckenaufzeichnung (neue Einstellungen)
+\n
+\n• verbesserte Navigationsbenachrichtigungen (Android Wear)
+\n
+\n• viele weitere Verbesserungen und Fehlerbehebungen
+\n
+\nund vieles mehr ... "</string>
     <string name="trip_rec_notification_settings">Streckenaufzeichnung (keine Daten)</string>
     <string name="trip_rec_notification_settings_desc">Benachrichtigung einblenden, in der die Streckenaufzeichnung durch Betätigen der Taste \'Aufzeichnen\' gestartet werden kann.</string>
     <string name="shared_string_notifications">Benachrichtigungen</string>
@@ -2776,153 +2747,27 @@ Abgedeckte Fläche: %1$s x %2$s</string>
     <string name="routing_attr_driving_style_safety_name">Sicher</string>
     <string name="routing_attr_relief_smoothness_factor_name">Höhenprofil</string>
     <string name="driving_region_automatic">Automatisch</string>
-    <string name="osmand_extended_description_part1">"
- OsmAnd (OSM Automated Navigation Directions) ist eine Karten- und Navigationsanwendung mit Zugriff auf die kostenlosen, weltweiten und qualitativ hochwertigen Daten von OpenStreetMap (OSM).
-
- Erfreuen Sie sich an der akustischen und visuellen Navigation, der Betrachtung von POIs (points of interest), der Erstellung und Verwaltung von GPX-Tracks, der Visualisierung von Höhenlinien und -angaben (über ein Erweiterungsmodul), den Auswahlmöglichkeiten zwischen Auto-, Fahrrad- und Fußgänger-Betriebsart, der Möglichkeit an OSM mitzuarbeiten und vielem mehr.
- "</string>
-    <string name="osmand_extended_description_part2">"
- GPS-Navigation
- • Sie haben die Wahl zwischen dem Offline-Betrieb (ohne Roaming-Gebühren, wenn Sie im Ausland sind) oder dem (schnelleren) Online-Betrieb
- • Die Sprachführung (mit aufgenommenen oder synthetischen Stimmen) begleitet Sie Schritt für Schritt auf Ihrem Weg
- • Ihre Route wird neu berechnet, sobald Sie von ihr abweichen
- • Fahrspurassistent, Straßennamen und voraussichtliche Ankunftszeit helfen Ihnen auf der Strecke
- • Zur Erhöhung Ihrer Reisesicherheit erfolgt ein automatischer Wechsel zwischen Tag- und Nachtmodus 
- • Sie können wählen, ob Tempolimits angezeigt werden sollen, und ob Sie bei deren Überschreitung darauf hingewiesen werden wollen
- • Die Kartenvergrößerung passt sich Ihrer Geschwindigkeit an
- • Sie können Ziele nach Adresse, Typ (z. B.: Parkplatz, Restaurant, Hotel, Tankstelle, Museum) oder geographischen Koordinaten suchen
- • Die Festlegung von Zwischenstopps entlang Ihrer Reiseroute ist möglich
- • Sie können Ihre GPX-Tracks aufzeichnen, einspielen und ihnen folgen
- "</string>
-    <string name="osmand_extended_description_part3">"
- Karten
- • zeigen POIs (point of interests) in Ihrer Umgebung an
- • richten sich nach Ihrer Bewegungsrichtung (oder dem Kompass) aus
- • zeigen an, wo sie sind und worauf Sie sehen
- • übermitteln Ihre Position, damit Ihre Freunde Sie finden können
- • speichern Ihre wichtigsten Orte als Favoriten
- • lassen Ihnen die Wahl, wie Bezeichnungen auf der Karte angezeigt werden sollen: in Englisch, Landessprache oder in phonetischer Schreibweise
- • stellen spezielle Online-Karten, Satellitenansichten (von Bing), verschiedene Overlays, wie GPX-Tracks zu Touren-/Routenverläufen, und zusätzliche Ebenen mit einstellbarer Transparenz dar
- "</string>
-    <string name="osmand_extended_description_part4">"
- Ski-Sport
- Das OsmAnd-Skikarten-Modul ermöglicht Ihnen das Betrachten von Skirouten, deren Schwierigkeitsgrad und einiger zusätzlicher Informationen, wie die Lage von Liften und weiterer Einrichtungen.
- "</string>
-    <string name="osmand_extended_description_part5">"
- Radfahren
- • Sie finden Radwege auf der Karte
- • Die GPS-Navigation im Fahrrad-Modus errechnet Ihre Route anhand von Radwegen
- • Sie können Ihre Geschwindigkeit und Höhe verfolgen
- • Die Möglichkeit der GPX-Aufzeichnung versetzt Sie in die Lage, Ihre Fahrt zu protokollieren und sie mit anderen zu teilen
- • Über ein Zusatzmodul können Sie sich Höhenlinien und das Geländerelief darstellen lassen
- "</string>
-    <string name="osmand_extended_description_part6">"
- Laufen, Wandern, Stadtbesichtigung
- • Die Karte zeigt Ihnen Fuß- und Wanderwege an
- • Wikipedia, in der von Ihnen gewünschten Sprache, kann Ihnen eine Menge bei einer Stadtbesichtigung erzählen
- • Haltestellen öffentlicher Verkehrsmittel (Bus, Tram, Bahn), inklusive der Linienbezeichnungen, helfen Ihnen dabei, sich in einer neuen Stadt zurechtzufinden
- • Die GPS-Navigation im Fußgänger-Modus berechnet Ihre Route anhand von Fußwegen
- • Sie können GPX-Routen einspielen und ihnen folgen oder eigene aufzeichnen und mit anderen teilen
- "</string>
-    <string name="osmand_extended_description_part7">"
- OSM-Mitarbeit
- • Melden Sie falsche Daten
- • Übertragen Sie direkt aus der App GPX-Tracks an OSM
- • Ergänzen Sie POIs und leiten Sie sie direkt (oder, falls Sie keine Netzverbindung haben, später) an OSM weiter
- "</string>
-    <string name="osmand_extended_description_part8">"
- OsmAnd ist quelloffen und wird stetig weiterentwickelt. Jeder kann durch Meldung von Fehlern, Verbesserung der Übersetzung oder Programmierung neuer Funktionen an der Anwendung mitarbeiten. Durch all diese Formen der Zusammenarbeit zwischen Entwickler und Anwender wird eine lebendige, kontinuierliche Verbesserung des Projekts gewährleistet. Darüberhinaus ist der Fortschritt des Projekts auch auf finanzielle Mitbeteiligung angewiesen, um die Programmierung und Testung neuer Funktionalitäten fördern zu können.
- Ungefähre Kartenabdeckung und -qualität:
- • Westeuropa: ****
- • Osteuropa: ***
- • Russland: ***
- • Nordamerika: ***
- • Südamerika: **
- • Asien: **
- • Japan &amp; Korea: ***
- • Mittlerer Osten: **
- • Afrika: **
- • Antarktis: *
- Die meisten Länder rund um den Globus stehen zum Herunterladen bereit!
- Holen Sie sich eine verlässliche Navigation für Ihr Land - sei es in Frankreich, Deutschland, Mexiko, Großbritannien, Spanien, den Niederlanden, den USA, Russland, Brasilien oder wo auch immer.
- "</string>
+    <string name="osmand_extended_description_part1">" OsmAnd (OSM Automated Navigation Directions) ist eine Karten- und Navigationsanwendung mit Zugriff auf die kostenlosen, weltweiten und qualitativ hochwertigen Daten von OpenStreetMap (OSM). Erfreuen Sie sich an der akustischen und visuellen Navigation, der Betrachtung von POIs (points of interest), der Erstellung und Verwaltung von GPX-Tracks, der Visualisierung von Höhenlinien und -angaben (über ein Erweiterungsmodul), den Auswahlmöglichkeiten zwischen Auto-, Fahrrad- und Fußgänger-Betriebsart, der Möglichkeit an OSM mitzuarbeiten und vielem mehr. "</string>
+    <string name="osmand_extended_description_part2">" GPS-Navigation • Sie haben die Wahl zwischen dem Offline-Betrieb (ohne Roaming-Gebühren, wenn Sie im Ausland sind) oder dem (schnelleren) Online-Betrieb • Die Sprachführung (mit aufgenommenen oder synthetischen Stimmen) begleitet Sie Schritt für Schritt auf Ihrem Weg • Ihre Route wird neu berechnet, sobald Sie von ihr abweichen • Fahrspurassistent, Straßennamen und voraussichtliche Ankunftszeit helfen Ihnen auf der Strecke • Zur Erhöhung Ihrer Reisesicherheit erfolgt ein automatischer Wechsel zwischen Tag- und Nachtmodus • Sie können wählen, ob Tempolimits angezeigt werden sollen, und ob Sie bei deren Überschreitung darauf hingewiesen werden wollen • Die Kartenvergrößerung passt sich Ihrer Geschwindigkeit an • Sie können Ziele nach Adresse, Typ (z. B.: Parkplatz, Restaurant, Hotel, Tankstelle, Museum) oder geographischen Koordinaten suchen • Die Festlegung von Zwischenstopps entlang Ihrer Reiseroute ist möglich • Sie können Ihre GPX-Tracks aufzeichnen, einspielen und ihnen folgen "</string>
+    <string name="osmand_extended_description_part3">" Karten • zeigen POIs (point of interests) in Ihrer Umgebung an • richten sich nach Ihrer Bewegungsrichtung (oder dem Kompass) aus • zeigen an, wo Sie sind und worauf Sie sehen • übermitteln Ihre Position, damit Ihre Freunde Sie finden können • speichern Ihre wichtigsten Orte als Favoriten • lassen Ihnen die Wahl, wie Bezeichnungen auf der Karte angezeigt werden sollen: in Englisch, Landessprache oder in phonetischer Schreibweise • stellen spezielle Online-Karten, Satellitenansichten (von Bing), verschiedene Overlays, wie GPX-Tracks zu Touren-/Routenverläufen, und zusätzliche Ebenen mit einstellbarer Transparenz dar "</string>
+    <string name="osmand_extended_description_part4">" Ski-Sport
+\nDas OsmAnd-Skikarten-Modul ermöglicht Ihnen das Betrachten von Skirouten, deren Schwierigkeitsgrad und einiger zusätzlicher Informationen, wie die Lage von Liften und weiterer Einrichtungen. "</string>
+    <string name="osmand_extended_description_part5">" Radfahren • Sie finden Radwege auf der Karte • Die GPS-Navigation im Fahrrad-Modus errechnet Ihre Route anhand von Radwegen • Sie können Ihre Geschwindigkeit und Höhe verfolgen • Die Möglichkeit der GPX-Aufzeichnung versetzt Sie in die Lage, Ihre Fahrt zu protokollieren und sie mit anderen zu teilen • Über ein Zusatzmodul können Sie sich Höhenlinien und das Geländerelief darstellen lassen "</string>
+    <string name="osmand_extended_description_part6">" Laufen, Wandern, Stadtbesichtigung • Die Karte zeigt Ihnen Fuß- und Wanderwege an • Wikipedia, in der von Ihnen gewünschten Sprache, kann Ihnen eine Menge bei einer Stadtbesichtigung erzählen • Haltestellen öffentlicher Verkehrsmittel (Bus, Tram, Bahn), inklusive der Linienbezeichnungen, helfen Ihnen dabei, sich in einer neuen Stadt zurechtzufinden • Die GPS-Navigation im Fußgänger-Modus berechnet Ihre Route anhand von Fußwegen • Sie können GPX-Routen einspielen und ihnen folgen oder eigene aufzeichnen und mit anderen teilen "</string>
+    <string name="osmand_extended_description_part7">" OSM-Mitarbeit • Melden Sie falsche Daten • Übertragen Sie direkt aus der App GPX-Tracks an OSM • Ergänzen Sie POIs und leiten Sie sie direkt (oder, falls Sie keine Netzverbindung haben, später) an OSM weiter "</string>
+    <string name="osmand_extended_description_part8">" OsmAnd ist quelloffen und wird stetig weiterentwickelt. Jeder kann durch Meldung von Fehlern, Verbesserung der Übersetzung oder Programmierung neuer Funktionen an der Anwendung mitarbeiten. Durch all diese Formen der Zusammenarbeit zwischen Entwickler und Anwender wird eine lebendige, kontinuierliche Verbesserung des Projekts gewährleistet. Darüberhinaus ist der Fortschritt des Projekts auch auf finanzielle Mitbeteiligung angewiesen, um die Programmierung und Testung neuer Funktionen fördern zu können. 
+\nUngefähre Kartenabdeckung und -qualität: • Westeuropa: **** • Osteuropa: *** • Russland: *** • Nordamerika: *** • Südamerika: ** • Asien: ** • Japan &amp; Korea: *** • Mittlerer Osten: ** • Afrika: ** • Antarktis: * - Die meisten Länder rund um den Globus stehen zum Herunterladen bereit! Holen Sie sich eine verlässliche Navigation für Ihr Land - sei es in Frankreich, Deutschland, Mexiko, Großbritannien, Spanien, den Niederlanden, den USA, Russland, Brasilien oder wo auch immer. "</string>
     <string name="restore_purchases">Käufe wiederherstellen</string>
     <string name="fonts_header">Schriftarten für Karten</string>
-    <string name="osmand_plus_extended_description_part1">"
- OsmAnd+ (OSM Automated Navigation Directions) ist eine Karten- und Navigationsanwendung mit Zugriff auf die kostenlosen, weltweit verfügbaren und qualitativ hochwertigen Daten von OpenStreetMap (OSM).
- Genießen Sie die akustische und visuelle Navigation, die Betrachtung von POIs (points of interest), die Erstellung und Bearbeitung von  GPX-Tracks, die Visualisierung von Höhenlinien und -angaben, die Auswahlmöglichkeiten zwischen Auto-, Fahrrad- und Fußgänger-Modus, die Möglichkeit der Mitarbeit an OSM und vieles mehr.
-
- OsmAnd+ ist die Kaufversion. Durch ihren Erwerb, unterstützen Sie das Projekt, fördern die Entwicklung neuer Funktionen, und erhalten die neusten Aktualisierungen.
-
- Einige der Hauptmerkmale:
- "</string>
-    <string name="osmand_plus_extended_description_part2">"
- Navigation
- • funktioniert online (schnell) oder offline (ohne Roaming-Gebühren im Ausland)
- • Akustische Schritt-für-Schritt-Wegführung (mit aufgenommenen oder synthetischen Stimmen)
- • Optional Fahrspurassistent, Straßennamenanzeige und geschätzte Ankunftszeit
- • unterstützt Zwischenstopps entlang der Reiseroute
- • Automatische Routenneuberechnung, sobald Sie von ihr abweichen
- • Ortssuche nach Adresse, Typ (z. B.: Restaurant, Hotel, Tankstelle, Museum) oder geographischen Koordinaten
- "</string>
-    <string name="osmand_plus_extended_description_part4">"
- OSM- und Wikipedia-Datennutzung
- • Qualitativ hochwertige Informationen aus den besten Gemeinschaftsprojekten der Welt
- • OSM-Daten stehen pro Land oder Region zur Verfügung
- • Wikipedia-POIs, großartig bei Besichtigungen
- • Unbegrenzte, kostenlose Downloads, direkt aus der App
- • Kompakte Offline-Vektorkarten, mindestens einmal pro Monat aktualisiert
-
- • Auswahl zwischen vollständigen Daten zu einer Region bzw. einfachen Daten zum Straßennetz (Beispiel: Ganz Japan benötigt 700 MB, das Straßennetz nur 200 MB)
- "</string>
-    <string name="osmand_plus_extended_description_part5">"
- Sicherheitsfunktionen
- • Optionales automatisches Umschalten der Tag-/Nachtansicht
- • Optionale Tempolimit-Anzeige, mit Warnung bei Überschreitung
- • Optionale geschwindigkeitsabhängige Vergrößerung
- • Positionsübermittlung, damit Freunde Sie finden können
- "</string>
-    <string name="osmand_plus_extended_description_part8">"
- Kartenabdeckung und ungefähre -qualität:
- • Westeuropa: ****
- • Osteuropa: ***
- • Russland: ***
- • Nordamerika: ***
- • Südamerika: **
- • Asien: **
- • Japan &amp; Korea: ***
- • Mittlerer Osten: **
- • Afrika: **
- • Antarktis: *
- Die meisten Länder rund um den Globus stehen zum Herunterladen bereit!
- Von Afghanistan bis Zimbabwe, von Australien bis in die USA. Argentinien, Brasilien, Kanada, Frankreich, Deutschland, Mexiko, Großbritannien, Spanien, ...
- "</string>
-    <string name="osmand_plus_extended_description_part6">"
- Funktionen für Radler und Fußgänger
- • Darstellung von Fuß-, Wander- und Radwegen, großartig für Outdoor-Aktivitäten
- • Spezielle Routenberechnung und Anzeigearten für Radler und Fußgänger
- • Wahlweise Haltestellen öffentlicher Verkehrsmittel (Bus, Tram, Bahn), einschließlich Linienbezeichnungen
- • Wahlweise Streckenaufzeichnung als GPX-Datei auf dem Gerät oder bei einem Online-Dienst
- • Wahlweise Geschwindigkeits- und Höhenanzeige
- • Darstellung von Höhenlinien und Geländeschattierung (über Zusatzmodul)
- "</string>
-    <string name="osmand_plus_extended_description_part7">"
- Direkte Mitarbeit an OSM
- • Fehler melden
- • GPX-Tracks direkt aus der App an OSM weiterleiten
- • POIs ergänzen und sie direkt (oder, bei fehlender Netzverbindung, später) zu OSM hochladen
- • Wahlweise Streckenaufzeichnung auch im Hintergrund (im Ruhezustand des Gerätes)
- OsmAnd ist quelloffen und wird stetig weiterentwickelt. Jeder kann durch Meldung von Fehlern, Verbesserung der Übersetzung oder Programmierung neuer Funktionen an der Anwendung mitarbeiten. Durch all diese Formen der Zusammenarbeit zwischen Entwickler und Anwender wird eine lebendige, kontinuierliche Verbesserung des Projekts gewährleistet. Darüberhinaus ist der Fortschritt des Projekts auch auf finanzielle Zuschüsse angewiesen, um die Programmierung und Testung neuer Funktionalitäten fördern zu können.
- "</string>
-    <string name="osmand_plus_extended_description_part3">"
- Kartenansicht
- • Positions- und Richtungsanzeige
- • Kartenausrichtung wahlweise nach Kompass oder Ihrer Bewegungsrichtung
- • Sicherung Ihrer wichtigsten Orte als Favoriten
- • Anzeige der POIs (point of interests) in Ihrer Umgebung
- • Anzeige spezieller Online-Karten, Satellitenansichten (von Bing), verschiedener Overlays wie GPX-Tracks zu Touren-/Routenverläufen und zusätzlicher Kartenebenen mit einstellbarer Transparenz
- • Anzeige von Ortsnamen wahlweise in Englisch, Landessprache, oder phonetischer Schreibweise
- "</string>
+    <string name="osmand_plus_extended_description_part1">" OsmAnd+ (OSM Automated Navigation Directions) ist eine Karten- und Navigationsanwendung mit Zugriff auf die kostenlosen, weltweit verfügbaren und qualitativ hochwertigen Daten von OpenStreetMap (OSM). Genießen Sie die akustische und visuelle Navigation, die Betrachtung von POIs (points of interest), die Erstellung und Bearbeitung von  GPX-Tracks, die Visualisierung von Höhenlinien und -angaben, die Auswahlmöglichkeiten zwischen Auto-, Fahrrad- und Fußgänger-Modus, die Möglichkeit der Mitarbeit an OSM und vieles mehr. OsmAnd+ ist die Kaufversion. Durch ihren Erwerb, unterstützen Sie das Projekt, fördern die Entwicklung neuer Funktionen und erhalten die neusten Aktualisierungen. Einige der Hauptmerkmale: "</string>
+    <string name="osmand_plus_extended_description_part2">" Navigation • funktioniert online (schnell) oder offline (ohne Roaming-Gebühren im Ausland) • akustische Schritt-für-Schritt-Wegführung (mit aufgenommenen oder synthetischen Stimmen) • optional mit Fahrspurassistent, Straßennamenanzeige und geschätzter Ankunftszeit • unterstützt Zwischenstopps entlang der Reiseroute • automatische Routenneuberechnung, sobald Sie von ihr abweichen • Ortssuche nach Adresse, Typ (z. B.: Restaurant, Hotel, Tankstelle, Museum) oder geographischen Koordinaten "</string>
+    <string name="osmand_plus_extended_description_part4">" OSM- und Wikipedia-Datennutzung • Qualitativ hochwertige Informationen aus den besten Gemeinschaftsprojekten der Welt • OSM-Daten stehen pro Land oder Region zur Verfügung • Wikipedia-POIs, großartig bei Besichtigungen • Unbegrenzte, kostenlose Downloads, direkt aus der App • Kompakte Offline-Vektorkarten, mindestens einmal pro Monat aktualisiert • Auswahl zwischen vollständigen Daten zu einer Region bzw. einfachen Daten zum Straßennetz (Beispiel: Japan insgesamt benötigt 700 MB, das Straßennetz nur 200 MB) "</string>
+    <string name="osmand_plus_extended_description_part5">" Sicherheitsfunktionen • Optionales automatisches Umschalten der Tag-/Nachtansicht • Optionale Tempolimit-Anzeige, mit Warnung bei Überschreitung • Optionale geschwindigkeitsabhängige Vergrößerung • Positionsübermittlung, damit Freunde Sie finden können "</string>
+    <string name="osmand_plus_extended_description_part8">" Kartenabdeckung und ungefähre -qualität: • Westeuropa: **** • Osteuropa: *** • Russland: *** • Nordamerika: *** • Südamerika: ** • Asien: ** • Japan &amp; Korea: *** • Mittlerer Osten: ** • Afrika: ** • Antarktis: * - Die meisten Länder rund um den Globus stehen zum Herunterladen bereit! Von Afghanistan bis Zimbabwe, von Australien bis in die USA. Argentinien, Brasilien, Kanada, Frankreich, Deutschland, Mexiko, Großbritannien, Spanien, … "</string>
+    <string name="osmand_plus_extended_description_part6">" Funktionen für Radler und Fußgänger • Darstellung von Fuß-, Wander- und Radwegen, großartig für Outdoor-Aktivitäten • Spezielle Routenberechnung und Anzeigearten für Radler und Fußgänger • Wahlweise Haltestellen öffentlicher Verkehrsmittel (Bus, Tram, Bahn), einschließlich Linienbezeichnungen • Wahlweise Streckenaufzeichnung als GPX-Datei auf dem Gerät oder bei einem Online-Dienst • Wahlweise Geschwindigkeits- und Höhenanzeige • Darstellung von Höhenlinien und Geländeschattierung (über Zusatzmodul) "</string>
+    <string name="osmand_plus_extended_description_part7">" Direkte Mitarbeit an OSM • Fehler melden • GPX-Tracks direkt aus der App an OSM weiterleiten • POIs ergänzen und sie direkt (oder, bei fehlender Netzverbindung, später) zu OSM hochladen • Wahlweise Streckenaufzeichnung auch im Hintergrund (im Ruhezustand des Gerätes)
+\n OsmAnd ist quelloffen und wird stetig weiterentwickelt. Jeder kann durch Meldung von Fehlern, Verbesserung der Übersetzung oder Programmierung neuer Funktionen an der Anwendung mitarbeiten. Durch all diese Formen der Zusammenarbeit zwischen Entwickler und Anwender wird eine lebendige, kontinuierliche Verbesserung des Projekts gewährleistet. Darüberhinaus ist der Fortschritt des Projekts auch auf finanzielle Zuschüsse angewiesen, um die Programmierung und Testung neuer Funktionalitäten fördern zu können. "</string>
+    <string name="osmand_plus_extended_description_part3">" Kartenansicht • Positions- und Richtungsanzeige • Kartenausrichtung wahlweise nach Kompass oder Ihrer Bewegungsrichtung • Sicherung Ihrer wichtigsten Orte als Favoriten • Anzeige der POIs (point of interests) in Ihrer Umgebung • Anzeige spezieller Online-Karten, Satellitenansichten (von Bing), verschiedener Overlays wie GPX-Tracks zu Touren-/Routenverläufen und zusätzlicher Kartenebenen mit einstellbarer Transparenz • Anzeige von Ortsnamen wahlweise in Englisch, Landessprache oder phonetischer Schreibweise "</string>
     <string name="quick_action_auto_zoom">Autom. Zoom an/aus</string>
     <string name="quick_action_auto_zoom_desc">Drücken der Aktionstaste schaltet die automatische, geschwindigkeitsabhängige Kartenvergrößerung ein/aus.</string>
     <string name="quick_action_auto_zoom_on">Autom. Zoom an</string>
@@ -2961,7 +2806,7 @@ Abgedeckte Fläche: %1$s x %2$s</string>
     <string name="change_color">Farbe ändern</string>
     <string name="edit_name">Namen ändern</string>
     <string name="animate_my_location">Meine Position animieren</string>
-    <string name="animate_my_location_desc">Näherungsweise Fortschreibung meiner Position, wenn deren Bestimmung vorübergehend ausfällt</string>
+    <string name="animate_my_location_desc">Animation meiner Position während der Navigation aktivieren</string>
     <string name="route_is_too_long_v2">Die Route ist für eine Berechnung unter Umständen zu lang. Fügen Sie bitte Zwischenstopps ein, wenn nach 10 Minuten kein Routenvorschlag erscheint.</string>
     <string name="save_poi_too_many_uppercase">Der Name enthält zu viele Großbuchstaben. Möchten Sie den Vorgang fortsetzen?</string>
     <string name="display_zoom_level">Darstellung ab Zoomstufe: %1$s</string>
@@ -2992,4 +2837,14 @@ Abgedeckte Fläche: %1$s x %2$s</string>
     <string name="mapillary_descr">Fotos von der Straße aus dem Netz für jedermann. Orte entdecken, mitwirken, die Welt in Bildern festhalten.</string>
     <string name="mapillary">Mapillary</string>
     <string name="mapillary_action_descr">Mit Mapillary Ihre ganz persönlichen Ansichten dieses Ortes beisteuern.</string>
+    <string name="shared_string_install">Installieren</string>
+    <string name="online_photos">Online-Fotos</string>
+    <string name="no_photos_descr">Es gibt keine Fotos von diesem Ort</string>
+    <string name="plugin_mapillary_descr">Fotos von der Straße für Jedermann. Plätze entdecken, mitwirken, die Welt im Bild festhalten.</string>
+    <string name="improve_coverage_mapillary">Verbessern Sie die Berichterstattung mit Mapillary</string>
+    <string name="improve_coverage_install_mapillary_desc">Machen Sie Ihr eigenes Foto oder eine Fotoserie und fügen Sie sie dieser Kartenposition hinzu. 
+\n 
+\nHierfür müssen Sie die App „Mapillary“ von Google Play installieren.</string>
+    <string name="open_mapillary">Mapillary öffnen</string>
+    <string name="mapillary_image">Mapillary-Foto</string>
     </resources>

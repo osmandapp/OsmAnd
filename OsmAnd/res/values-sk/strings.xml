@@ -2914,4 +2914,19 @@ Zodpovedá oblasti: %1$s x %2$s</string>
     <string name="nothing_found">Nič sa nenašlo :(</string>
     <string name="nothing_found_descr">Skúste zmeniť vyhľadávacie kritérium alebo oblasť hľadania</string>
     <string name="mapillary">Mapillary</string>
+    <string name="open_mapillary">Otvoriť Mapillary</string>
+    <string name="shared_string_install">Inštalovať</string>
+    <string name="improve_coverage_mapillary">Zlepšiť pokrytie s Mapillary</string>
+    <string name="improve_coverage_install_mapillary_desc">Môžete zosnímať vlastné fotografie a pridať ich na toto miesto na mape.
+\n
+\nJe potrebné nainštalovať aplikáciu Mapillary z Google Play.</string>
+    <string name="online_photos">Online fotografie</string>
+    <string name="shared_string_add_photos">Pridať fotografie</string>
+    <string name="no_photos_descr">Nemáme fotografie pre toto miesto</string>
+    <string name="mapillary_action_descr">Prispejte vlastnými pohľadmi na toto miesto z úrovne ulice pomocou Mapillary.</string>
+    <string name="mapillary_widget_descr">Umožňuje rýchle prispievanie do Mapillary</string>
+    <string name="mapillary_descr">Online fotografie z ulíc pre každého. Objavte miesta, spolupracuje, zachyťte svet.</string>
+    <string name="plugin_mapillary_descr">Fotografie z ulíc pre každého. Objavte miesta, spolupracuje, zachyťte svet.</string>
+    <string name="mapillary_widget">Nástroj Mapillary</string>
+    <string name="mapillary_image">Obrázok Mapillary</string>
     </resources>

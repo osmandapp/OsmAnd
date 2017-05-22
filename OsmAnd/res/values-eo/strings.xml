@@ -1849,13 +1849,13 @@ Provizore estas uzata enreta servo CloudMade.</string>
     <string name="voice_data_unavailable">Elektitaj voĉ-datumoj ne estas disponeblaj</string>
     <string name="sd_unmounted">Memorkarto ne alirebla.\nVi ne povos vidi mapojn kaj serĉi ejojn.</string>
     <string name="sd_mounted_ro">Memorkarto estas nurlega.\nVi nur povos foliumi la antaŭ-elŝutitajn mapojn kaj ne povos elŝuti novajn el la Interreto.</string>
-    <string name="route_tr">Turnu dekstren kaj veturu</string>
-    <string name="route_tshr">Turnegu dekstren kaj veturu</string>
-    <string name="route_tslr">Turnetu dekstren kaj veturu</string>
-    <string name="route_tl">Turnu maldekstren kaj veturu</string>
-    <string name="route_tshl">Turnegu maldekstren kaj veturu</string>
-    <string name="route_tsll">Turnetu maldekstren kaj veturu</string>
-    <string name="route_tu">Faru U-forman ĝiradon kaj veturu</string>
+    <string name="route_tr">Turnu dekstren</string>
+    <string name="route_tshr">Turnegu dekstren</string>
+    <string name="route_tslr">Turnetu dekstren</string>
+    <string name="route_tl">Turnu maldekstren</string>
+    <string name="route_tshl">Turnegu maldekstren</string>
+    <string name="route_tsll">Turnetu maldekstren</string>
+    <string name="route_tu">Faru U-forman ĝiradon</string>
     <string name="route_head">Rekten</string>
     <string name="first_time_continue">Poste</string>
     <string name="first_time_download">Elŝuti regionon</string>
@@ -2757,7 +2757,7 @@ De Afganujo al Zimbabvo, de Aŭstralio al Usono, Argentino, Brazilo, Kanado, Fra
     <string name="shared_string_visible">Videbla</string>
     <string name="analyze_on_map">Analizi sur mapo</string>
     <string name="sea_depth_thanks">Dankon al ci por aĉeti marajn profundec-kurbojn!</string>
-    <string name="index_item_depth_contours_osmand_ext">Maraj profundec-kurbojn</string>
+    <string name="index_item_depth_contours_osmand_ext">Maraj profundec-kurboj</string>
     <string name="index_item_depth_points_southern_hemisphere">Maraj profundec-kurboj de suda duonsfero</string>
     <string name="index_item_depth_points_northern_hemisphere">Maraj profundec-kurboj de norda duonsfero</string>
     <string name="download_depth_countours">Maraj profundec-kurboj</string>
@@ -2826,8 +2826,10 @@ De Afganujo al Zimbabvo, de Aŭstralio al Usono, Argentino, Brazilo, Kanado, Fra
     <string name="online_photos">Enretaj fotoj</string>
     <string name="no_photos_descr">Ni ne havas fotojn pri tiu ĉi loko</string>
     <string name="shared_string_install">Instali</string>
-    <string name="improve_coverage_mapillary">Plibonigi atingon per Mapillary</string>
-    <string name="improve_coverage_install_mapillary_desc">Vi povas fari viajn proprajn fotojn aŭ seriojn de fotoj kaj aldoni ilin al tiu ĉi map-loko.
+    <string name="improve_coverage_mapillary">Pliigi map-atingon de Mapillary</string>
+    <string name="improve_coverage_install_mapillary_desc">Vi povas fari viajn proprajn fotojn aŭ seriojn da fotoj kaj aldoni ilin al tiu ĉi map-loko.
 \n
 \nPor fari tion, vi devas instali aplikaĵon Mapillary el Google Play.</string>
+    <string name="open_mapillary">Malfermi Mapillary</string>
+    <string name="mapillary_image">Mapillary-foto</string>
     </resources>

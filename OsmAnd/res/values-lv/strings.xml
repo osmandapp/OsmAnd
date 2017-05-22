@@ -648,8 +648,8 @@
   <string name="save_current_track">Saglabāt patreizējo GPX trasi</string>
   <string name="save_track_interval">Logošanas intervāls navigācijas laikā</string>
   <string name="save_track_interval_descr">Izvēlieties ceļa logošanas intervālu treka ierakstam</string>
-  <string name="save_track_to_gpx_descrp">Navigācijas laikā treki tiks saglabāti treku mapē</string>
-  <string name="save_track_to_gpx">Navigācijas laikā treku rakstīt GPX failā</string>
+  <string name="save_track_to_gpx_descrp">Navigācijas laikā gpx treki tiks automātiski saglabāti treku mapē</string>
+  <string name="save_track_to_gpx">Navigācijas laikā treku ierakstīt GPX failā</string>
   <string name="update_tile">Atjaunot karti</string>
   <string name="reload_tile">Pārlādēt atēlu</string>
   <string name="mark_point">Mērķis</string>
@@ -791,14 +791,11 @@
   <string name="online_map_settings_descr">Konfigurēt tiešaistes vai kešotās kartes bildes</string>
   
   
-  <string name="osmand_rastermaps_plugin_description">"Ar šo spraudni jūs varēsiet piekļūt dažādām tiešsaistes (t.s. bilžu vai rastru) kartēm, sākot no iepriekš definētām OpenStreetMap bildēm ( kā Mapnik) līdz satelītu fotoattēliem un īpašiem klājumiem kā laikapstākļu kartes, klimata kartes, ğeoloğiskās kartes,  kalnu reljefi u.t.t.
-
-
-Jebkuras no šīm kartēm var tik lietotas kā pamata (bāzes) kartes vai kā virsklājs un apakšklājs citai pamata kartei (kā OsmAnd standarta bezsaistes kartes). Lai apakšklāja kartes būtu labāk redzamas, noteiktus elementus no OsmAnd vektoru kartēm ir iespējams paslēpt ar kartes konfigurācijas izvēlnes palīdzību.
-
-
-Bilžu kartes var lietot no tiešsaistes avotiem vai sagatavot bezsaistes lietošanai (iekopējot OsmAnd datu mapē) kā SQLite databāzi, to izveidojot ar kādu no atsevišķi pieejamajām kartēšanas datorprogrammām.
- "</string>
+  <string name="osmand_rastermaps_plugin_description">"Ar šo spraudni jūs varēsiet piekļūt dažādām tiešsaistes (t.s. bilžu vai rastru) kartēm, sākot no iepriekš definētām OpenStreetMap bildēm ( kā Mapnik) līdz satelītu fotoattēliem un īpašajiem klājumiem kā laikapstākļu kartes, klimata kartes, ğeoloğiskās kartes,  kalnu reljefi u.t.t.
+\n
+\nJebkuras no šīm kartēm var tik pielietotas kā pamata (bāzes) kartes vai kā virsklājs vai apakšklājs citai bāzes kartei (kā piemēram, OsmAnd standarta bezsaistes kartei). Lai apakšklāja kartes būtu labāk redzamas, noteiktus elementus no OsmAnd vektoru kartēm ir iespējams paslēpt caur kartes konfigurācijas izvēlni.
+\n
+\nBilžu kartes var lietot no tiešsaistes avotiem vai sagatavot bezsaistes lietošanai (iekopējot OsmAnd datu mapē) kā SQLite databāzi, to izveidojot ar kādu no atsevišķi pieejamajām kartēšanas aplikācijām. "</string>
   <string name="osmand_background_plugin_description">Rāda iestatījumus navigācijas darbībai fonā (izslēgts ekrāns), periodiski ieslēdzot GPS.</string>
   <string name="osmand_accessibility_description">Rādīt iestatījumus atsevišķām pieejamības iespējām kā TTS runas ātrums, atrašanās vietas izruna, ekrāna mērogošana u.t.t.</string>
   
@@ -1207,11 +1204,9 @@ OsmAnd ir atvērtā koda navigācijas aplikācija ar piekļuvi vispusīgiem Open
     <string name="local_osm_changes_delete_all_confirm">Tiks izdzēsti %1$d osm labojumi. Vai turpināt?</string>
     <string name="auto_zoom_none">Nav automātiskais mērogs</string>
 	<string name="index_name_openmaps">OpenMaps Eiropa</string>
-    <string name="srtm_plugin_description">"Šis spraudnis dod iespēju parādīt kontūru līnijas un kalnu reljefu griezumus uz standarta OsmAnd kartēm. Šo iespēju novērtēs dabas mīļotāji, aktīvās atpūtas cienītāji un jebkurš ar padziļinātu interesi par zemes reljefu. 
-
-
-Globālie dati (starp 70° Z un 70° D) ir bāzēti uz SRTM (Shuttle Radar Topography Mission) un ASTER (Advanced Spaceborne Thermal Emission and Reflection Radiometer) mērījumiem, attēlveidošanas rīks uz Terra\'s, vadošais NASA Zemes Novērošanas Sistēmas satelīts. ASTER ir kopējs veikums ar NASA, Japānas Ekonomikas Ministriju, Trade and Industry (METI) un Japānas Izplatījuma Sistēmām (J-spacesystems).
- "</string>
+    <string name="srtm_plugin_description">"Šis spraudnis dod iespēju rādīt kontūrlīniju un reljefu pārklājus uz standarta OsmAnd kartēm. Šo iespēju novērtēs dabas mīļotāji, aktīvās atpūtas cienītāji un jebkurš ar padziļinātu interesi par zemes reljefu. 
+\n
+\nGlobālie dati (starp 70° Z un 70° D) ir bāzēti uz SRTM (Shuttle Radar Topography Mission) un ASTER (Advanced Spaceborne Thermal Emission and Reflection Radiometer) mērījumiem, attēlveidošanas rīks uz Terra\'s, vadošais NASA Zemes Novērošanas Sistēmas satelīts. ASTER ir kopējs veikums ar NASA, Japānas Ekonomikas Ministriju, Trade and Industry (METI) un Japānas Izplatījuma Sistēmām (J-spacesystems). "</string>
     <string name="osmand_play_title_30_chars">OsmAnd kartes &amp; navigācija</string>
 	<string name="osmand_plus_play_title_30_chars">OsmAnd+ kartes &amp; navigācija</string>
 	<string name="support_new_features_descr">Lūdzu atbalstiet programmu ar ziedojumiem, lai palīdzētu to uzlabot un attīstīt</string>
@@ -1242,10 +1237,9 @@ Globālie dati (starp 70° Z un 70° D) ir bāzēti uz SRTM (Shuttle Radar Topog
 ……… * Nospiediet uz kartes un paturiet, lai noņemtu iepriekšējo punktu.\n…
 ……… * Nospiediet uz punkta un paturiet, lai pievienotu un lasītu aprakstu.\n…
 ……… * Nospiediet uz mērlineāla, lai izvēlētos citas darbības.</string>
-    <string name="osmand_srtm_long_description_1000_chars">"Šis spraudnis iespējo kontūrlīnijas, kas var tikt atttēlotas OsmAnd standarta kartēs.
-
- Globālie dati (starp 70 Z un 70 D) ir bāzēti uz SRTM (Shuttle Radar Topography Mission) un ASTER (Advanced Spaceborne Thermal Emission and Reflection Radiometer) mērījumiem, attēlveidošanas rīks uz Terra\'s, vadošais NASA Zemes Novērošanas Sistēmas satelīts. ASTER ir kopējs veikums ar NASA, Japānas Ekonomikas Ministriju, Trade and Industry (METI) un Japānas Izplatījuma Sistēmām (J-spacesystems).
- "</string>
+    <string name="osmand_srtm_long_description_1000_chars">"Šis spraudnis iespējo kontūrlīniju un reljefu pārklājus uz OsmAnd standarta kartēm.
+\n
+\n Globālie dati (starp 70 Z un 70 D) ir bāzēti uz SRTM (Shuttle Radar Topography Mission) un ASTER (Advanced Spaceborne Thermal Emission and Reflection Radiometer) mērījumiem, attēlveidošanas rīks uz Terra\'s, vadošais NASA Zemes Novērošanas Sistēmas satelīts. ASTER ir kopējs veikums ar NASA, Japānas Ekonomikas Ministriju, Trade and Industry (METI) un Japānas Izplatījuma Sistēmām (J-spacesystems). "</string>
     
     <string name="osb_author_dialog_password">OSM parole (optionāla)</string>
 	<string name="osmand_extended_description_4000_chars">"
@@ -1493,12 +1487,11 @@ Aptuvenais kartes pārklājums un kvalitāte:
     
     <string name="osmo_settings_uuid">Ierīces identifikators</string>
     <string name="osmo_settings_descr">Konfigurēt monitoringa iestatījumus un personīgo monitoringa kanālu</string>
-    <string name="osmo_plugin_description">"Šis spraudnis nodrošina vienkāršotu OpenStreetMap monitoringu, vairāk lasīt https://osmo.mobi
-
-Jūs varat sekot grupas mobilajām ierīcēm reālajā laikā, kā arī redzēt savas grupas augšupielādētos punktus un trekus.
-
-Reģistrētu lietotāju grupām ir pieejamas tādas papildiespējas kā grupas administrēšana un attālinātā kontrole.
- "</string>
+    <string name="osmo_plugin_description">"Šis spraudnis nodrošina vienkāršotu OpenStreetMap monitoringu, vairāk šeit https://osmo.mobi
+\n
+\nJūs varat sekot grupas mobilajām ierīcēm reālajā laikā, kā arī redzēt savas grupas augšupielādētos punktus un trekus.
+\n
+\nReģistrētu lietotāju grupām ir pieejamas tādas papildiespējas kā grupu administrēšana un attālinātā kontrole. "</string>
     <string name="osmo_plugin_name">OpenStreetMap monitorings</string>
     <string name="osmo_settings">OSMo</string>
    	
@@ -1650,10 +1643,9 @@ Reģistrētu lietotāju grupām ir pieejamas tādas papildiespējas kā grupas a
 	<string name="lang_fa">Persiešu</string>
 	<string name="map_preferred_locale_descr">Nosaukumi kartē (ja valoda nebūs pieejama, tiks lietoti vietvārdi vai angļu valoda)</string>
     <string name="map_preferred_locale">Kartes pamatvaloda</string>
-    <string name="record_plugin_description">"Ar šo spraudni jūs varat manuāli saglabāt ceļa trekus, nospiežot GPX ieraksta logrīku kartes ekrānā vai automātiski veikt treka ierakstus GPX failā.
-
-Ierakstītie treki vēlāk var tikt izmantoti treka analīzei, koplietošanai ar draugiem vai OSM izstrādei.  Atlēti var izmantot trekus, lai monitorētu treniņus. Pamata treku analīze var tikt veikta tieši caur OsmAnd kā piemēram, apļu laiki, vidējais ātrums utt., bet paplašinātai analīzei trekus var atvērt citās programmās.
- "</string>
+    <string name="record_plugin_description">"Ar šo spraudni jūs varat manuāli saglabāt trekus, nospiežot GPX ieraksta logrīku uz kartes vai veikt automātisku visu maršrutu ierakstu GPX failā.
+\n
+\nIerakstītie treki vēlāk var tikt izmantoti treka analīzei, koplietošanai ar draugiem vai OSM izstrādei.  Atlēti var izmantot trekus, lai monitorētu treniņus. Pamata treku analīze var tikt veikta tieši caur OsmAnd kā piemēram, apļu laiki, vidējais ātrums utt., bet paplašinātai analīzei trekus var atvērt citās programmās. "</string>
     <string name="record_plugin_name">Ceļa ieraksts</string>
     <string name="int_hour">h</string>
     <string name="duration">Laiks</string>
@@ -2017,7 +2009,7 @@ Vai gribat veikt jaunu reģistrāciju?</string>
     <string name="osm_live_subscription_settings">Abonomenta iestatījumi</string>
     <string name="osm_live_ask_for_purchase">Lūdzu, vispirms nopērciet abonomentu OSM atjauninājumiem</string>
 
-    <string name="osm_live_header">"Šis abonoments nodrošina regulārus karšu atjauninājumus visā pasaulē. Daļa no ienākumiem nonāk OSM kopienai par ieguldījumu OSM. Ja jums patīk OsmAnd un OSM  un vēlaties tos atbalstīt, tad tas ir perfekts veids, kā to izdarīt."</string>
+    <string name="osm_live_header">"Abonēšana nodrošina ik stundu karšu atjauninājumus no visas pasaules. Daļa no ienākumiem nonāk OSM kopienai par ieguldījumu OSM. Ja jums patīk OsmAnd un OSM  un vēlaties tos atbalstīt, tad šis ir lielisks veids, kā to darīt."</string>
     
     <string name="select_map_marker">Izvēlieties marķieri</string>
     <string name="map_markers_other">Citi marķieri</string>
@@ -2339,20 +2331,15 @@ failu(s)?
     <string name="osm_user_stat">Labojumi %1$s, vieta %2$s, kopējie labojumi %3$s</string>
     <string name="osm_editors_ranking">OSM labotāju reitings</string>
     <string name="lang_nds">Zemvācu</string>
-    <string name="plugin_touringview_descr">"Tūrisma karte rāda maksimāli daudz noderīgas detaļas ceļotājiem un profesionālajiem braucējiem, īpaši izceļot ceļus, trekus, norādes un orientēšanās zīmes.
-
-
-Visi ceļi, atkarībā no to tipa, ir iezīmēti ar atšķirīgām krāsām, kas būs īpaši noderīgi lielu kravu pārvadātājiem.
-
-
-āpat tiek nodrošinātas speciālas tūrisma opcijas kā veloceļiņu vai kalnu taciņu maršrutu rādīšana.
-
-
-Atsevišķas kartes lejupielāde nav nepieciešama.
-
-
-Šo karti var atkārtoti deaktivizēt šeit vai galvenajā izvēlē - kartes attēlošana.
- "</string>
+    <string name="plugin_touringview_descr">"Tūrisma karte attēlo maksimāli daudz detaļas ceļotājiem un profesionālajiem braucējiem, īpaši izceļot ceļus, trekus, norādes un orientācijas zīmes.
+\n
+\nVisi ceļi, atkarībā no to tipa, ir iezīmēti ar atšķirīgām krāsām, ko īpaši novērtēs lielu kravu pārvadātāji.
+\n
+\nTāpat tiek nodrošinātas īpašas, uz tūrismu orientētas opcijas, kā veloceļiņu vai kalnu taciņu maršrutu rādīšana kartē.
+\n
+\nNav nepieciešama speciālas kartes lejupielāde.
+\n
+\nŠo karti var atkārtoti deaktivizēt šeit vai galvenajā izvēlē - kartes attēlošana. "</string>
     <string name="map_mode">Apgaismojums</string>
     <string name="number_of_gpx_files_selected_pattern">%s GPX faili atzīmēti</string>
     <string name="rendering_value_thin_name">Tievi</string>
@@ -2362,24 +2349,22 @@ Atsevišķas kartes lejupielāde nav nepieciešama.
     <string name="no_waypoints_found">Nav atrasts neviens ceļa punkts</string>
     <string name="report">Pārskats</string>
     <string name="storage_permission_restart_is_required">Aplikācijai ir piešķirta atļauja rakstīt ārējā glabātuvē. Ir nepieciešams aplikācijas restarts.</string>
-    <string name="release_2_3">"
- • OSM Live. Atbalstiet karšu izdevējus un veidotājus, saņemiet atjauninājumus ik pēc stundas
-
-
- • Marķieri uz kartes. Jauns veids kā atzīmēt vietas kartē.
-
-
- • Vēl detalizētākas OSM kartes ar valsts specifiskiem ceļu zīmējumiem un jaunām iespējām
-
-
-• Vizuālas izmaiņas maršruta plānošanā
-
-
-• Vairāki uzlabojumi kartes izvēlnē kā piemēram, adrešu meklēšana
-
-
-un vēl...
- "</string>
+    <string name="release_2_3">" • OSM Live. Atbalstiet karšu izdevējus un veidotājus un saņemiet ik stundas karšu atjauninājumus.
+\n
+\n
+\n • Marķieri uz kartes. Jauns veids vietu atzīmēšanai kartē.
+\n
+\n
+\n • Detalizētākas OSM kartes ar valsts specifiskiem ceļu apzīmējumiem un jaunām kartes iespējām.
+\n
+\n
+\n• Vizuālas izmaiņas maršruta plānošanā.
+\n
+\n
+\n• Vairāki uzlabojumi kartes izvēlnē, kā piemēram, adrešu meklēšana pēc konteksta.
+\n
+\n
+\nun vēl... "</string>
     <string name="shared_string_move_up">Uz augšu</string>
     <string name="shared_string_move_down">Uz leju</string>
     <string name="finish_navigation">Beigt navigāciju</string>
@@ -2390,13 +2375,10 @@ un vēl...
     <string name="open_street_map_login_and_pass">OpenStreetMap lietotāja vārds un parole</string>
     <string name="osm_live_email_desc">Mums tas ir vajadzīgs, lai informētu jūs par ieguldījumiem</string>
     <string name="plugin_nautical_descr">"Spraudnis papildina OsmaAnd kartes ar jūras kartēm kuģošanai, ūdenslēpošanai un citiem ūdens sporta veidiem.
-
-
-Speciāls kartes papildinājums rādīs navigācijas ceļus, zīmes un simbolus uz ūdens un iekšzemē krastu tuvumā. Katra navigācijas zīme ir aprakstīta, lai to varētu viegli indentificēt un ir dots skaidrojums par tās nozīmi (kategorija, izmēri, krāsa, secība, atsauces, u.t.t.).
-
-
-Lai atgrieztos uz OsmAnd standarta kartēm, deaktivizējiet spraudni vai nomainiet karti galvenajā izvēlnē - kartes attēlošana.
- "</string>
+\n
+\nSpeciāls kartes papildinājums rāda navigācijas ceļus, zīmes un simbolus uz ūdens un iekšzemē krastu tuvumā. Katra navigācijas zīme ir aprakstīta, lai to varētu viegli indentificēt un ir dots skaidrojums par tās nozīmi (kategorija, izmēri, krāsa, secība, atsauces, u.t.t.).
+\n
+\nLai atgrieztos uz OsmAnd standarta kartēm, deaktivizējiet spraudni vai nomainiet karti galvenajā izvēlnē - kartes attēlošana. "</string>
     <string name="number_of_contributors">Līdzstrādnieku skaits</string>
     <string name="file_name_containes_illegal_char">Faila vārds satur neatļautas rakstu zīmes</string>
 <string name="access_default_color">Noklusētā krāsa</string>
@@ -2422,38 +2404,26 @@ Lai atgrieztos uz OsmAnd standarta kartēm, deaktivizējiet spraudni vai nomaini
 - Detalizētākus noteikumus un nosacījumus lasiet OsMo.mobi interneta lapā
 - Ja jums ir īpašas prasības un vajadzības - lūdzu rakstiet uz atbalsta epastu osmo.mobi@gmail.com
  "</string>
-    <string name="release_2_2">"
- • Jauns satura jūtīgs interfeiss pieskaroties vietām uz kartes un citur aplikācijā
-
-
- • Kartes skats tiek atvērts uzreiz, ja vien nav atzīmēts \"rādīt manu izvēlni atverot aplikāciju\"
-
-
- • Definēt kādas sadaļas un kā tiks attēlotas Manā Izvēlnē
-
-
- • Izslēgt manu izvēlni, ja jums labāk patīk kontrolēt aplikāciju caur parastām izvēlnēm
- 
-
- • Lai lejupielādētu kartes, izvēlētos reģionus var atzīmēt uz pasaules kartes
-
-
- • POI meklēšana tagad atbalsta specifiskākus vaicājumus
-
-
- • Uzlabotas POI un OSM labošanas iespējas
-
-
- • Pārstrādāts karšu datu lejupielādes struktūra un interfeiss
-
-
-un vēl...
- "</string>
-    <string name="plugin_ski_descr">"Šis OsmAnd spraudnis ļauj piekļūt datiem par slēpošanas trasēm un maršrutiem, trošu vagoniem un pacēlājiem. Maršruti un trases tiek rādītas pēc krāsām, atkarībā no grūtības pakāpes un ir attēlotas īpašā \"ziemas\" kartes stilā.
-
-
-Aktivizējot spraudni, kartes stils tiek nomainīts uz \"Ziema un slēpošana,\" attēlojot visus ainavas elementus ziemas apstākļiem atbilstošus. Deaktivizēt spraudni un atgriezties normālā kartes skatā var vai nu caur šejieni vai nomainot stilu kartes uzstādījumos.
- "</string>
+    <string name="release_2_2">" • Jauns satura-jūtīgs interfeiss, pieskaroties vietām uz kartes un citur aplikācijā
+\n
+\n • Kartes skats tiek atvērts uzreiz, ja vien nav atzīmēts \"rādīt manu izvēlni\", atverot aplikāciju
+\n
+\n • Definēt kā un kādas sadaļas tiks attēlotas Manā Izvēlnē
+\n
+\n • Izslēgt Manu Izvēlni, ja dodat priekšroku parastajām izvēlnēm
+\n 
+\n • Lai lejupielādētu kartes, vajadzīgos reģionus var atzīmēt uz pasaules kartes
+\n
+\n • POI meklēšana tagad atbalsta specifiskākus vaicājumus
+\n
+\n • Uzlabotas POI un OSM labošanas iespējas
+\n
+\n • Pārstrādāta karšu datu lejupielādes struktūra un interfeiss
+\n
+\nun vēl... "</string>
+    <string name="plugin_ski_descr">"Šis OsmAnd spraudnis ļauj piekļūt datiem par slēpošanas trasēm un maršrutiem, trošu vagoniem un pacēlājiem. Maršruti un trases tiek rādīti pēc krāsām, atkarībā no grūtības pakāpes un tiek attēlotas īpašā \"ziemas\" kartes stilā.
+\n
+\nAktivizējot spraudni, kartes stils tiek nomainīts uz \"Ziema un slēpošana,\" attēlojot visus ainavas elementus ziemas apstākļiem atbilstošus. Deaktivizēt spraudni var vai nu šeit vai nomainot kartes stilu kartes uzstādījumos. "</string>
     <string name="move_marker_bottom_sheet_title">Velciet karti, lai pārvietotu marķieri</string>
     <!-- string name="lat_lon_pattern">Plat: %1$.5f Gar: %2$.5f</string -->
     <string name="follow_us">Sekojiet mums</string>
@@ -2709,21 +2679,19 @@ Apraksta laukumu: %1$s x %2$s</string>
     <string name="quick_action_btn_tutorial_title">Mainīt pogas pozīciju</string>
     <string name="quick_action_btn_tutorial_descr">Turiet nospiestu un velciet pogu, lai mainītu tās atrašanās vietu uz ekrāna</string>
 	<string name="shared_string_action_name">Darbības vārds</string>
-<string name="release_2_5">"
- Klikojamas pogas kartē
-
-Spēcīgs POI filtrs: piemēram restorānu atrašana pēc virtuves tipa vai apmešanās vietu meklēšana pēc piedāvātā servisa
-
-Jauns Topo kartes stils velobraucējiem un ceļotājiem
-
-Paplašinātas ceļa ieraksta iespējas
-
-Uzlabota navigācijas ziņojumjosla (Android Wear)
-
-Daudz citi uzlabojumi un kļūdu labojumi
-
-Un vēl…
- "</string>
+<string name="release_2_5">" Klikojamas pogas kartē
+\n
+\nSpēcīgs POI filtrs: piemēram, restorānu meklēšana pēc virtuves tipa vai apmešanās vietas pēc piedāvātajiem servisiem
+\n
+\nJauns Topo Kartes stils velobraucējiem un ceļotājiem
+\n
+\nPaplašinātas ceļojuma ieraksta iespējas
+\n
+\nUzlabota navigācijas ziņojumjosla (Android Wear)
+\n
+\nDaudz citu uzlabojumu un kļūdu labojumu
+\n
+\nUn vēl… "</string>
     <string name="auto_split_recording_descr">Sākt jaunu segmentu pēc 6 minūšu pārtraukuma, jaunu treku pēc 2 stundu pārtraukuma vai jaunu failu pēc ilgāka pārtraukuma, ja ir izmainīts datums.</string>
     <string name="auto_split_recording_title">Automātiski sadalīt ierakstus pēc pārtraukuma</string>
 	<string name="release_2_6">"
@@ -2898,7 +2866,7 @@ Ja jums ir vajadzīga palīdzība ar OsmAnd aplikāciju, lūdzu kontaktējieties
     <string name="nothing_found_descr">Meklējiet pēc cita vārda vai palieliniet meklēšanas rādiusu, ietverot blakus teritorijas</string>
     <string name="quick_action_showhide_osmbugs_title">Rādīt/nerādīt OSM piezīmes</string>
     <string name="routing_attr_allow_private_description">Atļaut piekļūšanu privātajām zemēm</string>
-    <string name="animate_my_location_desc">Atļaut manas lokācijas ekstrapolāciju īslaicīgas atrašanās vietas zuduma gadījumā</string>
+    <string name="animate_my_location_desc">Maršruta gaitā turpināt rādīt kustīgu animāciju arī pie īslaicīgiem pārrāvumiem atrašanās vietas noteikšanā</string>
     <string name="quick_action_auto_zoom_desc">Spiežot darbības pogu, tiks ieslēgta vai izslēgta automātiskā kartes mērogošana, atkarībā no kustības ātruma.</string>
     <string name="quick_action_add_destination">Pievienot mērķi</string>
     <string name="quick_action_replace_destination">Nomainīt mērķi</string>
@@ -2960,11 +2928,9 @@ Ja jums ir vajadzīga palīdzība ar OsmAnd aplikāciju, lūdzu kontaktējieties
     <string name="quick_action_auto_zoom_off">Autom. mērogošana izslēgta</string>
     <string name="index_item_depth_points_southern_hemisphere">Jūras dziļuma punkti dienvidu puslodē</string>
     <string name="index_item_depth_points_northern_hemisphere">Jūras dziļuma punkti ziemeļu puslodē</string>
-    <string name="osmand_extended_description_part1">"
- OsmAnd (OSM Automated Navigation Directions) ir karšu un navigācijas aplikācija ar brīvu piekļuvi augstas kvalitātes OpenStreetMap (OSM) datiem no visas pasaules.
-
- Izbaudiet balss un vizuālo navigatoru, skatiet POIs (interešu punktus), veidojiet un pārvaldiet GPX trekus, lietojiet kontūrlīniju vizualizāciju and altitūdas informāciju (caur spraudni), izvēlieties auto, velobraucēju, kājāmgājēju režīmus, labojiet OSM datus un daudz vairāk.
- "</string>
+    <string name="osmand_extended_description_part1">" OsmAnd (OSM Automated Navigation Directions) ir karšu un navigācijas aplikācija ar brīvu piekļuvi augstas kvalitātes OpenStreetMap (OSM) datiem no visas pasaules.
+\n
+\n Izbaudiet balss un vizuālo navigatoru, skatiet POIs (interešu punktus), veidojiet un pārvaldiet GPX trekus, lietojiet kontūrlīniju vizualizāciju and altitūdas informāciju (caur spraudni), izvēlieties auto, velobraucēju, kājāmgājēju režīmus, labojiet OSM datus un daudz vairāk. "</string>
     <string name="osmand_extended_description_part2">"
  GPS navigācija
  • Izvēlieties bezsaistes (bez viesabonēšanas maksas, kad esat ārvalstīs) vai tiešsaistes (ātrāks) režīmu
@@ -3094,4 +3060,16 @@ No Afganistānas līdz Zimbabvei, no Austrālijas līdz ASV, Argentīna, Brazīl
     <string name="mapillary_widget_descr">Ātrā pieeja Mapillary</string>
     <string name="mapillary_descr">Tiešsaistes ielas līmeņa fotoattēli jebkuram. Atklājiet vietas, līdzdaliet, iemūžiniet pasauli.</string>
     <string name="mapillary">Mapillary</string>
+    <string name="open_mapillary">Atvērt Mapillary</string>
+    <string name="shared_string_install">Instalēt</string>
+    <string name="improve_coverage_mapillary">Uzlabot vietu pārklājumu ar Mapillary</string>
+    <string name="improve_coverage_install_mapillary_desc">Jūs varat uzņemt fotoattēlus vai fotoattēlu sēriju un pievienot šai vietai uz kartes.
+\n
+\nDarbībai nepieciešama Mapillary aplikācija no Google Play.</string>
+    <string name="online_photos">Tiešsaistes fotoattēli</string>
+    <string name="no_photos_descr">Mums nav fotoattēlu, ko parādīt, šai vietai</string>
+    <string name="plugin_mapillary_descr">Ielas līmeņa fotoattēli ikvienam - atklājiet vietas, kopīgojiet, iemūžiniet pasauli.</string>
+    <string name="hide_from_zoom_level">Paslēpt no zoom līmeņa</string>
+    <string name="show_from_zoom_level">Rādīt no zoom līmeņa</string>
+    <string name="mapillary_image">Mapillary bilde</string>
     </resources>

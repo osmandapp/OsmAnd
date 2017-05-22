@@ -74,16 +74,16 @@
 	<string name="poi_art">Artaĵ-vendejo</string>
 	<string name="poi_baby_goods">Bebaĵ-vendejo</string>
 	<string name="poi_bag">Sak-vendejo</string>
-	<string name="poi_bathroom_furnishing">Lavĉambro-akcesoraĵa vendejo</string>
+	<string name="poi_bathroom_furnishing">Lavĉambr-akcesoraĵa vendejo</string>
 	<string name="poi_bed">Litaĵ-vendejo</string>
 	<string name="poi_boutique">Galanteriejo</string>
-	<string name="poi_camera">Fotiloj k lensoj vendejo</string>
+	<string name="poi_camera">Fotiloj-k-lensoj vendejo</string>
 	<string name="poi_carpet">Tapiŝ-vendejo</string>
 	<string name="poi_chemist">Drogejo</string>
 	<string name="poi_charity">Almoza vendejo</string>
-	<string name="poi_clothes">Vesto-vendejo</string>
-	<string name="poi_clothes_children">Infanvesto-vendejo</string>
-	<string name="poi_shoes">Ŝuo-vendejo</string>
+	<string name="poi_clothes">Vest-vendejo</string>
+	<string name="poi_clothes_children">Infanvest-vendejo</string>
+	<string name="poi_shoes">Ŝu-vendejo</string>
 	<string name="poi_candles">Kandel-vendejo</string>
 	<string name="poi_computer">Komputil-vendejo</string>
 	<string name="poi_copyshop">Fotokopiilejo</string>
@@ -125,7 +125,7 @@
 <string name="poi_dive">Subakvadil-vendejo</string>
 	<string name="poi_doityourself">Memfaradil-vendejo</string>
 	<string name="poi_doors">Pord-vendejo</string>
-	<string name="poi_erotic">Seks-vendejo</string>
+	<string name="poi_erotic">Seksumil-vendejo</string>
 	<string name="poi_fashion">Mod-butiko</string>
 	<string name="poi_fishing">Fiŝkaptil-vendejo</string>
 	<string name="poi_florist">Florvendejo</string>
@@ -139,7 +139,7 @@
 	<string name="poi_gas">Gas-vendejo</string>
 	<string name="poi_gift">Suvenir-vendejo</string>
 	<string name="poi_hardware">Il-vendejo</string>
-	<string name="poi_glaziery">Pordoj k fenestroj vendejo</string>
+	<string name="poi_glaziery">Pordoj-k-fenestroj-vendejo</string>
 	<string name="poi_newsagent">Gazet-vendejo</string>
 	<string name="poi_fire_hydrant">Hidranto</string>
 	<string name="poi_fuel">Benzinejo</string>
@@ -195,7 +195,7 @@
 	<string name="poi_wiki_lang_vo">Vikipedio Volapuka</string>
 	<string name="poi_highway_crossing">Pasejo zebrostria</string>
 
-	<string name="poi_kitchen">Kuirej-meblo-vendejo</string>
+	<string name="poi_kitchen">Kuirej-mebl-vendejo</string>
 	<string name="poi_leather">Ledaĵ-vendejo</string>
 	<string name="poi_medical_supply">Medicinaĵ-vendejo</string>
 	<string name="poi_mobile_phone">Poŝtelefon-vendejo</string>
@@ -213,7 +213,7 @@
 	<string name="poi_scuba_diving_shop">Subakvadil-vendejo</string>
 	<string name="poi_ship_chandler">Ŝipekipistejo</string>
 	<string name="poi_sports">Sportovendejo</string>
-	<string name="poi_stationery">Papervaro-vendejo</string>
+	<string name="poi_stationery">Papervar-vendejo</string>
 	<string name="poi_tableware">Manĝil-vendejo</string>
 	<string name="poi_ticket">Bilet-butiko</string>
 	<string name="poi_tobacco">Tabak-vendejo</string>
@@ -223,7 +223,7 @@
 	<string name="poi_vacuum_cleaner">Senpolvigil-vendejo</string>
 	<string name="poi_variety_store">Ĉio-po-unu-spesmilo vendejo</string>
 	<string name="poi_video">Filmovendejo</string>
-	<string name="poi_window_blind">Fenestr-kovrila vendejo</string>
+	<string name="poi_window_blind">Fenestr-kovril-vendejo</string>
 	<string name="poi_department_store">Ĉiovendejo</string>
 	<string name="poi_bicycle_parking">Parkumejo bicikla</string>
 
@@ -250,7 +250,7 @@
 	<string name="poi_swimming_pool_shop">Naĝej-akcesoriaĵoj vendejo</string>
 	<string name="poi_games">Lud-vendejo</string>
 	<string name="poi_model">Modelfar-vendejo</string>
-	<string name="poi_trophy">Pokaloj k premioj vendejo</string>
+	<string name="poi_trophy">Pokaloj-k-premioj-vendejo</string>
 	<string name="poi_video_games">Videolud-vendejo</string>
 	<string name="poi_pyrotechnics">Artfajraĵ-vendejo</string>
 	<string name="poi_weapons">Armil-vendejo</string>
@@ -1117,20 +1117,20 @@
 	<string name="poi_disused">Neuzata</string>
 
 	<string name="poi_operator">Administranto</string>
-	<string name="poi_fee_yes">Jes</string>
-	<string name="poi_fee_no">Ne</string>
-	<string name="poi_drinking_water_yes">Jes</string>
-	<string name="poi_drinking_water_no">Ne</string>
+	<string name="poi_fee_yes">jes</string>
+	<string name="poi_fee_no">ne</string>
+	<string name="poi_drinking_water_yes">jes</string>
+	<string name="poi_drinking_water_no">ne</string>
 	<string name="poi_supervised_yes">Gardata</string>
 	<string name="poi_supervised_no">Ne-gardata</string>
-	<string name="poi_seasonal_yes">Jes</string>
-	<string name="poi_seasonal_no">Ne</string>
-	<string name="poi_seasonal_dry_season">Seka sezono</string>
-	<string name="poi_seasonal_wet_season">Pluva sezono</string>
-	<string name="poi_seasonal_spring">Printempo</string>
-	<string name="poi_seasonal_summer">Somero</string>
-	<string name="poi_seasonal_autumn">Aŭtuno</string>
-	<string name="poi_seasonal_winter">Vintro</string>
+	<string name="poi_seasonal_yes">jes</string>
+	<string name="poi_seasonal_no">ne</string>
+	<string name="poi_seasonal_dry_season">seka sezono</string>
+	<string name="poi_seasonal_wet_season">pluva sezono</string>
+	<string name="poi_seasonal_spring">printempo</string>
+	<string name="poi_seasonal_summer">somero</string>
+	<string name="poi_seasonal_autumn">aŭtuno</string>
+	<string name="poi_seasonal_winter">vintro</string>
 	<string name="poi_crossing_traffic_signals">Trafiklumoj</string>
 	<string name="poi_crossing_uncontrolled">Sen trafiklumoj</string>
 	<string name="poi_crossing_unmarked">Nemarkita</string>
@@ -1255,10 +1255,10 @@
 	<string name="poi_generator_source_oil">Energifonto: petrolo</string>
 	<string name="poi_generator_source_diesel">Energifonto: dizeloleo</string>
 
-	<string name="poi_pump_manual">Permana</string>
-	<string name="poi_pump_powered">Maŝina</string>
-	<string name="poi_pump_no">Sen pumpilo</string>
-	<string name="poi_pump_yes">Jes</string>
+	<string name="poi_pump_manual">permana</string>
+	<string name="poi_pump_powered">maŝina</string>
+	<string name="poi_pump_no">sen pumpilo</string>
+	<string name="poi_pump_yes">jes</string>
 
 	<string name="poi_water_characteristic_mineral">Minerala</string>
 	<string name="poi_water_characteristic_mud">Akvospeco: sediment-riĉa</string>
@@ -1290,8 +1290,8 @@
 	<string name="poi_board_type_astronomy">Astroscienco</string>
 
 	<string name="poi_commercial">Oficeja tereno</string>
-	<string name="poi_covered_yes">Jes</string>
-	<string name="poi_covered_no">Sen-tegmenta</string>
+	<string name="poi_covered_yes">jes</string>
+	<string name="poi_covered_no">sen-tegmenta</string>
 
 	<string name="poi_smoking_no">malpermesata</string>
 	<string name="poi_smoking_outside">permesata nur ekstere</string>
@@ -1303,11 +1303,11 @@
 	<string name="poi_toll_yes">Imposto</string>
 	<string name="poi_toll_no">Sen imposto</string>
 	<string name="poi_toll_hgv_yes">Imposto por kamionoj</string>
-	<string name="poi_tactile_paving_yes">Jes</string>
-	<string name="poi_tactile_paving_no">Sen reliefo por blinduloj</string>
-	<string name="poi_traffic_signals_sound_yes">Jes</string>
-	<string name="poi_traffic_signals_sound_no">Ne</string>
-	<string name="poi_traffic_signals_sound_walk">Tiam kiam irado permesata</string>
+	<string name="poi_tactile_paving_yes">jes</string>
+	<string name="poi_tactile_paving_no">sen reliefo por blinduloj</string>
+	<string name="poi_traffic_signals_sound_yes">jes</string>
+	<string name="poi_traffic_signals_sound_no">ne</string>
+	<string name="poi_traffic_signals_sound_walk">tiam, kiam irado permesata</string>
 
 	<string name="poi_leisure_common">Publika ripoza tereno</string>
 	<string name="poi_highway_steps">Ŝtuparo</string>
@@ -1788,9 +1788,9 @@
 	<string name="poi_shelter_type_weather_shelter">Budo kontraŭ-vetera</string>
 	<string name="poi_shelter_type_basic_hut">Kabano</string>
 	<string name="poi_shelter_type_field_shelter">Besto-ŝirmejo</string>
-	<string name="poi_internet_access_type_wlan">Sendrata</string>
-	<string name="poi_internet_access_type_terminal">Terminalo</string>
-	<string name="poi_internet_access_type_wired">Drata</string>
+	<string name="poi_internet_access_type_wlan">sendrata</string>
+	<string name="poi_internet_access_type_terminal">terminalo</string>
+	<string name="poi_internet_access_type_wired">drata</string>
 	<string name="poi_internet_access_type_public">Interret-aliro: publika</string>
 	<string name="poi_internet_access_type_service">Interret-aliro: priservo</string>
 	<string name="poi_internet_access_type_no">Sen interret-aliro</string>
@@ -2033,29 +2033,29 @@
 	<string name="poi_surveillance_outdoor">Supergardo: ekstere</string>
 	<string name="poi_surveillance_public">Supergardo: publika ejo</string>
 
-	<string name="poi_clothes_women">Inaj</string>
-	<string name="poi_clothes_underwear">Subvesto</string>
-	<string name="poi_clothes_men">Viraj</string>
-	<string name="poi_clothes_wedding">Roboj geedziĝaj</string>
-	<string name="poi_clothes_sports">Sportaj</string>
-	<string name="poi_clothes_babies">Bebaj</string>
-	<string name="poi_clothes_denim">Ĝinzoŝtofaj</string>
-	<string name="poi_clothes_workwear">Laborvestoj</string>
-	<string name="poi_clothes_hats">Kapvestoj</string>
-	<string name="poi_clothes_fur">Felaj vestoj</string>
-	<string name="poi_clothes_leather">Ledaj vestoj</string>
-	<string name="poi_clothes_costumes">Kostumoj</string>
-	<string name="poi_clothes_traditional">Tradiciaj</string>
-	<string name="poi_clothes_suits">Garnaĵoj</string>
-	<string name="poi_clothes_maternity">Por gravedulinoj</string>
-	<string name="poi_clothes_vintage">Eksmodaj</string>
-	<string name="poi_clothes_oversize">Por dikuloj</string>
-	<string name="poi_clothes_schoolwear">Pelerinoj de lernejanoj</string>
-	<string name="poi_clothes_swimwear">Banvestoj</string>
-	<string name="poi_clothes_socks">Ŝtrumpoj</string>
-	<string name="poi_clothes_shirts">Ĉemizoj</string>
-	<string name="poi_clothes_dance">Por danco</string>
-	<string name="poi_clothes_military">Militistaj</string>
+	<string name="poi_clothes_women">inaj</string>
+	<string name="poi_clothes_underwear">subvestoj</string>
+	<string name="poi_clothes_men">viraj</string>
+	<string name="poi_clothes_wedding">roboj geedziĝaj</string>
+	<string name="poi_clothes_sports">sportaj</string>
+	<string name="poi_clothes_babies">bebaj</string>
+	<string name="poi_clothes_denim">ĝinzoŝtofaj</string>
+	<string name="poi_clothes_workwear">laborvestoj</string>
+	<string name="poi_clothes_hats">kapvestoj</string>
+	<string name="poi_clothes_fur">felaj vestoj</string>
+	<string name="poi_clothes_leather">ledaj vestoj</string>
+	<string name="poi_clothes_costumes">kostumoj</string>
+	<string name="poi_clothes_traditional">tradiciaj</string>
+	<string name="poi_clothes_suits">garnaĵoj</string>
+	<string name="poi_clothes_maternity">por gravedulinoj</string>
+	<string name="poi_clothes_vintage">eksmodaj</string>
+	<string name="poi_clothes_oversize">por dikuloj</string>
+	<string name="poi_clothes_schoolwear">pelerinoj de lernejanoj</string>
+	<string name="poi_clothes_swimwear">banvestoj</string>
+	<string name="poi_clothes_socks">ŝtrumpoj</string>
+	<string name="poi_clothes_shirts">ĉemizoj</string>
+	<string name="poi_clothes_dance">por danco</string>
+	<string name="poi_clothes_military">militistaj</string>
 
 	<string name="poi_historic_milestone">Mejloŝtono historia</string>
 
@@ -3015,14 +3015,14 @@
 <string name="poi_fuel_type">Speco</string>
 	<string name="poi_payment_type">Pagmaniero</string>
 	<string name="poi_additional_type">Aldona</string>
-<string name="poi_shop_craft">Materialoj-por-metio vendejo</string>
+<string name="poi_shop_craft">Materialoj-por-metio-vendejo</string>
 
 	<string name="poi_service_bicycle_charging_yes">Ŝargado de bicikloj: jes</string>
 	<string name="poi_service_bicycle_charging_no">Ŝargado de bicikloj: ne</string>
 
 <string name="poi_fuel_avia_type">Speco</string>
 	<string name="poi_payment_fuel_type">Brulaĵ-kartoj</string>
-	<string name="poi_internet_access_type">Speco de interret-aliro</string>
+	<string name="poi_internet_access_type">Interret-aliro</string>
 	<string name="poi_vending_type">Vendado de</string>
 	<string name="poi_bicycle_service">Bicikla servo</string>
 	<string name="poi_clothes_type">Vestaĵoj</string>
@@ -3094,7 +3094,7 @@
 	<string name="poi_xmas_pyramid">Kristnaska piramido</string>
 	<string name="poi_xmas_shop">Kristnaska vendejo</string>
 	<string name="poi_xmas_tree">Kristnaska arbeto</string>
-	<string name="poi_xmas_shop_christmas_tree">Kristnaska-arbeto vendejo</string>
+	<string name="poi_xmas_shop_christmas_tree">Kristnask-arbet-vendejo</string>
 	<string name="poi_xmas_day_date">Periodo de aranĝo</string>
 	<string name="poi_xmas_note">Noto</string>
 	<string name="poi_xmas_opening_hours">Horoj de malfermo</string>
@@ -3304,7 +3304,7 @@
 <string name="poi_feeding_place">Bestonutrejo</string>
 
 <string name="poi_party">Provizadoj por aranĝoj</string>
-	<string name="poi_electrical">Elektraĵa vendejo</string>
+	<string name="poi_electrical">Elektraĵ-vendejo</string>
 	<string name="poi_locksmith">Seruristejo</string>
 	<string name="poi_lighting">Prilumigad-aparata vendejo</string>
 	<string name="poi_lottery">Loteri-bileta kiosko</string>

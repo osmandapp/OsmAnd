@@ -896,6 +896,7 @@ public class OsmandSettings {
 	public final OsmandPreference<Boolean> SHOW_MAPILLARY = new BooleanPreference("show_mapillary", false).makeGlobal();
 	public final OsmandPreference<Boolean> MAPILLARY_FIRST_DIALOG_SHOWN = new BooleanPreference("mapillary_first_dialog_shown", false).makeGlobal();
 	public final OsmandPreference<Boolean> MAPILLARY_MENU_COLLAPSED = new BooleanPreference("mapillary_menu_collapsed", false).makeGlobal();
+	public final OsmandPreference<Boolean> WEBGL_SUPPORTED = new BooleanPreference("webgl_supported", true).makeGlobal();
 
 	// this value string is synchronized with settings_pref.xml preference name
 	public final OsmandPreference<String> PREFERRED_LOCALE = new StringPreference("preferred_locale", "").makeGlobal();
@@ -1406,7 +1407,11 @@ public class OsmandSettings {
 			}
 		}
 		for (TileSourceTemplate l : TileSourceManager.getKnownSourceTemplates()) {
-			map.put(l.getName(), l.getName());
+			if (!l.isHidden()) {
+				map.put(l.getName(), l.getName());
+			} else {
+				map.remove(l.getName());
+			}
 		}
 		return map;
 

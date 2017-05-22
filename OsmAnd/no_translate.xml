@@ -2,7 +2,6 @@
 <resources>
     <string name="app_name">OsmAnd~</string>
     <string name="app_name_free">OsmAndF~</string>
-    <string name="app_version">2.7.0</string>
     <!--
     Note: For our dev build apk's, the above "app_version" is provided (via osmand/build.xml) as the base version prefix to our build number in the format:
              X.X.X#YYYYZ , where

@@ -2639,13 +2639,13 @@ Representa el área: %1$s x %2$s</string>
     <string name="add_new_folder">Añadir nueva carpeta</string>
     <string name="shared_string_slope">Pendiente</string>
     <string name="lang_ber">Bereber (amazig)</string>
-    <string name="routing_attr_relief_smoothness_factor_hills_name">Montañoso</string>
-    <string name="routing_attr_relief_smoothness_factor_plains_name">Poco montañoso</string>
+    <string name="routing_attr_relief_smoothness_factor_hills_name">Empinado</string>
+    <string name="routing_attr_relief_smoothness_factor_plains_name">Poco empinado</string>
     <string name="routing_attr_relief_smoothness_factor_more_plains_name">Plano (llanura)</string>
     <string name="routing_attr_driving_style_speed_name">Velocidad</string>
     <string name="routing_attr_driving_style_balance_name">Equilibrado</string>
     <string name="routing_attr_driving_style_safety_name">Seguridad</string>
-    <string name="relief_smoothness_factor_descr">Terreno preferido: llano o montañoso</string>
+    <string name="relief_smoothness_factor_descr">Terreno preferido: llano o empinado</string>
     <string name="do_not_send_anonymous_app_usage">No enviar estadísticas de uso anónimas de la aplicación</string>
     <string name="do_not_send_anonymous_app_usage_desc">OsmAnd recopila información acerca de las secciones que abres en la aplicación. No recopilamos datos de ubicación, ingresos en la aplicación o datos relacionados con las áreas que visualizas, buscas o descargas.</string>
     <string name="do_not_show_startup_messages">Ocultar mensajes al inicio</string>
@@ -2847,4 +2847,11 @@ Representa el área: %1$s x %2$s</string>
     <string name="plugin_mapillary_descr">Fotos a nivel de calle para todos. Descubre lugares, colabora, captura el mundo.</string>
     <string name="online_photos">Fotos en línea</string>
     <string name="no_photos_descr">No hay fotos de este lugar</string>
+    <string name="shared_string_install">Instalar</string>
+    <string name="improve_coverage_mapillary">Mejorar cobertura con Mapillary</string>
+    <string name="improve_coverage_install_mapillary_desc">Puedes tomar tus propias fotos o serie de fotos y añadirlas a esta ubicación del mapa.
+\n
+\nPara ello debes instalar la aplicación Mapillary desde Google Play.</string>
+    <string name="open_mapillary">Abrir Mapillary</string>
+    <string name="mapillary_image">Imagen de Mapillary</string>
     </resources>

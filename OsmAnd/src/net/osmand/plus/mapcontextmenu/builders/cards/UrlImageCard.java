@@ -1,12 +1,8 @@
 package net.osmand.plus.mapcontextmenu.builders.cards;
 
-import android.content.Intent;
-import android.net.Uri;
 import android.view.View;
-import android.widget.ImageView;
-import android.widget.TextView;
+import android.view.View.OnClickListener;
 
-import net.osmand.plus.R;
 import net.osmand.plus.activities.MapActivity;
 import net.osmand.util.Algorithms;
 
@@ -16,28 +12,18 @@ public class UrlImageCard extends ImageCard {
 
 	public UrlImageCard(MapActivity mapActivity, JSONObject imageObject) {
 		super(mapActivity, imageObject);
-		this.icon = getMyApplication().getIconsCache().getIcon(R.drawable.ic_action_osmand_logo, R.color.osmand_orange);
-		if (!Algorithms.isEmpty(getImageUrl())) {
-			this.onClickListener = new View.OnClickListener() {
+		if (!Algorithms.isEmpty(getUrl())) {
+			OnClickListener onClickListener = new OnClickListener() {
 				@Override
 				public void onClick(View v) {
-					Intent intent = new Intent(Intent.ACTION_VIEW);
-					intent.setData(Uri.parse(getImageUrl()));
-					v.getContext().startActivity(intent);
+					openUrl(getMapActivity(), getMyApplication(), "", getUrl(), isExternalLink());
 				}
 			};
-		}
-	}
-
-	@Override
-	public void update() {
-		super.update();
-		if (view != null) {
-			ImageView image = (ImageView) view.findViewById(R.id.image);
-			image.setVisibility(View.GONE);
-			TextView urlText = (TextView) view.findViewById(R.id.url);
-			urlText.setText(getImageUrl());
-			urlText.setVisibility(View.VISIBLE);
+			if (!Algorithms.isEmpty(buttonText)) {
+				this.onButtonClickListener = onClickListener;
+			} else {
+				this.onClickListener = onClickListener;
+			}
 		}
 	}
 }
