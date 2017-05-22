@@ -2445,21 +2445,17 @@ Jelenleg csak {2} MB érhető el.</string>
     <string name="number_of_edits">Szerkesztések száma</string>
     <string name="reports_for">Jelentés erről</string>
 <string name="report">Jelentés</string>
-    <string name="release_2_3">"
- • OSM Live. Támogasd a térkép szerkesztőit és fejlesztőket, és óránkénti térképfrissítést kapsz.
-
-
- • Térkép jelölők. Egy új mód arra, hogy a gyorsan tudj helyeket kiválasztani a térképen.
-
-
- • Még részletesebb OSM térképek, országspecifikus útszám ikonokkal és sok új térképelemmel.
-
-
- • Továbbfejlesztett útvonal előkészítő felület.
-
-
- • Számos fejlesztés a térkép környezeti menüjében, mint például a cím azonnali keresése.
- "</string>
+    <string name="release_2_3">" • OSM Live. Támogasd a térkép szerkesztőit és fejlesztőket, és óránkénti térképfrissítést kapsz.
+\n
+\n • Térkép jelölők. Egy új mód arra, hogy a gyorsan tudj helyeket kiválasztani a térképen.
+\n
+\n • Még részletesebb OSM térképek, országspecifikus útszám ikonokkal és sok új térképelemmel.
+\n
+\n • Továbbfejlesztett útvonal előkészítő felület.
+\n
+\n • Számos fejlesztés a térkép környezeti menüjében, mint például a cím azonnali keresése.
+\n 
+\nés még számos dolog… "</string>
     <string name="shared_string_move_up">Mozgatás fel</string>
     <string name="shared_string_move_down">Mozgatás le</string>
     <string name="finish_navigation">Navigáció befejezése</string>
@@ -2534,19 +2530,19 @@ Jelenleg csak {2} MB érhető el.</string>
     <string name="back_to_search">Vissza a kereséshez</string>
     <string name="confirmation_to_delete_history_items">Törölni szeretnéd a kiválasztott elemeket az előzményekből?</string>
     <string name="show_something_on_map">%1$s megjelenítése a térképen</string>
-    <string name="release_2_4">"
- • Új, hatékony szabad szavas kereső
-
- • Autó hangrendszer integráció Bluetoothon keresztül
-
- • Továbbfejlesztett navigáció, hangutasítások, és kanyarodósáv kijelzés
-
- • Továbbfejlesztett tömegközlekedési réteg útvonalak megjelenítésével
-
- • Új nyelvek, valamint már nyelvjárások is elérhetőek
-
- • Sok más fejlesztés és hibajavítás
- "</string>
+    <string name="release_2_4">" • Új, hatékony szabad szavas kereső
+\n
+\n • Autó hangrendszer integráció Bluetoothon keresztül
+\n
+\n • Továbbfejlesztett navigáció, hangutasítások és kanyarodósáv kijelzés
+\n
+\n • Továbbfejlesztett tömegközlekedési réteg útvonalak megjelenítésével
+\n
+\n • Új nyelvek, valamint már nyelvjárások is elérhetőek
+\n
+\n • Sok más fejlesztés és hibajavítás
+\n 
+\nés még számos dolog… "</string>
     <string name="dist_away_from_my_location">Keresés %1$s távolságban</string>
     <string name="show_on_map">Megjelenítés a térképen</string>
     <string name="share_history_subject">" megosztva OsmAnd segítségével"</string>
