@@ -609,7 +609,7 @@ public class ResourceManager {
 				}
 				boolean wikiMap = (f.getName().contains("_wiki") || f.getName().contains(IndexConstants.BINARY_WIKI_MAP_INDEX_EXT));
 				boolean srtmMap = f.getName().contains(IndexConstants.BINARY_SRTM_MAP_INDEX_EXT);
-				if (mapReader == null || (Version.isFreeVersion(context) && wikiMap)) {
+				if (mapReader == null || (Version.isFreeVersion(context) && wikiMap && !context.getSettings().FULL_VERSION_PURCHASED.get())) {
 					warnings.add(MessageFormat.format(context.getString(R.string.version_index_is_not_supported), f.getName())); //$NON-NLS-1$
 				} else {
 					if (mapReader.isBasemap()) {
