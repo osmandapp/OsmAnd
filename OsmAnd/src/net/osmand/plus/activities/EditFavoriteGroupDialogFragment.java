@@ -171,7 +171,6 @@ public class EditFavoriteGroupDialogFragment extends BottomSheetDialogFragment {
 				getMyApplication().getFavorites()
 						.editFavouriteGroup(group, group.name, group.color, visible);
 				updateParentFragment();
-				dismiss();
 			}
 		});
 
