@@ -1293,4 +1293,8 @@
     <string name="av_camera_focus_macro">Makro (iri plan) fokus rejimi</string>
     <string name="av_camera_focus_continuous">Kamera fasiləsiz fokuslamağa çalışsın</string>
     <string name="av_photo_play_sound">Şəkil çəkərkən səs çal</string>
+    <string name="mapillary_image">Mapillary təsviri</string>
+    <string name="osmand_plus_extended_description_part8">" Təxmini xəritənin əhatə dairəsi və keyfiyyəti: • Qərbi Avropa: **** • Şərqi Avropa: *** • Rusiya: *** • Şimali Amerika: *** • Cənubi Amerika: ** • Asiya: ** • Yaponiya &amp; Koreya: *** • Yaxın Şərq: ** • Afrika: ** • Antarktida: * Dünyanın bir çox ölkəsi endirmək üçün mövcuddur! Əfqanıstandan Zimbabveyə, Avstraliyadan ABŞ-a. Argentina, Braziliya, Kanada, Fransa, Almaniya, Meksika, Böyük Britaniya, İspaniya, … "</string>
+    <string name="avoid_in_routing_title">Yayın…</string>
+    <string name="map_widget_distance">Hədəf</string>
     </resources>
