@@ -10,7 +10,6 @@ import android.net.Uri;
 import android.os.AsyncTask;
 import android.os.Build;
 import android.os.Bundle;
-import android.os.Message;
 import android.support.annotation.NonNull;
 import android.support.design.widget.TabLayout;
 import android.support.design.widget.TextInputLayout;
@@ -46,6 +45,7 @@ import android.widget.ImageButton;
 import android.widget.LinearLayout;
 import android.widget.TextView;
 import android.widget.Toast;
+
 import net.osmand.CallbackWithObject;
 import net.osmand.PlatformUtil;
 import net.osmand.data.Amenity;
@@ -407,7 +407,7 @@ public class EditPoiDialogFragment extends BaseOsmAndDialogFragment {
 		int nonalpha = 0;
 		for(int i = 0; i < name.length(); i++) {
 			char c = name.charAt(i);
-			if(Character.isAlphabetic(c)) {
+			if(Character.isLetter(c) || Character.getType(c) == Character.LETTER_NUMBER) {
 				if(Character.toUpperCase(c) != c && Character.toLowerCase(c) == c) {
 					lower ++;
 				} else {
