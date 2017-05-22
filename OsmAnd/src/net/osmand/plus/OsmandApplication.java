@@ -28,7 +28,6 @@ import net.osmand.CallbackWithObject;
 import net.osmand.PlatformUtil;
 import net.osmand.access.AccessibilityPlugin;
 import net.osmand.aidl.OsmandAidlApi;
-import net.osmand.aidl.OsmandAidlService;
 import net.osmand.data.LatLon;
 import net.osmand.map.OsmandRegions;
 import net.osmand.map.WorldRegion;
@@ -73,6 +72,20 @@ import btools.routingapp.BRouterServiceConnection;
 import btools.routingapp.IBRouterService;
 
 public class OsmandApplication extends MultiDexApplication {
+	public static boolean isActivityVisible() {
+		return activityVisible;
+	}
+
+	public static void activityResumed() {
+		activityVisible = true;
+	}
+
+	public static void activityPaused() {
+		activityVisible = false;
+	}
+
+	private static boolean activityVisible;
+
 	public static final String EXCEPTION_PATH = "exception.log"; //$NON-NLS-1$
 	private static final org.apache.commons.logging.Log LOG = PlatformUtil.getLog(OsmandApplication.class);
 
