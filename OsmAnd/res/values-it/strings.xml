@@ -3008,4 +3008,5 @@ Copertura e qualità approssimativamente:
     <string name="improve_coverage_install_mapillary_desc">Puoi scattare una foto singola o una serie e aggiungerle a questa posizione della mappa.
 \n
 \nPer farlo è necessario installare l\'app Mapillary da Google Play.</string>
+    <string name="mapillary_image">Immagine Mapillary</string>
     </resources>
