@@ -11,8 +11,8 @@
     <string name="quick_action_showhide_osmbugs_descr">Нажатие на кнопку действия отобразит/скроет заметки OSM с карты.</string>
     <string name="sorted_by_distance">Отсортировано по расстоянию</string>
     <string name="search_favorites">Поиск в избранном</string>
-    <string name="hillshade_menu_download_descr">Чтобы увидеть отмывку (полутоновое изображение рельефа) на карте, нужно загрузить слой отмывки для этой области.</string>
-    <string name="hillshade_purchase_header">Чтобы увидеть отмывку (полутоновое изображение рельефа), нужно купить и установить плагин Contour Lines</string>
+    <string name="hillshade_menu_download_descr">Для того, чтобы отобразить затенение рельефа, вам нужно загрузить специальную карту для этой области</string>
+    <string name="hillshade_purchase_header">Для того, чтобы отобразить затенение рельефа, вам нужно купить и установить плагин</string>
     <string name="srtm_menu_download_descr">Для того, чтобы отобразить линии контуров рельефа, вам нужно загрузить специальную карту для этой области.</string>
     <string name="shared_string_plugin">Плагин</string>
     <string name="srtm_purchase_header">Для того, чтобы отобразить линии контуров рельефа, вам нужно купить и установить плагин</string>
@@ -207,12 +207,12 @@
     <string name="rendering_attr_contourColorScheme_name">Цветовая схема горизонталей</string>
     <string name="rendering_attr_surfaceIntegrity_name">Качество дорожного покрытия</string>
     <string name="search_hint">Введите название города, адрес, POI</string>
-    <string name="new_filter_desc">Введите имя для нового фильтра, он будет добавлен в список Категорий.</string>
+    <string name="new_filter_desc">Введите имя для нового фильтра. Вы сможете его найти в списке Категории.</string>
     <string name="translit_name_if_miss">Транслитерация если имя на %1$s отсутствует</string>
     <string name="translit_names">Транслитерация названий</string>
     <string name="edit_filter">Редактировать категории</string>
     <string name="subcategories">Подкатегории</string>
-    <string name="selected_categories">Выбранные категории</string>
+    <string name="selected_categories">Выбранные подкатегории</string>
     <string name="create_custom_poi">Настройка поиска</string>
     <string name="custom_search">Настроить поиск</string>
     <string name="shared_string_filters">Фильтры</string>
@@ -287,9 +287,7 @@
     <string name="rendering_attr_hideProposed_name">Планируемые объекты</string>
     
     
-    <string name="srtm_plugin_description">"Этот плагин предоставляет как слой контурных линий, так и слой отмывки (полутонового изображения рельефа) для стандартных карт OsmAnd. Эта функция будет высоко оценена спортсменами, туристами, путешественниками и всеми, кто заинтересован в рельефной структуре ландшафта. (Обратите внимание, что контурные линии и/или данные о рельефе — это отдельные файлы для загрузки, которые будут доступны после активации плагина.)
-\n
-\nГлобальные данные (между 70 градусами на севере и 70 градусами на юге) основываются на измерениях SRTM (Shuttle Radar Topography Mission) и ASTER (Advanced Spaceborne Thermal Emission and Reflection Radiometer) — инструментом визуализации Terra, флагманского спутника Системы Наблюдения Земли NASA. ASTER является результатом совместных усилий NASA, министерства экономики, торговли и промышленности Японии (METI), а также Космических Систем Японии (J-spacesystems). "</string>
+    <string name="srtm_plugin_description">"Этот плагин обеспечивает как наложение контурных линий, так и отображения затеняющего слоя рельефа поверх стандартных карт OsmAnd. Эта функция высоко оценится спортсменами, туристами, путешественниками и всеми, кто заинтересован в рельефной структуре ландшафта.\n\nГлобальные данные (между 70 градусами на севере и 70 градусами на юге) основываются на измерениях SRTM (Shuttle Radar Topography Mission) и ASTER (Advanced Spaceborne Thermal Emission and Reflection Radiometer) — инструментом визуализации Terra, флагманского спутника Системы Наблюдения Земли NASA. ASTER является результатом совместных усилий NASA, министерства экономики Японии, торговли и промышленности (METI), а также Космических Систем Японии (J-spacesystems). "</string>
     <string name="srtm_paid_version_msg">Рассмотрите, пожалуйста, покупку плагина \"Линии высот\" в Google Play, чтобы поддержать последующую разработку.</string>
     <string name="srtm_paid_version_title">Линии высот</string>
     <string name="av_def_action_video">Запись видео</string>
@@ -1183,7 +1181,7 @@
     <string name="precise_routing_mode">Точный маршрут (alpha)</string>
     <string name="support_new_features_descr">Пожертвуйте, чтобы увидеть новые опции реализованными в приложении</string>
     <string name="precise_routing_mode_descr">Включите, для расчёта точных маршрутов без затруднений. Всё ещё ограниченн расстоянием и медленный.</string>
-    <string name="download_hillshade_maps">Отмывка</string>
+    <string name="download_hillshade_maps">Затемнение рельефа</string>
     <string name="av_use_external_camera_descr">Использовать системную программу для фото</string>
     <string name="av_use_external_camera">Использовать приложение Камера</string>
     <string name="index_name_openmaps">OpenMaps - Европа</string>
@@ -1195,7 +1193,7 @@
     <string name="access_arrival_time">Время прибытия</string>
     <string name="map_widget_gps_info">Информация GPS</string>
     <string name="max_speed_none">нет</string>
-    <string name="layer_hillshade">Слой отмывки</string>
+    <string name="layer_hillshade">Слой рельефа местности</string>
     <string name="street_name">Название улицы</string>
     <string name="hno">Номер дома</string>
     <string name="download_using_mobile_internet">В настоящее время нет соединения по Wi-Fi. Хотите использовать текущее интернет-соединение для загрузки?</string>
@@ -1280,11 +1278,11 @@
     <string name="osb_author_or_password_not_specified">Пожалуйста, укажите в настройках пароль и имя пользователя OSM</string>
     <string name="route_descr_map_location">Карта: </string>
     <string name="osb_author_dialog_password">Пароль OSM (опционально)</string>
-    <string name="driving_region_descr">Выберите регион вождения: США, Европа, Великобритания, Азия и другие</string>
+    <string name="driving_region_descr">Выберите регион вождения: США, Европа, Англия, Азия и другие</string>
     <string name="driving_region">Регион вождения</string>
     <string name="driving_region_japan">Япония</string>
     <string name="driving_region_us">США</string>
-    <string name="driving_region_europe_asia">Европа, Азия, Латинская Америка и т. п.</string>
+    <string name="driving_region_europe_asia">Европа и Азия</string>
     <string name="driving_region_uk">Великобритания, Индия и др.</string>
     <string name="context_menu_item_directions_to">Проложить маршрут</string>
     <string name="context_menu_item_directions_from">Пункт отправления</string>
@@ -1900,7 +1898,7 @@
     <string name="gps_network_not_enabled">Служба определения координат не включена. Вы хотите включить её?</string>
     <string name="disable_recording_once_app_killed_descrp">При завершении приложения (через последние приложения) запись GPX будет поставлена на паузу. (Из панели уведомлений Android исчезнет значок фонового режима.)</string>
     <string name="download_wikipedia_files">Хотите загрузить дополнительные данные Википедии (%1$s Мб) ?</string>
-    <string name="lang_es_ar">Испанский (Аргентина)</string>
+    <string name="lang_es_ar">Испанский (аргентинский)</string>
     <string name="lang_nb">Норвежский букмол</string>
     <string name="lang_vo">Волапюк</string>
     <string name="lang_th">Тайский</string>
@@ -2029,7 +2027,7 @@
     <string name="favorite_category_dublicate_message">Категория с таким названием уже существует. Введите другое название.</string>
     <string name="favorite_category_name">Название категории</string>
     <string name="favorite_category_add_new_title">Добавить новую категорию</string>
-    <string name="hillshade_layer_disabled">Слой отмывки отключён</string>
+    <string name="hillshade_layer_disabled">Слой рельефа местности отключен</string>
     <string name="srtm_plugin_disabled">Контурные линии отключены</string>
     <string name="roads">Дороги</string>
     <string name="buy">Купить</string>
@@ -2266,7 +2264,7 @@
     <string name="shared_string_is_open_24_7">Открыто 24/7</string>
     <string name="storage_directory_card">Карта памяти</string>
     <string name="coords_format">Формат координат</string>
-    <string name="coords_format_descr">Формат географических координат</string>
+    <string name="coords_format_descr">Формат для географических координат</string>
   	<string name="app_mode_bus">Автобус</string>
  	<string name="app_mode_train">Поезд</string>
     <string name="release_2_4">
@@ -2392,5 +2390,4 @@
     <string name="file_can_not_be_moved">Файл не может быть перемещен.</string>
     <string name="sea_depth_thanks">Спасибо за покупку контуров глубин!</string>
     <string name="shared_string_add_photos">Добавить фотографии</string>
-    <string name="favorite_empty_place_name">Место</string>
     </resources>
