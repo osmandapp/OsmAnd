@@ -685,6 +685,7 @@ public class MapActivity extends OsmandActionBarActivity implements DownloadEven
 			new XMasDialogFragment().show(getSupportFragmentManager(), XMasDialogFragment.TAG);
 		}
 		FirstUsageWelcomeFragment.SHOW = false;
+		OsmandApplication.activityResumed();
 	}
 
 	@Override
@@ -1029,6 +1030,7 @@ public class MapActivity extends OsmandActionBarActivity implements DownloadEven
 		getMyApplication().getAppCustomization().pauseActivity(MapActivity.class);
 		app.getResourceManager().interruptRendering();
 		OsmandPlugin.onMapActivityPause(this);
+		OsmandApplication.activityPaused();
 	}
 
 	public void updateApplicationModeSettings() {
