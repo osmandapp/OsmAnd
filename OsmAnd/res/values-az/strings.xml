@@ -86,7 +86,7 @@
     <string name="osm_live_hide_user_name">Hesabatlarda adımı göstərmə</string>
     <string name="osm_live_active">Aktiv</string>
     <string name="osm_live_not_active">Qeyri-aktiv</string>
-    <string name="osm_live_enter_email">Zəhmət olmasa düzgün E-poçt ünvanı daxil et</string>
+    <string name="osm_live_enter_email">Zəhmət olmasa düzgün E-poçt ünvanı daxil edin</string>
     <string name="osm_live_subscription_settings">Abunəlik parametrləri</string>
     <string name="upload_anonymously">Anonim olaraq yüklə</string>
     <string name="download_files_question_space">{0} fayl endirilsin?
@@ -240,7 +240,7 @@
     <string name="shared_string_control_stop">Dayandır</string>
     <string name="shared_string_more">Daha çox…</string>
     <string name="shared_string_do_not_show_again">Yenidən göstərmə</string>
-    <string name="shared_string_remember_my_choice">Seçimimi yadda saxla</string>
+    <string name="shared_string_remember_my_choice">Seçimimi xatırla</string>
     <string name="shared_string_refresh">Yenilə</string>
     <string name="shared_string_download">Endir</string>
     <string name="shared_string_downloading">Endirilir</string>
@@ -336,12 +336,12 @@
     <string name="sort_by_name">Ada görə sırala</string>
     <string name="loading_smth">%1$s yüklənir…</string>
     <string name="map_widget_plain_time">Hazırki vaxt</string>
-    <string name="selected_gpx_info_show">
-
-Xəritədə görmək üçün basın və saxlayın</string>
-    <string name="local_index_gpx_info_show">
-
-Seçimlər üçün basıb saxlayın</string>
+    <string name="selected_gpx_info_show">"
+\n
+\nXəritədə görmək üçün basıb saxlayın"</string>
+    <string name="local_index_gpx_info_show">"
+\n
+\nSeçimlər üçün basıb saxlayın"</string>
     <string name="gpx_info_start_time">"Başlama vaxtı: %1$tF, %1$tT "</string>
     <string name="gpx_info_end_time">"Bitmə vaxtı: %1$tF, %1$tT "</string>
     <string name="gpx_info_maximum_speed">"Maksimum sürət: %1$s "</string>
@@ -708,9 +708,9 @@ Seçimlər üçün basıb saxlayın</string>
     <string name="poi_create_title">POI yarat</string>
     <string name="poi_remove_title">POI-ni sil</string>
     <string name="poi_remove_success">POI uğurla silindi</string>
-    <string name="poi_action_add">Əlavə et</string>
-    <string name="poi_action_change">Dəyişdir</string>
-    <string name="poi_action_delete">Sil</string>
+    <string name="poi_action_add">Əlavə etmə</string>
+    <string name="poi_action_change">Dəyişdirmə</string>
+    <string name="poi_action_delete">Silmə</string>
     <string name="poi_dialog_opening_hours">Açılır</string>
     <string name="poi_dialog_comment">Rəy</string>
     <string name="poi_dialog_reopen">Yenidən aç</string>
@@ -869,7 +869,7 @@ Seçimlər üçün basıb saxlayın</string>
     <string name="access_no_destination">Hədəf təyin edilməyib</string>
     <string name="access_hint_enter_description">Təsvir daxil et</string>
     <string name="access_widget_expand">Genişlət</string>
-    <string name="access_shared_string_navigate_up">Yuxarı gedin</string>
+    <string name="access_shared_string_navigate_up">Yuxarı get</string>
     <string name="gpx_monitoring_start">GPX qeydiyyatını başlat</string>
     <string name="gpx_monitoring_stop">GPX qeydiyyatını dayandır</string>
     <string name="gpx_start_new_segment">Yeni seqment başlat</string>
@@ -946,8 +946,8 @@ Seçimlər üçün basıb saxlayın</string>
     <string name="si_kmh">Saatda kilometr</string>
     <string name="si_mph">Saatda mil</string>
     <string name="si_m_s">Saniyədə metr</string>
-    <string name="si_min_km">Dəqiqədə kilometr</string>
-    <string name="si_min_m">Dəqiqədə mil</string>
+    <string name="si_min_km">Kilometrdə dəqiqə</string>
+    <string name="si_min_m">Mildə dəqiqə</string>
     <string name="shared_string_navigation">Naviqasiya</string>
     <string name="osmand_running_in_background">Arxa fonda işləyir</string>
     <string name="analyze_on_map">Xəritədə təhlil et</string>
@@ -1045,7 +1045,7 @@ Seçimlər üçün basıb saxlayın</string>
     <string name="avoid_roads_msg">Yayınmaq üçün yollar seçərək alternativ marşrut yarada bilərsiniz</string>
     <string name="rendering_attr_roadStyle_name">Yol stili</string>
     <string name="rendering_attr_roadStyle_description">Yol stili</string>
-    <string name="rendering_value_germanRoadAtlas_name">Alman yol atlası</string>
+    <string name="rendering_value_germanRoadAtlas_name">Almaniya yol atlası</string>
     <string name="rendering_value_highContrastRoads_name">Yüksək kontrastlı yollar</string>
     <string name="traffic_warning_railways">Dəmir yolu keçidi</string>
     <string name="show_railway_warnings">Dəmir yolu keçidləri</string>
@@ -1202,9 +1202,9 @@ Seçimlər üçün basıb saxlayın</string>
     <string name="favourites_remove_dialog_msg">“%s” favorit nöqtəsi silinsin?</string>
     <string name="favourites_remove_dialog_success">Favorit nöqtə {0} uğurla silindi.</string>
     <string name="poi_remove_confirm_template">{0} silinsin (rəy daxil edin) ?</string>
-    <string name="poi_action_succeded_template">{0}mə əməliyyatı uğurla tamamlandı.</string>
-    <string name="poi_error_unexpected_template">{0}mə əməliyyatı zamanı gözlənilməz səhv baş verdi.</string>
-    <string name="poi_error_io_error_template">{0}mə əməliyyatı zamanı I/O səhvi baş verdi.</string>
+    <string name="poi_action_succeded_template">{0} əməliyyatı uğurla tamamlandı.</string>
+    <string name="poi_error_unexpected_template">{0} əməliyyatı zamanı gözlənilməz səhv baş verdi.</string>
+    <string name="poi_error_io_error_template">{0} əməliyyatı zamanı I/O səhvi baş verdi.</string>
     <string name="poi_dialog_comment_default">POI dəyişdirmə</string>
     <string name="poi_dialog_other_tags_message">Bütün digər işarələr saxlanılır</string>
     <string name="routing_settings">Naviqasiya</string>
@@ -1214,4 +1214,83 @@ Seçimlər üçün basıb saxlayın</string>
     <string name="download_files_not_enough_space">%1$s MB endirmək üçün kifayət qədər yaddaş yoxdur (boş: %2$s).</string>
     <string name="keep_informing_never">Yalnız əl ilə (oxa toxun)</string>
     <string name="city_type_hamlet">Kənd</string>
+    <string name="use_osm_live_routing">OSM Live naviqasiya</string>
+    <string name="routing_settings_2">Naviqasiya parametrləri</string>
+    <string name="guidance_preferences_descr">Naviqasiya seçimləri</string>
+    <string name="cancel_navigation">Naviqasiyanı dayandır</string>
+    <string name="stop_routing_confirm">Naviqasiyanı dayandırmaq istədiyinizdən əminsiniz?</string>
+    <string name="osmand_play_title_30_chars">OsmAnd Xəritələr &amp; Naviqasiya</string>
+    <string name="osmand_plus_play_title_30_chars">OsmAnd+ Xəritələr &amp; Naviqasiya</string>
+    <string name="process_navigation_service">OsmAnd naviqasiya xidməti</string>
+    <string name="offline_maps_and_navigation">Offlayn Xəritələr
+\n&amp; Naviqasiya</string>
+    <string name="quick_action_add_navigation">Naviqasiya</string>
+    <string name="storage_directory_manual">Əllə müəyyənləşdirilmiş</string>
+    <string name="general_settings_2">Əsas parametrlər</string>
+    <string name="shared_string_dismiss">İmtina</string>
+    <string name="shared_string_io_error">I/O səhvi baş verdi</string>
+    <string name="shared_string_collapse"/>
+    <string name="route_points">Marşrut nöqtələri</string>
+    <string name="srtm_plugin_name">Kontur xətləri</string>
+    <string name="points">Nöqtələr</string>
+    <string name="traffic_warning_pedestrian">Piyada keçidi</string>
+    <string name="show_pedestrian_warnings">Piyada keçidləri</string>
+    <string name="navigate_point_zone">Zona</string>
+    <string name="coordinates">Koordinatlar</string>
+    <string name="rendering_attr_tramTrainRoutes_name">Tramvay və qatar marşrutları</string>
+    <string name="rendering_attr_subwayMode_name">Metro marşrutları</string>
+    <string name="rendering_attr_trainLightrailRoutes_name">Qatar marşrutları</string>
+    <string name="rendering_attr_tramRoutes_name">Tramvay marşrutları</string>
+    <string name="rendering_attr_trolleybusRoutes_name">Trolleybus marşrutları</string>
+    <string name="rendering_attr_busRoutes_name">Avtobus marşrutları</string>
+    <string name="rendering_category_routes">Marşrutlar</string>
+    <string name="rendering_category_transport">Nəqliyyat</string>
+    <string name="print_route">Marşrutu çap et</string>
+    <string name="index_tours">Turlar</string>
+    <string name="targets">Hədəflər</string>
+    <string name="map_downloaded_descr">%1$s xəritəsi endirildi, indi istifadə etməyə başlaya bilərsiniz.</string>
+    <string name="go_to_map">Xəritəni göstər</string>
+    <string name="favorite_category_dublicate_message">Göstərilən kateqoriya adı artıq mövcuddur. Fərqli ad istifadə edin.</string>
+    <string name="region_maps"/>
+    <string name="srtm_plugin_disabled">Kontur xətləri sönülüdür</string>
+    <string name="default_speed_system_descr">Sürət vahidi təyin edin</string>
+    <string name="default_speed_system">Sürət vahidi</string>
+    <string name="min_km">dəq/km</string>
+    <string name="min_mile">dəq/mil</string>
+    <string name="si_nm">Dəniz mili</string>
+    <string name="si_nm_h">Saatda dəniz mili (düyün)</string>
+    <string name="favourites_edit_dialog_title">Favorit məlumatı</string>
+    <string name="av_locations">Məkanlar</string>
+    <string name="traffic_warning_hazard">Təhlükə</string>
+    <string name="rendering_value_boldOutline_name">Qalın kontur</string>
+    <string name="no_updates_available">Yeniləmə mövcud deyil</string>
+    <string name="download_live_updates">Canlı yeniləmələr</string>
+    <string name="rendering_value_defaultTranslucentCyan_name">Standart (şəffaf mavi)</string>
+    <string name="rendering_attr_currentTrackColor_description">GPX rəngi</string>
+    <string name="rendering_attr_currentTrackWidth_name">GPX eni</string>
+    <string name="rendering_attr_currentTrackWidth_description">GPX eni</string>
+    <string name="rendering_value_translucent_red_name">Şəffaf qırmızı</string>
+    <string name="rendering_value_orange_name">Narıncı</string>
+    <string name="rendering_value_translucent_orange_name">Şəffaf narıncı</string>
+    <string name="rendering_value_translucent_yellow_name">Şəffaf sarı</string>
+    <string name="rendering_value_lightgreen_name">Açıq yaşıl</string>
+    <string name="rendering_value_translucent_lightgreen_name">Şəffaf açıq yaşıl</string>
+    <string name="rendering_value_translucent_green_name">Şəffaf yaşıl</string>
+    <string name="rendering_value_lightblue_name">Açıq mavi</string>
+    <string name="rendering_value_translucent_lightblue_name">Şəffaf açıq mavi</string>
+    <string name="rendering_value_blue_name">Mavi</string>
+    <string name="rendering_value_translucent_blue_name">Şəffaf mavi</string>
+    <string name="restart_is_required">Dəyişikliklərin tam tətbiq edilməsi üçün proqramı əllə yenidən başlatmaq lazımdır.</string>
+    <string name="archive_wikipedia_data">Endirilmiş köhnə uyğunsuz Vikipediya məlumatlarınız var. Arxivləmək istəyirsiniz?</string>
+    <string name="read_full_article">Tam məqaləni oxu (onlayn)</string>
+    <string name="edit_filter_save_as_menu_item">Fərqli saxla</string>
+    <string name="av_camera_focus">Kamera fokus növü</string>
+    <string name="av_camera_focus_descr">Daxili kameranın fokus növünü seçin</string>
+    <string name="av_camera_focus_auto">Avtomatik fokus</string>
+    <string name="av_camera_focus_hiperfocal">Hiperfokal fokus</string>
+    <string name="av_camera_focus_edof">Genişlədilmiş sahə dərinliyi (EDOF)</string>
+    <string name="av_camera_focus_infinity">Sonsuzluğa fokusla</string>
+    <string name="av_camera_focus_macro">Makro (iri plan) fokus rejimi</string>
+    <string name="av_camera_focus_continuous">Kamera fasiləsiz fokuslamağa çalışsın</string>
+    <string name="av_photo_play_sound">Şəkil çəkərkən səs çal</string>
     </resources>
