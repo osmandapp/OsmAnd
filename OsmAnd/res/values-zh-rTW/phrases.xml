@@ -3043,4 +3043,33 @@
 	<string name="poi_office_healer">治療辦公室</string>
 	<string name="poi_office_psychologist">心理學辦公室</string>
 	<string name="poi_office_nursing_service">護理服務</string>
+	<string name="poi_office_midwife">助產士辦公室</string>
+
+	<string name="poi_fire_hydrant_diameter">消防栓直徑</string>
+	<string name="poi_fire_hydrant_pressure">消防栓壓力</string>
+	<string name="poi_fire_hydrant_count">消防栓數量</string>
+	<string name="poi_fire_hydrant_flow_capacity">消防栓流量</string>
+	<string name="poi_fire_hydrant_position_sidewalk">消防栓位置︰人行道</string>
+	<string name="poi_fire_hydrant_position_green">消防栓位置︰綠地</string>
+	<string name="poi_fire_hydrant_position_lane">消防栓位置︰通道</string>
+	<string name="poi_fire_hydrant_position_parking_lot">消防栓位置︰停車場</string>
+	<string name="poi_fire_hydrant_position_street">消防栓位置︰街道</string>
+	<string name="poi_fire_hydrant_position_underground">消防栓位置︰地下</string>
+	<string name="poi_fire_hydrant_style_wsh">消防栓型式︰wsh</string>
+	<string name="poi_fire_hydrant_style_water_source_main">主要管道</string>
+	<string name="poi_fire_hydrant_style_water_source_pond">池塘</string>
+	<string name="poi_fire_hydrant_style_water_source_stream">河流</string>
+	<string name="poi_fire_hydrant_style_water_source_cistern">水槽</string>
+	<string name="poi_in_service_yes">在職︰是的</string>
+
+	<string name="poi_military_checkpoint">軍事檢查哨</string>
+
+	<string name="poi_bicycle_parking_lockers">儲物櫃</string>
+	<string name="poi_bicycle_parking_tree">單車停車樹</string>
+	<string name="poi_bicycle_parking_streetpod">停車莢艙</string>
+
+	<string name="poi_depth">深度</string>
+
+	<string name="poi_salt_yes">鹽</string>
+	<string name="poi_salt_no">鹽︰無</string>
 	</resources>
