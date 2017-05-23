@@ -1,17 +1,5 @@
 package net.osmand.plus.download;
 
-import java.io.File;
-import java.io.FileOutputStream;
-import java.io.IOException;
-import java.io.InputStream;
-import java.net.HttpURLConnection;
-import java.net.URL;
-import java.util.ArrayList;
-import java.util.List;
-import java.util.zip.GZIPInputStream;
-import java.util.zip.ZipEntry;
-import java.util.zip.ZipInputStream;
-
 import net.osmand.IProgress;
 import net.osmand.IndexConstants;
 import net.osmand.PlatformUtil;
@@ -23,6 +11,18 @@ import net.osmand.plus.helpers.FileNameTranslationHelper;
 import net.osmand.util.Algorithms;
 
 import org.apache.commons.logging.Log;
+
+import java.io.File;
+import java.io.FileOutputStream;
+import java.io.IOException;
+import java.io.InputStream;
+import java.net.HttpURLConnection;
+import java.net.URL;
+import java.util.ArrayList;
+import java.util.List;
+import java.util.zip.GZIPInputStream;
+import java.util.zip.ZipEntry;
+import java.util.zip.ZipInputStream;
 
 public class DownloadFileHelper {
 	
@@ -224,7 +224,6 @@ public class DownloadFileHelper {
 				copyVoiceConfig(de);
 			}
 			toReIndex.add(de.targetFile);
-			showWarningCallback.showWarning(ctx.getString(R.string.shared_string_download_successful));
 			return true;
 		} catch (IOException e) {
 			log.error("Exception ocurred", e); //$NON-NLS-1$

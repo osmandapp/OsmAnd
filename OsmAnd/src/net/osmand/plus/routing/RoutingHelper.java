@@ -676,10 +676,10 @@ public class RoutingHelper {
 						l.newRouteIsCalculated(newRoute, showToast);
 					}
 				}
-				if (showToast.value) {
+				if (showToast.value && OsmandPlugin.isDevelopment()) {
 					String msg = app.getString(R.string.new_route_calculated_dist) + ": "
 							+ OsmAndFormatter.getFormattedDistance(res.getWholeDistance(), app);
-					if (OsmandPlugin.isDevelopment() && res.getRoutingTime() != 0f) {
+					if (res.getRoutingTime() != 0f) {
 						msg += " (" + Algorithms.formatDuration((int) res.getRoutingTime(), app.accessibilityEnabled()) + ")";
 					}
 					app.showToastMessage(msg);
