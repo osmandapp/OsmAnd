@@ -14,6 +14,7 @@ import android.os.Build;
 import android.os.Bundle;
 import android.os.Handler;
 import android.os.Message;
+import android.preference.PreferenceManager;
 import android.support.multidex.MultiDex;
 import android.support.multidex.MultiDexApplication;
 import android.support.v7.app.AlertDialog;
@@ -32,6 +33,7 @@ import net.osmand.data.LatLon;
 import net.osmand.map.OsmandRegions;
 import net.osmand.map.WorldRegion;
 import net.osmand.osm.MapPoiTypes;
+import net.osmand.osm.io.NetworkUtils;
 import net.osmand.plus.AppInitializer.AppInitializeListener;
 import net.osmand.plus.access.AccessibilityMode;
 import net.osmand.plus.activities.DayNightHelper;
@@ -143,6 +145,9 @@ public class OsmandApplication extends MultiDexApplication {
 		appCustomization.setup(this);
 		osmandSettings = appCustomization.getOsmandSettings();
 		appInitializer.initVariables();
+		if (PreferenceManager.getDefaultSharedPreferences(this).getBoolean("enable_proxy", false)) {
+			NetworkUtils.setProxy(osmandSettings.PROXY_HOST.get(), osmandSettings.PROXY_PORT.get());
+		}
 		if (appInitializer.isAppVersionChanged() && appInitializer.getPrevAppVersion() < AppInitializer.VERSION_2_3) {
 			osmandSettings.freezeExternalStorageDirectory();
 		} else if (appInitializer.isFirstTime()) {
