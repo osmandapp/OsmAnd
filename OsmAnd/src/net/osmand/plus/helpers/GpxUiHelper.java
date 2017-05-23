@@ -1257,8 +1257,14 @@ public class GpxUiHelper {
 		} else {
 			yAxis = mChart.getAxisLeft();
 		}
-		yAxis.setTextColor(ActivityCompat.getColor(mChart.getContext(), R.color.gpx_chart_orange_label));
-		yAxis.setGridColor(ActivityCompat.getColor(mChart.getContext(), R.color.gpx_chart_orange_grid));
+		if (analysis.hasSpeedInTrack()) {
+			yAxis.setTextColor(ActivityCompat.getColor(mChart.getContext(), R.color.gpx_chart_orange_label));
+			yAxis.setGridColor(ActivityCompat.getColor(mChart.getContext(), R.color.gpx_chart_orange_grid));
+		} else {
+			yAxis.setTextColor(ActivityCompat.getColor(mChart.getContext(), R.color.gpx_chart_red_label));
+			yAxis.setGridColor(ActivityCompat.getColor(mChart.getContext(), R.color.gpx_chart_red_grid));
+		}
+
 		yAxis.setAxisMinimum(0f);
 
 		ArrayList<Entry> values = new ArrayList<>();
@@ -1320,11 +1326,19 @@ public class GpxUiHelper {
 		}
 		dataSet.units = mainUnitY;
 
-		dataSet.setColor(ContextCompat.getColor(mChart.getContext(), R.color.gpx_chart_orange));
+		if (analysis.hasSpeedInTrack()) {
+			dataSet.setColor(ContextCompat.getColor(mChart.getContext(), R.color.gpx_chart_orange));
+		} else {
+			dataSet.setColor(ContextCompat.getColor(mChart.getContext(), R.color.gpx_chart_red));
+		}
 		dataSet.setLineWidth(1f);
 		if (drawFilled) {
 			dataSet.setFillAlpha(128);
-			dataSet.setFillColor(ContextCompat.getColor(mChart.getContext(), R.color.gpx_chart_orange));
+			if (analysis.hasSpeedInTrack()) {
+				dataSet.setFillColor(ContextCompat.getColor(mChart.getContext(), R.color.gpx_chart_orange));
+			} else {
+				dataSet.setFillColor(ContextCompat.getColor(mChart.getContext(), R.color.gpx_chart_red));
+			}
 			dataSet.setDrawFilled(true);
 		} else {
 			dataSet.setDrawFilled(false);
