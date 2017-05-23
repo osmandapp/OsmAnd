@@ -3009,12 +3009,22 @@ Van bijna alle landen is een kaart te downloaden: van Afghanistan tot Zimbabwe, 
     <string name="sorted_by_distance">Gesorteerd op afstand</string>
     <string name="private_access_routing_req">Uw bestemming ligt in een gebied wat particulier eigendom is. Wilt u gebruik van particuliere wegen voor deze route toestaan?</string>
     <string name="restart_search">Opnieuw zoeken</string>
-    <string name="increase_search_radius">Zoekbereik vergroten</string>
+    <string name="increase_search_radius">Zoekgebied vergroten</string>
     <string name="nothing_found">Niets gevonden :(</string>
-    <string name="nothing_found_descr">Probeer een andere zoekterm of vergroot de zoekcirkel</string>
+    <string name="nothing_found_descr">Probeer een andere zoekterm of vergroot het zoekgebied</string>
     <string name="mapillary_widget">Mapillary-widget</string>
     <string name="mapillary">Mapillary</string>
     <string name="online_photos">Online foto\'s</string>
     <string name="shared_string_add_photos">Foto\'s toevoegen</string>
     <string name="no_photos_descr">Geen foto\'s beschikbaar voor deze locatie</string>
+    <string name="mapillary_image">Foto van Mapillary</string>
+    <string name="open_mapillary">Open Mapillary</string>
+    <string name="shared_string_install">Installeren</string>
+    <string name="improve_coverage_mapillary">Vergroot het bereik van Mapillary</string>
+    <string name="improve_coverage_install_mapillary_desc">Maak zelf een of meer foto\'s en voeg ze toe aan deze plek op de kaart.
+\nHiervoor moet je Mapillary installeren met Google Play.</string>
+    <string name="mapillary_action_descr">Voeg zelf foto\'s van deze plek toe met Mapillary.</string>
+    <string name="mapillary_widget_descr">Voeg eenvoudig foto\'s toe aan Mapillary</string>
+    <string name="mapillary_descr">Foto\'s van buiten voor iedereen. Ondek plaatsen, werk samen, en leg de wereld vast.</string>
+    <string name="plugin_mapillary_descr">Foto\'s van buiten voor iedereen. Ondek plaatsen, werk samen, en leg de wereld vast.</string>
     </resources>
