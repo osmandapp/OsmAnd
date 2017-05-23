@@ -1,5 +1,6 @@
 <?xml version='1.0' encoding='UTF-8'?>
 <resources>
+    <string name="favorite_empty_place_name">Место</string>
     <string name="private_access_routing_req">Пункт назначения находится в области с частным доступом. Вы хотите разрешить доступ к частным дорогам для этой поездки?</string>
     <string name="restart_search">Искать снова</string>
     <string name="increase_search_radius">Увеличить радиус поиска</string>
@@ -1278,11 +1279,11 @@
     <string name="osb_author_or_password_not_specified">Пожалуйста, укажите в настройках пароль и имя пользователя OSM</string>
     <string name="route_descr_map_location">Карта: </string>
     <string name="osb_author_dialog_password">Пароль OSM (опционально)</string>
-    <string name="driving_region_descr">Выберите регион вождения: США, Европа, Англия, Азия и другие</string>
+    <string name="driving_region_descr">Выберите регион вождения: США, Европа, Великобритания, Азия и другие</string>
     <string name="driving_region">Регион вождения</string>
     <string name="driving_region_japan">Япония</string>
     <string name="driving_region_us">США</string>
-    <string name="driving_region_europe_asia">Европа и Азия</string>
+    <string name="driving_region_europe_asia">Европа, Азия, Латинская Америка и т.п.</string>
     <string name="driving_region_uk">Великобритания, Индия и др.</string>
     <string name="context_menu_item_directions_to">Проложить маршрут</string>
     <string name="context_menu_item_directions_from">Пункт отправления</string>
