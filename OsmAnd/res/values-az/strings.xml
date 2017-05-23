@@ -257,7 +257,7 @@
     <string name="shared_string_address">Ünvan</string>
     <string name="shared_string_add">Əlavə et</string>
     <string name="shared_string_add_to_favorites">Favoritlərə əlavə et</string>
-    <string name="shared_string_my_location">Məkanım</string>
+    <string name="shared_string_my_location">Mövqeyim</string>
     <string name="shared_string_my_places">Yerlərim</string>
     <string name="shared_string_my_favorites">Favoritlərim</string>
     <string name="shared_string_audio">Səs</string>
@@ -553,8 +553,8 @@
     <string name="city_type_city">Şəhər</string>
     <string name="poi_filter_by_name">Adına görə axtar</string>
     <string name="button_upgrade_osmandplus">OsmAnd+\'a yüksəlt</string>
-    <string name="search_position_current_location_search">Məkan axtarılır…</string>
-    <string name="search_position_current_location_found">Məkanım (tapıldı)</string>
+    <string name="search_position_current_location_search">Mövqe axtarılır…</string>
+    <string name="search_position_current_location_found">Mövqeyim (tapıldı)</string>
     <string name="search_position_address">Ünvan…</string>
     <string name="search_position_favorites">Favoritlər…</string>
     <string name="context_menu_item_search">Buranın yaxınlığında axtar</string>
@@ -809,8 +809,8 @@
     <string name="nearest_cities">Yaxındakı şəhərlər</string>
     <string name="select_city">Şəhər seçin</string>
     <string name="select_postcode">Poçt kodu seçin</string>
-    <string name="quick_action_add_destination">Hədəf əlavə et</string>
-    <string name="quick_action_replace_destination">Hədəfi əvəz et</string>
+    <string name="quick_action_add_destination">Təyinat əlavə et</string>
+    <string name="quick_action_replace_destination">Təyinatı əvəz et</string>
     <string name="average_speed">Ortalama sürət</string>
     <string name="shared_string_time_moving">Hərəkət vaxtı</string>
     <string name="altitude_descent">Eniş</string>
@@ -866,8 +866,8 @@
     <string name="current_track">Hazırki yol</string>
     <string name="change_markers_position">İşarələyicinin mövqeyini dəyiş</string>
     <string name="move_marker_bottom_sheet_title">İşarələyicinin mövqeyini dəyişmək üçün xəritəni daşıyın</string>
-    <string name="access_no_destination">Hədəf təyin edilməyib</string>
-    <string name="access_hint_enter_description">Təsvir daxil et</string>
+    <string name="access_no_destination">Təyinat təyin edilməyib</string>
+    <string name="access_hint_enter_description">Açıqlama daxil et</string>
     <string name="access_widget_expand">Genişlət</string>
     <string name="access_shared_string_navigate_up">Yuxarı get</string>
     <string name="gpx_monitoring_start">GPX qeydiyyatını başlat</string>
@@ -885,7 +885,7 @@
     <string name="osmo_gpx_points_downloaded">%1$s OsMo nöqtəsi endirildi.</string>
     <string name="gpx_split_interval">Bölünmə intervalı</string>
     <string name="save_as_favorites_points">Favorit qrup olaraq saxla</string>
-    <string name="select_destination_and_intermediate_points">Hədəfləri seçin</string>
+    <string name="select_destination_and_intermediate_points">Təyinat nöqtələrini seçin</string>
     <string name="gpx_wpt">Yol nöqtəsi</string>
     <string name="gpx_info_waypoints">"Yol nöqtələri: %1$s "</string>
     <string name="gpx_info_distance">"Məsafə: %1$s (%2$s nöqtə) "</string>
@@ -928,7 +928,7 @@
     <string name="lang_hu_formal">Macarca (rəsmi)</string>
     <string name="lang_id">İndoneziya dili</string>
     <string name="lang_ko">Koreya dili</string>
-    <string name="route_descr_select_destination">Hədəf seçin</string>
+    <string name="route_descr_select_destination">Təyinat nöqtəsi seçin</string>
     <string name="routing_attr_avoid_toll_description">Pullu yollardan yayın</string>
     <string name="routing_attr_avoid_unpaved_name">Asfaltsız yollardan yayın</string>
     <string name="routing_attr_avoid_unpaved_description">Asfaltsız yollardan yayın</string>
@@ -941,7 +941,7 @@
 \n Qeyd 2: Yeni saxlama yerində OsmAnd və OsmAnd+ arasında fayl paylaşmaq mümkün olmayacaq.</string>
     <string name="copying_osmand_one_file_descr">Fayl (%s) yeni təyinat yerinə kopyalanır…</string>
     <string name="copying_osmand_files_descr">OsmAnd məlumat faylları yeni təyinat yerinə kopyalanır (%s)…</string>
-    <string name="quick_action_btn_tutorial_title">Düymə yerini dəyiş</string>
+    <string name="quick_action_btn_tutorial_title">Düymə mövqeyini dəyiş</string>
     <string name="road_blocked">Yol bağlanıb</string>
     <string name="si_kmh">Saatda kilometr</string>
     <string name="si_mph">Saatda mil</string>
@@ -1016,16 +1016,16 @@
     <string name="zxing_barcode_scanner_not_found">ZXing Barcode Scanner proqramı quraşdırılmayıb. Google Play-də axtarılsın?</string>
     <string name="rendering_attr_roadColors_description">Yol rəng sxemi seçin:</string>
     <string name="rendering_attr_roadColors_name">Yol rəng sxemi</string>
-    <string name="map_widget_show_destination_arrow">Hədəf istiqamətini göstər</string>
+    <string name="map_widget_show_destination_arrow">Təyinat istiqamətini göstər</string>
     <string name="no_route">Marşrut yoxdur</string>
-    <string name="delete_target_point">Hədəfi sil</string>
-    <string name="target_point">Hədəf %1$s</string>
-    <string name="replace_destination_point">Hədəfi dəyişdir</string>
-    <string name="new_destination_point_dialog">Artıq hədəf seçmisiniz:</string>
-    <string name="target_points">Hədəflər</string>
+    <string name="delete_target_point">Təyinat nöqtəsini sil</string>
+    <string name="target_point">Təyinat %1$s</string>
+    <string name="replace_destination_point">Təyinat nöqtəsini əvəz et</string>
+    <string name="new_destination_point_dialog">Artıq təyinat nöqtəsini seçmisiniz:</string>
+    <string name="target_points">Təyinat nöqtələri</string>
     <string name="amenity_type_user_defined">İstifadəçi müəyyənləşdirib</string>
     <string name="mapillary">Mapillary</string>
-    <string name="private_access_routing_req">Hədəfiniz xüsusi girişi olan ərazidə yerləşir. Bu səyahət üçün xüsusi yollara giriş icazəsi vermək istəyirsiniz?</string>
+    <string name="private_access_routing_req">Təyinat nöqtəniz xüsusi girişi olan ərazidə yerləşir. Bu səyahət üçün xüsusi yollara giriş icazəsi vermək istəyirsiniz?</string>
     <string name="shared_string_plugin">Qoşma</string>
     <string name="srtm_purchase_header">Xəritədə kontur xətlərini görmək üçün Kontur Xətləri qoşmasını almaq və quraşdırmaq lazımdır</string>
     <string name="plugin_settings">Qoşmalar</string>
@@ -1111,7 +1111,7 @@
     <string name="transport_search_desc">İctimai nəqliyyat axtarışı</string>
     <string name="context_menu_item_search_transport">İctimai nəqliyyat axtar</string>
     <string name="show_transport_over_map_description">İctimai nəqliyyat dayanacaqlarını xəritədə göstər</string>
-    <string name="unknown_location">Məkan hələ məlum deyil</string>
+    <string name="unknown_location">Mövqe hələ bilinmir</string>
     <string name="rendering_attr_transportStops_name">Nəqliyyat dayanacaqları</string>
     <string name="transport_stops">dayanacaq</string>
     <string name="transport_stops_to_pass">dayanacağı keç</string>
@@ -1165,7 +1165,7 @@
     <string name="fav_points_not_exist">Favorit nöqtələr yoxdur</string>
     <string name="only_show">Marşrutu göstər</string>
     <string name="follow">Naviqasiyanı başlat</string>
-    <string name="mark_final_location_first">Zəhmət olmasa öncə hədəfi seçin</string>
+    <string name="mark_final_location_first">İlk olaraq təyinat nöqtəsi seçin</string>
     <string name="get_directions">İstiqamətlər</string>
     <string name="auth_failed">İcazə uğursuz oldu</string>
     <string name="converting_names">Yerli/İngiliscə adlar çevrilir…</string>
@@ -1174,7 +1174,7 @@
     <string name="error_calculating_route_occured">Marşrut hesablanarkən səhv baş verdi</string>
     <string name="empty_route_calculated">Səhv: Hesablanan marşrut boşdur</string>
     <string name="new_route_calculated_dist">Yeni marşrut hesablandı, məsafə</string>
-    <string name="arrived_at_destination">Hədəfinizə gəlib çatdınız</string>
+    <string name="arrived_at_destination">Təyinat nöqtənizə gəlib çatdınız</string>
     <string name="invalid_locations">Koordinatlar etibarsızdır!</string>
     <string name="use_online_routing_descr">Marşrutu hesablamaq üçün internet istifadə et</string>
     <string name="use_online_routing">Onlayn naviqasiya istifadə et</string>
@@ -1182,7 +1182,7 @@
     <string name="use_english_names_descr">Yerli və ingiliscə adlar arasında seçim edin</string>
     <string name="choose_building">Bina seçin</string>
     <string name="show_poi_over_map_description">Xəritədə POI göstər (son seçilən filtri istifadə et)</string>
-    <string name="show_location">Məkanınızı göstər</string>
+    <string name="show_location">Mövqeyinizi göstər</string>
     <string name="app_description">Naviqasiya proqramı</string>
     <string name="incremental_search_street">Küçəni tədricən axtar</string>
     <string name="incremental_search_building">Binanı tədricən axtar</string>
@@ -1247,7 +1247,7 @@
     <string name="rendering_category_transport">Nəqliyyat</string>
     <string name="print_route">Marşrutu çap et</string>
     <string name="index_tours">Turlar</string>
-    <string name="targets">Hədəflər</string>
+    <string name="targets">Təyinat nöqtələri</string>
     <string name="map_downloaded_descr">%1$s xəritəsi endirildi, indi istifadə etməyə başlaya bilərsiniz.</string>
     <string name="go_to_map">Xəritəni göstər</string>
     <string name="favorite_category_dublicate_message">Göstərilən kateqoriya adı artıq mövcuddur. Fərqli ad istifadə edin.</string>
@@ -1296,5 +1296,9 @@
     <string name="mapillary_image">Mapillary təsviri</string>
     <string name="osmand_plus_extended_description_part8">" Təxmini xəritənin əhatə dairəsi və keyfiyyəti: • Qərbi Avropa: **** • Şərqi Avropa: *** • Rusiya: *** • Şimali Amerika: *** • Cənubi Amerika: ** • Asiya: ** • Yaponiya &amp; Koreya: *** • Yaxın Şərq: ** • Afrika: ** • Antarktida: * Dünyanın bir çox ölkəsi endirmək üçün mövcuddur! Əfqanıstandan Zimbabveyə, Avstraliyadan ABŞ-a. Argentina, Braziliya, Kanada, Fransa, Almaniya, Meksika, Böyük Britaniya, İspaniya, … "</string>
     <string name="avoid_in_routing_title">Yayın…</string>
-    <string name="map_widget_distance">Hədəf</string>
+    <string name="map_widget_distance">Təyinat nöqtəsi</string>
+    <string name="quick_action_add_first_intermediate">Birinci aralığı əlavə et</string>
+    <string name="quick_action_add_destination_desc">Fəaliyyət düyməsinə toxunulduqda ekranın mərkəzində bir təyinat nöqtəsi əlavə ediləcək. Əvvəl seçilmiş təyinat nöqtəsi son aralıq nöqtəsi olacaq.</string>
+    <string name="quick_action_replace_destination_desc">Fəaliyyət düyməsinə toxunulduqda təyinat nöqtəsi ekranın mərkəzi ilə əvəzlənəcək.</string>
+    <string name="quick_action_add_first_intermediate_desc">Fəaliyyət düyməsinə toxunulduqda ekranın mərkəzində birinci aralıq nöqtə əlavə ediləcək.</string>
     </resources>
