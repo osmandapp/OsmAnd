@@ -221,9 +221,9 @@ public abstract class MenuController extends BaseMenuController {
 		OsmandSettings st = ((OsmandApplication) getMapActivity().getApplicationContext()).getSettings();
 		addPlainMenuItem(R.drawable.ic_action_get_my_location, PointDescription.getLocationName(getMapActivity(),
 				latLon.getLatitude(), latLon.getLongitude(), true).replaceAll("\n", " "), false, false, null);
-		if (st.COORDINATES_FORMAT.get() != PointDescription.OLC_FORMAT)
-			addPlainMenuItem(R.drawable.ic_action_get_my_location, PointDescription.getLocationOlcName(
-					latLon.getLatitude(), latLon.getLongitude()).replaceAll("\n", " "), false, false, null);
+		//if (st.COORDINATES_FORMAT.get() != PointDescription.OLC_FORMAT)
+		//	addPlainMenuItem(R.drawable.ic_action_get_my_location, PointDescription.getLocationOlcName(
+		//			latLon.getLatitude(), latLon.getLongitude()).replaceAll("\n", " "), false, false, null);
 	}
 
 	public PointDescription getPointDescription() {

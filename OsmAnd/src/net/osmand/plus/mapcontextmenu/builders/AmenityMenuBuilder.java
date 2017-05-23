@@ -493,10 +493,10 @@ public class AmenityMenuBuilder extends MenuBuilder {
 		buildRow(view, R.drawable.ic_action_get_my_location, PointDescription.getLocationName(app,
 				amenity.getLocation().getLatitude(), amenity.getLocation().getLongitude(), true)
 				.replaceAll("\n", " "), 0, false, null, false, 0, false, null);
-		if (st.COORDINATES_FORMAT.get() != PointDescription.OLC_FORMAT)
-			buildRow(view, R.drawable.ic_action_get_my_location, PointDescription.getLocationOlcName(
-					amenity.getLocation().getLatitude(), amenity.getLocation().getLongitude())
-					.replaceAll("\n", " "), 0, false, null, false, 0, false, null);
+		//if (st.COORDINATES_FORMAT.get() != PointDescription.OLC_FORMAT)
+		//	buildRow(view, R.drawable.ic_action_get_my_location, PointDescription.getLocationOlcName(
+		//			amenity.getLocation().getLatitude(), amenity.getLocation().getLongitude())
+		//			.replaceAll("\n", " "), 0, false, null, false, 0, false, null);
 
 	}
 
