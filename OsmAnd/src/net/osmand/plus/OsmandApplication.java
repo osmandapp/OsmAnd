@@ -72,20 +72,6 @@ import btools.routingapp.BRouterServiceConnection;
 import btools.routingapp.IBRouterService;
 
 public class OsmandApplication extends MultiDexApplication {
-	public static boolean isActivityVisible() {
-		return activityVisible;
-	}
-
-	public static void activityResumed() {
-		activityVisible = true;
-	}
-
-	public static void activityPaused() {
-		activityVisible = false;
-	}
-
-	private static boolean activityVisible;
-
 	public static final String EXCEPTION_PATH = "exception.log"; //$NON-NLS-1$
 	private static final org.apache.commons.logging.Log LOG = PlatformUtil.getLog(OsmandApplication.class);
 
