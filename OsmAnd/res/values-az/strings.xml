@@ -1302,4 +1302,5 @@
     <string name="quick_action_replace_destination_desc">Fəaliyyət düyməsinə toxunulduqda təyinat nöqtəsi ekranın mərkəzi ilə əvəzlənəcək.</string>
     <string name="quick_action_add_first_intermediate_desc">Fəaliyyət düyməsinə toxunulduqda ekranın mərkəzində birinci aralıq nöqtə əlavə ediləcək.</string>
     <string name="do_not_show_startup_messages_desc">Proqram endirimləri və xüsusi yerli hadisələr haqda mesajları göstərir</string>
+    <string name="translit_name_if_miss">%1$s ad yoxdursa, başqa dildə yazılsın</string>
     </resources>
