@@ -224,9 +224,6 @@ public class DownloadFileHelper {
 				copyVoiceConfig(de);
 			}
 			toReIndex.add(de.targetFile);
-			if (OsmandApplication.isActivityVisible()) {
-				showWarningCallback.showWarning(ctx.getString(R.string.shared_string_download_successful));
-			}
 			return true;
 		} catch (IOException e) {
 			log.error("Exception ocurred", e); //$NON-NLS-1$
