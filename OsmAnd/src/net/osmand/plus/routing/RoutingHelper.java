@@ -676,15 +676,13 @@ public class RoutingHelper {
 						l.newRouteIsCalculated(newRoute, showToast);
 					}
 				}
-				if (showToast.value) {
-					if (OsmandPlugin.isDevelopment()) {
-						String msg = app.getString(R.string.new_route_calculated_dist) + ": "
-								+ OsmAndFormatter.getFormattedDistance(res.getWholeDistance(), app);
-						if (res.getRoutingTime() != 0f) {
-							msg += " (" + Algorithms.formatDuration((int) res.getRoutingTime(), app.accessibilityEnabled()) + ")";
-						}
-						app.showToastMessage(msg);
+				if (showToast.value && OsmandPlugin.isDevelopment()) {
+					String msg = app.getString(R.string.new_route_calculated_dist) + ": "
+							+ OsmAndFormatter.getFormattedDistance(res.getWholeDistance(), app);
+					if (res.getRoutingTime() != 0f) {
+						msg += " (" + Algorithms.formatDuration((int) res.getRoutingTime(), app.accessibilityEnabled()) + ")";
 					}
+					app.showToastMessage(msg);
 				}
 			}
 		});
