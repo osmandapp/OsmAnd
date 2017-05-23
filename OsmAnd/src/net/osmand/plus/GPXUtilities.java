@@ -303,6 +303,10 @@ public class GPXUtilities {
 			return maxElevation != -100;
 		}
 
+		public boolean hasSpeedInTrack() {
+			return hasSpeedInTrack;
+		}
+
 		public boolean isBoundsCalculated() {
 			return left !=0 && right != 0 && top != 0 && bottom != 0;
 		}
