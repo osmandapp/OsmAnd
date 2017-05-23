@@ -213,9 +213,9 @@ public class TestVoiceActivity extends OsmandActionBarActivity {
 		addButton(ll, "(7.2)  Continue for 2350m to ' '", builder(p).goAhead(2350, street(p, "")));
 		addButton(ll, "(7.3)  Continue for 360m to 'Broadway' and arrive at your intermediate destination ' '", builder(p).goAhead(360, street(p,"Broadway")).andArriveAtIntermediatePoint(""));
 		addButton(ll, "(7.4)  Continue for 800m to 'A33' and arrive at your destination ' '", builder(p).goAhead(800, street(p,"", "A33")).andArriveAtDestination(""));
-		addButton(ll, "(7.5)  Continue for 200m and arrive at your GPX waypoint 'Trailhead'", builder(p).goAhead(200, null).andArriveAtWayPoint("Trailhead"));
-		addButton(ll, "(7.6)  Continue for 400m and arrive at your favorite 'Brewery'", builder(p).goAhead(400, null).andArriveAtFavorite("Brewery"));
-		addButton(ll, "(7.7)  Continue for 600m and arrive at your POI 'Museum'", builder(p).goAhead(600, null).andArriveAtPoi("Museum"));
+		addButton(ll, "(7.5)  Continue for 200m and pass GPX waypoint 'Trailhead'", builder(p).goAhead(200, null).andArriveAtWayPoint("Trailhead"));
+		addButton(ll, "(7.6)  Continue for 400m and pass favorite 'Brewery'", builder(p).goAhead(400, null).andArriveAtFavorite("Brewery"));
+		addButton(ll, "(7.7)  Continue for 600m and pass POI 'Museum'", builder(p).goAhead(600, null).andArriveAtPoi("Museum"));
 
 		addButton(ll, "       Arriving and passing points:", builder(p));
 		addButton(ll, "(8.1)  Arrive at your destination 'Home'", builder(p).arrivedAtDestination("Home"));
