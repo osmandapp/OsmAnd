@@ -312,6 +312,7 @@ public class GPXUtilities {
 
 		public boolean hasElevationData;
 		public boolean hasSpeedData;
+		public boolean hasSpeedInTrack = false;
 
 		public boolean isSpeedSpecified() {
 			return avgSpeed > 0;
@@ -394,15 +395,8 @@ public class GPXUtilities {
 					}
 
 					float speed = (float) point.speed;
-					Speed speed1 = new Speed();
 					if (speed > 0) {
-						totalSpeedSum += speed;
-						maxSpeed = Math.max(speed, maxSpeed);
-						speedCount++;
-
-						speed1.speed = speed;
-					} else {
-						speed1.speed = 0;
+						hasSpeedInTrack = true;
 					}
 
 					// Trend channel approach for elevation gain/loss, Hardy 2015-09-22
@@ -485,12 +479,17 @@ public class GPXUtilities {
 							timeMoving = timeMoving + (point.time - prev.time);
 							totalDistanceMoving += calculations[0];
 						}
+
 						//Next few lines for Issue 3222 heuristic testing only
 						//	if (speed > 0 && point.time != 0 && prev.time != 0) {
 						//		timeMoving0 = timeMoving0 + (point.time - prev.time);
 						//		totalDistanceMoving0 += calculations[0];
 						//	}
 
+						//Last resorz: Derive speed values from displacment if track does not originally contain speed
+						if (!hasSpeedInTrack && speed == 0 && timeDiff > 0) {
+							speed = calculations[0] / timeDiff;
+						}
 					}
 
 					elevation1.time = timeDiff;
@@ -499,6 +498,15 @@ public class GPXUtilities {
 					if (!hasElevationData && !Float.isNaN(elevation1.elevation) && totalDistance > 0) {
 						hasElevationData = true;
 					}
+
+					if (speed > 0) {
+						totalSpeedSum += speed;
+						maxSpeed = Math.max(speed, maxSpeed);
+						speedCount++;
+					}
+
+					Speed speed1 = new Speed();
+					speed1.speed = speed;
 					speed1.time = timeDiff;
 					speed1.distance = elevation1.distance;
 					speedData.add(speed1);
