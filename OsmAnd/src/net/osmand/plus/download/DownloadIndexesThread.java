@@ -437,15 +437,6 @@ public class DownloadIndexesThread {
 					} else {
 						dbHelper.update(entry, DatabaseHelper.DOWNLOAD_ENTRY);
 					}
-				} else if (o instanceof String) {
-					String message = (String) o;
-					// ctx.getString(R.string.shared_string_io_error) +": Interrupted";
-					if (!message.toLowerCase().contains("interrupted")) {
-						if (uiActivity == null ||
-								!message.equals(app.getString(R.string.shared_string_download_successful))) {
-							app.showToastMessage(message);
-						}
-					}
 				}
 			}
 			downloadInProgress();
