@@ -1240,6 +1240,20 @@ public class AvailableGPXFragment extends OsmandExpandableListFragment {
 			}
 		});
 
+		item = optionsMenu.getMenu().add(R.string.analyze_on_map).setIcon(iconsCache.getThemedIcon(R.drawable.ic_map));
+		item.setOnMenuItemClickListener(new MenuItem.OnMenuItemClickListener() {
+			@Override
+			public boolean onMenuItemClick(MenuItem item) {
+				Intent newIntent = new Intent(getActivity(), getMyApplication().getAppCustomization().getTrackActivity());
+				newIntent.putExtra(TrackActivity.TRACK_FILE_NAME, gpxInfo.file.getAbsolutePath());
+				newIntent.setFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP);
+				newIntent.putExtra("open_details", true);
+				startActivity(newIntent);
+
+				return true;
+			}
+		});
+
 		item = optionsMenu.getMenu().add(R.string.shared_string_move).setIcon(iconsCache.getThemedIcon(R.drawable.ic_action_folder_stroke));
 		item.setOnMenuItemClickListener(new MenuItem.OnMenuItemClickListener() {
 			@Override

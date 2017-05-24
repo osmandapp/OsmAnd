@@ -784,6 +784,8 @@ public class TrackSegmentFragment extends OsmAndListFragment {
 		}
 	}
 
+	public boolean openDetailsFromMenu = false;
+
 	private enum GPXTabItemType {
 		GPX_TAB_ITEM_GENERAL,
 		GPX_TAB_ITEM_ALTITUDE,
@@ -1213,6 +1215,11 @@ public class TrackSegmentFragment extends OsmAndListFragment {
 
 			container.addView(view, 0);
 			views.put(position, view);
+
+			if (openDetailsFromMenu) {
+				openDetails(GPXTabItemType.GPX_TAB_ITEM_GENERAL);
+				openDetailsFromMenu = false;
+			}
 			return view;
 		}
 
