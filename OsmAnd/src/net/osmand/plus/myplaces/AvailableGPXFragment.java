@@ -92,8 +92,6 @@ import java.util.Map;
 import java.util.Set;
 import java.util.regex.Pattern;
 
-import static net.osmand.plus.R.string.m;
-
 public class AvailableGPXFragment extends OsmandExpandableListFragment {
 
 	public static final Pattern ILLEGAL_PATH_NAME_CHARACTERS = Pattern.compile("[?:\"*|<>]");
@@ -1246,29 +1244,58 @@ public class AvailableGPXFragment extends OsmandExpandableListFragment {
 		return displayGroups;
 	}
 
-	private class LoadGpxFileTask extends AsyncTask<Void, Void, GPXFile> {
+	private class OpenGpxDetailsTask extends AsyncTask<Void, Void, GPXFile> {
 
 		GpxInfo gpxInfo;
 
-		public LoadGpxFileTask(GpxInfo gpxInfo) {
+		public OpenGpxDetailsTask(GpxInfo gpxInfo) {
 			this.gpxInfo = gpxInfo;
 		}
 
 		@Override
 		protected GPXFile doInBackground(Void... voids) {
-			GPXFile result;
-			if (gpxInfo.file == null) {
-				result = getMyApplication().getSavingTrackHelper().getCurrentGpx();
-			} else {
-				SelectedGpxFile selectedGpxFile = selectedGpxHelper.getSelectedFileByPath(gpxInfo.file.getAbsolutePath());
-				if (selectedGpxFile != null && selectedGpxFile.getGpxFile() != null) {
-					result = selectedGpxFile.getGpxFile();
+			if (gpxInfo.gpx == null) {
+				GPXFile result;
+				if (gpxInfo.file == null) {
+					result = getMyApplication().getSavingTrackHelper().getCurrentGpx();
 				} else {
-					result = GPXUtilities.loadGPXFile(getActivity(), gpxInfo.file);
+					SelectedGpxFile selectedGpxFile = selectedGpxHelper.getSelectedFileByPath(gpxInfo.file.getAbsolutePath());
+					if (selectedGpxFile != null && selectedGpxFile.getGpxFile() != null) {
+						result = selectedGpxFile.getGpxFile();
+					} else {
+						result = GPXUtilities.loadGPXFile(getActivity(), gpxInfo.file);
+					}
+				}
+				Log.d("Analyze", "execute finished");
+				gpxInfo.gpx = result;
+			}
+			return null;
+		}
+
+		@Override
+		protected void onPostExecute(GPXFile gpxFile) {
+			List<GpxDisplayGroup> gpxDisplayGroupList = getGpxFile(gpxInfo);
+			Log.d("Analyze", gpxDisplayGroupList.toString());
+			List<GpxDisplayItem> items = null;
+			for (GpxDisplayGroup group : gpxDisplayGroupList) {
+				if (group.getType() == GpxSelectionHelper.GpxDisplayItemType.TRACK_SEGMENT) {
+					items = group.getModifiableList();
+					Log.d("Analyze", "getModList");
+					break;
 				}
 			}
-			Log.d("Analyze", "execute finished");
-			return result;
+			if (items != null) {
+				Log.d("Analyze", "items != null");
+				GpxDisplayItem gpxItem = items.get(0);
+				final OsmandSettings settings = app.getSettings();
+				settings.setMapLocationToShow(gpxItem.locationStart.lat, gpxItem.locationStart.lon,
+						settings.getLastKnownMapZoom(),
+						new PointDescription(PointDescription.POINT_TYPE_WPT, gpxItem.name),
+						false,
+						gpxItem);
+
+				MapActivity.launchMapActivityMoveToTop(getActivity());
+			} else Log.d("Analyze", "items == null");
 		}
 	}
 
@@ -1291,31 +1318,7 @@ public class AvailableGPXFragment extends OsmandExpandableListFragment {
 			@Override
 			public boolean onMenuItemClick(MenuItem item) {
 				Log.d("Analyze", "onItemClick");
-				if (gpxInfo.gpx == null) {
-					new LoadGpxFileTask(gpxInfo).execute();
-					Log.d("Analyze", "execute");
-				}
-				List<GpxDisplayGroup> gpxDisplayGroupList = getGpxFile(gpxInfo);
-				List<GpxDisplayItem> items = null;
-				for (GpxDisplayGroup group : gpxDisplayGroupList) {
-					if (group.getType() == GpxSelectionHelper.GpxDisplayItemType.TRACK_SEGMENT) {
-						items = group.getModifiableList();
-						Log.d("Analyze", "getModList");
-						break;
-					}
-				}
-				if (items != null) {
-					Log.d("Analyze", "items != null");
-					GpxDisplayItem gpxItem = items.get(0);
-					final OsmandSettings settings = app.getSettings();
-					settings.setMapLocationToShow(gpxItem.locationStart.lat, gpxItem.locationStart.lon,
-							settings.getLastKnownMapZoom(),
-							new PointDescription(PointDescription.POINT_TYPE_WPT, gpxItem.name),
-							false,
-							gpxItem);
-
-					MapActivity.launchMapActivityMoveToTop(getActivity());
-				} else 	Log.d("Analyze", "items == null");
+				new OpenGpxDetailsTask(gpxInfo).execute();
 				return true;
 			}
 		});
