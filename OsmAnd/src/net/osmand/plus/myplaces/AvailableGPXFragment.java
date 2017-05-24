@@ -19,6 +19,7 @@ import android.support.v7.widget.PopupMenu;
 import android.support.v7.widget.SearchView;
 import android.text.Editable;
 import android.text.TextWatcher;
+import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.Menu;
 import android.view.MenuInflater;
@@ -40,6 +41,7 @@ import android.widget.Toast;
 
 import net.osmand.AndroidUtils;
 import net.osmand.IndexConstants;
+import net.osmand.data.PointDescription;
 import net.osmand.plus.ContextMenuAdapter;
 import net.osmand.plus.ContextMenuAdapter.ItemClickListener;
 import net.osmand.plus.ContextMenuItem;
@@ -49,6 +51,8 @@ import net.osmand.plus.GPXUtilities.GPXFile;
 import net.osmand.plus.GPXUtilities.GPXTrackAnalysis;
 import net.osmand.plus.GPXUtilities.WptPt;
 import net.osmand.plus.GpxSelectionHelper;
+import net.osmand.plus.GpxSelectionHelper.GpxDisplayGroup;
+import net.osmand.plus.GpxSelectionHelper.GpxDisplayItem;
 import net.osmand.plus.GpxSelectionHelper.SelectedGpxFile;
 import net.osmand.plus.IconsCache;
 import net.osmand.plus.OsmAndFormatter;
@@ -87,6 +91,8 @@ import java.util.Locale;
 import java.util.Map;
 import java.util.Set;
 import java.util.regex.Pattern;
+
+import static net.osmand.plus.R.string.m;
 
 public class AvailableGPXFragment extends OsmandExpandableListFragment {
 
@@ -1226,6 +1232,46 @@ public class AvailableGPXFragment extends OsmandExpandableListFragment {
 		}
 	}
 
+	private List<GpxDisplayGroup> getGpxFile(GpxInfo gpxInfo) {
+		if (gpxInfo.gpx == null) {
+			return new ArrayList<>();
+		}
+		List<GpxDisplayGroup> displayGroups = selectedGpxHelper.collectDisplayGroups(gpxInfo.gpx);
+		if (gpxInfo.file != null) {
+			SelectedGpxFile sf = selectedGpxHelper.getSelectedFileByPath(gpxInfo.gpx.path);
+			if (sf != null && gpxInfo.file != null && sf.getDisplayGroups() != null) {
+				displayGroups = sf.getDisplayGroups();
+			}
+		}
+		return displayGroups;
+	}
+
+	private class LoadGpxFileTask extends AsyncTask<Void, Void, GPXFile> {
+
+		GpxInfo gpxInfo;
+
+		public LoadGpxFileTask(GpxInfo gpxInfo) {
+			this.gpxInfo = gpxInfo;
+		}
+
+		@Override
+		protected GPXFile doInBackground(Void... voids) {
+			GPXFile result;
+			if (gpxInfo.file == null) {
+				result = getMyApplication().getSavingTrackHelper().getCurrentGpx();
+			} else {
+				SelectedGpxFile selectedGpxFile = selectedGpxHelper.getSelectedFileByPath(gpxInfo.file.getAbsolutePath());
+				if (selectedGpxFile != null && selectedGpxFile.getGpxFile() != null) {
+					result = selectedGpxFile.getGpxFile();
+				} else {
+					result = GPXUtilities.loadGPXFile(getActivity(), gpxInfo.file);
+				}
+			}
+			Log.d("Analyze", "execute finished");
+			return result;
+		}
+	}
+
 	private void openPopUpMenu(View v, final GpxInfo gpxInfo) {
 		IconsCache iconsCache = getMyApplication().getIconsCache();
 		final PopupMenu optionsMenu = new PopupMenu(getActivity(), v);
@@ -1244,12 +1290,32 @@ public class AvailableGPXFragment extends OsmandExpandableListFragment {
 		item.setOnMenuItemClickListener(new MenuItem.OnMenuItemClickListener() {
 			@Override
 			public boolean onMenuItemClick(MenuItem item) {
-				Intent newIntent = new Intent(getActivity(), getMyApplication().getAppCustomization().getTrackActivity());
-				newIntent.putExtra(TrackActivity.TRACK_FILE_NAME, gpxInfo.file.getAbsolutePath());
-				newIntent.setFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP);
-				newIntent.putExtra("open_details", true);
-				startActivity(newIntent);
+				Log.d("Analyze", "onItemClick");
+				if (gpxInfo.gpx == null) {
+					new LoadGpxFileTask(gpxInfo).execute();
+					Log.d("Analyze", "execute");
+				}
+				List<GpxDisplayGroup> gpxDisplayGroupList = getGpxFile(gpxInfo);
+				List<GpxDisplayItem> items = null;
+				for (GpxDisplayGroup group : gpxDisplayGroupList) {
+					if (group.getType() == GpxSelectionHelper.GpxDisplayItemType.TRACK_SEGMENT) {
+						items = group.getModifiableList();
+						Log.d("Analyze", "getModList");
+						break;
+					}
+				}
+				if (items != null) {
+					Log.d("Analyze", "items != null");
+					GpxDisplayItem gpxItem = items.get(0);
+					final OsmandSettings settings = app.getSettings();
+					settings.setMapLocationToShow(gpxItem.locationStart.lat, gpxItem.locationStart.lon,
+							settings.getLastKnownMapZoom(),
+							new PointDescription(PointDescription.POINT_TYPE_WPT, gpxItem.name),
+							false,
+							gpxItem);
 
+					MapActivity.launchMapActivityMoveToTop(getActivity());
+				} else 	Log.d("Analyze", "items == null");
 				return true;
 			}
 		});

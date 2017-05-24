@@ -178,16 +178,8 @@ public class TrackActivity extends TabActivity {
 		}
 	}
 
-	boolean firstTime = true;
-
 	@Override
 	public void onAttachFragment(Fragment fragment) {
-		if(firstTime) {
-			if (getIntent().getBooleanExtra("open_details", false)) {
-				((TrackSegmentFragment) fragment).openDetailsFromMenu = true;
-				firstTime = false;
-			}
-		}
 		fragList.add(new WeakReference<>(fragment));
 	}
 
