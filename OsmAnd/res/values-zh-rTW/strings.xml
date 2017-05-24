@@ -1317,7 +1317,7 @@ OsmAnd (Automated Navigation Directions) 是一個地圖和導航的應用程式
     <string name="routing_attr_avoid_motorway_name">避開高速公路</string>
     <string name="routing_attr_avoid_motorway_description">避開高速公路</string>
     <string name="routing_attr_weight_name">重量限制</string>
-    <string name="routing_attr_weight_description">指定許可在路線行駛的車輛重量</string>
+    <string name="routing_attr_weight_description">指定被許可在路線上行駛的車輛重量</string>
     <string name="select_gpx">選擇 GPX …</string>
     <string name="route_descr_select_destination">選擇目的地</string>
 
@@ -1919,7 +1919,7 @@ OsmAnd (Automated Navigation Directions) 是一個地圖和導航的應用程式
     
     <string name="routing_attr_avoid_borders_description">防止越過邊界進入別國</string>
     <string name="routing_attr_height_name">高度限制</string>
-    <string name="routing_attr_height_description">指定許可在路線行駛的車輛高度</string>
+    <string name="routing_attr_height_description">指定被許可在路線上行駛的車輛高度</string>
     <string name="use_fast_recalculation">智慧路線重新計算</string>
     <string name="use_fast_recalculation_desc">只有在長途航行路線的初始部分重新計算</string>
     <string name="osmo_share_my_location">傳送位置</string>
