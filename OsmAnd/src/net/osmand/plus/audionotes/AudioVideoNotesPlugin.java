@@ -1118,6 +1118,7 @@ public class AudioVideoNotesPlugin extends OsmandPlugin {
 	public void recordAudio(double lat, double lon, final MapActivity mapActivity) {
 		if (ActivityCompat.checkSelfPermission(mapActivity, Manifest.permission.RECORD_AUDIO)
 				== PackageManager.PERMISSION_GRANTED) {
+			muteStreamMusicAndOutputGuidance();
 			initRecMenu(AVActionType.REC_AUDIO, lat, lon);
 			MediaRecorder mr = new MediaRecorder();
 			final File f = getBaseFileName(lat, lon, app, THREEGP_EXTENSION);
@@ -1129,6 +1130,7 @@ public class AudioVideoNotesPlugin extends OsmandPlugin {
 			try {
 				runMediaRecorder(mapActivity, mr, f);
 			} catch (Exception e) {
+                unmuteStreamMusicAndOutputGuidance();
 				log.error("Error starting audio recorder ", e);
 				Toast.makeText(app, app.getString(R.string.recording_error) + " : "
 						+ e.getMessage(), Toast.LENGTH_LONG).show();
@@ -1141,6 +1143,34 @@ public class AudioVideoNotesPlugin extends OsmandPlugin {
 					AUDIO_REQUEST_CODE);
 		}
 	}
+
+	private void muteStreamMusicAndOutputGuidance() {
+        AudioManager am = (AudioManager)app.getSystemService(Context.AUDIO_SERVICE);
+        int voiceGuidanceOutput = app.getSettings().AUDIO_STREAM_GUIDANCE.get();
+        if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.M){
+            am.adjustStreamVolume(AudioManager.STREAM_MUSIC, AudioManager.ADJUST_MUTE, 0);
+            if (voiceGuidanceOutput != AudioManager.STREAM_MUSIC)
+                am.adjustStreamVolume(voiceGuidanceOutput, AudioManager.ADJUST_MUTE, 0);
+        } else {
+            am.setStreamMute(AudioManager.STREAM_MUSIC, true);
+            if (voiceGuidanceOutput != AudioManager.STREAM_MUSIC)
+                am.setStreamMute(voiceGuidanceOutput, true);
+        }
+    }
+
+    private void unmuteStreamMusicAndOutputGuidance() {
+        AudioManager am = (AudioManager) app.getSystemService(Context.AUDIO_SERVICE);
+        int voiceGuidanceOutput = app.getSettings().AUDIO_STREAM_GUIDANCE.get();
+        if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.M){
+            am.adjustStreamVolume(AudioManager.STREAM_MUSIC, AudioManager.ADJUST_UNMUTE, 0);
+            if (voiceGuidanceOutput != AudioManager.STREAM_MUSIC)
+                am.adjustStreamVolume(voiceGuidanceOutput, AudioManager.ADJUST_UNMUTE, 0);
+        } else {
+            am.setStreamMute(AudioManager.STREAM_MUSIC, false);
+            if (voiceGuidanceOutput != AudioManager.STREAM_MUSIC)
+                am.setStreamMute(voiceGuidanceOutput, false);
+        }
+    }
 
 	public void takePhoto(final double lat, final double lon, final MapActivity mapActivity,
 						  final boolean forceInternal) {
@@ -1527,6 +1557,9 @@ public class AudioVideoNotesPlugin extends OsmandPlugin {
 				if (!recordControl.isVisible()) {
 					recordControl.setExplicitlyVisible(false);
 					mapActivity.getMapLayers().getMapInfoLayer().recreateControls();
+				}
+				if (currentRecording.type == AVActionType.REC_AUDIO) {
+					unmuteStreamMusicAndOutputGuidance();
 				}
 				stopCameraRecording(false);
 				if (recordControl != null) {
