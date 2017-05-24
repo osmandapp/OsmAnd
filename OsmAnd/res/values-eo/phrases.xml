@@ -1180,15 +1180,15 @@
 	<string name="poi_parking_underground">Subtera</string>
 	<string name="poi_parking_multi_storey">Multetaĝa</string>
 
-	<string name="poi_bicycle_parking_anchors">Ankroj</string>
+	<string name="poi_bicycle_parking_anchors">ankroj</string>
 	<string name="poi_trees_apple">Pomujoj</string>
-	<string name="poi_bicycle_parking_stands">Rakoj simplaj</string>
-	<string name="poi_bicycle_parking_wall_loops">Rakoj rad-kaptantaj</string>
-	<string name="poi_bicycle_parking_rack">Rakoj</string>
-	<string name="poi_bicycle_parking_building">Speciala konstruaĵo</string>
-	<string name="poi_bicycle_parking_shed">Budo</string>
-	<string name="poi_bicycle_parking_bollard">Paliseto</string>
-	<string name="poi_bicycle_parking_informal">Neformala</string>
+	<string name="poi_bicycle_parking_stands">rakoj simplaj</string>
+	<string name="poi_bicycle_parking_wall_loops">rakoj rad-kaptantaj</string>
+	<string name="poi_bicycle_parking_rack">rakoj</string>
+	<string name="poi_bicycle_parking_building">speciala konstruaĵo</string>
+	<string name="poi_bicycle_parking_shed">budo</string>
+	<string name="poi_bicycle_parking_bollard">paliseto</string>
+	<string name="poi_bicycle_parking_informal">neformala</string>
 
 	<string name="poi_leaf_type_broadleaved">Folihava(j)</string>
 	<string name="poi_leaf_type_needleleaved">Pinglofolia(j)</string>
@@ -2696,9 +2696,9 @@
 
 	<string name="poi_military_checkpoint">Kontrolejo armea</string>
 
-	<string name="poi_bicycle_parking_lockers">Ŝranketoj</string>
-	<string name="poi_bicycle_parking_tree">Bicikl-pendigilo</string>
-	<string name="poi_bicycle_parking_streetpod">Duon-ŝranketo</string>
+	<string name="poi_bicycle_parking_lockers">ŝranketoj</string>
+	<string name="poi_bicycle_parking_tree">bicikl-pendigilo</string>
+	<string name="poi_bicycle_parking_streetpod">duon-ŝranketo</string>
 
 	<string name="poi_wheelchair_designated">adaptita</string>
 	<string name="poi_spoil_heap">Skori-monto</string>
