@@ -1117,9 +1117,18 @@ public class AudioVideoNotesPlugin extends OsmandPlugin {
 
 	public void recordAudio(double lat, double lon, final MapActivity mapActivity) {
 		AudioManager am = (AudioManager)app.getSystemService(Context.AUDIO_SERVICE);
-		am.adjustStreamVolume(AudioManager.STREAM_MUSIC, AudioManager.ADJUST_MUTE, 0);
+		int voiceGuidanceOutput = app.getSettings().AUDIO_STREAM_GUIDANCE.get();
 		if (ActivityCompat.checkSelfPermission(mapActivity, Manifest.permission.RECORD_AUDIO)
 				== PackageManager.PERMISSION_GRANTED) {
+			if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.M){
+				am.adjustStreamVolume(AudioManager.STREAM_MUSIC, AudioManager.ADJUST_MUTE, 0);
+				if (voiceGuidanceOutput != AudioManager.STREAM_MUSIC)
+					am.adjustStreamVolume(voiceGuidanceOutput, AudioManager.ADJUST_MUTE, 0);
+			} else {
+				am.setStreamMute(AudioManager.STREAM_MUSIC, true);
+				if (voiceGuidanceOutput != AudioManager.STREAM_MUSIC)
+					am.setStreamMute(voiceGuidanceOutput, true);
+			}
 			initRecMenu(AVActionType.REC_AUDIO, lat, lon);
 			MediaRecorder mr = new MediaRecorder();
 			final File f = getBaseFileName(lat, lon, app, THREEGP_EXTENSION);
@@ -1530,6 +1539,19 @@ public class AudioVideoNotesPlugin extends OsmandPlugin {
 					recordControl.setExplicitlyVisible(false);
 					mapActivity.getMapLayers().getMapInfoLayer().recreateControls();
 				}
+				if (currentRecording.type == AVActionType.REC_AUDIO) {
+					AudioManager am = (AudioManager) app.getSystemService(Context.AUDIO_SERVICE);
+					int voiceGuidanceOutput = app.getSettings().AUDIO_STREAM_GUIDANCE.get();
+					if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.M){
+						am.adjustStreamVolume(AudioManager.STREAM_MUSIC, AudioManager.ADJUST_UNMUTE, 0);
+						if (voiceGuidanceOutput != AudioManager.STREAM_MUSIC)
+							am.adjustStreamVolume(voiceGuidanceOutput, AudioManager.ADJUST_UNMUTE, 0);
+					} else {
+						am.setStreamMute(AudioManager.STREAM_MUSIC, false);
+						if (voiceGuidanceOutput != AudioManager.STREAM_MUSIC)
+							am.setStreamMute(voiceGuidanceOutput, false);
+					}
+				}
 				stopCameraRecording(false);
 				if (recordControl != null) {
 					setRecordListener(recordControl, mapActivity);
@@ -1540,8 +1562,6 @@ public class AudioVideoNotesPlugin extends OsmandPlugin {
 				closeRecordingMenu();
 			}
 		}
-		AudioManager am = (AudioManager)app.getSystemService(Context.AUDIO_SERVICE);
-		am.adjustStreamVolume(AudioManager.STREAM_MUSIC, AudioManager.ADJUST_UNMUTE, 0);
 	}
 
 	private LatLon getNextRecordingLocation() {
