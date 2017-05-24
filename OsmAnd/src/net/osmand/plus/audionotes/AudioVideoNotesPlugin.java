@@ -1116,6 +1116,8 @@ public class AudioVideoNotesPlugin extends OsmandPlugin {
 	}
 
 	public void recordAudio(double lat, double lon, final MapActivity mapActivity) {
+		AudioManager am = (AudioManager)app.getSystemService(Context.AUDIO_SERVICE);
+		am.adjustStreamVolume(AudioManager.STREAM_MUSIC, AudioManager.ADJUST_MUTE, 0);
 		if (ActivityCompat.checkSelfPermission(mapActivity, Manifest.permission.RECORD_AUDIO)
 				== PackageManager.PERMISSION_GRANTED) {
 			initRecMenu(AVActionType.REC_AUDIO, lat, lon);
@@ -1538,6 +1540,8 @@ public class AudioVideoNotesPlugin extends OsmandPlugin {
 				closeRecordingMenu();
 			}
 		}
+		AudioManager am = (AudioManager)app.getSystemService(Context.AUDIO_SERVICE);
+		am.adjustStreamVolume(AudioManager.STREAM_MUSIC, AudioManager.ADJUST_UNMUTE, 0);
 	}
 
 	private LatLon getNextRecordingLocation() {
