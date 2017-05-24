@@ -1475,4 +1475,9 @@
 \n 注1：您的旧文件不会移动（但是可以稍后手动删除）。
 \n 注2：使用新的存储位置后，您无法将这些文件在 OsmAnd 和 OsmAnd+ 之间进行共享。</string>
     <string name="copying_osmand_one_file_descr">正在将文件（%s）复制到新位置……</string>
+    <string name="mapillary_image">Mapillary 图像</string>
+    <string name="open_mapillary">Open Mapillary</string>
+    <string name="shared_string_install">安装</string>
+    <string name="online_photos">在线照片</string>
+    <string name="mapillary_descr">供所有人使用的在线街景照片。协作发现景点，捕捉世界之美。</string>
     </resources>
