@@ -809,8 +809,8 @@
     <string name="nearest_cities">Yaxındakı şəhərlər</string>
     <string name="select_city">Şəhər seçin</string>
     <string name="select_postcode">Poçt kodu seçin</string>
-    <string name="quick_action_add_destination">Təyinat əlavə et</string>
-    <string name="quick_action_replace_destination">Təyinatı əvəz et</string>
+    <string name="quick_action_add_destination">Təyinat nöqtəsi əlavə et</string>
+    <string name="quick_action_replace_destination">Təyinat nöqtəsini əvəz et</string>
     <string name="average_speed">Ortalama sürət</string>
     <string name="shared_string_time_moving">Hərəkət vaxtı</string>
     <string name="altitude_descent">Eniş</string>
@@ -866,7 +866,7 @@
     <string name="current_track">Hazırki yol</string>
     <string name="change_markers_position">İşarələyicinin mövqeyini dəyiş</string>
     <string name="move_marker_bottom_sheet_title">İşarələyicinin mövqeyini dəyişmək üçün xəritəni daşıyın</string>
-    <string name="access_no_destination">Təyinat təyin edilməyib</string>
+    <string name="access_no_destination">Təyinat nöqtəsi seçilməyib</string>
     <string name="access_hint_enter_description">Açıqlama daxil et</string>
     <string name="access_widget_expand">Genişlət</string>
     <string name="access_shared_string_navigate_up">Yuxarı get</string>
@@ -1016,10 +1016,10 @@
     <string name="zxing_barcode_scanner_not_found">ZXing Barcode Scanner proqramı quraşdırılmayıb. Google Play-də axtarılsın?</string>
     <string name="rendering_attr_roadColors_description">Yol rəng sxemi seçin:</string>
     <string name="rendering_attr_roadColors_name">Yol rəng sxemi</string>
-    <string name="map_widget_show_destination_arrow">Təyinat istiqamətini göstər</string>
+    <string name="map_widget_show_destination_arrow">Təyinat nöqtəsi istiqamətini göstər</string>
     <string name="no_route">Marşrut yoxdur</string>
     <string name="delete_target_point">Təyinat nöqtəsini sil</string>
-    <string name="target_point">Təyinat %1$s</string>
+    <string name="target_point">Təyinat nöqtəsi %1$s</string>
     <string name="replace_destination_point">Təyinat nöqtəsini əvəz et</string>
     <string name="new_destination_point_dialog">Artıq təyinat nöqtəsini seçmisiniz:</string>
     <string name="target_points">Təyinat nöqtələri</string>
@@ -1303,4 +1303,7 @@
     <string name="quick_action_add_first_intermediate_desc">Fəaliyyət düyməsinə toxunulduqda ekranın mərkəzində birinci aralıq nöqtə əlavə ediləcək.</string>
     <string name="do_not_show_startup_messages_desc">Proqram endirimləri və xüsusi yerli hadisələr haqda mesajları göstərir</string>
     <string name="translit_name_if_miss">%1$s ad yoxdursa, başqa dildə yazılsın</string>
+    <string name="route_preferences">Marşrut seçimləri</string>
+    <string name="routing_preferences_descr">Marşrutlama seçimləri</string>
+    <string name="profile_settings">Profil parametrləri</string>
     </resources>
