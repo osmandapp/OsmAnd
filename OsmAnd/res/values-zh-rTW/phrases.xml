@@ -3072,4 +3072,20 @@
 
 	<string name="poi_salt_yes">鹽</string>
 	<string name="poi_salt_no">鹽︰無</string>
+	<string name="poi_spoil_heap">廢石堆</string>
+	
+	<string name="poi_wheelchair_designated">標示</string>
+	<string name="poi_summer_camp">夏令營</string>
+	<string name="poi_recreation_center">休憩中心</string>
+
+	<string name="poi_crossing_activation_automatic">平交道啓動︰自動</string>
+	<string name="poi_crossing_activation_local">平交道啓動︰現地</string>
+	<string name="poi_crossing_activation_remote">平交道啓動︰遠端</string>
+	<string name="poi_crossing_barrier_no">平交道柵欄︰無</string>
+	<string name="poi_crossing_barrier_yes">平交道柵欄</string>
+	<string name="poi_crossing_barrier_full">平交道柵欄︰完整的</string>
+	<string name="poi_crossing_barrier_half">平交道柵欄︰一半的</string>
+	<string name="poi_crossing_barrier_double_half">平交道柵欄︰雙一半的</string>
+	<string name="poi_crossing_bell_yes">平交道警鐘</string>
+	<string name="poi_crossing_bell_no">平交道警鐘︰無</string>
 	</resources>
