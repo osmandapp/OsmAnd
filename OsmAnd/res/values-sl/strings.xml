@@ -2896,4 +2896,6 @@ Koda predstavlja območje: %1$s x %2$s</string>
     <string name="srtm_purchase_header">Za prikaz reliefa na zemljevidu, je treba kupiti in namestiti vstavek Izohipse.</string>
     <string name="show_from_zoom_level">Prikaži od ravni približanja</string>
     <string name="display_zoom_level">Raven približanja: %1$s</string>
+    <string name="distance_moving">Razdalja je popravljena</string>
+    <string name="mapillary_image">Slika Mapillary</string>
     </resources>
