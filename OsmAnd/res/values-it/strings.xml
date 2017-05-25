@@ -3009,4 +3009,5 @@ Copertura e qualità approssimativamente:
 \n
 \nPer farlo è necessario installare l\'app Mapillary da Google Play.</string>
     <string name="mapillary_image">Immagine Mapillary</string>
+    <string name="distance_moving">Distanza corretta</string>
     </resources>
