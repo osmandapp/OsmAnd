@@ -2759,4 +2759,7 @@ Tai yra puikus būdas paremti OsmAnd ir OSM, jei jie jums patinka.</string>
     <string name="quick_action_btn_tutorial_title">Pakeisti mygtuko padėtį</string>
     <string name="shared_string_action_name">Veiksmo pavadinimas</string>
 <string name="mapillary_widget">Mapillary valdiklis</string>
+    <string name="mapillary_image">Mapillary nuotrauka</string>
+    <string name="open_mapillary">Atidaryti Mapillary</string>
+    <string name="online_photos">Nuotraukas internete</string>
     </resources>
