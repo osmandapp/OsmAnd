@@ -2943,7 +2943,7 @@ Fonctionnalités principales :
     <string name="srtm_color_scheme">Couleur du thème</string>
     <string name="show_from_zoom_level">Afficher à partir du niveau de zoom</string>
     <string name="route_is_too_long_v2">Cet itinéraire risque d\'être très long à calculer. Merci d\'ajouter des points de passage intermédiaires.</string>
-    <string name="srtm_menu_download_descr">Pour afficher les courbes de niveaux sur la carte, vous devez télécharger la carte courbes de niveaux de cette région.</string>
+    <string name="srtm_menu_download_descr">Pour afficher les courbes de niveaux sur la carte, vous devez télécharger la carte courbes de niveaux de la région.</string>
     <string name="shared_string_plugin">Greffon</string>
     <string name="srtm_purchase_header">Pour afficher les courbes de niveaux sur une carte, vous devez acheter puis installer le greffon Courbes de niveaux</string>
     <string name="hillshade_purchase_header">Pour afficher les ombrages du relief sur la carte, vous devez acheter et installer le greffon Courbes de niveaux</string>
@@ -2958,7 +2958,7 @@ Fonctionnalités principales :
     <string name="restart_search">Relancer la recherche</string>
     <string name="nothing_found">Aucun résultat</string>
     <string name="increase_search_radius">Augmenter le rayon de recherche</string>
-    <string name="nothing_found_descr">Modifiez les critères de recherche ou augmentez le rayon de recherche</string>
+    <string name="nothing_found_descr">Modifiez votre recherche ou augmentez la zone de recherche</string>
     <string name="private_access_routing_req">Votre destination se situe dans une zone privée. Souhaitez-vous autoriser l\'accès aux zones privées pour cet itinéraire ?</string>
     <string name="osmand_extended_description_part2">"
  Navigation GPS
@@ -2997,11 +2997,11 @@ Fonctionnalités principales :
     <string name="shared_string_install">Installer</string>
     <string name="mapillary">Mapillary</string>
     <string name="open_mapillary">Ouvrir Mapillary</string>
-    <string name="improve_coverage_mapillary">Améliorer la couverture avec Mapillary</string>
+    <string name="improve_coverage_mapillary">Améliorez la couverture photo avec Mapillary</string>
     <string name="improve_coverage_install_mapillary_desc">Vous pouvez prendre des photos et les ajouter à la carte.
 \n
 \nPour cela, installez l\'application Mapillary depuis Google Play.</string>
-    <string name="mapillary_action_descr">Participez en ajoutant vos photos détaillées à Mapillary.</string>
+    <string name="mapillary_action_descr">Participez en ajoutant vos photos détaillées sur Mapillary.</string>
     <string name="mapillary_widget">Gadget Mapillary</string>
     <string name="mapillary_widget_descr">Vous permet de contribuer facilement à Mapillary</string>
     <string name="mapillary_descr">Des photos en-ligne détaillées pour tous. Découvrez des lieux, collaborez ... capturez le monde.</string>
