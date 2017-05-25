@@ -38,9 +38,20 @@ public class AudioFocusHelperImpl implements AudioManager.OnAudioFocusChangeList
     @Override
     public void onAudioFocusChange(int focusChange)
     {
-        // Basically we ignore audio focus changes. There's not much we can do when we have interrupted audio
-        // for our speech, and we in turn get interrupted. Ignore it until a scenario comes up which gives us
-        // reason to change this strategy.
-        log.error("MediaCommandPlayerImpl.onAudioFocusChange(): Unexpected audio focus change: " + focusChange);
+	// Basically we ignore audio focus changes. There's not much we can do when we have interrupted audio
+	// for our speech, and we in turn get interrupted. Ignore it until a scenario comes up which gives us
+	// reason to change this strategy.
+	log.error("MediaCommandPlayerImpl.onAudioFocusChange(): Unexpected audio focus change: " + focusChange);
+
+	// Hardy, 2017-05-25: (See https://developer.android.com/guide/topics/media-apps/volume-and-earphones.html)
+//	if (focusChange == AudioManager.AUDIOFOCUS_LOSS) {
+		// Usually: Permanent loss of audio focus, stop playback here
+//	} else if (focusChange == AUDIOFOCUS_LOSS_TRANSIENT) {
+		// Usually: Pause playback
+//	} else if (focusChange == AUDIOFOCUS_LOSS_TRANSIENT_CAN_DUCK) {
+		// Usually: Lower the volume, keep playing
+//	} else if (focusChange == AudioManager.AUDIOFOCUS_GAIN) {
+		// Usually: App has been granted audio focus again, raise volume to normal
+//	}
     }
 }
