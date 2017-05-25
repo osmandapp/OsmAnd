@@ -632,7 +632,7 @@
     <string name="network_provider">Şəbəkə</string>
     <string name="gps_provider">GPS</string>
     <string name="int_seconds">saniyə</string>
-    <string name="int_min">dəq.</string>
+    <string name="int_min">dəqiqə</string>
     <string name="hide_poi_filter">Filtri gizlət</string>
     <string name="show_poi_filter">Filtri göstər</string>
     <string name="search_poi_filter">Filtr</string>
