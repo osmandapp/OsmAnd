@@ -1260,11 +1260,9 @@ public class GpxUiHelper {
 		if (analysis.hasSpeedInTrack()) {
 			yAxis.setTextColor(ActivityCompat.getColor(mChart.getContext(), R.color.gpx_chart_orange_label));
 			yAxis.setGridColor(ActivityCompat.getColor(mChart.getContext(), R.color.gpx_chart_orange_grid));
-			//FIXME: ((TextView) findViewById(R.id.text_spd_container).findViewById(R.id.text_spd_value)).setTextColor(R.color.gpx_chart_orange);
 		} else {
 			yAxis.setTextColor(ActivityCompat.getColor(mChart.getContext(), R.color.gpx_chart_red_label));
 			yAxis.setGridColor(ActivityCompat.getColor(mChart.getContext(), R.color.gpx_chart_red_grid));
-			//FIXME: ((TextView) findViewById(R.id.text_spd_container).findViewById(R.id.text_spd_value)).setTextColor(R.color.gpx_chart_red);
 		}
 
 		yAxis.setAxisMinimum(0f);
@@ -1693,6 +1691,7 @@ public class GpxUiHelper {
 						textSlpView.setVisibility(GONE);
 						break;
 					case SPEED:
+						((TextView) textSpdView.findViewById(R.id.text_spd_value)).setTextColor(dataSet.getColor());
 						((TextView) textSpdView.findViewById(R.id.text_spd_value)).setText(value);
 						((TextView) textSpdView.findViewById(R.id.text_spd_units)).setText(units);
 						textAltView.setVisibility(GONE);
@@ -1745,6 +1744,7 @@ public class GpxUiHelper {
 				}
 				if (spdSetIndex != -1) {
 					float y = getInterpolatedY(spdSetIndex == 0 ? dataSet1 : dataSet2, e);
+					((TextView) textSpdView.findViewById(R.id.text_spd_value)).setTextColor((spdSetIndex == 0 ? dataSet1 : dataSet2).getColor());
 					((TextView) textSpdView.findViewById(R.id.text_spd_value)).setText(Integer.toString((int) y) + " ");
 					((TextView) textSpdView.findViewById(R.id.text_spd_units)).setText(spdSetIndex == 0 ? dataSet1.units : dataSet2.units);
 					textSpdView.setVisibility(VISIBLE);
