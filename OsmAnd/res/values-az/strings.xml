@@ -657,7 +657,7 @@
     <string name="search_online_address">Onlayn axtarış</string>
     <string name="download_question">{0} - {1} endirilsin?</string>
     <string name="address">Ünvan</string>
-    <string name="update_existing">Əvəzlə</string>
+    <string name="update_existing">Əvəz et</string>
     <string name="opening_hours">İş saatları</string>
     <string name="loading_poi_obj">POI yüklənir…</string>
     <string name="failed_op">uğursuz</string>
@@ -1306,4 +1306,12 @@
     <string name="route_preferences">Marşrut seçimləri</string>
     <string name="routing_preferences_descr">Marşrutlama seçimləri</string>
     <string name="profile_settings">Profil parametrləri</string>
+    <string name="about_settings_descr">Versiya məlumatı, lisenziyalar, layihə üzvləri</string>
+    <string name="local_index_tile_data_expire">Başa çatır (dəqiqə): %1$s</string>
+    <string name="local_index_tile_data_downloadable">Endirilə bilən: %1$s</string>
+    <string name="edit_tilesource_expiration_time">Başa çatır (dəqiqə)</string>
+    <string name="edit_tilesource_choose_existing">Mövcud olanı seçin…</string>
+    <string name="maps_define_edit">Təyin/Düzəliş et…</string>
+    <string name="driving_region_europe_asia">Avropa, Asiya, Latın Amerikası və oxşar</string>
+    <string name="driving_region_uk">Böyük Britaniya, Hindistan və oxşar</string>
     </resources>
