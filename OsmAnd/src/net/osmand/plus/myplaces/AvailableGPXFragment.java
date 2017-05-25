@@ -1232,10 +1232,11 @@ public class AvailableGPXFragment extends OsmandExpandableListFragment {
 		}
 	}
 
-	private class OpenGpxDetailsTask extends AsyncTask<Void, Void, GPXFile> {
+	private class OpenGpxDetailsTask extends AsyncTask<Void, Void, Void> {
 
 		GpxInfo gpxInfo;
-		Dialog progressDialog;
+		ProgressDialog progressDialog;
+		List<GpxDisplayGroup> gpxDisplayGroupList;
 
 		OpenGpxDetailsTask(GpxInfo gpxInfo) {
 			this.gpxInfo = gpxInfo;
@@ -1244,29 +1245,35 @@ public class AvailableGPXFragment extends OsmandExpandableListFragment {
 		@Override
 		protected void onPreExecute() {
 			progressDialog = new ProgressDialog(getActivity());
+			progressDialog.setTitle("");
+			progressDialog.setMessage(getActivity().getResources().getString(R.string.loading_data));
 			progressDialog.setCancelable(false);
-			progressDialog.setTitle(R.string.loading_data);
-			progressDialog.show();
 		}
 
 		@Override
-		protected GPXFile doInBackground(Void... voids) {
+		protected Void doInBackground(Void... voids) {
 			GPXFile result;
 			if (gpxInfo.gpx == null) {
 				if (gpxInfo.file == null) {
 					result = getMyApplication().getSavingTrackHelper().getCurrentGpx();
 				} else {
+					publishProgress();
 					result = GPXUtilities.loadGPXFile(getActivity(), gpxInfo.file);
 				}
+				gpxDisplayGroupList = selectedGpxHelper.collectDisplayGroups(result);
 			} else {
-				return gpxInfo.gpx;
+				gpxDisplayGroupList = selectedGpxHelper.collectDisplayGroups(gpxInfo.gpx);
 			}
-			return result;
+			return null;
 		}
 
 		@Override
-		protected void onPostExecute(GPXFile gpxFile) {
-			List<GpxDisplayGroup> gpxDisplayGroupList = selectedGpxHelper.collectDisplayGroups(gpxFile);
+		protected void onProgressUpdate(Void... values) {
+			progressDialog.show();
+		}
+
+		@Override
+		protected void onPostExecute(Void aVoid) {
 			List<GpxDisplayItem> items = null;
 			for (GpxDisplayGroup group : gpxDisplayGroupList) {
 				if (group.getType() == GpxSelectionHelper.GpxDisplayItemType.TRACK_SEGMENT) {
@@ -1297,10 +1304,10 @@ public class AvailableGPXFragment extends OsmandExpandableListFragment {
 							new PointDescription(PointDescription.POINT_TYPE_WPT, gpxItem.name),
 							false,
 							gpxItem);
+					progressDialog.dismiss();
 					MapActivity.launchMapActivityMoveToTop(getActivity());
 				}
 			}
-			progressDialog.cancel();
 		}
 	}
 
