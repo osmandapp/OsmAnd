@@ -3007,4 +3007,5 @@ Fonctionnalités principales :
     <string name="mapillary_descr">Des photos en-ligne détaillées pour tous. Découvrez des lieux, collaborez ... capturez le monde.</string>
     <string name="plugin_mapillary_descr">Des photos détaillées pour tous. Découvrez des lieux, collaborez ... capturez le monde.</string>
     <string name="mapillary_image">Image Mapillary</string>
+    <string name="distance_moving">Distance corrigée</string>
     </resources>
