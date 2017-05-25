@@ -1266,7 +1266,6 @@ public class AvailableGPXFragment extends OsmandExpandableListFragment {
 						result = GPXUtilities.loadGPXFile(getActivity(), gpxInfo.file);
 					}
 				}
-				gpxInfo.gpx = result;
 			}
 			return result;
 		}
@@ -1285,8 +1284,14 @@ public class AvailableGPXFragment extends OsmandExpandableListFragment {
 				GpxDisplayItem gpxItem = items.get(0);
 				if (gpxItem.analysis != null) {
 					ArrayList<GPXDataSetType> list = new ArrayList<>();
-					if (gpxItem.analysis.hasElevationData) list.add(GPXDataSetType.ALTITUDE);
-					if (gpxItem.analysis.hasSpeedData) list.add(GPXDataSetType.SPEED);
+					if (gpxItem.analysis.hasElevationData) {
+						list.add(GPXDataSetType.ALTITUDE);
+					}
+					if (gpxItem.analysis.hasSpeedData) {
+						list.add(GPXDataSetType.SPEED);
+					} else {
+						list.add(GPXDataSetType.SLOPE);
+					}
 					gpxItem.chartTypes = list.toArray(new GPXDataSetType[list.size()]);
 					if (gpxItem.group.getGpx() != null) {
 						gpxItem.wasHidden = app.getSelectedGpxHelper().getSelectedFileByPath(gpxInfo.file.getAbsolutePath()) == null;
@@ -1318,7 +1323,7 @@ public class AvailableGPXFragment extends OsmandExpandableListFragment {
 			}
 		});
 
-		item = optionsMenu.getMenu().add(R.string.analyze_on_map).setIcon(iconsCache.getThemedIcon(R.drawable.ic_map));
+		item = optionsMenu.getMenu().add(R.string.analyze_on_map).setIcon(iconsCache.getThemedIcon(R.drawable.ic_action_info_dark));
 		item.setOnMenuItemClickListener(new MenuItem.OnMenuItemClickListener() {
 			@Override
 			public boolean onMenuItemClick(MenuItem item) {
