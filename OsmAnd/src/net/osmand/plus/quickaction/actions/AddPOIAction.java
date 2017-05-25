@@ -54,6 +54,7 @@ import net.osmand.util.Algorithms;
 import java.lang.reflect.Type;
 import java.util.ArrayList;
 import java.util.Comparator;
+import java.util.HashMap;
 import java.util.HashSet;
 import java.util.LinkedHashMap;
 import java.util.List;
@@ -539,7 +540,9 @@ public class AddPOIAction extends QuickAction {
 	}
 
 	private void setTagsIntoParams(Map<String, String> tags) {
+		HashMap<String, String> padrams = getParams();
 		getParams().put(KEY_TAG, new Gson().toJson(tags));
+		padrams = getParams();
 	}
 
 	private void putTagIntoParams(String tag, String value) {

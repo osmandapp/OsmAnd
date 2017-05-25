@@ -222,8 +222,14 @@ public class OpenstreetmapRemoteUtil implements OpenstreetmapUtil {
 
 		for (String k : n.getTagKeySet()) {
 			String val = n.getTag(k);
-			if (val.length() == 0 || k.length() == 0 || EditPoiData.POI_TYPE_TAG.equals(k) ||
-					k.startsWith(EditPoiData.REMOVE_TAG_PREFIX) || n.getTag(EditPoiData.REMOVE_TAG_PREFIX + k) != null)
+			boolean valLengthZero = val.length() == 0;
+			boolean kLengthZero = k.length() == 0;
+			boolean poiTypeTag = EditPoiData.POI_TYPE_TAG.equals(k);
+			boolean kStartsWithRemoveTagPrefix = k.startsWith(EditPoiData.REMOVE_TAG_PREFIX);
+			String removeTagPrefixK = EditPoiData.REMOVE_TAG_PREFIX + k;
+//			boolean tagWithRemoveTagPrefix = n.getTag(EditPoiData.REMOVE_TAG_PREFIX + k) != null;
+			boolean tagWithRemoveTagPrefix = k.contains(EditPoiData.REMOVE_TAG_PREFIX);
+			if (valLengthZero || kLengthZero || poiTypeTag || kStartsWithRemoveTagPrefix || tagWithRemoveTagPrefix)
 				continue;
 			ser.startTag(null, "tag"); //$NON-NLS-1$
 			ser.attribute(null, "k", k); //$NON-NLS-1$
