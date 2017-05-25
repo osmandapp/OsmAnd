@@ -3073,5 +3073,5 @@ Tidligere destination bliver sidste mellemliggende punkt.</string>
 \nFor at gøre dette skal Mapillary installeres fra Google Play.</string>
     <string name="open_mapillary">Åbn Mapillary</string>
     <string name="mapillary_image">Mapillary billede</string>
-    <string name="distance_moving">Afstand korrigeret</string>
+    <string name="distance_moving">Korrigeret afstand</string>
     </resources>
