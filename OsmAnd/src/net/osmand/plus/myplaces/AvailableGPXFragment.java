@@ -19,7 +19,6 @@ import android.support.v7.widget.PopupMenu;
 import android.support.v7.widget.SearchView;
 import android.text.Editable;
 import android.text.TextWatcher;
-import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.Menu;
 import android.view.MenuInflater;
@@ -70,6 +69,7 @@ import net.osmand.plus.dialogs.DirectionsDialogs;
 import net.osmand.plus.download.ui.LocalIndexesFragment;
 import net.osmand.plus.download.ui.LocalIndexesFragment.RenameCallback;
 import net.osmand.plus.helpers.AndroidUiHelper;
+import net.osmand.plus.helpers.GpxUiHelper.GPXDataSetType;
 import net.osmand.plus.monitoring.OsmandMonitoringPlugin;
 import net.osmand.plus.osmedit.OsmEditingPlugin;
 import net.osmand.util.Algorithms;
@@ -1248,14 +1248,14 @@ public class AvailableGPXFragment extends OsmandExpandableListFragment {
 
 		GpxInfo gpxInfo;
 
-		public OpenGpxDetailsTask(GpxInfo gpxInfo) {
+		OpenGpxDetailsTask(GpxInfo gpxInfo) {
 			this.gpxInfo = gpxInfo;
 		}
 
 		@Override
 		protected GPXFile doInBackground(Void... voids) {
+			GPXFile result = null;
 			if (gpxInfo.gpx == null) {
-				GPXFile result;
 				if (gpxInfo.file == null) {
 					result = getMyApplication().getSavingTrackHelper().getCurrentGpx();
 				} else {
@@ -1266,36 +1266,41 @@ public class AvailableGPXFragment extends OsmandExpandableListFragment {
 						result = GPXUtilities.loadGPXFile(getActivity(), gpxInfo.file);
 					}
 				}
-				Log.d("Analyze", "execute finished");
 				gpxInfo.gpx = result;
 			}
-			return null;
+			return result;
 		}
 
 		@Override
 		protected void onPostExecute(GPXFile gpxFile) {
 			List<GpxDisplayGroup> gpxDisplayGroupList = getGpxFile(gpxInfo);
-			Log.d("Analyze", gpxDisplayGroupList.toString());
 			List<GpxDisplayItem> items = null;
 			for (GpxDisplayGroup group : gpxDisplayGroupList) {
 				if (group.getType() == GpxSelectionHelper.GpxDisplayItemType.TRACK_SEGMENT) {
 					items = group.getModifiableList();
-					Log.d("Analyze", "getModList");
 					break;
 				}
 			}
 			if (items != null) {
-				Log.d("Analyze", "items != null");
 				GpxDisplayItem gpxItem = items.get(0);
-				final OsmandSettings settings = app.getSettings();
-				settings.setMapLocationToShow(gpxItem.locationStart.lat, gpxItem.locationStart.lon,
-						settings.getLastKnownMapZoom(),
-						new PointDescription(PointDescription.POINT_TYPE_WPT, gpxItem.name),
-						false,
-						gpxItem);
-
-				MapActivity.launchMapActivityMoveToTop(getActivity());
-			} else Log.d("Analyze", "items == null");
+				if (gpxItem.analysis != null) {
+					ArrayList<GPXDataSetType> list = new ArrayList<>();
+					if (gpxItem.analysis.hasElevationData) list.add(GPXDataSetType.ALTITUDE);
+					if (gpxItem.analysis.hasSpeedData) list.add(GPXDataSetType.SPEED);
+					gpxItem.chartTypes = list.toArray(new GPXDataSetType[list.size()]);
+					if (gpxItem.group.getGpx() != null) {
+						gpxItem.wasHidden = app.getSelectedGpxHelper().getSelectedFileByPath(gpxInfo.file.getAbsolutePath()) == null;
+						app.getSelectedGpxHelper().setGpxFileToDisplay(gpxItem.group.getGpx());
+					}
+					final OsmandSettings settings = app.getSettings();
+					settings.setMapLocationToShow(gpxItem.locationStart.lat, gpxItem.locationStart.lon,
+							settings.getLastKnownMapZoom(),
+							new PointDescription(PointDescription.POINT_TYPE_WPT, gpxItem.name),
+							false,
+							gpxItem);
+					MapActivity.launchMapActivityMoveToTop(getActivity());
+				}
+			}
 		}
 	}
 
@@ -1317,7 +1322,6 @@ public class AvailableGPXFragment extends OsmandExpandableListFragment {
 		item.setOnMenuItemClickListener(new MenuItem.OnMenuItemClickListener() {
 			@Override
 			public boolean onMenuItemClick(MenuItem item) {
-				Log.d("Analyze", "onItemClick");
 				new OpenGpxDetailsTask(gpxInfo).execute();
 				return true;
 			}
