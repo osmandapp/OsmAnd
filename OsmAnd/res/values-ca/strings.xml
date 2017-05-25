@@ -2731,7 +2731,7 @@ OsmAnd és de codi obert i es desenvolupa activament . Tothom pot recolzar l\'ap
     <string name="hillshade_purchase_header">Per veure l\'ombrejat de relleu al mapa cal comprar i instal·lar el connector de corbes de nivell</string>
     <string name="shared_string_plugin">Connector</string>
     <string name="srtm_purchase_header">Per veure les corbes de nivell cal comprar i instal·lar el connector de corbes de nivell</string>
-    <string name="srtm_menu_download_descr">Per veure les corbes de nivell al mapa cal baixar un mapa de corbes de nivell de\'aquesta zona.</string>
+    <string name="srtm_menu_download_descr">Per veure les corbes de nivell al mapa us cal baixar el mapa de corbes de nivell d\'aquesta zona.</string>
     <string name="hide_from_zoom_level">Amaga segons el nivell d\'escala</string>
     <string name="quick_action_showhide_osmbugs_title">Mostra/amaga notes OSM</string>
     <string name="quick_action_osmbugs_show">Mostra notes OSM</string>
@@ -2739,20 +2739,20 @@ OsmAnd és de codi obert i es desenvolupa activament . Tothom pot recolzar l\'ap
     <string name="quick_action_showhide_osmbugs_descr">Prement el botó d\'acció es mostraran o ocultaran notes OSM al mapa.</string>
     <string name="sorted_by_distance">Ordenat per distància</string>
     <string name="search_favorites">Cerca a preferits</string>
-    <string name="private_access_routing_req">La vostra destinació és dins una zona amb accés privat. Voleu admetre l\'accés a vies privades en aquest trajecte?</string>
+    <string name="private_access_routing_req">La vostra destinació és dins una zona amb accés privat. Voleu admetre l\'accés per vies privades en aquest trajecte?</string>
     <string name="restart_search">Reprèn la cerca</string>
     <string name="increase_search_radius">Augmenta el radi de cerca</string>
     <string name="nothing_found">No s\'ha trobat res :(</string>
-    <string name="nothing_found_descr">Proveu canviant la consulta de cerca o augmentant el radi de cerca</string>
+    <string name="nothing_found_descr">Modifiqueu la consulta de cerca o augmenteu el radi de cerca</string>
     <string name="mapillary_widget">Giny Mapillary</string>
     <string name="mapillary_widget_descr">Us permet fer aportacions a Mapillary de seguida</string>
-    <string name="mapillary_descr">Fotografies dels carrers a la xarxa per tothom. Descobriu llocs, col·laboreu, enregistreu el món.</string>
+    <string name="mapillary_descr">Fotografies a nivell de carrer a la xarxa per tothom. Descobriu llocs, col·laboreu, enregistreu el món.</string>
     <string name="mapillary">Mapillary</string>
     <string name="shared_string_add_photos">Afegeix fotos</string>
-    <string name="mapillary_action_descr">Col·labora amb Mapillary amb les vostres imatges d\'aquesta posició a nivell de carrer.</string>
-    <string name="plugin_mapillary_descr">Fotografies a nivell de carrer per a tothom. Descobriu llocs, col·laboreu, captureu el món.</string>
+    <string name="mapillary_action_descr">Col·laboreu mitjançant Mapillary amb les vostres imatges a nivell de carrer d\'aquest lloc.</string>
+    <string name="plugin_mapillary_descr">Fotografies a nivell de carrer per a tothom. Descobriu llocs, col·laboreu, enregistreu el món.</string>
     <string name="shared_string_install">Instal·la</string>
-    <string name="improve_coverage_mapillary">Millora la cobertura amb Mapillary</string>
+    <string name="improve_coverage_mapillary">Millora la cobertura fotogràfica amb Mapillary</string>
     <string name="improve_coverage_install_mapillary_desc">Podeu afegir les vostres fotos o sèrie de fotos a aquesta ubicació de mapa.
 \n
 \nPer fer-ho cal que us instal·leu l\'aplicació Mapillary des de Google Play.</string>
