@@ -476,6 +476,11 @@ public class GPXUtilities {
 						point.distance = segmentDistance;
 						timeDiff = (int)((point.time - prev.time) / 1000);
 
+						//Last resort: Derive speed values from displacement if track does not originally contain speed
+						if (!hasSpeedInTrack && speed == 0 && timeDiff > 0) {
+							speed = calculations[0] / timeDiff;
+						}
+
 						// Motion detection:
 						//   speed > 0  uses GPS chipset's motion detection
 						//   calculations[0] > minDisplacment * time  is heuristic needed because tracks may be filtered at recording time, so points at rest may not be present in file at all
@@ -489,11 +494,6 @@ public class GPXUtilities {
 						//		timeMoving0 = timeMoving0 + (point.time - prev.time);
 						//		totalDistanceMoving0 += calculations[0];
 						//	}
-
-						//Last resorz: Derive speed values from displacment if track does not originally contain speed
-						if (!hasSpeedInTrack && speed == 0 && timeDiff > 0) {
-							speed = calculations[0] / timeDiff;
-						}
 					}
 
 					elevation1.time = timeDiff;
