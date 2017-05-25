@@ -3088,4 +3088,7 @@
 	<string name="poi_crossing_barrier_double_half">平交道柵欄︰雙一半的</string>
 	<string name="poi_crossing_bell_yes">平交道警鐘</string>
 	<string name="poi_crossing_bell_no">平交道警鐘︰無</string>
+	<string name="poi_crossing_light_yes">平交道燈號</string>
+	<string name="poi_crossing_light_no">平交道燈號︰無</string>
+	<string name="poi_crossing_on_demand_yes">平交道遮斷器需要時開</string>
 	</resources>
