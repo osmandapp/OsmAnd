@@ -1260,9 +1260,11 @@ public class GpxUiHelper {
 		if (analysis.hasSpeedInTrack()) {
 			yAxis.setTextColor(ActivityCompat.getColor(mChart.getContext(), R.color.gpx_chart_orange_label));
 			yAxis.setGridColor(ActivityCompat.getColor(mChart.getContext(), R.color.gpx_chart_orange_grid));
+			((TextView) textSpdView.findViewById(R.id.text_spd_value)).setTextColor(R.color.gpx_chart_orange);
 		} else {
 			yAxis.setTextColor(ActivityCompat.getColor(mChart.getContext(), R.color.gpx_chart_red_label));
 			yAxis.setGridColor(ActivityCompat.getColor(mChart.getContext(), R.color.gpx_chart_red_grid));
+			((TextView) textSpdView.findViewById(R.id.text_spd_value)).setTextColor(R.color.gpx_chart_red);
 		}
 
 		yAxis.setAxisMinimum(0f);
