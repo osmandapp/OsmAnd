@@ -1,6 +1,8 @@
 package net.osmand.plus.myplaces;
 
 import android.app.Activity;
+import android.app.Dialog;
+import android.app.ProgressDialog;
 import android.content.Context;
 import android.content.DialogInterface;
 import android.content.Intent;
@@ -1230,49 +1232,41 @@ public class AvailableGPXFragment extends OsmandExpandableListFragment {
 		}
 	}
 
-	private List<GpxDisplayGroup> getGpxFile(GpxInfo gpxInfo) {
-		if (gpxInfo.gpx == null) {
-			return new ArrayList<>();
-		}
-		List<GpxDisplayGroup> displayGroups = selectedGpxHelper.collectDisplayGroups(gpxInfo.gpx);
-		if (gpxInfo.file != null) {
-			SelectedGpxFile sf = selectedGpxHelper.getSelectedFileByPath(gpxInfo.gpx.path);
-			if (sf != null && gpxInfo.file != null && sf.getDisplayGroups() != null) {
-				displayGroups = sf.getDisplayGroups();
-			}
-		}
-		return displayGroups;
-	}
-
 	private class OpenGpxDetailsTask extends AsyncTask<Void, Void, GPXFile> {
 
 		GpxInfo gpxInfo;
+		Dialog progressDialog;
 
 		OpenGpxDetailsTask(GpxInfo gpxInfo) {
 			this.gpxInfo = gpxInfo;
 		}
 
 		@Override
+		protected void onPreExecute() {
+			progressDialog = new ProgressDialog(getActivity());
+			progressDialog.setCancelable(false);
+			progressDialog.setTitle(R.string.loading_data);
+			progressDialog.show();
+		}
+
+		@Override
 		protected GPXFile doInBackground(Void... voids) {
-			GPXFile result = null;
+			GPXFile result;
 			if (gpxInfo.gpx == null) {
 				if (gpxInfo.file == null) {
 					result = getMyApplication().getSavingTrackHelper().getCurrentGpx();
 				} else {
-					SelectedGpxFile selectedGpxFile = selectedGpxHelper.getSelectedFileByPath(gpxInfo.file.getAbsolutePath());
-					if (selectedGpxFile != null && selectedGpxFile.getGpxFile() != null) {
-						result = selectedGpxFile.getGpxFile();
-					} else {
-						result = GPXUtilities.loadGPXFile(getActivity(), gpxInfo.file);
-					}
+					result = GPXUtilities.loadGPXFile(getActivity(), gpxInfo.file);
 				}
+			} else {
+				return gpxInfo.gpx;
 			}
 			return result;
 		}
 
 		@Override
 		protected void onPostExecute(GPXFile gpxFile) {
-			List<GpxDisplayGroup> gpxDisplayGroupList = getGpxFile(gpxInfo);
+			List<GpxDisplayGroup> gpxDisplayGroupList = selectedGpxHelper.collectDisplayGroups(gpxFile);
 			List<GpxDisplayItem> items = null;
 			for (GpxDisplayGroup group : gpxDisplayGroupList) {
 				if (group.getType() == GpxSelectionHelper.GpxDisplayItemType.TRACK_SEGMENT) {
@@ -1280,9 +1274,9 @@ public class AvailableGPXFragment extends OsmandExpandableListFragment {
 					break;
 				}
 			}
-			if (items != null) {
+			if (items != null && items.size() > 0) {
 				GpxDisplayItem gpxItem = items.get(0);
-				if (gpxItem.analysis != null) {
+				if (gpxItem != null && gpxItem.analysis != null) {
 					ArrayList<GPXDataSetType> list = new ArrayList<>();
 					if (gpxItem.analysis.hasElevationData) {
 						list.add(GPXDataSetType.ALTITUDE);
@@ -1306,6 +1300,7 @@ public class AvailableGPXFragment extends OsmandExpandableListFragment {
 					MapActivity.launchMapActivityMoveToTop(getActivity());
 				}
 			}
+			progressDialog.cancel();
 		}
 	}
 
