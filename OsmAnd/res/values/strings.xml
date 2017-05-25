@@ -14,7 +14,7 @@
     <string name="open_mapillary">Open Mapillary</string>
     <string name="shared_string_install">Install</string>
     <string name="improve_coverage_mapillary">Improve coverage with Mapillary</string>
-    <string name="improve_coverage_install_mapillary_desc">You can take your own photos or series of photos and add it to this map location.\n\nTo do this you need install Mapillary app from Google Play.</string>
+    <string name="improve_coverage_install_mapillary_desc">You can take your own photos or series of photos and attach them to this map location.\n\nTo do this you need install the Mapillary app from the Google Play Store.</string>
     <string name="online_photos">Online photos</string>
     <string name="shared_string_add_photos">Add photos</string>
     <string name="no_photos_descr">We don\'t have photos for this location</string>
