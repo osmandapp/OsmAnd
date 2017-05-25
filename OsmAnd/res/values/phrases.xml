@@ -86,6 +86,7 @@
 	<string name="poi_vacuum_cleaner_filter">Vacuum cleaner</string>
 	<string name="poi_free_flying_characteristic">Characteristic</string>
 	<string name="poi_cafeteria">Cafeteria</string>
+	<string name="poi_zoo_type">Type</string>
 
 <!--  categories -->
 	<string name="poi_shop">Store</string>
@@ -3356,5 +3357,16 @@
 	<string name="poi_resort_kids_camp">Kids camp</string>
 	<string name="poi_music_school">Music school</string>
 	<string name="poi_language_school">Language school</string>
+
+	<string name="poi_life_ring">Life ring</string>
+
+	<string name="poi_zoo_petting_zoo">Petting zoo</string>
+	<string name="poi_zoo_wildlife_park">Wildlife park</string>
+	<string name="poi_zoo_enclosure">Enclosure</string>
+	<string name="poi_zoo_safari_park">Safari park</string>
+	<string name="poi_zoo_birds">Birds</string>
+	<string name="poi_zoo_aviary">Aviary</string>
+	<string name="poi_zoo_falconry">Falconry</string>
+	<string name="poi_zoo_reptile">Reptile</string>
 
 </resources>

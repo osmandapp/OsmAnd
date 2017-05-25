@@ -3387,4 +3387,17 @@
 	<string name="poi_music_school">Музыкальная школа</string>
 	<string name="poi_language_school">Школа иностранных языков</string>
 
+	<string name="poi_life_ring">Спасательный круг</string>
+
+	<string name="poi_zoo_petting_zoo">Контактный зоопарк</string>
+	<string name="poi_zoo_wildlife_park">Парк дикой природы</string>
+	<string name="poi_zoo_enclosure">Клетки</string>
+	<string name="poi_zoo_safari_park">Сафари парк</string>
+	<string name="poi_zoo_birds">Птицы</string>
+	<string name="poi_zoo_aviary">Вольер для птиц</string>
+	<string name="poi_zoo_falconry">Соколиная охота</string>
+	<string name="poi_zoo_reptile">Рептилии</string>
+
+	<string name="poi_zoo_type">Тип</string>
+
 </resources>
