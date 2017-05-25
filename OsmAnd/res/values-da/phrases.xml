@@ -3452,4 +3452,14 @@
 
 <string name="poi_life_ring">Redningskrans</string>
 
+<string name="poi_zoo_type">Type</string>
+
+<string name="poi_zoo_petting_zoo">Kæledyrs-zoo</string>
+	<string name="poi_zoo_enclosure">Kabinet</string>
+	<string name="poi_zoo_safari_park">Safari park</string>
+	<string name="poi_zoo_birds">Fugle</string>
+	<string name="poi_zoo_aviary">Voliere</string>
+	<string name="poi_zoo_falconry">Falkejagt</string>
+	<string name="poi_zoo_reptile">Krybdyr</string>
+
 </resources>
