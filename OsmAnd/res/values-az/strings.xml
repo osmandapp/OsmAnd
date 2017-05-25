@@ -1314,4 +1314,5 @@
     <string name="maps_define_edit">Təyin/Düzəliş et…</string>
     <string name="driving_region_europe_asia">Avropa, Asiya, Latın Amerikası və oxşar</string>
     <string name="driving_region_uk">Böyük Britaniya, Hindistan və oxşar</string>
+    <string name="map_widget_view_direction">Baxış istiqaməti</string>
     </resources>
