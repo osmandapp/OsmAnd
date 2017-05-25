@@ -28,8 +28,7 @@ public class AudioFocusHelperImpl implements AudioManager.OnAudioFocusChangeList
 		}
 
 	@Override
-	public boolean abandonFocus(Context context, ApplicationMode applicationMode, int streamType)
-	{
+	public boolean abandonFocus(Context context, ApplicationMode applicationMode, int streamType) {
 		AudioManager mAudioManager = (AudioManager) context.getSystemService(Context.AUDIO_SERVICE);
 		return AudioManager.AUDIOFOCUS_REQUEST_GRANTED == mAudioManager.abandonAudioFocus(this);
 	}
@@ -44,7 +43,7 @@ public class AudioFocusHelperImpl implements AudioManager.OnAudioFocusChangeList
 		// Hardy, 2017-05-25: (See https://developer.android.com/guide/topics/media-apps/volume-and-earphones.html)
 //		if (focusChange == AudioManager.AUDIOFOCUS_LOSS) {
 			// Usually: Permanent loss of audio focus, stop playback here
-			//RoutingHelper.getVoiceRouter().interruptRouteCommands();
+//			RoutingHelper.getVoiceRouter().interruptRouteCommands();
 //		} else if (focusChange == AudioManager.AUDIOFOCUS_LOSS_TRANSIENT) {
 			// Usually: Pause playback
 //		} else if (focusChange == AudioManager.AUDIOFOCUS_LOSS_TRANSIENT_CAN_DUCK) {
