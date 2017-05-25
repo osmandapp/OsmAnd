@@ -64,159 +64,131 @@ public class QuickActionRegistry {
     }
 
     public List<QuickAction> getQuickActions() {
-
         List<QuickAction> actions = new ArrayList<>();
         actions.addAll(quickActions);
-
         return actions;
     }
 
-    public List<QuickAction> getFilteredQuickActions() {
+	public List<QuickAction> getFilteredQuickActions() {
 
-        List<QuickAction> actions = getQuickActions();
-        List<QuickAction> filteredActions = new ArrayList<>();
+		List<QuickAction> actions = getQuickActions();
+		List<QuickAction> filteredActions = new ArrayList<>();
 
-        for (QuickAction action: actions){
+		for (QuickAction action : actions) {
+			boolean skip = false;
+			if (OsmandPlugin.getEnabledPlugin(AudioVideoNotesPlugin.class) == null) {
 
-            boolean skip = false;
+				if (action.type == TakeAudioNoteAction.TYPE || action.type == TakePhotoNoteAction.TYPE
+						|| action.type == TakeVideoNoteAction.TYPE) {
+					skip = true;
+				}
+			}
 
-            if (OsmandPlugin.getEnabledPlugin(AudioVideoNotesPlugin.class) == null) {
+			if (OsmandPlugin.getEnabledPlugin(ParkingPositionPlugin.class) == null) {
+				if (action.type == ParkingAction.TYPE) {
+					skip = true;
+				}
+			}
 
-                if (action.type == TakeAudioNoteAction.TYPE ||
-                        action.type == TakePhotoNoteAction.TYPE ||
-                        action.type == TakeVideoNoteAction.TYPE) {
+			if (OsmandPlugin.getEnabledPlugin(NauticalMapsPlugin.class) == null) {
+				if (action.type == MapStyleAction.TYPE) {
+					if (((MapStyleAction) QuickActionFactory.produceAction(action)).getFilteredStyles().isEmpty()) {
+						skip = true;
+					}
+				}
+			}
 
-                    skip = true;
-                }
-            }
+			if (OsmandPlugin.getEnabledPlugin(OsmandRasterMapsPlugin.class) == null) {
+				if (action.type == MapSourceAction.TYPE) {
+					skip = true;
+				}
+			}
+			if (OsmandPlugin.getEnabledPlugin(OsmEditingPlugin.class) == null) {
+				if (action.type == AddPOIAction.TYPE) {
+					skip = true;
+				}
+				if (action.type == AddOSMBugAction.TYPE) {
+					skip = true;
+				}
+			}
+			if (!skip) {
+				filteredActions.add(action);
+			}
+		}
 
-            if (OsmandPlugin.getEnabledPlugin(ParkingPositionPlugin.class) == null) {
-
-                if (action.type == ParkingAction.TYPE) {
-                    skip = true;
-                }
-            }
-
-            if (OsmandPlugin.getEnabledPlugin(NauticalMapsPlugin.class) == null) {
-
-                if (action.type == MapStyleAction.TYPE) {
-
-                    if (((MapStyleAction) QuickActionFactory.produceAction(action)).getFilteredStyles().isEmpty()){
-
-                        skip = true;
-                    }
-                }
-            }
-
-            if (OsmandPlugin.getEnabledPlugin(OsmandRasterMapsPlugin.class) == null) {
-
-                if (action.type == MapSourceAction.TYPE) {
-                    skip = true;
-                }
-            }
-
-            if (OsmandPlugin.getEnabledPlugin(OsmEditingPlugin.class) == null) {
-
-                if (action.type == AddPOIAction.TYPE) {
-                    skip = true;
-                }
-
-                if (action.type == AddOSMBugAction.TYPE) {
-                    skip = true;
-                }
-            }
-
-            if (!skip) filteredActions.add(action);
-        }
-
-        return filteredActions;
-    }
+		return filteredActions;
+	}
 
     public void addQuickAction(QuickAction action){
-
         quickActions.add(action);
-
         settings.QUICK_ACTION_LIST.set(factory.quickActionListToString(quickActions));
     }
 
     public void deleteQuickAction(QuickAction action){
-
         int index = quickActions.indexOf(action);
-
-        if (index >= 0) quickActions.remove(index);
-
+        if (index >= 0) {
+        	quickActions.remove(index);
+        }
         settings.QUICK_ACTION_LIST.set(factory.quickActionListToString(quickActions));
     }
 
     public void deleteQuickAction(int id){
 
         int index = -1;
-
         for (QuickAction action: quickActions){
-
-            if (action.id == id)
-                index = quickActions.indexOf(action);
+            if (action.id == id) {
+            	index = quickActions.indexOf(action);
+            }
         }
-
-        if (index >= 0) quickActions.remove(index);
-
+        if (index >= 0) {
+        	quickActions.remove(index);
+        }
         settings.QUICK_ACTION_LIST.set(factory.quickActionListToString(quickActions));
     }
 
     public void updateQuickAction(QuickAction action){
-
         int index = quickActions.indexOf(action);
-
-        if (index >= 0) quickActions.set(index, action);
-
+        if (index >= 0) {
+        	quickActions.set(index, action);
+        }
         settings.QUICK_ACTION_LIST.set(factory.quickActionListToString(quickActions));
     }
 
     public void updateQuickActions(List<QuickAction>  quickActions){
-
         this.quickActions.clear();
         this.quickActions.addAll(quickActions);
-
         settings.QUICK_ACTION_LIST.set(factory.quickActionListToString(this.quickActions));
     }
 
     public QuickAction getQuickAction(long id){
-
         for (QuickAction action: quickActions){
-
-            if (action.id == id) return action;
+            if (action.id == id) {
+            	return action;
+            }
         }
-
         return null;
     }
 
     public boolean isNameUnique(QuickAction action, Context context){
-
-
         for (QuickAction a: quickActions){
-
             if (action.id != a.id) {
-
-                if (action.getName(context).equals(a.getName(context)))
+                if (action.getName(context).equals(a.getName(context))) {
                     return false;
+                }
             }
         }
-
         return true;
     }
 
     public QuickAction generateUniqueName(QuickAction action, Context context) {
-
         int number = 0;
         String name = action.getName(context);
-
         while (true) {
-
             number++;
-
             action.setName(name + " (" + number + ")");
-
-            if (isNameUnique(action, context)) return action;
+            if (isNameUnique(action, context)) {
+            	return action;
+            }
         }
     }
 
