@@ -1,5 +1,6 @@
 <?xml version='1.0' encoding='UTF-8'?>
 <resources>
+    <string name="distance_corrected">Korrigierte Distanz</string>
     <string name="wiki_around">Wikipedia-Artikel zur Umgebung</string>
     <string name="osmand_plus_extended_description_4000_chars_v2">"
 OsmAnd Maps &amp; Navigation - Orte finden und Routen berechnen ohne Internetverbindung. Dazu einfach Landkarten für beliebige Länder herunterladen, bevor man sich auf Reisen in unbekannte Regionen begibt.
