@@ -2850,22 +2850,22 @@ OsmAnd 是開放原始碼，而且正在積極的開發。應用程式從報告�
     <string name="quick_action_osmbugs_hide">隱藏 OSM 註解</string>
     <string name="search_favorites">搜尋我的收藏</string>
     <string name="quick_action_showhide_osmbugs_descr">輕點動作按鈕會在地圖上顯示或隱藏 OSM 註解。</string>
-    <string name="private_access_routing_req">您的目的地位於私人通路的區域。您想為這次旅程進入這條路私人道路嗎？</string>
+    <string name="private_access_routing_req">您的目的地位處私人通路的區域。您想為這次旅程進入這條路私人道路嗎？</string>
     <string name="restart_search">重新開始搜尋</string>
     <string name="increase_search_radius">增加搜尋半徑</string>
     <string name="nothing_found">没有找到 :(</string>
-    <string name="nothing_found_descr">試著變更搜尋的詢問或增加搜尋的半徑</string>
+    <string name="nothing_found_descr">變更搜尋的查詢或增加搜尋的半徑</string>
     <string name="mapillary">Mapillary</string>
     <string name="mapillary_widget">Mapillary 小工具</string>
     <string name="mapillary_widget_descr">讓您迅速的提供給 Mapillary</string>
-    <string name="mapillary_descr">把線上街頭照片給每個人。發覺地點、協作、抓取世界。</string>
+    <string name="mapillary_descr">把線上街道平面照片給每個人。發覺地點、協作、抓取世界。</string>
     <string name="shared_string_add_photos">新增照片</string>
-    <string name="mapillary_action_descr">在這個地點，用 Mapillary 貢獻您的線上街頭照片。</string>
-    <string name="plugin_mapillary_descr">將街頭照片給每個人。發覺地點、協作、抓取世界。</string>
+    <string name="mapillary_action_descr">在這個地點，透過 Mapillary 貢獻您的線上街頭照片。</string>
+    <string name="plugin_mapillary_descr">將街道平面照片給每個人。發覺地點、協作、抓取世界。</string>
     <string name="online_photos">線上照片</string>
     <string name="no_photos_descr">我們沒有在這個位置的照片</string>
     <string name="shared_string_install">安裝</string>
-    <string name="improve_coverage_mapillary">提高 Mapillary 覆蓋範圍</string>
+    <string name="improve_coverage_mapillary">提高 Mapillary 照片覆蓋的範圍</string>
     <string name="improve_coverage_install_mapillary_desc">您可以拍攝自己的照片或系列照片，並將其增加到此地圖位置。 
 \n 
 \n要做到這些，您需要去 Google Play 安裝 Mapillary 應用程式。</string>
