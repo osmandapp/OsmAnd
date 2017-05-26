@@ -1245,7 +1245,7 @@ public class AvailableGPXFragment extends OsmandExpandableListFragment {
 
 		@Override
 		protected void onPreExecute() {
-			if (gpxInfo.file != null) {
+			if (gpxInfo.gpx == null && gpxInfo.file != null) {
 				progressDialog = new ProgressDialog(getActivity());
 				progressDialog.setTitle("");
 				progressDialog.setMessage(getActivity().getResources().getString(R.string.loading_data));
@@ -1256,9 +1256,9 @@ public class AvailableGPXFragment extends OsmandExpandableListFragment {
 
 		@Override
 		protected GpxDisplayItem doInBackground(Void... voids) {
-			GPXFile gpxFile;
 			List<GpxDisplayGroup> gpxDisplayGroupList;
 			if (gpxInfo.gpx == null) {
+				GPXFile gpxFile;
 				if (gpxInfo.file == null) {
 					gpxFile = getMyApplication().getSavingTrackHelper().getCurrentGpx();
 				} else {
@@ -1285,6 +1285,9 @@ public class AvailableGPXFragment extends OsmandExpandableListFragment {
 
 		@Override
 		protected void onPostExecute(GpxDisplayItem gpxItem) {
+			if (progressDialog != null) {
+				progressDialog.dismiss();
+			}
 			if (gpxItem != null && gpxItem.analysis != null) {
 				ArrayList<GPXDataSetType> list = new ArrayList<>();
 				if (gpxItem.analysis.hasElevationData) {
@@ -1306,10 +1309,7 @@ public class AvailableGPXFragment extends OsmandExpandableListFragment {
 						new PointDescription(PointDescription.POINT_TYPE_WPT, gpxItem.name),
 						false,
 						gpxItem);
-				progressDialog.dismiss();
 				MapActivity.launchMapActivityMoveToTop(getActivity());
-			} else {
-				progressDialog.dismiss();
 			}
 		}
 	}
