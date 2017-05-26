@@ -48,7 +48,6 @@ import net.osmand.plus.osmedit.OsmPoint;
 import net.osmand.plus.osmedit.dialogs.PoiSubTypeDialogFragment;
 import net.osmand.plus.quickaction.CreateEditActionDialog;
 import net.osmand.plus.quickaction.QuickAction;
-import net.osmand.plus.quickaction.QuickActionFactory;
 import net.osmand.util.Algorithms;
 
 import java.lang.reflect.Type;
@@ -540,9 +539,13 @@ public class AddPOIAction extends QuickAction {
 	}
 
 	private void setTagsIntoParams(Map<String, String> tags) {
-		HashMap<String, String> padrams = getParams();
+		if (!tags.containsKey(POI_TYPE_TAG)) {
+			Map<String, String> additionalTags = new HashMap<>(tags);
+			tags.clear();
+			tags.put(POI_TYPE_TAG, getTagsFromParams().get(POI_TYPE_TAG));
+			tags.putAll(additionalTags);
+		}
 		getParams().put(KEY_TAG, new Gson().toJson(tags));
-		padrams = getParams();
 	}
 
 	private void putTagIntoParams(String tag, String value) {
