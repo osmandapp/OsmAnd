@@ -2187,4 +2187,11 @@
     <string name="get_for">Вземи за %1$s</string>
     <string name="get_started">Първи стъпки</string>
     <string name="route_stops_before">%1$s спирания преди</string>
+    <string name="shared_string_install">Инсталиране</string>
+    <string name="improve_coverage_install_mapillary_desc">Можете да направите снимки и да ги прикачите към това място.
+\nЗа целта инсталирайте приложението Mapillary app от Google Play Store.</string>
+    <string name="online_photos">Онлайн снимки</string>
+    <string name="shared_string_add_photos">Добавяне на снимки</string>
+    <string name="no_photos_descr">Ние нямаме снимки за това местоположение</string>
+    <string name="mapillary_action_descr">Допринесе с ваши собствени снимки на улично ниво за това място чрез Mapillary.</string>
     </resources>
