@@ -3361,4 +3361,14 @@
 
 	<string name="poi_life_ring">Рятувальний круг</string>
 
+<string name="poi_zoo_type">Тип</string>
+
+<string name="poi_zoo_petting_zoo">Контактний зоопарк</string>
+	<string name="poi_zoo_wildlife_park">Парк дикої природи</string>
+	<string name="poi_zoo_safari_park">Сафарі-парк</string>
+	<string name="poi_zoo_birds">Птахи</string>
+	<string name="poi_zoo_aviary">Вольєр для птахів</string>
+	<string name="poi_zoo_falconry">Соколине полювання</string>
+	<string name="poi_zoo_reptile">Рептилії</string>
+
 </resources>
