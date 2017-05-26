@@ -2819,14 +2819,14 @@ De Afganujo al Zimbabvo, de Aŭstralio al Usono, Argentino, Brazilo, Kanado, Fra
     <string name="mapillary">Mapillary</string>
     <string name="mapillary_widget">Mapillary-fenestraĵo</string>
     <string name="mapillary_widget_descr">Ebligas al vi rapide kontribui al Mapillary</string>
-    <string name="mapillary_descr">Enretaj strat-bildoj por ĉiuj. Esplori lokojn, kunlabori kaj foti la mondon.</string>
+    <string name="mapillary_descr">Enretaj strat-nivelaj fotoj por ĉiuj. Esplori lokojn, kunlabori kaj foti la mondon.</string>
     <string name="shared_string_add_photos">Aldoni fotojn</string>
     <string name="mapillary_action_descr">Kontribui per viaj strat-nivelaj vidaĵoj de tiu ĉi loko per Mapillary.</string>
     <string name="plugin_mapillary_descr">Strat-nivelaj fotoj por ĉiuj. Esplori lokojn, kunlabori kaj foti la mondon.</string>
     <string name="online_photos">Enretaj fotoj</string>
     <string name="no_photos_descr">Ni ne havas fotojn pri tiu ĉi loko</string>
     <string name="shared_string_install">Instali</string>
-    <string name="improve_coverage_mapillary">Pliigi map-atingon de Mapillary</string>
+    <string name="improve_coverage_mapillary">Pliigi fotan atingon de Mapillary</string>
     <string name="improve_coverage_install_mapillary_desc">Vi povas fari viajn proprajn fotojn aŭ seriojn da fotoj kaj aldoni ilin al tiu ĉi map-loko.
 \n
 \nPor fari tion, vi devas instali aplikaĵon Mapillary el Google Play.</string>
