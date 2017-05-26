@@ -946,7 +946,7 @@
 	<string name="poi_money_lender">Pruntedonantejo</string>
 	<string name="poi_pawnbroker">Lombardejo</string>
 	<string name="poi_accountant">Kontista oficejo</string>
-	<string name="poi_bitcoin_yes">Bitmono akcepta</string>
+	<string name="poi_bitcoin_yes">Bitmono akceptata</string>
 
 	<string name="poi_cave_entrance">Enirejo al kaverno</string>
 	<string name="poi_peak">Montpinto</string>
@@ -1121,8 +1121,8 @@
 	<string name="poi_fee_no">ne</string>
 	<string name="poi_drinking_water_yes">jes</string>
 	<string name="poi_drinking_water_no">ne</string>
-	<string name="poi_supervised_yes">Gardata</string>
-	<string name="poi_supervised_no">Ne-gardata</string>
+	<string name="poi_supervised_yes">gardata</string>
+	<string name="poi_supervised_no">negardata</string>
 	<string name="poi_seasonal_yes">jes</string>
 	<string name="poi_seasonal_no">ne</string>
 	<string name="poi_seasonal_dry_season">seka sezono</string>
@@ -1405,21 +1405,21 @@
 	<string name="poi_stars_7">Steloj: 7</string>
 	<string name="poi_love_hotel">Amor-hotelo</string>
 
-	<string name="poi_payment_coins_yes">Moneroj</string>
+	<string name="poi_payment_coins_yes">moneroj</string>
 	<string name="poi_payment_coins_no">Moneroj malakceptataj</string>
-	<string name="poi_payment_coins_0.5">Moneroj $0,5</string>
-	<string name="poi_payment_coins_50c12">Moneroj €0,5, €1 kaj €2</string>
-	<string name="poi_payment_telephone_cards_yes">Telefonkartoj</string>
+	<string name="poi_payment_coins_0.5">moneroj $0,5</string>
+	<string name="poi_payment_coins_50c12">moneroj €0,5, €1 kaj €2</string>
+	<string name="poi_payment_telephone_cards_yes">telefonkartoj</string>
 	<string name="poi_payment_telephone_cards_no">Telefonkartoj malakceptataj</string>
-	<string name="poi_payment_credit_cards_yes">Kreditkartoj</string>
+	<string name="poi_payment_credit_cards_yes">kreditkartoj</string>
 	<string name="poi_payment_credit_cards_no">Kreditkartoj malakceptataj</string>
-	<string name="poi_payment_notes_yes">Monbiletoj</string>
+	<string name="poi_payment_notes_yes">monbiletoj</string>
 	<string name="poi_payment_notes_no">Monbiletoj malakceptataj</string>
-	<string name="poi_payment_electronic_purses_yes">Antaŭpagitaj kartoj</string>
+	<string name="poi_payment_electronic_purses_yes">antaŭpagitaj kartoj</string>
 	<string name="poi_payment_electronic_purses_no">Antaŭpagitaj kartoj malakceptataj</string>
-	<string name="poi_payment_cash_yes">Kontanta mono</string>
+	<string name="poi_payment_cash_yes">kontanta mono</string>
 	<string name="poi_payment_cash_no">Kontanta mono malakceptata</string>
-	<string name="poi_payment_debit_cards_yes">Debetkartoj</string>
+	<string name="poi_payment_debit_cards_yes">debetkartoj</string>
 	<string name="poi_payment_debit_cards_no">Debetkartoj malakceptataj</string>
 	<string name="poi_payment_bitcoin_yes">Bitmono (Bitcoin)</string>
 	<string name="poi_payment_bitcoin_no">Bitmono (Bitcoin) malakceptata</string>
@@ -1446,7 +1446,7 @@
 	<string name="poi_payment_visa_electron_no">Visa Electron kartoj malakceptataj</string>
 	<string name="poi_payment_litecoin_yes">Litecoin</string>
 	<string name="poi_payment_litecoin_no">Litecoin malakceptata</string>
-	<string name="poi_payment_cheque_yes">Ĉekoj</string>
+	<string name="poi_payment_cheque_yes">ĉekoj</string>
 	<string name="poi_payment_cheque_no">Ĉekoj malakceptataj</string>
 	<string name="poi_payment_pikepass_yes">PIKEPASS</string>
 	<string name="poi_payment_pikepass_no">PIKEPASS malakceptata</string>
@@ -1454,7 +1454,7 @@
 	<string name="poi_payment_visa_debit_yes">Visa Debit</string>
 	<string name="poi_payment_visa_debit_no">Visa Debit kartoj malakceptataj</string>
 	<string name="poi_payment_cryptocurrencies_no">Ĉifrovalutoj malakceptataj</string>
-	<string name="poi_payment_others_yes">Aliaj</string>
+	<string name="poi_payment_others_yes">aliaj</string>
 	<string name="poi_payment_others_no">Aliaj pag-manieroj malakceptataj</string>
 	<string name="poi_payment_routex_yes">Routex</string>
 	<string name="poi_payment_routex_no">Routex brulaĵ-kartoj malakceptataj</string>
@@ -1462,7 +1462,7 @@
 	<string name="poi_payment_bancomat_no">Bancomat (Itala reto) kartoj malakceptataj</string>
 	<string name="poi_payment_icsf_yes">IC Stored Fare</string>
 	<string name="poi_payment_icsf_no">IC Stored Fare kartoj malakceptataj</string>
-	<string name="poi_payment_prepaid_ticket_yes">Antaŭpagitaj biletoj</string>
+	<string name="poi_payment_prepaid_ticket_yes">antaŭpagitaj biletoj</string>
 	<string name="poi_payment_jcb_yes">JCB</string>
 	<string name="poi_payment_jcb_no">JCB kartoj malakceptataj</string>
 	<string name="poi_payment_laser_yes">Laser (Irlanda reto)</string>
@@ -1485,7 +1485,7 @@
 	<string name="poi_payment_dogecoin_no">Dogecoin malakceptata</string>
 	<string name="poi_payment_cibus_yes">Cibus</string>
 	<string name="poi_payment_cibus_no">Cibus kartoj malakceptataj</string>
-	<string name="poi_payment_wire_transfer_yes">Ĝiroj</string>
+	<string name="poi_payment_wire_transfer_yes">ĝiroj</string>
 	<string name="poi_payment_wire_transfer_no">Ĝiroj malakceptataj</string>
 	<string name="poi_payment_ep_cash_yes">GeldKarte</string>
 	<string name="poi_payment_ep_cash_no">GeldKarte kartoj malakceptataj</string>
@@ -1513,7 +1513,7 @@
 	<string name="poi_payment_roadrunner_no">Roadrunner kartoj malakceptataj</string>
 	<string name="poi_payment_svg_yes">SVG</string>
 	<string name="poi_payment_svg_no">SVG brulaĵ-kartoj malakceptataj</string>
-	<string name="poi_payment_sms_yes">Per SMS</string>
+	<string name="poi_payment_sms_yes">per SMS</string>
 	<string name="poi_payment_sms_no">Pagoj per SMS malakceptataj</string>
 	<string name="poi_payment_ov_chipkaart_yes">OV-Chipkaart</string>
 	<string name="poi_payment_ov_chipkaart_no">OV-Chipkaart kartoj malakceptataj</string>
@@ -1523,15 +1523,15 @@
 	<string name="poi_payment_sube_no">SUBE kartoj malakceptataj</string>
 	<string name="poi_payment_via_verde_yes">Via Verde</string>
 	<string name="poi_payment_via_verde_no">Via Verde malakceptata</string>
-	<string name="poi_payment_meal_voucher_yes">Viand-kuponoj</string>
+	<string name="poi_payment_meal_voucher_yes">viand-kuponoj</string>
 	<string name="poi_payment_meal_voucher_no">Viand-kuponoj malakceptataj</string>
 	<string name="poi_payment_paypal_yes">PayPal</string>
 	<string name="poi_payment_paypal_no">PayPal malakceptata</string>
 	<string name="poi_payment_u_key_yes">U-Key</string>
 	<string name="poi_payment_u_key_no">U-Key malakceptata</string>
-	<string name="poi_payment_token_yes">Ĵetonoj</string>
+	<string name="poi_payment_token_yes">ĵetonoj</string>
 	<string name="poi_payment_token_no">Ĵetonoj malakceptataj</string>
-	<string name="poi_payment_gift_card_yes">Donac-kartoj</string>
+	<string name="poi_payment_gift_card_yes">donac-kartoj</string>
 	<string name="poi_payment_gift_card_no">Donac-kartoj malakceptataj</string>
 	<string name="poi_payment_golden_crown_yes">Golden Crown</string>
 	<string name="poi_payment_golden_crown_no">Golden Crown kartoj malakceptataj</string>
@@ -1543,7 +1543,7 @@
 	<string name="poi_payment_mtsmoney_yes">MTS-Money</string>
 	<string name="poi_payment_yandexmoney_yes">Yandex.Money</string>
 	<string name="poi_payment_yandexmoney_no">Yandex.Money malakceptata</string>
-	<string name="poi_description_payment">Maniero de pagado</string>
+	<string name="poi_description_payment">Pagmaniero</string>
 
 	<string name="poi_internet_access_fee_yes">Interret-aliro - pagenda</string>
 	<string name="poi_internet_access_fee_no">Interret-aliro - senpaga</string>
@@ -2923,7 +2923,7 @@
 	<string name="poi_health_person_type_technician">Laboranto de sanservo: teĥnikisto</string>
 	<string name="poi_health_person_type_witchdoctor">Laboranto de sanservo: fuŝkuracisto (ĉarlatano)</string>
 
-	<string name="poi_payment_account_cards_yes">Bankokartoj</string>
+	<string name="poi_payment_account_cards_yes">bankokartoj</string>
 	<string name="poi_payment_account_cards_no">Bankokartoj malakceptataj</string>
 	<string name="poi_health_specialty_general_yes">ĝenerala (familia kuracado)</string>
 	<string name="poi_health_specialty_ophthalmology_yes">okul-medicino (oftalmologio)</string>
@@ -3369,5 +3369,16 @@
 	<string name="poi_language_school">Lingva lernejo</string>
 
 <string name="poi_life_ring">Savoringo</string>
+
+<string name="poi_zoo_type">Speco</string>
+
+<string name="poi_zoo_petting_zoo">besteta ĝardeno</string>
+	<string name="poi_zoo_wildlife_park">sovaĝ-besta parko</string>
+	<string name="poi_zoo_enclosure">kaĝita</string>
+	<string name="poi_zoo_safari_park">safari-parko</string>
+	<string name="poi_zoo_birds">bird-kaĝoj</string>
+	<string name="poi_zoo_aviary">birdejo</string>
+	<string name="poi_zoo_falconry">rabbirda parko</string>
+	<string name="poi_zoo_reptile">rampulejo</string>
 
 </resources>
