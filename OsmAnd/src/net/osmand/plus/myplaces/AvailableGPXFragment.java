@@ -94,6 +94,8 @@ import java.util.Map;
 import java.util.Set;
 import java.util.regex.Pattern;
 
+import static net.osmand.plus.R.id.items;
+
 public class AvailableGPXFragment extends OsmandExpandableListFragment {
 
 	public static final Pattern ILLEGAL_PATH_NAME_CHARACTERS = Pattern.compile("[?:\"*|<>]");
@@ -1232,11 +1234,10 @@ public class AvailableGPXFragment extends OsmandExpandableListFragment {
 		}
 	}
 
-	private class OpenGpxDetailsTask extends AsyncTask<Void, Void, Void> {
+	private class OpenGpxDetailsTask extends AsyncTask<Void, Void, GpxDisplayItem> {
 
 		GpxInfo gpxInfo;
 		ProgressDialog progressDialog;
-		List<GpxDisplayGroup> gpxDisplayGroupList;
 
 		OpenGpxDetailsTask(GpxInfo gpxInfo) {
 			this.gpxInfo = gpxInfo;
@@ -1244,69 +1245,71 @@ public class AvailableGPXFragment extends OsmandExpandableListFragment {
 
 		@Override
 		protected void onPreExecute() {
-			progressDialog = new ProgressDialog(getActivity());
-			progressDialog.setTitle("");
-			progressDialog.setMessage(getActivity().getResources().getString(R.string.loading_data));
-			progressDialog.setCancelable(false);
+			if (gpxInfo.file != null) {
+				progressDialog = new ProgressDialog(getActivity());
+				progressDialog.setTitle("");
+				progressDialog.setMessage(getActivity().getResources().getString(R.string.loading_data));
+				progressDialog.setCancelable(false);
+				progressDialog.show();
+			}
 		}
 
 		@Override
-		protected Void doInBackground(Void... voids) {
-			GPXFile result;
+		protected GpxDisplayItem doInBackground(Void... voids) {
+			GPXFile gpxFile;
+			List<GpxDisplayGroup> gpxDisplayGroupList;
 			if (gpxInfo.gpx == null) {
 				if (gpxInfo.file == null) {
-					result = getMyApplication().getSavingTrackHelper().getCurrentGpx();
+					gpxFile = getMyApplication().getSavingTrackHelper().getCurrentGpx();
 				} else {
-					publishProgress();
-					result = GPXUtilities.loadGPXFile(getActivity(), gpxInfo.file);
+					gpxFile = GPXUtilities.loadGPXFile(getActivity(), gpxInfo.file);
 				}
-				gpxDisplayGroupList = selectedGpxHelper.collectDisplayGroups(result);
+				gpxDisplayGroupList = selectedGpxHelper.collectDisplayGroups(gpxFile);
 			} else {
 				gpxDisplayGroupList = selectedGpxHelper.collectDisplayGroups(gpxInfo.gpx);
+			}
+			List<GpxDisplayItem> items = null;
+			if (gpxDisplayGroupList != null) {
+				for (GpxDisplayGroup group : gpxDisplayGroupList) {
+					if (group.getType() == GpxSelectionHelper.GpxDisplayItemType.TRACK_SEGMENT) {
+						items = group.getModifiableList();
+						break;
+					}
+				}
+			}
+			if (items != null && items.size() > 0) {
+				return items.get(0);
 			}
 			return null;
 		}
 
 		@Override
-		protected void onProgressUpdate(Void... values) {
-			progressDialog.show();
-		}
-
-		@Override
-		protected void onPostExecute(Void aVoid) {
-			List<GpxDisplayItem> items = null;
-			for (GpxDisplayGroup group : gpxDisplayGroupList) {
-				if (group.getType() == GpxSelectionHelper.GpxDisplayItemType.TRACK_SEGMENT) {
-					items = group.getModifiableList();
-					break;
+		protected void onPostExecute(GpxDisplayItem gpxItem) {
+			if (gpxItem != null && gpxItem.analysis != null) {
+				ArrayList<GPXDataSetType> list = new ArrayList<>();
+				if (gpxItem.analysis.hasElevationData) {
+					list.add(GPXDataSetType.ALTITUDE);
 				}
-			}
-			if (items != null && items.size() > 0) {
-				GpxDisplayItem gpxItem = items.get(0);
-				if (gpxItem != null && gpxItem.analysis != null) {
-					ArrayList<GPXDataSetType> list = new ArrayList<>();
-					if (gpxItem.analysis.hasElevationData) {
-						list.add(GPXDataSetType.ALTITUDE);
-					}
-					if (gpxItem.analysis.hasSpeedData) {
-						list.add(GPXDataSetType.SPEED);
-					} else {
-						list.add(GPXDataSetType.SLOPE);
-					}
-					gpxItem.chartTypes = list.toArray(new GPXDataSetType[list.size()]);
-					if (gpxItem.group.getGpx() != null) {
-						gpxItem.wasHidden = app.getSelectedGpxHelper().getSelectedFileByPath(gpxInfo.file.getAbsolutePath()) == null;
-						app.getSelectedGpxHelper().setGpxFileToDisplay(gpxItem.group.getGpx());
-					}
-					final OsmandSettings settings = app.getSettings();
-					settings.setMapLocationToShow(gpxItem.locationStart.lat, gpxItem.locationStart.lon,
-							settings.getLastKnownMapZoom(),
-							new PointDescription(PointDescription.POINT_TYPE_WPT, gpxItem.name),
-							false,
-							gpxItem);
-					progressDialog.dismiss();
-					MapActivity.launchMapActivityMoveToTop(getActivity());
+				if (gpxItem.analysis.hasSpeedData) {
+					list.add(GPXDataSetType.SPEED);
+				} else {
+					list.add(GPXDataSetType.SLOPE);
 				}
+				gpxItem.chartTypes = list.toArray(new GPXDataSetType[list.size()]);
+				if (gpxItem.group.getGpx() != null) {
+					gpxItem.wasHidden = app.getSelectedGpxHelper().getSelectedFileByPath(gpxInfo.file.getAbsolutePath()) == null;
+					app.getSelectedGpxHelper().setGpxFileToDisplay(gpxItem.group.getGpx());
+				}
+				final OsmandSettings settings = app.getSettings();
+				settings.setMapLocationToShow(gpxItem.locationStart.lat, gpxItem.locationStart.lon,
+						settings.getLastKnownMapZoom(),
+						new PointDescription(PointDescription.POINT_TYPE_WPT, gpxItem.name),
+						false,
+						gpxItem);
+				progressDialog.dismiss();
+				MapActivity.launchMapActivityMoveToTop(getActivity());
+			} else {
+				progressDialog.dismiss();
 			}
 		}
 	}
