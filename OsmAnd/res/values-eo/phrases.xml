@@ -924,7 +924,7 @@
 	<string name="poi_craft_computer">Komputilistejo</string>
 	<string name="poi_funeral_directors">Tombistejo</string>
 	<string name="poi_beauty">Beligejo</string>
-	<string name="poi_beauty_salon_nails">Ung-beligado</string>
+	<string name="poi_beauty_salon_nails">ung-beligado</string>
 	<string name="poi_hairdresser">Frizejo</string>
 	<string name="poi_massage">Salono de masaĝo</string>
 	<string name="poi_tattoo">Tatuejo</string>
@@ -1291,7 +1291,7 @@
 
 	<string name="poi_commercial">Oficeja tereno</string>
 	<string name="poi_covered_yes">jes</string>
-	<string name="poi_covered_no">sen-tegmenta</string>
+	<string name="poi_covered_no">Sentegmenta</string>
 
 	<string name="poi_smoking_no">malpermesata</string>
 	<string name="poi_smoking_outside">permesata nur ekstere</string>
@@ -2158,14 +2158,14 @@
 	<string name="poi_refugee_yes">Servo por rifuĝintoj</string>
 	<string name="poi_refugee_no">Por rifuĝintoj: ne</string>
 
-	<string name="poi_social_facility_group_home">Grupa hejmo</string>
-	<string name="poi_social_facility_assisted_living">Subtenata loĝado</string>
-	<string name="poi_social_facility_outreach">Senpag-konsilejo</string>
-	<string name="poi_social_facility_food_bank">Manĝ-disdonejo</string>
-	<string name="poi_social_facility_shelter">Azilo</string>
-	<string name="poi_social_facility_ambulatory_care">Sanhelpejo</string>
-	<string name="poi_social_facility_workshop">Laborejo</string>
-	<string name="poi_social_facility_day_care">Tag-prizorgejo</string>
+	<string name="poi_social_facility_group_home">grupa hejmo</string>
+	<string name="poi_social_facility_assisted_living">subtenata loĝado</string>
+	<string name="poi_social_facility_outreach">senpaga konsilejo</string>
+	<string name="poi_social_facility_food_bank">manĝ-disdonejo</string>
+	<string name="poi_social_facility_shelter">azilo</string>
+	<string name="poi_social_facility_ambulatory_care">flegejo</string>
+	<string name="poi_social_facility_workshop">laborejo</string>
+	<string name="poi_social_facility_day_care">taga prizorgejo</string>
 
 	<string name="poi_social_facility_for_senior">maljunuloj</string>
 	<string name="poi_social_facility_for_child">infanoj</string>
