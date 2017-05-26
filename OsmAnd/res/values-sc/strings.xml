@@ -2824,22 +2824,23 @@ Pro praghere iscrie su còdighe intreu</string>
     <string name="restart_search">Torra a incumintzare sa chirca</string>
     <string name="increase_search_radius">Ismànnia su raju de chirca</string>
     <string name="nothing_found">Nudda de agatadu :(</string>
-    <string name="nothing_found_descr">Proa a mudare sos critèrios de chirca o a ismanniare su raju de chirca</string>
+    <string name="nothing_found_descr">Muda sos critèrios de chirca o a ismànnia su raju de chirca</string>
     <string name="private_access_routing_req">Sa destinatzione tua est positzionada in un\'àrea cun atzessu privadu. Boles abilitare s\'atzessu a sas istradas privadas pro custu biàgiu?</string>
     <string name="mapillary">Mapillary</string>
     <string name="mapillary_widget">Widget pro Mapillary</string>
     <string name="mapillary_widget_descr">Ti permitit de contribuire in manera lestra e fàtzile a Mapillary</string>
-    <string name="mapillary_descr">Fotografias de sas istradas in lìnia pro totus. Iscoberi logos, agiuda, catura su mundu.</string>
+    <string name="mapillary_descr">Fotografias a livellu de sas istradas in lìnia pro totus. Iscoberi logos, agiuda, catura su mundu.</string>
     <string name="shared_string_add_photos">Annanghe fotografias</string>
-    <string name="mapillary_action_descr">Contribui a Mapillary cun sas vistas tuas a livellu de s\'istrada.</string>
+    <string name="mapillary_action_descr">Contribui cun sas vistas tuas a livellu de s\'istrada pro mèdiu de Mapillary.</string>
     <string name="plugin_mapillary_descr">Fotografias a livellu de s\'istrada pro totus. Iscoberi logos, collàbora, catura su mundu.</string>
     <string name="online_photos">Fotografias in lìnia</string>
     <string name="no_photos_descr">Non tenimus fotografias pro custu logu</string>
     <string name="open_mapillary">Aberi Mapillary</string>
     <string name="shared_string_install">Installa</string>
-    <string name="improve_coverage_mapillary">Megiora sa cobertura cun Mapillary</string>
+    <string name="improve_coverage_mapillary">Megiora sa cobertura fotogràfica cun Mapillary</string>
     <string name="improve_coverage_install_mapillary_desc">Podes fàghere sas fotografias tuas (una sola o una sèrie) e las podes annànghere a custa positzione de sa mapa.
 \n
 \nPro lu fàghere depes installare s\'aplicatzione Mapillary dae Google Play.</string>
     <string name="mapillary_image">Immàgine de Mapillary</string>
+    <string name="distance_moving">Distàntzia curreta</string>
     </resources>
