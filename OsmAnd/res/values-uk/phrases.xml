@@ -3371,4 +3371,5 @@
 	<string name="poi_zoo_falconry">Соколине полювання</string>
 	<string name="poi_zoo_reptile">Рептилії</string>
 
-</resources>
+<string name="poi_zoo_enclosure">Клітки</string>
+	</resources>
