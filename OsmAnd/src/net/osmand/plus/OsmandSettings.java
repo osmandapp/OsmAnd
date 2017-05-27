@@ -999,6 +999,7 @@ public class OsmandSettings {
 
 	public final CommonPreference<Boolean> INTERRUPT_MUSIC = new BooleanPreference("interrupt_music", false).makeProfile();
 
+	public final CommonPreference<Boolean> ENABLE_PROXY = new BooleanPreference("enable_proxy", false).makeGlobal();
 	public final CommonPreference<String> PROXY_HOST = new StringPreference("proxy_host", "127.0.0.1").makeGlobal();
 	public final CommonPreference<Integer> PROXY_PORT = new IntPreference("proxy_port", 8118).makeGlobal();
 

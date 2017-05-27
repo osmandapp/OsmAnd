@@ -145,7 +145,7 @@ public class OsmandApplication extends MultiDexApplication {
 		appCustomization.setup(this);
 		osmandSettings = appCustomization.getOsmandSettings();
 		appInitializer.initVariables();
-		if (PreferenceManager.getDefaultSharedPreferences(this).getBoolean("enable_proxy", false)) {
+		if (osmandSettings.ENABLE_PROXY.get()) {
 			NetworkUtils.setProxy(osmandSettings.PROXY_HOST.get(), osmandSettings.PROXY_PORT.get());
 		}
 		if (appInitializer.isAppVersionChanged() && appInitializer.getPrevAppVersion() < AppInitializer.VERSION_2_3) {

@@ -342,6 +342,7 @@ public class SettingsGeneralActivity extends SettingsBaseActivity implements OnR
 
 
 	protected void enableProxy(boolean enable) {
+		settings.ENABLE_PROXY.set(enable);
 		if (enable) {
 			NetworkUtils.setProxy(settings.PROXY_HOST.get(), settings.PROXY_PORT.get());
 		} else {
@@ -350,7 +351,7 @@ public class SettingsGeneralActivity extends SettingsBaseActivity implements OnR
 	}
 
 	private void addProxyPrefs(PreferenceGroup proxy) {
-		CheckBoxPreference enableProxyPref = (CheckBoxPreference) proxy.findPreference("enable_proxy");
+		CheckBoxPreference enableProxyPref = (CheckBoxPreference) proxy.findPreference(settings.ENABLE_PROXY.getId());
 		enableProxyPref.setOnPreferenceChangeListener(new OnPreferenceChangeListener() {
 			@Override
 			public boolean onPreferenceChange(Preference preference, Object newValue) {
