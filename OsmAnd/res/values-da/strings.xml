@@ -3060,16 +3060,16 @@ Tidligere destination bliver sidste mellemliggende punkt.</string>
     <string name="mapillary">Mapillary</string>
     <string name="mapillary_widget">Mapillary modul</string>
     <string name="mapillary_widget_descr">Giver mulighed for hurtigt at bidrage til Mapillary</string>
-    <string name="mapillary_descr">Online gadefotos for alle. Oplev steder, samarbejd, indfang verden.</string>
+    <string name="mapillary_descr">Online fotos for alle på gadenivea. Oplev steder, samarbejd, indfang verden.</string>
     <string name="shared_string_add_photos">Tilføj fotos</string>
-    <string name="mapillary_action_descr">Bidrag med visninger af placeringen på gadeniveau med Mapillary.</string>
+    <string name="mapillary_action_descr">Bidrag med visninger af placeringen på gadeniveau via Mapillary.</string>
     <string name="plugin_mapillary_descr">Billeder på gadeniveau for alle. Opdag steder, samarbejd, indfang verden.</string>
     <string name="online_photos">Online fotos</string>
     <string name="no_photos_descr">Ingen fotos til denne placering</string>
     <string name="shared_string_install">Installer</string>
     <string name="improve_coverage_mapillary">Forbedre fotodækningen med Mapillary</string>
-    <string name="improve_coverage_install_mapillary_desc">Tag egne fotos eller serier af fotos og føje dem til denne kortplacering.
-\n
+    <string name="improve_coverage_install_mapillary_desc">Tag egne fotos eller serier af fotos og føj dem til denne placering. 
+\n 
 \nFor at gøre dette skal Mapillary installeres fra Google Play.</string>
     <string name="open_mapillary">Åbn Mapillary</string>
     <string name="mapillary_image">Mapillary billede</string>
