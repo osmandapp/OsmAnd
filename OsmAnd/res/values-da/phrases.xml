@@ -3454,13 +3454,13 @@
 
 <string name="poi_zoo_type">Type</string>
 
-<string name="poi_zoo_petting_zoo">Kæledyrs-zoo</string>
-	<string name="poi_zoo_enclosure">Kabinet</string>
+<string name="poi_zoo_petting_zoo">Børnezoo</string>
+	<string name="poi_zoo_enclosure">Indhegning</string>
 	<string name="poi_zoo_safari_park">Safaripark</string>
 	<string name="poi_zoo_birds">Fugle</string>
 	<string name="poi_zoo_aviary">Voliere</string>
-	<string name="poi_zoo_falconry">Falkejagt</string>
+	<string name="poi_zoo_falconry">Falkoneri</string>
 	<string name="poi_zoo_reptile">Krybdyr</string>
 
-<string name="poi_zoo_wildlife_park">Dyreppark</string>
+<string name="poi_zoo_wildlife_park">Dyrepark</string>
 	</resources>
