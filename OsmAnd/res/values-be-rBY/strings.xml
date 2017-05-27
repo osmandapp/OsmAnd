@@ -2552,14 +2552,14 @@ Moduli:
     <string name="restart_search">Pierazapuscić pošuk</string>
     <string name="increase_search_radius">Pavialičyć radyus pošuku</string>
     <string name="nothing_found">Ničoha nie znojdziena :(</string>
-    <string name="nothing_found_descr">Pasprabujćie źmianić zapyt ci pavialičyć radyus pošuku</string>
+    <string name="nothing_found_descr">Zmianić zapyt pošuku ci pavialičyć radyus pošuku</string>
     <string name="quick_action_showhide_osmbugs_title">Pakazać/schavać natatki OSM</string>
     <string name="quick_action_osmbugs_show">Pakazać natatki OSM</string>
     <string name="quick_action_osmbugs_hide">Schavać natatki OSM</string>
     <string name="quick_action_showhide_osmbugs_descr">Nacisk na knopky dziejańnia pakaža/schavaje natatki OSM na mapie.</string>
     <string name="sorted_by_distance">Adsartavana pa adlehłaści</string>
     <string name="search_favorites">Pošuk u abranych</string>
-    <string name="srtm_menu_download_descr">Dla prahladu konturnych linij na mapie, vam treba spampavać mapu konturnych linij hetaha rehijonu.</string>
+    <string name="srtm_menu_download_descr">Kab ubačyć konturnyja linii, vam nieabchodna spampavać admyslovuju mapu dlia hetaha rehijona.</string>
     <string name="shared_string_plugin">Dadatak</string>
     <string name="srtm_purchase_header">Dla prahladu konturnych linij na mapie, vam nieabchodna nabyć i ŭstalavać dadatak «Contour Lines»</string>
     <string name="srtm_color_scheme">Kalarovaja schiema</string>
@@ -2584,7 +2584,7 @@ Moduli:
     <string name="quick_action_auto_zoom_off">Aŭtamaštab adklučany</string>
     <string name="quick_action_add_destination">Dadać miesca pryznačeńnia</string>
     <string name="quick_action_replace_destination">Zamianić punkt pryznačeńnia</string>
-    <string name="private_access_routing_req">Vaš punkt pryznačeńnia znachdzicca na pryvatnaj terytoryi. Vy chočacie dazvolić dostup da pryvatnych daroh dla hetaj pajezdki?</string>
+    <string name="private_access_routing_req">Vaš punkt pryznačennia znachodzicca na pryvatnaj terytoryi. Vy chočacie dazvolić dostup da pryvatnych daroh dlia hetaj pajezdki?</string>
     <string name="subscribe_email_error">Pamyłka</string>
     <string name="depth_contour_descr">Nabor map, jakija źmiaščajuć kontury i kropki marskich hłybiń (na asnovie sietki ŭ 30 vuhłavych siekund).</string>
     <string name="sea_depth_thanks">Dziakuj za pakupku konuraŭ marskich hłybiń!</string>
@@ -2681,7 +2681,7 @@ Moduli:
     <string name="quick_action_add_osm_bug">Dadać OSM natatku</string>
     <string name="quick_action_navigation_voice">Holas ukl/adkl</string>
     <string name="shared_string_add_photos">Dadać fatahrafii</string>
-    <string name="no_photos_descr">U nas pakul niama fatahrafij hetaha miesca</string>
+    <string name="no_photos_descr">My nie majem fatahrafij dlia hetaha miesca</string>
     <string name="mapillary_widget">Vidžet Mapillary</string>
     <string name="mapillary">Мapillary</string>
     <string name="quick_action_map_underlay_action">Dadać padkladku</string>
@@ -2720,16 +2720,16 @@ Moduli:
     <string name="no_overlay">Biez nakładki</string>
     <string name="open_mapillary">Adkryć Mapillary</string>
     <string name="shared_string_install">Ustalavać</string>
-    <string name="improve_coverage_mapillary">Palepšyć pakryćcio z Mapillary</string>
+    <string name="improve_coverage_mapillary">Paliepšyć fota-pakryccio Mapillary</string>
     <string name="online_photos">Anłajn fatahrafii</string>
-    <string name="improve_coverage_install_mapillary_desc">Vy možacie zrabić ułasnyja fatahrafii ci padborku fatahrafij i dadać ih da hetaha miesca na mapie.
-\n
-\nKab zrabić tak, nieabchodna ŭstalavać Mapillary z Google Play.</string>
-    <string name="mapillary_action_descr">Padzialicca svaimi vuličnymi vidami hetaj miascovasci s Mapillary.</string>
-    <string name="mapillary_descr">Vuličnyja-Fota anlajn dla ŭsich. Adkryvajcie dla siabie miescy, dapamahajcie, zdymajcie śviet.</string>
-    <string name="plugin_mapillary_descr">Vuličnyja Fota dla Ŭsich. Adkryvajcie dla siabie miescy, dapamahajcie, zdymajcie śviet.</string>
+    <string name="improve_coverage_install_mapillary_desc">Vy možacie zrabić ulasnyja fatahrafii ci padborku fatahrafij i dadać ich da hetaha miesca na mapie. 
+\n 
+\nKab zrabić tak, nieabchodna ŭstaliavać Mapillary z Google Play.</string>
+    <string name="mapillary_action_descr">Padzialicca svaimi vuličnymi vidami hetaj miascovasci praz Mapillary.</string>
+    <string name="mapillary_descr">Vuličnyja fota anlajn dlia kožnaha. Adkryvajcie dlia siabie miescy, dapamahajcie, zdymajcie sviet.</string>
+    <string name="plugin_mapillary_descr">Vuličnyja fatahrafii dlia ŭsich. Adkryvajcie dlia siabie miescy, dapamahajcie, zdymajcie sviet.</string>
     <string name="mapillary_image">Vyjava Mapillary</string>
-    <string name="mapillary_widget_descr">Dazvalaje chutka ŭniesci svoj układ u Mapillary</string>
+    <string name="mapillary_widget_descr">Dazvaliaje vam chutki ŭniosak ŭ Mapillary</string>
     <string name="relief_smoothness_factor_descr">Pieravažny reljef: raŭninny abo ŭzhorysty</string>
     <string name="routing_attr_height_obstacles_description">Vykaryctoŭvać dadzienyja ab reljefu miascovaści, jakija pradstaŭlajucca SRTM, ASTER i EU-DEM</string>
     <string name="rendering_attr_depthContours_description">Pakazvać kontury i punkty hlybini</string>
@@ -2746,4 +2746,45 @@ Moduli:
     <string name="quick_action_add_destination_desc">Nacisk na knopku dadasć punkt pryznačennia pa centry ekrana. Papiaredni punkt pryznačennia stanie apošniaj pramiežkavaj kropkaj.</string>
     <string name="quick_action_replace_destination_desc">Nacisk na knopku zamienić punkt pryznačennia pa centry ekrana.</string>
     <string name="quick_action_add_first_intermediate_desc">Nacisk na knopku dadasć pieršuju pramiežkavuju kropku pa centry ekrana.</string>
+    <string name="distance_moving">Dystancyja papraŭlienaja</string>
+    <string name="subscribe_email_desc">Padpišyciesia na našu rassylku ab znižkach na prahramu i atrymajcie 3 dadatkovyja mapy!</string>
+    <string name="analyze_on_map">Analizuj na mapie</string>
+    <string name="do_not_send_anonymous_app_usage">Na adsylać ananimnaj statystyki vykarystannia</string>
+    <string name="do_not_send_anonymous_app_usage_desc">OsmAnd zbiraje infarmacyju ab tym, jaki častki prahramy vykarystoŭvajucca vami. Vaša miescaznachodžannie nikoli nie adpraŭliajecca, jak i ŭsio, što vy ŭvodzicie, jakija voblasci prahliadajecie, što šukajecie ci spampoŭvajecie.</string>
+    <string name="do_not_show_startup_messages_desc">Pakazvaje paviedamlienni pra znižki i spiecyjaĺnyja lakaĺnyja padziei</string>
+    <string name="routing_attr_relief_smoothness_factor_plains_name">Pahorysty</string>
+    <string name="route_points_category_name">Pavaroty na maršrucie</string>
+    <string name="track_points_category_name">Značnyja kropki maršruta</string>
+    <string name="shared_string_time_moving">Čas ruchu</string>
+    <string name="shared_string_time_span">Časavy dyjapazon</string>
+    <string name="routing_attr_relief_smoothness_factor_name">Abrać pierasiečanasć miascovasci</string>
+    <string name="routing_attr_height_obstacles_name">Vykarystoŭvać danyja vyšyni</string>
+    <string name="rendering_attr_depthContours_name">Kontury marskich hlybiń</string>
+    <string name="release_2_6">" • Novaja funkcyja: knopka chutkaha dziejannia 
+\n 
+\n • Paliepšany adkaz na žesty sensarnaha ekrana 
+\n 
+\n • Novy šryft mapy, jaki pakryvaje boĺš lakaliaju 
+\n 
+\n • Padtrymka TTS dlia varyjanaŭ rehijanaĺnych moŭ 
+\n 
+\n • Paliapšenni vizualizacyi ŭ niekatorych styliach mapaŭ i Vikipedyi 
+\n 
+\n • Padtrymka Open Location Code (OLC) 
+\n 
+\n • Adliustavannie profiliu vyšyni, ŭchilu i chutkasci dlia zapisnych GPX-trekaŭ i različanych maršrutaŭ 
+\n 
+\n • Nalady «Styĺ kiravannia» i paliapšennie lohiki ŭ rovarnaj maršrutyzacyi 
+\n 
+\n • Nalady dlia vykarystannia danych vyšyni ŭ rovarnaj maršrutyzacyi 
+\n 
+\n • Mnostva inšych paliapšenniaŭ i vypraŭlienniaŭ pamylak 
+\n 
+\n i šmat inšaha… "</string>
+    <string name="auto_split_recording_title">Aŭtamatyčnaje dzialiennie zapisaŭ paslia pieraryva</string>
+    <string name="auto_split_recording_descr">Pačać novy siehmient paslia 6 minutnaha pierapynku, novy trek — paslia 2 hadzinnaha pierapynku, ci novy fajl paslia doŭhaha pierapynku (jak zmianiliasia data).</string>
+    <string name="rendering_attr_contourDensity_name">Častaść haryzantaliaŭ</string>
+    <string name="rendering_value_medium_w_name">Siaredniaja</string>
+    <string name="rendering_value_low_name">Nizkaja</string>
+    <string name="rendering_attr_contourWidth_name">Taŭščynia haryzantaliaŭ</string>
     </resources>
