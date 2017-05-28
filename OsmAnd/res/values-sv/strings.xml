@@ -2540,7 +2540,7 @@ Vänligen tillhandahåll fullständig kod</string>
     <string name="restart_search">Starta om sökningen</string>
     <string name="increase_search_radius">Utöka sökradien</string>
     <string name="nothing_found">Hittade ingenting :(</string>
-    <string name="nothing_found_descr">Försök med att ändra sökorden eller utöka sökradien</string>
+    <string name="nothing_found_descr">Ändra sökord eller utöka sökradien</string>
     <string name="sorted_by_distance">Sorterat efter avstånd</string>
     <string name="search_favorites">Sökfavoriter</string>
     <string name="shared_string_plugin">Insticksmodul</string>
