@@ -2654,7 +2654,7 @@ Moduli:
     <string name="rendering_value_dark_brown_name">Ciomna-karyčnievy</string>
     <string name="search_hint">Uviadzicie nazvu horada, adras, POI</string>
     <string name="translit_name_if_miss">Tranślitaravać kali nazva na %1$s adsutničaje</string>
-    <string name="translit_names"/>
+    <string name="translit_names">Translitaracyja nazvaŭ</string>
     <string name="edit_filter">Redahavać katehoryi</string>
     <string name="subcategories">Padkatehoryi</string>
     <string name="selected_categories">Abranyja katehoryi</string>
@@ -2787,4 +2787,45 @@ Moduli:
     <string name="rendering_value_medium_w_name">Siaredniaja</string>
     <string name="rendering_value_low_name">Nizkaja</string>
     <string name="rendering_attr_contourWidth_name">Taŭščynia haryzantaliaŭ</string>
+    <string name="rendering_value_high_name">Vysokaja</string>
+    <string name="legacy_search">Sastarely pošuk</string>
+    <string name="show_legacy_search">Pakazvać sastarely pošuk</string>
+    <string name="show_legacy_search_desc">Dazvolić sastarely pošuk u meniu</string>
+    <string name="wiki_around">Blizkija artykuly ŭ Vikipedyi</string>
+    <string name="route_roundabout_short">Zbočcie na %1$d źjeździe</string>
+    <string name="gpx_no_tracks_title">U vas jašče niama śliadoŭ</string>
+    <string name="gpx_no_tracks_title_folder">Vy taksama možacie dadać śliady ŭ katalioh</string>
+    <string name="trip_rec_notification_settings_desc">Pakazvać apaviaščeńnie, jakoje dazvolić pačać zapis z dapamohaj knopki \"Zapis padarožža\"</string>
+    <string name="shared_string_notifications">Paviedamlieńni</string>
+    <string name="shared_string_paused">Prypynieny</string>
+    <string name="release_2_5">" • Ikonki na mapie, jakija moža naciskać, 
+\n 
+\n • Pošuk liubych POI: Pošuk restaranaŭ pavodlie kuchni abo kiempinhaŭ z peŭnymi vyhodami, 
+\n 
+\n • Novy styĺ mapy \"OsmAnd Topo\" dlia vielasipiedystaŭ i piešych turystaŭ. 
+\n 
+\n • Paliapšeńnie zapisu śliedu, 
+\n 
+\n • Paliapšeńnie apaviaščeńniaŭ pry navihacyi (Android Wear) 
+\n 
+\n • Mnostva inšych paliapšeńniaŭ i vypraŭlieńniaŭ, 
+\n 
+\n i mnohaje inšaje ... "</string>
+    <string name="save_track_min_speed_descr">Vybierycie minimaĺnuju chutkaść, pry pieravyšeńni jakoj punkt budzie zapisany ŭ ślied</string>
+    <string name="save_track_min_distance">Minimaĺnaja dystancyja dlia zapisu</string>
+    <string name="save_track_min_distance_descr">Vybierycie adliehlaść, pry pieravyšeńni jakoj punkt budzie zapisany ŭ ślied</string>
+    <string name="save_track_precision">Minimaĺnaja dakladnaść žurnaliavannia</string>
+    <string name="save_track_precision_descr">Abiarycie minimaĺnuju dakladnaść dlia kropki, kab być zažurnaliavanaj</string>
+    <string name="christmas_desc">Napiaredadni kaliadnych i navahodnich śviataŭ, vy možacie vybrać dlia adliustravańnia POI, źviazanyja z Kaliadami: jelki, kirmašy i da t.p.</string>
+    <string name="rendering_attr_contourColorScheme_name">Kolieravaja schiema haryzantaliaŭ</string>
+    <string name="rendering_attr_surfaceIntegrity_name">Jakaść darožnaha pakryćcia</string>
+    <string name="create_custom_poi">Stvaryć ulasny fiĺtr</string>
+    <string name="custom_search">Ulasny pošuk</string>
+    <string name="shared_string_filters">Fiĺtry</string>
+    <string name="apply_filters">Užyć fiĺtry</string>
+    <string name="save_filter">Zachavać fiĺtar</string>
+    <string name="delete_filter">Vydalić fiĺtr</string>
+    <string name="new_filter">Novy fiĺtar</string>
+    <string name="new_filter_desc">Kali laski, uviadzicie nazvu novaha fiĺtra. Jon budzie dadadzieny ŭ spis katehoryj.</string>
+    <string name="rendering_value_fine_name">Vieĺmi tonki</string>
     </resources>
