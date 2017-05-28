@@ -3025,7 +3025,7 @@ Tidligere destination bliver sidste mellemliggende punkt.</string>
     <string name="select_city">Vælg by</string>
     <string name="select_postcode">Vælg postnummer</string>
     <string name="type_address">Indtast adresse</string>
-    <string name="select_street">Vælg gader</string>
+    <string name="select_street">Vælg gade</string>
     <string name="shared_string_in_name">i %1$s</string>
     <string name="shared_string_overview">Oversigt</string>
     <string name="animate_my_location">Animér placering</string>
