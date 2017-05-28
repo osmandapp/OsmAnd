@@ -46,7 +46,7 @@ public class OsmAndLocationProvider implements SensorEventListener {
 
 	public static final int REQUEST_LOCATION_PERMISSION = 100;
 
-	private static final String SIMULATED_PROVIDER = "OsmAnd";
+	public static final String SIMULATED_PROVIDER = "OsmAnd";
 
 
 	public interface OsmAndLocationListener {
