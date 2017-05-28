@@ -497,6 +497,10 @@ public class FavoritesTreeFragment extends OsmandExpandableListFragment {
 			@Override
 			protected void onPostExecute(Void res) {
 				hideProgressBar();
+				if(getActivity() == null) {
+					// user quit application
+					return;
+				}
 				try {
 					if (src != null && dst != null) {
 						Algorithms.fileCopy(src, dst);
@@ -518,7 +522,7 @@ public class FavoritesTreeFragment extends OsmandExpandableListFragment {
 					sendIntent.setType("text/plain");
 					startActivity(sendIntent);
 				} catch (IOException e) {
-					//Toast.makeText(getActivity(), "Error sharing favorites: " + e.getMessage(), Toast.LENGTH_LONG).show();
+					Toast.makeText(getActivity(), "Error sharing favorites: " + e.getMessage(), Toast.LENGTH_SHORT).show();
 					e.printStackTrace();
 				}
 			}
