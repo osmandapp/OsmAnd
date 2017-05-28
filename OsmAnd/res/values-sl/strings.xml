@@ -1028,7 +1028,7 @@ Pomembnejše lastnosti:
     <string name="recording_context_menu_delete">Izbriši posnetek</string>
     <string name="recording_is_recorded">Zvok oziroma video se snema. Za ustavitev pritisnite gumb ustavi na gradniku.</string>
     <string name="layer_recordings">Sloj posnetka</string>
-    <string name="shared_string_control_start">Začni</string>
+    <string name="shared_string_control_start">Začni ...</string>
 
 
     <string name="av_def_action_video">Snemanje videa</string>
@@ -1900,7 +1900,7 @@ ZŠ (β) %2$s</string>
     <string name="shared_string_is_open">Odpri</string>
     <string name="shared_string_message">Sporočilo</string>
     <string name="welcome_header">Dobrodošli</string>
-    <string name="shared_string_go">Začni</string>
+    <string name="shared_string_go">Začni -&gt;</string>
     <string name="osmand_parking_overdue">prekoračen čas</string>
     <string name="shared_string_places">Kraji</string>
     <string name="watch">Poglej</string>
@@ -2864,12 +2864,12 @@ Koda predstavlja območje: %1$s x %2$s</string>
     <string name="mapillary_widget">Gradnik Mapillary</string>
     <string name="mapillary">Mapillary</string>
     <string name="shared_string_install">Namesti</string>
-    <string name="improve_coverage_mapillary">Izboljšajte pokritost prek sistema Mapillary</string>
+    <string name="improve_coverage_mapillary">Izboljšajte slikovno pokritost prek sistema Mapillary</string>
     <string name="improve_coverage_install_mapillary_desc">Uporabite lahko lastne fotografije ali posnetke in jih dodate na to mesto na zemljevidu.
 \n
 \nZa tovrstno sodelovanje mora biti nameščen program Mapillary prek Google Play.</string>
     <string name="online_photos">Spletne fotografije</string>
-    <string name="no_photos_descr">Za to mesto še ni dodanih fotografij</string>
+    <string name="no_photos_descr">Za to mesto še ni objavljenih fotografij</string>
     <string name="mapillary_action_descr">Sodelujete lahko s posnetki ulic za to mesto prek programa Mapillary.</string>
     <string name="mapillary_widget_descr">Omogoča hitro posodobitev območja prek sistema Mapillary</string>
     <string name="mapillary_descr">Spletne fotografije ulic za vsakogar. Odkrijte mesta, sodelujte in zajemite svet.</string>
