@@ -3094,4 +3094,14 @@
 	<string name="poi_addr_housename">家名</string>
 
 
+	<string name="poi_health_facility_type_field_hospital">保健施設:野外病院</string>
+	<string name="poi_health_facility_type_counselling_centre">保健施設:カウンセリングセンター</string>
+	<string name="poi_health_facility_type_laboratory">保健施設:医療研究機関</string>
+	<string name="poi_health_facility_type_therapy">保健施設:健康増進施設</string>
+	<string name="poi_health_facility_type_department">保健施設:特定分野(department)</string>
+	<string name="poi_health_facility_type_dispensary">保健施設:薬局</string>
+	<string name="poi_health_facility_type_first_aid">保健施設:応急措置施設</string>
+	<string name="poi_health_facility_type_nursing_home">保健施設:介護福祉施設</string>
+	<string name="poi_health_facility_type_support_group_home">保健施設:支援団体の相談所(support group home)</string>
+
 	</resources>
