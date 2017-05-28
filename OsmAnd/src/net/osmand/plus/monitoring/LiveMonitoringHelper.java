@@ -1,6 +1,5 @@
 package net.osmand.plus.monitoring;
 
-import java.io.BufferedInputStream;
 import java.io.BufferedReader;
 import java.io.InputStream;
 import java.io.InputStreamReader;
@@ -11,16 +10,17 @@ import java.text.MessageFormat;
 import java.util.ArrayList;
 import java.util.List;
 
-import javax.net.ssl.HttpsURLConnection;
 import javax.net.ssl.HostnameVerifier;
+import javax.net.ssl.HttpsURLConnection;
 import javax.net.ssl.SSLSession;
 
 import net.osmand.PlatformUtil;
+import net.osmand.data.LatLon;
 import net.osmand.plus.OsmAndLocationProvider;
 import net.osmand.plus.OsmandApplication;
 import net.osmand.plus.OsmandPlugin;
 import net.osmand.plus.OsmandSettings;
-import net.osmand.plus.R;
+import net.osmand.util.MapUtils;
 
 import org.apache.commons.logging.Log;
 
@@ -32,6 +32,7 @@ public class LiveMonitoringHelper  {
 	protected Context ctx;
 	private OsmandSettings settings;
 	private long lastTimeUpdated;
+	private LatLon lastPoint;
 	private final static Log log = PlatformUtil.getLog(LiveMonitoringHelper.class); 
 
 	public LiveMonitoringHelper(Context ctx){
@@ -44,18 +45,35 @@ public class LiveMonitoringHelper  {
 	}
 	
 	public void updateLocation(net.osmand.Location location) {
+		boolean record = false;
+		long locationTime = System.currentTimeMillis();
 		if (OsmAndLocationProvider.isPointAccurateForRouting(location) && isLiveMonitoringEnabled()
 				&& OsmAndLocationProvider.isNotSimulatedLocation(location)
 				&& OsmandPlugin.getEnabledPlugin(OsmandMonitoringPlugin.class) != null) {
-			long locationTime = System.currentTimeMillis();
 			if (locationTime - lastTimeUpdated > settings.LIVE_MONITORING_INTERVAL.get()) {
-				LiveMonitoringData data = new LiveMonitoringData((float)location.getLatitude(), (float)location.getLongitude(),
-						(float)location.getAltitude(), location.getSpeed(), location.getAccuracy(), location.getBearing(), locationTime);
-				new LiveSender().execute(data);
-				lastTimeUpdated = locationTime;
+				record = true;
+			}
+			float minDistance = settings.SAVE_TRACK_MIN_DISTANCE.get();
+			if(minDistance > 0 && lastPoint != null && MapUtils.getDistance(lastPoint, location.getLatitude(), location.getLongitude()) < 
+					minDistance) {
+				record = false;
+			}
+			float precision = settings.SAVE_TRACK_PRECISION.get();
+			if(precision > 0 && (!location.hasAccuracy() || location.getAccuracy() > precision)) {
+				record = false;
+			}
+			float minSpeed = settings.SAVE_TRACK_MIN_SPEED.get();
+			if(minSpeed > 0 && (!location.hasSpeed() || location.getSpeed() < minSpeed)) {
+				record = false;
 			}
 		}
-		
+		if(record) {
+			LiveMonitoringData data = new LiveMonitoringData((float)location.getLatitude(), (float)location.getLongitude(),
+					(float)location.getAltitude(), location.getSpeed(), location.getAccuracy(), location.getBearing(), locationTime);
+			new LiveSender().execute(data);
+			lastPoint = new LatLon(location.getLatitude(), location.getLongitude());
+			lastTimeUpdated = locationTime;
+		}
 	}
 	
 	

@@ -120,9 +120,13 @@ public class OsmAndLocationSimulation {
 			@Override
 			public void run() {
 				Location current = directions.isEmpty() ? null : new Location(directions.remove(0));
+				
 				Location prev = current;
 				long prevTime = current == null ? 0 : current.getTime();
 				float meters = metersToGoInFiveSteps(directions, current);
+				if(current != null) {
+					current.setProvider(OsmAndLocationProvider.SIMULATED_PROVIDER);
+				}
 				while (!directions.isEmpty() && routeAnimation != null) {
 					int timeout = (int) (time  * 1000);
 					float intervalTime = time;
