@@ -1340,4 +1340,14 @@
     <string name="map_viewing_item">Xəritəyə baxış</string>
     <string name="quick_action_map_style_switch">Xəritə stili “%s” olaraq dəyişdirildi.</string>
     <string name="quick_action_add_osm_bug">OSM qeyd əlavə et</string>
+    <string name="shared_string_recorded">Qeyd edildi</string>
+    <string name="shared_string_record">Qeyd et</string>
+    <string name="shared_string_trip_recording">Səyahət qeydetmə</string>
+    <string name="record_plugin_name">Səyahət qeydetmə</string>
+    <string name="monitoring_settings">Səyahət qeydetmə</string>
+    <string name="monitoring_settings_descr">Səyahətlərinizin necə qeyd ediləcəyini seçin</string>
+    <string name="av_use_external_recorder_descr">Video çəkmək üçün sistem proqramını istifadə et</string>
+    <string name="av_use_external_recorder">Sistem proqramını istifadə et</string>
+    <string name="recording_error">"Qeydetmə zamanı səhv baş verdi "</string>
+    <string name="recording_is_recorded">Səs/video qeyd edilir. Dayandırmaq üçün AV widget-inə basın.</string>
     </resources>
