@@ -2649,7 +2649,7 @@ El connector de mapes d\'esquí d\'OsmAnd us permet veure les pistes amb la seva
     <string name="quick_action_add_destination_desc">Prement el botó d\'acció afegireu com destinació el punt central de la pantalla. L\'anterior destí esdevindrà el darrer punt intermedi.</string>
     <string name="quick_action_replace_destination_desc">Prement el botó d\'acció substituireu la destinació actual pel punt central de la pantalla.</string>
     <string name="quick_action_add_first_intermediate_desc">Prement el botó d\'acció afegireu com primer punt intermedi el punt central de la pantalla.</string>
-    <string name="depth_contour_descr">Conjunt de mapes que conté isòbates i fondàries puntuals (segons una graella de 30\'\' d\'arc de pas).</string>
+    <string name="depth_contour_descr">Conjunt de mapes que contenen isòbates i fondàries puntuals.</string>
     <string name="shared_string_paused">En pausa</string>
     <string name="osmand_extended_description_part3">"
  Mapa
