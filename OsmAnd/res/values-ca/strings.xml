@@ -2674,10 +2674,10 @@ El connector de mapes d\'esquí d\'OsmAnd us permet veure les pistes amb la seva
     <string name="type_city_town">Introduïu el poble o ciutat</string>
     <string name="type_postcode">Introduïu el codi postal</string>
     <string name="nearest_cities">Ciutats més properes</string>
-    <string name="select_city">Seleccioneu el municipi</string>
-    <string name="select_postcode">Seleccioneu el codi postal</string>
+    <string name="select_city">Selecciona el municipi</string>
+    <string name="select_postcode">Selecciona el codi postal</string>
     <string name="osmand_plus_extended_description_part3">" Consulta del mapa • Mostra la vostra posició i orientació • Opcionalment el mapa s\'orienta segons la vostra pròpia orientació o en la direcció en que us moveu  • Deseu els vostres llocs més importants com Preferits • Mostra els PDIs (punts d\'interès) al vostre voltant • Mostra variants especials disponibles en línia, imatges de satèl·lit (de Bing),superposicions variades com traces de GPX turístiques/rutes i capes addicionals amb  transparència configurable • Opcionalment mostra els noms dels llocs en anglès, llengua local o ortografia fonètica "</string>
-    <string name="select_street">Seleccioneu carrers</string>
+    <string name="select_street">Selecciona el carrer</string>
     <string name="shared_string_in_name">inclou %1$s</string>
     <string name="type_address">Indiqueu l\'adreça</string>
     <string name="osmand_plus_extended_description_part4">"
