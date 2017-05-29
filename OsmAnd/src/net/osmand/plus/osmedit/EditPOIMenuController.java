@@ -2,7 +2,6 @@ package net.osmand.plus.osmedit;
 
 import android.content.DialogInterface;
 import android.graphics.drawable.Drawable;
-import android.support.annotation.NonNull;
 import android.support.v7.app.AlertDialog;
 
 import net.osmand.data.PointDescription;
@@ -12,7 +11,6 @@ import net.osmand.plus.activities.MapActivity;
 import net.osmand.plus.mapcontextmenu.MenuController;
 import net.osmand.plus.osmedit.OsmPoint.Action;
 import net.osmand.plus.osmedit.dialogs.SendPoiDialogFragment;
-import net.osmand.plus.osmedit.dialogs.SendPoiDialogFragment.ProgressDialogPoiUploader;
 import net.osmand.util.Algorithms;
 
 public class EditPOIMenuController extends MenuController {
@@ -20,27 +18,18 @@ public class EditPOIMenuController extends MenuController {
 	private OsmPoint osmPoint;
 	private OsmEditingPlugin plugin;
 	private String pointTypeStr;
-	private ProgressDialogPoiUploader poiUploader;
 
 	public EditPOIMenuController(final MapActivity mapActivity, PointDescription pointDescription, OsmPoint osmPoint) {
 		super(new EditPOIMenuBuilder(mapActivity, osmPoint), pointDescription, mapActivity);
 		this.osmPoint = osmPoint;
 		plugin = OsmandPlugin.getPlugin(OsmEditingPlugin.class);
 
-		poiUploader = new SendPoiDialogFragment.SimpleProgressDialogPoiUploader() {
-			@NonNull
-			@Override
-			protected MapActivity getMapActivity() {
-				return mapActivity;
-			}
-		};
-
 		leftTitleButtonController = new TitleButtonController() {
 			@Override
 			public void buttonPressed() {
 				if (plugin != null) {
-					SendPoiDialogFragment sendPoiDialogFragment = SendPoiDialogFragment.createInstance(new OsmPoint[]{getOsmPoint()});
-					sendPoiDialogFragment.setPoiUploader(poiUploader);
+					SendPoiDialogFragment sendPoiDialogFragment =
+							SendPoiDialogFragment.createInstance(new OsmPoint[]{getOsmPoint()}, SendPoiDialogFragment.PoiUploaderType.SIMPLE);
 					sendPoiDialogFragment.show(getMapActivity().getSupportFragmentManager(), SendPoiDialogFragment.TAG);
 				}
 			}

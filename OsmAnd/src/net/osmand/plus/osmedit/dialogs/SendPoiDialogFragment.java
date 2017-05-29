@@ -32,17 +32,19 @@ import java.util.Map;
 public class SendPoiDialogFragment extends DialogFragment {
 	public static final String TAG = "SendPoiDialogFragment";
 	public static final String OPENSTREETMAP_POINT = "openstreetmap_point";
+	public static final String POI_UPLOADER_TYPE = "poi_uploader_type";
 	private static String comment;
-	private ProgressDialogPoiUploader poiUploader;
 
-	public void setPoiUploader(ProgressDialogPoiUploader poiUploader) {
-		this.poiUploader = poiUploader;
+	public enum PoiUploaderType {
+		SIMPLE,
+		FRAGMENT
 	}
 
 	@NonNull
 	@Override
 	public Dialog onCreateDialog(Bundle savedInstanceState) {
 		final OsmPoint[] poi = (OsmPoint[]) getArguments().getSerializable(OPENSTREETMAP_POINT);
+		final PoiUploaderType poiUploaderType = PoiUploaderType.valueOf(getArguments().getString(POI_UPLOADER_TYPE, PoiUploaderType.SIMPLE.name()));
 		AlertDialog.Builder builder = new AlertDialog.Builder(getActivity());
 		View view = getActivity().getLayoutInflater().inflate(R.layout.send_poi_dialog, null);
 		final SwitchCompat uploadAnonymously = (SwitchCompat) view.findViewById(R.id.upload_anonymously_switch);
@@ -83,41 +85,44 @@ public class SendPoiDialogFragment extends DialogFragment {
 		});
 
 		final ProgressDialogPoiUploader progressDialogPoiUploader;
-		if (poiUploader != null) {
-			progressDialogPoiUploader = poiUploader;
+		if (poiUploaderType == PoiUploaderType.SIMPLE && getActivity() instanceof MapActivity) {
+			progressDialogPoiUploader =
+					new SendPoiDialogFragment.SimpleProgressDialogPoiUploader((MapActivity) getActivity());
 		} else {
 			progressDialogPoiUploader = (ProgressDialogPoiUploader) getParentFragment();
 		}
-
 		builder.setTitle(hasPOI ? R.string.upload_poi : R.string.upload_osm_note)
 				.setView(view)
 				.setPositiveButton(R.string.shared_string_ok, new DialogInterface.OnClickListener() {
 					@Override
 					public void onClick(DialogInterface dialog, int which) {
-						comment = messageEditText.getText().toString();
-						settings.USER_NAME.set(userNameEditText.getText().toString());
-						settings.USER_PASSWORD.set(passwordEditText.getText().toString());
-						if (comment.length() > 0) {
-							for (OsmPoint osmPoint : poi) {
-								if (osmPoint.getGroup() == OsmPoint.Group.POI) {
-									((OpenstreetmapPoint) osmPoint).setComment(comment);
-									break;
+						if (progressDialogPoiUploader != null) {
+							comment = messageEditText.getText().toString();
+							settings.USER_NAME.set(userNameEditText.getText().toString());
+							settings.USER_PASSWORD.set(passwordEditText.getText().toString());
+							if (comment.length() > 0) {
+								for (OsmPoint osmPoint : poi) {
+									if (osmPoint.getGroup() == OsmPoint.Group.POI) {
+										((OpenstreetmapPoint) osmPoint).setComment(comment);
+										break;
+									}
 								}
 							}
+							progressDialogPoiUploader.showProgressDialog(poi,
+									closeChangeSetCheckBox.isChecked(),
+									!hasPOI && uploadAnonymously.isChecked());
 						}
-						progressDialogPoiUploader.showProgressDialog(poi,
-								closeChangeSetCheckBox.isChecked(),
-								!hasPOI && uploadAnonymously.isChecked());
 					}
 				})
 				.setNegativeButton(R.string.shared_string_cancel, null);
 		return builder.create();
 	}
 
-	public static SendPoiDialogFragment createInstance(OsmPoint[] points) {
+	public static SendPoiDialogFragment createInstance(@NonNull OsmPoint[] points, @NonNull PoiUploaderType uploaderType) {
 		SendPoiDialogFragment fragment = new SendPoiDialogFragment();
 		Bundle bundle = new Bundle();
 		bundle.putSerializable(OPENSTREETMAP_POINT, points);
+		bundle.putString(POI_UPLOADER_TYPE, uploaderType.name());
 		fragment.setArguments(bundle);
 		return fragment;
 	}
@@ -126,14 +131,20 @@ public class SendPoiDialogFragment extends DialogFragment {
 		void showProgressDialog(OsmPoint[] points, boolean closeChangeSet, boolean anonymously);
 	}
 
-	public static abstract class SimpleProgressDialogPoiUploader implements ProgressDialogPoiUploader {
+	public static class SimpleProgressDialogPoiUploader implements ProgressDialogPoiUploader {
+
+		private MapActivity mapActivity;
+
+		public SimpleProgressDialogPoiUploader(MapActivity mapActivity) {
+			this.mapActivity = mapActivity;
+		}
+
 		@Override
 		public void showProgressDialog(OsmPoint[] points, boolean closeChangeSet, boolean anonymously) {
 			ProgressDialogFragment dialog = ProgressDialogFragment.createInstance(
 					R.string.uploading,
 					R.string.local_openstreetmap_uploading,
 					ProgressDialog.STYLE_HORIZONTAL);
-			final MapActivity mapActivity = getMapActivity();
 			OsmEditingPlugin plugin = OsmandPlugin.getPlugin(OsmEditingPlugin.class);
 			OsmEditsUploadListener listener = new OsmEditsUploadListenerHelper(mapActivity,
 					mapActivity.getString(R.string.local_openstreetmap_were_uploaded)) {
@@ -153,8 +164,5 @@ public class SendPoiDialogFragment extends DialogFragment {
 					dialog, listener, plugin, points.length, closeChangeSet, anonymously);
 			uploadTask.execute(points);
 		}
-
-		@NonNull
-		abstract protected MapActivity getMapActivity();
 	}
 }
