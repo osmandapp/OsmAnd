@@ -2855,4 +2855,6 @@ Representa el área: %1$s x %2$s</string>
     <string name="open_mapillary">Abrir Mapillary</string>
     <string name="mapillary_image">Imagen de Mapillary</string>
     <string name="distance_moving">Distancia corregida</string>
+    <string name="shared_string_permissions">Permisos</string>
+    <string name="import_gpx_failed_descr">OsmAnd no puede importar el archivo. Comprueba si OsmAnd tiene permiso para leer archivos desde esta ubicación.</string>
     </resources>
