@@ -11,7 +11,6 @@ import android.widget.ImageButton;
 import android.widget.ImageView;
 import android.widget.TextView;
 import android.widget.Toast;
-
 import net.osmand.CallbackWithObject;
 import net.osmand.Location;
 import net.osmand.ResultMatcher;
@@ -27,6 +26,7 @@ import net.osmand.plus.routing.RoutingHelper;
 import net.osmand.plus.views.AnimateDraggingMapThread;
 import net.osmand.plus.views.ContextMenuLayer;
 import net.osmand.router.RoutingConfiguration;
+import net.osmand.router.RoutingConfiguration.Builder;
 import net.osmand.util.MapUtils;
 
 import java.util.ArrayList;
@@ -54,9 +54,6 @@ public class AvoidSpecificRoads {
 		return missingRoads;
 	}
 
-	protected net.osmand.router.RoutingConfiguration.Builder getBuilder() {
-		return RoutingConfiguration.getDefault();
-	}
 
 	public ArrayAdapter<RouteDataObject> createAdapter(final MapActivity ctx) {
 		final ArrayList<RouteDataObject> points = new ArrayList<>();
@@ -105,7 +102,7 @@ public class AvoidSpecificRoads {
 
 	public void removeImpassableRoad(RouteDataObject obj) {
 		app.getSettings().removeImpassableRoad(getLocation(obj));
-		getBuilder().removeImpassableRoad(obj);
+		app.getDefaultRoutingConfig().removeImpassableRoad(obj);
 	}
 
 
@@ -220,7 +217,7 @@ public class AvoidSpecificRoads {
 						callback.onAddImpassableRoad(false, null);
 					}
 				} else {
-					getBuilder().removeImpassableRoad(currentObject);
+					app.getDefaultRoutingConfig().removeImpassableRoad(currentObject);
 					addImpassableRoadInternal(object, ll, showDialog, activity, loc);
 
 					if (callback != null) {
@@ -242,8 +239,11 @@ public class AvoidSpecificRoads {
 										   boolean showDialog,
 										   @Nullable MapActivity activity,
 										   @NonNull LatLon loc) {
-		if(!getBuilder().addImpassableRoad(object, ll)) {
-			app.getSettings().removeImpassableRoad(getLocation(object));
+		if(!app.getDefaultRoutingConfig().addImpassableRoad(object, ll)) {
+			LatLon location = getLocation(object);
+			if(location != null) {
+				app.getSettings().removeImpassableRoad(getLocation(object));
+			}
 		}
 		RoutingHelper rh = app.getRoutingHelper();
 		if (rh.isRouteCalculated() || rh.isRouteBeingCalculated()) {
@@ -277,7 +277,7 @@ public class AvoidSpecificRoads {
 
 	private LatLon getLocation(RouteDataObject object) {
 		Location location = app.getDefaultRoutingConfig().getImpassableRoadLocations().get(object.getId());
-		return new LatLon(location.getLatitude(), location.getLongitude());
+		return location == null ? null : new LatLon(location.getLatitude(), location.getLongitude());
 	}
 
 	public interface AvoidSpecificRoadsCallback {
