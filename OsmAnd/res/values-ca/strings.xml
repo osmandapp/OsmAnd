@@ -2761,4 +2761,6 @@ OsmAnd és de codi obert i es desenvolupa activament . Tothom pot recolzar l\'ap
     <string name="mapillary_image">Imatge Mapillary</string>
     <string name="open_mapillary">Inicia Mapillary</string>
     <string name="distance_moving">Distància corregida</string>
+    <string name="shared_string_permissions">Permisos</string>
+    <string name="import_gpx_failed_descr">OsmAnd no pot importar el fitxer. Si us plau, comproveu si OsmAnd té permís per llegir el fitxer des de la seva ubicació.</string>
     </resources>
