@@ -152,7 +152,7 @@
   <string name="live_monitoring_interval">Інтервал надсилання даних</string>
   <string name="live_monitoring_url_descr">Вкажіть веб-адресу з наступними параметрами: lat={0}, lon={1}, timestamp={2}, hdop={3}, altitude={4}, speed={5}, bearing={6}</string>
   <string name="live_monitoring_url">Онлайн-відстеження веб-адрес</string>
-  <string name="gpx_monitoring_disabled_warn">Записувати треки, використовуючи GPX віджет або вибравши «Запис подорожей» в Налаштуваннях.</string>
+  <string name="gpx_monitoring_disabled_warn">Записувати треки, використовуючи GPX-віджет або вибравши „Запис подорожей“ в Налаштуваннях.</string>
   <string name="show_current_gpx_title">Відображати пройдений шлях</string>
   <string name="free_version_message">Безкоштовна версія OsmAnd обмежена %1$s завантаженнями і не підтримує геостатті з Вікіпедії.</string>
   <string name="free_version_title">Безкоштовна версія</string>
@@ -836,8 +836,9 @@
   <string name="osmand_parking_pm">PM</string>
   <string name="osmand_parking_am">AM</string>
   <string name="osmand_parking_position_name">Місце стоянки</string>
-  <string name="osmand_parking_plugin_description">Втулок “Місце стоянки” дозволить вам запам’ятати, коли ви поставили автівку на стоянку та скільки часу залишилось, якщо стоянка обмежена часом.
-\n\nВи можете знайти місце стоянки та час на панелі керування та на відповідному віджеті на мапі. Також він додає нагадування в календар, якщо ви бажаєте отримати нагадування.</string>
+  <string name="osmand_parking_plugin_description">Втулок „Місце стоянки“ дозволить вам запам’ятати, коли ви поставили автівку на стоянку та скільки часу залишилось, якщо стоянка обмежена часом. 
+\n
+\nВи можете знайти місце стоянки та час на панелі керування та на відповідному віджеті на мапі. Також він додає нагадування в календар, якщо ви бажаєте отримати нагадування.</string>
   <string name="osmand_parking_plugin_name">Місце стоянки</string>
   <string name="context_menu_item_add_parking_point">Відмітити місце стоянки</string>
   <string name="context_menu_item_delete_parking_point">Вилучити позначку місця стоянки</string>
@@ -931,7 +932,7 @@
     <string name="av_use_external_camera_descr">Використовувати системну програму для фото</string>
     <string name="recording_unavailable">недоступно</string>
     <string name="shared_string_control_stop">Стоп</string>
-    <string name="shared_string_control_start">Запис</string>
+    <string name="shared_string_control_start">Старт</string>
     <string name="map_widget_av_notes">Аудіо/відео-нотатки</string>
     <string name="osmand_srtm_short_description_80_chars">Втулок OsmAnd для відображення рельєфу</string>
     
@@ -942,7 +943,7 @@
     <string name="recording_camera_not_available">Камера не доступна</string>
     <string name="recording_default_name">Запис</string>
     <string name="av_def_action_choose">Обрати за запитом</string>
-    <string name="recording_is_recorded">Аудіо/відео зараз записується. Для зупинки натисніть на АВ віджет.</string>
+    <string name="recording_is_recorded">Аудіо/відео зараз записується. Для зупинки натисніть на АВ-віджет.</string>
     <string name="recording_context_menu_arecord">Створити аудіо-нотатку</string>
     <string name="recording_context_menu_vrecord">Створити відео-нотатку</string>
     <string name="recording_context_menu_delete">Вилучити запис</string>
@@ -1216,7 +1217,7 @@ OsmAnd має відкриті сирці і активно розвиваєть
     <string name="local_openstreetmap_act_title">Редагування OSM</string>
     <string name="wait_current_task_finished">Будь ласка, зачекайте завершення поточної задачі</string>
     <string name="use_magnetic_sensor">Використовувати магнітометр</string>
-    <string name="monitoring_settings_descr">Налаштування запису треків</string>
+    <string name="monitoring_settings_descr">Налаштування запису Ваших подорожей</string>
     
     <string name="shared_string_downloading">Завантаження</string>
 	<string name="delete_point">Вилучити точку</string>
@@ -1763,14 +1764,14 @@ OsmAnd має відкриті сирці і активно розвиваєть
     <string name="rendering_value_car_name">Автівка</string>
     <string name="rendering_value_bicycle_name">Велосипед</string>
     <string name="rendering_value_pedestrian_name">Пішохід</string>
-    <string name="record_plugin_description">"Цей втулок активує можливість записувати та зберігати ваші треки вручну, торкаючись віджету логування GPX на екрані мапи, або автоматично записувати всі ваші подорожі у файл GPX.
-\n
+    <string name="record_plugin_description">"Цей втулок активує можливість записувати та зберігати ваші треки вручну, торкаючись віджету журналювання GPX на екрані мапи, або автоматично записувати всі ваші подорожі у файл GPX. 
+\n 
 \nЗаписаними треками можна поділитись з вашими друзями або іншими учасниками спільноти OSM. Атлети можуть використовувати записані треки для відстежування власних тренувань. Базовий аналіз треків наявний безпосередньо в OsmAnd, наприклад: час проходження кола, середня швидкість й т.п., звісно, записані треки можна також проаналізувати за допомогою іншого програмного забезпечення. "</string>
     <string name="save_track_to_gpx_globally">Писати трек у файл GPX</string>
 	<string name="save_track_to_gpx_globally_descr">Загальний запис місцезнаходження в файл GPX можна ввімкнути або вимкнути кнопкою логування GPX на екрані з мапою</string>
 	<string name="save_track_interval_globally">Інтервал записування</string>
 	<string name="rendering_attr_publicTransportMode_name">Маршрути автобусів, тролейбусів та шатлів</string>
-	<string name="record_plugin_name">Запис подорожей</string>
+	<string name="record_plugin_name">Запис подорожі</string>
     <string name="int_hour">г</string>
     <string name="duration">Тривалість</string>
     <string name="distance">Віддаль</string>
@@ -2088,7 +2089,7 @@ OsmAnd має відкриті сирці і активно розвиваєть
     <string name="rendering_value_walkingRoutesOSMC_name">Розмальовування відповідно пішохідній символіці OSMC</string>
     <string name="osmo_share_my_location">Повідомляти про місцезнаходження</string>
     <string name="shared_string_logoff">Вийти</string>
-    <string name="local_recordings_delete_all_confirm">Ви збираєтеся видалити %1$d записів. Ви впевнені?</string>
+    <string name="local_recordings_delete_all_confirm">Ви збираєтеся видалити %1$d нотаток. Ви впевнені?</string>
 	<string name="download_wikipedia_maps">Вікіпедія</string>
     <string name="rendering_value_default13_name">Типово (13)</string>
 	<string name="rendering_value_defaultTranslucentCyan_name">Типово (напівпрозорий блакитний)</string>
@@ -2384,7 +2385,7 @@ OsmAnd має відкриті сирці і активно розвиваєть
     <string name="map_marker_1st">Перша позначка мапи</string>
     <string name="map_marker_2nd">Друга позначка мапи</string>
     <string name="shared_string_toolbar">Панель інструментів</string>
-    <string name="shared_string_widgets">ВІджети</string>
+    <string name="shared_string_widgets">Віджети</string>
     <string name="osmand_plus_extended_description_4000_chars_v2">"
 OsmAnd мапи та навігація – пошук місце розташування на мапі та прокладання маршрутів без потреби у доступі до Інтернету. Звантажте мапу країни перед подорожжю для того, щоб виконувати пошук та прокладати маршрути в незнайомому місці. 
 
@@ -2566,8 +2567,8 @@ Facebook: https://www.facebook.com/osmandapp
     <string name="osmo_share_location">Поділитися</string>
     <string name="osmo_pause_location">Пауза</string>
     <string name="osmo_service_running">Сервіс OsMo запущений</string>
-    <string name="trip_rec_notification_settings">Запис поїздки (немає даних)</string>
-    <string name="trip_rec_notification_settings_desc">Показувати сповіщення, яке дозволить почати запис за допомогою кнопки „Запис поїздки“</string>
+    <string name="trip_rec_notification_settings">Запис подорожі (немає даних)</string>
+    <string name="trip_rec_notification_settings_desc">Показувати сповіщення, яке дозволить почати запис за допомогою кнопки „Запис подорожі“</string>
     <string name="shared_string_notifications">Повідомлення</string>
     <string name="shared_string_continue">Продовжити</string>
     <string name="shared_string_pause">Пауза</string>
@@ -2575,25 +2576,25 @@ Facebook: https://www.facebook.com/osmandapp
     <string name="shared_string_recorded">Записано</string>
     <string name="shared_string_record">Запис</string>
     <string name="gpx_logging_no_data">Немає даних</string>
-    <string name="release_2_5">" • Клікабельні іконки на мапі
-\n
+    <string name="release_2_5">" • Клікабельні іконки на мапі 
+\n 
 \n• Гнучка фільтрація POI в пошуку: шукайте ресторани за типом кухні, кемпінги за наявністю зручностей 
-\n
+\n 
 \n• Новий стиль мапи Topo для пішого туризму і велосипедистів 
 \n
 \n• Покращений запис поїздки (нові налаштування) 
-\n
+\n 
 \n• Покращені навігаційні повідомлення (Android Wear) 
-\n
+\n 
 \n• Безліч інших поліпшень й виправлень помилок 
-\n
+\n 
 \nі багато іншого … "</string>
     <string name="rendering_attr_contourColorScheme_description">Колірна схема горизонталей</string>
     <string name="save_track_min_speed">Мінімальна швидкість для запису</string>
     <string name="save_track_min_speed_descr">Виберіть мінімальну швидкість, при перевищенні якої точка буде записана в трек</string>
     <string name="save_track_min_distance">Мінімальна дистанція для запису</string>
     <string name="save_track_min_distance_descr">Виберіть відстань, при перевищенні якого точка буде записана в трек</string>
-    <string name="save_track_precision">Мінімально точність запису</string>
+    <string name="save_track_precision">Мінімальна точність запису</string>
     <string name="save_track_precision_descr">Виберіть мінімально допустиму точність для точки, щоб бути зажурнальованою</string>
     <string name="christmas_poi">Різдвяні POI</string>
     <string name="christmas_desc">Напередодні різдвяних і новорічних свят, ви можете вибрати для відображення POI, пов\'язані з Різдвом: ялинки, ярмарки і т.п.</string>
@@ -2919,19 +2920,17 @@ Facebook: https://www.facebook.com/osmandapp
 \n
 \nНасолоджуйтесь голосовою та візуальною навігацією, переглядайте точки інтересу (англ. POI), створюйте та керуйте GPX-треками, переглядайте контурні лінії та дані про висоту (за допомогою зовнішнього втулка), перемикайтеся  між режимами автомобіліста, велосипедиста й пішохода, редагуйте OSM та ще багато цікавого.
 \n "</string>
-    <string name="osmand_extended_description_part2">"
-\n GPS навігація
-\n • Ви можете вибрати між автономним режимом (без зборів за роумінг за кордоном) або через Інтернет (швидше)
-\n • Покрокові голосові підказки доставить Вас до місця призначення (записані чи синтезовані голоси)
-\n • Повторна маршрутизація кожен раз після відхилення від маршруту
-\n • Смуги руху, назви вулиць і приблизний час прибуття допоможуть Вам на шляху
-\n• Для того, щоб зробити Вашу подорож більш безпечною, режим дня/ночі автоматично перемикається
-\n • Ви можете налаштувати відображення обмежень швидкості та попередження про її перевищення
-\n • Мапа масштабується відповідно до Вашої швидкості
-\n • Ви можете шукати місця за адресою, типом (наприклад, паркування, ресторан, готель, заправна станція, музей) чи за географічними координатами
-\n • Підтримка проміжних точок на Вашому маршруті
-\n • Ви можете записати свій власний GPX-трек або завантажити готовий і слідувати за ним
-\n "</string>
+    <string name="osmand_extended_description_part2">" GPS навігація 
+\n • Ви можете вибрати між автономним режимом (без зборів за роумінг за кордоном) або через Інтернет (швидше) 
+\n • Покрокові голосові підказки доставить Вас до місця призначення (записані чи синтезовані голоси) 
+\n • Повторна маршрутизація кожен раз після відхилення від маршруту 
+\n • Смуги руху, назви вулиць і приблизний час прибуття допоможуть Вам на шляху 
+\n • Для того, щоб зробити Вашу подорож більш безпечною, режим дня/ночі автоматично перемикається 
+\n • Ви можете налаштувати відображення обмежень швидкості та попередження про її перевищення 
+\n • Мапа масштабується відповідно до Вашої швидкості 
+\n • Ви можете шукати місця за адресою, типом (наприклад, паркування, ресторан, готель, заправна станція, музей) чи за географічними координатами 
+\n • Підтримка проміжних точок на Вашому маршруті 
+\n • Ви можете записати свій власний GPX-трек або завантажити готовий і слідувати за ним "</string>
     <string name="osmand_extended_description_part3">" Мапа 
 \n • Відображає цікаві точки (POI) навколо Вас 
 \n • Налаштовує мапу за напрямком Вашого руху (чи за компасом) 
@@ -2944,14 +2943,12 @@ Facebook: https://www.facebook.com/osmandapp
 \n Лижня
 \nOsmAnd-втулок лижних мап дозволяє бачити лижні траси з рівнем складності та деякою додатковою інформацією на кшталт розташування підйомників та інших об’єктів.
 \n "</string>
-    <string name="osmand_extended_description_part5">"
-\n Їзда на велосипеді
-\n • Ви можете знайти велосипедні доріжки на мапі
-\n • GPS-навігація у велосипедному режимі будує маршрут використовуючи велосипедні шляхи
-\n • Ви можете бачити Вашу швидкість та висоту над рівнем моря
-\n • Опція GPX-запису дозволяє Вам записувати Вашу подорож та ділитися нею
-\n • Через втулок Ви можете включити відображення контурних ліній і затінення рельєфу
-\n "</string>
+    <string name="osmand_extended_description_part5">" Їзда на велосипеді 
+\n • Ви можете знайти велосипедні доріжки на мапі 
+\n • GPS-навігація у велосипедному режимі будує маршрут використовуючи велосипедні шляхи 
+\n • Ви можете бачити Вашу швидкість та висоту над рівнем моря 
+\n • Опція GPX-запису дозволяє Вам записувати Вашу подорож та ділитися нею 
+\n • Через втулок Ви можете включити відображення контурних ліній і затінення рельєфу "</string>
     <string name="osmand_extended_description_part6">"
 \n Прогулянки, походи, екскурсія по місту
 \n • Мапа показує ходьбу та пішохідні доріжки
@@ -3067,7 +3064,7 @@ Facebook: https://www.facebook.com/osmandapp
     <string name="shared_string_install">Встановити</string>
     <string name="improve_coverage_mapillary">Поліпшити фото-покриття Mapillary</string>
     <string name="improve_coverage_install_mapillary_desc">"Ви можете зробити власні фотографії або добірку фотографій і додати їх до цього місця на мапі.  
-\n
+\n 
 \nДля цього Вам необхідно встановити застосунок Mapillary з Google Play."</string>
     <string name="mapillary_image">Зображення Mapillary</string>
     <string name="distance_moving">Відстань виправлена</string>
