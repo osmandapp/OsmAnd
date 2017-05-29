@@ -102,13 +102,11 @@ public class AnimateDraggingMapThread {
 	public synchronized void startThreadAnimating(final Runnable runnable){
 		stopAnimatingSync();
 		stopped = false;
-		final Thread[] t = new Thread[1];
-		t[0] = new Thread(new Runnable() {
+		final Thread t = new Thread(new Runnable() {
 			
 			@Override
 			public void run() {
 				try { 
-					currentThread = t[0];
 					suspendUpdate();
 					runnable.run();
 				} finally {
@@ -117,8 +115,8 @@ public class AnimateDraggingMapThread {
 				}
 			}
 		}, "Animating Thread");
-		t[0].start();
-		
+		currentThread = t;		
+		t.start();
 	}
 
 	public void startMoving(final double finalLat, final double finalLon, final Pair<Integer, Double> finalZoom,
