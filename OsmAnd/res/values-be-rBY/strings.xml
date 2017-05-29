@@ -2586,7 +2586,7 @@ Moduli:
     <string name="quick_action_replace_destination">Zamianić punkt pryznačeńnia</string>
     <string name="private_access_routing_req">Vaš punkt pryznačennia znachodzicca na pryvatnaj terytoryi. Vy chočacie dazvolić dostup da pryvatnych daroh dlia hetaj pajezdki?</string>
     <string name="subscribe_email_error">Pamyłka</string>
-    <string name="depth_contour_descr">Nabor map, jakija źmiaščajuć kontury i kropki marskich hłybiń (na asnovie sietki ŭ 30 vuhłavych siekund).</string>
+    <string name="depth_contour_descr">Nabor map, jakija zmiaščajuć kontury i kropki marskich hlybiń.</string>
     <string name="sea_depth_thanks">Dziakuj za pakupku konuraŭ marskich hłybiń!</string>
     <string name="index_item_depth_contours_osmand_ext">Kontury marskich hłybiń</string>
     <string name="index_item_depth_points_southern_hemisphere">Kropki marskich hłybiń paŭdniovaha paŭšarja</string>
