@@ -29,6 +29,7 @@ import net.osmand.plus.R;
 import net.osmand.plus.activities.MapActivity;
 import net.osmand.plus.dialogs.ProgressDialogFragment;
 import net.osmand.plus.osmedit.dialogs.SendPoiDialogFragment;
+import net.osmand.plus.osmedit.dialogs.SendPoiDialogFragment.PoiUploaderType;
 
 import java.text.MessageFormat;
 import java.util.ArrayList;
@@ -68,16 +69,11 @@ public class OsmEditsUploadListenerHelper implements OsmEditsUploadListener {
 			OsmPoint point = loadErrorsMap.keySet().iterator().next();
 			String message = loadErrorsMap.get(point);
 			if (message.equals(activity.getString(R.string.auth_failed))) {
-				SendPoiDialogFragment dialogFragment =
-						SendPoiDialogFragment.createInstance(new OsmPoint[]{point});
+				SendPoiDialogFragment dialogFragment;
 				if (activity instanceof MapActivity) {
-					dialogFragment.setPoiUploader(new SendPoiDialogFragment.SimpleProgressDialogPoiUploader() {
-						@NonNull
-						@Override
-						protected MapActivity getMapActivity() {
-							return (MapActivity) activity;
-						}
-					});
+					dialogFragment = SendPoiDialogFragment.createInstance(new OsmPoint[]{point}, PoiUploaderType.SIMPLE);
+				} else {
+					dialogFragment = SendPoiDialogFragment.createInstance(new OsmPoint[]{point}, PoiUploaderType.FRAGMENT);
 				}
 				dialogFragment.show(activity.getSupportFragmentManager(), "error_loading");
 			} else {
