@@ -110,6 +110,7 @@ import net.osmand.plus.views.OsmandMapTileView;
 import net.osmand.plus.views.corenative.NativeCoreContext;
 import net.osmand.plus.views.mapwidgets.MapInfoWidgetsFactory.TopToolbarController;
 import net.osmand.plus.views.mapwidgets.MapInfoWidgetsFactory.TopToolbarControllerType;
+import net.osmand.plus.views.mapwidgets.TextInfoWidget;
 import net.osmand.render.RenderingRulesStorage;
 import net.osmand.router.GeneralRouter;
 import net.osmand.util.Algorithms;
@@ -185,6 +186,9 @@ public class MapActivity extends OsmandActionBarActivity implements DownloadEven
 
 	private boolean mIsDestroyed = false;
 	private InAppHelper inAppHelper;
+
+	private TextInfoWidget ruler;
+	private final static String RULER_KEY = "show.ruler";
 
 	@Override
 	public void onCreate(Bundle savedInstanceState) {
@@ -295,8 +299,29 @@ public class MapActivity extends OsmandActionBarActivity implements DownloadEven
 		app.getAidlApi().onCreateMapActivity(this);
 
 		mIsDestroyed = false;
+
+		ruler = new TextInfoWidget(this);
+		ruler.setOnClickListener(new View.OnClickListener() {
+			@Override
+			public void onClick(View v) {
+				Toast.makeText(app, "Ruler Test", Toast.LENGTH_SHORT).show();
+			}
+		});
+		ruler.setIcons(R.drawable.widget_distance_day, R.drawable.widget_distance_night);
+		ApplicationMode.regWidgetVisibility(RULER_KEY, ApplicationMode.DEFAULT);
+		showOrHideRuler();
 	}
 
+	public void showOrHideRuler() {
+		MapInfoLayer infoLayer = getMapLayers().getMapInfoLayer();
+		if (settings.SHOW_MAP_RULER.get()) {
+			infoLayer.registerSideWidget(ruler,
+					R.drawable.ic_action_ruler, R.string.map_widget_show_ruler, RULER_KEY, false, 45);
+		} else {
+			infoLayer.removeSideWidget(ruler);
+		}
+		infoLayer.recreateControls();
+	}
 
 	private void checkAppInitialization() {
 		if (app.isApplicationInitializing()) {

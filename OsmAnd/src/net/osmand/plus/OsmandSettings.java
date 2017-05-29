@@ -893,6 +893,8 @@ public class OsmandSettings {
 
 	public final OsmandPreference<Boolean> SHOW_POI_LABEL = new BooleanPreference("show_poi_label", false).makeGlobal();
 
+	public final OsmandPreference<Boolean> SHOW_MAP_RULER = new BooleanPreference("show_map_ruler", false).makeGlobal();
+
 	public final OsmandPreference<Boolean> SHOW_MAPILLARY = new BooleanPreference("show_mapillary", false).makeGlobal();
 	public final OsmandPreference<Boolean> MAPILLARY_FIRST_DIALOG_SHOWN = new BooleanPreference("mapillary_first_dialog_shown", false).makeGlobal();
 	public final OsmandPreference<Boolean> MAPILLARY_MENU_COLLAPSED = new BooleanPreference("mapillary_menu_collapsed", false).makeGlobal();

@@ -42,7 +42,6 @@ import net.osmand.plus.activities.MapActivity;
 import net.osmand.plus.activities.MapActivityLayers;
 import net.osmand.plus.activities.PluginActivity;
 import net.osmand.plus.activities.SettingsActivity;
-import net.osmand.plus.dashboard.DashboardOnMap;
 import net.osmand.plus.openseamapsplugin.NauticalMapsPlugin;
 import net.osmand.plus.poi.PoiFiltersHelper;
 import net.osmand.plus.rastermaps.OsmandRasterMapsPlugin;
@@ -189,6 +188,9 @@ public class ConfigureMapMenu {
 				} else {
 					showGpxSelectionDialog(adapter, adapter.getItem(pos));
 				}
+			} else if (itemId == R.string.map_widget_show_ruler) {
+				settings.SHOW_MAP_RULER.set(isChecked);
+				ma.showOrHideRuler();
 			} else if (itemId == R.string.layer_map) {
 				if (OsmandPlugin.getEnabledPlugin(OsmandRasterMapsPlugin.class) == null) {
 					Intent intent = new Intent(ma, PluginActivity.class);
@@ -466,6 +468,13 @@ public class ConfigureMapMenu {
 				.setColor(selected ? R.color.osmand_orange : ContextMenuItem.INVALID_ID)
 				.setIcon(R.drawable.ic_action_polygom_dark)
 				.setSecondaryIcon(R.drawable.ic_action_additional_option)
+				.setListener(l).createItem());
+		selected = settings.SHOW_MAP_RULER.get();
+		adapter.addItem(new ContextMenuItem.ItemBuilder()
+				.setTitleId(R.string.map_widget_show_ruler, activity)
+				.setSelected(settings.SHOW_MAP_RULER.get())
+				.setColor(selected ? R.color.osmand_orange : ContextMenuItem.INVALID_ID)
+				.setIcon(R.drawable.ic_action_ruler)
 				.setListener(l).createItem());
 		adapter.addItem(new ContextMenuItem.ItemBuilder()
 				.setTitleId(R.string.layer_map, activity)
