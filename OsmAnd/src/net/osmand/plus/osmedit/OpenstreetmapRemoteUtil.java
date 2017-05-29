@@ -223,7 +223,7 @@ public class OpenstreetmapRemoteUtil implements OpenstreetmapUtil {
 		for (String k : n.getTagKeySet()) {
 			String val = n.getTag(k);
 			if (val.length() == 0 || k.length() == 0 || EditPoiData.POI_TYPE_TAG.equals(k) ||
-					k.startsWith(EditPoiData.REMOVE_TAG_PREFIX) || n.getTag(EditPoiData.REMOVE_TAG_PREFIX + k) != null)
+					k.startsWith(EditPoiData.REMOVE_TAG_PREFIX) || k.contains(EditPoiData.REMOVE_TAG_PREFIX))
 				continue;
 			ser.startTag(null, "tag"); //$NON-NLS-1$
 			ser.attribute(null, "k", k); //$NON-NLS-1$
