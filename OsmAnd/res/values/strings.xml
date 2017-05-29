@@ -9,9 +9,6 @@
          3. All your modified/created strings are in the top of the file (to make easier find what\'s translated).
     PLEASE: Have a look at http://code.google.com/p/osmand/wiki/UIConsistency, it may really improve your and our work  :-)  Thx - Hardy
     -->
-<<<<<<< HEAD
-    <string name="private_access_routing_req">Your destination is located in the area with a private access. Do you want to allow access to the private roads for this trip?</string>
-=======
     <string name="shared_string_permissions">Permissions</string>
     <string name="import_gpx_failed_descr">OsmAnd cannot import the file. Please check if OsmAnd has permission to read file from its location.</string>
     <string name="distance_moving">Distance corrected</string>
@@ -30,7 +27,6 @@
     <string name="mapillary">Mapillary</string>
     <string name="plugin_mapillary_descr">Street-level photos for everyone. Discover places, collaborate, capture the world.</string>
     <string name="private_access_routing_req">Your destination is located in an area with private access. Do you want to allow access to the private roads for this trip?</string>
->>>>>>> 950b5efbde... Fix #3819
     <string name="restart_search">Restart search</string>
     <string name="increase_search_radius">Increase search radius</string>
     <string name="nothing_found">Nothing found :(</string>
