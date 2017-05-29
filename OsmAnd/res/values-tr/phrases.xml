@@ -1048,4 +1048,20 @@
 
 	<string name="poi_additional_atm_yes">Atm: evet</string>
 	<string name="poi_medical_system_unknown_yes">Tıp sistemi: bilinmeyen geleneksel</string>
+	<string name="poi_fuel_type">Tür</string>
+	<string name="poi_fuel_avia_type">Tür</string>
+	<string name="poi_payment_type">Ödeme türü</string>
+	<string name="poi_payment_fuel_type">Benzin kartı</string>
+	<string name="poi_additional_type">Ek</string>
+	<string name="poi_internet_access_type">İnternet erişim türü</string>
+	<string name="poi_vending_type">Satış türü</string>
+	<string name="poi_bicycle_service">Bisiklet hizmeti</string>
+	<string name="poi_clothes_type">Tür</string>
+	<string name="poi_shoes_type">Tür</string>
+	<string name="poi_fire_hydrant_type">Tür</string>
+	<string name="poi_fire_hydrant_position">Konum</string>
+	<string name="poi_fire_hydrant_water_source">Su kaynağı</string>
+	<string name="poi_payment_toll_type">Ödeme türü</string>
+	<string name="poi_traffic_signals_sound">Ses</string>
+	<string name="poi_highway_crossing_type">Tür</string>
 	</resources>
