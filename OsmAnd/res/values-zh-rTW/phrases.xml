@@ -3102,4 +3102,13 @@
 	<string name="poi_crossing_supervision_camera">平交道管理︰攝影機</string>
 
 	<string name="poi_dispensing_yes">是的</string>
+	<string name="poi_dispensing_no">配藥︰無</string>
+
+	<string name="poi_aerodrome_type_international">國際性的</string>
+	<string name="poi_aerodrome_type_regional">區域性的</string>
+	<string name="poi_aerodrome_type_public">民用</string>
+	<string name="poi_aerodrome_type_military">軍用</string>
+	<string name="poi_aerodrome_type_military_public">軍/民共用</string>
+	<string name="poi_aerodrome_type_private">私人</string>
+
 	</resources>
