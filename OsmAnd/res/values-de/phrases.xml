@@ -3368,4 +3368,15 @@
 
 <string name="poi_life_ring">Rettungsring</string>
 
-</resources>
+<string name="poi_zoo_petting_zoo">Streichelzoo</string>
+	<string name="poi_zoo_wildlife_park">Wildpark</string>
+	<string name="poi_zoo_enclosure">Gehege</string>
+	<string name="poi_zoo_safari_park">Safaripark</string>
+	<string name="poi_zoo_aviary">Voliere</string>
+	<string name="poi_zoo_falconry">Falknerei</string>
+	<string name="poi_zoo_reptile">Reptilien</string>
+
+<string name="poi_zoo_type">Typ</string>
+
+<string name="poi_zoo_birds">Vögel</string>
+	</resources>
