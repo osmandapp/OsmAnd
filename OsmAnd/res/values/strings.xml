@@ -9,7 +9,28 @@
          3. All your modified/created strings are in the top of the file (to make easier find what\'s translated).
     PLEASE: Have a look at http://code.google.com/p/osmand/wiki/UIConsistency, it may really improve your and our work  :-)  Thx - Hardy
     -->
+<<<<<<< HEAD
     <string name="private_access_routing_req">Your destination is located in the area with a private access. Do you want to allow access to the private roads for this trip?</string>
+=======
+    <string name="shared_string_permissions">Permissions</string>
+    <string name="import_gpx_failed_descr">OsmAnd cannot import the file. Please check if OsmAnd has permission to read file from its location.</string>
+    <string name="distance_moving">Distance corrected</string>
+    <string name="mapillary_image">Mapillary image</string>
+    <string name="open_mapillary">Open Mapillary</string>
+    <string name="shared_string_install">Install</string>
+    <string name="improve_coverage_mapillary">Improve photo coverage with Mapillary</string>
+    <string name="improve_coverage_install_mapillary_desc">You can take your own photos or series of photos and attach them to this map location.\n\nTo do this you need to install the Mapillary app from the Google Play Store.</string>
+    <string name="online_photos">Online photos</string>
+    <string name="shared_string_add_photos">Add photos</string>
+    <string name="no_photos_descr">We do not have photos for this location</string>
+    <string name="mapillary_action_descr">Contribute with your own street-level views of this location via Mapillary.</string>
+    <string name="mapillary_widget">Mapillary widget</string>
+    <string name="mapillary_widget_descr">Allows you to quickly contribute to Mapillary</string>
+    <string name="mapillary_descr">Online street-level photos for everyone. Discover places, collaborate, capture the world.</string>
+    <string name="mapillary">Mapillary</string>
+    <string name="plugin_mapillary_descr">Street-level photos for everyone. Discover places, collaborate, capture the world.</string>
+    <string name="private_access_routing_req">Your destination is located in an area with private access. Do you want to allow access to the private roads for this trip?</string>
+>>>>>>> 950b5efbde... Fix #3819
     <string name="restart_search">Restart search</string>
     <string name="increase_search_radius">Increase search radius</string>
     <string name="nothing_found">Nothing found :(</string>
