@@ -238,7 +238,7 @@ public class LiveUpdatesFragment extends BaseOsmAndFragment implements InAppList
 	}
 
 	public void notifyLiveUpdatesChanged() {
-		if (adapter != null) {
+		if (adapter != null && getMyApplication() != null && getActivity() != null) {
 			adapter.notifyLiveUpdatesChanged();
 		}
 	}
