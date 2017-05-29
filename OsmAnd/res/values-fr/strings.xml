@@ -3008,4 +3008,6 @@ Fonctionnalités principales :
     <string name="plugin_mapillary_descr">Des photos détaillées pour tous. Découvrez des lieux, collaborez ... capturez le monde.</string>
     <string name="mapillary_image">Image Mapillary</string>
     <string name="distance_moving">Distance corrigée</string>
+    <string name="shared_string_permissions">Autorisations</string>
+    <string name="import_gpx_failed_descr">OsmAnd ne peut importer le fichier. Merci de vérifier si OsmAnd possède l\'autorisation de lire le dossier et le fichier spécifiés.</string>
     </resources>
