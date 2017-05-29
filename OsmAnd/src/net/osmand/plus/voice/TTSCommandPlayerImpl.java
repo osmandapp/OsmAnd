@@ -209,7 +209,12 @@ public class TTSCommandPlayerImpl extends AbstractPrologCommandPlayer {
 							case TextToSpeech.LANG_COUNTRY_AVAILABLE:
 								ttsVoiceName = "".equals(ttsVoiceName) ? newLocale.getDisplayName() + ": LANG_COUNTRY_AVAILABLE" : ttsVoiceName;
 							case TextToSpeech.LANG_COUNTRY_VAR_AVAILABLE:
-								mTts.setLanguage(newLocale);
+								try {
+									mTts.setLanguage(newLocale);
+								} catch(Exception e) {
+									e.printStackTrace();
+									mTts.setLanguage(Locale.getDefault());
+								}
 								if(speechRate != 1) {
 									mTts.setSpeechRate(speechRate);
 								}
