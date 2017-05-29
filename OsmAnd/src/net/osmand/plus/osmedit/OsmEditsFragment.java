@@ -45,6 +45,7 @@ import net.osmand.plus.helpers.AndroidUiHelper;
 import net.osmand.plus.myplaces.FavoritesActivity;
 import net.osmand.plus.osmedit.OsmPoint.Action;
 import net.osmand.plus.osmedit.dialogs.SendPoiDialogFragment;
+import net.osmand.plus.osmedit.dialogs.SendPoiDialogFragment.PoiUploaderType;
 
 import org.xmlpull.v1.XmlSerializer;
 
@@ -543,8 +544,8 @@ public class OsmEditsFragment extends OsmAndListFragment
 	}
 
 	private void uploadItems(final OsmPoint[] items) {
-		SendPoiDialogFragment.createInstance(items).show(getChildFragmentManager(),
-				SendPoiDialogFragment.TAG);
+		SendPoiDialogFragment.createInstance(items, PoiUploaderType.FRAGMENT)
+				.show(getChildFragmentManager(), SendPoiDialogFragment.TAG);
 //		UploadOsmEditsConfirmDialogFragment.createInstancee(items).show(getChildFragmentManager(),
 //				UploadOsmEditsConfirmDialogFragment.TAG);
 	}

@@ -21,6 +21,7 @@ import net.osmand.plus.dashboard.DashboardOnMap;
 import net.osmand.plus.dashboard.tools.DashFragmentData;
 import net.osmand.plus.dialogs.ProgressDialogFragment;
 import net.osmand.plus.osmedit.dialogs.SendPoiDialogFragment;
+import net.osmand.plus.osmedit.dialogs.SendPoiDialogFragment.PoiUploaderType;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -111,7 +112,7 @@ public class DashOsmEditsFragment extends DashBaseFragment
 				@Override
 				public void onClick(View v) {
 					if (point.getGroup() == OsmPoint.Group.POI) {
-						SendPoiDialogFragment.createInstance(new OsmPoint[] {point})
+						SendPoiDialogFragment.createInstance(new OsmPoint[] {point}, PoiUploaderType.FRAGMENT)
 								.show(getChildFragmentManager(), "SendPoiDialogFragment");
 					} else {
 						uploadItem(point);
