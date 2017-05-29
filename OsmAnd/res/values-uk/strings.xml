@@ -2014,7 +2014,7 @@ OsmAnd має відкриті сирці і активно розвиваєть
     <string name="storage_directory">Сховище мап</string>
     <string name="shared_string_copy">Копіювати</string>
     <string name="filter_poi_hint">Фільтрувати за назвою</string>
-    <string name="search_poi_category_hint">Введіть текст для пошуку всіх</string>
+    <string name="search_poi_category_hint">Введіть запит для пошуку всіх</string>
     <string name="rendering_value__name">За замовчуванням</string>
     <string name="rendering_value_highContrastRoads_name">Контрастні дороги</string>
 	<string name="index_name_netherlands">Європа - Нідерланди</string>
@@ -2653,7 +2653,7 @@ Facebook: https://www.facebook.com/osmandapp
     <string name="shared_string_change">Змінити</string>
     <string name="get_started">Почати</string>
     <string name="route_stops_before">%1$s зупинок до обраної</string>
-    <string name="coords_search">Пошук за координатами</string>
+    <string name="coords_search">Пошук координат</string>
     <string name="advanced_coords_search">Розширений пошук за координатами</string>
     <string name="back_to_search">Повернення до пошуку</string>
     <string name="confirmation_to_delete_history_items">Вилучити вибране з історії пошуку?</string>
@@ -2874,8 +2874,8 @@ Facebook: https://www.facebook.com/osmandapp
     <string name="select_street">Виберіть вулицю</string>
     <string name="shared_string_in_name">у %1$s</string>
     <string name="type_address">Введіть адресу</string>
-    <string name="type_city_town">Введіть місто</string>
-    <string name="type_postcode">Введіть поштовий код</string>
+    <string name="type_city_town">Введіть місто чи СМТ</string>
+    <string name="type_postcode">Введіть поштовий індекс</string>
     <string name="nearest_cities">Найближчі міста</string>
     <string name="select_city">Виберіть місто</string>
     <string name="select_postcode">Виберіть поштовий індекс</string>
