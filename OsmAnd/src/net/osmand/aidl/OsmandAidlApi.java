@@ -88,25 +88,55 @@ public class OsmandAidlApi {
 
 	public void onDestroyMapActivity(final MapActivity mapActivity) {
 		if (refreshMapReceiver != null) {
-			mapActivity.unregisterReceiver(refreshMapReceiver);
+			try {
+				mapActivity.unregisterReceiver(refreshMapReceiver);
+			} catch (IllegalArgumentException e) {
+				e.printStackTrace();
+			}
+			refreshMapReceiver = null;
 		}
 		if (setMapLocationReceiver != null) {
-			mapActivity.unregisterReceiver(setMapLocationReceiver);
+			try {
+				mapActivity.unregisterReceiver(setMapLocationReceiver);
+			} catch (IllegalArgumentException e) {
+				e.printStackTrace();
+			}
+			setMapLocationReceiver = null;
 		}
 
 		if (addMapWidgetReceiver != null) {
-			mapActivity.unregisterReceiver(addMapWidgetReceiver);
+			try {
+				mapActivity.unregisterReceiver(addMapWidgetReceiver);
+			} catch (IllegalArgumentException e) {
+				e.printStackTrace();
+			}
+			addMapWidgetReceiver = null;
 		}
 		if (removeMapWidgetReceiver != null) {
-			mapActivity.unregisterReceiver(removeMapWidgetReceiver);
+			try {
+				mapActivity.unregisterReceiver(removeMapWidgetReceiver);
+			} catch (IllegalArgumentException e) {
+				e.printStackTrace();
+			}
+			removeMapWidgetReceiver = null;
 		}
 		widgetControls.clear();
 
 		if (addMapLayerReceiver != null) {
-			mapActivity.unregisterReceiver(addMapLayerReceiver);
+			try {
+				mapActivity.unregisterReceiver(addMapLayerReceiver);
+			} catch (IllegalArgumentException e) {
+				e.printStackTrace();
+			}
+			addMapLayerReceiver = null;
 		}
 		if (removeMapLayerReceiver != null) {
-			mapActivity.unregisterReceiver(removeMapLayerReceiver);
+			try {
+				mapActivity.unregisterReceiver(removeMapLayerReceiver);
+			} catch (IllegalArgumentException e) {
+				e.printStackTrace();
+			}
+			removeMapLayerReceiver = null;
 		}
 	}
 
