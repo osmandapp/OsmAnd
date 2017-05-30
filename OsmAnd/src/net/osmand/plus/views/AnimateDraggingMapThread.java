@@ -90,18 +90,19 @@ public class AnimateDraggingMapThread {
 	public void stopAnimatingSync(){
 		// wait until current thread != null
 		stopped = true;
-		while(currentThread != null){
+		Thread tt = null;
+		while((tt = currentThread) != null){
 			try {
-				currentThread.join();
+				tt.join();
 			} catch (Exception e) {
 			}
 		}
 	}
 	
-	public void startThreadAnimating(final Runnable runnable){
+	public synchronized void startThreadAnimating(final Runnable runnable){
 		stopAnimatingSync();
 		stopped = false;
-		currentThread = new Thread(new Runnable() {
+		final Thread t = new Thread(new Runnable() {
 			
 			@Override
 			public void run() {
@@ -114,8 +115,8 @@ public class AnimateDraggingMapThread {
 				}
 			}
 		}, "Animating Thread");
-		currentThread.start();
-		
+		currentThread = t;		
+		t.start();
 	}
 
 	public void startMoving(final double finalLat, final double finalLon, final Pair<Integer, Double> finalZoom,

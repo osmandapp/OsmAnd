@@ -12,7 +12,7 @@
     <string name="application_dir">Carpeta de almacenamiento de datos</string>
     <string name="shared_string_copy">Copiar</string>
     <string name="filter_poi_hint">Filtrar por nombre</string>
-    <string name="search_poi_category_hint">Escribe para buscar todo</string>
+    <string name="search_poi_category_hint">Escribe para buscar</string>
     <string name="rendering_attr_OSMMapperAssistant_name">Asistente al mapeador OSM</string>
     <string name="agps_info">Información A-GPS</string>
     <string name="shared_string_manage">Gestionar</string>
@@ -2370,7 +2370,7 @@ Si necesitas ayuda con la aplicación OsmAnd, contacte con nuestro equipo de sop
     <string name="dist_away_from_my_location">Buscar en %1$s alrededor</string>
     <string name="confirmation_to_delete_history_items">¿Quieres quitar del historial los elementos marcados?</string>
     <string name="back_to_search">Volver a la búsqueda</string>
-    <string name="coords_search">Coordenadas de búsqueda</string>
+    <string name="coords_search">Búsqueda de coordenadas</string>
     <string name="advanced_coords_search">Búsqueda avanzada de coordenadas</string>
     <string name="route_stops_before">%1$s parada(s) anterior(es)</string>
     <string name="rendering_attr_hideOverground_name">Objetos en superficie</string>
@@ -2786,8 +2786,8 @@ Representa el área: %1$s x %2$s</string>
     <string name="shared_string_paused">Pausado</string>
     <string name="type_city_town">Escribe la ciudad o pueblo</string>
     <string name="type_postcode">Escribe el código postal</string>
-    <string name="nearest_cities">Ciudades más cercanas</string>
-    <string name="select_city">Elegir la ciudad</string>
+    <string name="nearest_cities">Ciudades cercanas</string>
+    <string name="select_city">Elegir la ciudad o pueblo</string>
     <string name="select_postcode">Elegir el código postal</string>
     <string name="type_address">Escribe la dirección</string>
     <string name="select_street">Elegir la calle</string>
@@ -2839,4 +2839,6 @@ Representa el área: %1$s x %2$s</string>
     <string name="open_mapillary">Abrir Mapillary</string>
     <string name="mapillary_image">Imagen de Mapillary</string>
     <string name="distance_moving">Distancia corregida</string>
+    <string name="shared_string_permissions">Permisos</string>
+    <string name="import_gpx_failed_descr">OsmAnd no puede importar el archivo. Comprueba si OsmAnd tiene permiso para leer archivos desde esta ubicación.</string>
     </resources>

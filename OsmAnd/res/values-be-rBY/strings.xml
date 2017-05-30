@@ -2907,4 +2907,6 @@ Moduli:
     <string name="quick_action_sh_poi_descr">Vy možacie dadać adnu abo niekaĺki katehoryj POI dlia adliustravańnia na mapie.</string>
     <string name="quick_action_page_list_descr">Pry naciskanni na knopku budzie hartać staronki danaha spisu.</string>
     <string name="quick_action_btn_tutorial_descr">Doŭhi nacisk i pieraciahvannie dazvaĺci pieramiascić kropku</string>
+    <string name="shared_string_permissions">Dazvoly</string>
+    <string name="import_gpx_failed_descr">OsmAnd nie moža impartavać fajl. Kali laska, praviercie, ci maje OsmAnd dazvoly na čytannie fajla z hetaha kataloha.</string>
     </resources>

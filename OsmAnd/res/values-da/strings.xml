@@ -3074,4 +3074,6 @@ Tidligere destination bliver sidste mellemliggende punkt.</string>
     <string name="open_mapillary">Åbn Mapillary</string>
     <string name="mapillary_image">Mapillary foto</string>
     <string name="distance_moving">Korrigeret afstand</string>
+    <string name="shared_string_permissions">Tilladelser</string>
+    <string name="import_gpx_failed_descr">OsmAnd kan ikke importere filen. Kontroller om OsmAnd har tilladelse til at læse fra filplaceringen.</string>
     </resources>

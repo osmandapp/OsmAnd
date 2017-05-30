@@ -2872,4 +2872,6 @@ OsmAnd 是開放原始碼，而且正在積極的開發。應用程式從報告�
     <string name="open_mapillary">開啟 Mapillary</string>
     <string name="mapillary_image">Mapillary 圖片</string>
     <string name="distance_moving">距離已校正</string>
+    <string name="shared_string_permissions">權限</string>
+    <string name="import_gpx_failed_descr">OsmAnd 無法匯入檔案。 請檢查 OsmAnd 是否有權限從該位置去讀取檔案。</string>
     </resources>

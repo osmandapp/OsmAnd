@@ -1416,7 +1416,7 @@ OsmAnd має відкриті сирці і активно розвиваєть
     <string name="osmo_connected_devices">Під’єднані пристрої</string>
     <string name="osmo_groups">OsMo Групи</string>
     <string name="osmo_auto_send_locations_descr">Автоматичний початок подорожі та надсилання місцезнаходження після запуска застосунка</string>
-    <string name="osmo_auto_send_locations">Автоматичний запук подорожі</string>
+    <string name="osmo_auto_send_locations">Автоматичний запуск подорожі</string>
     <string name="osmo_tracker_id">ID трекера</string>
     <string name="osmo_tracker_id_descr">Натисніть, щоб подивитись ID трекера</string>
     <string name="osmo_server_operation_failed">OsMo Server збій виконання операції</string>
@@ -2014,7 +2014,7 @@ OsmAnd має відкриті сирці і активно розвиваєть
     <string name="storage_directory">Сховище мап</string>
     <string name="shared_string_copy">Копіювати</string>
     <string name="filter_poi_hint">Фільтрувати за назвою</string>
-    <string name="search_poi_category_hint">Введіть текст для пошуку всіх</string>
+    <string name="search_poi_category_hint">Введіть запит для пошуку всіх</string>
     <string name="rendering_value__name">За замовчуванням</string>
     <string name="rendering_value_highContrastRoads_name">Контрастні дороги</string>
 	<string name="index_name_netherlands">Європа - Нідерланди</string>
@@ -2572,22 +2572,22 @@ Facebook: https://www.facebook.com/osmandapp
     <string name="shared_string_notifications">Повідомлення</string>
     <string name="shared_string_continue">Продовжити</string>
     <string name="shared_string_pause">Пауза</string>
-    <string name="shared_string_trip">Поїздка</string>
+    <string name="shared_string_trip">Подорож</string>
     <string name="shared_string_recorded">Записано</string>
     <string name="shared_string_record">Запис</string>
     <string name="gpx_logging_no_data">Немає даних</string>
     <string name="release_2_5">" • Клікабельні іконки на мапі 
-\n 
-\n• Гнучка фільтрація POI в пошуку: шукайте ресторани за типом кухні, кемпінги за наявністю зручностей 
-\n 
-\n• Новий стиль мапи Topo для пішого туризму і велосипедистів 
 \n
+\n• Гнучка фільтрація POI в пошуку: шукайте ресторани за типом кухні, кемпінги за наявністю зручностей 
+\n
+\n• Новий стиль мапи Topo для пішого туризму і велосипедистів 
+\n 
 \n• Покращений запис поїздки (нові налаштування) 
 \n 
 \n• Покращені навігаційні повідомлення (Android Wear) 
-\n 
+\n
 \n• Безліч інших поліпшень й виправлень помилок 
-\n 
+\n
 \nі багато іншого … "</string>
     <string name="rendering_attr_contourColorScheme_description">Колірна схема горизонталей</string>
     <string name="save_track_min_speed">Мінімальна швидкість для запису</string>
@@ -2653,7 +2653,7 @@ Facebook: https://www.facebook.com/osmandapp
     <string name="shared_string_change">Змінити</string>
     <string name="get_started">Почати</string>
     <string name="route_stops_before">%1$s зупинок до обраної</string>
-    <string name="coords_search">Пошук за координатами</string>
+    <string name="coords_search">Пошук координат</string>
     <string name="advanced_coords_search">Розширений пошук за координатами</string>
     <string name="back_to_search">Повернення до пошуку</string>
     <string name="confirmation_to_delete_history_items">Вилучити вибране з історії пошуку?</string>
@@ -2848,8 +2848,8 @@ Facebook: https://www.facebook.com/osmandapp
     <string name="restart_search">Шукати знову</string>
     <string name="increase_search_radius">Збільшити радіус пошуку</string>
     <string name="nothing_found">Нічого не знайдено :(</string>
-    <string name="private_access_routing_req">"Пункт призначення знаходиться в області з приватним доступом.  Ви хочете дозволити доступ по приватних дорогах для цієї поїздки?"</string>
-    <string name="nothing_found_descr">Спробуйте змінити запит або збільшити радіус пошуку</string>
+    <string name="private_access_routing_req">"Пункт призначення знаходиться в області з приватним доступом.  Ви хочете дозволити доступ по приватних дорогах для цієї подорожі?"</string>
+    <string name="nothing_found_descr">Змініть пошуковий запит або ж розширте радіус пошуку</string>
     <string name="quick_action_showhide_osmbugs_title">Показати/приховати OSM-нотатки</string>
     <string name="quick_action_osmbugs_show">Показати OSM-нотатки</string>
     <string name="quick_action_osmbugs_hide">Приховати OSM-нотатки</string>
@@ -2874,8 +2874,8 @@ Facebook: https://www.facebook.com/osmandapp
     <string name="select_street">Виберіть вулицю</string>
     <string name="shared_string_in_name">у %1$s</string>
     <string name="type_address">Введіть адресу</string>
-    <string name="type_city_town">Введіть місто</string>
-    <string name="type_postcode">Введіть поштовий код</string>
+    <string name="type_city_town">Введіть місто чи СМТ</string>
+    <string name="type_postcode">Введіть поштовий індекс</string>
     <string name="nearest_cities">Найближчі міста</string>
     <string name="select_city">Виберіть місто</string>
     <string name="select_postcode">Виберіть поштовий індекс</string>
@@ -3053,7 +3053,7 @@ Facebook: https://www.facebook.com/osmandapp
 \n "</string>
     <string name="save_poi_too_many_uppercase">Назва містить занадто багато заголовних букв. Ви хочете продовжити?</string>
     <string name="shared_string_add_photos">Додати фотографії</string>
-    <string name="mapillary_action_descr">Поділитися своїми вуличними видами цієї місцевості з Mapillary.</string>
+    <string name="mapillary_action_descr">Поділитися своїми вуличними видами цієї місцевості через Mapillary.</string>
     <string name="mapillary_widget">Віджет Mapillary</string>
     <string name="mapillary_widget_descr">Дозволяє Вам швидко зробити внесок в Mapillary</string>
     <string name="mapillary_descr">"Фотографії вулиць в онлайні для всіх.  Відкрийте для себе місця, діліться та знимкуйте весь світ."</string>
@@ -3068,4 +3068,6 @@ Facebook: https://www.facebook.com/osmandapp
 \nДля цього Вам необхідно встановити застосунок Mapillary з Google Play."</string>
     <string name="mapillary_image">Зображення Mapillary</string>
     <string name="distance_moving">Відстань виправлена</string>
+    <string name="shared_string_permissions">Права доступу</string>
+    <string name="import_gpx_failed_descr">OsmAnd не може імпортувати файл. Будь ласка, перевірте, чи OsmAnd має дозвіл на читання файлу з його місця розташування.</string>
     </resources>

@@ -9,6 +9,8 @@
          3. All your modified/created strings are in the top of the file (to make easier find what\'s translated).
     PLEASE: Have a look at http://code.google.com/p/osmand/wiki/UIConsistency, it may really improve your and our work  :-)  Thx - Hardy
     -->
+    <string name="shared_string_permissions">Permissions</string>
+    <string name="import_gpx_failed_descr">OsmAnd cannot import the file. Please check if OsmAnd has permission to read file from its location.</string>
     <string name="distance_moving">Distance corrected</string>
     <string name="mapillary_image">Mapillary image</string>
     <string name="open_mapillary">Open Mapillary</string>
