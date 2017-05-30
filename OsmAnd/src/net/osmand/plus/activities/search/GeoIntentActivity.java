@@ -7,17 +7,8 @@ import android.content.Intent;
 import android.net.Uri;
 import android.os.AsyncTask;
 import android.os.Bundle;
-import android.util.Log;
-import android.view.LayoutInflater;
-import android.view.View;
-import android.view.ViewGroup;
-import android.widget.AdapterView;
-import android.widget.ArrayAdapter;
-import android.widget.TextView;
-import android.widget.Toast;
-import net.osmand.ResultMatcher;
+
 import net.osmand.data.Amenity;
-import net.osmand.data.City;
 import net.osmand.data.LatLon;
 import net.osmand.data.MapObject;
 import net.osmand.data.PointDescription;
@@ -31,20 +22,9 @@ import net.osmand.plus.OsmandSettings;
 import net.osmand.plus.R;
 import net.osmand.plus.activities.MapActivity;
 import net.osmand.plus.activities.OsmandListActivity;
-import net.osmand.plus.resources.RegionAddressRepository;
-import net.osmand.plus.resources.ResourceManager;
 import net.osmand.util.Algorithms;
 import net.osmand.util.GeoPointParserUtil;
 import net.osmand.util.GeoPointParserUtil.GeoParsedPoint;
-import net.osmand.util.MapUtils;
-
-import java.util.ArrayList;
-import java.util.Collection;
-import java.util.Collections;
-import java.util.Iterator;
-import java.util.List;
-
-import gnu.trove.map.hash.TLongObjectHashMap;
 
 public class GeoIntentActivity extends OsmandListActivity {
 
@@ -141,21 +121,31 @@ public class GeoIntentActivity extends OsmandListActivity {
 
 		@Override
 		protected void onPostExecute(GeoPointParserUtil.GeoParsedPoint p ) {
-			progress.dismiss();
-			OsmandSettings settings = getMyApplication().getSettings();
-			if (p != null && p.isGeoPoint()) {
-				PointDescription pd = new PointDescription(p.getLatitude(), p.getLongitude());
-				if(!Algorithms.isEmpty(p.getLabel())) {
-					pd.setName(p.getLabel());
+			if (progress != null && progress.isShowing()) {
+				try {
+					progress.dismiss();
+				} catch (Exception e) {
+					e.printStackTrace();
 				}
-				settings.setMapLocationToShow(p.getLatitude(), p.getLongitude(),
-						settings.getLastKnownMapZoom(), pd); //$NON-NLS-1$
-				MapActivity.launchMapActivityMoveToTop(GeoIntentActivity.this);
 			}
-			Uri uri = intent.getData();
-			String searchString = p != null && p.isGeoAddress() ? p.getQuery() : uri.toString();
-			settings.setSearchRequestToShow(searchString);
-			MapActivity.launchMapActivityMoveToTop(GeoIntentActivity.this);
+			try {
+				OsmandSettings settings = getMyApplication().getSettings();
+				if (p != null && p.isGeoPoint()) {
+					PointDescription pd = new PointDescription(p.getLatitude(), p.getLongitude());
+					if (!Algorithms.isEmpty(p.getLabel())) {
+						pd.setName(p.getLabel());
+					}
+					settings.setMapLocationToShow(p.getLatitude(), p.getLongitude(),
+							settings.getLastKnownMapZoom(), pd); //$NON-NLS-1$
+					MapActivity.launchMapActivityMoveToTop(GeoIntentActivity.this);
+				}
+				Uri uri = intent.getData();
+				String searchString = p != null && p.isGeoAddress() ? p.getQuery() : uri.toString();
+				settings.setSearchRequestToShow(searchString);
+				MapActivity.launchMapActivityMoveToTop(GeoIntentActivity.this);
+			} catch (Exception e) {
+				e.printStackTrace();
+			}
 		}
 
 	}
