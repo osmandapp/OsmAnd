@@ -2841,11 +2841,13 @@ Abgedeckte Fläche: %1$s x %2$s</string>
     <string name="shared_string_install">Installieren</string>
     <string name="online_photos">Online-Fotos</string>
     <string name="no_photos_descr">Es gibt keine Fotos von diesem Ort</string>
-    <string name="plugin_mapillary_descr">Fotos von der Straße für Jedermann. Plätze entdecken, mitwirken, die Welt im Bild festhalten.</string>
-    <string name="improve_coverage_mapillary">Verbessern Sie die Berichterstattung mit Mapillary</string>
+    <string name="plugin_mapillary_descr">Fotos von der Straße für jedermann. Plätze entdecken, mitwirken, die Welt im Bild festhalten.</string>
+    <string name="improve_coverage_mapillary">Verbessern Sie die Bildberichterstattung mit Mapillary</string>
     <string name="improve_coverage_install_mapillary_desc">Machen Sie Ihr eigenes Foto oder eine Fotoserie und fügen Sie sie dieser Kartenposition hinzu. 
 \n 
 \nHierfür müssen Sie die App „Mapillary“ von Google Play installieren.</string>
     <string name="open_mapillary">Mapillary öffnen</string>
     <string name="mapillary_image">Mapillary-Foto</string>
+    <string name="shared_string_permissions">Berechtigungen</string>
+    <string name="import_gpx_failed_descr">OsmAnd kann die Datei nicht importieren. Überprüfen Sie, ob OsmAnd Leserechte für den Dateispeicherort besitzt.</string>
     </resources>
