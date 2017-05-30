@@ -62,6 +62,8 @@ public class InAppHelper {
 	private boolean isDeveloperVersion = false;
 	private boolean forceRequestInventory = false;
 	private String token = "";
+	private boolean inventoryRequesting = false;
+	private boolean stopRequested = false;
 
 	private OsmandApplication ctx;
 	private List<InAppListener> listeners = new ArrayList<>();
@@ -270,8 +272,10 @@ public class InAppHelper {
 						skus.add(SKU_DEPTH_CONTOURS);
 						skus.add(SKU_FULL_VERSION_PRICE);
 						try {
+							inventoryRequesting = true;
 							mHelper.queryInventoryAsync(true, skus, mGotInventoryListener);
 						} catch (Exception e) {
+							inventoryRequesting = false;
 							logError("queryInventoryAsync Error", e);
 							notifyDismissProgress();
 							if (stopAfterResult) {
@@ -298,15 +302,16 @@ public class InAppHelper {
 	private QueryInventoryFinishedListener mGotInventoryListener = new QueryInventoryFinishedListener() {
 		public void onQueryInventoryFinished(IabResult result, Inventory inventory) {
 			logDebug("Query inventory finished.");
+			inventoryRequesting = false;
 
 			// Have we been disposed of in the meantime? If so, quit.
 			if (mHelper == null) return;
 
 			// Is it a failure?
-			if (result.isFailure()) {
+			if (result.isFailure() || stopRequested) {
 				logError("Failed to query inventory: " + result);
 				notifyError(result.getMessage());
-				if (stopAfterResult) {
+				if (stopAfterResult || stopRequested) {
 					stop();
 				}
 				return;
@@ -385,7 +390,7 @@ public class InAppHelper {
 				public void onResult(String result) {
 					notifyDismissProgress();
 					notifyGetItems();
-					if (stopAfterResult) {
+					if (stopAfterResult || stopRequested) {
 						stop();
 					}
 					logDebug("Initial inapp query finished");
@@ -649,8 +654,13 @@ public class InAppHelper {
 	public void stop() {
 		logDebug("Destroying helper.");
 		if (mHelper != null) {
-			mHelper.dispose();
-			mHelper = null;
+			if (!inventoryRequesting) {
+				stopRequested = false;
+				mHelper.dispose();
+				mHelper = null;
+			} else {
+				stopRequested = true;
+			}
 		}
 	}
 
