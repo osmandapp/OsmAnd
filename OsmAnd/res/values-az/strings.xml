@@ -1378,4 +1378,5 @@
     <string name="save_current_track">Hazırki GPX izini saxla</string>
     <string name="save_track_to_gpx">Naviqasiya zamanı izi avtomatik qeyd et</string>
     <string name="save_track_to_gpx_descrp">Naviqasiya zamanı iz GPX formatında izlər qovluğunda avtomatik saxlanacaq</string>
+    <string name="none_selected_gpx">Heç bir GPX faylı seçilməyib. Seçmək üçün mövcud izə basıb saxlayın.</string>
     </resources>
