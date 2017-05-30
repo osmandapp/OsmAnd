@@ -2843,4 +2843,6 @@ Pro praghere iscrie su còdighe intreu</string>
 \nPro lu fàghere depes installare s\'aplicatzione Mapillary dae Google Play.</string>
     <string name="mapillary_image">Immàgine de Mapillary</string>
     <string name="distance_moving">Distàntzia curreta</string>
+    <string name="shared_string_permissions">Autorizatziones</string>
+    <string name="import_gpx_failed_descr">OsmAnd non podet importare su documentu. Pro praghere verìfica chi OsmAnd tèngiat sas autorizatziones pro lèghere su documentu dae sa cartella sua.</string>
     </resources>
