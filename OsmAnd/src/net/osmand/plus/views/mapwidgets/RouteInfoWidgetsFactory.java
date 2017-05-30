@@ -25,6 +25,7 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.widget.ImageView;
 import android.widget.TextView;
+import android.widget.Toast;
 
 import net.osmand.Location;
 import net.osmand.binary.RouteDataObject;
@@ -57,7 +58,6 @@ import net.osmand.plus.views.mapwidgets.MapWidgetRegistry.WidgetState;
 import net.osmand.router.RouteResultPreparation;
 import net.osmand.router.TurnType;
 import net.osmand.util.Algorithms;
-import net.osmand.util.MapUtils;
 
 import java.util.ArrayList;
 import java.util.Arrays;
@@ -373,6 +373,18 @@ public class RouteInfoWidgetsFactory {
 		batteryControl.setText(null, null);
 		batteryControl.setIcons(battery, batteryN);
 		return batteryControl;
+	}
+
+	public TextInfoWidget createRulerControl(final MapActivity map) {
+		final TextInfoWidget rulerControl = new TextInfoWidget(map);
+		rulerControl.setOnClickListener(new View.OnClickListener() {
+			@Override
+			public void onClick(View v) {
+				Toast.makeText(map, "Ruler Test", Toast.LENGTH_SHORT).show();
+			}
+		});
+		rulerControl.setIcons(R.drawable.widget_distance_day, R.drawable.widget_distance_night);
+		return rulerControl;
 	}
 
 
