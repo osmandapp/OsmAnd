@@ -769,7 +769,10 @@ public class QuickSearchDialogFragment extends DialogFragment implements OsmAndC
 		searching = false;
 		hideProgressBar();
 		updateClearButtonVisibility(true);
-		getDialog().hide();
+		Dialog dialog = getDialog();
+		if (dialog != null) {
+			dialog.hide();
+		}
 		app.getLocationProvider().addCompassListener(app.getLocationProvider().getNavigationInfo());
 	}
 
