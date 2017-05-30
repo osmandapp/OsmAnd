@@ -680,13 +680,10 @@ Navigační služba je dočasně přepnuta na on-line CloudMade.</string>
     <string name="shared_string_online_maps">On-line mapy</string>
     <string name="online_map_settings_descr">Nastavení rastrových překryvných nebo podkresových map</string>
     <string name="osmand_rastermaps_plugin_description">"S tímto modulem můžete použít mnoho druhů on-line map (tzv. dlaždicové nebo rastrové mapy), od předdefinovaných OpenStreetMap dlaždic (jako Mapnik) až po satelitní snímky a speciální vrstvy jako mapy počasí, klimatické mapy, geologické mapy, stínované vrstvy, atd.
-
-
-Všechny tyto mapy mohou být použity jako hlavní (základní) mapa na obrazovce OsmAnd nebo jako překryvná popř. podkladová mapa k jiné základní mapě (např. standardní OsmAnd off-line mapě). Pro zlepšení viditelnosti podkladových map je možné vypnout některé objekty z vektorových map OsmAnd, přes menu \'Nastavení mapy\'.
-
-
-Dlaždicové mapy můžete získat přímo z on-line zdrojů nebo si je můžete připravit pro off-line použití (zkopírovat ručně do datového adresáře OsmAnd) jako SQLite databázi, která může být vytvořena mnoha programy pro přípravu map.
- "</string>
+\n
+\nVšechny tyto mapy mohou být použity jako hlavní (základní) mapa na obrazovce OsmAnd nebo jako překryvná popř. podkladová mapa k jiné základní mapě (např. standardní OsmAnd off-line mapě). Pro zlepšení viditelnosti podkladových map je možné vypnout některé objekty z vektorových map OsmAnd, přes menu \'Nastavení mapy\'.
+\n
+\nDlaždicové mapy můžete získat přímo z on-line zdrojů nebo si je můžete připravit pro off-line použití (zkopírovat ručně do datového adresáře OsmAnd) jako SQLite databázi, která může být vytvořena mnoha programy pro přípravu map. "</string>
     <string name="osmand_background_plugin_description">Zobrazí nastavení na povolení záznamu trasy a navigace v úsporném režimu (při vypnuté obrazovce) pravidelným probouzením GPS zařízení.</string>
     <string name="osmand_accessibility_description">Tento modul zobrazí nastavení pro speciální funkce ulehčení přístupu přímo v OsmAnd. Například je možné měnit rychlost TTS hlasu, použít trackball na přibližování nebo například použít hlasové předčítání pro oznamování polohy.</string>
     <string name="osmand_development_plugin_description">Tento modul zobrazí nastavení vývojových a ladících funkcí, jako jsou simulace navigace, informace o rychlosti vykreslování nebo hlasová oznámení. Tato nastavení jsou určené pro vývojáře a nejsou potřebné pro běžné použití.</string>
@@ -927,10 +924,8 @@ Výčet některých hlavních funkcí:
     <string name="download_select_map_types">Ostatní mapy</string>
     <string name="audionotes_plugin_name">Modul zvukové/video poznámky</string>
     <string name="srtm_plugin_description">"Tento modul poskytuje zobrazení vrstevnic a vrstvy stínování kopců, které mohou být zobrazené na standardních OsmAnd mapách. Tato funkce je vhodná především pro sportovce, turisty, chodce a vůbec všechny, které zajímá profil terénu. (Upozorňujeme, že data vrstevnic a stínování jsou oddělené, jejich stažení je umožněno po aktivaci pluginu)
-
-
-Celosvětová výšková data (mezi 70 stupni severní šířky a 70 stupni jižní šířky) se zakládají na měřeních SRTM (Shuttle Radar Topography Mission) a ASTER (Advanced Spaceborne Thermal Emission and Reflection Radiometer), snímkovací přístroj na palubě satelitu Terra, vlajkového satelitu Systému pozorování Země NASA. ASTER je společným projektem NASA, japonského ministerstva hospodářství, obchodu a průmyslu (METI) a Japan Space Systems (J-spacesystems).
- "</string>
+\n
+\nCelosvětová výšková data (mezi 70 stupni severní šířky a 70 stupni jižní šířky) se zakládají na měřeních SRTM (Shuttle Radar Topography Mission) a ASTER (Advanced Spaceborne Thermal Emission and Reflection Radiometer), snímkovací přístroj na palubě satelitu Terra, vlajkového satelitu Systému pozorování Země NASA. ASTER je společným projektem NASA, japonského ministerstva hospodářství, obchodu a průmyslu (METI) a Japan Space Systems (J-spacesystems). "</string>
     <string name="srtm_plugin_name">Vrstevnice</string>
     <string name="download_srtm_maps">Vrstevnice</string>
     <string name="audionotes_location_not_defined">GPS pozice pro záznam zvukové poznámky ještě není známa. Pokud chcete použít specifickou lokaci použijte \"Možnosti bodu\".</string>
@@ -973,10 +968,8 @@ Celosvětová výšková data (mezi 70 stupni severní šířky a 70 stupni již
     <string name="shared_string_control_stop">Zastavit</string>
     <string name="dropbox_plugin_description">Modul Dropbox vám umožňuje nahrávat trasy, audio a video poznámky do vašeho účtu Dropbox.</string>
     <string name="osmand_srtm_long_description_1000_chars">"Tento modul poskytuje zobrazení vrstevnic a vrstvy stínování kopců, které mohou být zobrazené na standardních OsmAnd mapách. Tato funkce je vhodná především pro sportovce, turisty, chodce a vůbec všechny, které zajímá profil terénu.
-
-
-Celosvětová výšková data (mezi 70 stupni severní šířky a 70 stupni jižní šířky) se zakládají na měřeních SRTM (Shuttle Radar Topography Mission) a ASTER (Advanced Spaceborne Thermal Emission and Reflection Radiometer), snímkovací přístroj na palubě satelitu Terra, vlajkového satelitu Systému pozorování Země NASA. ASTER je společným projektem NASA, japonského ministerstva hospodářství, obchodu a průmyslu (METI) a Japan Space Systems (J-spacesystems).
- "</string>
+\n
+\nCelosvětová výšková data (mezi 70 stupni severní šířky a 70 stupni jižní šířky) se zakládají na měřeních SRTM (Shuttle Radar Topography Mission) a ASTER (Advanced Spaceborne Thermal Emission and Reflection Radiometer), snímkovací přístroj na palubě satelitu Terra, vlajkového satelitu Systému pozorování Země NASA. ASTER je společným projektem NASA, japonského ministerstva hospodářství, obchodu a průmyslu (METI) a Japan Space Systems (J-spacesystems). "</string>
     <string name="stop_routing_confirm">Opravdu chcete zastavit navigaci?</string>
     <string name="clear_dest_confirm">Opravdu chcete smazat svůj cíl (a mezicíle)?</string>
     <string name="recording_context_menu_show">Zobrazit</string>
@@ -1240,13 +1233,10 @@ Celosvětová výšková data (mezi 70 stupni severní šířky a 70 stupni již
     <string name="osmo_mode_off">Spustit OsMo relaci</string>
     <string name="use_points_as_intermediates">Vypočítat trasu mezi body</string>
     <string name="osmo_plugin_description">"Tento modul částečně poskytuje funkcionalitu pro OpenStreetMap monitorování, podívejte se na https://osmo.mobi.
-
-
-Můžete sledovat všechna zařízení spolupracující skupiny v reálném čase. Můžete také vidět body a trasy nahrané do skupiny, které jste členem.
-
-
-The group has not been removed after months, bring it in line with the rules you create groups on the website OsMo.mobi
- "</string>
+\n
+\nMůžete sledovat všechna zařízení spolupracující skupiny v reálném čase. Můžete také vidět body a trasy nahrané do skupiny, které jste členem.
+\n
+\nThe group has not been removed after months, bring it in line with the rules you create groups on the website OsMo.mobi "</string>
     
     <string name="rendering_value_pink_name">růžová</string>
     
@@ -1380,21 +1370,13 @@ The group has not been removed after months, bring it in line with the rules you
     <string name="rendering_attr_hideWoodScrubs_name">Lesy a křoviny</string>
     <string name="rendering_attr_showSurfaces_name">Zobrazit povrch cesty</string>
     <string name="osmo_group_information">Prosím čtěte před vytvářením skupiny!</string>
-    <string name="osmo_group_information_desc">"
- - Vyplňte jméno a popis skupiny při vytvoření
-
- - From the application group are created only with Simple type, read more on the website https://osmo.mobi/g/new
-
- - Skupiny můžete spravovat přes webové stránky, umísťování tras a bodů je k dispozici všem
-
- - Nepodporujeme použití skupiny pouze jedním uživatelem, pokud to není POI skupina
-
- - Soukromé skupiny jsou omezené na 8 lidí.
-
- - Detailní pravidla a podmínky jsou vždy na stránkách OsMo.mobi
-
- - Pokud potřebujete zvláštní podmínky, prosím kontaktujte podporu: osmo.mobi@gmail.com
- "</string>
+    <string name="osmo_group_information_desc">" - Vyplňte jméno a popis skupiny při vytvoření
+\n - Z aplikace se vytváří pouze skupiny jednoduchého typu, více se dozvíte na stránkách https://osmo.mobi/g/new
+\n - Skupiny můžete spravovat přes webové stránky, umísťování tras a bodů je k dispozici všem
+\n - Nepodporujeme použití skupiny pouze jedním uživatelem, pokud to není POI skupina
+\n - Soukromé skupiny jsou omezené na 8 lidí.
+\n - Detailní pravidla a podmínky jsou vždy na stránkách OsMo.mobi
+\n - Pokud potřebujete zvláštní podmínky, prosím kontaktujte podporu: osmo.mobi@gmail.com "</string>
     <string name="osmo_auth_error">Chyba při autorizaci OsMo: %1$s.\n Služba může být dočasně nedostupná nebo vám vypršela registrace.
 \n Chcete pokračovat v nové registraci?</string>
     <string name="osmo_auth_error_short">Autorizace selhala</string>
@@ -1459,10 +1441,8 @@ The group has not been removed after months, bring it in line with the rules you
     <string name="save_track_interval_globally">Interval ukládání trasy</string>
     <string name="rendering_attr_publicTransportMode_name">Autobusy, trolejbusy a kyvadlová doprava</string>
     <string name="record_plugin_description">"Tento modul zapne funkci záznamu a uložení vašich tras stisknutím tlačítka GPX na panelu mapové obrazovky nebo také automatického ukládání všech vašich navigačních tras do GPX souboru.
-
-
-Zaznamenávané trasy můžete sdílet se svými přáteli nebo mohou být použity jako příspěvek do OSM. Sportovci mohou použít zaznamenané trasy k sledování svých tréninků. Základní analýza může být provedena již přímo v OsmAnd, například čas okruhu, průměrná rychlost, apod. Trasy mohou být samozřejmě analyzovány později speciálními programy třetích stran.
- "</string>
+\n
+\nZaznamenávané trasy můžete sdílet se svými přáteli nebo mohou být použity jako příspěvek do OSM. Sportovci mohou použít zaznamenané trasy k sledování svých tréninků. Základní analýza může být provedena již přímo v OsmAnd, například čas okruhu, průměrná rychlost, apod. Trasy mohou být samozřejmě analyzovány později speciálními programy třetích stran. "</string>
     <string name="record_plugin_name">Záznam cesty</string>
     <string name="int_hour">h</string>
     <string name="duration">Trvání</string>
@@ -1818,35 +1798,24 @@ Délka %2$s</string>
     <string name="filter_poi_hint">Filtrovat podle jména</string>
     <string name="search_poi_category_hint">Pište pro vyhledání ve všech</string>
     <string name="plugin_touringview_descr">"Aktivováním tohoto pohledu se změní styl mapy na \"Touring view\", který obsahuje víc detailů pro cestovatele a profesionální řidiče.
-
-
-Tento pohled poskytuje ve všech přiblíženích mapy maximum cestovních detailů (např. silnice, cesty, pěšiny a orientační značky).
-
-
-Také zobrazuje typy cest v jednoznačně odlišných barvách, což je užitečné například pro velká vozidla.
-
-
-Poskytuje také speciální možnosti pro cestování jako cyklotrasy a skialpinistické trasy.
-
-
-Není potřeba stahovat samostatný soubor, tento pohled používá standardní mapové soubory.
-
-
-Tento pohled může být vypnut jeho deaktivováním zde, nebo změnou hodnoty ve \"Vykreslování mapy\" v \"Nastavení mapy\".
- "</string>
+\n
+\nTento pohled poskytuje ve všech přiblíženích mapy maximum cestovních detailů (např. silnice, cesty, pěšiny a orientační značky).
+\n
+\nTaké zobrazuje typy cest v jednoznačně odlišných barvách, což je užitečné například pro velká vozidla.
+\n
+\nPoskytuje také speciální možnosti pro cestování jako cyklotrasy a skialpinistické trasy.
+\n
+\nNení potřeba stahovat samostatný soubor, tento pohled používá standardní mapové soubory.
+\n
+\nTento pohled může být vypnut jeho deaktivováním zde, nebo změnou hodnoty ve \"Vykreslování mapy\" v \"Nastavení mapy\". "</string>
     <string name="plugin_nautical_descr">"Tento modul obohacuje OsmAnd mapy a navigaci o poskytování plavebních map pro plavení, plachtění a ostatní typy vodních sportů.
-
-
-Speciální mapový modul pro OsmAnd poskytuje všechny plavební znaky a symboly pro vnitrozemskou i pobřežní navigaci. Popis každého plavebního znaku poskytuje všechny údaje k jejich identifikaci (kategorii, tvar, barvu atd.)
-
-
-Tento pohled může být vypnut jeho deaktivovací zde, nebo změnou hodnoty ve „Vykreslování mapy“ v „Nastavení mapy“.
- "</string>
+\n
+\nSpeciální mapový modul pro OsmAnd poskytuje všechny plavební znaky a symboly pro vnitrozemskou i pobřežní navigaci. Popis každého plavebního znaku poskytuje všechny údaje k jejich identifikaci (kategorii, tvar, barvu atd.)
+\n
+\nTento pohled může být vypnut jeho deaktivovací zde, nebo změnou hodnoty ve „Vykreslování mapy“ v „Nastavení mapy“. "</string>
     <string name="plugin_ski_descr">"Tento modul pro OsmAnd zobrazuje sjezdovky, běžecké tratě, skialpinistické trasy, lanovky a lyžařské vleky. Tratě a sjezdovky jsou zobrazeny barvami podle obtížnosti na speciálně barevně upravené zimní mapě.
-
-
-Aktivováním tohoto pohledu se změní styl mapy na \"Winter and ski\", který zobrazuje krajinné útvary v zimních podmínkách. Tento pohled může být vypnut jeho deaktivováním zde, nebo změnou hodnoty ve \"Vykreslování mapy\" v \"Nastavení mapy\".
- "</string>
+\n
+\nAktivováním tohoto pohledu se změní styl mapy na \"Winter and ski\", který zobrazuje krajinné útvary v zimních podmínkách. Tento pohled může být vypnut jeho deaktivováním zde, nebo změnou hodnoty ve \"Vykreslování mapy\" v \"Nastavení mapy\". "</string>
     <string name="index_name_netherlands">Evropa - Holandsko</string>
     <string name="rendering_value__name">Výchozí</string>
     <string name="rendering_value_highContrastRoads_name">Vysoce kontrastní cesty</string>
@@ -2087,33 +2056,23 @@ Aktivováním tohoto pohledu se změní styl mapy na \"Winter and ski\", který 
     <string name="access_from_map_description">Tlačítko menu zobrazí domovskou obrazovku místo menu</string>
     <string name="access_from_map">Přístup z mapy</string>
     <string name="copied_to_clipboard">Zkopírováno do schránky</string>
-    <string name="release_2_2">"
- • nové kontextově závislé rozhraní pro označení umístění na mapě a ostatních obrazovkách
-
-
- • obrazovka mapy je nyní spouštěná přímo, pokud není zvoleno \'Zobrazit domovskou obrazovku po startu\'
-
-
- • konfigurace karet zobrazovaných na domovské obrazovce
-
-
- • domovskou obrazovku je možné obejít, pokud preferujete ovládání aplikace přes menu
-
-
- • regiony, pro něž chcete stáhnout mapu, je nyní možné vybrat přímo na mapě světa
-
-
- • vyhledávání POI nyní umožňuje přesnější dotazy
-
-
- • vylepšená editace POI a OSM
-
-
- • přepracované rozhraní stahování map
-
-
- a další…
- "</string>
+    <string name="release_2_2">" • nové kontextově závislé rozhraní pro označení umístění na mapě a ostatních obrazovkách
+\n
+\n • obrazovka mapy je nyní spouštěná přímo, pokud není zvoleno \'Zobrazit domovskou obrazovku po startu\'
+\n
+\n • konfigurace karet zobrazovaných na domovské obrazovce
+\n
+\n • domovskou obrazovku je možné obejít, pokud preferujete ovládání aplikace přes menu
+\n
+\n • regiony, pro něž chcete stáhnout mapu, je nyní možné vybrat přímo na mapě světa
+\n
+\n • vyhledávání POI nyní umožňuje přesnější dotazy
+\n
+\n • vylepšená editace POI a OSM
+\n
+\n • přepracované rozhraní stahování map
+\n
+\n a další… "</string>
     <string name="osm_save_offline">Uložit off-line</string>
     <string name="osm_edit_modified_poi">Upravený OSM POI</string>
     <string name="osm_edit_deleted_poi">Smazaný OSM POI</string>
@@ -2381,27 +2340,19 @@ Pokud máte rádi OsmAnd a OSM a chcete je podpořit, toto je výborný způsob,
     <string name="rendering_attr_hideOverground_name">Nadzemní objekty</string>
     <string name="shared_string_change">Změnit</string>
     <string name="get_started">Začít</string>
-    <string name="release_2_4">"
- • Nové mocné vyhledávání libovolného textu
-
-
- • Propojení s audiosystémem v autě přes Bluetooth
-
-
- • Vylepšená navigace, hlasové pokyny a indikace jízdních pruhů
-
-
- • Vylepšená dopravní vrstva s vykreslením tras
-
-
- • Přidané další jazyky a regionální verze
-
-
- • Mnoho dalších vylepšení a oprav chyb
-
-
- a další…
- "</string>
+    <string name="release_2_4">" • Nové mocné vyhledávání libovolného textu
+\n
+\n • Propojení s audiosystémem v autě přes Bluetooth
+\n
+\n • Vylepšená navigace, hlasové pokyny a indikace jízdních pruhů
+\n
+\n • Vylepšená dopravní vrstva s vykreslením tras
+\n
+\n • Přidané další jazyky a regionální verze
+\n
+\n • Mnoho dalších vylepšení a oprav chyb
+\n
+\n a další… "</string>
     <string name="osm_live_payment_desc">Poplatek za předplatné bude stržen každý měsíc. Předplatné můžete zrušit kdykoli na Google Play.</string>
     <string name="donation_to_osm">Příspěvek komunitě OpenStreetMap</string>
     <string name="donation_to_osm_desc">Část příspěvku bude zaslaná uživatelům, kteří odesílají změny do OpenStreetMap. Cena předplatného zůstává stejná.</string>
@@ -2470,45 +2421,30 @@ Pokud máte rádi OsmAnd a OSM a chcete je podpořit, toto je výborný způsob,
     <string name="wiki_around">Články Wikipedie v okolí</string>
     <string name="search_map_hint">Hledat město nebo oblast</string>
     <string name="show_legacy_search_desc">Zapnout starší hledání v úvodním panelu</string>
-    <string name="release_2_5">"
- • Klikatelné ikony na mapě
-
-
- • Podrobné filtrování POI: Například hledání restaurace dle kuchyně, kempy se speciálními službami, apod.
-
-
- • Nový styl topo mapy pro cyklisty a turisty
-
-
- • Vylepšení nahrávání cesty
-
-
- • Vylepšené notifikace navigace (Android Wear)
-
-
- • Mnohá další vylepšení a opravy chyb
-
-
- a další…
- "</string>
-    <string name="release_2_3">"
- • OSM Live. Podpořte tvůrce map a vývojáře a získejte aktualizace map každou hodinu.
-
-
- • Mapové značky. Nový způsob rychlého výběru míst na mapě.
-
-
- • Detailnější mapy z OSM s ikonami cest pro příslušné krajiny a nové objekty na mapě.
-
-
- • Vylepšený vzhled a použití tvorby trasy.
-
-
- • Vylepšení v menu mapy, jako například hledání adresy podle kontextu.
-
-
- a další…
- "</string>
+    <string name="release_2_5">" • Klikatelné ikony na mapě
+\n
+\n • Podrobné filtrování POI: Například hledání restaurace dle kuchyně, kempy se speciálními službami, apod.
+\n
+\n • Nový styl topo mapy pro cyklisty a turisty
+\n
+\n • Vylepšení nahrávání cesty
+\n
+\n • Vylepšené notifikace navigace (Android Wear)
+\n
+\n • Mnohá další vylepšení a opravy chyb
+\n
+\n a další… "</string>
+    <string name="release_2_3">" • OSM Live. Podpořte tvůrce map a vývojáře a získejte aktualizace map každou hodinu.
+\n
+\n • Mapové značky. Nový způsob rychlého výběru míst na mapě.
+\n
+\n • Detailnější mapy z OSM s ikonami cest pro příslušné krajiny a nové objekty na mapě.
+\n
+\n • Vylepšený vzhled a použití tvorby trasy.
+\n
+\n • Vylepšení v menu mapy, jako například hledání adresy podle kontextu.
+\n
+\n a další… "</string>
     <string name="lang_sr_latn">Srbsky (Latinka)</string>
     <string name="lang_zh_hk">Čínsky (Hong Kong)</string>
     <string name="rendering_attr_contourDensity_description">Hustota vrstevnic</string>
@@ -2773,7 +2709,7 @@ Pokud potřebujete pomoci s aplikací OsmAnd, prosím kontaktujte naši podporu
     <string name="change_color">Změnit barvu</string>
     <string name="edit_name">Upravit název</string>
     <string name="animate_my_location">Animovat moji polohu</string>
-    <string name="animate_my_location_desc">Povolit extrapolaci mojí polohy při dočasné ztrátě družicového signálu</string>
+    <string name="animate_my_location_desc">Povolit animaci mojí polohy při navigaci</string>
     <string name="shared_string_overview">Přehled</string>
     <string name="select_street">Vyberte ulici</string>
     <string name="shared_string_in_name">v %1$s</string>
@@ -2801,6 +2737,23 @@ Pokud potřebujete pomoci s aplikací OsmAnd, prosím kontaktujte naši podporu
     <string name="restart_search">Spustit hledání znovu</string>
     <string name="increase_search_radius">Zvětšit okruh hledání</string>
     <string name="nothing_found">Nic nalezeno :(</string>
-    <string name="nothing_found_descr">Zkuste změnit vyhledávací dotaz nebo zvýšit okruh hledání</string>
+    <string name="nothing_found_descr">Změňte vyhledávací dotaz nebo zvyšte okruh hledání</string>
     <string name="quick_action_showhide_osmbugs_title">Zobrazit/skrýt poznámky OSM</string>
+    <string name="shared_string_permissions">Oprávnění</string>
+    <string name="import_gpx_failed_descr">OsmAnd nemůže naimportovat soubor. Prosím zkontrolujte, že má oprávnění číst soubor z tohoto umístění.</string>
+    <string name="distance_moving">Vzdálenost opravená</string>
+    <string name="mapillary_image">Obrázek Mapillary</string>
+    <string name="open_mapillary">Otevřít Mapillary</string>
+    <string name="shared_string_install">Instalovat</string>
+    <string name="improve_coverage_mapillary">Zlepšit pokrytí fotografií s Mapillary</string>
+    <string name="improve_coverage_install_mapillary_desc">Můžete vyfotit své vlastní fotografie nebo série fotografií a připojit je k tomuto místu na mapě.
+\n
+\nK tomu budete muset nainstalovat aplikaci Mapillary z obchodu Google Play.</string>
+    <string name="online_photos">On-line fotografie</string>
+    <string name="shared_string_add_photos">Přidat fotografie</string>
+    <string name="no_photos_descr">Nemáme fotografie pro toto umístění</string>
+    <string name="mapillary_action_descr">Přispějte vlastními pohledy na toto místo přes Mapillary z úrovně ulice.</string>
+    <string name="mapillary_widget_descr">Umožňuje rychle přispět do Mapillary</string>
+    <string name="mapillary_descr">On-line fotografie z ulic pro každého. Objevte místa, spolupracujte, zachyťte svět.</string>
+    <string name="plugin_mapillary_descr">Fotografie z ulic pro každého. Objevte místa, spolupracujte, zachyťte svět.</string>
     </resources>
