@@ -1323,4 +1323,28 @@
     <string name="routing_attr_height_obstacles_name">სიმაღლის მონაცემების გამოყენება</string>
     <string name="rendering_attr_depthContours_description">სიღრმის წერტილებისა და კონტურების ჩვენება</string>
     <string name="rendering_attr_depthContours_name">სიღრმის კონტურები</string>
-	</resources>
+	<string name="distance_moving">დაშორება შესწორებულია</string>
+    <string name="shared_string_install">ჩადგმა</string>
+    <string name="shared_string_add_photos">ფოტოების დამატება</string>
+    <string name="no_photos_descr">მოცემული ლოკაციისთვის ფოტოები არ არსებობს</string>
+    <string name="restart_search">თავიდან ძებნა</string>
+    <string name="increase_search_radius">ძებნის რადიუსის გაზრდა</string>
+    <string name="nothing_found">ვერაფერი ვიპოვეთ :(</string>
+    <string name="sorted_by_distance">დალაგებულია დაშორების მიხედვით</string>
+    <string name="search_favorites">რჩეულებში ძებნა</string>
+    <string name="favorite_group_name">ჯგუფის სახელი</string>
+    <string name="change_color">ფერის შეცვლა</string>
+    <string name="edit_name">სახელის შეცვლა</string>
+    <string name="shared_string_overview">მიმოხილვა</string>
+    <string name="select_street">ქუჩის არჩევა</string>
+    <string name="type_address">ჩაწერეთ მისამართი</string>
+    <string name="type_city_town">ჩაწერეთ ქალაქი</string>
+    <string name="type_postcode">ჩაწერეთ საფოსტო კოდი</string>
+    <string name="nearest_cities">უახლოესი ქალაქები</string>
+    <string name="select_city">აირჩიეთ ქალაქი</string>
+    <string name="select_postcode">აირჩიეთ საფოსტო კოდი</string>
+    <string name="quick_action_add_destination">დანიშნულების წერტილის დამატება</string>
+    <string name="quick_action_replace_destination">დანიშნულების წერტილის შეცვლა</string>
+    <string name="subscribe_email_error">შეცდომა</string>
+    <string name="fonts_header">რუკის ფონტები</string>
+    </resources>
