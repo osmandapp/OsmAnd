@@ -1330,7 +1330,7 @@ public class AvailableGPXFragment extends OsmandExpandableListFragment {
 		});
 
 		GPXTrackAnalysis analysis;
-		if ((analysis = getGpxTrackAnalysis(gpxInfo, app, null)) != null) {
+		if ((analysis = getGpxTrackAnalysis(gpxInfo, app)) != null) {
 			if (analysis.totalDistance != 0) {
 				item = optionsMenu.getMenu().add(R.string.analyze_on_map).setIcon(iconsCache.getThemedIcon(R.drawable.ic_action_info_dark));
 				item.setOnMenuItemClickListener(new MenuItem.OnMenuItemClickListener() {
@@ -1748,7 +1748,10 @@ public class AvailableGPXFragment extends OsmandExpandableListFragment {
 		} else {
 			viewName.setTypeface(Typeface.DEFAULT, Typeface.NORMAL);
 		}
-		GPXTrackAnalysis analysis = getGpxTrackAnalysis(child, app, icon);
+		if (getSelectedGpxFile(child, app) != null) {
+			icon.setImageDrawable(app.getIconsCache().getIcon(R.drawable.ic_action_polygom_dark, R.color.color_distance));
+		}
+		GPXTrackAnalysis analysis = getGpxTrackAnalysis(child, app);
 		boolean sectionRead = analysis == null;
 		if (sectionRead) {
 			v.findViewById(R.id.read_section).setVisibility(View.GONE);
@@ -1809,16 +1812,17 @@ public class AvailableGPXFragment extends OsmandExpandableListFragment {
 		v.findViewById(R.id.check_item).setVisibility(View.GONE);
 	}
 
-	@Nullable
-	private static GPXTrackAnalysis getGpxTrackAnalysis(GpxInfo gpxInfo, OsmandApplication app, ImageView icon) {
+	private static SelectedGpxFile getSelectedGpxFile(GpxInfo gpxInfo, OsmandApplication app) {
 		GpxSelectionHelper selectedGpxHelper = app.getSelectedGpxHelper();
-		SelectedGpxFile sgpx = gpxInfo.currentlyRecordingTrack ? selectedGpxHelper.getSelectedCurrentRecordingTrack() :
+		return gpxInfo.currentlyRecordingTrack ? selectedGpxHelper.getSelectedCurrentRecordingTrack() :
 				selectedGpxHelper.getSelectedFileByName(gpxInfo.getFileName());
+	}
+
+	@Nullable
+	private static GPXTrackAnalysis getGpxTrackAnalysis(GpxInfo gpxInfo, OsmandApplication app) {
+		SelectedGpxFile sgpx = getSelectedGpxFile(gpxInfo, app);
 		GPXTrackAnalysis analysis = null;
 		if (sgpx != null) {
-			if (icon != null) {
-				icon.setImageDrawable(app.getIconsCache().getIcon(R.drawable.ic_action_polygom_dark, R.color.color_distance));
-			}
 			analysis = sgpx.getTrackAnalysis();
 		} else if (gpxInfo.currentlyRecordingTrack) {
 			analysis = app.getSavingTrackHelper().getCurrentTrack().getTrackAnalysis();
