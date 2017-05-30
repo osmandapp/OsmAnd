@@ -477,7 +477,7 @@
 	<string name="poi_kindergarten">Parcu de giogos</string>
 	<string name="poi_company">Azienda</string>
 	<string name="poi_trade">Trading post</string>
-	<string name="poi_window_blind">Butega de bentanas tzurpas</string>
+	<string name="poi_window_blind">Butega de ventanas tzurpas</string>
 	<string name="poi_department_store">Supermercadu</string>
 	<string name="poi_aeroway_terminal">Terminal aeroportu</string>
 	<string name="poi_aeroway_gate">Gate aeroportu</string>
@@ -519,7 +519,7 @@
 	<string name="poi_craft_roofer">Fraigadura e acontzamentu de cobertas</string>
 	<string name="poi_craft_stand_builder">Ammàniu de bancos de bèndida</string>
 	<string name="poi_craft_watchmaker">Relogiàiu</string>
-	<string name="poi_craft_window_construction">Fraigadura de bentanas</string>
+	<string name="poi_craft_window_construction">Fraigadura de ventanas</string>
 
 	<string name="poi_toilets">Bagnu</string>
 	<string name="poi_bureau_de_change">Cambiadore de valutas</string>
