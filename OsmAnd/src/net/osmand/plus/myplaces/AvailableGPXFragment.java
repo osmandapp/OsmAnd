@@ -13,6 +13,7 @@ import android.os.AsyncTask;
 import android.os.Build;
 import android.os.Bundle;
 import android.os.Handler;
+import android.support.annotation.Nullable;
 import android.support.v4.content.ContextCompat;
 import android.support.v4.view.MenuItemCompat;
 import android.support.v7.app.AlertDialog;
@@ -1328,14 +1329,19 @@ public class AvailableGPXFragment extends OsmandExpandableListFragment {
 			}
 		});
 
-		item = optionsMenu.getMenu().add(R.string.analyze_on_map).setIcon(iconsCache.getThemedIcon(R.drawable.ic_action_info_dark));
-		item.setOnMenuItemClickListener(new MenuItem.OnMenuItemClickListener() {
-			@Override
-			public boolean onMenuItemClick(MenuItem item) {
-				new OpenGpxDetailsTask(gpxInfo).execute();
-				return true;
+		GPXTrackAnalysis analysis;
+		if ((analysis = getGpxTrackAnalysis(gpxInfo, app, null)) != null) {
+			if (analysis.totalDistance != 0) {
+				item = optionsMenu.getMenu().add(R.string.analyze_on_map).setIcon(iconsCache.getThemedIcon(R.drawable.ic_action_info_dark));
+				item.setOnMenuItemClickListener(new MenuItem.OnMenuItemClickListener() {
+					@Override
+					public boolean onMenuItemClick(MenuItem item) {
+						new OpenGpxDetailsTask(gpxInfo).execute();
+						return true;
+					}
+				});
 			}
-		});
+		}
 
 		item = optionsMenu.getMenu().add(R.string.shared_string_move).setIcon(iconsCache.getThemedIcon(R.drawable.ic_action_folder_stroke));
 		item.setOnMenuItemClickListener(new MenuItem.OnMenuItemClickListener() {
@@ -1732,7 +1738,6 @@ public class AvailableGPXFragment extends OsmandExpandableListFragment {
 		}
 
 		viewName.setText(child.getName());
-		GpxSelectionHelper selectedGpxHelper = app.getSelectedGpxHelper();
 
 		// ImageView icon = (ImageView) v.findViewById(!isDashItem? R.id.icon : R.id.show_on_map);
 		ImageView icon = (ImageView) v.findViewById(R.id.icon);
@@ -1743,20 +1748,7 @@ public class AvailableGPXFragment extends OsmandExpandableListFragment {
 		} else {
 			viewName.setTypeface(Typeface.DEFAULT, Typeface.NORMAL);
 		}
-		SelectedGpxFile sgpx = child.currentlyRecordingTrack ? selectedGpxHelper.getSelectedCurrentRecordingTrack() :
-				selectedGpxHelper.getSelectedFileByName(child.getFileName());
-		GPXTrackAnalysis analysis = null;
-		if (sgpx != null) {
-			icon.setImageDrawable(app.getIconsCache().getIcon(R.drawable.ic_action_polygom_dark, R.color.color_distance));
-			analysis = sgpx.getTrackAnalysis();
-		} else if (child.currentlyRecordingTrack) {
-			analysis = app.getSavingTrackHelper().getCurrentTrack().getTrackAnalysis();
-		} else {
-			GpxDataItem dataItem = child.file == null ? null : app.getGpxDatabase().getItem(child.file);
-			if (dataItem != null) {
-				analysis = dataItem.getAnalysis();
-			}
-		}
+		GPXTrackAnalysis analysis = getGpxTrackAnalysis(child, app, icon);
 		boolean sectionRead = analysis == null;
 		if (sectionRead) {
 			v.findViewById(R.id.read_section).setVisibility(View.GONE);
@@ -1815,5 +1807,27 @@ public class AvailableGPXFragment extends OsmandExpandableListFragment {
 		descr.setVisibility(View.GONE);
 
 		v.findViewById(R.id.check_item).setVisibility(View.GONE);
+	}
+
+	@Nullable
+	private static GPXTrackAnalysis getGpxTrackAnalysis(GpxInfo gpxInfo, OsmandApplication app, ImageView icon) {
+		GpxSelectionHelper selectedGpxHelper = app.getSelectedGpxHelper();
+		SelectedGpxFile sgpx = gpxInfo.currentlyRecordingTrack ? selectedGpxHelper.getSelectedCurrentRecordingTrack() :
+				selectedGpxHelper.getSelectedFileByName(gpxInfo.getFileName());
+		GPXTrackAnalysis analysis = null;
+		if (sgpx != null) {
+			if (icon != null) {
+				icon.setImageDrawable(app.getIconsCache().getIcon(R.drawable.ic_action_polygom_dark, R.color.color_distance));
+			}
+			analysis = sgpx.getTrackAnalysis();
+		} else if (gpxInfo.currentlyRecordingTrack) {
+			analysis = app.getSavingTrackHelper().getCurrentTrack().getTrackAnalysis();
+		} else {
+			GpxDataItem dataItem = gpxInfo.file == null ? null : app.getGpxDatabase().getItem(gpxInfo.file);
+			if (dataItem != null) {
+				analysis = dataItem.getAnalysis();
+			}
+		}
+		return analysis;
 	}
 }
