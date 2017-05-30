@@ -81,12 +81,16 @@ public class MapRouteInfoMenuFragment extends Fragment {
 	}
 
 	public void updateInfo() {
-		menu.updateInfo(mainView);
+		if (menu != null) {
+			menu.updateInfo(mainView);
+		}
 		applyDayNightMode();
 	}
 
 	public void updateFromIcon() {
-		menu.updateFromIcon(mainView);
+		if (menu != null) {
+			menu.updateFromIcon(mainView);
+		}
 	}
 
 	public void show(MapActivity mapActivity) {
