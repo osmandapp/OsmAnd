@@ -2032,7 +2032,7 @@
     <string name="delay_navigation_start">自动启动转弯指引</string>
     <string name="gpx_info_subtracks">"子轨迹：%1$s "</string>
     <string name="gpx_info_waypoints">"路标：%1$s "</string>
-    <string name="gpx_info_distance">"距离：%1$s（%2$ 个点） "</string>
+    <string name="gpx_info_distance">"距离：%1$s（%2$s 个点） "</string>
     <string name="gpx_info_start_time">"开始时间：%1$tF，%1$tT "</string>
     <string name="gpx_info_end_time">"结束时间：%1$tF，%1$tT "</string>
     <string name="gpx_info_average_speed">"平均速度：%1$s "</string>
