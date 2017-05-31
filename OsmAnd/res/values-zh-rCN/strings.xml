@@ -1057,8 +1057,8 @@
     <string name="context_menu_item_delete_waypoint">删除 GPX 路径点？</string>
     <string name="context_menu_item_edit_waypoint">编辑 GPX 路径点</string>
     <string name="shared_string_location">位置</string>
-    <string name="read_more">读取更多</string>
-    <string name="whats_new">有什么新变化在</string>
+    <string name="read_more">阅读更多信息</string>
+    <string name="whats_new">新版本更新内容，在</string>
     <string name="rendering_attr_hideProposed_name">隐藏已提议对象</string>
     <string name="shared_string_update">更新</string>
     <string name="shared_string_upload">上传</string>
