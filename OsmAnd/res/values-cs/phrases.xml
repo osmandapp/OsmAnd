@@ -1663,7 +1663,7 @@
 	<string name="poi_denomination_episcopal">Episkopální</string>
 	<string name="poi_length">Délka</string>
 
-<string name="poi_organic_only">Pouze bio-potraviny</string>
+<string name="poi_organic_only">Výhradně</string>
 
 	<string name="poi_traffic_mirror">Dopravní zrcadlo</string>
 
@@ -1692,8 +1692,8 @@
 	<string name="poi_mdf">Hlavní rozvaděč</string>
 	<string name="poi_min_age">Minimální věk</string>
 
-	<string name="poi_organic_yes">Bio-potraviny: ano</string>
-	<string name="poi_organic_no">Bio-potraviny: ne</string>
+	<string name="poi_organic_yes">Ano</string>
+	<string name="poi_organic_no">Ne</string>
 	<string name="poi_support_pole">Podpora: sloup</string>
 	<string name="poi_support_wall_mounted">Podpora: zeď</string>
 	<string name="poi_support_tree">Podpora: strom</string>
@@ -3339,5 +3339,45 @@
 	<string name="poi_architecture_wilhelminian_style">Architektura: Gründerzeit</string>
 	<string name="poi_historic_civilization_hernici">Civilizace: hernická</string>
 	<string name="poi_historic_civilization_tiahuanacota">Civilizace: tiahuanacká</string>
+
+	<string name="poi_zoo_type">Typ</string>
+
+<string name="poi_nuclear_explosion_salvo_first_detonation">Salva výbuchů: první výbuch ze salvy</string>
+	<string name="poi_nuclear_explosion_salvo_second_or_later_detonation">Salva výbuchů: druhý nebo další výbuch ze salvy</string>
+	<string name="poi_free_flying_site_toplanding">Místo k přistání na vrcholu</string>
+	<string name="poi_medical_system_sidda_yes">Tradiční indický</string>
+	<string name="poi_medical_system_unani_yes">Tradiční islámský</string>
+
+	<string name="poi_tower_construction_lattice">Konstrukce: mřížoví</string>
+	<string name="poi_tower_construction_dish">Konstrukce: parabola</string>
+	<string name="poi_tower_construction_concealed">Konstrukce: maskovaná</string>
+
+	<string name="poi_fast_food_cafeteria">Ano</string>
+
+	<string name="poi_drink_wine_yes">Víno: ano</string>
+	<string name="poi_drink_wine_retail">Víno: prodej</string>
+	<string name="poi_drink_wine_served">Víno: podávané</string>
+
+	<string name="poi_energy_supplier">Kancelář dodavatele energie</string>
+
+	<string name="poi_electronics_repair_computer">Opravy elektroniky: počítače</string>
+	<string name="poi_electronics_repair_appliance">Opravy elektroniky: spotřebiče</string>
+	<string name="poi_electronics_repair_phone">Opravy elektroniky: telefon</string>
+	<string name="poi_electronics_repair_tv">Opravy elektroniky: televizor</string>
+
+	<string name="poi_resort_kids_camp">Dětský tábor</string>
+	<string name="poi_music_school">Hudební škola</string>
+	<string name="poi_language_school">Jazyková škola</string>
+
+	<string name="poi_life_ring">Záchranný kruh</string>
+
+	<string name="poi_zoo_petting_zoo">Zoo pro děti</string>
+	<string name="poi_zoo_wildlife_park">Park s divokými zvířaty</string>
+	<string name="poi_zoo_enclosure">Ohrada</string>
+	<string name="poi_zoo_safari_park">Safari park</string>
+	<string name="poi_zoo_birds">Ptáci</string>
+	<string name="poi_zoo_aviary">Voliéra</string>
+	<string name="poi_zoo_falconry">Sokolnictví</string>
+	<string name="poi_zoo_reptile">Plazi</string>
 
 	</resources>

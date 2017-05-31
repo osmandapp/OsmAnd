@@ -3007,7 +3007,7 @@ Van bijna alle landen is een kaart te downloaden: van Afghanistan tot Zimbabwe, 
     <string name="quick_action_osmbugs_hide">Verberg OSM-opmerkingen</string>
     <string name="quick_action_showhide_osmbugs_descr">Een druk op de sneltoets toont of verbergt OSM-opmerkingen.</string>
     <string name="sorted_by_distance">Gesorteerd op afstand</string>
-    <string name="private_access_routing_req">Uw bestemming ligt in een gebied wat particulier eigendom is. Wilt u gebruik van particuliere wegen voor deze route toestaan?</string>
+    <string name="private_access_routing_req">Uw bestemming ligt in een gebied dat particulier eigendom is. Wilt u gebruik van particuliere wegen voor deze route toestaan?</string>
     <string name="restart_search">Opnieuw zoeken</string>
     <string name="increase_search_radius">Zoekgebied vergroten</string>
     <string name="nothing_found">Niets gevonden :(</string>
@@ -3023,8 +3023,19 @@ Van bijna alle landen is een kaart te downloaden: van Afghanistan tot Zimbabwe, 
     <string name="improve_coverage_mapillary">Vergroot het bereik van Mapillary</string>
     <string name="improve_coverage_install_mapillary_desc">Maak zelf een of meer foto\'s en voeg ze toe aan deze plek op de kaart.
 \nHiervoor moet je Mapillary installeren met Google Play.</string>
-    <string name="mapillary_action_descr">Voeg zelf foto\'s van deze plek toe met Mapillary.</string>
+    <string name="mapillary_action_descr">Voeg zelf foto\'s van deze plek toe via Mapillary.</string>
     <string name="mapillary_widget_descr">Voeg eenvoudig foto\'s toe aan Mapillary</string>
     <string name="mapillary_descr">Foto\'s van buiten voor iedereen. Ondek plaatsen, werk samen, en leg de wereld vast.</string>
     <string name="plugin_mapillary_descr">Foto\'s van buiten voor iedereen. Ondek plaatsen, werk samen, en leg de wereld vast.</string>
+    <string name="shared_string_permissions">Rechten</string>
+    <string name="import_gpx_failed_descr">OsmAnd kan het bestand niet lezen. Controleer of OsmAnd rechten heeft om het bestand van deze locatie te lezen.</string>
+    <string name="distance_moving">Gecorrigeerde afstand</string>
+    <string name="osmand_plus_extended_description_part1">" OsmAnd+ (OSM Automated Navigation Directions) is een kaart- en navigatieprogramma dat de vrije, wereldwijde en uitstekende OpenStreetMap (OSM) gegevens gebruikt. Met akoestische en visuele navigatie, bekijk POI (points of interest), maak en beheer GPX-sporen, gebruik hoogtelijnen en hoogtegegevens, kies tussen auto, fiets en wandelen, bewerk OSM en veel meer. OsmAnd+ is de betaalde versie van de app. Met de aanschaf ondersteunt u het project, geeft geld voor het maken van nieuwe functies, en krijgt u de nieuwste functies. Een paar belangrijke functies: "</string>
+    <string name="osmand_plus_extended_description_part2">" Navigatie • werkt online (snel) of offline (zonder roaming-kosten in het buitenalnd) • gesproken stap-voor-stap navigatie (met opgenomen of synthetische stem) • optioneel met rijstrookaanduiding, straatnamen und geschatte aankomsttijd • tussenstops op de route • automatische herberekening bij het verlaten van de route • zoek op adres, soort (bijv.: restaurant, hotel, benzinepomp, museum) of geografische coördinaten "</string>
+    <string name="osmand_plus_extended_description_part3">" kaart bekijken • positie en richting tonen • kaart richten volgens kompas of volgens beweging • bewaar plaatsen als favoriet • toon POIs (point of interest) in de buurt • toon specifieke online-kaarten, satellietbeelden (van Bing), overlays zoals GPX-sporen met rit-/routeinformatie und extra kaartlagen met instelbare transparantie • toon plaatsnamen in Engels, de taal van het land of phonetisch weergegeven "</string>
+    <string name="osmand_plus_extended_description_part4">" gebruik OSM- en Wikipedia-gegevens • de beste gegevens van de beste wereldwijde projecten • OSM-gegevens per land of regio • Wikipedia-POIs voor sightseeing • onbeperkte gratis downloads vanuit de app • compacte vectorkaarten, tenminste eens per maand bijgewerkt • keuze tussen volledige kaarten of alleen het stratennet (bijv: Japan compleet is 700 MB, de straten maar 200 MB) "</string>
+    <string name="osmand_plus_extended_description_part5">" veiligheidsfucties • kan automatisch tussen dag- en nachtweergave schakelen • kan maximum snelheid weergeven en waarschuwen bij overschrijding • kan kaartwegave aanpassen aan de snelheid • locatie doorgeven aan uw vrienden, zodat ze u kunnen vinden "</string>
+    <string name="osmand_plus_extended_description_part6">" functies voor fietsers en voetgangers • weergave van voetpaden, wandelroutes en fietspaden voor buitenactiviteiten • aangepaste weergave en routeberekening voor voetgangers en fietsers • weergave van OV-haltes (bus, tram, trein), inclusief zijnnummers • leg de afgelegde weg vast in een GPX-bestand op het apparaat of online • snelheids- en hoogteweergave • hoogtelijnen en reliëfschaduw weergeven (extra module) "</string>
+    <string name="osmand_plus_extended_description_part7">" bewerk OSM • meld verkeerde kaartgegevens • upload GPX-sporen naar OSM • voeg POIs toe en upload ze naar OSM • neem een GPX-spoor op met het apparaat in slaapstand
+\n OsmAnd is open-source wordt actief ontwikkeld. iedereen kan bijdragen door bugs te melsen, de vertaling te verbeteren of nieuwe functies te programmeren. Het project wordt druk verbeterd door al deze vormen van interactie met gebruikers. Het project is tevens afhankelijk van financiële bijdragen om programmeer- en testwerk te kunnen bekostigen. "</string>
     </resources>

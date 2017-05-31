@@ -2609,7 +2609,7 @@ Si istimas OsmAnd e OSM e los boles suportare, custa est una manera perfeta pro 
     <string name="dialog_add_action_title">Annanghe un\'atzione</string>
     <string name="quick_actions_delete">Iscantzella un\'atzione</string>
     <string name="quick_actions_delete_text">Seguru ses de bòlere iscantzellare s\'atzione \"%s\"?</string>
-    <string name="quick_favorites_show_favorites_dialog">Ammustra sa bentana de sos preferidos</string>
+    <string name="quick_favorites_show_favorites_dialog">Ammustra sa ventana de sos preferidos</string>
     <string name="quick_favorites_name_preset">Nùmene predefinidu</string>
     <string name="quick_action_add_marker_descr">Incarchende su butone de s\'atzione as a annànghere unu marcadore in su tzentru de sa mapa.</string>
     <string name="quick_action_add_gpx_descr">Incarchende su butone de s\'atzione as a annànghere unu puntu de coladòrgiu GPX in su tzentru de sa mapa.</string>
@@ -2624,7 +2624,7 @@ Si istimas OsmAnd e OSM e los boles suportare, custa est una manera perfeta pro 
     <string name="favorite_empty_place_name">Logu</string>
     <string name="quick_action_duplicates">Custu nùmene est giai impreadu, s\'atzione est istada rinumenada %1$s pro non tènnere dopiones.</string>
     <string name="quick_action_duplicate">Nùmene pro s\'atzione lestra duplicadu</string>
-    <string name="quick_action_interim_dialog">Ammustra una bentana intermèdia</string>
+    <string name="quick_action_interim_dialog">Ammustra una ventana intermèdia</string>
     <string name="quick_action_showhide_favorites_descr">Incarchende su butone de s\'atzione as a ammustrare o cuare sos puntos preferidos in sa mapa.</string>
     <string name="quick_action_showhide_poi_descr">Incarchende su butone de s\'atzione as a ammustrare o cuare sos PDI in sa mapa.</string>
     <string name="quick_action_showhide_favorites_title">Ammustra/cua sos preferidos</string>
@@ -2843,4 +2843,6 @@ Pro praghere iscrie su còdighe intreu</string>
 \nPro lu fàghere depes installare s\'aplicatzione Mapillary dae Google Play.</string>
     <string name="mapillary_image">Immàgine de Mapillary</string>
     <string name="distance_moving">Distàntzia curreta</string>
+    <string name="shared_string_permissions">Autorizatziones</string>
+    <string name="import_gpx_failed_descr">OsmAnd non podet importare su documentu. Pro praghere verìfica chi OsmAnd tèngiat sas autorizatziones pro lèghere su documentu dae sa cartella sua.</string>
     </resources>

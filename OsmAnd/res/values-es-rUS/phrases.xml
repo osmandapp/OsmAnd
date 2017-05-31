@@ -626,7 +626,7 @@
 	<string name="poi_craft_scaffolder">Montador de andamios</string>
 	<string name="poi_craft_sculptor">Escultor</string>
 	<string name="poi_craft_shoemaker">Zapatero</string>
-	<string name="poi_craft_stand_builder">Diseño de stands</string>
+	<string name="poi_craft_stand_builder">Creador de estand</string>
 	<string name="poi_craft_stonemason">Albañil</string>
 	<string name="poi_craft_sun_protection">Fábrica de toldos</string>
 	<string name="poi_craft_sweep">Deshollinador</string>
@@ -3190,5 +3190,7 @@
 	<string name="poi_zoo_aviary">Pajarera</string>
 	<string name="poi_zoo_falconry">Cetrería</string>
 	<string name="poi_zoo_reptile">Reptiles</string>
+
+<string name="poi_stands">Gradas</string>
 
 </resources>

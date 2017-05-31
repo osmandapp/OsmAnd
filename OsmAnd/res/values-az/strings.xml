@@ -1378,4 +1378,29 @@
     <string name="save_current_track">Hazırki GPX izini saxla</string>
     <string name="save_track_to_gpx">Naviqasiya zamanı izi avtomatik qeyd et</string>
     <string name="save_track_to_gpx_descrp">Naviqasiya zamanı iz GPX formatında izlər qovluğunda avtomatik saxlanacaq</string>
+    <string name="none_selected_gpx">Heç bir GPX faylı seçilməyib. Seçmək üçün mövcud izə basıb saxlayın.</string>
+    <string name="gpx_info_subtracks">"Alt izlər: %1$s "</string>
+    <string name="gpx_selection_track">%1$s
+\nİz %2$s</string>
+    <string name="gpx_file_is_empty">GPX iz boşdur</string>
+    <string name="osmo_regenerate_login_ids_confirm">Şəxsi İD-inizi yenidən yaratmaq istədiyinizdən əminsiniz? Qoşulduğunuz bütün cihazlar daha sizi izləyə bilməyəcək.</string>
+    <string name="osmo_regenerate_login_ids">İstifadəçi İD-ini yenidən yarat</string>
+    <string name="osmo_session_id_share">Cihazı izləmək üçün sessiya URL-si (%1$s)</string>
+    <string name="osmo_tracker_id_share">%2$s hədəf cihazına qoşulmaq üçün, %3$s linkinə toxunun və ya izləmə İD-ini təyin edin (%1$s)</string>
+    <string name="use_displayed_track_for_navigation">Naviqasiya üçün göstərilən iz istifadə etmək istəyirsiniz?</string>
+    <string name="distance_measurement_clear_route">Bütün nöqtələri təmizlə</string>
+    <string name="clear_destination">Təyinat nöqtəsini təmizlə</string>
+    <string name="local_indexes_cat_srtm">Kontur xətləri</string>
+    <string name="distance_measurement_finish_subtrack">Yeni bir alt iz başlat</string>
+    <string name="osmand_background_plugin_description">GPS cihazını vaxtaşırı oyadaraq arxa fon (ekran sönülü) rejimində naviqasiya və izləməni aktivləşdirmək üçün parametrləri göstərir.</string>
+    <string name="dropbox_plugin_description">Dropbox qoşması sizə izləri və səs/video qeydlərini Dropbox hesabınızla sinxorizasiya etməyə imkan verir.</string>
+    <string name="enable_plugin_monitoring_services">Mövqe qeydiyyatı xidmətini (GPX qeydiyyatı, onlayn izləmə) istifadə etmək üçün Səyahət qeydetmə qoşmasını aktivləşdirin</string>
+    <string name="gpxup_trackable">İzlənə bilən</string>
+    <string name="gpx_monitoring_disabled_warn">GPX widget və ya “Səyahət qeydetmə” parametri ilə izləri qeyd et.</string>
+    <string name="show_current_gpx_title">Hazırki izi göstər</string>
+    <string name="add_waypoint_dialog_title">Qeyd edilən GPX izinə yol nöqtəsi əlavə et</string>
+    <string name="gpx_files_not_found">İzlər qovluğunda GPX faylları tapılmadı</string>
+    <string name="layer_gpx_layer">GPX iz…</string>
+    <string name="background_router_service_descr">Ekran sönülü olarkən mövqeyinizi izləmək üçün OsmAnd arxa fonda işləyir</string>
+    <string name="saving_gpx_tracks">GPX izlər SD kartda saxlanır…</string>
     </resources>

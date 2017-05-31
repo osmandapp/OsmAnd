@@ -338,11 +338,11 @@ public class TrackSegmentFragment extends OsmAndListFragment {
 			}
 		});
 
-		boolean hasPath = getGpx().showCurrentTrack;
+		boolean hasPath = getGpx() != null && getGpx().showCurrentTrack;
 		if (rotatedTileBox == null || mapBitmap == null || mapTrackBitmap == null) {
 			QuadRect rect = getRect();
 			if (rect.left != 0 && rect.top != 0) {
-				hasPath = getGpx().tracks.size() > 0 || getGpx().routes.size() > 0;
+				hasPath = getGpx() != null && (getGpx().tracks.size() > 0 || getGpx().routes.size() > 0);
 				progressBar.setVisibility(View.VISIBLE);
 
 				double clat = rect.bottom / 2 + rect.top / 2;
@@ -396,7 +396,7 @@ public class TrackSegmentFragment extends OsmAndListFragment {
 		}
 
 		if (hasPath) {
-			if (!getGpx().showCurrentTrack && adapter.getCount() > 0) {
+			if (getGpx() != null && !getGpx().showCurrentTrack && adapter.getCount() > 0) {
 				prepareSplitIntervalAdapterData();
 				setupSplitIntervalView(splitIntervalView);
 				updateSplitIntervalView(splitIntervalView);
