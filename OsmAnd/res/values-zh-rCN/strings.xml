@@ -2076,7 +2076,7 @@
     <string name="osmo_share_current_session">在浏览器中共享当前会话</string>
     <string name="osmo_session_not_available">会话不可用，请检查“发送定位”已打开。</string>
     <string name="osmo_share_session">共享会话</string>
-    <string name="osmo_session_id_share">用会话 url 来跟踪设备 (%1$ s)</string>
+    <string name="osmo_session_id_share">用会话 url 来跟踪设备 (%1$s)</string>
     <string name="osmo_tracker_id_share">为了连接到目标设备 %2$s，点击链接 %3$s 或指定跟踪 id (%1$s)</string>
     <string name="osmo_track_interval">记录间隔</string>
     <string name="osmo_track_interval_descr">选择发送定位的时间间隔</string>
