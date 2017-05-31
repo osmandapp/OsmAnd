@@ -1594,7 +1594,7 @@
     <string name="christmas_desc">预知圣诞节和新年假期，您可以选择显示与圣诞节关联的 POI：圣诞树、市场等等。</string>
     <string name="rendering_attr_contourColorScheme_name">等高线的颜色调配</string>
     <string name="rendering_attr_surfaceIntegrity_name">道路表面完整性</string>
-    <string name="translit_name_if_miss">如果 %1$ 的名称缺失则音译</string>
+    <string name="translit_name_if_miss">如果 %1$s 的名称缺失则音译</string>
     <string name="translit_names">音译名称</string>
     <string name="new_filter_desc">请输入新的筛选名称。这会加到您的类别标签里。</string>
     <string name="osm_live_payment_desc">每个月会收取认购费用。您可以在 Google Play 随时取消您的订购。</string>
