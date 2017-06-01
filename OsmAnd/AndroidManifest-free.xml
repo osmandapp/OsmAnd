@@ -12,6 +12,11 @@
             tools:replace="android:process"
             android:process="net.osmand"/>
 
+        <service
+            android:name="net.osmand.aidl.OsmandAidlService"
+            tools:replace="android:process"
+            android:process="net.osmand"/>
+
         <provider
             android:name="android.support.v4.content.FileProvider"
             tools:replace="android:authorities"
