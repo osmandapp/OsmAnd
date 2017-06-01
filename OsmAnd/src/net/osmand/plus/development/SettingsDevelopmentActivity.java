@@ -94,11 +94,6 @@ public class SettingsDevelopmentActivity extends SettingsBaseActivity {
 		cat.addPreference(createCheckBoxPreference(settings.SHOW_LEGACY_SEARCH,
 				R.string.show_legacy_search, R.string.show_legacy_search_desc));
 
-		// FIXME delete USE_MAP_MARKERS
-//		cat.addPreference(createCheckBoxPreference(settings.USE_MAP_MARKERS,
-//				R.string.map_markers,
-//				R.string.show_map_markers_description));
-
 		Preference pref = new Preference(this);
 		final Preference simulate = pref;
 		final OsmAndLocationSimulation sim = getMyApplication().getLocationProvider().getLocationSimulation();
