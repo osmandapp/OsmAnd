@@ -87,6 +87,8 @@
 	<string name="poi_free_flying_characteristic">Characteristic</string>
 	<string name="poi_cafeteria">Cafeteria</string>
 	<string name="poi_zoo_type">Type</string>
+	<string name="poi_motorcycle_services">Services</string>
+	<string name="poi_motorcycle_type">Motorcycle type</string>
 
 <!--  categories -->
 	<string name="poi_shop">Store</string>
@@ -3370,5 +3372,26 @@
 	<string name="poi_zoo_reptile">Reptile</string>
 
 	<string name="poi_stands">Stands</string>
+
+	<string name="poi_motorcycle_sales_yes">Sales</string>
+	<string name="poi_motorcycle_sales_no">Sales: no</string>
+	<string name="poi_motorcycle_sales_yes_used">Sales: yes; used</string>
+	<string name="poi_motorcycle_sales_used">Sales: used</string>
+	<string name="poi_motorcycle_rental_yes">Rental</string>
+	<string name="poi_motorcycle_rental_no">Rental: no</string>
+	<string name="poi_motorcycle_repair_yes">Repair</string>
+	<string name="poi_motorcycle_repair_no">Repair: no</string>
+	<string name="poi_motorcycle_parts_yes">Parts</string>
+	<string name="poi_motorcycle_parts_no">Parts: no</string>
+	<string name="poi_motorcycle_tyres_yes">Tyres</string>
+	<string name="poi_motorcycle_tyres_no">Tyres: no</string>
+	<string name="poi_motorcycle_clothes_yes">Motorcycle clothes</string>
+	<string name="poi_motorcycle_clothes_no">Motorcycle clothes: no</string>
+	<string name="poi_motorcycle_type_scooter">Scooter</string>
+	<string name="poi_motorcycle_type_sportbike">Sportbike</string>
+	<string name="poi_motorcycle_type_chopper">Chopper</string>
+	<string name="poi_motorcycle_type_offroad">Offroad</string>
+	<string name="poi_motorcycle_type_dualsport">Dualsport</string>
+	<string name="poi_motorcycle_type_standard">Standard</string>
 
 </resources>
