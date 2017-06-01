@@ -9,10 +9,6 @@
             android:name="net.osmand.plus.NavigationService"
             android:process="net.osmand.dev"
             tools:replace="android:process"/>
-        <service
-            android:name="net.osmand.aidl.OsmandAidlService"
-            tools:replace="android:process"
-            android:process="net.osmand.dev"/>
         <provider
             android:name="android.support.v4.content.FileProvider"
             android:authorities="net.osmand.dev.fileprovider"
