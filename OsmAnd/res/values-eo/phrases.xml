@@ -3383,4 +3383,28 @@
 
 <string name="poi_stands">Spektoteraso</string>
 
-</resources>
+<string name="poi_motorcycle_services">Servoj</string>
+	<string name="poi_motorcycle_type">Motorcikla speco</string>
+
+<string name="poi_motorcycle_sales_yes">Vendado</string>
+	<string name="poi_motorcycle_sales_no">Vendado: ne</string>
+	<string name="poi_motorcycle_sales_yes_used">Vendado, brokantado</string>
+	<string name="poi_motorcycle_sales_used">Brokantado</string>
+	<string name="poi_motorcycle_rental_yes">Luado</string>
+	<string name="poi_motorcycle_rental_no">Luado: ne</string>
+	<string name="poi_motorcycle_repair_yes">Riparado</string>
+	<string name="poi_motorcycle_repair_no">Riparado: ne</string>
+	<string name="poi_motorcycle_parts_yes">Partoj</string>
+	<string name="poi_motorcycle_parts_no">Partoj: ne</string>
+	<string name="poi_motorcycle_tyres_yes">Aerbendoj</string>
+	<string name="poi_motorcycle_tyres_no">Aerbendoj: ne</string>
+	<string name="poi_motorcycle_clothes_yes">Motorciklaj vestaĵoj</string>
+	<string name="poi_motorcycle_clothes_no">Motorciklaj vestaĵoj: ne</string>
+	<string name="poi_motorcycle_type_scooter">skotero</string>
+	<string name="poi_motorcycle_type_sportbike">sporta</string>
+	<string name="poi_motorcycle_type_chopper">ĉopero</string>
+	<string name="poi_motorcycle_type_offroad">ĉiuterena (offroad)</string>
+	<string name="poi_motorcycle_type_standard">norma</string>
+
+<string name="poi_motorcycle_type_dualsport">dual-sport</string>
+	</resources>
