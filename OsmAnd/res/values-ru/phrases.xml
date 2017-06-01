@@ -3402,4 +3402,30 @@
 
 	<string name="poi_stands">Спортивная трибуна</string>
 
+	<string name="poi_motorcycle_services">Услуги</string>
+	<string name="poi_motorcycle_sales_yes">Продажа</string>
+	<string name="poi_motorcycle_sales_no">Продажа: нет</string>
+	<string name="poi_motorcycle_sales_yes_used">Продажа: есть; также б/у</string>
+	<string name="poi_motorcycle_sales_used">Продажа: б/у</string>
+	<string name="poi_motorcycle_rental_yes">Аренда</string>
+	<string name="poi_motorcycle_rental_no">Аренда: нет</string>
+	<string name="poi_motorcycle_repair_yes">Ремонт</string>
+	<string name="poi_motorcycle_repair_no">Ремонт: нет</string>
+	<string name="poi_motorcycle_parts_yes">Запчасти</string>
+	<string name="poi_motorcycle_parts_no">Запчасти: нет</string>
+	<string name="poi_motorcycle_tyres_yes">Шины</string>
+	<string name="poi_motorcycle_tyres_no">Шины: нет</string>
+	<string name="poi_motorcycle_clothes_yes">Мотоциклетная одежда</string>
+	<string name="poi_motorcycle_clothes_no">Мотоциклетная одежда: нет</string>
+
+	<string name="poi_motorcycle_type">Тип мотоциклов</string>
+	<string name="poi_motorcycle_type_scooter">Мотороллеры</string>
+	<string name="poi_motorcycle_type_sportbike">Спортивные</string>
+	<string name="poi_motorcycle_type_chopper">Чопперы</string>
+	<string name="poi_motorcycle_type_offroad">Внедорожные</string>
+	<string name="poi_motorcycle_type_dualsport">Двойного назначения</string>
+	<string name="poi_motorcycle_type_standard">Классика</string>
+
+
+
 </resources>
