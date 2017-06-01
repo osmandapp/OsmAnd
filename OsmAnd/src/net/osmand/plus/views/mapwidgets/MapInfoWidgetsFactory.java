@@ -10,6 +10,7 @@ import android.widget.TextView;
 
 import net.osmand.Location;
 import net.osmand.binary.RouteDataObject;
+import net.osmand.data.LatLon;
 import net.osmand.plus.CurrentPositionHelper;
 import net.osmand.plus.OsmAndFormatter;
 import net.osmand.plus.OsmAndLocationProvider;
@@ -32,6 +33,7 @@ import net.osmand.plus.views.RulerControlLayer;
 import net.osmand.plus.views.mapwidgets.NextTurnInfoWidget.TurnDrawable;
 import net.osmand.router.TurnType;
 import net.osmand.util.Algorithms;
+import net.osmand.util.MapUtils;
 
 import java.util.Iterator;
 import java.util.LinkedList;
@@ -110,10 +112,21 @@ public class MapInfoWidgetsFactory {
 
 	public TextInfoWidget createRulerControl(final MapActivity map) {
 		final RulerControlLayer rulerLayer = map.getMapLayers().getRulerControlLayer();
-		TextInfoWidget rulerControl = new TextInfoWidget(map) {
+		final String title = map.getResources().getString(R.string.map_widget_show_ruler);
+		final TextInfoWidget rulerControl = new TextInfoWidget(map) {
 			@Override
 			public boolean updateInfo(DrawSettings drawSettings) {
-				setText(rulerLayer.getText(), rulerLayer.getSubtext());
+				Location currentLoc = rulerLayer.getCurrentLoc();
+				LatLon centerLoc = rulerLayer.getCenterLoc();
+				if (currentLoc != null && centerLoc != null) {
+					float dist = (float) MapUtils.getDistance(currentLoc.getLatitude(), currentLoc.getLongitude(),
+							centerLoc.getLatitude(), centerLoc.getLongitude());
+					String distance = OsmAndFormatter.getFormattedDistance(dist, map.getMyApplication());
+					int ls = distance.lastIndexOf(' ');
+					setText(distance.substring(0, ls), distance.substring(ls + 1));
+				} else {
+					setText(title, null);
+				}
 				return true;
 			}
 		};
