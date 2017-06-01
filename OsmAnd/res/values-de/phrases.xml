@@ -3379,4 +3379,28 @@
 <string name="poi_zoo_type">Typ</string>
 
 <string name="poi_zoo_birds">Vögel</string>
+	<string name="poi_motorcycle_services">Kundendienst</string>
+	<string name="poi_motorcycle_type">Motorradtyp</string>
+
+<string name="poi_stands">Standplätze</string>
+
+	<string name="poi_motorcycle_sales_yes">Verkauf</string>
+	<string name="poi_motorcycle_sales_no">Verkauf: nein</string>
+	<string name="poi_motorcycle_sales_yes_used">Verkauf: ja; gebraucht</string>
+	<string name="poi_motorcycle_sales_used">Verkauf: gebraucht</string>
+	<string name="poi_motorcycle_rental_yes">Vermietung</string>
+	<string name="poi_motorcycle_rental_no">Vermietung: nein</string>
+	<string name="poi_motorcycle_repair_yes">Reparatur</string>
+	<string name="poi_motorcycle_repair_no">Reparatur: nein</string>
+	<string name="poi_motorcycle_parts_yes">Ersatzteile</string>
+	<string name="poi_motorcycle_parts_no">Ersatzteile: nein</string>
+	<string name="poi_motorcycle_tyres_yes">Reifen</string>
+	<string name="poi_motorcycle_tyres_no">Reifen: nein</string>
+	<string name="poi_motorcycle_clothes_yes">Motorradbekleidung</string>
+	<string name="poi_motorcycle_clothes_no">Motorradbekleidung: nein</string>
+	<string name="poi_motorcycle_type_scooter">Motorroller</string>
+	<string name="poi_motorcycle_type_sportbike">Supersportler</string>
+	<string name="poi_motorcycle_type_chopper">Chopper</string>
+	<string name="poi_motorcycle_type_offroad">Gelände</string>
+	<string name="poi_motorcycle_type_dualsport">Reiseenduro</string>
 	</resources>
