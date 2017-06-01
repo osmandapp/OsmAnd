@@ -1827,7 +1827,10 @@ public class AudioVideoNotesPlugin extends OsmandPlugin {
 		app.runInUIThread(new Runnable() {
 			@Override
 			public void run() {
-				getMapActivity().getContextMenu().updateMenuUI();
+				MapActivity activity = getMapActivity();
+				if (activity != null) {
+					activity.getContextMenu().updateMenuUI();
+				}
 			}
 		});
 	}
