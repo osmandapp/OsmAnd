@@ -6,11 +6,13 @@ import android.content.Context;
 import android.content.Intent;
 import android.content.IntentFilter;
 import android.graphics.Bitmap;
+import android.graphics.BitmapFactory;
 import android.graphics.BlurMaskFilter;
 import android.graphics.BlurMaskFilter.Blur;
 import android.graphics.Canvas;
 import android.graphics.Color;
 import android.graphics.ColorFilter;
+import android.graphics.DashPathEffect;
 import android.graphics.Matrix;
 import android.graphics.Paint;
 import android.graphics.Paint.Style;
@@ -25,15 +27,16 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.widget.ImageView;
 import android.widget.TextView;
-import android.widget.Toast;
 
 import net.osmand.Location;
 import net.osmand.binary.RouteDataObject;
 import net.osmand.data.LatLon;
+import net.osmand.data.QuadPoint;
 import net.osmand.data.RotatedTileBox;
 import net.osmand.plus.MapMarkersHelper.MapMarker;
 import net.osmand.plus.OsmAndFormatter;
 import net.osmand.plus.OsmAndLocationProvider;
+import net.osmand.plus.OsmAndLocationProvider.OsmAndLocationListener;
 import net.osmand.plus.OsmandApplication;
 import net.osmand.plus.OsmandSettings;
 import net.osmand.plus.OsmandSettings.OsmandPreference;
@@ -51,6 +54,7 @@ import net.osmand.plus.routing.RouteCalculationResult.NextDirectionInfo;
 import net.osmand.plus.routing.RouteDirectionInfo;
 import net.osmand.plus.routing.RoutingHelper;
 import net.osmand.plus.views.AnimateDraggingMapThread;
+import net.osmand.plus.views.OsmandMapLayer;
 import net.osmand.plus.views.OsmandMapLayer.DrawSettings;
 import net.osmand.plus.views.OsmandMapTileView;
 import net.osmand.plus.views.TurnPathHelper;
@@ -58,6 +62,7 @@ import net.osmand.plus.views.mapwidgets.MapWidgetRegistry.WidgetState;
 import net.osmand.router.RouteResultPreparation;
 import net.osmand.router.TurnType;
 import net.osmand.util.Algorithms;
+import net.osmand.util.MapUtils;
 
 import java.util.ArrayList;
 import java.util.Arrays;
@@ -376,17 +381,113 @@ public class RouteInfoWidgetsFactory {
 	}
 
 	public TextInfoWidget createRulerControl(final MapActivity map) {
-		final TextInfoWidget rulerControl = new TextInfoWidget(map);
-		rulerControl.setOnClickListener(new View.OnClickListener() {
-			@Override
-			public void onClick(View v) {
-				Toast.makeText(map, "Ruler Test", Toast.LENGTH_SHORT).show();
-			}
-		});
-		rulerControl.setIcons(R.drawable.widget_distance_day, R.drawable.widget_distance_night);
+		RulerControl rulerControl = new RulerControl(map);
+		map.getMapView().addLayer(rulerControl.getRulerControlLayer(), 4.5f);
 		return rulerControl;
 	}
 
+	public class RulerControl extends TextInfoWidget {
+
+		private String title;
+		private MapActivity mapActivity;
+		private Location currentLoc;
+		private LatLon centerLoc;
+
+		public RulerControl(Activity activity) {
+			super(activity);
+			mapActivity = (MapActivity) activity;
+			title = mapActivity.getResources().getString(R.string.map_widget_show_ruler);
+
+			setIcons(R.drawable.widget_distance_day, R.drawable.widget_distance_night);
+			setText(title, null);
+			addOnClickListener();
+			addLocationListener();
+		}
+
+		private void addOnClickListener() {
+			setOnClickListener(new View.OnClickListener() {
+				@Override
+				public void onClick(View view) {
+
+				}
+			});
+		}
+
+		private void addLocationListener() {
+			mapActivity.getMyApplication().getLocationProvider().addLocationListener(new OsmAndLocationListener() {
+				@Override
+				public void updateLocation(Location location) {
+					currentLoc = location;
+					updateText();
+				}
+			});
+		}
+
+		public OsmandMapLayer getRulerControlLayer() {
+			return new RulerControlLayer();
+		}
+
+		private void updateText() {
+			if (currentLoc != null && centerLoc != null) {
+				float dist = (float) MapUtils.getDistance(currentLoc.getLatitude(), currentLoc.getLongitude(),
+						centerLoc.getLatitude(), centerLoc.getLongitude());
+				String distance = OsmAndFormatter.getFormattedDistance(dist, mapActivity.getMyApplication());
+				int ls = distance.lastIndexOf(' ');
+				setText(distance.substring(0, ls), distance.substring(ls + 1));
+			} else {
+				setText(title, null);
+			}
+		}
+
+		private class RulerControlLayer extends OsmandMapLayer {
+
+			private Bitmap centerIcon;
+			private Paint bitmapPaint;
+			private Paint linePaint;
+
+			@Override
+			public void initLayer(OsmandMapTileView view) {
+				centerIcon = BitmapFactory.decodeResource(view.getResources(), R.drawable.map_ruler_center);
+
+				bitmapPaint = new Paint();
+				bitmapPaint.setAntiAlias(true);
+				bitmapPaint.setDither(true);
+				bitmapPaint.setFilterBitmap(true);
+
+				linePaint = new Paint();
+				linePaint.setAntiAlias(true);
+				linePaint.setStyle(Style.STROKE);
+				linePaint.setStrokeWidth(10);
+				linePaint.setPathEffect(new DashPathEffect(new float[]{10, 10}, 0));
+			}
+
+			@Override
+			public void onDraw(Canvas canvas, RotatedTileBox tileBox, DrawSettings settings) {
+				if (isVisible()) {
+					final QuadPoint centerPos = tileBox.getCenterPixelPoint();
+					canvas.drawBitmap(centerIcon, centerPos.x - centerIcon.getWidth() / 2,
+							centerPos.y - centerIcon.getHeight() / 2, bitmapPaint);
+					centerLoc = tileBox.getCenterLatLon();
+					updateText();
+					if (currentLoc != null) {
+						int currentLocX = tileBox.getPixXFromLonNoRot(currentLoc.getLongitude());
+						int currentLocY = tileBox.getPixYFromLatNoRot(currentLoc.getLatitude());
+						canvas.drawLine(currentLocX, currentLocY, centerPos.x, centerPos.y, linePaint);
+					}
+				}
+			}
+
+			@Override
+			public void destroyLayer() {
+
+			}
+
+			@Override
+			public boolean drawInScreenPixels() {
+				return false;
+			}
+		}
+	}
 
 	public TextInfoWidget createMaxSpeedControl(final MapActivity map) {
 		final RoutingHelper rh = map.getMyApplication().getRoutingHelper();
