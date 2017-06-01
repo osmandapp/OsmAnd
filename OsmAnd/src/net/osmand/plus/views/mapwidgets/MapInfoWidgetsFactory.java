@@ -1,6 +1,5 @@
 package net.osmand.plus.views.mapwidgets;
 
-import android.graphics.Color;
 import android.graphics.drawable.Drawable;
 import android.view.View;
 import android.view.View.OnClickListener;
@@ -29,6 +28,7 @@ import net.osmand.plus.mapcontextmenu.other.MapRouteInfoMenu;
 import net.osmand.plus.routing.RouteDirectionInfo;
 import net.osmand.plus.routing.RoutingHelper;
 import net.osmand.plus.views.OsmandMapLayer.DrawSettings;
+import net.osmand.plus.views.RulerControlLayer;
 import net.osmand.plus.views.mapwidgets.NextTurnInfoWidget.TurnDrawable;
 import net.osmand.router.TurnType;
 import net.osmand.util.Algorithms;
@@ -106,6 +106,27 @@ public class MapInfoWidgetsFactory {
 			}
 		});
 		return gpsInfoControl;
+	}
+
+	public TextInfoWidget createRulerControl(final MapActivity map) {
+		final RulerControlLayer rulerLayer = map.getMapLayers().getRulerControlLayer();
+		TextInfoWidget rulerControl = new TextInfoWidget(map) {
+			@Override
+			public boolean updateInfo(DrawSettings drawSettings) {
+				setText(rulerLayer.getText(), rulerLayer.getSubtext());
+				return true;
+			}
+		};
+
+		rulerControl.setIcons(R.drawable.widget_distance_day, R.drawable.widget_distance_night);
+		rulerControl.setOnClickListener(new OnClickListener() {
+			@Override
+			public void onClick(View view) {
+
+			}
+		});
+
+		return rulerControl;
 	}
 
 	public static class TopToolbarController {
