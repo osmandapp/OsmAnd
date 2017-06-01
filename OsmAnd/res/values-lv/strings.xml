@@ -1608,10 +1608,10 @@ Aptuvenais kartes pārklājums un kvalitāte:
 	<string name="gpx_info_distance">Distance: %1$s (%2$s punkti) </string>
 	<string name="gpx_info_start_time">Sākums: %1$tF, %1$tT </string>
 	<string name="gpx_info_end_time">Beigas: %1$tF, %1$tT </string>
-	<string name="gpx_info_average_speed">Vidējais ātrums: %11$s </string>
+	<string name="gpx_info_average_speed">Vidējais ātrums: %1$s </string>
 	<string name="gpx_info_maximum_speed">Maksimālais ātrums: %1$s </string>
 	<string name="gpx_info_avg_altitude">Vidējais augstums: %1$s</string>
-	<string name="gpx_info_diff_altitude">Augstuma starpība: %11$s</string>
+	<string name="gpx_info_diff_altitude">Augstuma starpība: %1$s</string>
 	<string name="gpx_info_asc_altitude">Kāpumi: %1$s</string>
     <string name="gpx_timespan">Laika periods: %1$s</string>
 	<string name="gpx_timemoving">Laiks kustībā: %1$s</string>
@@ -2527,7 +2527,7 @@ Un vēl...
     <string name="coords_format_descr">Ģeogrāfisko koordināšu formāts</string>
   	<string name="lang_hsb">Sorbu (Augšu)</string>
     <string name="search_map_hint">Meklēt pilsētu vai reğionu</string>
-    <string name="route_roundabout_short">Brauciet pa %$d izeju</string>
+    <string name="route_roundabout_short">Brauciet pa %1$d izeju</string>
     <string name="upload_poi">Augšupielādēt POI</string>
     <string name="route_calculation">Maršruta aprēķināšana</string>
     <string name="gpx_no_tracks_title">Nav vēl izveidoti treki</string>
