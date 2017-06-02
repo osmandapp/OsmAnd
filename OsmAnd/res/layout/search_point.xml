@@ -34,6 +34,23 @@
                 android:layout_height="wrap_content"
                 android:stretchColumns="1">
 
+                <TableRow android:layout_width="fill_parent" >
+
+                    <TextView
+                        android:textSize="@dimen/default_list_text_size"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_marginLeft="5dp"
+                        android:text="@string/navigate_point_format"></TextView>
+
+                    <Spinner
+                        android:layout_width="fill_parent"
+                        android:layout_height="wrap_content"
+                        android:id="@+id/Format"
+                        android:layout_marginLeft="5dp"
+                        android:layout_marginRight="5dp"></Spinner>
+                </TableRow>
+
                 <TableRow android:layout_width="fill_parent" android:id="@+id/lat_row">
 
                     <TextView
@@ -120,23 +137,6 @@
                         android:id="@+id/ZoneEdit"
                         android:layout_marginLeft="5dp"
                         android:layout_marginRight="5dp"></EditText>
-                </TableRow>
-
-                <TableRow android:layout_width="fill_parent" >
-
-                    <TextView
-                        android:textSize="@dimen/default_list_text_size"
-                        android:layout_width="wrap_content"
-                        android:layout_height="wrap_content"
-                        android:layout_marginLeft="5dp"
-                        android:text="@string/navigate_point_format"></TextView>
-
-                    <Spinner
-                        android:layout_width="fill_parent"
-                        android:layout_height="wrap_content"
-                        android:id="@+id/Format"
-                        android:layout_marginLeft="5dp"
-                        android:layout_marginRight="5dp"></Spinner>
                 </TableRow>
 
                 <TextView
