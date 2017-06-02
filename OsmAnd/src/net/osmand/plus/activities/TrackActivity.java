@@ -88,7 +88,7 @@ public class TrackActivity extends TabActivity {
 				@Override
 				protected GPXFile doInBackground(Void... params) {
 					long startTime = System.currentTimeMillis();
-					GPXFile result = null;
+					GPXFile result;
 					if (file == null) {
 						result = getMyApplication().getSavingTrackHelper().getCurrentGpx();
 					} else {
@@ -100,9 +100,11 @@ public class TrackActivity extends TabActivity {
 						}
 					}
 					if (result != null) {
-						while (System.currentTimeMillis() - startTime < 200) {
+						result.addGeneralTrack();
+						long timeout = 200 - (System.currentTimeMillis() - startTime);
+						if (timeout > 0) {
 							try {
-								Thread.sleep(50);
+								Thread.sleep(timeout);
 							} catch (InterruptedException e) {
 								// ignore
 							}

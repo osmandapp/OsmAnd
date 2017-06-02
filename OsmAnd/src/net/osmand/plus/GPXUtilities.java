@@ -12,7 +12,6 @@ import net.osmand.PlatformUtil;
 import net.osmand.data.LocationPoint;
 import net.osmand.data.PointDescription;
 import net.osmand.data.RotatedTileBox;
-import net.osmand.plus.views.OsmandMapTileView;
 import net.osmand.plus.views.Renderable;
 import net.osmand.util.Algorithms;
 
@@ -85,7 +84,7 @@ public class GPXUtilities {
 
 		public Map<String, String> getExtensionsToWrite() {
 			if (extensions == null) {
-				extensions = new LinkedHashMap<String, String>();
+				extensions = new LinkedHashMap<>();
 			}
 			return extensions;
 		}
@@ -124,26 +123,24 @@ public class GPXUtilities {
 		public WptPt() {
 		}
 
-//		public WptPt(WptPt toCopy) {
-//			this.lat = toCopy.lat;
-//			this.lon = toCopy.lon;
-//			if (toCopy.name != null) {
-//				this.name = new String(toCopy.name);
-//			}
-//			if (toCopy.link != null) {
-//				this.link = new String(toCopy.link);
-//			}
-//			if (toCopy.category != null) {
-//				this.category = new String(toCopy.category);
-//			}
-//			this.time = toCopy.time;
-//			this.ele = toCopy.ele;
-//			this.speed = toCopy.speed;
-//			this.hdop = toCopy.hdop;
-//			this.deleted = toCopy.deleted;
-//			this.colourARGB = toCopy.colourARGB;
-//			this.distance = toCopy.distance;
-//		}
+		public WptPt(WptPt wptPt) {
+			this.lat = wptPt.lat;
+			this.lon = wptPt.lon;
+			this.name = wptPt.name;
+			this.link = wptPt.link;
+
+			this.category = wptPt.category;
+			this.desc = wptPt.desc;
+			this.comment = wptPt.comment;
+
+			this.time = wptPt.time;
+			this.ele = wptPt.ele;
+			this.speed = wptPt.speed;
+			this.hdop = wptPt.hdop;
+			this.deleted = wptPt.deleted;
+			this.colourARGB = wptPt.colourARGB;
+			this.distance = wptPt.distance;
+		}
 
 		public void setDistance(double dist) {
 			distance = dist;
@@ -217,8 +214,7 @@ public class GPXUtilities {
 	}
 
 	public static class TrkSegment extends GPXExtensions {
-		public List<WptPt> points = new ArrayList<WptPt>();
-		private OsmandMapTileView view;
+		public List<WptPt> points = new ArrayList<>();
 
 		public List<Renderable.RenderableSegment> renders = new ArrayList<>();
 
@@ -231,7 +227,7 @@ public class GPXUtilities {
 		}
 
 		private List<GPXTrackAnalysis> split(SplitMetric metric, SplitMetric secondaryMetric, double metricLimit) {
-			List<SplitSegment> splitSegments = new ArrayList<GPXUtilities.SplitSegment>();
+			List<SplitSegment> splitSegments = new ArrayList<>();
 			splitSegment(metric, secondaryMetric, metricLimit, splitSegments, this);
 			return convert(splitSegments);
 		}
@@ -246,14 +242,14 @@ public class GPXUtilities {
 	public static class Track extends GPXExtensions {
 		public String name = null;
 		public String desc = null;
-		public List<TrkSegment> segments = new ArrayList<TrkSegment>();
+		public List<TrkSegment> segments = new ArrayList<>();
 
 	}
 
 	public static class Route extends GPXExtensions {
 		public String name = null;
 		public String desc = null;
-		public List<WptPt> points = new ArrayList<WptPt>();
+		public List<WptPt> points = new ArrayList<>();
 
 	}
 
@@ -710,7 +706,7 @@ public class GPXUtilities {
 	}
 
 	private static List<GPXTrackAnalysis> convert(List<SplitSegment> splitSegments) {
-		List<GPXTrackAnalysis> ls = new ArrayList<GPXUtilities.GPXTrackAnalysis>();
+		List<GPXTrackAnalysis> ls = new ArrayList<>();
 		for (SplitSegment s : splitSegments) {
 			GPXTrackAnalysis a = new GPXTrackAnalysis();
 			a.prepareInformation(0, s);
@@ -721,19 +717,64 @@ public class GPXUtilities {
 
 	public static class GPXFile extends GPXExtensions {
 		public String author;
-		public List<Track> tracks = new ArrayList<Track>();
-		public List<WptPt> points = new ArrayList<WptPt>();
-		public List<Route> routes = new ArrayList<Route>();
+		public List<Track> tracks = new ArrayList<>();
+		public List<WptPt> points = new ArrayList<>();
+		public List<Route> routes = new ArrayList<>();
 
 		public String warning = null;
 		public String path = "";
 		public boolean showCurrentTrack;
 		public long modifiedTime = 0;
 
+		private Track generalTrack;
+		private TrkSegment generalSegment;
+
 		public boolean isCloudmadeRouteFile() {
 			return "cloudmade".equalsIgnoreCase(author);
 		}
 
+		public void addGeneralTrack() {
+			Track generalTrack = getGeneralTrack();
+			if (generalTrack != null && !tracks.contains(generalTrack)) {
+				tracks.add(0, generalTrack);
+			}
+		}
+
+		public Track getGeneralTrack() {
+			TrkSegment generalSegment = getGeneralSegment();
+			if (generalTrack == null && generalSegment != null) {
+				Track track = new Track();
+				track.segments = new ArrayList<>();
+				track.segments.add(generalSegment);
+				generalTrack = track;
+			}
+			return generalTrack;
+		}
+
+		public TrkSegment getGeneralSegment() {
+			if (generalSegment == null && getNonEmptySegmentsCount() > 1) {
+				buildGeneralSegment();
+			}
+			return generalSegment;
+		}
+
+		private void buildGeneralSegment() {
+			TrkSegment segment = new TrkSegment();
+			for (Track track : tracks) {
+				for (TrkSegment s : track.segments) {
+					if (s.points.size() > 0) {
+						List<WptPt> waypoints = new ArrayList<>(s.points.size());
+						for (WptPt wptPt : s.points) {
+							waypoints.add(new WptPt(wptPt));
+						}
+						segment.points.addAll(waypoints);
+					}
+				}
+			}
+			if (segment.points.size() > 0) {
+				generalSegment = segment;
+			}
+		}
 
 		public GPXTrackAnalysis getAnalysis(long fileTimestamp) {
 			GPXTrackAnalysis g = new GPXTrackAnalysis();
@@ -909,7 +950,17 @@ public class GPXUtilities {
 			return points.isEmpty() && routes.isEmpty();
 		}
 
-
+		public int getNonEmptySegmentsCount() {
+			int count = 0;
+			for (Track t : tracks) {
+				for (TrkSegment s : t.segments) {
+					if (s.points.size() > 0) {
+						count++;
+					}
+				}
+			}
+			return count;
+		}
 	}
 
     public static String asString(GPXFile file, OsmandApplication ctx) {
@@ -1057,7 +1108,7 @@ public class GPXUtilities {
 
 	public static class GPXFileResult {
 		public ArrayList<List<Location>> locations = new ArrayList<List<Location>>();
-		public ArrayList<WptPt> wayPoints = new ArrayList<WptPt>();
+		public ArrayList<WptPt> wayPoints = new ArrayList<>();
 		// special case for cloudmate gpx : they discourage common schema
 		// by using waypoint as track points and rtept are not very close to real way
 		// such as wpt. However they provide additional information into gpx.

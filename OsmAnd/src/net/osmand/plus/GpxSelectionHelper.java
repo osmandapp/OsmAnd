@@ -86,6 +86,23 @@ public class GpxSelectionHelper {
 		return app.getString(resId, formatArgs);
 	}
 
+	public GpxDisplayGroup buildGeneralGpxDisplayGroup(GPXFile g, Track t) {
+		GpxDisplayGroup group = new GpxDisplayGroup(g);
+		String name = getGroupName(g);
+		group.gpxName = name;
+		group.color = t.getColor(g.getColor(0));
+		group.setType(GpxDisplayItemType.TRACK_SEGMENT);
+		group.setTrack(t);
+		group.setName(getString(R.string.gpx_selection_track, name, ""));
+		String d = "";
+		if (t.name != null && t.name.length() > 0) {
+			d = t.name + " " + d;
+		}
+		group.setDescription(d);
+		processGroupTrack(app, group);
+		return group;
+	}
+
 	public GpxDisplayGroup buildGpxDisplayGroup(GPXFile g, int trackIndex, String name) {
 		Track t = g.tracks.get(trackIndex);
 		GpxDisplayGroup group = new GpxDisplayGroup(g);
