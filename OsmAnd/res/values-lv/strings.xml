@@ -1,7 +1,7 @@
 <?xml version='1.0' encoding='UTF-8'?>
 <resources><string name="plugins_screen">Spraudņu pārvaldnieks</string>
   
-  <string name="prefs_plugins_descr">Spraudņi papildina aplikācijas iespējas un dod papildus funkcionalitāti</string>
+  <string name="prefs_plugins_descr">Spraudņi papildina aplikācijas iespējas un piešķir tai papildus funkcionalitāti</string>
   <string name="prefs_plugins">Spraudņi</string>
   
   <string name="osm_editing_plugin_description">Rādīt iestatījumus OSM pilnveidošanai - OSM POI objektu izveidei/labošanai, GPX treku izplatīšanai un ziņošanai par OSM kļūdām. Vairāk uzziniet https://openstreetmap.org vietnē. Ikviens ir aicināts ņemt aktīvu dalību, ko ir iespējams darīt caur OsmAnd aplikāciju, norādot jūsu OSM lietotāja datus.</string>
@@ -91,15 +91,15 @@
   <string name="local_openstreetmap_upload">Augšupielādēt izmaiņas uz OSM</string>
   <string name="local_openstreetmap_delete">Dzēst labojumus</string>
   <string name="local_openstreetmap_descr_title">Bezsaistes OSM rediģēšana:</string>
-  <string name="local_openstreetmap_settings">Saglabātie OSM POIs/Kļūdas</string>
-  <string name="local_openstreetmap_settings_descr">Pārvaldīt krātuvē ieliktos OSM POI/Kļūdas</string>
+  <string name="local_openstreetmap_settings">Saglabātie OSM POIs/Piezīmes</string>
+  <string name="local_openstreetmap_settings_descr">Pārvaldīt krātuvē ieliktos OSM POI/Piezīmes</string>
   
   
   <string name="live_monitoring_interval_descr">Norādīt sekošanas intervālu</string>
   <string name="live_monitoring_interval">Tiešaistes sekošanas intervāls</string>
   <string name="live_monitoring_url_descr">Norādiet web adresi ar parametru sintaksi: lat={0}, lon={1}, timestamp={2}, hdop={3}, altitude={4}, speed={5}, bearing={6}</string>
   <string name="live_monitoring_url">Tiešsaistes sekošanas web adrese</string>
-  <string name="gpx_monitoring_disabled_warn">Ierakstīt treku ar GPX logrīku vai caur \'ceļa ieraksts\' iestatījumos.</string>
+  <string name="gpx_monitoring_disabled_warn">Ierakstīt treku ar GPX logrīku vai caur \'Ceļa ieraksts\' iestatījumos.</string>
   <string name="show_current_gpx_title">Rādīt patreizējo trasi</string>
   
   <string name="free_version_message">Bezmaksas OsmAnd versijai ir ierobežojums uz %1$s lejupielādēm un tā neatbalsta bezsaistes wikipedia rakstus.</string>
@@ -123,7 +123,7 @@
   <string name="amenity_type_osmwiki">Wikipedia (bezsaistes)</string>
   <string name="amenity_type_user_defined">Lietotāja definēts</string>
   <string name="fav_export_confirmation">Fails ar iepriekš eksportētu izlasi jau pastāv. Vai vēlaties to pārrakstīt?</string>
-  <string name="profile_settings">Maršruta tips</string>
+  <string name="profile_settings">Profila iestatījumi</string>
   <string name="settings_preset">Noklusētais profils</string>
   <string name="settings_preset_descr">Kartes un navigācijas uzstādījumi tiek saglabāti katrā profilā atsevišķi. Izvēlieties noklusēto profilu.</string>
   
@@ -133,9 +133,9 @@
   <string name="global_settings">Globālie iestatījumi</string>
   <string name="index_settings">Kartes faili</string>
   <string name="index_settings_descr">"Lejupielādēt un pārraudzīt kartes daļas,  balss pakas un vikipēdijas interešu punktus (POI)"</string>
-  <string name="general_settings">Vispārējie uzstādījumi</string>
+  <string name="general_settings">Vispārīgie iestatījumi</string>
   <string name="general_settings_descr">Mainīt aplikācijas iestatījumus</string>
-  <string name="global_app_settings">Vispārējie iestatījumi</string>
+  <string name="global_app_settings">Globālie aplikācijas iestatījumi</string>
   <string name="user_name">OSM lietotāja vārds</string>
   <string name="open_street_map_login_descr">Nepieciešams, lai veiktu augšupielādes openstreetmap.org</string>
   <string name="user_password">Jūsu OSM parole</string>
@@ -398,7 +398,7 @@
   <string name="select_build_to_install">Izvēlieties, kuru OsmAnd versiju instalēt</string>
   <string name="contribution_activity">Instalācijas versija</string>
   <string name="gps_status_app_not_found">GPS statusa aplikācija nav instalēta. Meklēt Play veikalā?</string>
-  <string name="voice_is_not_available_msg">"Nav pieejama bass vadība,  lūdzu ejiet uz \'Uzstādījumi\' → \'Vispārējie izstādījumi\' → \'Balss vadība\' un izvēlieties vai lejupielādējiet balss pakotni."</string>
+  <string name="voice_is_not_available_msg">"Nav pieejama balss vadība,  lūdzu ejiet uz \'Iestatījumi\' → \'Vispārīgie Iestatījumi\' → \'Balss vadība\' un izvēlieties vai lejupielādējiet balss pakotni."</string>
   <string name="voice_is_not_available_title">Nav izvēlēta balss vadība</string>
   <string name="daynight_mode_day">Diena</string>
   <string name="daynight_mode_night">Nakts</string>
@@ -455,8 +455,8 @@
   <string name="poi_context_menu_delete">Dzēst POI</string>
   <string name="rotate_map_compass_opt">Pēc kompasa</string>
   <string name="rotate_map_bearing_opt">Kustības virzienā</string>
-  <string name="rotate_map_none_opt">Nemainīt virzienu</string>
-  <string name="rotate_map_to_bearing_descr">Pēc kompasa, kustības virzienā vai nemainīt</string>
+  <string name="rotate_map_none_opt">Nerotēt (augšā ziemeļi)</string>
+  <string name="rotate_map_to_bearing_descr">Kartes rotācija pēc kompasa, kustības virziena vai nerotēt</string>
   <string name="rotate_map_to_bearing">Kartes pagriešana</string>
   <string name="show_route">Maršruta detaļas</string>
   <string name="fav_imported_sucessfully">Izlase veiksmīgi importēta</string>
@@ -636,7 +636,7 @@
   <string name="use_online_routing_descr">Izmantot internetu, lai aprēķinātu maršrutu</string>
   <string name="use_online_routing">Lietot tiešsaites navigāciju</string>
   <string name="osm_settings_descr">Norādiet Openstreetmap.org (OSM) iestatījumus datu nosūtīšanai OSM</string>
-  <string name="data_settings_descr">Norādiet valodu, lejupielādējiet/pārlādējiet datus</string>
+  <string name="data_settings_descr">Iestatiet valodu, lejupielādējiet/atjaunojiet datus</string>
   <string name="data_settings">Dati</string>
   
   <string name="osm_settings">OSM labošana</string>
@@ -2291,7 +2291,7 @@ failu(s)?
     <string name="other_menu_group">Pārējais</string>
     <string name="plugins_menu_group">Spraudņi</string>
     <string name="first_usage_item">Sākt lietot</string>
-    <string name="first_usage_item_description">Kā lejupielādēt kartes un pamatiestatījumi</string>
+    <string name="first_usage_item_description">Kā lejupielādēt kartes un pamatiestatījumu lietošana</string>
     <string name="navigation_item_description">Navigācija</string>
     <string name="planning_trip_item">Ceļa plānošana</string>
     <string name="faq_item">BUJ</string>
@@ -2605,7 +2605,7 @@ Apraksta laukumu: %1$s x %2$s</string>
     <string name="quick_action_add_marker">Pievienot marķieri</string>
     <string name="quick_action_add_poi">Pievienot POI</string>
     <string name="quick_action_map_style">Mainīt kartes stilu</string>
-    <string name="quick_action_map_style_switch">Kartes stils ir izmainīts uz \"%s\".</string>
+    <string name="quick_action_map_style_switch">Kartes stils ir nomainīts uz \"%s\".</string>
     <string name="quick_action_take_audio_note">Sākt audio piezīmi</string>
     <string name="quick_action_take_video_note">Sākt video piezīmi</string>
     <string name="quick_action_take_photo_note">Sākt foto piezīmi</string>
@@ -2659,8 +2659,8 @@ Apraksta laukumu: %1$s x %2$s</string>
     <string name="quick_action_map_overlay">Nomainīt kartes virsklāju</string>
     <string name="quick_action_map_overlay_title">Kartes virsklāji</string>
     <string name="quick_action_map_overlay_action">Pievienot virsklāju</string>
-    <string name="quick_action_map_overlay_switch">Kartes virsklājs ir nomainīts uz \"%s\".</string>
-    <string name="quick_action_map_underlay_switch">Kartes apakšklājs ir nomainīts uz \"%s\".</string>
+    <string name="quick_action_map_overlay_switch">Kartes virsklājs tika nomainīts uz \"%s\".</string>
+    <string name="quick_action_map_underlay_switch">Kartes apakšklājs tika nomainīts uz \"%s\".</string>
     <string name="quick_action_map_underlay">Nomainīt kartes apakšklāju</string>
     <string name="quick_action_map_underlay_title">Kartes apakšklāji</string>
     <string name="quick_action_map_underlay_action">Pievienot apakšklāju</string>
@@ -2674,7 +2674,7 @@ Apraksta laukumu: %1$s x %2$s</string>
     <string name="quick_action_item_screen">Ekrāns %d</string>
     <string name="quick_favorites_name_preset">Vieta no izlases</string>
     <string name="quick_action_interim_dialog">Rādīt interim dialogu</string>
-    <string name="quick_action_duplicates">Šāds ātrās darbības vārds jau tiek lietots, tāpēc tika nomainīts uz %1$s, lai nedublētu vārdu.</string>
+    <string name="quick_action_duplicates">Šāds ātrās darbības vārds jau pastāv, tāpēc tas tika pārsaukts uz %1$s, lai izvairītos no dublikāta.</string>
     <string name="quick_action_duplicate">Ātrās darbības vārda dublikāts</string>
     <string name="quick_action_btn_tutorial_title">Mainīt pogas pozīciju</string>
     <string name="quick_action_btn_tutorial_descr">Turiet nospiestu un velciet pogu, lai mainītu tās atrašanās vietu uz ekrāna</string>
@@ -3072,4 +3072,5 @@ No Afganistānas līdz Zimbabvei, no Austrālijas līdz ASV, Argentīna, Brazīl
     <string name="hide_from_zoom_level">Paslēpt no zoom līmeņa</string>
     <string name="show_from_zoom_level">Rādīt no zoom līmeņa</string>
     <string name="mapillary_image">Mapillary bilde</string>
+    <string name="import_gpx_failed_descr">OsmAnd nevar importēt failu. Pārliecinieties vai OsmAnd ir atļauja nolasīt failu dotajā mapē.</string>
     </resources>
