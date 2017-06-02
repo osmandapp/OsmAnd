@@ -3111,4 +3111,11 @@
 	<string name="poi_aerodrome_type_military_public">軍/民共用</string>
 	<string name="poi_aerodrome_type_private">私人</string>
 
+	<string name="poi_motorcycle_services">服務</string>
+	<string name="poi_motorcycle_type">摩托車類型</string>
+
+<string name="poi_valley_balka">平谷</string>
+
+	<string name="poi_ventilation_shaft">通風井</string>
+
 	</resources>
