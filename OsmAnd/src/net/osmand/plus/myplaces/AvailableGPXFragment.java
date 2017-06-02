@@ -1,7 +1,6 @@
 package net.osmand.plus.myplaces;
 
 import android.app.Activity;
-import android.app.Dialog;
 import android.app.ProgressDialog;
 import android.content.Context;
 import android.content.DialogInterface;
@@ -51,6 +50,7 @@ import net.osmand.plus.GPXDatabase.GpxDataItem;
 import net.osmand.plus.GPXUtilities;
 import net.osmand.plus.GPXUtilities.GPXFile;
 import net.osmand.plus.GPXUtilities.GPXTrackAnalysis;
+import net.osmand.plus.GPXUtilities.Track;
 import net.osmand.plus.GPXUtilities.WptPt;
 import net.osmand.plus.GpxSelectionHelper;
 import net.osmand.plus.GpxSelectionHelper.GpxDisplayGroup;
@@ -94,8 +94,6 @@ import java.util.Locale;
 import java.util.Map;
 import java.util.Set;
 import java.util.regex.Pattern;
-
-import static net.osmand.plus.R.id.items;
 
 public class AvailableGPXFragment extends OsmandExpandableListFragment {
 
@@ -1257,26 +1255,26 @@ public class AvailableGPXFragment extends OsmandExpandableListFragment {
 
 		@Override
 		protected GpxDisplayItem doInBackground(Void... voids) {
-			List<GpxDisplayGroup> gpxDisplayGroupList;
+			GpxDisplayGroup gpxDisplayGroup = null;
+			GPXFile gpxFile = null;
+			Track generalTrack = null;
 			if (gpxInfo.gpx == null) {
-				GPXFile gpxFile;
-				if (gpxInfo.file == null) {
-					gpxFile = getMyApplication().getSavingTrackHelper().getCurrentGpx();
-				} else {
+				if (gpxInfo.file != null) {
 					gpxFile = GPXUtilities.loadGPXFile(getActivity(), gpxInfo.file);
 				}
-				gpxDisplayGroupList = selectedGpxHelper.collectDisplayGroups(gpxFile);
 			} else {
-				gpxDisplayGroupList = selectedGpxHelper.collectDisplayGroups(gpxInfo.gpx);
+				gpxFile = gpxInfo.gpx;
+			}
+			if (gpxFile != null) {
+				generalTrack = gpxFile.getGeneralTrack();
+			}
+			if (generalTrack != null) {
+				gpxFile.addGeneralTrack();
+				gpxDisplayGroup = selectedGpxHelper.buildGeneralGpxDisplayGroup(gpxFile, generalTrack);
 			}
 			List<GpxDisplayItem> items = null;
-			if (gpxDisplayGroupList != null) {
-				for (GpxDisplayGroup group : gpxDisplayGroupList) {
-					if (group.getType() == GpxSelectionHelper.GpxDisplayItemType.TRACK_SEGMENT) {
-						items = group.getModifiableList();
-						break;
-					}
-				}
+			if (gpxDisplayGroup != null) {
+				items = gpxDisplayGroup.getModifiableList();
 			}
 			if (items != null && items.size() > 0) {
 				return items.get(0);
@@ -1331,7 +1329,7 @@ public class AvailableGPXFragment extends OsmandExpandableListFragment {
 
 		GPXTrackAnalysis analysis;
 		if ((analysis = getGpxTrackAnalysis(gpxInfo, app)) != null) {
-			if (analysis.totalDistance != 0) {
+			if (analysis.totalDistance != 0 && !gpxInfo.currentlyRecordingTrack) {
 				item = optionsMenu.getMenu().add(R.string.analyze_on_map).setIcon(iconsCache.getThemedIcon(R.drawable.ic_action_info_dark));
 				item.setOnMenuItemClickListener(new MenuItem.OnMenuItemClickListener() {
 					@Override
