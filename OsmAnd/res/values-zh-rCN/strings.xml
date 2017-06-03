@@ -2390,8 +2390,8 @@
     <string name="download_type_to_filter">要筛选类型</string>
     <string name="use_high_res_maps">高分辨率显示</string>
     <string name="use_high_res_maps_descr">在高清晰度的屏幕上不要拉伸（模糊）地图图砖</string>
-    <string name="transport_searching_transport">运输结果（未设目的地）︰</string>
-    <string name="transport_searching_route">运输结果（有 {0} 条路线可到目的地）︰</string>
+    <string name="transport_searching_transport">交通运输结果（未设目的地）︰</string>
+    <string name="transport_searching_route">交通运输结果（有 {0} 条路线可到目的地）︰</string>
     <string name="voices">语音提示</string>
     <string name="transport_context_menu">搜索公交站</string>
     <string name="rotate_map_compass_opt">以指南针旋转</string>
