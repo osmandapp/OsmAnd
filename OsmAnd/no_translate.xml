@@ -3,12 +3,6 @@
     <string name="app_name">OsmAnd~</string>
     <string name="app_name_free">OsmAndF~</string>
     <string name="app_version_suffix"></string>
-    <!--
-    Note: appVersion will be concatenated via Manifest's "android:versionName" ("X.X.X") and the build info "app_version_suffix" ("#YYYYYZ" for dev builds only) as follows:
-             X.X.X#YYYYYZ , where
-                   YYYYY    is the build number of build branch Z
-                        Z : M=-master, D=-main-default, B=-Blackberry, Des=-design, MQA=-main-qt-arm, MQDA=-main-qt-default-arm, S=-sherpafy
-    -->
 
     <!-- Not translatable -->
     <string name="full_version_price">€5,99</string>

@@ -54,6 +54,7 @@ public class Version {
 		int versionCode = -1;
 		try {
 			PackageInfo packageInfo = ctx.getPackageManager().getPackageInfo(ctx.getPackageName(), 0);
+			//appVersion = packageInfo.versionName; //already appended in build.gradle: + ctx.getString(R.string.app_version_suffix);
 			appVersion = packageInfo.versionName + ctx.getString(R.string.app_version_suffix);
 			versionCode = packageInfo.versionCode;
 		} catch (PackageManager.NameNotFoundException e) {

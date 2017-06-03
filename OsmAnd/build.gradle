@@ -2,8 +2,8 @@ apply plugin: 'com.android.application'
 // Global Parameters accepted
 // TARGET_APP_NAME    - app name
 // APK_NUMBER_VERSION - version number of apk
-// APK_VERSION_SUFFIX - build number like #99999Z   (for dev builds only)
-//                      flavor                  Z : M=-master, D=-design, B=-Blackberry, MD=-main-default, MQA=-main-qt-arm, MQDA=-main-qt-default-arm, S=-sherpafy
+// APK_VERSION_SUFFIX - build number like #99999Z, appended (for dev builds) to Manifest's versionName as X.X.X#99999Z
+//                      Z means flavor: M=-master, D=-main-default, B=-Blackberry, Des=-design, MQA=-main-qt-arm, MQDA=-main-qt-default-arm, S=-sherpafy
 // APP_EDITION        - date stamp of builds
 // APP_FEATURES       - features +play_market +gps_status -parking_plugin -blackberry -free_version -amazon
 
@@ -42,6 +42,7 @@ android {
 		versionCode System.getenv("APK_NUMBER_VERSION") ? System.getenv("APK_NUMBER_VERSION").toInteger() : versionCode
 		multiDexEnabled true
 		versionName System.getenv("APK_VERSION")? System.getenv("APK_VERSION").toString(): versionName
+		//versionName System.getenv("APK_VERSION_SUFFIX")? versionName + System.getenv("APK_VERSION_SUFFIX").toString(): versionName
 	}
 
 	lintOptions {
@@ -187,7 +188,6 @@ def replaceNoTranslate(line) {
 //		return line.replaceAll(">[^<]*<", ">" + System.getenv("APK_VERSION") + "<")
 //	}
 	if (line.contains("\"app_version_suffix\"") && System.getenv("APK_VERSION_SUFFIX")) {
-		// appends build number to version number for dev builds
 		return line.replaceAll("</", System.getenv("APK_VERSION_SUFFIX") + "</")
 	}
 	if (line.contains("\"versionFeatures\"") && System.getenv("APP_FEATURES")) {
