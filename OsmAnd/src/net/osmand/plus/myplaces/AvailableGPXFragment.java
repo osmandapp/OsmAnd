@@ -1271,6 +1271,8 @@ public class AvailableGPXFragment extends OsmandExpandableListFragment {
 			if (generalTrack != null) {
 				gpxFile.addGeneralTrack();
 				gpxDisplayGroup = selectedGpxHelper.buildGeneralGpxDisplayGroup(gpxFile, generalTrack);
+			} else if (gpxFile != null && gpxFile.tracks.size() > 0) {
+				gpxDisplayGroup = selectedGpxHelper.buildGeneralGpxDisplayGroup(gpxFile, gpxFile.tracks.get(0));
 			}
 			List<GpxDisplayItem> items = null;
 			if (gpxDisplayGroup != null) {
