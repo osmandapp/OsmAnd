@@ -38,6 +38,7 @@ import android.widget.AdapterView;
 import android.widget.ArrayAdapter;
 import android.widget.CompoundButton;
 import android.widget.ImageView;
+import android.widget.ListAdapter;
 import android.widget.ListView;
 import android.widget.ProgressBar;
 import android.widget.TextView;
@@ -139,6 +140,27 @@ public class TrackSegmentFragment extends OsmAndListFragment {
 	private Bitmap mapBitmap;
 	private Bitmap mapTrackBitmap;
 
+    public static void setListViewHeightBasedOnChildren(ListView listView) {
+        ListAdapter listAdapter = listView.getAdapter();
+        if (listAdapter == null)
+            return;
+
+        int desiredWidth = View.MeasureSpec.makeMeasureSpec(listView.getWidth(), View.MeasureSpec.UNSPECIFIED);
+        int totalHeight = 0;
+        View view = null;
+        for (int i = 0; i < listAdapter.getCount(); i++) {
+            view = listAdapter.getView(i, view, listView);
+            if (i == 0)
+                view.setLayoutParams(new ViewGroup.LayoutParams(desiredWidth, ViewGroup.LayoutParams.WRAP_CONTENT));
+
+			view.measure(View.MeasureSpec.makeMeasureSpec(desiredWidth, View.MeasureSpec.AT_MOST), View.MeasureSpec.makeMeasureSpec(0, View.MeasureSpec.UNSPECIFIED));
+            totalHeight += view.getMeasuredHeight();
+        }
+        ViewGroup.LayoutParams params = listView.getLayoutParams();
+        params.height = totalHeight + (listView.getDividerHeight() * (listAdapter.getCount() - 1));
+        listView.setLayoutParams(params);
+    }
+
 	@Override
 	public void onCreate(@Nullable Bundle savedInstanceState) {
 		super.onCreate(savedInstanceState);
@@ -160,6 +182,15 @@ public class TrackSegmentFragment extends OsmAndListFragment {
 		view.findViewById(R.id.header_layout).setVisibility(View.GONE);
 
 		ListView listView = (ListView) view.findViewById(android.R.id.list);
+        listView.setOnTouchListener(new View.OnTouchListener() {
+            // Setting on Touch Listener for handling the touch inside ScrollView
+            @Override
+            public boolean onTouch(View v, MotionEvent event) {
+                // Disallow the touch request for parent scroll on touch of child view
+                v.getParent().requestDisallowInterceptTouchEvent(true);
+                return false;
+            }
+        });
 		listView.setDivider(null);
 		listView.setDividerHeight(0);
 
@@ -998,8 +1029,19 @@ public class TrackSegmentFragment extends OsmAndListFragment {
 					chart.setOnTouchListener(new View.OnTouchListener() {
 						@Override
 						public boolean onTouch(View v, MotionEvent event) {
-							getListView().requestDisallowInterceptTouchEvent(true);
-							return false;
+                            switch (event.getAction()) {
+                                case MotionEvent.ACTION_DOWN: {
+                                    chart.getParent().requestDisallowInterceptTouchEvent(true);
+                                    break;
+                                }
+                                case MotionEvent.ACTION_CANCEL:
+                                case MotionEvent.ACTION_UP: {
+									chart.getParent().requestDisallowInterceptTouchEvent(false);
+                                    break;
+                                }
+                            }
+
+                            return false;
 						}
 					});
 					chart.setOnChartValueSelectedListener(new OnChartValueSelectedListener() {
