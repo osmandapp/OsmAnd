@@ -2496,7 +2496,7 @@
     <string name="unsaved_changes_will_be_lost">任何未保存的更改将会丢失。要继续吗？</string>
     <string name="downloads_left_template">剩余 %1$s 次下载</string>
     <string name="roads">道路</string>
-    <string name="downloading_number_of_files">正在下载 - %1$ 个文件</string>
+    <string name="downloading_number_of_files">正在下载 - %1$d 个文件</string>
     <string name="show_free_version_banner">显示免费版标题</string>
     <string name="show_free_version_banner_description">即使你有付费版本你仍然可以看到免费版标题</string>
     <string name="activate_seamarks_plugin">请激活航线标识插件</string>
