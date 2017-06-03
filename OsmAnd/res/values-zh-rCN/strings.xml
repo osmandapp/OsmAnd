@@ -2260,4 +2260,151 @@
 \n
 \n OsmAnd 是开放源代码的导航应用程序，访问各式各样的全球性 OpenStreetMap（简称 OSM 开放街道地图）数据。所有数据（矢量图或地图图砖）可存放于手机的记忆卡上，可用作离线与在线导航，包含转弯提醒
 \n (turn by turn) 语音导航。一些主要功能： - 完整的离线功能（存放下载的矢量图或地图图砖于设备存储器） - 提供细致的全球离线矢量数据 - 直接从应用程序下载各国或区域数据 - 可叠加不同的多种地图层于自订的透明度，如 GPX 或导航轨迹、兴趣点、我的收藏、公共运输站 - 离线查寻地址、场所 (POI) - 中程距离的离线使用路线 - 汽车、自行车、步行模式有下列选项： - 可选择自动日夜模式切换 - 可依据速度选择地图缩放 - 可依据罗盘或运动方向选择地图选择对齐方式 - 可选的车道引导、速限显示、使用真人语音或 TTS 语音 OsmAnd 免费版限制: - 地图下载数量  - 无法使用离线维基百科的 POI OsmAnd 正在积极开发我们的项目，并且它的更进一步发展依赖于提供资金的捐助，用以资助发展和新功能的测试。请考虑购买 OsmAnd+，或资助特定的新功能或在 osmand.net 网站上做一些一般捐助。 "</string>
+    <string name="osmand_extended_description_part1">" OsmAnd (Automated Navigation Directions) 是一个地图和导航的应用程序可以免费的访问，有世界各地和高品质的 OpenStreetMap (OSM) 数据。有语音和视觉的导航，查看 POI（兴趣点），创建和管理 GPX 轨迹，使用可视化的等高线和海拔信息（需要插件），能在汽车驾驶、骑自行车和步行模式之间选择、OSM 编辑和更多。 "</string>
+    <string name="osmand_extended_description_part2">" GPS 导航 • 您可以在离线（当您在国外无需国际漫游费用）或连接（快速）两种模式间选择 • 转弯提醒 (turn by turn) 语音导航（真人和合成语音） • 当您偏离了行驶路线，重建改道规划 • 车道导引、街道名称和预计抵达时间会有一路的帮助 • 为了让您的行程安全，有日/夜模式自动切换 • 您可以选择显示车速限制，如果超速了则可以获得提醒 • 依您的速度调整地图缩放 • 您可以按照地址、类别（如停车场、餐厅、旅店、加油站、博物馆）或地理坐标搜索目的地 • 支持中转点于您的旅程 • 您可以录制自己的或上传一个 GPX 轨迹并跟随它 "</string>
+    <string name="osmand_extended_description_part3">" 地图 • 显示您周遭的 POI（兴趣点） • 调整地图到您的移动方向（或罗盘） • 显示您在哪里和您在看的地方 • 分享您的位置，让您的朋友能找到您 • 保存您最重要的地点于我的收藏 • 允许您去选择怎样在地图上显示名称：于英文、设备端或语言的拼写 • 显示专用的在线地图图砖、卫星视图（来自 Bing）、不同的叠加层如旅游/导航 GPX 轨迹以及可自定透明度的附加层 "</string>
+    <string name="osmand_extended_description_part4">" 滑雪 OsmAnd 滑雪地图插件，使您能够看到滑雪道与复杂程度和一些附加的信息，如滑雪缆车和其它设施的位置。 "</string>
+    <string name="osmand_extended_description_part5">" 自行车 • 您可以在地图找到自行车道 • GPS 导航在自行车模式下，使用自行车道构建您的路线 • 您能看到您的速度和海拔高度 • GPX 录制选项使您能去记录您的旅程并且分享 • 通过附加的插件组件，您可以启用显示等高线和地形阴影 "</string>
+    <string name="osmand_extended_description_part6">" 步行、健行、市区旅游 • 地图显示您的步行和健行路径 • 维基百科以您喜好的语言在市区旅游中可以告诉您很多事 • 大众运输停靠站（公共汽车、电车、火车），包括路线名称，有助于在新的城市里导航 • GPS 导航在行人模式下，使用步行路径构建您的路线 • 您可以上传并且跟随 GPX 路线或着记录和分享您自己的路线 "</string>
+    <string name="osmand_extended_description_part7">" ￼ 为 OSM 做出贡献 • 报告数据错误 • 从应用程序直接将 GPX 轨迹上传到 OSM • 增加 POI 并直接将其上传到 OSM（或如果脱机则之后上传） "</string>
+    <string name="osmand_extended_description_part8">" OsmAnd 是开源软件，而且正在积极的开发。应用程序从记述注解、改进翻译或编写新的功能，每个人都可以作出贡献。透过所有的这些形成开发人员和用户交互的作用下，让该项目处于不断改善的活络状态。项目的开发进度、编写代码和测试新的功能，还是要依靠提供资金捐款资助。 大概的地图覆盖区域和品质： • 西欧： **** • 东欧： *** • 俄罗斯： *** • 北美洲： *** • 南美洲： ** • 亚洲： ** • 日本和韩国： *** • 中东： ** • 非洲： ** • 南极洲： * 
+\n 全球大多数国家都可以下载！ 在您的国家获得可靠的导航 - 无论是法国、德国、墨西哥、英国、西班牙、荷兰、美国、俄罗斯、巴西或其他任何的国家。 "</string>
+    <string name="osmand_plus_long_description_1000_chars">" OsmAnd+ (OSM Automated Navigation Directions) OsmAnd+ 是开放源码导航应用程序，可以使用各式各样的全球性 OpenStreetMap （称 OSM 开放街道地图）数据。所有数据（矢量图或地图图砖）可存放于设备的记忆卡上，可作离线与在线地图导航，包含转弯提醒 (turn by turn) 语音导航。 一些主要的功能： - 完整离线功能（存放下载的矢量图或地图图砖于设备存储器） - 全球离线矢量地图数据 - 直接由手机下载各国或区域地图数据 - 可叠加不同的多种地图层于自订的透明度，如 GPX 或导航轨迹、兴趣点、我的收藏、等高线、大众运输停靠站 - 离线查寻地址、场所(POI) - 中程距离的脱机路线 - 汽车、自行车、步行模式有下列选项： - 自动日/夜模式切换选项 - 取决于速度的地图缩放选项 - 地图正北朝上或行进方向朝上选项 - 车道引导、速限显示、使用真人语音或 TTS 语音选项 "</string>
+    <string name="osmand_plus_extended_description_part1">" OsmAnd+ (OSM Automated Navigation Directions) 是一个地图和导航应用程序，可以免费访问全球性且高品质的 OpenStreetMap (OSM) 地图数据。有语音和视觉的导航、查看 POI（兴趣点）、创建和管理 GPX 轨迹、使用可视化的等高线和海拔信息，能在汽车驾驶、骑自行车和步行模式之间选择、OSM 编辑和更多。 OsmAnd + 是付费应用程序版本。透过购买，您支持了该项目，资助新功能的开发并收到最新的更新。一些主要特点： "</string>
+    <string name="osmand_plus_extended_description_part2">" 导航 • 在线工作（快速）或是离线（当您在国外无需国际漫游费用） • 转弯提醒 (turn by turn) 语音导航（真人和合成语音） • 可任选的车道导引、街道名称显示和预计抵达时间 • 支持您行程安排上的中转点 • 当您行驶路线改道，自动重新规划 • 查寻地点按照地址、类别（例如：餐厅、旅店、加油站、博物馆）或以地理位置坐标 "</string>
+    <string name="osmand_plus_extended_description_part3">" 地图查看 • 显示您的位置和方向 • 可以选择依照罗盘或您的运动方向对齐画面 • 将您最重要的地点，保存为我的收藏 
+\n • 显示您周遭的 POI（兴趣点） • 显示专用的在线地图图砖、卫星视图（来自 Bing）、不同的叠加层如旅游/导航 GPX 轨迹以及可自定透明度的附加层 • 可任选显示地名于英文、设备端或语言的拼写 "</string>
+    <string name="osmand_plus_extended_description_part4">" 使用 OSM 和维基百科的数据 • 来自世界最好的协作项目所得的高品质信息 • OSM 数据可用在每个国家或地区 • 维基百科 POI 卓越的观光景点 • 直接从应用程序，无限制的免费下载 • 密集的脱机矢量地图更新，至少每月一次 • 可在完整的区域数据还是只有公路网之间选择（例如：光全日本就有700 MB或200 MB的公路网） "</string>
+    <string name="osmand_plus_extended_description_part5">" 安全功能 • 任选的自动日/夜查看切换 • 任选的速限显示功能，如果您超速了它会提醒 • 取决于速度的地图缩放选项 
+\n • 分享您所在的位置的功能，这样您的朋友能找到您 "</string>
+    <string name="osmand_plus_extended_description_part6">" 自行车和步行功能 • 地图包括步行，健行旅游者，自行车道，非常适合户外活动 • 特殊的自行车和行人的路线和显示模式 • 任选的大众运输停靠站 (公共汽车、 电车、火车）包括线路名称 • 任选的旅程录制到设备端 GPX 文件或在线服务 • 任选的速度和高度显示 • 显示等高线和地形阴影（经由附加的插件） "</string>
+    <string name="osmand_plus_extended_description_part7">" 直接提供给 OSM
+\n • 报告地图错误
+\n • 直接从该应用程序上传 GPX 轨迹到 OSM
+\n • 增加 POI 并直接上传给 OSM（如果离线则在之后上传）
+\n • 任选的旅程录制而且在背景模式（当设备处于休眠模式下） OsmAnd 是开源软件，而且正在积极的开发。应用程序从报告错误、改进翻译或编写新的功能，每个人都可以作出贡献。透过所有的这些形成开发人员和用户交互的作用下，让该项目处于不断改善的活络状态。项目的开发进度、编写代码和测试新的功能，还是要依靠提供资金捐款资助。 "</string>
+    <string name="osmand_plus_extended_description_part8">" 大概的地图覆盖区域和品质： • 西欧： **** • 东欧： *** • 俄罗斯： *** • 北美洲： *** • 南美洲： ** • 亚洲：** • 日本和韩国： *** • 中东： ** • 非洲： ** • 南极洲： * 全球大多数国家都可以下载！ 从阿富汗到津巴布韦，从澳大利亚到美国。 阿根廷、巴西、加拿大、法国、德国、墨西哥、英国、 西班牙 … "</string>
+    <string name="route_updated_loc_found">一旦找到定位时，导航路线将重新规划</string>
+    <string name="osmand_parking_position_description_add_time">将车停在</string>
+    <string name="native_app_allocated_memory_descr">本地存储总计由应用程序 %1$s MB（Dalvik %2$s MB，其它 %3$s MB）。 比例存储 %4$s MB（Android 限制 %5$s MB，Dalvik %6$s MB）。</string>
+    <string name="starting_point_too_far">起始标点离最近的道路太远。</string>
+    <string name="osmand_parking_event">从停车场取车</string>
+    <string name="osmand_parking_warning_text">您的取车通知已加到您的日历行程中。它会一直保留在那里，直到您手动删除它。</string>
+    <string name="osmand_parking_time_limit_title">设置停车时间限制</string>
+    <string name="osmand_parking_delete_confirm">你想要删除停车位置标记吗？</string>
+    <string name="osmand_parking_delete">删除停车标记</string>
+    <string name="osmand_parking_choose_type">选择停车位的种类</string>
+    <string name="osmand_parking_add_event">将通知添加到日历应用中</string>
+    <string name="osmand_parking_time_limit">限时停车场</string>
+    <string name="osmand_parking_time_no_limit">不限时停车场</string>
+    <string name="osmand_parking_position_description">您停车的位置。%1$s</string>
+    <string name="osmand_parking_position_description_add">要取车请前往：</string>
+    <string name="osmand_parking_pm">下午</string>
+    <string name="osmand_parking_am">上午</string>
+    <string name="osmand_parking_position_name">停车位</string>
+    <string name="context_menu_item_add_parking_point">标记为一个停车位置</string>
+    <string name="context_menu_item_delete_parking_point">删除停车标记</string>
+    <string name="gpxup_public">公共</string>
+    <string name="asap">尽快</string>
+    <string name="share_route_as_gpx">作为 GPX 文件共享路线</string>
+    <string name="share_route_subject">通过 OsmAnd 分享路线</string>
+    <string name="rendering_attr_noPolygons_description">透明表示地图上所有的陆地区域</string>
+    <string name="rendering_attr_appMode_description">优化的地图用于</string>
+    <string name="rendering_attr_contourLines_description">显示缩放级别（需要等高线数据）：</string>
+    <string name="rendering_attr_hmRendered_description">增加地图显示的详细信息量</string>
+    <string name="left_side_navigation_descr">道路通行方向为左侧行车</string>
+    <string name="local_index_description">轻触任何现有的项目，查看更详细的信息，长按则停用或删除。目前在设备上的数据有（%1$s 可用）：</string>
+    <string name="first_time_msg">感谢您使用 OsmAnd。对于此应用程序的许多功能，您需要一些地区的离线数据，您可以透过\'设置\' -&gt; \'管理地图文件\'来下载。之后您可浏览地图、位置的地址、查看兴趣点以及寻找大众运输工具。</string>
+    <string name="basemap_was_selected_to_download">底图为某些特别的应用功能必需使用的，并且缺省为下载。</string>
+    <string name="prefs_plugins_descr">启动插件的高级设置和更多的附加功能</string>
+    <string name="play_commands_of_currently_selected_voice">用所选择的语音播放指令</string>
+    <string name="back_to_location">回到目前位置</string>
+    <string name="direction_style_sidewise">横向（8 个扇区）</string>
+    <string name="direction_style_clockwise">顺时针（12 个扇区）</string>
+    <string name="settings_direction_style">方向样式</string>
+    <string name="zoom_by_trackball_descr">以轨迹球水平移动改变地图缩放</string>
+    <string name="zoom_by_trackball">以轨迹球控制地图缩放</string>
+    <string name="arrival_distance_factor_early">提早</string>
+    <string name="arrival_distance_factor_normally">正常</string>
+    <string name="arrival_distance_factor_late">稍迟</string>
+    <string name="arrival_distance_factor_at_last">在最后几米</string>
+    <string name="arrival_distance">到达通知</string>
+    <string name="arrival_distance_descr">你想到达通知何时通知？</string>
+    <string name="use_fluorescent_overlays">荧光覆盖</string>
+    <string name="use_fluorescent_overlays_descr">使用荧光颜色来显示轨迹和路线</string>
+    <string name="local_openstreetmap_settings_descr">显示和管理在设备端数据库的 OSM 兴趣点/注解</string>
+    <string name="live_monitoring_interval_descr">指定在线追踪间隔时间</string>
+    <string name="live_monitoring_interval">在线跟踪时间间隔</string>
+    <string name="live_monitoring_url_descr">指定位置的 Web 地址参数语法：lat={0}, lon={1}, timestamp={2}, hdop={3}, altitude={4}, speed={5}, bearing={6}</string>
+    <string name="live_monitoring_url">在线跟踪 web 地址</string>
+    <string name="gpx_monitoring_disabled_warn">日志跟踪使用 GPX 部件或通过“旅行记录”设置。</string>
+    <string name="index_name_netherlands">欧洲 - 荷兰</string>
+    <string name="choose_auto_follow_route_descr">与当前位置的地图视图同步时间</string>
+    <string name="keep_informing_never">只有手动（轻触箭头）</string>
+    <string name="keep_informing_descr">定期重新通报导航指令</string>
+    <string name="keep_informing">重复导航指令</string>
+    <string name="auto_follow_route_navigation_descr">仅在导航时地图视图自动位于屏幕中心。</string>
+    <string name="auto_follow_location_enabled">自动将使用中的地图视图放在屏幕中间。</string>
+    <string name="poi_filter_nominatim">按名称在线</string>
+    <string name="select_search_position">起点：</string>
+    <string name="context_menu_item_search">在这附近搜索</string>
+    <string name="show_more_map_detail_descr">在放大地图时已显示部份矢量地图细节（道路等）</string>
+    <string name="shared_string_others">其它</string>
+    <string name="vector_data_missing">设备端（离线）的 SD 卡上找不到数据。要使用离线地图请去下载。</string>
+    <string name="shared_string_release">已发布</string>
+    <string name="local_index_items_backuped">%2$d 项中的 %1$d 项已顺利停用。</string>
+    <string name="local_index_items_deleted">%2$d 项中的 %1$d 项已顺利删除。</string>
+    <string name="local_index_items_restored">%2$d 项中的 %1$d 项已顺利启动。</string>
+    <string name="local_index_no_items_to_do">没有项目在 %1$s</string>
+    <string name="local_index_action_do">您即将要 %1$s %2$s 个项目，要继续吗？</string>
+    <string name="local_index_mi_restore">激活</string>
+    <string name="local_index_mi_backup">停用</string>
+    <string name="local_indexes_cat_backup">已停用</string>
+    <string name="tts_language_not_supported">选用的语言 Android TTS 引擎未支持，您要到市场上找其它引擎吗？否则使用之前设置的语言。</string>
+    <string name="tts_missing_language_data">安装所选语言没有数据。你想要去市场安装吗？</string>
+    <string name="gpx_option_from_start_point">沿着整条轨迹</string>
+    <string name="switch_to_vector_map_to_see">指定以脱机矢量地图显示
+\n
+\n启用方式“菜单” -&gt; “组态地图” -&gt; “地图来源…” -&gt; “离线矢量图”。</string>
+    <string name="voice_stream_voice_call">电话音频（会中断汽车蓝牙音响）</string>
+    <string name="select_tile_source_to_install">选择要安装或更新的（平铺）地图</string>
+    <string name="create_poi_link_to_osm_doc">带照片的<u>在线 OSM</u> 地图分类</string>
+    <string name="search_offline_geo_error">不能分析地理含义“%s”</string>
+    <string name="send_location_email_pattern">查看追踪位置，以网页浏览器链接 %1$s 或用 Android intent 链接 %2$s</string>
+    <string name="add_waypoint_dialog_added">GPX 航点“{0}”已成功添加</string>
+    <string name="poi_filter_namefinder">在线名称查找器</string>
+    <string name="osmand_routing_experimental">OsmAnd 离线导航是个实验性的功能，它不能运作超过 20 公里的距离。
+\n
+\n导航服务暂时切为在线的 CloudMade。</string>
+    <string name="osmand_net_previously_installed">有前一版的 OsmAnd 存在，所有的脱机数据将被新版引用。但我的收藏内的标点须以旧版程序导出后再用新版程序导入。</string>
+    <string name="build_installed">生成 {0} 成功安裝({1})。</string>
+    <string name="downloading_build">正在下载编译…</string>
+    <string name="install_selected_build">你想要安装 OsmAnd - {0} 之中的 {1} {2} MB 吗？</string>
+    <string name="loading_builds_failed">获取 OsmAnd 的生成列表失败</string>
+    <string name="loading_builds">正在加载 OsmAnd 编译…</string>
+    <string name="select_build_to_install">选择要安装的 OsmAnd 版本</string>
+    <string name="tiles_to_download_estimated_size">在缩放第{0}级别，下载{1}张地图图砖 ({2} MB)</string>
+    <string name="select_max_zoom_preload_area">选择要预加载的最大缩放</string>
+    <string name="continuous_rendering">连续渲染</string>
+    <string name="continuous_rendering_descr">显示连续渲染而不是一次性显示</string>
+    <string name="download_type_to_filter">要筛选类型</string>
+    <string name="use_high_res_maps">高分辨率显示</string>
+    <string name="use_high_res_maps_descr">在高清晰度的屏幕上不要拉伸（模糊）地图图砖</string>
+    <string name="transport_searching_transport">运输结果（未设目的地）︰</string>
+    <string name="transport_searching_route">运输结果（有 {0} 条路线可到目的地）︰</string>
+    <string name="voices">语音提示</string>
+    <string name="transport_context_menu">搜索公交站</string>
+    <string name="rotate_map_compass_opt">以指南针旋转</string>
+    <string name="rotate_map_bearing_opt">朝向行进方向</string>
+    <string name="import_file_favourites">将数据保存为 GPX 文件或将路标导入到收藏夹？</string>
+    <string name="fav_file_to_load_not_found">{0} 处找不到包含收藏夹的 GPX 文件</string>
+    <string name="fav_saved_sucessfully">收藏夹成功保存到 {0}</string>
+    <string name="no_fav_to_save">没有我的收藏标点要保存</string>
+    <string name="share_fav_subject">通过 OsmAnd 分享我的收藏夹</string>
+    <string name="none_region_found">在 SD 卡上找到的区域没有离线数据。从互联网下载区域数据。</string>
+    <string name="poi_namefinder_query_empty">输入搜索条件来查找 POI</string>
+    <string name="menu_layers">地图图层</string>
+    <string name="context_menu_item_search_poi">POI 搜索</string>
+    <string name="use_trackball_descr">使用轨迹球移动地图</string>
+    <string name="use_trackball">使用轨迹球</string>
     </resources>
