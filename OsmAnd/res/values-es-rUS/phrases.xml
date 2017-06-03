@@ -3200,8 +3200,8 @@
 	<string name="poi_motorcycle_sales_no">Venden motocicletas: no</string>
 	<string name="poi_motorcycle_sales_yes_used">Venden motocicletas: si; usadas</string>
 	<string name="poi_motorcycle_sales_used">Venden motocicletas: usadas</string>
-	<string name="poi_motorcycle_rental_yes">Ventas (al por menor)</string>
-	<string name="poi_motorcycle_rental_no">Venden motocicletas (al por menor): no</string>
+	<string name="poi_motorcycle_rental_yes">Alquiler</string>
+	<string name="poi_motorcycle_rental_no">Alquilan motocicletas: no</string>
 	<string name="poi_motorcycle_repair_yes">Reparación</string>
 	<string name="poi_motorcycle_repair_no">Reparan motocicletas: no</string>
 	<string name="poi_motorcycle_parts_yes">Repuestos para motocicletas</string>
