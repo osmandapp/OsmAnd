@@ -1861,8 +1861,7 @@
 \n - Antall kartnedlastinger er begrenset
 \n - Ingen tilgang til frakoblede interessepunkter fra Wikipedia
 \n
-\n OsmAnd utvikles aktivt, og prosjektet vårt avhenger av finansielle bidrag for å drive utviklingen og å teste ny funksjonalitet. Overvei å kjøpe OsmAnd+ eller støtte spesifikke nye funksjoner eller bidra med en generell donasjon på osmand.net.
-\n "</string>
+\n OsmAnd utvikles aktivt, og prosjektet vårt avhenger av finansielle bidrag for å drive utviklingen og å teste ny funksjonalitet. Overvei å kjøpe OsmAnd+ eller støtte spesifikke nye funksjoner eller bidra med en generell donasjon på osmand.net. "</string>
 	<string name="upload_osm_note_description">Du kan laste opp din OSM-notis anonymt eller bruke din OpenStreetmap.org -profil.</string>
     <string name="gpx_no_tracks_title">Du har ingen spor enda</string>
     <string name="gpx_no_tracks_title_folder">Legg til spor i mappen</string>
