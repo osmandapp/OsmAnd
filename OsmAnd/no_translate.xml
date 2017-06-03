@@ -2,7 +2,7 @@
 <resources>
     <string name="app_name">OsmAnd~</string>
     <string name="app_name_free">OsmAndF~</string>
-    <string name="app_version_suffix"></string>
+    <!-- string name="app_version_suffix"></string -->
 
     <!-- Not translatable -->
     <string name="full_version_price">€5,99</string>
