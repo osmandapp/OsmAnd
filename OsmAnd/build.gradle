@@ -1,11 +1,11 @@
 apply plugin: 'com.android.application'
 // Global Parameters accepted
+// TARGET_APP_NAME    - app name
 // APK_NUMBER_VERSION - version number of apk
-// APK_VERSION - build number like #9999Z, for dev builds appended to app_version like 2.0.0 in no_translate.xml)
-//               flavor                 Z : M=-master, D=-design, B=-Blackberry, MD=-main-default, MQA=-main-qt-arm, MQDA=-main-qt-default-arm, S=-sherpafy
-// TARGET_APP_NAME - app name
-// APP_EDITION - date stamp of builds
-// APP_FEATURES - features +play_market +gps_status -parking_plugin -blackberry -free_version -amazon
+// APK_VERSION_SUFFIX - build number like #99999Z   (for dev builds only)
+//                      flavor                  Z : M=-master, D=-design, B=-Blackberry, MD=-main-default, MQA=-main-qt-arm, MQDA=-main-qt-default-arm, S=-sherpafy
+// APP_EDITION        - date stamp of builds
+// APP_FEATURES       - features +play_market +gps_status -parking_plugin -blackberry -free_version -amazon
 
 // 1. To be done Filter fonts
 // <unzip src="OsmAndCore_android.aar" dest=".">
@@ -186,10 +186,10 @@ def replaceNoTranslate(line) {
 //	if (line.contains("\"app_version\"") && System.getenv("APK_VERSION")) {
 //		return line.replaceAll(">[^<]*<", ">" + System.getenv("APK_VERSION") + "<")
 //	}
-//	if (line.contains("\"app_version\"") && System.getenv("APK_VERSION_SUFFIX")) {
+	if (line.contains("\"app_version_suffix\"") && System.getenv("APK_VERSION_SUFFIX")) {
 		// appends build number to version number for dev builds
-//		return line.replaceAll("</", System.getenv("APK_VERSION_SUFFIX") + "</")
-//	}
+		return line.replaceAll("</", System.getenv("APK_VERSION_SUFFIX") + "</")
+	}
 	if (line.contains("\"versionFeatures\"") && System.getenv("APP_FEATURES")) {
 		return line.replaceAll(">[^<]*<", ">" + System.getenv("APP_FEATURES") + "<")
 	}
