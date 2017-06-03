@@ -399,10 +399,10 @@ public class OsmAndLocationProvider implements SensorEventListener {
 	private void updateSpeedEmulator(net.osmand.Location location) {
 		// For network/gps it's bad way (not accurate). It's widely used for testing purposes
 		// possibly keep using only for emulator case
-		if (location != null) {
-			if (location.distanceTo(location) > 3) {
-				float d = location.distanceTo(location);
-				long time = location.getTime() - location.getTime();
+		if (this.location != null) {
+			float d = this.location.distanceTo(location);
+			if (d > 3) {
+				long time = location.getTime() - this.location.getTime();
 				float speed;
 				if (time == 0) {
 					speed = 0;
@@ -416,6 +416,58 @@ public class OsmAndLocationProvider implements SensorEventListener {
 				location.setSpeed(speed);
 			}
 		}
+	}
+
+	/**
+	 * If GPS provider fails to calculate the bearing, then do it ourselves.
+	 * (note that location.hasBearing() is not always reliable; 
+	 *  some providers return hasBearing()==true(!) and getBearing()==0 in this case)
+	 */
+	private void ensureBearing(net.osmand.Location location) {
+		if (location != null &&
+			this.location != null &&
+			LocationManager.GPS_PROVIDER.equals(location.getProvider()) &&	// only applies to GPS provider
+			(!location.hasBearing() || location.getBearing() == 0) &&		// no bearing from provider
+			location.getTime() - this.location.getTime() >= 500)			// avoid division by zero
+		{
+			float distance = this.location.distanceTo(location);
+			float bearing = this.location.bearingTo(location);
+			long time = location.getTime() - this.location.getTime();
+			float speed = (distance * 1000) / time;	// m/s
+
+			if (distance < 3) {
+				// when we are standing, the gps location might be jumping around,
+				// so if changes are small, assume that we are standing
+				location.setSpeed(0);
+				location.setBearing(this.location.getBearing());
+			}
+			else {
+				// pass speed and bearing changes through a low-pass filter to smoothen them
+				float speedAlpha = 0.5f;
+				float smoothedSpeed = this.location.getSpeed() + speedAlpha * (speed - this.location.getSpeed());
+				location.setSpeed(smoothedSpeed);
+
+				float bearingAlpha = (speed < 4) ? 0.1F : 0.25F;	// more confidence in new bearing at high speed than at low
+
+				float bdiff = normAngle(bearing - this.location.getBearing());
+				float smoothedBearing = normAngle(this.location.getBearing() + bearingAlpha * bdiff);
+				location.setBearing(smoothedBearing);
+			}
+		}
+	}
+
+	/**
+	 * @return  angle aligned to ]-180, 180]
+	 */
+	private float normAngle(float angle)
+	{
+		while(angle > 180) {
+			angle -= 360;
+		}
+		while(angle <= -180) {
+			angle += 360;
+		}
+		return angle;
 	}
 
 	public static boolean isPointAccurateForRouting(net.osmand.Location loc) {
@@ -806,6 +858,7 @@ public class OsmAndLocationProvider implements SensorEventListener {
 			// only for emulator
 			updateSpeedEmulator(location);
 		}
+		ensureBearing(location);
 	}
 
 	public void checkIfLastKnownLocationIsValid() {
