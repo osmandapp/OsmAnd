@@ -49,13 +49,11 @@ public class Version {
 	}
 	
 	private Version(OsmandApplication ctx) {
-		// appVersion = ctx.getString(R.string.app_version);
 		String appVersion = "";
 		int versionCode = -1;
 		try {
 			PackageInfo packageInfo = ctx.getPackageManager().getPackageInfo(ctx.getPackageName(), 0);
-			//appVersion = packageInfo.versionName; //already appended in build.gradle: + ctx.getString(R.string.app_version_suffix);
-			appVersion = packageInfo.versionName + ctx.getString(R.string.app_version_suffix);
+			appVersion = packageInfo.versionName;  //Version suffix  ctx.getString(R.string.app_version_suffix)  already appended in build.gradle
 			versionCode = packageInfo.versionCode;
 		} catch (PackageManager.NameNotFoundException e) {
 			e.printStackTrace();
