@@ -1951,8 +1951,8 @@
 	<string name="poi_service_bicycle_repair_no">自行車維修：無</string>
 	<string name="poi_service_bicycle_rental_yes">自行車租賃：有</string>
 	<string name="poi_service_bicycle_rental_no">自行車租賃：無</string>
-	<string name="poi_service_bicycle_pump_yes">自行車灌氣泵浦：有</string>
-	<string name="poi_service_bicycle_pump_no">自行車灌氣泵浦：無</string>
+	<string name="poi_service_bicycle_pump_yes">泵浦</string>
+	<string name="poi_service_bicycle_pump_no">自行車打氣筒：無</string>
 	<string name="poi_service_bicycle_diy_yes">自行車 DIY 維修工具：有</string>
 	<string name="poi_service_bicycle_diy_no">自行車 DIY 維修工具：無</string>
 	<string name="poi_service_bicycle_cleaning_yes">自行車清洗：有</string>
@@ -3117,5 +3117,69 @@
 <string name="poi_valley_balka">平谷</string>
 
 	<string name="poi_ventilation_shaft">通風井</string>
+
+	<string name="poi_pump_style_modern">泵浦類型︰現代的</string>
+	<string name="poi_pump_style_historic">泵浦類型︰古蹟</string>
+	<string name="poi_pump_status_ok">泵浦狀態︰良好</string>
+	<string name="poi_pump_status_broken">泵浦狀態︰損壞</string>
+	<string name="poi_pump_status_locked">泵浦狀態︰上鎖</string>
+
+	<string name="poi_pumping_station">抽水站</string>
+
+	<string name="poi_generator_output_electricity">輸出功率</string>
+	<string name="poi_generator_output_electricity_yes">輸出︰電力</string>
+	<string name="poi_generator_output_hot_water_yes">輸出︰熱水</string>
+	<string name="poi_generator_output_steam_yes">輸出︰蒸汽</string>
+	<string name="poi_generator_output_hot_air_yes">輸出︰熱空氣</string>
+	<string name="poi_generator_output_cold_water_yes">輸出︰冷水</string>
+	<string name="poi_generator_output_compressed_air_yes">輸出︰壓縮空氣</string>
+	<string name="poi_generator_output_vacuum_yes">輸出︰真空</string>
+	<string name="poi_generator_output_biogas_yes">輸出︰沼氣</string>
+
+	<string name="poi_payment_troika_yes">Troika</string>
+	<string name="poi_payment_troika_no">不接受 Troika 卡</string>
+
+	<string name="poi_telescope">望遠鏡</string>
+	<string name="poi_telescope_type_optical">望遠鏡︰光學</string>
+	<string name="poi_telescope_type_radio">望遠鏡︰無線電</string>
+	<string name="poi_telescope_type_gamma">望遠鏡︰伽瑪</string>
+	<string name="poi_telescope_diameter">直徑</string>
+	<string name="poi_telescope_spectrum">光譜</string>
+	<string name="poi_telescope_usage_education">運用︰教育</string>
+	<string name="poi_telescope_usage_espionage">運用︰刺探</string>
+	<string name="poi_telescope_usage_research">運用︰研究</string>
+
+	<string name="poi_observatory_type_espionage">運用︰刺探</string>
+	<string name="poi_observatory_type_meteorological">氣象</string>
+	<string name="poi_observatory_type_gravitational">引力</string>
+
+	<string name="poi_greenhouse_horticulture">溫室栽培</string>
+
+	<string name="poi_voltage">電壓</string>
+	<string name="poi_display_yes">顯示︰是的</string>
+	<string name="poi_display_no">顯示︰無</string>
+	<string name="poi_display_analog_yes">類比顯示</string>
+	<string name="poi_display_digital_yes">數位顯示</string>
+	<string name="poi_display_sundial_yes">日規</string>
+
+	<string name="poi_barometer_yes">氣壓計</string>
+	<string name="poi_barometer_no">氣壓計︰無</string>
+	<string name="poi_thermometer_yes">溫度計</string>
+	<string name="poi_thermometer_no">溫度計︰無</string>
+	<string name="poi_hygrometer_yes">濕度計</string>
+	<string name="poi_hygrometer_no">濕度計︰無</string>
+	<string name="poi_date_yes">日期顯示</string>
+	<string name="poi_date_no">日期顯示︰無</string>
+
+	<string name="poi_support_pole">支撐︰電線桿</string>
+	<string name="poi_support_wall_mounted">支撐︰牆</string>
+	<string name="poi_support_tree">支撐︰樹</string>
+	<string name="poi_support_pedestal">支撐︰基座</string>
+	<string name="poi_support_ground">支撐︰地面</string>
+	<string name="poi_support_billboard">支撐︰看板</string>
+	<string name="poi_support_ceiling">支撐︰頂棚</string>
+	<string name="poi_support_suspended">支撐︰懸掛</string>
+	<string name="poi_support_roof">支撐︰屋頂</string>
+	<string name="poi_support_tower">支撐︰塔樓</string>
 
 	</resources>
