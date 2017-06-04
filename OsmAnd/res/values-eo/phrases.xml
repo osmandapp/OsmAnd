@@ -16,7 +16,7 @@
 		<string name="poi_traffic_enforcement">Trafik-kontrolado</string>
 	<string name="poi_man_made">Artefarita objekto</string>
 		<string name="poi_transport_construction">Stratlaboroj</string>
-		<string name="poi_water_supply">Akvo-konduktilo</string>
+		<string name="poi_water_supply">Akvokonduktilo</string>
 		<string name="poi_power">Energio</string>
 		<string name="poi_communication">Komunikado</string>
 		<string name="poi_trash_disposal">Rubmastrumado</string>
@@ -143,7 +143,7 @@
 	<string name="poi_newsagent">Gazet-vendejo</string>
 	<string name="poi_fire_hydrant">Hidranto</string>
 	<string name="poi_fuel">Benzinejo</string>
-	<string name="poi_car_wash">Aŭtopurigejo</string>
+	<string name="poi_car_wash">Aŭtomobil-purigejo</string>
 	<string name="poi_bus_stop">Haltejo aŭtobusa</string>
 	<string name="poi_bridge">Ponto</string>
 
@@ -312,9 +312,9 @@
 	<string name="poi_playground">Infana ludejo</string>
 	<string name="poi_bank">Bankejo</string>
 	<string name="poi_beach">Sablobordo</string>
-	<string name="poi_car_repair">Aŭtoriparejo</string>
+	<string name="poi_car_repair">Aŭtomobil-riparejo</string>
 	<string name="poi_service_tyres">Aerbendoj</string>
-	<string name="poi_vehicle_inspection">Aŭtokontrolejo</string>
+	<string name="poi_vehicle_inspection">Aŭtomobil-kontrolejo</string>
 	<string name="poi_fuel_diesel">Dizeloleo</string>
 	<string name="poi_fuel_gtl_diesel">Dizeloleo sinteza</string>
 	<string name="poi_fuel_hgv_diesel">Dizeloleo (kamionoj)</string>
@@ -337,7 +337,7 @@
 	<string name="poi_fuel_biogas">Biogaso</string>
 	<string name="poi_fuel_electricity">Elektro</string>
 	<string name="poi_charging_station">Ŝargostacio</string>
-	<string name="poi_vehicle_ramp">Aŭtoripara fosaĵeto</string>
+	<string name="poi_vehicle_ramp">Aŭtomobil-ripara fosaĵeto</string>
 	<string name="poi_taxi">Taksistacio</string>
 
 	<string name="poi_railway_buffer_stop">Baraĵo trakfina</string>
@@ -379,8 +379,8 @@
 	<string name="poi_turning_circle">Ejo por ĝirado U-forma</string>
 	<string name="poi_standpipe">Hidranto senprema</string>
 	<string name="poi_water_tower">Akvoturo</string>
-	<string name="poi_water_works">Akvo-trinkebligejo</string>
-	<string name="poi_wastewater_plant">Akvo-purigejo</string>
+	<string name="poi_water_works">Akvotrinkebligejo</string>
+	<string name="poi_wastewater_plant">Akvopurigejo</string>
 	<string name="poi_boatyard">Ŝipfarejo</string>
 	<string name="poi_lock_gate">Kluzo</string>
 	<string name="poi_power_plant">Elektrocentralo</string>
@@ -570,7 +570,7 @@
 	<string name="poi_nursing_home">Domo de permanenta zorgado</string>
 	<string name="poi_baby_hatch">Bebokesto</string>
 	<string name="poi_sanatorium">Kuracdomo</string>
-	<string name="poi_healthcare_alternative">Medicino alternativa</string>
+	<string name="poi_healthcare_alternative">Kontraŭmedicino</string>
 	<string name="poi_blood_bank">Sangobanko</string>
 	<string name="poi_healthcare_centre">Medicina centro</string>
 	<string name="poi_midwife">Akuŝisto</string>
@@ -617,7 +617,7 @@
 	<string name="poi_running_track">Kurado</string>
 	<string name="poi_bicycle_track">Kurejo bicikla</string>
 	<string name="poi_horse_track">Kurejo ĉevala</string>
-	<string name="poi_raceway">Aŭtokonkursejo</string>
+	<string name="poi_raceway">Aŭtomobil-konkursejo</string>
 	<string name="poi_9pin">Kegloludo 9-kegla</string>
 	<string name="poi_10pin">Kegloludo 10-kegla</string>
 	<string name="poi_archery">Arkpafado</string>
@@ -697,7 +697,7 @@
 	<string name="poi_attraction_summer_toboggan">Sumera toboganejo</string>
 	<string name="poi_attraction_swing_carousel">Karuselo ĉenseĝa</string>
 	<string name="poi_attraction_train">Vagonareto (atrakcio)</string>
-	<string name="poi_attraction_water_slide">Akvo-deglitejo</string>
+	<string name="poi_attraction_water_slide">Akvodeglitejo</string>
 
 	<string name="poi_religion_voodoo">Voduo</string>
 	<string name="poi_religion_taoist">Daŭismo</string>
@@ -930,8 +930,8 @@
 	<string name="poi_tattoo">Tatuejo</string>
 	<string name="poi_dry_cleaning">Vestaĵ-lavejo (nepolara solvilo)</string>
 	<string name="poi_laundry">Vestaĵ-lavejo (akvo)</string>
-	<string name="poi_car_rental">Aŭto-pruntejo</string>
-	<string name="poi_car_sharing">Aŭto-pruntejo komunuma (organizita kunveturado)</string>
+	<string name="poi_car_rental">Aŭtomobil-pruntejo</string>
+	<string name="poi_car_sharing">Aŭtomobil-pruntejo komunuma (organizita kunveturado)</string>
 	<string name="poi_boat_sharing">Boat-pruntejo komunuma</string>
 	<string name="poi_dock">Doko</string>
 	<string name="poi_cutline">Senarba strio</string>
@@ -939,7 +939,7 @@
 	<string name="poi_brothel">Putinejo</string>
 	<string name="poi_smoking_area">Fumejo</string>
 	<string name="poi_mortuary">Kadavrejo</string>
-	<string name="poi_crematorium">Kadavro-bruligejo</string>
+	<string name="poi_crematorium">Kadavr-bruligejo</string>
 	<string name="poi_internet_cafe">Retkafejo</string>
 
 	<string name="poi_payment_terminal">Pag-terminalo</string>
@@ -1072,7 +1072,7 @@
 	<string name="poi_bus_trap">Kaptilo kontraŭpersonaŭta</string>
 	<string name="poi_cattle_grid">Barilo kontraŭbruta</string>
 	<string name="poi_full_height_turnstile">Turniĝebla barilpordo (hom-alta)</string>
-	<string name="poi_bump_gate">Aŭto-puŝebla pordego</string>
+	<string name="poi_bump_gate">Aŭtomobil-puŝebla pordego</string>
 	<string name="poi_general_barrier">Ĝenerala barilo</string>
 	<string name="poi_stile">Trans-baril-ejo</string>
 	<string name="poi_debris">Ŝtonruba barilo</string>
@@ -1621,7 +1621,7 @@
 	<string name="poi_full_service_yes">Plena servo</string>
 	<string name="poi_brushless_yes">Jes</string>
 	<string name="poi_brushless_no">Senbrosa: ne</string>
-	<string name="poi_car_wash_no">Aŭtopurigejo: ne</string>
+	<string name="poi_car_wash_no">Aŭtomobil-purigejo: ne</string>
 
 	<string name="poi_aeroway_fuel">Benzinejo por aviadiloj</string>
 	<string name="poi_indoor_yes">Ene</string>
@@ -1781,13 +1781,13 @@
 
 	<string name="poi_shelter_type_sun_shelter">Kontraŭ-suna</string>
 	<string name="poi_shelter_type_building">Konstruaĵo</string>
-	<string name="poi_shelter_type_wildlife_hide">Besto-observejo</string>
+	<string name="poi_shelter_type_wildlife_hide">Best-observejo</string>
 	<string name="poi_shelter_type_rock_shelter">Groto</string>
 	<string name="poi_shelter_type_picnic_shelter">Senflankmura (piknika)</string>
 	<string name="poi_shelter_type_lean_to">Duon-ferma</string>
 	<string name="poi_shelter_type_weather_shelter">Budo kontraŭ-vetera</string>
 	<string name="poi_shelter_type_basic_hut">Kabano</string>
-	<string name="poi_shelter_type_field_shelter">Besto-ŝirmejo</string>
+	<string name="poi_shelter_type_field_shelter">Best-ŝirmejo</string>
 	<string name="poi_internet_access_type_wlan">sendrata</string>
 	<string name="poi_internet_access_type_terminal">terminalo</string>
 	<string name="poi_internet_access_type_wired">drata</string>
@@ -1929,7 +1929,7 @@
 	<string name="poi_service_bicycle_second_hand_yes">Brokantado de bicikloj</string>
 	<string name="poi_service_bicycle_second_hand_no">Brokantado de bicikloj: ne</string>
 
-	<string name="poi_wildlife_hide">Besto-observejo</string>
+	<string name="poi_wildlife_hide">Best-observejo</string>
 
 	<string name="poi_training_language">Lernado: lingvo</string>
 	<string name="poi_training_music">Lernado: muziko</string>
@@ -2643,7 +2643,7 @@
 	<string name="poi_health_facility_type_first_aid">San-servejo: tujhelpejo</string>
 	<string name="poi_health_facility_type_support_group_home">San-servejo: domo de grupo de psika apogo</string>
 
-	<string name="poi_suction_point">Akvo-pumpejo (fajrobrigado)</string>
+	<string name="poi_suction_point">Akvopumpejo (fajrobrigado)</string>
 
 	<string name="poi_fire_hydrant_type_underground">subtera</string>
 	<string name="poi_fire_hydrant_type_pillar">supertersurfaca</string>
@@ -2940,7 +2940,7 @@
 	<string name="poi_health_specialty_palliative_medicine_yes">Specialisto: isto de zorgado pri nekuracebluloj</string>
 
 	<string name="poi_health_specialty_psychiatry_yes">psiĥiatrio</string>
-	<string name="poi_health_specialty_neurology_yes">nervo-scienco (neŭrologio)</string>
+	<string name="poi_health_specialty_neurology_yes">nerv-scienco (neŭrologio)</string>
 	<string name="poi_health_specialty_dermatovenereology_yes">haŭt-seksummalsan-medicino (dermato-venerelogio)</string>
 	<string name="poi_health_specialty_cardiology_yes">kormedicino (kardiologio)</string>
 	<string name="poi_health_specialty_trauma_yes">urĝeca medicino</string>
@@ -2973,11 +2973,11 @@
 	<string name="poi_health_specialty_gastroenterology_yes">digest-sistem-scienco (gastroenterologio)</string>
 	<string name="poi_health_specialty_dentistry_yes">dent-kuracado</string>
 	<string name="poi_health_specialty_nephrology_yes">ren-kuracado (nefrologio)</string>
-	<string name="poi_health_specialty_neurosurgery_yes">nervo-ĥirurgio</string>
-	<string name="poi_health_specialty_neuropsychiatry_yes">nervo-psikiatrio (neŭropsikiatrio)</string>
+	<string name="poi_health_specialty_neurosurgery_yes">nerv-ĥirurgio</string>
+	<string name="poi_health_specialty_neuropsychiatry_yes">nerv-psikiatrio (neŭropsikiatrio)</string>
 	<string name="poi_health_specialty_endocrinology_yes">hormon-scienco (endokrinologio)</string>
 	<string name="poi_health_specialty_nuclear_medicine_yes">per-radioaktivizotop-kuracado (nuklea medicino)</string>
-	<string name="poi_health_specialty_pathology_yes">anatomo-patologio</string>
+	<string name="poi_health_specialty_pathology_yes">anatomi-patologio</string>
 	<string name="poi_health_specialty_oncology_yes">tumor-scienco (onkologio)</string>
 	<string name="poi_health_specialty_tropical_medicine_yes">tropika medicino</string>
 	<string name="poi_health_specialty_tropical_medicine_no">Neniu specialisto de tropika medicino</string>
@@ -3400,11 +3400,11 @@
 	<string name="poi_motorcycle_tyres_no">Aerbendoj: ne</string>
 	<string name="poi_motorcycle_clothes_yes">Motorciklaj vestaĵoj</string>
 	<string name="poi_motorcycle_clothes_no">Motorciklaj vestaĵoj: ne</string>
-	<string name="poi_motorcycle_type_scooter">skotero</string>
-	<string name="poi_motorcycle_type_sportbike">sporta</string>
-	<string name="poi_motorcycle_type_chopper">ĉopero</string>
-	<string name="poi_motorcycle_type_offroad">ĉiuterena (offroad)</string>
-	<string name="poi_motorcycle_type_standard">norma</string>
+	<string name="poi_motorcycle_type_scooter">skoteroj</string>
+	<string name="poi_motorcycle_type_sportbike">sportaj</string>
+	<string name="poi_motorcycle_type_chopper">ĉoperoj</string>
+	<string name="poi_motorcycle_type_offroad">ĉiuterenaj (offroad)</string>
+	<string name="poi_motorcycle_type_standard">normaj</string>
 
 <string name="poi_motorcycle_type_dualsport">dual-sport</string>
 	</resources>
