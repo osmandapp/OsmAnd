@@ -2935,7 +2935,7 @@ Od Afganistanu po Zimbabwe, przez Australię po USA. Argentyna, Brazylia, Kanada
     <string name="no_photos_descr">Nie ma zdjęć tego położenia</string>
     <string name="plugin_mapillary_descr">Udostępnia zdjęcia w widoku ulicznym. Pozwala na odkrywanie miejsc, współpracę nad uchwyceniem świata.</string>
     <string name="shared_string_install">Zainstaluj</string>
-    <string name="improve_coverage_mapillary">Zwiększ pokrycie Mapillary</string>
+    <string name="improve_coverage_mapillary">Zwiększ pokrycie zdjęć Mapillary</string>
     <string name="improve_coverage_install_mapillary_desc">Można zrobić własne zdjęcie lub serie zdjęć i następnie dodać je do tego położenia na mapie. 
 \n 
 \nAby to zrobić, należy pobrać aplikację Mapillary ze sklepu Google Play.</string>
