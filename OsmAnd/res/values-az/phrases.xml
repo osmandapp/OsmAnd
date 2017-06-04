@@ -53,4 +53,15 @@
 	<string name="poi_motorcycle_services">Xidmətlər</string>
 	<string name="poi_public_transport">İctimai nəqliyyat</string>
 	<string name="poi_education">Təhsil</string>
+	<string name="poi_air_transport">Hava nəqliyyatı</string>
+	<string name="poi_water_transport">Su nəqliyyatı</string>
+	<string name="poi_bicycle_transport">Velosiped nəqliyyatı</string>
+	<string name="poi_hiking_routes">Turizm marşrutları</string>
+	<string name="poi_finance">Maliyyə</string>
+	<string name="poi_cheese">Pendir dükanı</string>
+	<string name="poi_chocolate">Şokolad dükanı</string>
+	<string name="poi_coffee">Kofe dükanı</string>
+	<string name="poi_mall">Ticarət mərkəzi</string>
+	<string name="poi_beverages">İçki mağazası</string>
+	<string name="poi_shop">Mağaza</string>
 	</resources>
