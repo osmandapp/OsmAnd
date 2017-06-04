@@ -3392,4 +3392,40 @@
 
 <string name="poi_life_ring">Koło ratunkowe</string>
 
+<string name="poi_zoo_type">Rodzaj</string>
+	<string name="poi_motorcycle_services">Usługi</string>
+	<string name="poi_motorcycle_type">Typ motocykli</string>
+
+<string name="poi_zoo_petting_zoo">minizoo</string>
+	<string name="poi_zoo_wildlife_park">park dzikich zwierząt</string>
+	<string name="poi_zoo_enclosure">klatki</string>
+	<string name="poi_zoo_safari_park">park safari</string>
+	<string name="poi_zoo_aviary">woliera</string>
+	<string name="poi_zoo_birds">ptaki w klatkach</string>
+	<string name="poi_zoo_falconry">ptaki drapieżne</string>
+	<string name="poi_zoo_reptile">herpetarium</string>
+
+	<string name="poi_stands">Trybuny</string>
+
+	<string name="poi_motorcycle_sales_yes">Sprzedaż</string>
+	<string name="poi_motorcycle_sales_no">Sprzedaż: nie</string>
+	<string name="poi_motorcycle_sales_yes_used">Sprzedaż: tak, używane</string>
+	<string name="poi_motorcycle_sales_used">Sprzedaż: używane</string>
+	<string name="poi_motorcycle_rental_yes">Wynajem</string>
+	<string name="poi_motorcycle_rental_no">Wynajem: nie</string>
+	<string name="poi_motorcycle_repair_yes">Naprawa</string>
+	<string name="poi_motorcycle_repair_no">Naprawa: nie</string>
+	<string name="poi_motorcycle_parts_yes">Części</string>
+	<string name="poi_motorcycle_parts_no">Części: nie</string>
+	<string name="poi_motorcycle_tyres_yes">Opony</string>
+	<string name="poi_motorcycle_tyres_no">Opony: nie</string>
+	<string name="poi_motorcycle_clothes_yes">Odzież dla motocyklistów</string>
+	<string name="poi_motorcycle_clothes_no">Odzież dla motocyklistów: nie</string>
+	<string name="poi_motorcycle_type_scooter">skutery</string>
+	<string name="poi_motorcycle_type_sportbike">sportowe</string>
+	<string name="poi_motorcycle_type_chopper">choppery</string>
+	<string name="poi_motorcycle_type_offroad">off-road</string>
+	<string name="poi_motorcycle_type_dualsport">dual-sport</string>
+	<string name="poi_motorcycle_type_standard">standardowe</string>
+
 </resources>
