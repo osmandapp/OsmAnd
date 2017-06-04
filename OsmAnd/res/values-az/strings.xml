@@ -212,7 +212,7 @@
     <string name="shared_string_previous">Əvvəlki</string>
     <string name="shared_string_next">Sonrakı</string>
     <string name="shared_string_enable">Aktivləşdir</string>
-    <string name="shared_string_disable">Deaktiv et</string>
+    <string name="shared_string_disable">Qeyri-aktiv et</string>
     <string name="shared_string_enabled">Aktiv</string>
     <string name="shared_string_disabled">Qeyri-aktiv</string>
     <string name="shared_string_selected">Seçilmiş</string>
@@ -995,7 +995,7 @@
     <string name="lang_sq">Albanca</string>
     <string name="lang_is">İslandca</string>
     <string name="lang_ga">İrlandca</string>
-    <string name="lang_lb">Lüksemburq dili</string>
+    <string name="lang_lb">Lüksemburqca</string>
     <string name="lang_ht">Haiti dili</string>
     <string name="lang_et">Estonca</string>
     <string name="recording_context_menu_play">Oynat</string>
@@ -1345,7 +1345,7 @@
     <string name="shared_string_trip_recording">Səyahət qeydetmə</string>
     <string name="record_plugin_name">Səyahət qeydetmə</string>
     <string name="monitoring_settings">Səyahət qeydetmə</string>
-    <string name="monitoring_settings_descr">Səyahətlərinizin necə qeyd ediləcəyini seçin</string>
+    <string name="monitoring_settings_descr">Səyahətlərinizin necə qeyd ediləcəyini tənzimləyin</string>
     <string name="av_use_external_recorder_descr">Video çəkmək üçün sistem proqramını istifadə et</string>
     <string name="av_use_external_recorder">Sistem proqramını istifadə et</string>
     <string name="recording_error">"Qeydetmə zamanı səhv baş verdi "</string>
@@ -1445,7 +1445,7 @@
     <string name="app_mode_motorcycle">Motosiklet</string>
     <string name="local_osm_changes_delete_all_confirm">%1$d OSM dəyişikliyini silmək üzrəsiniz. Əminsiniz?</string>
     <string name="animate_routing_route_not_calculated">Zəhmət olmasa əvvəlcə marşrutu hesablayın</string>
-    <string name="route_is_too_long_v2">Bu marşrut hesablamaq üçün çox uzun ola birər. Zəhmət olmasa 10 dəqiqə ərzində nəticə tapılmasa, ara təyinat nöqtələri əlavə edin.</string>
+    <string name="route_is_too_long_v2">Bu marşrut, hesablamaq üçün çox uzun ola birər. Zəhmət olmasa 10 dəqiqə ərzində nəticə tapılmasa, ara təyinat nöqtələri əlavə edin.</string>
     <string name="auto_zoom_close">İri plana</string>
     <string name="auto_zoom_far">Orta plana</string>
     <string name="auto_zoom_farthest">Uzaq plana</string>
@@ -1493,4 +1493,22 @@
     <string name="add_as_first_destination_point">İlk ara təyinat nöqtəsi olaraq əlavə et</string>
     <string name="context_menu_item_intermediate_point">Ara təyinat nöqtəsi olaraq əlavə et</string>
     <string name="map_widget_intermediate_distance">Ara təyinat nöqtəsi</string>
+    <string name="lang_nds">Aşağı Almanca</string>
+    <string name="lang_mk">Makedonca</string>
+    <string name="lang_fy">Frizcə</string>
+    <string name="lang_tl">Taqalca</string>
+    <string name="lang_sh">Serb-Xorvatca</string>
+    <string name="lang_br">Bretonca</string>
+    <string name="lang_ta">Tamilcə</string>
+    <string name="lang_te">Teluquca</string>
+    <string name="lang_nn">Norveçcə (Nyunorsk)</string>
+    <string name="lang_ms">Malayca</string>
+    <string name="lang_gl">Qalisiyaca</string>
+    <string name="lang_ast">Asturiyaca</string>
+    <string name="current_route">Hazırki marşrut</string>
+    <string name="configure_map">Xəritəni tənzimlə</string>
+    <string name="layer_map_appearance">Ekranı tənzimlə</string>
+    <string name="map_widget_config">Ekranı tənzimlə</string>
+    <string name="quick_action_add_configure_map">Xəritəni tənzimlə</string>
+    <string name="recording_delete_confirm">Bu qeydetməni silmək istəyirsiniz?</string>
     </resources>
