@@ -160,7 +160,11 @@ public abstract class TilesCache<T> {
 		}
 		T cacheObject = cache.get(req.tileId);
 		if (cacheObject != null) {
-			return cacheObject;
+			if (isExpired(req)) {
+				cache.remove(req.tileId);
+			} else {
+				return cacheObject;
+			}
 		}
 		if (cache.size() > maxCacheSize) {
 			clearTiles();
@@ -191,10 +195,22 @@ public abstract class TilesCache<T> {
 
 	protected abstract T getTileObject(TileLoadDownloadRequest req);
 
-	protected void downloadIfExpired(TileLoadDownloadRequest req, long lastModified) {
+	protected boolean isExpired(TileLoadDownloadRequest req) {
+		if (req.tileSource.getExpirationTimeMillis() != -1 && req.url != null && req.dirWithTiles.canRead()) {
+			File en = new File(req.dirWithTiles, req.tileId);
+			return en.exists() && isExpired(req, en.lastModified());
+		}
+		return false;
+	}
+
+	protected boolean isExpired(TileLoadDownloadRequest req, long lastModified) {
 		long time = System.currentTimeMillis();
 		int ts = req.tileSource.getExpirationTimeMillis();
-		if(ts != -1 && req.url != null && time - lastModified > ts) {
+		return ts != -1 && req.url != null && time - lastModified > ts;
+	}
+
+	protected void downloadIfExpired(TileLoadDownloadRequest req, long lastModified) {
+		if (isExpired(req, lastModified)) {
 			asyncLoadingThread.requestToDownload(req);
 		}
 	}
