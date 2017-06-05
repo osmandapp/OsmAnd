@@ -7,7 +7,7 @@
 	<string name="poi_car_wash">洗車場(Car wash)</string>
 	<string name="poi_casino">賭場・カジノ(Casino)</string>
 	<string name="poi_city">市(City)</string>
-	<string name="poi_college">大学(College)</string>
+	<string name="poi_college">大学(単科)(College)</string>
 	<string name="poi_dentist">歯科医(Dentist)</string>
 	<string name="poi_embassy">大使館(Embassy)</string>
 	<string name="poi_hotel">ホテル(Hotel)</string>
@@ -19,7 +19,7 @@
 	<string name="poi_shop_yes">雑貨店(General store)</string>
 	<string name="poi_taxi">タクシー乗り場(Taxi)</string>
 	<string name="poi_theme_park">テーマパーク(Theme park)</string>
-	<string name="poi_university">大学(University)</string>
+	<string name="poi_university">大学(総合)(University)</string>
 	<string name="poi_zoo">動物園(Zoo)</string>
 <string name="poi_shop">店(Store)</string>
 		<string name="poi_shop_food">コンビニ・スーパーマーケット(Convenience store and supermarket)</string>
@@ -178,10 +178,10 @@
 	<string name="poi_traffic_calming_bump">減速帯(Bump)</string>
 	<string name="poi_traffic_calming_hump">減速帯(Hump)</string>
 	<string name="poi_traffic_calming_cushion">減速帯(Cushion)</string>
-	<string name="poi_traffic_calming_chicane">減速用障害物・減速帯(Chicane)</string>
+	<string name="poi_traffic_calming_chicane">減速帯・減速用障害物(Chicane)</string>
 	<string name="poi_traffic_calming_rumble_strip">ランブルストリップス・段差舗装(Rumble strip)</string>
-	<string name="poi_traffic_calming_table">上げ横断歩道・減速帯(Table)</string>
-	<string name="poi_traffic_calming_choker">減速用車線・減速帯(Choker)</string>
+	<string name="poi_traffic_calming_table">減速帯・上げ横断歩道(Table)</string>
+	<string name="poi_traffic_calming_choker">減速帯・減速用車線(Choker)</string>
 	<string name="poi_traffic_signals">信号機(Stop light)</string>
 
 	<string name="poi_car_repair">車両修理(Car repair)</string>
@@ -240,7 +240,7 @@
 
 	<string name="poi_speed_camera">スピードカメラ(Speed camera)</string>
 	<string name="poi_turning_circle">転回所(Turning circle)</string>
-	<string name="poi_motorway_junction">高速道路ジャンクション・JCT(Motorway junction)</string>
+	<string name="poi_motorway_junction">JCT・高速道路ジャンクション(Motorway junction)</string>
 
 	<string name="poi_water_well">井戸(Water well)</string>
 	<string name="poi_standpipe">消火栓(Standpipe)</string>
@@ -284,7 +284,7 @@
 	<string name="poi_fuel_lh2">液体水素</string>
 	<string name="poi_fuel_electricity">電気(Electricity)</string>
 	<string name="poi_junction">ジャンクション(Junction)</string>
-	<string name="poi_rest_area">パーキングエリア・PA</string>
+	<string name="poi_rest_area">PA・パーキングエリア</string>
 
 	<string name="poi_post_office">郵便局(Post office)</string>
 	<string name="poi_post_box">郵便ポスト(Post box)</string>
@@ -1742,8 +1742,8 @@
 	<string name="poi_payment_eurowag_no">燃料カード_Eurowag不可(Eurowag cards not accepted)</string>
 	<string name="poi_payment_e_zpass_yes">有料道路_E-ZPass(E‑ZPass)</string>
 	<string name="poi_payment_e_zpass_no">有料道路_E-ZPass不可(E‑ZPass not accepted)</string>
-	<string name="poi_payment_euroshell_yes">燃料カード_Euroshell(Euroshell)</string>
-	<string name="poi_payment_euroshell_no">燃料カード_Euroshell不可(Euroshell fuel cards not accepted)</string>
+	<string name="poi_payment_euroshell_yes">燃料カード_Euroshell</string>
+	<string name="poi_payment_euroshell_no">燃料カード_Euroshell不可</string>
 	<string name="poi_payment_dogecoin_yes">暗号通貨_Dogecoin(Dogecoin)</string>
 	<string name="poi_payment_dogecoin_no">暗号通貨_Dogecoin不可(Dogecoin not accepted)</string>
 	<string name="poi_payment_ep_cash_no">キャッシュカード(ゲルトカルテ)不可(Cash card (Geldkarte) not accepted)</string>
@@ -2187,7 +2187,7 @@
 	<string name="poi_motorcycle_repair">オートバイ修理</string>
 	<string name="poi_public_bath">公衆浴場</string>
 
-	<string name="poi_services">サービスエリア・SA</string>
+	<string name="poi_services">SA・サービスエリア</string>
 	<string name="poi_water_tap">水道の蛇口・給水栓</string>
 	<string name="poi_badminton">バドミントン</string>
 	<string name="poi_bandy">バンディ(Bandy)</string>
@@ -2270,22 +2270,22 @@
 	<string name="poi_historic_threshing_floor">歴史的な脱穀場</string>
 	<string name="poi_historic_railway">歴史的な鉄道</string>
 
-	<string name="poi_iwn_ref">複数の国境を越える長いハイキングネットワークの交点</string>
-	<string name="poi_route_hiking_iwn_poi">複数の国境を越える長いハイキング経路</string>
-	<string name="poi_lwn_ref">地域内の小さなハイキングネットワークの交点</string>
+	<string name="poi_iwn_ref">ハイキングネットワークの交点(複数の国境越えがある超長距離)</string>
+	<string name="poi_route_hiking_iwn_poi">ハイキング経路(複数の国境越えがある超長距離)</string>
+	<string name="poi_lwn_ref">ハイキングネットワークの交点(地域内の短距離)</string>
 
-	<string name="poi_route_hiking_lwn_poi">地域内の小さなハイキング経路</string>
+	<string name="poi_route_hiking_lwn_poi">ハイキング経路(地域内の短距離)</string>
 	<string name="poi_locomotive">展示機関車(Locomotive)</string>
 
-	<string name="poi_nwn_ref">国を横断するような長距離にわたるハイキングネットワークの交点</string>
-	<string name="poi_route_hiking_nwn_poi">国を横断するような長距離にわたるハイキング経路</string>
+	<string name="poi_nwn_ref">ハイキングネットワークの交点(国を横断するような長距離)</string>
+	<string name="poi_route_hiking_nwn_poi">ハイキング経路(国を横断するような長距離)</string>
 	<string name="poi_pa">Pa(マオリ族の要塞居留地)</string>
 
 	<string name="poi_bird_hide">野鳥観察舎</string>
 	<string name="poi_wildlife_hide">野生動物観察舎</string>
 
-	<string name="poi_rwn_ref">地域を越えるハイキングネットワークの交点</string>
-	<string name="poi_route_hiking_rwn_poi">地域を越えるハイキング経路</string>
+	<string name="poi_rwn_ref">ハイキングネットワークの交点(地域をまたぐ中距離)</string>
+	<string name="poi_route_hiking_rwn_poi">ハイキング経路(地域をまたぐ中距離)</string>
 	<string name="poi_sanitary_dump_station_yes">トレーラーハウス等のタンク内排泄物処理所:有り</string>
 	<string name="poi_sanitary_dump_station_no">トレーラーハウス等のタンク内排泄物処理所:無し</string>
 	<string name="poi_sanitary_dump_station">トレーラーハウス等のタンク内排泄物処理所</string>
@@ -2316,10 +2316,10 @@
 	<string name="poi_enforcement_check">取締装置:検問所</string>
 	<string name="poi_escape_lane">非常用避難及び強制減速車線(Escape lane)</string>
 
-	<string name="poi_icn_ref">複数の国境を越える長いサイクリングネットワークの交点</string>
-	<string name="poi_ncn_ref">国を横断するような長距離にわたるサイクリングネットワークの交点</string>
-	<string name="poi_rcn_ref">地域を越えるサイクリングネットワークの交点</string>
-	<string name="poi_lcn_ref">地域内の小さなサイクリングネットワークの交点</string>
+	<string name="poi_icn_ref">サイクリングネットワークの交点(複数の国境越えがある超長距離)</string>
+	<string name="poi_ncn_ref">サイクリングネットワークの交点(国を横断するような長距離)</string>
+	<string name="poi_rcn_ref">サイクリングネットワークの交点(地域をまたぐ中距離)</string>
+	<string name="poi_lcn_ref">サイクリングネットワークの交点(地域内の短距離)</string>
 	<string name="poi_node_networks">ハイキング／サイクリングに用いられるネットワークの交点</string>
 	<string name="poi_railway_yard">貨物駅・車両基地</string>
 
