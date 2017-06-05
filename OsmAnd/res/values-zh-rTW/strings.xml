@@ -356,9 +356,9 @@
     <string name="pref_vector_map">向量地圖設定</string>
     <string name="delete_confirmation_msg">刪除 %1$s？</string>
     <string name="city_type_suburb">市郊</string>
-    <string name="city_type_hamlet">村莊</string>
-    <string name="city_type_village">村鎮</string>
-    <string name="city_type_town">鎮</string>
+    <string name="city_type_hamlet">村鎮</string>
+    <string name="city_type_village">村落</string>
+    <string name="city_type_town">鄉鎮</string>
     <string name="city_type_city">城市</string>
 
     <string name="animate_route_off">停止模擬</string>
@@ -524,7 +524,7 @@
     <string name="km_h">公里/小時</string>
     <string name="m">公尺</string>
     <string name="old_map_index_is_not_supported">舊地圖格式 \'\'{0}\'\' 已不支援</string>
-    <string name="poi_filter_closest_poi">最近的興趣點</string>
+    <string name="poi_filter_closest_poi">最近的 POI</string>
     <string name="poi_filter_custom_filter">自訂篩選</string>
     <string name="poi_filter_namefinder">線上名稱尋找</string>
     <string name="reading_cached_tiles">正在取讀暫存地圖圖磚…</string>
@@ -578,7 +578,7 @@
     <string name="phone">電話</string>
     <string name="download_type_to_filter">類別篩選</string>
     <string name="use_high_res_maps">高解析顯示</string>
-    <string name="use_high_res_maps_descr">不要伸展（模糊）在高解析螢幕上的地圖圖磚</string>
+    <string name="use_high_res_maps_descr">在高解析度螢幕上不要過度拉伸（模糊）地圖圖磚</string>
 
     <string name="context_menu_item_search_transport">查尋公共交通</string>
     <string name="transport_searching_transport">交通運輸結果(無目的地)：</string>
@@ -886,7 +886,7 @@
     <string name="filter_current_poiButton">篩選</string>
 
     <string name="edit_filter_save_as_menu_item">另存</string>
-    <string name="edit_filter_delete_dialog_title">刪除選到的篩選？</string>
+    <string name="edit_filter_delete_dialog_title">刪除已選取的篩選嗎？</string>
     <string name="edit_filter_delete_message">篩選{0} 已被刪除</string>
     <string name="edit_filter_create_message">篩選{0}已被建立</string>
 
@@ -2006,7 +2006,7 @@ OsmAnd (Automated Navigation Directions) 是一個地圖和導航的應用程式
     <string name="error_message_pattern">錯誤：{0}</string>
     <string name="no_updates_available">沒可用的更新</string>
     <string name="we_really_care_about_your_opinion">我們很在乎您的意見，並且聽到您的反映對我們來說是很重要的。</string>
-    <string name="rendering_value_boldOutline_name">粗外框</string>
+    <string name="rendering_value_boldOutline_name">粗框體</string>
     <string name="traffic_warning_hazard">危險</string>
     <string name="dahboard_options_dialog_title">組態儀表板</string>
     <string name="shared_string_card_was_hidden">卡為隱藏</string>
@@ -2462,8 +2462,8 @@ Facebook：https://www.facebook.com/osmandapp
     <string name="shared_string_is_open_24_7">開啟 24/7</string>
     <string name="map_widget_search">查詢</string>
 	<string name="shared_string_from">從</string>
-    <string name="city_type_district">地區</string>
-    <string name="city_type_neighbourhood">鄰近</string>
+    <string name="city_type_district">區</string>
+    <string name="city_type_neighbourhood">鄰里</string>
     <string name="search_categories">種類</string>
     <string name="postcode">郵遞區號</string>
     <string name="share_history_subject">" 透過 OsmAnd  分享"</string>
@@ -2505,7 +2505,7 @@ Facebook：https://www.facebook.com/osmandapp
     <string name="location_not_found">未找到地方</string>
     <string name="no_inet_connection">沒有網際網路連線</string>
     <string name="no_inet_connection_desc_map">需要下載地圖。</string>
-    <string name="search_location">搜尋地方…</string>
+    <string name="search_location">正在搜尋位置…</string>
     <string name="storage_free_space">可用空間</string>
     <string name="storage_place_description">OsmAnd 資料存儲 (給地圖、軌跡等)：%1$s。</string>
     <string name="give_permission">給予許可</string>
