@@ -2910,22 +2910,22 @@ Kérlek adj meg egy teljes kódot</string>
     <string name="route_is_too_long_v2">Ennek az útnak a kiszámítása túl hosszú ideig tarthat. Ha 10 percen belül nem kap eredményt, kérjük, adjon hozzá köztes célpontokat.</string>
     <string name="osmand_extended_description_part1">" OsmAnd (OSM Automated Navigation Directions) egy térkép- és navigációs alkalmazás, amellyel hozzáférhet az ingyenes, globális és kiváló minőségű OpenStreetMap (OSM) adataihoz. Élvezze a hangalapú és vizuális navigációs szolgáltatást, tekintsen meg érdekes pontokat (POI-kat), hozzon létre és kezeljen GPX-útvonalakat szintvonalak és magasságinformációk használatával (egy plugin segítségével), válasszon az autós, kerékpáros és gyalogos üzemmód közül és használjon ki számos egyéb lehetőséget. "</string>
     <string name="save_poi_too_many_uppercase">A név túl sok nagybetűt tartalmaz. Folytatja?</string>
-    <string name="private_access_routing_req">A célpont korlátozott hozzáférésű területen található. Engedélyezed a magánutak használatát ennél az útvonaltrvnél?</string>
+    <string name="private_access_routing_req">A célpont korlátozott hozzáférésű területen található. Engedélyezed a magánutak használatát ennél az útvonaltervnél?</string>
     <string name="restart_search">Keresés újraindítása</string>
     <string name="increase_search_radius">Keresett terület szélesítése</string>
     <string name="nothing_found">Nincs találat :(</string>
-    <string name="nothing_found_descr">Próbálkozz a keresőkifejezés módosításával vagy a keresett terület szélesítésével</string>
+    <string name="nothing_found_descr">A keresési sugár növeléséhez módosítsd a keresőkifejezést</string>
     <string name="mapillary">Mapillary</string>
     <string name="shared_string_add_photos">Fényképek hozzáadása</string>
-    <string name="no_photos_descr">Itt nincsenek fényképeink</string>
-    <string name="mapillary_action_descr">Add hozzá a saját fényképedet a hely utcanézetéről a Mapillaryvel!</string>
+    <string name="no_photos_descr">Erről a helyről nincsenek fényképeink</string>
+    <string name="mapillary_action_descr">Add hozzá a saját fényképedet a hely utcanézetéről a Mapillaryvel.</string>
     <string name="mapillary_widget">Mapillary vezérlőgomb</string>
     <string name="mapillary_widget_descr">Segítségével gyorsan hozzájárulhatsz a Mapillaryhez</string>
-    <string name="mapillary_descr">Online utcaképek mindenkinek. Fedezz fel helyeket, vegyél benne részt, fotózd le a világot.</string>
-    <string name="plugin_mapillary_descr">Utcaképek mindenkinek. Fedezz fel helyeket, vegyél benne részt, fotózd le a világot.</string>
+    <string name="mapillary_descr">Online utcaszintű fotók mindenkinek. Fedezz fel helyeket, vegyél benne részt, fotózd le a világot.</string>
+    <string name="plugin_mapillary_descr">Utcaszintű fotók mindenkinek. Fedezz fel helyeket, vegyél benne részt, fotózd le a világot.</string>
     <string name="osmand_extended_description_part4">" Az OsmAnd sítérkép bővítménye lehetővé teszi a sípályák megjelenítését nehézség szerint, valamint további információkat, mint például a a felvonók helyét, és más berendezéseket. "</string>
     <string name="online_photos">Online fényképek</string>
-    <string name="improve_coverage_mapillary">Javítsd a lefedettséget a Mapillaryvel</string>
+    <string name="improve_coverage_mapillary">Javítsd a fotó lefedettséget Mapillaryvel</string>
     <string name="improve_coverage_install_mapillary_desc">Készíthetsz saját fényképet, vagy fényképsorozatot és hozzáadhatod a térképhez ezen a helyen. 
 \n 
 \nEhhez először telepítened kell a Mapillary alkalmazást a Google Play-ről.</string>
@@ -2945,4 +2945,6 @@ Kérlek adj meg egy teljes kódot</string>
 \n • Antarktisz: *
 \n A világ legtöbb országa letölthető. Afganisztántól Zimbabwéig, Ausztráliától az Egyesült Államokig. Magyarország, Szlovákia, Románia, Ausztria, Németország, Olaszország… "</string>
     <string name="distance_moving">Korrigált távolság</string>
+    <string name="shared_string_permissions">Engedélyek</string>
+    <string name="import_gpx_failed_descr">Az OsmAnd nem tudja importálni a fájlt. Kérlek ellenőrizd, hogy az OsmAndnek van-e engedélye fájlt olvasni erről a helyről.</string>
     </resources>
