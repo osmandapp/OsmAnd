@@ -14,6 +14,7 @@ public class RenderingRuleStorageProperties {
 	public static final String A_DEFAULT_COLOR = "defaultColor";
 	public static final String A_SHADOW_RENDERING = "shadowRendering";
 	public static final String ATTR_INT_VALUE = "attrIntValue";
+	public static final String ATTR_FLOAT_VALUE = "attrFloatValue";
 	public static final String ATTR_BOOL_VALUE = "attrBoolValue";
 	public static final String ATTR_COLOR_VALUE = "attrColorValue";
 	public static final String ATTR_STRING_VALUE = "attrStringValue";
@@ -99,6 +100,7 @@ public class RenderingRuleStorageProperties {
 	public RenderingRuleProperty R_TEST;
 	public RenderingRuleProperty R_DISABLE;
 	public RenderingRuleProperty R_ATTR_INT_VALUE;
+	public RenderingRuleProperty R_ATTR_FLOAT_VALUE;
 	public RenderingRuleProperty R_ATTR_BOOL_VALUE;
 	public RenderingRuleProperty R_ATTR_COLOR_VALUE;
 	public RenderingRuleProperty R_ATTR_STRING_VALUE;
@@ -224,6 +226,7 @@ public class RenderingRuleStorageProperties {
 
 		R_DISABLE = registerRuleInternal(RenderingRuleProperty.createOutputBooleanProperty(DISABLE));
 		R_ATTR_INT_VALUE = registerRuleInternal(RenderingRuleProperty.createOutputIntProperty(ATTR_INT_VALUE));
+		R_ATTR_FLOAT_VALUE = registerRuleInternal(RenderingRuleProperty.createOutputFloatProperty(ATTR_FLOAT_VALUE));
 		R_ATTR_BOOL_VALUE = registerRuleInternal(RenderingRuleProperty.createOutputBooleanProperty(ATTR_BOOL_VALUE));
 		R_ATTR_COLOR_VALUE = registerRuleInternal(RenderingRuleProperty.createOutputColorProperty(ATTR_COLOR_VALUE));
 		R_ATTR_STRING_VALUE = registerRuleInternal(RenderingRuleProperty.createOutputStringProperty(ATTR_STRING_VALUE));
