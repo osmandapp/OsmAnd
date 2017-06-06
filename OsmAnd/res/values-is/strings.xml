@@ -2211,4 +2211,9 @@ Stendur fyrir svæði: %1$s x %2$s</string>
     <string name="online_photos">Ljósmyndir á netinu</string>
     <string name="no_photos_descr">Ekki eru til myndir fyrir þessa staðsetningu</string>
     <string name="nothing_found_descr">Reyndu að breyta leitarorðum eða að stækka radíus leitarinnar</string>
+    <string name="import_gpx_failed_descr">OsmAnd getur ekki flutt skrána inn. Vinsamlegast athugið hvort OsmAnd hafi réttindi til að lesa skrána þar sem hún er.</string>
+    <string name="open_mapillary">Opna Mapillary</string>
+    <string name="mapillary_widget">Mapillary græja</string>
+    <string name="mapillary">Mapillary</string>
+    <string name="mapillary_image">Mapillary mynd</string>
     </resources>
