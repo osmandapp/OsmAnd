@@ -8,7 +8,6 @@ import android.graphics.Paint;
 import android.graphics.Paint.Style;
 
 import net.osmand.Location;
-import net.osmand.data.LatLon;
 import net.osmand.data.QuadPoint;
 import net.osmand.data.RotatedTileBox;
 import net.osmand.plus.R;
@@ -19,20 +18,10 @@ public class RulerControlLayer extends OsmandMapLayer {
     private Bitmap centerIcon;
     private Paint bitmapPaint;
     private Paint linePaint;
-    private Location currentLoc;
-    private LatLon centerLoc;
     private MapActivity mapActivity;
 
     public RulerControlLayer(MapActivity mapActivity) {
         this.mapActivity = mapActivity;
-    }
-
-    public Location getCurrentLoc() {
-        return currentLoc;
-    }
-
-    public LatLon getCenterLoc() {
-        return centerLoc;
     }
 
     @Override
@@ -59,8 +48,7 @@ public class RulerControlLayer extends OsmandMapLayer {
             canvas.drawBitmap(centerIcon, centerPos.x - centerIcon.getWidth() / 2,
                     centerPos.y - centerIcon.getHeight() / 2, bitmapPaint);
             canvas.rotate(tileBox.getRotate(), centerPos.x, centerPos.y);
-            centerLoc = tileBox.getCenterLatLon();
-            currentLoc = mapActivity.getMyApplication().getLocationProvider().getLastKnownLocation();
+            Location currentLoc = mapActivity.getMyApplication().getLocationProvider().getLastKnownLocation();
             if (currentLoc != null) {
                 int currentLocX = tileBox.getPixXFromLonNoRot(currentLoc.getLongitude());
                 int currentLocY = tileBox.getPixYFromLatNoRot(currentLoc.getLatitude());

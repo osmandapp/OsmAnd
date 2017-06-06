@@ -29,7 +29,6 @@ import net.osmand.plus.mapcontextmenu.other.MapRouteInfoMenu;
 import net.osmand.plus.routing.RouteDirectionInfo;
 import net.osmand.plus.routing.RoutingHelper;
 import net.osmand.plus.views.OsmandMapLayer.DrawSettings;
-import net.osmand.plus.views.RulerControlLayer;
 import net.osmand.plus.views.mapwidgets.NextTurnInfoWidget.TurnDrawable;
 import net.osmand.router.TurnType;
 import net.osmand.util.Algorithms;
@@ -111,13 +110,12 @@ public class MapInfoWidgetsFactory {
 	}
 
 	public TextInfoWidget createRulerControl(final MapActivity map) {
-		final RulerControlLayer rulerLayer = map.getMapLayers().getRulerControlLayer();
 		final String title = map.getResources().getString(R.string.map_widget_show_ruler);
 		final TextInfoWidget rulerControl = new TextInfoWidget(map) {
 			@Override
 			public boolean updateInfo(DrawSettings drawSettings) {
-				Location currentLoc = rulerLayer.getCurrentLoc();
-				LatLon centerLoc = rulerLayer.getCenterLoc();
+				Location currentLoc = map.getMyApplication().getLocationProvider().getLastKnownLocation();
+				LatLon centerLoc = map.getMapLocation();
 				if (currentLoc != null && centerLoc != null) {
 					float dist = (float) MapUtils.getDistance(currentLoc.getLatitude(), currentLoc.getLongitude(),
 							centerLoc.getLatitude(), centerLoc.getLongitude());
