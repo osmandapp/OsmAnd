@@ -103,6 +103,8 @@ public class GPXUtilities {
 	}
 
 	public static class WptPt extends GPXExtensions implements LocationPoint {
+		public boolean firstPoint = false;
+		public boolean lastPoint = false;
 		public double lat;
 		public double lon;
 		public String name = null;
@@ -214,6 +216,8 @@ public class GPXUtilities {
 	}
 
 	public static class TrkSegment extends GPXExtensions {
+		public boolean generalSegment = false;
+
 		public List<WptPt> points = new ArrayList<>();
 
 		public List<Renderable.RenderableSegment> renders = new ArrayList<>();
@@ -326,6 +330,9 @@ public class GPXUtilities {
 		public GPXTrackAnalysis prepareInformation(long filestamp, SplitSegment... splitSegments) {
 			float[] calculations = new float[1];
 
+			long startTimeOfSingleSegment = 0;
+			long endTimeOfSingleSegment = 0;
+
 			float totalElevation = 0;
 			int elevationPoints = 0;
 			int speedCount = 0;
@@ -365,6 +372,18 @@ public class GPXUtilities {
 					}
 					long time = point.time;
 					if (time != 0) {
+						if (s.segment.generalSegment) {
+							if (point.firstPoint) {
+								startTimeOfSingleSegment = time;
+							} else if (point.lastPoint) {
+								endTimeOfSingleSegment = time;
+							}
+							if (startTimeOfSingleSegment != 0 && endTimeOfSingleSegment != 0) {
+								timeSpan += endTimeOfSingleSegment - startTimeOfSingleSegment;
+								startTimeOfSingleSegment = 0;
+								endTimeOfSingleSegment = 0;
+							}
+						}
 						startTime = Math.min(startTime, time);
 						endTime = Math.max(endTime, time);
 					}
@@ -527,7 +546,9 @@ public class GPXUtilities {
 			// OUTPUT:
 			// 1. Total distance, Start time, End time
 			// 2. Time span
-			timeSpan = endTime - startTime;
+			if (timeSpan == 0) {
+				timeSpan = endTime - startTime;
+			}
 
 			// 3. Time moving, if any
 			// 4. Elevation, eleUp, eleDown, if recorded
@@ -767,11 +788,14 @@ public class GPXUtilities {
 						for (WptPt wptPt : s.points) {
 							waypoints.add(new WptPt(wptPt));
 						}
+						waypoints.get(0).firstPoint = true;
+						waypoints.get(waypoints.size() - 1).lastPoint = true;
 						segment.points.addAll(waypoints);
 					}
 				}
 			}
 			if (segment.points.size() > 0) {
+				segment.generalSegment = true;
 				generalSegment = segment;
 			}
 		}

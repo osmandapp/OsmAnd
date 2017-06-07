@@ -819,6 +819,7 @@ public class TrackSegmentFragment extends OsmAndListFragment {
 		private String[] titles;
 		private Map<GPXTabItemType, List<ILineDataSet>> dataSetsMap = new HashMap<>();
 		private TrkSegment segment;
+		private float listViewYPos;
 
 		GPXItemPagerAdapter(PagerSlidingTabStrip tabs, GpxDisplayItem gpxItem) {
 			super();
@@ -964,6 +965,10 @@ public class TrackSegmentFragment extends OsmAndListFragment {
 			return wpt;
 		}
 
+		private void scrollBy(int px) {
+			getListView().setSelectionFromTop(getListView().getFirstVisiblePosition(), getListView().getChildAt(0).getTop() - px);
+		}
+
 		@Override
 		public int getCount() {
 			return tabTypes.length;
@@ -999,6 +1004,15 @@ public class TrackSegmentFragment extends OsmAndListFragment {
 						@Override
 						public boolean onTouch(View v, MotionEvent event) {
 							getListView().requestDisallowInterceptTouchEvent(true);
+							switch (event.getAction()) {
+								case android.view.MotionEvent.ACTION_DOWN:
+									listViewYPos = event.getRawY();
+									break;
+								case android.view.MotionEvent.ACTION_MOVE:
+									scrollBy(Math.round(listViewYPos - event.getRawY()));
+									listViewYPos = event.getRawY();
+									break;
+							}
 							return false;
 						}
 					});
