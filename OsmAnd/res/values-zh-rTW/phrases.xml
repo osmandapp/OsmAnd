@@ -3182,4 +3182,9 @@
 	<string name="poi_support_roof">支撐︰屋頂</string>
 	<string name="poi_support_tower">支撐︰塔樓</string>
 
+	<string name="poi_mdf">主要配電架</string>
+	<string name="poi_fire_operator">消防員</string>
+
+	<string name="poi_water_tank">水箱</string>
+
 	</resources>
