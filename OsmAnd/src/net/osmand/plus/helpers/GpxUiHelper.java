@@ -952,7 +952,10 @@ public class GpxUiHelper {
 
 		XAxis xAxis = mChart.getXAxis();
 		xAxis.setDrawAxisLine(false);
-		xAxis.setDrawGridLines(false);
+		xAxis.setDrawGridLines(true);
+		xAxis.setGridLineWidth(1.5f);
+		xAxis.setGridColor(ActivityCompat.getColor(mChart.getContext(), R.color.gpx_chart_black_grid));
+		xAxis.enableGridDashedLine(25f, Float.MAX_VALUE, 0f);
 		xAxis.setPosition(BOTTOM);
 		xAxis.setTextColor(light ? mChart.getResources().getColor(R.color.secondary_text_light) : mChart.getResources().getColor(R.color.secondary_text_dark));
 
