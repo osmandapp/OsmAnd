@@ -1,7 +1,14 @@
 package net.osmand.plus.mapcontextmenu.other;
 
+import android.graphics.Bitmap;
+import android.graphics.BitmapFactory;
+import android.graphics.Canvas;
 import android.graphics.Matrix;
+import android.graphics.Paint;
+import android.graphics.PorterDuff;
+import android.graphics.PorterDuffColorFilter;
 import android.support.v4.app.Fragment;
+import android.support.v4.content.ContextCompat;
 import android.support.v7.widget.PopupMenu;
 import android.view.MenuItem;
 import android.view.MotionEvent;
@@ -36,6 +43,7 @@ import net.osmand.plus.helpers.GpxUiHelper;
 import net.osmand.plus.helpers.GpxUiHelper.GPXDataSetAxisType;
 import net.osmand.plus.helpers.GpxUiHelper.GPXDataSetType;
 import net.osmand.plus.helpers.GpxUiHelper.OrderedLineDataSet;
+import net.osmand.plus.render.MapRenderRepositories;
 import net.osmand.plus.views.mapwidgets.MapInfoWidgetsFactory;
 import net.osmand.plus.views.mapwidgets.MapInfoWidgetsFactory.TopToolbarController;
 
@@ -51,6 +59,7 @@ public class TrackDetailsMenu {
 	private GpxDisplayItem gpxItem;
 	private TrackDetailsBarController toolbarController;
 	private TrkSegment segment;
+	private Bitmap mapBitmap;
 
 	private static boolean VISIBLE;
 
@@ -276,7 +285,26 @@ public class TrackDetailsMenu {
 				mapActivity.refreshMap();
 			}
 
+			MapRenderRepositories renderer = mapActivity.getMyApplication().getResourceManager().getRenderer();
+			mapBitmap = renderer.getBitmap();
+			drawPoints(tb, chart);
 		}
+	}
+
+	private void drawPoints(RotatedTileBox rotatedTileBox, LineChart chart) {
+		if (mapBitmap != null) {
+			Canvas canvas = new Canvas(mapBitmap);
+			Paint paintIcon = new Paint();
+			Bitmap pointSmall = BitmapFactory.decodeResource(mapActivity.getResources(), R.drawable.map_white_shield_small);
+			int pointColor = ContextCompat.getColor(mapActivity.getMyApplication(), R.color.gpx_color_point);
+			paintIcon.setColorFilter(new PorterDuffColorFilter(pointColor, PorterDuff.Mode.MULTIPLY));
+			for (int i = 0; i < segment.points.size(); i++) {
+				float x = rotatedTileBox.getPixXFromLatLon(segment.points.get(i).lat, segment.points.get(i).lon);
+				float y = rotatedTileBox.getPixYFromLatLon(segment.points.get(i).lat, segment.points.get(i).lon);
+				canvas.drawBitmap(pointSmall, x + 400 - pointSmall.getWidth() / 2, y + 400 - pointSmall.getHeight() / 2, paintIcon);
+			}
+		}
+
 	}
 
 	private void refreshChart(LineChart chart, boolean forceFit) {
