@@ -703,6 +703,8 @@ public class OsmandSettings {
 		return p;
 	}
 
+	public final CommonPreference<Integer> RULER_MODE = new IntPreference("ruler_mode", 0).makeGlobal();
+
 	public final CommonPreference<Boolean> USE_FAST_RECALCULATION = new BooleanPreference("use_fast_recalculation", true).makeGlobal().cache();
 	public final CommonPreference<Boolean> FORCE_PRIVATE_ACCESS_ROUTING_ASKED = new BooleanPreference("force_private_access_routing", false).makeProfile().cache();
 

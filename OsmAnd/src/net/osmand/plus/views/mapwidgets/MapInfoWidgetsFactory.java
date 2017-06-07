@@ -114,26 +114,32 @@ public class MapInfoWidgetsFactory {
 		final TextInfoWidget rulerControl = new TextInfoWidget(map) {
 			@Override
 			public boolean updateInfo(DrawSettings drawSettings) {
-				Location currentLoc = map.getMyApplication().getLocationProvider().getLastKnownLocation();
-				LatLon centerLoc = map.getMapLocation();
-				if (currentLoc != null && centerLoc != null) {
-					float dist = (float) MapUtils.getDistance(currentLoc.getLatitude(), currentLoc.getLongitude(),
-							centerLoc.getLatitude(), centerLoc.getLongitude());
-					String distance = OsmAndFormatter.getFormattedDistance(dist, map.getMyApplication());
-					int ls = distance.lastIndexOf(' ');
-					setText(distance.substring(0, ls), distance.substring(ls + 1));
-				} else {
-					setText(title, null);
+				if (map.getMyApplication().getSettings().RULER_MODE.get() == 0) {
+					Location currentLoc = map.getMyApplication().getLocationProvider().getLastKnownLocation();
+					LatLon centerLoc = map.getMapLocation();
+					if (currentLoc != null && centerLoc != null) {
+						float dist = (float) MapUtils.getDistance(currentLoc.getLatitude(), currentLoc.getLongitude(),
+								centerLoc.getLatitude(), centerLoc.getLongitude());
+						String distance = OsmAndFormatter.getFormattedDistance(dist, map.getMyApplication());
+						int ls = distance.lastIndexOf(' ');
+						setText(distance.substring(0, ls), distance.substring(ls + 1));
+					} else {
+						setText(title, null);
+					}
 				}
 				return true;
 			}
 		};
 
+		rulerControl.setText(title, null);
 		rulerControl.setIcons(R.drawable.widget_distance_day, R.drawable.widget_distance_night);
 		rulerControl.setOnClickListener(new OnClickListener() {
 			@Override
 			public void onClick(View view) {
-
+				rulerControl.setText(title, null);
+				int mode = map.getMyApplication().getSettings().RULER_MODE.get();
+				map.getMyApplication().getSettings().RULER_MODE.set(mode == 0 ? 1 : 0);
+				map.refreshMap();
 			}
 		});
 
