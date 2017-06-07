@@ -2561,4 +2561,7 @@ Vänligen tillhandahåll fullständig kod</string>
     <string name="mapillary_widget">Mapillary-widget</string>
     <string name="mapillary">Mapillary</string>
     <string name="shared_string_install">Installera</string>
+    <string name="shared_string_permissions">Tillstånd</string>
+    <string name="import_gpx_failed_descr">OsmAnd kan inte importera filen. Kolla om OsmAnd har tillåtelse att läsa filen från sin plats.</string>
+    <string name="distance_moving">Distansen korrigerad</string>
     </resources>
