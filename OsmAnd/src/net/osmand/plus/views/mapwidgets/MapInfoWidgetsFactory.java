@@ -1,6 +1,5 @@
 package net.osmand.plus.views.mapwidgets;
 
-import android.graphics.Color;
 import android.graphics.drawable.Drawable;
 import android.view.View;
 import android.view.View.OnClickListener;
@@ -11,12 +10,14 @@ import android.widget.TextView;
 
 import net.osmand.Location;
 import net.osmand.binary.RouteDataObject;
+import net.osmand.data.LatLon;
 import net.osmand.plus.CurrentPositionHelper;
 import net.osmand.plus.OsmAndFormatter;
 import net.osmand.plus.OsmAndLocationProvider;
 import net.osmand.plus.OsmAndLocationProvider.GPSInfo;
 import net.osmand.plus.OsmandApplication;
 import net.osmand.plus.OsmandSettings;
+import net.osmand.plus.OsmandSettings.RulerMode;
 import net.osmand.plus.R;
 import net.osmand.plus.activities.MapActivity;
 import net.osmand.plus.activities.actions.StartGPSStatus;
@@ -32,6 +33,7 @@ import net.osmand.plus.views.OsmandMapLayer.DrawSettings;
 import net.osmand.plus.views.mapwidgets.NextTurnInfoWidget.TurnDrawable;
 import net.osmand.router.TurnType;
 import net.osmand.util.Algorithms;
+import net.osmand.util.MapUtils;
 
 import java.util.Iterator;
 import java.util.LinkedList;
@@ -106,6 +108,44 @@ public class MapInfoWidgetsFactory {
 			}
 		});
 		return gpsInfoControl;
+	}
+
+	public TextInfoWidget createRulerControl(final MapActivity map) {
+		final String title = map.getResources().getString(R.string.map_widget_show_ruler);
+		final TextInfoWidget rulerControl = new TextInfoWidget(map) {
+			@Override
+			public boolean updateInfo(DrawSettings drawSettings) {
+				if (map.getMyApplication().getSettings().RULER_MODE.get() == RulerMode.FIRST) {
+					Location currentLoc = map.getMyApplication().getLocationProvider().getLastKnownLocation();
+					LatLon centerLoc = map.getMapLocation();
+					if (currentLoc != null && centerLoc != null) {
+						float dist = (float) MapUtils.getDistance(currentLoc.getLatitude(), currentLoc.getLongitude(),
+								centerLoc.getLatitude(), centerLoc.getLongitude());
+						String distance = OsmAndFormatter.getFormattedDistance(dist, map.getMyApplication());
+						int ls = distance.lastIndexOf(' ');
+						setText(distance.substring(0, ls), distance.substring(ls + 1));
+					} else {
+						setText(title, null);
+					}
+				}
+				return true;
+			}
+		};
+
+		rulerControl.setText(title, null);
+		rulerControl.setIcons(R.drawable.widget_distance_day, R.drawable.widget_distance_night);
+		rulerControl.setOnClickListener(new OnClickListener() {
+			@Override
+			public void onClick(View view) {
+				rulerControl.setText(title, null);
+				final RulerMode mode = map.getMyApplication().getSettings().RULER_MODE.get();
+				map.getMyApplication().getSettings().RULER_MODE
+						.set(mode == RulerMode.FIRST ? RulerMode.SECOND : RulerMode.FIRST);
+				map.refreshMap();
+			}
+		});
+
+		return rulerControl;
 	}
 
 	public static class TopToolbarController {

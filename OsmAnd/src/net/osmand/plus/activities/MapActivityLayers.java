@@ -51,6 +51,7 @@ import net.osmand.plus.views.POIMapLayer;
 import net.osmand.plus.views.PointLocationLayer;
 import net.osmand.plus.views.PointNavigationLayer;
 import net.osmand.plus.views.RouteLayer;
+import net.osmand.plus.views.RulerControlLayer;
 import net.osmand.plus.views.TransportStopsLayer;
 import net.osmand.plus.views.mapwidgets.MapWidgetRegistry;
 
@@ -75,6 +76,7 @@ public class MapActivityLayers {
 	private FavouritesLayer mFavouritesLayer;
 	private TransportStopsLayer transportStopsLayer;
 	private PointLocationLayer locationLayer;
+	private RulerControlLayer rulerControlLayer;
 	private PointNavigationLayer navigationLayer;
 	private MapMarkersLayer mapMarkersLayer;
 	private ImpassableRoadsLayer impassableRoadsLayer;
@@ -162,6 +164,9 @@ public class MapActivityLayers {
 		// 7.5 Impassible roads
 		impassableRoadsLayer = new ImpassableRoadsLayer(activity);
 		mapView.addLayer(impassableRoadsLayer, 7.5f);
+		// 7.8 ruler control layer
+		rulerControlLayer = new RulerControlLayer(activity);
+		mapView.addLayer(rulerControlLayer, 7.8f);
 		// 8. context menu layer 
 		// 9. map info layer
 		mapInfoLayer = new MapInfoLayer(activity, routeLayer);
@@ -584,6 +589,10 @@ public class MapActivityLayers {
 
 	public PointLocationLayer getLocationLayer() {
 		return locationLayer;
+	}
+
+	public RulerControlLayer getRulerControlLayer() {
+		return rulerControlLayer;
 	}
 
 	public MapInfoLayer getMapInfoLayer() {
