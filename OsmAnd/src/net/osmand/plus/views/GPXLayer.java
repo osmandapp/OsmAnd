@@ -71,6 +71,8 @@ public class GPXLayer extends OsmandMapLayer implements ContextMenuLayer.IContex
 	private Bitmap selectedPoint;
 	private LatLon selectedPointLatLon;
 
+	private List<WptPt> pointsOnChart;
+
 	private static final int startZoom = 7;
 
 
@@ -349,6 +351,15 @@ public class GPXLayer extends OsmandMapLayer implements ContextMenuLayer.IContex
 					drawBigPoint(canvas, o, fileColor, x, y);
 				}
 			}
+			if (pointsOnChart != null) {
+				for (WptPt pointOnChart : pointsOnChart) {
+					float x = tileBox.getPixXFromLatLon(pointOnChart.getLatitude(), pointOnChart.getLongitude());
+					float y = tileBox.getPixYFromLatLon(pointOnChart.getLatitude(), pointOnChart.getLongitude());
+					int pointColor = ContextCompat.getColor(view.getApplication(), R.color.gpx_color_point);
+					paintIcon.setColorFilter(new PorterDuffColorFilter(pointColor, PorterDuff.Mode.MULTIPLY));
+					canvas.drawBitmap(pointSmall, x - pointSmall.getWidth() / 2, y - pointSmall.getHeight() / 2, paintIcon);
+				}
+			}
 			if (selectedPointLatLon != null
 					&& selectedPointLatLon.getLatitude() >= latLonBounds.bottom
 					&& selectedPointLatLon.getLatitude() <= latLonBounds.top
@@ -430,6 +441,10 @@ public class GPXLayer extends OsmandMapLayer implements ContextMenuLayer.IContex
 
 	public void setSelectedPointLatLon(LatLon selectedPointLatLon) {
 		this.selectedPointLatLon = selectedPointLatLon;
+	}
+
+	public void setPointsOnChart(List<WptPt> pointsOnChart) {
+		this.pointsOnChart = pointsOnChart;
 	}
 
 	private boolean calculateBelongs(int ex, int ey, int objx, int objy, int radius) {
