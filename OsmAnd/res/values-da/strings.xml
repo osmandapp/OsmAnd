@@ -788,7 +788,7 @@ Liste over understøttede lande (dybest set hele verden!): Afghanistan, Albanien
     <string name="unit_of_length">Afstand</string>
     <string name="si_mi_feet">Mil/fod</string>
     <string name="si_mi_yard">Mil/yards</string>
-    <string name="si_km_m">Kilometer/meter</string>
+    <string name="si_km_m">Km/m</string>
     <string name="yard">yd</string>
     <string name="foot">fod</string>
     <string name="mile_per_hour">mph</string>
@@ -1306,8 +1306,8 @@ Liste over understøttede lande (dybest set hele verden!): Afghanistan, Albanien
     <string name="driving_region_canada">Canada</string>
     <string name="driving_region_europe_asia">Europa, Asien, Latinamerika og og tilsvarende</string>
     <string name="driving_region_uk">Storbritannien, Indien og lignende</string>
-    <string name="driving_region">Køremråde</string>
-    <string name="driving_region_descr">Vælg køreområde: USA, Europa, Storbritannien, Asien og andre</string>
+    <string name="driving_region">Region</string>
+    <string name="driving_region_descr">Vælg region: USA, Europa, Storbritannien, Asien og andre</string>
     <string name="map_widget_fps_info">FPS-fejlsøgningssinfo</string>
     <string name="local_index_tile_data_expire">Udløber (minutter): %1$s</string>
     <string name="local_index_tile_data_maxzoom">Maks zoomniveau: %1$s</string>
