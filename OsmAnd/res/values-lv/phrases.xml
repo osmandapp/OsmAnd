@@ -3225,4 +3225,104 @@
 
 	<string name="poi_feeding_place">Dzīvnieku barotava</string>
 
-	</resources>
+	<string name="poi_zoo_type">Tips</string>
+	<string name="poi_motorcycle_services">Pakalpojumi</string>
+	<string name="poi_motorcycle_type">Motocikla veids</string>
+
+<string name="poi_generator_output_hot_water">Karstā ūdens jauda</string>
+	<string name="poi_generator_output_hot_water_yes">Ražo karstu ūdeni</string>
+	<string name="poi_generator_output_steam_yes">Ražo tvaiku</string>
+	<string name="poi_generator_output_hot_air_yes">Ražo karstu gaisu</string>
+	<string name="poi_generator_output_cold_water_yes">Ražo aukstu ūdeni</string>
+	<string name="poi_generator_output_compressed_air">Gaisa kompresora jauda</string>
+	<string name="poi_generator_output_compressed_air_yes">Izstrādā saspiestu gaisu</string>
+	<string name="poi_generator_output_vacuum_yes">Ražo vakuumu</string>
+	<string name="poi_generator_output_biogas">Biogāzes ražošanas jauda</string>
+	<string name="poi_generator_output_biogas_yes">Ražo biogāzi</string>
+
+	<string name="poi_fire_operator">Ugunsdzēsēju operators</string>
+
+	<string name="poi_public_bookcase">Publiskais grāmatu plaukts</string>
+	<string name="poi_cuisine">Virtuve</string>
+	<string name="poi_public_bookcase_type_shelf">Tips: skapis</string>
+
+	<string name="poi_cuisine_beef_bowl">Gaidons</string>
+	<string name="poi_cuisine_tapas">Tapas</string>
+	<string name="poi_cuisine_gastropub">Krodziņš</string>
+	<string name="poi_cuisine_heuriger">Heurigers</string>
+	<string name="poi_cuisine_curry">Karijs</string>
+	<string name="poi_cuisine_bagel">Beigls</string>
+	<string name="poi_cuisine_soba">Soba</string>
+	<string name="poi_cuisine_fried_food">Cepts ēdiens</string>
+	<string name="poi_cuisine_empanada">Empanada</string>
+	<string name="poi_cuisine_austrian">Austriešu</string>
+	<string name="poi_cuisine_mongolian">Mongoļu</string>
+	<string name="poi_cuisine_afghan">Afgāņu</string>
+	<string name="poi_cuisine_belgian">Beļğu</string>
+	<string name="poi_cuisine_basque">Basku</string>
+	<string name="poi_cuisine_senegalese">Senegāliešu</string>
+	<string name="poi_party">Ballīšu piederumi</string>
+	<string name="poi_electrical">Elektropreces</string>
+	<string name="poi_locksmith">Atslēgu un slēdzeņu veikals</string>
+	<string name="poi_lighting">Apgaismes ķermeņi</string>
+	<string name="poi_lottery">Loterijas biļetes</string>
+	<string name="poi_gambling_type">Tips</string>
+	<string name="poi_gambling_lottery">Loterija</string>
+	<string name="poi_gambling_pachinko">Pačinko</string>
+	<string name="poi_gambling_slot_machines">Spēļu automāti</string>
+	<string name="poi_gambling_betting">Derības</string>
+	<string name="poi_gambling_bingo">Bingo spēle</string>
+
+	<string name="poi_e_cigarette">Elektrisko cigarešu veikals</string>
+
+	<string name="poi_locomotive">Lokomatīve</string>
+
+	<string name="poi_photo_studio">Fotostudija</string>
+
+	<string name="poi_cliff">Klints</string>
+
+	<string name="poi_animal_keeping">Dzīvnieku audzēšana</string>
+	<string name="poi_animal_keeping_horse">Dzīvnieku audzēšana: zirgi</string>
+	<string name="poi_animal_keeping_sheep">Dzīvnieku audzēšana: aitas</string>
+	<string name="poi_fast_food_cafeteria">Jā</string>
+
+	<string name="poi_drink_wine_yes">Vīns: ir</string>
+	<string name="poi_electronics_repair_computer">Elektronikas remonts: datori</string>
+	<string name="poi_electronics_repair_appliance">Elektronikas remonts: vispārējs</string>
+	<string name="poi_electronics_repair_phone">Elektronikas remonts: telefoni</string>
+	<string name="poi_electronics_repair_tv">Elektronikas remonts: TV</string>
+
+	<string name="poi_resort_kids_camp">Bērnu nometne</string>
+	<string name="poi_music_school">Mūzikas skola</string>
+	<string name="poi_language_school">Svešvalodu skola</string>
+
+	<string name="poi_life_ring">Glābšanas riņķis</string>
+
+	<string name="poi_zoo_wildlife_park">Savvaļas iemītnieku parks</string>
+	<string name="poi_zoo_safari_park">Safari parks</string>
+	<string name="poi_zoo_birds">Putni</string>
+	<string name="poi_zoo_aviary">Aviārijs</string>
+	<string name="poi_zoo_falconry">Piekūnu medības</string>
+	<string name="poi_zoo_reptile">Reptiļi</string>
+
+	<string name="poi_motorcycle_sales_yes">Pārdošana</string>
+	<string name="poi_motorcycle_sales_no">Pārdošana: nē</string>
+	<string name="poi_motorcycle_sales_yes_used">Pārdošana: jā, lietotie</string>
+	<string name="poi_motorcycle_sales_used">Pārdošana: lietotie</string>
+	<string name="poi_motorcycle_rental_yes">Noma</string>
+	<string name="poi_motorcycle_rental_no">Noma: nav</string>
+	<string name="poi_motorcycle_repair_yes">Remonts</string>
+	<string name="poi_motorcycle_repair_no">Remonts: nē</string>
+	<string name="poi_motorcycle_parts_yes">Rezerves daļas</string>
+	<string name="poi_motorcycle_parts_no">Rezerves daļas: nav</string>
+	<string name="poi_motorcycle_tyres_yes">Riepas</string>
+	<string name="poi_motorcycle_tyres_no">Riepas: nav</string>
+	<string name="poi_motorcycle_clothes_yes">Motociklistu apğērbs</string>
+	<string name="poi_motorcycle_clothes_no">Motociklistu apğērbs: nav</string>
+	<string name="poi_motorcycle_type_scooter">Skūteri</string>
+	<string name="poi_motorcycle_type_sportbike">Sporta baiki</string>
+	<string name="poi_motorcycle_type_chopper">Čoperi</string>
+	<string name="poi_motorcycle_type_offroad">Bezceļa</string>
+	<string name="poi_motorcycle_type_standard">Klasiskie</string>
+
+</resources>
