@@ -148,7 +148,7 @@ public class GPXLayer extends OsmandMapLayer implements ContextMenuLayer.IContex
 		paintInnerCircle.setAntiAlias(true);
 		paintInnerRect = new Paint();
 		paintInnerRect.setStyle(Style.FILL_AND_STROKE);
-		paintInnerCircle.setColor(0xddFFFFFF);
+		paintInnerRect.setColor(0xddFFFFFF);
 		paintInnerRect.setAntiAlias(true);
 
 		paintIcon = new Paint();
