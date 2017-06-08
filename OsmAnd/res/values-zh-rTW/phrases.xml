@@ -3187,4 +3187,15 @@
 
 	<string name="poi_water_tank">水箱</string>
 
+	<string name="poi_toilets_disposal_flush">廁所處理：沖洗</string>
+	<string name="poi_toilets_disposal_pitlatrine">廁所處理：坑廁</string>
+	<string name="poi_toilets_disposal_chemical">廁所處理：化學式</string>
+	<string name="poi_toilets_disposal_bucket">廁所處理：存儲桶</string>
+
+	<string name="poi_length">長度</string>
+
+	<string name="poi_wiki_link">維基百科</string>
+
+	<string name="poi_xmas">耶誕節</string>
+	<string name="poi_xmas_tree">聖誕樹</string>
 	</resources>
