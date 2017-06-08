@@ -12,6 +12,7 @@ import android.widget.TextView;
 import com.github.mikephil.charting.charts.LineChart;
 import com.github.mikephil.charting.data.Entry;
 import com.github.mikephil.charting.data.LineData;
+import com.github.mikephil.charting.formatter.IAxisValueFormatter;
 import com.github.mikephil.charting.highlight.Highlight;
 import com.github.mikephil.charting.interfaces.datasets.ILineDataSet;
 import com.github.mikephil.charting.listener.ChartTouchListener.ChartGesture;
@@ -43,7 +44,9 @@ import java.lang.ref.WeakReference;
 import java.util.ArrayList;
 import java.util.Collections;
 import java.util.Comparator;
+import java.util.HashMap;
 import java.util.List;
+import java.util.Map;
 
 public class TrackDetailsMenu {
 
@@ -141,7 +144,7 @@ public class TrackDetailsMenu {
 		}
 		mapActivity.getMapLayers().getContextMenuLayer().exitGpxDetailsMode();
 		mapActivity.getMapLayers().getGpxLayer().setSelectedPointLatLon(null);
-		mapActivity.getMapLayers().getGpxLayer().setPointsOnChart(null);
+		mapActivity.getMapLayers().getGpxLayer().setPointsOfChart(null);
 		mapActivity.getMapLayers().getMapInfoLayer().setSelectedPointLatLon(null);
 		mapActivity.getMapView().setMapPositionX(0);
 		mapActivity.getMapView().refreshMap();
@@ -300,17 +303,27 @@ public class TrackDetailsMenu {
 		fitTrackOnMap(chart, location, forceFit);
 
         if (segment != null) {
-            List<WptPt> pointsOnChart = new ArrayList<>();
-            float[] entries = chart.getXAxis().mEntries;
-            for (int i = 0; i < entries.length; i++) {
-                WptPt pointToAdd = getPoint(chart, entries[i]);
-                if (pointToAdd != null) {
-                    pointsOnChart.add(pointToAdd);
-                }
-            }
-            mapActivity.getMapLayers().getGpxLayer().setPointsOnChart(pointsOnChart);
+            Map<String, WptPt> pointsOfChart = getPointsOfChart(chart);
+            mapActivity.getMapLayers().getGpxLayer().setPointsOfChart(pointsOfChart);
         }
 	}
+
+	private Map<String, WptPt> getPointsOfChart(LineChart chart) {
+        Map<String, WptPt> pointsOfChart = new HashMap<>();
+        float[] entries = chart.getXAxis().mEntries;
+        for (int i = 0; i < entries.length; i++) {
+            WptPt pointToAdd = getPoint(chart, entries[i]);
+            if (pointToAdd != null) {
+                if (gpxItem.chartAxisType == GPXDataSetAxisType.DISTANCE) {
+                    pointsOfChart.put(String.format("%.1f", entries[i]), pointToAdd);
+                } else if (gpxItem.chartAxisType == GPXDataSetAxisType.TIME) {
+                    IAxisValueFormatter formatter = chart.getXAxis().getValueFormatter();
+                    pointsOfChart.put(formatter.getFormattedValue(entries[i], chart.getXAxis()), pointToAdd);
+                }
+            }
+        }
+        return pointsOfChart;
+    }
 
 	private void updateView(final View parentView) {
 		GPXTrackAnalysis analysis = gpxItem.analysis;

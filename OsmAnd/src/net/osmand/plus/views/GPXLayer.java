@@ -71,7 +71,7 @@ public class GPXLayer extends OsmandMapLayer implements ContextMenuLayer.IContex
 	private Bitmap selectedPoint;
 	private LatLon selectedPointLatLon;
 
-	private List<WptPt> pointsOnChart;
+	private Map<String, WptPt> pointsOfChart;
 
 	private static final int startZoom = 7;
 
@@ -351,14 +351,8 @@ public class GPXLayer extends OsmandMapLayer implements ContextMenuLayer.IContex
 					drawBigPoint(canvas, o, fileColor, x, y);
 				}
 			}
-			if (pointsOnChart != null) {
-				for (WptPt pointOnChart : pointsOnChart) {
-					float x = tileBox.getPixXFromLatLon(pointOnChart.getLatitude(), pointOnChart.getLongitude());
-					float y = tileBox.getPixYFromLatLon(pointOnChart.getLatitude(), pointOnChart.getLongitude());
-					int pointColor = ContextCompat.getColor(view.getApplication(), R.color.gpx_color_point);
-					paintIcon.setColorFilter(new PorterDuffColorFilter(pointColor, PorterDuff.Mode.MULTIPLY));
-					canvas.drawBitmap(pointSmall, x - pointSmall.getWidth() / 2, y - pointSmall.getHeight() / 2, paintIcon);
-				}
+			if (pointsOfChart != null) {
+				drawPointsOfChart(canvas, tileBox);
 			}
 			if (selectedPointLatLon != null
 					&& selectedPointLatLon.getLatitude() >= latLonBounds.bottom
@@ -372,6 +366,18 @@ public class GPXLayer extends OsmandMapLayer implements ContextMenuLayer.IContex
 			}
 			this.fullObjectsLatLon = fullObjectsLatLon;
 			this.smallObjectsLatLon = smallObjectsLatLon;
+		}
+	}
+
+	private void drawPointsOfChart(Canvas canvas, RotatedTileBox tileBox) {
+		for (Map.Entry<String, WptPt> pointOfChart : pointsOfChart.entrySet()) {
+			float r = 12 * tileBox.getDensity();
+			float x = tileBox.getPixXFromLatLon(pointOfChart.getValue().getLatitude(), pointOfChart.getValue().getLongitude());
+			float y = tileBox.getPixYFromLatLon(pointOfChart.getValue().getLatitude(), pointOfChart.getValue().getLongitude());
+			canvas.drawCircle(x, y, r + (float) Math.ceil(tileBox.getDensity()), paintOuter);
+			canvas.drawCircle(x, y, r - (float) Math.ceil(tileBox.getDensity()), paintInnerCircle);
+			paintTextIcon.setTextSize(r);
+			canvas.drawText(pointOfChart.getKey(), x, y + r / 2, paintTextIcon);
 		}
 	}
 
@@ -443,8 +449,8 @@ public class GPXLayer extends OsmandMapLayer implements ContextMenuLayer.IContex
 		this.selectedPointLatLon = selectedPointLatLon;
 	}
 
-	public void setPointsOnChart(List<WptPt> pointsOnChart) {
-		this.pointsOnChart = pointsOnChart;
+	public void setPointsOfChart(Map<String, WptPt> pointsOfChart) {
+		this.pointsOfChart = pointsOfChart;
 	}
 
 	private boolean calculateBelongs(int ex, int ey, int objx, int objy, int radius) {
