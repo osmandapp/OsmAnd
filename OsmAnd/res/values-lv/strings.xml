@@ -3073,4 +3073,5 @@ No Afganistānas līdz Zimbabvei, no Austrālijas līdz ASV, Argentīna, Brazīl
     <string name="show_from_zoom_level">Rādīt no zoom līmeņa</string>
     <string name="mapillary_image">Mapillary bilde</string>
     <string name="import_gpx_failed_descr">OsmAnd nevar importēt failu. Pārliecinieties vai OsmAnd ir atļauja nolasīt failu dotajā mapē.</string>
+    <string name="shared_string_permissions">Atļaujas</string>
     </resources>
