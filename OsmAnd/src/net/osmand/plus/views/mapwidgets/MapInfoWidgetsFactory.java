@@ -17,6 +17,7 @@ import net.osmand.plus.OsmAndLocationProvider;
 import net.osmand.plus.OsmAndLocationProvider.GPSInfo;
 import net.osmand.plus.OsmandApplication;
 import net.osmand.plus.OsmandSettings;
+import net.osmand.plus.OsmandSettings.RulerMode;
 import net.osmand.plus.R;
 import net.osmand.plus.activities.MapActivity;
 import net.osmand.plus.activities.actions.StartGPSStatus;
@@ -114,7 +115,7 @@ public class MapInfoWidgetsFactory {
 		final TextInfoWidget rulerControl = new TextInfoWidget(map) {
 			@Override
 			public boolean updateInfo(DrawSettings drawSettings) {
-				if (map.getMyApplication().getSettings().RULER_MODE.get() == 0) {
+				if (map.getMyApplication().getSettings().RULER_MODE.get() == RulerMode.FIRST) {
 					Location currentLoc = map.getMyApplication().getLocationProvider().getLastKnownLocation();
 					LatLon centerLoc = map.getMapLocation();
 					if (currentLoc != null && centerLoc != null) {
@@ -137,8 +138,9 @@ public class MapInfoWidgetsFactory {
 			@Override
 			public void onClick(View view) {
 				rulerControl.setText(title, null);
-				int mode = map.getMyApplication().getSettings().RULER_MODE.get();
-				map.getMyApplication().getSettings().RULER_MODE.set(mode == 0 ? 1 : 0);
+				final RulerMode mode = map.getMyApplication().getSettings().RULER_MODE.get();
+				map.getMyApplication().getSettings().RULER_MODE
+						.set(mode == RulerMode.FIRST ? RulerMode.SECOND : RulerMode.FIRST);
 				map.refreshMap();
 			}
 		});

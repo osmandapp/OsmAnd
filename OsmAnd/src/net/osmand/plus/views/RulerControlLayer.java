@@ -15,16 +15,17 @@ import net.osmand.data.QuadPoint;
 import net.osmand.data.RotatedTileBox;
 import net.osmand.plus.OsmAndFormatter;
 import net.osmand.plus.OsmandApplication;
+import net.osmand.plus.OsmandSettings.RulerMode;
 import net.osmand.plus.R;
 import net.osmand.plus.activities.MapActivity;
-
-import static android.content.res.Configuration.ORIENTATION_LANDSCAPE;
-import static android.content.res.Configuration.ORIENTATION_PORTRAIT;
+import net.osmand.plus.helpers.AndroidUiHelper;
 
 public class RulerControlLayer extends OsmandMapLayer {
 
+    private static final int TEXT_SIZE = 14;
     private final MapActivity mapActivity;
     private OsmandApplication app;
+    private boolean portrait;
     private int maxRadius;
     private int radius;
     private int cacheZoom;
@@ -45,6 +46,7 @@ public class RulerControlLayer extends OsmandMapLayer {
     @Override
     public void initLayer(OsmandMapTileView view) {
         app = mapActivity.getMyApplication();
+        portrait = AndroidUiHelper.isOrientationPortrait(mapActivity);
         cacheDistances = new String[3];
         maxRadius = mapActivity.getResources().getDimensionPixelSize(R.dimen.map_ruler_width);
 
@@ -68,26 +70,29 @@ public class RulerControlLayer extends OsmandMapLayer {
 
         shadowPaint = new Paint();
         shadowPaint.setAntiAlias(true);
+        shadowPaint.setStyle(Style.STROKE);
+        shadowPaint.setStrokeWidth(6);
+        shadowPaint.setTextSize(TEXT_SIZE * mapActivity.getResources().getDisplayMetrics().density);
         shadowPaint.setColor(Color.WHITE);
 
         textPaint = new TextPaint();
         textPaint.setAntiAlias(true);
-        textPaint.setTextSize(14 * mapActivity.getResources().getDisplayMetrics().density);
+        textPaint.setTextSize(TEXT_SIZE * mapActivity.getResources().getDisplayMetrics().density);
     }
 
     @Override
     public void onDraw(Canvas canvas, RotatedTileBox tb, DrawSettings settings) {
         if (mapActivity.getMapLayers().getMapWidgetRegistry().isVisible("ruler")) {
             final QuadPoint center = tb.getCenterPixelPoint();
-            final int mode = app.getSettings().RULER_MODE.get();
+            final RulerMode mode = app.getSettings().RULER_MODE.get();
 
             drawCenterIcon(canvas, tb, center);
-            if (mode == 0) {
+            if (mode == RulerMode.FIRST) {
                 Location currentLoc = app.getLocationProvider().getLastKnownLocation();
                 if (currentLoc != null) {
                     drawDistance(canvas, tb, center, currentLoc);
                 }
-            } else if (mode == 1) {
+            } else if (mode == RulerMode.SECOND) {
                 for (int i = 1; i < 4; i++) {
                     drawCircle(canvas, tb, i, center);
                 }
@@ -115,27 +120,22 @@ public class RulerControlLayer extends OsmandMapLayer {
         String text = cacheDistances[circleNumber - 1];
         textPaint.getTextBounds(text, 0, text.length(), bounds);
 
-        float left = 0;
-        float right = 0;
-        float top = 0;
-        float bottom = 0;
+        float left;
+        float bottom;
 
-        if (mapActivity.getResources().getConfiguration().orientation == ORIENTATION_PORTRAIT) {
+        if (portrait) {
             left = center.x - bounds.width() / 2;
-            right = center.x + bounds.width() / 1.8f;
-            top = center.y - radius * circleNumber - bounds.height() / 2;
             bottom = center.y - radius * circleNumber + bounds.height() / 2;
-        } else if (mapActivity.getResources().getConfiguration().orientation == ORIENTATION_LANDSCAPE) {
+        } else {
             left = center.x + radius * circleNumber - bounds.width() / 2;
-            right = center.x + radius * circleNumber + bounds.width() / 1.8f;
-            top = center.y - bounds.height() / 2;
             bottom = center.y + bounds.height() / 2;
         }
 
         if (!mapActivity.getMapView().isZooming()) {
             canvas.rotate(-tb.getRotate(), center.x, center.y);
+            canvas.drawCircle(center.x, center.y, radius * circleNumber, shadowPaint);
             canvas.drawCircle(center.x, center.y, radius * circleNumber, circlePaint);
-            canvas.drawRect(left, top, right, bottom, shadowPaint);
+            canvas.drawText(text, left, bottom, shadowPaint);
             canvas.drawText(text, left, bottom, textPaint);
             canvas.rotate(tb.getRotate(), center.x, center.y);
         }
