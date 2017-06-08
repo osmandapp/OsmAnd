@@ -87,6 +87,8 @@ public class GPXLayer extends OsmandMapLayer implements ContextMenuLayer.IContex
 
 	private Paint paintInnerCircle;
 
+	private Paint paintInnerRect;
+
 	private Paint paintTextIcon;
 
 	private OsmandRenderer osmandRenderer;
@@ -144,6 +146,10 @@ public class GPXLayer extends OsmandMapLayer implements ContextMenuLayer.IContex
 		paintInnerCircle.setStyle(Style.FILL_AND_STROKE);
 		paintInnerCircle.setColor(0xddFFFFFF);
 		paintInnerCircle.setAntiAlias(true);
+		paintInnerRect = new Paint();
+		paintInnerRect.setStyle(Style.FILL_AND_STROKE);
+		paintInnerCircle.setColor(0xddFFFFFF);
+		paintInnerRect.setAntiAlias(true);
 
 		paintIcon = new Paint();
 		pointSmall = BitmapFactory.decodeResource(view.getResources(), R.drawable.map_white_shield_small);
@@ -372,10 +378,26 @@ public class GPXLayer extends OsmandMapLayer implements ContextMenuLayer.IContex
 	private void drawPointsOfChart(Canvas canvas, RotatedTileBox tileBox) {
 		for (Map.Entry<String, WptPt> pointOfChart : pointsOfChart.entrySet()) {
 			float r = 12 * tileBox.getDensity();
+
+			String stringToDisplay = pointOfChart.getKey();
+
+			float textWidth = paintTextIcon.measureText(stringToDisplay);
+
 			float x = tileBox.getPixXFromLatLon(pointOfChart.getValue().getLatitude(), pointOfChart.getValue().getLongitude());
 			float y = tileBox.getPixYFromLatLon(pointOfChart.getValue().getLatitude(), pointOfChart.getValue().getLongitude());
-			canvas.drawCircle(x, y, r + (float) Math.ceil(tileBox.getDensity()), paintOuter);
-			canvas.drawCircle(x, y, r - (float) Math.ceil(tileBox.getDensity()), paintInnerCircle);
+
+//			canvas.drawCircle(x, y, r + (float) Math.ceil(tileBox.getDensity()), paintOuter);
+
+//			canvas.drawCircle(x, y, r - (float) Math.ceil(tileBox.getDensity()), paintInnerCircle);
+//			paintTextIcon.setTextSize(r);
+//			canvas.drawText(pointOfChart.getKey(), x, y + r / 2, paintTextIcon);
+
+//			paintInnerRect.setColor();
+			canvas.drawRect(
+					x + (float) Math.ceil(tileBox.getDensity()) - textWidth / 2,
+					y + (float) Math.ceil(tileBox.getDensity()) - r /2,
+					x + (float) Math.ceil(tileBox.getDensity()) + textWidth / 2,
+					y + (float) Math.ceil(tileBox.getDensity()) + r / 2, paintInnerRect);
 			paintTextIcon.setTextSize(r);
 			canvas.drawText(pointOfChart.getKey(), x, y + r / 2, paintTextIcon);
 		}
