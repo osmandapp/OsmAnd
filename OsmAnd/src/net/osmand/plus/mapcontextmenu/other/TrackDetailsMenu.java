@@ -304,7 +304,9 @@ public class TrackDetailsMenu {
             float[] entries = chart.getXAxis().mEntries;
             for (int i = 0; i < entries.length; i++) {
                 WptPt pointToAdd = getPoint(chart, entries[i]);
-                pointsOnChart.add(pointToAdd);
+                if (pointToAdd != null) {
+                    pointsOnChart.add(pointToAdd);
+                }
             }
             mapActivity.getMapLayers().getGpxLayer().setPointsOnChart(pointsOnChart);
         }
