@@ -32,9 +32,11 @@ public class RulerControlLayer extends OsmandMapLayer {
     private int maxRadius;
     private int radius;
     private int cacheZoom;
+    private int height;
     private int halfMaxSide;
     private double cacheTileX;
     private double cacheTileY;
+    private int cacheCenterY;
     private ArrayList<String> cacheDistances;
     private Bitmap centerIcon;
     private Paint bitmapPaint;
@@ -58,7 +60,7 @@ public class RulerControlLayer extends OsmandMapLayer {
 
         DisplayMetrics displayMetrics = new DisplayMetrics();
         mapActivity.getWindowManager().getDefaultDisplay().getMetrics(displayMetrics);
-        int height = displayMetrics.heightPixels;
+        height = displayMetrics.heightPixels;
         int width = displayMetrics.widthPixels;
         halfMaxSide = (int) ((width > height ? width : height) / 2.2);
 
@@ -151,13 +153,15 @@ public class RulerControlLayer extends OsmandMapLayer {
     }
 
     private void updateData(RotatedTileBox tb) {
+        boolean centerChange = cacheCenterY != tb.getCenterPixelY();
         boolean move = tb.getZoom() != cacheZoom || Math.abs(tb.getCenterTileX() - cacheTileX) > 1 ||
-                Math.abs(tb.getCenterTileY() - cacheTileY) > 1;
+                Math.abs(tb.getCenterTileY() - cacheTileY) > 1 || centerChange;
 
         if (!mapActivity.getMapView().isZooming() && move && tb.getPixWidth() > 0 && maxRadius > 0) {
             cacheZoom = tb.getZoom();
             cacheTileX = tb.getCenterTileX();
             cacheTileY = tb.getCenterTileY();
+            cacheCenterY = tb.getCenterPixelY();
             cacheDistances.clear();
 
             final double dist = tb.getDistance(0, tb.getPixHeight() / 2, tb.getPixWidth(), tb.getPixHeight() / 2);
@@ -166,10 +170,16 @@ public class RulerControlLayer extends OsmandMapLayer {
                     OsmAndFormatter.calculateRoundedDist(maxRadius / pixDensity, app);
             radius = (int) (pixDensity * roundedDist);
 
-            int halfSide = halfMaxSide;
+            int maxHeightOfCircles;
             int i = 1;
 
-            while ((halfSide -= radius) > 0) {
+            if (portrait && cacheCenterY > height / 2) {
+                maxHeightOfCircles = cacheCenterY;
+            } else {
+                maxHeightOfCircles = halfMaxSide;
+            }
+
+            while ((maxHeightOfCircles -= radius) > 0) {
                 cacheDistances.add(OsmAndFormatter.getFormattedDistance((float) roundedDist * i++,
                         app, false).replaceAll(" ", ""));
             }
