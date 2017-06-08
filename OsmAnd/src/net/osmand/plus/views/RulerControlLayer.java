@@ -9,6 +9,7 @@ import android.graphics.Paint;
 import android.graphics.Paint.Style;
 import android.graphics.Rect;
 import android.text.TextPaint;
+import android.util.DisplayMetrics;
 
 import net.osmand.Location;
 import net.osmand.data.QuadPoint;
@@ -20,6 +21,8 @@ import net.osmand.plus.R;
 import net.osmand.plus.activities.MapActivity;
 import net.osmand.plus.helpers.AndroidUiHelper;
 
+import java.util.ArrayList;
+
 public class RulerControlLayer extends OsmandMapLayer {
 
     private static final int TEXT_SIZE = 14;
@@ -29,9 +32,10 @@ public class RulerControlLayer extends OsmandMapLayer {
     private int maxRadius;
     private int radius;
     private int cacheZoom;
+    private int halfMaxSide;
     private double cacheTileX;
     private double cacheTileY;
-    private String[] cacheDistances;
+    private ArrayList<String> cacheDistances;
     private Bitmap centerIcon;
     private Paint bitmapPaint;
     private Paint distancePaint;
@@ -47,10 +51,16 @@ public class RulerControlLayer extends OsmandMapLayer {
     public void initLayer(OsmandMapTileView view) {
         app = mapActivity.getMyApplication();
         portrait = AndroidUiHelper.isOrientationPortrait(mapActivity);
-        cacheDistances = new String[3];
-        maxRadius = mapActivity.getResources().getDimensionPixelSize(R.dimen.map_ruler_width);
+        cacheDistances = new ArrayList<>();
+        maxRadius = mapActivity.getResources().getDimensionPixelSize(R.dimen.map_ruler_radius);
 
         centerIcon = BitmapFactory.decodeResource(view.getResources(), R.drawable.map_ruler_center);
+
+        DisplayMetrics displayMetrics = new DisplayMetrics();
+        mapActivity.getWindowManager().getDefaultDisplay().getMetrics(displayMetrics);
+        int height = displayMetrics.heightPixels;
+        int width = displayMetrics.widthPixels;
+        halfMaxSide = (int) ((width > height ? width : height) / 2.2);
 
         bitmapPaint = new Paint();
         bitmapPaint.setAntiAlias(true);
@@ -93,7 +103,8 @@ public class RulerControlLayer extends OsmandMapLayer {
                     drawDistance(canvas, tb, center, currentLoc);
                 }
             } else if (mode == RulerMode.SECOND) {
-                for (int i = 1; i < 4; i++) {
+                updateData(tb);
+                for (int i = 1; i <= cacheDistances.size(); i++) {
                     drawCircle(canvas, tb, i, center);
                 }
             }
@@ -114,10 +125,8 @@ public class RulerControlLayer extends OsmandMapLayer {
     }
 
     private void drawCircle(Canvas canvas, RotatedTileBox tb, int circleNumber, QuadPoint center) {
-        updateData(tb);
-
         Rect bounds = new Rect();
-        String text = cacheDistances[circleNumber - 1];
+        String text = cacheDistances.get(circleNumber - 1);
         textPaint.getTextBounds(text, 0, text.length(), bounds);
 
         float left;
@@ -149,6 +158,7 @@ public class RulerControlLayer extends OsmandMapLayer {
             cacheZoom = tb.getZoom();
             cacheTileX = tb.getCenterTileX();
             cacheTileY = tb.getCenterTileY();
+            cacheDistances.clear();
 
             final double dist = tb.getDistance(0, tb.getPixHeight() / 2, tb.getPixWidth(), tb.getPixHeight() / 2);
             double pixDensity = tb.getPixWidth() / dist;
@@ -156,9 +166,12 @@ public class RulerControlLayer extends OsmandMapLayer {
                     OsmAndFormatter.calculateRoundedDist(maxRadius / pixDensity, app);
             radius = (int) (pixDensity * roundedDist);
 
-            for (int i = 0; i < 3; i++) {
-                cacheDistances[i] = OsmAndFormatter.getFormattedDistance((float) roundedDist * (i + 1),
-                        app, false).replaceAll(" ", "");
+            int halfSide = halfMaxSide;
+            int i = 1;
+
+            while ((halfSide -= radius) > 0) {
+                cacheDistances.add(OsmAndFormatter.getFormattedDistance((float) roundedDist * i++,
+                        app, false).replaceAll(" ", ""));
             }
         }
     }
