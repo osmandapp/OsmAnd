@@ -65,7 +65,8 @@
 	<dimen name="map_button_size">52dp</dimen>
 	<dimen name="map_small_button_size">44dp</dimen>
 	<dimen name="map_small_button_margin">5dp</dimen>
-	
+
+	<dimen name="map_ruler_radius">100dp</dimen>
 	<dimen name="map_ruler_width">120dp</dimen>
 	<dimen name="map_ruler_bottom_margin">9dp</dimen>
 	<dimen name="map_alarm_size">78dp</dimen>
