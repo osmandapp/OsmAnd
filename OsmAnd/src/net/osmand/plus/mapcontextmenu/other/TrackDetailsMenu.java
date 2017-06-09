@@ -143,8 +143,7 @@ public class TrackDetailsMenu {
 			mapActivity.hideTopToolbar(toolbarController);
 		}
 		mapActivity.getMapLayers().getContextMenuLayer().exitGpxDetailsMode();
-		mapActivity.getMapLayers().getGpxLayer().setSelectedPointLatLon(null);
-		mapActivity.getMapLayers().getGpxLayer().setAxisGridPoints(null);
+		mapActivity.getMapLayers().getGpxLayer().setAxisValueDetails(null);
 		mapActivity.getMapLayers().getMapInfoLayer().setSelectedPointLatLon(null);
 		mapActivity.getMapView().setMapPositionX(0);
 		mapActivity.getMapView().refreshMap();
@@ -291,39 +290,45 @@ public class TrackDetailsMenu {
 			WptPt wpt = getPoint(chart, gpxItem.chartHighlightPos);
 			if (wpt != null) {
 				location = new LatLon(wpt.lat, wpt.lon);
+				List<String> formattedAxisEntries = getFormattedAxisEntries(chart);
+				List<WptPt> axisGridPoints = getAxisGridPoints(chart);
+				AxisValueDetails axisValueDetails = new AxisValueDetails(axisGridPoints, formattedAxisEntries, location, getGpxItem());
 				if (gpxItem.route) {
 					mapActivity.getMapLayers().getMapInfoLayer().setSelectedPointLatLon(location);
 				} else {
-					mapActivity.getMapLayers().getGpxLayer().setSelectedPointLatLon(location);
+					mapActivity.getMapLayers().getGpxLayer().setAxisValueDetails(axisValueDetails);
 				}
 			}
 		} else {
 			gpxItem.chartHighlightPos = -1;
 		}
 		fitTrackOnMap(chart, location, forceFit);
-
-        if (segment != null) {
-            Map<String, WptPt> axisGridPoints = getAxisGridPoints(chart);
-            mapActivity.getMapLayers().getGpxLayer().setAxisGridPoints(axisGridPoints);
-        }
 	}
 
-	private Map<String, WptPt> getAxisGridPoints(LineChart chart) {
-        Map<String, WptPt> axisGridPoints = new HashMap<>();
+	private List<WptPt> getAxisGridPoints (LineChart chart) {
+        List<WptPt> axisGridPoints = new ArrayList<>();
         float[] entries = chart.getXAxis().mEntries;
         for (int i = 0; i < entries.length; i++) {
             WptPt pointToAdd = getPoint(chart, entries[i]);
-            if (pointToAdd != null) {
-                if (gpxItem.chartAxisType == GPXDataSetAxisType.DISTANCE) {
-					axisGridPoints.put(String.format("%.1f", entries[i]), pointToAdd);
-                } else if (gpxItem.chartAxisType == GPXDataSetAxisType.TIME) {
-                    IAxisValueFormatter formatter = chart.getXAxis().getValueFormatter();
-					axisGridPoints.put(formatter.getFormattedValue(entries[i], chart.getXAxis()), pointToAdd);
-                }
-            }
+			axisGridPoints.add(pointToAdd);
         }
         return axisGridPoints;
     }
+
+    private List<String> getFormattedAxisEntries (LineChart chart) {
+		float[] entries = chart.getXAxis().mEntries;
+		List<String> formattedAxisEntries = new ArrayList<>();
+			for (int i = 0; i < entries.length; i++) {
+				String formattedAxisEntry = "";
+				if (gpxItem.chartAxisType == GPXDataSetAxisType.DISTANCE) {
+					formattedAxisEntry = String.format("%.1f", entries[i]);
+				} else if (gpxItem.chartAxisType == GPXDataSetAxisType.TIME) {
+					formattedAxisEntry = chart.getXAxis().getValueFormatter().getFormattedValue(entries[i], chart.getXAxis());
+				}
+				formattedAxisEntries.add(formattedAxisEntry);
+			}
+		return formattedAxisEntries;
+	}
 
 	private void updateView(final View parentView) {
 		GPXTrackAnalysis analysis = gpxItem.analysis;
@@ -584,6 +589,36 @@ public class TrackDetailsMenu {
 		public void updateToolbar(MapInfoWidgetsFactory.TopToolbarView view) {
 			super.updateToolbar(view);
 			view.getShadowView().setVisibility(View.GONE);
+		}
+	}
+
+	public class AxisValueDetails {
+		private List<WptPt> axisGridPoints;
+		private List<String> formattedAxisGridEntries;
+		private LatLon selectedPointLatLon;
+		private GpxDisplayItem gpxDisplayItem;
+
+		public AxisValueDetails(List<WptPt> axisGridPoints, List<String> formattedAxisGridEntries, LatLon selectedPointLatLon, GpxDisplayItem gpxDisplayItem) {
+			this.axisGridPoints = axisGridPoints;
+			this.formattedAxisGridEntries = formattedAxisGridEntries;
+			this.selectedPointLatLon = selectedPointLatLon;
+			this.gpxDisplayItem = gpxDisplayItem;
+		}
+
+		public List<WptPt> getAxisGridPoints() {
+			return axisGridPoints;
+		}
+
+		public List<String> getFormattedAxisGridEntries() {
+			return formattedAxisGridEntries;
+		}
+
+		public LatLon getSelectedPointLatLon() {
+			return selectedPointLatLon;
+		}
+
+		public GpxDisplayItem getGpxDisplayItem() {
+			return gpxDisplayItem;
 		}
 	}
 }

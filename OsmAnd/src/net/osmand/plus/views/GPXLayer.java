@@ -36,6 +36,7 @@ import net.osmand.plus.OsmandApplication;
 import net.osmand.plus.OsmandSettings.CommonPreference;
 import net.osmand.plus.R;
 import net.osmand.plus.base.FavoriteImageDrawable;
+import net.osmand.plus.mapcontextmenu.other.TrackDetailsMenu.AxisValueDetails;
 import net.osmand.plus.render.OsmandRenderer;
 import net.osmand.plus.render.OsmandRenderer.RenderingContext;
 import net.osmand.plus.views.MapTextLayer.MapTextProvider;
@@ -69,9 +70,7 @@ public class GPXLayer extends OsmandMapLayer implements ContextMenuLayer.IContex
 	private int currentTrackColor;
 
 	private Bitmap selectedPoint;
-	private LatLon selectedPointLatLon;
-
-	private Map<String, WptPt> axisGridPoints;
+	private AxisValueDetails axisValueDetails;
 
 	private static final int startZoom = 7;
 
@@ -82,7 +81,6 @@ public class GPXLayer extends OsmandMapLayer implements ContextMenuLayer.IContex
 	private Map<WptPt, SelectedGpxFile> pointFileMap = new HashMap<>();
 	private MapTextLayer textLayer;
 
-
 	private Paint paintOuter;
 
 	private Paint paintInnerCircle;
@@ -90,6 +88,8 @@ public class GPXLayer extends OsmandMapLayer implements ContextMenuLayer.IContex
 	private Paint paintInnerRect;
 
 	private Paint paintTextIcon;
+
+	private Paint paintGridTextIcon;
 
 	private OsmandRenderer osmandRenderer;
 
@@ -108,6 +108,10 @@ public class GPXLayer extends OsmandMapLayer implements ContextMenuLayer.IContex
 		selectedGpxHelper = view.getApplication().getSelectedGpxHelper();
 		osmandRenderer = view.getApplication().getResourceManager().getRenderer().getRenderer();
 		initUI();
+	}
+
+	public void setAxisValueDetails(AxisValueDetails axisValueDetails) {
+		this.axisValueDetails = axisValueDetails;
 	}
 
 	private void initUI() {
@@ -136,6 +140,12 @@ public class GPXLayer extends OsmandMapLayer implements ContextMenuLayer.IContex
 		paintTextIcon.setColor(Color.BLACK);
 		paintTextIcon.setAntiAlias(true);
 
+		paintGridTextIcon = new Paint();
+		paintGridTextIcon.setTextAlign(Align.CENTER);
+		paintGridTextIcon.setFakeBoldText(true);
+		paintGridTextIcon.setColor(Color.WHITE);
+		paintGridTextIcon.setAntiAlias(true);
+
 		textLayer = view.getLayerByClass(MapTextLayer.class);
 
 		paintOuter = new Paint();
@@ -148,7 +158,6 @@ public class GPXLayer extends OsmandMapLayer implements ContextMenuLayer.IContex
 		paintInnerCircle.setAntiAlias(true);
 		paintInnerRect = new Paint();
 		paintInnerRect.setStyle(Style.FILL_AND_STROKE);
-		paintInnerRect.setColor(0xddFFFFFF);
 		paintInnerRect.setAntiAlias(true);
 
 		paintIcon = new Paint();
@@ -357,18 +366,20 @@ public class GPXLayer extends OsmandMapLayer implements ContextMenuLayer.IContex
 					drawBigPoint(canvas, o, fileColor, x, y);
 				}
 			}
-			if (axisGridPoints != null) {
+			if (axisValueDetails != null) {
 				drawAxisGridPoints(canvas, tileBox);
-			}
-			if (selectedPointLatLon != null
-					&& selectedPointLatLon.getLatitude() >= latLonBounds.bottom
-					&& selectedPointLatLon.getLatitude() <= latLonBounds.top
-					&& selectedPointLatLon.getLongitude() >= latLonBounds.left
-					&& selectedPointLatLon.getLongitude() <= latLonBounds.right) {
-				float x = tileBox.getPixXFromLatLon(selectedPointLatLon.getLatitude(), selectedPointLatLon.getLongitude());
-				float y = tileBox.getPixYFromLatLon(selectedPointLatLon.getLatitude(), selectedPointLatLon.getLongitude());
-				paintIcon.setColorFilter(null);
-				canvas.drawBitmap(selectedPoint, x - selectedPoint.getWidth() / 2, y - selectedPoint.getHeight() / 2, paintIcon);
+				LatLon selectedPointLatLon = axisValueDetails.getSelectedPointLatLon();
+				if (selectedPointLatLon.getLatitude() >= latLonBounds.bottom
+						&& selectedPointLatLon.getLatitude() <= latLonBounds.top
+						&& selectedPointLatLon.getLongitude() >= latLonBounds.left
+						&& selectedPointLatLon.getLongitude() <= latLonBounds.right) {
+					float x = tileBox.getPixXFromLatLon(selectedPointLatLon.getLatitude(), selectedPointLatLon.getLongitude());
+					float y = tileBox.getPixYFromLatLon(selectedPointLatLon.getLatitude(), selectedPointLatLon.getLongitude());
+					paintIcon.setColorFilter(null);
+					canvas.drawBitmap(selectedPoint, x - selectedPoint.getWidth() / 2, y - selectedPoint.getHeight() / 2, paintIcon);
+				}
+			} else if (paintInnerRect.getColor() != 0){
+				paintInnerRect.setColor(0);
 			}
 			this.fullObjectsLatLon = fullObjectsLatLon;
 			this.smallObjectsLatLon = smallObjectsLatLon;
@@ -376,30 +387,27 @@ public class GPXLayer extends OsmandMapLayer implements ContextMenuLayer.IContex
 	}
 
 	private void drawAxisGridPoints(Canvas canvas, RotatedTileBox tileBox) {
-		for (Map.Entry<String, WptPt> axisGridPoint : axisGridPoints.entrySet()) {
-			float r = 12 * tileBox.getDensity();
-
-			String stringToDisplay = axisGridPoint.getKey();
-
-			float textWidth = paintTextIcon.measureText(stringToDisplay);
-
-			float x = tileBox.getPixXFromLatLon(axisGridPoint.getValue().getLatitude(), axisGridPoint.getValue().getLongitude());
-			float y = tileBox.getPixYFromLatLon(axisGridPoint.getValue().getLatitude(), axisGridPoint.getValue().getLongitude());
-
-//			canvas.drawCircle(x, y, r + (float) Math.ceil(tileBox.getDensity()), paintOuter);
-
-//			canvas.drawCircle(x, y, r - (float) Math.ceil(tileBox.getDensity()), paintInnerCircle);
-//			paintTextIcon.setTextSize(r);
-//			canvas.drawText(pointOfChart.getKey(), x, y + r / 2, paintTextIcon);
-
-//			paintInnerRect.setColor();
+		if (paintInnerRect.getColor() == 0) {
+			SelectedGpxFile selectedGpxFile = selectedGpxHelper.getSelectedFileFromDisplayItemByName((axisValueDetails.getGpxDisplayItem().group.getGpxName()));
+			GpxDataItem gpxDataItem = view.getApplication().getGpxDatabase().getItem(new File(selectedGpxFile.getGpxFile().path));
+			paintInnerRect.setColor(gpxDataItem.getColor());
+		}
+		List<WptPt> axisGridPoints = axisValueDetails.getAxisGridPoints();
+		List<String> formattedAxisGridEntries = axisValueDetails.getFormattedAxisGridEntries();
+		float r = 12 * tileBox.getDensity();
+		paintGridTextIcon.setTextSize(r);
+		for (int i = 0; i < axisGridPoints.size(); i++) {
+			String textOnPoint = formattedAxisGridEntries.get(i);
+			float textWidth = paintGridTextIcon.measureText(textOnPoint);
+			float x = tileBox.getPixXFromLatLon(axisGridPoints.get(i).getLatitude(), axisGridPoints.get(i).getLongitude());
+			float y = tileBox.getPixYFromLatLon(axisGridPoints.get(i).getLatitude(), axisGridPoints.get(i).getLongitude());
 			canvas.drawRect(
-					x + (float) Math.ceil(tileBox.getDensity()) - textWidth / 2,
-					y + (float) Math.ceil(tileBox.getDensity()) - r /2,
-					x + (float) Math.ceil(tileBox.getDensity()) + textWidth / 2,
-					y + (float) Math.ceil(tileBox.getDensity()) + r / 2, paintInnerRect);
-			paintTextIcon.setTextSize(r);
-			canvas.drawText(axisGridPoint.getKey(), x, y + r / 2, paintTextIcon);
+					x - textWidth / 2 - 2 * (float) Math.ceil(tileBox.getDensity()),
+					y - r / 2 - 2 * (float) Math.ceil(tileBox.getDensity()),
+					x + textWidth / 2 + 2 * (float) Math.ceil(tileBox.getDensity()),
+					y + r / 2 + 3 * (float) Math.ceil(tileBox.getDensity()),
+					paintInnerRect);
+			canvas.drawText(textOnPoint, x, y + r / 2, paintGridTextIcon);
 		}
 	}
 
@@ -461,18 +469,6 @@ public class GPXLayer extends OsmandMapLayer implements ContextMenuLayer.IContex
 
 	private List<WptPt> getListStarPoints(SelectedGpxFile g) {
 		return g.getGpxFile().points;
-	}
-
-	public LatLon getSelectedPointLatLon() {
-		return selectedPointLatLon;
-	}
-
-	public void setSelectedPointLatLon(LatLon selectedPointLatLon) {
-		this.selectedPointLatLon = selectedPointLatLon;
-	}
-
-	public void setAxisGridPoints(Map<String, WptPt> axisGridPoints) {
-		this.axisGridPoints = axisGridPoints;
 	}
 
 	private boolean calculateBelongs(int ex, int ey, int objx, int objy, int radius) {
