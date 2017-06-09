@@ -144,7 +144,7 @@ public class TrackDetailsMenu {
 		}
 		mapActivity.getMapLayers().getContextMenuLayer().exitGpxDetailsMode();
 		mapActivity.getMapLayers().getGpxLayer().setSelectedPointLatLon(null);
-		mapActivity.getMapLayers().getGpxLayer().setPointsOfChart(null);
+		mapActivity.getMapLayers().getGpxLayer().setAxisGridPoints(null);
 		mapActivity.getMapLayers().getMapInfoLayer().setSelectedPointLatLon(null);
 		mapActivity.getMapView().setMapPositionX(0);
 		mapActivity.getMapView().refreshMap();
@@ -303,26 +303,26 @@ public class TrackDetailsMenu {
 		fitTrackOnMap(chart, location, forceFit);
 
         if (segment != null) {
-            Map<String, WptPt> pointsOfChart = getPointsOfChart(chart);
-            mapActivity.getMapLayers().getGpxLayer().setPointsOfChart(pointsOfChart);
+            Map<String, WptPt> axisGridPoints = getAxisGridPoints(chart);
+            mapActivity.getMapLayers().getGpxLayer().setAxisGridPoints(axisGridPoints);
         }
 	}
 
-	private Map<String, WptPt> getPointsOfChart(LineChart chart) {
-        Map<String, WptPt> pointsOfChart = new HashMap<>();
+	private Map<String, WptPt> getAxisGridPoints(LineChart chart) {
+        Map<String, WptPt> axisGridPoints = new HashMap<>();
         float[] entries = chart.getXAxis().mEntries;
         for (int i = 0; i < entries.length; i++) {
             WptPt pointToAdd = getPoint(chart, entries[i]);
             if (pointToAdd != null) {
                 if (gpxItem.chartAxisType == GPXDataSetAxisType.DISTANCE) {
-                    pointsOfChart.put(String.format("%.1f", entries[i]), pointToAdd);
+					axisGridPoints.put(String.format("%.1f", entries[i]), pointToAdd);
                 } else if (gpxItem.chartAxisType == GPXDataSetAxisType.TIME) {
                     IAxisValueFormatter formatter = chart.getXAxis().getValueFormatter();
-                    pointsOfChart.put(formatter.getFormattedValue(entries[i], chart.getXAxis()), pointToAdd);
+					axisGridPoints.put(formatter.getFormattedValue(entries[i], chart.getXAxis()), pointToAdd);
                 }
             }
         }
-        return pointsOfChart;
+        return axisGridPoints;
     }
 
 	private void updateView(final View parentView) {

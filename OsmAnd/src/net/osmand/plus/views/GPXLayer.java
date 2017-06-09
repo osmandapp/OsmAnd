@@ -71,7 +71,7 @@ public class GPXLayer extends OsmandMapLayer implements ContextMenuLayer.IContex
 	private Bitmap selectedPoint;
 	private LatLon selectedPointLatLon;
 
-	private Map<String, WptPt> pointsOfChart;
+	private Map<String, WptPt> axisGridPoints;
 
 	private static final int startZoom = 7;
 
@@ -357,8 +357,8 @@ public class GPXLayer extends OsmandMapLayer implements ContextMenuLayer.IContex
 					drawBigPoint(canvas, o, fileColor, x, y);
 				}
 			}
-			if (pointsOfChart != null) {
-				drawPointsOfChart(canvas, tileBox);
+			if (axisGridPoints != null) {
+				drawAxisGridPoints(canvas, tileBox);
 			}
 			if (selectedPointLatLon != null
 					&& selectedPointLatLon.getLatitude() >= latLonBounds.bottom
@@ -375,16 +375,16 @@ public class GPXLayer extends OsmandMapLayer implements ContextMenuLayer.IContex
 		}
 	}
 
-	private void drawPointsOfChart(Canvas canvas, RotatedTileBox tileBox) {
-		for (Map.Entry<String, WptPt> pointOfChart : pointsOfChart.entrySet()) {
+	private void drawAxisGridPoints(Canvas canvas, RotatedTileBox tileBox) {
+		for (Map.Entry<String, WptPt> axisGridPoint : axisGridPoints.entrySet()) {
 			float r = 12 * tileBox.getDensity();
 
-			String stringToDisplay = pointOfChart.getKey();
+			String stringToDisplay = axisGridPoint.getKey();
 
 			float textWidth = paintTextIcon.measureText(stringToDisplay);
 
-			float x = tileBox.getPixXFromLatLon(pointOfChart.getValue().getLatitude(), pointOfChart.getValue().getLongitude());
-			float y = tileBox.getPixYFromLatLon(pointOfChart.getValue().getLatitude(), pointOfChart.getValue().getLongitude());
+			float x = tileBox.getPixXFromLatLon(axisGridPoint.getValue().getLatitude(), axisGridPoint.getValue().getLongitude());
+			float y = tileBox.getPixYFromLatLon(axisGridPoint.getValue().getLatitude(), axisGridPoint.getValue().getLongitude());
 
 //			canvas.drawCircle(x, y, r + (float) Math.ceil(tileBox.getDensity()), paintOuter);
 
@@ -399,7 +399,7 @@ public class GPXLayer extends OsmandMapLayer implements ContextMenuLayer.IContex
 					x + (float) Math.ceil(tileBox.getDensity()) + textWidth / 2,
 					y + (float) Math.ceil(tileBox.getDensity()) + r / 2, paintInnerRect);
 			paintTextIcon.setTextSize(r);
-			canvas.drawText(pointOfChart.getKey(), x, y + r / 2, paintTextIcon);
+			canvas.drawText(axisGridPoint.getKey(), x, y + r / 2, paintTextIcon);
 		}
 	}
 
@@ -471,8 +471,8 @@ public class GPXLayer extends OsmandMapLayer implements ContextMenuLayer.IContex
 		this.selectedPointLatLon = selectedPointLatLon;
 	}
 
-	public void setPointsOfChart(Map<String, WptPt> pointsOfChart) {
-		this.pointsOfChart = pointsOfChart;
+	public void setAxisGridPoints(Map<String, WptPt> axisGridPoints) {
+		this.axisGridPoints = axisGridPoints;
 	}
 
 	private boolean calculateBelongs(int ex, int ey, int objx, int objy, int radius) {
