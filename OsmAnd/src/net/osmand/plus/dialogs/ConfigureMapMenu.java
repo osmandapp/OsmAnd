@@ -487,14 +487,6 @@ public class ConfigureMapMenu {
 	public static void refreshMapComplete(final MapActivity activity) {
 		activity.getMyApplication().getResourceManager().getRenderer().clearCache();
 		activity.updateMapSettings();
-		GPXLayer gpx = activity.getMapView().getLayerByClass(GPXLayer.class);
-		if (gpx != null) {
-			gpx.updateLayerStyle();
-		}
-		RouteLayer rte = activity.getMapView().getLayerByClass(RouteLayer.class);
-		if (rte != null) {
-			rte.updateLayerStyle();
-		}
 		activity.getMapView().refreshMap(true);
 	}
 
