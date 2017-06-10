@@ -2834,10 +2834,10 @@ Abgedeckte Fläche: %1$s x %2$s</string>
     <string name="show_from_zoom_level">Darstellen ab Zoomstufe</string>
     <string name="shared_string_add_photos">Fotos hinzufügen</string>
     <string name="mapillary_widget">Mapillary-Widget</string>
-    <string name="mapillary_widget_descr">Ermöglicht Ihnen auf schnelle Weise Mapillary-Beiträge</string>
-    <string name="mapillary_descr">Fotos von der Straße aus dem Netz für jedermann. Orte entdecken, mitwirken, die Welt in Bildern festhalten.</string>
+    <string name="mapillary_widget_descr">Ermöglicht einen schnellen Zugriff auf Mapillary</string>
+    <string name="mapillary_descr">Fotos von der Straße aus dem Netz für jeden. Orte entdecken, mitwirken und die Welt in Bildern festhalten.</string>
     <string name="mapillary">Mapillary</string>
-    <string name="mapillary_action_descr">Mit Mapillary Ihre ganz persönlichen Ansichten dieses Ortes beisteuern.</string>
+    <string name="mapillary_action_descr">Mit Mapillary eigene Bilder von diesem Ort hinzufügen.</string>
     <string name="shared_string_install">Installieren</string>
     <string name="online_photos">Online-Fotos</string>
     <string name="no_photos_descr">Es gibt keine Fotos von diesem Ort</string>
