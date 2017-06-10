@@ -418,8 +418,8 @@ Einige der Kernfunktionen:
 	<string name="city_type_suburb">Stadtteil</string>
 	<string name="city_type_hamlet">Weiler</string>
 	<string name="city_type_village">Dorf</string>
-	<string name="city_type_town">Stadt</string>
-	<string name="city_type_city">Großstadt</string>
+	<string name="city_type_town">Ort</string>
+	<string name="city_type_city">Stadt</string>
 	
 	<string name="animate_route_off">Simulation stoppen</string>
 	<string name="animate_route">Simulation starten</string>
@@ -1636,7 +1636,7 @@ Afghanistan, Ägypten, Albanien, Algerien, Andorra, Angola, Anguilla, Antigua un
 	<string name="osmo_group_share">Um eine Verbindung zur Gruppe %2$s herzustellen, bitte die Gruppen-ID (%1$s) angeben oder (%3$s) antippen.</string>
 	<string name="osmo_share_connect_device">Diesem Gerät permanent folgen</string>
 	<string name="osmo_share_current_session">Aktuelle Sitzung im Browser teilen</string>
-	<string name="osmo_session_not_available">Keine Sitzung vorhanden. Ist \'Standort senden\' aktiviert?</string>
+	<string name="osmo_session_not_available">Keine Sitzung vorhanden, überprüfen Sie ob \'Standort senden\' aktiv ist.</string>
 	<string name="osmo_share_session">Sitzung teilen</string>
 	<string name="osmo_session_id_share">Sitzungs-URL zur Geräteverfolgung (%1$s)</string>
 	<string name="osmo_track_interval">Aufzeichnungsintervall</string>
@@ -2240,7 +2240,7 @@ Lon %2$s</string>
 	<string name="file_size_in_mb">%.1f MB</string>
     <string name="please_specify_poi_type_only_from_list">Bitte einen gültigen POI-Typ angeben oder überspringen</string>
     <string name="share_osm_edits_subject">OSM-Bearbeitung mit OsmAnd geteilt</string>
-    <string name="av_locations_descr">GPX-Datei mit Notizen zu Orten</string>
+    <string name="av_locations_descr">GPX-Datei mit Notizen</string>
     <string name="free_downloads_used_description">Anzeige der genutzten freien Downloads</string>
 
     <string name="shared_string_location">Standort</string>
@@ -2723,7 +2723,7 @@ Abgedeckte Fläche: %1$s x %2$s</string>
     <string name="points_delete_multiple_succesful">Punkt(e) erfolgreich gelöscht.</string>
     <string name="points_delete_multiple">Es werden %1$d Punkt(e) gelöscht. Fortfahren?</string>
     <string name="track_points_category_name">Markante Punkte auf dieser Route</string>
-    <string name="route_points_category_name">Zu passierende Kehren auf dieser Route</string>
+    <string name="route_points_category_name">Richtungsänderungen entlang dieser Route</string>
     <string name="add_new_folder">Neuen Ordner hinzufügen</string>
     <string name="shared_string_slope">Steigung</string>
     <string name="relief_smoothness_factor_hills">Berge</string>
