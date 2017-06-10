@@ -102,10 +102,6 @@ public class RouteLayer extends OsmandMapLayer {
 		initUI();
 	}
 
-	public void updateLayerStyle() {
-		attrs.cachedHash = -1;
-	}
-	
 	
 	@Override
 	public void onPrepareBufferImage(Canvas canvas, RotatedTileBox tileBox, DrawSettings settings) {
