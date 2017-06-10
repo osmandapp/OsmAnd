@@ -2979,9 +2979,9 @@
 	<string name="poi_aquaculture_mussels">Aquakultur: Muscheln</string>
 
 	<string name="poi_mdf">Hauptverteiler</string>
-	<string name="poi_organic_yes">Bio-Lebensmittel: ja</string>
-	<string name="poi_organic_no">Bio-Lebensmittel: Nein</string>
-	<string name="poi_organic_only">Nur Bio-Lebensmittel</string>
+	<string name="poi_organic_yes">Ja</string>
+	<string name="poi_organic_no">Nein</string>
+	<string name="poi_organic_only">Ausschließlich</string>
 
 	<string name="poi_diplomatic_consulate">Konsulat</string>
 	<string name="poi_diplomatic_permanent_mission">Ständige Vertretung</string>
@@ -3403,4 +3403,6 @@
 	<string name="poi_motorcycle_type_chopper">Chopper</string>
 	<string name="poi_motorcycle_type_offroad">Gelände</string>
 	<string name="poi_motorcycle_type_dualsport">Reiseenduro</string>
-	</resources>
+	<string name="poi_motorcycle_type_standard">Standard</string>
+
+</resources>
