@@ -1,7 +1,7 @@
 <?xml version='1.0' encoding='UTF-8'?>
 <resources><string name="poi_shop">Vendejo</string>
 		<string name="poi_shop_food">Butiko oportuna kaj superbazaro</string>
-	<string name="poi_emergency">Vivsavado</string>
+	<string name="poi_emergency">Vivsavo</string>
 	<string name="poi_transportation">Transporto</string>
 		<string name="poi_road_obstacle">Voja barilo</string>
 		<string name="poi_filling_station">Benzinejo</string>
@@ -23,12 +23,12 @@
 		<string name="poi_landuse">Utilkampo</string>
 	<string name="poi_education">Edukado</string>
 	<string name="poi_administrative">Administrejo</string>
-	<string name="poi_healthcare">Kuracado</string>
+	<string name="poi_healthcare">Kuraco</string>
 	<string name="poi_office">Oficejo</string>
 	<string name="poi_sport">Sporto</string>
 	<string name="poi_tourism">Turismo</string>
 		<string name="poi_sightseeing">Vidindaĵo</string>
-		<string name="poi_accomodation">Loĝado</string>
+		<string name="poi_accomodation">Loĝo</string>
 		<string name="poi_internet_access">Interret-aliro</string>
 	<string name="poi_entertainment">Ripozejo</string>
 		<string name="poi_club">Klubo</string>
@@ -859,7 +859,7 @@
 	<string name="poi_dog_park">Hund-parko</string>
 	<string name="poi_leisure_fishing">Fiŝkaptadejo</string>
 	<string name="poi_hunting_stand">Altembusko ĉasada</string>
-	<string name="poi_lodging">Loĝado</string>
+	<string name="poi_lodging">Loĝo</string>
 	<string name="poi_harbour">Haveno</string>
 	<string name="poi_marina">Jaĥt-haveno</string>
 	<string name="poi_miniature_golf">Minigolfludejo</string>
