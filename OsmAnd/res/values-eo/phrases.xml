@@ -2059,11 +2059,11 @@
 
 	<string name="poi_historic_milestone">Mejloŝtono historia</string>
 
-	<string name="poi_shoes_children">Infanaj</string>
-	<string name="poi_shoes_women">Inaj</string>
-	<string name="poi_shoes_sport">Sportaj</string>
-	<string name="poi_shoes_men">Viraj</string>
-	<string name="poi_shoes_orthopedic">Ortopediaj</string>
+	<string name="poi_shoes_children">infanaj</string>
+	<string name="poi_shoes_women">inaj</string>
+	<string name="poi_shoes_sport">sportaj</string>
+	<string name="poi_shoes_men">viraj</string>
+	<string name="poi_shoes_orthopedic">ortopediaj</string>
 
 	<string name="poi_historic_manor">Palaceto historia</string>
 	<string name="poi_castle_type_stately">Speco de kastelo: palaceto</string>
