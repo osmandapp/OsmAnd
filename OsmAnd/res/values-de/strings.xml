@@ -1713,7 +1713,7 @@ Mit Neuanmeldung fortfahren?</string>
 	<string name="gpx_selection_track">%1$s \nTrack %2$s</string>
 	
 	<string name="gpx_split_interval">Trennungsintervall</string>
-	<string name="gpx_info_subtracks">"Track-Teile: %1$s "</string>
+	<string name="gpx_info_subtracks">"Track-Segmente: %1$s "</string>
 	<string name="gpx_monitoring_start">GPX-Aufzeichnung starten</string>
 	<string name="gpx_monitoring_stop">GPX-Aufzeichnung beenden</string>
 	<string name="gpx_start_new_segment">Neues Segment starten</string>
