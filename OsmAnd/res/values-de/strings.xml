@@ -2712,9 +2712,9 @@ Abgedeckte Fläche: %1$s x %2$s</string>
     <string name="shared_string_move">Verschieben</string>
     <string name="shared_string_tracks">Tracks</string>
     <string name="shared_string_time_moving">Zeit in Bewegung</string>
-    <string name="shared_string_time_span">Zeitspanne</string>
+    <string name="shared_string_time_span">Dauer</string>
     <string name="shared_string_max">Max</string>
-    <string name="shared_string_start_time">Startzeit</string>
+    <string name="shared_string_start_time">Anfangszeit</string>
     <string name="shared_string_end_time">Endzeit</string>
     <string name="shared_string_color">Farbe</string>
     <string name="max_speed">Höchstgeschwindigkeit</string>
@@ -2741,7 +2741,7 @@ Abgedeckte Fläche: %1$s x %2$s</string>
     <string name="parking_options">Parkmöglichkeiten</string>
     <string name="full_version_thanks">Vielen Dank, dass Sie die Vollversion von OsmAnd erworben haben!</string>
     <string name="routing_attr_relief_smoothness_factor_hills_name">Bergig</string>
-    <string name="routing_attr_relief_smoothness_factor_plains_name">Hügelig</string>
+    <string name="routing_attr_relief_smoothness_factor_plains_name">Weniger bergig</string>
     <string name="routing_attr_relief_smoothness_factor_more_plains_name">Flach</string>
     <string name="routing_attr_driving_style_speed_name">Schnell</string>
     <string name="routing_attr_driving_style_balance_name">Ausgewogen</string>
