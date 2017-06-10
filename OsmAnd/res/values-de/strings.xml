@@ -2173,21 +2173,21 @@ Lon %2$s</string>
     <string name="access_from_map_description">Menütaste zeigt Dashboard, nicht das Menü</string>
     <string name="show_on_start_description">\"Aus\" startet direkt die Kartenansicht</string>
     <string name="copied_to_clipboard">In die Zwischenablage kopiert</string>
-    <string name="release_2_2">" • Neue kontextbezogene Benutzeroberfläche bei Auswahl von Orten auf der Karte und in anderen Ansichten
+    <string name="release_2_2">" • Neue kontextbezogene Benutzeroberfläche bei Auswahl von Orten auf der Karte und anderen Ansichten
 \n
-\n • Kartenansicht wird nun direkt gestartet, wenn nicht \'Dashboard bei App-Start\' eingestellt ist
+\n • Kartenansicht wird nun direkt gestartet, außer bei Auswahl von \'Zeige Dashboard bei App-Start\'
 \n
-\n • Auswahl der im Dashboard anzuzeigenden Elemente möglich
+\n • Auswahl der anzuzeigenden Elemente im Dashboard möglich
 \n
 \n • Dashboard kann umgangen werden, falls menübasierte App-Steuerung gewünscht ist
 \n
-\n • Zum Herunterladen von Karten können Regionen durch Antippen auf der Weltkarte direkt ausgewählt werden
+\n • Zum Herunterladen von Kartendateien können nun Regionen direkt durch Tippen auf der Weltkarte ausgewählt werden
 \n
-\n • Die POI-Suche unterstützt nun präzisere Abfragen
+\n • Die POI-Suche ermöglicht nun speziellere Abfragen
 \n
 \n • Verbesserungen beim Editieren von POI- und OSM-Objekten
 \n
-\n • Überarbeitete Download-Schnittstelle und -Struktur für Kartendaten
+\n • Oberfläche und Struktur zum Herunterladen der Karten wurden überarbeitet
 \n
 \n und mehr … "</string>
     <string name="osm_save_offline">Offline speichern</string>
