@@ -2914,7 +2914,7 @@ Kérlek adj meg egy teljes kódot</string>
     <string name="restart_search">Keresés újraindítása</string>
     <string name="increase_search_radius">Keresett terület szélesítése</string>
     <string name="nothing_found">Nincs találat :(</string>
-    <string name="nothing_found_descr">A keresési sugár növeléséhez módosítsd a keresőkifejezést</string>
+    <string name="nothing_found_descr">Módosítsd a keresőkifejezést vagy növeld a keresési sugarat</string>
     <string name="mapillary">Mapillary</string>
     <string name="shared_string_add_photos">Fényképek hozzáadása</string>
     <string name="no_photos_descr">Erről a helyről nincsenek fényképeink</string>
