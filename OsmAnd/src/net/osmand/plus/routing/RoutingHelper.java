@@ -871,7 +871,7 @@ public class RoutingHelper {
 				if (res.isCalculated()) {
 					route = res;
 				} else {
-					evalWaitInterval = evalWaitInterval * 3 / 2;
+					evalWaitInterval = Math.max(3000, evalWaitInterval * 3 / 2); // for Issue #3899
 					evalWaitInterval = Math.min(evalWaitInterval, 120000);
 				}
 				currentRunningJob = null;
