@@ -1574,4 +1574,7 @@
 	<string name="poi_payment_transport_type">Soort betaling (transport)</string>
 	<string name="poi_social_facility_type">Type</string>
 	<string name="poi_social_facility_for">Doelgroep</string>
+	<string name="poi_compressed_air_filter">Perslucht</string>
+	<string name="poi_vacuum_cleaner_filter">Stofzuiger</string>
+	<string name="poi_free_flying_characteristic">Karakteristiek</string>
 	</resources>
