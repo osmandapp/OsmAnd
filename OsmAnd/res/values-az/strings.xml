@@ -1365,7 +1365,7 @@
     <string name="gpx_no_tracks_title">Sizin hələ izləriniz yoxdur</string>
     <string name="gpx_no_tracks_title_folder">Qovluğa izlər əlavə edə də bilərsiniz</string>
     <string name="gpx_add_track">İz əlavə et</string>
-    <string name="storage_place_description">OsmAnd-ın məlumatlar yeri (xəritələr, izlər və s.): %1$s.</string>
+    <string name="storage_place_description">OsmAnd-ın məlumat saxlama yeri (xəritələr, izlər və s.): %1$s.</string>
     <string name="shared_string_save_as_gpx">GPX izi olaraq saxla</string>
     <string name="shared_string_my_tracks">İzlərim</string>
     <string name="shared_string_currently_recording_track">Hazırki qeyd edilən iz</string>
@@ -1440,7 +1440,7 @@
     <string name="disable_complex_routing">Mürəkkəb marşrutlamanı söndür</string>
     <string name="amenity_type_seamark">Dəniz işarəsi</string>
     <string name="app_modes_choose_descr">Proqramda görünən istifadə profillərini seçin</string>
-    <string name="map_widget_map_rendering">Xəritə göstərilməsi</string>
+    <string name="map_widget_map_rendering">Xəritənin göstərilməsi</string>
     <string name="app_mode_hiking">Piyada turizm</string>
     <string name="app_mode_motorcycle">Motosiklet</string>
     <string name="local_osm_changes_delete_all_confirm">%1$d OSM dəyişikliyini silmək üzrəsiniz. Əminsiniz?</string>
@@ -1511,4 +1511,13 @@
     <string name="map_widget_config">Ekranı tənzimlə</string>
     <string name="quick_action_add_configure_map">Xəritəni tənzimlə</string>
     <string name="recording_delete_confirm">Bu qeydetməni silmək istəyirsiniz?</string>
+    <string name="routing_attr_allow_motorway_name">Avtomagistrallara icazə ver</string>
+    <string name="routing_attr_allow_motorway_description">Avtomagistrallara icazə ver</string>
+    <string name="trip_rec_notification_settings">Səyahət qeydetmə (məlumat yoxdur)</string>
+    <string name="trip_rec_notification_settings_desc">“Qeyd et” düyməsinə basaraq səyahət qeydetməni başlatmağa icazə verən bildirişi göstər</string>
+    <string name="save_track_min_speed">Minimum qeydiyyat sürəti</string>
+    <string name="new_filter_desc">Yeni filtr üçün ad daxil edin. Bu, sizin Kateqoriyalar bölmənizə əlavə olunur.</string>
+    <string name="donation_to_osm">OpenStreetMap cəmiyyəti üçün ianə</string>
+    <string name="donation_to_osm_desc">İanənizin bir hissəsi OpenStreetMap-a dəyişikliklər təqdim edən OSM istifadəçilərinə göndəriləcək. Abunəliyin qiyməti eyni qalır.</string>
+    <string name="access_expanded_list">Genişlədilmiş siyahı</string>
     </resources>
