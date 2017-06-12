@@ -1523,4 +1523,8 @@
 	<string name="poi_aerialway_bicycle">Fietsvervoer</string>
 	<string name="poi_aerialway_heating">Verwarming</string>
 	<string name="poi_pump">Pomp</string>
+	<string name="poi_observatory_designation">Aanduiding</string>
+	<string name="poi_telescope_type">Type</string>
+	<string name="poi_animal_training_type">Type</string>
+	<string name="poi_embassy_type">Type</string>
 	</resources>
