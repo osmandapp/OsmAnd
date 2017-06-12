@@ -112,25 +112,43 @@ public class MapInfoWidgetsFactory {
 
 	public TextInfoWidget createRulerControl(final MapActivity map) {
 		final String title = map.getResources().getString(R.string.map_widget_show_ruler);
-		final TextInfoWidget rulerControl = new TextInfoWidget(map) {
-			@Override
-			public boolean updateInfo(DrawSettings drawSettings) {
-				if (map.getMyApplication().getSettings().RULER_MODE.get() == RulerMode.FIRST) {
-					Location currentLoc = map.getMyApplication().getLocationProvider().getLastKnownLocation();
-					LatLon centerLoc = map.getMapLocation();
-					if (currentLoc != null && centerLoc != null) {
-						float dist = (float) MapUtils.getDistance(currentLoc.getLatitude(), currentLoc.getLongitude(),
-								centerLoc.getLatitude(), centerLoc.getLongitude());
-						String distance = OsmAndFormatter.getFormattedDistance(dist, map.getMyApplication());
-						int ls = distance.lastIndexOf(' ');
-						setText(distance.substring(0, ls), distance.substring(ls + 1));
-					} else {
-						setText(title, null);
-					}
-				}
-				return true;
-			}
-		};
+        final TextInfoWidget rulerControl = new TextInfoWidget(map) {
+            LatLon cacheFirstFinger;
+            LatLon cacheSecondFinger;
+
+            @Override
+            public boolean updateInfo(DrawSettings drawSettings) {
+                if (map.getMyApplication().getSettings().RULER_MODE.get() == RulerMode.FIRST) {
+                    Location currentLoc = map.getMyApplication().getLocationProvider().getLastKnownLocation();
+                    LatLon centerLoc = map.getMapLocation();
+                    LatLon firstFinger = map.getMapView().getFirstPointerLatLon();
+                    LatLon secondFinger = map.getMapView().getSecondPointerLatLon();
+
+                    if (firstFinger.getLatitude() != -1 && firstFinger.getLongitude() != -1 &&
+                            secondFinger.getLatitude() != -1 && secondFinger.getLongitude() != -1) {
+                        if (cacheFirstFinger != firstFinger || cacheSecondFinger != secondFinger) {
+							cacheFirstFinger = firstFinger;
+							cacheSecondFinger = secondFinger;
+                            setDistanceText(firstFinger.getLatitude(), firstFinger.getLongitude(),
+                                    secondFinger.getLatitude(), secondFinger.getLongitude());
+                        }
+                    } else if (currentLoc != null && centerLoc != null) {
+                        setDistanceText(currentLoc.getLatitude(), currentLoc.getLongitude(),
+                                centerLoc.getLatitude(), centerLoc.getLongitude());
+                    } else {
+                        setText(title, null);
+                    }
+                }
+                return true;
+            }
+
+            private void setDistanceText(double firstLat, double firstLon, double secondLat, double secondLon) {
+                float dist = (float) MapUtils.getDistance(firstLat, firstLon, secondLat, secondLon);
+                String distance = OsmAndFormatter.getFormattedDistance(dist, map.getMyApplication());
+                int ls = distance.lastIndexOf(' ');
+                setText(distance.substring(0, ls), distance.substring(ls + 1));
+            }
+        };
 
 		rulerControl.setText(title, null);
 		rulerControl.setIcons(R.drawable.widget_distance_day, R.drawable.widget_distance_night);
@@ -663,16 +681,16 @@ public class MapInfoWidgetsFactory {
 				RouteDataObject rt = locationProvider.getLastKnownRouteSegment();
 				if (rt != null) {
 					text = RoutingHelper.formatStreetName(
-							rt.getName(settings.MAP_PREFERRED_LOCALE.get(), settings.MAP_TRANSLITERATE_NAMES.get()), 
+							rt.getName(settings.MAP_PREFERRED_LOCALE.get(), settings.MAP_TRANSLITERATE_NAMES.get()),
 							rt.getRef(settings.MAP_PREFERRED_LOCALE.get(), settings.MAP_TRANSLITERATE_NAMES.get(), rt.bearingVsRouteDirection(locationProvider.getLastKnownLocation())),
-							rt.getDestinationName(settings.MAP_PREFERRED_LOCALE.get(), settings.MAP_TRANSLITERATE_NAMES.get(), rt.bearingVsRouteDirection(locationProvider.getLastKnownLocation())), 
+							rt.getDestinationName(settings.MAP_PREFERRED_LOCALE.get(), settings.MAP_TRANSLITERATE_NAMES.get(), rt.bearingVsRouteDirection(locationProvider.getLastKnownLocation())),
 									"»");
-				} 
+				}
 				if (text == null) {
 					text = "";
 				} else {
 					if(!Algorithms.isEmpty(text) && locationProvider.getLastKnownLocation() != null) {
-						double dist = 
+						double dist =
 								CurrentPositionHelper.getOrthogonalDistance(rt, locationProvider.getLastKnownLocation());
 						if(dist < 50) {
 							showMarker = true;

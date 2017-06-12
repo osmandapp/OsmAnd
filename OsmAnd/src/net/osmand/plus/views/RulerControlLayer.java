@@ -7,6 +7,7 @@ import android.graphics.Color;
 import android.graphics.DashPathEffect;
 import android.graphics.Paint;
 import android.graphics.Paint.Style;
+import android.graphics.PointF;
 import android.graphics.Rect;
 
 import net.osmand.Location;
@@ -86,10 +87,16 @@ public class RulerControlLayer extends OsmandMapLayer {
             final RulerMode mode = app.getSettings().RULER_MODE.get();
 
             if (mode == RulerMode.FIRST) {
-                drawCenterIcon(canvas, tb, center);
-                Location currentLoc = app.getLocationProvider().getLastKnownLocation();
-                if (currentLoc != null) {
-                    drawDistance(canvas, tb, center, currentLoc);
+                PointF firstFinger = view.getFirstPointer();
+                PointF secondFinger = view.getSecondPointer();
+                if (firstFinger.x != -1 && firstFinger.y != -1 && secondFinger.x != -1 && secondFinger.y != -1) {
+                    drawFingerDistance(canvas, tb, center, firstFinger, secondFinger);
+                } else {
+                    drawCenterIcon(canvas, tb, center);
+                    Location currentLoc = app.getLocationProvider().getLastKnownLocation();
+                    if (currentLoc != null) {
+                        drawDistance(canvas, tb, center, currentLoc);
+                    }
                 }
             } else if (mode == RulerMode.SECOND) {
                 drawCenterIcon(canvas, tb, center);
@@ -99,6 +106,12 @@ public class RulerControlLayer extends OsmandMapLayer {
                 }
             }
         }
+    }
+
+    private void drawFingerDistance(Canvas canvas, RotatedTileBox tb, QuadPoint center, PointF first, PointF second) {
+        canvas.rotate(-tb.getRotate(), center.x, center.y);
+        canvas.drawLine(first.x, first.y, second.x, second.y, distancePaint);
+        canvas.rotate(tb.getRotate(), center.x, center.y);
     }
 
     private void drawCenterIcon(Canvas canvas, RotatedTileBox tb, QuadPoint center) {

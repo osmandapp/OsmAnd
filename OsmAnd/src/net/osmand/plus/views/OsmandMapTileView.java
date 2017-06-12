@@ -161,6 +161,11 @@ public class OsmandMapTileView implements IMapDownloaderCallback {
 	private boolean afterDoubleTap = false;
 	private boolean wasMapLinkedBeforeGesture = false;
 
+	private PointF firstPointer;
+	private PointF secondPointer;
+	private LatLon firstPointerLatLon;
+	private LatLon secondPointerLatLon;
+
 	public OsmandMapTileView(MapActivity activity, int w, int h) {
 		this.activity = activity;
 		init(activity, w, h);
@@ -170,6 +175,11 @@ public class OsmandMapTileView implements IMapDownloaderCallback {
 	public void init(final MapActivity ctx, int w, int h) {
 		application = (OsmandApplication) ctx.getApplicationContext();
 		settings = application.getSettings();
+
+		firstPointer = new PointF(-1, -1);
+		secondPointer = new PointF(-1, -1);
+		firstPointerLatLon = new LatLon(-1, -1);
+		secondPointerLatLon = new LatLon(-1, -1);
 
 		paintGrayFill = new Paint();
 		paintGrayFill.setColor(Color.GRAY);
@@ -305,6 +315,22 @@ public class OsmandMapTileView implements IMapDownloaderCallback {
 	}
 
 	// ///////////////////////// NON UI PART (could be extracted in common) /////////////////////////////
+	public PointF getFirstPointer() {
+		return firstPointer;
+	}
+
+	public PointF getSecondPointer() {
+		return secondPointer;
+	}
+
+	public LatLon getFirstPointerLatLon() {
+		return firstPointerLatLon;
+	}
+
+	public LatLon getSecondPointerLatLon() {
+		return secondPointerLatLon;
+	}
+
 	public void setIntZoom(int zoom) {
 		zoom = zoom > getMaxZoom() ? getMaxZoom() : zoom;
 		zoom = zoom < getMinZoom() ? getMinZoom() : zoom;
@@ -1007,6 +1033,22 @@ public class OsmandMapTileView implements IMapDownloaderCallback {
 			this.y1 = y1;
 			this.x2 = x2;
 			this.y2 = y2;
+			firstPointerLatLon = currentViewport.getLatLonFromPixel(x1, y1);
+			secondPointerLatLon = currentViewport.getLatLonFromPixel(x2, y2);
+		}
+
+		@Override
+		public void onActionPointerDownOrMove(PointF first, PointF second) {
+			firstPointer.set(first);
+			secondPointer.set(second);
+		}
+
+		@Override
+		public void onActionPointerUp() {
+			firstPointer.set(-1, -1);
+			secondPointer.set(-1, -1);
+			firstPointerLatLon = new LatLon(-1, -1);
+			secondPointerLatLon = new LatLon(-1, -1);
 		}
 
 		@Override
