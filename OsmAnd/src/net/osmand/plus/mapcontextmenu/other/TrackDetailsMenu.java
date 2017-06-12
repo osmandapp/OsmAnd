@@ -290,7 +290,7 @@ public class TrackDetailsMenu {
 			if (wpt != null) {
 				location = new LatLon(wpt.lat, wpt.lon);
 				List<Pair<String, WptPt>> xAxisPoints = getXAxisPoints(chart);
-				TrackChartPoints trackChartPoints = new TrackChartPoints(xAxisPoints, location, getGpxItem().group.getGpx());
+				TrackChartPoints trackChartPoints = new TrackChartPoints(xAxisPoints, location, getTrackSegment(chart), getGpxItem().group.getGpx().path);
 				if (gpxItem.route) {
 					mapActivity.getMapLayers().getMapInfoLayer().setTrackChartPoints(trackChartPoints);
 				} else {
@@ -579,12 +579,14 @@ public class TrackDetailsMenu {
 	public class TrackChartPoints {
 		private List<Pair<String, WptPt>> xAxisPoints;
 		private LatLon highlightedPoint;
-		private GPXFile gpx;
+		private TrkSegment chartSegment;
+		private String gpxPath;
 
-		public TrackChartPoints(List<Pair<String, WptPt>> xAxisPoints, LatLon highlightedPoint, GPXFile gpx) {
+		public TrackChartPoints(List<Pair<String, WptPt>> xAxisPoints, LatLon highlightedPoint, TrkSegment chartSegment, String gpxPath) {
 			this.xAxisPoints = xAxisPoints;
 			this.highlightedPoint = highlightedPoint;
-			this.gpx = gpx;
+			this.chartSegment = chartSegment;
+			this.gpxPath = gpxPath;
 		}
 
 		public List<Pair<String, WptPt>> getXAxisPoints() {
@@ -595,8 +597,12 @@ public class TrackDetailsMenu {
 			return highlightedPoint;
 		}
 
-		public GPXFile getGpx() {
-			return gpx;
+		public TrkSegment getChartSegment() {
+			return chartSegment;
+		}
+
+		public String getGpxPath() {
+			return gpxPath;
 		}
 	}
 }

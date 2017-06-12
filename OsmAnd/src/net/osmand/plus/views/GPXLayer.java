@@ -379,8 +379,6 @@ public class GPXLayer extends OsmandMapLayer implements ContextMenuLayer.IContex
 					paintIcon.setColorFilter(null);
 					canvas.drawBitmap(selectedPoint, x - selectedPoint.getWidth() / 2, y - selectedPoint.getHeight() / 2, paintIcon);
 				}
-			} else if (paintInnerRect.getColor() != 0){
-				paintInnerRect.setColor(0);
 			}
 			this.fullObjectsLatLon = fullObjectsLatLon;
 			this.smallObjectsLatLon = smallObjectsLatLon;
@@ -388,21 +386,19 @@ public class GPXLayer extends OsmandMapLayer implements ContextMenuLayer.IContex
 	}
 
 	private void drawXAxisPoints(Canvas canvas, RotatedTileBox tileBox) {
-		if (paintInnerRect.getColor() == 0) {
-			SelectedGpxFile selectedGpxFile = selectedGpxHelper.getSelectedFileByPath((trackChartPoints.getGpx().path));
-			GpxDataItem gpxDataItem = null;
-			if (!selectedGpxFile.isShowCurrentTrack()) {
-				gpxDataItem = view.getApplication().getGpxDatabase().getItem(new File(selectedGpxFile.getGpxFile().path));
-			}
-			int color = gpxDataItem != null ? gpxDataItem.getColor() : 0;
-			if (selectedGpxFile.isShowCurrentTrack()) {
-				color = currentTrackColor;
-			}
-			if (color == 0) {
-				color = cachedColor;
-			}
-			paintInnerRect.setColor(color);
+		SelectedGpxFile selectedGpxFile = selectedGpxHelper.getSelectedFileByPath((trackChartPoints.getGpxPath()));
+		GpxDataItem gpxDataItem = null;
+		if (!selectedGpxFile.isShowCurrentTrack()) {
+			gpxDataItem = view.getApplication().getGpxDatabase().getItem(new File(selectedGpxFile.getGpxFile().path));
 		}
+		int color = gpxDataItem != null ? gpxDataItem.getColor() : 0;
+		if (selectedGpxFile.isShowCurrentTrack()) {
+			color = currentTrackColor;
+		}
+		if (color == 0) {
+			color = trackChartPoints.getChartSegment().getColor(cachedColor);
+		}
+		paintInnerRect.setColor(color);
 		QuadRect latLonBounds = tileBox.getLatLonBounds();
 		List<Pair<String, WptPt>> xAxisPoints = trackChartPoints.getXAxisPoints();
 		float r = 12 * tileBox.getDensity();
