@@ -384,7 +384,7 @@
 	<string name="shared_string_yes">是</string>
 	<string name="shared_string_cancel">取消</string>
 	<string name="shared_string_apply">应用</string>
-	<string name="shared_string_add">加</string>
+	<string name="shared_string_add">添加</string>
 	<string name="shared_string_no">否</string>
 	<string name="shared_string_delete">删除</string>
 	
@@ -1654,8 +1654,8 @@
     <string name="city_type_district">区</string>
     <string name="city_type_neighbourhood">邻近</string>
     <string name="map_widget_search">搜索</string>
-    <string name="shared_string_is_open_24_7">开放的 24/7</string>
-    <string name="storage_directory_card">存儲卡</string>
+    <string name="shared_string_is_open_24_7">24小时开放</string>
+    <string name="storage_directory_card">存储卡</string>
     <string name="coords_format">坐标格式</string>
     <string name="coords_format_descr">地理坐标格式</string>
     <string name="app_mode_bus">公交车</string>
@@ -1824,7 +1824,7 @@
     <string name="welcome_select_region">要正确地反映您的交通标志和法规，请选择您驾驶的地区：</string>
     <string name="welcome_text">OsmAnd 提供了全球的离线地图浏览和全球的离线导航 ！</string>
     <string name="osm_changes_added_to_local_edits">OSM 更改添加到本地的变更集</string>
-    <string name="osmo_grop_name_length_alert">组名称应该至少 3 个字符 ！</string>
+    <string name="osmo_grop_name_length_alert">组名称至少应有 3 个字符 ！</string>
     <string name="local_recordings_delete_all_confirm">要删除 %1$d 个注解。是否确定？</string>
     <string name="local_osm_changes_upload_all_confirm">你将要上传 %1$d 个更改到 OSM。是否确定？</string>
     <string name="delay_to_start_navigation_descr">指定等待时间以便继续留在航路规划屏幕</string>
@@ -2390,7 +2390,7 @@
     <string name="download_type_to_filter">要筛选类型</string>
     <string name="use_high_res_maps">高分辨率显示</string>
     <string name="use_high_res_maps_descr">在高清晰度的屏幕上不要拉伸（模糊）地图图砖</string>
-    <string name="transport_searching_transport">交通运输结果（未设目的地）︰</string>
+    <string name="transport_searching_transport">交通运输结果（未设目的地）：</string>
     <string name="transport_searching_route">交通运输结果（有 {0} 条路线可到目的地）︰</string>
     <string name="voices">语音提示</string>
     <string name="transport_context_menu">搜索公交站</string>
