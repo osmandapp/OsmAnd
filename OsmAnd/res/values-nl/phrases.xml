@@ -679,7 +679,7 @@
 	<string name="poi_military_barracks">Kazerne</string>
 	<string name="poi_military_danger_area">Gevaarlijke gebied</string>
 	<string name="poi_military_range">Militaire schietbaan</string>
-	<string name="poi_shop_food">Algemene voeding</string>
+	<string name="poi_shop_food">Levensmiddelen en supermarkt</string>
 	<string name="poi_road_obstacle">Weg obstakels</string>
 		<string name="poi_filling_station">Tankstation</string>
 		<string name="poi_public_transport">Openbaar vervoer</string>
@@ -1577,4 +1577,12 @@
 	<string name="poi_compressed_air_filter">Perslucht</string>
 	<string name="poi_vacuum_cleaner_filter">Stofzuiger</string>
 	<string name="poi_free_flying_characteristic">Karakteristiek</string>
+	<string name="poi_cafeteria">Cafetaria</string>
+	<string name="poi_zoo_type">Type</string>
+	<string name="poi_motorcycle_services">Service</string>
+	<string name="poi_motorcycle_type">Soort motorfiets</string>
+
+<string name="poi_emergency_infrastructure">Noodvoorzieningen</string>
+	<string name="poi_spices">Kruidenwinkel</string>
+	<string name="poi_shop_craft">Kunstenaarsbenodigdheden</string>
 	</resources>
