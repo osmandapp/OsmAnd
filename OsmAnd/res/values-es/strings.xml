@@ -2719,8 +2719,8 @@ Algunas de las características principales:
     <string name="type_city_town">Escribe la ciudad o pueblo</string>
     <string name="type_postcode">Escribe el código postal</string>
     <string name="nearest_cities">Ciudades más cercanas</string>
-    <string name="select_city">Selecciona la ciudad</string>
-    <string name="select_postcode">Selecciona el código postal</string>
+    <string name="select_city">Seleccionar ciudad</string>
+    <string name="select_postcode">Seleccionar código postal</string>
     <string name="shared_string_paused">Pausado</string>
     <string name="favorite_group_name">Nombre del grupo</string>
     <string name="change_color">Cambiar color</string>
@@ -2809,16 +2809,19 @@ Algunas de las características principales:
     <string name="mapillary_descr">Fotos a pie de calle para todos. Descubre lugares, colabora, captura el mundo.</string>
     <string name="mapillary">Mapillary</string>
     <string name="shared_string_add_photos">Añadir fotos</string>
-    <string name="mapillary_action_descr">Contribuye con Mapillary con tus propias vistas a pie de calle de esta ubicación.</string>
+    <string name="mapillary_action_descr">Contribuye con tus propias vistas a pie de calle de esta ubicación a través de Mapillary.</string>
     <string name="mapillary_widget_descr">Te permite la rápida contribución a Mapillary</string>
     <string name="plugin_mapillary_descr">Fotos a nivel de calle para todos. Descubre lugares, colabora, captura el mundo.</string>
     <string name="no_photos_descr">No tenemos fotos para esta ubicación</string>
     <string name="open_mapillary">Abrir Mapillary</string>
     <string name="shared_string_install">Instalar</string>
-    <string name="improve_coverage_mapillary">Mejorar la cobertura con Mapillary</string>
-    <string name="improve_coverage_install_mapillary_desc">Puedes hacer tus propias fotos o serie de fotos y añadirlas a esta ubicación del mapa.
-\n
-\nPara ello debes instalar la aplicación Mapillary desde Google Play.</string>
+    <string name="improve_coverage_mapillary">Mejorar la cobertura de fotos con Mapillary</string>
+    <string name="improve_coverage_install_mapillary_desc">Puedes hacer tus propias fotos o serie de fotos y añadirlas a esta ubicación del mapa. 
+\n 
+\nPara ello debes instalar la aplicación de Mapillary desde Google Play.</string>
     <string name="online_photos">Fotos en línea</string>
     <string name="mapillary_image">Imagen de Mapillary</string>
+    <string name="shared_string_permissions">Permisos</string>
+    <string name="import_gpx_failed_descr">OsmAnd no puede importar el archivo. Compruebe si OsmAnd tiene permiso para leer el archivo en esa ubicación.</string>
+    <string name="distance_moving">Distancia corregida</string>
     </resources>
