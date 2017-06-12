@@ -1537,4 +1537,8 @@
 	<string name="poi_denomination">Stroming</string>
 	<string name="poi_information_type">Type</string>
 	<string name="poi_information_contents">Inhoud</string>
+	<string name="poi_clock_option">Extra</string>
+	<string name="poi_scout_camp">Padvinderskamp</string>
+	<string name="poi_backcountry">Afgelegen plaats</string>
+	<string name="poi_resort_type">Type</string>
 	</resources>
