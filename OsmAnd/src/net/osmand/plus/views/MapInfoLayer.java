@@ -10,13 +10,13 @@ import android.view.View.OnClickListener;
 import android.widget.ImageButton;
 import android.widget.LinearLayout;
 
-import net.osmand.data.LatLon;
 import net.osmand.data.RotatedTileBox;
 import net.osmand.plus.OsmandApplication;
 import net.osmand.plus.OsmandSettings;
 import net.osmand.plus.R;
 import net.osmand.plus.activities.MapActivity;
 import net.osmand.plus.helpers.AndroidUiHelper;
+import net.osmand.plus.mapcontextmenu.other.TrackDetailsMenu.TrackChartPoints;
 import net.osmand.plus.views.mapwidgets.MapInfoWidgetsFactory;
 import net.osmand.plus.views.mapwidgets.MapInfoWidgetsFactory.TopTextView;
 import net.osmand.plus.views.mapwidgets.MapInfoWidgetsFactory.TopToolbarController;
@@ -57,7 +57,7 @@ public class MapInfoLayer extends OsmandMapLayer {
 	private TopTextView streetNameView;
 	private TopToolbarView topToolbarView;
 
-	private LatLon selectedPointLatLon;
+	private TrackChartPoints trackChartPoints;
 
 	public MapInfoLayer(MapActivity map, RouteLayer layer){
 		this.map = map;
@@ -221,13 +221,9 @@ public class MapInfoLayer extends OsmandMapLayer {
 		});
 	}
 
-	public LatLon getSelectedPointLatLon() {
-		return selectedPointLatLon;
-	}
-
-	public void setSelectedPointLatLon(LatLon selectedPointLatLon) {
-		this.selectedPointLatLon = selectedPointLatLon;
-		routeLayer.setSelectedPointLatLon(selectedPointLatLon);
+	public void setTrackChartPoints(TrackChartPoints trackChartPoints) {
+		this.trackChartPoints = trackChartPoints;
+		routeLayer.setTrackChartPoints(trackChartPoints);
 	}
 
 	private static class TextState {
