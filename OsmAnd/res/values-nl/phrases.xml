@@ -1544,5 +1544,8 @@
 	<string name="poi_piste_difficulty">Moeilijkheidsgraad piste</string>
 	<string name="poi_piste_grooming">Beheer piste</string>
 	<string name="poi_theatre_genre">Genre</string>
-	<string name="poi_outdoor_seating">Openlucht zitplaatsen</string>
+	<string name="poi_outdoor_seating">Openlucht-zitplaatsen</string>
+	<string name="poi_fee">Betaald</string>
+	<string name="poi_smoking">Roken</string>
+	<string name="poi_delivery">Bezorgen</string>
 	</resources>
