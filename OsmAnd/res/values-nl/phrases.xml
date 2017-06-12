@@ -1568,4 +1568,6 @@
 	<string name="poi_tents">Tenten</string>
 	<string name="poi_washing_machine">Wasmachine</string>
 	<string name="poi_caravans">Caravans</string>
+	<string name="poi_power_supply">Stroomvoorziening</string>
+	<string name="poi_medical_system"></string>
 	</resources>
