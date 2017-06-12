@@ -1560,4 +1560,8 @@
 	<string name="poi_fireplace">Open haard</string>
 	<string name="poi_seasonal">Seizoensgebonden</string>
 	<string name="poi_water_characteristic">Soort water</string>
+	<string name="poi_beach_surface_type">Oppervlak</string>
+	<string name="poi_nudism">Nudisme</string>
+	<string name="poi_diet">Dieet</string>
+	<string name="poi_health_specialty">Specialiteit gezondheid</string>
 	</resources>
