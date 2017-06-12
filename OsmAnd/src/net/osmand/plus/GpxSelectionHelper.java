@@ -347,19 +347,6 @@ public class GpxSelectionHelper {
 		return null;
 	}
 
-	public SelectedGpxFile getSelectedFileFromDisplayItemByName(String name) {
-		SelectedGpxFile selectedGpxFile = null;
-		name = name.replaceAll(" ", "_").concat(".gpx");
-		for (SelectedGpxFile s : selectedGPXFiles) {
-			String nameOfSelectedGpx = s.getGpxFile().path.replaceAll(" ", "_");
-			nameOfSelectedGpx = nameOfSelectedGpx.substring(nameOfSelectedGpx.lastIndexOf("/") + 1, nameOfSelectedGpx.length());
-			if (nameOfSelectedGpx.equals(name)) {
-				selectedGpxFile = s;
-			}
-		}
-		return selectedGpxFile;
-	}
-
 	public SelectedGpxFile getSelectedCurrentRecordingTrack() {
 		for (SelectedGpxFile s : selectedGPXFiles) {
 			if (s.isShowCurrentTrack()) {

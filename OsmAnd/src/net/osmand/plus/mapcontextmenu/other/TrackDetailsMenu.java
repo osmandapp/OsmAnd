@@ -2,6 +2,7 @@ package net.osmand.plus.mapcontextmenu.other;
 
 import android.graphics.Matrix;
 import android.support.v4.app.Fragment;
+import android.support.v4.util.Pair;
 import android.support.v7.widget.PopupMenu;
 import android.view.MenuItem;
 import android.view.MotionEvent;
@@ -12,7 +13,6 @@ import android.widget.TextView;
 import com.github.mikephil.charting.charts.LineChart;
 import com.github.mikephil.charting.data.Entry;
 import com.github.mikephil.charting.data.LineData;
-import com.github.mikephil.charting.formatter.IAxisValueFormatter;
 import com.github.mikephil.charting.highlight.Highlight;
 import com.github.mikephil.charting.interfaces.datasets.ILineDataSet;
 import com.github.mikephil.charting.listener.ChartTouchListener.ChartGesture;
@@ -26,6 +26,7 @@ import net.osmand.plus.GPXUtilities;
 import net.osmand.plus.GPXUtilities.GPXTrackAnalysis;
 import net.osmand.plus.GPXUtilities.TrkSegment;
 import net.osmand.plus.GPXUtilities.WptPt;
+import net.osmand.plus.GPXUtilities.GPXFile;
 import net.osmand.plus.GpxSelectionHelper.GpxDisplayItem;
 import net.osmand.plus.IconsCache;
 import net.osmand.plus.OsmandApplication;
@@ -44,9 +45,7 @@ import java.lang.ref.WeakReference;
 import java.util.ArrayList;
 import java.util.Collections;
 import java.util.Comparator;
-import java.util.HashMap;
 import java.util.List;
-import java.util.Map;
 
 public class TrackDetailsMenu {
 
@@ -143,8 +142,8 @@ public class TrackDetailsMenu {
 			mapActivity.hideTopToolbar(toolbarController);
 		}
 		mapActivity.getMapLayers().getContextMenuLayer().exitGpxDetailsMode();
-		mapActivity.getMapLayers().getGpxLayer().setAxisValueDetails(null);
-		mapActivity.getMapLayers().getMapInfoLayer().setSelectedPointLatLon(null);
+		mapActivity.getMapLayers().getGpxLayer().setTrackChartPoints(null);
+		mapActivity.getMapLayers().getMapInfoLayer().setTrackChartPoints(null);
 		mapActivity.getMapView().setMapPositionX(0);
 		mapActivity.getMapView().refreshMap();
 		segment = null;
@@ -290,13 +289,12 @@ public class TrackDetailsMenu {
 			WptPt wpt = getPoint(chart, gpxItem.chartHighlightPos);
 			if (wpt != null) {
 				location = new LatLon(wpt.lat, wpt.lon);
-				List<String> formattedAxisEntries = getFormattedAxisEntries(chart);
-				List<WptPt> axisGridPoints = getAxisGridPoints(chart);
-				AxisValueDetails axisValueDetails = new AxisValueDetails(axisGridPoints, formattedAxisEntries, location, getGpxItem());
+				List<Pair<String, WptPt>> xAxisPoints = getXAxisPoints(chart);
+				TrackChartPoints trackChartPoints = new TrackChartPoints(xAxisPoints, location, getGpxItem().group.getGpx());
 				if (gpxItem.route) {
-					mapActivity.getMapLayers().getMapInfoLayer().setSelectedPointLatLon(location);
+					mapActivity.getMapLayers().getMapInfoLayer().setTrackChartPoints(trackChartPoints);
 				} else {
-					mapActivity.getMapLayers().getGpxLayer().setAxisValueDetails(axisValueDetails);
+					mapActivity.getMapLayers().getGpxLayer().setTrackChartPoints(trackChartPoints);
 				}
 			}
 		} else {
@@ -305,29 +303,15 @@ public class TrackDetailsMenu {
 		fitTrackOnMap(chart, location, forceFit);
 	}
 
-	private List<WptPt> getAxisGridPoints (LineChart chart) {
-        List<WptPt> axisGridPoints = new ArrayList<>();
-        float[] entries = chart.getXAxis().mEntries;
-        for (int i = 0; i < entries.length; i++) {
-            WptPt pointToAdd = getPoint(chart, entries[i]);
-			axisGridPoints.add(pointToAdd);
-        }
-        return axisGridPoints;
-    }
-
-    private List<String> getFormattedAxisEntries (LineChart chart) {
+	private List<Pair<String, WptPt>> getXAxisPoints(LineChart chart) {
+		List<Pair<String, WptPt>> xAxisPoints = new ArrayList<>();
 		float[] entries = chart.getXAxis().mEntries;
-		List<String> formattedAxisEntries = new ArrayList<>();
-			for (int i = 0; i < entries.length; i++) {
-				String formattedAxisEntry = "";
-				if (gpxItem.chartAxisType == GPXDataSetAxisType.DISTANCE) {
-					formattedAxisEntry = String.format("%.1f", entries[i]);
-				} else if (gpxItem.chartAxisType == GPXDataSetAxisType.TIME) {
-					formattedAxisEntry = chart.getXAxis().getValueFormatter().getFormattedValue(entries[i], chart.getXAxis());
-				}
-				formattedAxisEntries.add(formattedAxisEntry);
-			}
-		return formattedAxisEntries;
+		for (int i = 0; i < entries.length; i++) {
+			String formattedEntry = chart.getXAxis().getValueFormatter().getFormattedValue(entries[i], chart.getXAxis());
+			WptPt pointToAdd = getPoint(chart, entries[i]);
+			xAxisPoints.add(new Pair<>(formattedEntry, pointToAdd));
+		}
+		return xAxisPoints;
 	}
 
 	private void updateView(final View parentView) {
@@ -592,33 +576,27 @@ public class TrackDetailsMenu {
 		}
 	}
 
-	public class AxisValueDetails {
-		private List<WptPt> axisGridPoints;
-		private List<String> formattedAxisGridEntries;
-		private LatLon selectedPointLatLon;
-		private GpxDisplayItem gpxDisplayItem;
+	public class TrackChartPoints {
+		private List<Pair<String, WptPt>> xAxisPoints;
+		private LatLon highlightedPoint;
+		private GPXFile gpx;
 
-		public AxisValueDetails(List<WptPt> axisGridPoints, List<String> formattedAxisGridEntries, LatLon selectedPointLatLon, GpxDisplayItem gpxDisplayItem) {
-			this.axisGridPoints = axisGridPoints;
-			this.formattedAxisGridEntries = formattedAxisGridEntries;
-			this.selectedPointLatLon = selectedPointLatLon;
-			this.gpxDisplayItem = gpxDisplayItem;
+		public TrackChartPoints(List<Pair<String, WptPt>> xAxisPoints, LatLon highlightedPoint, GPXFile gpx) {
+			this.xAxisPoints = xAxisPoints;
+			this.highlightedPoint = highlightedPoint;
+			this.gpx = gpx;
 		}
 
-		public List<WptPt> getAxisGridPoints() {
-			return axisGridPoints;
+		public List<Pair<String, WptPt>> getXAxisPoints() {
+			return xAxisPoints;
 		}
 
-		public List<String> getFormattedAxisGridEntries() {
-			return formattedAxisGridEntries;
+		public LatLon getHighlightedPoint() {
+			return highlightedPoint;
 		}
 
-		public LatLon getSelectedPointLatLon() {
-			return selectedPointLatLon;
-		}
-
-		public GpxDisplayItem getGpxDisplayItem() {
-			return gpxDisplayItem;
+		public GPXFile getGpx() {
+			return gpx;
 		}
 	}
 }

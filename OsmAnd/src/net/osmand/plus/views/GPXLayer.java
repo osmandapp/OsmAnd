@@ -17,6 +17,7 @@ import android.support.annotation.ColorInt;
 import android.support.annotation.NonNull;
 import android.support.annotation.Nullable;
 import android.support.v4.content.ContextCompat;
+import android.support.v4.util.Pair;
 
 import net.osmand.data.LatLon;
 import net.osmand.data.PointDescription;
@@ -36,7 +37,7 @@ import net.osmand.plus.OsmandApplication;
 import net.osmand.plus.OsmandSettings.CommonPreference;
 import net.osmand.plus.R;
 import net.osmand.plus.base.FavoriteImageDrawable;
-import net.osmand.plus.mapcontextmenu.other.TrackDetailsMenu.AxisValueDetails;
+import net.osmand.plus.mapcontextmenu.other.TrackDetailsMenu.TrackChartPoints;
 import net.osmand.plus.render.OsmandRenderer;
 import net.osmand.plus.render.OsmandRenderer.RenderingContext;
 import net.osmand.plus.views.MapTextLayer.MapTextProvider;
@@ -70,7 +71,7 @@ public class GPXLayer extends OsmandMapLayer implements ContextMenuLayer.IContex
 	private int currentTrackColor;
 
 	private Bitmap selectedPoint;
-	private AxisValueDetails axisValueDetails;
+	private TrackChartPoints trackChartPoints;
 
 	private static final int startZoom = 7;
 
@@ -110,8 +111,8 @@ public class GPXLayer extends OsmandMapLayer implements ContextMenuLayer.IContex
 		initUI();
 	}
 
-	public void setAxisValueDetails(AxisValueDetails axisValueDetails) {
-		this.axisValueDetails = axisValueDetails;
+	public void setTrackChartPoints(TrackChartPoints trackChartPoints) {
+		this.trackChartPoints = trackChartPoints;
 	}
 
 	private void initUI() {
@@ -366,15 +367,15 @@ public class GPXLayer extends OsmandMapLayer implements ContextMenuLayer.IContex
 					drawBigPoint(canvas, o, fileColor, x, y);
 				}
 			}
-			if (axisValueDetails != null) {
-				drawAxisGridPoints(canvas, tileBox);
-				LatLon selectedPointLatLon = axisValueDetails.getSelectedPointLatLon();
-				if (selectedPointLatLon.getLatitude() >= latLonBounds.bottom
-						&& selectedPointLatLon.getLatitude() <= latLonBounds.top
-						&& selectedPointLatLon.getLongitude() >= latLonBounds.left
-						&& selectedPointLatLon.getLongitude() <= latLonBounds.right) {
-					float x = tileBox.getPixXFromLatLon(selectedPointLatLon.getLatitude(), selectedPointLatLon.getLongitude());
-					float y = tileBox.getPixYFromLatLon(selectedPointLatLon.getLatitude(), selectedPointLatLon.getLongitude());
+			if (trackChartPoints != null) {
+				drawXAxisPoints(canvas, tileBox);
+				LatLon highlightedPoint = trackChartPoints.getHighlightedPoint();
+				if (highlightedPoint.getLatitude() >= latLonBounds.bottom
+						&& highlightedPoint.getLatitude() <= latLonBounds.top
+						&& highlightedPoint.getLongitude() >= latLonBounds.left
+						&& highlightedPoint.getLongitude() <= latLonBounds.right) {
+					float x = tileBox.getPixXFromLatLon(highlightedPoint.getLatitude(), highlightedPoint.getLongitude());
+					float y = tileBox.getPixYFromLatLon(highlightedPoint.getLatitude(), highlightedPoint.getLongitude());
 					paintIcon.setColorFilter(null);
 					canvas.drawBitmap(selectedPoint, x - selectedPoint.getWidth() / 2, y - selectedPoint.getHeight() / 2, paintIcon);
 				}
@@ -386,28 +387,44 @@ public class GPXLayer extends OsmandMapLayer implements ContextMenuLayer.IContex
 		}
 	}
 
-	private void drawAxisGridPoints(Canvas canvas, RotatedTileBox tileBox) {
+	private void drawXAxisPoints(Canvas canvas, RotatedTileBox tileBox) {
 		if (paintInnerRect.getColor() == 0) {
-			SelectedGpxFile selectedGpxFile = selectedGpxHelper.getSelectedFileFromDisplayItemByName((axisValueDetails.getGpxDisplayItem().group.getGpxName()));
-			GpxDataItem gpxDataItem = view.getApplication().getGpxDatabase().getItem(new File(selectedGpxFile.getGpxFile().path));
-			paintInnerRect.setColor(gpxDataItem.getColor());
+			SelectedGpxFile selectedGpxFile = selectedGpxHelper.getSelectedFileByPath((trackChartPoints.getGpx().path));
+			GpxDataItem gpxDataItem = null;
+			if (!selectedGpxFile.isShowCurrentTrack()) {
+				gpxDataItem = view.getApplication().getGpxDatabase().getItem(new File(selectedGpxFile.getGpxFile().path));
+			}
+			int color = gpxDataItem != null ? gpxDataItem.getColor() : 0;
+			if (selectedGpxFile.isShowCurrentTrack()) {
+				color = currentTrackColor;
+			}
+			if (color == 0) {
+				color = cachedColor;
+			}
+			paintInnerRect.setColor(color);
 		}
-		List<WptPt> axisGridPoints = axisValueDetails.getAxisGridPoints();
-		List<String> formattedAxisGridEntries = axisValueDetails.getFormattedAxisGridEntries();
+		QuadRect latLonBounds = tileBox.getLatLonBounds();
+		List<Pair<String, WptPt>> xAxisPoints = trackChartPoints.getXAxisPoints();
 		float r = 12 * tileBox.getDensity();
 		paintGridTextIcon.setTextSize(r);
-		for (int i = 0; i < axisGridPoints.size(); i++) {
-			String textOnPoint = formattedAxisGridEntries.get(i);
-			float textWidth = paintGridTextIcon.measureText(textOnPoint);
-			float x = tileBox.getPixXFromLatLon(axisGridPoints.get(i).getLatitude(), axisGridPoints.get(i).getLongitude());
-			float y = tileBox.getPixYFromLatLon(axisGridPoints.get(i).getLatitude(), axisGridPoints.get(i).getLongitude());
-			canvas.drawRect(
-					x - textWidth / 2 - 2 * (float) Math.ceil(tileBox.getDensity()),
-					y - r / 2 - 2 * (float) Math.ceil(tileBox.getDensity()),
-					x + textWidth / 2 + 2 * (float) Math.ceil(tileBox.getDensity()),
-					y + r / 2 + 3 * (float) Math.ceil(tileBox.getDensity()),
-					paintInnerRect);
-			canvas.drawText(textOnPoint, x, y + r / 2, paintGridTextIcon);
+		for (int i = 0; i < xAxisPoints.size(); i++) {
+			WptPt axisPoint = xAxisPoints.get(i).second;
+			if (axisPoint.getLatitude() >= latLonBounds.bottom
+					&& axisPoint.getLatitude() <= latLonBounds.top
+					&& axisPoint.getLongitude() >= latLonBounds.left
+					&& axisPoint.getLongitude() <= latLonBounds.right) {
+				String textOnPoint = xAxisPoints.get(i).first;
+				float textWidth = paintGridTextIcon.measureText(textOnPoint);
+				float x = tileBox.getPixXFromLatLon(axisPoint.getLatitude(), axisPoint.getLongitude());
+				float y = tileBox.getPixYFromLatLon(axisPoint.getLatitude(), axisPoint.getLongitude());
+				canvas.drawRect(
+						x - textWidth / 2 - 2 * (float) Math.ceil(tileBox.getDensity()),
+						y - r / 2 - 2 * (float) Math.ceil(tileBox.getDensity()),
+						x + textWidth / 2 + 2 * (float) Math.ceil(tileBox.getDensity()),
+						y + r / 2 + 3 * (float) Math.ceil(tileBox.getDensity()),
+						paintInnerRect);
+				canvas.drawText(textOnPoint, x, y + r / 2, paintGridTextIcon);
+			}
 		}
 	}
 
