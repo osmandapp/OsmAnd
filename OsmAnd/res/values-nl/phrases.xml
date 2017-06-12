@@ -814,7 +814,7 @@
 
 	<string name="poi_cooling_tower">Koeltoren</string>
 	<string name="poi_lighting_tower">Lichtmast</string>
-	<string name="poi_recycling_centre">Type: milieustation</string>
+	<string name="poi_recycling_centre">Milieustraat</string>
 	<string name="poi_recycling_container">Afvalcontainer</string>
 	<string name="poi_recycling_glass">Glas</string>
 	<string name="poi_recycling_paper">Papier</string>
@@ -1588,5 +1588,7 @@
 	<string name="poi_honey">Honingwinkel</string>
 	<string name="poi_religion">Religieuze objecten</string>
 
-	<string name="poi_aeroway_fuel">Vliegtuig tankstation</string>
+	<string name="poi_aeroway_fuel">Vliegtuig-tankstation</string>
+	<string name="poi_waterway_fuel">Tankstation voor scheepvaart</string>
+	<string name="poi_ice_hockey">IJshockey</string>
 	</resources>
