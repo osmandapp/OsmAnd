@@ -1541,4 +1541,5 @@
 	<string name="poi_scout_camp">Padvinderskamp</string>
 	<string name="poi_backcountry">Afgelegen plaats</string>
 	<string name="poi_resort_type">Type</string>
+	<string name="poi_piste_difficulty">Moeilijkheidsgraad piste</string>
 	</resources>
