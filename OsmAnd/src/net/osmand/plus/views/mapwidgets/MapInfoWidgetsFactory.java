@@ -139,8 +139,13 @@ public class MapInfoWidgetsFactory {
 			public void onClick(View view) {
 				rulerControl.setText(title, null);
 				final RulerMode mode = map.getMyApplication().getSettings().RULER_MODE.get();
-				map.getMyApplication().getSettings().RULER_MODE
-						.set(mode == RulerMode.FIRST ? RulerMode.SECOND : RulerMode.FIRST);
+				RulerMode newMode = RulerMode.FIRST;
+				if (mode == RulerMode.FIRST) {
+					newMode = RulerMode.SECOND;
+				} else if (mode == RulerMode.SECOND) {
+					newMode = RulerMode.EMPTY;
+				}
+				map.getMyApplication().getSettings().RULER_MODE.set(newMode);
 				map.refreshMap();
 			}
 		});

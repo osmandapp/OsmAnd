@@ -85,13 +85,14 @@ public class RulerControlLayer extends OsmandMapLayer {
             final QuadPoint center = tb.getCenterPixelPoint();
             final RulerMode mode = app.getSettings().RULER_MODE.get();
 
-            drawCenterIcon(canvas, tb, center);
             if (mode == RulerMode.FIRST) {
+                drawCenterIcon(canvas, tb, center);
                 Location currentLoc = app.getLocationProvider().getLastKnownLocation();
                 if (currentLoc != null) {
                     drawDistance(canvas, tb, center, currentLoc);
                 }
             } else if (mode == RulerMode.SECOND) {
+                drawCenterIcon(canvas, tb, center);
                 updateData(tb, center);
                 for (int i = 1; i <= cacheDistances.size(); i++) {
                     drawCircle(canvas, tb, i, center);

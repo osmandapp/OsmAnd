@@ -3031,6 +3031,7 @@ public class OsmandSettings {
 
 	public enum RulerMode {
 		FIRST,
-		SECOND
+		SECOND,
+		EMPTY
 	}
 }
