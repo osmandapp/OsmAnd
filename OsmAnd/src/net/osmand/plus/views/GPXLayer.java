@@ -386,17 +386,19 @@ public class GPXLayer extends OsmandMapLayer implements ContextMenuLayer.IContex
 	}
 
 	private void drawXAxisPoints(Canvas canvas, RotatedTileBox tileBox) {
-		SelectedGpxFile selectedGpxFile = selectedGpxHelper.getSelectedFileByPath((trackChartPoints.getGpxPath()));
-		GpxDataItem gpxDataItem = null;
-		if (!selectedGpxFile.isShowCurrentTrack()) {
-			gpxDataItem = view.getApplication().getGpxDatabase().getItem(new File(selectedGpxFile.getGpxFile().path));
-		}
-		int color = gpxDataItem != null ? gpxDataItem.getColor() : 0;
-		if (selectedGpxFile.isShowCurrentTrack()) {
-			color = currentTrackColor;
-		}
+		int color = trackChartPoints.getSegmentColor();
 		if (color == 0) {
-			color = trackChartPoints.getChartSegment().getColor(cachedColor);
+			GpxDataItem gpxDataItem = null;
+			if (!trackChartPoints.getGpx().showCurrentTrack) {
+				gpxDataItem = view.getApplication().getGpxDatabase().getItem(new File(trackChartPoints.getGpx().path));
+			}
+			color = gpxDataItem != null ? gpxDataItem.getColor() : 0;
+			if (trackChartPoints.getGpx().showCurrentTrack) {
+				color = currentTrackColor;
+			}
+			if (color == 0) {
+				color = cachedColor;
+			}
 		}
 		paintInnerRect.setColor(color);
 		QuadRect latLonBounds = tileBox.getLatLonBounds();
