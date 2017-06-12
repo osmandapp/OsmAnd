@@ -72,17 +72,19 @@ public class BinaryInspector {
 		// test cases show info
 		if ("test".equals(args[0])) {
 			in.inspector(new String[] {
+
 //					"-vpoi",
-//					"-vmap", "-vmapobjects", // "-vmapcoordinates",
-					"-vrouting",
+					"-vmap", "-vmapobjects", // "-vmapcoordinates",
+//					"-vrouting",
 //					"-vtransport",
 //					"-vaddress", "-vcities","-vstreetgroups",
 //					"-vstreets", "-vbuildings", "-vintersections",
 //					"-lang=ru",
 //					"-bbox=30.4981,50.4424,30.5195,50.4351",
-//					"-osm="+System.getProperty("maps.dir")+"/map.obf.osm",
+//					"-osm="+System.getProperty("maps.dir")+"/map_full.obf.osm",
 					System.getProperty("maps.dir")+"/Map.obf"
-//					System.getProperty("maps.dir")+"/Ukraine_kiev-city_europe.obf"
+//					System.getProperty("maps.dir")+"../temp/kiev/Ukraine_kiev-city_europe_17_06_05.obf",
+//					System.getProperty("maps.dir")+"Ukraine_kiev-city_europe_2.obf",
 			});
 		} else {
 			in.inspector(args);
@@ -258,7 +260,7 @@ public class BinaryInspector {
 						println("\n" + extracted.size() + " parts were successfully extracted to " + args[1]);
 					}
 				}
-			} else if (f.startsWith("-v")) {
+			} else if (f.startsWith("-v") || f.startsWith("-osm")) {
 				if (args.length < 2) {
 					printUsage("Missing file parameter");
 				} else {
