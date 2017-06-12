@@ -3196,6 +3196,14 @@
 
 	<string name="poi_wiki_link">維基百科</string>
 
-	<string name="poi_xmas">耶誕節</string>
+	<string name="poi_xmas">聖誕節</string>
 	<string name="poi_xmas_tree">聖誕樹</string>
+	<string name="poi_xmas_market">聖誕市集</string>
+	<string name="poi_xmas_pyramid">聖誕樹</string>
+	<string name="poi_xmas_shop">聖誕商店</string>
+	<string name="poi_xmas_event">聖誕活動</string>
+	<string name="poi_xmas_opening_hours">聖誕節：營業時間</string>
+	<string name="poi_xmas_location">聖誕節：位置</string>
+	<string name="poi_xmas_url">聖誕節：網站</string>
+
 	</resources>
