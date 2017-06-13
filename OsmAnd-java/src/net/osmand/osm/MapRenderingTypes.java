@@ -300,6 +300,7 @@ public abstract class MapRenderingTypes {
 				rt.id = mapRulType.id;
 				if(rt.isMain()) {
 					mapRulType.main = true;
+					mapRulType.order = rt.order;
 					if(rt.minzoom != 0) {
 						mapRulType.minzoom = Math.max(rt.minzoom, mapRulType.minzoom);
 					}

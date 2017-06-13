@@ -3081,7 +3081,7 @@
 	<string name="poi_covered">Cubierto</string>
 	<string name="poi_subway_station_filter">Estación de metro</string>
 	<string name="poi_ferry_terminal_cargo">Mercancías</string>
-	<string name="poi_bicycle_parking_type">Tipo</string>
+	<string name="poi_bicycle_parking_type">Tipu</string>
 	<string name="poi_aerialway_bicycle">Transporte de bicicletas</string>
 	<string name="poi_aerialway_heating">Calefacción</string>
 	<string name="poi_pump">Bomba</string>
@@ -3407,5 +3407,41 @@
 	<string name="poi_language_school">Escuela de idiomas</string>
 
 <string name="poi_life_ring">Aro salvavidas</string>
+
+<string name="poi_zoo_type">Tipo de zoológico</string>
+	<string name="poi_motorcycle_services">Servicios</string>
+	<string name="poi_motorcycle_type">Tipo de motocicleta</string>
+
+<string name="poi_zoo_petting_zoo">Zoológico interactivo</string>
+	<string name="poi_zoo_wildlife_park">Reserva natural</string>
+	<string name="poi_zoo_enclosure">Recinto</string>
+	<string name="poi_zoo_safari_park">Parque safari</string>
+	<string name="poi_zoo_birds">Aves</string>
+	<string name="poi_zoo_aviary">Pajarera</string>
+	<string name="poi_zoo_falconry">Cetrería</string>
+	<string name="poi_zoo_reptile">Reptiles</string>
+
+	<string name="poi_stands">Gradas</string>
+
+	<string name="poi_motorcycle_sales_yes">Ventas</string>
+	<string name="poi_motorcycle_sales_no">Venden motocicletas: no</string>
+	<string name="poi_motorcycle_sales_yes_used">Venden motocicletas: si; usadas</string>
+	<string name="poi_motorcycle_sales_used">Venden motocicletas: usadas</string>
+	<string name="poi_motorcycle_rental_yes">Alquiler</string>
+	<string name="poi_motorcycle_rental_no">Alquilan motocicletas: no</string>
+	<string name="poi_motorcycle_repair_yes">Reparación</string>
+	<string name="poi_motorcycle_repair_no">Reparan motocicletas: no</string>
+	<string name="poi_motorcycle_parts_yes">Repuestos para motocicletas</string>
+	<string name="poi_motorcycle_parts_no">Repuestos para motocicletas: no</string>
+	<string name="poi_motorcycle_tyres_yes">Neumáticos</string>
+	<string name="poi_motorcycle_tyres_no">Neumáticos: no</string>
+	<string name="poi_motorcycle_clothes_yes">Ropa de motocicleta</string>
+	<string name="poi_motorcycle_clothes_no">Ropa de motocicleta: no</string>
+	<string name="poi_motorcycle_type_scooter">Scooter (motoneta)</string>
+	<string name="poi_motorcycle_type_sportbike">Deportiva</string>
+	<string name="poi_motorcycle_type_chopper">Chopper</string>
+	<string name="poi_motorcycle_type_offroad">Todo terreno</string>
+	<string name="poi_motorcycle_type_dualsport">Doble propósito</string>
+	<string name="poi_motorcycle_type_standard">Estándar</string>
 
 </resources>
