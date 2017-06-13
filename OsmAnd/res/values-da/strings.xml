@@ -3002,7 +3002,7 @@ Repræsenterer område: %1$s x %2$s</string>
     <string name="index_item_depth_points_northern_hemisphere">Havdybdepunkter for den nordlige halvkugle</string>
     <string name="download_depth_countours">Havdybdekonturer</string>
     <string name="nautical_maps">Søkort</string>
-    <string name="depth_contour_descr">Kortsæt der indeholder dybdekonturlinjer og -punkter (baseret på et 30 buesekunder gitter).</string>
+    <string name="depth_contour_descr">Kortsæt der indeholder dybdekonturlinjer og -punkter.</string>
     <string name="subscribe_email_error">Fejl</string>
     <string name="subscribe_email_desc">Abonner på e-mail listen om OsmAnd rabatter og hent yderligere 3 kort!</string>
     <string name="no_overlay">Ingen overleejring</string>

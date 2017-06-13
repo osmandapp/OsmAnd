@@ -76,7 +76,7 @@
     <string name="no_underlay">No underlay</string>
     <string name="subscribe_email_error">Error</string>
     <string name="subscribe_email_desc">Subscribe to our email list about app discounts and get 3 more map downloads!</string>
-    <string name="depth_contour_descr">Set of maps containing the sea depth contour lines and points (based on a 30 arc-second grid).</string>
+    <string name="depth_contour_descr">Set of maps containing the sea depth contour lines and points.</string>
     <string name="sea_depth_thanks">Thank you for purchasing nautical depth contours!</string>
     <string name="index_item_depth_contours_osmand_ext">Nautical depth contours</string>
     <string name="index_item_depth_points_southern_hemisphere">Nautical depth points southern hemisphere</string>
