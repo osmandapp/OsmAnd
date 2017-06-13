@@ -395,6 +395,7 @@ public class GPXLayer extends OsmandMapLayer implements ContextMenuLayer.IContex
 			if (color == 0) {
 				color = cachedColor;
 			}
+			trackChartPoints.setSegmentColor(color);
 		}
 		paintInnerRect.setColor(color);
 		QuadRect latLonBounds = tileBox.getLatLonBounds();

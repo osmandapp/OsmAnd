@@ -148,6 +148,7 @@ public class TrackDetailsMenu {
 		mapActivity.getMapView().setMapPositionX(0);
 		mapActivity.getMapView().refreshMap();
 		segment = null;
+		trackChartPoints = null;
 	}
 
 	public void updateInfo(final View main) {
