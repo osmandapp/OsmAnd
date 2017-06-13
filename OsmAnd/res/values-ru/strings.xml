@@ -61,7 +61,7 @@
     <string name="index_item_depth_contours_osmand_ext">Контуры глубин</string>
     <string name="index_item_depth_points_southern_hemisphere">Точки глубин (южное полушарие)</string>
     <string name="index_item_depth_points_northern_hemisphere">Точки глубин (северное полушарие)</string>
-    <string name="depth_contour_descr">Контуры и точки глубин (основано на сетке в 30 угловых секунд)</string>
+    <string name="depth_contour_descr">Контуры и точки глубин</string>
     <string name="subscribe_email_desc">Подпишитесь на нашу email рассылку про скидки на OsmAnd и получите 3 дополнительные загрузки карт!</string>
     <string name="subscribe_email_error">Ошибка</string>
     <string name="quick_action_auto_zoom">Автомасштаб карты вкл/выкл</string>
