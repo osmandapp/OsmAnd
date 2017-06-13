@@ -2,6 +2,7 @@ package net.osmand.plus.mapcontextmenu.other;
 
 import android.graphics.Matrix;
 import android.support.v4.app.Fragment;
+import android.support.v4.util.Pair;
 import android.support.v7.widget.PopupMenu;
 import android.view.MenuItem;
 import android.view.MotionEvent;
@@ -25,6 +26,7 @@ import net.osmand.plus.GPXUtilities;
 import net.osmand.plus.GPXUtilities.GPXTrackAnalysis;
 import net.osmand.plus.GPXUtilities.TrkSegment;
 import net.osmand.plus.GPXUtilities.WptPt;
+import net.osmand.plus.GPXUtilities.GPXFile;
 import net.osmand.plus.GpxSelectionHelper.GpxDisplayItem;
 import net.osmand.plus.IconsCache;
 import net.osmand.plus.OsmandApplication;
@@ -51,6 +53,7 @@ public class TrackDetailsMenu {
 	private GpxDisplayItem gpxItem;
 	private TrackDetailsBarController toolbarController;
 	private TrkSegment segment;
+	private TrackChartPoints trackChartPoints;
 
 	private static boolean VISIBLE;
 
@@ -140,11 +143,12 @@ public class TrackDetailsMenu {
 			mapActivity.hideTopToolbar(toolbarController);
 		}
 		mapActivity.getMapLayers().getContextMenuLayer().exitGpxDetailsMode();
-		mapActivity.getMapLayers().getGpxLayer().setSelectedPointLatLon(null);
-		mapActivity.getMapLayers().getMapInfoLayer().setSelectedPointLatLon(null);
+		mapActivity.getMapLayers().getGpxLayer().setTrackChartPoints(null);
+		mapActivity.getMapLayers().getMapInfoLayer().setTrackChartPoints(null);
 		mapActivity.getMapView().setMapPositionX(0);
 		mapActivity.getMapView().refreshMap();
 		segment = null;
+		trackChartPoints = null;
 	}
 
 	public void updateInfo(final View main) {
@@ -286,17 +290,37 @@ public class TrackDetailsMenu {
 			gpxItem.chartHighlightPos = highlights[0].getX();
 			WptPt wpt = getPoint(chart, gpxItem.chartHighlightPos);
 			if (wpt != null) {
+				if (trackChartPoints == null) {
+					trackChartPoints = new TrackChartPoints();
+					int segmentColor = getTrackSegment(chart).getColor(0);
+					trackChartPoints.setSegmentColor(segmentColor);
+					trackChartPoints.setGpx(getGpxItem().group.getGpx());
+				}
 				location = new LatLon(wpt.lat, wpt.lon);
+				List<Pair<String, WptPt>> xAxisPoints = getXAxisPoints(chart);
+				trackChartPoints.setHighlightedPoint(location);
+				trackChartPoints.setXAxisPoints(xAxisPoints);
 				if (gpxItem.route) {
-					mapActivity.getMapLayers().getMapInfoLayer().setSelectedPointLatLon(location);
+					mapActivity.getMapLayers().getMapInfoLayer().setTrackChartPoints(trackChartPoints);
 				} else {
-					mapActivity.getMapLayers().getGpxLayer().setSelectedPointLatLon(location);
+					mapActivity.getMapLayers().getGpxLayer().setTrackChartPoints(trackChartPoints);
 				}
 			}
 		} else {
 			gpxItem.chartHighlightPos = -1;
 		}
 		fitTrackOnMap(chart, location, forceFit);
+	}
+
+	private List<Pair<String, WptPt>> getXAxisPoints(LineChart chart) {
+		List<Pair<String, WptPt>> xAxisPoints = new ArrayList<>();
+		float[] entries = chart.getXAxis().mEntries;
+		for (int i = 0; i < entries.length; i++) {
+			String formattedEntry = chart.getXAxis().getValueFormatter().getFormattedValue(entries[i], chart.getXAxis());
+			WptPt pointToAdd = getPoint(chart, entries[i]);
+			xAxisPoints.add(new Pair<>(formattedEntry, pointToAdd));
+		}
+		return xAxisPoints;
 	}
 
 	private void updateView(final View parentView) {
@@ -558,6 +582,45 @@ public class TrackDetailsMenu {
 		public void updateToolbar(MapInfoWidgetsFactory.TopToolbarView view) {
 			super.updateToolbar(view);
 			view.getShadowView().setVisibility(View.GONE);
+		}
+	}
+
+	public class TrackChartPoints {
+		private List<Pair<String, WptPt>> xAxisPoints;
+		private LatLon highlightedPoint;
+		private int segmentColor;
+		private GPXFile gpx;
+
+		public List<Pair<String, WptPt>> getXAxisPoints() {
+			return xAxisPoints;
+		}
+
+		public LatLon getHighlightedPoint() {
+			return highlightedPoint;
+		}
+
+		public int getSegmentColor() {
+			return segmentColor;
+		}
+
+		public GPXFile getGpx() {
+			return gpx;
+		}
+
+		public void setXAxisPoints(List<Pair<String, WptPt>> xAxisPoints) {
+			this.xAxisPoints = xAxisPoints;
+		}
+
+		public void setHighlightedPoint(LatLon highlightedPoint) {
+			this.highlightedPoint = highlightedPoint;
+		}
+
+		public void setSegmentColor(int segmentColor) {
+			this.segmentColor = segmentColor;
+		}
+
+		public void setGpx(GPXFile gpx) {
+			this.gpx = gpx;
 		}
 	}
 }
