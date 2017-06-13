@@ -2881,7 +2881,7 @@ Koda predstavlja območje: %1$s x %2$s</string>
     <string name="quick_action_auto_zoom_desc">S pritiskom na gumb dejanj se preklopi prikaz samodejnega približevanja zemljevida glede na hitrost gibanja.</string>
     <string name="quick_action_replace_destination_desc">S pritiskom na gumb dejanj se zamenja trenutno ciljno mesto z mestom na sredini zaslona.</string>
     <string name="subscribe_email_desc">Naročite se na dopisni seznam o popustih programa in prejmite tri dodatne prejeme zemljevidov!</string>
-    <string name="depth_contour_descr">Nabor zemljevidov z izobatami morske gladine (na osnovi 30 sekundne mreže).</string>
+    <string name="depth_contour_descr">Nabor zemljevidov z izobatami morske gladine.</string>
     <string name="sea_depth_thanks">Zahvaljujemo se vam za nakup navtičnega zemljevida z reliefom morskega dna!</string>
     <string name="index_item_depth_contours_osmand_ext">Navtični relief globine</string>
     <string name="index_item_depth_points_southern_hemisphere">Navtične globinske točke južne poloble</string>
@@ -2898,4 +2898,7 @@ Koda predstavlja območje: %1$s x %2$s</string>
     <string name="display_zoom_level">Raven približanja: %1$s</string>
     <string name="distance_moving">Razdalja je popravljena</string>
     <string name="mapillary_image">Slika Mapillary</string>
+    <string name="import_gpx_failed_descr">Ni mogoče uvoziti datoteke. Preverite ali ima program ustrezna dovoljenja za branje datotek s tega mesta.</string>
+    <string name="shared_string_permissions">Dovoljenja</string>
+    <string name="osmand_extended_description_part1">" OsmAnd (OSM Automated Navigation Directions) je zemljevid in program za navigacijo, ki omogoča dostop do brezplačnih kakovostnih podatkov prek zemljevidov OpenStreetMap (OSM). Program omogoča glasovno vodenje, navigacijo, pregled točk POI (krajevne točke zanimivosti), ustvarjanje in upravljanje sledi GPX, uporabo izohips za predočenje nadmorske višine, možnost preklapljanja načina navigacije za kolesarje, pešce, vozila in še mnogo več ... "</string>
     </resources>
