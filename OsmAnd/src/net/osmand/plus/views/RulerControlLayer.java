@@ -4,7 +4,6 @@ import android.graphics.Bitmap;
 import android.graphics.BitmapFactory;
 import android.graphics.Canvas;
 import android.graphics.Color;
-import android.graphics.DashPathEffect;
 import android.graphics.Paint;
 import android.graphics.Paint.Style;
 import android.graphics.PointF;
@@ -40,10 +39,11 @@ public class RulerControlLayer extends OsmandMapLayer {
     private double cacheTileY;
     private ArrayList<String> cacheDistances;
 
-    private Bitmap centerIcon;
+    private Bitmap centerIconDay;
+    private Bitmap centerIconNight;
     private Paint bitmapPaint;
-    private Paint distancePaint;
-    private RenderingLineAttributes attrs;
+    private RenderingLineAttributes lineAttrs;
+    private RenderingLineAttributes circleAttrs;
 
     public RulerControlLayer(MapActivity mapActivity) {
         this.mapActivity = mapActivity;
@@ -57,32 +57,30 @@ public class RulerControlLayer extends OsmandMapLayer {
         cacheCenter = new QuadPoint();
         maxRadiusInDp = mapActivity.getResources().getDimensionPixelSize(R.dimen.map_ruler_radius);
 
-        centerIcon = BitmapFactory.decodeResource(view.getResources(), R.drawable.map_ruler_center);
+        centerIconDay = BitmapFactory.decodeResource(view.getResources(), R.drawable.map_ruler_center_day);
+        centerIconNight = BitmapFactory.decodeResource(view.getResources(), R.drawable.map_ruler_center_night);
 
         bitmapPaint = new Paint();
         bitmapPaint.setAntiAlias(true);
         bitmapPaint.setDither(true);
         bitmapPaint.setFilterBitmap(true);
 
-        distancePaint = new Paint();
-        distancePaint.setAntiAlias(true);
-        distancePaint.setStyle(Style.STROKE);
-        distancePaint.setStrokeWidth(10);
-        distancePaint.setPathEffect(new DashPathEffect(new float[]{10, 10}, 0));
+        lineAttrs = new RenderingLineAttributes("rulerLine");
 
-        attrs = new RenderingLineAttributes("rulerCircle");
-        attrs.paint.setStrokeWidth(2);
-        attrs.paint2.setTextSize(TEXT_SIZE * mapActivity.getResources().getDisplayMetrics().density);
-        attrs.paint2.setStyle(Style.FILL_AND_STROKE);
-        attrs.shadowPaint.setTextSize(TEXT_SIZE * mapActivity.getResources().getDisplayMetrics().density);
-        attrs.shadowPaint.setStrokeWidth(6);
-        attrs.shadowPaint.setColor(Color.WHITE);
+        circleAttrs = new RenderingLineAttributes("rulerCircle");
+        circleAttrs.paint.setStrokeWidth(2);
+        circleAttrs.paint2.setTextSize(TEXT_SIZE * mapActivity.getResources().getDisplayMetrics().density);
+        circleAttrs.shadowPaint.setTextSize(TEXT_SIZE * mapActivity.getResources().getDisplayMetrics().density);
+        circleAttrs.shadowPaint.setStrokeWidth(6);
+        circleAttrs.shadowPaint.setColor(Color.WHITE);
     }
 
     @Override
     public void onDraw(Canvas canvas, RotatedTileBox tb, DrawSettings settings) {
         if (mapActivity.getMapLayers().getMapWidgetRegistry().isVisible("ruler")) {
-            attrs.updatePaints(view, settings, tb);
+            lineAttrs.updatePaints(view, settings, tb);
+            circleAttrs.updatePaints(view, settings, tb);
+            circleAttrs.paint2.setStyle(Style.FILL);
             final QuadPoint center = tb.getCenterPixelPoint();
             final RulerMode mode = app.getSettings().RULER_MODE.get();
 
@@ -92,14 +90,14 @@ public class RulerControlLayer extends OsmandMapLayer {
                 if (firstFinger.x != -1 && firstFinger.y != -1 && secondFinger.x != -1 && secondFinger.y != -1) {
                     drawFingerDistance(canvas, tb, center, firstFinger, secondFinger);
                 } else {
-                    drawCenterIcon(canvas, tb, center);
+                    drawCenterIcon(canvas, tb, center, settings.isNightMode());
                     Location currentLoc = app.getLocationProvider().getLastKnownLocation();
                     if (currentLoc != null) {
                         drawDistance(canvas, tb, center, currentLoc);
                     }
                 }
             } else if (mode == RulerMode.SECOND) {
-                drawCenterIcon(canvas, tb, center);
+                drawCenterIcon(canvas, tb, center, settings.isNightMode());
                 updateData(tb, center);
                 for (int i = 1; i <= cacheDistances.size(); i++) {
                     drawCircle(canvas, tb, i, center);
@@ -110,21 +108,26 @@ public class RulerControlLayer extends OsmandMapLayer {
 
     private void drawFingerDistance(Canvas canvas, RotatedTileBox tb, QuadPoint center, PointF first, PointF second) {
         canvas.rotate(-tb.getRotate(), center.x, center.y);
-        canvas.drawLine(first.x, first.y, second.x, second.y, distancePaint);
+        canvas.drawLine(first.x, first.y, second.x, second.y, lineAttrs.paint);
         canvas.rotate(tb.getRotate(), center.x, center.y);
     }
 
-    private void drawCenterIcon(Canvas canvas, RotatedTileBox tb, QuadPoint center) {
+    private void drawCenterIcon(Canvas canvas, RotatedTileBox tb, QuadPoint center, boolean nightMode) {
         canvas.rotate(-tb.getRotate(), center.x, center.y);
-        canvas.drawBitmap(centerIcon, center.x - centerIcon.getWidth() / 2,
-                center.y - centerIcon.getHeight() / 2, bitmapPaint);
+        if (nightMode) {
+            canvas.drawBitmap(centerIconNight, center.x - centerIconNight.getWidth() / 2,
+                    center.y - centerIconNight.getHeight() / 2, bitmapPaint);
+        } else {
+            canvas.drawBitmap(centerIconDay, center.x - centerIconDay.getWidth() / 2,
+                    center.y - centerIconDay.getHeight() / 2, bitmapPaint);
+        }
         canvas.rotate(tb.getRotate(), center.x, center.y);
     }
 
     private void drawDistance(Canvas canvas, RotatedTileBox tb, QuadPoint center, Location currentLoc) {
         int currentLocX = tb.getPixXFromLonNoRot(currentLoc.getLongitude());
         int currentLocY = tb.getPixYFromLatNoRot(currentLoc.getLatitude());
-        canvas.drawLine(currentLocX, currentLocY, center.x, center.y, distancePaint);
+        canvas.drawLine(currentLocX, currentLocY, center.x, center.y, lineAttrs.paint);
     }
 
     private void updateData(RotatedTileBox tb, QuadPoint center) {
@@ -195,7 +198,7 @@ public class RulerControlLayer extends OsmandMapLayer {
     private void drawCircle(Canvas canvas, RotatedTileBox tb, int circleNumber, QuadPoint center) {
         Rect bounds = new Rect();
         String text = cacheDistances.get(circleNumber - 1);
-        attrs.paint2.getTextBounds(text, 0, text.length(), bounds);
+        circleAttrs.paint2.getTextBounds(text, 0, text.length(), bounds);
 
         float x = 0;
         float y = 0;
@@ -216,10 +219,10 @@ public class RulerControlLayer extends OsmandMapLayer {
 
         if (!mapActivity.getMapView().isZooming()) {
             canvas.rotate(-tb.getRotate(), center.x, center.y);
-            canvas.drawCircle(center.x, center.y, radius * circleNumber, attrs.shadowPaint);
-            canvas.drawCircle(center.x, center.y, radius * circleNumber, attrs.paint);
-            canvas.drawText(text, x, y, attrs.shadowPaint);
-            canvas.drawText(text, x, y, attrs.paint2);
+            canvas.drawCircle(center.x, center.y, radius * circleNumber, circleAttrs.shadowPaint);
+            canvas.drawCircle(center.x, center.y, radius * circleNumber, circleAttrs.paint);
+            canvas.drawText(text, x, y, circleAttrs.shadowPaint);
+            canvas.drawText(text, x, y, circleAttrs.paint2);
             canvas.rotate(tb.getRotate(), center.x, center.y);
         }
     }
