@@ -3010,4 +3010,5 @@ Fonctionnalités principales :
     <string name="distance_moving">Distance corrigée</string>
     <string name="shared_string_permissions">Autorisations</string>
     <string name="import_gpx_failed_descr">OsmAnd ne peut importer le fichier. Merci de vérifier si OsmAnd possède l\'autorisation de lire le dossier et le fichier spécifiés.</string>
+    <string name="map_widget_ruler_control_first_mode">Mode de connexion</string>
     </resources>
