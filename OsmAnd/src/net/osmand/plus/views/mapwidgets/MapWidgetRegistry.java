@@ -235,7 +235,7 @@ public class MapWidgetRegistry {
 	public boolean isVisible(String key) {
 		ApplicationMode mode = settings.APPLICATION_MODE.get();
 		Set<String> elements = visibleElementsFromSettings.get(mode);
-		return elements != null && elements.contains(key);
+		return elements != null && (elements.contains(key) || elements.contains(COLLAPSED_PREFIX + key));
 	}
 
 	public void setVisibility(MapWidgetRegInfo m, boolean visible, boolean collapsed) {
