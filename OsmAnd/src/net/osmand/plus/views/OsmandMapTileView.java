@@ -161,6 +161,12 @@ public class OsmandMapTileView implements IMapDownloaderCallback {
 	private boolean afterDoubleTap = false;
 	private boolean wasMapLinkedBeforeGesture = false;
 
+	private float firstTouchPointX;
+	private float firstTouchPointY;
+	private float secondTouchPointX;
+	private float secondTouchPointY;
+	private boolean multiTouch;
+
 	public OsmandMapTileView(MapActivity activity, int w, int h) {
 		this.activity = activity;
 		init(activity, w, h);
@@ -305,6 +311,26 @@ public class OsmandMapTileView implements IMapDownloaderCallback {
 	}
 
 	// ///////////////////////// NON UI PART (could be extracted in common) /////////////////////////////
+	public float getFirstTouchPointX() {
+		return firstTouchPointX;
+	}
+
+	public float getFirstTouchPointY() {
+		return firstTouchPointY;
+	}
+
+	public float getSecondTouchPointX() {
+		return secondTouchPointX;
+	}
+
+	public float getSecondTouchPointY() {
+		return secondTouchPointY;
+	}
+
+	public boolean isMultiTouch() {
+		return multiTouch;
+	}
+
 	public void setIntZoom(int zoom) {
 		zoom = zoom > getMaxZoom() ? getMaxZoom() : zoom;
 		zoom = zoom < getMinZoom() ? getMinZoom() : zoom;
@@ -1007,6 +1033,20 @@ public class OsmandMapTileView implements IMapDownloaderCallback {
 			this.y1 = y1;
 			this.x2 = x2;
 			this.y2 = y2;
+		}
+
+		@Override
+		public void onActionPointerDownOrMove(float x1, float y1, float x2, float y2) {
+			firstTouchPointX = x1;
+			firstTouchPointY = y1;
+			secondTouchPointX = x2;
+			secondTouchPointY = y2;
+			multiTouch = true;
+		}
+
+		@Override
+		public void onActionPointerUp() {
+			multiTouch = false;
 		}
 
 		@Override
