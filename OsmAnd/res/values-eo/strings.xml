@@ -2762,7 +2762,7 @@ De Afganujo al Zimbabvo, de Aŭstralio al Usono, Argentino, Brazilo, Kanado, Fra
     <string name="index_item_depth_points_northern_hemisphere">Maraj profundec-kurboj de norda duonsfero</string>
     <string name="download_depth_countours">Maraj profundec-kurboj</string>
     <string name="nautical_maps">Maraj mapoj</string>
-    <string name="depth_contour_descr">Kolekto da mapoj reprezentantaj marajn profundec-kurbojn kaj punktojn (bazitajn sur 30-arksekunda krado).</string>
+    <string name="depth_contour_descr">Kolekto da mapoj reprezentantaj marajn profundec-kurbojn kaj punktojn.</string>
     <string name="quick_action_add_destination">Aldoni celon</string>
     <string name="quick_action_replace_destination">Anstataŭigi celon</string>
     <string name="quick_action_add_first_intermediate">Aldoni unuan interlokon</string>

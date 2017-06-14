@@ -2768,7 +2768,7 @@ Representa el área: %1$s x %2$s</string>
     <string name="index_item_depth_points_northern_hemisphere">Puntos de profundidad náuticos del hemisferio norte</string>
     <string name="download_depth_countours">Curvas de profundidad náuticas</string>
     <string name="nautical_maps">Mapas náuticos</string>
-    <string name="depth_contour_descr">Conjunto de mapas que contienen las curvas y puntos de profundidad náuticas (según una grilla de 30 arco-segundos).</string>
+    <string name="depth_contour_descr">Conjunto de mapas que contienen las curvas y puntos de profundidad náuticas.</string>
     <string name="subscribe_email_error">Error</string>
     <string name="subscribe_email_desc">¡Suscríbete a nuestra lista de correo electrónico para recibir descuentos de la aplicación y obtener 3 descargas de mapas más!</string>
     <string name="no_overlay">Sin superposición</string>
