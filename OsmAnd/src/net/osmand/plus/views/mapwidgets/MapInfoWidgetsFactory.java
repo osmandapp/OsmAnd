@@ -110,15 +110,87 @@ public class MapInfoWidgetsFactory {
 		return gpsInfoControl;
 	}
 
+	public static class RulerWidgetState extends MapWidgetRegistry.WidgetState {
+
+		static final int RULER_CONTROL_WIDGET_STATE_FIRST_MODE = R.id.ruler_control_widget_state_first_mode;
+		static final int RULER_CONTROL_WIDGET_STATE_SECOND_MODE = R.id.ruler_control_widget_state_second_mode;
+		static final int RULER_CONTROL_WIDGET_STATE_EMPTY_MODE = R.id.ruler_control_widget_state_empty_mode;
+
+		private final OsmandSettings.CommonPreference<RulerMode> rulerMode;
+
+		public RulerWidgetState(OsmandApplication ctx) {
+			super(ctx);
+			rulerMode = ctx.getSettings().RULER_MODE;
+		}
+
+		@Override
+		public int getMenuTitleId() {
+			if (rulerMode.get() == RulerMode.SECOND) {
+				return R.string.map_widget_ruler_control_second_mode;
+			} else {
+				return R.string.map_widget_ruler_control_first_mode;
+			}
+		}
+
+		@Override
+		public int getMenuIconId() {
+			final RulerMode mode = rulerMode.get();
+			if (mode == RulerMode.FIRST) {
+				return R.drawable.ic_action_ruler_location;
+			} else if (mode == RulerMode.SECOND) {
+				return R.drawable.ic_action_ruler_circle;
+			}
+			return R.drawable.ic_action_hide;
+		}
+
+		@Override
+		public int getMenuItemId() {
+			RulerMode mode = rulerMode.get();
+			if (mode == RulerMode.FIRST) {
+				return RULER_CONTROL_WIDGET_STATE_FIRST_MODE;
+			} else if (mode == RulerMode.SECOND){
+				return RULER_CONTROL_WIDGET_STATE_SECOND_MODE;
+			} else {
+				return RULER_CONTROL_WIDGET_STATE_EMPTY_MODE;
+			}
+		}
+
+		@Override
+		public int[] getMenuTitleIds() {
+			return new int[]{R.string.map_widget_ruler_control_first_mode, R.string.map_widget_ruler_control_second_mode};
+		}
+
+		@Override
+		public int[] getMenuIconIds() {
+			return new int[]{R.drawable.ic_action_ruler_location, R.drawable.ic_action_ruler_circle};
+		}
+
+		@Override
+		public int[] getMenuItemIds() {
+			return new int[]{RULER_CONTROL_WIDGET_STATE_FIRST_MODE, RULER_CONTROL_WIDGET_STATE_SECOND_MODE};
+		}
+
+		@Override
+		public void changeState(int stateId) {
+			RulerMode newMode = RulerMode.FIRST;
+			if (stateId == RULER_CONTROL_WIDGET_STATE_SECOND_MODE) {
+				newMode = RulerMode.SECOND;
+			}
+			rulerMode.set(newMode);
+		}
+	}
+
 	public TextInfoWidget createRulerControl(final MapActivity map) {
 		final String title = map.getResources().getString(R.string.map_widget_show_ruler);
         final TextInfoWidget rulerControl = new TextInfoWidget(map) {
             LatLon cacheFirstFinger;
             LatLon cacheSecondFinger;
+			RulerMode cacheMode = map.getMyApplication().getSettings().RULER_MODE.get();
 
             @Override
             public boolean updateInfo(DrawSettings drawSettings) {
-                if (map.getMyApplication().getSettings().RULER_MODE.get() == RulerMode.FIRST) {
+				RulerMode mode = map.getMyApplication().getSettings().RULER_MODE.get();
+                if (mode == RulerMode.FIRST) {
                     Location currentLoc = map.getMyApplication().getLocationProvider().getLastKnownLocation();
                     LatLon centerLoc = map.getMapLocation();
                     LatLon firstFinger = map.getMapView().getFirstPointerLatLon();
@@ -139,6 +211,13 @@ public class MapInfoWidgetsFactory {
                         setText(title, null);
                     }
                 }
+                if (mode != cacheMode){
+					cacheMode = mode;
+					setRulerControlIcon(this, mode);
+					if (mode != RulerMode.FIRST) {
+						setText(title, null);
+					}
+				}
                 return true;
             }
 
@@ -151,7 +230,7 @@ public class MapInfoWidgetsFactory {
         };
 
 		rulerControl.setText(title, null);
-		rulerControl.setIcons(R.drawable.widget_distance_day, R.drawable.widget_distance_night);
+		setRulerControlIcon(rulerControl, map.getMyApplication().getSettings().RULER_MODE.get());
 		rulerControl.setOnClickListener(new OnClickListener() {
 			@Override
 			public void onClick(View view) {
@@ -163,12 +242,23 @@ public class MapInfoWidgetsFactory {
 				} else if (mode == RulerMode.SECOND) {
 					newMode = RulerMode.EMPTY;
 				}
+				setRulerControlIcon(rulerControl, newMode);
 				map.getMyApplication().getSettings().RULER_MODE.set(newMode);
 				map.refreshMap();
 			}
 		});
 
 		return rulerControl;
+	}
+
+	private void setRulerControlIcon(TextInfoWidget rulerControl, RulerMode mode) {
+		if (mode == RulerMode.FIRST) {
+			rulerControl.setIcons(R.drawable.widget_ruler_location_day, R.drawable.widget_ruler_location_night);
+		} else if (mode == RulerMode.SECOND) {
+			rulerControl.setIcons(R.drawable.widget_ruler_circle_day, R.drawable.widget_ruler_circle_night);
+		} else {
+			rulerControl.setIcons(R.drawable.widget_hidden_day, R.drawable.widget_hidden_night);
+		}
 	}
 
 	public static class TopToolbarController {
