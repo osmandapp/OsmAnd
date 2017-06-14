@@ -291,8 +291,9 @@ public class TestVoiceActivity extends OsmandActionBarActivity {
 					}
 				}
 				if (description.startsWith("(11.3)")) {
-					final String systemVoiceUsed = AbstractPrologCommandPlayer.getCurrentVersion() > 99 ? TTSCommandPlayerImpl.getTtsVoiceName() : "Recorded voice";
-					Toast.makeText(TestVoiceActivity.this, "System's language availability status and voice actually used:\n\n" + systemVoiceUsed, Toast.LENGTH_LONG).show();
+					final String systemVoiceStatus = AbstractPrologCommandPlayer.getCurrentVersion() > 99 ? TTSCommandPlayerImpl.getTtsVoiceStatus() : "Recorded voice";
+					final String systemVoiceUsed = AbstractPrologCommandPlayer.getCurrentVersion() > 99 ? TTSCommandPlayerImpl.getTtsVoiceUsed() : "Recorded voice";
+					Toast.makeText(TestVoiceActivity.this, "Voice language availability:  " + systemVoiceStatus + "\n\nVoice actually used:  " + systemVoiceUsed, Toast.LENGTH_LONG).show();
 				}
 			}
 		});
