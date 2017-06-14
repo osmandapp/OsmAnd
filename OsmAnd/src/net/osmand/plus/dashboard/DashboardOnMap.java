@@ -74,7 +74,7 @@ import net.osmand.plus.helpers.WaypointHelper.LocationPointWrapper;
 import net.osmand.plus.mapcontextmenu.other.MapRouteInfoMenu;
 import net.osmand.plus.mapcontextmenu.other.RoutePreferencesMenu;
 import net.osmand.plus.mapcontextmenu.other.RoutePreferencesMenu.LocalRoutingParameter;
-import net.osmand.plus.mapillary.MapillaryPlugin;
+import net.osmand.plus.mapillary.MapillaryMenu;
 import net.osmand.plus.mapillary.MapillaryPlugin.MapillaryFirstDialogFragment;
 import net.osmand.plus.rastermaps.OsmandRasterMapsPlugin;
 import net.osmand.plus.routing.RoutingHelper;
@@ -188,6 +188,7 @@ public class DashboardOnMap implements ObservableScrollViewCallbacks, DynamicLis
 		DASHBOARD,
 		OVERLAY_MAP,
 		UNDERLAY_MAP,
+		MAPILLARY,
 		CONTOUR_LINES,
 		HILLSHADE,
 		MAP_MARKERS,
@@ -462,6 +463,8 @@ public class DashboardOnMap implements ObservableScrollViewCallbacks, DynamicLis
 			tv.setText(R.string.map_markers);
 		} else if (visibleType == DashboardType.MAP_MARKERS_SELECTION) {
 			tv.setText(R.string.select_map_markers);
+		} else if (visibleType == DashboardType.MAPILLARY) {
+			tv.setText(R.string.mapillary);
 		} else if (visibleType == DashboardType.CONTOUR_LINES) {
 			tv.setText(R.string.srtm_plugin_name);
 		} else if (visibleType == DashboardType.HILLSHADE) {
@@ -903,6 +906,7 @@ public class DashboardOnMap implements ObservableScrollViewCallbacks, DynamicLis
 				&& visibleType != DashboardType.MAP_MARKERS_SELECTION
 				&& visibleType != DashboardType.CONFIGURE_SCREEN
 				&& visibleType != DashboardType.CONFIGURE_MAP
+				&& visibleType != DashboardType.MAPILLARY
 				&& visibleType != DashboardType.CONTOUR_LINES
 				&& visibleType != DashboardType.HILLSHADE) {
 			listView.setDivider(dividerDrawable);
@@ -980,6 +984,8 @@ public class DashboardOnMap implements ObservableScrollViewCallbacks, DynamicLis
 				cm = RasterMapMenu.createListAdapter(mapActivity, OsmandRasterMapsPlugin.RasterMapType.UNDERLAY);
 			} else if (visibleType == DashboardType.OVERLAY_MAP) {
 				cm = RasterMapMenu.createListAdapter(mapActivity, OsmandRasterMapsPlugin.RasterMapType.OVERLAY);
+			} else if (visibleType == DashboardType.MAPILLARY) {
+				cm = MapillaryMenu.createListAdapter(mapActivity);
 			} else if (visibleType == DashboardType.CONTOUR_LINES) {
 				cm = ContourLinesMenu.createListAdapter(mapActivity);
 			} else if (visibleType == DashboardType.HILLSHADE) {
