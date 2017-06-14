@@ -30,6 +30,7 @@ import net.osmand.plus.mapcontextmenu.other.MapRouteInfoMenu;
 import net.osmand.plus.routing.RouteDirectionInfo;
 import net.osmand.plus.routing.RoutingHelper;
 import net.osmand.plus.views.OsmandMapLayer.DrawSettings;
+import net.osmand.plus.views.OsmandMapTileView;
 import net.osmand.plus.views.mapwidgets.NextTurnInfoWidget.TurnDrawable;
 import net.osmand.router.TurnType;
 import net.osmand.util.Algorithms;
@@ -183,43 +184,48 @@ public class MapInfoWidgetsFactory {
 	public TextInfoWidget createRulerControl(final MapActivity map) {
 		final String title = map.getResources().getString(R.string.map_widget_show_ruler);
         final TextInfoWidget rulerControl = new TextInfoWidget(map) {
-            LatLon cacheFirstFinger;
-            LatLon cacheSecondFinger;
+			boolean needNewLatLon;
 			RulerMode cacheMode = map.getMyApplication().getSettings().RULER_MODE.get();
 
-            @Override
-            public boolean updateInfo(DrawSettings drawSettings) {
+			@Override
+			public boolean updateInfo(DrawSettings drawSettings) {
 				RulerMode mode = map.getMyApplication().getSettings().RULER_MODE.get();
-                if (mode == RulerMode.FIRST) {
-                    Location currentLoc = map.getMyApplication().getLocationProvider().getLastKnownLocation();
-                    LatLon centerLoc = map.getMapLocation();
-                    LatLon firstFinger = map.getMapView().getFirstPointerLatLon();
-                    LatLon secondFinger = map.getMapView().getSecondPointerLatLon();
+				if (mode == RulerMode.FIRST) {
+					Location currentLoc = map.getMyApplication().getLocationProvider().getLastKnownLocation();
+					LatLon centerLoc = map.getMapLocation();
+					OsmandMapTileView view = map.getMapView();
 
-                    if (firstFinger.getLatitude() != -1 && firstFinger.getLongitude() != -1 &&
-                            secondFinger.getLatitude() != -1 && secondFinger.getLongitude() != -1) {
-                        if (cacheFirstFinger != firstFinger || cacheSecondFinger != secondFinger) {
-							cacheFirstFinger = firstFinger;
-							cacheSecondFinger = secondFinger;
-                            setDistanceText(firstFinger.getLatitude(), firstFinger.getLongitude(),
-                                    secondFinger.getLatitude(), secondFinger.getLongitude());
-                        }
-                    } else if (currentLoc != null && centerLoc != null) {
-                        setDistanceText(currentLoc.getLatitude(), currentLoc.getLongitude(),
-                                centerLoc.getLatitude(), centerLoc.getLongitude());
-                    } else {
-                        setText(title, null);
-                    }
-                }
-                if (mode != cacheMode){
+
+					if (view.isTwoFingersTouch()) {
+						if (needNewLatLon) {
+							float x1 = view.getFirstTouchPointX();
+							float y1 = view.getFirstTouchPointY();
+							float x2 = view.getSecondTouchPointX();
+							float y2 = view.getSecondTouchPointY();
+							LatLon firstFinger = view.getCurrentRotatedTileBox().getLatLonFromPixel(x1, y1);
+							LatLon secondFinger = view.getCurrentRotatedTileBox().getLatLonFromPixel(x2, y2);
+							setDistanceText(firstFinger.getLatitude(), firstFinger.getLongitude(),
+									secondFinger.getLatitude(), secondFinger.getLongitude());
+							needNewLatLon = false;
+						}
+					} else if (currentLoc != null && centerLoc != null) {
+						setDistanceText(currentLoc.getLatitude(), currentLoc.getLongitude(),
+								centerLoc.getLatitude(), centerLoc.getLongitude());
+						needNewLatLon = true;
+					} else {
+						setText(title, null);
+						needNewLatLon = true;
+					}
+				}
+				if (mode != cacheMode) {
 					cacheMode = mode;
 					setRulerControlIcon(this, mode);
 					if (mode != RulerMode.FIRST) {
 						setText(title, null);
 					}
 				}
-                return true;
-            }
+				return true;
+			}
 
             private void setDistanceText(double firstLat, double firstLon, double secondLat, double secondLon) {
                 float dist = (float) MapUtils.getDistance(firstLat, firstLon, secondLat, secondLon);

@@ -161,10 +161,11 @@ public class OsmandMapTileView implements IMapDownloaderCallback {
 	private boolean afterDoubleTap = false;
 	private boolean wasMapLinkedBeforeGesture = false;
 
-	private PointF firstPointer;
-	private PointF secondPointer;
-	private LatLon firstPointerLatLon;
-	private LatLon secondPointerLatLon;
+	private float firstTouchPointX;
+	private float firstTouchPointY;
+	private float secondTouchPointX;
+	private float secondTouchPointY;
+	private boolean twoFingersTouch;
 
 	public OsmandMapTileView(MapActivity activity, int w, int h) {
 		this.activity = activity;
@@ -175,11 +176,6 @@ public class OsmandMapTileView implements IMapDownloaderCallback {
 	public void init(final MapActivity ctx, int w, int h) {
 		application = (OsmandApplication) ctx.getApplicationContext();
 		settings = application.getSettings();
-
-		firstPointer = new PointF(-1, -1);
-		secondPointer = new PointF(-1, -1);
-		firstPointerLatLon = new LatLon(-1, -1);
-		secondPointerLatLon = new LatLon(-1, -1);
 
 		paintGrayFill = new Paint();
 		paintGrayFill.setColor(Color.GRAY);
@@ -315,20 +311,24 @@ public class OsmandMapTileView implements IMapDownloaderCallback {
 	}
 
 	// ///////////////////////// NON UI PART (could be extracted in common) /////////////////////////////
-	public PointF getFirstPointer() {
-		return firstPointer;
+	public float getFirstTouchPointX() {
+		return firstTouchPointX;
 	}
 
-	public PointF getSecondPointer() {
-		return secondPointer;
+	public float getFirstTouchPointY() {
+		return firstTouchPointY;
 	}
 
-	public LatLon getFirstPointerLatLon() {
-		return firstPointerLatLon;
+	public float getSecondTouchPointX() {
+		return secondTouchPointX;
 	}
 
-	public LatLon getSecondPointerLatLon() {
-		return secondPointerLatLon;
+	public float getSecondTouchPointY() {
+		return secondTouchPointY;
+	}
+
+	public boolean isTwoFingersTouch() {
+		return twoFingersTouch;
 	}
 
 	public void setIntZoom(int zoom) {
@@ -1033,22 +1033,20 @@ public class OsmandMapTileView implements IMapDownloaderCallback {
 			this.y1 = y1;
 			this.x2 = x2;
 			this.y2 = y2;
-			firstPointerLatLon = currentViewport.getLatLonFromPixel(x1, y1);
-			secondPointerLatLon = currentViewport.getLatLonFromPixel(x2, y2);
 		}
 
 		@Override
-		public void onActionPointerDownOrMove(PointF first, PointF second) {
-			firstPointer.set(first);
-			secondPointer.set(second);
+		public void onActionPointerDownOrMove(float x1, float y1, float x2, float y2) {
+			firstTouchPointX = x1;
+			firstTouchPointY = y1;
+			secondTouchPointX = x2;
+			secondTouchPointY = y2;
+			twoFingersTouch = true;
 		}
 
 		@Override
 		public void onActionPointerUp() {
-			firstPointer.set(-1, -1);
-			secondPointer.set(-1, -1);
-			firstPointerLatLon = new LatLon(-1, -1);
-			secondPointerLatLon = new LatLon(-1, -1);
+			twoFingersTouch = false;
 		}
 
 		@Override

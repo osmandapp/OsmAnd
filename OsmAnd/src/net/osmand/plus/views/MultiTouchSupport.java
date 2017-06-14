@@ -33,7 +33,7 @@ public class MultiTouchSupport {
 
     		public void onGestureInit(float x1, float y1, float x2, float y2);
 
-			public void onActionPointerDownOrMove(PointF first, PointF second);
+			public void onActionPointerDownOrMove(float x1, float y1, float x2, float y2);
 
 			public void onActionPointerUp();
 	}
@@ -107,7 +107,7 @@ public class MultiTouchSupport {
 				angle = (float) (Math.atan2(y2 - y1, x2 -x1) * 180 / Math.PI);
 			}
 			if (actionCode == MotionEvent.ACTION_DOWN || actionCode == MotionEvent.ACTION_MOVE) {
-				listener.onActionPointerDownOrMove(new PointF(x1, y1), new PointF(x2, y2));
+				listener.onActionPointerDownOrMove(x1, y1, x2, y2);
 			} else if (actionCode == MotionEvent.ACTION_UP || actionCode == MotionEvent.ACTION_POINTER_UP) {
 				listener.onActionPointerUp();
 			}
