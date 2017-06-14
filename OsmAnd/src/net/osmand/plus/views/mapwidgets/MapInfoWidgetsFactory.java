@@ -196,7 +196,7 @@ public class MapInfoWidgetsFactory {
 					OsmandMapTileView view = map.getMapView();
 
 
-					if (view.isTwoFingersTouch()) {
+					if (view.isMultiTouch()) {
 						if (needNewLatLon) {
 							float x1 = view.getFirstTouchPointX();
 							float y1 = view.getFirstTouchPointY();

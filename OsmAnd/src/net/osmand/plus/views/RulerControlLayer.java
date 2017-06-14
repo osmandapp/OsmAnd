@@ -84,7 +84,7 @@ public class RulerControlLayer extends OsmandMapLayer {
             final RulerMode mode = app.getSettings().RULER_MODE.get();
 
             if (mode == RulerMode.FIRST) {
-                if (view.isTwoFingersTouch()) {
+                if (view.isMultiTouch()) {
                     float x1 = view.getFirstTouchPointX();
                     float y1 = view.getFirstTouchPointY();
                     float x2 = view.getSecondTouchPointX();

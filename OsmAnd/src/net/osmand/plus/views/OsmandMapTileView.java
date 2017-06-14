@@ -165,7 +165,7 @@ public class OsmandMapTileView implements IMapDownloaderCallback {
 	private float firstTouchPointY;
 	private float secondTouchPointX;
 	private float secondTouchPointY;
-	private boolean twoFingersTouch;
+	private boolean multiTouch;
 
 	public OsmandMapTileView(MapActivity activity, int w, int h) {
 		this.activity = activity;
@@ -327,8 +327,8 @@ public class OsmandMapTileView implements IMapDownloaderCallback {
 		return secondTouchPointY;
 	}
 
-	public boolean isTwoFingersTouch() {
-		return twoFingersTouch;
+	public boolean isMultiTouch() {
+		return multiTouch;
 	}
 
 	public void setIntZoom(int zoom) {
@@ -1041,12 +1041,12 @@ public class OsmandMapTileView implements IMapDownloaderCallback {
 			firstTouchPointY = y1;
 			secondTouchPointX = x2;
 			secondTouchPointY = y2;
-			twoFingersTouch = true;
+			multiTouch = true;
 		}
 
 		@Override
 		public void onActionPointerUp() {
-			twoFingersTouch = false;
+			multiTouch = false;
 		}
 
 		@Override
