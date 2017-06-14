@@ -69,7 +69,9 @@ public class RulerControlLayer extends OsmandMapLayer {
         circleAttrs = new RenderingLineAttributes("rulerCircle");
         circleAttrs.paint.setStrokeWidth(2);
         circleAttrs.paint2.setTextSize(TEXT_SIZE * mapActivity.getResources().getDisplayMetrics().density);
-        circleAttrs.shadowPaint.setTextSize(TEXT_SIZE * mapActivity.getResources().getDisplayMetrics().density);
+        circleAttrs.paint3.setColor(Color.WHITE);
+        circleAttrs.paint3.setStrokeWidth(6);
+        circleAttrs.paint3.setTextSize(TEXT_SIZE * mapActivity.getResources().getDisplayMetrics().density);
         circleAttrs.shadowPaint.setStrokeWidth(6);
         circleAttrs.shadowPaint.setColor(Color.WHITE);
     }
@@ -216,9 +218,9 @@ public class RulerControlLayer extends OsmandMapLayer {
             canvas.rotate(-tb.getRotate(), center.x, center.y);
             canvas.drawCircle(center.x, center.y, radius * circleNumber, circleAttrs.shadowPaint);
             canvas.drawCircle(center.x, center.y, radius * circleNumber, circleAttrs.paint);
-            canvas.drawText(text, x1, y1, circleAttrs.shadowPaint);
+            canvas.drawText(text, x1, y1, circleAttrs.paint3);
             canvas.drawText(text, x1, y1, circleAttrs.paint2);
-            canvas.drawText(text, x2, y2, circleAttrs.shadowPaint);
+            canvas.drawText(text, x2, y2, circleAttrs.paint3);
             canvas.drawText(text, x2, y2, circleAttrs.paint2);
             canvas.rotate(tb.getRotate(), center.x, center.y);
         }
