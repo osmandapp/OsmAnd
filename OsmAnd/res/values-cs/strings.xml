@@ -2720,7 +2720,7 @@ Pokud potřebujete pomoci s aplikací OsmAnd, prosím kontaktujte naši podporu
     <string name="no_underlay">Bez podkladové vrstvy</string>
     <string name="subscribe_email_error">Chyba</string>
     <string name="subscribe_email_desc">Přihlaste se k odběru novinek o slevách aplikace a získejte 3 další stahování map!</string>
-    <string name="depth_contour_descr">"Sada map obsahuje hloubkové vrstevnice a body v moři  (založené na mřížce po 30 úhlových sekundách)."</string>
+    <string name="depth_contour_descr">Sada map obsahuje hloubkové vrstevnice a body v moři.</string>
     <string name="sea_depth_thanks">Děkujeme vám za nákup námořních hloubkových vrstevnic!</string>
     <string name="index_item_depth_contours_osmand_ext">Námořní hloubkové vrstevnice</string>
     <string name="index_item_depth_points_southern_hemisphere">Námořní hloubkové body jižní polokoule</string>
@@ -2756,4 +2756,5 @@ Pokud potřebujete pomoci s aplikací OsmAnd, prosím kontaktujte naši podporu
     <string name="mapillary_widget_descr">Umožňuje rychle přispět do Mapillary</string>
     <string name="mapillary_descr">On-line fotografie z ulic pro každého. Objevte místa, spolupracujte, zachyťte svět.</string>
     <string name="plugin_mapillary_descr">Fotografie z ulic pro každého. Objevte místa, spolupracujte, zachyťte svět.</string>
+    <string name="mapillary_widget">Nástroj Mapillary</string>
     </resources>
