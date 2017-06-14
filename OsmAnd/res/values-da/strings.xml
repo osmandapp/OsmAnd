@@ -3076,4 +3076,6 @@ Tidligere destination bliver sidste mellemliggende punkt.</string>
     <string name="distance_moving">Korrigeret afstand</string>
     <string name="shared_string_permissions">Tilladelser</string>
     <string name="import_gpx_failed_descr">OsmAnd kan ikke importere filen. Kontroller om OsmAnd har læsetilladelse på filplaceringen.</string>
+    <string name="map_widget_ruler_control_first_mode">Forbindelsestilstand</string>
+    <string name="map_widget_ruler_control_second_mode">Radius-tilstand</string>
     </resources>
