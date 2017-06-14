@@ -161,18 +161,10 @@ public class RulerControlLayer extends OsmandMapLayer {
 
         if (maxVertical >= maxHorizontal) {
             maxRadius = maxVertical;
-            if (topDist >= bottomDist) {
-                textSide = TextSide.TOP;
-            } else {
-                textSide = TextSide.BOTTOM;
-            }
+            textSide = TextSide.VERTICAL;
         } else {
             maxRadius = maxHorizontal;
-            if (rightDist >= leftDist) {
-                textSide = TextSide.RIGHT;
-            } else {
-                textSide = TextSide.LEFT;
-            }
+            textSide = TextSide.HORIZONTAL;
         }
         if (radius != 0) {
             updateText();
@@ -201,38 +193,40 @@ public class RulerControlLayer extends OsmandMapLayer {
         String text = cacheDistances.get(circleNumber - 1);
         circleAttrs.paint2.getTextBounds(text, 0, text.length(), bounds);
 
-        float x = 0;
-        float y = 0;
+        // coords of left or top text
+        float x1 = 0;
+        float y1 = 0;
+        // coords of right or bottom text
+        float x2 = 0;
+        float y2 = 0;
 
-        if (textSide == TextSide.TOP) {
-            x = center.x - bounds.width() / 2;
-            y = center.y - radius * circleNumber + bounds.height() / 2;
-        } else if (textSide == TextSide.RIGHT) {
-            x = center.x + radius * circleNumber - bounds.width() / 2;
-            y = center.y + bounds.height() / 2;
-        } else if (textSide == TextSide.BOTTOM) {
-            x = center.x - bounds.width() / 2;
-            y = center.y + radius * circleNumber + bounds.height() / 2;
-        } else if (textSide == TextSide.LEFT) {
-            x = center.x - radius * circleNumber - bounds.width() / 2;
-            y = center.y + bounds.height() / 2;
+        if (textSide == TextSide.VERTICAL) {
+            x1 = center.x - bounds.width() / 2;
+            y1 = center.y - radius * circleNumber + bounds.height() / 2;
+            x2 = center.x - bounds.width() / 2;
+            y2 = center.y + radius * circleNumber + bounds.height() / 2;
+        } else if (textSide == TextSide.HORIZONTAL) {
+            x1 = center.x - radius * circleNumber - bounds.width() / 2;
+            y1 = center.y + bounds.height() / 2;
+            x2 = center.x + radius * circleNumber - bounds.width() / 2;
+            y2 = center.y + bounds.height() / 2;
         }
 
         if (!mapActivity.getMapView().isZooming()) {
             canvas.rotate(-tb.getRotate(), center.x, center.y);
             canvas.drawCircle(center.x, center.y, radius * circleNumber, circleAttrs.shadowPaint);
             canvas.drawCircle(center.x, center.y, radius * circleNumber, circleAttrs.paint);
-            canvas.drawText(text, x, y, circleAttrs.shadowPaint);
-            canvas.drawText(text, x, y, circleAttrs.paint2);
+            canvas.drawText(text, x1, y1, circleAttrs.shadowPaint);
+            canvas.drawText(text, x1, y1, circleAttrs.paint2);
+            canvas.drawText(text, x2, y2, circleAttrs.shadowPaint);
+            canvas.drawText(text, x2, y2, circleAttrs.paint2);
             canvas.rotate(tb.getRotate(), center.x, center.y);
         }
     }
 
     private enum TextSide {
-        TOP,
-        BOTTOM,
-        LEFT,
-        RIGHT
+        VERTICAL,
+        HORIZONTAL
     }
 
     @Override
