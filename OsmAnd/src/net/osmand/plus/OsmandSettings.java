@@ -1301,7 +1301,7 @@ public class OsmandSettings {
 
 	public final OsmandPreference<Boolean> ANIMATE_MY_LOCATION = new BooleanPreference("animate_my_location", true).makeGlobal().cache();
 
-	public final OsmandPreference<Boolean> UPDATED_MAP_VIEW = new BooleanPreference("new_map_view", false).makeGlobal().cache();
+	public final OsmandPreference<Boolean> NEW_MAP_VIEW = new BooleanPreference("new_map_view", false).makeGlobal().cache();
 
 	public final OsmandPreference<Boolean> ROUTE_MAP_MARKERS_START_MY_LOC = new BooleanPreference("route_map_markers_start_my_loc", false).makeGlobal().cache();
 

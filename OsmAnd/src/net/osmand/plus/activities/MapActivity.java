@@ -203,7 +203,11 @@ public class MapActivity extends OsmandActionBarActivity implements DownloadEven
 		super.onCreate(savedInstanceState);
 		// Full screen is not used here
 		// getWindow().setFlags(WindowManager.LayoutParams.FLAG_FULLSCREEN, WindowManager.LayoutParams.FLAG_FULLSCREEN);
-		setContentView(R.layout.main);
+		if (settings.NEW_MAP_VIEW.get()) {
+			setContentView(R.layout.main_new);
+		} else {
+			setContentView(R.layout.main);
+		}
 
 		int statusBarHeight = 0;
 		int resourceId = getResources().getIdentifier("status_bar_height", "dimen", "android");

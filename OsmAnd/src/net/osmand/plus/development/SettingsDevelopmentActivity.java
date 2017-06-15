@@ -67,7 +67,7 @@ public class SettingsDevelopmentActivity extends SettingsBaseActivity {
 				R.string.animate_my_location,
 				R.string.animate_my_location_desc));
 
-		cat.addPreference(createCheckBoxPreference(settings.UPDATED_MAP_VIEW,
+		cat.addPreference(createCheckBoxPreference(settings.NEW_MAP_VIEW,
 				R.string.new_map_view,
 				R.string.new_map_view_desc));
 
