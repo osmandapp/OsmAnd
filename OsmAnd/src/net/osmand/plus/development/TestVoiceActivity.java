@@ -141,7 +141,7 @@ public class TestVoiceActivity extends OsmandActionBarActivity {
 	private String getVoiceSystemInfo() {
 		String v ="";
 		v += "App profile:  " + ((OsmandApplication) getApplication()).getSettings().APPLICATION_MODE.get().getStringKey();
-		v += "\n\nVoice guidance output:  " + ((OsmandApplication) getApplication()).getSettings().AUDIO_STREAM_GUIDANCE.get().getStringKey();
+		v += "\n\nVoice guidance output:  " + ((OsmandApplication) getApplication()).getSettings().AUDIO_STREAM_GUIDANCE.get();
 		v += "\n\nOsmAnd voice:  " + osmandVoice;
 		v += "\n\nOsmAnd voice language:  " + osmandVoiceLang;
 
