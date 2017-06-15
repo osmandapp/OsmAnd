@@ -329,7 +329,7 @@ public class TestVoiceActivity extends OsmandActionBarActivity {
 						infoButton.setText("\u25BA (11.1) (Tap to refresh)\n" + getVoiceSystemInfo());
 						Toast.makeText(TestVoiceActivity.this, "BT SCO init delay changed to " + ((OsmandApplication) getApplication()).getSettings().BT_SCO_DELAY.get() + "\u00A0ms.", Toast.LENGTH_LONG).show();
 					} else {
-						Toast.makeText(TestVoiceActivity.this, "Setting only available when using Phone Call Audio.", Toast.LENGTH_LONG).show();
+						Toast.makeText(TestVoiceActivity.this, "Setting only available when using 'Phone call audio'.", Toast.LENGTH_LONG).show();
 					}
 				}
 			}
