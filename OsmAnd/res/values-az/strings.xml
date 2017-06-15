@@ -344,7 +344,7 @@
 \nSeçimlər üçün basıb saxlayın"</string>
     <string name="gpx_info_start_time">Başlama vaxtı: %1$tF, %1$tT</string>
     <string name="gpx_info_end_time">Bitmə vaxtı: %1$tF, %1$tT</string>
-    <string name="gpx_info_maximum_speed">"Maksimum sürət: %1$s "</string>
+    <string name="gpx_info_maximum_speed">Maksimum sürət: %1$s</string>
     <string name="osmo_user_joined">İstifadəçi %1$s %2$s qrupuna qoşuldu</string>
     <string name="osmo_show_group_notifications">Qrup bildirişlərini göstər</string>
     <string name="osmo_follow">İzlə</string>
@@ -417,7 +417,7 @@
     <string name="speak_street_names">Küçə adları (TTS)</string>
     <string name="speak_speed_limit">Sürət limiti</string>
     <string name="speak_cameras">Sürət kameraları</string>
-    <string name="route_descr_map_location">"Xəritə: "</string>
+    <string name="route_descr_map_location">Xəritə:</string>
     <string name="route_to">Buraya:</string>
     <string name="route_from">Buradan:</string>
     <string name="settings_preset">Standart profil</string>
@@ -451,7 +451,7 @@
     <string name="av_def_action_audio">Səs yaz</string>
     <string name="av_use_external_camera_descr">Şəkil üçün sistem proqramını istifadə et</string>
     <string name="av_use_external_camera">Kamera proqramını istifadə et</string>
-    <string name="av_settings">"Səs/video parametrləri "</string>
+    <string name="av_settings">Səs/video parametrləri</string>
     <string name="download_select_map_types">Digər xəritələr</string>
     <string name="download_regular_maps">Standart xəritə</string>
     <string name="map_widget_max_speed">Sürət limiti</string>
@@ -558,7 +558,7 @@
     <string name="search_position_address">Ünvan…</string>
     <string name="search_position_favorites">Favoritlər…</string>
     <string name="context_menu_item_search">Buranın yaxınlığında axtar</string>
-    <string name="filename_input">"Fayl adı: "</string>
+    <string name="filename_input">Fayl adı:</string>
     <string name="local_index_mi_upload_gpx">OSM-a göndər</string>
     <string name="show_more_map_detail">Digər xəritə detallarını göstər</string>
     <string name="favorite_home_category">Ev</string>
@@ -889,11 +889,11 @@
     <string name="gpx_wpt">Yol nöqtəsi</string>
     <string name="gpx_info_waypoints">Yol nöqtələri: %1$s</string>
     <string name="gpx_info_distance">Məsafə: %1$s (%2$s nöqtə)</string>
-    <string name="gpx_info_average_speed">"Ortalama sürət: %1$s "</string>
+    <string name="gpx_info_average_speed">Ortalama sürət: %1$s</string>
     <string name="gpx_info_avg_altitude">Ortalama yüksəklik: %1$s</string>
     <string name="gpx_info_diff_altitude">Yüksəklik diapazonu: %1$s</string>
     <string name="gpx_info_asc_altitude">Eniş/yoxuş: %1$s</string>
-    <string name="gpx_selection_number_of_points">" %1$s nöqtə"</string>
+    <string name="gpx_selection_number_of_points">%1$s nöqtə</string>
     <string name="gpx_selection_point">%1$s nöqtəsi</string>
     <string name="gpx_selection_points">%1$s
 \nNöqtələr</string>
@@ -915,7 +915,7 @@
     <string name="osmo_enable_tracker">Mövqelərimi göndər</string>
     <string name="osmo_control">OsMo sürətli giriş</string>
     <string name="osmo_auth_pending">İcazə gözlənilir…</string>
-    <string name="osmo_io_error">"OsMo qoşulma problemi: "</string>
+    <string name="osmo_io_error">OsMo qoşulma problemi:</string>
     <string name="osmo_mode_restart">OsMo sessiyanı yenidən başlat</string>
     <string name="osmo_mode_on">OsMo sessiyanı dayandır</string>
     <string name="osmo_mode_off">OsMo sessiyanı başlat</string>
@@ -1348,7 +1348,7 @@
     <string name="monitoring_settings_descr">Səyahətlərinizin necə qeyd ediləcəyini tənzimləyin</string>
     <string name="av_use_external_recorder_descr">Video çəkmək üçün sistem proqramını istifadə et</string>
     <string name="av_use_external_recorder">Sistem proqramını istifadə et</string>
-    <string name="recording_error">"Qeydetmə zamanı səhv baş verdi "</string>
+    <string name="recording_error">Qeydetmə zamanı səhv baş verdi</string>
     <string name="recording_is_recorded">Səs/video qeyd edilir. Dayandırmaq üçün AV widget-inə basın.</string>
     <string name="building_number">Bina nömrəsi</string>
     <string name="shared_string_permissions">İcazələr</string>
@@ -1410,8 +1410,8 @@
     <string name="osmo_connect_to_device">Cihaz ilə əlaqə</string>
     <string name="osmo_connect_to_group">Qrup ilə əlaqə</string>
     <string name="osmo_activity">OpenStreetMap Nəzarət</string>
-    <string name="osmo_locations_sent">"%1$d məkan göndərildi (buferdə %2$d) "</string>
-    <string name="osmo_conn_successfull">"Bağlantı yaradıldı: %1$s "</string>
+    <string name="osmo_locations_sent">%1$d məkan göndərildi (buferdə %2$d)</string>
+    <string name="osmo_conn_successfull">Bağlantı yaradıldı: %1$s</string>
     <string name="osmo_settings_uuid">Bənzərsiz cihaz İD-i</string>
     <string name="use_points_as_intermediates">Nöqtələr arasındakı marşrutu hesabla</string>
     <string name="osmo_settings_descr">Nəzarət parametrlərini tənzimləyin və şəxsi nəzarət kanalını quraşdırın</string>
