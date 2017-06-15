@@ -141,6 +141,17 @@ public class TestVoiceActivity extends OsmandActionBarActivity {
 	private String getVoiceSystemInfo() {
 		String v ="";
 		v += "App profile:  " + ((OsmandApplication) getApplication()).getSettings().APPLICATION_MODE.get().getStringKey();
+
+		if (((OsmandApplication) getApplication()).getSettings().AUDIO_STREAM_GUIDANCE.get() == 3) {
+			v += "\n\nVoice guidance output:  Media/music audio";
+		} else if (((OsmandApplication) getApplication()).getSettings().AUDIO_STREAM_GUIDANCE.get() == 5) {
+			v += "\n\nVoice guidance output:  Notification audio";
+		} else if (((OsmandApplication) getApplication()).getSettings().AUDIO_STREAM_GUIDANCE.get() == 0) {
+			v += "\n\nVoice guidance output:  Phone call audio";
+		} else {
+			v += "\n\nVoice guidance output:  " + ((OsmandApplication) getApplication()).getSettings().AUDIO_STREAM_GUIDANCE.get();
+		}
+
 		v += "\n\nVoice guidance output:  " + ((OsmandApplication) getApplication()).getSettings().AUDIO_STREAM_GUIDANCE.get();
 		v += "\n\nOsmAnd voice:  " + osmandVoice;
 		v += "\n\nOsmAnd voice language:  " + osmandVoiceLang;
@@ -159,7 +170,8 @@ public class TestVoiceActivity extends OsmandActionBarActivity {
 			v += "\n\nBT SCO:  Current profile is not set to 'Phone Call Audio'.";
 		}
 
-		v += "\n\nPhone call audio delay:  " + ((OsmandApplication) getApplication()).getSettings().BT_SCO_DELAY.get() + " ms";
+		v += "\n\nPhone call audio delay:  " + ((OsmandApplication) getApplication()).getSettings().BT_SCO_DELAY.get() + "\u00A0ms";
+		v += "\n"
 		return v;
 	}
 
@@ -270,7 +282,7 @@ public class TestVoiceActivity extends OsmandActionBarActivity {
 
 		addButton(ll, "       Voice system info:", builder(p));
 		addButton(ll, "(11.1) (Tap to display all)\n\n" + voiceSystemInfo, builder(p).attention(""));
-		addButton(ll, "(11.2)\nTap to change Phone call audio delay (if car stereo cuts off prompts). Default is 1500 ms.", builder(p).attention(""));
+		addButton(ll, "(11.2)\nTap to change Phone call audio delay (if car stereo cuts off prompts). Default is 1500\u00A0ms.", builder(p).attention(""));
 		ll.forceLayout();
 	}
 
@@ -309,7 +321,7 @@ public class TestVoiceActivity extends OsmandActionBarActivity {
 						} else {
 							((OsmandApplication) getApplication()).getSettings().BT_SCO_DELAY.set(1000);
 						}
-						Toast.makeText(TestVoiceActivity.this, "BT SCO init delay changed to " + ((OsmandApplication) getApplication()).getSettings().BT_SCO_DELAY.get() + " ms", Toast.LENGTH_LONG).show();
+						Toast.makeText(TestVoiceActivity.this, "BT SCO init delay changed to " + ((OsmandApplication) getApplication()).getSettings().BT_SCO_DELAY.get() + "\u00A0ms", Toast.LENGTH_LONG).show();
 					} else {
 						Toast.makeText(TestVoiceActivity.this, "Setting only available for Phone Call Audio", Toast.LENGTH_LONG).show();
 					}
