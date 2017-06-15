@@ -313,7 +313,7 @@
 	<string name="poi_bank">Bankejo</string>
 	<string name="poi_beach">Sablobordo</string>
 	<string name="poi_car_repair">Aŭtomobil-riparejo</string>
-	<string name="poi_service_tyres">Aerbendoj</string>
+	<string name="poi_service_tyres">aerbendoj</string>
 	<string name="poi_vehicle_inspection">Aŭtomobil-kontrolejo</string>
 	<string name="poi_fuel_diesel">Dizeloleo</string>
 	<string name="poi_fuel_gtl_diesel">Dizeloleo sinteza</string>
@@ -1608,11 +1608,11 @@
 	<string name="poi_second_hand_no">Sen brokantaĵoj</string>
 	<string name="poi_second_hand_only">Nur brokantaĵoj</string>
 
-	<string name="poi_service_parts">Partoj</string>
-	<string name="poi_service_dealer">Vendado de aŭtoj</string>
-	<string name="poi_service_repair">Riparo</string>
+	<string name="poi_service_parts">partoj</string>
+	<string name="poi_service_dealer">vendado de aŭtoj</string>
+	<string name="poi_service_repair">riparo</string>
 	<string name="poi_service_repair_no">Sen riparo</string>
-	<string name="poi_service_electrical">Riparo de elektraj aŭtoj</string>
+	<string name="poi_service_electrical">riparo de elektraj aŭtoj</string>
 	<string name="poi_motorcycle_repair">Riparejo de motorcikloj</string>
 	<string name="poi_self_service_yes">Jes</string>
 	<string name="poi_self_service_no">Sen memservo</string>
@@ -1912,21 +1912,21 @@
 	<string name="poi_surveillance_yes">Supergardo: jes</string>
 	<string name="poi_shop_additional_yes">Kun vendejo</string>
 
-	<string name="poi_service_bicycle_retail_yes">Vendado</string>
-	<string name="poi_service_bicycle_retail_no">Vendo de bicikloj: ne</string>
-	<string name="poi_service_bicycle_repair_yes">Riparado</string>
+	<string name="poi_service_bicycle_retail_yes">vendado</string>
+	<string name="poi_service_bicycle_retail_no">Vendado de bicikloj: ne</string>
+	<string name="poi_service_bicycle_repair_yes">riparo</string>
 	<string name="poi_service_bicycle_repair_no">Riparo de bicikloj: ne</string>
-	<string name="poi_service_bicycle_rental_yes">Pruntado</string>
+	<string name="poi_service_bicycle_rental_yes">prunto</string>
 	<string name="poi_service_bicycle_rental_no">Prunto de bicikloj: ne</string>
-	<string name="poi_service_bicycle_pump_yes">Aerpumpilo</string>
+	<string name="poi_service_bicycle_pump_yes">aerpumpilo</string>
 	<string name="poi_service_bicycle_pump_no">Aerpumpilo: ne</string>
-	<string name="poi_service_bicycle_diy_yes">Iloj por mem-riparo de bicikloj</string>
+	<string name="poi_service_bicycle_diy_yes">iloj por mem-riparo de bicikloj</string>
 	<string name="poi_service_bicycle_diy_no">Iloj por mem-riparo de bicikloj: ne</string>
-	<string name="poi_service_bicycle_cleaning_yes">Purigado</string>
+	<string name="poi_service_bicycle_cleaning_yes">purigo</string>
 	<string name="poi_service_bicycle_cleaning_no">Purigo de bicikloj: ne</string>
-	<string name="poi_service_bicycle_chaintool_yes">Iloj por ĉeno de biciklo</string>
+	<string name="poi_service_bicycle_chaintool_yes">iloj por ĉeno de biciklo</string>
 	<string name="poi_service_bicycle_chaintool_no">Iloj por ĉeno de biciklo: ne</string>
-	<string name="poi_service_bicycle_second_hand_yes">Brokantado de bicikloj</string>
+	<string name="poi_service_bicycle_second_hand_yes">brokantado de bicikloj</string>
 	<string name="poi_service_bicycle_second_hand_no">Brokantado de bicikloj: ne</string>
 
 	<string name="poi_wildlife_hide">Best-observejo</string>
@@ -3383,22 +3383,22 @@
 
 <string name="poi_stands">Spektoteraso</string>
 
-<string name="poi_motorcycle_services">Servoj</string>
+<string name="poi_motorcycle_services">Servo</string>
 	<string name="poi_motorcycle_type">Motorcikla speco</string>
 
-<string name="poi_motorcycle_sales_yes">Vendado</string>
-	<string name="poi_motorcycle_sales_no">Vendado: ne</string>
-	<string name="poi_motorcycle_sales_yes_used">Vendado, brokantado</string>
-	<string name="poi_motorcycle_sales_used">Brokantado</string>
-	<string name="poi_motorcycle_rental_yes">Luado</string>
-	<string name="poi_motorcycle_rental_no">Luado: ne</string>
-	<string name="poi_motorcycle_repair_yes">Riparado</string>
-	<string name="poi_motorcycle_repair_no">Riparado: ne</string>
-	<string name="poi_motorcycle_parts_yes">Partoj</string>
+<string name="poi_motorcycle_sales_yes">vendo</string>
+	<string name="poi_motorcycle_sales_no">vendo: ne</string>
+	<string name="poi_motorcycle_sales_yes_used">vendo, brokanto</string>
+	<string name="poi_motorcycle_sales_used">brokanto</string>
+	<string name="poi_motorcycle_rental_yes">luo</string>
+	<string name="poi_motorcycle_rental_no">Luo: ne</string>
+	<string name="poi_motorcycle_repair_yes">riparo</string>
+	<string name="poi_motorcycle_repair_no">Riparo: ne</string>
+	<string name="poi_motorcycle_parts_yes">partoj</string>
 	<string name="poi_motorcycle_parts_no">Partoj: ne</string>
-	<string name="poi_motorcycle_tyres_yes">Aerbendoj</string>
+	<string name="poi_motorcycle_tyres_yes">aerbendoj</string>
 	<string name="poi_motorcycle_tyres_no">Aerbendoj: ne</string>
-	<string name="poi_motorcycle_clothes_yes">Motorciklaj vestaĵoj</string>
+	<string name="poi_motorcycle_clothes_yes">motorciklaj vestaĵoj</string>
 	<string name="poi_motorcycle_clothes_no">Motorciklaj vestaĵoj: ne</string>
 	<string name="poi_motorcycle_type_scooter">skoteroj</string>
 	<string name="poi_motorcycle_type_sportbike">sportaj</string>
