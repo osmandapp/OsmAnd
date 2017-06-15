@@ -67,6 +67,10 @@ public class SettingsDevelopmentActivity extends SettingsBaseActivity {
 				R.string.animate_my_location,
 				R.string.animate_my_location_desc));
 
+		cat.addPreference(createCheckBoxPreference(settings.UPDATED_MAP_VIEW,
+				R.string.new_map_view,
+				R.string.new_map_view_desc));
+
 		final Preference firstRunPreference = new Preference(this);
 		firstRunPreference.setTitle(R.string.simulate_initial_startup);
 		firstRunPreference.setSummary(R.string.simulate_initial_startup_descr);
