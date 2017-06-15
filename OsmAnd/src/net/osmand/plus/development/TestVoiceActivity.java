@@ -297,7 +297,7 @@ public class TestVoiceActivity extends OsmandActionBarActivity {
 			// Section headline buttons
 			button.setPadding(10, 20, 10, 5);
 		} else {
-			button.setPadding(50, 5, 10, 5);
+			button.setPadding(40, 5, 10, 5);
 		}
 		if (description.startsWith("\u25BA (11.1)")) {
 			infoButton = button;
