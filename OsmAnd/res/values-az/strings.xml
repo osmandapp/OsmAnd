@@ -1522,4 +1522,6 @@
     <string name="access_expanded_list">Genişlədilmiş siyahı</string>
     <string name="unit_of_length_descr">Uzunluq vahidlərini dəyişin</string>
     <string name="unit_of_length">Uzunluq vahidi</string>
+    <string name="map_widget_ruler_control_first_mode">Qoşulma rejimi</string>
+    <string name="map_widget_ruler_control_second_mode">Radius rejimi</string>
     </resources>
