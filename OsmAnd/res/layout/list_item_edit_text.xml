@@ -1,0 +1,25 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    android:background="?attr/bg_color"
+    android:orientation="vertical"
+    android:paddingLeft="56dp"
+    android:paddingStart="56dp">
+
+    <android.support.v7.widget.AppCompatEditText
+        android:id="@+id/edit_text"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginEnd="16dp"
+        android:layout_marginRight="16dp"
+        android:hint="@string/mapillary_menu_edit_text_hint"
+        android:textSize="@dimen/default_list_text_size" />
+
+    <View
+        android:id="@+id/divider"
+        android:layout_width="wrap_content"
+        android:layout_height="1dp"
+        android:layout_marginTop="12dp"
+        android:background="?attr/dashboard_divider" />
+</LinearLayout>

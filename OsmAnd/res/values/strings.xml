@@ -9,6 +9,14 @@
          3. All your modified/created strings are in the top of the file (to make easier find what\'s translated).
     PLEASE: Have a look at http://code.google.com/p/osmand/wiki/UIConsistency, it may really improve your and our work  :-)  Thx - Hardy
     -->
+    <string name="mapillary_menu_date_to">To</string>
+    <string name="mapillary_menu_date_from">From</string>
+    <string name="mapillary_menu_descr_dates">View images added in a certain period.</string>
+    <string name="mapillary_menu_title_dates">Dates</string>
+    <string name="mapillary_menu_edit_text_hint">Type user name</string>
+    <string name="mapillary_menu_descr_username">View images added by a certain user.</string>
+    <string name="mapillary_menu_title_username">Username</string>
+    <string name="mapillary_menu_filter_description">You can filter images by the name of the user or by the date.</string>
     <string name="map_widget_ruler_control_first_mode">Connection mode</string>
     <string name="map_widget_ruler_control_second_mode">Radius mode</string>
     <string name="shared_string_permissions">Permissions</string>
