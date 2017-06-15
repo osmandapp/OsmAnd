@@ -160,12 +160,12 @@ public class TestVoiceActivity extends OsmandActionBarActivity {
 		} else {
 			v += "\n \u25CF Voice language availability:   Recorded voice";
 			v += "\n \u25CF Voice actually used:   Recorded voice";
-					}
+		}
 
 		if (((OsmandApplication) getApplication()).getSettings().AUDIO_STREAM_GUIDANCE.get() == 0) {
 			v += "\n \u25CF BT SCO:   " + AbstractPrologCommandPlayer.btScoInit;
 		} else {
-			v += "\n \u25CF BT SCO:   The current profile is not set to use 'Phone Call Audio'.";
+			v += "\n \u25CF BT SCO:   The current app profile is not set to use 'Phone call audio'.";
 		}
 
 		v += "\n \u25CF Phone call audio delay:   " + ((OsmandApplication) getApplication()).getSettings().BT_SCO_DELAY.get() + "\u00A0ms";
