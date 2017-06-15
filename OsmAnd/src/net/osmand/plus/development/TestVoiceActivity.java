@@ -140,26 +140,26 @@ public class TestVoiceActivity extends OsmandActionBarActivity {
 
 	private String getVoiceSystemInfo() {
 		String v ="";
-		v += "App profile:  " + ((OsmandApplication) getApplication()).getSettings().APPLICATION_MODE.get();
-		v += "\nnVoice guidance output:  " + ((OsmandApplication) getApplication()).getSettings().AUDIO_STREAM_GUIDANCE.get();
-		v += "\nnOsmAnd voice:  " + osmandVoice;
-		v += "\nnOsmAnd voice language:  " + osmandVoiceLang;
+		v += "App profile:  " + ((OsmandApplication) getApplication()).getSettings().APPLICATION_MODE.get().getStringKey();
+		v += "\n\nVoice guidance output:  " + ((OsmandApplication) getApplication()).getSettings().AUDIO_STREAM_GUIDANCE.get().getStringKey();
+		v += "\n\nOsmAnd voice:  " + osmandVoice;
+		v += "\n\nOsmAnd voice language:  " + osmandVoiceLang;
 
 		if (AbstractPrologCommandPlayer.getCurrentVersion() > 99) {
-			v += "\nnVoice language availability:  " + TTSCommandPlayerImpl.getTtsVoiceStatus();
-			v += "\nnVoice actually used:  " + TTSCommandPlayerImpl.getTtsVoiceUsed();
+			v += "\n\nVoice language availability:  " + TTSCommandPlayerImpl.getTtsVoiceStatus();
+			v += "\n\nVoice actually used:  " + TTSCommandPlayerImpl.getTtsVoiceUsed();
 		} else {
-			v += "\nnVoice language availability:  Recorded voice";
-			v += "\nnVoice actually used:  Recorded voice";
+			v += "\n\nVoice language availability:  Recorded voice";
+			v += "\n\nVoice actually used:  Recorded voice";
 					}
 
 		if (((OsmandApplication) getApplication()).getSettings().AUDIO_STREAM_GUIDANCE.get() == 0) {
-			v += "\nnBT SCO:  " + AbstractPrologCommandPlayer.btScoInit;
+			v += "\n\nBT SCO:  " + AbstractPrologCommandPlayer.btScoInit;
 		} else {
-			v += "\nnBT SCO:  Current profile is not set to Phone Call Audio.";
+			v += "\n\nBT SCO:  Current profile is not set to 'Phone Call Audio'.";
 		}
 
-		v += "\nnPhone call audio delay:  " + ((OsmandApplication) getApplication()).getSettings().BT_SCO_DELAY.get() + " ms";
+		v += "\n\nPhone call audio delay:  " + ((OsmandApplication) getApplication()).getSettings().BT_SCO_DELAY.get() + " ms";
 		return v;
 	}
 
@@ -271,7 +271,6 @@ public class TestVoiceActivity extends OsmandActionBarActivity {
 		addButton(ll, "       Voice system info:", builder(p));
 		addButton(ll, "(11.1) (Tap to display all)\n\n" + voiceSystemInfo, builder(p).attention(""));
 		addButton(ll, "(11.2)\nTap to change Phone call audio delay (if car stereo cuts off prompts). Default is 1500 ms.", builder(p).attention(""));
-		//addButton(ll, "(11.3)\nOsmAnd voice: " + osmandVoice + "\nOsmAnd voice language: " + osmandVoiceLang + "\n\nTap to view system's language availability status and voice actually used", builder(p));
 		ll.forceLayout();
 	}
 
@@ -294,11 +293,7 @@ public class TestVoiceActivity extends OsmandActionBarActivity {
 			public void onClick(View v) {
 				builder.play();
 				if (description.startsWith("(11.1)")) {
-//					if (((OsmandApplication) getApplication()).getSettings().AUDIO_STREAM_GUIDANCE.get() == 0) {
-//						Toast.makeText(TestVoiceActivity.this, AbstractPrologCommandPlayer.btScoInit + "\nBT SCO init delay:  " + ((OsmandApplication) getApplication()).getSettings().BT_SCO_DELAY.get() + " ms", Toast.LENGTH_LONG).show();
-//					} else {
-//						Toast.makeText(TestVoiceActivity.this, "Action only available for Phone Call Audio", Toast.LENGTH_LONG).show();
-//					}
+					voiceSystemInfo = getVoiceSystemInfo();
 					Toast.makeText(TestVoiceActivity.this, voiceSystemInfo, Toast.LENGTH_LONG).show();
 				}
 				if (description.startsWith("(11.2)")) {
@@ -319,11 +314,6 @@ public class TestVoiceActivity extends OsmandActionBarActivity {
 						Toast.makeText(TestVoiceActivity.this, "Setting only available for Phone Call Audio", Toast.LENGTH_LONG).show();
 					}
 				}
-//				if (description.startsWith("(11.3)")) {
-//					final String systemVoiceStatus = AbstractPrologCommandPlayer.getCurrentVersion() > 99 ? TTSCommandPlayerImpl.getTtsVoiceStatus() : "Recorded voice";
-//					final String systemVoiceUsed = AbstractPrologCommandPlayer.getCurrentVersion() > 99 ? TTSCommandPlayerImpl.getTtsVoiceUsed() : "Recorded voice";
-//					Toast.makeText(TestVoiceActivity.this, "Voice language availability:  " + systemVoiceStatus + "\n\nVoice actually used:  " + systemVoiceUsed, Toast.LENGTH_LONG).show();
-//				}
 			}
 		});
 	}
