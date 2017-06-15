@@ -171,7 +171,7 @@ public class TestVoiceActivity extends OsmandActionBarActivity {
 		}
 
 		v += "\n\nPhone call audio delay:  " + ((OsmandApplication) getApplication()).getSettings().BT_SCO_DELAY.get() + "\u00A0ms";
-		v += "\n"
+		v += "\n";
 		return v;
 	}
 
@@ -282,7 +282,7 @@ public class TestVoiceActivity extends OsmandActionBarActivity {
 
 		addButton(ll, "       Voice system info:", builder(p));
 		addButton(ll, "(11.1) (Tap to display all)\n\n" + voiceSystemInfo, builder(p).attention(""));
-		addButton(ll, "(11.2)\nTap to change Phone call audio delay (if car stereo cuts off prompts). Default is 1500\u00A0ms.", builder(p).attention(""));
+		addButton(ll, "(11.2) Tap to change Phone call audio delay (if car stereo cuts off prompts). Default is 1500\u00A0ms.", builder(p).attention(""));
 		ll.forceLayout();
 	}
 
