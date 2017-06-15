@@ -293,7 +293,12 @@ public class TestVoiceActivity extends OsmandActionBarActivity {
 		button.setTransformationMethod(null); //or else button text is all upper case
 		button.setText(description);
 		button.setLayoutParams(new LayoutParams(LayoutParams.FILL_PARENT, LayoutParams.WRAP_CONTENT));
-		button.setPadding(10, 5, 10, 2);
+		if (!description.startsWith("\u25BA (")) {
+			// Section headline buttons
+			button.setPadding(60, 20, 60, 5);
+		} else {
+			button.setPadding(10, 5, 10, 5);
+		}
 		if (description.startsWith("\u25BA (11.1)")) {
 			infoButton = button;
 		}
