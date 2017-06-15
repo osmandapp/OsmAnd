@@ -208,7 +208,7 @@ public class TestVoiceActivity extends OsmandActionBarActivity {
 	}
 
 	private void addButtons(final LinearLayout ll, CommandPlayer p) {
-		addButton(ll, "Route calculated and number tests:", builder(p));
+		addButton(ll, "       Route calculated and number tests:", builder(p));
 		addButton(ll, "\u25BA (1.1)  New route calculated, 150m, 230sec (00:03:50)", builder(p).newRouteCalculated(150, 230));
 		addButton(ll, "\u25BA (1.2)  New route calculated, 1350m, 3680sec (01:01:20)", builder(p).newRouteCalculated(1350, 3680));
 		addButton(ll, "\u25BA (1.3)  New route calculated 3700m, 7320sec (02:02)", builder(p).newRouteCalculated(3700, 7320));
@@ -218,7 +218,7 @@ public class TestVoiceActivity extends OsmandActionBarActivity {
 		addButton(ll, "\u25BA (2.3)  Route recalculated 89750m, 55800sec (15:30)", builder(p).routeRecalculated(89750, 55800));
 		addButton(ll, "\u25BA (2.4)  Route recalculated 125900m, 92700sec (25:45)", builder(p).routeRecalculated(125900, 92700));
 
-		addButton(ll, "All turn types: prepareTurn, makeTurnIn, turn:", builder(p));
+		addButton(ll, "       All turn types: prepareTurn, makeTurnIn, turn:", builder(p));
 		addButton(ll, "\u25BA (3.1)  After 1520m turn slightly left", builder(p).prepareTurn(AbstractPrologCommandPlayer.A_LEFT_SL, 1520, street(p, "")));
 		addButton(ll, "\u25BA (3.2)  In 450m turn sharply left onto 'Hauptstra"+"\u00df"+"e', then bear right", builder(p).turn(AbstractPrologCommandPlayer.A_LEFT_SH, 450, street(p, "Hauptstraße")).then().bearRight(street(p, "")));
 		addButton(ll, "\u25BA (3.3)  Turn left, then in 100m turn slightly right", builder(p).turn(AbstractPrologCommandPlayer.A_LEFT, street(p, "")).then().turn(AbstractPrologCommandPlayer.A_RIGHT_SL, 100, street(p, "")));
@@ -226,7 +226,7 @@ public class TestVoiceActivity extends OsmandActionBarActivity {
 		addButton(ll, "\u25BA (3.5)  In 370m turn slightly right onto 'Route 23' 'Main Street', then bear left", builder(p).turn(AbstractPrologCommandPlayer.A_RIGHT_SL, 370, street(p, "Main Street", "Route 23")).then().bearLeft(street(p, "")));
 		addButton(ll, "\u25BA (3.6)  Turn sharply right onto 'Main Street'", builder(p).turn(AbstractPrologCommandPlayer.A_RIGHT_SH, street(p, "Main Street")));
 
-		addButton(ll, "Keep left/right: prepareTurn, makeTurnIn, turn:", builder(p));
+		addButton(ll, "       Keep left/right: prepareTurn, makeTurnIn, turn:", builder(p));
 		addButton(ll, "\u25BA (4.1)  After 1810m keep left ' '", builder(p).prepareTurn(AbstractPrologCommandPlayer.A_LEFT_KEEP, 1810, street(p, "")));
 		addButton(ll, "\u25BA (4.2)  In 400m keep left ' ' then in 80m keep right onto 'A1'", builder(p).turn(AbstractPrologCommandPlayer.A_LEFT_KEEP, 400, street(p, "")).then().turn(AbstractPrologCommandPlayer.A_RIGHT_KEEP, 80, street(p,"", "A1")));
 		addButton(ll, "\u25BA (4.3)  Keep right on 'Highway 60'", builder(p).turn(AbstractPrologCommandPlayer.A_RIGHT_KEEP, street(p, "Highway 60", "", "", "Highway 60")));
@@ -234,18 +234,18 @@ public class TestVoiceActivity extends OsmandActionBarActivity {
 				builder(p).turn(AbstractPrologCommandPlayer.A_LEFT, street(p, "Broadway"))
 				.then().turn(AbstractPrologCommandPlayer.A_RIGHT_KEEP, 100, street(p, "")).andArriveAtDestination("Town Hall"));
 
-		addButton(ll, "Roundabouts: prepareTurn, makeTurnIn, turn:", builder(p));
+		addButton(ll, "       Roundabouts: prepareTurn, makeTurnIn, turn:", builder(p));
 		addButton(ll, "\u25BA (5.1)  After 1250m enter a roundabout", builder(p).prepareRoundAbout(1250, 3, street(p,"", "I 15", "Los Angeles")));
 		addButton(ll, "\u25BA (5.2)  In 450m enter the roundabout and take the 1st exit onto 'I 15' toward 'Los Angeles'", builder(p).roundAbout(450, 0, 1, street(p,"", "I 15", "Los Angeles")));
 		addButton(ll, "\u25BA (5.3)  Roundabout: Take the 2nd exit onto 'Highway 60'", builder(p).roundAbout(0, 2, street(p, "Highway 60")));
 
-		addButton(ll, "U-turns: prepareTurn, makeTurnIn, turn, when possible:", builder(p));
+		addButton(ll, "       U-turns: prepareTurn, makeTurnIn, turn, when possible:", builder(p));
 		addButton(ll, "\u25BA (6.1)  After 640m make a U-turn", builder(p).prepareMakeUT(640, street(p, "")));
 		addButton(ll, "\u25BA (6.2)  In 400m make a U-turn", builder(p).makeUT(400, street(p, "")));
 		addButton(ll, "\u25BA (6.3)  Make a U-turn on 'Riviera'", builder(p).makeUT(street(p, "Riviera", "", "", "Riviera")));
 		addButton(ll, "\u25BA (6.4)  When possible, make a U-turn", builder(p).makeUTwp());
 
-		addButton(ll, "Go straight, follow the road, approaching:", builder(p));
+		addButton(ll, "       Go straight, follow the road, approaching:", builder(p));
 		addButton(ll, "\u25BA (7.1)  Straight ahead", builder(p).goAhead());
 		addButton(ll, "\u25BA (7.2)  Continue for 2350m to ' '", builder(p).goAhead(2350, street(p, "")));
 		addButton(ll, "\u25BA (7.3)  Continue for 360m to 'Broadway' and arrive at your intermediate destination ' '", builder(p).goAhead(360, street(p,"Broadway")).andArriveAtIntermediatePoint(""));
@@ -254,14 +254,14 @@ public class TestVoiceActivity extends OsmandActionBarActivity {
 		addButton(ll, "\u25BA (7.6)  Continue for 400m and pass favorite 'Brewery'", builder(p).goAhead(400, null).andArriveAtFavorite("Brewery"));
 		addButton(ll, "\u25BA (7.7)  Continue for 600m and pass POI 'Museum'", builder(p).goAhead(600, null).andArriveAtPoi("Museum"));
 
-		addButton(ll, "Arriving and passing points:", builder(p));
+		addButton(ll, "       Arriving and passing points:", builder(p));
 		addButton(ll, "\u25BA (8.1)  Arrive at your destination 'Home'", builder(p).arrivedAtDestination("Home"));
 		addButton(ll, "\u25BA (8.2)  Arrive at your intermediate destination 'Friend'", builder(p).arrivedAtIntermediatePoint("Friend"));
 		addButton(ll, "\u25BA (8.3)  Passing GPX waypoint 'Trailhead'", builder(p).arrivedAtWayPoint("Trailhead"));
 		addButton(ll, "\u25BA (8.4)  Passing favorite 'Brewery'", builder(p).arrivedAtFavorite("Brewery"));
 		addButton(ll, "\u25BA (8.5)  Passing POI 'Museum'", builder(p).arrivedAtPoi("Museum"));
 
-		addButton(ll, "Attention prompts:", builder(p));
+		addButton(ll, "       Attention prompts:", builder(p));
 		addButton(ll, "\u25BA (9.1)  You are exceeding the speed limit '50' (18 m/s)", builder(p).speedAlarm(50, 18f));
 		addButton(ll, "\u25BA (9.2)  Attention, speed camera", builder(p).attention("SPEED_CAMERA"));
 		addButton(ll, "\u25BA (9.3)  Attention, border control", builder(p).attention("BORDER_CONTROL"));
@@ -271,13 +271,13 @@ public class TestVoiceActivity extends OsmandActionBarActivity {
 		addButton(ll, "\u25BA (9.7)  Attention, stop sign", builder(p).attention("STOP"));
 		addButton(ll, "\u25BA (9.8)  Attention, pedestrian crosswalk", builder(p).attention("PEDESTRIAN"));
 
-		addButton(ll, "Other prompts:", builder(p));
+		addButton(ll, "       Other prompts:", builder(p));
 		addButton(ll, "\u25BA (10.1) GPS signal lost", builder(p).gpsLocationLost());
 		addButton(ll, "\u25BA (10.2) GPS signal recovered", builder(p).gpsLocationRecover());
 		addButton(ll, "\u25BA (10.3) You have been off the route for 1050m", builder(p).offRoute(1050));
 		addButton(ll, "\u25BA (10.4) You are back on the route", builder(p).backOnRoute());
 
-		addButton(ll, "Voice system info:", builder(p));
+		addButton(ll, "       Voice system info:", builder(p));
 		addButton(ll, "\u25BA (11.1) (Tap to refresh)\n" + getVoiceSystemInfo(), builder(p).attention(""));
 		addButton(ll, "\u25BA (11.2) Tap to change Phone call audio delay (if car stereo cuts off prompts). Default is 1500\u00A0ms.", builder(p).attention(""));
 		ll.forceLayout();
@@ -294,7 +294,7 @@ public class TestVoiceActivity extends OsmandActionBarActivity {
 		button.setText(description);
 		button.setLayoutParams(new LayoutParams(LayoutParams.FILL_PARENT, LayoutParams.WRAP_CONTENT));
 		button.setPadding(10, 5, 10, 2);
-		if (description.startsWith("(11.1)")) {
+		if (description.startsWith("\u25BA (11.1)")) {
 			infoButton = button;
 		}
 		
@@ -304,7 +304,7 @@ public class TestVoiceActivity extends OsmandActionBarActivity {
 			@Override
 			public void onClick(View v) {
 				builder.play();
-				if (description.startsWith("(11.1)")) {
+				if (description.startsWith("\u25BA (11.1)")) {
 					infoButton.setText("\u25BA (11.1) (Tap to refresh)\n" + getVoiceSystemInfo());
 					Toast.makeText(TestVoiceActivity.this, "Info refreshed.", Toast.LENGTH_LONG).show();
 				}
