@@ -2692,27 +2692,27 @@ Facebook：https://www.facebook.com/osmandapp
     <string name="quick_action_page_list_descr">輕點動作按鈕會直達下面的清單。</string>
     <string name="auto_split_recording_title">自動分割錄製之後的間隙</string>
 	<string name="auto_split_recording_descr">如果日期已更改，開始新區段在6分鐘後的間隙，新軌跡在2小時後的間隙，或新檔案在更長的間隙之後。</string>
-    <string name="release_2_6">" • 新功能：快速動作按鈕
-\n
-\n •  改進了觸控螢幕手勢的回應(同時平移和縮放)
-\n
-\n • 新的地圖字體覆蓋了更多的語言環境
-\n
-\n • 支援 TTS 不同版本的區域語言(和語法)
-\n
-\n • 在一些地圖樣式和維基百科的清晰度增強
-\n
-\n • 支援開放位置碼 (OLC)
-\n
-\n •  為記錄的 GPX 軌跡和預測的路線顯示海拔、坡度和速度的概貌
-\n
-\n •  在自行車路線中\"駕駛樣式\"設定和邏輯的改進
-\n
-\n •  在自行車路線中使用高度資料的設定
-\n
-\n •  一些其它的改進和錯誤修復
-\n
-\n 和更多… "</string>
+    <string name="release_2_6">"\\022 新功能：快速動作按鈕 
+\n 
+\n •  改進了觸控螢幕手勢的回應(同時平移和縮放) 
+\n 
+\n • 新的地圖字體覆蓋了更多的語言環境 
+\n 
+\n • 支援 TTS 不同版本的區域語言(和語法) 
+\n 
+\n • 在一些地圖樣式和維基百科的清晰度增強 
+\n 
+\n • 支援開放位置碼 (OLC) 
+\n 
+\n •  為記錄的 GPX 軌跡和預測的路線顯示海拔、坡度和速度的概貌 
+\n 
+\n •  在自行車路線中\"駕駛樣式\"設定和邏輯的改進 
+\n 
+\n •  在自行車路線中使用高度資料的設定 
+\n 
+\n •  一些其它的改進和錯誤修復 
+\n 
+\n 和更多…"</string>
 	<string name="rendering_attr_depthContours_description">顯示等深線和標記</string>
     <string name="rendering_attr_depthContours_name">航海等深線</string>
 	<string name="routing_attr_height_relief_smoothness_factor_name">地貌柔滑系數</string>
@@ -2874,4 +2874,6 @@ OsmAnd 是開放原始碼，而且正在積極的開發。應用程式從報告�
     <string name="distance_moving">距離已校正</string>
     <string name="shared_string_permissions">權限</string>
     <string name="import_gpx_failed_descr">OsmAnd 無法匯入檔案。 請檢查 OsmAnd 是否有權限從該位置去讀取檔案。</string>
+    <string name="map_widget_ruler_control_first_mode">連接方式</string>
+    <string name="map_widget_ruler_control_second_mode">半徑方式</string>
     </resources>
