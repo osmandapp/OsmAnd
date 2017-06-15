@@ -279,7 +279,7 @@ public class TestVoiceActivity extends OsmandActionBarActivity {
 		addButton(ll, "(10.4) You are back on the route", builder(p).backOnRoute());
 
 		addButton(ll, "       Voice system info:", builder(p));
-		addButton(ll, "(11.1) (Tap to display all)\n" + voiceSystemInfo, builder(p).attention(""));
+		addButton(ll, "(11.1) (Tap to refresh)\n" + voiceSystemInfo, builder(p).attention(""));
 		addButton(ll, "(11.2) Tap to change Phone call audio delay (if car stereo cuts off prompts). Default is 1500\u00A0ms.", builder(p).attention(""));
 		ll.forceLayout();
 	}
@@ -304,7 +304,8 @@ public class TestVoiceActivity extends OsmandActionBarActivity {
 				builder.play();
 				if (description.startsWith("(11.1)")) {
 					voiceSystemInfo = getVoiceSystemInfo();
-					Toast.makeText(TestVoiceActivity.this, voiceSystemInfo, Toast.LENGTH_LONG).show();
+					button.setText("(11.1) (Tap to refresh)\n" + voiceSystemInfo);
+					Toast.makeText(TestVoiceActivity.this, "Info refreshed.", Toast.LENGTH_LONG).show();
 				}
 				if (description.startsWith("(11.2)")) {
 					if (((OsmandApplication) getApplication()).getSettings().AUDIO_STREAM_GUIDANCE.get() == 0) {
