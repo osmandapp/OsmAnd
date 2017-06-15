@@ -2959,4 +2959,6 @@ OsmAnd мае адкрыты зыходны код і актыўна разві�
     <string name="distance_moving">Дыстанцыя папраўленая</string>
     <string name="shared_string_permissions">Дазволы</string>
     <string name="import_gpx_failed_descr">OsmAnd не можа імпартаваць файл. Калі ласка, праверце, ці мае OsmAnd дазволы на чытанне файла з гэтага каталога.</string>
+    <string name="map_widget_ruler_control_first_mode">Рэжым злучэння</string>
+    <string name="map_widget_ruler_control_second_mode">Рэжым радыуса</string>
     </resources>
