@@ -140,36 +140,36 @@ public class TestVoiceActivity extends OsmandActionBarActivity {
 
 	private String getVoiceSystemInfo() {
 		String v ="";
-		v += "\u25CF App profile:  " + ((OsmandApplication) getApplication()).getSettings().APPLICATION_MODE.get().getStringKey();
+		v += " \u25CF App profile:   " + ((OsmandApplication) getApplication()).getSettings().APPLICATION_MODE.get().getStringKey();
 
 		if (((OsmandApplication) getApplication()).getSettings().AUDIO_STREAM_GUIDANCE.get() == 3) {
-			v += "\n\u25CF Voice guidance output:  Media/music audio";
+			v += "\n \u25CF Voice guidance output:   Media/music audio";
 		} else if (((OsmandApplication) getApplication()).getSettings().AUDIO_STREAM_GUIDANCE.get() == 5) {
-			v += "\n\u25CF Voice guidance output:  Notification audio";
+			v += "\n \u25CF Voice guidance output:   Notification audio";
 		} else if (((OsmandApplication) getApplication()).getSettings().AUDIO_STREAM_GUIDANCE.get() == 0) {
-			v += "\n\u25CF Voice guidance output:  Phone call audio";
+			v += "\n \u25CF Voice guidance output:   Phone call audio";
 		} else {
-			v += "\n\u25CF Voice guidance output:  " + ((OsmandApplication) getApplication()).getSettings().AUDIO_STREAM_GUIDANCE.get();
+			v += "\n \u25CF Voice guidance output:   " + ((OsmandApplication) getApplication()).getSettings().AUDIO_STREAM_GUIDANCE.get();
 		}
 
-		v += "\n\u25CF OsmAnd voice:  " + osmandVoice;
-		v += "\n\u25CF OsmAnd voice language:  " + osmandVoiceLang;
+		v += "\n \u25CF OsmAnd voice:   " + osmandVoice;
+		v += "\n \u25CF OsmAnd voice language:   " + osmandVoiceLang;
 
 		if (AbstractPrologCommandPlayer.getCurrentVersion() > 99) {
-			v += "\n\u25CF Voice language availability:  " + TTSCommandPlayerImpl.getTtsVoiceStatus();
-			v += "\n\u25CF Voice actually used:  " + TTSCommandPlayerImpl.getTtsVoiceUsed();
+			v += "\n \u25CF Voice language availability:   " + TTSCommandPlayerImpl.getTtsVoiceStatus();
+			v += "\n \u25CF Voice actually used:   " + TTSCommandPlayerImpl.getTtsVoiceUsed();
 		} else {
-			v += "\n\u25CF Voice language availability:  Recorded voice";
-			v += "\n\u25CF Voice actually used:  Recorded voice";
+			v += "\n \u25CF Voice language availability:   Recorded voice";
+			v += "\n \u25CF Voice actually used:   Recorded voice";
 					}
 
 		if (((OsmandApplication) getApplication()).getSettings().AUDIO_STREAM_GUIDANCE.get() == 0) {
-			v += "\n\u25CF BT SCO:  " + AbstractPrologCommandPlayer.btScoInit;
+			v += "\n \u25CF BT SCO:   " + AbstractPrologCommandPlayer.btScoInit;
 		} else {
-			v += "\n\u25CF BT SCO:  Current profile is not set to 'Phone Call Audio'.";
+			v += "\n \u25CF BT SCO:   Current profile is not set to 'Phone Call Audio'.";
 		}
 
-		v += "\n\u25CF Phone call audio delay:  " + ((OsmandApplication) getApplication()).getSettings().BT_SCO_DELAY.get() + "\u00A0ms";
+		v += "\n \u25CF Phone call audio delay:   " + ((OsmandApplication) getApplication()).getSettings().BT_SCO_DELAY.get() + "\u00A0ms";
 		return v;
 	}
 
@@ -289,7 +289,7 @@ public class TestVoiceActivity extends OsmandActionBarActivity {
 	}
 
 	public void addButton(ViewGroup layout, final String description, final CommandBuilder builder){
-		Button button = new Button(this);
+		final Button button = new Button(this);
 		button.setGravity(Gravity.LEFT);
 		button.setTransformationMethod(null); //or else button text is all upper case
 		button.setText(description);
