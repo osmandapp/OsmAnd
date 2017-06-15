@@ -294,6 +294,9 @@ public class TestVoiceActivity extends OsmandActionBarActivity {
 		button.setText(description);
 		button.setLayoutParams(new LayoutParams(LayoutParams.FILL_PARENT, LayoutParams.WRAP_CONTENT));
 		button.setPadding(10, 5, 10, 2);
+		if (description.startsWith("(11.1)")) {
+			infoButton = button;
+		}
 		
 		layout.addView(button);
 		button.setOnClickListener(new View.OnClickListener() {
@@ -302,7 +305,6 @@ public class TestVoiceActivity extends OsmandActionBarActivity {
 			public void onClick(View v) {
 				builder.play();
 				if (description.startsWith("(11.1)")) {
-					infoButton = button;
 					infoButton.setText("\u25BA (11.1) (Tap to refresh)\n" + getVoiceSystemInfo());
 					Toast.makeText(TestVoiceActivity.this, "Info refreshed.", Toast.LENGTH_LONG).show();
 				}
