@@ -190,32 +190,32 @@ public class MapInfoWidgetsFactory {
 			@Override
 			public boolean updateInfo(DrawSettings drawSettings) {
 				RulerMode mode = map.getMyApplication().getSettings().RULER_MODE.get();
-				if (mode == RulerMode.FIRST) {
+				OsmandMapTileView view = map.getMapView();
+
+				if (view.isMultiTouch()) {
+					if (needNewLatLon) {
+						float x1 = view.getFirstTouchPointX();
+						float y1 = view.getFirstTouchPointY();
+						float x2 = view.getSecondTouchPointX();
+						float y2 = view.getSecondTouchPointY();
+						LatLon firstFinger = view.getCurrentRotatedTileBox().getLatLonFromPixel(x1, y1);
+						LatLon secondFinger = view.getCurrentRotatedTileBox().getLatLonFromPixel(x2, y2);
+						setDistanceText(firstFinger.getLatitude(), firstFinger.getLongitude(),
+								secondFinger.getLatitude(), secondFinger.getLongitude());
+						needNewLatLon = false;
+					}
+				} else if (mode == RulerMode.FIRST) {
 					Location currentLoc = map.getMyApplication().getLocationProvider().getLastKnownLocation();
 					LatLon centerLoc = map.getMapLocation();
-					OsmandMapTileView view = map.getMapView();
 
-
-					if (view.isMultiTouch()) {
-						if (needNewLatLon) {
-							float x1 = view.getFirstTouchPointX();
-							float y1 = view.getFirstTouchPointY();
-							float x2 = view.getSecondTouchPointX();
-							float y2 = view.getSecondTouchPointY();
-							LatLon firstFinger = view.getCurrentRotatedTileBox().getLatLonFromPixel(x1, y1);
-							LatLon secondFinger = view.getCurrentRotatedTileBox().getLatLonFromPixel(x2, y2);
-							setDistanceText(firstFinger.getLatitude(), firstFinger.getLongitude(),
-									secondFinger.getLatitude(), secondFinger.getLongitude());
-							needNewLatLon = false;
-						}
-					} else if (currentLoc != null && centerLoc != null) {
+					if (currentLoc != null && centerLoc != null) {
 						setDistanceText(currentLoc.getLatitude(), currentLoc.getLongitude(),
 								centerLoc.getLatitude(), centerLoc.getLongitude());
 						needNewLatLon = true;
-					} else {
-						setText(title, null);
-						needNewLatLon = true;
 					}
+				} else {
+					setText(title, null);
+					needNewLatLon = true;
 				}
 				if (mode != cacheMode) {
 					cacheMode = mode;
