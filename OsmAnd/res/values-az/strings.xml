@@ -271,7 +271,7 @@
     <string name="watch">İzlə</string>
     <string name="notes">Qeydlər</string>
     <string name="online_map">Onlayn xəritə</string>
-    <string name="free">"%1$s boş "</string>
+    <string name="free">%1$s boş</string>
     <string name="device_memory">Cihaz yaddaşı</string>
     <string name="edit_group">Qrupa düzəliş et</string>
     <string name="remove_the_tag">İŞARƏNİ SİL</string>
@@ -342,8 +342,8 @@
     <string name="local_index_gpx_info_show">"
 \n
 \nSeçimlər üçün basıb saxlayın"</string>
-    <string name="gpx_info_start_time">"Başlama vaxtı: %1$tF, %1$tT "</string>
-    <string name="gpx_info_end_time">"Bitmə vaxtı: %1$tF, %1$tT "</string>
+    <string name="gpx_info_start_time">Başlama vaxtı: %1$tF, %1$tT</string>
+    <string name="gpx_info_end_time">Bitmə vaxtı: %1$tF, %1$tT</string>
     <string name="gpx_info_maximum_speed">"Maksimum sürət: %1$s "</string>
     <string name="osmo_user_joined">İstifadəçi %1$s %2$s qrupuna qoşuldu</string>
     <string name="osmo_show_group_notifications">Qrup bildirişlərini göstər</string>
@@ -887,8 +887,8 @@
     <string name="save_as_favorites_points">Favorit qrup olaraq saxla</string>
     <string name="select_destination_and_intermediate_points">Təyinat nöqtələrini seçin</string>
     <string name="gpx_wpt">Yol nöqtəsi</string>
-    <string name="gpx_info_waypoints">"Yol nöqtələri: %1$s "</string>
-    <string name="gpx_info_distance">"Məsafə: %1$s (%2$s nöqtə) "</string>
+    <string name="gpx_info_waypoints">Yol nöqtələri: %1$s</string>
+    <string name="gpx_info_distance">Məsafə: %1$s (%2$s nöqtə)</string>
     <string name="gpx_info_average_speed">"Ortalama sürət: %1$s "</string>
     <string name="gpx_info_avg_altitude">Ortalama yüksəklik: %1$s</string>
     <string name="gpx_info_diff_altitude">Yüksəklik diapazonu: %1$s</string>
@@ -1379,7 +1379,7 @@
     <string name="save_track_to_gpx">Naviqasiya zamanı izi avtomatik qeyd et</string>
     <string name="save_track_to_gpx_descrp">Naviqasiya zamanı iz GPX formatında izlər qovluğunda avtomatik saxlanacaq</string>
     <string name="none_selected_gpx">Heç bir GPX faylı seçilməyib. Seçmək üçün mövcud izə basıb saxlayın.</string>
-    <string name="gpx_info_subtracks">"Alt izlər: %1$s "</string>
+    <string name="gpx_info_subtracks">Alt izlər: %1$s</string>
     <string name="gpx_selection_track">%1$s
 \nİz %2$s</string>
     <string name="gpx_file_is_empty">GPX iz boşdur</string>
@@ -1520,4 +1520,6 @@
     <string name="donation_to_osm">OpenStreetMap cəmiyyəti üçün ianə</string>
     <string name="donation_to_osm_desc">İanənizin bir hissəsi OpenStreetMap-a dəyişikliklər təqdim edən OSM istifadəçilərinə göndəriləcək. Abunəliyin qiyməti eyni qalır.</string>
     <string name="access_expanded_list">Genişlədilmiş siyahı</string>
+    <string name="unit_of_length_descr">Uzunluq vahidlərini dəyişin</string>
+    <string name="unit_of_length">Uzunluq vahidi</string>
     </resources>
