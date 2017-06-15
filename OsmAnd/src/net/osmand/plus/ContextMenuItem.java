@@ -27,6 +27,7 @@ public class ContextMenuItem {
 	private final int layout;
 	private boolean loading;
 	private final boolean category;
+	private final boolean clickable;
 	private final boolean skipPaintingWithoutColor;
 	private final int pos;
 	private String description;
@@ -47,6 +48,7 @@ public class ContextMenuItem {
 							@LayoutRes int layout,
 							boolean loading,
 							boolean category,
+							boolean clickable,
 							boolean skipPaintingWithoutColor, int pos,
 							String description,
 							ContextMenuAdapter.ItemClickListener itemClickListener,
@@ -65,6 +67,7 @@ public class ContextMenuItem {
 		this.layout = layout;
 		this.loading = loading;
 		this.category = category;
+		this.clickable = clickable;
 		this.skipPaintingWithoutColor = skipPaintingWithoutColor;
 		this.pos = pos;
 		this.description = description;
@@ -133,6 +136,10 @@ public class ContextMenuItem {
 
 	public boolean isCategory() {
 		return category;
+	}
+
+	public boolean isClickable() {
+		return clickable;
 	}
 
 	public int getPos() {
@@ -223,6 +230,7 @@ public class ContextMenuItem {
 		private int mLayout = INVALID_ID;
 		private boolean mLoading = false;
 		private boolean mIsCategory = false;
+		private boolean mIsClickable = true;
 		private int mPosition = -1;
 		private String mDescription = null;
 		private ContextMenuAdapter.ItemClickListener mItemClickListener = null;
@@ -287,6 +295,11 @@ public class ContextMenuItem {
 			return this;
 		}
 
+		public ItemBuilder setClickable(boolean clickable) {
+			mIsClickable = clickable;
+			return this;
+		}
+
 		public ItemBuilder setPosition(int position) {
 			mPosition = position;
 			return this;
@@ -338,7 +351,7 @@ public class ContextMenuItem {
 
 		public ContextMenuItem createItem() {
 			return new ContextMenuItem(mTitleId, mTitle, mIcon, mColorRes, mSecondaryIcon,
-					mSelected, mProgress, mLayout, mLoading, mIsCategory, mSkipPaintingWithoutColor,
+					mSelected, mProgress, mLayout, mLoading, mIsCategory, mIsClickable, mSkipPaintingWithoutColor,
 					mPosition, mDescription, mItemClickListener, mIntegerListener, mProgressListener,
 					mHideDivider, mMinHeight, mTag);
 		}

@@ -21,7 +21,6 @@ import android.widget.ProgressBar;
 import android.widget.SeekBar;
 import android.widget.TextView;
 
-import net.osmand.AndroidUtils;
 import net.osmand.PlatformUtil;
 import net.osmand.plus.activities.HelpActivity;
 import net.osmand.plus.activities.actions.AppModeDialog;
@@ -115,7 +114,7 @@ public class ContextMenuAdapter {
 		public boolean isEnabled(int position) {
 			final ContextMenuItem item = getItem(position);
 			if (item != null) {
-				return !item.isCategory() && item.getLayout() != R.layout.drawer_divider;
+				return !item.isCategory() && item.isClickable() && item.getLayout() != R.layout.drawer_divider;
 			}
 			return true;
 		}
@@ -331,6 +330,11 @@ public class ContextMenuAdapter {
 			}
 
 			if (item.isCategory()) {
+				convertView.setFocusable(false);
+				convertView.setClickable(false);
+			}
+
+			if (!item.isClickable()) {
 				convertView.setFocusable(false);
 				convertView.setClickable(false);
 			}
