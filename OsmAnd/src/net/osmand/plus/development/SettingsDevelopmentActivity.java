@@ -13,6 +13,7 @@ import android.preference.PreferenceCategory;
 import android.preference.PreferenceScreen;
 import android.support.v7.app.AlertDialog;
 import android.view.View;
+import android.widget.Toast;
 
 import net.osmand.plus.ApplicationMode;
 import net.osmand.plus.OsmAndLocationSimulation;
@@ -67,9 +68,18 @@ public class SettingsDevelopmentActivity extends SettingsBaseActivity {
 				R.string.animate_my_location,
 				R.string.animate_my_location_desc));
 
-		cat.addPreference(createCheckBoxPreference(settings.NEW_MAP_VIEW,
-				R.string.new_map_view,
-				R.string.new_map_view_desc));
+        CheckBoxPreference newMapViewPref = createCheckBoxPreference(settings.NEW_MAP_VIEW,
+                R.string.new_map_view,
+                R.string.new_map_view_desc);
+		newMapViewPref.setOnPreferenceChangeListener(new Preference.OnPreferenceChangeListener() {
+			@Override
+			public boolean onPreferenceChange(Preference preference, Object o) {
+				SettingsDevelopmentActivity.super.onPreferenceChange(preference, o);
+				Toast.makeText(SettingsDevelopmentActivity.this, "Restart app to apply settings", Toast.LENGTH_SHORT).show();
+				return true;
+			}
+		});
+        cat.addPreference(newMapViewPref);
 
 		final Preference firstRunPreference = new Preference(this);
 		firstRunPreference.setTitle(R.string.simulate_initial_startup);
