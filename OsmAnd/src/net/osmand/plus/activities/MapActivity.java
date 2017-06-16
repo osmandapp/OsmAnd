@@ -287,6 +287,27 @@ public class MapActivity extends OsmandActionBarActivity implements DownloadEven
 
 		mapActions.updateDrawerMenu();
 		drawerLayout = (DrawerLayout) findViewById(R.id.drawer_layout);
+		drawerLayout.addDrawerListener(new DrawerLayout.DrawerListener() {
+			@Override
+			public void onDrawerSlide(View drawerView, float slideOffset) {
+				mapView.setMultiTouch(false);
+			}
+
+			@Override
+			public void onDrawerOpened(View drawerView) {
+
+			}
+
+			@Override
+			public void onDrawerClosed(View drawerView) {
+
+			}
+
+			@Override
+			public void onDrawerStateChanged(int newState) {
+
+			}
+		});
 
 		IntentFilter filter = new IntentFilter(Intent.ACTION_SCREEN_OFF);
 		screenOffReceiver = new ScreenOffReceiver();
