@@ -185,7 +185,6 @@ public class MapInfoWidgetsFactory {
 		final String title = map.getResources().getString(R.string.map_widget_show_ruler);
         final TextInfoWidget rulerControl = new TextInfoWidget(map) {
 			boolean needNewLatLon;
-			RulerMode cacheMode = map.getMyApplication().getSettings().RULER_MODE.get();
 
 			@Override
 			public boolean updateInfo(DrawSettings drawSettings) {
@@ -204,25 +203,18 @@ public class MapInfoWidgetsFactory {
 								secondFinger.getLatitude(), secondFinger.getLongitude());
 						needNewLatLon = false;
 					}
-				} else if (mode == RulerMode.FIRST) {
+				} else if (mode == RulerMode.FIRST || mode == RulerMode.SECOND) {
 					Location currentLoc = map.getMyApplication().getLocationProvider().getLastKnownLocation();
 					LatLon centerLoc = map.getMapLocation();
 
 					if (currentLoc != null && centerLoc != null) {
 						setDistanceText(currentLoc.getLatitude(), currentLoc.getLongitude(),
 								centerLoc.getLatitude(), centerLoc.getLongitude());
-						needNewLatLon = true;
 					}
+					needNewLatLon = true;
 				} else {
 					setText(title, null);
 					needNewLatLon = true;
-				}
-				if (mode != cacheMode) {
-					cacheMode = mode;
-					setRulerControlIcon(this, mode);
-					if (mode != RulerMode.FIRST) {
-						setText(title, null);
-					}
 				}
 				return true;
 			}
@@ -240,7 +232,6 @@ public class MapInfoWidgetsFactory {
 		rulerControl.setOnClickListener(new OnClickListener() {
 			@Override
 			public void onClick(View view) {
-				rulerControl.setText(title, null);
 				final RulerMode mode = map.getMyApplication().getSettings().RULER_MODE.get();
 				RulerMode newMode = RulerMode.FIRST;
 				if (mode == RulerMode.FIRST) {
