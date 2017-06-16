@@ -22,6 +22,8 @@
             android:layout_marginRight="12dp"
             android:layout_weight="1"
             android:text="@string/mapillary_menu_date_from"
+            android:textColor="?android:textColorSecondary"
+            android:textSize="@dimen/default_desc_text_size"
             tools:text="From" />
 
         <android.support.v7.widget.AppCompatTextView
@@ -31,7 +33,9 @@
             android:layout_marginLeft="12dp"
             android:layout_marginStart="12dp"
             android:layout_weight="1"
-            android:text="@string/mapillary_menu_date_to"
+            android:text="@string/shared_string_to"
+            android:textColor="?android:textColorSecondary"
+            android:textSize="@dimen/default_desc_text_size"
             tools:text="To" />
     </LinearLayout>
 
@@ -47,7 +51,9 @@
             android:layout_height="wrap_content"
             android:layout_marginEnd="12dp"
             android:layout_marginRight="12dp"
-            android:layout_weight="1" />
+            android:layout_weight="1"
+            android:textColor="?android:textColorPrimary"
+            android:textSize="@dimen/default_list_text_size" />
 
         <android.support.v7.widget.AppCompatSpinner
             android:id="@+id/from_spinner"
@@ -55,7 +61,9 @@
             android:layout_height="wrap_content"
             android:layout_marginLeft="12dp"
             android:layout_marginStart="12dp"
-            android:layout_weight="1" />
+            android:layout_weight="1"
+            android:textColor="?android:textColorPrimary"
+            android:textSize="@dimen/default_list_text_size" />
     </LinearLayout>
 
     <View

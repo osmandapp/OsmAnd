@@ -42,15 +42,15 @@ public class MapillaryMenu {
             }
         };
 
-        boolean light = settings.isLightContent();
+        boolean nightMode = mapActivity.getMyApplication().getDaynightHelper().isNightModeForMapControls();
         int toggleIconColorId;
         int toggleIconId;
         if (selected) {
             toggleIconId = R.drawable.ic_action_view;
-            toggleIconColorId = light ? R.color.color_dialog_buttons_light : R.color.color_dialog_buttons_dark;
+            toggleIconColorId = nightMode ? R.color.color_dialog_buttons_light : R.color.color_dialog_buttons_dark;
         } else {
             toggleIconId = R.drawable.ic_action_hide;
-            toggleIconColorId = light ? R.color.icon_color : 0;
+            toggleIconColorId = nightMode ? R.color.icon_color : 0;
         }
 
         contextMenuAdapter.addItem(new ContextMenuItem.ItemBuilder()

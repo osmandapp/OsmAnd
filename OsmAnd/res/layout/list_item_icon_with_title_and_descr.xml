@@ -42,6 +42,7 @@
             android:layout_height="match_parent"
             android:ellipsize="end"
             android:lines="1"
+            android:textColor="?android:textColorSecondary"
             android:textSize="@dimen/default_desc_text_size"
             tools:text="View images added by a certain user." />
     </LinearLayout>
