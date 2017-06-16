@@ -131,9 +131,27 @@ public class RulerControlLayer extends OsmandMapLayer {
     }
 
     private void drawDistance(Canvas canvas, RotatedTileBox tb, QuadPoint center, Location currentLoc) {
-        int currentLocX = tb.getPixXFromLonNoRot(currentLoc.getLongitude());
-        int currentLocY = tb.getPixYFromLatNoRot(currentLoc.getLatitude());
-        canvas.drawLine(currentLocX, currentLocY, center.x, center.y, lineAttrs.paint);
+        int currX = tb.getPixXFromLonNoRot(currentLoc.getLongitude());
+        int currY = tb.getPixYFromLatNoRot(currentLoc.getLatitude());
+        int width = tb.getPixWidth();
+        int height = tb.getPixHeight();
+
+        if (currX < 0 || currY < 0 || currX > width || currY > height) {
+            float x = (currX + center.x) / 2;
+            float y = (currY + center.y) / 2;
+
+            while (true) {
+                if (x < 0 || y < 0 || x > width || y > height) {
+                    currX = (int) x;
+                    currY = (int) y;
+                } else {
+                    break;
+                }
+                x = (x + center.x) / 2;
+                y = (y + center.y) / 2;
+            }
+        }
+        canvas.drawLine(currX, currY, center.x, center.y, lineAttrs.paint);
     }
 
     private void updateData(RotatedTileBox tb, QuadPoint center) {
