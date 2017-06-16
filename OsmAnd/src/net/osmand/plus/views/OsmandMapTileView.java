@@ -1034,6 +1034,10 @@ public class OsmandMapTileView implements IMapDownloaderCallback {
 			this.x2 = x2;
 			this.y2 = y2;
 			if (x1 != x2 && y1 != y2) {
+				firstTouchPointX = x1;
+				firstTouchPointY = y1;
+				secondTouchPointX = x2;
+				secondTouchPointY = y2;
 				multiTouch = true;
 			}
 		}
