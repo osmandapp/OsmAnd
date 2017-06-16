@@ -2944,4 +2944,6 @@ Od Afganistanu po Zimbabwe, przez Australię po USA. Argentyna, Brazylia, Kanada
     <string name="distance_moving">Poprawiona odległość</string>
     <string name="shared_string_permissions">Uprawnienia</string>
     <string name="import_gpx_failed_descr">Nie można zaimportować pliku. Proszę sprawdzić czy program posiada uprawnienia do odczytywania pliku z jego położenia.</string>
+    <string name="map_widget_ruler_control_first_mode">Tryb łączenia</string>
+    <string name="map_widget_ruler_control_second_mode">Tryb promienia</string>
     </resources>
