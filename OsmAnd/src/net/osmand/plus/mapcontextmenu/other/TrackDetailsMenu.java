@@ -297,7 +297,7 @@ public class TrackDetailsMenu {
 					trackChartPoints.setGpx(getGpxItem().group.getGpx());
 				}
 				location = new LatLon(wpt.lat, wpt.lon);
-				List<Pair<String, WptPt>> xAxisPoints = getXAxisPoints(chart);
+				List<WptPt> xAxisPoints = getXAxisPoints(chart);
 				trackChartPoints.setHighlightedPoint(location);
 				trackChartPoints.setXAxisPoints(xAxisPoints);
 				if (gpxItem.route) {
@@ -312,13 +312,12 @@ public class TrackDetailsMenu {
 		fitTrackOnMap(chart, location, forceFit);
 	}
 
-	private List<Pair<String, WptPt>> getXAxisPoints(LineChart chart) {
-		List<Pair<String, WptPt>> xAxisPoints = new ArrayList<>();
+	private List<WptPt> getXAxisPoints(LineChart chart) {
+		List<WptPt> xAxisPoints = new ArrayList<>();
 		float[] entries = chart.getXAxis().mEntries;
 		for (int i = 0; i < entries.length; i++) {
-			String formattedEntry = chart.getXAxis().getValueFormatter().getFormattedValue(entries[i], chart.getXAxis());
 			WptPt pointToAdd = getPoint(chart, entries[i]);
-			xAxisPoints.add(new Pair<>(formattedEntry, pointToAdd));
+			xAxisPoints.add(pointToAdd);
 		}
 		return xAxisPoints;
 	}
@@ -586,12 +585,12 @@ public class TrackDetailsMenu {
 	}
 
 	public class TrackChartPoints {
-		private List<Pair<String, WptPt>> xAxisPoints;
+		private List<WptPt> xAxisPoints;
 		private LatLon highlightedPoint;
 		private int segmentColor;
 		private GPXFile gpx;
 
-		public List<Pair<String, WptPt>> getXAxisPoints() {
+		public List<WptPt> getXAxisPoints() {
 			return xAxisPoints;
 		}
 
@@ -607,7 +606,7 @@ public class TrackDetailsMenu {
 			return gpx;
 		}
 
-		public void setXAxisPoints(List<Pair<String, WptPt>> xAxisPoints) {
+		public void setXAxisPoints(List<WptPt> xAxisPoints) {
 			this.xAxisPoints = xAxisPoints;
 		}
 

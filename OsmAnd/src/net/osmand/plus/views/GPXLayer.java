@@ -86,11 +86,9 @@ public class GPXLayer extends OsmandMapLayer implements ContextMenuLayer.IContex
 
 	private Paint paintInnerCircle;
 
-	private Paint paintInnerRect;
+	private Paint paintGridCircle;
 
 	private Paint paintTextIcon;
-
-	private Paint paintGridTextIcon;
 
 	private OsmandRenderer osmandRenderer;
 
@@ -141,12 +139,6 @@ public class GPXLayer extends OsmandMapLayer implements ContextMenuLayer.IContex
 		paintTextIcon.setColor(Color.BLACK);
 		paintTextIcon.setAntiAlias(true);
 
-		paintGridTextIcon = new Paint();
-		paintGridTextIcon.setTextAlign(Align.CENTER);
-		paintGridTextIcon.setFakeBoldText(true);
-		paintGridTextIcon.setColor(Color.WHITE);
-		paintGridTextIcon.setAntiAlias(true);
-
 		textLayer = view.getLayerByClass(MapTextLayer.class);
 
 		paintOuter = new Paint();
@@ -157,9 +149,9 @@ public class GPXLayer extends OsmandMapLayer implements ContextMenuLayer.IContex
 		paintInnerCircle.setStyle(Style.FILL_AND_STROKE);
 		paintInnerCircle.setColor(0xddFFFFFF);
 		paintInnerCircle.setAntiAlias(true);
-		paintInnerRect = new Paint();
-		paintInnerRect.setStyle(Style.FILL_AND_STROKE);
-		paintInnerRect.setAntiAlias(true);
+		paintGridCircle = new Paint();
+		paintGridCircle.setStyle(Style.FILL_AND_STROKE);
+		paintGridCircle.setAntiAlias(true);
 
 		paintIcon = new Paint();
 		pointSmall = BitmapFactory.decodeResource(view.getResources(), R.drawable.map_white_shield_small);
@@ -397,28 +389,19 @@ public class GPXLayer extends OsmandMapLayer implements ContextMenuLayer.IContex
 			}
 			trackChartPoints.setSegmentColor(color);
 		}
-		paintInnerRect.setColor(color);
+		paintGridCircle.setColor(color);
 		QuadRect latLonBounds = tileBox.getLatLonBounds();
-		List<Pair<String, WptPt>> xAxisPoints = trackChartPoints.getXAxisPoints();
-		float r = 12 * tileBox.getDensity();
-		paintGridTextIcon.setTextSize(r);
+		List<WptPt> xAxisPoints = trackChartPoints.getXAxisPoints();
+		float r = 3 * tileBox.getDensity();
 		for (int i = 0; i < xAxisPoints.size(); i++) {
-			WptPt axisPoint = xAxisPoints.get(i).second;
+			WptPt axisPoint = xAxisPoints.get(i);
 			if (axisPoint.getLatitude() >= latLonBounds.bottom
 					&& axisPoint.getLatitude() <= latLonBounds.top
 					&& axisPoint.getLongitude() >= latLonBounds.left
 					&& axisPoint.getLongitude() <= latLonBounds.right) {
-				String textOnPoint = xAxisPoints.get(i).first;
-				float textWidth = paintGridTextIcon.measureText(textOnPoint);
 				float x = tileBox.getPixXFromLatLon(axisPoint.getLatitude(), axisPoint.getLongitude());
 				float y = tileBox.getPixYFromLatLon(axisPoint.getLatitude(), axisPoint.getLongitude());
-				canvas.drawRect(
-						x - textWidth / 2 - 2 * (float) Math.ceil(tileBox.getDensity()),
-						y - r / 2 - 2 * (float) Math.ceil(tileBox.getDensity()),
-						x + textWidth / 2 + 2 * (float) Math.ceil(tileBox.getDensity()),
-						y + r / 2 + 3 * (float) Math.ceil(tileBox.getDensity()),
-						paintInnerRect);
-				canvas.drawText(textOnPoint, x, y + r / 2, paintGridTextIcon);
+				canvas.drawCircle(x, y, r + (float) Math.ceil(tileBox.getDensity()), paintGridCircle);
 			}
 		}
 	}
