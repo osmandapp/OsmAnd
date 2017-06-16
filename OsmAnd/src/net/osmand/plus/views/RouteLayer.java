@@ -32,7 +32,6 @@ import android.graphics.Path;
 import android.graphics.PointF;
 import android.graphics.PorterDuff.Mode;
 import android.graphics.PorterDuffColorFilter;
-import android.support.v4.util.Pair;
 
 public class RouteLayer extends OsmandMapLayer {
 	
