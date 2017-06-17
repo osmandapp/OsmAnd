@@ -186,6 +186,8 @@ public class MapActivity extends OsmandActionBarActivity implements DownloadEven
 	private boolean mIsDestroyed = false;
 	private InAppHelper inAppHelper;
 
+	private DrawerLayout.DrawerListener drawerListener;
+
 	@Override
 	public void onCreate(Bundle savedInstanceState) {
 		long tm = System.currentTimeMillis();
@@ -287,7 +289,7 @@ public class MapActivity extends OsmandActionBarActivity implements DownloadEven
 
 		mapActions.updateDrawerMenu();
 		drawerLayout = (DrawerLayout) findViewById(R.id.drawer_layout);
-		drawerLayout.addDrawerListener(new DrawerLayout.DrawerListener() {
+		drawerListener = new DrawerLayout.DrawerListener() {
 			@Override
 			public void onDrawerSlide(View drawerView, float slideOffset) {
 				mapView.setMultiTouch(false);
@@ -307,7 +309,8 @@ public class MapActivity extends OsmandActionBarActivity implements DownloadEven
 			public void onDrawerStateChanged(int newState) {
 
 			}
-		});
+		};
+		drawerLayout.addDrawerListener(drawerListener);
 
 		IntentFilter filter = new IntentFilter(Intent.ACTION_SCREEN_OFF);
 		screenOffReceiver = new ScreenOffReceiver();
@@ -998,6 +1001,9 @@ public class MapActivity extends OsmandActionBarActivity implements DownloadEven
 		}
 		if (inAppHelper != null) {
 			inAppHelper.stop();
+		}
+		if (drawerLayout != null) {
+			drawerLayout.removeDrawerListener(drawerListener);
 		}
 		mIsDestroyed = true;
 	}
