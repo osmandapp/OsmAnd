@@ -1524,4 +1524,11 @@
     <string name="unit_of_length">Uzunluq vahidi</string>
     <string name="map_widget_ruler_control_first_mode">Qoşulma rejimi</string>
     <string name="map_widget_ruler_control_second_mode">Radius rejimi</string>
+    <string name="local_index_items_backuped">%1$d / %2$d obyekt uğurla qeyri-aktiv edildi.</string>
+    <string name="local_index_no_items_to_do">%1$smək üçün obyekt yoxdur</string>
+    <string name="local_index_action_do">%2$s obyekti %1$smək üzrəsiniz. Davam edilsin?</string>
+    <string name="local_indexes_cat_backup">Qeyri-aktiv edilmiş</string>
+    <string name="ttsvoice">TTS səsi</string>
+    <string name="internet_connection_required_for_online_route">Onlayn naviqasiya xidməti seçildi, amma internet bağlantısı yoxdur.</string>
+    <string name="gpx_option_destination_point">Hazırki təyinat nöqtəsini istifadə et</string>
     </resources>
