@@ -313,7 +313,7 @@ Au-delà la navigation bascule automatiquement sur le service en ligne CloudMade
     <string name="shared_string_select_all">Sélectionner tout</string>
     <string name="shared_string_refresh">Recharger</string>
     <string name="fast_route_mode">Itinéraire le plus rapide</string>
-    <string name="fast_route_mode_descr">"Activer pour calculer l\'itinéraire le plus rapide et désactiver pour calculer l\'itinéraire le plus économique "</string>
+    <string name="fast_route_mode_descr">Activer pour calculer l\'itinéraire le plus rapide ou désactiver pour calculer l\'itinéraire le plus économe en carburant</string>
     <string name="tiles_to_download_estimated_size">Le zoom {0} télécharge {1} carreaux ({2} Mb )</string>
     <string name="shared_string_download_map">Télécharger la carte</string>
     <string name="select_max_zoom_preload_area">Sélectionnez le zoom maximum pour précharger la zone visible</string>
@@ -1429,7 +1429,7 @@ Vous pouvez suivre tous les appareils d\'un groupe en temps réel. Ce greffon pe
 	<string name="osmo_tracker_id_descr">Cliquer pour afficher l\'identifiant de suivi</string>
     <string name="osmo_session_token">Jeton de session : %1$s</string>
     <string name="osmo_auth_pending">En attente d\'autorisation…</string>
-    <string name="osmo_locations_sent">"Positions envoyées : %1$d (en attente : %2$d) "</string>
+    <string name="osmo_locations_sent">Positions envoyées : %1$d (en attente : %2$d)</string>
     <string name="osmo_conn_successfull">Connexion établie : %1$s </string>
     <string name="osmo_auto_send_locations_descr">Démarrer automatiquement l\'itinéraire et envoyer les positions dès le démarrage de l\'application</string>
     <string name="osmo_auto_send_locations">Démarrer automatiquement l\'itinéraire</string>
@@ -1521,7 +1521,7 @@ Vous pouvez suivre tous les appareils d\'un groupe en temps réel. Ce greffon pe
     <string name="gpx_split_interval">Intervalle de division</string>
     <string name="local_index_gpx_info_show">\n\nAppui long pour afficher les options</string>
     <string name="gpx_info_subtracks">Sections : %1$s </string>
-    <string name="gpx_info_waypoints">"Points de passage : %1$s "</string>
+    <string name="gpx_info_waypoints">Points de passage : %1$s</string>
     <string name="gpx_info_distance">Distance : %1$s (%2$s points) </string>
     <string name="gpx_info_start_time">Heure de départ : %1$tF,  %1$tT </string>
     <string name="gpx_info_end_time">Heure d\'arrivée : %1$tF,  %1$tT </string>
@@ -1877,7 +1877,7 @@ Les traces ainsi enregistrées peuvent être partagées avec vos amis ou utilis�
     <string name="online_map">Carte en ligne</string>
     <string name="roads_only">Routes uniquement</string>
     <string name="rendering_attr_pisteRoutes_name">Pistes de ski</string>
-    <string name="watch">Montre</string>
+    <string name="watch">Suivre</string>
     <string name="shared_string_audio">Audio</string>
 
 
@@ -2539,7 +2539,7 @@ Si vous appréciez OsmAnd et OSM et que vous souhaitez soutenir ces projets, c\'
     <string name="city_type_neighbourhood">Quartier</string>
     <string name="postcode">Code postal</string>
     <string name="search_categories">Catégories</string>
-    <string name="share_history_subject">" Partagé via OsmAnd"</string>
+    <string name="share_history_subject">partagé via OsmAnd</string>
     <string name="show_on_map">Afficher sur la carte</string>
     <string name="back_to_search">Retour à la recherche</string>
     <string name="confirmation_to_delete_history_items">Souhaitez-vous supprimer les éléments sélectionnés de l\'historique ?</string>
@@ -2843,10 +2843,7 @@ représentant la zone : %1$s x %2$s</string>
 
  Profitez d\'un guidage vocal comme visuel; Découvrez des points d\'intérêt; Créez et gérez des traces GPX; Installez des greffons pour visualiser l\'altitude et les courbes de niveaux; Utilisez les modes Conduite, Piéton, Cycliste; Contribuez à l\'amélioration des cartes OSM et bien plus encore !
  "</string>
-    <string name="osmand_extended_description_part4">"
- Ski
- Le greffon OsmAnd ski maps permet de visualiser les pistes de ski avec leur niveau de difficulté et d\'autres informations utiles comme l\'emplacement et le type des remontées mécaniques.
- "</string>
+    <string name="osmand_extended_description_part4">Le greffon OsmAnd ski maps permet de visualiser les pistes de ski avec leur niveau de difficulté et d\'autres informations utiles comme l\'emplacement et le type des remontées mécaniques.</string>
     <string name="osmand_extended_description_part7">"
  Contribuez à OpenStreetMap (OSM)
  • Signalez des anomalies
@@ -2958,7 +2955,7 @@ Fonctionnalités principales :
     <string name="restart_search">Relancer la recherche</string>
     <string name="nothing_found">Aucun résultat trouvé :(</string>
     <string name="increase_search_radius">Augmenter le rayon de recherche</string>
-    <string name="nothing_found_descr">Modifiez la requête ou agrandissez le rayon de recherche</string>
+    <string name="nothing_found_descr">Modifiez la requête ou augmentez le rayon de recherche</string>
     <string name="private_access_routing_req">Votre destination se situe dans une zone privée. Souhaitez-vous autoriser l\'accès aux zones privées pour cet itinéraire ?</string>
     <string name="osmand_extended_description_part2">"
  Navigation GPS
@@ -3010,5 +3007,6 @@ Fonctionnalités principales :
     <string name="distance_moving">Distance corrigée</string>
     <string name="shared_string_permissions">Autorisations</string>
     <string name="import_gpx_failed_descr">OsmAnd ne peut importer le fichier. Merci de vérifier si OsmAnd possède l\'autorisation de lire le dossier et le fichier spécifiés.</string>
-    <string name="map_widget_ruler_control_first_mode">Mode de connexion</string>
+    <string name="map_widget_ruler_control_first_mode">Règle de mesure avec 2 points</string>
+    <string name="map_widget_ruler_control_second_mode">Règle de mesure par rayon</string>
     </resources>
