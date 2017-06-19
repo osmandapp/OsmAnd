@@ -293,10 +293,18 @@ public class TrackDetailsMenu {
 		float maximumVisibleXValue = (float) chart.getValuesByTouchPoint(handler.contentRight(), handler.contentBottom(), YAxis.AxisDependency.LEFT).x;
 
 		if (highlights != null && highlights.length > 0) {
-			if (highlights[0].getX() < minimumVisibleXValue) {
-				gpxItem.chartHighlightPos = minimumVisibleXValue;
-			} else if (highlights[0].getX() > maximumVisibleXValue) {
-				gpxItem.chartHighlightPos = maximumVisibleXValue;
+			if (minimumVisibleXValue != 0 && maximumVisibleXValue != 0) {
+				if (highlights[0].getX() < minimumVisibleXValue) {
+					Highlight h = chart.getHighlightByTouchPoint(minimumVisibleXValue, 0f);
+					chart.highlightValue(h);
+					gpxItem.chartHighlightPos = minimumVisibleXValue;
+				} else if (highlights[0].getX() > maximumVisibleXValue) {
+					Highlight h = chart.getHighlightByTouchPoint(maximumVisibleXValue, 0f);
+					chart.highlightValue(h);
+					gpxItem.chartHighlightPos = maximumVisibleXValue;
+				} else {
+					gpxItem.chartHighlightPos = highlights[0].getX();
+				}
 			} else {
 				gpxItem.chartHighlightPos = highlights[0].getX();
 			}
