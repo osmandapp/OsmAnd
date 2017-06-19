@@ -2841,6 +2841,6 @@ Representa el área: %1$s x %2$s</string>
     <string name="distance_moving">Distancia corregida</string>
     <string name="shared_string_permissions">Permisos</string>
     <string name="import_gpx_failed_descr">OsmAnd no puede importar el archivo. Comprueba si OsmAnd tiene permiso para leer archivos desde esta ubicación.</string>
-    <string name="map_widget_ruler_control_first_mode">Modo de conexión</string>
-    <string name="map_widget_ruler_control_second_mode">Modo de radio</string>
+    <string name="map_widget_ruler_control_first_mode">Regla de dos puntos</string>
+    <string name="map_widget_ruler_control_second_mode">Regla radial</string>
     </resources>
