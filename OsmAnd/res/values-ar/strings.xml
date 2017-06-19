@@ -41,7 +41,7 @@
     <string name="recording_context_menu_precord">التقاط صورة</string>
     <string name="dropbox_plugin_name">ملحق دروب بوكس</string>
     <string name="av_def_action_choose">حدد بناء على طلبها</string>
-    <string name="recording_error">حدث خطأ أثناء التسجيل.. </string>
+    <string name="recording_error">حدث خطأ أثناء التسجيل</string>
     <string name="recording_delete_confirm">هل تريد إزالة هذا التسجيل ؟</string>
     <string name="recording_unavailable">غير متاح</string>
     <string name="recording_can_not_be_played">تعذر تشغيل التسجيل</string>
@@ -933,7 +933,7 @@ OsmAnd هو المصدر المفتوح و التي يجري تطويرها بن
 	
 	<string name="shared_string_save_as_gpx">حفظ الطريق كمسار GPX</string>
 	<string name="route_successfully_saved_at">تم حفظ المسار بنجاح ك \'%1$s\'.</string>
-	<string name="filename_input">اسم الملف </string>
+	<string name="filename_input">اسم الملف:</string>
 	<string name="file_with_name_already_exist">يوجد ملف بنفس الاسم موجود مسبقا.</string>
 	<string name="shared_string_save">حفظ</string>
 	
@@ -2847,4 +2847,33 @@ OsmAnd هو المصدر المفتوح و التي يجري تطويرها بن
     <string name="shared_string_time_span">الفترة الزمنية</string>
     <string name="route_altitude">ارتفاع الطريق</string>
     <string name="routing_attr_relief_smoothness_factor_name">تحديد تذبذب الإرتفاع</string>
+    <string name="map_widget_ruler_control_second_mode">وضع نصف القطر</string>
+    <string name="shared_string_permissions">رخص</string>
+    <string name="import_gpx_failed_descr">لا يمكن للتطبيق استيراد الملف. الرجاء التحقق إذا كان التطبيق لديه إذن قراءة الملف من موقعه.</string>
+    <string name="distance_moving">تم تصحيح المسافة</string>
+    <string name="mapillary_image">صورة مابيلاري</string>
+    <string name="open_mapillary">فتح مابيلاري</string>
+    <string name="shared_string_install">تثبيت</string>
+    <string name="improve_coverage_mapillary">تحسين التغطية بالصور بمابيلاري</string>
+    <string name="online_photos">صور على الإنترنت</string>
+    <string name="shared_string_add_photos">إضافة صور</string>
+    <string name="no_photos_descr">ليس لدينا صور لهذا الموقع</string>
+    <string name="mapillary_action_descr">ساهم بصور الشوارع الخاصة بك لهذا الموقع عن طريق مابيلاري.</string>
+    <string name="mapillary_widget">ويدجت مابيلاري</string>
+    <string name="mapillary_widget_descr">يسمح لك بالمساهمة بسرعة لمابيلاري</string>
+    <string name="mapillary_descr">صور شوارع متاحة على الإنترنت للجميع. اكتشاف أماكن، تعاون، والتقط العالم.</string>
+    <string name="mapillary">مابيلاري</string>
+    <string name="plugin_mapillary_descr">صور شوارع متاحة للجميع. اكتشاف أماكن، تعاون، والتقط العالم.</string>
+    <string name="private_access_routing_req">الوجهة الخاص بك تقع في منطقة ذات وصول خاص. هل تريد تفعيل خاصية السماح بالوصول إلى الطرق الخاصة لهذه الرحلة؟</string>
+    <string name="quick_action_showhide_osmbugs_descr">النقر على زر الإجراء سيظهر أو يخفي ملاحظات OSM على الخريطة.</string>
+    <string name="hide_from_zoom_level">إخفاء من مستوى التكبير/التصغير</string>
+    <string name="srtm_menu_download_descr">لعرض الخطوط الكنتورية على الخريطة، تحتاج إلى تحميل الخريطة الخط الكنتوري لهذه المنطقة.</string>
+    <string name="show_from_zoom_level">عرض من مستوى التكبير/التصغير</string>
+    <string name="display_zoom_level">عرض مستوى التكبير/التصغير: %1$s</string>
+    <string name="animate_my_location">تحريك الموقع الخاص بي</string>
+    <string name="srtm_purchase_header">لمشاهدة الخطوط الكنتورية على الخريطة، أنت بحاجة لشراء وتثبيت البرنامج المساعد للخطوط الكنتورية</string>
+    <string name="animate_my_location_desc">تفعيل حركة موقعي أثناء الملاحة</string>
+    <string name="quick_action_auto_zoom_desc">النقر على زر الإجراء سوف يقوم بتشغيل/إيقاف تكبير الخريطة وفقا لسرعتك.</string>
+    <string name="quick_action_add_destination_desc">النقر على زر الإجراء سيقوم بإضافة وجهة في مركز الشاشة. الوجهة المعينة مسبقا تصبح النقطة الوسيطة الأخيرة.</string>
+    <string name="quick_action_replace_destination_desc">النقر على زر الإجراء سيحل محل الوجهة بالموقع الظاهر على مركز الشاشة.</string>
     </resources>

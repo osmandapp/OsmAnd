@@ -1725,7 +1725,7 @@ Liste des pays pris en charge (pratiquement le monde entier !) : Afghanistan, Al
     <string name="way_alarms">Alertes de circulation</string>
     <string name="speak_favorites">Favoris proches</string>
     <string name="speak_poi">Points d\'intérêt proches</string>
-    <string name="shared_string_all">Tous</string>
+    <string name="shared_string_all">Tout</string>
     <string name="index_tours">Tours</string>
     <string name="record_plugin_description">"Ce greffon permet d\'enregistrer vos itinéraires dans un fichier au format GPX : soit automatiquement soit manuellement grâce à un bouton supplémentaire affiché sur la carte.
 
@@ -1971,7 +1971,7 @@ Pour revenir à l’un des styles de carte classique de OsmAnd, désactivez simp
     <string name="shared_string_edit">Modifier</string>
     <string name="shared_string_is_open">Ouvert</string>
     <string name="filter_poi_hint">Filtrer par nom</string>
-    <string name="search_poi_category_hint">Rechercher partout</string>
+    <string name="search_poi_category_hint">Saisir pour tout rechercher</string>
     <string name="index_name_netherlands">Europe - Pays-Bas</string>
     <string name="rendering_value__name">Par défaut</string>
     <string name="rendering_value_highContrastRoads_name">Routes avec fort contraste</string>
@@ -2913,13 +2913,13 @@ Fonctionnalités principales :
     <string name="quick_action_auto_zoom_on">Zoom automatique activé</string>
     <string name="quick_action_auto_zoom_off">Zoom automatique désactivé</string>
     <string name="shared_string_paused">Mis en pause</string>
-    <string name="type_city_town">Type de ville</string>
-    <string name="type_postcode">Saisissez le code postal</string>
+    <string name="type_city_town">Entrer la ville ou le village</string>
+    <string name="type_postcode">Entrer le code postal</string>
     <string name="nearest_cities">Villes les plus proches</string>
-    <string name="select_city">Sélectionnez la ville</string>
-    <string name="select_postcode">Sélectionnez le code postal</string>
-    <string name="type_address">Saisissez une adresse</string>
-    <string name="select_street">Sélectionnez les rues</string>
+    <string name="select_city">Sélectionner la ville</string>
+    <string name="select_postcode">Sélectionner le code postal</string>
+    <string name="type_address">Entrer une adresse</string>
+    <string name="select_street">Sélectionner la rue</string>
     <string name="shared_string_in_name">dans %1$s</string>
     <string name="shared_string_overview">Vue d\'ensemble</string>
     <string name="animate_my_location_desc">Activer l\'animation de votre position pendant la navigation</string>
@@ -2956,9 +2956,9 @@ Fonctionnalités principales :
     <string name="sorted_by_distance">Trier par distance</string>
     <string name="search_favorites">Rechercher des favoris</string>
     <string name="restart_search">Relancer la recherche</string>
-    <string name="nothing_found">Aucun résultat</string>
+    <string name="nothing_found">Aucun résultat trouvé :(</string>
     <string name="increase_search_radius">Augmenter le rayon de recherche</string>
-    <string name="nothing_found_descr">Modifiez votre recherche ou augmentez la zone de recherche</string>
+    <string name="nothing_found_descr">Modifiez la requête ou agrandissez le rayon de recherche</string>
     <string name="private_access_routing_req">Votre destination se situe dans une zone privée. Souhaitez-vous autoriser l\'accès aux zones privées pour cet itinéraire ?</string>
     <string name="osmand_extended_description_part2">"
  Navigation GPS

@@ -251,7 +251,7 @@
     <string name="osmand_service">Tryb działania w tle</string>
     <string name="osmand_service_descr">Działanie aplikacji, gdy ekran jest wygaszony</string>
     <string name="fast_route_mode">Najszybsza trasa</string>
-    <string name="fast_route_mode_descr">"Wyznacza najszybszą trasę zamiast ekonomicznej "</string>
+    <string name="fast_route_mode_descr">Wyznacza najszybszą trasę zamiast ekonomicznej</string>
     <string name="tiles_to_download_estimated_size">Do pobrania {1} kafelków na poziomie {0} ({2} MB)</string>
     <string name="shared_string_download_map">Pobierz mapę</string>
     <string name="select_max_zoom_preload_area">Proszę wybrać maksymalne przybliżenie do pobrania</string>
@@ -629,11 +629,11 @@
     <string name="online_map_settings_descr">Skonfiguruj źródła kafelków online i offline</string>
 
 
-    <string name="osmand_rastermaps_plugin_description">"Umożliwia uzyskanie dostępu do wielu rodzajów map online (tzw kafelki lub raster), od gotowych kafelków OpenStreetMap (jak Mapnik) do zdjęć satelitarnych i specjalnych warstw map pogodowych uniwersalnych, map klimatycznych, map geologicznych, warstw cieniowania rzeźby terenu itp.
+    <string name="osmand_rastermaps_plugin_description">Umożliwia uzyskanie dostępu do wielu rodzajów map online (tzw kafelki lub raster), od gotowych kafelków OpenStreetMap (jak Mapnik) do zdjęć satelitarnych i specjalnych warstw map pogodowych uniwersalnych, map klimatycznych, map geologicznych, warstw cieniowania rzeźby terenu itp.
 \n
 \nKażda z tych map może być wykorzystana jako główna (podstawa) mapa wyświetlana na ekranie mapy OsmAnd lub jako nakładka lub podkład do innej mapy bazowej (jak zwykłe mapy offline OsmAnd). W celu zwiększenia widoczności mapy bazowej, niektóre elementy map wektorowych OsmAnd można łatwo ukryć poprzez menu „Konfiguracja mapy” zgodnie z zapotrzebowaniem.
 \n
-\nMapy kafelkowe można uzyskać bezpośrednio z zasobów sieciowych, jak i przygotować je do użytku w trybie offline (i ręcznie skopiować do katalogu danych OsmAnd) jako bazy danych sqlite, które mogą być przygotowane przez niezależnych dostawców map. "</string>
+\nMapy kafelkowe można uzyskać bezpośrednio z zasobów sieciowych, jak i przygotować je do użytku w trybie offline (i ręcznie skopiować do katalogu danych OsmAnd) jako bazy danych sqlite, które mogą być przygotowane przez niezależnych dostawców map.</string>
     <string name="osmand_background_plugin_description">Wyświetla ustawienia umożliwiające włączenie śledzenia i nawigacji w tle (wyłączony ekran) poprzez okresowe wybudzanie urządzenia GPS.</string>
     <string name="osmand_accessibility_description">Umożliwia korzystanie ze specjalnych ułatwień dostępu urządzenia bezpośrednio w OsmAnd. Pozwala na np. dostosowanie szybkości mowy syntezowanych komunikatów głosowych, skonfigurowanie poruszania się po ekranie za pomocą pada kierunkowego, użycie trackballa do zmiany przybliżenia lub użycie syntezowanych komunikatów głosowych np. do automatycznego powiadamiania o położeniu.</string>
 
@@ -1015,9 +1015,9 @@ Niektóre z podstawowych funkcji:
     <string name="download_srtm_maps">Poziomice</string>
     <string name="download_select_map_types">Inne mapy</string>
     <string name="srtm_plugin_name">Poziomice</string>
-    <string name="srtm_plugin_description">"Dostarcza warstwy poziomic i cieniowania rzeźby terenu wyświetlanych na standardowych mapach OsmAnd. Funkcja przydatna dla sportowców, turystów i osób zainteresowanych strukturą reliefową krajobrazu. (Proszę zauważyć, że dane poziomic i cieniowania terenu należy osobno pobrać po aktywacji wtyczki.)
+    <string name="srtm_plugin_description">Dostarcza warstwy poziomic i cieniowania rzeźby terenu wyświetlanych na standardowych mapach OsmAnd. Funkcja przydatna dla sportowców, turystów i osób zainteresowanych strukturą reliefową krajobrazu. (Proszę zauważyć, że dane poziomic i cieniowania terenu należy osobno pobrać po aktywacji wtyczki.)
 \n
-\nŚwiatowe dane (między 70 stopniem szerokości północnej a 70 stopniem szerokości południowej) opierają się na pomiarach SRTM (Shuttle Radar Topography Mission) i ASTER (Advanced Spaceborne Thermal Emission and Reflection Radiometer), przyrządu na pokładzie Terra, flagowego satelity Systemu Obserwacji Ziemi NASA. ASTER jest wspólnym przedsięwzięciem NASA, japońskiego Ministerstwa Gospodarki, Handlu i Przemysłu (METI) i Japońskich Systemów Kosmicznych (J-spacesystems). "</string>
+\nŚwiatowe dane (między 70 stopniem szerokości północnej a 70 stopniem szerokości południowej) opierają się na pomiarach SRTM (Shuttle Radar Topography Mission) i ASTER (Advanced Spaceborne Thermal Emission and Reflection Radiometer), przyrządu na pokładzie Terra, flagowego satelity Systemu Obserwacji Ziemi NASA. ASTER jest wspólnym przedsięwzięciem NASA, japońskiego Ministerstwa Gospodarki, Handlu i Przemysłu (METI) i Japońskich Systemów Kosmicznych (J-spacesystems).</string>
     <string name="index_srtm_ele">Poziomice</string>
     <string name="index_srtm_parts">części</string>
 
@@ -1067,9 +1067,9 @@ Niektóre z podstawowych funkcji:
     <string name="srtm_paid_version_title">Wtyczka poziomic</string>
     <string name="recording_context_menu_arecord">Nagraj notatkę audio</string>
     <string name="recording_context_menu_vrecord">Nagraj notatkę wideo</string>
-    <string name="osmand_srtm_long_description_1000_chars">"Dostarcza warstwy poziomic i cieniowania rzeźby terenu wyświetlanych na standardowych mapach OsmAnd. Funkcja przydatna dla sportowców, turystów i osób zainteresowanych strukturą reliefową krajobrazu.
+    <string name="osmand_srtm_long_description_1000_chars">Dostarcza warstwy poziomic i cieniowania rzeźby terenu wyświetlanych na standardowych mapach OsmAnd. Funkcja przydatna dla sportowców, turystów i osób zainteresowanych strukturą reliefową krajobrazu.
 \n
-\nŚwiatowe dane (między 70 stopniem szerokości północnej a 70 stopniem szerokości południowej) opierają się na pomiarach SRTM (Shuttle Radar Topography Mission) i ASTER (Advanced Spaceborne Thermal Emission and Reflection Radiometer), przyrządu na pokładzie Terra, flagowego satelity Systemu Obserwacji Ziemi NASA. ASTER jest wspólnym przedsięwzięciem NASA, japońskiego Ministerstwa Gospodarki, Handlu i Przemysłu (METI) i Japońskich Systemów Kosmicznych (J-spacesystems). "</string>
+\nŚwiatowe dane (między 70 stopniem szerokości północnej a 70 stopniem szerokości południowej) opierają się na pomiarach SRTM (Shuttle Radar Topography Mission) i ASTER (Advanced Spaceborne Thermal Emission and Reflection Radiometer), przyrządu na pokładzie Terra, flagowego satelity Systemu Obserwacji Ziemi NASA. ASTER jest wspólnym przedsięwzięciem NASA, japońskiego Ministerstwa Gospodarki, Handlu i Przemysłu (METI) i Japońskich Systemów Kosmicznych (J-spacesystems).</string>
     <string name="recording_context_menu_show">Wyświetlanie</string>
     <string name="recording_photo_description">Zdjęcie %1$s %2$s</string>
     <string name="av_def_action_picture">Zrobienie zdjęcia</string>
@@ -1386,7 +1386,7 @@ Afganistan, Afryka Południowa, Albania, Algieria, Andora, Angola, Anguilla, Ant
     <string name="shared_string_remember_my_choice">Zapamiętanie wyboru</string>
 
     <string name="animate_routing_route_not_calculated">Proszę najpierw przeliczyć trasę</string>
-    <string name="animate_routing_route">"Użycie wyznaczonej trasy "</string>
+    <string name="animate_routing_route">Użycie wyznaczonej trasy</string>
     <string name="animate_routing_gpx">Użycie śladu GPX</string>
 
     <string name="local_osm_changes_delete_all_confirm">Usunąć %1$d zmian OSM?</string>
@@ -1507,8 +1507,11 @@ Afganistan, Afryka Południowa, Albania, Algieria, Andora, Angola, Anguilla, Ant
     <string name="navigation_intent_invalid">Nieprawidłowy format: %s</string>
     <string name="osmo_settings_uuid">Unikatowy identyfikator urządzenia</string>
     <string name="osmo_settings_descr">Skonfiguruj monitorowanie i ustaw osobisty kanał monitorowania</string>
-    <string name="osmo_plugin_description">"Zapewnia częściową funkcjonalność monitoringu OpenStreetMap. Więcej szczegółów na http://osmo.mobi.
-\n\nZa jej pomocą można śledzić wszystkie urządzenia z danej grupy w czasie rzeczywistym, oglądać punkty i trasy przesłane przez ich uczestników.\n\nGrupa nie została usunięta po kilku miesiącach, wprowadza ją zgodnie z regułą tworzenie grup na stronie OsMo.mobi "</string>
+    <string name="osmo_plugin_description">Zapewnia częściową funkcjonalność monitoringu OpenStreetMap. Więcej szczegółów na http://osmo.mobi.
+\n
+\nZa jej pomocą można śledzić wszystkie urządzenia z danej grupy w czasie rzeczywistym, oglądać punkty i trasy przesłane przez ich uczestników.
+\n
+\nGrupa nie została usunięta po kilku miesiącach, wprowadza się ją zgodnie z regułą tworzenia grup na stronie OsMo.mobi</string>
     <string name="osmo_plugin_name">Monitoring OpenStreetMap</string>
     <string name="osmo_settings">OsMo</string>
     <string name="keep_informing_never">Tylko ręcznie (naciśnij strzałkę)</string>
@@ -1529,7 +1532,7 @@ Afganistan, Afryka Południowa, Albania, Algieria, Andora, Angola, Anguilla, Ant
     <string name="osmo_tracker_id">Identyfikator serwera śledzącego</string>
     <string name="osmo_session_token">Token sesji: %1$s</string>
     <string name="osmo_auth_pending">Oczekiwanie na uwierzytelnienie…</string>
-    <string name="osmo_conn_successfull">"Nawiązano połączenie: %1$s "</string>
+    <string name="osmo_conn_successfull">Nawiązano połączenie: %1$s</string>
     <string name="osmo_mode_restart">Uruchom ponownie sesję OsMo</string>
     <string name="osmo_settings_debug">Informacje diagnozowania błędów</string>
     <string name="hours_ago">godzin temu</string>
@@ -1604,13 +1607,13 @@ Afganistan, Afryka Południowa, Albania, Algieria, Andora, Angola, Anguilla, Ant
     <string name="shared_string_my_favorites">Ulubione</string>
     <string name="shared_string_my_places">Miejsca</string>
 
-    <string name="gpx_info_subtracks">"Ślady podrzędne: %1$s "</string>
+    <string name="gpx_info_subtracks">Ślady podrzędne: %1$s</string>
     <string name="gpx_info_waypoints">Punkty trasy: %1$s </string>
     <string name="gpx_info_distance">Odległość: %1$s (%2$s punktów) </string>
     <string name="gpx_info_start_time">Czas rozpoczęcia: %1$tF, %1$tT </string>
     <string name="gpx_info_end_time">Czas zakończenia: %1$tF, %1$tT </string>
-    <string name="gpx_info_average_speed">"Średnia prędkość: %1$s "</string>
-    <string name="gpx_info_maximum_speed">"Maksymalna prędkość: %1$s "</string>
+    <string name="gpx_info_average_speed">Średnia prędkość: %1$s</string>
+    <string name="gpx_info_maximum_speed">Maksymalna prędkość: %1$s</string>
     <string name="gpx_info_avg_altitude">Średnia wysokość: %1$s</string>
     <string name="gpx_info_diff_altitude">Zakres wysokości: %1$s</string>
     <string name="gpx_info_asc_altitude">Zjazd/podjazd: %1$s</string>
@@ -1644,13 +1647,13 @@ Afganistan, Afryka Południowa, Albania, Algieria, Andora, Angola, Anguilla, Ant
 
     <string name="local_index_select_gpx_file">Wybierz aby wyświetlić</string>
     <string name="osmo_group_by_invite">Dołącz do grupy przez zaproszenie</string>
-    <string name="osmo_group_information_desc">" - Tworząc grupę należy nadać jej nazwę i wypełnić opis
+    <string name="osmo_group_information_desc">- Tworząc grupę należy nadać jej nazwę i wypełnić opis
 \n - Poprzez aplikację są tworzone tylko grupy prostego typu, czytaj więcej na stronie https://osmo.mobi/g/new
 \n - Poprzez stronę możesz zarządzać grupą, i ustawiać trasy i punkty dostępne dla wszystkich
 \n - Nie aprobujemy grup jednoosobowych, jeżeli nie jest to grupa typu użyteczne miejsce
 \n - Prywatne grupy są ograniczone do 8 osób
 \n - Szczegółowe regulaminy użytkowania są dostępne na stronie OsMo.mobi
-\n - Jeśli trzeba utworzyć grupę, ale z innymi warunkami, prosimy o kontakt osmo.mobi@gmail.com "</string>
+\n - Jeśli trzeba utworzyć grupę, ale z innymi warunkami, prosimy o kontakt osmo.mobi@gmail.com</string>
     <string name="osmo_group_information">Proszę przeczytać przed założeniem grupy!</string>
     <string name="osmo_not_signed_in">Nie udało się zalogować do OsMo</string>
     <string name="osmo_gpx_points_downloaded">Pobrano %1$s punktów OsMo.</string>
@@ -1744,9 +1747,9 @@ Afganistan, Afryka Południowa, Albania, Algieria, Andora, Angola, Anguilla, Ant
     <string name="save_track_to_gpx_globally">Rejestrowanie śladu do pliku GPX</string>
     <string name="save_track_to_gpx_globally_descr">Rejestrowanie położenia do pliku GPX można włączyć lub wyłączyć używając widżetu rejestrowania GPX na ekranie mapy</string>
     <string name="save_track_interval_globally">Częstość rejestrowania</string>
-	<string name="record_plugin_description">"Aktywuje funkcje rejestrowania i zapisywania śladów za pomocą widżetu rejestrowania śladów GPX na ekranie mapy lub automatyczne rejestruje przebiegi wszystkich tras do plików GPX.
+	<string name="record_plugin_description">Aktywuje funkcje rejestrowania i zapisywania śladów za pomocą widżetu rejestrowania śladów GPX na ekranie mapy lub automatyczne rejestruje przebiegi wszystkich tras do plików GPX.
 \n
-\nNagrane ślady można udostępnić znajomym lub wykorzystać na rzecz rozwoju mapy OpenStreetMap. Sportowcy mogą korzystać z nagranych śladów do monitorowania treningów. W tym celu OsmAnd udostępnia podstawowe informacje takie jak czasy okrążeń, średnia prędkość itp. Ślady mogą być później analizowane w specjalnych narzędziach do analizy przygotowanych przez innych dostawców. "</string>
+\nNagrane ślady można udostępnić znajomym lub wykorzystać na rzecz rozwoju mapy OpenStreetMap. Sportowcy mogą korzystać z nagranych śladów do monitorowania treningów. W tym celu OsmAnd udostępnia podstawowe informacje takie jak czasy okrążeń, średnia prędkość itp. Ślady mogą być później analizowane w specjalnych narzędziach do analizy przygotowanych przez innych dostawców.</string>
     <string name="confirm_every_run">Ponawianie pytania</string>
     <string name="save_global_track_interval_descr">Wybierz tempo rejestrowania dla nagrywania ścieżki (włączonego poprzez widżet rejestrowania GPX na mapie)</string>
     <string name="save_global_track_interval">Ogólna częstość rejestrowania</string>
@@ -1863,7 +1866,7 @@ Afganistan, Afryka Południowa, Albania, Algieria, Andora, Angola, Anguilla, Ant
     <string name="notes">Uwagi</string>
     <string name="online_map">Mapa online</string>
     <string name="roads_only">Tylko drogi</string>
-    <string name="free">"Wolne %1$s "</string>
+    <string name="free">Wolne %1$s</string>
     <string name="device_memory">Pamięć urządzenia</string>
     <string name="edit_group">Modyfikowanie grupy</string>
     <string name="parking_place">Miejsce parkowania</string>
@@ -1909,17 +1912,17 @@ Długość %2$s</string>
     <string name="track_segments">Segmenty</string>
     <string name="track_points">Punkty trasy</string>
     <string name="plugin_touringview_name">Widok mapy turystycznej</string>
-    <string name="plugin_touringview_descr">"Zmienia styl mapy OsmAnd na „turystyczny”, który jest specjalnym trybem wysokiej rozdzielczości dla turystów i kierowców zawodowych.
-\n
-\nTen widok dostarcza w danych mapy przy każdym poziomie przybliżenia maksymalną ilość dostępnych detali (w szczególności dróg, szlaków, ścieżek oraz znaków orientacyjnych).
-\n
-\nW sposób jasny i jednoznaczny szereguje typy dróg wg przypisanych kolorów, co jest przydatne, np. podczas prowadzenia dużych pojazdów.
-\n
-\nUdostępnia specjalne opcje turystyczne, jak np. trasy rowerowe lub alpejskie szlaki górskie.
-\n
-\nNie potrzeba pobierać specjalnej mapy, ten widok jest tworzony z map standardowych.
-\n
-\nMożna go wyłączyć używając obecnej tutaj opcji lub zmieniając styl mapy w menu konfiguracji mapy. "</string>
+    <string name="plugin_touringview_descr">Zmienia styl mapy OsmAnd na „turystyczny”, który jest specjalnym trybem wysokiej rozdzielczości dla turystów i kierowców zawodowych. 
+\n 
+\nTen widok dostarcza w danych mapy przy każdym poziomie przybliżenia maksymalną ilość dostępnych detali (w szczególności dróg, szlaków, ścieżek oraz znaków orientacyjnych). 
+\n 
+\nW sposób jasny i jednoznaczny szereguje typy dróg wg przypisanych kolorów, co jest przydatne, np. podczas prowadzenia dużych pojazdów. 
+\n 
+\nUdostępnia specjalne opcje turystyczne, jak np. trasy rowerowe lub alpejskie szlaki górskie. 
+\n 
+\nNie potrzeba pobierać specjalnej mapy, ten widok jest tworzony z map standardowych. 
+\n 
+\nMożna go wyłączyć używając obecnej tutaj opcji lub zmieniając styl mapy w menu konfiguracji mapy.</string>
     <string name="watch">Oglądaj</string>
     <string name="rendering_attr_pisteRoutes_name">Stoki narciarskie</string>
     <string name="rendering_attr_pisteGrooming_name">Ratrakowanie</string>
@@ -1954,14 +1957,14 @@ Długość %2$s</string>
     <string name="osmo_grop_name_length_alert">Nazwa grupy powinna zawierać co najmniej 3 znaki!</string>
     <string name="shared_string_go">Nawiguj</string>
 
-    <string name="plugin_nautical_descr">"Umożliwia tworzenie map nawigacyjnych dla łodzi, żaglówek oraz innych sportów wodnych.
-\n
-\nSpecjalny dodatek do OsmAnd wstawia znaki nawigacyjne i oznaczenia map morskich dla nawigacji śródlądowej oraz przybrzeżnej. Opis każdego znaku dostarcza szczegółów potrzebnych do identyfikacji jego i jego przeznaczenia (kategoria, kształt, kolor, kolejność, odniesienie itd.).
-\n
-\nW razie potrzeby należy wyłączyć tę wtyczkę lub zmienić styl w opcjach „Styl mapy\" w menu „Konfiguracja mapy\", aby powrócić do jednego z typowych stylów map OsmAnd. "</string>
-    <string name="plugin_ski_descr">"Dodaje do OsmAnd szczegóły dotyczące stoków narciarskich, tras biegowych, tras skitour, kolejek linowych i wyciągów narciarskich na świecie. Trasy i szlaki są pokolorowane według trudności i przedstawione w specjalnym zimowym stylu mapy, imitującym krajobraz pokryty śniegiem.
-\n
-\nWłączenie tego widoku zmienia styl mapy na „Zima i narty”, ukazujący teren pokryty śniegiem. Widok można wyłączyć przez wyłączenie wtyczki lub zmianę stylu w menu „Styl mapy” w „Konfiguracji mapy”. "</string>
+    <string name="plugin_nautical_descr">Umożliwia tworzenie map nawigacyjnych dla łodzi, żaglówek oraz innych sportów wodnych. 
+\n 
+\nSpecjalny dodatek do OsmAnd wstawia znaki nawigacyjne i oznaczenia map morskich dla nawigacji śródlądowej oraz przybrzeżnej. Opis każdego znaku dostarcza szczegółów potrzebnych do identyfikacji jego i jego przeznaczenia (kategoria, kształt, kolor, kolejność, odniesienie itd.). 
+\n 
+\nW razie potrzeby należy wyłączyć tę wtyczkę lub zmienić styl w opcjach „Styl mapy\" w menu „Konfiguracja mapy\", aby powrócić do jednego z typowych stylów map OsmAnd.</string>
+    <string name="plugin_ski_descr">Dodaje do OsmAnd szczegóły dotyczące stoków narciarskich, tras biegowych, tras skitour, kolejek linowych i wyciągów narciarskich na świecie. Trasy i szlaki są pokolorowane według trudności i przedstawione w specjalnym zimowym stylu mapy, imitującym krajobraz pokryty śniegiem. 
+\n 
+\nWłączenie tego widoku zmienia styl mapy na „Zima i narty”, ukazujący teren pokryty śniegiem. Widok można wyłączyć przez wyłączenie wtyczki lub zmianę stylu w menu „Styl mapy” w „Konfiguracji mapy”.</string>
     <string name="shared_string_message">Wiadomość</string>
     <string name="shared_string_do_not_use">Brak</string>
     <string name="shared_string_address">Adres</string>
@@ -2213,23 +2216,23 @@ Długość %2$s</string>
     <string name="access_from_map_description">Wyświetla kokpit zamiast menu</string>
     <string name="access_from_map">Dostęp z mapy</string>
     <string name="copied_to_clipboard">Skopiowane do schowka</string>
-    <string name="release_2_2">" • Nowe menu kontekstowe, przystosowane do wybierania lokacji na mapie oraz na innych ekranach
-\n
-\n • Mapa jest teraz wyświetlana bezpośrednio, o ile nie wybrano opcji \'Pokaż pulpit podczas startu aplikacji\'
-\n
-\n • Można skonfigurować które zakładki oraz jak będą wyświetlane na pulpicie
-\n
-\n • Pomiń panel jeżeli chcesz kontrolować aplikacją poprzez menu
-\n
-\n • W celu pobrania map, interesujące nas regiony można wybrać bezpośrednio na mapie świata
-\n
-\n • Wyszukiwarka POI wspiera teraz bardziej precyzyjne zapytania
-\n
-\n • Poprawiona funkcjonalność POI oraz edytora OSM
-\n
-\n • Struktura oraz interfejs menu pobierania map zostały ulepszone
-\n
-\n i więcej "</string>
+    <string name="release_2_2">\\022 Nowe menu kontekstowe, przystosowane do wybierania lokacji na mapie oraz na innych ekranach 
+\n 
+\n • Mapa jest teraz wyświetlana bezpośrednio, o ile nie wybrano opcji \'Pokaż pulpit podczas startu aplikacji\' 
+\n 
+\n • Można skonfigurować które zakładki oraz jak będą wyświetlane na pulpicie 
+\n 
+\n • Pomiń panel jeżeli chcesz kontrolować aplikacją poprzez menu 
+\n 
+\n • W celu pobrania map, interesujące nas regiony można wybrać bezpośrednio na mapie świata 
+\n 
+\n • Wyszukiwarka POI wspiera teraz bardziej precyzyjne zapytania 
+\n 
+\n • Poprawiona funkcjonalność POI oraz edytora OSM 
+\n 
+\n • Struktura oraz interfejs menu pobierania map zostały ulepszone 
+\n 
+\n i więcej…</string>
     <string name="context_menu_item_open_note">Utwórz uwagę OSM</string>
     <string name="osn_bug_name">Uwaga OSM</string>
     <string name="osn_comment_dialog_title">Dodaj komentarz</string>
@@ -2433,17 +2436,17 @@ Jeśli potrzebujesz pomocy podczas używania OsmAnd, prosimy o kontakt z naszym 
     <string name="show_transparency_seekbar">Pasek przezroczystości</string>
     <string name="no_map_markers_found">Proszę dodać znacznik na mapie</string>
     <string name="no_waypoints_found">Nie znaleziono punktów</string>
-    <string name="release_2_3">" • OSM Live. Wspieraj współtwórców map i programistów, aby uzyskać bieżące aktualizacji mapy.
-\n
-\n • Znaczniki mapy. Nowy sposób na szybkie oznaczenie położenia na mapie.
-\n
-\n • Bardziej szczegółowe mapy OSM z oznaczeniami numeracji dróg specyficznymi dla konkretnego kraju oraz wiele nowych funkcji map.
-\n
-\n • Ulepszony wygląd i przygotowanie trasy.
-\n
-\n • Wiele ulepszeń w menu kontekstowym mapy, takie jak kontekstowe odnośniki adresu.
-\n
-\n i więcej… "</string>
+    <string name="release_2_3">\\022 OSM Live. Wspieraj współtwórców map i programistów, aby uzyskać bieżące aktualizacji mapy. 
+\n 
+\n • Znaczniki mapy. Nowy sposób na szybkie oznaczenie położenia na mapie. 
+\n 
+\n • Bardziej szczegółowe mapy OSM z oznaczeniami numeracji dróg specyficznymi dla konkretnego kraju oraz wiele nowych funkcji map. 
+\n 
+\n • Ulepszony wygląd i przygotowanie trasy. 
+\n 
+\n • Wiele ulepszeń w menu kontekstowym mapy, takie jak kontekstowe odnośniki adresu. 
+\n 
+\n i więcej…</string>
     <string name="shared_string_move_up">Przenieś w górę</string>
     <string name="shared_string_move_down">Przenieś w dół</string>
     <string name="finish_navigation">Zakończ nawigację</string>
@@ -2529,22 +2532,22 @@ Jeśli potrzebujesz pomocy podczas używania OsmAnd, prosimy o kontakt z naszym 
     <string name="postcode">Kod pocztowy</string>
     <string name="search_categories">Kategorie</string>
     <string name="lang_hsb">Górnołużycki</string>
-    <string name="share_history_subject">" udostępnione przez OsmAnd"</string>
+    <string name="share_history_subject">udostępnione przez OsmAnd</string>
     <string name="show_on_map">Wyświetl na mapie</string>
     <string name="show_something_on_map">Wyświetl %1$s na mapie</string>
-    <string name="release_2_4">" • Nowa wszechstronna metoda wyszukiwania tekstowego
-\n
-\n • Ulepszono integrację z zestawem audio Bluetooth
-\n
-\n • Ulepszona nawigacja - podpowiedzi głosowe i wskazówki dot. pasów ruchu
-\n
-\n • Ulepszenia w warstwie transportu publicznego i wyświetlanie kursów
-\n
-\n • Dodano nowe tłumaczenia i wsparcie dla dialektów
-\n
-\n • Mnóstwo innych ulepszeń i poprawek
-\n
-\n i więcej… "</string>
+    <string name="release_2_4">\\022 Nowa wszechstronna metoda wyszukiwania tekstowego 
+\n 
+\n • Ulepszono integrację z zestawem audio Bluetooth 
+\n 
+\n • Ulepszona nawigacja - podpowiedzi głosowe i wskazówki dot. pasów ruchu 
+\n 
+\n • Ulepszenia w warstwie transportu publicznego i wyświetlanie kursów 
+\n 
+\n • Dodano nowe tłumaczenia i wsparcie dla dialektów 
+\n 
+\n • Mnóstwo innych ulepszeń i poprawek 
+\n 
+\n i więcej…</string>
     <string name="dist_away_from_my_location">Szukaj w odległości %1$s</string>
     <string name="confirmation_to_delete_history_items">Usunąć wybrane elementy z historii?</string>
     <string name="back_to_search">Powrót do wyszukiwania</string>
@@ -2623,19 +2626,19 @@ Jeśli potrzebujesz pomocy podczas używania OsmAnd, prosimy o kontakt z naszym 
     <string name="shared_string_recorded">Zarejestrowany</string>
     <string name="shared_string_record">Rejestruj</string>
     <string name="gpx_logging_no_data">Brak danych</string>
-    <string name="release_2_5">" • Ikony mapy, które można kliknąć
-\n
-\n • wszechstronna wyszukiwarka użytecznych miejsc: wyszukiwanie restauracji wg kuchni, kempingów wg udogodnień
-\n
-\n • nowy styl mapy „OsmAnd Topo” dla rowerzystów i pieszych turystów
-\n
-\n • ulepszone rejestrowanie śladów
-\n
-\n • ulepszone powiadomienia nawigacji (Android Wear)
-\n
-\n • mnóstwo innych ulepszeń i poprawek błędów
-\n
-\n i więcej… "</string>
+    <string name="release_2_5">\\022 Ikony mapy, które można kliknąć 
+\n 
+\n • wszechstronna wyszukiwarka użytecznych miejsc: wyszukiwanie restauracji wg kuchni, kempingów wg udogodnień 
+\n 
+\n • nowy styl mapy „OsmAnd Topo” dla rowerzystów i pieszych turystów 
+\n 
+\n • ulepszone rejestrowanie śladów 
+\n 
+\n • ulepszone powiadomienia nawigacji (Android Wear) 
+\n 
+\n • mnóstwo innych ulepszeń i poprawek błędów 
+\n 
+\n i więcej…</string>
     <string name="trip_rec_notification_settings">Rejestrowanie śladu (brak danych)</string>
     <string name="trip_rec_notification_settings_desc">Wyświetla komunikat umożliwiający rozpoczęcie rejestrowania śladu po naciśnięciu przycisku</string>
     <string name="shared_string_notifications">Powiadomienia</string>
@@ -2754,27 +2757,27 @@ Reprezentuje obszar: %1$s x %2$s</string>
     <string name="quick_action_page_list_descr">Naciśnięcie przycisku czynności wyświetli poniższą listę.</string>
     <string name="auto_split_recording_title">Automatyczne dzielenie nagrań po przerwie</string>
 	<string name="auto_split_recording_descr">Rozpoczyna nowy segment po 6 min przerwy, nową trasę po 2 h i nowy plik po dłuższej przerwie, jeżeli data ulegnie zmianie</string>
-    <string name="release_2_6">" • Nowa funkcja: przycisk szybkiej czynności
-\n
-\n • Poprawiono odpowiedź na gesty ekranu dotykowego
-\n
-\n • Nowe kroje pisma wspierające więcej języków
-\n
-\n • Obsługa dialektów w generowaniu mowy
-\n
-\n • Ulepszenia wizualne w kilku stylach map i w Wikipedii
-\n
-\n • Obsługa otwartych kodów lokalizacyjnych (OLC)
-\n
-\n • Wyświetlanie wysokości, nachylenia i profilu prędkości dla nagranych śladów GPX i wyznaczonych tras
-\n
-\n • Ustawienie \'Styl jazdy\' i logiczne ulepszenia w wytyczaniu tras rowerowych
-\n
-\n • Ustawienie użycia danych wysokościowych w wytyczaniu tras rowerowych
-\n
-\n • Mnóstwo innych ulepszeń i poprawek
-\n
-\n i więcej "</string>
+    <string name="release_2_6">\\022 Nowa funkcja: przycisk szybkiej czynności 
+\n 
+\n • Poprawiono odpowiedź na gesty ekranu dotykowego 
+\n 
+\n • Nowe kroje pisma wspierające więcej języków 
+\n 
+\n • Obsługa dialektów w generowaniu mowy 
+\n 
+\n • Ulepszenia wizualne w kilku stylach map i w Wikipedii 
+\n 
+\n • Obsługa otwartych kodów lokalizacyjnych (OLC) 
+\n 
+\n • Wyświetlanie wysokości, nachylenia i profilu prędkości dla nagranych śladów GPX i wyznaczonych tras 
+\n 
+\n • Ustawienie \'Styl jazdy\' i logiczne ulepszenia w wytyczaniu tras rowerowych 
+\n 
+\n • Ustawienie użycia danych wysokościowych w wytyczaniu tras rowerowych 
+\n 
+\n • Mnóstwo innych ulepszeń i poprawek 
+\n 
+\n i więcej…</string>
 	<string name="rendering_attr_depthContours_description">Wyświetla kontury i punkty głębi</string>
     <string name="rendering_attr_depthContours_name">Mapy batymetryczne</string>
 	<string name="routing_attr_height_relief_smoothness_factor_name">Współczynnik gładkości rzeźby terenu</string>
@@ -2850,11 +2853,11 @@ Reprezentuje obszar: %1$s x %2$s</string>
     <string name="select_city">Wybierz miasto</string>
     <string name="select_postcode">Wybierz kod pocztowy</string>
     <string name="subscribe_email_desc">Zapisz się do naszej subskrypcji dotyczącej rabatów na aplikację i zgarnij 3 dodatkowe pobrania map!</string>
-    <string name="depth_contour_descr">Zastaw map przedstawiających punkty głębokości i poziomice dna morskiego (oparty na siatce dokładności 30 sekund kątowych).</string>
+    <string name="depth_contour_descr">Zastaw map przedstawiających punkty głębokości i poziomice dna morskiego.</string>
     <string name="sea_depth_thanks">Dziękujemy za zakup map batymetrycznych!</string>
     <string name="index_item_depth_contours_osmand_ext">Mapy batymetryczne</string>
-    <string name="index_item_depth_points_southern_hemisphere">Mapy batymetryczne półkuli południowej</string>
-    <string name="index_item_depth_points_northern_hemisphere">Mapy batymetryczne półkuli północnej</string>
+    <string name="index_item_depth_points_southern_hemisphere">Mapa batymetryczna półkuli południowej</string>
+    <string name="index_item_depth_points_northern_hemisphere">Mapa batymetryczna półkuli północnej</string>
     <string name="download_depth_countours">Mapy batymetryczne</string>
     <string name="analyze_on_map">Analizuj na mapie</string>
     <string name="fonts_header">Kroje pisma mapy</string>
@@ -2864,7 +2867,7 @@ Reprezentuje obszar: %1$s x %2$s</string>
 
  Rozkoszuj się głosową i optyczną nawigacją, przeglądaniem użytecznych miejsc (ang. POI), tworzeniem i zarządzaniem śladami GPX, wyświetlaniem poziomic i informacji o wysokości (przez zewnętrzną wtyczkę), wyborem między trybami samochodowym, rowerowym i pieszym, edycją OSM i więcej.
  "</string>
-    <string name="select_street">Wybierz ulice</string>
+    <string name="select_street">Wybierz ulicę</string>
     <string name="shared_string_in_name">w %1$s</string>
     <string name="shared_string_overview">Podsumowanie</string>
     <string name="animate_my_location">Animowanie położenia</string>
@@ -2901,22 +2904,9 @@ Reprezentuje obszar: %1$s x %2$s</string>
     <string name="quick_action_showhide_osmbugs_title">Przełącz wyświetlanie uwag OSM</string>
     <string name="quick_action_osmbugs_show">Pokaż uwagi OSM</string>
     <string name="quick_action_osmbugs_hide">Ukryj uwagi OSM</string>
-    <string name="osmand_plus_extended_description_part8">"
- Przybliżona jakość mapy:
-• Europa Zachodnia: ****
-• Europa Wschodnia: ***
-• Rosja: ***
-• Ameryka Północna: ***
-• Ameryka Południowa: **
-• Azja: **
-• Japonia i Korea: ***
-• Bliski Wschód: **
-• Afryka: **
-• Antarktyda: *
-
-Jest możliwe pobranie map większości krajów na świecie!
-Od Afganistanu po Zimbabwe, przez Australię po USA. Argentyna, Brazylia, Kanada, Francja, Niemcy, Polska, Meksyk, Wielka Brytania, Hiszpania, ...
- "</string>
+    <string name="osmand_plus_extended_description_part8">Przybliżona jakość mapy: • Europa Zachodnia: **** • Europa Wschodnia: *** • Rosja: *** • Ameryka Północna: *** • Ameryka Południowa: ** • Azja: ** • Japonia i Korea: *** • Bliski Wschód: ** • Afryka: ** • Antarktyda: *
+\n
+\nJest możliwe pobranie map większości krajów na świecie! Od Afganistanu po Zimbabwe, przez Australię po USA. Argentyna, Brazylia, Kanada, Francja, Niemcy, Polska, Meksyk, Wielka Brytania, Hiszpania…</string>
     <string name="sorted_by_distance">Posortowane wg odległości</string>
     <string name="quick_action_showhide_osmbugs_descr">Przełącza wyświetlanie uwag OSM na mapie.</string>
     <string name="restart_search">Rozpocznij ponownie wyszukiwanie</string>
@@ -2944,4 +2934,6 @@ Od Afganistanu po Zimbabwe, przez Australię po USA. Argentyna, Brazylia, Kanada
     <string name="distance_moving">Poprawiona odległość</string>
     <string name="shared_string_permissions">Uprawnienia</string>
     <string name="import_gpx_failed_descr">Nie można zaimportować pliku. Proszę sprawdzić czy program posiada uprawnienia do odczytywania pliku z jego położenia.</string>
+    <string name="map_widget_ruler_control_first_mode">Tryb łączenia</string>
+    <string name="map_widget_ruler_control_second_mode">Tryb promienia</string>
     </resources>

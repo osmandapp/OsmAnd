@@ -160,12 +160,12 @@ public class TestVoiceActivity extends OsmandActionBarActivity {
 		} else {
 			v += "\n \u25CF Voice language availability:   Recorded voice";
 			v += "\n \u25CF Voice actually used:   Recorded voice";
-					}
+		}
 
 		if (((OsmandApplication) getApplication()).getSettings().AUDIO_STREAM_GUIDANCE.get() == 0) {
 			v += "\n \u25CF BT SCO:   " + AbstractPrologCommandPlayer.btScoInit;
 		} else {
-			v += "\n \u25CF BT SCO:   The current profile is not set to use 'Phone Call Audio'.";
+			v += "\n \u25CF BT SCO:   The current app profile is not set to use 'Phone call audio'.";
 		}
 
 		v += "\n \u25CF Phone call audio delay:   " + ((OsmandApplication) getApplication()).getSettings().BT_SCO_DELAY.get() + "\u00A0ms";
@@ -293,7 +293,15 @@ public class TestVoiceActivity extends OsmandActionBarActivity {
 		button.setTransformationMethod(null); //or else button text is all upper case
 		button.setText(description);
 		button.setLayoutParams(new LayoutParams(LayoutParams.FILL_PARENT, LayoutParams.WRAP_CONTENT));
-		button.setPadding(10, 5, 10, 2);
+		if (!description.startsWith("\u25BA (")) {
+			// Section headline buttons
+			button.setPadding(10, 20, 10, 5);
+		} else {
+			button.setPadding(40, 5, 10, 5);
+		}
+		if (description.startsWith("\u25BA (11.1)")) {
+			infoButton = button;
+		}
 		
 		layout.addView(button);
 		button.setOnClickListener(new View.OnClickListener() {
@@ -301,8 +309,7 @@ public class TestVoiceActivity extends OsmandActionBarActivity {
 			@Override
 			public void onClick(View v) {
 				builder.play();
-				if (description.startsWith("(11.1)")) {
-					infoButton = button;
+				if (description.startsWith("\u25BA (11.1)")) {
 					infoButton.setText("\u25BA (11.1) (Tap to refresh)\n" + getVoiceSystemInfo());
 					Toast.makeText(TestVoiceActivity.this, "Info refreshed.", Toast.LENGTH_LONG).show();
 				}
@@ -322,7 +329,7 @@ public class TestVoiceActivity extends OsmandActionBarActivity {
 						infoButton.setText("\u25BA (11.1) (Tap to refresh)\n" + getVoiceSystemInfo());
 						Toast.makeText(TestVoiceActivity.this, "BT SCO init delay changed to " + ((OsmandApplication) getApplication()).getSettings().BT_SCO_DELAY.get() + "\u00A0ms.", Toast.LENGTH_LONG).show();
 					} else {
-						Toast.makeText(TestVoiceActivity.this, "Setting only available when using Phone Call Audio.", Toast.LENGTH_LONG).show();
+						Toast.makeText(TestVoiceActivity.this, "Setting only available when using 'Phone call audio'.", Toast.LENGTH_LONG).show();
 					}
 				}
 			}

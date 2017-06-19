@@ -2870,7 +2870,7 @@ We slaan geen locatiegegevens, zoektermen of andere gebruikersgegevens op.</stri
     <string name="no_underlay">Geen underlay</string>
     <string name="subscribe_email_error">Foutmelding</string>
     <string name="subscribe_email_desc">Abonneer op de mailinglist voor aanbiedingen en ontvang 3 extra kaart-downloads!</string>
-    <string name="depth_contour_descr">Deze kaarten tonen de dieptepunten en -contouren van de zeeën en oceanen (op basis van een 30 boogseconden-raster).</string>
+    <string name="depth_contour_descr">Deze kaarten tonen de dieptepunten en -contouren van zeeën en oceanen.</string>
     <string name="sea_depth_thanks">Bedankt voor het aanschaffen van Zeediepten en -contouren!</string>
     <string name="index_item_depth_contours_osmand_ext">Zeediepte-contourlijnen</string>
     <string name="index_item_depth_points_southern_hemisphere">Zeediepten Zuidelijk Halfrond</string>
