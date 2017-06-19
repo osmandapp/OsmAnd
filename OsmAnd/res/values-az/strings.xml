@@ -53,7 +53,7 @@
     <string name="get_started">Başla</string>
     <string name="back_to_search">Axtarışa qayıt</string>
     <string name="show_something_on_map">%1$s-i xəritədə göstər</string>
-    <string name="share_history_subject">" OsmAnd ilə paylaşılıb"</string>
+    <string name="share_history_subject">OsmAnd ilə paylaşılıb</string>
     <string name="search_categories">Kateqoriyalar</string>
     <string name="postcode">Poçt kodu</string>
     <string name="map_widget_search">Axtar</string>
@@ -330,7 +330,7 @@
     <string name="osmo_group_information">Zəhmət olmasa qrup yaratmazdan əvvəl oxuyun!</string>
     <string name="osmo_auto_connect">Avtomatik qoşulma</string>
     <string name="osmo_start_service">OsMo xidməti</string>
-    <string name="no_index_file_to_download">Endirilənlər tapılmadı, zəhmət olmasa internet bağlantınızı yoxlayın.</string>
+    <string name="no_index_file_to_download">Endirilənlər tapılmadı, internet bağlantınızı yoxlayın.</string>
     <string name="local_index_select_gpx_file">Göstərmək üçün seçin</string>
     <string name="sort_by_distance">Məsafəyə görə sırala</string>
     <string name="sort_by_name">Ada görə sırala</string>
@@ -1294,7 +1294,7 @@
     <string name="av_camera_focus_continuous">Kamera fasiləsiz fokuslamağa çalışsın</string>
     <string name="av_photo_play_sound">Şəkil çəkərkən səs çal</string>
     <string name="mapillary_image">Mapillary təsviri</string>
-    <string name="osmand_plus_extended_description_part8">" Təxmini xəritənin əhatə dairəsi və keyfiyyəti: • Qərbi Avropa: **** • Şərqi Avropa: *** • Rusiya: *** • Şimali Amerika: *** • Cənubi Amerika: ** • Asiya: ** • Yaponiya &amp; Koreya: *** • Yaxın Şərq: ** • Afrika: ** • Antarktida: * Dünyanın bir çox ölkəsi endirmək üçün mövcuddur! Əfqanıstandan Zimbabveyə, Avstraliyadan ABŞ-a. Argentina, Braziliya, Kanada, Fransa, Almaniya, Meksika, Böyük Britaniya, İspaniya, … "</string>
+    <string name="osmand_plus_extended_description_part8">Təxmini xəritənin əhatə dairəsi və keyfiyyəti: • Qərbi Avropa: **** • Şərqi Avropa: *** • Rusiya: *** • Şimali Amerika: *** • Cənubi Amerika: ** • Asiya: ** • Yaponiya &amp; Koreya: *** • Yaxın Şərq: ** • Afrika: ** • Antarktida: * Dünyanın bir çox ölkəsi endirmək üçün mövcuddur! Əfqanıstandan Zimbabveyə, Avstraliyadan ABŞ-a. Argentina, Braziliya, Kanada, Fransa, Almaniya, Meksika, Böyük Britaniya, İspaniya, …</string>
     <string name="avoid_in_routing_title">Yayın…</string>
     <string name="map_widget_distance">Təyinat nöqtəsi</string>
     <string name="quick_action_add_first_intermediate">Birinci aralığı əlavə et</string>
@@ -1522,8 +1522,8 @@
     <string name="access_expanded_list">Genişlədilmiş siyahı</string>
     <string name="unit_of_length_descr">Uzunluq vahidlərini dəyişin</string>
     <string name="unit_of_length">Uzunluq vahidi</string>
-    <string name="map_widget_ruler_control_first_mode">Qoşulma rejimi</string>
-    <string name="map_widget_ruler_control_second_mode">Radius rejimi</string>
+    <string name="map_widget_ruler_control_first_mode">İki nöqtə xətkeş</string>
+    <string name="map_widget_ruler_control_second_mode">Radius xətkeşi</string>
     <string name="local_index_items_backuped">%1$d / %2$d obyekt uğurla qeyri-aktiv edildi.</string>
     <string name="local_index_no_items_to_do">%1$smək üçün obyekt yoxdur</string>
     <string name="local_index_action_do">%2$s obyekti %1$smək üzrəsiniz. Davam edilsin?</string>
