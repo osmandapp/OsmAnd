@@ -580,7 +580,7 @@ public class TrackDetailsMenu {
 		if (gpxItem.chartHighlightPos != -1) {
 			chart.highlightValue(gpxItem.chartHighlightPos, 0);
 		} else {
-			chart.highlightValue(null);
+			chart.highlightValue(0, 0);
 		}
 	}
 
