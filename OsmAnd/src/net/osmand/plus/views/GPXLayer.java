@@ -85,6 +85,7 @@ public class GPXLayer extends OsmandMapLayer implements ContextMenuLayer.IContex
 
 	private Paint paintInnerRect;
 
+    private Paint paintGridOuterCircle;
 	private Paint paintGridCircle;
 
 	private Paint paintTextIcon;
@@ -146,6 +147,11 @@ public class GPXLayer extends OsmandMapLayer implements ContextMenuLayer.IContex
 		paintGridCircle = new Paint();
 		paintGridCircle.setStyle(Style.FILL_AND_STROKE);
 		paintGridCircle.setAntiAlias(true);
+        paintGridOuterCircle = new Paint();
+        paintGridOuterCircle.setStyle(Style.FILL_AND_STROKE);
+        paintGridOuterCircle.setAntiAlias(true);
+        paintGridOuterCircle.setColor(Color.WHITE);
+        paintGridOuterCircle.setAlpha(204);
 
 		paintIcon = new Paint();
 		pointSmall = BitmapFactory.decodeResource(view.getResources(), R.drawable.map_white_shield_small);
@@ -400,6 +406,7 @@ public class GPXLayer extends OsmandMapLayer implements ContextMenuLayer.IContex
 			trackChartPoints.setSegmentColor(color);
 		}
 		paintGridCircle.setColor(color);
+        paintGridCircle.setAlpha(255);
 		QuadRect latLonBounds = tileBox.getLatLonBounds();
 		List<WptPt> xAxisPoints = trackChartPoints.getXAxisPoints();
 		float r = 3 * tileBox.getDensity();
@@ -411,6 +418,7 @@ public class GPXLayer extends OsmandMapLayer implements ContextMenuLayer.IContex
 					&& axisPoint.getLongitude() <= latLonBounds.right) {
 				float x = tileBox.getPixXFromLatLon(axisPoint.getLatitude(), axisPoint.getLongitude());
 				float y = tileBox.getPixYFromLatLon(axisPoint.getLatitude(), axisPoint.getLongitude());
+                canvas.drawCircle(x, y, r + 2 * (float) Math.ceil(tileBox.getDensity()), paintGridOuterCircle);
 				canvas.drawCircle(x, y, r + (float) Math.ceil(tileBox.getDensity()), paintGridCircle);
 			}
 		}
