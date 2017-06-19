@@ -1,5 +1,6 @@
 <?xml version="1.0" encoding="utf-8"?>
 <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="wrap_content"
     android:background="?attr/bg_color"
@@ -7,15 +8,21 @@
     android:paddingLeft="56dp"
     android:paddingStart="56dp">
 
-    <android.support.v7.widget.AppCompatEditText
-        android:id="@+id/edit_text"
+    <android.support.design.widget.TextInputLayout
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:layout_marginEnd="16dp"
-        android:layout_marginRight="16dp"
-        android:hint="@string/mapillary_menu_edit_text_hint"
-        android:textColor="?android:textColorPrimary"
-        android:textSize="@dimen/default_list_text_size" />
+        android:layout_marginRight="16dp">
+
+        <AutoCompleteTextView
+            android:id="@+id/auto_complete_text_view"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:hint="@string/mapillary_menu_edit_text_hint"
+            android:textColor="?android:textColorPrimary"
+            android:textSize="@dimen/default_list_text_size"
+            tools:text="Username" />
+    </android.support.design.widget.TextInputLayout>
 
     <View
         android:id="@+id/divider"

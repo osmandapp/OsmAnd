@@ -77,7 +77,7 @@ public class MapillaryMenu {
                 .createItem());
 
         contextMenuAdapter.addItem(new ContextMenuItem.ItemBuilder()
-                .setLayout(R.layout.list_item_edit_text)
+                .setLayout(R.layout.list_item_auto_complete_text_view)
                 .setClickable(false)
                 .createItem());
 
@@ -90,7 +90,7 @@ public class MapillaryMenu {
                 .createItem());
 
         contextMenuAdapter.addItem(new ContextMenuItem.ItemBuilder()
-                .setLayout(R.layout.list_item_date_spinners)
+                .setLayout(R.layout.list_item_date_from_and_to)
                 .setClickable(false)
                 .createItem());
 
