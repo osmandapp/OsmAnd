@@ -12,6 +12,8 @@ import android.graphics.PointF;
 import android.graphics.PorterDuff;
 import android.graphics.PorterDuff.Mode;
 import android.graphics.PorterDuffColorFilter;
+import android.graphics.Rect;
+import android.graphics.RectF;
 import android.os.AsyncTask;
 import android.support.annotation.ColorInt;
 import android.support.annotation.NonNull;
@@ -307,14 +309,16 @@ public class GPXLayer extends OsmandMapLayer implements ContextMenuLayer.IContex
 					if (ind > 0) {
 						nm = nm.substring(0, ind);
 					}
-					float nmWidth = paintTextIcon.measureText(nm);
-					canvas.drawRect(
-							x - nmWidth / 2 - 2 * (float) Math.ceil(tileBox.getDensity()),
-							y - r / 2 - 2 * (float) Math.ceil(tileBox.getDensity()),
-							x + nmWidth / 2 + 2 * (float) Math.ceil(tileBox.getDensity()),
-							y + r / 2 + 3 * (float) Math.ceil(tileBox.getDensity()),
-							paintInnerRect);
-					canvas.drawText(nm, x, y + r / 2, paintTextIcon);
+					Rect bounds = new Rect();
+					paintTextIcon.getTextBounds(nm, 0, nm.length(), bounds);
+					int nmWidth = bounds.width();
+					int nmHeight = bounds.height();
+                    RectF rect = new RectF(x - nmWidth / 2 - 2 * (float) Math.ceil(tileBox.getDensity()),
+                            y - nmHeight / 2 - 2 * (float) Math.ceil(tileBox.getDensity()),
+                            x + nmWidth / 2 + 2 * (float) Math.ceil(tileBox.getDensity()),
+                            y + (float) Math.ceil((float)nmHeight / 2) + 2 * (float) Math.ceil(tileBox.getDensity()));
+                    canvas.drawRoundRect(rect, 5, 5, paintInnerRect);
+					canvas.drawText(nm, x, y + nmHeight / 2, paintTextIcon);
 				}
 			}
 		}
