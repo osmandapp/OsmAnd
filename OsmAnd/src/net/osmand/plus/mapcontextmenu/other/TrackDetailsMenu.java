@@ -2,7 +2,6 @@ package net.osmand.plus.mapcontextmenu.other;
 
 import android.graphics.Matrix;
 import android.support.v4.app.Fragment;
-import android.support.v4.util.Pair;
 import android.support.v7.widget.PopupMenu;
 import android.view.MenuItem;
 import android.view.MotionEvent;
@@ -11,6 +10,7 @@ import android.widget.ImageView;
 import android.widget.TextView;
 
 import com.github.mikephil.charting.charts.LineChart;
+import com.github.mikephil.charting.components.YAxis;
 import com.github.mikephil.charting.data.Entry;
 import com.github.mikephil.charting.data.LineData;
 import com.github.mikephil.charting.highlight.Highlight;
@@ -18,6 +18,7 @@ import com.github.mikephil.charting.interfaces.datasets.ILineDataSet;
 import com.github.mikephil.charting.listener.ChartTouchListener.ChartGesture;
 import com.github.mikephil.charting.listener.OnChartGestureListener;
 import com.github.mikephil.charting.listener.OnChartValueSelectedListener;
+import com.github.mikephil.charting.utils.ViewPortHandler;
 
 import net.osmand.data.LatLon;
 import net.osmand.data.QuadRect;
@@ -286,8 +287,19 @@ public class TrackDetailsMenu {
 	private void refreshChart(LineChart chart, boolean forceFit) {
 		Highlight[] highlights = chart.getHighlighted();
 		LatLon location = null;
+
+		ViewPortHandler handler = chart.getViewPortHandler();
+		float minimumVisibleXValue = (float) chart.getValuesByTouchPoint(handler.contentLeft(), handler.contentBottom(), YAxis.AxisDependency.LEFT).x;
+		float maximumVisibleXValue = (float) chart.getValuesByTouchPoint(handler.contentRight(), handler.contentBottom(), YAxis.AxisDependency.LEFT).x;
+
 		if (highlights != null && highlights.length > 0) {
-			gpxItem.chartHighlightPos = highlights[0].getX();
+			if (highlights[0].getX() < minimumVisibleXValue) {
+				gpxItem.chartHighlightPos = minimumVisibleXValue;
+			} else if (highlights[0].getX() > maximumVisibleXValue) {
+				gpxItem.chartHighlightPos = maximumVisibleXValue;
+			} else {
+				gpxItem.chartHighlightPos = highlights[0].getX();
+			}
 			WptPt wpt = getPoint(chart, gpxItem.chartHighlightPos);
 			if (wpt != null) {
 				if (trackChartPoints == null) {
@@ -297,7 +309,7 @@ public class TrackDetailsMenu {
 					trackChartPoints.setGpx(getGpxItem().group.getGpx());
 				}
 				location = new LatLon(wpt.lat, wpt.lon);
-				List<Pair<String, WptPt>> xAxisPoints = getXAxisPoints(chart);
+				List<WptPt> xAxisPoints = getXAxisPoints(chart);
 				trackChartPoints.setHighlightedPoint(location);
 				trackChartPoints.setXAxisPoints(xAxisPoints);
 				if (gpxItem.route) {
@@ -312,13 +324,12 @@ public class TrackDetailsMenu {
 		fitTrackOnMap(chart, location, forceFit);
 	}
 
-	private List<Pair<String, WptPt>> getXAxisPoints(LineChart chart) {
-		List<Pair<String, WptPt>> xAxisPoints = new ArrayList<>();
+	private List<WptPt> getXAxisPoints(LineChart chart) {
+		List<WptPt> xAxisPoints = new ArrayList<>();
 		float[] entries = chart.getXAxis().mEntries;
 		for (int i = 0; i < entries.length; i++) {
-			String formattedEntry = chart.getXAxis().getValueFormatter().getFormattedValue(entries[i], chart.getXAxis());
 			WptPt pointToAdd = getPoint(chart, entries[i]);
-			xAxisPoints.add(new Pair<>(formattedEntry, pointToAdd));
+			xAxisPoints.add(pointToAdd);
 		}
 		return xAxisPoints;
 	}
@@ -586,12 +597,12 @@ public class TrackDetailsMenu {
 	}
 
 	public class TrackChartPoints {
-		private List<Pair<String, WptPt>> xAxisPoints;
+		private List<WptPt> xAxisPoints;
 		private LatLon highlightedPoint;
 		private int segmentColor;
 		private GPXFile gpx;
 
-		public List<Pair<String, WptPt>> getXAxisPoints() {
+		public List<WptPt> getXAxisPoints() {
 			return xAxisPoints;
 		}
 
@@ -607,7 +618,7 @@ public class TrackDetailsMenu {
 			return gpx;
 		}
 
-		public void setXAxisPoints(List<Pair<String, WptPt>> xAxisPoints) {
+		public void setXAxisPoints(List<WptPt> xAxisPoints) {
 			this.xAxisPoints = xAxisPoints;
 		}
 

@@ -32,7 +32,6 @@ import android.graphics.Path;
 import android.graphics.PointF;
 import android.graphics.PorterDuff.Mode;
 import android.graphics.PorterDuffColorFilter;
-import android.support.v4.util.Pair;
 
 public class RouteLayer extends OsmandMapLayer {
 	
@@ -52,8 +51,7 @@ public class RouteLayer extends OsmandMapLayer {
 
 	private Paint paintIcon;
 	private Paint paintIconAction;
-	private Paint paintGridTextIcon;
-	private Paint paintInnerRect;
+	private Paint paintGridCircle;
 
 	private Paint paintIconSelected;
 	private Bitmap selectedPoint;
@@ -80,16 +78,10 @@ public class RouteLayer extends OsmandMapLayer {
 		paintIcon.setColor(Color.BLACK);
 		paintIcon.setStrokeWidth(3);
 
-		paintGridTextIcon = new Paint();
-		paintGridTextIcon.setTextAlign(Paint.Align.CENTER);
-		paintGridTextIcon.setFakeBoldText(true);
-		paintGridTextIcon.setColor(Color.WHITE);
-		paintGridTextIcon.setAntiAlias(true);
-
 		paintIconAction = new Paint();
 		paintIconAction.setFilterBitmap(true);
 		paintIconAction.setAntiAlias(true);
-		
+
 		attrs = new RenderingLineAttributes("route");
 		attrs.defaultWidth = (int) (12 * view.getDensity());
 		attrs.defaultWidth3 = (int) (7 * view.getDensity());
@@ -103,10 +95,10 @@ public class RouteLayer extends OsmandMapLayer {
 		paintIconSelected = new Paint();
 		selectedPoint = BitmapFactory.decodeResource(view.getResources(), R.drawable.map_default_location);
 
-		paintInnerRect = new Paint();
-		paintInnerRect.setStyle(Paint.Style.FILL_AND_STROKE);
-		paintInnerRect.setAntiAlias(true);
-		paintInnerRect.setColor(attrs.defaultColor);
+		paintGridCircle = new Paint();
+		paintGridCircle.setStyle(Paint.Style.FILL_AND_STROKE);
+		paintGridCircle.setAntiAlias(true);
+		paintGridCircle.setColor(attrs.defaultColor);
 	}
 	
 	@Override
@@ -177,26 +169,17 @@ public class RouteLayer extends OsmandMapLayer {
 
 	private void drawXAxisPoints(Canvas canvas, RotatedTileBox tileBox) {
 		QuadRect latLonBounds = tileBox.getLatLonBounds();
-		List<Pair<String, WptPt>> xAxisPoints = trackChartPoints.getXAxisPoints();
-		float r = 12 * tileBox.getDensity();
-		paintGridTextIcon.setTextSize(r);
+		List<WptPt> xAxisPoints = trackChartPoints.getXAxisPoints();
+		float r = 3 * tileBox.getDensity();
 		for (int i = 0; i < xAxisPoints.size(); i++) {
-			WptPt axisPoint = xAxisPoints.get(i).second;
+			WptPt axisPoint = xAxisPoints.get(i);
 			if (axisPoint.getLatitude() >= latLonBounds.bottom
 					&& axisPoint.getLatitude() <= latLonBounds.top
 					&& axisPoint.getLongitude() >= latLonBounds.left
 					&& axisPoint.getLongitude() <= latLonBounds.right) {
-				String textOnPoint = xAxisPoints.get(i).first;
-				float textWidth = paintGridTextIcon.measureText(textOnPoint);
 				float x = tileBox.getPixXFromLatLon(axisPoint.getLatitude(), axisPoint.getLongitude());
 				float y = tileBox.getPixYFromLatLon(axisPoint.getLatitude(), axisPoint.getLongitude());
-				canvas.drawRect(
-						x - textWidth / 2 - 2 * (float) Math.ceil(tileBox.getDensity()),
-						y - r / 2 - 2 * (float) Math.ceil(tileBox.getDensity()),
-						x + textWidth / 2 + 2 * (float) Math.ceil(tileBox.getDensity()),
-						y + r / 2 + 3 * (float) Math.ceil(tileBox.getDensity()),
-						paintInnerRect);
-				canvas.drawText(textOnPoint, x, y + r / 2, paintGridTextIcon);
+				canvas.drawCircle(x, y, r + (float) Math.ceil(tileBox.getDensity()), paintGridCircle);
 			}
 		}
 	}
