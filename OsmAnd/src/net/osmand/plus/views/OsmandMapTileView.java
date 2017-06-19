@@ -331,6 +331,10 @@ public class OsmandMapTileView implements IMapDownloaderCallback {
 		return multiTouch;
 	}
 
+	public void setMultiTouch(boolean multiTouch) {
+		this.multiTouch = multiTouch;
+	}
+
 	public void setIntZoom(int zoom) {
 		zoom = zoom > getMaxZoom() ? getMaxZoom() : zoom;
 		zoom = zoom < getMinZoom() ? getMinZoom() : zoom;
@@ -1033,6 +1037,13 @@ public class OsmandMapTileView implements IMapDownloaderCallback {
 			this.y1 = y1;
 			this.x2 = x2;
 			this.y2 = y2;
+			if (x1 != x2 || y1 != y2) {
+				firstTouchPointX = x1;
+				firstTouchPointY = y1;
+				secondTouchPointX = x2;
+				secondTouchPointY = y2;
+				multiTouch = true;
+			}
 		}
 
 		@Override
