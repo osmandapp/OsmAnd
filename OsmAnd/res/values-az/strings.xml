@@ -292,7 +292,7 @@
     <string name="everything_up_to_date">Bütün fayllar yenidir</string>
     <string name="home_button">Ev</string>
     <string name="map_update">%1$s xəritə üçün yeniləmə var</string>
-    <string name="search_for">Axtar</string>
+    <string name="search_for">Axtarış</string>
     <string name="wake_on_voice">Ekranı yandır</string>
     <string name="rendering_category_hide">Gizlət</string>
     <string name="rendering_category_details">Detallar</string>
@@ -543,7 +543,7 @@
     <string name="amenity_type_osmwiki">Vikipediya (offlayn)</string>
     <string name="index_settings">Xəritə fayllarını idarə et</string>
     <string name="general_settings">Ümumi</string>
-    <string name="global_app_settings">Ümumi proqram parametrləri</string>
+    <string name="global_app_settings">Əsas proqram parametrləri</string>
     <string name="user_name">OSM istifadəçi adınız</string>
     <string name="user_password">OSM şifrəniz</string>
     <string name="osmand_service">Arxa fon rejimi</string>
@@ -734,7 +734,7 @@
     <string name="closing_at">Bağlanır:</string>
     <string name="contact_info">Əlaqə məlumatları</string>
     <string name="description">Açıqlama</string>
-    <string name="add_opening_hours">Açılış saatları əlavə et</string>
+    <string name="add_opening_hours">İş saatları əlavə et</string>
     <string name="poi_dialog_poi_type">POI növü</string>
     <string name="working_days">İş günləri</string>
     <string name="recent_places">Ən son yerlər</string>
