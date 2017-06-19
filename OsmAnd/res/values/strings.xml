@@ -17,8 +17,8 @@
     <string name="mapillary_menu_descr_username">View images added by a certain user.</string>
     <string name="mapillary_menu_title_username">Username</string>
     <string name="mapillary_menu_filter_description">You can filter images by the name of the user or by the date.</string>
-    <string name="map_widget_ruler_control_first_mode">Connection mode</string>
-    <string name="map_widget_ruler_control_second_mode">Radius mode</string>
+    <string name="map_widget_ruler_control_first_mode">Two point ruler</string>
+    <string name="map_widget_ruler_control_second_mode">Radius ruler</string>
     <string name="shared_string_permissions">Permissions</string>
     <string name="import_gpx_failed_descr">OsmAnd cannot import the file. Please check if OsmAnd has permission to read file from its location.</string>
     <string name="distance_moving">Distance corrected</string>

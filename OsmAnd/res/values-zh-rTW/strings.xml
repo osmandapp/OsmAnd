@@ -2461,7 +2461,7 @@ Facebook：https://www.facebook.com/osmandapp
 	<string name="shared_string_from">從</string>
     <string name="city_type_district">區</string>
     <string name="city_type_neighbourhood">鄰里</string>
-    <string name="search_categories">種類</string>
+    <string name="search_categories">類別</string>
     <string name="postcode">郵遞區號</string>
     <string name="share_history_subject">"透過 OsmAnd  分享"</string>
     <string name="lang_hsb">索布語 (上游)</string>
@@ -2525,7 +2525,7 @@ Facebook：https://www.facebook.com/osmandapp
     <string name="lang_kab">卡拜爾</string>
     <string name="edit_filter">編輯分類</string>
     <string name="shared_string_filters">篩選</string>
-    <string name="selected_categories">已選取分類</string>
+    <string name="selected_categories">已選取的分類</string>
     <string name="subcategories">子分類</string>
     <string name="create_custom_poi">建立自訂篩選</string>
     <string name="custom_search">自訂搜尋</string>
@@ -2868,6 +2868,6 @@ Facebook：https://www.facebook.com/osmandapp
     <string name="distance_moving">距離已校正</string>
     <string name="shared_string_permissions">權限</string>
     <string name="import_gpx_failed_descr">OsmAnd 無法匯入檔案。 請檢查 OsmAnd 是否有權限從該位置去讀取檔案。</string>
-    <string name="map_widget_ruler_control_first_mode">連接方式</string>
-    <string name="map_widget_ruler_control_second_mode">半徑方式</string>
+    <string name="map_widget_ruler_control_first_mode">兩點劃線</string>
+    <string name="map_widget_ruler_control_second_mode">半徑劃線</string>
     </resources>
