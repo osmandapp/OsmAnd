@@ -684,11 +684,11 @@ Memòria proporcional %4$s MB (límit de l\'Android %5$s MB, Dalvik %6$s MB).</s
     <string name="opening_hours_not_supported">Format d\'horaris d\'obertura no suportat per a l\'edició</string>
     <string name="transport_to_go_after">prioritza distancia</string>
     <string name="hello">Aplicació de navegació OsmAnd</string>
-    <string name="osmand_rastermaps_plugin_description">"Amb aquest connector podeu accedir a diferents tipus de mapa (anomenats mosaic o ràster), des de les tessel·les predefinides d\'OpenStreetMap (com Mapnik) a imatges de satèl·lit i capes específiques com mapes meteorològics, climàtics, geològics, de relleu, etc.
-\n
-\nQualsevol d\'aquests mapes es pot utilitzar sigui com principal (base) per veure\'s a la vista del mapa de l\'OsmAnd, o com una superposició o sots-posició d\'un altre mapa base (com els mapes  d\'OsmAnd habituals en desconnexió). Per fer més visible qualsevol mapa en sots-posició, es pot amagar fàcilment determinats elements dels mapes vectorials de l\'OsmAnd via el menú «Configuració del mapa» a voluntat.
-\n
-\nEls mapes de tessel·les es poden obtenir directament de proveïdors en línia, o es poden preparar per un ús fora de línia (cal copiar-los manualment al directori de l\'OsmAnd) com una base de dades SQLite construïda per diferents eines de preparació de mapes de tercers. "</string>
+    <string name="osmand_rastermaps_plugin_description">"Amb aquest connector podeu accedir a diferents tipus de mapa (anomenats mosaic o ràster), des de les tessel·les predefinides d\'OpenStreetMap (com Mapnik) a imatges de satèl·lit i capes específiques com mapes meteorològics, climàtics, geològics, de relleu, etc. 
+\n 
+\nQualsevol d\'aquests mapes es pot utilitzar sigui com principal (base) per veure\'s a la vista del mapa de l\'OsmAnd, o com una superposició o sots-posició d\'un altre mapa base (com els mapes  d\'OsmAnd habituals en desconnexió). Per fer més visible qualsevol mapa en sots-posició, es pot amagar fàcilment determinats elements dels mapes vectorials de l\'OsmAnd via el menú «Configuració del mapa» a voluntat. 
+\n 
+\nEls mapes de tessel·les es poden obtenir directament de proveïdors en línia, o es poden preparar per un ús fora de línia (cal copiar-los manualment al directori de l\'OsmAnd) com una base de dades SQLite construïda per diferents eines de preparació de mapes de tercers."</string>
     <string name="choose_audio_stream_descr">Escolliu el canal d\'audio on reproduir el guiat per veu</string>
     <string name="renderers">Renderització dels vectors</string>
     
@@ -878,9 +878,9 @@ Memòria proporcional %4$s MB (límit de l\'Android %5$s MB, Dalvik %6$s MB).</s
     <string name="show_transport_over_map">Mostra les parades del transport</string>
     <string name="save_track_to_gpx">Enregistrament automàtic del trajecte durant la navegació</string>
     <string name="use_english_names_descr">Escolliu entre noms nadius i noms anglesos</string>
-    <string name="srtm_plugin_description">"Aquest connector proporciona tant corbes de nivell superposades com una capa d\'ombres amb efecte relleu per superposar als mapes de OsmAnd. Corredors, ciclistes, excursionistes i qualsevol interessat en el perfil de relleu del terreny ho agrairan força. (Fixeu-vos que les corbes de nivell i/o els efectes de relleu són baixades independents i complementàries, disponibles un cop s\'hagi activat el connector).
-\n
-\nLes dades globals (entre 70 graus nord i 70 graus sud) estan basades en mesures del SRTM (Shuttle Radar Topography Mission) i del ASTER (Advanced Spaceborne Thermal Emission and Reflection Radiometer), un instrument de generació d\'imatges a bord de Terra, el satèl·lit insígnia del Sistema d\'Observació de la Terra de la NASA. ASTER és un esforç de col·laboració entre la NASA, el Ministeri d\'Economia i Comerç del Japó (METI) i la fundació Japan Space Systems (J-spacesystems). "</string>
+    <string name="srtm_plugin_description">Aquest connector proporciona tant corbes de nivell superposades com una capa d\'ombres amb efecte relleu per superposar als mapes de OsmAnd. Corredors, ciclistes, excursionistes i qualsevol interessat en el perfil de relleu del terreny ho agrairan força. (Fixeu-vos que les corbes de nivell i/o els efectes de relleu són baixades independents i complementàries, disponibles un cop s\'hagi activat el connector). 
+\n 
+\nLes dades globals (entre 70 graus nord i 70 graus sud) estan basades en mesures del SRTM (Shuttle Radar Topography Mission) i del ASTER (Advanced Spaceborne Thermal Emission and Reflection Radiometer), un instrument de generació d\'imatges a bord de Terra, el satèl·lit insígnia del Sistema d\'Observació de la Terra de la NASA. ASTER és un esforç de col·laboració entre la NASA, el Ministeri d\'Economia i Comerç del Japó (METI) i la fundació Japan Space Systems (J-spacesystems).</string>
     <string name="rendering_attr_showRoadMaps_description">Indiqueu quan mostrar mapes de només carreteres:</string>
     <string name="auto_announce_on">Inicia els anuncis automàtics</string>
     <string name="send_location_email_pattern">Per a veure la localització seguiu l\'enllaç web %1$s o l\'enllaç Android %2$s</string>
@@ -1114,9 +1114,9 @@ Memòria proporcional %4$s MB (límit de l\'Android %5$s MB, Dalvik %6$s MB).</s
     <string name="shared_string_favorite">Preferida</string>
     <string name="route_preferences">Preferències de ruta</string>
     <string name="route_info">Informació de ruta</string>
-    <string name="osmand_srtm_long_description_1000_chars">"Aquest connector proporciona tant corbes de nivell superposades com una capa d\'ombres amb efecte relleu per superposar als mapes de OsmAnd. Corredors, ciclistes, excursionistes i qualsevol interessat en el perfil de relleu del terreny ho agrairan força.
-\n
-\nLes dades globals (entre 70 graus nord i 70 graus sud) estan basades en mesures del SRTM (Shuttle Radar Topography Mission) i del ASTER (Advanced Spaceborne Thermal Emission and Reflection Radiometer), un instrument de generació d\'imatges a bord de Terra, el satèl·lit insígnia del Sistema d\'Observació de la Terra de la NASA. ASTER és un esforç de col·laboració entre la NASA, el Ministeri d\'Economia i Comerç del Japó (METI) i la fundació Japan Space Systems (J-spacesystems). "</string>
+    <string name="osmand_srtm_long_description_1000_chars">Aquest connector proporciona tant corbes de nivell superposades com una capa d\'ombres amb efecte relleu per superposar als mapes de OsmAnd. Corredors, ciclistes, excursionistes i qualsevol interessat en el perfil de relleu del terreny ho agrairan força. 
+\n 
+\nLes dades globals (entre 70 graus nord i 70 graus sud) estan basades en mesures del SRTM (Shuttle Radar Topography Mission) i del ASTER (Advanced Spaceborne Thermal Emission and Reflection Radiometer), un instrument de generació d\'imatges a bord de Terra, el satèl·lit insígnia del Sistema d\'Observació de la Terra de la NASA. ASTER és un esforç de col·laboració entre la NASA, el Ministeri d\'Economia i Comerç del Japó (METI) i la fundació Japan Space Systems (J-spacesystems).</string>
     <string name="keep_and_add_destination_point">Afegeix com el següent punt de destinació</string>
     <string name="calculate_osmand_route_without_internet">Calcula un segment de ruta a l\'OsmAnd sense Internet</string>
     <string name="gpx_option_calculate_first_last_segment">Calcula una ruta a l\'OsmAnd pels seus segments primer i darrer</string>
@@ -1541,9 +1541,9 @@ Afganistan, Albània, Alemanya, Antilles Holandeses, Algèria, Andorra, Angola, 
     <string name="speak_poi">PDI propers</string>
     <string name="index_tours">Itineraris</string>
     <string name="shared_string_all">Totes</string>
-    <string name="record_plugin_description">"Aquest connector activa la funcionalitat d\'enregistrar i desar els vostres trajectes, sigui prement sobre la pantalla del mapa el giny de gravació GPX, o sigui desant-los tots en un fitxer GPX automàticament.
-\n
-\nLes rutes enregistrades es poden compartir amb els vostres amics o aportar-les per ser utilitzades a OSM. Els atletes poden utilitzar els seus registres per monitoritzar els seus entrenaments. Es pot fer una anàlisi bàsica de les rutes directament a OsmAnd com la durada de cada volta, velocitat mitjana, etc.,  i, per descomptat, es poden analitzar amb eines especialitzades de tercers. "</string>
+    <string name="record_plugin_description">"Aquest connector activa la funcionalitat d\'enregistrar i desar els vostres trajectes, sigui prement sobre la pantalla del mapa el giny de gravació GPX, o sigui desant-los tots en un fitxer GPX automàticament. 
+\n 
+\nLes rutes enregistrades es poden compartir amb els vostres amics o aportar-les per ser utilitzades a OSM. Els atletes poden utilitzar els seus registres per monitoritzar els seus entrenaments. Es pot fer una anàlisi bàsica de les rutes directament a OsmAnd com la durada de cada volta, velocitat mitjana, etc.,  i, per descomptat, es poden analitzar amb eines especialitzades de tercers."</string>
     <string name="record_plugin_name">Enregistrament de trajectes</string>
     <string name="int_hour">h</string>
     <string name="duration">Durada</string>
