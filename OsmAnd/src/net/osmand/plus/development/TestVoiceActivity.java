@@ -249,7 +249,7 @@ public class TestVoiceActivity extends OsmandActionBarActivity {
 		addButton(ll, "\u25BA (7.1)  Straight ahead", builder(p).goAhead());
 		addButton(ll, "\u25BA (7.2)  Continue for 2350m to ' '", builder(p).goAhead(2350, street(p, "")));
 		addButton(ll, "\u25BA (7.3)  Continue for 360m to 'Broadway' and arrive at your intermediate destination ' '", builder(p).goAhead(360, street(p,"Broadway")).andArriveAtIntermediatePoint(""));
-		addButton(ll, "\u25BA (7.4)  Continue for 800m to 'Dr Martin Luther King Jr Blvd' and arrive at your destination ' '", builder(p).goAhead(800, street(p,"", "Dr Martin Luther King Jr Blvd")).andArriveAtDestination(""));
+		addButton(ll, "\u25BA (7.4)  Continue for 800m to 'Dr Martin Luther King Jr Boulevard' and arrive at your destination ' '", builder(p).goAhead(800, street(p,"", "Dr Martin Luther King Jr Boulevard")).andArriveAtDestination(""));
 		addButton(ll, "\u25BA (7.5)  Continue for 200m and pass GPX waypoint 'Trailhead'", builder(p).goAhead(200, null).andArriveAtWayPoint("Trailhead"));
 		addButton(ll, "\u25BA (7.6)  Continue for 400m and pass favorite 'Brewery'", builder(p).goAhead(400, null).andArriveAtFavorite("Brewery"));
 		addButton(ll, "\u25BA (7.7)  Continue for 600m and pass POI 'Museum'", builder(p).goAhead(600, null).andArriveAtPoi("Museum"));
