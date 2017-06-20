@@ -103,7 +103,7 @@
 	<string name="avoid_in_routing_descr">تجنب الطرق ذات الرسوم، وغير المعبدة، والعبارات</string>
 	
 	
-	<string name="gps_wakeup_interval">GPS إيقاظ الفاصل الزمني: %s</string>
+	<string name="gps_wakeup_interval">الفاصل الزمني لإستيقاظ نظام تحديد المواقع: %s</string>
 	<string name="int_continuosly">متواصل</string>
 	<string name="screen_is_locked">لفتح قفل الشاشة اضغط على أيقونة القفل</string>
 	<string name="map_widget_top_text">اسم الشارع</string>
@@ -404,7 +404,7 @@
     <string name="add_tag">أضف وسما</string>
     <string name="show_warnings_descr">ضبط تحذيرات المرور ( حدود السرعة، والتوقف القسري، والمطبات الصناعية ) ، وتحذيرات كاميرا السرعة ، ومعلومات الممرات</string>
 	
-    <string name="local_index_tile_data_zooms">التقريبات المُنزّلة: %1$s</string>
+    <string name="local_index_tile_data_zooms">التكبيرات المُنزّلة: %1$s</string>
     <string name="local_index_tile_data_name">معلومات التّجانب: %1$s</string>
     <string name="edit_tilesource_successfully">حُفِظ المصدر التّجانبي %1$s بنجاح</string>
     <string name="use_compass_navigation_descr">استخدم البوصلة عندما لا تكون هناك أي وجهة محددة</string>
@@ -469,7 +469,7 @@
 	<string name="av_photo_play_sound_descr">فعّل هذا في حال رغبتك بسماع نغمة التقاط الصّور</string>
 <string name="edit_tilesource_elliptic_tile">نموذج مركتور البيضوي</string>
     
-    <string name="route_descr_lat_lon">خط عرض %1$.3f، طول %2$.3f</string>
+    <string name="route_descr_lat_lon">خط عرض %1$.3f، خط طول %2$.3f</string>
     
 	
 	
@@ -639,8 +639,7 @@
     
     
 	
-	<string name="native_app_allocated_memory_descr">المساحة المحجوزة من الذّاكرة الأصلية %1$s MB (Dalvik %2$s MB, other %3$s MB).
-		الذّاكرة النّسبية %4$s MB (الأقصى لأندرويد %5$s MB, Dalvik %6$s MB).</string>
+	<string name="native_app_allocated_memory_descr">إجمالي الذاكرة الأصلية المخصصة من قبل التطبيق %1$ s ميغابايت (Dalvik %2$ s ميغابايت، الأخرى %3$ s ميغابايت). الذاكرة النسبية %4$ s ميغابايت (حد الجهاز %5$ s ميغابايت Dalvik %6$ s ميغابايت).</string>
 	<string name="app_mode_hiking">مشي</string>
     <string name="app_mode_motorcycle">دراجة نارية</string>
     <string name="app_mode_boat">قارب</string>
@@ -967,7 +966,7 @@ OsmAnd هو المصدر المفتوح و التي يجري تطويرها بن
 	<string name="local_index_mi_backup">عطّل</string>
 	
 	<string name="local_index_mi_reload">حدّث من sdcard</string>
-	<string name="shared_string_download">تنزيل</string>
+	<string name="shared_string_download">تحميل</string>
 	<string name="local_index_poi_data">بيانات POI</string>
 	<string name="local_index_address_data">بيانات العناوين</string>
 	<string name="local_index_transport_data">بيانات وسائل النقل العام</string>
@@ -1221,7 +1220,7 @@ OsmAnd هو المصدر المفتوح و التي يجري تطويرها بن
 	<string name="shared_string_search">بحث</string>
 	<string name="shared_string_show_description">عرض الوصف</string>
 	<string name="shared_string_message">رسالة</string>
-	<string name="welmode_download_maps">تنزيل الخرائط</string>
+	<string name="welmode_download_maps">تحميل الخرائط</string>
 	<string name="welcome_select_region">لعرض إشارات وقواعد المرور بشكل صحيح، من فضلك اختر منطقة القيادة:</string>
 	<string name="shared_string_add_to_favorites">إضافة إلى المواقع المفضلة</string>
 	<string name="shared_string_my_places">مواقعي</string>
@@ -1251,7 +1250,7 @@ OsmAnd هو المصدر المفتوح و التي يجري تطويرها بن
     <string name="general_settings_2">الإعدادات العامة</string>
 	<string name="shared_string_ellipsis">…</string>
 	<string name="shared_string_ok">موافق</string>
-	<string name="shared_string_dismiss">تجاهل</string>
+	<string name="shared_string_dismiss">انصراف</string>
 	<string name="shared_string_do_not_use">لا تستخدم</string>
 	<string name="shared_string_enable">تفعيل</string>
 	<string name="shared_string_disable">تعطيل</string>
@@ -1408,7 +1407,7 @@ OsmAnd هو المصدر المفتوح و التي يجري تطويرها بن
     <string name="traffic_warning_speed_limit">حد السرعة</string>
     <string name="sleep_mode_stop_dialog">"إيقاف وضع GPS المفعل في الخلفية  ؟"</string>
 	<string name="stop_navigation_service">إيقاف</string>
-	<string name="confirm_every_run">دائماً اسأل</string>
+	<string name="confirm_every_run">إسأل دائماً</string>
 	<string name="save_global_track_interval">الفاصل الزمني العام للتسجيل</string>
 	<string name="background_service_int">الفاصل الزمني لإيقاظ GPS</string>
 	<string name="enable_sleep_mode">تفعيل وضع GPS في الخلفية</string>
