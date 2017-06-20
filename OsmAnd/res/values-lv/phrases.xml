@@ -3325,4 +3325,10 @@
 	<string name="poi_motorcycle_type_offroad">Bezceļa</string>
 	<string name="poi_motorcycle_type_standard">Klasiskie</string>
 
-</resources>
+<string name="poi_drink_wine_retail">Vīns: pudelēs</string>
+	<string name="poi_drink_wine_served">Vīns: servēts</string>
+
+	<string name="poi_zoo_petting_zoo">Mājdzīvnieku zoo</string>
+	<string name="poi_stands">Sporta tribīnes</string>
+
+	</resources>
