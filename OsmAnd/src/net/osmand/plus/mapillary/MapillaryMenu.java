@@ -13,7 +13,7 @@ import net.osmand.plus.activities.MapActivity;
 public class MapillaryMenu {
 
     public static ContextMenuAdapter createListAdapter(final MapActivity mapActivity) {
-        ContextMenuAdapter adapter = new ContextMenuAdapter();
+        ContextMenuAdapter adapter = new ContextMenuAdapter(mapActivity);
         adapter.setDefaultLayoutId(R.layout.list_item_icon_and_menu);
         createLayersItems(adapter, mapActivity);
         return adapter;

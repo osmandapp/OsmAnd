@@ -16,6 +16,7 @@ import android.util.TypedValue;
 import android.view.Gravity;
 import android.view.MenuItem;
 import android.view.View;
+import android.view.ViewGroup;
 import android.view.ViewTreeObserver;
 import android.view.animation.Animation;
 import android.view.animation.Animation.AnimationListener;
@@ -464,6 +465,7 @@ public class DashboardOnMap implements ObservableScrollViewCallbacks, DynamicLis
 		} else if (visibleType == DashboardType.MAP_MARKERS_SELECTION) {
 			tv.setText(R.string.select_map_markers);
 		} else if (visibleType == DashboardType.MAPILLARY) {
+			listView.setDescendantFocusability(ViewGroup.FOCUS_AFTER_DESCENDANTS);
 			tv.setText(R.string.mapillary);
 		} else if (visibleType == DashboardType.CONTOUR_LINES) {
 			tv.setText(R.string.srtm_plugin_name);

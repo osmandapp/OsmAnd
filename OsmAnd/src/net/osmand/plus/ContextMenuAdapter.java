@@ -1,21 +1,31 @@
 package net.osmand.plus;
 
 import android.app.Activity;
+import android.app.DatePickerDialog;
 import android.content.Intent;
+import android.content.res.Resources;
 import android.graphics.drawable.Drawable;
 import android.net.Uri;
+import android.os.Build;
 import android.support.annotation.ColorRes;
 import android.support.annotation.DrawableRes;
 import android.support.annotation.IdRes;
 import android.support.annotation.LayoutRes;
 import android.support.v4.app.FragmentActivity;
 import android.support.v7.widget.AppCompatImageView;
+import android.text.Editable;
+import android.text.TextWatcher;
+import android.util.TypedValue;
 import android.view.ContextThemeWrapper;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.ArrayAdapter;
+import android.widget.AutoCompleteTextView;
+import android.widget.Button;
 import android.widget.CompoundButton;
 import android.widget.CompoundButton.OnCheckedChangeListener;
+import android.widget.DatePicker;
+import android.widget.EditText;
 import android.widget.ImageView;
 import android.widget.ProgressBar;
 import android.widget.SeekBar;
@@ -23,13 +33,19 @@ import android.widget.TextView;
 
 import net.osmand.PlatformUtil;
 import net.osmand.plus.activities.HelpActivity;
+import net.osmand.plus.activities.MapActivity;
 import net.osmand.plus.activities.actions.AppModeDialog;
 import net.osmand.plus.dialogs.ConfigureMapMenu;
 import net.osmand.plus.dialogs.HelpArticleDialogFragment;
 
 import org.apache.commons.logging.Log;
 
+import java.text.DateFormat;
+import java.text.SimpleDateFormat;
 import java.util.ArrayList;
+import java.util.Calendar;
+import java.util.Comparator;
+import java.util.Date;
 import java.util.LinkedHashSet;
 import java.util.List;
 import java.util.Set;
@@ -41,6 +57,15 @@ public class ContextMenuAdapter {
 	private int DEFAULT_LAYOUT_ID = R.layout.list_menu_item_native;
 	List<ContextMenuItem> items = new ArrayList<>();
 	private ConfigureMapMenu.OnClickListener changeAppModeListener = null;
+	private MapActivity mapActivity;
+
+	public ContextMenuAdapter() {
+
+	}
+
+	public ContextMenuAdapter(MapActivity mapActivity) {
+		this.mapActivity = mapActivity;
+	}
 
 	public int length() {
 		return items.size();
@@ -327,6 +352,181 @@ public class ContextMenuAdapter {
 				} else {
 					dividerView.setVisibility(View.VISIBLE);
 				}
+			}
+
+			final View autoCompleteTextView = convertView.findViewById(R.id.auto_complete_text_view);
+			if (autoCompleteTextView != null) {
+				AutoCompleteTextView textView = (AutoCompleteTextView) autoCompleteTextView;
+				final ArrayAdapter<String> adapter;
+
+				if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.LOLLIPOP) {
+					adapter = new ArrayAdapter<>(getContext(), R.layout.list_textview, new String[]{"username1", "name1", "user1"});
+				} else {
+					TypedValue typedValue = new TypedValue();
+					Resources.Theme theme = getContext().getTheme();
+					theme.resolveAttribute(android.R.attr.textColorSecondary, typedValue, true);
+					final int textColor = typedValue.data;
+
+					adapter = new ArrayAdapter<String>(getContext(), R.layout.list_textview, new String[]{"username1", "name1", "user1"}) {
+						@Override
+						public View getView(int position, View convertView, ViewGroup parent) {
+							final View view = super.getView(position, convertView, parent);
+							((TextView) view.findViewById(R.id.textView)).setTextColor(textColor);
+							return view;
+						}
+					};
+				}
+				adapter.sort(new Comparator<String>() {
+					@Override
+					public int compare(String first, String second) {
+						return first.compareTo(second);
+					}
+				});
+				textView.setAdapter(adapter);
+
+				String selectedUsername = app.getSettings().MAPILLARY_FILTER_USERNAME.get();
+				if (!selectedUsername.equals("")) {
+					textView.setText(selectedUsername);
+					textView.setSelection(selectedUsername.length());
+				}
+
+				textView.addTextChangedListener(new TextWatcher() {
+					@Override
+					public void beforeTextChanged(CharSequence charSequence, int i, int i1, int i2) {
+
+					}
+
+					@Override
+					public void onTextChanged(CharSequence charSequence, int i, int i1, int i2) {
+
+					}
+
+					@Override
+					public void afterTextChanged(Editable editable) {
+						app.getSettings().MAPILLARY_FILTER_USERNAME.set(editable.toString());
+					}
+				});
+			}
+
+			final View dateFromEditText = convertView.findViewById(R.id.date_from_edit_text);
+			if (dateFromEditText != null) {
+				final EditText dateFrom = (EditText) dateFromEditText;
+				final DateFormat dateFormat = SimpleDateFormat.getDateInstance(DateFormat.MEDIUM);
+
+				final DatePickerDialog.OnDateSetListener date = new DatePickerDialog.OnDateSetListener() {
+					@Override
+					public void onDateSet(DatePicker view, int year, int monthOfYear, int dayOfMonth) {
+						Calendar from = Calendar.getInstance();
+						from.set(Calendar.YEAR, year);
+						from.set(Calendar.MONTH, monthOfYear);
+						from.set(Calendar.DAY_OF_MONTH, dayOfMonth);
+						dateFrom.setText(dateFormat.format(from.getTime()));
+						app.getSettings().MAPILLARY_FILTER_FROM_DATE.set(from.getTimeInMillis());
+					}
+				};
+
+				dateFrom.setOnClickListener(new View.OnClickListener() {
+					@Override
+					public void onClick(View view) {
+						Calendar now = Calendar.getInstance();
+						new DatePickerDialog(mapActivity, date,
+								now.get(Calendar.YEAR),
+								now.get(Calendar.MONTH),
+								now.get(Calendar.DAY_OF_MONTH)).show();
+					}
+				});
+
+				long from = app.getSettings().MAPILLARY_FILTER_FROM_DATE.get();
+				if (from != 0) {
+					dateFrom.setText(dateFormat.format(new Date(from)));
+				}
+				dateFrom.setCompoundDrawablesWithIntrinsicBounds(null, null,
+						mIconsCache.getThemedIcon(R.drawable.ic_action_arrow_drop_down), null);
+			}
+
+			final View dateToEditText = convertView.findViewById(R.id.date_to_edit_text);
+			if (dateToEditText != null) {
+				final EditText dateTo = (EditText) dateToEditText;
+				final DateFormat dateFormat = SimpleDateFormat.getDateInstance(DateFormat.MEDIUM);
+
+				final DatePickerDialog.OnDateSetListener date = new DatePickerDialog.OnDateSetListener() {
+					@Override
+					public void onDateSet(DatePicker view, int year, int monthOfYear, int dayOfMonth) {
+						Calendar to = Calendar.getInstance();
+						to.set(Calendar.YEAR, year);
+						to.set(Calendar.MONTH, monthOfYear);
+						to.set(Calendar.DAY_OF_MONTH, dayOfMonth);
+						dateTo.setText(dateFormat.format(to.getTime()));
+						app.getSettings().MAPILLARY_FILTER_TO_DATE.set(to.getTimeInMillis());
+					}
+				};
+
+				dateTo.setOnClickListener(new View.OnClickListener() {
+					@Override
+					public void onClick(View view) {
+						Calendar now = Calendar.getInstance();
+						new DatePickerDialog(mapActivity, date,
+								now.get(Calendar.YEAR),
+								now.get(Calendar.MONTH),
+								now.get(Calendar.DAY_OF_MONTH)).show();
+					}
+				});
+
+				long to = app.getSettings().MAPILLARY_FILTER_TO_DATE.get();
+				if (to != 0) {
+					dateTo.setText(dateFormat.format(new Date(to)));
+				}
+				dateTo.setCompoundDrawablesWithIntrinsicBounds(null, null,
+						mIconsCache.getThemedIcon(R.drawable.ic_action_arrow_drop_down), null);
+			}
+
+			final View applyBtn = convertView.findViewById(R.id.button_apply);
+			if (applyBtn != null) {
+				final Button apply = (Button) applyBtn;
+				apply.setOnClickListener(new View.OnClickListener() {
+					@Override
+					public void onClick(View view) {
+						View list = (View) view.getParent().getParent().getParent();
+						String username = ((AutoCompleteTextView) list.findViewById(R.id.auto_complete_text_view)).getText().toString();
+						String dateFrom = ((EditText) list.findViewById(R.id.date_from_edit_text)).getText().toString();
+						String dateTo = ((EditText) list.findViewById(R.id.date_to_edit_text)).getText().toString();
+						OsmandSettings settings = app.getSettings();
+
+						if (!username.equals("") || !dateFrom.equals("") || !dateTo.equals("")) {
+							settings.USE_MAPILLARY_FILTER.set(true);
+						}
+						if (username.equals("")) {
+							settings.MAPILLARY_FILTER_USERNAME.set("");
+						}
+						if (dateFrom.equals("")) {
+							settings.MAPILLARY_FILTER_FROM_DATE.set(0L);
+						}
+						if (dateTo.equals("")) {
+							settings.MAPILLARY_FILTER_TO_DATE.set(0L);
+						}
+					}
+				});
+			}
+
+			final View clearBtn = convertView.findViewById(R.id.button_clear);
+			if (clearBtn != null) {
+				final Button clear = (Button) clearBtn;
+				clear.setOnClickListener(new View.OnClickListener() {
+					@Override
+					public void onClick(View view) {
+						View list = (View) view.getParent().getParent().getParent();
+						OsmandSettings settings = app.getSettings();
+
+						((AutoCompleteTextView) list.findViewById(R.id.auto_complete_text_view)).setText("");
+						((EditText) list.findViewById(R.id.date_from_edit_text)).setText("");
+						((EditText) list.findViewById(R.id.date_to_edit_text)).setText("");
+
+						settings.USE_MAPILLARY_FILTER.set(false);
+						settings.MAPILLARY_FILTER_USERNAME.set("");
+						settings.MAPILLARY_FILTER_FROM_DATE.set(0L);
+						settings.MAPILLARY_FILTER_TO_DATE.set(0L);
+					}
+				});
 			}
 
 			if (item.isCategory()) {
