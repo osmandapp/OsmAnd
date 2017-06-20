@@ -1350,7 +1350,7 @@ public class DashboardOnMap implements ObservableScrollViewCallbacks, DynamicLis
 	}
 
 	private boolean isBackButtonVisible() {
-		return !(visibleType == DashboardType.DASHBOARD || visibleType == DashboardType.LIST_MENU);
+		return !(visibleType == DashboardType.DASHBOARD || visibleType == DashboardType.LIST_MENU || visibleType == DashboardType.MAP_MENU);
 	}
 
 	private void updateTopButton(int scrollY) {
