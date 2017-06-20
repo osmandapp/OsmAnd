@@ -630,6 +630,7 @@ public class VoiceRouter {
 			}
 			if ((player != null) && ("en".startsWith(player.getLanguage()))) {
 				pn = pn.replace("SR", "S R");    // Avoid SR (as for State Route or Strada Regionale) be pronounced as "Senior" in English tts voice
+				pn = pn.replace("Dr.", "Dr");    // Avoid pause many English TTS voices introduce after period
 			}
 		}
 		return pn;
