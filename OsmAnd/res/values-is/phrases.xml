@@ -2039,4 +2039,30 @@
 	<string name="poi_australian_football">Ástralskur fótbolti</string>
 	<string name="poi_equestrian">Hestaíþróttir</string>
 	<string name="poi_ice_skating">Skautar á ís</string>
+	<string name="poi_zoo_type">Tegund</string>
+	<string name="poi_motorcycle_services">Þjónusta</string>
+	<string name="poi_motorcycle_type">Tegund bifhjóls</string>
+
+<string name="poi_craft_winery">Víngerð</string>
+
+	<string name="poi_club_art">Listaklúbbur</string>
+	<string name="poi_club_computer">Tölvuklúbbur</string>
+	<string name="poi_club_board_games">Borðleikjaklúbbur</string>
+	<string name="poi_club_sport">Íþróttafélag</string>
+	<string name="poi_club_game">Leikjaklúbbur</string>
+	<string name="poi_club_chess">Skákfélag</string>
+	<string name="poi_club_cinema">Kvikmyndaklúbbur</string>
+	<string name="poi_club_fan">Aðdáendaklúbbur</string>
+	<string name="poi_club_fishing">Fiskveiðiklúbbur</string>
+	<string name="poi_club_linux">Linux-áhugamannaklúbbur</string>
+	<string name="poi_club_theatre">Leiklistarfélag</string>
+	<string name="poi_club_history">Sagnfræðifélag</string>
+	<string name="poi_club_music">Tónlistarklúbbur</string>
+	<string name="poi_club_photography">Ljósmyndaklúbbur</string>
+	<string name="poi_club_shooting">Skotfimifélag</string>
+	<string name="poi_club_charity">Góðgerðafélag</string>
+	<string name="poi_club_freemasonry">Frímúrarastúka</string>
+	<string name="poi_club_sailing">Siglingaklúbbur</string>
+	<string name="poi_club_scout">Skátafélag</string>
+
 	</resources>
