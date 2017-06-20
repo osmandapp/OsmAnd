@@ -36,7 +36,7 @@
     
     <string name="local_indexes_cat_av">بيانات الصوت / الفيديو</string>
     <string name="stop_routing_confirm">هل أنت متأكد أنك تريد إيقاف الملاحة؟</string>
-    <string name="clear_dest_confirm">هل أنت متأكد أنك تريد مسح نقطة الوجهة (والوجهات الوسيطية) ؟</string>
+    <string name="clear_dest_confirm">هل أنت متأكد أنك تريد مسح نقطة الوجهة (والوجهات المتوسطة) ؟</string>
     <string name="precise_routing_mode">التوجيه الدقيق (ألفا)</string>
     <string name="recording_context_menu_precord">التقاط صورة</string>
     <string name="dropbox_plugin_name">ملحق دروب بوكس</string>
@@ -76,7 +76,7 @@
 	<string name="map_widget_show_destination_arrow">أظهر إتجاه المقصد</string>
     <string name="map_widget_monitoring_services">خدمات التسجيل</string>
 	<string name="no_route">لا طريق</string>
-	<string name="delete_target_point">إزالة وجهة</string>
+	<string name="delete_target_point">إزالة الوجهة</string>
     <string name="new_destination_point_dialog">لقد حددت نقطة وجهة سابقا:</string>
     <string name="target_points">الوجهات</string>
     <string name="btn_advanced_mode">الوضع المتقدم…</string>
@@ -370,7 +370,7 @@
     <string name="rendering_attr_roadColors_description">اختر نظام ألوان الطريق:</string>
 	<string name="rendering_attr_roadColors_name">نظام ألوان الطريق</string>
     <string name="target_point">الوجهة %1$s</string>
-    <string name="intermediate_point">الوجهة الوسيطة %1$s</string>
+    <string name="intermediate_point">الوجهة المتوسطة %1$s</string>
     <string name="context_menu_item_last_intermediate_point">أضف كآخر وجهة وسيطة</string>
     <string name="context_menu_item_first_intermediate_point">أضف كأول وجهة وسيطة</string>
     
@@ -445,7 +445,7 @@
 	
 	<string name="map_widget_next_turn_small">المنعطف التالي (صغير)</string>
 	<string name="map_widget_next_next_turn">المنعطف الثاني</string>
-	<string name="map_widget_mini_route">خريطة الطريق مصغرة</string>
+	<string name="map_widget_mini_route">خريطة طريق مصغرة</string>
 	<string name="bg_service_interval">تعيين الفاصل الزمني للتنبيه:</string>
 	<string name="continue_follow_previous_route_auto">المسار السابق لم يكتمل. هل تريد متابعته؟ (%1$s ثانية)</string>
 	<string name="route_updated_loc_found">سيعاد احتساب المسار حالما يتم العثور على الموقع</string>
@@ -550,7 +550,7 @@
 	<string name="index_settings">إدارة بيانات الخرائط</string>
 	<string name="general_settings">عام</string>
 	<string name="general_settings_descr">ضبط العرض والإعدادات العامة للتطبيق</string>
-	<string name="open_street_map_login_descr">مطلوب للمساهمة في openstreetmap.org</string>
+	<string name="open_street_map_login_descr">مطلوب لطلبات openstreetmap.org</string>
 	
 	<string name="local_openstreetmap_uploading">يرفع …</string>
 	<string name="local_openstreetmap_uploadall">رفع الكل</string>
@@ -1076,7 +1076,7 @@ OsmAnd هو المصدر المفتوح و التي يجري تطويرها بن
 	<string name="amenity_type_sport">رياضة</string>
 	<string name="amenity_type_sustenance">رزق</string>
 	<string name="amenity_type_tourism">سياحة</string>
-	<string name="indexing_address">يفهرس العنوان…</string>
+	<string name="indexing_address">فهرسة العنوان…</string>
 	<string name="indexing_map">يفهرس الخريطة…</string>
 	<string name="indexing_poi">يفهرس POI…</string>
 	<string name="indexing_transport">جاري فهرسة وسائل النقل…</string>
@@ -1175,7 +1175,7 @@ OsmAnd هو المصدر المفتوح و التي يجري تطويرها بن
  ملاحظة 1 : الملفات القديمة ستبقى كما هي دون لمس (ولكن يمكن حذفها يدويا).
 
  ملاحظة 2 : لا يمكن مشاركة الملفات بين OsmAnd و +OsmAnd في مكان التخزين الجديد.</string>
-    <string name="copying_osmand_one_file_descr">ينسخ الملف (%s) إلى مساره الجديد…</string>
+    <string name="copying_osmand_one_file_descr">نسخ الملف (%s) إلى مساره الجديد…</string>
     <string name="arrival_distance">إخطار الوصول</string>
     <string name="arrival_distance_descr">هل تريد أن يعلمك البرنامج عند الوصول إلى مقصدك؟</string>
     <string name="keep_informing_never">أبدًا</string>
@@ -1910,7 +1910,7 @@ OsmAnd هو المصدر المفتوح و التي يجري تطويرها بن
     <string name="features_menu_group">ميزات</string>
     <string name="help_us_to_improve_menu_group">ساعدنا على تحسين أوسماند OSMAnd</string>
     <string name="first_usage_item">أول استخدام</string>
-    <string name="first_usage_item_description">كيفية تحميل الخرائط وتعيين الإعدادات الأساسية</string>
+    <string name="first_usage_item_description">كيفية تحميل الخرائط، تعيين الإعدادات الأساسية</string>
     <string name="planning_trip_item">التخطيط لرحلة</string>
     <string name="faq_item">الأسئلة المتداولة</string>
     <string name="faq_item_description">الأسئلة المتداولة</string>
@@ -2037,7 +2037,7 @@ OsmAnd هو المصدر المفتوح و التي يجري تطويرها بن
     <string name="rendering_attr_hideUnderground_name">أشياء تحت الأرض</string>
     <string name="data_is_not_available">البيانات غير متوفرة</string>
     <string name="shared_string_read_more">إقرأ المزيد</string>
-    <string name="road_blocked">الطريق محظورة</string>
+    <string name="road_blocked">طريق مسدود</string>
     <string name="shared_string_select">حدد</string>
     <string name="switch_start_finish">إعكس نقطة الانطلاق و الوصول</string>
     <string name="rendering_attr_hideIcons_name">أيقونات ال POI</string>
@@ -2151,7 +2151,7 @@ OsmAnd هو المصدر المفتوح و التي يجري تطويرها بن
 (المساحة المتوفرة هي {2} مب.)</string>
     <string name="transport_route_distance">مسافة المسلك</string>
     <string name="update_poi_error_local">خطأ تحيين القائمة المحلية للPOI</string>
-    <string name="context_menu_item_update_poi">تحيين الPOI</string>
+    <string name="context_menu_item_update_poi">تحديث POI</string>
     <string name="upload_osm_note_description">يمكنك رفع ملاحظات OSM الخاصة بك بصفة مخفية أو استخدام حسابك على openstreetmap.org .</string>
     <string name="add_points_to_map_markers_q">هل تريد اضافة جميع النقاط الى العلامات الموضعية؟</string>
     <string name="clear_markers_history_q">هل تريد مسح جميع محفوظات العلامات الموضعية؟</string>
@@ -2251,7 +2251,7 @@ OsmAnd هو المصدر المفتوح و التي يجري تطويرها بن
     <string name="route_general_information">المسافة الإجمالية %1$s، مدة السفر %2$d سا و %3$d د.</string>
     <string name="back_to_search">العودة إلى البحث</string>
     <string name="consider_turning_polygons_off">من المستحسن إيقاف عرض المضلعات.</string>
-    <string name="access_from_map_description">يطلق زر القائمة لوحة التحكم و ليس القائمة بحد ذاتها</string>
+    <string name="access_from_map_description">زر القائمة يشغل لوحة التحكم و ليس القائمة بحد ذاتها</string>
     <string name="confirmation_to_delete_history_items">هل تريد حذف العناصر المحددة من السجل؟</string>
     <string name="access_direction_haptic_feedback">توجيه رد فعل الهزاز</string>
     <string name="please_specify_poi_type_only_from_list">يرجى تحديد نوع POI الصحيح أو تخطيه</string>
@@ -2548,7 +2548,7 @@ OsmAnd هو المصدر المفتوح و التي يجري تطويرها بن
     <string name="first_usage_greeting">أحصل على التوجيهات واكتشف أماكن جديدة دون إنترنت</string>
     <string name="search_my_location">البحث في موقعي</string>
     <string name="get_for">تحصل عليه بـ %1$s</string>
-    <string name="get_for_month">تحصل عليه لـ %1$s أشهر</string>
+    <string name="get_for_month">تحصل عليه بـ %1$s في الشهر</string>
     <string name="osm_live_banner_desc">تحصل على عدد غير محدود من تنزيلات الخرائط والتحديثات في الشهر : أسبوعيا، يوميا أو كل ساعة.</string>
     <string name="osmand_plus_banner_desc">نسخة كاملة من تطبيق أواسام آند مع تنزيل غير محدود وتحديثات شهرية للخرائط .</string>
     <string name="si_mi_meters">أميال/أمتار</string>
