@@ -50,6 +50,7 @@ import net.osmand.plus.IconsCache;
 import net.osmand.plus.MapMarkersHelper;
 import net.osmand.plus.MapMarkersHelper.MapMarker;
 import net.osmand.plus.MapMarkersHelper.MapMarkerChangedListener;
+import net.osmand.plus.MapMenu;
 import net.osmand.plus.OsmandApplication;
 import net.osmand.plus.OsmandPlugin;
 import net.osmand.plus.OsmandSettings;
@@ -179,6 +180,7 @@ public class DashboardOnMap implements ObservableScrollViewCallbacks, DynamicLis
 	}
 
 	public enum DashboardType {
+		MAP_MENU,
 		WAYPOINTS,
 		WAYPOINTS_FLAT,
 		CONFIGURE_SCREEN,
@@ -448,6 +450,8 @@ public class DashboardOnMap implements ObservableScrollViewCallbacks, DynamicLis
 		boolean waypointsVisible = visibleType == DashboardType.WAYPOINTS || visibleType == DashboardType.WAYPOINTS_FLAT;
 		if (waypointsVisible) {
 			tv.setText(R.string.waypoints);
+		} else if (visibleType == DashboardType.MAP_MENU){
+			tv.setText("");
 		} else if (visibleType == DashboardType.CONFIGURE_MAP) {
 			tv.setText(R.string.configure_map);
 		} else if (visibleType == DashboardType.CONFIGURE_SCREEN) {
@@ -898,7 +902,8 @@ public class DashboardOnMap implements ObservableScrollViewCallbacks, DynamicLis
 //			listView.setBackgroundColor(backgroundColor);
 			listEmptyTextView.setBackgroundColor(backgroundColor);
 		}
-		if (visibleType != DashboardType.WAYPOINTS
+		if (visibleType != DashboardType.MAP_MENU
+				&& visibleType != DashboardType.WAYPOINTS
 				&& visibleType != DashboardType.MAP_MARKERS
 				&& visibleType != DashboardType.MAP_MARKERS_SELECTION
 				&& visibleType != DashboardType.CONFIGURE_SCREEN
@@ -964,8 +969,9 @@ public class DashboardOnMap implements ObservableScrollViewCallbacks, DynamicLis
 			}
 
 		} else {
-
-			if (visibleType == DashboardType.CONFIGURE_SCREEN) {
+			if (visibleType == DashboardType.MAP_MENU) {
+				cm = MapMenu.createListAdapter(mapActivity);
+			} else if (visibleType == DashboardType.CONFIGURE_SCREEN) {
 				cm = mapActivity.getMapLayers().getMapWidgetRegistry().getViewConfigureMenuAdapter(mapActivity);
 			} else if (visibleType == DashboardType.CONFIGURE_MAP) {
 				cm = new ConfigureMapMenu().createListAdapter(mapActivity);

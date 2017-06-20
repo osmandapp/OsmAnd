@@ -447,7 +447,7 @@ public class MapControlsLayer extends OsmandMapLayer {
 					if (dash) {
 						mapActivity.getDashboard().setDashboardVisibility(true, DashboardType.DASHBOARD);
 					} else {
-						mapActivity.openDrawer();
+						mapActivity.getDashboard().setDashboardVisibility(true, DashboardType.MAP_MENU);
 					}
 				}
 			});
