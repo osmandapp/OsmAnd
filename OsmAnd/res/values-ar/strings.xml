@@ -629,17 +629,8 @@
     <string name="animate_routing_route">حاكي باستخدام المسار المحتسب </string>
     <string name="animate_routing_gpx">حاكي باستخدام مسار GPX</string>
     <string name="shared_string_remember_my_choice">تذكر اختياري</string>
-    
-    
-    
-    
-    
-    
-    
-    
-    
 	
-	<string name="native_app_allocated_memory_descr">إجمالي الذاكرة الأصلية المخصصة من قبل التطبيق %1$ s ميغابايت (Dalvik %2$ s ميغابايت، الأخرى %3$ s ميغابايت). الذاكرة النسبية %4$ s ميغابايت (حد الجهاز %5$ s ميغابايت Dalvik %6$ s ميغابايت).</string>
+	<string name="native_app_allocated_memory_descr">إجمالي الذاكرة الأصلية المخصصة من قبل التطبيق %1$s ميغابايت (Dalvik %2$s ميغابايت، الأخرى %3$s ميغابايت). الذاكرة النسبية %4$s ميغابايت (حد الجهاز %5$s ميغابايت Dalvik %6$s ميغابايت).</string>
 	<string name="app_mode_hiking">مشي</string>
     <string name="app_mode_motorcycle">دراجة نارية</string>
     <string name="app_mode_boat">قارب</string>
