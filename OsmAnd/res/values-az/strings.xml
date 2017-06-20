@@ -977,7 +977,7 @@
     <string name="subscribe_email_desc">Proqramın endirimləri haqqında e-poçt siyahımıza abunə olun və əlavə 3 xəritə endirməsi əldə edin!</string>
     <string name="sea_depth_thanks">Dəniz dərinliyi konturlarını aldığınız üçün təşəkkürlər!</string>
     <string name="index_item_depth_contours_osmand_ext">Dəniz dərinliyi konturları</string>
-    <string name="index_item_depth_points_southern_hemisphere"/>
+    <string name="index_item_depth_points_southern_hemisphere">Dəniz dərinliyi cənub yarımkürəsində göstərilir</string>
     <string name="download_depth_countours">Dəniz dərinliyi konturları</string>
     <string name="nautical_maps">Dəniz xəritələri</string>
     <string name="do_not_send_anonymous_app_usage">Anonim proqram istifadəsi statistikalarını göndərmə</string>
@@ -1093,7 +1093,7 @@
     <string name="direction_style_clockwise">Saat istiqamətində (12 sektor)</string>
     <string name="settings_direction_style">İstiqamət stili</string>
     <string name="settings_direction_style_descr">Hərəkət zamanı nisbi istiqamətləri ifadə etmək üçün stil seçin</string>
-    <string name="accessibility_preferences_descr"/>
+    <string name="accessibility_preferences_descr">Xüsusi imkanlarla əlaqəli seçimlər</string>
     <string name="rendering_out_of_memory">Seçilən sahəni göstərmək üçün kifayət qədər proses yaddaşı yoxdur</string>
     <string name="free_version_message">Bu pulsuz OsmAnd versiyası %1$s endirmə ilə məhdudlaşır və offlayn Vikipediya məqalələrini dəstəkləmir.</string>
     <string name="index_name_other">Ümumdünya və mövzu xəritələri</string>
@@ -1229,7 +1229,7 @@
     <string name="general_settings_2">Əsas parametrlər</string>
     <string name="shared_string_dismiss">İmtina et</string>
     <string name="shared_string_io_error">I/O səhvi baş verdi</string>
-    <string name="shared_string_collapse"/>
+    <string name="shared_string_collapse">Yığışdır</string>
     <string name="route_points">Marşrut nöqtələri</string>
     <string name="srtm_plugin_name">Kontur xətləri</string>
     <string name="points">Nöqtələr</string>
@@ -1251,7 +1251,7 @@
     <string name="map_downloaded_descr">%1$s xəritəsi endirildi, indi istifadə etməyə başlaya bilərsiniz.</string>
     <string name="go_to_map">Xəritəni göstər</string>
     <string name="favorite_category_dublicate_message">Göstərilən kateqoriya adı artıq mövcuddur. Fərqli ad istifadə edin.</string>
-    <string name="region_maps"/>
+    <string name="region_maps">Region xəritələri</string>
     <string name="srtm_plugin_disabled">Kontur xətləri sönülüdür</string>
     <string name="default_speed_system_descr">Sürət vahidi təyin edin</string>
     <string name="default_speed_system">Sürət vahidi</string>
@@ -1540,4 +1540,10 @@
 \n- qruplar yarada;
 \n- qrupları və cihazları server ilə sinxronlaşdıra;
 \n- qrupları və cihazları veb-saytdakı şəxsi alət panelində idarə edə bilməz.</string>
+    <string name="access_from_map">Xəritədən giriş</string>
+    <string name="shared_string_accessibility">Xüsusi imkanlar</string>
+    <string name="accessibility_options">Xüsusi imkanlar seçimləri</string>
+    <string name="accessibility_mode">Xüsusi imkanlar rejimi</string>
+    <string name="accessibility_mode_descr">Xüsusi imkanlar xüsusiyyətlərini aktivləşdirir</string>
+    <string name="index_item_depth_points_northern_hemisphere">Dəniz dərinliyi şimal yarımkürəsində göstərilir</string>
     </resources>
