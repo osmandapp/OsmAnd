@@ -1546,4 +1546,16 @@
     <string name="accessibility_mode">Xüsusi imkanlar rejimi</string>
     <string name="accessibility_mode_descr">Xüsusi imkanlar xüsusiyyətlərini aktivləşdirir</string>
     <string name="index_item_depth_points_northern_hemisphere">Dəniz dərinliyi şimal yarımkürəsində göstərilir</string>
+    <string name="no_waypoints_found">Yol nöqtələri tapılmadı</string>
+    <string name="context_menu_item_delete_waypoint">GPX yol nöqtəsi silinsin?</string>
+    <string name="context_menu_item_edit_waypoint">GPX nöqtəsinə düzəliş et</string>
+    <string name="waypoints">Yol nöqtələri</string>
+    <string name="announce_gpx_waypoints">GPX yol nöqtələri</string>
+    <string name="add_waypoint_dialog_added">GPX yol nöqtəsi “{0}” uğurla əlavə edildi</string>
+    <string name="context_menu_item_add_waypoint">GPX yol nöqtəsi əlavə et</string>
+    <string name="import_file_favourites">Məlumatlar GPX faylı olaraq saxlansın yoxsa yol nöqtələri Favoritlərə idxal edilsin?</string>
+    <string name="quick_action_add_gpx">GPX yol nöqtəsi əlavə et</string>
+    <string name="rotate_map_compass_opt">Kompasa görə</string>
+    <string name="rotate_map_bearing_opt">Hərəkət istiqamətində</string>
+    <string name="poi_context_menu_modify">POI-yə düzəliş et</string>
     </resources>
