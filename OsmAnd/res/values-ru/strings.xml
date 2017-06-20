@@ -2400,4 +2400,5 @@
     <string name="mapillary_descr">Уличные онлайн фотографии для всех. Исследуйте места, сотрудничайте, снимайте мир.</string>
     <string name="mapillary">Mapillary</string>
     <string name="plugin_mapillary_descr">Уличные фотографии для всех. Исследуйте места, сотрудничайте, снимайте мир.</string>
+    <string name="save_poi_too_many_uppercase">Название содержит слишком много заглавных букв. Вы действительно хотите продолжить?</string>
     </resources>
