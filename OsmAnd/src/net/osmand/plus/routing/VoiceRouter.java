@@ -625,11 +625,12 @@ public class VoiceRouter {
 			pn = pn.replace(':', ' ');
 			pn = pn.replace(";", ", "); // Trailing blank prevents punctuation being pronounced. Replace by comma for better intonation.
 			pn = pn.replace("/", ", "); // Slash is actually pronounced by many TTS engines, ceeating an awkward voice prompt, better replace by comma.
-			if ((player != null) && (!"de".equals(player.getLanguage()))) {
+			if ((player != null) && (!player.getLanguage().equals("de"))) {
 				pn = pn.replace("\u00df", "ss"); // Helps non-German tts voices to pronounce German Strasse (=street)
 			}
-			if ((player != null) && ("en".startsWith(player.getLanguage()))) {
+			if ((player != null) && (player.getLanguage().startsWith("en"))) {
 				pn = pn.replace("SR", "S R");    // Avoid SR (as for State Route or Strada Regionale) be pronounced as "Senior" in English tts voice
+				pn = pn.replace("Dr.", "Dr ");   // Avoid pause many English TTS voices introduce after period
 			}
 		}
 		return pn;

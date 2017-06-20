@@ -684,11 +684,11 @@ Memòria proporcional %4$s MB (límit de l\'Android %5$s MB, Dalvik %6$s MB).</s
     <string name="opening_hours_not_supported">Format d\'horaris d\'obertura no suportat per a l\'edició</string>
     <string name="transport_to_go_after">prioritza distancia</string>
     <string name="hello">Aplicació de navegació OsmAnd</string>
-    <string name="osmand_rastermaps_plugin_description">"Amb aquest connector podeu accedir a diferents tipus de mapa (anomenats mosaic o ràster), des de les tessel·les predefinides d\'OpenStreetMap (com Mapnik) a imatges de satèl·lit i capes específiques com mapes meteorològics, climàtics, geològics, de relleu, etc.
-\n
-\nQualsevol d\'aquests mapes es pot utilitzar sigui com principal (base) per veure\'s a la vista del mapa de l\'OsmAnd, o com una superposició o sots-posició d\'un altre mapa base (com els mapes  d\'OsmAnd habituals en desconnexió). Per fer més visible qualsevol mapa en sots-posició, es pot amagar fàcilment determinats elements dels mapes vectorials de l\'OsmAnd via el menú «Configuració del mapa» a voluntat.
-\n
-\nEls mapes de tessel·les es poden obtenir directament de proveïdors en línia, o es poden preparar per un ús fora de línia (cal copiar-los manualment al directori de l\'OsmAnd) com una base de dades SQLite construïda per diferents eines de preparació de mapes de tercers. "</string>
+    <string name="osmand_rastermaps_plugin_description">"Amb aquest connector podeu accedir a diferents tipus de mapa (anomenats mosaic o ràster), des de les tessel·les predefinides d\'OpenStreetMap (com Mapnik) a imatges de satèl·lit i capes específiques com mapes meteorològics, climàtics, geològics, de relleu, etc. 
+\n 
+\nQualsevol d\'aquests mapes es pot utilitzar sigui com principal (base) per veure\'s a la vista del mapa de l\'OsmAnd, o com una superposició o sots-posició d\'un altre mapa base (com els mapes  d\'OsmAnd habituals en desconnexió). Per fer més visible qualsevol mapa en sots-posició, es pot amagar fàcilment determinats elements dels mapes vectorials de l\'OsmAnd via el menú «Configuració del mapa» a voluntat. 
+\n 
+\nEls mapes de tessel·les es poden obtenir directament de proveïdors en línia, o es poden preparar per un ús fora de línia (cal copiar-los manualment al directori de l\'OsmAnd) com una base de dades SQLite construïda per diferents eines de preparació de mapes de tercers."</string>
     <string name="choose_audio_stream_descr">Escolliu el canal d\'audio on reproduir el guiat per veu</string>
     <string name="renderers">Renderització dels vectors</string>
     
@@ -878,9 +878,9 @@ Memòria proporcional %4$s MB (límit de l\'Android %5$s MB, Dalvik %6$s MB).</s
     <string name="show_transport_over_map">Mostra les parades del transport</string>
     <string name="save_track_to_gpx">Enregistrament automàtic del trajecte durant la navegació</string>
     <string name="use_english_names_descr">Escolliu entre noms nadius i noms anglesos</string>
-    <string name="srtm_plugin_description">"Aquest connector proporciona tant corbes de nivell superposades com una capa d\'ombres amb efecte relleu per superposar als mapes de OsmAnd. Corredors, ciclistes, excursionistes i qualsevol interessat en el perfil de relleu del terreny ho agrairan força. (Fixeu-vos que les corbes de nivell i/o els efectes de relleu són baixades independents i complementàries, disponibles un cop s\'hagi activat el connector).
-\n
-\nLes dades globals (entre 70 graus nord i 70 graus sud) estan basades en mesures del SRTM (Shuttle Radar Topography Mission) i del ASTER (Advanced Spaceborne Thermal Emission and Reflection Radiometer), un instrument de generació d\'imatges a bord de Terra, el satèl·lit insígnia del Sistema d\'Observació de la Terra de la NASA. ASTER és un esforç de col·laboració entre la NASA, el Ministeri d\'Economia i Comerç del Japó (METI) i la fundació Japan Space Systems (J-spacesystems). "</string>
+    <string name="srtm_plugin_description">Aquest connector proporciona tant corbes de nivell superposades com una capa d\'ombres amb efecte relleu per superposar als mapes de OsmAnd. Corredors, ciclistes, excursionistes i qualsevol interessat en el perfil de relleu del terreny ho agrairan força. (Fixeu-vos que les corbes de nivell i/o els efectes de relleu són baixades independents i complementàries, disponibles un cop s\'hagi activat el connector). 
+\n 
+\nLes dades globals (entre 70 graus nord i 70 graus sud) estan basades en mesures del SRTM (Shuttle Radar Topography Mission) i del ASTER (Advanced Spaceborne Thermal Emission and Reflection Radiometer), un instrument de generació d\'imatges a bord de Terra, el satèl·lit insígnia del Sistema d\'Observació de la Terra de la NASA. ASTER és un esforç de col·laboració entre la NASA, el Ministeri d\'Economia i Comerç del Japó (METI) i la fundació Japan Space Systems (J-spacesystems).</string>
     <string name="rendering_attr_showRoadMaps_description">Indiqueu quan mostrar mapes de només carreteres:</string>
     <string name="auto_announce_on">Inicia els anuncis automàtics</string>
     <string name="send_location_email_pattern">Per a veure la localització seguiu l\'enllaç web %1$s o l\'enllaç Android %2$s</string>
@@ -1114,9 +1114,9 @@ Memòria proporcional %4$s MB (límit de l\'Android %5$s MB, Dalvik %6$s MB).</s
     <string name="shared_string_favorite">Preferida</string>
     <string name="route_preferences">Preferències de ruta</string>
     <string name="route_info">Informació de ruta</string>
-    <string name="osmand_srtm_long_description_1000_chars">"Aquest connector proporciona tant corbes de nivell superposades com una capa d\'ombres amb efecte relleu per superposar als mapes de OsmAnd. Corredors, ciclistes, excursionistes i qualsevol interessat en el perfil de relleu del terreny ho agrairan força.
-\n
-\nLes dades globals (entre 70 graus nord i 70 graus sud) estan basades en mesures del SRTM (Shuttle Radar Topography Mission) i del ASTER (Advanced Spaceborne Thermal Emission and Reflection Radiometer), un instrument de generació d\'imatges a bord de Terra, el satèl·lit insígnia del Sistema d\'Observació de la Terra de la NASA. ASTER és un esforç de col·laboració entre la NASA, el Ministeri d\'Economia i Comerç del Japó (METI) i la fundació Japan Space Systems (J-spacesystems). "</string>
+    <string name="osmand_srtm_long_description_1000_chars">Aquest connector proporciona tant corbes de nivell superposades com una capa d\'ombres amb efecte relleu per superposar als mapes de OsmAnd. Corredors, ciclistes, excursionistes i qualsevol interessat en el perfil de relleu del terreny ho agrairan força. 
+\n 
+\nLes dades globals (entre 70 graus nord i 70 graus sud) estan basades en mesures del SRTM (Shuttle Radar Topography Mission) i del ASTER (Advanced Spaceborne Thermal Emission and Reflection Radiometer), un instrument de generació d\'imatges a bord de Terra, el satèl·lit insígnia del Sistema d\'Observació de la Terra de la NASA. ASTER és un esforç de col·laboració entre la NASA, el Ministeri d\'Economia i Comerç del Japó (METI) i la fundació Japan Space Systems (J-spacesystems).</string>
     <string name="keep_and_add_destination_point">Afegeix com el següent punt de destinació</string>
     <string name="calculate_osmand_route_without_internet">Calcula un segment de ruta a l\'OsmAnd sense Internet</string>
     <string name="gpx_option_calculate_first_last_segment">Calcula una ruta a l\'OsmAnd pels seus segments primer i darrer</string>
@@ -1180,11 +1180,11 @@ Memòria proporcional %4$s MB (límit de l\'Android %5$s MB, Dalvik %6$s MB).</s
     <string name="interrupt_music">Interrompre la música</string>
     <string name="osmo_settings_uuid">Identificador únic del dispositiu</string>
     <string name="osmo_settings_descr">Configureu els paràmetres de monitorització i el canal de seguiment personal</string>
-    <string name="osmo_plugin_description">"Aquest connector us ofereix parcialment la funcionalitat de la Monitorització OpenStreetmap, consulteu http://osmo.mobi.
-\n
-\nPodeu fer el seguiment de tots els dispositius que integrin un grup en temps real. També podeu consultar les fites i traces pujades en el grup on sigueu.
-\n
-\nEl grups creats fa mesos s\'han d\'actualitzar amb les normes actuals de creació de grups a la seu  OsMo.mobi "</string>
+    <string name="osmo_plugin_description">"Aquest connector us ofereix parcialment la funcionalitat de la Monitorització OpenStreetmap, consulteu http://osmo.mobi. 
+\n 
+\nPodeu fer el seguiment de tots els dispositius que integrin un grup en temps real. També podeu consultar les fites i traces pujades en el grup on sigueu. 
+\n 
+\nEl grup fa mesos que dura, actualitzeu-lo segons les normes de creació de grups a la web  OsMo.mobi"</string>
     <string name="osmo_plugin_name">Monitorització OpenStreetMap</string>
     <string name="osmo_settings">OsMo</string>
     <string name="osmo_io_error">Problema de connexió amb OSMo: </string>
@@ -1459,13 +1459,13 @@ Afganistan, Albània, Alemanya, Antilles Holandeses, Algèria, Andorra, Angola, 
     <string name="osmo_gpx_track_downloaded">S\'ha baixat la traça OsMo %1$s.</string>
     <string name="osmo_not_signed_in">Ha fallat l\'inici de sessió OsMo</string>
     <string name="osmo_group_by_invite">Entreu per convidar</string>
-    <string name="osmo_group_information_desc">" - En crear un grup li hauríeu de donar-li un nom i omplir una descripció
+    <string name="osmo_group_information_desc">"- En crear un grup li hauríeu de donar-li un nom i omplir una descripció 
 \n - Des de la gestió de grups només se\'n poden crear de tipus Simple, llegiu-ne més a la web  https://osmo.mobi/g/new 
-\n - Mitjançant la web es pot gestionar un grup, publicar rutes i ubicacions que tots poden accedir
-\n - No es recolzen els grups d\'un sol usuari si no es tracta el grup d\'un PDI
-\n - Els grups privats estan limitats fins un màxim de 8 persones.
-\n - Els termes i condicions detallats es poden consultar sempre a la web OsMo.mobi
-\n - Si us calen condicions especials, contacteu amb el suport: osmo.mobi@gmail.com "</string>
+\n - Mitjançant la web es pot gestionar un grup, publicar rutes i ubicacions que tots poden accedir 
+\n - No es recolzen els grups d\'un sol usuari si no es tracta el grup d\'un PDI 
+\n - Els grups privats estan limitats fins un màxim de 8 persones. 
+\n - Els termes i condicions detallats es poden consultar sempre a la web OsMo.mobi 
+\n - Si us calen condicions especials, contacteu amb el suport: osmo.mobi@gmail.com"</string>
     <string name="osmo_group_information">Cal que ho llegiu abans de crear un grup.</string>
     <string name="osmo_auth_error_short">Ha fallat l\'autorització</string>
     <string name="osmo_auth_error">S\'ha trobat un error d\'autorització OsMo: %1$s.
@@ -1541,9 +1541,9 @@ Afganistan, Albània, Alemanya, Antilles Holandeses, Algèria, Andorra, Angola, 
     <string name="speak_poi">PDI propers</string>
     <string name="index_tours">Itineraris</string>
     <string name="shared_string_all">Totes</string>
-    <string name="record_plugin_description">"Aquest connector activa la funcionalitat d\'enregistrar i desar els vostres trajectes, sigui prement sobre la pantalla del mapa el giny de gravació GPX, o sigui desant-los tots en un fitxer GPX automàticament.
-\n
-\nLes rutes enregistrades es poden compartir amb els vostres amics o aportar-les per ser utilitzades a OSM. Els atletes poden utilitzar els seus registres per monitoritzar els seus entrenaments. Es pot fer una anàlisi bàsica de les rutes directament a OsmAnd com la durada de cada volta, velocitat mitjana, etc.,  i, per descomptat, es poden analitzar amb eines especialitzades de tercers. "</string>
+    <string name="record_plugin_description">"Aquest connector activa la funcionalitat d\'enregistrar i desar els vostres trajectes, sigui prement sobre la pantalla del mapa el giny de gravació GPX, o sigui desant-los tots en un fitxer GPX automàticament. 
+\n 
+\nLes rutes enregistrades es poden compartir amb els vostres amics o aportar-les per ser utilitzades a OSM. Els atletes poden utilitzar els seus registres per monitoritzar els seus entrenaments. Es pot fer una anàlisi bàsica de les rutes directament a OsmAnd com la durada de cada volta, velocitat mitjana, etc.,  i, per descomptat, es poden analitzar amb eines especialitzades de tercers."</string>
     <string name="record_plugin_name">Enregistrament de trajectes</string>
     <string name="int_hour">h</string>
     <string name="duration">Durada</string>
@@ -2004,23 +2004,23 @@ Per retornar a l\'estil habitual dels mapes d\'OsmAnd, només cal desactivar aqu
     <string name="shared_string_location">Localització</string>
     <string name="poi_context_menu_modify_osm_change">Modifica el canvi OSM</string>
     <string name="copied_to_clipboard">S\'ha copiat al \tporta-retalls</string>
-    <string name="release_2_2">" • Una nova IU contextual per designar ubicacions en el mapa i en altres pantalles
-\n
-\n • La pantalla del mapa s\'obre directament excepte quan es selecciona  \'Mostra el tauler en iniciar\'
-\n
-\n • Configureu el tauler amb quines targetes es mostraran i com
-\n
-\n • Prescindiu del tauler si preferiu un control de l\'aplicació mitjançant menú
-\n
-\n • Per baixar mapes, les regions es poden seleccionar directament tocant sobre el mapa mundial
-\n
-\n • Ara, la cerca de PDI admet consultes més específiques
-\n
-\n • S\'ha millorat la funcionalitat d\'edició OSM i PDI
-\n
-\n • S\'han tornat a fer l\'estructura i la interfície de la baixada de mapes
-\n
-\n i encara més… "</string>
+    <string name="release_2_2">"\\022 Una nova IU contextual per designar ubicacions en el mapa i en altres pantalles 
+\n 
+\n • La pantalla del mapa s\'obre directament excepte quan es selecciona  \'Mostra el tauler en iniciar\' 
+\n 
+\n • Configureu el tauler amb quines targetes es mostraran i com 
+\n 
+\n • Prescindiu del tauler si preferiu un control de l\'aplicació mitjançant menú 
+\n 
+\n • Per baixar mapes, les regions es poden seleccionar directament tocant sobre el mapa mundial 
+\n 
+\n • Ara, la cerca de PDI admet consultes més específiques 
+\n 
+\n • S\'ha millorat la funcionalitat d\'edició OSM i PDI 
+\n 
+\n • S\'han tornat a fer l\'estructura i la interfície de la baixada de mapes 
+\n 
+\n i encara més…"</string>
     <string name="osm_save_offline">Desa en local</string>
     <string name="osm_edit_modified_poi">S\'ha modificat PDI d\'OSM</string>
     <string name="osm_edit_deleted_poi">S\'ha eliminat PDI d\'OSM</string>
@@ -2210,9 +2210,17 @@ L\'ús de memòria serà de {3} MB temporalment i {1} MB permanentment.
     <string name="full_report">Informe complert</string>
     <string name="open_street_map_login_and_pass">Usuari i contrasenya d\'OpenStreetMap</string>
     <string name="osm_live_subscribe_btn">Subscriu</string>
-    <string name="release_2_3">" • OSM en directe. Recolzament a desenvolupadors i col·laboradors de mapes i obtenció de mapes actualitzats cada hora..
-\n\n • Marcadors de mapa. Una nova opció per seleccionar ràpidament llocs al mapa.\n\n • Els mapes OSM tenen més detalls amb la la simbologia específica de les carreteres del país i moltes noves característiques del mapa.\n\n • S\'ha millorat l\'aspecte i la experiència de la preparació de ruta.
-\n\n • Moltes millores al menú contextual de mapa, com la cerca contextual d\'adreces .\n\n i encara més… "</string>
+    <string name="release_2_3">\\022 OSM en directe. Recolzament a desenvolupadors i col·laboradors i obtenció de mapes actualitzats cada hora. 
+\n
+\n • Marcadors de mapa. Una nova opció per seleccionar ràpidament llocs al mapa.
+\n
+\n • Els mapes OSM tenen més detalls amb la la simbologia específica de les carreteres del país i moltes noves característiques del mapa.
+\n
+\n • S\'ha millorat l\'aspecte i la experiència de la preparació de ruta. 
+\n
+\n • Moltes millores al menú contextual de mapa, com la cerca contextual d\'adreces .
+\n
+\n i encara més…</string>
     <string name="osm_live_subscription">Subscripció a OSM en directe</string>
     <string name="osm_live_email_desc">Ens cal per proporcionar-vos informació d\'aportacions</string>
     <string name="osm_live_support_region">Zona de suport</string>
@@ -2304,20 +2312,20 @@ L\'ús de memòria serà de {3} MB temporalment i {1} MB permanentment.
     <string name="search_categories">Categories</string>
     <string name="lang_hsb">Alt sòrab</string>
     <string name="show_on_map">Indica en el mapa</string>
-    <string name="share_history_subject">" compartit via OsmAnd"</string>
-    <string name="release_2_4">" • Nova cerca de text lliure molt potent
-\n
-\n • Integració via Bluetooth de l\'àudio del cotxe amb l\'altaveu del mòbil
-\n
-\n • Guia de navegació millorada, notificacions de veu i indicació dels carrils de gir
-\n
-\n • Millores a la capa de transport col·lectiu amb representació del trajecte
-\n
-\n• S\'han afegit més llocs i ara gestiona llocs regionals
-\n
-\n • Moltes més millores i correccions d\'errors
-\n
-\n i més… "</string>
+    <string name="share_history_subject">compartit via OsmAnd</string>
+    <string name="release_2_4">\\022 Nova cerca de text lliure molt potent 
+\n 
+\n • Integració via Bluetooth de l\'àudio del cotxe amb l\'altaveu del mòbil 
+\n 
+\n • Guia de navegació millorada, notificacions de veu i indicació dels carrils de gir 
+\n 
+\n • Millores a la capa de transport col·lectiu amb representació del trajecte 
+\n 
+\n• S\'han afegit més llocs i ara gestiona llocs regionals 
+\n 
+\n • Moltes més millores i correccions d\'errors 
+\n 
+\n i més…</string>
     <string name="back_to_search">Torna a la cerca</string>
     <string name="confirmation_to_delete_history_items">Voleu esborrar els elements seleccionats de l\'historial?</string>
     <string name="show_something_on_map">Situa %1$s en el mapa</string>
@@ -2396,19 +2404,19 @@ L\'ús de memòria serà de {3} MB temporalment i {1} MB permanentment.
     <string name="shared_string_recorded">Enregistrat</string>
     <string name="shared_string_record">Enegistra</string>
     <string name="gpx_logging_no_data">No hi ha dades</string>
-    <string name="release_2_5">" • Icones per clicar al mapa
-\n
-\n • Potent filtre de cerca de PDIs: cerca, p.e.  restaurants per tipus de cuina o càmpings amb equipaments determinats
-\n
-\n • Nou estil de mapa topològic per ciclistes i senderistes
-\n
-\n • Enregistrament de la ruta millorat
-\n
-\n • Notificacions de navegació millorades (Android Wear)
-\n
-\n • Moltes més millores i correccions d\'errors
-\n
-\n i més… "</string>
+    <string name="release_2_5">"\\022 Icones per clicar al mapa 
+\n 
+\n • Potent filtre de cerca de PDIs: cerca, p.e.  restaurants per tipus de cuina o càmpings amb equipaments determinats 
+\n 
+\n • Nou estil de mapa topològic per ciclistes i senderistes 
+\n 
+\n • Enregistrament de la ruta millorat 
+\n 
+\n • Notificacions de navegació millorades (Android Wear) 
+\n 
+\n • Moltes més millores i correccions d\'errors 
+\n 
+\n i més…"</string>
     <string name="shared_string_notifications">Notificacions</string>
     <string name="trip_rec_notification_settings">Enregistrament de la ruta (no hi ha dades)</string>
     <string name="trip_rec_notification_settings_desc">Mostra una notificació que permet començar l\'enregistrament de la ruta prement el botó Enregistra</string>
@@ -2528,27 +2536,27 @@ Abasta l\'àrea: %1$s x %2$s</string>
     <string name="quick_action_page_list_descr">Prement el botó d\'acció es mostra la pàgina següent seguint la llista.</string>
     <string name="auto_split_recording_title">Divisió automàtica de les gravacions un cop aturades</string>
 	<string name="auto_split_recording_descr">Comença un nou segment desprès de 6 min d\'interrupció, una traça nova si es superen les 2 hores o un nou fitxer si encara dura més i s\'ha canviat de data.</string>
-    <string name="release_2_6">" • Nova opció: botó d\'acció ràpida
-\n
-\n • Resposta millorada a les indicacions de la pantalla tàctil (p.e. gir de la pantalla i ampliació alhora)
-\n
-\n • Mapes provinents de noves fonts per recollir millor zones concretes
-\n
-\n • Suport de TTS a variants pròpies de l\'idioma (i accents)
-\n
-\n • Més visibilitat segons diferents mapes temàtics i Viquipèdia
-\n
-\n • Suport al codi de posicionament obert (OLC)
-\n
-\n • Mostra els perfils d\'elevació, pendent i velocitat de les traces GPX enregistrades i de les rutes calculades.
-\n
-\n • Configuració del \"estil de conducció\" i millores lògiques en el càlcul de rutes per bicicleta.
-\n
-\n • Configuració per utilitzar les dades d\'elevació en el càlcul de rutes per bicicleta.
-\n
-\n • Altres millores i correccions d\'errors
-\n
-\ni encara més… "</string>
+    <string name="release_2_6">\\022 Nova opció: botó d\'acció ràpida 
+\n 
+\n • Resposta millorada a les indicacions de la pantalla tàctil (p.e. gir de la pantalla i ampliació alhora) 
+\n 
+\n • Mapes provinents de noves fonts per recollir millor zones concretes 
+\n 
+\n • Suport de TTS a variants pròpies de l\'idioma (i accents) 
+\n 
+\n • Més visibilitat segons diferents mapes temàtics i Viquipèdia 
+\n 
+\n • Suport al codi de posicionament obert (OLC) 
+\n 
+\n • Mostra els perfils d\'elevació, pendent i velocitat de les traces GPX enregistrades i de les rutes calculades. 
+\n 
+\n • Configuració del \"estil de conducció\" i millores lògiques en el càlcul de rutes per bicicleta. 
+\n 
+\n • Configuració per utilitzar les dades d\'elevació en el càlcul de rutes per bicicleta. 
+\n 
+\n • Altres millores i correccions d\'errors 
+\n 
+\ni encara més…</string>
 	<string name="rendering_attr_depthContours_description">Mostra isòbates i fondàries puntuals</string>
     <string name="rendering_attr_depthContours_name">Isòbates</string>
 	<string name="routing_attr_height_relief_smoothness_factor_name">Factor de suavitat de relleu</string>
@@ -2763,6 +2771,6 @@ OsmAnd és de codi obert i es desenvolupa activament . Tothom pot recolzar l\'ap
     <string name="distance_moving">Distància corregida</string>
     <string name="shared_string_permissions">Permisos</string>
     <string name="import_gpx_failed_descr">OsmAnd no pot importar el fitxer. Si us plau, comproveu si OsmAnd té permís per llegir el fitxer des de la seva ubicació.</string>
-    <string name="map_widget_ruler_control_first_mode">Mode connexió</string>
-    <string name="map_widget_ruler_control_second_mode">Mode radi</string>
+    <string name="map_widget_ruler_control_first_mode">Distància entre dos punts</string>
+    <string name="map_widget_ruler_control_second_mode">Radi de distància</string>
     </resources>

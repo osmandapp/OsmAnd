@@ -135,4 +135,19 @@
 	<string name="poi_ticket">Piletimüük</string>
 	<string name="poi_tobacco">Tubaka pood</string>
 	<string name="poi_toys">Mänguasjapood</string>
+	<string name="poi_fuel_avia_type">Tüüp</string>
+	<string name="poi_payment_type">Makse tüüp</string>
+	<string name="poi_payment_fuel_type">Kütuse kaardid</string>
+	<string name="poi_additional_type">Täiendav</string>
+	<string name="poi_internet_access_type">Interneti juurdepääsu tüüp</string>
+	<string name="poi_vending_type">Müügiautomaatide tüüp</string>
+	<string name="poi_bicycle_service">Jalgratta teenindus</string>
+	<string name="poi_clothes_type">Tüüp</string>
+	<string name="poi_shoes_type">Tüüp</string>
+	<string name="poi_fire_hydrant_type">Tüüp</string>
+	<string name="poi_fire_hydrant_position">Asukoht</string>
+	<string name="poi_fire_hydrant_water_source">Vee allikas</string>
+	<string name="poi_payment_toll_type">Makse tüüp</string>
+	<string name="poi_traffic_signals_sound">Heli</string>
+	<string name="poi_highway_crossing_type">Tüüp</string>
 	</resources>

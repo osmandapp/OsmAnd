@@ -224,7 +224,7 @@ public class TestVoiceActivity extends OsmandActionBarActivity {
 		addButton(ll, "\u25BA (3.3)  Turn left, then in 100m turn slightly right", builder(p).turn(AbstractPrologCommandPlayer.A_LEFT, street(p, "")).then().turn(AbstractPrologCommandPlayer.A_RIGHT_SL, 100, street(p, "")));
 		addButton(ll, "\u25BA (3.4)  After 3100m turn right onto 'SR 80' toward 'Rome'", builder(p).prepareTurn(AbstractPrologCommandPlayer.A_RIGHT, 3100, street(p, "", "SR 80", "Rome")));
 		addButton(ll, "\u25BA (3.5)  In 370m turn slightly right onto 'Route 23' 'Main Street', then bear left", builder(p).turn(AbstractPrologCommandPlayer.A_RIGHT_SL, 370, street(p, "Main Street", "Route 23")).then().bearLeft(street(p, "")));
-		addButton(ll, "\u25BA (3.6)  Turn sharply right onto 'Main Street'", builder(p).turn(AbstractPrologCommandPlayer.A_RIGHT_SH, street(p, "Main Street")));
+		addButton(ll, "\u25BA (3.6)  Turn sharply right onto 'Dr.-Quinn-Stra"+"\u00df"+"e'", builder(p).turn(AbstractPrologCommandPlayer.A_RIGHT_SH, street(p, "Dr.-Quinn-Straße")));
 
 		addButton(ll, "Keep left/right: prepareTurn, makeTurnIn, turn:", builder(p));
 		addButton(ll, "\u25BA (4.1)  After 1810m keep left ' '", builder(p).prepareTurn(AbstractPrologCommandPlayer.A_LEFT_KEEP, 1810, street(p, "")));
@@ -249,7 +249,7 @@ public class TestVoiceActivity extends OsmandActionBarActivity {
 		addButton(ll, "\u25BA (7.1)  Straight ahead", builder(p).goAhead());
 		addButton(ll, "\u25BA (7.2)  Continue for 2350m to ' '", builder(p).goAhead(2350, street(p, "")));
 		addButton(ll, "\u25BA (7.3)  Continue for 360m to 'Broadway' and arrive at your intermediate destination ' '", builder(p).goAhead(360, street(p,"Broadway")).andArriveAtIntermediatePoint(""));
-		addButton(ll, "\u25BA (7.4)  Continue for 800m to 'A33' and arrive at your destination ' '", builder(p).goAhead(800, street(p,"", "A33")).andArriveAtDestination(""));
+		addButton(ll, "\u25BA (7.4)  Continue for 800m to 'Dr Martin Luther King Jr Boulevard' and arrive at your destination ' '", builder(p).goAhead(800, street(p,"", "Dr Martin Luther King Jr Boulevard")).andArriveAtDestination(""));
 		addButton(ll, "\u25BA (7.5)  Continue for 200m and pass GPX waypoint 'Trailhead'", builder(p).goAhead(200, null).andArriveAtWayPoint("Trailhead"));
 		addButton(ll, "\u25BA (7.6)  Continue for 400m and pass favorite 'Brewery'", builder(p).goAhead(400, null).andArriveAtFavorite("Brewery"));
 		addButton(ll, "\u25BA (7.7)  Continue for 600m and pass POI 'Museum'", builder(p).goAhead(600, null).andArriveAtPoi("Museum"));

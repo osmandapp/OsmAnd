@@ -205,7 +205,7 @@
 	<string name="driving_region_japan">اليابان</string>
 	<string name="driving_region_us">الولايات المتحدة</string>
 	<string name="driving_region_canada">كندا</string>
-	<string name="driving_region_europe_asia">أوروبا وآسيا</string>
+	<string name="driving_region_europe_asia">أوروبا، آسيا، أمريكا اللاتينية، وغيرها</string>
 	<string name="driving_region_uk">المملكة المتحدة، الهند وما شابه ذلك</string>
 	<string name="announce_gpx_waypoints">نقاط الطريق GPX</string>
     <string name="speak_title">أعلن…</string>
@@ -2754,14 +2754,14 @@ OsmAnd هو المصدر المفتوح و التي يجري تطويرها بن
 • العديد من التحسينات الأخرى وإصلاح الأخطاء وأكثر من ذلك ...
  "</string>
 	<string name="add_new_folder">أضف ملفا جديدا</string>
-    <string name="track_points_category_name">النقاط المهمة في هذا الطريق</string>
+    <string name="track_points_category_name">النقاط البارزة على هذا الطريق</string>
     <string name="max_speed">السرعة القصوى</string>
     <string name="average_speed">متوسط السرعة</string>
     <string name="shared_string_color">اللون</string>
     <string name="file_can_not_be_moved">لا يمكن نقل الملف.</string>
     <string name="total_distance">المسافة الإجمالية</string>
     <string name="lang_ber">البربرية</string>
-    <string name="points_delete_multiple_succesful">تم حذف النقطة أو النقاط بنجاح.</string>
+    <string name="points_delete_multiple_succesful">تم حذف النقاط بنجاح.</string>
     <string name="points_delete_multiple">أنت بصدد حذف %1$d نقطة. هل أنت متأكد ؟</string>
     <string name="shared_string_max">أقصى</string>
     <string name="shared_string_start_time">ساعة البداية</string>
@@ -2828,7 +2828,7 @@ OsmAnd هو المصدر المفتوح و التي يجري تطويرها بن
   • تحميل مسارات جي بي إكس إلى خريطة الطريق المفتوحة مباشرة بواسطة التطبيق
   • إضافة النقاط المهمة وتحميلها مباشرة إلى خريطة الطريق المفتوحة (أو في وقت لاحق إن كنت غير متصل)
  "</string>
-    <string name="nothing_found_descr">حاول تغيير طلب البحث أو بتوسيع دائرة البحث</string>
+    <string name="nothing_found_descr">حاول تغيير طلب البحث أو وسع دائرة البحث</string>
     <string name="quick_action_showhide_osmbugs_title">إظهار أو إخفاء ملاحظات الخريطة</string>
     <string name="quick_action_osmbugs_show">أظهر ملاحظات الخريطة</string>
     <string name="quick_action_osmbugs_hide">اخفي ملاحظات الخريطة</string>
@@ -2847,8 +2847,8 @@ OsmAnd هو المصدر المفتوح و التي يجري تطويرها بن
     <string name="shared_string_time_span">الفترة الزمنية</string>
     <string name="route_altitude">ارتفاع الطريق</string>
     <string name="routing_attr_relief_smoothness_factor_name">تحديد تذبذب الإرتفاع</string>
-    <string name="map_widget_ruler_control_second_mode">وضع نصف القطر</string>
-    <string name="shared_string_permissions">رخص</string>
+    <string name="map_widget_ruler_control_second_mode">حساب نصف القطر</string>
+    <string name="shared_string_permissions">ترخيصات</string>
     <string name="import_gpx_failed_descr">لا يمكن للتطبيق استيراد الملف. الرجاء التحقق إذا كان التطبيق لديه إذن قراءة الملف من موقعه.</string>
     <string name="distance_moving">تم تصحيح المسافة</string>
     <string name="mapillary_image">صورة مابيلاري</string>
@@ -2861,16 +2861,16 @@ OsmAnd هو المصدر المفتوح و التي يجري تطويرها بن
     <string name="mapillary_action_descr">ساهم بصور الشوارع الخاصة بك لهذا الموقع عن طريق مابيلاري.</string>
     <string name="mapillary_widget">ويدجت مابيلاري</string>
     <string name="mapillary_widget_descr">يسمح لك بالمساهمة بسرعة لمابيلاري</string>
-    <string name="mapillary_descr">صور شوارع متاحة على الإنترنت للجميع. اكتشاف أماكن، تعاون، والتقط العالم.</string>
+    <string name="mapillary_descr">صور شوارع متاحة على الإنترنت للجميع. اكتشف أماكن، تعاون، والتقط صورا للعالم.</string>
     <string name="mapillary">مابيلاري</string>
-    <string name="plugin_mapillary_descr">صور شوارع متاحة للجميع. اكتشاف أماكن، تعاون، والتقط العالم.</string>
-    <string name="private_access_routing_req">الوجهة الخاص بك تقع في منطقة ذات وصول خاص. هل تريد تفعيل خاصية السماح بالوصول إلى الطرق الخاصة لهذه الرحلة؟</string>
+    <string name="plugin_mapillary_descr">صور شوارع متاحة للجميع. اكتشف أماكن، تعاون، والتقط صورا للعالم.</string>
+    <string name="private_access_routing_req">الوجهة الخاص بك تقع في منطقة ذات ولوج خاص. هل تريد تفعيل خاصية السماح بالوصول إلى هاته الأماكن لهذه الرحلة؟</string>
     <string name="quick_action_showhide_osmbugs_descr">النقر على زر الإجراء سيظهر أو يخفي ملاحظات OSM على الخريطة.</string>
     <string name="hide_from_zoom_level">إخفاء من مستوى التكبير/التصغير</string>
-    <string name="srtm_menu_download_descr">لعرض الخطوط الكنتورية على الخريطة، تحتاج إلى تحميل الخريطة الخط الكنتوري لهذه المنطقة.</string>
+    <string name="srtm_menu_download_descr">لعرض الخطوط الكنتورية على الخريطة، تحتاج إلى تحميل خريطة الخط الكنتوري لهذه المنطقة.</string>
     <string name="show_from_zoom_level">عرض من مستوى التكبير/التصغير</string>
     <string name="display_zoom_level">عرض مستوى التكبير/التصغير: %1$s</string>
-    <string name="animate_my_location">تحريك الموقع الخاص بي</string>
+    <string name="animate_my_location">تفعيل حركة الموقع الخاص بي</string>
     <string name="srtm_purchase_header">لمشاهدة الخطوط الكنتورية على الخريطة، أنت بحاجة لشراء وتثبيت البرنامج المساعد للخطوط الكنتورية</string>
     <string name="animate_my_location_desc">تفعيل حركة موقعي أثناء الملاحة</string>
     <string name="quick_action_auto_zoom_desc">النقر على زر الإجراء سوف يقوم بتشغيل/إيقاف تكبير الخريطة وفقا لسرعتك.</string>
