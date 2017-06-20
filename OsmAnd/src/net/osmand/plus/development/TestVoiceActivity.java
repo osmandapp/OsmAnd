@@ -25,6 +25,7 @@ import net.osmand.plus.voice.AbstractPrologCommandPlayer;
 import net.osmand.plus.voice.TTSCommandPlayerImpl;
 import net.osmand.plus.voice.CommandBuilder;
 import net.osmand.plus.voice.CommandPlayer;
+import net.osmand.plus.routing.VoiceRouter;
 import net.osmand.util.Algorithms;
 
 import java.io.File;
@@ -190,7 +191,14 @@ public class TestVoiceActivity extends OsmandActionBarActivity {
 		}
 		return new Struct("");
 	}
+
 	private Term street(CommandPlayer p, String name, String ref, String destName, String currentName) {
+		// Pass all test strings through our character replacement method
+			ref = VoiceRouter.getSpeakablePointName(ref);
+			name = VoiceRouter.getSpeakablePointName(name);
+			destName = VoiceRouter.getSpeakablePointName(destName);
+			currentName = VoiceRouter.getSpeakablePointName(currentName);
+
 		if(p.supportsStructuredStreetNames()) {
 			Struct next = new Struct(new Term[] { getTermString(ref),
 					getTermString(name),
