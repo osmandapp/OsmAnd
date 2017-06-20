@@ -322,7 +322,7 @@
     <string name="local_index_tile_data_downloadable">قابل للتنزيل: %1$s</string>
     <string name="local_index_tile_data_maxzoom">أقصى تكبير: %1$s</string>
     <string name="local_index_tile_data_minzoom">أدنى تكبير: %1$s</string>
-    <string name="maps_define_edit">تعريف/تحرير…</string>
+    <string name="maps_define_edit">تعريف/تعديل…</string>
 	    
     
     <string name="speak_descr">ضبط إعدادات نطق أسماء الشوارع، وتحذيرات المرور (توقيفات الإجبارية، ومطبات السرعة)، و تحذيرات كاميرات السرعة، و السرعة القصوى</string>
@@ -1315,7 +1315,7 @@ OsmAnd هو المصدر المفتوح و التي يجري تطويرها بن
 	<string name="no_fav_to_save">لم يتم العثور على نقاط أماكن مفضلة للقيام بالاحتفاظ بها</string>
 	<string name="fav_points_edited">تم تحرير النقطة المفضلة</string>
 	<string name="fav_points_not_exist">لا وجود لأية نقطة مفضلة</string>
-	<string name="favourites_context_menu_edit">تحرير المفضلة</string>
+	<string name="favourites_context_menu_edit">تعديل المفضلة</string>
 	<string name="favourites_context_menu_delete">حذف المفضلة</string>
 	<string name="favourites_remove_dialog_msg">إزالة النقطة المفضلة \'%s\' ؟</string>
 	<string name="favourites_remove_dialog_success">تم بنجاح حذف النقطة المفضلة {0}.</string>
@@ -1855,7 +1855,7 @@ OsmAnd هو المصدر المفتوح و التي يجري تطويرها بن
     <string name="osmo_tracker_id_descr">اضغط لمعاينة معرف المتعقب</string>
     <string name="osmo_share_my_location">إرسال الموقع</string>
     <string name="hello">تطبيق الملاحة أوسماند OSMAnd</string>
-    <string name="update_poi_error_loading">خطأ أثناء تحميل البيانات من الخادم</string>
+    <string name="update_poi_error_loading">حدث خطأ أثناء تحميل البيانات من السيرفر</string>
     <string name="context_menu_item_update_map_confirm">تحديث البيانات المحلية عبر الإنترنت ؟</string>
     <string name="search_history_street">الشارع : {0}، {1}</string>
     <string name="search_history_int_streets">تقاطع : {0} x {1} في {2}</string>
