@@ -720,6 +720,8 @@ public class TrackSegmentFragment extends OsmAndListFragment {
 		addOptionSplit(300, false, groups);
 		addOptionSplit(600, false, groups);
 		addOptionSplit(900, false, groups);
+		addOptionSplit(1800, false, groups);
+		addOptionSplit(3600, false, groups);
 	}
 
 	private void updateSplit(List<GpxDisplayGroup> groups, SelectedGpxFile sf) {
