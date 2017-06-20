@@ -6,6 +6,7 @@ import android.graphics.Canvas;
 import android.graphics.Color;
 import android.graphics.Paint;
 import android.graphics.Paint.Style;
+import android.graphics.Path;
 import android.graphics.Rect;
 import android.view.View;
 
@@ -19,6 +20,8 @@ import net.osmand.plus.R;
 import net.osmand.plus.activities.MapActivity;
 
 import java.util.ArrayList;
+
+import gnu.trove.list.array.TIntArrayList;
 
 public class RulerControlLayer extends OsmandMapLayer {
 
@@ -39,6 +42,9 @@ public class RulerControlLayer extends OsmandMapLayer {
     private double cacheTileX;
     private double cacheTileY;
     private ArrayList<String> cacheDistances;
+    private Path distancePath;
+    private TIntArrayList tx;
+    private TIntArrayList ty;
 
     private Bitmap centerIconDay;
     private Bitmap centerIconNight;
@@ -58,6 +64,9 @@ public class RulerControlLayer extends OsmandMapLayer {
         cacheCenter = new QuadPoint();
         maxRadiusInDp = mapActivity.getResources().getDimensionPixelSize(R.dimen.map_ruler_radius);
         rightWidgetsPanel = mapActivity.findViewById(R.id.map_right_widgets_panel);
+        distancePath = new Path();
+        tx = new TIntArrayList();
+        ty = new TIntArrayList();
 
         centerIconDay = BitmapFactory.decodeResource(view.getResources(), R.drawable.map_ruler_center_day);
         centerIconNight = BitmapFactory.decodeResource(view.getResources(), R.drawable.map_ruler_center_night);
@@ -133,25 +142,17 @@ public class RulerControlLayer extends OsmandMapLayer {
     private void drawDistance(Canvas canvas, RotatedTileBox tb, QuadPoint center, Location currentLoc) {
         int currX = tb.getPixXFromLonNoRot(currentLoc.getLongitude());
         int currY = tb.getPixYFromLatNoRot(currentLoc.getLatitude());
-        int width = tb.getPixWidth();
-        int height = tb.getPixHeight();
+        distancePath.reset();
+        tx.clear();
+        ty.clear();
 
-        if (currX < 0 || currY < 0 || currX > width || currY > height) {
-            float x = (currX + center.x) / 2;
-            float y = (currY + center.y) / 2;
+        tx.add(currX);
+        ty.add(currY);
+        tx.add((int) center.x);
+        ty.add((int) center.y);
 
-            while (true) {
-                if (x < 0 || y < 0 || x > width || y > height) {
-                    currX = (int) x;
-                    currY = (int) y;
-                } else {
-                    break;
-                }
-                x = (x + center.x) / 2;
-                y = (y + center.y) / 2;
-            }
-        }
-        canvas.drawLine(currX, currY, center.x, center.y, lineAttrs.paint);
+        calculatePath(tb, tx, ty, distancePath);
+        canvas.drawPath(distancePath, lineAttrs.paint);
     }
 
     private void updateData(RotatedTileBox tb, QuadPoint center) {
