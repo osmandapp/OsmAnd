@@ -1,7 +1,9 @@
 package net.osmand.plus.activities;
 
+import android.Manifest;
 import android.content.Intent;
 import android.os.Bundle;
+import android.support.v4.app.ActivityCompat;
 import android.view.Gravity;
 import android.view.LayoutInflater;
 import android.view.View;
@@ -13,6 +15,7 @@ import android.widget.TextView;
 
 import net.osmand.data.LatLon;
 import net.osmand.plus.IconsCache;
+import net.osmand.plus.OsmAndLocationProvider;
 import net.osmand.plus.R;
 import net.osmand.plus.Version;
 import net.osmand.plus.activities.search.SearchActivity;
@@ -20,6 +23,7 @@ import net.osmand.plus.base.BottomSheetDialogFragment;
 import net.osmand.plus.dashboard.DashboardOnMap;
 import net.osmand.plus.download.IndexItem;
 import net.osmand.plus.liveupdates.OsmLiveActivity;
+import net.osmand.plus.views.MapControlsLayer;
 
 import java.util.List;
 
@@ -215,6 +219,60 @@ public class MapMenuDialogFragment extends BottomSheetDialogFragment{
                 Intent intent = new Intent(mapActivity, HelpActivity.class);
                 intent.addFlags(Intent.FLAG_ACTIVITY_REORDER_TO_FRONT);
                 mapActivity.startActivity(intent);
+                dismiss();
+            }
+        });
+
+        View configureMapView = view.findViewById(R.id.map_menu_configure_map_view);
+        configureMapView.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                MapActivity.clearPrevActivityIntent();
+                mapActivity.getDashboard().setDashboardVisibility(true, DashboardOnMap.DashboardType.CONFIGURE_MAP);
+                dismiss();
+            }
+        });
+
+        View searchView = view.findViewById(R.id.map_menu_search_view);
+        searchView.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                mapActivity.showQuickSearch(MapActivity.ShowQuickSearchMode.NEW_IF_EXPIRED, false);
+                dismiss();
+            }
+        });
+
+        View hideView = view.findViewById(R.id.map_menu_hide_view);
+        hideView.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                dismiss();
+            }
+        });
+
+        View routeView = view.findViewById(R.id.map_menu_route_view);
+        routeView.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                MapControlsLayer mapControlsLayer = mapActivity.getMapLayers().getMapControlsLayer();
+                if (mapControlsLayer != null) {
+                    mapControlsLayer.doRoute(false);
+                }
+                dismiss();
+            }
+        });
+
+        View locationView = view.findViewById(R.id.map_menu_location_view);
+        locationView.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                if (OsmAndLocationProvider.isLocationPermissionAvailable(mapActivity)) {
+                    mapActivity.getMapViewTrackingUtilities().backToLocationImpl();
+                } else {
+                    ActivityCompat.requestPermissions(mapActivity,
+                            new String[]{Manifest.permission.ACCESS_FINE_LOCATION},
+                            OsmAndLocationProvider.REQUEST_LOCATION_PERMISSION);
+                }
                 dismiss();
             }
         });
