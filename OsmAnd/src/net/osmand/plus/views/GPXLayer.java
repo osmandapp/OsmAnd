@@ -12,6 +12,8 @@ import android.graphics.PointF;
 import android.graphics.PorterDuff;
 import android.graphics.PorterDuff.Mode;
 import android.graphics.PorterDuffColorFilter;
+import android.graphics.Rect;
+import android.graphics.RectF;
 import android.os.AsyncTask;
 import android.support.annotation.ColorInt;
 import android.support.annotation.NonNull;
@@ -81,8 +83,10 @@ public class GPXLayer extends OsmandMapLayer implements ContextMenuLayer.IContex
 	private Map<WptPt, SelectedGpxFile> pointFileMap = new HashMap<>();
 	private MapTextLayer textLayer;
 
+	private Paint paintOuterRect;
 	private Paint paintInnerRect;
 
+    private Paint paintGridOuterCircle;
 	private Paint paintGridCircle;
 
 	private Paint paintTextIcon;
@@ -139,11 +143,22 @@ public class GPXLayer extends OsmandMapLayer implements ContextMenuLayer.IContex
 		textLayer = view.getLayerByClass(MapTextLayer.class);
 
 		paintInnerRect = new Paint();
-		paintInnerRect.setStyle(Style.FILL_AND_STROKE);
+		paintInnerRect.setStyle(Style.FILL);
 		paintInnerRect.setAntiAlias(true);
+		paintOuterRect = new Paint();
+		paintOuterRect.setStyle(Style.STROKE);
+		paintOuterRect.setAntiAlias(true);
+		paintOuterRect.setColor(Color.WHITE);
+		paintOuterRect.setStrokeWidth(3);
+		paintOuterRect.setAlpha(255);
 		paintGridCircle = new Paint();
 		paintGridCircle.setStyle(Style.FILL_AND_STROKE);
 		paintGridCircle.setAntiAlias(true);
+        paintGridOuterCircle = new Paint();
+        paintGridOuterCircle.setStyle(Style.FILL_AND_STROKE);
+        paintGridOuterCircle.setAntiAlias(true);
+        paintGridOuterCircle.setColor(Color.WHITE);
+        paintGridOuterCircle.setAlpha(204);
 
 		paintIcon = new Paint();
 		pointSmall = BitmapFactory.decodeResource(view.getResources(), R.drawable.map_white_shield_small);
@@ -307,14 +322,17 @@ public class GPXLayer extends OsmandMapLayer implements ContextMenuLayer.IContex
 					if (ind > 0) {
 						nm = nm.substring(0, ind);
 					}
-					float nmWidth = paintTextIcon.measureText(nm);
-					canvas.drawRect(
-							x - nmWidth / 2 - 2 * (float) Math.ceil(tileBox.getDensity()),
-							y - r / 2 - 2 * (float) Math.ceil(tileBox.getDensity()),
-							x + nmWidth / 2 + 2 * (float) Math.ceil(tileBox.getDensity()),
-							y + r / 2 + 3 * (float) Math.ceil(tileBox.getDensity()),
-							paintInnerRect);
-					canvas.drawText(nm, x, y + r / 2, paintTextIcon);
+					Rect bounds = new Rect();
+					paintTextIcon.getTextBounds(nm, 0, nm.length(), bounds);
+					int nmWidth = bounds.width();
+					int nmHeight = bounds.height();
+                    RectF rect = new RectF(x - nmWidth / 2 - 2 * (float) Math.ceil(tileBox.getDensity()),
+                            y + nmHeight / 2 + 3 * (float) Math.ceil(tileBox.getDensity()),
+                            x + nmWidth / 2 + 3 * (float) Math.ceil(tileBox.getDensity()),
+                            y - nmHeight / 2 - 2 * (float) Math.ceil(tileBox.getDensity()));
+                    canvas.drawRoundRect(rect, 5, 5, paintInnerRect);
+					canvas.drawRoundRect(rect, 5, 5, paintOuterRect);
+					canvas.drawText(nm, x, y + nmHeight / 2, paintTextIcon);
 				}
 			}
 		}
@@ -396,6 +414,7 @@ public class GPXLayer extends OsmandMapLayer implements ContextMenuLayer.IContex
 			trackChartPoints.setSegmentColor(color);
 		}
 		paintGridCircle.setColor(color);
+        paintGridCircle.setAlpha(255);
 		QuadRect latLonBounds = tileBox.getLatLonBounds();
 		List<WptPt> xAxisPoints = trackChartPoints.getXAxisPoints();
 		float r = 3 * tileBox.getDensity();
@@ -407,6 +426,7 @@ public class GPXLayer extends OsmandMapLayer implements ContextMenuLayer.IContex
 					&& axisPoint.getLongitude() <= latLonBounds.right) {
 				float x = tileBox.getPixXFromLatLon(axisPoint.getLatitude(), axisPoint.getLongitude());
 				float y = tileBox.getPixYFromLatLon(axisPoint.getLatitude(), axisPoint.getLongitude());
+                canvas.drawCircle(x, y, r + 2 * (float) Math.ceil(tileBox.getDensity()), paintGridOuterCircle);
 				canvas.drawCircle(x, y, r + (float) Math.ceil(tileBox.getDensity()), paintGridCircle);
 			}
 		}

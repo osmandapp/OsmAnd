@@ -10,7 +10,6 @@ import android.widget.ImageView;
 import android.widget.TextView;
 
 import com.github.mikephil.charting.charts.LineChart;
-import com.github.mikephil.charting.components.YAxis;
 import com.github.mikephil.charting.data.Entry;
 import com.github.mikephil.charting.data.LineData;
 import com.github.mikephil.charting.highlight.Highlight;
@@ -18,7 +17,6 @@ import com.github.mikephil.charting.interfaces.datasets.ILineDataSet;
 import com.github.mikephil.charting.listener.ChartTouchListener.ChartGesture;
 import com.github.mikephil.charting.listener.OnChartGestureListener;
 import com.github.mikephil.charting.listener.OnChartValueSelectedListener;
-import com.github.mikephil.charting.utils.ViewPortHandler;
 
 import net.osmand.data.LatLon;
 import net.osmand.data.QuadRect;
@@ -288,15 +286,18 @@ public class TrackDetailsMenu {
 		Highlight[] highlights = chart.getHighlighted();
 		LatLon location = null;
 
-		ViewPortHandler handler = chart.getViewPortHandler();
-		float minimumVisibleXValue = (float) chart.getValuesByTouchPoint(handler.contentLeft(), handler.contentBottom(), YAxis.AxisDependency.LEFT).x;
-		float maximumVisibleXValue = (float) chart.getValuesByTouchPoint(handler.contentRight(), handler.contentBottom(), YAxis.AxisDependency.LEFT).x;
+		float minimumVisibleXValue = chart.getLowestVisibleX();
+		float maximumVisibleXValue = chart.getHighestVisibleX();
 
 		if (highlights != null && highlights.length > 0) {
-			if (highlights[0].getX() < minimumVisibleXValue) {
-				gpxItem.chartHighlightPos = minimumVisibleXValue;
-			} else if (highlights[0].getX() > maximumVisibleXValue) {
-				gpxItem.chartHighlightPos = maximumVisibleXValue;
+			if (minimumVisibleXValue != 0 && maximumVisibleXValue != 0) {
+				if (highlights[0].getX() < minimumVisibleXValue) {
+					gpxItem.chartHighlightPos = minimumVisibleXValue;
+				} else if (highlights[0].getX() > maximumVisibleXValue) {
+					gpxItem.chartHighlightPos = maximumVisibleXValue;
+				} else {
+					gpxItem.chartHighlightPos = highlights[0].getX();
+				}
 			} else {
 				gpxItem.chartHighlightPos = highlights[0].getX();
 			}
@@ -572,7 +573,8 @@ public class TrackDetailsMenu {
 		if (gpxItem.chartHighlightPos != -1) {
 			chart.highlightValue(gpxItem.chartHighlightPos, 0);
 		} else {
-			chart.highlightValue(null);
+			gpxItem.chartHighlightPos = chart.getLowestVisibleX();
+			chart.highlightValue(chart.getLowestVisibleX(), 0);
 		}
 	}
 
