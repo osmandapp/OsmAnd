@@ -1,15 +1,16 @@
 package net.osmand.plus.activities;
 
 import android.Manifest;
+import android.app.Dialog;
 import android.content.Intent;
 import android.os.Bundle;
+import android.support.annotation.NonNull;
+import android.support.design.widget.BottomSheetBehavior;
+import android.support.design.widget.CoordinatorLayout;
 import android.support.v4.app.ActivityCompat;
-import android.view.Gravity;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
-import android.view.Window;
-import android.view.WindowManager;
 import android.widget.ImageView;
 import android.widget.TextView;
 
@@ -19,7 +20,6 @@ import net.osmand.plus.OsmAndLocationProvider;
 import net.osmand.plus.R;
 import net.osmand.plus.Version;
 import net.osmand.plus.activities.search.SearchActivity;
-import net.osmand.plus.base.BottomSheetDialogFragment;
 import net.osmand.plus.dashboard.DashboardOnMap;
 import net.osmand.plus.download.IndexItem;
 import net.osmand.plus.liveupdates.OsmLiveActivity;
@@ -27,20 +27,36 @@ import net.osmand.plus.views.MapControlsLayer;
 
 import java.util.List;
 
-public class MapMenuDialogFragment extends BottomSheetDialogFragment{
+public class MapMenuDialogFragment extends android.support.design.widget.BottomSheetDialogFragment{
 
     private MapActivity mapActivity;
 
-    @Override
-    public void onStart() {
-        super.onStart();
+    private BottomSheetBehavior.BottomSheetCallback bottomSheetBehaviorCallback = new BottomSheetBehavior.BottomSheetCallback() {
+        @Override
+        public void onStateChanged(@NonNull View bottomSheet, int newState) {
+            if (newState == BottomSheetBehavior.STATE_HIDDEN) {
+                dismiss();
+            }
+        }
 
-        final Window window = getDialog().getWindow();
-        WindowManager.LayoutParams params = window.getAttributes();
-        params.height = ViewGroup.LayoutParams.WRAP_CONTENT;
-        params.gravity = Gravity.BOTTOM;
-        params.width = ViewGroup.LayoutParams.MATCH_PARENT;
-        window.setAttributes(params);
+        @Override
+        public void onSlide(@NonNull View bottomSheet, float slideOffset) {
+
+        }
+    };
+
+    @Override
+    public void setupDialog(Dialog dialog, int style) {
+        super.setupDialog(dialog, style);
+        View contentView = View.inflate(getContext(), R.layout.map_menu_fragment, null);
+        dialog.setContentView(contentView);
+
+        CoordinatorLayout.LayoutParams params = (CoordinatorLayout.LayoutParams) ((View) contentView.getParent()).getLayoutParams();
+        CoordinatorLayout.Behavior behavior = params.getBehavior();
+
+        if( behavior != null && behavior instanceof BottomSheetBehavior ) {
+            ((BottomSheetBehavior) behavior).setBottomSheetCallback(bottomSheetBehaviorCallback);
+        }
     }
 
     @Override
@@ -51,6 +67,9 @@ public class MapMenuDialogFragment extends BottomSheetDialogFragment{
         View view = inflater.inflate(R.layout.map_menu_fragment, container, false);
 
         IconsCache ic = mapActivity.getMyApplication().getIconsCache();
+
+        View parentLayout = view.findViewById(R.id.map_menu_parent);
+        parentLayout.setBackgroundColor(getActivity().getResources().getColor(R.color.bg_color_light));
 
         View dashboardView = view.findViewById(R.id.dashboard_view);
         ((ImageView) view.findViewById(R.id.dashboard_icon)).
