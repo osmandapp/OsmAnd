@@ -89,9 +89,7 @@
     <string name="osm_live_enter_email">Zəhmət olmasa düzgün E-poçt ünvanı daxil edin</string>
     <string name="osm_live_subscription_settings">Abunəlik parametrləri</string>
     <string name="upload_anonymously">Anonim olaraq yüklə</string>
-    <string name="download_files_question_space">{0} fayl endirilsin?
-{1} MB yaddaş istifədə olunub.
-({2} MB boş yaddaş var.)</string>
+    <string name="download_files_question_space">{0} fayl endirilsin? {1} MB yaddaş istifadə edir. ({2} MB boş yer var.)</string>
     <string name="upload_osm_note">OSM qeyd yüklə</string>
     <string name="shared_string_toolbar">Alətlər paneli</string>
     <string name="shared_string_widgets">Widget-lər</string>
@@ -1430,8 +1428,8 @@
     <string name="routing_attr_avoid_stairs_description">Pilləkənlərdən yayın</string>
     <string name="routing_attr_avoid_borders_name">Sərhəd keçidlərindən yayın</string>
     <string name="routing_attr_avoid_borders_description">Başqa ölkə ilə sərhəd kəsişmələrindən yayın</string>
-    <string name="routing_attr_weight_description">Marşrutlarda icazə veriləcək avtomobil çəkisini təyin edin</string>
-    <string name="routing_attr_height_description">Marşrutlarda icazə veriləcək avtomobil hündürlüyünü təyin edin</string>
+    <string name="routing_attr_weight_description">Marşrutlarda icazə veriləcək nəqliyyat vasitəsinin çəkisini təyin edin</string>
+    <string name="routing_attr_height_description">Marşrutlarda icazə veriləcək nəqliyyat vasitəsinin hündürlüyünü təyin edin</string>
     <string name="calculate_osmand_route_gpx">OsmAnd offlayn marşrut hesabla</string>
     <string name="app_mode_truck">Yük maşını</string>
     <string name="speech_rate_descr">TTS üçün danışıq sürəti təyin edin</string>
@@ -1558,4 +1556,19 @@
     <string name="rotate_map_compass_opt">Kompasa görə</string>
     <string name="rotate_map_bearing_opt">Hərəkət istiqamətində</string>
     <string name="poi_context_menu_modify">POI-yə düzəliş et</string>
+    <string name="select_map_marker">Xəritə işarələyici seçin</string>
+    <string name="map_markers_other">Digər işarələyicilər</string>
+    <string name="rendering_attr_hideUnderground_name">Yeraltı obyektlər</string>
+    <string name="data_is_not_available">Məlumatlar mövcud deyil</string>
+    <string name="starting_point">Başlanğıc nöqtə</string>
+    <string name="rendering_attr_horseRoutes_name">At marşrutları</string>
+    <string name="show_on_start_description">“Sönülü” birbaşa xəritə ekranını başladır</string>
+    <string name="osm_save_offline">Offlayn saxla</string>
+    <string name="osn_add_dialog_error">Səhv baş verdi: qeyd yaradılmadı</string>
+    <string name="osn_close_dialog_error">Səhv baş verdi: qeyd bağladılmadı</string>
+    <string name="osb_comment_dialog_error">Səhv baş verdi: rəy əlavə edilmədi</string>
+    <string name="share_osm_edits_subject">OSM düzəlişləri OsmAnd ilə paylaşılıb</string>
+    <string name="rendering_attr_hideProposed_name">Təklif olunan obyektlər</string>
+    <string name="local_recordings_delete_all_confirm">%1$d qeydi silmək üzrəsiniz. Əminsiniz?</string>
+    <string name="local_osm_changes_upload_all_confirm">%1$d dəyişikliyi OSM-a yükləmək üzrəsiniz. Əminsiniz?</string>
     </resources>
