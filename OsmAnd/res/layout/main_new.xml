@@ -1,7 +1,5 @@
 <?xml version="1.0" encoding="utf-8"?>
-<android.support.v4.widget.DrawerLayout
-    android:id="@+id/drawer_layout"
-    xmlns:android="http://schemas.android.com/apk/res/android"
+<FrameLayout xmlns:android="http://schemas.android.com/apk/res/android"
     android:layout_width="match_parent"
     android:layout_height="match_parent">
 
@@ -98,12 +96,4 @@
 
     </FrameLayout>
 
-    <ListView
-        android:id="@+id/menuItems"
-        android:layout_width="280dp"
-        android:layout_height="match_parent"
-        android:layout_gravity="left"
-        android:background="?attr/bg_color"
-        android:drawSelectorOnTop="true" />
-
-</android.support.v4.widget.DrawerLayout>
+</FrameLayout>

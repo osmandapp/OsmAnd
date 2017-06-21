@@ -126,7 +126,9 @@ public class QuickActionListFragment extends BaseOsmAndFragment implements Quick
     public void onResume() {
         super.onResume();
 
-        getMapActivity().disableDrawer();
+        if (!getMyApplication().getSettings().NEW_MAP_VIEW.get()) {
+            getMapActivity().disableDrawer();
+        }
         quickActionRegistry.setUpdatesListener(this);
     }
 
@@ -134,7 +136,9 @@ public class QuickActionListFragment extends BaseOsmAndFragment implements Quick
     public void onPause() {
         super.onPause();
 
-        getMapActivity().enableDrawer();
+        if (!getSettings().NEW_MAP_VIEW.get()) {
+            getMapActivity().enableDrawer();
+        }
         quickActionRegistry.setUpdatesListener(null);
     }
 
