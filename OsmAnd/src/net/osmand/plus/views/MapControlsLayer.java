@@ -42,6 +42,7 @@ import net.osmand.plus.TargetPointsHelper;
 import net.osmand.plus.TargetPointsHelper.TargetPoint;
 import net.osmand.plus.activities.MapActivity;
 import net.osmand.plus.activities.MapActivity.ShowQuickSearchMode;
+import net.osmand.plus.activities.MapMenuDialogFragment;
 import net.osmand.plus.dashboard.DashboardOnMap.DashboardType;
 import net.osmand.plus.dialogs.DirectionsDialogs;
 import net.osmand.plus.mapcontextmenu.MapContextMenu;
@@ -447,7 +448,8 @@ public class MapControlsLayer extends OsmandMapLayer {
 					if (dash) {
 						mapActivity.getDashboard().setDashboardVisibility(true, DashboardType.DASHBOARD);
 					} else {
-						mapActivity.getDashboard().setDashboardVisibility(true, DashboardType.MAP_MENU);
+                        MapMenuDialogFragment mapMenuDialogFragment = new MapMenuDialogFragment();
+                        mapMenuDialogFragment.show(mapActivity.getSupportFragmentManager(), null);
 					}
 				}
 			});
