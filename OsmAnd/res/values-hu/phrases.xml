@@ -3404,4 +3404,6 @@
 	<string name="poi_motorcycle_clothes_yes">Motoros ruha</string>
 	<string name="poi_motorcycle_clothes_no">Motoros ruha: nincs</string>
 	<string name="poi_motorcycle_type_scooter">Robogó</string>
+	<string name="poi_zoo_enclosure">Kifutó</string>
+	<string name="poi_zoo_falconry">Solymászat</string>
 	</resources>
