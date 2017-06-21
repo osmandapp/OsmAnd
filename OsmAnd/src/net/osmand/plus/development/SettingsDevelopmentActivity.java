@@ -2,6 +2,7 @@ package net.osmand.plus.development;
 
 
 import android.annotation.SuppressLint;
+import android.content.DialogInterface;
 import android.content.Intent;
 import android.os.Bundle;
 import android.os.Debug;
@@ -75,7 +76,7 @@ public class SettingsDevelopmentActivity extends SettingsBaseActivity {
 			@Override
 			public boolean onPreferenceChange(Preference preference, Object o) {
 				SettingsDevelopmentActivity.super.onPreferenceChange(preference, o);
-				Toast.makeText(SettingsDevelopmentActivity.this, "Restart app to apply settings", Toast.LENGTH_SHORT).show();
+				restartApp();
 				return true;
 			}
 		});
@@ -263,6 +264,17 @@ public class SettingsDevelopmentActivity extends SettingsBaseActivity {
 		b.show();
 	}
 
+	private void restartApp() {
+		AlertDialog.Builder bld = new AlertDialog.Builder(this);
+		bld.setMessage(R.string.restart_is_required);
+		bld.setPositiveButton(R.string.shared_string_ok, new DialogInterface.OnClickListener() {
 
+			@Override
+			public void onClick(DialogInterface dialog, int which) {
+				android.os.Process.killProcess(android.os.Process.myPid());
+			}
+		});
+		bld.show();
+	}
 
 }
