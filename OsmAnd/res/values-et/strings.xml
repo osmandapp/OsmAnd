@@ -156,4 +156,6 @@
     <string name="open_mapillary">Ava Mapillary</string>
     <string name="shared_string_install">Paigalda</string>
     <string name="online_photos">Veebi fotod</string>
+    <string name="shared_string_add_photos">Lisa fotosid</string>
+    <string name="mapillary_widget">Mapillary vidin</string>
     </resources>
