@@ -43,12 +43,16 @@ public class FirstUsageWelcomeFragment extends Fragment {
 	@Override
 	public void onResume() {
 		super.onResume();
-		((MapActivity)getActivity()).disableDrawer();
+		if (!((MapActivity)getActivity()).getMyApplication().getSettings().NEW_MAP_VIEW.get()) {
+			((MapActivity)getActivity()).disableDrawer();
+		}
 	}
 
 	@Override
 	public void onPause() {
 		super.onPause();
-		((MapActivity)getActivity()).enableDrawer();
+		if (!((MapActivity)getActivity()).getMyApplication().getSettings().NEW_MAP_VIEW.get()) {
+			((MapActivity) getActivity()).enableDrawer();
+		}
 	}
 }

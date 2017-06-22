@@ -537,7 +537,9 @@ public class DashboardOnMap implements ObservableScrollViewCallbacks, DynamicLis
 				@Override
 				public void onClick(View v) {
 					hideDashboard(false);
-					mapActivity.openDrawer();
+					if (!getMyApplication().getSettings().NEW_MAP_VIEW.get()) {
+						mapActivity.openDrawer();
+					}
 				}
 			});
 		}
@@ -779,7 +781,9 @@ public class DashboardOnMap implements ObservableScrollViewCallbacks, DynamicLis
 		this.visibleType = type;
 		DashboardOnMap.staticVisible = visible;
 		DashboardOnMap.staticVisibleType = type;
-		mapActivity.enableDrawer();
+		if (!getMyApplication().getSettings().NEW_MAP_VIEW.get()) {
+			mapActivity.enableDrawer();
+		}
 
 		getMyApplication().getMapMarkersHelper().removeListener(this);
 		if (mapActivity.getMapLayers().getMapMarkersLayer().clearRoute()) {
@@ -796,7 +800,9 @@ public class DashboardOnMap implements ObservableScrollViewCallbacks, DynamicLis
 			mapLinkedToLocation = mapActivity.getMapViewTrackingUtilities().isMapLinkedToLocation();
 			myLocation = mapActivity.getMyApplication().getLocationProvider().getLastKnownLocation();
 			mapActivity.getMapViewTrackingUtilities().setDashboard(this);
-			mapActivity.disableDrawer();
+			if (!getMyApplication().getSettings().NEW_MAP_VIEW.get()) {
+				mapActivity.disableDrawer();
+			}
 			dashboardView.setVisibility(View.VISIBLE);
 			if (isActionButtonVisible()) {
 				setActionButton(visibleType);

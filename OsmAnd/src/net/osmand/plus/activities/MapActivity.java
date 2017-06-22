@@ -186,8 +186,6 @@ public class MapActivity extends OsmandActionBarActivity implements DownloadEven
 	private boolean mIsDestroyed = false;
 	private InAppHelper inAppHelper;
 
-	private DrawerLayout.DrawerListener drawerListener;
-
 	@Override
 	public void onCreate(Bundle savedInstanceState) {
 		long tm = System.currentTimeMillis();
@@ -205,7 +203,11 @@ public class MapActivity extends OsmandActionBarActivity implements DownloadEven
 		super.onCreate(savedInstanceState);
 		// Full screen is not used here
 		// getWindow().setFlags(WindowManager.LayoutParams.FLAG_FULLSCREEN, WindowManager.LayoutParams.FLAG_FULLSCREEN);
-		setContentView(R.layout.main);
+		if (settings.NEW_MAP_VIEW.get()) {
+			setContentView(R.layout.main_new);
+		} else {
+			setContentView(R.layout.main);
+		}
 
 		int statusBarHeight = 0;
 		int resourceId = getResources().getIdentifier("status_bar_height", "dimen", "android");
@@ -287,30 +289,10 @@ public class MapActivity extends OsmandActionBarActivity implements DownloadEven
 		}
 		mapView.refreshMap(true);
 
-		mapActions.updateDrawerMenu();
-		drawerLayout = (DrawerLayout) findViewById(R.id.drawer_layout);
-		drawerListener = new DrawerLayout.DrawerListener() {
-			@Override
-			public void onDrawerSlide(View drawerView, float slideOffset) {
-				mapView.setMultiTouch(false);
-			}
-
-			@Override
-			public void onDrawerOpened(View drawerView) {
-
-			}
-
-			@Override
-			public void onDrawerClosed(View drawerView) {
-
-			}
-
-			@Override
-			public void onDrawerStateChanged(int newState) {
-
-			}
-		};
-		drawerLayout.addDrawerListener(drawerListener);
+		if (!settings.NEW_MAP_VIEW.get()) {
+			mapActions.updateDrawerMenu();
+			drawerLayout = (DrawerLayout) findViewById(R.id.drawer_layout);
+		}
 
 		IntentFilter filter = new IntentFilter(Intent.ACTION_SCREEN_OFF);
 		screenOffReceiver = new ScreenOffReceiver();
@@ -359,7 +341,9 @@ public class MapActivity extends OsmandActionBarActivity implements DownloadEven
 						dashboardOnMap.updateLocation(true, true, false);
 					}
 					findViewById(R.id.init_progress).setVisibility(View.GONE);
-					findViewById(R.id.drawer_layout).invalidate();
+					if (!settings.NEW_MAP_VIEW.get()) {
+						findViewById(R.id.drawer_layout).invalidate();
+					}
 				}
 			};
 			getMyApplication().checkApplicationIsBeingInitialized(this, initListener);
@@ -498,9 +482,11 @@ public class MapActivity extends OsmandActionBarActivity implements DownloadEven
 		if (dashboardOnMap.onBackPressed()) {
 			return;
 		}
-		if (drawerLayout.isDrawerOpen(Gravity.LEFT)) {
-			closeDrawer();
-			return;
+		if (!settings.NEW_MAP_VIEW.get()) {
+			if (drawerLayout.isDrawerOpen(Gravity.LEFT)) {
+				closeDrawer();
+				return;
+			}
 		}
 		if (getQuickSearchDialogFragment() != null) {
 			showQuickSearch(ShowQuickSearchMode.CURRENT, false);
@@ -699,7 +685,9 @@ public class MapActivity extends OsmandActionBarActivity implements DownloadEven
 				permissionDone = true;
 			}
 		}
-		enableDrawer();
+		if (!settings.NEW_MAP_VIEW.get()) {
+			enableDrawer();
+		}
 
 		if (showWelcomeScreen) {
 			getSupportFragmentManager().beginTransaction()
@@ -1002,9 +990,6 @@ public class MapActivity extends OsmandActionBarActivity implements DownloadEven
 		if (inAppHelper != null) {
 			inAppHelper.stop();
 		}
-		if (drawerLayout != null) {
-			drawerLayout.removeDrawerListener(drawerListener);
-		}
 		mIsDestroyed = true;
 	}
 
@@ -1070,7 +1055,9 @@ public class MapActivity extends OsmandActionBarActivity implements DownloadEven
 			mapLayers.getMapQuickActionLayer().refreshLayer();
 		}
 		mapLayers.updateLayers(mapView);
-		mapActions.updateDrawerMenu();
+		if (!settings.NEW_MAP_VIEW.get()) {
+			mapActions.updateDrawerMenu();
+		}
 		mapView.setComplexZoom(mapView.getZoom(), mapView.getSettingsMapDensity());
 		app.getDaynightHelper().startSensorIfNeeded(new StateChangedListener<Boolean>() {
 
@@ -1156,7 +1143,9 @@ public class MapActivity extends OsmandActionBarActivity implements DownloadEven
 			return true;
 		} else if (keyCode == KeyEvent.KEYCODE_MENU /*&& event.getRepeatCount() == 0*/) {
 			// repeat count 0 doesn't work for samsung, 1 doesn't work for lg
-			toggleDrawer();
+			if (!settings.NEW_MAP_VIEW.get()) {
+				toggleDrawer();
+			}
 			return true;
 		} else if (settings.ZOOM_BY_TRACKBALL.get()) {
 			// Parrot device has only dpad left and right
@@ -1340,10 +1329,12 @@ public class MapActivity extends OsmandActionBarActivity implements DownloadEven
 	}
 
 	public void toggleDrawer() {
-		if (drawerLayout.isDrawerOpen(Gravity.LEFT)) {
-			closeDrawer();
-		} else {
-			openDrawer();
+		if (!settings.NEW_MAP_VIEW.get()) {
+			if (drawerLayout.isDrawerOpen(Gravity.LEFT)) {
+				closeDrawer();
+			} else {
+				openDrawer();
+			}
 		}
 	}
 
