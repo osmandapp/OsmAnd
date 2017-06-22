@@ -11,6 +11,7 @@ import android.graphics.PointF;
 import android.graphics.drawable.Drawable;
 import android.os.Build;
 import android.support.annotation.NonNull;
+import android.support.design.widget.BottomSheetBehavior;
 import android.support.v4.app.ActivityCompat;
 import android.support.v4.view.ViewCompat;
 import android.support.v4.view.ViewPropertyAnimatorCompat;
@@ -63,6 +64,8 @@ public class MapControlsLayer extends OsmandMapLayer {
 	private static final int REQUEST_LOCATION_FOR_NAVIGATION_FAB_PERMISSION = 201;
 	private static final int REQUEST_LOCATION_FOR_ADD_DESTINATION_PERMISSION = 202;
 
+	private BottomSheetBehavior mBottomSheetBehavior;
+
 	public MapHudButton createHudButton(View iv, int resId) {
 		MapHudButton mc = new MapHudButton();
 		mc.iv = iv;
@@ -110,6 +113,7 @@ public class MapControlsLayer extends OsmandMapLayer {
 		settings = activity.getMyApplication().getSettings();
 		mapView = mapActivity.getMapView();
 		contextMenuLayer = mapActivity.getMapLayers().getContextMenuLayer();
+		mBottomSheetBehavior = BottomSheetBehavior.from(mapActivity.findViewById(R.id.bottom_sheet));
 	}
 
 	public MapRouteInfoMenu getMapRouteInfoMenu() {
@@ -448,8 +452,23 @@ public class MapControlsLayer extends OsmandMapLayer {
 					if (dash) {
 						mapActivity.getDashboard().setDashboardVisibility(true, DashboardType.DASHBOARD);
 					} else {
-                        MapMenuDialogFragment mapMenuDialogFragment = new MapMenuDialogFragment();
-                        mapMenuDialogFragment.show(mapActivity.getSupportFragmentManager(), null);
+                        mBottomSheetBehavior.setState(BottomSheetBehavior.STATE_EXPANDED);
+
+						mBottomSheetBehavior.setBottomSheetCallback(new BottomSheetBehavior.BottomSheetCallback() {
+							@Override
+							public void onStateChanged(@NonNull View bottomSheet, int newState) {
+								if (newState == BottomSheetBehavior.STATE_COLLAPSED) {
+									mBottomSheetBehavior.setPeekHeight(0);
+								}
+							}
+
+							@Override
+							public void onSlide(@NonNull View bottomSheet, float slideOffset) {
+
+							}
+						});
+//                        MapMenuDialogFragment mapMenuDialogFragment = new MapMenuDialogFragment();
+//                        mapMenuDialogFragment.show(mapActivity.getSupportFragmentManager(), null);
 					}
 				}
 			});

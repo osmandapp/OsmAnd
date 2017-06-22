@@ -4,17 +4,10 @@ import android.Manifest;
 import android.content.Intent;
 import android.os.Bundle;
 import android.support.v4.app.ActivityCompat;
-import android.util.Log;
-import android.view.Gravity;
 import android.view.LayoutInflater;
-import android.view.MotionEvent;
 import android.view.View;
 import android.view.ViewGroup;
-import android.view.Window;
-import android.view.WindowManager;
 import android.widget.ImageView;
-import android.widget.LinearLayout;
-import android.widget.ScrollView;
 import android.widget.TextView;
 
 import net.osmand.data.LatLon;
@@ -31,23 +24,9 @@ import net.osmand.plus.views.MapControlsLayer;
 
 import java.util.List;
 
-public class MapMenuDialogFragment extends BottomSheetDialogFragment implements View.OnTouchListener{
+public class MapMenuDialogFragment extends BottomSheetDialogFragment {
 
     private MapActivity mapActivity;
-
-    private ScrollView scrollView;
-
-    @Override
-    public void onStart() {
-        super.onStart();
-
-        final Window window = getDialog().getWindow();
-        WindowManager.LayoutParams params = window.getAttributes();
-        params.height = 800;
-        params.gravity = Gravity.BOTTOM;
-        params.width = ViewGroup.LayoutParams.MATCH_PARENT;
-        window.setAttributes(params);
-    }
 
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
@@ -255,13 +234,7 @@ public class MapMenuDialogFragment extends BottomSheetDialogFragment implements 
         hideView.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-//                dismiss();
-                final Window window = getDialog().getWindow();
-                WindowManager.LayoutParams params = window.getAttributes();
-                params.height += 1;
-                params.gravity = Gravity.BOTTOM;
-                params.width = ViewGroup.LayoutParams.MATCH_PARENT;
-                window.setAttributes(params);
+                dismiss();
             }
         });
 
@@ -292,38 +265,7 @@ public class MapMenuDialogFragment extends BottomSheetDialogFragment implements 
             }
         });
 
-        scrollView = (ScrollView) view.findViewById(R.id.map_menu_scroll_view);
-        scrollView.setOnTouchListener(this);
-
-        LinearLayout title = (LinearLayout) view.findViewById(R.id.map_menu_title);
-        title.setOnTouchListener(this);
-
         return view;
     }
 
-    private float yPos = 0;
-
-    @Override
-    public boolean onTouch(View view, MotionEvent motionEvent) {
-        switch (motionEvent.getAction()) {
-            case MotionEvent.ACTION_DOWN:
-                yPos = motionEvent.getRawY();
-                Log.d("down", "yPos: " + yPos);
-                break;
-            case MotionEvent.ACTION_MOVE:
-                float offset = yPos - motionEvent.getRawY();
-                Log.d("move", "offset: " + offset);
-                yPos = motionEvent.getRawY();
-                Log.d("move", "yPos: " + yPos);
-                break;
-//                final Window window = getDialog().getWindow();
-//                WindowManager.LayoutParams params = window.getAttributes();
-//                params.height += 1;
-//                params.gravity = Gravity.BOTTOM;
-//                params.width = ViewGroup.LayoutParams.MATCH_PARENT;
-//                window.setAttributes(params);
-        }
-
-        return false;
-    }
 }
