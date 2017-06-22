@@ -1,17 +1,20 @@
 package net.osmand.plus.activities;
 
 import android.Manifest;
-import android.app.Dialog;
 import android.content.Intent;
 import android.os.Bundle;
-import android.support.annotation.NonNull;
-import android.support.design.widget.BottomSheetBehavior;
-import android.support.design.widget.CoordinatorLayout;
 import android.support.v4.app.ActivityCompat;
+import android.util.Log;
+import android.view.Gravity;
 import android.view.LayoutInflater;
+import android.view.MotionEvent;
 import android.view.View;
 import android.view.ViewGroup;
+import android.view.Window;
+import android.view.WindowManager;
 import android.widget.ImageView;
+import android.widget.LinearLayout;
+import android.widget.ScrollView;
 import android.widget.TextView;
 
 import net.osmand.data.LatLon;
@@ -20,6 +23,7 @@ import net.osmand.plus.OsmAndLocationProvider;
 import net.osmand.plus.R;
 import net.osmand.plus.Version;
 import net.osmand.plus.activities.search.SearchActivity;
+import net.osmand.plus.base.BottomSheetDialogFragment;
 import net.osmand.plus.dashboard.DashboardOnMap;
 import net.osmand.plus.download.IndexItem;
 import net.osmand.plus.liveupdates.OsmLiveActivity;
@@ -27,36 +31,22 @@ import net.osmand.plus.views.MapControlsLayer;
 
 import java.util.List;
 
-public class MapMenuDialogFragment extends android.support.design.widget.BottomSheetDialogFragment{
+public class MapMenuDialogFragment extends BottomSheetDialogFragment implements View.OnTouchListener{
 
     private MapActivity mapActivity;
 
-    private BottomSheetBehavior.BottomSheetCallback bottomSheetBehaviorCallback = new BottomSheetBehavior.BottomSheetCallback() {
-        @Override
-        public void onStateChanged(@NonNull View bottomSheet, int newState) {
-            if (newState == BottomSheetBehavior.STATE_HIDDEN) {
-                dismiss();
-            }
-        }
-
-        @Override
-        public void onSlide(@NonNull View bottomSheet, float slideOffset) {
-
-        }
-    };
+    private ScrollView scrollView;
 
     @Override
-    public void setupDialog(Dialog dialog, int style) {
-        super.setupDialog(dialog, style);
-        View contentView = View.inflate(getContext(), R.layout.map_menu_fragment, null);
-        dialog.setContentView(contentView);
+    public void onStart() {
+        super.onStart();
 
-        CoordinatorLayout.LayoutParams params = (CoordinatorLayout.LayoutParams) ((View) contentView.getParent()).getLayoutParams();
-        CoordinatorLayout.Behavior behavior = params.getBehavior();
-
-        if( behavior != null && behavior instanceof BottomSheetBehavior ) {
-            ((BottomSheetBehavior) behavior).setBottomSheetCallback(bottomSheetBehaviorCallback);
-        }
+        final Window window = getDialog().getWindow();
+        WindowManager.LayoutParams params = window.getAttributes();
+        params.height = 800;
+        params.gravity = Gravity.BOTTOM;
+        params.width = ViewGroup.LayoutParams.MATCH_PARENT;
+        window.setAttributes(params);
     }
 
     @Override
@@ -265,7 +255,13 @@ public class MapMenuDialogFragment extends android.support.design.widget.BottomS
         hideView.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                dismiss();
+//                dismiss();
+                final Window window = getDialog().getWindow();
+                WindowManager.LayoutParams params = window.getAttributes();
+                params.height += 1;
+                params.gravity = Gravity.BOTTOM;
+                params.width = ViewGroup.LayoutParams.MATCH_PARENT;
+                window.setAttributes(params);
             }
         });
 
@@ -296,6 +292,38 @@ public class MapMenuDialogFragment extends android.support.design.widget.BottomS
             }
         });
 
+        scrollView = (ScrollView) view.findViewById(R.id.map_menu_scroll_view);
+        scrollView.setOnTouchListener(this);
+
+        LinearLayout title = (LinearLayout) view.findViewById(R.id.map_menu_title);
+        title.setOnTouchListener(this);
+
         return view;
+    }
+
+    private float yPos = 0;
+
+    @Override
+    public boolean onTouch(View view, MotionEvent motionEvent) {
+        switch (motionEvent.getAction()) {
+            case MotionEvent.ACTION_DOWN:
+                yPos = motionEvent.getRawY();
+                Log.d("down", "yPos: " + yPos);
+                break;
+            case MotionEvent.ACTION_MOVE:
+                float offset = yPos - motionEvent.getRawY();
+                Log.d("move", "offset: " + offset);
+                yPos = motionEvent.getRawY();
+                Log.d("move", "yPos: " + yPos);
+                break;
+//                final Window window = getDialog().getWindow();
+//                WindowManager.LayoutParams params = window.getAttributes();
+//                params.height += 1;
+//                params.gravity = Gravity.BOTTOM;
+//                params.width = ViewGroup.LayoutParams.MATCH_PARENT;
+//                window.setAttributes(params);
+        }
+
+        return false;
     }
 }

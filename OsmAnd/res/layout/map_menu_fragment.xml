@@ -31,6 +31,7 @@
     </LinearLayout>
 
     <ScrollView
+        android:id="@+id/map_menu_scroll_view"
         android:layout_above="@+id/map_menu_bottom_buttons"
         android:layout_below="@id/map_menu_title"
         android:layout_width="match_parent"
