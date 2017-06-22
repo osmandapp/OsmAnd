@@ -8,7 +8,7 @@ import android.util.AttributeSet;
 public class DelayAutoCompleteTextView extends android.support.v7.widget.AppCompatAutoCompleteTextView {
 
     private static final int MESSAGE_TEXT_CHANGED = 100;
-    private static final int DEFAULT_AUTOCOMPLETE_DELAY = 2000;
+    private static final int DEFAULT_AUTOCOMPLETE_DELAY = 1000;
 
     public DelayAutoCompleteTextView(Context context, AttributeSet attrs) {
         super(context, attrs);

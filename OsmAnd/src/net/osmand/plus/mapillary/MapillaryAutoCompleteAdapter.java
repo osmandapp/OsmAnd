@@ -62,6 +62,16 @@ public class MapillaryAutoCompleteAdapter extends ArrayAdapter<String> implement
         return names.get(position);
     }
 
+    @Override
+    public boolean isEnabled(int position) {
+        String text = names.get(position);
+        if (text.equals(app.getString(R.string.wrong_user_name)) ||
+                text.equals(app.getString(R.string.no_inet_connection))) {
+            return false;
+        }
+        return true;
+    }
+
     @NonNull
     @Override
     public Filter getFilter() {
@@ -71,22 +81,24 @@ public class MapillaryAutoCompleteAdapter extends ArrayAdapter<String> implement
                 FilterResults filterResults = new FilterResults();
                 if (constraint != null) {
                     try {
-                        Pair<String, String> user = new GetMapillaryUserAsyncTask().execute(constraint.toString()).get();
-                        names.clear();
                         OsmandSettings settings = app.getSettings();
                         if (!settings.isInternetConnectionAvailable()) {
-                            names.add(app.getResources().getString(R.string.no_inet_connection));
+                            names.add(app.getString(R.string.no_inet_connection));
                             wrong = true;
-                        } else if (user != null) {
-                            settings.MAPILLARY_FILTER_USER_KEY.set(user.first);
-                            settings.MAPILLARY_FILTER_USERNAME.set(user.second);
-                            names.add(user.second);
-                            wrong = false;
                         } else {
-                            settings.MAPILLARY_FILTER_USER_KEY.set("");
-                            settings.MAPILLARY_FILTER_USERNAME.set("");
-                            names.add(getContext().getResources().getString(R.string.wrong_user_name));
-                            wrong = true;
+                            Pair<String, String> user = new GetMapillaryUserAsyncTask().execute(constraint.toString()).get();
+                            names.clear();
+                            if (user != null) {
+                                settings.MAPILLARY_FILTER_USER_KEY.set(user.first);
+                                settings.MAPILLARY_FILTER_USERNAME.set(user.second);
+                                names.add(user.second);
+                                wrong = false;
+                            } else {
+                                settings.MAPILLARY_FILTER_USER_KEY.set("");
+                                settings.MAPILLARY_FILTER_USERNAME.set("");
+                                names.add(app.getString(R.string.wrong_user_name));
+                                wrong = true;
+                            }
                         }
                     } catch (InterruptedException e) {
                         Log.e(TAG, e.toString());

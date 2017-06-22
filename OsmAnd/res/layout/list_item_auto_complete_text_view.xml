@@ -5,26 +5,22 @@
     android:layout_height="wrap_content"
     android:background="?attr/bg_color"
     android:orientation="vertical"
-    android:paddingLeft="56dp"
-    android:paddingStart="56dp">
+    android:paddingLeft="52dp"
+    android:paddingStart="52dp">
 
-    <android.support.design.widget.TextInputLayout
+
+    <net.osmand.plus.mapillary.DelayAutoCompleteTextView
+        android:id="@+id/auto_complete_text_view"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:layout_marginEnd="16dp"
-        android:layout_marginRight="16dp">
-
-        <net.osmand.plus.mapillary.DelayAutoCompleteTextView
-            android:id="@+id/auto_complete_text_view"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:completionThreshold="1"
-            android:hint="@string/mapillary_menu_edit_text_hint"
-            android:inputType="text"
-            android:textColor="?android:textColorPrimary"
-            android:textSize="@dimen/default_list_text_size"
-            tools:text="Username" />
-    </android.support.design.widget.TextInputLayout>
+        android:layout_marginRight="16dp"
+        android:completionThreshold="1"
+        android:hint="@string/mapillary_menu_edit_text_hint"
+        android:inputType="text"
+        android:textColor="?android:textColorPrimary"
+        android:textSize="@dimen/default_list_text_size"
+        tools:text="Username" />
 
     <LinearLayout
         android:id="@+id/warning_linear_layout"

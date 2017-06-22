@@ -5,8 +5,8 @@
     android:layout_height="wrap_content"
     android:background="?attr/bg_color"
     android:orientation="vertical"
-    android:paddingLeft="56dp"
-    android:paddingStart="56dp">
+    android:paddingLeft="52dp"
+    android:paddingStart="52dp">
 
     <LinearLayout
         android:layout_width="match_parent"

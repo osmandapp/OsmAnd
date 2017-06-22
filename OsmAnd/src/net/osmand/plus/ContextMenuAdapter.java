@@ -371,7 +371,7 @@ public class ContextMenuAdapter {
 
 					@Override
 					public void onTextChanged(CharSequence charSequence, int i, int i1, int i2) {
-                        ((View)textView.getParent().getParent()).findViewById(R.id.warning_linear_layout).setVisibility(View.GONE);
+                        ((View)textView.getParent()).findViewById(R.id.warning_linear_layout).setVisibility(View.GONE);
 					}
 
 					@Override
@@ -380,7 +380,7 @@ public class ContextMenuAdapter {
 					}
 				});
 
-				ImageView imageView = (ImageView) ((View) textView.getParent().getParent()).findViewById(R.id.warning_image_view);
+				ImageView imageView = (ImageView) ((View) textView.getParent()).findViewById(R.id.warning_image_view);
 				imageView.setImageDrawable(mIconsCache.getPaintedIcon(R.drawable.ic_small_warning,
 						app.getResources().getColor(R.color.color_warning)));
 			}
