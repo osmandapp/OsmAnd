@@ -34,6 +34,7 @@ import net.osmand.plus.activities.MapActivity;
 import net.osmand.plus.activities.actions.AppModeDialog;
 import net.osmand.plus.dialogs.ConfigureMapMenu;
 import net.osmand.plus.dialogs.HelpArticleDialogFragment;
+import net.osmand.plus.mapillary.DelayAutoCompleteTextView;
 import net.osmand.plus.mapillary.MapillaryAutoCompleteAdapter;
 
 import org.apache.commons.logging.Log;
@@ -353,7 +354,7 @@ public class ContextMenuAdapter {
 
 			final View autoCompleteTextView = convertView.findViewById(R.id.auto_complete_text_view);
 			if (autoCompleteTextView != null) {
-				final AutoCompleteTextView textView = (AutoCompleteTextView) autoCompleteTextView;
+				final DelayAutoCompleteTextView textView = (DelayAutoCompleteTextView) autoCompleteTextView;
 				textView.setAdapter(new MapillaryAutoCompleteAdapter(getContext(), R.layout.auto_complete_suggestion, app));
 
 				String selectedUsername = app.getSettings().MAPILLARY_FILTER_USERNAME.get();
