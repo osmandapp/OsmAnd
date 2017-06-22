@@ -670,7 +670,7 @@
 	<string name="poi_car_sharing">カーシェアリング(Car sharing)</string>
 	<string name="poi_boat_sharing">ボートシェアリング(Boat sharing)</string>
 	<string name="poi_dock">ドック(Dock)</string>
-	<string name="poi_toilets">トイレ(Restroom)</string>
+	<string name="poi_toilets">トイレ</string>
 	<string name="poi_brothel">売春宿(Brothel)</string>
 	<string name="poi_smoking_area">喫煙所・喫煙エリア(Smoking area)</string>
 	<string name="poi_mortuary">遺体安置所(Mortuary)</string>
@@ -1095,8 +1095,8 @@
 
 	<string name="poi_operator">管理者(Operator)</string>
 	<string name="poi_brand">ブランド(Brand)</string>
-	<string name="poi_fee_yes">有料(Yes)</string>
-	<string name="poi_fee_no">無料(No)</string>
+	<string name="poi_fee_yes">有料</string>
+	<string name="poi_fee_no">無料</string>
 	<string name="poi_drinking_water_yes">有り</string>
 	<string name="poi_drinking_water_no">無し</string>
 	<string name="poi_supervised_yes">監督者(Supervised)</string>
@@ -1143,7 +1143,7 @@
 	<string name="poi_subway_station_filter">地下鉄駅(Subway station)</string>
 	<string name="poi_ferry_terminal_cargo">貨物(Cargo)</string>
 	<string name="poi_aerialway_bicycle">自転車輸送・持込(Bicycle transportation)</string>
-	<string name="poi_fee">料金(Fee)</string>
+	<string name="poi_fee">料金</string>
 	<string name="poi_site_type_megalith">巨石建造物(Megalith)</string>
 	<string name="poi_site_type_tumulus">古墳(Tumulus)</string>
 	<string name="poi_site_type_fortification">砦・要塞(Fortification)</string>
@@ -1168,15 +1168,15 @@
 	<string name="poi_free_flying_site_toplanding">トップランディング場所(Toplanding)</string>
 	<string name="poi_free_flying_site_towing">飛行機による牽引離着陸場所(Towing)</string>
 	<string name="poi_free_flying_site_training">練習場(Training)</string>
-	<string name="poi_free_flying_official_yes">公的許可有り(Official: yes)</string>
-	<string name="poi_free_flying_official_no">公的許可無し(Official: no)</string>
+	<string name="poi_free_flying_official_yes">公的許可:有り</string>
+	<string name="poi_free_flying_official_no">公的許可:無し</string>
 	<string name="poi_free_flying_paragliding_yes">パラグライディング(Paragliding)</string>
 	<string name="poi_free_flying_paragliding_no">パラグライディング不可(Paragliding: no)</string>
 	<string name="poi_free_flying_hanggliding_no">ハンググライディング不可(Hanggliding: no)</string>
 	<string name="poi_free_flying_rigid_yes">リジットウイング(Rigid)</string>
 	<string name="poi_free_flying_rigid_no">リジットウイング不可(Free flying rigid: no)</string>
-	<string name="poi_free_flying_guest_guidelines_yes">常連利用者以外への特別な注意事項:有り(Guest guidelines: yes)</string>
-	<string name="poi_free_flying_guest_guidelines_no">常連利用者以外への特別な注意事項:無し(Guest guidelines: no)</string>
+	<string name="poi_free_flying_guest_guidelines_yes">常連利用者以外への特別な注意事項:有り</string>
+	<string name="poi_free_flying_guest_guidelines_no">常連利用者以外への特別な注意事項:無し</string>
 
 	<string name="poi_nudism">裸体主義実践の可否(Nudism)</string>
 	<string name="poi_nudism_yes">許可(Allowed)</string>
@@ -1185,12 +1185,12 @@
 	<string name="poi_nudism_customary">通例(Customary)</string>
 	<string name="poi_nudism_permissive">許容(Permissive)</string>
 
-	<string name="poi_gambling_type">賭博の種類(Type)</string>
-	<string name="poi_gambling_lottery">宝くじ(Lottery)</string>
-	<string name="poi_gambling_pachinko">パチンコ(Pachinko)</string>
-	<string name="poi_gambling_slot_machines">スロットマシーン(Slot machines)</string>
-	<string name="poi_gambling_betting">賭け事(Betting)</string>
-	<string name="poi_gambling_bingo">ビンゴ(Bingo)</string>
+	<string name="poi_gambling_type">ギャンブルの種類</string>
+	<string name="poi_gambling_lottery">宝くじ</string>
+	<string name="poi_gambling_pachinko">パチンコ</string>
+	<string name="poi_gambling_slot_machines">スロットマシーン</string>
+	<string name="poi_gambling_betting">賭け事全般</string>
+	<string name="poi_gambling_bingo">ビンゴ</string>
 
 	<string name="poi_massage_type">マッサージタイプ(Massage type)</string>
 	<string name="poi_massage_thai">タイ式</string>
@@ -1236,8 +1236,8 @@
 	<string name="poi_theatre_genre_ballet">バレエ</string>
 	<string name="poi_theatre_genre_shadow_play">影絵芝居(Shadow play)</string>
 
-	<string name="poi_toilets_yes">有り(Yes)</string>
-	<string name="poi_toilets_no">無し(Without toilets)</string>
+	<string name="poi_toilets_yes">有り</string>
+	<string name="poi_toilets_no">無し</string>
 	<string name="poi_toilets_wheelchair_yes">車椅子用トイレ有り</string>
 	<string name="poi_toilets_wheelchair_no">車椅子用トイレ無し</string>
 	<string name="poi_toilets_access_customers">来客用トイレ(Toilets access: customers)</string>
