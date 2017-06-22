@@ -51,6 +51,7 @@ public class RouteLayer extends OsmandMapLayer {
 
 	private Paint paintIcon;
 	private Paint paintIconAction;
+	private Paint paintGridOuterCircle;
 	private Paint paintGridCircle;
 
 	private Paint paintIconSelected;
@@ -99,6 +100,12 @@ public class RouteLayer extends OsmandMapLayer {
 		paintGridCircle.setStyle(Paint.Style.FILL_AND_STROKE);
 		paintGridCircle.setAntiAlias(true);
 		paintGridCircle.setColor(attrs.defaultColor);
+		paintGridCircle.setAlpha(255);
+		paintGridOuterCircle = new Paint();
+		paintGridOuterCircle.setStyle(Paint.Style.FILL_AND_STROKE);
+		paintGridOuterCircle.setAntiAlias(true);
+		paintGridOuterCircle.setColor(Color.WHITE);
+		paintGridOuterCircle.setAlpha(204);
 	}
 	
 	@Override
@@ -179,6 +186,7 @@ public class RouteLayer extends OsmandMapLayer {
 					&& axisPoint.getLongitude() <= latLonBounds.right) {
 				float x = tileBox.getPixXFromLatLon(axisPoint.getLatitude(), axisPoint.getLongitude());
 				float y = tileBox.getPixYFromLatLon(axisPoint.getLatitude(), axisPoint.getLongitude());
+				canvas.drawCircle(x, y, r + 2 * (float) Math.ceil(tileBox.getDensity()), paintGridOuterCircle);
 				canvas.drawCircle(x, y, r + (float) Math.ceil(tileBox.getDensity()), paintGridCircle);
 			}
 		}

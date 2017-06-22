@@ -126,7 +126,7 @@
     <string name="open_street_map_login_descr">openstreetmap.org felé történő adatküldéshez szükséges</string>
     <string name="user_password">OSM jelszavad</string>
     
-    <string name="osmand_service">Háttér mód</string>
+    <string name="osmand_service">Háttérmód</string>
     <string name="osmand_service_descr">Az OsmAnd háttérben fut, ha ki van kapcsolava a képernyő</string>
 
 
@@ -260,11 +260,11 @@ Ehhez {1} MB helyre van szükség.
     <string name="voice_stream_notification">Üzenetjel hangcsatorna</string>
     <string name="voice_stream_music">Zene hangcsatorna</string>
     <string name="warning_tile_layer_not_downloadable">%1$s térkép réteget nem tudja az alkalmazás letölteni, meg kell próbálni újratelepíteni.</string>
-    <string name="overlay_transparency_descr">Rátét áttetszőség megváltoztatása</string>
-    <string name="overlay_transparency">Rátét áttetszőség</string>
-    <string name="map_transparency_descr">Alaptérkép áttetszőség megváltoztatása</string>
-    <string name="map_transparency">Térkép áttetszőség</string>
-    <string name="modify_transparency">Áttetszőség megváltoztatása (0 - átlátszó, 255 - átlátszatlan)</string>
+    <string name="overlay_transparency_descr">Rátét átlátszóságának módosítása</string>
+    <string name="overlay_transparency">Rátét átlátszósága</string>
+    <string name="map_transparency_descr">Alaptérkép átlátszóságának módosítása</string>
+    <string name="map_transparency">Alaptérkép átlátszósága</string>
+    <string name="modify_transparency">Átlátszóság módosítása (0 - átlátszó, 255 - átlátszatlan)</string>
     <string name="layer_underlay">Alátét térkép…</string>
     <string name="map_underlay">Alátét térkép</string>
     <string name="map_underlay_descr">Alátét térkép kiválasztás</string>
@@ -418,7 +418,7 @@ Ehhez {1} MB helyre van szükség.
     <string name="transport_context_menu">Közlekedés keresése a célnál</string>
 
     
-    <string name="poi_context_menu_modify">POI módosítás</string>
+    <string name="poi_context_menu_modify">POI módosítása</string>
     <string name="poi_context_menu_delete">POI törlés</string>
     <string name="rotate_map_compass_opt">Iránytű alapján</string>
     <string name="rotate_map_bearing_opt">Mozgás alapján</string>
@@ -1115,7 +1115,7 @@ Néhány fontosabb funkció:
     <string name="accessibility_options">Kisegítő lehetőségek</string>
     <string name="select_address_activity">Cím kiválasztása</string>
     <string name="favourites_list_activity">Kedvenc kiválasztása</string>
-    <string name="local_openstreetmap_act_title">OSM módosítások</string>
+    <string name="local_openstreetmap_act_title">OSM-módosítások</string>
     <string name="shared_string_more_actions">További műveletek</string>
     <string name="download_using_mobile_internet">Jelenleg nincs Wi-Fi kapcsolat. Szeretnéd a jelenlegi Internetkapcsolatot használni a letöltéshez?</string>
     <string name="cancel_route">Útvonal elvetése</string>
@@ -1632,7 +1632,7 @@ Néhány fontosabb funkció:
     <string name="local_index_description">Egy meglévő elem adatainak megtekintéséhez kattints rá, a deaktiváláshoz és törléshez nyomd meg hosszan. Jelenlegi adatok az eszközön (%1$s szabad):</string>
     <string name="speed_limit_exceed">Sebességhatár tolerancia</string>
     <string name="speed_limit_exceed_message">Válaszd ki a sebességkorlát toleranciájának határát, amely fölött hangos figyelmeztetést fogsz kapni.</string>
-    <string name="fav_point_emoticons_message">A kedvenc hely neve módosítva lett erre: %1$s, lehetővé téve a hangulatjeleket tartalmazó szöveg fájlba mentését.</string>
+    <string name="fav_point_emoticons_message">A kedvenc hely neve erre módosult: %1$s, hogy lehetővé váljék a hangulatjeleket tartalmazó szöveg fájlba mentése.</string>
     <string name="print_route">Útvonal nyomtatása</string>
     <string name="osmo_device_not_found">Eszköz nem található</string>
     <string name="osmo_no_connection_msg">Nem sikerült csatlakozni az OsMo szerverhez:
@@ -1915,7 +1915,7 @@ Afganisztán, Albánia, Algéria, Amerikai Egyesült Államok, Andorra, Anglia, 
     <string name="location_on_map">Helyzet:\n Szélesség %1$s\n Hosszúság %2$s</string>
     <string name="route_points">Útvonal pontok</string>
     <string name="action_create">Létrehozás művelet</string>
-    <string name="action_modify">Módosítás művelet</string>
+    <string name="action_modify">Módosítási művelet</string>
     <string name="action_delete">Törlés művelet</string>
     <string name="osm_edits">OSM szerkesztések</string>
     <string name="osmand_parking_hour">ó</string>
@@ -2260,7 +2260,7 @@ Hosszúság: %2$s</string>
     <string name="rendering_attr_roadStyle_description">Útstílus</string>
     <string name="poi_dialog_reopen">Újranyitás</string>
 	<string name="save_poi_without_poi_type_message">Biztosan elmented a POI-t típus nélkül?</string>
-    <string name="poi_context_menu_modify_osm_change">OSM szerkesztés módosítása</string>
+    <string name="poi_context_menu_modify_osm_change">OSM-szerkesztés módosítása</string>
     <string name="release_2_2">" • Új, környezetérzékeny menü térképre tapintáskor
 \n
 \n • Az alkalmazás már közvetlenül a térkép képernyővel indul a műszerfal helyett
@@ -2345,7 +2345,7 @@ Hosszúság: %2$s</string>
     <string name="osm_live_hide_user_name">Ne jelenjen meg a nevem a jelentésekben</string>
     <string name="osm_live_support_region">Támogatott régió</string>
     <string name="osm_live_month_cost">Havi költség</string>
-    <string name="osm_live_month_cost_desc">Havi kifizetés</string>
+    <string name="osm_live_month_cost_desc">Havi fizetés</string>
     <string name="osm_live_active">Aktív</string>
     <string name="osm_live_not_active">Inaktív</string>
     <string name="osm_live_enter_email">Kérlek, érvényes email címet adj meg</string>
@@ -2362,7 +2362,7 @@ Ha szereted az OsmAndot és az OSM-et, és szeretnéd támogatni a fejlődésük
     <string name="select_map_marker">Térképjelölő kiválasztása</string>
     <string name="map_markers_other">Egyéb jelölők</string>
     <string name="upload_anonymously">Feltöltés névtelenül</string>
-    <string name="show_transparency_seekbar">Átlátszóság csúszka megjelenítése</string>
+    <string name="show_transparency_seekbar">Átlátszóságcsúszka megjelenítése</string>
     <string name="download_files_error_not_enough_space">Nincs elég hely!
 A művelethez {3} MB ideiglenes és {1} MB végleges hely szükséges.
 Jelenleg csak {2} MB érhető el.</string>
@@ -2435,7 +2435,7 @@ Jelenleg csak {2} MB érhető el.</string>
 <string name="storage_permission_restart_is_required">Az alkalmazás már tud írni a külső tárolóra. Egy kézi alkalmazás újraindítás szükséges.</string>
     <string name="rec_split_desc">Klippek elvágása, ha a felhasznált hely túllépi a tárolási méretet</string>
     <string name="rec_split_clip_length_desc">Az egyes felvett klippek hossza nem lesz hosszabb a megadott időnél</string>
-    <string name="rec_split_storage_size_desc">Az összes klipp által elfoglalható hely</string>
+    <string name="rec_split_storage_size_desc">Az összes klip által elfoglalható hely</string>
     <string name="no_map_markers_found">Kérlek, vegyél fel jelölőket a térképen</string>
     <string name="no_waypoints_found">Nem találhatók útpontok</string>
     <string name="map_widget_bearing">Relatív irány</string>
@@ -2914,7 +2914,7 @@ Kérlek adj meg egy teljes kódot</string>
     <string name="restart_search">Keresés újraindítása</string>
     <string name="increase_search_radius">Keresett terület szélesítése</string>
     <string name="nothing_found">Nincs találat :(</string>
-    <string name="nothing_found_descr">Módosítsd a keresőkifejezést vagy növeld a keresési sugarat</string>
+    <string name="nothing_found_descr">Módosítsd a keresőkifejezést vagy növeld a keresés sugarát</string>
     <string name="mapillary">Mapillary</string>
     <string name="shared_string_add_photos">Fényképek hozzáadása</string>
     <string name="no_photos_descr">Erről a helyről nincsenek fényképeink</string>

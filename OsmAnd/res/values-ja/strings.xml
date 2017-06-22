@@ -2464,7 +2464,7 @@ OsmAndとOSMをサポートする方法として現状最適な方法である�
     <string name="access_disable_offroute_recalc_descr">案内されたルートから大きく離れた場合、自動的にルートの再計算をしないようにします</string>
     <string name="back_to_search">検索に戻る</string>
     <string name="confirmation_to_delete_history_items">選択された履歴を削除しますか？</string>
-    <string name="show_something_on_map">マップ上の%1$sへ移動</string>
+    <string name="show_something_on_map">マップ上に%1$sを表示</string>
     <string name="release_2_4">" • 新しくなって、より強化されたフリーワード検索
 \n
 \n • Bluetooth関連の改善多数
