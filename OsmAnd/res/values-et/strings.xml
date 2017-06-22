@@ -148,4 +148,7 @@
     <string name="increase_search_radius">Suurenda otsingu raadiust</string>
     <string name="nothing_found">Midagi ei leitud :(</string>
     <string name="nothing_found_descr">Muuda otsingu päringut või suurenda otsingu raadiust</string>
+    <string name="map_widget_ruler_control_first_mode">Kahe punkti vaheline kaugus</string>
+    <string name="shared_string_permissions">Load</string>
+    <string name="import_gpx_failed_descr">OsmAnd ei saa faili importida. Palun veendu, et OsmAnd\'il on õigus lugeda faili asukohast</string>
     </resources>
