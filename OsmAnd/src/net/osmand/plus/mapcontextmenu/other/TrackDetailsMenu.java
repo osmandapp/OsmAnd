@@ -53,6 +53,7 @@ public class TrackDetailsMenu {
 	private TrackDetailsBarController toolbarController;
 	private TrkSegment segment;
 	private TrackChartPoints trackChartPoints;
+	private List<WptPt> xAxisPoints;
 
 	private static boolean VISIBLE;
 
@@ -310,9 +311,8 @@ public class TrackDetailsMenu {
 					trackChartPoints.setGpx(getGpxItem().group.getGpx());
 				}
 				location = new LatLon(wpt.lat, wpt.lon);
-				List<WptPt> xAxisPoints = getXAxisPoints(chart);
 				trackChartPoints.setHighlightedPoint(location);
-				trackChartPoints.setXAxisPoints(xAxisPoints);
+				trackChartPoints.setXAxisPoints(getXAxisPoints(chart));
 				if (gpxItem.route) {
 					mapActivity.getMapLayers().getMapInfoLayer().setTrackChartPoints(trackChartPoints);
 				} else {
@@ -326,11 +326,19 @@ public class TrackDetailsMenu {
 	}
 
 	private List<WptPt> getXAxisPoints(LineChart chart) {
-		List<WptPt> xAxisPoints = new ArrayList<>();
 		float[] entries = chart.getXAxis().mEntries;
-		for (int i = 0; i < entries.length; i++) {
-			WptPt pointToAdd = getPoint(chart, entries[i]);
-			xAxisPoints.add(pointToAdd);
+		float maxXValue = chart.getLineData().getXMax();
+		if (entries.length >= 2) {
+			float interval = entries[1] - entries[0];
+			if (interval > 0) {
+				xAxisPoints = new ArrayList<>();
+				float currentPointEntry = interval;
+				while (currentPointEntry < maxXValue) {
+					WptPt pointToAdd = getPoint(chart, currentPointEntry);
+					xAxisPoints.add(pointToAdd);
+					currentPointEntry += interval;
+				}
+			}
 		}
 		return xAxisPoints;
 	}
