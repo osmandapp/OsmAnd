@@ -26,6 +26,30 @@
             tools:text="Username" />
     </android.support.design.widget.TextInputLayout>
 
+    <LinearLayout
+        android:id="@+id/warning_linear_layout"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:orientation="horizontal"
+        android:visibility="gone">
+
+        <ImageView
+            android:id="@+id/warning_image_view"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content" />
+
+        <TextView
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_gravity="center_vertical"
+            android:layout_marginLeft="8dp"
+            android:layout_marginStart="8dp"
+            android:text="@string/wrong_user_name"
+            android:textColor="?android:textColorSecondary"
+            android:textSize="@dimen/default_sub_text_size"
+            tools:text="Wrong user name!" />
+    </LinearLayout>
+
     <View
         android:id="@+id/divider"
         android:layout_width="wrap_content"

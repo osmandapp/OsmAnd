@@ -9,6 +9,7 @@
          3. All your modified/created strings are in the top of the file (to make easier find what\'s translated).
     PLEASE: Have a look at http://code.google.com/p/osmand/wiki/UIConsistency, it may really improve your and our work  :-)  Thx - Hardy
     -->
+    <string name="wrong_user_name">Wrong user name!</string>
     <string name="shared_string_to">To</string>
     <string name="mapillary_menu_date_from">From</string>
     <string name="mapillary_menu_descr_dates">View images added in a certain period.</string>
