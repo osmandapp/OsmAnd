@@ -16,7 +16,6 @@ import android.util.TypedValue;
 import android.view.Gravity;
 import android.view.MenuItem;
 import android.view.View;
-import android.view.ViewGroup;
 import android.view.ViewTreeObserver;
 import android.view.animation.Animation;
 import android.view.animation.Animation.AnimationListener;
@@ -75,7 +74,7 @@ import net.osmand.plus.helpers.WaypointHelper.LocationPointWrapper;
 import net.osmand.plus.mapcontextmenu.other.MapRouteInfoMenu;
 import net.osmand.plus.mapcontextmenu.other.RoutePreferencesMenu;
 import net.osmand.plus.mapcontextmenu.other.RoutePreferencesMenu.LocalRoutingParameter;
-import net.osmand.plus.mapillary.MapillaryMenu;
+import net.osmand.plus.mapillary.MapillaryFiltersFragment;
 import net.osmand.plus.mapillary.MapillaryPlugin.MapillaryFirstDialogFragment;
 import net.osmand.plus.rastermaps.OsmandRasterMapsPlugin;
 import net.osmand.plus.routing.RoutingHelper;
@@ -465,7 +464,6 @@ public class DashboardOnMap implements ObservableScrollViewCallbacks, DynamicLis
 		} else if (visibleType == DashboardType.MAP_MARKERS_SELECTION) {
 			tv.setText(R.string.select_map_markers);
 		} else if (visibleType == DashboardType.MAPILLARY) {
-			listView.setDescendantFocusability(ViewGroup.FOCUS_AFTER_DESCENDANTS);
 			tv.setText(R.string.mapillary);
 		} else if (visibleType == DashboardType.CONTOUR_LINES) {
 			tv.setText(R.string.srtm_plugin_name);
@@ -817,8 +815,14 @@ public class DashboardOnMap implements ObservableScrollViewCallbacks, DynamicLis
 			updateDownloadBtn();
 			View listViewLayout = dashboardView.findViewById(R.id.dash_list_view_layout);
 			ScrollView scrollView = (ScrollView) dashboardView.findViewById(R.id.main_scroll);
-			if (visibleType == DashboardType.DASHBOARD) {
-				addOrUpdateDashboardFragments();
+			if (visibleType == DashboardType.DASHBOARD || visibleType == DashboardType.MAPILLARY) {
+				if (visibleType == DashboardType.DASHBOARD) {
+					addOrUpdateDashboardFragments();
+				} else {
+					mapActivity.getSupportFragmentManager().beginTransaction()
+							.replace(R.id.content, new MapillaryFiltersFragment(), MapillaryFiltersFragment.TAG)
+							.commit();
+				}
 				scrollView.setVisibility(View.VISIBLE);
 				scrollView.scrollTo(0, 0);
 				listViewLayout.setVisibility(View.GONE);
@@ -908,7 +912,6 @@ public class DashboardOnMap implements ObservableScrollViewCallbacks, DynamicLis
 				&& visibleType != DashboardType.MAP_MARKERS_SELECTION
 				&& visibleType != DashboardType.CONFIGURE_SCREEN
 				&& visibleType != DashboardType.CONFIGURE_MAP
-				&& visibleType != DashboardType.MAPILLARY
 				&& visibleType != DashboardType.CONTOUR_LINES
 				&& visibleType != DashboardType.HILLSHADE) {
 			listView.setDivider(dividerDrawable);
@@ -986,8 +989,6 @@ public class DashboardOnMap implements ObservableScrollViewCallbacks, DynamicLis
 				cm = RasterMapMenu.createListAdapter(mapActivity, OsmandRasterMapsPlugin.RasterMapType.UNDERLAY);
 			} else if (visibleType == DashboardType.OVERLAY_MAP) {
 				cm = RasterMapMenu.createListAdapter(mapActivity, OsmandRasterMapsPlugin.RasterMapType.OVERLAY);
-			} else if (visibleType == DashboardType.MAPILLARY) {
-				cm = MapillaryMenu.createListAdapter(mapActivity);
 			} else if (visibleType == DashboardType.CONTOUR_LINES) {
 				cm = ContourLinesMenu.createListAdapter(mapActivity);
 			} else if (visibleType == DashboardType.HILLSHADE) {
