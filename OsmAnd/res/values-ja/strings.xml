@@ -2939,7 +2939,7 @@ OsmAndとOSMをサポートする方法として現状最適な方法である�
     <string name="rendering_attr_surfaceIntegrity_name">路面状態</string>
     <string name="translit_name_if_miss">%1$sの名前が欠落している場合、(他の文字で)翻字します</string>
     <string name="translit_names">名称を翻字</string>
-    <string name="private_access_routing_req">目的地の位置が専有エリア内にあります。専有道路あるいは私道を通ることを許可しますか？</string>
+    <string name="private_access_routing_req">目的地の位置が専有エリア(私有地)内にあります。専有道路あるいは私道を通ることを許可しますか？</string>
     <string name="quick_action_page_list_descr">アクションボタンをタップすると以下のリスト順にマップスタイルを変更します。</string>
     <string name="nothing_found">見つかりませんでした(´д｀)</string>
     <string name="nothing_found_descr">検索単語を変更したり、検索の距離を広げてみてください</string>
@@ -2971,8 +2971,8 @@ OsmAndとOSMをサポートする方法として現状最適な方法である�
     <string name="shared_string_add_photos">写真を追加</string>
     <string name="no_photos_descr">この近辺の写真はありません</string>
     <string name="online_photos">近隣の写真(要オンライン)</string>
-    <string name="mapillary_descr">情報共有のためのストリート写真です(要オンライン)。新たな場所の発見に、協力しあい、この世界を写真で保存しましょう。</string>
-    <string name="improve_coverage_mapillary">Mapillaryの有効領域を広げましょう</string>
+    <string name="mapillary_descr">情報共有のための路上写真です(要オンライン)。新たな場所の発見に、協力しあい、この世界を写真で保存しましょう。</string>
+    <string name="improve_coverage_mapillary">Mapillaryにて写真の有効領域を広げましょう</string>
     <string name="improve_coverage_install_mapillary_desc">自分自身の写真や、ストリートビューの様な連続写真をこの地点に追加することが出来ます。
 \n
 \nその為にはGoogle PlayからMapillaryというアプリのインストールが必要になります。</string>
@@ -2980,8 +2980,9 @@ OsmAndとOSMをサポートする方法として現状最適な方法である�
     <string name="mapillary">Mapillary</string>
     <string name="mapillary_widget">Mapillaryウィジェット</string>
     <string name="mapillary_image">Mapillary画像</string>
-    <string name="mapillary_action_descr">Mapillaryにて、この場所のストリートレベルビューに貢献します</string>
+    <string name="mapillary_action_descr">Mapillaryにて、この場所の路上表示に貢献します</string>
     <string name="mapillary_widget_descr">Mapillaryへワンタッチ貢献を許可します</string>
-    <string name="plugin_mapillary_descr">皆で共有するストリートレベル写真です。新たな場所の発見に、協力しあい、この世界を写真で保存しましょう。</string>
+    <string name="plugin_mapillary_descr">皆で共有する路上写真です。新たな場所の発見に、協力しあい、この世界を写真で保存しましょう。</string>
     <string name="shared_string_install">インストール</string>
+    <string name="import_gpx_failed_descr">OsmAndは指定したファイルをインポートできません。OsmAndにその場所からファイルを読み取る権限があるか確認して下さい。</string>
     </resources>
