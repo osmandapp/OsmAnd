@@ -154,6 +154,7 @@ public class MapControlsLayer extends OsmandMapLayer {
 		}
 		initDasboardRelatedControls();
 		updateControls(view.getCurrentRotatedTileBox(), null);
+		mapBottomButtonsDialogFragment = new MapBottomButtonsDialogFragment();
 	}
 
 	public void initDasboardRelatedControls() {
@@ -321,37 +322,6 @@ public class MapControlsLayer extends OsmandMapLayer {
 		mapActivity.getWindowManager().getDefaultDisplay().getMetrics(metrics);
 		bottomSheetBehavior.setPeekHeight(metrics.heightPixels / 2);
 		bottomSheetBehavior.setState(BottomSheetBehavior.STATE_HIDDEN);
-		bottomSheetBehavior.setBottomSheetCallback(new BottomSheetBehavior.BottomSheetCallback() {
-			@Override
-			public void onStateChanged(@NonNull View bottomSheet, int newState) {
-				switch (newState) {
-					case BottomSheetBehavior.STATE_COLLAPSED:
-						Log.e("Bottom Sheet Behaviour", "STATE_COLLAPSED");
-						break;
-					case BottomSheetBehavior.STATE_DRAGGING:
-						Log.e("Bottom Sheet Behaviour", "STATE_DRAGGING");
-						break;
-					case BottomSheetBehavior.STATE_EXPANDED:
-						Log.e("Bottom Sheet Behaviour", "STATE_EXPANDED");
-						break;
-					case BottomSheetBehavior.STATE_HIDDEN:
-						Log.e("Bottom Sheet Behaviour", "STATE_HIDDEN");
-						break;
-					case BottomSheetBehavior.STATE_SETTLING:
-						Log.e("Bottom Sheet Behaviour", "STATE_SETTLING");
-						break;
-				}
-			}
-
-			@Override
-			public void onSlide(@NonNull View bottomSheet, float slideOffset) {
-				Log.d(MapControlsLayer.class.getCanonicalName(), "onSlide: " + bottomSheet.getY() + "::" + bottomSheet.getMeasuredHeight() + " :: " + bottomSheet.getTop());
-				Log.d(MapControlsLayer.class.getCanonicalName(), "onSlide: " + slideOffset);
-//				ViewGroup.LayoutParams params = bottomSheet.getLayoutParams();
-//				params.height = Math.max(0, metrics.heightPixels - (int) bottomSheet.getTop());
-//				bottomSheet.setLayoutParams(params);
-			}
-		});
 
 		IconsCache ic = mapActivity.getMyApplication().getIconsCache();
 
@@ -705,7 +675,6 @@ public class MapControlsLayer extends OsmandMapLayer {
 					} else {
 						bottomSheetBehavior.setState(BottomSheetBehavior.STATE_COLLAPSED);
 						bottomSheetBehavior.setHideable(false);
-                        mapBottomButtonsDialogFragment = new MapBottomButtonsDialogFragment();
                         mapBottomButtonsDialogFragment.show(mapActivity.getSupportFragmentManager(), null);
 					}
 				}

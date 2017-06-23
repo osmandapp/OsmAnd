@@ -32,8 +32,8 @@ public class MapBottomButtonsDialogFragment extends BottomSheetDialogFragment {
         int themeId = isLightTheme ? R.style.OsmandLightTheme_BottomSheet
                 : R.style.OsmandDarkTheme_BottomSheet;
         final Dialog dialog = new Dialog(getActivity(), themeId);
-        dialog.getWindow().setFlags(WindowManager.LayoutParams.FLAG_NOT_TOUCH_MODAL,
-                WindowManager.LayoutParams.FLAG_NOT_TOUCH_MODAL);
+        dialog.getWindow().setFlags(WindowManager.LayoutParams.FLAG_NOT_FOCUSABLE,
+                WindowManager.LayoutParams.FLAG_NOT_FOCUSABLE);
         dialog.getWindow().clearFlags(WindowManager.LayoutParams.FLAG_DIM_BEHIND);
         dialog.setCanceledOnTouchOutside(false);
         dialog.getWindow().requestFeature(Window.FEATURE_NO_TITLE);
