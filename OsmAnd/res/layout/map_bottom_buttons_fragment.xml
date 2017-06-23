@@ -21,7 +21,7 @@
         android:orientation="vertical">
 
         <ImageButton
-            android:focusable="false"
+            android:clickable="false"
             android:id="@+id/map_bottom_button_configure_map_button"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
@@ -30,6 +30,7 @@
             tools:src="@drawable/map_world_globe_dark"/>
 
         <net.osmand.plus.widgets.TextViewEx
+            android:ellipsize="end"
             android:maxLines="1"
             android:gravity="center_horizontal"
             android:layout_width="match_parent"
@@ -39,7 +40,7 @@
             android:textColor="?android:attr/textColorPrimary"
             android:textSize="@dimen/bottom_button_text_size"
             osmand:typeface="@string/font_roboto_medium"
-            tools:text="@string/configure_map"/>
+            android:text="@string/configure_map"/>
 
     </LinearLayout>
 
@@ -56,7 +57,7 @@
         android:orientation="vertical">
 
         <ImageButton
-            android:focusable="false"
+            android:clickable="false"
             android:id="@+id/map_bottom_button_search_button"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
@@ -65,6 +66,7 @@
             tools:src="@drawable/ic_action_search_dark" />
 
         <net.osmand.plus.widgets.TextViewEx
+            android:ellipsize="end"
             android:maxLines="1"
             android:gravity="center_horizontal"
             android:layout_width="match_parent"
@@ -91,7 +93,7 @@
         android:orientation="vertical">
 
         <ImageButton
-            android:focusable="false"
+            android:clickable="false"
             android:id="@+id/map_bottom_button_hide_button"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
@@ -100,6 +102,7 @@
             tools:src="@drawable/ic_action_arrow_down"/>
 
         <net.osmand.plus.widgets.TextViewEx
+            android:ellipsize="end"
             android:maxLines="1"
             android:gravity="center_horizontal"
             android:layout_width="match_parent"
@@ -126,7 +129,7 @@
         android:orientation="vertical">
 
         <ImageButton
-            android:focusable="false"
+            android:clickable="false"
             android:id="@+id/map_bottom_button_route_button"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
@@ -135,6 +138,7 @@
             tools:src="@drawable/map_directions"/>
 
         <net.osmand.plus.widgets.TextViewEx
+            android:ellipsize="end"
             android:maxLines="1"
             android:gravity="center_horizontal"
             android:layout_width="match_parent"
@@ -161,7 +165,7 @@
         android:orientation="vertical">
 
         <ImageButton
-            android:focusable="false"
+            android:clickable="false"
             android:id="@+id/map_bottom_button_location_button"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
@@ -170,6 +174,7 @@
             tools:src="@drawable/map_my_location"/>
 
         <net.osmand.plus.widgets.TextViewEx
+            android:ellipsize="end"
             android:maxLines="1"
             android:gravity="center_horizontal"
             android:layout_width="match_parent"
@@ -179,7 +184,7 @@
             android:textColor="?android:attr/textColorPrimary"
             android:textSize="@dimen/bottom_button_text_size"
             osmand:typeface="@string/font_roboto_medium"
-            tools:text="@string/map_widget_search"/>
+            android:text="@string/map_widget_search"/>
 
     </LinearLayout>
 
