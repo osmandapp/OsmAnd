@@ -85,7 +85,7 @@ public class MapillaryPlugin extends OsmandPlugin {
 
 	private void createLayers() {
 		rasterLayer = new MapillaryRasterLayer();
-		vectorLayer = new MapillaryVectorLayer(settings);
+		vectorLayer = new MapillaryVectorLayer();
 	}
 
 	@Override

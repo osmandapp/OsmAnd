@@ -9,7 +9,7 @@
     android:paddingStart="52dp">
 
 
-    <net.osmand.plus.mapillary.DelayAutoCompleteTextView
+    <net.osmand.plus.views.controls.DelayAutoCompleteTextView
         android:id="@+id/auto_complete_text_view"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"

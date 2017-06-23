@@ -1,4 +1,4 @@
-package net.osmand.plus.mapillary;
+package net.osmand.plus.views.controls;
 
 import android.content.Context;
 import android.os.Handler;

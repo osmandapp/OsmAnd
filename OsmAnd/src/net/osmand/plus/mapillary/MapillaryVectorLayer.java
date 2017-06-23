@@ -22,7 +22,6 @@ import net.osmand.data.QuadRect;
 import net.osmand.data.RotatedTileBox;
 import net.osmand.map.ITileSource;
 import net.osmand.plus.OsmandPlugin;
-import net.osmand.plus.OsmandSettings;
 import net.osmand.plus.R;
 import net.osmand.plus.rastermaps.OsmandRasterMapsPlugin;
 import net.osmand.plus.resources.ResourceManager;
@@ -31,7 +30,6 @@ import net.osmand.plus.views.MapTileLayer;
 import net.osmand.plus.views.OsmandMapTileView;
 import net.osmand.util.MapUtils;
 
-import java.util.Date;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
@@ -50,11 +48,9 @@ class MapillaryVectorLayer extends MapTileLayer implements MapillaryLayer, ICont
 	private Paint paintLine;
 	private Bitmap point;
 	private Map<QuadPointDouble, Map> visiblePoints = new HashMap<>();
-	private OsmandSettings settings;
 
-	MapillaryVectorLayer(OsmandSettings settings) {
+	MapillaryVectorLayer() {
 		super(false);
-		this.settings = settings;
 	}
 
 	@Override
@@ -200,9 +196,10 @@ class MapillaryVectorLayer extends MapTileLayer implements MapillaryLayer, ICont
 	private boolean skipPoint(Point p) {
 		String userKey = settings.MAPILLARY_FILTER_USER_KEY.get();
 		HashMap<String, Object> userData = (HashMap<String, Object>) p.getUserData();
-		Date capturedAt = new Date((long) userData.get("captured_at"));
+		long capturedAt = (long) userData.get("captured_at");
 		long from = settings.MAPILLARY_FILTER_FROM_DATE.get();
 		long to = settings.MAPILLARY_FILTER_TO_DATE.get();
+
 		if (!userKey.equals("")) {
 			String key = (String) userData.get("userkey");
 			if (!userKey.equals(key)) {
@@ -210,21 +207,11 @@ class MapillaryVectorLayer extends MapTileLayer implements MapillaryLayer, ICont
 			}
 		}
 		if (from != 0 && to != 0) {
-			Date fromDate = new Date(from);
-			Date toDate = new Date(to);
-			if (capturedAt.before(fromDate) || capturedAt.after(toDate)) {
+			if (capturedAt < from || capturedAt > to) {
 				return true;
 			}
-		} else if (from != 0) {
-			Date fromDate = new Date(from);
-			if (capturedAt.before(fromDate)) {
-				return true;
-			}
-		} else if (to != 0) {
-			Date toDate = new Date(to);
-			if (capturedAt.after(toDate)) {
-				return true;
-			}
+		} else if ((from != 0 && capturedAt < from) || (to != 0 && capturedAt > to)) {
+			return true;
 		}
 		return false;
 	}

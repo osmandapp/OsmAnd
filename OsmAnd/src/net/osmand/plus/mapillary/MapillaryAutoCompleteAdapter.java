@@ -41,14 +41,18 @@ import java.util.concurrent.ExecutionException;
 public class MapillaryAutoCompleteAdapter extends ArrayAdapter<String> implements Filterable {
 
     private static final String TAG = MapillaryAutoCompleteAdapter.class.getSimpleName();
-    private ArrayList<String> names;
-    private OsmandApplication app;
+    private final String WRONG_USER_NAME;
+    private final String NO_INTERNET_CONNECTION;
+    private final ArrayList<String> names;
+    private final OsmandApplication app;
     private boolean wrong;
 
     public MapillaryAutoCompleteAdapter(@NonNull Context context, @LayoutRes int resource, OsmandApplication app) {
         super(context, resource);
         names = new ArrayList<>();
         this.app = app;
+        WRONG_USER_NAME = app.getString(R.string.wrong_user_name);
+        NO_INTERNET_CONNECTION = app.getString(R.string.no_inet_connection);
     }
 
     @Override
@@ -65,8 +69,7 @@ public class MapillaryAutoCompleteAdapter extends ArrayAdapter<String> implement
     @Override
     public boolean isEnabled(int position) {
         String text = names.get(position);
-        if (text.equals(app.getString(R.string.wrong_user_name)) ||
-                text.equals(app.getString(R.string.no_inet_connection))) {
+        if (text.equals(WRONG_USER_NAME) || text.equals(NO_INTERNET_CONNECTION)) {
             return false;
         }
         return true;
@@ -82,12 +85,12 @@ public class MapillaryAutoCompleteAdapter extends ArrayAdapter<String> implement
                 if (constraint != null) {
                     try {
                         OsmandSettings settings = app.getSettings();
+                        names.clear();
                         if (!settings.isInternetConnectionAvailable()) {
-                            names.add(app.getString(R.string.no_inet_connection));
+                            names.add(NO_INTERNET_CONNECTION);
                             wrong = true;
                         } else {
                             Pair<String, String> user = new GetMapillaryUserAsyncTask().execute(constraint.toString()).get();
-                            names.clear();
                             if (user != null) {
                                 settings.MAPILLARY_FILTER_USER_KEY.set(user.first);
                                 settings.MAPILLARY_FILTER_USERNAME.set(user.second);
@@ -96,7 +99,7 @@ public class MapillaryAutoCompleteAdapter extends ArrayAdapter<String> implement
                             } else {
                                 settings.MAPILLARY_FILTER_USER_KEY.set("");
                                 settings.MAPILLARY_FILTER_USERNAME.set("");
-                                names.add(app.getString(R.string.wrong_user_name));
+                                names.add(WRONG_USER_NAME);
                                 wrong = true;
                             }
                         }
