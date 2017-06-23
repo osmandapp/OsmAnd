@@ -75,6 +75,7 @@
 	<color name="list_item_light_pressed">#8cd0d0d0</color>
 	<color name="list_item_dark_pressed">#be39464d</color>
 	<color name="bg_color_light">#fff</color>
+	<color name="bg_color_light_5_transparency">#f2f0f0f0</color>
 	<color name="bg_color_dark">#333b40</color>
 
 	<color name="fab_color">#ff8f00</color>

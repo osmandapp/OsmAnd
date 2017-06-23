@@ -10,6 +10,7 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.view.Window;
 import android.view.WindowManager;
+import android.widget.ImageView;
 
 import net.osmand.plus.IconsCache;
 import net.osmand.plus.OsmAndLocationProvider;
@@ -22,10 +23,11 @@ import net.osmand.plus.views.MapControlsLayer;
 public class MapBottomButtonsDialogFragment extends BottomSheetDialogFragment {
     private MapActivity mapActivity;
     private BottomSheetBehavior bottomSheetBehavior;
+    private boolean isLightTheme;
 
     @Override
     public Dialog onCreateDialog(Bundle savedInstanceState) {
-        boolean isLightTheme = getMyApplication()
+        isLightTheme = getMyApplication()
                 .getSettings().OSMAND_THEME.get() == OsmandSettings.OSMAND_LIGHT_THEME;
         int themeId = isLightTheme ? R.style.OsmandLightTheme_BottomSheet
                 : R.style.OsmandDarkTheme_BottomSheet;
@@ -48,31 +50,36 @@ public class MapBottomButtonsDialogFragment extends BottomSheetDialogFragment {
 
         IconsCache ic = mapActivity.getMyApplication().getIconsCache();
 
-        View parentLayout = view.findViewById(R.id.map_bottom_buttons);
-        parentLayout.setBackgroundColor(getActivity().getResources().getColor(R.color.bg_color_light));
-
         View configureMapView = view.findViewById(R.id.map_bottom_button_configure_map_view);
+        ((ImageView) view.findViewById(R.id.map_bottom_button_configure_map_button)).
+                setImageDrawable(ic.getPaintedIcon(R.drawable.ic_action_layers_dark, mapActivity.getResources().getColor(R.color.on_map_icon_color)));
         configureMapView.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
                 MapActivity.clearPrevActivityIntent();
                 mapActivity.getDashboard().setDashboardVisibility(true, DashboardOnMap.DashboardType.CONFIGURE_MAP);
                 dismiss();
+                bottomSheetBehavior.setHideable(true);
                 bottomSheetBehavior.setState(BottomSheetBehavior.STATE_HIDDEN);
             }
         });
 
         View searchView = view.findViewById(R.id.map_bottom_button_search_view);
+        ((ImageView) view.findViewById(R.id.map_bottom_button_search_button)).
+                setImageDrawable(ic.getPaintedIcon(R.drawable.ic_action_search_dark, mapActivity.getResources().getColor(R.color.on_map_icon_color)));
         searchView.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
                 mapActivity.showQuickSearch(MapActivity.ShowQuickSearchMode.NEW_IF_EXPIRED, false);
                 dismiss();
+                bottomSheetBehavior.setHideable(true);
                 bottomSheetBehavior.setState(BottomSheetBehavior.STATE_HIDDEN);
             }
         });
 
         View hideView = view.findViewById(R.id.map_bottom_button_hide_view);
+        ((ImageView) view.findViewById(R.id.map_bottom_button_hide_button)).
+                setImageDrawable(ic.getPaintedIcon(R.drawable.ic_action_arrow_down, mapActivity.getResources().getColor(R.color.on_map_icon_color)));
         hideView.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
@@ -83,6 +90,8 @@ public class MapBottomButtonsDialogFragment extends BottomSheetDialogFragment {
         });
 
         View routeView = view.findViewById(R.id.map_bottom_button_route_view);
+        ((ImageView) view.findViewById(R.id.map_bottom_button_route_button)).
+                setImageDrawable(ic.getPaintedIcon(R.drawable.ic_action_gdirections_dark, mapActivity.getResources().getColor(R.color.on_map_icon_color)));
         routeView.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
@@ -91,11 +100,14 @@ public class MapBottomButtonsDialogFragment extends BottomSheetDialogFragment {
                     mapControlsLayer.doRoute(false);
                 }
                 dismiss();
+                bottomSheetBehavior.setHideable(true);
                 bottomSheetBehavior.setState(BottomSheetBehavior.STATE_HIDDEN);
             }
         });
 
         View locationView = view.findViewById(R.id.map_bottom_button_location_view);
+        ((ImageView) view.findViewById(R.id.map_bottom_button_location_button)).
+                setImageDrawable(ic.getPaintedIcon(R.drawable.map_my_location, mapActivity.getResources().getColor(R.color.on_map_icon_color)));
         locationView.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
@@ -107,6 +119,7 @@ public class MapBottomButtonsDialogFragment extends BottomSheetDialogFragment {
                             OsmAndLocationProvider.REQUEST_LOCATION_PERMISSION);
                 }
                 dismiss();
+                bottomSheetBehavior.setHideable(true);
                 bottomSheetBehavior.setState(BottomSheetBehavior.STATE_HIDDEN);
             }
         });

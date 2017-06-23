@@ -364,6 +364,7 @@ public class MapControlsLayer extends OsmandMapLayer {
 				MapActivity.clearPrevActivityIntent();
 				mapActivity.getDashboard().setDashboardVisibility(true, DashboardOnMap.DashboardType.DASHBOARD);
 				mapBottomButtonsDialogFragment.dismiss();
+				bottomSheetBehavior.setHideable(true);
 				bottomSheetBehavior.setState(BottomSheetBehavior.STATE_HIDDEN);
 			}
 		});
@@ -380,6 +381,7 @@ public class MapControlsLayer extends OsmandMapLayer {
 				MapActivity.clearPrevActivityIntent();
 				mapActivity.getDashboard().setDashboardVisibility(true, DashboardOnMap.DashboardType.MAP_MARKERS);
 				mapBottomButtonsDialogFragment.dismiss();
+				bottomSheetBehavior.setHideable(true);
 				bottomSheetBehavior.setState(BottomSheetBehavior.STATE_HIDDEN);
 			}
 		});
@@ -396,6 +398,7 @@ public class MapControlsLayer extends OsmandMapLayer {
 				MapActivity.clearPrevActivityIntent();
 				mapActivity.getDashboard().setDashboardVisibility(true, DashboardOnMap.DashboardType.WAYPOINTS);
 				mapBottomButtonsDialogFragment.dismiss();
+				bottomSheetBehavior.setHideable(true);
 				bottomSheetBehavior.setState(BottomSheetBehavior.STATE_HIDDEN);
 			}
 		});
@@ -411,6 +414,7 @@ public class MapControlsLayer extends OsmandMapLayer {
 				newIntent.setFlags(Intent.FLAG_ACTIVITY_REORDER_TO_FRONT);
 				mapActivity.startActivity(newIntent);
 				mapBottomButtonsDialogFragment.dismiss();
+				bottomSheetBehavior.setHideable(true);
 				bottomSheetBehavior.setState(BottomSheetBehavior.STATE_HIDDEN);
 			}
 		});
@@ -435,6 +439,7 @@ public class MapControlsLayer extends OsmandMapLayer {
 				newIntent.addFlags(Intent.FLAG_ACTIVITY_REORDER_TO_FRONT);
 				mapActivity.startActivity(newIntent);
 				mapBottomButtonsDialogFragment.dismiss();
+				bottomSheetBehavior.setHideable(true);
 				bottomSheetBehavior.setState(BottomSheetBehavior.STATE_HIDDEN);
 			}
 		});
@@ -459,6 +464,7 @@ public class MapControlsLayer extends OsmandMapLayer {
 				newIntent.addFlags(Intent.FLAG_ACTIVITY_REORDER_TO_FRONT);
 				mapActivity.startActivity(newIntent);
 				mapBottomButtonsDialogFragment.dismiss();
+				bottomSheetBehavior.setHideable(true);
 				bottomSheetBehavior.setState(BottomSheetBehavior.STATE_HIDDEN);
 			}
 		});
@@ -476,6 +482,7 @@ public class MapControlsLayer extends OsmandMapLayer {
 				intent.addFlags(Intent.FLAG_ACTIVITY_REORDER_TO_FRONT);
 				mapActivity.startActivity(intent);
 				mapBottomButtonsDialogFragment.dismiss();
+				bottomSheetBehavior.setHideable(true);
 				bottomSheetBehavior.setState(BottomSheetBehavior.STATE_HIDDEN);
 			}
 		});
@@ -491,6 +498,7 @@ public class MapControlsLayer extends OsmandMapLayer {
 				newIntent.addFlags(Intent.FLAG_ACTIVITY_REORDER_TO_FRONT);
 				mapActivity.startActivity(newIntent);
 				mapBottomButtonsDialogFragment.dismiss();
+				bottomSheetBehavior.setHideable(true);
 				bottomSheetBehavior.setState(BottomSheetBehavior.STATE_HIDDEN);
 			}
 		});
@@ -504,6 +512,7 @@ public class MapControlsLayer extends OsmandMapLayer {
 				MapActivity.clearPrevActivityIntent();
 				mapActivity.getDashboard().setDashboardVisibility(true, DashboardOnMap.DashboardType.CONFIGURE_SCREEN);
 				mapBottomButtonsDialogFragment.dismiss();
+				bottomSheetBehavior.setHideable(true);
 				bottomSheetBehavior.setState(BottomSheetBehavior.STATE_HIDDEN);
 			}
 		});
@@ -519,6 +528,7 @@ public class MapControlsLayer extends OsmandMapLayer {
 				settings.addFlags(Intent.FLAG_ACTIVITY_REORDER_TO_FRONT);
 				mapActivity.startActivity(settings);
 				mapBottomButtonsDialogFragment.dismiss();
+				bottomSheetBehavior.setHideable(true);
 				bottomSheetBehavior.setState(BottomSheetBehavior.STATE_HIDDEN);
 			}
 		});
@@ -533,6 +543,7 @@ public class MapControlsLayer extends OsmandMapLayer {
 				intent.addFlags(Intent.FLAG_ACTIVITY_REORDER_TO_FRONT);
 				mapActivity.startActivity(intent);
 				mapBottomButtonsDialogFragment.dismiss();
+				bottomSheetBehavior.setHideable(true);
 				bottomSheetBehavior.setState(BottomSheetBehavior.STATE_HIDDEN);
 			}
 		});

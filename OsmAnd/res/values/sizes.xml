@@ -70,7 +70,7 @@
 	<dimen name="map_ruler_radius">100dp</dimen>
 	<dimen name="map_ruler_width">120dp</dimen>
 	<dimen name="map_ruler_bottom_margin">9dp</dimen>
-	<dimen name="map_ruler_layout_bottom_margin">80dp</dimen>
+	<dimen name="map_ruler_layout_bottom_margin">77dp</dimen>
 	<dimen name="map_alarm_size">78dp</dimen>
 	
 	
@@ -86,7 +86,8 @@
 	<dimen name="map_button_spacing">11dp</dimen>
 	<dimen name="map_button_spacing_land">6dp</dimen>
 	<dimen name="map_button_margin">6dp</dimen>
-	<dimen name="map_zoom_buttons_bottom_margin">122dp</dimen>
+	<dimen name="map_button_margin_new">1dp</dimen>
+	<dimen name="map_zoom_buttons_bottom_margin">145dp</dimen>
 	<dimen name="map_routing_progress_width">100dp</dimen>
 	
 	
@@ -136,6 +137,7 @@
     <!-- TextSizes -->
     <dimen name="default_list_text_size_large">19sp</dimen>
     <dimen name="default_list_text_size">16sp</dimen>
+	<dimen name="bottom_button_text_size">10sp</dimen>
     <dimen name="default_desc_text_size">14sp</dimen>
     <dimen name="default_sub_text_size">12sp</dimen>
 	<dimen name="welcome_header_text_size">23sp</dimen>

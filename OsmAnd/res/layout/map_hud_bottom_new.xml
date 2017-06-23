@@ -71,7 +71,7 @@
             android:layout_height="wrap_content"
             android:layout_gravity="bottom"
             android:layout_marginBottom="@dimen/map_ruler_layout_bottom_margin"
-            android:layout_marginLeft="@dimen/map_button_margin">
+            android:layout_marginLeft="@dimen/map_button_margin_new">
 
             <FrameLayout
                 android:layout_width="fill_parent"
@@ -150,9 +150,9 @@
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_gravity="bottom|left"
-            android:layout_marginBottom="@dimen/map_button_margin"
-            android:layout_marginLeft="@dimen/map_button_margin"
-            android:layout_marginRight="@dimen/map_button_margin">
+            android:layout_marginBottom="@dimen/map_button_margin_new"
+            android:layout_marginLeft="@dimen/map_button_margin_new"
+            android:layout_marginRight="@dimen/map_button_margin_new">
 
             <ImageButton
                 android:id="@+id/map_layers_button"
@@ -221,8 +221,7 @@
             android:layout_height="wrap_content"
             android:layout_gravity="bottom|right"
             android:layout_marginBottom="@dimen/map_zoom_buttons_bottom_margin"
-            android:layout_marginRight="@dimen/map_button_margin"
-            android:layout_marginLeft="@dimen/map_button_spacing"
+            android:layout_marginRight="@dimen/map_button_margin_new"
             android:orientation="vertical">
 
             <ImageButton
@@ -237,7 +236,6 @@
                 android:id="@+id/map_zoom_out_button"
                 android:layout_width="@dimen/map_button_size_new"
                 android:layout_height="@dimen/map_button_size_new"
-                android:layout_marginTop="@dimen/map_button_spacing"
                 android:background="@drawable/btn_circle_trans_35_new"
                 android:contentDescription="@string/zoomOut"
                 tools:src="@drawable/ic_action_test_light" />
