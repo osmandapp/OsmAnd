@@ -1507,9 +1507,10 @@ OsmAnd هو المصدر المفتوح و التي يجري تطويرها بن
     <string name="delay_navigation_start">ابدأ التوجيه دروان بدوران تلقائيا</string>
     <string name="gpx_info_subtracks">مسارات فرعية: %1$s</string>
 	<string name="gpx_info_waypoints">وجهات: %1$s</string>
-	<string name="gpx_info_distance">المسافة: %1$s (ـ s$%2 نقطة)</string>
-	<string name="gpx_info_start_time">وقت البداية: %1$Tt$1% ,Ft</string>
-	<string name="gpx_info_end_time">وقت الانتهاء: %1$Tt$1% ,Ft</string>
+	<string name="gpx_info_distance">المسافة: %1$s (%2$s نقطة)</string>
+	<string name="gpx_info_start_time">وقت البداية: %1$tF,  %1$tT </string>
+	<string name="gpx_info_end_time">وقت الانتهاء: %1$tF,  %1$tT </string>
+
 	<string name="gpx_info_average_speed">السرعة المتوسطة : %1$s</string>
 	<string name="gpx_info_maximum_speed">السرعة القصوى: %1$s</string>
 	<string name="gpx_info_avg_altitude">متوسط الارتفاع عن سطح البحر: %1$s</string>
