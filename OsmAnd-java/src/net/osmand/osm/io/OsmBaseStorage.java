@@ -262,7 +262,7 @@ public class OsmBaseStorage {
 		if (parser.getAttributeName(parser.getAttributeCount() - 1).equals(ATTR_VERSION)) {
 			return Integer.valueOf(parser.getAttributeValue(parser.getAttributeCount() - 1));
 		}
-		return -1;
+		return 0;
 	}
 
 	public void endElement(XmlPullParser parser, String name) {
