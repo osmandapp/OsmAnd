@@ -408,10 +408,10 @@ public class EditPoiDialogFragment extends BaseOsmAndDialogFragment {
 		for(int i = 0; i < name.length(); i++) {
 			char c = name.charAt(i);
 			if(Character.isLetter(c) || Character.getType(c) == Character.LETTER_NUMBER) {
-				if(Character.toUpperCase(c) != c && Character.toLowerCase(c) == c) {
-					lower ++;
-				} else {
+				if(Character.isUpperCase(c)) {
 					capital ++;
+				} else {
+					lower ++;
 				}
 			} else {
 				nonalpha ++;
