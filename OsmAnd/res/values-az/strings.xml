@@ -862,8 +862,8 @@
     <string name="city_type_neighbourhood">Ətrafında</string>
     <string name="coords_format_descr">Coğrafi koordinatlar üçün format</string>
     <string name="current_track">Hazırki iz</string>
-    <string name="change_markers_position">İşarələyicinin mövqeyini dəyiş</string>
-    <string name="move_marker_bottom_sheet_title">İşarələyicinin mövqeyini dəyişmək üçün xəritəni daşıyın</string>
+    <string name="change_markers_position">İşarənin mövqeyini dəyiş</string>
+    <string name="move_marker_bottom_sheet_title">İşarənin mövqeyini dəyişmək üçün xəritəni daşıyın</string>
     <string name="access_no_destination">Təyinat nöqtəsi seçilməyib</string>
     <string name="access_hint_enter_description">Açıqlama daxil et</string>
     <string name="access_widget_expand">Genişlət</string>
@@ -1556,8 +1556,8 @@
     <string name="rotate_map_compass_opt">Kompasa görə</string>
     <string name="rotate_map_bearing_opt">Hərəkət istiqamətində</string>
     <string name="poi_context_menu_modify">POI-yə düzəliş et</string>
-    <string name="select_map_marker">Xəritə işarələyici seçin</string>
-    <string name="map_markers_other">Digər işarələyicilər</string>
+    <string name="select_map_marker">Xəritə işarəsi seçin</string>
+    <string name="map_markers_other">Digər işarələr</string>
     <string name="rendering_attr_hideUnderground_name">Yeraltı obyektlər</string>
     <string name="data_is_not_available">Məlumatlar mövcud deyil</string>
     <string name="starting_point">Başlanğıc nöqtə</string>
@@ -1580,4 +1580,16 @@
     <string name="osm_user_stat">%1$s düzəliş, %2$s dərəcə, cəmi %3$s düzəliş</string>
     <string name="osm_editors_ranking">OSM Redaktorlar sıralaması</string>
     <string name="shared_string_reverse_order">Əksinə sırala</string>
+    <string name="map_marker_1st">İlk xəritə işarəsi</string>
+    <string name="map_marker_2nd">İkinci xəritə işarəsi</string>
+    <string name="add_points_to_map_markers_q">Bütün nöqtələri xəritə işarələrinə əlavə etmək istəyirsiniz?</string>
+    <string name="shared_string_add_to_map_markers">Xəritə işarələrinə əlavə et</string>
+    <string name="select_map_markers">Xəritə işarələri seçin</string>
+    <string name="show_map_markers_description">Xəritə işarələri xüsusiyyətini aktivləşdir</string>
+    <string name="clear_active_markers_q">Bütün aktiv işarələri silmək istəyirsiniz?</string>
+    <string name="clear_markers_history_q">Xəritə işarələri tarixçəsini təmizləmək istəyirsiniz?</string>
+    <string name="active_markers">Aktiv işarələr</string>
+    <string name="map_markers">Xəritə işarələri</string>
+    <string name="map_marker">Xəritə işarəsi</string>
+    <string name="quick_action_add_marker">Xəritə işarəsi əlavə et</string>
     </resources>
