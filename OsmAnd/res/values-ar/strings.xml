@@ -2866,5 +2866,5 @@ OsmAnd هو المصدر المفتوح و التي يجري تطويرها بن
     <string name="quick_action_duplicates">اسم الإجراء السريع المحدد قيد الاستخدام، لقد تم تغييره إلى %1$s لتجنب التكرار.</string>
     <string name="quick_action_page_list_descr">النقر على زر الإجراء سوف يوجهك خلال القائمة أدناه.</string>
     <string name="route_points_category_name">انعطافات لتمر بهذا الطريق</string>
-    <string name="navigate_point_olc_info_area">OLC الصالحة بالكامل\nتمثل المنطقة: %1$s2% x $s</string>
+    <string name="navigate_point_olc_info_area">OLC الصالحة بالكامل\nتمثل المنطقة: %1$s %2 x $s</string>
     </resources>
