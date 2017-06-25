@@ -1303,17 +1303,17 @@
     <string name="rendering_value_light_brown_name">浅棕色</string>
     <string name="rendering_value_dark_brown_name">深棕色</string>
     <string name="use_osm_live_routing">OSM 实时导航</string>
-    <string name="release_2_3">" • OSM 实时功能。支持地图贡献者和开发者获取每小时更新的地图。 
-\n
-\n • 地图标记。新的快速地图选点的方式。
-\n
-\n • 更多详细的国别特有的道路标志以及包含许多新地图功能的 OSM 地图。
-\n
+    <string name="release_2_3">\\022 OSM 实时功能。支持地图贡献者和开发者获取每小时更新的地图。 
+\n 
+\n • 地图标记。新的快速地图选点的方式。 
+\n 
+\n • 更多详细的国别特有的道路标志以及包含许多新地图功能的 OSM 地图。 
+\n 
 \n • 改进的导航准备界面外观显示。 
 \n
-\n • 上下文菜单的许多改进，例如上下文中的地址查找。
-\n
-\n还有更多…… "</string>
+\n • 上下文菜单的许多改进，例如上下文中的地址查找。 
+\n 
+\n还有更多……</string>
     <string name="get_directions">导航</string>
     <string name="settings_privacy">隐私</string>
     <string name="proxy_pref_title">代理</string>
@@ -1697,13 +1697,19 @@
     <string name="rendering_value_thin_name">细的</string>
     <string name="rendering_value_medium_name">中等</string>
     <string name="rendering_value_bold_name">加粗</string>
-    <string name="osmo_group_information_desc">" - 创建一个群组，并请给它一个名称和填写说明 
+    <string name="osmo_group_information_desc">- 创建一个群组，并请给它一个名称和填写说明 
+\n
 \n - 从应用程序创建的群组只是简单的类型，在网站 https://osmo.mobi/g/new 了解更多 
+\n
 \n - 透过这个网站，您可以管理群组、地点追踪和所有可用标点 
+\n
 \n - 如果这不是 POI 群组，我们不赞同使用的群组只有一个用户 
+\n
 \n - 私人群组仅限于 8 人 
+\n
 \n - 详细的条款及条件一直在网站 OsMo.mobi 上 
-\n - 如果您需要特别的条件 - 请连络支持︰osmo.mobi@gmail.com "</string>
+\n
+\n - 如果您需要特别的条件 - 请连络支持︰osmo.mobi@gmail.com</string>
     <string name="osmo_no_connection_msg">无法连接到 OsMo 服务器：
 \n - 检查您的互联网连接； 
 \n- 检查设置； 
@@ -1713,11 +1719,11 @@
 \n- 以服务器同步群组和设备；
 \n- 在网站上的个人仪表板管理群组和设备。</string>
     <string name="osmo_auto_send_locations_descr">自动开始旅行并在应用程序启动后发送位置</string>
-    <string name="osmo_plugin_description">"这个插件部分提供了 OpenStreetMap 监控功能，请参阅 http://osmo.mobi。 
-\n 
+    <string name="osmo_plugin_description">这个插件部分提供了 OpenStreetMap 监控功能，请参阅 http://osmo.mobi。 
+\n
 \n您可以即时追踪所有参与群组的设备。具有各种选项用于连接期间追踪或持续的追踪。您还可以查看上传到您所属群组的航点和轨迹。 
-\n 
-\n经过几个月不移除该群组，使其符合您在 OsMo.mobi 网站上创建的群组规则 "</string>
+\n
+\n经过几个月不移除该群组，使其符合您在 OsMo.mobi 网站上创建的群组规则</string>
     <string name="storage_permission_restart_is_required">现在应用程序允许写入外部存储。需要手动重新启动应用程序。</string>
     <string name="storage_directory_readonly_desc">当前所选的数据存储文件夹是只读的。存储文件夹暂时切换到内部存储。请选择有效的存储目录。</string>
     <string name="osm_live_region_desc">你捐款的一部分将发送给 OSM，用户将更改提交到该地区地图</string>
@@ -1739,25 +1745,25 @@
     <string name="no_camera_permission">应用程序没有权限访问摄像头。</string>
     <string name="no_microphone_permission">应用程序没有访问麦克风的权限。</string>
     <string name="show_on_start_description">“关闭”会直接启动地图屏幕</string>
-    <string name="release_2_2">" • 在地图上和其它屏幕上，为点击位置做了新的敏捷内容菜单用户界面 
-\n 
+    <string name="release_2_2">\\022 在地图上和其它屏幕上，为点击位置做了新的敏捷内容菜单用户界面 
+\n
 \n • 地图屏幕上现在除了直接启动外，还有\'在应用程序时启动显示仪表板\'可选 
-\n 
+\n
 \n • 组态哪些以及何种卡可以在仪表板上显示 
-\n 
+\n
 \n • 如果您喜欢基本菜单的应用程序控制，绕过仪表板方式 
-\n 
-\n • 要下载地图，可以直接在全球地图上点击区域 
+\n
+\n • 要下载地图，可以直接在全球地图上点击区域
 \n 
 \n • 更好的重新计算路线（现在引擎经过反复的尝试，建议一条不同的路线） 
-\n 
+\n
 \n • 兴趣点搜索现在支持更具体的查找 
-\n 
+\n
 \n • 改善过的兴趣点和 OSM 编辑功能 
-\n 
+\n
 \n • 地图数据下载结构和界面重新设计 
-\n 
-\n 还有更多… "</string>
+\n
+\n 还有更多…</string>
     <string name="share_osm_edits_subject">通过 OsmAnd 协作编辑 OSM</string>
     <string name="lang_nds">低地德语</string>
     <string name="lang_mk">马其顿</string>
@@ -1849,21 +1855,21 @@
     <string name="route_points">路线点</string>
     <string name="track_segments">轨迹区段</string>
     <string name="track_points">轨迹点</string>
-    <string name="osmand_rastermaps_plugin_description">"有了这个插件，您可以访问多种类型的网上（所谓的图砖或网格）地图，从默认的 OpenStreetMap 图砖（如 Mapnik）到卫星图像和特殊用途的图层，比如天气地图、气候地图、地质地图、地形阴影层等。 
-\n 
+    <string name="osmand_rastermaps_plugin_description">有了这个插件，您可以访问多种类型的网上（所谓的图砖或网格）地图，从默认的 OpenStreetMap 图砖（如 Mapnik）到卫星图像和特殊用途的图层，比如天气地图、气候地图、地质地图、地形阴影层等。 
+\n
 \n这些地图可以用来作为主要的（基本）地图，以便在 OsmAnd 地图屏幕上显示，或作为上层又或另外基本地图的底层（如 OsmAnd 标准的离线地图）。为了使任何的底层地图可以看见，OsmAnd 矢量地图可以容易的根据需要透过 \'组态地图\' 菜单来隐藏某些构成。 
-\n 
-\n地图图砖可以直接透过在线数据源获得，或者可以使用准备好的脱机地图（手动复制到 OsmAnd 的数据文件夹中） 作为一个 SQLite 数据库，可以透过各种的第三方地图编制工具产生。 "</string>
+\n
+\n地图图砖可以直接透过在线数据源获得，或者可以使用准备好的脱机地图（手动复制到 OsmAnd 的数据文件夹中） 作为一个 SQLite 数据库，可以透过各种的第三方地图编制工具产生。</string>
     <string name="record_plugin_name">旅行记录</string>
-    <string name="record_plugin_description">"这个插件在地图屏幕上，并手动轻击 GPX 记录小工具，以启动去录制和保存您轨迹的功能，或是自动记录您所有的导航路线到 GPX 文件。 
-\n 
-\n录制的轨迹可以与您的朋友共享或用作为 OSM 的贡献。运动选手可以使用录制的轨迹，监看他们的训练。一些基本的轨迹分析，可以直接在 OsmAnd 进行，如一圈的时间、平均速度等，而轨迹当然也可于事后在专门的第三方分析工具解析。 "</string>
-    <string name="osmand_srtm_long_description_1000_chars">"这个插件同时提供了等高在线层和（地貌）地形阴影层，显示在 OsmAnd 标准地图的顶部。此功能会让运动选手、健行旅游者、背包客，和对起伏的地理构成感兴趣的任何人。 
-\n 
-\n全球数据（在北纬 70 度至南纬 70 度之间）的测量基于 SRTM (Shuttle Radar Topography Mission)和 ASTER (Advanced Spaceborne Thermal Emission and Reflection Radiometer)，安装在美国太空总署地球观测系统的旗舰卫星 Terra 上的遥测仪器，ASTER 是美国太空总署、日本经济产业省(METI)、日本太空系统 (J-spacesystems)之间的通力合作产物。 "</string>
-    <string name="srtm_plugin_description">"这个插件组件同时提供了等高在线层和（地貌）地形阴影层，显示在 OsmAnd 标准地图的顶部。此功能会让运动选手、健行旅游者、背包客，和对起伏的地理构成感兴趣的任何人。（请注意，等高线和地貌数据是各自独立的，在插件组件启用后可以追加下载。） 
-\n 
-\n全球数据（在 70 度以北和 70 度以南之间）的测量基于 SRTM（Shuttle Radar Topography Mission）和 ASTER（Advanced Spaceborne Thermal Emission and Reflection Radiometer），安装在美国太空总署地球观测系统的旗舰卫星 Terra 上的遥测仪器，ASTER 是美国太空总署、日本经济产业省（METI）、日本太空系统（J-spacesystems）之间的通力合作的产物。 "</string>
+    <string name="record_plugin_description">这个插件在地图屏幕上，并手动轻击 GPX 记录小工具，以启动去录制和保存您轨迹的功能，或是自动记录您所有的导航路线到 GPX 文件。 
+\n
+\n录制的轨迹可以与您的朋友共享或用作为 OSM 的贡献。运动选手可以使用录制的轨迹，监看他们的训练。一些基本的轨迹分析，可以直接在 OsmAnd 进行，如一圈的时间、平均速度等，而轨迹当然也可于事后在专门的第三方分析工具解析。</string>
+    <string name="osmand_srtm_long_description_1000_chars">这个插件同时提供了等高在线层和（地貌）地形阴影层，显示在 OsmAnd 标准地图的顶部。此功能会让运动选手、健行旅游者、背包客，和对起伏的地理构成感兴趣的任何人。 
+\n
+\n全球数据（在北纬 70 度至南纬 70 度之间）的测量基于 SRTM (Shuttle Radar Topography Mission)和 ASTER (Advanced Spaceborne Thermal Emission and Reflection Radiometer)，安装在美国太空总署地球观测系统的旗舰卫星 Terra 上的遥测仪器，ASTER 是美国太空总署、日本经济产业省(METI)、日本太空系统 (J-spacesystems)之间的通力合作产物。</string>
+    <string name="srtm_plugin_description">这个插件组件同时提供了等高在线层和（地貌）地形阴影层，显示在 OsmAnd 标准地图的顶部。此功能会让运动选手、健行旅游者、背包客，和对起伏的地理构成感兴趣的任何人。（请注意，等高线和地貌数据是各自独立的，在插件组件启用后可以追加下载。） 
+\n
+\n全球数据（在 70 度以北和 70 度以南之间）的测量基于 SRTM（Shuttle Radar Topography Mission）和 ASTER（Advanced Spaceborne Thermal Emission and Reflection Radiometer），安装在美国太空总署地球观测系统的旗舰卫星 Terra 上的遥测仪器，ASTER 是美国太空总署、日本经济产业省（METI）、日本太空系统（J-spacesystems）之间的通力合作的产物。</string>
     <string name="plugin_touringview_name">旅游地图视图</string>
     <string name="plugin_nautical_name">航海地图视图</string>
     <string name="audionotes_plugin_description">音频/视频附注插件组件提供的功能，在旅程中取得的音频/照相/视频之注解，使用在地图画面上的按钮，或地图上任何的位置直接显示上下文菜单。</string>
@@ -1951,25 +1957,25 @@
     <string name="int_hour">小时</string>
     <string name="duration">持续时间</string>
     <string name="distance">距离</string>
-    <string name="plugin_touringview_descr">"启动此预览的地图样式更改为“旅游查看”，这是给旅客和职业司机的一种特殊的高细节查看。 
-\n 
+    <string name="plugin_touringview_descr">启动此预览的地图样式更改为“旅游查看”，这是给旅客和职业司机的一种特殊的高细节查看。 
+\n
 \n此预览提供了在任何给与的地图缩放，（特别是公路、轨道、路径和定位标记）在地图数据中最大量可获得的详细行程。 
-\n 
+\n
 \n它也清楚地描绘了各类道路明确地色码，例如驾驶大型车辆时，这是非常有用的。 
-\n 
+\n
 \n并提供了特别的旅游选项，比如显示自行车路线或高山的路线。 
-\n 
+\n
 \n此预览是从我们的标准地图所创建，不需要下载特殊的地图。 
-\n 
-\n此预览可以在这里经由再次取消启动，或透过“配置地图”下的“地图样式”这两者中任何一个的更改而恢复它。 "</string>
-    <string name="plugin_nautical_descr">"这个插件丰富了 OsmAnd 地图和导航应用，也为了划船、帆船、与其他类型的水上运动，产生了航海地图。 
-\n 
+\n
+\n此预览可以在这里经由再次取消启动，或透过“配置地图”下的“地图样式”这两者中任何一个的更改而恢复它。</string>
+    <string name="plugin_nautical_descr">这个插件丰富了 OsmAnd 地图和导航应用，也为了划船、帆船、与其他类型的水上运动，产生了航海地图。 
+\n
 \n一个为 OsmAnd 附加的特有地图，将提供用于所有内陆近岸航行的航海导航标志和图表符号。每个导航标志描述提供需识别出它们和它们含义的详细信息（类别、形状、颜色、串行、参考等）。 
-\n 
-\n要返回到 OsmAnd 惯用的地图模式，再次取消这个插件的启动，或“配置地图”下的“地图样式”，在这两者中的任何一个的更改都可轻易的回复。 "</string>
-    <string name="plugin_ski_descr">"此插件为 OsmAnd 所安置，让您在全球滑雪斜坡、越野滑雪、阿尔卑斯山的滑雪路线、缆车和滑雪缆车上的详细信息了若指掌。以颜色编码显示路线和滑雪道的困难度，并且在特殊的“冬季”地图样式描画出，哪个在冬季景观变成雪色。 
-\n 
-\n启动此预览，会更改地图样式到“冬季和滑雪”，显示出冬季的条件下，所有的景观特征。此查看可以在这里经由再次取消启动，或通过“配置地图”下的“地图样式”这两者中任何一个的更改而恢复它。 "</string>
+\n
+\n要返回到 OsmAnd 惯用的地图模式，再次取消这个插件的启动，或“配置地图”下的“地图样式”，在这两者中的任何一个的更改都可轻易的回复。</string>
+    <string name="plugin_ski_descr">此插件为 OsmAnd 所安置，让您在全球滑雪斜坡、越野滑雪、阿尔卑斯山的滑雪路线、缆车和滑雪缆车上的详细信息了若指掌。以颜色编码显示路线和滑雪道的困难度，并且在特殊的“冬季”地图样式描画出，哪个在冬季景观变成雪色。 
+\n
+\n启动此预览，会更改地图样式到“冬季和滑雪”，显示出冬季的条件下，所有的景观特征。此查看可以在这里经由再次取消启动，或通过“配置地图”下的“地图样式”这两者中任何一个的更改而恢复它。</string>
     <string name="index_tours">旅游</string>
     <string name="shared_string_all">全部</string>
     <string name="waypoints">路标</string>
