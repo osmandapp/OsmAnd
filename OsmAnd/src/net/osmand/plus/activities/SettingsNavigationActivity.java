@@ -293,6 +293,8 @@ public class SettingsNavigationActivity extends SettingsBaseActivity {
 					if (player != null) {
 						player.updateAudioStream(settings.AUDIO_STREAM_GUIDANCE.get());
 					}
+					// Sync DEFAULT value with CAR value, as we have other way to set it for now
+					settings.AUDIO_STREAM_GUIDANCE.setModeValue(ApplicationMode.DEFAULT, settings.AUDIO_STREAM_GUIDANCE.getModeValue(ApplicationMode.CAR));
 					return true;
 				}
 			});

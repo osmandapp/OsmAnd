@@ -326,7 +326,7 @@ public abstract class AbstractPrologCommandPlayer implements CommandPlayer, Stat
 			try {
 				AudioManager mAudioManager = (AudioManager) ctx.getSystemService(Context.AUDIO_SERVICE);
 				if (mAudioManager == null || !mAudioManager.isBluetoothScoAvailableOffCall()) {
-					  btScoInit = "BT SCO available:   NO";
+					  btScoInit = "Reported not available.";
 					return false;
 				}
 				mAudioManager.setMode(0);
@@ -337,10 +337,10 @@ public abstract class AbstractPrologCommandPlayer implements CommandPlayer, Stat
 			} catch (Exception e) {
 				System.out.println("Exception starting BT SCO " + e.getMessage() );
 				btScoStatus = false;
-					  btScoInit = "BT SCO available:   YES\nBT SCO initializes: NO\n(" + e.getMessage() + ")";
+					  btScoInit = "Available, but not initializad.\n(" + e.getMessage() + ")";
 				return false;
 			}
-					  btScoInit = "BT SCO available:   YES\nBT SCO initializes: YES";
+					  btScoInit = "Available, initialized OK.";
 			return true;
 		} else {
 			AudioManager mAudioManager = (AudioManager) ctx.getSystemService(Context.AUDIO_SERVICE);

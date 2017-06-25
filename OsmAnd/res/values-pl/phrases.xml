@@ -85,7 +85,7 @@
 	<string name="poi_window_blind">Zasłony</string>
 	<string name="poi_department_store">Dom handlowy</string>
 	<string name="poi_electronics">RTV</string>
-	<string name="poi_car">Salony i komisy samochodowe</string>
+	<string name="poi_car">Salon/komis samochodowy</string>
 	<string name="poi_car_parts">Części samochodowe</string>
 	<string name="poi_atv">Quady</string>
 	<string name="poi_cosmetics">Drogeria</string>
@@ -294,7 +294,7 @@
 	<string name="poi_canadian_football">Futbol kanadyjski</string>
 	<string name="poi_chess">Szachy</string>
 	<string name="poi_cricket">Krykiet</string>
-	<string name="poi_cycling">Jazda na rowerze</string>
+	<string name="poi_cycling">Kolarstwo</string>
 	<string name="poi_diving">Nurkowanie</string>
 	<string name="poi_scuba_diving">Nurkowanie</string>
 	<string name="poi_dog_racing">Wyścigi psów</string>
@@ -508,7 +508,7 @@
 	<string name="poi_fuel_biodiesel">Biodiesel</string>
 	<string name="poi_fuel_lpg">LPG</string>
 	<string name="poi_fuel_cng">CNG</string>
-	<string name="poi_public_transport_stop_position">"Przystanek transportu  publicznego"</string>
+	<string name="poi_public_transport_stop_position">Przystanek transportu publicznego</string>
 	<string name="poi_halt">Przystanek kolejowy</string>
 	<string name="poi_rest_area">Miejsce obsługi podróżnych (bez sklepu)</string>
 
@@ -1489,7 +1489,7 @@
 
 	<string name="poi_quango">Organizacja częściowo pozarządowa</string>
 	<string name="poi_animal_training">Tresura zwierząt</string>
-	<string name="poi_dojo">Sala ćwiczeń sztuk walk</string>
+	<string name="poi_dojo">Dojo</string>
 
 	<string name="poi_water_tap">Kran z wodą</string>
 	<string name="poi_grassland">Łąka</string>
@@ -2467,7 +2467,7 @@
 	<string name="poi_protection_title">Rodzaj ochrony</string>
 	<string name="poi_protection_object_historic">Ochrona: historii</string>
 	<string name="poi_protection_object_nature">Ochrona: przyrody</string>
-	<string name="poi_protection_object_habitat">Ochrona: habitatu</string>
+	<string name="poi_protection_object_habitat">Ochrona: siedliska</string>
 	<string name="poi_protection_object_water">Ochrona: wody</string>
 
 	<string name="poi_addr_housename">Nazwa budynku</string>
@@ -2502,7 +2502,7 @@
 	<string name="poi_free_flying_site_orientation_n">Kierunek lotu: północ</string>
 	<string name="poi_free_flying_site_orientation_ne">Kierunek lotu: północny-wschód</string>
 	<string name="poi_free_flying_site_orientation_e">Kierunek lotu: wschód</string>
-	<string name="poi_free_flying_site_orientation_se">Kierunek lotu: południowy-wschów</string>
+	<string name="poi_free_flying_site_orientation_se">Kierunek lotu: południowy-wschód</string>
 	<string name="poi_free_flying_site_orientation_s">Kierunek lotu: południe</string>
 	<string name="poi_free_flying_site_orientation_sw">Kierunek lotu: południowy-zachód</string>
 	<string name="poi_free_flying_site_orientation_w">Kierunek lotu: zachód</string>
@@ -3146,7 +3146,7 @@
 	<string name="poi_cuisine_burger">Hamburger</string>
 	<string name="poi_cuisine_coffee">Kawa</string>
 	<string name="poi_cuisine_sandwich">Kanapki</string>
-	<string name="poi_cuisine_kebab">Kabab</string>
+	<string name="poi_cuisine_kebab">Kebab</string>
 	<string name="poi_cuisine_chicken">Kurczak</string>
 	<string name="poi_cuisine_ice_cream">Lody</string>
 	<string name="poi_cuisine_sushi">Sushi</string>
@@ -3396,7 +3396,7 @@
 	<string name="poi_motorcycle_services">Usługi</string>
 	<string name="poi_motorcycle_type">Typ motocykli</string>
 
-<string name="poi_zoo_petting_zoo">minizoo</string>
+<string name="poi_zoo_petting_zoo">Minizoo</string>
 	<string name="poi_zoo_wildlife_park">park dzikich zwierząt</string>
 	<string name="poi_zoo_enclosure">klatki</string>
 	<string name="poi_zoo_safari_park">park safari</string>

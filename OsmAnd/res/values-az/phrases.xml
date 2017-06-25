@@ -74,4 +74,18 @@
 	<string name="poi_wine">Şərab mağazası</string>
 	<string name="poi_books">Kitab mağazası</string>
 	<string name="poi_bicycle">Velosiped mağazası</string>
+	<string name="poi_mobile_phone">Mobil telefon mağazası</string>
+	<string name="poi_motorcycle">Motosiklet mağazası</string>
+	<string name="poi_music">Musiqi mağazası</string>
+	<string name="poi_musical_instrument">Musiqi alətləri</string>
+	<string name="poi_outdoor">Açıq havada mağaza</string>
+	<string name="poi_paint">Boya mağazası</string>
+	<string name="poi_pet">Ev heyvanı mağazası</string>
+	<string name="poi_resource_diamond">Almaz</string>
+	<string name="poi_resource_gold">Qızıl</string>
+	<string name="poi_resource_graphite">Qrafit</string>
+	<string name="poi_resource_gravel">Çınqıl</string>
+	<string name="poi_resource_gypsum">Gips</string>
+	<string name="poi_resource_iron_ore">Dəmir filizi</string>
+	<string name="poi_nuclear_explosion_type_atmospheric_water_surface_barge"></string>
 	</resources>

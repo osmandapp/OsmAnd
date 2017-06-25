@@ -53,7 +53,7 @@
     <string name="get_started">Başla</string>
     <string name="back_to_search">Axtarışa qayıt</string>
     <string name="show_something_on_map">%1$s-i xəritədə göstər</string>
-    <string name="share_history_subject">" OsmAnd ilə paylaşılıb"</string>
+    <string name="share_history_subject">OsmAnd ilə paylaşılıb</string>
     <string name="search_categories">Kateqoriyalar</string>
     <string name="postcode">Poçt kodu</string>
     <string name="map_widget_search">Axtar</string>
@@ -89,9 +89,7 @@
     <string name="osm_live_enter_email">Zəhmət olmasa düzgün E-poçt ünvanı daxil edin</string>
     <string name="osm_live_subscription_settings">Abunəlik parametrləri</string>
     <string name="upload_anonymously">Anonim olaraq yüklə</string>
-    <string name="download_files_question_space">{0} fayl endirilsin?
-{1} MB yaddaş istifədə olunub.
-({2} MB boş yaddaş var.)</string>
+    <string name="download_files_question_space">{0} fayl endirilsin? {1} MB yaddaş istifadə edir. ({2} MB boş yer var.)</string>
     <string name="upload_osm_note">OSM qeyd yüklə</string>
     <string name="shared_string_toolbar">Alətlər paneli</string>
     <string name="shared_string_widgets">Widget-lər</string>
@@ -200,7 +198,7 @@
     <string name="your_edits">Düzəlişləriniz</string>
     <string name="waypoint_visit_after">Sonra ziyarət et</string>
     <string name="waypoint_visit_before">Öncə ziyarət et</string>
-    <string name="tips_and_tricks_descr">Çox soruşulan suallar, son dəyişikliklər və digərləri</string>
+    <string name="tips_and_tricks_descr">Tez-tez verilən suallar, son dəyişikliklər və digərləri</string>
     <string name="shared_string_ellipsis">…</string>
     <string name="shared_string_ok">OK</string>
     <string name="shared_string_cancel">Ləğv et</string>
@@ -271,7 +269,7 @@
     <string name="watch">İzlə</string>
     <string name="notes">Qeydlər</string>
     <string name="online_map">Onlayn xəritə</string>
-    <string name="free">"%1$s boş "</string>
+    <string name="free">%1$s boş</string>
     <string name="device_memory">Cihaz yaddaşı</string>
     <string name="edit_group">Qrupa düzəliş et</string>
     <string name="remove_the_tag">İŞARƏNİ SİL</string>
@@ -292,7 +290,7 @@
     <string name="everything_up_to_date">Bütün fayllar yenidir</string>
     <string name="home_button">Ev</string>
     <string name="map_update">%1$s xəritə üçün yeniləmə var</string>
-    <string name="search_for">Axtar</string>
+    <string name="search_for">Axtarış</string>
     <string name="wake_on_voice">Ekranı yandır</string>
     <string name="rendering_category_hide">Gizlət</string>
     <string name="rendering_category_details">Detallar</string>
@@ -330,7 +328,7 @@
     <string name="osmo_group_information">Zəhmət olmasa qrup yaratmazdan əvvəl oxuyun!</string>
     <string name="osmo_auto_connect">Avtomatik qoşulma</string>
     <string name="osmo_start_service">OsMo xidməti</string>
-    <string name="no_index_file_to_download">Endirilənlər tapılmadı, zəhmət olmasa internet bağlantınızı yoxlayın.</string>
+    <string name="no_index_file_to_download">Endirilənlər tapılmadı, internet bağlantınızı yoxlayın.</string>
     <string name="local_index_select_gpx_file">Göstərmək üçün seçin</string>
     <string name="sort_by_distance">Məsafəyə görə sırala</string>
     <string name="sort_by_name">Ada görə sırala</string>
@@ -342,9 +340,9 @@
     <string name="local_index_gpx_info_show">"
 \n
 \nSeçimlər üçün basıb saxlayın"</string>
-    <string name="gpx_info_start_time">"Başlama vaxtı: %1$tF, %1$tT "</string>
-    <string name="gpx_info_end_time">"Bitmə vaxtı: %1$tF, %1$tT "</string>
-    <string name="gpx_info_maximum_speed">"Maksimum sürət: %1$s "</string>
+    <string name="gpx_info_start_time">Başlama vaxtı: %1$tF, %1$tT</string>
+    <string name="gpx_info_end_time">Bitmə vaxtı: %1$tF, %1$tT</string>
+    <string name="gpx_info_maximum_speed">Maksimum sürət: %1$s</string>
     <string name="osmo_user_joined">İstifadəçi %1$s %2$s qrupuna qoşuldu</string>
     <string name="osmo_show_group_notifications">Qrup bildirişlərini göstər</string>
     <string name="osmo_follow">İzlə</string>
@@ -417,7 +415,7 @@
     <string name="speak_street_names">Küçə adları (TTS)</string>
     <string name="speak_speed_limit">Sürət limiti</string>
     <string name="speak_cameras">Sürət kameraları</string>
-    <string name="route_descr_map_location">"Xəritə: "</string>
+    <string name="route_descr_map_location">Xəritə:</string>
     <string name="route_to">Buraya:</string>
     <string name="route_from">Buradan:</string>
     <string name="settings_preset">Standart profil</string>
@@ -451,7 +449,7 @@
     <string name="av_def_action_audio">Səs yaz</string>
     <string name="av_use_external_camera_descr">Şəkil üçün sistem proqramını istifadə et</string>
     <string name="av_use_external_camera">Kamera proqramını istifadə et</string>
-    <string name="av_settings">"Səs/video parametrləri "</string>
+    <string name="av_settings">Səs/video parametrləri</string>
     <string name="download_select_map_types">Digər xəritələr</string>
     <string name="download_regular_maps">Standart xəritə</string>
     <string name="map_widget_max_speed">Sürət limiti</string>
@@ -543,7 +541,7 @@
     <string name="amenity_type_osmwiki">Vikipediya (offlayn)</string>
     <string name="index_settings">Xəritə fayllarını idarə et</string>
     <string name="general_settings">Ümumi</string>
-    <string name="global_app_settings">Ümumi proqram parametrləri</string>
+    <string name="global_app_settings">Əsas proqram parametrləri</string>
     <string name="user_name">OSM istifadəçi adınız</string>
     <string name="user_password">OSM şifrəniz</string>
     <string name="osmand_service">Arxa fon rejimi</string>
@@ -558,7 +556,7 @@
     <string name="search_position_address">Ünvan…</string>
     <string name="search_position_favorites">Favoritlər…</string>
     <string name="context_menu_item_search">Buranın yaxınlığında axtar</string>
-    <string name="filename_input">"Fayl adı: "</string>
+    <string name="filename_input">Fayl adı:</string>
     <string name="local_index_mi_upload_gpx">OSM-a göndər</string>
     <string name="show_more_map_detail">Digər xəritə detallarını göstər</string>
     <string name="favorite_home_category">Ev</string>
@@ -734,7 +732,7 @@
     <string name="closing_at">Bağlanır:</string>
     <string name="contact_info">Əlaqə məlumatları</string>
     <string name="description">Açıqlama</string>
-    <string name="add_opening_hours">Açılış saatları əlavə et</string>
+    <string name="add_opening_hours">İş saatları əlavə et</string>
     <string name="poi_dialog_poi_type">POI növü</string>
     <string name="working_days">İş günləri</string>
     <string name="recent_places">Ən son yerlər</string>
@@ -756,7 +754,7 @@
     <string name="features_menu_group">Xüsusiyyətlər</string>
     <string name="other_menu_group">Digər</string>
     <string name="first_usage_item">İlk istifadə</string>
-    <string name="faq_item_description">Çox soruşulan suallar</string>
+    <string name="faq_item_description">Tez-tez verilən suallar</string>
     <string name="versions_item">Versiyalar</string>
     <string name="contact_us">Bizimlə əlaqə</string>
     <string name="use_drawer_btn">Menyu istifadə et</string>
@@ -887,13 +885,13 @@
     <string name="save_as_favorites_points">Favorit qrup olaraq saxla</string>
     <string name="select_destination_and_intermediate_points">Təyinat nöqtələrini seçin</string>
     <string name="gpx_wpt">Yol nöqtəsi</string>
-    <string name="gpx_info_waypoints">"Yol nöqtələri: %1$s "</string>
-    <string name="gpx_info_distance">"Məsafə: %1$s (%2$s nöqtə) "</string>
-    <string name="gpx_info_average_speed">"Ortalama sürət: %1$s "</string>
+    <string name="gpx_info_waypoints">Yol nöqtələri: %1$s</string>
+    <string name="gpx_info_distance">Məsafə: %1$s (%2$s nöqtə)</string>
+    <string name="gpx_info_average_speed">Ortalama sürət: %1$s</string>
     <string name="gpx_info_avg_altitude">Ortalama yüksəklik: %1$s</string>
     <string name="gpx_info_diff_altitude">Yüksəklik diapazonu: %1$s</string>
     <string name="gpx_info_asc_altitude">Eniş/yoxuş: %1$s</string>
-    <string name="gpx_selection_number_of_points">" %1$s nöqtə"</string>
+    <string name="gpx_selection_number_of_points">%1$s nöqtə</string>
     <string name="gpx_selection_point">%1$s nöqtəsi</string>
     <string name="gpx_selection_points">%1$s
 \nNöqtələr</string>
@@ -915,7 +913,7 @@
     <string name="osmo_enable_tracker">Mövqelərimi göndər</string>
     <string name="osmo_control">OsMo sürətli giriş</string>
     <string name="osmo_auth_pending">İcazə gözlənilir…</string>
-    <string name="osmo_io_error">"OsMo qoşulma problemi: "</string>
+    <string name="osmo_io_error">OsMo qoşulma problemi:</string>
     <string name="osmo_mode_restart">OsMo sessiyanı yenidən başlat</string>
     <string name="osmo_mode_on">OsMo sessiyanı dayandır</string>
     <string name="osmo_mode_off">OsMo sessiyanı başlat</string>
@@ -961,7 +959,7 @@
     <string name="online_photos">Onlayn şəkillər</string>
     <string name="shared_string_add_photos">Şəkillər əlavə et</string>
     <string name="live_updates">Canlı yeniləmələr</string>
-    <string name="access_from_map_description"/>
+    <string name="access_from_map_description">Menyu düyməsi menyunu yox, alət panelini açır</string>
     <string name="lang_als">Albanca (Tosk)</string>
     <string name="regions">Regionlar</string>
     <string name="days_behind">gün əvvəl</string>
@@ -977,7 +975,7 @@
     <string name="subscribe_email_desc">Proqramın endirimləri haqqında e-poçt siyahımıza abunə olun və əlavə 3 xəritə endirməsi əldə edin!</string>
     <string name="sea_depth_thanks">Dəniz dərinliyi konturlarını aldığınız üçün təşəkkürlər!</string>
     <string name="index_item_depth_contours_osmand_ext">Dəniz dərinliyi konturları</string>
-    <string name="index_item_depth_points_southern_hemisphere"/>
+    <string name="index_item_depth_points_southern_hemisphere">Dəniz dərinliyi cənub yarımkürəsində göstərilir</string>
     <string name="download_depth_countours">Dəniz dərinliyi konturları</string>
     <string name="nautical_maps">Dəniz xəritələri</string>
     <string name="do_not_send_anonymous_app_usage">Anonim proqram istifadəsi statistikalarını göndərmə</string>
@@ -1093,7 +1091,7 @@
     <string name="direction_style_clockwise">Saat istiqamətində (12 sektor)</string>
     <string name="settings_direction_style">İstiqamət stili</string>
     <string name="settings_direction_style_descr">Hərəkət zamanı nisbi istiqamətləri ifadə etmək üçün stil seçin</string>
-    <string name="accessibility_preferences_descr"/>
+    <string name="accessibility_preferences_descr">Xüsusi imkanlarla əlaqəli seçimlər</string>
     <string name="rendering_out_of_memory">Seçilən sahəni göstərmək üçün kifayət qədər proses yaddaşı yoxdur</string>
     <string name="free_version_message">Bu pulsuz OsmAnd versiyası %1$s endirmə ilə məhdudlaşır və offlayn Vikipediya məqalələrini dəstəkləmir.</string>
     <string name="index_name_other">Ümumdünya və mövzu xəritələri</string>
@@ -1229,7 +1227,7 @@
     <string name="general_settings_2">Əsas parametrlər</string>
     <string name="shared_string_dismiss">İmtina et</string>
     <string name="shared_string_io_error">I/O səhvi baş verdi</string>
-    <string name="shared_string_collapse"/>
+    <string name="shared_string_collapse">Yığışdır</string>
     <string name="route_points">Marşrut nöqtələri</string>
     <string name="srtm_plugin_name">Kontur xətləri</string>
     <string name="points">Nöqtələr</string>
@@ -1251,7 +1249,7 @@
     <string name="map_downloaded_descr">%1$s xəritəsi endirildi, indi istifadə etməyə başlaya bilərsiniz.</string>
     <string name="go_to_map">Xəritəni göstər</string>
     <string name="favorite_category_dublicate_message">Göstərilən kateqoriya adı artıq mövcuddur. Fərqli ad istifadə edin.</string>
-    <string name="region_maps"/>
+    <string name="region_maps">Region xəritələri</string>
     <string name="srtm_plugin_disabled">Kontur xətləri sönülüdür</string>
     <string name="default_speed_system_descr">Sürət vahidi təyin edin</string>
     <string name="default_speed_system">Sürət vahidi</string>
@@ -1294,7 +1292,7 @@
     <string name="av_camera_focus_continuous">Kamera fasiləsiz fokuslamağa çalışsın</string>
     <string name="av_photo_play_sound">Şəkil çəkərkən səs çal</string>
     <string name="mapillary_image">Mapillary təsviri</string>
-    <string name="osmand_plus_extended_description_part8">" Təxmini xəritənin əhatə dairəsi və keyfiyyəti: • Qərbi Avropa: **** • Şərqi Avropa: *** • Rusiya: *** • Şimali Amerika: *** • Cənubi Amerika: ** • Asiya: ** • Yaponiya &amp; Koreya: *** • Yaxın Şərq: ** • Afrika: ** • Antarktida: * Dünyanın bir çox ölkəsi endirmək üçün mövcuddur! Əfqanıstandan Zimbabveyə, Avstraliyadan ABŞ-a. Argentina, Braziliya, Kanada, Fransa, Almaniya, Meksika, Böyük Britaniya, İspaniya, … "</string>
+    <string name="osmand_plus_extended_description_part8">Təxmini xəritənin əhatə dairəsi və keyfiyyəti: • Qərbi Avropa: **** • Şərqi Avropa: *** • Rusiya: *** • Şimali Amerika: *** • Cənubi Amerika: ** • Asiya: ** • Yaponiya &amp; Koreya: *** • Yaxın Şərq: ** • Afrika: ** • Antarktida: * Dünyanın bir çox ölkəsi endirmək üçün mövcuddur! Əfqanıstandan Zimbabveyə, Avstraliyadan ABŞ-a. Argentina, Braziliya, Kanada, Fransa, Almaniya, Meksika, Böyük Britaniya, İspaniya, …</string>
     <string name="avoid_in_routing_title">Yayın…</string>
     <string name="map_widget_distance">Təyinat nöqtəsi</string>
     <string name="quick_action_add_first_intermediate">Birinci aralığı əlavə et</string>
@@ -1348,7 +1346,7 @@
     <string name="monitoring_settings_descr">Səyahətlərinizin necə qeyd ediləcəyini tənzimləyin</string>
     <string name="av_use_external_recorder_descr">Video çəkmək üçün sistem proqramını istifadə et</string>
     <string name="av_use_external_recorder">Sistem proqramını istifadə et</string>
-    <string name="recording_error">"Qeydetmə zamanı səhv baş verdi "</string>
+    <string name="recording_error">Qeydetmə zamanı səhv baş verdi</string>
     <string name="recording_is_recorded">Səs/video qeyd edilir. Dayandırmaq üçün AV widget-inə basın.</string>
     <string name="building_number">Bina nömrəsi</string>
     <string name="shared_string_permissions">İcazələr</string>
@@ -1365,7 +1363,7 @@
     <string name="gpx_no_tracks_title">Sizin hələ izləriniz yoxdur</string>
     <string name="gpx_no_tracks_title_folder">Qovluğa izlər əlavə edə də bilərsiniz</string>
     <string name="gpx_add_track">İz əlavə et</string>
-    <string name="storage_place_description">OsmAnd-ın məlumatlar yeri (xəritələr, izlər və s.): %1$s.</string>
+    <string name="storage_place_description">OsmAnd-ın məlumat saxlama yeri (xəritələr, izlər və s.): %1$s.</string>
     <string name="shared_string_save_as_gpx">GPX izi olaraq saxla</string>
     <string name="shared_string_my_tracks">İzlərim</string>
     <string name="shared_string_currently_recording_track">Hazırki qeyd edilən iz</string>
@@ -1379,7 +1377,7 @@
     <string name="save_track_to_gpx">Naviqasiya zamanı izi avtomatik qeyd et</string>
     <string name="save_track_to_gpx_descrp">Naviqasiya zamanı iz GPX formatında izlər qovluğunda avtomatik saxlanacaq</string>
     <string name="none_selected_gpx">Heç bir GPX faylı seçilməyib. Seçmək üçün mövcud izə basıb saxlayın.</string>
-    <string name="gpx_info_subtracks">"Alt izlər: %1$s "</string>
+    <string name="gpx_info_subtracks">Alt izlər: %1$s</string>
     <string name="gpx_selection_track">%1$s
 \nİz %2$s</string>
     <string name="gpx_file_is_empty">GPX iz boşdur</string>
@@ -1393,7 +1391,7 @@
     <string name="local_indexes_cat_srtm">Kontur xətləri</string>
     <string name="distance_measurement_finish_subtrack">Yeni bir alt iz başlat</string>
     <string name="osmand_background_plugin_description">GPS cihazını vaxtaşırı oyadaraq arxa fon (ekran sönülü) rejimində naviqasiya və izləməni aktivləşdirmək üçün parametrləri göstərir.</string>
-    <string name="dropbox_plugin_description">Dropbox qoşması sizə izləri və səs/video qeydlərini Dropbox hesabınızla sinxorizasiya etməyə imkan verir.</string>
+    <string name="dropbox_plugin_description">Dropbox qoşması sizə izləri və səs/video qeydlərini Dropbox hesabınızla sinxronlaşdırmağa imkan verir.</string>
     <string name="enable_plugin_monitoring_services">Mövqe qeydiyyatı xidmətini (GPX qeydiyyatı, onlayn izləmə) istifadə etmək üçün Səyahət qeydetmə qoşmasını aktivləşdirin</string>
     <string name="gpxup_trackable">İzlənə bilən</string>
     <string name="gpx_monitoring_disabled_warn">GPX widget və ya “Səyahət qeydetmə” parametri ilə izləri qeyd et.</string>
@@ -1410,8 +1408,8 @@
     <string name="osmo_connect_to_device">Cihaz ilə əlaqə</string>
     <string name="osmo_connect_to_group">Qrup ilə əlaqə</string>
     <string name="osmo_activity">OpenStreetMap Nəzarət</string>
-    <string name="osmo_locations_sent">"%1$d məkan göndərildi (buferdə %2$d) "</string>
-    <string name="osmo_conn_successfull">"Bağlantı yaradıldı: %1$s "</string>
+    <string name="osmo_locations_sent">%1$d məkan göndərildi (buferdə %2$d)</string>
+    <string name="osmo_conn_successfull">Bağlantı yaradıldı: %1$s</string>
     <string name="osmo_settings_uuid">Bənzərsiz cihaz İD-i</string>
     <string name="use_points_as_intermediates">Nöqtələr arasındakı marşrutu hesabla</string>
     <string name="osmo_settings_descr">Nəzarət parametrlərini tənzimləyin və şəxsi nəzarət kanalını quraşdırın</string>
@@ -1430,8 +1428,8 @@
     <string name="routing_attr_avoid_stairs_description">Pilləkənlərdən yayın</string>
     <string name="routing_attr_avoid_borders_name">Sərhəd keçidlərindən yayın</string>
     <string name="routing_attr_avoid_borders_description">Başqa ölkə ilə sərhəd kəsişmələrindən yayın</string>
-    <string name="routing_attr_weight_description">Marşrutlarda icazə veriləcək avtomobil çəkisini təyin edin</string>
-    <string name="routing_attr_height_description">Marşrutlarda icazə veriləcək avtomobil hündürlüyünü təyin edin</string>
+    <string name="routing_attr_weight_description">Marşrutlarda icazə veriləcək nəqliyyat vasitəsinin çəkisini təyin edin</string>
+    <string name="routing_attr_height_description">Marşrutlarda icazə veriləcək nəqliyyat vasitəsinin hündürlüyünü təyin edin</string>
     <string name="calculate_osmand_route_gpx">OsmAnd offlayn marşrut hesabla</string>
     <string name="app_mode_truck">Yük maşını</string>
     <string name="speech_rate_descr">TTS üçün danışıq sürəti təyin edin</string>
@@ -1440,7 +1438,7 @@
     <string name="disable_complex_routing">Mürəkkəb marşrutlamanı söndür</string>
     <string name="amenity_type_seamark">Dəniz işarəsi</string>
     <string name="app_modes_choose_descr">Proqramda görünən istifadə profillərini seçin</string>
-    <string name="map_widget_map_rendering">Xəritə göstərilməsi</string>
+    <string name="map_widget_map_rendering">Xəritənin göstərilməsi</string>
     <string name="app_mode_hiking">Piyada turizm</string>
     <string name="app_mode_motorcycle">Motosiklet</string>
     <string name="local_osm_changes_delete_all_confirm">%1$d OSM dəyişikliyini silmək üzrəsiniz. Əminsiniz?</string>
@@ -1511,4 +1509,75 @@
     <string name="map_widget_config">Ekranı tənzimlə</string>
     <string name="quick_action_add_configure_map">Xəritəni tənzimlə</string>
     <string name="recording_delete_confirm">Bu qeydetməni silmək istəyirsiniz?</string>
+    <string name="routing_attr_allow_motorway_name">Avtomagistrallara icazə ver</string>
+    <string name="routing_attr_allow_motorway_description">Avtomagistrallara icazə ver</string>
+    <string name="trip_rec_notification_settings">Səyahət qeydetmə (məlumat yoxdur)</string>
+    <string name="trip_rec_notification_settings_desc">“Qeyd et” düyməsinə basaraq səyahət qeydetməni başlatmağa icazə verən bildirişi göstər</string>
+    <string name="save_track_min_speed">Minimum qeydiyyat sürəti</string>
+    <string name="new_filter_desc">Yeni filtr üçün ad daxil edin. Bu, sizin Kateqoriyalar bölmənizə əlavə olunur.</string>
+    <string name="donation_to_osm">OpenStreetMap cəmiyyəti üçün ianə</string>
+    <string name="donation_to_osm_desc">İanənizin bir hissəsi OpenStreetMap-a dəyişikliklər təqdim edən OSM istifadəçilərinə göndəriləcək. Abunəliyin qiyməti eyni qalır.</string>
+    <string name="access_expanded_list">Genişlədilmiş siyahı</string>
+    <string name="unit_of_length_descr">Uzunluq vahidlərini dəyişin</string>
+    <string name="unit_of_length">Uzunluq vahidi</string>
+    <string name="map_widget_ruler_control_first_mode">İki nöqtə xətkeş</string>
+    <string name="map_widget_ruler_control_second_mode">Radius xətkeşi</string>
+    <string name="local_index_items_backuped">%1$d / %2$d obyekt uğurla qeyri-aktiv edildi.</string>
+    <string name="local_index_no_items_to_do">%1$smək üçün obyekt yoxdur</string>
+    <string name="local_index_action_do">%2$s obyekti %1$smək üzrəsiniz. Davam edilsin?</string>
+    <string name="local_indexes_cat_backup">Qeyri-aktiv edilmiş</string>
+    <string name="ttsvoice">TTS səsi</string>
+    <string name="internet_connection_required_for_online_route">Onlayn naviqasiya xidməti seçildi, amma internet bağlantısı yoxdur.</string>
+    <string name="gpx_option_destination_point">Hazırki təyinat nöqtəsini istifadə et</string>
+    <string name="home">Alət paneli</string>
+    <string name="dahboard_options_dialog_title">Alət panelini tənzimlə</string>
+    <string name="use_dashboard_btn">Alət panelini istifadə et</string>
+    <string name="dashboard_or_drawer_title">Alət paneli va ya menyu idarə etməsi</string>
+    <string name="dashboard_or_drawer_description">Proqramı, əsasən, dəyişkən alət paneli və ya sabit menyu vasitəsilə idarə etmək üçün yeni seçim var. Seçiminizi alət paneli parametrlərində hər zaman dəyişə bilərsiniz.</string>
+    <string name="anonymous_user_hint">Anonim istifadəçi:
+\n- qruplar yarada;
+\n- qrupları və cihazları server ilə sinxronlaşdıra;
+\n- qrupları və cihazları veb-saytdakı şəxsi alət panelində idarə edə bilməz.</string>
+    <string name="access_from_map">Xəritədən giriş</string>
+    <string name="shared_string_accessibility">Xüsusi imkanlar</string>
+    <string name="accessibility_options">Xüsusi imkanlar seçimləri</string>
+    <string name="accessibility_mode">Xüsusi imkanlar rejimi</string>
+    <string name="accessibility_mode_descr">Xüsusi imkanlar xüsusiyyətlərini aktivləşdirir</string>
+    <string name="index_item_depth_points_northern_hemisphere">Dəniz dərinliyi şimal yarımkürəsində göstərilir</string>
+    <string name="no_waypoints_found">Yol nöqtələri tapılmadı</string>
+    <string name="context_menu_item_delete_waypoint">GPX yol nöqtəsi silinsin?</string>
+    <string name="context_menu_item_edit_waypoint">GPX nöqtəsinə düzəliş et</string>
+    <string name="waypoints">Yol nöqtələri</string>
+    <string name="announce_gpx_waypoints">GPX yol nöqtələri</string>
+    <string name="add_waypoint_dialog_added">GPX yol nöqtəsi “{0}” uğurla əlavə edildi</string>
+    <string name="context_menu_item_add_waypoint">GPX yol nöqtəsi əlavə et</string>
+    <string name="import_file_favourites">Məlumatlar GPX faylı olaraq saxlansın yoxsa yol nöqtələri Favoritlərə idxal edilsin?</string>
+    <string name="quick_action_add_gpx">GPX yol nöqtəsi əlavə et</string>
+    <string name="rotate_map_compass_opt">Kompasa görə</string>
+    <string name="rotate_map_bearing_opt">Hərəkət istiqamətində</string>
+    <string name="poi_context_menu_modify">POI-yə düzəliş et</string>
+    <string name="select_map_marker">Xəritə işarələyici seçin</string>
+    <string name="map_markers_other">Digər işarələyicilər</string>
+    <string name="rendering_attr_hideUnderground_name">Yeraltı obyektlər</string>
+    <string name="data_is_not_available">Məlumatlar mövcud deyil</string>
+    <string name="starting_point">Başlanğıc nöqtə</string>
+    <string name="rendering_attr_horseRoutes_name">At marşrutları</string>
+    <string name="show_on_start_description">“Sönülü” birbaşa xəritə ekranını başladır</string>
+    <string name="osm_save_offline">Offlayn saxla</string>
+    <string name="osn_add_dialog_error">Səhv baş verdi: qeyd yaradılmadı</string>
+    <string name="osn_close_dialog_error">Səhv baş verdi: qeyd bağladılmadı</string>
+    <string name="osb_comment_dialog_error">Səhv baş verdi: rəy əlavə edilmədi</string>
+    <string name="share_osm_edits_subject">OSM düzəlişləri OsmAnd ilə paylaşılıb</string>
+    <string name="rendering_attr_hideProposed_name">Təklif olunan obyektlər</string>
+    <string name="local_recordings_delete_all_confirm">%1$d qeydi silmək üzrəsiniz. Əminsiniz?</string>
+    <string name="local_osm_changes_upload_all_confirm">%1$d dəyişikliyi OSM-a yükləmək üzrəsiniz. Əminsiniz?</string>
+    <string name="osm_live_subscription">OSM Live abunəliyi</string>
+    <string name="osm_live_thanks">Canlı yeniləmələrə abunə olduğunuz üçün təşəkkür edirik!</string>
+    <string name="osm_live_ask_for_purchase">Zəhmət olmasa əvvəlcə OSM Live abunəliyini alın</string>
+    <string name="storage_directory_shared">Paylaşılan yaddaş</string>
+    <string name="donations">İanələr</string>
+    <string name="number_of_recipients">Qəbul edənlərin sayı</string>
+    <string name="osm_user_stat">%1$s düzəliş, %2$s dərəcə, cəmi %3$s düzəliş</string>
+    <string name="osm_editors_ranking">OSM Redaktorlar sıralaması</string>
+    <string name="shared_string_reverse_order">Əksinə sırala</string>
     </resources>

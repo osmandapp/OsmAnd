@@ -205,8 +205,10 @@ public class OsmBaseStorage {
 			if (ELEM_NODE.equals(name)) {
 				currentParsedEntity = new Node(parseDouble(parser, ATTR_LAT, 0), parseDouble(parser, ATTR_LON, 0),
 						parseId(parser, ATTR_ID, -1));
+				currentParsedEntity.setVersion(parseVersion(parser));
 			} else if (ELEM_WAY.equals(name)) {
 				currentParsedEntity = new Way(parseId(parser, ATTR_ID, -1));
+				currentParsedEntity.setVersion(parseVersion(parser));
 			} else if (ELEM_RELATION.equals(name)) {
 				currentParsedEntity = new Relation(parseId(parser, ATTR_ID, -1));
 			} else {
@@ -256,6 +258,13 @@ public class OsmBaseStorage {
 		}
 	}
 	
+	private int parseVersion(XmlPullParser parser) {
+		if (parser.getAttributeName(parser.getAttributeCount() - 1).equals(ATTR_VERSION)) {
+			return Integer.valueOf(parser.getAttributeValue(parser.getAttributeCount() - 1));
+		}
+		return 0;
+	}
+
 	public void endElement(XmlPullParser parser, String name) {
 		EntityType type = null;
 		if (ELEM_NODE.equals(name)){

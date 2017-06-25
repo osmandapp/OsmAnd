@@ -22,7 +22,7 @@
     <string name="si_mi_meters">Mílur/metrar</string>
     <string name="storage_free_space">Laust pláss</string>
     <string name="shared_string_change">Skipta um</string>
-    <string name="share_history_subject">" deilt með OsmAnd"</string>
+    <string name="share_history_subject">deilt með OsmAnd</string>
     <string name="search_categories">Flokkar</string>
     <string name="postcode">Póstnúmer</string>
     <string name="shared_string_from">frá</string>
@@ -321,9 +321,9 @@
     <string name="loading_smth">Hleð inn %1$s…</string>
     <string name="map_widget_plain_time">Núverandi tími</string>
     <string name="gpx_wpt">Leiðarpunktur</string>
-    <string name="gpx_info_waypoints">"Leiðarpunktar: %1$s "</string>
+    <string name="gpx_info_waypoints">Leiðarpunktar: %1$s</string>
     <string name="gpx_selection_segment_title">Bútur</string>
-    <string name="gpx_selection_number_of_points">" %1$s punktar"</string>
+    <string name="gpx_selection_number_of_points">%1$s punktar</string>
     <string name="gpx_selection_point">Punktur %1$s</string>
     <string name="osmo_follow">Fylgja</string>
     <string name="osmo_sign_in">Skrá inn</string>
@@ -417,7 +417,7 @@
     <string name="driving_region_australia">Ástralía</string>
     <string name="speak_title">Tilkynna…</string>
     <string name="speak_speed_limit">Hraðatakmörk</string>
-    <string name="route_descr_map_location">"Kort: "</string>
+    <string name="route_descr_map_location">Kort:</string>
     <string name="route_descr_destination">Áfangastaður</string>
     <string name="route_to">Til:</string>
     <string name="route_via">Um:</string>
@@ -573,7 +573,7 @@
     <string name="search_position_map_view">Núverandi miðja korts</string>
     <string name="select_search_position">Upphaf:</string>
     <string name="context_menu_item_search">Leita nálægt þessu</string>
-    <string name="filename_input">"Skráarheiti: "</string>
+    <string name="filename_input">Skráarheiti:</string>
     <string name="favorite_home_category">Heima</string>
     <string name="favorite_friends_category">Vinir</string>
     <string name="favorite_places_category">Staðir</string>
@@ -867,7 +867,7 @@
     <string name="online_map">Nettengt kort</string>
     <string name="roads_only">Einungis vegir</string>
     <string name="rendering_attr_pisteRoutes_name">Skíðabrekkur</string>
-    <string name="free">"Laust %1$s "</string>
+    <string name="free">Laust %1$s</string>
     <string name="device_memory">Minni tækis</string>
     <string name="rendering_attr_pisteGrooming_name">Verið að troða leið</string>
     <string name="parking_place">Bílastæði</string>
@@ -891,7 +891,7 @@
     <string name="traffic_warning_speed_camera">Hraðamyndavél</string>
     <string name="save_track_to_gpx_globally">Skrifa feril í GPX-skrá</string>
     <string name="save_current_track">Vista núverandi GPX-feril</string>
-    <string name="gpx_info_subtracks">"Undirferlar: %1$s "</string>
+    <string name="gpx_info_subtracks">Undirferlar: %1$s</string>
     <string name="gpx_selection_track">%1$s 
 Ferill %2$s</string>
     <string name="gpx_file_is_empty">GPX-ferill er tómur</string>
@@ -1146,7 +1146,7 @@ Ferill %2$s</string>
     <string name="recording_photo_description">Ljósmynd %1$s %2$s</string>
     <string name="dropbox_plugin_name">Dropbox-viðbót</string>
     <string name="av_settings_descr">Breyta stillingum hljóð- og myndmerkja</string>
-    <string name="av_settings">"Stillingar hljóð- og myndmerkja "</string>
+    <string name="av_settings">Stillingar hljóð- og myndskeiða</string>
     <string name="recording_context_menu_delete">Eyða upptöku</string>
     <string name="map_widget_distancemeasurement">Mæling vegalengda</string>
     <string name="map_widget_audionotes">Hljóð-minnispunktar</string>
@@ -1537,9 +1537,9 @@ Len %2$s</string>
     <string name="gpx_monitoring_start">Byrja GPX-skráningu</string>
     <string name="gpx_monitoring_stop">Stöðva GPX-skráningu</string>
     <string name="osmo_not_signed_in">Innskráning á OsMo mistókst</string>
-    <string name="gpx_info_distance">"Fjarlægð: %1$s (%2$s punktar) "</string>
+    <string name="gpx_info_distance">Vegalengd: %1$s (%2$s punktar)</string>
     <string name="osmo_track_interval">Millibil skráninga</string>
-    <string name="recording_error">"Villa kom upp á meðan upptöku stóð "</string>
+    <string name="recording_error">Villa kom upp á meðan upptöku stóð</string>
     <string name="recording_camera_not_available">Myndavél er ekki tiltæk</string>
     <string name="recording_open_external_player">Opna utanaðkomandi spilara</string>
     <string name="recording_delete_confirm">Viltu eyða þessari upptöku?</string>
@@ -1645,10 +1645,10 @@ Len %2$s</string>
     <string name="local_index_gpx_info_show">
 
 Ýta og halda til að sjá valkosti</string>
-    <string name="gpx_info_start_time">"Upphafstími: %1$tF, %1$tT "</string>
-    <string name="gpx_info_end_time">"Lokatími: %1$tF, %1$tT "</string>
-    <string name="gpx_info_average_speed">"Meðalhraði: %1$s "</string>
-    <string name="gpx_info_maximum_speed">"Hámarkshraði: %1$s "</string>
+    <string name="gpx_info_start_time">Upphafstími: %1$tF, %1$tT</string>
+    <string name="gpx_info_end_time">Lokatími: %1$tF, %1$tT</string>
+    <string name="gpx_info_average_speed">Meðalhraði: %1$s</string>
+    <string name="gpx_info_maximum_speed">Hámarkshraði: %1$s</string>
     <string name="gpx_info_avg_altitude">Meðalhæð: %1$s</string>
     <string name="gpx_info_diff_altitude">Hæðarsvið: %1$s</string>
     <string name="gpx_info_asc_altitude">Lækkun/Hækkun: %1$s</string>
@@ -1671,8 +1671,8 @@ Punktar</string>
     <string name="osmo_enable_tracker">Senda staðsetningar mínar</string>
     <string name="osmo_control">Flýtiaðgangur OsMo</string>
     <string name="osmo_session_token">Setuteikn: %1$s</string>
-    <string name="osmo_conn_successfull">"Tengingu komið á: %1$s "</string>
-    <string name="osmo_io_error">"Vandamál í OsMo-tengingu: "</string>
+    <string name="osmo_conn_successfull">Tengingu komið á: %1$s</string>
+    <string name="osmo_io_error">Vandamál í OsMo-tengingu:</string>
     <string name="use_points_as_intermediates">Reikna leið milli punkta</string>
     <string name="osmo_mode_restart">Endurræsa OsMo-setu</string>
     <string name="osmo_mode_on">Stöðva OsMo-setu</string>
@@ -1706,7 +1706,7 @@ Punktar</string>
 
     <string name="indexing_transport">Lykla samgöngur…</string>
     <string name="daynight_descr">Veldu reglu til að skipta um dags/næturham</string>
-    <string name="fast_route_mode_descr">"Virkja til að reikna hröðustu leið eða gera óvirkt til að reikna hagkvæmustu leið "</string>
+    <string name="fast_route_mode_descr">Virkja til að reikna hröðustu leið eða gera óvirkt til að reikna hagkvæmustu leið</string>
     <string name="tiles_to_download_estimated_size">Við aðdráttinn {0} skal sækja {1} tígla ({2} MB)</string>
     <string name="select_max_zoom_preload_area">Veldu hámarksaðdrátt fyrir forhleðslu</string>
     <string name="maps_could_not_be_downloaded">Það tókst ekki að hlaða inn kortinu</string>
@@ -2101,7 +2101,7 @@ Stendur fyrir svæði: %1$s x %2$s</string>
     <string name="install_selected_build">Viltu setja upp OsmAnd - {0} af {1} {2} MB ?</string>
     <string name="quick_action_map_overlay_switch">Yfirlagi kortsins var breytt yfir í \"%s\".</string>
     <string name="quick_action_map_underlay_switch">Undirlagi kortsins var breytt yfir í \"%s\".</string>
-    <string name="osmo_locations_sent">"Sendar %1$d staðsetningar (í biðminni %2$d) "</string>
+    <string name="osmo_locations_sent">Sendar %1$d staðsetningar (í biðminni %2$d)</string>
     <string name="keep_and_add_destination_point">Bæta við sem áfangastað í framhaldinu</string>
     <string name="routing_preferences_descr">Stillingar leiðavals</string>
     <string name="disable_complex_routing">Gera flókið leiðaval óvirkt</string>
@@ -2126,11 +2126,11 @@ Stendur fyrir svæði: %1$s x %2$s</string>
     <string name="rendering_attr_showRoadMaps_description">Velja þegar birta á kort einungis með vegum:</string>
     <string name="show_warnings_descr">Stilla umferðaraðvaranir (hraðatakmarkanir, lokanir, umferðarhnúta, hraðahindranir), aðvaranir um hraðamyndavélar og upplýsingar um akreinaskiptingar</string>
     <string name="osmand_short_description_80_chars">Almenn skoðun landakorta í farsíma og flakk á ónettengdum sem nettengdum OSM-landakortum</string>
-	<string name="osmand_extended_description_part7">" Leggðu þitt fram til OSM • Tilkynntu um villur í gögnum • Sendu inn GPX-ferla til OSM beint úr forritinu • Bættu við merkisstöðum og sendu þá beint inn til OSM (eða síðar ef engin nettenging er til staðar) "</string>
-    <string name="osmand_extended_description_part8">" OsmAnd er opinn hugbúnaður og í stöðugri þróun. Hver sem er getur tekið þátt í gerð forritsins, til dæmis með því að tilkynna um hnökra, bæta þýðingar eða forrita nýja eiginleika. Lífleg staða verkefnisins og sífelldar endurbætur má þannig rekja til margra þátta samspils milli notenda og hönnuða. Verkefnið styðst líka við fjárhagslega styrki frá notendum sem nýtast til að fjármagna viðameiri forritun og prófanir.
-\n Gæði og áætluð þekja landakorta: • Vestur-Evrópa: **** • Austur-Evrópa: *** • Rússland: *** • Norður-Ameríka: *** • Suður-Ameríka: ** • Asía: ** • Japan &amp; Kórea: *** • Miðausturlönd: ** • Afríka: ** • Suðurskautslandið: * Hægt er að sækja kort frá flestum heimsins löndum á netinu! Frá Afghanistan til Zimbabwe, frá Ástralíu til BNA. Argentína, Brasilía, Kanada, Frakkland, Þýskaland, Mexíkó, Spánn, eða eitthvað annað. "</string>
+	<string name="osmand_extended_description_part7">Leggðu þitt fram til OSM • Tilkynntu um villur í gögnum • Sendu inn GPX-ferla til OSM beint úr forritinu • Bættu við merkisstöðum og sendu þá beint inn til OSM (eða síðar ef engin nettenging er til staðar)</string>
+    <string name="osmand_extended_description_part8">OsmAnd er opinn hugbúnaður og í stöðugri þróun. Hver sem er getur tekið þátt í gerð forritsins, til dæmis með því að tilkynna um hnökra, bæta þýðingar eða forrita nýja eiginleika. Lífleg staða verkefnisins og sífelldar endurbætur má þannig rekja til margra þátta samspils milli notenda og hönnuða. Verkefnið styðst líka við fjárhagslega styrki frá notendum sem nýtast til að fjármagna viðameiri forritun og prófanir. 
+\n Gæði og áætluð þekja landakorta: • Vestur-Evrópa: **** • Austur-Evrópa: *** • Rússland: *** • Norður-Ameríka: *** • Suður-Ameríka: ** • Asía: ** • Japan &amp; Kórea: *** • Miðausturlönd: ** • Afríka: ** • Suðurskautslandið: * Hægt er að sækja kort frá flestum heimsins löndum á netinu! Frá Afghanistan til Zimbabwe, frá Ástralíu til BNA. Argentína, Brasilía, Kanada, Frakkland, Þýskaland, Mexíkó, Spánn, eða eitthvað annað.</string>
     <string name="osmand_plus_short_description_80_chars">Almenn skoðun landakorta í farsíma og flakk á ónettengdum sem nettengdum OSM-landakortum</string>
-	<string name="osmand_plus_extended_description_part7">" Leggðu þitt fram til OSM • Tilkynntu um villur í gögnum • Sendu inn GPX-ferla til OSM beint úr forritinu • Bættu við merkisstöðum og sendu þá beint inn til OSM (eða síðar ef engin nettenging er til staðar) OsmAnd er opinn hugbúnaður og í stöðugri þróun. Hver sem er getur tekið þátt í gerð forritsins, til dæmis með því að tilkynna um hnökra, bæta þýðingar eða forrita nýja eiginleika. Lífleg staða verkefnisins og sífelldar endurbætur má þannig rekja til margra þátta samspils milli notenda og hönnuða. Verkefnið styðst líka við fjárhagslega styrki frá notendum sem nýtast til að fjármagna viðameiri forritun og prófanir.  "</string>
+	<string name="osmand_plus_extended_description_part7">Leggðu þitt fram til OSM • Tilkynntu um villur í gögnum • Sendu inn GPX-ferla til OSM beint úr forritinu • Bættu við merkisstöðum og sendu þá beint inn til OSM (eða síðar ef engin nettenging er til staðar) OsmAnd er opinn hugbúnaður og í stöðugri þróun. Hver sem er getur tekið þátt í gerð forritsins, til dæmis með því að tilkynna um hnökra, bæta þýðingar eða forrita nýja eiginleika. Lífleg staða verkefnisins og sífelldar endurbætur má þannig rekja til margra þátta samspils milli notenda og hönnuða. Verkefnið styðst líka við fjárhagslega styrki frá notendum sem nýtast til að fjármagna viðameiri forritun og prófanir.</string>
     <string name="search_offline_geo_error">Ekki tókst að þátta \'%s\' geo-virkniskipun (intent)</string>
     <string name="send_location_email_pattern">Til að sjá staðsetninguna, fylgdu veftenglinum %1$s eða Android-virkniskipunatenglinum %2$s</string>
     <string name="version_index_is_not_supported">Ekki er stuðningur við \'\'{0}\'\' útgáfu af vísi</string>
@@ -2216,4 +2216,10 @@ Stendur fyrir svæði: %1$s x %2$s</string>
     <string name="mapillary_widget">Mapillary græja</string>
     <string name="mapillary">Mapillary</string>
     <string name="mapillary_image">Mapillary mynd</string>
+    <string name="map_widget_ruler_control_first_mode">Tveggja-punkta mælistika</string>
+    <string name="map_widget_ruler_control_second_mode">Mælistika út frá miðju hrings</string>
+    <string name="shared_string_permissions">Heimildir</string>
+    <string name="distance_moving">Leiðrétt fjarlægð</string>
+    <string name="improve_coverage_mapillary">Bæta ljósmyndaþekju með Mapillary</string>
+    <string name="hide_from_zoom_level">Fela í aðdráttarstigi</string>
     </resources>

@@ -30,6 +30,7 @@ import net.osmand.plus.mapcontextmenu.other.MapRouteInfoMenu;
 import net.osmand.plus.routing.RouteDirectionInfo;
 import net.osmand.plus.routing.RoutingHelper;
 import net.osmand.plus.views.OsmandMapLayer.DrawSettings;
+import net.osmand.plus.views.OsmandMapTileView;
 import net.osmand.plus.views.mapwidgets.NextTurnInfoWidget.TurnDrawable;
 import net.osmand.router.TurnType;
 import net.osmand.util.Algorithms;
@@ -110,42 +111,156 @@ public class MapInfoWidgetsFactory {
 		return gpsInfoControl;
 	}
 
+	public static class RulerWidgetState extends MapWidgetRegistry.WidgetState {
+
+		static final int RULER_CONTROL_WIDGET_STATE_FIRST_MODE = R.id.ruler_control_widget_state_first_mode;
+		static final int RULER_CONTROL_WIDGET_STATE_SECOND_MODE = R.id.ruler_control_widget_state_second_mode;
+		static final int RULER_CONTROL_WIDGET_STATE_EMPTY_MODE = R.id.ruler_control_widget_state_empty_mode;
+
+		private final OsmandSettings.CommonPreference<RulerMode> rulerMode;
+
+		public RulerWidgetState(OsmandApplication ctx) {
+			super(ctx);
+			rulerMode = ctx.getSettings().RULER_MODE;
+		}
+
+		@Override
+		public int getMenuTitleId() {
+			if (rulerMode.get() == RulerMode.SECOND) {
+				return R.string.map_widget_ruler_control_second_mode;
+			} else {
+				return R.string.map_widget_ruler_control_first_mode;
+			}
+		}
+
+		@Override
+		public int getMenuIconId() {
+			final RulerMode mode = rulerMode.get();
+			if (mode == RulerMode.FIRST) {
+				return R.drawable.ic_action_ruler_location;
+			} else if (mode == RulerMode.SECOND) {
+				return R.drawable.ic_action_ruler_circle;
+			}
+			return R.drawable.ic_action_hide;
+		}
+
+		@Override
+		public int getMenuItemId() {
+			RulerMode mode = rulerMode.get();
+			if (mode == RulerMode.FIRST) {
+				return RULER_CONTROL_WIDGET_STATE_FIRST_MODE;
+			} else if (mode == RulerMode.SECOND){
+				return RULER_CONTROL_WIDGET_STATE_SECOND_MODE;
+			} else {
+				return RULER_CONTROL_WIDGET_STATE_EMPTY_MODE;
+			}
+		}
+
+		@Override
+		public int[] getMenuTitleIds() {
+			return new int[]{R.string.map_widget_ruler_control_first_mode, R.string.map_widget_ruler_control_second_mode};
+		}
+
+		@Override
+		public int[] getMenuIconIds() {
+			return new int[]{R.drawable.ic_action_ruler_location, R.drawable.ic_action_ruler_circle};
+		}
+
+		@Override
+		public int[] getMenuItemIds() {
+			return new int[]{RULER_CONTROL_WIDGET_STATE_FIRST_MODE, RULER_CONTROL_WIDGET_STATE_SECOND_MODE};
+		}
+
+		@Override
+		public void changeState(int stateId) {
+			RulerMode newMode = RulerMode.FIRST;
+			if (stateId == RULER_CONTROL_WIDGET_STATE_SECOND_MODE) {
+				newMode = RulerMode.SECOND;
+			}
+			rulerMode.set(newMode);
+		}
+	}
+
 	public TextInfoWidget createRulerControl(final MapActivity map) {
 		final String title = map.getResources().getString(R.string.map_widget_show_ruler);
-		final TextInfoWidget rulerControl = new TextInfoWidget(map) {
+        final TextInfoWidget rulerControl = new TextInfoWidget(map) {
+			boolean needNewLatLon;
+			long cacheMultiTouchTime;
+
 			@Override
 			public boolean updateInfo(DrawSettings drawSettings) {
-				if (map.getMyApplication().getSettings().RULER_MODE.get() == RulerMode.FIRST) {
+				RulerMode mode = map.getMyApplication().getSettings().RULER_MODE.get();
+				OsmandMapTileView view = map.getMapView();
+
+				if (cacheMultiTouchTime != view.getMultiTouchTime()) {
+					cacheMultiTouchTime = view.getMultiTouchTime();
+					needNewLatLon = true;
+				}
+				if (view.isMultiTouch() || System.currentTimeMillis() - cacheMultiTouchTime < 3000) {
+					if (needNewLatLon) {
+						float x1 = view.getFirstTouchPointX();
+						float y1 = view.getFirstTouchPointY();
+						float x2 = view.getSecondTouchPointX();
+						float y2 = view.getSecondTouchPointY();
+						LatLon firstFinger = view.getCurrentRotatedTileBox().getLatLonFromPixel(x1, y1);
+						LatLon secondFinger = view.getCurrentRotatedTileBox().getLatLonFromPixel(x2, y2);
+						setDistanceText(firstFinger.getLatitude(), firstFinger.getLongitude(),
+								secondFinger.getLatitude(), secondFinger.getLongitude());
+						needNewLatLon = false;
+					}
+				} else if (mode == RulerMode.FIRST || mode == RulerMode.SECOND) {
 					Location currentLoc = map.getMyApplication().getLocationProvider().getLastKnownLocation();
 					LatLon centerLoc = map.getMapLocation();
+
 					if (currentLoc != null && centerLoc != null) {
-						float dist = (float) MapUtils.getDistance(currentLoc.getLatitude(), currentLoc.getLongitude(),
+						setDistanceText(currentLoc.getLatitude(), currentLoc.getLongitude(),
 								centerLoc.getLatitude(), centerLoc.getLongitude());
-						String distance = OsmAndFormatter.getFormattedDistance(dist, map.getMyApplication());
-						int ls = distance.lastIndexOf(' ');
-						setText(distance.substring(0, ls), distance.substring(ls + 1));
-					} else {
-						setText(title, null);
 					}
+					needNewLatLon = true;
+				} else {
+					setText(title, null);
+					needNewLatLon = true;
 				}
 				return true;
 			}
-		};
+
+            private void setDistanceText(double firstLat, double firstLon, double secondLat, double secondLon) {
+                float dist = (float) MapUtils.getDistance(firstLat, firstLon, secondLat, secondLon);
+                String distance = OsmAndFormatter.getFormattedDistance(dist, map.getMyApplication());
+                int ls = distance.lastIndexOf(' ');
+                setText(distance.substring(0, ls), distance.substring(ls + 1));
+            }
+        };
 
 		rulerControl.setText(title, null);
-		rulerControl.setIcons(R.drawable.widget_distance_day, R.drawable.widget_distance_night);
+		setRulerControlIcon(rulerControl, map.getMyApplication().getSettings().RULER_MODE.get());
 		rulerControl.setOnClickListener(new OnClickListener() {
 			@Override
 			public void onClick(View view) {
-				rulerControl.setText(title, null);
 				final RulerMode mode = map.getMyApplication().getSettings().RULER_MODE.get();
-				map.getMyApplication().getSettings().RULER_MODE
-						.set(mode == RulerMode.FIRST ? RulerMode.SECOND : RulerMode.FIRST);
+				RulerMode newMode = RulerMode.FIRST;
+				if (mode == RulerMode.FIRST) {
+					newMode = RulerMode.SECOND;
+				} else if (mode == RulerMode.SECOND) {
+					newMode = RulerMode.EMPTY;
+				}
+				setRulerControlIcon(rulerControl, newMode);
+				map.getMyApplication().getSettings().RULER_MODE.set(newMode);
 				map.refreshMap();
 			}
 		});
 
 		return rulerControl;
+	}
+
+	private void setRulerControlIcon(TextInfoWidget rulerControl, RulerMode mode) {
+		if (mode == RulerMode.FIRST) {
+			rulerControl.setIcons(R.drawable.widget_ruler_location_day, R.drawable.widget_ruler_location_night);
+		} else if (mode == RulerMode.SECOND) {
+			rulerControl.setIcons(R.drawable.widget_ruler_circle_day, R.drawable.widget_ruler_circle_night);
+		} else {
+			rulerControl.setIcons(R.drawable.widget_hidden_day, R.drawable.widget_hidden_night);
+		}
 	}
 
 	public static class TopToolbarController {
@@ -658,16 +773,16 @@ public class MapInfoWidgetsFactory {
 				RouteDataObject rt = locationProvider.getLastKnownRouteSegment();
 				if (rt != null) {
 					text = RoutingHelper.formatStreetName(
-							rt.getName(settings.MAP_PREFERRED_LOCALE.get(), settings.MAP_TRANSLITERATE_NAMES.get()), 
+							rt.getName(settings.MAP_PREFERRED_LOCALE.get(), settings.MAP_TRANSLITERATE_NAMES.get()),
 							rt.getRef(settings.MAP_PREFERRED_LOCALE.get(), settings.MAP_TRANSLITERATE_NAMES.get(), rt.bearingVsRouteDirection(locationProvider.getLastKnownLocation())),
-							rt.getDestinationName(settings.MAP_PREFERRED_LOCALE.get(), settings.MAP_TRANSLITERATE_NAMES.get(), rt.bearingVsRouteDirection(locationProvider.getLastKnownLocation())), 
+							rt.getDestinationName(settings.MAP_PREFERRED_LOCALE.get(), settings.MAP_TRANSLITERATE_NAMES.get(), rt.bearingVsRouteDirection(locationProvider.getLastKnownLocation())),
 									"»");
-				} 
+				}
 				if (text == null) {
 					text = "";
 				} else {
 					if(!Algorithms.isEmpty(text) && locationProvider.getLastKnownLocation() != null) {
-						double dist = 
+						double dist =
 								CurrentPositionHelper.getOrthogonalDistance(rt, locationProvider.getLastKnownLocation());
 						if(dist < 50) {
 							showMarker = true;

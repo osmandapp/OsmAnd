@@ -2383,19 +2383,19 @@ El espacio de almacenamiento usado es {3} MB temporalmente y {1} MB permanenteme
     <string name="si_mi_meters">Millas/metros</string>
     <string name="driving_region_australia">Australia</string>
     <string name="lang_kab">Cabilio</string>
-    <string name="release_2_5">" • Ahora se pueden pulsar los iconos del mapa
-\n
-\n • Nuevo filtro de búsqueda PDI potente: Busca, p.e. restaurantes por tipo de cocina o campamentos con instalaciones específicas
-\n
-\n • Nuevo estilo de mapa topográfico (Topo) para ciclistas y senderistas
-\n
-\n • Mejoras en la grabación de viaje
-\n
-\n • Mejoras en la notificación de navegación (Android Wear)
-\n
-\n • Muchas otras mejoras y correcciones de errores
-\n
-\n y más… "</string>
+    <string name="release_2_5">\\022 Iconos del mapa pulsables
+\n 
+\n • Filtro de búsqueda PDI potente: Busca, p.e. restaurantes por tipo de cocina o campamentos con instalaciones específicas 
+\n 
+\n • Nuevo estilo de mapa topográfico (Topo) para ciclistas y senderistas 
+\n 
+\n • Mejoras en la grabación de viaje 
+\n 
+\n • Mejoras en la notificación de navegación (Android Wear) 
+\n 
+\n • Muchas otras mejoras y correcciones de errores 
+\n 
+\n y más…</string>
     <string name="wiki_around">Artículos de Wikipedia cercanos</string>
     <string name="route_roundabout_short">Toma la %1$d salida y continúa</string>
     <string name="upload_poi">Subir Punto de Interés</string>
@@ -2536,27 +2536,27 @@ El espacio de almacenamiento usado es {3} MB temporalmente y {1} MB permanenteme
     <string name="quick_action_btn_tutorial_title">Cambiar la posición del botón</string>
     <string name="quick_action_btn_tutorial_descr">Pulsación larga y arrastrar el botón para cambiar su posición en la pantalla</string>
 	<string name="shared_string_action_name">Nombre de acción</string>
-<string name="release_2_6">" • Nueva función: Botón de acción rápida
-\n
-\n • Mejorada la respuesta de gestos táctiles (p.e. panorámicas y acercamientos simultáneos)
-\n
-\n • El nuevo tipo de letra del mapa abarca más regiones
-\n
-\n • Soporte TTS para idiomas regionales (y acentos)
-\n
-\n • Mejorada la visibilidad en varios estilos de mapas y Wikipedia
-\n
-\n • Soporte para «Código  de Ubicación Abierto» (Open Location Code)
-\n
-\n • Visualización del perfil de elevación, pendiente y velocidad para las trazas GPX grabadas y la ruta calculada
-\n
-\n • Opción \"Estilo de conducción\" y mejoras lógicas en el cálculo de rutas para bicicleta
-\n
-\n • Opciones para usar los datos de altitud en el cálculo de rutas para bicicleta
-\n
-\n • Varias otras mejoras y corrección de errores
-\n
-\n y más… "</string>
+<string name="release_2_6">"\\022 Nueva función: Botón de acción rápida 
+\n 
+\n • Mejorada la respuesta de gestos táctiles (p.e. desplazamiento y acercamiento simultáneos) 
+\n 
+\n • El nuevo tipo de letra del mapa abarca más regiones 
+\n 
+\n • Soporte TTS para idiomas regionales (y acentos) 
+\n 
+\n • Mejorada la visibilidad en varios estilos de mapas y Wikipedia 
+\n 
+\n • Soporte para «Código  de Ubicación Abierto» (Open Location Code) 
+\n 
+\n • Visualización del perfil de elevación, pendiente y velocidad para las trazas GPX grabadas y la ruta calculada 
+\n 
+\n • Opción \"Estilo de conducción\" y mejoras lógicas en el cálculo de rutas para bicicleta 
+\n 
+\n • Opciones para usar los datos de altitud en el cálculo de rutas para bicicleta 
+\n 
+\n • Varias otras mejoras y corrección de errores 
+\n 
+\n y más…"</string>
 	<string name="select_gpx_folder">Seleccionar carpeta de traza</string>
     <string name="file_can_not_be_moved">No se puede mover el archivo.</string>
     <string name="shared_string_move">Mover</string>
@@ -2698,7 +2698,7 @@ Cobertura y calidad aproximadas del mapa:
     <string name="no_underlay">Sin subyacente</string>
     <string name="subscribe_email_error">Error</string>
     <string name="subscribe_email_desc">¡Suscríbete a nuestra lista de correo electrónico sobre descuentos de la aplicación y obtén 3 descargas de mapa adicionales!</string>
-    <string name="depth_contour_descr">Conjunto de mapas que contienen las curvas y puntos de profundidad náuticas (según una grilla de 30 arco-segundos).</string>
+    <string name="depth_contour_descr">Conjunto de mapas que contienen las curvas de nivel de los fondos marinos.</string>
     <string name="sea_depth_thanks">¡Gracias por adquirir las curvas de profundidad náuticas!</string>
     <string name="index_item_depth_contours_osmand_ext">Curvas de profundidad náuticas</string>
     <string name="index_item_depth_points_southern_hemisphere">Curvas de profundidad náuticas del hemisferio sur</string>
@@ -2719,8 +2719,8 @@ Algunas de las características principales:
     <string name="type_city_town">Escribe la ciudad o pueblo</string>
     <string name="type_postcode">Escribe el código postal</string>
     <string name="nearest_cities">Ciudades más cercanas</string>
-    <string name="select_city">Selecciona la ciudad</string>
-    <string name="select_postcode">Selecciona el código postal</string>
+    <string name="select_city">Seleccionar ciudad</string>
+    <string name="select_postcode">Seleccionar código postal</string>
     <string name="shared_string_paused">Pausado</string>
     <string name="favorite_group_name">Nombre del grupo</string>
     <string name="change_color">Cambiar color</string>
@@ -2809,16 +2809,19 @@ Algunas de las características principales:
     <string name="mapillary_descr">Fotos a pie de calle para todos. Descubre lugares, colabora, captura el mundo.</string>
     <string name="mapillary">Mapillary</string>
     <string name="shared_string_add_photos">Añadir fotos</string>
-    <string name="mapillary_action_descr">Contribuye con Mapillary con tus propias vistas a pie de calle de esta ubicación.</string>
+    <string name="mapillary_action_descr">Contribuye con tus propias vistas a pie de calle de esta ubicación a través de Mapillary.</string>
     <string name="mapillary_widget_descr">Te permite la rápida contribución a Mapillary</string>
     <string name="plugin_mapillary_descr">Fotos a nivel de calle para todos. Descubre lugares, colabora, captura el mundo.</string>
     <string name="no_photos_descr">No tenemos fotos para esta ubicación</string>
     <string name="open_mapillary">Abrir Mapillary</string>
     <string name="shared_string_install">Instalar</string>
-    <string name="improve_coverage_mapillary">Mejorar la cobertura con Mapillary</string>
-    <string name="improve_coverage_install_mapillary_desc">Puedes hacer tus propias fotos o serie de fotos y añadirlas a esta ubicación del mapa.
-\n
-\nPara ello debes instalar la aplicación Mapillary desde Google Play.</string>
+    <string name="improve_coverage_mapillary">Mejorar la cobertura de fotos con Mapillary</string>
+    <string name="improve_coverage_install_mapillary_desc">Puedes hacer tus propias fotos o serie de fotos y añadirlas a esta ubicación del mapa. 
+\n 
+\nPara ello debes instalar la aplicación de Mapillary desde Google Play.</string>
     <string name="online_photos">Fotos en línea</string>
     <string name="mapillary_image">Imagen de Mapillary</string>
+    <string name="shared_string_permissions">Permisos</string>
+    <string name="import_gpx_failed_descr">OsmAnd no puede importar el archivo. Compruebe si OsmAnd tiene permiso para leer el archivo en esa ubicación.</string>
+    <string name="distance_moving">Distancia corregida</string>
     </resources>

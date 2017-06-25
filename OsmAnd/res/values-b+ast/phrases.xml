@@ -47,4 +47,8 @@
 	<string name="poi_recycling_type">Triba</string>
 	<string name="poi_shelter_type">Triba</string>
 	<string name="poi_medical_system">Sistema mélicu</string>
+	<string name="poi_vending_type">Tipu de máquina de venta</string>
+	<string name="poi_self_service">Autoserviciu</string>
+	<string name="poi_automated">Automatizáu</string>
+	<string name="poi_covered">Cubiertu</string>
 	</resources>

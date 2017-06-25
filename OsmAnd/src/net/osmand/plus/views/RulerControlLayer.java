@@ -4,10 +4,11 @@ import android.graphics.Bitmap;
 import android.graphics.BitmapFactory;
 import android.graphics.Canvas;
 import android.graphics.Color;
-import android.graphics.DashPathEffect;
 import android.graphics.Paint;
 import android.graphics.Paint.Style;
+import android.graphics.Path;
 import android.graphics.Rect;
+import android.view.View;
 
 import net.osmand.Location;
 import net.osmand.data.QuadPoint;
@@ -20,12 +21,15 @@ import net.osmand.plus.activities.MapActivity;
 
 import java.util.ArrayList;
 
+import gnu.trove.list.array.TIntArrayList;
+
 public class RulerControlLayer extends OsmandMapLayer {
 
     private static final int TEXT_SIZE = 14;
     private final MapActivity mapActivity;
     private OsmandApplication app;
     private OsmandMapTileView view;
+    private View rightWidgetsPanel;
 
     private TextSide textSide;
     private int maxRadiusInDp;
@@ -37,12 +41,17 @@ public class RulerControlLayer extends OsmandMapLayer {
     private int cacheZoom;
     private double cacheTileX;
     private double cacheTileY;
+    private long cacheMultiTouchTime;
     private ArrayList<String> cacheDistances;
+    private Path distancePath;
+    private TIntArrayList tx;
+    private TIntArrayList ty;
 
-    private Bitmap centerIcon;
+    private Bitmap centerIconDay;
+    private Bitmap centerIconNight;
     private Paint bitmapPaint;
-    private Paint distancePaint;
-    private RenderingLineAttributes attrs;
+    private RenderingLineAttributes lineAttrs;
+    private RenderingLineAttributes circleAttrs;
 
     public RulerControlLayer(MapActivity mapActivity) {
         this.mapActivity = mapActivity;
@@ -55,43 +64,59 @@ public class RulerControlLayer extends OsmandMapLayer {
         cacheDistances = new ArrayList<>();
         cacheCenter = new QuadPoint();
         maxRadiusInDp = mapActivity.getResources().getDimensionPixelSize(R.dimen.map_ruler_radius);
+        rightWidgetsPanel = mapActivity.findViewById(R.id.map_right_widgets_panel);
+        distancePath = new Path();
+        tx = new TIntArrayList();
+        ty = new TIntArrayList();
 
-        centerIcon = BitmapFactory.decodeResource(view.getResources(), R.drawable.map_ruler_center);
+        centerIconDay = BitmapFactory.decodeResource(view.getResources(), R.drawable.map_ruler_center_day);
+        centerIconNight = BitmapFactory.decodeResource(view.getResources(), R.drawable.map_ruler_center_night);
 
         bitmapPaint = new Paint();
         bitmapPaint.setAntiAlias(true);
         bitmapPaint.setDither(true);
         bitmapPaint.setFilterBitmap(true);
 
-        distancePaint = new Paint();
-        distancePaint.setAntiAlias(true);
-        distancePaint.setStyle(Style.STROKE);
-        distancePaint.setStrokeWidth(10);
-        distancePaint.setPathEffect(new DashPathEffect(new float[]{10, 10}, 0));
+        lineAttrs = new RenderingLineAttributes("rulerLine");
 
-        attrs = new RenderingLineAttributes("rulerCircle");
-        attrs.paint.setStrokeWidth(2);
-        attrs.paint2.setTextSize(TEXT_SIZE * mapActivity.getResources().getDisplayMetrics().density);
-        attrs.paint2.setStyle(Style.FILL_AND_STROKE);
-        attrs.shadowPaint.setTextSize(TEXT_SIZE * mapActivity.getResources().getDisplayMetrics().density);
-        attrs.shadowPaint.setStrokeWidth(6);
-        attrs.shadowPaint.setColor(Color.WHITE);
+        circleAttrs = new RenderingLineAttributes("rulerCircle");
+        circleAttrs.paint.setStrokeWidth(2);
+        circleAttrs.paint2.setTextSize(TEXT_SIZE * mapActivity.getResources().getDisplayMetrics().density);
+        circleAttrs.paint3.setColor(Color.WHITE);
+        circleAttrs.paint3.setStrokeWidth(6);
+        circleAttrs.paint3.setTextSize(TEXT_SIZE * mapActivity.getResources().getDisplayMetrics().density);
+        circleAttrs.shadowPaint.setStrokeWidth(6);
+        circleAttrs.shadowPaint.setColor(Color.WHITE);
     }
 
     @Override
     public void onDraw(Canvas canvas, RotatedTileBox tb, DrawSettings settings) {
-        if (mapActivity.getMapLayers().getMapWidgetRegistry().isVisible("ruler")) {
-            attrs.updatePaints(view, settings, tb);
+        if (mapActivity.getMapLayers().getMapWidgetRegistry().isVisible("ruler") &&
+                rightWidgetsPanel.getVisibility() == View.VISIBLE) {
+            lineAttrs.updatePaints(view, settings, tb);
+            circleAttrs.updatePaints(view, settings, tb);
+            circleAttrs.paint2.setStyle(Style.FILL);
             final QuadPoint center = tb.getCenterPixelPoint();
             final RulerMode mode = app.getSettings().RULER_MODE.get();
 
-            drawCenterIcon(canvas, tb, center);
-            if (mode == RulerMode.FIRST) {
+            if (cacheMultiTouchTime != view.getMultiTouchTime()) {
+                cacheMultiTouchTime = view.getMultiTouchTime();
+            }
+            if (view.isMultiTouch() || System.currentTimeMillis() - cacheMultiTouchTime < 3000) {
+                float x1 = view.getFirstTouchPointX();
+                float y1 = view.getFirstTouchPointY();
+                float x2 = view.getSecondTouchPointX();
+                float y2 = view.getSecondTouchPointY();
+                drawFingerDistance(canvas, tb, center, x1, y1, x2, y2);
+            } else if (mode == RulerMode.FIRST) {
+                drawCenterIcon(canvas, tb, center, settings.isNightMode());
                 Location currentLoc = app.getLocationProvider().getLastKnownLocation();
                 if (currentLoc != null) {
                     drawDistance(canvas, tb, center, currentLoc);
                 }
-            } else if (mode == RulerMode.SECOND) {
+            }
+            if (mode == RulerMode.SECOND) {
+                drawCenterIcon(canvas, tb, center, settings.isNightMode());
                 updateData(tb, center);
                 for (int i = 1; i <= cacheDistances.size(); i++) {
                     drawCircle(canvas, tb, i, center);
@@ -100,17 +125,38 @@ public class RulerControlLayer extends OsmandMapLayer {
         }
     }
 
-    private void drawCenterIcon(Canvas canvas, RotatedTileBox tb, QuadPoint center) {
+    private void drawFingerDistance(Canvas canvas, RotatedTileBox tb, QuadPoint center, float x1, float y1, float x2, float y2) {
         canvas.rotate(-tb.getRotate(), center.x, center.y);
-        canvas.drawBitmap(centerIcon, center.x - centerIcon.getWidth() / 2,
-                center.y - centerIcon.getHeight() / 2, bitmapPaint);
+        canvas.drawLine(x1, y1, x2, y2, lineAttrs.paint);
+        canvas.rotate(tb.getRotate(), center.x, center.y);
+    }
+
+    private void drawCenterIcon(Canvas canvas, RotatedTileBox tb, QuadPoint center, boolean nightMode) {
+        canvas.rotate(-tb.getRotate(), center.x, center.y);
+        if (nightMode) {
+            canvas.drawBitmap(centerIconNight, center.x - centerIconNight.getWidth() / 2,
+                    center.y - centerIconNight.getHeight() / 2, bitmapPaint);
+        } else {
+            canvas.drawBitmap(centerIconDay, center.x - centerIconDay.getWidth() / 2,
+                    center.y - centerIconDay.getHeight() / 2, bitmapPaint);
+        }
         canvas.rotate(tb.getRotate(), center.x, center.y);
     }
 
     private void drawDistance(Canvas canvas, RotatedTileBox tb, QuadPoint center, Location currentLoc) {
-        int currentLocX = tb.getPixXFromLonNoRot(currentLoc.getLongitude());
-        int currentLocY = tb.getPixYFromLatNoRot(currentLoc.getLatitude());
-        canvas.drawLine(currentLocX, currentLocY, center.x, center.y, distancePaint);
+        int currX = tb.getPixXFromLonNoRot(currentLoc.getLongitude());
+        int currY = tb.getPixYFromLatNoRot(currentLoc.getLatitude());
+        distancePath.reset();
+        tx.clear();
+        ty.clear();
+
+        tx.add(currX);
+        ty.add(currY);
+        tx.add((int) center.x);
+        ty.add((int) center.y);
+
+        calculatePath(tb, tx, ty, distancePath);
+        canvas.drawPath(distancePath, lineAttrs.paint);
     }
 
     private void updateData(RotatedTileBox tb, QuadPoint center) {
@@ -143,18 +189,10 @@ public class RulerControlLayer extends OsmandMapLayer {
 
         if (maxVertical >= maxHorizontal) {
             maxRadius = maxVertical;
-            if (topDist >= bottomDist) {
-                textSide = TextSide.TOP;
-            } else {
-                textSide = TextSide.BOTTOM;
-            }
+            textSide = TextSide.VERTICAL;
         } else {
             maxRadius = maxHorizontal;
-            if (rightDist >= leftDist) {
-                textSide = TextSide.RIGHT;
-            } else {
-                textSide = TextSide.LEFT;
-            }
+            textSide = TextSide.HORIZONTAL;
         }
         if (radius != 0) {
             updateText();
@@ -179,42 +217,44 @@ public class RulerControlLayer extends OsmandMapLayer {
     }
 
     private void drawCircle(Canvas canvas, RotatedTileBox tb, int circleNumber, QuadPoint center) {
-        Rect bounds = new Rect();
-        String text = cacheDistances.get(circleNumber - 1);
-        attrs.paint2.getTextBounds(text, 0, text.length(), bounds);
-
-        float x = 0;
-        float y = 0;
-
-        if (textSide == TextSide.TOP) {
-            x = center.x - bounds.width() / 2;
-            y = center.y - radius * circleNumber + bounds.height() / 2;
-        } else if (textSide == TextSide.RIGHT) {
-            x = center.x + radius * circleNumber - bounds.width() / 2;
-            y = center.y + bounds.height() / 2;
-        } else if (textSide == TextSide.BOTTOM) {
-            x = center.x - bounds.width() / 2;
-            y = center.y + radius * circleNumber + bounds.height() / 2;
-        } else if (textSide == TextSide.LEFT) {
-            x = center.x - radius * circleNumber - bounds.width() / 2;
-            y = center.y + bounds.height() / 2;
-        }
-
         if (!mapActivity.getMapView().isZooming()) {
+            Rect bounds = new Rect();
+            String text = cacheDistances.get(circleNumber - 1);
+            circleAttrs.paint2.getTextBounds(text, 0, text.length(), bounds);
+
+            // coords of left or top text
+            float x1 = 0;
+            float y1 = 0;
+            // coords of right or bottom text
+            float x2 = 0;
+            float y2 = 0;
+
+            if (textSide == TextSide.VERTICAL) {
+                x1 = center.x - bounds.width() / 2;
+                y1 = center.y - radius * circleNumber + bounds.height() / 2;
+                x2 = center.x - bounds.width() / 2;
+                y2 = center.y + radius * circleNumber + bounds.height() / 2;
+            } else if (textSide == TextSide.HORIZONTAL) {
+                x1 = center.x - radius * circleNumber - bounds.width() / 2;
+                y1 = center.y + bounds.height() / 2;
+                x2 = center.x + radius * circleNumber - bounds.width() / 2;
+                y2 = center.y + bounds.height() / 2;
+            }
+
             canvas.rotate(-tb.getRotate(), center.x, center.y);
-            canvas.drawCircle(center.x, center.y, radius * circleNumber, attrs.shadowPaint);
-            canvas.drawCircle(center.x, center.y, radius * circleNumber, attrs.paint);
-            canvas.drawText(text, x, y, attrs.shadowPaint);
-            canvas.drawText(text, x, y, attrs.paint2);
+            canvas.drawCircle(center.x, center.y, radius * circleNumber, circleAttrs.shadowPaint);
+            canvas.drawCircle(center.x, center.y, radius * circleNumber, circleAttrs.paint);
+            canvas.drawText(text, x1, y1, circleAttrs.paint3);
+            canvas.drawText(text, x1, y1, circleAttrs.paint2);
+            canvas.drawText(text, x2, y2, circleAttrs.paint3);
+            canvas.drawText(text, x2, y2, circleAttrs.paint2);
             canvas.rotate(tb.getRotate(), center.x, center.y);
         }
     }
 
     private enum TextSide {
-        TOP,
-        BOTTOM,
-        LEFT,
-        RIGHT
+        VERTICAL,
+        HORIZONTAL
     }
 
     @Override

@@ -687,125 +687,123 @@ public class AvailableGPXFragment extends OsmandExpandableListFragment {
 
 		final List<File> dirs = new ArrayList<>();
 		collectDirs(app.getAppPath(IndexConstants.GPX_INDEX_DIR), dirs, info.file.getParentFile());
-		if (!dirs.isEmpty()) {
-			if (!info.file.getParentFile().equals(app.getAppPath(IndexConstants.GPX_INDEX_DIR))) {
-				dirs.add(0, app.getAppPath(IndexConstants.GPX_INDEX_DIR));
-			}
-			String gpxDir = app.getAppPath(IndexConstants.GPX_INDEX_DIR).getPath();
-			int i = 0;
-			for (File dir : dirs) {
-				String dirName = dir.getPath();
-				if (dirName.startsWith(gpxDir)) {
-					if (dirName.length() == gpxDir.length()) {
-						dirName = dir.getName();
-					} else {
-						dirName = dirName.substring(gpxDir.length() + 1);
-					}
+		if (!info.file.getParentFile().equals(app.getAppPath(IndexConstants.GPX_INDEX_DIR))) {
+			dirs.add(0, app.getAppPath(IndexConstants.GPX_INDEX_DIR));
+		}
+		String gpxDir = app.getAppPath(IndexConstants.GPX_INDEX_DIR).getPath();
+		int i = 0;
+		for (File dir : dirs) {
+			String dirName = dir.getPath();
+			if (dirName.startsWith(gpxDir)) {
+				if (dirName.length() == gpxDir.length()) {
+					dirName = dir.getName();
+				} else {
+					dirName = dirName.substring(gpxDir.length() + 1);
 				}
-				menuAdapter.addItem(itemBuilder.setTitle(Algorithms.capitalizeFirstLetter(dirName))
-						.setIcon(R.drawable.ic_action_folder_stroke).setTag(i).createItem());
-				i++;
 			}
-			menuAdapter.addItem(itemBuilder.setTitleId(R.string.add_new_folder, app)
-					.setIcon(R.drawable.map_zoom_in).setTag(-1).createItem());
-			final AlertDialog.Builder builder = new AlertDialog.Builder(getActivity());
-			final ArrayAdapter<ContextMenuItem> listAdapter =
-					menuAdapter.createListAdapter(getActivity(), app.getSettings().isLightContent());
-			builder.setTitle(R.string.select_gpx_folder);
-			builder.setAdapter(listAdapter, new DialogInterface.OnClickListener() {
+			menuAdapter.addItem(itemBuilder.setTitle(Algorithms.capitalizeFirstLetter(dirName))
+					.setIcon(R.drawable.ic_action_folder_stroke).setTag(i).createItem());
+			i++;
+		}
+		menuAdapter.addItem(itemBuilder.setTitleId(R.string.add_new_folder, app)
+				.setIcon(R.drawable.map_zoom_in).setTag(-1).createItem());
+		final AlertDialog.Builder builder = new AlertDialog.Builder(getActivity());
+		final ArrayAdapter<ContextMenuItem> listAdapter =
+				menuAdapter.createListAdapter(getActivity(), app.getSettings().isLightContent());
+		builder.setTitle(R.string.select_gpx_folder);
+		builder.setAdapter(listAdapter, new DialogInterface.OnClickListener() {
 
-				@Override
-				public void onClick(DialogInterface dialog, int which) {
-					ContextMenuItem item = menuAdapter.getItem(which);
-					int index = item.getTag();
-					if (index == -1) {
-						Activity a = getActivity();
-						AlertDialog.Builder b = new AlertDialog.Builder(a);
-						b.setTitle(R.string.add_new_folder);
-						final EditText editText = new EditText(a);
-						editText.addTextChangedListener(new TextWatcher() {
-							@Override
-							public void beforeTextChanged(CharSequence s, int start, int count, int after) {
-							}
+			@Override
+			public void onClick(DialogInterface dialog, int which) {
+				ContextMenuItem item = menuAdapter.getItem(which);
+				int index = item.getTag();
+				if (index == -1) {
+					Activity a = getActivity();
+					AlertDialog.Builder b = new AlertDialog.Builder(a);
+					b.setTitle(R.string.add_new_folder);
+					final EditText editText = new EditText(a);
+					editText.addTextChangedListener(new TextWatcher() {
+						@Override
+						public void beforeTextChanged(CharSequence s, int start, int count, int after) {
+						}
 
-							@Override
-							public void onTextChanged(CharSequence s, int start, int before, int count) {
-							}
+						@Override
+						public void onTextChanged(CharSequence s, int start, int before, int count) {
+						}
 
-							@Override
-							public void afterTextChanged(Editable s) {
-								Editable text = editText.getText();
-								if (text.length() >= 1) {
-									if (ILLEGAL_PATH_NAME_CHARACTERS.matcher(text).find()) {
-										editText.setError(app.getString(R.string.file_name_containes_illegal_char));
-									}
+						@Override
+						public void afterTextChanged(Editable s) {
+							Editable text = editText.getText();
+							if (text.length() >= 1) {
+								if (ILLEGAL_PATH_NAME_CHARACTERS.matcher(text).find()) {
+									editText.setError(app.getString(R.string.file_name_containes_illegal_char));
 								}
 							}
-						});
-						int leftPadding = AndroidUtils.dpToPx(a, 24f);
-						int topPadding = AndroidUtils.dpToPx(a, 4f);
-						b.setView(editText, leftPadding, topPadding, leftPadding, topPadding);
-						// Behaviour will be overwritten later;
-						b.setPositiveButton(R.string.shared_string_ok, null);
-						b.setNegativeButton(R.string.shared_string_cancel, null);
-						final AlertDialog alertDialog = b.create();
-						alertDialog.setOnShowListener(new DialogInterface.OnShowListener() {
-							@Override
-							public void onShow(DialogInterface dialog) {
-								alertDialog.getButton(AlertDialog.BUTTON_POSITIVE).setOnClickListener(
-										new View.OnClickListener() {
-											@Override
-											public void onClick(View v) {
-												String newName = editText.getText().toString();
-												if (ILLEGAL_PATH_NAME_CHARACTERS.matcher(newName).find()) {
-													Toast.makeText(app, R.string.file_name_containes_illegal_char,
-															Toast.LENGTH_LONG).show();
-													return;
-												}
-												File destFolder = new File(app.getAppPath(IndexConstants.GPX_INDEX_DIR), newName);
-												if (destFolder.exists()) {
-													Toast.makeText(app, R.string.file_with_name_already_exists,
-															Toast.LENGTH_LONG).show();
-													return;
-												} else if (destFolder.mkdirs()) {
-													File dest = new File(destFolder, info.fileName);
-													if (info.file.renameTo(dest)) {
-														app.getGpxDatabase().rename(info.file, dest);
-														asyncLoader = new LoadGpxTask();
-														asyncLoader.execute(getActivity());
-													} else {
-														Toast.makeText(app, R.string.file_can_not_be_moved, Toast.LENGTH_LONG).show();
-													}
-
+						}
+					});
+					int leftPadding = AndroidUtils.dpToPx(a, 24f);
+					int topPadding = AndroidUtils.dpToPx(a, 4f);
+					b.setView(editText, leftPadding, topPadding, leftPadding, topPadding);
+					// Behaviour will be overwritten later;
+					b.setPositiveButton(R.string.shared_string_ok, null);
+					b.setNegativeButton(R.string.shared_string_cancel, null);
+					final AlertDialog alertDialog = b.create();
+					alertDialog.setOnShowListener(new DialogInterface.OnShowListener() {
+						@Override
+						public void onShow(DialogInterface dialog) {
+							alertDialog.getButton(AlertDialog.BUTTON_POSITIVE).setOnClickListener(
+									new View.OnClickListener() {
+										@Override
+										public void onClick(View v) {
+											String newName = editText.getText().toString();
+											if (ILLEGAL_PATH_NAME_CHARACTERS.matcher(newName).find()) {
+												Toast.makeText(app, R.string.file_name_containes_illegal_char,
+														Toast.LENGTH_LONG).show();
+												return;
+											}
+											File destFolder = new File(app.getAppPath(IndexConstants.GPX_INDEX_DIR), newName);
+											if (destFolder.exists()) {
+												Toast.makeText(app, R.string.file_with_name_already_exists,
+														Toast.LENGTH_LONG).show();
+												return;
+											} else if (destFolder.mkdirs()) {
+												File dest = new File(destFolder, info.fileName);
+												if (info.file.renameTo(dest)) {
+													app.getGpxDatabase().rename(info.file, dest);
+													asyncLoader = new LoadGpxTask();
+													asyncLoader.execute(getActivity());
 												} else {
 													Toast.makeText(app, R.string.file_can_not_be_moved, Toast.LENGTH_LONG).show();
 												}
-												alertDialog.dismiss();
+
+											} else {
+												Toast.makeText(app, R.string.file_can_not_be_moved, Toast.LENGTH_LONG).show();
 											}
-										});
-							}
-						});
-						alertDialog.show();
+											alertDialog.dismiss();
+										}
+									});
+						}
+					});
+					alertDialog.show();
+				} else {
+					File dir = dirs.get(index);
+					File dest = new File(dir, info.file.getName());
+					if (dest.exists()) {
+						Toast.makeText(app, R.string.file_with_name_already_exists, Toast.LENGTH_LONG).show();
 					} else {
-						File dir = dirs.get(index);
-						File dest = new File(dir, info.file.getName());
-						if (dest.exists()) {
-							Toast.makeText(app, R.string.file_with_name_already_exists, Toast.LENGTH_LONG).show();
+						if (info.file.renameTo(dest)) {
+							app.getGpxDatabase().rename(info.file, dest);
+							asyncLoader = new LoadGpxTask();
+							asyncLoader.execute(getActivity());
 						} else {
-							if (info.file.renameTo(dest)) {
-								app.getGpxDatabase().rename(info.file, dest);
-								asyncLoader = new LoadGpxTask();
-								asyncLoader.execute(getActivity());
-							} else {
-								Toast.makeText(app, R.string.file_can_not_be_moved, Toast.LENGTH_LONG).show();
-							}
+							Toast.makeText(app, R.string.file_can_not_be_moved, Toast.LENGTH_LONG).show();
 						}
 					}
 				}
-			});
-			builder.setNegativeButton(R.string.shared_string_cancel, null);
-			builder.create().show();
-		}
+			}
+		});
+		builder.setNegativeButton(R.string.shared_string_cancel, null);
+		builder.create().show();
 	}
 
 	public class LoadGpxTask extends AsyncTask<Activity, GpxInfo, List<GpxInfo>> {

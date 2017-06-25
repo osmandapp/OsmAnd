@@ -25,6 +25,7 @@ import net.osmand.plus.GPXUtilities;
 import net.osmand.plus.GPXUtilities.GPXTrackAnalysis;
 import net.osmand.plus.GPXUtilities.TrkSegment;
 import net.osmand.plus.GPXUtilities.WptPt;
+import net.osmand.plus.GPXUtilities.GPXFile;
 import net.osmand.plus.GpxSelectionHelper.GpxDisplayItem;
 import net.osmand.plus.IconsCache;
 import net.osmand.plus.OsmandApplication;
@@ -51,6 +52,8 @@ public class TrackDetailsMenu {
 	private GpxDisplayItem gpxItem;
 	private TrackDetailsBarController toolbarController;
 	private TrkSegment segment;
+	private TrackChartPoints trackChartPoints;
+	private List<WptPt> xAxisPoints;
 
 	private static boolean VISIBLE;
 
@@ -140,11 +143,12 @@ public class TrackDetailsMenu {
 			mapActivity.hideTopToolbar(toolbarController);
 		}
 		mapActivity.getMapLayers().getContextMenuLayer().exitGpxDetailsMode();
-		mapActivity.getMapLayers().getGpxLayer().setSelectedPointLatLon(null);
-		mapActivity.getMapLayers().getMapInfoLayer().setSelectedPointLatLon(null);
+		mapActivity.getMapLayers().getGpxLayer().setTrackChartPoints(null);
+		mapActivity.getMapLayers().getMapInfoLayer().setTrackChartPoints(null);
 		mapActivity.getMapView().setMapPositionX(0);
 		mapActivity.getMapView().refreshMap();
 		segment = null;
+		trackChartPoints = null;
 	}
 
 	public void updateInfo(final View main) {
@@ -282,21 +286,61 @@ public class TrackDetailsMenu {
 	private void refreshChart(LineChart chart, boolean forceFit) {
 		Highlight[] highlights = chart.getHighlighted();
 		LatLon location = null;
+
+		float minimumVisibleXValue = chart.getLowestVisibleX();
+		float maximumVisibleXValue = chart.getHighestVisibleX();
+
 		if (highlights != null && highlights.length > 0) {
-			gpxItem.chartHighlightPos = highlights[0].getX();
+			if (minimumVisibleXValue != 0 && maximumVisibleXValue != 0) {
+				if (highlights[0].getX() < minimumVisibleXValue) {
+					gpxItem.chartHighlightPos = minimumVisibleXValue;
+				} else if (highlights[0].getX() > maximumVisibleXValue) {
+					gpxItem.chartHighlightPos = maximumVisibleXValue;
+				} else {
+					gpxItem.chartHighlightPos = highlights[0].getX();
+				}
+			} else {
+				gpxItem.chartHighlightPos = highlights[0].getX();
+			}
 			WptPt wpt = getPoint(chart, gpxItem.chartHighlightPos);
 			if (wpt != null) {
+				if (trackChartPoints == null) {
+					trackChartPoints = new TrackChartPoints();
+					int segmentColor = getTrackSegment(chart).getColor(0);
+					trackChartPoints.setSegmentColor(segmentColor);
+					trackChartPoints.setGpx(getGpxItem().group.getGpx());
+				}
 				location = new LatLon(wpt.lat, wpt.lon);
+				trackChartPoints.setHighlightedPoint(location);
+				trackChartPoints.setXAxisPoints(getXAxisPoints(chart));
 				if (gpxItem.route) {
-					mapActivity.getMapLayers().getMapInfoLayer().setSelectedPointLatLon(location);
+					mapActivity.getMapLayers().getMapInfoLayer().setTrackChartPoints(trackChartPoints);
 				} else {
-					mapActivity.getMapLayers().getGpxLayer().setSelectedPointLatLon(location);
+					mapActivity.getMapLayers().getGpxLayer().setTrackChartPoints(trackChartPoints);
 				}
 			}
 		} else {
 			gpxItem.chartHighlightPos = -1;
 		}
 		fitTrackOnMap(chart, location, forceFit);
+	}
+
+	private List<WptPt> getXAxisPoints(LineChart chart) {
+		float[] entries = chart.getXAxis().mEntries;
+		float maxXValue = chart.getLineData().getXMax();
+		if (entries.length >= 2) {
+			float interval = entries[1] - entries[0];
+			if (interval > 0) {
+				xAxisPoints = new ArrayList<>();
+				float currentPointEntry = interval;
+				while (currentPointEntry < maxXValue) {
+					WptPt pointToAdd = getPoint(chart, currentPointEntry);
+					xAxisPoints.add(pointToAdd);
+					currentPointEntry += interval;
+				}
+			}
+		}
+		return xAxisPoints;
 	}
 
 	private void updateView(final View parentView) {
@@ -537,7 +581,8 @@ public class TrackDetailsMenu {
 		if (gpxItem.chartHighlightPos != -1) {
 			chart.highlightValue(gpxItem.chartHighlightPos, 0);
 		} else {
-			chart.highlightValue(null);
+			gpxItem.chartHighlightPos = chart.getLowestVisibleX();
+			chart.highlightValue(chart.getLowestVisibleX(), 0);
 		}
 	}
 
@@ -558,6 +603,45 @@ public class TrackDetailsMenu {
 		public void updateToolbar(MapInfoWidgetsFactory.TopToolbarView view) {
 			super.updateToolbar(view);
 			view.getShadowView().setVisibility(View.GONE);
+		}
+	}
+
+	public class TrackChartPoints {
+		private List<WptPt> xAxisPoints;
+		private LatLon highlightedPoint;
+		private int segmentColor;
+		private GPXFile gpx;
+
+		public List<WptPt> getXAxisPoints() {
+			return xAxisPoints;
+		}
+
+		public LatLon getHighlightedPoint() {
+			return highlightedPoint;
+		}
+
+		public int getSegmentColor() {
+			return segmentColor;
+		}
+
+		public GPXFile getGpx() {
+			return gpx;
+		}
+
+		public void setXAxisPoints(List<WptPt> xAxisPoints) {
+			this.xAxisPoints = xAxisPoints;
+		}
+
+		public void setHighlightedPoint(LatLon highlightedPoint) {
+			this.highlightedPoint = highlightedPoint;
+		}
+
+		public void setSegmentColor(int segmentColor) {
+			this.segmentColor = segmentColor;
+		}
+
+		public void setGpx(GPXFile gpx) {
+			this.gpx = gpx;
 		}
 	}
 }

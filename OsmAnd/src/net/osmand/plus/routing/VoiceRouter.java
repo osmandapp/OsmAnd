@@ -618,18 +618,19 @@ public class VoiceRouter {
 		return empty;
 	}
 
-	public String getSpeakablePointName(String pn) {
-		// Replace characters which may produce unwanted tts sounds:
+	public static String getSpeakablePointName(String pn) {
+		// Replace characters which may produce unwanted TTS sounds:
 		if (pn != null) {
 			pn = pn.replace('-', ' ');
 			pn = pn.replace(':', ' ');
 			pn = pn.replace(";", ", "); // Trailing blank prevents punctuation being pronounced. Replace by comma for better intonation.
 			pn = pn.replace("/", ", "); // Slash is actually pronounced by many TTS engines, ceeating an awkward voice prompt, better replace by comma.
-			if ((player != null) && (!"de".equals(player.getLanguage()))) {
-				pn = pn.replace("\u00df", "ss"); // Helps non-German tts voices to pronounce German Strasse (=street)
+			if ((player != null) && (!player.getLanguage().equals("de"))) {
+				pn = pn.replace("\u00df", "ss"); // Helps non-German TTS voices to pronounce German Straße (=street)
 			}
-			if ((player != null) && ("en".startsWith(player.getLanguage()))) {
-				pn = pn.replace("SR", "S R");    // Avoid SR (as for State Route or Strada Regionale) be pronounced as "Senior" in English tts voice
+			if ((player != null) && (player.getLanguage().startsWith("en"))) {
+				pn = pn.replace("SR", "S R");    // Avoid SR (as for State Route or Strada Regionale) be pronounced as "Senior" in English TTS voice
+				pn = pn.replace("Dr.", "Dr ");   // Avoid pause many English TTS voices introduce after period
 			}
 		}
 		return pn;

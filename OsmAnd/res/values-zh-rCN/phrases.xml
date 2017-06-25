@@ -1,2 +1,10 @@
-<?xml version="1.0" encoding="utf-8"?>
-<resources></resources>
+<?xml version='1.0' encoding='UTF-8'?>
+<resources><string name="poi_fuel_avia_type">类型</string>
+	<string name="poi_payment_type">支付类别</string>
+	<string name="poi_clothes_type">类型</string>
+	<string name="poi_shoes_type">类型</string>
+	<string name="poi_fire_hydrant_type">类型</string>
+	<string name="poi_fire_hydrant_position">位置</string>
+	<string name="poi_fire_hydrant_water_source">水源</string>
+	<string name="poi_payment_toll_type">支付类别</string>
+	</resources>

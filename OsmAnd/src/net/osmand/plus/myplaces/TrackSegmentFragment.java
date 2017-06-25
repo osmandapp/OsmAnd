@@ -287,7 +287,15 @@ public class TrackSegmentFragment extends OsmAndListFragment {
 		vis.setOnCheckedChangeListener(new CompoundButton.OnCheckedChangeListener() {
 			@Override
 			public void onCheckedChanged(CompoundButton buttonView, boolean isChecked) {
-				app.getSelectedGpxHelper().selectGpxFile(getGpx(), vis.isChecked(), false);
+				if (!isChecked) {
+					selectedSplitInterval = 0;
+				}
+				SelectedGpxFile sf = app.getSelectedGpxHelper().selectGpxFile(getGpx(), vis.isChecked(), false);
+				final List<GpxDisplayGroup> groups = getDisplayGroups();
+				if (groups.size() > 0) {
+					updateSplit(groups, vis.isChecked() ? sf : null);
+				}
+				updateSplitIntervalView(splitIntervalView);
 				updateColorView(colorView);
 			}
 		});
@@ -720,6 +728,8 @@ public class TrackSegmentFragment extends OsmAndListFragment {
 		addOptionSplit(300, false, groups);
 		addOptionSplit(600, false, groups);
 		addOptionSplit(900, false, groups);
+		addOptionSplit(1800, false, groups);
+		addOptionSplit(3600, false, groups);
 	}
 
 	private void updateSplit(List<GpxDisplayGroup> groups, SelectedGpxFile sf) {

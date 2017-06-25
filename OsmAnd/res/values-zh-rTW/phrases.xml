@@ -3196,6 +3196,38 @@
 
 	<string name="poi_wiki_link">維基百科</string>
 
-	<string name="poi_xmas">耶誕節</string>
+	<string name="poi_xmas">聖誕節</string>
 	<string name="poi_xmas_tree">聖誕樹</string>
+	<string name="poi_xmas_market">聖誕市集</string>
+	<string name="poi_xmas_pyramid">聖誕樹</string>
+	<string name="poi_xmas_shop">聖誕商店</string>
+	<string name="poi_xmas_event">聖誕活動</string>
+	<string name="poi_xmas_opening_hours">聖誕節：營業時間</string>
+	<string name="poi_xmas_location">聖誕節：位置</string>
+	<string name="poi_xmas_url">聖誕節：網站</string>
+
+	<string name="poi_public_bookcase">公共書架</string>
+	<string name="poi_cuisine_pizza">披薩</string>
+	<string name="poi_cuisine_burger">漢堡</string>
+	<string name="poi_cuisine_coffee">咖啡</string>
+	<string name="poi_cuisine_sandwich">三明治</string>
+	<string name="poi_cuisine_kebab">中東烤肉</string>
+	<string name="poi_cuisine_doner">土耳其烤肉 (沙威瑪)</string>
+	<string name="poi_cuisine_chicken">雞肉</string>
+	<string name="poi_cuisine_ice_cream">冰淇淋</string>
+	<string name="poi_cuisine_sushi">壽司</string>
+	<string name="poi_cuisine_fish_and_chips">炸魚和薯條</string>
+	<string name="poi_cuisine_seafood">海鮮</string>
+	<string name="poi_cuisine_barbecue">燒烤</string>
+	<string name="poi_cuisine_noodle">麵</string>
+	<string name="poi_cuisine_donut">甜甜圈</string>
+	<string name="poi_cuisine_ramen">拉麵</string>
+	<string name="poi_cuisine_crepe">可麗餅</string>
+	<string name="poi_cuisine_breakfast">早餐</string>
+	<string name="poi_cuisine_beef_bowl">牛丼</string>
+	<string name="poi_cuisine_steak">牛排</string>
+	<string name="poi_cuisine_tapas">西班牙小菜</string>
+	<string name="poi_cuisine_gastropub">餐酒館</string>
+	<string name="poi_cuisine_heuriger">Heuriger</string>
+	<string name="poi_cuisine_curry">咖哩</string>
 	</resources>

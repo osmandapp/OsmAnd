@@ -1145,11 +1145,11 @@
     <string name="route_distance">מרחק:</string>
     <string name="route_duration">זמן:</string>
     <string name="shared_string_near">ליד</string>
-    <string name="shared_string_undo_all">ביטול הכל</string>
+    <string name="shared_string_undo_all">ביטול הכול</string>
     <string name="rec_split">פיצול הקלטות</string>
     <string name="rec_split_title">שימוש בפיצול הקלטות</string>
-    <string name="rec_split_desc">דרוס סרטונים קיימים אם המקום הנדרש עולה על כמות המקום המוקצה</string>
-    <string name="rec_split_storage_size">הקצאת מקום</string>
+    <string name="rec_split_desc">יש לדרוס סרטונים קיימים אם המקום הנדרש עולה על כמות המקום המוקצה</string>
+    <string name="rec_split_storage_size">גודל האחסון</string>
     <string name="no_address_found">לא נקבעה כתובת</string>
     <string name="shared_string_hide">הסתרה</string>
     <string name="av_video_quality_low">איכות וידאו נמוכה</string>
@@ -1165,7 +1165,7 @@
     <string name="access_from_map">גישה מתצוגת המפה</string>
     <string name="show_on_start_description">במצב כבוי תוצג המפה מיד עם הכניסה ליישום</string>
     <string name="show_on_start">תצוגה בכניסה ליישום</string>
-    <string name="osmo_share_location">שתף</string>
+    <string name="osmo_share_location">שיתוף</string>
     <string name="shared_string_continue">המשך</string>
     <string name="shared_string_record">רשומה</string>
     <string name="gpx_logging_no_data">אין נתונים</string>
@@ -1175,8 +1175,8 @@
     <string name="shared_string_notifications">הודעות</string>
     <string name="osmo_pause_location">הפסקה</string>
     <string name="shared_string_pause">הפסקה</string>
-    <string name="map_markers_other">סַמָנים אחרים</string>
-    <string name="gpx_add_track">הוסף מסלול</string>
+    <string name="map_markers_other">סמנים אחרים</string>
+    <string name="gpx_add_track">הוספת מסלול</string>
     <string name="gpx_no_tracks_title">עוד אין לך מסלולים</string>
     <string name="rendering_value_dark_brown_name">חום כהה</string>
     <string name="rendering_value_light_brown_name">חום בהיר</string>
@@ -1187,17 +1187,17 @@
     <string name="update_time">זמן עידכון</string>
     <string name="update_now">עדכן עכשיו</string>
     <string name="updates_size">גודל עידכון</string>
-    <string name="shared_string_filters">מַסנֵנים</string>
-    <string name="save_filter">שמור מסנן</string>
-    <string name="delete_filter">מחק מסנן</string>
-    <string name="apply_filters">השתמש במסנן</string>
+    <string name="shared_string_filters">מסננים</string>
+    <string name="save_filter">שמירת מסנן</string>
+    <string name="delete_filter">מחיקת מסנן</string>
+    <string name="apply_filters">החלת מסננים</string>
     <string name="new_filter">מסנן חדש</string>
     <string name="app_mode_bus">אוטובוס</string>
  	<string name="app_mode_train">רכבת</string>
     <string name="rendering_value_bicycle_name">אופניים</string>
     <string name="osm_live_active">פעיל</string>
     <string name="osm_live_not_active">לא פעיל</string>
-    <string name="osm_live_enter_email">נא להזין כתובת דואר אלקטרוני חוקית</string>
+    <string name="osm_live_enter_email">נא להזין כתובת דוא״ל חוקית</string>
     <string name="osm_live_enter_user_name">נא להזין שם פומבי</string>
     <string name="osm_live_month_cost_desc">תשלום חודשי</string>
     </resources>

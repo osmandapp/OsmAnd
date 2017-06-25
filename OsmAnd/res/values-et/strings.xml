@@ -1,4 +1,5 @@
-<?xml version="1.0" encoding="UTF-8" standalone="no"?><resources><string name="add_opening_hours">Lisa lahioleku ajad</string>
+<?xml version='1.0' encoding='UTF-8'?>
+<resources><string name="add_opening_hours">Lisa lahioleku ajad</string>
 	<string name="description">Kirjeldus</string>
 	<string name="contact_info">Kontakti info</string>
 	
@@ -49,7 +50,7 @@
 	<string name="shared_string_download">Laealla</string>
 	<string name="shared_string_downloading">Allalaadimine</string>
 	<string name="shared_string_download_successful">Allalaadimine õnnestus</string>
-	<string name="shared_string_close">Sule</string>
+	<string name="shared_string_close">Sulge</string>
 	<string name="shared_string_exit">Välju</string>
 	<string name="shared_string_show">Näita</string>
 	<string name="shared_string_show_all">Näita kõik</string>
@@ -99,7 +100,7 @@
     <string name="access_direction_haptic_feedback_descr">Näita sihtpunkti suunda vibratsiooniga</string>
     <string name="shared_string_from">alates</string>
     <string name="city_type_district">Linnaosa</string>
-    <string name="city_type_neighbourhood">Ümbruskond</string>
+    <string name="city_type_neighbourhood">Naabruskond</string>
     <string name="map_widget_search">Otsi</string>
 	<string name="shared_string_is_open_24_7">Avatud 24/7</string>
     <string name="storage_directory_card">Mälukaart</string>
@@ -143,4 +144,18 @@
     <string name="osmo_group_information_desc">" - Grupi loomisel määra selle nimi ja kirjeldus\n - Rakenduses saab luua ainult lihtsat tüüpi gruppe, loe rohkem lehelt https://osmo.mobi/g/new\n - Veebilehel saad hallata gruppe, asetada radasid ja huvipunkte\n - Me ei toeta ainult ühe kasutajaga gruppe, kui see ei ole POI grupp\n - Privaatgrupid on kuni 8 kasutajale\n - Detailsed kasutustingimused on alati saadaval lehel OsMo.mobi\n - Eritingimuste korral võta ühendust klienditoega: osmo.mobi@gmail.com "</string>
     <string name="osmo_specify_tracker_id">Täpsusta ID</string>
     <string name="osmo_no_connection_msg">Ei suuda ühenduda OsMo serveriga:\n- kontrolli internetiühendust;\n- kontrolli seadeid;\n- kontrolli meie Twitteri lehte: https://twitter.com/OsMomobi</string>
+    <string name="mapillary">Mapillary</string>
+    <string name="increase_search_radius">Suurenda otsingu raadiust</string>
+    <string name="nothing_found">Midagi ei leitud :(</string>
+    <string name="nothing_found_descr">Muuda otsingu päringut või suurenda otsingu raadiust</string>
+    <string name="map_widget_ruler_control_first_mode">Kahe punkti vaheline kaugus</string>
+    <string name="shared_string_permissions">Load</string>
+    <string name="import_gpx_failed_descr">OsmAnd ei saa faili importida. Palun veendu, et OsmAnd\'il on õigus lugeda faili selle asukohast.</string>
+    <string name="distance_moving">Kaugus parandatud</string>
+    <string name="mapillary_image">Mapillary pilt</string>
+    <string name="open_mapillary">Ava Mapillary</string>
+    <string name="shared_string_install">Paigalda</string>
+    <string name="online_photos">Veebi fotod</string>
+    <string name="shared_string_add_photos">Lisa fotosid</string>
+    <string name="mapillary_widget">Mapillary vidin</string>
     </resources>

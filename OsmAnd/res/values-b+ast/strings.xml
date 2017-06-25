@@ -241,7 +241,7 @@
 	<!-- string name="lat_lon_pattern">Lla: %1$.5f Llo: %2$.5f</string -->
 	<string name="osmand_development_plugin_description">Esti complementu amuesa axustes pal desendolcu y depuración de carauterístiques pa probar o simular trayeutos, el rindimientu del renderizáu de pantalla o avisos per voz. Estos axustes tán pensaos pa desendolcadores y nun se precisen pal usuariu xeneral.</string>
 	<string name="osmand_accessibility_description">Esti complementu fai que les carauterístiques d\'accesibilidá del preséu tean disponibles direutamente n\'OsmAnd. Facilita, por exemplu, l\'axuste de la tasa de fala pa voces TTS, configuración de la pantalla de navegación del mandu direicional, usu d\'un trackball pa controlar el zoom o usu de feedback pa testu a falar como pal anunciu automáticu de la to posición.</string>
-	<string name="osm_editing_plugin_description">Pente esti complementu, OsmAnd pue usase pa facer collaboraciones n\'OSM como la creación o modificación d\'oxetos POI, apertura o comentar fallos y collaboración con ficheros GPX guardaos. OSM ta fechu pola comunidá, un proyeutu de cartografía de dominiu públicu. Pa detalles, por favor vete a https://openstreetmap.org. Agradezse la participación activa y les collaboraciones puen facese direutamente dende OsmAnd si especifiques les tos credenciales personales d\'OSM na aplicación.</string>
+	<string name="osm_editing_plugin_description">Pente esti complementu, OsmAnd pue usase pa facer collaboraciones n\'OSM como la creación o modificación d\'oxetos POI, apertura o comentar notes y collaboración con ficheros GPX guardaos. OSM ta fechu pola comunidá, un proyeutu de cartografía de dominiu públicu. Pa detalles, por favor vete a https://openstreetmap.org. Agradezse la participación activa y les collaboraciones puen facese direutamente dende OsmAnd si especifiques les tos credenciales personales d\'OSM na aplicación.</string>
 	<string name="osmand_distance_planning_plugin_description">Esti complementu apurre un widget cola pantalla del mapa pa crear caminos calcando nel mapa, o usar o modificar ficheros GPX esistentes pa planiar un viaxe y midir la distancia ente puntos. Los resultaos puen guardase como ficheru GPX pa usalos más sero como referencia.</string>
 	<string name="osm_live_thanks">¡Gracies por soscribite a los anovamientos en direuto!</string>
 	<string name="live_updates">En direuto</string>
@@ -411,7 +411,7 @@
     <string name="driving_region_japan">Xapón</string>
     <string name="driving_region_us">Estaos Xuníos</string>
     <string name="driving_region_canada">Canadá</string>
-    <string name="driving_region_europe_asia">Europa y Asia</string>
+    <string name="driving_region_europe_asia">Europa, Asia, América llatina y asemeyaos</string>
     <string name="driving_region_uk">RR.XX, India, y asemeyaos</string>
     <string name="speak_speed_limit">Llende de velocidá</string>
     <string name="speak_cameras">Radares de velocidá</string>
@@ -484,7 +484,7 @@ Llo %2$s</string>
     <string name="lang_hsb">Sorbiu (Altu)</string>
     <string name="lang_sw">Suaḥili</string>
     <string name="lang_he">Hebréu</string>
-    <string name="coords_format_descr">Formatu pa les coordenaes xeográfiques</string>
+    <string name="coords_format_descr">Formatu de coordenaes xeográfiques</string>
   	<string name="access_direction_audio_feedback_descr">Indica la direición del puntu oxetivu sonóramente</string>
     <string name="access_direction_haptic_feedback_descr">Indica la direición del puntu oxetivu vibrando</string>
     <string name="access_hint_enter_description">Introduz la descripción</string>
@@ -718,14 +718,10 @@ Puntos</string>
     <string name="access_disable_wrong_direction_recalc_descr">Evita\'l recálculu automáticu de ruta cuando teas diendo pela direición incorreuta</string>
     <string name="osmo_tracker_id_descr">Primi pa ver la ID del rastrexador</string>
     <string name="osmo_plugin_description">"Esti complementu apurre de mou parcial la función de Siguimientu d\'OpenStreetMap, mira https://osmo.mobi
- 
-
-
-Pues siguir en tiempu real tolos preseos d\'un grupu participante. Tamién pues ver el puntu y les pistes xubíes al grupu que perteneces.
- 
-
-El grupu nun se desanició dempués de meses, ponlu en llinia coles regles coles que crees grupos nel sitiu web OsMo.mobi
- "</string>
+\n 
+\nPues siguir en tiempu real tolos preseos d\'un grupu participante. Tamién pues ver el puntu y les traces xubíes al grupu que perteneces.
+\n 
+\nEl grupu nun se desanició dempués de meses, ponlu en llinia coles regles coles que crees grupos nel sitiu web OsMo.mobi "</string>
     <string name="simulate_your_location_stop_descr">Para de simular el to allugamientu</string>
     <string name="simulate_your_location_descr">Simula usando una ruta calculada o un GPX grabáu</string>
     <string name="disable_recording_once_app_killed_descrp">Posaráse\'l rexistru de GPX cuando s\'amortie l\'aplicación (per aplicaciones recientes). (La indicación de fondu d\'OsmAnd desapaecerá de la barra d\'avisos d\'Android).</string>
@@ -733,25 +729,25 @@ El grupu nun se desanició dempués de meses, ponlu en llinia coles regles coles
     <string name="fonts_header">Fontes pal mapa</string>
     <string name="right_side_navigation">Conducción pela derecha</string>
     <string name="driving_region_automatic">Automáticu</string>
-    <string name="do_not_send_anonymous_app_usage">Nun unviar datos anónimos d\'usu de l\'aplicación</string>
+    <string name="do_not_send_anonymous_app_usage">Nun unviar estadístiques anónimes d\'usu de l\'aplicación</string>
     <string name="do_not_send_anonymous_app_usage_desc">Osmand recueye información tocante a les partes qu\'abres de l\'aplicación. Enxamás s\'unvia\'l to allugamientu, nin nada qu\'introduzas n\'aplicación o nos detalles de les árees que veas, guetes o baxes.</string>
     <string name="do_not_show_startup_messages">Nun amosar los mensaxes nel aniciu</string>
     <string name="do_not_show_startup_messages_desc">Amuesa descuentos de l\'aplicación y mensaxes especiales d\'actividaes llocales</string>
     <string name="parking_options">Opciones d\'aparcamientu</string>
     <string name="full_version_thanks">¡Gracies por mercar la versión completa d\'OsmAnd!</string>
-    <string name="routing_attr_relief_smoothness_factor_hills_name">Llombes</string>
-    <string name="routing_attr_relief_smoothness_factor_plains_name">Llanos</string>
-    <string name="routing_attr_relief_smoothness_factor_more_plains_name">Más llanos</string>
+    <string name="routing_attr_relief_smoothness_factor_hills_name">Pindio</string>
+    <string name="routing_attr_relief_smoothness_factor_plains_name">Menos pindio</string>
+    <string name="routing_attr_relief_smoothness_factor_more_plains_name">Plano</string>
     <string name="routing_attr_driving_style_speed_name">Velocidá</string>
     <string name="routing_attr_driving_style_balance_name">Equilibráu</string>
     <string name="routing_attr_driving_style_safety_name">Seguru</string>
-    <string name="relief_smoothness_factor_descr">Prioridá a llanos o llombes</string>
+    <string name="relief_smoothness_factor_descr">Preferir terrén: llanu o pindiu</string>
     <string name="shared_string_slope">Cuesta</string>
     <string name="add_new_folder">Añadir carpeta nueva</string>
     <string name="points_delete_multiple_succesful">Puntu(os) desaniciáu(os) correutamente.</string>
     <string name="points_delete_multiple">Vas desaniciar %1$d puntu(os). ¿Tas seguru?</string>
-    <string name="route_points_category_name">Puntos de pasu de la ruta</string>
-    <string name="track_points_category_name">Puntos importantes d\'esta ruta</string>
+    <string name="route_points_category_name">Xiros a pasar con esta ruta</string>
+    <string name="track_points_category_name">Puntos destacaos d\'esta ruta</string>
     <string name="gpx_track">Traza</string>
     <string name="max_speed">Velocidá máxima</string>
     <string name="average_speed">Velocidá media</string>
@@ -773,35 +769,33 @@ El grupu nun se desanició dempués de meses, ponlu en llinia coles regles coles
     <string name="average_altitude">Altor mediu</string>
     <string name="shared_string_time">Tiempu</string>
     <string name="total_distance">Distancia total</string>
-    <string name="routing_attr_relief_smoothness_factor_name">Factor d\'adondamientu del relieve</string>
+    <string name="routing_attr_relief_smoothness_factor_name">Seleiciona la variación d\'altor</string>
     <string name="routing_attr_height_obstacles_name">Usar datos d\'elevación</string>
     <string name="routing_attr_height_obstacles_description">Usar los datos d\'elevación del terrén proporcionaos por SRTM, ASTER y UE-DEM</string>
 
     <string name="rendering_attr_depthContours_description">Amosar les curves de nivel y puntos</string>
-    <string name="rendering_attr_depthContours_name">Curves de nivel</string>
-	<string name="release_2_6">"
- • Nueva función: Botón d\'aición rápida
-
- • Respuesta ameyorada a xestos en pantalles táctiles
-
- • Nueves tipografíes del mapa que cubren más llingües
-
- • Soporte TTS pa variantes rexonales de llingua
-
- • Ameyoramientos de visibilidá en dellos estilos de mapes y Wikipedia
-
- • Encontu pa Open Location Code (OLC)
-
- • Ver el perfil d\'elevación y pendiente para los GPX grabaos (tamién velocidá) y la ruta calculada
-
- • Opción «Estilu de conducción» y ameyoramientos na llóxica del cálculu de rutes pa bicicletes
-
- • Opciones para usar los datos d\'altitú nel cálculu de rutes pa bicicletes
-
- • Dellos ameyoramientos y errores iguaos más
-
- y más…
- "</string>
+    <string name="rendering_attr_depthContours_name">Curves de fondura marina</string>
+	<string name="release_2_6">" • Nueva función: Botón d\'aición rápida
+\n
+\n • Respuesta ameyorada a xestos en pantalles táctiles (p.ex. abasnar y ampliar al tiempu)
+\n
+\n • Nueves tipografíes del mapa que cubren más llingües
+\n
+\n • Soporte TTS pa variantes rexonales de llingua
+\n
+\n • Ameyoramientos de visibilidá en dellos estilos de mapes y Wikipedia
+\n
+\n • Encontu pa Open Location Code (OLC)
+\n
+\n • Ver el perfil d\'elevación, pendiente y velocidá pa les traces GPX grabaes y la ruta calculada
+\n
+\n • Opción «Estilu de conducción» y ameyoramientos na llóxica del cálculu de rutes pa bicicletes
+\n
+\n • Opciones para usar los datos d\'altitú nel cálculu de rutes pa bicicletes
+\n
+\n • Dellos ameyoramientos y errores iguaos más
+\n
+\n y más… "</string>
 	<string name="search_another_country">Esbillar otra rexón</string>
     <string name="shared_string_change">Camudar</string>
     <string name="mapillary_image">Imaxe de Mapillary</string>
@@ -894,4 +888,7 @@ El grupu nun se desanició dempués de meses, ponlu en llinia coles regles coles
     <string name="shared_string_is_open_24_7">Abierto 24/7</string>
     <string name="current_track">Ruta actual</string>
     <string name="access_disable_offroute_recalc">Nun camudar la ruta al tar fuera de la carretera</string>
+    <string name="shared_string_permissions">Permisos</string>
+    <string name="import_gpx_failed_descr">OsmAnd nun pudo importar el ficheru. Comprueba si OsmAnd tien permisu pa lleer el ficheru dende\'l so allugamientu.</string>
+    <string name="distance_moving">Distancia correxida</string>
     </resources>

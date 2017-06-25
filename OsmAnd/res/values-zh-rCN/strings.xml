@@ -7,7 +7,7 @@
 	<string name="shared_string_clear">清除</string>
 	<string name="filter_current_poiButton">過濾器</string>
 	
-	<string name="edit_filter_save_as_menu_item">“另存為”</string>
+	<string name="edit_filter_save_as_menu_item">另存为</string>
 	
 	<string name="recording_unavailable">无法使用</string>
     <string name="recording_context_menu_play">玩</string>
@@ -384,7 +384,7 @@
 	<string name="shared_string_yes">是</string>
 	<string name="shared_string_cancel">取消</string>
 	<string name="shared_string_apply">应用</string>
-	<string name="shared_string_add">加</string>
+	<string name="shared_string_add">添加</string>
 	<string name="shared_string_no">否</string>
 	<string name="shared_string_delete">删除</string>
 	
@@ -1231,19 +1231,19 @@
     <string name="osmo_share_location">分享</string>
     <string name="osmo_pause_location">暂停</string>
     <string name="shared_string_notifications">通知</string>
-    <string name="release_2_5">" • 地图上可点击的图标
-\n
-\n • 强大的兴趣点过滤搜索：例如，根据菜肴搜索餐馆，或者具有特定设施的场所
-\n
-\n • 新的 Topo 地图风格，为骑行爱好者和登山者设计
-\n
-\n • 增强的旅途记录功能
-\n
-\n • 改进了导航提醒功能（Android Wear）
-\n
-\n • 许多其它改进和缺陷修复
-\n
-\n 还有更多待你发现…… "</string>
+    <string name="release_2_5">\\022 地图上可点击的图标 
+\n 
+\n • 强大的兴趣点过滤搜索：例如，根据菜肴搜索餐馆，或者具有特定设施的场所 
+\n 
+\n • 新的 Topo 地图风格，为骑行爱好者和登山者设计 
+\n 
+\n • 增强的旅途记录功能 
+\n 
+\n • 改进了导航提醒功能（Android Wear） 
+\n 
+\n • 许多其它改进和缺陷修复 
+\n 
+\n 还有更多待你发现……</string>
     <string name="christmas_poi">圣诞兴趣点</string>
     <string name="christmas_desc_q">显示圣诞兴趣点？</string>
     <string name="search_hint">输入城市、地址、兴趣点名称</string>
@@ -1529,7 +1529,7 @@
     <string name="no_overlay">无覆盖层</string>
     <string name="no_underlay">无衬底层</string>
     <string name="subscribe_email_desc">订阅我们的邮件列表可以获知应用程序折扣并获得3个地图下载！</string>
-    <string name="depth_contour_descr">地图套件包含海深等高线和点 （基于 30 弧秒网格）。</string>
+    <string name="depth_contour_descr">地图套件包含海深等高线和点。</string>
     <string name="sea_depth_thanks">感谢您购买航海等深线 ！</string>
     <string name="index_item_depth_contours_osmand_ext">航海等深线</string>
     <string name="index_item_depth_points_southern_hemisphere">南半球航海等深线</string>
@@ -1634,28 +1634,28 @@
     <string name="back_to_search">返回到搜索</string>
     <string name="confirmation_to_delete_history_items">你想要从历史中删除所选的项目吗？</string>
     <string name="show_something_on_map">在地图上显示 %1$s</string>
-    <string name="release_2_4">" • 新加入非常强大的自由文本查找 
-\n 
+    <string name="release_2_4">\\022 新加入非常强大的自由文本查找 
+\n
 \n • 透过蓝牙集成汽车音响系统 / 电话扬声器 
-\n 
+\n
 \n • 改进的路线引导、 语音提示，和转弯道指示 
-\n 
+\n
 \n • 改进了运输层与路线绘制 
-\n 
+\n
 \n • 增加了更多的语言环境，现在支持区域的语言环境 
-\n 
+\n
 \n • 许多其它的改善和修正错误 
-\n 
-\n 以及更多… "</string>
+\n
+\n 以及更多…</string>
     <string name="dist_away_from_my_location">搜索 %1$s 离开</string>
-    <string name="share_history_subject">" 通过 OsmAnd 分享"</string>
+    <string name="share_history_subject">通过 OsmAnd 分享</string>
     <string name="postcode">邮政编码</string>
     <string name="shared_string_from">从</string>
     <string name="city_type_district">区</string>
     <string name="city_type_neighbourhood">邻近</string>
     <string name="map_widget_search">搜索</string>
-    <string name="shared_string_is_open_24_7">开放的 24/7</string>
-    <string name="storage_directory_card">存儲卡</string>
+    <string name="shared_string_is_open_24_7">24小时开放</string>
+    <string name="storage_directory_card">存储卡</string>
     <string name="coords_format">坐标格式</string>
     <string name="coords_format_descr">地理坐标格式</string>
     <string name="app_mode_bus">公交车</string>
@@ -1765,27 +1765,27 @@
     <string name="lang_als">"阿尔巴尼亚  (Tosk)"</string>
     <string name="world_map_download_descr">世界底图（涵盖整个世界的缩小版）可能存在丢失或过期。请考虑下载它的全球概览。</string>
     <string name="map_downloaded_descr">已下载 %1$s 的地图，你现在可以开始使用它。</string>
-    <string name="release_2_6">" • 新功能：快速动作按钮 
-\n 
+    <string name="release_2_6">"\\022 新功能：快速动作按钮 
+\n
 \n •  改进了触摸屏幕手势的回应(同时平移和缩放) 
-\n 
+\n
 \n • 新的地图字体覆盖了更多的语言环境 
-\n 
+\n
 \n • 支持 TTS 不同版本的区域语言(和语法) 
-\n 
+\n
 \n • 在一些地图样式和维基百科的清晰度增强 
-\n 
+\n
 \n • 支持开放位置码 (OLC) 
-\n 
+\n
 \n •  为记录的 GPX 轨迹和预测的路线显示海拔、坡度和速度的概貌 
-\n 
+\n
 \n •  在自行车路线中\"驾驶样式\"设置和逻辑的改进 
-\n 
+\n
 \n •  在自行车路线中使用高度数据的设置 
-\n 
+\n
 \n •  一些其它的改进和错误修复 
-\n 
-\n 和更多… "</string>
+\n
+\n 以及更多…"</string>
     <string name="simulate_initial_startup_descr">设置标志，指示第一个应用程序启动，保持所有其他设置保持不变</string>
     <string name="favorite_category_dublicate_message">指定的类别名称已存在。请使用一个不同的名称。</string>
     <string name="shared_string_trip_recording">旅行记录</string>
@@ -1824,7 +1824,7 @@
     <string name="welcome_select_region">要正确地反映您的交通标志和法规，请选择您驾驶的地区：</string>
     <string name="welcome_text">OsmAnd 提供了全球的离线地图浏览和全球的离线导航 ！</string>
     <string name="osm_changes_added_to_local_edits">OSM 更改添加到本地的变更集</string>
-    <string name="osmo_grop_name_length_alert">组名称应该至少 3 个字符 ！</string>
+    <string name="osmo_grop_name_length_alert">组名称至少应有 3 个字符 ！</string>
     <string name="local_recordings_delete_all_confirm">要删除 %1$d 个注解。是否确定？</string>
     <string name="local_osm_changes_upload_all_confirm">你将要上传 %1$d 个更改到 OSM。是否确定？</string>
     <string name="delay_to_start_navigation_descr">指定等待时间以便继续留在航路规划屏幕</string>
@@ -2390,8 +2390,8 @@
     <string name="download_type_to_filter">要筛选类型</string>
     <string name="use_high_res_maps">高分辨率显示</string>
     <string name="use_high_res_maps_descr">在高清晰度的屏幕上不要拉伸（模糊）地图图砖</string>
-    <string name="transport_searching_transport">交通运输结果（未设目的地）︰</string>
-    <string name="transport_searching_route">交通运输结果（有 {0} 条路线可到目的地）︰</string>
+    <string name="transport_searching_transport">交通运输结果（未设目的地）：</string>
+    <string name="transport_searching_route">交通运输结果（有 {0} 条路线可到目的地）：</string>
     <string name="voices">语音提示</string>
     <string name="transport_context_menu">搜索公交站</string>
     <string name="rotate_map_compass_opt">以指南针旋转</string>
@@ -2604,4 +2604,6 @@
     <string name="quick_action_map_source_switch">地图来源已更改为\"%s\"。</string>
     <string name="quick_action_btn_tutorial_title">更改按钮的位置</string>
     <string name="quick_action_btn_tutorial_descr">长按并拖动按钮来改变其在屏幕上的位置</string>
+    <string name="map_widget_ruler_control_first_mode">两点量尺</string>
+    <string name="map_widget_ruler_control_second_mode">半径量尺</string>
     </resources>

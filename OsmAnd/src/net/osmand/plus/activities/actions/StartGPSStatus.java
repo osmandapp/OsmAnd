@@ -31,6 +31,7 @@ import net.osmand.plus.views.OsmandMapTileView;
 public class StartGPSStatus extends OsmAndAction {
 
 	public enum GpsStatusApps {
+		GPC_CONNECTED("GPS Connected", "org.bruxo.gpsconnected", "", ""),
 		GPS_STATUS("GPS Status & Toolbox", "com.eclipsim.gpsstatus2", "", "com.eclipsim.gpsstatus2.GPSStatus"),
 		GPS_TEST("GPS Test", "com.chartcross.gpstest", "com.chartcross.gpstestplus", ""),
 		INVIU_GPS("inViu GPS-details ", "de.enaikoon.android.inviu.gpsdetails", "", ""),

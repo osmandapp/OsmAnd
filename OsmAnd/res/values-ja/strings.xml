@@ -881,7 +881,7 @@ POIの更新は利用できません</string>
 	<string name="avoid_in_routing_title">使用しない道路の指定…</string>
 	<string name="avoid_in_routing_descr">有料道路、未舗装道路、フェリー等、使用しない経路を設定します</string>
 	<string name="map_widget_fluorescent">使用ルートを明滅させる</string>
-	<string name="map_widget_show_ruler">縮尺</string>
+	<string name="map_widget_show_ruler">距離測定</string>
 	
 	<string name="map_widget_view_direction">視線方向</string>
 	<string name="map_widget_transparent">ウィジェット背景の透明化</string>
@@ -2464,7 +2464,7 @@ OsmAndとOSMをサポートする方法として現状最適な方法である�
     <string name="access_disable_offroute_recalc_descr">案内されたルートから大きく離れた場合、自動的にルートの再計算をしないようにします</string>
     <string name="back_to_search">検索に戻る</string>
     <string name="confirmation_to_delete_history_items">選択された履歴を削除しますか？</string>
-    <string name="show_something_on_map">マップ上の%1$sへ移動</string>
+    <string name="show_something_on_map">マップ上に%1$sを表示</string>
     <string name="release_2_4">" • 新しくなって、より強化されたフリーワード検索
 \n
 \n • Bluetooth関連の改善多数
@@ -2760,7 +2760,7 @@ OsmAndとOSMをサポートする方法として現状最適な方法である�
     <string name="no_underlay">アンダーレイ無し</string>
     <string name="subscribe_email_error">エラー</string>
     <string name="subscribe_email_desc">メーリングリストをご購読いただけると、アプリの割引やさらに３つのマップをダウンロード可能になります！</string>
-    <string name="depth_contour_descr">点と等深線による海底地形図がマップに表示されます(角度単位30秒をベースとした角度表示)。</string>
+    <string name="depth_contour_descr">点と等深線による海底地形図がマップに表示されます。</string>
     <string name="sea_depth_thanks">海洋等深線データを購入していただき、ありがとうございます！</string>
     <string name="index_item_depth_contours_osmand_ext">海洋等深線データ</string>
     <string name="download_depth_countours">海洋等深線データ</string>
@@ -2939,7 +2939,7 @@ OsmAndとOSMをサポートする方法として現状最適な方法である�
     <string name="rendering_attr_surfaceIntegrity_name">路面状態</string>
     <string name="translit_name_if_miss">%1$sの名前が欠落している場合、(他の文字で)翻字します</string>
     <string name="translit_names">名称を翻字</string>
-    <string name="private_access_routing_req">目的地の位置が専有エリア内にあります。専有道路あるいは私道を通ることを許可しますか？</string>
+    <string name="private_access_routing_req">目的地の位置が専有エリア(私有地)内にあります。専有道路あるいは私道を通ることを許可しますか？</string>
     <string name="quick_action_page_list_descr">アクションボタンをタップすると以下のリスト順にマップスタイルを変更します。</string>
     <string name="nothing_found">見つかりませんでした(´д｀)</string>
     <string name="nothing_found_descr">検索単語を変更したり、検索の距離を広げてみてください</string>
@@ -2971,8 +2971,8 @@ OsmAndとOSMをサポートする方法として現状最適な方法である�
     <string name="shared_string_add_photos">写真を追加</string>
     <string name="no_photos_descr">この近辺の写真はありません</string>
     <string name="online_photos">近隣の写真(要オンライン)</string>
-    <string name="mapillary_descr">情報共有のためのストリート写真です(要オンライン)。新たな場所の発見に、協力しあい、この世界を写真で保存しましょう。</string>
-    <string name="improve_coverage_mapillary">Mapillaryの有効領域を広げましょう</string>
+    <string name="mapillary_descr">情報共有のための路上写真です(要オンライン)。新たな場所の発見に、協力しあい、この世界を写真で保存しましょう。</string>
+    <string name="improve_coverage_mapillary">Mapillaryにて写真の有効領域を広げましょう</string>
     <string name="improve_coverage_install_mapillary_desc">自分自身の写真や、ストリートビューの様な連続写真をこの地点に追加することが出来ます。
 \n
 \nその為にはGoogle PlayからMapillaryというアプリのインストールが必要になります。</string>
@@ -2980,8 +2980,12 @@ OsmAndとOSMをサポートする方法として現状最適な方法である�
     <string name="mapillary">Mapillary</string>
     <string name="mapillary_widget">Mapillaryウィジェット</string>
     <string name="mapillary_image">Mapillary画像</string>
-    <string name="mapillary_action_descr">Mapillaryにて、この場所のストリートレベルビューに貢献します</string>
+    <string name="mapillary_action_descr">Mapillaryにて、この場所の路上表示に貢献します</string>
     <string name="mapillary_widget_descr">Mapillaryへワンタッチ貢献を許可します</string>
-    <string name="plugin_mapillary_descr">皆で共有するストリートレベル写真です。新たな場所の発見に、協力しあい、この世界を写真で保存しましょう。</string>
+    <string name="plugin_mapillary_descr">皆で共有する路上写真です。新たな場所の発見に、協力しあい、この世界を写真で保存しましょう。</string>
     <string name="shared_string_install">インストール</string>
+    <string name="import_gpx_failed_descr">OsmAndは指定したファイルをインポートできません。OsmAndにその場所からファイルを読み取る権限があるか確認して下さい。</string>
+    <string name="map_widget_ruler_control_second_mode">同心円</string>
+    <string name="map_widget_ruler_control_first_mode">2点間距離測定</string>
+    <string name="shared_string_permissions">権限</string>
     </resources>
