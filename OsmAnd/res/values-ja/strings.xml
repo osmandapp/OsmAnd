@@ -2760,7 +2760,7 @@ OsmAndとOSMをサポートする方法として現状最適な方法である�
     <string name="no_underlay">アンダーレイ無し</string>
     <string name="subscribe_email_error">エラー</string>
     <string name="subscribe_email_desc">メーリングリストをご購読いただけると、アプリの割引やさらに３つのマップをダウンロード可能になります！</string>
-    <string name="depth_contour_descr">点と等深線による海底地形図がマップに表示されます(角度単位30秒をベースとした角度表示)。</string>
+    <string name="depth_contour_descr">点と等深線による海底地形図がマップに表示されます。</string>
     <string name="sea_depth_thanks">海洋等深線データを購入していただき、ありがとうございます！</string>
     <string name="index_item_depth_contours_osmand_ext">海洋等深線データ</string>
     <string name="download_depth_countours">海洋等深線データ</string>
@@ -2987,4 +2987,5 @@ OsmAndとOSMをサポートする方法として現状最適な方法である�
     <string name="import_gpx_failed_descr">OsmAndは指定したファイルをインポートできません。OsmAndにその場所からファイルを読み取る権限があるか確認して下さい。</string>
     <string name="map_widget_ruler_control_second_mode">同心円</string>
     <string name="map_widget_ruler_control_first_mode">2点間距離測定</string>
+    <string name="shared_string_permissions">権限</string>
     </resources>
