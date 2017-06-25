@@ -11,7 +11,6 @@ import net.osmand.data.LatLon;
 import net.osmand.data.QuadPoint;
 import net.osmand.router.BinaryRoutePlanner.RouteSegment;
 import net.osmand.router.BinaryRoutePlanner.RouteSegmentPoint;
-import net.osmand.router.GeneralRouter.GeneralRouterProfile;
 import net.osmand.util.MapUtils;
 
 import org.apache.commons.logging.Log;
