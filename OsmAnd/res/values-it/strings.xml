@@ -674,7 +674,7 @@ La memoria utilizzata è  {1} MB.
     <string name="default_buttons_support">Sostieni</string>
     <string name="support_new_features">Sostieni nuove caratteristiche</string>
 
-    <string name="show_ruler_level">Visualizza la scala grafica</string>
+    <string name="show_ruler_level">Visualizza il righello</string>
     <string name="info_button">Info</string>
     <string name="back_to_location">Torna alla posizione</string>
 
@@ -858,7 +858,7 @@ Memoria in proporzione %4$s MB (limite di Android %5$s MB, Dalvik %6$s MB).</str
     <string name="show_warnings_title">Mostra avvisi…</string>
     <string name="show_warnings_descr">Configura gli avvisi sul traffico (limiti velocità, fermate forzate, dossi rallentatori), avvisi autovelox e indicazioni di corsia</string>
     <string name="map_widget_fluorescent">Itinerari fluorescenti</string>
-    <string name="map_widget_show_ruler">Scala grafica</string>
+    <string name="map_widget_show_ruler">Righello</string>
 
     <string name="map_widget_view_direction">﻿Direzione della visuale</string>
     <string name="map_widget_transparent">Widget trasparenti</string>
