@@ -2995,4 +2995,12 @@
 	<string name="poi_life_ring">Bouée de sauvetage</string>
 
 <string name="poi_bicycle_parking_lockers">Consigne automatique</string>
+	<string name="poi_zoo_type">Type</string>
+	<string name="poi_motorcycle_services">Services</string>
+	<string name="poi_motorcycle_type">Type de moto</string>
+
+<string name="poi_payment_ep_minipay_yes">Minipay</string>
+	<string name="poi_vending_water">Vente d\'eau</string>
+	<string name="poi_fuel_autogas">GPL/LPG</string>
+	<string name="poi_crop_rape">Culture : colza</string>
 	</resources>
