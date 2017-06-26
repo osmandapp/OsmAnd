@@ -1,0 +1,191 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:osmand="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_gravity="bottom"
+    android:id="@+id/map_bottom_buttons"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    android:orientation="horizontal"
+    android:background="?attr/bottom_menu_view_bg_5_transparency"
+    android:layout_marginLeft="@dimen/map_button_margin_new"
+    android:layout_marginRight="@dimen/map_button_margin_new"
+    android:layout_marginBottom="@dimen/map_button_margin_new"
+    android:gravity="center_vertical">
+
+    <LinearLayout
+        android:id="@+id/map_bottom_button_configure_map_view"
+        android:layout_width="@dimen/map_button_size_new"
+        android:layout_height="@dimen/map_button_size_new"
+        android:gravity="center_vertical"
+        android:orientation="vertical">
+
+        <ImageButton
+            android:clickable="false"
+            android:id="@+id/map_bottom_button_configure_map_button"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:paddingTop="6dp"
+            android:background="@null"
+            tools:src="@drawable/map_world_globe_dark"/>
+
+        <net.osmand.plus.widgets.TextViewEx
+            android:ellipsize="end"
+            android:maxLines="1"
+            android:gravity="center_horizontal"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:paddingTop="6dp"
+            android:paddingBottom="6dp"
+            android:textColor="?android:attr/textColorPrimary"
+            android:textSize="@dimen/bottom_button_text_size"
+            osmand:typeface="@string/font_roboto_medium"
+            android:text="@string/configure_map"/>
+
+    </LinearLayout>
+
+    <View
+        android:layout_width="0dp"
+        android:layout_weight="1"
+        android:layout_height="@dimen/map_button_size_new"/>
+
+    <LinearLayout
+        android:id="@+id/map_bottom_button_search_view"
+        android:layout_width="@dimen/map_button_size_new"
+        android:layout_height="@dimen/map_button_size_new"
+        android:gravity="center_vertical"
+        android:orientation="vertical">
+
+        <ImageButton
+            android:clickable="false"
+            android:id="@+id/map_bottom_button_search_button"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:background="@null"
+            android:paddingTop="6dp"
+            tools:src="@drawable/ic_action_search_dark" />
+
+        <net.osmand.plus.widgets.TextViewEx
+            android:ellipsize="end"
+            android:maxLines="1"
+            android:gravity="center_horizontal"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:paddingTop="6dp"
+            android:paddingBottom="6dp"
+            android:textColor="?android:attr/textColorPrimary"
+            android:textSize="@dimen/bottom_button_text_size"
+            osmand:typeface="@string/font_roboto_medium"
+            android:text="@string/map_widget_search"/>
+
+    </LinearLayout>
+
+    <View
+        android:layout_width="0dp"
+        android:layout_weight="1"
+        android:layout_height="@dimen/map_button_size_new"/>
+
+    <LinearLayout
+        android:id="@+id/map_bottom_button_hide_view"
+        android:layout_width="@dimen/map_button_size_new"
+        android:layout_height="@dimen/map_button_size_new"
+        android:gravity="center_vertical"
+        android:orientation="vertical">
+
+        <ImageButton
+            android:clickable="false"
+            android:id="@+id/map_bottom_button_hide_button"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:paddingTop="6dp"
+            android:background="@null"
+            tools:src="@drawable/ic_action_arrow_down"/>
+
+        <net.osmand.plus.widgets.TextViewEx
+            android:ellipsize="end"
+            android:maxLines="1"
+            android:gravity="center_horizontal"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:paddingTop="6dp"
+            android:paddingBottom="6dp"
+            android:textColor="?android:attr/textColorPrimary"
+            android:textSize="@dimen/bottom_button_text_size"
+            osmand:typeface="@string/font_roboto_medium"
+            android:text="@string/shared_string_hide"/>
+
+    </LinearLayout>
+
+    <View
+        android:layout_width="0dp"
+        android:layout_weight="1"
+        android:layout_height="@dimen/map_button_size_new"/>
+
+    <LinearLayout
+        android:id="@+id/map_bottom_button_route_view"
+        android:layout_width="@dimen/map_button_size_new"
+        android:layout_height="@dimen/map_button_size_new"
+        android:gravity="center_vertical"
+        android:orientation="vertical">
+
+        <ImageButton
+            android:clickable="false"
+            android:id="@+id/map_bottom_button_route_button"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:paddingTop="6dp"
+            android:background="@null"
+            tools:src="@drawable/map_directions"/>
+
+        <net.osmand.plus.widgets.TextViewEx
+            android:ellipsize="end"
+            android:maxLines="1"
+            android:gravity="center_horizontal"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:paddingTop="6dp"
+            android:paddingBottom="6dp"
+            android:textColor="?android:attr/textColorPrimary"
+            android:textSize="@dimen/bottom_button_text_size"
+            osmand:typeface="@string/font_roboto_medium"
+            android:text="@string/layer_route"/>
+
+    </LinearLayout>
+
+    <View
+        android:layout_width="0dp"
+        android:layout_weight="1"
+        android:layout_height="@dimen/map_button_size_new"/>
+
+    <LinearLayout
+        android:id="@+id/map_bottom_button_location_view"
+        android:layout_width="@dimen/map_button_size_new"
+        android:layout_height="@dimen/map_button_size_new"
+        android:gravity="center_vertical"
+        android:orientation="vertical">
+
+        <ImageButton
+            android:clickable="false"
+            android:id="@+id/map_bottom_button_location_button"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:paddingTop="6dp"
+            android:background="@null"
+            tools:src="@drawable/map_my_location"/>
+
+        <net.osmand.plus.widgets.TextViewEx
+            android:ellipsize="end"
+            android:maxLines="1"
+            android:gravity="center_horizontal"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:paddingTop="6dp"
+            android:paddingBottom="6dp"
+            android:textColor="?android:attr/textColorPrimary"
+            android:textSize="@dimen/bottom_button_text_size"
+            osmand:typeface="@string/font_roboto_medium"
+            android:text="@string/map_widget_search"/>
+
+    </LinearLayout>
+
+</LinearLayout>

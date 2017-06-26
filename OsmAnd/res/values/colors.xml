@@ -75,6 +75,7 @@
 	<color name="list_item_light_pressed">#8cd0d0d0</color>
 	<color name="list_item_dark_pressed">#be39464d</color>
 	<color name="bg_color_light">#fff</color>
+	<color name="bg_color_light_5_transparency">#f2f0f0f0</color>
 	<color name="bg_color_dark">#333b40</color>
 
 	<color name="fab_color">#ff8f00</color>
@@ -87,6 +88,8 @@
 	<color name="map_widget_dark_stroke">#80ffffff</color>
 	<color name="map_widget_dark_pressed">#80aaaaaa</color>
 	<color name="map_widget_light_trans">#80ffffff</color>
+	<color name="map_widget_light_trans_35">#a6ffffff</color>
+	<color name="map_widget_light_trans_10">#e6ffffff</color>
 	<color name="map_widget_light_pressed">#e5e5e5</color>
 	<color name="map_widget_blue">#536dfe</color>
 	<color name="map_widget_blue_pressed">#485dd9</color>

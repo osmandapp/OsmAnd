@@ -1,0 +1,293 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    android:layout_gravity="bottom"
+    android:orientation="vertical">
+
+    <!--<net.osmand.plus.quickaction.QuickActionsWidget
+        android:id="@+id/quick_action_widget"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        tools:visibility="visible"
+        android:visibility="gone"/>
+
+    <FrameLayout
+        android:id="@+id/map_quick_actions_button_container"
+        android:layout_width="match_parent"
+        android:layout_height="0dp"
+        android:layout_weight="1"
+        android:padding="8dp"
+        android:animateLayoutChanges="true">
+
+        <ImageButton
+            android:id="@+id/map_quick_actions_button"
+            android:layout_width="@dimen/map_button_size"
+            android:layout_height="@dimen/map_button_size"
+            android:background="@drawable/btn_circle_blue"
+            android:contentDescription="@string/zoomIn"
+            android:layout_gravity="bottom|right"
+            android:visibility="gone"
+            tools:visibility="visible"
+            tools:src="@drawable/ic_action_test_light"/>
+
+    </FrameLayout>-->
+
+    <FrameLayout
+        android:id="@+id/bottom_controls_container"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content">
+
+        <FrameLayout
+            android:id="@+id/map_alarm_warning"
+            android:layout_width="@dimen/map_alarm_size"
+            android:layout_height="@dimen/map_alarm_size"
+            android:layout_gravity="bottom|left"
+            android:layout_marginBottom="@dimen/map_alarm_bottom_margin_new"
+            android:layout_marginLeft="@dimen/map_button_shadow_margin">
+
+            <ImageView
+                android:id="@+id/map_alarm_warning_icon"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_gravity="center"
+                android:src="@drawable/warnings_limit" />
+
+            <TextView
+                android:id="@+id/map_alarm_warning_text"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_gravity="center"
+                android:textColor="@color/color_black"
+                android:textSize="@dimen/map_alarm_text_size"
+                android:textStyle="bold"
+                tools:text="60" />
+        </FrameLayout>
+
+        <FrameLayout
+            android:id="@+id/map_ruler_layout"
+            android:layout_width="@dimen/map_ruler_width"
+            android:layout_height="wrap_content"
+            android:layout_gravity="bottom"
+            android:layout_marginBottom="@dimen/map_ruler_layout_bottom_margin"
+            android:layout_marginLeft="@dimen/map_button_margin_new">
+
+            <FrameLayout
+                android:layout_width="fill_parent"
+                android:layout_height="fill_parent"
+                android:layout_marginBottom="@dimen/map_ruler_bottom_margin">
+
+
+                <TextView
+                    android:id="@+id/map_ruler_text_shadow"
+                    android:layout_width="fill_parent"
+                    android:layout_height="fill_parent"
+                    android:layout_gravity="bottom"
+                    android:gravity="center_horizontal"
+                    android:lineSpacingMultiplier="0.9"
+                    android:textSize="@dimen/map_widget_text_size_small"
+                    tools:text="100 m" />
+
+                <TextView
+                    android:id="@+id/map_ruler_text"
+                    android:layout_width="fill_parent"
+                    android:layout_height="fill_parent"
+                    android:layout_gravity="bottom"
+                    android:gravity="center_horizontal"
+                    android:lineSpacingMultiplier="0.9"
+                    android:textSize="@dimen/map_widget_text_size_small"
+                    tools:text="100 m" />
+
+            </FrameLayout>
+
+            <ImageView
+                android:id="@+id/map_ruler_image"
+                android:layout_width="fill_parent"
+                android:layout_height="wrap_content"
+                android:layout_gravity="bottom"
+                android:background="@drawable/ruler" />
+        </FrameLayout>
+
+        <TextView
+            android:id="@+id/map_app_mode_text"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_gravity="bottom|left"
+            android:layout_marginBottom="56dp"
+            android:layout_marginLeft="8dp"
+            android:gravity="center_horizontal"
+            android:textSize="@dimen/map_button_text_size"
+            tools:text="13.44" />
+
+        <LinearLayout
+            android:id="@+id/map_transparency_layout"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_gravity="bottom|center_horizontal"
+            android:layout_marginBottom="@dimen/map_button_size_new"
+            android:orientation="horizontal">
+
+            <SeekBar
+                android:id="@+id/map_transparency_seekbar"
+                android:layout_width="@dimen/map_trans_seek_size"
+                android:layout_height="wrap_content"
+                android:layout_gravity="center"
+                android:paddingLeft="6dp"
+                android:paddingRight="6dp" />
+
+            <ImageButton
+                android:id="@+id/map_transparency_hide"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_gravity="center"
+                android:background="@drawable/btn_circle_transparent"
+                android:contentDescription="@string/shared_string_hide"
+                android:src="@drawable/headliner_close" />
+        </LinearLayout>
+
+        <LinearLayout
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_gravity="bottom|left"
+            android:layout_marginBottom="@dimen/map_button_margin_new"
+            android:layout_marginLeft="@dimen/map_button_margin_new"
+            android:layout_marginRight="@dimen/map_button_margin_new">
+
+            <ImageButton
+                android:id="@+id/map_layers_button"
+                android:layout_width="@dimen/map_button_size_new"
+                android:layout_height="@dimen/map_button_size_new"
+                android:background="@drawable/btn_circle_trans_10_new"
+                android:contentDescription="@string/configure_map"
+                tools:src="@drawable/ic_action_test_light"/>
+
+            <View
+                android:layout_width="0dp"
+                android:layout_height="match_parent"
+                android:layout_weight="1"/>
+
+            <ImageButton
+                android:id="@+id/map_search_button"
+                android:layout_width="@dimen/map_button_size_new"
+                android:layout_height="@dimen/map_button_size_new"
+                android:background="@drawable/btn_circle_trans_10_new"
+                android:contentDescription="@string/map_widget_search"
+                tools:src="@drawable/ic_action_test_light"/>
+
+            <View
+                android:layout_width="0dp"
+                android:layout_height="match_parent"
+                android:layout_weight="1"/>
+
+            <ImageButton
+                android:id="@+id/map_menu_button"
+                android:layout_width="@dimen/map_button_size_new"
+                android:layout_height="@dimen/map_button_size_new"
+                android:background="@drawable/btn_circle_trans_35_new"
+                android:contentDescription="@string/backToMenu"
+                tools:src="@drawable/ic_action_test_light" />
+
+            <View
+                android:layout_width="0dp"
+                android:layout_height="match_parent"
+                android:layout_weight="1"/>
+
+            <ImageButton
+                android:id="@+id/map_route_info_button"
+                android:layout_width="@dimen/map_button_size_new"
+                android:layout_height="@dimen/map_button_size_new"
+                android:background="@drawable/btn_circle_trans_10_new"
+                android:contentDescription="@string/layer_route"
+                tools:src="@drawable/ic_action_test_light" />
+
+            <View
+                android:layout_width="0dp"
+                android:layout_height="match_parent"
+                android:layout_weight="1"/>
+
+            <ImageButton
+                android:id="@+id/map_my_location_button"
+                android:layout_width="@dimen/map_button_size_new"
+                android:layout_height="@dimen/map_button_size_new"
+                android:background="@drawable/btn_circle_trans_10_new"
+                android:contentDescription="@string/shared_string_my_location"
+                tools:src="@drawable/ic_action_test_light" />
+
+        </LinearLayout>
+
+        <LinearLayout
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_gravity="bottom|right"
+            android:layout_marginBottom="@dimen/map_zoom_buttons_bottom_margin"
+            android:layout_marginRight="@dimen/map_button_margin_new"
+            android:orientation="vertical">
+
+            <ImageButton
+                android:id="@+id/map_zoom_in_button"
+                android:layout_width="@dimen/map_button_size_new"
+                android:layout_height="@dimen/map_button_size_new"
+                android:background="@drawable/btn_circle_trans_35_new"
+                android:contentDescription="@string/zoomIn"
+                tools:src="@drawable/ic_action_test_light" />
+
+            <ImageButton
+                android:id="@+id/map_zoom_out_button"
+                android:layout_width="@dimen/map_button_size_new"
+                android:layout_height="@dimen/map_button_size_new"
+                android:background="@drawable/btn_circle_trans_35_new"
+                android:contentDescription="@string/zoomOut"
+                tools:src="@drawable/ic_action_test_light" />
+
+        </LinearLayout>
+    </FrameLayout>
+
+    <FrameLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content">
+
+        <include layout="@layout/recording_note_fragment"
+            tools:visibility="gone"/>
+
+        <include layout="@layout/move_marker_bottom_sheet"
+            tools:visibility="gone"/>
+
+        <FrameLayout
+            android:id="@+id/bottomFragmentContainer"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"/>
+
+        <LinearLayout
+            android:id="@+id/map_context_menu_layout"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_gravity="bottom"
+            android:background="@drawable/btn_flat"
+            android:visibility="gone">
+
+            <TextView
+                android:layout_width="0dp"
+                android:layout_height="fill_parent"
+                android:layout_weight="1"
+                android:ellipsize="end"
+                android:gravity="center">
+            </TextView>
+
+            <ImageButton
+                android:layout_width="@dimen/map_address_height"
+                android:layout_height="@dimen/map_address_height"
+                android:layout_gravity="center_vertical"
+                android:background="@drawable/btn_circle_transparent"
+                tools:src="@drawable/ic_action_test_light"/>
+
+            <ImageButton
+                android:layout_width="@dimen/map_address_height"
+                android:layout_height="@dimen/map_address_height"
+                android:layout_gravity="center_vertical"
+                android:background="@drawable/btn_circle_transparent"
+                tools:src="@drawable/ic_action_test_light"/>
+        </LinearLayout>
+    </FrameLayout>
+
+</LinearLayout>

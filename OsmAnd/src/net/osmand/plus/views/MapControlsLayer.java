@@ -2,7 +2,9 @@ package net.osmand.plus.views;
 
 import android.Manifest;
 import android.annotation.SuppressLint;
+import android.app.Dialog;
 import android.content.DialogInterface;
+import android.content.Intent;
 import android.content.pm.PackageManager;
 import android.graphics.Canvas;
 import android.graphics.Color;
@@ -10,16 +12,23 @@ import android.graphics.ColorFilter;
 import android.graphics.PointF;
 import android.graphics.drawable.Drawable;
 import android.os.Build;
+import android.os.Bundle;
 import android.support.annotation.NonNull;
+import android.support.design.widget.BottomSheetBehavior;
 import android.support.v4.app.ActivityCompat;
 import android.support.v4.view.ViewCompat;
 import android.support.v4.view.ViewPropertyAnimatorCompat;
 import android.support.v4.view.ViewPropertyAnimatorListener;
 import android.support.v7.app.AlertDialog;
+import android.util.DisplayMetrics;
+import android.util.Log;
+import android.view.LayoutInflater;
 import android.view.MotionEvent;
 import android.view.View;
 import android.view.View.OnClickListener;
 import android.view.ViewGroup;
+import android.view.Window;
+import android.view.WindowManager;
 import android.widget.ImageButton;
 import android.widget.ImageView;
 import android.widget.LinearLayout;
@@ -31,6 +40,7 @@ import net.osmand.core.android.MapRendererContext;
 import net.osmand.data.LatLon;
 import net.osmand.data.PointDescription;
 import net.osmand.data.RotatedTileBox;
+import net.osmand.plus.IconsCache;
 import net.osmand.plus.OsmAndLocationProvider;
 import net.osmand.plus.OsmandApplication;
 import net.osmand.plus.OsmandPlugin;
@@ -40,10 +50,17 @@ import net.osmand.plus.OsmandSettings.LayerTransparencySeekbarMode;
 import net.osmand.plus.R;
 import net.osmand.plus.TargetPointsHelper;
 import net.osmand.plus.TargetPointsHelper.TargetPoint;
+import net.osmand.plus.Version;
+import net.osmand.plus.activities.HelpActivity;
 import net.osmand.plus.activities.MapActivity;
 import net.osmand.plus.activities.MapActivity.ShowQuickSearchMode;
+import net.osmand.plus.activities.MapBottomButtonsDialogFragment;
+import net.osmand.plus.activities.search.SearchActivity;
+import net.osmand.plus.dashboard.DashboardOnMap;
 import net.osmand.plus.dashboard.DashboardOnMap.DashboardType;
 import net.osmand.plus.dialogs.DirectionsDialogs;
+import net.osmand.plus.download.IndexItem;
+import net.osmand.plus.liveupdates.OsmLiveActivity;
 import net.osmand.plus.mapcontextmenu.MapContextMenu;
 import net.osmand.plus.mapcontextmenu.other.MapRouteInfoMenu;
 import net.osmand.plus.mapcontextmenu.other.TrackDetailsMenu;
@@ -102,6 +119,8 @@ public class MapControlsLayer extends OsmandMapLayer {
 	private MapQuickActionLayer mapQuickActionLayer;
 	private boolean forceShowCompass;
 	private LatLon requestedLatLon;
+	private BottomSheetBehavior bottomSheetBehavior;
+	private MapBottomButtonsDialogFragment mapBottomButtonsDialogFragment;
 
 	public MapControlsLayer(MapActivity activity) {
 		this.mapActivity = activity;
@@ -109,6 +128,7 @@ public class MapControlsLayer extends OsmandMapLayer {
 		settings = activity.getMyApplication().getSettings();
 		mapView = mapActivity.getMapView();
 		contextMenuLayer = mapActivity.getMapLayers().getContextMenuLayer();
+		bottomSheetBehavior = BottomSheetBehavior.from(mapActivity.findViewById(R.id.map_bottom_sheet));
 	}
 
 	public MapRouteInfoMenu getMapRouteInfoMenu() {
@@ -131,10 +151,14 @@ public class MapControlsLayer extends OsmandMapLayer {
 		initZooms();
 		initDasboardRelatedControls();
 		updateControls(view.getCurrentRotatedTileBox(), null);
+		mapBottomButtonsDialogFragment = new MapBottomButtonsDialogFragment();
 	}
 
 	public void initDasboardRelatedControls() {
 		initControls();
+		if (settings.NEW_MAP_VIEW.get()) {
+			initBottomSheetControls();
+		}
 		initRouteControls();
 	}
 
@@ -239,44 +263,268 @@ public class MapControlsLayer extends OsmandMapLayer {
 	}
 
 	private void initTopControls() {
-		View configureMap = mapActivity.findViewById(R.id.map_layers_button);
-		layersHud = createHudButton(configureMap, R.drawable.map_world_globe_dark)
-				.setIconColorId(R.color.on_map_icon_color, 0)
-				.setBg(R.drawable.btn_inset_circle_trans, R.drawable.btn_inset_circle_night);
-		controls.add(layersHud);
-		configureMap.setOnClickListener(new View.OnClickListener() {
+		if (settings.NEW_MAP_VIEW.get()) {
+			View compass = mapActivity.findViewById(R.id.map_compass_button);
+			compassHud = createHudButton(compass, R.drawable.map_compass).setIconColorId(0).
+					setBg(R.drawable.btn_inset_circle_trans, R.drawable.btn_inset_circle_night);
+			compassHud.compass = true;
+			controls.add(compassHud);
+			compass.setOnClickListener(new View.OnClickListener() {
+				@Override
+				public void onClick(View v) {
+					mapActivity.getMapViewTrackingUtilities().switchRotateMapMode();
+				}
+			});
+		} else {
+			View configureMap = mapActivity.findViewById(R.id.map_layers_button);
+			layersHud = createHudButton(configureMap, R.drawable.map_world_globe_dark)
+					.setIconColorId(R.color.on_map_icon_color, 0)
+					.setBg(R.drawable.btn_inset_circle_trans, R.drawable.btn_inset_circle_night);
+			controls.add(layersHud);
+			configureMap.setOnClickListener(new View.OnClickListener() {
+				@Override
+				public void onClick(View v) {
+					MapActivity.clearPrevActivityIntent();
+					mapActivity.getDashboard().setDashboardVisibility(true, DashboardType.CONFIGURE_MAP);
+				}
+			});
+
+			View compass = mapActivity.findViewById(R.id.map_compass_button);
+			compassHud = createHudButton(compass, R.drawable.map_compass).setIconColorId(0).
+					setBg(R.drawable.btn_inset_circle_trans, R.drawable.btn_inset_circle_night);
+			compassHud.compass = true;
+			controls.add(compassHud);
+			compass.setOnClickListener(new View.OnClickListener() {
+				@Override
+				public void onClick(View v) {
+					mapActivity.getMapViewTrackingUtilities().switchRotateMapMode();
+				}
+			});
+
+			View search = mapActivity.findViewById(R.id.map_search_button);
+			quickSearchHud = createHudButton(search, R.drawable.map_search_dark)
+					.setIconsId(R.drawable.map_search_dark, R.drawable.map_search_night)
+					.setIconColorId(0)
+					.setBg(R.drawable.btn_inset_circle_trans, R.drawable.btn_inset_circle_night);
+			controls.add(quickSearchHud);
+			search.setOnClickListener(new View.OnClickListener() {
+				@Override
+				public void onClick(View v) {
+					mapActivity.showQuickSearch(ShowQuickSearchMode.NEW_IF_EXPIRED, false);
+				}
+			});
+		}
+
+	}
+
+	private void initBottomSheetControls() {
+		final DisplayMetrics metrics = new DisplayMetrics();
+		mapActivity.getWindowManager().getDefaultDisplay().getMetrics(metrics);
+		bottomSheetBehavior.setPeekHeight(metrics.heightPixels / 2);
+		bottomSheetBehavior.setState(BottomSheetBehavior.STATE_HIDDEN);
+		bottomSheetBehavior.setBottomSheetCallback(new BottomSheetBehavior.BottomSheetCallback() {
 			@Override
-			public void onClick(View v) {
+			public void onStateChanged(@NonNull View bottomSheet, int newState) {
+				switch (newState) {
+					case BottomSheetBehavior.STATE_COLLAPSED:
+						break;
+					case BottomSheetBehavior.STATE_EXPANDED:
+						break;
+					case BottomSheetBehavior.STATE_HIDDEN:
+						mapBottomButtonsDialogFragment.dismiss();
+						break;
+				}
+			}
+
+			@Override
+			public void onSlide(@NonNull View bottomSheet, float slideOffset) {
+
+			}
+		});
+
+		IconsCache ic = mapActivity.getMyApplication().getIconsCache();
+
+		View dashboardView = mapActivity.findViewById(R.id.dashboard_view);
+		((ImageView) mapActivity.findViewById(R.id.dashboard_icon)).
+				setImageDrawable(ic.getThemedIcon(R.drawable.map_dashboard));
+		dashboardView.setOnClickListener(new View.OnClickListener() {
+			@Override
+			public void onClick(View view) {
 				MapActivity.clearPrevActivityIntent();
-				mapActivity.getDashboard().setDashboardVisibility(true, DashboardType.CONFIGURE_MAP);
+				mapActivity.getDashboard().setDashboardVisibility(true, DashboardOnMap.DashboardType.DASHBOARD);
+				bottomSheetBehavior.setHideable(true);
+				bottomSheetBehavior.setState(BottomSheetBehavior.STATE_HIDDEN);
 			}
 		});
 
-		View compass = mapActivity.findViewById(R.id.map_compass_button);
-		compassHud = createHudButton(compass, R.drawable.map_compass).setIconColorId(0).
-				setBg(R.drawable.btn_inset_circle_trans, R.drawable.btn_inset_circle_night);
-		compassHud.compass = true;
-		controls.add(compassHud);
-		compass.setOnClickListener(new View.OnClickListener() {
+		View mapMarkersView = mapActivity.findViewById(R.id.map_markers_view);
+		if (!mapActivity.getMyApplication().getSettings().USE_MAP_MARKERS.get()) {
+			mapMarkersView.setVisibility(View.GONE);
+		}
+		((ImageView) mapActivity.findViewById(R.id.map_markers_icon)).
+				setImageDrawable(ic.getThemedIcon(R.drawable.ic_action_flag_dark));
+		mapMarkersView.setOnClickListener(new View.OnClickListener() {
 			@Override
-			public void onClick(View v) {
-				mapActivity.getMapViewTrackingUtilities().switchRotateMapMode();
+			public void onClick(View view) {
+				MapActivity.clearPrevActivityIntent();
+				mapActivity.getDashboard().setDashboardVisibility(true, DashboardOnMap.DashboardType.MAP_MARKERS);
+				bottomSheetBehavior.setHideable(true);
+				bottomSheetBehavior.setState(BottomSheetBehavior.STATE_HIDDEN);
 			}
 		});
 
-		View search = mapActivity.findViewById(R.id.map_search_button);
-		quickSearchHud = createHudButton(search, R.drawable.map_search_dark)
-				.setIconsId(R.drawable.map_search_dark, R.drawable.map_search_night)
-				.setIconColorId(0)
-				.setBg(R.drawable.btn_inset_circle_trans, R.drawable.btn_inset_circle_night);
-		controls.add(quickSearchHud);
-		search.setOnClickListener(new View.OnClickListener() {
+		View waypointsView = mapActivity.findViewById(R.id.waypoints_view);
+		if (mapActivity.getMyApplication().getSettings().USE_MAP_MARKERS.get()) {
+			waypointsView.setVisibility(View.GONE);
+		}
+		((ImageView) mapActivity.findViewById(R.id.waypoints_icon)).
+				setImageDrawable(ic.getThemedIcon(R.drawable.ic_action_intermediate));
+		waypointsView.setOnClickListener(new View.OnClickListener() {
 			@Override
-			public void onClick(View v) {
-				mapActivity.showQuickSearch(ShowQuickSearchMode.NEW_IF_EXPIRED, false);
+			public void onClick(View view) {
+				MapActivity.clearPrevActivityIntent();
+				mapActivity.getDashboard().setDashboardVisibility(true, DashboardOnMap.DashboardType.WAYPOINTS);
+				bottomSheetBehavior.setHideable(true);
+				bottomSheetBehavior.setState(BottomSheetBehavior.STATE_HIDDEN);
 			}
 		});
 
+		View myPlacesView = mapActivity.findViewById(R.id.my_places_view);
+		((ImageView) mapActivity.findViewById(R.id.my_places_icon)).
+				setImageDrawable(ic.getThemedIcon(R.drawable.ic_action_fav_dark));
+		myPlacesView.setOnClickListener(new View.OnClickListener() {
+			@Override
+			public void onClick(View view) {
+				Intent newIntent = new Intent(mapActivity, mapActivity.getMyApplication().getAppCustomization()
+						.getFavoritesActivity());
+				newIntent.setFlags(Intent.FLAG_ACTIVITY_REORDER_TO_FRONT);
+				mapActivity.startActivity(newIntent);
+				bottomSheetBehavior.setHideable(true);
+				bottomSheetBehavior.setState(BottomSheetBehavior.STATE_HIDDEN);
+			}
+		});
+
+		View legacySearchView = mapActivity.findViewById(R.id.legacy_search_view);
+		if (!mapActivity.getMyApplication().getSettings().SHOW_LEGACY_SEARCH.get()) {
+			legacySearchView.setVisibility(View.GONE);
+		}
+		((ImageView) mapActivity.findViewById(R.id.legacy_search_icon)).
+				setImageDrawable(ic.getThemedIcon(R.drawable.ic_action_search_dark));
+		legacySearchView.setOnClickListener(new View.OnClickListener() {
+			@Override
+			public void onClick(View view) {
+				Intent newIntent = new Intent(mapActivity, mapActivity.getMyApplication().getAppCustomization()
+						.getSearchActivity());
+				LatLon loc = mapActivity.getMapLocation();
+				newIntent.putExtra(SearchActivity.SEARCH_LAT, loc.getLatitude());
+				newIntent.putExtra(SearchActivity.SEARCH_LON, loc.getLongitude());
+				if (mapActivity.getMapViewTrackingUtilities().isMapLinkedToLocation()) {
+					newIntent.putExtra(SearchActivity.SEARCH_NEARBY, true);
+				}
+				newIntent.addFlags(Intent.FLAG_ACTIVITY_REORDER_TO_FRONT);
+				mapActivity.startActivity(newIntent);
+				bottomSheetBehavior.setHideable(true);
+				bottomSheetBehavior.setState(BottomSheetBehavior.STATE_HIDDEN);
+			}
+		});
+
+		View downloadMapsView = mapActivity.findViewById(R.id.download_maps_view);
+		String d = mapActivity.getMyApplication().getString(R.string.welmode_download_maps);
+		if (mapActivity.getMyApplication().getDownloadThread().getIndexes().isDownloadedFromInternet) {
+			List<IndexItem> updt = mapActivity.getMyApplication().getDownloadThread().getIndexes().getItemsToUpdate();
+			if (updt != null && updt.size() > 0) {
+				d += " (" + updt.size() + ")";
+			}
+		}
+		((TextView) mapActivity.findViewById(R.id.download_maps_text)).
+				setText(d);
+		((ImageView) mapActivity.findViewById(R.id.download_maps_icon)).
+				setImageDrawable(ic.getThemedIcon(R.drawable.ic_type_archive));
+		downloadMapsView.setOnClickListener(new View.OnClickListener() {
+			@Override
+			public void onClick(View view) {
+				Intent newIntent = new Intent(mapActivity, mapActivity.getMyApplication().getAppCustomization()
+						.getDownloadActivity());
+				newIntent.addFlags(Intent.FLAG_ACTIVITY_REORDER_TO_FRONT);
+				mapActivity.startActivity(newIntent);
+				bottomSheetBehavior.setHideable(true);
+				bottomSheetBehavior.setState(BottomSheetBehavior.STATE_HIDDEN);
+			}
+		});
+
+		View osmLiveView = mapActivity.findViewById(R.id.osm_live_view);
+		if (!(Version.isGooglePlayEnabled(mapActivity.getMyApplication()) || Version.isDeveloperVersion(mapActivity.getMyApplication()))) {
+			osmLiveView.setVisibility(View.GONE);
+		}
+		((ImageView) mapActivity.findViewById(R.id.osm_live_icon)).
+				setImageDrawable(ic.getThemedIcon(R.drawable.ic_action_osm_live));
+		osmLiveView.setOnClickListener(new View.OnClickListener() {
+			@Override
+			public void onClick(View view) {
+				Intent intent = new Intent(mapActivity, OsmLiveActivity.class);
+				intent.addFlags(Intent.FLAG_ACTIVITY_REORDER_TO_FRONT);
+				mapActivity.startActivity(intent);
+				bottomSheetBehavior.setHideable(true);
+				bottomSheetBehavior.setState(BottomSheetBehavior.STATE_HIDDEN);
+			}
+		});
+
+		View pluginsView = mapActivity.findViewById(R.id.plugins_view);
+		((ImageView) mapActivity.findViewById(R.id.plugins_icon)).
+				setImageDrawable(ic.getThemedIcon(R.drawable.ic_extension_dark));
+		pluginsView.setOnClickListener(new View.OnClickListener() {
+			@Override
+			public void onClick(View view) {
+				Intent newIntent = new Intent(mapActivity, mapActivity.getMyApplication().getAppCustomization()
+						.getPluginsActivity());
+				newIntent.addFlags(Intent.FLAG_ACTIVITY_REORDER_TO_FRONT);
+				mapActivity.startActivity(newIntent);
+				bottomSheetBehavior.setHideable(true);
+				bottomSheetBehavior.setState(BottomSheetBehavior.STATE_HIDDEN);
+			}
+		});
+
+		View configureScreenView = mapActivity.findViewById(R.id.configure_screen_view);
+		((ImageView) mapActivity.findViewById(R.id.configure_screen_icon)).
+				setImageDrawable(ic.getThemedIcon(R.drawable.ic_configure_screen_dark));
+		configureScreenView.setOnClickListener(new View.OnClickListener() {
+			@Override
+			public void onClick(View view) {
+				MapActivity.clearPrevActivityIntent();
+				mapActivity.getDashboard().setDashboardVisibility(true, DashboardOnMap.DashboardType.CONFIGURE_SCREEN);
+				bottomSheetBehavior.setHideable(true);
+				bottomSheetBehavior.setState(BottomSheetBehavior.STATE_HIDDEN);
+			}
+		});
+
+		View settingsView = mapActivity.findViewById(R.id.settings_view);
+		((ImageView) mapActivity.findViewById(R.id.settings_icon)).
+				setImageDrawable(ic.getThemedIcon(R.drawable.ic_action_settings));
+		settingsView.setOnClickListener(new View.OnClickListener() {
+			@Override
+			public void onClick(View view) {
+				final Intent settings = new Intent(mapActivity, mapActivity.getMyApplication().getAppCustomization()
+						.getSettingsActivity());
+				settings.addFlags(Intent.FLAG_ACTIVITY_REORDER_TO_FRONT);
+				mapActivity.startActivity(settings);
+				bottomSheetBehavior.setHideable(true);
+				bottomSheetBehavior.setState(BottomSheetBehavior.STATE_HIDDEN);
+			}
+		});
+
+		View helpView = mapActivity.findViewById(R.id.help_view);
+		((ImageView) mapActivity.findViewById(R.id.help_icon)).
+				setImageDrawable(ic.getThemedIcon(R.drawable.ic_action_help));
+		helpView.setOnClickListener(new View.OnClickListener() {
+			@Override
+			public void onClick(View view) {
+				Intent intent = new Intent(mapActivity, HelpActivity.class);
+				intent.addFlags(Intent.FLAG_ACTIVITY_REORDER_TO_FRONT);
+				mapActivity.startActivity(intent);
+				bottomSheetBehavior.setHideable(true);
+				bottomSheetBehavior.setState(BottomSheetBehavior.STATE_HIDDEN);
+			}
+		});
 	}
 
 	private void initRouteControls() {
@@ -375,53 +623,132 @@ public class MapControlsLayer extends OsmandMapLayer {
 	}
 
 	private void initControls() {
-		View backToLocation = mapActivity.findViewById(R.id.map_my_location_button);
-		backToLocationControl = createHudButton(backToLocation, R.drawable.map_my_location)
-				.setBg(R.drawable.btn_circle_blue);
-		controls.add(backToLocationControl);
-
-		backToLocation.setOnClickListener(new View.OnClickListener() {
-			@Override
-			public void onClick(View v) {
-				if (OsmAndLocationProvider.isLocationPermissionAvailable(mapActivity)) {
-					mapActivity.getMapViewTrackingUtilities().backToLocationImpl();
-				} else {
-					ActivityCompat.requestPermissions(mapActivity,
-							new String[]{Manifest.permission.ACCESS_FINE_LOCATION},
-							OsmAndLocationProvider.REQUEST_LOCATION_PERMISSION);
+		if (settings.NEW_MAP_VIEW.get()) {
+			View configureMap = mapActivity.findViewById(R.id.map_layers_button);
+			layersHud = createHudButton(configureMap, R.drawable.map_world_globe_dark)
+					.setIconColorId(R.color.on_map_icon_color, 0)
+					.setBg(R.drawable.btn_circle_trans_10_new, R.drawable.btn_circle_night_new);
+			controls.add(layersHud);
+			configureMap.setOnClickListener(new View.OnClickListener() {
+				@Override
+				public void onClick(View v) {
+					MapActivity.clearPrevActivityIntent();
+					mapActivity.getDashboard().setDashboardVisibility(true, DashboardType.CONFIGURE_MAP);
 				}
-			}
-		});
-		View backToMenuButton = mapActivity.findViewById(R.id.map_menu_button);
+			});
 
-		final boolean dash = settings.SHOW_DASHBOARD_ON_MAP_SCREEN.get();
-		menuControl = createHudButton(backToMenuButton,
-				!dash ? R.drawable.map_drawer : R.drawable.map_dashboard).setBg(
-				R.drawable.btn_round, R.drawable.btn_round_night);
-		controls.add(menuControl);
-		backToMenuButton.setOnClickListener(new View.OnClickListener() {
-			@Override
-			public void onClick(View v) {
-				MapActivity.clearPrevActivityIntent();
-				if (dash) {
-					mapActivity.getDashboard().setDashboardVisibility(true, DashboardType.DASHBOARD);
-				} else {
-					mapActivity.openDrawer();
+			View search = mapActivity.findViewById(R.id.map_search_button);
+			quickSearchHud = createHudButton(search, R.drawable.map_search_dark)
+					.setIconsId(R.drawable.map_search_dark, R.drawable.map_search_night)
+					.setIconColorId(0)
+					.setBg(R.drawable.btn_circle_trans_10_new, R.drawable.btn_circle_night_new);
+			controls.add(quickSearchHud);
+			search.setOnClickListener(new View.OnClickListener() {
+				@Override
+				public void onClick(View v) {
+					mapActivity.showQuickSearch(ShowQuickSearchMode.NEW_IF_EXPIRED, false);
 				}
-			}
-		});
-		zoomText = (TextView) mapActivity.findViewById(R.id.map_app_mode_text);
+			});
 
-		View routePlanButton = mapActivity.findViewById(R.id.map_route_info_button);
-		routePlanningBtn = createHudButton(routePlanButton, R.drawable.map_directions).setBg(
-				R.drawable.btn_round, R.drawable.btn_round_night);
-		controls.add(routePlanningBtn);
-		routePlanButton.setOnClickListener(new View.OnClickListener() {
-			@Override
-			public void onClick(View v) {
-				doRoute(false);
-			}
-		});
+			View backToLocation = mapActivity.findViewById(R.id.map_my_location_button);
+			backToLocationControl = createHudButton(backToLocation, R.drawable.map_my_location)
+					.setBg(R.drawable.btn_circle_blue_new);
+			controls.add(backToLocationControl);
+
+			backToLocation.setOnClickListener(new View.OnClickListener() {
+				@Override
+				public void onClick(View v) {
+					if (OsmAndLocationProvider.isLocationPermissionAvailable(mapActivity)) {
+						mapActivity.getMapViewTrackingUtilities().backToLocationImpl();
+					} else {
+						ActivityCompat.requestPermissions(mapActivity,
+								new String[]{Manifest.permission.ACCESS_FINE_LOCATION},
+								OsmAndLocationProvider.REQUEST_LOCATION_PERMISSION);
+					}
+				}
+			});
+			View backToMenuButton = mapActivity.findViewById(R.id.map_menu_button);
+
+			final boolean dash = settings.SHOW_DASHBOARD_ON_MAP_SCREEN.get();
+			menuControl = createHudButton(backToMenuButton,
+					!dash ? R.drawable.map_drawer : R.drawable.map_dashboard).setBg(
+					R.drawable.btn_circle_trans_35_new, R.drawable.btn_circle_night_new);
+			controls.add(menuControl);
+			backToMenuButton.setOnClickListener(new View.OnClickListener() {
+				@Override
+				public void onClick(View v) {
+					MapActivity.clearPrevActivityIntent();
+					if (dash) {
+						mapActivity.getDashboard().setDashboardVisibility(true, DashboardType.DASHBOARD);
+					} else {
+						bottomSheetBehavior.setState(BottomSheetBehavior.STATE_COLLAPSED);
+						bottomSheetBehavior.setHideable(false);
+                        mapBottomButtonsDialogFragment.show(mapActivity.getSupportFragmentManager(), null);
+					}
+				}
+			});
+			zoomText = (TextView) mapActivity.findViewById(R.id.map_app_mode_text);
+
+			View routePlanButton = mapActivity.findViewById(R.id.map_route_info_button);
+			routePlanningBtn = createHudButton(routePlanButton, R.drawable.map_directions).setBg(
+					R.drawable.btn_circle_trans_10_new, R.drawable.btn_circle_night_new);
+			controls.add(routePlanningBtn);
+			routePlanButton.setOnClickListener(new View.OnClickListener() {
+				@Override
+				public void onClick(View v) {
+					doRoute(false);
+				}
+			});
+		} else {
+			View backToLocation = mapActivity.findViewById(R.id.map_my_location_button);
+			backToLocationControl = createHudButton(backToLocation, R.drawable.map_my_location)
+					.setBg(R.drawable.btn_circle_blue);
+			controls.add(backToLocationControl);
+
+			backToLocation.setOnClickListener(new View.OnClickListener() {
+				@Override
+				public void onClick(View v) {
+					if (OsmAndLocationProvider.isLocationPermissionAvailable(mapActivity)) {
+						mapActivity.getMapViewTrackingUtilities().backToLocationImpl();
+					} else {
+						ActivityCompat.requestPermissions(mapActivity,
+								new String[]{Manifest.permission.ACCESS_FINE_LOCATION},
+								OsmAndLocationProvider.REQUEST_LOCATION_PERMISSION);
+					}
+				}
+			});
+			View backToMenuButton = mapActivity.findViewById(R.id.map_menu_button);
+
+			final boolean dash = settings.SHOW_DASHBOARD_ON_MAP_SCREEN.get();
+			menuControl = createHudButton(backToMenuButton,
+					!dash ? R.drawable.map_drawer : R.drawable.map_dashboard).setBg(
+					R.drawable.btn_round, R.drawable.btn_round_night);
+			controls.add(menuControl);
+			backToMenuButton.setOnClickListener(new View.OnClickListener() {
+				@Override
+				public void onClick(View v) {
+					MapActivity.clearPrevActivityIntent();
+					if (dash) {
+						mapActivity.getDashboard().setDashboardVisibility(true, DashboardType.DASHBOARD);
+					} else {
+						mapActivity.openDrawer();
+					}
+				}
+			});
+			zoomText = (TextView) mapActivity.findViewById(R.id.map_app_mode_text);
+
+			View routePlanButton = mapActivity.findViewById(R.id.map_route_info_button);
+			routePlanningBtn = createHudButton(routePlanButton, R.drawable.map_directions).setBg(
+					R.drawable.btn_round, R.drawable.btn_round_night);
+			controls.add(routePlanningBtn);
+			routePlanButton.setOnClickListener(new View.OnClickListener() {
+				@Override
+				public void onClick(View v) {
+					doRoute(false);
+				}
+			});
+		}
+
 	}
 
 	public void doRoute(boolean hasTargets) {
@@ -613,35 +940,69 @@ public class MapControlsLayer extends OsmandMapLayer {
 	}
 
 	private void initZooms() {
-		final OsmandMapTileView view = mapActivity.getMapView();
-		View zoomInButton = mapActivity.findViewById(R.id.map_zoom_in_button);
-		mapZoomIn = createHudButton(zoomInButton, R.drawable.map_zoom_in).
-				setIconsId(R.drawable.map_zoom_in, R.drawable.map_zoom_in_night).setRoundTransparent();
-		controls.add(mapZoomIn);
-		zoomInButton.setOnClickListener(new View.OnClickListener() {
-			@Override
-			public void onClick(View v) {
-				if (view.isZooming()) {
-					mapActivity.changeZoom(2, System.currentTimeMillis());
-				} else {
-					mapActivity.changeZoom(1, System.currentTimeMillis());
-				}
+		if (settings.NEW_MAP_VIEW.get()) {
+			final OsmandMapTileView view = mapActivity.getMapView();
+			View zoomInButton = mapActivity.findViewById(R.id.map_zoom_in_button);
+			mapZoomIn = createHudButton(zoomInButton, R.drawable.map_zoom_in).
+					setIconsId(R.drawable.map_zoom_in, R.drawable.map_zoom_in_night).setBg(
+					R.drawable.btn_circle_trans_35_new, R.drawable.btn_circle_night_new);;
+			controls.add(mapZoomIn);
+			zoomInButton.setOnClickListener(new View.OnClickListener() {
+				@Override
+				public void onClick(View v) {
+					if (view.isZooming()) {
+						mapActivity.changeZoom(2, System.currentTimeMillis());
+					} else {
+						mapActivity.changeZoom(1, System.currentTimeMillis());
+					}
 
-			}
-		});
-		final View.OnLongClickListener listener = MapControlsLayer.getOnClickMagnifierListener(view);
-		zoomInButton.setOnLongClickListener(listener);
-		View zoomOutButton = mapActivity.findViewById(R.id.map_zoom_out_button);
-		mapZoomOut = createHudButton(zoomOutButton, R.drawable.map_zoom_out).
-				setIconsId(R.drawable.map_zoom_out, R.drawable.map_zoom_out_night).setRoundTransparent();
-		controls.add(mapZoomOut);
-		zoomOutButton.setOnClickListener(new View.OnClickListener() {
-			@Override
-			public void onClick(View v) {
-				mapActivity.changeZoom(-1, System.currentTimeMillis());
-			}
-		});
-		zoomOutButton.setOnLongClickListener(listener);
+				}
+			});
+			final View.OnLongClickListener listener = MapControlsLayer.getOnClickMagnifierListener(view);
+			zoomInButton.setOnLongClickListener(listener);
+			View zoomOutButton = mapActivity.findViewById(R.id.map_zoom_out_button);
+			mapZoomOut = createHudButton(zoomOutButton, R.drawable.map_zoom_out).
+					setIconsId(R.drawable.map_zoom_out, R.drawable.map_zoom_out_night).setBg(
+					R.drawable.btn_circle_trans_35_new, R.drawable.btn_circle_night_new);
+			controls.add(mapZoomOut);
+			zoomOutButton.setOnClickListener(new View.OnClickListener() {
+				@Override
+				public void onClick(View v) {
+					mapActivity.changeZoom(-1, System.currentTimeMillis());
+				}
+			});
+			zoomOutButton.setOnLongClickListener(listener);
+		} else {
+			final OsmandMapTileView view = mapActivity.getMapView();
+			View zoomInButton = mapActivity.findViewById(R.id.map_zoom_in_button);
+			mapZoomIn = createHudButton(zoomInButton, R.drawable.map_zoom_in).
+					setIconsId(R.drawable.map_zoom_in, R.drawable.map_zoom_in_night).setRoundTransparent();
+			controls.add(mapZoomIn);
+			zoomInButton.setOnClickListener(new View.OnClickListener() {
+				@Override
+				public void onClick(View v) {
+					if (view.isZooming()) {
+						mapActivity.changeZoom(2, System.currentTimeMillis());
+					} else {
+						mapActivity.changeZoom(1, System.currentTimeMillis());
+					}
+
+				}
+			});
+			final View.OnLongClickListener listener = MapControlsLayer.getOnClickMagnifierListener(view);
+			zoomInButton.setOnLongClickListener(listener);
+			View zoomOutButton = mapActivity.findViewById(R.id.map_zoom_out_button);
+			mapZoomOut = createHudButton(zoomOutButton, R.drawable.map_zoom_out).
+					setIconsId(R.drawable.map_zoom_out, R.drawable.map_zoom_out_night).setRoundTransparent();
+			controls.add(mapZoomOut);
+			zoomOutButton.setOnClickListener(new View.OnClickListener() {
+				@Override
+				public void onClick(View v) {
+					mapActivity.changeZoom(-1, System.currentTimeMillis());
+				}
+			});
+			zoomOutButton.setOnLongClickListener(listener);
+		}
 	}
 
 	public void startNavigation() {
@@ -791,23 +1152,44 @@ public class MapControlsLayer extends OsmandMapLayer {
 		boolean enabled = mapActivity.getMyApplication().getLocationProvider().getLastKnownLocation() != null;
 		boolean tracked = mapActivity.getMapViewTrackingUtilities().isMapLinkedToLocation();
 
-		if (!enabled) {
-			backToLocationControl.setBg(R.drawable.btn_circle, R.drawable.btn_circle_night);
-			backToLocationControl.setIconColorId(R.color.icon_color, 0);
-			backToLocationControl.iv.setContentDescription(mapActivity.getString(R.string.unknown_location));
-		} else if (tracked) {
-			backToLocationControl.setBg(R.drawable.btn_circle, R.drawable.btn_circle_night);
-			backToLocationControl.setIconColorId(R.color.color_myloc_distance);
-			backToLocationControl.iv.setContentDescription(mapActivity.getString(R.string.access_map_linked_to_location));
+		if (settings.NEW_MAP_VIEW.get()) {
+			if (!enabled) {
+				backToLocationControl.setBg(R.drawable.btn_circle_trans_10_new, R.drawable.btn_circle_night_new);
+				backToLocationControl.setIconColorId(R.color.icon_color, 0);
+				backToLocationControl.iv.setContentDescription(mapActivity.getString(R.string.unknown_location));
+			} else if (tracked) {
+				backToLocationControl.setBg(R.drawable.btn_circle_trans_10_new, R.drawable.btn_circle_night_new);
+				backToLocationControl.setIconColorId(R.color.color_myloc_distance);
+				backToLocationControl.iv.setContentDescription(mapActivity.getString(R.string.access_map_linked_to_location));
+			} else {
+				backToLocationControl.setIconColorId(0);
+				backToLocationControl.setBg(R.drawable.btn_circle_blue_new);
+				backToLocationControl.iv.setContentDescription(mapActivity.getString(R.string.map_widget_back_to_loc));
+			}
+			boolean visible = !(tracked && rh.isFollowingMode());
+			backToLocationControl.updateVisibility(visible && !dialogOpened);
+			if (app.accessibilityEnabled()) {
+				backToLocationControl.iv.setClickable(enabled && visible);
+			}
 		} else {
-			backToLocationControl.setIconColorId(0);
-			backToLocationControl.setBg(R.drawable.btn_circle_blue);
-			backToLocationControl.iv.setContentDescription(mapActivity.getString(R.string.map_widget_back_to_loc));
-		}
-		boolean visible = !(tracked && rh.isFollowingMode());
-		backToLocationControl.updateVisibility(visible && !dialogOpened);
-		if (app.accessibilityEnabled()) {
-			backToLocationControl.iv.setClickable(enabled && visible);
+			if (!enabled) {
+				backToLocationControl.setBg(R.drawable.btn_circle, R.drawable.btn_circle_night);
+				backToLocationControl.setIconColorId(R.color.icon_color, 0);
+				backToLocationControl.iv.setContentDescription(mapActivity.getString(R.string.unknown_location));
+			} else if (tracked) {
+				backToLocationControl.setBg(R.drawable.btn_circle, R.drawable.btn_circle_night);
+				backToLocationControl.setIconColorId(R.color.color_myloc_distance);
+				backToLocationControl.iv.setContentDescription(mapActivity.getString(R.string.access_map_linked_to_location));
+			} else {
+				backToLocationControl.setIconColorId(0);
+				backToLocationControl.setBg(R.drawable.btn_circle_blue);
+				backToLocationControl.iv.setContentDescription(mapActivity.getString(R.string.map_widget_back_to_loc));
+			}
+			boolean visible = !(tracked && rh.isFollowingMode());
+			backToLocationControl.updateVisibility(visible && !dialogOpened);
+			if (app.accessibilityEnabled()) {
+				backToLocationControl.iv.setClickable(enabled && visible);
+			}
 		}
 	}
 

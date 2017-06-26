@@ -79,17 +79,21 @@ public class MapMultiSelectionMenuFragment extends Fragment implements AdapterVi
 			dismissMenu();
 			return;
 		}
-		wasDrawerDisabled = menu.getMapActivity().isDrawerDisabled();
-		if (!wasDrawerDisabled) {
-			menu.getMapActivity().disableDrawer();
+		if (!((MapActivity)getActivity()).getMyApplication().getSettings().NEW_MAP_VIEW.get()) {
+			wasDrawerDisabled = menu.getMapActivity().isDrawerDisabled();
+			if (!wasDrawerDisabled) {
+				menu.getMapActivity().disableDrawer();
+			}
 		}
 	}
 
 	@Override
 	public void onPause() {
 		super.onPause();
-		if (!wasDrawerDisabled) {
-			menu.getMapActivity().enableDrawer();
+		if (!((MapActivity)getActivity()).getMyApplication().getSettings().NEW_MAP_VIEW.get()) {
+			if (!wasDrawerDisabled) {
+				menu.getMapActivity().enableDrawer();
+			}
 		}
 	}
 

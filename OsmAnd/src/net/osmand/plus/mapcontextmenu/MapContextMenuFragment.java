@@ -757,9 +757,11 @@ public class MapContextMenuFragment extends Fragment implements DownloadEvents {
 		screenOrientation = DashLocationFragment.getScreenOrientation(getActivity());
 		getMapActivity().getMapViewTrackingUtilities().setContextMenu(menu);
 		getMapActivity().getMapViewTrackingUtilities().setMapLinkedToLocation(false);
-		wasDrawerDisabled = getMapActivity().isDrawerDisabled();
-		if (!wasDrawerDisabled) {
-			getMapActivity().disableDrawer();
+		if (!getMyApplication().getSettings().NEW_MAP_VIEW.get()) {
+			wasDrawerDisabled = getMapActivity().isDrawerDisabled();
+			if (!wasDrawerDisabled) {
+				getMapActivity().disableDrawer();
+			}
 		}
 	}
 
@@ -767,8 +769,10 @@ public class MapContextMenuFragment extends Fragment implements DownloadEvents {
 	public void onPause() {
 		getMapActivity().getMapViewTrackingUtilities().setContextMenu(null);
 		getMapActivity().getMapViewTrackingUtilities().setMapLinkedToLocation(false);
-		if (!wasDrawerDisabled) {
-			getMapActivity().enableDrawer();
+		if (!getMyApplication().getSettings().NEW_MAP_VIEW.get()) {
+			if (!wasDrawerDisabled) {
+				getMapActivity().enableDrawer();
+			}
 		}
 		super.onPause();
 	}
