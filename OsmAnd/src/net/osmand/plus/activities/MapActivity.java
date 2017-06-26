@@ -107,6 +107,7 @@ import net.osmand.plus.views.OsmAndMapLayersView;
 import net.osmand.plus.views.OsmAndMapSurfaceView;
 import net.osmand.plus.views.OsmandMapLayer;
 import net.osmand.plus.views.OsmandMapTileView;
+import net.osmand.plus.views.RulerControlLayer;
 import net.osmand.plus.views.corenative.NativeCoreContext;
 import net.osmand.plus.views.mapwidgets.MapInfoWidgetsFactory.TopToolbarController;
 import net.osmand.plus.views.mapwidgets.MapInfoWidgetsFactory.TopToolbarControllerType;
@@ -293,6 +294,8 @@ public class MapActivity extends OsmandActionBarActivity implements DownloadEven
 			@Override
 			public void onDrawerSlide(View drawerView, float slideOffset) {
 				mapView.setMultiTouch(false);
+				mapView.setMultiTouchEndTime(0);
+				mapView.getLayerByClass(RulerControlLayer.class).refreshMapDelayed();
 			}
 
 			@Override
