@@ -87,5 +87,20 @@
 	<string name="poi_resource_gravel">Çınqıl</string>
 	<string name="poi_resource_gypsum">Gips</string>
 	<string name="poi_resource_iron_ore">Dəmir filizi</string>
-	<string name="poi_nuclear_explosion_type_atmospheric_water_surface_barge"></string>
+	<string name="poi_nuclear_explosion_type_atmospheric_water_surface_barge"/>
+	<string name="poi_post_office">Poçt şöbəsi</string>
+	<string name="poi_post_box">Poçt qutusu</string>
+	<string name="poi_telephone">Telefon</string>
+	<string name="poi_communication_tower">Kommunikasiya qülləsi</string>
+	<string name="poi_observation_tower">Müşahidə qülləsi</string>
+	<string name="poi_bell_tower">Zəng qülləsi</string>
+	<string name="poi_lighting_tower">İşıq qülləsi</string>
+	<string name="poi_recycling">Təkrar emal</string>
+
+	<string name="poi_recycling_container">Konteyner</string>
+	<string name="poi_recycling_glass">Şüşə</string>
+	<string name="poi_recycling_paper">Kağız</string>
+	<string name="poi_recycling_clothes">Geyimlər</string>
+	<string name="poi_recycling_plastic">Plastik</string>
+	<string name="poi_recycling_batteries">Batareyalar</string>
 	</resources>
