@@ -3070,6 +3070,6 @@ Facebook: https://www.facebook.com/osmandapp
     <string name="distance_moving">Відстань виправлена</string>
     <string name="shared_string_permissions">Права доступу</string>
     <string name="import_gpx_failed_descr">OsmAnd не може імпортувати файл. Будь ласка, перевірте, чи OsmAnd має дозвіл на читання файлу з його місця розташування.</string>
-    <string name="map_widget_ruler_control_first_mode">Режим підключення</string>
-    <string name="map_widget_ruler_control_second_mode">Радіусний режим</string>
+    <string name="map_widget_ruler_control_first_mode">Двоточкова лінійка</string>
+    <string name="map_widget_ruler_control_second_mode">Радіусна лінійка</string>
     </resources>
