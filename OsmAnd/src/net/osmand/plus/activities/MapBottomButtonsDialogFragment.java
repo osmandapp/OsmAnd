@@ -23,11 +23,10 @@ import net.osmand.plus.views.MapControlsLayer;
 public class MapBottomButtonsDialogFragment extends BottomSheetDialogFragment {
     private MapActivity mapActivity;
     private BottomSheetBehavior bottomSheetBehavior;
-    private boolean isLightTheme;
 
     @Override
     public Dialog onCreateDialog(Bundle savedInstanceState) {
-        isLightTheme = getMyApplication()
+        boolean isLightTheme = getMyApplication()
                 .getSettings().OSMAND_THEME.get() == OsmandSettings.OSMAND_LIGHT_THEME;
         int themeId = isLightTheme ? R.style.OsmandLightTheme_BottomSheet
                 : R.style.OsmandDarkTheme_BottomSheet;
@@ -46,7 +45,7 @@ public class MapBottomButtonsDialogFragment extends BottomSheetDialogFragment {
         View view = inflater.inflate(R.layout.map_bottom_buttons_fragment, container, false);
 
         mapActivity = (MapActivity)getActivity();
-        bottomSheetBehavior = mapActivity.getBottomSheetBehavior();
+        bottomSheetBehavior = BottomSheetBehavior.from(mapActivity.findViewById(R.id.map_bottom_sheet));
 
         IconsCache ic = mapActivity.getMyApplication().getIconsCache();
 
@@ -58,7 +57,6 @@ public class MapBottomButtonsDialogFragment extends BottomSheetDialogFragment {
             public void onClick(View view) {
                 MapActivity.clearPrevActivityIntent();
                 mapActivity.getDashboard().setDashboardVisibility(true, DashboardOnMap.DashboardType.CONFIGURE_MAP);
-                dismiss();
                 bottomSheetBehavior.setHideable(true);
                 bottomSheetBehavior.setState(BottomSheetBehavior.STATE_HIDDEN);
             }
@@ -71,7 +69,6 @@ public class MapBottomButtonsDialogFragment extends BottomSheetDialogFragment {
             @Override
             public void onClick(View view) {
                 mapActivity.showQuickSearch(MapActivity.ShowQuickSearchMode.NEW_IF_EXPIRED, false);
-                dismiss();
                 bottomSheetBehavior.setHideable(true);
                 bottomSheetBehavior.setState(BottomSheetBehavior.STATE_HIDDEN);
             }
@@ -83,7 +80,6 @@ public class MapBottomButtonsDialogFragment extends BottomSheetDialogFragment {
         hideView.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                dismiss();
                 bottomSheetBehavior.setHideable(true);
                 bottomSheetBehavior.setState(BottomSheetBehavior.STATE_HIDDEN);
             }
@@ -99,7 +95,6 @@ public class MapBottomButtonsDialogFragment extends BottomSheetDialogFragment {
                 if (mapControlsLayer != null) {
                     mapControlsLayer.doRoute(false);
                 }
-                dismiss();
                 bottomSheetBehavior.setHideable(true);
                 bottomSheetBehavior.setState(BottomSheetBehavior.STATE_HIDDEN);
             }
@@ -118,7 +113,6 @@ public class MapBottomButtonsDialogFragment extends BottomSheetDialogFragment {
                             new String[]{Manifest.permission.ACCESS_FINE_LOCATION},
                             OsmAndLocationProvider.REQUEST_LOCATION_PERMISSION);
                 }
-                dismiss();
                 bottomSheetBehavior.setHideable(true);
                 bottomSheetBehavior.setState(BottomSheetBehavior.STATE_HIDDEN);
             }

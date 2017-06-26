@@ -128,7 +128,7 @@ public class MapControlsLayer extends OsmandMapLayer {
 		settings = activity.getMyApplication().getSettings();
 		mapView = mapActivity.getMapView();
 		contextMenuLayer = mapActivity.getMapLayers().getContextMenuLayer();
-		bottomSheetBehavior = mapActivity.getBottomSheetBehavior();
+		bottomSheetBehavior = BottomSheetBehavior.from(mapActivity.findViewById(R.id.map_bottom_sheet));
 	}
 
 	public MapRouteInfoMenu getMapRouteInfoMenu() {
@@ -149,9 +149,6 @@ public class MapControlsLayer extends OsmandMapLayer {
 		initTopControls();
 		initTransparencyBar();
 		initZooms();
-		if (settings.NEW_MAP_VIEW.get()) {
-			initBottomSheetControls();
-		}
 		initDasboardRelatedControls();
 		updateControls(view.getCurrentRotatedTileBox(), null);
 		mapBottomButtonsDialogFragment = new MapBottomButtonsDialogFragment();
@@ -159,6 +156,9 @@ public class MapControlsLayer extends OsmandMapLayer {
 
 	public void initDasboardRelatedControls() {
 		initControls();
+		if (settings.NEW_MAP_VIEW.get()) {
+			initBottomSheetControls();
+		}
 		initRouteControls();
 	}
 
@@ -322,6 +322,25 @@ public class MapControlsLayer extends OsmandMapLayer {
 		mapActivity.getWindowManager().getDefaultDisplay().getMetrics(metrics);
 		bottomSheetBehavior.setPeekHeight(metrics.heightPixels / 2);
 		bottomSheetBehavior.setState(BottomSheetBehavior.STATE_HIDDEN);
+		bottomSheetBehavior.setBottomSheetCallback(new BottomSheetBehavior.BottomSheetCallback() {
+			@Override
+			public void onStateChanged(@NonNull View bottomSheet, int newState) {
+				switch (newState) {
+					case BottomSheetBehavior.STATE_COLLAPSED:
+						break;
+					case BottomSheetBehavior.STATE_EXPANDED:
+						break;
+					case BottomSheetBehavior.STATE_HIDDEN:
+						mapBottomButtonsDialogFragment.dismiss();
+						break;
+				}
+			}
+
+			@Override
+			public void onSlide(@NonNull View bottomSheet, float slideOffset) {
+
+			}
+		});
 
 		IconsCache ic = mapActivity.getMyApplication().getIconsCache();
 
@@ -333,7 +352,6 @@ public class MapControlsLayer extends OsmandMapLayer {
 			public void onClick(View view) {
 				MapActivity.clearPrevActivityIntent();
 				mapActivity.getDashboard().setDashboardVisibility(true, DashboardOnMap.DashboardType.DASHBOARD);
-				mapBottomButtonsDialogFragment.dismiss();
 				bottomSheetBehavior.setHideable(true);
 				bottomSheetBehavior.setState(BottomSheetBehavior.STATE_HIDDEN);
 			}
@@ -350,7 +368,6 @@ public class MapControlsLayer extends OsmandMapLayer {
 			public void onClick(View view) {
 				MapActivity.clearPrevActivityIntent();
 				mapActivity.getDashboard().setDashboardVisibility(true, DashboardOnMap.DashboardType.MAP_MARKERS);
-				mapBottomButtonsDialogFragment.dismiss();
 				bottomSheetBehavior.setHideable(true);
 				bottomSheetBehavior.setState(BottomSheetBehavior.STATE_HIDDEN);
 			}
@@ -367,7 +384,6 @@ public class MapControlsLayer extends OsmandMapLayer {
 			public void onClick(View view) {
 				MapActivity.clearPrevActivityIntent();
 				mapActivity.getDashboard().setDashboardVisibility(true, DashboardOnMap.DashboardType.WAYPOINTS);
-				mapBottomButtonsDialogFragment.dismiss();
 				bottomSheetBehavior.setHideable(true);
 				bottomSheetBehavior.setState(BottomSheetBehavior.STATE_HIDDEN);
 			}
@@ -383,7 +399,6 @@ public class MapControlsLayer extends OsmandMapLayer {
 						.getFavoritesActivity());
 				newIntent.setFlags(Intent.FLAG_ACTIVITY_REORDER_TO_FRONT);
 				mapActivity.startActivity(newIntent);
-				mapBottomButtonsDialogFragment.dismiss();
 				bottomSheetBehavior.setHideable(true);
 				bottomSheetBehavior.setState(BottomSheetBehavior.STATE_HIDDEN);
 			}
@@ -408,7 +423,6 @@ public class MapControlsLayer extends OsmandMapLayer {
 				}
 				newIntent.addFlags(Intent.FLAG_ACTIVITY_REORDER_TO_FRONT);
 				mapActivity.startActivity(newIntent);
-				mapBottomButtonsDialogFragment.dismiss();
 				bottomSheetBehavior.setHideable(true);
 				bottomSheetBehavior.setState(BottomSheetBehavior.STATE_HIDDEN);
 			}
@@ -433,7 +447,6 @@ public class MapControlsLayer extends OsmandMapLayer {
 						.getDownloadActivity());
 				newIntent.addFlags(Intent.FLAG_ACTIVITY_REORDER_TO_FRONT);
 				mapActivity.startActivity(newIntent);
-				mapBottomButtonsDialogFragment.dismiss();
 				bottomSheetBehavior.setHideable(true);
 				bottomSheetBehavior.setState(BottomSheetBehavior.STATE_HIDDEN);
 			}
@@ -451,7 +464,6 @@ public class MapControlsLayer extends OsmandMapLayer {
 				Intent intent = new Intent(mapActivity, OsmLiveActivity.class);
 				intent.addFlags(Intent.FLAG_ACTIVITY_REORDER_TO_FRONT);
 				mapActivity.startActivity(intent);
-				mapBottomButtonsDialogFragment.dismiss();
 				bottomSheetBehavior.setHideable(true);
 				bottomSheetBehavior.setState(BottomSheetBehavior.STATE_HIDDEN);
 			}
@@ -467,7 +479,6 @@ public class MapControlsLayer extends OsmandMapLayer {
 						.getPluginsActivity());
 				newIntent.addFlags(Intent.FLAG_ACTIVITY_REORDER_TO_FRONT);
 				mapActivity.startActivity(newIntent);
-				mapBottomButtonsDialogFragment.dismiss();
 				bottomSheetBehavior.setHideable(true);
 				bottomSheetBehavior.setState(BottomSheetBehavior.STATE_HIDDEN);
 			}
@@ -481,7 +492,6 @@ public class MapControlsLayer extends OsmandMapLayer {
 			public void onClick(View view) {
 				MapActivity.clearPrevActivityIntent();
 				mapActivity.getDashboard().setDashboardVisibility(true, DashboardOnMap.DashboardType.CONFIGURE_SCREEN);
-				mapBottomButtonsDialogFragment.dismiss();
 				bottomSheetBehavior.setHideable(true);
 				bottomSheetBehavior.setState(BottomSheetBehavior.STATE_HIDDEN);
 			}
@@ -497,7 +507,6 @@ public class MapControlsLayer extends OsmandMapLayer {
 						.getSettingsActivity());
 				settings.addFlags(Intent.FLAG_ACTIVITY_REORDER_TO_FRONT);
 				mapActivity.startActivity(settings);
-				mapBottomButtonsDialogFragment.dismiss();
 				bottomSheetBehavior.setHideable(true);
 				bottomSheetBehavior.setState(BottomSheetBehavior.STATE_HIDDEN);
 			}
@@ -512,7 +521,6 @@ public class MapControlsLayer extends OsmandMapLayer {
 				Intent intent = new Intent(mapActivity, HelpActivity.class);
 				intent.addFlags(Intent.FLAG_ACTIVITY_REORDER_TO_FRONT);
 				mapActivity.startActivity(intent);
-				mapBottomButtonsDialogFragment.dismiss();
 				bottomSheetBehavior.setHideable(true);
 				bottomSheetBehavior.setState(BottomSheetBehavior.STATE_HIDDEN);
 			}

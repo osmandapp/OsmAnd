@@ -167,7 +167,6 @@ public class MapActivity extends OsmandActionBarActivity implements DownloadEven
 	private boolean landscapeLayout;
 
 	private Dialog progressDlg = null;
-	private BottomSheetBehavior bottomSheetBehavior;
 
 	private List<DialogProvider> dialogProviders = new ArrayList<>(2);
 	private StateChangedListener<ApplicationMode> applicationModeListener;
@@ -187,10 +186,6 @@ public class MapActivity extends OsmandActionBarActivity implements DownloadEven
 
 	private boolean mIsDestroyed = false;
 	private InAppHelper inAppHelper;
-
-	public BottomSheetBehavior getBottomSheetBehavior() {
-		return bottomSheetBehavior;
-	}
 
 	@Override
 	public void onCreate(Bundle savedInstanceState) {
@@ -213,10 +208,6 @@ public class MapActivity extends OsmandActionBarActivity implements DownloadEven
 			setContentView(R.layout.main_new);
 		} else {
 			setContentView(R.layout.main);
-		}
-
-		if (settings.NEW_MAP_VIEW.get()) {
-			bottomSheetBehavior = BottomSheetBehavior.from(findViewById(R.id.map_bottom_sheet));
 		}
 
 		int statusBarHeight = 0;
