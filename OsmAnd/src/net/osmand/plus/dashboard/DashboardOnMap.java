@@ -1237,12 +1237,17 @@ public class DashboardOnMap implements ObservableScrollViewCallbacks, DynamicLis
 
 
 	private void addOrUpdateDashboardFragments() {
+		FragmentManager manager = mapActivity.getSupportFragmentManager();
+		Fragment mapillaryFragment = manager.findFragmentByTag(MapillaryFiltersFragment.TAG);
 		OsmandSettings settings = getMyApplication().getSettings();
-		TransactionBuilder builder =
-				new TransactionBuilder(mapActivity.getSupportFragmentManager(), settings, mapActivity);
-		builder.addFragmentsData(fragmentsData)
+		TransactionBuilder builder = new TransactionBuilder(manager, settings, mapActivity);
+		FragmentTransaction transaction = builder.addFragmentsData(fragmentsData)
 				.addFragmentsData(OsmandPlugin.getPluginsCardsList())
-				.getFragmentTransaction().commit();
+				.getFragmentTransaction();
+		if (mapillaryFragment != null) {
+			transaction.remove(mapillaryFragment);
+		}
+		transaction.commit();
 	}
 
 	public boolean isVisible() {

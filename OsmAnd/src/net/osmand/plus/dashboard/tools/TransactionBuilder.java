@@ -1,6 +1,5 @@
 package net.osmand.plus.dashboard.tools;
 
-import android.support.v4.app.Fragment;
 import android.support.v4.app.FragmentManager;
 import android.support.v4.app.FragmentTransaction;
 import android.util.Log;
@@ -9,7 +8,6 @@ import net.osmand.plus.OsmandSettings;
 import net.osmand.plus.R;
 import net.osmand.plus.activities.MapActivity;
 import net.osmand.plus.dashboard.DashBaseFragment;
-import net.osmand.plus.mapillary.MapillaryFiltersFragment;
 
 import java.util.ArrayList;
 import java.util.Arrays;
@@ -52,10 +50,6 @@ public final class TransactionBuilder {
 
 	public FragmentTransaction getFragmentTransaction() {
 		FragmentTransaction fragmentTransaction = manager.beginTransaction();
-		Fragment frag = manager.findFragmentByTag(MapillaryFiltersFragment.TAG);
-		if (frag != null) {
-			fragmentTransaction.remove(frag);
-		}
 		Collections.sort(fragments);
 		for (DashFragmentData dashFragmentData : fragments) {
 			DashBaseFragment fragment =
