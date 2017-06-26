@@ -764,7 +764,6 @@ public class DashboardOnMap implements ObservableScrollViewCallbacks, DynamicLis
 
 	public void refreshDashboardFragments() {
 		addOrUpdateDashboardFragments();
-		removeMapillaryFiltersFragment();
 	}
 
 	public void setDashboardVisibility(boolean visible, DashboardType type, DashboardType prevItem, boolean animation) {
