@@ -1,7 +1,6 @@
 package net.osmand.plus;
 
 import android.app.Activity;
-import android.app.DatePickerDialog;
 import android.content.Intent;
 import android.graphics.drawable.Drawable;
 import android.net.Uri;
@@ -11,18 +10,12 @@ import android.support.annotation.IdRes;
 import android.support.annotation.LayoutRes;
 import android.support.v4.app.FragmentActivity;
 import android.support.v7.widget.AppCompatImageView;
-import android.text.Editable;
-import android.text.TextWatcher;
 import android.view.ContextThemeWrapper;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.ArrayAdapter;
-import android.widget.AutoCompleteTextView;
-import android.widget.Button;
 import android.widget.CompoundButton;
 import android.widget.CompoundButton.OnCheckedChangeListener;
-import android.widget.DatePicker;
-import android.widget.EditText;
 import android.widget.ImageView;
 import android.widget.ProgressBar;
 import android.widget.SeekBar;
@@ -30,20 +23,13 @@ import android.widget.TextView;
 
 import net.osmand.PlatformUtil;
 import net.osmand.plus.activities.HelpActivity;
-import net.osmand.plus.activities.MapActivity;
 import net.osmand.plus.activities.actions.AppModeDialog;
 import net.osmand.plus.dialogs.ConfigureMapMenu;
 import net.osmand.plus.dialogs.HelpArticleDialogFragment;
-import net.osmand.plus.views.controls.DelayAutoCompleteTextView;
-import net.osmand.plus.mapillary.MapillaryAutoCompleteAdapter;
 
 import org.apache.commons.logging.Log;
 
-import java.text.DateFormat;
-import java.text.SimpleDateFormat;
 import java.util.ArrayList;
-import java.util.Calendar;
-import java.util.Date;
 import java.util.LinkedHashSet;
 import java.util.List;
 import java.util.Set;
@@ -55,15 +41,6 @@ public class ContextMenuAdapter {
 	private int DEFAULT_LAYOUT_ID = R.layout.list_menu_item_native;
 	List<ContextMenuItem> items = new ArrayList<>();
 	private ConfigureMapMenu.OnClickListener changeAppModeListener = null;
-	private MapActivity mapActivity;
-
-	public ContextMenuAdapter() {
-
-	}
-
-	public ContextMenuAdapter(MapActivity mapActivity) {
-		this.mapActivity = mapActivity;
-	}
 
 	public int length() {
 		return items.size();
@@ -350,167 +327,6 @@ public class ContextMenuAdapter {
 				} else {
 					dividerView.setVisibility(View.VISIBLE);
 				}
-			}
-
-			final View autoCompleteTextView = convertView.findViewById(R.id.auto_complete_text_view);
-			if (autoCompleteTextView != null) {
-				final DelayAutoCompleteTextView textView = (DelayAutoCompleteTextView) autoCompleteTextView;
-				textView.setAdapter(new MapillaryAutoCompleteAdapter(getContext(), R.layout.auto_complete_suggestion, app));
-
-				String selectedUsername = app.getSettings().MAPILLARY_FILTER_USERNAME.get();
-				if (!selectedUsername.equals("") && app.getSettings().USE_MAPILLARY_FILTER.get()) {
-					textView.setText(selectedUsername);
-					textView.setSelection(selectedUsername.length());
-				}
-
-				textView.addTextChangedListener(new TextWatcher() {
-					@Override
-					public void beforeTextChanged(CharSequence charSequence, int i, int i1, int i2) {
-
-					}
-
-					@Override
-					public void onTextChanged(CharSequence charSequence, int i, int i1, int i2) {
-                        ((View)textView.getParent()).findViewById(R.id.warning_linear_layout).setVisibility(View.GONE);
-					}
-
-					@Override
-					public void afterTextChanged(Editable editable) {
-
-					}
-				});
-
-				ImageView imageView = (ImageView) ((View) textView.getParent()).findViewById(R.id.warning_image_view);
-				imageView.setImageDrawable(mIconsCache.getPaintedIcon(R.drawable.ic_small_warning,
-						app.getResources().getColor(R.color.color_warning)));
-			}
-
-			final View dateFromEditText = convertView.findViewById(R.id.date_from_edit_text);
-			if (dateFromEditText != null) {
-				final EditText dateFrom = (EditText) dateFromEditText;
-				final DateFormat dateFormat = SimpleDateFormat.getDateInstance(DateFormat.MEDIUM);
-				final OsmandSettings settings = app.getSettings();
-
-				final DatePickerDialog.OnDateSetListener date = new DatePickerDialog.OnDateSetListener() {
-					@Override
-					public void onDateSet(DatePicker view, int year, int monthOfYear, int dayOfMonth) {
-						Calendar from = Calendar.getInstance();
-						from.set(Calendar.YEAR, year);
-						from.set(Calendar.MONTH, monthOfYear);
-						from.set(Calendar.DAY_OF_MONTH, dayOfMonth);
-						dateFrom.setText(dateFormat.format(from.getTime()));
-						settings.MAPILLARY_FILTER_FROM_DATE.set(from.getTimeInMillis());
-					}
-				};
-
-				dateFrom.setOnClickListener(new View.OnClickListener() {
-					@Override
-					public void onClick(View view) {
-						Calendar now = Calendar.getInstance();
-						new DatePickerDialog(mapActivity, date,
-								now.get(Calendar.YEAR),
-								now.get(Calendar.MONTH),
-								now.get(Calendar.DAY_OF_MONTH)).show();
-					}
-				});
-
-				if (settings.USE_MAPILLARY_FILTER.get()) {
-					long from = settings.MAPILLARY_FILTER_FROM_DATE.get();
-					if (from != 0) {
-                        dateFrom.setText(dateFormat.format(new Date(from)));
-                    }
-				}
-				dateFrom.setCompoundDrawablesWithIntrinsicBounds(null, null,
-						mIconsCache.getThemedIcon(R.drawable.ic_action_arrow_drop_down), null);
-			}
-
-			final View dateToEditText = convertView.findViewById(R.id.date_to_edit_text);
-			if (dateToEditText != null) {
-				final EditText dateTo = (EditText) dateToEditText;
-				final DateFormat dateFormat = SimpleDateFormat.getDateInstance(DateFormat.MEDIUM);
-				final OsmandSettings settings = app.getSettings();
-
-				final DatePickerDialog.OnDateSetListener date = new DatePickerDialog.OnDateSetListener() {
-					@Override
-					public void onDateSet(DatePicker view, int year, int monthOfYear, int dayOfMonth) {
-						Calendar to = Calendar.getInstance();
-						to.set(Calendar.YEAR, year);
-						to.set(Calendar.MONTH, monthOfYear);
-						to.set(Calendar.DAY_OF_MONTH, dayOfMonth);
-						dateTo.setText(dateFormat.format(to.getTime()));
-						settings.MAPILLARY_FILTER_TO_DATE.set(to.getTimeInMillis());
-					}
-				};
-
-				dateTo.setOnClickListener(new View.OnClickListener() {
-					@Override
-					public void onClick(View view) {
-						Calendar now = Calendar.getInstance();
-						new DatePickerDialog(mapActivity, date,
-								now.get(Calendar.YEAR),
-								now.get(Calendar.MONTH),
-								now.get(Calendar.DAY_OF_MONTH)).show();
-					}
-				});
-
-				if (settings.USE_MAPILLARY_FILTER.get()) {
-					long to = settings.MAPILLARY_FILTER_TO_DATE.get();
-					if (to != 0) {
-                        dateTo.setText(dateFormat.format(new Date(to)));
-                    }
-				}
-				dateTo.setCompoundDrawablesWithIntrinsicBounds(null, null,
-						mIconsCache.getThemedIcon(R.drawable.ic_action_arrow_drop_down), null);
-			}
-
-			final View applyBtn = convertView.findViewById(R.id.button_apply);
-			if (applyBtn != null) {
-				final Button apply = (Button) applyBtn;
-				apply.setOnClickListener(new View.OnClickListener() {
-					@Override
-					public void onClick(View view) {
-						View list = (View) view.getParent().getParent().getParent();
-						String username = ((AutoCompleteTextView) list.findViewById(R.id.auto_complete_text_view)).getText().toString();
-						String dateFrom = ((EditText) list.findViewById(R.id.date_from_edit_text)).getText().toString();
-						String dateTo = ((EditText) list.findViewById(R.id.date_to_edit_text)).getText().toString();
-						OsmandSettings settings = app.getSettings();
-
-						if (!settings.MAPILLARY_FILTER_USERNAME.get().equals("") || !dateFrom.equals("") || !dateTo.equals("")) {
-							settings.USE_MAPILLARY_FILTER.set(true);
-						}
-						if (!username.equals("") && settings.MAPILLARY_FILTER_USERNAME.get().equals("")) {
-							list.findViewById(R.id.warning_linear_layout).setVisibility(View.VISIBLE);
-						}
-						if (dateFrom.equals("")) {
-							settings.MAPILLARY_FILTER_FROM_DATE.set(0L);
-						}
-						if (dateTo.equals("")) {
-							settings.MAPILLARY_FILTER_TO_DATE.set(0L);
-						}
-					}
-				});
-			}
-
-			final View clearBtn = convertView.findViewById(R.id.button_clear);
-			if (clearBtn != null) {
-				final Button clear = (Button) clearBtn;
-				clear.setOnClickListener(new View.OnClickListener() {
-					@Override
-					public void onClick(View view) {
-						View list = (View) view.getParent().getParent().getParent();
-						OsmandSettings settings = app.getSettings();
-
-						((AutoCompleteTextView) list.findViewById(R.id.auto_complete_text_view)).setText("");
-						((EditText) list.findViewById(R.id.date_from_edit_text)).setText("");
-						((EditText) list.findViewById(R.id.date_to_edit_text)).setText("");
-
-						settings.USE_MAPILLARY_FILTER.set(false);
-						settings.MAPILLARY_FILTER_USER_KEY.set("");
-						settings.MAPILLARY_FILTER_USERNAME.set("");
-						settings.MAPILLARY_FILTER_FROM_DATE.set(0L);
-						settings.MAPILLARY_FILTER_TO_DATE.set(0L);
-					}
-				});
 			}
 
 			if (item.isCategory()) {

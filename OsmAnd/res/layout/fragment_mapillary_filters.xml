@@ -6,6 +6,7 @@
     android:orientation="vertical">
 
     <RelativeLayout
+        android:id="@+id/toggle_row"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:background="?attr/bg_color"
@@ -13,7 +14,7 @@
         tools:layout_height="60dp">
 
         <android.support.v7.widget.AppCompatImageView
-            android:id="@+id/display_icon"
+            android:id="@+id/toggle_row_icon"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_alignParentLeft="true"
@@ -24,7 +25,7 @@
             tools:src="@drawable/ic_action_gabout_dark" />
 
         <android.support.v7.widget.SwitchCompat
-            android:id="@+id/display_toggle"
+            android:id="@+id/toggle_row_toggle"
             android:layout_width="wrap_content"
             android:layout_height="match_parent"
             android:layout_alignParentEnd="true"
@@ -37,16 +38,16 @@
             android:focusable="false" />
 
         <android.support.v7.widget.AppCompatTextView
-            android:id="@+id/display_title"
+            android:id="@+id/toggle_row_title"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_centerVertical="true"
             android:layout_marginLeft="16dp"
             android:layout_marginStart="16dp"
-            android:layout_toEndOf="@+id/display_icon"
-            android:layout_toLeftOf="@id/display_toggle"
-            android:layout_toRightOf="@+id/display_icon"
-            android:layout_toStartOf="@id/display_toggle"
+            android:layout_toEndOf="@+id/toggle_row_icon"
+            android:layout_toLeftOf="@id/toggle_row_toggle"
+            android:layout_toRightOf="@+id/toggle_row_icon"
+            android:layout_toStartOf="@id/toggle_row_toggle"
             android:textAppearance="@style/TextAppearance.ListItemTitle"
             tools:text="Some title text" />
     </RelativeLayout>
@@ -110,10 +111,11 @@
         android:minHeight="60dp">
 
         <android.support.v7.widget.AppCompatImageView
+            android:id="@+id/mapillary_filters_user_icon"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_margin="16dp"
-            android:src="@drawable/ic_action_user" />
+            tools:src="@drawable/ic_action_user" />
 
         <LinearLayout
             android:layout_width="match_parent"
@@ -146,6 +148,7 @@
     <LinearLayout
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
+        android:animateLayoutChanges="true"
         android:background="?attr/bg_color"
         android:orientation="vertical"
         android:paddingLeft="52dp"
@@ -202,10 +205,11 @@
         android:minHeight="60dp">
 
         <android.support.v7.widget.AppCompatImageView
+            android:id="@+id/mapillary_filters_date_icon"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_margin="16dp"
-            android:src="@drawable/ic_action_data" />
+            tools:src="@drawable/ic_action_data" />
 
         <LinearLayout
             android:layout_width="match_parent"

@@ -1050,7 +1050,13 @@ public class DashboardOnMap implements ObservableScrollViewCallbacks, DynamicLis
 	}
 
 	public void refreshContent(boolean force) {
-		if (visibleType == DashboardType.WAYPOINTS
+		if (visibleType == DashboardType.MAPILLARY) {
+			Fragment mapillaryFragment = mapActivity.getSupportFragmentManager().findFragmentByTag(MapillaryFiltersFragment.TAG);
+			mapActivity.getSupportFragmentManager().beginTransaction()
+					.detach(mapillaryFragment)
+					.attach(mapillaryFragment)
+					.commit();
+		} else if (visibleType == DashboardType.WAYPOINTS
 				|| visibleType == DashboardType.MAP_MARKERS
 				|| visibleType == DashboardType.MAP_MARKERS_SELECTION
 				|| visibleType == DashboardType.CONFIGURE_SCREEN
