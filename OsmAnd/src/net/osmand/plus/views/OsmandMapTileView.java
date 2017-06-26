@@ -166,6 +166,7 @@ public class OsmandMapTileView implements IMapDownloaderCallback {
 	private float secondTouchPointX;
 	private float secondTouchPointY;
 	private boolean multiTouch;
+	private long multiTouchTime;
 
 	public OsmandMapTileView(MapActivity activity, int w, int h) {
 		this.activity = activity;
@@ -333,6 +334,10 @@ public class OsmandMapTileView implements IMapDownloaderCallback {
 
 	public void setMultiTouch(boolean multiTouch) {
 		this.multiTouch = multiTouch;
+	}
+
+	public long getMultiTouchTime() {
+		return multiTouchTime;
 	}
 
 	public void setIntZoom(int zoom) {
@@ -1043,6 +1048,7 @@ public class OsmandMapTileView implements IMapDownloaderCallback {
 				secondTouchPointX = x2;
 				secondTouchPointY = y2;
 				multiTouch = true;
+				multiTouchTime = System.currentTimeMillis();
 			}
 		}
 

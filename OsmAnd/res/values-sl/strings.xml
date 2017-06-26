@@ -992,7 +992,7 @@ Omogoča tudi dodajanje opomb v koledar za prikaz opomnikov ob daljših časih p
     <string name="recording_context_menu_delete">Izbriši posnetek</string>
     <string name="recording_is_recorded">Zvok oziroma video se snema. Za ustavitev pritisnite gumb ustavi na gradniku.</string>
     <string name="layer_recordings">Sloj posnetka</string>
-    <string name="shared_string_control_start">Izmeri ...</string>
+    <string name="shared_string_control_start">Izmeri ↦</string>
 
 
     <string name="av_def_action_video">Snemanje videa</string>
@@ -2722,7 +2722,7 @@ Koda predstavlja območje: %1$s x %2$s</string>
     <string name="quick_action_btn_tutorial_descr">Z dolgim pritiskom in vlekom je mogoče postaviti gumb na poljubno mesto na zaslonu</string>
 	<string name="rendering_attr_depthContours_description">Pokaži točke in izohipse globine</string>
     <string name="rendering_attr_depthContours_name">Navtične globinske izohipse</string>
-	<string name="route_altitude">Nadmorska višina poti</string>
+	<string name="route_altitude">Višinske spremembe poti</string>
     <string name="altitude_descent">Spust</string>
     <string name="altitude_ascent">Vzpon</string>
     <string name="altitude_range">Obseg nadmorske višine</string>
@@ -2862,4 +2862,6 @@ Koda predstavlja območje: %1$s x %2$s</string>
     <string name="map_widget_ruler_control_second_mode">Krožno ravnilo</string>
     <string name="quick_action_add_destination_desc">S pritiskom na gumb dejanj bo dodano novo ciljno mesto kot točka na sredini zaslona. Morebitna prej nastavljena ciljna točka postane zadnja vmesna točka.</string>
     <string name="quick_action_add_first_intermediate_desc">S pritiskom na gumb dejanj bo dodana na sredino zaslona prva vmesna točka.</string>
+    <string name="osmand_extended_description_part5">"Kolesarjenje • Omogoča iskanje kolesarskih poti na zemljevidu • Navigacija GPS omogoča v načinu za kolesarjenje določevanje poti po izključno kolesarskih poteh • Beležijo se podatki  hitrosti in spremembe višine med vožnjo • Možnost shranjevanja poti GPX omogoča beleženje in izmenjavo poti • Prek dodatnih vstavkov je mogoče prikazati tudi izohipse terena in senčenje hribovitih predelov"</string>
+    <string name="osmand_plus_extended_description_part5">Varnostne možnosti • Izbirno preklapljanje dnevno-nočnega pogleda • Nastavitev prikaza omejitev hitrosti z možnostjo opozoril v primeru prekoračitev • Prilagajanje približanja zemljevida glede na hitrost vožnje • Skupinsko objavljanje podatkov o trenutni točki za lažje iskanje med prijatelji</string>
     </resources>

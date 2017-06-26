@@ -7,4 +7,5 @@
 	<string name="poi_fire_hydrant_position">位置</string>
 	<string name="poi_fire_hydrant_water_source">水源</string>
 	<string name="poi_payment_toll_type">支付类别</string>
+	<string name="poi_fuel_type">类型</string>
 	</resources>

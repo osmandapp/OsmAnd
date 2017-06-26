@@ -670,7 +670,7 @@
 	<string name="poi_car_sharing">カーシェアリング(Car sharing)</string>
 	<string name="poi_boat_sharing">ボートシェアリング(Boat sharing)</string>
 	<string name="poi_dock">ドック(Dock)</string>
-	<string name="poi_toilets">トイレ(Restroom)</string>
+	<string name="poi_toilets">トイレ</string>
 	<string name="poi_brothel">売春宿(Brothel)</string>
 	<string name="poi_smoking_area">喫煙所・喫煙エリア(Smoking area)</string>
 	<string name="poi_mortuary">遺体安置所(Mortuary)</string>
@@ -1095,8 +1095,8 @@
 
 	<string name="poi_operator">管理者(Operator)</string>
 	<string name="poi_brand">ブランド(Brand)</string>
-	<string name="poi_fee_yes">有料(Yes)</string>
-	<string name="poi_fee_no">無料(No)</string>
+	<string name="poi_fee_yes">有料</string>
+	<string name="poi_fee_no">無料</string>
 	<string name="poi_drinking_water_yes">有り</string>
 	<string name="poi_drinking_water_no">無し</string>
 	<string name="poi_supervised_yes">監督者(Supervised)</string>
@@ -1143,7 +1143,7 @@
 	<string name="poi_subway_station_filter">地下鉄駅(Subway station)</string>
 	<string name="poi_ferry_terminal_cargo">貨物(Cargo)</string>
 	<string name="poi_aerialway_bicycle">自転車輸送・持込(Bicycle transportation)</string>
-	<string name="poi_fee">料金(Fee)</string>
+	<string name="poi_fee">料金</string>
 	<string name="poi_site_type_megalith">巨石建造物(Megalith)</string>
 	<string name="poi_site_type_tumulus">古墳(Tumulus)</string>
 	<string name="poi_site_type_fortification">砦・要塞(Fortification)</string>
@@ -1168,15 +1168,15 @@
 	<string name="poi_free_flying_site_toplanding">トップランディング場所(Toplanding)</string>
 	<string name="poi_free_flying_site_towing">飛行機による牽引離着陸場所(Towing)</string>
 	<string name="poi_free_flying_site_training">練習場(Training)</string>
-	<string name="poi_free_flying_official_yes">公的許可有り(Official: yes)</string>
-	<string name="poi_free_flying_official_no">公的許可無し(Official: no)</string>
+	<string name="poi_free_flying_official_yes">公的許可:有り</string>
+	<string name="poi_free_flying_official_no">公的許可:無し</string>
 	<string name="poi_free_flying_paragliding_yes">パラグライディング(Paragliding)</string>
 	<string name="poi_free_flying_paragliding_no">パラグライディング不可(Paragliding: no)</string>
 	<string name="poi_free_flying_hanggliding_no">ハンググライディング不可(Hanggliding: no)</string>
 	<string name="poi_free_flying_rigid_yes">リジットウイング(Rigid)</string>
 	<string name="poi_free_flying_rigid_no">リジットウイング不可(Free flying rigid: no)</string>
-	<string name="poi_free_flying_guest_guidelines_yes">常連利用者以外への特別な注意事項:有り(Guest guidelines: yes)</string>
-	<string name="poi_free_flying_guest_guidelines_no">常連利用者以外への特別な注意事項:無し(Guest guidelines: no)</string>
+	<string name="poi_free_flying_guest_guidelines_yes">常連利用者以外への特別な注意事項:有り</string>
+	<string name="poi_free_flying_guest_guidelines_no">常連利用者以外への特別な注意事項:無し</string>
 
 	<string name="poi_nudism">裸体主義実践の可否(Nudism)</string>
 	<string name="poi_nudism_yes">許可(Allowed)</string>
@@ -1185,12 +1185,12 @@
 	<string name="poi_nudism_customary">通例(Customary)</string>
 	<string name="poi_nudism_permissive">許容(Permissive)</string>
 
-	<string name="poi_gambling_type">賭博の種類(Type)</string>
-	<string name="poi_gambling_lottery">宝くじ(Lottery)</string>
-	<string name="poi_gambling_pachinko">パチンコ(Pachinko)</string>
-	<string name="poi_gambling_slot_machines">スロットマシーン(Slot machines)</string>
-	<string name="poi_gambling_betting">賭け事(Betting)</string>
-	<string name="poi_gambling_bingo">ビンゴ(Bingo)</string>
+	<string name="poi_gambling_type">ギャンブルの種類</string>
+	<string name="poi_gambling_lottery">宝くじ</string>
+	<string name="poi_gambling_pachinko">パチンコ</string>
+	<string name="poi_gambling_slot_machines">スロットマシーン</string>
+	<string name="poi_gambling_betting">賭け事全般</string>
+	<string name="poi_gambling_bingo">ビンゴ</string>
 
 	<string name="poi_massage_type">マッサージタイプ(Massage type)</string>
 	<string name="poi_massage_thai">タイ式</string>
@@ -1236,8 +1236,8 @@
 	<string name="poi_theatre_genre_ballet">バレエ</string>
 	<string name="poi_theatre_genre_shadow_play">影絵芝居(Shadow play)</string>
 
-	<string name="poi_toilets_yes">有り(Yes)</string>
-	<string name="poi_toilets_no">無し(Without toilets)</string>
+	<string name="poi_toilets_yes">有り</string>
+	<string name="poi_toilets_no">無し</string>
 	<string name="poi_toilets_wheelchair_yes">車椅子用トイレ有り</string>
 	<string name="poi_toilets_wheelchair_no">車椅子用トイレ無し</string>
 	<string name="poi_toilets_access_customers">来客用トイレ(Toilets access: customers)</string>
@@ -3103,5 +3103,80 @@
 	<string name="poi_health_facility_type_first_aid">保健施設:応急措置施設</string>
 	<string name="poi_health_facility_type_nursing_home">保健施設:介護福祉施設</string>
 	<string name="poi_health_facility_type_support_group_home">保健施設:支援団体の相談所(support group home)</string>
+
+	<string name="poi_zoo_type">動物園の種類</string>
+	<string name="poi_motorcycle_services">提供サービス</string>
+	<string name="poi_motorcycle_type">対応バイクの種類</string>
+
+<string name="poi_inscription_n">銘文:北</string>
+	<string name="poi_inscription_nw">銘文:北西</string>
+	<string name="poi_inscription_w">銘文:西</string>
+	<string name="poi_inscription_sw">銘文:南西</string>
+	<string name="poi_inscription_s">銘文:南</string>
+	<string name="poi_inscription_se">銘文:南東</string>
+	<string name="poi_inscription_e">銘文:東</string>
+	<string name="poi_inscription_ne">銘文:北西</string>
+
+	<string name="poi_nuclear_explosion_site">核実験場</string>
+	<string name="poi_nuclear_explosion_type_underground_shaft">爆発場所:地下、立坑</string>
+	<string name="poi_nuclear_explosion_type_underground_tunnel">爆発場所:地下、トンネル</string>
+	<string name="poi_nuclear_explosion_type_atmospheric">爆発場所:大気圏内</string>
+	<string name="poi_nuclear_explosion_type_atmospheric_airdrop">爆発場所:大気圏内、空中投下</string>
+	<string name="poi_nuclear_explosion_type_atmospheric_surface_tower">爆発場所:大気圏内、地面、塔</string>
+	<string name="poi_nuclear_explosion_type_atmospheric_balloon">爆発場所:大気圏内、バルーン</string>
+	<string name="poi_nuclear_explosion_type_atmospheric_atmospheric_surface">爆発場所:大気圏内、地面</string>
+	<string name="poi_nuclear_explosion_type_atmospheric_water_surface_barge">爆発場所:大気圏内、水上、艀</string>
+	<string name="poi_nuclear_explosion_type_underground">爆発場所:地下</string>
+	<string name="poi_nuclear_explosion_type_cratering_burst">爆発場所:クレーター爆発(実際は浅い地下)</string>
+	<string name="poi_nuclear_explosion_type_atmospheric_rocket_or_missile">爆発場所:大気圏内、ロケットまたはミサイル</string>
+	<string name="poi_nuclear_explosion_type_space">爆発場所:宇宙空間(高度80km以上)</string>
+	<string name="poi_nuclear_explosion_type_underwater">爆発場所:水中</string>
+	<string name="poi_nuclear_explosion_date_utc">爆発日(UTC 協定世界時)</string>
+	<string name="poi_nuclear_explosion_country">実施国家</string>
+	<string name="poi_nuclear_explosion_shot_name_en">核実験計画名(英語)</string>
+	<string name="poi_nuclear_explosion_series">核実験回数</string>
+	<string name="poi_nuclear_explosion_purpose_nuclear_weapons_related">実験目的:核兵器関連</string>
+	<string name="poi_nuclear_explosion_purpose_weapons_effects">実験目的:兵器効果</string>
+	<string name="poi_nuclear_explosion_purpose_safety_experiment">実験目的:安全性試験</string>
+	<string name="poi_nuclear_explosion_purpose_research_for_peaceful_applications">実験目的:平和利用のための研究</string>
+	<string name="poi_nuclear_explosion_purpose_fundamental_science">実験目的:基礎科学</string>
+	<string name="poi_nuclear_explosion_purpose_industrial_application_cavity_excavation">実験目的:工業利用、掘削</string>
+	<string name="poi_nuclear_explosion_purpose_industrial_application_seismic_sounding">実験目的:工業利用、地震波測定</string>
+	<string name="poi_nuclear_explosion_purpose_industrial_application_oil_stimulation">実験目的:工業利用、油田刺激</string>
+	<string name="poi_nuclear_explosion_purpose_industrial_application">実験目的:工業利用</string>
+	<string name="poi_nuclear_explosion_purpose_industrial_application_earth_moving">実験目的:工業利用、地ならし</string>
+	<string name="poi_nuclear_explosion_time_utc">爆発時間(UTC 協定世界時)</string>
+	<string name="poi_nuclear_explosion_yield">産出物</string>
+	<string name="poi_nuclear_explosion_hole">爆発口</string>
+	<string name="poi_nuclear_explosion_height_of_burst">爆発高度</string>
+	<string name="poi_nuclear_explosion_ground_zero_altitude">爆発標高</string>
+	<string name="poi_nuclear_explosion_body_wave_magnitude">物体波の大きさ</string>
+	<string name="poi_nuclear_explosion_salvo_first_detonation">斉射爆発:サルボテストの初回爆発数</string>
+	<string name="poi_nuclear_explosion_salvo_second_or_later_detonation">斉射爆発:サルボテストの2回目以降の爆発数</string>
+	<string name="poi_nuclear_explosion_crater_diameter">クレーター直径</string>
+	<string name="poi_nuclear_explosion_warhead">弾頭種類</string>
+	<string name="poi_nuclear_explosion_device">爆破装置</string>
+
+	<string name="poi_button_operated_yes">ボタン操作:有り</string>
+	<string name="poi_button_operated_no">ボタン操作:無し</string>
+
+	<string name="poi_health_service_nursing_yes">提供保健種:看護:有り</string>
+	<string name="poi_health_service_nursing_no">提供保健種:看護:無し</string>
+	<string name="poi_health_service_counselling_yes">提供保健種:カウンセリング:有り</string>
+	<string name="poi_health_service_counselling_no">提供保健種:カウンセリング:無し</string>
+	<string name="poi_health_service_examination_yes">提供保健種:健康診断:有り</string>
+	<string name="poi_health_service_examination_no">提供保健種:健康診断:無し</string>
+	<string name="poi_health_service_child_care_yes">提供保健種:託児施設:有り</string>
+	<string name="poi_health_service_child_care_no">提供保健種:託児施設:無し</string>
+	<string name="poi_health_service_prevention_yes">提供保健種:疾患予防:有り</string>
+	<string name="poi_health_service_prevention_no">提供保健種:疾患予防:無し</string>
+	<string name="poi_health_service_prevention_vaccination_yes">提供保健種:ワクチン接種:有り</string>
+	<string name="poi_health_service_prevention_vaccination_no">提供保健種:ワクチン接種:無し</string>
+	<string name="poi_health_service_support_yes">提供保健種:その他サポート:有り</string>
+	<string name="poi_health_service_support_no">提供保健種:その他サポート:無し</string>
+	<string name="poi_health_service_test_yes">提供保健種:医療検査:有り</string>
+	<string name="poi_health_service_test_no">提供保健種:医療検査:無し</string>
+
+	<string name="poi_health_amenity_type_scales">計測器(体重計、身長計等)</string>
 
 	</resources>
