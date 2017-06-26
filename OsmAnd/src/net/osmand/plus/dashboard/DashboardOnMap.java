@@ -764,6 +764,7 @@ public class DashboardOnMap implements ObservableScrollViewCallbacks, DynamicLis
 
 	public void refreshDashboardFragments() {
 		addOrUpdateDashboardFragments();
+		removeMapillaryFiltersFragment();
 	}
 
 	public void setDashboardVisibility(boolean visible, DashboardType type, DashboardType prevItem, boolean animation) {
@@ -818,6 +819,7 @@ public class DashboardOnMap implements ObservableScrollViewCallbacks, DynamicLis
 			if (visibleType == DashboardType.DASHBOARD || visibleType == DashboardType.MAPILLARY) {
 				if (visibleType == DashboardType.DASHBOARD) {
 					addOrUpdateDashboardFragments();
+					removeMapillaryFiltersFragment();
 				} else {
 					mapActivity.getSupportFragmentManager().beginTransaction()
 							.replace(R.id.content, new MapillaryFiltersFragment(), MapillaryFiltersFragment.TAG)
@@ -1237,17 +1239,24 @@ public class DashboardOnMap implements ObservableScrollViewCallbacks, DynamicLis
 
 
 	private void addOrUpdateDashboardFragments() {
+		OsmandSettings settings = getMyApplication().getSettings();
+		TransactionBuilder builder =
+				new TransactionBuilder(mapActivity.getSupportFragmentManager(), settings, mapActivity);
+		builder.addFragmentsData(fragmentsData)
+				.addFragmentsData(OsmandPlugin.getPluginsCardsList())
+				.getFragmentTransaction().commit();
+	}
+
+	private void removeMapillaryFiltersFragment() {
 		FragmentManager manager = mapActivity.getSupportFragmentManager();
 		Fragment mapillaryFragment = manager.findFragmentByTag(MapillaryFiltersFragment.TAG);
-		OsmandSettings settings = getMyApplication().getSettings();
-		TransactionBuilder builder = new TransactionBuilder(manager, settings, mapActivity);
-		FragmentTransaction transaction = builder.addFragmentsData(fragmentsData)
-				.addFragmentsData(OsmandPlugin.getPluginsCardsList())
-				.getFragmentTransaction();
 		if (mapillaryFragment != null) {
-			transaction.remove(mapillaryFragment);
+			OsmandSettings settings = getMyApplication().getSettings();
+			TransactionBuilder builder = new TransactionBuilder(manager, settings, mapActivity);
+			builder.getFragmentTransaction()
+					.remove(mapillaryFragment)
+					.commit();
 		}
-		transaction.commit();
 	}
 
 	public boolean isVisible() {
