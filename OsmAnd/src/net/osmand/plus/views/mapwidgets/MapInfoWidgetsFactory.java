@@ -31,6 +31,7 @@ import net.osmand.plus.routing.RouteDirectionInfo;
 import net.osmand.plus.routing.RoutingHelper;
 import net.osmand.plus.views.OsmandMapLayer.DrawSettings;
 import net.osmand.plus.views.OsmandMapTileView;
+import net.osmand.plus.views.RulerControlLayer;
 import net.osmand.plus.views.mapwidgets.NextTurnInfoWidget.TurnDrawable;
 import net.osmand.router.TurnType;
 import net.osmand.util.Algorithms;
@@ -185,18 +186,18 @@ public class MapInfoWidgetsFactory {
 		final String title = map.getResources().getString(R.string.map_widget_show_ruler);
         final TextInfoWidget rulerControl = new TextInfoWidget(map) {
 			boolean needNewLatLon;
-			long cacheMultiTouchTime;
+			long cacheMultiTouchEndTime;
 
 			@Override
 			public boolean updateInfo(DrawSettings drawSettings) {
 				RulerMode mode = map.getMyApplication().getSettings().RULER_MODE.get();
 				OsmandMapTileView view = map.getMapView();
 
-				if (cacheMultiTouchTime != view.getMultiTouchTime()) {
-					cacheMultiTouchTime = view.getMultiTouchTime();
+				if (cacheMultiTouchEndTime != view.getMultiTouchEndTime()) {
+					cacheMultiTouchEndTime = view.getMultiTouchEndTime();
 					needNewLatLon = true;
 				}
-				if (view.isMultiTouch() || System.currentTimeMillis() - cacheMultiTouchTime < 3000) {
+				if (!view.isZooming() && view.isMultiTouch() || System.currentTimeMillis() - cacheMultiTouchEndTime < RulerControlLayer.DELAY) {
 					if (needNewLatLon) {
 						float x1 = view.getFirstTouchPointX();
 						float y1 = view.getFirstTouchPointY();

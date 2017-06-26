@@ -166,7 +166,7 @@ public class OsmandMapTileView implements IMapDownloaderCallback {
 	private float secondTouchPointX;
 	private float secondTouchPointY;
 	private boolean multiTouch;
-	private long multiTouchTime;
+	private long multiTouchEndTime;
 
 	public OsmandMapTileView(MapActivity activity, int w, int h) {
 		this.activity = activity;
@@ -336,8 +336,12 @@ public class OsmandMapTileView implements IMapDownloaderCallback {
 		this.multiTouch = multiTouch;
 	}
 
-	public long getMultiTouchTime() {
-		return multiTouchTime;
+	public long getMultiTouchEndTime() {
+		return multiTouchEndTime;
+	}
+
+	public void setMultiTouchEndTime(long multiTouchEndTime) {
+		this.multiTouchEndTime = multiTouchEndTime;
 	}
 
 	public void setIntZoom(int zoom) {
@@ -995,6 +999,8 @@ public class OsmandMapTileView implements IMapDownloaderCallback {
 		private LatLon initialCenterLatLon;
 		private boolean startRotating = false;
 		private static final float ANGLE_THRESHOLD = 30;
+		private int cacheIntZoom = getZoom();
+		private double cacheFractionalZoom = getZoomFractionalPart();
 
 		@Override
 		public void onZoomOrRotationEnded(double relativeToStart, float angleRelative) {
@@ -1048,7 +1054,6 @@ public class OsmandMapTileView implements IMapDownloaderCallback {
 				secondTouchPointX = x2;
 				secondTouchPointY = y2;
 				multiTouch = true;
-				multiTouchTime = System.currentTimeMillis();
 			}
 		}
 
@@ -1064,6 +1069,13 @@ public class OsmandMapTileView implements IMapDownloaderCallback {
 		@Override
 		public void onActionPointerUp() {
 			multiTouch = false;
+			if (cacheIntZoom != getZoom() || cacheFractionalZoom != getZoomFractionalPart()) {
+				cacheIntZoom = getZoom();
+				cacheFractionalZoom = getZoomFractionalPart();
+				multiTouchEndTime = 0;
+			} else {
+				multiTouchEndTime = System.currentTimeMillis();
+			}
 		}
 
 		@Override
