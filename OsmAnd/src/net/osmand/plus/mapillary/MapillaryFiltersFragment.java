@@ -107,6 +107,13 @@ public class MapillaryFiltersFragment extends BaseOsmAndFragment {
             @Override
             public void onTextChanged(CharSequence charSequence, int i, int i1, int i2) {
                 view.findViewById(R.id.warning_linear_layout).setVisibility(View.GONE);
+                if (charSequence.length() > 0 ||
+                        settings.MAPILLARY_FILTER_TO_DATE.get() != 0 ||
+                        settings.MAPILLARY_FILTER_FROM_DATE.get() != 0) {
+                    changeButtonState((Button) view.findViewById(R.id.button_apply), 1, true);
+                } else {
+                    changeButtonState((Button) view.findViewById(R.id.button_apply), .5f, false);
+                }
             }
 
             @Override
@@ -122,13 +129,14 @@ public class MapillaryFiltersFragment extends BaseOsmAndFragment {
         final EditText dateFromEt = (EditText) view.findViewById(R.id.date_from_edit_text);
         final DatePickerDialog.OnDateSetListener dateFromDialog = new DatePickerDialog.OnDateSetListener() {
             @Override
-            public void onDateSet(DatePicker view, int year, int monthOfYear, int dayOfMonth) {
+            public void onDateSet(DatePicker v, int year, int monthOfYear, int dayOfMonth) {
                 Calendar from = Calendar.getInstance();
                 from.set(Calendar.YEAR, year);
                 from.set(Calendar.MONTH, monthOfYear);
                 from.set(Calendar.DAY_OF_MONTH, dayOfMonth);
                 dateFromEt.setText(dateFormat.format(from.getTime()));
                 settings.MAPILLARY_FILTER_FROM_DATE.set(from.getTimeInMillis());
+                changeButtonState((Button) view.findViewById(R.id.button_apply), 1, true);
             }
         };
         dateFromEt.setOnClickListener(new View.OnClickListener() {
@@ -147,13 +155,14 @@ public class MapillaryFiltersFragment extends BaseOsmAndFragment {
         final EditText dateToEt = (EditText) view.findViewById(R.id.date_to_edit_text);
         final DatePickerDialog.OnDateSetListener dateToDialog = new DatePickerDialog.OnDateSetListener() {
             @Override
-            public void onDateSet(DatePicker view, int year, int monthOfYear, int dayOfMonth) {
+            public void onDateSet(DatePicker v, int year, int monthOfYear, int dayOfMonth) {
                 Calendar to = Calendar.getInstance();
                 to.set(Calendar.YEAR, year);
                 to.set(Calendar.MONTH, monthOfYear);
                 to.set(Calendar.DAY_OF_MONTH, dayOfMonth);
                 dateToEt.setText(dateFormat.format(to.getTime()));
                 settings.MAPILLARY_FILTER_TO_DATE.set(to.getTimeInMillis());
+                changeButtonState((Button) view.findViewById(R.id.button_apply), 1, true);
             }
         };
         dateToEt.setOnClickListener(new View.OnClickListener() {
@@ -181,6 +190,7 @@ public class MapillaryFiltersFragment extends BaseOsmAndFragment {
 
 
         final Button apply = (Button) view.findViewById(R.id.button_apply);
+        changeButtonState(apply, .5f, false);
         apply.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
@@ -200,6 +210,9 @@ public class MapillaryFiltersFragment extends BaseOsmAndFragment {
                 if (dateTo.equals("")) {
                     settings.MAPILLARY_FILTER_TO_DATE.set(0L);
                 }
+
+                changeButtonState(apply, .5f, false);
+                plugin.updateLayers(mapActivity.getMapView(), mapActivity);
             }
         });
 
@@ -217,6 +230,9 @@ public class MapillaryFiltersFragment extends BaseOsmAndFragment {
                 settings.MAPILLARY_FILTER_USERNAME.set("");
                 settings.MAPILLARY_FILTER_FROM_DATE.set(0L);
                 settings.MAPILLARY_FILTER_TO_DATE.set(0L);
+
+                changeButtonState(apply, .5f, false);
+                plugin.updateLayers(mapActivity.getMapView(), mapActivity);
             }
         });
 
@@ -227,5 +243,10 @@ public class MapillaryFiltersFragment extends BaseOsmAndFragment {
         settings.SHOW_MAPILLARY.set(!settings.SHOW_MAPILLARY.get());
         plugin.updateLayers(mapActivity.getMapView(), mapActivity);
         mapActivity.getDashboard().refreshContent(true);
+    }
+
+    private void changeButtonState(Button button, float alpha, boolean enabled) {
+        button.setAlpha(alpha);
+        button.setEnabled(enabled);
     }
 }

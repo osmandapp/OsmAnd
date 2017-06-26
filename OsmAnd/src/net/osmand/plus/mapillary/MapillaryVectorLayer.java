@@ -182,7 +182,7 @@ class MapillaryVectorLayer extends MapTileLayer implements MapillaryLayer, ICont
 				ty = (tileY + py) * mult;
 				if (tileBounds.contains(tx, ty, tx, ty)) {
 					if (settings.USE_MAPILLARY_FILTER.get()) {
-						if (skipPoint(p)) continue;
+						if (filtered(p.getUserData())) continue;
 					}
 					x = tileBox.getPixXFromTile(tileX + px, tileY + py, TILE_ZOOM);
 					y = tileBox.getPixYFromTile(tileX + px, tileY + py, TILE_ZOOM);
@@ -193,9 +193,12 @@ class MapillaryVectorLayer extends MapTileLayer implements MapillaryLayer, ICont
 		}
 	}
 
-	private boolean skipPoint(Point p) {
+	private boolean filtered(Object data) {
+		if (data == null) {
+			return true;
+		}
 		String userKey = settings.MAPILLARY_FILTER_USER_KEY.get();
-		HashMap<String, Object> userData = (HashMap<String, Object>) p.getUserData();
+		HashMap<String, Object> userData = (HashMap<String, Object>) data;
 		long capturedAt = (long) userData.get("captured_at");
 		long from = settings.MAPILLARY_FILTER_FROM_DATE.get();
 		long to = settings.MAPILLARY_FILTER_TO_DATE.get();
@@ -221,18 +224,22 @@ class MapillaryVectorLayer extends MapTileLayer implements MapillaryLayer, ICont
 			if (g instanceof LineString && !g.isEmpty()) {
 				LineString l = (LineString) g;
 				if (l.getCoordinateSequence() != null && !l.isEmpty()) {
-					draw(l.getCoordinateSequence().toCoordinateArray(), canvas, tileBox, tileX, tileY);
+					if (!filtered(l.getUserData())) {
+						draw(l.getCoordinateSequence().toCoordinateArray(), canvas, tileBox, tileX, tileY);
+					}
 				}
 			} else if (g instanceof MultiLineString && !g.isEmpty()) {
 				MultiLineString ml = (MultiLineString) g;
-				for (int i = 0; i < ml.getNumGeometries(); i++) {
-					Geometry gm = ml.getGeometryN(i);
-					if (gm instanceof LineString && !gm.isEmpty()) {
-						LineString l = (LineString) gm;
-						if (l.getCoordinateSequence() != null && !l.isEmpty()) {
-							draw(l.getCoordinateSequence().toCoordinateArray(), canvas, tileBox, tileX, tileY);
-						}
-					}
+				if (!filtered(ml.getUserData())) {
+					for (int i = 0; i < ml.getNumGeometries(); i++) {
+                        Geometry gm = ml.getGeometryN(i);
+                        if (gm instanceof LineString && !gm.isEmpty()) {
+                            LineString l = (LineString) gm;
+                            if (l.getCoordinateSequence() != null && !l.isEmpty()) {
+                                draw(l.getCoordinateSequence().toCoordinateArray(), canvas, tileBox, tileX, tileY);
+                            }
+                        }
+                    }
 				}
 			}
 		}
