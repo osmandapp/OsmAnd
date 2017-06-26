@@ -1571,4 +1571,13 @@
     <string name="rendering_attr_hideProposed_name">Təklif olunan obyektlər</string>
     <string name="local_recordings_delete_all_confirm">%1$d qeydi silmək üzrəsiniz. Əminsiniz?</string>
     <string name="local_osm_changes_upload_all_confirm">%1$d dəyişikliyi OSM-a yükləmək üzrəsiniz. Əminsiniz?</string>
+    <string name="osm_live_subscription">OSM Live abunəliyi</string>
+    <string name="osm_live_thanks">Canlı yeniləmələrə abunə olduğunuz üçün təşəkkür edirik!</string>
+    <string name="osm_live_ask_for_purchase">Zəhmət olmasa əvvəlcə OSM Live abunəliyini alın</string>
+    <string name="storage_directory_shared">Paylaşılan yaddaş</string>
+    <string name="donations">İanələr</string>
+    <string name="number_of_recipients">Qəbul edənlərin sayı</string>
+    <string name="osm_user_stat">%1$s düzəliş, %2$s dərəcə, cəmi %3$s düzəliş</string>
+    <string name="osm_editors_ranking">OSM Redaktorlar sıralaması</string>
+    <string name="shared_string_reverse_order">Əksinə sırala</string>
     </resources>

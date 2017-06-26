@@ -41,6 +41,7 @@ public class RulerControlLayer extends OsmandMapLayer {
     private int cacheZoom;
     private double cacheTileX;
     private double cacheTileY;
+    private long cacheMultiTouchTime;
     private ArrayList<String> cacheDistances;
     private Path distancePath;
     private TIntArrayList tx;
@@ -98,7 +99,10 @@ public class RulerControlLayer extends OsmandMapLayer {
             final QuadPoint center = tb.getCenterPixelPoint();
             final RulerMode mode = app.getSettings().RULER_MODE.get();
 
-            if (view.isMultiTouch()) {
+            if (cacheMultiTouchTime != view.getMultiTouchTime()) {
+                cacheMultiTouchTime = view.getMultiTouchTime();
+            }
+            if (view.isMultiTouch() || System.currentTimeMillis() - cacheMultiTouchTime < 3000) {
                 float x1 = view.getFirstTouchPointX();
                 float y1 = view.getFirstTouchPointY();
                 float x2 = view.getSecondTouchPointX();

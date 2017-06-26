@@ -674,7 +674,7 @@ La memoria utilizzata è  {1} MB.
     <string name="default_buttons_support">Sostieni</string>
     <string name="support_new_features">Sostieni nuove caratteristiche</string>
 
-    <string name="show_ruler_level">Visualizza la scala grafica</string>
+    <string name="show_ruler_level">Visualizza il righello</string>
     <string name="info_button">Info</string>
     <string name="back_to_location">Torna alla posizione</string>
 
@@ -858,7 +858,7 @@ Memoria in proporzione %4$s MB (limite di Android %5$s MB, Dalvik %6$s MB).</str
     <string name="show_warnings_title">Mostra avvisi…</string>
     <string name="show_warnings_descr">Configura gli avvisi sul traffico (limiti velocità, fermate forzate, dossi rallentatori), avvisi autovelox e indicazioni di corsia</string>
     <string name="map_widget_fluorescent">Itinerari fluorescenti</string>
-    <string name="map_widget_show_ruler">Scala grafica</string>
+    <string name="map_widget_show_ruler">Righello</string>
 
     <string name="map_widget_view_direction">﻿Direzione della visuale</string>
     <string name="map_widget_transparent">Widget trasparenti</string>
@@ -1613,21 +1613,19 @@ Il gruppo che non è stato rimosso da mesi viene allineato con le tue regole per
     <string name="osmo_gpx_track_downloaded">Scaricate %1$s tracce OsMo.</string>
     <string name="osmo_not_signed_in">Login a OsMo fallito</string>
     <string name="osmo_group_by_invite">Accedere su invito</string>
-    <string name="osmo_group_information_desc">"
- - Quando crei un gruppo, per favore, dagli un nome e una descrizione
-
- - Dall\'app possono essere creati solo gruppi di tipo semplice, più informazioni su sito https://osmo.mobi/g/new
- 
- - Attraverso il sito è possibile gestire il gruppo e aggiungere tracce e punti disponibili per tutti
- 
- - Non auspichiamo l\'utilizzo dei gruppi con un solo membro, se questo non è il gruppo dei PDI
- 
- - I gruppi privati sono limitati a 8 persone
- 
- - Termini e condizioni dell\'utilizzo sono sempre disponibili su OsMo.mobi
- 
- - Se avete altre necessità particolari - per favore contattate il supporto osmo.mobi@gmail.com
- "</string>
+    <string name="osmo_group_information_desc">- Quando crei un gruppo, per favore, dagli un nome e una descrizione
+\n
+\n - Dall\'app possono essere creati solo gruppi di tipo semplice, più informazioni su sito https://osmo.mobi/g/new
+\n 
+\n - Attraverso il sito è possibile gestire il gruppo e aggiungere tracce e punti disponibili per tutti
+\n 
+\n - Non auspichiamo l\'utilizzo dei gruppi con un solo membro, se questo non è il gruppo dei PDI
+\n 
+\n - I gruppi privati sono limitati a 8 persone
+\n 
+\n - Termini e condizioni dell\'utilizzo sono sempre disponibili su OsMo.mobi
+\n 
+\n - Se avete altre necessità particolari - per favore contattate il supporto osmo.mobi@gmail.com</string>
     <string name="osmo_group_information">Per favore leggere prima di creare un gruppo!</string>
     <string name="osmo_auth_error">Errore di autorizzazione OsMo: %1$s.
 
@@ -2573,27 +2571,28 @@ Se ami OsmAnd e OSM e vuoi sostenerli, questo è un modo perfetto per farlo.</st
     <string name="back_to_search">Ritorna alla ricerca</string>
     <string name="confirmation_to_delete_history_items">Vuoi cancellare gli elementi della cronologia selezionati?</string>
     <string name="show_something_on_map">Mostra %1$s sulla mappa</string>
-    <string name="release_2_4">" • Nuova ricerca testuale molto potente
-\n
-\n • Integrazione attraverso Bluetooth con il sistema audio dell\'auto/speaker
-\n
-\n
+    <string name="release_2_4">\\022 Nuova ricerca testuale molto potente 
+\n 
+\n • Integrazione attraverso Bluetooth con il sistema audio dell\'auto/speaker 
+\n 
+\n 
 \n • Annunci vocali delle indicazioni vocali del percorso, cambio di corsia migliorati 
 \n
-\n
-\n • Mappa dei trasporti pubblici migliorata con calcolo del percorso
-\n
-\n
-\n • Aggiunte più lingue e ora sono supportati anche i dialetti
-\n
-\n
-\n • Molte altre migliorie e correzioni di errori
-\n
-\n
-\n e altro… "</string>
+\n 
+\n 
+\n • Mappa dei trasporti pubblici migliorata con calcolo del percorso 
+\n 
+\n 
+\n • Aggiunte più lingue e ora sono supportati anche i dialetti 
+\n 
+\n 
+\n • Molte altre migliorie e correzioni di errori 
+\n 
+\n 
+\n e altro…</string>
     <string name="dist_away_from_my_location">Cerca a %1$s di distanza</string>
     <string name="show_on_map">Mostra sulla mappa</string>
-    <string name="share_history_subject">" condiviso attraverso OsmAnd"</string>
+    <string name="share_history_subject">condiviso attraverso OsmAnd</string>
     <string name="search_categories">Categorie</string>
     <string name="postcode">Codice postale</string>
     <string name="shared_string_from">da</string>
@@ -2670,25 +2669,25 @@ Se ami OsmAnd e OSM e vuoi sostenerli, questo è un modo perfetto per farlo.</st
     <string name="shared_string_recorded">Registrato</string>
     <string name="shared_string_record">Registra</string>
     <string name="gpx_logging_no_data">Nessun dato</string>
-    <string name="release_2_5">" • Icone sulla mappa cliccabili
-\n
-\n
-\n • Potente filtro di ricerca dei PDI: ricerca dei ristoranti per tipo di cucina, campeggi per esigenze specifiche
-\n
-\n
-\n • Nuovo stile Topo per ciclisti ed escursionisti
-\n
-\n
-\n • Registrazione viaggio migliorata
-\n
-\n
-\n • Notifiche di navigazione migliorate (Android Wear)
-\n
-\n
-\n • Molti altri miglioramenti e correzioni di bug
-\n
-\n
-\n e altro… "</string>
+    <string name="release_2_5">/022 Icone sulla mappa cliccabili 
+\n 
+\n 
+\n • Potente filtro di ricerca dei PDI: ricerca dei ristoranti per tipo di cucina, campeggi per esigenze specifiche 
+\n 
+\n 
+\n • Nuovo stile Topo per ciclisti ed escursionisti 
+\n 
+\n 
+\n • Registrazione viaggio migliorata 
+\n 
+\n 
+\n • Notifiche di navigazione migliorate (Android Wear) 
+\n 
+\n 
+\n • Molti altri miglioramenti e correzioni di bug 
+\n 
+\n 
+\n e altro…</string>
     <string name="rendering_attr_contourColorScheme_description">Schema del colore dei contorni</string>
     <string name="save_track_min_speed">Velocità minima di registrazione</string>
     <string name="translit_name_if_miss">Traslittera se manca il nome in %1$s</string>
@@ -2811,25 +2810,26 @@ Rappresenta l\'area: %1$s x %2$s</string>
 	<string name="auto_split_recording_title">Divisione automatica delle registrazioni dopo un periodo</string>
 	<string name="auto_split_recording_descr">Inizia un nuovo segmento dopo 6 minuti, una nuova traccia dopo 2 ore, o un nuovo file dopo un intervallo maggiore.</string>
     <string name="rendering_attr_depthContours_description">Mostra contorni e punti in profondità</string>
-    <string name="release_2_6">" • Nuove funzionalità: Pulsante azione veloce
-\n
-\n • Migliorata la risposta del touch screen ai gesti (es. zoommare e allargare)
-\n
+    <string name="release_2_6">"/022 Nuove funzionalità: Pulsante azione veloce 
+\n 
+\n • Migliorata la risposta del touch screen ai gesti (es. zoommare e allargare) 
+\n 
 \n • Nuovi caratteri della mappa  mappa per estendere la copertura di più lingue 
 \n
-\n • Supporto TTS per le lingue locali (e accenti)
-\n
-\n • Miglioramento della visibilità in molti stili mappa e wikipedia
-\n
-\n • Supporto all\'Open Location Code (OLC)
-\n
-\n • Visualizzazione di un profilo altimetrico, pendenza, e velocità per i GPX registrati e percorsi calcolati
-\n
-\n • Impostazione e miglioramenti della logica dello \"Stile guida\" nella guida svolta per svolta in bicicletta
-\n
-\n • Molti altri miglioramenti e correzioni di errori
-\n
-\n e altro ancora… "</string>
+\n 
+\n • Supporto TTS per le lingue locali (e accenti) 
+\n 
+\n • Miglioramento della visibilità in molti stili mappa e wikipedia 
+\n 
+\n • Supporto all\'Open Location Code (OLC) 
+\n 
+\n • Visualizzazione di un profilo altimetrico, pendenza, e velocità per i GPX registrati e percorsi calcolati 
+\n 
+\n • Impostazione e miglioramenti della logica dello \"Stile guida\" nella guida svolta per svolta in bicicletta 
+\n 
+\n • Molti altri miglioramenti e correzioni di errori 
+\n 
+\n e altro ancora…"</string>
 	<string name="routing_attr_driving_style_name">Stile di guida</string>
     <string name="routing_attr_driving_style_description">Guida sicura, veloce o bilanciata</string>
     <string name="route_altitude">Profilo altimetrico del percorso</string>
@@ -2881,7 +2881,7 @@ Rappresenta l\'area: %1$s x %2$s</string>
     <string name="full_version_thanks">Grazie per avere acquistato la versione completa di OsmAnd!</string>
     <string name="fonts_header">Caratteri della mappa</string>
     <string name="right_side_navigation">Guida a destra</string>
-    <string name="depth_contour_descr">"Insieme di mappe che contengono le linee isoipse marine e i punti (basati su una  griglia di 30 arco-secondi)."</string>
+    <string name="depth_contour_descr">Insieme di mappe che contengono le linee isoipse marine e i punti.</string>
     <string name="sea_depth_thanks">Grazie per avere acquistato le isoipse nautiche!</string>
     <string name="index_item_depth_contours_osmand_ext">Isoipse nautiche</string>
     <string name="index_item_depth_points_southern_hemisphere">Punti nautici sotto il livello del mare dell\'emisfero Australe</string>
@@ -3012,4 +3012,6 @@ Copertura e qualità approssimativamente:
     <string name="distance_moving">Distanza corretta</string>
     <string name="shared_string_permissions">Permessi</string>
     <string name="import_gpx_failed_descr">OsmAnd non può importare il file. Controlla se OsmAnd ha i permessi per leggere file dalla posizione.</string>
+    <string name="map_widget_ruler_control_first_mode">Righello a due punti</string>
+    <string name="map_widget_ruler_control_second_mode">Righello radiale</string>
     </resources>

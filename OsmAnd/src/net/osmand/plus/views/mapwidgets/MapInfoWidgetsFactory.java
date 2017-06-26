@@ -185,13 +185,18 @@ public class MapInfoWidgetsFactory {
 		final String title = map.getResources().getString(R.string.map_widget_show_ruler);
         final TextInfoWidget rulerControl = new TextInfoWidget(map) {
 			boolean needNewLatLon;
+			long cacheMultiTouchTime;
 
 			@Override
 			public boolean updateInfo(DrawSettings drawSettings) {
 				RulerMode mode = map.getMyApplication().getSettings().RULER_MODE.get();
 				OsmandMapTileView view = map.getMapView();
 
-				if (view.isMultiTouch()) {
+				if (cacheMultiTouchTime != view.getMultiTouchTime()) {
+					cacheMultiTouchTime = view.getMultiTouchTime();
+					needNewLatLon = true;
+				}
+				if (view.isMultiTouch() || System.currentTimeMillis() - cacheMultiTouchTime < 3000) {
 					if (needNewLatLon) {
 						float x1 = view.getFirstTouchPointX();
 						float y1 = view.getFirstTouchPointY();
