@@ -1921,7 +1921,7 @@
 
 	<string name="poi_public_bath">Opinbert baðhús</string>
 
-	<string name="poi_toilets_access_public">Salernisaðgangur: opinn</string>
+	<string name="poi_toilets_access_public">Aðgangur að snyrtingum: opinn</string>
 
 	<string name="poi_vending_parking_tickets_public_transport_tickets">Bílastæðamiðar; miðar í almenningssamgöngur</string>
 	<string name="poi_health_specialty_optometry_yes">Sjónskoðun</string>
@@ -2174,7 +2174,7 @@
 
 	<string name="poi_piste_grooming_classic">Hefðbundið</string>
 	<string name="poi_piste_grooming_backcountry">Úr alfaraleið</string>
-	<string name="poi_piste_grooming_skating">Skautar</string>
+	<string name="poi_piste_grooming_skating">Skautun</string>
 	<string name="poi_aerialway_bubble_yes">Blaðra</string>
 	<string name="poi_aerialway_bubble_no">Engin blaðra</string>
 	<string name="poi_rooms">Herbergi</string>
@@ -2296,4 +2296,155 @@
 	<string name="poi_swing_gate">Sveifluhlið</string>
 	<string name="poi_turnstile">Snúningshlið</string>
 	<string name="poi_barrier_entrance">Op í gegnum vegg eða girðingu</string>
+	<string name="poi_abandoned_poi">Yfirgefinn hlutur</string>
+	<string name="poi_disused">Aflagt</string>
+
+	<string name="poi_brand">Vörumerki</string>
+	<string name="poi_crossing_traffic_signals">Með stöðvunarljósum</string>
+	<string name="poi_crossing_uncontrolled">Óstýrt</string>
+	<string name="poi_wholesale">Heildsala</string>
+
+	<string name="poi_access_permissive">Aðgangur leyfilegur</string>
+	<string name="poi_access_customers">Aðgangur viðskiptavina</string>
+	<string name="poi_access_delivery">Aðgangur vegna vörulosunar</string>
+	<string name="poi_access_agricultural">Aðgangur vegna landbúnaðar</string>
+
+	<string name="poi_nudism_permissive">Með leyfi</string>
+
+	<string name="poi_bicycle_parking_anchors">Festingar</string>
+	<string name="poi_bicycle_parking_stands">Standar</string>
+	<string name="poi_bicycle_parking_wall_loops">Hjólalykkjur</string>
+	<string name="poi_urban">Í byggð</string>
+	<string name="poi_rural">Sveit</string>
+
+	<string name="poi_enforcement_traffic_signals">Umferðareftirlit: stöðvunarljós</string>
+	<string name="poi_enforcement_maxspeed">Umferðareftirlit: hámarkshraði</string>
+	<string name="poi_enforcement_maxheight">Umferðareftirlit: hámarkshæð</string>
+	<string name="poi_enforcement_mindistance">Umferðareftirlit: lágmarksmillibil</string>
+	<string name="poi_enforcement_check">Umferðareftirlit: vigtun</string>
+	<string name="poi_enforcement_access">Umferðareftirlit: aðgangur</string>
+	<string name="poi_enforcement_toll">Umferðareftirlit: tollur</string>
+
+	<string name="poi_animal_shelter_dog">Gerð skýlis: hundar</string>
+	<string name="poi_animal_shelter_cat">Gerð skýlis: kettir</string>
+	<string name="poi_animal_shelter_dog_cat">Gerð skýlis: hundar, kettir</string>
+	<string name="poi_animal_shelter_bird">Gerð skýlis: fuglar</string>
+
+	<string name="poi_intermittent">Ósamfellt</string>
+
+	<string name="poi_pump_powered">Aflknúið</string>
+	<string name="poi_information_guidepost">Leiðsögustaur</string>
+	<string name="poi_information_trail_blaze">Leiðamerki</string>
+	<string name="poi_information_audioguide">Hljóðleiðsögn</string>
+	<string name="poi_information_tactile_model">Upphleypt líkan</string>
+	<string name="poi_information_tactile_map">Upphleypt kort</string>
+	<string name="poi_board_type_notice">Upplýsingatafla</string>
+	<string name="poi_covered_no">Ekki undir þaki</string>
+
+	<string name="poi_smoking_isolated">Í aðskildu herbergi</string>
+	<string name="poi_tactile_paving_no">Án snertimerkingar yfirborðs</string>
+	<string name="poi_mini_roundabout">Lítið hringtorg</string>
+	<string name="poi_leisure_common">Sameiginlegt afþreyingarsvæði</string>
+	<string name="poi_windfall">Vindfellt</string>
+	<string name="poi_dead_wood">Dauður viður</string>
+
+	<string name="poi_passing_place">Víkingakantur</string>
+	<string name="poi_level">Stig</string>
+	<string name="poi_rtsa_scale">RTSA-kvarði</string>
+
+	<string name="poi_piste_difficulty_freeride">Frjáls aðferð</string>
+	<string name="poi_piste_grooming_classic_skating">Hefðbundið+skautun</string>
+	<string name="poi_piste_grooming_scooter">Bifhjól</string>
+	<string name="poi_piste_grooming_mogul">Hólabraut</string>
+
+	<string name="poi_garden_type_residential">Tegund garðs: íbúðasvæði</string>
+	<string name="poi_garden_type_community">Tegund garðs: samfélags</string>
+	<string name="poi_garden_type_private">Tegund garðs: einka</string>
+	<string name="poi_garden_type_botanical">Tegund garðs: grasagarður</string>
+
+	<string name="poi_garden_style_kitchen">Tegund garðs: eldhús</string>
+	<string name="poi_garden_style_rosarium">Tegund garðs: rósagarður</string>
+	<string name="poi_garden_style_french">Tegund garðs: franskur</string>
+	<string name="poi_garden_style_english">Tegund garðs: enskur</string>
+	<string name="poi_garden_style_japanese">Tegund garðs: japanskur</string>
+
+	<string name="poi_capacity">Afkastageta</string>
+	<string name="poi_capacity_disabled_no">Engin sérstök sæti fyrir fatlaða</string>
+	<string name="poi_capacity_disabled">Sérstök sæti fyrir fatlaða</string>
+	<string name="poi_capacity_women_yes">Sérstök sæti fyrir konur</string>
+	<string name="poi_capacity_women_no">Engin sérstök sæti fyrir konur</string>
+	<string name="poi_capacity_women">Sérstök sæti fyrir konur</string>
+	<string name="poi_capacity_pupils">Sérstök sæti fyrir námsmenn</string>
+	<string name="poi_capacity_teachers">Sérstök sæti fyrir kennara</string>
+	<string name="poi_capacity_parent_yes">Sérstök sæti fyrir foreldra</string>
+	<string name="poi_capacity_parent_no">Engin sérstök sæti fyrir foreldra</string>
+	<string name="poi_capacity_parent">Sérstök sæti fyrir foreldra</string>
+
+	<string name="poi_aerialway_occupancy">Afkastageta klefa/sæta/bíla</string>
+	<string name="poi_aerialway_capacity">Afkastageta á klukkustund</string>
+	<string name="poi_aerialway_duration">Meðal-ferðatími, mínútur</string>
+	<string name="poi_payment_coins_yes">Mynt</string>
+	<string name="poi_payment_coins_no">Ekki tekið við mynt</string>
+	<string name="poi_payment_coins_0.5">$0.5 mynt</string>
+	<string name="poi_payment_coins_50c12">50c, 1€, og 2€ mynt</string>
+	<string name="poi_payment_electronic_purses_yes">Rafbuddur</string>
+	<string name="poi_payment_electronic_purses_no">Ekki tekið við rafbuddum</string>
+	<string name="poi_payment_account_cards_yes">Reikningskort</string>
+	<string name="poi_payment_account_cards_no">Ekki tekið við reikningskortum</string>
+	<string name="poi_payment_dkv_yes">DKV</string>
+	<string name="poi_payment_dkv_no">Ekki tekið við DKV</string>
+	<string name="poi_payment_uta_yes">UTA</string>
+	<string name="poi_payment_uta_no">Ekki tekið við UTA-kortum</string>
+	<string name="poi_payment_efectivo_yes">Efectivo</string>
+	<string name="poi_payment_efectivo_no">Ekki tekið við Efectivo</string>
+	<string name="poi_payment_girocard_yes">Girocard</string>
+	<string name="poi_payment_girocard_no">Ekki tekið við Girocard</string>
+	<string name="poi_payment_visa_electron_yes">Visa Electron</string>
+	<string name="poi_payment_visa_electron_no">Ekki tekið við VISA Electron-kortum</string>
+	<string name="poi_payment_litecoin_yes">Litecoin</string>
+	<string name="poi_payment_litecoin_no">Ekki tekið við Litecoin</string>
+	<string name="poi_payment_pikepass_yes">PIKEPASS</string>
+	<string name="poi_payment_pikepass_no">Ekki tekið við PIKEPASS</string>
+	<string name="poi_payment_visa_debit_yes">VISA-debetkort</string>
+	<string name="poi_payment_visa_debit_no">Ekki tekið við VISA-debetkortum</string>
+	<string name="poi_payment_cryptocurrencies_no">Ekki tekið við rafrænum gjaldmiðlum</string>
+	<string name="poi_payment_sms_yes">SMS-greiðslur</string>
+	<string name="poi_payment_sms_no">Ekki tekið við SMS-greiðslum</string>
+	<string name="poi_description_payment">Lýsing greiðslu</string>
+
+	<string name="poi_diet_kosher_filter_yes">Kosher</string>
+	<string name="poi_diet_kosher_only">Einungis kosher</string>
+	<string name="poi_diet_kosher_yes">Kosher</string>
+	<string name="poi_diet_kosher_no">Kosher-matur: nei</string>
+	<string name="poi_diet_halal_filter_yes">Halal</string>
+	<string name="poi_diet_halal_only">Einungis halal</string>
+	<string name="poi_diet_halal_yes">Halal</string>
+	<string name="poi_diet_halal_no">Halal-matur: nei</string>
+	<string name="poi_diet_lactose_free_filter_yes">Laktósafrítt</string>
+	<string name="poi_diet_lactose_free_only">Einungis laktósafrítt</string>
+	<string name="poi_diet_lactose_free_yes">Laktósafrítt</string>
+	<string name="poi_diet_lactose_free_no">Laktósafrír matur: nei</string>
+	<string name="poi_diet_pescetarian_yes">Grænmetis-fiskætur</string>
+
+	<string name="poi_drive_in_no">Bílalúga: nei</string>
+	<string name="poi_drive_through_no">Bílaafgreiðsla: nei</string>
+
+	<string name="poi_brewery_additional">Nafn á brugghúsi</string>
+	<string name="poi_microbrewery_yes">Bruggað á staðnum</string>
+	<string name="poi_microbrewery_no">Ekki bruggað á staðnum</string>
+
+	<string name="poi_service_electrical">Viðgerðir rafknúinna ökutækja</string>
+	<string name="poi_toilets_wheelchair_yes">Aðgangur hjólastóla að snyrtingum: já</string>
+	<string name="poi_toilets_wheelchair_no">Aðgangur hjólastóla að snyrtingum: nei</string>
+	<string name="poi_toilets_access_customers">Aðgangur að snyrtingum: viðskiptavinir</string>
+	<string name="poi_toilets_access_permissive">Aðgangur að snyrtingum: með leyfi</string>
+	<string name="poi_toilets_access_community">Aðgangur að snyrtingum: samfélagið</string>
+	<string name="poi_maxstay">Tímatakmörkun bílastæðis</string>
+
+	<string name="poi_vending_parking_tickets">Bílastæðamiðar</string>
+	<string name="poi_vending_tickets">Miðasala</string>
+	<string name="poi_vending_animal_food">Dýrafóður</string>
+	<string name="poi_vending_public_transport_plans">Kort yfir almenningssamgöngur</string>
+	<string name="poi_vending_drinks_sweets">Drykkir og sælgæti</string>
+	<string name="poi_memorial_cross">Krosslaga</string>
 	</resources>
