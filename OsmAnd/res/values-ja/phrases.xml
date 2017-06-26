@@ -3179,4 +3179,17 @@
 
 	<string name="poi_health_amenity_type_scales">計測器(体重計、身長計等)</string>
 
+	<string name="poi_health_person_type_assistant">在職医療従事者:助手</string>
+	<string name="poi_health_person_type_healer">在職医療従事者:治療士</string>
+	<string name="poi_health_person_type_midwife">在職医療従事者:助産婦</string>
+	<string name="poi_health_person_type_nurse">在職医療従事者:看護師</string>
+	<string name="poi_health_person_type_paramedic">在職医療従事者:救急医療</string>
+	<string name="poi_health_person_type_physician">在職医療従事者:医師</string>
+	<string name="poi_health_person_type_podologist">在職医療従事者:足脚学専門科・ポドロジスト</string>
+	<string name="poi_health_person_type_psychologist">在職医療従事者:心理学者</string>
+	<string name="poi_health_person_type_therapist">在職医療従事者:セラピスト</string>
+	<string name="poi_health_person_type_physician_assitant">在職医療従事者:医師助手</string>
+	<string name="poi_health_person_type_technician">在職医療従事者:技師</string>
+	<string name="poi_health_person_type_witchdoctor">在職医療従事者:呪術医</string>
+
 	</resources>
