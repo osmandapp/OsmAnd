@@ -334,8 +334,10 @@ public class GPXLayer extends OsmandMapLayer implements ContextMenuLayer.IContex
                             y + nmHeight / 2 + 3 * (float) Math.ceil(tileBox.getDensity()),
                             x + nmWidth / 2 + 3 * (float) Math.ceil(tileBox.getDensity()),
                             y - nmHeight / 2 - 2 * (float) Math.ceil(tileBox.getDensity()));
-                    canvas.drawRoundRect(rect, 5, 5, paintInnerRect);
-					canvas.drawRoundRect(rect, 5, 5, paintOuterRect);
+                    canvas.drawRoundRect(rect, 0, 0, paintInnerRect);
+					canvas.drawRoundRect(rect, 0, 0, paintOuterRect);
+//					canvas.drawRect(rect, paintInnerRect);
+//					canvas.drawRect(rect, paintOuterRect);
 					canvas.drawText(nm, x, y + nmHeight / 2, paintTextIcon);
 				}
 			}
