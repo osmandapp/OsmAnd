@@ -1565,7 +1565,7 @@
 	<string name="poi_payment_gift_card_no">不接受禮品卡</string>
 	<string name="poi_payment_golden_crown_yes">接受 Golden Crown 卡</string>
 	<string name="poi_payment_golden_crown_no">不接受 Golden Crown 卡</string>
-	<string name="poi_payment_pro100_yes">接受 PRO100</string>
+	<string name="poi_payment_pro100_yes">PRO100</string>
 	<string name="poi_payment_pro100_no">不接受 PRO100</string>
 	<string name="poi_payment_union_card_yes">接受 Union 卡</string>
 	<string name="poi_payment_union_card_no">不接受 Union 卡</string>
@@ -2387,7 +2387,7 @@
 	<string name="poi_historic_period_old_kingdom">歷史時期：古王國 (西元前2686年 – 2181年)</string>
 	<string name="poi_historic_period_first_intermediate_period">歷史時期：第一中間期 (西元前2181年 - 2055年)</string>
 	<string name="poi_historic_period_second_intermediate_period">歷史時期：第二中間期 (西元前1650年 - 1550年)</string>
-	<string name="poi_historic_period_third_intermediate_period">"歷史時期：第三中間期 (西元前1069年 - 664年) "</string>
+	<string name="poi_historic_period_third_intermediate_period">歷史時期：第三中間期 (西元前1069年 - 664年)</string>
 	<string name="poi_historic_period_first_persian_period">歷史時期：第一波斯時期</string>
 	<string name="poi_historic_period_late_period">歷史時期：後期 (西元前664 - 332年)</string>
 	<string name="poi_historic_period_second_persian_period">歷史時期：第二波斯時期</string>
@@ -3230,4 +3230,22 @@
 	<string name="poi_cuisine_gastropub">餐酒館</string>
 	<string name="poi_cuisine_heuriger">Heuriger</string>
 	<string name="poi_cuisine_curry">咖哩</string>
+	<string name="poi_xmas_shop_christmas_tree">樹商店</string>
+	<string name="poi_xmas_note">聖誕節：註解</string>
+	<string name="poi_cuisine_grill">烤架</string>
+	<string name="poi_cuisine_bagel">貝果</string>
+	<string name="poi_cuisine_pancake">鬆餅</string>
+	<string name="poi_cuisine_pasta">義大利麵</string>
+	<string name="poi_cuisine_fast_food">速食</string>
+	<string name="poi_cuisine_juice">果汁</string>
+	<string name="poi_cuisine_soba">蕎麥麵</string>
+	<string name="poi_cuisine_tea">茶</string>
+	<string name="poi_cuisine_tea_shop">茶飲店</string>
+	<string name="poi_cuisine_soup">湯</string>
+	<string name="poi_cuisine_pie">派</string>
+	<string name="poi_cuisine_hotdog">熱狗</string>
+	<string name="poi_cuisine_deli">熟食店</string>
+	<string name="poi_cuisine_salad">沙拉</string>
+	<string name="poi_cuisine_frozen_yogurt">霜凍優格</string>
+	<string name="poi_cuisine_fried_food">油炸食品</string>
 	</resources>
