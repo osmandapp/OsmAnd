@@ -112,4 +112,41 @@
 	<string name="poi_photo">Şəkil dükanı</string>
 	<string name="poi_second_hand">İkinci əl mağazası</string>
 	<string name="poi_ticket">Bilet satışları</string>
+	<string name="poi_video">Video mağazası</string>
+	<string name="poi_electronics">Elektronika mağazası</string>
+	<string name="poi_car_parts">Avtomobil hissələri</string>
+	<string name="poi_cosmetics">Kosmetika</string>
+	<string name="poi_perfumery">Ətir mağazası</string>
+	<string name="poi_honey">Bal mağazası</string>
+	<string name="poi_fuel_diesel">Dizel</string>
+	<string name="poi_fuel_gtl_diesel">GTL dizel</string>
+	<string name="poi_fuel_hgv_diesel">HGV dizel</string>
+	<string name="poi_fuel_biodiesel">Bio dizel</string>
+	<string name="poi_fuel_octane_80"/>
+	<string name="poi_public_transport_platform">İctimai nəqliyyat dayanacağı</string>
+	<string name="poi_public_transport_platform_bus">Avtobus dayanacağı</string>
+	<string name="poi_bus_stop">Avtobus dayanacağı</string>
+	<string name="poi_subway_station">Metro stansiyası</string>
+	<string name="poi_tunnel">Tunel</string>
+	<string name="poi_bridge">Körpü</string>
+
+	<string name="poi_speed_camera">Sürət kamerası</string>
+	<string name="poi_recycling_newspaper">Qəzet</string>
+	<string name="poi_recycling_mobile_phones">Mobil telefonlar</string>
+	<string name="poi_recycling_computers">Kompyuterlər</string>
+	<string name="poi_recycling_tv_monitor">TV, monitorlar</string>
+	<string name="poi_recycling_paint">Boya</string>
+	<string name="poi_recycling_cars">Avtomobillər</string>
+	<string name="poi_recycling_bicycles">Velosipedlər</string>
+
+	<string name="poi_college">Kollec</string>
+	<string name="poi_driving_school">Sürücülük məktəbi</string>
+	<string name="poi_school">Məktəb</string>
+	<string name="poi_university">Universitet</string>
+
+	<string name="poi_country">Ölkə</string>
+	<string name="poi_city">Şəhər</string>
+	<string name="poi_stadium">Stadion</string>
+	<string name="poi_sports_centre">İdman mərkəzi</string>
+	<string name="poi_golf">Qolf</string>
 	</resources>
