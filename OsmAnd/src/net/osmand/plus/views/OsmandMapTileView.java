@@ -995,8 +995,6 @@ public class OsmandMapTileView implements IMapDownloaderCallback {
 		private LatLon initialCenterLatLon;
 		private boolean startRotating = false;
 		private static final float ANGLE_THRESHOLD = 30;
-		private int cacheIntZoom = getZoom();
-		private double cacheFractionalZoom = getZoomFractionalPart();
 
 		@Override
 		public void onZoomOrRotationEnded(double relativeToStart, float angleRelative) {
@@ -1065,9 +1063,7 @@ public class OsmandMapTileView implements IMapDownloaderCallback {
 		@Override
 		public void onActionPointerUp() {
 			multiTouch = false;
-			if (cacheIntZoom != getZoom() || cacheFractionalZoom != getZoomFractionalPart()) {
-				cacheIntZoom = getZoom();
-				cacheFractionalZoom = getZoomFractionalPart();
+			if (isZooming()) {
 				multiTouchEndTime = 0;
 			} else {
 				multiTouchEndTime = System.currentTimeMillis();
