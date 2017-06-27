@@ -103,4 +103,13 @@
 	<string name="poi_recycling_clothes">Geyimlər</string>
 	<string name="poi_recycling_plastic">Plastik</string>
 	<string name="poi_recycling_batteries">Batareyalar</string>
+	<string name="poi_bed">Yataq əşyaları mağazası</string>
+	<string name="poi_camera">Kameralar və obyektivlər</string>
+	<string name="poi_computer">Kompyuter mağazası</string>
+	<string name="poi_frame">Şəkil çərçivəsi dükanı</string>
+	<string name="poi_shop_yes">Ümumi mağaza</string>
+	<string name="poi_gift">Hədiyyə dükanı</string>
+	<string name="poi_photo">Şəkil dükanı</string>
+	<string name="poi_second_hand">İkinci əl mağazası</string>
+	<string name="poi_ticket">Bilet satışları</string>
 	</resources>
