@@ -61,12 +61,6 @@ public class MapillaryFiltersFragment extends BaseOsmAndFragment {
 
 
         final View toggleRow = view.findViewById(R.id.toggle_row);
-        toggleRow.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View view) {
-                showOrHideMapillaryLayers(settings, plugin, mapActivity);
-            }
-        });
         final boolean selected = settings.SHOW_MAPILLARY.get();
         final int toggleActionStringId = selected ? R.string.shared_string_enabled : R.string.shared_string_disabled;
         int toggleIconColorId;
@@ -86,7 +80,15 @@ public class MapillaryFiltersFragment extends BaseOsmAndFragment {
         toggle.setOnCheckedChangeListener(new CompoundButton.OnCheckedChangeListener() {
             @Override
             public void onCheckedChanged(CompoundButton compoundButton, boolean b) {
-                showOrHideMapillaryLayers(settings, plugin, mapActivity);
+                settings.SHOW_MAPILLARY.set(!settings.SHOW_MAPILLARY.get());
+                plugin.updateLayers(mapActivity.getMapView(), mapActivity);
+                mapActivity.getDashboard().refreshContent(true);
+            }
+        });
+        toggleRow.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                toggle.setChecked(!toggle.isChecked());
             }
         });
 
@@ -239,6 +241,7 @@ public class MapillaryFiltersFragment extends BaseOsmAndFragment {
 
                 changeButtonState(apply, .5f, false);
                 plugin.updateLayers(mapActivity.getMapView(), mapActivity);
+                mapActivity.getDashboard().hideDashboard();
             }
         });
 
@@ -263,12 +266,6 @@ public class MapillaryFiltersFragment extends BaseOsmAndFragment {
         });
 
         return view;
-    }
-
-    private void showOrHideMapillaryLayers(OsmandSettings settings, MapillaryPlugin plugin, MapActivity mapActivity) {
-        settings.SHOW_MAPILLARY.set(!settings.SHOW_MAPILLARY.get());
-        plugin.updateLayers(mapActivity.getMapView(), mapActivity);
-        mapActivity.getDashboard().refreshContent(true);
     }
 
     private void changeButtonState(Button button, float alpha, boolean enabled) {

@@ -370,7 +370,7 @@
             android:background="?attr/bg_color">
 
             <Button
-                android:id="@+id/button_apply"
+                android:id="@+id/button_clear"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_alignParentLeft="true"
@@ -378,17 +378,17 @@
                 android:layout_marginLeft="32dp"
                 android:layout_marginStart="32dp"
                 android:background="?attr/selectableItemBackground"
-                android:text="@string/shared_string_apply"
+                android:text="@string/shared_string_clear"
                 android:textColor="?attr/color_dialog_buttons" />
 
             <Button
-                android:id="@+id/button_clear"
+                android:id="@+id/button_apply"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_alignParentEnd="true"
                 android:layout_alignParentRight="true"
                 android:background="?attr/selectableItemBackground"
-                android:text="@string/shared_string_clear"
+                android:text="@string/shared_string_apply"
                 android:textColor="?attr/color_dialog_buttons" />
         </RelativeLayout>
 
