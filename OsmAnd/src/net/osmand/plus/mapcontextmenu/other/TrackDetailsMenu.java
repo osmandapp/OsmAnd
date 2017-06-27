@@ -244,7 +244,7 @@ public class TrackDetailsMenu {
 							pointDistance += segment.points.get(i - 1).distance;
 						}
 					}
-					if (segment.points.get(i).distance + pointDistance >= startDistance && segment.points.get(i).distance <= endDistance) {
+					if (pointDistance + segment.points.get(i).distance >= startDistance && pointDistance + segment.points.get(i).distance <= endDistance) {
 						if (left == 0 && right == 0) {
 							left = segment.points.get(i).getLongitude();
 							right = segment.points.get(i).getLongitude();
