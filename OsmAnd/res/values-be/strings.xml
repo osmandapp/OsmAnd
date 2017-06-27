@@ -2960,4 +2960,13 @@ OsmAnd мае адкрыты зыходны код і актыўна разві�
     <string name="import_gpx_failed_descr">OsmAnd не можа імпартаваць файл. Калі ласка, праверце, ці мае OsmAnd дазволы на чытанне файла з гэтага каталога.</string>
     <string name="map_widget_ruler_control_first_mode">Лінейка двухпунктавая</string>
     <string name="map_widget_ruler_control_second_mode">Лінейка прамянёвая</string>
+    <string name="wrong_user_name">Няправільнае імя карыстальніка!</string>
+    <string name="shared_string_to">Да</string>
+    <string name="mapillary_menu_date_from">Ад</string>
+    <string name="mapillary_menu_descr_dates">Паглядзець выявы даданыя ў пэўны перыяд.</string>
+    <string name="mapillary_menu_title_dates">Даты</string>
+    <string name="mapillary_menu_edit_text_hint">Увядзіце імя карыстальніка</string>
+    <string name="mapillary_menu_descr_username">Паглядзець выявы даданыя пэўным карыстальнікам.</string>
+    <string name="mapillary_menu_title_username">Імя карыстальніка</string>
+    <string name="mapillary_menu_filter_description">Вы можаце фільтраваць выявы па імю карыстальніка ці даце.</string>
     </resources>
