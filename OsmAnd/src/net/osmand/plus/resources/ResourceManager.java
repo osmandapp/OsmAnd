@@ -5,6 +5,7 @@ import android.content.Context;
 import android.content.res.AssetManager;
 import android.database.sqlite.SQLiteException;
 import android.os.HandlerThread;
+import android.support.annotation.NonNull;
 import android.text.format.DateFormat;
 import android.util.DisplayMetrics;
 import android.view.WindowManager;
@@ -336,6 +337,14 @@ public class ResourceManager {
 		return cache != null && cache.getTileForMapSync(file, map, x, y, zoom, loadFromInternetIfNeeded) != null;
 	}
 
+	public void clearCacheAndTile(@NonNull ITileSource map) {
+		String path = dirWithTiles.getAbsolutePath() + "/" + map.getName();
+		map.clearTiles(path);
+		TilesCache cache = getTilesCache(map);
+		if (cache != null) {
+			cache.clearTileCache(map.getName());
+		}
+	}
 
 	////////////////////////////////////////////// Working with indexes ////////////////////////////////////////////////
 

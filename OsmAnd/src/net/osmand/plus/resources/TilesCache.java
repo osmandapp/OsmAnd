@@ -224,6 +224,10 @@ public abstract class TilesCache<T> {
 		}
 	}
 
+	protected synchronized void clearTileCache(String tileId) {
+		cache.remove(tileId);
+	}
+
 	public synchronized T get(String key) {
 		return cache.get(key);
 	}

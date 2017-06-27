@@ -24,11 +24,13 @@ import android.widget.EditText;
 import android.widget.ImageView;
 import android.widget.TextView;
 
+import net.osmand.map.TileSourceManager;
 import net.osmand.plus.OsmandPlugin;
 import net.osmand.plus.OsmandSettings;
 import net.osmand.plus.R;
 import net.osmand.plus.activities.MapActivity;
 import net.osmand.plus.base.BaseOsmAndFragment;
+import net.osmand.plus.resources.ResourceManager;
 import net.osmand.plus.views.controls.DelayAutoCompleteTextView;
 
 import java.text.DateFormat;
@@ -97,7 +99,10 @@ public class MapillaryFiltersFragment extends BaseOsmAndFragment {
         reloadTile.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-
+                ResourceManager manager = getMyApplication().getResourceManager();
+                manager.clearCacheAndTile(TileSourceManager.getMapillaryVectorSource());
+                manager.clearCacheAndTile(TileSourceManager.getMapillaryRasterSource());
+                plugin.updateLayers(mapActivity.getMapView(), mapActivity);
             }
         });
 
