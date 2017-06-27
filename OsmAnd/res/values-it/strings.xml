@@ -3014,4 +3014,16 @@ Copertura e qualità approssimativamente:
     <string name="import_gpx_failed_descr">OsmAnd non può importare il file. Controlla se OsmAnd ha i permessi per leggere file dalla posizione.</string>
     <string name="map_widget_ruler_control_first_mode">Righello a due punti</string>
     <string name="map_widget_ruler_control_second_mode">Righello radiale</string>
+    <string name="shared_string_reload">Ricarica</string>
+    <string name="mapillary_menu_descr_tile_cache">Ricarica le mattonelle se vuoi visualizzare gli ultimi dati.</string>
+    <string name="mapillary_menu_title_tile_cache">Cache mattonelle</string>
+    <string name="wrong_user_name">Nome utente errato!</string>
+    <string name="shared_string_to">A</string>
+    <string name="mapillary_menu_date_from">Da</string>
+    <string name="mapillary_menu_descr_dates">Visualizza le immagini aggiunte in un certo periodo.</string>
+    <string name="mapillary_menu_title_dates">Date</string>
+    <string name="mapillary_menu_edit_text_hint">Scrivi il nome utente</string>
+    <string name="mapillary_menu_descr_username">Visualizza le immagini aggiunte da un certo utente.</string>
+    <string name="mapillary_menu_title_username">Nome utente</string>
+    <string name="mapillary_menu_filter_description">Puoi filtrare le immagini per nome dell\'utente o per data, i filtri si possono applicare solo per gli zoom più elevati.</string>
     </resources>
