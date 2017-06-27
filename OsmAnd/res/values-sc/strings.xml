@@ -2861,4 +2861,16 @@ Pro praghere iscrie su còdighe intreu</string>
     <string name="import_gpx_failed_descr">OsmAnd non podet importare su documentu. Pro praghere verìfica chi OsmAnd tèngiat sas autorizatziones pro lèghere su documentu dae sa cartella sua.</string>
     <string name="map_widget_ruler_control_first_mode">Medidura cun duos puntos</string>
     <string name="map_widget_ruler_control_second_mode">Medidura cun su raju</string>
+    <string name="shared_string_reload">Torra a carrigare</string>
+    <string name="mapillary_menu_descr_tile_cache">Torra a carrigare sos tasseddos pro bìdere datos agiornados.</string>
+    <string name="mapillary_menu_title_tile_cache">Cache de sos tasseddos</string>
+    <string name="wrong_user_name">Nùmene impreadore isballiadu!</string>
+    <string name="shared_string_to">A</string>
+    <string name="mapillary_menu_date_from">Dae</string>
+    <string name="mapillary_menu_descr_dates">Abbista sas immàgines annantas in unu tzertu perìodu.</string>
+    <string name="mapillary_menu_title_dates">Datas</string>
+    <string name="mapillary_menu_edit_text_hint">Iscrie su nùmene impreadore</string>
+    <string name="mapillary_menu_descr_username">Abbista sas immàgines annantas dae unu impreadore isseberadu.</string>
+    <string name="mapillary_menu_title_username">Nùmene impreadore</string>
+    <string name="mapillary_menu_filter_description">Podes filtrare sas immàgines pro impreadore o data. Sos filtros s\'aplicat a pustis de ismanniamentu.</string>
     </resources>
