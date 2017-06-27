@@ -2924,4 +2924,5 @@ eta gehiago…
     <string name="animate_my_location">Animatu nire kokalekua</string>
     <string name="route_is_too_long_v2">Ibilbide hau kalkulatzeko luzeegia izan daiteke. Sortu tarteko helburuak ez baduzu emaitza bat lortu 10 minututan.</string>
     <string name="shared_string_add_photos">Gehitu argazkiak</string>
+    <string name="map_widget_ruler_control_first_mode">Puntu biko erregela</string>
     </resources>
