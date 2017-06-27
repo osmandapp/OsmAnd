@@ -2663,7 +2663,7 @@ Tai yra puikus būdas paremti OsmAnd ir OSM, jei jie jums patinka.</string>
     <string name="driving_region_automatic">Automatinis</string>
     <string name="do_not_send_anonymous_app_usage">Nesiųsti anoniminės programėlės naudojimo informacijos</string>
     <string name="shared_string_install">Įdiegti</string>
-    <string name="improve_coverage_mapillary">Pagerinti padengimą su Mapillary</string>
+    <string name="improve_coverage_mapillary">Pagerinti nuotraukų aprėptį su Mapillary</string>
     <string name="shared_string_add_photos">Pridėti nuotrauką</string>
     <string name="no_photos_descr">Mes neturime šios vietovės nuotraukų</string>
     <string name="mapillary">Mapillary</string>
