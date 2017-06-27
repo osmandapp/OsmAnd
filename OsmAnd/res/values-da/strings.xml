@@ -2951,4 +2951,13 @@ Tidligere destination bliver sidste mellemliggende punkt.</string>
     <string name="import_gpx_failed_descr">OsmAnd kan ikke importere filen. Kontroller om OsmAnd har læsetilladelse på filplaceringen.</string>
     <string name="map_widget_ruler_control_first_mode">To-punkts lineal</string>
     <string name="map_widget_ruler_control_second_mode">Radius lineal</string>
+    <string name="wrong_user_name">Forkert brugernavn!</string>
+    <string name="shared_string_to">Til</string>
+    <string name="mapillary_menu_date_from">Fra</string>
+    <string name="mapillary_menu_title_dates">Datoer</string>
+    <string name="mapillary_menu_edit_text_hint">Indtast brugernavn</string>
+    <string name="mapillary_menu_descr_username">Se billeder tilføjet af en bestemt bruger.</string>
+    <string name="mapillary_menu_title_username">Brugernavn</string>
+    <string name="mapillary_menu_filter_description">Filtrer billeder efter brugernavn eller dato.</string>
+    <string name="mapillary_menu_descr_dates">Se billeder tilføjet i en bestemt periode.</string>
     </resources>
