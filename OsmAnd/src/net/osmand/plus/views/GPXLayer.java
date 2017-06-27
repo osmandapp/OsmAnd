@@ -388,14 +388,16 @@ public class GPXLayer extends OsmandMapLayer implements ContextMenuLayer.IContex
 			}
 			if (trackChartPoints != null) {
 				LatLon highlightedPoint = trackChartPoints.getHighlightedPoint();
-				if (highlightedPoint.getLatitude() >= latLonBounds.bottom
-						&& highlightedPoint.getLatitude() <= latLonBounds.top
-						&& highlightedPoint.getLongitude() >= latLonBounds.left
-						&& highlightedPoint.getLongitude() <= latLonBounds.right) {
-					float x = tileBox.getPixXFromLatLon(highlightedPoint.getLatitude(), highlightedPoint.getLongitude());
-					float y = tileBox.getPixYFromLatLon(highlightedPoint.getLatitude(), highlightedPoint.getLongitude());
-					paintIcon.setColorFilter(null);
-					canvas.drawBitmap(selectedPoint, x - selectedPoint.getWidth() / 2, y - selectedPoint.getHeight() / 2, paintIcon);
+				if (highlightedPoint != null) {
+					if (highlightedPoint.getLatitude() >= latLonBounds.bottom
+							&& highlightedPoint.getLatitude() <= latLonBounds.top
+							&& highlightedPoint.getLongitude() >= latLonBounds.left
+							&& highlightedPoint.getLongitude() <= latLonBounds.right) {
+						float x = tileBox.getPixXFromLatLon(highlightedPoint.getLatitude(), highlightedPoint.getLongitude());
+						float y = tileBox.getPixYFromLatLon(highlightedPoint.getLatitude(), highlightedPoint.getLongitude());
+						paintIcon.setColorFilter(null);
+						canvas.drawBitmap(selectedPoint, x - selectedPoint.getWidth() / 2, y - selectedPoint.getHeight() / 2, paintIcon);
+					}
 				}
 			}
 			this.fullObjectsLatLon = fullObjectsLatLon;
