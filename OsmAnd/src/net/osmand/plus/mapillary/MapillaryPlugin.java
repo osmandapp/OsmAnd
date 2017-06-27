@@ -26,6 +26,7 @@ import net.osmand.plus.R;
 import net.osmand.plus.activities.MapActivity;
 import net.osmand.plus.activities.MapActivityLayers;
 import net.osmand.plus.base.BottomSheetDialogFragment;
+import net.osmand.plus.dashboard.DashboardOnMap;
 import net.osmand.plus.views.MapInfoLayer;
 import net.osmand.plus.views.MapTileLayer;
 import net.osmand.plus.views.OsmandMapTileView;
@@ -130,10 +131,17 @@ public class MapillaryPlugin extends OsmandPlugin {
 	}
 
 	@Override
-	public void registerLayerContextMenuActions(final OsmandMapTileView mapView,
-												ContextMenuAdapter adapter,
-												final MapActivity mapActivity) {
+	public void registerLayerContextMenuActions(final OsmandMapTileView mapView, ContextMenuAdapter adapter, final MapActivity mapActivity) {
 		ContextMenuAdapter.ItemClickListener listener = new ContextMenuAdapter.OnRowItemClick() {
+
+			@Override
+			public boolean onRowItemClick(ArrayAdapter<ContextMenuItem> adapter, View view, int itemId, int position) {
+				if (itemId == R.string.mapillary) {
+					mapActivity.getDashboard().setDashboardVisibility(true, DashboardOnMap.DashboardType.MAPILLARY);
+					return false;
+				}
+				return true;
+			}
 
 			@Override
 			public boolean onContextMenuClick(final ArrayAdapter<ContextMenuItem> adapter, int itemId, final int pos, boolean isChecked) {
@@ -157,10 +165,12 @@ public class MapillaryPlugin extends OsmandPlugin {
 		if (rasterLayer.getMap() == null) {
 			settings.SHOW_MAPILLARY.set(false);
 		}
-		adapter.addItem(new ContextMenuItem.ItemBuilder().setTitleId(R.string.mapillary, mapActivity)
+		adapter.addItem(new ContextMenuItem.ItemBuilder()
+				.setTitleId(R.string.mapillary, mapActivity)
 				.setSelected(settings.SHOW_MAPILLARY.get())
 				.setColor(settings.SHOW_MAPILLARY.get() ? R.color.osmand_orange : ContextMenuItem.INVALID_ID)
 				.setIcon(R.drawable.ic_action_mapillary)
+				.setSecondaryIcon(R.drawable.ic_action_additional_option)
 				.setListener(listener)
 				.setPosition(11)
 				.createItem());

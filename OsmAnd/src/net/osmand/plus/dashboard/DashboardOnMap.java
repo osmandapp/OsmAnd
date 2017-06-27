@@ -74,7 +74,7 @@ import net.osmand.plus.helpers.WaypointHelper.LocationPointWrapper;
 import net.osmand.plus.mapcontextmenu.other.MapRouteInfoMenu;
 import net.osmand.plus.mapcontextmenu.other.RoutePreferencesMenu;
 import net.osmand.plus.mapcontextmenu.other.RoutePreferencesMenu.LocalRoutingParameter;
-import net.osmand.plus.mapillary.MapillaryPlugin;
+import net.osmand.plus.mapillary.MapillaryFiltersFragment;
 import net.osmand.plus.mapillary.MapillaryPlugin.MapillaryFirstDialogFragment;
 import net.osmand.plus.rastermaps.OsmandRasterMapsPlugin;
 import net.osmand.plus.routing.RoutingHelper;
@@ -188,6 +188,7 @@ public class DashboardOnMap implements ObservableScrollViewCallbacks, DynamicLis
 		DASHBOARD,
 		OVERLAY_MAP,
 		UNDERLAY_MAP,
+		MAPILLARY,
 		CONTOUR_LINES,
 		HILLSHADE,
 		MAP_MARKERS,
@@ -462,6 +463,8 @@ public class DashboardOnMap implements ObservableScrollViewCallbacks, DynamicLis
 			tv.setText(R.string.map_markers);
 		} else if (visibleType == DashboardType.MAP_MARKERS_SELECTION) {
 			tv.setText(R.string.select_map_markers);
+		} else if (visibleType == DashboardType.MAPILLARY) {
+			tv.setText(R.string.mapillary);
 		} else if (visibleType == DashboardType.CONTOUR_LINES) {
 			tv.setText(R.string.srtm_plugin_name);
 		} else if (visibleType == DashboardType.HILLSHADE) {
@@ -812,8 +815,15 @@ public class DashboardOnMap implements ObservableScrollViewCallbacks, DynamicLis
 			updateDownloadBtn();
 			View listViewLayout = dashboardView.findViewById(R.id.dash_list_view_layout);
 			ScrollView scrollView = (ScrollView) dashboardView.findViewById(R.id.main_scroll);
-			if (visibleType == DashboardType.DASHBOARD) {
-				addOrUpdateDashboardFragments();
+			if (visibleType == DashboardType.DASHBOARD || visibleType == DashboardType.MAPILLARY) {
+				removeMapillaryFiltersFragment();
+				if (visibleType == DashboardType.DASHBOARD) {
+					addOrUpdateDashboardFragments();
+				} else {
+					mapActivity.getSupportFragmentManager().beginTransaction()
+							.replace(R.id.content, new MapillaryFiltersFragment(), MapillaryFiltersFragment.TAG)
+							.commit();
+				}
 				scrollView.setVisibility(View.VISIBLE);
 				scrollView.scrollTo(0, 0);
 				listViewLayout.setVisibility(View.GONE);
@@ -1041,7 +1051,13 @@ public class DashboardOnMap implements ObservableScrollViewCallbacks, DynamicLis
 	}
 
 	public void refreshContent(boolean force) {
-		if (visibleType == DashboardType.WAYPOINTS
+		if (visibleType == DashboardType.MAPILLARY) {
+			Fragment mapillaryFragment = mapActivity.getSupportFragmentManager().findFragmentByTag(MapillaryFiltersFragment.TAG);
+			mapActivity.getSupportFragmentManager().beginTransaction()
+					.detach(mapillaryFragment)
+					.attach(mapillaryFragment)
+					.commit();
+		} else if (visibleType == DashboardType.WAYPOINTS
 				|| visibleType == DashboardType.MAP_MARKERS
 				|| visibleType == DashboardType.MAP_MARKERS_SELECTION
 				|| visibleType == DashboardType.CONFIGURE_SCREEN
@@ -1228,6 +1244,18 @@ public class DashboardOnMap implements ObservableScrollViewCallbacks, DynamicLis
 		builder.addFragmentsData(fragmentsData)
 				.addFragmentsData(OsmandPlugin.getPluginsCardsList())
 				.getFragmentTransaction().commit();
+	}
+
+	private void removeMapillaryFiltersFragment() {
+		FragmentManager manager = mapActivity.getSupportFragmentManager();
+		Fragment mapillaryFragment = manager.findFragmentByTag(MapillaryFiltersFragment.TAG);
+		if (mapillaryFragment != null) {
+			OsmandSettings settings = getMyApplication().getSettings();
+			TransactionBuilder builder = new TransactionBuilder(manager, settings, mapActivity);
+			builder.getFragmentTransaction()
+					.remove(mapillaryFragment)
+					.commit();
+		}
 	}
 
 	public boolean isVisible() {
