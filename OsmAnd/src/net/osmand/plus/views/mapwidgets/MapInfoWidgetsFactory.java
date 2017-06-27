@@ -187,6 +187,7 @@ public class MapInfoWidgetsFactory {
         final TextInfoWidget rulerControl = new TextInfoWidget(map) {
 			boolean needNewLatLon;
 			long cacheMultiTouchEndTime;
+			RulerControlLayer rulerLayer = map.getMapLayers().getRulerControlLayer();
 
 			@Override
 			public boolean updateInfo(DrawSettings drawSettings) {
@@ -197,7 +198,7 @@ public class MapInfoWidgetsFactory {
 					cacheMultiTouchEndTime = view.getMultiTouchEndTime();
 					needNewLatLon = true;
 				}
-				if (!view.isZooming() && view.isMultiTouch() || System.currentTimeMillis() - cacheMultiTouchEndTime < RulerControlLayer.DELAY) {
+				if (rulerLayer.isShowTwoFingersDistance()) {
 					if (needNewLatLon) {
 						float x1 = view.getFirstTouchPointX();
 						float y1 = view.getFirstTouchPointY();

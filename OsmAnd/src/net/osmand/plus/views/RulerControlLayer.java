@@ -27,7 +27,7 @@ import gnu.trove.list.array.TIntArrayList;
 
 public class RulerControlLayer extends OsmandMapLayer {
 
-    public static final long DELAY = 1500;
+    public static final long DELAY = 2000;
     private static final int TEXT_SIZE = 14;
 
     private final MapActivity mapActivity;
@@ -40,6 +40,7 @@ public class RulerControlLayer extends OsmandMapLayer {
     private float maxRadius;
     private int radius;
     private double roundedDist;
+    private boolean showTwoFingersDistance;
 
     private QuadPoint cacheCenter;
     private int cacheIntZoom;
@@ -62,6 +63,10 @@ public class RulerControlLayer extends OsmandMapLayer {
 
     public RulerControlLayer(MapActivity mapActivity) {
         this.mapActivity = mapActivity;
+    }
+
+    public boolean isShowTwoFingersDistance() {
+        return showTwoFingersDistance;
     }
 
     @Override
@@ -122,7 +127,8 @@ public class RulerControlLayer extends OsmandMapLayer {
                 cacheMultiTouchEndTime = view.getMultiTouchEndTime();
                 refreshMapDelayed();
             }
-            if (!view.isMultiTouchCancelled() && !view.isZooming() && view.isMultiTouch() || System.currentTimeMillis() - cacheMultiTouchEndTime < DELAY) {
+            showTwoFingersDistance = !view.isZooming() && view.isMultiTouch() || System.currentTimeMillis() - cacheMultiTouchEndTime < DELAY;
+            if (showTwoFingersDistance) {
                 float x1 = view.getFirstTouchPointX();
                 float y1 = view.getFirstTouchPointY();
                 float x2 = view.getSecondTouchPointX();

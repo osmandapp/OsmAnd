@@ -167,7 +167,6 @@ public class OsmandMapTileView implements IMapDownloaderCallback {
 	private float secondTouchPointY;
 	private boolean multiTouch;
 	private long multiTouchEndTime;
-	private boolean multiTouchCancelled;
 
 	public OsmandMapTileView(MapActivity activity, int w, int h) {
 		this.activity = activity;
@@ -331,10 +330,6 @@ public class OsmandMapTileView implements IMapDownloaderCallback {
 
 	public boolean isMultiTouch() {
 		return multiTouch;
-	}
-
-	public boolean isMultiTouchCancelled() {
-		return multiTouchCancelled;
 	}
 
 	public long getMultiTouchEndTime() {
@@ -1055,7 +1050,6 @@ public class OsmandMapTileView implements IMapDownloaderCallback {
 				secondTouchPointX = x2;
 				secondTouchPointY = y2;
 				multiTouch = true;
-				multiTouchCancelled = false;
 			}
 		}
 
@@ -1066,7 +1060,6 @@ public class OsmandMapTileView implements IMapDownloaderCallback {
 			secondTouchPointX = x2;
 			secondTouchPointY = y2;
 			multiTouch = true;
-			multiTouchCancelled = false;
 		}
 
 		@Override
@@ -1083,7 +1076,7 @@ public class OsmandMapTileView implements IMapDownloaderCallback {
 
 		@Override
 		public void onActionCancel() {
-			multiTouchCancelled = true;
+			multiTouch = false;
 		}
 
 		@Override
