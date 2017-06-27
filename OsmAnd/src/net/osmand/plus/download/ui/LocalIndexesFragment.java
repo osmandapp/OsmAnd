@@ -3,7 +3,6 @@ package net.osmand.plus.download.ui;
 import android.app.Activity;
 import android.content.DialogInterface;
 import android.content.res.Resources;
-import android.content.res.TypedArray;
 import android.graphics.Typeface;
 import android.graphics.drawable.Drawable;
 import android.os.AsyncTask;
@@ -483,7 +482,7 @@ public class LocalIndexesFragment extends OsmandExpandableListFragment implement
 					} else if (operation == CLEAR_TILES_OPERATION) {
 						ITileSource src =  (ITileSource) info.getAttachedObject();
 						if(src != null) {
-							src.clearTiles(info.getPathToData());
+							src.deleteTiles(info.getPathToData());
 						}
 					}
 					total++;
