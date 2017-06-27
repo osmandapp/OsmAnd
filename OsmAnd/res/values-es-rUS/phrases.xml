@@ -298,7 +298,7 @@
 	<string name="poi_storage_tank">Tanque de almacenamiento</string>
 	<string name="poi_college">Instituto educativo</string>
 	<string name="poi_driving_school">Autoescuela</string>
-	<string name="poi_kindergarten">Jardín infantil</string>
+	<string name="poi_kindergarten">Jardín de infantes</string>
 	<string name="poi_school">Escuela</string>
 	<string name="poi_training">Centro de capacitación</string>
 	<string name="poi_university">Universidad</string>
@@ -1903,9 +1903,9 @@
 	<string name="poi_surveillance_indoor">Vigilancia interior</string>
 	<string name="poi_surveillance_outdoor">Vigilancia exterior</string>
 	<string name="poi_surveillance_public">Vigilancia pública</string>
-	<string name="poi_clothes_women">De mujer</string>
+	<string name="poi_clothes_women">Femenina</string>
 	<string name="poi_clothes_underwear">Ropa interior</string>
-	<string name="poi_clothes_men">De hombre</string>
+	<string name="poi_clothes_men">Masculina</string>
 	<string name="poi_clothes_wedding">Vestidos de novia</string>
 	<string name="poi_clothes_sports">Deportiva</string>
 	<string name="poi_clothes_babies">De bebes</string>
@@ -1928,9 +1928,9 @@
 <string name="poi_clothes_denim">De mezclilla (vaqueros/jeans)</string>
 	<string name="poi_historic_milestone">Hito histórico</string>
 	<string name="poi_shoes_children">De niños</string>
-	<string name="poi_shoes_women">De mujer</string>
-	<string name="poi_shoes_sport">Deportivas</string>
-	<string name="poi_shoes_men">De hombres</string>
+	<string name="poi_shoes_women">Femenino</string>
+	<string name="poi_shoes_sport">Deportivo</string>
+	<string name="poi_shoes_men">Masculino</string>
 	<string name="poi_shoes_orthopedic">Ortopédico</string>
 	<string name="poi_historic_manor">Mansión histórica</string>
 	<string name="poi_castle_type_stately">Castillo: Majestuoso</string>
@@ -2103,7 +2103,7 @@
 	<string name="poi_historic_period_old_kingdom">Período histórico: Antiguo reinado (2686 – 2181 aC)</string>
 	<string name="poi_historic_period_first_intermediate_period">Período histórico: Primer período intermedio (2181 – 2055 aC)</string>
 	<string name="poi_historic_period_second_intermediate_period">Período histórico: Segundo período intermedio (1650 – 1550 aC)</string>
-	<string name="poi_historic_period_third_intermediate_period">"Período histórico: Tercer período intermedio (1069 – 664 aC) "</string>
+	<string name="poi_historic_period_third_intermediate_period">Período histórico: Tercer período intermedio (1069 – 664 aC)</string>
 	<string name="poi_historic_period_first_persian_period">Período histórico: Primer período persa</string>
 	<string name="poi_historic_period_late_period">Período histórico: Último período (664 – 332 aC)</string>
 	<string name="poi_historic_period_second_persian_period">Período histórico: Segundo período persa</string>
