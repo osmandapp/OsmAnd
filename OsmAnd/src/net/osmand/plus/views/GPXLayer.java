@@ -422,19 +422,21 @@ public class GPXLayer extends OsmandMapLayer implements ContextMenuLayer.IContex
 		paintGridCircle.setColor(color);
         paintGridCircle.setAlpha(255);
 		QuadRect latLonBounds = tileBox.getLatLonBounds();
-		List<WptPt> xAxisPoints = trackChartPoints.getXAxisPoints();
 		float r = 3 * tileBox.getDensity();
-		for (int i = 0; i < xAxisPoints.size(); i++) {
-			WptPt axisPoint = xAxisPoints.get(i);
-			if (axisPoint != null) {
-				if (axisPoint.getLatitude() >= latLonBounds.bottom
-						&& axisPoint.getLatitude() <= latLonBounds.top
-						&& axisPoint.getLongitude() >= latLonBounds.left
-						&& axisPoint.getLongitude() <= latLonBounds.right) {
-					float x = tileBox.getPixXFromLatLon(axisPoint.getLatitude(), axisPoint.getLongitude());
-					float y = tileBox.getPixYFromLatLon(axisPoint.getLatitude(), axisPoint.getLongitude());
-					canvas.drawCircle(x, y, r + 2 * (float) Math.ceil(tileBox.getDensity()), paintGridOuterCircle);
-					canvas.drawCircle(x, y, r + (float) Math.ceil(tileBox.getDensity()), paintGridCircle);
+		List<WptPt> xAxisPoints = trackChartPoints.getXAxisPoints();
+		if (xAxisPoints != null) {
+			for (int i = 0; i < xAxisPoints.size(); i++) {
+				WptPt axisPoint = xAxisPoints.get(i);
+				if (axisPoint != null) {
+					if (axisPoint.getLatitude() >= latLonBounds.bottom
+							&& axisPoint.getLatitude() <= latLonBounds.top
+							&& axisPoint.getLongitude() >= latLonBounds.left
+							&& axisPoint.getLongitude() <= latLonBounds.right) {
+						float x = tileBox.getPixXFromLatLon(axisPoint.getLatitude(), axisPoint.getLongitude());
+						float y = tileBox.getPixYFromLatLon(axisPoint.getLatitude(), axisPoint.getLongitude());
+						canvas.drawCircle(x, y, r + 2 * (float) Math.ceil(tileBox.getDensity()), paintGridOuterCircle);
+						canvas.drawCircle(x, y, r + (float) Math.ceil(tileBox.getDensity()), paintGridCircle);
+					}
 				}
 			}
 		}

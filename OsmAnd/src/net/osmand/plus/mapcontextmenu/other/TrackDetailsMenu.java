@@ -191,9 +191,15 @@ public class TrackDetailsMenu {
 				}
 			} else {
 				float distance = pos * dataSet.getDivX();
-				for (WptPt p : segment.points) {
-					if (p.distance >= distance) {
-						wpt = p;
+				double pointDistance = 0;
+				for (int i = 0; i < segment.points.size(); i++) {
+					if (i != 0) {
+						if (segment.points.get(i).distance < segment.points.get(i - 1).distance) {
+							pointDistance += segment.points.get(i - 1).distance;
+						}
+					}
+					if (pointDistance + segment.points.get(i).distance >= distance) {
+						wpt = segment.points.get(i);
 						break;
 					}
 				}
@@ -231,18 +237,24 @@ public class TrackDetailsMenu {
 			} else {
 				float startDistance = startPos * dataSet.getDivX();
 				float endDistance = endPos * dataSet.getDivX();
-				for (WptPt p : segment.points) {
-					if (p.distance >= startDistance && p.distance <= endDistance) {
+				double pointDistance = 0;
+				for (int i = 0; i < segment.points.size(); i++) {
+					if (i != 0) {
+						if (segment.points.get(i).distance < segment.points.get(i - 1).distance) {
+							pointDistance += segment.points.get(i - 1).distance;
+						}
+					}
+					if (segment.points.get(i).distance + pointDistance >= startDistance && segment.points.get(i).distance <= endDistance) {
 						if (left == 0 && right == 0) {
-							left = p.getLongitude();
-							right = p.getLongitude();
-							top = p.getLatitude();
-							bottom = p.getLatitude();
+							left = segment.points.get(i).getLongitude();
+							right = segment.points.get(i).getLongitude();
+							top = segment.points.get(i).getLatitude();
+							bottom = segment.points.get(i).getLatitude();
 						} else {
-							left = Math.min(left, p.getLongitude());
-							right = Math.max(right, p.getLongitude());
-							top = Math.max(top, p.getLatitude());
-							bottom = Math.min(bottom, p.getLatitude());
+							left = Math.min(left, segment.points.get(i).getLongitude());
+							right = Math.max(right, segment.points.get(i).getLongitude());
+							top = Math.max(top, segment.points.get(i).getLatitude());
+							bottom = Math.min(bottom, segment.points.get(i).getLatitude());
 						}
 					}
 				}
