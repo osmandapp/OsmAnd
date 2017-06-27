@@ -36,6 +36,8 @@ public class MultiTouchSupport {
 			public void onActionPointerDownOrMove(float x1, float y1, float x2, float y2);
 
 			public void onActionPointerUp();
+
+			public void onActionCancel();
 	}
 
 	private boolean multiTouchAPISupported = false;
@@ -86,6 +88,9 @@ public class MultiTouchSupport {
 		}
 		int actionCode = event.getAction() & ACTION_MASK;
 		try {
+			if (actionCode == MotionEvent.ACTION_CANCEL) {
+				listener.onActionCancel();
+			}
 			Integer pointCount = (Integer) getPointerCount.invoke(event);
 			if(pointCount < 2){
 				if(inZoomMode){

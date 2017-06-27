@@ -122,7 +122,7 @@ public class RulerControlLayer extends OsmandMapLayer {
                 cacheMultiTouchEndTime = view.getMultiTouchEndTime();
                 refreshMapDelayed();
             }
-            if (!view.isZooming() && view.isMultiTouch() || System.currentTimeMillis() - cacheMultiTouchEndTime < DELAY) {
+            if (!view.isMultiTouchCancelled() && !view.isZooming() && view.isMultiTouch() || System.currentTimeMillis() - cacheMultiTouchEndTime < DELAY) {
                 float x1 = view.getFirstTouchPointX();
                 float y1 = view.getFirstTouchPointY();
                 float x2 = view.getSecondTouchPointX();
