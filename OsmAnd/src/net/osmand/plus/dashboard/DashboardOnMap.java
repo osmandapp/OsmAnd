@@ -1,6 +1,7 @@
 package net.osmand.plus.dashboard;
 
 import android.annotation.SuppressLint;
+import android.content.Context;
 import android.content.Intent;
 import android.content.res.Resources;
 import android.graphics.drawable.ColorDrawable;
@@ -20,6 +21,7 @@ import android.view.ViewTreeObserver;
 import android.view.animation.Animation;
 import android.view.animation.Animation.AnimationListener;
 import android.view.animation.TranslateAnimation;
+import android.view.inputmethod.InputMethodManager;
 import android.widget.AbsListView;
 import android.widget.AdapterView;
 import android.widget.AdapterView.OnItemClickListener;
@@ -1337,10 +1339,21 @@ public class DashboardOnMap implements ObservableScrollViewCallbacks, DynamicLis
 
 	private void backPressed() {
 		if (previousVisibleType != visibleType && previousVisibleType != null) {
+			if (visibleType == DashboardType.MAPILLARY) {
+				hideKeyboard();
+			}
 			visibleType = null;
 			setDashboardVisibility(true, previousVisibleType);
 		} else {
 			hideDashboard();
+		}
+	}
+
+	private void hideKeyboard() {
+		View currentFocus = mapActivity.getCurrentFocus();
+		if (currentFocus != null) {
+			InputMethodManager imm = (InputMethodManager) mapActivity.getSystemService(Context.INPUT_METHOD_SERVICE);
+			imm.hideSoftInputFromWindow(currentFocus.getWindowToken(), 0);
 		}
 	}
 
