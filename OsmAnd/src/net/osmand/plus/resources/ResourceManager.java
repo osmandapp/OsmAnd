@@ -337,12 +337,11 @@ public class ResourceManager {
 		return cache != null && cache.getTileForMapSync(file, map, x, y, zoom, loadFromInternetIfNeeded) != null;
 	}
 
-	public void clearCacheAndTile(@NonNull ITileSource map) {
-		String path = dirWithTiles.getAbsolutePath() + "/" + map.getName();
-		map.clearTiles(path);
+	public void clearCacheAndTiles(@NonNull ITileSource map) {
+		map.deleteTiles(new File(dirWithTiles, map.getName()).getAbsolutePath());
 		TilesCache cache = getTilesCache(map);
 		if (cache != null) {
-			cache.clearTileCache(map.getName());
+			cache.clearTiles();
 		}
 	}
 

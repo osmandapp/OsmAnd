@@ -100,8 +100,8 @@ public class MapillaryFiltersFragment extends BaseOsmAndFragment {
             @Override
             public void onClick(View view) {
                 ResourceManager manager = getMyApplication().getResourceManager();
-                manager.clearCacheAndTile(TileSourceManager.getMapillaryVectorSource());
-                manager.clearCacheAndTile(TileSourceManager.getMapillaryRasterSource());
+                manager.clearCacheAndTiles(TileSourceManager.getMapillaryVectorSource());
+                manager.clearCacheAndTiles(TileSourceManager.getMapillaryRasterSource());
                 plugin.updateLayers(mapActivity.getMapView(), mapActivity);
             }
         });
