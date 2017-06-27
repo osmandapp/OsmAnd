@@ -2851,5 +2851,8 @@ Representa el área: %1$s x %2$s</string>
     <string name="mapillary_menu_edit_text_hint">Tipo de nombre de usuario</string>
     <string name="mapillary_menu_descr_username">Ver imágenes añadidas por un determinado usuario.</string>
     <string name="mapillary_menu_title_username">Nombre de usuario</string>
-    <string name="mapillary_menu_filter_description">Puedes filtrar imágenes por nombre de usuario o por fecha.</string>
+    <string name="mapillary_menu_filter_description">Puedes filtrar imágenes por usuario o por fecha.</string>
+    <string name="shared_string_reload">Recargar</string>
+    <string name="mapillary_menu_descr_tile_cache">Recargar teselas para ver la información actualizada.</string>
+    <string name="mapillary_menu_title_tile_cache">Caché de teselas</string>
     </resources>
