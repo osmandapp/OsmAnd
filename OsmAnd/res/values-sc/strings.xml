@@ -2544,11 +2544,11 @@ Si istimas OsmAnd e OSM e los boles suportare, custa est una manera perfeta pro 
     <string name="gpx_logging_no_data">Datu perunu</string>
     <string name="rendering_attr_contourColorScheme_description">Ischema de colores de sas lìnias de livellu</string>
     <string name="save_track_min_speed">Lestresa mìnima pro sa registratzione</string>
-    <string name="save_track_min_speed_descr">Issèbera sa lestresa mìnima pro registrare unu puntu</string>
+    <string name="save_track_min_speed_descr">Filtru: Issèbera sa lestresa mìnima pro registrare unu puntu</string>
     <string name="save_track_min_distance">Rilevamentu de movimentu pro sa registratzione</string>
-    <string name="save_track_min_distance_descr">Issèbera sa distàntzia mìnima dae s\'ùrtima positzione pro registrare unu puntu</string>
+    <string name="save_track_min_distance_descr">Filtru: Issèbera sa distàntzia mìnima dae s\'ùrtima positzione pro registrare unu puntu</string>
     <string name="save_track_precision">Pretzisione mìnima de registratzione</string>
-    <string name="save_track_precision_descr">Issèbera sa pretzisione mìnima pro sa registratzione</string>
+    <string name="save_track_precision_descr">Filtru: Issèbera sa pretzisione mìnima pro sa registratzione</string>
     <string name="christmas_poi">PDI de Nadale</string>
     <string name="christmas_desc">Antitzipende sas vacàntzias de Nadale (Pasca de Nadale e sa Prima die de s\'annu) est possìbile isseberare de visualizare sos PDI assotziados a sa Pasca de Nadale: s\'àrbore de Nadale, sos mercados, etz.</string>
     <string name="christmas_desc_q">Ammustrare sos PDI de Nadale?</string>
