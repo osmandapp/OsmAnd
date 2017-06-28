@@ -2868,8 +2868,8 @@ Facebook：https://www.facebook.com/osmandapp
     <string name="distance_moving">距離已校正</string>
     <string name="shared_string_permissions">權限</string>
     <string name="import_gpx_failed_descr">OsmAnd 無法匯入檔案。 請檢查 OsmAnd 是否有權限從該位置去讀取檔案。</string>
-    <string name="map_widget_ruler_control_first_mode">兩點直尺</string>
-    <string name="map_widget_ruler_control_second_mode">半徑直尺</string>
+    <string name="map_widget_ruler_control_first_mode">兩點間測量尺</string>
+    <string name="map_widget_ruler_control_second_mode">半徑測量尺</string>
     <string name="wrong_user_name">錯誤的使用者名稱！</string>
     <string name="shared_string_to">至</string>
     <string name="mapillary_menu_date_from">從</string>
