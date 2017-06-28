@@ -1095,24 +1095,18 @@ POIの更新は利用できません</string>
 	<string name="av_photo_play_sound">写真撮影時に撮影音を使用</string>
 	<string name="av_camera_focus_infinity">フォーカスを無限遠(∞)にセット</string>
 	<string name="av_camera_focus_macro">マクロ(近距離)フォーカスモード</string>
-	<string name="osmand_srtm_long_description_1000_chars">"このプラグインは、等高線のオーバーレイ表示と陰影起伏図(浮き彫り表示)の両方がOsmAndの標準マップ上に表示出来るように用意されています。
-この機能は地形の構造を知る必要のある、アスリート、ハイカー、登山者、そしてその他の多くの人々の助けになるでしょう。
-
-
-このグローバルデータ(北緯70°から南緯70°の間)はSRTM(スペースシャトル立体地形データ)とNASAの地球観測衛星であるテラ(Terra)に搭載されたASTER(資源探査用将来型センサ)と呼ばれる機器の観測結果をベースにしたものです。 ASTERはNASAと日本の経済産業省(METI)、そして宇宙システム開発利用推進機構(J-spacesystems)の共同作業によるものです。
- "</string>
+	<string name="osmand_srtm_long_description_1000_chars">このプラグインは、等高線のオーバーレイ表示と陰影起伏図(浮き彫り表示)の両方がOsmAndの標準マップ上に表示出来るように用意されています。 この機能は地形の構造を知る必要のある、アスリート、ハイカー、登山者、そしてその他の多くの人々の助けになるでしょう。
+\n
+\nこのグローバルデータ(北緯70°から南緯70°の間)はSRTM(スペースシャトル立体地形データ)とNASAの地球観測衛星であるテラ(Terra)に搭載されたASTER(資源探査用将来型センサ)と呼ばれる機器の観測結果をベースにしたものです。 ASTERはNASAと日本の経済産業省(METI)、そして宇宙システム開発利用推進機構(J-spacesystems)の共同作業によるものです。</string>
     <string name="audionotes_location_not_defined">メモを取る地点が指定されていません。マップ上を長押しでメニューを開き、右端のボタン『その他のアクション』から任意の形式のメモを取ることが出来ます。</string>
     <string name="map_widget_audionotes">音声メモ</string>
     <string name="audionotes_plugin_description">音声/動画メモプラグインは、旅行中の音声/写真/動画に関するメモ機能を提供します。マップ画面上のボタンまたはコンテキストメニューから使用出来ます。</string>
     <string name="audionotes_plugin_name">音声/動画メモ</string>
     <string name="index_srtm_parts">パート</string>
     <string name="index_srtm_ele">等高線</string>
-    <string name="srtm_plugin_description">"このプラグインは、等高線のオーバーレイ表示と陰影起伏図(浮き彫り表示)の両方がOsmAndの標準マップ上に表示出来るように用意されています。
-この機能は地形の構造を知る必要のある、アスリート、ハイカー、登山者、そしてその他の多くの人々の助けになるでしょう。（等高線、陰影起伏図はプラグインを有効にした後、別途ダウンロードしてください）
-
-
-このグローバルデータ(北緯70°から南緯70°の間)はSRTM(スペースシャトル立体地形データ)とNASAの地球観測衛星であるテラ(Terra)に搭載されたASTER(資源探査用将来型センサ)と呼ばれる機器の観測結果をベースにしたものです。 ASTERはNASAと日本の経済産業省(METI)、そして宇宙システム開発利用推進機構(J-spacesystems)の共同作業によるものです。
- "</string>
+    <string name="srtm_plugin_description">このプラグインは、等高線のオーバーレイ表示と陰影起伏図(浮き彫り表示)の両方がOsmAndの標準マップ上に表示出来るように用意されています。 この機能は地形の構造を知る必要のある、アスリート、ハイカー、登山者、そしてその他の多くの人々の助けになるでしょう。（等高線、陰影起伏図はプラグインを有効にした後、別途ダウンロードしてください）
+\n
+\nこのグローバルデータ(北緯70°から南緯70°の間)はSRTM(スペースシャトル立体地形データ)とNASAの地球観測衛星であるテラ(Terra)に搭載されたASTER(資源探査用将来型センサ)と呼ばれる機器の観測結果をベースにしたものです。 ASTERはNASAと日本の経済産業省(METI)、そして宇宙システム開発利用推進機構(J-spacesystems)の共同作業によるものです。</string>
     <string name="srtm_plugin_name">等高線</string>
     <string name="download_select_map_types">他のマップ</string>
     <string name="download_srtm_maps">等高線</string>
@@ -1336,12 +1330,11 @@ POIの更新は利用できません</string>
 	
     
 	<string name="rendering_attr_noPolygons_description">マップ上の土地の特徴を透明にする</string>
-	<string name="osmand_rastermaps_plugin_description">"このプラグインを使用すると、標準のOpenStreetMapタイル(Mapnik風)から衛星画像、天気図、気候マップ、地質図、陰影起伏図など、目的に応じた様々な(タイル又はラスタと呼ばれる)オンラインマップにアクセスし、レイヤーに反映することができます。
-\n
-\n
-\nこれらのマップのいずれも(OsmAnd標準オフラインマップの様に)ベースマップとして使用でき、オーバーレイマップ、アンダーレイマップとしてもOsmAndマップ画面に表示させることが出来ます。アンダーレイマップを見やすくしたい時は、OsmAndベクターマップの特定の要素を必要に応じて\'マップ設定\'メニューから簡単に非表示にすることができます。
-\n
-\nタイルマップはオンライン経由で直接取得することが可能です、また様々なサードパーティ製マップ作成ツールで作成したSQLiteデータベースをオフラインで使用するために調整することができます。(手動でOsmAndのデータフォルダにコピーする必要があります) "</string>
+	<string name="osmand_rastermaps_plugin_description">このプラグインを使用すると、標準のOpenStreetMapタイル(Mapnik風)から衛星画像、天気図、気候マップ、地質図、陰影起伏図など、目的に応じた様々な(タイル又はラスタと呼ばれる)オンラインマップにアクセスし、レイヤーに反映することができます。 
+\n 
+\nこれらのマップのいずれも(OsmAnd標準オフラインマップの様に)ベースマップとして使用でき、オーバーレイマップ、アンダーレイマップとしてもOsmAndマップ画面に表示させることが出来ます。アンダーレイマップを見やすくしたい時は、OsmAndベクターマップの特定の要素を必要に応じて\'マップ設定\'メニューから簡単に非表示にすることができます。 
+\n 
+\nタイルマップはオンライン経由で直接取得することが可能です、また様々なサードパーティ製マップ作成ツールで作成したSQLiteデータベースをオフラインで使用するために調整することができます。(手動でOsmAndのデータフォルダにコピーする必要があります)</string>
 	
 	
 	<string name="osm_editing_plugin_description">このプラグイン経由でPOIオブジェクトの作成や変更、OSM注記の開示やコメント、記録したGPXファイルを使用しOSMの改善に貢献することが出来ます。OSM(OpenStreetMap)はコミュニティ主導で行われる、世界規模のパブリックドメイン(特定の知的財産権に影響されない)マップ作成のプロジェクトです。詳しくはhttps://openstreetmap.orgを参照してください。アプリに必要な情報を入力することでOsmAndからもいくつかの作業を直接行うことができます。積極的な参加を歓迎いたします。</string>
@@ -1433,9 +1426,13 @@ POIの更新は利用できません</string>
 新しく登録しますか？</string>
     <string name="osmo_group_by_invite">招待枠での認証</string>
     <string name="stop_navigation_service">停止</string>
-	<string name="osmo_group_information_desc">" - グループを作成する際、名前とグループに関する説明を入力してください。\n - アプリから作成した際は簡易タイプでグループが作成されます。詳細はウェブサイトで https://osmo.mobi/g/new
-\n - グループはウェブサイトを通じて場所、経路、地点の全てを管理できます。
-\n - POIグループでない場合は、グループ内1人だけの管理は推奨しません。\n - プライベートグループは8人に制限されています。\n - 詳細な使用条件は以下ウェブサイトにて  https://OsMo.mobi\n - 特殊な使用条件の場合はサポートまでお問い合わせください: osmo.mobi@gmail.com "</string>
+	<string name="osmo_group_information_desc">"- グループを作成する際、名前とグループに関する説明を入力してください。
+\n - アプリから作成した際は簡易タイプでグループが作成されます。詳細はウェブサイトで https://osmo.mobi/g/new 
+\n - グループはウェブサイトを通じて場所、経路、地点の全てを管理できます。 
+\n - POIグループでない場合は、グループ内1人だけの管理は推奨しません。
+\n - プライベートグループは8人に制限されています。
+\n - 詳細な使用条件は以下ウェブサイトにて  https://OsMo.mobi
+\n - 特殊な使用条件の場合はサポートまでお問い合わせください: osmo.mobi@gmail.com"</string>
     <string name="osmo_group_information">グループを作成する前に必ずお読み下さい！</string>
     <string name="gpx_start_new_segment">新しいセグメントの開始</string>
     <string name="osmo_not_signed_in">OsMoログインの失敗</string>
@@ -1572,11 +1569,11 @@ POIの更新は利用できません</string>
 	<string name="keep_informing_descr">ナビゲーション指示を繰り返す間隔を設定します</string>
     <string name="arrival_distance">目的地周辺でのアナウンスタイミング</string>
     <string name="arrival_distance_descr">目的地周辺でのアナウンスをするタイミングを設定します</string>
-    <string name="osmo_plugin_description">"このプラグインはOpenStreetMapモニタリング機能の一部を提供します。 https://osmo.mobi を参照して下さい。
-\n
-\nあなたはグループに参加している全てのデバイスをリアルタイムで追跡することが可能です。あなたが属しているグループのアップロードされた地点や経路を見ることも出来ます。
-\n
-\nあなたが OsMo.mobi のウェブサイト上で規則に従い作成したグループは、数ヶ月削除されることはありません。 "</string>
+    <string name="osmo_plugin_description">このプラグインはOpenStreetMapモニタリング機能の一部を提供します。 https://osmo.mobi を参照して下さい。 
+\n 
+\nあなたはグループに参加している全てのデバイスをリアルタイムで追跡することが可能です。あなたが属しているグループのアップロードされた地点や経路を見ることも出来ます。 
+\n 
+\nあなたが OsMo.mobi のウェブサイト上で規則に従い作成したグループは、数ヶ月削除されることはありません。</string>
     <string name="osmo_plugin_name">OpenStreetMapモニタリング</string>
    	<string name="always_center_position_on_map">移動時、現在地を画面中央よりに表示</string>
     <string name="voice_pref_title">音声関連設定</string>
@@ -1687,9 +1684,9 @@ POIの更新は利用できません</string>
     <string name="rendering_value_car_name">車</string>
     <string name="rendering_value_bicycle_name">自転車</string>
     <string name="rendering_value_pedestrian_name">徒歩</string>
-    <string name="record_plugin_description">"このプラグインはマップ画面のGPXログウィジェットをタッチして経路の記録と保存が出来る機能を有効化します、またログとして自動的にナビゲーションルートをGPXファイルに記録することもできます。
-\n
-\n記録された経路は、友人と共有することができ、またOSM発展のためにも使用されます。アスリートなら記録した経路をトレーニングモニターとして利用することが出来ます。ラップタイムや平均速度等いくつかの基本的な経路分析ならOsmAndから直接行うことができ、記録した経路を後で特別なサードパーティ製解析ツールで分析することも出来ます。 "</string>
+    <string name="record_plugin_description">このプラグインはマップ画面のGPXログウィジェットをタッチして経路の記録と保存が出来る機能を有効化します、またログとして自動的にナビゲーションルートをGPXファイルに記録することもできます。 
+\n 
+\n記録された経路は、友人と共有することができ、またOSM発展のためにも使用されます。アスリートなら記録した経路をトレーニングモニターとして利用することが出来ます。ラップタイムや平均速度等いくつかの基本的な経路分析ならOsmAndから直接行うことができ、記録した経路を後で特別なサードパーティ製解析ツールで分析することも出来ます。</string>
     <string name="record_plugin_name">旅程・経路記録</string>
     <string name="int_hour">時間</string>
     <string name="duration">期限</string>
@@ -2474,7 +2471,7 @@ OsmAndとOSMをサポートする方法として現状最適な方法である�
 \n等々… "</string>
     <string name="dist_away_from_my_location">%1$s離れた場所を検索</string>
     <string name="show_on_map">マップ上に表示</string>
-    <string name="share_history_subject">" OsmAndにて共有"</string>
+    <string name="share_history_subject">OsmAnd経由で共有</string>
     <string name="search_categories">カテゴリ</string>
     <string name="postcode">郵便番号</string>
     <string name="shared_string_from">差出人</string>
@@ -2784,7 +2781,7 @@ OsmAndとOSMをサポートする方法として現状最適な方法である�
     <string name="shared_string_paused">一時停止</string>
     <string name="save_track_min_speed">ログに記録する最低速度</string>
     <string name="save_track_min_speed_descr">ログに記録を許可する最低速度を設定します</string>
-    <string name="save_track_min_distance">ログに記録する最低移動範囲</string>
+    <string name="save_track_min_distance">ログに記録する最低移動距離</string>
     <string name="save_track_min_distance_descr">ログに記録を許可する最後に記録した地点からの最低移動距離を設定します</string>
     <string name="save_track_precision">ログに記録する最小精度</string>
     <string name="save_track_precision_descr">ログに記録を許可する最低精度を設定します</string>
@@ -2984,4 +2981,17 @@ OsmAndとOSMをサポートする方法として現状最適な方法である�
     <string name="shared_string_permissions">権限</string>
     <string name="access_shared_string_navigate_up">上に移動</string>
     <string name="rendering_value_fine_name">美麗</string>
+    <string name="shared_string_reload">再読み込み</string>
+    <string name="mapillary_menu_descr_tile_cache">最新データを見るためにタイルを再読み込みします。</string>
+    <string name="mapillary_menu_title_tile_cache">タイルキャッシュ</string>
+    <string name="wrong_user_name">不正なユーザー名です！</string>
+    <string name="shared_string_to">送信先</string>
+    <string name="mapillary_menu_date_from">送信元</string>
+    <string name="mapillary_menu_descr_dates">指定の期間に追加された画像を表示します。</string>
+    <string name="mapillary_menu_title_dates">日付</string>
+    <string name="mapillary_menu_edit_text_hint">ユーザー名を入力</string>
+    <string name="mapillary_menu_descr_username">指定のユーザーによって追加された画像を表示します。</string>
+    <string name="mapillary_menu_title_username">ユーザー名</string>
+    <string name="mapillary_menu_filter_description">送信者または日付別に画像をフィルタリングできます。 フィルタは、拡大縮小ズームにのみ適用されます。</string>
+    <string name="distance_moving">距離補正済み</string>
     </resources>
