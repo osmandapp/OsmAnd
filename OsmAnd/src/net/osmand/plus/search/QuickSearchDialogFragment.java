@@ -802,7 +802,7 @@ public class QuickSearchDialogFragment extends DialogFragment implements OsmAndC
 				}
 			} else {
 				if (word != null && word.getResult() != null) {
-					buttonToolbarText.setText(app.getString(R.string.show_something_on_map, word.getResult().localeName).toUpperCase());
+					buttonToolbarText.setText(app.getString(R.string.show_something_on_map, word.getResult().localeName).toUpperCase().replaceAll("(A|I)([B-DF-HJ-NP-TV-ZĞÇŞ])-İ XƏRİTƏDƏ GÖSTƏR","$1$2I XƏRİTƏDƏ GÖSTƏR").replaceAll("(E|Ə|İ)([B-DF-HJ-NP-TV-ZĞÇŞ])-İ XƏRİTƏDƏ GÖSTƏR","$1$2İ XƏRİTƏDƏ GÖSTƏR").replaceAll("(O|U)([B-DF-HJ-NP-TV-ZĞÇŞ])-İ XƏRİTƏDƏ GÖSTƏR","$1$2U XƏRİTƏDƏ GÖSTƏR").replaceAll("(Ö|Ü)([B-DF-HJ-NP-TV-ZĞÇŞ])-İ XƏRİTƏDƏ GÖSTƏR","$1$2Ü XƏRİTƏDƏ GÖSTƏR").replaceAll("(A|I)-İ XƏRİTƏDƏ GÖSTƏR","$1NI XƏRİTƏDƏ GÖSTƏR").replaceAll("(E|Ə|İ)-İ XƏRİTƏDƏ GÖSTƏR","$1Nİ XƏRİTƏDƏ GÖSTƏR").replaceAll("(O|U)-İ XƏRİTƏDƏ GÖSTƏR","$1NU XƏRİTƏDƏ GÖSTƏR").replaceAll("(Ö|Ü)-İ XƏRİTƏDƏ GÖSTƏR","$1NÜ XƏRİTƏDƏ GÖSTƏR"));
 				} else {
 					buttonToolbarText.setText(app.getString(R.string.shared_string_show_on_map).toUpperCase());
 				}
