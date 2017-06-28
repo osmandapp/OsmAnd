@@ -3192,4 +3192,39 @@
 	<string name="poi_health_person_type_technician">在職医療従事者:技師</string>
 	<string name="poi_health_person_type_witchdoctor">在職医療従事者:呪術医</string>
 
+	<string name="poi_counselling_type_addiction_yes">カウンセリング(依存症):対応</string>
+	<string name="poi_counselling_type_addiction_no">カウンセリング(依存症):対応できず</string>
+	<string name="poi_counselling_type_antenatal_yes">カウンセリング(妊産婦教育):対応</string>
+	<string name="poi_counselling_type_antenatal_no">カウンセリング(妊産婦教育):対応できず</string>
+	<string name="poi_counselling_type_child_guidance_yes">カウンセリング(児童相談):対応</string>
+	<string name="poi_counselling_type_child_guidance_no">カウンセリング(児童相談):対応できず</string>
+	<string name="poi_counselling_type_couple_yes">カウンセリング(夫婦間問題):対応</string>
+	<string name="poi_counselling_type_couple_no">カウンセリング(夫婦間問題):対応できず</string>
+	<string name="poi_counselling_type_crisis_yes">カウンセリング(危機的状況):対応</string>
+	<string name="poi_counselling_type_crisis_no">カウンセリング(危機的状況):対応できず</string>
+	<string name="poi_counselling_type_drugs_yes">カウンセリング(薬物):対応</string>
+	<string name="poi_counselling_type_drugs_no">カウンセリング(薬物):対応できず</string>
+	<string name="poi_counselling_type_education_yes">カウンセリング(教育相談):対応</string>
+	<string name="poi_counselling_type_education_no">カウンセリング(教育相談):対応できず</string>
+	<string name="poi_counselling_type_family_yes">カウンセリング(家族問題):対応</string>
+	<string name="poi_counselling_type_family_no">カウンセリング(家族問題):対応できず</string>
+	<string name="poi_counselling_type_homeless_yes">カウンセリング(ホームレス):対応</string>
+	<string name="poi_counselling_type_homeless_no">カウンセリング(ホームレス):対応できず</string>
+	<string name="poi_counselling_type_immigrant_yes">カウンセリング(移民問題):対応</string>
+	<string name="poi_counselling_type_immigrant_no">カウンセリング(移民問題):対応できず</string>
+	<string name="poi_counselling_type_marriage_yes">カウンセリング(結婚問題):対応</string>
+	<string name="poi_counselling_type_marriage_no">カウンセリング(結婚問題):対応できず</string>
+	<string name="poi_counselling_type_nutrition_yes">カウンセリング(栄養相談):対応</string>
+	<string name="poi_counselling_type_nutrition_nfire_hydo">カウンセリング(栄養相談):対応できず</string>
+	<string name="poi_counselling_type_rehabilitation_yes">カウンセリング(リハビリ相談):対応</string>
+	<string name="poi_counselling_type_rehabilitation_no">カウンセリング(リハビリ相談):対応できず</string>
+	<string name="poi_counselling_type_sexual_yes">カウンセリング(性問題):対応</string>
+	<string name="poi_counselling_type_sexual_no">カウンセリング(性問題):対応できず</string>
+	<string name="poi_counselling_type_sexual_abuse_yes">カウンセリング(性的虐待):対応</string>
+	<string name="poi_counselling_type_sexual_abuse_no">カウンセリング(性的虐待):対応できず</string>
+	<string name="poi_counselling_type_victim_yes">カウンセリング(犯罪被害者):対応</string>
+	<string name="poi_counselling_type_victim_no">カウンセリング(犯罪被害者):対応できず</string>
+	<string name="poi_counselling_type_violence_yes">カウンセリング(親密なパートナーあるいは家庭内暴力):対応</string>
+	<string name="poi_counselling_type_violence_no">カウンセリング(親密なパートナーあるいは家庭内暴力):対応できず</string>
+
 	</resources>
