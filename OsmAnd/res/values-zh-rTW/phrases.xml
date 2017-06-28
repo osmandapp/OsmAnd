@@ -3248,4 +3248,22 @@
 	<string name="poi_cuisine_salad">沙拉</string>
 	<string name="poi_cuisine_frozen_yogurt">霜凍優格</string>
 	<string name="poi_cuisine_fried_food">油炸食品</string>
+	<string name="poi_cuisine_fine_dining">好的美食</string>
+	<string name="poi_cuisine_savory_pancakes">鹹味煎餅</string>
+	<string name="poi_cuisine_bistro">小餐館</string>
+	<string name="poi_cuisine_bakery">麵包店</string>
+	<string name="poi_cuisine_couscous">古斯米</string>
+	<string name="poi_cuisine_fried_chicken">炸雞</string>
+	<string name="poi_cuisine_dessert">甜點</string>
+	<string name="poi_cuisine_canteen">食堂</string>
+	<string name="poi_cuisine_tacos">玉米餅</string>
+	<string name="poi_cuisine_piadina">義大利風味餅</string>
+	<string name="poi_cuisine_falafel">中東蔬菜球</string>
+	<string name="poi_cuisine_smoothie">冰沙</string>
+	<string name="poi_cuisine_souvlaki">希臘串烤</string>
+	<string name="poi_cuisine_snack">小吃</string>
+	<string name="poi_cuisine_yogurt">優格</string>
+	<string name="poi_cuisine_gyros">希臘旋轉烤肉</string>
+	<string name="poi_cuisine_empanada">拉丁餡餅</string>
+	<string name="poi_cuisine_crepes">可麗餅</string>
 	</resources>
