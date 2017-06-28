@@ -108,7 +108,7 @@ public class SettingsMonitoringActivity extends SettingsBaseActivity {
 		names = new String[floatValues.length];
 		names[0] = getString(R.string.shared_string_not_selected);
 		names[1] = "> 0";
-		for(int i = 1; i < floatValues.length; i++) {
+		for(int i = 2; i < floatValues.length; i++) {
 			names[i] = floatValues[i].intValue() + " " + getString(R.string.km_h);
 			floatValues[i] = floatValues[i] / 3.6f;
 		}
