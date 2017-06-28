@@ -1349,8 +1349,8 @@ Afganistan, Albània, Alemanya, Antilles Holandeses, Algèria, Andorra, Angola, 
     <string name="osmo_tracker_id_descr">Premeu per veure la identificació del traçador</string>
     <string name="osmo_session_token">Testimoni de la sessió: %1$s</string>
     <string name="osmo_auth_pending">S\'està esperant l\'autorització…</string>
-    <string name="osmo_locations_sent">"%1$d ubicacions enviades (%2$d a la memòria intermèdia) "</string>
-    <string name="osmo_conn_successfull">"S\'ha establert la connexió: %1$s "</string>
+    <string name="osmo_locations_sent">%1$d ubicacions enviades (%2$d a la memòria intermèdia)</string>
+    <string name="osmo_conn_successfull">S\'ha establert la connexió: %1$s</string>
     <string name="osmo_mode_restart">Reinicia la sessió a OsMo</string>
     <string name="osmo_settings_debug">Informació de depuració</string>
     <string name="hours_ago">hores abans</string>
@@ -1421,7 +1421,7 @@ Afganistan, Albània, Alemanya, Antilles Holandeses, Algèria, Andorra, Angola, 
     <string name="gpx_info_waypoints">Fites: %1$s</string>
     <string name="gpx_info_distance">Distància: %1$s (%2$s punts) </string>
     <string name="gpx_info_start_time">Hora d\'inici: %1$tF, %1$tT </string>
-    <string name="gpx_info_end_time">"Hora d\'arribada: %1$tF, %1$tT "</string>
+    <string name="gpx_info_end_time">Hora d\'arribada: %1$tF, %1$tT</string>
     <string name="gpx_info_average_speed">Velocitat mitjana: %1$s </string>
     <string name="gpx_info_maximum_speed">Velocitat màxima: %1$s </string>
     <string name="gpx_info_avg_altitude">Alçada mitjana: %1$s</string>
@@ -2613,7 +2613,7 @@ Abasta l\'àrea: %1$s x %2$s</string>
 \n Gaudiu del guiatge visual i de veu, la representació de *PDIs (punts d\'interès), de la creació i gestió de traces de GPX, la selecció la representació de corbes de nivell i d\'informació d\'elevació (a través d\'un *connector), dels modes diferenciats entre la conducció de vehicle, bicicleta o com vianant, de la edició d\'OSM i de molt més. "</string>
     <string name="restore_purchases">Recupera les compres</string>
     <string name="fonts_header">Tipus de lletra pel mapa</string>
-    <string name="osmand_extended_description_part2">" Navegació GPS • Podeu triar el mode desconnectat (no hi hauran càrrecs de roaming si sou a l\'estranger) o el mode en línia (més àgil) • El guiatge de veu gir-a-gir us dirigeix pel camí (veus enregistrades i sintètiques) • La ruta es tornarà a calcular si us desvieu de la proposta anterior • Les indicacions de carril, els noms de carrer i el temps d\'arribada estimat us ajudaran pel camí • Per fer el vostre viatge més segur, els canvis entre mode diurn i nocturn són automàtics • Podeu activar la indicació dels límits de velocitat i d\'advertiments si els supereu • L\'escala del mapa s\'ajusta a la vostra velocitat • Podeu cercar destinacions per adreça, per tipus (p. ex.: aparcament, restaurant, hotel, gasolinera, museu), o per les coordenades geogràfiques • Gestiona els punts intermedis en el vostre itinerari • Podeu enregistrar el vostre trajecte o baixar una traça GPX i seguir-la "</string>
+    <string name="osmand_extended_description_part2">Navegació GPS • Podeu triar el mode desconnectat (no hi hauran càrrecs de roaming si sou a l\'estranger) o el mode en línia (més àgil) • El guiatge de veu gir-a-gir us dirigeix pel camí (veus enregistrades i sintètiques) • La ruta es tornarà a calcular si us desvieu de la proposta anterior • Les indicacions de carril, els noms de carrer i el temps d\'arribada estimat us ajudaran pel camí • Per fer el vostre viatge més segur, els canvis entre mode diurn i nocturn són automàtics • Podeu activar la indicació dels límits de velocitat i d\'advertiments si els supereu • L\'escala del mapa s\'ajusta a la vostra velocitat • Podeu cercar destinacions per adreça, per tipus (p. ex.: aparcament, restaurant, hotel, gasolinera, museu), o per les coordenades geogràfiques • Gestiona els punts de pas en el vostre itinerari • Podeu enregistrar el vostre trajecte o pujar una traça GPX i seguir-la</string>
     <string name="osmand_extended_description_part4">"
  Esquí
 El connector de mapes d\'esquí d\'OsmAnd us permet veure les pistes amb la seva dificultat i altres informacions addicional, com ara la ubicació dels ascensors i altres instal·lacions.
@@ -2659,16 +2659,7 @@ El connector de mapes d\'esquí d\'OsmAnd us permet veure les pistes amb la seva
     <string name="quick_action_add_first_intermediate_desc">Prement el botó d\'acció afegireu com primer punt intermedi el punt central de la pantalla.</string>
     <string name="depth_contour_descr">Llibreria de mapes que contenen isòbates i fondàries puntuals.</string>
     <string name="shared_string_paused">En pausa</string>
-    <string name="osmand_extended_description_part3">"
- Mapa
-• Mostra els PDIs (punts d\'interès) al vostre voltant
-• Ajusta l\'orientació del mapa a la vostra direcció del moviment (o al nord)
-• Mostra on sou i com esteu orientat
-• Comparteix la votre ubicació de manera que els vostre amics us puguin trobar
-• Manté els vostres llocs més importants a Preferits
-• Permet escollir com es mostren els noms al mapa: en anglès, llengues locals o en ortografia fonètica
-• Mostra representacions especialitzades disponibles a la xarxa, vistes de satèl·lit (Bing), diferents superposicions com traces GPX d\'exploració/navegació i capes addicionals amb un grau transparència variable
- "</string>
+    <string name="osmand_extended_description_part3">Mapa • Mostra els PDIs (punts d\'interès) al vostre voltant • Ajusta l\'orientació del mapa a la vostra direcció del moviment (o al nord) • Mostra on sou i com esteu orientat • Compartiu la vostra ubicació perquè els vostres amics us puguin trobar • Manté els vostres llocs més importants a Preferits • Permet escollir com es mostren els noms al mapa: en anglès, llengues locals o amb ortografia fonètica • Mostra representacions especialitzades disponibles a la xarxa, imatges de satèl·lit (Bing), diferents superposicions com traces GPX d\'exploració/navegació i capes addicionals amb un grau transparència variable</string>
     <string name="osmand_plus_extended_description_part2">"
  Navegació
 • Funciona en línia (ràpid) o sense connexió (sense càrrecs de roaming quan sigueu a l\'estranger)
