@@ -2855,4 +2855,5 @@ Representa el área: %1$s x %2$s</string>
     <string name="shared_string_reload">Recargar</string>
     <string name="mapillary_menu_descr_tile_cache">Recargar teselas para ver la información actualizada.</string>
     <string name="mapillary_menu_title_tile_cache">Caché de teselas</string>
+    <string name="shared_string_reset">Restablecer</string>
     </resources>
