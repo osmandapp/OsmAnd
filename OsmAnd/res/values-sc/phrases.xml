@@ -2633,4 +2633,8 @@
 <string name="poi_music_school">Iscola de mùsica</string>
 	<string name="poi_language_school">Iscola de limbas</string>
 
+<string name="poi_zoo_type">Casta</string>
+	<string name="poi_motorcycle_services">Servìtzios</string>
+	<string name="poi_motorcycle_type">Casta de mototzicleta</string>
+
 </resources>
