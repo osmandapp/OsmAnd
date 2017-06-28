@@ -2878,8 +2878,8 @@ Facebook：https://www.facebook.com/osmandapp
     <string name="mapillary_menu_edit_text_hint">鍵入使用者名稱</string>
     <string name="mapillary_menu_descr_username">檢視某些使用者增加的映像。</string>
     <string name="mapillary_menu_title_username">使用者名稱</string>
-    <string name="mapillary_menu_filter_description">您可以按照使用者的名稱或日期篩選映像，篩選僅適用於近距縮放。</string>
+    <string name="mapillary_menu_filter_description">您可以按照提供者或日期篩選圖片，篩選僅適用於特寫鏡頭縮放。</string>
     <string name="shared_string_reload">重新載入</string>
-    <string name="mapillary_menu_descr_tile_cache">如果您想要查看最新的資料，請重新載入圖磚。</string>
+    <string name="mapillary_menu_descr_tile_cache">請重新載入圖磚，以查看最新的資料。</string>
     <string name="mapillary_menu_title_tile_cache">圖磚快取</string>
     </resources>
