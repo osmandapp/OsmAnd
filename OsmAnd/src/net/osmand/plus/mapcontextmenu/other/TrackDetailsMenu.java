@@ -191,9 +191,15 @@ public class TrackDetailsMenu {
 				}
 			} else {
 				float distance = pos * dataSet.getDivX();
-				for (WptPt p : segment.points) {
-					if (p.distance >= distance) {
-						wpt = p;
+				double previousSplitDistance = 0;
+				for (int i = 0; i < segment.points.size(); i++) {
+					if (i != 0) {
+						if (segment.points.get(i).distance < segment.points.get(i - 1).distance) {
+							previousSplitDistance += segment.points.get(i - 1).distance;
+						}
+					}
+					if (previousSplitDistance + segment.points.get(i).distance >= distance) {
+						wpt = segment.points.get(i);
 						break;
 					}
 				}
@@ -231,18 +237,24 @@ public class TrackDetailsMenu {
 			} else {
 				float startDistance = startPos * dataSet.getDivX();
 				float endDistance = endPos * dataSet.getDivX();
-				for (WptPt p : segment.points) {
-					if (p.distance >= startDistance && p.distance <= endDistance) {
+				double previousSplitDistance = 0;
+				for (int i = 0; i < segment.points.size(); i++) {
+					if (i != 0) {
+						if (segment.points.get(i).distance < segment.points.get(i - 1).distance) {
+							previousSplitDistance += segment.points.get(i - 1).distance;
+						}
+					}
+					if (previousSplitDistance + segment.points.get(i).distance >= startDistance && previousSplitDistance + segment.points.get(i).distance <= endDistance) {
 						if (left == 0 && right == 0) {
-							left = p.getLongitude();
-							right = p.getLongitude();
-							top = p.getLatitude();
-							bottom = p.getLatitude();
+							left = segment.points.get(i).getLongitude();
+							right = segment.points.get(i).getLongitude();
+							top = segment.points.get(i).getLatitude();
+							bottom = segment.points.get(i).getLatitude();
 						} else {
-							left = Math.min(left, p.getLongitude());
-							right = Math.max(right, p.getLongitude());
-							top = Math.max(top, p.getLatitude());
-							bottom = Math.min(bottom, p.getLatitude());
+							left = Math.min(left, segment.points.get(i).getLongitude());
+							right = Math.max(right, segment.points.get(i).getLongitude());
+							top = Math.max(top, segment.points.get(i).getLatitude());
+							bottom = Math.min(bottom, segment.points.get(i).getLatitude());
 						}
 					}
 				}
@@ -287,6 +299,13 @@ public class TrackDetailsMenu {
 		Highlight[] highlights = chart.getHighlighted();
 		LatLon location = null;
 
+		if (trackChartPoints == null) {
+			trackChartPoints = new TrackChartPoints();
+			int segmentColor = getTrackSegment(chart).getColor(0);
+			trackChartPoints.setSegmentColor(segmentColor);
+			trackChartPoints.setGpx(getGpxItem().group.getGpx());
+		}
+
 		float minimumVisibleXValue = chart.getLowestVisibleX();
 		float maximumVisibleXValue = chart.getHighestVisibleX();
 
@@ -304,23 +323,17 @@ public class TrackDetailsMenu {
 			}
 			WptPt wpt = getPoint(chart, gpxItem.chartHighlightPos);
 			if (wpt != null) {
-				if (trackChartPoints == null) {
-					trackChartPoints = new TrackChartPoints();
-					int segmentColor = getTrackSegment(chart).getColor(0);
-					trackChartPoints.setSegmentColor(segmentColor);
-					trackChartPoints.setGpx(getGpxItem().group.getGpx());
-				}
 				location = new LatLon(wpt.lat, wpt.lon);
 				trackChartPoints.setHighlightedPoint(location);
-				trackChartPoints.setXAxisPoints(getXAxisPoints(chart));
-				if (gpxItem.route) {
-					mapActivity.getMapLayers().getMapInfoLayer().setTrackChartPoints(trackChartPoints);
-				} else {
-					mapActivity.getMapLayers().getGpxLayer().setTrackChartPoints(trackChartPoints);
-				}
 			}
 		} else {
 			gpxItem.chartHighlightPos = -1;
+		}
+		trackChartPoints.setXAxisPoints(getXAxisPoints(chart));
+		if (gpxItem.route) {
+			mapActivity.getMapLayers().getMapInfoLayer().setTrackChartPoints(trackChartPoints);
+		} else {
+			mapActivity.getMapLayers().getGpxLayer().setTrackChartPoints(trackChartPoints);
 		}
 		fitTrackOnMap(chart, location, forceFit);
 	}
@@ -575,14 +588,15 @@ public class TrackDetailsMenu {
 	}
 
 	private void updateChart(LineChart chart) {
+		chart.notifyDataSetChanged();
+		chart.invalidate();
 		if (gpxItem.chartMatrix != null) {
 			chart.getViewPortHandler().refresh(new Matrix(gpxItem.chartMatrix), chart, true);
 		}
 		if (gpxItem.chartHighlightPos != -1) {
 			chart.highlightValue(gpxItem.chartHighlightPos, 0);
 		} else {
-			gpxItem.chartHighlightPos = chart.getLowestVisibleX();
-			chart.highlightValue(chart.getLowestVisibleX(), 0);
+			chart.highlightValue(null);
 		}
 	}
 

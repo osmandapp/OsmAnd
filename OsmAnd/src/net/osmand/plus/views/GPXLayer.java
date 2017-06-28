@@ -334,8 +334,10 @@ public class GPXLayer extends OsmandMapLayer implements ContextMenuLayer.IContex
                             y + nmHeight / 2 + 3 * (float) Math.ceil(tileBox.getDensity()),
                             x + nmWidth / 2 + 3 * (float) Math.ceil(tileBox.getDensity()),
                             y - nmHeight / 2 - 2 * (float) Math.ceil(tileBox.getDensity()));
-                    canvas.drawRoundRect(rect, 5, 5, paintInnerRect);
-					canvas.drawRoundRect(rect, 5, 5, paintOuterRect);
+                    canvas.drawRoundRect(rect, 0, 0, paintInnerRect);
+					canvas.drawRoundRect(rect, 0, 0, paintOuterRect);
+//					canvas.drawRect(rect, paintInnerRect);
+//					canvas.drawRect(rect, paintOuterRect);
 					canvas.drawText(nm, x, y + nmHeight / 2, paintTextIcon);
 				}
 			}
@@ -386,14 +388,16 @@ public class GPXLayer extends OsmandMapLayer implements ContextMenuLayer.IContex
 			}
 			if (trackChartPoints != null) {
 				LatLon highlightedPoint = trackChartPoints.getHighlightedPoint();
-				if (highlightedPoint.getLatitude() >= latLonBounds.bottom
-						&& highlightedPoint.getLatitude() <= latLonBounds.top
-						&& highlightedPoint.getLongitude() >= latLonBounds.left
-						&& highlightedPoint.getLongitude() <= latLonBounds.right) {
-					float x = tileBox.getPixXFromLatLon(highlightedPoint.getLatitude(), highlightedPoint.getLongitude());
-					float y = tileBox.getPixYFromLatLon(highlightedPoint.getLatitude(), highlightedPoint.getLongitude());
-					paintIcon.setColorFilter(null);
-					canvas.drawBitmap(selectedPoint, x - selectedPoint.getWidth() / 2, y - selectedPoint.getHeight() / 2, paintIcon);
+				if (highlightedPoint != null) {
+					if (highlightedPoint.getLatitude() >= latLonBounds.bottom
+							&& highlightedPoint.getLatitude() <= latLonBounds.top
+							&& highlightedPoint.getLongitude() >= latLonBounds.left
+							&& highlightedPoint.getLongitude() <= latLonBounds.right) {
+						float x = tileBox.getPixXFromLatLon(highlightedPoint.getLatitude(), highlightedPoint.getLongitude());
+						float y = tileBox.getPixYFromLatLon(highlightedPoint.getLatitude(), highlightedPoint.getLongitude());
+						paintIcon.setColorFilter(null);
+						canvas.drawBitmap(selectedPoint, x - selectedPoint.getWidth() / 2, y - selectedPoint.getHeight() / 2, paintIcon);
+					}
 				}
 			}
 			this.fullObjectsLatLon = fullObjectsLatLon;
@@ -420,18 +424,22 @@ public class GPXLayer extends OsmandMapLayer implements ContextMenuLayer.IContex
 		paintGridCircle.setColor(color);
         paintGridCircle.setAlpha(255);
 		QuadRect latLonBounds = tileBox.getLatLonBounds();
-		List<WptPt> xAxisPoints = trackChartPoints.getXAxisPoints();
 		float r = 3 * tileBox.getDensity();
-		for (int i = 0; i < xAxisPoints.size(); i++) {
-			WptPt axisPoint = xAxisPoints.get(i);
-			if (axisPoint.getLatitude() >= latLonBounds.bottom
-					&& axisPoint.getLatitude() <= latLonBounds.top
-					&& axisPoint.getLongitude() >= latLonBounds.left
-					&& axisPoint.getLongitude() <= latLonBounds.right) {
-				float x = tileBox.getPixXFromLatLon(axisPoint.getLatitude(), axisPoint.getLongitude());
-				float y = tileBox.getPixYFromLatLon(axisPoint.getLatitude(), axisPoint.getLongitude());
-                canvas.drawCircle(x, y, r + 2 * (float) Math.ceil(tileBox.getDensity()), paintGridOuterCircle);
-				canvas.drawCircle(x, y, r + (float) Math.ceil(tileBox.getDensity()), paintGridCircle);
+		List<WptPt> xAxisPoints = trackChartPoints.getXAxisPoints();
+		if (xAxisPoints != null) {
+			for (int i = 0; i < xAxisPoints.size(); i++) {
+				WptPt axisPoint = xAxisPoints.get(i);
+				if (axisPoint != null) {
+					if (axisPoint.getLatitude() >= latLonBounds.bottom
+							&& axisPoint.getLatitude() <= latLonBounds.top
+							&& axisPoint.getLongitude() >= latLonBounds.left
+							&& axisPoint.getLongitude() <= latLonBounds.right) {
+						float x = tileBox.getPixXFromLatLon(axisPoint.getLatitude(), axisPoint.getLongitude());
+						float y = tileBox.getPixYFromLatLon(axisPoint.getLatitude(), axisPoint.getLongitude());
+						canvas.drawCircle(x, y, r + 2 * (float) Math.ceil(tileBox.getDensity()), paintGridOuterCircle);
+						canvas.drawCircle(x, y, r + (float) Math.ceil(tileBox.getDensity()), paintGridCircle);
+					}
+				}
 			}
 		}
 	}
