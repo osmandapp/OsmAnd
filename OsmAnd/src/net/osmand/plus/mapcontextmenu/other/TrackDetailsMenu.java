@@ -193,13 +193,15 @@ public class TrackDetailsMenu {
 				float distance = pos * dataSet.getDivX();
 				double previousSplitDistance = 0;
 				for (int i = 0; i < segment.points.size(); i++) {
+					WptPt currentPoint = segment.points.get(i);
 					if (i != 0) {
-						if (segment.points.get(i).distance < segment.points.get(i - 1).distance) {
-							previousSplitDistance += segment.points.get(i - 1).distance;
+						WptPt previousPoint = segment.points.get(i - 1);
+						if (currentPoint.distance < previousPoint.distance) {
+							previousSplitDistance += previousPoint.distance;
 						}
 					}
-					if (previousSplitDistance + segment.points.get(i).distance >= distance) {
-						wpt = segment.points.get(i);
+					if (previousSplitDistance + currentPoint.distance >= distance) {
+						wpt = currentPoint;
 						break;
 					}
 				}
@@ -239,22 +241,24 @@ public class TrackDetailsMenu {
 				float endDistance = endPos * dataSet.getDivX();
 				double previousSplitDistance = 0;
 				for (int i = 0; i < segment.points.size(); i++) {
+					WptPt currentPoint = segment.points.get(i);
 					if (i != 0) {
-						if (segment.points.get(i).distance < segment.points.get(i - 1).distance) {
-							previousSplitDistance += segment.points.get(i - 1).distance;
+						WptPt previousPoint = segment.points.get(i - 1);
+						if (currentPoint.distance < previousPoint.distance) {
+							previousSplitDistance += previousPoint.distance;
 						}
 					}
-					if (previousSplitDistance + segment.points.get(i).distance >= startDistance && previousSplitDistance + segment.points.get(i).distance <= endDistance) {
+					if (previousSplitDistance + currentPoint.distance >= startDistance && previousSplitDistance + currentPoint.distance <= endDistance) {
 						if (left == 0 && right == 0) {
-							left = segment.points.get(i).getLongitude();
-							right = segment.points.get(i).getLongitude();
-							top = segment.points.get(i).getLatitude();
-							bottom = segment.points.get(i).getLatitude();
+							left = currentPoint.getLongitude();
+							right = currentPoint.getLongitude();
+							top = currentPoint.getLatitude();
+							bottom = currentPoint.getLatitude();
 						} else {
-							left = Math.min(left, segment.points.get(i).getLongitude());
-							right = Math.max(right, segment.points.get(i).getLongitude());
-							top = Math.max(top, segment.points.get(i).getLatitude());
-							bottom = Math.min(bottom, segment.points.get(i).getLatitude());
+							left = Math.min(left, currentPoint.getLongitude());
+							right = Math.max(right, currentPoint.getLongitude());
+							top = Math.max(top, currentPoint.getLatitude());
+							bottom = Math.min(bottom, currentPoint.getLatitude());
 						}
 					}
 				}
