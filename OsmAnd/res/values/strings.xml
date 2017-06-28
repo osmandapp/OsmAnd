@@ -211,11 +211,11 @@
     </string>
     <string name="rendering_attr_contourColorScheme_description">Contour lines color scheme</string>
     <string name="save_track_min_speed">Logging minimum speed</string>
-    <string name="save_track_min_speed_descr">Set minimum speed for a point to be logged</string>
+    <string name="save_track_min_speed_descr">Filter: Set minimum speed for a point to be logged</string>
     <string name="save_track_min_distance">Logging minimum displacement</string>
-    <string name="save_track_min_distance_descr">Set minimum distance from last position for point to be logged</string>
+    <string name="save_track_min_distance_descr">Filter: Set minimum distance from last position for point to be logged</string>
     <string name="save_track_precision">Logging minimum accuracy</string>
-    <string name="save_track_precision_descr">Set minimum accuracy for a point to be logged</string>
+    <string name="save_track_precision_descr">Filter: Set minimum accuracy for a point to be logged</string>
     <string name="christmas_poi">Christmas POI</string>
     <string name="christmas_desc">Anticipating Christmas and New Year holidays, you can choose to display the POI associated with Christmas: Christmas trees, markets, etc.</string>
     <string name="christmas_desc_q">Show Christmas POI?</string>
