@@ -299,6 +299,13 @@ public class TrackDetailsMenu {
 		Highlight[] highlights = chart.getHighlighted();
 		LatLon location = null;
 
+		if (trackChartPoints == null) {
+			trackChartPoints = new TrackChartPoints();
+			int segmentColor = getTrackSegment(chart).getColor(0);
+			trackChartPoints.setSegmentColor(segmentColor);
+			trackChartPoints.setGpx(getGpxItem().group.getGpx());
+		}
+
 		float minimumVisibleXValue = chart.getLowestVisibleX();
 		float maximumVisibleXValue = chart.getHighestVisibleX();
 
@@ -321,12 +328,6 @@ public class TrackDetailsMenu {
 			}
 		} else {
 			gpxItem.chartHighlightPos = -1;
-		}
-		if (trackChartPoints == null) {
-			trackChartPoints = new TrackChartPoints();
-			int segmentColor = getTrackSegment(chart).getColor(0);
-			trackChartPoints.setSegmentColor(segmentColor);
-			trackChartPoints.setGpx(getGpxItem().group.getGpx());
 		}
 		trackChartPoints.setXAxisPoints(getXAxisPoints(chart));
 		if (gpxItem.route) {
