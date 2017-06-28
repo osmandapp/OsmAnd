@@ -2535,7 +2535,7 @@ Wenn Sie OsmAnd und OSM lieben und unterstützen wollen, so ist dies die perfekt
     <string name="christmas_desc_q">Weihnachtsattraktionen anzeigen?</string>
     <string name="save_track_min_speed">Mindestgeschwindigkeit für Erfassung</string>
     <string name="save_track_min_speed_descr">Legen Sie die Mindestgeschwindigkeit fest, ab der ein Punkt aufgezeichnet wird</string>
-    <string name="save_track_min_distance">Bewegungserkennung für Erfassung</string>
+    <string name="save_track_min_distance">Mindestentfernung für Erfassung</string>
     <string name="save_track_min_distance_descr">Wählen Sie die Mindestentfernung von der letzten Position, ab der ein neuer Punkt aufgezeichnet wird</string>
     <string name="save_track_precision">Mindestgenauigkeit für Erfassung</string>
     <string name="save_track_precision_descr">Legen Sie die Mindestgenauigkeit für die Aufzeichnung eines Punktes fest</string>
