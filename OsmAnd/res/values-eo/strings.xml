@@ -2423,11 +2423,11 @@ Se vi bezonas helpon pri OsmAnd aplikaĵo, bonvolu kontakti nian helpantaron: su
     <string name="rendering_attr_surfaceIntegrity_name">Kohero de vojpavimo</string>
     <string name="rendering_attr_contourColorScheme_description">Kolor-skemo de nivelkurboj</string>
     <string name="save_track_min_speed">Minimuma rapido por registrado</string>
-    <string name="save_track_min_speed_descr">Elekti minimuman rapidon por punkto esti registrita</string>
-    <string name="save_track_min_distance">Detekto de movado por registrado</string>
-    <string name="save_track_min_distance_descr">Elekti minimuman distancon por punkto esti registrita</string>
+    <string name="save_track_min_speed_descr">Filtrilo: elekti minimuman rapidon por punkto esti registrita</string>
+    <string name="save_track_min_distance">Minimuma delokiĝo por registri</string>
+    <string name="save_track_min_distance_descr">Filtrilo: elekti minimuman distancon por punkto esti registrita</string>
     <string name="save_track_precision">Minimuma akurateco de registrado</string>
-    <string name="save_track_precision_descr">Elekti minimuman akuratecon por punkto esti registrita</string>
+    <string name="save_track_precision_descr">Filtrilo: elekti minimuman akuratecon por punkto esti registrita</string>
     <string name="christmas_poi">Kristnaskaj interesejoj</string>
     <string name="christmas_desc">Atendante Kristnaskon kaj la novan jaron, vi povas aktivigi vidigadon de interesejoj rilataj al Kristnasko: kristnaskaj arbetoj, foiroj, ktp.</string>
     <string name="christmas_desc_q">Ĉu montri kristnaskaj interesejoj?</string>
