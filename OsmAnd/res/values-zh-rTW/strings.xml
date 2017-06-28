@@ -2539,11 +2539,11 @@ Facebook：https://www.facebook.com/osmandapp
     <string name="translit_name_if_miss">如果 %1$s 的名稱缺失則音譯</string>
     <string name="rendering_attr_contourColorScheme_description">等高線的色彩調配</string>
     <string name="save_track_min_speed">記錄最低的速度</string>
-    <string name="save_track_min_speed_descr">設定最低速度的一個點用以記錄</string>
-    <string name="save_track_min_distance">記錄移動檢測</string>
-    <string name="save_track_min_distance_descr">從最後位置的一個點設定最短距離用以記錄</string>
+    <string name="save_track_min_speed_descr">篩選：設定最低速度的一個點用以記錄</string>
+    <string name="save_track_min_distance">記錄最小位移</string>
+    <string name="save_track_min_distance_descr">篩選：從最後位置的一個點設定最短距離用以記錄</string>
     <string name="save_track_precision">記錄最小的精確度</string>
-    <string name="save_track_precision_descr">設定最小精確度的一個點用以記錄</string>
+    <string name="save_track_precision_descr">篩選：設定最小精確度的一個點用以記錄</string>
     <string name="christmas_poi">聖誕節 POI</string>
     <string name="christmas_desc_q">顯示聖誕節 POI？</string>
     <string name="rendering_value_light_brown_name">淺棕色</string>
