@@ -2880,4 +2880,5 @@ OsmAnd هو المصدر المفتوح و التي يجري تطويرها بن
     <string name="shared_string_reload">إعادة تحميل</string>
     <string name="mapillary_menu_descr_tile_cache">إعادة تحميل أجزاء الخريطة لمشاهدة البيانات المحدثة.</string>
     <string name="mapillary_menu_title_tile_cache">التخزين المؤقت لأجزاء الخريطة</string>
+    <string name="shared_string_reset">إعادة تعيين</string>
     </resources>
