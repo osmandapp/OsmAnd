@@ -2972,4 +2972,5 @@ OsmAnd мае адкрыты зыходны код і актыўна разві�
     <string name="shared_string_reload">Абнавіць</string>
     <string name="mapillary_menu_descr_tile_cache">Абнавіць фрагменты, каб убачыць актуальныя даныя.</string>
     <string name="mapillary_menu_title_tile_cache">Кэш фрагментаў</string>
+    <string name="shared_string_reset">Скінуць</string>
     </resources>
