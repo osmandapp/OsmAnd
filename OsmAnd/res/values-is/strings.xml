@@ -1433,7 +1433,7 @@ og leiðsögn</string>
     <string name="use_english_names_descr">Veldu á milli staðarheita og enskra heita</string>
     <string name="map_tile_source_descr">Veldu uppruna nettengdra korta eða kortatígla í biðminni</string>
     <string name="save_track_min_speed">Lágmarkshraði skráningar</string>
-    <string name="save_track_min_distance">Hreyfiskynjun skráningar</string>
+    <string name="save_track_min_distance">Skráning minnstu hreyfingar</string>
     <string name="save_track_precision">Lágmarksnákvæmni skráningar</string>
     <string name="christmas_poi">Jólastaðir</string>
     <string name="search_hint">Settu inn borg, heimilisfang, merkisstað</string>
@@ -2222,4 +2222,16 @@ Stendur fyrir svæði: %1$s x %2$s</string>
     <string name="distance_moving">Leiðrétt fjarlægð</string>
     <string name="improve_coverage_mapillary">Bæta ljósmyndaþekju með Mapillary</string>
     <string name="hide_from_zoom_level">Fela í aðdráttarstigi</string>
+    <string name="shared_string_reload">Endurnýja</string>
+    <string name="mapillary_menu_descr_tile_cache">Endurlesa kortaflísar til að sjá uppfærð gögn.</string>
+    <string name="mapillary_menu_title_tile_cache">Tiglaskyndiminni</string>
+    <string name="wrong_user_name">Rangt notandanafn!</string>
+    <string name="shared_string_to">Til</string>
+    <string name="mapillary_menu_date_from">Frá</string>
+    <string name="mapillary_menu_descr_dates">Skoða myndir sem bætt hefur verið inn á tilteknu tímabili.</string>
+    <string name="mapillary_menu_title_dates">Dagsetningar</string>
+    <string name="mapillary_menu_edit_text_hint">Settu inn nafn á notanda</string>
+    <string name="mapillary_menu_descr_username">Skoða myndir sem tiltekinn notandi hefur bætt við.</string>
+    <string name="mapillary_menu_title_username">Notandanafn</string>
+    <string name="mapillary_menu_filter_description">Þú getur síað myndir eftir sendanda eða dagsetningu. Síum er aðeins beitt í miklum aðdrætti.</string>
     </resources>
