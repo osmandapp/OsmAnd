@@ -277,10 +277,15 @@ public class TrackSegmentFragment extends OsmAndListFragment {
 		headerView.setOnClickListener(new View.OnClickListener() {
 			@Override
 			public void onClick(View view) {
-				LatLon location = new LatLon(generalDisplayItem.locationStart.lat, generalDisplayItem.locationStart.lon);
+				LatLon location = new LatLon(generalDisplayItem.locationStart.lat,
+						generalDisplayItem.locationStart.lon);
 				final OsmandSettings settings = app.getSettings();
 				settings.setMapLocationToShow(location.getLatitude(), location.getLongitude(),
-						settings.getLastKnownMapZoom());
+						settings.getLastKnownMapZoom(),
+						new PointDescription(PointDescription.POINT_TYPE_WPT, generalDisplayItem.name),
+						false,
+						getRect()
+				);
 
 				MapActivity.launchMapActivityMoveToTop(getActivity());
 			}
