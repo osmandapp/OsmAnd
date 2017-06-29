@@ -1610,7 +1610,7 @@
 	<string name="poi_historic_period_first_intermediate_period">Історичний період: перший перехідний період (2181 - 2055 р. до н.е.)</string>
 	<string name="poi_piste_difficulty_advanced">Для просунутих</string>
 	<string name="poi_historic_period_second_intermediate_period">Історичний період: другий перехідний період (1650 - 1550 р. до н.е.)</string>
-	<string name="poi_historic_period_third_intermediate_period">"Історичний період: третій перехідний період (1069 - 664 до н.е.) "</string>
+	<string name="poi_historic_period_third_intermediate_period">Історичний період: третій перехідний період (1069 – 664 до н.е.)</string>
 	<string name="poi_piste_difficulty_novice">Для новачків</string>
 	<string name="poi_piste_difficulty_expert">Експерт</string>
 	<string name="poi_historic_period_first_persian_period">Історичний період: перший перський період</string>
@@ -2567,7 +2567,7 @@
 	<string name="poi_min_age">Мінімальний вік</string>
 
 	<string name="poi_cuisine_brasserie">Брассери (стейк і чіпси)</string>
-	<string name="poi_payment_pro100_yes">"ПРО100 "</string>
+	<string name="poi_payment_pro100_yes">ПРО100</string>
 	<string name="poi_vending_excrement_bags">Пакети для екскрементів тварин</string>
 	<string name="poi_wetland_wet_meadow">Заболочений луг</string>
 	<string name="poi_industrial_oil">Тип: нафтова промисловість</string>
