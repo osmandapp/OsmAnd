@@ -1172,10 +1172,10 @@ public class TrackSegmentFragment extends OsmAndListFragment {
 								view.findViewById(R.id.list_divider).setVisibility(View.GONE);
 								view.findViewById(R.id.start_end_time).setVisibility(View.GONE);
 							}
-							view.findViewById(R.id.details_view).setOnClickListener(new View.OnClickListener() {
+							view.findViewById(R.id.analyze_on_map).setOnClickListener(new View.OnClickListener() {
 								@Override
 								public void onClick(View v) {
-									openDetails(GPXTabItemType.GPX_TAB_ITEM_GENERAL);
+									openAnalyzeOnMap(GPXTabItemType.GPX_TAB_ITEM_GENERAL);
 								}
 							});
 
@@ -1216,10 +1216,10 @@ public class TrackSegmentFragment extends OsmAndListFragment {
 								view.findViewById(R.id.list_divider).setVisibility(View.GONE);
 								view.findViewById(R.id.ascent_descent).setVisibility(View.GONE);
 							}
-							view.findViewById(R.id.details_view).setOnClickListener(new View.OnClickListener() {
+							view.findViewById(R.id.analyze_on_map).setOnClickListener(new View.OnClickListener() {
 								@Override
 								public void onClick(View v) {
-									openDetails(GPXTabItemType.GPX_TAB_ITEM_ALTITUDE);
+									openAnalyzeOnMap(GPXTabItemType.GPX_TAB_ITEM_ALTITUDE);
 								}
 							});
 
@@ -1259,10 +1259,10 @@ public class TrackSegmentFragment extends OsmAndListFragment {
 								view.findViewById(R.id.list_divider).setVisibility(View.GONE);
 								view.findViewById(R.id.time_distance).setVisibility(View.GONE);
 							}
-							view.findViewById(R.id.details_view).setOnClickListener(new View.OnClickListener() {
+							view.findViewById(R.id.analyze_on_map).setOnClickListener(new View.OnClickListener() {
 								@Override
 								public void onClick(View v) {
-									openDetails(GPXTabItemType.GPX_TAB_ITEM_SPEED);
+									openAnalyzeOnMap(GPXTabItemType.GPX_TAB_ITEM_SPEED);
 								}
 							});
 							break;
@@ -1367,7 +1367,7 @@ public class TrackSegmentFragment extends OsmAndListFragment {
 			}
 		}
 
-		void openDetails(GPXTabItemType tabType) {
+		void openAnalyzeOnMap(GPXTabItemType tabType) {
 			LatLon location = null;
 			WptPt wpt = null;
 			gpxItem.chartTypes = null;
