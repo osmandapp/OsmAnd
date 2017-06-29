@@ -3107,4 +3107,5 @@ Facebook: https://www.facebook.com/osmandapp
     <string name="mapillary_menu_descr_username">Переглянути зображення, додані певним користувачем.</string>
     <string name="mapillary_menu_title_username">Ім\'я користувача</string>
     <string name="mapillary_menu_filter_description">Ви можете відфільтрувати зображення за подавачем чи за датою. Фільтри застосовуються лише для масштабування крупним планом.</string>
+    <string name="shared_string_reset">Скинути</string>
     </resources>
