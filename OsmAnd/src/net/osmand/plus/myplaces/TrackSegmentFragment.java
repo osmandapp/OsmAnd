@@ -274,7 +274,8 @@ public class TrackSegmentFragment extends OsmAndListFragment {
 	}
 
 	private void updateHeader() {
-		headerView.setOnClickListener(new View.OnClickListener() {
+		imageView = (ImageView) headerView.findViewById(R.id.imageView);
+		imageView.setOnClickListener(new View.OnClickListener() {
 			@Override
 			public void onClick(View view) {
 				LatLon location = new LatLon(generalDisplayItem.locationStart.lat,
@@ -290,7 +291,6 @@ public class TrackSegmentFragment extends OsmAndListFragment {
 				MapActivity.launchMapActivityMoveToTop(getActivity());
 			}
 		});
-		imageView = (ImageView) headerView.findViewById(R.id.imageView);
 		final View splitColorView = headerView.findViewById(R.id.split_color_view);
 		final View divider = headerView.findViewById(R.id.divider);
 		final View splitIntervalView = headerView.findViewById(R.id.split_interval_view);
