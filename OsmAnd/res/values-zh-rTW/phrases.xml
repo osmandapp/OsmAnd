@@ -3352,4 +3352,21 @@
 	<string name="poi_cuisine_jamaican">牙買加料理</string>
 	<string name="poi_cuisine_armenian">亞美尼亞料理</string>
 	<string name="poi_cuisine_hawaiian">夏威夷料理</string>
+	<string name="poi_cuisine_pakistani">巴基斯坦料理</string>
+	<string name="poi_cuisine_taiwanese">臺灣料理</string>
+	<string name="poi_cuisine_english">英格蘭料理</string>
+	<string name="poi_cuisine_tex_mex">德-墨料理</string>
+	<string name="poi_cuisine_dutch">荷蘭料理</string>
+	<string name="poi_cuisine_syrian">敘利亞料理</string>
+	<string name="poi_cuisine_australian">澳洲料理</string>
+	<string name="poi_cuisine_cajun">卡郡料理</string>
+	<string name="poi_cuisine_egyptian">埃及料理</string>
+	<string name="poi_cuisine_senegalese">塞內加爾料理</string>
+	<string name="poi_cuisine_jewish">猶太料理</string>
+	<string name="poi_cuisine_bulgarian">保加利亞料理</string>
+	<string name="poi_cuisine_tibetan">西藏料理</string>
+
+	<string name="poi_party">派對用品</string>
+	<string name="poi_electrical">電器產品店</string>
+	<string name="poi_locksmith">鎖匠店</string>
 	</resources>
