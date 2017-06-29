@@ -2214,7 +2214,7 @@ OsmAnd має відкриті сирці і активно розвиваєть
     <string name="rate_this_app">Оцінити цей додаток</string>
     <string name="rate_this_app_long">Будь ласка, дайте оцінку OsmAnd на Google Play</string>
     <string name="user_hates_app_get_feedback">Розкажіть нам, чому.</string>
-    <string name="failed_to_upload">Не вдалося завантажити</string>
+    <string name="failed_to_upload">Не вдалося вивантажити</string>
     <string name="delete_change">Видалити зміни</string>
     <string name="successfully_uploaded_pattern">Успішно вивантажено {0}/{1}</string>
     <string name="try_again">Спробуйте ще раз</string>
@@ -2312,7 +2312,7 @@ OsmAnd має відкриті сирці і активно розвиваєть
     <string name="select_voice_provider_descr">Виберіть або завантажте голосові вказівки для вашої мови</string>
     <string name="impassable_road_desc">Виберіть дороги, яких ви бажаєте уникати під час навігації</string>
     <string name="shared_string_sound">Звук</string>
-    <string name="poi_deleted_localy">POI буде видалено після того, як ви завантажите ваші зміни</string>
+    <string name="poi_deleted_localy">POI буде вилучено після того, як ви вивантажите ваші зміни</string>
     <string name="confirm_download_roadmaps">Ви впевнені, що бажаєте завантажити мапу з дорогами, хоча ви вже маєете стандартну (повну) мапу?</string>
     <string name="missing_write_external_storage_permission">Додаток не має дозволу для запису на SD-карту</string>
     <string name="last_update">Останнє оновлення: %s</string>
