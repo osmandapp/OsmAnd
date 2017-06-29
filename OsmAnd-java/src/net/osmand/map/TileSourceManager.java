@@ -1,5 +1,13 @@
 package net.osmand.map;
 
+import net.osmand.PlatformUtil;
+import net.osmand.osm.io.NetworkUtils;
+import net.osmand.util.Algorithms;
+
+import org.apache.commons.logging.Log;
+import org.xmlpull.v1.XmlPullParser;
+import org.xmlpull.v1.XmlPullParserException;
+
 import java.io.BufferedReader;
 import java.io.BufferedWriter;
 import java.io.ByteArrayOutputStream;
@@ -17,15 +25,6 @@ import java.util.ArrayList;
 import java.util.LinkedHashMap;
 import java.util.List;
 import java.util.Map;
-
-import net.osmand.PlatformUtil;
-import net.osmand.osm.io.NetworkUtils;
-import net.osmand.util.Algorithms;
-
-import org.apache.commons.logging.Log;
-import org.xmlpull.v1.XmlPullParser;
-import org.xmlpull.v1.XmlPullParserException;
-
 
 import bsh.Interpreter;
 
@@ -278,7 +277,7 @@ public class TileSourceManager {
 		
 		
 		@Override
-		public void clearTiles(String path) {
+		public void deleteTiles(String path) {
 			File pf = new File(path);
 			File[] list = pf.listFiles();
 			if(list != null) {

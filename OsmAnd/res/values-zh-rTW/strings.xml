@@ -2539,11 +2539,11 @@ Facebook：https://www.facebook.com/osmandapp
     <string name="translit_name_if_miss">如果 %1$s 的名稱缺失則音譯</string>
     <string name="rendering_attr_contourColorScheme_description">等高線的色彩調配</string>
     <string name="save_track_min_speed">記錄最低的速度</string>
-    <string name="save_track_min_speed_descr">設定最低速度的一個點用以記錄</string>
-    <string name="save_track_min_distance">記錄移動檢測</string>
-    <string name="save_track_min_distance_descr">從最後位置的一個點設定最短距離用以記錄</string>
+    <string name="save_track_min_speed_descr">篩選：設定最低速度的一個點用以記錄</string>
+    <string name="save_track_min_distance">記錄最小位移</string>
+    <string name="save_track_min_distance_descr">篩選：從最後位置的一個點設定最短距離用以記錄</string>
     <string name="save_track_precision">記錄最小的精確度</string>
-    <string name="save_track_precision_descr">設定最小精確度的一個點用以記錄</string>
+    <string name="save_track_precision_descr">篩選：設定最小精確度的一個點用以記錄</string>
     <string name="christmas_poi">聖誕節 POI</string>
     <string name="christmas_desc_q">顯示聖誕節 POI？</string>
     <string name="rendering_value_light_brown_name">淺棕色</string>
@@ -2868,6 +2868,18 @@ Facebook：https://www.facebook.com/osmandapp
     <string name="distance_moving">距離已校正</string>
     <string name="shared_string_permissions">權限</string>
     <string name="import_gpx_failed_descr">OsmAnd 無法匯入檔案。 請檢查 OsmAnd 是否有權限從該位置去讀取檔案。</string>
-    <string name="map_widget_ruler_control_first_mode">兩點直尺</string>
-    <string name="map_widget_ruler_control_second_mode">半徑直尺</string>
+    <string name="map_widget_ruler_control_first_mode">兩點間測量尺</string>
+    <string name="map_widget_ruler_control_second_mode">半徑測量尺</string>
+    <string name="wrong_user_name">錯誤的使用者名稱！</string>
+    <string name="shared_string_to">至</string>
+    <string name="mapillary_menu_date_from">從</string>
+    <string name="mapillary_menu_descr_dates">檢視在一定時間內增加的圖片。</string>
+    <string name="mapillary_menu_title_dates">日期</string>
+    <string name="mapillary_menu_edit_text_hint">鍵入使用者名稱</string>
+    <string name="mapillary_menu_descr_username">檢視某些使用者增加的圖片。</string>
+    <string name="mapillary_menu_title_username">使用者名稱</string>
+    <string name="mapillary_menu_filter_description">您可以按照提供者或日期篩選圖片，篩選僅適用於特寫鏡頭縮放。</string>
+    <string name="shared_string_reload">重新載入</string>
+    <string name="mapillary_menu_descr_tile_cache">請重新載入圖磚，以查看最新的資料。</string>
+    <string name="mapillary_menu_title_tile_cache">圖磚快取</string>
     </resources>

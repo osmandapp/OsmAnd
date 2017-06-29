@@ -1577,7 +1577,7 @@
 	<string name="poi_payment_gift_card_no">Gavekort accepteres ikke</string>
 	<string name="poi_payment_golden_crown_yes">Golden Crown</string>
 	<string name="poi_payment_golden_crown_no">Golden Crown kort accepteres ikke</string>
-	<string name="poi_payment_pro100_yes">"PRO100 "</string>
+	<string name="poi_payment_pro100_yes">PRO100</string>
 	<string name="poi_payment_pro100_no">PRO100 kort accepteres ikke</string>
 	<string name="poi_payment_union_card_yes">Union Card</string>
 	<string name="poi_payment_union_card_no">Union kort accepteres ikke</string>
@@ -2311,7 +2311,7 @@
 	<string name="poi_historic_period_old_kingdom">Historiskperiode: det gamle Kongerige (2686 - 2181 f.Kr.)</string>
 	<string name="poi_historic_period_first_intermediate_period">Historiskperiode: første mellemliggende periode (2181- 2055 f.Kr.)</string>
 	<string name="poi_historic_period_second_intermediate_period">Historiskperiode: anden mellemliggende periode (1650 – 1550 f.Kr.)</string>
-	<string name="poi_historic_period_third_intermediate_period">"Historiskperiode: tredje mellemliggende periode (1069 - 664 f.Kr.) "</string>
+	<string name="poi_historic_period_third_intermediate_period">Historiskperiode: tredje mellemliggende periode (1069 - 664 f.Kr.)</string>
 	<string name="poi_historic_period_first_persian_period">Historiskperiode: første persiske periode</string>
 	<string name="poi_historic_period_late_period">Historiskperiode: sene periode (664 - 332 f.Kr.)</string>
 	<string name="poi_historic_period_second_persian_period">Historiskperiode: anden Persiske periode</string>

@@ -104,10 +104,11 @@ public class SettingsMonitoringActivity extends SettingsBaseActivity {
 		}
 		cat.addPreference(createListPreference(settings.SAVE_TRACK_PRECISION, names, floatValues,  
 				R.string.save_track_precision, R.string.save_track_precision_descr));
-		floatValues = new Float[] {0.f, 1.0f, 2.0f, 3.0f, 4.0f, 5.0f, 6.0f, 7.0f};
+		floatValues = new Float[] {0.f, 0.000001f, 1.0f, 2.0f, 3.0f, 4.0f, 5.0f, 6.0f, 7.0f};
 		names = new String[floatValues.length];
 		names[0] = getString(R.string.shared_string_not_selected);
-		for(int i = 1; i < floatValues.length; i++) {
+		names[1] = "> 0"; // This option for the GPS chipset motion detection
+		for(int i = 2; i < floatValues.length; i++) {
 			names[i] = floatValues[i].intValue() + " " + getString(R.string.km_h);
 			floatValues[i] = floatValues[i] / 3.6f;
 		}

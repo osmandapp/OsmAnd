@@ -2534,11 +2534,11 @@ Wenn Sie OsmAnd und OSM lieben und unterstützen wollen, so ist dies die perfekt
     <string name="christmas_desc">In Erwartung der Weihnachts- und Neujahrsfeiertage, können Sie sich weihnachtliche Attraktionen anzeigen lassen: Weihnachtsbäume, -märkte, etc.</string>
     <string name="christmas_desc_q">Weihnachtsattraktionen anzeigen?</string>
     <string name="save_track_min_speed">Mindestgeschwindigkeit für Erfassung</string>
-    <string name="save_track_min_speed_descr">Legen Sie die Mindestgeschwindigkeit fest, ab der ein Punkt aufgezeichnet wird</string>
-    <string name="save_track_min_distance">Bewegungserkennung für Erfassung</string>
-    <string name="save_track_min_distance_descr">Wählen Sie die Mindestentfernung von der letzten Position, ab der ein neuer Punkt aufgezeichnet wird</string>
+    <string name="save_track_min_speed_descr">Filter: Legen Sie die Mindestgeschwindigkeit fest, ab der ein Punkt aufgezeichnet wird</string>
+    <string name="save_track_min_distance">Mindestentfernung für Erfassung</string>
+    <string name="save_track_min_distance_descr">Filter: Wählen Sie die Mindestentfernung von der letzten Position, ab der ein neuer Punkt aufgezeichnet wird</string>
     <string name="save_track_precision">Mindestgenauigkeit für Erfassung</string>
-    <string name="save_track_precision_descr">Legen Sie die Mindestgenauigkeit für die Aufzeichnung eines Punktes fest</string>
+    <string name="save_track_precision_descr">Filter: Legen Sie die Mindestgenauigkeit für die Aufzeichnung eines Punktes fest</string>
     <string name="rendering_attr_contourColorScheme_description">Farbschema für Höhenlinien</string>
     <string name="shared_string_continue">Fortsetzen</string>
     <string name="shared_string_pause">Pause</string>
@@ -2855,4 +2855,15 @@ Abgedeckte Fläche: %1$s x %2$s</string>
     <string name="mapillary_image">Mapillary-Foto</string>
     <string name="shared_string_permissions">Berechtigungen</string>
     <string name="import_gpx_failed_descr">OsmAnd kann die Datei nicht importieren. Überprüfen Sie, ob OsmAnd Leserechte für den Dateispeicherort besitzt.</string>
+    <string name="mapillary_menu_edit_text_hint">Benutzernamen eingeben</string>
+    <string name="mapillary_menu_descr_username">Bilder betrachten, die von einem bestimmten Benutzer eingestellt wurden.</string>
+    <string name="mapillary_menu_title_username">Benutzername</string>
+    <string name="shared_string_reload">Erneut laden</string>
+    <string name="mapillary_menu_descr_tile_cache">Kacheln neu laden, um nach Datumswerten zu suchen.</string>
+    <string name="mapillary_menu_title_tile_cache">Kachelzwischenspeicher</string>
+    <string name="wrong_user_name">Falscher Benutzername!</string>
+    <string name="shared_string_to">Bis</string>
+    <string name="mapillary_menu_date_from">Von</string>
+    <string name="mapillary_menu_descr_dates">Bilder betrachten, die in einem bestimmten Zeitabschnitt eingestellt wurden.</string>
+    <string name="mapillary_menu_title_dates">Datumswerte</string>
     </resources>

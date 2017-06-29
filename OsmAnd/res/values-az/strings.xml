@@ -172,7 +172,7 @@
     <string name="storage_directory_multiuser">Çox istifadəçili yaddaş</string>
     <string name="storage_directory_internal_app">Daxili proqram yaddaşı</string>
     <string name="storage_directory_default">Daxili yaddaş</string>
-    <string name="application_dir">Məlumatlar qovluğu</string>
+    <string name="application_dir">Məlumatların saxlandığı qovluq</string>
     <string name="shared_string_copy">Kopyala</string>
     <string name="filter_poi_hint">Ada görə filtrlə</string>
     <string name="search_poi_category_hint">Axtarmaq üçün yazın</string>
@@ -1592,4 +1592,16 @@
     <string name="map_markers">Xəritə işarələri</string>
     <string name="map_marker">Xəritə işarəsi</string>
     <string name="quick_action_add_marker">Xəritə işarəsi əlavə et</string>
+    <string name="shared_string_reload">Yenidən yüklə</string>
+    <string name="wrong_user_name">Yanlış istifadəçi adı!</string>
+    <string name="shared_string_to">Buraya:</string>
+    <string name="mapillary_menu_date_from">Buradan:</string>
+    <string name="mapillary_menu_descr_dates">Müəyyən bir dövrdə əlavə edilmiş şəkillərə baxın.</string>
+    <string name="mapillary_menu_title_dates">Tarixlər</string>
+    <string name="mapillary_menu_edit_text_hint">İstifadəçi adını yazın</string>
+    <string name="mapillary_menu_descr_username">Müəyyən bir istifadəçinin əlavə etdiyi şəkillərə bax.</string>
+    <string name="mapillary_menu_title_username">İstifadəçi adı</string>
+    <string name="no_address_found">Ünvan müəyyən deyil</string>
+    <string name="context_menu_item_open_note">OSM qeydini aç</string>
+    <string name="storage_directory">Xəritənin saxlandığı yer</string>
     </resources>

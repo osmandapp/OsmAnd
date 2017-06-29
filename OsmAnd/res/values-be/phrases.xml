@@ -1695,7 +1695,7 @@
 	<string name="poi_payment_gift_card_no">Падарункавыя карткі не прымаюцца</string>
 	<string name="poi_payment_golden_crown_yes">Залатая Карона</string>
 	<string name="poi_payment_golden_crown_no">Карткі Залатая Карона не прымаюцца</string>
-	<string name="poi_payment_pro100_yes">"ПРО100 "</string>
+	<string name="poi_payment_pro100_yes">ПРО100</string>
 	<string name="poi_payment_pro100_no">Карткі ПРО100 не прымаюцца</string>
 	<string name="poi_payment_union_card_yes">Union Card</string>
 	<string name="poi_payment_union_card_no">Карткі Union Card не прымаюцца</string>
@@ -2296,7 +2296,7 @@
 	<string name="poi_historic_period_old_kingdom">Гістарычны пэрыяд: старажытнае царства (2686 – 2181 г. да н.э.)</string>
 	<string name="poi_historic_period_first_intermediate_period">Гістарычны пэрыяд: першы пераходны пэрыяд (2181 – 2055 г. да н.э.)</string>
 	<string name="poi_historic_period_second_intermediate_period">Гістарычны пэрыяд: другі пераходны пэрыяд (1650 – 1550 г. да н.э.)</string>
-	<string name="poi_historic_period_third_intermediate_period">"Гістарычны пэрыяд: трэці пераходны пэрыяд (1069 – 664 г. да н.э.) "</string>
+	<string name="poi_historic_period_third_intermediate_period">Гістарычны пэрыяд: трэці пераходны пэрыяд (1069 – 664 г. да н.э.)</string>
 	<string name="poi_historic_period_first_persian_period">Гістарычны пэрыяд: першы пэрсідзкі пэрыяд</string>
 	<string name="poi_historic_period_late_period">Гістарычны пэрыяд: позняе царства (664 – 332 г. да н.э.)</string>
 	<string name="poi_historic_period_second_persian_period">Гістарычны пэрыяд: другі пэрсідскі пэрыяд</string>

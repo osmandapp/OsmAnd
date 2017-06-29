@@ -1514,4 +1514,11 @@
 <string name="poi_motorcycle_services">الخدمات</string>
 	<string name="poi_motorcycle_type">نوع الدراجة النارية</string>
 
-</resources>
+<string name="poi_motorcycle_type_standard">موحد</string>
+
+<string name="poi_zoo_type">نوع</string>
+	<string name="poi_aerialway_station">محطة Aerialway</string>
+	<string name="poi_aerialway_chair_lift">رافعة بالكرسي</string>
+	<string name="poi_aerialway_t_bar">رافعة T</string>
+	<string name="poi_aerialway_j_bar">رافعة J</string>
+	</resources>

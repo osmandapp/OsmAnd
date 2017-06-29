@@ -9,6 +9,9 @@
          3. All your modified/created strings are in the top of the file (to make easier find what\'s translated).
     PLEASE: Have a look at http://code.google.com/p/osmand/wiki/UIConsistency, it may really improve your and our work  :-)  Thx - Hardy
     -->
+    <string name="shared_string_reload">Reload</string>
+    <string name="mapillary_menu_descr_tile_cache">Reload tiles to see up to date data.</string>
+    <string name="mapillary_menu_title_tile_cache">Tile cache</string>
     <string name="wrong_user_name">Wrong user name!</string>
     <string name="shared_string_to">To</string>
     <string name="mapillary_menu_date_from">From</string>
@@ -17,7 +20,7 @@
     <string name="mapillary_menu_edit_text_hint">Type user name</string>
     <string name="mapillary_menu_descr_username">View images added by a certain user.</string>
     <string name="mapillary_menu_title_username">Username</string>
-    <string name="mapillary_menu_filter_description">You can filter images by the name of the user or by the date.</string>
+    <string name="mapillary_menu_filter_description">You can filter images by submitter or by date. Filters apply only for closeup zoom.</string>
     <string name="map_widget_ruler_control_first_mode">Two point ruler</string>
     <string name="map_widget_ruler_control_second_mode">Radius ruler</string>
     <string name="shared_string_permissions">Permissions</string>
@@ -208,11 +211,11 @@
     </string>
     <string name="rendering_attr_contourColorScheme_description">Contour lines color scheme</string>
     <string name="save_track_min_speed">Logging minimum speed</string>
-    <string name="save_track_min_speed_descr">Set minimum speed for a point to be logged</string>
-    <string name="save_track_min_distance">Logging motion detection</string>
-    <string name="save_track_min_distance_descr">Set minimum distance from last position for point to be logged</string>
+    <string name="save_track_min_speed_descr">Filter: Set minimum speed for a point to be logged</string>
+    <string name="save_track_min_distance">Logging minimum displacement</string>
+    <string name="save_track_min_distance_descr">Filter: Set minimum distance from last position for point to be logged</string>
     <string name="save_track_precision">Logging minimum accuracy</string>
-    <string name="save_track_precision_descr">Set minimum accuracy for a point to be logged</string>
+    <string name="save_track_precision_descr">Filter: Set minimum accuracy for a point to be logged</string>
     <string name="christmas_poi">Christmas POI</string>
     <string name="christmas_desc">Anticipating Christmas and New Year holidays, you can choose to display the POI associated with Christmas: Christmas trees, markets, etc.</string>
     <string name="christmas_desc_q">Show Christmas POI?</string>
@@ -631,7 +634,7 @@
     <string name="lang_bn">Bengali</string>
     <string name="lang_tl">Tagalog</string>
     <string name="lang_sh">Serbo-Croatian</string>
-    <string name="lang_az">Azeri</string>
+    <string name="lang_az">Azerbaijani</string>
     <string name="lang_br">Breton</string>
     <string name="lang_sq">Albanian</string>
     <string name="lang_is">Icelandic</string>

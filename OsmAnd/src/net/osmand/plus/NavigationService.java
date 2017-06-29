@@ -100,9 +100,23 @@ public class NavigationService extends Service implements LocationListener {
 			final Intent serviceIntent = new Intent(ctx, NavigationService.class);
 			ctx.stopService(serviceIntent);
 		} else {
-			NotificationHelper helper = ((OsmandApplication) getApplication()).getNotificationHelper();
-			helper.updateTopNotification();
-			helper.refreshNotifications();
+			// Issue #3604
+			final OsmandApplication app = (OsmandApplication) getApplication();
+			if ((usedBy == 2) && !(app.getSettings().SAVE_GLOBAL_TRACK_INTERVAL.get() < 30000) && (serviceOffInterval == 0)) {
+				serviceOffInterval = app.getSettings().SAVE_GLOBAL_TRACK_INTERVAL.get();
+				// From onStartCommand:
+				serviceError = serviceOffInterval / 5;
+				serviceError = Math.min(serviceError, 12 * 60 * 1000);
+				serviceError = Math.max(serviceError, 30 * 1000);
+				serviceError = Math.min(serviceError, serviceOffInterval);
+				app.setNavigationService(this);
+				AlarmManager alarmManager = (AlarmManager) getSystemService(ALARM_SERVICE);
+				pendingIntent = PendingIntent.getBroadcast(this, 0, new Intent(this, OnNavigationServiceAlarmReceiver.class), PendingIntent.FLAG_UPDATE_CURRENT);
+				alarmManager.setRepeating(AlarmManager.ELAPSED_REALTIME_WAKEUP, SystemClock.elapsedRealtime() + 500, serviceOffInterval, pendingIntent);
+			}
+
+			app.getNotificationHelper().updateTopNotification();
+			app.getNotificationHelper().refreshNotifications();
 		}
 	}
 

@@ -2811,11 +2811,11 @@ Moduli:
 \n • Mnostva inšych paliapšeńniaŭ i vypraŭlieńniaŭ, 
 \n 
 \n i mnohaje inšaje …</string>
-    <string name="save_track_min_speed_descr">Vybierycie minimaĺnuju chutkaść, pry pieravyšeńni jakoj punkt budzie zapisany ŭ ślied</string>
-    <string name="save_track_min_distance">Minimaĺnaja dystancyja dlia zapisu</string>
-    <string name="save_track_min_distance_descr">Vybierycie adliehlaść, pry pieravyšeńni jakoj punkt budzie zapisany ŭ ślied</string>
+    <string name="save_track_min_speed_descr">Fiĺtr: zadajcie minimaĺnuju chutkasć kropki, kab być zažurnaliavanaj</string>
+    <string name="save_track_min_distance">Žurnaliavannie minimaĺnaha zrušennia</string>
+    <string name="save_track_min_distance_descr">Fiĺtr: zadajcie minimaĺnuju adliehlasć kropki ad apošniaj pazicyi, kab być zažurnaliavanaj</string>
     <string name="save_track_precision">Minimaĺnaja dakladnaść žurnaliavannia</string>
-    <string name="save_track_precision_descr">Abiarycie minimaĺnuju dakladnaść dlia kropki, kab być zažurnaliavanaj</string>
+    <string name="save_track_precision_descr">Fiĺtr: zadajcie minimaĺnuju dakladnasć dlia kropki, kab być zažurnaliavanaj</string>
     <string name="christmas_desc">Napiaredadni kaliadnych i navahodnich śviataŭ, vy možacie vybrać dlia adliustravańnia POI, źviazanyja z Kaliadami: jelki, kirmašy i da t.p.</string>
     <string name="rendering_attr_contourColorScheme_name">Kolieravaja schiema haryzantaliaŭ</string>
     <string name="rendering_attr_surfaceIntegrity_name">Jakaść darožnaha pakryćcia</string>
@@ -2911,4 +2911,16 @@ Moduli:
     <string name="import_gpx_failed_descr">OsmAnd nie moža impartavać fajl. Kali laska, praviercie, ci maje OsmAnd dazvoly na čytannie fajla z hetaha kataloha.</string>
     <string name="map_widget_ruler_control_first_mode">Liniejka dvuchpunktavaja</string>
     <string name="map_widget_ruler_control_second_mode">Liniejka pramianiovaja</string>
+    <string name="wrong_user_name">Niapraviĺnaje imia karystaĺnika!</string>
+    <string name="shared_string_to">Da</string>
+    <string name="mapillary_menu_date_from">Ad</string>
+    <string name="mapillary_menu_descr_dates">Pahliadzieć vyjavy dadanyja ŭ peŭny pieryjad.</string>
+    <string name="mapillary_menu_title_dates">Daty</string>
+    <string name="mapillary_menu_edit_text_hint">Uviadzicie imia karystaĺnika</string>
+    <string name="mapillary_menu_descr_username">Pahliadzieć vyjavy dadanyja peŭnym karystaĺnikam.</string>
+    <string name="mapillary_menu_title_username">Imia karystaĺnika</string>
+    <string name="mapillary_menu_filter_description">Vy možacie fiĺtravać vyjavy pa adpraŭniku ci dacie. Fiĺtry ŭžyvajucca toĺki dlia bujnoha pavieličennia.</string>
+    <string name="shared_string_reload">Abnavić</string>
+    <string name="mapillary_menu_descr_tile_cache">Abnavić frahmienty, kab ubačyć aktuaĺnyja danyja.</string>
+    <string name="mapillary_menu_title_tile_cache">Keš frahmientaŭ</string>
     </resources>
