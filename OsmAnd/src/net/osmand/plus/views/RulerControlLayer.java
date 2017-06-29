@@ -44,7 +44,6 @@ public class RulerControlLayer extends OsmandMapLayer {
 
     private QuadPoint cacheCenter;
     private int cacheIntZoom;
-    private double cacheFractionalZoom;
     private double cacheTileX;
     private double cacheTileY;
     private long cacheMultiTouchEndTime;
@@ -118,16 +117,13 @@ public class RulerControlLayer extends OsmandMapLayer {
             final QuadPoint center = tb.getCenterPixelPoint();
             final RulerMode mode = app.getSettings().RULER_MODE.get();
 
-            if (cacheIntZoom != view.getZoom() || cacheFractionalZoom != view.getZoomFractionalPart()) {
-                cacheIntZoom = view.getZoom();
-                cacheFractionalZoom = view.getZoomFractionalPart();
-                view.setMultiTouchEndTime(0);
-                cacheMultiTouchEndTime = 0;
+            if (view.isMultiTouch() && view.isZooming()) {
+                view.setWasZoomInMultiTouch(true);
             } else if (cacheMultiTouchEndTime != view.getMultiTouchEndTime()) {
                 cacheMultiTouchEndTime = view.getMultiTouchEndTime();
                 refreshMapDelayed();
             }
-            showTwoFingersDistance = !view.isZooming() && view.isMultiTouch() || System.currentTimeMillis() - cacheMultiTouchEndTime < DELAY;
+            showTwoFingersDistance = !view.isWasZoomInMultiTouch() && !view.isZooming() && (view.isMultiTouch() || System.currentTimeMillis() - cacheMultiTouchEndTime < DELAY);
             if (showTwoFingersDistance) {
                 float x1 = view.getFirstTouchPointX();
                 float y1 = view.getFirstTouchPointY();

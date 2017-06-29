@@ -167,6 +167,7 @@ public class OsmandMapTileView implements IMapDownloaderCallback {
 	private float secondTouchPointY;
 	private boolean multiTouch;
 	private long multiTouchEndTime;
+	private boolean wasZoomInMultiTouch;
 
 	public OsmandMapTileView(MapActivity activity, int w, int h) {
 		this.activity = activity;
@@ -336,8 +337,12 @@ public class OsmandMapTileView implements IMapDownloaderCallback {
 		return multiTouchEndTime;
 	}
 
-	public void setMultiTouchEndTime(long multiTouchEndTime) {
-		this.multiTouchEndTime = multiTouchEndTime;
+	public boolean isWasZoomInMultiTouch() {
+		return wasZoomInMultiTouch;
+	}
+
+	public void setWasZoomInMultiTouch(boolean wasZoomInMultiTouch) {
+		this.wasZoomInMultiTouch = wasZoomInMultiTouch;
 	}
 
 	public void setIntZoom(int zoom) {
@@ -1048,6 +1053,7 @@ public class OsmandMapTileView implements IMapDownloaderCallback {
 				secondTouchPointX = x2;
 				secondTouchPointY = y2;
 				multiTouch = true;
+                wasZoomInMultiTouch = false;
 			}
 		}
 
@@ -1064,9 +1070,10 @@ public class OsmandMapTileView implements IMapDownloaderCallback {
 		public void onActionPointerUp() {
 			multiTouch = false;
 			if (isZooming()) {
-				multiTouchEndTime = 0;
+				wasZoomInMultiTouch = true;
 			} else {
 				multiTouchEndTime = System.currentTimeMillis();
+				wasZoomInMultiTouch = false;
 			}
 		}
 
