@@ -150,7 +150,7 @@ public class MapInfoWidgetsFactory {
 			RulerMode mode = rulerMode.get();
 			if (mode == RulerMode.FIRST) {
 				return RULER_CONTROL_WIDGET_STATE_FIRST_MODE;
-			} else if (mode == RulerMode.SECOND){
+			} else if (mode == RulerMode.SECOND) {
 				return RULER_CONTROL_WIDGET_STATE_SECOND_MODE;
 			} else {
 				return RULER_CONTROL_WIDGET_STATE_EMPTY_MODE;
@@ -184,31 +184,23 @@ public class MapInfoWidgetsFactory {
 
 	public TextInfoWidget createRulerControl(final MapActivity map) {
 		final String title = map.getResources().getString(R.string.map_widget_show_ruler);
-        final TextInfoWidget rulerControl = new TextInfoWidget(map) {
-			boolean needNewLatLon;
-			long cacheMultiTouchEndTime;
+		final TextInfoWidget rulerControl = new TextInfoWidget(map) {
 			RulerControlLayer rulerLayer = map.getMapLayers().getRulerControlLayer();
+			LatLon cacheFirstTouchPoint = new LatLon(0, 0);
+			LatLon cacheSecondTouchPoint = new LatLon(0, 0);
 
 			@Override
 			public boolean updateInfo(DrawSettings drawSettings) {
 				RulerMode mode = map.getMyApplication().getSettings().RULER_MODE.get();
 				OsmandMapTileView view = map.getMapView();
 
-				if (cacheMultiTouchEndTime != view.getMultiTouchEndTime()) {
-					cacheMultiTouchEndTime = view.getMultiTouchEndTime();
-					needNewLatLon = true;
-				}
 				if (rulerLayer.isShowTwoFingersDistance()) {
-					if (needNewLatLon) {
-						float x1 = view.getFirstTouchPointX();
-						float y1 = view.getFirstTouchPointY();
-						float x2 = view.getSecondTouchPointX();
-						float y2 = view.getSecondTouchPointY();
-						LatLon firstFinger = view.getCurrentRotatedTileBox().getLatLonFromPixel(x1, y1);
-						LatLon secondFinger = view.getCurrentRotatedTileBox().getLatLonFromPixel(x2, y2);
-						setDistanceText(firstFinger.getLatitude(), firstFinger.getLongitude(),
-								secondFinger.getLatitude(), secondFinger.getLongitude());
-						needNewLatLon = false;
+					if (!cacheFirstTouchPoint.equals(view.getFirstTouchPointLatLon()) ||
+							!cacheSecondTouchPoint.equals(view.getSecondTouchPointLatLon())) {
+						cacheFirstTouchPoint = view.getFirstTouchPointLatLon();
+						cacheSecondTouchPoint = view.getSecondTouchPointLatLon();
+						setDistanceText(cacheFirstTouchPoint.getLatitude(), cacheFirstTouchPoint.getLongitude(),
+								cacheSecondTouchPoint.getLatitude(), cacheSecondTouchPoint.getLongitude());
 					}
 				} else if (mode == RulerMode.FIRST || mode == RulerMode.SECOND) {
 					Location currentLoc = map.getMyApplication().getLocationProvider().getLastKnownLocation();
@@ -218,10 +210,8 @@ public class MapInfoWidgetsFactory {
 						setDistanceText(currentLoc.getLatitude(), currentLoc.getLongitude(),
 								centerLoc.getLatitude(), centerLoc.getLongitude());
 					}
-					needNewLatLon = true;
 				} else {
 					setText(title, null);
-					needNewLatLon = true;
 				}
 				return true;
 			}

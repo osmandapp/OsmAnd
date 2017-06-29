@@ -161,10 +161,8 @@ public class OsmandMapTileView implements IMapDownloaderCallback {
 	private boolean afterDoubleTap = false;
 	private boolean wasMapLinkedBeforeGesture = false;
 
-	private float firstTouchPointX;
-	private float firstTouchPointY;
-	private float secondTouchPointX;
-	private float secondTouchPointY;
+	private LatLon firstTouchPointLatLon;
+	private LatLon secondTouchPointLatLon;
 	private boolean multiTouch;
 	private long multiTouchEndTime;
 	private boolean wasZoomInMultiTouch;
@@ -313,20 +311,12 @@ public class OsmandMapTileView implements IMapDownloaderCallback {
 	}
 
 	// ///////////////////////// NON UI PART (could be extracted in common) /////////////////////////////
-	public float getFirstTouchPointX() {
-		return firstTouchPointX;
+	public LatLon getFirstTouchPointLatLon() {
+		return firstTouchPointLatLon;
 	}
 
-	public float getFirstTouchPointY() {
-		return firstTouchPointY;
-	}
-
-	public float getSecondTouchPointX() {
-		return secondTouchPointX;
-	}
-
-	public float getSecondTouchPointY() {
-		return secondTouchPointY;
+	public LatLon getSecondTouchPointLatLon() {
+		return secondTouchPointLatLon;
 	}
 
 	public boolean isMultiTouch() {
@@ -1048,22 +1038,11 @@ public class OsmandMapTileView implements IMapDownloaderCallback {
 			this.x2 = x2;
 			this.y2 = y2;
 			if (x1 != x2 || y1 != y2) {
-				firstTouchPointX = x1;
-				firstTouchPointY = y1;
-				secondTouchPointX = x2;
-				secondTouchPointY = y2;
+				firstTouchPointLatLon = currentViewport.getLatLonFromPixel(x1, y1);
+				secondTouchPointLatLon = currentViewport.getLatLonFromPixel(x2, y2);
 				multiTouch = true;
                 wasZoomInMultiTouch = false;
 			}
-		}
-
-		@Override
-		public void onActionPointerDownOrMove(float x1, float y1, float x2, float y2) {
-			firstTouchPointX = x1;
-			firstTouchPointY = y1;
-			secondTouchPointX = x2;
-			secondTouchPointY = y2;
-			multiTouch = true;
 		}
 
 		@Override
