@@ -258,6 +258,7 @@ public class MapillaryFiltersFragment extends BaseOsmAndFragment {
 
                 changeButtonState(apply, .5f, false);
                 plugin.updateLayers(mapActivity.getMapView(), mapActivity);
+                hideKeyboard();
             }
         });
 
@@ -276,8 +277,8 @@ public class MapillaryFiltersFragment extends BaseOsmAndFragment {
                 settings.MAPILLARY_FILTER_FROM_DATE.set(0L);
                 settings.MAPILLARY_FILTER_TO_DATE.set(0L);
 
-                changeButtonState(apply, .5f, false);
                 plugin.updateLayers(mapActivity.getMapView(), mapActivity);
+                hideKeyboard();
             }
         });
 

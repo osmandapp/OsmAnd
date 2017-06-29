@@ -9,6 +9,7 @@
          3. All your modified/created strings are in the top of the file (to make easier find what\'s translated).
     PLEASE: Have a look at http://code.google.com/p/osmand/wiki/UIConsistency, it may really improve your and our work  :-)  Thx - Hardy
     -->
+    <string name="shared_string_reset">Reset</string>
     <string name="shared_string_reload">Reload</string>
     <string name="mapillary_menu_descr_tile_cache">Reload tiles to see up to date data.</string>
     <string name="mapillary_menu_title_tile_cache">Tile cache</string>

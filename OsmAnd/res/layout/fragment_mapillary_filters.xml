@@ -384,7 +384,7 @@
                 android:background="?attr/selectableItemBackground"
                 android:gravity="start|center_vertical"
                 android:minWidth="0dp"
-                android:text="@string/shared_string_clear"
+                android:text="@string/shared_string_reset"
                 android:textAlignment="textStart"
                 android:textColor="?attr/color_dialog_buttons" />
 
