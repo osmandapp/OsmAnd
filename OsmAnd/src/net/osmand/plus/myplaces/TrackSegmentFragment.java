@@ -1178,6 +1178,12 @@ public class TrackSegmentFragment extends OsmAndListFragment {
 									openAnalyzeOnMap(GPXTabItemType.GPX_TAB_ITEM_GENERAL);
 								}
 							});
+							view.findViewById(R.id.split_interval).setOnClickListener(new View.OnClickListener() {
+								@Override
+								public void onClick(View view) {
+									openSplitIntervalScreen();
+								}
+							});
 
 							break;
 						case GPX_TAB_ITEM_ALTITUDE:
@@ -1222,6 +1228,12 @@ public class TrackSegmentFragment extends OsmAndListFragment {
 									openAnalyzeOnMap(GPXTabItemType.GPX_TAB_ITEM_ALTITUDE);
 								}
 							});
+							view.findViewById(R.id.split_interval).setOnClickListener(new View.OnClickListener() {
+								@Override
+								public void onClick(View view) {
+									openSplitIntervalScreen();
+								}
+							});
 
 							break;
 						case GPX_TAB_ITEM_SPEED:
@@ -1263,6 +1275,12 @@ public class TrackSegmentFragment extends OsmAndListFragment {
 								@Override
 								public void onClick(View v) {
 									openAnalyzeOnMap(GPXTabItemType.GPX_TAB_ITEM_SPEED);
+								}
+							});
+							view.findViewById(R.id.split_interval).setOnClickListener(new View.OnClickListener() {
+								@Override
+								public void onClick(View view) {
+									openSplitIntervalScreen();
 								}
 							});
 							break;
@@ -1428,6 +1446,10 @@ public class TrackSegmentFragment extends OsmAndListFragment {
 
 			MapActivity.launchMapActivityMoveToTop(getActivity());
 		}
+	}
+
+	void openSplitIntervalScreen() {
+
 	}
 
 	private class SplitTrackAsyncTask extends AsyncTask<Void, Void, Void> {
