@@ -80,8 +80,13 @@
             android:layout_alignParentEnd="true"
             android:layout_alignParentRight="true"
             android:layout_centerVertical="true"
+            android:layout_marginEnd="16dp"
+            android:layout_marginRight="16dp"
             android:background="?attr/selectableItemBackground"
+            android:gravity="end|center_vertical"
+            android:minWidth="0dp"
             android:text="@string/shared_string_reload"
+            android:textAlignment="textEnd"
             android:textColor="?attr/color_dialog_buttons" />
 
         <LinearLayout
@@ -349,7 +354,6 @@
                     android:textSize="@dimen/default_list_text_size"
                     tools:text="To" />
             </android.support.design.widget.TextInputLayout>
-
         </LinearLayout>
 
         <View
@@ -375,10 +379,13 @@
                 android:layout_height="wrap_content"
                 android:layout_alignParentLeft="true"
                 android:layout_alignParentStart="true"
-                android:layout_marginLeft="32dp"
-                android:layout_marginStart="32dp"
+                android:layout_marginLeft="56dp"
+                android:layout_marginStart="56dp"
                 android:background="?attr/selectableItemBackground"
+                android:gravity="start|center_vertical"
+                android:minWidth="0dp"
                 android:text="@string/shared_string_clear"
+                android:textAlignment="textStart"
                 android:textColor="?attr/color_dialog_buttons" />
 
             <Button
@@ -387,8 +394,13 @@
                 android:layout_height="wrap_content"
                 android:layout_alignParentEnd="true"
                 android:layout_alignParentRight="true"
+                android:layout_marginEnd="16dp"
+                android:layout_marginRight="16dp"
                 android:background="?attr/selectableItemBackground"
+                android:gravity="end|center_vertical"
+                android:minWidth="0dp"
                 android:text="@string/shared_string_apply"
+                android:textAlignment="textEnd"
                 android:textColor="?attr/color_dialog_buttons" />
         </RelativeLayout>
 
