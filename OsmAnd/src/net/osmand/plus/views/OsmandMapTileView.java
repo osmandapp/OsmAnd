@@ -161,12 +161,11 @@ public class OsmandMapTileView implements IMapDownloaderCallback {
 	private boolean afterDoubleTap = false;
 	private boolean wasMapLinkedBeforeGesture = false;
 
-	private float firstTouchPointX;
-	private float firstTouchPointY;
-	private float secondTouchPointX;
-	private float secondTouchPointY;
+	private LatLon firstTouchPointLatLon;
+	private LatLon secondTouchPointLatLon;
 	private boolean multiTouch;
 	private long multiTouchEndTime;
+	private boolean wasZoomInMultiTouch;
 
 	public OsmandMapTileView(MapActivity activity, int w, int h) {
 		this.activity = activity;
@@ -312,36 +311,28 @@ public class OsmandMapTileView implements IMapDownloaderCallback {
 	}
 
 	// ///////////////////////// NON UI PART (could be extracted in common) /////////////////////////////
-	public float getFirstTouchPointX() {
-		return firstTouchPointX;
+	public LatLon getFirstTouchPointLatLon() {
+		return firstTouchPointLatLon;
 	}
 
-	public float getFirstTouchPointY() {
-		return firstTouchPointY;
-	}
-
-	public float getSecondTouchPointX() {
-		return secondTouchPointX;
-	}
-
-	public float getSecondTouchPointY() {
-		return secondTouchPointY;
+	public LatLon getSecondTouchPointLatLon() {
+		return secondTouchPointLatLon;
 	}
 
 	public boolean isMultiTouch() {
 		return multiTouch;
 	}
 
-	public void setMultiTouch(boolean multiTouch) {
-		this.multiTouch = multiTouch;
-	}
-
 	public long getMultiTouchEndTime() {
 		return multiTouchEndTime;
 	}
 
-	public void setMultiTouchEndTime(long multiTouchEndTime) {
-		this.multiTouchEndTime = multiTouchEndTime;
+	public boolean isWasZoomInMultiTouch() {
+		return wasZoomInMultiTouch;
+	}
+
+	public void setWasZoomInMultiTouch(boolean wasZoomInMultiTouch) {
+		this.wasZoomInMultiTouch = wasZoomInMultiTouch;
 	}
 
 	public void setIntZoom(int zoom) {
@@ -999,8 +990,6 @@ public class OsmandMapTileView implements IMapDownloaderCallback {
 		private LatLon initialCenterLatLon;
 		private boolean startRotating = false;
 		private static final float ANGLE_THRESHOLD = 30;
-		private int cacheIntZoom = getZoom();
-		private double cacheFractionalZoom = getZoomFractionalPart();
 
 		@Override
 		public void onZoomOrRotationEnded(double relativeToStart, float angleRelative) {
@@ -1049,33 +1038,27 @@ public class OsmandMapTileView implements IMapDownloaderCallback {
 			this.x2 = x2;
 			this.y2 = y2;
 			if (x1 != x2 || y1 != y2) {
-				firstTouchPointX = x1;
-				firstTouchPointY = y1;
-				secondTouchPointX = x2;
-				secondTouchPointY = y2;
+				firstTouchPointLatLon = currentViewport.getLatLonFromPixel(x1, y1);
+				secondTouchPointLatLon = currentViewport.getLatLonFromPixel(x2, y2);
 				multiTouch = true;
+                wasZoomInMultiTouch = false;
 			}
-		}
-
-		@Override
-		public void onActionPointerDownOrMove(float x1, float y1, float x2, float y2) {
-			firstTouchPointX = x1;
-			firstTouchPointY = y1;
-			secondTouchPointX = x2;
-			secondTouchPointY = y2;
-			multiTouch = true;
 		}
 
 		@Override
 		public void onActionPointerUp() {
 			multiTouch = false;
-			if (cacheIntZoom != getZoom() || cacheFractionalZoom != getZoomFractionalPart()) {
-				cacheIntZoom = getZoom();
-				cacheFractionalZoom = getZoomFractionalPart();
-				multiTouchEndTime = 0;
+			if (isZooming()) {
+				wasZoomInMultiTouch = true;
 			} else {
 				multiTouchEndTime = System.currentTimeMillis();
+				wasZoomInMultiTouch = false;
 			}
+		}
+
+		@Override
+		public void onActionCancel() {
+			multiTouch = false;
 		}
 
 		@Override
