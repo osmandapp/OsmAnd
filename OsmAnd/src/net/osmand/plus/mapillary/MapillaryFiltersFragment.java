@@ -60,7 +60,7 @@ public class MapillaryFiltersFragment extends BaseOsmAndFragment {
         final DateFormat dateFormat = SimpleDateFormat.getDateInstance(DateFormat.MEDIUM);
 
         final View view = View.inflate(new ContextThemeWrapper(getContext(), themeRes), R.layout.fragment_mapillary_filters, null);
-        view.setBackgroundColor(backgroundColor);
+        view.findViewById(R.id.mapillary_filters_linear_layout).setBackgroundColor(backgroundColor);
 
 
         final View toggleRow = view.findViewById(R.id.toggle_row);
@@ -78,7 +78,7 @@ public class MapillaryFiltersFragment extends BaseOsmAndFragment {
         ((AppCompatTextView) toggleRow.findViewById(R.id.toggle_row_title)).setText(toggleActionStringId);
         final Drawable drawable = getIcon(toggleIconId, toggleIconColorId);
         ((AppCompatImageView) toggleRow.findViewById(R.id.toggle_row_icon)).setImageDrawable(drawable);
-        final CompoundButton toggle = (CompoundButton) toggleRow.findViewById(R.id.toggle_row_toggle);
+        final CompoundButton toggle = toggleRow.findViewById(R.id.toggle_row_toggle);
         toggle.setChecked(selected);
         toggle.setOnCheckedChangeListener(new CompoundButton.OnCheckedChangeListener() {
             @Override
@@ -96,7 +96,7 @@ public class MapillaryFiltersFragment extends BaseOsmAndFragment {
         });
 
 
-        final Button reloadTile = (Button) view.findViewById(R.id.button_reload_tile);
+        final Button reloadTile = view.findViewById(R.id.button_reload_tile);
         reloadTile.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
@@ -114,7 +114,7 @@ public class MapillaryFiltersFragment extends BaseOsmAndFragment {
         ((AppCompatImageView) view.findViewById(R.id.mapillary_filters_tile_cache_icon)).setImageDrawable(getIcon(R.drawable.ic_layer_top_dark, colorRes));
 
 
-        final DelayAutoCompleteTextView textView = (DelayAutoCompleteTextView) view.findViewById(R.id.auto_complete_text_view);
+        final DelayAutoCompleteTextView textView = view.findViewById(R.id.auto_complete_text_view);
         textView.setAdapter(new MapillaryAutoCompleteAdapter(getContext(), R.layout.auto_complete_suggestion, getMyApplication()));
         String selectedUsername = settings.MAPILLARY_FILTER_USERNAME.get();
         if (!selectedUsername.equals("") && settings.USE_MAPILLARY_FILTER.get()) {
@@ -162,12 +162,12 @@ public class MapillaryFiltersFragment extends BaseOsmAndFragment {
 
             }
         });
-        ImageView imageView = (ImageView) view.findViewById(R.id.warning_image_view);
+        ImageView imageView = view.findViewById(R.id.warning_image_view);
         imageView.setImageDrawable(getPaintedContentIcon(R.drawable.ic_small_warning,
                 getResources().getColor(R.color.color_warning)));
 
 
-        final EditText dateFromEt = (EditText) view.findViewById(R.id.date_from_edit_text);
+        final EditText dateFromEt = view.findViewById(R.id.date_from_edit_text);
         final DatePickerDialog.OnDateSetListener dateFromDialog = new DatePickerDialog.OnDateSetListener() {
             @Override
             public void onDateSet(DatePicker v, int year, int monthOfYear, int dayOfMonth) {
@@ -194,7 +194,7 @@ public class MapillaryFiltersFragment extends BaseOsmAndFragment {
         dateFromEt.setCompoundDrawablesWithIntrinsicBounds(null, null, getContentIcon(R.drawable.ic_action_arrow_drop_down), null);
 
 
-        final EditText dateToEt = (EditText) view.findViewById(R.id.date_to_edit_text);
+        final EditText dateToEt = view.findViewById(R.id.date_to_edit_text);
         final DatePickerDialog.OnDateSetListener dateToDialog = new DatePickerDialog.OnDateSetListener() {
             @Override
             public void onDateSet(DatePicker v, int year, int monthOfYear, int dayOfMonth) {
@@ -232,7 +232,7 @@ public class MapillaryFiltersFragment extends BaseOsmAndFragment {
         }
 
 
-        final Button apply = (Button) view.findViewById(R.id.button_apply);
+        final Button apply = view.findViewById(R.id.button_apply);
         changeButtonState(apply, .5f, false);
         apply.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -263,7 +263,7 @@ public class MapillaryFiltersFragment extends BaseOsmAndFragment {
         });
 
 
-        final Button clear = (Button) view.findViewById(R.id.button_clear);
+        final Button clear = view.findViewById(R.id.button_clear);
         clear.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {

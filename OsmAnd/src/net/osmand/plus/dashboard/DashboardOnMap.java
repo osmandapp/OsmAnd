@@ -77,7 +77,6 @@ import net.osmand.plus.mapcontextmenu.other.MapRouteInfoMenu;
 import net.osmand.plus.mapcontextmenu.other.RoutePreferencesMenu;
 import net.osmand.plus.mapcontextmenu.other.RoutePreferencesMenu.LocalRoutingParameter;
 import net.osmand.plus.mapillary.MapillaryFiltersFragment;
-import net.osmand.plus.mapillary.MapillaryFiltersMapShadowFragment;
 import net.osmand.plus.mapillary.MapillaryPlugin.MapillaryFirstDialogFragment;
 import net.osmand.plus.rastermaps.OsmandRasterMapsPlugin;
 import net.osmand.plus.routing.RoutingHelper;
@@ -824,8 +823,7 @@ public class DashboardOnMap implements ObservableScrollViewCallbacks, DynamicLis
 					addOrUpdateDashboardFragments();
 				} else {
 					mapActivity.getSupportFragmentManager().beginTransaction()
-							.replace(R.id.content, new MapillaryFiltersMapShadowFragment(), MapillaryFiltersMapShadowFragment.TAG)
-							.add(R.id.content, new MapillaryFiltersFragment(), MapillaryFiltersFragment.TAG)
+							.replace(R.id.content, new MapillaryFiltersFragment(), MapillaryFiltersFragment.TAG)
 							.commit();
 				}
 				scrollView.setVisibility(View.VISIBLE);
@@ -1253,13 +1251,11 @@ public class DashboardOnMap implements ObservableScrollViewCallbacks, DynamicLis
 	private void removeMapillaryFiltersFragment() {
 		FragmentManager manager = mapActivity.getSupportFragmentManager();
 		Fragment mapillaryFragment = manager.findFragmentByTag(MapillaryFiltersFragment.TAG);
-		Fragment shadowOnMap = manager.findFragmentByTag(MapillaryFiltersMapShadowFragment.TAG);
-		if (mapillaryFragment != null && shadowOnMap != null) {
+		if (mapillaryFragment != null) {
 			OsmandSettings settings = getMyApplication().getSettings();
 			TransactionBuilder builder = new TransactionBuilder(manager, settings, mapActivity);
 			builder.getFragmentTransaction()
 					.remove(mapillaryFragment)
-					.remove(shadowOnMap)
 					.commit();
 		}
 	}
