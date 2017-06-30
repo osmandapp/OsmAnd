@@ -3,7 +3,7 @@
           xmlns:tools="http://schemas.android.com/tools">
 
     <application
-        android:icon="@mipmap/icon_free"
+        android:icon="@drawable/icon_free"
         tools:replace="android:icon">
         <service
             android:name="net.osmand.plus.NavigationService"

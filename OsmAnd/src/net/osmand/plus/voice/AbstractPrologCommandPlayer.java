@@ -111,7 +111,7 @@ public abstract class AbstractPrologCommandPlayer implements CommandPlayer, Stat
 		NotificationCompat.Builder notificationBuilder =
 				new NotificationCompat.Builder(ctx)
 						.setVisibility(NotificationCompat.VISIBILITY_PUBLIC)
-						.setSmallIcon(R.mipmap.icon)
+						.setSmallIcon(R.drawable.icon)
 						.setContentTitle(ctx.getString(R.string.app_name))
 						.setContentText(message)
 						.setGroup(WEAR_ALERT);

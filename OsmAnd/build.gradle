@@ -17,8 +17,8 @@ apply plugin: 'com.android.application'
 // Less important
 
 android {
-    compileSdkVersion 26
-    buildToolsVersion "26.0.0"
+	compileSdkVersion 23
+	buildToolsVersion "23.0.3"
 
 	signingConfigs {
 		development {
@@ -38,7 +38,7 @@ android {
 
 	defaultConfig {
 		minSdkVersion System.getenv("MIN_SDK_VERSION") ? System.getenv("MIN_SDK_VERSION").toInteger() : 14
-		targetSdkVersion 26
+		targetSdkVersion 23
 		versionCode 270
 		versionCode System.getenv("APK_NUMBER_VERSION") ? System.getenv("APK_NUMBER_VERSION").toInteger() : versionCode
 		multiDexEnabled true
@@ -352,10 +352,10 @@ tasks.withType(JavaCompile) {
 }
 
 task appStart(type: Exec) {
-	// linux
+	// linux 
 	commandLine 'adb', 'shell', 'am', 'start', '-n', 'net.osmand.plus/net.osmand.plus.activities.MapActivity'
 	// windows
-	// commandLine 'cmd', '/c', 'adb', 'shell', 'am', 'start', '-n', 'net.osmand.plus/net.osmand.plus.activities.MapActivity'
+	// commandLine 'cmd', '/c', 'adb', 'shell', 'am', 'start', '-n', 'net.osmand.plus/net.osmand.plus.activities.MapActivity'      
 }
 
 repositories {
@@ -373,7 +373,7 @@ repositories {
 	}
 }
 
-def analytics = (System.getenv("APP_FEATURES") && System.getenv("APP_FEATURES").contains("+play_market") &&
+def analytics = (System.getenv("APP_FEATURES") && System.getenv("APP_FEATURES").contains("+play_market") && 
 	System.getenv("PACKAGE_TO_BUILT").equals("net.osmand") ) || System.getenv("USE_FIREBASE")
 dependencies {
 	compile project(path: ':OsmAnd-java', configuration: 'android')
