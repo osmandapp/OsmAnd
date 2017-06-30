@@ -3381,4 +3381,13 @@
 
 	<string name="poi_locomotive">鐵路機車</string>
 
+	<string name="poi_nutrition_supplements">營養補充品</string>
+	<string name="poi_photo_studio">照相館</string>
+
+	<string name="poi_animal_keeping">動物飼養</string>
+	<string name="poi_animal_keeping_horse">動物飼養：馬</string>
+	<string name="poi_animal_keeping_sheep">動物飼養：羊</string>
+	<string name="poi_tower_construction_lattice">施工：格構式</string>
+	<string name="poi_motorcycle_type_offroad">越野</string>
+	<string name="poi_motorcycle_type_dualsport">Dualsport</string>
 	</resources>
