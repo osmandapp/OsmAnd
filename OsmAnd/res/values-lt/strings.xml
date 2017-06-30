@@ -2780,4 +2780,6 @@ Tai yra puikus būdas paremti OsmAnd ir OSM, jei jie jums patinka.</string>
     <string name="mapillary_descr">Internetinės gatvės nuotraukos visiems. Atraskite vietas, bendradarbiaukite, fotografuokite pasaulį.</string>
     <string name="plugin_mapillary_descr">Internetinės gatvės nuotraukos visiems. Atraskite vietas, bendradarbiaukite, fotografuokite pasaulį.</string>
     <string name="routing_attr_allow_private_description">Suteikti prieigą prie privačių teritorijų</string>
+    <string name="points_delete_multiple_succesful">Punktas(-ai) sėkmingai ištrintas(-i).</string>
+    <string name="points_delete_multiple">Jūs ketinate trinti %1$d punktą (- us). Ar tikrai?</string>
     </resources>
