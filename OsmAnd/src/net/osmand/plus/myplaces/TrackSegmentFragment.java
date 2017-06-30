@@ -1449,7 +1449,11 @@ public class TrackSegmentFragment extends OsmAndListFragment {
 	}
 
 	void openSplitIntervalScreen() {
-
+		getFragmentManager()
+				.beginTransaction()
+				.replace(R.id.track_activity_layout, new SplitSegmentFragment())
+				.addToBackStack(null)
+				.commit();
 	}
 
 	private class SplitTrackAsyncTask extends AsyncTask<Void, Void, Void> {

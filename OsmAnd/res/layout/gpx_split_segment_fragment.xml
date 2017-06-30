@@ -4,467 +4,476 @@
     xmlns:osmand="http://schemas.android.com/apk/res-auto"
     android:orientation="vertical"
     android:layout_width="match_parent"
-    android:layout_height="wrap_content"
-    android:background="?attr/bg_color"
-    android:paddingLeft="16dp"
-    android:paddingRight="16dp">
+    android:layout_height="wrap_content">
+
+    <include layout="@layout/list_item_divider"/>
 
     <LinearLayout
-        android:layout_width="match_parent"
-        android:layout_height="40dp"
-        android:orientation="horizontal">
-
-        <ImageView
-            android:id="@+id/overview_image"
-            android:layout_width="16dp"
-            android:layout_height="16dp"
-            android:src="@drawable/ic_action_time_start"
-            android:layout_marginBottom="12dp"
-            android:layout_marginTop="12dp"
-            android:layout_marginRight="12dp"/>
-
-        <net.osmand.plus.widgets.TextViewEx
-            android:id="@+id/overview_text"
-            android:background="@null"
-            android:layout_gravity="center_vertical"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:textColor="?android:attr/textColorPrimary"
-            osmand:typeface="@string/font_roboto_medium"
-            android:textSize="@dimen/default_desc_text_size"
-            tools:text="Overview"/>
-
-        <net.osmand.plus.widgets.TextViewEx
-            android:id="@+id/fragment_count_text"
-            android:background="@null"
-            android:layout_gravity="center_vertical"
-            android:gravity="right"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:textColor="?android:attr/textColorPrimary"
-            osmand:typeface="@string/font_roboto_medium"
-            android:textSize="@dimen/default_desc_text_size"
-            tools:text="1 of 4"/>
-
-    </LinearLayout>
-
-    <View
-        android:layout_width="match_parent"
-        android:layout_height="1dp"
-        android:layout_marginLeft="28dp"
-        android:background="?attr/dashboard_divider"/>
-
-    <LinearLayout
+        android:orientation="vertical"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:orientation="horizontal"
-        android:layout_marginTop="10dp"
-        android:layout_marginBottom="10dp">
+        android:background="?attr/bg_color"
+        android:paddingLeft="16dp"
+        android:paddingRight="16dp">
 
         <LinearLayout
-            android:layout_marginRight="3dp"
-            android:layout_width="107dp"
-            android:layout_height="wrap_content"
+            android:layout_width="match_parent"
+            android:layout_height="40dp"
             android:orientation="horizontal">
 
             <ImageView
-                android:id="@+id/distance_or_timespan_image"
-                android:layout_width="16dp"
-                android:layout_height="16dp"
-                android:src="@drawable/ic_action_polygom_dark"
-                android:layout_marginRight="12dp"/>
-
-            <LinearLayout
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:orientation="vertical">
-
-                <net.osmand.plus.widgets.TextViewEx
-                    android:id="@+id/distance_or_time_span_value"
-                    android:layout_width="match_parent"
-                    android:layout_height="wrap_content"
-                    android:background="@null"
-                    tools:text="40 km"
-                    android:textColor="?android:attr/textColorPrimary"
-                    osmand:typeface="@string/font_roboto_medium"
-                    android:textSize="@dimen/default_desc_text_size"/>
-
-                <TextView
-                    android:id="@+id/distance_or_time_span_text"
-                    android:layout_width="match_parent"
-                    android:layout_height="wrap_content"
-                    android:background="@null"
-                    android:layout_marginTop="3dp"
-                    tools:text="@string/distance"
-                    android:textColor="?android:attr/textColorSecondary"
-                    android:textSize="@dimen/default_sub_text_size"/>
-
-            </LinearLayout>
-
-        </LinearLayout>
-
-        <LinearLayout
-            android:layout_marginRight="3dp"
-            android:layout_width="107dp"
-            android:layout_height="wrap_content"
-            android:orientation="horizontal">
-
-            <ImageView
+                android:id="@+id/overview_image"
                 android:layout_width="16dp"
                 android:layout_height="16dp"
                 android:src="@drawable/ic_action_time_start"
+                android:layout_marginBottom="12dp"
+                android:layout_marginTop="12dp"
                 android:layout_marginRight="12dp"/>
 
-            <LinearLayout
+            <net.osmand.plus.widgets.TextViewEx
+                android:id="@+id/overview_text"
+                android:background="@null"
+                android:layout_gravity="center_vertical"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:orientation="vertical">
+                android:textColor="?android:attr/textColorPrimary"
+                osmand:typeface="@string/font_roboto_medium"
+                android:textSize="@dimen/default_desc_text_size"
+                tools:text="Overview"/>
 
-                <net.osmand.plus.widgets.TextViewEx
-                    android:id="@+id/start_time_value"
-                    android:layout_width="match_parent"
-                    android:layout_height="wrap_content"
-                    android:background="@null"
-                    tools:text="15:24:58"
-                    android:textColor="?android:attr/textColorPrimary"
-                    osmand:typeface="@string/font_roboto_medium"
-                    android:textSize="@dimen/default_desc_text_size"/>
+            <net.osmand.plus.widgets.TextViewEx
+                android:id="@+id/fragment_count_text"
+                android:background="@null"
+                android:layout_gravity="center_vertical"
+                android:gravity="right"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:textColor="?android:attr/textColorPrimary"
+                osmand:typeface="@string/font_roboto_medium"
+                android:textSize="@dimen/default_desc_text_size"
+                tools:text="1 of 4"/>
 
-                <TextView
-                    android:layout_width="match_parent"
+        </LinearLayout>
+
+        <View
+            android:layout_width="match_parent"
+            android:layout_height="1dp"
+            android:layout_marginLeft="28dp"
+            android:background="?attr/dashboard_divider"/>
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:orientation="horizontal"
+            android:layout_marginTop="10dp"
+            android:layout_marginBottom="10dp">
+
+            <LinearLayout
+                android:layout_marginRight="3dp"
+                android:layout_width="107dp"
+                android:layout_height="wrap_content"
+                android:orientation="horizontal">
+
+                <ImageView
+                    android:id="@+id/distance_or_timespan_image"
+                    android:layout_width="16dp"
+                    android:layout_height="16dp"
+                    android:src="@drawable/ic_action_polygom_dark"
+                    android:layout_marginRight="12dp"/>
+
+                <LinearLayout
+                    android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:background="@null"
-                    android:layout_marginTop="3dp"
-                    android:text="@string/shared_string_start_time"
-                    android:textColor="?android:attr/textColorSecondary"
-                    android:textSize="@dimen/default_sub_text_size"/>
+                    android:orientation="vertical">
+
+                    <net.osmand.plus.widgets.TextViewEx
+                        android:id="@+id/distance_or_time_span_value"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:background="@null"
+                        tools:text="40 km"
+                        android:textColor="?android:attr/textColorPrimary"
+                        osmand:typeface="@string/font_roboto_medium"
+                        android:textSize="@dimen/default_desc_text_size"/>
+
+                    <TextView
+                        android:id="@+id/distance_or_time_span_text"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:background="@null"
+                        android:layout_marginTop="3dp"
+                        tools:text="@string/distance"
+                        android:textColor="?android:attr/textColorSecondary"
+                        android:textSize="@dimen/default_sub_text_size"/>
+
+                </LinearLayout>
+
+            </LinearLayout>
+
+            <LinearLayout
+                android:layout_marginRight="3dp"
+                android:layout_width="107dp"
+                android:layout_height="wrap_content"
+                android:orientation="horizontal">
+
+                <ImageView
+                    android:layout_width="16dp"
+                    android:layout_height="16dp"
+                    android:src="@drawable/ic_action_time_start"
+                    android:layout_marginRight="12dp"/>
+
+                <LinearLayout
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:orientation="vertical">
+
+                    <net.osmand.plus.widgets.TextViewEx
+                        android:id="@+id/start_time_value"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:background="@null"
+                        tools:text="15:24:58"
+                        android:textColor="?android:attr/textColorPrimary"
+                        osmand:typeface="@string/font_roboto_medium"
+                        android:textSize="@dimen/default_desc_text_size"/>
+
+                    <TextView
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:background="@null"
+                        android:layout_marginTop="3dp"
+                        android:text="@string/shared_string_start_time"
+                        android:textColor="?android:attr/textColorSecondary"
+                        android:textSize="@dimen/default_sub_text_size"/>
+
+                </LinearLayout>
+
+            </LinearLayout>
+
+            <LinearLayout
+                android:layout_width="107dp"
+                android:layout_height="wrap_content"
+                android:orientation="horizontal">
+
+                <ImageView
+                    android:layout_width="16dp"
+                    android:layout_height="16dp"
+                    android:src="@drawable/ic_action_time_end"
+                    android:layout_marginRight="12dp"/>
+
+                <LinearLayout
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:orientation="vertical">
+
+                    <net.osmand.plus.widgets.TextViewEx
+                        android:id="@+id/end_time_value"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:background="@null"
+                        tools:text="15:34:58"
+                        android:textColor="?android:attr/textColorPrimary"
+                        osmand:typeface="@string/font_roboto_medium"
+                        android:textSize="@dimen/default_desc_text_size"/>
+
+                    <TextView
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:background="@null"
+                        android:layout_marginTop="3dp"
+                        android:text="@string/shared_string_end_time"
+                        android:textColor="?android:attr/textColorSecondary"
+                        android:textSize="@dimen/default_sub_text_size"/>
+
+                </LinearLayout>
 
             </LinearLayout>
 
         </LinearLayout>
 
-        <LinearLayout
-            android:layout_width="107dp"
-            android:layout_height="wrap_content"
-            android:orientation="horizontal">
+        <View
+            android:layout_width="match_parent"
+            android:layout_height="1dp"
+            android:layout_marginLeft="28dp"
+            android:background="?attr/dashboard_divider"/>
 
-            <ImageView
-                android:layout_width="16dp"
-                android:layout_height="16dp"
-                android:src="@drawable/ic_action_time_end"
-                android:layout_marginRight="12dp"/>
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:orientation="horizontal"
+            android:layout_marginTop="10dp"
+            android:layout_marginBottom="10dp">
 
             <LinearLayout
-                android:layout_width="wrap_content"
+                android:layout_marginRight="3dp"
+                android:layout_width="107dp"
                 android:layout_height="wrap_content"
-                android:orientation="vertical">
+                android:orientation="horizontal">
 
-                <net.osmand.plus.widgets.TextViewEx
-                    android:id="@+id/end_time_value"
-                    android:layout_width="match_parent"
-                    android:layout_height="wrap_content"
-                    android:background="@null"
-                    tools:text="15:34:58"
-                    android:textColor="?android:attr/textColorPrimary"
-                    osmand:typeface="@string/font_roboto_medium"
-                    android:textSize="@dimen/default_desc_text_size"/>
+                <ImageView
+                    android:layout_width="16dp"
+                    android:layout_height="16dp"
+                    android:src="@drawable/ic_action_altitude_average"
+                    android:layout_marginRight="12dp"/>
 
-                <TextView
-                    android:layout_width="match_parent"
+                <LinearLayout
+                    android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:background="@null"
-                    android:layout_marginTop="3dp"
-                    android:text="@string/shared_string_end_time"
-                    android:textColor="?android:attr/textColorSecondary"
-                    android:textSize="@dimen/default_sub_text_size"/>
+                    android:orientation="vertical">
+
+                    <net.osmand.plus.widgets.TextViewEx
+                        android:id="@+id/average_altitude_value"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:background="@null"
+                        tools:text="25 000 m"
+                        android:textColor="?android:attr/textColorPrimary"
+                        osmand:typeface="@string/font_roboto_medium"
+                        android:textSize="@dimen/default_desc_text_size"/>
+
+                    <TextView
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:background="@null"
+                        android:layout_marginTop="3dp"
+                        tools:text="Average"
+                        android:textColor="?android:attr/textColorSecondary"
+                        android:textSize="@dimen/default_sub_text_size"/>
+
+                </LinearLayout>
+
+            </LinearLayout>
+
+            <LinearLayout
+                android:layout_marginRight="3dp"
+                android:layout_width="107dp"
+                android:layout_height="wrap_content"
+                android:orientation="horizontal">
+
+                <ImageView
+                    android:layout_width="16dp"
+                    android:layout_height="16dp"
+                    android:src="@drawable/ic_action_altitude_average"
+                    android:layout_marginRight="12dp"/>
+
+                <LinearLayout
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:orientation="vertical">
+
+                    <net.osmand.plus.widgets.TextViewEx
+                        android:id="@+id/min_altitude_value"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:background="@null"
+                        tools:text="1 m"
+                        android:textColor="?android:attr/textColorPrimary"
+                        osmand:typeface="@string/font_roboto_medium"
+                        android:textSize="@dimen/default_desc_text_size"/>
+
+                    <net.osmand.plus.widgets.TextViewEx
+                        android:id="@+id/max_altitude_value"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:background="@null"
+                        tools:text="2335 m"
+                        android:textColor="?android:attr/textColorPrimary"
+                        osmand:typeface="@string/font_roboto_medium"
+                        android:textSize="@dimen/default_desc_text_size"/>
+
+                    <TextView
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:background="@null"
+                        android:layout_marginTop="3dp"
+                        android:text="Range"
+                        android:textColor="?android:attr/textColorSecondary"
+                        android:textSize="@dimen/default_sub_text_size"/>
+
+                </LinearLayout>
+
+            </LinearLayout>
+
+            <LinearLayout
+                android:layout_width="107dp"
+                android:layout_height="wrap_content"
+                android:orientation="horizontal">
+
+                <ImageView
+                    android:layout_width="16dp"
+                    android:layout_height="16dp"
+                    android:src="@drawable/ic_action_altitude_average"
+                    android:layout_marginRight="12dp"/>
+
+                <LinearLayout
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:orientation="vertical">
+
+                    <net.osmand.plus.widgets.TextViewEx
+                        android:id="@+id/ascent_value"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:background="@null"
+                        tools:text="6280 m"
+                        android:textColor="?android:attr/textColorPrimary"
+                        osmand:typeface="@string/font_roboto_medium"
+                        android:textSize="@dimen/default_desc_text_size"/>
+
+                    <net.osmand.plus.widgets.TextViewEx
+                        android:id="@+id/descent_value"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:background="@null"
+                        tools:text="6285 m"
+                        android:textColor="?android:attr/textColorPrimary"
+                        osmand:typeface="@string/font_roboto_medium"
+                        android:textSize="@dimen/default_desc_text_size"/>
+
+                    <TextView
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:background="@null"
+                        android:layout_marginTop="3dp"
+                        android:text="Ascent/Descent"
+                        android:textColor="?android:attr/textColorSecondary"
+                        android:textSize="@dimen/default_sub_text_size"/>
+
+                </LinearLayout>
 
             </LinearLayout>
 
         </LinearLayout>
 
-    </LinearLayout>
-
-    <View
-        android:layout_width="match_parent"
-        android:layout_height="1dp"
-        android:layout_marginLeft="28dp"
-        android:background="?attr/dashboard_divider"/>
-
-    <LinearLayout
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:orientation="horizontal"
-        android:layout_marginTop="10dp"
-        android:layout_marginBottom="10dp">
+        <View
+            android:layout_width="match_parent"
+            android:layout_height="1dp"
+            android:layout_marginLeft="28dp"
+            android:background="?attr/dashboard_divider"/>
 
         <LinearLayout
-            android:layout_marginRight="3dp"
-            android:layout_width="107dp"
+            android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:orientation="horizontal">
-
-            <ImageView
-                android:layout_width="16dp"
-                android:layout_height="16dp"
-                android:src="@drawable/ic_action_altitude_average"
-                android:layout_marginRight="12dp"/>
+            android:orientation="horizontal"
+            android:layout_marginTop="10dp"
+            android:layout_marginBottom="10dp">
 
             <LinearLayout
-                android:layout_width="wrap_content"
+                android:layout_marginRight="3dp"
+                android:layout_width="107dp"
                 android:layout_height="wrap_content"
-                android:orientation="vertical">
+                android:orientation="horizontal">
 
-                <net.osmand.plus.widgets.TextViewEx
-                    android:id="@+id/average_altitude_value"
-                    android:layout_width="match_parent"
-                    android:layout_height="wrap_content"
-                    android:background="@null"
-                    tools:text="25 000 m"
-                    android:textColor="?android:attr/textColorPrimary"
-                    osmand:typeface="@string/font_roboto_medium"
-                    android:textSize="@dimen/default_desc_text_size"/>
+                <ImageView
+                    android:layout_width="16dp"
+                    android:layout_height="16dp"
+                    android:src="@drawable/ic_action_time_span"
+                    android:layout_marginRight="12dp"/>
 
-                <TextView
-                    android:layout_width="match_parent"
+                <LinearLayout
+                    android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:background="@null"
-                    android:layout_marginTop="3dp"
-                    tools:text="Average"
-                    android:textColor="?android:attr/textColorSecondary"
-                    android:textSize="@dimen/default_sub_text_size"/>
+                    android:orientation="vertical">
+
+                    <net.osmand.plus.widgets.TextViewEx
+                        android:id="@+id/moving_time_value"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:background="@null"
+                        tools:text="3:20:12"
+                        android:textColor="?android:attr/textColorPrimary"
+                        osmand:typeface="@string/font_roboto_medium"
+                        android:textSize="@dimen/default_desc_text_size"/>
+
+                    <TextView
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:background="@null"
+                        android:layout_marginTop="3dp"
+                        tools:text="Moving time"
+                        android:textColor="?android:attr/textColorSecondary"
+                        android:textSize="@dimen/default_sub_text_size"/>
+
+                </LinearLayout>
 
             </LinearLayout>
 
-        </LinearLayout>
-
-        <LinearLayout
-            android:layout_marginRight="3dp"
-            android:layout_width="107dp"
-            android:layout_height="wrap_content"
-            android:orientation="horizontal">
-
-            <ImageView
-                android:layout_width="16dp"
-                android:layout_height="16dp"
-                android:src="@drawable/ic_action_altitude_average"
-                android:layout_marginRight="12dp"/>
-
             <LinearLayout
-                android:layout_width="wrap_content"
+                android:layout_marginRight="3dp"
+                android:layout_width="107dp"
                 android:layout_height="wrap_content"
-                android:orientation="vertical">
+                android:orientation="horizontal">
 
-                <net.osmand.plus.widgets.TextViewEx
-                    android:id="@+id/min_altitude_value"
-                    android:layout_width="match_parent"
-                    android:layout_height="wrap_content"
-                    android:background="@null"
-                    tools:text="1 m"
-                    android:textColor="?android:attr/textColorPrimary"
-                    osmand:typeface="@string/font_roboto_medium"
-                    android:textSize="@dimen/default_desc_text_size"/>
+                <ImageView
+                    android:layout_width="16dp"
+                    android:layout_height="16dp"
+                    android:src="@drawable/ic_action_speed"
+                    android:layout_marginRight="12dp"/>
 
-                <net.osmand.plus.widgets.TextViewEx
-                    android:id="@+id/max_altitude_value"
-                    android:layout_width="match_parent"
+                <LinearLayout
+                    android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:background="@null"
-                    tools:text="2335 m"
-                    android:textColor="?android:attr/textColorPrimary"
-                    osmand:typeface="@string/font_roboto_medium"
-                    android:textSize="@dimen/default_desc_text_size"/>
+                    android:orientation="vertical">
 
-                <TextView
-                    android:layout_width="match_parent"
-                    android:layout_height="wrap_content"
-                    android:background="@null"
-                    android:layout_marginTop="3dp"
-                    android:text="Range"
-                    android:textColor="?android:attr/textColorSecondary"
-                    android:textSize="@dimen/default_sub_text_size"/>
+                    <net.osmand.plus.widgets.TextViewEx
+                        android:id="@+id/average_speed_value"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:background="@null"
+                        tools:text="11.1 km/h"
+                        android:textColor="?android:attr/textColorPrimary"
+                        osmand:typeface="@string/font_roboto_medium"
+                        android:textSize="@dimen/default_desc_text_size"/>
+
+                    <TextView
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:background="@null"
+                        android:layout_marginTop="3dp"
+                        android:text="Average"
+                        android:textColor="?android:attr/textColorSecondary"
+                        android:textSize="@dimen/default_sub_text_size"/>
+
+                </LinearLayout>
 
             </LinearLayout>
 
-        </LinearLayout>
-
-        <LinearLayout
-            android:layout_width="107dp"
-            android:layout_height="wrap_content"
-            android:orientation="horizontal">
-
-            <ImageView
-                android:layout_width="16dp"
-                android:layout_height="16dp"
-                android:src="@drawable/ic_action_altitude_average"
-                android:layout_marginRight="12dp"/>
-
             <LinearLayout
-                android:layout_width="wrap_content"
+                android:layout_width="107dp"
                 android:layout_height="wrap_content"
-                android:orientation="vertical">
+                android:orientation="horizontal">
 
-                <net.osmand.plus.widgets.TextViewEx
-                    android:id="@+id/ascent_value"
-                    android:layout_width="match_parent"
+                <ImageView
+                    android:layout_width="16dp"
+                    android:layout_height="16dp"
+                    android:src="@drawable/ic_action_speed"
+                    android:layout_marginRight="12dp"/>
+
+                <LinearLayout
+                    android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:background="@null"
-                    tools:text="6280 m"
-                    android:textColor="?android:attr/textColorPrimary"
-                    osmand:typeface="@string/font_roboto_medium"
-                    android:textSize="@dimen/default_desc_text_size"/>
+                    android:orientation="vertical">
 
-                <net.osmand.plus.widgets.TextViewEx
-                    android:id="@+id/descent_value"
-                    android:layout_width="match_parent"
-                    android:layout_height="wrap_content"
-                    android:background="@null"
-                    tools:text="6285 m"
-                    android:textColor="?android:attr/textColorPrimary"
-                    osmand:typeface="@string/font_roboto_medium"
-                    android:textSize="@dimen/default_desc_text_size"/>
+                    <net.osmand.plus.widgets.TextViewEx
+                        android:id="@+id/max_min_speed_value"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:background="@null"
+                        tools:text="93 kmg/h"
+                        android:textColor="?android:attr/textColorPrimary"
+                        osmand:typeface="@string/font_roboto_medium"
+                        android:textSize="@dimen/default_desc_text_size"/>
 
-                <TextView
-                    android:layout_width="match_parent"
-                    android:layout_height="wrap_content"
-                    android:background="@null"
-                    android:layout_marginTop="3dp"
-                    android:text="Ascent/Descent"
-                    android:textColor="?android:attr/textColorSecondary"
-                    android:textSize="@dimen/default_sub_text_size"/>
+                    <TextView
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:background="@null"
+                        android:layout_marginTop="3dp"
+                        android:text="Max/Min"
+                        android:textColor="?android:attr/textColorSecondary"
+                        android:textSize="@dimen/default_sub_text_size"/>
 
-            </LinearLayout>
-
-        </LinearLayout>
-
-    </LinearLayout>
-
-    <View
-        android:layout_width="match_parent"
-        android:layout_height="1dp"
-        android:layout_marginLeft="28dp"
-        android:background="?attr/dashboard_divider"/>
-
-    <LinearLayout
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:orientation="horizontal"
-        android:layout_marginTop="10dp"
-        android:layout_marginBottom="10dp">
-
-        <LinearLayout
-            android:layout_marginRight="3dp"
-            android:layout_width="107dp"
-            android:layout_height="wrap_content"
-            android:orientation="horizontal">
-
-            <ImageView
-                android:layout_width="16dp"
-                android:layout_height="16dp"
-                android:src="@drawable/ic_action_time_span"
-                android:layout_marginRight="12dp"/>
-
-            <LinearLayout
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:orientation="vertical">
-
-                <net.osmand.plus.widgets.TextViewEx
-                    android:id="@+id/moving_time_value"
-                    android:layout_width="match_parent"
-                    android:layout_height="wrap_content"
-                    android:background="@null"
-                    tools:text="3:20:12"
-                    android:textColor="?android:attr/textColorPrimary"
-                    osmand:typeface="@string/font_roboto_medium"
-                    android:textSize="@dimen/default_desc_text_size"/>
-
-                <TextView
-                    android:layout_width="match_parent"
-                    android:layout_height="wrap_content"
-                    android:background="@null"
-                    android:layout_marginTop="3dp"
-                    tools:text="Moving time"
-                    android:textColor="?android:attr/textColorSecondary"
-                    android:textSize="@dimen/default_sub_text_size"/>
-
-            </LinearLayout>
-
-        </LinearLayout>
-
-        <LinearLayout
-            android:layout_marginRight="3dp"
-            android:layout_width="107dp"
-            android:layout_height="wrap_content"
-            android:orientation="horizontal">
-
-            <ImageView
-                android:layout_width="16dp"
-                android:layout_height="16dp"
-                android:src="@drawable/ic_action_speed"
-                android:layout_marginRight="12dp"/>
-
-            <LinearLayout
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:orientation="vertical">
-
-                <net.osmand.plus.widgets.TextViewEx
-                    android:id="@+id/average_speed_value"
-                    android:layout_width="match_parent"
-                    android:layout_height="wrap_content"
-                    android:background="@null"
-                    tools:text="11.1 km/h"
-                    android:textColor="?android:attr/textColorPrimary"
-                    osmand:typeface="@string/font_roboto_medium"
-                    android:textSize="@dimen/default_desc_text_size"/>
-
-                <TextView
-                    android:layout_width="match_parent"
-                    android:layout_height="wrap_content"
-                    android:background="@null"
-                    android:layout_marginTop="3dp"
-                    android:text="Average"
-                    android:textColor="?android:attr/textColorSecondary"
-                    android:textSize="@dimen/default_sub_text_size"/>
-
-            </LinearLayout>
-
-        </LinearLayout>
-
-        <LinearLayout
-            android:layout_width="107dp"
-            android:layout_height="wrap_content"
-            android:orientation="horizontal">
-
-            <ImageView
-                android:layout_width="16dp"
-                android:layout_height="16dp"
-                android:src="@drawable/ic_action_speed"
-                android:layout_marginRight="12dp"/>
-
-            <LinearLayout
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:orientation="vertical">
-
-                <net.osmand.plus.widgets.TextViewEx
-                    android:id="@+id/max_min_speed_value"
-                    android:layout_width="match_parent"
-                    android:layout_height="wrap_content"
-                    android:background="@null"
-                    tools:text="93 kmg/h"
-                    android:textColor="?android:attr/textColorPrimary"
-                    osmand:typeface="@string/font_roboto_medium"
-                    android:textSize="@dimen/default_desc_text_size"/>
-
-                <TextView
-                    android:layout_width="match_parent"
-                    android:layout_height="wrap_content"
-                    android:background="@null"
-                    android:layout_marginTop="3dp"
-                    android:text="Max/Min"
-                    android:textColor="?android:attr/textColorSecondary"
-                    android:textSize="@dimen/default_sub_text_size"/>
+                </LinearLayout>
 
             </LinearLayout>
 
