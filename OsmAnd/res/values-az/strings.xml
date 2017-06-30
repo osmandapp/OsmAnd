@@ -1596,7 +1596,7 @@
     <string name="wrong_user_name">Yanlış istifadəçi adı!</string>
     <string name="shared_string_to">Bu tarixədək:</string>
     <string name="mapillary_menu_date_from">Bu tarixdən:</string>
-    <string name="mapillary_menu_descr_dates">Bir dövrdə əlavə edilmiş şəkillərə baxın.</string>
+    <string name="mapillary_menu_descr_dates">Müəyyən dövrdə əlavə edilmiş şəkillərə baxın.</string>
     <string name="mapillary_menu_title_dates">Tarixlər</string>
     <string name="mapillary_menu_edit_text_hint">İstifadəçi adını yazın</string>
     <string name="mapillary_menu_descr_username">Bir istifadəçinin əlavə etdiyi şəkillərə baxın.</string>
