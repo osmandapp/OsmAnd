@@ -1926,7 +1926,7 @@ Per retornar a l\'estil habitual dels mapes d\'OsmAnd, només cal desactivar aqu
     <string name="si_m_s">Metres per segon</string>
     <string name="si_min_km">Minuts per quilòmetre</string>
     <string name="si_min_m">Minuts per milla</string>
-    <string name="si_nm_h">Millesmarines per hora (nusos)</string>
+    <string name="si_nm_h">Milles marines per hora (nusos)</string>
     <string name="nm_h">nusos</string>
     <string name="min_mile">min/m</string>
     <string name="min_km">min/km</string>
