@@ -73,7 +73,7 @@
   <string name="gpx_visibility_txt">Видимість</string>
   <string name="gpx_tags_txt">Теги</string>
   <string name="gpx_description_txt">Опис</string>
-  <string name="validate_gpx_upload_name_pwd">Будь ласка, вкажіть ім’я користувача і пароль в OSM для завантаження GPX файлів в OSM.</string>
+  <string name="validate_gpx_upload_name_pwd">Будь ласка, вкажіть ім’я користувача і пароль в OSM для вивантаження GPX-файлів в OSM.</string>
   <string name="default_buttons_support">Підтримка</string>
   <string name="support_new_features">Підтримати розробку нових функцій</string>
   <string name="show_ruler_level">Відображати масштаб</string>
@@ -136,12 +136,12 @@
   <string name="offline_edition">Оффлайн редагування</string>
   <string name="offline_edition_descr">Завжди використовувати оффлайн редагування</string>
   <string name="update_poi_does_not_change_indexes">Змінення POI в застосунку не впливають на POI завантажені з інтернету, всі зміни записуються в локальний файл.</string>
-  <string name="local_openstreetmap_uploading">Завантаження …</string>
-  <string name="local_openstreetmap_were_uploaded">{0} POI/Нотатки завантажено в OpenStreetMap</string>
-  <string name="local_openstreetmap_uploadall">Завантажити все</string>
+  <string name="local_openstreetmap_uploading">Вивантаження …</string>
+  <string name="local_openstreetmap_were_uploaded">{0} POI/нотатки вивантажено у OpenStreetMap</string>
+  <string name="local_openstreetmap_uploadall">Вивантажити усе</string>
   
   
-  <string name="local_openstreetmap_upload">Завантажити зміни в OSM</string>
+  <string name="local_openstreetmap_upload">Вивантажити зміни в OSM</string>
   <string name="local_openstreetmap_delete">Вилучити створені</string>
   <string name="local_openstreetmap_descr_title">Асинхронне редагування OSM:</string>
   <string name="local_openstreetmap_settings">Локально збережені POI/Нотатки</string>
@@ -259,8 +259,8 @@
   <string name="file_with_name_already_exist">Файл з таким ім’ям вже існує.</string>
   <string name="shared_string_save">Зберегти</string>
   
-  <string name="local_index_upload_gpx_description">Відіслати GPX файли на OSM сервер. Вони будуть використані для покращення мап і завантажені на osm.org.</string>
-  <string name="local_index_items_uploaded">%1$d з %2$d об’єктів успішно завантажено.</string>
+  <string name="local_index_upload_gpx_description">Вивантажити GPX-файли на сервер OSM. Вони будуть використані для покращення мап.</string>
+  <string name="local_index_items_uploaded">%1$d з %2$d об’єктів успішно вивантажено.</string>
   <string name="local_index_mi_upload_gpx">Відправити в OSM</string>
   <string name="show_more_map_detail">Показати більше деталей</string>
   <string name="show_more_map_detail_descr">Відображати деталі (дороги та інше) починаючи з малого масштабу</string>
@@ -606,8 +606,8 @@
   <string name="favorite">Закладки</string>
   <string name="shared_string_clear_all">Очистити все</string>
   <string name="shared_string_history">Історія</string>
-  <string name="uploading_data">Завантаження даних…</string>
-  <string name="uploading">Завантаження…</string>
+  <string name="uploading_data">Вивантаження даних…</string>
+  <string name="uploading">Вивантаження…</string>
   <string name="search_nothing_found">Нічого не знайдено</string>
   <string name="searching">Пошук…</string>
   <string name="searching_address">Пошук адреси…</string>
@@ -1593,10 +1593,10 @@ OsmAnd має відкриті сирці і активно розвиваєть
     <string name="osmo_settings_debug">Інформація для відлагодження</string>
     <string name="osmo_settings_descr">Налаштування параметрів моніторингу та встановлення персонального каналу моніторингу</string>
     <string name="osmo_settings">OsMo</string>
-    <string name="osmo_plugin_description">Цей втулок частково надає можливості OpenStreetMap Monitoring, дивіться https://osmo.mobi
-\n
-\nВи можете відстежувати пристрої учасників з вашої групи в поточному часі. Також, ви можете бачити точки та треки завантажені в групу, до якої ви належите. 
-\n
+    <string name="osmo_plugin_description">Цей втулок частково надає можливості OpenStreetMap Monitoring, дивіться https://osmo.mobi 
+\n 
+\nВи можете відстежувати пристрої учасників з вашої групи в поточному часі. Також, ви можете бачити точки та треки вивантажені в групу, до якої ви належите. 
+\n 
 \nГрупи, що не були вилучені впродовж місяців, повинні привести свій стан у відповідність до груп створених на сайті OsMo.mobi</string>
     <string name="osmo_plugin_name">OpenStreetMap моніторинг</string>
    	<string name="always_center_position_on_map">Показувати положення завжди в центрі</string>
@@ -1974,7 +1974,7 @@ OsmAnd має відкриті сирці і активно розвиваєть
 	<string name="back_to_map">Повернутись до мапи</string>
 	<string name="location_on_map">Координати:↵\n Шир %1$s↵\n Дов %2$s</string>
 	<string name="shared_string_release">Дата випуску</string>
-	<string name="local_osm_changes_upload_all_confirm">Ви збираєтесь надіслати %1$d змін до OSM. Ви впевнені?</string>
+	<string name="local_osm_changes_upload_all_confirm">Ви збираєтесь вивантажити %1$d змін до OSM. Ви впевнені?</string>
     <string name="confirmation_to_clear_history">Бажаєте очистити історію?</string>
     <string name="delay_to_start_navigation_descr">Вкажіть час очікування для перебування на екрані планування маршруту</string>
     <string name="shared_string_is_open">Відкрито</string>
@@ -2214,7 +2214,7 @@ OsmAnd має відкриті сирці і активно розвиваєть
     <string name="rate_this_app">Оцінити цей додаток</string>
     <string name="rate_this_app_long">Будь ласка, дайте оцінку OsmAnd на Google Play</string>
     <string name="user_hates_app_get_feedback">Розкажіть нам, чому.</string>
-    <string name="failed_to_upload">Не вдалося завантажити</string>
+    <string name="failed_to_upload">Не вдалося вивантажити</string>
     <string name="delete_change">Видалити зміни</string>
     <string name="successfully_uploaded_pattern">Успішно вивантажено {0}/{1}</string>
     <string name="try_again">Спробуйте ще раз</string>
@@ -2312,7 +2312,7 @@ OsmAnd має відкриті сирці і активно розвиваєть
     <string name="select_voice_provider_descr">Виберіть або завантажте голосові вказівки для вашої мови</string>
     <string name="impassable_road_desc">Виберіть дороги, яких ви бажаєте уникати під час навігації</string>
     <string name="shared_string_sound">Звук</string>
-    <string name="poi_deleted_localy">POI буде видалено після того, як ви завантажите ваші зміни</string>
+    <string name="poi_deleted_localy">POI буде вилучено після того, як ви вивантажите ваші зміни</string>
     <string name="confirm_download_roadmaps">Ви впевнені, що бажаєте завантажити мапу з дорогами, хоча ви вже маєете стандартну (повну) мапу?</string>
     <string name="missing_write_external_storage_permission">Додаток не має дозволу для запису на SD-карту</string>
     <string name="last_update">Останнє оновлення: %s</string>
@@ -2535,8 +2535,8 @@ Facebook: https://www.facebook.com/osmandapp
 Частина від передплати спрямовується до спільноти OSM та виплачується кожному маперу за його внесок.
 Якщо вам подобається OsmAnd та OSM, ви можете у такий спосіб підтримати їх.</string>
     
-    <string name="upload_osm_note_description">Ви можете додати Нотатку в OSM анонімно, або скориставшись вашим обліковим записом на OpenStreetMap.org.</string>
-    <string name="upload_osm_note">Надіслати Нотатку OSM</string>
+    <string name="upload_osm_note_description">Ви можете додати нотатку в OSM анонімно, або скориставшись вашим обліковим записом на OpenStreetMap.org.</string>
+    <string name="upload_osm_note">Надіслати нотатку в OSM</string>
     <string name="file_name_containes_illegal_char">Назва файлу містить неприпустимі символи</string>
 <string name="follow_us">Слідуйте за нами</string>
     <string name="access_direction_audio_feedback">Звукова ідентифікація напрямку</string>
@@ -2604,7 +2604,7 @@ Facebook: https://www.facebook.com/osmandapp
     <string name="rendering_attr_contourColorScheme_description">Колірна схема горизонталей</string>
     <string name="save_track_min_speed">Мінімальна швидкість для запису</string>
     <string name="save_track_min_speed_descr">Виберіть мінімальну швидкість, при перевищенні якої точка буде записана в трек</string>
-    <string name="save_track_min_distance">Мінімальна дистанція для запису</string>
+    <string name="save_track_min_distance">Мінімальне зміщення для запису</string>
     <string name="save_track_min_distance_descr">Виберіть відстань, при перевищенні якого точка буде записана в трек</string>
     <string name="save_track_precision">Мінімальна точність запису</string>
     <string name="save_track_precision_descr">Виберіть мінімально допустиму точність для точки, щоб бути зажурнальованою</string>
@@ -3095,4 +3095,16 @@ Facebook: https://www.facebook.com/osmandapp
     <string name="import_gpx_failed_descr">OsmAnd не може імпортувати файл. Будь ласка, перевірте, чи OsmAnd має дозвіл на читання файлу з його місця розташування.</string>
     <string name="map_widget_ruler_control_first_mode">Двоточкова лінійка</string>
     <string name="map_widget_ruler_control_second_mode">Радіусна лінійка</string>
+    <string name="shared_string_reload">Перезавантажити</string>
+    <string name="mapillary_menu_descr_tile_cache">Перезавантажити тайли, щоб переглянути актуальні дані.</string>
+    <string name="mapillary_menu_title_tile_cache">Тайловий кеш</string>
+    <string name="wrong_user_name">Невірне ім\'я користувача!</string>
+    <string name="shared_string_to">до</string>
+    <string name="mapillary_menu_date_from">від</string>
+    <string name="mapillary_menu_descr_dates">Переглядайте зображення, додані за певний період.</string>
+    <string name="mapillary_menu_title_dates">Дати</string>
+    <string name="mapillary_menu_edit_text_hint">Введіть ім\'я користувача</string>
+    <string name="mapillary_menu_descr_username">Переглянути зображення, додані певним користувачем.</string>
+    <string name="mapillary_menu_title_username">Ім\'я користувача</string>
+    <string name="mapillary_menu_filter_description">Ви можете відфільтрувати зображення за подавачем чи за датою. Фільтри застосовуються лише для масштабування крупним планом.</string>
     </resources>

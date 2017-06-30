@@ -132,7 +132,7 @@
 	<string name="poi_route_light_rail_ref">Smálest</string>
 	<string name="poi_clothes_schoolwear">Skólaföt</string>
 	<string name="poi_social_facility_shelter">Skýli</string>
-	<string name="poi_social_facility_for_disabled">Óvirkt</string>
+	<string name="poi_social_facility_for_disabled">Fatlaðir</string>
 	<string name="poi_site_type_city">Borg</string>
 	<string name="poi_fire_hydrant_style_water_source_stream">Lækur</string>
 	<string name="poi_aerodrome_type_public">Opinbert</string>
@@ -1519,7 +1519,7 @@
 	<string name="poi_theatre_genre_shadow_play">Skuggaleikhús</string>
 
 	<string name="poi_bandstand">Hljómsveitarpallur</string>
-	<string name="poi_historic_civilization_byzantine">Menning: byzantínsk (285 e.Kr. – 1453 e.Kr.)</string>
+	<string name="poi_historic_civilization_byzantine">Menning: býsantínsk (285 e.Kr. – 1453 e.Kr.)</string>
 	<string name="poi_historic_civilization_mycenaean">Menning: mýkenönsk</string>
 	<string name="poi_animal_training">Dýraþjálfun</string>
 	<string name="poi_historic_period_stone_bronze_undetermined">Sögutími: steinöld / bronsöld (óráðið)</string>
@@ -2447,4 +2447,125 @@
 	<string name="poi_vending_public_transport_plans">Kort yfir almenningssamgöngur</string>
 	<string name="poi_vending_drinks_sweets">Drykkir og sælgæti</string>
 	<string name="poi_memorial_cross">Krosslaga</string>
+	<string name="poi_branch">Útibú</string>
+
+	<string name="poi_memorial_stele">Staur</string>
+	<string name="poi_memorial_koshinto">Koshinto</string>
+	<string name="poi_memorial_blue_plaque">Blár skjöldur</string>
+	<string name="poi_memorial_jizo">Jizo</string>
+	<string name="poi_memorial_stolperstein">Götusteinn</string>
+	<string name="poi_memorial_stupa">Stupa</string>
+	<string name="poi_memorial_prasat">Prasat</string>
+	<string name="poi_memorial_fassade_decoration">Veggskreyting</string>
+
+	<string name="poi_historic_quarry">Söguleg grjótnáma</string>
+
+	<string name="poi_resource_aggregate">Malarblanda</string>
+	<string name="poi_resource_antimony">Antímon</string>
+	<string name="poi_resource_beryl">Berýl</string>
+	<string name="poi_resource_chromite">Krómít</string>
+	<string name="poi_resource_dimension_stone">Byggingasteinn</string>
+	<string name="poi_resource_lignite">Brúnkol</string>
+	<string name="poi_resource_mica">Glimmer</string>
+	<string name="poi_resource_mineral_oil">Steinefnaolía</string>
+	<string name="poi_resource_peat">Mór</string>
+	<string name="poi_resource_rutile">Títansandur</string>
+	<string name="poi_resource_slate_iron_ore_copper">Steinþynnur;járngrýti;kopar</string>
+	<string name="poi_resource_slate">Þynnur</string>
+	<string name="poi_resource_zircon">Zirkon</string>
+
+	<string name="poi_wetland_wet_meadow">Engi</string>
+	<string name="poi_beach_shingle">Möl</string>
+	<string name="poi_beach_rocky">Klettótt</string>
+
+	<string name="poi_chimney">Skorsteinn</string>
+	<string name="poi_bench_no">Án bekkja</string>
+	<string name="poi_bin_yes">Með ruslafötu</string>
+	<string name="poi_bin_no">Án ruslafötu</string>
+
+	<string name="poi_shelter_type_picnic_shelter">Nestisaðstaða</string>
+	<string name="poi_shelter_type_lean_to">Setskýli</string>
+	<string name="poi_shelter_type_basic_hut">Einfaldur kofi</string>
+	<string name="poi_shelter_type_wildlife_hide">Dýraskoðunarskýli</string>
+	<string name="poi_shelter_type_rock_shelter">Skýli í klettaskúta</string>
+	<string name="poi_shelter_type_field_shelter">Skýli fyrir búpening</string>
+	<string name="poi_shelter_type_tent">Gerð skýlis: tjald</string>
+	<string name="poi_shelter_type_abandoned">Gerð skýlis: yfirgefið</string>
+
+	<string name="poi_artwork_type_stele">Tegund listaverks: staur</string>
+	<string name="poi_architecture_constructivism">Byggingastíll: konstrúktívismi</string>
+	<string name="poi_architecture_timber_frame">Byggingastíll: bindingsverk</string>
+	<string name="poi_architecture_oldrussian">Byggingastíll: fornrússneskur</string>
+	<string name="poi_architecture_postconstructivism">Byggingastíll: póstkonstrúktívismi</string>
+	<string name="poi_tunnel_waterway">Vatnsgöng</string>
+	<string name="poi_tunnel_car">Vegagöng</string>
+	<string name="poi_tunnel_pedestrian">Göng fyrir fótgangandi</string>
+	<string name="poi_bridge_car">Vegabrú</string>
+	<string name="poi_bridge_waterway">Bátabrú</string>
+	<string name="poi_lit_yes">Upplýst: já</string>
+	<string name="poi_lit_no">Upplýst: nei</string>
+
+	<string name="poi_surface_sett">Yfirborð: steinlagt</string>
+	<string name="poi_surface_cobblestone">Yfirborð: götusteinar</string>
+	<string name="poi_surface_paving_stones">Yfirborð: hellusteinar</string>
+	<string name="poi_surface_grass_paver">Yfirborð: grassteinar</string>
+	<string name="poi_surface_ground">Yfirborð: jarðvegur</string>
+	<string name="poi_surface_dirt">Yfirborð: mold</string>
+	<string name="poi_service_bicycle_second_hand_yes">Sala á notuðum reiðhjólum</string>
+	<string name="poi_service_bicycle_second_hand_no">Sala á notuðum reiðhjólum: nei</string>
+	<string name="poi_bicycle_repair_station">Stöð til að gera sjálf við reiðhjól</string>
+
+	<string name="poi_note">Athugasemd</string>
+	<string name="poi_model_aerodrome">Módelflugsvæði</string>
+	<string name="poi_historic_milestone">Sögulegur kílómetrasteinn</string>
+
+	<string name="poi_historic_manor">Sögulegur herragarður</string>
+	<string name="poi_castle_type_stately">Tegund kastala: bústaður</string>
+	<string name="poi_castle_type_defensive">Tegund kastala: varnarvirki</string>
+	<string name="poi_castle_type_fortress">Tegund kastala: virki</string>
+	<string name="poi_castle_type_palace">Tegund kastala: höll</string>
+	<string name="poi_castle_type_kremlin">Tegund kastala: rússneskur (kreml)</string>
+	<string name="poi_castle_type_defensive_stately">Tegund kastala: varnarvirki, bústaður</string>
+	<string name="poi_castle_type_castrum">Tegund kastala: rómverskur (castrum)</string>
+	<string name="poi_castle_type_shiro">Tegund kastala: japanskur (shiro)</string>
+
+	<string name="poi_social_facility_group_home">Sambýli</string>
+	<string name="poi_social_facility_assisted_living">Búseta með stuðningi</string>
+	<string name="poi_social_facility_outreach">Útbreiðsla</string>
+	<string name="poi_social_facility_food_bank">Matarbanki</string>
+	<string name="poi_social_facility_ambulatory_care">Heimahlynning</string>
+	<string name="poi_social_facility_for_senior">Aldraðir</string>
+	<string name="poi_social_facility_for_child">Börn</string>
+	<string name="poi_social_facility_for_orphan">Munaðarleysingjar</string>
+	<string name="poi_social_facility_for_mental_health">Sjúklingar með geðrænar truflanir</string>
+	<string name="poi_social_facility_for_juvenile">Ungmenni</string>
+	<string name="poi_social_facility_for_homeless">Heimilislausir</string>
+	<string name="poi_social_facility_for_migrant">Farandfólk</string>
+	<string name="poi_social_facility_for_underprivileged">Bágstaddir</string>
+	<string name="poi_social_facility_for_drug_addicted">Eiturlyfjafíklar</string>
+	<string name="poi_social_facility_for_unemployed">Atvinnulausir</string>
+	<string name="poi_social_facility_for_diseased">Sjúkir</string>
+	<string name="poi_social_facility_for_child_juvenile">Börn: ungmenni</string>
+
+	<string name="poi_historic_civilization_nuragic">Menning: núrísk (18. öld f. Kr – 2. öld e.Kr.)</string>
+	<string name="poi_historic_civilization_imperial_chinese">Menning: kínverska keisaraveldið (221 f. Kr – 1911 e. Kr)</string>
+	<string name="poi_historic_civilization_greek_egyptian">Menning: grísk-egypsk (332-30 f.Kr)</string>
+	<string name="poi_historic_civilization_roman_and_byzantine_egyptian">Menning: rómversk- og býsantísk-egypsk</string>
+	<string name="poi_historic_period_nuragic">Sögutími: núrískur</string>
+	<string name="poi_boat_storage">Bátageymsla</string>
+
+	<string name="poi_health_specialty_general_yes">Almennar heimilislækningar</string>
+	<string name="poi_health_specialty_ophthalmology_yes">Augnlækningar</string>
+	<string name="poi_health_specialty_paediatrics_yes">Barnalækningar</string>
+	<string name="poi_health_specialty_dermatology_yes">Húðlækningar</string>
+	<string name="poi_health_specialty_urology_yes">Þvagfæralækningar</string>
+	<string name="poi_health_specialty_surgery_yes">Almennar skurðlækningar</string>
+	<string name="poi_health_specialty_radiology_yes">Geislalækninar</string>
+	<string name="poi_health_specialty_psychiatry_yes">Geðlækningar</string>
+	<string name="poi_health_specialty_neurology_yes">Taugalækningar</string>
+	<string name="poi_health_specialty_cardiology_yes">Hjartalækningar</string>
+	<string name="poi_health_specialty_trauma_yes">Áfallalækningar</string>
+	<string name="poi_health_specialty_anaesthetics_yes">Svæfingalækningar</string>
+	<string name="poi_health_specialty_dentistry_yes">Tannlækningar</string>
+	<string name="poi_health_specialty_reiki_yes">Reiki</string>
 	</resources>

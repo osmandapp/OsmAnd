@@ -2969,4 +2969,5 @@ Tidligere destination bliver sidste mellemliggende punkt.</string>
     <string name="shared_string_reload">Genindlæs</string>
     <string name="mapillary_menu_descr_tile_cache">Genindlæs kortbrikker for at se opdaterede data.</string>
     <string name="mapillary_menu_title_tile_cache">Kortbrik-cache</string>
+    <string name="shared_string_reset">Nulstil</string>
     </resources>

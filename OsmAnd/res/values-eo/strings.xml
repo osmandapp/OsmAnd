@@ -2848,4 +2848,5 @@ Indikas lokon:  %1$s x %2$s"</string>
     <string name="mapillary_menu_descr_username">Vidi bildojn aldonitajn de iu uzanto.</string>
     <string name="mapillary_menu_title_username">Uzantnomo</string>
     <string name="mapillary_menu_filter_description">Vi povas filtri bildojn laŭ alŝutinto aŭ laŭ dato. Filtriloj aplikiĝas nur je pligrandigo.</string>
+    <string name="shared_string_reset">Reagordi</string>
     </resources>
