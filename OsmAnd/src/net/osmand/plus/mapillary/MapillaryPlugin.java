@@ -34,7 +34,10 @@ import net.osmand.plus.views.mapwidgets.MapWidgetRegistry.MapWidgetRegInfo;
 import net.osmand.plus.views.mapwidgets.TextInfoWidget;
 import net.osmand.util.Algorithms;
 
+import java.text.MessageFormat;
 import java.util.List;
+
+import static android.content.Intent.ACTION_VIEW;
 
 public class MapillaryPlugin extends OsmandPlugin {
 	public static final String ID = "osmand.mapillary";
@@ -216,14 +219,16 @@ public class MapillaryPlugin extends OsmandPlugin {
 		boolean success = false;
 		OsmandApplication app = (OsmandApplication) activity.getApplication();
 		if (isPackageInstalled(MAPILLARY_PACKAGE_ID, app)) {
-			Intent launchIntent = app.getPackageManager().getLaunchIntentForPackage(MAPILLARY_PACKAGE_ID);
-			if (launchIntent != null) {
-				if (imageKey != null) {
-					launchIntent.putExtra("photo_id", imageKey);
-				}
-				app.startActivity(launchIntent);
-				success = true;
+			if (imageKey != null) {
+				Intent intent = new Intent(ACTION_VIEW, Uri.parse(MessageFormat.format("mapillary://mapillary/photo/{0}?image_key={0}", imageKey)));
+				intent.addFlags(Intent.FLAG_ACTIVITY_NEW_TASK);
+				app.startActivity(intent);
+			} else {
+				Intent intent = new Intent(Intent.ACTION_VIEW, Uri.parse("mapillary://mapillary/capture"));
+				intent.addFlags(Intent.FLAG_ACTIVITY_NEW_TASK);
+				app.startActivity(intent);
 			}
+			success = true;
 		} else {
 			new MapillaryInstallDialogFragment().show(activity.getSupportFragmentManager(), MapillaryInstallDialogFragment.TAG);
 		}
@@ -239,7 +244,7 @@ public class MapillaryPlugin extends OsmandPlugin {
 	}
 
 	private static boolean execInstall(OsmandApplication app, String url) {
-		Intent intent = new Intent(Intent.ACTION_VIEW, Uri.parse(url));
+		Intent intent = new Intent(ACTION_VIEW, Uri.parse(url));
 		try {
 			intent.setFlags(Intent.FLAG_ACTIVITY_NEW_TASK);
 			app.startActivity(intent);
