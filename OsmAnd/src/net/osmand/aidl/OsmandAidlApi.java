@@ -9,13 +9,16 @@ import android.os.ParcelFileDescriptor;
 import android.view.View;
 
 import net.osmand.IndexConstants;
+import net.osmand.aidl.favorite.AFavorite;
 import net.osmand.aidl.gpx.ASelectedGpxFile;
 import net.osmand.aidl.maplayer.AMapLayer;
 import net.osmand.aidl.maplayer.point.AMapPoint;
 import net.osmand.aidl.mapmarker.AMapMarker;
 import net.osmand.aidl.mapwidget.AMapWidget;
+import net.osmand.data.FavouritePoint;
 import net.osmand.data.LatLon;
 import net.osmand.data.PointDescription;
+import net.osmand.plus.FavouritesDbHelper;
 import net.osmand.plus.GPXUtilities;
 import net.osmand.plus.GPXUtilities.GPXFile;
 import net.osmand.plus.GpxSelectionHelper.SelectedGpxFile;
@@ -23,6 +26,7 @@ import net.osmand.plus.MapMarkersHelper;
 import net.osmand.plus.MapMarkersHelper.MapMarker;
 import net.osmand.plus.OsmandApplication;
 import net.osmand.plus.activities.MapActivity;
+import net.osmand.plus.helpers.ColorDialogs;
 import net.osmand.plus.views.AidlMapLayer;
 import net.osmand.plus.views.MapInfoLayer;
 import net.osmand.plus.views.OsmandMapLayer;
@@ -343,6 +347,24 @@ public class OsmandAidlApi {
 			}
 		});
 		return control;
+	}
+
+	boolean addFavorite(AFavorite favorite) {
+		if (favorite != null) {
+			FavouritesDbHelper favoritesHelper = app.getFavorites();
+			FavouritePoint point = new FavouritePoint(favorite.getLat(), favorite.getLon(), favorite.getName(), favorite.getCategory());
+			point.setDescription(favorite.getDescription());
+			int color = 0;
+			if (!Algorithms.isEmpty(favorite.getColor())) {
+				color = ColorDialogs.getColorByTag(favorite.getColor());
+			}
+			point.setColor(color);
+			point.setVisible(favorite.isVisible());
+			favoritesHelper.addFavourite(point);
+			return true;
+		} else {
+			return false;
+		}
 	}
 
 	boolean addMapMarker(AMapMarker marker) {
