@@ -1945,11 +1945,11 @@
 	<string name="poi_surveillance_yes">監視器：有</string>
 	<string name="poi_shop_additional_yes">有商店</string>
 
-	<string name="poi_service_bicycle_retail_yes">自行車零售：有</string>
+	<string name="poi_service_bicycle_retail_yes">零售</string>
 	<string name="poi_service_bicycle_retail_no">自行車零售：無</string>
-	<string name="poi_service_bicycle_repair_yes">自行車維修：有</string>
+	<string name="poi_service_bicycle_repair_yes">維修</string>
 	<string name="poi_service_bicycle_repair_no">自行車維修：無</string>
-	<string name="poi_service_bicycle_rental_yes">自行車租賃：有</string>
+	<string name="poi_service_bicycle_rental_yes">租賃</string>
 	<string name="poi_service_bicycle_rental_no">自行車租賃：無</string>
 	<string name="poi_service_bicycle_pump_yes">泵浦</string>
 	<string name="poi_service_bicycle_pump_no">自行車打氣筒：無</string>
@@ -2955,12 +2955,12 @@
 	<string name="poi_health_person_type_technician">醫療工作者職務︰技術人員</string>
 	<string name="poi_health_person_type_witchdoctor">醫療工作者職務︰巫醫</string>
 
-	<string name="poi_counselling_type_addiction_yes">諮商（成癮）︰有</string>
-	<string name="poi_counselling_type_addiction_no">諮商（成癮）︰無</string>
-	<string name="poi_counselling_type_antenatal_yes">諮商（產前）︰有</string>
-	<string name="poi_counselling_type_antenatal_no">諮商（產前）︰無</string>
-	<string name="poi_counselling_type_child_guidance_yes">諮商（兒童指導）︰有</string>
-	<string name="poi_counselling_type_child_guidance_no">諮商（兒童指導）︰無</string>
+	<string name="poi_counselling_type_addiction_yes">諮詢（成癮）︰有</string>
+	<string name="poi_counselling_type_addiction_no">諮詢（成癮）︰無</string>
+	<string name="poi_counselling_type_antenatal_yes">諮詢（產前）︰有</string>
+	<string name="poi_counselling_type_antenatal_no">諮詢（產前）︰無</string>
+	<string name="poi_counselling_type_child_guidance_yes">諮詢（兒童指導）︰有</string>
+	<string name="poi_counselling_type_child_guidance_no">諮詢（兒童指導）︰無</string>
 	<string name="poi_life_ring">救生圈</string>
 
 <string name="poi_drink_wine_served">酒：提供服務</string>
@@ -2968,34 +2968,34 @@
 	<string name="poi_nuclear_explosion_salvo_first_detonation">爆炸齊射：首次引爆齊射</string>
 	<string name="poi_nuclear_explosion_salvo_second_or_later_detonation">爆炸齊射：第二次或之後引爆齊射</string>
 	<string name="poi_nuclear_explosion_crater_diameter">爆炸：爆炸範圍直徑</string>
-	<string name="poi_counselling_type_couple_yes">諮商（伴侶）：有</string>
-	<string name="poi_counselling_type_couple_no">諮商（伴侶）：無</string>
-	<string name="poi_counselling_type_crisis_yes">諮商（危險期）︰有</string>
-	<string name="poi_counselling_type_crisis_no">諮商（危險期）︰無</string>
-	<string name="poi_counselling_type_drugs_yes">諮商（藥物）︰有</string>
-	<string name="poi_counselling_type_drugs_no">諮商（藥物）︰無</string>
-	<string name="poi_counselling_type_education_yes">諮商（教育）︰有</string>
-	<string name="poi_counselling_type_education_no">諮商（教育）︰無</string>
-	<string name="poi_counselling_type_family_yes">諮商（家庭）︰有</string>
-	<string name="poi_counselling_type_family_no">諮商（家庭）︰無</string>
-	<string name="poi_counselling_type_homeless_yes">諮商（無家可歸者）︰有</string>
-	<string name="poi_counselling_type_homeless_no">諮商（無家可歸者）︰無</string>
-	<string name="poi_counselling_type_immigrant_yes">諮商（移民）︰有</string>
-	<string name="poi_counselling_type_immigrant_no">諮商（移民）︰無</string>
-	<string name="poi_counselling_type_marriage_yes">諮商（婚姻）︰有</string>
-	<string name="poi_counselling_type_marriage_no">諮商（婚姻）︰無</string>
-	<string name="poi_counselling_type_nutrition_yes">諮商（營養學）︰有</string>
-	<string name="poi_counselling_type_nutrition_nfire_hydo">諮商（營養學）︰無</string>
-	<string name="poi_counselling_type_rehabilitation_yes">諮商（復健）︰有</string>
-	<string name="poi_counselling_type_rehabilitation_no">諮商（復健）︰無</string>
-	<string name="poi_counselling_type_sexual_yes">諮商（性關係）︰有</string>
-	<string name="poi_counselling_type_sexual_no">諮商（性關係）︰無</string>
-	<string name="poi_counselling_type_sexual_abuse_yes">諮商（性虐待）︰有</string>
-	<string name="poi_counselling_type_sexual_abuse_no">諮商（性虐待）︰無</string>
-	<string name="poi_counselling_type_victim_yes">諮商（受害者）︰有</string>
-	<string name="poi_counselling_type_victim_no">諮商（受害者）︰無</string>
-	<string name="poi_counselling_type_violence_yes">諮商（暴力）︰有</string>
-	<string name="poi_counselling_type_violence_no">諮商（暴力）︰無</string>
+	<string name="poi_counselling_type_couple_yes">諮詢（伴侶）：有</string>
+	<string name="poi_counselling_type_couple_no">諮詢（伴侶）：無</string>
+	<string name="poi_counselling_type_crisis_yes">諮詢（危險期）︰有</string>
+	<string name="poi_counselling_type_crisis_no">諮詢（危險期）︰無</string>
+	<string name="poi_counselling_type_drugs_yes">諮詢（藥物）︰有</string>
+	<string name="poi_counselling_type_drugs_no">諮詢（藥物）︰無</string>
+	<string name="poi_counselling_type_education_yes">諮詢（教育）︰有</string>
+	<string name="poi_counselling_type_education_no">諮詢（教育）︰無</string>
+	<string name="poi_counselling_type_family_yes">諮詢（家庭）︰有</string>
+	<string name="poi_counselling_type_family_no">諮詢（家庭）︰無</string>
+	<string name="poi_counselling_type_homeless_yes">諮詢（無家可歸者）︰有</string>
+	<string name="poi_counselling_type_homeless_no">諮詢（無家可歸者）︰無</string>
+	<string name="poi_counselling_type_immigrant_yes">諮詢（移民）︰有</string>
+	<string name="poi_counselling_type_immigrant_no">諮詢（移民）︰無</string>
+	<string name="poi_counselling_type_marriage_yes">諮詢（婚姻）︰有</string>
+	<string name="poi_counselling_type_marriage_no">諮詢（婚姻）︰無</string>
+	<string name="poi_counselling_type_nutrition_yes">諮詢（營養學）︰有</string>
+	<string name="poi_counselling_type_nutrition_nfire_hydo">諮詢（營養學）︰無</string>
+	<string name="poi_counselling_type_rehabilitation_yes">諮詢（復健）︰有</string>
+	<string name="poi_counselling_type_rehabilitation_no">諮詢（復健）︰無</string>
+	<string name="poi_counselling_type_sexual_yes">諮詢（性關係）︰有</string>
+	<string name="poi_counselling_type_sexual_no">諮詢（性關係）︰無</string>
+	<string name="poi_counselling_type_sexual_abuse_yes">諮詢（性虐待）︰有</string>
+	<string name="poi_counselling_type_sexual_abuse_no">諮詢（性虐待）︰無</string>
+	<string name="poi_counselling_type_victim_yes">諮詢（受害者）︰有</string>
+	<string name="poi_counselling_type_victim_no">諮詢（受害者）︰無</string>
+	<string name="poi_counselling_type_violence_yes">諮詢（暴力）︰有</string>
+	<string name="poi_counselling_type_violence_no">諮詢（暴力）︰無</string>
 
 	<string name="poi_provided_for_infant_yes">服務嬰兒：有</string>
 	<string name="poi_provided_for_infant_no">服務嬰兒：無</string>
@@ -3021,8 +3021,8 @@
 	<string name="poi_treat_inpatient_yes">住院護理：有</string>
 	<string name="poi_treat_inpatient_no">住院護理：無</string>
 	<string name="poi_treat_inpatient_only">住院護理：只有</string>
-	<string name="poi_counselling_yes">諮商︰有</string>
-	<string name="poi_counselling_no">諮商︰無</string>
+	<string name="poi_counselling_yes">諮詢︰有</string>
+	<string name="poi_counselling_no">諮詢︰無</string>
 	<string name="poi_emergency_yes">緊急情況︰有</string>
 	<string name="poi_emergency_no">緊急情況︰無</string>
 	<string name="poi_home_visit_yes">是的</string>
@@ -3388,6 +3388,45 @@
 	<string name="poi_animal_keeping_horse">動物飼養：馬</string>
 	<string name="poi_animal_keeping_sheep">動物飼養：羊</string>
 	<string name="poi_tower_construction_lattice">施工：格構式</string>
-	<string name="poi_motorcycle_type_offroad">越野</string>
-	<string name="poi_motorcycle_type_dualsport">Dualsport</string>
+	<string name="poi_motorcycle_type_offroad">越野型機車</string>
+	<string name="poi_motorcycle_type_dualsport">多功能型機車</string>
+	<string name="poi_motorcycle_type_scooter">踏板機車</string>
+	<string name="poi_motorcycle_type_sportbike">運動型機車</string>
+	<string name="poi_motorcycle_type_chopper">美式機車</string>
+	<string name="poi_motorcycle_type_standard">標準型機車</string>
+
+<string name="poi_motorcycle_clothes_yes">騎士服裝</string>
+	<string name="poi_motorcycle_clothes_no">騎士服裝：無</string>
+	<string name="poi_motorcycle_rental_yes">租賃</string>
+	<string name="poi_motorcycle_rental_no">租賃：無</string>
+	<string name="poi_motorcycle_repair_yes">維修</string>
+	<string name="poi_motorcycle_repair_no">維修：無</string>
+	<string name="poi_motorcycle_parts_yes">零配件</string>
+	<string name="poi_motorcycle_parts_no">零配件：無</string>
+	<string name="poi_motorcycle_tyres_yes">輪胎</string>
+	<string name="poi_motorcycle_tyres_no">輪胎：無</string>
+	<string name="poi_feeding_place">動物飼養的地方</string>
+
+	<string name="poi_e_cigarette">電子香煙商店</string>
+
+	<string name="poi_tower_construction_freestanding">施工：獨立式</string>
+	<string name="poi_tower_construction_dish">施工：碟形</string>
+	<string name="poi_tower_construction_dome">施工：圓頂</string>
+	<string name="poi_tower_construction_concealed">施工：隱藏</string>
+
+	<string name="poi_zoo_petting_zoo">可愛動物園</string>
+	<string name="poi_zoo_wildlife_park">野生動物公園</string>
+	<string name="poi_zoo_enclosure">圍場</string>
+	<string name="poi_zoo_safari_park">野生動物園</string>
+	<string name="poi_zoo_birds">鳥類</string>
+	<string name="poi_zoo_aviary">鳥舍</string>
+	<string name="poi_zoo_falconry">訓鷹術</string>
+	<string name="poi_zoo_reptile">爬行動物</string>
+
+	<string name="poi_stands">站台</string>
+
+	<string name="poi_motorcycle_sales_yes">銷售</string>
+	<string name="poi_motorcycle_sales_no">銷售：無</string>
+	<string name="poi_motorcycle_sales_yes_used">銷售：有的;二手</string>
+	<string name="poi_motorcycle_sales_used">銷售：二手</string>
 	</resources>
