@@ -1902,7 +1902,7 @@ Délka %2$s</string>
     <string name="lang_bn">Bengálština</string>
     <string name="lang_tl">Tagalština</string>
     <string name="lang_sh">Srbochorvatština</string>
-    <string name="lang_az">Ázerbájdžánština</string>
+    <string name="lang_az">Ázerbájdžánsky</string>
     <string name="lang_br">Bretonština</string>
     <string name="lang_sq">Albánština</string>
     <string name="lang_is">Islandština</string>
@@ -2358,11 +2358,11 @@ Pokud máte rádi OsmAnd a OSM a chcete je podpořit, toto je výborný způsob,
     <string name="gpx_logging_no_data">Žádná data</string>
     <string name="rendering_attr_contourColorScheme_description">Barevné schéma pro vrstevnice</string>
     <string name="save_track_min_speed">Minimální rychlost pro záznam</string>
-    <string name="save_track_min_speed_descr">Nastavte minimální rychlost, při které se zaznamená bod</string>
-    <string name="save_track_min_distance">Detekce pohybu pro záznam</string>
-    <string name="save_track_min_distance_descr">Nastavte minimální vzdálenost od posledního záznamu, při které se zaznamená nový bod</string>
+    <string name="save_track_min_speed_descr">Filtr: Nastavte minimální rychlost, při které se zaznamená bod</string>
+    <string name="save_track_min_distance">Minimální změna polohy pro záznam</string>
+    <string name="save_track_min_distance_descr">Filtr: Nastavte minimální vzdálenost od posledního záznamu, při které se zaznamená nový bod</string>
     <string name="save_track_precision">Minimální přesnost záznamu</string>
-    <string name="save_track_precision_descr">Nastavte minimální přesnost, při které se zaznamená bod</string>
+    <string name="save_track_precision_descr">Filtr: Nastavte minimální přesnost, při které se zaznamená bod</string>
     <string name="christmas_poi">Vánoční POI</string>
     <string name="christmas_desc">Před Vánoci a Novým rokem můžete zobrazit POI spojené s Vánoci: vánoční stromky, trhy atd.</string>
     <string name="christmas_desc_q">Zobrazit vánoční POI?</string>
@@ -2723,4 +2723,17 @@ Pokud potřebujete pomoci s aplikací OsmAnd, prosím kontaktujte naši podporu
     <string name="mapillary_widget">Nástroj Mapillary</string>
     <string name="map_widget_ruler_control_first_mode">Dvoubodové pravítko</string>
     <string name="map_widget_ruler_control_second_mode">Kruhové pravítko</string>
+    <string name="shared_string_reset">Resetovat</string>
+    <string name="shared_string_reload">Znovu načíst</string>
+    <string name="mapillary_menu_descr_tile_cache">Znovu načíst dlaždice pro zobrazení aktuálních dat.</string>
+    <string name="mapillary_menu_title_tile_cache">Vyrovnávací paměť dlaždic</string>
+    <string name="wrong_user_name">Nesprávné uživatelské jméno!</string>
+    <string name="shared_string_to">Do</string>
+    <string name="mapillary_menu_date_from">Od</string>
+    <string name="mapillary_menu_descr_dates">Zobrazit obrázky přidané v určitém období.</string>
+    <string name="mapillary_menu_title_dates">Datumy</string>
+    <string name="mapillary_menu_edit_text_hint">Zadejte uživatelské jméno</string>
+    <string name="mapillary_menu_descr_username">Zobrazit obrázky přidané určitým uživatelem.</string>
+    <string name="mapillary_menu_title_username">Uživatelské jméno</string>
+    <string name="mapillary_menu_filter_description">Můžete filtrovat snímky podle odesílatele nebo podle datumu. Filtry se použijí pouze pro detailní přiblížení.</string>
     </resources>
