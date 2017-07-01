@@ -4,7 +4,8 @@
     xmlns:osmand="http://schemas.android.com/apk/res-auto"
     android:orientation="vertical"
     android:layout_width="match_parent"
-    android:layout_height="wrap_content">
+    android:layout_height="wrap_content"
+    android:clickable="false">
 
     <include layout="@layout/list_item_divider"/>
 
@@ -25,7 +26,7 @@
                 android:id="@+id/overview_image"
                 android:layout_width="16dp"
                 android:layout_height="16dp"
-                android:src="@drawable/ic_action_time_start"
+                tools:src="@drawable/ic_action_split_interval"
                 android:layout_marginBottom="12dp"
                 android:layout_marginTop="12dp"
                 android:layout_marginRight="12dp"/>
@@ -78,7 +79,7 @@
                     android:id="@+id/distance_or_timespan_image"
                     android:layout_width="16dp"
                     android:layout_height="16dp"
-                    android:src="@drawable/ic_action_polygom_dark"
+                    tools:src="@drawable/ic_action_track_16"
                     android:layout_marginRight="12dp"/>
 
                 <LinearLayout
@@ -102,7 +103,7 @@
                         android:layout_height="wrap_content"
                         android:background="@null"
                         android:layout_marginTop="3dp"
-                        tools:text="@string/distance"
+                        android:text="@string/distance"
                         android:textColor="?android:attr/textColorSecondary"
                         android:textSize="@dimen/default_sub_text_size"/>
 
@@ -117,9 +118,10 @@
                 android:orientation="horizontal">
 
                 <ImageView
+                    android:id="@+id/start_time_image"
                     android:layout_width="16dp"
                     android:layout_height="16dp"
-                    android:src="@drawable/ic_action_time_start"
+                    tools:src="@drawable/ic_action_time_start_16"
                     android:layout_marginRight="12dp"/>
 
                 <LinearLayout
@@ -138,11 +140,12 @@
                         android:textSize="@dimen/default_desc_text_size"/>
 
                     <TextView
+                        android:id="@+id/start_date_value"
                         android:layout_width="match_parent"
                         android:layout_height="wrap_content"
                         android:background="@null"
                         android:layout_marginTop="3dp"
-                        android:text="@string/shared_string_start_time"
+                        android:text="Aud 8, 2016"
                         android:textColor="?android:attr/textColorSecondary"
                         android:textSize="@dimen/default_sub_text_size"/>
 
@@ -156,9 +159,10 @@
                 android:orientation="horizontal">
 
                 <ImageView
+                    android:id="@+id/end_time_image"
                     android:layout_width="16dp"
                     android:layout_height="16dp"
-                    android:src="@drawable/ic_action_time_end"
+                    tools:src="@drawable/ic_action_time_end_16"
                     android:layout_marginRight="12dp"/>
 
                 <LinearLayout
@@ -177,11 +181,12 @@
                         android:textSize="@dimen/default_desc_text_size"/>
 
                     <TextView
+                        android:id="@+id/end_date_value"
                         android:layout_width="match_parent"
                         android:layout_height="wrap_content"
                         android:background="@null"
                         android:layout_marginTop="3dp"
-                        android:text="@string/shared_string_end_time"
+                        android:text="Aug 8, 2016"
                         android:textColor="?android:attr/textColorSecondary"
                         android:textSize="@dimen/default_sub_text_size"/>
 
@@ -211,9 +216,10 @@
                 android:orientation="horizontal">
 
                 <ImageView
+                    android:id="@+id/average_altitude_image"
                     android:layout_width="16dp"
                     android:layout_height="16dp"
-                    android:src="@drawable/ic_action_altitude_average"
+                    tools:src="@drawable/ic_action_altitude_average_16"
                     android:layout_marginRight="12dp"/>
 
                 <LinearLayout
@@ -236,7 +242,7 @@
                         android:layout_height="wrap_content"
                         android:background="@null"
                         android:layout_marginTop="3dp"
-                        tools:text="Average"
+                        android:text="Average"
                         android:textColor="?android:attr/textColorSecondary"
                         android:textSize="@dimen/default_sub_text_size"/>
 
@@ -251,9 +257,10 @@
                 android:orientation="horizontal">
 
                 <ImageView
+                    android:id="@+id/altitude_range_image"
                     android:layout_width="16dp"
                     android:layout_height="16dp"
-                    android:src="@drawable/ic_action_altitude_average"
+                    tools:src="@drawable/ic_action_altitude_range_16"
                     android:layout_marginRight="12dp"/>
 
                 <LinearLayout
@@ -300,9 +307,10 @@
                 android:orientation="horizontal">
 
                 <ImageView
+                    android:id="@+id/ascent_descent_image"
                     android:layout_width="16dp"
                     android:layout_height="16dp"
-                    android:src="@drawable/ic_action_altitude_average"
+                    tools:src="@drawable/ic_action_altitude_descent_ascent_16"
                     android:layout_marginRight="12dp"/>
 
                 <LinearLayout
@@ -365,9 +373,10 @@
                 android:orientation="horizontal">
 
                 <ImageView
+                    android:id="@+id/moving_time_image"
                     android:layout_width="16dp"
                     android:layout_height="16dp"
-                    android:src="@drawable/ic_action_time_span"
+                    tools:src="@drawable/ic_action_time_moving_16"
                     android:layout_marginRight="12dp"/>
 
                 <LinearLayout
@@ -390,7 +399,7 @@
                         android:layout_height="wrap_content"
                         android:background="@null"
                         android:layout_marginTop="3dp"
-                        tools:text="Moving time"
+                        android:text="Moving time"
                         android:textColor="?android:attr/textColorSecondary"
                         android:textSize="@dimen/default_sub_text_size"/>
 
@@ -405,9 +414,10 @@
                 android:orientation="horizontal">
 
                 <ImageView
+                    android:id="@+id/average_speed_image"
                     android:layout_width="16dp"
                     android:layout_height="16dp"
-                    android:src="@drawable/ic_action_speed"
+                    tools:src="@drawable/ic_action_speed_16"
                     android:layout_marginRight="12dp"/>
 
                 <LinearLayout
@@ -444,9 +454,10 @@
                 android:orientation="horizontal">
 
                 <ImageView
+                    android:id="@+id/max_speed_image"
                     android:layout_width="16dp"
                     android:layout_height="16dp"
-                    android:src="@drawable/ic_action_speed"
+                    tools:src="@drawable/ic_action_max_speed_16"
                     android:layout_marginRight="12dp"/>
 
                 <LinearLayout

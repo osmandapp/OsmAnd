@@ -71,6 +71,10 @@ public class IconsCache {
 		return getDrawable(id, app.getSettings().isLightContent() ? R.color.icon_color : 0);
 	}
 
+	public Drawable getPaintedThemedIcon(@DrawableRes int id, @ColorRes int colorIdLight, @ColorRes int colorIdDark) {
+		return getDrawable(id, app.getSettings().isLightContent() ? colorIdLight : colorIdDark);
+	}
+
 	public Drawable getIcon(@DrawableRes int id) {
 		return getDrawable(id, 0);
 	}

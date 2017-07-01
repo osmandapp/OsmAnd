@@ -249,4 +249,6 @@
 	<color name="gpx_chart_red_label">#b20000</color>
 	<color name="gpx_chart_green_label">#197d2a</color>
 
+	<color name="gpx_split_segment_icon_color">#b3b3b3</color>
+
 </resources>
