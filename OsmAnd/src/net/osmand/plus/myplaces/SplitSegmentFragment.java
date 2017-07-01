@@ -117,6 +117,7 @@ public class SplitSegmentFragment extends OsmAndListFragment{
                             final List<GpxDisplayGroup> groups = getDisplayGroups();
                             if (groups.size() > 0) {
                                 updateSplit(groups, sf);
+                                updateContent();
                             }
                             popup.dismiss();
                             updateSplitIntervalView(splitIntervalView);
@@ -146,13 +147,10 @@ public class SplitSegmentFragment extends OsmAndListFragment{
 
     public void updateContent() {
         adapter.clear();
-        GPXUtilities.GPXFile gpxFile = getGpx();
-        List<GpxDisplayGroup> displayGroups = getDisplayGroups();
-        List<GpxDisplayGroup> groups = getOriginalGroups();
         adapter.setNotifyOnChange(false);
-        for (GpxDisplayItem i : flatten(groups)) {
-            adapter.add(i);
-        }
+        List<GpxDisplayGroup> originalGroups = getOriginalGroups();
+        List<GpxDisplayItem> splitSegments = getSplitSegments();
+        adapter.addAll(splitSegments);
         adapter.setNotifyOnChange(true);
         adapter.notifyDataSetChanged();
         updateHeader();
@@ -297,8 +295,8 @@ public class SplitSegmentFragment extends OsmAndListFragment{
         return groups;
     }
 
-    private List<GpxDisplayItem> getSplitSegments(boolean useDisplayGroups) {
-        List<GpxDisplayGroup> result = getMyActivity().getGpxFile(useDisplayGroups);
+    private List<GpxDisplayItem> getSplitSegments() {
+        List<GpxDisplayGroup> result = getMyActivity().getGpxFile(true);
         List<GpxDisplayItem> splitSegments = new ArrayList<>();
         for (GpxDisplayGroup group : result) {
             splitSegments.addAll(group.getModifiableList());
