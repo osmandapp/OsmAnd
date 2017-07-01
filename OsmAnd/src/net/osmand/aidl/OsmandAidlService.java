@@ -2,12 +2,11 @@ package net.osmand.aidl;
 
 import android.app.Service;
 import android.content.Intent;
-import android.net.Uri;
-import android.os.Build;
 import android.os.IBinder;
 import android.os.RemoteException;
 
 import net.osmand.aidl.calculateroute.CalculateRouteParams;
+import net.osmand.aidl.favorite.AddFavoriteParams;
 import net.osmand.aidl.gpx.ASelectedGpxFile;
 import net.osmand.aidl.gpx.HideGpxParams;
 import net.osmand.aidl.gpx.ImportGpxParams;
@@ -47,6 +46,15 @@ public class OsmandAidlService extends Service {
 	}
 
 	private final IOsmAndAidlInterface.Stub mBinder = new IOsmAndAidlInterface.Stub() {
+
+		@Override
+		public boolean addFavorite(AddFavoriteParams params) throws RemoteException {
+			try {
+				return params != null && getApi().addFavorite(params.getFavorite());
+			} catch (Exception e) {
+				return false;
+			}
+		}
 
 		@Override
 		public boolean addMapMarker(AddMapMarkerParams params) throws RemoteException {
