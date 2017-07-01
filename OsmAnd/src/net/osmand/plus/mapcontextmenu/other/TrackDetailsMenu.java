@@ -316,9 +316,13 @@ public class TrackDetailsMenu {
 		if (highlights != null && highlights.length > 0) {
 			if (minimumVisibleXValue != 0 && maximumVisibleXValue != 0) {
 				if (highlights[0].getX() < minimumVisibleXValue) {
-					gpxItem.chartHighlightPos = minimumVisibleXValue;
+					float difference = (maximumVisibleXValue - minimumVisibleXValue) * 0.1f;
+					gpxItem.chartHighlightPos = minimumVisibleXValue + difference;
+					chart.highlightValue(minimumVisibleXValue + difference, 0);
 				} else if (highlights[0].getX() > maximumVisibleXValue) {
-					gpxItem.chartHighlightPos = maximumVisibleXValue;
+					float difference = (maximumVisibleXValue - minimumVisibleXValue) * 0.1f;
+					gpxItem.chartHighlightPos = maximumVisibleXValue - difference;
+					chart.highlightValue(maximumVisibleXValue - difference, 0);
 				} else {
 					gpxItem.chartHighlightPos = highlights[0].getX();
 				}
