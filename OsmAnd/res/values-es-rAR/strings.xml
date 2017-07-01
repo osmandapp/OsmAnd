@@ -2416,7 +2416,7 @@ Si necesitas ayuda con la aplicación OsmAnd, contacte con nuestro equipo de sop
     <string name="give_permission">Conceder permiso</string>
     <string name="allow_access_location">Permitir acceso a la ubicación</string>
     <string name="first_usage_greeting">Obtén direcciones y descubre lugares nuevos sin conexión a Internet</string>
-    <string name="si_mi_meters">Millas/Metros</string>
+    <string name="si_mi_meters">Millas/metros</string>
     <string name="get_for">Obtener por %1$s</string>
     <string name="get_for_month">Obtener por %1$s al mes</string>
     <string name="osm_live_banner_desc">Obtén descargas ilimitada de mapas y más actualizaciones de mapas por mes: cada semana, día u hora.</string>
