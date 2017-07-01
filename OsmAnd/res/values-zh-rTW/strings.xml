@@ -2882,4 +2882,5 @@ Facebook：https://www.facebook.com/osmandapp
     <string name="shared_string_reload">重新載入</string>
     <string name="mapillary_menu_descr_tile_cache">請重新載入圖磚，以查看最新的資料。</string>
     <string name="mapillary_menu_title_tile_cache">圖磚快取</string>
+    <string name="shared_string_reset">重置</string>
     </resources>

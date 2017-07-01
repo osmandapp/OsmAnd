@@ -2670,7 +2670,7 @@ Tai yra puikus būdas paremti OsmAnd ir OSM, jei jie jums patinka.</string>
     <string name="restart_search">Ieškoti iš naujo</string>
     <string name="increase_search_radius">Padidinti paieškos spindulį</string>
     <string name="nothing_found">Nepavyko nieko rasti :(</string>
-    <string name="nothing_found_descr">Pabandykite pakeisti paieškos užklausą arba padidinti paieškos spindulį</string>
+    <string name="nothing_found_descr">Pakeiskite paieškos užklausą arba padidinkite paieškos spindulį</string>
     <string name="quick_action_showhide_osmbugs_title">Rodyti/slėpti OSM Pastabas</string>
     <string name="quick_action_osmbugs_show">Rodyti OSM Pastabas</string>
     <string name="quick_action_osmbugs_hide">Slėpti OSM Pastabas</string>
@@ -2769,4 +2769,17 @@ Tai yra puikus būdas paremti OsmAnd ir OSM, jei jie jums patinka.</string>
     <string name="shared_string_permissions">Teisės</string>
     <string name="sorted_by_distance">Surūšiuota pagal atstumą</string>
     <string name="shared_string_visible">Matomas</string>
+    <string name="shared_string_reload">Perkrauti</string>
+    <string name="wrong_user_name">Neteisingas vartotojo vardas!</string>
+    <string name="mapillary_menu_descr_dates">Peržiūrėti nuotraukas, pridėtas per tam tikrą laikotarpį.</string>
+    <string name="mapillary_menu_descr_username">Peržiūrėti nuotraukas, pridėtas tam tikro vartotojo.</string>
+    <string name="import_gpx_failed_descr">OsmAnd negali importuoti failo. Prašome patikrinti, ar OsmAnd turi leidimą skaityti failą iš jo buvimo vietos.</string>
+    <string name="distance_moving">Atstumas pataisytas</string>
+    <string name="mapillary_action_descr">Prisidėti su savo šios vietos gatvių vaizdu naudojant Mapillary.</string>
+    <string name="mapillary_widget_descr">Leidžia jums greitai prisidėti prie Mapillary</string>
+    <string name="mapillary_descr">Internetinės gatvės nuotraukos visiems. Atraskite vietas, bendradarbiaukite, fotografuokite pasaulį.</string>
+    <string name="plugin_mapillary_descr">Internetinės gatvės nuotraukos visiems. Atraskite vietas, bendradarbiaukite, fotografuokite pasaulį.</string>
+    <string name="routing_attr_allow_private_description">Suteikti prieigą prie privačių teritorijų</string>
+    <string name="points_delete_multiple_succesful">Punktas(-ai) sėkmingai ištrintas(-i).</string>
+    <string name="points_delete_multiple">Jūs ketinate trinti %1$d punktą (- us). Ar tikrai?</string>
     </resources>

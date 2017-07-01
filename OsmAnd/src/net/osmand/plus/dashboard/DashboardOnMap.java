@@ -1371,6 +1371,7 @@ public class DashboardOnMap implements ObservableScrollViewCallbacks, DynamicLis
 		}
 		updateColorOfToolbar(scrollY);
 		updateTopButton(scrollY);
+		updateMapShadow(scrollY);
 	}
 
 	private boolean isActionButtonVisible() {
@@ -1386,6 +1387,18 @@ public class DashboardOnMap implements ObservableScrollViewCallbacks, DynamicLis
 
 	private boolean isBackButtonVisible() {
 		return !(visibleType == DashboardType.DASHBOARD || visibleType == DashboardType.LIST_MENU);
+	}
+
+	private void updateMapShadow(int scrollY) {
+		View shadowOnMap = dashboardView.findViewById(R.id.shadow_on_map);
+		if (shadowOnMap != null) {
+			int minTop = dashboardView.findViewById(R.id.map_part_dashboard).getHeight() - toolbar.getHeight();
+			if (scrollY >= minTop) {
+				shadowOnMap.setVisibility(View.GONE);
+			} else {
+				shadowOnMap.setVisibility(View.VISIBLE);
+			}
+		}
 	}
 
 	private void updateTopButton(int scrollY) {
@@ -1432,6 +1445,7 @@ public class DashboardOnMap implements ObservableScrollViewCallbacks, DynamicLis
 			gradientToolbar.setAlpha((int) ((1 - t) * 255));
 			setAlpha(dashboardView, (int) (t * 128), 0);
 			View toolbar = dashboardView.findViewById(R.id.toolbar);
+			updateMapShadowColor(malpha);
 			if (t < 1) {
 				//noinspection deprecation
 				toolbar.setBackgroundDrawable(gradientToolbar);
@@ -1439,6 +1453,13 @@ public class DashboardOnMap implements ObservableScrollViewCallbacks, DynamicLis
 				toolbar.setBackgroundColor(0xff000000 | baseColor);
 			}
 		}
+	}
+
+	private void updateMapShadowColor(int alpha) {
+		View shadowOnMap = dashboardView.findViewById(R.id.shadow_on_map);
+		if (shadowOnMap != null) {
+            setAlpha(shadowOnMap, alpha, baseColor);
+        }
 	}
 
 	private void updateListAdapter(ArrayAdapter<?> listAdapter, OnItemClickListener listener) {

@@ -60,7 +60,7 @@ public class MapillaryFiltersFragment extends BaseOsmAndFragment {
         final DateFormat dateFormat = SimpleDateFormat.getDateInstance(DateFormat.MEDIUM);
 
         final View view = View.inflate(new ContextThemeWrapper(getContext(), themeRes), R.layout.fragment_mapillary_filters, null);
-        view.setBackgroundColor(backgroundColor);
+        view.findViewById(R.id.mapillary_filters_linear_layout).setBackgroundColor(backgroundColor);
 
 
         final View toggleRow = view.findViewById(R.id.toggle_row);
@@ -258,6 +258,7 @@ public class MapillaryFiltersFragment extends BaseOsmAndFragment {
 
                 changeButtonState(apply, .5f, false);
                 plugin.updateLayers(mapActivity.getMapView(), mapActivity);
+                hideKeyboard();
             }
         });
 
@@ -276,8 +277,8 @@ public class MapillaryFiltersFragment extends BaseOsmAndFragment {
                 settings.MAPILLARY_FILTER_FROM_DATE.set(0L);
                 settings.MAPILLARY_FILTER_TO_DATE.set(0L);
 
-                changeButtonState(apply, .5f, false);
                 plugin.updateLayers(mapActivity.getMapView(), mapActivity);
+                hideKeyboard();
             }
         });
 

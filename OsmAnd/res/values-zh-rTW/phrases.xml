@@ -3352,4 +3352,42 @@
 	<string name="poi_cuisine_jamaican">牙買加料理</string>
 	<string name="poi_cuisine_armenian">亞美尼亞料理</string>
 	<string name="poi_cuisine_hawaiian">夏威夷料理</string>
+	<string name="poi_cuisine_pakistani">巴基斯坦料理</string>
+	<string name="poi_cuisine_taiwanese">臺灣料理</string>
+	<string name="poi_cuisine_english">英格蘭料理</string>
+	<string name="poi_cuisine_tex_mex">德-墨料理</string>
+	<string name="poi_cuisine_dutch">荷蘭料理</string>
+	<string name="poi_cuisine_syrian">敘利亞料理</string>
+	<string name="poi_cuisine_australian">澳洲料理</string>
+	<string name="poi_cuisine_cajun">卡郡料理</string>
+	<string name="poi_cuisine_egyptian">埃及料理</string>
+	<string name="poi_cuisine_senegalese">塞內加爾料理</string>
+	<string name="poi_cuisine_jewish">猶太料理</string>
+	<string name="poi_cuisine_bulgarian">保加利亞料理</string>
+	<string name="poi_cuisine_tibetan">西藏料理</string>
+
+	<string name="poi_party">派對用品</string>
+	<string name="poi_electrical">電器產品店</string>
+	<string name="poi_locksmith">鎖匠店</string>
+	<string name="poi_lighting">照明燈具</string>
+	<string name="poi_lottery">樂透彩票</string>
+	<string name="poi_gambling">賭博場地</string>
+
+	<string name="poi_gambling_lottery">樂透</string>
+	<string name="poi_gambling_pachinko">小鋼珠</string>
+	<string name="poi_gambling_slot_machines">吃角子老虎</string>
+	<string name="poi_gambling_betting">投注</string>
+	<string name="poi_gambling_bingo">賓果</string>
+
+	<string name="poi_locomotive">鐵路機車</string>
+
+	<string name="poi_nutrition_supplements">營養補充品</string>
+	<string name="poi_photo_studio">照相館</string>
+
+	<string name="poi_animal_keeping">動物飼養</string>
+	<string name="poi_animal_keeping_horse">動物飼養：馬</string>
+	<string name="poi_animal_keeping_sheep">動物飼養：羊</string>
+	<string name="poi_tower_construction_lattice">施工：格構式</string>
+	<string name="poi_motorcycle_type_offroad">越野</string>
+	<string name="poi_motorcycle_type_dualsport">Dualsport</string>
 	</resources>
