@@ -1982,7 +1982,7 @@ OsmAnd هو المصدر المفتوح و التي يجري تطويرها بن
     <string name="osmo_start_service">خدمة أوسمو OsMo</string>
     <string name="routing_attr_avoid_borders_name">منع تخطي الحدود</string>
     <string name="impassable_road_desc">حدد الطرق التي تريد تجنبها أثناء التنقل</string>
-    <string name="search_categories">الفئات</string>
+    <string name="search_categories">فئات</string>
     <string name="shared_string_near">بالقرب من</string>
     <string name="route_tslr">در قليلا إلى اليمين ثم واصل</string>
     <string name="route_tsll">در قليلا إلى اليسار ثم واصل</string>
@@ -2213,7 +2213,7 @@ OsmAnd هو المصدر المفتوح و التي يجري تطويرها بن
 \nوغيرها…</string>
     <string name="dist_away_from_my_location">ابحث %1$s بعيدا</string>
     <string name="show_on_map">اظهر على الخريطة</string>
-    <string name="share_history_subject">تمت مشاركته بـ OsmAnd</string>
+    <string name="share_history_subject">تمت مشاركته عبر OsmAnd</string>
     <string name="route_general_information">المسافة الإجمالية %1$s، مدة السفر %2$d سا و %3$d د.</string>
     <string name="back_to_search">العودة إلى البحث</string>
     <string name="consider_turning_polygons_off">من المستحسن إيقاف عرض المضلعات.</string>
