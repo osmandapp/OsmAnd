@@ -2904,7 +2904,7 @@ eta gehiago…
     <string name="restart_search">Berrasi bilaketa</string>
     <string name="increase_search_radius">Handitu bilaketaren erradioa</string>
     <string name="nothing_found">Ez da ezer aurkitu :(</string>
-    <string name="nothing_found_descr">Saiatu bilaketa terminoak aldatzen edo bilaketaren erradioa handitzen</string>
+    <string name="nothing_found_descr">Aldatu bilaketa terminoak edo handitu bilaketaren erradioa</string>
     <string name="quick_action_showhide_osmbugs_title">Erakutsi/ezkutatu OSM oharrak</string>
     <string name="quick_action_osmbugs_show">Erakutsi OSM oharrak</string>
     <string name="quick_action_osmbugs_hide">Ezkutatu OSM oharrak</string>
@@ -2925,4 +2925,37 @@ eta gehiago…
     <string name="route_is_too_long_v2">Ibilbide hau kalkulatzeko luzeegia izan daiteke. Sortu tarteko helburuak ez baduzu emaitza bat lortu 10 minututan.</string>
     <string name="shared_string_add_photos">Gehitu argazkiak</string>
     <string name="map_widget_ruler_control_first_mode">Puntu biko erregela</string>
+    <string name="shared_string_reset">Leheneratu</string>
+    <string name="shared_string_reload">Birkargatu</string>
+    <string name="mapillary_menu_descr_tile_cache">Birkargatu lauzak eguneratutako datuak ikusteko.</string>
+    <string name="mapillary_menu_title_tile_cache">Lauzen katxea</string>
+    <string name="wrong_user_name">Erabiltzaile-izen okerra!</string>
+    <string name="shared_string_to">Nora</string>
+    <string name="mapillary_menu_date_from">Nondik</string>
+    <string name="mapillary_menu_descr_dates">Ikusi tarte zehatz batean gehitutako argazkiak.</string>
+    <string name="mapillary_menu_title_dates">Datak</string>
+    <string name="mapillary_menu_edit_text_hint">Idatzi erabiltzaile-izena</string>
+    <string name="mapillary_menu_descr_username">Ikusi erabiltzaile jakin batek gehitutako argazkiak.</string>
+    <string name="mapillary_menu_title_username">Erabiltzaile-izena</string>
+    <string name="mapillary_menu_filter_description">Aragazkian igorlearen eta dataren arabera iragazi ditzakezu. Iragazkiak zoom hurbilean bakarrik erabiltzen dira.</string>
+    <string name="map_widget_ruler_control_second_mode">Erradioaren erregela</string>
+    <string name="shared_string_permissions">Baimenak</string>
+    <string name="import_gpx_failed_descr">OsmAnd-ek ezin du fitxategia inportatu. Egiaztatu OsmAndek fitxategia dagoen tokian irakurtzeko baimenak dituen.</string>
+    <string name="distance_moving">Zuzendutako distantzia</string>
+    <string name="mapillary_image">Mapillary irudia</string>
+    <string name="open_mapillary">Ireki Mapillary</string>
+    <string name="shared_string_install">Instalatu</string>
+    <string name="improve_coverage_mapillary">Eskuratu argazki gehiago Mapillary bitartez</string>
+    <string name="improve_coverage_install_mapillary_desc">Zure argazkiak edo argazki sortak erantsi maparen puntu batean erantsi ditzakezu.
+\n
+\nHau egiteko Mapillary aplikazioa instalatu behar duzu, Google Playn dago.</string>
+    <string name="online_photos">Sareko argazkiak</string>
+    <string name="no_photos_descr">Ez dugu argazkirik kokaleku honetarako</string>
+    <string name="mapillary">Mapillary</string>
+    <string name="mapillary_action_descr">Partekatu kokaleku honetako zure kale mailako argazkiak Mapillary erabiliz.</string>
+    <string name="mapillary_widget">Mapillary trepeta</string>
+    <string name="mapillary_widget_descr">Mapillaryn parte hartze azkar bat baimentzen dizu</string>
+    <string name="mapillary_descr">Kale mailako argazkiak denontzat. Deskubritu tokiak, parte hartu, eskuratu mundua.</string>
+    <string name="plugin_mapillary_descr">Kale mailako argazkiak denontzat. Deskubritu tokiak, parte hartu, eskuratu mundua.</string>
+    <string name="srtm_purchase_header">Mapan sestra-kurbak ikusteko, Contour Lines gehigarria eraosi eta instalatu behar duzu</string>
     </resources>
