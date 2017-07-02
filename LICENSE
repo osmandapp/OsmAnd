@@ -62,7 +62,7 @@
         - Open-SVG-Map-Icons - Public Domain
 
     * Non-patched source libraries:
-        - SherlockBar - Apache Lisense - https://github.com/osmandapp/Osmand/tree/master/SherlockBar (https://github.com/JakeWharton/ActionBarSherlock/blob/master/LICENSE.txt)
+        - SherlockBar - Apache License - https://github.com/osmandapp/Osmand/tree/master/SherlockBar (https://github.com/JakeWharton/ActionBarSherlock/blob/master/LICENSE.txt)
 
     * Patched libraries:
         - Protobuf - New BSD License (patches - https://github.com/osmandapp/Osmand/tree/master/OsmAnd-java/protobuf-src, https://github.com/osmandapp/OsmAnd-core/tree/legacy_core/externals/protobuf)
