@@ -3040,7 +3040,7 @@
 	<string name="poi_office_physician">醫師辦公室</string>
 	<string name="poi_office_therapist">治療辦公室</string>
 	<string name="poi_office_podologist">手足病辦公室</string>
-	<string name="poi_office_healer">治療辦公室</string>
+	<string name="poi_office_healer">診療室</string>
 	<string name="poi_office_psychologist">心理學辦公室</string>
 	<string name="poi_office_nursing_service">護理服務</string>
 	<string name="poi_office_midwife">助產士辦公室</string>
@@ -3149,7 +3149,7 @@
 	<string name="poi_telescope_usage_espionage">運用︰刺探</string>
 	<string name="poi_telescope_usage_research">運用︰研究</string>
 
-	<string name="poi_observatory_type_espionage">運用︰刺探</string>
+	<string name="poi_observatory_type_espionage">運用︰偵探</string>
 	<string name="poi_observatory_type_meteorological">氣象</string>
 	<string name="poi_observatory_type_gravitational">引力</string>
 
