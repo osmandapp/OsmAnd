@@ -1525,4 +1525,35 @@
 	<string name="poi_aerialway_platter">رافعة متزحلقين</string>
 	<string name="poi_aerialway_mixed_lift">رافعة مختلطة</string>
 	<string name="poi_aerialway_drag_lift">رافعة سحب</string>
+	<string name="poi_aerialway_rope_tow">رافعة بجر الحبل</string>
+	<string name="poi_water_well">بئر</string>
+	<string name="poi_standpipe">صنبور</string>
+	<string name="poi_lock_gate">قفل البوابة</string>
+	<string name="poi_weir">حاجز مائي</string>
+	<string name="poi_breakwater">حائل الأمواج</string>
+	<string name="poi_groyne">حاجز كشف الانجراف والتعرية</string>
+
+	<string name="poi_power_cable_distribution_cabinet">خزانة توزيع الأسلاك</string>
+	<string name="poi_power_pole">عمود كهربائي</string>
+
+	<string name="poi_bell_tower">برج جرس</string>
+	<string name="poi_telephone_exchange">بدالة الخدمات الهاتفية</string>
+
+	<string name="poi_recycling_cork">فلين</string>
+	<string name="poi_recycling_styrofoam">الستايروفوم</string>
+	<string name="poi_recycling_polyester">بوليستر</string>
+	<string name="poi_recycling_plasterboard">لوح جصي</string>
+	<string name="poi_recycling_fridge_and_freezer">ثلاجة ومجمد</string>
+	<string name="poi_recycling_furniture">أثاث</string>
+	<string name="poi_waste_disposal">صرف القمامة</string>
+	<string name="poi_landuse_railway">منطقة سكك حديدية</string>
+	<string name="poi_retail">بيع أراضي بالتجزئة</string>
+
+	<string name="poi_quarry">مقلع</string>
+	<string name="poi_orchard">بستان</string>
+	<string name="poi_basin">حوض</string>
+
+	<string name="poi_pier">رصيف بحري</string>
+	<string name="poi_crane">رافعة</string>
+	<string name="poi_construction">بناء</string>
 	</resources>
