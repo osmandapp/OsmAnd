@@ -269,7 +269,7 @@
     <string name="gps_wake_up_timer">Vek-intervalo de GPS</string>
     <string name="favourites_edit_dialog_title">Ŝatataj informoj</string>
     <string name="simulate_your_location_stop_descr">Ĉesigas simuladon de pozicio</string>
-    <string name="simulate_your_location_descr">Simuli uzante komputitan kurson aŭ registritan GPX-spuron</string>
+    <string name="simulate_your_location_descr">Simuli vian pozicion uzante komputitan kurson aŭ registritan GPX-spuron</string>
     <string name="looking_up_address">Serĉado de adreso</string>
     <string name="av_locations_descr">GPX-dosiero kun notoj pri lokoj</string>
     <string name="av_locations">Lokoj</string>
@@ -898,7 +898,7 @@ Premtenu por vidi sur la mapo</string>
     <string name="map_widget_magnetic_bearing">Magneta birado</string>
     <string name="map_widget_bearing">Relativa birado</string>
     <string name="access_disable_offroute_recalc">Ne ŝanĝi kurson kiam devoje</string>
-    <string name="access_disable_offroute_recalc_descr">Ne aŭtomate rekalkuli kurson, kiam vi estas malproksime de ĝusta vojo</string>
+    <string name="access_disable_offroute_recalc_descr">Ne aŭtomate rekalkuli kurson, kiam vi estas forlasis ĝustan vojon</string>
     <string name="access_disable_wrong_direction_recalc">Ne ŝanĝi kurson kiam kontraŭdirekte</string>
     <string name="access_disable_wrong_direction_recalc_descr">Ne aŭtomate rekalkuli kurson, kiam vi movas malĝustan direkton</string>
     <string name="access_smart_autoannounce">Inteligentaj mem-sciigoj</string>
@@ -972,7 +972,7 @@ Premtenu por vidi sur la mapo</string>
     <string name="disable_complex_routing">Malaktivigi komplikan difinadon de vojo</string>
     <string name="amenity_type_seamark">Mara navigadpunkto</string>
     <string name="app_modes_choose">Aplikaĵaj profiloj</string>
-    <string name="app_modes_choose_descr">Elekti profilojn de uzado montratajn en aplikaĵo</string>
+    <string name="app_modes_choose_descr">Elekti profilojn de uzado por esti videblaj en aplikaĵo</string>
     <string name="map_widget_map_rendering">Map-bildigado</string>
     <string name="app_mode_hiking">Piedirado</string>
     <string name="app_mode_motorcycle">Motorciklo</string>
@@ -1062,7 +1062,7 @@ Premtenu por vidi sur la mapo</string>
     <string name="use_kalman_filter_compass">Uzi filtrilon de Kalman</string>
     <string name="use_kalman_filter_compass_descr">Etigi bruojn en legoj de kompaso, sed pliigi inertecon</string>
     <string name="use_magnetic_sensor">Uzi magnet-sentilon</string>
-    <string name="use_magnetic_sensor_descr">Uzi magnet-sentilon anstataŭ orientiĝ-sentilon por legi kompasan direkton</string>
+    <string name="use_magnetic_sensor_descr">Por kompasa lego, uzi magnet-sentilon anstataŭ orientiĝ-sentilon</string>
     <string name="other_location">Alia</string>
     <string name="files_limit">Ankoraŭ %1$d dosieroj</string>
     <string name="available_downloads_left">%1$d dosieroj disponeblaj por elŝuto</string>
@@ -1368,7 +1368,7 @@ Proporcia memoro %4$s MB (limito de Android %5$s MB, Dalvik %6$s MB).</string>
     <string name="prefs_plugins">Kromprogramoj</string>
     <string name="prefs_plugins_descr">Kromprogramoj aktivigas spertajn agordojn kaj pliajn eblojn</string>
     <string name="vector_maps_may_display_faster_on_some_devices">Vektoraj mapoj verŝajne funkcias pli rapide. Estas eble, ke tio ne funkcias en kelkaj aparatoj.</string>
-    <string name="play_commands_of_currently_selected_voice">Ludi avertojn uzante elektitan voĉon</string>
+    <string name="play_commands_of_currently_selected_voice">Elekti voĉon kaj provi ĝin ludante avertojn</string>
     <string name="native_rendering">Indiĝena blldigo</string>
     <string name="test_voice_prompts">Testi voĉ-avertojn</string>
     <string name="switch_to_raster_map_to_see">Neniu eksterreta vektora mapo disponebla por tiu ĉi loko. Vi povas elŝuti iun en Agordoj (Administri map-dosierojn), aŭ ŝalti enretajn mapojn (aktivigu la Enretajn mapojn kromprogramon).</string>
@@ -2021,7 +2021,7 @@ Provizore estas uzata enreta servo CloudMade.</string>
     <string name="navigation_intent_invalid">Erara formo: %s</string>
     <string name="plugin_install_needs_network">Vi bezonas retkonekton por instali tiun ĉi kromprogramon.</string>
     <string name="use_fast_recalculation">Inteligenta rekalkulado de kurso</string>
-    <string name="use_fast_recalculation_desc">Rekalkuli nur komencan parton de kurso por longaj vojaĝoj</string>
+    <string name="use_fast_recalculation_desc">Por longaj vojaĝoj, rekalkuli nur komencan parton de kurso</string>
     <string name="rate_this_app">Taksi tiun ĉi aplikaĵon</string>
     <string name="we_really_care_about_your_opinion">Cia opinio pri programo estas tre grava por ni kaj ni volus ekkoni ĝin.</string>
     <string name="rate_this_app_long">Bonvolu taksi OsmAnd ĉe Google Play</string>
@@ -2388,9 +2388,9 @@ Se vi bezonas helpon pri OsmAnd aplikaĵo, bonvolu kontakti nian helpantaron: su
     <string name="give_permission">Permesi</string>
     <string name="allow_access_location">Permesi aliron al pozicio</string>
     <string name="first_usage_greeting">Navigi kaj esplori novajn lokojn sen Interreta konekto</string>
-    <string name="search_my_location">Serĉi mian pozicion</string>
+    <string name="search_my_location">Trovi mian pozicion</string>
     <string name="no_update_info">Ne montri ĝisdatigojn</string>
-    <string name="no_update_info_desc">Ne serĉi informojn pri novaj versioj kaj rabatoj rilataj al OsmAnd</string>
+    <string name="no_update_info_desc">Ne serĉi pri novaj versioj aŭ OsmAnd rilataj rabatoj</string>
     <string name="get_it">Havigi ĝin</string>
     <string name="get_for">Havigi ĝin por %1$s</string>
     <string name="get_for_month">Havigi ĝin por %1$s monatoj</string>
@@ -2468,7 +2468,7 @@ Se vi bezonas helpon pri OsmAnd aplikaĵo, bonvolu kontakti nian helpantaron: su
     <string name="wiki_around">Pri ĉirkaŭaĵo en Vikipedio</string>
     <string name="legacy_search">Malnova serĉilo</string>
     <string name="show_legacy_search">Montri malnovan serĉilon</string>
-    <string name="show_legacy_search_desc">Aktivigi malnovan serĉilon en la tirmenuo</string>
+    <string name="show_legacy_search_desc">Aldoni malnovan serĉilon en la tirmenuon</string>
     <string name="routing_attr_allow_motorway_name">Permesi aŭtovojojn</string>
     <string name="routing_attr_allow_motorway_description">Permesi aŭtoŝoseojn</string>
     <string name="lang_sr_latn">Serba (latina)</string>
