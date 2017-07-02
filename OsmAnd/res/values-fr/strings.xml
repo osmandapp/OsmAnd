@@ -2133,7 +2133,7 @@ Pour revenir à l’un des styles de carte classique de OsmAnd, désactivez simp
     <string name="si_m_s">Mètres par seconde</string>
     <string name="si_min_km">Minutes par kilomètre</string>
     <string name="si_min_m">Minutes par mile</string>
-    <string name="si_nm_h">Nœuds (miles nautiques par heure)</string>
+    <string name="si_nm_h">Miles nautiques par heure (nœuds)</string>
     <string name="nm_h">nœuds</string>
     <string name="min_mile">min/m</string>
     <string name="min_km">min/km</string>
@@ -2144,7 +2144,7 @@ Pour revenir à l’un des styles de carte classique de OsmAnd, désactivez simp
 
     <string name="srtm_plugin_disabled">Courbes de niveau désactivées</string>
     <string name="show_free_version_banner">Afficher le bandeau \"Version Gratuite\"</string>
-    <string name="show_free_version_banner_description">Même si vous avez acheté la version payante, le bandeau \"Version Gratuite\" peut-être affiché</string>
+    <string name="show_free_version_banner_description">Afficher le bandeau \"Version Gratuite\" même dans la version payante</string>
     <string name="downloading_number_of_files">Téléchargement de %1$d fichiers</string>
     <string name="hillshade_layer_disabled">Affichage du relief désactivé</string>
     <string name="buy">Acheter</string>
@@ -3021,4 +3021,5 @@ Fonctionnalités principales :
     <string name="mapillary_menu_descr_dates">Afficher les images ajoutées à certaines dates.</string>
     <string name="mapillary_menu_descr_username">Afficher les images ajoutées par certains utilisateurs.</string>
     <string name="mapillary_menu_filter_description">Vous pouvez filtrer les images par date ou nom d\'utilisateur, le filtre est appliqué après avoir zoomé.</string>
+    <string name="shared_string_reset">Réinitialiser</string>
     </resources>
