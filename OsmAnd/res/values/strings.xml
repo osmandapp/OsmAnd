@@ -66,8 +66,8 @@
     <string name="favorite_group_name">Group name</string>
     <string name="change_color">Change color</string>
     <string name="edit_name">Edit name</string>
-    <string name="animate_my_location">Animate my location</string>
-    <string name="animate_my_location_desc">Enable animation of my location during navigation</string>
+    <string name="animate_my_location">Animate My Position</string>
+    <string name="animate_my_location_desc">Enable map panning animation of My Pocation during navigation</string>
     <string name="shared_string_overview">Overview</string>
     <string name="select_street">Select street</string>
     <string name="shared_string_in_name">in %1$s</string>
@@ -262,7 +262,7 @@
     <string name="give_permission">Give permission</string>
     <string name="allow_access_location">Allow access to location</string>
     <string name="first_usage_greeting">Get directions and discover new places without Internet connection</string>
-    <string name="search_my_location">Search my location</string>
+    <string name="search_my_location">Find my position</string>
     <string name="no_update_info_desc">Do not check for version updates or OsmAnd related discounts</string>
     <string name="no_update_info">Do not show updates</string>
     <string name="update_all_maps_now">Do you want to update all maps now?</string>
