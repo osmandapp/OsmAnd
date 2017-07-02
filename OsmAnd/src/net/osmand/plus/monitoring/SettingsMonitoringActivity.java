@@ -118,6 +118,8 @@ public class SettingsMonitoringActivity extends SettingsBaseActivity {
 				R.string.auto_split_recording_descr));
 		cat.addPreference(createCheckBoxPreference(settings.DISABLE_RECORDING_ONCE_APP_KILLED, R.string.disable_recording_once_app_killed,
 				R.string.disable_recording_once_app_killed_descrp));
+		cat.addPreference(createCheckBoxPreference(settings.STORE_TRACKS_IN_MONTHLY_DIRECTORIES, R.string.store_tracks_in_monthly_directories,
+				R.string.store_tracks_in_monthly_directories_descrp));
 	}
 
 
