@@ -516,7 +516,7 @@
 	<string name="shared_string_online_maps">الخرائط المتصلة بالانترنت</string>
 	<string name="online_map_settings_descr">ضبط مصادر الخرائط التجانبية على الإنترنت أو المخزنة مؤقتا</string>
 	<string name="auto_zoom_farthest">إلى مدى الطويل</string>
-	<string name="use_magnetic_sensor_descr">استخدم الحساس المغناطيسي لتحديد قيمة البوصلة بدلا من حساس الاتجاهات</string>
+	<string name="use_magnetic_sensor_descr">لقراءة البوصلة، استخدام المستشعر المغناطيسي بدلاً من مستشعر التوجيه</string>
     
 	
 	<string name="osmand_accessibility_description">هاته الأداة تجعل ميزات ذوي الإحتياجات الخاصة متاحة مباشرة في التطبيق. الأداة تسهل تعديل وتيرة الكلام لأصوات TTS، ضبط أداة توحيه واحهة الملاحة، إستخدام كرة تحكم لتعديل الزوم، أو استخدام خاصية الرد من نص إلى كلام لإعلان موقعك أثناء السياقة.</string>
@@ -635,7 +635,7 @@
     <string name="app_mode_motorcycle">دراجة نارية</string>
     <string name="app_mode_boat">قارب</string>
     <string name="app_mode_aircraft">الطائرات</string>
-    <string name="app_modes_choose_descr">اختيار أوضاع التطبيق المتوفرة</string>
+    <string name="app_modes_choose_descr">اختر أوضاع الاستخدام لتكون مرئية في التطبيق</string>
     <string name="app_modes_choose">ملامح التطبيق</string>
 	
     <string name="map_widget_map_rendering">تقديم الخريطة</string>
@@ -1698,7 +1698,7 @@ OsmAnd هو المصدر المفتوح و التي يجري تطويرها بن
     <string name="storage_directory_shared">الذّاكرة المشتركة</string>
     <string name="donations">التبرعات</string>
     <string name="osm_live_user_public_name">الاسم العموميّ</string>
-    <string name="osm_live_hide_user_name">لا تعرض اسمي في التّقارير</string>
+    <string name="osm_live_hide_user_name">لا تظهر اسمي في التقارير</string>
     <string name="osm_live_active">نشط</string>
     <string name="osm_live_not_active">خامل</string>
     <string name="osm_live_enter_email">الرجاء إدخل عنوان بريد إلكتروني صالح</string>
@@ -1721,7 +1721,7 @@ OsmAnd هو المصدر المفتوح و التي يجري تطويرها بن
     <string name="access_direction_audio_feedback">اتجاه صدى الصوت</string>
     <string name="use_osm_live_routing">الملاحة عبر OSM Live</string>
     <string name="access_no_destination">لم يتم تعيين الوجهة</string>
-    <string name="access_disable_wrong_direction_recalc_descr">"منع إعادة الحساب التلقائي للمسار عند السير في  اتجاه خاطئ"</string>
+    <string name="access_disable_wrong_direction_recalc_descr">يمنع إعادة الحساب التلقائي للطريق أثناء الانتقال للاتجاه المعاكس</string>
     <string name="access_default_color">اللون الافتراضي</string>
     <string name="access_category_choice">اختر فئة</string>
     <string name="access_hint_enter_name">أدخل الاسم</string>
@@ -1807,9 +1807,9 @@ OsmAnd هو المصدر المفتوح و التي يجري تطويرها بن
     <string name="access_direction_audio_feedback_descr">اشر صوتيا عن اتجاه نقطة الوصول</string>
     <string name="access_direction_haptic_feedback_descr">اشر عن اتجاه نقطة الهدف بالاهتزاز</string>
     <string name="use_osm_live_routing_description">تمكين الملاحة لتغييرات OSM Live (تجريبي)</string>
-	<string name="access_disable_offroute_recalc">لا تغير المسار عندما تكون خارج الطريق</string>
-    <string name="access_disable_offroute_recalc_descr">منع إعادة الحساب التلقائي للمسار عندما تبتعد قليلا عن الطريق الصحيح</string>
-    <string name="access_disable_wrong_direction_recalc">لا تغير المسار باتجاه خاطئ</string>
+	<string name="access_disable_offroute_recalc">عدم اعادة حساب الطريق بعد مغادرته</string>
+    <string name="access_disable_offroute_recalc_descr">يمنع إعادة الحساب التلقائي للطريق بعدما تكون قد غادرته</string>
+    <string name="access_disable_wrong_direction_recalc">عدم إعادة حساب الطريق للاتجاه المعاكس</string>
     <string name="access_smart_autoannounce">الإخطار الآلي الذكي</string>
     <string name="access_smart_autoannounce_descr">الإشعار فقط عند تغير الوجهة نحو نقطة الهدف</string>
     <string name="access_autoannounce_period">مهلة الإخطار الآلي</string>
@@ -2266,7 +2266,7 @@ OsmAnd هو المصدر المفتوح و التي يجري تطويرها بن
     <string name="srtm_plugin_disabled">الخطوط الكفافية معطلة</string>
     <string name="nm">بحاجة إلى معلومات أكثر</string>
     <string name="nm_h">ميل بحري/ساعة</string>
-    <string name="simulate_your_location_descr">"محاكاة باستخدام طريق مقاس أو تسجيل GPX "</string>
+    <string name="simulate_your_location_descr">محاكاة موقعك باستخدام طريق مقاس أو مسار GPX مسجل</string>
     <string name="routing_attr_avoid_shuttle_train_name">تجنب قطار المدينة</string>
     <string name="routing_attr_avoid_shuttle_train_description">تجنب قطار المدينة</string>
     <string name="traffic_warning_hazard">خطر</string>
@@ -2496,8 +2496,8 @@ OsmAnd هو المصدر المفتوح و التي يجري تطويرها بن
     <string name="replace_favorite_confirmation">هل أنت متأكد من أنك تريد استبدال المفضلة %1$s؟</string>
     <string name="clear_tile_data">مسح كافة البيانات الجزئية</string>
     <string name="update_all_maps_now">هل تريد تحديث كافة الخرائط الآن؟</string>
-    <string name="no_update_info_desc">لا تعين أية تحديثات حول الإصدارات الجديدة، أو التخفيضات متعلقة بـ Osmand</string>
-    <string name="no_update_info">عدم إظهار التحديثات</string>
+    <string name="no_update_info_desc">لا تتحقق من وجود تحديثات الإصدار أو الخصومات المتعلقة بالتطبيق</string>
+    <string name="no_update_info">لا تظهر التحديثات</string>
     <string name="skip_map_downloading">تخطي تنزيل الخرائط</string>
     <string name="skip_map_downloading_desc">ليس لديك أي خريطة محلية مثبتة. يمكنك اختيار خريطة من اللائحة أو تنزيل خرائط لاحقاً عبر القائمة - %1$s.</string>
     <string name="search_another_country">حدد منطقة أخرى</string>
@@ -2512,7 +2512,7 @@ OsmAnd هو المصدر المفتوح و التي يجري تطويرها بن
     <string name="give_permission">إعطاء الإذن</string>
     <string name="allow_access_location">الإذن بالوصول إلى الموقع</string>
     <string name="first_usage_greeting">أحصل على التوجيهات واكتشف أماكن جديدة دون إنترنت</string>
-    <string name="search_my_location">البحث في موقعي</string>
+    <string name="search_my_location">ابحث عن موقعي</string>
     <string name="get_for">تحصل عليه بـ %1$s</string>
     <string name="get_for_month">تحصل عليه بـ %1$s للشهر</string>
     <string name="osm_live_banner_desc">تحصل على عدد غير محدود من تنزيلات الخرائط والتحديثات في الشهر : أسبوعيا، يوميا أو كل ساعة.</string>
@@ -2595,7 +2595,7 @@ OsmAnd هو المصدر المفتوح و التي يجري تطويرها بن
           3. كل السلاسل أو السترينجز المنشأة/المعدلة  التي تم إنشاؤها متواجدة في الجزء العلوي من الملف (لتسهيل ايجاد ما هو مترجم).
      من فضلك: إلقاء نظرة على http://code.google.com/p/osmand/wiki/UIConsistency، قد تحسن من عملك وعملنا :-) شكرا - هاردي"</string>
     <string name="show_legacy_search">إظهار طريقة البحث القديمة</string>
-    <string name="show_legacy_search_desc">تفعيل البحث القديم في قائمة الدرج</string>
+    <string name="show_legacy_search_desc">إضافة البحث المتعمق في قائمة الدرج</string>
     <string name="routing_attr_allow_motorway_name">الطريق السريع مسموح</string>
     <string name="routing_attr_allow_motorway_description">الطريق السريع مسموح</string>
     <string name="legacy_search">بحث موروث</string>
@@ -2813,9 +2813,9 @@ OsmAnd هو المصدر المفتوح و التي يجري تطويرها بن
     <string name="srtm_menu_download_descr">لعرض الخطوط الكنتورية على الخريطة، تحتاج إلى تحميل خريطة الخط الكنتوري لهذه المنطقة.</string>
     <string name="show_from_zoom_level">عرض من مستوى التكبير/التصغير</string>
     <string name="display_zoom_level">عرض مستوى التكبير/التصغير: %1$s</string>
-    <string name="animate_my_location">تفعيل حركة الموقع الخاص بي</string>
+    <string name="animate_my_location">قم بتحريك موقعي</string>
     <string name="srtm_purchase_header">لمشاهدة الخطوط الكنتورية على الخريطة، أنت بحاجة لشراء وتثبيت البرنامج المساعد للخطوط الكنتورية</string>
-    <string name="animate_my_location_desc">تفعيل حركة موقعي أثناء الملاحة</string>
+    <string name="animate_my_location_desc">تفعيل تعديل حركة الخريطة بالنسبة لموقعي أثناء الملاحة</string>
     <string name="quick_action_auto_zoom_desc">النقر على زر الإجراء سوف يقوم بتشغيل/إيقاف تكبير الخريطة وفقا لسرعتك.</string>
     <string name="quick_action_add_destination_desc">النقر على زر الإجراء سيقوم بإضافة وجهة في مركز الشاشة. الوجهة المعينة مسبقا تصبح النقطة الوسيطة الأخيرة.</string>
     <string name="quick_action_replace_destination_desc">النقر على زر الإجراء سيحل محل الوجهة بالموقع الظاهر على مركز الشاشة.</string>
