@@ -317,7 +317,7 @@ Både placering og tid er synlige på betjeningspanel samt i modul på kortskær
 
 OSM er et i fællesskab drevet, globalt offentligt domæne kortlægningsprojekt. For nærmere oplysninger henvises til https://openstreetmap.org. Aktiv deltagelse er værdsat, og bidragene kan ske direkte fra OsmAnd, hvis man angiver OSM legitimationsoplysninger.</string>
     <string name="vector_maps_may_display_faster_on_some_devices">Vektorkort vises sandsynligvis hurtigere. Fungerer muligvis ikke godt på nogle enheder.</string>
-    <string name="play_commands_of_currently_selected_voice">Afspil kommandoer med den valgte stemme</string>
+    <string name="play_commands_of_currently_selected_voice">Vælg en stemmefil og test ved at afspille beskeder</string>
     <string name="debugging_and_development">OsmAnd udvikling</string>
     <string name="native_rendering">Indbygget optegning</string>
     <string name="test_voice_prompts">Test talemeddelelser</string>
@@ -1220,7 +1220,7 @@ Liste over understøttede lande (dybest set hele verden!): Afghanistan, Albanien
     <string name="available_downloads_left">%1$d filer kan hentes</string>
     <string name="use_magnetic_sensor">Magnetisk sensor</string>
     <string name="local_indexes_cat_srtm">Højdekurver</string>
-    <string name="use_magnetic_sensor_descr">Brug magnetisksensor i stedet for retningssensor til at bestemme kompasværdi</string>
+    <string name="use_magnetic_sensor_descr">For kompaslæsning, brug magnetisksensoren i stedet for orienteringssensoren</string>
     <string name="use_kalman_filter_compass_descr">Reducerer støj i kompasaflæsninger, men tilføjer inerti</string>
     <string name="use_kalman_filter_compass">Kalman filter</string>
     <string name="wait_current_task_finished">Vent - mens aktuel opgave bliver færdig</string>
@@ -1344,7 +1344,7 @@ Liste over understøttede lande (dybest set hele verden!): Afghanistan, Albanien
     <string name="app_mode_boat">Båd</string>
     <string name="app_mode_aircraft">Fly</string>
     <string name="map_widget_map_rendering">Kortoptegning</string>
-    <string name="app_modes_choose_descr">Vælg tilgængelige brugerprofiler</string>
+    <string name="app_modes_choose_descr">Vælg, at brugsprofilerne skal være synlige i programmet</string>
     <string name="app_modes_choose">Programprofiler</string>
     <string name="amenity_type_seamark">Sømærke</string>
 
@@ -1998,7 +1998,7 @@ Lon %2$s</string>
     
     <string name="routing_attr_height_description">Køretøjets højde der tillades på ruter</string>
     <string name="use_fast_recalculation">Smart rutegenberegning</string>
-    <string name="use_fast_recalculation_desc">Genberegn kun den indledende del af ruten for lange ture</string>
+    <string name="use_fast_recalculation_desc">For lange ture, genberegn kun den indledende del af ruten</string>
     <string name="osmo_share_my_location">Overfør placering</string>
     <string name="shared_string_logoff">Log af</string>
     <string name="rendering_value_disabled_name">Deaktiveret</string>
@@ -2124,7 +2124,7 @@ Lon %2$s</string>
     <string name="unsaved_changes_will_be_lost">Eventuelle ikke-gemte ændringer vil gå tabt. Fortsæt?</string>
     <string name="are_you_sure">Sikker?</string>
     <string name="simulate_your_location_stop_descr">Stop simulering af position</string>
-    <string name="simulate_your_location_descr">Simuler ved brug af beregnet rute eller optaget GPX</string>
+    <string name="simulate_your_location_descr">Simuler position ved brug af beregnet rute eller optaget GPX-spor</string>
     <string name="downloads_left_template">%1$s filhentninger tilbage</string>
     <string name="roads">Veje</string>
     <string name="favourites_edit_dialog_title">Favoritinformation</string>
@@ -2152,7 +2152,7 @@ Lon %2$s</string>
 
     <string name="srtm_plugin_disabled">Højdekurver er deaktiveret</string>
     <string name="show_free_version_banner">Vis banner for gratis version</string>
-    <string name="show_free_version_banner_description">"Selvom du har en  betalt version kan du stadig se banner for den gratis version"</string>
+    <string name="show_free_version_banner_description">Vis banneret for den gratis version selv på den betalte version</string>
     <string name="downloading_number_of_files">Henter - %1$d fil</string>
     <string name="buy">KØB</string>
     <string name="hillshade_layer_disabled">Reliefskygger er deaktiveret</string>
@@ -2507,10 +2507,10 @@ Hvis du  ønsker at støtte OsmAnd og OSM, er dette en god måde at gøre det p�
     <string name="access_widget_expand">Udvid</string>
     <string name="access_shared_string_navigate_up">Navigere op</string>
     <string name="access_sort">Sorter</string>
-    <string name="access_disable_offroute_recalc">Ændre ikke ruten, ved afvigelse væk fra vejen</string>
-    <string name="access_disable_offroute_recalc_descr">Forhindre automatisk genberegning ved afvigelse fra ruten</string>
-    <string name="access_disable_wrong_direction_recalc">Ændre ikke ruten ved forkert retning</string>
-    <string name="access_disable_wrong_direction_recalc_descr">Forhindre automatisk genberegning af ruten, ved bevægelse i den forkerte retning</string>
+    <string name="access_disable_offroute_recalc">Ingen rutegenberegning ved afvigelse fra ruten</string>
+    <string name="access_disable_offroute_recalc_descr">Forhindrer automatisk rutegenberegning ved afvigelse fra ruten</string>
+    <string name="access_disable_wrong_direction_recalc">Ingen rutegenberegning ved modsat retning</string>
+    <string name="access_disable_wrong_direction_recalc_descr">Forhindrer automatisk genberegning af ruten, bare ved bevægelse i den modsatte retning</string>
     <string name="access_smart_autoannounce_descr">Underret kun når retning til målpunktet ændres</string>
     <string name="access_autoannounce_period">Autoannonceringsperiode</string>
     <string name="access_autoannounce_period_descr">Mindste tidsinterval mellem annonceringer</string>
@@ -2582,7 +2582,7 @@ Hvis du  ønsker at støtte OsmAnd og OSM, er dette en god måde at gøre det p�
     <string name="get_started">Kom i gang</string>
     <string name="update_all_maps_now">Opdater alle kort nu?</string>
     <string name="clear_tile_data">Ryd alle kortbrikker</string>
-    <string name="no_update_info_desc">Kontroller ikke om der er opdateringer til nye versioner, rabatter i forbindelse med OsmAnd</string>
+    <string name="no_update_info_desc">Kontroller ikke for opdateringer eller rabatter</string>
     <string name="no_update_info">Vis ikke opdateringer</string>
     <string name="search_my_location">Søg efter placering</string>
     <string name="skip_map_downloading">Spring over hentning af kort</string>
@@ -2678,7 +2678,7 @@ Hvis du  ønsker at støtte OsmAnd og OSM, er dette en god måde at gøre det p�
     <string name="routing_attr_allow_motorway_description">Tillad motorveje</string>
     <string name="legacy_search">Legacy søgning</string>
     <string name="show_legacy_search">Vis legacy søgning</string>
-    <string name="show_legacy_search_desc">Aktiver legacy søgning i sidemenuen</string>
+    <string name="show_legacy_search_desc">Tilføj legacy søgning til sidemenuen</string>
     <string name="lang_sr_latn">Serbisk (Latin)</string>
     <string name="lang_zh_hk">Kinesisk (Hong Kong)</string>
     <string name="rendering_attr_hideWaterPolygons_description">Vand</string>
