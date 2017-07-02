@@ -317,7 +317,7 @@ Både placering og tid er synlige på betjeningspanel samt i modul på kortskær
 
 OSM er et i fællesskab drevet, globalt offentligt domæne kortlægningsprojekt. For nærmere oplysninger henvises til https://openstreetmap.org. Aktiv deltagelse er værdsat, og bidragene kan ske direkte fra OsmAnd, hvis man angiver OSM legitimationsoplysninger.</string>
     <string name="vector_maps_may_display_faster_on_some_devices">Vektorkort vises sandsynligvis hurtigere. Fungerer muligvis ikke godt på nogle enheder.</string>
-    <string name="play_commands_of_currently_selected_voice">Vælg en stemmefil og test ved at afspille beskeder</string>
+    <string name="play_commands_of_currently_selected_voice">Vælg en stemme og test den ved at afspille beskeder</string>
     <string name="debugging_and_development">OsmAnd udvikling</string>
     <string name="native_rendering">Indbygget optegning</string>
     <string name="test_voice_prompts">Test talemeddelelser</string>
@@ -2152,7 +2152,7 @@ Lon %2$s</string>
 
     <string name="srtm_plugin_disabled">Højdekurver er deaktiveret</string>
     <string name="show_free_version_banner">Vis banner for gratis version</string>
-    <string name="show_free_version_banner_description">Vis banneret for den gratis version selv på den betalte version</string>
+    <string name="show_free_version_banner_description">Vis banneret for den gratis version selv for den betalte version</string>
     <string name="downloading_number_of_files">Henter - %1$d fil</string>
     <string name="buy">KØB</string>
     <string name="hillshade_layer_disabled">Reliefskygger er deaktiveret</string>
@@ -2584,7 +2584,7 @@ Hvis du  ønsker at støtte OsmAnd og OSM, er dette en god måde at gøre det p�
     <string name="clear_tile_data">Ryd alle kortbrikker</string>
     <string name="no_update_info_desc">Kontroller ikke for opdateringer eller rabatter</string>
     <string name="no_update_info">Vis ikke opdateringer</string>
-    <string name="search_my_location">Søg efter placering</string>
+    <string name="search_my_location">Find position</string>
     <string name="skip_map_downloading">Spring over hentning af kort</string>
     <string name="skip_map_downloading_desc">Der ikke nogen offline kort installeret. Vælg et kort fra listen eller hent senere via Menu - %1$s.</string>
     <string name="search_another_country">Vælg et andet område</string>
@@ -2907,8 +2907,8 @@ Tidligere destination bliver sidste mellemliggende punkt.</string>
     <string name="select_street">Vælg gade</string>
     <string name="shared_string_in_name">i %1$s</string>
     <string name="shared_string_overview">Oversigt</string>
-    <string name="animate_my_location">Animér placering</string>
-    <string name="animate_my_location_desc">Aktiver animation af placering under navigation</string>
+    <string name="animate_my_location">Animér position</string>
+    <string name="animate_my_location_desc">Aktiver animation af position under navigation</string>
     <string name="favorite_group_name">Gruppenavn</string>
     <string name="change_color">Skift farve</string>
     <string name="edit_name">Rediger navn</string>
