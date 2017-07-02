@@ -2782,4 +2782,19 @@ Tai yra puikus būdas paremti OsmAnd ir OSM, jei jie jums patinka.</string>
     <string name="routing_attr_allow_private_description">Suteikti prieigą prie privačių teritorijų</string>
     <string name="points_delete_multiple_succesful">Punktas(-ai) sėkmingai ištrintas(-i).</string>
     <string name="points_delete_multiple">Jūs ketinate trinti %1$d punktą (- us). Ar tikrai?</string>
+    <string name="shared_string_reset">Nustatyti iš naujo</string>
+    <string name="mapillary_menu_descr_tile_cache">Užkrauti žemėlapio lakštus iš naujo kad pamatytumėte naujus duomenis.</string>
+    <string name="mapillary_menu_title_tile_cache">Žemėlapio lakštų talpykla</string>
+    <string name="shared_string_to">Iki</string>
+    <string name="mapillary_menu_filter_description">Vaizdus galima filtruoti pagal pateikėją arba pagal datą. Filtrai veikia tik labai priartinus.</string>
+    <string name="map_widget_ruler_control_first_mode">Liniuotė tarp dviejų taškų</string>
+    <string name="map_widget_ruler_control_second_mode">Spindulio liniuotė</string>
+    <string name="improve_coverage_install_mapillary_desc">Galite fotografuoti ir savo nuotraukas ar jų grupę prisegti ją prie šios vietos žemėlapyje.
+\n
+\nKad tą galėtumėt padaryti jums reikalinga Mapillary programa iš Google Play parduotuvės.</string>
+    <string name="private_access_routing_req">Jūsų kelionės tikslas yra privačioje teritorijoje. Ar norite leisti keliavimą privačiais keliais šioje kelionėje?</string>
+    <string name="quick_action_showhide_osmbugs_descr">Paspaudus aktyvinimo mygtuką OSM užrašai bus parodomi ant žemėlapio arba paslepiami.</string>
+    <string name="hillshade_menu_download_descr">Norėdami pamatyti kalnų reljefo šešėlių žemėlapį turite parsisiųsti kalnų šešėlių sluoksnio žemėlapį šiam regionui.</string>
+    <string name="hillshade_purchase_header">Norėdami pamatyti kalnų šešėlius ant žemėlapio turėsite nusipirkti ir įdiegti Kontūrų Linijų įskiepį</string>
+    <string name="hide_from_zoom_level">Paslėpti mąstelį</string>
     </resources>
