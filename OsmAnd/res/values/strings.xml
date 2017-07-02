@@ -67,7 +67,7 @@
     <string name="change_color">Change color</string>
     <string name="edit_name">Edit name</string>
     <string name="animate_my_location">Animate My Position</string>
-    <string name="animate_my_location_desc">Enable map panning animation of My Pocation during navigation</string>
+    <string name="animate_my_location_desc">Enable map panning animation of My Position during navigation</string>
     <string name="shared_string_overview">Overview</string>
     <string name="select_street">Select street</string>
     <string name="shared_string_in_name">in %1$s</string>
@@ -1832,7 +1832,7 @@
     <string name="prefs_plugins_descr">Plugins activate advanced settings and additional functionality</string>
     <string name="prefs_plugins">Plugins</string>
     <string name="vector_maps_may_display_faster_on_some_devices">Vector maps likely display faster. May not work well on some devices.</string>
-    <string name="play_commands_of_currently_selected_voice">Select a voice file and test by playing prompts</string>
+    <string name="play_commands_of_currently_selected_voice">Select a voice and test by playing prompts</string>
     <string name="native_rendering">Native rendering</string>
     <string name="test_voice_prompts">Test voice prompts</string>
     <string name="switch_to_raster_map_to_see">No offline vector map present for this location. You can download one in Settings (Manage map files), or switch to online maps (enable online maps plugin for this).</string>
@@ -2498,7 +2498,7 @@
     <string name="roads">Roads</string>
     <string name="downloading_number_of_files">Downloading - %1$d file</string>
     <string name="show_free_version_banner">Show free version banner</string>
-    <string name="show_free_version_banner_description">Display the free version banner even on the paid version</string>
+    <string name="show_free_version_banner_description">Display the free version banner even in the paid version</string>
     <string name="buy">BUY</string>
     <string name="activate_seamarks_plugin">Please activate Seamarks plugin</string>
     <string name="activate_srtm_plugin">Please activate SRTM plugin</string>
