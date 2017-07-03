@@ -42,6 +42,7 @@ public class RulerControlLayer extends OsmandMapLayer {
     private int radius;
     private double roundedDist;
     private boolean showTwoFingersDistance;
+    private boolean twoPointersZoomOutAllowed;
 
     private QuadPoint cacheCenter;
     private int cacheIntZoom;
@@ -109,9 +110,19 @@ public class RulerControlLayer extends OsmandMapLayer {
     }
 
     @Override
+    public boolean isMapGestureAllowed(MapGestureType type) {
+        if (type != MapGestureType.TWO_POINTERS_ZOOM_OUT) {
+            return true;
+        } else {
+            return twoPointersZoomOutAllowed;
+        }
+    }
+
+    @Override
     public void onDraw(Canvas canvas, RotatedTileBox tb, DrawSettings settings) {
         if (mapActivity.getMapLayers().getMapWidgetRegistry().isVisible("ruler") &&
                 rightWidgetsPanel.getVisibility() == View.VISIBLE) {
+            twoPointersZoomOutAllowed = false;
             lineAttrs.updatePaints(view, settings, tb);
             circleAttrs.updatePaints(view, settings, tb);
             circleAttrs.paint2.setStyle(Style.FILL);
@@ -147,6 +158,8 @@ public class RulerControlLayer extends OsmandMapLayer {
                     drawCircle(canvas, tb, i, center);
                 }
             }
+        } else {
+            twoPointersZoomOutAllowed = true;
         }
     }
 
