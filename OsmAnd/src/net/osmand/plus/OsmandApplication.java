@@ -129,7 +129,7 @@ public class OsmandApplication extends MultiDexApplication {
 	@Override
 	public void onCreate() {
 		long timeToStart = System.currentTimeMillis();
-		if (Version.getAppName(this).equals("OsmAnd~")) {
+		if (Version.isDeveloperVersion(this)) {
 			if (android.os.Build.VERSION.SDK_INT >= 9) {
 				try {
 					Class.forName("net.osmand.plus.base.EnableStrictMode").newInstance();
