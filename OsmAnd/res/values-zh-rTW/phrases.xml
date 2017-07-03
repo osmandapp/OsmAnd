@@ -3199,7 +3199,7 @@
 	<string name="poi_xmas">聖誕節</string>
 	<string name="poi_xmas_tree">聖誕樹</string>
 	<string name="poi_xmas_market">聖誕市集</string>
-	<string name="poi_xmas_pyramid">聖誕樹</string>
+	<string name="poi_xmas_pyramid">聖誕樹塔</string>
 	<string name="poi_xmas_shop">聖誕商店</string>
 	<string name="poi_xmas_event">聖誕活動</string>
 	<string name="poi_xmas_opening_hours">聖誕節：營業時間</string>
@@ -3355,7 +3355,7 @@
 	<string name="poi_cuisine_pakistani">巴基斯坦料理</string>
 	<string name="poi_cuisine_taiwanese">臺灣料理</string>
 	<string name="poi_cuisine_english">英格蘭料理</string>
-	<string name="poi_cuisine_tex_mex">德-墨料理</string>
+	<string name="poi_cuisine_tex_mex">德州-墨西哥料理</string>
 	<string name="poi_cuisine_dutch">荷蘭料理</string>
 	<string name="poi_cuisine_syrian">敘利亞料理</string>
 	<string name="poi_cuisine_australian">澳洲料理</string>
