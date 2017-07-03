@@ -2828,7 +2828,7 @@ Repræsenterer område: %1$s x %2$s</string>
     <string name="gpx_track">Spor</string>
     <string name="points_delete_multiple_succesful">Punkter slettet.</string>
     <string name="points_delete_multiple">Slet %1$d, punkter. Sikker?</string>
-    <string name="route_points_category_name">Sving på ruten der skal passeres</string>
+    <string name="route_points_category_name">Sving at passere på ruten</string>
     <string name="track_points_category_name">Markante punkter på ruten</string>
     <string name="add_new_folder">Tilføj ny mappe</string>
     <string name="shared_string_slope">Hældning</string>
@@ -2908,7 +2908,7 @@ Tidligere destination bliver sidste mellemliggende punkt.</string>
     <string name="shared_string_in_name">i %1$s</string>
     <string name="shared_string_overview">Oversigt</string>
     <string name="animate_my_location">Animér position</string>
-    <string name="animate_my_location_desc">Aktiver animation af position under navigation</string>
+    <string name="animate_my_location_desc">Aktiver kort panorering animation af position under navigation</string>
     <string name="favorite_group_name">Gruppenavn</string>
     <string name="change_color">Skift farve</string>
     <string name="edit_name">Rediger navn</string>
@@ -2971,5 +2971,5 @@ Tidligere destination bliver sidste mellemliggende punkt.</string>
     <string name="mapillary_menu_title_tile_cache">Kortbrik-cache</string>
     <string name="shared_string_reset">Nulstil</string>
     <string name="store_tracks_in_monthly_directories">Gem optagede spor i månedlige mapper</string>
-    <string name="store_tracks_in_monthly_directories_descrp">Gem optagede spor i mapper baseret på den måned, hvor sporet blev optaget i, fx 2017-01 for januar 2017.</string>
+    <string name="store_tracks_in_monthly_directories_descrp">Gem optagede spor i mapper baseret på måneden, hvori sporet blev optaget, fx 2017-01 for januar 2017.</string>
     </resources>
