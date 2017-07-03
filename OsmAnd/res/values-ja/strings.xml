@@ -604,7 +604,7 @@ POIの更新は利用できません</string>
 <string name="poi_dialog_comment_default">POI 変更</string>
 <string name="poi_dialog_other_tags_message">他のタグは全て保存されました</string>
 <string name="default_buttons_commit">コミット</string>
-<string name="shared_string_clear">全削除</string>
+<string name="shared_string_clear">条件のクリア</string>
 <string name="filter_current_poiButton">フィルタ</string>
 
 <string name="edit_filter_save_as_menu_item">名前をつけて保存</string>
@@ -2984,14 +2984,14 @@ OsmAndとOSMをサポートする方法として現状最適な方法である�
     <string name="shared_string_reload">再読み込み</string>
     <string name="mapillary_menu_descr_tile_cache">最新データを見るためにタイルを再読み込みします。</string>
     <string name="mapillary_menu_title_tile_cache">タイルキャッシュ</string>
-    <string name="wrong_user_name">不正なユーザー名です！</string>
-    <string name="shared_string_to">送信先</string>
-    <string name="mapillary_menu_date_from">送信元</string>
-    <string name="mapillary_menu_descr_dates">指定の期間に追加された画像を表示します。</string>
+    <string name="wrong_user_name">存在しないユーザー名です！</string>
+    <string name="shared_string_to">この日付以前</string>
+    <string name="mapillary_menu_date_from">この日付以降</string>
+    <string name="mapillary_menu_descr_dates">指定の期間に追加された画像だけを表示します。</string>
     <string name="mapillary_menu_title_dates">日付</string>
     <string name="mapillary_menu_edit_text_hint">ユーザー名を入力</string>
-    <string name="mapillary_menu_descr_username">指定のユーザーによって追加された画像を表示します。</string>
+    <string name="mapillary_menu_descr_username">指定のユーザーによって追加された画像のみを表示します。</string>
     <string name="mapillary_menu_title_username">ユーザー名</string>
-    <string name="mapillary_menu_filter_description">送信者または日付別に画像をフィルタリングできます。 フィルタは、拡大縮小ズームにのみ適用されます。</string>
+    <string name="mapillary_menu_filter_description">投稿者または日付で投稿された画像をフィルタリングできます。 フィルタは拡大ズームにのみ適用されます。</string>
     <string name="distance_moving">距離補正済み</string>
     </resources>
