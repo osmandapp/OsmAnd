@@ -118,7 +118,7 @@
     <string name="si_min_km">mínútur á kílómetra</string>
     <string name="si_min_m">mínútur á mílu</string>
     <string name="si_nm_h">Sjómílur á klukkustund (hnútar)</string>
-    <string name="nm_h">smi/klst</string>
+    <string name="nm_h">sml/klst</string>
     <string name="min_mile">min/m</string>
     <string name="min_km">min/km</string>
     <string name="m_s">m/sek</string>
@@ -862,8 +862,8 @@
     <string name="back_to_map">Aftur í kort</string>
     <string name="share_note">Deila minnispunkti</string>
     <string name="location_on_map">Staðsetning:
- Breidd %1$s
- Lengd %2$s</string>
+\nBreidd %1$s
+\nLengd %2$s</string>
     <string name="online_map">Nettengt kort</string>
     <string name="roads_only">Einungis vegir</string>
     <string name="rendering_attr_pisteRoutes_name">Skíðabrekkur</string>
@@ -1413,7 +1413,7 @@ og leiðsögn</string>
     <string name="voice_data_corrupted">Valin raddgögn eru skemmd</string>
     <string name="voice_data_unavailable">Valin raddgögn eru ekki tiltæk</string>
     <string name="sd_unmounted">SD-kortið er ekki aðgengilegt.
-Þú munt ekki geta séð kort eða fundið hluti.</string>
+\nÞú munt ekki geta séð kort eða fundið hluti.</string>
     <string name="sd_mounted_ro">SD-kortið er skrifvarið.
 Þú munt aðeins geta séð foruppsetta kortið og getur ekki sótt ný gögn af netinu.</string>
     <string name="unzipping_file">Afpakka skrá…</string>
