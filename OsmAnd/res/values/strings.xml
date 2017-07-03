@@ -9,8 +9,8 @@
          3. All your modified/created strings are in the top of the file (to make easier find what\'s translated).
     PLEASE: Have a look at http://code.google.com/p/osmand/wiki/UIConsistency, it may really improve your and our work  :-)  Thx - Hardy
     -->
-    <string name="store_tracks_in_monthly_directories">Store recorded tracks in monthly directories</string>
-    <string name="store_tracks_in_monthly_directories_descrp">Store recorded tracks in directories based on the month that the track was recorded in, for example 2017-01 for January 2017.</string>
+    <string name="store_tracks_in_monthly_directories">Store recorded tracks in monthly folders</string>
+    <string name="store_tracks_in_monthly_directories_descrp">Store recorded tracks in sub-folders per recording month (like 2017-01).</string>
     <string name="shared_string_reset">Reset</string>
     <string name="shared_string_reload">Reload</string>
     <string name="mapillary_menu_descr_tile_cache">Reload tiles to see up to date data.</string>
