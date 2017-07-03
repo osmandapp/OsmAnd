@@ -1108,9 +1108,6 @@ public class OsmandMapTileView implements IMapDownloaderCallback {
 		@Override
 		public boolean onDoubleTap(MotionEvent e) {
 			LOG.debug("onDoubleTap getZoom()");
-			if (!mapGestureAllowed(OsmandMapLayer.MapGestureType.DOUBLE_TAP_ZOOM_IN)) {
-				return false;
-			}
 			if (!doubleTapScaleDetector.isInZoomMode()) {
 				if (isZoomingAllowed(getZoom(), 1.1f)) {
 					final RotatedTileBox tb = getCurrentRotatedTileBox();
