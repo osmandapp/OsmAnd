@@ -53,7 +53,7 @@ public class DoubleTapScaleDetector {
 	}
 
 	public boolean onTouchEvent(MotionEvent event) {
-		if (event.getPointerCount() != 1) {
+		if (event.getPointerCount() != 1 || !view.mapGestureAllowed(OsmandMapLayer.MapGestureType.DOUBLE_TAP_ZOOM_CHANGE)) {
 			resetEvents();
 			mIsDoubleTapping = false;
 			mScrolling = false;

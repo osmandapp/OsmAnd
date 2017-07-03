@@ -338,7 +338,7 @@ public class OsmandMapTileView implements IMapDownloaderCallback {
 		this.wasZoomInMultiTouch = wasZoomInMultiTouch;
 	}
 
-	private boolean mapGestureAllowed(OsmandMapLayer.MapGestureType type) {
+	public boolean mapGestureAllowed(OsmandMapLayer.MapGestureType type) {
 		for (OsmandMapLayer layer : layers) {
 			if (!layer.isMapGestureAllowed(type)) {
 				return false;
@@ -1027,9 +1027,6 @@ public class OsmandMapTileView implements IMapDownloaderCallback {
 
 		@Override
 		public void onZoomEnded(double relativeToStart) {
-			if (!mapGestureAllowed(OsmandMapLayer.MapGestureType.DOUBLE_TAP_ZOOM_CHANGE)) {
-				return;
-			}
 			// 1.5 works better even on dm.density=1 devices
 			float dz = (float) ((relativeToStart - 1) * DoubleTapScaleDetector.SCALE_PER_SCREEN);
 			setIntZoom(Math.round(dz) + initialViewport.getZoom());
@@ -1104,9 +1101,6 @@ public class OsmandMapTileView implements IMapDownloaderCallback {
 
 		@Override
 		public void onZooming(double relativeToStart) {
-			if (!mapGestureAllowed(OsmandMapLayer.MapGestureType.DOUBLE_TAP_ZOOM_CHANGE)) {
-				return;
-			}
 			double dz = (relativeToStart - 1) * DoubleTapScaleDetector.SCALE_PER_SCREEN;
 			changeZoomPosition((float) dz, 0);
 		}
