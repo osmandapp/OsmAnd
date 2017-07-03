@@ -1186,7 +1186,8 @@
     <string name="incremental_search_building">Binanı tədricən axtar</string>
     <string name="choose_available_region">Siyahıdan region seçin</string>
     <string name="choose_intersected_street">Kəsişən küçəni seçin</string>
-    <string name="navigate_point_top_text">Seçilən formatda en və uzunluğu daxil edin (D - dərəcə, M - dəqiqə, S - saniyə)</string>
+    <string name="navigate_point_top_text">Seçilən formatda en və uzunluğu daxil edin
+\n(D - dərəcə, M - dəqiqə, S - saniyə)</string>
     <string name="navigate_point_latitude">En</string>
     <string name="navigate_point_longitude">Uzunluq</string>
     <string name="navigate_point_format_D">DDD.DD</string>
