@@ -1608,4 +1608,19 @@
     <string name="mapillary_menu_filter_description">Şəkilləri təqdim edənə və ya tarixə görə filtrləyə bilərsiniz. Filtrlər yalnız yaxın miqyas üçün tətbiq olunur.</string>
     <string name="general_settings_descr">Proqramın ekran və ümumi parametrlərini tənzimləyin</string>
     <string name="open_street_map_login_descr">openstreetmap.org təqdimlər üçün lazımdır</string>
+    <string name="no_map_markers_found">Zəhmət olmasa xəritədə işarələr əlavə edin</string>
+    <string name="settings_preset_descr">Xəritə görünüşü və naviqasiya parametrləri hər istifadə profilinə görə yadda saxlanılır. Standart profilinizi burada seçin.</string>
+    <string name="app_mode_default">Xəritəyə baxış</string>
+    <string name="share_route_as_gpx">Marşrutu GPX faylı olaraq paylaş</string>
+    <string name="share_route_subject">Marşrut OsmAnd ilə paylaşılıb</string>
+    <string name="rendering_attr_contourLines_name">Kontur xətlərini göstər</string>
+    <string name="rendering_attr_hmRendered_name">Daha çox xəritə detalı göstər</string>
+    <string name="local_index_routing_data">Marşrutlama məlumatları</string>
+    <string name="navigate_point_format">Format</string>
+    <string name="poi_search_desc">POI (maraq nöqtəsi) axtar</string>
+    <string name="navpoint_search_desc">Koordinatlar</string>
+    <string name="offline_navigation_not_available">OsmAnd offlayn naviqasiya müvəqqəti olaraq mövcud deyil.</string>
+    <string name="unknown_from_location">Başlanğıc nöqtə hələ müəyyənləşdirilməyib</string>
+    <string name="local_indexes_cat_map">Standart xəritələr (vektor)</string>
+    <string name="validate_gpx_upload_name_pwd">GPX fayllarını yükləmək üçün OSM istifadəçi adı və şifrəni daxil edin.</string>
     </resources>

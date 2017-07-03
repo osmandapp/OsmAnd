@@ -371,9 +371,9 @@
   <string name="shared_string_previous">Попередній</string>
   <string name="unit_of_length_descr">Змінити одиниці вимірювання довжини</string>
   <string name="unit_of_length">Одиниці вимірювання довжини</string>
-  <string name="si_mi_feet">Милі/фути</string>
-  <string name="si_mi_yard">Милі/ярди</string>
-  <string name="si_km_m">Кілометри/метри</string>
+  <string name="si_mi_feet">Милі, фути</string>
+  <string name="si_mi_yard">Милі, ярди</string>
+  <string name="si_km_m">Кілометри, метри</string>
   <string name="yard">ярд</string>
   <string name="foot">фут</string>
   <string name="mile_per_hour">мл/г</string>
@@ -1382,12 +1382,12 @@ OsmAnd має відкриті сирці і активно розвиваєть
 	    
     
     <string name="driving_region_descr">Виберіть регіон: США, Європа, Англія, Азія та інші</string>
-	<string name="driving_region">Регіон</string>
+	<string name="driving_region">Регіон водіння</string>
 	<string name="driving_region_japan">Японія</string>
 	<string name="driving_region_us">США</string>
 	<string name="driving_region_canada">Канада</string>
 	<string name="driving_region_europe_asia">Європа, Азія, Латинська Америка та подібні</string>
-	<string name="driving_region_uk">Англія, Індія та інші</string>
+	<string name="driving_region_uk">Великобританія, Індія &amp; схожі</string>
 	
 	
 	<string name="map_widget_fps_info">FPS-інфо</string>
@@ -2175,9 +2175,9 @@ OsmAnd має відкриті сирці і активно розвиваєть
     <string name="default_speed_system_descr">Визначте одиниці виміру швидкості</string>
     <string name="default_speed_system">Одиниці виміру швидкості</string>
     <string name="si_nm">Морські милі</string>
-    <string name="si_kmh">Кілометри на годину</string>
-    <string name="si_mph">Милі на годину</string>
-    <string name="si_m_s">Метри на секунду</string>
+    <string name="si_kmh">Кілометрів за годину</string>
+    <string name="si_mph">Миль на годину</string>
+    <string name="si_m_s">Метрів за секунду</string>
     <string name="si_min_km">Хвилин за кілометр</string>
     <string name="si_min_m">Хвилин за милю</string>
     <string name="si_nm_h">Морських миль на годину (вузол)</string>
@@ -2334,8 +2334,8 @@ OsmAnd має відкриті сирці і активно розвиваєть
     <string name="starting_point">Початкова точка</string>
     <string name="shared_string_not_selected">Не вибрано</string>
     <string name="rec_split_clip_length">Тривалість кліпу</string>
-    <string name="nm">м.милі</string>
-    <string name="nm_h">м.миль/г</string>
+    <string name="nm">мор.м.</string>
+    <string name="nm_h">мор.м./год</string>
     <string name="update_time">Час оновлення</string>
     <string name="updates_size">Розмір оновлення</string>
     <string name="weekly">Щотижня</string>
@@ -2638,7 +2638,7 @@ Facebook: https://www.facebook.com/osmandapp
     <string name="get_for_month">Отримати за %1$s на місяць</string>
     <string name="osm_live_banner_desc">Отримайте необмежені завантаження для мап, а також оновлення мап частіше ніж один раз на місяць: щотижня, щодня або щогодини.</string>
     <string name="osmand_plus_banner_desc">Повна версія OsmAnd з необмеженою кількістю завантажень і щомісячних оновлень для мап.</string>
-    <string name="si_mi_meters">Милі / метри</string>
+    <string name="si_mi_meters">Милі, метри</string>
     <string name="skip_map_downloading">Пропустити завантаження мап</string>
     <string name="skip_map_downloading_desc">У вас немає завантажених мап. Ви можете вибрати мапу зі списку або завантажити її пізніше за допомогою меню — %1$s.</string>
     <string name="search_another_country">Виберіть інший регіон</string>

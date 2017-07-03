@@ -1435,7 +1435,7 @@ Afganistan, Afryka Południowa, Albania, Algieria, Andora, Angola, Anguilla, Ant
     <string name="routing_attr_weight_description">Określa maksymalną, dozwoloną masę pojazdu</string>
     <string name="select_gpx">Wybierz GPX…</string>
     <string name="route_descr_select_destination">Proszę wybrać cel trasy</string>
-    <string name="shared_string_select_on_map">Wskazanie na mapie</string>
+    <string name="shared_string_select_on_map">Wskaż na mapie</string>
     <string name="shared_string_favorite">Ulubione</string>
     <string name="route_preferences">Ustawienia trasy</string>
     <string name="route_info">Informacje o trasie</string>
@@ -2871,7 +2871,7 @@ Reprezentuje obszar: %1$s x %2$s</string>
     <string name="shared_string_in_name">w %1$s</string>
     <string name="shared_string_overview">Podsumowanie</string>
     <string name="animate_my_location">Animowanie położenia</string>
-    <string name="animate_my_location_desc">Animuj moją pozycję podczas nawigacji</string>
+    <string name="animate_my_location_desc">Włącza animację aktualnego położenia na mapie</string>
     <string name="osmand_extended_description_part2">"
  Nawigacja GPS
  • Możesz wybrać pomiędzy trybem offline (brak kosztów roamingu za granicą) lub online (szybciej)
@@ -2942,4 +2942,9 @@ Reprezentuje obszar: %1$s x %2$s</string>
     <string name="shared_string_to">Do</string>
     <string name="mapillary_menu_date_from">Od</string>
     <string name="wrong_user_name">Nieprawidłowa nazwa użytkownika!</string>
+    <string name="mapillary_menu_title_tile_cache">Pamięć podręczna kafelków</string>
+    <string name="mapillary_menu_descr_dates">Wyświetla obrazy dodane w określonym czasie</string>
+    <string name="mapillary_menu_edit_text_hint">Proszę wprowadzić nazwę użytkownika</string>
+    <string name="mapillary_menu_filter_description">Można filtrować obrazy według nazwy użytkownika lub daty. Filtry mają zastosowanie dla większych przybliżeń.</string>
+    <string name="mapillary_menu_descr_username">Wyświetla obrazy dodane przez określonego użytkownika.</string>
     </resources>

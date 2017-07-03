@@ -26,7 +26,7 @@
     <string name="maps_define_edit">Вызначыць/зьмянiць…</string>
 	<string name="map_widget_fps_info">Адладачная інфармацыя FPS</string>
 	<string name="driving_region_descr">Абярыце рэгіён кіраваньня: ЗША, Эўропа, Вялікабрытанія, Азія і іншыя</string>
-	<string name="driving_region">Рэгіён кіраваньня</string>
+	<string name="driving_region">Рэгіён кіравання</string>
 	<string name="driving_region_japan">Японія</string>
 	<string name="driving_region_us">ЗША</string>
 	<string name="driving_region_canada">Канада</string>
@@ -570,7 +570,7 @@ OsmAnd мае адкрыты зыходны код і актыўна разві�
 	<string name="favourites_search_desc">Пошук упадабаных</string>
 	
 	<string name="offline_navigation_not_available">Аўтаномная навігацыя OsmAnd часова недаступная.</string>
-	<string name="left_side_navigation">Леваручны рух</string>
+	<string name="left_side_navigation">Левабаковы рух</string>
 	<string name="left_side_navigation_descr">Абраць для краін з леваручным рухам</string>
 	
 	<string name="unknown_from_location">Першапачатковае месцазнаходжаньне не вызначана</string>
@@ -900,7 +900,7 @@ OsmAnd мае адкрыты зыходны код і актыўна разві�
 	<string name="unit_of_length">Адзінка вымярэньня адлегласьці</string>
 	<string name="si_mi_feet">Мілі/футы</string>
 	<string name="si_mi_yard">Мілі/ярды</string>
-	<string name="si_km_m">Кілямэтры/мэтры</string>
+	<string name="si_km_m">Кіламетры/метры</string>
 	<string name="yard">ярд</string>
 	<string name="foot">фут</string>
 	<string name="mile_per_hour">мл/г</string>
@@ -2138,10 +2138,10 @@ OsmAnd мае адкрыты зыходны код і актыўна разві�
     <string name="default_speed_system">Адзінка вымярэньня хуткасьці</string>
     <string name="nm">м.мілі</string>
     <string name="si_nm">Марскія мілі</string>
-    <string name="si_kmh">Кілямэтраў за гадзіну</string>
+    <string name="si_kmh">Кіламетраў за гадзіну</string>
     <string name="si_mph">Міляў за гадзіну</string>
-    <string name="si_m_s">Мэтраў за сэкунду</string>
-    <string name="si_min_km">Хвілін на кілямэтар</string>
+    <string name="si_m_s">Метраў за секунду</string>
+    <string name="si_min_km">Хвілін на кіламетар</string>
     <string name="si_min_m">Хвілін на мілю</string>
     <string name="si_nm_h">Марскіх міль за гадзіну (вузлоў)</string>
     <string name="nm_h">м.міль/г</string>
@@ -2588,7 +2588,7 @@ OsmAnd мае адкрыты зыходны код і актыўна разві�
     <string name="get_it">Атрымаць</string>
     <string name="osm_live_banner_desc">Атрымаеце неабмежаваныя загрузкі мапаў і абнаўленьні больш за адзін раз на месяц: штотыдзень, штодзень ці штогадзіну.</string>
     <string name="osmand_plus_banner_desc">Поўная вэрсія OsmAnd зь неабмежаванай загрузкай мапаў і штомесячных абнаўленьняў мапы.</string>
-    <string name="si_mi_meters">Мілі/мэтры</string>
+    <string name="si_mi_meters">Мілі/метры</string>
     <string name="osm_live_payment_desc">Абаненцкая плата спаганяецца штомесяц. Вы зможаце адмяніць падпіску на Google Play у любы момант.</string>
     <string name="donation_to_osm">Ахвяраванне OpenStreetMap супольнасці</string>
     <string name="donation_to_osm_desc">Частка вашага ахвяраваньня будзе накіраваная OSM карыстальнікам, якія адпраўляюць зьмены ў OpenStreetMap. Кошт падпіскі застаецца тым жа самым.</string>
