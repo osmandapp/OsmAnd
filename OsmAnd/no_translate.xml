@@ -1,7 +1,7 @@
 <?xml version="1.0" encoding="utf-8" standalone="no"?>
 <resources>
     <string name="app_name">OsmAnd~</string>
-    <string name="app_name_free">OsmAndF~</string>
+    <string name="app_name_free">OsmAnd Nightly</string>
     <!-- string name="app_version_suffix"></string -->
 
     <!-- Not translatable -->
