@@ -226,6 +226,9 @@ public class OsmandMapTileView implements IMapDownloaderCallback {
 			@Override
 			public void onTwoFingerTap() {
 				//afterTwoFingersTap = true;
+				if (!mapGestureAllowed(OsmandMapLayer.MapGestureType.TWO_POINTERS_ZOOM_OUT)) {
+					return;
+				}
 				if (isZoomingAllowed(getZoom(), -1.1f)) {
 					getAnimatedDraggingThread().startZooming(getZoom() - 1, currentViewport.getZoomFloatPart(), false);
 					if (wasMapLinkedBeforeGesture) {
@@ -333,6 +336,15 @@ public class OsmandMapTileView implements IMapDownloaderCallback {
 
 	public void setWasZoomInMultiTouch(boolean wasZoomInMultiTouch) {
 		this.wasZoomInMultiTouch = wasZoomInMultiTouch;
+	}
+
+	public boolean mapGestureAllowed(OsmandMapLayer.MapGestureType type) {
+		for (OsmandMapLayer layer : layers) {
+			if (!layer.isMapGestureAllowed(type)) {
+				return false;
+			}
+		}
+		return true;
 	}
 
 	public void setIntZoom(int zoom) {
