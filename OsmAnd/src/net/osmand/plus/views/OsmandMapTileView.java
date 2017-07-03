@@ -226,12 +226,10 @@ public class OsmandMapTileView implements IMapDownloaderCallback {
 			@Override
 			public void onTwoFingerTap() {
 				//afterTwoFingersTap = true;
+				if (!mapGestureAllowed(OsmandMapLayer.MapGestureType.TWO_POINTERS_ZOOM_OUT)) {
+					return;
+				}
 				if (isZoomingAllowed(getZoom(), -1.1f)) {
-					for (OsmandMapLayer layer : layers) {
-						if (!layer.isMapGestureAllowed(OsmandMapLayer.MapGestureType.TWO_POINTERS_ZOOM_OUT)) {
-							return;
-						}
-					}
 					getAnimatedDraggingThread().startZooming(getZoom() - 1, currentViewport.getZoomFloatPart(), false);
 					if (wasMapLinkedBeforeGesture) {
 						ctx.getMapViewTrackingUtilities().setMapLinkedToLocation(true);
@@ -338,6 +336,15 @@ public class OsmandMapTileView implements IMapDownloaderCallback {
 
 	public void setWasZoomInMultiTouch(boolean wasZoomInMultiTouch) {
 		this.wasZoomInMultiTouch = wasZoomInMultiTouch;
+	}
+
+	private boolean mapGestureAllowed(OsmandMapLayer.MapGestureType type) {
+		for (OsmandMapLayer layer : layers) {
+			if (!layer.isMapGestureAllowed(type)) {
+				return false;
+			}
+		}
+		return true;
 	}
 
 	public void setIntZoom(int zoom) {
@@ -1020,10 +1027,8 @@ public class OsmandMapTileView implements IMapDownloaderCallback {
 
 		@Override
 		public void onZoomEnded(double relativeToStart) {
-			for (OsmandMapLayer layer : layers) {
-				if (!layer.isMapGestureAllowed(OsmandMapLayer.MapGestureType.DOUBLE_TAP_ZOOM_CHANGE)) {
-					return;
-				}
+			if (!mapGestureAllowed(OsmandMapLayer.MapGestureType.DOUBLE_TAP_ZOOM_CHANGE)) {
+				return;
 			}
 			// 1.5 works better even on dm.density=1 devices
 			float dz = (float) ((relativeToStart - 1) * DoubleTapScaleDetector.SCALE_PER_SCREEN);
@@ -1099,10 +1104,8 @@ public class OsmandMapTileView implements IMapDownloaderCallback {
 
 		@Override
 		public void onZooming(double relativeToStart) {
-			for (OsmandMapLayer layer : layers) {
-				if (!layer.isMapGestureAllowed(OsmandMapLayer.MapGestureType.DOUBLE_TAP_ZOOM_CHANGE)) {
-					return;
-				}
+			if (!mapGestureAllowed(OsmandMapLayer.MapGestureType.DOUBLE_TAP_ZOOM_CHANGE)) {
+				return;
 			}
 			double dz = (relativeToStart - 1) * DoubleTapScaleDetector.SCALE_PER_SCREEN;
 			changeZoomPosition((float) dz, 0);
@@ -1111,10 +1114,8 @@ public class OsmandMapTileView implements IMapDownloaderCallback {
 		@Override
 		public boolean onDoubleTap(MotionEvent e) {
 			LOG.debug("onDoubleTap getZoom()");
-			for (OsmandMapLayer layer : layers) {
-				if (!layer.isMapGestureAllowed(OsmandMapLayer.MapGestureType.DOUBLE_TAP_ZOOM_IN)) {
-					return false;
-				}
+			if (!mapGestureAllowed(OsmandMapLayer.MapGestureType.DOUBLE_TAP_ZOOM_IN)) {
+				return false;
 			}
 			if (!doubleTapScaleDetector.isInZoomMode()) {
 				if (isZoomingAllowed(getZoom(), 1.1f)) {

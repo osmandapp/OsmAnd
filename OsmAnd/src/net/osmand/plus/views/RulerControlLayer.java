@@ -42,7 +42,6 @@ public class RulerControlLayer extends OsmandMapLayer {
     private int radius;
     private double roundedDist;
     private boolean showTwoFingersDistance;
-    private boolean twoPointersZoomOutAllowed;
 
     private QuadPoint cacheCenter;
     private int cacheIntZoom;
@@ -111,18 +110,16 @@ public class RulerControlLayer extends OsmandMapLayer {
 
     @Override
     public boolean isMapGestureAllowed(MapGestureType type) {
-        if (type != MapGestureType.TWO_POINTERS_ZOOM_OUT) {
-            return true;
+        if (rulerModeOn() && type == MapGestureType.TWO_POINTERS_ZOOM_OUT) {
+            return false;
         } else {
-            return twoPointersZoomOutAllowed;
+            return true;
         }
     }
 
     @Override
     public void onDraw(Canvas canvas, RotatedTileBox tb, DrawSettings settings) {
-        if (mapActivity.getMapLayers().getMapWidgetRegistry().isVisible("ruler") &&
-                rightWidgetsPanel.getVisibility() == View.VISIBLE) {
-            twoPointersZoomOutAllowed = false;
+        if (rulerModeOn()) {
             lineAttrs.updatePaints(view, settings, tb);
             circleAttrs.updatePaints(view, settings, tb);
             circleAttrs.paint2.setStyle(Style.FILL);
@@ -158,9 +155,12 @@ public class RulerControlLayer extends OsmandMapLayer {
                     drawCircle(canvas, tb, i, center);
                 }
             }
-        } else {
-            twoPointersZoomOutAllowed = true;
         }
+    }
+
+    private boolean rulerModeOn() {
+        return mapActivity.getMapLayers().getMapWidgetRegistry().isVisible("ruler") &&
+                rightWidgetsPanel.getVisibility() == View.VISIBLE;
     }
 
     public void refreshMapDelayed() {
