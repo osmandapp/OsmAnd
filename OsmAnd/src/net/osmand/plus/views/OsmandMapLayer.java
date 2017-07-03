@@ -1,24 +1,5 @@
 package net.osmand.plus.views;
 
-import gnu.trove.list.array.TIntArrayList;
-
-import java.util.ArrayList;
-import java.util.Arrays;
-import java.util.List;
-import java.util.Map;
-
-import net.osmand.data.LatLon;
-import net.osmand.data.QuadRect;
-import net.osmand.data.QuadTree;
-import net.osmand.data.RotatedTileBox;
-import net.osmand.plus.ContextMenuAdapter;
-import net.osmand.plus.OsmandApplication;
-import net.osmand.plus.activities.MapActivity;
-import net.osmand.plus.render.OsmandRenderer;
-import net.osmand.plus.render.OsmandRenderer.RenderingContext;
-import net.osmand.render.RenderingRuleSearchRequest;
-import net.osmand.render.RenderingRulesStorage;
-import net.osmand.util.MapAlgorithms;
 import android.graphics.Canvas;
 import android.graphics.Color;
 import android.graphics.ColorFilter;
@@ -34,10 +15,40 @@ import android.os.AsyncTask;
 import android.support.annotation.NonNull;
 import android.view.MotionEvent;
 
+import net.osmand.data.LatLon;
+import net.osmand.data.QuadRect;
+import net.osmand.data.QuadTree;
+import net.osmand.data.RotatedTileBox;
+import net.osmand.plus.ContextMenuAdapter;
+import net.osmand.plus.OsmandApplication;
+import net.osmand.plus.activities.MapActivity;
+import net.osmand.plus.render.OsmandRenderer;
+import net.osmand.plus.render.OsmandRenderer.RenderingContext;
+import net.osmand.render.RenderingRuleSearchRequest;
+import net.osmand.render.RenderingRulesStorage;
+import net.osmand.util.MapAlgorithms;
+
+import java.util.ArrayList;
+import java.util.Arrays;
+import java.util.List;
+import java.util.Map;
+
+import gnu.trove.list.array.TIntArrayList;
+
 public abstract class OsmandMapLayer {
 
 	protected List<LatLon> fullObjectsLatLon;
 	protected List<LatLon> smallObjectsLatLon;
+
+	public enum MapGestureType {
+		DOUBLE_TAP_ZOOM_IN,
+		DOUBLE_TAP_ZOOM_CHANGE,
+		TWO_POINTERS_ZOOM_OUT
+	}
+
+	public boolean isMapGestureAllowed(MapGestureType type) {
+		return true;
+	}
 
 	public abstract void initLayer(OsmandMapTileView view);
 

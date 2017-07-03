@@ -109,9 +109,17 @@ public class RulerControlLayer extends OsmandMapLayer {
     }
 
     @Override
+    public boolean isMapGestureAllowed(MapGestureType type) {
+        if (rulerModeOn() && type == MapGestureType.TWO_POINTERS_ZOOM_OUT) {
+            return false;
+        } else {
+            return true;
+        }
+    }
+
+    @Override
     public void onDraw(Canvas canvas, RotatedTileBox tb, DrawSettings settings) {
-        if (mapActivity.getMapLayers().getMapWidgetRegistry().isVisible("ruler") &&
-                rightWidgetsPanel.getVisibility() == View.VISIBLE) {
+        if (rulerModeOn()) {
             lineAttrs.updatePaints(view, settings, tb);
             circleAttrs.updatePaints(view, settings, tb);
             circleAttrs.paint2.setStyle(Style.FILL);
@@ -148,6 +156,11 @@ public class RulerControlLayer extends OsmandMapLayer {
                 }
             }
         }
+    }
+
+    private boolean rulerModeOn() {
+        return mapActivity.getMapLayers().getMapWidgetRegistry().isVisible("ruler") &&
+                rightWidgetsPanel.getVisibility() == View.VISIBLE;
     }
 
     public void refreshMapDelayed() {
@@ -208,7 +221,7 @@ public class RulerControlLayer extends OsmandMapLayer {
             boolean move = tb.getZoom() != cacheIntZoom || Math.abs(tb.getCenterTileX() - cacheTileX) > 1 ||
                     Math.abs(tb.getCenterTileY() - cacheTileY) > 1;
 
-            if (!mapActivity.getMapView().isZooming() && move) {
+            if (!tb.isZoomAnimated() && move) {
                 cacheIntZoom = tb.getZoom();
                 cacheTileX = tb.getCenterTileX();
                 cacheTileY = tb.getCenterTileY();
