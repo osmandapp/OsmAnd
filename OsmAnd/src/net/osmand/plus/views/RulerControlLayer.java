@@ -208,7 +208,7 @@ public class RulerControlLayer extends OsmandMapLayer {
             boolean move = tb.getZoom() != cacheIntZoom || Math.abs(tb.getCenterTileX() - cacheTileX) > 1 ||
                     Math.abs(tb.getCenterTileY() - cacheTileY) > 1;
 
-            if (!mapActivity.getMapView().isZooming() && move) {
+            if (!tb.isZoomAnimated() && move) {
                 cacheIntZoom = tb.getZoom();
                 cacheTileX = tb.getCenterTileX();
                 cacheTileY = tb.getCenterTileY();

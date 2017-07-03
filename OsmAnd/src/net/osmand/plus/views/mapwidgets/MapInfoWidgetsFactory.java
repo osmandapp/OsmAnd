@@ -207,8 +207,12 @@ public class MapInfoWidgetsFactory {
 					LatLon centerLoc = map.getMapLocation();
 
 					if (currentLoc != null && centerLoc != null) {
-						setDistanceText(currentLoc.getLatitude(), currentLoc.getLongitude(),
-								centerLoc.getLatitude(), centerLoc.getLongitude());
+						if (map.getMapViewTrackingUtilities().isMapLinkedToLocation()) {
+							setDistanceText(0);
+						} else {
+							setDistanceText(currentLoc.getLatitude(), currentLoc.getLongitude(),
+									centerLoc.getLatitude(), centerLoc.getLongitude());
+						}
 					}
 				} else {
 					setText(title, null);
@@ -216,13 +220,21 @@ public class MapInfoWidgetsFactory {
 				return true;
 			}
 
-            private void setDistanceText(double firstLat, double firstLon, double secondLat, double secondLon) {
-                float dist = (float) MapUtils.getDistance(firstLat, firstLon, secondLat, secondLon);
-                String distance = OsmAndFormatter.getFormattedDistance(dist, map.getMyApplication());
-                int ls = distance.lastIndexOf(' ');
-                setText(distance.substring(0, ls), distance.substring(ls + 1));
-            }
-        };
+			private void setDistanceText(float dist) {
+				calculateAndSetText(dist);
+			}
+
+			private void setDistanceText(double firstLat, double firstLon, double secondLat, double secondLon) {
+				float dist = (float) MapUtils.getDistance(firstLat, firstLon, secondLat, secondLon);
+				calculateAndSetText(dist);
+			}
+
+			private void calculateAndSetText(float dist) {
+				String distance = OsmAndFormatter.getFormattedDistance(dist, map.getMyApplication());
+				int ls = distance.lastIndexOf(' ');
+				setText(distance.substring(0, ls), distance.substring(ls + 1));
+			}
+		};
 
 		rulerControl.setText(title, null);
 		setRulerControlIcon(rulerControl, map.getMyApplication().getSettings().RULER_MODE.get());
