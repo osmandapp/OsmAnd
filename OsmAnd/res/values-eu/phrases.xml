@@ -1427,7 +1427,7 @@
 	<string name="poi_bitcoin_yes">Bitcoin bidezko ordainketa</string>
 
 	<string name="poi_cave_entrance">Haitzulora sarrera</string>
-	<string name="poi_backcountry">Pistaz kanpo</string>
+	<string name="poi_backcountry">Pistatik at</string>
 	<string name="poi_drive_through">Autoz zeharkatu</string>
 	<string name="poi_nudism">Nudismoa</string>
 
@@ -1518,8 +1518,8 @@
 	<string name="poi_casino">Kasinoa</string>
 	<string name="poi_community_centre">Komunitate zentroa</string>
 	<string name="poi_social_centre">Gizarte zentroa</string>
-	<string name="poi_ferry_terminal_cargo">Kargaontzia</string>
-	<string name="poi_scout_camp">Ikuskatzaileen kanpamentua</string>
+	<string name="poi_ferry_terminal_cargo">Karga</string>
+	<string name="poi_scout_camp">Eskaut kanpina</string>
 	<string name="poi_diet_vegetarian_only">Begetarianoa besterik ez</string>
 	<string name="poi_diet_vegetarian_yes">Begetarianoa</string>
 	<string name="poi_diet_vegetarian_no">Dieta begetarianoa: ez</string>
@@ -1566,9 +1566,9 @@
 	<string name="poi_training_aviation">Heziketa: abiazioa</string>
 	<string name="poi_training_hairdressing">Heziketa: ile-apaintzailea</string>
 
-	<string name="poi_tactile_paving">Ukimen zoladura</string>
-	<string name="poi_piste_grooming">Pisten prestaketa</string>
-	<string name="poi_drive_in">Drive in</string>
+	<string name="poi_tactile_paving">Ukimenezko zoladura</string>
+	<string name="poi_piste_grooming">Pistaren prestaketa</string>
+	<string name="poi_drive_in">Autoz sartu</string>
 	<string name="poi_diet">Dieta</string>
 	<string name="poi_health_specialty">Osasun espezialitatea</string>
 	<string name="poi_massage_type">Masaje mota</string>
@@ -1843,7 +1843,7 @@
 	<string name="poi_aerialway_station">Teleaulki geltokia</string>
 	<string name="poi_aerialway_magic_carpet">Tapiz magikoa (igogailua)</string>
 	<string name="poi_aerialway_rope_tow">Kable-igogailua</string>
-	<string name="poi_aerialway_pylon">Metalezko dorreak dituen teleaulkia</string>
+	<string name="poi_aerialway_pylon">Metalezko dorreak dituen kable bidezko igogailua</string>
 
 	<string name="poi_water_works">Edateko uren araztegia</string>
 	<string name="poi_waterway_turning_point">Ubidearen biraketa puntua</string>
