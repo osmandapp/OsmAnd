@@ -32,6 +32,7 @@ import java.util.LinkedHashMap;
 import java.util.List;
 import java.util.Locale;
 import java.util.Map;
+import java.util.TimeZone;
 
 public class SavingTrackHelper extends SQLiteOpenHelper {
 	
@@ -198,6 +199,20 @@ public class SavingTrackHelper extends SQLiteOpenHelper {
 					File fout = new File(dir, f + ".gpx"); //$NON-NLS-1$
 					if (!data.get(f).isEmpty()) {
 						WptPt pt = data.get(f).findPointToShow();
+
+						if (ctx.getSettings().STORE_TRACKS_IN_MONTHLY_DIRECTORIES.get()) {
+							SimpleDateFormat dateDirFormat = new SimpleDateFormat("yyyy-MM");
+							dateDirFormat.setTimeZone(TimeZone.getTimeZone("UTC"));
+							String dateDirName = dateDirFormat.format(new Date(pt.time));
+
+							File dateDir = new File(dir, dateDirName);
+							dateDir.mkdirs();
+
+							if (dateDir.exists()) {
+								dir = dateDir;
+							}
+						}
+
 						String fileName = f + "_" + new SimpleDateFormat("HH-mm_EEE", Locale.US).format(new Date(pt.time)); //$NON-NLS-1$
 						fout = new File(dir, fileName + ".gpx"); //$NON-NLS-1$
 						int ind = 1;
