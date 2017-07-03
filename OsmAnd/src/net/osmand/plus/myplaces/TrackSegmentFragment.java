@@ -1183,12 +1183,16 @@ public class TrackSegmentFragment extends OsmAndListFragment {
 									openAnalyzeOnMap(GPXTabItemType.GPX_TAB_ITEM_GENERAL);
 								}
 							});
-							view.findViewById(R.id.split_interval).setOnClickListener(new View.OnClickListener() {
-								@Override
-								public void onClick(View view) {
-									openSplitIntervalScreen();
-								}
-							});
+							if (getGpx().showCurrentTrack) {
+								view.findViewById(R.id.split_interval).setVisibility(View.GONE);
+							} else {
+								view.findViewById(R.id.split_interval).setOnClickListener(new View.OnClickListener() {
+									@Override
+									public void onClick(View view) {
+										openSplitIntervalScreen();
+									}
+								});
+							}
 
 							break;
 						case GPX_TAB_ITEM_ALTITUDE:
@@ -1233,12 +1237,16 @@ public class TrackSegmentFragment extends OsmAndListFragment {
 									openAnalyzeOnMap(GPXTabItemType.GPX_TAB_ITEM_ALTITUDE);
 								}
 							});
-							view.findViewById(R.id.split_interval).setOnClickListener(new View.OnClickListener() {
-								@Override
-								public void onClick(View view) {
-									openSplitIntervalScreen();
-								}
-							});
+							if (getGpx().showCurrentTrack) {
+								view.findViewById(R.id.split_interval).setVisibility(View.GONE);
+							} else {
+								view.findViewById(R.id.split_interval).setOnClickListener(new View.OnClickListener() {
+									@Override
+									public void onClick(View view) {
+										openSplitIntervalScreen();
+									}
+								});
+							}
 
 							break;
 						case GPX_TAB_ITEM_SPEED:
@@ -1282,12 +1290,16 @@ public class TrackSegmentFragment extends OsmAndListFragment {
 									openAnalyzeOnMap(GPXTabItemType.GPX_TAB_ITEM_SPEED);
 								}
 							});
-							view.findViewById(R.id.split_interval).setOnClickListener(new View.OnClickListener() {
-								@Override
-								public void onClick(View view) {
-									openSplitIntervalScreen();
-								}
-							});
+							if (getGpx().showCurrentTrack) {
+								view.findViewById(R.id.split_interval).setVisibility(View.GONE);
+							} else {
+								view.findViewById(R.id.split_interval).setOnClickListener(new View.OnClickListener() {
+									@Override
+									public void onClick(View view) {
+										openSplitIntervalScreen();
+									}
+								});
+							}
 							break;
 					}
 				}
@@ -1454,10 +1466,10 @@ public class TrackSegmentFragment extends OsmAndListFragment {
 	}
 
 	void openSplitIntervalScreen() {
-		getFragmentManager()
+		getMyActivity().getSupportFragmentManager()
 				.beginTransaction()
 				.replace(R.id.track_activity_layout, new SplitSegmentFragment())
-				.addToBackStack(null)
+				.addToBackStack("open_split_segments")
 				.commit();
 	}
 

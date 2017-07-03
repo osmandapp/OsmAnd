@@ -4,8 +4,7 @@
     xmlns:osmand="http://schemas.android.com/apk/res-auto"
     android:orientation="vertical"
     android:layout_width="match_parent"
-    android:layout_height="wrap_content"
-    android:clickable="false">
+    android:layout_height="wrap_content">
 
     <include layout="@layout/list_item_divider"/>
 
@@ -42,17 +41,16 @@
                 android:textSize="@dimen/default_desc_text_size"
                 tools:text="Overview"/>
 
-            <net.osmand.plus.widgets.TextViewEx
+            <TextView
+                tools:text="1 of 4"
                 android:id="@+id/fragment_count_text"
                 android:background="@null"
                 android:layout_gravity="center_vertical"
                 android:gravity="right"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:textColor="?android:attr/textColorPrimary"
-                osmand:typeface="@string/font_roboto_medium"
-                android:textSize="@dimen/default_desc_text_size"
-                tools:text="1 of 4"/>
+                android:textColor="?android:attr/textColorSecondary"
+                android:textSize="@dimen/default_sub_text_size"/>
 
         </LinearLayout>
 
@@ -71,7 +69,8 @@
 
             <LinearLayout
                 android:layout_marginRight="3dp"
-                android:layout_width="107dp"
+                android:layout_width="0dp"
+                android:layout_weight="1"
                 android:layout_height="wrap_content"
                 android:orientation="horizontal">
 
@@ -103,7 +102,7 @@
                         android:layout_height="wrap_content"
                         android:background="@null"
                         android:layout_marginTop="3dp"
-                        android:text="@string/distance"
+                        tools:text="@string/distance"
                         android:textColor="?android:attr/textColorSecondary"
                         android:textSize="@dimen/default_sub_text_size"/>
 
@@ -113,7 +112,8 @@
 
             <LinearLayout
                 android:layout_marginRight="3dp"
-                android:layout_width="107dp"
+                android:layout_width="0dp"
+                android:layout_weight="1"
                 android:layout_height="wrap_content"
                 android:orientation="horizontal">
 
@@ -145,7 +145,7 @@
                         android:layout_height="wrap_content"
                         android:background="@null"
                         android:layout_marginTop="3dp"
-                        android:text="Aud 8, 2016"
+                        tools:text="Aud 8, 2016"
                         android:textColor="?android:attr/textColorSecondary"
                         android:textSize="@dimen/default_sub_text_size"/>
 
@@ -154,7 +154,8 @@
             </LinearLayout>
 
             <LinearLayout
-                android:layout_width="107dp"
+                android:layout_width="0dp"
+                android:layout_weight="1"
                 android:layout_height="wrap_content"
                 android:orientation="horizontal">
 
@@ -186,7 +187,7 @@
                         android:layout_height="wrap_content"
                         android:background="@null"
                         android:layout_marginTop="3dp"
-                        android:text="Aug 8, 2016"
+                        tools:text="Aug 8, 2016"
                         android:textColor="?android:attr/textColorSecondary"
                         android:textSize="@dimen/default_sub_text_size"/>
 
@@ -211,7 +212,8 @@
 
             <LinearLayout
                 android:layout_marginRight="3dp"
-                android:layout_width="107dp"
+                android:layout_width="0dp"
+                android:layout_weight="1"
                 android:layout_height="wrap_content"
                 android:orientation="horizontal">
 
@@ -242,7 +244,7 @@
                         android:layout_height="wrap_content"
                         android:background="@null"
                         android:layout_marginTop="3dp"
-                        android:text="Average"
+                        android:text="@string/average"
                         android:textColor="?android:attr/textColorSecondary"
                         android:textSize="@dimen/default_sub_text_size"/>
 
@@ -252,7 +254,8 @@
 
             <LinearLayout
                 android:layout_marginRight="3dp"
-                android:layout_width="107dp"
+                android:layout_width="0dp"
+                android:layout_weight="1"
                 android:layout_height="wrap_content"
                 android:orientation="horizontal">
 
@@ -267,6 +270,16 @@
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:orientation="vertical">
+
+                    <net.osmand.plus.widgets.TextViewEx
+                        android:id="@+id/min_max_altitude_value"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:background="@null"
+                        tools:text="1/2335 m"
+                        android:textColor="?android:attr/textColorPrimary"
+                        osmand:typeface="@string/font_roboto_medium"
+                        android:textSize="@dimen/default_desc_text_size"/>
 
                     <net.osmand.plus.widgets.TextViewEx
                         android:id="@+id/min_altitude_value"
@@ -289,20 +302,22 @@
                         android:textSize="@dimen/default_desc_text_size"/>
 
                     <TextView
+                        android:id="@+id/textView4"
                         android:layout_width="match_parent"
                         android:layout_height="wrap_content"
-                        android:background="@null"
                         android:layout_marginTop="3dp"
-                        android:text="Range"
+                        android:background="@null"
+                        android:text="@string/range"
                         android:textColor="?android:attr/textColorSecondary"
-                        android:textSize="@dimen/default_sub_text_size"/>
+                        android:textSize="@dimen/default_sub_text_size" />
 
                 </LinearLayout>
 
             </LinearLayout>
 
             <LinearLayout
-                android:layout_width="107dp"
+                android:layout_width="0dp"
+                android:layout_weight="1"
                 android:layout_height="wrap_content"
                 android:orientation="horizontal">
 
@@ -317,6 +332,16 @@
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:orientation="vertical">
+
+                    <net.osmand.plus.widgets.TextViewEx
+                        android:id="@+id/ascent_descent_value"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:background="@null"
+                        tools:text="6280/6285 m"
+                        android:textColor="?android:attr/textColorPrimary"
+                        osmand:typeface="@string/font_roboto_medium"
+                        android:textSize="@dimen/default_desc_text_size"/>
 
                     <net.osmand.plus.widgets.TextViewEx
                         android:id="@+id/ascent_value"
@@ -343,7 +368,7 @@
                         android:layout_height="wrap_content"
                         android:background="@null"
                         android:layout_marginTop="3dp"
-                        android:text="Ascent/Descent"
+                        android:text="@string/ascent_descent"
                         android:textColor="?android:attr/textColorSecondary"
                         android:textSize="@dimen/default_sub_text_size"/>
 
@@ -368,7 +393,8 @@
 
             <LinearLayout
                 android:layout_marginRight="3dp"
-                android:layout_width="107dp"
+                android:layout_width="0dp"
+                android:layout_weight="1"
                 android:layout_height="wrap_content"
                 android:orientation="horizontal">
 
@@ -399,7 +425,7 @@
                         android:layout_height="wrap_content"
                         android:background="@null"
                         android:layout_marginTop="3dp"
-                        android:text="Moving time"
+                        android:text="@string/moving_time"
                         android:textColor="?android:attr/textColorSecondary"
                         android:textSize="@dimen/default_sub_text_size"/>
 
@@ -409,7 +435,8 @@
 
             <LinearLayout
                 android:layout_marginRight="3dp"
-                android:layout_width="107dp"
+                android:layout_width="0dp"
+                android:layout_weight="1"
                 android:layout_height="wrap_content"
                 android:orientation="horizontal">
 
@@ -440,7 +467,7 @@
                         android:layout_height="wrap_content"
                         android:background="@null"
                         android:layout_marginTop="3dp"
-                        android:text="Average"
+                        android:text="@string/average"
                         android:textColor="?android:attr/textColorSecondary"
                         android:textSize="@dimen/default_sub_text_size"/>
 
@@ -449,7 +476,8 @@
             </LinearLayout>
 
             <LinearLayout
-                android:layout_width="107dp"
+                android:layout_width="0dp"
+                android:layout_weight="1"
                 android:layout_height="wrap_content"
                 android:orientation="horizontal">
 
@@ -470,17 +498,38 @@
                         android:layout_width="match_parent"
                         android:layout_height="wrap_content"
                         android:background="@null"
+                        tools:text="93/2 kmg/h"
+                        android:textColor="?android:attr/textColorPrimary"
+                        osmand:typeface="@string/font_roboto_medium"
+                        android:textSize="@dimen/default_desc_text_size"/>
+
+                    <net.osmand.plus.widgets.TextViewEx
+                        android:id="@+id/max_speed_value"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:background="@null"
                         tools:text="93 kmg/h"
                         android:textColor="?android:attr/textColorPrimary"
                         osmand:typeface="@string/font_roboto_medium"
                         android:textSize="@dimen/default_desc_text_size"/>
 
+                    <net.osmand.plus.widgets.TextViewEx
+                        android:id="@+id/min_speed_value"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:background="@null"
+                        tools:text="2 kmg/h"
+                        android:textColor="?android:attr/textColorPrimary"
+                        osmand:typeface="@string/font_roboto_medium"
+                        android:textSize="@dimen/default_desc_text_size"/>
+
                     <TextView
+                        android:id="@+id/max_min_speed_text"
                         android:layout_width="match_parent"
                         android:layout_height="wrap_content"
                         android:background="@null"
                         android:layout_marginTop="3dp"
-                        android:text="Max/Min"
+                        android:text="@string/max_min"
                         android:textColor="?android:attr/textColorSecondary"
                         android:textSize="@dimen/default_sub_text_size"/>
 

@@ -1,5 +1,6 @@
 package net.osmand.plus.myplaces;
 
+import android.content.res.ColorStateList;
 import android.os.AsyncTask;
 import android.os.Bundle;
 import android.support.annotation.NonNull;
@@ -41,7 +42,7 @@ import gnu.trove.list.array.TIntArrayList;
 
 import static net.osmand.plus.myplaces.TrackSegmentFragment.ARG_TO_FILTER_SHORT_TRACKS;
 
-public class SplitSegmentFragment extends OsmAndListFragment{
+public class SplitSegmentFragment extends OsmAndListFragment {
 
     private OsmandApplication app;
 
@@ -53,12 +54,13 @@ public class SplitSegmentFragment extends OsmAndListFragment{
     private List<Double> distanceSplit = new ArrayList<>();
     private TIntArrayList timeSplit = new TIntArrayList();
     private int selectedSplitInterval;
-    private boolean updateEnable;
+    private IconsCache ic;
 
     @Override
     public void onCreate(@Nullable Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        this.app = getMyApplication();
+        app = getMyApplication();
+        ic = app.getIconsCache();
     }
 
     @Override
@@ -67,6 +69,7 @@ public class SplitSegmentFragment extends OsmAndListFragment{
         getListView().setBackgroundColor(getResources().getColor(
                 getMyApplication().getSettings().isLightContent() ? R.color.ctx_menu_info_view_bg_light
                         : R.color.ctx_menu_info_view_bg_dark));
+        getMyActivity().onAttachFragment(this);
     }
 
     @Override
@@ -86,6 +89,7 @@ public class SplitSegmentFragment extends OsmAndListFragment{
 
         adapter = new SplitSegmentsAdapter(new ArrayList<GpxDisplayItem>());
         headerView = getActivity().getLayoutInflater().inflate(R.layout.gpx_split_segments_header, null, false);
+        ((ImageView) headerView.findViewById(R.id.header_split_image)).setImageDrawable(ic.getIcon(R.drawable.ic_action_split_interval, app.getSettings().isLightContent() ? R.color.gpx_split_segment_icon_color : 0));
 
         listView.addHeaderView(headerView);
         listView.addFooterView(getActivity().getLayoutInflater().inflate(R.layout.list_shadow_footer, null, false));
@@ -99,8 +103,10 @@ public class SplitSegmentFragment extends OsmAndListFragment{
         final View splitIntervalView = headerView.findViewById(R.id.split_interval_view);
 
         if (getGpx() != null && !getGpx().showCurrentTrack && adapter.getCount() > 0) {
-            prepareSplitIntervalAdapterData();
             setupSplitIntervalView(splitIntervalView);
+            if (options.size() == 0) {
+                prepareSplitIntervalAdapterData();
+            }
             updateSplitIntervalView(splitIntervalView);
             splitIntervalView.setOnClickListener(new View.OnClickListener() {
                 @Override
@@ -141,20 +147,11 @@ public class SplitSegmentFragment extends OsmAndListFragment{
     public void onResume() {
         super.onResume();
         updateContent();
-        updateEnable = true;
-    }
-
-    @Override
-    public void onPause() {
-        super.onPause();
-        updateEnable = false;
     }
 
     public void updateContent() {
         adapter.clear();
         adapter.setNotifyOnChange(false);
-        List<GpxDisplayGroup> original = getOriginalGroups();
-        List<GpxDisplayGroup> display = getDisplayGroups();
         GpxDisplayItem overviewSegments = getOverviewSegment();
         adapter.add(overviewSegments);
         List<GpxDisplayItem> splitSegments = getSplitSegments();
@@ -162,18 +159,6 @@ public class SplitSegmentFragment extends OsmAndListFragment{
         adapter.setNotifyOnChange(true);
         adapter.notifyDataSetChanged();
         updateHeader();
-    }
-
-    protected List<GpxDisplayItem> flatten(List<GpxDisplayGroup> groups) {
-        ArrayList<GpxDisplayItem> list = new ArrayList<>();
-        for(GpxDisplayGroup g : groups) {
-            list.addAll(g.getModifiableList());
-        }
-        return list;
-    }
-
-    private List<GpxDisplayGroup> getOriginalGroups() {
-        return filterGroups(false);
     }
 
     private void updateSplit(List<GpxDisplayGroup> groups, GpxSelectionHelper.SelectedGpxFile sf) {
@@ -306,9 +291,9 @@ public class SplitSegmentFragment extends OsmAndListFragment{
     private List<GpxDisplayItem> getSplitSegments() {
         List<GpxDisplayGroup> result = getMyActivity().getGpxFile(true);
         List<GpxDisplayItem> splitSegments = new ArrayList<>();
-        for (GpxDisplayGroup group : result) {
-            if (group.isSplitDistance() || group.isSplitTime()) {
-                splitSegments.addAll(group.getModifiableList());
+        if (result != null && result.size() > 0) {
+            if (result.get(0).isSplitDistance() || result.get(0).isSplitTime()) {
+                splitSegments.addAll(result.get(0).getModifiableList());
             }
         }
         return splitSegments;
@@ -316,7 +301,11 @@ public class SplitSegmentFragment extends OsmAndListFragment{
 
     private GpxDisplayItem getOverviewSegment() {
         List<GpxDisplayGroup> result = getMyActivity().getGpxFile(false);
-        return result.get(0).getModifiableList().get(0);
+        GpxDisplayItem overviewSegment = null;
+        if (result.size() > 0) {
+            overviewSegment = result.get(0).getModifiableList().get(0);
+        }
+        return overviewSegment;
     }
 
     private boolean isArgumentTrue(@NonNull String arg) {
@@ -332,11 +321,21 @@ public class SplitSegmentFragment extends OsmAndListFragment{
         return false;
     }
 
+    public void reloadSplitFragment() {
+        getFragmentManager()
+                .beginTransaction()
+                .detach(this)
+                .attach(this)
+                .commit();
+    }
+
     private class SplitSegmentsAdapter extends ArrayAdapter<GpxDisplayItem> {
 
         SplitSegmentsAdapter(List<GpxDisplayItem> items) {
             super(getActivity(), 0, items);
         }
+
+        ColorStateList defaultTextColor;
 
         @NonNull
         @Override
@@ -345,32 +344,73 @@ public class SplitSegmentFragment extends OsmAndListFragment{
             if (convertView == null) {
                 convertView = getMyActivity().getLayoutInflater().inflate(R.layout.gpx_split_segment_fragment, parent, false);
             }
+            TextView overviewTextView = (TextView) convertView.findViewById(R.id.overview_text);
+            ImageView overviewImageView = (ImageView) convertView.findViewById(R.id.overview_image);
+            if (position == 0) {
+                overviewImageView.setImageDrawable(ic.getIcon(R.drawable.ic_action_time_span_16, app.getSettings().isLightContent() ? R.color.gpx_split_segment_icon_color : 0));
+                if (defaultTextColor == null) {
+                    defaultTextColor = overviewTextView.getTextColors();
+                }
+                overviewTextView.setTextColor(defaultTextColor);
+                overviewTextView.setText(app.getString(R.string.shared_string_overview));
+                ((TextView) convertView.findViewById(R.id.fragment_count_text)).setText("");
+            } else {
+                if (currentGpxDisplayItem != null && currentGpxDisplayItem.analysis != null) {
+                    overviewTextView.setTextColor(app.getSettings().isLightContent() ? app.getResources().getColor(R.color.gpx_split_overview_light) : app.getResources().getColor(R.color.gpx_split_overview_dark));
+                    if (currentGpxDisplayItem.group.isSplitDistance()) {
+                        overviewImageView.setImageDrawable(ic.getIcon(R.drawable.ic_action_track_16, app.getSettings().isLightContent() ? R.color.gpx_split_overview_light : R.color.gpx_split_overview_dark));
+                        overviewTextView.setText("");
+                        double metricStart = currentGpxDisplayItem.analysis.metricEnd - currentGpxDisplayItem.analysis.totalDistance;
+                        overviewTextView.append(OsmAndFormatter.getFormattedDistance((float) metricStart, app));
+                        overviewTextView.append(" - ");
+                        overviewTextView.append(OsmAndFormatter.getFormattedDistance((float) currentGpxDisplayItem.analysis.metricEnd, app));
+                    } else if (currentGpxDisplayItem.group.isSplitTime()) {
+                        overviewImageView.setImageDrawable(ic.getIcon(R.drawable.ic_action_time_span_16, app.getSettings().isLightContent() ? R.color.gpx_split_overview_light : R.color.gpx_split_overview_dark));
+                        overviewTextView.setText("");
+                        double metricStart = currentGpxDisplayItem.analysis.metricEnd - (currentGpxDisplayItem.analysis.timeSpan / 1000);
+                        overviewTextView.append(OsmAndFormatter.getFormattedDuration((int) metricStart, app));
+                        overviewTextView.append(" - ");
+                        overviewTextView.append(OsmAndFormatter.getFormattedDuration((int) currentGpxDisplayItem.analysis.metricEnd, app));
+                    }
+                    ((TextView) convertView.findViewById(R.id.fragment_count_text)).setText(app.getString(R.string.of, position, adapter.getCount() - 1));
+                }
+            }
 
-            IconsCache ic = app.getIconsCache();
-            ((ImageView) convertView.findViewById(R.id.distance_or_timespan_image))
-                    .setImageDrawable(ic.getPaintedThemedIcon(R.drawable.ic_action_track_16, R.color.gpx_split_segment_icon_color, 0));
+            ImageView distanceOrTimeSpanImageView = ((ImageView) convertView.findViewById(R.id.distance_or_timespan_image));
+            if (position == 0) {
+                distanceOrTimeSpanImageView.setImageDrawable(ic.getIcon(R.drawable.ic_action_track_16, app.getSettings().isLightContent() ? R.color.gpx_split_segment_icon_color : 0));
+            } else {
+                distanceOrTimeSpanImageView.setImageDrawable(ic.getIcon(R.drawable.ic_action_time_span_16, app.getSettings().isLightContent() ? R.color.gpx_split_segment_icon_color : 0));
+            }
             ((ImageView) convertView.findViewById(R.id.start_time_image))
-                    .setImageDrawable(ic.getPaintedThemedIcon(R.drawable.ic_action_time_start_16, R.color.gpx_split_segment_icon_color, 0));
+                    .setImageDrawable(ic.getIcon(R.drawable.ic_action_time_start_16, app.getSettings().isLightContent() ? R.color.gpx_split_segment_icon_color : 0));
             ((ImageView) convertView.findViewById(R.id.end_time_image))
-                    .setImageDrawable(ic.getPaintedThemedIcon(R.drawable.ic_action_time_end_16, R.color.gpx_split_segment_icon_color, 0));
+                    .setImageDrawable(ic.getIcon(R.drawable.ic_action_time_end_16, app.getSettings().isLightContent() ? R.color.gpx_split_segment_icon_color : 0));
             ((ImageView) convertView.findViewById(R.id.average_altitude_image))
-                    .setImageDrawable(ic.getPaintedThemedIcon(R.drawable.ic_action_altitude_average_16, R.color.gpx_split_segment_icon_color, 0));
+                    .setImageDrawable(ic.getIcon(R.drawable.ic_action_altitude_average_16, app.getSettings().isLightContent() ? R.color.gpx_split_segment_icon_color : 0));
             ((ImageView) convertView.findViewById(R.id.altitude_range_image))
-                    .setImageDrawable(ic.getPaintedThemedIcon(R.drawable.ic_action_altitude_range_16, R.color.gpx_split_segment_icon_color, 0));
+                    .setImageDrawable(ic.getIcon(R.drawable.ic_action_altitude_range_16, app.getSettings().isLightContent() ? R.color.gpx_split_segment_icon_color : 0));
             ((ImageView) convertView.findViewById(R.id.ascent_descent_image))
-                    .setImageDrawable(ic.getPaintedThemedIcon(R.drawable.ic_action_altitude_descent_ascent_16, R.color.gpx_split_segment_icon_color, 0));
+                    .setImageDrawable(ic.getIcon(R.drawable.ic_action_altitude_descent_ascent_16, app.getSettings().isLightContent() ? R.color.gpx_split_segment_icon_color : 0));
             ((ImageView) convertView.findViewById(R.id.moving_time_image))
-                    .setImageDrawable(ic.getPaintedThemedIcon(R.drawable.ic_action_time_moving_16, R.color.gpx_split_segment_icon_color, 0));
+                    .setImageDrawable(ic.getIcon(R.drawable.ic_action_time_moving_16, app.getSettings().isLightContent() ? R.color.gpx_split_segment_icon_color : 0));
             ((ImageView) convertView.findViewById(R.id.average_speed_image))
-                    .setImageDrawable(ic.getPaintedThemedIcon(R.drawable.ic_action_speed_16, R.color.gpx_split_segment_icon_color, 0));
+                    .setImageDrawable(ic.getIcon(R.drawable.ic_action_speed_16, app.getSettings().isLightContent() ? R.color.gpx_split_segment_icon_color : 0));
             ((ImageView) convertView.findViewById(R.id.max_speed_image))
-                    .setImageDrawable(ic.getPaintedThemedIcon(R.drawable.ic_action_max_speed_16, R.color.gpx_split_segment_icon_color, 0));
+                    .setImageDrawable(ic.getIcon(R.drawable.ic_action_max_speed_16, app.getSettings().isLightContent() ? R.color.gpx_split_segment_icon_color : 0));
 
             if (currentGpxDisplayItem != null) {
                 GPXTrackAnalysis analysis = currentGpxDisplayItem.analysis;
                 if (analysis != null) {
-                    ((TextView) convertView.findViewById(R.id.distance_or_time_span_value))
-                            .setText(OsmAndFormatter.getFormattedDistance(analysis.totalDistance, app));
+                    TextView distanceOrTimeSpanValue = (TextView) convertView.findViewById(R.id.distance_or_time_span_value);
+                    TextView distanceOrTimeSpanText = (TextView) convertView.findViewById(R.id.distance_or_time_span_text);
+                    if (position == 0) {
+                        distanceOrTimeSpanValue.setText(OsmAndFormatter.getFormattedDistance(analysis.totalDistance, app));
+                        distanceOrTimeSpanText.setText(app.getString(R.string.distance));
+                    } else {
+                        distanceOrTimeSpanValue.setText(OsmAndFormatter.getFormattedDuration((int) (analysis.timeSpan / 1000), app));
+                        distanceOrTimeSpanText.setText(app.getString(R.string.shared_string_time_span));
+                    }
                     if (analysis.timeSpan > 0) {
                         DateFormat tf = SimpleDateFormat.getTimeInstance(DateFormat.SHORT);
                         DateFormat df = SimpleDateFormat.getDateInstance(DateFormat.MEDIUM);
@@ -385,30 +425,106 @@ public class SplitSegmentFragment extends OsmAndListFragment{
                         ((TextView) convertView.findViewById(R.id.end_time_value))
                                 .setText(tf.format(end));
                         ((TextView) convertView.findViewById(R.id.end_date_value))
-                                .setText(tf.format(end));
+                                .setText(df.format(end));
                     }
-
-                    String min = OsmAndFormatter.getFormattedAlt(analysis.minElevation, app);
-                    String max = OsmAndFormatter.getFormattedAlt(analysis.maxElevation, app);
-                    String asc = OsmAndFormatter.getFormattedAlt(analysis.diffElevationUp, app);
-                    String desc = OsmAndFormatter.getFormattedAlt(analysis.diffElevationDown, app);
 
                     ((TextView) convertView.findViewById(R.id.average_altitude_value))
                             .setText(OsmAndFormatter.getFormattedAlt(analysis.avgElevation, app));
-                    ((TextView) convertView.findViewById(R.id.min_altitude_value))
-                            .setText(min);
-                    ((TextView) convertView.findViewById(R.id.max_altitude_value))
-                            .setText(max);
-                    ((TextView) convertView.findViewById(R.id.ascent_value))
-                            .setText(asc);
-                    ((TextView) convertView.findViewById(R.id.descent_value))
-                            .setText(desc);
+
+                    String min = OsmAndFormatter.getFormattedAlt(analysis.minElevation, app);
+                    String max = OsmAndFormatter.getFormattedAlt(analysis.maxElevation, app);
+                    String min_max_elevation = min.substring(0, min.indexOf(" ")).concat("/").concat(max);
+                    if (min_max_elevation.length() > 9) {
+                        (convertView.findViewById(R.id.min_altitude_value))
+                                .setVisibility(View.VISIBLE);
+                        (convertView.findViewById(R.id.max_altitude_value))
+                                .setVisibility(View.VISIBLE);
+                        ((TextView) convertView.findViewById(R.id.min_altitude_value))
+                                .setText(min);
+                        ((TextView) convertView.findViewById(R.id.max_altitude_value))
+                                .setText(max);
+                        (convertView.findViewById(R.id.min_max_altitude_value))
+                                .setVisibility(View.GONE);
+                    } else {
+                        (convertView.findViewById(R.id.min_max_altitude_value))
+                                .setVisibility(View.VISIBLE);
+                        ((TextView) convertView.findViewById(R.id.min_max_altitude_value))
+                                .setText(min_max_elevation);
+                        (convertView.findViewById(R.id.min_altitude_value))
+                                .setVisibility(View.GONE);
+                        (convertView.findViewById(R.id.max_altitude_value))
+                                .setVisibility(View.GONE);
+                    }
+
+                    String asc = OsmAndFormatter.getFormattedAlt(analysis.diffElevationUp, app);
+                    String desc = OsmAndFormatter.getFormattedAlt(analysis.diffElevationDown, app);
+                    String asc_desc = asc.substring(0, asc.indexOf(" ")).concat("/").concat(desc);
+                    if (asc_desc.length() > 9) {
+                        (convertView.findViewById(R.id.ascent_value))
+                                .setVisibility(View.VISIBLE);
+                        (convertView.findViewById(R.id.descent_value))
+                                .setVisibility(View.VISIBLE);
+                        ((TextView) convertView.findViewById(R.id.ascent_value))
+                                .setText(asc);
+                        ((TextView) convertView.findViewById(R.id.descent_value))
+                                .setText(desc);
+                        (convertView.findViewById(R.id.ascent_descent_value))
+                                .setVisibility(View.GONE);
+                    } else {
+                        (convertView.findViewById(R.id.ascent_descent_value))
+                                .setVisibility(View.VISIBLE);
+                        ((TextView) convertView.findViewById(R.id.ascent_descent_value))
+                                .setText(asc_desc);
+                        (convertView.findViewById(R.id.ascent_value))
+                                .setVisibility(View.GONE);
+                        (convertView.findViewById(R.id.descent_value))
+                                .setVisibility(View.GONE);
+                    }
+
                     ((TextView) convertView.findViewById(R.id.moving_time_value))
                             .setText(Algorithms.formatDuration((int) (analysis.timeMoving / 1000), app.accessibilityEnabled()));
                     ((TextView) convertView.findViewById(R.id.average_speed_value))
                             .setText(OsmAndFormatter.getFormattedSpeed(analysis.avgSpeed, app));
-                    ((TextView) convertView.findViewById(R.id.max_min_speed_value))
-                            .setText("");
+
+                    String maxSpeed = OsmAndFormatter.getFormattedSpeed(analysis.maxSpeed, app);
+                    String minSpeed = OsmAndFormatter.getFormattedSpeed(analysis.minSpeed, app);
+                    String max_min_speed = maxSpeed.substring(0, maxSpeed.indexOf(" ")).concat("/").concat(minSpeed.substring(0, minSpeed.indexOf(" ")));
+                    if (minSpeed.substring(0, minSpeed.indexOf(" ")).equals("0") || minSpeed.substring(0, minSpeed.indexOf(" ")).equals("0.0")) {
+                        (convertView.findViewById(R.id.max_speed_value))
+                                .setVisibility(View.VISIBLE);
+                        (convertView.findViewById(R.id.min_speed_value))
+                                .setVisibility(View.GONE);
+                        ((TextView) convertView.findViewById(R.id.max_speed_value))
+                                .setText(maxSpeed);
+                        (convertView.findViewById(R.id.max_min_speed_value))
+                                .setVisibility(View.GONE);
+                        ((TextView) convertView.findViewById(R.id.max_min_speed_text))
+                                .setText(app.getString(R.string.shared_string_max));
+                    } else if (max_min_speed.length() > 9) {
+                        (convertView.findViewById(R.id.max_speed_value))
+                                .setVisibility(View.VISIBLE);
+                        (convertView.findViewById(R.id.min_speed_value))
+                                .setVisibility(View.VISIBLE);
+                        ((TextView) convertView.findViewById(R.id.max_speed_value))
+                                .setText(maxSpeed);
+                        ((TextView) convertView.findViewById(R.id.min_speed_value))
+                                .setText(minSpeed);
+                        (convertView.findViewById(R.id.max_min_speed_value))
+                                .setVisibility(View.GONE);
+                        ((TextView) convertView.findViewById(R.id.max_min_speed_text))
+                                .setText(app.getString(R.string.max_min));
+                    } else {
+                        (convertView.findViewById(R.id.max_min_speed_value))
+                                .setVisibility(View.VISIBLE);
+                        ((TextView) convertView.findViewById(R.id.max_min_speed_value))
+                                .setText(max_min_speed);
+                        (convertView.findViewById(R.id.max_speed_value))
+                                .setVisibility(View.GONE);
+                        (convertView.findViewById(R.id.min_speed_value))
+                                .setVisibility(View.GONE);
+                        ((TextView) convertView.findViewById(R.id.max_min_speed_text))
+                                .setText(app.getString(R.string.max_min));
+                    }
                 }
             }
             return convertView;
