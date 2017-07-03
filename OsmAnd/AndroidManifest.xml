@@ -48,7 +48,7 @@
 
 	<!-- android:theme="@style/OsmandLightDarkActionBarTheme" -->
 	<application android:allowBackup="true" android:backupAgent="net.osmand.plus.OsmandBackupAgent"
-		android:icon="@drawable/icon" android:label="@string/app_name"
+		android:icon="@mipmap/icon" android:label="@string/app_name"
 		android:name="net.osmand.plus.OsmandApplication" android:configChanges="locale"
 		android:theme="@style/OsmandDarkTheme" android:restoreAnyVersion="true" android:largeHeap="true">
 
@@ -58,8 +58,8 @@
 		<meta-data android:name="com.sec.android.multiwindow.DEFAULT_SIZE_H" android:resource="@dimen/app_defaultsize_h" android:value="" />
 		<meta-data android:name="com.sec.android.multiwindow.MINIMUM_SIZE_W" android:resource="@dimen/app_minimumsize_w" android:value="" />
 		<meta-data android:name="com.sec.android.multiwindow.MINIMUM_SIZE_H" android:resource="@dimen/app_minimumsize_h" android:value="" />
-		<meta-data android:name="com.sec.minimode.icon.portrait.normal" android:resource="@drawable/icon" android:value="" />
-		<meta-data android:name="com.sec.minimode.icon.landscape.normal" android:resource="@drawable/icon" android:value="" />
+		<meta-data android:name="com.sec.minimode.icon.portrait.normal" android:resource="@mipmap/icon" android:value="" />
+		<meta-data android:name="com.sec.minimode.icon.landscape.normal" android:resource="@mipmap/icon" android:value="" />
         <activity android:name="net.osmand.plus.activities.HelpActivity" />
         <activity android:name="net.osmand.plus.activities.ExitActivity" />
         
