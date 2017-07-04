@@ -2891,4 +2891,5 @@ Facebook：https://www.facebook.com/osmandapp
     <string name="moving_time">移動時間</string>
     <string name="max_min">最大/最小</string>
     <string name="range">範圍</string>
+    <string name="range_min_max">範圍 = 最小/最大</string>
     </resources>
