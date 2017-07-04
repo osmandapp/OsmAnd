@@ -2797,4 +2797,7 @@ Tai yra puikus būdas paremti OsmAnd ir OSM, jei jie jums patinka.</string>
     <string name="hillshade_menu_download_descr">Norėdami pamatyti kalnų reljefo šešėlių žemėlapį turite parsisiųsti kalnų šešėlių sluoksnio žemėlapį šiam regionui.</string>
     <string name="hillshade_purchase_header">Norėdami pamatyti kalnų šešėlius ant žemėlapio turėsite nusipirkti ir įdiegti Kontūrų Linijų įskiepį</string>
     <string name="hide_from_zoom_level">Paslėpti mąstelį</string>
+    <string name="store_tracks_in_monthly_directories">Išsaugoti įrašytas keliones mėnesiniuose segtuvuose</string>
+    <string name="store_tracks_in_monthly_directories_descrp">Išsaugoti įrašytas keliones mėnesiniuose poaplankiuose (pvz. 2017-01).</string>
+    <string name="srtm_menu_download_descr">Norėdami ant žemėlapio matyti kontūrų linijas turėsite parsisiųsti šio regiono konturų linijų žemėlapį.</string>
     </resources>
