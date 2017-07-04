@@ -2822,6 +2822,23 @@ Algunas de las características principales:
     <string name="online_photos">Fotos en línea</string>
     <string name="mapillary_image">Imagen de Mapillary</string>
     <string name="shared_string_permissions">Permisos</string>
-    <string name="import_gpx_failed_descr">OsmAnd no puede importar el archivo. Compruebe si OsmAnd tiene permiso para leer el archivo en esa ubicación.</string>
+    <string name="import_gpx_failed_descr">OsmAnd no puede importar el archivo. Comprueba si OsmAnd tiene permiso para leer el archivo en esa ubicación.</string>
     <string name="distance_moving">Distancia corregida</string>
+    <string name="store_tracks_in_monthly_directories">Almacenar pistas grabadas en directorios mensuales</string>
+    <string name="store_tracks_in_monthly_directories_descrp">Almacena las pistas grabadas en subcarpetas según el mes de grabación (como 2017 - 01).</string>
+    <string name="shared_string_reset">Reiniciar</string>
+    <string name="shared_string_reload">Recargar</string>
+    <string name="mapillary_menu_descr_tile_cache">Recarga las teselas para ver ldatos actualizados.</string>
+    <string name="mapillary_menu_title_tile_cache">Almacén de teselas</string>
+    <string name="wrong_user_name">¡Nombre de usuario incorrecto!</string>
+    <string name="shared_string_to">Para</string>
+    <string name="mapillary_menu_date_from">De</string>
+    <string name="mapillary_menu_descr_dates">Ver las imágenes añadidas en un periodo determinado.</string>
+    <string name="mapillary_menu_title_dates">Fechas</string>
+    <string name="mapillary_menu_edit_text_hint">Escribe el nombre de usuario</string>
+    <string name="mapillary_menu_descr_username">Ver las imágenes añadidas por un determinado usuario.</string>
+    <string name="mapillary_menu_title_username">Nombre de usuario</string>
+    <string name="mapillary_menu_filter_description">Puedes filtrar imágenes por remitente o por fecha. Los filtros se aplican sólo para el zoom de primer plano.</string>
+    <string name="map_widget_ruler_control_first_mode">Regla de dos puntos</string>
+    <string name="map_widget_ruler_control_second_mode">Regla de radio</string>
     </resources>
