@@ -361,7 +361,26 @@ public class OsmandAidlApi {
 			point.setColor(color);
 			point.setVisible(favorite.isVisible());
 			favoritesHelper.addFavourite(point);
+			refreshMap();
 			return true;
+		} else {
+			return false;
+		}
+	}
+
+	boolean removeFavorite(AFavorite favorite) {
+		if (favorite != null) {
+			FavouritesDbHelper favoritesHelper = app.getFavorites();
+			List<FavouritePoint> favorites = favoritesHelper.getFavouritePoints();
+			for (FavouritePoint f : favorites) {
+				if (f.getName().equals(favorite.getName()) && f.getCategory().equals(favorite.getCategory()) &&
+						f.getLatitude() == favorite.getLat() && f.getLongitude() == favorite.getLon()) {
+					favoritesHelper.deleteFavourite(f);
+					refreshMap();
+					return true;
+				}
+			}
+			return false;
 		} else {
 			return false;
 		}
