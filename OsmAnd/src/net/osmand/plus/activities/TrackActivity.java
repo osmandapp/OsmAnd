@@ -37,7 +37,6 @@ public class TrackActivity extends TabActivity {
 
 	public static final String TRACK_FILE_NAME = "TRACK_FILE_NAME";
 	public static final String CURRENT_RECORDING = "CURRENT_RECORDING";
-	public final String OPEN_SPLIT_SEGMENTS = "OPEN_SPLIT_SEGMENTS";
 	protected List<WeakReference<Fragment>> fragList = new ArrayList<>();
 	protected PagerSlidingTabStrip slidingTabLayout;
 	private File file = null;
@@ -228,7 +227,7 @@ public class TrackActivity extends TabActivity {
 			int backStackEntriesCount = getSupportFragmentManager().getBackStackEntryCount();
 			if (backStackEntriesCount > 0) {
 				FragmentManager.BackStackEntry backStackEntry = getSupportFragmentManager().getBackStackEntryAt(getSupportFragmentManager().getBackStackEntryCount() - 1);
-				if (backStackEntry.getName().equals("open_split_segments")) {
+				if (backStackEntry.getName().equals(SplitSegmentFragment.TAG)) {
 					for (WeakReference<Fragment> f : fragList) {
 						Fragment frag = f.get();
 						if (frag instanceof TrackSegmentFragment) {
@@ -258,7 +257,7 @@ public class TrackActivity extends TabActivity {
 		int backStackEntriesCount = getSupportFragmentManager().getBackStackEntryCount();
 		if (backStackEntriesCount > 0) {
 			FragmentManager.BackStackEntry backStackEntry = getSupportFragmentManager().getBackStackEntryAt(getSupportFragmentManager().getBackStackEntryCount() - 1);
-			if (backStackEntry.getName().equals("open_split_segments")) {
+			if (backStackEntry.getName().equals(SplitSegmentFragment.TAG)) {
 				for (WeakReference<Fragment> f : fragList) {
 					Fragment frag = f.get();
 					if (frag instanceof TrackSegmentFragment) {

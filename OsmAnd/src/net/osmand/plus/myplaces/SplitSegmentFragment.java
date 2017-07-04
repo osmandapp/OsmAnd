@@ -32,8 +32,6 @@ import net.osmand.plus.activities.TrackActivity;
 import net.osmand.plus.base.OsmAndListFragment;
 import net.osmand.util.Algorithms;
 
-import org.w3c.dom.Text;
-
 import java.text.DateFormat;
 import java.text.SimpleDateFormat;
 import java.util.ArrayList;
@@ -47,6 +45,7 @@ import static net.osmand.plus.myplaces.TrackSegmentFragment.ARG_TO_FILTER_SHORT_
 
 public class SplitSegmentFragment extends OsmAndListFragment {
 
+    public final static String TAG = "SPLIT_SEGMENT_FRAGMENT";
     private OsmandApplication app;
 
     private SplitSegmentsAdapter adapter;
