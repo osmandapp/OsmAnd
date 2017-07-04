@@ -17,8 +17,8 @@ apply plugin: 'com.android.application'
 // Less important
 
 android {
-	compileSdkVersion 23
-	buildToolsVersion "23.0.3"
+	compileSdkVersion 26
+	buildToolsVersion "26.0.0"
 
 	signingConfigs {
 		development {
@@ -385,10 +385,10 @@ dependencies {
 	// compile project(':eclipse-compile:design')
 	// compile project(':eclipse-compile:cardview')
 	// compile project(':eclipse-compile:gridlayout')
-	compile 'com.android.support:gridlayout-v7:23.3.0'
-	compile 'com.android.support:cardview-v7:23.3.0'
-	compile 'com.android.support:appcompat-v7:23.3.0'
-	compile 'com.android.support:design:23.3.0'
+	compile 'com.android.support:gridlayout-v7:25.3.1'
+	compile 'com.android.support:cardview-v7:25.3.1'
+	compile 'com.android.support:appcompat-v7:25.3.1'
+	compile 'com.android.support:design:25.3.1'
 	compile fileTree(include: ['*.jar'], exclude: ['QtAndroid-bundled.jar', 'QtAndroidAccessibility-bundled.jar', 'OsmAndCore_android.jar', 'OsmAndCore_wrapper.jar', 'android-support-multidex.jar'], dir: 'libs')
 	legacyCompile "net.osmand:OsmAndCore_android:0.1-SNAPSHOT@jar"
 	qtcoredebugCompile "net.osmand:OsmAndCore_androidNativeDebug:0.1-SNAPSHOT@aar"

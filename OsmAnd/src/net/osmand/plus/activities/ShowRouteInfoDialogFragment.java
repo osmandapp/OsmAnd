@@ -108,7 +108,7 @@ public class ShowRouteInfoDialogFragment extends DialogFragment {
 		view = inflater.inflate(R.layout.route_info_layout, container, false);
 
 		Toolbar toolbar = (Toolbar) view.findViewById(R.id.toolbar);
-		toolbar.setNavigationIcon(getMyApplication().getIconsCache().getThemedIcon(R.drawable.abc_ic_ab_back_mtrl_am_alpha));
+		toolbar.setNavigationIcon(getMyApplication().getIconsCache().getThemedIcon(R.drawable.abc_ic_ab_back_material));
 		toolbar.setNavigationContentDescription(R.string.shared_string_close);
 		toolbar.setNavigationOnClickListener(new View.OnClickListener() {
 			@Override

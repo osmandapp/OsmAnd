@@ -30,7 +30,7 @@
                 android:layout_height="56dp"
                 android:layout_gravity="top"
                 android:contentDescription="@string/back_to_search"
-                android:src="@drawable/abc_ic_ab_back_mtrl_am_alpha"/>
+                android:src="@drawable/abc_ic_ab_back_material"/>
 
             <LinearLayout
                 android:id="@+id/top_bar_title_layout"

@@ -168,7 +168,7 @@ public class TrackDetailsMenuFragment extends Fragment {
 
 		ImageButton backButton = (ImageButton) mainView.findViewById(R.id.top_bar_back_button);
 		if (backButton != null) {
-			backButton.setImageDrawable(ctx.getMyApplication().getIconsCache().getIcon(R.drawable.abc_ic_ab_back_mtrl_am_alpha, R.color.color_white));
+			backButton.setImageDrawable(ctx.getMyApplication().getIconsCache().getIcon(R.drawable.abc_ic_ab_back_material, R.color.color_white));
 		}
 
 	}

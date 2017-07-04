@@ -152,7 +152,7 @@ public class CreateEditActionDialog extends DialogFragment {
         toolbar.setTitleTextColor(Color.WHITE);
 
         toolbar.setNavigationIcon(getIconsCache().getIcon(
-                R.drawable.abc_ic_ab_back_mtrl_am_alpha,
+                R.drawable.abc_ic_ab_back_material,
                 R.color.color_white));
 
         toolbar.setNavigationContentDescription(R.string.access_shared_string_navigate_up);
