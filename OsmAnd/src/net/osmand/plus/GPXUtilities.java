@@ -275,6 +275,7 @@ public class GPXUtilities {
 		public double minElevation = 99999;
 		public double maxElevation = -100;
 
+		public float minSpeed;
 		public float maxSpeed = 0;
 		public float avgSpeed;
 
@@ -520,6 +521,7 @@ public class GPXUtilities {
 
 					if (speed > 0) {
 						totalSpeedSum += speed;
+						minSpeed = Math.min(speed, minSpeed);
 						maxSpeed = Math.max(speed, maxSpeed);
 						speedCount++;
 					}
