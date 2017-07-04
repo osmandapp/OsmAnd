@@ -6,6 +6,7 @@ import net.osmand.aidl.map.SetMapLocationParams;
 import net.osmand.aidl.favorite.AFavorite;
 import net.osmand.aidl.favorite.AddFavoriteParams;
 import net.osmand.aidl.favorite.RemoveFavoriteParams;
+import net.osmand.aidl.favorite.UpdateFavoriteParams;
 
 import net.osmand.aidl.mapmarker.AMapMarker;
 import net.osmand.aidl.mapmarker.AddMapMarkerParams;
@@ -37,6 +38,7 @@ interface IOsmAndAidlInterface {
 
     boolean addFavorite(in AddFavoriteParams params);
     boolean removeFavorite(in RemoveFavoriteParams params);
+    boolean updateFavorite(in UpdateFavoriteParams params);
 
     boolean addMapMarker(in AddMapMarkerParams params);
     boolean removeMapMarker(in RemoveMapMarkerParams params);

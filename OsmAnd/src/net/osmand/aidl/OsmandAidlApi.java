@@ -386,6 +386,38 @@ public class OsmandAidlApi {
 		}
 	}
 
+	boolean updateFavorite(AFavorite fPrev, AFavorite fNew) {
+		if (fPrev != null && fNew != null) {
+			FavouritesDbHelper favoritesHelper = app.getFavorites();
+			List<FavouritePoint> favorites = favoritesHelper.getFavouritePoints();
+			for (FavouritePoint f : favorites) {
+				if (f.getName().equals(fPrev.getName()) && f.getCategory().equals(fPrev.getCategory()) &&
+						f.getLatitude() == fPrev.getLat() && f.getLongitude() == fPrev.getLon()) {
+					if (fNew.getLat() != f.getLatitude() || fNew.getLon() != f.getLongitude()) {
+						favoritesHelper.editFavourite(f, fNew.getLat(), fNew.getLon());
+					}
+					if (!fNew.getName().equals(f.getName()) || !fNew.getDescription().equals(f.getDescription()) ||
+							!fNew.getCategory().equals(f.getCategory())) {
+						favoritesHelper.editFavouriteName(f, fNew.getName(), fNew.getCategory(), fNew.getDescription());
+					}
+					int color = 0;
+					if (!Algorithms.isEmpty(fNew.getColor())) {
+						color = ColorDialogs.getColorByTag(fNew.getColor());
+					}
+					if (color != f.getColor()) {
+						FavouritesDbHelper.FavoriteGroup fg = favoritesHelper.getGroup(f);
+						favoritesHelper.editFavouriteGroup(fg, fg.name, color, fg.visible);
+					}
+					refreshMap();
+					return true;
+				}
+			}
+			return false;
+		} else {
+			return false;
+		}
+	}
+
 	boolean addMapMarker(AMapMarker marker) {
 		if (marker != null) {
 			PointDescription pd = new PointDescription(
