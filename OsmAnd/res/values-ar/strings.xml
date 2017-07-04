@@ -2890,4 +2890,5 @@ OsmAnd هو المصدر المفتوح و التي يجري تطويرها بن
     <string name="range">نطاق</string>
     <string name="max_min">أقصى/أدنى</string>
     <string name="range_min_max">المدى = الأدنى/الأقصى</string>
+    <string name="min_max">الأدنى/الأقصى</string>
     </resources>
