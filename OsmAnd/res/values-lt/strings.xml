@@ -2779,7 +2779,7 @@ Tai yra puikus būdas paremti OsmAnd ir OSM, jei jie jums patinka.</string>
     <string name="mapillary_widget_descr">Leidžia jums greitai prisidėti prie Mapillary</string>
     <string name="mapillary_descr">Internetinės gatvės nuotraukos visiems. Atraskite vietas, bendradarbiaukite, fotografuokite pasaulį.</string>
     <string name="plugin_mapillary_descr">Internetinės gatvės nuotraukos visiems. Atraskite vietas, bendradarbiaukite, fotografuokite pasaulį.</string>
-    <string name="routing_attr_allow_private_description">Suteikti prieigą prie privačių teritorijų</string>
+    <string name="routing_attr_allow_private_description">Naudoti privačias teritorijas</string>
     <string name="points_delete_multiple_succesful">Punktas(-ai) sėkmingai ištrintas(-i).</string>
     <string name="points_delete_multiple">Jūs ketinate trinti %1$d punktą (- us). Ar tikrai?</string>
     <string name="shared_string_reset">Nustatyti iš naujo</string>
@@ -2800,4 +2800,20 @@ Tai yra puikus būdas paremti OsmAnd ir OSM, jei jie jums patinka.</string>
     <string name="store_tracks_in_monthly_directories">Išsaugoti įrašytas keliones mėnesiniuose segtuvuose</string>
     <string name="store_tracks_in_monthly_directories_descrp">Išsaugoti įrašytas keliones mėnesiniuose poaplankiuose (pvz. 2017-01).</string>
     <string name="srtm_menu_download_descr">Norėdami ant žemėlapio matyti kontūrų linijas turėsite parsisiųsti šio regiono konturų linijų žemėlapį.</string>
+    <string name="srtm_purchase_header">Norėdami matyti konturų linijas ant žemėlapio turėsite nusipirkti ir įsidiegti kontūrų linijų įskiepį</string>
+    <string name="show_from_zoom_level">Rodyti nuo mąstelio</string>
+    <string name="routing_attr_allow_private_name">Naudoti privačius kelius</string>
+    <string name="display_zoom_level">Mąstelis: %1$s</string>
+    <string name="animate_my_location_desc">Įgalinti mano mano vietos animaciją stumiant žemėlapį navigacijos metu</string>
+    <string name="shared_string_in_name">už %1$s</string>
+    <string name="quick_action_auto_zoom">Aut. žem. mąst. į/išj</string>
+    <string name="quick_action_auto_zoom_desc">Mygtuko paspaudimas į/išjungs automatinį žemėlapio mąstelio keitimą pagal jūsų greitį.</string>
+    <string name="quick_action_auto_zoom_on"/>
+    <string name="quick_action_auto_zoom_off">Aut. žemėl. mąstelis įšjungtas</string>
+    <string name="quick_action_replace_destination">Pakeisti kelionės tikslą</string>
+    <string name="quick_action_add_destination_desc">Paspaudus mygtuką ekrano centre esanti vieta bus pridėta kaip naujas kelionės tikslas. Anksčiau buvęs tikslas taps paskutiniuoju tarpiniu tikslu.</string>
+    <string name="quick_action_replace_destination_desc">Paspaudus mygtuką kelionės tikslas bus pakeistas ekrano centre esančia vieta.</string>
+    <string name="quick_action_add_first_intermediate_desc">Paspaudus mygtuką ekrano centre esanti vieta bus pridėta kaip pirmas tarpinis tikslas.</string>
+    <string name="no_overlay">Jokio viršutinio sluoksnio</string>
+    <string name="no_underlay">Jokio apatnio sluoksnio</string>
     </resources>
