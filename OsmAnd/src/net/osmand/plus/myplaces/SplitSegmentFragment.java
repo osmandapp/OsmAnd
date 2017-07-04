@@ -13,6 +13,7 @@ import android.view.ViewGroup;
 import android.widget.AdapterView;
 import android.widget.ArrayAdapter;
 import android.widget.ImageView;
+import android.widget.LinearLayout;
 import android.widget.ListView;
 import android.widget.TextView;
 
@@ -30,6 +31,8 @@ import net.osmand.plus.R;
 import net.osmand.plus.activities.TrackActivity;
 import net.osmand.plus.base.OsmAndListFragment;
 import net.osmand.util.Algorithms;
+
+import org.w3c.dom.Text;
 
 import java.text.DateFormat;
 import java.text.SimpleDateFormat;
@@ -408,122 +411,148 @@ public class SplitSegmentFragment extends OsmAndListFragment {
                         distanceOrTimeSpanValue.setText(OsmAndFormatter.getFormattedDistance(analysis.totalDistance, app));
                         distanceOrTimeSpanText.setText(app.getString(R.string.distance));
                     } else {
-                        distanceOrTimeSpanValue.setText(OsmAndFormatter.getFormattedDuration((int) (analysis.timeSpan / 1000), app));
+                        if (analysis.timeSpan > 0) {
+                            distanceOrTimeSpanValue.setText(OsmAndFormatter.getFormattedDuration((int) (analysis.timeSpan / 1000), app));
+                        } else {
+                            distanceOrTimeSpanValue.setText("-");
+                        }
                         distanceOrTimeSpanText.setText(app.getString(R.string.shared_string_time_span));
                     }
+
+                    TextView startTimeValue = (TextView) convertView.findViewById(R.id.start_time_value);
+                    TextView startDateValue = (TextView) convertView.findViewById(R.id.start_date_value);
+                    TextView endTimeValue = (TextView) convertView.findViewById(R.id.end_time_value);
+                    TextView endDateValue = (TextView) convertView.findViewById(R.id.end_date_value);
                     if (analysis.timeSpan > 0) {
                         DateFormat tf = SimpleDateFormat.getTimeInstance(DateFormat.SHORT);
                         DateFormat df = SimpleDateFormat.getDateInstance(DateFormat.MEDIUM);
 
                         Date start = new Date(analysis.startTime);
-                        ((TextView) convertView.findViewById(R.id.start_time_value))
-                                .setText(tf.format(start));
-                        ((TextView) convertView.findViewById(R.id.start_date_value))
-                                .setText(df.format(start));
+                        startTimeValue.setText(tf.format(start));
+                        startDateValue.setText(df.format(start));
 
                         Date end = new Date(analysis.endTime);
-                        ((TextView) convertView.findViewById(R.id.end_time_value))
-                                .setText(tf.format(end));
-                        ((TextView) convertView.findViewById(R.id.end_date_value))
-                                .setText(df.format(end));
+                        endTimeValue.setText(tf.format(end));
+                        endDateValue.setText(df.format(end));
+                    } else {
+                        startTimeValue.setText("-");
+                        startDateValue.setText("-");
+                        endTimeValue.setText("-");
+                        endDateValue.setText("-");
                     }
 
-                    ((TextView) convertView.findViewById(R.id.average_altitude_value))
-                            .setText(OsmAndFormatter.getFormattedAlt(analysis.avgElevation, app));
+                    View elevationDivider = convertView.findViewById(R.id.elevation_divider);
+                    View elevationSection = convertView.findViewById(R.id.elevation_layout);
+                    if (analysis.hasElevationData) {
+                        elevationDivider.setVisibility(View.VISIBLE);
+                        elevationSection.setVisibility(View.VISIBLE);
 
-                    String min = OsmAndFormatter.getFormattedAlt(analysis.minElevation, app);
-                    String max = OsmAndFormatter.getFormattedAlt(analysis.maxElevation, app);
-                    String min_max_elevation = min.substring(0, min.indexOf(" ")).concat("/").concat(max);
-                    if (min_max_elevation.length() > 9) {
-                        (convertView.findViewById(R.id.min_altitude_value))
-                                .setVisibility(View.VISIBLE);
-                        (convertView.findViewById(R.id.max_altitude_value))
-                                .setVisibility(View.VISIBLE);
-                        ((TextView) convertView.findViewById(R.id.min_altitude_value))
-                                .setText(min);
-                        ((TextView) convertView.findViewById(R.id.max_altitude_value))
-                                .setText(max);
-                        (convertView.findViewById(R.id.min_max_altitude_value))
-                                .setVisibility(View.GONE);
+                        ((TextView) convertView.findViewById(R.id.average_altitude_value))
+                                .setText(OsmAndFormatter.getFormattedAlt(analysis.avgElevation, app));
+
+                        String min = OsmAndFormatter.getFormattedAlt(analysis.minElevation, app);
+                        String max = OsmAndFormatter.getFormattedAlt(analysis.maxElevation, app);
+                        String min_max_elevation = min.substring(0, min.indexOf(" ")).concat("/").concat(max);
+                        if (min_max_elevation.length() > 9) {
+                            (convertView.findViewById(R.id.min_altitude_value))
+                                    .setVisibility(View.VISIBLE);
+                            (convertView.findViewById(R.id.max_altitude_value))
+                                    .setVisibility(View.VISIBLE);
+                            ((TextView) convertView.findViewById(R.id.min_altitude_value))
+                                    .setText(min);
+                            ((TextView) convertView.findViewById(R.id.max_altitude_value))
+                                    .setText(max);
+                            (convertView.findViewById(R.id.min_max_altitude_value))
+                                    .setVisibility(View.GONE);
+                        } else {
+                            (convertView.findViewById(R.id.min_max_altitude_value))
+                                    .setVisibility(View.VISIBLE);
+                            ((TextView) convertView.findViewById(R.id.min_max_altitude_value))
+                                    .setText(min_max_elevation);
+                            (convertView.findViewById(R.id.min_altitude_value))
+                                    .setVisibility(View.GONE);
+                            (convertView.findViewById(R.id.max_altitude_value))
+                                    .setVisibility(View.GONE);
+                        }
+
+                        TextView ascentValue = (TextView) convertView.findViewById(R.id.ascent_value);
+                        TextView descentValue = (TextView) convertView.findViewById(R.id.descent_value);
+                        TextView ascentDescentValue = (TextView) convertView.findViewById(R.id.ascent_descent_value);
+
+                        String asc = OsmAndFormatter.getFormattedAlt(analysis.diffElevationUp, app);
+                        String desc = OsmAndFormatter.getFormattedAlt(analysis.diffElevationDown, app);
+                        String asc_desc = asc.substring(0, asc.indexOf(" ")).concat("/").concat(desc);
+                        if (asc_desc.length() > 9) {
+                            ascentValue.setVisibility(View.VISIBLE);
+                            descentValue.setVisibility(View.VISIBLE);
+                            ascentValue.setText(asc);
+                            descentValue.setText(desc);
+                            ascentDescentValue.setVisibility(View.GONE);
+                        } else {
+                            ascentDescentValue.setVisibility(View.VISIBLE);
+                            ascentDescentValue.setText(asc_desc);
+                            ascentValue.setVisibility(View.GONE);
+                            descentValue.setVisibility(View.GONE);
+                        }
+
                     } else {
-                        (convertView.findViewById(R.id.min_max_altitude_value))
-                                .setVisibility(View.VISIBLE);
-                        ((TextView) convertView.findViewById(R.id.min_max_altitude_value))
-                                .setText(min_max_elevation);
-                        (convertView.findViewById(R.id.min_altitude_value))
-                                .setVisibility(View.GONE);
-                        (convertView.findViewById(R.id.max_altitude_value))
-                                .setVisibility(View.GONE);
+                        elevationDivider.setVisibility(View.GONE);
+                        elevationSection.setVisibility(View.GONE);
                     }
 
-                    String asc = OsmAndFormatter.getFormattedAlt(analysis.diffElevationUp, app);
-                    String desc = OsmAndFormatter.getFormattedAlt(analysis.diffElevationDown, app);
-                    String asc_desc = asc.substring(0, asc.indexOf(" ")).concat("/").concat(desc);
-                    if (asc_desc.length() > 9) {
-                        (convertView.findViewById(R.id.ascent_value))
-                                .setVisibility(View.VISIBLE);
-                        (convertView.findViewById(R.id.descent_value))
-                                .setVisibility(View.VISIBLE);
-                        ((TextView) convertView.findViewById(R.id.ascent_value))
-                                .setText(asc);
-                        ((TextView) convertView.findViewById(R.id.descent_value))
-                                .setText(desc);
-                        (convertView.findViewById(R.id.ascent_descent_value))
-                                .setVisibility(View.GONE);
-                    } else {
-                        (convertView.findViewById(R.id.ascent_descent_value))
-                                .setVisibility(View.VISIBLE);
-                        ((TextView) convertView.findViewById(R.id.ascent_descent_value))
-                                .setText(asc_desc);
-                        (convertView.findViewById(R.id.ascent_value))
-                                .setVisibility(View.GONE);
-                        (convertView.findViewById(R.id.descent_value))
-                                .setVisibility(View.GONE);
-                    }
+                    View speedDivider = convertView.findViewById(R.id.speed_divider);
+                    View speedSection = convertView.findViewById(R.id.speed_layout);
+                    if (analysis.hasSpeedData) {
+                        speedDivider.setVisibility(View.VISIBLE);
+                        speedSection.setVisibility(View.VISIBLE);
 
-                    ((TextView) convertView.findViewById(R.id.moving_time_value))
-                            .setText(Algorithms.formatDuration((int) (analysis.timeMoving / 1000), app.accessibilityEnabled()));
-                    ((TextView) convertView.findViewById(R.id.average_speed_value))
-                            .setText(OsmAndFormatter.getFormattedSpeed(analysis.avgSpeed, app));
+                        ((TextView) convertView.findViewById(R.id.moving_time_value))
+                                .setText(Algorithms.formatDuration((int) (analysis.timeMoving / 1000), app.accessibilityEnabled()));
+                        ((TextView) convertView.findViewById(R.id.average_speed_value))
+                                .setText(OsmAndFormatter.getFormattedSpeed(analysis.avgSpeed, app));
 
-                    String maxSpeed = OsmAndFormatter.getFormattedSpeed(analysis.maxSpeed, app);
-                    String minSpeed = OsmAndFormatter.getFormattedSpeed(analysis.minSpeed, app);
-                    String max_min_speed = maxSpeed.substring(0, maxSpeed.indexOf(" ")).concat("/").concat(minSpeed.substring(0, minSpeed.indexOf(" ")));
-                    if (minSpeed.substring(0, minSpeed.indexOf(" ")).equals("0") || minSpeed.substring(0, minSpeed.indexOf(" ")).equals("0.0")) {
-                        (convertView.findViewById(R.id.max_speed_value))
-                                .setVisibility(View.VISIBLE);
-                        (convertView.findViewById(R.id.min_speed_value))
-                                .setVisibility(View.GONE);
-                        ((TextView) convertView.findViewById(R.id.max_speed_value))
-                                .setText(maxSpeed);
-                        (convertView.findViewById(R.id.max_min_speed_value))
-                                .setVisibility(View.GONE);
-                        ((TextView) convertView.findViewById(R.id.max_min_speed_text))
-                                .setText(app.getString(R.string.shared_string_max));
-                    } else if (max_min_speed.length() > 9) {
-                        (convertView.findViewById(R.id.max_speed_value))
-                                .setVisibility(View.VISIBLE);
-                        (convertView.findViewById(R.id.min_speed_value))
-                                .setVisibility(View.VISIBLE);
-                        ((TextView) convertView.findViewById(R.id.max_speed_value))
-                                .setText(maxSpeed);
-                        ((TextView) convertView.findViewById(R.id.min_speed_value))
-                                .setText(minSpeed);
-                        (convertView.findViewById(R.id.max_min_speed_value))
-                                .setVisibility(View.GONE);
-                        ((TextView) convertView.findViewById(R.id.max_min_speed_text))
-                                .setText(app.getString(R.string.max_min));
+                        String maxSpeed = OsmAndFormatter.getFormattedSpeed(analysis.maxSpeed, app);
+                        String minSpeed = OsmAndFormatter.getFormattedSpeed(analysis.minSpeed, app);
+                        String max_min_speed = maxSpeed.substring(0, maxSpeed.indexOf(" ")).concat("/").concat(minSpeed.substring(0, minSpeed.indexOf(" ")));
+                        if (minSpeed.substring(0, minSpeed.indexOf(" ")).equals("0") || minSpeed.substring(0, minSpeed.indexOf(" ")).equals("0.0")) {
+                            (convertView.findViewById(R.id.max_speed_value))
+                                    .setVisibility(View.VISIBLE);
+                            (convertView.findViewById(R.id.min_speed_value))
+                                    .setVisibility(View.GONE);
+                            ((TextView) convertView.findViewById(R.id.max_speed_value))
+                                    .setText(maxSpeed);
+                            (convertView.findViewById(R.id.max_min_speed_value))
+                                    .setVisibility(View.GONE);
+                            ((TextView) convertView.findViewById(R.id.max_min_speed_text))
+                                    .setText(app.getString(R.string.shared_string_max));
+                        } else if (max_min_speed.length() > 9) {
+                            (convertView.findViewById(R.id.max_speed_value))
+                                    .setVisibility(View.VISIBLE);
+                            (convertView.findViewById(R.id.min_speed_value))
+                                    .setVisibility(View.VISIBLE);
+                            ((TextView) convertView.findViewById(R.id.max_speed_value))
+                                    .setText(maxSpeed);
+                            ((TextView) convertView.findViewById(R.id.min_speed_value))
+                                    .setText(minSpeed);
+                            (convertView.findViewById(R.id.max_min_speed_value))
+                                    .setVisibility(View.GONE);
+                            ((TextView) convertView.findViewById(R.id.max_min_speed_text))
+                                    .setText(app.getString(R.string.max_min));
+                        } else {
+                            (convertView.findViewById(R.id.max_min_speed_value))
+                                    .setVisibility(View.VISIBLE);
+                            ((TextView) convertView.findViewById(R.id.max_min_speed_value))
+                                    .setText(max_min_speed);
+                            (convertView.findViewById(R.id.max_speed_value))
+                                    .setVisibility(View.GONE);
+                            (convertView.findViewById(R.id.min_speed_value))
+                                    .setVisibility(View.GONE);
+                            ((TextView) convertView.findViewById(R.id.max_min_speed_text))
+                                    .setText(app.getString(R.string.max_min));
+                        }
                     } else {
-                        (convertView.findViewById(R.id.max_min_speed_value))
-                                .setVisibility(View.VISIBLE);
-                        ((TextView) convertView.findViewById(R.id.max_min_speed_value))
-                                .setText(max_min_speed);
-                        (convertView.findViewById(R.id.max_speed_value))
-                                .setVisibility(View.GONE);
-                        (convertView.findViewById(R.id.min_speed_value))
-                                .setVisibility(View.GONE);
-                        ((TextView) convertView.findViewById(R.id.max_min_speed_text))
-                                .setText(app.getString(R.string.max_min));
+                        speedDivider.setVisibility(View.GONE);
+                        speedSection.setVisibility(View.GONE);
                     }
                 }
             }

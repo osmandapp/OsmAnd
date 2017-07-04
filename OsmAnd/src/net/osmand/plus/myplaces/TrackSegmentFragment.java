@@ -1475,7 +1475,7 @@ public class TrackSegmentFragment extends OsmAndListFragment {
 		getMyActivity().getSupportFragmentManager()
 				.beginTransaction()
 				.replace(R.id.track_activity_layout, new SplitSegmentFragment())
-				.addToBackStack("open_split_segments")
+				.addToBackStack(getMyActivity().OPEN_SPLIT_SEGMENTS)
 				.commit();
 	}
 
