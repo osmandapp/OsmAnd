@@ -4,6 +4,7 @@ import android.content.Intent;
 import android.os.AsyncTask;
 import android.os.Bundle;
 import android.support.v4.app.Fragment;
+import android.support.v4.app.FragmentManager;
 import android.support.v4.view.ViewPager;
 import android.support.v7.app.ActionBar;
 import android.support.v7.widget.Toolbar;
@@ -22,6 +23,7 @@ import net.osmand.plus.OsmAndAppCustomization;
 import net.osmand.plus.OsmandApplication;
 import net.osmand.plus.R;
 import net.osmand.plus.myplaces.FavoritesActivity;
+import net.osmand.plus.myplaces.SplitSegmentFragment;
 import net.osmand.plus.myplaces.TrackPointFragment;
 import net.osmand.plus.myplaces.TrackSegmentFragment;
 import net.osmand.plus.views.controls.PagerSlidingTabStrip;
@@ -124,6 +126,8 @@ public class TrackActivity extends TabActivity {
 							Fragment frag = f.get();
 							if (frag instanceof TrackSegmentFragment) {
 								((TrackSegmentFragment) frag).updateContent();
+							} else if (frag instanceof SplitSegmentFragment) {
+								((SplitSegmentFragment) frag).reloadSplitFragment();
 							} else if (frag instanceof TrackPointFragment) {
 								((TrackPointFragment) frag).setContent();
 							}
@@ -220,6 +224,20 @@ public class TrackActivity extends TabActivity {
 		int itemId = item.getItemId();
 		switch (itemId) {
 		case android.R.id.home:
+			int backStackEntriesCount = getSupportFragmentManager().getBackStackEntryCount();
+			if (backStackEntriesCount > 0) {
+				FragmentManager.BackStackEntry backStackEntry = getSupportFragmentManager().getBackStackEntryAt(getSupportFragmentManager().getBackStackEntryCount() - 1);
+				if (backStackEntry.getName().equals(SplitSegmentFragment.TAG)) {
+					for (WeakReference<Fragment> f : fragList) {
+						Fragment frag = f.get();
+						if (frag instanceof TrackSegmentFragment) {
+							((TrackSegmentFragment) frag).updateSplitView();
+						}
+					}
+					getSupportFragmentManager().popBackStack();
+					return true;
+				}
+			}
 			if (getIntent().hasExtra(MapActivity.INTENT_KEY_PARENT_MAP_ACTIVITY)) {
 				OsmAndAppCustomization appCustomization = getMyApplication().getAppCustomization();
 				final Intent favorites = new Intent(this, appCustomization.getFavoritesActivity());
@@ -232,6 +250,25 @@ public class TrackActivity extends TabActivity {
 
 		}
 		return false;
+	}
+
+	@Override
+	public void onBackPressed() {
+		int backStackEntriesCount = getSupportFragmentManager().getBackStackEntryCount();
+		if (backStackEntriesCount > 0) {
+			FragmentManager.BackStackEntry backStackEntry = getSupportFragmentManager().getBackStackEntryAt(getSupportFragmentManager().getBackStackEntryCount() - 1);
+			if (backStackEntry.getName().equals(SplitSegmentFragment.TAG)) {
+				for (WeakReference<Fragment> f : fragList) {
+					Fragment frag = f.get();
+					if (frag instanceof TrackSegmentFragment) {
+						((TrackSegmentFragment) frag).updateSplitView();
+					}
+				}
+				getSupportFragmentManager().popBackStack();
+				return;
+			}
+		}
+		super.onBackPressed();
 	}
 
 	boolean isHavingWayPoints(){
