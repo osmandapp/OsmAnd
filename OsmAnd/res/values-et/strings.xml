@@ -158,4 +158,10 @@
     <string name="online_photos">Veebi fotod</string>
     <string name="shared_string_add_photos">Lisa fotosid</string>
     <string name="mapillary_widget">Mapillary vidin</string>
+    <string name="shared_string_reset">Lähtesta</string>
+    <string name="shared_string_reload">Laadi uuesti</string>
+    <string name="wrong_user_name">Vale kasutajanimi!</string>
+    <string name="mapillary_menu_title_dates">Kuupäevad</string>
+    <string name="mapillary_menu_edit_text_hint">Sisesta kasutajatunnus</string>
+    <string name="mapillary_menu_title_username">Kasutajatunnus</string>
     </resources>
