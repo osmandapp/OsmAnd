@@ -2874,4 +2874,6 @@ Pro praghere iscrie su còdighe intreu</string>
     <string name="mapillary_menu_title_username">Nùmene impreadore</string>
     <string name="mapillary_menu_filter_description">Podes filtrare sas immàgines pro impreadore o data. Sos filtros s\'aplicat a pustis de ismanniamentu.</string>
     <string name="shared_string_reset">Reimposta</string>
+    <string name="store_tracks_in_monthly_directories">Sarva sas rastas registradas in cartellas diferentes pro cada mese</string>
+    <string name="store_tracks_in_monthly_directories_descrp">Sarva sas rastas registradas in suta-cartellas diferentes pro mese de registratzione (es. 2017-01).</string>
     </resources>

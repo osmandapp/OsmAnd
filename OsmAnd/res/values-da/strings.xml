@@ -2971,5 +2971,5 @@ Tidligere destination bliver sidste mellemliggende punkt.</string>
     <string name="mapillary_menu_title_tile_cache">Kortbrik-cache</string>
     <string name="shared_string_reset">Nulstil</string>
     <string name="store_tracks_in_monthly_directories">Gem optagede spor i månedlige mapper</string>
-    <string name="store_tracks_in_monthly_directories_descrp">Gem optagede spor i mapper baseret på måneden, hvori sporet blev optaget, fx 2017-01 for januar 2017.</string>
+    <string name="store_tracks_in_monthly_directories_descrp">Gemme optagede spor i undermapper pr optagelsesmåned (fx. 2017-01).</string>
     </resources>

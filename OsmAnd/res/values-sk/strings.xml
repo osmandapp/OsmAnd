@@ -2898,4 +2898,6 @@ Zodpovedá oblasti: %1$s x %2$s</string>
     <string name="mapillary_menu_descr_username">Zobraziť obrázky pridané daným používateľom.</string>
     <string name="mapillary_menu_title_username">Meno používateľa</string>
     <string name="mapillary_menu_filter_description">Môžete filtrovať obrázky podľa odosielateľa alebo dátumu. Filtre sa aplikujú len pri vysokom priblížení.</string>
+    <string name="store_tracks_in_monthly_directories">Ukladať zaznamenané stopy v priečinkoch po mesiacoch</string>
+    <string name="store_tracks_in_monthly_directories_descrp">Ukladať zaznamenané stopy v podpriečinkoch podľa mesiaca záznamu (ako 2017-01).</string>
     </resources>

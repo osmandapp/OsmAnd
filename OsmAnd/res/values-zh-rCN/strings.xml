@@ -2622,4 +2622,5 @@
     <string name="mapillary_menu_descr_dates">查看特定时期内添加的图像。</string>
     <string name="mapillary_menu_filter_description">您可以根据用户名或日期过滤图像。</string>
     <string name="shared_string_reload">重新载入</string>
+    <string name="shared_string_reset">重置</string>
     </resources>
