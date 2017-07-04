@@ -8,6 +8,7 @@ import android.os.RemoteException;
 import net.osmand.aidl.calculateroute.CalculateRouteParams;
 import net.osmand.aidl.favorite.AddFavoriteParams;
 import net.osmand.aidl.favorite.RemoveFavoriteParams;
+import net.osmand.aidl.favorite.UpdateFavoriteParams;
 import net.osmand.aidl.gpx.ASelectedGpxFile;
 import net.osmand.aidl.gpx.HideGpxParams;
 import net.osmand.aidl.gpx.ImportGpxParams;
@@ -61,6 +62,15 @@ public class OsmandAidlService extends Service {
 		public boolean removeFavorite(RemoveFavoriteParams params) throws RemoteException {
 			try {
 				return params != null && getApi().removeFavorite(params.getFavorite());
+			} catch (Exception e) {
+				return false;
+			}
+		}
+
+		@Override
+		public boolean updateFavorite(UpdateFavoriteParams params) throws RemoteException {
+			try {
+				return params != null && getApi().updateFavorite(params.getFavoritePrev(), params.getFavoriteNew());
 			} catch (Exception e) {
 				return false;
 			}
