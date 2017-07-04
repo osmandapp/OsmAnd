@@ -521,11 +521,7 @@ public class GPXUtilities {
 
 					if (speed > 0) {
 						totalSpeedSum += speed;
-						if (minSpeed == 0) {
-							minSpeed = speed;
-						} else {
-							minSpeed = Math.min(speed, minSpeed);
-						}
+						minSpeed = Math.min(speed, minSpeed);
 						maxSpeed = Math.max(speed, maxSpeed);
 						speedCount++;
 					}
