@@ -400,14 +400,6 @@ public class OsmandAidlApi {
 							!fNew.getCategory().equals(f.getCategory())) {
 						favoritesHelper.editFavouriteName(f, fNew.getName(), fNew.getCategory(), fNew.getDescription());
 					}
-					int color = 0;
-					if (!Algorithms.isEmpty(fNew.getColor())) {
-						color = ColorDialogs.getColorByTag(fNew.getColor());
-					}
-					if (color != f.getColor()) {
-						FavouritesDbHelper.FavoriteGroup fg = favoritesHelper.getGroup(f);
-						favoritesHelper.editFavouriteGroup(fg, fg.name, color, fg.visible);
-					}
 					refreshMap();
 					return true;
 				}
