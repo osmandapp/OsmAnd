@@ -2491,12 +2491,12 @@ Jeśli potrzebujesz pomocy podczas używania OsmAnd, prosimy o kontakt z naszym 
     <string name="rendering_value_bold_name">Gruby</string>
     <string name="access_no_destination">Nie ustalono położenia docelowego</string>
     <string name="access_disable_offroute_recalc">Utrzymywanie trasy po zboczeniu z niej</string>
-    <string name="access_disable_offroute_recalc_descr">Zapobiega zmianie wyznaczonej trasy po znacznym oddaleniu się od niej</string>
+    <string name="access_disable_offroute_recalc_descr">Zapobiega automatycznemu wyznaczaniu nowej trasy po znacznym oddaleniu się od niej</string>
     <string name="map_widget_magnetic_bearing">Orientacja magnetyczna</string>
     <string name="map_widget_bearing">Orientacja względna</string>
     <string name="access_disable_wrong_direction_recalc">Utrzymywanie trasy po obraniu niewłaściwego kierunku</string>
     <string name="use_osm_live_routing_description">Włącza nawigację dla bieżących aktualizacji mapy (beta)</string>
-	<string name="access_disable_wrong_direction_recalc_descr">Zapobiega zmianie wyznaczonej trasy podczas poruszania się w niewłaściwym kierunku</string>
+	<string name="access_disable_wrong_direction_recalc_descr">Zapobiega automatycznemu wyznaczaniu nowej trasy podczas poruszania się w niewłaściwym kierunku</string>
     <string name="map_widget_battery">Stan akumulatora</string>
     <string name="access_direction_audio_feedback_descr">Wskazuje kierunek do celu używając dźwięku</string>
     <string name="access_direction_audio_feedback">Dźwiękowe powiadomienia o kierunku</string>
@@ -2582,7 +2582,7 @@ Jeśli potrzebujesz pomocy podczas używania OsmAnd, prosimy o kontakt z naszym 
     <string name="give_permission">Zezwól</string>
     <string name="allow_access_location">Zezwól na dostęp do położenia</string>
     <string name="search_my_location">Wyszukaj aktualne położenie</string>
-    <string name="no_update_info_desc">Nie sprawdza aktualizacji dotyczących nowych wersji, rabatów związanych z OsmAnd</string>
+    <string name="no_update_info_desc">Nie sprawdza aktualizacji dotyczących nowych wersji i rabatów związanych z OsmAnd</string>
     <string name="no_update_info">Pomijanie aktualizacji</string>
     <string name="update_all_maps_now">Uaktualnić wszystkie mapy?</string>
     <string name="clear_tile_data">Wyczyść wszystkie kafelki</string>
@@ -2611,13 +2611,13 @@ Jeśli potrzebujesz pomocy podczas używania OsmAnd, prosimy o kontakt z naszym 
     <string name="rendering_attr_contourColorScheme_name">Zestaw kolorów poziomic</string>
     <string name="rendering_attr_surfaceIntegrity_name">Spójność nawierzchni dróg</string>
     <string name="christmas_poi">Bożonarodzeniowe miejsca</string>
-    <string name="save_track_min_speed_descr">Rejestruje położenie po osiągnięciu określonej prędkości ruchu</string>
+    <string name="save_track_min_speed_descr">Filtr: minimalna prędkość ruchu, aby zarejestrować punkt</string>
     <string name="rendering_attr_contourColorScheme_description">Zestaw kolorów poziomic</string>
     <string name="save_track_min_speed">Minimalna prędkość rejestrowania</string>
-    <string name="save_track_min_distance">Wykrywanie ruchu podczas rejestrowania</string>
-    <string name="save_track_min_distance_descr">Rejestruje położenie po oddaleniu na określoną odległość od ostatniego położenia</string>
+    <string name="save_track_min_distance">Filtr: minimalna zmiana położenia, aby zarejestrować punkt</string>
+    <string name="save_track_min_distance_descr">Filtr: ustaw minimalną odległość od poprzedniego punktu do rejestracji</string>
     <string name="save_track_precision">Minimalna dokładność rejestrowania</string>
-    <string name="save_track_precision_descr">Rejestruje położenie po osiągnięciu zadanej dokładności</string>
+    <string name="save_track_precision_descr">Filtr: rejestruje położenie po osiągnięciu zadanej dokładności</string>
     <string name="christmas_desc">Oczekując Świąt Bożego Narodzenia i Nowego Roku, możesz włączyć wyświetlanie użytecznych miejsc związanych ze Świętami: choinki, jarmarki, itp.</string>
     <string name="christmas_desc_q">Wyświetlać świąteczne miejsca?</string>
     <string name="shared_string_continue">Kontynuuj</string>
@@ -2657,7 +2657,7 @@ Jeśli potrzebujesz pomocy podczas używania OsmAnd, prosimy o kontakt z naszym 
     <string name="wiki_around">Artykuły Wikipedii w pobliżu</string>
     <string name="legacy_search">Przestarzała wyszukiwarka</string>
     <string name="show_legacy_search">Przestarzała wyszukiwarka</string>
-    <string name="show_legacy_search_desc">Aktywuje przestarzałą wyszukiwarkę w menu rozwijanym</string>
+    <string name="show_legacy_search_desc">Dodaje starą wyszukiwarkę do menu rozwijanego</string>
     <string name="routing_attr_allow_motorway_name">Uwzglednianie autostrad</string>
     <string name="routing_attr_allow_motorway_description">Zezwala na autostrady</string>
     <string name="lang_sr_latn">Serbski (łaciński)</string>
@@ -2947,4 +2947,8 @@ Reprezentuje obszar: %1$s x %2$s</string>
     <string name="mapillary_menu_edit_text_hint">Proszę wprowadzić nazwę użytkownika</string>
     <string name="mapillary_menu_filter_description">Można filtrować obrazy według nazwy użytkownika lub daty. Filtry mają zastosowanie dla większych przybliżeń.</string>
     <string name="mapillary_menu_descr_username">Wyświetla obrazy dodane przez określonego użytkownika.</string>
+    <string name="store_tracks_in_monthly_directories">Zapisz zarejestrowane ślady w miesięcznych katalogach</string>
+    <string name="store_tracks_in_monthly_directories_descrp">Zapisz zarejestrowane ślady w podfolderach na każdy rejestrowany miesiąc (np. 2017-01).</string>
+    <string name="shared_string_reset">Resetuj</string>
+    <string name="mapillary_menu_descr_tile_cache">Przeładuj kafelki, aby je uaktualnić.</string>
     </resources>
