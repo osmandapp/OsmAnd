@@ -2856,6 +2856,6 @@ Representa el área: %1$s x %2$s</string>
     <string name="mapillary_menu_descr_tile_cache">Recargar teselas para ver la información actualizada.</string>
     <string name="mapillary_menu_title_tile_cache">Caché de teselas</string>
     <string name="shared_string_reset">Restablecer</string>
-    <string name="store_tracks_in_monthly_directories">Guardar las trazas grabadas en directorios mensuales</string>
-    <string name="store_tracks_in_monthly_directories_descrp">Guarda las trazas grabadas en directorios, basados en el mes en que se grabó, por ejemplo 2017-01 para Enero de 2017.</string>
+    <string name="store_tracks_in_monthly_directories">Guardar las trazas grabadas en carpetas mensuales</string>
+    <string name="store_tracks_in_monthly_directories_descrp">Guarda las trazas grabadas en subcarpetas por mes de grabación (como 2017-01).</string>
     </resources>
