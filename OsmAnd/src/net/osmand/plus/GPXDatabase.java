@@ -266,6 +266,7 @@ public class GPXDatabase {
 		a.avgElevation = avgElevation;
 		a.minElevation = minElevation;
 		a.maxElevation = maxElevation;
+		a.minSpeed = maxSpeed;
 		a.maxSpeed = maxSpeed;
 		a.avgSpeed = avgSpeed;
 		a.points = points;
