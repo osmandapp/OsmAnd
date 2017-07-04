@@ -134,6 +134,7 @@ public class TrackSegmentFragment extends OsmAndListFragment {
 	private Paint paintIcon;
 	private Bitmap pointSmall;
 	private GpxDisplayItem generalDisplayItem;
+	private View splitIntervalView;
 
 	private ImageView imageView;
 	private RotatedTileBox rotatedTileBox;
@@ -293,7 +294,7 @@ public class TrackSegmentFragment extends OsmAndListFragment {
 		});
 		final View splitColorView = headerView.findViewById(R.id.split_color_view);
 		final View divider = headerView.findViewById(R.id.divider);
-		final View splitIntervalView = headerView.findViewById(R.id.split_interval_view);
+		splitIntervalView = headerView.findViewById(R.id.split_interval_view);
 		final View colorView = headerView.findViewById(R.id.color_view);
 		final SwitchCompat vis = (SwitchCompat) headerView.findViewById(R.id.showOnMapToggle);
 		final ProgressBar progressBar = (ProgressBar) headerView.findViewById(R.id.mapLoadProgress);
@@ -464,6 +465,11 @@ public class TrackSegmentFragment extends OsmAndListFragment {
 			splitColorView.setVisibility(View.GONE);
 			divider.setVisibility(View.GONE);
 		}
+	}
+
+	public void updateSplitView() {
+		prepareSplitIntervalAdapterData();
+		updateSplitIntervalView(splitIntervalView);
 	}
 
 	private void refreshTrackBitmap() {

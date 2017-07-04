@@ -228,7 +228,13 @@ public class TrackActivity extends TabActivity {
 			if (backStackEntriesCount > 0) {
 				FragmentManager.BackStackEntry backStackEntry = getSupportFragmentManager().getBackStackEntryAt(getSupportFragmentManager().getBackStackEntryCount() - 1);
 				if (backStackEntry.getName().equals("open_split_segments")) {
-					super.onBackPressed();
+					for (WeakReference<Fragment> f : fragList) {
+						Fragment frag = f.get();
+						if (frag instanceof TrackSegmentFragment) {
+							((TrackSegmentFragment) frag).updateSplitView();
+						}
+					}
+					getSupportFragmentManager().popBackStack();
 					return true;
 				}
 			}
@@ -244,6 +250,25 @@ public class TrackActivity extends TabActivity {
 
 		}
 		return false;
+	}
+
+	@Override
+	public void onBackPressed() {
+		int backStackEntriesCount = getSupportFragmentManager().getBackStackEntryCount();
+		if (backStackEntriesCount > 0) {
+			FragmentManager.BackStackEntry backStackEntry = getSupportFragmentManager().getBackStackEntryAt(getSupportFragmentManager().getBackStackEntryCount() - 1);
+			if (backStackEntry.getName().equals("open_split_segments")) {
+				for (WeakReference<Fragment> f : fragList) {
+					Fragment frag = f.get();
+					if (frag instanceof TrackSegmentFragment) {
+						((TrackSegmentFragment) frag).updateSplitView();
+					}
+				}
+				getSupportFragmentManager().popBackStack();
+				return;
+			}
+		}
+		super.onBackPressed();
 	}
 
 	boolean isHavingWayPoints(){
