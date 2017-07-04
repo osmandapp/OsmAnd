@@ -2545,7 +2545,7 @@ Si istimas OsmAnd e OSM e los boles suportare, custa est una manera perfeta pro 
     <string name="rendering_attr_contourColorScheme_description">Ischema de colores de sas lìnias de livellu</string>
     <string name="save_track_min_speed">Lestresa mìnima pro sa registratzione</string>
     <string name="save_track_min_speed_descr">Filtru: Issèbera sa lestresa mìnima pro registrare unu puntu</string>
-    <string name="save_track_min_distance">Rilevamentu de movimentu pro sa registratzione</string>
+    <string name="save_track_min_distance">Rilevamentu de movimentu mìnimu pro sa registratzione</string>
     <string name="save_track_min_distance_descr">Filtru: Issèbera sa distàntzia mìnima dae s\'ùrtima positzione pro registrare unu puntu</string>
     <string name="save_track_precision">Pretzisione mìnima de registratzione</string>
     <string name="save_track_precision_descr">Filtru: Issèbera sa pretzisione mìnima pro sa registratzione</string>
@@ -2876,4 +2876,6 @@ Pro praghere iscrie su còdighe intreu</string>
     <string name="shared_string_reset">Reimposta</string>
     <string name="store_tracks_in_monthly_directories">Sarva sas rastas registradas in cartellas diferentes pro cada mese</string>
     <string name="store_tracks_in_monthly_directories_descrp">Sarva sas rastas registradas in suta-cartellas diferentes pro mese de registratzione (es. 2017-01).</string>
+    <string name="of">%1$d de %2$d</string>
+    <string name="moving_time">Tempus in movimentu</string>
     </resources>
