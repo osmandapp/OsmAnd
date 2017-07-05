@@ -364,6 +364,22 @@ public class OsmandAidlApi {
 		}
 	}
 
+	boolean removeFavoriteGroup(AFavoriteGroup favoriteGroup) {
+		if (favoriteGroup != null) {
+			FavouritesDbHelper favoritesHelper = app.getFavorites();
+			List<FavouritesDbHelper.FavoriteGroup> groups = favoritesHelper.getFavoriteGroups();
+			for (FavouritesDbHelper.FavoriteGroup g : groups) {
+				if (g.name.equals(favoriteGroup.getName())) {
+					favoritesHelper.deleteGroup(g);
+					return true;
+				}
+			}
+			return false;
+		} else {
+			return false;
+		}
+	}
+
 	boolean addFavorite(AFavorite favorite) {
 		if (favorite != null) {
 			FavouritesDbHelper favoritesHelper = app.getFavorites();

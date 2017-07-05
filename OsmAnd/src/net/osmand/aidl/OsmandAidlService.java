@@ -10,6 +10,7 @@ import net.osmand.aidl.favorite.AddFavoriteParams;
 import net.osmand.aidl.favorite.RemoveFavoriteParams;
 import net.osmand.aidl.favorite.UpdateFavoriteParams;
 import net.osmand.aidl.favorite.group.AddFavoriteGroupParams;
+import net.osmand.aidl.favorite.group.RemoveFavoriteGroupParams;
 import net.osmand.aidl.gpx.ASelectedGpxFile;
 import net.osmand.aidl.gpx.HideGpxParams;
 import net.osmand.aidl.gpx.ImportGpxParams;
@@ -54,6 +55,15 @@ public class OsmandAidlService extends Service {
 		public boolean addFavoriteGroup(AddFavoriteGroupParams params) throws RemoteException {
 			try {
 				return params != null && getApi().addFavoriteGroup(params.getFavoriteGroup());
+			} catch (Exception e) {
+				return false;
+			}
+		}
+
+		@Override
+		public boolean removeFavoriteGroup(RemoveFavoriteGroupParams params) throws RemoteException {
+			try {
+				return params != null && getApi().removeFavoriteGroup(params.getFavoriteGroup());
 			} catch (Exception e) {
 				return false;
 			}
