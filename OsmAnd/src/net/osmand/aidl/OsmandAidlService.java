@@ -53,6 +53,15 @@ public class OsmandAidlService extends Service {
 	private final IOsmAndAidlInterface.Stub mBinder = new IOsmAndAidlInterface.Stub() {
 
 		@Override
+		public boolean refreshMap() throws RemoteException {
+			try {
+				return getApi().reloadMap();
+			} catch (Exception e) {
+				return false;
+			}
+		}
+
+		@Override
 		public boolean addFavoriteGroup(AddFavoriteGroupParams params) throws RemoteException {
 			try {
 				return params != null && getApi().addFavoriteGroup(params.getFavoriteGroup());

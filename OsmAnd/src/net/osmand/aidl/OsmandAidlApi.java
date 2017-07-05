@@ -350,6 +350,11 @@ public class OsmandAidlApi {
 		return control;
 	}
 
+	boolean reloadMap() {
+		refreshMap();
+		return true;
+	}
+
 	boolean addFavoriteGroup(AFavoriteGroup favoriteGroup) {
 		if (favoriteGroup != null) {
 			FavouritesDbHelper favoritesHelper = app.getFavorites();

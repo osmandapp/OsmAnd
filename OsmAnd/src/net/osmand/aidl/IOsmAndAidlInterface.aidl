@@ -41,6 +41,8 @@ import net.osmand.aidl.maplayer.UpdateMapLayerParams;
 
 interface IOsmAndAidlInterface {
 
+    boolean refreshMap();
+
     boolean addFavoriteGroup(in AddFavoriteGroupParams params);
     boolean removeFavoriteGroup(in RemoveFavoriteGroupParams params);
     boolean updateFavoriteGroup(in UpdateFavoriteGroupParams params);
