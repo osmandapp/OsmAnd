@@ -346,6 +346,7 @@ public class SplitSegmentFragment extends OsmAndListFragment {
             if (convertView == null) {
                 convertView = getMyActivity().getLayoutInflater().inflate(R.layout.gpx_split_segment_fragment, parent, false);
             }
+            convertView.setOnClickListener(null);
             TextView overviewTextView = (TextView) convertView.findViewById(R.id.overview_text);
             ImageView overviewImageView = (ImageView) convertView.findViewById(R.id.overview_image);
             if (position == 0) {
