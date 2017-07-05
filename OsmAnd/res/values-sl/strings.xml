@@ -169,7 +169,7 @@
     <string name="global_app_allocated_memory">Uporabljen pomnilnik</string>
     <string name="starting_point_too_far">- izhodišče je predaleč od najbližje ceste.</string>
     <string name="rendering_attr_noPolygons_description">Nastavi vse ploskve zemljevida kot prosojne</string>
-    <string name="rendering_attr_noPolygons_name">Ploskve</string>
+    <string name="rendering_attr_noPolygons_name">Izriši ploskve</string>
     <string name="rendering_attr_appMode_name">Način izrisa</string>
     <string name="rendering_attr_appMode_description">Prilagodi zemljevid za</string>
     <string name="rendering_attr_contourLines_name">Izriši izohipse</string>
@@ -647,11 +647,11 @@ Omogoča tudi dodajanje opomb v koledar za prikaz opomnikov ob daljših časih p
     <string name="osmand_service_descr">Osmand se zažene v ozadju, ko je zaslon izklopljen</string>
 
 
-    <string name="daynight_mode_auto">Glede na sončni vzhod in zahod</string>
-    <string name="daynight_mode_day">Dnevni</string>
-    <string name="daynight_mode_night">Nočni</string>
-    <string name="daynight_mode_sensor">Svetlobno tipalo</string>
-    <string name="daynight">Svetlobni učinek izrisa</string>
+    <string name="daynight_mode_auto">Preklopi ob sončnem vzhodu in zahodu</string>
+    <string name="daynight_mode_day">Svetli dnevni izris</string>
+    <string name="daynight_mode_night">Temni nočni izris</string>
+    <string name="daynight_mode_sensor">Upoštevaj svetlobno tipalo</string>
+    <string name="daynight">Možnosti izrisa</string>
     <string name="daynight_descr">Izberi način svetlobnega učinka za izris zemljevida (dnevni/nočni način)</string>
 
     <string name="download_files_not_enough_space">Ni dovolj razpoložljivega prostora za prejem %1$s MB (prosto: %2$s).</string>
@@ -956,7 +956,7 @@ Omogoča tudi dodajanje opomb v koledar za prikaz opomnikov ob daljših časih p
 
 
     <string name="monitoring_control_start">Beleženje GPX</string>
-    <string name="rendering_attr_noAdminboundaries_name">Meje</string>
+    <string name="rendering_attr_noAdminboundaries_name">Izriši upravne meje</string>
     <string name="rendering_attr_noAdminboundaries_description">Izbira onemogoči izris upravnih mej (na ravneh približanja od 5 do 9)</string>
 
 
@@ -1076,7 +1076,7 @@ Omogoča tudi dodajanje opomb v koledar za prikaz opomnikov ob daljših časih p
     <string name="gpx_file_name">Ime datoteke GPX</string>
     <string name="gpx_saved_sucessfully">Datoteka GPX uspešno shranjena v {0}</string>
     <string name="shared_string_do_not_show_again">Ne pokaži več</string>
-    <string name="distance_measurement_start_editing">Začni z določanjem razdalje</string>
+    <string name="distance_measurement_start_editing">Začni z merjenjem razdalje</string>
     <string name="distance_measurement_finish_editing">Končaj določanje razdalje</string>
     <string name="distance_measurement_clear_route">Počisti vse točke določanja razdalj</string>
 
@@ -1595,7 +1595,7 @@ Afganistan, Albanija, Alžirija, Andora, Angola, Angvila, Antigva in Barbuda, Ar
     <string name="sleep_mode_stop_dialog">Ali želite končati ozadnji način GPS?</string>
     <string name="map_preferred_locale_descr">Prednostno uporabljeni jezik oznak na zemljevidu (če jezik ni na voljo, so uporabljene angleške ali krajevne oznake)</string>
     <string name="map_preferred_locale">Jezik oznak na zemljevidu</string>
-    <string name="local_map_names">Krajevna imena</string>
+    <string name="local_map_names">Upoštevaj krajevna imena</string>
     <string name="lang_sw">Svahili</string>
     <string name="lang_he">Hebrejščina</string>
     <string name="forward">Naprej</string>
@@ -2112,7 +2112,7 @@ ZŠ (β) %2$s</string>
     <string name="confirm_download_roadmaps">Ali ste prepričani, da želite prejeti zemljevid le s podatki cest, čeprav je nameščen že polni zemljevid?</string>
     <string name="value_downloaded_of_max">%1$.1f od %2$.1f MB</string>
     <string name="file_size_in_mb">%.1f MB</string>
-    <string name="update_all">Posodobi vse (%1$s MB)</string>
+    <string name="update_all">Posodobi vse datoteke (%1$s MB)</string>
     <string name="free_downloads_used">Omejitev brezplačnih prejemov je dosežena.</string>
     <string name="free_downloads_used_description">Prikazuje število izvedenih brezplačnih prejemov</string>
     <string name="osm_edit_created_poi">Ustvarjena točka POI</string>
@@ -2149,7 +2149,7 @@ ZŠ (β) %2$s</string>
     <string name="contact_us">Stik z nami</string>
     <string name="world_map_download_descr">Osnovni svetovni zemljevid (zemljevid sveta pri oddaljenem pogledu) je zastarel, ali pa ni nameščen. Brez tega zemljevida prikaz ni popoln.</string>
     <string name="simulate_initial_startup_descr">Nastavi zastavico, ki določa prvi zagon programa, ostale nastavitve pa ostanejo nespremenjene.</string>
-    <string name="show_on_start_description">Možnost \'brez\' zažene v pogledu zemljevida</string>
+    <string name="show_on_start_description">Onemogočena možnost zažene program v pogledu zemljevida</string>
     <string name="enter_country_name">Vpis imena države</string>
 
 
@@ -2399,7 +2399,7 @@ Del prihodka se vrne skupnosti OSM in se izplačuje za vsako opravljeno dejavnos
     <string name="access_widget_expand">Razširi</string>
     <string name="access_shared_string_navigate_up">Vodi naprej</string>
     <string name="access_sort">Razvrsti</string>
-    <string name="map_mode">Način zemljevida</string>
+    <string name="map_mode">Dnevni/Nočni izris</string>
     <string name="number_of_gpx_files_selected_pattern">%s izbranih datotek GPX</string>
     <string name="osmand_plus_extended_description_4000_chars_v2">"
 Zemljevidi in navigacija OsmAnd - iskanje točk in preračunavanje poti v načinu brez povezave
@@ -2877,4 +2877,13 @@ Koda predstavlja območje: %1$s x %2$s</string>
     <string name="mapillary_menu_descr_username">Pogled sličic, ki jih je dodal določen uporabnik.</string>
     <string name="mapillary_menu_title_username">Uporabniško ime</string>
     <string name="mapillary_menu_filter_description">Slike je mogoče filtrirati po datumu in uporabniku. Filtri so dejavni le pri največjem približanju.</string>
+    <string name="store_tracks_in_monthly_directories">Shrani zabeležene sledi v mapah, razdeljenih po mesecih</string>
+    <string name="store_tracks_in_monthly_directories_descrp">Sledi so shranjene v podmape, poimenovane kot mesečni zapis datuma (na primer 2017-01).</string>
+    <string name="average">Povprečje</string>
+    <string name="of">%1$d od %2$d</string>
+    <string name="ascent_descent">Vzpon/Spust</string>
+    <string name="moving_time">Čas premikanja</string>
+    <string name="max_min">Največ/Najmanj</string>
+    <string name="range">Obseg</string>
+    <string name="osmand_extended_description_part2">Navigacija GPS • Izbirati je mogoče med načinom brez povezave (ni stroškov gostovanja v tujini)) oziroma z vzpostavljeno povezavo (hitrejše delovanje) • Glasovno vodenje od zavoja-do-zavoja na celotni poti (posneti ali sintetizirani glasovi) • Popravek poti se preračuna, kadar premikanje skrene z začrtane poti. • Natančnost vodenja je povečana z opozarjanje na pasove, imena ulic in pričakovan čas prihoda • Za preglednejši in varnejši prikaz se preklop med dnevnim in nočnim pogledom izvede samodejno • Izbrati je mogoče prikaz omejitev hitrosti in prikaz obvestil ob prekoračitvi • Približanje zemljevida se prilagaja hitrosti premikanja • Ciljne točke je mogoče iskati po naslovu, po vrsti (na primer parkirišče, restavracija, hotel, bencinska črpalka, muzej ...) ali pa z vpisom koordinatnega naslova • Podpira vpis vmesnih točk na poti • Omogočeno je beleženje sledi in shranjevanje v zapis GPX</string>
     </resources>

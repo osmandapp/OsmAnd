@@ -1227,7 +1227,7 @@
     <string name="shared_string_pause">暂停</string>
     <string name="gpx_logging_no_data">无数据</string>
     <string name="save_track_min_speed">最低记录速度</string>
-    <string name="save_track_min_speed_descr">设置记录点的最低速度</string>
+    <string name="save_track_min_speed_descr">过滤器：设置记录点的最低速度</string>
     <string name="osmo_share_location">分享</string>
     <string name="osmo_pause_location">暂停</string>
     <string name="shared_string_notifications">通知</string>
@@ -1576,7 +1576,7 @@
     <string name="rendering_attr_hideWaterPolygons_name">隐藏水</string>
     <string name="legacy_search">旧版搜索</string>
     <string name="show_legacy_search">显示旧版搜索</string>
-    <string name="show_legacy_search_desc">在拖曳清单中启用旧版搜索</string>
+    <string name="show_legacy_search_desc">在抽屉列表中添加旧版搜索</string>
     <string name="routing_attr_allow_motorway_name">允许进入机动车路</string>
     <string name="routing_attr_allow_motorway_description">允许机动车路</string>
     <string name="route_roundabout_short">利用 %1$d 退出并离开</string>
@@ -1590,7 +1590,7 @@
     <string name="save_track_min_distance">记录运动检测</string>
     <string name="save_track_min_distance_descr">从最后位置的一个点设置最短距离用以记录</string>
     <string name="save_track_precision">记录最小的精确度</string>
-    <string name="save_track_precision_descr">设置用来记录的最小精度点</string>
+    <string name="save_track_precision_descr">过滤器：设置用来记录的最小精度点</string>
     <string name="christmas_desc">预知圣诞节和新年假期，您可以选择显示与圣诞节关联的 POI：圣诞树、市场等等。</string>
     <string name="rendering_attr_contourColorScheme_name">等高线的颜色调配</string>
     <string name="rendering_attr_surfaceIntegrity_name">道路表面完整性</string>
@@ -2623,4 +2623,11 @@
     <string name="mapillary_menu_filter_description">您可以根据用户名或日期过滤图像。</string>
     <string name="shared_string_reload">重新载入</string>
     <string name="shared_string_reset">重置</string>
+    <string name="store_tracks_in_monthly_directories">按月将记录的轨迹存放在文件夹中</string>
+    <string name="store_tracks_in_monthly_directories_descrp">按照月份将记录的轨迹存储在子文件夹中（例如 2017-01）。</string>
+    <string name="mapillary_menu_descr_tile_cache">重新加载区片以查看最新的数据。</string>
+    <string name="mapillary_menu_title_tile_cache">区片缓存</string>
+    <string name="average">平均</string>
+    <string name="ascent_descent">升序/降序</string>
+    <string name="max_min">最大/最小</string>
     </resources>

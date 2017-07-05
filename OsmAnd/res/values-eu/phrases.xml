@@ -1078,7 +1078,7 @@
 	<string name="poi_hostel">Hostatua</string>
 	<string name="poi_chalet">Txaleta</string>
 	<string name="poi_alpine_hut">Mendi-aterpea</string>
-	<string name="poi_apartment">Etxebizitza</string>
+	<string name="poi_apartment">Apartamentua</string>
 	<string name="poi_wilderness_hut">Borda</string>
 	<string name="poi_cabin">Etxola</string>
 	<string name="poi_hunting_lodge">Ehiztari-aterpea</string>
@@ -2169,4 +2169,9 @@
 	<string name="poi_elevator_yes">Igogailuarekin</string>
 	<string name="poi_elevator_no">Igogailu gabe</string>
 
-	</resources>
+	<string name="poi_cafeteria">Kafetegia</string>
+	<string name="poi_zoo_type">Mota</string>
+	<string name="poi_motorcycle_services">Zerbitzuak</string>
+	<string name="poi_motorcycle_type">Motor mota</string>
+
+</resources>
