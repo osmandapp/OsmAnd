@@ -6,6 +6,7 @@ import net.osmand.aidl.map.SetMapLocationParams;
 import net.osmand.aidl.favorite.group.AFavoriteGroup;
 import net.osmand.aidl.favorite.group.AddFavoriteGroupParams;
 import net.osmand.aidl.favorite.group.RemoveFavoriteGroupParams;
+import net.osmand.aidl.favorite.group.UpdateFavoriteGroupParams;
 
 import net.osmand.aidl.favorite.AFavorite;
 import net.osmand.aidl.favorite.AddFavoriteParams;
@@ -42,6 +43,7 @@ interface IOsmAndAidlInterface {
 
     boolean addFavoriteGroup(in AddFavoriteGroupParams params);
     boolean removeFavoriteGroup(in RemoveFavoriteGroupParams params);
+    boolean updateFavoriteGroup(in UpdateFavoriteGroupParams params);
 
     boolean addFavorite(in AddFavoriteParams params);
     boolean removeFavorite(in RemoveFavoriteParams params);

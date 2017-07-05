@@ -380,6 +380,26 @@ public class OsmandAidlApi {
 		}
 	}
 
+	boolean updateFavoriteGroup(AFavoriteGroup gPrev, AFavoriteGroup gNew) {
+		if (gPrev != null && gNew != null) {
+			FavouritesDbHelper favoritesHelper = app.getFavorites();
+			List<FavouritesDbHelper.FavoriteGroup> groups = favoritesHelper.getFavoriteGroups();
+			for (FavouritesDbHelper.FavoriteGroup g : groups) {
+				if (g.name.equals(gPrev.getName())) {
+					int color = 0;
+					if (!Algorithms.isEmpty(gNew.getColor())) {
+						color = ColorDialogs.getColorByTag(gNew.getColor());
+					}
+					favoritesHelper.editFavouriteGroup(g, gNew.getName(), color, gNew.isVisible());
+					return true;
+				}
+			}
+			return false;
+		} else {
+			return false;
+		}
+	}
+
 	boolean addFavorite(AFavorite favorite) {
 		if (favorite != null) {
 			FavouritesDbHelper favoritesHelper = app.getFavorites();
