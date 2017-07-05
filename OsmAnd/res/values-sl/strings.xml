@@ -131,7 +131,7 @@
     <string name="left_side_navigation">Promet po levi strani</string>
     <string name="left_side_navigation_descr">Možnost izberite za države, kjer se vozi po levi strani ceste</string>
     <string name="unknown_from_location">Izhodiščna točka še ni določena</string>
-    <string name="unknown_location">Trenutno mesto še ni določeno</string>
+    <string name="unknown_location">Trenutno mesto še ni določeno!</string>
     <string name="modify_transparency">Spremeni prosojnost (0 - prosojno, 255 - neprosojno)</string>
     <string name="confirm_interrupt_download">Ali želite prekiniti prejemanje datoteke?</string>
     <string name="basemap_was_selected_to_download">Za pravilno delovanje programa mora biti nameščen osnovni zemljevid sveta. Paket je izbran in pripravljen za prejem.</string>
@@ -1550,7 +1550,7 @@ Afganistan, Albanija, Alžirija, Andora, Angola, Angvila, Antigva in Barbuda, Ar
     <string name="layer_amenity_label">Izpiši oznake točk</string>
     <string name="gpx_wpt">Vmesna točka</string>
     <string name="selected_gpx_info_show">\n\nPritisnite in zadržite za prikaz na zemljevidu</string>
-    <string name="delay_navigation_start">Samodejno začni vodenje od zavoja do zavoja (turn-by-turn)</string>
+    <string name="delay_navigation_start">Samodejno začni vodenje od zavoja do zavoja</string>
     <string name="gpx_info_subtracks">Podsledi: %1$s</string>
     <string name="gpx_info_waypoints">Vmesne točke: %1$s</string>
     <string name="gpx_info_diff_altitude">Višinski razpon: %1$s</string>
@@ -1869,7 +1869,7 @@ ZŠ (β) %2$s</string>
     <string name="shared_string_is_open">Odpri</string>
     <string name="shared_string_message">Sporočilo</string>
     <string name="welcome_header">Dobrodošli</string>
-    <string name="shared_string_go">Začni -&gt;</string>
+    <string name="shared_string_go">Začni ↝</string>
     <string name="osmand_parking_overdue">prekoračen čas</string>
     <string name="shared_string_places">Kraji</string>
     <string name="watch">Poglej</string>
@@ -1952,7 +1952,7 @@ ZŠ (β) %2$s</string>
     <string name="download_wikipedia_maps">Wikipedija</string>
     <string name="shared_string_import2osmand">Uvozi v OsmAnd</string>
     <string name="local_recordings_delete_all_confirm">Ali res želite izbrisati opombe (%1$d))?</string>
-    <string name="gps_network_not_enabled">Storitev določanja trenutnega mesta ne deluje. Ali jo želite zagnati?</string>
+    <string name="gps_network_not_enabled">Storitev določanja trenutnega mesta ni omogočena. Ali jo želite zagnati?</string>
     <string name="disable_recording_once_app_killed">Prepreči samostojno beleženje</string>
     <string name="disable_recording_once_app_killed_descrp">Možnost onemogoči beleženje GPX, ko program ni dejaven (preko nedavnih programov). To je možnost delovanja v ozadju, katere indikator se ne pojavi v obvestilni vrstici.</string>
     <string name="download_wikipedia_files">Ali želite prejeti dodatne podatke iz Wikipedije (%1$s MB) ?</string>
