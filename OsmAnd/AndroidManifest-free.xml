@@ -6,7 +6,10 @@
         android:icon="@mipmap/icon_free"
 		android:label="@string/app_name_free"
         tools:replace="android:icon, android:label">
-
+        <activity
+            android:name="net.osmand.plus.activities.MapActivity"
+            android:theme="SplashScreenFree"
+            tools:replace="android:theme"/>
         <service
             android:name="net.osmand.plus.NavigationService"
             tools:replace="android:process"
