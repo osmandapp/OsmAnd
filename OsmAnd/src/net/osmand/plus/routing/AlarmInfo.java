@@ -128,6 +128,9 @@ public class AlarmInfo implements LocationPoint {
 		if (type == AlarmInfoType.SPEED_CAMERA && (time < 15 || distance < 150)) {
 			return type.getPriority();
 		}
+		if (type == AlarmInfoType.TOLL_BOOTH && (time < 30 || distance < 500)) {
+			return type.getPriority();
+		}
 		// 2nd level
 		if (time < 7 || distance < 100) {
 			return type.getPriority() + AlarmInfoType.MAXIMUM.getPriority();
