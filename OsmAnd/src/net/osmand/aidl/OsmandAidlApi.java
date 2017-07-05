@@ -358,6 +358,12 @@ public class OsmandAidlApi {
 	boolean addFavoriteGroup(AFavoriteGroup favoriteGroup) {
 		if (favoriteGroup != null) {
 			FavouritesDbHelper favoritesHelper = app.getFavorites();
+			List<FavouritesDbHelper.FavoriteGroup> groups = favoritesHelper.getFavoriteGroups();
+			for (FavouritesDbHelper.FavoriteGroup g : groups) {
+				if (g.name.equals(favoriteGroup.getName())) {
+					return false;
+				}
+			}
 			int color = 0;
 			if (!Algorithms.isEmpty(favoriteGroup.getColor())) {
 				color = ColorDialogs.getColorByTag(favoriteGroup.getColor());
