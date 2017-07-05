@@ -10,6 +10,7 @@ import android.view.View;
 
 import net.osmand.IndexConstants;
 import net.osmand.aidl.favorite.AFavorite;
+import net.osmand.aidl.favorite.group.AFavoriteGroup;
 import net.osmand.aidl.gpx.ASelectedGpxFile;
 import net.osmand.aidl.maplayer.AMapLayer;
 import net.osmand.aidl.maplayer.point.AMapPoint;
@@ -347,6 +348,20 @@ public class OsmandAidlApi {
 			}
 		});
 		return control;
+	}
+
+	boolean addFavoriteGroup(AFavoriteGroup favoriteGroup) {
+		if (favoriteGroup != null) {
+			FavouritesDbHelper favoritesHelper = app.getFavorites();
+			int color = 0;
+			if (!Algorithms.isEmpty(favoriteGroup.getColor())) {
+				color = ColorDialogs.getColorByTag(favoriteGroup.getColor());
+			}
+			favoritesHelper.addEmptyCategory(favoriteGroup.getName(), color, favoriteGroup.isVisible());
+			return true;
+		} else {
+			return false;
+		}
 	}
 
 	boolean addFavorite(AFavorite favorite) {
