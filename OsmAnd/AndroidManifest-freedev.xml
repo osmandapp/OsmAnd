@@ -5,6 +5,10 @@
     <application
         android:icon="@mipmap/icon_nightly"
         tools:replace="android:icon">
+        <activity
+            android:name="net.osmand.plus.activities.MapActivity"
+            android:theme="SplashScreenFreeDev"
+            tools:replace="android:theme"/>
         <service
             android:name="net.osmand.plus.NavigationService"
             android:process="net.osmand.dev"
