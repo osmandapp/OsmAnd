@@ -1,19 +1,22 @@
 package net.osmand.plus.myplaces;
 
+import android.animation.Animator;
+import android.animation.AnimatorListenerAdapter;
 import android.content.res.ColorStateList;
 import android.os.AsyncTask;
 import android.os.Bundle;
 import android.support.annotation.NonNull;
 import android.support.annotation.Nullable;
 import android.support.v7.widget.ListPopupWindow;
+import android.util.Log;
 import android.view.Gravity;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.AbsListView;
 import android.widget.AdapterView;
 import android.widget.ArrayAdapter;
 import android.widget.ImageView;
-import android.widget.LinearLayout;
 import android.widget.ListView;
 import android.widget.TextView;
 
@@ -82,22 +85,96 @@ public class SplitSegmentFragment extends OsmAndListFragment {
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
         setHasOptionsMenu(true);
-        View view = getActivity().getLayoutInflater().inflate(R.layout.update_index, container, false);
-        view.findViewById(R.id.header_layout).setVisibility(View.GONE);
+        final View view = getActivity().getLayoutInflater().inflate(R.layout.split_segments_layout, container, false);
 
         ListView listView = (ListView) view.findViewById(android.R.id.list);
         listView.setDivider(null);
         listView.setDividerHeight(0);
 
         adapter = new SplitSegmentsAdapter(new ArrayList<GpxDisplayItem>());
-        headerView = getActivity().getLayoutInflater().inflate(R.layout.gpx_split_segments_header, null, false);
+        headerView = view.findViewById(R.id.header_layout);
         ((ImageView) headerView.findViewById(R.id.header_split_image)).setImageDrawable(ic.getIcon(R.drawable.ic_action_split_interval, app.getSettings().isLightContent() ? R.color.icon_color : 0));
 
-        listView.addHeaderView(headerView);
+        listView.addHeaderView(getActivity().getLayoutInflater().inflate(R.layout.gpx_split_segments_empty_header, null, false));
         listView.addFooterView(getActivity().getLayoutInflater().inflate(R.layout.list_shadow_footer, null, false));
         updateHeader();
+        updateContent();
 
         setListAdapter(adapter);
+
+        listView.setOnScrollListener(new AbsListView.OnScrollListener() {
+
+            int initialYPos;
+            boolean changed;
+            int visibility = View.VISIBLE;
+
+            @Override
+            public void onScrollStateChanged(AbsListView absListView, int i) {
+                initialYPos = -1;
+                changed = false;
+            }
+
+            @Override
+            public void onScroll(AbsListView absListView, int i, int i1, int i2) {
+                View c = absListView.getChildAt(0);
+                if (c != null) {
+                    int currentYPos = -c.getTop() + absListView.getFirstVisiblePosition() * c.getHeight();
+                    if (initialYPos == -1) {
+                        initialYPos = currentYPos;
+                    }
+
+                    if (currentYPos < headerView.getHeight() && visibility == View.GONE) {
+                        changed = false;
+                        initialYPos = currentYPos;
+                    }
+
+                    if (currentYPos < initialYPos && !changed && visibility == View.GONE) {
+                        if (currentYPos < headerView.getHeight()) {
+                            headerView.setTranslationY(currentYPos - headerView.getHeight());
+                        } else {
+                            headerView.animate().translationY(0);
+                            visibility = View.VISIBLE;
+                            changed = true;
+                        }
+                    } else if (currentYPos > initialYPos && !changed && visibility == View.VISIBLE) {
+                        if (currentYPos < headerView.getHeight()) {
+                            headerView.setTranslationY(-currentYPos);
+                        } else {
+                            headerView.animate().translationY(-headerView.getHeight());
+                            visibility = View.GONE;
+                            changed = true;
+                        }
+                    }
+
+                    Log.d("onScroll", "currentYpos: " + currentYPos);
+                    Log.d("onScroll", "visibility: " + visibility);
+                    Log.d("onScroll", "headerView.getHeight(): " + headerView.getHeight());
+                    Log.d("onScroll", "headerView.getTranslationY(): " + headerView.getTranslationY());
+//                    if (headerView.getHeight() != 0) {
+//                        if (visibility == View.VISIBLE) {
+//                            if (currentYPos < headerView.getHeight()) {
+//                                headerView.setTranslationY(-currentYPos);
+//                            } else if (!changed) {
+//                                headerView.animate().translationY(-headerView.getHeight());
+//                                visibility = View.GONE;
+//                                changed = true;
+//                            }
+//                        }
+//
+//                        if (visibility == View.GONE) {
+//                            if (currentYPos < headerView.getHeight()) {
+//                                headerView.setTranslationY(currentYPos - headerView.getHeight());
+//                            } else if (!changed) {
+//                                headerView.animate().translationY(0);
+//                                visibility = View.VISIBLE;
+//                                changed = true;
+//                            }
+//                        }
+//                    }
+                }
+            }
+        });
+
         return view;
     }
 
@@ -143,12 +220,6 @@ public class SplitSegmentFragment extends OsmAndListFragment {
         } else {
             splitIntervalView.setVisibility(View.GONE);
         }
-    }
-
-    @Override
-    public void onResume() {
-        super.onResume();
-        updateContent();
     }
 
     public void updateContent() {

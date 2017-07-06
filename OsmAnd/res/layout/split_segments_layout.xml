@@ -1,0 +1,86 @@
+<?xml version="1.0" encoding="utf-8"?>
+<FrameLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    xmlns:tools="http://schemas.android.com/tools"
+    xmlns:osmand="http://schemas.android.com/apk/res-auto"
+    android:orientation="vertical">
+
+    <ListView
+        android:id="@android:id/list"
+        android:layout_width="fill_parent"
+        android:layout_height="match_parent"
+        android:layout_marginLeft="0dp"
+        android:layout_marginRight="0dp"
+        android:layout_marginTop="0dp"/>
+
+    <LinearLayout
+        android:id="@+id/header_layout"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:orientation="vertical">
+
+        <LinearLayout
+            android:orientation="horizontal"
+            android:layout_width="match_parent"
+            android:layout_height="48dp"
+            android:background="?attr/bg_color"
+            android:paddingLeft="16dp"
+            android:paddingRight="16dp">
+
+            <ImageView
+                android:id="@+id/header_split_image"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_gravity="center_vertical"
+                tools:src="@drawable/ic_action_split_interval"
+                android:layout_marginBottom="12dp"
+                android:layout_marginTop="12dp"
+                android:layout_marginRight="16dp"/>
+
+            <LinearLayout
+                android:id="@+id/split_interval_view"
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:background="?attr/selectableItemBackground">
+
+                <net.osmand.plus.widgets.TextViewEx
+                    android:id="@+id/split_interval_title"
+                    android:background="@null"
+                    android:layout_gravity="center_vertical"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:textColor="?android:attr/textColorPrimary"
+                    osmand:typeface="@string/font_roboto_medium"
+                    android:textSize="@dimen/default_desc_text_size"
+                    android:text="Split interval:"/>
+
+                <net.osmand.plus.widgets.TextViewEx
+                    android:id="@+id/split_interval_text"
+                    android:background="@null"
+                    android:layout_gravity="center_vertical"
+                    android:gravity="right"
+                    android:layout_width="0dp"
+                    android:layout_weight="1"
+                    android:layout_height="wrap_content"
+                    android:textColor="?android:attr/textColorPrimary"
+                    osmand:typeface="@string/font_roboto_medium"
+                    android:textSize="@dimen/default_desc_text_size"
+                    tools:text="10 km"/>
+
+                <ImageView
+                    android:id="@+id/split_interval_arrow"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_gravity="center_vertical"
+                    android:src="@drawable/ic_action_arrow_drop_down"/>
+
+            </LinearLayout>
+
+        </LinearLayout>
+
+        <include layout="@layout/card_bottom_divider"/>
+
+    </LinearLayout>
+
+</FrameLayout>
