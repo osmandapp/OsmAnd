@@ -496,7 +496,7 @@
   <string name="poi_context_menu_delete">Вилучити POI</string>
   <string name="rotate_map_compass_opt">За напрямком компаса</string>
   <string name="rotate_map_bearing_opt">За напрямком руху</string>
-  <string name="rotate_map_none_opt">Не повертати</string>
+  <string name="rotate_map_none_opt">Не повертати (північ вгорі)</string>
   <string name="rotate_map_to_bearing_descr">Виберіть спосіб повороту мапи</string>
   <string name="rotate_map_to_bearing">Орієнтація мапи</string>
   <string name="show_route">Деталі маршруту</string>
@@ -2035,7 +2035,7 @@ OsmAnd має відкриті сирці і активно розвиваєть
 	<string name="routing_attr_height_name">Обмеження висоти</string>
 	<string name="routing_attr_height_description">Вкажіть висоту автівки, щоб враховувати її під час прокладання маршрутів</string>
     <string name="use_fast_recalculation">Інтелектуальне переобчислення маршруту</string>
-	<string name="use_fast_recalculation_desc">Переобчислення тільки початкової частини маршруту для тривалих поїздок</string>
+	<string name="use_fast_recalculation_desc">Для довгих подорожей перераховувати лише початкову частину маршруту</string>
 <string name="light_theme">Світла</string>
     <string name="dark_theme">Темна</string>
     <string name="lang_pms">П’ємонтський</string>
@@ -2286,7 +2286,8 @@ OsmAnd має відкриті сирці і активно розвиваєть
 <string name="access_from_map_description">Кнопка меню запускає домашню сторінку, не меню</string>
     <string name="access_from_map">Доступ з мапи</string>
     <string name="simulate_initial_startup_descr">Встановлює прапорець першого запуску додатку, не змінює інші налаштування</string>
-    <string name="simulate_your_location_descr">Моделювати за допомогою розрахованого маршруту чи записаного треку GPX</string>
+    <string name="simulate_your_location_descr">Моделювати за допомогою розрахованого маршруту чи записаного треку GPX
+\nМоделювати моє розташування, використовуючи розрахований маршрут або записаний GPX-трек</string>
     <string name="user_hates_app_get_feedback_long">Будь ласка, розкажіть, що ви бажали б змінити в додатку.</string>
     <string name="opening_at">Відкриття о</string>
     <string name="closing_at">Закриття о</string>
@@ -2468,10 +2469,10 @@ Facebook: https://www.facebook.com/osmandapp
     <string name="access_no_destination">Пункт призначення не встановлено</string>
     <string name="map_widget_magnetic_bearing">Магнітний пеленг</string>
     <string name="map_widget_bearing">Курсовий кут</string>
-    <string name="access_disable_offroute_recalc">Не змінювати маршрут при сході зі шляху</string>
-    <string name="access_disable_offroute_recalc_descr">Запобігає автоматичному перерахунку маршруту під час значнного віддалення від заданого шляху</string>
-    <string name="access_disable_wrong_direction_recalc">Не змінювати маршрут при помилковому напрямку</string>
-    <string name="access_disable_wrong_direction_recalc_descr">Забороняє автоматичний перерахунок маршруту, коли ви рухаєтеся в неправильному напрямку</string>
+    <string name="access_disable_offroute_recalc">Не перераховувати маршрут при сході з нього</string>
+    <string name="access_disable_offroute_recalc_descr">Запобігає автоматичному перерахунку маршруту після відхиленні від нього</string>
+    <string name="access_disable_wrong_direction_recalc">Не перераховувати маршрут для протилежного напрямку</string>
+    <string name="access_disable_wrong_direction_recalc_descr">Запобігає автоматичному перерахунку маршруту, коли Ви рухаєтеся в протилежному напрямку</string>
     <string name="access_smart_autoannounce">Інтелектуальне оповіщення</string>
     <string name="access_smart_autoannounce_descr">Сповіщати тільки якщо напрямок до цільової точки змінюється</string>
     <string name="access_autoannounce_period">Період сповіщеннь</string>
@@ -2564,7 +2565,7 @@ Facebook: https://www.facebook.com/osmandapp
     <string name="rendering_attr_hideWaterPolygons_name">Приховати воду</string>
     <string name="legacy_search">Старий пошук</string>
     <string name="show_legacy_search">Показувати старий пошук</string>
-    <string name="show_legacy_search_desc">Дозволити старий пошук в меню</string>
+    <string name="show_legacy_search_desc">Додати старий пошук в меню</string>
     <string name="routing_attr_allow_motorway_name">Дозволити автомагістралі</string>
     <string name="routing_attr_allow_motorway_description">Дозволити автомагістралі</string>
     <string name="wiki_around">Статті Вікіпедії поруч</string>
@@ -2853,7 +2854,7 @@ Facebook: https://www.facebook.com/osmandapp
     <string name="routing_attr_driving_style_safety_name">Безпечний</string>
     <string name="routing_attr_driving_style_speed_name">Швидкісний</string>
     <string name="animate_my_location">Анімувати моє місце розташування</string>
-    <string name="animate_my_location_desc">Задіяти анімацію моєї позиції під час навігації</string>
+    <string name="animate_my_location_desc">Задіяти анімацію мого місця розташування під час навігації</string>
     <string name="do_not_show_startup_messages">Не показувати повідомлення при запуску</string>
     <string name="subscribe_email_desc">Підпишіться на наше email-розсилання про знижки на OsmAnd та отримаєте 3 додаткові завантаження мап!</string>
     <string name="do_not_show_startup_messages_desc">Відображаються знижки та спеціальні повідомлення про місцеві події</string>
@@ -3108,4 +3109,12 @@ Facebook: https://www.facebook.com/osmandapp
     <string name="mapillary_menu_title_username">Ім\'я користувача</string>
     <string name="mapillary_menu_filter_description">Ви можете відфільтрувати зображення за подавачем чи за датою. Фільтри застосовуються лише для масштабування крупним планом.</string>
     <string name="shared_string_reset">Скинути</string>
+    <string name="store_tracks_in_monthly_directories">Зберігати записані треки у помісячних теках</string>
+    <string name="store_tracks_in_monthly_directories_descrp">Зберігати записані треки в підтеках за місяць запису (наприклад, 2017-01).</string>
+    <string name="average">Середнє</string>
+    <string name="of">%1$d зі %2$d</string>
+    <string name="ascent_descent">Підйом/спуск</string>
+    <string name="moving_time">Час руху</string>
+    <string name="max_min">Макс./мін.</string>
+    <string name="range">Діапазон</string>
     </resources>
