@@ -2909,7 +2909,7 @@
 	<string name="poi_fire_hydrant_count">Brandhaneantal</string>
 	<string name="poi_fire_hydrant_flow_capacity">Brandhaneflowkapacitet</string>
 	<string name="poi_fire_hydrant_position_sidewalk">Fortov</string>
-	<string name="poi_fire_hydrant_position_green">Græsplæne</string>
+	<string name="poi_fire_hydrant_position_green">Græs</string>
 	<string name="poi_fire_hydrant_position_lane">Vognbane</string>
 	<string name="poi_fire_hydrant_position_parking_lot">Parkeringsplads</string>
 	<string name="poi_fire_hydrant_position_street">Gaden</string>
