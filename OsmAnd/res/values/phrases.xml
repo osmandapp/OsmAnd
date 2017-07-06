@@ -1070,6 +1070,7 @@
 	<string name="poi_seamark_light_float">Float light, seamark</string>
 	<string name="poi_seamark_light_vessel">Vessel light, seamark</string>
 	<string name="poi_mooring">Mooring</string>
+	<string name="poi_lock_basin">Lock basin</string>
 	<string name="poi_notice">Notice, seamark</string>
 	<string name="poi_pile">Pile</string>
 	<string name="poi_radar_transponder">Radar transponder, seamark</string>
