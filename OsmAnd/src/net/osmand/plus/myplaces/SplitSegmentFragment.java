@@ -11,6 +11,7 @@ import android.support.v7.widget.ListPopupWindow;
 import android.util.Log;
 import android.view.Gravity;
 import android.view.LayoutInflater;
+import android.view.MotionEvent;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.AbsListView;
@@ -60,6 +61,7 @@ public class SplitSegmentFragment extends OsmAndListFragment {
     private TIntArrayList timeSplit = new TIntArrayList();
     private int selectedSplitInterval;
     private IconsCache ic;
+    private float listViewYPos;
 
     @Override
     public void onCreate(@Nullable Bundle savedInstanceState) {
@@ -87,7 +89,7 @@ public class SplitSegmentFragment extends OsmAndListFragment {
         setHasOptionsMenu(true);
         final View view = getActivity().getLayoutInflater().inflate(R.layout.split_segments_layout, container, false);
 
-        ListView listView = (ListView) view.findViewById(android.R.id.list);
+        final ListView listView = (ListView) view.findViewById(android.R.id.list);
         listView.setDivider(null);
         listView.setDividerHeight(0);
 
@@ -123,33 +125,38 @@ public class SplitSegmentFragment extends OsmAndListFragment {
                         initialYPos = currentYPos;
                     }
 
-                    if (currentYPos < headerView.getHeight() && visibility == View.GONE) {
+                    if (currentYPos < headerView.getHeight() && changed && visibility == View.GONE) {
                         changed = false;
                         initialYPos = currentYPos;
                     }
 
+
                     if (currentYPos < initialYPos && !changed && visibility == View.GONE) {
-                        if (currentYPos < headerView.getHeight()) {
-                            headerView.setTranslationY(currentYPos - headerView.getHeight());
+                        if (currentYPos <= headerView.getHeight()) {
+                            headerView.clearAnimation();
+                            headerView.setTranslationY(-currentYPos);
                         } else {
+                            headerView.clearAnimation();
                             headerView.animate().translationY(0);
                             visibility = View.VISIBLE;
                             changed = true;
                         }
                     } else if (currentYPos > initialYPos && !changed && visibility == View.VISIBLE) {
-                        if (currentYPos < headerView.getHeight()) {
+                        if (currentYPos <= headerView.getHeight()) {
+                            headerView.clearAnimation();
                             headerView.setTranslationY(-currentYPos);
                         } else {
+                            headerView.clearAnimation();
                             headerView.animate().translationY(-headerView.getHeight());
                             visibility = View.GONE;
                             changed = true;
                         }
                     }
 
-                    Log.d("onScroll", "currentYpos: " + currentYPos);
-                    Log.d("onScroll", "visibility: " + visibility);
-                    Log.d("onScroll", "headerView.getHeight(): " + headerView.getHeight());
-                    Log.d("onScroll", "headerView.getTranslationY(): " + headerView.getTranslationY());
+//                    Log.d("onScroll", "currentYpos: " + currentYPos);
+//                    Log.d("onScroll", "visibility: " + visibility);
+//                    Log.d("onScroll", "headerView.getHeight(): " + headerView.getHeight());
+//                    Log.d("onScroll", "headerView.getTranslationY(): " + headerView.getTranslationY());
 //                    if (headerView.getHeight() != 0) {
 //                        if (visibility == View.VISIBLE) {
 //                            if (currentYPos < headerView.getHeight()) {
