@@ -10,6 +10,7 @@ import android.view.View;
 
 import net.osmand.IndexConstants;
 import net.osmand.aidl.favorite.AFavorite;
+import net.osmand.aidl.favorite.group.AFavoriteGroup;
 import net.osmand.aidl.gpx.ASelectedGpxFile;
 import net.osmand.aidl.maplayer.AMapLayer;
 import net.osmand.aidl.maplayer.point.AMapPoint;
@@ -347,6 +348,67 @@ public class OsmandAidlApi {
 			}
 		});
 		return control;
+	}
+
+	boolean reloadMap() {
+		refreshMap();
+		return true;
+	}
+
+	boolean addFavoriteGroup(AFavoriteGroup favoriteGroup) {
+		if (favoriteGroup != null) {
+			FavouritesDbHelper favoritesHelper = app.getFavorites();
+			List<FavouritesDbHelper.FavoriteGroup> groups = favoritesHelper.getFavoriteGroups();
+			for (FavouritesDbHelper.FavoriteGroup g : groups) {
+				if (g.name.equals(favoriteGroup.getName())) {
+					return false;
+				}
+			}
+			int color = 0;
+			if (!Algorithms.isEmpty(favoriteGroup.getColor())) {
+				color = ColorDialogs.getColorByTag(favoriteGroup.getColor());
+			}
+			favoritesHelper.addEmptyCategory(favoriteGroup.getName(), color, favoriteGroup.isVisible());
+			return true;
+		} else {
+			return false;
+		}
+	}
+
+	boolean removeFavoriteGroup(AFavoriteGroup favoriteGroup) {
+		if (favoriteGroup != null) {
+			FavouritesDbHelper favoritesHelper = app.getFavorites();
+			List<FavouritesDbHelper.FavoriteGroup> groups = favoritesHelper.getFavoriteGroups();
+			for (FavouritesDbHelper.FavoriteGroup g : groups) {
+				if (g.name.equals(favoriteGroup.getName())) {
+					favoritesHelper.deleteGroup(g);
+					return true;
+				}
+			}
+			return false;
+		} else {
+			return false;
+		}
+	}
+
+	boolean updateFavoriteGroup(AFavoriteGroup gPrev, AFavoriteGroup gNew) {
+		if (gPrev != null && gNew != null) {
+			FavouritesDbHelper favoritesHelper = app.getFavorites();
+			List<FavouritesDbHelper.FavoriteGroup> groups = favoritesHelper.getFavoriteGroups();
+			for (FavouritesDbHelper.FavoriteGroup g : groups) {
+				if (g.name.equals(gPrev.getName())) {
+					int color = 0;
+					if (!Algorithms.isEmpty(gNew.getColor())) {
+						color = ColorDialogs.getColorByTag(gNew.getColor());
+					}
+					favoritesHelper.editFavouriteGroup(g, gNew.getName(), color, gNew.isVisible());
+					return true;
+				}
+			}
+			return false;
+		} else {
+			return false;
+		}
 	}
 
 	boolean addFavorite(AFavorite favorite) {

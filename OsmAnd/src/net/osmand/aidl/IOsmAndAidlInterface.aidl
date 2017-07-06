@@ -3,6 +3,11 @@ package net.osmand.aidl;
 import net.osmand.aidl.map.ALatLon;
 import net.osmand.aidl.map.SetMapLocationParams;
 
+import net.osmand.aidl.favorite.group.AFavoriteGroup;
+import net.osmand.aidl.favorite.group.AddFavoriteGroupParams;
+import net.osmand.aidl.favorite.group.RemoveFavoriteGroupParams;
+import net.osmand.aidl.favorite.group.UpdateFavoriteGroupParams;
+
 import net.osmand.aidl.favorite.AFavorite;
 import net.osmand.aidl.favorite.AddFavoriteParams;
 import net.osmand.aidl.favorite.RemoveFavoriteParams;
@@ -35,6 +40,12 @@ import net.osmand.aidl.maplayer.RemoveMapLayerParams;
 import net.osmand.aidl.maplayer.UpdateMapLayerParams;
 
 interface IOsmAndAidlInterface {
+
+    boolean refreshMap();
+
+    boolean addFavoriteGroup(in AddFavoriteGroupParams params);
+    boolean removeFavoriteGroup(in RemoveFavoriteGroupParams params);
+    boolean updateFavoriteGroup(in UpdateFavoriteGroupParams params);
 
     boolean addFavorite(in AddFavoriteParams params);
     boolean removeFavorite(in RemoveFavoriteParams params);
