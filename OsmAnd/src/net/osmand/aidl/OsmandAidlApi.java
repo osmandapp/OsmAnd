@@ -732,6 +732,7 @@ public class OsmandAidlApi {
 		GPXUtilities.GPXTrackAnalysis analysis = gpx.getAnalysis(gpx.modifiedTime);
 		GPXDatabase.GpxDataItem gpxDataItem = new GPXDatabase.GpxDataItem(destination, analysis);
 		gpxDataItem.setColor(clr);
+		gpxDataItem.setLastModifiedTime(destination.lastModified());
 		app.getGpxDatabase().add(gpxDataItem);
 		refreshMap();
 	}
