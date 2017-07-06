@@ -8,7 +8,7 @@
         tools:replace="android:icon, android:label">
         <activity
             android:name="net.osmand.plus.activities.MapActivity"
-            android:theme="SplashScreenFree"
+            android:theme="@style/SplashScreenFree"
             tools:replace="android:theme"/>
         <service
             android:name="net.osmand.plus.NavigationService"
