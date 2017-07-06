@@ -20,6 +20,7 @@ import net.osmand.data.FavouritePoint;
 import net.osmand.data.LatLon;
 import net.osmand.data.PointDescription;
 import net.osmand.plus.FavouritesDbHelper;
+import net.osmand.plus.GPXDatabase;
 import net.osmand.plus.GPXUtilities;
 import net.osmand.plus.GPXUtilities.GPXFile;
 import net.osmand.plus.GpxSelectionHelper.SelectedGpxFile;
@@ -35,6 +36,8 @@ import net.osmand.plus.views.OsmandMapLayer.DrawSettings;
 import net.osmand.plus.views.OsmandMapTileView;
 import net.osmand.plus.views.mapwidgets.MapWidgetRegistry.MapWidgetRegInfo;
 import net.osmand.plus.views.mapwidgets.TextInfoWidget;
+import net.osmand.render.RenderingRule;
+import net.osmand.render.RenderingRulesStorage;
 import net.osmand.util.Algorithms;
 
 import java.io.ByteArrayInputStream;
@@ -47,6 +50,9 @@ import java.io.InputStream;
 import java.util.List;
 import java.util.Map;
 import java.util.concurrent.ConcurrentHashMap;
+
+import static net.osmand.plus.dialogs.ConfigureMapMenu.COLOR_ATTR;
+import static net.osmand.plus.dialogs.ConfigureMapMenu.CURRENT_TRACK_COLOR_ATTR;
 
 public class OsmandAidlApi {
 
@@ -631,13 +637,14 @@ public class OsmandAidlApi {
 		return false;
 	}
 
-	boolean importGpxFromFile(File source, String destinationPath) {
+	boolean importGpxFromFile(File source, String destinationPath, String color) {
 		if (source != null && !Algorithms.isEmpty(destinationPath)) {
 			if (source.exists() && source.canRead()) {
 				File destination = app.getAppPath(IndexConstants.GPX_INDEX_DIR + destinationPath);
 				if (destination.getParentFile().canWrite()) {
 					try {
 						Algorithms.fileCopy(source, destination);
+						updateGpxColor(color, destination);
 						return true;
 					} catch (IOException e) {
 						e.printStackTrace();
@@ -648,7 +655,7 @@ public class OsmandAidlApi {
 		return false;
 	}
 
-	boolean importGpxFromUri(Uri gpxUri, String destinationPath) {
+	boolean importGpxFromUri(Uri gpxUri, String destinationPath, String color) {
 		if (gpxUri != null && !Algorithms.isEmpty(destinationPath)) {
 			File destination = app.getAppPath(IndexConstants.GPX_INDEX_DIR + destinationPath);
 			ParcelFileDescriptor gpxParcelDescriptor = null;
@@ -660,6 +667,7 @@ public class OsmandAidlApi {
 					FileOutputStream fout = new FileOutputStream(destination);
 					try {
 						Algorithms.streamCopy(is, fout);
+						updateGpxColor(color, destination);
 					} finally {
 						try {
 							is.close();
@@ -681,7 +689,7 @@ public class OsmandAidlApi {
 		return false;
 	}
 
-	boolean importGpxFromData(String sourceRawData, String destinationPath) {
+	boolean importGpxFromData(String sourceRawData, String destinationPath, String color) {
 		if (!Algorithms.isEmpty(sourceRawData) && !Algorithms.isEmpty(destinationPath)) {
 			File destination = app.getAppPath(IndexConstants.GPX_INDEX_DIR + destinationPath);
 			try {
@@ -689,6 +697,7 @@ public class OsmandAidlApi {
 				FileOutputStream fout = new FileOutputStream(destination);
 				try {
 					Algorithms.streamCopy(is, fout);
+					updateGpxColor(color, destination);
 				} finally {
 					try {
 						is.close();
@@ -707,6 +716,24 @@ public class OsmandAidlApi {
 			}
 		}
 		return false;
+	}
+
+	private void updateGpxColor(String color, File destination) {
+		RenderingRulesStorage renderer = app.getRendererRegistry().getCurrentSelectedRenderer();
+		int clr = 0;
+		List<RenderingRule> rules = renderer.getRenderingAttributeRule("gpx").getIfElseChildren().get(0).getIfElseChildren();
+		for (RenderingRule r : rules) {
+			String cName = r.getStringPropertyValue(CURRENT_TRACK_COLOR_ATTR);
+			if (!Algorithms.isEmpty(cName) && cName.equals(color)) {
+				clr = r.getIntPropertyValue(COLOR_ATTR);
+			}
+		}
+		GPXFile gpx = GPXUtilities.loadGPXFile(app, destination);
+		GPXUtilities.GPXTrackAnalysis analysis = gpx.getAnalysis(gpx.modifiedTime);
+		GPXDatabase.GpxDataItem gpxDataItem = new GPXDatabase.GpxDataItem(destination, analysis);
+		gpxDataItem.setColor(clr);
+		app.getGpxDatabase().add(gpxDataItem);
+		refreshMap();
 	}
 
 	boolean showGpx(String fileName) {
