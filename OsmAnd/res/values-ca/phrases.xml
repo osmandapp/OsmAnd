@@ -1702,7 +1702,7 @@
 	<string name="poi_payment_token_no">No s\'accepta Tokens</string>
 	<string name="poi_payment_golden_crown_yes">Golden Crown</string>
 	<string name="poi_payment_golden_crown_no">No s\'accepten targes Golden Crown</string>
-	<string name="poi_payment_pro100_yes">"PRO100 "</string>
+	<string name="poi_payment_pro100_yes">PRO100</string>
 	<string name="poi_payment_pro100_no">No s\'accepten targes PRO100</string>
 	<string name="poi_payment_union_card_yes">Union Card</string>
 	<string name="poi_payment_union_card_no">No s\'accepta Union Card</string>
@@ -1962,7 +1962,7 @@
 
 	<string name="poi_tents_yes">Permès</string>
 	<string name="poi_tents_no">No es permet l\'acampada</string>
-	<string name="poi_scout_yes">Camp escolta: sí</string>
+	<string name="poi_scout_yes">Sí</string>
 	<string name="poi_scout_no">Camp escolta: no</string>
 	<string name="poi_group_only_yes">Només per grups: sí</string>
 	<string name="poi_group_only_no">Només per grups: no</string>
@@ -2188,7 +2188,7 @@
 	<string name="poi_health_facility_type_first_aid">Tipus de centre sanitari: primers auxilis</string>
 	<string name="poi_health_facility_type_laboratory">Tipus de centre sanitari: laboratori</string>
 	<string name="poi_health_facility_type_therapy">Tipus de centre sanitari: teràpies</string>
-	<string name="poi_health_specialty_palliative_medicine_yes">Tipus d\'equipament sanitari: medicina pal·liativa</string>
+	<string name="poi_health_specialty_palliative_medicine_yes">Medicina pal·liativa</string>
 
 	<string name="poi_suction_point">Punt d\'aspiració</string>
 
@@ -2206,7 +2206,7 @@
 	<string name="poi_disease_aids_yes">SIDA: sí</string>
 	<string name="poi_disease_aids_no">SIDA: no</string>
 
-	<string name="poi_fire_hydrant_position_underground">Localització de l\'hidrant: soterrat</string>
+	<string name="poi_fire_hydrant_position_underground">Soterrat</string>
 	<string name="poi_street_cabinet_telecom">Tipus d\'armari: telecomunicacions</string>
 	<string name="poi_street_cabinet_power">Tipus d\'armari: electricitat</string>
 	<string name="poi_street_cabinet_cable_tv">Tipus d\'armari: tv per cable</string>
@@ -2457,7 +2457,7 @@
 	<string name="poi_historic_period_middle_kingdom">Període històric: imperi mitjà d\'Egipte (2055 - 1650 aC)</string>
 	<string name="poi_historic_period_predynastic_egypt">Període històric: Egipte predinàstic</string>
 	<string name="poi_historic_period_early_dynastic_period">Període històric: període arcaic (3100 - 2866 aC)</string>
-	<string name="poi_historic_period_third_intermediate_period">"Període històric: tercer període intermedi (1069 - 664 aC) "</string>
+	<string name="poi_historic_period_third_intermediate_period">Període històric: tercer període intermedi (1069 - 664 aC)</string>
 	<string name="poi_historic_period_dominate">Període històric: dominat (285 dC - 476 dC)</string>
 	<string name="poi_site_type_earthwork">Treball de terra</string>
 	<string name="poi_site_type_settlement">Assentament</string>
@@ -2735,11 +2735,11 @@
 	<string name="poi_fire_hydrant_pressure">Pressió de l\'hidrant</string>
 	<string name="poi_fire_hydrant_count">Nombre d\'hidrants</string>
 	<string name="poi_fire_hydrant_flow_capacity">Cabal màxim de l\'hidrant</string>
-	<string name="poi_fire_hydrant_position_sidewalk">Localització de l\'hidrant: vorera</string>
-	<string name="poi_fire_hydrant_position_green">Localització de l\'hidrant: gespa</string>
-	<string name="poi_fire_hydrant_position_lane">Localització de l\'hidrant: carril</string>
-	<string name="poi_fire_hydrant_position_parking_lot">Localització de l\'hidrant: aparcament</string>
-	<string name="poi_fire_hydrant_position_street">Localització de l\'hidrant: carrer</string>
+	<string name="poi_fire_hydrant_position_sidewalk">Vorera</string>
+	<string name="poi_fire_hydrant_position_green">Gespa</string>
+	<string name="poi_fire_hydrant_position_lane">Carril</string>
+	<string name="poi_fire_hydrant_position_parking_lot">Aparcament</string>
+	<string name="poi_fire_hydrant_position_street">Carrer</string>
 	<string name="poi_cafeteria">Cafeteria</string>
 
 <string name="poi_aerialway_length">Llargària</string>
@@ -3045,9 +3045,9 @@
 	<string name="poi_payment_troika_no">La tarja Troika no s\'accepta</string>
 
 	<string name="poi_telescope">Telescopi</string>
-	<string name="poi_telescope_type_optical">Telescopi: òptic</string>
-	<string name="poi_telescope_type_radio">Telescopi: radiotelescopi</string>
-	<string name="poi_telescope_type_gamma">Telescopi: raigs gamma</string>
+	<string name="poi_telescope_type_optical">Òptic</string>
+	<string name="poi_telescope_type_radio">Radiotelescopi</string>
+	<string name="poi_telescope_type_gamma">Raigs gamma</string>
 	<string name="poi_health_service_nursing_yes">Servei mèdic: infermeria: sí</string>
 	<string name="poi_health_service_nursing_no">Servei mèdic: infermeria: no</string>
 	<string name="poi_health_service_counselling_yes">Servei mèdic: assesorament: sí</string>
