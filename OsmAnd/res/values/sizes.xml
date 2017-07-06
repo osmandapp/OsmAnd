@@ -134,5 +134,9 @@
     <dimen name="default_sub_text_size">12sp</dimen>
 	<dimen name="welcome_header_text_size">23sp</dimen>
 
+	<dimen name="default_split_segments_overview">12sp</dimen>
+	<dimen name="default_split_segments_data">12sp</dimen>
+	<dimen name="default_split_segments_sub">9sp</dimen>
+
 	<dimen name="dialog_header_text_size">20sp</dimen>
 </resources>
