@@ -3067,8 +3067,8 @@
 	<string name="poi_additional_type">Adicional</string>
 <string name="poi_shop_craft">Artículos para arte y artesanías</string>
 
-	<string name="poi_service_bicycle_charging_yes">Cargador eléctrico para bicicletas</string>
-	<string name="poi_service_bicycle_charging_no">Cargador eléctrico para bicicletas: No</string>
+	<string name="poi_service_bicycle_charging_yes">Cargador eléctrico</string>
+	<string name="poi_service_bicycle_charging_no">Cargador eléctrico: No</string>
 
 <string name="poi_fuel_avia_type">Tipo de combustible (aviones)</string>
 	<string name="poi_payment_fuel_type">Tarjetas de combustible</string>
@@ -3455,4 +3455,5 @@
 	<string name="poi_motorcycle_type_dualsport">Doble propósito</string>
 	<string name="poi_motorcycle_type_standard">Estándar</string>
 
-</resources>
+<string name="poi_lock_basin">Compuerta de cuenca</string>
+	</resources>
