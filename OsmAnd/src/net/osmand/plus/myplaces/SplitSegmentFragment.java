@@ -91,7 +91,7 @@ public class SplitSegmentFragment extends OsmAndListFragment {
 
         adapter = new SplitSegmentsAdapter(new ArrayList<GpxDisplayItem>());
         headerView = getActivity().getLayoutInflater().inflate(R.layout.gpx_split_segments_header, null, false);
-        ((ImageView) headerView.findViewById(R.id.header_split_image)).setImageDrawable(ic.getIcon(R.drawable.ic_action_split_interval, app.getSettings().isLightContent() ? R.color.gpx_split_segment_icon_color : 0));
+        ((ImageView) headerView.findViewById(R.id.header_split_image)).setImageDrawable(ic.getIcon(R.drawable.ic_action_split_interval, app.getSettings().isLightContent() ? R.color.icon_color : 0));
 
         listView.addHeaderView(headerView);
         listView.addFooterView(getActivity().getLayoutInflater().inflate(R.layout.list_shadow_footer, null, false));
@@ -379,12 +379,6 @@ public class SplitSegmentFragment extends OsmAndListFragment {
                 }
             }
 
-            ImageView distanceOrTimeSpanImageView = ((ImageView) convertView.findViewById(R.id.distance_or_timespan_image));
-            if (position == 0) {
-                distanceOrTimeSpanImageView.setImageDrawable(ic.getIcon(R.drawable.ic_action_track_16, app.getSettings().isLightContent() ? R.color.gpx_split_segment_icon_color : 0));
-            } else {
-                distanceOrTimeSpanImageView.setImageDrawable(ic.getIcon(R.drawable.ic_action_time_span_16, app.getSettings().isLightContent() ? R.color.gpx_split_segment_icon_color : 0));
-            }
             ((ImageView) convertView.findViewById(R.id.start_time_image))
                     .setImageDrawable(ic.getIcon(R.drawable.ic_action_time_start_16, app.getSettings().isLightContent() ? R.color.gpx_split_segment_icon_color : 0));
             ((ImageView) convertView.findViewById(R.id.end_time_image))
@@ -405,18 +399,27 @@ public class SplitSegmentFragment extends OsmAndListFragment {
             if (currentGpxDisplayItem != null) {
                 GPXTrackAnalysis analysis = currentGpxDisplayItem.analysis;
                 if (analysis != null) {
+                    ImageView distanceOrTimeSpanImageView = ((ImageView) convertView.findViewById(R.id.distance_or_timespan_image));
                     TextView distanceOrTimeSpanValue = (TextView) convertView.findViewById(R.id.distance_or_time_span_value);
                     TextView distanceOrTimeSpanText = (TextView) convertView.findViewById(R.id.distance_or_time_span_text);
                     if (position == 0) {
+                        distanceOrTimeSpanImageView.setImageDrawable(ic.getIcon(R.drawable.ic_action_track_16, app.getSettings().isLightContent() ? R.color.gpx_split_segment_icon_color : 0));
                         distanceOrTimeSpanValue.setText(OsmAndFormatter.getFormattedDistance(analysis.totalDistance, app));
                         distanceOrTimeSpanText.setText(app.getString(R.string.distance));
                     } else {
-                        if (analysis.timeSpan > 0) {
-                            distanceOrTimeSpanValue.setText(OsmAndFormatter.getFormattedDuration((int) (analysis.timeSpan / 1000), app));
-                        } else {
-                            distanceOrTimeSpanValue.setText("-");
+                        if (currentGpxDisplayItem.group.isSplitDistance()) {
+                            distanceOrTimeSpanImageView.setImageDrawable(ic.getIcon(R.drawable.ic_action_time_span_16, app.getSettings().isLightContent() ? R.color.gpx_split_segment_icon_color : 0));
+                            if (analysis.timeSpan > 0) {
+                                distanceOrTimeSpanValue.setText(Algorithms.formatDuration((int) (analysis.timeSpan / 1000), app.accessibilityEnabled()));
+                            } else {
+                                distanceOrTimeSpanValue.setText("-");
+                            }
+                            distanceOrTimeSpanText.setText(app.getString(R.string.shared_string_time_span));
+                        } else if (currentGpxDisplayItem.group.isSplitTime()) {
+                            distanceOrTimeSpanImageView.setImageDrawable(ic.getIcon(R.drawable.ic_action_track_16, app.getSettings().isLightContent() ? R.color.gpx_split_segment_icon_color : 0));
+                            distanceOrTimeSpanValue.setText(OsmAndFormatter.getFormattedDistance(analysis.totalDistance, app));
+                            distanceOrTimeSpanText.setText(app.getString(R.string.distance));
                         }
-                        distanceOrTimeSpanText.setText(app.getString(R.string.shared_string_time_span));
                     }
 
                     TextView startTimeValue = (TextView) convertView.findViewById(R.id.start_time_value);
