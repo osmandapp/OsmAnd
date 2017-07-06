@@ -2827,7 +2827,7 @@
 	<string name="poi_health_facility_type_nursing_home">Тип медучреждения: хоспис</string>
 	<string name="poi_health_facility_type_support_group_home">Тип медучреждения: встречи групп поддержки</string>
 
-	<string name="poi_health_specialty_palliative_medicine_yes">Специализация: паллиативная помощь</string>
+	<string name="poi_health_specialty_palliative_medicine_yes">Паллиативная помощь</string>
 
 	<string name="poi_suction_point">Точка забора воды</string>
 

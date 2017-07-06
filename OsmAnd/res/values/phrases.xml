@@ -2105,8 +2105,8 @@
 	<string name="poi_service_bicycle_chaintool_no">Bicycle chaintool: no</string>
 	<string name="poi_service_bicycle_second_hand_yes">Retail sale of second-hand bicycles</string>
 	<string name="poi_service_bicycle_second_hand_no">Retail sale of second-hand bicycles: no</string>
-	<string name="poi_service_bicycle_charging_yes">Bicycle charging: yes</string>
-	<string name="poi_service_bicycle_charging_no">Bicycle charging: no</string>
+	<string name="poi_service_bicycle_charging_yes">Charging: yes</string>
+	<string name="poi_service_bicycle_charging_no">Charging: no</string>
 	<string name="poi_bicycle_repair_station">Bicycle self-repair station</string>
 
 	<string name="poi_wildlife_hide">Place to observe wildlife</string>
@@ -2269,7 +2269,7 @@
 	<string name="poi_openfire_no">Open-fire not allowed</string>
 	<string name="poi_backcountry_yes">Yes</string>
 	<string name="poi_backcountry_no">No</string>
-	<string name="poi_scout_yes">Scout camp: yes</string>
+	<string name="poi_scout_yes">Yes</string>
 	<string name="poi_scout_no">Scout camp: no</string>
 	<string name="poi_group_only_yes">Group only: yes</string>
 	<string name="poi_group_only_no">Group only: no</string>
@@ -2630,7 +2630,7 @@
 	<string name="poi_health_specialty_naturopathy_yes">Naturopathy</string>
 	<string name="poi_health_specialty_depth_psychology_yes">Depth psychology</string>
 	<string name="poi_health_specialty_behavior_yes">Behavior</string>
-	<string name="poi_health_specialty_palliative_medicine_yes">Health specialty: palliative medicine</string>
+	<string name="poi_health_specialty_palliative_medicine_yes">Palliative medicine</string>
 
 	<string name="poi_building_type_pyramid">Building type: pyramid</string>
 
@@ -2938,12 +2938,12 @@
 	<string name="poi_fire_hydrant_pressure">Hydrant pressure</string>
 	<string name="poi_fire_hydrant_count">Hydrant count</string>
 	<string name="poi_fire_hydrant_flow_capacity">Hydrant flow capacity</string>
-	<string name="poi_fire_hydrant_position_sidewalk">Hydrant position: sidewalk</string>
-	<string name="poi_fire_hydrant_position_green">Hydrant position: green</string>
-	<string name="poi_fire_hydrant_position_lane">Hydrant position: lane</string>
-	<string name="poi_fire_hydrant_position_parking_lot">Hydrant position: parking lot</string>
-	<string name="poi_fire_hydrant_position_street">Hydrant position: street</string>
-	<string name="poi_fire_hydrant_position_underground">Hydrant position: underground</string>
+	<string name="poi_fire_hydrant_position_sidewalk">Sidewalk</string>
+	<string name="poi_fire_hydrant_position_green">Green</string>
+	<string name="poi_fire_hydrant_position_lane">Lane</string>
+	<string name="poi_fire_hydrant_position_parking_lot">Parking lot</string>
+	<string name="poi_fire_hydrant_position_street">Street</string>
+	<string name="poi_fire_hydrant_position_underground">Underground</string>
 	<string name="poi_fire_hydrant_style_wsh">Hydrant style: wsh</string>
 	<string name="poi_fire_hydrant_style_water_source_main">Main</string>
 	<string name="poi_fire_hydrant_style_water_source_pond">Pond</string>
@@ -3024,9 +3024,9 @@
 	<string name="poi_payment_troika_no">Troika card not accepted</string>
 
 	<string name="poi_telescope">Telescope</string>
-	<string name="poi_telescope_type_optical">Telescope: optical</string>
-	<string name="poi_telescope_type_radio">Telescope: radio</string>
-	<string name="poi_telescope_type_gamma">Telescope: gamma</string>
+	<string name="poi_telescope_type_optical">Optical</string>
+	<string name="poi_telescope_type_radio">Radio</string>
+	<string name="poi_telescope_type_gamma">Gamma</string>
 	<string name="poi_telescope_diameter">Diameter</string>
 	<string name="poi_telescope_spectrum">Spectrum</string>
 	<string name="poi_telescope_usage_education">Usage: education</string>
