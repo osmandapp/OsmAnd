@@ -3117,4 +3117,5 @@ Facebook: https://www.facebook.com/osmandapp
     <string name="moving_time">Час руху</string>
     <string name="max_min">Макс./мін.</string>
     <string name="range">Діапазон</string>
+    <string name="min_max">Мін/макс</string>
     </resources>
