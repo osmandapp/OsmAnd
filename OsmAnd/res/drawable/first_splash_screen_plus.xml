@@ -7,9 +7,4 @@
             android:gravity="center_horizontal|top"
             android:src="@drawable/ic_logo_splash_osmand_plus"/>
     </item>
-    <item android:bottom="128dp">
-        <bitmap
-            android:gravity="center_horizontal|bottom"
-            android:src="@drawable/image_text_osmand_plus"/>
-    </item>
 </layer-list>

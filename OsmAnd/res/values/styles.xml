@@ -74,16 +74,16 @@
         <item name="android:background">?attr/selectableItemBackground</item>
     </style>
 
-    <style name="SplashScreenPlus" parent="OsmandLightTheme.NoActionbar">
-        <item name="android:windowBackground">@drawable/splash_screen_plus</item>
+    <style name="FirstSplashScreenPlus" parent="OsmandLightTheme.NoActionbar">
+        <item name="android:windowBackground">@drawable/first_splash_screen_plus</item>
     </style>
 
-    <style name="SplashScreenFree" parent="OsmandLightTheme.NoActionbar">
-        <item name="android:windowBackground">@drawable/splash_screen_free</item>
+    <style name="FirstSplashScreenFree" parent="OsmandLightTheme.NoActionbar">
+        <item name="android:windowBackground">@drawable/first_splash_screen_free</item>
     </style>
 
-    <style name="SplashScreenFreeDev" parent="OsmandLightTheme.NoActionbar">
-        <item name="android:windowBackground">@drawable/splash_screen_free_dev</item>
+    <style name="FirstSplashScreenFreeDev" parent="OsmandLightTheme.NoActionbar">
+        <item name="android:windowBackground">@drawable/first_splash_screen_free_dev</item>
     </style>
 
     <!-- Osmand themes styles -->
