@@ -2669,7 +2669,7 @@ Se ami OsmAnd e OSM e vuoi sostenerli, questo è un modo perfetto per farlo.</st
     <string name="shared_string_recorded">Registrato</string>
     <string name="shared_string_record">Registra</string>
     <string name="gpx_logging_no_data">Nessun dato</string>
-    <string name="release_2_5">/022 Icone sulla mappa cliccabili 
+    <string name="release_2_5">\\022 Icone sulla mappa cliccabili 
 \n 
 \n 
 \n • Potente filtro di ricerca dei PDI: ricerca dei ristoranti per tipo di cucina, campeggi per esigenze specifiche 
@@ -2810,25 +2810,43 @@ Rappresenta l\'area: %1$s x %2$s</string>
 	<string name="auto_split_recording_title">Divisione automatica delle registrazioni dopo un periodo</string>
 	<string name="auto_split_recording_descr">Inizia un nuovo segmento dopo 6 minuti, una nuova traccia dopo 2 ore, o un nuovo file dopo un intervallo maggiore.</string>
     <string name="rendering_attr_depthContours_description">Mostra contorni e punti in profondità</string>
-    <string name="release_2_6">"/022 Nuove funzionalità: Pulsante azione veloce 
+    <string name="release_2_6">"\\022 Nuove funzionalità: Pulsante azione veloce 
+\n
 \n 
+\n
 \n • Migliorata la risposta del touch screen ai gesti (es. zoommare e allargare) 
+\n
 \n 
+\n
 \n • Nuovi caratteri della mappa  mappa per estendere la copertura di più lingue 
 \n
 \n 
+\n 
+\n
 \n • Supporto TTS per le lingue locali (e accenti) 
+\n
 \n 
+\n
 \n • Miglioramento della visibilità in molti stili mappa e wikipedia 
+\n
 \n 
+\n
 \n • Supporto all\'Open Location Code (OLC) 
+\n
 \n 
+\n
 \n • Visualizzazione di un profilo altimetrico, pendenza, e velocità per i GPX registrati e percorsi calcolati 
+\n
 \n 
+\n
 \n • Impostazione e miglioramenti della logica dello \"Stile guida\" nella guida svolta per svolta in bicicletta 
+\n
 \n 
+\n
 \n • Molti altri miglioramenti e correzioni di errori 
+\n
 \n 
+\n
 \n e altro ancora…"</string>
 	<string name="routing_attr_driving_style_name">Stile di guida</string>
     <string name="routing_attr_driving_style_description">Guida sicura, veloce o bilanciata</string>

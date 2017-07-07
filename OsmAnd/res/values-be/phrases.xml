@@ -2133,7 +2133,7 @@
 	<string name="poi_openfire_no">Развядзеньне адкрытага агню забаронена</string>
 	<string name="poi_backcountry_yes">Так</string>
 	<string name="poi_backcountry_no">Не</string>
-	<string name="poi_scout_yes">Лягер скаўтаў</string>
+	<string name="poi_scout_yes">так</string>
 	<string name="poi_scout_no">Лягер скаўтаў: не</string>
 	<string name="poi_group_only_yes">Даступна толькі для груп: так</string>
 	<string name="poi_group_only_no">Даступна толькі для груп: не</string>
@@ -2749,7 +2749,7 @@
 	<string name="poi_health_facility_type_nursing_home">Тып мэдустановы: хоспіс</string>
 	<string name="poi_health_facility_type_support_group_home">Тып мэдустановы: сустрэчы груп падтрымкі</string>
 
-	<string name="poi_health_specialty_palliative_medicine_yes">Спэцыялізацыя: паліятыўная дапамога</string>
+	<string name="poi_health_specialty_palliative_medicine_yes">Паліятыўная дапамога</string>
 
 	<string name="poi_suction_point">Пункт пампаваньня вады</string>
 
@@ -2860,10 +2860,10 @@
 	<string name="poi_fire_hydrant_pressure">Ціск вады ў гідранце</string>
 	<string name="poi_fire_hydrant_count">Колькасьць гідрантаў</string>
 	<string name="poi_fire_hydrant_flow_capacity">Прапускная здольнасьць гідранта</string>
-	<string name="poi_fire_hydrant_position_sidewalk">Разьмяшчэньне гідранта: ходнік</string>
-	<string name="poi_fire_hydrant_position_parking_lot">Разьмяшчэньне гідранта: паркоўка</string>
-	<string name="poi_fire_hydrant_position_street">Разьмяшчэньне гідранта: вуліца</string>
-	<string name="poi_fire_hydrant_position_underground">Разьмяшчэньне гідранта: падземны</string>
+	<string name="poi_fire_hydrant_position_sidewalk">Ходнік</string>
+	<string name="poi_fire_hydrant_position_parking_lot">Паркоўка</string>
+	<string name="poi_fire_hydrant_position_street">Вуліца</string>
+	<string name="poi_fire_hydrant_position_underground">Падземны</string>
 	<string name="poi_fire_hydrant_style_water_source_main">Асноўная</string>
 	<string name="poi_fire_hydrant_style_water_source_pond">Сажалка</string>
 	<string name="poi_fire_hydrant_style_water_source_stream">Струмень</string>
@@ -2943,9 +2943,9 @@
 	<string name="poi_payment_troika_no">Карткі Тройка не прымаюцца</string>
 
 	<string name="poi_telescope">Тэлескоп</string>
-	<string name="poi_telescope_type_optical">Тэлескоп: аптычны</string>
-	<string name="poi_telescope_type_radio">Тэлескоп: радыё</string>
-	<string name="poi_telescope_type_gamma">Тэлескоп: гама</string>
+	<string name="poi_telescope_type_optical">Аптычны</string>
+	<string name="poi_telescope_type_radio">Радыё</string>
+	<string name="poi_telescope_type_gamma">Гама</string>
 	<string name="poi_telescope_diameter">Дыямэтар</string>
 	<string name="poi_telescope_spectrum">Спэктр</string>
 	<string name="poi_telescope_usage_education">Прызначэньне: адукацыя</string>
@@ -3042,7 +3042,7 @@
 
 	<string name="poi_seamark_dyke">Вадзяны знак: насып</string>
 	<string name="poi_content_wastewater">Зьмесьціва: сьцёкі</string>
-	<string name="poi_fire_hydrant_position_green">Разьмяшчэньне гідранта: трава</string>
+	<string name="poi_fire_hydrant_position_green">Трава</string>
 	<string name="poi_wiki_link">Вікіпэдыя</string>
 
 <string name="poi_toilets_disposal_chemical">Утылізацыя адыходаў: хімічная</string>
@@ -3057,9 +3057,9 @@
 <string name="poi_denomination_uniting">Яднаючая Царква ў Аўстраліі</string>
 	<string name="poi_denomination_reform">Рэфармісцкі юдаізм</string>
 	<string name="poi_memorial_koshinto">Кашынта</string>
-	<string name="poi_service_bicycle_charging_no">Зарадка электравеласіпедаў: не</string>
+	<string name="poi_service_bicycle_charging_no">Зарадка: не</string>
 
-<string name="poi_service_bicycle_charging_yes">Зарадка электравеласіпедаў: ёсць</string>
+<string name="poi_service_bicycle_charging_yes">Зарадка: ёсць</string>
 	<string name="poi_shop_craft">Тавары для рукадзельля</string>
 
 	<string name="poi_fuel_avia_type">Від паліва</string>
@@ -3378,7 +3378,7 @@
 
 <string name="poi_fire_hydrant_type_dry_barrel">Наземны сухі</string>
 	<string name="poi_counselling_type_nutrition_nfire_hydo">Кансультацыя па пытаньнях харчаваньня: не</string>
-	<string name="poi_fire_hydrant_position_lane">Разьмяшчэньне гідранта: паласа руху</string>
+	<string name="poi_fire_hydrant_position_lane">Паласа руху</string>
 	<string name="poi_fire_hydrant_style_wsh">Дызайн гідранта: wsh</string>
 	<string name="poi_cuisine_buschenschank">Buschenschank (вытанчаныя аўстрыйскія віны)</string>
 	<string name="poi_cuisine_fine_dining">Эксклюзіўныя стравы</string>
@@ -3444,4 +3444,5 @@
 	<string name="poi_motorcycle_type_dualsport">Двайнога прызначэння</string>
 	<string name="poi_motorcycle_type_standard">Класічныя</string>
 
-</resources>
+<string name="poi_lock_basin">Запорны басейн</string>
+	</resources>

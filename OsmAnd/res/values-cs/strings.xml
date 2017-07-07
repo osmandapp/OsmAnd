@@ -380,7 +380,7 @@ Navigační služba je dočasně přepnuta na on-line CloudMade.</string>
     <string name="poi_context_menu_delete">Smazat POI</string>
     <string name="rotate_map_compass_opt">Podle kompasu</string>
     <string name="rotate_map_bearing_opt">Ve směru pohybu</string>
-    <string name="rotate_map_none_opt">Neotáčet</string>
+    <string name="rotate_map_none_opt">Neotáčet (sever nahoře)</string>
     <string name="rotate_map_to_bearing_descr">Zvolte směr natočení mapy</string>
     <string name="rotate_map_to_bearing">Natočení mapy</string>
     <string name="show_route">Ukázat cestu</string>
@@ -993,7 +993,7 @@ Proporcionální paměť %4$s MB (limit Androidu %5$s MB, Dalvik %6$s MB).</stri
     <string name="use_kalman_filter_compass">Použít Kalmanův filtr</string>
     <string name="use_magnetic_sensor">Používat magnetický senzor</string>
     <string name="wait_current_task_finished">Čekejte prosím na dokončení úlohy</string>
-    <string name="use_magnetic_sensor_descr">Použít magnetický senzor k určení směru místo senzoru natočení</string>
+    <string name="use_magnetic_sensor_descr">K určení směru použít magnetický senzor místo senzoru natočení</string>
     <string name="cancel_route">Zrušit trasu</string>
     <string name="clear_destination">Smazat cíl</string>
     <string name="local_indexes_cat_srtm">Vrstevnice</string>
@@ -1811,7 +1811,7 @@ Délka %2$s</string>
     <string name="routing_attr_height_name">Výškové omezení</string>
     <string name="routing_attr_height_description">Zadejte výšku vozidla, jaká má být povolena na cestách</string>
     <string name="use_fast_recalculation">Inteligentní přepočítávání trasy</string>
-    <string name="use_fast_recalculation_desc">Přepočítat pouze počáteční úsek trasy při dlouhých cestách</string>
+    <string name="use_fast_recalculation_desc">Pro dlouhé cesty přepočítat pouze počáteční úsek trasy</string>
     <string name="osmo_share_my_location">Odeslat polohu</string>
     <string name="shared_string_logoff">Odhlásit</string>
     <string name="shared_string_import2osmand">Importovat do OsmAnd</string>
@@ -1955,7 +1955,7 @@ Délka %2$s</string>
     <string name="osmand_running_in_background">Běh na pozadí</string>
     <string name="favourites_edit_dialog_title">Informace o oblíbeném bodu</string>
     <string name="simulate_your_location_stop_descr">Ukončit simulaci vaší polohy</string>
-    <string name="simulate_your_location_descr">Simulovat pomocí zaznamenané GPX nebo vypočítané trasy</string>
+    <string name="simulate_your_location_descr">Simulovat mou polohu pomocí zaznamenané GPX nebo vypočítané trasy</string>
     <string name="favourites_context_menu_add">Přidat oblíbený bod</string>
     <string name="downloads_left_template">%1$s stahování zbývá</string>
     <string name="roads">Cesty</string>
@@ -2223,7 +2223,7 @@ Pokud máte rádi OsmAnd a OSM a chcete je podpořit, toto je výborný způsob,
 <string name="access_no_destination">Cíl není nastaven</string>
     <string name="map_widget_magnetic_bearing">Magnetické směrování</string>
     <string name="map_widget_bearing">Relativní směrování</string>
-    <string name="access_disable_offroute_recalc">Nepřepočítávat trasu při odchýlení z cesty</string>
+    <string name="access_disable_offroute_recalc">Nepřepočítávat trasu při jejím odchýlení</string>
     <string name="access_disable_offroute_recalc_descr">Nepřepočítávat trasu automaticky, pokud se vzdálíte od naplánované cesty</string>
     <string name="access_disable_wrong_direction_recalc">Nepřepočítávat trasu při opačném směru</string>
     <string name="access_disable_wrong_direction_recalc_descr">Nepřepočítávat trasu automaticky, když se pohybujete opačným směrem</string>
@@ -2305,8 +2305,8 @@ Pokud máte rádi OsmAnd a OSM a chcete je podpořit, toto je výborný způsob,
     <string name="give_permission">Udělit oprávnění</string>
     <string name="allow_access_location">Povolit přístup k poloze</string>
     <string name="first_usage_greeting">Získejte pokyny a objevte nová místa bez připojení k Internetu</string>
-    <string name="search_my_location">Hledat mou polohu</string>
-    <string name="no_update_info_desc">Nekontrolovat žádné aktualizace nových verzí a slevy související s OsmAnd</string>
+    <string name="search_my_location">Najít mou polohu</string>
+    <string name="no_update_info_desc">Nekontrolovat aktualizace nových verzí a slevy související s OsmAnd</string>
     <string name="no_update_info">Nezobrazovat aktualizace</string>
     <string name="update_all_maps_now">Chcete aktualizovat všechny mapy ihned?</string>
     <string name="clear_tile_data">Vymazat všechny dlaždice</string>
@@ -2396,7 +2396,7 @@ Pokud máte rádi OsmAnd a OSM a chcete je podpořit, toto je výborný způsob,
     <string name="routing_attr_allow_motorway_description">Povolit jízdu po dálnicích</string>
     <string name="wiki_around">Články Wikipedie v okolí</string>
     <string name="search_map_hint">Hledat město nebo oblast</string>
-    <string name="show_legacy_search_desc">Zapnout starší hledání v úvodním panelu</string>
+    <string name="show_legacy_search_desc">Přidat starší hledání do úvodního panelu</string>
     <string name="release_2_5">• Klikatelné ikony na mapě
 \n 
 \n • Podrobné filtrování POI: Například hledání restaurace dle kuchyně, kempy se speciálními službami, apod.
@@ -2736,4 +2736,12 @@ Pokud potřebujete pomoci s aplikací OsmAnd, prosím kontaktujte naši podporu
     <string name="mapillary_menu_descr_username">Zobrazit obrázky přidané určitým uživatelem.</string>
     <string name="mapillary_menu_title_username">Uživatelské jméno</string>
     <string name="mapillary_menu_filter_description">Můžete filtrovat snímky podle odesílatele nebo podle datumu. Filtry se použijí pouze pro detailní přiblížení.</string>
+    <string name="store_tracks_in_monthly_directories">Ukládat zaznamenané trasy v adresářích po měsících</string>
+    <string name="store_tracks_in_monthly_directories_descrp">Ukládat zaznamenané trasy v podadresářích podle měsíce záznamu (např. 2017-01).</string>
+    <string name="average">Průměr</string>
+    <string name="of">%1$d z %2$d</string>
+    <string name="ascent_descent">Stoupání/Klesání</string>
+    <string name="moving_time">Čas pohybu</string>
+    <string name="max_min">Max/Min</string>
+    <string name="range">Úsek</string>
     </resources>

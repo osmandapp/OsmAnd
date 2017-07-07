@@ -1985,28 +1985,28 @@
 	<string name="poi_payment_icsf_no">Картки IC Stored Fare не приймаються</string>
 	<string name="poi_shelter_type_basic_hut">Хатинка</string>
 	<string name="poi_power_supply_no">Джерело живлення: відсутнє</string>
-	<string name="poi_fire_hydrant_position_sidewalk">Розміщення гідранта: тротуар</string>
+	<string name="poi_fire_hydrant_position_sidewalk">Тротуар</string>
 	<string name="poi_payment_prepaid_ticket_yes">Попередньо оплачені квитки</string>
 	<string name="poi_shelter_type_building">Будівля</string>
 	<string name="poi_power_supply_cee_17_blue">Джерело живлення (роз\'єм): CEE 17 синій (IEC 60309)</string>
-	<string name="poi_fire_hydrant_position_green">Розміщення гідранта: трава</string>
+	<string name="poi_fire_hydrant_position_green">Трава</string>
 	<string name="poi_payment_jcb_yes">JCB</string>
 	<string name="poi_shelter_type_wildlife_hide">Для спостереження за дикою природою</string>
 	<string name="poi_power_supply_cee_7_4">Джерело живлення (роз\'єм): CEE 7/4 (тип F)</string>
-	<string name="poi_fire_hydrant_position_lane">Розміщення гідранта: смуга руху</string>
+	<string name="poi_fire_hydrant_position_lane">Смуга руху</string>
 	<string name="poi_payment_jcb_no">Карти JCB не приймаються</string>
 	<string name="poi_shelter_type_rock_shelter">У каменях</string>
 	<string name="poi_power_supply_cee_7_5">Джерело живлення (роз\'єм): CEE 7/5 (тип E)</string>
-	<string name="poi_fire_hydrant_position_parking_lot">Розміщення гідранта: парковка</string>
+	<string name="poi_fire_hydrant_position_parking_lot">Паркування</string>
 	<string name="poi_payment_laser_yes">Лазер (ірландська мережа)</string>
 	<string name="poi_shelter_type_sun_shelter">Від сонця</string>
 	<string name="poi_power_supply_nema_5_15">Джерело живлення (роз\'єм): NEMA 5-15 (тип B)</string>
 
-	<string name="poi_fire_hydrant_position_street">Розміщення гідранта: вулиця</string>
+	<string name="poi_fire_hydrant_position_street">Вулиця</string>
 	<string name="poi_payment_laser_no">Карти Laser не приймаються</string>
 	<string name="poi_shelter_type_field_shelter">У полі</string>
 	<string name="poi_capacity_tents">Максимальне число наметів</string>
-	<string name="poi_fire_hydrant_position_underground">Розміщення гідранта: підземний</string>
+	<string name="poi_fire_hydrant_position_underground">Підземний</string>
 	<string name="poi_payment_ep_quick_yes">Quick</string>
 	<string name="poi_shelter_type_tent">Тип укриття: намет</string>
 	<string name="poi_capacity_caravans">Максимальне число автопричепів</string>
@@ -2326,7 +2326,7 @@
 	<string name="poi_cuisine_pakistani">Пакистанська</string>
 	<string name="poi_indoor_yes">Всередині приміщення</string>
 	<string name="poi_resource_ruby">Рубін</string>
-	<string name="poi_service_bicycle_charging_yes">Зарядка електровелосипедів: є</string>
+	<string name="poi_service_bicycle_charging_yes">Зарядка: є</string>
 	<string name="poi_clothes_fur">Хутряна</string>
 	<string name="poi_judo">Дзюдо</string>
 	<string name="poi_free_flying_no_flight_time">Заборонений для вільного польоту час</string>
@@ -2337,7 +2337,7 @@
 	<string name="poi_payment_ov_chipkaart_no">Картки OV-Chipkaart не приймаються</string>
 	<string name="poi_indoor_no">Зовні</string>
 	<string name="poi_resource_rutile">Рутил</string>
-	<string name="poi_service_bicycle_charging_no">Зарядка електровелосипедів: немає</string>
+	<string name="poi_service_bicycle_charging_no">Зарядка: немає</string>
 	<string name="poi_clothes_leather">Шкіряна</string>
 	<string name="poi_disc_golf">Диск-гольф</string>
 	<string name="poi_free_flying_guest_guidelines_yes">Інструкції для відвідувачів: так</string>
@@ -2669,7 +2669,7 @@
 	<string name="poi_diet_vegetarian_only">Лише вегетаріанське харчування</string>
 	<string name="poi_memorial_column">Колона</string>
 	<string name="poi_service_bicycle_diy_yes">Інструменти для самостійного ремонту</string>
-	<string name="poi_scout_yes">Скаутський табір: так</string>
+	<string name="poi_scout_yes">так</string>
 	<string name="poi_water_tap">Водопровідний кран</string>
 	<string name="poi_diplomatic_delegation">Делегація</string>
 	<string name="poi_cuisine_bavarian">Баварська</string>
@@ -2872,7 +2872,7 @@
 	<string name="poi_historic_manor">Історична садиба</string>
 	<string name="poi_protection_object_historic">Об\'єкт охорони: історичний</string>
 	<string name="poi_counselling_type_rehabilitation_no">Консультація реабілітаційна: немає</string>
-	<string name="poi_telescope_type_optical">Телескоп: оптичний</string>
+	<string name="poi_telescope_type_optical">Оптичний</string>
 	<string name="poi_cuisine_grill">Гриль</string>
 	<string name="poi_cuisine_uzbek">Узбецька</string>
 	<string name="poi_drive_through_no">Клієнти, що сидять в автомобілі, не обслуговуються</string>
@@ -2886,7 +2886,7 @@
 	<string name="poi_counselling_type_sexual_yes">Консультація сексуальна: так</string>
 	<string name="poi_cuisine_bagel">Бейгл (єврейський бублик)</string>
 	<string name="poi_cuisine_czech">Чеська</string>
-	<string name="poi_telescope_type_radio">Телескопи: радіотелескоп</string>
+	<string name="poi_telescope_type_radio">Радіотелескоп</string>
 	<string name="poi_brewery_additional">Назва пивоварні</string>
 	<string name="poi_vending_toll">Оплата за проїзд</string>
 	<string name="poi_bridge_movable_transporter">Тип розвідного моста: літаючий паром</string>
@@ -2894,7 +2894,7 @@
 	<string name="poi_castle_type_defensive">Тип замка: оборонний</string>
 	<string name="poi_protection_object_habitat">Об\'єкт охорони: середовище проживання</string>
 	<string name="poi_counselling_type_sexual_no">Консультація сексуальна: немає</string>
-	<string name="poi_telescope_type_gamma">Телескоп: гамма</string>
+	<string name="poi_telescope_type_gamma">Гамма</string>
 	<string name="poi_cuisine_diner">Дайнер (американська дешева закусочна)</string>
 	<string name="poi_cuisine_cuban">Кубинська</string>
 	<string name="poi_microbrewery_yes">Власна пивоварня</string>
@@ -3215,7 +3215,7 @@
 	<string name="poi_resource_mineral_oil">Мінеральне масло</string>
 	<string name="poi_route_train_ref">Поїзд</string>
 	<string name="poi_crop_raspberry">Вирощується культура: малина</string>
-	<string name="poi_health_specialty_palliative_medicine_yes">Спеціалізація: паліативна допомога</string>
+	<string name="poi_health_specialty_palliative_medicine_yes">Паліативна допомога</string>
 
 	<string name="poi_nuclear_explosion_purpose_industrial_application">Мета вибуху: промислове застосування</string>
 	<string name="poi_counselling_yes">Консультаційні послуги</string>
@@ -3398,4 +3398,5 @@
 	<string name="poi_motorcycle_type_dualsport">Подвійного призначення</string>
 	<string name="poi_motorcycle_type_standard">Класика</string>
 
-</resources>
+<string name="poi_lock_basin">Запірний басейн</string>
+	</resources>

@@ -2898,5 +2898,11 @@ Area honi dagokio: %1$s x %2$s</string>
     <string name="osmand_plus_extended_description_part8">Gutxi gora beherako mapen kalitatea: • Mendebaldeko Europa: **** • Ekialdeko Europa: *** • Errusia: *** • Ipar Amerika: *** • Hego Amerika: ** • Asia: ** • Japonia eta Korea: *** • Ekialde hurbila: ** • Afrika: ** • Antartika: * Munduko estatu gehienak deskargagarri daude! Afganistanetik Zimbabwera, Australiatik EEBBetara. Argentina, Brasil, Kanada, Frantzia, Alemania, Mexiko, Erresuma Batua, Espainia, …</string>
     <string name="save_poi_too_many_uppercase">Izenak letra larri gehiegi ditu. Jarraitu nahi duzu?</string>
     <string name="store_tracks_in_monthly_directories">Gorde grabatutako lorratzak hilabeteko karpetatan</string>
-    <string name="store_tracks_in_monthly_directories_descrp">Gorde grabatutako lorratzak grabazioaren hilabetearen araberako azpi-karpetatan (esaterako 2017-01)</string>
+    <string name="store_tracks_in_monthly_directories_descrp">Gorde grabatutako lorratzak grabazioaren hilabetearen araberako azpi-karpetatan (esaterako 2017-01).</string>
+    <string name="average">Batez beste</string>
+    <string name="of">%1$d / %2$d</string>
+    <string name="ascent_descent">Gora/Behera</string>
+    <string name="moving_time">Denbora mugimenduan</string>
+    <string name="max_min">Max/Min</string>
+    <string name="range">Barrutia</string>
     </resources>

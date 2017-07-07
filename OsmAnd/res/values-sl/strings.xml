@@ -131,7 +131,7 @@
     <string name="left_side_navigation">Promet po levi strani</string>
     <string name="left_side_navigation_descr">Možnost izberite za države, kjer se vozi po levi strani ceste</string>
     <string name="unknown_from_location">Izhodiščna točka še ni določena</string>
-    <string name="unknown_location">Trenutno mesto še ni določeno</string>
+    <string name="unknown_location">Trenutno mesto še ni določeno!</string>
     <string name="modify_transparency">Spremeni prosojnost (0 - prosojno, 255 - neprosojno)</string>
     <string name="confirm_interrupt_download">Ali želite prekiniti prejemanje datoteke?</string>
     <string name="basemap_was_selected_to_download">Za pravilno delovanje programa mora biti nameščen osnovni zemljevid sveta. Paket je izbran in pripravljen za prejem.</string>
@@ -1550,7 +1550,7 @@ Afganistan, Albanija, Alžirija, Andora, Angola, Angvila, Antigva in Barbuda, Ar
     <string name="layer_amenity_label">Izpiši oznake točk</string>
     <string name="gpx_wpt">Vmesna točka</string>
     <string name="selected_gpx_info_show">\n\nPritisnite in zadržite za prikaz na zemljevidu</string>
-    <string name="delay_navigation_start">Samodejno začni vodenje od zavoja do zavoja (turn-by-turn)</string>
+    <string name="delay_navigation_start">Samodejno začni vodenje od zavoja do zavoja</string>
     <string name="gpx_info_subtracks">Podsledi: %1$s</string>
     <string name="gpx_info_waypoints">Vmesne točke: %1$s</string>
     <string name="gpx_info_diff_altitude">Višinski razpon: %1$s</string>
@@ -1869,7 +1869,7 @@ ZŠ (β) %2$s</string>
     <string name="shared_string_is_open">Odpri</string>
     <string name="shared_string_message">Sporočilo</string>
     <string name="welcome_header">Dobrodošli</string>
-    <string name="shared_string_go">Začni -&gt;</string>
+    <string name="shared_string_go">Začni ↝</string>
     <string name="osmand_parking_overdue">prekoračen čas</string>
     <string name="shared_string_places">Kraji</string>
     <string name="watch">Poglej</string>
@@ -1952,7 +1952,7 @@ ZŠ (β) %2$s</string>
     <string name="download_wikipedia_maps">Wikipedija</string>
     <string name="shared_string_import2osmand">Uvozi v OsmAnd</string>
     <string name="local_recordings_delete_all_confirm">Ali res želite izbrisati opombe (%1$d))?</string>
-    <string name="gps_network_not_enabled">Storitev določanja trenutnega mesta ne deluje. Ali jo želite zagnati?</string>
+    <string name="gps_network_not_enabled">Storitev določanja trenutnega mesta ni omogočena. Ali jo želite zagnati?</string>
     <string name="disable_recording_once_app_killed">Prepreči samostojno beleženje</string>
     <string name="disable_recording_once_app_killed_descrp">Možnost onemogoči beleženje GPX, ko program ni dejaven (preko nedavnih programov). To je možnost delovanja v ozadju, katere indikator se ne pojavi v obvestilni vrstici.</string>
     <string name="download_wikipedia_files">Ali želite prejeti dodatne podatke iz Wikipedije (%1$s MB) ?</string>
@@ -2886,4 +2886,7 @@ Koda predstavlja območje: %1$s x %2$s</string>
     <string name="max_min">Največ/Najmanj</string>
     <string name="range">Obseg</string>
     <string name="osmand_extended_description_part2">Navigacija GPS • Izbirati je mogoče med načinom brez povezave (ni stroškov gostovanja v tujini)) oziroma z vzpostavljeno povezavo (hitrejše delovanje) • Glasovno vodenje od zavoja-do-zavoja na celotni poti (posneti ali sintetizirani glasovi) • Popravek poti se preračuna, kadar premikanje skrene z začrtane poti. • Natančnost vodenja je povečana z opozarjanje na pasove, imena ulic in pričakovan čas prihoda • Za preglednejši in varnejši prikaz se preklop med dnevnim in nočnim pogledom izvede samodejno • Izbrati je mogoče prikaz omejitev hitrosti in prikaz obvestil ob prekoračitvi • Približanje zemljevida se prilagaja hitrosti premikanja • Ciljne točke je mogoče iskati po naslovu, po vrsti (na primer parkirišče, restavracija, hotel, bencinska črpalka, muzej ...) ali pa z vpisom koordinatnega naslova • Podpira vpis vmesnih točk na poti • Omogočeno je beleženje sledi in shranjevanje v zapis GPX</string>
+    <string name="osmand_extended_description_part3">Zemljevid • Prikaz točk POI (point of interests) v bližini • Prilagajanje zemljevida smeri gibanja (ali kompasa) • Prikaz trenutne točke in smer gledanja • Objava trenutnega mesta, da vas prijatelji hitreje najdejo • Shranjevanje najpomembnejših mest med Priljubljenimi točkami • Omogoča izbiro prikaza imen krajev na zemljevidu: angleško, krajevno oziroma fonetično zapisano ime • Prikaz posebnih spletnih zemljevidov, kot so satelitski posnetki (Bing) in različnih prekrivnih plasti, kot so sledi GPX, izohipse in drugo</string>
+    <string name="osmand_extended_description_part6">Pohodništvo, sprehodi in raziskovanje mest • Na zemljevidu so posebej poudarjene pešpoti • Povezave na spletne strani Wikipedija so odličen pripomoček za raziskovanje mesta • Postaje javnih prevozov (avtobus, tramvaj, vlak) in nazivi tras omogočajo hitro orientacijo v mestu • Navigacija GPS v načinu za pešce preračuna pot po pešpoteh • Sledi poti GPX je mogoče shraniti in prikazati za sledenje</string>
+    <string name="osmand_plus_extended_description_part4">Uporaba podatkov OSM in Wikipedije • Kakovostni podatki dveh najboljših sodelovalnih projektov na svetu • Podatki OSM so na voljo po državah ali regijah • Točke POI prek Wikipedije so odličen pripomoček za ogledovanje znamenitosti • Neomejeni prejemi posodobitev neposredno iz programa • Skrčeni vektorski zemljevidi za delo brez povezave se posodabljajo vsaj enkrat mesečno • Možnost izbire med popolnimi podatki območja ali pa zgolj cestnega omrežja (primer: zemljevid Japonske zasede 700 MB, japonsko cestno omrežje pa zgolj 200 MB)</string>
     </resources>

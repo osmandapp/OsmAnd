@@ -22,8 +22,8 @@
 	<string name="poi_deli">Delikatesa</string>
 	<string name="poi_transportation">Prevozi</string>
 		<string name="poi_road_obstacle">Ovire na cesti</string>
-		<string name="poi_filling_station">Bencinski servisi</string>
-		<string name="poi_shop_food">Trgovine z živili</string>
+		<string name="poi_filling_station">Bencinski servis</string>
+		<string name="poi_shop_food">Trgovina z živili</string>
 	<string name="poi_personal_transport">Zasebni prevozi</string>
 		<string name="poi_public_transport">Javni prevozi</string>
 		<string name="poi_air_transport">Letališča</string>

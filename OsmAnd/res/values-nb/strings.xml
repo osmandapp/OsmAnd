@@ -2190,7 +2190,7 @@ Representerer området: %1$s x %2$s</string>
     <string name="points_delete_multiple">Du skal slette %1$d punkt(er). Er du sikker?</string>
     <string name="average_speed">Gjennomsnittshastighet</string>
     <string name="select_gpx_folder">Velg spor-mappe</string>
-    <string name="osmand_extended_description_part1">" OsmAnd (OSM Automated Navigation Directions) er et kart- og navigeringsprogram med tilgang til gratis, verdensomspennende og høykvalitets data fra OpenStreetMap (OSM). Gled deg over tale og visuell navigering, visning av interessepunkter, oppretting og behandling av GPX-spor, bruk av kotevisualisering og høydeinformasjon (gjennom programtillegg), et valg mellom kjøring, sykling, fotgjenger-modus, OSM-redigering og mye mer. "</string>
+    <string name="osmand_extended_description_part1">OsmAnd (OSM Automated Navigation Directions) er et kart- og navigeringsprogram med tilgang til gratis, verdensomspennende og høykvalitets data fra OpenStreetMap (OSM). Gled deg over tale og visuell navigering, visning av interessepunkter, oppretting og behandling av GPX-spor, bruk av kotevisualisering og høydeinformasjon (gjennom programtillegg), et valg mellom kjøring, sykling, fotgjenger-modus, OSM-redigering og mye mer.</string>
     <string name="osmand_plus_long_description_1000_chars">" OsmAnd+ (OSM Automated Navigation Directions)
 \n
 \n OsmAnd+ er et navigeringsprogram med åpen kildekode og med tilgang til et bredt mangfold av globale data fra OpenStreetMap (OSM). Alle kartdata (vektor- eller fliskart) kan lagres på telefonens minnekort for frakoblet bruk. OsmAnd tilbyr også frakoblet og nettbasert rutefunksjon inkludert talebaserte anvisninger.
@@ -2210,7 +2210,7 @@ Representerer området: %1$s x %2$s</string>
 \n - Valgfri fartsavhengig kart-zooming
 \n - Valgfri kartjustering etter kompass- eller bevegelsesretning
 \n - Valgfri fil-henvisning, fartsgrensevisning, innspilte og TTS-tale "</string>
-    <string name="osmand_plus_extended_description_part1">" OsmAnd+ (OSM Automated Navigation Directions) er et kart- og navigeringsprogram med tilgang til gratis, verdensomspennende og høykvalitets data fra OpenStreetMap (OSM). Gled deg over tale og visuell navigering, visning av interessepunkter, oppretting og behandling av GPX-spor, bruk av kotevisualisering og høydeinformasjon, et valg mellom kjøring, sykling, fotgjenger-modus, OSM-redigering og mye mer. OsmAnd+ er betalingsversjonen, ved å kjøpe den støtter du prosjektet, finansierer utviklingen av nye funksjoner, og mottar de siste oppdateringene. Noen av hovedfunksjonene: "</string>
+    <string name="osmand_plus_extended_description_part1">OsmAnd+ (OSM Automated Navigation Directions) er et kart- og navigeringsprogram med tilgang til gratis, verdensomspennende og høykvalitets data fra OpenStreetMap (OSM). Gled deg over tale og visuell navigering, visning av interessepunkter, oppretting og behandling av GPX-spor, bruk av kotevisualisering og høydeinformasjon, et valg mellom kjøring, sykling, fotgjenger-modus, OSM-redigering og mye mer. OsmAnd+ er betalingsversjonen, ved å kjøpe den støtter du prosjektet, finansierer utviklingen av nye funksjoner, og mottar de siste oppdateringene. Noen av hovedfunksjonene:</string>
     <string name="quick_action_map_source_switch">Kartkilden er endret til \"%s\".</string>
     <string name="quick_action_map_source_action">Legg til kartkilde</string>
     <string name="quick_action_map_source_title">Kartkilder</string>

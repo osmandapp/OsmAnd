@@ -1256,7 +1256,7 @@
 	<string name="poi_pump_no">Sin bomba</string>
 
 	<string name="poi_water_characteristic_mineral">Mineralizada</string>
-	<string name="poi_water_characteristic_mud">Lodosa</string>
+	<string name="poi_water_characteristic_mud">Característica del agua: Lodosa</string>
 	<string name="poi_water_characteristic_sulfuric">Sulfúrica</string>
 
 	<string name="poi_water_point">Toma de agua</string>
@@ -1604,12 +1604,12 @@
 	<string name="poi_microbrewery_yes">Sí</string>
 	<string name="poi_microbrewery_no">Sin cerveza artesanal</string>
 
-	<string name="poi_takeaway_yes">Con comida para llevar</string>
+	<string name="poi_takeaway_yes">Comida para llevar</string>
 	<string name="poi_takeaway_no">Comida para llevar: No</string>
 	<string name="poi_takeaway_only">Comida para llevar: Solamente</string>
 
 	<string name="poi_delivery_no">Sin servicio a domicilio</string>
-	<string name="poi_delivery_yes">Con servicio a domicilio</string>
+	<string name="poi_delivery_yes">Servicio a domicilio</string>
 	<string name="poi_delivery_only">Sólo servicio a domicilio</string>
 
 	<string name="poi_outdoor_seating_yes">Asientos exteriores: Si</string>
@@ -1622,7 +1622,7 @@
 
 	<string name="poi_cocktails_yes">Sí</string>
 
-	<string name="poi_second_hand_yes">Con artículos usados</string>
+	<string name="poi_second_hand_yes">Artículos usados</string>
 	<string name="poi_second_hand_no">Sin artículos usados</string>
 	<string name="poi_second_hand_only">Sólo artículos usados</string>
 
@@ -1655,7 +1655,7 @@
 	<string name="poi_toilets_access_community">Acceso a los baños: Comunidad</string>
 	<string name="poi_toilets_access_public">Acceso a los baños: Público</string>
 
-	<string name="poi_diaper_yes">Con cambiador de pañales</string>
+	<string name="poi_diaper_yes">Cambiador de pañales</string>
 	<string name="poi_diaper_no">Sin cambiador de pañales</string>
 	<string name="poi_diaper_room">Habitación para cambio de pañales</string>
 
@@ -1894,29 +1894,29 @@
 <string name="poi_lit_yes">Iluminado: Sí</string>
 	<string name="poi_lit_no">Iluminado: No</string>
 
-	<string name="poi_surface_unpaved">Superficie: Sin pavimentar</string>
-	<string name="poi_surface_paved">Superficie: Pavimentada</string>
-	<string name="poi_surface_asphalt">Superficie: Asfaltada</string>
+	<string name="poi_surface_unpaved">Superficie: Sin pavimento</string>
+	<string name="poi_surface_paved">Superficie: Pavimento</string>
+	<string name="poi_surface_asphalt">Superficie: Asfalto</string>
 	<string name="poi_surface_concrete">Superficie: Hormigón</string>
-	<string name="poi_surface_sett">Superficie: Adoquinada</string>
+	<string name="poi_surface_sett">Superficie: Adoquín</string>
 	<string name="poi_surface_cobblestone">Superficie: Empedrada (adoquín)</string>
 	<string name="poi_surface_paving_stones">Superficie: Pavimento intertrabado</string>
-	<string name="poi_surface_pebblestone">Superficie: Empedrada (canto rodado)</string>
+	<string name="poi_surface_pebblestone">Superficie: Canto rodado</string>
 	<string name="poi_surface_stone">Superficie: Piedras</string>
-	<string name="poi_surface_metal">Superficie: Metalizada</string>
+	<string name="poi_surface_metal">Superficie: Metal</string>
 	<string name="poi_surface_wood">Superficie: Madera</string>
-	<string name="poi_surface_gravel">Superficie: Ripio</string>
-	<string name="poi_surface_fine_gravel">Superficie: Ripio fino</string>
+	<string name="poi_surface_gravel">Superficie: Ripio/grava</string>
+	<string name="poi_surface_fine_gravel">Superficie: Ripio fino/grava fina</string>
 	<string name="poi_surface_compacted">Superficie: Tierra compactada</string>
-	<string name="poi_surface_sand">Superficie: Arenosa</string>
+	<string name="poi_surface_sand">Superficie: Arena</string>
 	<string name="poi_surface_grass">Superficie: Césped</string>
 	<string name="poi_surface_grass_paver">Superficie: Césped pavimentado</string>
 	<string name="poi_surface_ground">Superficie: Tierra (natural)</string>
-	<string name="poi_surface_dirt">Superficie: Lodosa</string>
+	<string name="poi_surface_dirt">Superficie: Tierra lodosa</string>
 	<string name="poi_surface_mud">Superficie: Con hojas</string>
-	<string name="poi_surface_ice">Superficie: Congelada</string>
-	<string name="poi_surface_salt">Superficie: De sal</string>
-	<string name="poi_surface_snow">Superficie: Nevada</string>
+	<string name="poi_surface_ice">Superficie: Hielo</string>
+	<string name="poi_surface_salt">Superficie: Sal</string>
+	<string name="poi_surface_snow">Superficie: Nieve</string>
 
 	<string name="poi_route_bus_ref">Colectivo</string>
 	<string name="poi_route_share_taxi_ref">Taxi compartido</string>
@@ -2155,7 +2155,7 @@
 	<string name="poi_dog_no">Prohibido perros</string>
 
 <string name="poi_power_supply_cee_17_blue">Fuente de alimentación (enchufe): CEE 17 azul</string>
-	<string name="poi_refugee_yes">Con servicios para refugiados</string>
+	<string name="poi_refugee_yes">Servicios para refugiados</string>
 	<string name="poi_refugee_no">Servicios para refugiados: No</string>
 
 	<string name="poi_social_facility_group_home">Grupo residencial</string>
@@ -2934,7 +2934,7 @@
 	<string name="poi_crossing_supervision_attendant">Cruce supervisado: Personalmente</string>
 	<string name="poi_crossing_supervision_camera">Cruce supervisado: Con cámara</string>
 
-<string name="poi_crossing_saltire_yes">Con cruz de San Andrés</string>
+<string name="poi_crossing_saltire_yes">Cruz de San Andrés</string>
 	<string name="poi_crossing_saltire_no">Cruz de San Andrés: No</string>
 	<string name="poi_dispensing_yes">Sí</string>
 	<string name="poi_dispensing_no">Receta médica: No</string>
@@ -2998,7 +2998,7 @@
 	<string name="poi_display_no">Pantalla: No</string>
 	<string name="poi_display_analog_yes">Pantalla análoga</string>
 	<string name="poi_display_digital_yes">Pantalla digital</string>
-	<string name="poi_display_sundial_yes">Con reloj solar</string>
+	<string name="poi_display_sundial_yes">Reloj solar</string>
 
 	<string name="poi_barometer_yes">Barómetro</string>
 	<string name="poi_barometer_no">Barómetro: No</string>
@@ -3067,8 +3067,8 @@
 	<string name="poi_additional_type">Adicional</string>
 <string name="poi_shop_craft">Artículos para arte y artesanías</string>
 
-	<string name="poi_service_bicycle_charging_yes">Cargador eléctrico para bicicletas</string>
-	<string name="poi_service_bicycle_charging_no">Cargador eléctrico para bicicletas: No</string>
+	<string name="poi_service_bicycle_charging_yes">Cargador eléctrico</string>
+	<string name="poi_service_bicycle_charging_no">Cargador eléctrico: No</string>
 
 <string name="poi_fuel_avia_type">Tipo de combustible (aviones)</string>
 	<string name="poi_payment_fuel_type">Tarjetas de combustible</string>
@@ -3134,7 +3134,7 @@
 	<string name="poi_shelter_type">Tipo de refugio</string>
 	<string name="poi_fireplace">Chimenea</string>
 	<string name="poi_seasonal">Estacional</string>
-	<string name="poi_water_characteristic">Características del agua</string>
+	<string name="poi_water_characteristic">Característica del agua</string>
 	<string name="poi_beach_surface_type">Superficie</string>
 	<string name="poi_nudism">Nudismo</string>
 
@@ -3455,4 +3455,5 @@
 	<string name="poi_motorcycle_type_dualsport">Doble propósito</string>
 	<string name="poi_motorcycle_type_standard">Estándar</string>
 
-</resources>
+<string name="poi_lock_basin">Compuerta de cuenca</string>
+	</resources>

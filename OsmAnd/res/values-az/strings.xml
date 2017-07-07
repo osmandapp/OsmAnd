@@ -1624,4 +1624,8 @@
     <string name="unknown_from_location">Başlanğıc nöqtə hələ müəyyənləşdirilməyib</string>
     <string name="local_indexes_cat_map">Standart xəritələr (vektor)</string>
     <string name="validate_gpx_upload_name_pwd">GPX fayllarını yükləmək üçün OSM istifadəçi adı və şifrəni daxil edin.</string>
+    <string name="number_of_contributors">İanə ödəyənlərin sayı</string>
+    <string name="number_of_edits">Düzəlişlərin sayı</string>
+    <string name="reports_for">Hesabat:</string>
+    <string name="file_name_containes_illegal_char">Fayl adında dəstəklənməyən simvol var</string>
     </resources>

@@ -107,7 +107,7 @@ public class QuickSearchCoordinatesFragment extends DialogFragment implements Os
 		view = inflater.inflate(R.layout.search_advanced_coords, container, false);
 
 		Toolbar toolbar = (Toolbar) view.findViewById(R.id.toolbar);
-		toolbar.setNavigationIcon(app.getIconsCache().getIcon(R.drawable.abc_ic_ab_back_mtrl_am_alpha));
+		toolbar.setNavigationIcon(app.getIconsCache().getIcon(R.drawable.abc_ic_ab_back_material));
 		toolbar.setNavigationContentDescription(R.string.access_shared_string_navigate_up);
 		toolbar.setNavigationOnClickListener(new View.OnClickListener() {
 			@Override

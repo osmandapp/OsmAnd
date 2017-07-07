@@ -2971,11 +2971,12 @@ Tidligere destination bliver sidste mellemliggende punkt.</string>
     <string name="mapillary_menu_title_tile_cache">Kortbrik-cache</string>
     <string name="shared_string_reset">Nulstil</string>
     <string name="store_tracks_in_monthly_directories">Gem optagede spor i månedlige mapper</string>
-    <string name="store_tracks_in_monthly_directories_descrp">Gemme optagede spor i undermapper pr optagelsesmåned (fx. 2017-01).</string>
+    <string name="store_tracks_in_monthly_directories_descrp">Gem optagede spor i undermapper pr optagelsesmåned (fx. 2017-01).</string>
     <string name="average">Gennemsnit</string>
     <string name="of">%1$d af %2$d</string>
     <string name="ascent_descent">Stigning/fald</string>
     <string name="moving_time">Tid i bevægelse</string>
-    <string name="max_min">Maks/Min</string>
+    <string name="max_min">Maks/min</string>
     <string name="range">Interval</string>
+    <string name="range_min_max">Interval = min/maks</string>
     </resources>
