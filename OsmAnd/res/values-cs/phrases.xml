@@ -1886,9 +1886,9 @@
 	<string name="poi_pump_status_locked">Stav pumpy: zamčená</string>
 
 	<string name="poi_telescope">Dalekohled</string>
-	<string name="poi_telescope_type_optical">Dalekohled: optický</string>
-	<string name="poi_telescope_type_radio">Dalekohled: rádiový</string>
-	<string name="poi_telescope_type_gamma">Dalekohled: gama</string>
+	<string name="poi_telescope_type_optical">Optický</string>
+	<string name="poi_telescope_type_radio">Rádiový</string>
+	<string name="poi_telescope_type_gamma">Gama</string>
 	<string name="poi_telescope_diameter">Průměr</string>
 	<string name="poi_telescope_spectrum">Spektrum</string>
 	<string name="poi_telescope_usage_education">Použití: výuka</string>
@@ -2275,7 +2275,7 @@
 	<string name="poi_tents_no">Stany nepovoleny</string>
 	<string name="poi_backcountry_yes">Ano</string>
 	<string name="poi_backcountry_no">Ne</string>
-	<string name="poi_scout_yes">Skautský tábor: ano</string>
+	<string name="poi_scout_yes">Ano</string>
 	<string name="poi_scout_no">Skautský tábor: ne</string>
 	<string name="poi_group_only_yes">Pouze skupina: ano</string>
 	<string name="poi_group_only_no">Pouze skupina: ne</string>
@@ -2842,12 +2842,12 @@
 	<string name="poi_fire_hydrant_pressure">Tlak hydrantu</string>
 	<string name="poi_fire_hydrant_count">Počet hydrantů</string>
 	<string name="poi_fire_hydrant_flow_capacity">Kapacita průtoku hydrantu</string>
-	<string name="poi_fire_hydrant_position_sidewalk">Pozice hydrantu: chodník</string>
-	<string name="poi_fire_hydrant_position_green">Pozice hydrantu: tráva</string>
-	<string name="poi_fire_hydrant_position_lane">Pozice hydrantu: cesta</string>
-	<string name="poi_fire_hydrant_position_parking_lot">Pozice hydrantu: parkoviště</string>
-	<string name="poi_fire_hydrant_position_street">Pozice hydrantu: ulice</string>
-	<string name="poi_fire_hydrant_position_underground">Pozice hydrantu: podzemní</string>
+	<string name="poi_fire_hydrant_position_sidewalk">Chodník</string>
+	<string name="poi_fire_hydrant_position_green">Tráva</string>
+	<string name="poi_fire_hydrant_position_lane">Cesta</string>
+	<string name="poi_fire_hydrant_position_parking_lot">Parkoviště</string>
+	<string name="poi_fire_hydrant_position_street">Ulice</string>
+	<string name="poi_fire_hydrant_position_underground">Podzemní</string>
 	<string name="poi_fire_hydrant_style_wsh">Styl hydrantu: wsh</string>
 	<string name="poi_fire_hydrant_style_water_source_main">Hlavní</string>
 	<string name="poi_fire_hydrant_style_water_source_pond">Rybník</string>
@@ -3110,14 +3110,14 @@
 	<string name="poi_takeaway_filter_yes">Ano</string>
 	<string name="poi_delivery_filter_yes">Ano</string>
 	<string name="poi_outdoor_seating_filter_yes">Ano</string>
-	<string name="poi_service_bicycle_charging_yes">Nabíjení jízdních kol: Ano</string>
-	<string name="poi_service_bicycle_charging_no">Nabíjení jízdních kol: ne</string>
+	<string name="poi_service_bicycle_charging_yes">Nabíjení: Ano</string>
+	<string name="poi_service_bicycle_charging_no">Nabíjení: ne</string>
 	<string name="poi_shower_filter_yes">Ano</string>
 	<string name="poi_social_facility_outreach">Nebytové zařízení</string>
 	<string name="poi_hackerspace">Komunitní místo</string>
 
 
-	<string name="poi_health_specialty_palliative_medicine_yes">Zdravotní specializace: paliativní medicína</string>
+	<string name="poi_health_specialty_palliative_medicine_yes">Paliativní medicína</string>
 
 	<string name="poi_fair_trade_yes">Spravedlivý obchod: Ano</string>
 	<string name="poi_fair_trade_no">Spravedlivý obchod: ne</string>
