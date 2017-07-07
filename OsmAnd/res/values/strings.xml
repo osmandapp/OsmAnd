@@ -491,7 +491,7 @@
     <string name="route_duration">Time:</string>
     <string name="rendering_attr_horseRoutes_name">Horse routes</string>
     <string name="no_address_found">No address determined</string>
-    <string name="shared_string_near">Near</string>
+    <string name="shared_string_near">Near %1$s</string>
     <string name="shared_string_hide">Hide</string>
     <string name="av_video_quality_low">Lowest quality</string>
     <string name="av_video_quality_high">Highest quality</string>
