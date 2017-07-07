@@ -38,7 +38,7 @@ public class AudioVideoNoteRecordingMenuFullScreenFragment extends Fragment {
 	@Override
 	public void onDestroyView() {
 		super.onDestroyView();
-		if (!dismissing) {
+		if (!dismissing && menu != null) {
 			menu.finishRecording();
 		}
 	}
