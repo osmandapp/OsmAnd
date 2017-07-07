@@ -46,6 +46,7 @@ import net.osmand.data.PointDescription;
 import net.osmand.plus.ContextMenuAdapter;
 import net.osmand.plus.ContextMenuAdapter.ItemClickListener;
 import net.osmand.plus.ContextMenuItem;
+import net.osmand.plus.GPXDatabase;
 import net.osmand.plus.GPXDatabase.GpxDataItem;
 import net.osmand.plus.GPXUtilities;
 import net.osmand.plus.GPXUtilities.GPXFile;
@@ -86,6 +87,7 @@ import java.util.Arrays;
 import java.util.Collections;
 import java.util.Comparator;
 import java.util.Date;
+import java.util.HashMap;
 import java.util.HashSet;
 import java.util.LinkedHashMap;
 import java.util.LinkedHashSet;
@@ -1511,12 +1513,12 @@ public class AvailableGPXFragment extends OsmandExpandableListFragment {
 
 	public class ProcessGpxTask extends AsyncTask<Void, GpxDataItem, Void> {
 
-		private List<File> processedDataFiles = new ArrayList<>();
+		private Map<File, GpxDataItem> processedDataFiles = new HashMap<>();
 
 		ProcessGpxTask() {
 			List<GpxDataItem> dataItems = app.getGpxDatabase().getItems();
 			for (GpxDataItem item : dataItems) {
-				processedDataFiles.add(item.getFile());
+				processedDataFiles.put(item.getFile(), item);
 			}
 		}
 
@@ -1545,17 +1547,38 @@ public class AvailableGPXFragment extends OsmandExpandableListFragment {
 					String sub = gpxSubfolder.length() == 0 ?
 							gpxFile.getName() : gpxSubfolder + "/" + gpxFile.getName();
 					processGPXFolder(gpxFile, sub);
-				} else if (gpxFile.isFile() && gpxFile.getName().toLowerCase().endsWith(".gpx") && !processedDataFiles.contains(gpxFile)) {
-					GPXFile f = GPXUtilities.loadGPXFile(app, gpxFile);
-					GPXTrackAnalysis analysis = f.getAnalysis(gpxFile.lastModified());
-					GpxDataItem newItem = new GpxDataItem(gpxFile, analysis);
-					app.getGpxDatabase().add(newItem);
+				} else if (gpxFile.isFile() && gpxFile.getName().toLowerCase().endsWith(".gpx")) {
+					if (!processedDataFiles.containsKey(gpxFile)) {
+						GPXFile f = GPXUtilities.loadGPXFile(app, gpxFile);
+						GPXTrackAnalysis analysis = f.getAnalysis(gpxFile.lastModified());
+						GpxDataItem newItem = new GpxDataItem(gpxFile, analysis);
+						newItem.setLastModifiedTime(gpxFile.lastModified());
+						app.getGpxDatabase().add(newItem);
 
-					if (isCancelled()) {
-						break;
+						if (isCancelled()) {
+                            break;
+                        }
+						processedDataFiles.put(gpxFile, newItem);
+						publishProgress(newItem);
+					} else {
+						GpxDataItem dataItem = processedDataFiles.get(gpxFile);
+						if (dataItem.getLastModifiedTime() != gpxFile.lastModified()) {
+							GPXDatabase db = app.getGpxDatabase();
+							GPXFile f = GPXUtilities.loadGPXFile(app, gpxFile);
+							GPXTrackAnalysis analysis = f.getAnalysis(gpxFile.lastModified());
+
+							db.updateLastModifiedTime(dataItem, gpxFile.lastModified());
+							db.updateAnalysis(dataItem, analysis);
+							if (dataItem.getColor() != f.getColor(0)) {
+								db.updateColor(dataItem, f.getColor(0));
+							}
+							if (!dataItem.getFile().getName().equals(gpxFile.getName())) {
+								db.rename(dataItem.getFile(), gpxFile);
+								dataItem.setFile(gpxFile);
+							}
+							publishProgress(dataItem);
+						}
 					}
-					processedDataFiles.add(gpxFile);
-					publishProgress(newItem);
 				}
 			}
 		}

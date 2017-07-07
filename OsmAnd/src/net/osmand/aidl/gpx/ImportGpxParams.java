@@ -12,20 +12,24 @@ public class ImportGpxParams implements Parcelable {
 	private Uri gpxUri;
 	private String sourceRawData;
 	private String destinationPath;
+	private String color;
 
-	public ImportGpxParams(File gpxFile, String destinationPath) {
+	public ImportGpxParams(File gpxFile, String destinationPath, String color) {
 		this.gpxFile = gpxFile;
 		this.destinationPath = destinationPath;
+		this.color = color;
 	}
 
-	public ImportGpxParams(Uri gpxUri, String destinationPath) {
+	public ImportGpxParams(Uri gpxUri, String destinationPath, String color) {
 		this.gpxUri = gpxUri;
 		this.destinationPath = destinationPath;
+		this.color = color;
 	}
 
-	public ImportGpxParams(String sourceRawData, String destinationPath) {
+	public ImportGpxParams(String sourceRawData, String destinationPath, String color) {
 		this.sourceRawData = sourceRawData;
 		this.destinationPath = destinationPath;
+		this.color = color;
 	}
 
 	public ImportGpxParams(Parcel in) {
@@ -59,6 +63,10 @@ public class ImportGpxParams implements Parcelable {
 		return destinationPath;
 	}
 
+	public String getColor() {
+		return color;
+	}
+
 	public void writeToParcel(Parcel out, int flags) {
 		if (gpxFile != null) {
 			out.writeString(gpxFile.getAbsolutePath());
@@ -68,6 +76,7 @@ public class ImportGpxParams implements Parcelable {
 		out.writeParcelable(gpxUri, flags);
 		out.writeString(sourceRawData);
 		out.writeString(destinationPath);
+		out.writeString(color);
 	}
 
 	private void readFromParcel(Parcel in) {
@@ -78,6 +87,7 @@ public class ImportGpxParams implements Parcelable {
 		gpxUri = in.readParcelable(Uri.class.getClassLoader());
 		sourceRawData = in.readString();
 		destinationPath = in.readString();
+		color = in.readString();
 	}
 
 	public int describeContents() {
