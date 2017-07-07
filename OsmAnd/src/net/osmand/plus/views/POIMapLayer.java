@@ -327,7 +327,7 @@ public class POIMapLayer extends OsmandMapLayer implements ContextMenuLayer.ICon
 
 		final Toolbar topBar = new Toolbar(ctx);
 		topBar.setClickable(true);
-		Drawable back = app.getIconsCache().getIcon(R.drawable.abc_ic_ab_back_mtrl_am_alpha);
+		Drawable back = app.getIconsCache().getIcon(R.drawable.abc_ic_ab_back_material);
 		topBar.setNavigationIcon(back);
 		topBar.setNavigationContentDescription(R.string.access_shared_string_navigate_up);
 		topBar.setTitle(title);
@@ -435,7 +435,7 @@ public class POIMapLayer extends OsmandMapLayer implements ContextMenuLayer.ICon
 
 		final Toolbar topBar = new Toolbar(ctx);
 		topBar.setClickable(true);
-		Drawable back = app.getIconsCache().getIcon(R.drawable.abc_ic_ab_back_mtrl_am_alpha);
+		Drawable back = app.getIconsCache().getIcon(R.drawable.abc_ic_ab_back_material);
 		topBar.setNavigationIcon(back);
 		topBar.setNavigationContentDescription(R.string.access_shared_string_navigate_up);
 		topBar.setTitle(title);

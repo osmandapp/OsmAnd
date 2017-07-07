@@ -713,7 +713,7 @@ public class OsMoGroupsActivity extends OsmandExpandableListActivity implements 
 		ll.setOrientation(LinearLayout.VERTICAL);
 		Toolbar tb = new Toolbar(this);
 		tb.setClickable(true);
-		Drawable back = ((OsmandApplication) getApplication()).getIconsCache().getIcon(R.drawable.abc_ic_ab_back_mtrl_am_alpha);
+		Drawable back = ((OsmandApplication) getApplication()).getIconsCache().getIcon(R.drawable.abc_ic_ab_back_material);
 		tb.setNavigationIcon(back);
 		tb.setNavigationContentDescription(R.string.access_shared_string_navigate_up);
 		tb.setTitle(R.string.osmo_sign_in);

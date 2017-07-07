@@ -1559,7 +1559,7 @@ Liste over understøttede lande (dybest set hele verden!): Afghanistan, Albanien
     <string name="gpx_info_maximum_speed">Maks hastighed: %1$s </string>
     <string name="gpx_info_avg_altitude">Gennemsnitshøjde: %1$s</string>
     <string name="gpx_info_diff_altitude">Højdeinterval: %1$s</string>
-    <string name="gpx_info_asc_altitude">Ned-/opstigning: %1$s</string>
+    <string name="gpx_info_asc_altitude">Fald/stigning: %1$s</string>
     <string name="gpx_timespan">Tidsrum: %1$s</string>
     <string name="gpx_timemoving">Tid i bevægelse: %1$s</string>
     <string name="gpx_selection_segment_title">Segment</string>
@@ -2971,5 +2971,11 @@ Tidligere destination bliver sidste mellemliggende punkt.</string>
     <string name="mapillary_menu_title_tile_cache">Kortbrik-cache</string>
     <string name="shared_string_reset">Nulstil</string>
     <string name="store_tracks_in_monthly_directories">Gem optagede spor i månedlige mapper</string>
-    <string name="store_tracks_in_monthly_directories_descrp">Gemme optagede spor i undermapper pr optagelsesmåned (fx. 2017-01).</string>
+    <string name="store_tracks_in_monthly_directories_descrp">Gem optagede spor i undermapper pr optagelsesmåned (fx. 2017-01).</string>
+    <string name="average">Gennemsnit</string>
+    <string name="of">%1$d af %2$d</string>
+    <string name="ascent_descent">Stigning/fald</string>
+    <string name="moving_time">Tid i bevægelse</string>
+    <string name="max_min">Maks/min</string>
+    <string name="range">Interval</string>
     </resources>

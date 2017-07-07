@@ -2146,7 +2146,7 @@
 	<string name="poi_openfire_no">Åben ild ikke tilladt</string>
 	<string name="poi_backcountry_yes">Ja</string>
 	<string name="poi_backcountry_no">Nej</string>
-	<string name="poi_scout_yes">Spejderlejr: ja</string>
+	<string name="poi_scout_yes">Ja</string>
 	<string name="poi_scout_no">Spejderlejr: nej</string>
 	<string name="poi_group_only_yes">Kun grupper: ja</string>
 	<string name="poi_group_only_no">Kun grupper: nej</string>
@@ -2794,7 +2794,7 @@
 	<string name="poi_health_facility_type_nursing_home">Sundhedsfacilitetstype: plejehjem</string>
 	<string name="poi_health_facility_type_support_group_home">Sundhedsfacilitetstype: bofællesskab</string>
 
-	<string name="poi_health_specialty_palliative_medicine_yes">Sundhedsspeciale: palliativ medicin</string>
+	<string name="poi_health_specialty_palliative_medicine_yes">Palliativ medicin</string>
 
 <string name="poi_suction_point">Sugepunkt</string>
 
@@ -2908,12 +2908,12 @@
 	<string name="poi_fire_hydrant_pressure">Brandhanetryk</string>
 	<string name="poi_fire_hydrant_count">Brandhaneantal</string>
 	<string name="poi_fire_hydrant_flow_capacity">Brandhaneflowkapacitet</string>
-	<string name="poi_fire_hydrant_position_sidewalk">Brandhaneplacering: fortov</string>
-	<string name="poi_fire_hydrant_position_green">Brandhaneplacering: græsplæne</string>
-	<string name="poi_fire_hydrant_position_lane">Brandhaneplacering: vognbane</string>
-	<string name="poi_fire_hydrant_position_parking_lot">Brandhaneplacering: parkeringsplads</string>
-	<string name="poi_fire_hydrant_position_street">Brandhaneplacering: gaden</string>
-	<string name="poi_fire_hydrant_position_underground">Brandhaneplacering: under jorden</string>
+	<string name="poi_fire_hydrant_position_sidewalk">Fortov</string>
+	<string name="poi_fire_hydrant_position_green">Græs</string>
+	<string name="poi_fire_hydrant_position_lane">Vognbane</string>
+	<string name="poi_fire_hydrant_position_parking_lot">Parkeringsplads</string>
+	<string name="poi_fire_hydrant_position_street">Gaden</string>
+	<string name="poi_fire_hydrant_position_underground">Under jorden</string>
 	<string name="poi_fire_hydrant_style_wsh">Brandhanetype: wsh</string>
 	<string name="poi_fire_hydrant_style_water_source_main">Primær</string>
 	<string name="poi_fire_hydrant_style_water_source_pond">Dam</string>
@@ -2996,9 +2996,9 @@
 	<string name="poi_payment_troika_no">Troika kort accepteres ikke</string>
 
 <string name="poi_telescope">Teleskop</string>
-	<string name="poi_telescope_type_optical">Teleskop: optisk</string>
-	<string name="poi_telescope_type_radio">Teleskop: radio</string>
-	<string name="poi_telescope_type_gamma">Teleskop: gamma</string>
+	<string name="poi_telescope_type_optical">Optisk</string>
+	<string name="poi_telescope_type_radio">Radio</string>
+	<string name="poi_telescope_type_gamma">Gamma</string>
 	<string name="poi_telescope_diameter">Diameter</string>
 	<string name="poi_telescope_spectrum">Spektrum</string>
 	<string name="poi_telescope_usage_education">Anvendelse: uddannelse</string>
@@ -3096,8 +3096,8 @@
 <string name="poi_fuel_type">Type</string>
 	<string name="poi_payment_type">Betalingstype</string>
 	<string name="poi_additional_type">Yderligere</string>
-<string name="poi_service_bicycle_charging_yes">Cykel opladning: ja</string>
-	<string name="poi_service_bicycle_charging_no">Cykel opladning: nej</string>
+<string name="poi_service_bicycle_charging_yes">Opladning: ja</string>
+	<string name="poi_service_bicycle_charging_no">Opladning: nej</string>
 
 <string name="poi_shop_craft">Kunst og håndværk tilbehørsbutik</string>
 
@@ -3489,4 +3489,5 @@
 	<string name="poi_motorcycle_type_dualsport">Enduro</string>
 	<string name="poi_motorcycle_type_standard">Standard</string>
 
-</resources>
+<string name="poi_lock_basin">Slusebassin</string>
+	</resources>

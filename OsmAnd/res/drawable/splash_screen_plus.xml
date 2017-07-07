@@ -1,0 +1,15 @@
+<?xml version="1.0" encoding="utf-8"?>
+<layer-list xmlns:android="http://schemas.android.com/apk/res/android"
+    android:opacity="opaque">
+    <item android:drawable="@color/map_background_color_light"/>
+    <item android:top="150dp">
+        <bitmap
+            android:gravity="center_horizontal|top"
+            android:src="@drawable/ic_logo_splash_osmand_plus"/>
+    </item>
+    <item android:bottom="128dp">
+        <bitmap
+            android:gravity="center_horizontal|bottom"
+            android:src="@drawable/image_text_osmand_plus"/>
+    </item>
+</layer-list>

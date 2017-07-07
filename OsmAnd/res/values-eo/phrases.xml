@@ -2090,7 +2090,7 @@
 	<string name="poi_openfire_no">Fajro malpermesata</string>
 	<string name="poi_backcountry_yes">Jes</string>
 	<string name="poi_backcountry_no">Ne</string>
-	<string name="poi_scout_yes">Skolta kampadejo: jes</string>
+	<string name="poi_scout_yes">jes</string>
 	<string name="poi_scout_no">Skolta kampadejo: ne</string>
 	<string name="poi_group_only_yes">Nur por grupoj: jes</string>
 	<string name="poi_group_only_no">Nur por grupoj: ne</string>
@@ -2665,12 +2665,12 @@
 	<string name="poi_office_midwife">Oficejo de akuŝisto</string>
 
 	<string name="poi_fire_hydrant_flow_capacity">Flurapido hidranta</string>
-	<string name="poi_fire_hydrant_position_sidewalk">Pozicio de hidranto: irejo</string>
-	<string name="poi_fire_hydrant_position_green">Pozicio de hidranto: gazono</string>
-	<string name="poi_fire_hydrant_position_lane">Pozicio de hidranto: veturejo</string>
-	<string name="poi_fire_hydrant_position_parking_lot">Pozicio de hidranto: parkumejo</string>
-	<string name="poi_fire_hydrant_position_street">Pozicio de hidranto: strato</string>
-	<string name="poi_fire_hydrant_position_underground">Pozicio de hidranto: subtero</string>
+	<string name="poi_fire_hydrant_position_sidewalk">irejo</string>
+	<string name="poi_fire_hydrant_position_green">herbotapiŝo</string>
+	<string name="poi_fire_hydrant_position_lane">veturejo</string>
+	<string name="poi_fire_hydrant_position_parking_lot">parkumejo</string>
+	<string name="poi_fire_hydrant_position_street">strato</string>
+	<string name="poi_fire_hydrant_position_underground">subtero</string>
 	<string name="poi_fire_hydrant_style_wsh">Tipo de hidranto: wsh</string>
 	<string name="poi_fire_hydrant_style_water_source_main">Akvokonduktilo</string>
 	<string name="poi_fire_hydrant_style_water_source_pond">Lageto</string>
@@ -2746,9 +2746,9 @@
 	<string name="poi_payment_troika_yes">Troika (Тройка)</string>
 	<string name="poi_payment_troika_no">Troika (Тройка) kartoj malakceptataj</string>
 
-	<string name="poi_telescope_type_optical">Teleskopo: optika</string>
-	<string name="poi_telescope_type_radio">Teleskopo: radia</string>
-	<string name="poi_telescope_type_gamma">Teleskopo: gam-radia</string>
+	<string name="poi_telescope_type_optical">optika</string>
+	<string name="poi_telescope_type_radio">radia</string>
+	<string name="poi_telescope_type_gamma">gam-radia</string>
 	<string name="poi_telescope_diameter">Diametro</string>
 	<string name="poi_telescope_spectrum">Spektro</string>
 	<string name="poi_telescope_usage_education">Uzado: edukado</string>
@@ -2937,7 +2937,7 @@
 	<string name="poi_health_specialty_urology_yes">urin-sistem-scienco (urologio)</string>
 	<string name="poi_health_specialty_surgery_yes">ĥirurgio</string>
 	<string name="poi_health_specialty_radiology_yes">radi-medicino (radiologio)</string>
-	<string name="poi_health_specialty_palliative_medicine_yes">Specialisto: isto de zorgado pri nekuracebluloj</string>
+	<string name="poi_health_specialty_palliative_medicine_yes">zorgo pri nekuracebluloj</string>
 
 	<string name="poi_health_specialty_psychiatry_yes">psiĥiatrio</string>
 	<string name="poi_health_specialty_neurology_yes">nerv-scienco (neŭrologio)</string>
@@ -3017,8 +3017,8 @@
 	<string name="poi_additional_type">Aldona</string>
 <string name="poi_shop_craft">Materialoj-por-metio-vendejo</string>
 
-	<string name="poi_service_bicycle_charging_yes">Ŝargado de bicikloj: jes</string>
-	<string name="poi_service_bicycle_charging_no">Ŝargado de bicikloj: ne</string>
+	<string name="poi_service_bicycle_charging_yes">Ŝargo: jes</string>
+	<string name="poi_service_bicycle_charging_no">Ŝargo: ne</string>
 
 <string name="poi_fuel_avia_type">Speco</string>
 	<string name="poi_payment_fuel_type">Brulaĵ-kartoj</string>

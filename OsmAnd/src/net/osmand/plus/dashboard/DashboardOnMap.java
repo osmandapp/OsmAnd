@@ -487,7 +487,7 @@ public class DashboardOnMap implements ObservableScrollViewCallbacks, DynamicLis
 		lst.setVisibility(View.GONE);
 		ImageView back = (ImageView) dashboardView.findViewById(R.id.toolbar_back);
 		back.setImageDrawable(
-				getMyApplication().getIconsCache().getIcon(R.drawable.abc_ic_ab_back_mtrl_am_alpha));
+				getMyApplication().getIconsCache().getIcon(R.drawable.abc_ic_ab_back_material));
 		back.setOnClickListener(new View.OnClickListener() {
 
 			@Override

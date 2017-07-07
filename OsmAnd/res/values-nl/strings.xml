@@ -3038,4 +3038,13 @@ Van bijna alle landen is een kaart te downloaden: van Afghanistan tot Zimbabwe, 
     <string name="osmand_plus_extended_description_part6">" functies voor fietsers en voetgangers • weergave van voetpaden, wandelroutes en fietspaden voor buitenactiviteiten • aangepaste weergave en routeberekening voor voetgangers en fietsers • weergave van OV-haltes (bus, tram, trein), inclusief zijnnummers • leg de afgelegde weg vast in een GPX-bestand op het apparaat of online • snelheids- en hoogteweergave • hoogtelijnen en reliëfschaduw weergeven (extra module) "</string>
     <string name="osmand_plus_extended_description_part7">" bewerk OSM • meld verkeerde kaartgegevens • upload GPX-sporen naar OSM • voeg POIs toe en upload ze naar OSM • neem een GPX-spoor op met het apparaat in slaapstand
 \n OsmAnd is open-source wordt actief ontwikkeld. iedereen kan bijdragen door bugs te melsen, de vertaling te verbeteren of nieuwe functies te programmeren. Het project wordt druk verbeterd door al deze vormen van interactie met gebruikers. Het project is tevens afhankelijk van financiële bijdragen om programmeer- en testwerk te kunnen bekostigen. "</string>
+    <string name="shared_string_reset">Reset</string>
+    <string name="shared_string_reload">Opnieuw laden</string>
+    <string name="wrong_user_name">Foute gebruikersnaam!</string>
+    <string name="shared_string_to">Tot</string>
+    <string name="mapillary_menu_date_from">Van</string>
+    <string name="mapillary_menu_descr_dates">Bekijk foto\'s die in een bepaalde periode gemaakt zijn.</string>
+    <string name="mapillary_menu_title_dates">Data</string>
+    <string name="mapillary_menu_edit_text_hint">Geef gebruikersnaam</string>
+    <string name="mapillary_menu_title_username">Gebruikersnaam</string>
     </resources>

@@ -51,7 +51,7 @@ public class IconPopupMenu implements MenuBuilder.Callback, MenuPresenter.Callba
 		mMenu.setCallback(this);
 		mAnchor = anchor;
 		mPopup = new MenuPopupHelper(context, mMenu, anchor);
-		mPopup.setCallback(this);
+		mPopup.setPresenterCallback(this);
 		mPopup.setForceShowIcon(true);
 	}
 

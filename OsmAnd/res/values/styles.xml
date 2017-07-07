@@ -74,8 +74,21 @@
         <item name="android:background">?attr/selectableItemBackground</item>
     </style>
 
+    <style name="SplashScreenPlus" parent="OsmandLightTheme">
+        <item name="android:windowBackground">@drawable/splash_screen_plus</item>
+    </style>
+
+    <style name="SplashScreenFree" parent="OsmandLightTheme">
+        <item name="android:windowBackground">@drawable/splash_screen_free</item>
+    </style>
+
+    <style name="SplashScreenFreeDev" parent="OsmandLightTheme">
+        <item name="android:windowBackground">@drawable/splash_screen_free_dev</item>
+    </style>
+
     <!-- Osmand themes styles -->
     <style name="OsmandLightTheme" parent="Theme.AppCompat.Light">
+        <item name="mapBackground">@color/map_background_color_light</item>
         <item name="chart_marker_background">@drawable/chart_marker_background_light</item>
         <item name="routeParameterTitleColor">@color/color_myloc_distance</item>
         <item name="ctx_menu_info_divider">@color/ctx_menu_info_divider_light</item>
@@ -249,6 +262,7 @@
     </style>
 
     <style name="OsmandDarkTheme" parent="Theme.AppCompat">
+        <item name="mapBackground">@color/map_background_color_dark</item>
         <item name="chart_marker_background">@drawable/chart_marker_background_dark</item>
         <item name="routeParameterTitleColor">@color/osmand_orange</item>
         <item name="ctx_menu_info_divider">@color/ctx_menu_info_divider_dark</item>

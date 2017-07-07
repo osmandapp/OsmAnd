@@ -10,6 +10,7 @@ import android.view.View;
 
 import net.osmand.IndexConstants;
 import net.osmand.aidl.favorite.AFavorite;
+import net.osmand.aidl.favorite.group.AFavoriteGroup;
 import net.osmand.aidl.gpx.ASelectedGpxFile;
 import net.osmand.aidl.maplayer.AMapLayer;
 import net.osmand.aidl.maplayer.point.AMapPoint;
@@ -349,6 +350,67 @@ public class OsmandAidlApi {
 		return control;
 	}
 
+	boolean reloadMap() {
+		refreshMap();
+		return true;
+	}
+
+	boolean addFavoriteGroup(AFavoriteGroup favoriteGroup) {
+		if (favoriteGroup != null) {
+			FavouritesDbHelper favoritesHelper = app.getFavorites();
+			List<FavouritesDbHelper.FavoriteGroup> groups = favoritesHelper.getFavoriteGroups();
+			for (FavouritesDbHelper.FavoriteGroup g : groups) {
+				if (g.name.equals(favoriteGroup.getName())) {
+					return false;
+				}
+			}
+			int color = 0;
+			if (!Algorithms.isEmpty(favoriteGroup.getColor())) {
+				color = ColorDialogs.getColorByTag(favoriteGroup.getColor());
+			}
+			favoritesHelper.addEmptyCategory(favoriteGroup.getName(), color, favoriteGroup.isVisible());
+			return true;
+		} else {
+			return false;
+		}
+	}
+
+	boolean removeFavoriteGroup(AFavoriteGroup favoriteGroup) {
+		if (favoriteGroup != null) {
+			FavouritesDbHelper favoritesHelper = app.getFavorites();
+			List<FavouritesDbHelper.FavoriteGroup> groups = favoritesHelper.getFavoriteGroups();
+			for (FavouritesDbHelper.FavoriteGroup g : groups) {
+				if (g.name.equals(favoriteGroup.getName())) {
+					favoritesHelper.deleteGroup(g);
+					return true;
+				}
+			}
+			return false;
+		} else {
+			return false;
+		}
+	}
+
+	boolean updateFavoriteGroup(AFavoriteGroup gPrev, AFavoriteGroup gNew) {
+		if (gPrev != null && gNew != null) {
+			FavouritesDbHelper favoritesHelper = app.getFavorites();
+			List<FavouritesDbHelper.FavoriteGroup> groups = favoritesHelper.getFavoriteGroups();
+			for (FavouritesDbHelper.FavoriteGroup g : groups) {
+				if (g.name.equals(gPrev.getName())) {
+					int color = 0;
+					if (!Algorithms.isEmpty(gNew.getColor())) {
+						color = ColorDialogs.getColorByTag(gNew.getColor());
+					}
+					favoritesHelper.editFavouriteGroup(g, gNew.getName(), color, gNew.isVisible());
+					return true;
+				}
+			}
+			return false;
+		} else {
+			return false;
+		}
+	}
+
 	boolean addFavorite(AFavorite favorite) {
 		if (favorite != null) {
 			FavouritesDbHelper favoritesHelper = app.getFavorites();
@@ -361,7 +423,50 @@ public class OsmandAidlApi {
 			point.setColor(color);
 			point.setVisible(favorite.isVisible());
 			favoritesHelper.addFavourite(point);
+			refreshMap();
 			return true;
+		} else {
+			return false;
+		}
+	}
+
+	boolean removeFavorite(AFavorite favorite) {
+		if (favorite != null) {
+			FavouritesDbHelper favoritesHelper = app.getFavorites();
+			List<FavouritePoint> favorites = favoritesHelper.getFavouritePoints();
+			for (FavouritePoint f : favorites) {
+				if (f.getName().equals(favorite.getName()) && f.getCategory().equals(favorite.getCategory()) &&
+						f.getLatitude() == favorite.getLat() && f.getLongitude() == favorite.getLon()) {
+					favoritesHelper.deleteFavourite(f);
+					refreshMap();
+					return true;
+				}
+			}
+			return false;
+		} else {
+			return false;
+		}
+	}
+
+	boolean updateFavorite(AFavorite fPrev, AFavorite fNew) {
+		if (fPrev != null && fNew != null) {
+			FavouritesDbHelper favoritesHelper = app.getFavorites();
+			List<FavouritePoint> favorites = favoritesHelper.getFavouritePoints();
+			for (FavouritePoint f : favorites) {
+				if (f.getName().equals(fPrev.getName()) && f.getCategory().equals(fPrev.getCategory()) &&
+						f.getLatitude() == fPrev.getLat() && f.getLongitude() == fPrev.getLon()) {
+					if (fNew.getLat() != f.getLatitude() || fNew.getLon() != f.getLongitude()) {
+						favoritesHelper.editFavourite(f, fNew.getLat(), fNew.getLon());
+					}
+					if (!fNew.getName().equals(f.getName()) || !fNew.getDescription().equals(f.getDescription()) ||
+							!fNew.getCategory().equals(f.getCategory())) {
+						favoritesHelper.editFavouriteName(f, fNew.getName(), fNew.getCategory(), fNew.getDescription());
+					}
+					refreshMap();
+					return true;
+				}
+			}
+			return false;
 		} else {
 			return false;
 		}

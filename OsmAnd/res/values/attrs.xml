@@ -4,6 +4,7 @@
         <attr name="maxVisibleWidth" format="dimension"/>
     </declare-styleable>
     <declare-styleable name="OsmAndTheme">
+        <attr name="mapBackground" format="reference"/>
         <attr name="routeParameterTitleColor" format="color"/>
         <attr name="chart_marker_background" format="reference" />
         <!-- list colors -->
