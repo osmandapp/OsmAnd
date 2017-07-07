@@ -1,14 +1,11 @@
 package net.osmand.plus.myplaces;
 
-import android.animation.Animator;
-import android.animation.AnimatorListenerAdapter;
 import android.content.res.ColorStateList;
 import android.os.AsyncTask;
 import android.os.Bundle;
 import android.support.annotation.NonNull;
 import android.support.annotation.Nullable;
 import android.support.v7.widget.ListPopupWindow;
-import android.util.Log;
 import android.view.Gravity;
 import android.view.LayoutInflater;
 import android.view.View;
@@ -87,7 +84,7 @@ public class SplitSegmentFragment extends OsmAndListFragment {
         setHasOptionsMenu(true);
         final View view = getActivity().getLayoutInflater().inflate(R.layout.split_segments_layout, container, false);
 
-        ListView listView = (ListView) view.findViewById(android.R.id.list);
+        final ListView listView = (ListView) view.findViewById(android.R.id.list);
         listView.setDivider(null);
         listView.setDividerHeight(0);
 
@@ -97,80 +94,40 @@ public class SplitSegmentFragment extends OsmAndListFragment {
 
         listView.addHeaderView(getActivity().getLayoutInflater().inflate(R.layout.gpx_split_segments_empty_header, null, false));
         listView.addFooterView(getActivity().getLayoutInflater().inflate(R.layout.list_shadow_footer, null, false));
-        updateHeader();
         updateContent();
+        updateHeader();
 
         setListAdapter(adapter);
 
         listView.setOnScrollListener(new AbsListView.OnScrollListener() {
-
-            int initialYPos;
-            boolean changed;
-            int visibility = View.VISIBLE;
+            int previousYPos = -1;
 
             @Override
             public void onScrollStateChanged(AbsListView absListView, int i) {
-                initialYPos = -1;
-                changed = false;
+                if (i == SCROLL_STATE_IDLE) {
+                    previousYPos = -1;
+                }
             }
 
             @Override
             public void onScroll(AbsListView absListView, int i, int i1, int i2) {
-                View c = absListView.getChildAt(0);
+                View c = absListView.getChildAt(1);
                 if (c != null) {
                     int currentYPos = -c.getTop() + absListView.getFirstVisiblePosition() * c.getHeight();
-                    if (initialYPos == -1) {
-                        initialYPos = currentYPos;
+                    if (previousYPos == -1) {
+                        previousYPos = currentYPos;
                     }
 
-                    if (currentYPos < headerView.getHeight() && visibility == View.GONE) {
-                        changed = false;
-                        initialYPos = currentYPos;
+                    float yTranslationToSet = headerView.getTranslationY() + (previousYPos - currentYPos);
+                    if (yTranslationToSet < 0 && yTranslationToSet > -headerView.getHeight()) {
+                        headerView.setTranslationY(yTranslationToSet);
+                    } else if (yTranslationToSet < -headerView.getHeight()) {
+                        headerView.setTranslationY(-headerView.getHeight());
+                    } else if (yTranslationToSet > 0) {
+                        headerView.setTranslationY(0);
                     }
 
-                    if (currentYPos < initialYPos && !changed && visibility == View.GONE) {
-                        if (currentYPos < headerView.getHeight()) {
-                            headerView.setTranslationY(currentYPos - headerView.getHeight());
-                        } else {
-                            headerView.animate().translationY(0);
-                            visibility = View.VISIBLE;
-                            changed = true;
-                        }
-                    } else if (currentYPos > initialYPos && !changed && visibility == View.VISIBLE) {
-                        if (currentYPos < headerView.getHeight()) {
-                            headerView.setTranslationY(-currentYPos);
-                        } else {
-                            headerView.animate().translationY(-headerView.getHeight());
-                            visibility = View.GONE;
-                            changed = true;
-                        }
-                    }
-
-                    Log.d("onScroll", "currentYpos: " + currentYPos);
-                    Log.d("onScroll", "visibility: " + visibility);
-                    Log.d("onScroll", "headerView.getHeight(): " + headerView.getHeight());
-                    Log.d("onScroll", "headerView.getTranslationY(): " + headerView.getTranslationY());
-//                    if (headerView.getHeight() != 0) {
-//                        if (visibility == View.VISIBLE) {
-//                            if (currentYPos < headerView.getHeight()) {
-//                                headerView.setTranslationY(-currentYPos);
-//                            } else if (!changed) {
-//                                headerView.animate().translationY(-headerView.getHeight());
-//                                visibility = View.GONE;
-//                                changed = true;
-//                            }
-//                        }
-//
-//                        if (visibility == View.GONE) {
-//                            if (currentYPos < headerView.getHeight()) {
-//                                headerView.setTranslationY(currentYPos - headerView.getHeight());
-//                            } else if (!changed) {
-//                                headerView.animate().translationY(0);
-//                                visibility = View.VISIBLE;
-//                                changed = true;
-//                            }
-//                        }
-//                    }
+                    previousYPos = currentYPos;
                 }
             }
         });
