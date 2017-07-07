@@ -791,7 +791,7 @@ public class MapInfoWidgetsFactory {
 						if(dist < 50) {
 							showMarker = true;
 						} else {
-							text = map.getResources().getString(R.string.shared_string_near) + " " + text;
+							text = map.getResources().getString(R.string.shared_string_near, text);
 						}
 					}
 				}
