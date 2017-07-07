@@ -10,10 +10,10 @@ import android.view.Gravity;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.AbsListView;
 import android.widget.AdapterView;
 import android.widget.ArrayAdapter;
 import android.widget.ImageView;
-import android.widget.LinearLayout;
 import android.widget.ListView;
 import android.widget.TextView;
 
@@ -82,22 +82,56 @@ public class SplitSegmentFragment extends OsmAndListFragment {
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
         setHasOptionsMenu(true);
-        View view = getActivity().getLayoutInflater().inflate(R.layout.update_index, container, false);
-        view.findViewById(R.id.header_layout).setVisibility(View.GONE);
+        final View view = getActivity().getLayoutInflater().inflate(R.layout.split_segments_layout, container, false);
 
-        ListView listView = (ListView) view.findViewById(android.R.id.list);
+        final ListView listView = (ListView) view.findViewById(android.R.id.list);
         listView.setDivider(null);
         listView.setDividerHeight(0);
 
         adapter = new SplitSegmentsAdapter(new ArrayList<GpxDisplayItem>());
-        headerView = getActivity().getLayoutInflater().inflate(R.layout.gpx_split_segments_header, null, false);
-        ((ImageView) headerView.findViewById(R.id.header_split_image)).setImageDrawable(ic.getIcon(R.drawable.ic_action_split_interval, app.getSettings().isLightContent() ? R.color.gpx_split_segment_icon_color : 0));
+        headerView = view.findViewById(R.id.header_layout);
+        ((ImageView) headerView.findViewById(R.id.header_split_image)).setImageDrawable(ic.getIcon(R.drawable.ic_action_split_interval, app.getSettings().isLightContent() ? R.color.icon_color : 0));
 
-        listView.addHeaderView(headerView);
+        listView.addHeaderView(getActivity().getLayoutInflater().inflate(R.layout.gpx_split_segments_empty_header, null, false));
         listView.addFooterView(getActivity().getLayoutInflater().inflate(R.layout.list_shadow_footer, null, false));
+        updateContent();
         updateHeader();
 
         setListAdapter(adapter);
+
+        listView.setOnScrollListener(new AbsListView.OnScrollListener() {
+            int previousYPos = -1;
+
+            @Override
+            public void onScrollStateChanged(AbsListView absListView, int i) {
+                if (i == SCROLL_STATE_IDLE) {
+                    previousYPos = -1;
+                }
+            }
+
+            @Override
+            public void onScroll(AbsListView absListView, int i, int i1, int i2) {
+                View c = absListView.getChildAt(1);
+                if (c != null) {
+                    int currentYPos = -c.getTop() + absListView.getFirstVisiblePosition() * c.getHeight();
+                    if (previousYPos == -1) {
+                        previousYPos = currentYPos;
+                    }
+
+                    float yTranslationToSet = headerView.getTranslationY() + (previousYPos - currentYPos);
+                    if (yTranslationToSet < 0 && yTranslationToSet > -headerView.getHeight()) {
+                        headerView.setTranslationY(yTranslationToSet);
+                    } else if (yTranslationToSet < -headerView.getHeight()) {
+                        headerView.setTranslationY(-headerView.getHeight());
+                    } else if (yTranslationToSet > 0) {
+                        headerView.setTranslationY(0);
+                    }
+
+                    previousYPos = currentYPos;
+                }
+            }
+        });
+
         return view;
     }
 
@@ -143,12 +177,6 @@ public class SplitSegmentFragment extends OsmAndListFragment {
         } else {
             splitIntervalView.setVisibility(View.GONE);
         }
-    }
-
-    @Override
-    public void onResume() {
-        super.onResume();
-        updateContent();
     }
 
     public void updateContent() {
@@ -346,6 +374,7 @@ public class SplitSegmentFragment extends OsmAndListFragment {
             if (convertView == null) {
                 convertView = getMyActivity().getLayoutInflater().inflate(R.layout.gpx_split_segment_fragment, parent, false);
             }
+            convertView.setOnClickListener(null);
             TextView overviewTextView = (TextView) convertView.findViewById(R.id.overview_text);
             ImageView overviewImageView = (ImageView) convertView.findViewById(R.id.overview_image);
             if (position == 0) {
@@ -378,12 +407,6 @@ public class SplitSegmentFragment extends OsmAndListFragment {
                 }
             }
 
-            ImageView distanceOrTimeSpanImageView = ((ImageView) convertView.findViewById(R.id.distance_or_timespan_image));
-            if (position == 0) {
-                distanceOrTimeSpanImageView.setImageDrawable(ic.getIcon(R.drawable.ic_action_track_16, app.getSettings().isLightContent() ? R.color.gpx_split_segment_icon_color : 0));
-            } else {
-                distanceOrTimeSpanImageView.setImageDrawable(ic.getIcon(R.drawable.ic_action_time_span_16, app.getSettings().isLightContent() ? R.color.gpx_split_segment_icon_color : 0));
-            }
             ((ImageView) convertView.findViewById(R.id.start_time_image))
                     .setImageDrawable(ic.getIcon(R.drawable.ic_action_time_start_16, app.getSettings().isLightContent() ? R.color.gpx_split_segment_icon_color : 0));
             ((ImageView) convertView.findViewById(R.id.end_time_image))
@@ -404,18 +427,27 @@ public class SplitSegmentFragment extends OsmAndListFragment {
             if (currentGpxDisplayItem != null) {
                 GPXTrackAnalysis analysis = currentGpxDisplayItem.analysis;
                 if (analysis != null) {
+                    ImageView distanceOrTimeSpanImageView = ((ImageView) convertView.findViewById(R.id.distance_or_timespan_image));
                     TextView distanceOrTimeSpanValue = (TextView) convertView.findViewById(R.id.distance_or_time_span_value);
                     TextView distanceOrTimeSpanText = (TextView) convertView.findViewById(R.id.distance_or_time_span_text);
                     if (position == 0) {
+                        distanceOrTimeSpanImageView.setImageDrawable(ic.getIcon(R.drawable.ic_action_track_16, app.getSettings().isLightContent() ? R.color.gpx_split_segment_icon_color : 0));
                         distanceOrTimeSpanValue.setText(OsmAndFormatter.getFormattedDistance(analysis.totalDistance, app));
                         distanceOrTimeSpanText.setText(app.getString(R.string.distance));
                     } else {
-                        if (analysis.timeSpan > 0) {
-                            distanceOrTimeSpanValue.setText(OsmAndFormatter.getFormattedDuration((int) (analysis.timeSpan / 1000), app));
-                        } else {
-                            distanceOrTimeSpanValue.setText("-");
+                        if (currentGpxDisplayItem.group.isSplitDistance()) {
+                            distanceOrTimeSpanImageView.setImageDrawable(ic.getIcon(R.drawable.ic_action_time_span_16, app.getSettings().isLightContent() ? R.color.gpx_split_segment_icon_color : 0));
+                            if (analysis.timeSpan > 0) {
+                                distanceOrTimeSpanValue.setText(Algorithms.formatDuration((int) (analysis.timeSpan / 1000), app.accessibilityEnabled()));
+                            } else {
+                                distanceOrTimeSpanValue.setText("-");
+                            }
+                            distanceOrTimeSpanText.setText(app.getString(R.string.shared_string_time_span));
+                        } else if (currentGpxDisplayItem.group.isSplitTime()) {
+                            distanceOrTimeSpanImageView.setImageDrawable(ic.getIcon(R.drawable.ic_action_track_16, app.getSettings().isLightContent() ? R.color.gpx_split_segment_icon_color : 0));
+                            distanceOrTimeSpanValue.setText(OsmAndFormatter.getFormattedDistance(analysis.totalDistance, app));
+                            distanceOrTimeSpanText.setText(app.getString(R.string.distance));
                         }
-                        distanceOrTimeSpanText.setText(app.getString(R.string.shared_string_time_span));
                     }
 
                     TextView startTimeValue = (TextView) convertView.findViewById(R.id.start_time_value);
