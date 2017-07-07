@@ -129,17 +129,19 @@ public class GPXDatabase {
 
 	private SQLiteConnection openConnection(boolean readonly) {
 		SQLiteConnection conn = context.getSQLiteAPI().getOrCreateDatabase(DB_NAME, readonly);
-		if (conn.getVersion() == 0 || DB_VERSION != conn.getVersion()) {
+		int version = conn.getVersion();
+		if (version == 0 || DB_VERSION != version) {
 			if (readonly) {
 				conn.close();
 				conn = context.getSQLiteAPI().getOrCreateDatabase(DB_NAME, readonly);
 			}
-			if (conn.getVersion() == 0) {
+			version = conn.getVersion();
+			conn.setVersion(DB_VERSION);
+			if (version == 0) {
 				onCreate(conn);
 			} else {
-				onUpgrade(conn, conn.getVersion(), DB_VERSION);
+				onUpgrade(conn, version, DB_VERSION);
 			}
-			conn.setVersion(DB_VERSION);
 		}
 		return conn;
 	}
