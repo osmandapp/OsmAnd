@@ -227,11 +227,14 @@ public class OsmandAidlService extends Service {
 		public boolean importGpx(ImportGpxParams params) throws RemoteException {
 			if (params != null && !Algorithms.isEmpty(params.getDestinationPath())) {
 				if (params.getGpxFile() != null) {
-					return getApi().importGpxFromFile(params.getGpxFile(), params.getDestinationPath());
+					return getApi().importGpxFromFile(params.getGpxFile(), params.getDestinationPath(),
+							params.getColor(), params.isShow());
 				} else if (params.getGpxUri() != null) {
-					return getApi().importGpxFromUri(params.getGpxUri(), params.getDestinationPath());
+					return getApi().importGpxFromUri(params.getGpxUri(), params.getDestinationPath(),
+							params.getColor(), params.isShow());
 				} else if (params.getSourceRawData() != null) {
-					return getApi().importGpxFromData(params.getSourceRawData(), params.getDestinationPath());
+					return getApi().importGpxFromData(params.getSourceRawData(), params.getDestinationPath(),
+							params.getColor(), params.isShow());
 				}
 			}
 			return false;

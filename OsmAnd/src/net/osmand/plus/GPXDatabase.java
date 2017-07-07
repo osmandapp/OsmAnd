@@ -13,7 +13,7 @@ import java.util.List;
 public class GPXDatabase {
 
 	private static final String DB_NAME = "gpx_database";
-	private static final int DB_VERSION = 2;
+	private static final int DB_VERSION = 3;
 	private static final String GPX_TABLE_NAME = "gpxTable";
 	private static final String GPX_COL_NAME = "fileName";
 	private static final String GPX_COL_DIR = "fileDir";
@@ -38,6 +38,7 @@ public class GPXDatabase {
 	private static final String GPX_COL_WPT_POINTS = "wptPoints";
 
 	private static final String GPX_COL_COLOR = "color";
+	private static final String GPX_COL_FILE_LAST_MODIFIED_TIME = "fileLastModifiedTime";
 
 	private static final String GPX_TABLE_CREATE = "CREATE TABLE IF NOT EXISTS " + GPX_TABLE_NAME + " (" +
 			GPX_COL_NAME + " TEXT, " +
@@ -61,14 +62,30 @@ public class GPXDatabase {
 
 			GPX_COL_POINTS + " int, " +
 			GPX_COL_WPT_POINTS + " int, " +
-			GPX_COL_COLOR + " TEXT);";
+			GPX_COL_COLOR + " TEXT, " +
+			GPX_COL_FILE_LAST_MODIFIED_TIME + " long);";
 
-	private static final String GPX_TABLE_SELECT = "SELECT " + GPX_COL_NAME + ", " + GPX_COL_DIR + "," + GPX_COL_TOTAL_DISTANCE + ", " +
-			GPX_COL_TOTAL_TRACKS + ", " + GPX_COL_START_TIME + ", " + GPX_COL_END_TIME + ", " +
-			GPX_COL_TIME_SPAN + ", " + GPX_COL_TIME_MOVING + ", " + GPX_COL_TOTAL_DISTANCE_MOVING + ", " +
-			GPX_COL_DIFF_ELEVATION_UP + ", " + GPX_COL_DIFF_ELEVATION_DOWN + ", " + GPX_COL_AVG_ELEVATION + ", " +
-			GPX_COL_MIN_ELEVATION + ", " + GPX_COL_MAX_ELEVATION + ", " + GPX_COL_MAX_SPEED + ", " +
-			GPX_COL_AVG_SPEED + ", " + GPX_COL_POINTS + ", " + GPX_COL_WPT_POINTS + ", " + GPX_COL_COLOR +
+	private static final String GPX_TABLE_SELECT = "SELECT " +
+			GPX_COL_NAME + ", " +
+			GPX_COL_DIR + "," +
+			GPX_COL_TOTAL_DISTANCE + ", " +
+			GPX_COL_TOTAL_TRACKS + ", " +
+			GPX_COL_START_TIME + ", " +
+			GPX_COL_END_TIME + ", " +
+			GPX_COL_TIME_SPAN + ", " +
+			GPX_COL_TIME_MOVING + ", " +
+			GPX_COL_TOTAL_DISTANCE_MOVING + ", " +
+			GPX_COL_DIFF_ELEVATION_UP + ", " +
+			GPX_COL_DIFF_ELEVATION_DOWN + ", " +
+			GPX_COL_AVG_ELEVATION + ", " +
+			GPX_COL_MIN_ELEVATION + ", " +
+			GPX_COL_MAX_ELEVATION + ", " +
+			GPX_COL_MAX_SPEED + ", " +
+			GPX_COL_AVG_SPEED + ", " +
+			GPX_COL_POINTS + ", " +
+			GPX_COL_WPT_POINTS + ", " +
+			GPX_COL_COLOR + ", " +
+			GPX_COL_FILE_LAST_MODIFIED_TIME +
 			" FROM " +	GPX_TABLE_NAME;
 
 	private OsmandApplication context;
@@ -77,10 +94,16 @@ public class GPXDatabase {
 		private File file;
 		private GPXTrackAnalysis analysis;
 		private int color;
+		private long fileLastModifiedTime;
 
 		public GpxDataItem(File file, GPXTrackAnalysis analysis) {
 			this.file = file;
 			this.analysis = analysis;
+		}
+
+		public GpxDataItem(File file, int color) {
+			this.file = file;
+			this.color = color;
 		}
 
 		public File getFile() {
@@ -95,8 +118,8 @@ public class GPXDatabase {
 			return color;
 		}
 
-		public void setColor(int color) {
-			this.color = color;
+		public long getFileLastModifiedTime() {
+			return fileLastModifiedTime;
 		}
 	}
 
@@ -117,7 +140,6 @@ public class GPXDatabase {
 				onUpgrade(conn, conn.getVersion(), DB_VERSION);
 			}
 			conn.setVersion(DB_VERSION);
-
 		}
 		return conn;
 	}
@@ -130,6 +152,33 @@ public class GPXDatabase {
 		if (oldVersion < 2) {
 			db.execSQL("ALTER TABLE " + GPX_TABLE_NAME + " ADD " + GPX_COL_COLOR + " TEXT");
 		}
+		if (oldVersion < 3) {
+			db.execSQL("ALTER TABLE " + GPX_TABLE_NAME + " ADD " + GPX_COL_FILE_LAST_MODIFIED_TIME + " long");
+			List<GpxDataItem> items = getItems();
+			for (GpxDataItem item : items) {
+				updateLastModifiedTime(item);
+			}
+		}
+	}
+
+	private boolean updateLastModifiedTime(GpxDataItem item) {
+		SQLiteConnection db = openConnection(false);
+		if (db != null) {
+			try {
+				String fileName = getFileName(item.file);
+				String fileDir = getFileDir(item.file);
+				long fileLastModifiedTime = item.file.lastModified();
+				db.execSQL("UPDATE " + GPX_TABLE_NAME + " SET " +
+								GPX_COL_FILE_LAST_MODIFIED_TIME + " = ? " +
+								" WHERE " + GPX_COL_NAME + " = ? AND " + GPX_COL_DIR + " = ?",
+						new Object[] { fileLastModifiedTime, fileName, fileDir });
+				item.fileLastModifiedTime = fileLastModifiedTime;
+			} finally {
+				db.close();
+			}
+			return true;
+		}
+		return false;
 	}
 
 	public boolean rename(File currentFile, File newFile) {
@@ -163,7 +212,7 @@ public class GPXDatabase {
 								GPX_COL_COLOR + " = ? " +
 								" WHERE " + GPX_COL_NAME + " = ? AND " + GPX_COL_DIR + " = ?",
 						new Object[] { (color == 0 ? "" : Algorithms.colorToString(color)), fileName, fileDir });
-				item.setColor(color);
+				item.color = color;
 			} finally {
 				db.close();
 			}
@@ -225,11 +274,57 @@ public class GPXDatabase {
 		} else {
 			color = Algorithms.colorToString(item.color);
 		}
-		db.execSQL(
-				"INSERT INTO " + GPX_TABLE_NAME + " VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?)",
-				new Object[] { fileName, fileDir, a.totalDistance, a.totalTracks, a.startTime, a.endTime,
-						a.timeSpan, a.timeMoving, a.totalDistanceMoving, a.diffElevationUp, a.diffElevationDown,
-						a.avgElevation, a.minElevation, a.maxElevation, a.maxSpeed, a.avgSpeed, a.points, a.wptPoints, color });
+		if (a != null) {
+			db.execSQL(
+					"INSERT INTO " + GPX_TABLE_NAME + " VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?)",
+					new Object[]{ fileName, fileDir, a.totalDistance, a.totalTracks, a.startTime, a.endTime,
+							a.timeSpan, a.timeMoving, a.totalDistanceMoving, a.diffElevationUp, a.diffElevationDown,
+							a.avgElevation, a.minElevation, a.maxElevation, a.maxSpeed, a.avgSpeed, a.points, a.wptPoints,
+							color, item.file.lastModified() });
+		} else {
+			db.execSQL(
+					"INSERT INTO " + GPX_TABLE_NAME + "(" + GPX_COL_NAME + ", " + GPX_COL_DIR + ", " +
+							GPX_COL_COLOR + ", " + GPX_COL_FILE_LAST_MODIFIED_TIME + ") VALUES (?, ?, ?, ?)",
+					new Object[]{ fileName, fileDir, color, 0 });
+		}
+	}
+
+	public boolean updateAnalysis(GpxDataItem item, GPXTrackAnalysis a) {
+		SQLiteConnection db = openConnection(false);
+		if (db != null && a != null) {
+			try {
+				String fileName = getFileName(item.file);
+				String fileDir = getFileDir(item.file);
+				db.execSQL("UPDATE " + GPX_TABLE_NAME + " SET " +
+								GPX_COL_TOTAL_DISTANCE + " = ?, " +
+								GPX_COL_TOTAL_TRACKS + " = ?, " +
+								GPX_COL_START_TIME + " = ?, " +
+								GPX_COL_END_TIME + " = ?, " +
+								GPX_COL_TIME_SPAN + " = ?, " +
+								GPX_COL_TIME_MOVING + " = ?, " +
+								GPX_COL_TOTAL_DISTANCE_MOVING + " = ?, " +
+								GPX_COL_DIFF_ELEVATION_UP + " = ?, " +
+								GPX_COL_DIFF_ELEVATION_DOWN + " = ?, " +
+								GPX_COL_AVG_ELEVATION + " = ?, " +
+								GPX_COL_MIN_ELEVATION + " = ?, " +
+								GPX_COL_MAX_ELEVATION + " = ?, " +
+								GPX_COL_MAX_SPEED + " = ?, " +
+								GPX_COL_AVG_SPEED + " = ?, " +
+								GPX_COL_POINTS + " = ?, " +
+								GPX_COL_WPT_POINTS + " = ?, " +
+								GPX_COL_FILE_LAST_MODIFIED_TIME + " = ? " +
+								" WHERE " + GPX_COL_NAME + " = ? AND " + GPX_COL_DIR + " = ?",
+						new Object[]{ a.totalDistance, a.totalTracks, a.startTime, a.endTime,
+								a.timeSpan, a.timeMoving, a.totalDistanceMoving, a.diffElevationUp,
+								a.diffElevationDown, a.avgElevation, a.minElevation, a.maxElevation,
+								a.maxSpeed, a.avgSpeed, a.points, a.wptPoints, item.file.lastModified(),
+								fileName, fileDir });
+			} finally {
+				db.close();
+			}
+			return true;
+		}
+		return false;
 	}
 
 	private GpxDataItem readItem(SQLiteCursor query) {
@@ -252,6 +347,7 @@ public class GPXDatabase {
 		int points = (int)query.getInt(16);
 		int wptPoints = (int)query.getInt(17);
 		String color = query.getString(18);
+		long fileLastModifiedTime = query.getLong(19);
 
 		GPXTrackAnalysis a = new GPXTrackAnalysis();
 		a.totalDistance = totalDistance;
@@ -280,10 +376,11 @@ public class GPXDatabase {
 		}
 		GpxDataItem item = new GpxDataItem(new File(dir, fileName), a);
 		try {
-			item.setColor(Algorithms.isEmpty(color) ? 0 : Algorithms.parseColor(color));
+			item.color = Algorithms.isEmpty(color) ? 0 : Algorithms.parseColor(color);
 		} catch (IllegalArgumentException e) {
-			item.setColor(0);
+			item.color = 0;
 		}
+		item.fileLastModifiedTime = fileLastModifiedTime;
 		return item;
 	}
 
