@@ -1014,7 +1014,7 @@
     <string name="ascent_descent">Ascent/Descent</string>
     <string name="moving_time">Moving time</string>
     <string name="max_min">Max/Min</string>
-    <string name="range">Range</string>
+    <string name="range_min_max">Range = Min/Max</string>
     <string name="index_tours">Tours</string>
     <string name="shared_string_all">All</string>
     <string name="waypoints">Waypoints</string>
