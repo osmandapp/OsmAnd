@@ -74,5 +74,9 @@
     <dimen name="default_desc_text_size">16sp</dimen>
     <dimen name="default_sub_text_size">14sp</dimen>
 	<dimen name="welcome_header_text_size">27sp</dimen>
+
+	<dimen name="default_split_segments_overview">14sp</dimen>
+	<dimen name="default_split_segments_data">14sp</dimen>
+	<dimen name="default_split_segments_sub">11sp</dimen>
     
 </resources>
