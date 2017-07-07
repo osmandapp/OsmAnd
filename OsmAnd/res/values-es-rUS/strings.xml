@@ -2863,4 +2863,5 @@ Representa el área: %1$s x %2$s</string>
     <string name="max_min">Máx/Min</string>
     <string name="range">Rango</string>
     <string name="range_min_max">Rango = Min/Máx</string>
+    <string name="min_max">Min/Máx</string>
     </resources>
