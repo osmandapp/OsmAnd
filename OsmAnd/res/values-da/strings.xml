@@ -2979,4 +2979,5 @@ Tidligere destination bliver sidste mellemliggende punkt.</string>
     <string name="max_min">Maks/min</string>
     <string name="range">Interval</string>
     <string name="range_min_max">Interval = min/maks</string>
+    <string name="min_max">Min/maks</string>
     </resources>
