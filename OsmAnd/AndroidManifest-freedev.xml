@@ -6,7 +6,7 @@
         android:icon="@mipmap/icon_nightly"
         tools:replace="android:icon">
         <activity
-            android:name="net.osmand.plus.activities.MapActivity"
+            android:name="net.osmand.plus.activities.SplashActivity"
             android:theme="@style/SplashScreenFreeDev"
             tools:replace="android:theme"/>
         <service

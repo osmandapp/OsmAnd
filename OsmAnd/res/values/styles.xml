@@ -74,15 +74,15 @@
         <item name="android:background">?attr/selectableItemBackground</item>
     </style>
 
-    <style name="SplashScreenPlus" parent="OsmandLightTheme">
+    <style name="SplashScreenPlus" parent="OsmandLightTheme.NoActionbar">
         <item name="android:windowBackground">@drawable/splash_screen_plus</item>
     </style>
 
-    <style name="SplashScreenFree" parent="OsmandLightTheme">
+    <style name="SplashScreenFree" parent="OsmandLightTheme.NoActionbar">
         <item name="android:windowBackground">@drawable/splash_screen_free</item>
     </style>
 
-    <style name="SplashScreenFreeDev" parent="OsmandLightTheme">
+    <style name="SplashScreenFreeDev" parent="OsmandLightTheme.NoActionbar">
         <item name="android:windowBackground">@drawable/splash_screen_free_dev</item>
     </style>
 
