@@ -3,6 +3,7 @@ package net.osmand.plus.views;
 import android.content.Context;
 import android.graphics.Canvas;
 import android.graphics.PointF;
+import android.graphics.drawable.Drawable;
 import android.os.Vibrator;
 import android.support.annotation.DimenRes;
 import android.support.v4.content.ContextCompat;
@@ -73,7 +74,7 @@ public class MapQuickActionLayer extends OsmandMapLayer implements QuickActionRe
         quickActionButton = (ImageButton) mapActivity.findViewById(R.id.map_quick_actions_button);
         setQuickActionButtonMargin();
         isLayerOn = quickActionRegistry.isQuickActionOn();
-        quickActionButton.setImageResource(R.drawable.map_quick_action);
+        setUpQuickActionBtnResources(app.getDaynightHelper().isNightModeForMapControls());
         quickActionButton.setContentDescription(mapActivity.getString(R.string.configure_screen_quick_action));
         quickActionButton.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -293,6 +294,7 @@ public class MapQuickActionLayer extends OsmandMapLayer implements QuickActionRe
             contextMarker.draw(canvas);
         }
         setUpQuickActionBtnVisibility();
+        setUpQuickActionBtnResources(settings.isNightMode());
     }
 
     private void setUpQuickActionBtnVisibility() {
@@ -304,6 +306,20 @@ public class MapQuickActionLayer extends OsmandMapLayer implements QuickActionRe
                 mapActivity.getContextMenu().getMultiSelectionMenu().isVisible() && mapActivity.getContextMenu().getMultiSelectionMenu().getFragmentByTag().isAdded() ||
                 mapActivity.getContextMenu().getMultiSelectionMenu().isVisible() && !mapActivity.getContextMenu().getMultiSelectionMenu().getFragmentByTag().isRemoving();
         quickActionButton.setVisibility(hideQuickButton ? View.GONE : View.VISIBLE);
+    }
+
+    private void setUpQuickActionBtnResources(boolean nightMode) {
+        Drawable icon;
+        int backgroundId;
+        if (nightMode) {
+            backgroundId = R.drawable.btn_circle_night;
+            icon = app.getIconsCache().getIcon(R.drawable.map_quick_action, 0);
+        } else {
+            backgroundId = R.drawable.btn_circle_trans;
+            icon = app.getIconsCache().getIcon(R.drawable.map_quick_action, R.color.icon_color);
+        }
+        quickActionButton.setBackgroundResource(backgroundId);
+        quickActionButton.setImageDrawable(icon);
     }
 
     @Override
