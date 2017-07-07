@@ -7,7 +7,7 @@
 		android:label="@string/app_name_free"
         tools:replace="android:icon, android:label">
         <activity
-            android:name="net.osmand.plus.activities.MapActivity"
+            android:name="net.osmand.plus.activities.SplashActivity"
             android:theme="@style/SplashScreenFree"
             tools:replace="android:theme"/>
         <service
