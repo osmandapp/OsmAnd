@@ -1912,7 +1912,7 @@
 	<string name="poi_aquaculture_mussels">Akvakultúra: mušle</string>
 
 	<string name="poi_telescope">Teleskop/Ďalekohľad</string>
-	<string name="poi_telescope_type_optical">Teleskop: optický</string>
+	<string name="poi_telescope_type_optical">Optický</string>
 	<string name="poi_telescope_type_radio">Teleskop: rádiový</string>
 	<string name="poi_telescope_type_gamma">Teleskop: gamma-žiarenie</string>
 	<string name="poi_nuclear_explosion_crater_diameter">Výbuch: priemer krátera</string>
@@ -1921,12 +1921,12 @@
 	<string name="poi_fire_hydrant_pressure">Tlak v hydrante</string>
 	<string name="poi_fire_hydrant_count">Počet hydrantov</string>
 	<string name="poi_fire_hydrant_flow_capacity">Prietok v hydrante</string>
-	<string name="poi_fire_hydrant_position_sidewalk">Umiestnenie hydrantu: na chodníku</string>
-	<string name="poi_fire_hydrant_position_green">Umiestnenie hydrantu: na trávniku</string>
-	<string name="poi_fire_hydrant_position_lane">Umiestnenie hydrantu: v jazdnom pruhu</string>
-	<string name="poi_fire_hydrant_position_parking_lot">Umiestnenie hydrantu: na parkovisku</string>
-	<string name="poi_fire_hydrant_position_street">Umiestnenie hydrantu: na ulici</string>
-	<string name="poi_fire_hydrant_position_underground">Umiestnenie hydrantu: pod zemou</string>
+	<string name="poi_fire_hydrant_position_sidewalk">Na chodníku</string>
+	<string name="poi_fire_hydrant_position_green">Na trávniku</string>
+	<string name="poi_fire_hydrant_position_lane">V jazdnom pruhu</string>
+	<string name="poi_fire_hydrant_position_parking_lot">Na parkovisku</string>
+	<string name="poi_fire_hydrant_position_street">Na ulici</string>
+	<string name="poi_fire_hydrant_position_underground">Pod zemou</string>
 	<string name="poi_fire_hydrant_style_wsh">Vzhľad hydrantu: wsh</string>
 	<string name="poi_fire_hydrant_style_water_source_main">Vodovod</string>
 	<string name="poi_fire_hydrant_style_water_source_pond">Rybník</string>
@@ -2451,7 +2451,7 @@
 	<string name="poi_tents_no">Stany nepovolené</string>
 	<string name="poi_openfire_yes">Otvorený oheň polovený</string>
 	<string name="poi_openfire_no">Otvorený oheň nepolovený</string>
-	<string name="poi_scout_yes">Skautský tábor: áno</string>
+	<string name="poi_scout_yes">Áno</string>
 	<string name="poi_scout_no">Skautský tábor: nie</string>
 	<string name="poi_group_only_yes">Len skupiny: áno</string>
 	<string name="poi_group_only_no">Len skupiny: nie</string>
@@ -2494,8 +2494,8 @@
 
 	<string name="poi_technical_monument">Technický monument</string>
 
-	<string name="poi_service_bicycle_charging_yes">Nabíjanie bicyklov: áno</string>
-	<string name="poi_service_bicycle_charging_no">Nabíjanie bicyklov: nie</string>
+	<string name="poi_service_bicycle_charging_yes">Nabíjanie: áno</string>
+	<string name="poi_service_bicycle_charging_no">Nabíjanie: nie</string>
 	<string name="poi_bicycle_repair_station">Stanica na vlastnú opravu bicyklov</string>
 
 	<string name="poi_military_checkpoint">Vojenský kontrolný bod</string>
