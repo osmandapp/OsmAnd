@@ -18,6 +18,7 @@ import android.preference.PreferenceManager;
 import android.support.multidex.MultiDex;
 import android.support.multidex.MultiDexApplication;
 import android.support.v7.app.AlertDialog;
+import android.support.v7.app.AppCompatDelegate;
 import android.text.format.DateFormat;
 import android.view.View;
 import android.view.accessibility.AccessibilityManager;
@@ -139,6 +140,9 @@ public class OsmandApplication extends MultiDexApplication {
 			}
 		}
 		super.onCreate();
+		if (android.os.Build.VERSION.SDK_INT < 21) {
+			AppCompatDelegate.setCompatVectorFromResourcesEnabled(true);
+		}
 		createInUiThread();
 		uiHandler = new Handler();
 		appCustomization = new OsmAndAppCustomization();
