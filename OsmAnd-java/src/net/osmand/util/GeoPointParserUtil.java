@@ -368,6 +368,12 @@ public class GeoPointParserUtil {
 		System.out.println("url: " + url);
 		actual = GeoPointParserUtil.parse(url);
 		assertGeoPoint(actual, new GeoParsedPoint(ilat, ilon, z));
+		
+		// https://maps.google.com/maps?q=loc:-21.8835112,-47.7838932 (Name)
+		url = "https://maps.google.com/maps?q=loc:" + dlat + "," + dlon + " (Name)" ;
+		System.out.println("url: " + url);
+		actual = GeoPointParserUtil.parse(url);
+		assertGeoPoint(actual, new GeoParsedPoint(dlat, dlon));
 
 		// http://maps.google.com/maps/ll=34.99393,-106.61568,z=11
 		url = "http://maps.google.com/maps/ll=" + dlat + "," + dlon + ",z=" + z;
