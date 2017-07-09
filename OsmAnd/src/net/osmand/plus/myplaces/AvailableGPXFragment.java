@@ -27,6 +27,8 @@ import android.view.MenuInflater;
 import android.view.MenuItem;
 import android.view.View;
 import android.view.ViewGroup;
+import android.view.inputmethod.InputMethodManager;
+import android.widget.AbsListView;
 import android.widget.ArrayAdapter;
 import android.widget.Button;
 import android.widget.CheckBox;
@@ -328,6 +330,22 @@ public class AvailableGPXFragment extends OsmandExpandableListFragment {
 		if (this.adapter != null) {
 			listView.setAdapter(this.adapter);
 		}
+
+		listView.setOnScrollListener(new AbsListView.OnScrollListener() {
+			@Override
+			public void onScrollStateChanged(AbsListView absListView, int i) {
+				View currentFocus = getActivity().getCurrentFocus();
+				if (currentFocus != null) {
+					InputMethodManager imm = (InputMethodManager) getActivity().getSystemService(Context.INPUT_METHOD_SERVICE);
+					imm.hideSoftInputFromWindow(currentFocus.getWindowToken(), 0);
+				}
+			}
+
+			@Override
+			public void onScroll(AbsListView absListView, int i, int i1, int i2) {
+
+			}
+		});
 
 		return v;
 	}
