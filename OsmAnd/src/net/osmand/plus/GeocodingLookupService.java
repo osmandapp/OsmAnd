@@ -176,7 +176,7 @@ public class GeocodingLookupService {
 							}
 
 							if (!Algorithms.isEmpty(result) && relevantDistance > 100) {
-								result = app.getString(R.string.shared_string_near) + " " + result;
+								result = app.getString(R.string.shared_string_near, result);
 							}
 						}
 
