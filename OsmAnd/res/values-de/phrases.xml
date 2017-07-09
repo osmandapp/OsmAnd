@@ -1868,7 +1868,7 @@
 	<string name="poi_payment_gift_card_no">Geschenkkarte nicht akzeptiert</string>
 	<string name="poi_payment_golden_crown_yes">Golden Crown</string>
 	<string name="poi_payment_golden_crown_no">Golden Crown Karte nicht akzeptiert</string>
-	<string name="poi_payment_pro100_yes">"PRO100 "</string>
+	<string name="poi_payment_pro100_yes">PRO100</string>
 	<string name="poi_payment_pro100_no">PRO100 Karte nicht akzeptiert</string>
 	<string name="poi_payment_union_card_yes">Union Karte</string>
 	<string name="poi_payment_union_card_no">Union Karte nicht akzeptiert</string>
@@ -2273,7 +2273,7 @@
 	<string name="poi_tents_no">Zelten nicht gestattet</string>
 	<string name="poi_backcountry_yes">Ja</string>
 	<string name="poi_backcountry_no">Nein</string>
-	<string name="poi_scout_yes">Pfadfinderlager: ja</string>
+	<string name="poi_scout_yes">Ja</string>
 	<string name="poi_scout_no">Pfadfinderlager: nein</string>
 	<string name="poi_group_only_yes">Nur Gruppen: ja</string>
 	<string name="poi_group_only_no">Nur Gruppen: nein</string>
@@ -3016,8 +3016,8 @@
 <string name="poi_fuel_type">Typ</string>
 	<string name="poi_payment_type">Zahlungsart</string>
 	<string name="poi_additional_type">Zusätzlich</string>
-<string name="poi_service_bicycle_charging_yes">Fahrrad laden: ja</string>
-	<string name="poi_service_bicycle_charging_no">Fahrrad laden: nein</string>
+<string name="poi_service_bicycle_charging_yes">Ladestation: ja</string>
+	<string name="poi_service_bicycle_charging_no">Ladestation: nein</string>
 
 <string name="poi_shop_craft">Geschäft für Kunsthandwerksbedarf</string>
 
