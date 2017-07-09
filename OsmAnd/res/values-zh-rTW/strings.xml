@@ -2884,7 +2884,7 @@ Facebook：https://www.facebook.com/osmandapp
     <string name="mapillary_menu_title_tile_cache">圖磚快取</string>
     <string name="shared_string_reset">重置</string>
     <string name="store_tracks_in_monthly_directories">在每月的資料夾中存儲已記錄的軌跡</string>
-    <string name="store_tracks_in_monthly_directories_descrp">在每個月已記錄的子資料夾中存儲記錄的軌跡 (例如 2017-01）。</string>
+    <string name="store_tracks_in_monthly_directories_descrp">存儲已記錄的軌跡以月份記錄在子資料夾中 (例如 2017-01）。</string>
     <string name="average">平均</string>
     <string name="of">%1$d 的 %2$d</string>
     <string name="ascent_descent">上升/下降</string>
