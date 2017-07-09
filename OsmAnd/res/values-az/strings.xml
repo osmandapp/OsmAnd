@@ -111,7 +111,7 @@
     <string name="no_camera_permission">Proqramın kameradan istifadə etmək icazəsi yoxdur.</string>
     <string name="route_distance">Məsafə:</string>
     <string name="route_duration">Vaxt:</string>
-    <string name="shared_string_near">Yaxın</string>
+    <string name="shared_string_near">%1$s yaxınlığı</string>
     <string name="shared_string_hide">Gizlət</string>
     <string name="av_video_quality_high">Yüksək keyfiyyət</string>
     <string name="av_video_quality_low">Aşağı keyfiyyət</string>
