@@ -988,7 +988,7 @@
 
 	<string name="poi_religious">宗教関係エリア(Religious area)</string>
 	<string name="poi_cutline">森林の切れ目(Cutline)</string>
-	<string name="poi_shower">シャワー(Shower)</string>
+	<string name="poi_shower">シャワー</string>
 	<string name="poi_tree">樹木(Tree)</string>
 	<string name="poi_military_office">軍事事務所(Military office)</string>
 	<string name="poi_wiki_place">ウィキペディア(Wikipedia)</string>
@@ -1148,7 +1148,7 @@
 	<string name="poi_site_type_tumulus">古墳(Tumulus)</string>
 	<string name="poi_site_type_fortification">砦・要塞(Fortification)</string>
 	<string name="poi_site_type_settlement">開拓・居留地(Settlement)</string>
-	<string name="poi_site_type_city">都市(City)</string>
+	<string name="poi_site_type_city">都市遺跡(City)</string>
 	<string name="poi_site_type_hut_circle">環状列石(Hut circle)</string>
 	<string name="poi_site_type_necropolis">巨大墓所または荒廃都市(Necropolis)</string>
 	<string name="poi_site_type_petroglyph">壁画・彫刻(Petroglyph)</string>
@@ -1188,7 +1188,7 @@
 	<string name="poi_gambling_type">ギャンブルの種類</string>
 	<string name="poi_gambling_lottery">宝くじ</string>
 	<string name="poi_gambling_pachinko">パチンコ</string>
-	<string name="poi_gambling_slot_machines">スロットマシーン</string>
+	<string name="poi_gambling_slot_machines">スロットマシン</string>
 	<string name="poi_gambling_betting">賭け事全般</string>
 	<string name="poi_gambling_bingo">ビンゴ</string>
 
@@ -1250,22 +1250,22 @@
 	<string name="poi_toilets_disposal_chemical">化学処理トイレ(Toilets disposal: chemical)</string>
 	<string name="poi_toilets_disposal_bucket">バケツトイレ(Toilets disposal: bucket)</string>
 
-	<string name="poi_backcountry">バックカントリー・管理区域外エリア(Backcountry)</string>
-	<string name="poi_backcountry_yes">可(Yes)</string>
-	<string name="poi_backcountry_no">不可(No)</string>
+	<string name="poi_backcountry">バックカントリー・管理区域外エリアへの進入</string>
+	<string name="poi_backcountry_yes">可</string>
+	<string name="poi_backcountry_no">不可</string>
 	<string name="poi_caravans">キャンピングカー・トレーラー(Caravans)</string>
 	<string name="poi_caravans_yes">可(Yes)</string>
 	<string name="poi_caravans_no">キャンピングカー:不可(Caravans: no)</string>
-	<string name="poi_clock_option">街頭時計の付属表示(Additional)</string>
-	<string name="poi_barometer_yes">気圧計・晴雨計(Barometer)</string>
-	<string name="poi_barometer_no">気圧計:無し(Barometer: no)</string>
-	<string name="poi_date_yes">日付表示(Date display)</string>
-	<string name="poi_date_no">日付表示:無し(Date display: no)</string>
+	<string name="poi_clock_option">街頭時計の付属表示</string>
+	<string name="poi_barometer_yes">気圧計・晴雨計</string>
+	<string name="poi_barometer_no">気圧計:無し</string>
+	<string name="poi_date_yes">日付表示</string>
+	<string name="poi_date_no">日付表示:無し</string>
 
-	<string name="poi_hygrometer_yes">湿度計(Hygrometer)</string>
-	<string name="poi_hygrometer_no">湿度計:無し(Hygrometer: no)</string>
-	<string name="poi_thermometer_yes">温度計(Thermometer)</string>
-	<string name="poi_thermometer_no">温度計:無し(Thermometer: no)</string>
+	<string name="poi_hygrometer_yes">湿度計</string>
+	<string name="poi_hygrometer_no">湿度計:無し</string>
+	<string name="poi_thermometer_yes">温度計</string>
+	<string name="poi_thermometer_no">温度計:無し</string>
 	<string name="poi_denomination">宗派(Denomination)</string>
 	<string name="poi_fireplace">暖炉(Fireplace)</string>
 	<string name="poi_fireplace_yes">有り(Yes)</string>
@@ -1296,7 +1296,7 @@
 	<string name="poi_information_route_marker">ルートマーカー(Route marker)</string>
 	<string name="poi_information_trail_blaze">道しるべ(Trail blaze)</string>
 	<string name="poi_religion_type">宗教(Religion)</string>
-	<string name="poi_recreation_center">レクリエーションセンター(Recreation center)</string>
+	<string name="poi_recreation_center">保養施設(Recreation center)</string>
 
 	<string name="poi_power_supply">電源(Power supply)</string>
 	<string name="poi_power_supply_no">電源:無し(Power supply: no)</string>
@@ -1305,17 +1305,17 @@
 	<string name="poi_power_supply_cee_7_5">電源ソケット形状:CEE 7/5(Power supply (socket): CEE 7/5)</string>
 	<string name="poi_power_supply_nema_5_15">電源ソケット形状:NEMA 5-15(Power supply (socket): NEMA 5-15)</string>
 
-	<string name="poi_star_rating">星評価(Star rating)</string>
-	<string name="poi_stars_1">1 ツーリスト(1 (Tourist))</string>
-	<string name="poi_stars_1s">1S ツーリスト上位(1S (Superior Tourist))</string>
-	<string name="poi_stars_2">2 スタンダード(2 (Standard))</string>
-	<string name="poi_stars_2s">2S スタンダード上位(2S (Superior Standard))</string>
-	<string name="poi_stars_3">3 コンフォート(3 (Comfort))</string>
-	<string name="poi_stars_3s">3S コンフォート上位(3S (Superior Comfort))</string>
-	<string name="poi_stars_4">4 ファーストクラス(4 (First Class))</string>
-	<string name="poi_stars_4s">4S ファーストクラス上位(4S (Superior First Class))</string>
-	<string name="poi_stars_5">5 ラグジュアリー(5 (Luxury))</string>
-	<string name="poi_stars_5s">5S ラグジュアリー上位(5S (Superior Luxury))</string>
+	<string name="poi_star_rating">格付け(Star rating)</string>
+	<string name="poi_stars_1">☆(Tourist)</string>
+	<string name="poi_stars_1s">☆S(Superior Tourist)</string>
+	<string name="poi_stars_2">☆☆(Standard)</string>
+	<string name="poi_stars_2s">☆☆S(Superior Standard)</string>
+	<string name="poi_stars_3">☆☆☆(Comfort)</string>
+	<string name="poi_stars_3s">☆☆☆S(Superior Comfort)</string>
+	<string name="poi_stars_4">☆☆☆☆(First Class)</string>
+	<string name="poi_stars_4s">☆☆☆☆S(Superior First Class)</string>
+	<string name="poi_stars_5">☆☆☆☆☆(Luxury)</string>
+	<string name="poi_stars_5s">☆☆☆☆☆S(Superior Luxury)</string>
 	<string name="poi_tents">テント(Tents)</string>
 	<string name="poi_tents_no">テント不可(Tents not allowed)</string>
 	<string name="poi_tents_yes">許可(Allowed)</string>
@@ -1673,7 +1673,7 @@
 	<string name="poi_scout_yes">肯定(Scout camp: yes)</string>
 	<string name="poi_scout_no">否定(Scout camp: no)</string>
 	<string name="poi_washing_machine_yes">有り(Yes)</string>
-	<string name="poi_shower_filter_yes">有り(Yes)</string>
+	<string name="poi_shower_filter_yes">有り</string>
 	<string name="poi_car_wash_yes">有り(Yes)</string>
 
 	<string name="poi_payment_transport_type">送金の種類(Payment type (transport))</string>
@@ -1686,7 +1686,7 @@
 	<string name="poi_payment_credit_cards_no">クレジットカード不可</string>
 	<string name="poi_payment_notes_yes">紙幣(Banknotes)</string>
 	<string name="poi_payment_notes_no">紙幣不可(Banknotes not accepted)</string>
-	<string name="poi_payment_electronic_purses_yes">電子マネー可</string>
+	<string name="poi_payment_electronic_purses_yes">電子マネー</string>
 	<string name="poi_payment_electronic_purses_no">電子マネー不可</string>
 	<string name="poi_payment_cash_no">現金不可(Cash not accepted)</string>
 	<string name="poi_payment_debit_cards_yes">デビットカード</string>
@@ -1720,8 +1720,8 @@
 	<string name="poi_payment_pikepass_yes">有料道路_PIKEPASS(PIKEPASS)</string>
 	<string name="poi_payment_pikepass_no">有料道路_PIKEPASS不可(PIKEPASS not accepted)</string>
 	<string name="poi_payment_pikepass_designated">有料道路_PIKEPASS指定(PIKEPASS (designated))</string>
-	<string name="poi_payment_visa_debit_yes">デビットカード_Visaデビットカード</string>
-	<string name="poi_payment_visa_debit_no">デビットカード_Visaデビットカード不可</string>
+	<string name="poi_payment_visa_debit_yes">デビットカード_Visaデビット</string>
+	<string name="poi_payment_visa_debit_no">デビットカード_Visaデビット不可</string>
 	<string name="poi_payment_cryptocurrencies_no">暗号通貨不可(Cryptocurrencies not accepted)</string>
 	<string name="poi_payment_others_yes">その他(Others)</string>
 	<string name="poi_payment_others_no">その他該当支払い方法不可(Other payment methods not accepted)</string>
@@ -1729,8 +1729,8 @@
 	<string name="poi_payment_routex_no">燃料カード_Routex不可(Routex fuel cards not accepted)</string>
 	<string name="poi_payment_bancomat_yes">デビットカード_Bancomat</string>
 	<string name="poi_payment_bancomat_no">デビットカード_Bancomat不可</string>
-	<string name="poi_payment_icsf_yes">公共交通機関_ICストアドフェアカード(Suica等)(IC Stored Fare)</string>
-	<string name="poi_payment_icsf_no">公共交通機関_ICストアドフェアカード(Suica等)(IC Stored Fare)</string>
+	<string name="poi_payment_icsf_yes">公共交通機関_ICストアドフェアカード(Suica等)</string>
+	<string name="poi_payment_icsf_no">公共交通機関_ICストアドフェアカード(Suica等)</string>
 	<string name="poi_payment_prepaid_ticket_yes">公共交通機関_プリペイドチケット(Prepaid tickets)</string>
 	<string name="poi_payment_jcb_yes">クレジットカード_JCB</string>
 	<string name="poi_payment_jcb_no">クレジットカード_JCB不可</string>
@@ -2096,7 +2096,7 @@
 	<string name="poi_traffic_signals_sound_no">無し</string>
 	<string name="poi_traffic_signals_sound_walk">歩行許可時のみ</string>
 
-	<string name="poi_resort_type">リゾート種別(Type)</string>
+	<string name="poi_resort_type">保養地、援助施設</string>
 	<string name="poi_telescope_type">望遠鏡の種類</string>
 	<string name="poi_telescope_type_optical">光学望遠鏡</string>
 	<string name="poi_telescope_type_radio">電波望遠鏡</string>
