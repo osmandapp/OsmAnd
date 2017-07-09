@@ -2947,8 +2947,8 @@ Reprezentuje obszar: %1$s x %2$s</string>
     <string name="mapillary_menu_edit_text_hint">Proszę wprowadzić nazwę użytkownika</string>
     <string name="mapillary_menu_filter_description">Można filtrować obrazy według nazwy użytkownika lub daty. Filtry mają zastosowanie dla większych przybliżeń.</string>
     <string name="mapillary_menu_descr_username">Wyświetla obrazy dodane przez określonego użytkownika.</string>
-    <string name="store_tracks_in_monthly_directories">Zapisz zarejestrowane ślady w miesięcznych katalogach</string>
-    <string name="store_tracks_in_monthly_directories_descrp">Zapisz zarejestrowane ślady w podfolderach na każdy rejestrowany miesiąc (np. 2017-01).</string>
+    <string name="store_tracks_in_monthly_directories">Ślady w miesięcznych katalogach</string>
+    <string name="store_tracks_in_monthly_directories_descrp">Przechowuje zarejestrowane ślady w podkatalogach odpowiadającym miesiącom (np. 2017-01).</string>
     <string name="shared_string_reset">Resetuj</string>
     <string name="mapillary_menu_descr_tile_cache">Przeładuj kafelki, aby je uaktualnić.</string>
     <string name="average">Średnia</string>
