@@ -1,3 +1,7 @@
+gradle
+gradlew
+gradlew.bat
+ 
 valgrind/
 bin/
 dist/
