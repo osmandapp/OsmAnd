@@ -1,4 +1,5 @@
-<?xml version="1.0" encoding="UTF-8" standalone="no"?><resources><string name="recording_context_menu_show">اظهر</string>
+<?xml version='1.0' encoding='UTF-8'?>
+<resources><string name="recording_context_menu_show">اظهر</string>
     <string name="av_def_action_picture">التقط صورة</string>
     
     <string name="av_def_action_video">تسجيل الفيديو</string>
@@ -2701,4 +2702,10 @@
     <string name="max_min">أقصى/أدنى</string>
     
     <string name="min_max">الأدنى/الأقصى</string>
+    <string name="release_2_7">/022 اضافة برنامج مابيلاري المساعد بمستوى صور الشوارع
+\n • ويدجت مسطرة لقياس المسافة
+\n • تقسيم فترات فصل الـ GPX بمعلومات مفصلة حول مسارك
+\n • تحسينات وإصلاحات للشوائب
+\n
+\n</string>
     </resources>
