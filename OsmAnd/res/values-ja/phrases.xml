@@ -3227,4 +3227,19 @@
 	<string name="poi_counselling_type_violence_yes">カウンセリング(親密なパートナーあるいは家庭内暴力):対応</string>
 	<string name="poi_counselling_type_violence_no">カウンセリング(親密なパートナーあるいは家庭内暴力):対応できず</string>
 
+	<string name="poi_generator_output_electricity">出力電力</string>
+	<string name="poi_generator_output_electricity_yes">出力:電気</string>
+	<string name="poi_generator_output_hot_water">熱水発電</string>
+	<string name="poi_generator_output_hot_water_yes">出力:熱水</string>
+	<string name="poi_generator_output_steam_yes">出力:蒸気</string>
+	<string name="poi_generator_output_hot_air_yes">出力:熱風</string>
+	<string name="poi_generator_output_cold_water_yes">出力:冷水</string>
+	<string name="poi_generator_output_compressed_air">圧縮空気発電</string>
+	<string name="poi_generator_output_compressed_air_yes">出力:圧縮空気</string>
+	<string name="poi_generator_output_vacuum_yes">出力:真空</string>
+	<string name="poi_generator_output_biogas">バイオガス発電</string>
+	<string name="poi_generator_output_biogas_yes">出力:バイオガス</string>
+
+	<string name="poi_generator_output_electricity_no">出力(電力):無し</string>
+
 	</resources>
