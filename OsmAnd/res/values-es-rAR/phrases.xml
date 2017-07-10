@@ -155,7 +155,7 @@
 	<string name="poi_gate">Portón</string>
 	<string name="poi_city_wall">Muralla de la ciudad</string>
 	<string name="poi_lift_gate">Barrera levadiza</string>
-	<string name="poi_toll_booth">Peaje</string>
+	<string name="poi_toll_booth">Cabina de peaje</string>
 	<string name="poi_border_control">Control fronterizo</string>
 	<string name="poi_traffic_calming_bump">Lomo de burro (corto)</string>
 	<string name="poi_traffic_calming_hump">Resalte</string>
@@ -1807,7 +1807,7 @@
 	<string name="poi_shelter_type_abandoned">Tipo de refugio: Abandonado</string>
 
 	<string name="poi_shelter_type_tent">Tipo de refugio: Carpa</string>
-	<string name="poi_internet_access_type_wlan">Inalámbrico</string>
+	<string name="poi_internet_access_type_wlan">Inalámbrico (Wi-Fi)</string>
 	<string name="poi_wetland_fen">Humedal subterráneo</string>
 	<string name="poi_shelter_type_field_shelter">Refugio rural</string>
 	<string name="poi_internet_access_type_terminal">PC con Internet</string>
@@ -2730,21 +2730,21 @@
 	<string name="poi_medical_system_sidda_yes">Siddha</string>
 	<string name="poi_medical_system_unani_yes">Unani</string>
 
-	<string name="poi_health_service_nursing_yes">Servicio de salud: Con enfermería</string>
+	<string name="poi_health_service_nursing_yes">Servicio de salud: Enfermería</string>
 	<string name="poi_health_service_nursing_no">Servicio de salud: Sin enfermería</string>
-	<string name="poi_health_service_counselling_yes">Servicio de salud: Con asesoramiento</string>
+	<string name="poi_health_service_counselling_yes">Servicio de salud: Asesoramiento</string>
 	<string name="poi_health_service_counselling_no">Servicio de salud: Sin asesoramiento</string>
-	<string name="poi_health_service_examination_yes">Servicio de salud: Con revisión médica</string>
+	<string name="poi_health_service_examination_yes">Servicio de salud: Revisión médica</string>
 	<string name="poi_health_service_examination_no">Servicio de salud: Sin revisión médica</string>
-	<string name="poi_health_service_child_care_yes">Servicio de salud: Con pediatría</string>
+	<string name="poi_health_service_child_care_yes">Servicio de salud: Pediatría</string>
 	<string name="poi_health_service_child_care_no">Servicio de salud: Sin pediatría</string>
-	<string name="poi_health_service_prevention_yes">Servicio de salud: Con prevención</string>
+	<string name="poi_health_service_prevention_yes">Servicio de salud: Prevención</string>
 	<string name="poi_health_service_prevention_no">Servicio de salud: Sin prevención</string>
-	<string name="poi_health_service_prevention_vaccination_yes">Servicio de salud: Con vacunación</string>
+	<string name="poi_health_service_prevention_vaccination_yes">Servicio de salud: Vacunación</string>
 	<string name="poi_health_service_prevention_vaccination_no">Servicio de salud: Sin vacunación</string>
-	<string name="poi_health_service_support_yes">Servicio de salud: Con ayuda</string>
+	<string name="poi_health_service_support_yes">Servicio de salud: Ayuda</string>
 	<string name="poi_health_service_support_no">Servicio de salud: Sin ayuda</string>
-	<string name="poi_health_service_test_yes">Servicio de salud: Con análisis</string>
+	<string name="poi_health_service_test_yes">Servicio de salud: Análisis</string>
 	<string name="poi_health_service_test_no">Servicio de salud: Sin análisis</string>
 
 	<string name="poi_health_facility_type_office">Consultorio médico</string>
