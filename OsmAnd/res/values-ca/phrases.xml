@@ -89,7 +89,7 @@
 	<string name="poi_ses_station">Estació de protecció civil</string>
 	<string name="poi_ford">Gual</string>
 	<string name="poi_lift_gate">Tanca llevadissa</string>
-	<string name="poi_border_control">Punt de control duaner</string>
+	<string name="poi_border_control">Control de fronteres</string>
 	<string name="poi_traffic_calming_bump">Banda reductora</string>
 	<string name="poi_traffic_calming_hump">Ressalt</string>
 	<string name="poi_traffic_calming_cushion">Coixí berlinès</string>
