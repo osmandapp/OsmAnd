@@ -1122,7 +1122,7 @@ Proportionaler Speicher %4$s MB (Android Limit %5$s MB, Dalvik %6$s MB).</string
 	<string name="av_use_external_recorder">System-Video-App nutzen</string>
 	<string name="av_settings_descr">Konfigurieren von Audio- und Video-Einstellungen</string>
 	<string name="shared_string_control_stop">Stopp</string>
-	<string name="av_settings">Audio/Video-Einstellungen</string>
+	<string name="av_settings">Audio/Video Einstellungen</string>
 	<string name="shared_string_control_start">Start</string>
 	<string name="av_def_action_picture">Foto aufnehmen</string>
 	<string name="av_use_external_camera_descr">Systemanwendung für Fotos verwenden</string>
@@ -1200,7 +1200,7 @@ Proportionaler Speicher %4$s MB (Android Limit %5$s MB, Dalvik %6$s MB).</string
 	<string name="cancel_route">Route verwerfen</string>
 	<string name="use_kalman_filter_compass_descr">Kompass-Rauschreduzierung (erhöht die Kompassträgheit etwas)</string>
 	<string name="use_kalman_filter_compass">Kalman-Filter verwenden</string>
-	<string name="use_magnetic_sensor_descr">Magnetsensor statt Lagesensor zur Kompassermittlung verwenden</string>
+	<string name="use_magnetic_sensor_descr">Für den Kompass Magnetsensor statt Lagesensor verwenden</string>
 	<string name="use_magnetic_sensor">Magnetsensor verwenden</string>
 	<string name="local_indexes_cat_srtm">Höhenlinien</string>
 	<string name="wait_current_task_finished">Bitte warten Sie, der laufende Task wird beendet</string>
@@ -1248,7 +1248,7 @@ Proportionaler Speicher %4$s MB (Android Limit %5$s MB, Dalvik %6$s MB).</string
 	<string name="keep_intermediate_points">Zwischenziele behalten</string>
 	<string name="new_directions_point_dialog">Es sind bereits Zwischenziele gesetzt.</string>
 	<string name="context_menu_item_directions_to">Navigiere zu</string>
-	<string name="route_descr_map_location">"Karte: "</string>
+	<string name="route_descr_map_location">Karte:</string>
 	<string name="route_to">nach:</string>
 	<string name="route_via">über:</string>
 	<string name="route_from">von:</string>
@@ -1293,7 +1293,7 @@ Proportionaler Speicher %4$s MB (Android Limit %5$s MB, Dalvik %6$s MB).</string
 	<string name="shared_string_remember_my_choice">Auswahl merken</string>
 	<string name="animate_routing_route_not_calculated">Zuerst die Route berechnen</string>
 	<string name="animate_routing_gpx">Simulation anhand eines GPX-Track</string>
-	<string name="animate_routing_route">Simulation anhand berechneter Route</string>
+	<string name="animate_routing_route">Simulation mit berechneter Route</string>
 	<string name="app_mode_hiking">Wandern</string>
 	<string name="app_mode_motorcycle">Motorrad</string>
 	<string name="app_mode_boat">Boot</string>
@@ -1613,7 +1613,7 @@ Afghanistan, Ägypten, Albanien, Algerien, Andorra, Angola, Anguilla, Antigua un
 \nEs können auch anonym Gruppen eingerichtet werden. Deren Möglichkeiten sind allerdings eingeschränkt: Die Gruppe besteht nur für einige Tage und es ist keine zentrale Steuerung der Gruppe möglich. Voll funktionsfähige Gruppen müssen auf der genannten Internetseite erstellt werden, auf sie haben nur registrierte Nutzer Zugriff. "</string>
 	<string name="osmo_plugin_name">OsMo (OSM Monitoring)</string>
 	<string name="osmo_settings">OsMo</string>
-	<string name="osmo_io_error">"OsMo-Verbindungsproblem: "</string>
+	<string name="osmo_io_error">OsMo-Verbindungsproblem:</string>
 	<string name="osmo_mode_on">OsMo-Sitzung beenden</string>
 	<string name="osmo_mode_off">OsMo-Sitzung starten</string>
 	<string name="osmo_auto_send_locations_descr">Nach App-Start automatisch Streckenaufzeichnung starten und Positionen senden</string>
@@ -1703,7 +1703,7 @@ Mit Neuanmeldung fortfahren?</string>
 	<string name="gpx_info_start_time">Startzeit: %1$tF, %1$tT </string>
 	<string name="gpx_info_end_time">Endzeit: %1$tF, %1$tT </string>
 	<string name="gpx_info_average_speed">Durchschnittsgeschwindigkeit: %1$s </string>
-	<string name="gpx_info_maximum_speed">"Höchstgeschwindigkeit: %1$s "</string>
+	<string name="gpx_info_maximum_speed">Höchstgeschwindigkeit: %1$s</string>
 	<string name="gpx_info_avg_altitude">Durchschnittliche Höhe: %1$s</string>
 	<string name="gpx_info_diff_altitude">Höhenunterschied: %1$s</string>
 	<string name="gpx_info_asc_altitude">Ab-/Anstieg: %1$s</string>
@@ -1718,7 +1718,7 @@ Mit Neuanmeldung fortfahren?</string>
 	<string name="gpx_selection_track">%1$s \nTrack %2$s</string>
 	
 	<string name="gpx_split_interval">Trennungsintervall</string>
-	<string name="gpx_info_subtracks">"Track-Segmente: %1$s "</string>
+	<string name="gpx_info_subtracks">Track-Segmente: %1$s</string>
 	<string name="gpx_monitoring_start">GPX-Aufzeichnung starten</string>
 	<string name="gpx_monitoring_stop">GPX-Aufzeichnung beenden</string>
 	<string name="gpx_start_new_segment">Neues Segment starten</string>
@@ -2014,7 +2014,7 @@ Lon %2$s</string>
     <string name="lang_bn">Bengalisch</string>
     <string name="lang_tl">Tagalog</string>
     <string name="lang_sh">Serbokroatisch</string>
-    <string name="lang_az">Aserbaidschan</string>
+    <string name="lang_az">Aserbeidschanisch</string>
     <string name="lang_br">Bretonisch</string>
     <string name="lang_sq">Albanisch</string>
     <string name="lang_is">Isländisch</string>
@@ -2147,7 +2147,7 @@ Lon %2$s</string>
     <string name="osmand_running_in_background">Läuft im Hintergrund</string>
     <string name="favourites_edit_dialog_title">Favoriteninformationen</string>
     <string name="simulate_your_location_stop_descr">Standort-Simulation beenden</string>
-    <string name="simulate_your_location_descr">Simulation einer berechneten Route oder eines aufgezeichneten GPX-Track</string>
+    <string name="simulate_your_location_descr">Simulation Ihrer Position mit einer berechneten Route oder einem aufgezeichneten GPX-Track</string>
     <string name="recent_places">Letzte Orte</string>
 	<string name="saved_at_time">Erfolgreich gespeichert um: %1$s</string>
 	<string name="count_of_lines">Anzahl der Reihen</string>
@@ -2411,10 +2411,10 @@ Wenn Sie OsmAnd und OSM lieben und unterstützen wollen, so ist dies die perfekt
     <string name="access_widget_expand">Ausklappen</string>
     <string name="access_shared_string_navigate_up">Nach oben navigieren</string>
     <string name="access_sort">Sortieren</string>
-    <string name="access_disable_offroute_recalc">Keine Routenänderung bei Abweichungen</string>
-    <string name="access_disable_offroute_recalc_descr">Keine automatische Routenneuberechnung bei grober Abweichung von der geplanten Route</string>
-    <string name="access_disable_wrong_direction_recalc">Keine Routenänderung bei falscher Fahrtrichtung</string>
-    <string name="access_disable_wrong_direction_recalc_descr">Keine automatische Routenneuberechnung bei Bewegung in entgegengesetzter Richtung</string>
+    <string name="access_disable_offroute_recalc">Keine Neuberechnung nach Verlassen der Route</string>
+    <string name="access_disable_offroute_recalc_descr">Verhindert automatische Neuberechnung der Route nach dem verlassen der geplanten Route</string>
+    <string name="access_disable_wrong_direction_recalc">Keine Neuberechnung bei falscher Fahrtrichtung</string>
+    <string name="access_disable_wrong_direction_recalc_descr">Keine automatische Neuberechnung der Route bei Bewegung in entgegengesetzter Richtung</string>
     <string name="access_smart_autoannounce">Intelligente automatische Ansage</string>
     <string name="access_smart_autoannounce_descr">Nur benachrichtigen, wenn sich die Richtung zum Zielpunkt geändert hat</string>
     <string name="access_autoannounce_period_descr">Kürzester Zeitabstand zwischen Ansagen</string>
@@ -2470,7 +2470,7 @@ Wenn Sie OsmAnd und OSM lieben und unterstützen wollen, so ist dies die perfekt
 \n
 \n und mehr… "</string>
     <string name="show_on_map">Zeige auf der Karte</string>
-    <string name="share_history_subject">" geteilt über OsmAnd"</string>
+    <string name="share_history_subject">geteilt über OsmAnd</string>
     <string name="dist_away_from_my_location">Suche %1$s entfernt</string>
     <string name="advanced_coords_search">Erweiterte Koordinatensuche</string>
     <string name="coords_search">Koordinatensuche</string>
@@ -2575,7 +2575,7 @@ Wenn Sie OsmAnd und OSM lieben und unterstützen wollen, so ist dies die perfekt
     <string name="search_map_hint">Suche Stadt oder Region</string>
     <string name="legacy_search">Alte Suche</string>
     <string name="show_legacy_search">Alte Suche einblenden</string>
-    <string name="show_legacy_search_desc">Veraltete Suche im Seitenmenü aktivieren</string>
+    <string name="show_legacy_search_desc">Alte Suche im Seitenmenü hinzufügen</string>
     <string name="routing_attr_allow_motorway_name">Autobahnen berücksichtigen</string>
     <string name="routing_attr_allow_motorway_description">Autobahnen in Berechnung mit einbeziehen</string>
     <string name="lang_sr_latn">Serbisch (lateinisch)</string>
@@ -2876,4 +2876,6 @@ Abgedeckte Fläche: %1$s x %2$s</string>
     <string name="map_widget_ruler_control_second_mode">Zirkel</string>
     <string name="of">%1$d von %2$d</string>
     <string name="moving_time">Zeit in Bewegung</string>
+    <string name="mapillary_menu_filter_description">Sie können Bilder nach Übermittler oder Datum filtern. Filter gelten nur für nahe Zoomstufen.</string>
+    <string name="min_max">min/max</string>
     </resources>
