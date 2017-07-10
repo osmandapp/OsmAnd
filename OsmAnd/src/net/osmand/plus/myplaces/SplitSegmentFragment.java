@@ -8,6 +8,8 @@ import android.support.annotation.Nullable;
 import android.support.v7.widget.ListPopupWindow;
 import android.view.Gravity;
 import android.view.LayoutInflater;
+import android.view.Menu;
+import android.view.MenuInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.AbsListView;
@@ -72,6 +74,12 @@ public class SplitSegmentFragment extends OsmAndListFragment {
                 getMyApplication().getSettings().isLightContent() ? R.color.ctx_menu_info_view_bg_light
                         : R.color.ctx_menu_info_view_bg_dark));
         getMyActivity().onAttachFragment(this);
+    }
+
+    @Override
+    public void onCreateOptionsMenu(Menu menu, MenuInflater inflater) {
+        menu.clear();
+        getMyActivity().getClearToolbar(false);
     }
 
     @Override
