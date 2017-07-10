@@ -1472,6 +1472,7 @@ public class TrackSegmentFragment extends OsmAndListFragment {
 	}
 
 	void openSplitIntervalScreen() {
+		getMyActivity().getSlidingTabLayout().setVisibility(View.GONE);
 		getMyActivity().getSupportFragmentManager()
 				.beginTransaction()
 				.replace(R.id.track_activity_layout, new SplitSegmentFragment())
