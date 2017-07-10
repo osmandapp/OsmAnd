@@ -1673,7 +1673,7 @@ Memòria in proportzione %4$s MB (lìmite de Android %5$s MB, Dalvik %6$s MB).</
     <string name="traffic_warning_speed_limit">Limite de lestresa</string>
     <string name="traffic_warning_payment">Casellu</string>
     <string name="traffic_warning_stop">Cartellu de Stop</string>
-    <string name="traffic_warning_border_control">Controllu doganale</string>
+    <string name="traffic_warning_border_control">Puntu de controllu</string>
     <string name="traffic_warning_calming">Minimadore de lestresa</string>
     <string name="traffic_warning_speed_camera">Autovelox</string>
     <string name="traffic_warning">Avisu de tràficu</string>

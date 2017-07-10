@@ -1628,4 +1628,5 @@
     <string name="number_of_edits">Düzəlişlərin sayı</string>
     <string name="reports_for">Hesabat:</string>
     <string name="file_name_containes_illegal_char">Fayl adında dəstəklənməyən simvol var</string>
+    <string name="store_tracks_in_monthly_directories">Qeyd edilən izləri aylıq qovluqlarda saxla</string>
     </resources>
