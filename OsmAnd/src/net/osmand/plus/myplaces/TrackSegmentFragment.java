@@ -1477,6 +1477,7 @@ public class TrackSegmentFragment extends OsmAndListFragment {
 				.replace(R.id.track_activity_layout, new SplitSegmentFragment())
 				.addToBackStack(SplitSegmentFragment.TAG)
 				.commit();
+		getMyActivity().getSlidingTabLayout().setVisibility(View.GONE);
 	}
 
 	private class SplitTrackAsyncTask extends AsyncTask<Void, Void, Void> {
