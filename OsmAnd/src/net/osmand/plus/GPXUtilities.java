@@ -275,7 +275,7 @@ public class GPXUtilities {
 		public double minElevation = 99999;
 		public double maxElevation = -100;
 
-		public float minSpeed = 0;
+		public float minSpeed = Float.MAX_VALUE;
 		public float maxSpeed = 0;
 		public float avgSpeed;
 
@@ -519,13 +519,9 @@ public class GPXUtilities {
 						hasElevationData = true;
 					}
 
+					minSpeed = Math.min(speed, minSpeed);
 					if (speed > 0) {
 						totalSpeedSum += speed;
-						if (minSpeed == 0) {
-							minSpeed = speed;
-						} else {
-							minSpeed = Math.min(speed, minSpeed);
-						}
 						maxSpeed = Math.max(speed, maxSpeed);
 						speedCount++;
 					}
@@ -813,9 +809,11 @@ public class GPXUtilities {
 			for (int i = 0; i < tracks.size(); i++) {
 				Track subtrack = tracks.get(i);
 				for (TrkSegment segment : subtrack.segments) {
-					g.totalTracks++;
-					if (segment.points.size() > 1) {
-						splitSegments.add(new SplitSegment(segment));
+					if (!segment.generalSegment) {
+						g.totalTracks++;
+						if (segment.points.size() > 1) {
+							splitSegments.add(new SplitSegment(segment));
+						}
 					}
 				}
 			}

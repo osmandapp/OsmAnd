@@ -2818,12 +2818,12 @@ Repræsenterer område: %1$s x %2$s</string>
     <string name="file_can_not_be_moved">Filen kan ikke flyttes.</string>
     <string name="shared_string_move">Flyt</string>
     <string name="shared_string_time_span">Varighed</string>
-    <string name="shared_string_max">Max</string>
+    <string name="shared_string_max">Maks</string>
     <string name="shared_string_start_time">Starttidspunkt</string>
     <string name="shared_string_end_time">Sluttidspunkt</string>
     <string name="shared_string_color">Farve</string>
     <string name="shared_string_time_moving">Tid i bevægelse</string>
-    <string name="max_speed">Max hastighed</string>
+    <string name="max_speed">Maks-hastighed</string>
     <string name="average_speed">Gennemsnitshastighed</string>
     <string name="gpx_track">Spor</string>
     <string name="points_delete_multiple_succesful">Punkter slettet.</string>

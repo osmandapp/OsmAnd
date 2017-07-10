@@ -870,28 +870,27 @@ Se aprecia la participación activa, y las contribuciones pueden hacerse directa
     <string name="interrupt_music">Pausar música</string>
     <string name="osmand_play_title_30_chars">Navegación y Mapas OsmAnd</string>
     <string name="osmand_short_description_80_chars">Visor y navegador móvil global de mapas OSM con y sin conexión</string>
-    <string name="osmand_long_description_1000_chars">OsmAnd (OSM Automated Navigation Directions, y en español, Guía de Navegación Automatizada de OSM) 
-\n 
-\n OsmAnd es una aplicación de navegación de código abierto con acceso a una amplia variedad de datos globales de OpenStreetMap (OSM). Todos los datos del mapa (vectores y teselas) pueden ser almacenados en la memoria del teléfono para su uso sin conexión. OsmAnd también ofrece funcionalidad de rutas con y sin conexión, incluyendo indicaciones giro-a-giro mediante voz. 
+    <string name="osmand_long_description_1000_chars">"OsmAnd (OSM Automated Navigation Directions, y en español, Guía de Navegación Automatizada de OSM), es una aplicación de navegación de código abierto con acceso a una amplia variedad de datos globales de OpenStreetMap (OSM). Todos los datos del mapa (vectores y teselas) pueden ser almacenados en la memoria del teléfono para su uso sin conexión. OsmAnd también ofrece funcionalidad de rutas con y sin conexión, incluyendo indicaciones giro-a-giro por voz. 
 \n 
 \n Algunas de las funciones fundamentales: 
 \n - Completa funcionalidad sin conexión (almacena los mapas vectoriales o teselas descargados en la memoria del dispositivo) 
 \n - Mapas vectoriales compactos disponibles de todo el planeta 
-\n - Descarga de mapa del país o región directamente desde la aplicación 
+\n - Descarga el mapa del país o región directamente desde la aplicación 
 \n - Posibilidad de superponer varias capas de mapa, como GPX o rutas de navegación, Puntos de Interés (PDI), favoritos, curvas de nivel, paradas de transporte público, mapas adicionales con transparencia personalizable 
 \n - Búsqueda sin conexión de direcciones y lugares (PDI) 
 \n - Rutas sin conexión para distancias de rango medio 
-\n - Modos de automóvil, bicicleta, y peatón con: 
-\n - opción de cambio automático de vista día/noche 
-\n - opción de ampliación según la velocidad 
-\n - alineación opcional del mapa, según brújula o dirección del movimiento 
-\n - opción de indicación de carriles, visualización de límites de velocidad, voces grabadas y sintetizadas. 
+\n 
+\n - Modos de automóvil, bicicleta y peatón con: 
+\n  - (Opcional) Cambio automático de vista día/noche 
+\n  - (Opcional) Ampliación del mapa según la velocidad 
+\n  - (Opcional) Alineación del mapa, según brújula o dirección del movimiento 
+\n  - (Opcional) Indicación de carriles, mostrar límites de velocidad, voces grabadas y sintetizadas
 \n 
 \n Limitaciones de la versión gratuita de OsmAnd: 
 \n - Límite del número de mapas descargados 
 \n - Sin acceso a los PDIs descargados de Wikipedia. 
 \n 
-\n OsmAnd está siendo desarrollado activamente. Nuestro proyecto y su progreso adicional se basa en contribuciones económicas para financiar el desarrollo y las pruebas de nuevas funcionalidades. Por favor, considera comprar OsmAnd+, financiar nuevas funciones o hacer una donación general en OsmAnd.net.</string>
+\n OsmAnd está siendo desarrollado activamente. Nuestro proyecto y su progreso adicional se basa en contribuciones económicas para financiar el desarrollo y las pruebas de nuevas funcionalidades. Por favor, considera comprar OsmAnd+, financiar nuevas funciones o hacer una donación general en OsmAnd.net."</string>
     <string name="osmand_extended_description_4000_chars">"
 OsmAnd (OSM Automated Navigation Directions, o traducido al español, Guía de navegación automatizada OSM) es un mapa y una aplicación de navegación con acceso a datos de todo el mundo, de alta calidad y gratuitos de OpenStreetMap (OSM). Todos los datos de los mapas se pueden almacenar en la tarjeta de memoria del dispositivo para su uso sin conexión. A través del GPS de tu dispositivo, OsmAnd ofrece indicaciones de navegación, visuales y por voz, para automóvil, bicicleta y peatones. Todas las funciones principales funcionan tanto conectado como sin conexión (no necesita Internet).
 OsmAnd+ es la versión de pago de la aplicación. Comprándola das soporte al proyecto, financias el desarrollo de nuevas funciones y obtienes las últimas actualizaciones. Puedes probar la aplicación antes de comprarla instalando la versión libre llamada OsmAnd.
@@ -965,19 +964,18 @@ Afganistán, Albania, Alemania, Andorra, Angola, Anguila, Antigua y Barbuda, Ant
  "</string>
     <string name="osmand_plus_play_title_30_chars">Navegación y Mapas OsmAnd+</string>
     <string name="osmand_plus_short_description_80_chars">Visor y navegador móvil global de mapas OSM con y sin conexión</string>
-    <string name="osmand_plus_long_description_1000_chars">"OsmAnd+ (OSM Automated Navigation Directions, y en español, Guía de Navegación Automatizada de OSM) 
-\n 
-\n OsmAnd+ es una aplicación de navegación de código abierto con acceso a una amplia variedad de datos globales de OpenStreetMap (OSM). Todos los datos del mapa (vectores y teselas), pueden ser almacenados en la memoria del teléfono para su uso sin conexión. OsmAnd también ofrece funcionalidad de rutas con y sin conexión con guía giro-a-giro mediante voz. 
-\n 
+    <string name="osmand_plus_long_description_1000_chars">"OsmAnd+ (OSM Automated Navigation Directions, y en español, Guía de Navegación Automatizada de OSM), es una aplicación de navegación de código abierto con acceso a una amplia variedad de datos globales de OpenStreetMap (OSM). Todos los datos del mapa (vectores y teselas), pueden ser almacenados en la memoria del teléfono para su uso sin conexión. OsmAnd también ofrece funcionalidad de rutas con y sin conexión con guía giro-a-giro por voz. 
+\n
 \n OsmAnd+ es la versión de pago de la aplicación, comprándola das soporte al proyecto, financias el desarrollo de nuevas funciones, y recibes las últimas actualizaciones. 
-\n 
-\n  Algunas de las funciones fundamentales: 
+\n
+\n Algunas de las funciones fundamentales: 
 \n - Completa funcionalidad sin conexión (guarda los mapas vectoriales o teselas descargados en el almacenamiento del dispositivo) 
 \n - Mapas mundiales vectoriales compactos disponibles 
 \n - Descarga ilimitada de mapas de países o regiones directamente desde la aplicación 
 \n - Posibilidad de superponer varias capas de mapa, como GPX o rutas de navegación, Puntos de Interés, favoritos, curvas de nivel, paradas de transporte público, mapas adicionales con transparencia personalizable 
 \n - Búsqueda sin conexión de direcciones y lugares (PDIs) 
-\n - Rutas sin conexión para distancias de rango medio 
+\n - Rutas sin conexión para distancias de rango medio
+\n  
 \n - Modos de automóvil, bicicleta y peatón con: 
 \n  - (Opcional) Cambio automático de vista día/noche 
 \n  - (Opcional) Ampliación del mapa según la velocidad 
@@ -2864,4 +2862,5 @@ Representa el área: %1$s x %2$s</string>
     <string name="moving_time">Tiempo moviéndose</string>
     <string name="max_min">Máx/Min</string>
     <string name="range">Rango</string>
+    <string name="range_min_max">Rango = Min/Máx</string>
     </resources>

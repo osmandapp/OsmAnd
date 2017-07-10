@@ -275,8 +275,8 @@ public class MapInfoWidgetsFactory {
 		int bgLightLandId = R.drawable.btn_round;
 		int bgDarkLandId = R.drawable.btn_round_night;
 
-		int backBtnIconLightId = R.drawable.abc_ic_ab_back_material;
-		int backBtnIconDarkId = R.drawable.abc_ic_ab_back_material;
+		int backBtnIconLightId = R.drawable.ic_arrow_back;
+		int backBtnIconDarkId = R.drawable.ic_arrow_back;
 		int backBtnIconClrLightId = R.color.icon_color;
 		int backBtnIconClrDarkId = 0;
 

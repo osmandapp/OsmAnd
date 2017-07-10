@@ -1,6 +1,6 @@
 <?xml version='1.0' encoding='UTF-8'?>
 <resources><string name="poi_shop">Parduotuvė</string>
-		<string name="poi_shop_food">Maisto parduotuvė</string>
+		<string name="poi_shop_food">Maisto parduotuvė ir supermarketas</string>
 	<string name="poi_emergency">Pagalbos tarnybos</string>
 	<string name="poi_transportation">Transportas</string>
 		<string name="poi_road_obstacle">Kelio kliūtis</string>
@@ -364,4 +364,35 @@
 
 	<string name="poi_estate_agent">Nekilnojamo turto agentūra</string>
 	<string name="poi_ngo">Visuomeninė organizacija</string>
+	<string name="poi_diet">Dieta</string>
+	<string name="poi_health_specialty">Medicininė specializacija</string>
+	<string name="poi_tents">Palapinės</string>
+	<string name="poi_caravans">Automobilių priekabos</string>
+	<string name="poi_power_supply">Elektros energijos šaltinis</string>
+	<string name="poi_medical_system">Medicininė sistema</string>
+	<string name="poi_home_visit">Namų aplankymas</string>
+	<string name="poi_payment_transport_type">Mokėjimo tipas (transportas)</string>
+	<string name="poi_compressed_air_filter">Suspaustas oras</string>
+	<string name="poi_free_flying_characteristic">Charakteristika</string>
+	<string name="poi_cafeteria">Valgykla</string>
+	<string name="poi_zoo_type">Tipas</string>
+	<string name="poi_motorcycle_services">Paslaugos</string>
+	<string name="poi_motorcycle_type">Motociklo tipas</string>
+
+<string name="poi_emergency_infrastructure">Avarinė infrastruktūra</string>
+	<string name="poi_mobile_phone">Mobilių telefonų parduotuvė</string>
+	<string name="poi_motorcycle">Motociklų parduotuvė</string>
+	<string name="poi_optician">Optika</string>
+	<string name="poi_organic">Ekologiški maisto produktai</string>
+	<string name="poi_outdoor">Aktyvaus poilsio prekių parduotuvė</string>
+	<string name="poi_paint">Dažų parduotuvė</string>
+	<string name="poi_pet">Gyvūnų parduotuvė</string>
+	<string name="poi_photo">Foto parduotuvė</string>
+	<string name="poi_radiotechnics">Radijo technikos parduotuvė</string>
+	<string name="poi_second_hand">Naudotų daiktų parduotuvė</string>
+	<string name="poi_scuba_diving_shop">Nardymo prekių parduotuvė</string>
+	<string name="poi_ship_chandler">Laivų aptrūpinimo agentas</string>
+	<string name="poi_tableware">Stalo įrankių parduotuvė</string>
+	<string name="poi_trade">Turgelis</string>
+	<string name="poi_tyres">Padangų parduotuvė</string>
 	</resources>

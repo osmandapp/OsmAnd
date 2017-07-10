@@ -27,6 +27,8 @@ import android.view.MenuInflater;
 import android.view.MenuItem;
 import android.view.View;
 import android.view.ViewGroup;
+import android.view.inputmethod.InputMethodManager;
+import android.widget.AbsListView;
 import android.widget.ArrayAdapter;
 import android.widget.Button;
 import android.widget.CheckBox;
@@ -46,6 +48,7 @@ import net.osmand.data.PointDescription;
 import net.osmand.plus.ContextMenuAdapter;
 import net.osmand.plus.ContextMenuAdapter.ItemClickListener;
 import net.osmand.plus.ContextMenuItem;
+import net.osmand.plus.GPXDatabase;
 import net.osmand.plus.GPXDatabase.GpxDataItem;
 import net.osmand.plus.GPXUtilities;
 import net.osmand.plus.GPXUtilities.GPXFile;
@@ -86,6 +89,7 @@ import java.util.Arrays;
 import java.util.Collections;
 import java.util.Comparator;
 import java.util.Date;
+import java.util.HashMap;
 import java.util.HashSet;
 import java.util.LinkedHashMap;
 import java.util.LinkedHashSet;
@@ -326,6 +330,22 @@ public class AvailableGPXFragment extends OsmandExpandableListFragment {
 		if (this.adapter != null) {
 			listView.setAdapter(this.adapter);
 		}
+
+		listView.setOnScrollListener(new AbsListView.OnScrollListener() {
+			@Override
+			public void onScrollStateChanged(AbsListView absListView, int i) {
+				View currentFocus = getActivity().getCurrentFocus();
+				if (currentFocus != null) {
+					InputMethodManager imm = (InputMethodManager) getActivity().getSystemService(Context.INPUT_METHOD_SERVICE);
+					imm.hideSoftInputFromWindow(currentFocus.getWindowToken(), 0);
+				}
+			}
+
+			@Override
+			public void onScroll(AbsListView absListView, int i, int i1, int i2) {
+
+			}
+		});
 
 		return v;
 	}
@@ -1511,12 +1531,13 @@ public class AvailableGPXFragment extends OsmandExpandableListFragment {
 
 	public class ProcessGpxTask extends AsyncTask<Void, GpxDataItem, Void> {
 
-		private List<File> processedDataFiles = new ArrayList<>();
+		private Map<File, GpxDataItem> processedDataFiles = new HashMap<>();
+		private GPXDatabase db = app.getGpxDatabase();
 
 		ProcessGpxTask() {
-			List<GpxDataItem> dataItems = app.getGpxDatabase().getItems();
+			List<GpxDataItem> dataItems = db.getItems();
 			for (GpxDataItem item : dataItems) {
-				processedDataFiles.add(item.getFile());
+				processedDataFiles.put(item.getFile(), item);
 			}
 		}
 
@@ -1545,17 +1566,23 @@ public class AvailableGPXFragment extends OsmandExpandableListFragment {
 					String sub = gpxSubfolder.length() == 0 ?
 							gpxFile.getName() : gpxSubfolder + "/" + gpxFile.getName();
 					processGPXFolder(gpxFile, sub);
-				} else if (gpxFile.isFile() && gpxFile.getName().toLowerCase().endsWith(".gpx") && !processedDataFiles.contains(gpxFile)) {
-					GPXFile f = GPXUtilities.loadGPXFile(app, gpxFile);
-					GPXTrackAnalysis analysis = f.getAnalysis(gpxFile.lastModified());
-					GpxDataItem newItem = new GpxDataItem(gpxFile, analysis);
-					app.getGpxDatabase().add(newItem);
-
-					if (isCancelled()) {
-						break;
+				} else if (gpxFile.isFile() && gpxFile.getName().toLowerCase().endsWith(".gpx")) {
+					GpxDataItem item = processedDataFiles.get(gpxFile);
+					if (item == null || item.getFileLastModifiedTime() != gpxFile.lastModified()) {
+						GPXFile f = GPXUtilities.loadGPXFile(app, gpxFile);
+						GPXTrackAnalysis analysis = f.getAnalysis(gpxFile.lastModified());
+						if (item == null) {
+							item = new GpxDataItem(gpxFile, analysis);
+							db.add(item);
+						} else {
+							db.updateAnalysis(item, analysis);
+						}
 					}
-					processedDataFiles.add(gpxFile);
-					publishProgress(newItem);
+					processedDataFiles.put(gpxFile, item);
+					publishProgress(item);
+				}
+				if (isCancelled()) {
+					break;
 				}
 			}
 		}

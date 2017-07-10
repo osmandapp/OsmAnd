@@ -257,7 +257,7 @@
     <string name="left">向左方</string>
     <string name="front_left">左前方</string>
     <string name="oclock">點鐘</string>
-    <string name="towards">接近</string>
+    <string name="towards">朝向</string>
     <string name="accuracy">精確性</string>
     <string name="altitude">海拔高度</string>
     <string name="no_info">沒有數據</string>
@@ -656,15 +656,15 @@
     <string name="sd_unmounted">SD卡無法存取。\n您將無法看到地圖或找地點。</string>
     <string name="sd_mounted_ro">SD 卡是唯讀模式。\n您只能看預載的地圖且無法由網路下載。</string>
     <string name="unzipping_file">解壓縮檔案…</string>
-    <string name="route_tr">右轉之後直行</string>
-    <string name="route_tshr">右後轉之後直行</string>
-    <string name="route_tslr">轉入右前方之後直行</string>
-    <string name="route_tl">左轉之後直行</string>
-    <string name="route_tshl">左後轉之後直行</string>
-    <string name="route_tsll">轉入右前方之後直行</string>
-    <string name="route_tu">迴轉之後直行</string>
+    <string name="route_tr">右轉後直行</string>
+    <string name="route_tshr">向右急轉後直行</string>
+    <string name="route_tslr">向右急轉後直行</string>
+    <string name="route_tl">左轉後直行</string>
+    <string name="route_tshl">向左急轉後直行</string>
+    <string name="route_tsll">向左急轉後直行</string>
+    <string name="route_tu">迴轉後直行</string>
     <string name="route_head">前方</string>
-    <string name="first_time_continue">繼續</string>
+    <string name="first_time_continue">隨後</string>
     <string name="first_time_download">下載地區</string>
     <string name="search_poi_location">搜尋訊號中…</string>
     <string name="search_near_map">查尋目前地圖中心附近</string>
@@ -2077,7 +2077,7 @@ OsmAnd (Automated Navigation Directions) 是一個地圖和導航的應用程式
     <string name="hillshade_layer_disabled">地形陰影圖層停用</string>
     <string name="activate_seamarks_plugin">請啟動航線標識外掛元件</string>
     <string name="activate_srtm_plugin">請啟動 SRTM 外掛元件</string>
-    <string name="later">接著</string>
+    <string name="later">隨後</string>
     <string name="get_full_version">完整版</string>
     <string name="regions">地區</string>
 
@@ -2884,11 +2884,12 @@ Facebook：https://www.facebook.com/osmandapp
     <string name="mapillary_menu_title_tile_cache">圖磚快取</string>
     <string name="shared_string_reset">重置</string>
     <string name="store_tracks_in_monthly_directories">在每月的資料夾中存儲已記錄的軌跡</string>
-    <string name="store_tracks_in_monthly_directories_descrp">在每個月已記錄的子資料夾中存儲記錄的軌跡 (例如 2017-01）。</string>
+    <string name="store_tracks_in_monthly_directories_descrp">存儲已記錄的軌跡以月份記錄在子資料夾中 (例如 2017-01）。</string>
     <string name="average">平均</string>
     <string name="of">%1$d 的 %2$d</string>
     <string name="ascent_descent">上升/下降</string>
     <string name="moving_time">移動時間</string>
     <string name="max_min">最大/最小</string>
     <string name="range">範圍</string>
+    <string name="range_min_max">範圍 = 最小/最大</string>
     </resources>

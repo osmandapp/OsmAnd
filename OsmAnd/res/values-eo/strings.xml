@@ -2857,4 +2857,5 @@ Indikas lokon:  %1$s x %2$s"</string>
     <string name="moving_time">Movada tempo</string>
     <string name="max_min">Maks./min.</string>
     <string name="range">Variejo</string>
+    <string name="range_min_max">Variejo = min/maks</string>
     </resources>

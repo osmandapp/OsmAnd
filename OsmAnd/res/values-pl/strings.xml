@@ -2891,7 +2891,7 @@ Reprezentuje obszar: %1$s x %2$s</string>
     <string name="display_zoom_level">Stopień przybliżenia: %1$s</string>
     <string name="srtm_color_scheme">Zestaw kolorów</string>
     <string name="show_from_zoom_level">Wyświetlanie od stopnia przybliżenia</string>
-    <string name="routing_attr_allow_private_name">Zezwolenie na dostęp prywatny</string>
+    <string name="routing_attr_allow_private_name">Uwzględnianie prywatnych obszarów</string>
     <string name="routing_attr_allow_private_description">Zezwala na dostęp do prywatnych obszarów</string>
     <string name="route_is_too_long_v2">Ta trasa może być zbyt długa do wyznaczenia. Prosimy dodać punkty pośrednie, jeżeli nie dostaniesz wyniku w ciągu 10 minut.</string>
     <string name="save_poi_too_many_uppercase">Nazwa zawiera zbyt wiele wielkich liter. Czy chcesz kontynuować?</string>
@@ -2947,8 +2947,8 @@ Reprezentuje obszar: %1$s x %2$s</string>
     <string name="mapillary_menu_edit_text_hint">Proszę wprowadzić nazwę użytkownika</string>
     <string name="mapillary_menu_filter_description">Można filtrować obrazy według nazwy użytkownika lub daty. Filtry mają zastosowanie dla większych przybliżeń.</string>
     <string name="mapillary_menu_descr_username">Wyświetla obrazy dodane przez określonego użytkownika.</string>
-    <string name="store_tracks_in_monthly_directories">Zapisz zarejestrowane ślady w miesięcznych katalogach</string>
-    <string name="store_tracks_in_monthly_directories_descrp">Zapisz zarejestrowane ślady w podfolderach na każdy rejestrowany miesiąc (np. 2017-01).</string>
+    <string name="store_tracks_in_monthly_directories">Ślady w miesięcznych katalogach</string>
+    <string name="store_tracks_in_monthly_directories_descrp">Przechowuje zarejestrowane ślady w podkatalogach odpowiadającym miesiącom (np. 2017-01).</string>
     <string name="shared_string_reset">Resetuj</string>
     <string name="mapillary_menu_descr_tile_cache">Przeładuj kafelki, aby je uaktualnić.</string>
     <string name="average">Średnia</string>

@@ -2889,4 +2889,5 @@ OsmAnd هو المصدر المفتوح و التي يجري تطويرها بن
     <string name="moving_time">زمن التنقل</string>
     <string name="range">نطاق</string>
     <string name="max_min">أقصى/أدنى</string>
+    <string name="range_min_max">المدى = الأدنى/الأقصى</string>
     </resources>

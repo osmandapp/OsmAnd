@@ -2842,4 +2842,55 @@ Tai yra puikus būdas paremti OsmAnd ir OSM, jei jie jums patinka.</string>
     <string name="routing_attr_height_obstacles_description">Naudoti SRTM, ASTER ir EU-DEM pateikiamus vietovės aukščio duomenis</string>
     <string name="rendering_attr_depthContours_description">Rodyti gylio kontūrus ir taškus</string>
     <string name="rendering_attr_depthContours_name">Vandenyno gylio kontūrai</string>
+    <string name="release_2_6">\\022 Nauja funkcija: Greito veiksmo mygtukas
+\n
+\n • Patobulinta liečiamo ekrano veiksmų reakcija (t.y. mąstelio keitimas ir žemėlapio stūmimas tuo pačiu metu)
+\n
+\n • Nauji žemėlapio fontai tinkantys daugiau kalbų
+\n
+\n • Teksto vertimo į kalbą (TTS) palaikymas regioniniams kalbų variantams (ir akcentams)
+\n
+\n • Kelių žemėlapių stilių ir vikipedijos matomumo patobulinimai
+\n
+\n • Open Location Code (OLC) palaikymas
+\n
+\n • Aukščio, įkalnės ir greičio profilio rodymas į GPX įrašytiems ir apskaičiuotiems maršrutams
+\n
+\n • \"Vairavimo stiliaus\" nustatyms ir logikos patobulinimai dviračių maršrutų skaičiavimams
+\n
+\n • Nustatymai aukščio infromaciją dviračių maršrutų skaičiavimams
+\n
+\n • Keltas kitų patobulinimų ir klaidų ištaisymų
+\n
+\n ir dar daugiau…</string>
+    <string name="auto_split_recording_title">Automatinis įrašo padalinimas po pertraukimo</string>
+    <string name="auto_split_recording_descr">Pradėti naują segmentą po 6 minučių tarpo, naują kelio įrašą po 2 valandų, arba naują failą jie po ilgesnio tarpo pasikeitė data.</string>
+    <string name="rendering_attr_contourDensity_description">Kontūrų linijų tankis</string>
+    <string name="rendering_attr_contourDensity_name">Konturų linijų tankis</string>
+    <string name="rendering_attr_contourWidth_description">Konturų linijų plotis</string>
+    <string name="rendering_attr_contourWidth_name">Konturų linijų plotis</string>
+    <string name="show_legacy_search_desc">Priedėti senąją paiešką prie stalčiaus sąrašo</string>
+    <string name="routing_attr_allow_motorway_description">Leisti greitkelius</string>
+    <string name="wiki_around">Šalia esantys Vikipedijos straipsniai</string>
+    <string name="route_roundabout_short">Sukite į %1$d išvažiavimą ir keliaukite</string>
+    <string name="gpx_no_tracks_title">Jūs dar neturite išsaugotų kelių</string>
+    <string name="gpx_no_tracks_title_folder">Jūs taip pat galite išsaugoti kelius segtuve</string>
+    <string name="trip_rec_notification_settings_desc">Rodyti pranešimą kuris leidžia pradėti kelionės įrašymą paspaudus \"Įrašyti\" mygtuką</string>
+    <string name="release_2_5">\\022 INteraktyvios žemėlapio ikonos
+\n
+\n • Galingas LV paieškos filtras: ieškoti restoranų pvz. pagal virtuvę ar kempingų pagal su specifinėm paslaugom
+\n
+\n • Naujas Topo žemėlapio stilius dviratininkams ir keliautojams
+\n
+\n • Patobulintas kelionės įrašymas
+\n
+\n • Patobulinti navigaciniai pranešimai (Android Wear)
+\n
+\n • Daugelis kitų patobulinimų ir klaidų pataisymų
+\n
+\n ir dar daugiau…</string>
+    <string name="save_track_min_speed_descr">Filtras: Nustatyti minimalų greitų kad taškas būtų pažymėtas</string>
+    <string name="save_track_min_distance">Minimalus atstumas pažymėjimui</string>
+    <string name="save_track_min_distance_descr">Filtras: Nustatyti minimalų atstumą nuo ankstesnės pozicijos kad taškas būtų išsaugotas</string>
+    <string name="save_track_precision">Minimalus išsaugojimo tikslumas</string>
     </resources>

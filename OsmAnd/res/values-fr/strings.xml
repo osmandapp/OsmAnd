@@ -1991,7 +1991,7 @@ Pour revenir à l’un des styles de carte classique de OsmAnd, désactivez simp
     <string name="routing_attr_height_name">Limite de hauteur</string>
     <string name="routing_attr_height_description">Précisez la hauteur du véhicule qui doit être respectée sur les routes empruntées</string>
     <string name="use_fast_recalculation">Recalcule intelligent de l\'itinéraire</string>
-    <string name="use_fast_recalculation_desc">Recalculer uniquement le début de l\'itinéraire pour les longs trajets</string>
+    <string name="use_fast_recalculation_desc">Pour les longs trajets, recalculer uniquement le début de l\'itinéraire</string>
     <string name="osmo_share_my_location">Partager ma position</string>
     <string name="shared_string_logoff">Se déconnecter</string>
     <string name="rendering_value_disabled_name">Désactivé</string>
@@ -3022,4 +3022,7 @@ Fonctionnalités principales :
     <string name="mapillary_menu_descr_username">Afficher les images ajoutées par certains utilisateurs.</string>
     <string name="mapillary_menu_filter_description">Vous pouvez filtrer les images par date ou nom d\'utilisateur, le filtre est appliqué après avoir zoomé.</string>
     <string name="shared_string_reset">Réinitialiser</string>
+    <string name="average">Moyenne</string>
+    <string name="ascent_descent">Croissant / Décroissant</string>
+    <string name="max_min">Max / Min</string>
     </resources>

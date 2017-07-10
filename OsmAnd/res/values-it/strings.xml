@@ -2657,10 +2657,10 @@ Se ami OsmAnd e OSM e vuoi sostenerli, questo è un modo perfetto per farlo.</st
     <string name="rendering_value_dark_brown_name">Marrone scuro</string>
     <string name="rendering_attr_surfaceIntegrity_name">Integrità della superficie stradale</string>
     <string name="save_track_min_speed_descr">Filtro: imposta la velocità minima per la registrazione di un punto</string>
-    <string name="save_track_min_distance">Soglia del movimento di registrazione</string>
-    <string name="save_track_min_distance_descr">Scegliere la distanza minima dal precedente punto a cui avverrà la registrazione di un nuovo punto</string>
+    <string name="save_track_min_distance">Soglia minima dello spostamento per la registrazione</string>
+    <string name="save_track_min_distance_descr">Filtro: imposta la distanza minima dal precedente punto a cui avverrà la registrazione di un nuovo punto</string>
     <string name="save_track_precision">Precisione minima per la registrazione</string>
-    <string name="save_track_precision_descr">Impostare la minima precisione per la registrazione di un punto</string>
+    <string name="save_track_precision_descr">Filtro: impostare la minima precisione per la registrazione di un punto</string>
     <string name="rendering_attr_contourColorScheme_name">Colorazione delle linee isoipse</string>
     <string name="search_hint">Digitare il nome del pdi, città, indirizzo</string>
     <string name="shared_string_continue">Continua</string>
@@ -2812,40 +2812,21 @@ Rappresenta l\'area: %1$s x %2$s</string>
     <string name="rendering_attr_depthContours_description">Mostra contorni e punti in profondità</string>
     <string name="release_2_6">"\\022 Nuove funzionalità: Pulsante azione veloce 
 \n
-\n 
-\n
 \n • Migliorata la risposta del touch screen ai gesti (es. zoommare e allargare) 
-\n
-\n 
 \n
 \n • Nuovi caratteri della mappa  mappa per estendere la copertura di più lingue 
 \n
-\n 
-\n 
-\n
 \n • Supporto TTS per le lingue locali (e accenti) 
-\n
-\n 
 \n
 \n • Miglioramento della visibilità in molti stili mappa e wikipedia 
 \n
-\n 
-\n
 \n • Supporto all\'Open Location Code (OLC) 
-\n
-\n 
 \n
 \n • Visualizzazione di un profilo altimetrico, pendenza, e velocità per i GPX registrati e percorsi calcolati 
 \n
-\n 
-\n
 \n • Impostazione e miglioramenti della logica dello \"Stile guida\" nella guida svolta per svolta in bicicletta 
 \n
-\n 
-\n
 \n • Molti altri miglioramenti e correzioni di errori 
-\n
-\n 
 \n
 \n e altro ancora…"</string>
 	<string name="routing_attr_driving_style_name">Stile di guida</string>
@@ -2932,7 +2913,7 @@ Rappresenta l\'area: %1$s x %2$s</string>
     <string name="select_street">Seleziona le strade</string>
     <string name="shared_string_in_name">in %1$s</string>
     <string name="type_address">Scrivi l\'indirizzo</string>
-    <string name="animate_my_location">Anima la mia localizzazione</string>
+    <string name="animate_my_location">Simula la mia posizione</string>
     <string name="animate_my_location_desc">In navigazione abilita l\'interpolazione della mia localizzazione</string>
     <string name="shared_string_overview">Panoramica</string>
     <string name="show_from_zoom_level">Mostra dal livello di zoom</string>
@@ -3043,7 +3024,7 @@ Copertura e qualità approssimativamente:
     <string name="mapillary_menu_edit_text_hint">Scrivi il nome utente</string>
     <string name="mapillary_menu_descr_username">Visualizza le immagini aggiunte da un certo utente.</string>
     <string name="mapillary_menu_title_username">Nome utente</string>
-    <string name="mapillary_menu_filter_description">Puoi filtrare le immagini per nome dell\'utente o per data, i filtri si possono applicare solo per gli zoom più elevati.</string>
+    <string name="mapillary_menu_filter_description">Puoi filtrare le immagini per nome dell\'utente o per data. I filtri si possono applicare solo per gli zoom più elevati.</string>
     <string name="store_tracks_in_monthly_directories">Salva le tracce registrate in cartelle mensili</string>
     <string name="store_tracks_in_monthly_directories_descrp">Salva le tracce registrate in sottocartelle per mese di registrazione (come 2017-01).</string>
     <string name="shared_string_reset">Reimposta</string>

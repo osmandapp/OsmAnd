@@ -2981,4 +2981,5 @@ OsmAnd мае адкрыты зыходны код і актыўна разві�
     <string name="moving_time">Час руху</string>
     <string name="max_min">Макс./Мін.</string>
     <string name="range">Інтэрвал</string>
+    <string name="range_min_max">Адлегласць = Мін./Макс.</string>
     </resources>
