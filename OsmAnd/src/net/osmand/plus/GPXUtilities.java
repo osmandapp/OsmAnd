@@ -521,6 +521,7 @@ public class GPXUtilities {
 
 					if (speed > 0) {
 						totalSpeedSum += speed;
+//						android.util.Log.d(GPXUtilities.class.getSimpleName(), "metricEnd: " + s.metricEnd + " speed: " + speed);
 						minSpeed = Math.min(speed, minSpeed);
 						maxSpeed = Math.max(speed, maxSpeed);
 						speedCount++;

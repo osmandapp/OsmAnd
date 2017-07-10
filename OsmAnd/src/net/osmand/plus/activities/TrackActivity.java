@@ -48,6 +48,10 @@ public class TrackActivity extends TabActivity {
 	private List<GpxDisplayGroup> originalGroups = new ArrayList<>();
 	private boolean stopped = false;
 
+	public PagerSlidingTabStrip getSlidingTabLayout() {
+		return slidingTabLayout;
+	}
+
 	@Override
 	public void onCreate(Bundle icicle) {
 		((OsmandApplication) getApplication()).applyTheme(this);
@@ -234,6 +238,9 @@ public class TrackActivity extends TabActivity {
 							((TrackSegmentFragment) frag).updateSplitView();
 						}
 					}
+					if (isHavingWayPoints() || isHavingRoutePoints()) {
+						getSlidingTabLayout().setVisibility(View.VISIBLE);
+					}
 					getSupportFragmentManager().popBackStack();
 					return true;
 				}
@@ -263,6 +270,9 @@ public class TrackActivity extends TabActivity {
 					if (frag instanceof TrackSegmentFragment) {
 						((TrackSegmentFragment) frag).updateSplitView();
 					}
+				}
+				if (isHavingWayPoints() || isHavingRoutePoints()) {
+					getSlidingTabLayout().setVisibility(View.VISIBLE);
 				}
 				getSupportFragmentManager().popBackStack();
 				return;
