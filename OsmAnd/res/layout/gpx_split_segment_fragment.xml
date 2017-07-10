@@ -309,7 +309,7 @@
                         android:layout_height="wrap_content"
                         android:layout_marginTop="3dp"
                         android:background="@null"
-                        android:text="@string/range"
+                        android:text="@string/range_min_max"
                         android:textColor="?android:attr/textColorSecondary"
                         android:textSize="@dimen/default_split_segments_sub" />
 
