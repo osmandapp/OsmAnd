@@ -2992,8 +2992,8 @@ OsmAndとOSMをサポートする方法として現状最適な方法である�
     <string name="mapillary_menu_edit_text_hint">ユーザー名を入力</string>
     <string name="mapillary_menu_descr_username">指定のユーザーに追加された画像だけを表示します。</string>
     <string name="mapillary_menu_title_username">ユーザー名</string>
-    <string name="mapillary_menu_filter_description">投稿者、日付で投稿された画像をフィルタリングできます。
-\n一定値以上にマップが拡大された場合のみフィルタは適用されます。</string>
+    <string name="mapillary_menu_filter_description">投稿者と日付で投稿された画像をフィルタリングできます。
+\nマップが一定値以上に拡大された場合のみフィルタは適用されます。</string>
     <string name="distance_moving">距離補正済み</string>
     <string name="shared_string_reset">リセット</string>
     <string name="store_tracks_in_monthly_directories">月ごとのフォルダ別に記録経路を保存</string>
