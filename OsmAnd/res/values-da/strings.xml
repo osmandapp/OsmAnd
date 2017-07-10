@@ -1,4 +1,5 @@
-<?xml version="1.0" encoding="UTF-8" standalone="no"?><resources>
+<?xml version='1.0' encoding='UTF-8'?>
+<resources>
     <string name="srtm_paid_version_msg">Overvej at købe Højdekurve udvidelsen (\'Contour lines\') på Google Play for at støtte den videre udvikling.</string>
     <string name="av_def_action_video">Optag video</string>
     <string name="av_def_action_audio">Optag audio</string>
@@ -2794,4 +2795,10 @@ Tidligere destination bliver sidste mellemliggende punkt.</string>
     
     <string name="range_min_max">Interval = min/maks</string>
     <string name="min_max">Min/maks</string>
+    <string name="release_2_7">\\022 Mapillary udvidelse med billeder på gadeniveau
+\n • Lineal modul til afstandsmåling 
+\n• GPX split mellemrum med detaljeret info om spor
+\n • Andre forbedringer og fejlrettelser
+\n
+\n</string>
     </resources>
