@@ -2088,7 +2088,7 @@ POIの更新は利用できません</string>
     <string name="osmand_running_in_background">バックグラウンドで実行</string>
     <string name="favourites_edit_dialog_title">お気に入りの情報</string>
     <string name="simulate_your_location_stop_descr">移動シミュレーションの停止</string>
-    <string name="simulate_your_location_descr">計算されたルート、またはGPXに記録されたルートを使用して移動時のシミュレートをします</string>
+    <string name="simulate_your_location_descr">計算されたルート、またはGPXに記録されたルートを使用して移動のシミュレーションをします</string>
     <string name="favourites_context_menu_add">お気に入りに追加</string>
 	<string name="are_you_sure">よろしいですか？</string>
 	<string name="unsaved_changes_will_be_lost">未保存の変更は失われます。続行しますか？</string>
@@ -2421,7 +2421,7 @@ OsmAndとOSMをサポートする方法として現状最適な方法である�
 	<string name="use_osm_live_routing">OSMライブナビゲーション</string>
     <string name="access_no_destination">目的地が設定されていません</string>
     <string name="access_disable_offroute_recalc">道を外れてもルートを変更しない</string>
-    <string name="access_disable_wrong_direction_recalc">適切でない案内だった場合ルートを変更しない</string>
+    <string name="access_disable_wrong_direction_recalc">反対方向へ向かった場合ルートを変更しない</string>
     <string name="access_disable_wrong_direction_recalc_descr">目的地の方向と逆進した場合、自動的にルートの再計算をしないようにします</string>
     <string name="access_smart_autoannounce">スマート音声案内</string>
     <string name="access_smart_autoannounce_descr">目的地への方向が変更されたときのみ通知します</string>
@@ -2452,7 +2452,7 @@ OsmAndとOSMをサポートする方法として現状最適な方法である�
     <string name="follow_us">フォローはこちらから</string>
     <string name="access_direction_audio_feedback">音シグナルで案内</string>
     <string name="access_direction_haptic_feedback">振動シグナルで案内</string>
-    <string name="access_disable_offroute_recalc_descr">案内されたルートから大きく離れた場合、自動的にルートの再計算をしないようにします</string>
+    <string name="access_disable_offroute_recalc_descr">ルートから離れた場合に、自動的にルートの再計算をしないようにします</string>
     <string name="back_to_search">検索に戻る</string>
     <string name="confirmation_to_delete_history_items">選択された履歴を削除しますか？</string>
     <string name="show_something_on_map">マップ上に%1$sを表示</string>
@@ -2487,7 +2487,7 @@ OsmAndとOSMをサポートする方法として現状最適な方法である�
     <string name="map_widget_magnetic_bearing">磁方位</string>
     <string name="legacy_search">レガシー検索</string>
     <string name="show_legacy_search">レガシー検索を表示</string>
-    <string name="show_legacy_search_desc">ドロワーリスト型のレガシー(旧型)検索も使用できるようにします</string>
+    <string name="show_legacy_search_desc">メニューリストで旧型検索も使用できるようにします</string>
     <string name="routing_attr_allow_motorway_name">高速道路を許可</string>
     <string name="routing_attr_allow_motorway_description">高速道路を使用可能とみなします</string>
     <string name="release_2_6">" • クイックアクションボタンの実装
@@ -2583,7 +2583,7 @@ OsmAndとOSMをサポートする方法として現状最適な方法である�
     <string name="location_not_found">場所が見つかりません</string>
     <string name="no_inet_connection_desc_map">マップのダウンロードにはインターネット接続が必要です。</string>
     <string name="search_my_location">現在地取得</string>
-    <string name="no_update_info_desc">OsmAndのアップデート情報や、割引に関しての情報をチェックしません</string>
+    <string name="no_update_info_desc">OsmAndのバージョン更新や、割引に関しての情報をチェックしません</string>
     <string name="no_update_info">更新情報を非表示</string>
     <string name="update_all_maps_now">すべてのマップを今すぐ更新しますか？</string>
     <string name="replace_favorite_confirmation">お気に入り %1$sを置き換えてよろしいですか？</string>
@@ -2996,4 +2996,7 @@ OsmAndとOSMをサポートする方法として現状最適な方法である�
 \n一定値以上にマップが拡大された場合のみフィルタは適用されます。</string>
     <string name="distance_moving">距離補正済み</string>
     <string name="shared_string_reset">リセット</string>
+    <string name="store_tracks_in_monthly_directories">月ごとのフォルダ別に記録経路を保存</string>
+    <string name="store_tracks_in_monthly_directories_descrp">サブフォルダ(例:2017-01)を作成して記録した月ごとに経路を保存します。</string>
+    <string name="average">平均</string>
     </resources>
