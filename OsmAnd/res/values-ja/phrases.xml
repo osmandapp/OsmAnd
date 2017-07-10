@@ -1824,8 +1824,8 @@
 	<string name="poi_automated_yes">肯定</string>
 	<string name="poi_automated_no">非自動化</string>
 	<string name="poi_brushless">非回転ブラシ洗車の有無（Brushless)</string>
-	<string name="poi_brushless_yes">肯定</string>
-	<string name="poi_brushless_no">否定</string>
+	<string name="poi_brushless_yes">有り</string>
+	<string name="poi_brushless_no">非回転ブラシ洗車:無し</string>
 	<string name="poi_capacity_disabled">障害者専用コーナーの有無(Dedicated places for disabled)</string>
 	<string name="poi_capacity_women_yes">有り</string>
 	<string name="poi_capacity_women_no">無し</string>
