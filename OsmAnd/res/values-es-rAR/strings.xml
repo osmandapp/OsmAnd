@@ -212,7 +212,7 @@ Lon %2$s</string>
     <string name="text_size">Tamaño del texto</string>
     <string name="traffic_warning_speed_limit">Límite de velocidad</string>
     <string name="traffic_warning_border_control">Control fronterizo</string>
-    <string name="traffic_warning_payment">Peaje</string>
+    <string name="traffic_warning_payment">Cabina de peaje</string>
     <string name="traffic_warning_stop">Señal de alto</string>
     <string name="traffic_warning_calming">Reductor de velocidad</string>
     <string name="traffic_warning_speed_camera">Radar de velocidad</string>
@@ -1911,7 +1911,7 @@ Afganistán, Albania, Alemania, Andorra, Angola, Anguila, Antigua y Barbuda, Ant
     <string name="no_updates_available">Sin actualizaciones disponibles</string>
     <string name="we_really_care_about_your_opinion">Nos interesa mucho y es importante oír tu opinión.</string>
     <string name="rendering_value_boldOutline_name">Borde remarcado</string>
-    <string name="traffic_warning_hazard">Advertencia de riesgo</string>
+    <string name="traffic_warning_hazard">Advertencia de peligro</string>
     <string name="dahboard_options_dialog_title">Configurar panel</string>
     <string name="shared_string_card_was_hidden">La tarjeta se ocultó</string>
     <string name="shared_string_undo">Deshacer</string>
@@ -2583,8 +2583,8 @@ Si necesitas ayuda con la aplicación OsmAnd, contacte con nuestro equipo de sop
 </string>
     <string name="navigate_point_olc_info_short">OLC corto
 Proporciona un código completo</string>
-    <string name="navigate_point_olc_info_area">OLC completo válido
-Representa el área: %1$s x %2$s</string>
+    <string name="navigate_point_olc_info_area">OLC completo y válido.
+\nÁrea representada: %1$s x %2$s</string>
     <string name="quick_action_page_list_descr">Pulsar el botón de acción mostrará la siguiente lista.</string>
     <string name="auto_split_recording_title">División automática de grabaciones en intervalos</string>
 	<string name="auto_split_recording_descr">Iniciar nuevo segmento en el lapso de 6 min, nueva traza en el lapso de 2 h, o nuevo archivo en el lapso más largo si la fecha se cambió.</string>
