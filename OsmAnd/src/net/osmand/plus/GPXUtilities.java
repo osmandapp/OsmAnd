@@ -921,7 +921,7 @@ public class GPXUtilities {
 			for (Track t : tracks) {
 				int trackColor = t.getColor(getColor(0));
 				for (TrkSegment ts : t.segments) {
-					if (ts.points.size() > 0) {
+					if (!ts.generalSegment && ts.points.size() > 0) {
 						TrkSegment sgmt = new TrkSegment();
 						tpoints.add(sgmt);
 						sgmt.points.addAll(ts.points);
