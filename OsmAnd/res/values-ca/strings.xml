@@ -723,7 +723,7 @@ Memòria proporcional %4$s MB (límit de l\'Android %5$s MB, Dalvik %6$s MB).</s
     <string name="route_tshr">Gireu fortament a la dreta i continueu</string>
     <string name="route_tslr">Gireu lleugerament a la dreta i continueu</string>
     <string name="route_tl">Gireu a l\'esquerra i continueu</string>
-    <string name="route_tshl">Gireu fortamanent a l\'esquerra i continueu</string>
+    <string name="route_tshl">Gireu fortament a l\'esquerra i continueu</string>
     <string name="route_tsll">Gireu lleugerament a l\'esquerra i continueu</string>
     <string name="route_tu">Feu un gir en forma d\'U i continueu</string>
     <string name="search_near_map">Cerca propera a la posició actual al mapa</string>
@@ -1555,10 +1555,10 @@ Afganistan, Albània, Alemanya, Antilles Holandeses, Algèria, Andorra, Angola, 
     <string name="save_global_track_interval">Interval d\'enregistrament general</string>
     <string name="traffic_warning_speed_limit">Velocitat màxima</string>
     <string name="traffic_warning_border_control">Control de fronteres</string>
-    <string name="traffic_warning_payment">Estació de peatge</string>
+    <string name="traffic_warning_payment">Barrera de peatge</string>
     <string name="traffic_warning_stop">Senyal d\'stop</string>
     <string name="traffic_warning_calming">Ressalt</string>
-    <string name="traffic_warning_speed_camera">Càmera de control de velocitat</string>
+    <string name="traffic_warning_speed_camera">Radar de trànsit</string>
     <string name="traffic_warning">Avís de circulació</string>
     <string name="local_index_description">Premeu qualsevol indicació existent per veure més detalls, mantingueu premuda per desactivar o esborrar. Dades actuals al dispositiu (%1$s lliure):</string>
     <string name="text_size_descr">Definiu la mida del text en el mapa.</string>
