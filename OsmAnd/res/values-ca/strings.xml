@@ -2733,4 +2733,5 @@ Abasta l\'àrea: %1$s x %2$s</string>
     <string name="max_min">Màx/Mín</string>
     <string name="range">Interval</string>
     <string name="range_min_max">Interval = Mín/Màx</string>
+    <string name="min_max">Mín/Màx</string>
     </resources>
