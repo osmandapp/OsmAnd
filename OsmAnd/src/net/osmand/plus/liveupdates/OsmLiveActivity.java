@@ -80,6 +80,12 @@ public class OsmLiveActivity extends AbstractDownloadActivity implements Downloa
 	}
 
 	@Override
+	protected void onPause() {
+		super.onPause();
+		getMyApplication().getDownloadThread().resetUiActivity(this);
+	}
+
+	@Override
 	protected void onDestroy() {
 		super.onDestroy();
 		if (inAppHelper != null) {

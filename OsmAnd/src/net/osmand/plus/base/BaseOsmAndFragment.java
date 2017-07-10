@@ -18,10 +18,7 @@ public class BaseOsmAndFragment extends Fragment {
 	private IconsCache iconsCache;
 
 	protected OsmandApplication getMyApplication() {
-		if (isAdded()) {
-			return (OsmandApplication) getActivity().getApplication();
-		}
-		return null;
+		return (OsmandApplication) getActivity().getApplication();
 	}
 
 	protected OsmandActionBarActivity getMyActivity() {
