@@ -2858,4 +2858,5 @@ Indikas lokon:  %1$s x %2$s"</string>
     <string name="max_min">Maks./min.</string>
     <string name="range">Variejo</string>
     <string name="range_min_max">Variejo = min/maks</string>
+    <string name="min_max">Min./maks.</string>
     </resources>
