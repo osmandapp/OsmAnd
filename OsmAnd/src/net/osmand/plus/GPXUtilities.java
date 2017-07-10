@@ -813,9 +813,11 @@ public class GPXUtilities {
 			for (int i = 0; i < tracks.size(); i++) {
 				Track subtrack = tracks.get(i);
 				for (TrkSegment segment : subtrack.segments) {
-					g.totalTracks++;
-					if (segment.points.size() > 1) {
-						splitSegments.add(new SplitSegment(segment));
+					if (!segment.generalSegment) {
+						g.totalTracks++;
+						if (segment.points.size() > 1) {
+							splitSegments.add(new SplitSegment(segment));
+						}
 					}
 				}
 			}
