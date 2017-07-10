@@ -2956,7 +2956,7 @@ Tidligere destination bliver sidste mellemliggende punkt.</string>
     <string name="shared_string_permissions">Tilladelser</string>
     <string name="import_gpx_failed_descr">OsmAnd kan ikke importere filen. Kontroller om OsmAnd har læsetilladelse på filplaceringen.</string>
     <string name="map_widget_ruler_control_first_mode">To-punkts lineal</string>
-    <string name="map_widget_ruler_control_second_mode">Radius lineal</string>
+    <string name="map_widget_ruler_control_second_mode">Cirkel lineal</string>
     <string name="wrong_user_name">Forkert brugernavn!</string>
     <string name="shared_string_to">Til</string>
     <string name="mapillary_menu_date_from">Fra</string>
@@ -2964,14 +2964,14 @@ Tidligere destination bliver sidste mellemliggende punkt.</string>
     <string name="mapillary_menu_edit_text_hint">Indtast brugernavn</string>
     <string name="mapillary_menu_descr_username">Se billeder tilføjet af en bestemt bruger.</string>
     <string name="mapillary_menu_title_username">Brugernavn</string>
-    <string name="mapillary_menu_filter_description">Filtrer billeder efter indsender eller dato. Filter gælder kun for tæt på zoom.</string>
+    <string name="mapillary_menu_filter_description">Filtrer billeder efter indsender eller dato. Filter gælder kun for højere zoom.</string>
     <string name="mapillary_menu_descr_dates">Se billeder tilføjet i en bestemt periode.</string>
     <string name="shared_string_reload">Genindlæs</string>
     <string name="mapillary_menu_descr_tile_cache">Genindlæs kortbrikker for at se opdaterede data.</string>
     <string name="mapillary_menu_title_tile_cache">Kortbrik-cache</string>
     <string name="shared_string_reset">Nulstil</string>
     <string name="store_tracks_in_monthly_directories">Gem optagede spor i månedlige mapper</string>
-    <string name="store_tracks_in_monthly_directories_descrp">Gem optagede spor i undermapper pr optagelsesmåned (fx. 2017-01).</string>
+    <string name="store_tracks_in_monthly_directories_descrp">Gem optagede spor i undermapper arrangeret efter optagelsesmåned (fx. 2017-01).</string>
     <string name="average">Gennemsnit</string>
     <string name="of">%1$d af %2$d</string>
     <string name="ascent_descent">Stigning/fald</string>
