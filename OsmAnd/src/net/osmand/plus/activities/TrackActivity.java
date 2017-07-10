@@ -238,10 +238,10 @@ public class TrackActivity extends TabActivity {
 							((TrackSegmentFragment) frag).updateSplitView();
 						}
 					}
+					getSupportFragmentManager().popBackStack();
 					if (isHavingWayPoints() || isHavingRoutePoints()) {
 						getSlidingTabLayout().setVisibility(View.VISIBLE);
 					}
-					getSupportFragmentManager().popBackStack();
 					return true;
 				}
 			}
@@ -271,10 +271,10 @@ public class TrackActivity extends TabActivity {
 						((TrackSegmentFragment) frag).updateSplitView();
 					}
 				}
+				getSupportFragmentManager().popBackStack();
 				if (isHavingWayPoints() || isHavingRoutePoints()) {
 					getSlidingTabLayout().setVisibility(View.VISIBLE);
 				}
-				getSupportFragmentManager().popBackStack();
 				return;
 			}
 		}
