@@ -1138,7 +1138,7 @@
 	<string name="poi_payment_toll_type">支払いの種類(Payment type)</string>
 	<string name="poi_traffic_signals_sound">視覚障害者用信号機音声</string>
 	<string name="poi_tactile_paving">視覚障害者誘導用ブロック(Tactile paving)</string>
-	<string name="poi_self_service">セルフサービス(Self service)</string>
+	<string name="poi_self_service">セルフサービス式か否か(Self service)</string>
 	<string name="poi_automated">自動化(Automated)</string>
 	<string name="poi_subway_station_filter">地下鉄駅(Subway station)</string>
 	<string name="poi_ferry_terminal_cargo">貨物(Cargo)</string>
@@ -1201,12 +1201,12 @@
 	<string name="poi_massage_yes">マッサージサービス(Massage services)</string>
 	<string name="poi_piste_difficulty">ゲレンデ難易度(Piste difficulty)</string>
 	<string name="poi_piste_grooming">ゲレンデの対応種・状態(Piste grooming)</string>
-	<string name="poi_piste_difficulty_easy">簡単・初級者用(Easy)</string>
-	<string name="poi_piste_difficulty_intermediate">普通・中級者用(Intermediate)</string>
-	<string name="poi_piste_difficulty_advanced">上級者用(Advanced)</string>
-	<string name="poi_piste_difficulty_novice">すごく簡単・初心者用(Novice)</string>
-	<string name="poi_piste_difficulty_expert">難しい・上級者用(Expert)</string>
-	<string name="poi_piste_difficulty_freeride">フリーライド・競技用(Freeride)</string>
+	<string name="poi_piste_difficulty_easy">斜度30-35°・初級者用(Easy)</string>
+	<string name="poi_piste_difficulty_intermediate">斜度35-40°・中級者用(Intermediate)</string>
+	<string name="poi_piste_difficulty_advanced">斜度40-45°上級者用(Advanced)</string>
+	<string name="poi_piste_difficulty_novice">斜度0-30°・初心者用(Novice)</string>
+	<string name="poi_piste_difficulty_expert">斜度45-50°・上級者用(Expert)</string>
+	<string name="poi_piste_difficulty_freeride">斜度50-55°・非圧雪面、コース外等(Freeride)</string>
 	<string name="poi_piste_grooming_classic">一般的なアルペン・ノルディックスキー用(Classic)</string>
 	<string name="poi_piste_grooming_classic_skating">一般的コース＋スケート可(Classic+skating)</string>
 	<string name="poi_piste_grooming_backcountry">バックカントリー(Backcountry)</string>
@@ -1254,9 +1254,9 @@
 	<string name="poi_backcountry_yes">可</string>
 	<string name="poi_backcountry_no">不可</string>
 	<string name="poi_caravans">キャンピングカー・トレーラー(Caravans)</string>
-	<string name="poi_caravans_yes">可(Yes)</string>
-	<string name="poi_caravans_no">キャンピングカー:不可(Caravans: no)</string>
-	<string name="poi_clock_option">街頭時計の付属表示</string>
+	<string name="poi_caravans_yes">可</string>
+	<string name="poi_caravans_no">キャンピングカー:不可</string>
+	<string name="poi_clock_option">街頭時計の付属物</string>
 	<string name="poi_barometer_yes">気圧計・晴雨計</string>
 	<string name="poi_barometer_no">気圧計:無し</string>
 	<string name="poi_date_yes">日付表示</string>
@@ -1268,8 +1268,8 @@
 	<string name="poi_thermometer_no">温度計:無し</string>
 	<string name="poi_denomination">宗派(Denomination)</string>
 	<string name="poi_fireplace">暖炉(Fireplace)</string>
-	<string name="poi_fireplace_yes">有り(Yes)</string>
-	<string name="poi_fireplace_no">暖炉無し(No fireplace)</string>
+	<string name="poi_fireplace_yes">有り</string>
+	<string name="poi_fireplace_no">暖炉無し</string>
 
 	<string name="poi_information_contents">展示内容・コンテンツ(Contents)</string>
 	<string name="poi_board_type_astronomy">天文学(Astronomy)</string>
@@ -1299,7 +1299,7 @@
 	<string name="poi_recreation_center">保養施設(Recreation center)</string>
 
 	<string name="poi_power_supply">電源(Power supply)</string>
-	<string name="poi_power_supply_no">電源:無し(Power supply: no)</string>
+	<string name="poi_power_supply_no">電源:無し</string>
 	<string name="poi_power_supply_cee_17_blue">電源ソケット形状:CEE 17 青(Power supply (socket): CEE 17 blue)</string>
 	<string name="poi_power_supply_cee_7_4">電源ソケット形状:CEE 7/4(Power supply (socket): CEE 7/4)</string>
 	<string name="poi_power_supply_cee_7_5">電源ソケット形状:CEE 7/5(Power supply (socket): CEE 7/5)</string>
@@ -1317,22 +1317,22 @@
 	<string name="poi_stars_5">☆☆☆☆☆(Luxury)</string>
 	<string name="poi_stars_5s">☆☆☆☆☆S(Superior Luxury)</string>
 	<string name="poi_tents">テント(Tents)</string>
-	<string name="poi_tents_no">テント不可(Tents not allowed)</string>
-	<string name="poi_tents_yes">許可(Allowed)</string>
+	<string name="poi_tents_no">テント不可(又は設営に不向き)</string>
+	<string name="poi_tents_yes">許可</string>
 	<string name="poi_washing_machine">洗濯機(Washing machine)</string>
-	<string name="poi_washing_machine_no">洗濯機:無し(Washing machine: no)</string>
-	<string name="poi_car_wash_no">洗車場:無し(Car wash: no)</string>
+	<string name="poi_washing_machine_no">洗濯機:無し</string>
+	<string name="poi_car_wash_no">洗車場:無し</string>
 
 
 	<string name="poi_compressed_air_filter">エアーコンプレッサー(Compressed air)</string>
-	<string name="poi_compressed_air_yes">有り(Yes)</string>
-	<string name="poi_compressed_air_no">エアーコンプレッサー:無し(Compressed air: no)</string>
+	<string name="poi_compressed_air_yes">有り</string>
+	<string name="poi_compressed_air_no">エアーコンプレッサー:無し</string>
 
-	<string name="poi_self_service_yes">肯定(Yes)</string>
-	<string name="poi_self_service_no">否定(No self-service)</string>
+	<string name="poi_self_service_yes">セルフサービス式</string>
+	<string name="poi_self_service_no">セルフサービスではない</string>
 	<string name="poi_vacuum_cleaner_filter">掃除機(Vacuum cleaner)</string>
-	<string name="poi_vacuum_cleaner_yes">有り(Yes)</string>
-	<string name="poi_vacuum_cleaner_no">掃除機:無し(Vacuum cleaner: no)</string>
+	<string name="poi_vacuum_cleaner_yes">有り</string>
+	<string name="poi_vacuum_cleaner_no">掃除機:無し</string>
 	<string name="poi_amenity_vacuum_cleaner">掃除機(Vacuum cleaner)</string>
 
 	<string name="poi_fuel_adblue">アドブルー・尿素水還元剤(AdBlue fuel)</string>
@@ -1362,54 +1362,54 @@
 	<string name="poi_cuisine_donut">ドーナツ(Donut)</string>
 	<string name="poi_cuisine_ramen">ラーメン(Ramen)</string>
 	<string name="poi_cuisine_crepe">クレープ(Crepe)</string>
-	<string name="poi_cuisine_breakfast">朝食(Breakfast)</string>
+	<string name="poi_cuisine_breakfast">01営業形態_朝食(Breakfast)</string>
 	<string name="poi_cuisine_beef_bowl">牛丼(Gyudon)</string>
 	<string name="poi_cuisine_steak">ステーキ・肉魚切り身等の焼き料理(Steak)</string>
 	<string name="poi_cuisine_tapas">タパス・前菜・小皿料理(Tapas)</string>
-	<string name="poi_cuisine_gastropub">ガストロパブ・バー兼レストラン(Gastropub)</string>
-	<string name="poi_cuisine_heuriger">ホイリゲ・ワイン酒場・居酒屋(Heuriger)</string>
+	<string name="poi_cuisine_gastropub">01営業形態_ガストロパブ・バー兼レストラン(Gastropub)</string>
+	<string name="poi_cuisine_heuriger">01営業形態_イリゲ・ワイン酒場・居酒屋(Heuriger)</string>
 	<string name="poi_cuisine_curry">カレー(Curry)</string>
-	<string name="poi_cuisine_buschenschank">居酒屋(Buschenschank)</string>
+	<string name="poi_cuisine_buschenschank">01営業形態_居酒屋(Buschenschank)</string>
 	<string name="poi_cuisine_grill">グリル・鉄板、焼き網料理(Grill)</string>
 	<string name="poi_cuisine_bagel">ベーグル(Bagel)</string>
-	<string name="poi_cuisine_diner">ダイナー・簡易食堂(Diner)</string>
+	<string name="poi_cuisine_diner">01営業形態_ダイナー・簡易食堂(Diner)</string>
 	<string name="poi_cuisine_sausage">ソーセージ(Sausage)</string>
 	<string name="poi_cuisine_cake">ケーキ(Cake)</string>
 	<string name="poi_cuisine_pancake">パンケーキ・ホットケーキ(Pancake)</string>
 	<string name="poi_cuisine_pasta">パスタ(Pasta)</string>
-	<string name="poi_cuisine_fast_food">ファストフード(Fast food)</string>
+	<string name="poi_cuisine_fast_food">01営業形態_ファストフード(Fast food)</string>
 	<string name="poi_cuisine_juice">ジュース(Juice)</string>
 	<string name="poi_cuisine_soba">蕎麦(Soba)</string>
-	<string name="poi_cuisine_fine_dining">高級レストラン(Fine dining)</string>
+	<string name="poi_cuisine_fine_dining">01営業形態_高級レストラン(Fine dining)</string>
 	<string name="poi_cuisine_tea">茶・紅茶(Tea)</string>
-	<string name="poi_cuisine_tea_shop">ティーショップ(Tea shop)</string>
+	<string name="poi_cuisine_tea_shop">01営業形態_ティーショップ(Tea shop)</string>
 	<string name="poi_cuisine_soup">スープ(Soup)</string>
 	<string name="poi_cuisine_pie">パイ(Pie)</string>
 	<string name="poi_cuisine_hotdog">ホットドッグ(Hotdog)</string>
-	<string name="poi_cuisine_deli">デリ・総菜屋(Deli)</string>
+	<string name="poi_cuisine_deli">01営業形態_デリ・総菜屋(Deli)</string>
 	<string name="poi_cuisine_salad">サラダ(Salad)</string>
 	<string name="poi_cuisine_frozen_yogurt">フローズンヨーグルト(Frozen yogurt)</string>
 	<string name="poi_cuisine_fried_food">揚げ物(Fried food)</string>
 	<string name="poi_cuisine_savory_pancakes">具入りパンケーキ・チヂミ・お好み焼き等(Savory pancakes)</string>
-	<string name="poi_cuisine_bistro">大衆食堂(Bistro)</string>
-	<string name="poi_cuisine_bakery">パン屋(Bakery)</string>
+	<string name="poi_cuisine_bistro">01営業形態_大衆食堂(Bistro)</string>
+	<string name="poi_cuisine_bakery">01営業形態_パン屋(Bakery)</string>
 	<string name="poi_cuisine_couscous">クスクス(Couscous)</string>
 	<string name="poi_cuisine_fried_chicken">フライドチキン(Fried chicken)</string>
 	<string name="poi_cuisine_dessert">デザート(Dessert)</string>
-	<string name="poi_cuisine_canteen">PX・社員食堂(Canteen)</string>
+	<string name="poi_cuisine_canteen">01営業形態_社員食堂・学食・酒保(Canteen)</string>
 	<string name="poi_cuisine_tacos">タコス(Tacos)</string>
 	<string name="poi_cuisine_piadina">ピアディーナ(Piadina)</string>
 	<string name="poi_cuisine_falafel">ファラフェル・ひよこ豆、そらまめのコロッケ(Falafel)</string>
 	<string name="poi_cuisine_smoothie">スムージー(Smoothie)</string>
 	<string name="poi_cuisine_souvlaki">スブラキ・串焼き(Souvlaki)</string>
-	<string name="poi_cuisine_snack">スナック(Snack)</string>
+	<string name="poi_cuisine_snack">軽食(Snack)</string>
 	<string name="poi_cuisine_yogurt">ヨーグルト(Yogurt)</string>
 	<string name="poi_cuisine_gyros">ギロピタ・ドネルケバブ(Gyros)</string>
 	<string name="poi_cuisine_empanada">エンパナーダ・具入りパン(Empanada)</string>
 	<string name="poi_cuisine_crepes">クレープ(Crepes)</string>
 	<string name="poi_cuisine_yakiniku">焼肉(Yakiniku)</string>
 	<string name="poi_cuisine_udon">うどん(Udon)</string>
-	<string name="poi_cuisine_brasserie">ブラッスリー・カフェレストラン(Brasserie)</string>
+	<string name="poi_cuisine_brasserie">01営業形態_ブラッスリー・カフェレストラン(Brasserie)</string>
 	<string name="poi_cuisine_bubble_tea">タピオカティー(Bubble tea)</string>
 	<string name="poi_cuisine_yakitori">焼き鳥(Yakitori)</string>
 	<string name="poi_cuisine_meat">肉(Meat)</string>
@@ -1418,7 +1418,7 @@
 	<string name="poi_cuisine_chocolate">チョコレート(Chocolate)</string>
 	<string name="poi_cuisine_wine">ワイン(Wine)</string>
 	<string name="poi_cuisine_potato">ジャガイモ(Potato)</string>
-	<string name="poi_cuisine_brunch">ブランチ(Brunch)</string>
+	<string name="poi_cuisine_brunch">01営業形態_ブランチ(Brunch)</string>
 	<string name="poi_cuisine_sub">サンドイッチ(Sub)</string>
 	<string name="poi_cuisine_pita">ピタパン(Pita)</string>
 	<string name="poi_cuisine_fondue">フォンデュ(Fondue)</string>
@@ -1507,10 +1507,10 @@
 	<string name="poi_cuisine_tibetan">チベット料理(Tibetan)</string>
 
 	<string name="poi_delivery">出前・宅配(Delivery)</string>
-	<string name="poi_delivery_filter_yes">可(Yes)</string>
-	<string name="poi_delivery_yes">宅配可(Delivery)</string>
-	<string name="poi_delivery_no">宅配不可(No delivery)</string>
-	<string name="poi_delivery_only">宅配のみ(Delivery only)</string>
+	<string name="poi_delivery_filter_yes">可</string>
+	<string name="poi_delivery_yes">宅配可</string>
+	<string name="poi_delivery_no">宅配不可</string>
+	<string name="poi_delivery_only">宅配のみ</string>
 
 	<string name="poi_diet">ダイエット・食事制限(Diet)</string>
 	<string name="poi_diet_vegetarian_filter_yes">ベジタリアン(Vegetarian)</string>
@@ -1542,28 +1542,28 @@
 	<string name="poi_dish">料理(Dish)</string>
 	<string name="poi_wiki_lang_ku">クルド語 wiki(Kurdish wiki)</string>
 	<string name="poi_microbrewery">地ビール醸造所(Microbrewery)</string>
-	<string name="poi_microbrewery_yes">地ビール醸造有り(Microbrewery)</string>
-	<string name="poi_microbrewery_no">地ビール醸造無し</string>
+	<string name="poi_microbrewery_yes">地ビール有り</string>
+	<string name="poi_microbrewery_no">地ビール無し</string>
 
 	<string name="poi_organic_yes">有り</string>
 	<string name="poi_organic_no">無し</string>
 	<string name="poi_organic_only">自然食品のみ取り扱い</string>
 
 	<string name="poi_outdoor_seating">屋外席(Outdoor seating)</string>
-	<string name="poi_outdoor_seating_filter_yes">有り(Yes)</string>
-	<string name="poi_outdoor_seating_yes">屋外席:有り(Outdoor seating: yes)</string>
-	<string name="poi_outdoor_seating_no">屋外席無し(No outdoor seating)</string>
-	<string name="poi_outdoor_seating_terrace">屋外席:テラス(Outdoor seating: terrace)</string>
-	<string name="poi_outdoor_seating_sidewalk">屋外席:歩道側(Outdoor seating: sidewalk)</string>
-	<string name="poi_outdoor_seating_pedestrian_zone">屋外席:歩行者ゾーン(Outdoor seating: pedestrian zone)</string>
-	<string name="poi_outdoor_seating_garden">屋外席:庭(Outdoor seating: garden)</string>
-	<string name="poi_outdoor_seating_patio">屋外席:中庭(Outdoor seating: patio)</string>
+	<string name="poi_outdoor_seating_filter_yes">有り</string>
+	<string name="poi_outdoor_seating_yes">屋外席:有り</string>
+	<string name="poi_outdoor_seating_no">屋外席:無し</string>
+	<string name="poi_outdoor_seating_terrace">屋外席:テラス(terrace)</string>
+	<string name="poi_outdoor_seating_sidewalk">屋外席:歩道(sidewalk)</string>
+	<string name="poi_outdoor_seating_pedestrian_zone">屋外席:歩行者天国(pedestrian zone)</string>
+	<string name="poi_outdoor_seating_garden">屋外席:庭(arden)</string>
+	<string name="poi_outdoor_seating_patio">屋外席:中庭(patio)</string>
 
-	<string name="poi_takeaway">テイクアウト・持ち帰り(Takeaway)</string>
-	<string name="poi_takeaway_filter_yes">有り(Yes)</string>
-	<string name="poi_takeaway_yes">テイクアウト・持ち帰り有り(Takeaway)</string>
-	<string name="poi_takeaway_no">持ち帰り無し(No takeaway)</string>
-	<string name="poi_takeaway_only">テイクアウト・持ち帰りのみ(Takeaway only)</string>
+	<string name="poi_takeaway">テイクアウト・持ち帰り</string>
+	<string name="poi_takeaway_filter_yes">可能</string>
+	<string name="poi_takeaway_yes">持ち帰り可</string>
+	<string name="poi_takeaway_no">持ち帰り不可</string>
+	<string name="poi_takeaway_only">テイクアウト・持ち帰りのみ</string>
 
 	<string name="poi_archaeological_site_type">遺跡の種類</string>
 	<string name="poi_health_specialty">医療機関(Health specialty)</string>
@@ -1631,7 +1631,7 @@
 	<string name="poi_health_specialty_acupuncture_yes">鍼治療(Acupuncture)</string>
 	<string name="poi_health_specialty_homeopathy_yes">ホメオパシー(民間療法)(Homeopathy)</string>
 	<string name="poi_health_specialty_traditional_chinese_medicine_yes">東洋医学(Traditional chinese medicine)</string>
-	<string name="poi_health_specialty_reiki_yes">レイキ・霊気(民間療法)Reiki</string>
+	<string name="poi_health_specialty_reiki_yes">レイキ・霊気(民間療法)(Reiki)</string>
 	<string name="poi_health_specialty_herbalism_yes">本草学(Herbalism)</string>
 	<string name="poi_health_specialty_chiropractic_yes">カイロプラクティック(Chiropractic)</string>
 	<string name="poi_health_specialty_naturopathy_yes">自然療法(Naturopathy)</string>
@@ -1668,13 +1668,13 @@
 	<string name="poi_seasonal">営業期(Seasonal)</string>
 	<string name="poi_drive_in">ドライブイン(Drive in)</string>
 	<string name="poi_drive_in_no">無し</string>
-	<string name="poi_power_supply_yes">有り(Yes)</string>
+	<string name="poi_power_supply_yes">有り</string>
 	<string name="poi_scout_camp">ボーイスカウト用キャンプ(Scout camp)</string>
 	<string name="poi_scout_yes">肯定(Scout camp: yes)</string>
 	<string name="poi_scout_no">否定(Scout camp: no)</string>
-	<string name="poi_washing_machine_yes">有り(Yes)</string>
+	<string name="poi_washing_machine_yes">有り</string>
 	<string name="poi_shower_filter_yes">有り</string>
-	<string name="poi_car_wash_yes">有り(Yes)</string>
+	<string name="poi_car_wash_yes">有り</string>
 
 	<string name="poi_payment_transport_type">送金の種類(Payment type (transport))</string>
 	<string name="poi_payment_coins_yes">硬貨</string>
@@ -1703,10 +1703,10 @@
 	<string name="poi_payment_american_express_no">クレジットカード_American Express(AMEX)不可</string>
 	<string name="poi_payment_diners_club_yes">クレジットカード_ダイナースクラブ</string>
 	<string name="poi_payment_diners_club_no">クレジットカード_ダイナースクラブカード不可</string>
-	<string name="poi_payment_dkv_yes">燃料カード_DKV(DKV)</string>
-	<string name="poi_payment_dkv_no">燃料カード_DKV不可(DKV not accepted)</string>
-	<string name="poi_payment_uta_yes">燃料カード_UTA(UTA)</string>
-	<string name="poi_payment_uta_no">燃料カード_UTA不可(UTA cards not accepted)</string>
+	<string name="poi_payment_dkv_yes">燃料カード_DKV</string>
+	<string name="poi_payment_dkv_no">燃料カード_DKV不可</string>
+	<string name="poi_payment_uta_yes">燃料カード_UTA</string>
+	<string name="poi_payment_uta_no">燃料カード_UTA不可</string>
 	<string name="poi_payment_girocard_yes">デビットカード_Girocard</string>
 	<string name="poi_payment_girocard_no">デビットカード_Girocard不可</string>
 	<string name="poi_payment_discover_card_yes">クレジットカード_ディスカバーカード</string>
@@ -1725,8 +1725,8 @@
 	<string name="poi_payment_cryptocurrencies_no">暗号通貨不可(Cryptocurrencies not accepted)</string>
 	<string name="poi_payment_others_yes">その他(Others)</string>
 	<string name="poi_payment_others_no">その他該当支払い方法不可(Other payment methods not accepted)</string>
-	<string name="poi_payment_routex_yes">燃料カード_Routex(Routex)</string>
-	<string name="poi_payment_routex_no">燃料カード_Routex不可(Routex fuel cards not accepted)</string>
+	<string name="poi_payment_routex_yes">燃料カード_Routex</string>
+	<string name="poi_payment_routex_no">燃料カード_Routex不可</string>
 	<string name="poi_payment_bancomat_yes">デビットカード_Bancomat</string>
 	<string name="poi_payment_bancomat_no">デビットカード_Bancomat不可</string>
 	<string name="poi_payment_icsf_yes">公共交通機関_ICストアドフェアカード(Suica等)</string>
@@ -1738,8 +1738,8 @@
 	<string name="poi_payment_laser_no">デビットカード_Laser不可</string>
 	<string name="poi_payment_ep_quick_yes">電子マネー_Quick</string>
 	<string name="poi_payment_ep_quick_no">電子マネー_Quickカード不可</string>
-	<string name="poi_payment_eurowag_yes">燃料カード_Eurowag(Eurowag)</string>
-	<string name="poi_payment_eurowag_no">燃料カード_Eurowag不可(Eurowag cards not accepted)</string>
+	<string name="poi_payment_eurowag_yes">燃料カード_Eurowag</string>
+	<string name="poi_payment_eurowag_no">燃料カード_Eurowag不可</string>
 	<string name="poi_payment_e_zpass_yes">有料道路_E-ZPass(E‑ZPass)</string>
 	<string name="poi_payment_e_zpass_no">有料道路_E-ZPass不可(E‑ZPass not accepted)</string>
 	<string name="poi_payment_euroshell_yes">燃料カード_Euroshell</string>
@@ -1820,7 +1820,7 @@
 
 	<string name="poi_tactile_paving_yes">有り</string>
 	<string name="poi_tactile_paving_no">無し</string>
-	<string name="poi_cuisine_sagardotegia">バスク伝統サイダー(リンゴ酒・ワイン)ハウス(Sagardotegia)</string>
+	<string name="poi_cuisine_sagardotegia">01営業形態_バスク伝統サイダー(リンゴ酒・ワイン)ハウス(Sagardotegia)</string>
 	<string name="poi_automated_yes">肯定</string>
 	<string name="poi_automated_no">非自動化</string>
 	<string name="poi_brushless">非回転ブラシ洗車の有無（Brushless)</string>
