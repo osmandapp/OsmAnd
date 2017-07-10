@@ -4,10 +4,12 @@ This project aims at providing comfortable map viewing and navigation (routing) 
 To get started, continue with the basic description below, then find more detail on our Welcome Wiki Pages, the Project Homepage, or the OpenStreetMap OsmAnd Wiki Page.
 You are welcome to discuss any question regarding the project at the Google group OsmAnd. Please do not use comments on wiki pages because it is rather difficult to find them.
 
-<a href="https://f-droid.org/repository/browse/?fdid=net.osmand.plus" target="_blank">
-<img src="https://f-droid.org/badge/get-it-on.png" alt="Get it on F-Droid" height="90"/></a>
 <a href="https://play.google.com/store/apps/details?id=net.osmand" target="_blank">
 <img src="https://play.google.com/intl/en_us/badges/images/generic/en-play-badge.png" alt="Get it on Google Play" height="90"/></a>
+<a href="https://www.amazon.com/gp/product/B00D0SEGMC/ref=mas_pm_OsmAnd-Maps-Navigation" target="_blank">
+<img src="images/amazon-apps-store.png" alt="Get it on Amazon" height="90"/></a>
+<a href="https://f-droid.org/repository/browse/?fdid=net.osmand.plus" target="_blank">
+<img src="https://f-droid.org/badge/get-it-on.png" alt="Get it on F-Droid" height="90"/></a>
 
 Functionality
 -------------
