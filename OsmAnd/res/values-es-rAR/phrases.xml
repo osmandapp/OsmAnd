@@ -3455,7 +3455,9 @@
 	<string name="poi_motorcycle_type_dualsport">Doble propósito</string>
 	<string name="poi_motorcycle_type_standard">Estándar</string>
 
-<string name="poi_lock_basin">Compuerta de cuenca</string>
+<string name="poi_lock_basin">Compuerta de esclusa</string>
 	<string name="poi_generator_output_electricity_no">Salida (electricidad): No</string>
+
+<string name="poi_owner">Propietario</string>
 
 </resources>
