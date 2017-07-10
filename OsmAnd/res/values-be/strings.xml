@@ -1698,13 +1698,13 @@ OsmAnd мае адкрыты зыходны код і актыўна разві�
 	<string name="confirm_every_run">Пытацца заўсёды</string>
 	<string name="save_global_track_interval_descr">Абярыце інтэрвал запісу сьледу (уключаецца віджэтам запісу GPX на мапе)</string>
 	<string name="save_global_track_interval">Агульны інтэрвал запісу</string>
-	<string name="traffic_warning_speed_limit">Абмежаваньне хуткасьці</string>
+	<string name="traffic_warning_speed_limit">Абмежаванне хуткасці</string>
     <string name="traffic_warning_border_control">Памежны кантроль</string>
     <string name="traffic_warning_payment">Платны праезд</string>
-    <string name="traffic_warning_stop">Знак STOP</string>
-    <string name="traffic_warning_calming">Зьнізьце хуткасьць</string>
+    <string name="traffic_warning_stop">Знак СТОП</string>
+    <string name="traffic_warning_calming">Знізьце хуткасць</string>
     <string name="traffic_warning_speed_camera">Фотарадар</string>
-    <string name="traffic_warning">Абмежаваньне руху</string>
+    <string name="traffic_warning">Абмежаванне руху</string>
 	<string name="text_size_descr">Зьмяніць памер тэксту на мапе.</string>
     <string name="text_size">Памер тэксту</string>
     <string name="speed_limit_exceed">Дапушчальнае значэньне перавышэньня хуткасьці</string>
@@ -2084,7 +2084,7 @@ OsmAnd мае адкрыты зыходны код і актыўна разві�
 <string name="no_updates_available">Няма даступных абнаўленьняў</string>
     <string name="we_really_care_about_your_opinion">Нас вельмі цікавіць ваша меркаваньне і нам важна пачуць вас.</string>
 	<string name="rendering_value_boldOutline_name">Тлусты абрыс</string>
-    <string name="traffic_warning_hazard">Небясьпека</string>
+    <string name="traffic_warning_hazard">Небяспека</string>
     <string name="app_name_osmand">OsmAnd</string>
 	<string name="offline_maps_and_navigation">Аўтаномныя мапы\nі навігацыя</string>
 <string name="dahboard_options_dialog_title">Налады Панэлі кіраваньня</string>
@@ -2287,9 +2287,9 @@ OsmAnd мае адкрыты зыходны код і актыўна разві�
     <string name="av_audio_bitrate_descr">Абярыце бітрэйт аўдыё</string>
     <string name="av_video_quality_low">Нізкая якасьць</string>
     <string name="av_video_quality_high">Высокая якасьць</string>
-    <string name="no_address_found">Адрэса ня вызначаная</string> 
+    <string name="no_address_found">Адрас не вызначаны</string> 
 	<string name="shared_string_near">Побач</string>
-    <string name="looking_up_address">Пошук адрэсы</string>
+    <string name="looking_up_address">Пошук адраса</string>
     <string name="route_distance">Адлегласьць:</string>
     <string name="route_duration">Час:</string>
     <string name="rendering_attr_horseRoutes_name">Конныя маршруты</string>
@@ -2982,4 +2982,5 @@ OsmAnd мае адкрыты зыходны код і актыўна разві�
     <string name="max_min">Макс./Мін.</string>
     <string name="range">Інтэрвал</string>
     <string name="range_min_max">Адлегласць = Мін./Макс.</string>
+    <string name="min_max">Мін./Макс.</string>
     </resources>
