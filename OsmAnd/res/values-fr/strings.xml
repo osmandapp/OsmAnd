@@ -3025,4 +3025,9 @@ Fonctionnalités principales :
     <string name="average">Moyenne</string>
     <string name="ascent_descent">Croissant / Décroissant</string>
     <string name="max_min">Max / Min</string>
+    <string name="store_tracks_in_monthly_directories">Enregistrer les traces dans des dossiers mensuels</string>
+    <string name="store_tracks_in_monthly_directories_descrp">Enregistrer les traces dans des sous-dossiers organisés par mois (par exemple 2017-01).</string>
+    <string name="of">%1$d de %2$d</string>
+    <string name="moving_time">Durée de déplacement</string>
+    <string name="min_max">Min / Max</string>
     </resources>
