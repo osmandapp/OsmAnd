@@ -2933,4 +2933,5 @@ Moduli:
     <string name="max_min">Maks./Min.</string>
     <string name="range">Interval</string>
     <string name="range_min_max">Adliehlasć = Min./Maks.</string>
+    <string name="min_max">Min./Maks.</string>
     </resources>
