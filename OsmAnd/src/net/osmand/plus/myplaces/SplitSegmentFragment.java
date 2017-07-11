@@ -302,6 +302,9 @@ public class SplitSegmentFragment extends OsmAndListFragment {
     }
 
     private List<GpxDisplayGroup> filterGroups(boolean useDisplayGroups) {
+        if (getMyActivity() == null) {
+            return null;
+        }
         List<GpxDisplayGroup> result = getMyActivity().getGpxFile(useDisplayGroups);
         List<GpxDisplayGroup> groups = new ArrayList<>();
         for (GpxDisplayGroup group : result) {
@@ -613,17 +616,21 @@ public class SplitSegmentFragment extends OsmAndListFragment {
         }
 
         protected void onPostExecute(Void result) {
-            if (mSelectedGpxFile != null) {
-                mSelectedGpxFile.setDisplayGroups(getDisplayGroups());
-            }
             if (!mActivity.isFinishing()) {
-                mActivity.setProgressBarIndeterminateVisibility(false);
+                mActivity.setSupportProgressBarIndeterminateVisibility(false);
+            }
+            if (mSelectedGpxFile != null) {
+                List<GpxDisplayGroup> groups = getDisplayGroups();
+                if (groups == null) {
+                    return;
+                }
+                mSelectedGpxFile.setDisplayGroups(groups);
             }
             updateContent();
         }
 
         protected void onPreExecute() {
-            mActivity.setProgressBarIndeterminateVisibility(true);
+            mActivity.setSupportProgressBarIndeterminateVisibility(true);
         }
 
         @Override

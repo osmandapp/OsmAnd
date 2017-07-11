@@ -134,7 +134,6 @@ public class TrackSegmentFragment extends OsmAndListFragment {
 	private Paint paintIcon;
 	private Bitmap pointSmall;
 	private GpxDisplayItem generalDisplayItem;
-	private View splitIntervalView;
 
 	private ImageView imageView;
 	private RotatedTileBox rotatedTileBox;
@@ -294,7 +293,7 @@ public class TrackSegmentFragment extends OsmAndListFragment {
 		});
 		final View splitColorView = headerView.findViewById(R.id.split_color_view);
 		final View divider = headerView.findViewById(R.id.divider);
-		splitIntervalView = headerView.findViewById(R.id.split_interval_view);
+		final View splitIntervalView = headerView.findViewById(R.id.split_interval_view);
 		final View colorView = headerView.findViewById(R.id.color_view);
 		final SwitchCompat vis = (SwitchCompat) headerView.findViewById(R.id.showOnMapToggle);
 		final ProgressBar progressBar = (ProgressBar) headerView.findViewById(R.id.mapLoadProgress);
@@ -468,8 +467,12 @@ public class TrackSegmentFragment extends OsmAndListFragment {
 	}
 
 	public void updateSplitView() {
-		prepareSplitIntervalAdapterData();
-		updateSplitIntervalView(splitIntervalView);
+		SelectedGpxFile sf = app.getSelectedGpxHelper().selectGpxFile(getGpx(), ((SwitchCompat)headerView.findViewById(R.id.showOnMapToggle)).isChecked(), false);
+		final List<GpxDisplayGroup> groups = getDisplayGroups();
+		if (groups.size() > 0) {
+			updateSplit(groups, ((SwitchCompat)headerView.findViewById(R.id.showOnMapToggle)).isChecked() ? sf : null);
+		}
+		updateSplitIntervalView(headerView.findViewById(R.id.split_interval_view));
 	}
 
 	private void refreshTrackBitmap() {
@@ -678,6 +681,9 @@ public class TrackSegmentFragment extends OsmAndListFragment {
 	}
 
 	private List<GpxDisplayGroup> filterGroups(boolean useDisplayGroups) {
+		if (getMyActivity() == null) {
+			return null;
+		}
 		List<GpxDisplayGroup> result = getMyActivity().getGpxFile(useDisplayGroups);
 		List<GpxDisplayGroup> groups = new ArrayList<>();
 		for (GpxDisplayGroup group : result) {
@@ -712,6 +718,10 @@ public class TrackSegmentFragment extends OsmAndListFragment {
 		adapter.setNotifyOnChange(true);
 		adapter.notifyDataSetChanged();
 		updateHeader();
+		if (getGpx() != null && (getGpx().tracks.size() > 0 || getGpx().routes.size() > 0)) {
+			(headerView.findViewById(R.id.split_color_view)).setVisibility(View.VISIBLE);
+			(headerView.findViewById(R.id.divider)).setVisibility(View.VISIBLE);
+		}
 	}
 
 	protected List<GpxDisplayItem> flatten(List<GpxDisplayGroup> groups) {
@@ -990,9 +1000,17 @@ public class TrackSegmentFragment extends OsmAndListFragment {
 					}
 				} else {
 					float distance = pos * dataSet.getDivX();
-					for (WptPt p : segment.points) {
-						if (p.distance >= distance) {
-							wpt = p;
+					double previousSplitDistance = 0;
+					for (int i = 0; i < segment.points.size(); i++) {
+						WptPt currentPoint = segment.points.get(i);
+						if (i != 0) {
+							WptPt previousPoint = segment.points.get(i - 1);
+							if (currentPoint.distance < previousPoint.distance) {
+								previousSplitDistance += previousPoint.distance;
+							}
+						}
+						if (previousSplitDistance + currentPoint.distance >= distance) {
+							wpt = currentPoint;
 							break;
 						}
 					}
@@ -1496,19 +1514,23 @@ public class TrackSegmentFragment extends OsmAndListFragment {
 		}
 
 		protected void onPostExecute(Void result) {
+			if (!mActivity.isFinishing()) {
+				mActivity.setSupportProgressBarIndeterminateVisibility(false);
+			}
 			if (mSelectedGpxFile != null) {
-				mSelectedGpxFile.setDisplayGroups(getDisplayGroups());
+				List<GpxDisplayGroup> groups = getDisplayGroups();
+				if (groups == null) {
+					return;
+				}
+				mSelectedGpxFile.setDisplayGroups(groups);
 			}
 			if (mFragment.isVisible()) {
 				//mFragment.updateContent();
 			}
-			if (!mActivity.isFinishing()) {
-				mActivity.setProgressBarIndeterminateVisibility(false);
-			}
 		}
 
 		protected void onPreExecute() {
-			mActivity.setProgressBarIndeterminateVisibility(true);
+			mActivity.setSupportProgressBarIndeterminateVisibility(true);
 		}
 
 		@Override
