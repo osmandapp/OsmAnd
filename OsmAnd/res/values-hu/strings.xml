@@ -8,7 +8,7 @@
     <string name="default_buttons_support">Támogatás</string>
     <string name="support_new_features">Új funkciók támogatása</string>
 
-    <string name="show_ruler_level">Lépték megjelenítése</string>
+    <string name="show_ruler_level">Vonalzó megjelenítése</string>
     <string name="info_button">Információ</string>
     <string name="back_to_location">Vissza a pozícióra</string>
     <string name="shared_string_help">Súgó</string>
@@ -878,7 +878,7 @@ Proporcionális memória %4$s MB (Android korlát %5$s MB, Dalvik %6$s MB).</str
     <string name="show_warnings_title">Figyelmeztetések megjelenítése…</string>
     <string name="show_warnings_descr">Sebességhatárok, traffipaxok, fekvőrendőrök, sávinformációk jelzése</string>
     <string name="map_widget_fluorescent">Élénk színű utak</string>
-    <string name="map_widget_show_ruler">Lépték</string>
+    <string name="map_widget_show_ruler">Vonalzó</string>
 
     <string name="map_widget_view_direction">Látómező</string>
     <string name="map_widget_transparent">Átlátszó gombok</string>
@@ -2637,8 +2637,8 @@ Ha segítségre van szükséged az OsmAnd alkalmazással kapcsolatban, keresd a 
     <string name="shared_string_recorded">Felvett</string>
     <string name="shared_string_record">Felvétel</string>
     <string name="save_track_min_speed">Rögzítési minimum sebesség</string>
-    <string name="save_track_min_speed_descr">Megadhatod a legkisebb sebességet, aminél pontot fog rögzíteni</string>
-    <string name="save_track_min_distance">Rögzítési mozgásérzékelés</string>
+    <string name="save_track_min_speed_descr">Szűrő: A legkisebb sebesség megadása, aminél pontot fog rögzíteni</string>
+    <string name="save_track_min_distance">Rögzítési minimális elmozdulás</string>
     <string name="save_track_min_distance_descr">Az előző pozíciódtól mért legkisebb távolság, ahol pontot fog rögzíteni</string>
     <string name="save_track_precision">Rögzítési minimum pontosság</string>
     <string name="save_track_precision_descr">Minimális GPS-vételi pontosság, aminél pontot fog rögzíteni</string>
@@ -2668,7 +2668,7 @@ Ha segítségre van szükséged az OsmAnd alkalmazással kapcsolatban, keresd a 
     <string name="search_map_hint">Város, régió keresése</string>
     <string name="legacy_search">Régi kereső</string>
     <string name="show_legacy_search">Régi kereső megjelenítése</string>
-    <string name="show_legacy_search_desc">Régi kereső engedélyezése az oldalsó menüben</string>
+    <string name="show_legacy_search_desc">Régi kereső megjelenítése az oldalsó menüben</string>
     <string name="routing_attr_allow_motorway_name">Autópályák engedélyezése</string>
     <string name="routing_attr_allow_motorway_description">Autópályák engedélyezése</string>
     <string name="lang_sr_latn">szerb (latin betűs)</string>
@@ -2786,36 +2786,25 @@ Kérlek adj meg egy teljes kódot</string>
 
     <string name="rendering_attr_depthContours_description">Mélységvonalak és pontok megjelenítése</string>
     <string name="rendering_attr_depthContours_name">Tengeri mélységvonalak</string>
-	<string name="release_2_6">"
-\n • Új funkció: Gyors művelet gomb
-\n
-\n
-\n • Javított érintőképernyő-gesztus felismerés
-\n
-\n
-\n • Új, több írásmódot lefedő betűtípusok a térképen
-\n
-\n
-\n • TTS szövegfelolvasó támogatás regionális nyelvváltozatokon
-\n
-\n
-\n • Láthatósági fejlesztések több térképstíluson és Wikipédia cikkeken
-\n
-\n
-\n • Open Location Code (OLC) támogatás
-\n
-\n
-\n • Szintmetszet, lejtőprofil és sebességdiagram készítése a felvett GPX fájlokról valamint a tervezett útvonalakról
-\n
-\n
-\n • „Vezetési stílus” beállítások és logika fejlesztés kerékpáros tervezésnél
-\n
-\n
-\n • Magassági adatok használata kerékpáros tervezésnél
-\n
-\n
-\n • Sok egyéb apró fejlesztés és hibajavítás
-\n "</string>
+	<string name="release_2_6">• Új funkció: Gyors művelet gomb 
+\n 
+\n • Javított érintőképernyő-gesztus felismerés 
+\n 
+\n • Új, több írásmódot lefedő betűtípusok a térképen 
+\n 
+\n • TTS szövegfelolvasó támogatás regionális nyelvváltozatokon 
+\n 
+\n • Láthatósági fejlesztések több térképstíluson és Wikipédia cikkeken 
+\n 
+\n • Open Location Code (OLC) támogatás 
+\n 
+\n • Szintmetszet, lejtőprofil és sebességdiagram készítése a felvett GPX fájlokról valamint a tervezett útvonalakról 
+\n 
+\n • „Vezetési stílus” beállítások és logika fejlesztés kerékpáros tervezésnél 
+\n 
+\n • Magassági adatok használata kerékpáros tervezésnél 
+\n 
+\n • Sok egyéb apró fejlesztés és hibajavítás</string>
 	<string name="auto_split_recording_title">Felvételek auto-vágása szünet után</string>
 	<string name="auto_split_recording_descr">Új szakasz készítése 6 perc szünet után, új nyomvonal 2 óra szünet után, és új fájl hosszabb szünet után, vagy dátum változásakor.</string>
     <string name="max_speed">Max sebesség</string>
@@ -2867,7 +2856,7 @@ Kérlek adj meg egy teljes kódot</string>
     <string name="no_underlay">Nincs alátét</string>
     <string name="subscribe_email_error">Hiba</string>
     <string name="subscribe_email_desc">Iratkozz fel az alkalmazás akciókról szóló hírlevelünkre és kapsz további 3 térképletöltést!</string>
-    <string name="depth_contour_descr">Térképkészlet, amely tartalmazza a tengeri mélységvonalakat és -pontokat (30 szögperces háló alapján).</string>
+    <string name="depth_contour_descr">Térképkészlet, amely tartalmazza a tengeri mélységvonalakat és -pontokat.</string>
     <string name="sea_depth_thanks">Köszönjük, hogy megvásároltad a tengeri mélységvonalakat!</string>
     <string name="index_item_depth_contours_osmand_ext">Tengeri mélységvonalak</string>
     <string name="index_item_depth_points_southern_hemisphere">Tengeri mélységpontok, déli félteke</string>
@@ -2904,7 +2893,7 @@ Kérlek adj meg egy teljes kódot</string>
     <string name="favorite_group_name">Csoport megnevezése</string>
     <string name="change_color">Szín módosítása</string>
     <string name="edit_name">Név szerkesztése</string>
-    <string name="animate_my_location">Helyzetem animálása</string>
+    <string name="animate_my_location">Saját pozícióm animálása</string>
     <string name="animate_my_location_desc">Helyzetem animálásának engedélyezése navigáció közben</string>
     <string name="shared_string_overview">Áttekintés</string>
     <string name="route_is_too_long_v2">Ennek az útnak a kiszámítása túl hosszú ideig tarthat. Ha 10 percen belül nem kap eredményt, kérjük, adjon hozzá köztes célpontokat.</string>
@@ -2947,4 +2936,21 @@ Kérlek adj meg egy teljes kódot</string>
     <string name="distance_moving">Korrigált távolság</string>
     <string name="shared_string_permissions">Engedélyek</string>
     <string name="import_gpx_failed_descr">Az OsmAnd nem tudja importálni a fájlt. Kérlek ellenőrizd, hogy az OsmAndnek van-e engedélye fájlt olvasni erről a helyről.</string>
+    <string name="store_tracks_in_monthly_directories">Nyomvonalak tárolása havi könyvtárakban</string>
+    <string name="store_tracks_in_monthly_directories_descrp">Felvett nyomvonalak tárolása havi bontású alkönyvtárakban (pl. 2017-01).</string>
+    <string name="shared_string_reset">Visszaállítás</string>
+    <string name="shared_string_reload">Újratöltés</string>
+    <string name="mapillary_menu_descr_tile_cache">Csempék újratöltése, hogy naprakész adat jelenjen meg.</string>
+    <string name="mapillary_menu_title_tile_cache">Csempe gyorsítótár</string>
+    <string name="wrong_user_name">Hibás felhasználónév!</string>
+    <string name="shared_string_to">Eddig</string>
+    <string name="mapillary_menu_date_from">Ettől</string>
+    <string name="mapillary_menu_descr_dates">A megadott időszakban feltöltött képek megtekintése.</string>
+    <string name="mapillary_menu_title_dates">Dátumok</string>
+    <string name="mapillary_menu_edit_text_hint">Felhasználónév megadása</string>
+    <string name="mapillary_menu_descr_username">A megadott felhasználó képeinek megtekintése.</string>
+    <string name="mapillary_menu_title_username">Felhasználónév</string>
+    <string name="mapillary_menu_filter_description">Szűrheted a képeket feltöltőre vagy dátum szerint. A szűrők csak közeli zoomszinteken érvényesek.</string>
+    <string name="map_widget_ruler_control_first_mode">Vonalzó</string>
+    <string name="map_widget_ruler_control_second_mode">Sugaras vonalzó</string>
     </resources>
