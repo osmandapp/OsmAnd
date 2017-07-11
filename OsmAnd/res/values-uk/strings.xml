@@ -1849,7 +1849,7 @@ OsmAnd має відкриті сирці і активно розвиваєть
     <string name="traffic_warning_payment">Збирання плати за проїзд</string>
     <string name="traffic_warning_stop">Знак СТОП</string>
     <string name="traffic_warning_calming">Зниження швидкості</string>
-    <string name="traffic_warning_speed_camera">Фото-радар</string>
+    <string name="traffic_warning_speed_camera">Камера контролю швидкості</string>
     <string name="traffic_warning">Попередження на дорозі</string>
 	<string name="local_index_description">Клацніть будь-який наявний елемент для перегляду додаткових відомостей, натисніть і утримуйте, щоб деактивувати або вилучити. Поточні дані на пристрої (%1$s вільно):</string>
 	<string name="watch">Годинник</string>
