@@ -188,22 +188,33 @@ public class MapInfoWidgetsFactory {
 			RulerControlLayer rulerLayer = map.getMapLayers().getRulerControlLayer();
 			LatLon cacheFirstTouchPoint = new LatLon(0, 0);
 			LatLon cacheSecondTouchPoint = new LatLon(0, 0);
+			LatLon cacheSingleTouchPoint = new LatLon(0, 0);
+			boolean fingerAndLocDistWasShown;
 
 			@Override
 			public boolean updateInfo(DrawSettings drawSettings) {
 				RulerMode mode = map.getMyApplication().getSettings().RULER_MODE.get();
 				OsmandMapTileView view = map.getMapView();
+				Location currentLoc = map.getMyApplication().getLocationProvider().getLastKnownLocation();
 
-				if (rulerLayer.isShowTwoFingersDistance()) {
+				if (rulerLayer.isShowDistBetweenFingerAndLocation() && currentLoc != null) {
+					if (!cacheSingleTouchPoint.equals(rulerLayer.getSingleTouchPointLatLon())) {
+						cacheSingleTouchPoint = rulerLayer.getSingleTouchPointLatLon();
+						setDistanceText(cacheSingleTouchPoint.getLatitude(), cacheSingleTouchPoint.getLongitude(),
+								currentLoc.getLatitude(), currentLoc.getLongitude());
+						fingerAndLocDistWasShown = true;
+					}
+				} else if (rulerLayer.isShowTwoFingersDistance()) {
 					if (!cacheFirstTouchPoint.equals(view.getFirstTouchPointLatLon()) ||
-							!cacheSecondTouchPoint.equals(view.getSecondTouchPointLatLon())) {
+							!cacheSecondTouchPoint.equals(view.getSecondTouchPointLatLon()) ||
+							fingerAndLocDistWasShown) {
 						cacheFirstTouchPoint = view.getFirstTouchPointLatLon();
 						cacheSecondTouchPoint = view.getSecondTouchPointLatLon();
 						setDistanceText(cacheFirstTouchPoint.getLatitude(), cacheFirstTouchPoint.getLongitude(),
 								cacheSecondTouchPoint.getLatitude(), cacheSecondTouchPoint.getLongitude());
+						fingerAndLocDistWasShown = false;
 					}
 				} else if (mode == RulerMode.FIRST || mode == RulerMode.SECOND) {
-					Location currentLoc = map.getMyApplication().getLocationProvider().getLastKnownLocation();
 					LatLon centerLoc = map.getMapLocation();
 
 					if (currentLoc != null && centerLoc != null) {
@@ -258,9 +269,7 @@ public class MapInfoWidgetsFactory {
 	}
 
 	private void setRulerControlIcon(TextInfoWidget rulerControl, RulerMode mode) {
-		if (mode == RulerMode.FIRST) {
-			rulerControl.setIcons(R.drawable.widget_ruler_location_day, R.drawable.widget_ruler_location_night);
-		} else if (mode == RulerMode.SECOND) {
+		if (mode == RulerMode.FIRST || mode == RulerMode.SECOND) {
 			rulerControl.setIcons(R.drawable.widget_ruler_circle_day, R.drawable.widget_ruler_circle_night);
 		} else {
 			rulerControl.setIcons(R.drawable.widget_hidden_day, R.drawable.widget_hidden_night);
