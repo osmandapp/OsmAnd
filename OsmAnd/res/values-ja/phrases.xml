@@ -208,7 +208,7 @@
 	<string name="poi_railway_platform">鉄道プラットホーム(Railroad platform)</string>
 	<string name="poi_halt">鉄道停車位置(Railroad stop)</string>
 	<string name="poi_subway_entrance">地下鉄入り口(Subway entrance)</string>
-	<string name="poi_subway_station">地下鉄駅も検索する</string>
+	<string name="poi_subway_station">鉄道駅を地下鉄に絞る</string>
 	<string name="poi_railway_buffer_stop">鉄道用車止め(Railroad buffer stop)</string>
 	<string name="poi_helipad">ヘリポート(Helipad)</string>
 	<string name="poi_runway">滑走路(Runway)</string>
@@ -1367,7 +1367,7 @@
 	<string name="poi_cuisine_steak">ステーキ・肉魚切り身等の焼き料理(Steak)</string>
 	<string name="poi_cuisine_tapas">タパス・前菜・小皿料理(Tapas)</string>
 	<string name="poi_cuisine_gastropub">_形式_ガストロパブ・バー兼レストラン(Gastropub)</string>
-	<string name="poi_cuisine_heuriger">_形式_イリゲ・ワイン酒場・居酒屋(Heuriger)</string>
+	<string name="poi_cuisine_heuriger">_形式_ホイリゲ・ワイン酒場・居酒屋(Heuriger)</string>
 	<string name="poi_cuisine_curry">カレー(Curry)</string>
 	<string name="poi_cuisine_buschenschank">_形式_居酒屋(Buschenschank)</string>
 	<string name="poi_cuisine_grill">グリル・鉄板、焼き網料理(Grill)</string>
