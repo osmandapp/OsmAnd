@@ -2893,4 +2893,6 @@ Tai yra puikus būdas paremti OsmAnd ir OSM, jei jie jums patinka.</string>
     <string name="save_track_min_distance">Minimalus atstumas pažymėjimui</string>
     <string name="save_track_min_distance_descr">Filtras: Nustatyti minimalų atstumą nuo ankstesnės pozicijos kad taškas būtų išsaugotas</string>
     <string name="save_track_precision">Minimalus išsaugojimo tikslumas</string>
+    <string name="save_track_precision_descr">Filtras: Nustatyti mažiausią tikslumą kad taškas būtų išsaugotas</string>
+    <string name="translit_name_if_miss">Transliteracija jei %1$s vardo nėra</string>
     </resources>
