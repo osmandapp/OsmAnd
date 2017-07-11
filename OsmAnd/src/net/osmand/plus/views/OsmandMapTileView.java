@@ -334,10 +334,6 @@ public class OsmandMapTileView implements IMapDownloaderCallback {
 		return wasZoomInMultiTouch;
 	}
 
-	public void setWasZoomInMultiTouch(boolean wasZoomInMultiTouch) {
-		this.wasZoomInMultiTouch = wasZoomInMultiTouch;
-	}
-
 	public boolean mapGestureAllowed(OsmandMapLayer.MapGestureType type) {
 		for (OsmandMapLayer layer : layers) {
 			if (!layer.isMapGestureAllowed(type)) {
@@ -1128,6 +1124,9 @@ public class OsmandMapTileView implements IMapDownloaderCallback {
 			float calcRotate = calc.getRotate() + angle;
 			calc.setRotate(calcRotate);
 			calc.setZoomAndAnimation(initialViewport.getZoom(), dz, initialViewport.getZoomFloatPart());
+			if (multiTouch) {
+				wasZoomInMultiTouch = true;
+			}
 
 			final QuadPoint cp = initialViewport.getCenterPixelPoint();
 			// Keep zoom center fixed or flexible
