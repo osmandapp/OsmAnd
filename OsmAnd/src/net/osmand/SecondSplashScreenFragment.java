@@ -13,7 +13,9 @@ import android.view.ViewGroup;
 import android.widget.ImageView;
 import android.widget.RelativeLayout;
 
+import net.osmand.plus.OsmandApplication;
 import net.osmand.plus.R;
+import net.osmand.plus.Version;
 import net.osmand.plus.activities.MapActivity;
 import net.osmand.plus.helpers.AndroidUiHelper;
 
@@ -45,7 +47,6 @@ public class SecondSplashScreenFragment extends Fragment {
 
         int orientation = getResources().getConfiguration().orientation;
 
-        //Only phone between 0-599 has navigationbar can move
         boolean isSmartphone = getResources().getConfiguration().smallestScreenWidthDp < 600;
         if (isSmartphone && Configuration.ORIENTATION_LANDSCAPE == orientation)
             return 0;
@@ -57,6 +58,10 @@ public class SecondSplashScreenFragment extends Fragment {
         return 0;
     }
 
+    public boolean isSmartphone() {
+        return getResources().getConfiguration().smallestScreenWidthDp < 600;
+    }
+
     public int getNavigationBarWidth ()
     {
         if (!hasNavBar())
@@ -64,11 +69,9 @@ public class SecondSplashScreenFragment extends Fragment {
 
         int orientation = getResources().getConfiguration().orientation;
 
-        //Only phone between 0-599 has navigationbar can move
         boolean isSmartphone = getResources().getConfiguration().smallestScreenWidthDp < 600;
 
-        if (orientation == Configuration.ORIENTATION_LANDSCAPE && isSmartphone)
-        {
+        if (orientation == Configuration.ORIENTATION_LANDSCAPE && isSmartphone) {
             int id = getResources().getIdentifier("navigation_bar_width", "dimen", "android");
             if (id > 0)
                 return getResources().getDimensionPixelSize(id);
@@ -97,47 +100,59 @@ public class SecondSplashScreenFragment extends Fragment {
             if (android.os.Build.VERSION.SDK_INT >= android.os.Build.VERSION_CODES.N_MR1) {
                 if (AndroidUiHelper.getScreenOrientation(getActivity()) == ActivityInfo.SCREEN_ORIENTATION_LANDSCAPE) {
                     int defaultLogoMarginTop = AndroidUtils.dpToPx(getActivity(), 24);
-                    int logoMarginLeft = getNavigationBarWidth();
-                    logoLayoutParams.setMargins(logoMarginLeft, defaultLogoMarginTop - getStatusBarHeight(), 0, 0);
+                    int logoPaddingLeft = getNavigationBarWidth();
+                    logo.setPadding(logoPaddingLeft, 0, 0, 0);
+                    logoLayoutParams.setMargins(0, defaultLogoMarginTop - getStatusBarHeight(), 0, 0);
                 } else if (AndroidUiHelper.getScreenOrientation(getActivity()) == ActivityInfo.SCREEN_ORIENTATION_REVERSE_LANDSCAPE) {
                     int defaultLogoMarginTop = AndroidUtils.dpToPx(getActivity(), 24);
-                    int logoMarginRight = getNavigationBarWidth();
-                    logoLayoutParams.setMargins(0, defaultLogoMarginTop - getStatusBarHeight(), logoMarginRight, 0);
+                    int logoPaddingRight = getNavigationBarWidth();
+                    logo.setPadding(0, 0, logoPaddingRight, 0);
+                    logoLayoutParams.setMargins(0, defaultLogoMarginTop - getStatusBarHeight(), 0, 0);
                 }
             } else {
                 int defaultLogoMarginTop = AndroidUtils.dpToPx(getActivity(), 24);
-                int logoMarginLeft = getNavigationBarWidth();
-                logoLayoutParams.setMargins(logoMarginLeft, defaultLogoMarginTop - getStatusBarHeight(), 0, 0);
+                int logoPaddingLeft = getNavigationBarWidth();
+                logo.setPadding(logoPaddingLeft, 0, 0, 0);
+                logoLayoutParams.setMargins(0, defaultLogoMarginTop - getStatusBarHeight(), 0, 0);
             }
         }
         logo.setLayoutParams(logoLayoutParams);
         view.addView(logo);
 
         ImageView text = new ImageView(getActivity());
-        text.setImageDrawable(getResources().getDrawable(R.drawable.image_text_osmand_plus));
+        if (Version.isFreeVersion(((MapActivity) getActivity()).getMyApplication())) {
+            text.setImageDrawable(getResources().getDrawable(R.drawable.image_text_osmand));
+        } else if ((Version.isPaidVersion(((MapActivity) getActivity()).getMyApplication())) ||
+                (Version.isDeveloperVersion(((MapActivity) getActivity()).getMyApplication()))) {
+            text.setImageDrawable(getResources().getDrawable(R.drawable.image_text_osmand_plus));
+        }
         RelativeLayout.LayoutParams textLayoutParams = new RelativeLayout.LayoutParams(RelativeLayout.LayoutParams.WRAP_CONTENT, RelativeLayout.LayoutParams.WRAP_CONTENT);
         textLayoutParams.addRule(RelativeLayout.ALIGN_PARENT_BOTTOM);
         textLayoutParams.addRule(RelativeLayout.CENTER_HORIZONTAL);
         if (AndroidUiHelper.getScreenOrientation(getActivity()) == ActivityInfo.SCREEN_ORIENTATION_PORTRAIT ||
                 AndroidUiHelper.getScreenOrientation(getActivity()) == ActivityInfo.SCREEN_ORIENTATION_REVERSE_PORTRAIT) {
             int defaultTextMarginBottom = AndroidUtils.dpToPx(getActivity(), 128);
+            Log.d("PORTRAIT", "defaultTextMarginBottom: " + defaultTextMarginBottom);
+            Log.d("PORTRAIT", "getNavigationBarHeight: " + getNavigationBarHeight());
             textLayoutParams.setMargins(0, 0, 0, defaultTextMarginBottom - getNavigationBarHeight());
         } else if (AndroidUiHelper.getScreenOrientation(getActivity()) == ActivityInfo.SCREEN_ORIENTATION_LANDSCAPE ||
                 AndroidUiHelper.getScreenOrientation(getActivity()) == ActivityInfo.SCREEN_ORIENTATION_REVERSE_LANDSCAPE) {
             if (android.os.Build.VERSION.SDK_INT >= android.os.Build.VERSION_CODES.N_MR1) {
                 if (AndroidUiHelper.getScreenOrientation(getActivity()) == ActivityInfo.SCREEN_ORIENTATION_LANDSCAPE) {
                     int defaultTextMarginBottom = AndroidUtils.dpToPx(getActivity(), 48);
-                    int textMarginLeft = getNavigationBarWidth();
-                    Log.d("LANDSCAPE", "width: " + getNavigationBarWidth());
-                    textLayoutParams.setMargins(textMarginLeft, 0, 0, defaultTextMarginBottom);
+                    int textPaddingLeft = getNavigationBarWidth();
+                    text.setPadding(textPaddingLeft, 0, 0, 0);
+                    textLayoutParams.setMargins(0, 0, 0, defaultTextMarginBottom);
                 } else if (AndroidUiHelper.getScreenOrientation(getActivity()) == ActivityInfo.SCREEN_ORIENTATION_REVERSE_LANDSCAPE) {
                     int defaultTextMarginBottom = AndroidUtils.dpToPx(getActivity(), 48);
-                    int textMarginRight = getNavigationBarWidth();
-                    Log.d("REVERSE_LANDSCAPE", "width: " + getNavigationBarWidth());
-                    textLayoutParams.setMargins(0, 0, textMarginRight, defaultTextMarginBottom);
+                    int textPaddingRight = getNavigationBarWidth();
+                    text.setPadding(0, 0, textPaddingRight, 0);
+                    textLayoutParams.setMargins(0, 0, 0, defaultTextMarginBottom);
                 }
             } else {
                 int defaultTextMarginBottom = AndroidUtils.dpToPx(getActivity(), 48);
+                int textPaddingLeft = getNavigationBarWidth();
+                text.setPadding(textPaddingLeft, 0, 0, 0);
                 textLayoutParams.setMargins(0, 0, 0, defaultTextMarginBottom);
             }
         }
@@ -148,6 +163,11 @@ public class SecondSplashScreenFragment extends Fragment {
 
             @Override
             public void run() {
+//                getActivity().setRequestedOrientation(ActivityInfo.SCREEN_ORIENTATION_UNSPECIFIED);
+//                if (((MapActivity)getActivity()).getMyApplication().getSettings().MAP_SCREEN_ORIENTATION.get() != getActivity().getRequestedOrientation()) {
+//                    getActivity().setRequestedOrientation(settings.MAP_SCREEN_ORIENTATION.get());
+//                    // can't return from this method we are not sure if activity will be recreated or not
+//                }
                 getActivity().getSupportFragmentManager().beginTransaction().remove(SecondSplashScreenFragment.this).commitAllowingStateLoss();
             }
         }, SECOND_SPLASH_TIME_OUT);

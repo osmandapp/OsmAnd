@@ -10,6 +10,7 @@ import android.content.Context;
 import android.content.DialogInterface;
 import android.content.Intent;
 import android.content.IntentFilter;
+import android.content.pm.ActivityInfo;
 import android.content.pm.PackageManager;
 import android.media.AudioManager;
 import android.net.Uri;
@@ -188,23 +189,9 @@ public class MapActivity extends OsmandActionBarActivity implements DownloadEven
 	private boolean mIsDestroyed = false;
 	private InAppHelper inAppHelper;
 
-	public void hideStatusBar() {
-//		getWindow().setFlags(WindowManager.LayoutParams.FLAG_FULLSCREEN, WindowManager.LayoutParams.FLAG_FULLSCREEN);
-//		getWindow().setFlags(WindowManager.LayoutParams.FLAG_TRANSLUCENT_NAVIGATION, WindowManager.LayoutParams.FLAG_TRANSLUCENT_NAVIGATION);
-
-
-//		getWindow().setFlags(WindowManager.LayoutParams.FLAG_LAYOUT_NO_LIMITS, WindowManager.LayoutParams.FLAG_LAYOUT_NO_LIMITS);
-	}
-
-	public void showStatusBar() {
-//		getWindow().clearFlags(WindowManager.LayoutParams.FLAG_FULLSCREEN);
-
-
-//		getWindow().clearFlags(WindowManager.LayoutParams.FLAG_LAYOUT_NO_LIMITS);
-	}
-
 	@Override
 	public void onCreate(Bundle savedInstanceState) {
+//		setRequestedOrientation(AndroidUiHelper.getScreenOrientation(this));
 		overridePendingTransition(0, 0);
 		long tm = System.currentTimeMillis();
 		app = getMyApplication();
@@ -235,6 +222,7 @@ public class MapActivity extends OsmandActionBarActivity implements DownloadEven
 
 		mapView = new OsmandMapTileView(this, w, h);
 		if (app.getAppInitializer().checkAppVersionChanged() && WhatsNewDialogFragment.SHOW) {
+			SecondSplashScreenFragment.SHOW = false;
 			WhatsNewDialogFragment.SHOW = false;
 			new WhatsNewDialogFragment().show(getSupportFragmentManager(), null);
 		}
@@ -542,8 +530,10 @@ public class MapActivity extends OsmandActionBarActivity implements DownloadEven
 					dashboardOnMap.setDashboardVisibility(true, DashboardOnMap.staticVisibleType);
 				} else {
 					if (ErrorBottomSheetDialog.shouldShow(settings, this)) {
+						SecondSplashScreenFragment.SHOW = false;
 						new ErrorBottomSheetDialog().show(getSupportFragmentManager(), "dialog");
 					} else if (RateUsBottomSheetDialog.shouldShow(app)) {
+						SecondSplashScreenFragment.SHOW = false;
 						new RateUsBottomSheetDialog().show(getSupportFragmentManager(), "dialog");
 					}
 				}
@@ -696,16 +686,25 @@ public class MapActivity extends OsmandActionBarActivity implements DownloadEven
 		enableDrawer();
 
 		if (showWelcomeScreen) {
+			SecondSplashScreenFragment.SHOW = false;
 			getSupportFragmentManager().beginTransaction()
 					.add(R.id.fragmentContainer, new FirstUsageWelcomeFragment(),
 							FirstUsageWelcomeFragment.TAG).commitAllowingStateLoss();
 		} else if (!isFirstScreenShowing() && XMasDialogFragment.shouldShowXmasDialog(app)) {
+			SecondSplashScreenFragment.SHOW = false;
 			new XMasDialogFragment().show(getSupportFragmentManager(), XMasDialogFragment.TAG);
 		}
 		FirstUsageWelcomeFragment.SHOW = false;
-		if (!showWelcomeScreen && SecondSplashScreenFragment.SHOW) {
+		if (SecondSplashScreenFragment.SHOW) {
 			getSupportFragmentManager().beginTransaction().add(R.id.fragmentContainer, new SecondSplashScreenFragment(), SecondSplashScreenFragment.TAG).commitAllowingStateLoss();
 		}
+//		else {
+//			setRequestedOrientation(ActivityInfo.SCREEN_ORIENTATION_UNSPECIFIED);
+//			if (settings.MAP_SCREEN_ORIENTATION.get() != getRequestedOrientation()) {
+//				setRequestedOrientation(settings.MAP_SCREEN_ORIENTATION.get());
+//				// can't return from this method we are not sure if activity will be recreated or not
+//			}
+//		}
 		SecondSplashScreenFragment.SHOW = false;
 	}
 
