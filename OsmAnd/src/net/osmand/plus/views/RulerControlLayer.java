@@ -153,14 +153,11 @@ public class RulerControlLayer extends OsmandMapLayer {
 
             if (view.isMultiTouch()) {
                 showDistBetweenFingerAndLocation = false;
-                if (view.isZooming()) {
-                    view.setWasZoomInMultiTouch(true);
-                }
             } else if (cacheMultiTouchEndTime != view.getMultiTouchEndTime()) {
                 cacheMultiTouchEndTime = view.getMultiTouchEndTime();
                 refreshMapDelayed();
             }
-            showTwoFingersDistance = !view.isWasZoomInMultiTouch() && !view.isZooming() &&
+            showTwoFingersDistance = !view.isWasZoomInMultiTouch() && !tb.isZoomAnimated() &&
                     (view.isMultiTouch() || System.currentTimeMillis() - cacheMultiTouchEndTime < DELAY);
 
             Location currentLoc = app.getLocationProvider().getLastKnownLocation();
@@ -307,7 +304,7 @@ public class RulerControlLayer extends OsmandMapLayer {
 
     private void drawCircle(Canvas canvas, RotatedTileBox tb, int circleNumber, QuadPoint center,
                             RenderingLineAttributes attrs) {
-        if (!mapActivity.getMapView().isZooming()) {
+        if (!tb.isZoomAnimated()) {
             Rect bounds = new Rect();
             String text = cacheDistances.get(circleNumber - 1);
             attrs.paint2.getTextBounds(text, 0, text.length(), bounds);
