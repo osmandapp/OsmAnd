@@ -113,7 +113,7 @@ public class MapInfoWidgetsFactory {
 	}
 
 	public TextInfoWidget createRulerControl(final MapActivity map) {
-		final String title = map.getResources().getString(R.string.map_widget_show_ruler);
+		final String title = "-";
 		final TextInfoWidget rulerControl = new TextInfoWidget(map) {
 			RulerControlLayer rulerLayer = map.getMapLayers().getRulerControlLayer();
 			LatLon cacheFirstTouchPoint = new LatLon(0, 0);
@@ -144,7 +144,7 @@ public class MapInfoWidgetsFactory {
 								cacheSecondTouchPoint.getLatitude(), cacheSecondTouchPoint.getLongitude());
 						fingerAndLocDistWasShown = false;
 					}
-				} else if (mode == RulerMode.FIRST || mode == RulerMode.SECOND) {
+				} else {
 					LatLon centerLoc = map.getMapLocation();
 
 					if (currentLoc != null && centerLoc != null) {
@@ -154,9 +154,9 @@ public class MapInfoWidgetsFactory {
 							setDistanceText(currentLoc.getLatitude(), currentLoc.getLongitude(),
 									centerLoc.getLatitude(), centerLoc.getLongitude());
 						}
+					} else {
+						setText(title, null);
 					}
-				} else {
-					setText(title, null);
 				}
 				return true;
 			}
