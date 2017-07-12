@@ -904,7 +904,7 @@
     <string name="app_modes_choose_descr">앱에서 볼 수있는 사용자 프로필를 선택합니다</string>
     
 	<string name="local_osm_changes_delete_all_confirm">%1$d OSM 변경 사항을 삭제하려고 합니다.  확실합니까?</string>
-    <string name="route_is_too_long">OsmAnd 오프라인 라우팅(길찾기)는 200km 이상 떨어진 포인트를 계산할 때 매우 긴 시간이 걸리 수 있습니다. (가끔 작동 되지 않을 수 있습니다) 당신은 더 나은 성능을 위해 경유지를 추가할 수 있습니다.</string>
+    
 	<string name="auto_zoom_close">좀 더 가깝게</string>
 	<string name="auto_zoom_far">중간 거리에</string>
 	<string name="auto_zoom_farthest">긴 거리에</string>
@@ -1151,73 +1151,7 @@
 \n- 선택적인 속도에 의존하는 지도 줌
 \n- 나침반이나 방향에 따라 맵 정렬
 \n- 선택적 차선 안내 , 제한 속도 표시, 기록 및 TTS 음색 "</string>
-	<string name="osmand_plus_extended_description_4000_chars">" OsmAnd (OSM Automated Navigation Directions)은 세계적으로 고품질 OpenStreetMap (OSM)에 액세스 할 수있는 지도 및 탐색 응용 프로그램입니다. 모든 지도 데이터는 오프라인으로 사용하기 위해 장치의 내장 메모리에 저장할 수 있습니다.
-\n장치의 GPS를 통해, OsmAnd는 자동차, 자전거, 보행자를 위해 화면 표시와 음성 안내로 경로를 보여줍니다. 모든 주요 기능은 온라인과 오프라인 (인터넷 연결없이) 으로 양쪽에서 작동합니다. ↵ ↵
-\nOsmAnd +는 유료 버전의 응용 프로그램입니다. 구입하여 최신 업데이트를 받을 수 있습니다. 또한 당신이 프로젝트를 지원하고 새로운 기능의 개발에 자금 지원을 해 줄 수 잇습니다.
-\nOsmAnd라는 무료 버전을 설치하는 것으로, 구입하기 전에 응용 프로그램을 테스트 할 수 있습니다.
-\n\n\n주요 기능 중 일부 : ↵ ↵
-\n\n탐색 ↵
-\n- 온라인 (이른)과 오프라인 (해외에서 로밍을 사용하지 않는) 모두에서 작동 ↵
-\n- 턴 바이 턴 음성 안내 (녹음 음성 또는 음성 합성) ↵
-\n- 옵션 레인 안내, 거리 이름 표시 및 도착 예정 시간 ↵
-\n- 여정에서 중간 경유 지점 (경로)를 지원 ↵
-\n- 루트에서 벗어난 경우 자동 경로 재 설정 ↵
-\n- 유형 (예 : 식당, 호텔, 주유소, 박물관 )에서 주소 또는 지리적 좌표로 위치를 검색 ↵ ↵\n\n지도보기 ↵
-\n-지도에 위치와 방향을 표시 - 선택적 나침반이나 움직임의 방향에 따라지도를 회전 ↵
-\n- 즐겨 찾기로 가장 중요한 위치를 저장 ↵
-\n- 당신의 주위 디스플레이의 POI (관심 지점) ↵
-\n- 전문 온라인 타일지도를 표시 ↵
-\n- 위성보기를 표시 할 수 있습니다 (Bing에서) ↵
-\n- 여행 / 네비게이션, GPX 트랙 및 사용자 정의 투명성을 가진 추가 맵 오버레이 표시가 가능 ↵
-\n- 옵션, 영어, 지역, 또는 발음 표기 지명을 표시 ↵ ↵
-\n\nOpenStreetMap 위키 백과의 데이터를 사용 ↵
-\n- 세계 최고의 공동 프로젝트에서의 품질 정보 ↵
-\n- 국가 또는 지역마다 사용 가능한 OpenStreetMap 글로벌 맵 ↵
-\n- 관광에 편리한 위키 백과 POI↵
-\n- 응용 프로그램에서 직접에서 무제한 무료 다운로드 ↵
-\n- 최신지도 (적어도 한달에 한번 정도 업데이트) ↵
-\n- 컴팩트 같은 오프라인 벡터 맵 ↵
-\n- 전체지도 데이터 또는 도로망 만 사이에서 선택 (예 : 일본 전체에서 700MB 또는 도로망 만의 경우 200MB) ↵
-\n- 온라인 또는 캐시 타일 맵을 지원 ↵ ↵
-\n\n안전 기능 ↵
-\n- 옵션에서 자동화 된 낮 / 야간 표시 전환 ↵
-\n- 옵션에서 설정 한 제한 속도를 초과하면 알람으로 안내 ↵
-\n- 옵션에서 속도에 따라 지도의 확대 축소 ↵
-\n- 당신의 친구가 당신을 찾을 수 있도록 위치를 공유 ↵ ↵
-\n\n자전거와 보행자의 기능 ↵
-\n-지도는 야외 전용 산책로, 하이킹 및 자전거 도로를 포함 ↵
-\n- 자전거 및 보행자를 위한 특별한 경로 설정 및 표시 모드 ↵
-\n- 옵션에서 노선명을 포함한 대중 교통 정류장 (버스, 트램, 기차) ↵
-\n- 옵션에서 로컬 GPX 파일 또는 온라인을 이용한 여행 기록 서비스 ↵
-\n- 옵션에서 속도 및 고도 표시 ↵
-\n- 등고선과 언덕 음영 표시 (추가 플러그인을 통해) ↵ ↵
-\n\n직접 OpenStreetMap에 기여 ↵
-\n- 보고서 맵 버그 ↵
-\n- OSM 폴더에 GPX 트랙 기록을 응용 프로그램에서 직접 업로드 ↵
-\n- POI를 추가하고 직접 OSM 에 (오프라인의 경우 나중에) 업로드 ↵
-\n- 옵션에서 백그라운드 모드에서 임의의 여행 기록 만들기 (장치가 절전 모드에있는 동안) ↵ ↵
-\n\nOsmAnd는 오픈 소스이며, 활발하게 개발이 진행되고 있습니다 . 누구나 버그의 보고, 번역의 개선, 새로운 기능의 코딩 등의 애플리케이션에 공헌 할 수 있습니다.
-\n프로젝트는 포럼에서 개발자와 사용자의 상호 작용에서 진행되고 있습니다. 프로젝트의 진행, 또한 새로운 기능의 개발, 코딩 및 테스트를 위해 여러분의 재정적 기여에 의존하고 있습니다.
-\nOsmAnd +를 구입함으로써 응용 프로그램이 더 좋아집니다! 또한 특정의 새로운 기능에 투자하거나 osmand.net에 기부를 할 수 있습니다. ↵ ↵ ↵
-\n\n\n대략적인지도 범위와 품질 : ↵
-\n- 서유럽 : **** ↵
-\n- 동유럽 : *** ↵
-\n- 러시아 : *** ↵
-\n- 북미 *** ↵
-\n- 남아메리카 : ** ↵
-\n- 아시아 : ** ↵
-\n- 한국 : *** ↵
-\n- 중동 : ** ↵
-\n- 아프리카 : ** ↵
-\n- 남극 : * ↵ ↵
-\n\n\n지원하는 국가의 목록 (기본적으로 전세계 대응) : ↵
-\n\n아프가니스탄, 알바니아 알제리 안도라, 앙골라, 앵 귈라, 안티구아 바부 다, 아르헨티나, 아르메니아, 아루바, 호주, 오스트리아, 아제르바이잔, 바하마, 바레인, 방글라데시, 바베이도스, 벨로루시, 벨기에, 벨리즈, 베냉, 버뮤다, 부탄, 볼리비아, 보네르 보스니아 헤르체고비나, 보츠와나, 브라질, 영국령 버진 아일랜드, 브루나이, 불가리아, 부르 키나 파소, 부룬디,
-\n\n캄보디아, 카메룬, 캐나다, 카보 베르데, 중앙 아프리카 공화국, 차드, 칠레, 중국, 콜롬비아, 코모로, 콩고, 코스타리카, 코트 디부 아르, 크로아티아, 쿠바, 큐라 소, 키프로스, 체코, 덴마크, 지부티, 도미니카, 도미니카 공화국, 에콰도르, 이집트, 엘살바도르, 적도 기니, 에리트레아, 에스토니아, 에티오피아, 피지, 핀란드, 프랑스, 프랑스 령 기아나, 프랑스 령 폴리네시아,
-\n\n가봉, 감비아, 조지아, 독일, 가나, 지브롤터, 그리스, 그린 랜드, 그레나다, 과들루프, 괌, 과테말라, 건지, 기니, 기니 비사우, 가이아나, 아이티, 바티칸, 온두라스, 홍콩, 헝가리, 아이슬란드, 인도, 인도네시아,이란, 이라크 아일랜드 맨섬 이스라엘 이탈리아 자메이카 일본 저지 요르단
-\n\n카자흐스탄 케냐 키리바시 북한과 한국, 쿠웨이트, 키르기스스탄, 라오스, 라트비아, 레바논, 레소토, 라이베리아, 리비아, 리히텐슈타인, 리투아니아, 룩셈부르크, 마카오, 마케도니아, 마다가스카르, 말라위, 말레이시아, 몰디브, 말리, 몰타, 마르티니크, 모리타니, 모리셔스, 마 요트, 멕시코, 미크로네시아, 몰도바, 모나코, 몽골, 몬테네그로, 몬세 라트, 모로코, 모잠비크, 미얀마,
-\n\n나미비아, 나우루, 네팔, 네덜란드, 네덜란드 령 안틸레스, 뉴 칼레도니아, 뉴질랜드, 니카라과, 니제르, 나이지리아, 노르웨이, 오만, 파키스탄, 팔라우, 팔레스타인, 파나마, 파푸아 뉴기니, 파라과이, 페루, 필리핀, 폴란드, 포르투갈, 푸에르토 리코, 카타르, 루마니아, 러시아, 르완다,
-\n\n생 바르 텔레 미 세인트 헬레나 세인트 키츠 네비스, 세인트 루시아, 세인트 마틴, 생 피에르 미 클롱, 세인트 빈센트 그레나딘, 사모아, 산 마리노, 사우디 아라비아, 세네갈, 세르비아, 세이셸, 시에라 리온, 싱가포르 , 슬로바키아, 슬로베니아, 소말리아, 남아프리카 공화국, 사우스 조지아 남부 수단, 스페인, 스리랑카, 수단, 수리남, 스와질란드, 스웨덴, 스위스, 시리아,
-\n\n대만, 타지키스탄, 탄자니아, 태국, 동 티모르, 토고, 토켈 라우, 통가, 트리니다드 토바고, 튀니지, 터키, 투르크 메니스탄, 투발루, 우간다, 우크라이나, 아랍 에미리트, 영국 (UK), 미국 (USA), 우루과이, 우즈베키스탄, 바누아투, 베네수엘라, 베트남, 월리스 푸 투나 서부 사하라 예멘 잠비아 짐바브웨 "</string>
+	
 	<string name="filterpoi_activity">POI 필터 만들기</string>
 	<string name="select_navigation_mode">전송 모드 선택</string>
 	<string name="day_night_info_description">일출: %1$s \n일몰: %2$s</string>
@@ -1425,68 +1359,7 @@
     <string name="audionotes_location_not_defined">노트와 연결할 위치는 아직 정의되지 않았습니다. 지정된 위치에 노트를 할당하려면 \"위치 사용…\"</string>
     
 	
-	<string name="osmand_extended_description_4000_chars">" OsmAnd 은 전세계에 무료로, 고품질의 OpenStreetMap 데이터에 액세스가 가능한 지도 및 운행 앱입니다.
-\n모든 지도 데이터를 오프라인으로 사용할수 있도록 메모리 카드에 저장할 수 있습니다. 장치의 GPS 를 통해,
-\nOsmAnd 는 자동차, 자전거 및 보행자를 위한 광센서 및 음성 안내와 함께 라우팅(길찾기)을 제공합니다.
-\n모든 주요 기능은 온라인과 오프라인에서 모두 작동합니다.
-\nOsmAnd+ 는 유료 버전 앱입니다.
-\nOsmAnd+ 를 구입하므로써 새로운 기능의 프로젝트와 개발을 지원하게 됩니다.
-\n\n주요 기능 중 일부 :
-\n\nNavigation : 운행
-\n- 온라인 또는 오프라인으로 작업
-\n- 턴바이턴 음성안내
-\n- 선택적 길안내, 거리이름 표시, 도착예상시각 표시
-\n- 트래킹하는 동안 중간 경유지 지원
-\n- 루트를 이탈하였을 때 자동으로 길찾기 재실행
-\n- 주소 또는 좌표로 장소를 검색 (또는 레스토랑, 호텔, 주유소, 박물관 등등)
-\n\nMap Viewing :지도 보기
-\n- 지도에 현재위치와 방향을 표시
-\n- 선택적으로 나침반 또는 GPS로 진행방향를 지도에 표시 가능
-\n- 즐겨찾기로 중요한 장소를 저장하기
-\n- 주위에 있는 POI를 표시하기
-\n- 특정 온라인 타일맵 표시하기
-\n- 위성지도(Bing) 보기
-\n- 다른 오버레이 지도 표시
-\n- 선택적으로 영어로 장소 이름을 표시
-\n\nUse OpenStreetMap and Wikipedia Data:
-\n- 세계 최고의 협력 프로젝트로 최고 품질의 정보를 사용
-\n- 각 나라 또는 지역별로 이용가능한 글로벌 지도 사용
-\n- 관광을 위한 위키피디아 POI 이용(무료버전은 이용할 수 없다)
-\n- 앱으로 부터 직접 무제한 무료 다운로드, (무료버전은 16개의 지도로 다운로드 제한)
-\n- 항상 최신의 지도 업데이트(최소 한달에 한번 업데이트됨)
-\n- 콤팩트한 오프라인 벡터 맵
-\n- 전지역 지도와 도로전용 지도 선택가능 (예로 일본 전지역은 용량이 700MB, 도로전용 지도는 용량이 200MB)
-\n- 또한 온라인 지도와 캐시된 지도 지원 Safety Features
-\n- 옵션으로 자동으로 주간/야간 보기 전환
-\n- 옵션으로 속도제한표시,
-\n- 옵션으로 속도에 따라 지도크기 변화
-\n- 당신의 친구가 당신을 찾을 수 있도록 친구와 위치를 공유
-\n\nBicycle and Pedestrian Features
-\n- 지도는 걷기, 하이킹, 자전거 길, 아웃도어 활동을 포함한다,
-\n- 자전거와 보행자를 위한 특별한 길찾기와 표시모드
-\n- 옵션으로 도로 이름을 포함한 대중교통 정거장 표시 (버스, 전차, 기차)
-\n- 옵션으로 로컬 GPX파일 또는 온라인으로 여행 기록 저장
-\n- 옵션으로 속도와 고도 표시
-\n- 등고선과 음영 표시(부가적인 플러그인을 통해서)
-\n\n직접 OSM에 공헌하기
-\n- 지도 버그 보고
-\n- 앱에서 직접 OSM으로 GPX파일 업로드하기
-\n- 포인트 추가 및 포인트를 OSM에 업로드하기
-\n- 옵션으로 백그라운드 모드로 여행기록(기기가 절전 모드로 있는 동안)
-\n\nOsmAnd 는 오픈 소스 이고 적극적으로 개발되었습니다. 모두가 버그를 보고 번역을 개선 하거나 새로운 기능을 코딩하여 앱에 기여할 수 있습니다.
-\n이 프로젝트는 개발자와 사용자의 상호작용으로 모든 형태에 의해 지속적인 개선을 희망합니다. 프로젝트 진행상황은 새로운 기능의 개발, 코딩, 테스트를 투자하는 재정 지원에 의존하고 있습니다.
-\nOsmAnd+ 를 구입하여 앱이 한 단계 성장하는데 도움을 주세요! 그것은 특정한 새로운 기능을 투자하는, 또는 osmand.net 에 대한 일반적인 기부를 하는 것도 가능합니다.
-\n\nApproximate map coverage and quality:
-\n- Western Europe: ****
-\n- Eastern Europe: ***
-\n- Russia: *** - North America: ***
-\n- South America: **
-\n- Asia: ** - Japan &amp; Korea: ***
-\n- Middle East: **
-\n- Africa: **
-\n- Antarctica: *
-\n\nList of countries supported (basically world wide!):
-\nAfghanistan, Albania, Algeria, Andorra, Angola, Anguilla, Antigua and Barbuda, Argentina, Armenia, Aruba, Australia, Austria, Azerbaijan, Bahamas, Bahrain, Bangladesh, Barbados, Belarus, Belgium, Belize, Benin, Bermuda, Bhutan, Bolivia, Bonaire, Bosnia and Herzegovina, Botswana, Brazil, British Virgin Islands, Brunei, Bulgaria, Burkina Faso, Burundi, Cambodia, Cameroon, Canada, Cape Verde, Central African Republic, Chad, Chile, China, Colombia, Comoros, Congo, Costa Rica, Ivory Coast, Croatia, Cuba, Curaçao, Cyprus, Czech Republic, Denmark, Djibouti, Dominica, Dominican Republic, Ecuador, Egypt, El Salvador, Equatorial Guinea, Eritrea, Estonia, Ethiopia, Fiji, Finland, France, French Guiana, French Polynesia, Gabon, Gambia, Georgia, Germany, Ghana, Gibraltar, Greece, Greenland, Grenada, Guadeloupe, Guam, Guatemala, Guernsey, Guinea, Guinea-Bissau, Guyana, Haiti, Vatican, Honduras, Hong Kong, Hungary, Iceland, India, Indonesia, Iran, Iraq, Ireland, Isle of Man, Israel, Italy, Jamaica, Japan, Jersey, Jordan, Kazakhstan, Kenya, Kiribati, North Korea and South Korea, Kuwait, Kyrgyzstan, Laos, Latvia, Lebanon, Lesotho, Liberia, Libya, Liechtenstein, Lithuania, Luxembourg, Macao, Macedonia, Madagascar, Malawi, Malaysia, Maldives, Mali, Malta, Martinique, Mauritania, Mauritius, Mayotte, Mexico, Micronesia, Moldova, Monaco, Mongolia, Montenegro, Montserrat, Morocco, Mozambique, Myanmar, Namibia, Nauru, Nepal, Netherlands, Netherlands Antilles, New Caledonia, New Zealand, Nicaragua, Niger, Nigeria, Norway, Oman, Pakistan, Palau, Palestinian Territory, Panama, Papua New Guinea, Paraguay, Peru, Philippines, Poland, Portugal, Puerto Rico, Qatar, Romania, Russia, Rwanda, Saint Barthelemy, Saint Helena, Saint Kitts and Nevis, Saint Lucia, Saint Martin, Saint Pierre and Miquelon, Saint Vincent and the Grenadines, Samoa, San Marino, Saudi Arabia, Senegal, Serbia, Seychelles, Sierra Leone, Singapore, Slovakia, Slovenia, Somalia, South Africa, South Georgia, South Sudan, Spain, Sri Lanka, Sudan, Suriname, Swaziland, Sweden, Switzerland, Syria, Taiwan, Tajikistan, Tanzania, Thailand, Timor-Leste, Togo, Tokelau, Tonga, Trinidad and Tobago, Tunisia, Turkey, Turkmenistan, Tuvalu, Uganda, Ukraine, United Arab Emirates, United Kingdom (UK), United States of America (USA), Uruguay, Uzbekistan, Vanuatu, Venezuela, Vietnam, Wallis and Futuna, Western Sahara, Yemen, Zambia, Zimbabwe. "</string>
+	
 	<string name="osmand_rastermaps_plugin_description">"이 플러그인을 사용하면 날씨지도, 기후지도, 지질지도, 음영레이어 등과 같은 위성 영상과 특수 목적 레이어에 (Mapnik 같은) 미리 정의 된 OpenStreetMap의 타일에서, 온라인 지도(타일 또는 래스터라고도 함) 의 여러 유형의 지도에 액세스 할 수 있습니다\n↵\n이러한 지도 중 하나가 OsmAnd지도 화면에 표시하기 위해 메인 (기본)지도로 사용할 수 있다,  또는 (OsmAnd의 일반 오프라인 지도 처럼) 다른 기본 맵에 오버레이 또는 언더레이로 메인 (기본)지도로 사용할 수 있다. 지도를 상세히 볼 수 있도록 언더레이 지도를 만들려면, OsmAnd 벡터 지도의 특정 요소는 쉽게 원하는대로 \'지도 구성\' 메뉴를 통해 숨길 수 있다. ↵\n↵\n타일 맵은 온라인 소스를 통해 직접 구할 수  있다, 또는 다양한 서드파티 지도 준비 도구에 의해 만들 수 있는  SQLite 데이터베이스로서 오프라인 용 사용을 할 수 있다. (수동으로 OsmAnd의 데이터 폴더에 복사 할 수 있다).\n\n기본 맵으로 또는 오버레이/언더레이 지도로 온라인 또는 캐시 타일맵의 다양한 구성을 위한 설정을 표시합니다. 이 지도는 오프라인으로 준비하거나 OsmAnd 데이터 폴더에 복사 할 수 있습니다. "</string>
 	
 	<string name="towards">쪽으로</string>

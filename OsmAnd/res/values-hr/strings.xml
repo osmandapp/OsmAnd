@@ -1,5 +1,4 @@
-<?xml version='1.0' encoding='UTF-8'?>
-<resources><string name="map_widget_gps_info">GPS informacije</string>
+<?xml version="1.0" encoding="UTF-8" standalone="no"?><resources><string name="map_widget_gps_info">GPS informacije</string>
     <string name="access_arrival_time">Vrijeme dolaska</string>
     <string name="item_checked">provjereno</string>
     <string name="item_unchecked">neprovjereno</string>
@@ -958,8 +957,7 @@
     <string name="app_modes_choose">Profili aplikacije</string>
 	<string name="app_modes_choose_descr">Odaberite profil koji će se koristiti u aplikaciji</string>
     <string name="local_osm_changes_delete_all_confirm">Izbrisati ćete %1$d osm promjene. Jeste li sigurni?</string>
-    <string name="route_is_too_long">Ruta je možda preduga da se izračuna pomoću OsmAnd offline usmjeravanja. 
-        	U prosjeku offline usmjeravanje moguće je između točaka do 200 km. Molimo dodajte jednu ili više među točaka za izračun rute.</string>
+    
 	
     <string name="local_index_tile_data_expire">Expire za (minutes): %1$s</string>
     <string name="local_index_tile_data_downloadable">Preuzimanje: %1$s</string>
@@ -1542,7 +1540,7 @@
     <string name="file_can_not_be_moved">Datoteke se ne mogu premjestiti.</string>
     <string name="shared_string_move">Premjestiti</string>
     <string name="routing_attr_driving_style_name">Stil vožnje</string>
-    <string name="routing_attr_driving_style_description">Sigurna, brza ili uravnotežena vožnja</string>
+    
     <string name="altitude_descent">nizbrdica</string>
     <string name="altitude_ascent">Uzbrdica</string>
     <string name="altitude_range">Visinska razlika</string>
