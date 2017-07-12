@@ -373,16 +373,18 @@ public class GPXUtilities {
 					}
 					long time = point.time;
 					if (time != 0) {
-						if (s.segment.generalSegment) {
-							if (point.firstPoint) {
-								startTimeOfSingleSegment = time;
-							} else if (point.lastPoint) {
-								endTimeOfSingleSegment = time;
-							}
-							if (startTimeOfSingleSegment != 0 && endTimeOfSingleSegment != 0) {
-								timeSpan += endTimeOfSingleSegment - startTimeOfSingleSegment;
-								startTimeOfSingleSegment = 0;
-								endTimeOfSingleSegment = 0;
+						if (s.metricEnd == 0) {
+							if (s.segment.generalSegment) {
+								if (point.firstPoint) {
+									startTimeOfSingleSegment = time;
+								} else if (point.lastPoint) {
+									endTimeOfSingleSegment = time;
+								}
+								if (startTimeOfSingleSegment != 0 && endTimeOfSingleSegment != 0) {
+									timeSpan += endTimeOfSingleSegment - startTimeOfSingleSegment;
+									startTimeOfSingleSegment = 0;
+									endTimeOfSingleSegment = 0;
+								}
 							}
 						}
 						startTime = Math.min(startTime, time);
