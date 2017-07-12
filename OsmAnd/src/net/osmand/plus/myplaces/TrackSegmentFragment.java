@@ -363,14 +363,7 @@ public class TrackSegmentFragment extends OsmAndListFragment {
 			}
 		});
 
-		boolean hasPath = false;
-		if (getGpx() != null) {
-			if (getGpx().showCurrentTrack) {
-				hasPath = false;
-			} else if (getGpx().tracks.size() > 0 || getGpx().routes.size() > 0) {
-				hasPath = true;
-			}
-		}
+		boolean hasPath = getGpx() != null && (getGpx().tracks.size() > 0 || getGpx().routes.size() > 0);
 		if (rotatedTileBox == null || mapBitmap == null || mapTrackBitmap == null) {
 			QuadRect rect = getRect();
 			if (rect.left != 0 && rect.top != 0) {
