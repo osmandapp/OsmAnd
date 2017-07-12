@@ -2114,8 +2114,10 @@ public class QuickSearchDialogFragment extends DialogFragment implements OsmAndC
 								HistoryEntry historyEntry = (HistoryEntry) searchListItem.getSearchResult().object;
 								searchHistoryHelper.remove(historyEntry);
 							}
-							((QuickSearchDialogFragment) getParentFragment()).reloadHistory();
-							((QuickSearchDialogFragment) getParentFragment()).enableSelectionMode(false, -1);
+							if (getParentFragment() instanceof QuickSearchDialogFragment) {
+								((QuickSearchDialogFragment) getParentFragment()).reloadHistory();
+								((QuickSearchDialogFragment) getParentFragment()).enableSelectionMode(false, -1);
+							}
 						}
 					})
 					.setNegativeButton(R.string.shared_string_no, null);
