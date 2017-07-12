@@ -107,6 +107,7 @@ public class GPXLayer extends OsmandMapLayer implements ContextMenuLayer.IContex
 		this.view = view;
 		selectedGpxHelper = view.getApplication().getSelectedGpxHelper();
 		osmandRenderer = view.getApplication().getResourceManager().getRenderer().getRenderer();
+		view.getApplication().getGpxDatabase().processSplit();
 		initUI();
 	}
 

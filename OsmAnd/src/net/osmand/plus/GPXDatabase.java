@@ -2,6 +2,7 @@ package net.osmand.plus;
 
 import net.osmand.IndexConstants;
 import net.osmand.plus.GPXUtilities.GPXTrackAnalysis;
+import net.osmand.plus.activities.TrackActivity;
 import net.osmand.plus.api.SQLiteAPI.SQLiteConnection;
 import net.osmand.plus.api.SQLiteAPI.SQLiteCursor;
 import net.osmand.util.Algorithms;
@@ -403,6 +404,21 @@ public class GPXDatabase {
 			}
 		}
 		return items;
+	}
+
+	public void processSplit() {
+		List<GpxDataItem> items = getItems();
+		for (GpxDataItem dataItem : items) {
+			GpxSelectionHelper gpxSelectionHelper = context.getSelectedGpxHelper();
+			GpxSelectionHelper.SelectedGpxFile selectedGpxFile = gpxSelectionHelper.getSelectedFileByPath(dataItem.file.getAbsolutePath());
+			if (selectedGpxFile != null && selectedGpxFile.getGpxFile() != null) {
+				GPXUtilities.GPXFile gpxFile = selectedGpxFile.getGpxFile();
+				List<GpxSelectionHelper.GpxDisplayGroup> groups = context.getSelectedGpxHelper().collectDisplayGroups(gpxFile);
+				for (GpxSelectionHelper.GpxDisplayGroup group : groups) {
+
+				}
+			}
+		}
 	}
 
 	public GpxDataItem getItem(File file) {
