@@ -194,7 +194,7 @@ public class MapInfoLayer extends OsmandMapLayer {
 		TextInfoWidget battery = ric.createBatteryControl(map);
 		registerSideWidget(battery, R.drawable.ic_action_battery, R.string.map_widget_battery, "battery", false, 42);
 		TextInfoWidget ruler = mic.createRulerControl(map);
-		registerSideWidget(ruler, new MapInfoWidgetsFactory.RulerWidgetState(app), "ruler", false, 43);
+		registerSideWidget(ruler, R.drawable.ic_action_ruler_circle, R.string.map_widget_ruler_control, "ruler", false, 43);
 	}
 
 	public void recreateControls() {

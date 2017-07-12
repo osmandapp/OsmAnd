@@ -3095,7 +3095,7 @@ Facebook: https://www.facebook.com/osmandapp
     <string name="shared_string_permissions">Права доступу</string>
     <string name="import_gpx_failed_descr">OsmAnd не може імпортувати файл. Будь ласка, перевірте, чи OsmAnd має дозвіл на читання файлу з його місця розташування.</string>
     <string name="map_widget_ruler_control_first_mode">Двоточкова лінійка</string>
-    <string name="map_widget_ruler_control_second_mode">Радіусна лінійка</string>
+    <string name="map_widget_ruler_control">Радіусна лінійка</string>
     <string name="shared_string_reload">Перезавантажити</string>
     <string name="mapillary_menu_descr_tile_cache">Перезавантажити тайли, щоб переглянути актуальні дані.</string>
     <string name="mapillary_menu_title_tile_cache">Тайловий кеш</string>

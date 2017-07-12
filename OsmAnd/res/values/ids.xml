@@ -8,9 +8,5 @@
     <!-- Time control widget ids-->
     <item name="time_control_widget_state_arrival_time" type="id"/>
     <item name="time_control_widget_state_time_to_go" type="id"/>
-    <!-- Ruler control widget ids-->
-    <item name="ruler_control_widget_state_first_mode" type="id"/>
-    <item name="ruler_control_widget_state_second_mode" type="id"/>
-    <item name="ruler_control_widget_state_empty_mode" type="id"/>
 
 </resources>

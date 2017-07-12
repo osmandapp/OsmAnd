@@ -2910,7 +2910,7 @@ Moduli:
     <string name="shared_string_permissions">Dazvoly</string>
     <string name="import_gpx_failed_descr">OsmAnd nie moža impartavać fajl. Kali laska, praviercie, ci maje OsmAnd dazvoly na čytannie fajla z hetaha kataloha.</string>
     <string name="map_widget_ruler_control_first_mode">Liniejka dvuchpunktavaja</string>
-    <string name="map_widget_ruler_control_second_mode">Liniejka pramianiovaja</string>
+    <string name="map_widget_ruler_control">Liniejka pramianiovaja</string>
     <string name="wrong_user_name">Niapraviĺnaje imia karystaĺnika!</string>
     <string name="shared_string_to">Da</string>
     <string name="mapillary_menu_date_from">Ad</string>

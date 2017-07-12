@@ -2884,7 +2884,7 @@ Zodpovedá oblasti: %1$s x %2$s</string>
     <string name="shared_string_permissions">Povolenia</string>
     <string name="import_gpx_failed_descr">OsmAnd nemôže naimportovať súbor. Prosím skontrolujte, či OsmAnd má oprávnenie čítať súbor z tohto umiestnenia.</string>
     <string name="map_widget_ruler_control_first_mode">Dvojbodové pravítko</string>
-    <string name="map_widget_ruler_control_second_mode">Polomerové pravítko</string>
+    <string name="map_widget_ruler_control">Polomerové pravítko</string>
     <string name="shared_string_reset">Resetovať</string>
     <string name="shared_string_reload">Znovu načítať</string>
     <string name="mapillary_menu_descr_tile_cache">Znovu načítať dlaždice pre získanie aktuálnych dát.</string>

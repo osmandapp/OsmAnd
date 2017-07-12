@@ -2835,7 +2835,7 @@ Indikas lokon:  %1$s x %2$s"</string>
     <string name="shared_string_permissions">Permesoj</string>
     <string name="import_gpx_failed_descr">OsmAnd ne povas enporti la dosieron. Bonvolu kontroli, ĉu OsmAnd estas permesata por legi dosieron de tiu ĉi loko.</string>
     <string name="map_widget_ruler_control_first_mode">Dupunkta mezurilo</string>
-    <string name="map_widget_ruler_control_second_mode">Radiusa mezurilo</string>
+    <string name="map_widget_ruler_control">Radiusa mezurilo</string>
     <string name="shared_string_reload">Reŝargi</string>
     <string name="mapillary_menu_descr_tile_cache">Reŝargi kahelojn por ĝisdatigi datumojn.</string>
     <string name="mapillary_menu_title_tile_cache">Kahela memoro</string>

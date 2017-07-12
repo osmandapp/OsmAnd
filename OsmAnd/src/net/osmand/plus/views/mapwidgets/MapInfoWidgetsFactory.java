@@ -112,78 +112,8 @@ public class MapInfoWidgetsFactory {
 		return gpsInfoControl;
 	}
 
-	public static class RulerWidgetState extends MapWidgetRegistry.WidgetState {
-
-		static final int RULER_CONTROL_WIDGET_STATE_FIRST_MODE = R.id.ruler_control_widget_state_first_mode;
-		static final int RULER_CONTROL_WIDGET_STATE_SECOND_MODE = R.id.ruler_control_widget_state_second_mode;
-		static final int RULER_CONTROL_WIDGET_STATE_EMPTY_MODE = R.id.ruler_control_widget_state_empty_mode;
-
-		private final OsmandSettings.CommonPreference<RulerMode> rulerMode;
-
-		public RulerWidgetState(OsmandApplication ctx) {
-			super(ctx);
-			rulerMode = ctx.getSettings().RULER_MODE;
-		}
-
-		@Override
-		public int getMenuTitleId() {
-			if (rulerMode.get() == RulerMode.SECOND) {
-				return R.string.map_widget_ruler_control_second_mode;
-			} else {
-				return R.string.map_widget_ruler_control_first_mode;
-			}
-		}
-
-		@Override
-		public int getMenuIconId() {
-			final RulerMode mode = rulerMode.get();
-			if (mode == RulerMode.FIRST) {
-				return R.drawable.ic_action_ruler_location;
-			} else if (mode == RulerMode.SECOND) {
-				return R.drawable.ic_action_ruler_circle;
-			}
-			return R.drawable.ic_action_hide;
-		}
-
-		@Override
-		public int getMenuItemId() {
-			RulerMode mode = rulerMode.get();
-			if (mode == RulerMode.FIRST) {
-				return RULER_CONTROL_WIDGET_STATE_FIRST_MODE;
-			} else if (mode == RulerMode.SECOND) {
-				return RULER_CONTROL_WIDGET_STATE_SECOND_MODE;
-			} else {
-				return RULER_CONTROL_WIDGET_STATE_EMPTY_MODE;
-			}
-		}
-
-		@Override
-		public int[] getMenuTitleIds() {
-			return new int[]{R.string.map_widget_ruler_control_first_mode, R.string.map_widget_ruler_control_second_mode};
-		}
-
-		@Override
-		public int[] getMenuIconIds() {
-			return new int[]{R.drawable.ic_action_ruler_location, R.drawable.ic_action_ruler_circle};
-		}
-
-		@Override
-		public int[] getMenuItemIds() {
-			return new int[]{RULER_CONTROL_WIDGET_STATE_FIRST_MODE, RULER_CONTROL_WIDGET_STATE_SECOND_MODE};
-		}
-
-		@Override
-		public void changeState(int stateId) {
-			RulerMode newMode = RulerMode.FIRST;
-			if (stateId == RULER_CONTROL_WIDGET_STATE_SECOND_MODE) {
-				newMode = RulerMode.SECOND;
-			}
-			rulerMode.set(newMode);
-		}
-	}
-
 	public TextInfoWidget createRulerControl(final MapActivity map) {
-		final String title = map.getResources().getString(R.string.map_widget_show_ruler);
+		final String title = "-";
 		final TextInfoWidget rulerControl = new TextInfoWidget(map) {
 			RulerControlLayer rulerLayer = map.getMapLayers().getRulerControlLayer();
 			LatLon cacheFirstTouchPoint = new LatLon(0, 0);
@@ -193,7 +123,6 @@ public class MapInfoWidgetsFactory {
 
 			@Override
 			public boolean updateInfo(DrawSettings drawSettings) {
-				RulerMode mode = map.getMyApplication().getSettings().RULER_MODE.get();
 				OsmandMapTileView view = map.getMapView();
 				Location currentLoc = map.getMyApplication().getLocationProvider().getLastKnownLocation();
 
@@ -214,7 +143,7 @@ public class MapInfoWidgetsFactory {
 								cacheSecondTouchPoint.getLatitude(), cacheSecondTouchPoint.getLongitude());
 						fingerAndLocDistWasShown = false;
 					}
-				} else if (mode == RulerMode.FIRST || mode == RulerMode.SECOND) {
+				} else {
 					LatLon centerLoc = map.getMapLocation();
 
 					if (currentLoc != null && centerLoc != null) {
@@ -224,9 +153,9 @@ public class MapInfoWidgetsFactory {
 							setDistanceText(currentLoc.getLatitude(), currentLoc.getLongitude(),
 									centerLoc.getLatitude(), centerLoc.getLongitude());
 						}
+					} else {
+						setText(title, null);
 					}
-				} else {
-					setText(title, null);
 				}
 				return true;
 			}

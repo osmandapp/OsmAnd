@@ -2790,7 +2790,7 @@ OsmAnd هو المصدر المفتوح و التي يجري تطويرها بن
     <string name="shared_string_time_span">الفترة الزمنية</string>
     <string name="route_altitude">ارتفاع الطريق</string>
     <string name="routing_attr_relief_smoothness_factor_name">تحديد تذبذب الإرتفاع</string>
-    <string name="map_widget_ruler_control_second_mode">حساب نصف القطر</string>
+    <string name="map_widget_ruler_control">حساب نصف القطر</string>
     <string name="shared_string_permissions">ترخيصات</string>
     <string name="import_gpx_failed_descr">لا يمكن للتطبيق استيراد الملف. الرجاء التحقق إذا كان التطبيق لديه إذن قراءة الملف من موقعه.</string>
     <string name="distance_moving">تم تصحيح المسافة</string>

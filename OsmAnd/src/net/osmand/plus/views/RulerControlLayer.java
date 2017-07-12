@@ -86,7 +86,7 @@ public class RulerControlLayer extends OsmandMapLayer {
         this.view = view;
         cacheDistances = new ArrayList<>();
         cacheCenter = new QuadPoint();
-        maxRadiusInDp = mapActivity.getResources().getDimensionPixelSize(R.dimen.map_ruler_radius);
+        maxRadiusInDp = mapActivity.getResources().getDimensionPixelSize(R.dimen.map_ruler_width);
         rightWidgetsPanel = mapActivity.findViewById(R.id.map_right_widgets_panel);
         distancePath = new Path();
         tx = new TIntArrayList();
@@ -160,6 +160,7 @@ public class RulerControlLayer extends OsmandMapLayer {
             showTwoFingersDistance = !view.isWasZoomInMultiTouch() && !tb.isZoomAnimated() &&
                     (view.isMultiTouch() || System.currentTimeMillis() - cacheMultiTouchEndTime < DELAY);
 
+            drawCenterIcon(canvas, tb, center, settings.isNightMode());
             Location currentLoc = app.getLocationProvider().getLastKnownLocation();
             if (showDistBetweenFingerAndLocation && currentLoc != null) {
                 float x = tb.getPixXFromLonNoRot(singleTouchPointLatLon.getLongitude());
@@ -175,7 +176,6 @@ public class RulerControlLayer extends OsmandMapLayer {
                 drawFingerDistance(canvas, x1, y1, x2, y2, settings.isNightMode());
             }
             if (mode == RulerMode.FIRST || mode == RulerMode.SECOND) {
-                drawCenterIcon(canvas, tb, center, settings.isNightMode());
                 updateData(tb, center);
                 RenderingLineAttributes attrs;
                 if (mode == RulerMode.FIRST) {

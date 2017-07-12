@@ -2788,7 +2788,7 @@ Tai yra puikus būdas paremti OsmAnd ir OSM, jei jie jums patinka.</string>
     <string name="shared_string_to">Iki</string>
     <string name="mapillary_menu_filter_description">Vaizdus galima filtruoti pagal pateikėją arba pagal datą. Filtrai veikia tik labai priartinus.</string>
     <string name="map_widget_ruler_control_first_mode">Liniuotė tarp dviejų taškų</string>
-    <string name="map_widget_ruler_control_second_mode">Spindulio liniuotė</string>
+    <string name="map_widget_ruler_control">Spindulio liniuotė</string>
     <string name="improve_coverage_install_mapillary_desc">Galite fotografuoti ir savo nuotraukas ar jų grupę prisegti ją prie šios vietos žemėlapyje.
 \n
 \nKad tą galėtumėt padaryti jums reikalinga Mapillary programa iš Google Play parduotuvės.</string>
