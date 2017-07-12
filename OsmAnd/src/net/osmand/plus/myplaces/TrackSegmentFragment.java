@@ -57,6 +57,7 @@ import net.osmand.data.PointDescription;
 import net.osmand.data.QuadRect;
 import net.osmand.data.RotatedTileBox;
 import net.osmand.data.RotatedTileBox.RotatedTileBoxBuilder;
+import net.osmand.plus.GPXDatabase;
 import net.osmand.plus.GPXDatabase.GpxDataItem;
 import net.osmand.plus.GPXUtilities;
 import net.osmand.plus.GPXUtilities.GPXFile;
@@ -297,7 +298,7 @@ public class TrackSegmentFragment extends OsmAndListFragment {
 		final View colorView = headerView.findViewById(R.id.color_view);
 		final SwitchCompat vis = (SwitchCompat) headerView.findViewById(R.id.showOnMapToggle);
 		final ProgressBar progressBar = (ProgressBar) headerView.findViewById(R.id.mapLoadProgress);
-		boolean selected = getGpx() != null &&
+		final boolean selected = getGpx() != null &&
 				((getGpx().showCurrentTrack && app.getSelectedGpxHelper().getSelectedCurrentRecordingTrack() != null) ||
 						(getGpx().path != null && app.getSelectedGpxHelper().getSelectedFileByPath(getGpx().path) != null));
 		vis.setChecked(selected);
@@ -311,6 +312,9 @@ public class TrackSegmentFragment extends OsmAndListFragment {
 				final List<GpxDisplayGroup> groups = getDisplayGroups();
 				if (groups.size() > 0) {
 					updateSplit(groups, vis.isChecked() ? sf : null);
+					if (getGpxDataItem() != null) {
+//						updateSplitInDatabase();
+					}
 				}
 				updateSplitIntervalView(splitIntervalView);
 				updateColorView(colorView);
@@ -445,6 +449,9 @@ public class TrackSegmentFragment extends OsmAndListFragment {
 								final List<GpxDisplayGroup> groups = getDisplayGroups();
 								if (groups.size() > 0) {
 									updateSplit(groups, vis.isChecked() ? sf : null);
+									if (getGpxDataItem() != null) {
+//										updateSplitInDatabase();
+									}
 								}
 								popup.dismiss();
 								updateSplitIntervalView(splitIntervalView);
@@ -464,6 +471,22 @@ public class TrackSegmentFragment extends OsmAndListFragment {
 			divider.setVisibility(View.GONE);
 		}
 	}
+
+//	private void updateSplitInDatabase() {
+//		int splitType = -1;
+//		double splitInterval = -1;
+//		if (selectedSplitInterval == 0) {
+//			splitType = GPXDatabase.GPX_SPLIT_TYPE_NO_SPLIT;
+//			splitInterval = 0;
+//		} else if (distanceSplit.get(selectedSplitInterval) > 0) {
+//			splitType = GPXDatabase.GPX_SPLIT_TYPE_DISTANCE;
+//			splitInterval = distanceSplit.get(selectedSplitInterval);
+//		} else if (timeSplit.get(selectedSplitInterval) > 0) {
+//			splitType = GPXDatabase.GPX_SPLIT_TYPE_TIME;
+//			splitInterval = timeSplit.get(selectedSplitInterval);
+//		}
+//		app.getGpxDatabase().updateSplit(getGpxDataItem(), splitType, splitInterval);
+//	}
 
 	public void updateSplitView() {
 		SelectedGpxFile sf = app.getSelectedGpxHelper().selectGpxFile(getGpx(), ((SwitchCompat)headerView.findViewById(R.id.showOnMapToggle)).isChecked(), false);
