@@ -1522,7 +1522,7 @@
     <string name="unit_of_length_descr">Uzunluq vahidlərini dəyişin</string>
     <string name="unit_of_length">Uzunluq vahidi</string>
     <string name="map_widget_ruler_control_first_mode">İki nöqtə xətkeş</string>
-    <string name="map_widget_ruler_control_second_mode">Radius xətkeşi</string>
+    <string name="map_widget_ruler_control">Radius xətkeşi</string>
     <string name="local_index_items_backuped">%1$d / %2$d obyekt uğurla qeyri-aktiv edildi.</string>
     <string name="local_index_no_items_to_do">%1$smək üçün obyekt yoxdur</string>
     <string name="local_index_action_do">%2$s obyekti %1$smək üzrəsiniz. Davam edilsin?</string>

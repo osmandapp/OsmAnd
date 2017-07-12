@@ -2710,7 +2710,7 @@ Abasta l\'àrea: %1$s x %2$s</string>
     <string name="shared_string_permissions">Permisos</string>
     <string name="import_gpx_failed_descr">OsmAnd no pot importar el fitxer. Si us plau, comproveu si OsmAnd té permís per llegir el fitxer des de la seva ubicació.</string>
     <string name="map_widget_ruler_control_first_mode">Distància entre dos punts</string>
-    <string name="map_widget_ruler_control_second_mode">Radi de distància</string>
+    <string name="map_widget_ruler_control">Radi de distància</string>
     <string name="shared_string_reload">Actualitza</string>
     <string name="mapillary_menu_descr_tile_cache">Actualitzeu les tessel·les per veure les dades més recents.</string>
     <string name="mapillary_menu_title_tile_cache">Memòria cau de tessel·les</string>

@@ -2722,7 +2722,7 @@ Pokud potřebujete pomoci s aplikací OsmAnd, prosím kontaktujte naši podporu
     <string name="plugin_mapillary_descr">Fotografie z ulic pro každého. Objevte místa, spolupracujte, zachyťte svět.</string>
     <string name="mapillary_widget">Nástroj Mapillary</string>
     <string name="map_widget_ruler_control_first_mode">Dvoubodové pravítko</string>
-    <string name="map_widget_ruler_control_second_mode">Kruhové pravítko</string>
+    <string name="map_widget_ruler_control">Kruhové pravítko</string>
     <string name="shared_string_reset">Resetovat</string>
     <string name="shared_string_reload">Znovu načíst</string>
     <string name="mapillary_menu_descr_tile_cache">Znovu načíst dlaždice pro zobrazení aktuálních dat.</string>

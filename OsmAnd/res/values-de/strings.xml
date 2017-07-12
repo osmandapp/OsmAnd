@@ -2873,7 +2873,7 @@ Abgedeckte Fläche: %1$s x %2$s</string>
     <string name="store_tracks_in_monthly_directories">Aufgezeichnete Tracks in Monatsordnern speichern</string>
     <string name="store_tracks_in_monthly_directories_descrp">Aufgezeichnete Tracks in nach Aufzeichnungsmonat benannten Unterordnern speichern (z. B. 2017-01).</string>
     <string name="map_widget_ruler_control_first_mode">Lineal</string>
-    <string name="map_widget_ruler_control_second_mode">Zirkel</string>
+    <string name="map_widget_ruler_control">Zirkel</string>
     <string name="of">%1$d von %2$d</string>
     <string name="moving_time">Zeit in Bewegung</string>
     <string name="mapillary_menu_filter_description">Sie können Bilder nach Übermittler oder Datum filtern. Filter gelten nur für nahe Zoomstufen.</string>

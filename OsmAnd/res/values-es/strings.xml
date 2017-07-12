@@ -2840,5 +2840,5 @@ Algunas de las características principales:
     <string name="mapillary_menu_title_username">Nombre de usuario</string>
     <string name="mapillary_menu_filter_description">Puedes filtrar imágenes por remitente o por fecha. Los filtros se aplican sólo para el zoom de primer plano.</string>
     <string name="map_widget_ruler_control_first_mode">Regla de dos puntos</string>
-    <string name="map_widget_ruler_control_second_mode">Regla de radio</string>
+    <string name="map_widget_ruler_control">Regla de radio</string>
     </resources>

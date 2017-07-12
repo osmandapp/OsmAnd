@@ -2860,7 +2860,7 @@ Pro praghere iscrie su còdighe intreu</string>
     <string name="shared_string_permissions">Autorizatziones</string>
     <string name="import_gpx_failed_descr">OsmAnd non podet importare su documentu. Pro praghere verìfica chi OsmAnd tèngiat sas autorizatziones pro lèghere su documentu dae sa cartella sua.</string>
     <string name="map_widget_ruler_control_first_mode">Medidura cun duos puntos</string>
-    <string name="map_widget_ruler_control_second_mode">Medidura cun su raju</string>
+    <string name="map_widget_ruler_control">Medidura cun su raju</string>
     <string name="shared_string_reload">Torra a carrigare</string>
     <string name="mapillary_menu_descr_tile_cache">Torra a carrigare sos tasseddos pro bìdere datos agiornados.</string>
     <string name="mapillary_menu_title_tile_cache">Cache de sos tasseddos</string>

@@ -86,7 +86,7 @@ public class RulerControlLayer extends OsmandMapLayer {
         this.view = view;
         cacheDistances = new ArrayList<>();
         cacheCenter = new QuadPoint();
-        maxRadiusInDp = mapActivity.getResources().getDimensionPixelSize(R.dimen.map_ruler_radius);
+        maxRadiusInDp = mapActivity.getResources().getDimensionPixelSize(R.dimen.map_ruler_width);
         rightWidgetsPanel = mapActivity.findViewById(R.id.map_right_widgets_panel);
         distancePath = new Path();
         tx = new TIntArrayList();

@@ -2839,7 +2839,7 @@ Proporciona un código completo</string>
     <string name="shared_string_permissions">Permisos</string>
     <string name="import_gpx_failed_descr">OsmAnd no puede importar el archivo. Comprueba si OsmAnd tiene permiso para leer archivos desde esta ubicación.</string>
     <string name="map_widget_ruler_control_first_mode">Regla de dos puntos</string>
-    <string name="map_widget_ruler_control_second_mode">Regla radial</string>
+    <string name="map_widget_ruler_control">Regla radial</string>
     <string name="wrong_user_name">¡Nombre de usuario incorrecto!</string>
     <string name="shared_string_to">Hasta</string>
     <string name="mapillary_menu_date_from">Desde</string>

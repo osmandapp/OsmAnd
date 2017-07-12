@@ -2952,7 +2952,7 @@ Kérlek adj meg egy teljes kódot</string>
     <string name="mapillary_menu_title_username">Felhasználónév</string>
     <string name="mapillary_menu_filter_description">Szűrheted a képeket feltöltőre vagy dátum szerint. A szűrők csak közeli zoomszinteken érvényesek.</string>
     <string name="map_widget_ruler_control_first_mode">Vonalzó</string>
-    <string name="map_widget_ruler_control_second_mode">Sugaras vonalzó</string>
+    <string name="map_widget_ruler_control">Sugaras vonalzó</string>
     <string name="average">Átlag</string>
     <string name="of">%1$d / %2$d</string>
     <string name="ascent_descent">Emelkedő/Lejtő</string>

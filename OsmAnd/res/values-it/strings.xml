@@ -3012,7 +3012,7 @@ Copertura e qualità approssimativamente:
     <string name="shared_string_permissions">Permessi</string>
     <string name="import_gpx_failed_descr">OsmAnd non può importare il file. Controlla se OsmAnd ha i permessi per leggere file dalla posizione.</string>
     <string name="map_widget_ruler_control_first_mode">Righello a due punti</string>
-    <string name="map_widget_ruler_control_second_mode">Righello radiale</string>
+    <string name="map_widget_ruler_control">Righello radiale</string>
     <string name="shared_string_reload">Ricarica</string>
     <string name="mapillary_menu_descr_tile_cache">Ricarica le mattonelle se vuoi visualizzare dati aggiornati.</string>
     <string name="mapillary_menu_title_tile_cache">Cache mattonelle</string>

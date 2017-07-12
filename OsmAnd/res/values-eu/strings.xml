@@ -2868,7 +2868,7 @@ Area honi dagokio: %1$s x %2$s</string>
     <string name="mapillary_menu_descr_username">Ikusi erabiltzaile jakin batek gehitutako argazkiak.</string>
     <string name="mapillary_menu_title_username">Erabiltzaile-izena</string>
     <string name="mapillary_menu_filter_description">Aragazkian igorlearen eta dataren arabera iragazi ditzakezu. Iragazkiak zoom hurbilean bakarrik erabiltzen dira.</string>
-    <string name="map_widget_ruler_control_second_mode">Erradioaren erregela</string>
+    <string name="map_widget_ruler_control">Erradioaren erregela</string>
     <string name="shared_string_permissions">Baimenak</string>
     <string name="import_gpx_failed_descr">OsmAnd-ek ezin du fitxategia inportatu. Egiaztatu OsmAndek fitxategia dagoen tokian irakurtzeko baimenak dituen.</string>
     <string name="distance_moving">Zuzendutako distantzia</string>
