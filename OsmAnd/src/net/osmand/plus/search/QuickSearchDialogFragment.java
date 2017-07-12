@@ -93,7 +93,6 @@ import net.osmand.util.MapUtils;
 
 import java.io.File;
 import java.io.IOException;
-import java.lang.ref.WeakReference;
 import java.text.MessageFormat;
 import java.util.ArrayList;
 import java.util.List;
@@ -458,9 +457,8 @@ public class QuickSearchDialogFragment extends DialogFragment implements OsmAndC
 					@Override
 					public void onClick(View v) {
 						DeleteDialogFragment deleteDialog = new DeleteDialogFragment();
-						deleteDialog.setApp(app);
-						deleteDialog.setHistorySearchFragment(historySearchFragment);
-						deleteDialog.setQuickSearchDialogFragment(QuickSearchDialogFragment.this);
+						deleteDialog.setSearchHistoryHelper(SearchHistoryHelper.getInstance(app));
+						deleteDialog.setSelectedItems(historySearchFragment.getListAdapter().getSelectedItems());
 						deleteDialog.show(getChildFragmentManager(), "DeleteHistoryConfirmationFragment");
 					}
 				}
@@ -2093,20 +2091,15 @@ public class QuickSearchDialogFragment extends DialogFragment implements OsmAndC
 
 	public static class DeleteDialogFragment extends DialogFragment {
 
-		private WeakReference<OsmandApplication> app;
-		private WeakReference<QuickSearchDialogFragment> quickSearchDialogFragment;
-		private WeakReference<QuickSearchHistoryListFragment> historySearchFragment;
+		private SearchHistoryHelper searchHistoryHelper;
+		private List<QuickSearchListItem> selectedItems;
 
-		public void setApp(OsmandApplication app) {
-			this.app = new WeakReference<>(app);
+		public void setSearchHistoryHelper(SearchHistoryHelper searchHistoryHelper) {
+			this.searchHistoryHelper = searchHistoryHelper;
 		}
 
-		public void setQuickSearchDialogFragment(QuickSearchDialogFragment quickSearchDialogFragment) {
-			this.quickSearchDialogFragment = new WeakReference<>(quickSearchDialogFragment);
-		}
-
-		public void setHistorySearchFragment(QuickSearchHistoryListFragment historySearchFragment) {
-			this.historySearchFragment = new WeakReference<>(historySearchFragment);
+		public void setSelectedItems(List<QuickSearchListItem> selectedItems) {
+			this.selectedItems = selectedItems;
 		}
 
 		@NonNull
@@ -2117,14 +2110,12 @@ public class QuickSearchDialogFragment extends DialogFragment implements OsmAndC
 					.setPositiveButton(R.string.shared_string_yes, new DialogInterface.OnClickListener() {
 						@Override
 						public void onClick(DialogInterface dialog, int which) {
-							SearchHistoryHelper helper = SearchHistoryHelper.getInstance(app.get());
-							List<QuickSearchListItem> selectedItems = historySearchFragment.get().getListAdapter().getSelectedItems();
 							for (QuickSearchListItem searchListItem : selectedItems) {
 								HistoryEntry historyEntry = (HistoryEntry) searchListItem.getSearchResult().object;
-								helper.remove(historyEntry);
+								searchHistoryHelper.remove(historyEntry);
 							}
-							quickSearchDialogFragment.get().reloadHistory();
-							quickSearchDialogFragment.get().enableSelectionMode(false, -1);
+							((QuickSearchDialogFragment) getParentFragment()).reloadHistory();
+							((QuickSearchDialogFragment) getParentFragment()).enableSelectionMode(false, -1);
 						}
 					})
 					.setNegativeButton(R.string.shared_string_no, null);
