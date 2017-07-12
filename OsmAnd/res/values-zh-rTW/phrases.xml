@@ -2125,7 +2125,7 @@
 	<string name="poi_openfire_no">不允許用火</string>
 	<string name="poi_backcountry_yes">野外露營</string>
 	<string name="poi_backcountry_no">野外露營：否</string>
-	<string name="poi_scout_yes">偵察營：是的</string>
+	<string name="poi_scout_yes">是的</string>
 	<string name="poi_scout_no">偵察營：否</string>
 	<string name="poi_group_only_yes">只有群組：是的</string>
 	<string name="poi_group_only_no">只有群組：否</string>
@@ -2535,8 +2535,8 @@
 	<string name="poi_delivery_filter_yes">是的</string>
 	<string name="poi_outdoor_seating_filter_yes">是的</string>
 	<string name="poi_diaper_table_count">尿布更換台數量</string>
-	<string name="poi_service_bicycle_charging_yes">自行車充電︰有</string>
-	<string name="poi_service_bicycle_charging_no">自行車充電︰沒有</string>
+	<string name="poi_service_bicycle_charging_yes">充電︰有</string>
+	<string name="poi_service_bicycle_charging_no">充電︰沒有</string>
 	<string name="poi_bicycle_repair_station">自行車自行維修站</string>
 
 	<string name="poi_shower_filter_yes">是的</string>
@@ -2710,7 +2710,7 @@
 	<string name="poi_health_specialty_optometry_yes">驗光</string>
 	<string name="poi_health_specialty_obstetrics_caesarean_section_yes">婦產科（剖腹產）</string>
 	<string name="poi_health_specialty_obstetrics_caesarean_section_no">醫療專業：婦產科（剖腹產）︰沒有</string>
-	<string name="poi_health_specialty_palliative_medicine_yes">醫療專業：緩和醫療</string>
+	<string name="poi_health_specialty_palliative_medicine_yes">安寧緩和醫療</string>
 
 	<string name="poi_health_specialty_clinical_pathology_yes">臨床病理學</string>
 	<string name="poi_health_specialty_speech_therapy_yes">語言治療</string>
@@ -3049,12 +3049,12 @@
 	<string name="poi_fire_hydrant_pressure">消防栓壓力</string>
 	<string name="poi_fire_hydrant_count">消防栓數量</string>
 	<string name="poi_fire_hydrant_flow_capacity">消防栓流量</string>
-	<string name="poi_fire_hydrant_position_sidewalk">消防栓位置︰人行道</string>
-	<string name="poi_fire_hydrant_position_green">消防栓位置︰綠地</string>
-	<string name="poi_fire_hydrant_position_lane">消防栓位置︰通道</string>
-	<string name="poi_fire_hydrant_position_parking_lot">消防栓位置︰停車場</string>
-	<string name="poi_fire_hydrant_position_street">消防栓位置︰街道</string>
-	<string name="poi_fire_hydrant_position_underground">消防栓位置︰地下</string>
+	<string name="poi_fire_hydrant_position_sidewalk">人行道</string>
+	<string name="poi_fire_hydrant_position_green">綠地</string>
+	<string name="poi_fire_hydrant_position_lane">通道</string>
+	<string name="poi_fire_hydrant_position_parking_lot">停車場</string>
+	<string name="poi_fire_hydrant_position_street">街道</string>
+	<string name="poi_fire_hydrant_position_underground">地下</string>
 	<string name="poi_fire_hydrant_style_wsh">消防栓型式︰wsh</string>
 	<string name="poi_fire_hydrant_style_water_source_main">主要管道</string>
 	<string name="poi_fire_hydrant_style_water_source_pond">池塘</string>
@@ -3140,9 +3140,9 @@
 	<string name="poi_payment_troika_no">不接受 Troika 卡</string>
 
 	<string name="poi_telescope">望遠鏡</string>
-	<string name="poi_telescope_type_optical">望遠鏡︰光學</string>
-	<string name="poi_telescope_type_radio">望遠鏡︰無線電</string>
-	<string name="poi_telescope_type_gamma">望遠鏡︰伽瑪</string>
+	<string name="poi_telescope_type_optical">光學</string>
+	<string name="poi_telescope_type_radio">無線電</string>
+	<string name="poi_telescope_type_gamma">伽瑪</string>
 	<string name="poi_telescope_diameter">直徑</string>
 	<string name="poi_telescope_spectrum">光譜</string>
 	<string name="poi_telescope_usage_education">運用︰教育</string>
@@ -3429,4 +3429,9 @@
 	<string name="poi_motorcycle_sales_no">銷售：無</string>
 	<string name="poi_motorcycle_sales_yes_used">銷售：有的;二手</string>
 	<string name="poi_motorcycle_sales_used">銷售：二手</string>
-	</resources>
+	<string name="poi_lock_basin">塘形船閘</string>
+	<string name="poi_generator_output_electricity_no">輸出（電力）：無</string>
+
+	<string name="poi_owner">業主</string>
+
+</resources>
