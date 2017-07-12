@@ -73,13 +73,13 @@ public class SplitSegmentFragment extends OsmAndListFragment {
         getListView().setBackgroundColor(getResources().getColor(
                 getMyApplication().getSettings().isLightContent() ? R.color.ctx_menu_info_view_bg_light
                         : R.color.ctx_menu_info_view_bg_dark));
-        getMyActivity().onAttachFragment(this);
+        getTrackActivity().onAttachFragment(this);
     }
 
     @Override
     public void onCreateOptionsMenu(Menu menu, MenuInflater inflater) {
         menu.clear();
-        getMyActivity().getClearToolbar(false);
+        getTrackActivity().getClearToolbar(false);
     }
 
     @Override
@@ -162,7 +162,7 @@ public class SplitSegmentFragment extends OsmAndListFragment {
                     popup.setDropDownGravity(Gravity.RIGHT | Gravity.TOP);
                     popup.setVerticalOffset(AndroidUtils.dpToPx(app, -48f));
                     popup.setHorizontalOffset(AndroidUtils.dpToPx(app, -6f));
-                    popup.setAdapter(new ArrayAdapter<>(getMyActivity(),
+                    popup.setAdapter(new ArrayAdapter<>(getTrackActivity(),
                             R.layout.popup_list_text_item, options));
                     popup.setOnItemClickListener(new AdapterView.OnItemClickListener() {
 
@@ -232,10 +232,10 @@ public class SplitSegmentFragment extends OsmAndListFragment {
     }
 
     private GPXUtilities.GPXFile getGpx() {
-        return getMyActivity().getGpx();
+        return getTrackActivity().getGpx();
     }
 
-    public TrackActivity getMyActivity() {
+    public TrackActivity getTrackActivity() {
         return (TrackActivity) getActivity();
     }
 
@@ -302,10 +302,10 @@ public class SplitSegmentFragment extends OsmAndListFragment {
     }
 
     private List<GpxDisplayGroup> filterGroups(boolean useDisplayGroups) {
-        if (getMyActivity() == null) {
+        if (getTrackActivity() == null) {
             return null;
         }
-        List<GpxDisplayGroup> result = getMyActivity().getGpxFile(useDisplayGroups);
+        List<GpxDisplayGroup> result = getTrackActivity().getGpxFile(useDisplayGroups);
         List<GpxDisplayGroup> groups = new ArrayList<>();
         for (GpxDisplayGroup group : result) {
             boolean add = hasFilterType(group.getType());
@@ -330,7 +330,7 @@ public class SplitSegmentFragment extends OsmAndListFragment {
     }
 
     private List<GpxDisplayItem> getSplitSegments() {
-        List<GpxDisplayGroup> result = getMyActivity().getGpxFile(true);
+        List<GpxDisplayGroup> result = getTrackActivity().getGpxFile(true);
         List<GpxDisplayItem> splitSegments = new ArrayList<>();
         if (result != null && result.size() > 0) {
             if (result.get(0).isSplitDistance() || result.get(0).isSplitTime()) {
@@ -341,7 +341,7 @@ public class SplitSegmentFragment extends OsmAndListFragment {
     }
 
     private GpxDisplayItem getOverviewSegment() {
-        List<GpxDisplayGroup> result = getMyActivity().getGpxFile(false);
+        List<GpxDisplayGroup> result = getTrackActivity().getGpxFile(false);
         GpxDisplayItem overviewSegment = null;
         if (result.size() > 0) {
             overviewSegment = result.get(0).getModifiableList().get(0);
@@ -383,7 +383,7 @@ public class SplitSegmentFragment extends OsmAndListFragment {
         public View getView(int position, @Nullable View convertView, @NonNull ViewGroup parent) {
             GpxDisplayItem currentGpxDisplayItem = getItem(position);
             if (convertView == null) {
-                convertView = getMyActivity().getLayoutInflater().inflate(R.layout.gpx_split_segment_fragment, parent, false);
+                convertView = getTrackActivity().getLayoutInflater().inflate(R.layout.gpx_split_segment_fragment, parent, false);
             }
             convertView.setOnClickListener(null);
             TextView overviewTextView = (TextView) convertView.findViewById(R.id.overview_text);
@@ -611,7 +611,7 @@ public class SplitSegmentFragment extends OsmAndListFragment {
 
         SplitTrackAsyncTask(@Nullable GpxSelectionHelper.SelectedGpxFile selectedGpxFile, List<GpxDisplayGroup> groups) {
             mSelectedGpxFile = selectedGpxFile;
-            mActivity = getMyActivity();
+            mActivity = getTrackActivity();
             this.groups = groups;
         }
 
