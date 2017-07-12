@@ -123,7 +123,6 @@ public class MapInfoWidgetsFactory {
 
 			@Override
 			public boolean updateInfo(DrawSettings drawSettings) {
-				RulerMode mode = map.getMyApplication().getSettings().RULER_MODE.get();
 				OsmandMapTileView view = map.getMapView();
 				Location currentLoc = map.getMyApplication().getLocationProvider().getLastKnownLocation();
 
