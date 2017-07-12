@@ -1,5 +1,4 @@
-<?xml version='1.0' encoding='UTF-8'?>
-<resources><string name="city_type_district">ജില്ല</string>
+<?xml version="1.0" encoding="UTF-8" standalone="no"?><resources><string name="city_type_district">ജില്ല</string>
     <string name="city_type_neighbourhood">സമീപദേശം</string>
     <string name="map_widget_search">തെരച്ചില്‍</string>
 	<string name="app_mode_bus">ബസ്</string>
@@ -1673,44 +1672,7 @@
     <string name="rendering_attr_roadColors_name">റോഡ് നിറക്കൂട്ട്</string>
     <string name="intermediate_point_too_far">ഇടലക്ഷ്യസ്ഥാനം %1$s അടുത്തുള്ള പാതയില്‍ നിന്നും വളരെ അകലെയാണ്.</string>
     <string name="use_compass_navigation_descr">മറ്റ് വിധത്തില്‍ ദിശ കണ്ട്പിടിക്കാനായില്ലെങ്കില്‍ വടക്കുനോക്കി ഉപയോഗിക്കുക</string>
-    <string name="osmand_plus_extended_description_4000_chars">"
-ഓഎസ്എംആന്ഡ്(ഓഎസ്എം ആട്ടോമേറ്റഡ് നാവിഗേഷന്‍ ഡൈറക്ഷന്‍സ് -വഴികാട്ടിയും മാര്‍ഗദര്‍ശിയും) ഒരു ഭൂപടവും വഴികാട്ടിയുമാണ്. അത് നിലവാരമുള്ളതും സൗജന്യവുമായ ആഗോള   ഒപെണ്‍സ്ട്രീറ്റ്മാപ്(ഓഎസ്എം) ഭൂപട വിവരങ്ങളാണ് ഉപയോഗിക്കുന്നത്. എല്ല ഭൂപടങ്ങളും മറ്റുവിവരങ്ങളും നിങ്ങളുടെ ഉപകരണത്തില്‍ തന്നെ ഓഫ്ലൈനായ് സൂക്ഷിക്കാവുന്നതാണ്. ജിപിഎസ് ഉപയോഗിച്ച് കാര്‍, ബൈക്ക്, കാല്‍നടയാത്രക്കാര്‍ എന്നിവര്‍ക്കായി ശബ്ദ/ദൃഷ്യ നിര്‍ദേശങ്ങളോടെ ഓഎസ്ംആന്ഡ് വഴികാട്ടിയായ് പ്രവര്‍ത്തിക്കുന്നു. ഇത്  ഓണ്‍ലൈനിലും ഓഫ്ലൈനിലും പ്രവര്‍ത്തിക്കും(ഇന്റെര്‍നെറ്റ് ആവശ്യമില്ല -മാപ്പ് ഡൗണ്‍ലോഡ് ചെയ്യാനല്ലാതെ).
-
-ഓഎസ്എംആന്ഡ്+ ഇതിന്റെ പണം മുടക്കിയ പതിപ്പാണ്. ഇത് മേടിക്കുന്നത് വഴി നിങ്ങള്‍ ഈ സംരംഭത്തെ, പുതിയ സവിശേഷതകള്‍ക്കായി   പിന്തുണക്കാം,കൂടാതെ പുതിയ പരിഷ്കാരങ്ങള്‍ നിങ്ങള്‍ക്ക് പെട്ടന്ന് ലഭ്യമാവുകയും ചെയ്യും. നിങ്ങള്‍ക്ക് ഈ ആപ്പ്ളിക്കേഷന്റെ എല്ല സവിശേഷതകളും സൗജന്യമായ് ഓഎസ്എംആന്ഡില്‍ ഉപയോഗിക്കാവുന്നതാണ്.
-
-ചില പ്രധാന സവിശേഷതകള്‍:
-
-വഴികാട്ടി
-
-ഭൂപടം
-
-ഓപണ്‍സ്ട്രീറ്റ്മാപ്പ് വിക്കീപീഡിയ വിവരങ്ങള്‍ ഉപയൊഗിച്ച്:
-
-സുരക്ഷാ ക്രമീകരണങ്ങള്‍
-
-സൈക്കിള്‍ ,കാല്‍നടയാതരക്കാര്‍ക്കായുള്ള സവിശേഷതകള്‍
-
-ഓപണ്‍സ്ട്രീറ്റ്മാപ്പിലെക്ക് നേരിട്ട് പങ്കെടുക്കുക
-
-ഓഎസ്എംആന്ഡ് 
- ഓപ്പണ്‍ സോര്‍സും, സജീവമായി വികസിപ്പിക്കപെടുന്നതുമാണ്. എല്ലാവര്‍ക്കും ഇതില്‍ ബഗ് റിപ്പോട്ട് ചെയ്തും, പരിഭാക്ഷ മെച്ചപ്പെടുത്തിയോ, അല്ലെക്കില്‍ പുതിയ സവിശേഷതകള്‍ കോഡ് ചെയ്തോ സഹകരിക്കാവുന്നതാണ്. ഈ പ്രോജക്ടിന്റെ അഭിവൃത്തി ഡെവലപ്പര്‍മാരുടെയും ഉപയോക്താക്കളുടെയും സമ്പര്‍ക്കത്തെ ആശ്രയിച്ചിരിക്കുന്നു. അതുപോലെ ഒരുപരിധിവരെ പണവും ഇതിനാവശ്യമാണ്.  ഓഎസ്എംആന്ഡ്+ വാങ്ങുന്നത് ഇതിനു സഹായകരമാണ്. അതുപോലെ ഒരു പ്രത്യേക സവിശേഷതക്കായോ, അല്ലെങ്കില്‍ പൊതുവായൊ ഓഎസ്എംആന്ഡിന് osmand.net ല്‍ സംഭാവന ചെയ്യാവുന്നതാണ്.
-
-
-Approximate map coverage and quality:
- - Western Europe: ****
- - Eastern Europe: ***
- - Russia: ***
- - North America: ***
- - South America: **
- - Asia: **
- - Japan &amp; Korea: ***
- - Middle East: **
- - Africa: **
- - Antarctica: *
-
-List of countries supported (basically world wide!):
-Afghanistan, Albania, Algeria, Andorra, Angola, Anguilla, Antigua and Barbuda, Argentina, Armenia, Aruba, Australia, Austria, Azerbaijan, Bahamas, Bahrain, Bangladesh, Barbados, Belarus, Belgium, Belize, Benin, Bermuda, Bhutan, Bolivia, Bonaire, Bosnia and Herzegovina, Botswana, Brazil, British Virgin Islands, Brunei, Bulgaria, Burkina Faso, Burundi, Cambodia, Cameroon, Canada, Cape Verde, Central African Republic, Chad, Chile, China, Colombia, Comoros, Congo, Costa Rica, Ivory Coast, Croatia, Cuba, Curaçao, Cyprus, Czech Republic, Denmark, Djibouti, Dominica, Dominican Republic, Ecuador, Egypt, El Salvador, Equatorial Guinea, Eritrea, Estonia, Ethiopia, Fiji, Finland, France, French Guiana, French Polynesia, Gabon, Gambia, Georgia, Germany, Ghana, Gibraltar, Greece, Greenland, Grenada, Guadeloupe, Guam, Guatemala, Guernsey, Guinea, Guinea-Bissau, Guyana, Haiti, Vatican, Honduras, Hong Kong, Hungary, Iceland, India, Indonesia, Iran, Iraq, Ireland, Isle of Man, Israel, Italy, Jamaica, Japan, Jersey, Jordan, Kazakhstan, Kenya, Kiribati, North Korea and South Korea, Kuwait, Kyrgyzstan, Laos, Latvia, Lebanon, Lesotho, Liberia, Libya, Liechtenstein, Lithuania, Luxembourg, Macao, Macedonia, Madagascar, Malawi, Malaysia, Maldives, Mali, Malta, Martinique, Mauritania, Mauritius, Mayotte, Mexico, Micronesia, Moldova, Monaco, Mongolia, Montenegro, Montserrat, Morocco, Mozambique, Myanmar, Namibia, Nauru, Nepal, Netherlands, Netherlands Antilles, New Caledonia, New Zealand, Nicaragua, Niger, Nigeria, Norway, Oman, Pakistan, Palau, Palestinian Territory, Panama, Papua New Guinea, Paraguay, Peru, Philippines, Poland, Portugal, Puerto Rico, Qatar, Romania, Russia, Rwanda, Saint Barthelemy, Saint Helena, Saint Kitts and Nevis, Saint Lucia, Saint Martin, Saint Pierre and Miquelon, Saint Vincent and the Grenadines, Samoa, San Marino, Saudi Arabia, Senegal, Serbia, Seychelles, Sierra Leone, Singapore, Slovakia, Slovenia, Somalia, South Africa, South Georgia, South Sudan, Spain, Sri Lanka, Sudan, Suriname, Swaziland, Sweden, Switzerland, Syria, Taiwan, Tajikistan, Tanzania, Thailand, Timor-Leste, Togo, Tokelau, Tonga, Trinidad and Tobago, Tunisia, Turkey, Turkmenistan, Tuvalu, Uganda, Ukraine, United Arab Emirates, United Kingdom (UK), United States of America (USA), Uruguay, Uzbekistan, Vanuatu, Venezuela, Vietnam, Wallis and Futuna, Western Sahara, Yemen, Zambia, Zimbabwe.
- "</string>
+    
     <string name="global_app_allocated_memory_descr">"അനുവദിച്ചിരിക്കുന്ന മെമ്മറി  %1$s MB (ആന്ഡ്രോയിഡ് പരിധി  %2$s MB, ഡാല്വിക്  %3$s MB)."</string>
     <string name="osmand_parking_warning_text">നിങ്ങളുടെ കാര്‍ എടുക്കാനുള്ള ഒരു അറിയിപ്പ്‌ കലണ്ടറില്‍ ചേര്‍ത്തിരിക്കുന്നു. അത് നിങ്ങള്‍ നീക്കം ചെയ്യുന്നത് വരെ അവിടെയുണ്ടാകും.</string>
     <string name="osmand_parking_time_limit_title">പാര്‍ക്ക് ചെയ്യാവുന്ന സമയ പരിധി ചൂണ്ടിക്കാണിക്കുക</string>
