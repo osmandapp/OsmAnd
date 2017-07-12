@@ -1,5 +1,4 @@
-<?xml version='1.0' encoding='UTF-8'?>
-<resources>
+<?xml version="1.0" encoding="UTF-8" standalone="no"?><resources>
     <string name="always_center_position_on_map">Ammustra sa positzione semper a su tzentru</string>
     <string name="voice_pref_title">Boghe</string>
     <string name="misc_pref_title">Mistura</string>
@@ -118,7 +117,7 @@
 
     <string name="shared_string_and">e</string>
     <string name="shared_string_or">o</string>
-    <string name="route_is_too_long">Su càlculu de s’àndala de OsmAnd chene impreare internet diat pòtere dimandare meda tempus (o a bortas non funtzionare) pro distantzias prus longas de 200 km. Si cussigiat de annànghere una o prus tapas in s’àndala pro megiorare sas prestatziones.</string>
+    
     <string name="auto_zoom_none">Perunu ismanniamentu automàticu</string>
     <string name="auto_zoom_close">Pro ismanniare</string>
     <string name="auto_zoom_far">Mesanu</string>
@@ -630,146 +629,10 @@ Boles protzèdere cun una registratzione noa?</string>
     <string name="lang_sr">Serbu</string>
     <string name="lang_zh_cn">Tzinesu (semplificadu)</string>
     <string name="lang_zh_tw">Tzinesu (traditzionale)</string>
-    <string name="osmand_extended_description_4000_chars">"
-OsmAnd (OSM Automated Navigation Directions - Indicatziones de Nàvigu Automàticas) est un aplicatzione pro su nàvigu chi impreat sa cantidade manna de datos a mitza aberta de OpenStreetMap (OSM). Totu sas mapas (vetoriales o a tasseddos) podent èssere sarbadas in s’ischeda de su telèfono pro èssere impreadas chene lìnia. Impreende su GPS de su dispositivu OsmAnd oferit su nàvigu cun, s’in casu, sa ghia vocale, pro sa màchina, sa bitzicleta e a pedes. Totu sas funtzionalidades sunt disponìbiles siat in lìnia siat chene lìnia (non serbit una connessione ad ìnternet).
-
-Calicuna de sas caraterìsticas printzipales:
-
-Nàvigu
- - Funtzionat in lìnia (lestru) o chene lìnia (chene gastos cando ses in s’èsteru)
- - Boghe de ghia bortada pro bortada (boghes registradas e sintetizadas) - Indicatziones de corsia optzionales, indicatziones de su nùmene de s’istrada, indicatziones de su tempus de lòmpida istimadu
- - Suportat tapas intermèdias in s’àndala
- - Ricàlculu automàticu cada borta chi èssis dae s’àndala
- - Chirca pro indiritzu, pro casta (es.: ristorante, albergu, istatzione de servìtziu, museu) e pro coordinatas geogràficas de sos logos 
-
-Visualizatzione de sa mapa
- - Ammustra sa positzione e s’orientamentu tuo in sa mapa
- - Allìnia optzionalmente sa mapa sighinde sa bùssola o sa diretzione de movimentu
- - Sarba sos logos prus importantes pro tie in sos Preferidos
- - Ammustra sos PDI (puntos de interesse) inghìriu a tie
- - Podet ammustrare mapas ispetzializadas a tasseddos in lìnia
- - Podet ammustrare vistas satellitares (dae Bing)
- - Podet ammustrare istratos subraponìbiles diferentes, comente rastas GPX pro su nàvigu e mapas additzionales cun trasparentzia pessonalizzàbile
- - Ammustra sos nùmenes in inglesu, limba locale, o pronùntzia fonètica 
-
-Imprea datos OpenStreetMap e Wikipedia:
- - Datos de arta calidade dae sos mègius progetos collaborativos de su mundu
- - Mapas globales pro OpenStreetMap, disponìbiles pro istadu o regione
- - Wikipedia PDI, òtimos pro giros turìsticos (non disponìbiles in sa versione gratùita)
- - Iscarrigamentos gratùitos chene lìmites, diretamente dae s’aplicu (lìmite de iscarrigamentu de 16 documentos pro sa mapa in sa versione gratùita)
- - Mapas sèmper agiornadas (a su mancu una borta a su mese)
- - Mapas vetoriales compatas chene lìnia - Issèbera intre mapas cumpridas e petzi istradales (es: totu su Giapone est 700 MB, o 200 MB pro petzi sas istradas)
- - Suportat fintzas mapas a tasseddos in lìnia o in sa cache 
-
-Caraterìsticas pro sa seguràntzia:
- - Modìfica automàtica optzionale de sa vista die/note
- - Ammustradura optzionale de su lìmite de lestresa, cun avisos si lu bàrigas
- - Ismanniamentu automàticu optzionale regoladu dae sa lestresa
- - Cumpartzi sa positzione tua pro permìtere a sos amigos tuos de t’agatare
-
-Funtzionalidades pro sa bitzicleta e a pedes:
- - Sa mapa inclùit àndalas pro bitzicleta, escursionismu e pedonales, òtimas pro sas atividades a s’àera aberta
- - Modalidades ispetziales pro sa bitzicleta e a pedes
- - Firmadas de su trasportu pùblicu (postales, trams, trenos) optzionales, cun sos nùmenes de sas lìnias incluidos
- - Registratziones optionales in documentos GPX locales o servìtzios in lìnia
- - Ammustradura optzionale de sa lestresa e de s’artaria
- - Ammustradura de sas lìnias de livellu e de sas umbraduras de sos rilievos (impreende unu componente agiuntivu, o estensione, dedicadu) 
-
-Contributzione dereta ad OpenStreetMap
- - Iscrie notas in sa mapa
- - Càrriga rastas GPX in OSM diretamente dae s’aplicatzione
- - Annanghe PDI e càrriga·los diretamente in OSM (o prus a tardu si ses chene lìnia)
- - Registratzione optzionale fintzas in modalidade \"in s’isfundu\" (cando su dispositivu est in modalidade \"a reposu\")
-
-OsmAnd est unu progetu a mitza aberta e est ativamente isvilupadu. Totus podent cuntribuire a s’aplicu marchende notas, megiorende sas bortaduras, o programmende funtzionalidades noas. Su progetu est totora in unu istadu sighidu e vitale de megioramentu pro mèdiu de totu custas formas de interatziones intre impitadores e isvilupadores. Su progetu andat in antis gràtzias fintzas a sas contributziones finantziàrias, pro totu s’isvilupu e s’isperimentatzione de caraterìsticas noas. Comporende OsmAnd+ podes agiudare s’aplicatzione a divènnere fintzas prus ispantosa! Est fintzas possìbile finantziare funtziones dislindadas, o fàghere una donatzione generale in osmand.net. 
-
-
-Calidade e cobertura aprosimativa:
- - Europa otzidentale: ****
- - Europa orientale: ***
- - Rùssia: ***
- - Nord Amèrica: ***
- - Sud Amèrica: **
- - Àsia: **
- - Giapone e Corea: ***
- - Oriente de mesu: **
- - Àfrica: **
- - Antàrtide: * 
-
-Lista de sa regiones suportadas (praticamente totu su mundu!): 
-Afghanistan, Albania, Algeria, Andorra, Angola, Anguilla, Antigua and Barbuda, Argentina, Armenia, Aruba, Australia, Austria, Azerbaijan, Bahamas, Bahrain, Bangladesh, Barbados, Belarus, Belgium, Belize, Benin, Bermuda, Bhutan, Bolivia, Bonaire, Bosnia and Herzegovina, Botswana, Brazil, British Virgin Islands, Brunei, Bulgaria, Burkina Faso, Burundi, Cambodia, Cameroon, Canada, Cape Verde, Central African Republic, Chad, Chile, China, Colombia, Comoros, Congo, Costa Rica, Ivory Coast, Croatia, Cuba, Curaçao, Cyprus, Czech Republic, Denmark, Djibouti, Dominica, Dominican Republic, Ecuador, Egypt, El Salvador, Equatorial Guinea, Eritrea, Estonia, Ethiopia, Fiji, Finland, France, French Guiana, French Polynesia, Gabon, Gambia, Georgia, Germany, Ghana, Gibraltar, Greece, Greenland, Grenada, Guadeloupe, Guam, Guatemala, Guernsey, Guinea, Guinea-Bissau, Guyana, Haiti, Vatican, Honduras, Hong Kong, Hungary, Iceland, India, Indonesia, Iran, Iraq, Ireland, Isle of Man, Israel, Italy, Jamaica, Japan, Jersey, Jordan, Kazakhstan, Kenya, Kiribati, North Korea and South Korea, Kuwait, Kyrgyzstan, Laos, Latvia, Lebanon, Lesotho, Liberia, Libya, Liechtenstein, Lithuania, Luxembourg, Macao, Macedonia, Madagascar, Malawi, Malaysia, Maldives, Mali, Malta, Martinique, Mauritania, Mauritius, Mayotte, Mexico, Micronesia, Moldova, Monaco, Mongolia, Montenegro, Montserrat, Morocco, Mozambique, Myanmar, Namibia, Nauru, Nepal, Netherlands, Netherlands Antilles, New Caledonia, New Zealand, Nicaragua, Niger, Nigeria, Norway, Oman, Pakistan, Palau, Palestinian Territory, Panama, Papua New Guinea, Paraguay, Peru, Philippines, Poland, Portugal, Puerto Rico, Qatar, Romania, Russia, Rwanda, Saint Barthelemy, Saint Helena, Saint Kitts and Nevis, Saint Lucia, Saint Martin, Saint Pierre and Miquelon, Saint Vincent and the Grenadines, Samoa, San Marino, Saudi Arabia, Senegal, Serbia, Seychelles, Sierra Leone, Singapore, Slovakia, Slovenia, Somalia, South Africa, South Georgia, South Sudan, Spain, Sri Lanka, Sudan, Suriname, Swaziland, Sweden, Switzerland, Syria, Taiwan, Tajikistan, Tanzania, Thailand, Timor-Leste, Togo, Tokelau, Tonga, Trinidad and Tobago, Tunisia, Turkey, Turkmenistan, Tuvalu, Uganda, Ukraine, United Arab Emirates, United Kingdom (UK), United States of America (USA), Uruguay, Uzbekistan, Vanuatu, Venezuela, Vietnam, Wallis and Futuna, Western Sahara, Yemen, Zambia, Zimbabwe.
- "</string>
+    
     <string name="rendering_attr_subwayMode_name">Àndalas metropolitana</string>
     <string name="osmand_plus_long_description_1000_chars">OsmAnd+ (OSM Automated Navigation Directions - Indicatziones de Nàvigu Automàticas) OsmAnd+ est unu aplicatzione a mitza aberta pro su nàvigu chi tènet atzessu a sa variedade manna de datos globales de Openstreetmap (OSM). Totu sas mapas (vetoriales o a tasseddos) podent èssere sarvadas in sa memòria de su telèfono pro èssere impreadas chene lìnia. OsmAnd ofèrridi fintzas una funtzione de nàvigu cun ghia vocale in lìnia e chene lìnia. OsmAnd+ est sa versione a pagamentu, comporende·la suportas su progetu, finantzias s’isvilupu de funtzionalidades noas, e retzis totu sos ùrtimos agiornamentos. Calicuna de sas funtziones printzipales: - Funtzionalidade cumprida chene lìnia (sarva mapas vetoriales o a tasseddos in sa memòria de su dispositivu) - Mapas compatas chene lìnia disponìbiles pro totu su mundu - Iscarrigamentu chene lìmites de mapas de regiones e istados deretamente dae s’aplicu - Funtzionalidade chene lìnia de Wikipedia (isgàrriga PDI Wikipedia), òtima pro giros turìsticos - Possibilidade de subrapònnere istratos diferentes de mapas, comente rastas GPX o de nàvigu, Puntos De Interesse, preferidos, lìnias de livellu, firmadas de sos trasportos pùblicos, mapas additzionales cun trasparèntzia pessonalizzàbile - Chirca chene lìnia pro indiritzos e logos (PDI) - Càlculu de s’àndala chene lìnia pro distàntzias mèdias - Modalidades in màchina, bitzicleta, e a pedes cun: - muda automàtica optzionale de sa vista die/note - Ismanniamentu automàticu optzionale regoladu dae sa lestresa - Alliniamentu de sa mapa regoladu dae sa diretzione o dae sa bùssola - indicadore de corsia optzionale, segnalatzione de su lìmite de lestresa, boghes registradas e TTS</string>
-    <string name="osmand_plus_extended_description_4000_chars">"
-OsmAnd (OSM Automated Navigation Directions - Indicatziones de Nàvigu Automàticas) est un aplicatzione pro su nàvigu chi impreat sa cantidade manna de datos a mitza aberta de OpenStreetMap (OSM). Totu sas mapas (vetoriales o a tasseddos) podent èssere sarbadas in s’ischeda de su telèfono pro èssere impreadas chene lìnia. Impreende su GPS de su dispositivu OsmAnd oferit su nàvigu cun, s’in casu, sa ghia vocale, pro sa màchina, sa bitzicleta e a pedes. Totu sas funtzionalidades sunt disponìbiles siat in lìnia siat chene lìnia (non serbit una connessione ad ìnternet).
-
-Calicuna de sas caraterìsticas printzipales:
-
-Nàvigu
- - Funtzionat in lìnia (lestru) o chene lìnia (chene gastos cando ses in s’èsteru)
- - Boghe de ghia bortada pro bortada (boghes registradas e sintetizadas) - Indicatziones de corsia optzionales, indicatziones de su nùmene de s’istrada, indicatziones de su tempus de lòmpida istimadu
- - Suportat tapas intermèdias in s’àndala
- - Ricàlculu automàticu cada borta chi èssis dae s’àndala
- - Chirca pro indiritzu, pro casta (es.: ristorante, albergu, istatzione de servìtziu, museu) e pro coordinatas geogràficas de sos logos 
-
-Visualizatzione de sa mapa
- - Ammustra sa positzione e s’orientamentu tuo in sa mapa
- - Allìnia optzionalmente sa mapa sighinde sa bùssola o sa diretzione de movimentu
- - Sarba sos logos prus importantes pro tie in sos Preferidos
- - Ammustra sos PDI (puntos de interesse) inghìriu a tie
- - Podet ammustrare mapas ispetzializadas a tasseddos in lìnia
- - Podet ammustrare vistas satellitares (dae Bing)
- - Podet ammustrare istratos subraponìbiles diferentes, comente rastas GPX pro su nàvigu e mapas additzionales cun trasparentzia pessonalizzàbile
- - Ammustra sos nùmenes in inglesu, limba locale, o pronùntzia fonètica 
-
-Imprea datos OpenStreetMap e Wikipedia:
- - Datos de arta calidade dae sos mègius progetos collaborativos de su mundu
- - Mapas globales pro OpenStreetMap, disponìbiles pro istadu o regione
- - Wikipedia PDI, òtimos pro giros turìsticos (non disponìbiles in sa versione gratùita)
- - Iscarrigamentos gratùitos chene lìmites, diretamente dae s’aplicu (lìmite de iscarrigamentu de 16 documentos pro sa mapa in sa versione gratùita)
- - Mapas sèmper agiornadas (a su mancu una borta a su mese)
- - Mapas vetoriales compatas chene lìnia - Issèbera intre mapas cumpridas e petzi istradales (es: totu su Giapone est 700 MB, o 200 MB pro petzi sas istradas)
- - Suportat fintzas mapas a tasseddos in lìnia o in sa cache 
-
-Caraterìsticas pro sa seguràntzia:
- - Modìfica automàtica optzionale de sa vista die/note
- - Ammustradura optzionale de su lìmite de lestresa, cun avisos si lu bàrigas
- - Ismanniamentu automàticu optzionale regoladu dae sa lestresa
- - Cumpartzi sa positzione tua pro permìtere a sos amigos tuos de t’agatare
-
-Funtzionalidades pro sa bitzicleta e a pedes:
- - Sa mapa inclùit àndalas pro bitzicleta, escursionismu e pedonales, òtimas pro sas atividades a s’àera aberta
- - Modalidades ispetziales pro sa bitzicleta e a pedes
- - Firmadas de su trasportu pùblicu (postales, trams, trenos) optzionales, cun sos nùmenes de sas lìnias incluidos
- - Registratziones optionales in documentos GPX locales o servìtzios in lìnia
- - Ammustradura optzionale de sa lestresa e de s’artaria
- - Ammustradura de sas lìnias de livellu e de sas umbraduras de sos rilievos (impreende unu componente agiuntivu, o estensione, dedicadu) 
-
-Contributzione dereta ad OpenStreetMap
- - Iscrie notas in sa mapa
- - Càrriga rastas GPX in OSM diretamente dae s’aplicatzione
- - Annanghe PDI e càrriga·los diretamente in OSM (o prus a tardu si ses chene lìnia)
- - Registratzione optzionale fintzas in modalidade \"in s’isfundu\" (cando su dispositivu est in modalidade \"a reposu\")
-
-OsmAnd est unu progetu a mitza aberta e est ativamente isvilupadu. Totus podent cuntribuire a s’aplicu marchende notas, megiorende sas bortaduras, o programmende funtzionalidades noas. Su progetu est totora in unu istadu sighidu e vitale de megioramentu pro mèdiu de totu custas formas de interatziones intre impitadores e isvilupadores. Su progetu andat in antis gràtzias fintzas a sas contributziones finantziàrias, pro totu s’isvilupu e s’isperimentatzione de caraterìsticas noas. Comporende OsmAnd+ podes agiudare s’aplicatzione a divènnere fintzas prus ispantosa! Est fintzas possìbile finantziare funtziones dislindadas, o fàghere una donatzione generale in osmand.net. 
-
-
-Calidade e cobertura aprosimativa:
- - Europa otzidentale: ****
- - Europa orientale: ***
- - Rùssia: ***
- - Nord Amèrica: ***
- - Sud Amèrica: **
- - Àsia: **
- - Giapone e Corea: ***
- - Oriente de mesu: **
- - Àfrica: **
- - Antàrtide: * 
-
-Lista de sa regiones suportadas (praticamente totu su mundu!): 
-Afghanistan, Albania, Algeria, Andorra, Angola, Anguilla, Antigua and Barbuda, Argentina, Armenia, Aruba, Australia, Austria, Azerbaijan, Bahamas, Bahrain, Bangladesh, Barbados, Belarus, Belgium, Belize, Benin, Bermuda, Bhutan, Bolivia, Bonaire, Bosnia and Herzegovina, Botswana, Brazil, British Virgin Islands, Brunei, Bulgaria, Burkina Faso, Burundi, Cambodia, Cameroon, Canada, Cape Verde, Central African Republic, Chad, Chile, China, Colombia, Comoros, Congo, Costa Rica, Ivory Coast, Croatia, Cuba, Curaçao, Cyprus, Czech Republic, Denmark, Djibouti, Dominica, Dominican Republic, Ecuador, Egypt, El Salvador, Equatorial Guinea, Eritrea, Estonia, Ethiopia, Fiji, Finland, France, French Guiana, French Polynesia, Gabon, Gambia, Georgia, Germany, Ghana, Gibraltar, Greece, Greenland, Grenada, Guadeloupe, Guam, Guatemala, Guernsey, Guinea, Guinea-Bissau, Guyana, Haiti, Vatican, Honduras, Hong Kong, Hungary, Iceland, India, Indonesia, Iran, Iraq, Ireland, Isle of Man, Israel, Italy, Jamaica, Japan, Jersey, Jordan, Kazakhstan, Kenya, Kiribati, North Korea and South Korea, Kuwait, Kyrgyzstan, Laos, Latvia, Lebanon, Lesotho, Liberia, Libya, Liechtenstein, Lithuania, Luxembourg, Macao, Macedonia, Madagascar, Malawi, Malaysia, Maldives, Mali, Malta, Martinique, Mauritania, Mauritius, Mayotte, Mexico, Micronesia, Moldova, Monaco, Mongolia, Montenegro, Montserrat, Morocco, Mozambique, Myanmar, Namibia, Nauru, Nepal, Netherlands, Netherlands Antilles, New Caledonia, New Zealand, Nicaragua, Niger, Nigeria, Norway, Oman, Pakistan, Palau, Palestinian Territory, Panama, Papua New Guinea, Paraguay, Peru, Philippines, Poland, Portugal, Puerto Rico, Qatar, Romania, Russia, Rwanda, Saint Barthelemy, Saint Helena, Saint Kitts and Nevis, Saint Lucia, Saint Martin, Saint Pierre and Miquelon, Saint Vincent and the Grenadines, Samoa, San Marino, Saudi Arabia, Senegal, Serbia, Seychelles, Sierra Leone, Singapore, Slovakia, Slovenia, Somalia, South Africa, South Georgia, South Sudan, Spain, Sri Lanka, Sudan, Suriname, Swaziland, Sweden, Switzerland, Syria, Taiwan, Tajikistan, Tanzania, Thailand, Timor-Leste, Togo, Tokelau, Tonga, Trinidad and Tobago, Tunisia, Turkey, Turkmenistan, Tuvalu, Uganda, Ukraine, United Arab Emirates, United Kingdom (UK), United States of America (USA), Uruguay, Uzbekistan, Vanuatu, Venezuela, Vietnam, Wallis and Futuna, Western Sahara, Yemen, Zambia, Zimbabwe.
- "</string>
+    
     <string name="local_index_poi_data">Datos PDI</string>
     <string name="local_indexes_cat_poi">Datos PDI</string>
     <string name="poi_context_menu_modify">Muda PDI</string>
@@ -2276,53 +2139,7 @@ Lon %2$s</string>
     <string name="shared_string_email_address">Indiritzu de posta eletrònica</string>
     <string name="rendering_attr_showMtbRoutes_name">Ammustra sas àndalas MTB</string>
     <string name="show_polygons">Ammustra sos polìgonos</string>
-    <string name="osmand_plus_extended_description_4000_chars_v2">"
-OsmAnd Mapas &amp; Nàvigu - cuncorda àndalas e agata logos in sa mapa chene una connessione ìnternet. Iscàrriga sa mapa de un’istadu in antis de incumintzare unu biàgiu pro agatare logos e àndalas in un’àrea disconnota.
-
-Optziones de base:
-• Mapas a sa minuda de prus de 200 natziones
-• Navigadore chene lìnia cun ghia vocale
-• Chirca de indiritzos in modalidade chene lìnia
-• Informatziones chi pertocant sos logos in sa mapa: puntos de interesse, cafes, parchègios, butegas
-• Possibilidade de annànghere logos a sos preferidos
-• Nàvigu pro màchinas, tziclistas e pedones 
-
-Optziones agiuntivas:
-• Abilidade de bìdere e registrare rastas GPX
-• Descritziones Wikipedia de sos PDI
-• Possibilidade de annànghere fotos e notas àudio e vìdeo a sa mapa
-• Modalidades mapa Die e Note pro una ghia prus discansosa
-• Informatziones chi pertocant sas àndalas e sas firmadas de sos trasportos pùblicos
-• Carreras e coladòrgios tziclàbiles e pedonales
-• Àndalas turìsticas pro totu su mundu
-• Mapas in lìnia dae medas mitzas
-• Informatziones chi pertocant sa casta de pamentu e de illuminatzione istradale
-• Possibilidade de annanghere, modificare e iscantzellare PDI (pro impreadores OpenStreetMap.org)
-• OsMo - compidada in lìnia de àteros dispositivos
-
-Imprea unu navigadore afidàbile in sa natzione tua - chi siat sa Frantza, sa Germània, su Mèssicu, su Regnu Unidu, s’Ispàgna, s’Olanda, sos Istados Unidos, sa Rùssia, su Brasile o calesisiat àteru istadu.
-
-Estensiones:
-• Curvas de livellu e umbraduras de sos rilievos https://goo.gl/7mojP8
- Datos pro ammustrare sas lìnias de livellu e sas umbraduras de sos rilievos, de annàghere a sa mapa OsmAnd de base.
-
-• Mapas pro iscì https://goo.gl/pX6DxJ
- Informatziones chi pertocant sas pistas pro iscì, pistas pro iscì de fundu, funivias e isciovias.
-
-• Mapas nàuticas https://goo.gl/0hEdxm
- Mapas ispetziales pro ammustrare sos sìmbulos e sos sinnales pro su nàvigu nàuticu curtzu (Nàvigu costieru) o longu (nàvigu arteriale).
-
-• Positzione de parchègiu https://goo.gl/6JxQXF
- T’agiudat a sinnare su logu in ue as parchegiadu sa màchina e bìdere cantu tempus t\'abarrat si su parchègiu est a tempus limitadu.
-
-Mantenne·ti informadu!
-
-Twitter: https://twitter.com/osmandapp
-Facebook: https://www.facebook.com/osmandapp
-Giassu/Situ: http://osmand.net
-
-Si tenes bisòngiu de agiudu cun s\'aplicatzione OsmAnd, pro praghere cuntata su grupu de suportu nostru: support@osmand.net. 
- "</string>
+    
     <string name="select_map_markers">Ischerta sos marcadores de sa mapa</string>
     <string name="shared_string_reverse_order">Fùrria s\'òrdine</string>
     
@@ -2462,7 +2279,7 @@ Si istimas OsmAnd e OSM e los boles suportare, custa est una manera perfeta pro 
     <string name="map_widget_search">Chirca</string>
 	<string name="city_type_district">Distretu</string>
     <string name="search_categories">Categorias</string>
-    <string name="show_on_map">Ammustra in sa mapa</string>
+    
     <string name="share_history_subject">cumpartzidu pro mèdiu de OsmAnd</string>
     <string name="lang_hsb">Sorabu (superiore)</string>
     <string name="show_something_on_map">Ammustra %1$s in sa mapa</string>
@@ -2710,13 +2527,13 @@ Pro praghere iscrie su còdighe intreu</string>
 \n e àteru…"</string>
 	<string name="rendering_attr_depthContours_name">Lìnias nàuticas de profondidade</string>
 	<string name="rendering_attr_depthContours_description">Ammustra sas lìnias de profondidade</string>
-    <string name="routing_attr_height_relief_smoothness_factor_description">Prus terrinu paris o prus cùcuros</string>
+    
     <string name="routing_attr_height_obstacles_name">Imprea sos datos de s\'artària</string>
     <string name="routing_attr_height_obstacles_description">Imprea sos datos de s\'artària frunidos dae SRTM, ASTER e EU-DEM</string>
 
-    <string name="routing_attr_height_relief_smoothness_factor_name">Fatore de levigadura de sos rilievos</string>
+    
     <string name="routing_attr_driving_style_name">Istile de ghia</string>
-    <string name="routing_attr_driving_style_description">Ghia segura, lestra o bilantziada</string>
+    
     <string name="route_altitude">Artària de s\'istrada</string>
     <string name="altitude_descent">Falada</string>
     <string name="altitude_ascent">Artziada</string>
@@ -2859,7 +2676,7 @@ Pro praghere iscrie su còdighe intreu</string>
     <string name="distance_moving">Distàntzia curreta</string>
     <string name="shared_string_permissions">Autorizatziones</string>
     <string name="import_gpx_failed_descr">OsmAnd non podet importare su documentu. Pro praghere verìfica chi OsmAnd tèngiat sas autorizatziones pro lèghere su documentu dae sa cartella sua.</string>
-    <string name="map_widget_ruler_control_first_mode">Medidura cun duos puntos</string>
+    
     <string name="map_widget_ruler_control">Medidura cun su raju</string>
     <string name="shared_string_reload">Torra a carrigare</string>
     <string name="mapillary_menu_descr_tile_cache">Torra a carrigare sos tasseddos pro bìdere datos agiornados.</string>

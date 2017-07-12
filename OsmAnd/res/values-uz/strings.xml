@@ -1,5 +1,4 @@
-<?xml version='1.0' encoding='UTF-8'?>
-<resources><string name="get_it">Уни олиш</string>
+<?xml version="1.0" encoding="UTF-8" standalone="no"?><resources><string name="get_it">Уни олиш</string>
     <string name="get_for">%1$sга олиш</string>
     <string name="get_for_month">Ойига %1$sга олиш</string>
     <string name="si_mi_meters">Миля/метр</string>

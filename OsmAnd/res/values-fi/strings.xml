@@ -1,5 +1,4 @@
-<?xml version='1.0' encoding='UTF-8'?>
-<resources><string name="no_route">Ei reittiä</string>
+<?xml version="1.0" encoding="UTF-8" standalone="no"?><resources><string name="no_route">Ei reittiä</string>
 	<string name="delete_target_point">Poista päämäärä</string>
 	<string name="target_point">Päämäärä %1$s</string>
     <string name="intermediate_point">Välietappi %1$s</string>
@@ -2173,7 +2172,7 @@ Jos pidät OsmAndista ja OSMsta ja haluat tukea niitä, on tämä täydellinen t
     <string name="rendering_attr_contourDensity_name">Korkeuskäyräviivojen tiheys</string>
     <string name="rendering_attr_depthContours_name">Korkeuskäyrät</string>
 	<string name="rendering_attr_depthContours_description">Näytä korkeuskäyrät ja -pisteet</string>
-    <string name="route_is_too_long">OsmAndin offline-reititys voi kestää hyvin pitkään (tai epäonnistua), jos pisteet ovat toisistaan kauempana kuin 200 km. Suorituskyky on parempi, jos lisäät välietappeja.</string>
+    
     <string name="routing_attr_driving_style_description">Turvallista, nopeaa tai tasapainoista ajoa</string>
     <string name="route_altitude">Reitin korkeus</string>
     <string name="altitude_descent">Lasku</string>
@@ -2182,7 +2181,7 @@ Jos pidät OsmAndista ja OSMsta ja haluat tukea niitä, on tämä täydellinen t
     <string name="average_altitude">Keskimäärin</string>
     <string name="shared_string_time">Aika</string>
     <string name="total_distance">Kokonaisetäisyys</string>
-    <string name="routing_attr_height_relief_smoothness_factor_name">Korkeuserojen tasaisuustekijä</string>
+    
     <string name="routing_attr_height_relief_smoothness_factor_description">Enemmän tasaista vai enemmän mäkiä</string>
     <string name="routing_attr_height_obstacles_name">Käytä korkeustietoja</string>
     <string name="routing_attr_height_obstacles_description">Käytä maaston korkeustietoja jotka saadaan SRTM, ASTER ja EU-DEM lähteistä</string>

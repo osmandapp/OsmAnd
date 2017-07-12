@@ -1,5 +1,4 @@
-<?xml version='1.0' encoding='UTF-8'?>
-<resources>
+<?xml version="1.0" encoding="UTF-8" standalone="no"?><resources>
     <string name="screen_is_locked">För att låsa upp skärmen tryck på låsikonen</string>
     <string name="ChooseCountry">Välj land</string>
     <string name="choose_city">Välj stad eller postnummer</string>
@@ -1156,7 +1155,7 @@ Nyttjat utrymme är {1} MB.
 
 
     <string name="map_magnifier">Kartförstoring</string>
-    <string name="route_is_too_long">OsmAnd offline-ruttning kan ta väldigt lång tid (eller ibland inte fungera alls) för punkter mer än 200 km från varandra. Lägg till en eller flera mellanliggande mål för bättre prestanda.</string>
+    
     <string name="auto_zoom_none">Ingen auto-zoom</string>
     <string name="auto_zoom_close">Nära</string>
     <string name="auto_zoom_far">Medelavstånd</string>
@@ -2453,14 +2452,14 @@ Vänligen tillhandahåll fullständig kod</string>
     <string name="shared_string_move">Flytta</string>
     <string name="shared_string_tracks">Spår</string>
     <string name="routing_attr_driving_style_name">Körstil</string>
-    <string name="routing_attr_driving_style_description">Säker, snabb eller balanserad körning</string>
+    
     <string name="route_altitude">Rutthöjd</string>
     <string name="altitude_descent">Sänkning</string>
     <string name="altitude_ascent">Stigning</string>
     <string name="average_altitude">Genomsnittshöjd</string>
     <string name="shared_string_time">Tid</string>
     <string name="total_distance">Total sträcka</string>
-    <string name="routing_attr_height_relief_smoothness_factor_description">Mer slätter eller mer kullar</string>
+    
     <string name="shared_string_time_span">Tidsspann</string>
     <string name="shared_string_max">Max</string>
     <string name="shared_string_start_time">Starttid</string>
@@ -2503,11 +2502,11 @@ Vänligen tillhandahåll fullständig kod</string>
     <string name="rendering_attr_depthContours_description">Visa djupkonturer och punkter</string>
     <string name="shared_string_slope">Sluttning</string>
     <string name="altitude_range">Höjdområde</string>
-    <string name="relief_smoothness_factor_hills">Kullar</string>
+    
     <string name="relief_smoothness_factor_plains">Slätter</string>
-    <string name="relief_smoothness_factor_more_plains">Mer slätter</string>
+    
     <string name="driving_style_speed">Hastighet</string>
-    <string name="driving_style_balance">Balans</string>
+    
     <string name="driving_style_safety">Säkerhet</string>
     <string name="relief_smoothness_factor_descr">Favoritterräng: slätt eller kuperat</string>
     <string name="full_version_thanks">Tack för att du köpt den fullständiga versionen av OsmAnd!</string>

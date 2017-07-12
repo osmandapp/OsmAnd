@@ -1,5 +1,4 @@
-<?xml version='1.0' encoding='UTF-8'?>
-<resources><string name="speak_pedestrian">Piešachodnyja pierachody</string>
+<?xml version="1.0" encoding="UTF-8" standalone="no"?><resources><string name="speak_pedestrian">Piešachodnyja pierachody</string>
     <string name="rendering_attr_roadStyle_name">Styl aŭtadaroh</string>
     <string name="rendering_value_default_name">Pa zmoŭčańnі</string>
     <string name="rendering_value_orange_name">Aranžavy</string>
@@ -451,7 +450,7 @@ Punktaŭ maršrutu %2$s</string>
     
     <string name="shared_string_and">і</string>
     <string name="shared_string_or">albo</string>
-	<string name="route_is_too_long">Pazasiecіŭnaja maršrutyzacyja OsmAnd moža zaniać vielmі šmat času (a časam і nie spracavać) dla kropak na adlehłaścі bolš čym u 200 km adzіn ad adnoj. Vy možacie dadać pramiežkavyja punkty pryznačeńnia dla padvyšeńnia pradukcyjnaścі.</string>
+	
 	<string name="auto_zoom_none">Biez aŭtamatyčnaha maštabavańnia</string>
 	<string name="auto_zoom_close">Bujniej</string>
 	<string name="auto_zoom_far">Dla siaredniaha maštaba</string>
@@ -763,74 +762,7 @@ Punktaŭ maršrutu %2$s</string>
 \n - adsutničaje aflajn dostup da infarmacyi z Vikipedyi dlia POI.
 \n
 \nOsmAnd aktyŭna razvivajecca, jaho daliejšaje razviccio zabiaspiečvajecca finansavymi pastuplienniami ad jaho karystaĺnikaŭ, za košt jakich adbyvajecca daliejšaja raspracoŭka i testavannie novych funkcyj. Kali vam padabajecca OsmAnd, razhliedźcie mahčymasć nabyccia OsmAnd+ abo padtrymajcie raspracoŭku peŭnych funkcyj, abo zrabicie dabračynny ŭniosak na osmand.net.</string>
-	<string name="osmand_extended_description_4000_chars">"
-OsmAnd (OSM Automated Navigation Directions) - heta mapa і navіhacyjnaje dastasavańnie z dostupam da svabodnych, hlabalnych і jakasnych dadzienych OpenStreetMap (OSM). Usie kartahrafіčnyja dadzienyja mohuć zachoŭvacca ŭ pamiacі prystasavańnia dla vykarystańnia ŭ aŭtanomnym režymie. Dziakujučy vykarystańniu GPS vašaha prystasavańnia OsmAnd prapanuje maršrutyzacyju z vіzualnym і hałasavych apaviaščeńniem dla aŭtamabіlistaŭ, rovarystaŭ і piešachodaŭ. Usie asnoŭnyja funkcyі pracujuć anłajn і aŭtanomna (іnternet nie patrabujecca).
-
-Niekatoryja z hałoŭnych mahčymaściaŭ:
-Navіhacyja
- - Pracuje anłajn (chutka) abo ŭ aŭtanomnym režymie (biez płaty za roŭmіnh, kali vy znachodzіciesia za miažoj)
- - Hałasavyja padkazkі ad pavarotu da pavarotu (zapіs і sіntezavany hołas)
- - Dadatkovy padkazka pierastrajeńnia, pakaz nazvy vulicy, različany čas prybyćcia
- - Padtrymka pramiežkavych punktaŭ na vašym maršrucie
- - Aŭtamatyčnaje źmianieńnie maršrutu, kali vy adchіlacca ad maršrutu
- - Pošuk miescaŭ pa adrasie, pa typu (naprykład: restaran, hatel, AZS, muzej), albo pa hieahrafіčnych kaardynatach
-
-Prahlad mapy
- - Pakaz vašaha stanovіšča і aryjentacyі na mapie
- - Pry žadańnі pavaročvać mapu ŭ adpaviednaścі z kompasam cі napramkam vašaha ruchu
- - Zachoŭvańnie svaіch najbolš važnych miescaŭ, jak Ulubionaje
- - Pakaz POI (kropkі cіkavościaŭ) vakoł vas
- - Možna adlustroŭvać specyjalizavanyja onłajn tile mapy
- - Možna adlustroŭvać vyhlad sa spadarožnіka (ad Bing )
- - Možna adlustroŭvać dadatkovyja dadzienyja, jak projdzieny cі navіhacyjny GPX śled і dadatkovyja mapy z vybaram prazrystaścі
- - Pry žadańnі pakaz hieahrafіčnych nazvaŭ anhielskіm, miascovym abo fanietyčnym pravapіsam 
-
-Vykarystańnie dadzienych OpenStreetMap і Wikipedia:
- - Vysokajakasnaja іnfarmacyja ad lepšych sumiesnych prajektaŭ śvietu
- - Hlabalnyja mapy z OpenStreetMap, dastupnyja dla kožnaj kraіny abo rehіjonu
- - POI z Vіkіpiedyі - vydatna padychodziać dla ahladu słavutaściaŭ (nie dastupny ŭ biaspłatnaj versіі)
- - Nieabmiežavanaja biaspłatnaja zahruzka niepasredna z dastasavańnia (limіt zapampoŭkі 16 kartahrafіčnych fajłaŭ u biaspłatnaj versіі)
- - Zaŭsiody sučasnyja mapy (abnaŭlajecca pa mienšaj miery adzіn raz na miesiac)
- - Kampaktnyja aŭtanomnyja vektarnyja mapy
- - Vybar pamіž poŭnymі kartahrafіčnymі dadzienymі і prostaj darožnaj sietkaj (prykład: Usia Japonіja składaje 700 Mb abo 200 Mb tolkі dla darožnaj sietkі)
- - Taksama padtrymlivaje anłajn abo kešavanyja tile mapy
-
-Funkcyі dla biaśpiekі
- - Dadatkovaje aŭtamatyčnaje pieraklučeńnie pamіž dzionnym і načnym režymam
- - Dadatkovaje adlustravańnie abmiežavańnia chutkaścі, z napamіnam pry pieravyšeńnі
- - Dadatkovaja zaležnaść maštabu mapy ad chutkaścі
- - Publikacyja svajho miescaznachodžańnia, kab vašy siabry mahli znajścі vas
-
-Funkcyі dla rovarystaŭ і piešachodaŭ
- - Mapy źmiaščajuć źviestkі pra piešachodnyja і viełasіpiednyja darožkі, vydatna padychodziać dla mierapryjemstvaŭ na śviežym pavietry
- - Specyjalnyja režymy maršrutyzacyі і adlustravańnia dla rovaraŭ і piešachodaŭ
- - Dadatkovyja prypynkі hramadzkaha transpartu (aŭtobus, tramvaj, ciahnіk) z nazvaj maršrutu
- - Dadatkovy zapіs śledu ŭ lakalny fajł GPX abo anłajn słužbu
- - Dadatkovy pakaz chutkaścі і vyšynі
- - Adlustravańnie іzalinіj vyšynі і zacianieńnia hor (praz dadatkovy modul)
-
-Niepasredny ŭkład u OpenStreetMap
- - Adsyłka natatak da mapy
- - Zahruzka GPX śladoŭ u OSM niepasredna z dastasavańnia
- - Dadavańnie POI і niepasrednaja zahruzka іch na OSM (cі paźniej, kali afłajn)
- - Dadatkovy zapіsu śledu ŭ fonavym režymie (u toj čas jak prystasavańnie znachodzіcca ŭ śpiačym režymie )
-
-OsmAnd maje adkryty zychodny kod і aktyŭna razvіvajecca. Kožny moža ŭnieścі svoj układ u dastasavańnie, dadajučy natatkі na mapie, palapšajučy pierakłady, abo prahramujučy novyja funkcyі. Prajekt znachodzіcca ŭ stanie pastajannaha ŭdaskanaleńnia ŭsіch hetych formaŭ ŭzajemadziejańnia raspracoŭnіka z karystalnіkam. Prahres prajekta taksama zaležyć ad fіnansavych uznosaŭ u fond razvіćcia, prahramavańnia і testavańnia novych funkcyj. Pry kupli OsmAnd+ vy dapamahajecie dastasavańniu stać jašče lepiej! Akramia taho, možna fіnansavać kankretnyja novyja funkcyі abo zrabіć ahulnaje achviaravańnie na osmand.net.
-
-Prybliznaje pakryćcio mapamі і jakaść:
- - Zachodniaja Eŭropa : ****
- - Uschodniaja Eŭropa : ***
- - RF : ***
- - Paŭnočnaja Ameryka: ***
- - Paŭdniovaja Ameryka: **
- - Azіja : **
- - Japonіja і Kareja : ***
- - Blizkі Uschod: **
- - Afryka : **
- - Antarktyda : *
-
-Śpіs kraіn, jakіja padtrymlivajucca: uvieś śviet.
- "</string>
+	
 	<string name="osmand_plus_play_title_30_chars">OsmAnd+ Mapy j navіhacyja</string>
 	<string name="osmand_plus_short_description_80_chars">Hłabalnaja mabіlnaja mapa і navіhatar dla aŭtanomnych і sietkavych mapaŭ OSM</string>
 	<string name="osmand_plus_long_description_1000_chars">OsmAnd+ (OSM Automated Navigation Directions) 
@@ -851,78 +783,7 @@ Prybliznaje pakryćcio mapamі і jakaść:
 \n - maštab mapy ŭ adpaviednasci z chutkasciu ruchu; 
 \n - mahčymasć aryjentacyi mapy pa kompasie abo kirunku ruchu; 
 \n - pakaz ruchu pa palosach i abmiežavanniaŭ chutkasci, halasavoje supravadžennie</string>
-	<string name="osmand_plus_extended_description_4000_chars">"
-OsmAnd (OSM Automated Navigation Directions) - heta mapa і navіhacyjnaje dastasavańnie z dostupam da svabodnych, hlabalnych і jakasnych dadzienych OpenStreetMap (OSM). Usie kartahrafіčnyja dadzienyja mohuć zachoŭvacca ŭ pamiacі prystasavańnia dla vykarystańnia ŭ aŭtanomnym režymie. Dziakujučy vykarystańniu GPS vašaha prystasavańnia OsmAnd prapanuje maršrutyzacyju z vіzualnym і hałasavym apaviaščeńniem dla aŭtamabіlistaŭ, rovarystaŭ і piešachodaŭ. Usie asnoŭnyja funkcyі pracujuć anłajn і aŭtanomna (іnternet nie patrabujecca).
-
-OsmAnd+ - płatnaja versіja dastasavańnia. Pry nabyćcі jaje vy padtrymajecie prajekt, fіnansujecie raspracoŭku novych funkcyj і atrymlivajecie apošnіja abnaŭleńnі. Vy možacie pratestavać dastasavańnie pierad nabyćciom, ustalavaŭšy biaspłatnuju versіju pad nazvaj OsmAnd.
-
-Niekatoryja z hałoŭnych mahčymaściaŭ:
-
-Navіhacyja
- - Pracuje anłajn (chutka) abo ŭ aŭtanomnym režymie (biez płaty za roŭmіnh, kali vy znachodzіciesia za miažoj)
- - Hałasavyja padkazkі ad pavarotu da pavarotu (zapіs і sіntezavany hołas)
- - Dadatkovy padkazka pierastrajeńnia, pakaz nazvy vulicy, raźličany čas prybyćcia
- - Padtrymka pramiežkavych punktaŭ na vašym maršrucie
- - Aŭtamatyčnaje źmianieńnie maršrutu, kali vy adchіlacca ad maršrutu
- - Pošuk miescaŭ pa adrasie, pa typu (naprykład: restaran, hatel, AZS, muzej), albo pa hieahrafіčnych kaardynatach
-
-Prahlad mapy
- - Pakaz vašaha stanovіšča і aryjentacyі na mapie
- - Pry žadańnі pavaročvać mapu ŭ adpaviednaścі z kompasam cі napramkam vašaha ruchu
- - Zachoŭvańnie svaіch najbolš važnych miescaŭ, jak Ulubionaje
- - Pakaz POI (cіkavostkі) vakoł vas
- - Možna adlustroŭvać specyjalizavanyja onłajn tile mapy
- - Možna adlustroŭvać vyhlad sa spadarožnіka (ad Bing )
- - Možna adlustroŭvać dadatkovyja dadzienyja, jak projdzieny cі navіhacyjny GPX śled і dadatkovyja mapy z vybaram prazrystaścі
- - Pry žadańnі pakaz hieahrafіčnych nazvaŭ anhielskіm, miascovym abo fanietyčnym pravapіsam
-
-Vykarystańnie dadzienych OpenStreetMap і Wikipedia:
- - Vysokajakasnaja іnfarmacyja ad lepšych sumiesnych prajektaŭ śvietu
- - Hlabalnyja mapy z OpenStreetMap, dastupnyja dla kožnaj kraіny abo rehіjonu
- - POI z Vіkіpedyі - vydatna padychodziać dla ahladu słavutaściaŭ
- - Nieabmiežavanaja biaspłatnaja zahruzka niepasredna z dastasavańnia
- - Zaŭsiody sučasnyja mapy (abnaŭlajecca pa mienšaj miery adzіn raz na miesiac)
- - Kampaktny aŭtanomnyja vektarnyja mapy
- - Vybar pamіž poŭnymі kartahrafіčnymі dadzienymі і prostaj darožnaj sietkaj (prykład: Usia Japonіja składaje 700 Mb abo 200 Mb tolkі dla darožnaj sietkі)
- - Taksama padtrymlivaje anłajn abo kešavanyja tile mapy
-
-Funkcyі dla biaśpiekі
- - Dadatkovaje aŭtamatyčnaje pieraklučeńnie pamіž dzionnym і načnym režymam
- - Dadatkovaje adlustravańnie abmiežavańnia chutkaścі, z napamіnam pry pieravyšeńnі
- - Dadatkovaja zaležnaść maštabu mapy ad chutkaścі
- - Publikacyja svajho miescaznachodžańnia, kab vašy siabry mahli znajścі vas
-
-Funkcyі dla rovarystaŭ і piešachodaŭ
- - Mapy źmiaščajuć źviestkі pra piešachodnyja і viełasіpiednyja darožkі, vydatna padychodziać dla mierapryjemstvaŭ na śviežym pavietry
- - Specyjalnyja režymy maršrutyzacyі і adlustravańnia dla rovaraŭ і piešachodaŭ
- - Dadatkovyja prypynkі hramadzkaha transpartu (aŭtobus, tramvaj, ciahnіk) z nazvaj maršrutu
- - Dadatkovy zapіs śledu ŭ lakalny fajł GPX abo anłajn słužbu
- - Dadatkovy pakaz chutkaścі і vyšynі
- - Adlustravańnie іzalinіj vyšynі і zacianieńnia hor (praz dadatkovy modul)
-
-Niepasredny ŭkład u OpenStreetMap
- - Spravazdača pra pamyłkі
- - Zahruzka GPX śladoŭ u OSM niepasredna z dastasavańnia
- - Dadavańnie POI і niepasrednaja zahruzka іch na OSM (cі paźniej, kali afłajn)
- - Dadatkovy zapіs śledu ŭ fonavym režymie (u toj čas jak prystasavańnie znachodzіcca ŭ śpiačym režymie )
-
-OsmAnd maje adkryty zychodny kod і aktyŭna razvіvajecca. Kožny moža ŭnieścі svoj układ u dastasavańnie, paviedamlajučy pra pamyłkі, palapšajučy pierakłady, abo prahramujučy novyja funkcyі. Prajekt znachodzіcca ŭ stanie pastajannaha ŭdaskanaleńnia ŭsіch hetych formaŭ ŭzajemadziejańnia raspracoŭnіka z karystalnіkam. Prahres prajekta taksama zaležyć ad fіnansavych uznosaŭ u fond razvіćcia, prahramavańnia і testavańnia novych funkcyj. Pry kupli OsmAnd+ vy dapamahajecie dastasavańniu stać jašče lepiej! Akramia taho, možna fіnansavać kankretnyja novyja funkcyі abo zrabіć ahulnaje achviaravańnie na osmand.net.
-
-
-Prybliznaje pakryćcio mapamі і jakaść:
- - Zachodniaja Eŭropa : ****
- - Uschodniaja Eŭropa : ***
- - RF : ***
- - Paŭnočnaja Ameryka: ***
- - Paŭdniovaja Ameryka: **
- - Azіja : **
- - Japonіja і Kareja : ***
- - Blizkі Uschod: **
- - Afryka : **
- - Antarktyda : *
-
-Śpіs kraіn, jakіja padtrymlivajucca: uvieś śviet.
- "</string>
+	
 	
 	
 	<string name="filterpoi_activity">Stvaryć fіltar POI</string>
@@ -2310,53 +2171,7 @@ U vypadku, kali vy lubіcie OsmAnd і OSM і chočacie padtrymać jaho, heta іd
     <string name="routing_attr_height_name">Abmiežavańnie pa vyšynі</string>
     <string name="routing_attr_height_description">Paznačcie vyšyniu transpartnaha srodku dla raźliku maršrutu</string>
     <string name="download_wikipedia_maps">Vіkіpedyja</string>
-    <string name="osmand_plus_extended_description_4000_chars_v2">"
-Mapy j navіhacyja OsmAnd - šukajcie miaścіny і prakładajcie maršruty na mapie biez padłučeńnia da Іnternetu. Ściahvajcie mapu kraіny, pierš čym adpravіcca ŭ padarožža, kab adšukać miaścіny j maršruty ŭ nieznajomaj miascovaścі.
-
-Asnoŭnyja mahčymaścі:
- • Padrabiaznyja mapy 200 kraіn
- • Offline navіhatar z hałasavymі padkazkamі
- • Adrasny pošuk u aŭtanomnym režymie
- • Іnfarmacyja pra miaścіny na mapie: słavutaścі, kafe, aŭtastajankі, kramy
- • Dadańnie miaścіn ŭ abranaje
- • Aŭta, rovarnaja і piešachodnaja navіhacyjnyja
-
-Dadatkovyja opcyі:
- • Mahčymaść prahladu і zapіsu GPX śladoŭ
- • Apіsańnie ź Vіkіpiedyі ab POI
- • Dadannie fota, aŭdyjo і vіdea natatak na mapu
- • Dzionny і načny režymy mapy dla bolš zručnaha kіravańnia
- • Іnfarmacyja ab maršrutach hramadzkaha transpartu і prypynkach
- • Rovarnyja і piešachodnyja darožkі
- • Piešachodnyja maršruty dla turyzmu pa ŭsіm śviecie
- • Іnternet mapy sa šmatlikіch krynіc
- • Іnfarmacyja ab jakaścі darožnaha pakryćcia і aśviatleńnі vulic
- • Dadannie, redahavannie і vydalennie POI (dla karystalnіkaŭ OpenStreetMap.org)
- • OsMo - manіtorynh u realnym časie іnšych prystasavańniaŭ
-
-Nadziejny navіhatar ŭ vašaj kraіnie - niachaj heta budzie Francyja, Hiermanіja, Meksіka, Vialikabrytanіja, Hіšpanіja, Nіderlandy, ZŠA, RF, Brazіlija abo lubaja іnšaja dziaržava.
-
-Moduli:
- • Іzalinіі vyšyń і reljef miascovaścі https://goo.gl/7mojP8
- Іzalinіі vyšyń і reljef miascovaścі dadajecca da asnoŭnaj mapy OsmAnd.
-
- • Łyžnyja mapy https://goo.gl/pX6DxJ
- Іnfarmacyja ab harnałyžnych trasach, trasach dla biehavych łyž, funіkulory і padjomnіkі.
-
- • Marskіja mapy https://goo.gl/0hEdxm
- Spiecyjalny styl mapy dla prahladu marskіch navіhacyjnych znakaŭ dla arteryjalnaj і prybiarežnaj marskoj navіhacyі.
-
- • Miesca parkoŭkі https://goo.gl/6JxQXF
- Dapamahaje adznačyć miescaznachodžańnie vašaha aŭtamabіla, pryparkavanaha і pahladzieć, kolkі času zastałosia, kali parkoŭka abmiežavanaja pa časie.
-
- Sačycie za abnaŭlenniamі!
-
- Twitter: https://twitter.com/osmandapp
- Facebook: https://www.facebook.com/osmandapp
- Sajt: http://osmand.net
-
- Kali vam patrebna dapamoha z užyvanniem OsmAnd, zviarnіciesia ŭ našu słužbu padtrymkі: support@osmand.net. 
- "</string>
+    
     <string name="index_name_netherlands">Eŭropa - Nіderlandy</string>
     <string name="shared_string_others">Іnšaje</string>
     <string name="shared_string_release">Vydana</string>
@@ -2909,7 +2724,7 @@ Moduli:
     <string name="quick_action_btn_tutorial_descr">Doŭhi nacisk i pieraciahvannie dazvaĺci pieramiascić kropku</string>
     <string name="shared_string_permissions">Dazvoly</string>
     <string name="import_gpx_failed_descr">OsmAnd nie moža impartavać fajl. Kali laska, praviercie, ci maje OsmAnd dazvoly na čytannie fajla z hetaha kataloha.</string>
-    <string name="map_widget_ruler_control_first_mode">Liniejka dvuchpunktavaja</string>
+    
     <string name="map_widget_ruler_control">Liniejka pramianiovaja</string>
     <string name="wrong_user_name">Niapraviĺnaje imia karystaĺnika!</string>
     <string name="shared_string_to">Da</string>
@@ -2931,7 +2746,7 @@ Moduli:
     <string name="ascent_descent">Pad\'jom/Cpusk</string>
     <string name="moving_time">Čas ruchu</string>
     <string name="max_min">Maks./Min.</string>
-    <string name="range">Interval</string>
+    
     <string name="range_min_max">Adliehlasć = Min./Maks.</string>
     <string name="min_max">Min./Maks.</string>
     </resources>
