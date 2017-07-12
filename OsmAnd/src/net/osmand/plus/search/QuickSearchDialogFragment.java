@@ -457,7 +457,6 @@ public class QuickSearchDialogFragment extends DialogFragment implements OsmAndC
 					@Override
 					public void onClick(View v) {
 						DeleteDialogFragment deleteDialog = new DeleteDialogFragment();
-						deleteDialog.setSearchHistoryHelper(SearchHistoryHelper.getInstance(app));
 						deleteDialog.setSelectedItems(historySearchFragment.getListAdapter().getSelectedItems());
 						deleteDialog.show(getChildFragmentManager(), "DeleteHistoryConfirmationFragment");
 					}
@@ -2091,12 +2090,7 @@ public class QuickSearchDialogFragment extends DialogFragment implements OsmAndC
 
 	public static class DeleteDialogFragment extends DialogFragment {
 
-		private SearchHistoryHelper searchHistoryHelper;
 		private List<QuickSearchListItem> selectedItems;
-
-		public void setSearchHistoryHelper(SearchHistoryHelper searchHistoryHelper) {
-			this.searchHistoryHelper = searchHistoryHelper;
-		}
 
 		public void setSelectedItems(List<QuickSearchListItem> selectedItems) {
 			this.selectedItems = selectedItems;
@@ -2110,13 +2104,15 @@ public class QuickSearchDialogFragment extends DialogFragment implements OsmAndC
 					.setPositiveButton(R.string.shared_string_yes, new DialogInterface.OnClickListener() {
 						@Override
 						public void onClick(DialogInterface dialog, int which) {
-							for (QuickSearchListItem searchListItem : selectedItems) {
-								HistoryEntry historyEntry = (HistoryEntry) searchListItem.getSearchResult().object;
-								searchHistoryHelper.remove(historyEntry);
-							}
 							if (getParentFragment() instanceof QuickSearchDialogFragment) {
-								((QuickSearchDialogFragment) getParentFragment()).reloadHistory();
-								((QuickSearchDialogFragment) getParentFragment()).enableSelectionMode(false, -1);
+								QuickSearchDialogFragment parentFragment = (QuickSearchDialogFragment) getParentFragment();
+								SearchHistoryHelper helper = SearchHistoryHelper.getInstance(parentFragment.getMyApplication());
+								for (QuickSearchListItem searchListItem : selectedItems) {
+									HistoryEntry historyEntry = (HistoryEntry) searchListItem.getSearchResult().object;
+									helper.remove(historyEntry);
+								}
+								parentFragment.reloadHistory();
+								parentFragment.enableSelectionMode(false, -1);
 							}
 						}
 					})
