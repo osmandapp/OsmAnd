@@ -160,7 +160,7 @@ public class RulerControlLayer extends OsmandMapLayer {
             showTwoFingersDistance = !view.isWasZoomInMultiTouch() && !tb.isZoomAnimated() &&
                     (view.isMultiTouch() || System.currentTimeMillis() - cacheMultiTouchEndTime < DELAY);
 
-            drawCenterIcon(canvas, tb, center, settings.isNightMode());
+            drawCenterIcon(canvas, tb, center, settings.isNightMode(), mode);
             Location currentLoc = app.getLocationProvider().getLastKnownLocation();
             if (showDistBetweenFingerAndLocation && currentLoc != null) {
                 float x = tb.getPixXFromLonNoRot(singleTouchPointLatLon.getLongitude());
@@ -215,9 +215,10 @@ public class RulerControlLayer extends OsmandMapLayer {
         }
     }
 
-    private void drawCenterIcon(Canvas canvas, RotatedTileBox tb, QuadPoint center, boolean nightMode) {
+    private void drawCenterIcon(Canvas canvas, RotatedTileBox tb, QuadPoint center, boolean nightMode,
+                                RulerMode mode) {
         canvas.rotate(-tb.getRotate(), center.x, center.y);
-        if (nightMode) {
+        if (nightMode || mode == RulerMode.SECOND) {
             canvas.drawBitmap(centerIconNight, center.x - centerIconNight.getWidth() / 2,
                     center.y - centerIconNight.getHeight() / 2, bitmapPaint);
         } else {
