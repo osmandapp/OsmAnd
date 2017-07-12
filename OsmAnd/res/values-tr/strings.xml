@@ -2197,4 +2197,16 @@
     <string name="shared_string_overview">Genel bakış</string>
     <string name="select_street">Sokağı seçin</string>
     <string name="type_address">Adres yazın</string>
+    <string name="quick_action_btn_tutorial_title">Düğme konumunu değiştir</string>
+    <string name="store_tracks_in_monthly_directories_descrp">Kayıtlı parçaları, kayıt ayına (2017-01 gibi) alt klasörler halinde depolayın.</string>
+    <string name="shared_string_reset">Reset</string>
+    <string name="shared_string_reload">Tekrar yükle</string>
+    <string name="mapillary_menu_descr_tile_cache">Güncel verileri görmek için döşemeleri yeniden yükleyin.</string>
+    <string name="mapillary_menu_title_tile_cache">Karo önbellek</string>
+    <string name="wrong_user_name">Yanlış kullanıcı adı!</string>
+    <string name="shared_string_to">İçin</string>
+    <string name="mapillary_menu_descr_dates">Belirli bir dönemde eklenen görüntüleri görüntüleyin.</string>
+    <string name="mapillary_menu_title_dates">Tarih</string>
+    <string name="mapillary_menu_edit_text_hint">Kullanıcı adını yazın</string>
+    <string name="mapillary_menu_descr_username">Belirli bir kullanıcı tarafından eklenen görüntüleri görüntüleyin.</string>
     </resources>
