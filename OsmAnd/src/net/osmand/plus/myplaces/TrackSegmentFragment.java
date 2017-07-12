@@ -365,7 +365,7 @@ public class TrackSegmentFragment extends OsmAndListFragment {
 
 		boolean hasPath = false;
 		if (getGpx() != null) {
-			if (getGpx().showCurrentTrack && adapter.getCount() > 0) {
+			if (getGpx().showCurrentTrack) {
 				hasPath = false;
 			} else if (getGpx().tracks.size() > 0 || getGpx().routes.size() > 0) {
 				hasPath = true;
@@ -427,7 +427,7 @@ public class TrackSegmentFragment extends OsmAndListFragment {
 		}
 
 		if (hasPath) {
-			if (getGpx() != null && !getGpx().showCurrentTrack) {
+			if (getGpx() != null && !getGpx().showCurrentTrack && adapter.getCount() > 0) {
 				prepareSplitIntervalAdapterData();
 				setupSplitIntervalView(splitIntervalView);
 				updateSplitIntervalView(splitIntervalView);
