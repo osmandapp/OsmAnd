@@ -30,7 +30,6 @@ import net.osmand.plus.OsmandSettings;
 import net.osmand.plus.R;
 import net.osmand.plus.activities.MapActivity;
 import net.osmand.plus.mapcontextmenu.MenuBuilder;
-import net.osmand.plus.mapillary.MapillaryPlugin;
 import net.osmand.plus.osmedit.OsmEditingPlugin;
 import net.osmand.plus.views.POIMapLayer;
 import net.osmand.util.Algorithms;
@@ -483,9 +482,9 @@ public class AmenityMenuBuilder extends MenuBuilder {
 				(amenity.getId() % 2 == 0 || (amenity.getId() >> 1) < Integer.MAX_VALUE)) {
 			String link;
 			if (amenity.getId() % 2 == 0) {
-				link = "http://www.openstreetmap.org/node/";
+				link = "https://www.openstreetmap.org/node/";
 			} else {
-				link = "http://www.openstreetmap.org/way/";
+				link = "https://www.openstreetmap.org/way/";
 			}
 			buildRow(view, R.drawable.ic_action_info_dark, link + (amenity.getId() >> 1),
 					0, false, null, true, 0, true, null);
