@@ -1,4 +1,5 @@
-<?xml version="1.0" encoding="UTF-8" standalone="no"?><resources>
+<?xml version='1.0' encoding='UTF-8'?>
+<resources>
 	<string name="av_locations">Allugamientos</string>
 	<string name="plugin_settings">Complementos</string>
 	<string name="no_updates_available">Nun hai anovamientos disponibles</string>
@@ -460,7 +461,7 @@ Llo %2$s</string>
     <string name="lang_bn">Bengalí</string>
     <string name="lang_tl">Tagalu</string>
     <string name="lang_sh">Serbocroata</string>
-    <string name="lang_az">Azerí</string>
+    <string name="lang_az">Azerbaiyanu</string>
     <string name="lang_bpy">Bishnupriya</string>
     <string name="lang_nv">Navayu</string>
     <string name="lang_ku">Curdu</string>
@@ -543,7 +544,7 @@ L\'allugamientu y tiempu son visibles nel cuadru de mandos d\'OsmAnd tamién nel
     <string name="shared_string_add_to_favorites">Amestar a favoritos</string>
     <string name="record_plugin_name">Grabación de viaxe</string>
 	<string name="audionotes_plugin_description">El complementu de notes d\'audiu/videu apurre la funcionalidá de facer notes d\'audiu/semeyes/videu nun viaxe, usando un botón na pantalla\'l mapa o direutamente dende\'l menú contestual pa cualesquier posición nel mapa.</string>
-    <string name="free">Llibre %1$s</string>
+    <string name="free">%1$s llibre</string>
     <string name="remove_the_tag">DESANICIAR ETIQUETA</string>
     <string name="show_pedestrian_warnings">Pasos peatones</string>
     <string name="background_service_is_enabled_question">Entá ta executándose\'l serviciu de fondu d\'OsmAnd. ¿Quies paralu tamién?</string>
@@ -674,7 +675,7 @@ Puntos</string>
     <string name="wait_current_task_finished">Espera fasta que fines la xera actual, por favor</string>
     <string name="use_kalman_filter_compass_descr">Amenorga\'l ruíu nes llectures de la brúxula pero amiesta inercia</string>
     <string name="use_kalman_filter_compass">Usar peñera Kalman</string>
-    <string name="use_magnetic_sensor_descr">Usa\'l sensor magnéticu pa determinar el valor de la brúxula en cuentes del sensor d\'orientación</string>
+    <string name="use_magnetic_sensor_descr">Pa lleer la brúxula, usar el sensor magnéticu en cuentes del sensor d\'orientación</string>
     <string name="files_limit">Falten %1$d ficheros</string>
     <string name="install_paid">Versión completa</string>
     <string name="clear_destination">Llimpiar destín</string>
@@ -713,8 +714,8 @@ Puntos</string>
     <string name="shared_string_topbar">Barra cimera</string>
     <string name="text_size_descr">Afita\'l tamañu\'l testu nel mapa.</string>
     <string name="use_osm_live_routing_description">Habilita la navegación pa camudancies d\'OSM Live (Beta)</string>
-	<string name="access_disable_offroute_recalc_descr">Evita\'l recálculu automáticu de ruta al tar daqué lloñe del camín correutu</string>
-    <string name="access_disable_wrong_direction_recalc_descr">Evita\'l recálculu automáticu de ruta cuando teas diendo pela direición incorreuta</string>
+	<string name="access_disable_offroute_recalc_descr">Evita\'l recálculu automáticu de la ruta después d\'abandonala</string>
+    <string name="access_disable_wrong_direction_recalc_descr">Evita\'l recálculu automáticu de la ruta cuando sólo te muevas en direición contraria</string>
     <string name="osmo_tracker_id_descr">Primi pa ver la ID del rastrexador</string>
     <string name="osmo_plugin_description">Esti complementu apurre de mou parcial la función de Siguimientu d\'OpenStreetMap, mira https://osmo.mobi 
 \n 
@@ -724,7 +725,7 @@ Puntos</string>
 \n
 \nEl grupu nun se desanició dempués de meses, ponlu en llinia coles regles coles que crees grupos nel sitiu web OsMo.mobi</string>
     <string name="simulate_your_location_stop_descr">Para de simular el to allugamientu</string>
-    <string name="simulate_your_location_descr">Simula usando una ruta calculada o un GPX grabáu</string>
+    <string name="simulate_your_location_descr">Simular la posición usando una ruta calculada o una traza GPX grabada</string>
     <string name="disable_recording_once_app_killed_descrp">Posaráse\'l rexistru de GPX cuando s\'amortie l\'aplicación (per aplicaciones recientes). (La indicación de fondu d\'OsmAnd desapaecerá de la barra d\'avisos d\'Android).</string>
     <string name="restore_purchases">Restaurar merques</string>
     <string name="fonts_header">Fontes pal mapa</string>
@@ -868,11 +869,11 @@ Puntos</string>
     <string name="shared_string_record">Grabar</string>
     <string name="gpx_logging_no_data">Ensin datos</string>
     <string name="save_track_min_speed">Rexistru de velocidá mínima</string>
-    <string name="save_track_min_speed_descr">Afita la velocidá mínima pa un un puntu a rexistrar</string>
-    <string name="save_track_min_distance">Rexistru de deteición de movición</string>
-    <string name="save_track_min_distance_descr">Afita la distancia mínima dende la cabera posición pal puntu a rexistrar</string>
+    <string name="save_track_min_speed_descr">Filtru: Configura la velocidá mínima pa rexistrar un puntu</string>
+    <string name="save_track_min_distance">Movimientu mínimu a grabar</string>
+    <string name="save_track_min_distance_descr">Filtru: Configura la distancia mínima dende la cabera posición pa rexistrar el puntu</string>
     <string name="save_track_precision">Rexistru de precisión mínimo</string>
-    <string name="save_track_precision_descr">Afita la precisión mínimo pa un puntu a rexistrar</string>
+    <string name="save_track_precision_descr">Filtru: Configura la precisión mínima pa rexistrar un puntu</string>
     <string name="christmas_poi">POI de Nadal</string>
     <string name="christmas_desc">Anticipa les vacaciones de Nadal y Añu nuevu, pues escoyer l\'amosar los POI asociaos col Nadal: Árboles de nadal, tiendes... etc.</string>
     <string name="christmas_desc_q">¿Amosar POI de Nadal?</string>
@@ -888,7 +889,7 @@ Puntos</string>
     <string name="show_something_on_map">Amosar %1$s nel mapa</string>
     <string name="shared_string_is_open_24_7">Abierto 24/7</string>
     <string name="current_track">Ruta actual</string>
-    <string name="access_disable_offroute_recalc">Nun camudar la ruta al tar fuera de la carretera</string>
+    <string name="access_disable_offroute_recalc">Nun recalcular la ruta cuando s\'abandone</string>
     <string name="shared_string_permissions">Permisos</string>
     <string name="import_gpx_failed_descr">OsmAnd nun pudo importar el ficheru. Comprueba si OsmAnd tien permisu pa lleer el ficheru dende\'l so allugamientu.</string>
     <string name="distance_moving">Distancia correxida</string>
