@@ -1173,10 +1173,14 @@
 
 	<string name="poi_animal_shelter">Приют для животных</string>
 
-	<string name="poi_animal_shelter_dog">Тип приюта: для собак</string>
-	<string name="poi_animal_shelter_cat">Тип приюта: для кошек</string>
-	<string name="poi_animal_shelter_dog_cat">Тип приюта: для собак и кошек</string>
-	<string name="poi_animal_shelter_bird">Тип приюта: для птиц</string>
+	<string name="poi_animal_shelter_dog">Собаки</string>
+	<string name="poi_animal_shelter_cat">Кошки</string>
+	<string name="poi_animal_shelter_dog_cat">Собаки и кошки</string>
+	<string name="poi_animal_shelter_bird">Птицы</string>
+	<string name="poi_animal_shelter_wildlife">Дикие животные</string>
+	<string name="poi_animal_shelter_horse">Лошади</string>
+	<string name="poi_animal_shelter_mammal">Млекопитающие</string>
+	<string name="poi_animal_shelter_fish">Рыбы</string>
 
 	<string name="poi_shower">Душ</string>
 
@@ -3429,5 +3433,16 @@
 	<string name="poi_generator_output_electricity_no">Не вырабатывает электричество</string>
 
 	<string name="poi_owner">Владелец</string>
+
+	<string name="poi_animal_shelter_type">Принимаются животные</string>
+	<string name="poi_animal_shelter_purpose">Цель содержания</string>
+
+	<string name="poi_animal_shelter_purpose_adoption_yes">Долговременная опека: да</string>
+	<string name="poi_animal_shelter_purpose_adoption_no">Долговременная опека: нет</string>
+	<string name="poi_animal_shelter_purpose_release_yes">Реабилитация и выпуск: да</string>
+	<string name="poi_animal_shelter_purpose_release_no">Реабилитация и выпуск: нет</string>
+
+	<string name="poi_spaceport">Космодром</string>
+
 
 </resources>

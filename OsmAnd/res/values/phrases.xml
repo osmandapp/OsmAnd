@@ -89,6 +89,8 @@
 	<string name="poi_zoo_type">Type</string>
 	<string name="poi_motorcycle_services">Services</string>
 	<string name="poi_motorcycle_type">Motorcycle type</string>
+	<string name="poi_animal_shelter_type">Animals accepted</string>
+	<string name="poi_animal_shelter_purpose">Purpose</string>
 
 <!--  categories -->
 	<string name="poi_shop">Store</string>
@@ -1386,10 +1388,14 @@
 	<string name="poi_enforcement_toll">Enforcement: toll</string>
 
 	<string name="poi_animal_shelter">Animal shelter</string>
-	<string name="poi_animal_shelter_dog">Shelter type: dog</string>
-	<string name="poi_animal_shelter_cat">Shelter type: cat</string>
-	<string name="poi_animal_shelter_dog_cat">Shelter type: dog, cat</string>
-	<string name="poi_animal_shelter_bird">Shelter type: bird</string>
+	<string name="poi_animal_shelter_dog">Dogs</string>
+	<string name="poi_animal_shelter_cat">Catc</string>
+	<string name="poi_animal_shelter_dog_cat">Dogs, cats</string>
+	<string name="poi_animal_shelter_bird">Birds</string>
+	<string name="poi_animal_shelter_wildlife">Wildlife</string>
+	<string name="poi_animal_shelter_horse">Horses</string>
+	<string name="poi_animal_shelter_mammal">Mammals</string>
+	<string name="poi_animal_shelter_fish">Fishes</string>
 
 	<string name="poi_seats">Seats</string>
 	<string name="poi_backrest_yes">Backrest: yes</string>
@@ -3398,5 +3404,12 @@
 	<string name="poi_generator_output_electricity_no">Output (electricity): no</string>
 
 	<string name="poi_owner">Owner</string>
+
+	<string name="poi_animal_shelter_purpose_adoption_yes">Adoption: yes</string>
+	<string name="poi_animal_shelter_purpose_adoption_no">Adoption: no</string>
+	<string name="poi_animal_shelter_purpose_release_yes">Release: yes</string>
+	<string name="poi_animal_shelter_purpose_release_no">Release: no</string>
+
+	<string name="poi_spaceport">Spaceport</string>
 
 </resources>
