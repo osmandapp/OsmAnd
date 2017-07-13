@@ -43,6 +43,11 @@ import net.osmand.plus.dashboard.DashLocationFragment;
 import net.osmand.util.Algorithms;
 import net.osmand.util.MapUtils;
 
+import static android.text.InputType.TYPE_CLASS_NUMBER;
+import static android.text.InputType.TYPE_NUMBER_FLAG_DECIMAL;
+import static android.text.InputType.TYPE_TEXT_FLAG_CAP_CHARACTERS;
+import static android.text.InputType.TYPE_TEXT_FLAG_NO_SUGGESTIONS;
+
 public class QuickSearchCoordinatesFragment extends DialogFragment implements OsmAndCompassListener, OsmAndLocationListener {
 
 	public static final String TAG = "QuickSearchCoordinatesFragment";
@@ -503,6 +508,16 @@ public class QuickSearchCoordinatesFragment extends DialogFragment implements Os
 		}
 	}
 
+	private void setInputTypeDependingOnFormat(EditText[] editTexts) {
+		for (EditText et : editTexts) {
+			if (currentFormat == PointDescription.FORMAT_DEGREES) {
+				et.setInputType(TYPE_CLASS_NUMBER | TYPE_NUMBER_FLAG_DECIMAL);
+			} else {
+				et.setInputType(TYPE_TEXT_FLAG_CAP_CHARACTERS | TYPE_TEXT_FLAG_NO_SUGGESTIONS);
+			}
+		}
+	}
+
 	private boolean applyFormat(int format, boolean forceApply) {
 		if (currentFormat != format || forceApply) {
 			int prevFormat = currentFormat;
@@ -510,7 +525,8 @@ public class QuickSearchCoordinatesFragment extends DialogFragment implements Os
 			formatEdit.setText(PointDescription.formatToHumanString(getMyApplication(), currentFormat));
 			final EditText latEdit = ((EditText) view.findViewById(R.id.latitudeEditText));
 			final EditText lonEdit = ((EditText) view.findViewById(R.id.longitudeEditText));
-			updateControlsVisibility();
+            setInputTypeDependingOnFormat(new EditText[]{latEdit, lonEdit});
+            updateControlsVisibility();
 			if (currentFormat == PointDescription.UTM_FORMAT) {
 				final EditText northingEdit = ((EditText) view.findViewById(R.id.northingEditText));
 				final EditText eastingEdit = ((EditText) view.findViewById(R.id.eastingEditText));

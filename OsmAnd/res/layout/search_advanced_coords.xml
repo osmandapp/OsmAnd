@@ -92,7 +92,6 @@
                                 android:layout_height="wrap_content"
                                 android:hint="@string/navigate_point_latitude"
                                 android:imeOptions="actionNext"
-                                android:inputType="textCapCharacters|textNoSuggestions"
                                 tools:text="22.12345"/>
 
                         </android.support.design.widget.TextInputLayout>
@@ -139,7 +138,6 @@
                                 android:layout_height="wrap_content"
                                 android:hint="@string/navigate_point_longitude"
                                 android:imeOptions="actionDone"
-                                android:inputType="textCapCharacters|textNoSuggestions"
                                 tools:text="22.12345"/>
 
                         </android.support.design.widget.TextInputLayout>
