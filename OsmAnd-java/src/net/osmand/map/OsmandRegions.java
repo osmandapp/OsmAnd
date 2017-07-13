@@ -1,6 +1,7 @@
 package net.osmand.map;
 
 
+import net.osmand.OsmAndCollator;
 import net.osmand.PlatformUtil;
 import net.osmand.ResultMatcher;
 import net.osmand.binary.BinaryMapDataObject;
@@ -664,9 +665,11 @@ public class OsmandRegions {
 			}
 		}
 		Comparator<WorldRegion> nameComparator = new Comparator<WorldRegion>() {
+			final net.osmand.Collator collator = OsmAndCollator.primaryCollator();
+
 			@Override
 			public int compare(WorldRegion w1, WorldRegion w2) {
-				return w1.getLocaleName().compareTo(w2.getLocaleName());
+				return collator.compare(w1.getLocaleName(), w2.getLocaleName());
 			}
 		};
 		sortSubregions(world, nameComparator);
