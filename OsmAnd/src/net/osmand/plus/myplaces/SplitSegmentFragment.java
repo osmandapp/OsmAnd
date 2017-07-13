@@ -145,15 +145,13 @@ public class SplitSegmentFragment extends OsmAndListFragment {
                         previousYPos = currentYPos;
                     }
 
-                    if (previousYPos - currentYPos < headerView.getHeight()) {
-                        float yTranslationToSet = headerView.getTranslationY() + (previousYPos - currentYPos);
-                        if (yTranslationToSet < 0 && yTranslationToSet > -headerView.getHeight()) {
-                            headerView.setTranslationY(yTranslationToSet);
-                        } else if (yTranslationToSet < -headerView.getHeight()) {
-                            headerView.setTranslationY(-headerView.getHeight());
-                        } else if (yTranslationToSet > 0) {
-                            headerView.setTranslationY(0);
-                        }
+                    float yTranslationToSet = headerView.getTranslationY() + (previousYPos - currentYPos);
+                    if (yTranslationToSet < 0 && yTranslationToSet > -headerView.getHeight()) {
+                        headerView.setTranslationY(yTranslationToSet);
+                    } else if (yTranslationToSet < -headerView.getHeight()) {
+                        headerView.setTranslationY(-headerView.getHeight());
+                    } else if (yTranslationToSet > 0) {
+                        headerView.setTranslationY(0);
                     }
 
                     previousYPos = currentYPos;
