@@ -896,10 +896,10 @@
 	<string name="poi_fax">Fax</string>
 	<string name="facebook">Facebook</string>
 	<string name="poi_mobile">Móvil</string>
-	<string name="poi_animal_shelter_dog">Tipo de refugio: Canino</string>
-	<string name="poi_animal_shelter_cat">Tipo de refugio: Gatuno</string>
-	<string name="poi_animal_shelter_dog_cat">Tipo de refugio: Canino y gatuno</string>
-	<string name="poi_animal_shelter_bird">Tipo de refugio: Aves</string>
+	<string name="poi_animal_shelter_dog">Perros</string>
+	<string name="poi_animal_shelter_cat">Gatos</string>
+	<string name="poi_animal_shelter_dog_cat">Perros, gatos</string>
+	<string name="poi_animal_shelter_bird">Aves</string>
 <string name="poi_recycling_centre">Centro de reciclaje</string>
 	<string name="poi_recycling_container">Contenedor</string>
 	<string name="poi_recycling_glass">Vidrio</string>
