@@ -191,7 +191,7 @@ public class MapActivity extends OsmandActionBarActivity implements DownloadEven
 
 	@Override
 	public void onCreate(Bundle savedInstanceState) {
-//		setRequestedOrientation(AndroidUiHelper.getScreenOrientation(this));
+		setRequestedOrientation(AndroidUiHelper.getScreenOrientation(this));
 		overridePendingTransition(0, 0);
 		long tm = System.currentTimeMillis();
 		app = getMyApplication();
@@ -548,10 +548,6 @@ public class MapActivity extends OsmandActionBarActivity implements DownloadEven
 		if (getSupportActionBar() != null) {
 			getSupportActionBar().hide();
 		}
-		if (settings.MAP_SCREEN_ORIENTATION.get() != getRequestedOrientation()) {
-			setRequestedOrientation(settings.MAP_SCREEN_ORIENTATION.get());
-			// can't return from this method we are not sure if activity will be recreated or not
-		}
 
 		app.getLocationProvider().checkIfLastKnownLocationIsValid();
 		// for voice navigation
@@ -697,14 +693,13 @@ public class MapActivity extends OsmandActionBarActivity implements DownloadEven
 		FirstUsageWelcomeFragment.SHOW = false;
 		if (SecondSplashScreenFragment.SHOW) {
 			getSupportFragmentManager().beginTransaction().add(R.id.fragmentContainer, new SecondSplashScreenFragment(), SecondSplashScreenFragment.TAG).commitAllowingStateLoss();
+		} else {
+			setRequestedOrientation(ActivityInfo.SCREEN_ORIENTATION_UNSPECIFIED);
+			if (settings.MAP_SCREEN_ORIENTATION.get() != getRequestedOrientation()) {
+				setRequestedOrientation(settings.MAP_SCREEN_ORIENTATION.get());
+				// can't return from this method we are not sure if activity will be recreated or not
+			}
 		}
-//		else {
-//			setRequestedOrientation(ActivityInfo.SCREEN_ORIENTATION_UNSPECIFIED);
-//			if (settings.MAP_SCREEN_ORIENTATION.get() != getRequestedOrientation()) {
-//				setRequestedOrientation(settings.MAP_SCREEN_ORIENTATION.get());
-//				// can't return from this method we are not sure if activity will be recreated or not
-//			}
-//		}
 		SecondSplashScreenFragment.SHOW = false;
 	}
 

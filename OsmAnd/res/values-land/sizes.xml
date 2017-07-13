@@ -1,4 +1,7 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources>
     <dimen name="map_go_button_width">200dp</dimen>
+
+    <dimen name="splash_screen_logo_top">24dp</dimen>
+    <dimen name="splash_screen_text_bottom">48dp</dimen>
 </resources>
