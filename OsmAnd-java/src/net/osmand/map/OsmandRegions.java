@@ -1,6 +1,7 @@
 package net.osmand.map;
 
 
+import net.osmand.OsmAndCollator;
 import net.osmand.PlatformUtil;
 import net.osmand.ResultMatcher;
 import net.osmand.binary.BinaryMapDataObject;
@@ -17,7 +18,6 @@ import net.osmand.util.MapUtils;
 import java.io.File;
 import java.io.IOException;
 import java.io.RandomAccessFile;
-import java.text.Collator;
 import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.Collections;
@@ -665,7 +665,7 @@ public class OsmandRegions {
 			}
 		}
 		Comparator<WorldRegion> nameComparator = new Comparator<WorldRegion>() {
-			final Collator collator = Collator.getInstance();
+			final net.osmand.Collator collator = OsmAndCollator.primaryCollator();
 
 			@Override
 			public int compare(WorldRegion w1, WorldRegion w2) {
