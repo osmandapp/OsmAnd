@@ -416,6 +416,7 @@ public class GpxSelectionHelper {
 							save = true;
 						} else {
 							selectGpxFile(gpx, true, false);
+							processSplit();
 						}
 					} else if (obj.has(CURRENT_TRACK)) {
 						selectedGPXFiles.add(savingTrackHelper.getCurrentTrack());
@@ -451,7 +452,6 @@ public class GpxSelectionHelper {
 				ar.put(obj);
 			}
 		}
-		processSplit();
 		app.getSettings().SELECTED_GPX.set(ar.toString());
 	}
 
