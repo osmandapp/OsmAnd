@@ -1,4 +1,5 @@
-<?xml version="1.0" encoding="UTF-8" standalone="no"?><resources><string name="email">電子郵件</string>
+<?xml version='1.0' encoding='UTF-8'?>
+<resources><string name="email">電子郵件</string>
 	<string name="poi_dialog_opening_hours">打開</string>
 	<string name="poi_dialog_comment">評論</string>
 	<string name="poi_dialog_comment_default">改變POI</string>
@@ -1587,9 +1588,9 @@
     <string name="shared_string_record">记录</string>
     <string name="rendering_attr_contourColorScheme_description">等高线的色彩调配</string>
     <string name="save_track_min_distance">记录运动检测</string>
-    <string name="save_track_min_distance_descr">从最后位置的一个点设置最短距离用以记录</string>
+    <string name="save_track_min_distance_descr">过滤器：从最后位置的一个点设置最短距离用以记录</string>
     <string name="save_track_precision">记录最小的精确度</string>
-    <string name="save_track_precision_descr">过滤器：设置用来记录的最小精度点</string>
+    <string name="save_track_precision_descr">过滤器：设置记录一个点的最小精度</string>
     <string name="christmas_desc">预知圣诞节和新年假期，您可以选择显示与圣诞节关联的 POI：圣诞树、市场等等。</string>
     <string name="rendering_attr_contourColorScheme_name">等高线的颜色调配</string>
     <string name="rendering_attr_surfaceIntegrity_name">道路表面完整性</string>
@@ -1618,8 +1619,8 @@
     <string name="give_permission">授予权限</string>
     <string name="allow_access_location">允许访问到的位置</string>
     <string name="first_usage_greeting">在没有互联网连接的情况下，取得指引与探索新地点</string>
-    <string name="search_my_location">搜索我的位置</string>
-    <string name="no_update_info_desc">不检查任何有关新版本的更新与 OsmAnd 有关折扣的信息</string>
+    <string name="search_my_location">寻找我的位置</string>
+    <string name="no_update_info_desc">不检查版本更新或与 OsmAnd 有关折扣的信息</string>
     <string name="no_update_info">不显示更新</string>
     <string name="update_all_maps_now">你想现在更新所有的地图吗？</string>
     <string name="clear_tile_data">清除所有的图砖</string>
@@ -1669,7 +1670,7 @@
     <string name="access_no_destination">未设置目的地</string>
     <string name="map_widget_magnetic_bearing">磁方位</string>
     <string name="map_widget_bearing">相对方位</string>
-    <string name="access_disable_offroute_recalc">当您离开道路，不改变路线</string>
+    <string name="access_disable_offroute_recalc">当您离开道路时不重新计算路线</string>
     <string name="access_disable_offroute_recalc_descr">当您离正确的道路很远，阻止自动路线重新估算</string>
     <string name="access_disable_wrong_direction_recalc">不要改变错误方向的路线</string>
     <string name="access_disable_wrong_direction_recalc_descr">当你正朝着错误的方向行进，防止自动路线重新计算</string>
@@ -2629,4 +2630,7 @@
     <string name="average">平均</string>
     <string name="ascent_descent">升序/降序</string>
     <string name="max_min">最大/最小</string>
+    <string name="of">%2$d 中的 %1$d</string>
+    <string name="moving_time">移动时间</string>
+    <string name="min_max">最小/最大</string>
     </resources>
