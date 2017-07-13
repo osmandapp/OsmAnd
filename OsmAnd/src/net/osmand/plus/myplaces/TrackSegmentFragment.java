@@ -313,7 +313,7 @@ public class TrackSegmentFragment extends OsmAndListFragment {
 				if (groups.size() > 0) {
 					updateSplit(groups, vis.isChecked() ? sf : null);
 					if (getGpxDataItem() != null) {
-//						updateSplitInDatabase();
+						updateSplitInDatabase();
 					}
 				}
 				updateSplitIntervalView(splitIntervalView);
@@ -450,7 +450,7 @@ public class TrackSegmentFragment extends OsmAndListFragment {
 								if (groups.size() > 0) {
 									updateSplit(groups, vis.isChecked() ? sf : null);
 									if (getGpxDataItem() != null) {
-//										updateSplitInDatabase();
+										updateSplitInDatabase();
 									}
 								}
 								popup.dismiss();
@@ -472,27 +472,30 @@ public class TrackSegmentFragment extends OsmAndListFragment {
 		}
 	}
 
-//	private void updateSplitInDatabase() {
-//		int splitType = -1;
-//		double splitInterval = -1;
-//		if (selectedSplitInterval == 0) {
-//			splitType = GPXDatabase.GPX_SPLIT_TYPE_NO_SPLIT;
-//			splitInterval = 0;
-//		} else if (distanceSplit.get(selectedSplitInterval) > 0) {
-//			splitType = GPXDatabase.GPX_SPLIT_TYPE_DISTANCE;
-//			splitInterval = distanceSplit.get(selectedSplitInterval);
-//		} else if (timeSplit.get(selectedSplitInterval) > 0) {
-//			splitType = GPXDatabase.GPX_SPLIT_TYPE_TIME;
-//			splitInterval = timeSplit.get(selectedSplitInterval);
-//		}
-//		app.getGpxDatabase().updateSplit(getGpxDataItem(), splitType, splitInterval);
-//	}
+	private void updateSplitInDatabase() {
+		int splitType = 0;
+		double splitInterval = 0;
+		if (selectedSplitInterval == 0) {
+			splitType = GPXDatabase.GPX_SPLIT_TYPE_NO_SPLIT;
+			splitInterval = 0;
+		} else if (distanceSplit.get(selectedSplitInterval) > 0) {
+			splitType = GPXDatabase.GPX_SPLIT_TYPE_DISTANCE;
+			splitInterval = distanceSplit.get(selectedSplitInterval);
+		} else if (timeSplit.get(selectedSplitInterval) > 0) {
+			splitType = GPXDatabase.GPX_SPLIT_TYPE_TIME;
+			splitInterval = timeSplit.get(selectedSplitInterval);
+		}
+		app.getGpxDatabase().updateSplit(getGpxDataItem(), splitType, splitInterval);
+	}
 
 	public void updateSplitView() {
 		SelectedGpxFile sf = app.getSelectedGpxHelper().selectGpxFile(getGpx(), ((SwitchCompat)headerView.findViewById(R.id.showOnMapToggle)).isChecked(), false);
 		final List<GpxDisplayGroup> groups = getDisplayGroups();
 		if (groups.size() > 0) {
 			updateSplit(groups, ((SwitchCompat)headerView.findViewById(R.id.showOnMapToggle)).isChecked() ? sf : null);
+			if (getGpxDataItem() != null) {
+				updateSplitInDatabase();
+			}
 		}
 		updateSplitIntervalView(headerView.findViewById(R.id.split_interval_view));
 	}
