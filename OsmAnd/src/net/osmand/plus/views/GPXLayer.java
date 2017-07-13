@@ -193,7 +193,6 @@ public class GPXLayer extends OsmandMapLayer implements ContextMenuLayer.IContex
 			cache.clear();
 			currentTrackColor = view.getSettings().CURRENT_TRACK_COLOR.get();
 			if (!selectedGPXFiles.isEmpty()) {
-				selectedGpxHelper.processSplit();
 				drawSelectedFilesSegments(canvas, tileBox, selectedGPXFiles, settings);
 				canvas.rotate(-tileBox.getRotate(), tileBox.getCenterPixelX(), tileBox.getCenterPixelY());
 				if (trackChartPoints != null) {

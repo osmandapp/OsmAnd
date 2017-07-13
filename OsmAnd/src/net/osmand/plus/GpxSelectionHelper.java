@@ -451,6 +451,7 @@ public class GpxSelectionHelper {
 				ar.put(obj);
 			}
 		}
+		processSplit();
 		app.getSettings().SELECTED_GPX.set(ar.toString());
 	}
 
