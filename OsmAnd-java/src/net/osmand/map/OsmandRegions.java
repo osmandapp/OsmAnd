@@ -17,6 +17,7 @@ import net.osmand.util.MapUtils;
 import java.io.File;
 import java.io.IOException;
 import java.io.RandomAccessFile;
+import java.text.Collator;
 import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.Collections;
@@ -664,9 +665,11 @@ public class OsmandRegions {
 			}
 		}
 		Comparator<WorldRegion> nameComparator = new Comparator<WorldRegion>() {
+			final Collator collator = Collator.getInstance();
+
 			@Override
 			public int compare(WorldRegion w1, WorldRegion w2) {
-				return w1.getLocaleName().compareTo(w2.getLocaleName());
+				return collator.compare(w1.getLocaleName(), w2.getLocaleName());
 			}
 		};
 		sortSubregions(world, nameComparator);
