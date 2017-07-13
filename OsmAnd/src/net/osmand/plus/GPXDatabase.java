@@ -1,8 +1,6 @@
 package net.osmand.plus;
 
 import net.osmand.IndexConstants;
-import net.osmand.plus.GpxSelectionHelper.GpxDisplayGroup;
-import net.osmand.plus.GpxSelectionHelper.SelectedGpxFile;
 import net.osmand.plus.GPXUtilities.GPXTrackAnalysis;
 import net.osmand.plus.api.SQLiteAPI.SQLiteConnection;
 import net.osmand.plus.api.SQLiteAPI.SQLiteCursor;
@@ -455,36 +453,6 @@ public class GPXDatabase {
 			}
 		}
 		return items;
-	}
-
-	public void processSplit() {
-		List<GpxDataItem> items = getItems();
-		for (GpxDataItem dataItem : items) {
-			if (dataItem.getSplitType() != 0) {
-				GpxSelectionHelper gpxSelectionHelper = context.getSelectedGpxHelper();
-				SelectedGpxFile selectedGpxFile = gpxSelectionHelper.getSelectedFileByPath(dataItem.file.getAbsolutePath());
-				if (selectedGpxFile != null && selectedGpxFile.getGpxFile() != null) {
-					GPXUtilities.GPXFile gpxFile = selectedGpxFile.getGpxFile();
-					List<GpxDisplayGroup> groups = context.getSelectedGpxHelper().collectDisplayGroups(gpxFile);
-					if (dataItem.getSplitType() == GPX_SPLIT_TYPE_NO_SPLIT) {
-						for (GpxDisplayGroup model : groups) {
-							model.noSplit(context);
-						}
-						selectedGpxFile.setDisplayGroups(groups);
-					} else if (dataItem.getSplitType() == GPX_SPLIT_TYPE_DISTANCE) {
-						for (GpxDisplayGroup model : groups) {
-							model.splitByDistance(context, dataItem.getSplitInterval());
-						}
-						selectedGpxFile.setDisplayGroups(groups);
-					} else if (dataItem.getSplitType() == GPX_SPLIT_TYPE_TIME) {
-						for (GpxDisplayGroup model : groups) {
-							model.splitByTime(context, (int) dataItem.getSplitInterval());
-						}
-						selectedGpxFile.setDisplayGroups(groups);
-					}
-				}
-			}
-		}
 	}
 
 	public GpxDataItem getItem(File file) {
