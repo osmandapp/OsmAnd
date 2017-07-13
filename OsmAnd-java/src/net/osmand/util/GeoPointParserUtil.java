@@ -268,19 +268,19 @@ public class GeoPointParserUtil {
 
 		// http://openstreetmap.org/#map=11/34/-106
 		z = 11;
-		url = "http://openstreetmap.org/#map=" + z + "/" + ilat + "/" + ilon;
+		url = "https://openstreetmap.org/#map=" + z + "/" + ilat + "/" + ilon;
 		System.out.println("url: " + url);
 		actual = GeoPointParserUtil.parse(url);
 		assertGeoPoint(actual, new GeoParsedPoint(ilat, ilon, z));
 
 		// http://openstreetmap.org/#map=11/34.99393/-106.61568
-		url = "http://openstreetmap.org/#map=" + z + "/" + dlat + "/" + dlon;
+		url = "https://openstreetmap.org/#map=" + z + "/" + dlat + "/" + dlon;
 		System.out.println("url: " + url);
 		actual = GeoPointParserUtil.parse(url);
 		assertGeoPoint(actual, new GeoParsedPoint(dlat, dlon, z));
 
 		// http://openstreetmap.org/#11/34.99393/-106.61568
-		url = "http://openstreetmap.org/#" + z + "/" + dlat + "/" + dlon;
+		url = "https://openstreetmap.org/#" + z + "/" + dlat + "/" + dlon;
 		System.out.println("url: " + url);
 		actual = GeoPointParserUtil.parse(url);
 		assertGeoPoint(actual, new GeoParsedPoint(dlat, dlon, z));
@@ -334,19 +334,19 @@ public class GeoPointParserUtil {
 
 		// http://openstreetmap.de/zoom=11&lat=34&lon=-106
 		z = 11;
-		url = "http://openstreetmap.de/zoom=" + z + "&lat=" + ilat + "&lon=" + ilon;
+		url = "https://openstreetmap.de/zoom=" + z + "&lat=" + ilat + "&lon=" + ilon;
 		System.out.println("url: " + url);
 		actual = GeoPointParserUtil.parse(url);
 		assertGeoPoint(actual, new GeoParsedPoint(ilat, ilon, z));
 
 		// http://openstreetmap.de/zoom=11&lat=34.99393&lon=-106.61568
-		url = "http://openstreetmap.de/zoom=" + z + "&lat=" + dlat + "&lon=" + dlon;
+		url = "https://openstreetmap.de/zoom=" + z + "&lat=" + dlat + "&lon=" + dlon;
 		System.out.println("url: " + url);
 		actual = GeoPointParserUtil.parse(url);
 		assertGeoPoint(actual, new GeoParsedPoint(dlat, dlon, z));
 
 		// http://openstreetmap.de/lat=34.99393&lon=-106.61568&zoom=11
-		url = "http://openstreetmap.de/lat=" + dlat + "&lon=" + dlon + "&zoom=" + z;
+		url = "https://openstreetmap.de/lat=" + dlat + "&lon=" + dlon + "&zoom=" + z;
 		System.out.println("url: " + url);
 		actual = GeoPointParserUtil.parse(url);
 		assertGeoPoint(actual, new GeoParsedPoint(dlat, dlon, z));

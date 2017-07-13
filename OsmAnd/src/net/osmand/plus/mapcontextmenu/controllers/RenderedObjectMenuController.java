@@ -8,7 +8,6 @@ import net.osmand.plus.R;
 import net.osmand.plus.activities.MapActivity;
 import net.osmand.plus.mapcontextmenu.MenuBuilder;
 import net.osmand.plus.mapcontextmenu.MenuController;
-import net.osmand.plus.mapillary.MapillaryPlugin;
 import net.osmand.plus.osmedit.OsmEditingPlugin;
 import net.osmand.plus.render.RenderingIcons;
 import net.osmand.util.Algorithms;
@@ -90,9 +89,9 @@ public class RenderedObjectMenuController extends MenuController {
 				(renderedObject.getId() % 2 == 1 || (renderedObject.getId() >> 7) < Integer.MAX_VALUE)) {
 			String link;
 			if ((renderedObject.getId() >> 6) % 2 == 1) {
-				link = "http://www.openstreetmap.org/node/";
+				link = "https://www.openstreetmap.org/node/";
 			} else {
-				link = "http://www.openstreetmap.org/way/";
+				link = "https://www.openstreetmap.org/way/";
 			}
 			addPlainMenuItem(R.drawable.ic_action_info_dark, link + (renderedObject.getId() >> 7), true, true, null);
 		}
