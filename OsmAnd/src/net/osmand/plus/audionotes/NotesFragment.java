@@ -149,7 +149,7 @@ public class NotesFragment extends OsmAndListFragment {
 			public int compare(Recording first, Recording second) {
 				long firstTime = first.getLastModified();
 				long secondTime = second.getLastModified();
-				if (firstTime > secondTime) {
+				if (firstTime < secondTime) {
 					return 1;
 				} else if (firstTime == secondTime) {
 					return 0;
@@ -158,7 +158,6 @@ public class NotesFragment extends OsmAndListFragment {
 				}
 			}
 		});
-		Collections.reverse(items);
 	}
 
 	@Override
