@@ -26,8 +26,7 @@
                 android:layout_width="16dp"
                 android:layout_height="16dp"
                 tools:src="@drawable/ic_action_split_interval"
-                android:layout_marginBottom="12dp"
-                android:layout_marginTop="12dp"
+                android:layout_gravity="center_vertical"
                 android:layout_marginRight="12dp"/>
 
             <net.osmand.plus.widgets.TextViewEx
@@ -64,7 +63,7 @@
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:orientation="horizontal"
-            android:layout_marginTop="8dp"
+            android:layout_marginTop="7dp"
             android:layout_marginBottom="8dp">
 
             <LinearLayout
@@ -75,6 +74,7 @@
                 android:orientation="horizontal">
 
                 <ImageView
+                    android:layout_marginTop="2dp"
                     android:id="@+id/distance_or_timespan_image"
                     android:layout_width="16dp"
                     android:layout_height="16dp"
@@ -101,7 +101,7 @@
                         android:layout_width="match_parent"
                         android:layout_height="wrap_content"
                         android:background="@null"
-                        android:layout_marginTop="3dp"
+                        android:layout_marginTop="1dp"
                         tools:text="@string/distance"
                         android:textColor="?android:attr/textColorSecondary"
                         android:textSize="@dimen/default_split_segments_sub"/>
@@ -118,6 +118,7 @@
                 android:orientation="horizontal">
 
                 <ImageView
+                    android:layout_marginTop="2dp"
                     android:id="@+id/start_time_image"
                     android:layout_width="16dp"
                     android:layout_height="16dp"
@@ -134,17 +135,17 @@
                         android:layout_width="match_parent"
                         android:layout_height="wrap_content"
                         android:background="@null"
-                        tools:text="15:24:58"
                         android:textColor="?android:attr/textColorPrimary"
+                        android:textSize="@dimen/default_split_segments_data"
                         osmand:typeface="@string/font_roboto_medium"
-                        android:textSize="@dimen/default_split_segments_data"/>
+                        tools:text="15:24:58" />
 
                     <TextView
                         android:id="@+id/start_date_value"
                         android:layout_width="match_parent"
                         android:layout_height="wrap_content"
                         android:background="@null"
-                        android:layout_marginTop="3dp"
+                        android:layout_marginTop="1dp"
                         tools:text="Aud 8, 2016"
                         android:textColor="?android:attr/textColorSecondary"
                         android:textSize="@dimen/default_split_segments_sub"/>
@@ -160,6 +161,7 @@
                 android:orientation="horizontal">
 
                 <ImageView
+                    android:layout_marginTop="2dp"
                     android:id="@+id/end_time_image"
                     android:layout_width="16dp"
                     android:layout_height="16dp"
@@ -186,7 +188,7 @@
                         android:layout_width="match_parent"
                         android:layout_height="wrap_content"
                         android:background="@null"
-                        android:layout_marginTop="3dp"
+                        android:layout_marginTop="1dp"
                         tools:text="Aug 8, 2016"
                         android:textColor="?android:attr/textColorSecondary"
                         android:textSize="@dimen/default_split_segments_sub"/>
@@ -209,7 +211,7 @@
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:orientation="horizontal"
-            android:layout_marginTop="8dp"
+            android:layout_marginTop="7dp"
             android:layout_marginBottom="8dp">
 
             <LinearLayout
@@ -220,6 +222,7 @@
                 android:orientation="horizontal">
 
                 <ImageView
+                    android:layout_marginTop="2dp"
                     android:id="@+id/average_altitude_image"
                     android:layout_width="16dp"
                     android:layout_height="16dp"
@@ -245,7 +248,7 @@
                         android:layout_width="match_parent"
                         android:layout_height="wrap_content"
                         android:background="@null"
-                        android:layout_marginTop="3dp"
+                        android:layout_marginTop="1dp"
                         android:text="@string/average"
                         android:textColor="?android:attr/textColorSecondary"
                         android:textSize="@dimen/default_split_segments_sub"/>
@@ -262,6 +265,7 @@
                 android:orientation="horizontal">
 
                 <ImageView
+                    android:layout_marginTop="2dp"
                     android:id="@+id/altitude_range_image"
                     android:layout_width="16dp"
                     android:layout_height="16dp"
@@ -307,9 +311,9 @@
                         android:id="@+id/textView4"
                         android:layout_width="match_parent"
                         android:layout_height="wrap_content"
-                        android:layout_marginTop="3dp"
+                        android:layout_marginTop="1dp"
                         android:background="@null"
-                        android:text="@string/range_min_max"
+                        android:text="@string/min_max"
                         android:textColor="?android:attr/textColorSecondary"
                         android:textSize="@dimen/default_split_segments_sub" />
 
@@ -324,6 +328,7 @@
                 android:orientation="horizontal">
 
                 <ImageView
+                    android:layout_marginTop="2dp"
                     android:id="@+id/ascent_descent_image"
                     android:layout_width="16dp"
                     android:layout_height="16dp"
@@ -369,7 +374,7 @@
                         android:layout_width="match_parent"
                         android:layout_height="wrap_content"
                         android:background="@null"
-                        android:layout_marginTop="3dp"
+                        android:layout_marginTop="1dp"
                         android:text="@string/ascent_descent"
                         android:textColor="?android:attr/textColorSecondary"
                         android:textSize="@dimen/default_split_segments_sub"/>
@@ -392,7 +397,7 @@
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:orientation="horizontal"
-            android:layout_marginTop="8dp"
+            android:layout_marginTop="7dp"
             android:layout_marginBottom="8dp">
 
             <LinearLayout
@@ -403,6 +408,7 @@
                 android:orientation="horizontal">
 
                 <ImageView
+                    android:layout_marginTop="2dp"
                     android:id="@+id/moving_time_image"
                     android:layout_width="16dp"
                     android:layout_height="16dp"
@@ -428,7 +434,7 @@
                         android:layout_width="match_parent"
                         android:layout_height="wrap_content"
                         android:background="@null"
-                        android:layout_marginTop="3dp"
+                        android:layout_marginTop="1dp"
                         android:text="@string/moving_time"
                         android:textColor="?android:attr/textColorSecondary"
                         android:textSize="@dimen/default_split_segments_sub"/>
@@ -445,6 +451,7 @@
                 android:orientation="horizontal">
 
                 <ImageView
+                    android:layout_marginTop="2dp"
                     android:id="@+id/average_speed_image"
                     android:layout_width="16dp"
                     android:layout_height="16dp"
@@ -470,7 +477,7 @@
                         android:layout_width="match_parent"
                         android:layout_height="wrap_content"
                         android:background="@null"
-                        android:layout_marginTop="3dp"
+                        android:layout_marginTop="1dp"
                         android:text="@string/average"
                         android:textColor="?android:attr/textColorSecondary"
                         android:textSize="@dimen/default_split_segments_sub"/>
@@ -486,6 +493,7 @@
                 android:orientation="horizontal">
 
                 <ImageView
+                    android:layout_marginTop="2dp"
                     android:id="@+id/max_speed_image"
                     android:layout_width="16dp"
                     android:layout_height="16dp"
@@ -532,7 +540,7 @@
                         android:layout_width="match_parent"
                         android:layout_height="wrap_content"
                         android:background="@null"
-                        android:layout_marginTop="3dp"
+                        android:layout_marginTop="1dp"
                         android:text="@string/max_min"
                         android:textColor="?android:attr/textColorSecondary"
                         android:textSize="@dimen/default_split_segments_sub"/>

@@ -1,7 +1,6 @@
-<?xml version='1.0' encoding='UTF-8'?>
-<resources>
+<?xml version="1.0" encoding="UTF-8" standalone="no"?><resources>
     <string name="about_version">Verzija:</string>
-    <string name="about_settings">Oko</string>
+    
     <string name="about_settings_descr">Verzija info, licence, članovi projekta</string>
     
     <string name="av_photo_play_sound_descr">Izaberite da li da se čuje zvuk prilikom snimanja fotografija</string>
@@ -17,7 +16,7 @@
     <string name="shared_string_or">ili</string>
 	<string name="auto_zoom_none">Bez auto-zuma</string>
 	<string name="base_world_map">Osnovna karta sveta</string>
-	<string name="tip_map_styles">Stilovi mapa</string>
+	
 	<string name="local_index_tile_data_expire">Ističe(minuta): %1$s</string>
     <string name="local_index_tile_data_maxzoom">Maksimalno uveličanje: %1$s</string>
     <string name="edit_tilesource_elliptic_tile">Ekliptični prikaz zemljine kugle</string>
@@ -49,7 +48,7 @@
     <string name="context_menu_item_directions_from">Uputstvo od</string>
     <string name="route_descr_map_location">Karta : </string>
     <string name="route_descr_lat_lon">Šir %1$.3f, duž %2$.3f</string>
-    <string name="route_descr_current_location">Trenutna pozicija</string>
+    
     <string name="route_to">Do:</string>
     <string name="route_via">Preko:</string>
     <string name="route_from">Iz:</string>
@@ -72,7 +71,7 @@
     <string name="distance_measurement_start_editing">Počnite uređivanje</string>
     <string name="distance_measurement_finish_editing">Završi uređivanje</string>
     <string name="distance_measurement_clear_route">Obrišite sve tačke</string>
-    <string name="distance_measurement_save_gpx">Sačuvaj kao GPX</string>
+    
     <string name="distance_measurement_load_gpx">Otvori postojeći GPX</string>
     <string name="wait_current_task_finished">Molimo sačekajte dok se ne završi trenutni zadatak</string>
     <string name="use_kalman_filter_compass">Koristite Kalman filter</string>
@@ -102,20 +101,20 @@
     <string name="download_roads_only_item">Samo putevi</string>
     <string name="download_srtm_maps">izohipse</string>
     <string name="rendering_attr_noAdminboundaries_name">Sakrij granice</string>
-	<string name="tip_altitude_offset">Korekcija nadmorske visine</string>
+	
 	<string name="map_widget_max_speed">Ograničenje brzine</string>
     <string name="monitoring_control_start">GPX</string>
     <string name="no_buildings_found">Nema pronađenih objekata.</string>
     <string name="incremental_search_city">Traži grad inkrementalno</string>
     <string name="search_villages_and_postcodes">Pretraga sela/Poštanski kod</string>
-	<string name="tip_rotation_switching">Orjentacija mape</string>
+	
 	<string name="tip_day_night_mode">Dnevni/noćni režim</string>
-	<string name="tip_osm_improve">Poboljšanje OSM podataka</string>
+	
 	<string name="tip_navigation">Navigacija</string>
 	<string name="native_library_not_supported">Nativna biblioteka nije podržana na ovom uređaju .</string>
 	<string name="init_native_library">Pokretanje nativne biblioteke…</string>
 	<string name="choose_auto_follow_route">Autocentriranje mape</string>
-	<string name="auto_follow_route_never">Nikada</string>
+	
 	<string name="pref_vector_map">Podešavanje vektorske mapa</string>
 	<string name="city_type_suburb">Predgrađe</string>
 	<string name="city_type_village">Selo</string>
@@ -169,7 +168,7 @@
 	<string name="gpx_files_not_found">GPX datoteke se ne nalaze u direktorijumu</string>
 	<string name="error_reading_gpx">Greška pri čitanju GPX podataka</string>
 	
-	<string name="osb_bug_name">Greška</string>
+	
 	<string name="poi_context_menu_modify">Izmena POI</string>
 	<string name="poi_context_menu_delete">Brisanje POI</string>
 	<string name="rotate_map_none_opt">Bez rotacije (sever je gore)</string>
@@ -189,7 +188,7 @@
 	<string name="auto_follow_location_enabled">Auto-centriranje karte tokom upotrebe.</string>
 	<string name="day_night_info_description">Izlazak sunca: %1$s \nZalazak sunca: %2$s</string>
 	<string name="day_night_info">Dan/noć informacije</string>
-	<string name="map_widget_day_night">Dnevna/noćna mapa</string>
+	
 	<string name="map_widget_renderer">Stil mape</string>
 	
 	<string name="avoid_in_routing_title">Izbegavati…</string>
@@ -201,7 +200,7 @@
 	<string name="rotate_map_to_bearing_descr">Odaberite poravnavanje ekrana mape</string>
 	<string name="show_route">Detalji rute</string>
 	<string name="poi_namefinder_query_empty">Uneti upit za pretragu POI</string>
-	<string name="layer_transport_route">Ruta transporta</string>
+	
 	<string name="layer_osm_bugs">Dnevnik grešaka OSM-a na mreži</string>
 	<string name="layer_poi">POI…</string>
 	<string name="context_menu_item_search_poi">Pretraga POI</string>
@@ -211,7 +210,7 @@
 	<string name="gps_provider">GPS</string>
 	<string name="int_seconds">sekunde</string>
 	<string name="int_min">min.</string>
-	<string name="tip_faq_t">Molimo Vas da posetite sledeći link https://code.google.com/p/osmand/wiki/FAQ da vidite najčešće postavljana pitanja.</string>
+	
     <string name="tip_faq">Najčešće postavljana pitanja</string>
     <string name="max_speed_none">nijedan</string>
     <string name="stop_routing_confirm">Da li ste sigurni da želite da prekinete navigaciju?</string>
@@ -231,7 +230,7 @@
     <string name="dash_download_new_one">Preuzmi novu kartu</string>
     <string name="dash_download_manage">Upravljajte</string>
     <string name="map_locale">Jezik karte</string>
-    <string name="application_dir_change_warning2">Da li želite da Osmand umnoži i svoje podatke na novo mesto? Izaberite „Ne“ da bi Osmand samo napravio i koristio novu fasciklu.</string>
+    
     <string name="navigate_point_zone">Oblast</string>
     <string name="download_tab_downloads">Sva preuzimanja</string>
     <string name="download_tab_updates">Nadogradnje</string>
@@ -241,7 +240,7 @@
     <string name="everything_up_to_date">Sve datoteke su sveže</string>
     <string name="use_opengl_render">Koristi OpenGL za prikaz</string>
     <string name="use_opengl_render_descr">Koristi hardversko ubrzanje OpenGL-a za prikaz (možda ne radi na nekim uređajima)</string>
-    <string name="osmo_use_https_descr">Koristi bezbednu vezu sa serverom</string>
+    
     <string name="osmo_use_https">Koristi HTTPS</string>
 	
 	<string name="map_update">Dostupne su nadogradnje %1$s karata</string>
@@ -257,7 +256,7 @@
 <string name="search_position_current_location_search">Pretraga položaja…</string>
 	<string name="search_position_current_location_found">Položaj (pronađen)</string>
 	<string name="search_position_favorites">Omiljeno…</string>
-	<string name="search_position_current_location">Trenutni položaj…</string>
+	
 	<string name="search_position_map_view">Središte trenutne mape</string>
 	<string name="select_search_position">Izvor:</string>
 	<string name="context_menu_item_search">Traži obližnje</string>
@@ -272,10 +271,10 @@
 	<string name="favourites_delete_multiple_succesful">Omiljena tačka(e) je uspešno izbrisana.</string>
 	<string name="favorite_friends_category">Prijatelji</string>
 	<string name="favorite_places_category">Mesta</string>
-	<string name="favorite_default_category">Ostalo</string>
+	
 	<string name="shared_string_name">Ime</string>
 	<string name="favourites_edit_dialog_category">Vrsta</string>
-	<string name="vector_map_not_needed">Ne, hvala</string>
+	
 	<string name="basemap_missing">Osnovna mapa sveta (koja pokriva ceo svet na malom uveličanju) nedostaje. Molim, preuzmite World_basemap_x.obf radi celokupnosti sredine.</string>
 	<string name="local_index_installed">Izdanje</string>
 	<string name="local_index_no_items_to_do">Nema stavki za %1$s</string>
@@ -301,7 +300,7 @@
 	<string name="map_text_size">Veličina pisma na mapi</string>
 	<string name="trace_rendering">Podaci o otklonu grešaka prikaza</string>
 	<string name="trace_rendering_descr">Prikazuj učinak prikaza</string>
-	<string name="tip_recent_changes">Skorašnje izmene</string>
+	
 	<string name="voice_not_use">Ne koristi</string>
 	
 	<string name="installing_new_resources">Raspakujem nove podatke…</string>
@@ -389,7 +388,7 @@
     <string name="points">Tačke</string>
     
     <string name="shared_string_my_location">Moj položaj</string>
-    <string name="osm_editing_manage">Upravljajte</string>
+    
     <string name="home_button">Kuća</string>
     <string name="rendering_attr_subwayMode_name">Linije metroa</string>
     <string name="search_radius_proximity">U blizini</string>

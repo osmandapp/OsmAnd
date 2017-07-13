@@ -1180,7 +1180,7 @@
     <string name="disable_complex_routing_descr">Dezactivează rutarea în 2 faze pentru navigarea auto</string>
     <string name="disable_complex_routing">Dezactivează rutarea complexă</string>
     <string name="amenity_type_seamark">Baliză</string>
-    <string name="route_is_too_long">Rutarea offline OsmAnd poate dura foarte mult timp (sau uneri nu funcționează) pentru puncte la distanța mai mare de 200km. Este posibil să doriți să adăugați puncte intermediare pentru o performanță mai bună.</string>
+    
 	<string name="traffic_warning_speed_limit">Limită viteză</string>
     <string name="traffic_warning_border_control">Control graniță</string>
     <string name="traffic_warning_payment">Cabina de taxă</string>

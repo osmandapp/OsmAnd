@@ -1,5 +1,4 @@
-<?xml version='1.0' encoding='UTF-8'?>
-<resources>
+<?xml version="1.0" encoding="UTF-8" standalone="no"?><resources>
     <string name="rendering_attr_roadColors_description">Velg fargeskjema for veier:</string>
     <string name="rendering_attr_roadColors_name">Veifargeskjema</string>
     <string name="map_widget_show_destination_arrow">Vis retning til målet</string>
@@ -620,7 +619,7 @@
     <string name="edit_tilesource_url_to_load">URL</string>
     <string name="edit_tilesource_choose_existing">Velg eksisterende…</string>
     <string name="maps_define_edit">Definer/rediger…</string>
-    <string name="route_is_too_long">OsmAnd offline ruteplanlegging kan ta veldig lang tid (eller ikke virke noen ganger) for punkter mere enn 200km fra hverandre. Man kan da legge til mellomliggende reisemål for bedre ytelse.</string>
+    
     <string name="auto_zoom_none">Ingen auto-zoom</string>
     <string name="auto_zoom_close">Nært hold</string>
     <string name="auto_zoom_far">Middels hold</string>
@@ -1694,7 +1693,7 @@
     <string name="confirmation_to_delete_history_items">Vil du fjerne de valgte elementene fra historikken?</string>
     <string name="show_something_on_map">Vis %1$s på kartet</string>
     <string name="dist_away_from_my_location">Søk %1$s unna</string>
-    <string name="show_on_map">Vis på kartet</string>
+    
     <string name="share_history_subject">" delt via OsmAnd"</string>
     <string name="rendering_attr_horseRoutes_name">Hesteruter</string>
     <string name="world_ski_missing">For å vise skikart må det spesielle offline-kartet lastes ned</string>
@@ -2147,7 +2146,7 @@ Representerer området: %1$s x %2$s</string>
     <string name="shared_string_move">Flytt</string>
     <string name="shared_string_tracks">Spor</string>
     <string name="routing_attr_driving_style_name">Kjørestil</string>
-    <string name="routing_attr_driving_style_description">Trygg, rask eller balansert kjøring</string>
+    
     <string name="shared_string_time">Tid</string>
     <string name="total_distance">Total distanse</string>
     <string name="srtm_color_scheme">Fargevalg</string>

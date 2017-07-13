@@ -66,7 +66,6 @@
 	<dimen name="map_small_button_size">44dp</dimen>
 	<dimen name="map_small_button_margin">5dp</dimen>
 
-	<dimen name="map_ruler_radius">100dp</dimen>
 	<dimen name="map_ruler_width">120dp</dimen>
 	<dimen name="map_ruler_bottom_margin">9dp</dimen>
 	<dimen name="map_alarm_size">78dp</dimen>
@@ -134,9 +133,9 @@
     <dimen name="default_sub_text_size">12sp</dimen>
 	<dimen name="welcome_header_text_size">23sp</dimen>
 
-	<dimen name="default_split_segments_overview">12sp</dimen>
-	<dimen name="default_split_segments_data">12sp</dimen>
-	<dimen name="default_split_segments_sub">9sp</dimen>
+	<dimen name="default_split_segments_overview">13sp</dimen>
+	<dimen name="default_split_segments_data">13sp</dimen>
+	<dimen name="default_split_segments_sub">10sp</dimen>
 
 	<dimen name="dialog_header_text_size">20sp</dimen>
 </resources>

@@ -1,5 +1,4 @@
-<?xml version='1.0' encoding='UTF-8'?>
-<resources>
+<?xml version="1.0" encoding="UTF-8" standalone="no"?><resources>
 
     <string name="layer_map_appearance">Configurar pantalla</string>
     <string name="show_lanes">Carriles</string>
@@ -962,79 +961,7 @@ Tanto la ubicación como el tiempo de estacionamiento se muestran en el panel de
     <string name="item_unchecked">desmarcado</string>
     <string name="shared_string_map">Mapa</string>
     <string name="access_arrival_time">Hora de llegada</string>
-    <string name="osmand_extended_description_4000_chars">"
-OsmAnd (OSM Automated Navigation Directions, o traducido al español, Guía de navegación automatizada OSM) es un mapa y una aplicación de navegación con acceso a datos de todo el mundo, de alta calidad y gratuitos de OpenStreetMap (OSM). Todos los datos de los mapas se pueden almacenar en la tarjeta de memoria del dispositivo para su uso sin conexión. A través del GPS de su dispositivo, OsmAnd ofrece avisos de navegación, visuales y de voz, para el automóvil, bicicleta y el peatón. Todas las funciones principales funcionan tanto conectado como desconectado (no necesita Internet).
-
-OsmAnd+ es la versión de pago de la aplicación. Comprándola da soporte al proyecto, financia el desarrollo de nueva características y obtiene las últimas actualizaciones. Puede probar la aplicación antes de comprarla instalando la versión libre llamada OsmAnd.
-
- Algunas de las características principales:
-
-Navegación:
-- Funciona con conexión (rápido) o sin conexión (sin cargos de roaming cuando está en el extranjero)
-- Avisos por voz giro-a-giro (voces grabadas y sintetizadas)
-- Indicaciones de carril opcional, visualización del nombre de las calles y tiempo estimado de llegada
-- Soporta destinos intermedios en su itinerario (ruta)
-- Recalcula automáticamente la ruta cada vez que se desvía
-- Busca lugares por dirección, por tipo (p.e: restaurante, hotel, gasolinera, museo), o mediante coordenadas geográficas
-
-Visualización:
-- Muestra su posición y orientación en el mapa
-- Orienta el mapa según la brújula o el sentido del movimiento
-- Guarda sus lugares más importantes como favoritos
-- Muestra PDIs (puntos de interés) a su alrededor
-- Puede mostrar mapas especializados en línea
-- Puede mostrar imágenes de satélite (de Bing)
-- Puede mostrar superposiciones diferentes como trazas GPX de navegación/turismo y mapas adicionales con transparencia personalizable
-- Muestra los nombres de los lugares en inglés, idioma local o transcripción fonética
-
-Usa datos de OpenStreetMap y Wikipedia:
-- Información de alta calidad a partir de los mejores proyectos colaborativos del mundo
-- Dispone de mapas globales de OpenStreetMap, según el país o región
-- Puntos de interés de Wikipedia, ideal para hacer visitas turísticas
-- Descarga ilimitada gratuita, directamente desde la aplicación
-- Mapas siempre actualizados (al menos una vez al mes)
-- Mapas vectoriales compactos sin conexión
-- Selección entre mapas completos o sólo la red de carreteras (ejemplo: el mapa completo de Japón es de 700 MB y sólo 200 MB para la red de carreteras)
-- También admite teselas de mapas en línea o almacenadas localmente
-
-Características de seguridad:
-- Conmutación automática de la vista día/noche
-- Muestra opcionalmente límites de velocidad con recordatorio si se excede
-- Acercamiento opcional del mapa variable dependiente de su velocidad
-- Comparte su ubicación para que sus amigos le puedan encontrar
-
-Características para bicicletas y peatones:
-- Los mapas incluyen caminos a pie, sendas y vías para bicicletas, ideal para actividades al aire libre
-- Navegación especial y modos de visualización para bicicletas y peatones
-- Paradas de transporte público (autobús, tranvía, tren) opcionales, incluidos los nombres de líneas
-- Grabación opcional del recorrido a un archivo GPX local o a servicios en línea
-- Muestra la velocidad y altitud opcionalmente
-- Muestra curvas de nivel y relieve sombreado (a través de un complemento adicional)
-
-Contribuir directamente a OpenStreetMap:
-- Informar de los errores del mapa
-- Subir rutas GPX a OSM directamente desde la aplicación
-- Añadir puntos de interés y subirlos directamente a OSM (o posteriormente si está desconectado)
-- Grabación de viaje opcional también en segundo plano (mientras el dispositivo está en modo reposo)
-
-OsmAnd es de código abierto y se está desarrollado activamente. Todo el mundo puede contribuir a la aplicación informando de fallos, mejorando las traducciones, o codificando nuevas características. El proyecto se encuentra en un estado muy animado con mejoras continuas gracias a todas estas formas de interacción entre usuarios y desarrolladores. El avance del proyecto también necesita de contribuciones financieras para pagar el desarrollo, codificación y pruebas de nuevas funcionalidades. Al comprar OsmAnd+ está ayudando a que la aplicación sea aún más impresionante! También es posible financiar nuevas características específicas, o hacer una donación general a osmand.net.
-
-
-Cobertura y calidad aproximadas del mapa:
-- Europa Occidental: ****
-- Europa del Este: ***
-- Rusia: ***
-- América del Norte: ***
-- América del Sur: **
-- Asia: **
-- Japón y Corea: ***
-- Oriente Medio: **
-- África: **
-- Antártida: *
-
-La lista de países incluidos (¡prácticamente todo el mundo!):
-Afganistán, Albania, Alemania, Andorra, Angola, Anguila, Antigua y Barbuda, Antillas Holandesas, Arabia Saudita, Argelia, Argentina, Armenia, Aruba, Australia, Austria, Azerbaiyán, Bahamas, Bahrein, Bangladesh, Barbados, Bélgica, Belice, Benín, Bermuda, Bielorrusia, Bolivia, Bonaire, Bosnia y Herzegovina, Botsuana, Brasil, Brunei, Bulgaria, Burkina Faso, Burundi, Bután, Cabo Verde, Camboya, Camerún, Canadá, Chad, Chile, China, Chipre, Colombia, Comoras, Congo, Corea del Norte, Corea del Sur, Costa de Marfil, Costa Rica, Croacia, Cuba, Curazao, Dinamarca, Djibouti, Dominica, Ecuador, Egipto, El Salvador, El Vaticano, Emiratos Árabes Unidos, Eritrea, Eslovaquia, Eslovenia, España, Estados Unidos de América, Estonia, Etiopía, Fiji, Filipinas, Finlandia, Francia, Gabón, Gambia, Georgia, Georgia del Sur, Ghana, Gibraltar, Granada, Grecia, Groenlandia, Guadalupe, Guam, Guatemala, Guayana Francesa, Guernsey, Guinea, Guinea-Bissau, Guinea Ecuatorial, Guyana, Haití, Honduras, Hong Kong, Hungría, India, Indonesia, Irán, Iraq, Irlanda, Isla de Man, Islandia, Islas Vírgenes Británicas, Israel, Italia, Jamaica, Japón, Jersey, Jordania, Kazajstán, Kenya, Kirguistán, Kiribati, Kuwait, Laos, Lesotho, Letonia, Líbano, Liberia, Libia, Liechtenstein, Lituania, Luxemburgo, Macao, Macedonia, Madagascar, Malasia, Malawi, Maldivas, Malí, Malta, Marruecos, Martinica, Mauricio, Mauritania, Mayotte, México, Micronesia, Moldavia, Mónaco, Mongolia, Montenegro, Montserrat, Mozambique, Myanmar, Namibia, Nauru, Nepal, Nicaragua, Níger, Nigeria, Noruega, Nueva Caledonia, Nueva Zelanda, Omán, Países Bajos, Pakistán, Palau, Panamá, Papúa Nueva Guinea, Paraguay, Perú, Polinesia Francesa, Polonia, Portugal, Puerto Rico, Qatar, Reino Unido, República Centroafricana, República Checa, República Dominicana, Ruanda, Rumanía, Rusia, Sahara Occidental, Saint-Barthelemy, Saint Helena, Saint Kitts y Nevis, Samoa, San Marino, San Martin, San Pedro y Miquelón, Santa Lucía, San Vicente y las Granadinas, Senegal, Serbia, Seychelles, Sierra Leona, Singapur, Siria, Somalia, Sri Lanka, Sudáfrica, Sudán, Sudán del Sur, Suecia, Suiza, Suriname, Swazilandia, Tailandia, Taiwán, Tanzania, Tayikistán, Territorio Palestino, Timor Oriental, Togo, Tokelau, Tonga, Trinidad y Tobago, Túnez, Turkmenistán, Turquía, Tuvalu, Ucrania, Uganda, Uruguay, Uzbekistán, Vanuatu, Venezuela, Vietnam, Wallis y Futuna, Yemen, Zambia, Zimbabwe.
- "</string>
+    
     <string name="layer_hillshade">Capa de sombreado</string>
     <string name="map_widget_gps_info">Información GPS</string>
     <string name="osmand_play_title_30_chars">Navegación y Mapas OsmAnd</string>
@@ -1152,81 +1079,9 @@ Afganistán, Albania, Alemania, Andorra, Angola, Anguila, Antigua y Barbuda, Ant
     <string name="edit_tilesource_elliptic_tile">Mercator elíptica</string>
     <string name="map_widget_fps_info">Información de FPS</string>
     <string name="base_world_map">Mapa base mundial</string>
-    <string name="osmand_plus_extended_description_4000_chars">"
-OsmAnd (OSM Automated Navigation Directions, o traducido al español, Guía de navegación automatizada OSM) es un mapa y una aplicación de navegación con acceso a datos de todo el mundo, de alta calidad y gratuitos de OpenStreetMap (OSM). Todos los datos de los mapas se pueden almacenar en la tarjeta de memoria del dispositivo para su uso fuera de línea. A través del GPS de su dispositivo, OsmAnd ofrece avisos de navegación, visuales y de voz, para el automóvil, bicicleta y el peatón. Todas las funciones principales funcionan tanto en línea como fuera de línea (no necesita Internet).
-
-OsmAnd+ es la versión de pago de la aplicación. Comprándola da soporte al proyecto, financia el desarrollo de nueva características y obtiene las últimas actualizaciones. Puede probar la aplicación antes de comprarla instalando la versión libre llamada OsmAnd.
-
- Algunas de las características principales:
-
-
-Navegación:
-- Funciona con conexión (rápido) o sin conexión (sin cargos de roaming cuando está en el extranjero)
-- Avisos por voz giro-a-giro (voces grabadas y sintetizadas)
-- Indicaciones de carril opcional, mostrado de nombre de las calles y tiempo estimado de llegada
-- Soporta destinos intermedios en su itinerario (ruta)
-- Recalcula automáticamente la ruta cada vez que se desvía
-- Búsqueda de lugares por dirección, por tipo (por ejemplo: restaurante, hotel, gasolinera, museo), o mediante coordenadas geográficas
-
-Visualización:
-- Muestra su posición y orientación en el mapa
-- Opcionalmente orienta el mapa según la brújula o el sentido del movimiento
-- Guarda sus lugares más importantes como favoritos
-- Muestra PDIs (puntos de interés) a su alrededor
-- Puede mostrar mapas especializados en línea
-- Puede mostrar imágenes de satélite (de Bing)
-- Puede mostrar superposiciones diferentes como trazas GPX de navegación/turismo y mapas adicionales con transparencia personalizable
-- Opcionalmente muestra los nombres de los lugares en inglés, idioma local o transcripción fonética
-
-Usa datos de OpenStreetMap y Wikipedia:
-- Información de alta calidad a partir de los mejores proyectos colaborativos del mundo
-- Mapas globales de OpenStreetMap, disponibles según el país o región
-- Puntos de interés de Wikipedia, ideal para hacer visitas turísticas
-- Descarga ilimitada gratuita, directamente desde la aplicación
-- Mapas siempre actualizados (al menos una vez al mes)
-- Mapas vectoriales compactos fuera de línea
-- Selección entre mapas completos o sólo la red de carreteras (ejemplo: el mapa completo de Japón es de 700 MB y sólo 200 MB para la red de carreteras)
-- También admite teselas de mapas en línea o almacenadas localmente
-
-Características de seguridad:
-- Conmutación automática de la vista día/noche
-- Muestra opcionalmente límites de velocidad con recordatorio si se excede
-- Acercamiento opcional del mapa variable dependiente de su velocidad
-- Comparte su ubicación para que sus amigos le puedan encontrar
-
-Características para bicicletas y peatones:
-- Los mapas incluyen caminos a pie, sendas y vías para bicicletas, ideal para actividades al aire libre
-- Navegación especial y modos de visualización para bicicletas y peatones
-- Paradas de transporte público (autobús, tranvía, tren) opcionales, incluidos los nombres de líneas
-- Grabación opcional del recorrido a un archivo GPX local o a servicios en línea
-- Muestra la velocidad y altitud opcionalmente
-- Muestra curvas de nivel y relieve sombreado (a través de un complemento adicional)
-
-Contribuir directamente a OpenStreetMap:
-- Informar de los errores del mapa
-- Subir rutas GPX a OSM directamente desde la aplicación
-- Añadir puntos de interés y subirlos directamente a OSM (o posteriormente si está fuera de línea)
-- Grabación de viaje opcional también en segundo plano (mientras el dispositivo está en modo reposo)
-
-OsmAnd es de código abierto y se está desarrollado activamente. Todo el mundo puede contribuir a la aplicación informando de fallos, mejorando las traducciones, o codificando nuevas características. El proyecto se encuentra en un estado muy animado con mejoras continuas gracias a todas estas formas de interacción entre usuarios y desarrolladores. El avance del proyecto también necesita de contribuciones financieras para pagar el desarrollo, codificación y pruebas de nuevas funcionalidades. Al comprar OsmAnd+ está ayudando a que la aplicación sea aún más impresionante! También es posible financiar nuevas características específicas, o hacer una donación general a osmand.net.
-
-Cobertura y calidad aproximadas del mapa:
-- Europa Occidental: ****
-- Europa del Este: ***
-- Rusia: ***
-- América del Norte: ***
-- América del Sur: **
-- Asia: **
-- Japón y Corea: ***
-- Oriente Medio: **
-- África: **
-- Antártida: *
-
-La lista de países incluidos (¡prácticamente todo el mundo!):
-Afganistán, Albania, Alemania, Andorra, Angola, Anguila, Antigua y Barbuda, Antillas Holandesas, Arabia Saudita, Argelia, Argentina, Armenia, Aruba, Australia, Austria, Azerbaiyán, Bahamas, Bahrein, Bangladesh, Barbados, Bélgica, Belice, Benín, Bermuda, Bielorrusia, Bolivia, Bonaire, Bosnia y Herzegovina, Botsuana, Brasil, Brunei, Bulgaria, Burkina Faso, Burundi, Bután, Cabo Verde, Camboya, Camerún, Canadá, Chad, Chile, China, Chipre, Colombia, Comoras, Congo, Corea del Norte, Corea del Sur, Costa de Marfil, Costa Rica, Croacia, Cuba, Curazao, Dinamarca, Djibouti, Dominica, Ecuador, Egipto, El Salvador, El Vaticano, Emiratos Árabes Unidos, Eritrea, Eslovaquia, Eslovenia, España, Estados Unidos de América, Estonia, Etiopía, Fiji, Filipinas, Finlandia, Francia, Gabón, Gambia, Georgia, Georgia del Sur, Ghana, Gibraltar, Granada, Grecia, Groenlandia, Guadalupe, Guam, Guatemala, Guayana Francesa, Guernsey, Guinea, Guinea-Bissau, Guinea Ecuatorial, Guyana, Haití, Honduras, Hong Kong, Hungría, India, Indonesia, Irán, Iraq, Irlanda, Isla de Man, Islandia, Islas Vírgenes Británicas, Israel, Italia, Jamaica, Japón, Jersey, Jordania, Kazajstán, Kenya, Kirguistán, Kiribati, Kuwait, Laos, Lesotho, Letonia, Líbano, Liberia, Libia, Liechtenstein, Lituania, Luxemburgo, Macao, Macedonia, Madagascar, Malasia, Malawi, Maldivas, Malí, Malta, Marruecos, Martinica, Mauricio, Mauritania, Mayotte, México, Micronesia, Moldavia, Mónaco, Mongolia, Montenegro, Montserrat, Mozambique, Myanmar, Namibia, Nauru, Nepal, Nicaragua, Níger, Nigeria, Noruega, Nueva Caledonia, Nueva Zelanda, Omán, Países Bajos, Pakistán, Palau, Panamá, Papúa Nueva Guinea, Paraguay, Perú, Polinesia Francesa, Polonia, Portugal, Puerto Rico, Qatar, Reino Unido, República Centroafricana, República Checa, República Dominicana, Ruanda, Rumanía, Rusia, Sahara Occidental, Saint-Barthelemy, Saint Helena, Saint Kitts y Nevis, Samoa, San Marino, San Martin, San Pedro y Miquelón, Santa Lucía, San Vicente y las Granadinas, Senegal, Serbia, Seychelles, Sierra Leona, Singapur, Siria, Somalia, Sri Lanka, Sudáfrica, Sudán, Sudán del Sur, Suecia, Suiza, Suriname, Swazilandia, Tailandia, Taiwán, Tanzania, Tayikistán, Territorio Palestino, Timor Oriental, Togo, Tokelau, Tonga, Trinidad y Tobago, Túnez, Turkmenistán, Turquía, Tuvalu, Ucrania, Uganda, Uruguay, Uzbekistán, Vanuatu, Venezuela, Vietnam, Wallis y Futuna, Yemen, Zambia, Zimbabwe.
- "</string>
+    
     <string name="map_magnifier">Ampliación del mapa</string>
-    <string name="route_is_too_long">El cálculo de la ruta de OsmAnd sin conexión, puede tardar mucho tiempo (o a veces no funcionar) para puntos separados más de 200km. Tal vez quiera añadir destinos intermedios para un mejor rendimiento.</string>
+    
     <string name="auto_zoom_none">Sin zoom automático</string>
     <string name="shared_string_remember_my_choice">Recordar mi elección</string>
     <string name="shared_string_and">y</string>
@@ -2144,50 +1999,7 @@ Lon %2$s</string>
 <string name="rendering_attr_hideUnderground_name">Objetos subterráneos</string>
     <string name="data_is_not_available">No hay datos disponibles</string>
     <string name="shared_string_read_more">Leer más</string>
-    <string name="osmand_plus_extended_description_4000_chars_v2">"
-OsmAnd Mapas y Navegación - encuentra ubicaciones en el mapa y calcula rutas sin conexión a Internet. Descarga un mapa de un país antes de viajar para encontrar sitios y rutas en un área que no sea familiar.
-
- Opciones básicas:
- • Mapas detallados de 200 países
- • Navegador fuera de línea con avisos de voz
- • Búsqueda de direcciones en modo sin conexión
- • Información sobre ubicaciones en el mapa: puntos de interés, cafeterías, aparcamientos, tiendas
- • Añadir ubicaciones a tus favoritos
- • Opciones adicionales de navegación en modos Automóvil, Bicicleta y Peatón :
- • Capacidad de ver y grabar trazas GPX
- • Descripciones de Wikipedia de los PDI
- • Añadir notas de imagen, audio y vídeo al mapa
- • Modos de mapa Día y Noche  para una conducción más adecuada
- • Información sobre rutas y paradas de transporte público
- • Vías ciclistas y senderos
- • Vías de senderismo para hacer turismo en todo el mundo
- • Mapas en línea de numerosas fuentes
- • Información sobre calidad del pavimento e iluminación de las calles
- • Añadir, editar y eliminar PDI (para usuarios de Openstreetmap.org)
- • OsMo - monitorización en directo de otros dispositivos
-
- Consigue un explorador fiable en tu país - ya sea Francia, Alemania, México, Reino Unido, España, Holanda, EE.UU., Rusia, Brasil o cualquier otro estado.
-
- Extras:
- • Mapas de curvas de nivel y sombreado del terreno https://goo.gl/7mojP8
- Datos de curvas de nivel y visualización de terreno añadidos al mapa básico OsmAnd.
-
- • Mapas de esquí https://goo.gl/pX6DxJ
- Información sobre pistas de esquí, pistas de esquí de fondo, telecabinas y remontes de esquí.
-
- • Mapa náutico https://goo.gl/0hEdxm
- Estilo de mapa especial para ver señales de navegación náutica para navegación fluvial y costera.
-
- • Posición de aparcamiento https://goo.gl/6jxQXF
- Te ayuda a marcar la ubicación de tu vehículo aparcado y ver cuánto tiempo queda si el aparcamiento es por tiempo limitado.
-
- ¡Mantente informado!
- Twitter: https://twitter.com/osmandapp
- Facebook: https://www.facebook.com/osmandapp
- Sitio: http://osmand.net
-
- Si necesitas ayuda con la aplicación OsmAnd, por favor contacta con nuestro equipo de soporte: support@osmand.net. 
- "</string>
+    
     <string name="shared_string_email_address">Dirección de correo electrónico</string>
     <string name="shared_string_status">Estado</string>
     <string name="shared_string_save_changes">Guardar los cambios</string>
@@ -2325,7 +2137,7 @@ El espacio de almacenamiento usado es {3} MB temporalmente y {1} MB permanenteme
     <string name="lang_be_by">Bielorruso (latino)</string>
     <string name="lang_kn">Canarés</string>
     <string name="share_history_subject">" compartido vía OsmAnd"</string>
-    <string name="show_on_map">Mostrar en el mapa</string>
+    
     <string name="coords_search">Búsqueda de coordenadas</string>
     <string name="advanced_coords_search">Búsqueda avanzada de coordenadas</string>
     <string name="back_to_search">Volver a buscar</string>
@@ -2562,7 +2374,7 @@ El espacio de almacenamiento usado es {3} MB temporalmente y {1} MB permanenteme
     <string name="shared_string_move">Mover</string>
     <string name="shared_string_tracks">Trazas</string>
     <string name="routing_attr_driving_style_name">Estilo de conducción</string>
-    <string name="routing_attr_driving_style_description">Seguro, rápido o de conducción equilibrada</string>
+    
     <string name="route_altitude">Elevación de la ruta</string>
     <string name="altitude_descent">Descenso</string>
     <string name="altitude_ascent">Ascenso</string>
@@ -2570,7 +2382,7 @@ El espacio de almacenamiento usado es {3} MB temporalmente y {1} MB permanenteme
     <string name="average_altitude">Altitud media</string>
     <string name="shared_string_time">Tiempo</string>
     <string name="total_distance">Distancia total</string>
-    <string name="routing_attr_height_relief_smoothness_factor_name">Factor de suavizado del relieve</string>
+    
     <string name="routing_attr_height_relief_smoothness_factor_description">Más llanuras o más colinas</string>
     <string name="routing_attr_height_obstacles_name">Utilizar datos de elevación</string>
     <string name="routing_attr_height_obstacles_description">Utilizar los datos de elevación del terreno proporcionados por SRTM, ASTER y UE-DEM</string>
@@ -2839,6 +2651,6 @@ Algunas de las características principales:
     <string name="mapillary_menu_descr_username">Ver las imágenes añadidas por un determinado usuario.</string>
     <string name="mapillary_menu_title_username">Nombre de usuario</string>
     <string name="mapillary_menu_filter_description">Puedes filtrar imágenes por remitente o por fecha. Los filtros se aplican sólo para el zoom de primer plano.</string>
-    <string name="map_widget_ruler_control_first_mode">Regla de dos puntos</string>
-    <string name="map_widget_ruler_control_second_mode">Regla de radio</string>
+    
+    <string name="map_widget_ruler_control">Regla de radio</string>
     </resources>

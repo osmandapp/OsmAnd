@@ -3399,4 +3399,8 @@
 	<string name="poi_motorcycle_type_standard">Класика</string>
 
 <string name="poi_lock_basin">Запірний басейн</string>
-	</resources>
+	<string name="poi_generator_output_electricity_no">Вивід (електрика): ні</string>
+
+	<string name="poi_owner">Власник</string>
+
+</resources>

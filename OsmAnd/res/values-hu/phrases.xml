@@ -2144,8 +2144,8 @@
 	<string name="poi_service_bicycle_chaintool_no">Kerékpárlánc-szerszám nincs</string>
 	<string name="poi_service_bicycle_second_hand_yes">Használtkerékpár-kereskedés</string>
 	<string name="poi_service_bicycle_second_hand_no">Használtkerékpár-kereskedés nincs</string>
-	<string name="poi_service_bicycle_charging_yes">Kerékpártöltés</string>
-	<string name="poi_service_bicycle_charging_no">Kerékpártöltés nincs</string>
+	<string name="poi_service_bicycle_charging_yes">Töltés: van</string>
+	<string name="poi_service_bicycle_charging_no">Töltés: nincs</string>
 	<string name="poi_bicycle_repair_station">Önálló kerékpárszerelő pont</string>
 
 	<string name="poi_wildlife_hide">Vadfigyelő rejtek</string>
@@ -2786,11 +2786,11 @@
 	<string name="poi_fire_hydrant_diameter">Tűzcsapátmérő</string>
 	<string name="poi_fire_hydrant_pressure">Tűzcsapnyomás</string>
 	<string name="poi_fire_hydrant_count">Tűzcsapok száma</string>
-	<string name="poi_fire_hydrant_position_sidewalk">Tűzcsap helye: járda</string>
-	<string name="poi_fire_hydrant_position_green">Tűzcsap helye: zöldterület</string>
-	<string name="poi_fire_hydrant_position_parking_lot">Tűzcsap helye: parkoló</string>
-	<string name="poi_fire_hydrant_position_street">Tűzcsap helye: utca</string>
-	<string name="poi_fire_hydrant_position_underground">Tűzcsap helye: föld alatt</string>
+	<string name="poi_fire_hydrant_position_sidewalk">Járda</string>
+	<string name="poi_fire_hydrant_position_green">Zöldterület</string>
+	<string name="poi_fire_hydrant_position_parking_lot">Parkolóhely</string>
+	<string name="poi_fire_hydrant_position_street">Utca</string>
+	<string name="poi_fire_hydrant_position_underground">Föld alatt</string>
 	<string name="poi_fire_hydrant_style_water_source_main">Fő</string>
 	<string name="poi_fire_hydrant_style_water_source_pond">Tó</string>
 	<string name="poi_fire_hydrant_style_water_source_stream">Patak</string>
@@ -2932,7 +2932,7 @@
 	<string name="poi_health_specialty_naturopathy_yes">Naturopátia</string>
 	<string name="poi_health_specialty_depth_psychology_yes">Mélylélektan</string>
 	<string name="poi_health_specialty_behavior_yes">Viselkedés-lélektan</string>
-	<string name="poi_health_specialty_palliative_medicine_yes">Szakorvosi ellátás: palliatív gyógyászat</string>
+	<string name="poi_health_specialty_palliative_medicine_yes">Palliatív gyógyászat</string>
 
 	<string name="poi_health_service_nursing_yes">Egészségügyi szolgáltatás: ápolás</string>
 	<string name="poi_health_service_nursing_no">Egészségügyi szolgáltatás: ápolás nincs</string>
@@ -3199,7 +3199,7 @@
 
 	<string name="poi_office_nursing_service">Ápolószolgálat</string>
 	<string name="poi_fire_hydrant_type_pond">Száraz tűzcsap</string>
-	<string name="poi_fire_hydrant_position_lane">Tűzcsap helye: úttest</string>
+	<string name="poi_fire_hydrant_position_lane">Úttest</string>
 	<string name="poi_fire_hydrant_style_wsh">Tűzcsapfajta: akna</string>
 	<string name="poi_valley_balka">Balka (völgy, Oroszo.)</string>
 
@@ -3328,7 +3328,7 @@
 	<string name="poi_payment_token_no">Zsetont nem fogad el</string>
 	<string name="poi_payment_golden_crown_yes">Zolotaya Korona</string>
 	<string name="poi_payment_golden_crown_no">Zolotaya Koronát nem fogad el</string>
-	<string name="poi_payment_pro100_yes">"PRO100 "</string>
+	<string name="poi_payment_pro100_yes">PRO100</string>
 	<string name="poi_payment_pro100_no">PRO100 kártyát nem fogad el</string>
 	<string name="poi_payment_union_card_yes">Union kártya</string>
 	<string name="poi_payment_union_card_no">Union kártyát nem fogad el</string>
@@ -3406,4 +3406,8 @@
 	<string name="poi_motorcycle_type_scooter">Robogó</string>
 	<string name="poi_zoo_enclosure">Kifutó</string>
 	<string name="poi_zoo_falconry">Solymászat</string>
-	</resources>
+	<string name="poi_generator_output_electricity_no">Kimenet (elektromosság): nincs</string>
+
+	<string name="poi_owner">Tulajdonos</string>
+
+</resources>

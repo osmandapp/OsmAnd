@@ -1,5 +1,4 @@
-<?xml version='1.0' encoding='UTF-8'?>
-<resources><string name="search_map_hint">Leita að borg eða héraði</string>
+<?xml version="1.0" encoding="UTF-8" standalone="no"?><resources><string name="search_map_hint">Leita að borg eða héraði</string>
     <string name="osmo_share_location">Deila</string>
     <string name="osmo_pause_location">Í bið</string>
     <string name="gpx_appearance">Útlit</string>
@@ -1290,7 +1289,7 @@ og leiðsögn</string>
     <string name="coords_search">Leit eftir hnitum</string>
     <string name="advanced_coords_search">Ítarleg leit eftir hnitum</string>
     <string name="dist_away_from_my_location">Leita %1$s frá</string>
-    <string name="route_is_too_long">Leiðarútreikningur OsmAnd án nettengingar getur tekið langan tíma (eða jafnvel ekki gengið upp) fyrir punkta sem eru meira en 200 km frá hver öðrum. Þú gætir viljað bæta inn á milli nokkrum áföngum svo vinnslan verði auðveldari.</string>
+    
     <string name="clear_intermediate_points">Hreinsa út áfanga</string>
     <string name="keep_intermediate_points">Halda áföngum</string>
     <string name="new_directions_point_dialog">Þú ert nú þegar með áfanga stillta.</string>
@@ -2216,8 +2215,8 @@ Stendur fyrir svæði: %1$s x %2$s</string>
     <string name="mapillary_widget">Mapillary græja</string>
     <string name="mapillary">Mapillary</string>
     <string name="mapillary_image">Mapillary mynd</string>
-    <string name="map_widget_ruler_control_first_mode">Tveggja-punkta mælistika</string>
-    <string name="map_widget_ruler_control_second_mode">Mælistika út frá miðju hrings</string>
+    
+    <string name="map_widget_ruler_control">Mælistika út frá miðju hrings</string>
     <string name="shared_string_permissions">Heimildir</string>
     <string name="distance_moving">Leiðrétt fjarlægð</string>
     <string name="improve_coverage_mapillary">Bæta ljósmyndaþekju með Mapillary</string>

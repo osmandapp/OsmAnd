@@ -373,16 +373,18 @@ public class GPXUtilities {
 					}
 					long time = point.time;
 					if (time != 0) {
-						if (s.segment.generalSegment) {
-							if (point.firstPoint) {
-								startTimeOfSingleSegment = time;
-							} else if (point.lastPoint) {
-								endTimeOfSingleSegment = time;
-							}
-							if (startTimeOfSingleSegment != 0 && endTimeOfSingleSegment != 0) {
-								timeSpan += endTimeOfSingleSegment - startTimeOfSingleSegment;
-								startTimeOfSingleSegment = 0;
-								endTimeOfSingleSegment = 0;
+						if (s.metricEnd == 0) {
+							if (s.segment.generalSegment) {
+								if (point.firstPoint) {
+									startTimeOfSingleSegment = time;
+								} else if (point.lastPoint) {
+									endTimeOfSingleSegment = time;
+								}
+								if (startTimeOfSingleSegment != 0 && endTimeOfSingleSegment != 0) {
+									timeSpan += endTimeOfSingleSegment - startTimeOfSingleSegment;
+									startTimeOfSingleSegment = 0;
+									endTimeOfSingleSegment = 0;
+								}
 							}
 						}
 						startTime = Math.min(startTime, time);
@@ -921,7 +923,7 @@ public class GPXUtilities {
 			for (Track t : tracks) {
 				int trackColor = t.getColor(getColor(0));
 				for (TrkSegment ts : t.segments) {
-					if (ts.points.size() > 0) {
+					if (!ts.generalSegment && ts.points.size() > 0) {
 						TrkSegment sgmt = new TrkSegment();
 						tpoints.add(sgmt);
 						sgmt.points.addAll(ts.points);

@@ -51,6 +51,8 @@ import org.apache.commons.logging.Log;
 import java.io.File;
 import java.io.IOException;
 import java.util.ArrayList;
+import java.util.Collections;
+import java.util.Comparator;
 import java.util.Iterator;
 import java.util.List;
 
@@ -128,6 +130,7 @@ public class NotesFragment extends OsmAndListFragment {
 	public void onResume() {
 		super.onResume();
 		items = new ArrayList<>(plugin.getAllRecordings());
+		sortItemsDescending();
 		ListView listView = getListView();
 		if (items.size() > 0 && footerView == null) {
 			//listView.addHeaderView(getActivity().getLayoutInflater().inflate(R.layout.list_shadow_header, null, false));
@@ -138,6 +141,23 @@ public class NotesFragment extends OsmAndListFragment {
 		}
 		listAdapter = new NotesAdapter(items);
 		listView.setAdapter(listAdapter);
+	}
+
+	private void sortItemsDescending() {
+		Collections.sort(items, new Comparator<Recording>() {
+			@Override
+			public int compare(Recording first, Recording second) {
+				long firstTime = first.getLastModified();
+				long secondTime = second.getLastModified();
+				if (firstTime < secondTime) {
+					return 1;
+				} else if (firstTime == secondTime) {
+					return 0;
+				} else {
+					return -1;
+				}
+			}
+		});
 	}
 
 	@Override

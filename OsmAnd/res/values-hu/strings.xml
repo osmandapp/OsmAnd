@@ -1,5 +1,4 @@
-<?xml version='1.0' encoding='UTF-8'?>
-<resources>
+<?xml version="1.0" encoding="UTF-8" standalone="no"?><resources>
     <string name="send_files_to_osm">GPX fájl küldése OSM-re?</string>
     <string name="gpx_visibility_txt">Láthatóság</string>
     <string name="gpx_tags_txt">Címkék</string>
@@ -8,7 +7,7 @@
     <string name="default_buttons_support">Támogatás</string>
     <string name="support_new_features">Új funkciók támogatása</string>
 
-    <string name="show_ruler_level">Lépték megjelenítése</string>
+    <string name="show_ruler_level">Vonalzó megjelenítése</string>
     <string name="info_button">Információ</string>
     <string name="back_to_location">Vissza a pozícióra</string>
     <string name="shared_string_help">Súgó</string>
@@ -380,7 +379,7 @@ Ehhez {1} MB helyre van szükség.
     <string name="shared_string_select_all">Minden kijelölése</string>
     <string name="shared_string_refresh">Frissítés</string>
     <string name="fast_route_mode">Leggyorsabb útvonal</string>
-    <string name="fast_route_mode_descr">"Leggyorsabb útvonal kiszámításának engedélyezése, vagy tiltása az üzemanyag-takarékos útvonal útért "</string>
+    <string name="fast_route_mode_descr">Leggyorsabb útvonal kiszámításának engedélyezése, vagy tiltása az üzemanyag-takarékos útvonal útért</string>
     <string name="tiles_to_download_estimated_size">{0} nagyításnál {1} térképcsempe letöltése ({2} Mb )</string>
     <string name="shared_string_download_map">Térkép letöltése</string>
     <string name="select_max_zoom_preload_area">Maximális nagyítás kiválasztása a látható terület előtöltéséhez</string>
@@ -422,7 +421,7 @@ Ehhez {1} MB helyre van szükség.
     <string name="poi_context_menu_delete">POI törlés</string>
     <string name="rotate_map_compass_opt">Iránytű alapján</string>
     <string name="rotate_map_bearing_opt">Mozgás alapján</string>
-    <string name="rotate_map_none_opt">Ne forogjon</string>
+    <string name="rotate_map_none_opt">Ne forogjon (észak felül)</string>
     <string name="rotate_map_to_bearing_descr">Térkép forgatásának meghatározása</string>
     <string name="rotate_map_to_bearing">Térkép forgatása</string>
     <string name="show_route">Útvonal részletei</string>
@@ -770,7 +769,7 @@ Ehhez {1} MB helyre van szükség.
     <string name="osm_editing_plugin_description">Ezen bővítményen keresztül az OsmAnd használható OSM hozzájárulások beküldéséhez, mint például OSM POI objektumok létrehozása vagy módosítása, OSM Jegyzetek nyitása és hozzászólások írása, illetve a rögzített GPX fájlok közreadása. Az OSM egy közösségi, globális, közkincs térképező projekt. A részletekért nézd meg a https://openstreetmap.org oldalt. Értékelik az aktív részvételt, és a hozzájárulások közvetlenül az OsmAnd alkalmazásból is beküldhetők, ha az alkalmazásban megadod a személyes OSM hitelesítési adataid.</string>
     <string name="vector_maps_may_display_faster_on_some_devices">Vektoros térképek gyorsabban rajzolódnak. Nem minden eszközön működik.</string>
 
-    <string name="play_commands_of_currently_selected_voice">Hangutasítások kimondása a kiválasztott hanggal</string>
+    <string name="play_commands_of_currently_selected_voice">Hang kiválasztása és tesztelése utasítások lejátszásával</string>
     <string name="debugging_and_development">OsmAnd fejlesztés</string>
     <string name="native_rendering">Natív renderelés</string>
 
@@ -878,7 +877,7 @@ Proporcionális memória %4$s MB (Android korlát %5$s MB, Dalvik %6$s MB).</str
     <string name="show_warnings_title">Figyelmeztetések megjelenítése…</string>
     <string name="show_warnings_descr">Sebességhatárok, traffipaxok, fekvőrendőrök, sávinformációk jelzése</string>
     <string name="map_widget_fluorescent">Élénk színű utak</string>
-    <string name="map_widget_show_ruler">Lépték</string>
+    <string name="map_widget_show_ruler">Vonalzó</string>
 
     <string name="map_widget_view_direction">Látómező</string>
     <string name="map_widget_transparent">Átlátszó gombok</string>
@@ -1125,7 +1124,7 @@ Néhány fontosabb funkció:
     <string name="files_limit">%1$d fájl maradt</string>
     <string name="available_downloads_left">%1$d fájl elérhető letöltésre</string>
     <string name="install_paid">Teljes verzió</string>
-    <string name="use_magnetic_sensor_descr">A mágnesszenzor használata az iránytű értékének meghatározásához az tájolás szenzor helyett</string>
+    <string name="use_magnetic_sensor_descr">A mágnesszenzor használata az iránytű értékének meghatározásához a tájolás szenzor helyett</string>
     <string name="use_magnetic_sensor">Mágnesszenzor (iránytű) használata</string>
     <string name="use_kalman_filter_compass_descr">Csökkenti a zajt az iránytű olvasásakor, de hozzáadja a tehetetlenséget</string>
     <string name="use_kalman_filter_compass">Kálmán-szűrő használata</string>
@@ -1253,7 +1252,7 @@ Néhány fontosabb funkció:
 
     <string name="local_osm_changes_delete_all_confirm">%1$d OSM módosítást fogsz törölni. Biztos vagy benne?</string>
     <string name="shared_string_delete_all">Összes törlése</string>
-    <string name="route_is_too_long">Az OsmAnd offline tervezője számára rendkívül sokáig tarthat (vagy néha nem is működik) 200 km-nél távolabb lévő pontok között útvonalat tervezni. Kérlek adj hozzá köztes célpontokat.</string>
+    
     <string name="auto_zoom_none">Nincs auto zoom</string>
     <string name="auto_zoom_close">Közelre</string>
     <string name="auto_zoom_far">Közepes távolságra</string>
@@ -1410,7 +1409,7 @@ Néhány fontosabb funkció:
     <string name="gpx_info_distance">Távolság: %1$s (%2$s pont) </string>
     <string name="gpx_info_start_time">Kezdés: %1$tF,  %1$tT </string>
     <string name="gpx_info_end_time">Befejezés: %1$tF,  %1$tT </string>
-    <string name="gpx_info_average_speed">"Átlagsebesség: %1$s "</string>
+    <string name="gpx_info_average_speed">Átlagsebesség: %1$s</string>
     <string name="gpx_info_maximum_speed">Legnagyobb sebesség: %1$s </string>
     <string name="gpx_info_avg_altitude">Átlagmagasság: %1$s</string>
     <string name="gpx_info_diff_altitude">Magasság tartomány: %1$s</string>
@@ -1579,9 +1578,9 @@ Néhány fontosabb funkció:
     <string name="osmo_tracker_id_descr">Kattints a tracker ID megtekintéséhez</string>
     <string name="osmo_session_token">Munkamenet token: %1$s</string>
     <string name="osmo_auth_pending">Várakozás engedélyeztetésre…</string>
-    <string name="osmo_locations_sent">"Pozíció elküldve %1$s (pufferben %2$s) "</string>
-    <string name="osmo_conn_successfull">"Kapcsolat létrejött: %1$s "</string>
-    <string name="osmo_io_error">"OsMo kapcsolódási probléma: "</string>
+    <string name="osmo_locations_sent">Pozíció elküldve %1$s (pufferben %2$s)</string>
+    <string name="osmo_conn_successfull">Kapcsolat létrejött: %1$s</string>
+    <string name="osmo_io_error">OsMo kapcsolódási probléma:</string>
     <string name="osmo_mode_restart">OsMo munkamenet újraindítása</string>
     <string name="osmo_mode_on">OsMo munkamenet leállítása</string>
     <string name="osmo_mode_off">OsMo munkamenet elindítása</string>
@@ -1665,77 +1664,7 @@ Néhány fontosabb funkció:
     <string name="rendering_category_hide">Elrejtés</string>
     <string name="wake_on_voice">Képernyő bekapcsolása</string>
     <string name="wake_on_voice_descr">Az eszköz képernyőjének bekapcsolása (ha ki van kapcsolva) egy kanyarodáshoz közeledve</string>
-    <string name="osmand_extended_description_4000_chars">"
-Az OsmAnd (OSM Automated Navigation Directions) egy térkép és navigációs alkalmazás, ingyenes, világméretű és jó minőségű OpenStreetMap (OSM) térképpel. Az összes térképadat offline tárolható az eszköz memóriakártyáján. GPS használatával az OsmAnd képes útvonaltervezésre, vizuális és hangnavigációra, mindezt autós, kerékpáros és gyalogos módban. Az összes főbb funkció működik online és offline (internetkapcsolat nélkül) is.
-
-Néhány főbb funkció:
-
-Navigáció
-- Működik online (gyorsabb) vagy offline (nincs internet roaming díj külföldön)
-- Turn-by-turn hangnavigáció felvett, vagy gépi hanggal (utóbbihoz TTS felolvasó szükséges)
-- Sávkijelzés, utcanévkijelzés, várható érkezési idő
-- Köztes célpontok megadásának lehetősége
-- Automatikus újratervezés, ha letértél az útról
-- Keresés helyekre cím alapján, típus szerint (étterem, hotel, benzinkút, múzeum), vagy koordináta alapján
-
-Térkép nézet
-- A pozíciód és irányod megjelenítése a térképen
-- A térkép forgatása választható iránytű, vagy mozgásirány alapján
-- Fontos helyek mentése Kedvencként
-- POI-k (érdekes helyek) megjelenítése a környékeden
-- Online (csempés) térképek megjelenítése
-- Műhold nézet (Bing)
-- Különféle rátét térképek állítható átlátszósággal, felvett GPX nyomvonalak
-- Helynevek megjelenítése saját nyelven, angolul, vagy fonetikus átírásban
-
-OpenStreetMap és Wikipédia adatok
-- Minőségi információk az egész világról a legjobb közösségi projektektől
-- OpenStreetMap térképek az egész földről országonkénti vagy régió szerinti bontásban
-- Wikipédia POI-k városnézéshez (nem elérhető az ingyenes verzióban)
-- Korlátlan ingyenes letöltés közvetlenül az alkalmazásból (az ingyenes verzióban 16 térképfájlra korlátozva)
-- Folyamatosan frissülő térképek (legalább havonta egyszer)
-- Kompakt offline vektoros térképek
-- Választható teljes térkép vagy csak úthálózat (például teljes Japán 700 MB, de az úthálózat csak 200 MB)
-- Támogatja az online vagy előre letárolt csempés térképeket
-
-Biztonsági funkciók
-- Választható automata nappal/éjjel nézet váltás
-- Választható sebességhatár kijelzés, túllépés esetén figyelmeztetéssel
-- Választható sebességfüggő nagyítás
-- Pozíciód megosztása, hogy a barátaid megtaláljanak
-
-Kerékpáros és gyalogos funkciók
-- Szabadtéri tevékenységekhez a térképek tartalmazzák a gyalogos, túra, és kerékpáros ösvényeket
-- Külön gyalogos és kerékpáros tervezés és megjelenítés
-- Tömegközlekedési megállók vonalnevekkel
-- Utazás felvétele GPX fájlba vagy online szolgáltatásra
-- Sebesség és tengerszint feletti magasság megjelenítés
-- Szintvonalak és domborzatárnyékolás megjelenítése (bővítmény telepítése szükséges)
-
-Közvetlen OpenStreetMap közreműködés
-- Térképhibák jelentése
-- GPX nyomvonalak feltöltése OSM-re közvetlenül az alkalmazásból
-- POI-k felvétele és feltöltése közvetlenül OSM-be (vagy később offline)
-- Opcionális útvonalrögzítés akár a háttérben is (kikapcsolt képernyővel)
-
-Az OsmAnd nyílt forráskódú és aktív fejlesztés alatt áll. Bárki közreműködhet hibák jelentésével, fordításokkal, vagy új funkciók fejlesztésével. A projekt haladása függ az anyagi hozzájárulásoktól is, megalapozva a fejlesztést, kódolást, és az új funkciók tesztelését. Az OsmAnd+ megvásárlásával segítheted, hogy az alkalmazás még szuperebb legyen! Az osmand.net-en lehetőség van konkrét funkció támogatására és általános adományozásra is.
-
-
-Hozzávetőleges térképi lefedettség és minőség:
-- Nyugat-Európa: ****
-- Kelet-Európa: ***
-- Oroszország: ***
-- Észak-Amerika: ***
-- Dél-Amerika: **
-- Ázsia: **
-- Japán &amp; Korea: ***
-- Közel-Kelet: **
-- Afrika: **
-- Antarktisz: *
-
-Támogatott országok listája (alapvetően az egész világ!):
-Afganisztán, Albánia, Algéria, Amerikai Egyesült Államok, Andorra, Anglia, Angola, Anguilla, Antigua és Barbuda, Argentína, Aruba, Ausztrália, Ausztria, Azerbajdzsán, Bahamák, Bahrein, Banglades, Barbados, Belgium, Belize, Benin, Bhután, Bissau-Guinea, Bolívia, Bonaire, Bosznia és Hercegovina, Botswana, Brazília, Brit Virgin-szigetek, Brunei, Bulgária, Burkina Faso, Burundi, Chile, Ciprus, Comore-szigetek, Costa Rica, Curaçao, Csád, Csehország, Dánia, Dél-afrikai Köztársaság, Déli-Georgia, Dél-Szudán, Dominika, Dominikai Köztársaság, Dzsibuti, Ecuador, Egyesült Arab Emírségek, Egyesült Királyság, Egyiptom, El Salvador, Elefántcsontpart, Egyenlítői-Guinea, Eritrea, Észtország, Etiópia, Fehéroroszország, Fiji-szigetek, Finnország, Franciaország, Francia Polinézia, Fülöp-szigetek, Gabon, Gambia, Ghána, Gibraltár, Görögország, Grenada, Grönland, Grúzia, Guadeloupe, Guam, Guatemala, Guernsey, Guinea, Guyana, Haiti, Hollandia, Holland Antillák, Honduras, Horvátország, Hongkong, India, Indonézia, Irak, Irán, Írország, Izland, Izrael, Jamaica, Japán, Jemen, Jersey, Jordánia, Kambodzsa, Kamerun, Kanada, Katar, Kazahsztán, Kelet-Timor, Kenya, Kína, Kiribati, Kirgizisztán, Észak Korea és Dél Korea,  Kolumbia, Kongó, Koszovó, Közép-afrikai Köztársaság, Kuba, Kuvait, Laosz, Lengyelország, Lesotho, Lettország, Libanon, Libéria, Líbia, Lichtenstein, Litvánia, Luxemburg, Macedónia, Madagaszkár, Makaó, Magyarország, Malajzia, Malawi, Maldív-szigetek, Mali, Málta, Man-szigetek, Marokkó, Martinique, Mauritánia, Mauritius, Mayotte, Mexikó, Mianmar, Mikronézia, Moldova, Monaco, Mongólia, Montenegró, Monserrat, Mozambik, Namíbia, Nauru, Németország, Nepál, Nicaragua, Niger, Nigéria, Norvégia, Nyugat-Szahara, Olaszország, Omán, Oroszország, Örményország, Pakisztán, Palau, Palesztina, Panama, Pápua Új-Guinea, Paraguay, Peru, Portugália, Puerto Rico, Románia, Ruanda, Saint-Barthélemy, Szent Ilona, Saint Kitts és Nevis, Saint Lucia, Saint-Martin, Saint-Pierre és Miquelon, Saint Vincent és a Grenadine-szigetek, San Marino, Seychelle-szigetek, Sierra Leone, Spanyolország, Srí Lanka, Suriname, Svájc, Svédország, Szamoa, Szaúd-Arábia, Szenegál, Szerbia, Szingapúr, Szíria, Szlovákia, Szlovénia, Szomália, Szudán, Szváziföld, Tajvan, Tádzsikisztán, Tanzánia, Thaiföld, Tokelau-szigetek, Togo, Tonga, Törökország, Trinidad és Tobago, Tunézia, Tuvalu, Türkmenisztán, Uganda, Új-Kaledónia, Új-Zéland, Ukrajna, Uruguay, Üzbegisztán, Vanuatu, Vatikán, Venezuela, Vietnam, Wallis és Fortuna, Zambia, Zimbabwe, Zöld-foki Köztársaság
- "</string>
+    
     <string name="osmand_plus_extended_description_4000_chars">"
 Az OsmAnd (OSM Automated Navigation Directions) egy térkép és navigációs alkalmazás, ingyenes, világméretű és jó minőségű OpenStreetMap (OSM) térképpel. Az összes térképadat offline tárolható az eszköz memóriakártyáján. GPS használatával az OsmAnd képes útvonaltervezésre, vizuális és hangnavigációra, mindezt autós, kerékpáros és gyalogos módban. Az összes főbb funkció működik online és offline (Internetkapcsolat nélkül) is.
 
@@ -2439,8 +2368,8 @@ Jelenleg csak {2} MB érhető el.</string>
     <string name="no_map_markers_found">Kérlek, vegyél fel jelölőket a térképen</string>
     <string name="no_waypoints_found">Nem találhatók útpontok</string>
     <string name="map_widget_bearing">Relatív irány</string>
-    <string name="access_disable_offroute_recalc_descr">Megakadályozza az automatikus újratervezést, ha túl távol vagy a helyes úttól</string>
-    <string name="access_disable_wrong_direction_recalc_descr">Megakadályozza az automatikus újratervezést, ha rossz irányba mész</string>
+    <string name="access_disable_offroute_recalc_descr">Megakadályozza az automatikus újratervezést, amikor elhagyod a tervezett útvonalat</string>
+    <string name="access_disable_wrong_direction_recalc_descr">Megakadályozza az automatikus újratervezést, amíg az ellenkező irányba haladsz</string>
     <string name="access_default_color">Alapértelmezett szín</string>
     <string name="access_category_choice">Válassz kategóriát</string>
     <string name="access_hint_enter_name">Adj meg egy nevet</string>
@@ -2465,8 +2394,8 @@ Jelenleg csak {2} MB érhető el.</string>
     <string name="use_osm_live_routing">OSM Live navigáció</string>
     <string name="use_osm_live_routing_description">Navigáció engedélyezése az OSM Live módosításainál (Beta)</string>
 	<string name="map_widget_magnetic_bearing">Mágneses irány</string>
-    <string name="access_disable_offroute_recalc">Ne tervezzen újra, ha letérsz az útról</string>
-    <string name="access_disable_wrong_direction_recalc">Ne tervezzen újra, ha rossz irányba mész</string>
+    <string name="access_disable_offroute_recalc">Ne tervezzen újra, ha letérsz az útvonalról</string>
+    <string name="access_disable_wrong_direction_recalc">Ne tervezzen újra, ha ellenkező irányba mész</string>
     <string name="access_no_destination">Nincs beállítva cél</string>
     <string name="map_widget_battery">Akkumulátor töltöttsége</string>
     <string name="move_marker_bottom_sheet_title">A jelölő helyének módosításához mozgasd a térképet</string>
@@ -2511,8 +2440,8 @@ Jelenleg csak {2} MB érhető el.</string>
 \n 
 \nés még számos dolog… "</string>
     <string name="dist_away_from_my_location">Keresés %1$s távolságban</string>
-    <string name="show_on_map">Megjelenítés a térképen</string>
-    <string name="share_history_subject">" megosztva OsmAnd segítségével"</string>
+    
+    <string name="share_history_subject">megosztva OsmAndból</string>
     <string name="search_categories">Kategóriák</string>
     <string name="city_type_district">Kerület</string>
     <string name="map_widget_search">Keresés</string>
@@ -2522,52 +2451,7 @@ Jelenleg csak {2} MB érhető el.</string>
     <string name="city_type_neighbourhood">Városrész</string>
     <string name="route_stops_before">%1$s megállóval előtte</string>
     <string name="advanced_coords_search">Haladó koordináta keresés</string>
-    <string name="osmand_plus_extended_description_4000_chars_v2">"
-OsmAnd Térképek &amp; Navigáció - keress helyszíneket a térképen, tervezz útvonalat internetkapcsolat nélkül. Utazás előtt töltsd le az ország térképét, hogy ismeretlen helyeken is bárhova odatalálj.
-
-Alap lehetőségek:
-• 200 ország részletes térképe
-• Offline navigáció hangutasításokkal
-• Címkeresés offline módban
-• Információ a térképen különféle helyszínekről: látnivalók, kávézók, parkolók, boltok
-• Kedvenc helyek elmentése
-• Autós, kerékpáros és gyalogos navigáció
-
-További lehetőségek: 
-• GPX nyomvonalak felvétele és megtekintése
-• Látnivalók Wikipédia cikke
-• Fotó-, hang- és videojegyzet készítése
-• Nappali és éjszakai üzemmódok a kényelmes vezetés érdekében
-• Információ tömegközlekedési útvonalakról, megállókról
-• Kerékpárutak, járdák, ösvények
-• Turistajelzések az egész világról
-• Online térképek számos forrásból
-• Információ az útburkolatról, minőségről és közvilágításról
-• Helyek hozzáadása, szerkesztése, törlése (OpenStreetMap.org felhasználók számára)
-• OsMo - más eszközök élő követése
-
-Szerezz egy megbízható navigátort az országodba – legyen az Magyarország, Németország, Franciaország, Anglia, USA, Oroszország, Brazília, Mexikó, vagy bármely más ország.
-
-Bővítmények:
-• Szintvonalak és domborzatárnyékolás https://goo.gl/7mojP8
- Az alap OsmAnd térképre szintvonalakat és a domborzatot ábrázolós árnyékolást tesz.
-
-• Sítérképek https://goo.gl/pX6DxJ
- Információ sípályákról, sífutóutakról, felvonókról, síliftekről.
-
-• Hajózási térkép https://goo.gl/0hEdxm
- Speciális térképstílus, ami folyami és partközeli navigációhoz jelenít meg hajózási jelzéseket.
-
-• Parkolási helyek https://goo.gl/6JxQXF
- Segít megjelölni a leparkolt jármű helyét és mutatja, mennyi idő van hátra a parkolásból.
-
-
-Twitter: https://twitter.com/osmandapp
-Facebook: https://www.facebook.com/osmandapp
-Weboldal: http://osmand.net
-
-Ha segítségre van szükséged az OsmAnd alkalmazással kapcsolatban, keresd a támogatói csoportunkat: support@osmand.net. 
- "</string>
+    
     <string name="rendering_attr_hideOverground_name">Felszíni objektumok</string>
     <string name="shared_string_change">Módosítás</string>
     <string name="get_started">Kezdj hozzá</string>
@@ -2637,11 +2521,11 @@ Ha segítségre van szükséged az OsmAnd alkalmazással kapcsolatban, keresd a 
     <string name="shared_string_recorded">Felvett</string>
     <string name="shared_string_record">Felvétel</string>
     <string name="save_track_min_speed">Rögzítési minimum sebesség</string>
-    <string name="save_track_min_speed_descr">Megadhatod a legkisebb sebességet, aminél pontot fog rögzíteni</string>
-    <string name="save_track_min_distance">Rögzítési mozgásérzékelés</string>
-    <string name="save_track_min_distance_descr">Az előző pozíciódtól mért legkisebb távolság, ahol pontot fog rögzíteni</string>
+    <string name="save_track_min_speed_descr">Szűrő: A legkisebb sebesség megadása, aminél pontot fog rögzíteni</string>
+    <string name="save_track_min_distance">Rögzítési minimális elmozdulás</string>
+    <string name="save_track_min_distance_descr">Szűrő: Az előző pozíciótól mért legkisebb távolság, ahol pontot fog rögzíteni</string>
     <string name="save_track_precision">Rögzítési minimum pontosság</string>
-    <string name="save_track_precision_descr">Minimális GPS-vételi pontosság, aminél pontot fog rögzíteni</string>
+    <string name="save_track_precision_descr">Szűrő: Minimális GPS-vételi pontosság, aminél pontot fog rögzíteni</string>
     <string name="christmas_poi">Karácsonyi POI</string>
     <string name="christmas_desc">A karácsonyra és újévi ünnepekre készülve bekapcsolhatod a karácsonyi POI-k megjelenítését: karácsonyfák, vásárok, stb.</string>
     <string name="christmas_desc_q">Megjeleníted a karácsonyi POI-kat?</string>
@@ -2668,7 +2552,7 @@ Ha segítségre van szükséged az OsmAnd alkalmazással kapcsolatban, keresd a 
     <string name="search_map_hint">Város, régió keresése</string>
     <string name="legacy_search">Régi kereső</string>
     <string name="show_legacy_search">Régi kereső megjelenítése</string>
-    <string name="show_legacy_search_desc">Régi kereső engedélyezése az oldalsó menüben</string>
+    <string name="show_legacy_search_desc">Régi kereső megjelenítése az oldalsó menüben</string>
     <string name="routing_attr_allow_motorway_name">Autópályák engedélyezése</string>
     <string name="routing_attr_allow_motorway_description">Autópályák engedélyezése</string>
     <string name="lang_sr_latn">szerb (latin betűs)</string>
@@ -2771,7 +2655,7 @@ Kérlek adj meg egy teljes kódot</string>
     <string name="shared_string_move">Áthelyezés</string>
     <string name="shared_string_tracks">Nyomvonalak</string>
     <string name="routing_attr_driving_style_name">Vezetési stílus</string>
-    <string name="routing_attr_driving_style_description">Biztonságos, gyors, vagy kiegyensúlyozott vezetés</string>
+    
     <string name="route_altitude">Útvonal magassága</string>
     <string name="altitude_descent">Lejtő</string>
     <string name="altitude_ascent">Emelkedő</string>
@@ -2779,43 +2663,32 @@ Kérlek adj meg egy teljes kódot</string>
     <string name="average_altitude">Átlagmagasság</string>
     <string name="shared_string_time">Idő</string>
     <string name="total_distance">Teljes táv</string>
-    <string name="routing_attr_height_relief_smoothness_factor_name">Domborzat simításának mértéke</string>
+    
     <string name="routing_attr_height_relief_smoothness_factor_description">Síkabb vagy dombosabb</string>
     <string name="routing_attr_height_obstacles_name">Magasságadatok használata</string>
     <string name="routing_attr_height_obstacles_description">SRMT, ASTER és EU-DEM domborzatmodellek használata</string>
 
     <string name="rendering_attr_depthContours_description">Mélységvonalak és pontok megjelenítése</string>
     <string name="rendering_attr_depthContours_name">Tengeri mélységvonalak</string>
-	<string name="release_2_6">"
-\n • Új funkció: Gyors művelet gomb
-\n
-\n
-\n • Javított érintőképernyő-gesztus felismerés
-\n
-\n
-\n • Új, több írásmódot lefedő betűtípusok a térképen
-\n
-\n
-\n • TTS szövegfelolvasó támogatás regionális nyelvváltozatokon
-\n
-\n
-\n • Láthatósági fejlesztések több térképstíluson és Wikipédia cikkeken
-\n
-\n
-\n • Open Location Code (OLC) támogatás
-\n
-\n
-\n • Szintmetszet, lejtőprofil és sebességdiagram készítése a felvett GPX fájlokról valamint a tervezett útvonalakról
-\n
-\n
-\n • „Vezetési stílus” beállítások és logika fejlesztés kerékpáros tervezésnél
-\n
-\n
-\n • Magassági adatok használata kerékpáros tervezésnél
-\n
-\n
-\n • Sok egyéb apró fejlesztés és hibajavítás
-\n "</string>
+	<string name="release_2_6">• Új funkció: Gyors művelet gomb 
+\n 
+\n • Javított érintőképernyő-gesztus felismerés 
+\n 
+\n • Új, több írásmódot lefedő betűtípusok a térképen 
+\n 
+\n • TTS szövegfelolvasó támogatás regionális nyelvváltozatokon 
+\n 
+\n • Láthatósági fejlesztések több térképstíluson és Wikipédia cikkeken 
+\n 
+\n • Open Location Code (OLC) támogatás 
+\n 
+\n • Szintmetszet, lejtőprofil és sebességdiagram készítése a felvett GPX fájlokról valamint a tervezett útvonalakról 
+\n 
+\n • „Vezetési stílus” beállítások és logika fejlesztés kerékpáros tervezésnél 
+\n 
+\n • Magassági adatok használata kerékpáros tervezésnél 
+\n 
+\n • Sok egyéb apró fejlesztés és hibajavítás</string>
 	<string name="auto_split_recording_title">Felvételek auto-vágása szünet után</string>
 	<string name="auto_split_recording_descr">Új szakasz készítése 6 perc szünet után, új nyomvonal 2 óra szünet után, és új fájl hosszabb szünet után, vagy dátum változásakor.</string>
     <string name="max_speed">Max sebesség</string>
@@ -2867,7 +2740,7 @@ Kérlek adj meg egy teljes kódot</string>
     <string name="no_underlay">Nincs alátét</string>
     <string name="subscribe_email_error">Hiba</string>
     <string name="subscribe_email_desc">Iratkozz fel az alkalmazás akciókról szóló hírlevelünkre és kapsz további 3 térképletöltést!</string>
-    <string name="depth_contour_descr">Térképkészlet, amely tartalmazza a tengeri mélységvonalakat és -pontokat (30 szögperces háló alapján).</string>
+    <string name="depth_contour_descr">Térképkészlet, amely tartalmazza a tengeri mélységvonalakat és -pontokat.</string>
     <string name="sea_depth_thanks">Köszönjük, hogy megvásároltad a tengeri mélységvonalakat!</string>
     <string name="index_item_depth_contours_osmand_ext">Tengeri mélységvonalak</string>
     <string name="index_item_depth_points_southern_hemisphere">Tengeri mélységpontok, déli félteke</string>
@@ -2904,7 +2777,7 @@ Kérlek adj meg egy teljes kódot</string>
     <string name="favorite_group_name">Csoport megnevezése</string>
     <string name="change_color">Szín módosítása</string>
     <string name="edit_name">Név szerkesztése</string>
-    <string name="animate_my_location">Helyzetem animálása</string>
+    <string name="animate_my_location">Saját pozícióm animálása</string>
     <string name="animate_my_location_desc">Helyzetem animálásának engedélyezése navigáció közben</string>
     <string name="shared_string_overview">Áttekintés</string>
     <string name="route_is_too_long_v2">Ennek az útnak a kiszámítása túl hosszú ideig tarthat. Ha 10 percen belül nem kap eredményt, kérjük, adjon hozzá köztes célpontokat.</string>
@@ -2947,4 +2820,27 @@ Kérlek adj meg egy teljes kódot</string>
     <string name="distance_moving">Korrigált távolság</string>
     <string name="shared_string_permissions">Engedélyek</string>
     <string name="import_gpx_failed_descr">Az OsmAnd nem tudja importálni a fájlt. Kérlek ellenőrizd, hogy az OsmAndnek van-e engedélye fájlt olvasni erről a helyről.</string>
+    <string name="store_tracks_in_monthly_directories">Nyomvonalak tárolása havi könyvtárakban</string>
+    <string name="store_tracks_in_monthly_directories_descrp">Felvett nyomvonalak tárolása havi bontású alkönyvtárakban (pl. 2017-01).</string>
+    <string name="shared_string_reset">Visszaállítás</string>
+    <string name="shared_string_reload">Újratöltés</string>
+    <string name="mapillary_menu_descr_tile_cache">Csempék újratöltése, hogy naprakész adat jelenjen meg.</string>
+    <string name="mapillary_menu_title_tile_cache">Csempe gyorsítótár</string>
+    <string name="wrong_user_name">Hibás felhasználónév!</string>
+    <string name="shared_string_to">Eddig</string>
+    <string name="mapillary_menu_date_from">Ettől</string>
+    <string name="mapillary_menu_descr_dates">A megadott időszakban feltöltött képek megtekintése.</string>
+    <string name="mapillary_menu_title_dates">Dátumok</string>
+    <string name="mapillary_menu_edit_text_hint">Felhasználónév megadása</string>
+    <string name="mapillary_menu_descr_username">A megadott felhasználó képeinek megtekintése.</string>
+    <string name="mapillary_menu_title_username">Felhasználónév</string>
+    <string name="mapillary_menu_filter_description">Szűrheted a képeket feltöltőre vagy dátum szerint. A szűrők csak közeli zoomszinteken érvényesek.</string>
+    
+    <string name="map_widget_ruler_control">Sugaras vonalzó</string>
+    <string name="average">Átlag</string>
+    <string name="of">%1$d / %2$d</string>
+    <string name="ascent_descent">Emelkedő/Lejtő</string>
+    <string name="moving_time">Mozgásban töltött idő</string>
+    <string name="max_min">Max/Min</string>
+    <string name="min_max">Min/Max</string>
     </resources>

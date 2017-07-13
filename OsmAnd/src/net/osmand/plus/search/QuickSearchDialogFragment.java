@@ -456,30 +456,9 @@ public class QuickSearchDialogFragment extends DialogFragment implements OsmAndC
 				new OnClickListener() {
 					@Override
 					public void onClick(View v) {
-
-						new DialogFragment() {
-							@NonNull
-							@Override
-							public Dialog onCreateDialog(Bundle savedInstanceState) {
-								AlertDialog.Builder builder = new AlertDialog.Builder(getActivity());
-								builder.setTitle(R.string.confirmation_to_delete_history_items)
-										.setPositiveButton(R.string.shared_string_yes, new DialogInterface.OnClickListener() {
-											@Override
-											public void onClick(DialogInterface dialog, int which) {
-												SearchHistoryHelper helper = SearchHistoryHelper.getInstance(app);
-												List<QuickSearchListItem> selectedItems = historySearchFragment.getListAdapter().getSelectedItems();
-												for (QuickSearchListItem searchListItem : selectedItems) {
-													HistoryEntry historyEntry = (HistoryEntry) searchListItem.getSearchResult().object;
-													helper.remove(historyEntry);
-												}
-												reloadHistory();
-												enableSelectionMode(false, -1);
-											}
-										})
-										.setNegativeButton(R.string.shared_string_no, null);
-								return builder.create();
-							}
-						}.show(getChildFragmentManager(), "DeleteHistoryConfirmationFragment");
+						DeleteDialogFragment deleteDialog = new DeleteDialogFragment();
+						deleteDialog.setSelectedItems(historySearchFragment.getListAdapter().getSelectedItems());
+						deleteDialog.show(getChildFragmentManager(), "DeleteHistoryConfirmationFragment");
 					}
 				}
 		);
@@ -2106,6 +2085,39 @@ public class QuickSearchDialogFragment extends DialogFragment implements OsmAndC
 
 		public QuickSearchToolbarController() {
 			super(TopToolbarControllerType.QUICK_SEARCH);
+		}
+	}
+
+	public static class DeleteDialogFragment extends DialogFragment {
+
+		private List<QuickSearchListItem> selectedItems;
+
+		public void setSelectedItems(List<QuickSearchListItem> selectedItems) {
+			this.selectedItems = selectedItems;
+		}
+
+		@NonNull
+		@Override
+		public Dialog onCreateDialog(Bundle savedInstanceState) {
+			AlertDialog.Builder builder = new AlertDialog.Builder(getActivity());
+			builder.setTitle(R.string.confirmation_to_delete_history_items)
+					.setPositiveButton(R.string.shared_string_yes, new DialogInterface.OnClickListener() {
+						@Override
+						public void onClick(DialogInterface dialog, int which) {
+							if (getParentFragment() instanceof QuickSearchDialogFragment) {
+								QuickSearchDialogFragment parentFragment = (QuickSearchDialogFragment) getParentFragment();
+								SearchHistoryHelper helper = SearchHistoryHelper.getInstance(parentFragment.getMyApplication());
+								for (QuickSearchListItem searchListItem : selectedItems) {
+									HistoryEntry historyEntry = (HistoryEntry) searchListItem.getSearchResult().object;
+									helper.remove(historyEntry);
+								}
+								parentFragment.reloadHistory();
+								parentFragment.enableSelectionMode(false, -1);
+							}
+						}
+					})
+					.setNegativeButton(R.string.shared_string_no, null);
+			return builder.create();
 		}
 	}
 }

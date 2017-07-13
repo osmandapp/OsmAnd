@@ -1,5 +1,4 @@
-<?xml version='1.0' encoding='UTF-8'?>
-<resources>
+<?xml version="1.0" encoding="UTF-8" standalone="no"?><resources>
 <string name="nothing_found">Heç nə tapılmadı :(</string>
     <string name="restart_search">Axtarışı yenidən başlat</string>
     <string name="change_color">Rəngi dəyiş</string>
@@ -1521,8 +1520,8 @@
     <string name="access_expanded_list">Genişlədilmiş siyahı</string>
     <string name="unit_of_length_descr">Uzunluq vahidlərini dəyişin</string>
     <string name="unit_of_length">Uzunluq vahidi</string>
-    <string name="map_widget_ruler_control_first_mode">İki nöqtə xətkeş</string>
-    <string name="map_widget_ruler_control_second_mode">Radius xətkeşi</string>
+    
+    <string name="map_widget_ruler_control">Radius xətkeşi</string>
     <string name="local_index_items_backuped">%1$d / %2$d obyekt uğurla qeyri-aktiv edildi.</string>
     <string name="local_index_no_items_to_do">%1$smək üçün obyekt yoxdur</string>
     <string name="local_index_action_do">%2$s obyekti %1$smək üzrəsiniz. Davam edilsin?</string>
@@ -1629,4 +1628,5 @@
     <string name="reports_for">Hesabat:</string>
     <string name="file_name_containes_illegal_char">Fayl adında dəstəklənməyən simvol var</string>
     <string name="store_tracks_in_monthly_directories">Qeyd edilən izləri aylıq qovluqlarda saxla</string>
+    <string name="store_tracks_in_monthly_directories_descrp">İzləri hər qeyd edildiyi aya görə alt qovluqlarda saxla (2017-01 kimi).</string>
     </resources>

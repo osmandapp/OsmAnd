@@ -12,6 +12,7 @@ import android.graphics.PointF;
 import android.graphics.PorterDuff.Mode;
 import android.graphics.PorterDuffColorFilter;
 import android.os.AsyncTask;
+import android.os.Build;
 import android.support.annotation.NonNull;
 import android.view.MotionEvent;
 
@@ -76,10 +77,14 @@ public abstract class OsmandMapLayer {
 	public boolean onTouchEvent(MotionEvent event, RotatedTileBox tileBox) {
 		return false;
 	}
-	
+
 
 	public <Params> void executeTaskInBackground(AsyncTask<Params, ?, ?> task, Params... params) {
-		task.execute(params);
+		if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.HONEYCOMB) {
+			task.executeOnExecutor(AsyncTask.THREAD_POOL_EXECUTOR, params);
+		} else {
+			task.execute(params);
+		}
 	}
 
 	public boolean isPresentInFullObjects(LatLon latLon) {

@@ -1,5 +1,4 @@
-<?xml version='1.0' encoding='UTF-8'?>
-<resources>
+<?xml version="1.0" encoding="UTF-8" standalone="no"?><resources>
 	<string name="av_locations">Allugamientos</string>
 	<string name="plugin_settings">Complementos</string>
 	<string name="no_updates_available">Nun hai anovamientos disponibles</string>
@@ -902,8 +901,8 @@ Puntos</string>
     <string name="mapillary_menu_descr_username">Ver les imaxes añadíes por un determináu usuariu.</string>
     <string name="mapillary_menu_title_username">Nome del usuariu</string>
     <string name="mapillary_menu_filter_description">Pueden filtriase les imaxes pol remitente o pola data. Los filtros aplíquense solo nes escales cercanes.</string>
-    <string name="map_widget_ruler_control_first_mode">Regla ente dos puntos</string>
-    <string name="map_widget_ruler_control_second_mode">Regla de radiu</string>
+    
+    <string name="map_widget_ruler_control">Regla de radiu</string>
     <string name="improve_coverage_mapillary">Ameyorar la cobertura de fotos con Mapillary</string>
     <string name="hillshade_menu_download_descr">Pa ver la solombra del relieve nel mapa, necesites descargar la superposición de solombra del relieve d\'esta rexón.</string>
     <string name="hillshade_purchase_header">Pa ver la solombra del relieve nel mapa, necesites comprar ya instalar el complementu Curves de Nivel</string>

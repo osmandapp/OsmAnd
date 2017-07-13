@@ -243,6 +243,9 @@ public class AudioVideoNotesPlugin extends OsmandPlugin {
 			return file;
 		}
 
+		public long getLastModified() {
+			return file.lastModified();
+		}
 
 		public boolean setName(String name) {
 			File directory = file.getParentFile();
