@@ -13,7 +13,7 @@ import java.util.List;
 public class GPXDatabase {
 
 	private static final String DB_NAME = "gpx_database";
-	private static final int DB_VERSION = 3;
+	private static final int DB_VERSION = 4;
 	private static final String GPX_TABLE_NAME = "gpxTable";
 	private static final String GPX_COL_NAME = "fileName";
 	private static final String GPX_COL_DIR = "fileDir";
@@ -40,6 +40,13 @@ public class GPXDatabase {
 	private static final String GPX_COL_COLOR = "color";
 	private static final String GPX_COL_FILE_LAST_MODIFIED_TIME = "fileLastModifiedTime";
 
+	private static final String GPX_COL_SPLIT_TYPE = "splitType";
+	private static final String GPX_COL_SPLIT_INTERVAL = "splitInterval";
+
+	public static final int GPX_SPLIT_TYPE_NO_SPLIT = -1;
+	public static final int GPX_SPLIT_TYPE_DISTANCE = 1;
+	public static final int GPX_SPLIT_TYPE_TIME = 2;
+
 	private static final String GPX_TABLE_CREATE = "CREATE TABLE IF NOT EXISTS " + GPX_TABLE_NAME + " (" +
 			GPX_COL_NAME + " TEXT, " +
 			GPX_COL_DIR + " TEXT, " +
@@ -63,7 +70,9 @@ public class GPXDatabase {
 			GPX_COL_POINTS + " int, " +
 			GPX_COL_WPT_POINTS + " int, " +
 			GPX_COL_COLOR + " TEXT, " +
-			GPX_COL_FILE_LAST_MODIFIED_TIME + " long);";
+			GPX_COL_FILE_LAST_MODIFIED_TIME + " long, " +
+			GPX_COL_SPLIT_TYPE + " int, " +
+			GPX_COL_SPLIT_INTERVAL + " double);";
 
 	private static final String GPX_TABLE_SELECT = "SELECT " +
 			GPX_COL_NAME + ", " +
@@ -85,7 +94,9 @@ public class GPXDatabase {
 			GPX_COL_POINTS + ", " +
 			GPX_COL_WPT_POINTS + ", " +
 			GPX_COL_COLOR + ", " +
-			GPX_COL_FILE_LAST_MODIFIED_TIME +
+			GPX_COL_FILE_LAST_MODIFIED_TIME + ", " +
+			GPX_COL_SPLIT_TYPE + ", " +
+			GPX_COL_SPLIT_INTERVAL +
 			" FROM " +	GPX_TABLE_NAME;
 
 	private OsmandApplication context;
@@ -95,6 +106,8 @@ public class GPXDatabase {
 		private GPXTrackAnalysis analysis;
 		private int color;
 		private long fileLastModifiedTime;
+		private int splitType;
+		private double splitInterval;
 
 		public GpxDataItem(File file, GPXTrackAnalysis analysis) {
 			this.file = file;
@@ -120,6 +133,14 @@ public class GPXDatabase {
 
 		public long getFileLastModifiedTime() {
 			return fileLastModifiedTime;
+		}
+
+		public int getSplitType() {
+			return splitType;
+		}
+
+		public double getSplitInterval() {
+			return splitInterval;
 		}
 	}
 
@@ -160,6 +181,10 @@ public class GPXDatabase {
 			for (GpxDataItem item : items) {
 				updateLastModifiedTime(item);
 			}
+		}
+		if (oldVersion < 4) {
+			db.execSQL("ALTER TABLE " + GPX_TABLE_NAME + " ADD " + GPX_COL_SPLIT_TYPE + " int");
+			db.execSQL("ALTER TABLE " + GPX_TABLE_NAME + " ADD " + GPX_COL_SPLIT_INTERVAL + " double");
 		}
 	}
 
@@ -223,6 +248,27 @@ public class GPXDatabase {
 		return false;
 	}
 
+	public boolean updateSplit(GpxDataItem item, int splitType, double splitInterval) {
+		SQLiteConnection db = openConnection(false);
+		if (db != null){
+			try {
+				String fileName = getFileName(item.file);
+				String fileDir = getFileDir(item.file);
+				db.execSQL("UPDATE " + GPX_TABLE_NAME + " SET " +
+								GPX_COL_SPLIT_TYPE + " = ?, " +
+								GPX_COL_SPLIT_INTERVAL + " = ? " +
+								" WHERE " + GPX_COL_NAME + " = ? AND " + GPX_COL_DIR + " = ?",
+						new Object[] { splitType, splitInterval, fileName, fileDir });
+				item.splitType = splitType;
+				item.splitInterval = splitInterval;
+			} finally {
+				db.close();
+			}
+			return true;
+		}
+		return false;
+	}
+
 	public boolean remove(File file) {
 		SQLiteConnection db = openConnection(false);
 		if (db != null){
@@ -278,16 +324,16 @@ public class GPXDatabase {
 		}
 		if (a != null) {
 			db.execSQL(
-					"INSERT INTO " + GPX_TABLE_NAME + " VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?)",
+					"INSERT INTO " + GPX_TABLE_NAME + " VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?)",
 					new Object[]{ fileName, fileDir, a.totalDistance, a.totalTracks, a.startTime, a.endTime,
 							a.timeSpan, a.timeMoving, a.totalDistanceMoving, a.diffElevationUp, a.diffElevationDown,
 							a.avgElevation, a.minElevation, a.maxElevation, a.maxSpeed, a.avgSpeed, a.points, a.wptPoints,
-							color, item.file.lastModified() });
+							color, item.file.lastModified(), item.splitType, item.splitInterval });
 		} else {
 			db.execSQL(
 					"INSERT INTO " + GPX_TABLE_NAME + "(" + GPX_COL_NAME + ", " + GPX_COL_DIR + ", " +
-							GPX_COL_COLOR + ", " + GPX_COL_FILE_LAST_MODIFIED_TIME + ") VALUES (?, ?, ?, ?)",
-					new Object[]{ fileName, fileDir, color, 0 });
+							GPX_COL_COLOR + ", " + GPX_COL_FILE_LAST_MODIFIED_TIME + ", " + GPX_COL_SPLIT_TYPE + ", " + GPX_COL_SPLIT_INTERVAL + ") VALUES (?, ?, ?, ?, ?, ?)",
+					new Object[]{ fileName, fileDir, color, 0, item.splitType, item.splitInterval });
 		}
 	}
 
@@ -350,6 +396,8 @@ public class GPXDatabase {
 		int wptPoints = (int)query.getInt(17);
 		String color = query.getString(18);
 		long fileLastModifiedTime = query.getLong(19);
+		int splitType = (int)query.getInt(20);
+		double splitInterval = query.getDouble(21);
 
 		GPXTrackAnalysis a = new GPXTrackAnalysis();
 		a.totalDistance = totalDistance;
@@ -383,6 +431,8 @@ public class GPXDatabase {
 			item.color = 0;
 		}
 		item.fileLastModifiedTime = fileLastModifiedTime;
+		item.splitType = splitType;
+		item.splitInterval = splitInterval;
 		return item;
 	}
 

@@ -1,11 +1,14 @@
 package net.osmand.plus.myplaces;
 
 import android.content.res.ColorStateList;
+import android.graphics.Paint;
+import android.graphics.Rect;
 import android.os.AsyncTask;
 import android.os.Bundle;
 import android.support.annotation.NonNull;
 import android.support.annotation.Nullable;
 import android.support.v7.widget.ListPopupWindow;
+import android.util.DisplayMetrics;
 import android.view.Gravity;
 import android.view.LayoutInflater;
 import android.view.Menu;
@@ -32,6 +35,7 @@ import net.osmand.plus.OsmandApplication;
 import net.osmand.plus.R;
 import net.osmand.plus.activities.TrackActivity;
 import net.osmand.plus.base.OsmAndListFragment;
+import net.osmand.plus.helpers.FontCache;
 import net.osmand.util.Algorithms;
 
 import java.text.DateFormat;
@@ -59,12 +63,22 @@ public class SplitSegmentFragment extends OsmAndListFragment {
     private TIntArrayList timeSplit = new TIntArrayList();
     private int selectedSplitInterval;
     private IconsCache ic;
+    private int minMaxSpeedLayoutWidth;
+    private Paint minMaxSpeedPaint;
+    private Rect minMaxSpeedTextBounds;
 
     @Override
     public void onCreate(@Nullable Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         app = getMyApplication();
         ic = app.getIconsCache();
+    }
+
+    @Override
+    public void onViewCreated(View view, Bundle savedInstanceState) {
+        super.onViewCreated(view, savedInstanceState);
+        updateContent();
+        updateHeader();
     }
 
     @Override
@@ -90,6 +104,13 @@ public class SplitSegmentFragment extends OsmAndListFragment {
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
         setHasOptionsMenu(true);
+
+        minMaxSpeedPaint = new Paint();
+        minMaxSpeedPaint.setTextSize(getResources().getDimension(R.dimen.default_split_segments_data));
+        minMaxSpeedPaint.setTypeface(FontCache.getFont(getContext(), "fonts/Roboto-Medium.ttf"));
+        minMaxSpeedPaint.setStyle(Paint.Style.FILL);
+        minMaxSpeedTextBounds = new Rect();
+
         final View view = getActivity().getLayoutInflater().inflate(R.layout.split_segments_layout, container, false);
 
         final ListView listView = (ListView) view.findViewById(android.R.id.list);
@@ -102,8 +123,6 @@ public class SplitSegmentFragment extends OsmAndListFragment {
 
         listView.addHeaderView(getActivity().getLayoutInflater().inflate(R.layout.gpx_split_segments_empty_header, null, false));
         listView.addFooterView(getActivity().getLayoutInflater().inflate(R.layout.list_shadow_footer, null, false));
-        updateContent();
-        updateHeader();
 
         setListAdapter(adapter);
 
@@ -119,7 +138,7 @@ public class SplitSegmentFragment extends OsmAndListFragment {
 
             @Override
             public void onScroll(AbsListView absListView, int i, int i1, int i2) {
-                View c = absListView.getChildAt(1);
+                View c = absListView.getChildAt(0);
                 if (c != null) {
                     int currentYPos = -c.getTop() + absListView.getFirstVisiblePosition() * c.getHeight();
                     if (previousYPos == -1) {
@@ -194,8 +213,9 @@ public class SplitSegmentFragment extends OsmAndListFragment {
         adapter.add(overviewSegments);
         List<GpxDisplayItem> splitSegments = getSplitSegments();
         adapter.addAll(splitSegments);
-        adapter.setNotifyOnChange(true);
         adapter.notifyDataSetChanged();
+        getListView().setSelection(0);
+        headerView.setTranslationY(0);
         updateHeader();
     }
 
@@ -395,7 +415,9 @@ public class SplitSegmentFragment extends OsmAndListFragment {
                 }
                 overviewTextView.setTextColor(defaultTextColor);
                 overviewTextView.setText(app.getString(R.string.shared_string_overview));
-                ((TextView) convertView.findViewById(R.id.fragment_count_text)).setText("");
+                if (currentGpxDisplayItem != null) {
+                    ((TextView) convertView.findViewById(R.id.fragment_count_text)).setText(app.getString(R.string.shared_string_time_span) + ": " + Algorithms.formatDuration((int) (currentGpxDisplayItem.analysis.timeSpan / 1000), app.accessibilityEnabled()));
+                }
             } else {
                 if (currentGpxDisplayItem != null && currentGpxDisplayItem.analysis != null) {
                     overviewTextView.setTextColor(app.getSettings().isLightContent() ? app.getResources().getColor(R.color.gpx_split_overview_light) : app.getResources().getColor(R.color.gpx_split_overview_dark));
@@ -555,7 +577,21 @@ public class SplitSegmentFragment extends OsmAndListFragment {
 
                         String maxSpeed = OsmAndFormatter.getFormattedSpeed(analysis.maxSpeed, app);
                         String minSpeed = OsmAndFormatter.getFormattedSpeed(analysis.minSpeed, app);
-                        String max_min_speed = maxSpeed.substring(0, maxSpeed.indexOf(" ")).concat("/").concat(minSpeed);
+                        String maxMinSpeed = maxSpeed.substring(0, maxSpeed.indexOf(" ")).concat("/").concat(minSpeed);
+
+                        if (minMaxSpeedLayoutWidth == 0) {
+                            DisplayMetrics metrics = new DisplayMetrics();
+                            getActivity().getWindowManager().getDefaultDisplay().getMetrics(metrics);
+                            int screenWidth = metrics.widthPixels;
+                            int widthWithoutSidePadding = screenWidth - AndroidUtils.dpToPx(getActivity(), 32);
+                            int singleLayoutWidth = widthWithoutSidePadding / 3;
+                            int twoLayouts = 2 * (singleLayoutWidth + AndroidUtils.dpToPx(getActivity(), 3));
+                            minMaxSpeedLayoutWidth = widthWithoutSidePadding - twoLayouts - AndroidUtils.dpToPx(getActivity(), 28);
+                        }
+
+                        minMaxSpeedPaint.getTextBounds(maxMinSpeed, 0, maxMinSpeed.length(), minMaxSpeedTextBounds);
+                        int minMaxStringWidth = minMaxSpeedTextBounds.width();
+
                         if (minSpeed.substring(0, minSpeed.indexOf(" ")).equals("0") || minSpeed.substring(0, minSpeed.indexOf(" ")).equals("0.0")) {
                             (convertView.findViewById(R.id.max_speed_value))
                                     .setVisibility(View.VISIBLE);
@@ -567,7 +603,7 @@ public class SplitSegmentFragment extends OsmAndListFragment {
                                     .setVisibility(View.GONE);
                             ((TextView) convertView.findViewById(R.id.max_min_speed_text))
                                     .setText(app.getString(R.string.shared_string_max));
-                        } else if (max_min_speed.length() > 9) {
+                        } else if (minMaxStringWidth > minMaxSpeedLayoutWidth) {
                             (convertView.findViewById(R.id.max_speed_value))
                                     .setVisibility(View.VISIBLE);
                             (convertView.findViewById(R.id.min_speed_value))
@@ -584,7 +620,7 @@ public class SplitSegmentFragment extends OsmAndListFragment {
                             (convertView.findViewById(R.id.max_min_speed_value))
                                     .setVisibility(View.VISIBLE);
                             ((TextView) convertView.findViewById(R.id.max_min_speed_value))
-                                    .setText(max_min_speed);
+                                    .setText(maxMinSpeed);
                             (convertView.findViewById(R.id.max_speed_value))
                                     .setVisibility(View.GONE);
                             (convertView.findViewById(R.id.min_speed_value))
