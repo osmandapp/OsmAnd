@@ -72,7 +72,12 @@ public class SecondSplashScreenFragment extends Fragment {
         view.setBackgroundColor(getResources().getColor(R.color.map_background_color_light));
 
         ImageView logo = new ImageView(getContext());
-        logo.setImageDrawable(getResources().getDrawable(R.drawable.ic_logo_splash_osmand_plus));
+        if (Version.isFreeVersion(((MapActivity) getActivity()).getMyApplication())) {
+            logo.setImageDrawable(getResources().getDrawable(R.drawable.ic_logo_splash_osmand));
+        } else if ((Version.isPaidVersion(((MapActivity) getActivity()).getMyApplication())) ||
+                (Version.isDeveloperVersion(((MapActivity) getActivity()).getMyApplication()))) {
+            logo.setImageDrawable(getResources().getDrawable(R.drawable.ic_logo_splash_osmand_plus));
+        }
         RelativeLayout.LayoutParams logoLayoutParams = new RelativeLayout.LayoutParams(RelativeLayout.LayoutParams.WRAP_CONTENT, RelativeLayout.LayoutParams.WRAP_CONTENT);
         logoLayoutParams.addRule(RelativeLayout.ALIGN_PARENT_TOP);
         logoLayoutParams.addRule(RelativeLayout.CENTER_HORIZONTAL);
