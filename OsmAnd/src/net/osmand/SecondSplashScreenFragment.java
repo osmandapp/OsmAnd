@@ -20,7 +20,7 @@ import net.osmand.plus.helpers.AndroidUiHelper;
 public class SecondSplashScreenFragment extends Fragment {
     public static final String TAG = "SecondSplashScreenFragment";
     public static boolean SHOW = true;
-    private static final int SECOND_SPLASH_TIME_OUT = 2000;
+    private static final int SECOND_SPLASH_TIME_OUT = 5000;
 
     private boolean hasNavBar() {
         int id = getResources().getIdentifier("config_showNavigationBar", "bool", "android");
@@ -124,26 +124,23 @@ public class SecondSplashScreenFragment extends Fragment {
     }
 
     @Override
-    public void onViewCreated(View view, @Nullable Bundle savedInstanceState) {
-        super.onViewCreated(view, savedInstanceState);
+    public void onResume() {
+        super.onResume();
+        ((MapActivity)getActivity()).disableDrawer();
         new Handler().postDelayed(new Runnable() {
 
             @Override
             public void run() {
-                getActivity().setRequestedOrientation(ActivityInfo.SCREEN_ORIENTATION_UNSPECIFIED);
-                if (((MapActivity)getActivity()).getMyApplication().getSettings().MAP_SCREEN_ORIENTATION.get() != getActivity().getRequestedOrientation()) {
-                    getActivity().setRequestedOrientation(((MapActivity)getActivity()).getMyApplication().getSettings().MAP_SCREEN_ORIENTATION.get());
-                    // can't return from this method we are not sure if activity will be recreated or not
+                if ((MapActivity)getActivity() != null) {
+                    ((MapActivity)getActivity()).setRequestedOrientation(ActivityInfo.SCREEN_ORIENTATION_UNSPECIFIED);
+                    if (((MapActivity)getActivity()).getMyApplication().getSettings().MAP_SCREEN_ORIENTATION.get() != getActivity().getRequestedOrientation()) {
+                        getActivity().setRequestedOrientation(((MapActivity)getActivity()).getMyApplication().getSettings().MAP_SCREEN_ORIENTATION.get());
+                        // can't return from this method we are not sure if activity will be recreated or not
+                    }
+                    ((MapActivity)getActivity()).getSupportFragmentManager().beginTransaction().remove(SecondSplashScreenFragment.this).commitAllowingStateLoss();
                 }
-                getActivity().getSupportFragmentManager().beginTransaction().remove(SecondSplashScreenFragment.this).commitAllowingStateLoss();
             }
         }, SECOND_SPLASH_TIME_OUT);
-    }
-
-    @Override
-    public void onResume() {
-        super.onResume();
-        ((MapActivity)getActivity()).disableDrawer();
     }
 
     @Override
