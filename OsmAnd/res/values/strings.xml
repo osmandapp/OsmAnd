@@ -9,6 +9,8 @@
          3. All your modified/created strings are in the top of the file (to make easier find what\'s translated).
     PLEASE: Have a look at http://code.google.com/p/osmand/wiki/UIConsistency, it may really improve your and our work  :-)  Thx - Hardy
     -->
+    <string name="quick_action_resume_pause_navigation">Resume/Pause Navigation</string>
+    <string name="quick_action_resume_pause_navigation_descr">Press this button to pause the navigation, or to resume it if it was already paused.</string>
     <string name="quick_action_show_navigation_finish_dialog">Show Finish navigation dialog</string>
     <string name="quick_action_start_stop_navigation">Start/Finish Navigation</string>
     <string name="quick_action_start_stop_navigation_descr">Press this button to start the navigation, or to stop it if it was already started.</string>

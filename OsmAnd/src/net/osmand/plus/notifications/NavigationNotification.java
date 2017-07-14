@@ -64,7 +64,7 @@ public class NavigationNotification extends OsmandNotification {
 				RoutingHelper routingHelper = app.getRoutingHelper();
 				routingHelper.setRoutePlanningMode(true);
 				routingHelper.setFollowingMode(false);
-				routingHelper.setPauseNaviation(true);
+				routingHelper.setPauseNavigation(true);
 			}
 		}, new IntentFilter(OSMAND_PAUSE_NAVIGATION_SERVICE_ACTION));
 
