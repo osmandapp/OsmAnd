@@ -1439,7 +1439,7 @@ Tanto la ubicación como el tiempo de estacionamiento se muestran en el panel de
     <string name="save_global_track_interval">Intervalo de registro general</string>
     <string name="traffic_warning_speed_limit">Límite de velocidad</string>
     <string name="traffic_warning_border_control">Control fronterizo</string>
-    <string name="traffic_warning_payment">Peaje</string>
+    <string name="traffic_warning_payment">Cabina de peaje</string>
     <string name="traffic_warning_stop">Señal de detención</string>
     <string name="traffic_warning_speed_camera">Radar de velocidad</string>
     <string name="local_index_description">Pulsa cualquier objeto para ver más detalles, mantén pulsado para desactivar o borrar. Datos en el dispositivo actualmente (%1$s libre):</string>
@@ -1753,7 +1753,7 @@ Lon %2$s</string>
     <string name="no_updates_available">Sin actualizaciones disponibles</string>
     <string name="we_really_care_about_your_opinion">Nos interesa mucho y es importante para nosotros oír su opinión.</string>
     <string name="rendering_value_boldOutline_name">Borde remarcado</string>
-    <string name="traffic_warning_hazard">Advertencia de riesgo</string>
+    <string name="traffic_warning_hazard">Advertencia de peligro</string>
     <string name="dahboard_options_dialog_title">Configurar panel</string>
     <string name="shared_string_card_was_hidden">Se ocultó la tarjeta</string>
     <string name="shared_string_undo">Deshacer</string>
@@ -2456,7 +2456,7 @@ Por favor proporciona un código completo</string>
     <string name="restore_purchases">Restaurar compras</string>
     <string name="fonts_header">Fuentes para mapa</string>
     <string name="osmand_extended_description_part2">"Navegación GPS • Puedes elegir modo entre desconectado (sin cargos de roaming cuando estás en el extranjero) o conectado (más rápido) • La guía de voz correo a giro te indica a lo largo del camino (voces grabadas y sintetizadas) • La ruta se reconstruye cada vez que te apartes de ella • La indicación de carril, los nombres de las calles, y el tiempo estimado de llegada ayudará a lo largo de la vía • Para hacer tu viaje más seguro,  el modo día/noche cambia automáticamente • Puedes elegir mostrar los límites de velocidad, y recibir recordatorios si se superan • El zoom del mapa se ajusta a tu velocidad • Puedes buscar destinos por dirección, por tipo (por ejemplo: aparcamiento, restaurante, hotel, gasolinera, museo), o mediante coordenadas geográficas • Admite puntos intermedios en el itinerario • Puedes grabar tu propia pista  GPX o subir una, y seguirla"</string>
-    <string name="osmand_extended_description_part3">Mapa • Muestra PDIs (puntos de interés) a tu alrededor • Ajusta el mapa hacia la dirección del movimiento (o a la brújula) • Muestra dónde estás y hacia dónde estás mirando • Comparte tu ubicación para que tus amigos puedan encontrarte • Mantiene tus lugares más importantes en Favoritos • Te permite elegir cómo se muestran los nombres en el mapa: en inglés, local, o con ortografía fonética • Muestra teselas especializadas en línea, vista de satélite (de Bing), diferentes superposiciones como pistas GPX y capas adicionales con transparencia personalizable.</string>
+    <string name="osmand_extended_description_part3">Mapa • Muestra PDIs (puntos de interés) a tu alrededor • Ajusta el mapa hacia la dirección del movimiento (o a la brújula) • Muestra dónde estás y hacia dónde estás mirando • Comparte tu ubicación para que tus amigos puedan encontrarte • Mantiene tus lugares más importantes en Favoritos • Te permite elegir cómo se muestran los nombres en el mapa: en inglés, local, o con ortografía fonética • Muestra teselas especializadas en línea, vista de satélite (de Bing), diferentes superposiciones como pistas GPX y capas adicionales con transparencia personalizable</string>
     <string name="osmand_extended_description_part4">Esquí El complemento de OsmAnd de mapas de esquí te permite ver las pistas de esquí con el nivel de complejidad y alguna información adicional, como la ubicación de los ascensores y otras instalaciones.</string>
     <string name="osmand_extended_description_part5">Ciclismo 
 \n • Puedes encontrar vías ciclistas en el mapa 
