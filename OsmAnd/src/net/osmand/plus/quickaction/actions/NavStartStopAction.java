@@ -11,6 +11,7 @@ import net.osmand.plus.R;
 import net.osmand.plus.activities.MapActivity;
 import net.osmand.plus.mapcontextmenu.other.DestinationReachedMenu;
 import net.osmand.plus.quickaction.QuickAction;
+import net.osmand.plus.routing.RoutingHelper;
 
 public class NavStartStopAction extends QuickAction {
 
@@ -27,7 +28,8 @@ public class NavStartStopAction extends QuickAction {
 
     @Override
     public void execute(MapActivity activity) {
-        if (activity.getRoutingHelper().isFollowingMode()) {
+        RoutingHelper helper = activity.getRoutingHelper();
+        if (helper.isPauseNavigation() || helper.isFollowingMode()) {
             if (Boolean.valueOf(getParams().get(KEY_DIALOG))) {
                 DestinationReachedMenu.show(activity);
             } else {
@@ -68,17 +70,21 @@ public class NavStartStopAction extends QuickAction {
 
     @Override
     public String getActionText(OsmandApplication application) {
-        return application.getRoutingHelper().isFollowingMode()
-                ? application.getString(R.string.cancel_navigation)
-                : application.getString(R.string.follow);
+        RoutingHelper helper = application.getRoutingHelper();
+        if (helper.isPauseNavigation() || helper.isFollowingMode()) {
+            return application.getString(R.string.cancel_navigation);
+        }
+        return application.getString(R.string.follow);
     }
 
     @Override
     public int getIconRes(Context context) {
         if (context instanceof MapActivity) {
-            return ((MapActivity) context).getRoutingHelper().isFollowingMode()
-                    ? R.drawable.ic_action_target
-                    : R.drawable.ic_action_start_navigation;
+            RoutingHelper helper = ((MapActivity) context).getRoutingHelper();
+            if (helper.isPauseNavigation() || helper.isFollowingMode()) {
+                return R.drawable.ic_action_target;
+            }
+            return R.drawable.ic_action_start_navigation;
         }
         return super.getIconRes(context);
     }
