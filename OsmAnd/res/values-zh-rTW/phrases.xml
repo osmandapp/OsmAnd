@@ -950,10 +950,10 @@
 	<string name="poi_fax">傳真</string>
 	<string name="facebook">臉書</string>
 	<string name="poi_mobile">行動電話</string>
-	<string name="poi_animal_shelter_dog">收容所類型：狗</string>
-	<string name="poi_animal_shelter_cat">收容所類型：貓</string>
-	<string name="poi_animal_shelter_dog_cat">收容所類型：狗、貓</string>
-	<string name="poi_animal_shelter_bird">收容所類型：鳥</string>
+	<string name="poi_animal_shelter_dog">狗</string>
+	<string name="poi_animal_shelter_cat">貓</string>
+	<string name="poi_animal_shelter_dog_cat">狗、貓</string>
+	<string name="poi_animal_shelter_bird">鳥類</string>
 
 <string name="poi_shower">淋浴</string>
 	<string name="poi_recycling_centre">類型：資源回收中心</string>
@@ -3433,5 +3433,21 @@
 	<string name="poi_generator_output_electricity_no">輸出（電力）：無</string>
 
 	<string name="poi_owner">業主</string>
+
+<string name="poi_animal_shelter_type">動物收容所</string>
+	<string name="poi_animal_shelter_purpose">目的</string>
+
+<string name="poi_animal_shelter_wildlife">野生動物</string>
+	<string name="poi_animal_shelter_horse">馬</string>
+	<string name="poi_animal_shelter_mammal">哺乳動物</string>
+	<string name="poi_animal_shelter_fish">魚類</string>
+
+	<string name="poi_xmas_day_date">聖誕節：活動期間</string>
+	<string name="poi_animal_shelter_purpose_adoption_yes">領養：是的</string>
+	<string name="poi_animal_shelter_purpose_adoption_no">領養：否</string>
+	<string name="poi_animal_shelter_purpose_release_yes">釋放：是的</string>
+	<string name="poi_animal_shelter_purpose_release_no">釋放：否</string>
+
+	<string name="poi_spaceport">太空中心</string>
 
 </resources>
