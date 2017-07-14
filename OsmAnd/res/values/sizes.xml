@@ -138,4 +138,7 @@
 	<dimen name="default_split_segments_sub">10sp</dimen>
 
 	<dimen name="dialog_header_text_size">20sp</dimen>
+
+	<dimen name="splash_screen_logo_top">150dp</dimen>
+	<dimen name="splash_screen_text_bottom">128dp</dimen>
 </resources>
