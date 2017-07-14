@@ -30,6 +30,7 @@
         android:src="@drawable/bg_shadow_list_top" />
 
     <LinearLayout
+        android:id="@+id/show_dialog_row"
         android:layout_width="match_parent"
         android:layout_height="56dp"
         android:background="?attr/bg_color"

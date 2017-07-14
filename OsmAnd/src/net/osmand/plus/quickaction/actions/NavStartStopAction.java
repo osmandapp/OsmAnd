@@ -42,10 +42,18 @@ public class NavStartStopAction extends QuickAction {
         View view = LayoutInflater.from(parent.getContext())
                 .inflate(R.layout.quick_action_start_stop_navigation, parent, false);
 
+        final SwitchCompat showDialogSwitch = (SwitchCompat) view.findViewById(R.id.show_dialog_switch);
+
         if (!getParams().isEmpty()) {
-            ((SwitchCompat) view.findViewById(R.id.show_dialog_switch))
-                    .setChecked(Boolean.valueOf(getParams().get(KEY_DIALOG)));
+            showDialogSwitch.setChecked(Boolean.valueOf(getParams().get(KEY_DIALOG)));
         }
+
+        view.findViewById(R.id.show_dialog_row).setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                showDialogSwitch.setChecked(!showDialogSwitch.isChecked());
+            }
+        });
 
         parent.addView(view);
     }
