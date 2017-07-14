@@ -131,6 +131,11 @@
 				<data android:scheme="file" android:host="*" android:mimeType="*/*" android:pathPattern=".*\\..*\\..*\\.kml" />
 				<data android:scheme="file" android:host="*" android:mimeType="*/*" android:pathPattern=".*\\..*\\..*\\..*\\.kml" />
 				<data android:scheme="file" android:host="*" android:mimeType="*/*" android:pathPattern=".*\\..*\\..*\\..*\\..*\\.kml" />
+				<data android:scheme="file" android:host="*" android:mimeType="*/*" android:pathPattern=".*\\.kmz" />
+				<data android:scheme="file" android:host="*" android:mimeType="*/*" android:pathPattern=".*\\..*\\.kmz" />
+				<data android:scheme="file" android:host="*" android:mimeType="*/*" android:pathPattern=".*\\..*\\..*\\.kmz" />
+				<data android:scheme="file" android:host="*" android:mimeType="*/*" android:pathPattern=".*\\..*\\..*\\..*\\.kmz" />
+				<data android:scheme="file" android:host="*" android:mimeType="*/*" android:pathPattern=".*\\..*\\..*\\..*\\..*\\.kmz" />
 			</intent-filter>
 
 			<!--trying to handle emails-->
