@@ -1,4 +1,5 @@
-<?xml version="1.0" encoding="UTF-8" standalone="no"?><resources>
+<?xml version='1.0' encoding='UTF-8'?>
+<resources>
 
     <string name="layer_map_appearance">Configurar pantalla</string>
     <string name="show_lanes">Carriles</string>
@@ -2636,21 +2637,27 @@ Algunas de las características principales:
     <string name="shared_string_permissions">Permisos</string>
     <string name="import_gpx_failed_descr">OsmAnd no puede importar el archivo. Comprueba si OsmAnd tiene permiso para leer el archivo en esa ubicación.</string>
     <string name="distance_moving">Distancia corregida</string>
-    <string name="store_tracks_in_monthly_directories">Almacenar pistas grabadas en directorios mensuales</string>
-    <string name="store_tracks_in_monthly_directories_descrp">Almacena las pistas grabadas en subcarpetas según el mes de grabación (como 2017 - 01).</string>
-    <string name="shared_string_reset">Reiniciar</string>
+    <string name="store_tracks_in_monthly_directories">Guardar las trazas grabadas en carpetas mensuales</string>
+    <string name="store_tracks_in_monthly_directories_descrp">Guarda las trazas grabadas en subcarpetas por mes de grabación (como 2017-01).</string>
+    <string name="shared_string_reset">Restablecer</string>
     <string name="shared_string_reload">Recargar</string>
-    <string name="mapillary_menu_descr_tile_cache">Recarga las teselas para ver ldatos actualizados.</string>
-    <string name="mapillary_menu_title_tile_cache">Almacén de teselas</string>
+    <string name="mapillary_menu_descr_tile_cache">Recargar teselas para ver la información actualizada.</string>
+    <string name="mapillary_menu_title_tile_cache">Caché de teselas</string>
     <string name="wrong_user_name">¡Nombre de usuario incorrecto!</string>
-    <string name="shared_string_to">Para</string>
-    <string name="mapillary_menu_date_from">De</string>
-    <string name="mapillary_menu_descr_dates">Ver las imágenes añadidas en un periodo determinado.</string>
+    <string name="shared_string_to">Hasta</string>
+    <string name="mapillary_menu_date_from">Desde</string>
+    <string name="mapillary_menu_descr_dates">Ver imágenes añadidas en un cierto período.</string>
     <string name="mapillary_menu_title_dates">Fechas</string>
-    <string name="mapillary_menu_edit_text_hint">Escribe el nombre de usuario</string>
-    <string name="mapillary_menu_descr_username">Ver las imágenes añadidas por un determinado usuario.</string>
+    <string name="mapillary_menu_edit_text_hint">Tipo de nombre de usuario</string>
+    <string name="mapillary_menu_descr_username">Ver imágenes añadidas por un determinado usuario.</string>
     <string name="mapillary_menu_title_username">Nombre de usuario</string>
-    <string name="mapillary_menu_filter_description">Puedes filtrar imágenes por remitente o por fecha. Los filtros se aplican sólo para el zoom de primer plano.</string>
+    <string name="mapillary_menu_filter_description">Puedes filtrar imágenes por usuario o por fecha. Los filtros aplican para los primeros acercamientos.</string>
     
-    <string name="map_widget_ruler_control">Regla de radio</string>
+    <string name="map_widget_ruler_control">Regla radial</string>
+    <string name="average">Promedio</string>
+    <string name="of">%1$d de %2$d</string>
+    <string name="ascent_descent">Ascenso/Descenso</string>
+    <string name="moving_time">Tiempo moviéndose</string>
+    <string name="max_min">Máx/Min</string>
+    <string name="min_max">Min/Máx</string>
     </resources>
