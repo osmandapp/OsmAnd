@@ -1,5 +1,6 @@
 package net.osmand.plus.quickaction.actions;
 
+import android.content.Context;
 import android.support.v7.widget.SwitchCompat;
 import android.view.LayoutInflater;
 import android.view.View;
@@ -73,7 +74,12 @@ public class NavStartStopAction extends QuickAction {
     }
 
     @Override
-    public boolean isActionWithSlash(OsmandApplication application) {
-        return application.getRoutingHelper().isFollowingMode();
+    public int getIconRes(Context context) {
+        if (context instanceof MapActivity) {
+            return ((MapActivity) context).getRoutingHelper().isFollowingMode()
+                    ? R.drawable.ic_action_target
+                    : R.drawable.ic_action_start_navigation;
+        }
+        return super.getIconRes(context);
     }
 }
