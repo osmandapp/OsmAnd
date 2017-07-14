@@ -954,10 +954,10 @@
 	<string name="poi_fax">Fax</string>
 	<string name="facebook">Facebook</string>
 	<string name="poi_mobile">Móvil</string>
-	<string name="poi_animal_shelter_dog">Refugio canino</string>
-	<string name="poi_animal_shelter_cat">Refugio gatuno</string>
-	<string name="poi_animal_shelter_dog_cat">Refugio canino y gatuno</string>
-	<string name="poi_animal_shelter_bird">Refugio para aves</string>
+	<string name="poi_animal_shelter_dog">Perros</string>
+	<string name="poi_animal_shelter_cat">Gatos</string>
+	<string name="poi_animal_shelter_dog_cat">Perros, gatos</string>
+	<string name="poi_animal_shelter_bird">Aves</string>
 
 <string name="poi_recycling_centre">Centro de reciclaje</string>
 	<string name="poi_recycling_container">Contenedor</string>
@@ -1546,7 +1546,7 @@
 	<string name="poi_payment_token_no">No acepta Tokens</string>
 	<string name="poi_payment_gift_card_yes">Tarjetas de regalo</string>
 	<string name="poi_payment_gift_card_no">No acepta tarjetas de regalo</string>
-	<string name="poi_payment_pro100_yes">"PRO100 "</string>
+	<string name="poi_payment_pro100_yes">PRO100</string>
 	<string name="poi_payment_pro100_no">No acepta tarjetas PRO100</string>
 	<string name="poi_payment_union_card_yes">Union Card</string>
 	<string name="poi_payment_union_card_no">No acepta tarjetas Union card</string>
@@ -2128,7 +2128,7 @@
 	<string name="poi_openfire_no">Prohibido encender fuego</string>
 	<string name="poi_backcountry_yes">Sí</string>
 	<string name="poi_backcountry_no">No</string>
-	<string name="poi_scout_yes">Permitido campamento scout</string>
+	<string name="poi_scout_yes">Sí</string>
 	<string name="poi_scout_no">Prohibido campamento scout</string>
 	<string name="poi_group_only_yes">Sólo para grupos</string>
 	<string name="poi_group_only_no">Sólo para grupos: No</string>
@@ -2293,7 +2293,7 @@
 	<string name="poi_historic_period_old_kingdom">Período histórico: Antiguo reinado (2686 – 2181 aC)</string>
 	<string name="poi_historic_period_first_intermediate_period">Período histórico: Primer período intermedio (2181 – 2055 aC)</string>
 	<string name="poi_historic_period_second_intermediate_period">Período histórico: Segundo período intermedio (1650 – 1550 aC)</string>
-	<string name="poi_historic_period_third_intermediate_period">"Período histórico: Tercer período intermedio (1069 – 664 aC) "</string>
+	<string name="poi_historic_period_third_intermediate_period">Período histórico: Tercer período intermedio (1069 – 664 aC)</string>
 	<string name="poi_historic_period_first_persian_period">Período histórico: Primer período persa</string>
 	<string name="poi_historic_period_late_period">Período histórico: Último período (664 – 332 aC)</string>
 	<string name="poi_historic_period_second_persian_period">Período histórico: Segundo período persa</string>
@@ -2425,7 +2425,7 @@
 
 <string name="poi_wiki_lang_af">Wiki en Afrikáans</string>
 	<string name="poi_wiki_lang_als">Wiki en alsaciano</string>
-	<string name="poi_wiki_lang_az">Wiki en azerí</string>
+	<string name="poi_wiki_lang_az">Wiki en azerí (Azerbaiyán)</string>
 	<string name="poi_wiki_lang_bn">Wiki en bengalí</string>
 	<string name="poi_wiki_lang_bpy">Wiki en bishnupriya</string>
 	<string name="poi_wiki_lang_br">Wiki en bretón</string>
@@ -2751,7 +2751,7 @@
 	<string name="poi_health_facility_type_nursing_home">Tipo de centro sanitario: hogar de ancianos</string>
 	<string name="poi_health_facility_type_support_group_home">Tipo de centro sanitario: grupo de apoyo</string>
 
-	<string name="poi_health_specialty_palliative_medicine_yes">Especialidad sanitario: medicina paliativa</string>
+	<string name="poi_health_specialty_palliative_medicine_yes">Medicina paliativa</string>
 
 	<string name="poi_suction_point">Punto de aspiración</string>
 
@@ -2865,12 +2865,12 @@
 	<string name="poi_fire_hydrant_pressure">Presión del hidrante</string>
 	<string name="poi_fire_hydrant_count">Cantidad de hidrantes</string>
 	<string name="poi_fire_hydrant_flow_capacity">Capacidad de caudal del hidrante</string>
-	<string name="poi_fire_hydrant_position_sidewalk">Ubicación del hidrante: en acera</string>
-	<string name="poi_fire_hydrant_position_green">Ubicación del hidrante: en césped</string>
-	<string name="poi_fire_hydrant_position_lane">Ubicación del hidrante: en carril</string>
-	<string name="poi_fire_hydrant_position_parking_lot">Ubicación del hidrante: en aparcamiento</string>
-	<string name="poi_fire_hydrant_position_street">Ubicación del hidrante: en la calle</string>
-	<string name="poi_fire_hydrant_position_underground">Ubicación del hidrante: subterráneo</string>
+	<string name="poi_fire_hydrant_position_sidewalk">En acera</string>
+	<string name="poi_fire_hydrant_position_green">En césped</string>
+	<string name="poi_fire_hydrant_position_lane">En carril</string>
+	<string name="poi_fire_hydrant_position_parking_lot">En aparcamiento</string>
+	<string name="poi_fire_hydrant_position_street">En la calle</string>
+	<string name="poi_fire_hydrant_position_underground">Subterráneo</string>
 	<string name="poi_fire_hydrant_style_wsh">Estilo del hidrante: wsh</string>
 	<string name="poi_fire_hydrant_style_water_source_main">Principal</string>
 	<string name="poi_fire_hydrant_style_water_source_pond">Estanque</string>
@@ -2959,9 +2959,9 @@
 	<string name="poi_payment_troika_no">No acepta tarjeta Troika</string>
 
 	<string name="poi_telescope">Telescopio</string>
-	<string name="poi_telescope_type_optical">Tipo de telescopio: óptico</string>
-	<string name="poi_telescope_type_radio">Tipo de telescopio: radiotelescopio</string>
-	<string name="poi_telescope_type_gamma">Tipo de telescopio: de rayos gamma</string>
+	<string name="poi_telescope_type_optical">Óptico</string>
+	<string name="poi_telescope_type_radio">Radiotelescopio</string>
+	<string name="poi_telescope_type_gamma">Rayos gamma</string>
 	<string name="poi_telescope_diameter">Diámetro</string>
 	<string name="poi_telescope_spectrum">Espectro</string>
 	<string name="poi_telescope_usage_education">Uso: educativo</string>
@@ -3130,8 +3130,8 @@
 
 	<string name="poi_shop_craft">Tienda de artículos de Artes y oficios</string>
 
-	<string name="poi_service_bicycle_charging_yes">Carga de bicicletas: sí</string>
-	<string name="poi_service_bicycle_charging_no">Carga de bicicletas: no</string>
+	<string name="poi_service_bicycle_charging_yes">Cargador eléctrico</string>
+	<string name="poi_service_bicycle_charging_no">Cargador eléctrico: no</string>
 
 	<string name="poi_xmas">Navidad</string>
 	<string name="poi_xmas_event">Evento de Navidad</string>
