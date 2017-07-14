@@ -2140,14 +2140,14 @@
 	<string name="poi_shower_outdoor">Ducha: exterior</string>
 	<string name="poi_shower_cold">Ducha: fría</string>
 	<string name="poi_shower_indoor">Ducha: interior</string>
-	<string name="poi_caravans_yes">Si</string>
+	<string name="poi_caravans_yes">Sí</string>
 	<string name="poi_caravans_no">Prohibido casas rodantes</string>
-	<string name="poi_impromptu_yes">Improvisado: Si</string>
+	<string name="poi_impromptu_yes">Improvisado: Sí</string>
 	<string name="poi_impromptu_no">Improvisado: No</string>
 	<string name="poi_sanitary_dump_station_yes">Con estación de descarga sanitaria</string>
 	<string name="poi_sanitary_dump_station_no">Sin estación de descarga sanitaria</string>
 	<string name="poi_sanitary_dump_station_customers">Estación de descarga sanitaria sólo para clientes</string>
-	<string name="poi_power_supply_yes">Si</string>
+	<string name="poi_power_supply_yes">Sí</string>
 	<string name="poi_power_supply_no">Sin fuentes de alimentación</string>
 	<string name="poi_power_supply_cee_17_blue">Fuente de alimentación (enchufe): CEE 17 azul</string>
 	<string name="poi_power_supply_cee_7_4">Fuente de alimentación (enchufe): CEE 7/4</string>
@@ -2389,7 +2389,7 @@
 	<string name="poi_sculptor">Escultor</string>
 
 	<string name="poi_cross">Cruz</string>
-	<string name="poi_summit_cross">Cumbre a la cruz: Si</string>
+	<string name="poi_summit_cross">Cumbre a la cruz: Sí</string>
 
 	<string name="poi_prison_camp">Ex campo de prisioneros</string>
 	<string name="poi_concentration_camp">Tipo: Campo de concentración</string>
