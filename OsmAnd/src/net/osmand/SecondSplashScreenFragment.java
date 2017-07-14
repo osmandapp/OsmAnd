@@ -21,6 +21,7 @@ public class SecondSplashScreenFragment extends Fragment {
     public static final String TAG = "SecondSplashScreenFragment";
     public static boolean SHOW = true;
     private static final int SECOND_SPLASH_TIME_OUT = 5000;
+    private boolean started = false;
 
     private boolean hasNavBar() {
         int id = getResources().getIdentifier("config_showNavigationBar", "bool", "android");
@@ -69,6 +70,7 @@ public class SecondSplashScreenFragment extends Fragment {
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
         RelativeLayout view = new RelativeLayout(getActivity());
+        view.setOnClickListener(null);
         view.setBackgroundColor(getResources().getColor(R.color.map_background_color_light));
 
         ImageView logo = new ImageView(getContext());
@@ -127,11 +129,12 @@ public class SecondSplashScreenFragment extends Fragment {
     public void onResume() {
         super.onResume();
         ((MapActivity)getActivity()).disableDrawer();
-        new Handler().postDelayed(new Runnable() {
+        if (!started) {
+            started = true;
+            new Handler().postDelayed(new Runnable() {
 
-            @Override
-            public void run() {
-                if ((MapActivity)getActivity() != null) {
+                @Override
+                public void run() {
                     ((MapActivity)getActivity()).setRequestedOrientation(ActivityInfo.SCREEN_ORIENTATION_UNSPECIFIED);
                     if (((MapActivity)getActivity()).getMyApplication().getSettings().MAP_SCREEN_ORIENTATION.get() != getActivity().getRequestedOrientation()) {
                         getActivity().setRequestedOrientation(((MapActivity)getActivity()).getMyApplication().getSettings().MAP_SCREEN_ORIENTATION.get());
@@ -139,8 +142,8 @@ public class SecondSplashScreenFragment extends Fragment {
                     }
                     ((MapActivity)getActivity()).getSupportFragmentManager().beginTransaction().remove(SecondSplashScreenFragment.this).commitAllowingStateLoss();
                 }
-            }
-        }, SECOND_SPLASH_TIME_OUT);
+            }, SECOND_SPLASH_TIME_OUT);
+        }
     }
 
     @Override
