@@ -350,6 +350,10 @@ public class MapControlsLayer extends OsmandMapLayer {
 		}
 	}
 
+	public void stopNavigation() {
+		clickRouteCancel();
+	}
+
 	protected void clickRouteCancel() {
 		mapRouteInfoMenu.hide();
 		if (mapActivity.getRoutingHelper().isFollowingMode()) {
@@ -438,6 +442,10 @@ public class MapControlsLayer extends OsmandMapLayer {
 	public void doNavigate() {
 		mapRouteInfoMenu.hide();
 		startNavigation();
+	}
+
+	public void showNavigationDialog() {
+		onNavigationClick();
 	}
 
 	private void onNavigationClick() {
