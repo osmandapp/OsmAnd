@@ -114,14 +114,14 @@ public class QuickActionFactory {
 
         quickActions.add(new ShowHidePoiAction());
 
-		if (OsmandPlugin.getEnabledPlugin(OsmEditingPlugin.class) != null) {
-			QuickAction showHideOSMBugAction = new ShowHideOSMBugAction();
-			if (!showHideOSMBugAction.hasInstanceInList(active)) {
-				quickActions.add(showHideOSMBugAction);
-			}
-		}
+        if (OsmandPlugin.getEnabledPlugin(OsmEditingPlugin.class) != null) {
+            QuickAction showHideOSMBugAction = new ShowHideOSMBugAction();
+            if (!showHideOSMBugAction.hasInstanceInList(active)) {
+                quickActions.add(showHideOSMBugAction);
+            }
+        }
 
-		quickActions.add(new MapStyleAction());
+        quickActions.add(new MapStyleAction());
 
         if (OsmandPlugin.getEnabledPlugin(OsmandRasterMapsPlugin.class) != null) {
 
@@ -131,44 +131,44 @@ public class QuickActionFactory {
         }
 
         QuickAction voice = new NavVoiceAction();
-		QuickAction addDestination = new NavAddDestinationAction();
-		QuickAction addFirstIntermediate = new NavAddFirstIntermediateAction();
-		QuickAction replaceDestination = new NavReplaceDestinationAction();
-		QuickAction autoZoomMap = new NavAutoZoomMapAction();
+        QuickAction addDestination = new NavAddDestinationAction();
+        QuickAction addFirstIntermediate = new NavAddFirstIntermediateAction();
+        QuickAction replaceDestination = new NavReplaceDestinationAction();
+        QuickAction autoZoomMap = new NavAutoZoomMapAction();
         QuickAction startStopNavigation = new NavStartStopAction();
         QuickAction resumePauseNavigation = new NavResumePauseAction();
 
-		ArrayList<QuickAction> navigationQuickActions = new ArrayList<>();
+        ArrayList<QuickAction> navigationQuickActions = new ArrayList<>();
 
         if (!voice.hasInstanceInList(active)) {
             navigationQuickActions.add(voice);
         }
-		if (!addDestination.hasInstanceInList(active)) {
-			navigationQuickActions.add(addDestination);
-		}
-		if (!addFirstIntermediate.hasInstanceInList(active)) {
-			navigationQuickActions.add(addFirstIntermediate);
-		}
-		if (!replaceDestination.hasInstanceInList(active)) {
-			navigationQuickActions.add(replaceDestination);
-		}
-		if (!autoZoomMap.hasInstanceInList(active)) {
-			navigationQuickActions.add(autoZoomMap);
-		}
-		if (!startStopNavigation.hasInstanceInList(active)) {
+        if (!addDestination.hasInstanceInList(active)) {
+            navigationQuickActions.add(addDestination);
+        }
+        if (!addFirstIntermediate.hasInstanceInList(active)) {
+            navigationQuickActions.add(addFirstIntermediate);
+        }
+        if (!replaceDestination.hasInstanceInList(active)) {
+            navigationQuickActions.add(replaceDestination);
+        }
+        if (!autoZoomMap.hasInstanceInList(active)) {
+            navigationQuickActions.add(autoZoomMap);
+        }
+        if (!startStopNavigation.hasInstanceInList(active)) {
             navigationQuickActions.add(startStopNavigation);
         }
         if (!resumePauseNavigation.hasInstanceInList(active)) {
             navigationQuickActions.add(resumePauseNavigation);
         }
 
-		if (navigationQuickActions.size() > 0) {
-			quickActions.add(new QuickAction(0, R.string.quick_action_add_navigation));
-			quickActions.addAll(navigationQuickActions);
-		}
+        if (navigationQuickActions.size() > 0) {
+            quickActions.add(new QuickAction(0, R.string.quick_action_add_navigation));
+            quickActions.addAll(navigationQuickActions);
+        }
 
 
-		return quickActions;
+        return quickActions;
     }
 
     public static QuickAction newActionByType(int type) {
