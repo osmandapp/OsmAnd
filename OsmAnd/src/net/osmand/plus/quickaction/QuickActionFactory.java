@@ -46,7 +46,7 @@ public class QuickActionFactory {
 
     public String quickActionListToString(List<QuickAction> quickActions) {
 
-		return new Gson().toJson(quickActions);
+        return new Gson().toJson(quickActions);
     }
 
     public List<QuickAction> parseActiveActionsList(String json) {
@@ -208,8 +208,8 @@ public class QuickActionFactory {
             case NavVoiceAction.TYPE:
                 return new NavVoiceAction();
 
-			case ShowHideOSMBugAction.TYPE:
-				return new ShowHideOSMBugAction();
+            case ShowHideOSMBugAction.TYPE:
+                return new ShowHideOSMBugAction();
 
             case AddOSMBugAction.TYPE:
                 return new AddOSMBugAction();
@@ -229,17 +229,17 @@ public class QuickActionFactory {
             case MapUnderlayAction.TYPE:
                 return new MapUnderlayAction();
 
-			case NavAddDestinationAction.TYPE:
-				return new NavAddDestinationAction();
+            case NavAddDestinationAction.TYPE:
+                return new NavAddDestinationAction();
 
-			case NavAddFirstIntermediateAction.TYPE:
-				return new NavAddFirstIntermediateAction();
+            case NavAddFirstIntermediateAction.TYPE:
+                return new NavAddFirstIntermediateAction();
 
-			case NavReplaceDestinationAction.TYPE:
-				return new NavReplaceDestinationAction();
+            case NavReplaceDestinationAction.TYPE:
+                return new NavReplaceDestinationAction();
 
-			case NavAutoZoomMapAction.TYPE:
-				return new NavAutoZoomMapAction();
+            case NavAutoZoomMapAction.TYPE:
+                return new NavAutoZoomMapAction();
 
             case NavStartStopAction.TYPE:
                 return new NavStartStopAction();
@@ -289,8 +289,8 @@ public class QuickActionFactory {
             case NavVoiceAction.TYPE:
                 return new NavVoiceAction(quickAction);
 
-			case ShowHideOSMBugAction.TYPE:
-				return new ShowHideOSMBugAction(quickAction);
+            case ShowHideOSMBugAction.TYPE:
+                return new ShowHideOSMBugAction(quickAction);
 
             case AddOSMBugAction.TYPE:
                 return new AddOSMBugAction(quickAction);
@@ -310,17 +310,17 @@ public class QuickActionFactory {
             case MapUnderlayAction.TYPE:
                 return new MapUnderlayAction(quickAction);
 
-			case NavAddDestinationAction.TYPE:
-				return new NavAddDestinationAction(quickAction);
+            case NavAddDestinationAction.TYPE:
+                return new NavAddDestinationAction(quickAction);
 
-			case NavAddFirstIntermediateAction.TYPE:
-				return new NavAddFirstIntermediateAction(quickAction);
+            case NavAddFirstIntermediateAction.TYPE:
+                return new NavAddFirstIntermediateAction(quickAction);
 
-			case NavReplaceDestinationAction.TYPE:
-				return new NavReplaceDestinationAction(quickAction);
+            case NavReplaceDestinationAction.TYPE:
+                return new NavReplaceDestinationAction(quickAction);
 
-			case NavAutoZoomMapAction.TYPE:
-				return new NavAutoZoomMapAction(quickAction);
+            case NavAutoZoomMapAction.TYPE:
+                return new NavAutoZoomMapAction(quickAction);
 
             case NavStartStopAction.TYPE:
                 return new NavStartStopAction(quickAction);
@@ -328,12 +328,14 @@ public class QuickActionFactory {
             case NavResumePauseAction.TYPE:
                 return new NavResumePauseAction(quickAction);
 
-			default:
+            default:
                 return quickAction;
         }
     }
 
-    public static @DrawableRes int getActionIcon(int type) {
+    public static
+    @DrawableRes
+    int getActionIcon(int type) {
 
         switch (type) {
 
@@ -373,8 +375,8 @@ public class QuickActionFactory {
             case ShowHideOSMBugAction.TYPE:
                 return R.drawable.ic_action_bug_dark;
 
-			case AddOSMBugAction.TYPE:
-				return R.drawable.ic_action_bug_dark;
+            case AddOSMBugAction.TYPE:
+                return R.drawable.ic_action_bug_dark;
 
             case AddPOIAction.TYPE:
                 return R.drawable.ic_action_gabout_dark;
@@ -391,17 +393,17 @@ public class QuickActionFactory {
             case MapUnderlayAction.TYPE:
                 return R.drawable.ic_layer_bottom_dark;
 
-			case NavAddDestinationAction.TYPE:
-				return R.drawable.ic_action_target;
+            case NavAddDestinationAction.TYPE:
+                return R.drawable.ic_action_target;
 
-			case NavAddFirstIntermediateAction.TYPE:
-				return R.drawable.ic_action_intermediate;
+            case NavAddFirstIntermediateAction.TYPE:
+                return R.drawable.ic_action_intermediate;
 
-			case NavReplaceDestinationAction.TYPE:
-				return R.drawable.ic_action_target;
+            case NavReplaceDestinationAction.TYPE:
+                return R.drawable.ic_action_target;
 
-			case NavAutoZoomMapAction.TYPE:
-				return R.drawable.ic_action_search_dark;
+            case NavAutoZoomMapAction.TYPE:
+                return R.drawable.ic_action_search_dark;
 
             case NavStartStopAction.TYPE:
                 return R.drawable.ic_action_start_navigation;
@@ -410,11 +412,13 @@ public class QuickActionFactory {
                 return R.drawable.ic_play_dark;
 
             default:
-				return R.drawable.ic_action_plus;
+                return R.drawable.ic_action_plus;
         }
     }
 
-    public static @StringRes int getActionName(int type) {
+    public static
+    @StringRes
+    int getActionName(int type) {
 
         switch (type) {
 
@@ -451,8 +455,8 @@ public class QuickActionFactory {
             case NavVoiceAction.TYPE:
                 return R.string.quick_action_navigation_voice;
 
-			case ShowHideOSMBugAction.TYPE:
-				return R.string.quick_action_showhide_osmbugs_title;
+            case ShowHideOSMBugAction.TYPE:
+                return R.string.quick_action_showhide_osmbugs_title;
 
             case AddOSMBugAction.TYPE:
                 return R.string.quick_action_add_osm_bug;
@@ -472,17 +476,17 @@ public class QuickActionFactory {
             case MapUnderlayAction.TYPE:
                 return R.string.quick_action_map_underlay;
 
-			case NavAddDestinationAction.TYPE:
-				return R.string.quick_action_add_destination;
+            case NavAddDestinationAction.TYPE:
+                return R.string.quick_action_add_destination;
 
-			case NavAddFirstIntermediateAction.TYPE:
-				return R.string.quick_action_add_first_intermediate;
+            case NavAddFirstIntermediateAction.TYPE:
+                return R.string.quick_action_add_first_intermediate;
 
-			case NavReplaceDestinationAction.TYPE:
-				return R.string.quick_action_replace_destination;
+            case NavReplaceDestinationAction.TYPE:
+                return R.string.quick_action_replace_destination;
 
-			case NavAutoZoomMapAction.TYPE:
-				return R.string.quick_action_auto_zoom;
+            case NavAutoZoomMapAction.TYPE:
+                return R.string.quick_action_auto_zoom;
 
             case NavStartStopAction.TYPE:
                 return R.string.quick_action_start_stop_navigation;
@@ -491,7 +495,7 @@ public class QuickActionFactory {
                 return R.string.quick_action_resume_pause_navigation;
 
             default:
-				return R.string.quick_action_new_action;
+                return R.string.quick_action_new_action;
         }
     }
 
@@ -508,16 +512,17 @@ public class QuickActionFactory {
             case TakePhotoNoteAction.TYPE:
             case TakeVideoNoteAction.TYPE:
             case NavVoiceAction.TYPE:
-			case NavAddDestinationAction.TYPE:
-			case NavAddFirstIntermediateAction.TYPE:
-			case NavReplaceDestinationAction.TYPE:
-			case NavAutoZoomMapAction.TYPE:
-			case ShowHideOSMBugAction.TYPE:
+            case NavAddDestinationAction.TYPE:
+            case NavAddFirstIntermediateAction.TYPE:
+            case NavReplaceDestinationAction.TYPE:
+            case NavAutoZoomMapAction.TYPE:
+            case ShowHideOSMBugAction.TYPE:
             case NavStartStopAction.TYPE:
             case NavResumePauseAction.TYPE:
                 return false;
 
-            default: return true;
+            default:
+                return true;
         }
     }
 }
