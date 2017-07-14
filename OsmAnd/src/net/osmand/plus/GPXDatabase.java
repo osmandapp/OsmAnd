@@ -177,14 +177,18 @@ public class GPXDatabase {
 		}
 		if (oldVersion < 3) {
 			db.execSQL("ALTER TABLE " + GPX_TABLE_NAME + " ADD " + GPX_COL_FILE_LAST_MODIFIED_TIME + " long");
+		}
+		
+		if (oldVersion < 4) {
+			db.execSQL("ALTER TABLE " + GPX_TABLE_NAME + " ADD " + GPX_COL_SPLIT_TYPE + " int");
+			db.execSQL("ALTER TABLE " + GPX_TABLE_NAME + " ADD " + GPX_COL_SPLIT_INTERVAL + " double");
+		}
+		
+		if (oldVersion < 3) {	
 			List<GpxDataItem> items = getItems();
 			for (GpxDataItem item : items) {
 				updateLastModifiedTime(item);
 			}
-		}
-		if (oldVersion < 4) {
-			db.execSQL("ALTER TABLE " + GPX_TABLE_NAME + " ADD " + GPX_COL_SPLIT_TYPE + " int");
-			db.execSQL("ALTER TABLE " + GPX_TABLE_NAME + " ADD " + GPX_COL_SPLIT_INTERVAL + " double");
 		}
 	}
 
