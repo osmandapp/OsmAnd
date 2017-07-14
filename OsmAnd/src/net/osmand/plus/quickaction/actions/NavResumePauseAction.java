@@ -51,7 +51,11 @@ public class NavResumePauseAction extends QuickAction {
 
     @Override
     public String getActionText(OsmandApplication application) {
-        return application.getRoutingHelper().isRoutePlanningMode()
+        RoutingHelper helper = application.getRoutingHelper();
+        if (!helper.isRouteCalculated()) {
+            return application.getString(R.string.continue_navigation);
+        }
+        return helper.isRoutePlanningMode()
                 ? application.getString(R.string.continue_navigation)
                 : application.getString(R.string.pause_navigation);
     }
@@ -59,10 +63,19 @@ public class NavResumePauseAction extends QuickAction {
     @Override
     public int getIconRes(Context context) {
         if (context instanceof MapActivity) {
-            return ((MapActivity) context).getRoutingHelper().isRoutePlanningMode()
+            RoutingHelper helper = ((MapActivity) context).getRoutingHelper();
+            if (!helper.isRouteCalculated()) {
+                return R.drawable.ic_play_dark;
+            }
+            return helper.isRoutePlanningMode()
                     ? R.drawable.ic_play_dark
                     : R.drawable.ic_pause;
         }
         return super.getIconRes(context);
+    }
+
+    @Override
+    public boolean isActionEnable(OsmandApplication app) {
+        return app.getRoutingHelper().isRouteCalculated();
     }
 }
