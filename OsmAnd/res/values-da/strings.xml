@@ -2796,8 +2796,11 @@ Tidligere destination bliver sidste mellemliggende punkt.</string>
     <string name="range_min_max">Interval = min/maks</string>
     <string name="min_max">Min/maks</string>
     <string name="release_2_7">\\022 Mapillary udvidelse med billeder på gadeniveau
+\n
 \n • Lineal modul til afstandsmåling 
-\n• GPX split mellemrum med detaljeret info om spor
+\n
+\n• GPX split intervaller med detaljeret info om spor
+\n
 \n • Andre forbedringer og fejlrettelser
 \n
 \n</string>
