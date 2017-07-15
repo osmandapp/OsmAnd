@@ -312,7 +312,7 @@
 	<string name="poi_prosecutor">Fiscal</string>
 	<string name="poi_pension_fund">Seguridad social</string>
 	<string name="poi_migration">Migración</string>
-	<string name="poi_tax_inspection">Inspeción fiscal</string>
+	<string name="poi_tax_inspection">Inspección fiscal</string>
 	<string name="poi_office_administrative">Oficina administrativa</string>
 	<string name="poi_customs">Aduana</string>
 	<string name="poi_city">Ciudad</string>
@@ -1207,18 +1207,18 @@
 	<string name="poi_covered_yes">Sí</string>
 	<string name="poi_covered_no">Al descubierto</string>
 	<string name="poi_smoking_no">Prohibido</string>
-	<string name="poi_smoking_outside">Permitido sólo afuera</string>
+	<string name="poi_smoking_outside">Sólo afuera</string>
 	<string name="poi_smoking_yes">Permitido</string>
-	<string name="poi_smoking_separated">Permitido en sala separada</string>
-	<string name="poi_smoking_isolated">Permitido en sala aislada</string>
-	<string name="poi_smoking_dedicated">Sólo para fumadores</string>
+	<string name="poi_smoking_separated">En sala separada</string>
+	<string name="poi_smoking_isolated">En sala aislada</string>
+	<string name="poi_smoking_dedicated">Sólo fumadores</string>
 	<string name="poi_toll_no">Sin peaje</string>
 	<string name="poi_toll_yes">Peaje</string>
 	<string name="poi_tactile_paving_yes">Sí</string>
 	<string name="poi_tactile_paving_no">Sin pavimento táctil</string>
 	<string name="poi_traffic_signals_sound_yes">Sí</string>
 	<string name="poi_traffic_signals_sound_no">No</string>
-	<string name="poi_traffic_signals_sound_walk">Sólo cuando se permite al caminar</string>
+	<string name="poi_traffic_signals_sound_walk">Sólo se permite al caminar</string>
 <string name="poi_retail">Área comercial</string>
 	<string name="poi_ford_stepping_stones">Puente de piedras</string>
 	<string name="poi_information_board">Tablero</string>
@@ -1787,7 +1787,7 @@
 	<string name="poi_route_railway_ref">Ruta ferroviaria</string>
 <string name="poi_bridge_structure_simple_wooden">Estructura del puente: Madera simple</string>
 	<string name="poi_historic_yes">Objeto histórico</string>
-	<string name="poi_surveillance_yes">Vigilado: Sí</string>
+	<string name="poi_surveillance_yes">Vigilancia: Sí</string>
 	<string name="poi_shop_additional_yes">Con tienda</string>
 	<string name="poi_service_bicycle_retail_yes">Venta</string>
 	<string name="poi_service_bicycle_retail_no">Venden bicicletas: No</string>
@@ -2479,7 +2479,7 @@
 	<string name="poi_free_flying_guest_guidelines_yes">Directrices de invitado: Sí</string>
 	<string name="poi_free_flying_guest_guidelines_no">Directrices de invitado: No</string>
 
-	<string name="poi_tanning_salon">Centro de bronceado (solarium)</string>
+	<string name="poi_tanning_salon">Centro de bronceado (solárium)</string>
 
 <string name="poi_sanitary_dump_station">Estación de descarga sanitaria</string>
 
@@ -2531,7 +2531,7 @@
 <string name="poi_suction_point">Punto de succión</string>
 
 	<string name="poi_fire_hydrant_type_underground">Subterráneo</string>
-	<string name="poi_fire_hydrant_type_pillar">Poste</string>
+	<string name="poi_fire_hydrant_type_pillar">Pilar</string>
 	<string name="poi_fire_hydrant_type_dry_barrel">Barril seco</string>
 	<string name="poi_fire_hydrant_type_pond">Estanque</string>
 	<string name="poi_fire_hydrant_type_wall">De pared</string>
@@ -2552,40 +2552,40 @@
 	<string name="poi_health_person_type_technician">Rol del trabajador en salud: Técnico</string>
 	<string name="poi_health_person_type_witchdoctor">Rol del trabajador en salud: Brujo/a</string>
 
-	<string name="poi_counselling_type_addiction_yes">Asesoramiento (adicción): Sí</string>
-	<string name="poi_counselling_type_addiction_no">Asesoramiento (adicción): No</string>
-	<string name="poi_counselling_type_antenatal_yes">Asesoramiento (prenatal): Sí</string>
-	<string name="poi_counselling_type_antenatal_no">Asesoramiento (prenatal): No</string>
-	<string name="poi_counselling_type_child_guidance_yes">Asesoramiento (orientación infantil): Sí</string>
-	<string name="poi_counselling_type_child_guidance_no">Asesoramiento (orientación infantil): No</string>
-	<string name="poi_counselling_type_couple_yes">Asesoramiento (pareja): Sí</string>
-	<string name="poi_counselling_type_couple_no">Asesoramiento (pareja): No</string>
-	<string name="poi_counselling_type_crisis_yes">Asesoramiento (crisis): Sí</string>
-	<string name="poi_counselling_type_crisis_no">Asesoramiento (crisis): No</string>
-	<string name="poi_counselling_type_drugs_yes">Asesoramiento (drogas): Sí</string>
-	<string name="poi_counselling_type_drugs_no">Asesoramiento (drogas): No</string>
-	<string name="poi_counselling_type_education_yes">Asesoramiento (educación): Sí</string>
-	<string name="poi_counselling_type_education_no">Asesoramiento (educación): No</string>
-	<string name="poi_counselling_type_family_yes">Asesoramiento (familiar): Sí</string>
-	<string name="poi_counselling_type_family_no">Asesoramiento (familiar): No</string>
-	<string name="poi_counselling_type_homeless_yes">Asesoramiento (sin hogar): Sí</string>
-	<string name="poi_counselling_type_homeless_no">Asesoramiento (sin hogar): No</string>
-	<string name="poi_counselling_type_immigrant_yes">Asesoramiento (inmigrantes): Sí</string>
-	<string name="poi_counselling_type_immigrant_no">Asesoramiento (inmigrantes): No</string>
-	<string name="poi_counselling_type_marriage_yes">Asesoramiento (matrimonio): Sí</string>
-	<string name="poi_counselling_type_marriage_no">Asesoramiento (matrimonio): No</string>
-	<string name="poi_counselling_type_nutrition_yes">Asesoramiento (nutrición): Sí</string>
+	<string name="poi_counselling_type_addiction_yes">Asesoría (adicción): Sí</string>
+	<string name="poi_counselling_type_addiction_no">Asesoría (adicción): No</string>
+	<string name="poi_counselling_type_antenatal_yes">Asesoría (prenatal): Sí</string>
+	<string name="poi_counselling_type_antenatal_no">Asesoría (prenatal): No</string>
+	<string name="poi_counselling_type_child_guidance_yes">Asesoría (orientación infantil): Sí</string>
+	<string name="poi_counselling_type_child_guidance_no">Asesoría (orientación infantil): No</string>
+	<string name="poi_counselling_type_couple_yes">Asesoría (pareja): Sí</string>
+	<string name="poi_counselling_type_couple_no">Asesoría (pareja): No</string>
+	<string name="poi_counselling_type_crisis_yes">Asesoría (crisis): Sí</string>
+	<string name="poi_counselling_type_crisis_no">Asesoría (crisis): No</string>
+	<string name="poi_counselling_type_drugs_yes">Asesoría (drogas): Sí</string>
+	<string name="poi_counselling_type_drugs_no">Asesoría (drogas): No</string>
+	<string name="poi_counselling_type_education_yes">Asesoría (educación): Sí</string>
+	<string name="poi_counselling_type_education_no">Asesoría (educación): No</string>
+	<string name="poi_counselling_type_family_yes">Asesoría (familiar): Sí</string>
+	<string name="poi_counselling_type_family_no">Asesoría (familiar): No</string>
+	<string name="poi_counselling_type_homeless_yes">Asesoría (sin hogar): Sí</string>
+	<string name="poi_counselling_type_homeless_no">Asesoría (sin hogar): No</string>
+	<string name="poi_counselling_type_immigrant_yes">Asesoría (inmigrantes): Sí</string>
+	<string name="poi_counselling_type_immigrant_no">Asesoría (inmigrantes): No</string>
+	<string name="poi_counselling_type_marriage_yes">Asesoría (matrimonio): Sí</string>
+	<string name="poi_counselling_type_marriage_no">Asesoría (matrimonio): No</string>
+	<string name="poi_counselling_type_nutrition_yes">Asesoría (nutrición): Sí</string>
 	<string name="poi_counselling_type_nutrition_no">Asesoramiento (nutrición): No</string>
-	<string name="poi_counselling_type_rehabilitation_yes">Asesoramiento (rehabilitación): Sí</string>
-	<string name="poi_counselling_type_rehabilitation_no">Asesoramiento (rehabilitación): No</string>
-	<string name="poi_counselling_type_sexual_yes">Asesoramiento (sexual): Sí</string>
-	<string name="poi_counselling_type_sexual_no">Asesoramiento (sexual): No</string>
-	<string name="poi_counselling_type_sexual_abuse_yes">Asesoramiento (abuso sexual): Sí</string>
-	<string name="poi_counselling_type_sexual_abuse_no">Asesoramiento (abuso sexual): No</string>
-	<string name="poi_counselling_type_victim_yes">Asesoramiento (víctimas): Sí</string>
-	<string name="poi_counselling_type_victim_no">Asesoramiento (víctimas): No</string>
-	<string name="poi_counselling_type_violence_yes">Asesoramiento (violencia): Sí</string>
-	<string name="poi_counselling_type_violence_no">Asesoramiento (violencia): No</string>
+	<string name="poi_counselling_type_rehabilitation_yes">Asesoría (rehabilitación): Sí</string>
+	<string name="poi_counselling_type_rehabilitation_no">Asesoría (rehabilitación): No</string>
+	<string name="poi_counselling_type_sexual_yes">Asesoría (sexual): Sí</string>
+	<string name="poi_counselling_type_sexual_no">Asesoría (sexual): No</string>
+	<string name="poi_counselling_type_sexual_abuse_yes">Asesoría (abuso sexual): Sí</string>
+	<string name="poi_counselling_type_sexual_abuse_no">Asesoría (abuso sexual): No</string>
+	<string name="poi_counselling_type_victim_yes">Asesoría (víctimas): Sí</string>
+	<string name="poi_counselling_type_victim_no">Asesoría (víctimas): No</string>
+	<string name="poi_counselling_type_violence_yes">Asesoría (violencia): Sí</string>
+	<string name="poi_counselling_type_violence_no">Asesoría (violencia): No</string>
 
 <string name="poi_provided_for_infant_yes">Provisto para bebés: Sí</string>
 	<string name="poi_provided_for_infant_no">Provisto para bebés: No</string>
@@ -2611,8 +2611,8 @@
 	<string name="poi_treat_inpatient_yes">Servicios para pacientes: Sí</string>
 	<string name="poi_treat_inpatient_no">Servicios para pacientes: No</string>
 	<string name="poi_treat_inpatient_only">Servicios para pacientes: Solamente</string>
-	<string name="poi_counselling_yes">Asesoramiento: Sí</string>
-	<string name="poi_counselling_no">Asesoramiento: No</string>
+	<string name="poi_counselling_yes">Asesoría: Sí</string>
+	<string name="poi_counselling_no">Asesoría: No</string>
 	<string name="poi_emergency_yes">Emergencias: Sí</string>
 	<string name="poi_emergency_no">Emergencias: No</string>
 	<string name="poi_home_visit_yes">Sí</string>
@@ -2635,7 +2635,7 @@
 	<string name="poi_office_nursing_service">Servicio de enfermería</string>
 	<string name="poi_office_midwife">Oficina de partera</string>
 
-<string name="poi_counselling_type_nutrition_nfire_hydo">Asesoramiento (nutrición): No</string>
+<string name="poi_counselling_type_nutrition_nfire_hydo">Asesoría (nutrición): No</string>
 	<string name="poi_fire_hydrant_diameter">Diámetro del hidrante</string>
 	<string name="poi_fire_hydrant_pressure">Presión del hidrante</string>
 	<string name="poi_fire_hydrant_count">Cantidad de hidrantes</string>
@@ -2717,7 +2717,7 @@
 	<string name="poi_pump_style_modern">Estilo de bomba: Moderna</string>
 	<string name="poi_pump_style_historic">Estilo de bomba: Histórica</string>
 	<string name="poi_pump_status_ok">Estado de la bomba: Bueno</string>
-	<string name="poi_pump_status_broken">Estado de la bomba: Malo</string>
+	<string name="poi_pump_status_broken">Estado de la bomba: Estropeada</string>
 	<string name="poi_pump_status_locked">Estado de la bomba: Bloqueada</string>
 
 <string name="poi_valley_balka">Balka (cauce seco)</string>
@@ -2752,8 +2752,8 @@
 	<string name="poi_generator_output_compressed_air">Potencia de salida de aire comprimido</string>
 	<string name="poi_generator_output_compressed_air_yes">Salida: Aire comprimido</string>
 	<string name="poi_generator_output_vacuum_yes">Salida: Vacío</string>
-	<string name="poi_generator_output_biogas">Potencia de salida de Biogas</string>
-	<string name="poi_generator_output_biogas_yes">Salida: Biogas</string>
+	<string name="poi_generator_output_biogas">Potencia de salida de Biogás</string>
+	<string name="poi_generator_output_biogas_yes">Salida: Biogás</string>
 
 	<string name="poi_pumping_station">Estación de bombeo</string>
 
@@ -2812,7 +2812,7 @@
 
 <string name="poi_diaper_table_count">Cambiador de pañales</string>
 
-<string name="poi_water_tank">Tanque de agua</string>
+<string name="poi_water_tank">Depósito de agua</string>
 
 	<string name="poi_toilets_disposal_flush">Eliminación de desechos: Cisterna</string>
 	<string name="poi_toilets_disposal_pitlatrine">Eliminación de desechos: Letrina</string>
