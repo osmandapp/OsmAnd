@@ -2623,4 +2623,14 @@ Por favor proporciona un código completo</string>
     <string name="moving_time">Tiempo moviéndose</string>
     <string name="max_min">Máx/Min</string>
     <string name="min_max">Min/Máx</string>
+    <string name="release_2_7">\\022 Complemento de Mapillary con imágenes a nivel de calle
+\n
+\n • Control de regla para medir distancias
+\n
+\n • División de intervalos GPX con información detallada sobre la traza
+\n
+\n • Otras mejoras y corrección de errores
+\n
+\n</string>
+    <string name="rendering_value_translucent_pink_name">Rosa translúcido</string>
     </resources>
