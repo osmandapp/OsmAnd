@@ -36,6 +36,7 @@ import java.util.ArrayList;
 import java.util.Date;
 import java.util.List;
 import java.util.Locale;
+import java.util.zip.ZipInputStream;
 
 /**
  * @author Koen Rabaey
@@ -43,6 +44,7 @@ import java.util.Locale;
 public class GpxImportHelper {
 
 	public static final String KML_SUFFIX = ".kml";
+	public static final String KMZ_SUFFIX = ".kmz";
 	public static final String GPX_SUFFIX = ".gpx";
 	private final Activity activity;
 	private final OsmandApplication app;
@@ -86,6 +88,8 @@ public class GpxImportHelper {
 
 		if (fileName != null && fileName.endsWith(KML_SUFFIX)) {
 			handleKmlImport(intentUri, fileName, saveFile, useImportDir);
+		} else if (fileName != null && fileName.endsWith(KMZ_SUFFIX)) {
+			handleKmzImport(intentUri, fileName, saveFile, useImportDir);
 		} else {
 			handleFavouritesImport(intentUri, fileName, saveFile, useImportDir);
 		}
@@ -218,6 +222,59 @@ public class GpxImportHelper {
 		}.execute();
 	}
 
+	private void handleKmzImport(final Uri kmzFile, final String name, final boolean save, final boolean useImportDir) {
+		new AsyncTask<Void, Void, GPXFile>() {
+			ProgressDialog progress = null;
+
+			@Override
+			protected void onPreExecute() {
+				progress = ProgressDialog.show(activity, app.getString(R.string.loading_smth, ""), app.getString(R.string.loading_data));
+			}
+
+			@Override
+			protected GPXFile doInBackground(Void... voids) {
+				InputStream is = null;
+				ZipInputStream zis = null;
+				try {
+					final ParcelFileDescriptor pFD = app.getContentResolver().openFileDescriptor(kmzFile, "r");
+					if (pFD != null) {
+						is = new FileInputStream(pFD.getFileDescriptor());
+						zis = new ZipInputStream(is);
+						zis.getNextEntry();
+						final String result = Kml2Gpx.toGpx(zis);
+						if (result != null) {
+							try {
+								return GPXUtilities.loadGPXFile(app, new ByteArrayInputStream(result.getBytes("UTF-8")));
+							} catch (UnsupportedEncodingException e) {
+								return null;
+							}
+						}
+					}
+				} catch (Exception e) {
+					e.printStackTrace();
+				} finally {
+					try {
+						if (is != null) {
+							is.close();
+						}
+						if (zis != null) {
+							zis.close();
+						}
+					} catch (IOException ignore) {
+					}
+				}
+				return null;
+			}
+
+			@Override
+			protected void onPostExecute(GPXFile result) {
+				progress.dismiss();
+				handleResult(result, name, save, useImportDir);
+			}
+
+		}.execute();
+	}
+
 	private void handleKmlImport(final Uri kmlFile, final String name, final boolean save, final boolean useImportDir) {
 		new AsyncTask<Void, Void, GPXFile>() {
 			ProgressDialog progress = null;
@@ -345,6 +402,8 @@ public class GpxImportHelper {
 		}
 		if (fileName.endsWith(KML_SUFFIX)) {
 			builder.replace(builder.length() - KML_SUFFIX.length(), builder.length(), GPX_SUFFIX);
+		} else if (fileName.endsWith(KMZ_SUFFIX)) {
+			builder.replace(builder.length() - KMZ_SUFFIX.length(), builder.length(), GPX_SUFFIX);
 		} else if (!fileName.endsWith(GPX_SUFFIX)) {
 			builder.append(GPX_SUFFIX);
 		}
