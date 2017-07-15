@@ -1,4 +1,5 @@
-<?xml version="1.0" encoding="UTF-8" standalone="no"?><resources>
+<?xml version='1.0' encoding='UTF-8'?>
+<resources>
 
     <string name="rendering_attr_hideHouseNumbers_name">Números de casa</string>
     <string name="copying_osmand_file_failed">Falló al copiar archivos</string>
@@ -2678,4 +2679,14 @@ Proporciona un código completo</string>
     
     <string name="range_min_max">Rango = Min/Máx</string>
     <string name="min_max">Min/Máx</string>
+    <string name="release_2_7">\\022 Complemento de Mapillary con imágenes a nivel de calle
+\n
+\n • Control de regla para medir distancias
+\n
+\n • División de intervalos GPX con información detallada sobre la traza
+\n
+\n • Otras mejoras y corrección de errores
+\n
+\n</string>
+    <string name="rendering_value_translucent_pink_name">Rosa translúcido</string>
     </resources>
