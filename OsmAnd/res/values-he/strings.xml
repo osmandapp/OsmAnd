@@ -1,4 +1,5 @@
-<?xml version="1.0" encoding="UTF-8" standalone="no"?><resources>
+<?xml version='1.0' encoding='UTF-8'?>
+<resources>
 	<string name="shared_string_no">לא</string>
 	<string name="shared_string_yes">כן</string>
 	<string name="close_changeset">סגירת ערכת השינויים</string>
@@ -1199,4 +1200,17 @@
     <string name="osm_live_enter_email">נא להזין כתובת דוא״ל חוקית</string>
     <string name="osm_live_enter_user_name">נא להזין שם פומבי</string>
     <string name="osm_live_month_cost_desc">תשלום חודשי</string>
+    <string name="store_tracks_in_monthly_directories">אחסון המסלולים המוקלטים בתיקיות לפי חודש</string>
+    <string name="shared_string_reset">איפוס</string>
+    <string name="shared_string_reload">רענון</string>
+    <string name="mapillary_menu_descr_tile_cache">יש לרענן את האריחים כדי לראות מידע עדכני.</string>
+    <string name="mapillary_menu_title_tile_cache">מטמון האריחים</string>
+    <string name="wrong_user_name">שם המשתמש שגוי!</string>
+    <string name="shared_string_to">עד</string>
+    <string name="mapillary_menu_date_from">מ־</string>
+    <string name="mapillary_menu_descr_dates">הצגת תמונות שנוספו בתקופה מסוימת.</string>
+    <string name="mapillary_menu_title_dates">תאריכים</string>
+    <string name="mapillary_menu_edit_text_hint">הקלדת שם משתמש</string>
+    <string name="mapillary_menu_descr_username">הצגת תמונות שנוספו על ידי משתמש מסוים.</string>
+    <string name="mapillary_menu_title_username">שם משתמש</string>
     </resources>
