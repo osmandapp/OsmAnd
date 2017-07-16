@@ -7,6 +7,7 @@ import android.support.annotation.StringRes;
 import com.google.gson.Gson;
 import com.google.gson.reflect.TypeToken;
 
+import net.osmand.plus.OsmandApplication;
 import net.osmand.plus.OsmandPlugin;
 import net.osmand.plus.R;
 import net.osmand.plus.audionotes.AudioVideoNotesPlugin;
@@ -56,7 +57,7 @@ public class QuickActionFactory {
         return quickActions != null ? quickActions : new ArrayList<QuickAction>();
     }
 
-    public static List<QuickAction> produceTypeActionsListWithHeaders(List<QuickAction> active) {
+    public static List<QuickAction> produceTypeActionsListWithHeaders(List<QuickAction> active, OsmandApplication app) {
 
         ArrayList<QuickAction> quickActions = new ArrayList<>();
 
@@ -64,10 +65,12 @@ public class QuickActionFactory {
         quickActions.add(new FavoriteAction());
         quickActions.add(new GPXAction());
 
-        QuickAction marker = new MarkerAction();
+        if (app.getSettings().USE_MAP_MARKERS.get()) {
+            QuickAction marker = new MarkerAction();
 
-        if (!marker.hasInstanceInList(active)) {
-            quickActions.add(marker);
+            if (!marker.hasInstanceInList(active)) {
+                quickActions.add(marker);
+            }
         }
 
         if (OsmandPlugin.getEnabledPlugin(AudioVideoNotesPlugin.class) != null) {

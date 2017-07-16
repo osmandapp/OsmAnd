@@ -103,6 +103,9 @@ public class SettingsAccessibilityActivity extends SettingsBaseActivity {
 
 		cat.addPreference(createCheckBoxPreference(settings.ZOOM_BY_TRACKBALL, R.string.zoom_by_trackball,
 				R.string.zoom_by_trackball_descr));
+		cat.addPreference(createCheckBoxPreference(settings.USE_MAP_MARKERS,
+				R.string.map_markers,
+				R.string.show_map_markers_description));
 	}
 
 

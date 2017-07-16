@@ -19,6 +19,7 @@ import net.osmand.plus.quickaction.actions.AddOSMBugAction;
 import net.osmand.plus.quickaction.actions.AddPOIAction;
 import net.osmand.plus.quickaction.actions.MapSourceAction;
 import net.osmand.plus.quickaction.actions.MapStyleAction;
+import net.osmand.plus.quickaction.actions.MarkerAction;
 import net.osmand.plus.rastermaps.OsmandRasterMapsPlugin;
 
 import java.lang.reflect.Type;
@@ -76,6 +77,13 @@ public class QuickActionRegistry {
 
 		for (QuickAction action : actions) {
 			boolean skip = false;
+
+			if (!settings.USE_MAP_MARKERS.get()) {
+				if (action.type == MarkerAction.TYPE) {
+					skip = true;
+				}
+			}
+
 			if (OsmandPlugin.getEnabledPlugin(AudioVideoNotesPlugin.class) == null) {
 
 				if (action.type == TakeAudioNoteAction.TYPE || action.type == TakePhotoNoteAction.TYPE
