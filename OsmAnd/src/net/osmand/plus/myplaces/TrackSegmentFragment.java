@@ -134,7 +134,6 @@ public class TrackSegmentFragment extends OsmAndListFragment {
 	private int defPointColor;
 	private Paint paintIcon;
 	private Bitmap pointSmall;
-	private GpxDisplayItem generalDisplayItem;
 
 	private ImageView imageView;
 	private RotatedTileBox rotatedTileBox;
@@ -279,12 +278,12 @@ public class TrackSegmentFragment extends OsmAndListFragment {
 		imageView.setOnClickListener(new View.OnClickListener() {
 			@Override
 			public void onClick(View view) {
-				LatLon location = new LatLon(generalDisplayItem.locationStart.lat,
-						generalDisplayItem.locationStart.lon);
+				LatLon location = new LatLon(getGpx().findPointToShow().getLatitude(),
+						getGpx().findPointToShow().getLongitude());
 				final OsmandSettings settings = app.getSettings();
 				settings.setMapLocationToShow(location.getLatitude(), location.getLongitude(),
 						settings.getLastKnownMapZoom(),
-						new PointDescription(PointDescription.POINT_TYPE_WPT, generalDisplayItem.name),
+						new PointDescription(PointDescription.POINT_TYPE_WPT, getGpxDataItem().getFile().getName()),
 						false,
 						getRect()
 				);
@@ -856,9 +855,6 @@ public class TrackSegmentFragment extends OsmAndListFragment {
 				pager = (WrapContentHeightViewPager) row.findViewById(R.id.pager);
 			}
 			GpxDisplayItem item = getItem(position);
-			if (position == 0) {
-				generalDisplayItem = item;
-			}
 			if (item != null) {
 				pager.setAdapter(new GPXItemPagerAdapter(tabLayout, item));
 				if (create) {
