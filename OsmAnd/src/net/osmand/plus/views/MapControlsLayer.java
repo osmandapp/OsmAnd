@@ -350,13 +350,17 @@ public class MapControlsLayer extends OsmandMapLayer {
 		}
 	}
 
-	protected void clickRouteCancel() {
+	public void stopNavigation() {
 		mapRouteInfoMenu.hide();
 		if (mapActivity.getRoutingHelper().isFollowingMode()) {
 			mapActivity.getMapActions().stopNavigationActionConfirm();
 		} else {
 			mapActivity.getMapActions().stopNavigationWithoutConfirm();
 		}
+	}
+
+	protected void clickRouteCancel() {
+		stopNavigation();
 	}
 
 	protected void clickRouteGo() {
