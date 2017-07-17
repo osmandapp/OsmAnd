@@ -1,4 +1,5 @@
-<?xml version="1.0" encoding="UTF-8" standalone="no"?><resources>
+<?xml version='1.0' encoding='UTF-8'?>
+<resources>
     <string name="rendering_attr_roadColors_description">選擇道路的色彩調配：</string>
     <string name="rendering_attr_roadColors_name">道路的色彩調配</string>
     <string name="map_widget_show_destination_arrow">顯示目的地方向</string>
@@ -2786,4 +2787,14 @@ OsmAnd (Automated Navigation Directions) 是一個地圖和導航的應用程式
     
     <string name="range_min_max">範圍 = 最小/最大</string>
     <string name="min_max">最小/最大</string>
+    <string name="release_2_7">\\022 Mapillary 外掛元件與街道級影像
+\n
+\n • 用於距離測量的尺規小工具
+\n
+\n • GPX 分配間隔與關於您軌跡的詳細資訊
+\n
+\n • 其他改進和錯誤修正
+\n
+\n</string>
+    <string name="rendering_value_translucent_pink_name">半透明粉紅色</string>
     </resources>

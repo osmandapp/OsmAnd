@@ -1234,10 +1234,10 @@
 	<string name="poi_enforcement_toll">Kontrolo: imposto</string>
 
 	<string name="poi_animal_shelter">Azilo por bestoj</string>
-	<string name="poi_animal_shelter_dog">Azilo por: hundoj</string>
-	<string name="poi_animal_shelter_cat">Azilo por: katoj</string>
-	<string name="poi_animal_shelter_dog_cat">Azilo por: hundoj kaj katoj</string>
-	<string name="poi_animal_shelter_bird">Azilo por: birdoj</string>
+	<string name="poi_animal_shelter_dog">hundoj</string>
+	<string name="poi_animal_shelter_cat">katoj</string>
+	<string name="poi_animal_shelter_dog_cat">hundoj kaj katoj</string>
+	<string name="poi_animal_shelter_bird">birdoj</string>
 
 	<string name="poi_seats">Seĝoj</string>
 	<string name="poi_backrest_yes">Seĝodorsoj: jes</string>
@@ -3412,4 +3412,19 @@
 
 <string name="poi_generator_output_electricity_no">Elaĵo (elektro): ne</string>
 
-	</resources>
+	<string name="poi_animal_shelter_type">Akceptataj bestoj</string>
+	<string name="poi_animal_shelter_purpose">Celo</string>
+
+<string name="poi_animal_shelter_wildlife">sovaĝaj bestoj</string>
+	<string name="poi_animal_shelter_horse">ĉevaloj</string>
+	<string name="poi_animal_shelter_mammal">mamuloj</string>
+	<string name="poi_animal_shelter_fish">fiŝoj</string>
+
+	<string name="poi_animal_shelter_purpose_adoption_yes">adopto: jes</string>
+	<string name="poi_animal_shelter_purpose_adoption_no">adopto: ne</string>
+	<string name="poi_animal_shelter_purpose_release_yes">elliberigo: jes</string>
+	<string name="poi_animal_shelter_purpose_release_no">elliberigo: ne</string>
+
+	<string name="poi_spaceport">Kosmodromo</string>
+
+</resources>
