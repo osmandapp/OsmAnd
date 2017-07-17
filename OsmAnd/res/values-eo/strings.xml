@@ -2728,8 +2728,8 @@ Indikas lokon:  %1$s x %2$s"</string>
 \n</string>
     <string name="rendering_value_translucent_pink_name">Rozkolora diafana</string>
     <string name="quick_action_resume_pause_navigation">Daŭrigi/paŭzigi navigadon</string>
-    <string name="quick_action_resume_pause_navigation_descr">Premu tiun ĉi butonon por paŭzigi navigadon aŭ por reaktivigi se ĝi estas jam paŭzigita.</string>
+    <string name="quick_action_resume_pause_navigation_descr">Premu tiun ĉi butonon por paŭzigi navigadon aŭ por reaktivigi ĝin se ĝi estas jam paŭzigita.</string>
     <string name="quick_action_show_navigation_finish_dialog">Montri fenestron fini navigadon</string>
-    <string name="quick_action_start_stop_navigation">Ekigi/fini navigadon</string>
+    <string name="quick_action_start_stop_navigation">Ekigi/ĉesigi navigadon</string>
     <string name="quick_action_start_stop_navigation_descr">Premu tiun ĉi butonon por ekigi navigadon aŭ por ĉesigi ĝin se ĝi estas jam aktivigita.</string>
     </resources>
