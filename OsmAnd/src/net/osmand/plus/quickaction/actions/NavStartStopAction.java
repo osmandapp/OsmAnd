@@ -36,7 +36,7 @@ public class NavStartStopAction extends QuickAction {
                 activity.getMapLayers().getMapControlsLayer().stopNavigation();
             }
         } else {
-            activity.getMapLayers().getMapControlsLayer().showNavigationDialog();
+            activity.getMapLayers().getMapControlsLayer().doRoute(false);
         }
     }
 

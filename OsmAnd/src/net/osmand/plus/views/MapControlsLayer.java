@@ -444,10 +444,6 @@ public class MapControlsLayer extends OsmandMapLayer {
 		startNavigation();
 	}
 
-	public void showNavigationDialog() {
-		doRoute(false);
-	}
-
 	private void onNavigationClick() {
 		MapActivity.clearPrevActivityIntent();
 		RoutingHelper routingHelper = mapActivity.getRoutingHelper();
