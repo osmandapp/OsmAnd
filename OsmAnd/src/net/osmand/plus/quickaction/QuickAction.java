@@ -80,6 +80,10 @@ public class QuickAction {
         return isActionEditable;
     }
 
+    public boolean isActionEnable(OsmandApplication app) {
+        return true;
+    }
+
     public String getName(Context context) {
         return name == null || name.isEmpty() ? nameRes > 0 ? context.getString(nameRes) : "" : name;
     }
