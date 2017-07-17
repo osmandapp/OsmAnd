@@ -2849,4 +2849,9 @@ Fonctionnalités principales :
     <string name="moving_time">Durée de déplacement</string>
     <string name="min_max">Min / Max</string>
     <string name="rendering_value_translucent_pink_name">Rose translucide</string>
+    <string name="quick_action_resume_pause_navigation">Reprendre / Suspendre la Navigation</string>
+    <string name="quick_action_resume_pause_navigation_descr">Appuyez sur ce bouton pour suspendre la navigation ou la reprendre après l\'avoir suspendue.</string>
+    <string name="quick_action_show_navigation_finish_dialog">Afficher la fenêtre de fin de navigation</string>
+    <string name="quick_action_start_stop_navigation">Démarrer / Arrêter la Navigation</string>
+    <string name="quick_action_start_stop_navigation_descr">Appuyez sur ce bouton pour démarrer la navigation ou l\'arrêter lorsqu\'elle est en cours.</string>
     </resources>
