@@ -2805,4 +2805,9 @@ Tidligere destination bliver sidste mellemliggende punkt.</string>
 \n
 \n</string>
     <string name="rendering_value_translucent_pink_name">Gennemsigtig lyserød</string>
+    <string name="quick_action_resume_pause_navigation">Genoptag/pause navigation</string>
+    <string name="quick_action_resume_pause_navigation_descr">Tryk på knappen pause navigation eller genoptag, hvis det allerede var sat på pause.</string>
+    <string name="quick_action_show_navigation_finish_dialog">Vis Afslut navigation dialog</string>
+    <string name="quick_action_start_stop_navigation">Start/slut Navigation</string>
+    <string name="quick_action_start_stop_navigation_descr">Tryk på knappen for at starte navigationen eller stoppe den, hvis den allerede var begyndt.</string>
     </resources>
