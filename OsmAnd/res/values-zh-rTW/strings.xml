@@ -2109,7 +2109,7 @@ OsmAnd (Automated Navigation Directions) 是一個地圖和導航的應用程式
     <string name="rendering_attr_roadStyle_description">道路樣式</string>
     <string name="poi_dialog_reopen">重新開啟</string>
 	<string name="osm_save_offline">離線儲存</string>
-    <string name="release_2_2">\\022 在地圖上和其它螢幕上，為點擊位置做了新的敏捷內容選單使用者界面 
+    <string name="release_2_2">\\u2022 在地圖上和其它螢幕上，為點擊位置做了新的敏捷內容選單使用者界面
 \n 
 \n • 地圖螢幕上現在除了直接啟動外，還有\'在應用程式時啟動顯示儀表板\'可選 
 \n 
@@ -2284,7 +2284,7 @@ OsmAnd (Automated Navigation Directions) 是一個地圖和導航的應用程式
     <string name="report">報告</string>
     <string name="file_name_containes_illegal_char">檔案名稱含有違反規則的字符</string>
 <string name="storage_permission_restart_is_required">現在應用程式允許寫入外部記憶體。應用程式需要手動重新啟動。</string>
-    <string name="release_2_3">"\\022 OSM 即時。支援地圖貢獻者和開發者和每小時獲得地圖更新。 
+    <string name="release_2_3">"\\u2022 OSM 即時。支援地圖貢獻者和開發者和每小時獲得地圖更新。
 \n 
 \n • 地圖標記。一種新的方式以快速在地圖上選擇地點。 
 \n 
@@ -2364,7 +2364,7 @@ OsmAnd (Automated Navigation Directions) 是一個地圖和導航的應用程式
     <string name="show_something_on_map">在地圖上顯示 %1$s</string>
     <string name="dist_away_from_my_location">查詢 %1$s 路線</string>
     
-    <string name="release_2_4">\\022 新加入非常強大的自由文字查詢 
+    <string name="release_2_4">\\u2022 新加入非常強大的自由文字查詢
 \n 
 \n • 透過藍牙集成汽車音響系統 / 電話揚聲器 
 \n 
@@ -2455,7 +2455,7 @@ OsmAnd (Automated Navigation Directions) 是一個地圖和導航的應用程式
     <string name="osmo_pause_location">暫停</string>
     <string name="osmo_service_running">OsMo 服務正在運行</string>
     <string name="shared_string_notifications">通知</string>
-    <string name="release_2_5">\\022 在地圖上可點擊圖示 
+    <string name="release_2_5">\\u2022 在地圖上可點擊圖示
 \n 
 \n• 非常強大的 POI 篩選查詢：例如依菜餚找餐館或附有特定設施的露營場地 
 \n 
@@ -2583,7 +2583,7 @@ OsmAnd (Automated Navigation Directions) 是一個地圖和導航的應用程式
     <string name="quick_action_page_list_descr">輕點動作按鈕會直達下面的清單。</string>
     <string name="auto_split_recording_title">自動分割錄製之後的間隙</string>
 	<string name="auto_split_recording_descr">如果日期已更改，開始新區段在6分鐘後的間隙，新軌跡在2小時後的間隙，或新檔案在更長的間隙之後。</string>
-    <string name="release_2_6">"\\022 新功能：快速動作按鈕 
+    <string name="release_2_6">"\\u2022 新功能：快速動作按鈕
 \n 
 \n •  改進了觸控螢幕手勢的回應(同時平移和縮放) 
 \n 
@@ -2787,7 +2787,7 @@ OsmAnd (Automated Navigation Directions) 是一個地圖和導航的應用程式
     
     <string name="range_min_max">範圍 = 最小/最大</string>
     <string name="min_max">最小/最大</string>
-    <string name="release_2_7">\\022 Mapillary 外掛元件與街道等級影像
+    <string name="release_2_7">\\u2022 Mapillary 外掛元件與街道等級影像
 \n
 \n • 用於距離測量的尺規小工具
 \n

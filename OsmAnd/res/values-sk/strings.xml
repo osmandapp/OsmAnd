@@ -1976,7 +1976,7 @@ Dĺžka %2$s</string>
     <string name="context_menu_item_delete_waypoint">Odstrániť bod GPX?</string>
     <string name="context_menu_item_edit_waypoint">Upraviť bod GPX</string>
     <string name="copied_to_clipboard">Skopírované do schránky</string>
-    <string name="release_2_2">\\022 Nové kontextovo závislé rozhranie pre označenie umiestnení na mape a iných obrazovkách
+    <string name="release_2_2">\\u2022 Nové kontextovo závislé rozhranie pre označenie umiestnení na mape a iných obrazovkách
 \n
 \n • Obrazovka mapy je priamo spustená ak nie je zvolené \'Zobraziť úvodný panel pri štarte\'
 \n
@@ -2169,7 +2169,7 @@ Ak máte radi OsmAnd a OSM a chcete ich podporiť, toto je výborný spôsob ako
     <string name="no_waypoints_found">Nenašli sa žiadne body cesty</string>
     <string name="report">Hlásenie</string>
     <string name="storage_permission_restart_is_required">Aplikácia teraz má povolenie zapisovať do externého úložiska. Je potrebný reštart aplikácie.</string>
-    <string name="release_2_3">\\022 OSM Live. Podporte tvorcov mapy a vývojárov a získajte aktualizácie máp každú hodinu.
+    <string name="release_2_3">\\u2022 OSM Live. Podporte tvorcov mapy a vývojárov a získajte aktualizácie máp každú hodinu.
 \n
 \n • Mapové značky. Nový spôsob rýchleho výberu miest na mape.
 \n
@@ -2247,7 +2247,7 @@ Ak máte radi OsmAnd a OSM a chcete ich podporiť, toto je výborný spôsob ako
     <string name="share_history_subject">zdieľaná cez OsmAnd</string>
     <string name="confirmation_to_delete_history_items">Chcete vymazať vybrané položky histórie?</string>
     <string name="show_something_on_map">Zobraziť %1$s na mape</string>
-    <string name="release_2_4">\\022 Nové mocné vyhľadávanie ľubovoľného textu 
+    <string name="release_2_4">\\u2022 Nové mocné vyhľadávanie ľubovoľného textu
 \n 
 \n • Prepojenie s audiosystémom v aute cez Bluetooth 
 \n 
@@ -2341,7 +2341,7 @@ Ak máte radi OsmAnd a OSM a chcete ich podporiť, toto je výborný spôsob ako
     <string name="trip_rec_notification_settings">Záznam výletu (žiadne dáta)</string>
     <string name="trip_rec_notification_settings_desc">Zobraziť oznámenie, ktoré umožňuje spustiť nahrávanie stlačením tlačidla Nahrať</string>
     <string name="shared_string_notifications">Oznámenia</string>
-    <string name="release_2_5">\\022 Aktivovateľné ikony na mape 
+    <string name="release_2_5">\\u2022 Aktivovateľné ikony na mape
 \n 
 \n • Podrobné vyhľadávanie bodov záujmu: hľadajte reštaurácie podľa druhu kuchyne, kempingy so špeciálnymi službami 
 \n 
@@ -2469,7 +2469,7 @@ Zodpovedá oblasti: %1$s x %2$s</string>
 	<string name="shared_string_action_name">Názov akcie</string>
 <string name="auto_split_recording_title">Automaticky prerušiť nahrávku po medzere</string>
 	<string name="auto_split_recording_descr">Začať nový úsek po prestávke 6 minút, novú stopu po prestávke 2 hodín alebo nový súbor po dlhšej prestávke ak sa zmenil dátum.</string>
-    <string name="release_2_6">\\022 Nová funkcia: Tlačidlo rýchlej akcie 
+    <string name="release_2_6">\\u2022 Nová funkcia: Tlačidlo rýchlej akcie
 \n 
 \n • Vylepšené reakcie na dotykové gestá (napr. súbežné posúvanie a približovanie) 
 \n 

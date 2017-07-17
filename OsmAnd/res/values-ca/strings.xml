@@ -1864,7 +1864,7 @@ Per retornar a l\'estil habitual dels mapes d\'OsmAnd, només cal desactivar aqu
     <string name="shared_string_location">Localització</string>
     <string name="poi_context_menu_modify_osm_change">Modifica el canvi OSM</string>
     <string name="copied_to_clipboard">S\'ha copiat al \tporta-retalls</string>
-    <string name="release_2_2">"\\022 Una nova IU contextual per designar ubicacions en el mapa i en altres pantalles 
+    <string name="release_2_2">"\\u2022 Una nova IU contextual per designar ubicacions en el mapa i en altres pantalles
 \n 
 \n • La pantalla del mapa s\'obre directament excepte quan es selecciona  \'Mostra el tauler en iniciar\' 
 \n 
@@ -2027,7 +2027,7 @@ L\'ús de memòria serà de {3} MB temporalment i {1} MB permanentment.
     <string name="full_report">Informe complert</string>
     <string name="open_street_map_login_and_pass">Usuari i contrasenya d\'OpenStreetMap</string>
     <string name="osm_live_subscribe_btn">Subscriu</string>
-    <string name="release_2_3">\\022 OSM en directe. Recolzament a desenvolupadors i col·laboradors i obtenció de mapes actualitzats cada hora. 
+    <string name="release_2_3">\\u2022 OSM en directe. Recolzament a desenvolupadors i col·laboradors i obtenció de mapes actualitzats cada hora.
 \n
 \n • Marcadors de mapa. Una nova opció per seleccionar ràpidament llocs al mapa.
 \n
@@ -2130,7 +2130,7 @@ L\'ús de memòria serà de {3} MB temporalment i {1} MB permanentment.
     <string name="lang_hsb">Alt sòrab</string>
     
     <string name="share_history_subject">compartit via OsmAnd</string>
-    <string name="release_2_4">\\022 Nova cerca de text lliure molt potent 
+    <string name="release_2_4">\\u2022 Nova cerca de text lliure molt potent
 \n 
 \n • Integració via Bluetooth de l\'àudio del cotxe amb l\'altaveu del mòbil 
 \n 
@@ -2221,7 +2221,7 @@ L\'ús de memòria serà de {3} MB temporalment i {1} MB permanentment.
     <string name="shared_string_recorded">Enregistrat</string>
     <string name="shared_string_record">Enegistra</string>
     <string name="gpx_logging_no_data">No hi ha dades</string>
-    <string name="release_2_5">"\\022 Icones per clicar al mapa 
+    <string name="release_2_5">"\\u2022 Icones per clicar al mapa
 \n 
 \n • Potent filtre de cerca de PDIs: cerca, p.e.  restaurants per tipus de cuina o càmpings amb equipaments determinats 
 \n 
@@ -2353,7 +2353,7 @@ Abasta l\'àrea: %1$s x %2$s</string>
     <string name="quick_action_page_list_descr">Prement el botó d\'acció es mostra la pàgina següent seguint la llista.</string>
     <string name="auto_split_recording_title">Divisió automàtica de les gravacions un cop aturades</string>
 	<string name="auto_split_recording_descr">Comença un nou segment desprès de 6 min d\'interrupció, una traça nova si es superen les 2 hores o un nou fitxer si encara dura més i s\'ha canviat de data.</string>
-    <string name="release_2_6">\\022 Nova opció: botó d\'acció ràpida 
+    <string name="release_2_6">\\u2022 Nova opció: botó d\'acció ràpida
 \n 
 \n • Resposta millorada a les indicacions de la pantalla tàctil (p.e. gir de la pantalla i ampliació alhora) 
 \n 

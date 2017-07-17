@@ -2394,7 +2394,7 @@ Se ami OsmAnd e OSM e vuoi sostenerli, questo è un modo perfetto per farlo.</st
     <string name="back_to_search">Ritorna alla ricerca</string>
     <string name="confirmation_to_delete_history_items">Vuoi cancellare gli elementi della cronologia selezionati?</string>
     <string name="show_something_on_map">Mostra %1$s sulla mappa</string>
-    <string name="release_2_4">\\022 Nuova ricerca testuale molto potente 
+    <string name="release_2_4">\\u2022 Nuova ricerca testuale molto potente
 \n 
 \n • Integrazione attraverso Bluetooth con il sistema audio dell\'auto/speaker 
 \n 
@@ -2492,7 +2492,7 @@ Se ami OsmAnd e OSM e vuoi sostenerli, questo è un modo perfetto per farlo.</st
     <string name="shared_string_recorded">Registrato</string>
     <string name="shared_string_record">Registra</string>
     <string name="gpx_logging_no_data">Nessun dato</string>
-    <string name="release_2_5">\\022 Icone sulla mappa cliccabili 
+    <string name="release_2_5">\\u2022 Icone sulla mappa cliccabili
 \n 
 \n 
 \n • Potente filtro di ricerca dei PDI: ricerca dei ristoranti per tipo di cucina, campeggi per esigenze specifiche 
@@ -2633,7 +2633,7 @@ Rappresenta l\'area: %1$s x %2$s</string>
 	<string name="auto_split_recording_title">Divisione automatica delle registrazioni dopo un periodo</string>
 	<string name="auto_split_recording_descr">Inizia un nuovo segmento dopo 6 minuti, una nuova traccia dopo 2 ore, o un nuovo file dopo un intervallo maggiore.</string>
     <string name="rendering_attr_depthContours_description">Mostra contorni e punti in profondità</string>
-    <string name="release_2_6">"\\022 Nuove funzionalità: Pulsante azione veloce 
+    <string name="release_2_6">"\\u2022 Nuove funzionalità: Pulsante azione veloce
 \n
 \n • Migliorata la risposta del touch screen ai gesti (es. zoommare e allargare) 
 \n
