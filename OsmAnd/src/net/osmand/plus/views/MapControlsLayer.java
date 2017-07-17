@@ -445,7 +445,7 @@ public class MapControlsLayer extends OsmandMapLayer {
 	}
 
 	public void showNavigationDialog() {
-		onNavigationClick();
+		doRoute(false);
 	}
 
 	private void onNavigationClick() {
