@@ -119,7 +119,7 @@ public class RoutingHelper {
 		return lastRouteCalcErrorShort;
 	}
 
-	public void setPauseNaviation(boolean b) {
+	public void setPauseNavigation(boolean b) {
 		this.isPauseNavigation = b;
 		if (b) {
 			if (app.getNavigationService() != null) {
