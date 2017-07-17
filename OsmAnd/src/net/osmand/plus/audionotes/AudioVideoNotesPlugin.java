@@ -1658,7 +1658,7 @@ public class AudioVideoNotesPlugin extends OsmandPlugin {
 		if (isRecording()) {
 			AVActionType type = currentRecording.type;
 			finishRecording();
-			if (!AV_RECORDER_SPLIT.get() || type != AVActionType.REC_VIDEO) {
+			if (type != AVActionType.REC_AUDIO && (!AV_RECORDER_SPLIT.get() || type != AVActionType.REC_VIDEO)) {
 				final Recording recordingForMenu = r;
 				app.runInUIThread(new Runnable() {
 					@Override
