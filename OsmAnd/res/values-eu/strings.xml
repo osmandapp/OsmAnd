@@ -1779,7 +1779,7 @@ Lorratza %2$s</string>
 \nTalde batean parte hartzen duten gailuak denbora errealean jarraitu ditzakezu. Taldera gehitutako puntu eta lorratzak ere ikusi ditzakezu partaide bazara.
 \n
 \nTaldea ez da hilabeteetan kendu, bete OsMo.mobi gunearen arauak</string>
-    <string name="release_2_3">\\022 OSM Live. Babestu mapa egileak eta garatzaileak eta jaso orduz orduko eguneraketak. 
+    <string name="release_2_3">\\u2022 OSM Live. Babestu mapa egileak eta garatzaileak eta jaso orduz orduko eguneraketak.
 \n
 \n • Mapa-markatzaileak. Mapako lekuak atoan hautatzeko modu berri bat.
 \n
@@ -1873,7 +1873,7 @@ Biltegiratzean {3} MB behar dira une batez, {1} MB behin betiko.
     <string name="map_downloaded_descr">%1$sko mapa deskargatu da. Erabiltzen hasi zaitezke.</string>
     <string name="file_name_containes_illegal_char">Fitxategiaren izenak karaktere baliogaberen bat du</string>
 <string name="show_something_on_map">Erakutsi %1$s mapan</string>
-    <string name="release_2_4">\\022 Testu librearen bilaketa boteretsu berria.
+    <string name="release_2_4">\\u2022 Testu librearen bilaketa boteretsu berria.
 \n
 \n
 \n • Asko hobetutako Bluetooth bidezko audioa.
@@ -2112,7 +2112,7 @@ Biltegiratzean {3} MB behar dira une batez, {1} MB behin betiko.
 
     <string name="use_dashboard_btn">Erabili kontrol panela</string>
     <string name="dashboard_or_drawer_description">Orain aplikazioa kontrol panel aldakor batetik ala finkatutako menu estatiko batetik kudeatzeko aukera dago. Erabakia aldatzeko aukera duzu kontrol panelaren ezarpenetan.</string>
-    <string name="release_2_2">\\022 Testuinguruaren jakitun den interfazea mapan eta beste pantailetan kokalekuetan sakatzeko 
+    <string name="release_2_2">\\u2022 Testuinguruaren jakitun den interfazea mapan eta beste pantailetan kokalekuetan sakatzeko
 \n
 \n • Maparen pantaila orain zuzenean abiatzen da \"Bistaratu kontrol panela abioan\" markatu ezean
 \n
@@ -2384,7 +2384,7 @@ mapak eta nabigazioa</string>
     <string name="shared_string_recorded">Grabatuta</string>
     <string name="shared_string_record">Grabatu</string>
     <string name="gpx_logging_no_data">Daturik ez</string>
-    <string name="release_2_5">\\022 klikatu daitezkeen ikonoak mapan
+    <string name="release_2_5">\\u2022 klikatu daitezkeen ikonoak mapan
 \n
 \n
 \n • Iragazki bidezko POI bilaketa ahaltsua: bilatu adibidez jatetxeak sukaldaritza motaren arabera, edo behar zehatzetarako kanpingak
@@ -2523,7 +2523,7 @@ Area honi dagokio: %1$s x %2$s</string>
 	<string name="auto_split_recording_descr">Hasi segmentu berria 6 minututako hutsune bat eta gero, lorratz berria bi ordu eta gero, edo fitxategi berria data aldatzean.</string>
     <string name="rendering_attr_depthContours_description">Erakutsi sakonera sestra-kurbak eta puntuak</string>
     <string name="rendering_attr_depthContours_name">Sakonera nautikoaren sestra-kurbak</string>
-	<string name="release_2_6">\\022 Ezaugarri berria: Ekintza azkarren botoia
+	<string name="release_2_6">\\u2022 Ezaugarri berria: Ekintza azkarren botoia
 \n
 \n
 \n • Pantaila ukigarriaren keinuen erantzuna hobetua
@@ -2720,7 +2720,7 @@ Area honi dagokio: %1$s x %2$s</string>
     <string name="osmand_extended_description_part5">Bizikleta • Bizikletentzako bideak aurki ditzakezu mapan • Bizikletarako GPS nabigazioak ibilbideak bizikletentzako bideak erabiliz eraikiko du • Zure abiadura eta altuera ikusi ditzakezu • GPX grabaketak zure bidaia grabatu eta partekatzea ahalbidetzen dizu • Gehigarriekin sestra-kurbak eta erliebe-itzalak gaitu ditzakezu</string>
     <string name="osmand_plus_extended_description_part6">Bizikleta eta oinezkoentzako ezaugarriak • Oinez, mendian, eta bizikletarekin egiteko bideak eta aktibitateak ikusi • Bizikleta eta oinezkoentzako ibilbide eta ikuspegi bereziak • Aukeran garraio publikoaren geltokiak (autobusa, tranbia, trena) lineen izenak barne • Aukeran bidaiaren grabaketa tokiko GPX fitxategira edo interneteko zerbitzari batera • AUkeran abiadura eta altuera bistaratu • Biostaratu sestra-kurbak eta erliebe-itzalak (plug-in gehigarriarekin)</string>
     <string name="min_max">Min/Max</string>
-    <string name="release_2_7">\\022 Mapillary gehigarria kale-mailako argazkiekin
+    <string name="release_2_7">\\u2022 Mapillary gehigarria kale-mailako argazkiekin
 \n
 \n • DIstantzia nehurtzeko erregela
 \n

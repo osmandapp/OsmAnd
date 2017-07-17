@@ -1910,7 +1910,7 @@ Lon %2$s</string>
     <string name="rendering_attr_currentTrackWidth_description">Ancho del GPX</string>
     <string name="rendering_attr_roadStyle_description">Estilo de carretera</string>
     <string name="osm_save_offline">Guardar sin conexión</string>
-    <string name="release_2_2">\\022 Nueva interfaz de usuario sensible al contexto para pulsar ubicaciones en el mapa y en otras pantallas. 
+    <string name="release_2_2">\\u2022 Nueva interfaz de usuario sensible al contexto para pulsar ubicaciones en el mapa y en otras pantallas.
 \n 
 \n• La pantalla del mapa ahora se inicia directamente, a menos que \'Mostrar panel de control al iniciar la aplicación\', este seleccionado. 
 \n 
@@ -2071,7 +2071,7 @@ El espacio de almacenamiento usado es {3} MB temporalmente y {1} MB permanenteme
     <string name="storage_directory_readonly_desc">La carpeta de almacenamiento de datos seleccionada actualmente es de sólo lectura. La carpeta de almacenamiento fue cambiada temporalmente a la memoria interna. Por favor, elige directorio de almacenamiento válido.</string>
     <string name="storage_directory_shared">Memoria compartida</string>
     <string name="storage_permission_restart_is_required">Ahora la aplicación puede escribir en el almacenamiento externo. Se necesita un rearranque manual de la aplicación.</string>
-    <string name="release_2_3">"\\022 OSM en vivo. Apoya a colaboradores del mapa y desarrolladores y obtén actualizaciones de mapas cada hora. 
+    <string name="release_2_3">"\\u2022 OSM en vivo. Apoya a colaboradores del mapa y desarrolladores y obtén actualizaciones de mapas cada hora.
 \n
 \n • Marcadores de mapa. Una nueva forma de seleccionar rápidamente lugares en el mapa.
 \n
@@ -2161,7 +2161,7 @@ El espacio de almacenamiento usado es {3} MB temporalmente y {1} MB permanenteme
     <string name="confirmation_to_delete_history_items">¿Quieres quitar del historial los elementos seleccionados?</string>
     <string name="show_something_on_map">Mostrar %1$s en el mapa</string>
     <string name="dist_away_from_my_location">Buscar en %1$s alrededor</string>
-    <string name="release_2_4">"\\022 Nueva y muy poderosa búsqueda por texto libre 
+    <string name="release_2_4">"\\u2022 Nueva y muy poderosa búsqueda por texto libre
 \n 
 \n • Integración con el sistema de audio y  el micrófono del automóvil vía Bluetooth 
 \n 
@@ -2212,7 +2212,7 @@ El espacio de almacenamiento usado es {3} MB temporalmente y {1} MB permanenteme
     <string name="si_mi_meters">Millas/metros</string>
     <string name="driving_region_australia">Australia</string>
     <string name="lang_kab">Cabilio</string>
-    <string name="release_2_5">\\022 Iconos del mapa pulsables
+    <string name="release_2_5">\\u2022 Iconos del mapa pulsables
 \n 
 \n • Filtro de búsqueda PDI potente: Busca, p.e. restaurantes por tipo de cocina o campamentos con instalaciones específicas 
 \n 
@@ -2365,7 +2365,7 @@ El espacio de almacenamiento usado es {3} MB temporalmente y {1} MB permanenteme
     <string name="quick_action_btn_tutorial_title">Cambiar la posición del botón</string>
     <string name="quick_action_btn_tutorial_descr">Pulsación larga y arrastrar el botón para cambiar su posición en la pantalla</string>
 	<string name="shared_string_action_name">Nombre de acción</string>
-<string name="release_2_6">"\\022 Nueva función: Botón de acción rápida 
+<string name="release_2_6">"\\u2022 Nueva función: Botón de acción rápida
 \n 
 \n • Mejorada la respuesta de gestos táctiles (p.e. desplazamiento y acercamiento simultáneos) 
 \n 
@@ -2623,7 +2623,7 @@ Por favor proporciona un código completo</string>
     <string name="moving_time">Tiempo moviéndose</string>
     <string name="max_min">Máx/Min</string>
     <string name="min_max">Min/Máx</string>
-    <string name="release_2_7">\\022 Complemento de Mapillary con imágenes a nivel de calle
+    <string name="release_2_7">\\u2022 Complemento de Mapillary con imágenes a nivel de calle
 \n
 \n • Control de regla para medir distancias
 \n

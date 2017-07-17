@@ -2076,7 +2076,7 @@ Długość %2$s</string>
     <string name="access_from_map_description">Wyświetla kokpit zamiast menu</string>
     <string name="access_from_map">Dostęp z mapy</string>
     <string name="copied_to_clipboard">Skopiowane do schowka</string>
-    <string name="release_2_2">\\022 Nowe menu kontekstowe, przystosowane do wybierania lokacji na mapie oraz na innych ekranach 
+    <string name="release_2_2">\\u2022 Nowe menu kontekstowe, przystosowane do wybierania lokacji na mapie oraz na innych ekranach
 \n 
 \n • Mapa jest teraz wyświetlana bezpośrednio, o ile nie wybrano opcji \'Pokaż pulpit podczas startu aplikacji\' 
 \n 
@@ -2250,7 +2250,7 @@ Długość %2$s</string>
     <string name="show_transparency_seekbar">Pasek przezroczystości</string>
     <string name="no_map_markers_found">Proszę dodać znacznik na mapie</string>
     <string name="no_waypoints_found">Nie znaleziono punktów</string>
-    <string name="release_2_3">\\022 OSM Live. Wspieraj współtwórców map i programistów, aby uzyskać bieżące aktualizacji mapy. 
+    <string name="release_2_3">\\u2022 OSM Live. Wspieraj współtwórców map i programistów, aby uzyskać bieżące aktualizacji mapy.
 \n 
 \n • Znaczniki mapy. Nowy sposób na szybkie oznaczenie położenia na mapie. 
 \n 
@@ -2349,7 +2349,7 @@ Długość %2$s</string>
     <string name="share_history_subject">udostępnione przez OsmAnd</string>
     
     <string name="show_something_on_map">Wyświetl %1$s na mapie</string>
-    <string name="release_2_4">\\022 Nowa wszechstronna metoda wyszukiwania tekstowego 
+    <string name="release_2_4">\\u2022 Nowa wszechstronna metoda wyszukiwania tekstowego
 \n 
 \n • Ulepszono integrację z zestawem audio Bluetooth 
 \n 
@@ -2440,7 +2440,7 @@ Długość %2$s</string>
     <string name="shared_string_recorded">Zarejestrowany</string>
     <string name="shared_string_record">Rejestruj</string>
     <string name="gpx_logging_no_data">Brak danych</string>
-    <string name="release_2_5">\\022 Ikony mapy, które można kliknąć 
+    <string name="release_2_5">\\u2022 Ikony mapy, które można kliknąć
 \n 
 \n • wszechstronna wyszukiwarka użytecznych miejsc: wyszukiwanie restauracji wg kuchni, kempingów wg udogodnień 
 \n 
@@ -2571,7 +2571,7 @@ Reprezentuje obszar: %1$s x %2$s</string>
     <string name="quick_action_page_list_descr">Naciśnięcie przycisku czynności wyświetli poniższą listę.</string>
     <string name="auto_split_recording_title">Automatyczne dzielenie nagrań po przerwie</string>
 	<string name="auto_split_recording_descr">Rozpoczyna nowy segment po 6 min przerwy, nową trasę po 2 h i nowy plik po dłuższej przerwie, jeżeli data ulegnie zmianie</string>
-    <string name="release_2_6">\\022 Nowa funkcja: przycisk szybkiej czynności 
+    <string name="release_2_6">\\u2022 Nowa funkcja: przycisk szybkiej czynności
 \n 
 \n • Poprawiono odpowiedź na gesty ekranu dotykowego 
 \n 

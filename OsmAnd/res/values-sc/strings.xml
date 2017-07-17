@@ -2045,7 +2045,7 @@ Lon %2$s</string>
     <string name="use_drawer_btn">Imprea sa mapa</string>
     <string name="access_from_map_description">Su butone de su menù alluet su pannellu de controllu, imbetzes de su menù</string>
     <string name="access_from_map">Intra dae sa mapa</string>
-    <string name="release_2_2">\\022 Interfache impitadore noa pro incarcare positziones in sa mapa e in àteros ischermos 
+    <string name="release_2_2">\\u2022 Interfache impitadore noa pro incarcare positziones in sa mapa e in àteros ischermos
 \n 
 \n • S\'ischermu de sa mapa est como postu come prima cosa a s’allumìngiu de s’aplicatzione, semper chi \'Ammustra pannellu de controllu in s\'allumìngiu\' no siet ischertadu 
 \n 
@@ -2204,7 +2204,7 @@ Si istimas OsmAnd e OSM e los boles suportare, custa est una manera perfeta pro 
     <string name="storage_directory_shared">Memòria cumpartzida</string>
     <string name="full_report">Raportu cumpridu</string>
     <string name="open_street_map_login_and_pass">Nùmene impreadore e crae de OpenStreetMap</string>
-    <string name="release_2_3">\\022 OSM Live. Suporta sos contribuidores a sa mapa e sos isvilupadores pro otènnere mapas agiornadas cada ora. 
+    <string name="release_2_3">\\u2022 OSM Live. Suporta sos contribuidores a sa mapa e sos isvilupadores pro otènnere mapas agiornadas cada ora.
 \n
 \n • Marcadores mapa. Una manera noa de ischertare in manera lestra logos in sa mapa.
 \n
@@ -2289,7 +2289,7 @@ Si istimas OsmAnd e OSM e los boles suportare, custa est una manera perfeta pro 
     <string name="confirmation_to_delete_history_items">Boles iscantzellare sos elementos ischertados de s\'istòria?</string>
     <string name="coords_search">Chirca cun coordinatas</string>
     <string name="advanced_coords_search">Chirca avantzada cun coordinatas</string>
-    <string name="release_2_4">"\\022 Chirca de testu noa e potente meda 
+    <string name="release_2_4">"\\u2022 Chirca de testu noa e potente meda
 \n 
 \n • Integratzione intre su sistema àudio de sa màchina e su telèfono pro mèdiu de Bluetooth 
 \n 
@@ -2374,7 +2374,7 @@ Si istimas OsmAnd e OSM e los boles suportare, custa est una manera perfeta pro 
     <string name="rendering_value_dark_brown_name">Castàngiu iscuru</string>
     <string name="rendering_attr_contourColorScheme_name">Ischema de colores pro sas lìnias de livellu</string>
     <string name="rendering_attr_surfaceIntegrity_name">Integridade superfitziale istradale</string>
-    <string name="release_2_5">\\022 Iconas incarcàbiles in sa mapa 
+    <string name="release_2_5">\\u2022 Iconas incarcàbiles in sa mapa
 \n 
 \n • Chirca filtrada de PDI potente meda: chirca sos ristorantes pro casta de coghina, o sos campègios cun caraterìsticas particulares 
 \n 
@@ -2505,7 +2505,7 @@ Pro praghere iscrie su còdighe intreu</string>
     <string name="auto_split_recording_title">Iscroba automaticamente sas registratziones</string>
 	<string name="auto_split_recording_descr">Incumintza unu segmentu nou a pustis de una pàusa de 6 minutos, una rasta noa a pustis de 2 oras o unu documentu nou si sa pàusa est istada prus longa e sa data est cambiada.</string>
     <string name="quick_action_page_list_descr">Incarchende su butone pro s\'atzione as a cùrrere pro sa lista in suta.</string>
-    <string name="release_2_6">"\\022 Funtzionalidae noa: Butone pro sas atziones lestras 
+    <string name="release_2_6">"\\u2022 Funtzionalidae noa: Butone pro sas atziones lestras
 \n 
 \n • Megioramentu de sa risposta de s\'ichermu a sos incarcos 
 \n 
@@ -2698,7 +2698,7 @@ Pro praghere iscrie su còdighe intreu</string>
     <string name="moving_time">Tempus in movimentu</string>
     <string name="max_min">Mass/Min</string>
     <string name="min_max">Min/Mass</string>
-    <string name="release_2_7">\\022 Estensione Mapillary cun immàgines a livellu de s\'istrada
+    <string name="release_2_7">\\u2022 Estensione Mapillary cun immàgines a livellu de s\'istrada
 \n
 \n • Widget righellu pro medire sas distàntzias
 \n

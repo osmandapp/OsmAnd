@@ -1231,7 +1231,7 @@
     <string name="osmo_share_location">分享</string>
     <string name="osmo_pause_location">暂停</string>
     <string name="shared_string_notifications">通知</string>
-    <string name="release_2_5">\\022 地图上可点击的图标 
+    <string name="release_2_5">\\u2022 地图上可点击的图标
 \n 
 \n • 强大的兴趣点过滤搜索：例如，根据菜肴搜索餐馆，或者具有特定设施的场所 
 \n 
@@ -1303,7 +1303,7 @@
     <string name="rendering_value_light_brown_name">浅棕色</string>
     <string name="rendering_value_dark_brown_name">深棕色</string>
     <string name="use_osm_live_routing">OSM 实时导航</string>
-    <string name="release_2_3">\\022 OSM 实时功能。支持地图贡献者和开发者获取每小时更新的地图。 
+    <string name="release_2_3">\\u2022 OSM 实时功能。支持地图贡献者和开发者获取每小时更新的地图。
 \n 
 \n • 地图标记。新的快速地图选点的方式。 
 \n 
@@ -1634,7 +1634,7 @@
     <string name="back_to_search">返回到搜索</string>
     <string name="confirmation_to_delete_history_items">你想要从历史中删除所选的项目吗？</string>
     <string name="show_something_on_map">在地图上显示 %1$s</string>
-    <string name="release_2_4">\\022 新加入非常强大的自由文本查找 
+    <string name="release_2_4">\\u2022 新加入非常强大的自由文本查找
 \n
 \n • 透过蓝牙集成汽车音响系统 / 电话扬声器 
 \n
@@ -1745,7 +1745,7 @@
     <string name="no_camera_permission">应用程序没有权限访问摄像头。</string>
     <string name="no_microphone_permission">应用程序没有访问麦克风的权限。</string>
     <string name="show_on_start_description">“关闭”会直接启动地图屏幕</string>
-    <string name="release_2_2">\\022 在地图上和其它屏幕上，为点击位置做了新的敏捷内容菜单用户界面 
+    <string name="release_2_2">\\u2022 在地图上和其它屏幕上，为点击位置做了新的敏捷内容菜单用户界面
 \n
 \n • 地图屏幕上现在除了直接启动外，还有\'在应用程序时启动显示仪表板\'可选 
 \n
@@ -1771,7 +1771,7 @@
     <string name="lang_als">"阿尔巴尼亚  (Tosk)"</string>
     <string name="world_map_download_descr">世界底图（涵盖整个世界的缩小版）可能存在丢失或过期。请考虑下载它的全球概览。</string>
     <string name="map_downloaded_descr">已下载 %1$s 的地图，你现在可以开始使用它。</string>
-    <string name="release_2_6">"\\022 新功能：快速动作按钮 
+    <string name="release_2_6">"\\u2022 新功能：快速动作按钮
 \n
 \n •  改进了触摸屏幕手势的回应(同时平移和缩放) 
 \n
