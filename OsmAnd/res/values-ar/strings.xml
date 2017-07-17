@@ -2709,4 +2709,9 @@
 \n
 \n</string>
     <string name="rendering_value_translucent_pink_name">وردي شفاف</string>
+    <string name="quick_action_resume_pause_navigation">استئناف/وقف الملاحة</string>
+    <string name="quick_action_resume_pause_navigation_descr">اضغط على هذا الزر لإيقاف الملاحة، أو استئنافها إذا كانت موقفة مسبقا.</string>
+    <string name="quick_action_show_navigation_finish_dialog">إظهار حوار انتهاء الملاحة</string>
+    <string name="quick_action_start_stop_navigation">بدء/انهاء الملاحة</string>
+    <string name="quick_action_start_stop_navigation_descr">اضغط على هذا الزر لبدء الملاحة، أو لوقفها إذا ما كانت قد بدأت مسبقا.</string>
     </resources>
