@@ -23,6 +23,10 @@ public class SecondSplashScreenFragment extends Fragment {
     private static final int SECOND_SPLASH_TIME_OUT = 5000;
     private boolean started = false;
 
+    private MapActivity getMapActivity() {
+        return (MapActivity) getActivity();
+    }
+
     private boolean hasNavBar() {
         int id = getResources().getIdentifier("config_showNavigationBar", "bool", "android");
         if (id > 0)
@@ -74,20 +78,20 @@ public class SecondSplashScreenFragment extends Fragment {
         view.setBackgroundColor(getResources().getColor(R.color.map_background_color_light));
 
         ImageView logo = new ImageView(getContext());
-        if (Version.isFreeVersion(((MapActivity) getActivity()).getMyApplication())) {
+        if (Version.isFreeVersion(getMapActivity().getMyApplication())) {
             logo.setImageDrawable(getResources().getDrawable(R.drawable.ic_logo_splash_osmand));
-        } else if ((Version.isPaidVersion(((MapActivity) getActivity()).getMyApplication())) ||
-                (Version.isDeveloperVersion(((MapActivity) getActivity()).getMyApplication()))) {
+        } else if ((Version.isPaidVersion(getMapActivity().getMyApplication())) ||
+                (Version.isDeveloperVersion(getMapActivity().getMyApplication()))) {
             logo.setImageDrawable(getResources().getDrawable(R.drawable.ic_logo_splash_osmand_plus));
         }
         RelativeLayout.LayoutParams logoLayoutParams = new RelativeLayout.LayoutParams(RelativeLayout.LayoutParams.WRAP_CONTENT, RelativeLayout.LayoutParams.WRAP_CONTENT);
         logoLayoutParams.addRule(RelativeLayout.ALIGN_PARENT_TOP);
         logoLayoutParams.addRule(RelativeLayout.CENTER_HORIZONTAL);
         ImageView text = new ImageView(getActivity());
-        if (Version.isFreeVersion(((MapActivity) getActivity()).getMyApplication())) {
+        if (Version.isFreeVersion(getMapActivity().getMyApplication())) {
             text.setImageDrawable(getResources().getDrawable(R.drawable.image_text_osmand));
-        } else if ((Version.isPaidVersion(((MapActivity) getActivity()).getMyApplication())) ||
-                (Version.isDeveloperVersion(((MapActivity) getActivity()).getMyApplication()))) {
+        } else if ((Version.isPaidVersion(getMapActivity().getMyApplication())) ||
+                (Version.isDeveloperVersion(getMapActivity().getMyApplication()))) {
             text.setImageDrawable(getResources().getDrawable(R.drawable.image_text_osmand_plus));
         }
         RelativeLayout.LayoutParams textLayoutParams = new RelativeLayout.LayoutParams(RelativeLayout.LayoutParams.WRAP_CONTENT, RelativeLayout.LayoutParams.WRAP_CONTENT);
@@ -128,19 +132,19 @@ public class SecondSplashScreenFragment extends Fragment {
     @Override
     public void onResume() {
         super.onResume();
-        ((MapActivity)getActivity()).disableDrawer();
+        getMapActivity().disableDrawer();
         if (!started) {
             started = true;
             new Handler().postDelayed(new Runnable() {
 
                 @Override
                 public void run() {
-                    ((MapActivity)getActivity()).setRequestedOrientation(ActivityInfo.SCREEN_ORIENTATION_UNSPECIFIED);
-                    if (((MapActivity)getActivity()).getMyApplication().getSettings().MAP_SCREEN_ORIENTATION.get() != getActivity().getRequestedOrientation()) {
-                        getActivity().setRequestedOrientation(((MapActivity)getActivity()).getMyApplication().getSettings().MAP_SCREEN_ORIENTATION.get());
+                    getActivity().setRequestedOrientation(ActivityInfo.SCREEN_ORIENTATION_UNSPECIFIED);
+                    if (getMapActivity().getMyApplication().getSettings().MAP_SCREEN_ORIENTATION.get() != getActivity().getRequestedOrientation()) {
+                        getActivity().setRequestedOrientation(getMapActivity().getMyApplication().getSettings().MAP_SCREEN_ORIENTATION.get());
                         // can't return from this method we are not sure if activity will be recreated or not
                     }
-                    ((MapActivity)getActivity()).getSupportFragmentManager().beginTransaction().remove(SecondSplashScreenFragment.this).commitAllowingStateLoss();
+                    getActivity().getSupportFragmentManager().beginTransaction().remove(SecondSplashScreenFragment.this).commitAllowingStateLoss();
                 }
             }, SECOND_SPLASH_TIME_OUT);
         }
@@ -149,6 +153,6 @@ public class SecondSplashScreenFragment extends Fragment {
     @Override
     public void onPause() {
         super.onPause();
-        ((MapActivity)getActivity()).enableDrawer();
+        getMapActivity().enableDrawer();
     }
 }
