@@ -254,6 +254,10 @@ public class QuickActionsWidget extends LinearLayout {
 						}
 					});
 				}
+                if (!action.isActionEnable(application)) {
+                    view.setEnabled(false);
+                    view.setAlpha(0.5f);
+                }
             }
 
             if (land) {
