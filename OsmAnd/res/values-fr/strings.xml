@@ -944,7 +944,7 @@ Fonctionnalités principales :
     <string name="target_point">Étape %1$s</string>
     <string name="target_points">Itinéraire</string>
     <string name="intermediate_point_too_far">Étape %1$s trop éloignée de la route la plus proche.</string>
-    <string name="arrived_at_intermediate_point">Vous avez atteint l\'étape intermédiaire</string>
+    <string name="arrived_at_intermediate_point">Vous êtes arrivés à l\'étape intermédiaire</string>
     <string name="context_menu_item_intermediate_point">Ajouter comme étape</string>
     <string name="map_widget_intermediate_distance">Étape</string>
     <string name="ending_point_too_far">Point d\'arrivée trop éloigné de la route la plus proche.</string>
@@ -2848,4 +2848,5 @@ Fonctionnalités principales :
     <string name="of">%1$d de %2$d</string>
     <string name="moving_time">Durée de déplacement</string>
     <string name="min_max">Min / Max</string>
+    <string name="rendering_value_translucent_pink_name">Rose translucide</string>
     </resources>
