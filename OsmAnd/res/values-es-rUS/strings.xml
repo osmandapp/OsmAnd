@@ -2689,4 +2689,9 @@ Proporciona un código completo</string>
 \n
 \n</string>
     <string name="rendering_value_translucent_pink_name">Rosa translúcido</string>
+    <string name="quick_action_resume_pause_navigation">Reanudar/Pausar navegación</string>
+    <string name="quick_action_resume_pause_navigation_descr">Pulsa este botón para pausar la navegación, o para reanudarla si ya estaba pausada.</string>
+    <string name="quick_action_show_navigation_finish_dialog">Mostrar diálogo de Finalizar navegación</string>
+    <string name="quick_action_start_stop_navigation">Iniciar/Parar navegación</string>
+    <string name="quick_action_start_stop_navigation_descr">Pulsa este botón para iniciar la navegación, o para finalizarla si ya se había iniciado.</string>
     </resources>
