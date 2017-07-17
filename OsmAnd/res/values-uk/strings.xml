@@ -1,4 +1,5 @@
-<?xml version="1.0" encoding="UTF-8" standalone="no"?><resources>
+<?xml version='1.0' encoding='UTF-8'?>
+<resources>
   <string name="asap">Швидко</string>
   
   <string name="route_roundabout">Круговий рух : %1$d з’їзд</string>
@@ -2933,4 +2934,14 @@
     <string name="max_min">Макс./мін.</string>
     
     <string name="min_max">Мін/макс</string>
+    <string name="release_2_7">\\022 Втулок Mapillary з вуличними зображеннями
+\n
+\n • Віджет-лінійка для вимірювання дистанцій
+\n
+\n • Розділені GPX-інтервали з докладною інформацією про Ваш трек
+\n
+\n • Інші поліпшення й виправлення помилок
+\n
+\n</string>
+    <string name="rendering_value_translucent_pink_name">Напівпрозорий рожевий</string>
     </resources>
