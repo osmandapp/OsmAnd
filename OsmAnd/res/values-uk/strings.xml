@@ -842,7 +842,7 @@
   <string name="osmand_parking_plugin_name">Місце стоянки</string>
   <string name="context_menu_item_add_parking_point">Відмітити місце стоянки</string>
   <string name="context_menu_item_delete_parking_point">Вилучити позначку місця стоянки</string>
-  <string name="starting_point_too_far">Початок маршруту надто далеко від найближчої дороги.</string>
+  <string name="starting_point_too_far">Початковий пункт занадто далеко від найближчої дороги.</string>
   <string name="shared_location">Загальні місця</string>
   
   <string name="global_app_allocated_memory_descr">Зайнято пам’яті %1$s MB (Обмеження Android %2$s MB, dalvik %3$s MB).</string>
@@ -1016,9 +1016,9 @@
     <string name="new_destination_point_dialog">Ви вже встановили пункт призначення:</string>
     <string name="target_points">Точки призначення</string>
     <string name="intermediate_point_too_far">Проміжна точка %1$s занадто далека від найближчої дороги.</string>
-    <string name="arrived_at_intermediate_point">Ви вже досягнули проміжної точки</string>
+    <string name="arrived_at_intermediate_point">Ви досягли проміжного пункту</string>
     <string name="context_menu_item_intermediate_point">Додати як проміжну точку</string>
-    <string name="ending_point_too_far">Початок маршруту занадто далеко від найближчої дороги.</string>
+    <string name="ending_point_too_far">Кінцевий пункт занадто далеко від найближчої дороги.</string>
     <string name="add_tag">Додати мітку</string>
     <string name="btn_advanced_mode">Розширений режим…</string>
     <string name="poi_filter_parking">Стоянки</string>
