@@ -43,8 +43,7 @@ import net.osmand.plus.dashboard.DashLocationFragment;
 import net.osmand.util.Algorithms;
 import net.osmand.util.MapUtils;
 
-import static android.text.InputType.TYPE_CLASS_NUMBER;
-import static android.text.InputType.TYPE_NUMBER_FLAG_DECIMAL;
+import static android.text.InputType.TYPE_CLASS_PHONE;
 import static android.text.InputType.TYPE_TEXT_FLAG_CAP_CHARACTERS;
 import static android.text.InputType.TYPE_TEXT_FLAG_NO_SUGGESTIONS;
 
@@ -511,7 +510,7 @@ public class QuickSearchCoordinatesFragment extends DialogFragment implements Os
 	private void setInputTypeDependingOnFormat(EditText[] editTexts) {
 		for (EditText et : editTexts) {
 			if (currentFormat == PointDescription.FORMAT_DEGREES) {
-				et.setInputType(TYPE_CLASS_NUMBER | TYPE_NUMBER_FLAG_DECIMAL);
+				et.setInputType(TYPE_CLASS_PHONE);
 			} else {
 				et.setInputType(TYPE_TEXT_FLAG_CAP_CHARACTERS | TYPE_TEXT_FLAG_NO_SUGGESTIONS);
 			}
