@@ -1,4 +1,5 @@
-<?xml version="1.0" encoding="UTF-8" standalone="no"?><resources>
+<?xml version='1.0' encoding='UTF-8'?>
+<resources>
     <string name="srtm_paid_version_msg">Overvej at købe Højdekurve udvidelsen (\'Contour lines\') på Google Play for at støtte den videre udvikling.</string>
     <string name="av_def_action_video">Optag video</string>
     <string name="av_def_action_audio">Optag audio</string>
@@ -2110,7 +2111,7 @@ Lon %2$s</string>
 	<string name="osn_close_dialog_success">Note lukket</string>
 	<string name="osm_edit_modified_poi">Ændret OSM IP</string>
     <string name="osm_edit_deleted_poi">Slettet OSM IP</string>
-    <string name="release_2_2">\\022 Ny kontekstafhængig brugergrænseflade når der vælges lokationer på kortet og på andre skærme 
+    <string name="release_2_2">\\u2022 Ny kontekstafhængig brugergrænseflade når der vælges lokationer på kortet og på andre skærme
 \n 
 \n • Kortskærmen vises direkte, medmindre \'Vis betjeningspanel ved start\' er valgt 
 \n 
@@ -2284,7 +2285,7 @@ Hvis du  ønsker at støtte OsmAnd og OSM, er dette en god måde at gøre det p�
     <string name="finish_navigation">Afslut navigation</string>
     <string name="shared_string_move_up">Flyt op</string>
     <string name="shared_string_move_down">Flyt ned</string>
-    <string name="release_2_3">"\\022 OSM Live. Støt bidragsyderne og udviklere af kortet og få kortopdateringer hver time. 
+    <string name="release_2_3">"\\u2022 OSM Live. Støt bidragsyderne og udviklere af kortet og få kortopdateringer hver time.
 \n 
 \n • Kortmarkører. En ny måde til hurtigt at vælge steder på kortet. 
 \n 
@@ -2367,7 +2368,7 @@ Hvis du  ønsker at støtte OsmAnd og OSM, er dette en god måde at gøre det p�
     <string name="lang_hsb">Øvresorbisk</string>
     <string name="share_history_subject">delt via OsmAnd</string>
     
-    <string name="release_2_4">"\\022 Ny meget stærk fritekstsøgning 
+    <string name="release_2_4">"\\u2022 Ny meget stærk fritekstsøgning
 \n 
 \n  • Integration med bilens lydsystem og telefon via Bluetooth 
 \n 
@@ -2459,7 +2460,7 @@ Hvis du  ønsker at støtte OsmAnd og OSM, er dette en god måde at gøre det p�
     <string name="shared_string_recorded">Optaget</string>
     <string name="shared_string_record">Optag</string>
     <string name="gpx_logging_no_data">Ingen data</string>
-    <string name="release_2_5">\\022 Klikbare ikoner på kortet 
+    <string name="release_2_5">\\u2022 Klikbare ikoner på kortet
 \n 
 \n  • Fleksibel IP-filter søgning: Søg fx. restauranter efter køkkenstil, eller campingpladser med særlige faciliteter 
 \n 
@@ -2590,7 +2591,7 @@ Repræsenterer område: %1$s x %2$s</string>
     <string name="quick_action_page_list_descr">Tryk på genvejen vil gennemløbe nedenstående liste.</string>
     <string name="auto_split_recording_title">Opdel automatisk optagelser efter et ophold</string>
 	<string name="auto_split_recording_descr">Start et nyt segment efter ophold på 6 min., et nyt spor efter 2 t, eller en ny fil efter længere ophold, hvis datoen er ændret.</string>
-    <string name="release_2_6">\\022 Ny funktion: Genvejsknap 
+    <string name="release_2_6">\\u2022 Ny funktion: Genvejsknap
 \n 
 \n  • Forbedret respons på berøringsskærm (fx. samtidig panorering og zoom) 
 \n 
@@ -2794,4 +2795,19 @@ Tidligere destination bliver sidste mellemliggende punkt.</string>
     
     <string name="range_min_max">Interval = min/maks</string>
     <string name="min_max">Min/maks</string>
+    <string name="release_2_7">\\u2022 Mapillary udvidelse med billeder på gadeniveau
+\n
+\n • Lineal modul til afstandsmåling 
+\n
+\n • GPX split intervaller med detaljeret info om spor
+\n
+\n • Andre forbedringer og fejlrettelser
+\n
+\n</string>
+    <string name="rendering_value_translucent_pink_name">Gennemsigtig lyserød</string>
+    <string name="quick_action_resume_pause_navigation">Genoptag/pause navigation</string>
+    <string name="quick_action_resume_pause_navigation_descr">Tryk på knappen pause navigation eller genoptag, hvis det allerede var sat på pause.</string>
+    <string name="quick_action_show_navigation_finish_dialog">Vis Afslut navigation dialog</string>
+    <string name="quick_action_start_stop_navigation">Start/slut Navigation</string>
+    <string name="quick_action_start_stop_navigation_descr">Tryk på knappen for at starte navigationen eller stoppe den, hvis den allerede var begyndt.</string>
     </resources>

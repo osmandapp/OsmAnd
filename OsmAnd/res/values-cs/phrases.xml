@@ -1213,10 +1213,10 @@
 	<string name="poi_urban">Město</string>
 	<string name="poi_rural">Venkov</string>
 
-	<string name="poi_animal_shelter_dog">Typ útulku: pes</string>
-	<string name="poi_animal_shelter_cat">Typ útulku: kočky</string>
-	<string name="poi_animal_shelter_dog_cat">Typ útulku: pes, kočka</string>
-	<string name="poi_animal_shelter_bird">Typ útulku: pták</string>
+	<string name="poi_animal_shelter_dog">Psi</string>
+	<string name="poi_animal_shelter_cat">Kočky</string>
+	<string name="poi_animal_shelter_dog_cat">Psi, kočky</string>
+	<string name="poi_animal_shelter_bird">Ptáci</string>
 
 	<string name="poi_seats">Sedačky</string>
 	<string name="poi_backrest_yes">Opěradlo: ano</string>
@@ -3382,5 +3382,8 @@
 
 	<string name="poi_motorcycle_services">Služby</string>
 	<string name="poi_motorcycle_type">Typ motocyklu</string>
+
+<string name="poi_animal_shelter_type">Zvířata povolena</string>
+	<string name="poi_animal_shelter_purpose">Účel</string>
 
 </resources>

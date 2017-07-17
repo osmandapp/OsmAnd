@@ -1,0 +1,65 @@
+<?xml version="1.0" encoding="utf-8"?>
+
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+              android:layout_width="match_parent"
+              android:layout_height="match_parent"
+              android:orientation="vertical">
+
+    <TextView
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:background="?attr/bg_color"
+        android:padding="16dp"
+        android:text="@string/quick_action_start_stop_navigation_descr"
+        android:textColor="?android:textColorPrimary"
+        android:textSize="@dimen/default_list_text_size"/>
+
+    <ImageView
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_gravity="top"
+        android:scaleType="fitXY"
+        android:src="@drawable/bg_shadow_list_bottom"/>
+
+    <ImageView
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_gravity="top"
+        android:layout_marginTop="16dp"
+        android:scaleType="fitXY"
+        android:src="@drawable/bg_shadow_list_top"/>
+
+    <LinearLayout
+        android:id="@+id/show_dialog_row"
+        android:layout_width="match_parent"
+        android:layout_height="56dp"
+        android:background="?attr/bg_color"
+        android:orientation="horizontal">
+
+        <TextView
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_gravity="center"
+            android:layout_weight="1"
+            android:padding="16dp"
+            android:text="@string/quick_action_show_navigation_finish_dialog"
+            android:textColor="?android:textColorPrimary"
+            android:textSize="@dimen/default_list_text_size"/>
+
+        <android.support.v7.widget.SwitchCompat
+            android:id="@+id/show_dialog_switch"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_gravity="center_vertical"
+            android:layout_marginLeft="16dp"
+            android:layout_marginRight="16dp"/>
+    </LinearLayout>
+
+    <ImageView
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_gravity="top"
+        android:scaleType="fitXY"
+        android:src="@drawable/bg_shadow_list_bottom"/>
+
+</LinearLayout>

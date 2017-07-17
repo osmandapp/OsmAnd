@@ -2772,7 +2772,7 @@ Tai yra puikus būdas paremti OsmAnd ir OSM, jei jie jums patinka.</string>
     <string name="routing_attr_height_obstacles_description">Naudoti SRTM, ASTER ir EU-DEM pateikiamus vietovės aukščio duomenis</string>
     <string name="rendering_attr_depthContours_description">Rodyti gylio kontūrus ir taškus</string>
     <string name="rendering_attr_depthContours_name">Vandenyno gylio kontūrai</string>
-    <string name="release_2_6">\\022 Nauja funkcija: Greito veiksmo mygtukas
+    <string name="release_2_6">\\u2022 Nauja funkcija: Greito veiksmo mygtukas
 \n
 \n • Patobulinta liečiamo ekrano veiksmų reakcija (t.y. mąstelio keitimas ir žemėlapio stūmimas tuo pačiu metu)
 \n
@@ -2806,7 +2806,7 @@ Tai yra puikus būdas paremti OsmAnd ir OSM, jei jie jums patinka.</string>
     <string name="gpx_no_tracks_title">Jūs dar neturite išsaugotų kelių</string>
     <string name="gpx_no_tracks_title_folder">Jūs taip pat galite išsaugoti kelius segtuve</string>
     <string name="trip_rec_notification_settings_desc">Rodyti pranešimą kuris leidžia pradėti kelionės įrašymą paspaudus \"Įrašyti\" mygtuką</string>
-    <string name="release_2_5">\\022 INteraktyvios žemėlapio ikonos
+    <string name="release_2_5">\\u2022 INteraktyvios žemėlapio ikonos
 \n
 \n • Galingas LV paieškos filtras: ieškoti restoranų pvz. pagal virtuvę ar kempingų pagal su specifinėm paslaugom
 \n

@@ -1,4 +1,5 @@
-<?xml version="1.0" encoding="UTF-8" standalone="no"?><resources>
+<?xml version='1.0' encoding='UTF-8'?>
+<resources>
 <string name="app_mode_bus">Bus</string>
  	<string name="app_mode_train">Ćah</string>
     <string name="map_widget_battery">Staw baterije</string>
@@ -275,8 +276,8 @@
     <string name="rendering_attr_lessDetailed_name">Mjenje detailow</string>
     <string name="osmo_auth_error_short">Awtorizacija njewuspěšna</string>
     <string name="sort_by_name">Po mjenje sortować</string>
-    <string name="gpx_info_average_speed">"Přerězna spěšnosć: %1$s "</string>
-    <string name="gpx_info_maximum_speed">"Maksimalna spěšnosć: %1$s "</string>
+    <string name="gpx_info_average_speed">Přerězna spěšnosć: %1$s</string>
+    <string name="gpx_info_maximum_speed">Maksimalna spěšnosć: %1$s</string>
     <string name="gpx_info_avg_altitude">Přerězna wysokosć: %1$s</string>
     <string name="osmo_sign_in">Přizjewić</string>
     <string name="osmo_user_name">Wužiwar</string>
@@ -380,7 +381,7 @@
     <string name="speak_street_names">Dróhowe mjena (TTS)</string>
     <string name="speak_cameras">Błyskače</string>
     <string name="speak_traffic_warnings">Wobchadne warnowanja</string>
-    <string name="route_descr_map_location">"Karta: "</string>
+    <string name="route_descr_map_location">Karta:</string>
     <string name="route_descr_lat_lon">šěr %1$.3f, doł %2$.3f</string>
     <string name="route_descr_destination">Cil</string>
     <string name="route_to">do:</string>
@@ -602,7 +603,7 @@
     <string name="search_position_map_view">Tuchwilne srjedźišćo karty</string>
     <string name="select_search_position">Wuchadźišćo:</string>
     <string name="context_menu_item_search">We wokolinje pytać</string>
-    <string name="filename_input">"Mjeno dataje: "</string>
+    <string name="filename_input">Mjeno dataje:</string>
     <string name="file_with_name_already_exist">Dataja ze samsnym mjenom hižo eksistuje.</string>
     <string name="favorite_home_category">Doma</string>
     <string name="favorite_friends_category">Přećeljo</string>

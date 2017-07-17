@@ -1,5 +1,6 @@
 <?xml version='1.0' encoding='UTF-8'?>
-<resources><string name="poi_office">Ofis</string>
+<resources>
+	<string name="poi_office">Ofis</string>
 	<string name="poi_sport">İdman</string>
 	<string name="poi_tourism">Turizm</string>
 	<string name="poi_club">Klub</string>
@@ -87,7 +88,6 @@
 	<string name="poi_resource_gravel">Çınqıl</string>
 	<string name="poi_resource_gypsum">Gips</string>
 	<string name="poi_resource_iron_ore">Dəmir filizi</string>
-	<string name="poi_nuclear_explosion_type_atmospheric_water_surface_barge"/>
 	<string name="poi_post_office">Poçt şöbəsi</string>
 	<string name="poi_post_box">Poçt qutusu</string>
 	<string name="poi_telephone">Telefon</string>
@@ -122,7 +122,6 @@
 	<string name="poi_fuel_gtl_diesel">GTL dizel</string>
 	<string name="poi_fuel_hgv_diesel">HGV dizel</string>
 	<string name="poi_fuel_biodiesel">Bio dizel</string>
-	<string name="poi_fuel_octane_80"/>
 	<string name="poi_public_transport_platform">İctimai nəqliyyat dayanacağı</string>
 	<string name="poi_public_transport_platform_bus">Avtobus dayanacağı</string>
 	<string name="poi_bus_stop">Avtobus dayanacağı</string>
@@ -149,4 +148,4 @@
 	<string name="poi_stadium">Stadion</string>
 	<string name="poi_sports_centre">İdman mərkəzi</string>
 	<string name="poi_golf">Qolf</string>
-	</resources>
+</resources>

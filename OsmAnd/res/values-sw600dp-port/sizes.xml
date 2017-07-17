@@ -1,0 +1,5 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <dimen name="splash_screen_logo_top">300dp</dimen>
+    <dimen name="splash_screen_text_bottom">200dp</dimen>
+</resources>
