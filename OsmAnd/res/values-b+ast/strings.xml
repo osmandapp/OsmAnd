@@ -777,7 +777,7 @@ Puntos</string>
 
     <string name="rendering_attr_depthContours_description">Amosar les curves de nivel y puntos</string>
     <string name="rendering_attr_depthContours_name">Curves de fondura marina</string>
-	<string name="release_2_6">\\022 Nueva función: Botón d\'aición rápida 
+	<string name="release_2_6">\\u2022 Nueva función: Botón d\'aición rápida
 \n 
 \n • Respuesta ameyorada a xestos en pantalles táctiles (p.ex. abasnar y ampliar al tiempu) 
 \n 

@@ -2123,7 +2123,7 @@
     <string name="dashboard_or_drawer_title">Панэль кіраваньня ці мэню</string>
     <string name="please_specify_poi_type_only_from_list">Калі ласка, увядзіце правільны тып POI або прапусьціце яго</string>
     <string name="dashboard_or_drawer_description">Дадаўся выбар асноўнага элемэнту кіраваньня праграмаю праз панэль кіраваньня або статычнае мэню. Ваш выбар можа быць зьменены ў наладах галоўнага экрана.</string>
-<string name="release_2_2">\\022 Новы кантэкстна-залежны інтэрфейс для выбару пазіцыі на мапе і на іншых экранах 
+<string name="release_2_2">\\u2022 Новы кантэкстна-залежны інтэрфейс для выбару пазіцыі на мапе і на іншых экранах
 \n 
 \n • Экран мапы цяпер запускаецца непасрэдна, калі вы не выбралі \"Паказваць панэль кіраваньня пры запуску\" 
 \n 
@@ -2261,7 +2261,7 @@
     <string name="upload_osm_note_description">Вы можаце адаслаць Вашу OSM заўвагу ананімна альбо праз свой профіль OpenStreetMap.org.</string>
     <string name="upload_osm_note">Адаслаць OSM заўвагу</string>
     <string name="report">Справаздача</string>
-    <string name="release_2_3">\\022 OSM Live. Падтрымка аўтараў і распрацоўнікаў мапаў і атрыманьне штогадзінных абнаўленьняў мапы. 
+    <string name="release_2_3">\\u2022 OSM Live. Падтрымка аўтараў і распрацоўнікаў мапаў і атрыманьне штогадзінных абнаўленьняў мапы.
 \n 
 \n • Маркеры. Новы спосаб для хуткага выбару месцаў на мапе. 
 \n 
@@ -2362,7 +2362,7 @@
 
     <string name="dist_away_from_my_location">Шукаць за %1$s ад месцазнаходжаньня</string>
     <string name="share_history_subject">падзяліліся праз OsmAnd</string>
-    <string name="release_2_4">\\022 Новы паўнатэкставы пошук 
+    <string name="release_2_4">\\u2022 Новы паўнатэкставы пошук
 \n 
 \n • Інтэграцыя праз Bluetooth аўтамабільных аўдыясістэм / калонак 
 \n 
@@ -2465,7 +2465,7 @@
     <string name="rendering_attr_hideWaterPolygons_description">Ваду</string>
     <string name="show_legacy_search_desc">Дадаць састарэлы пошук у спісе, што раскрываецца</string>
     <string name="rendering_attr_contourWidth_name">Таўшчыня гарызанталяў</string>
-    <string name="release_2_5">\\022 Іконкі на мапе, якія можа націскаць, 
+    <string name="release_2_5">\\u2022 Іконкі на мапе, якія можа націскаць,
 \n 
 \n • Пошук любых POI: Пошук рэстаранаў паводле кухні або кемпінгаў з пэўнымі выгодамі, 
 \n 
@@ -2543,7 +2543,7 @@
     <string name="quick_action_navigation_voice_on">Голас актыўны</string>
     <string name="rendering_attr_depthContours_description">Паказваць контуры і пункты глыбіні</string>
     <string name="rendering_attr_depthContours_name">Контуры марскіх глыбінь</string>
-	<string name="release_2_6">\\022 Новая функцыя: кнопка хуткага дзеяння 
+	<string name="release_2_6">\\u2022 Новая функцыя: кнопка хуткага дзеяння
 \n 
 \n • Палепшаны адказ на жэсты сэнсарнага экрана 
 \n 

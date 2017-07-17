@@ -1930,7 +1930,7 @@ Se aprecia la participación activa, y las contribuciones pueden hacerse directa
     <string name="rendering_attr_roadStyle_description">Estilo del camino</string>
     <string name="poi_dialog_reopen">Reabrir</string>
 	<string name="osm_save_offline">Guardar sin conexión</string>
-    <string name="release_2_2">\\022 Nueva interfaz de usuario sensible al contexto para aprovechar lugares en el mapa y en otra pantallas. 
+    <string name="release_2_2">\\u2022 Nueva interfaz de usuario sensible al contexto para aprovechar lugares en el mapa y en otra pantallas.
 \n 
 \n• La pantalla del mapa ahora se inicia directamente, a menos que \'Mostrar panel de control al iniciar la aplicación\', este seleccionado. 
 \n 
@@ -2098,7 +2098,7 @@ Se aprecia la participación activa, y las contribuciones pueden hacerse directa
     <string name="shared_string_move_down">Bajar</string>
     <string name="finish_navigation">Finalizar navegación</string>
     <string name="avoid_road">Evitar camino</string>
-    <string name="release_2_3">\\022 OSM Live. Apoya a los editores y desarrolladores del mapa y obtén actualizaciones del mapa cada hora. 
+    <string name="release_2_3">\\u2022 OSM Live. Apoya a los editores y desarrolladores del mapa y obtén actualizaciones del mapa cada hora.
 \n 
 \n • Marcadores del mapa. Una nueva forma de elegir rápidamente lugares en el mapa. 
 \n 
@@ -2180,7 +2180,7 @@ Se aprecia la participación activa, y las contribuciones pueden hacerse directa
     <string name="lang_hsb">Sorabo (Alto)</string>
     <string name="share_history_subject">compartido a través de OsmAnd</string>
     
-    <string name="release_2_4">\\022 Nueva y muy poderosa búsqueda por texto libre 
+    <string name="release_2_4">\\u2022 Nueva y muy poderosa búsqueda por texto libre
 \n 
 \n • Integración con el sistema de audio del automóvil y altavoces del teléfono vía Bluetooth 
 \n 
@@ -2272,7 +2272,7 @@ Se aprecia la participación activa, y las contribuciones pueden hacerse directa
     <string name="shared_string_recorded">Grabado</string>
     <string name="shared_string_record">Grabar</string>
     <string name="gpx_logging_no_data">Sin datos</string>
-    <string name="release_2_5">\\022 Ahora se pueden pulsar los iconos del mapa 
+    <string name="release_2_5">\\u2022 Ahora se pueden pulsar los iconos del mapa
 \n 
 \n • Nuevo filtro de búsqueda PDI potente: Busca, p.e. restaurantes por tipo de cocina o campamentos con instalaciones específicas 
 \n 
@@ -2403,7 +2403,7 @@ Proporciona un código completo</string>
     <string name="quick_action_page_list_descr">Pulsar el botón de acción mostrará la siguiente lista.</string>
     <string name="auto_split_recording_title">División automática de grabaciones en intervalos</string>
 	<string name="auto_split_recording_descr">Iniciar nuevo segmento en el lapso de 6 min, nueva traza en el lapso de 2 h, o nuevo archivo en el lapso más largo si la fecha se cambió.</string>
-    <string name="release_2_6">\\022 Nueva función: Botón de acción rápida 
+    <string name="release_2_6">\\u2022 Nueva función: Botón de acción rápida
 \n 
 \n • Mejorada la respuesta de gestos táctiles (p.e. panorámicas y ampliaciones simultáneas) 
 \n 

@@ -2237,7 +2237,7 @@
     <string name="av_locations_descr">Файл GPX з координатами нотаток</string>
     <string name="show_free_version_banner_description">Навіть, якщо ви придбали платну версію, ви все ще можете бачити банер для безкоштовної версії</string>
     <string name="dashboard_or_drawer_description">У вас зараз є вибір керувати застосунком через гнучку панель керування або через звичайне мені. Ваші вподобання завжди можна змінити в параметрах панелі керування.</string>
-    <string name="release_2_2">\\022 Нові елементи інтерфейсу, що залежать від поточного стану, для вибору місця на мапи та на інших екранах 
+    <string name="release_2_2">\\u2022 Нові елементи інтерфейсу, що залежать від поточного стану, для вибору місця на мапи та на інших екранах
 \n
 \n • Екран з мапою відкривається під час запуску, якщо тільки не активовано функцію „Показувати панель керування під час запуску“ 
 \n
@@ -2315,7 +2315,7 @@
     <string name="no_map_markers_found">Додайте позначки на мапі</string>
     <string name="no_waypoints_found">Точки шляху не знайдені</string>
     <string name="storage_permission_restart_is_required">Тепер застосунок має можливість записувати у зовнішнє сховище. Потрібне ручне перезавантаження.</string>
-    <string name="release_2_3">\\022 OSM Live. Підтримка маперів та розробників; надає щогодинне оновлення даних. 
+    <string name="release_2_3">\\u2022 OSM Live. Підтримка маперів та розробників; надає щогодинне оновлення даних.
 \n
 \n • Позначки. Новий спосіб швидко позначити місце на мапі. 
 \n
@@ -2405,7 +2405,7 @@
     <string name="shared_string_recorded">Записано</string>
     <string name="shared_string_record">Запис</string>
     <string name="gpx_logging_no_data">Немає даних</string>
-    <string name="release_2_5">\\022 Клікабельні іконки на мапі 
+    <string name="release_2_5">\\u2022 Клікабельні іконки на мапі
 \n 
 \n• Гнучка фільтрація POI в пошуку: шукайте ресторани за типом кухні, кемпінги за наявністю зручностей 
 \n 
@@ -2487,7 +2487,7 @@
     <string name="back_to_search">Повернення до пошуку</string>
     <string name="confirmation_to_delete_history_items">Вилучити вибране з історії пошуку?</string>
     <string name="show_something_on_map">Показати %1$s на мапі</string>
-    <string name="release_2_4">\\022 Новий повнотекстовий пошук 
+    <string name="release_2_4">\\u2022 Новий повнотекстовий пошук
 \n
 \n• Інтеграція через Bluetooth автомобільних аудіосистем/колонок 
 \n
@@ -2584,7 +2584,7 @@
 	<string name="auto_split_recording_title">Авто-розрив запису після перерви</string>
 	<string name="auto_split_recording_descr">Почати новий сегмент після 6 хвилинної перерви, новий трек після 2 годинної перерви, або новий файл після тривалої перерви (якщо змінилася дата).</string>
     <string name="select_gpx_folder">Виберіть теку GPX-треку</string>
-    <string name="release_2_6">"\\022 Нова функція: кнопка швидкої дії 
+    <string name="release_2_6">"\\u2022 Нова функція: кнопка швидкої дії
 \n 
 \n • Покращена відповідь на жести сенсорного екрану 
 \n 
