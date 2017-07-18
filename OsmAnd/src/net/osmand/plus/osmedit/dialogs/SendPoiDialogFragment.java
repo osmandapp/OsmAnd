@@ -56,7 +56,6 @@ public class SendPoiDialogFragment extends DialogFragment {
 		final View passwordLabel = view.findViewById(R.id.osm_user_password_label);
 		final CheckBox closeChangeSetCheckBox =
 				(CheckBox) view.findViewById(R.id.close_change_set_checkbox);
-		messageEditText.setText(comment);
 		final OsmandSettings settings = ((OsmandApplication) getActivity().getApplication())
 				.getSettings();
 		userNameEditText.setText(settings.USER_NAME.get());
@@ -65,10 +64,14 @@ public class SendPoiDialogFragment extends DialogFragment {
 		assert poi != null;
 		for (OsmPoint p : poi) {
 			if (p.getGroup() == OsmPoint.Group.POI) {
+				if (comment == null || comment.equals("")) {
+					comment = ((OpenstreetmapPoint) p).getComment();
+				}
 				hasPoiGroup = true;
 				break;
 			}
 		}
+		messageEditText.setText(comment);
 		final boolean hasPOI = hasPoiGroup;
 		messageLabel.setVisibility(hasPOI ? View.VISIBLE : View.GONE);
 		messageEditText.setVisibility(hasPOI ? View.VISIBLE : View.GONE);
