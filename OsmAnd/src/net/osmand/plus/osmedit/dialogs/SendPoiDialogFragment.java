@@ -33,7 +33,7 @@ public class SendPoiDialogFragment extends DialogFragment {
 	public static final String TAG = "SendPoiDialogFragment";
 	public static final String OPENSTREETMAP_POINT = "openstreetmap_point";
 	public static final String POI_UPLOADER_TYPE = "poi_uploader_type";
-	private static String comment;
+	private String comment = "";
 
 	public enum PoiUploaderType {
 		SIMPLE,
@@ -62,15 +62,36 @@ public class SendPoiDialogFragment extends DialogFragment {
 		passwordEditText.setText(settings.USER_PASSWORD.get());
 		boolean hasPoiGroup = false;
 		assert poi != null;
+		String addGroup = "";
+		String editGroup = "";
+		String deleteGroup = "";
+		String reopenGroup = "";
 		for (OsmPoint p : poi) {
 			if (p.getGroup() == OsmPoint.Group.POI) {
-				if (comment == null || comment.equals("")) {
-					comment = ((OpenstreetmapPoint) p).getComment();
+				String action = OsmPoint.displayAction.get(p.getAction());
+				String type = ((OpenstreetmapPoint) p).getEntity().getTag("poi_type_tag");
+				if (action.equals(OsmPoint.displayAction.get(OsmPoint.Action.CREATE))) {
+					addGroup += (type + ", ");
+				} else if (action.equals(OsmPoint.displayAction.get(OsmPoint.Action.MODIFY))) {
+					editGroup += (type + ", ");
+				} else if (action.equals(OsmPoint.displayAction.get(OsmPoint.Action.DELETE))) {
+					deleteGroup += (type + ", ");
+				} else if (action.equals(OsmPoint.displayAction.get(OsmPoint.Action.REOPEN))) {
+					reopenGroup += (type + ", ");
 				}
 				hasPoiGroup = true;
-				break;
 			}
 		}
+		if (!addGroup.equals("")) {
+			comment += OsmPoint.displayAction.get(OsmPoint.Action.CREATE) + " " + addGroup.substring(0, addGroup.length() - 2) + "; ";
+		} else if (!editGroup.equals("")) {
+			comment += OsmPoint.displayAction.get(OsmPoint.Action.MODIFY) + " " + editGroup.substring(0, editGroup.length() - 2) + "; ";
+		} else if (!deleteGroup.equals("")) {
+			comment += OsmPoint.displayAction.get(OsmPoint.Action.MODIFY) + " " + deleteGroup.substring(0, deleteGroup.length() - 2) + "; ";
+		} else if (!reopenGroup.equals("")) {
+			comment += OsmPoint.displayAction.get(OsmPoint.Action.MODIFY) + " " + reopenGroup.substring(0, reopenGroup.length() - 2) + "; ";
+		}
+		comment = comment.substring(0, comment.length() - 2);
 		messageEditText.setText(comment);
 		final boolean hasPOI = hasPoiGroup;
 		messageLabel.setVisibility(hasPOI ? View.VISIBLE : View.GONE);
@@ -100,7 +121,6 @@ public class SendPoiDialogFragment extends DialogFragment {
 					@Override
 					public void onClick(DialogInterface dialog, int which) {
 						if (progressDialogPoiUploader != null) {
-							comment = messageEditText.getText().toString();
 							settings.USER_NAME.set(userNameEditText.getText().toString());
 							settings.USER_PASSWORD.set(passwordEditText.getText().toString());
 							if (comment.length() > 0) {

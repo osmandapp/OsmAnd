@@ -117,12 +117,7 @@ public class OpenstreetmapsDbHelper extends SQLiteOpenHelper {
 					}
 					p.setEntity(entity);
 					p.setAction(query.getString(3));
-					String comment = query.getString(4);
-					if (comment.equals("")) {
-						String action = OsmPoint.stringAction.get(p.getAction());
-						comment = action.substring(0, 1).toUpperCase() + action.substring(1) + " " + entity.getTag("poi_type_tag");
-					}
-					p.setComment(comment);
+					p.setComment(query.getString(4));
 					points.add(p);
 				} while (query.moveToNext());
 			}
