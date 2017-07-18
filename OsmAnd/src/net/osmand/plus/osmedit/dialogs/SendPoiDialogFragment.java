@@ -88,9 +88,9 @@ public class SendPoiDialogFragment extends DialogFragment {
 		} else if (!editGroup.equals("")) {
 			comment += OsmPoint.displayAction.get(OsmPoint.Action.MODIFY) + " " + editGroup.substring(0, editGroup.length() - 2) + "; ";
 		} else if (!deleteGroup.equals("")) {
-			comment += OsmPoint.displayAction.get(OsmPoint.Action.MODIFY) + " " + deleteGroup.substring(0, deleteGroup.length() - 2) + "; ";
+			comment += OsmPoint.displayAction.get(OsmPoint.Action.DELETE) + " " + deleteGroup.substring(0, deleteGroup.length() - 2) + "; ";
 		} else if (!reopenGroup.equals("")) {
-			comment += OsmPoint.displayAction.get(OsmPoint.Action.MODIFY) + " " + reopenGroup.substring(0, reopenGroup.length() - 2) + "; ";
+			comment += OsmPoint.displayAction.get(OsmPoint.Action.REOPEN) + " " + reopenGroup.substring(0, reopenGroup.length() - 2) + "; ";
 		}
 		comment = comment.substring(0, comment.length() - 2);
 		messageEditText.setText(comment);
