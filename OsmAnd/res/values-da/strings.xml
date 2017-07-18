@@ -2651,9 +2651,9 @@ Repræsenterer område: %1$s x %2$s</string>
     <string name="routing_attr_relief_smoothness_factor_hills_name">Kuperet</string>
     <string name="routing_attr_relief_smoothness_factor_plains_name">Mindre kuperet</string>
     <string name="routing_attr_relief_smoothness_factor_more_plains_name">Fladt</string>
-    <string name="routing_attr_driving_style_speed_name">Hurtig</string>
+    <string name="routing_attr_driving_style_speed_name">Foretræk større veje</string>
     <string name="routing_attr_driving_style_balance_name">Balanceret</string>
-    <string name="routing_attr_driving_style_safety_name">Sikker</string>
+    <string name="routing_attr_driving_style_safety_name">Foretrækk sideveje</string>
     <string name="relief_smoothness_factor_descr">Foretruknet terræn: fladt eller kuperet</string>
     <string name="routing_attr_relief_smoothness_factor_name">Vælg terræntype</string>
     <string name="full_version_thanks">Tak for købet af den fulde version af OsmAnd!</string>
