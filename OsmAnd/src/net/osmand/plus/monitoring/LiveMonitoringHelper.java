@@ -6,8 +6,12 @@ import java.io.InputStreamReader;
 import java.net.HttpURLConnection;
 import java.net.URI;
 import java.net.URL;
+import java.text.DateFormat;
 import java.text.MessageFormat;
+import java.text.SimpleDateFormat;
 import java.util.ArrayList;
+import java.util.Calendar;
+import java.util.Date;
 import java.util.List;
 
 import javax.net.ssl.HostnameVerifier;
@@ -112,6 +116,14 @@ public class LiveMonitoringHelper  {
 	}
 
 	public void sendData(LiveMonitoringData data) {
+		Calendar c = Calendar.getInstance();
+		int hours = c.get(Calendar.HOUR);
+		int minutes = c.get(Calendar.MINUTE);
+		int seconds = c.get(Calendar.SECOND);
+		Date date = new Date(data.time);
+		DateFormat formatter = new SimpleDateFormat("HH:mm:ss:SSS");
+		String dateFormatted = formatter.format(date);
+		log.info("Time at first: " + dateFormatted + " Current time at first: " + hours + ":" + minutes + ":" + seconds);
 		String st = settings.LIVE_MONITORING_URL.get();
 		List<String> prm = new ArrayList<String>();
 		int maxLen = 0;
@@ -191,6 +203,13 @@ public class LiveMonitoringHelper  {
 					is.close();
 				}
 				log.info("Monitor response (" + urlConnection.getHeaderField("Content-Type") + "): " + responseBody.toString());
+				c = Calendar.getInstance();
+				hours = c.get(Calendar.HOUR);
+				minutes = c.get(Calendar.MINUTE);
+				seconds = c.get(Calendar.SECOND);
+				date = new Date(data.time);
+				dateFormatted = formatter.format(date);
+				log.info("Time after response: " + dateFormatted + " Current time after response: " + hours + ":" + minutes + ":" + seconds);
 			}
 
 			urlConnection.disconnect();
