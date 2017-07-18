@@ -278,17 +278,20 @@ public class TrackSegmentFragment extends OsmAndListFragment {
 		imageView.setOnClickListener(new View.OnClickListener() {
 			@Override
 			public void onClick(View view) {
-				LatLon location = new LatLon(getGpx().findPointToShow().getLatitude(),
-						getGpx().findPointToShow().getLongitude());
-				final OsmandSettings settings = app.getSettings();
-				settings.setMapLocationToShow(location.getLatitude(), location.getLongitude(),
-						settings.getLastKnownMapZoom(),
-						new PointDescription(PointDescription.POINT_TYPE_WPT, getGpxDataItem().getFile().getName()),
-						false,
-						getRect()
-				);
+				WptPt pointToShow = getGpx() != null ? getGpx().findPointToShow() : null;
+				if (pointToShow != null) {
+					LatLon location = new LatLon(pointToShow.getLatitude(),
+							pointToShow.getLongitude());
+					final OsmandSettings settings = app.getSettings();
+					settings.setMapLocationToShow(location.getLatitude(), location.getLongitude(),
+							settings.getLastKnownMapZoom(),
+							new PointDescription(PointDescription.POINT_TYPE_WPT, getGpxDataItem().getFile().getName()),
+							false,
+							getRect()
+					);
 
-				MapActivity.launchMapActivityMoveToTop(getActivity());
+					MapActivity.launchMapActivityMoveToTop(getActivity());
+				}
 			}
 		});
 		final View splitColorView = headerView.findViewById(R.id.split_color_view);
@@ -488,15 +491,17 @@ public class TrackSegmentFragment extends OsmAndListFragment {
 	}
 
 	public void updateSplitView() {
-		SelectedGpxFile sf = app.getSelectedGpxHelper().selectGpxFile(getGpx(), ((SwitchCompat)headerView.findViewById(R.id.showOnMapToggle)).isChecked(), false);
-		final List<GpxDisplayGroup> groups = getDisplayGroups();
-		if (groups.size() > 0) {
-			updateSplit(groups, ((SwitchCompat)headerView.findViewById(R.id.showOnMapToggle)).isChecked() ? sf : null);
-			if (getGpxDataItem() != null) {
-				updateSplitInDatabase();
+		if (getGpx() != null) {
+			SelectedGpxFile sf = app.getSelectedGpxHelper().selectGpxFile(getGpx(), ((SwitchCompat)headerView.findViewById(R.id.showOnMapToggle)).isChecked(), false);
+			final List<GpxDisplayGroup> groups = getDisplayGroups();
+			if (groups.size() > 0) {
+				updateSplit(groups, ((SwitchCompat)headerView.findViewById(R.id.showOnMapToggle)).isChecked() ? sf : null);
+				if (getGpxDataItem() != null) {
+					updateSplitInDatabase();
+				}
 			}
+			updateSplitIntervalView(headerView.findViewById(R.id.split_interval_view));
 		}
-		updateSplitIntervalView(headerView.findViewById(R.id.split_interval_view));
 	}
 
 	private void refreshTrackBitmap() {
