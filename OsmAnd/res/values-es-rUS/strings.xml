@@ -794,7 +794,7 @@ Se aprecia la participación activa, y las contribuciones pueden hacerse directa
     <string name="recording_default_name">Grabación</string>
     <string name="map_widget_av_notes">Notas multimedia</string>
     <string name="map_widget_distancemeasurement">Medición de distancia</string>
-    <string name="audionotes_location_not_defined">No se definió la ubicación para asociar la nota. Utiliza \"Usar ubicación…\" para asignar una nota a la ubicación indicada.</string>
+    <string name="audionotes_location_not_defined">No se definió la ubicación para asociar la nota. Utiliza «Usar ubicación…» para asignar una nota a la ubicación indicada.</string>
     <string name="map_widget_audionotes">Notas de audio</string>
     <string name="index_srtm_parts">partes</string>
     <string name="index_srtm_ele">Curvas de nivel</string>
@@ -2324,7 +2324,7 @@ Si amas a OsmAnd, OSM y quieres apoyarlos, esta es una perfecta manera de hacerl
     <string name="quick_action_add_marker">Añadir marcador de mapa</string>
     <string name="quick_action_add_poi">Añadir PDI</string>
     <string name="quick_action_map_style">Cambiar estilo del mapa</string>
-    <string name="quick_action_map_style_switch">El estilo del mapa se cambió para \"%s\".</string>
+    <string name="quick_action_map_style_switch">El estilo del mapa se cambió para «%s».</string>
     <string name="quick_action_take_audio_note">Grabar nota de audio</string>
     <string name="quick_action_take_video_note">Grabar nota de video</string>
     <string name="quick_action_take_photo_note">Tomar nota fotográfica</string>
@@ -2339,7 +2339,7 @@ Si amas a OsmAnd, OSM y quieres apoyarlos, esta es una perfecta manera de hacerl
     <string name="quick_action_add_favorite">Añadir favorito</string>
     <string name="dialog_add_action_title">Añadir acción</string>
     <string name="quick_actions_delete">Borrar acción</string>
-    <string name="quick_actions_delete_text">¿Quieres borrar la acción \"%s\"?</string>
+    <string name="quick_actions_delete_text">¿Quieres borrar la acción «%s»?</string>
     <string name="quick_favorites_show_favorites_dialog">Mostrar diálogo de favoritos</string>
     <string name="quick_favorites_name_preset">Nombre predefinido</string>
     <string name="shared_string_action_name">Nombre de la acción</string>
@@ -2387,7 +2387,7 @@ Si amas a OsmAnd, OSM y quieres apoyarlos, esta es una perfecta manera de hacerl
     <string name="quick_action_map_source">Cambiar fuente del mapa</string>
     <string name="quick_action_map_source_title">Fuentes del mapa</string>
     <string name="quick_action_map_source_action">Añadir fuente del mapa</string>
-    <string name="quick_action_map_source_switch">La fuente del mapa se cambió a \"%s\".</string>
+    <string name="quick_action_map_source_switch">La fuente del mapa se cambió a «%s».</string>
     <string name="quick_action_btn_tutorial_title">Cambiar ubicación del botón</string>
     <string name="quick_action_btn_tutorial_descr">Mantener pulsado y arrastrar el botón para mover la ubicación en la pantalla</string>
 <string name="quick_action_interim_dialog">Mostrar un diálogo temporal</string>
@@ -2398,12 +2398,12 @@ Si amas a OsmAnd, OSM y quieres apoyarlos, esta es una perfecta manera de hacerl
 Proporciona un código completo</string>
     <string name="navigate_point_olc_info_area">OLC completo y válido.
 \nÁrea representada: %1$s x %2$s</string>
-    <string name="quick_action_map_overlay_switch">Se cambió el mapa superpuesto a \"%s\".</string>
-    <string name="quick_action_map_underlay_switch">Se cambió el mapa subyacente a \"%s\".</string>
+    <string name="quick_action_map_overlay_switch">Se cambió el mapa superpuesto a «%s».</string>
+    <string name="quick_action_map_underlay_switch">Se cambió el mapa subyacente a «%s».</string>
     <string name="quick_action_page_list_descr">Pulsar el botón de acción mostrará la siguiente lista.</string>
     <string name="auto_split_recording_title">División automática de grabaciones en intervalos</string>
 	<string name="auto_split_recording_descr">Iniciar nuevo segmento en el lapso de 6 min, nueva traza en el lapso de 2 h, o nuevo archivo en el lapso más largo si la fecha se cambió.</string>
-    <string name="release_2_6">\\u2022 Nueva función: Botón de acción rápida
+    <string name="release_2_6">\\u2022 Nueva función: Botón de acción rápida 
 \n 
 \n • Mejorada la respuesta de gestos táctiles (p.e. panorámicas y ampliaciones simultáneas) 
 \n 
@@ -2417,7 +2417,7 @@ Proporciona un código completo</string>
 \n 
 \n • Visualización del perfil de elevación, pendiente y velocidad para las trazas GPX grabadas y la ruta calculada 
 \n 
-\n • Opción de \"Estilo de conducción\" y mejoras lógicas en el cálculo de rutas para bicicleta 
+\n • Opción de «Estilo de conducción» y mejoras lógicas en el cálculo de rutas para bicicleta 
 \n 
 \n • Ajustes para usar datos de altitud en el cálculo de rutas para bicicleta 
 \n 
@@ -2620,9 +2620,9 @@ Proporciona un código completo</string>
     <string name="route_is_too_long_v2">Esta ruta puede ser muy larga para calcular. Añade destinos intermedios si no se encuentran resultados dentro de los 10 minutos.</string>
     <string name="srtm_menu_download_descr">Para ver las curvas de nivel en el mapa, debes descargar el mapa de curvas de nivel de esta región.</string>
     <string name="shared_string_plugin">Complemento</string>
-    <string name="srtm_purchase_header">Para ver las curvas de nivel en el mapa, debes comprar e instalar el complemento \"Curvas de nivel\"</string>
+    <string name="srtm_purchase_header">Para ver las curvas de nivel en el mapa, debes comprar e instalar el complemento «Curvas de nivel»</string>
     <string name="hillshade_menu_download_descr">Para ver el sombreado del relieve en el mapa, debes descargar la superposición del sombreado de esta región.</string>
-    <string name="hillshade_purchase_header">Para ver el sombreado del relieve en el mapa, debes comprar e instalar el complemento \"Curvas de nivel\"</string>
+    <string name="hillshade_purchase_header">Para ver el sombreado del relieve en el mapa, debes comprar e instalar el complemento «Curvas de nivel»</string>
     <string name="hide_from_zoom_level">Ocultar desde el nivel de ampliación</string>
     <string name="quick_action_showhide_osmbugs_title">Alternar vista de problemas OSM en el mapa</string>
     <string name="quick_action_osmbugs_show">Mostrar problemas OSM en el mapa</string>
@@ -2679,12 +2679,12 @@ Proporciona un código completo</string>
     
     <string name="range_min_max">Rango = Min/Máx</string>
     <string name="min_max">Min/Máx</string>
-    <string name="release_2_7">• Complemento de Mapillary con imágenes a nivel de calle
-\n
-\n • Control de regla para medir distancias
-\n
-\n • División de intervalos GPX con información detallada sobre la traza
-\n
+    <string name="release_2_7">\\u2022 Complemento de Mapillary con imágenes a nivel de calle 
+\n 
+\n • Control de regla para medir distancias 
+\n 
+\n • División de intervalos GPX con información detallada sobre la traza 
+\n 
 \n • Otras mejoras y corrección de errores
 \n
 \n</string>
