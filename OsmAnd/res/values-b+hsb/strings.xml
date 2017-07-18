@@ -904,4 +904,5 @@
     <string name="storage_directory_card">Składowanska karta</string>
     <string name="coords_format">Format koordinatow</string>
     <string name="coords_format_descr">Format za geografiske koordinaty</string>
-</resources>
+<string name="mapillary">Mapillary</string>
+    </resources>
