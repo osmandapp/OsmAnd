@@ -6,10 +6,10 @@ import android.graphics.Canvas;
 import android.graphics.Paint;
 import android.graphics.Paint.Style;
 import android.graphics.Path;
+import android.graphics.PointF;
 import android.graphics.Rect;
 import android.os.Handler;
 import android.os.Message;
-import android.view.MotionEvent;
 import android.view.View;
 
 import net.osmand.Location;
@@ -49,6 +49,8 @@ public class RulerControlLayer extends OsmandMapLayer {
 	private double cacheTileX;
 	private double cacheTileY;
 	private long cacheMultiTouchEndTime;
+	private long cacheSingleTapTime;
+	private long singleTapTime;
 	private ArrayList<String> cacheDistances;
 	private Path distancePath;
 	private TIntArrayList tx;
@@ -130,13 +132,9 @@ public class RulerControlLayer extends OsmandMapLayer {
 	}
 
 	@Override
-	public boolean onTouchEvent(MotionEvent event, RotatedTileBox tileBox) {
-		if (event.getAction() == MotionEvent.ACTION_DOWN) {
-			showDistBetweenFingerAndLocation = true;
-			singleTouchPointLatLon = tileBox.getLatLonFromPixel(event.getX(), event.getY());
-		} else if (event.getAction() == MotionEvent.ACTION_UP) {
-			showDistBetweenFingerAndLocation = false;
-		}
+	public boolean onSingleTap(PointF point, RotatedTileBox tileBox) {
+		singleTouchPointLatLon = tileBox.getLatLonFromPixel(point.x, point.y);
+		singleTapTime = System.currentTimeMillis();
 		return false;
 	}
 
@@ -151,12 +149,16 @@ public class RulerControlLayer extends OsmandMapLayer {
 			final QuadPoint center = tb.getCenterPixelPoint();
 			final RulerMode mode = app.getSettings().RULER_MODE.get();
 
-			if (view.isMultiTouch()) {
-				showDistBetweenFingerAndLocation = false;
-			} else if (cacheMultiTouchEndTime != view.getMultiTouchEndTime()) {
+			if (cacheSingleTapTime != singleTapTime) {
+				cacheSingleTapTime = singleTapTime;
+				refreshMapDelayed();
+			}
+			if (cacheMultiTouchEndTime != view.getMultiTouchEndTime()) {
 				cacheMultiTouchEndTime = view.getMultiTouchEndTime();
 				refreshMapDelayed();
 			}
+			showDistBetweenFingerAndLocation = !tb.isZoomAnimated() && singleTouchPointLatLon != null &&
+					System.currentTimeMillis() - cacheSingleTapTime < DELAY;
 			showTwoFingersDistance = !view.isWasZoomInMultiTouch() && !tb.isZoomAnimated() &&
 					(view.isMultiTouch() || System.currentTimeMillis() - cacheMultiTouchEndTime < DELAY);
 
