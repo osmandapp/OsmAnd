@@ -1328,14 +1328,11 @@ I dati globali (fra i 70 gradi nord e 70 gradi sud) sono basati su misurazioni d
     <string name="navigation_intent_invalid">Formato non valido: %s</string>
     <string name="osmo_settings_uuid">ID univoco del dispositivo</string>
     <string name="osmo_settings_descr">Configura le impostazioni di monitoraggio e imposta il canale di monitoraggio personale</string>
-    <string name="osmo_plugin_description">"Questo componente aggiuntivo fornisce parzialmente le funzionalità del monitoraggio di OpenStreetMap, vedi http://osmo.mobi.
-
-
-Puoi tracciare in tempo reale tutti i dispositivi di un gruppo di partecipanti. Puoi anche visualizzare i punti e le tracce caricate dal gruppo a cui appartieni.
-
-
-Il gruppo che non è stato rimosso da mesi viene allineato con le tue regole per la creazione di gruppi nel sito OsMo.mobi
- "</string>
+    <string name="osmo_plugin_description">Questo componente aggiuntivo fornisce parzialmente le funzionalità del monitoraggio di OpenStreetMap, vedi http://osmo.mobi.
+\n
+\nPuoi tracciare in tempo reale tutti i dispositivi di un gruppo di partecipanti. Puoi anche visualizzare i punti e le tracce caricate dal gruppo a cui appartieni.
+\n
+\nIl gruppo che non è stato rimosso da mesi viene allineato con le tue regole per la creazione di gruppi nel sito OsMo.mobi</string>
     <string name="osmo_plugin_name">Monitoraggio OpenStreetMap</string>
     <string name="osmo_settings">OsMO</string>
     <string name="keep_informing_never">Solo manualmente (tap sulla freccia)</string>
@@ -2861,4 +2858,14 @@ Copertura e qualità approssimativamente:
     <string name="moving_time">Tempo in movimento</string>
     <string name="max_min">Max/Min</string>
     <string name="min_max">Min/Max</string>
+    <string name="quick_action_resume_pause_navigation">Riprendi/Sospendi la Navigazione</string>
+    <string name="release_2_7">\\022 Componente aggiuntivo Mapillary con immagini stradali
+\n
+\n • Widget righello per la misurazione della distanza
+\n
+\n • Informazioni dettagliate e suddivisore delle tue tracce GPX
+\n
+\n • Altre migliorie e correzione di errori
+\n
+\n</string>
     </resources>
