@@ -1217,4 +1217,5 @@
     <string name="map_widget_ruler_control">מד זווית</string>
     <string name="shared_string_permissions">הרשאות</string>
     <string name="import_gpx_failed_descr">ל־OsmAnd אין אפשרות לייבא את הקובץ. נא לוודא של־OsmAnd יש הרשאה לקרוא קבצים מהמיקום הזה.</string>
+    <string name="distance_moving">המרחק תוקן</string>
     </resources>
