@@ -19,6 +19,7 @@ import net.osmand.plus.OsmandSettings;
 import net.osmand.plus.R;
 import net.osmand.plus.activities.MapActivity;
 import net.osmand.plus.dialogs.ProgressDialogFragment;
+import net.osmand.plus.osmedit.EditPoiData;
 import net.osmand.plus.osmedit.OpenstreetmapPoint;
 import net.osmand.plus.osmedit.OsmBugsLayer;
 import net.osmand.plus.osmedit.OsmEditingPlugin;
@@ -69,7 +70,7 @@ public class SendPoiDialogFragment extends DialogFragment {
 		for (OsmPoint p : poi) {
 			if (p.getGroup() == OsmPoint.Group.POI) {
 				String action = OsmPoint.displayAction.get(p.getAction());
-				String type = ((OpenstreetmapPoint) p).getEntity().getTag("poi_type_tag");
+				String type = ((OpenstreetmapPoint) p).getEntity().getTag(EditPoiData.POI_TYPE_TAG);
 				if (action.equals(OsmPoint.displayAction.get(OsmPoint.Action.CREATE))) {
 					addGroup += (type + ", ");
 				} else if (action.equals(OsmPoint.displayAction.get(OsmPoint.Action.MODIFY))) {
