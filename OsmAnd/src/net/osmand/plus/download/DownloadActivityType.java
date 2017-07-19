@@ -309,6 +309,11 @@ public class DownloadActivityType {
 			String downloadName = basename.substring(0, ind - 1) + basename.substring(ind + "addresses-nationwide".length());
 			return osmandRegions.getLocaleName(downloadName, includingParent) +
 					" "+ ctx.getString(R.string.index_item_nation_addresses);
+		} else if (basename.startsWith("Depth_")) {
+			final int extInd = basename.indexOf("osmand_ext");
+			String downloadName = extInd == -1 ? basename.substring(6, basename.length()).replace('_', ' ')
+					: basename.substring(6, extInd).replace('_', ' ');
+			return ctx.getString(R.string.download_depth_countours) + " " + downloadName;
 		}
 
 		return osmandRegions.getLocaleName(basename, includingParent);
