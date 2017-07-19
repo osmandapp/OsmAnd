@@ -449,7 +449,8 @@ public class EditPoiDialogFragment extends BaseOsmAndDialogFragment {
 			if (offlineEdit && !Algorithms.isEmpty(poiTypeTag)) {
 				node.putTagNoLC(EditPoiData.POI_TYPE_TAG, poiTypeTag);
 			}
-			comment = OsmPoint.displayAction.get(action) + " " + poiTypeTag;
+			String actionString = action == OsmPoint.Action.CREATE ? getString(R.string.shared_string_add) : getString(R.string.shared_string_edit);
+			comment = actionString + " " + poiTypeTag;
 		}
 		commitNode(action, node, mOpenstreetmapUtil.getEntityInfo(node.getId()), comment, false,
 				new CallbackWithObject<Node>() {

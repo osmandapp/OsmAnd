@@ -13,6 +13,7 @@ import android.widget.CheckBox;
 import android.widget.CompoundButton;
 import android.widget.EditText;
 
+import net.osmand.osm.PoiType;
 import net.osmand.plus.OsmandApplication;
 import net.osmand.plus.OsmandPlugin;
 import net.osmand.plus.OsmandSettings;
@@ -27,24 +28,30 @@ import net.osmand.plus.osmedit.OsmEditsUploadListener;
 import net.osmand.plus.osmedit.OsmEditsUploadListenerHelper;
 import net.osmand.plus.osmedit.OsmPoint;
 import net.osmand.plus.osmedit.UploadOpenstreetmapPointAsyncTask;
+import net.osmand.util.Algorithms;
 
+import java.util.HashMap;
 import java.util.Map;
 
 public class SendPoiDialogFragment extends DialogFragment {
 	public static final String TAG = "SendPoiDialogFragment";
 	public static final String OPENSTREETMAP_POINT = "openstreetmap_point";
 	public static final String POI_UPLOADER_TYPE = "poi_uploader_type";
-	private String comment = "";
+	private OsmPoint[] poi;
 
 	public enum PoiUploaderType {
 		SIMPLE,
 		FRAGMENT
 	}
 
+	private OsmandApplication getMyApplication() {
+		return (OsmandApplication) getActivity().getApplication();
+	}
+
 	@NonNull
 	@Override
 	public Dialog onCreateDialog(Bundle savedInstanceState) {
-		final OsmPoint[] poi = (OsmPoint[]) getArguments().getSerializable(OPENSTREETMAP_POINT);
+		poi = (OsmPoint[]) getArguments().getSerializable(OPENSTREETMAP_POINT);
 		final PoiUploaderType poiUploaderType = PoiUploaderType.valueOf(getArguments().getString(POI_UPLOADER_TYPE, PoiUploaderType.SIMPLE.name()));
 		AlertDialog.Builder builder = new AlertDialog.Builder(getActivity());
 		View view = getActivity().getLayoutInflater().inflate(R.layout.send_poi_dialog, null);
@@ -63,40 +70,13 @@ public class SendPoiDialogFragment extends DialogFragment {
 		passwordEditText.setText(settings.USER_PASSWORD.get());
 		boolean hasPoiGroup = false;
 		assert poi != null;
-		String addGroup = "";
-		String editGroup = "";
-		String deleteGroup = "";
-		String reopenGroup = "";
 		for (OsmPoint p : poi) {
 			if (p.getGroup() == OsmPoint.Group.POI) {
-				String action = OsmPoint.displayAction.get(p.getAction());
-				String type = ((OpenstreetmapPoint) p).getEntity().getTag(EditPoiData.POI_TYPE_TAG);
-				if (action.equals(OsmPoint.displayAction.get(OsmPoint.Action.CREATE))) {
-					addGroup += (type + ", ");
-				} else if (action.equals(OsmPoint.displayAction.get(OsmPoint.Action.MODIFY))) {
-					editGroup += (type + ", ");
-				} else if (action.equals(OsmPoint.displayAction.get(OsmPoint.Action.DELETE))) {
-					deleteGroup += (type + ", ");
-				} else if (action.equals(OsmPoint.displayAction.get(OsmPoint.Action.REOPEN))) {
-					reopenGroup += (type + ", ");
-				}
 				hasPoiGroup = true;
+				break;
 			}
 		}
-		if (!addGroup.equals("")) {
-			comment += OsmPoint.displayAction.get(OsmPoint.Action.CREATE) + " " + addGroup.substring(0, addGroup.length() - 2) + "; ";
-		}
-		if (!editGroup.equals("")) {
-			comment += OsmPoint.displayAction.get(OsmPoint.Action.MODIFY) + " " + editGroup.substring(0, editGroup.length() - 2) + "; ";
-		}
-		if (!deleteGroup.equals("")) {
-			comment += OsmPoint.displayAction.get(OsmPoint.Action.DELETE) + " " + deleteGroup.substring(0, deleteGroup.length() - 2) + "; ";
-		}
-		if (!reopenGroup.equals("")) {
-			comment += OsmPoint.displayAction.get(OsmPoint.Action.REOPEN) + " " + reopenGroup.substring(0, reopenGroup.length() - 2) + "; ";
-		}
-		comment = comment.substring(0, comment.length() - 2);
-		messageEditText.setText(comment);
+		messageEditText.setText(createDefaultChangeSet());
 		final boolean hasPOI = hasPoiGroup;
 		messageLabel.setVisibility(hasPOI ? View.VISIBLE : View.GONE);
 		messageEditText.setVisibility(hasPOI ? View.VISIBLE : View.GONE);
@@ -127,6 +107,7 @@ public class SendPoiDialogFragment extends DialogFragment {
 						if (progressDialogPoiUploader != null) {
 							settings.USER_NAME.set(userNameEditText.getText().toString());
 							settings.USER_PASSWORD.set(passwordEditText.getText().toString());
+							String comment = messageEditText.getText().toString();
 							if (comment.length() > 0) {
 								for (OsmPoint osmPoint : poi) {
 									if (osmPoint.getGroup() == OsmPoint.Group.POI) {
@@ -152,6 +133,111 @@ public class SendPoiDialogFragment extends DialogFragment {
 		bundle.putString(POI_UPLOADER_TYPE, uploaderType.name());
 		fragment.setArguments(bundle);
 		return fragment;
+	}
+
+	private String createDefaultChangeSet() {
+		Map<String, PoiType> allTranslatedSubTypes = getMyApplication().getPoiTypes().getAllTranslatedNames(true);
+		Map<String, Integer> addGroup = new HashMap<>();
+		Map<String, Integer> editGroup = new HashMap<>();
+		Map<String, Integer> deleteGroup = new HashMap<>();
+		Map<String, Integer> reopenGroup = new HashMap<>();
+		String comment = "";
+		for (OsmPoint p : poi) {
+			if (p.getGroup() == OsmPoint.Group.POI) {
+				OsmPoint.Action action = p.getAction();
+				String type = ((OpenstreetmapPoint) p).getEntity().getTag(EditPoiData.POI_TYPE_TAG);
+				PoiType localizedPoiType = allTranslatedSubTypes.get(type.toLowerCase().trim());
+				if (localizedPoiType != null) {
+					type = Algorithms.capitalizeFirstLetter(localizedPoiType.getKeyName().replace('_', ' '));
+				}
+				if (action == OsmPoint.Action.CREATE) {
+					if (!addGroup.containsKey(type)) {
+						addGroup.put(type, 1);
+					} else {
+						addGroup.put(type, addGroup.get(type) + 1);
+					}
+				} else if (action == OsmPoint.Action.MODIFY) {
+					if (!editGroup.containsKey(type)) {
+						editGroup.put(type, 1);
+					} else {
+						editGroup.put(type, editGroup.get(type) + 1);
+					}
+				} else if (action == OsmPoint.Action.DELETE) {
+					if (!deleteGroup.containsKey(type)) {
+						deleteGroup.put(type, 1);
+					} else {
+						deleteGroup.put(type, deleteGroup.get(type) + 1);
+					}
+				} else if (action == OsmPoint.Action.REOPEN) {
+					if (!reopenGroup.containsKey(type)) {
+						reopenGroup.put(type, 1);
+					} else {
+						reopenGroup.put(type, reopenGroup.get(type) + 1);
+					}
+				}
+			}
+		}
+		int modifiedItemsOutOfLimit = 0;
+		boolean stringModifiedIfExceeded = false;
+		for (int i = 0; i < 4; i++) {
+			String action;
+			Map<String, Integer> group;
+			switch (i) {
+				case 0:
+					action = getString(R.string.shared_string_add);
+					group = addGroup;
+					break;
+				case 1:
+					action = getString(R.string.shared_string_edit);
+					group = editGroup;
+					break;
+				case 2:
+					action = getString(R.string.shared_string_delete);
+					group = deleteGroup;
+					break;
+				case 3:
+					action = getString(R.string.poi_dialog_reopen);;
+					group = reopenGroup;
+					break;
+				default:
+					action = "";
+					group = new HashMap<>();
+			}
+
+			if (!group.isEmpty()) {
+				if (modifiedItemsOutOfLimit == 0) {
+					comment = comment.concat(action).concat(" ");
+				}
+				int pos = 0;
+				for (Map.Entry<String, Integer> entry : group.entrySet()) {
+					String type = entry.getKey();
+					int quantity = entry.getValue();
+					if (comment.length() > 200) {
+						modifiedItemsOutOfLimit += quantity;
+						if (!stringModifiedIfExceeded) {
+							if (pos == 0) {
+								comment = comment.substring(0, comment.length() - action.length() - 3).concat("; ");
+							} else {
+								comment = comment.substring(0, comment.length() - 2).concat("; ");
+							}
+							stringModifiedIfExceeded = true;
+						}
+					} else {
+						comment = comment.concat(quantity == 1 ? "" : quantity + " ").concat(type + ", ");
+					}
+					pos++;
+				}
+				if (modifiedItemsOutOfLimit == 0) {
+					comment = comment.substring(0, comment.length() - 2).concat("; ");
+				}
+			}
+		}
+		if (modifiedItemsOutOfLimit != 0) {
+			comment = comment.concat(modifiedItemsOutOfLimit + " ").concat(getString(R.string.items_modified)).concat(".");
+		} else if (!comment.equals("")){
+			comment = comment.substring(0, comment.length() - 2).concat(".");
+		}
+		return comment;
 	}
 
 	public interface ProgressDialogPoiUploader {
