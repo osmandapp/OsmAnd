@@ -372,7 +372,12 @@ public class SearchUICore {
 					SearchResultMatcher rm = new SearchResultMatcher(matcher, phrase, request, requestNumber, totalLimit);
 					rm.searchStarted(phrase);
 					if (TIMEOUT_BETWEEN_CHARS > 0 && delayedExecution) {
-						Thread.sleep(TIMEOUT_BETWEEN_CHARS);
+						long startTime = System.currentTimeMillis();
+						while (System.currentTimeMillis() - startTime <= TIMEOUT_BETWEEN_CHARS) {
+							if (rm.isCancelled()) {
+								return;
+							}
+						}
 					} else if (TIMEOUT_BEFORE_SEARCH > 0) {
 						Thread.sleep(TIMEOUT_BEFORE_SEARCH);
 					}
