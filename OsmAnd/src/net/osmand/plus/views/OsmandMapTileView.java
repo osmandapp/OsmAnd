@@ -615,11 +615,13 @@ public class OsmandMapTileView implements IMapDownloaderCallback {
 	private int updateDefaultColor(boolean nightMode) {
 		int color = MAP_DEFAULT_COLOR;
 		RenderingRulesStorage rrs = application.getRendererRegistry().getCurrentSelectedRenderer();
-		RenderingRuleSearchRequest req = new RenderingRuleSearchRequest(rrs);
-		req.setBooleanFilter(rrs.PROPS.R_NIGHT_MODE, nightMode);
-		if (req.searchRenderingAttribute(RenderingRuleStorageProperties.A_DEFAULT_COLOR)) {
-			color = req.getIntPropertyValue(req.ALL.R_ATTR_COLOR_VALUE);
-			defaultColor = color;
+		if (rrs != null) {
+			RenderingRuleSearchRequest req = new RenderingRuleSearchRequest(rrs);
+			req.setBooleanFilter(rrs.PROPS.R_NIGHT_MODE, nightMode);
+			if (req.searchRenderingAttribute(RenderingRuleStorageProperties.A_DEFAULT_COLOR)) {
+				color = req.getIntPropertyValue(req.ALL.R_ATTR_COLOR_VALUE);
+				defaultColor = color;
+			}
 		}
 		return color;
 	}
