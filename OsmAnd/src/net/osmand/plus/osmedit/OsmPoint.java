@@ -11,12 +11,18 @@ public abstract class OsmPoint  implements Serializable {
 	public static enum Action {CREATE, MODIFY, DELETE, REOPEN};
 
 	public static final Map<Action, String> stringAction = new HashMap<Action, String>();
+	public static final Map<Action, String> displayAction = new HashMap<Action, String>();
 	public static final Map<String, Action> actionString = new HashMap<String, Action>();
 	static {
 		stringAction.put(Action.CREATE, "create");
 		stringAction.put(Action.MODIFY, "modify");
 		stringAction.put(Action.DELETE, "delete");
 		stringAction.put(Action.REOPEN, "reopen");
+
+		displayAction.put(Action.CREATE, "Add");
+		displayAction.put(Action.MODIFY, "Edit");
+		displayAction.put(Action.DELETE, "Delete");
+		displayAction.put(Action.REOPEN, "Reopen");
 
 		actionString.put("create", Action.CREATE);
 		actionString.put("modify", Action.MODIFY);
