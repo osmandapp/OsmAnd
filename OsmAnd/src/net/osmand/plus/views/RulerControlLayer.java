@@ -6,6 +6,7 @@ import android.graphics.Canvas;
 import android.graphics.Paint;
 import android.graphics.Paint.Style;
 import android.graphics.Path;
+import android.graphics.PointF;
 import android.graphics.Rect;
 import android.os.Handler;
 import android.os.Message;
@@ -28,7 +29,8 @@ import gnu.trove.list.array.TIntArrayList;
 
 public class RulerControlLayer extends OsmandMapLayer {
 
-	public static final long DELAY = 2000;
+	private static final long DRAW_TIME = 2000;
+	private static final long DELAY_BEFORE_DRAW = 500;
 	private static final int TEXT_SIZE = 14;
 
 	private final MapActivity mapActivity;
@@ -43,6 +45,8 @@ public class RulerControlLayer extends OsmandMapLayer {
 	private double roundedDist;
 	private boolean showTwoFingersDistance;
 	private boolean showDistBetweenFingerAndLocation;
+	private boolean touchOutside;
+	private int acceptableTouchRadius;
 
 	private QuadPoint cacheCenter;
 	private int cacheIntZoom;
@@ -53,7 +57,10 @@ public class RulerControlLayer extends OsmandMapLayer {
 	private Path distancePath;
 	private TIntArrayList tx;
 	private TIntArrayList ty;
-	private LatLon singleTouchPointLatLon;
+	private LatLon touchPointLatLon;
+	private PointF touchPoint;
+	private PointF firstTouchPoint;
+	private long touchTime;
 
 	private Bitmap centerIconDay;
 	private Bitmap centerIconNight;
@@ -76,8 +83,8 @@ public class RulerControlLayer extends OsmandMapLayer {
 		return showDistBetweenFingerAndLocation;
 	}
 
-	public LatLon getSingleTouchPointLatLon() {
-		return singleTouchPointLatLon;
+	public LatLon getTouchPointLatLon() {
+		return touchPointLatLon;
 	}
 
 	@Override
@@ -91,6 +98,9 @@ public class RulerControlLayer extends OsmandMapLayer {
 		distancePath = new Path();
 		tx = new TIntArrayList();
 		ty = new TIntArrayList();
+		firstTouchPoint = new PointF();
+		touchPoint = new PointF();
+		acceptableTouchRadius = mapActivity.getResources().getDimensionPixelSize(R.dimen.acceptable_touch_radius);
 
 		centerIconDay = BitmapFactory.decodeResource(view.getResources(), R.drawable.map_ruler_center_day);
 		centerIconNight = BitmapFactory.decodeResource(view.getResources(), R.drawable.map_ruler_center_night);
@@ -131,13 +141,30 @@ public class RulerControlLayer extends OsmandMapLayer {
 
 	@Override
 	public boolean onTouchEvent(MotionEvent event, RotatedTileBox tileBox) {
-		if (event.getAction() == MotionEvent.ACTION_DOWN) {
-			showDistBetweenFingerAndLocation = true;
-			singleTouchPointLatLon = tileBox.getLatLonFromPixel(event.getX(), event.getY());
-		} else if (event.getAction() == MotionEvent.ACTION_UP) {
-			showDistBetweenFingerAndLocation = false;
+		if (rulerModeOn()) {
+			if (event.getAction() == MotionEvent.ACTION_DOWN) {
+				touchOutside = false;
+				firstTouchPoint.set(event.getX(), event.getY());
+				setSingleTouch(event.getX(), event.getY(), tileBox);
+			} else if (event.getAction() == MotionEvent.ACTION_MOVE) {
+				double d = Math.sqrt(Math.pow(event.getX() - firstTouchPoint.x, 2) + Math.pow(event.getY() - firstTouchPoint.y, 2));
+				if (d < acceptableTouchRadius) {
+					setSingleTouch(event.getX(), event.getY(), tileBox);
+					touchOutside = false;
+				} else {
+					touchOutside = true;
+				}
+			} else if (event.getAction() == MotionEvent.ACTION_UP) {
+				refreshMapDelayed();
+			}
 		}
 		return false;
+	}
+
+	private void setSingleTouch(float x, float y, RotatedTileBox tb) {
+		touchTime = System.currentTimeMillis();
+		touchPoint.set(x, y);
+		touchPointLatLon = tb.getLatLonFromPixel(x, y);
 	}
 
 	@Override
@@ -151,20 +178,22 @@ public class RulerControlLayer extends OsmandMapLayer {
 			final QuadPoint center = tb.getCenterPixelPoint();
 			final RulerMode mode = app.getSettings().RULER_MODE.get();
 
-			if (view.isMultiTouch()) {
-				showDistBetweenFingerAndLocation = false;
-			} else if (cacheMultiTouchEndTime != view.getMultiTouchEndTime()) {
+			if (cacheMultiTouchEndTime != view.getMultiTouchEndTime()) {
 				cacheMultiTouchEndTime = view.getMultiTouchEndTime();
 				refreshMapDelayed();
 			}
-			showTwoFingersDistance = !view.isWasZoomInMultiTouch() && !tb.isZoomAnimated() &&
-					(view.isMultiTouch() || System.currentTimeMillis() - cacheMultiTouchEndTime < DELAY);
+			boolean wasNotZoom = !view.isWasZoomInMultiTouch() && !tb.isZoomAnimated();
+			showTwoFingersDistance = wasNotZoom &&
+					(view.isMultiTouch() || System.currentTimeMillis() - cacheMultiTouchEndTime < DRAW_TIME);
+			showDistBetweenFingerAndLocation = !showTwoFingersDistance && wasNotZoom && !view.isMultiTouch() &&
+					!touchOutside && System.currentTimeMillis() - touchTime > DELAY_BEFORE_DRAW &&
+					System.currentTimeMillis() - touchTime < DRAW_TIME;
 
 			drawCenterIcon(canvas, tb, center, settings.isNightMode(), mode);
 			Location currentLoc = app.getLocationProvider().getLastKnownLocation();
 			if (showDistBetweenFingerAndLocation && currentLoc != null) {
-				float x = tb.getPixXFromLonNoRot(singleTouchPointLatLon.getLongitude());
-				float y = tb.getPixYFromLatNoRot(singleTouchPointLatLon.getLatitude());
+				float x = tb.getPixXFromLonNoRot(touchPointLatLon.getLongitude());
+				float y = tb.getPixYFromLatNoRot(touchPointLatLon.getLatitude());
 				drawDistBetweenFingerAndLocation(canvas, tb, x, y, currentLoc, settings.isNightMode());
 			} else if (showTwoFingersDistance) {
 				LatLon firstTouchPoint = view.getFirstTouchPointLatLon();
@@ -195,8 +224,8 @@ public class RulerControlLayer extends OsmandMapLayer {
 				rightWidgetsPanel.getVisibility() == View.VISIBLE;
 	}
 
-	public void refreshMapDelayed() {
-		handler.sendEmptyMessageDelayed(0, DELAY + 50);
+	private void refreshMapDelayed() {
+		handler.sendEmptyMessageDelayed(0, DRAW_TIME + 50);
 	}
 
 	private void drawFingerDistance(Canvas canvas, float x1, float y1, float x2, float y2, boolean nightMode) {
