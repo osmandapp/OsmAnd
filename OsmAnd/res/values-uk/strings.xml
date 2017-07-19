@@ -2944,4 +2944,9 @@
 \n
 \n</string>
     <string name="rendering_value_translucent_pink_name">Напівпрозорий рожевий</string>
+    <string name="quick_action_resume_pause_navigation">Відновити/призупинити навігацію</string>
+    <string name="quick_action_resume_pause_navigation_descr">Натисніть цю кнопку, щоб призупинити навігацію або відновити її, якщо вона вже була призупинена.</string>
+    <string name="quick_action_show_navigation_finish_dialog">Показати вікно, щоб завершити навігацію</string>
+    <string name="quick_action_start_stop_navigation">Початок/завершення навігації</string>
+    <string name="quick_action_start_stop_navigation_descr">Натисніть цю кнопку, щоб запустити навігацію або зупинити її, якщо вона вже була запущена.</string>
     </resources>
