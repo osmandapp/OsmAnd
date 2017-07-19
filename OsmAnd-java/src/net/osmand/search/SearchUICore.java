@@ -377,6 +377,7 @@ public class SearchUICore {
 							if (rm.isCancelled()) {
 								return;
 							}
+							Thread.sleep(TIMEOUT_BEFORE_SEARCH);
 						}
 					} else if (TIMEOUT_BEFORE_SEARCH > 0) {
 						Thread.sleep(TIMEOUT_BEFORE_SEARCH);
