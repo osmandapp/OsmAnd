@@ -173,6 +173,7 @@ public class OsmandMapTileView implements IMapDownloaderCallback {
 	private LatLon firstTouchPointLatLon;
 	private LatLon secondTouchPointLatLon;
 	private boolean multiTouch;
+	private long multiTouchStartTime;
 	private long multiTouchEndTime;
 	private boolean wasZoomInMultiTouch;
 
@@ -333,6 +334,10 @@ public class OsmandMapTileView implements IMapDownloaderCallback {
 
 	public boolean isMultiTouch() {
 		return multiTouch;
+	}
+
+	public long getMultiTouchStartTime() {
+		return multiTouchStartTime;
 	}
 
 	public long getMultiTouchEndTime() {
@@ -1076,6 +1081,7 @@ public class OsmandMapTileView implements IMapDownloaderCallback {
 				secondTouchPointLatLon = currentViewport.getLatLonFromPixel(x2, y2);
 				multiTouch = true;
                 wasZoomInMultiTouch = false;
+				multiTouchStartTime = System.currentTimeMillis();
 			}
 		}
 
