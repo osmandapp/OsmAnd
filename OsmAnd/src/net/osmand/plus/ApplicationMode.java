@@ -123,6 +123,8 @@ public class ApplicationMode {
 			applicationMode.headingIconNight = R.drawable.map_car_location_view_angle_night;
 			applicationMode.locationIconDay = R.drawable.map_car_location;
 			applicationMode.locationIconNight = R.drawable.map_car_location_night;
+			applicationMode.locationIconDayLost = R.drawable.map_car_location_lost;
+			applicationMode.locationIconNightLost = R.drawable.map_car_location_lost_night;
 			return this;
 		}
 
@@ -138,6 +140,8 @@ public class ApplicationMode {
 			applicationMode.headingIconNight = R.drawable.map_bicycle_location_view_angle_night;
 			applicationMode.locationIconDay = R.drawable.map_bicycle_location;
 			applicationMode.locationIconNight = R.drawable.map_bicycle_location_night;
+			applicationMode.locationIconDayLost = R.drawable.map_bicycle_location_lost;
+			applicationMode.locationIconNightLost = R.drawable.map_bicycle_location_lost_night;
 			return this;
 		}
 
@@ -148,6 +152,8 @@ public class ApplicationMode {
 			applicationMode.headingIconNight = R.drawable.map_default_location_view_angle_night;
 			applicationMode.locationIconDay = R.drawable.map_pedestrian_location;
 			applicationMode.locationIconNight = R.drawable.map_pedestrian_location_night;
+			applicationMode.locationIconDayLost = R.drawable.map_pedestrian_location_lost;
+			applicationMode.locationIconNightLost = R.drawable.map_pedestrian_location_lost_night;
 			return this;
 		}
 
@@ -304,6 +310,14 @@ public class ApplicationMode {
 		return locationIconNight;
 	}
 
+	public int getResourceLocationDayLost() {
+		return locationIconDayLost;
+	}
+
+	public int getResourceLocationNightLost() {
+		return locationIconNightLost;
+	}
+
 	public String getStringKey() {
 		return stringKey;
 	}
@@ -364,5 +378,7 @@ public class ApplicationMode {
 	private int headingIconNight = R.drawable.map_pedestrian_location_view_angle_night;
 	private int locationIconDay = R.drawable.map_pedestrian_location;
 	private int locationIconNight = R.drawable.map_pedestrian_location_night;
+	private int locationIconDayLost = R.drawable.map_pedestrian_location_lost;
+	private int locationIconNightLost = R.drawable.map_pedestrian_location_lost_night;
 	private static StateChangedListener<String> listener;
 }
