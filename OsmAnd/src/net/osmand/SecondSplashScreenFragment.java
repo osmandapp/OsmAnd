@@ -14,10 +14,16 @@ import android.widget.ImageView;
 import android.widget.RelativeLayout;
 
 import net.osmand.plus.OsmandApplication;
+import net.osmand.plus.OsmandPlugin;
 import net.osmand.plus.R;
 import net.osmand.plus.Version;
 import net.osmand.plus.activities.MapActivity;
+import net.osmand.plus.audionotes.AudioVideoNotesPlugin;
 import net.osmand.plus.helpers.AndroidUiHelper;
+import net.osmand.plus.inapp.InAppHelper;
+import net.osmand.plus.openseamapsplugin.NauticalMapsPlugin;
+import net.osmand.plus.parkingpoint.ParkingPositionPlugin;
+import net.osmand.plus.skimapsplugin.SkiMapsPlugin;
 
 public class SecondSplashScreenFragment extends Fragment {
     public static final String TAG = "SecondSplashScreenFragment";
@@ -95,9 +101,22 @@ public class SecondSplashScreenFragment extends Fragment {
         logoLayoutParams.addRule(RelativeLayout.CENTER_HORIZONTAL);
         ImageView text = new ImageView(activity);
         if (Version.isFreeVersion(app)) {
-            text.setImageDrawable(getResources().getDrawable(R.drawable.image_text_osmand));
+            if (InAppHelper.isSubscribedToLiveUpdates()) {
+                text.setImageDrawable(getResources().getDrawable(R.drawable.image_text_osmand_osmlive));
+            } else if (OsmandPlugin.getPlugin(ParkingPositionPlugin.class) != null
+                    || OsmandPlugin.getPlugin(SkiMapsPlugin.class) != null
+                    || OsmandPlugin.getPlugin(NauticalMapsPlugin.class) != null
+                    || InAppHelper.isDepthContoursPurchased()) {
+                text.setImageDrawable(getResources().getDrawable(R.drawable.image_text_osmand_inapp));
+            } else {
+                text.setImageDrawable(getResources().getDrawable(R.drawable.image_text_osmand));
+            }
         } else if (Version.isPaidVersion(app) || Version.isDeveloperVersion(app)) {
-            text.setImageDrawable(getResources().getDrawable(R.drawable.image_text_osmand_plus));
+            if (InAppHelper.isSubscribedToLiveUpdates()) {
+                text.setImageDrawable(getResources().getDrawable(R.drawable.image_text_osmand_plus_osmlive));
+            } else {
+                text.setImageDrawable(getResources().getDrawable(R.drawable.image_text_osmand_plus));
+            }
         }
         RelativeLayout.LayoutParams textLayoutParams = new RelativeLayout.LayoutParams(RelativeLayout.LayoutParams.WRAP_CONTENT, RelativeLayout.LayoutParams.WRAP_CONTENT);
         textLayoutParams.addRule(RelativeLayout.ALIGN_PARENT_BOTTOM);
