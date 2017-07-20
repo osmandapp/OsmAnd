@@ -37,8 +37,8 @@ public class GeocodingUtilities {
 
 	private static final Log log = PlatformUtil.getLog(GeocodingUtilities.class);
 
-	// Location to test parameters http://www.openstreetmap.org/#map=18/53.896473/27.540071 (hno 44)
-	// BUG http://www.openstreetmap.org/#map=19/50.9356/13.35348 (hno 26) street is 
+	// Location to test parameters https://www.openstreetmap.org/#map=18/53.896473/27.540071 (hno 44)
+	// BUG https://www.openstreetmap.org/#map=19/50.9356/13.35348 (hno 26) street is 
 	public static final float THRESHOLD_MULTIPLIER_SKIP_STREETS_AFTER = 5;
 	public static final float STOP_SEARCHING_STREET_WITH_MULTIPLIER_RADIUS = 250;
 	public static final float STOP_SEARCHING_STREET_WITHOUT_MULTIPLIER_RADIUS = 400;

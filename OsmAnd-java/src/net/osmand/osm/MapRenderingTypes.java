@@ -20,7 +20,7 @@ import org.xmlpull.v1.XmlPullParser;
 import org.xmlpull.v1.XmlPullParserException;
 
 /**
- * reference : http://wiki.openstreetmap.org/wiki/Map_Features
+ * reference : https://wiki.openstreetmap.org/wiki/Map_Features
  */
 public abstract class MapRenderingTypes {
 

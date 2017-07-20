@@ -266,20 +266,20 @@ public class GeoPointParserUtil {
 		actual = GeoPointParserUtil.parse(url);
 		assertGeoPoint(actual, new GeoParsedPoint(dlat, dlon, z));
 
-		// http://openstreetmap.org/#map=11/34/-106
+		// https://openstreetmap.org/#map=11/34/-106
 		z = 11;
 		url = "https://openstreetmap.org/#map=" + z + "/" + ilat + "/" + ilon;
 		System.out.println("url: " + url);
 		actual = GeoPointParserUtil.parse(url);
 		assertGeoPoint(actual, new GeoParsedPoint(ilat, ilon, z));
 
-		// http://openstreetmap.org/#map=11/34.99393/-106.61568
+		// https://openstreetmap.org/#map=11/34.99393/-106.61568
 		url = "https://openstreetmap.org/#map=" + z + "/" + dlat + "/" + dlon;
 		System.out.println("url: " + url);
 		actual = GeoPointParserUtil.parse(url);
 		assertGeoPoint(actual, new GeoParsedPoint(dlat, dlon, z));
 
-		// http://openstreetmap.org/#11/34.99393/-106.61568
+		// https://openstreetmap.org/#11/34.99393/-106.61568
 		url = "https://openstreetmap.org/#" + z + "/" + dlat + "/" + dlon;
 		System.out.println("url: " + url);
 		actual = GeoPointParserUtil.parse(url);
@@ -300,52 +300,52 @@ public class GeoPointParserUtil {
 
 		// https://wiki.openstreetmap.org/wiki/Shortlink
 
-		// http://osm.org/go/TyFSutZ-?m=
+		// https://osm.org/go/TyFSutZ-?m=
 		// https://www.openstreetmap.org/?mlat=34.993933029174805&mlon=-106.61568069458008#map=15/34.99393/-106.61568
 		z = 15;
-		url = "http://osm.org/go/TyFYuF6P--?m=";
+		url = "https://osm.org/go/TyFYuF6P--?m=";
 		System.out.println("url: " + url);
 		actual = GeoPointParserUtil.parse(url);
 		assertApproximateGeoPoint(actual, new GeoParsedPoint(longLat, longLon, z));
 
-		// http://osm.org/go/TyFS--
-		// http://www.openstreetmap.org/#map=3/34.99/-106.70
+		// https://osm.org/go/TyFS--
+		// https://www.openstreetmap.org/#map=3/34.99/-106.70
 		z = 3;
-		url = "http://osm.org/go/TyFS--";
+		url = "https://osm.org/go/TyFS--";
 		System.out.println("url: " + url);
 		actual = GeoPointParserUtil.parse(url);
 		assertApproximateGeoPoint(actual, new GeoParsedPoint(dlat, dlon, z));
 
-		// http://osm.org/go/TyFYuF6P~~-?m // current shortlink format with "~"
+		// https://osm.org/go/TyFYuF6P~~-?m // current shortlink format with "~"
 		// https://www.openstreetmap.org/?mlat=34.993933029174805&mlon=-106.61568069458008#map=15/34.99393/-106.61568
 		z = 20;
-		url = "http://osm.org/go/TyFYuF6P~~-?m";
+		url = "https://osm.org/go/TyFYuF6P~~-?m";
 		System.out.println("url: " + url);
 		actual = GeoPointParserUtil.parse(url);
 		assertApproximateGeoPoint(actual, new GeoParsedPoint(longLat, longLon, z));
 
-		// http://osm.org/go/TyFYuF6P@@--?m= // old, deprecated shortlink format with "@"
+		// https://osm.org/go/TyFYuF6P@@--?m= // old, deprecated shortlink format with "@"
 		// https://www.openstreetmap.org/?mlat=34.993933029174805&mlon=-106.61568069458008#map=15/34.99393/-106.61568
 		z = 21;
-		url = "http://osm.org/go/TyFYuF6P@@--?m=";
+		url = "https://osm.org/go/TyFYuF6P@@--?m=";
 		System.out.println("url: " + url);
 		actual = GeoPointParserUtil.parse(url);
 		assertApproximateGeoPoint(actual, new GeoParsedPoint(longLat, longLon, z));
 
-		// http://openstreetmap.de/zoom=11&lat=34&lon=-106
+		// https://openstreetmap.de/zoom=11&lat=34&lon=-106
 		z = 11;
 		url = "https://openstreetmap.de/zoom=" + z + "&lat=" + ilat + "&lon=" + ilon;
 		System.out.println("url: " + url);
 		actual = GeoPointParserUtil.parse(url);
 		assertGeoPoint(actual, new GeoParsedPoint(ilat, ilon, z));
 
-		// http://openstreetmap.de/zoom=11&lat=34.99393&lon=-106.61568
+		// https://openstreetmap.de/zoom=11&lat=34.99393&lon=-106.61568
 		url = "https://openstreetmap.de/zoom=" + z + "&lat=" + dlat + "&lon=" + dlon;
 		System.out.println("url: " + url);
 		actual = GeoPointParserUtil.parse(url);
 		assertGeoPoint(actual, new GeoParsedPoint(dlat, dlon, z));
 
-		// http://openstreetmap.de/lat=34.99393&lon=-106.61568&zoom=11
+		// https://openstreetmap.de/lat=34.99393&lon=-106.61568&zoom=11
 		url = "https://openstreetmap.de/lat=" + dlat + "&lon=" + dlon + "&zoom=" + z;
 		System.out.println("url: " + url);
 		actual = GeoPointParserUtil.parse(url);
@@ -656,13 +656,13 @@ public class GeoPointParserUtil {
 
 		String urls[] = {
 				"https://openstreetmap.org/go/0LQ127-?m",
-				"http://osm.org/go/0LQ127-?m",
-				"http://osm.org/go/0EEQjE==",
-				"http://osm.org/go/0EEQjEEb",
-				"http://osm.org/go/0EE~jEEb",
-				"http://osm.org/go/0EE@jEEb",
-				"http://osm.org/go/~~~~",
-				"http://osm.org/go/@@@@",
+				"https://osm.org/go/0LQ127-?m",
+				"https://osm.org/go/0EEQjE==",
+				"https://osm.org/go/0EEQjEEb",
+				"https://osm.org/go/0EE~jEEb",
+				"https://osm.org/go/0EE@jEEb",
+				"https://osm.org/go/~~~~",
+				"https://osm.org/go/@@@@",
 				"https://www.openstreetmap.org/#map=0/0/0",
 				"https://www.openstreetmap.org/#map=0/180/180",
 				"https://www.openstreetmap.org/#map=0/-180/-180",
