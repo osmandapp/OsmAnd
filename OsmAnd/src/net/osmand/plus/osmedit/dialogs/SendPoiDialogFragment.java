@@ -184,19 +184,19 @@ public class SendPoiDialogFragment extends DialogFragment {
 			Map<String, Integer> group;
 			switch (i) {
 				case 0:
-					action = getString(R.string.shared_string_add);
+					action = getString(R.string.default_changeset_add);
 					group = addGroup;
 					break;
 				case 1:
-					action = getString(R.string.shared_string_edit);
+					action = getString(R.string.default_changeset_edit);
 					group = editGroup;
 					break;
 				case 2:
-					action = getString(R.string.shared_string_delete);
+					action = getString(R.string.default_changeset_delete);
 					group = deleteGroup;
 					break;
 				case 3:
-					action = getString(R.string.poi_dialog_reopen);;
+					action = getString(R.string.default_changeset_reopen);;
 					group = reopenGroup;
 					break;
 				default:
