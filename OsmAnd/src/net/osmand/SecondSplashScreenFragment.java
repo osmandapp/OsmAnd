@@ -100,12 +100,9 @@ public class SecondSplashScreenFragment extends Fragment {
         logoLayoutParams.addRule(RelativeLayout.CENTER_HORIZONTAL);
         ImageView text = new ImageView(activity);
         if (Version.isFreeVersion(app)) {
-            if (InAppHelper.isSubscribedToLiveUpdates()) {
+            if ((InAppHelper.isSubscribedToLiveUpdates() && InAppHelper.isFullVersionPurchased()) || InAppHelper.isSubscribedToLiveUpdates()) {
                 text.setImageDrawable(getResources().getDrawable(R.drawable.image_text_osmand_osmlive));
-            } else if (OsmandPlugin.getPlugin(ParkingPositionPlugin.class) != null
-                    || OsmandPlugin.getPlugin(SkiMapsPlugin.class) != null
-                    || OsmandPlugin.getPlugin(NauticalMapsPlugin.class) != null
-                    || InAppHelper.isDepthContoursPurchased()) {
+            } else if (InAppHelper.isFullVersionPurchased()) {
                 text.setImageDrawable(getResources().getDrawable(R.drawable.image_text_osmand_inapp));
             } else {
                 text.setImageDrawable(getResources().getDrawable(R.drawable.image_text_osmand));
@@ -165,7 +162,6 @@ public class SecondSplashScreenFragment extends Fragment {
 
                 @Override
                 public void run() {
-                    android.util.Log.d("Splash", "dismisssplashinsplash");
                     if (activity instanceof MapActivity && !((MapActivity) activity).isActivityDestroyed()) {
                         ((MapActivity)activity).dismissSecondSplashScreen();
                     }
