@@ -6,13 +6,10 @@ import java.io.InputStreamReader;
 import java.net.HttpURLConnection;
 import java.net.URI;
 import java.net.URL;
-import java.text.DateFormat;
 import java.text.MessageFormat;
-import java.text.SimpleDateFormat;
 import java.util.ArrayList;
-import java.util.Calendar;
-import java.util.Date;
 import java.util.List;
+import java.util.concurrent.ConcurrentLinkedQueue;
 
 import javax.net.ssl.HostnameVerifier;
 import javax.net.ssl.HttpsURLConnection;
@@ -37,17 +34,20 @@ public class LiveMonitoringHelper  {
 	private OsmandSettings settings;
 	private long lastTimeUpdated;
 	private LatLon lastPoint;
-	private final static Log log = PlatformUtil.getLog(LiveMonitoringHelper.class); 
+	private final static Log log = PlatformUtil.getLog(LiveMonitoringHelper.class);
+	private ConcurrentLinkedQueue<LiveMonitoringData> queue;
+	private boolean started = false;
 
 	public LiveMonitoringHelper(Context ctx){
 		this.ctx = ctx;
 		settings = ((OsmandApplication) ctx.getApplicationContext()).getSettings();
+		queue = new ConcurrentLinkedQueue<>();
 	}
 	
 	public boolean isLiveMonitoringEnabled(){
 		return settings.LIVE_MONITORING.get() && (settings.SAVE_TRACK_TO_GPX.get() || settings.SAVE_GLOBAL_TRACK_TO_GPX.get());
 	}
-	
+
 	public void updateLocation(net.osmand.Location location) {
 		boolean record = false;
 		long locationTime = System.currentTimeMillis();
@@ -71,10 +71,18 @@ public class LiveMonitoringHelper  {
 				record = false;
 			}
 		}
+		if (isLiveMonitoringEnabled()) {
+			if (!started) {
+				new LiveSender().execute(queue);
+				started = true;
+			}
+		} else {
+			started = false;
+		}
 		if(record) {
 			LiveMonitoringData data = new LiveMonitoringData((float)location.getLatitude(), (float)location.getLongitude(),
 					(float)location.getAltitude(), location.getSpeed(), location.getAccuracy(), location.getBearing(), locationTime);
-			new LiveSender().execute(data);
+			queue.add(data);
 			lastPoint = new LatLon(location.getLatitude(), location.getLongitude());
 			lastTimeUpdated = locationTime;
 		}
@@ -103,27 +111,23 @@ public class LiveMonitoringHelper  {
 		
 	}
 	
-	private class LiveSender extends AsyncTask<LiveMonitoringData, Void, Void> {
+	private class LiveSender extends AsyncTask<ConcurrentLinkedQueue<LiveMonitoringData>, Void, Void> {
 
 		@Override
-		protected Void doInBackground(LiveMonitoringData... params) {
-			for(LiveMonitoringData d : params){
-				sendData(d);
+		protected Void doInBackground(ConcurrentLinkedQueue<LiveMonitoringData>... concurrentLinkedQueues) {
+			while (isLiveMonitoringEnabled()) {
+				for (ConcurrentLinkedQueue queue : concurrentLinkedQueues) {
+					if (!queue.isEmpty()) {
+						LiveMonitoringData data = (LiveMonitoringData) queue.poll();
+						sendData(data);
+					}
+				}
 			}
 			return null;
 		}
-		
 	}
 
 	public void sendData(LiveMonitoringData data) {
-		Calendar c = Calendar.getInstance();
-		int hours = c.get(Calendar.HOUR);
-		int minutes = c.get(Calendar.MINUTE);
-		int seconds = c.get(Calendar.SECOND);
-		Date date = new Date(data.time);
-		DateFormat formatter = new SimpleDateFormat("HH:mm:ss:SSS");
-		String dateFormatted = formatter.format(date);
-		log.info("Time at first: " + dateFormatted + " Current time at first: " + hours + ":" + minutes + ":" + seconds);
 		String st = settings.LIVE_MONITORING_URL.get();
 		List<String> prm = new ArrayList<String>();
 		int maxLen = 0;
@@ -203,13 +207,6 @@ public class LiveMonitoringHelper  {
 					is.close();
 				}
 				log.info("Monitor response (" + urlConnection.getHeaderField("Content-Type") + "): " + responseBody.toString());
-				c = Calendar.getInstance();
-				hours = c.get(Calendar.HOUR);
-				minutes = c.get(Calendar.MINUTE);
-				seconds = c.get(Calendar.SECOND);
-				date = new Date(data.time);
-				dateFormatted = formatter.format(date);
-				log.info("Time after response: " + dateFormatted + " Current time after response: " + hours + ":" + minutes + ":" + seconds);
 			}
 
 			urlConnection.disconnect();
