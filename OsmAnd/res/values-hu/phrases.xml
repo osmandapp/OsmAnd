@@ -201,7 +201,7 @@
 	<string name="poi_craft_electrician">Villanyszerelő</string>
 	<string name="poi_craft_gardener">Kertész</string>
 	<string name="poi_craft_jeweller">Ékszerész</string>
-	<string name="poi_craft_locksmith">Lakatos</string>
+	<string name="poi_craft_locksmith">Zárlakatos</string>
 	<string name="poi_craft_key_cutter">Kulcsmásoló</string>
 	<string name="poi_craft_photographer">Fényképész</string>
 	<string name="poi_craft_photographic_laboratory">Fotólabor</string>
@@ -456,7 +456,7 @@
 	<string name="poi_swimming">Úszás</string>
 	<string name="poi_tennis">Tenisz</string>
 	<string name="poi_archaeological_site">Régészeti lelőhely</string>
-	<string name="poi_battlefield">Csatamező</string>
+	<string name="poi_battlefield">Csatatér</string>
 	<string name="poi_boundary_stone">Határkő</string>
 	<string name="poi_historic_cannon">Történelmi ágyú</string>
 	<string name="poi_rune_stone">Rúnakő</string>
@@ -1358,7 +1358,7 @@
 	<string name="poi_memorial_plaque">Emléktábla</string>
 	<string name="poi_memorial_statue">Szobor</string>
 	<string name="poi_memorial_stone">Kő</string>
-	<string name="poi_memorial_stele">Sztélé</string>
+	<string name="poi_memorial_stele">Kopjafa, sztélé</string>
 	<string name="poi_memorial_bust">Mellszobor</string>
 	<string name="poi_memorial_vehicle">Jármű</string>
 	<string name="poi_memorial_obelisk">Obeliszk</string>
@@ -1689,7 +1689,7 @@
 	<string name="poi_artwork_type_mosaic">Műalkotás típusa: mozaik</string>
 	<string name="poi_artwork_type_relief">Műalkotás típusa: dombormű</string>
 	<string name="poi_artwork_type_graffiti">Műalkotás típusa: graffiti</string>
-	<string name="poi_artwork_type_stele">Műalkotás típusa: sztélé</string>
+	<string name="poi_artwork_type_stele">Műalkotás típusa: kopjafa, sztélé</string>
 	<string name="poi_artwork_type_fountain">Műalkotás típusa: szökőkút</string>
 
 	<string name="poi_width">Szélesség</string>
@@ -3410,4 +3410,20 @@
 
 	<string name="poi_owner">Tulajdonos</string>
 
-</resources>
+<string name="poi_animal_shelter_type">Fogadott állatok</string>
+	<string name="poi_animal_shelter_purpose">Cél</string>
+
+<string name="poi_animal_shelter_wildlife">Vadon élő</string>
+	<string name="poi_animal_shelter_horse">Ló</string>
+	<string name="poi_animal_shelter_mammal">Emlős</string>
+	<string name="poi_animal_shelter_fish">Hal</string>
+
+	<string name="poi_animal_shelter_purpose_adoption_yes">Örökbeadás</string>
+	<string name="poi_animal_shelter_purpose_adoption_no">Nem adnak örökbe</string>
+	<string name="poi_animal_shelter_purpose_release_yes">Szabadon engedés</string>
+	<string name="poi_animal_shelter_purpose_release_no">Nem engedik szabadon</string>
+
+	<string name="poi_spaceport">Űrrepülőtér</string>
+
+<string name="poi_lock_basin">Zsilipmedence</string>
+	</resources>

@@ -2436,9 +2436,9 @@ Por favor proporciona un código completo</string>
     <string name="routing_attr_relief_smoothness_factor_hills_name">Empinado</string>
     <string name="routing_attr_relief_smoothness_factor_plains_name">Poco empinado</string>
     <string name="routing_attr_relief_smoothness_factor_more_plains_name">Llano</string>
-    <string name="routing_attr_driving_style_speed_name">Velocidad</string>
+    <string name="routing_attr_driving_style_speed_name">Preferir carreteras principales</string>
     <string name="routing_attr_driving_style_balance_name">Equilibrado</string>
-    <string name="routing_attr_driving_style_safety_name">Seguridad</string>
+    <string name="routing_attr_driving_style_safety_name">Preferir carreteras secundarias</string>
     <string name="relief_smoothness_factor_descr">Terreno preferido: llano o empinado</string>
     <string name="lang_ber">Bereber</string>
     <string name="do_not_send_anonymous_app_usage">No enviar estadísticas de uso anónimas de la aplicación</string>

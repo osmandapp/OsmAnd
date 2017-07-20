@@ -18,11 +18,12 @@ import net.osmand.plus.R;
 import net.osmand.plus.Version;
 import net.osmand.plus.activities.MapActivity;
 import net.osmand.plus.helpers.AndroidUiHelper;
+import net.osmand.plus.inapp.InAppHelper;
 
 public class SecondSplashScreenFragment extends Fragment {
     public static final String TAG = "SecondSplashScreenFragment";
     public static boolean SHOW = true;
-    private static final int SECOND_SPLASH_TIME_OUT = 5000;
+    private static final int SECOND_SPLASH_TIME_OUT = 8000;
     private boolean started = false;
     private FragmentActivity activity;
     private OsmandApplication app;
@@ -95,9 +96,19 @@ public class SecondSplashScreenFragment extends Fragment {
         logoLayoutParams.addRule(RelativeLayout.CENTER_HORIZONTAL);
         ImageView text = new ImageView(activity);
         if (Version.isFreeVersion(app)) {
-            text.setImageDrawable(getResources().getDrawable(R.drawable.image_text_osmand));
+            if ((InAppHelper.isSubscribedToLiveUpdates() && InAppHelper.isFullVersionPurchased()) || InAppHelper.isSubscribedToLiveUpdates()) {
+                text.setImageDrawable(getResources().getDrawable(R.drawable.image_text_osmand_osmlive));
+            } else if (InAppHelper.isFullVersionPurchased()) {
+                text.setImageDrawable(getResources().getDrawable(R.drawable.image_text_osmand_inapp));
+            } else {
+                text.setImageDrawable(getResources().getDrawable(R.drawable.image_text_osmand));
+            }
         } else if (Version.isPaidVersion(app) || Version.isDeveloperVersion(app)) {
-            text.setImageDrawable(getResources().getDrawable(R.drawable.image_text_osmand_plus));
+            if (InAppHelper.isSubscribedToLiveUpdates()) {
+                text.setImageDrawable(getResources().getDrawable(R.drawable.image_text_osmand_plus_osmlive));
+            } else {
+                text.setImageDrawable(getResources().getDrawable(R.drawable.image_text_osmand_plus));
+            }
         }
         RelativeLayout.LayoutParams textLayoutParams = new RelativeLayout.LayoutParams(RelativeLayout.LayoutParams.WRAP_CONTENT, RelativeLayout.LayoutParams.WRAP_CONTENT);
         textLayoutParams.addRule(RelativeLayout.ALIGN_PARENT_BOTTOM);
@@ -142,18 +153,14 @@ public class SecondSplashScreenFragment extends Fragment {
         }
         if (!started) {
             started = true;
+            SecondSplashScreenFragment.SHOW = false;
             new Handler().postDelayed(new Runnable() {
 
                 @Override
                 public void run() {
-                    if (activity instanceof MapActivity) {
-                        activity.setRequestedOrientation(ActivityInfo.SCREEN_ORIENTATION_UNSPECIFIED);
-                        if (app.getSettings().MAP_SCREEN_ORIENTATION.get() != activity.getRequestedOrientation()) {
-                            activity.setRequestedOrientation(app.getSettings().MAP_SCREEN_ORIENTATION.get());
-                            // can't return from this method we are not sure if activity will be recreated or not
-                        }
+                    if (activity instanceof MapActivity && !((MapActivity) activity).isActivityDestroyed()) {
+                        ((MapActivity)activity).dismissSecondSplashScreen();
                     }
-                    activity.getSupportFragmentManager().beginTransaction().remove(SecondSplashScreenFragment.this).commitAllowingStateLoss();
                 }
             }, SECOND_SPLASH_TIME_OUT);
         }

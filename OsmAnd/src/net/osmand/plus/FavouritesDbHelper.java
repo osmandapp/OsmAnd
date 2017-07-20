@@ -663,7 +663,7 @@ public class FavouritesDbHelper {
 		if (conn.getVersion() == 0 || DATABASE_VERSION != conn.getVersion()) {
 			if (readonly) {
 				conn.close();
-				conn = context.getSQLiteAPI().getOrCreateDatabase(FAVOURITE_DB_NAME, readonly);
+				conn = context.getSQLiteAPI().getOrCreateDatabase(FAVOURITE_DB_NAME, false);
 			}
 			if (conn.getVersion() == 0) {
 				onCreate(conn);

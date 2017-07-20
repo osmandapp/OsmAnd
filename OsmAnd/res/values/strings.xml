@@ -119,7 +119,7 @@
     <string name="routing_attr_relief_smoothness_factor_hills_name">Hilly</string>
     <string name="routing_attr_relief_smoothness_factor_plains_name">Less hilly</string>
     <string name="routing_attr_relief_smoothness_factor_more_plains_name">Flat</string>
-    <string name="routing_attr_driving_style_speed_name">Prefer major roads</string>
+    <string name="routing_attr_driving_style_speed_name">Accept major roads</string>
     <string name="routing_attr_driving_style_balance_name">Balanced</string>
     <string name="routing_attr_driving_style_safety_name">Prefer byways</string>
     <string name="relief_smoothness_factor_descr">Preferred terrain: flat or hilly</string>

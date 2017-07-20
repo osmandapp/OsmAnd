@@ -2644,9 +2644,9 @@ représentant la zone : %1$s x %2$s</string>
     <string name="routing_attr_relief_smoothness_factor_hills_name">Vallonné</string>
     <string name="routing_attr_relief_smoothness_factor_plains_name">Moins vallonné</string>
     <string name="routing_attr_relief_smoothness_factor_more_plains_name">Plat</string>
-    <string name="routing_attr_driving_style_speed_name">Rapide</string>
+    <string name="routing_attr_driving_style_speed_name">Privilégier les routes principales</string>
     <string name="routing_attr_driving_style_balance_name">Équilibré</string>
-    <string name="routing_attr_driving_style_safety_name">Sûre</string>
+    <string name="routing_attr_driving_style_safety_name">Privilégier les routes secondaires</string>
     <string name="full_version_thanks">Merci d\'avoir acheté la version complète d\'OsmAnd !</string>
     <string name="routing_attr_relief_smoothness_factor_name">Sélectionnez les préférences de relief</string>
     <string name="parking_options">Choix de stationnement</string>

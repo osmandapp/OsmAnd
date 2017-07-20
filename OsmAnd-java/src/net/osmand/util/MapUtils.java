@@ -302,9 +302,9 @@ public class MapUtils {
 	}
 
 	// Examples
-//	System.out.println(buildShortOsmUrl(51.51829d, 0.07347d, 16)); // http://osm.org/go/0EEQsyfu
-//	System.out.println(buildShortOsmUrl(52.30103d, 4.862927d, 18)); // http://osm.org/go/0E4_JiVhs
-//	System.out.println(buildShortOsmUrl(40.59d, -115.213d, 9)); // http://osm.org/go/TelHTB--
+//	System.out.println(buildShortOsmUrl(51.51829d, 0.07347d, 16)); // https://osm.org/go/0EEQsyfu
+//	System.out.println(buildShortOsmUrl(52.30103d, 4.862927d, 18)); // https://osm.org/go/0E4_JiVhs
+//	System.out.println(buildShortOsmUrl(40.59d, -115.213d, 9)); // https://osm.org/go/TelHTB--
 	public static String buildShortOsmUrl(double latitude, double longitude, int zoom) {
 		return BASE_SHORT_OSM_URL + createShortLinkString(latitude, longitude, zoom) + "?m";
 	}

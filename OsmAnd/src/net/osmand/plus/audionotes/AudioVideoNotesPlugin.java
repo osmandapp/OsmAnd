@@ -386,7 +386,7 @@ public class AudioVideoNotesPlugin extends OsmandPlugin {
 						rot -= 360;
 					}
 					int abs = (int) (Math.abs(rot) * 100.0);
-					String rotString = abs / 100f + "";
+					String rotString = abs + "/100";
 					setAttribute.invoke(exInstance, "GPSImgDirection", rotString);
 				}
 				if (loc != null && loc.hasAltitude()) {

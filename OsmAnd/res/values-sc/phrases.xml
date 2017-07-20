@@ -2637,4 +2637,9 @@
 	<string name="poi_motorcycle_services">Servìtzios</string>
 	<string name="poi_motorcycle_type">Casta de mototzicleta</string>
 
+<string name="poi_animal_shelter_type">Animales atzetados</string>
+	<string name="poi_animal_shelter_purpose">Punna</string>
+
+<string name="poi_spaceport">Portu ispatziale</string>
+
 </resources>

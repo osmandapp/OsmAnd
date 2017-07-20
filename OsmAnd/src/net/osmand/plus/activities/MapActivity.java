@@ -189,6 +189,8 @@ public class MapActivity extends OsmandActionBarActivity implements DownloadEven
 	private boolean mIsDestroyed = false;
 	private InAppHelper inAppHelper;
 
+	private SecondSplashScreenFragment secondSplashScreenFragment;
+
 	@Override
 	public void onCreate(Bundle savedInstanceState) {
 		setRequestedOrientation(AndroidUiHelper.getScreenOrientation(this));
@@ -692,7 +694,8 @@ public class MapActivity extends OsmandActionBarActivity implements DownloadEven
 		}
 		FirstUsageWelcomeFragment.SHOW = false;
 		if (SecondSplashScreenFragment.SHOW) {
-			getSupportFragmentManager().beginTransaction().add(R.id.fragmentContainer, new SecondSplashScreenFragment(), SecondSplashScreenFragment.TAG).commitAllowingStateLoss();
+			secondSplashScreenFragment = new SecondSplashScreenFragment();
+			getSupportFragmentManager().beginTransaction().add(R.id.fragmentContainer, secondSplashScreenFragment, SecondSplashScreenFragment.TAG).commitAllowingStateLoss();
 		} else {
 			setRequestedOrientation(ActivityInfo.SCREEN_ORIENTATION_UNSPECIFIED);
 			if (settings.MAP_SCREEN_ORIENTATION.get() != getRequestedOrientation()) {
@@ -700,7 +703,16 @@ public class MapActivity extends OsmandActionBarActivity implements DownloadEven
 				// can't return from this method we are not sure if activity will be recreated or not
 			}
 		}
+	}
+
+	public void dismissSecondSplashScreen() {
 		SecondSplashScreenFragment.SHOW = false;
+		getSupportFragmentManager().beginTransaction().remove(secondSplashScreenFragment).commitAllowingStateLoss();
+		setRequestedOrientation(ActivityInfo.SCREEN_ORIENTATION_UNSPECIFIED);
+		if (app.getSettings().MAP_SCREEN_ORIENTATION.get() != getRequestedOrientation()) {
+			setRequestedOrientation(app.getSettings().MAP_SCREEN_ORIENTATION.get());
+			// can't return from this method we are not sure if activity will be recreated or not
+		}
 	}
 
 	@Override
@@ -1094,8 +1106,12 @@ public class MapActivity extends OsmandActionBarActivity implements DownloadEven
 				if (registry.getCurrentSelectedRenderer() != newRenderer) {
 					registry.setCurrentSelectedRender(newRenderer);
 					app.getResourceManager().getRenderer().clearCache();
+					mapView.resetDefaultColor();
 					mapView.refreshMap(true);
+				} else {
+					mapView.resetDefaultColor();
 				}
+
 				return null;
 			}
 
