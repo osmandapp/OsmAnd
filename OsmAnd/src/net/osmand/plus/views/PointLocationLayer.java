@@ -26,6 +26,8 @@ import java.util.List;
 public class PointLocationLayer extends OsmandMapLayer implements ContextMenuLayer.IContextMenuProvider {
 	private static final Log LOG = PlatformUtil.getLog(PointLocationLayer.class);
 
+	private static final int UPDATES_BEFORE_CHECK_LOCATION = 20;
+
 	protected final static int RADIUS = 7;
 
 	private Paint locationPaint;
@@ -147,7 +149,7 @@ public class PointLocationLayer extends OsmandMapLayer implements ContextMenuLay
 			}
 
 		}
-		if (updatesCounter == 20) {
+		if (updatesCounter == UPDATES_BEFORE_CHECK_LOCATION) {
 			updatesCounter = 0;
 		} else {
 			updatesCounter++;
