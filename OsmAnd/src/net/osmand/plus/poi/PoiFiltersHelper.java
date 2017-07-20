@@ -402,7 +402,7 @@ public class PoiFiltersHelper {
 			if (conn.getVersion() == 0 || DATABASE_VERSION != conn.getVersion()) {
 				if (readonly) {
 					conn.close();
-					conn = context.getSQLiteAPI().getOrCreateDatabase(DATABASE_NAME, readonly);
+					conn = context.getSQLiteAPI().getOrCreateDatabase(DATABASE_NAME, false);
 				}
 				if (conn.getVersion() == 0) {
 					conn.setVersion(DATABASE_VERSION);

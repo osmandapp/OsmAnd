@@ -50,7 +50,7 @@ public class DatabaseHelper {
         if (conn.getVersion() == 0 || DB_VERSION != conn.getVersion()) {
             if (readonly) {
                 conn.close();
-                conn = app.getSQLiteAPI().getOrCreateDatabase(DB_NAME, true);
+                conn = app.getSQLiteAPI().getOrCreateDatabase(DB_NAME, false);
             }
             if (conn.getVersion() == 0) {
                 conn.setVersion(DB_VERSION);

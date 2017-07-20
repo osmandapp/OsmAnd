@@ -154,7 +154,7 @@ public class GPXDatabase {
 		if (version == 0 || DB_VERSION != version) {
 			if (readonly) {
 				conn.close();
-				conn = context.getSQLiteAPI().getOrCreateDatabase(DB_NAME, readonly);
+				conn = context.getSQLiteAPI().getOrCreateDatabase(DB_NAME, false);
 			}
 			version = conn.getVersion();
 			conn.setVersion(DB_VERSION);
@@ -443,9 +443,9 @@ public class GPXDatabase {
 	public List<GpxDataItem> getItems() {
 		List<GpxDataItem> items = new ArrayList<>();
 		SQLiteConnection db = openConnection(true);
-		if (db != null){
+		if (db != null) {
 			try {
-				SQLiteCursor query = db.rawQuery(GPX_TABLE_SELECT , null);
+				SQLiteCursor query = db.rawQuery(GPX_TABLE_SELECT, null);
 				if (query.moveToFirst()) {
 					do {
 						items.add(readItem(query));
