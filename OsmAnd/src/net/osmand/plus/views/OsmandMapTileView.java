@@ -29,6 +29,7 @@ import android.view.WindowManager;
 import android.widget.Toast;
 
 import net.osmand.PlatformUtil;
+import net.osmand.SecondSplashScreenFragment;
 import net.osmand.access.AccessibilityActionsProvider;
 import net.osmand.core.android.MapRendererView;
 import net.osmand.data.LatLon;
@@ -662,6 +663,10 @@ public class OsmandMapTileView implements IMapDownloaderCallback {
 			}
 		}
 
+		if (activity instanceof MapActivity && !((MapActivity) activity).isActivityDestroyed() &&
+				((MapActivity) activity).getSupportFragmentManager().findFragmentByTag(SecondSplashScreenFragment.TAG) != null) {
+			((MapActivity) activity).dismissSecondSplashScreen();
+		}
 		for (int i = 0; i < layers.size(); i++) {
 			try {
 				OsmandMapLayer layer = layers.get(i);
