@@ -14,15 +14,11 @@ import android.widget.ImageView;
 import android.widget.RelativeLayout;
 
 import net.osmand.plus.OsmandApplication;
-import net.osmand.plus.OsmandPlugin;
 import net.osmand.plus.R;
 import net.osmand.plus.Version;
 import net.osmand.plus.activities.MapActivity;
 import net.osmand.plus.helpers.AndroidUiHelper;
 import net.osmand.plus.inapp.InAppHelper;
-import net.osmand.plus.openseamapsplugin.NauticalMapsPlugin;
-import net.osmand.plus.parkingpoint.ParkingPositionPlugin;
-import net.osmand.plus.skimapsplugin.SkiMapsPlugin;
 
 public class SecondSplashScreenFragment extends Fragment {
     public static final String TAG = "SecondSplashScreenFragment";
