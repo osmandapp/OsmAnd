@@ -25,6 +25,7 @@ public class SettingsMonitoringActivity extends SettingsBaseActivity {
 	public static final int[] BG_MINUTES = new int[]{2, 3, 5, 10, 15, 30, 60, 90};
 	private static final int[] SECONDS = OsmandMonitoringPlugin.SECONDS;
 	private static final int[] MINUTES = OsmandMonitoringPlugin.MINUTES;
+	private static final int[] MAX_INTERVAL_TO_SEND_MINUTES = OsmandMonitoringPlugin.MAX_INTERVAL_TO_SEND_MINUTES;
 	
 	public SettingsMonitoringActivity() {
 		super(true);
@@ -136,6 +137,8 @@ public class SettingsMonitoringActivity extends SettingsBaseActivity {
 		cat.addPreference(liveMonitoring);
 		cat.addPreference(createTimeListPreference(settings.LIVE_MONITORING_INTERVAL, SECONDS,
 				MINUTES, 1000, R.string.live_monitoring_interval, R.string.live_monitoring_interval_descr));
+		cat.addPreference(createTimeListPreference(settings.LIVE_MONITORING_MAX_INTERVAL_TO_SEND, null,
+				MAX_INTERVAL_TO_SEND_MINUTES, 1000, R.string.live_monitoring_max_interval_to_send, R.string.live_monitoring_max_interval_to_send_desrc));
 	}
 
 	private void createNotificationSection(PreferenceScreen grp) {

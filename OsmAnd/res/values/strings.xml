@@ -1936,6 +1936,8 @@
     <string name="live_monitoring_interval">Online tracking interval</string>
     <string name="live_monitoring_url_descr">Specify the web address with parameter syntax: lat={0}, lon={1}, timestamp={2}, hdop={3}, altitude={4}, speed={5}, bearing={6}</string>
     <string name="live_monitoring_url">Online tracking web address</string>
+    <string name="live_monitoring_max_interval_to_send">Maximum online tracking interval to send</string>
+    <string name="live_monitoring_max_interval_to_send_desrc">Specify maximum online tracking interval to send</string>
     <string name="gpx_monitoring_disabled_warn">Log track using GPX widget or via \'Trip recording\' settings.</string>
     <string name="show_current_gpx_title">Show current track</string>
     <string name="free_version_message">This free OsmAnd version is limited to %1$s downloads and does not support offline Wikipedia articles.</string>

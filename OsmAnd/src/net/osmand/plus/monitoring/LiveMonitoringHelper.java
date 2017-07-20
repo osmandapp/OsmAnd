@@ -119,7 +119,9 @@ public class LiveMonitoringHelper  {
 				for (ConcurrentLinkedQueue queue : concurrentLinkedQueues) {
 					if (!queue.isEmpty()) {
 						LiveMonitoringData data = (LiveMonitoringData) queue.poll();
-						sendData(data);
+						if (!(System.currentTimeMillis() - data.time > settings.LIVE_MONITORING_MAX_INTERVAL_TO_SEND.get())) {
+							sendData(data);
+						}
 					}
 				}
 			}
