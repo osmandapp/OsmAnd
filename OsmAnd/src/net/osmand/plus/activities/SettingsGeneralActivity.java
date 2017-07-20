@@ -516,6 +516,8 @@ public class SettingsGeneralActivity extends SettingsBaseActivity implements OnR
 			restartApp();
 		} else if (id.equals(settings.OSMAND_THEME.getId())) {
 			restartApp();
+		} else if (id.equals(settings.METRIC_SYSTEM.getId())) {
+			settings.METRIC_SYSTEM_CHANGED_MANUALLY.set(true);
 		} else {
 			updateAllSettings();
 		}

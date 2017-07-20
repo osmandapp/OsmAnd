@@ -162,7 +162,7 @@ public class LiveMonitoringHelper  {
 			urlConnection.setReadTimeout(15000);
 
 			// allow certificates where hostnames doesn't match CN
-			if (url.getProtocol() == "https") {
+			if (url.getProtocol().equals("https")) {
 				((HttpsURLConnection) urlConnection).setHostnameVerifier(
 						new HostnameVerifier() {
 							public boolean verify(String host, SSLSession session) {

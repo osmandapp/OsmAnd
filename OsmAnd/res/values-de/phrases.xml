@@ -3410,4 +3410,9 @@
 	<string name="poi_animal_shelter_mammal">Säugetiere</string>
 	<string name="poi_animal_shelter_fish">Fische</string>
 
+	<string name="poi_animal_shelter_type">Tierannahme</string>
+	<string name="poi_animal_shelter_purpose">Bestimmung</string>
+
+<string name="poi_owner">Eigentümer</string>
+
 	</resources>

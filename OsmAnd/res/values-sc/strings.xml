@@ -2559,16 +2559,16 @@ Pro praghere iscrie su còdighe intreu</string>
     <string name="points_delete_multiple">As a iscantzellare %1$d puntu/os. Seguru ses?</string>
     <string name="track_points_category_name">Puntos importantes in custa àndala</string>
     <string name="add_new_folder">Annanghe una cartella noa</string>
-    <string name="route_points_category_name">Puntos de colare in cust\'àndala</string>
+    <string name="route_points_category_name">Bortadas de colare in cust\'àndala</string>
     <string name="shared_string_slope">Caladòrgia</string>
     <string name="lang_ber">Bèrberu</string>
     <string name="relief_smoothness_factor_descr">Terrinos preferidos: in paris o cun cùcuros</string>
     <string name="routing_attr_relief_smoothness_factor_hills_name">Cùcuros/montigros</string>
     <string name="routing_attr_relief_smoothness_factor_plains_name">Pagos cùcuros</string>
     <string name="routing_attr_relief_smoothness_factor_more_plains_name">Terrinu in paris</string>
-    <string name="routing_attr_driving_style_speed_name">Lestru</string>
+    <string name="routing_attr_driving_style_speed_name">Privilègia sas istradas printzipales</string>
     <string name="routing_attr_driving_style_balance_name">Bilantziadu</string>
-    <string name="routing_attr_driving_style_safety_name">Seguru</string>
+    <string name="routing_attr_driving_style_safety_name">Privilègia sas istradas segundàrias</string>
     <string name="routing_attr_relief_smoothness_factor_name">Valore de variatzione de s\'artària</string>
     <string name="full_version_thanks">Gràtzias pro àere comporadu sa versione intrea de OsmAnd!</string>
     <string name="do_not_send_anonymous_app_usage">No imbies informatziones anònimas a pitzu de s\'impreu de s\'aplicatzione</string>
@@ -2710,4 +2710,9 @@ Pro praghere iscrie su còdighe intreu</string>
     <string name="rendering_value_translucent_pink_name">Rosa translùtzidu</string>
     <string name="average">Mèdiu</string>
     <string name="ascent_descent">Ascendente/Discendente</string>
+    <string name="quick_action_resume_pause_navigation">Faghe sighire/Pone in pàusa su nàvigu</string>
+    <string name="quick_action_resume_pause_navigation_descr">Incarca custu butone pro pònnere in pàusa su nàvigu, o pru lu sighire si est giai in pàusa.</string>
+    <string name="quick_action_show_navigation_finish_dialog">Ammustra sa ventana pro sa fine de su nàvigu</string>
+    <string name="quick_action_start_stop_navigation">Incumintza/Acaba su nàvigu</string>
+    <string name="quick_action_start_stop_navigation_descr">Incarca custu butone pro incumintzare su nàvigu, o pro l\'acabare si est giai incumintzadu.</string>
     </resources>

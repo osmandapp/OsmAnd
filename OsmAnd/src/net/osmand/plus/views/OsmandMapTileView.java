@@ -48,6 +48,9 @@ import net.osmand.plus.activities.MapActivity;
 import net.osmand.plus.helpers.TwoFingerTapDetector;
 import net.osmand.plus.views.MultiTouchSupport.MultiTouchZoomListener;
 import net.osmand.plus.views.OsmandMapLayer.DrawSettings;
+import net.osmand.render.RenderingRuleSearchRequest;
+import net.osmand.render.RenderingRuleStorageProperties;
+import net.osmand.render.RenderingRulesStorage;
 import net.osmand.util.MapUtils;
 
 import org.apache.commons.logging.Log;
@@ -62,6 +65,7 @@ public class OsmandMapTileView implements IMapDownloaderCallback {
 	private static final int MAP_FORCE_REFRESH_MESSAGE = OsmAndConstants.UI_HANDLER_MAP_VIEW + 5;
 	private static final int BASE_REFRESH_MESSAGE = OsmAndConstants.UI_HANDLER_MAP_VIEW + 3;
 	protected final static int LOWEST_ZOOM_TO_ROTATE = 9;
+	private static final int MAP_DEFAULT_COLOR = 0xffebe7e4;
 	private boolean MEASURE_FPS = false;
 	private FPSMeasurement main = new FPSMeasurement();
 	private FPSMeasurement additional = new FPSMeasurement();
@@ -69,6 +73,7 @@ public class OsmandMapTileView implements IMapDownloaderCallback {
 	private Activity activity;
 	private OsmandApplication application;
 	protected OsmandSettings settings = null;
+	private Integer defaultColor = null;
 
 	private class FPSMeasurement {
 		int fpsMeasureCount = 0;
@@ -102,6 +107,10 @@ public class OsmandMapTileView implements IMapDownloaderCallback {
 
 	public interface OnClickListener {
 		public boolean onPressEvent(PointF point);
+	}
+
+	public int getDefaultColor() {
+		return defaultColor;
 	}
 
 	protected static final Log LOG = PlatformUtil.getLog(OsmandMapTileView.class);
@@ -593,13 +602,30 @@ public class OsmandMapTileView implements IMapDownloaderCallback {
 	}
 
 	private void fillCanvas(Canvas canvas, DrawSettings drawSettings) {
-		if (drawSettings.isNightMode()) {
-			canvas.drawARGB(255, 100, 100, 100);
-		} else {
-			canvas.drawARGB(255, 225, 225, 225);
+		Integer color = defaultColor;
+		if (color == null) {
+			color = updateDefaultColor(drawSettings.isNightMode());
 		}
+		canvas.drawColor(color);
 	}
 
+	public void resetDefaultColor() {
+		defaultColor = null;
+	}
+
+	private int updateDefaultColor(boolean nightMode) {
+		int color = MAP_DEFAULT_COLOR;
+		RenderingRulesStorage rrs = application.getRendererRegistry().getCurrentSelectedRenderer();
+		if (rrs != null) {
+			RenderingRuleSearchRequest req = new RenderingRuleSearchRequest(rrs);
+			req.setBooleanFilter(rrs.PROPS.R_NIGHT_MODE, nightMode);
+			if (req.searchRenderingAttribute(RenderingRuleStorageProperties.A_DEFAULT_COLOR)) {
+				color = req.getIntPropertyValue(req.ALL.R_ATTR_COLOR_VALUE);
+				defaultColor = color;
+			}
+		}
+		return color;
+	}
 
 	public boolean isMeasureFPS() {
 		return MEASURE_FPS;

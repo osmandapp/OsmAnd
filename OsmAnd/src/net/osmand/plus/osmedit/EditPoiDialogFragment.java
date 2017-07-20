@@ -432,6 +432,7 @@ public class EditPoiDialogFragment extends BaseOsmAndDialogFragment {
 			}
 		}
 		String poiTypeTag = editPoiData.getTagValues().get(EditPoiData.POI_TYPE_TAG);
+		String comment = "";
 		if (poiTypeTag != null) {
 			final PoiType poiType = editPoiData.getAllTranslatedSubTypes().get(poiTypeTag.trim().toLowerCase());
 			if (poiType != null) {
@@ -448,8 +449,10 @@ public class EditPoiDialogFragment extends BaseOsmAndDialogFragment {
 			if (offlineEdit && !Algorithms.isEmpty(poiTypeTag)) {
 				node.putTagNoLC(EditPoiData.POI_TYPE_TAG, poiTypeTag);
 			}
-		} 
-		commitNode(action, node, mOpenstreetmapUtil.getEntityInfo(node.getId()), "", false,
+			String actionString = action == OsmPoint.Action.CREATE ? getString(R.string.default_changeset_add) : getString(R.string.default_changeset_edit);
+			comment = actionString + " " + poiTypeTag;
+		}
+		commitNode(action, node, mOpenstreetmapUtil.getEntityInfo(node.getId()), comment, false,
 				new CallbackWithObject<Node>() {
 
 					@Override

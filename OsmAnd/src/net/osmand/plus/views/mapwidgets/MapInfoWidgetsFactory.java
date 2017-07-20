@@ -127,8 +127,8 @@ public class MapInfoWidgetsFactory {
 				Location currentLoc = map.getMyApplication().getLocationProvider().getLastKnownLocation();
 
 				if (rulerLayer.isShowDistBetweenFingerAndLocation() && currentLoc != null) {
-					if (!cacheSingleTouchPoint.equals(rulerLayer.getSingleTouchPointLatLon())) {
-						cacheSingleTouchPoint = rulerLayer.getSingleTouchPointLatLon();
+					if (!cacheSingleTouchPoint.equals(rulerLayer.getTouchPointLatLon())) {
+						cacheSingleTouchPoint = rulerLayer.getTouchPointLatLon();
 						setDistanceText(cacheSingleTouchPoint.getLatitude(), cacheSingleTouchPoint.getLongitude(),
 								currentLoc.getLatitude(), currentLoc.getLongitude());
 						fingerAndLocDistWasShown = true;

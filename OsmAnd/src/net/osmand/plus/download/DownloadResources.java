@@ -264,7 +264,10 @@ public class DownloadResources extends DownloadResourceGroup {
 		DownloadResourceGroup fonts = new DownloadResourceGroup(otherGroup, DownloadResourceGroupType.FONTS_HEADER);
 
 		DownloadResourceGroup worldMaps = new DownloadResourceGroup(this, DownloadResourceGroupType.WORLD_MAPS);
-		DownloadResourceGroup nauticalMaps = new DownloadResourceGroup(this, DownloadResourceGroupType.NAUTICAL_MAPS_HEADER);
+
+		DownloadResourceGroup nauticalMapsGroup = new DownloadResourceGroup(this, DownloadResourceGroupType.NAUTICAL_MAPS_GROUP);
+		DownloadResourceGroup nauticalMapsScreen = new DownloadResourceGroup(nauticalMapsGroup, DownloadResourceGroupType.NAUTICAL_MAPS);
+		DownloadResourceGroup nauticalMaps = new DownloadResourceGroup(nauticalMapsGroup, DownloadResourceGroupType.NAUTICAL_MAPS_HEADER);
 
 		Map<WorldRegion, List<IndexItem> > groupByRegion = new LinkedHashMap<WorldRegion, List<IndexItem>>();
 		OsmandRegions regs = app.getRegions();
@@ -346,7 +349,11 @@ public class DownloadResources extends DownloadResourceGroup {
 		// 2. if there is no subregions and there only 1 index item it could be merged to the level up - objection there is no such maps
 		// 3. if hillshade/srtm is disabled, all maps from inner level could be combined into 1 
 		addGroup(worldMaps);
-		addGroup(nauticalMaps);
+
+		nauticalMapsScreen.addGroup(nauticalMaps);
+		nauticalMapsGroup.addGroup(nauticalMapsScreen);
+		addGroup(nauticalMapsGroup);
+
 		if (otherMaps.size() > 0) {
 			addGroup(otherMapsGroup);
 		}

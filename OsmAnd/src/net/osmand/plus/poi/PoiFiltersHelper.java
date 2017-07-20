@@ -1,5 +1,7 @@
 package net.osmand.plus.poi;
 
+import android.support.annotation.NonNull;
+
 import net.osmand.osm.AbstractPoiType;
 import net.osmand.osm.MapPoiTypes;
 import net.osmand.osm.PoiCategory;
@@ -12,15 +14,9 @@ import net.osmand.plus.api.SQLiteAPI.SQLiteCursor;
 import net.osmand.plus.api.SQLiteAPI.SQLiteStatement;
 import net.osmand.util.Algorithms;
 
-import android.support.annotation.NonNull;
-import android.util.ArraySet;
-
-import java.lang.reflect.Array;
-import java.text.Collator;
 import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.Collections;
-import java.util.Comparator;
 import java.util.HashSet;
 import java.util.Iterator;
 import java.util.LinkedHashMap;
@@ -198,7 +194,7 @@ public class PoiFiltersHelper {
 	}
 
 	public List<PoiUIFilter> getTopDefinedPoiFilters() {
-		if (cacheTopStandardFilters == null) {
+//		if (cacheTopStandardFilters == null) {
 			List<PoiUIFilter> top = new ArrayList<PoiUIFilter>();
 			// user defined
 			top.addAll(getUserDefinedPoiFilters());
@@ -213,7 +209,7 @@ public class PoiFiltersHelper {
 			}
 			Collections.sort(top);
 			cacheTopStandardFilters = top;
-		}
+//		}
 		List<PoiUIFilter> result = new ArrayList<PoiUIFilter>();
 		result.addAll(cacheTopStandardFilters);
 		result.add(getShowAllPOIFilter());
@@ -406,7 +402,7 @@ public class PoiFiltersHelper {
 			if (conn.getVersion() == 0 || DATABASE_VERSION != conn.getVersion()) {
 				if (readonly) {
 					conn.close();
-					conn = context.getSQLiteAPI().getOrCreateDatabase(DATABASE_NAME, readonly);
+					conn = context.getSQLiteAPI().getOrCreateDatabase(DATABASE_NAME, false);
 				}
 				if (conn.getVersion() == 0) {
 					conn.setVersion(DATABASE_VERSION);

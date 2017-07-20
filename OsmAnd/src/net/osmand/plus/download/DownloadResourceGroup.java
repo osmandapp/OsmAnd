@@ -41,10 +41,12 @@ public class DownloadResourceGroup {
 		// headers with font items
 		FONTS_HEADER(R.string.fonts_header),
 		// headers with resources
+		NAUTICAL_MAPS_GROUP(R.string.nautical_maps),
 		OTHER_MAPS_GROUP(R.string.download_select_map_types),
 		OTHER_GROUP(R.string.other_menu_group),
 		SUBREGIONS(R.string.regions),
 		// screen items
+		NAUTICAL_MAPS(R.string.nautical_maps),
 		VOICE_TTS(R.string.index_name_tts_voice),
 		FONTS(R.string.fonts_header),
 		VOICE_REC(R.string.index_name_voice),
@@ -60,7 +62,7 @@ public class DownloadResourceGroup {
 
 		public boolean isScreen() {
 			return this == WORLD || this == REGION || this == VOICE_TTS
-					|| this == VOICE_REC || this == OTHER_MAPS || this == FONTS;
+					|| this == VOICE_REC || this == OTHER_MAPS || this == FONTS || this == NAUTICAL_MAPS;
 		}
 
 		public String getDefaultId() {
@@ -72,7 +74,8 @@ public class DownloadResourceGroup {
 		}
 
 		public boolean containsIndexItem() {
-			return isHeader() && this != SUBREGIONS && this != OTHER_GROUP && this != OTHER_MAPS_GROUP;
+			return isHeader() && this != SUBREGIONS && this != OTHER_GROUP && this != OTHER_MAPS_GROUP
+					&& this != NAUTICAL_MAPS_GROUP;
 		}
 
 		public boolean isHeader() {
@@ -80,7 +83,7 @@ public class DownloadResourceGroup {
 					|| this == WORLD_MAPS || this == REGION_MAPS || this == OTHER_GROUP
 					|| this == HILLSHADE_HEADER || this == SRTM_HEADER
 					|| this == OTHER_MAPS_HEADER || this == OTHER_MAPS_GROUP
-					|| this == FONTS_HEADER || this == NAUTICAL_MAPS_HEADER;
+					|| this == FONTS_HEADER || this == NAUTICAL_MAPS_HEADER || this == NAUTICAL_MAPS_GROUP;
 		}
 
 		public static String getVoiceTTSId() {

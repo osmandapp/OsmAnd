@@ -2667,8 +2667,8 @@
     <string name="fonts_header">Шрифти для мапи</string>
     <string name="right_side_navigation">Правосторонній рух</string>
     <string name="routing_attr_driving_style_balance_name">Збалансований</string>
-    <string name="routing_attr_driving_style_safety_name">Безпечний</string>
-    <string name="routing_attr_driving_style_speed_name">Швидкісний</string>
+    <string name="routing_attr_driving_style_safety_name">Надавати перевагу путівцям</string>
+    <string name="routing_attr_driving_style_speed_name">Враховувати основні дороги</string>
     <string name="animate_my_location">Анімувати моє місце розташування</string>
     <string name="animate_my_location_desc">Задіяти анімацію мого місця розташування під час навігації</string>
     <string name="do_not_show_startup_messages">Не показувати повідомлення при запуску</string>
@@ -2944,4 +2944,9 @@
 \n
 \n</string>
     <string name="rendering_value_translucent_pink_name">Напівпрозорий рожевий</string>
+    <string name="quick_action_resume_pause_navigation">Відновити/призупинити навігацію</string>
+    <string name="quick_action_resume_pause_navigation_descr">Натисніть цю кнопку, щоб призупинити навігацію або відновити її, якщо вона вже була призупинена.</string>
+    <string name="quick_action_show_navigation_finish_dialog">Показати вікно, щоб завершити навігацію</string>
+    <string name="quick_action_start_stop_navigation">Початок/завершення навігації</string>
+    <string name="quick_action_start_stop_navigation_descr">Натисніть цю кнопку, щоб запустити навігацію або зупинити її, якщо вона вже була запущена.</string>
     </resources>

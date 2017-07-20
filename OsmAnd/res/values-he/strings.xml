@@ -1213,4 +1213,9 @@
     <string name="mapillary_menu_edit_text_hint">הקלדת שם משתמש</string>
     <string name="mapillary_menu_descr_username">הצגת תמונות שנוספו על ידי משתמש מסוים.</string>
     <string name="mapillary_menu_title_username">שם משתמש</string>
+    <string name="mapillary_menu_filter_description">אפשר לסנן תמונות לפי השולח או לפי תאריך. המסננים חלים רק על תקריב בגודל מסוים.</string>
+    <string name="map_widget_ruler_control">מד זווית</string>
+    <string name="shared_string_permissions">הרשאות</string>
+    <string name="import_gpx_failed_descr">ל־OsmAnd אין אפשרות לייבא את הקובץ. נא לוודא של־OsmAnd יש הרשאה לקרוא קבצים מהמיקום הזה.</string>
+    <string name="distance_moving">המרחק תוקן</string>
     </resources>
