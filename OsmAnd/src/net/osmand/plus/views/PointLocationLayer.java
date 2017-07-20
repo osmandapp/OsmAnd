@@ -76,7 +76,7 @@ public class PointLocationLayer extends OsmandMapLayer implements ContextMenuLay
 	private boolean isLocationOutdated() {
 		if (locationProvider.getLastKnownLocation() != null) {
 			return System.currentTimeMillis() - locationProvider.getLastKnownLocation().getTime() >
-					OsmAndLocationProvider.LOCATION_SHELF_LIFE_FOR_ICON;
+					OsmAndLocationProvider.STALE_LOCATION_TIMEOUT_FOR_ICON;
 		}
 		return false;
 	}

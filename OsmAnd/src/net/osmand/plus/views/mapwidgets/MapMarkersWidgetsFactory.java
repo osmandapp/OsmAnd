@@ -194,7 +194,7 @@ public class MapMarkersWidgetsFactory {
 			} else if (lastKnownPosition == null) {
 				loc = null;
 			} else {
-				if (System.currentTimeMillis() - lastKnownPosition.getTime() < OsmAndLocationProvider.LOCATION_SHELF_LIFE) {
+				if (System.currentTimeMillis() - lastKnownPosition.getTime() < OsmAndLocationProvider.STALE_LOCATION_TIMEOUT) {
 					loc = new LatLon(lastKnownPosition.getLatitude(), lastKnownPosition.getLongitude());
 				} else {
 					loc = null;
