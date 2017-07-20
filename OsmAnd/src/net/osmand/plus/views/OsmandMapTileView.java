@@ -658,6 +658,10 @@ public class OsmandMapTileView implements IMapDownloaderCallback {
 			}
 		}
 
+		if (activity instanceof MapActivity && !((MapActivity) activity).isActivityDestroyed() &&
+				((MapActivity) activity).getSupportFragmentManager().findFragmentByTag(SecondSplashScreenFragment.TAG) != null) {
+			((MapActivity) activity).dismissSecondSplashScreen();
+		}
 		for (int i = 0; i < layers.size(); i++) {
 			try {
 				OsmandMapLayer layer = layers.get(i);
@@ -681,9 +685,6 @@ public class OsmandMapTileView implements IMapDownloaderCallback {
 			drawMapPosition(canvas, multiTouchSupport.getCenterPoint().x, multiTouchSupport.getCenterPoint().y);
 		} else if (doubleTapScaleDetector.isInZoomMode()) {
 			drawMapPosition(canvas, doubleTapScaleDetector.getCenterX(), doubleTapScaleDetector.getCenterY());
-		}
-		if (activity instanceof MapActivity && !((MapActivity) activity).isActivityDestroyed() && ((MapActivity) activity).getSupportFragmentManager().findFragmentByTag(SecondSplashScreenFragment.TAG) != null) {
-			((MapActivity) activity).dismissSecondSplashScreen();
 		}
 	}
 
