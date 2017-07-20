@@ -113,7 +113,7 @@ public class MapInfoWidgetsFactory {
 	}
 
 	public TextInfoWidget createRulerControl(final MapActivity map) {
-		final String title = "-";
+		final String title = "—";
 		final TextInfoWidget rulerControl = new TextInfoWidget(map) {
 			RulerControlLayer rulerLayer = map.getMapLayers().getRulerControlLayer();
 			LatLon cacheFirstTouchPoint = new LatLon(0, 0);

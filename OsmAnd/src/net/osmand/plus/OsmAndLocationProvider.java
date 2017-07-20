@@ -48,6 +48,7 @@ public class OsmAndLocationProvider implements SensorEventListener {
 
 	public static final String SIMULATED_PROVIDER = "OsmAnd";
 
+	public static final long LOCATION_SHELF_LIFE = 1000 * 60 * 60; // 60 minutes
 
 	public interface OsmAndLocationListener {
 		void updateLocation(net.osmand.Location location);
