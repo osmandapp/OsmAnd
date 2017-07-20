@@ -1218,4 +1218,37 @@
     <string name="shared_string_permissions">הרשאות</string>
     <string name="import_gpx_failed_descr">ל־OsmAnd אין אפשרות לייבא את הקובץ. נא לוודא של־OsmAnd יש הרשאה לקרוא קבצים מהמיקום הזה.</string>
     <string name="distance_moving">המרחק תוקן</string>
+    <string name="quick_action_resume_pause_navigation">הפסקה/המשך בניווט</string>
+    <string name="quick_action_resume_pause_navigation_descr">יש ללחוץ על כפתור זה כדי להפסיק את הניווט או כדי להמשיך אם הוא כבר הופסק.</string>
+    <string name="quick_action_show_navigation_finish_dialog">הצגת דו־שיח סיום הניווט</string>
+    <string name="quick_action_start_stop_navigation">התחלה/סיום הניווט</string>
+    <string name="quick_action_start_stop_navigation_descr">יש ללחוץ על כפתור זה כדי להתחיל בניווט או כדי לעצור אותו אם הוא כבר החל.</string>
+    <string name="store_tracks_in_monthly_directories_descrp">אחסון המסלולים המוקלטים בתת־תיקיות לפי חודש ההקלטה (למשל: 2017-01).</string>
+    <string name="mapillary_image">תמונת Mapillary</string>
+    <string name="open_mapillary">פתיחת Mapillary</string>
+    <string name="shared_string_install">התקנה</string>
+    <string name="improve_coverage_mapillary">שיפור כיסוי התמונות עם Mapillary</string>
+    <string name="improve_coverage_install_mapillary_desc">ניתן לצלם סדרת תמונות משלך ולצרף אותם למיקום הזה במפה.
+\n
+\nכדי לעשות זאת עליך להתקין את היישום של Mapillary מחנות היישומים Google Play.</string>
+    <string name="online_photos">תמונות מקוונות</string>
+    <string name="shared_string_add_photos">הוספת תמונות</string>
+    <string name="no_photos_descr">אין לנו תמונות במיקום זה</string>
+    <string name="mapillary_action_descr">ניתן לתרום עם נופים ברמת הרחוב למיקום זה עם Mapillary.</string>
+    <string name="mapillary_widget">וידג׳ט Mapillary</string>
+    <string name="mapillary_widget_descr">מאפשר לך לתרום במהירות ל־Mapillary</string>
+    <string name="mapillary_descr">תמונות מקוונות ברמת רחוב לכולם. היכרות עם מקומות חדשים, שיתוף פעולה וצילום העולם.</string>
+    <string name="mapillary">Mapillary</string>
+    <string name="plugin_mapillary_descr">תמונות ברמת הרחוב לכולם. להכיר מקומות, לשתף פעולה ולצלם את העולם.</string>
+    <string name="private_access_routing_req">היעד שלך ממוקם באיזור עם גישה פרטית לאפשר גישה לכבישים הפרטיים לצורך טיול זה?</string>
+    <string name="restart_search">חיפוש מחדש</string>
+    <string name="increase_search_radius">הגדלת רדיוס החיפוש</string>
+    <string name="nothing_found">לא נמצא כלום :(</string>
+    <string name="nothing_found_descr">יש לשנות את הביטוי לחיפוש או להגדיל את רדיוס החיפוש</string>
+    <string name="quick_action_showhide_osmbugs_title">הצגה/הסתרה של הערות OSM</string>
+    <string name="quick_action_osmbugs_show">הצגת הערות OSM</string>
+    <string name="quick_action_osmbugs_hide">הסתרת הערות OSM</string>
+    <string name="quick_action_showhide_osmbugs_descr">לחיצה על כפתור הפעולה תגרום להצגת או הסתרה של הערות OSM על המפה.</string>
+    <string name="sorted_by_distance">מסודר לפי מרחק</string>
+    <string name="search_favorites">חיפוש במועדפים</string>
     </resources>
