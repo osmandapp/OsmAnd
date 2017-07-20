@@ -1,4 +1,5 @@
-<?xml version="1.0" encoding="UTF-8" standalone="no"?><resources>
+<?xml version='1.0' encoding='UTF-8'?>
+<resources>
     <string name="always_center_position_on_map">Ammustra sa positzione semper a su tzentru</string>
     <string name="voice_pref_title">Boghe</string>
     <string name="misc_pref_title">Mistura</string>
@@ -615,7 +616,7 @@ Boles protzèdere cun una registratzione noa?</string>
     <string name="avoid_in_routing_title">Istransi…</string>
     <string name="avoid_in_routing_descr">Istransi sas istradas a pagamentu, isterradas, traghetos</string>
     <string name="map_widget_fluorescent">Camineras fluorescentes</string>
-    <string name="map_widget_show_ruler">Iscala gràfica</string>
+    <string name="map_widget_show_ruler">Righellu</string>
     <string name="map_widget_view_direction">Diretzione de sa visuale</string>
     <string name="map_widget_transparent">Butones trasparentes</string>
     <string name="bg_service_sleep_mode_off">Abìlita\n modalidade \"de isfundu\"</string>
@@ -755,7 +756,7 @@ Memòria in proportzione %4$s MB (lìmite de Android %5$s MB, Dalvik %6$s MB).</
     <string name="validate_gpx_upload_name_pwd">Imposta impitadore e crae (password) de OSM pro carrigare documentos GPX.</string>
     <string name="default_buttons_support">Sustènne</string>
     <string name="support_new_features">Sustènne caraterìsticas noas</string>
-    <string name="show_ruler_level">Ammustra s’iscala gràfica</string>
+    <string name="show_ruler_level">Ammustra su righellu</string>
     <string name="info_button">Info</string>
     <string name="back_to_location">Torra a sa positzione</string>
     <string name="shared_string_help">Agiudu</string>
@@ -2044,7 +2045,7 @@ Lon %2$s</string>
     <string name="use_drawer_btn">Imprea sa mapa</string>
     <string name="access_from_map_description">Su butone de su menù alluet su pannellu de controllu, imbetzes de su menù</string>
     <string name="access_from_map">Intra dae sa mapa</string>
-    <string name="release_2_2">\\022 Interfache impitadore noa pro incarcare positziones in sa mapa e in àteros ischermos 
+    <string name="release_2_2">\\u2022 Interfache impitadore noa pro incarcare positziones in sa mapa e in àteros ischermos
 \n 
 \n • S\'ischermu de sa mapa est como postu come prima cosa a s’allumìngiu de s’aplicatzione, semper chi \'Ammustra pannellu de controllu in s\'allumìngiu\' no siet ischertadu 
 \n 
@@ -2203,7 +2204,7 @@ Si istimas OsmAnd e OSM e los boles suportare, custa est una manera perfeta pro 
     <string name="storage_directory_shared">Memòria cumpartzida</string>
     <string name="full_report">Raportu cumpridu</string>
     <string name="open_street_map_login_and_pass">Nùmene impreadore e crae de OpenStreetMap</string>
-    <string name="release_2_3">\\022 OSM Live. Suporta sos contribuidores a sa mapa e sos isvilupadores pro otènnere mapas agiornadas cada ora. 
+    <string name="release_2_3">\\u2022 OSM Live. Suporta sos contribuidores a sa mapa e sos isvilupadores pro otènnere mapas agiornadas cada ora.
 \n
 \n • Marcadores mapa. Una manera noa de ischertare in manera lestra logos in sa mapa.
 \n
@@ -2288,7 +2289,7 @@ Si istimas OsmAnd e OSM e los boles suportare, custa est una manera perfeta pro 
     <string name="confirmation_to_delete_history_items">Boles iscantzellare sos elementos ischertados de s\'istòria?</string>
     <string name="coords_search">Chirca cun coordinatas</string>
     <string name="advanced_coords_search">Chirca avantzada cun coordinatas</string>
-    <string name="release_2_4">"\\022 Chirca de testu noa e potente meda 
+    <string name="release_2_4">"\\u2022 Chirca de testu noa e potente meda
 \n 
 \n • Integratzione intre su sistema àudio de sa màchina e su telèfono pro mèdiu de Bluetooth 
 \n 
@@ -2373,7 +2374,7 @@ Si istimas OsmAnd e OSM e los boles suportare, custa est una manera perfeta pro 
     <string name="rendering_value_dark_brown_name">Castàngiu iscuru</string>
     <string name="rendering_attr_contourColorScheme_name">Ischema de colores pro sas lìnias de livellu</string>
     <string name="rendering_attr_surfaceIntegrity_name">Integridade superfitziale istradale</string>
-    <string name="release_2_5">\\022 Iconas incarcàbiles in sa mapa 
+    <string name="release_2_5">\\u2022 Iconas incarcàbiles in sa mapa
 \n 
 \n • Chirca filtrada de PDI potente meda: chirca sos ristorantes pro casta de coghina, o sos campègios cun caraterìsticas particulares 
 \n 
@@ -2504,7 +2505,7 @@ Pro praghere iscrie su còdighe intreu</string>
     <string name="auto_split_recording_title">Iscroba automaticamente sas registratziones</string>
 	<string name="auto_split_recording_descr">Incumintza unu segmentu nou a pustis de una pàusa de 6 minutos, una rasta noa a pustis de 2 oras o unu documentu nou si sa pàusa est istada prus longa e sa data est cambiada.</string>
     <string name="quick_action_page_list_descr">Incarchende su butone pro s\'atzione as a cùrrere pro sa lista in suta.</string>
-    <string name="release_2_6">"\\022 Funtzionalidae noa: Butone pro sas atziones lestras 
+    <string name="release_2_6">"\\u2022 Funtzionalidae noa: Butone pro sas atziones lestras
 \n 
 \n • Megioramentu de sa risposta de s\'ichermu a sos incarcos 
 \n 
@@ -2558,16 +2559,16 @@ Pro praghere iscrie su còdighe intreu</string>
     <string name="points_delete_multiple">As a iscantzellare %1$d puntu/os. Seguru ses?</string>
     <string name="track_points_category_name">Puntos importantes in custa àndala</string>
     <string name="add_new_folder">Annanghe una cartella noa</string>
-    <string name="route_points_category_name">Puntos de colare in cust\'àndala</string>
+    <string name="route_points_category_name">Bortadas de colare in cust\'àndala</string>
     <string name="shared_string_slope">Caladòrgia</string>
     <string name="lang_ber">Bèrberu</string>
     <string name="relief_smoothness_factor_descr">Terrinos preferidos: in paris o cun cùcuros</string>
     <string name="routing_attr_relief_smoothness_factor_hills_name">Cùcuros/montigros</string>
     <string name="routing_attr_relief_smoothness_factor_plains_name">Pagos cùcuros</string>
     <string name="routing_attr_relief_smoothness_factor_more_plains_name">Terrinu in paris</string>
-    <string name="routing_attr_driving_style_speed_name">Lestru</string>
+    <string name="routing_attr_driving_style_speed_name">Privilègia sas istradas printzipales</string>
     <string name="routing_attr_driving_style_balance_name">Bilantziadu</string>
-    <string name="routing_attr_driving_style_safety_name">Seguru</string>
+    <string name="routing_attr_driving_style_safety_name">Privilègia sas istradas segundàrias</string>
     <string name="routing_attr_relief_smoothness_factor_name">Valore de variatzione de s\'artària</string>
     <string name="full_version_thanks">Gràtzias pro àere comporadu sa versione intrea de OsmAnd!</string>
     <string name="do_not_send_anonymous_app_usage">No imbies informatziones anònimas a pitzu de s\'impreu de s\'aplicatzione</string>
@@ -2695,4 +2696,23 @@ Pro praghere iscrie su còdighe intreu</string>
     <string name="store_tracks_in_monthly_directories_descrp">Sarva sas rastas registradas in suta-cartellas diferentes pro mese de registratzione (es. 2017-01).</string>
     <string name="of">%1$d de %2$d</string>
     <string name="moving_time">Tempus in movimentu</string>
+    <string name="max_min">Mass/Min</string>
+    <string name="min_max">Min/Mass</string>
+    <string name="release_2_7">\\u2022 Estensione Mapillary cun immàgines a livellu de s\'istrada
+\n
+\n • Widget righellu pro medire sas distàntzias
+\n
+\n • Intervallos iscrobados GPX cun informatziones a pitzu de sa rasta tua
+\n
+\n • Àteros megioramentos e curretziones de errores
+\n
+\n</string>
+    <string name="rendering_value_translucent_pink_name">Rosa translùtzidu</string>
+    <string name="average">Mèdiu</string>
+    <string name="ascent_descent">Ascendente/Discendente</string>
+    <string name="quick_action_resume_pause_navigation">Faghe sighire/Pone in pàusa su nàvigu</string>
+    <string name="quick_action_resume_pause_navigation_descr">Incarca custu butone pro pònnere in pàusa su nàvigu, o pru lu sighire si est giai in pàusa.</string>
+    <string name="quick_action_show_navigation_finish_dialog">Ammustra sa ventana pro sa fine de su nàvigu</string>
+    <string name="quick_action_start_stop_navigation">Incumintza/Acaba su nàvigu</string>
+    <string name="quick_action_start_stop_navigation_descr">Incarca custu butone pro incumintzare su nàvigu, o pro l\'acabare si est giai incumintzadu.</string>
     </resources>

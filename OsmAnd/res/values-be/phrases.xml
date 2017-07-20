@@ -961,10 +961,10 @@
 	<string name="poi_fax">Факс</string>
 	<string name="facebook">Фэйсбук</string>
 	<string name="poi_mobile">Сотавы тэлефон</string>
-	<string name="poi_animal_shelter_dog">Тып прытулку: для сабак</string>
-	<string name="poi_animal_shelter_cat">Тып прытулку: для котак</string>
-	<string name="poi_animal_shelter_dog_cat">Тып прытулку: для сабак і котак</string>
-	<string name="poi_animal_shelter_bird">Тып прытулку: для птушак</string>
+	<string name="poi_animal_shelter_dog">Сабакі</string>
+	<string name="poi_animal_shelter_cat">Каты</string>
+	<string name="poi_animal_shelter_dog_cat">Сабакі, каты</string>
+	<string name="poi_animal_shelter_bird">Птушкі</string>
 
 <string name="poi_shower">Душ</string>
 	<string name="poi_recycling_centre">Пункт прыёму</string>
@@ -3448,5 +3448,20 @@
 	<string name="poi_generator_output_electricity_no">Выхад (электрычнасць): не</string>
 
 	<string name="poi_owner">Уладальнік</string>
+
+<string name="poi_animal_shelter_type">Прымаюцца жывёлы</string>
+	<string name="poi_animal_shelter_purpose">Мэта</string>
+
+<string name="poi_animal_shelter_wildlife">Звяры</string>
+	<string name="poi_animal_shelter_horse">Коні</string>
+	<string name="poi_animal_shelter_mammal">Сысуны</string>
+	<string name="poi_animal_shelter_fish">Рыбы</string>
+
+	<string name="poi_animal_shelter_purpose_adoption_yes">Апека: так</string>
+	<string name="poi_animal_shelter_purpose_adoption_no">Апека: не</string>
+	<string name="poi_animal_shelter_purpose_release_yes">Выпуск: так</string>
+	<string name="poi_animal_shelter_purpose_release_no">Выпуск: не</string>
+
+	<string name="poi_spaceport">Касмадром</string>
 
 </resources>

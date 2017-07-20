@@ -1,5 +1,7 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources>
+    <dimen name="acceptable_touch_radius">48dp</dimen>
+
 	<dimen name="dialog_button_height">36dp</dimen>
 	<dimen name="undo_bottom_offset">15dp</dimen>
 	<dimen name="touch_slop">32dp</dimen>
@@ -10,7 +12,7 @@
 	<dimen name="dashboard_land_width">360dp</dimen>
     <dimen name="dashboard_map_toolbar">56dp</dimen>
 	<dimen name="dash_parking_height">78dp</dimen>
-	
+
     <dimen name="subHeaderPadding">2dp</dimen>
     <dimen name="subHeaderMarginLeft">15dp</dimen>
     <dimen name="showAllButtonMarginRight">14dp</dimen>
@@ -30,15 +32,15 @@
     <dimen name="dashCardMargin">4dp</dimen>
 	<dimen name="abp__shadow_height">4dp</dimen>
     <dimen name="dashFABMargin">0dp</dimen>
-    
+
     <dimen name="list_content_padding">16dp</dimen>
     <dimen name="list_header_padding">8dp</dimen>
-    
+
 	<dimen name="list_header_top_margin">16dp</dimen>
 	<dimen name="list_header_settings_top_margin">10dp</dimen>
 	<dimen name="list_header_text_left_margin">12dp</dimen>
 	<dimen name="list_header_bottom_margin">8dp</dimen>
-	
+
 	<dimen name="favorites_icon_right_margin">24dp</dimen>
 	<dimen name="local_index_check_right_margin">10dp</dimen>
 	<dimen name="favorites_icon_top_margin">13dp</dimen>
@@ -50,8 +52,8 @@
 	<dimen name="gpx_small_icon_margin">3dp</dimen>
 	<dimen name="gpx_small_text_margin">14dp</dimen>
 	<dimen name="gpx_text_top_margin">6dp</dimen>
-	
-	
+
+
 	<dimen name="dashboard_parking_left_margin">16dp</dimen>
 	<dimen name="dashboard_parking_icon_size">48dp</dimen>
 	<!--  map buttons -->
@@ -69,8 +71,8 @@
 	<dimen name="map_ruler_width">120dp</dimen>
 	<dimen name="map_ruler_bottom_margin">9dp</dimen>
 	<dimen name="map_alarm_size">78dp</dimen>
-	
-	
+
+
 	<dimen name="map_alarm_bottom_margin">87dp</dimen>
 	<dimen name="map_alarm_bottom_margin_land">57dp</dimen>
 	<dimen name="map_button_shadow_height">85dp</dimen>
@@ -83,8 +85,8 @@
 	<dimen name="map_button_spacing_land">6dp</dimen>
 	<dimen name="map_button_margin">6dp</dimen>
 	<dimen name="map_routing_progress_width">100dp</dimen>
-	
-	
+
+
 	<dimen name="map_button_inset_shadow">2dp</dimen>
 	<dimen name="map_button_inset">2dp</dimen>
 	<dimen name="map_button_rect_rad">3dp</dimen>
@@ -94,9 +96,9 @@
 	<dimen name="map_route_planning_land_width_minus_shadow">306dp</dimen>
 	<dimen name="map_route_planning_max_height">330dp</dimen>
 	<dimen name="map_minwidth_widget">100dp</dimen>
-	
-	
-	
+
+
+
 	<dimen name="map_widget_text_size">23sp</dimen>
 	<dimen name="map_widget_text_size_small">15sp</dimen>
 	<dimen name="map_button_text_size">18sp</dimen>
@@ -104,7 +106,7 @@
 	<dimen name="map_widget_text_bottom_margin">1sp</dimen>
 	<dimen name="map_widget_text_small_bottom_margin">3sp</dimen>
 	<dimen name="map_widget_icon_margin">2dp</dimen>
-	
+
 	<dimen name="dash_margin">2dp</dimen>
 	<dimen name="dash_margin_h">6dp</dimen>
 
@@ -138,4 +140,7 @@
 	<dimen name="default_split_segments_sub">10sp</dimen>
 
 	<dimen name="dialog_header_text_size">20sp</dimen>
+
+	<dimen name="splash_screen_logo_top">150dp</dimen>
+	<dimen name="splash_screen_text_bottom">128dp</dimen>
 </resources>

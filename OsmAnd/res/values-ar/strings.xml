@@ -1,4 +1,5 @@
-<?xml version="1.0" encoding="UTF-8" standalone="no"?><resources><string name="recording_context_menu_show">اظهر</string>
+<?xml version='1.0' encoding='UTF-8'?>
+<resources><string name="recording_context_menu_show">اظهر</string>
     <string name="av_def_action_picture">التقط صورة</string>
     
     <string name="av_def_action_video">تسجيل الفيديو</string>
@@ -2568,8 +2569,8 @@
     <string name="driving_region_automatic">آلي</string>
     <string name="parking_options">خيارات مواقف السيارات</string>
     <string name="full_version_thanks">شكرا لكم لاقتناء النسخة الكاملة من أوسماند !</string>
-    <string name="routing_attr_driving_style_speed_name">السرعة</string>
-    <string name="routing_attr_driving_style_safety_name">الأمان</string>
+    <string name="routing_attr_driving_style_speed_name">تفضيل الطرق الرئيسية</string>
+    <string name="routing_attr_driving_style_safety_name">تفضيل الشوارع الجانبية</string>
     <string name="gpx_track">المسار</string>
     <string name="select_gpx_folder">إختر مجلد المسار</string>
     <string name="shared_string_tracks">المسارات</string>
@@ -2701,4 +2702,16 @@
     <string name="max_min">أقصى/أدنى</string>
     
     <string name="min_max">الأدنى/الأقصى</string>
+    <string name="release_2_7">/022 اضافة برنامج مابيلاري المساعد بمستوى صور الشوارع
+\n • ويدجت مسطرة لقياس المسافة
+\n • تقسيم فترات فصل الـ GPX بمعلومات مفصلة حول مسارك
+\n • تحسينات وإصلاحات للشوائب
+\n
+\n</string>
+    <string name="rendering_value_translucent_pink_name">وردي شفاف</string>
+    <string name="quick_action_resume_pause_navigation">استئناف/وقف الملاحة</string>
+    <string name="quick_action_resume_pause_navigation_descr">اضغط على هذا الزر لإيقاف الملاحة، أو استئنافها إذا كانت موقفة مسبقا.</string>
+    <string name="quick_action_show_navigation_finish_dialog">إظهار حوار انتهاء الملاحة</string>
+    <string name="quick_action_start_stop_navigation">بدء/انهاء الملاحة</string>
+    <string name="quick_action_start_stop_navigation_descr">اضغط على هذا الزر لبدء الملاحة، أو لوقفها إذا ما كانت قد بدأت مسبقا.</string>
     </resources>

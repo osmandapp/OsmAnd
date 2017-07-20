@@ -1,4 +1,5 @@
-<?xml version="1.0" encoding="UTF-8" standalone="no"?><resources>
+<?xml version='1.0' encoding='UTF-8'?>
+<resources>
     <string name="offline_edition">Modifications hors-ligne</string>
     <string name="offline_edition_descr">Toujours utiliser l\'édition hors-ligne</string>
 
@@ -418,10 +419,10 @@ Au-delà la navigation bascule automatiquement sur le service en ligne CloudMade
 \nVous ne pourrez pas en télécharger d\'internet, seules les cartes présentes seront accessibles.</string>
     <string name="unzipping_file">Décompression du fichier…</string>
     <string name="route_tr">Tournez à droite et continuez</string>
-    <string name="route_tshr">Braquez sur la droite et continuez</string>
+    <string name="route_tshr">Tournez franchement à droite et continuez</string>
     <string name="route_tslr">Tournez légèrement vers la droite et continuez</string>
     <string name="route_tl">Tournez à gauche et continuez</string>
-    <string name="route_tshl">Braquez sur la gauche et continuez</string>
+    <string name="route_tshl">Tournez franchement à gauche et continuez</string>
     <string name="route_tsll">Tournez légèrement vers la gauche et continuez</string>
     <string name="route_tu">Faites demi-tour et continuez</string>
     <string name="route_head">Avancez</string>
@@ -701,7 +702,7 @@ Les cartes tuiles peuvent être obtenues directement en ligne ou peuvent être p
     <string name="osm_editing_plugin_description">Grâce à ce greffon vous pouvez gérer vos contributions à OpenStreetMap (OSM) directement depuis l\'application OsmAnd. Par exemple : créer ou modifier les points d\'intérêt OSM, déclarer ou commenter les notes OSM et envoyer vos traces GPX (nécessite un compte OSM). OpenStreetMap est une communauté ouverte de cartographie publique. Pour plus de détails, consultez https://openstreetmap.org.</string>
     <string name="vector_maps_may_display_faster_on_some_devices">Cartes vectorielles (hors-ligne) peuvent s\'afficher plus rapidement. Peut ne pas fonctionner sur certains appareils.</string>
 
-    <string name="play_commands_of_currently_selected_voice">Diffuse les commandes sonores disponibles pour la voix sélectionnée</string>
+    <string name="play_commands_of_currently_selected_voice">Sélectionnez une voix et testez les annonces vocales</string>
     <string name="debugging_and_development">Débogage et développement OsmAnd</string>
     <string name="native_rendering">Rendu natif</string>
 
@@ -943,7 +944,7 @@ Fonctionnalités principales :
     <string name="target_point">Étape %1$s</string>
     <string name="target_points">Itinéraire</string>
     <string name="intermediate_point_too_far">Étape %1$s trop éloignée de la route la plus proche.</string>
-    <string name="arrived_at_intermediate_point">Vous avez atteint l\'étape intermédiaire</string>
+    <string name="arrived_at_intermediate_point">Vous êtes arrivés à l\'étape intermédiaire</string>
     <string name="context_menu_item_intermediate_point">Ajouter comme étape</string>
     <string name="map_widget_intermediate_distance">Étape</string>
     <string name="ending_point_too_far">Point d\'arrivée trop éloigné de la route la plus proche.</string>
@@ -1108,7 +1109,7 @@ Les données globales (entre 70 degrés Nord et 70 degrés Sud) sont basées sur
     <string name="files_limit">Encore %1$d téléchargements possibles</string>
     <string name="available_downloads_left">Vous pouvez encore télécharger %1$d fichier(s).</string>
     <string name="install_paid">Version complète</string>
-    <string name="use_magnetic_sensor_descr">Utiliser le magnétomètre pour déterminer l\'orientation de la boussole au lieu du capteur d\'orientation</string>
+    <string name="use_magnetic_sensor_descr">Utiliser le capteur magnétique pour déterminer l\'orientation de la boussole plutôt que le capteur d\'orientation</string>
     <string name="use_magnetic_sensor">Utiliser le magnétomètre (boussole)</string>
     <string name="local_indexes_cat_srtm">Courbes de niveau</string>
     <string name="use_kalman_filter_compass_descr">Réduit le bruit sur les mesures de la boussole, mais ajoute de l\'inertie</string>
@@ -1606,9 +1607,9 @@ Les traces ainsi enregistrées peuvent être partagées avec vos amis ou utilis�
     <string name="save_global_track_interval_descr">Sélectionnez l\'intervalle d\'enregistrement des traces (activé via le gadget d\'enregistrement GPX depuis la carte)</string>
     <string name="save_global_track_interval">Intervalle d\'enregistrement par défaut</string>
     <string name="traffic_warning_speed_limit">Limite de vitesse</string>
-    <string name="traffic_warning_border_control">Contrôle aux frontières</string>
+    <string name="traffic_warning_border_control">Poste frontière</string>
     <string name="traffic_warning_payment">Barrière de péage</string>
-    <string name="traffic_warning_stop">Stop</string>
+    <string name="traffic_warning_stop">Panneau stop</string>
     <string name="traffic_warning_calming">Ralentisseur</string>
     <string name="traffic_warning_speed_camera">Radar de vitesse</string>
     <string name="traffic_warning">Alerte de circulation</string>
@@ -1977,7 +1978,7 @@ Pour revenir à l’un des styles de carte classique de OsmAnd, désactivez simp
     <string name="av_locations_descr">Fichier GPX avec notes</string>
 
     <string name="simulate_your_location_stop_descr">Arrêter de simuler votre position</string>
-    <string name="simulate_your_location_descr">Simuler à partir d\'un fichier GPX ou d\'une route calculée</string>
+    <string name="simulate_your_location_descr">Simulez votre position à partir d\'un fichier GPX ou d\'une route calculée</string>
     <string name="are_you_sure">Etes-vous certain ?</string>
     <string name="unsaved_changes_will_be_lost">Les modifications non enregistrées seront perdues. Souhaitez-vous poursuivre ?</string>
     <string name="downloads_left_template">%1$s téléchargement(s) restant(s)</string>
@@ -2320,9 +2321,9 @@ Si vous appréciez OsmAnd et OSM et que vous souhaitez soutenir ces projets, c\'
     <string name="map_widget_magnetic_bearing">Cap magnétique</string>
     <string name="map_widget_bearing">Cap relatif</string>
     <string name="access_disable_offroute_recalc">Ignorer les écarts de route</string>
-    <string name="access_disable_offroute_recalc_descr">Permet de ne pas recalculer automatiquement un nouvel itinéraire si vous vous éloignez beaucoup de la route prévue</string>
-    <string name="access_disable_wrong_direction_recalc_descr">Permet de ne pas recalculer automatiquement un nouvel itinéraire si vous partez dans la mauvaise direction</string>
-    <string name="access_disable_wrong_direction_recalc">Ignorer les écarts de direction</string>
+    <string name="access_disable_offroute_recalc_descr">Permet de ne pas recalculer un nouvel itinéraire lorsque vous quittez l\'itinéraire prévu</string>
+    <string name="access_disable_wrong_direction_recalc_descr">Permet de ne pas recalculer un nouvel itinéraire lorsque vous faites demi-tour</string>
+    <string name="access_disable_wrong_direction_recalc">Ne pas recalculer l\'itinéraire lors d\'un demi-tour</string>
     <string name="use_osm_live_routing_description">Activer la navigation OSM Live prenant en comptes les modifications en temps réel (Bêta)</string>
 	<string name="use_osm_live_routing">Navigation OSM Live</string>
     <string name="follow_us">Suivez-nous</string>
@@ -2438,11 +2439,11 @@ Si vous appréciez OsmAnd et OSM et que vous souhaitez soutenir ces projets, c\'
     <string name="christmas_desc_q">Afficher les points d\'intérêt de Noël ?</string>
     <string name="rendering_attr_contourColorScheme_description">Couleurs des courbes de niveau</string>
     <string name="save_track_min_speed">Vitesse minimale pour enregistrer</string>
-    <string name="save_track_min_speed_descr">Indiquez une vitesse minimale à partir de laquelle déclencher l\'enregistrement</string>
+    <string name="save_track_min_speed_descr">Filtre : Indiquez une vitesse minimale à partir de laquelle déclencher l\'enregistrement</string>
     <string name="save_track_min_distance">Détection du déplacement pour enregistrer</string>
-    <string name="save_track_min_distance_descr">Indiquez une distance minimale à partir de laquelle déclencher l\'enregistrement</string>
+    <string name="save_track_min_distance_descr">Filtre : Indiquez une distance minimale à partir de laquelle déclencher l\'enregistrement</string>
     <string name="save_track_precision">Précision minimale pour l\'enregistrement</string>
-    <string name="save_track_precision_descr">Définissez la précision minimale d\'un point pour son enregistrement</string>
+    <string name="save_track_precision_descr">Filtre : Définissez la précision minimale d\'un point pour son enregistrement</string>
     <string name="shared_string_continue">Continuer</string>
     <string name="shared_string_pause">Pause</string>
     <string name="shared_string_trip">Itinéraire</string>
@@ -2493,7 +2494,7 @@ Si vous appréciez OsmAnd et OSM et que vous souhaitez soutenir ces projets, c\'
     <string name="rendering_attr_contourDensity_description">Densité des courbes de niveaux</string>
     <string name="legacy_search">Recherche héritée</string>
     <string name="show_legacy_search">Afficher la recherche héritée</string>
-    <string name="show_legacy_search_desc">Activer la recherche héritée dans la liste déroulante</string>
+    <string name="show_legacy_search_desc">Ajouter la recherche héritée à la liste déroulante</string>
     <string name="rendering_attr_hideWaterPolygons_name">Masquer l\'eau</string>
     <string name="configure_screen_quick_action">Action rapide</string>
 
@@ -2643,9 +2644,9 @@ représentant la zone : %1$s x %2$s</string>
     <string name="routing_attr_relief_smoothness_factor_hills_name">Vallonné</string>
     <string name="routing_attr_relief_smoothness_factor_plains_name">Moins vallonné</string>
     <string name="routing_attr_relief_smoothness_factor_more_plains_name">Plat</string>
-    <string name="routing_attr_driving_style_speed_name">Rapide</string>
+    <string name="routing_attr_driving_style_speed_name">Privilégier les routes principales</string>
     <string name="routing_attr_driving_style_balance_name">Équilibré</string>
-    <string name="routing_attr_driving_style_safety_name">Sûre</string>
+    <string name="routing_attr_driving_style_safety_name">Privilégier les routes secondaires</string>
     <string name="full_version_thanks">Merci d\'avoir acheté la version complète d\'OsmAnd !</string>
     <string name="routing_attr_relief_smoothness_factor_name">Sélectionnez les préférences de relief</string>
     <string name="parking_options">Choix de stationnement</string>
@@ -2847,4 +2848,10 @@ Fonctionnalités principales :
     <string name="of">%1$d de %2$d</string>
     <string name="moving_time">Durée de déplacement</string>
     <string name="min_max">Min / Max</string>
+    <string name="rendering_value_translucent_pink_name">Rose translucide</string>
+    <string name="quick_action_resume_pause_navigation">Reprendre / Suspendre la Navigation</string>
+    <string name="quick_action_resume_pause_navigation_descr">Appuyez sur ce bouton pour suspendre la navigation ou la reprendre après l\'avoir suspendue.</string>
+    <string name="quick_action_show_navigation_finish_dialog">Afficher la fenêtre de fin de navigation</string>
+    <string name="quick_action_start_stop_navigation">Démarrer / Arrêter la Navigation</string>
+    <string name="quick_action_start_stop_navigation_descr">Appuyez sur ce bouton pour démarrer la navigation ou l\'arrêter lorsqu\'elle est en cours.</string>
     </resources>

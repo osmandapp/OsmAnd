@@ -350,13 +350,17 @@ public class MapControlsLayer extends OsmandMapLayer {
 		}
 	}
 
-	protected void clickRouteCancel() {
+	public void stopNavigation() {
 		mapRouteInfoMenu.hide();
 		if (mapActivity.getRoutingHelper().isFollowingMode()) {
 			mapActivity.getMapActions().stopNavigationActionConfirm();
 		} else {
 			mapActivity.getMapActions().stopNavigationWithoutConfirm();
 		}
+	}
+
+	protected void clickRouteCancel() {
+		stopNavigation();
 	}
 
 	protected void clickRouteGo() {
@@ -659,7 +663,7 @@ public class MapControlsLayer extends OsmandMapLayer {
 				touchEvent = 0;
 				app.logEvent(mapActivity, "start_navigation");
 				app.getSettings().APPLICATION_MODE.set(routingHelper.getAppMode());
-				mapActivity.getMapViewTrackingUtilities().backToLocationImpl();
+				mapActivity.getMapViewTrackingUtilities().backToLocationImpl(17);
 				app.getSettings().FOLLOW_THE_ROUTE.set(true);
 				routingHelper.setFollowingMode(true);
 				routingHelper.setRoutePlanningMode(false);

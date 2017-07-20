@@ -1,7 +1,6 @@
 package net.osmand.plus.dashboard;
 
 import android.content.DialogInterface;
-import android.content.Intent;
 import android.os.Bundle;
 import android.support.annotation.Nullable;
 import android.support.v7.app.AlertDialog;
@@ -123,7 +122,7 @@ public class DashNavigationFragment extends DashBaseFragment {
 				} else {
 					routingHelper.setRoutePlanningMode(true);
 					routingHelper.setFollowingMode(false);
-					routingHelper.setPauseNaviation(true);
+					routingHelper.setPauseNavigation(true);
 				}
 				updatePlayButton(routingHelper, map, play);
 				map.getMapViewTrackingUtilities().switchToRoutePlanningMode();

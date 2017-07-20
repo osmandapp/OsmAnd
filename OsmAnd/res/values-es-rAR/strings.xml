@@ -1,4 +1,5 @@
-<?xml version="1.0" encoding="UTF-8" standalone="no"?><resources>
+<?xml version='1.0' encoding='UTF-8'?>
+<resources>
 
     <string name="rendering_attr_hideHouseNumbers_name">Números de casa</string>
     <string name="copying_osmand_file_failed">Falló al copiar archivos</string>
@@ -793,7 +794,7 @@ Se aprecia la participación activa, y las contribuciones pueden hacerse directa
     <string name="recording_default_name">Grabación</string>
     <string name="map_widget_av_notes">Notas multimedia</string>
     <string name="map_widget_distancemeasurement">Medición de distancia</string>
-    <string name="audionotes_location_not_defined">No se definió la ubicación para asociar la nota. Utiliza \"Usar ubicación…\" para asignar una nota a la ubicación indicada.</string>
+    <string name="audionotes_location_not_defined">No se definió la ubicación para asociar la nota. Utiliza «Usar ubicación…» para asignar una nota a la ubicación indicada.</string>
     <string name="map_widget_audionotes">Notas de audio</string>
     <string name="index_srtm_parts">partes</string>
     <string name="index_srtm_ele">Curvas de nivel</string>
@@ -1929,7 +1930,7 @@ Se aprecia la participación activa, y las contribuciones pueden hacerse directa
     <string name="rendering_attr_roadStyle_description">Estilo del camino</string>
     <string name="poi_dialog_reopen">Reabrir</string>
 	<string name="osm_save_offline">Guardar sin conexión</string>
-    <string name="release_2_2">\\022 Nueva interfaz de usuario sensible al contexto para aprovechar lugares en el mapa y en otra pantallas. 
+    <string name="release_2_2">\\u2022 Nueva interfaz de usuario sensible al contexto para aprovechar lugares en el mapa y en otra pantallas.
 \n 
 \n• La pantalla del mapa ahora se inicia directamente, a menos que \'Mostrar panel de control al iniciar la aplicación\', este seleccionado. 
 \n 
@@ -2097,7 +2098,7 @@ Se aprecia la participación activa, y las contribuciones pueden hacerse directa
     <string name="shared_string_move_down">Bajar</string>
     <string name="finish_navigation">Finalizar navegación</string>
     <string name="avoid_road">Evitar camino</string>
-    <string name="release_2_3">\\022 OSM Live. Apoya a los editores y desarrolladores del mapa y obtén actualizaciones del mapa cada hora. 
+    <string name="release_2_3">\\u2022 OSM Live. Apoya a los editores y desarrolladores del mapa y obtén actualizaciones del mapa cada hora.
 \n 
 \n • Marcadores del mapa. Una nueva forma de elegir rápidamente lugares en el mapa. 
 \n 
@@ -2179,7 +2180,7 @@ Se aprecia la participación activa, y las contribuciones pueden hacerse directa
     <string name="lang_hsb">Sorabo (Alto)</string>
     <string name="share_history_subject">compartido a través de OsmAnd</string>
     
-    <string name="release_2_4">\\022 Nueva y muy poderosa búsqueda por texto libre 
+    <string name="release_2_4">\\u2022 Nueva y muy poderosa búsqueda por texto libre
 \n 
 \n • Integración con el sistema de audio del automóvil y altavoces del teléfono vía Bluetooth 
 \n 
@@ -2271,7 +2272,7 @@ Se aprecia la participación activa, y las contribuciones pueden hacerse directa
     <string name="shared_string_recorded">Grabado</string>
     <string name="shared_string_record">Grabar</string>
     <string name="gpx_logging_no_data">Sin datos</string>
-    <string name="release_2_5">\\022 Ahora se pueden pulsar los iconos del mapa 
+    <string name="release_2_5">\\u2022 Ahora se pueden pulsar los iconos del mapa
 \n 
 \n • Nuevo filtro de búsqueda PDI potente: Busca, p.e. restaurantes por tipo de cocina o campamentos con instalaciones específicas 
 \n 
@@ -2323,7 +2324,7 @@ Se aprecia la participación activa, y las contribuciones pueden hacerse directa
     <string name="quick_action_add_marker">Añadir marcador de mapa</string>
     <string name="quick_action_add_poi">Añadir PDI</string>
     <string name="quick_action_map_style">Cambiar estilo del mapa</string>
-    <string name="quick_action_map_style_switch">El estilo del mapa se cambió para \"%s\".</string>
+    <string name="quick_action_map_style_switch">El estilo del mapa se cambió para «%s».</string>
     <string name="quick_action_take_audio_note">Grabar nota de audio</string>
     <string name="quick_action_take_video_note">Grabar nota de video</string>
     <string name="quick_action_take_photo_note">Tomar nota fotográfica</string>
@@ -2338,7 +2339,7 @@ Se aprecia la participación activa, y las contribuciones pueden hacerse directa
     <string name="quick_action_add_favorite">Añadir favorito</string>
     <string name="dialog_add_action_title">Añadir acción</string>
     <string name="quick_actions_delete">Borrar acción</string>
-    <string name="quick_actions_delete_text">¿Quieres borrar la acción \"%s\"?</string>
+    <string name="quick_actions_delete_text">¿Quieres borrar la acción «%s»?</string>
     <string name="quick_favorites_show_favorites_dialog">Mostrar diálogo de favoritos</string>
     <string name="quick_favorites_name_preset">Nombre predefinido</string>
     <string name="shared_string_action_name">Nombre de la acción</string>
@@ -2386,12 +2387,12 @@ Se aprecia la participación activa, y las contribuciones pueden hacerse directa
     <string name="quick_action_map_source">Cambiar fuente del mapa</string>
     <string name="quick_action_map_source_title">Fuentes del mapa</string>
     <string name="quick_action_map_source_action">Añadir fuente del mapa</string>
-    <string name="quick_action_map_source_switch">La fuente del mapa se cambió a \"%s\".</string>
+    <string name="quick_action_map_source_switch">La fuente del mapa se cambió a «%s».</string>
     <string name="quick_action_btn_tutorial_title">Cambiar ubicación del botón</string>
     <string name="quick_action_btn_tutorial_descr">Mantener pulsado y arrastrar el botón para mover la ubicación en la pantalla</string>
 <string name="quick_action_interim_dialog">Mostrar un diálogo temporal</string>
-    <string name="quick_action_map_overlay_switch">Se cambió el mapa superpuesto a \"%s\".</string>
-    <string name="quick_action_map_underlay_switch">Se cambió el mapa subyacente a \"%s\".</string>
+    <string name="quick_action_map_overlay_switch">Se cambió el mapa superpuesto a «%s».</string>
+    <string name="quick_action_map_underlay_switch">Se cambió el mapa subyacente a «%s».</string>
     <string name="navigate_point_olc">Código de Ubicación Abierto (OLC)</string>
     <string name="navigate_point_olc_info_invalid">OLC inválido
 </string>
@@ -2402,7 +2403,7 @@ Proporciona un código completo</string>
     <string name="quick_action_page_list_descr">Pulsar el botón de acción mostrará la siguiente lista.</string>
     <string name="auto_split_recording_title">División automática de grabaciones en intervalos</string>
 	<string name="auto_split_recording_descr">Iniciar nuevo segmento en el lapso de 6 min, nueva traza en el lapso de 2 h, o nuevo archivo en el lapso más largo si la fecha se cambió.</string>
-    <string name="release_2_6">\\022 Nueva función: Botón de acción rápida 
+    <string name="release_2_6">\\u2022 Nueva función: Botón de acción rápida 
 \n 
 \n • Mejorada la respuesta de gestos táctiles (p.e. panorámicas y ampliaciones simultáneas) 
 \n 
@@ -2416,7 +2417,7 @@ Proporciona un código completo</string>
 \n 
 \n • Visualización del perfil de elevación, pendiente y velocidad para las trazas GPX grabadas y la ruta calculada 
 \n 
-\n • Opción de \"Estilo de conducción\" y mejoras lógicas en el cálculo de rutas para bicicleta 
+\n • Opción de «Estilo de conducción» y mejoras lógicas en el cálculo de rutas para bicicleta 
 \n 
 \n • Ajustes para usar datos de altitud en el cálculo de rutas para bicicleta 
 \n 
@@ -2462,9 +2463,9 @@ Proporciona un código completo</string>
     <string name="routing_attr_relief_smoothness_factor_hills_name">Empinado</string>
     <string name="routing_attr_relief_smoothness_factor_plains_name">Poco empinado</string>
     <string name="routing_attr_relief_smoothness_factor_more_plains_name">Plano (llanura)</string>
-    <string name="routing_attr_driving_style_speed_name">Velocidad</string>
+    <string name="routing_attr_driving_style_speed_name">Preferir caminos principales</string>
     <string name="routing_attr_driving_style_balance_name">Equilibrado</string>
-    <string name="routing_attr_driving_style_safety_name">Seguridad</string>
+    <string name="routing_attr_driving_style_safety_name">Preferir caminos secundarios</string>
     <string name="relief_smoothness_factor_descr">Terreno preferido: llano o empinado</string>
     <string name="do_not_send_anonymous_app_usage">No enviar estadísticas de uso anónimas de la aplicación</string>
     <string name="do_not_send_anonymous_app_usage_desc">OsmAnd recopila información acerca de las secciones que abres en la aplicación. No recopilamos datos de ubicación, ingresos en la aplicación o datos relacionados con las áreas que visualizas, buscas o descargas.</string>
@@ -2618,9 +2619,9 @@ Proporciona un código completo</string>
     <string name="route_is_too_long_v2">Esta ruta puede ser muy larga para calcular. Añade destinos intermedios si no se encuentran resultados dentro de los 10 minutos.</string>
     <string name="srtm_menu_download_descr">Para ver las curvas de nivel en el mapa, debes descargar el mapa de curvas de nivel de esta región.</string>
     <string name="shared_string_plugin">Complemento</string>
-    <string name="srtm_purchase_header">Para ver las curvas de nivel en el mapa, debes comprar e instalar el complemento \"Curvas de nivel\"</string>
+    <string name="srtm_purchase_header">Para ver las curvas de nivel en el mapa, debes comprar e instalar el complemento «Curvas de nivel»</string>
     <string name="hillshade_menu_download_descr">Para ver el sombreado del relieve en el mapa, debes descargar la superposición del sombreado de esta región.</string>
-    <string name="hillshade_purchase_header">Para ver el sombreado del relieve en el mapa, debes comprar e instalar el complemento \"Curvas de nivel\"</string>
+    <string name="hillshade_purchase_header">Para ver el sombreado del relieve en el mapa, debes comprar e instalar el complemento «Curvas de nivel»</string>
     <string name="hide_from_zoom_level">Ocultar desde el nivel de ampliación</string>
     <string name="quick_action_showhide_osmbugs_title">Alternar vista de problemas OSM en el mapa</string>
     <string name="quick_action_osmbugs_show">Mostrar problemas OSM en el mapa</string>
@@ -2630,7 +2631,7 @@ Proporciona un código completo</string>
     <string name="search_favorites">Buscar favoritos</string>
     <string name="restart_search">Reiniciar búsqueda</string>
     <string name="increase_search_radius">Aumentar radio de búsqueda</string>
-    <string name="nothing_found">¡Nada por aquí! &#128542;</string>
+    <string name="nothing_found">¡Nada por aquí! 😞</string>
     <string name="nothing_found_descr">Modifica la consulta de búsqueda o aumenta el radio de búsqueda</string>
     <string name="private_access_routing_req">El destino se ubica en un área de acceso privado. ¿Quieres acceder en este viaje a los caminos privados?</string>
     <string name="mapillary">Mapillary</string>
@@ -2677,4 +2678,19 @@ Proporciona un código completo</string>
     
     <string name="range_min_max">Rango = Min/Máx</string>
     <string name="min_max">Min/Máx</string>
+    <string name="release_2_7">\\u2022 Complemento de Mapillary con imágenes a nivel de calle 
+\n 
+\n • Control de regla para medir distancias 
+\n 
+\n • División de intervalos GPX con información detallada sobre la traza 
+\n 
+\n • Otras mejoras y corrección de errores
+\n
+\n</string>
+    <string name="rendering_value_translucent_pink_name">Rosa translúcido</string>
+    <string name="quick_action_resume_pause_navigation">Reanudar/Pausar navegación</string>
+    <string name="quick_action_resume_pause_navigation_descr">Pulsa este botón para pausar la navegación, o para reanudar si ya estaba pausada.</string>
+    <string name="quick_action_show_navigation_finish_dialog">Mostrar diálogo de Finalizar navegación</string>
+    <string name="quick_action_start_stop_navigation">Iniciar/Parar navegación</string>
+    <string name="quick_action_start_stop_navigation_descr">Pulsa este botón para iniciar la navegación, o para finalizarla si ya se había iniciado.</string>
     </resources>

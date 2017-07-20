@@ -1,4 +1,5 @@
-<?xml version="1.0" encoding="UTF-8" standalone="no"?><resources>
+<?xml version='1.0' encoding='UTF-8'?>
+<resources>
   <string name="asap">Швидко</string>
   
   <string name="route_roundabout">Круговий рух : %1$d з’їзд</string>
@@ -841,7 +842,7 @@
   <string name="osmand_parking_plugin_name">Місце стоянки</string>
   <string name="context_menu_item_add_parking_point">Відмітити місце стоянки</string>
   <string name="context_menu_item_delete_parking_point">Вилучити позначку місця стоянки</string>
-  <string name="starting_point_too_far">Початок маршруту надто далеко від найближчої дороги.</string>
+  <string name="starting_point_too_far">Початковий пункт занадто далеко від найближчої дороги.</string>
   <string name="shared_location">Загальні місця</string>
   
   <string name="global_app_allocated_memory_descr">Зайнято пам’яті %1$s MB (Обмеження Android %2$s MB, dalvik %3$s MB).</string>
@@ -1015,9 +1016,9 @@
     <string name="new_destination_point_dialog">Ви вже встановили пункт призначення:</string>
     <string name="target_points">Точки призначення</string>
     <string name="intermediate_point_too_far">Проміжна точка %1$s занадто далека від найближчої дороги.</string>
-    <string name="arrived_at_intermediate_point">Ви вже досягнули проміжної точки</string>
+    <string name="arrived_at_intermediate_point">Ви досягли проміжного пункту</string>
     <string name="context_menu_item_intermediate_point">Додати як проміжну точку</string>
-    <string name="ending_point_too_far">Початок маршруту занадто далеко від найближчої дороги.</string>
+    <string name="ending_point_too_far">Кінцевий пункт занадто далеко від найближчої дороги.</string>
     <string name="add_tag">Додати мітку</string>
     <string name="btn_advanced_mode">Розширений режим…</string>
     <string name="poi_filter_parking">Стоянки</string>
@@ -2236,7 +2237,7 @@
     <string name="av_locations_descr">Файл GPX з координатами нотаток</string>
     <string name="show_free_version_banner_description">Навіть, якщо ви придбали платну версію, ви все ще можете бачити банер для безкоштовної версії</string>
     <string name="dashboard_or_drawer_description">У вас зараз є вибір керувати застосунком через гнучку панель керування або через звичайне мені. Ваші вподобання завжди можна змінити в параметрах панелі керування.</string>
-    <string name="release_2_2">\\022 Нові елементи інтерфейсу, що залежать від поточного стану, для вибору місця на мапи та на інших екранах 
+    <string name="release_2_2">\\u2022 Нові елементи інтерфейсу, що залежать від поточного стану, для вибору місця на мапи та на інших екранах
 \n
 \n • Екран з мапою відкривається під час запуску, якщо тільки не активовано функцію „Показувати панель керування під час запуску“ 
 \n
@@ -2314,7 +2315,7 @@
     <string name="no_map_markers_found">Додайте позначки на мапі</string>
     <string name="no_waypoints_found">Точки шляху не знайдені</string>
     <string name="storage_permission_restart_is_required">Тепер застосунок має можливість записувати у зовнішнє сховище. Потрібне ручне перезавантаження.</string>
-    <string name="release_2_3">\\022 OSM Live. Підтримка маперів та розробників; надає щогодинне оновлення даних. 
+    <string name="release_2_3">\\u2022 OSM Live. Підтримка маперів та розробників; надає щогодинне оновлення даних.
 \n
 \n • Позначки. Новий спосіб швидко позначити місце на мапі. 
 \n
@@ -2404,7 +2405,7 @@
     <string name="shared_string_recorded">Записано</string>
     <string name="shared_string_record">Запис</string>
     <string name="gpx_logging_no_data">Немає даних</string>
-    <string name="release_2_5">\\022 Клікабельні іконки на мапі 
+    <string name="release_2_5">\\u2022 Клікабельні іконки на мапі
 \n 
 \n• Гнучка фільтрація POI в пошуку: шукайте ресторани за типом кухні, кемпінги за наявністю зручностей 
 \n 
@@ -2486,7 +2487,7 @@
     <string name="back_to_search">Повернення до пошуку</string>
     <string name="confirmation_to_delete_history_items">Вилучити вибране з історії пошуку?</string>
     <string name="show_something_on_map">Показати %1$s на мапі</string>
-    <string name="release_2_4">\\022 Новий повнотекстовий пошук 
+    <string name="release_2_4">\\u2022 Новий повнотекстовий пошук
 \n
 \n• Інтеграція через Bluetooth автомобільних аудіосистем/колонок 
 \n
@@ -2583,7 +2584,7 @@
 	<string name="auto_split_recording_title">Авто-розрив запису після перерви</string>
 	<string name="auto_split_recording_descr">Почати новий сегмент після 6 хвилинної перерви, новий трек після 2 годинної перерви, або новий файл після тривалої перерви (якщо змінилася дата).</string>
     <string name="select_gpx_folder">Виберіть теку GPX-треку</string>
-    <string name="release_2_6">"\\022 Нова функція: кнопка швидкої дії 
+    <string name="release_2_6">"\\u2022 Нова функція: кнопка швидкої дії
 \n 
 \n • Покращена відповідь на жести сенсорного екрану 
 \n 
@@ -2666,8 +2667,8 @@
     <string name="fonts_header">Шрифти для мапи</string>
     <string name="right_side_navigation">Правосторонній рух</string>
     <string name="routing_attr_driving_style_balance_name">Збалансований</string>
-    <string name="routing_attr_driving_style_safety_name">Безпечний</string>
-    <string name="routing_attr_driving_style_speed_name">Швидкісний</string>
+    <string name="routing_attr_driving_style_safety_name">Надавати перевагу путівцям</string>
+    <string name="routing_attr_driving_style_speed_name">Надавати перевагу основним дорогам</string>
     <string name="animate_my_location">Анімувати моє місце розташування</string>
     <string name="animate_my_location_desc">Задіяти анімацію мого місця розташування під час навігації</string>
     <string name="do_not_show_startup_messages">Не показувати повідомлення при запуску</string>
@@ -2933,4 +2934,19 @@
     <string name="max_min">Макс./мін.</string>
     
     <string name="min_max">Мін/макс</string>
+    <string name="release_2_7">\\022 Втулок Mapillary з вуличними зображеннями
+\n
+\n • Віджет-лінійка для вимірювання дистанцій
+\n
+\n • Розділені GPX-інтервали з докладною інформацією про Ваш трек
+\n
+\n • Інші поліпшення й виправлення помилок
+\n
+\n</string>
+    <string name="rendering_value_translucent_pink_name">Напівпрозорий рожевий</string>
+    <string name="quick_action_resume_pause_navigation">Відновити/призупинити навігацію</string>
+    <string name="quick_action_resume_pause_navigation_descr">Натисніть цю кнопку, щоб призупинити навігацію або відновити її, якщо вона вже була призупинена.</string>
+    <string name="quick_action_show_navigation_finish_dialog">Показати вікно, щоб завершити навігацію</string>
+    <string name="quick_action_start_stop_navigation">Початок/завершення навігації</string>
+    <string name="quick_action_start_stop_navigation_descr">Натисніть цю кнопку, щоб запустити навігацію або зупинити її, якщо вона вже була запущена.</string>
     </resources>

@@ -1,4 +1,5 @@
-<?xml version="1.0" encoding="UTF-8" standalone="no"?><resources>
+<?xml version='1.0' encoding='UTF-8'?>
+<resources>
     <string name="search_button">Poišči</string>
     <string name="search_activity">Iskanje podatkov</string>
 
@@ -2135,7 +2136,7 @@ ZŠ (β) %2$s</string>
     <string name="dashboard_or_drawer_title">Upravljanje prek nadzorne plošče ali menija</string>
     <string name="dashboard_or_drawer_description">Ob meniju je po novem na voljo možnost upravljanja s programom preko prilagodljive nadzorne plošče. Možnost je mogoče spremeniti med nastavitvami.</string>
 <string name="osm_edit_commented_note">Opomba OSM z dodatnimi zapisi</string>
-    <string name="release_2_2">\\022 Prenovljen in posodobljen vmesnik, ki omogoča izbiranje mest na zemljevidu in prek drugih pogledov 
+    <string name="release_2_2">\\u2022 Prenovljen in posodobljen vmesnik, ki omogoča izbiranje mest na zemljevidu in prek drugih pogledov
 \n
 \n • Pogled zemljevida se zažene neposredno, če ni izbrana možnost \"Pokaži nadzorno ploščo ob zagonu programa\" 
 \n
@@ -2292,7 +2293,7 @@ ZŠ (β) %2$s</string>
     <string name="file_name_containes_illegal_char">V imenu datoteke je nedovoljen znak</string>
 <string name="no_map_markers_found">Ni nobene določene označbe</string>
     <string name="no_waypoints_found">Ni vmesnih točk</string>
-    <string name="release_2_3">\\022 Uporabljajte OSM v živo. Pridobite si možnost urnih posodobitev zemljevidov. S podporo razvijalcem in skupnosti si pridobite dostop do trenutnih podatkov. 
+    <string name="release_2_3">\\u2022 Uporabljajte OSM v živo. Pridobite si možnost urnih posodobitev zemljevidov. S podporo razvijalcem in skupnosti si pridobite dostop do trenutnih podatkov.
 \n
 \n • Z označbami zemljevidov je mogoča enostavna izbira mest na zemljevidu. 
 \n
@@ -2369,7 +2370,7 @@ Del prihodka se vrne skupnosti OSM in se izplačuje za vsako opravljeno dejavnos
     <string name="back_to_search">Nazaj na iskanje</string>
     <string name="confirmation_to_delete_history_items">Ali res želite izbrisati izbrane predmete zgodovine?</string>
     <string name="show_something_on_map">Pokaži %1$s na zemljevidu</string>
-    <string name="release_2_4">\\022 Zmogljivo besedilno iskanje 
+    <string name="release_2_4">\\u2022 Zmogljivo besedilno iskanje
 \n 
 \n • Posodobitev delovanja zvoka preko sistema Bluetooth 
 \n 
@@ -2465,7 +2466,7 @@ Del prihodka se vrne skupnosti OSM in se izplačuje za vsako opravljeno dejavnos
     <string name="save_track_precision_descr">Filter: nastavitev najmanjše natančnosti beleženja točk na zemljevidu</string>
     <string name="osmo_share_location">Objavi</string>
     <string name="trip_rec_notification_settings_desc">Pokaži obvestilo, ki omogoča začetek beleženja potovanja s pritiskom na gumb za beleženje</string>
-    <string name="release_2_5">\\022 Kljikljive ikone na zemljevidu 
+    <string name="release_2_5">\\u2022 Kljikljive ikone na zemljevidu
 \n
 \n • Zmogljivo iskanje točk POI: iskanje na primer restavracij po vrsti kuhinje, ali pa prostore za kampiranje s posebnimi zahtevami 
 \n
@@ -2570,26 +2571,26 @@ Koda predstavlja območje: %1$s x %2$s</string>
     <string name="quick_action_map_overlay">Spremeni prekrivno plast zemljevida</string>
     <string name="quick_action_map_overlay_switch">Prekrivna plast je spremenjena na »%s«.</string>
     <string name="quick_action_map_underlay_switch">Podloga zemljevida je spremenjena na »%s«.</string>
-    <string name="release_2_6">"\\022 Nova zmožnost: dodan je gumb za hitra dejanja 
-\n
+    <string name="release_2_6">"• Nova zmožnost: dodan je gumb za hitra dejanja 
+\n 
 \n • Izboljšana odzivnost zaslona za upravljanje s potezami in dotiki 
-\n
+\n 
 \n • Nova pisava s široko podporo različnim jezikom 
-\n
+\n 
 \n • Podpora branja TTS za krajevne različice jezikov 
-\n
+\n 
 \n • Izboljšana preglednost različnih slogov zemljevidov 
-\n
+\n 
 \n • Izboljšan prikaz člankov z Wikipedije 
-\n
+\n 
 \n • Podpora OLC (Open Location Code) 
-\n
+\n 
 \n • Prikaz profila nadmorske višine, hitrosti in naklona za shranjene sledi GPX (poti in hitrosti) in preračunane poti 
-\n
+\n 
 \n • Nastavitev »sloga vožnje« in izboljšava preračunavanja kolesarskih poti 
-\n
+\n 
 \n • Mnogo izboljšav in razrešenih hroščev 
-\n
+\n 
 \n  in še mnogo več …"</string>
 	<string name="auto_split_recording_title">Samodejno razdeli beleženje po vmesnih točkah</string>
 	<string name="auto_split_recording_descr">Začne z novim odsekom po 6 minutnem premoru, novo sled po dvournem premoru oziroma s povsem novo datoteko beleženja, če je zamik čez datumsko mejo.</string>
@@ -2785,4 +2786,16 @@ Koda predstavlja območje: %1$s x %2$s</string>
     <string name="osmand_plus_extended_description_part4">Uporaba podatkov OSM in Wikipedije • Kakovostni podatki dveh najboljših sodelovalnih projektov na svetu • Podatki OSM so na voljo po državah ali regijah • Točke POI prek Wikipedije so odličen pripomoček za ogledovanje znamenitosti • Neomejeni prejemi posodobitev neposredno iz programa • Skrčeni vektorski zemljevidi za delo brez povezave se posodabljajo vsaj enkrat mesečno • Možnost izbire med popolnimi podatki območja ali pa zgolj cestnega omrežja (primer: zemljevid Japonske zasede 700 MB, japonsko cestno omrežje pa zgolj 200 MB)</string>
     <string name="min_max">Najmanj/Največ</string>
     <string name="osmand_extended_description_part8">OsmAnd je odprtokodni program, ki je v neprestanem razvoju. Vsakdo lahko sodeluje pri razvoju z objavljanjem hroščev, pregledom prevodov in razvojem programske opreme. Pri programu sodeluje živahna odprtokodna skupnost s celega sveta. Napredek razvoja je odvisen tudi od donacij za programiranje in preizkušanje programske opreme. Ocena kakovosti in pokritosti zemljevidov: • Zahodna Evropa: **** • Vzhodna Evropa: *** • Rusija: *** • Severna Amerika: *** • Južna Amerika: ** • Azija: ** • Japonska in Koreja: *** • Bližnji vzhod: ** • Afrika: ** • Antarktika: * Večina zemljevidov držav je na voljo za prejem! Uporabite zanesljiv navigacijski sistem za različne države – Francijo, Nemčijo, Mehiko, Združeno kraljestvo, Španijo, Nizozemsko, Združene države, Rusijo, Brazilijo in mnoge druge.</string>
+    <string name="quick_action_resume_pause_navigation">Nadaljuj/Ustavi navigacijo</string>
+    <string name="quick_action_start_stop_navigation">Začni/Končaj navigacijo</string>
+    <string name="release_2_7">\\022 Vstavek Mapillary za slikovno podporo ulic
+\n
+\n • Gradnik ravnila za merjenje razdalj
+\n
+\n • Razdelitev intervalov GPX za podrobnejši prikaz poti
+\n
+\n • Druge posodobitve in razrešene napake
+\n
+\n</string>
+    <string name="rendering_value_translucent_pink_name">Prosojna rožnata</string>
     </resources>

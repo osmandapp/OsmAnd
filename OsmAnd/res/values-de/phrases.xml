@@ -1002,10 +1002,10 @@
 	<string name="poi_access_private">Privatweg</string>
 	<string name="poi_access_destination">Anlieger frei</string>
 	<string name="poi_access_permissive">Zutritt erlaubt</string>
-	<string name="poi_animal_shelter_dog">Asylform: Hunde</string>
-	<string name="poi_animal_shelter_cat">Asylform: Katzen</string>
-	<string name="poi_animal_shelter_dog_cat">Asylform: Hunde, Katzen</string>
-	<string name="poi_animal_shelter_bird">Asylform: Vögel</string>
+	<string name="poi_animal_shelter_dog">Hunde</string>
+	<string name="poi_animal_shelter_cat">Katzen</string>
+	<string name="poi_animal_shelter_dog_cat">Hunde, Katzen</string>
+	<string name="poi_animal_shelter_bird">Vögel</string>
 
 <string name="poi_mill_pond">Mühlenteich</string>
 	<string name="twitter">Twitter</string>
@@ -3405,4 +3405,14 @@
 	<string name="poi_motorcycle_type_dualsport">Reiseenduro</string>
 	<string name="poi_motorcycle_type_standard">Standard</string>
 
-</resources>
+<string name="poi_animal_shelter_wildlife">Wildtiere</string>
+	<string name="poi_animal_shelter_horse">Pferde</string>
+	<string name="poi_animal_shelter_mammal">Säugetiere</string>
+	<string name="poi_animal_shelter_fish">Fische</string>
+
+	<string name="poi_animal_shelter_type">Tierannahme</string>
+	<string name="poi_animal_shelter_purpose">Bestimmung</string>
+
+<string name="poi_owner">Eigentümer</string>
+
+	</resources>

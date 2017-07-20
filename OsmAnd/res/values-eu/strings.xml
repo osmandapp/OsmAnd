@@ -1,4 +1,5 @@
-<?xml version="1.0" encoding="UTF-8" standalone="no"?><resources>
+<?xml version='1.0' encoding='UTF-8'?>
+<resources>
   <string name="local_index_tile_data_zooms">Deskargatutako zoomak: %1$s</string>
   <string name="local_index_tile_data_expire">Iraungitze epea (minutuak): %1$s</string>
   <string name="local_index_tile_data_downloadable">Deskargagarria: %1$s</string>
@@ -1778,7 +1779,7 @@ Lorratza %2$s</string>
 \nTalde batean parte hartzen duten gailuak denbora errealean jarraitu ditzakezu. Taldera gehitutako puntu eta lorratzak ere ikusi ditzakezu partaide bazara.
 \n
 \nTaldea ez da hilabeteetan kendu, bete OsMo.mobi gunearen arauak</string>
-    <string name="release_2_3">\\022 OSM Live. Babestu mapa egileak eta garatzaileak eta jaso orduz orduko eguneraketak. 
+    <string name="release_2_3">\\u2022 OSM Live. Babestu mapa egileak eta garatzaileak eta jaso orduz orduko eguneraketak.
 \n
 \n • Mapa-markatzaileak. Mapako lekuak atoan hautatzeko modu berri bat.
 \n
@@ -1872,7 +1873,7 @@ Biltegiratzean {3} MB behar dira une batez, {1} MB behin betiko.
     <string name="map_downloaded_descr">%1$sko mapa deskargatu da. Erabiltzen hasi zaitezke.</string>
     <string name="file_name_containes_illegal_char">Fitxategiaren izenak karaktere baliogaberen bat du</string>
 <string name="show_something_on_map">Erakutsi %1$s mapan</string>
-    <string name="release_2_4">\\022 Testu librearen bilaketa boteretsu berria.
+    <string name="release_2_4">\\u2022 Testu librearen bilaketa boteretsu berria.
 \n
 \n
 \n • Asko hobetutako Bluetooth bidezko audioa.
@@ -2111,7 +2112,7 @@ Biltegiratzean {3} MB behar dira une batez, {1} MB behin betiko.
 
     <string name="use_dashboard_btn">Erabili kontrol panela</string>
     <string name="dashboard_or_drawer_description">Orain aplikazioa kontrol panel aldakor batetik ala finkatutako menu estatiko batetik kudeatzeko aukera dago. Erabakia aldatzeko aukera duzu kontrol panelaren ezarpenetan.</string>
-    <string name="release_2_2">\\022 Testuinguruaren jakitun den interfazea mapan eta beste pantailetan kokalekuetan sakatzeko 
+    <string name="release_2_2">\\u2022 Testuinguruaren jakitun den interfazea mapan eta beste pantailetan kokalekuetan sakatzeko
 \n
 \n • Maparen pantaila orain zuzenean abiatzen da \"Bistaratu kontrol panela abioan\" markatu ezean
 \n
@@ -2383,7 +2384,7 @@ mapak eta nabigazioa</string>
     <string name="shared_string_recorded">Grabatuta</string>
     <string name="shared_string_record">Grabatu</string>
     <string name="gpx_logging_no_data">Daturik ez</string>
-    <string name="release_2_5">\\022 klikatu daitezkeen ikonoak mapan
+    <string name="release_2_5">\\u2022 klikatu daitezkeen ikonoak mapan
 \n
 \n
 \n • Iragazki bidezko POI bilaketa ahaltsua: bilatu adibidez jatetxeak sukaldaritza motaren arabera, edo behar zehatzetarako kanpingak
@@ -2522,7 +2523,7 @@ Area honi dagokio: %1$s x %2$s</string>
 	<string name="auto_split_recording_descr">Hasi segmentu berria 6 minututako hutsune bat eta gero, lorratz berria bi ordu eta gero, edo fitxategi berria data aldatzean.</string>
     <string name="rendering_attr_depthContours_description">Erakutsi sakonera sestra-kurbak eta puntuak</string>
     <string name="rendering_attr_depthContours_name">Sakonera nautikoaren sestra-kurbak</string>
-	<string name="release_2_6">\\022 Ezaugarri berria: Ekintza azkarren botoia
+	<string name="release_2_6">\\u2022 Ezaugarri berria: Ekintza azkarren botoia
 \n
 \n
 \n • Pantaila ukigarriaren keinuen erantzuna hobetua
@@ -2718,4 +2719,24 @@ Area honi dagokio: %1$s x %2$s</string>
     <string name="osmand_extended_description_part3">Mapa • Bistaratu inguruko interesezko puntuak (POI) • Egokitu mapa zure mugimenduaren (edo iparrorratzaren) norabidera • Non zauden eta nora begiratzen duzun erakusten du • Partekatu zure kokalekua lagunek aurkitu zaitzaten • Gorde zuretzat garrantzitsuak diren tokiak gogokoetan • Mapan izenak nola bistaratu aukeratzen uzten dizu: zure hizkuntzan, tokiko hizkuntzan, edo ahoskera fonetikoa • Interneteko tesela mapak erakusten ditu, satelite ikuspegia (Bingek eskainia), hainbat gainazal, esaterako turismorako edo nabigaziorako GPX lorratzak eta azal gehigarriak gardentasun aldagarriarekin</string>
     <string name="osmand_extended_description_part5">Bizikleta • Bizikletentzako bideak aurki ditzakezu mapan • Bizikletarako GPS nabigazioak ibilbideak bizikletentzako bideak erabiliz eraikiko du • Zure abiadura eta altuera ikusi ditzakezu • GPX grabaketak zure bidaia grabatu eta partekatzea ahalbidetzen dizu • Gehigarriekin sestra-kurbak eta erliebe-itzalak gaitu ditzakezu</string>
     <string name="osmand_plus_extended_description_part6">Bizikleta eta oinezkoentzako ezaugarriak • Oinez, mendian, eta bizikletarekin egiteko bideak eta aktibitateak ikusi • Bizikleta eta oinezkoentzako ibilbide eta ikuspegi bereziak • Aukeran garraio publikoaren geltokiak (autobusa, tranbia, trena) lineen izenak barne • Aukeran bidaiaren grabaketa tokiko GPX fitxategira edo interneteko zerbitzari batera • AUkeran abiadura eta altuera bistaratu • Biostaratu sestra-kurbak eta erliebe-itzalak (plug-in gehigarriarekin)</string>
+    <string name="min_max">Min/Max</string>
+    <string name="release_2_7">\\u2022 Mapillary gehigarria kale-mailako argazkiekin
+\n
+\n • DIstantzia nehurtzeko erregela
+\n
+\n • GPX banatze tarteak ibilbidearen xehetasunekin
+\n
+\n • Bestelako hobekuntza eta zuzenketak
+\n
+\n</string>
+    <string name="rendering_value_translucent_pink_name">Arrosa gardena</string>
+    <string name="osmand_extended_description_part6">Oinez, mendian, hirian • Makak oinezko eta mendizaleentzako ibilbideak erakutsiko dizkizu • Wikipediak asko kontatu ahal dizu hiri bat bisitatzean zuk nahiago duzun hizkuntzan • Garraio publikoaren geltokiak (autobusa, tranbia, trena), lineen izenak barne, hirian ibiltzeko laguntza • GPS nabigazioak oinezkoen moduan ibilbidea oinezkoentzako bideak barne-hartuz sortuko du • GPX ibilbide bat igo eta jarraitu dezakezu edo zurea grabatu eta partekatu</string>
+    <string name="osmand_extended_description_part8">OsmAnd librea da eta garapen aktiboan dago. Edonork egin ditzake ekarpenak, arazoen berri emanez, itzulpenak hobetuz, edo ezaugarri berriak programatuz. Proiektua hobekuntza jarraituan murgilduta dago garatzaile eta erabiltzaileen arteko elkarrekintza hau dela eta. Proiektuak diru-laguntzak eta dohaintzak behar ditu ere kodeketa lana ordaindu eta ezaugarri berriak probatzeko. Gutxi gora-behrako mapen kalitatea: • Mendebaldeko Europa: **** • Ekialdeko Europa: *** • Errusia: *** • Ipar Amerika: *** • Hego Aerika: ** • Asia: ** • Japonia eta Korea: *** • Ekialde hurbila: ** • Afrika: ** • Antartika: * Munduko herrialde gehienetako maopak deskargatu daitezke! Eskuratu nabigatzaile fidagarri bat zuretzat - Frantzian, Alemanian, Mexikon, Erresuma Batuan, Espainian, Herbehereetan, Estatu Batuetan, Errusian, Brasilen, edonon.</string>
+    <string name="osmand_plus_extended_description_part1">OsmAnd+ (OSM Automated Navigation Directions) mapa eta nabigazio aplikazio bat da, mundu osoko, kalitate oneko OpenStreetMaps (OSM) mapak erabiltzen baimentzen dizkizu. Gozatu ahots bidezko ibilbide jarraipena Einteresezko puntuak (POI), sortu eta kudeatu GPX lorratzak, erabili sestra-kurbak eta altitude-informazioa, aukeratu kotxe, bizikleta eta oinezko moduen artean, editatu OSM eta askoz gehiago. OsmAnd+ ordainpeko bertsioa da. Erosten baduzu proiektua babesten duzu eta ezaugarri berrien gartapena, eta azken eguneraketak izango dituzu. Ezaugarri nagusietako batzuk:</string>
+    <string name="osmand_plus_extended_description_part2">Nabigazioa • Internetera konektatua zein deskonektatuta dabil (ibiltaritza gasturik ez atzerriak zaudenean) • Bide-gurutzetik bide-gurutzera ahots gidaritza (grabatutako eta sintetizatutako ahotsekin) • Aukeran erraia gidaritza, kale izenaren bistaratzea, eta iritsiera orduaren estimazioa • Ibilbidean tarteko puntuak onartzen ditu • Ibilbidea uzten baduzu automatikoki birkalkulatzen du • Bilatu tokiak motaren arabera (esaterako, jatetxeak, hotelak, gasolindegiak, mudeoak), edo kokaleku geografikoaren arabera</string>
+    <string name="osmand_plus_extended_description_part3">Maparen kontsulta • Bistaratu zure kokaleku eta norabidea • Aukeran alineatu irudia iparorratzarekin edo zure mugimenduaren norabidearekin • Gorde zure leku garrantzitsuak gogoko gisa • Bistaratu zure inguruko interesezko puntuak (POI) • Bistaratu interneteko tesela-mapa bereziak, satelite ikuspegia (Bing), edo gardentasun aldagarria duten turismorako gainazalak edo GPX lorratzak • Aukerak bistaratu izenak zure hizkuntzan, tokiko hizkuntzan edo idazkera fonetikoan</string>
+    <string name="osmand_plus_extended_description_part4">Erabili OSM eta Wikipediako datuak • Kalitate handiko informazioa elkarlanean sortutako munduko proiektu onenen eskutik • OSM datua herrialdeko edo eskualdeko daude eskuragarri • Wikipedia POIak, ezinhonbeak bistak ikusteko • Mugarik gabeko deskargak aplikaziotik bertatik • Tamainaz txikitu deskargatutako bektore-mapak hilean behin gutxienez • Eskualdeko datu guztiak edo errepide sarearen datuak besterik ez deskargatzeko aukera (Adibidea: Japoinia osoa 700 MB dira eta errepide sarea bakarrik 200 MB)</string>
+    <string name="osmand_plus_extended_description_part5">Segurtasun-funtzioak • Aukerazko egun/gau ikuspegien arteko aldaketa • Aukeran abiadura muga bistaratu, eta gainditzekotan ohartarazi • Abiaduraren araberako zoom maila aukeran • Partekatu zure kokalekua lagunek aurkitu zaitzaten</string>
+    <string name="osmand_plus_extended_description_part7">Egin ekarpenak zuzenean OSMen• Jakinarazi datuen erroreak • Igo GPX lorratzak zuzenean OSMra aplikaziotik • Gehitu POIak eta igo zuzenean OSMra (edo geroago, konektatzen zarenean) • Aukeran, grabatu bidaia bigarren planoan (gailua lo dagoela) 
+\nOsmAnd librea da eta garapen aktiboan dago. Edonork egin ditzake ekarpenak, arazoen berri emanez, itzulpenak hobetuz, edo ezaugarri berriak programatuz. Proiektua hobekuntza jarraituan dago garatzaile eta erabiltzaileen arteko hartu-eman hauei esker. Funtzio berriak programatu eta frogatzeko, proiektuak diru-laguntzak behar ditu.</string>
     </resources>
