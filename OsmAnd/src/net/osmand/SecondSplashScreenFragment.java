@@ -22,7 +22,7 @@ import net.osmand.plus.helpers.AndroidUiHelper;
 public class SecondSplashScreenFragment extends Fragment {
     public static final String TAG = "SecondSplashScreenFragment";
     public static boolean SHOW = true;
-    private static final int SECOND_SPLASH_TIME_OUT = 5000;
+    private static final int SECOND_SPLASH_TIME_OUT = 8000;
     private boolean started = false;
     private FragmentActivity activity;
     private OsmandApplication app;
@@ -142,18 +142,15 @@ public class SecondSplashScreenFragment extends Fragment {
         }
         if (!started) {
             started = true;
+            SecondSplashScreenFragment.SHOW = false;
             new Handler().postDelayed(new Runnable() {
 
                 @Override
                 public void run() {
-                    if (activity instanceof MapActivity) {
-                        activity.setRequestedOrientation(ActivityInfo.SCREEN_ORIENTATION_UNSPECIFIED);
-                        if (app.getSettings().MAP_SCREEN_ORIENTATION.get() != activity.getRequestedOrientation()) {
-                            activity.setRequestedOrientation(app.getSettings().MAP_SCREEN_ORIENTATION.get());
-                            // can't return from this method we are not sure if activity will be recreated or not
-                        }
+                    android.util.Log.d("Splash", "dismisssplashinsplash");
+                    if (activity instanceof MapActivity && !((MapActivity) activity).isActivityDestroyed()) {
+                        ((MapActivity)activity).dismissSecondSplashScreen();
                     }
-                    activity.getSupportFragmentManager().beginTransaction().remove(SecondSplashScreenFragment.this).commitAllowingStateLoss();
                 }
             }, SECOND_SPLASH_TIME_OUT);
         }

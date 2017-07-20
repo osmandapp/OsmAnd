@@ -29,6 +29,7 @@ import android.view.WindowManager;
 import android.widget.Toast;
 
 import net.osmand.PlatformUtil;
+import net.osmand.SecondSplashScreenFragment;
 import net.osmand.access.AccessibilityActionsProvider;
 import net.osmand.core.android.MapRendererView;
 import net.osmand.data.LatLon;
@@ -654,6 +655,9 @@ public class OsmandMapTileView implements IMapDownloaderCallback {
 			drawMapPosition(canvas, multiTouchSupport.getCenterPoint().x, multiTouchSupport.getCenterPoint().y);
 		} else if (doubleTapScaleDetector.isInZoomMode()) {
 			drawMapPosition(canvas, doubleTapScaleDetector.getCenterX(), doubleTapScaleDetector.getCenterY());
+		}
+		if (activity instanceof MapActivity && !((MapActivity) activity).isActivityDestroyed() && ((MapActivity) activity).getSupportFragmentManager().findFragmentByTag(SecondSplashScreenFragment.TAG) != null) {
+			((MapActivity) activity).dismissSecondSplashScreen();
 		}
 	}
 
