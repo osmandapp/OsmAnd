@@ -82,7 +82,7 @@ public class ShareMenu extends BaseMenuController {
 	public void share(ShareItem item) {
 		final int zoom = getMapActivity().getMapView().getZoom();
 		final String geoUrl = MapUtils.buildGeoUrl(latLon.getLatitude(), latLon.getLongitude(), zoom);
-		final String httpUrl = "http://osmand.net/go?lat=" + ((float) latLon.getLatitude())
+		final String httpUrl = "https://osmand.net/go?lat=" + ((float) latLon.getLatitude())
 				+ "&lon=" + ((float) latLon.getLongitude()) + "&z=" + zoom;
 		StringBuilder sb = new StringBuilder();
 		if (!Algorithms.isEmpty(title)) {

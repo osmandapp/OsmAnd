@@ -167,7 +167,7 @@ public class SearchAddressOnlineFragment extends Fragment implements SearchActiv
 						NOMINATIM_API = "https://nominatim.openstreetmap.org/search";
 					}
 					else {
-						NOMINATIM_API = "http://nominatim.openstreetmap.org/search";
+						NOMINATIM_API = "https://nominatim.openstreetmap.org/search";
 					}
 					
 					final List<Place> places = new ArrayList<Place>();

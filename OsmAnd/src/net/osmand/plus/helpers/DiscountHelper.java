@@ -1,9 +1,12 @@
 package net.osmand.plus.helpers;
 
-import java.text.SimpleDateFormat;
-import java.util.Date;
-import java.util.LinkedHashMap;
-import java.util.Map;
+import android.annotation.SuppressLint;
+import android.content.Intent;
+import android.net.Uri;
+import android.os.AsyncTask;
+import android.provider.Settings.Secure;
+import android.util.Log;
+import android.view.View;
 
 import net.osmand.AndroidNetworkUtils;
 import net.osmand.plus.OsmandApplication;
@@ -19,13 +22,10 @@ import net.osmand.util.Algorithms;
 
 import org.json.JSONObject;
 
-import android.annotation.SuppressLint;
-import android.content.Intent;
-import android.net.Uri;
-import android.os.AsyncTask;
-import android.provider.Settings.Secure;
-import android.util.Log;
-import android.view.View;
+import java.text.SimpleDateFormat;
+import java.util.Date;
+import java.util.LinkedHashMap;
+import java.util.Map;
 
 public class DiscountHelper {
 
@@ -38,7 +38,7 @@ public class DiscountHelper {
 	private static String mIcon;
 	private static String mUrl;
 	private static boolean mBannerVisible;
-	private static final String URL = "http://osmand.net/api/motd";
+	private static final String URL = "https://osmand.net/api/motd";
 	private static final String INAPP_PREFIX = "osmand-in-app:";
 
 

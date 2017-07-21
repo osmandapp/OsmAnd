@@ -344,7 +344,7 @@ public class FirstUsageWizardFragment extends Fragment implements OsmAndLocation
 					@Override
 					protected String doInBackground(Void... params) {
 						try {
-							return AndroidNetworkUtils.sendRequest(app, "http://osmand.net/api/geo-ip", pms,
+							return AndroidNetworkUtils.sendRequest(app, "https://osmand.net/api/geo-ip", pms,
 									"Requesting location by IP...", false, false);
 
 						} catch (Exception e) {

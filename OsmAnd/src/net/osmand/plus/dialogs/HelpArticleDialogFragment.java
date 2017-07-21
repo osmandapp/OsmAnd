@@ -1,10 +1,8 @@
 package net.osmand.plus.dialogs;
 
 import android.annotation.SuppressLint;
-import android.content.ContentResolver;
 import android.content.Context;
 import android.os.Bundle;
-import android.provider.Settings;
 import android.support.annotation.NonNull;
 import android.support.v4.app.DialogFragment;
 import android.support.v7.widget.Toolbar;
@@ -14,6 +12,7 @@ import android.view.ViewGroup;
 import android.webkit.WebSettings;
 import android.webkit.WebView;
 import android.webkit.WebViewClient;
+
 import net.osmand.PlatformUtil;
 import net.osmand.plus.OsmandApplication;
 import net.osmand.plus.OsmandSettings;
@@ -104,12 +103,12 @@ public class HelpArticleDialogFragment extends DialogFragment {
 			sb.append(fileContents);
 			sb.append(FOOTER_INNER);
 
-			webView.loadDataWithBaseURL("http://osmand.net", sb.toString(), null, "utf-8", null);
+			webView.loadDataWithBaseURL("https://osmand.net", sb.toString(), null, "utf-8", null);
 			webView.setWebViewClient(new WebViewClient() {
 				@Override
 				public boolean shouldOverrideUrlLoading(WebView view, String url) {
-					if (url.startsWith("http://osmand.net/features?id=")) {
-						String id = url.substring("http://osmand.net/features?id=".length());
+					if (url.startsWith("https://osmand.net/features?id=")) {
+						String id = url.substring("https://osmand.net/features?id=".length());
 						dismiss();
 						instantiateWithAsset("feature_articles/" + id + ".html", getString(R.string.shared_string_help))
 								.show(getActivity().getSupportFragmentManager(), "DIALOG_HELP_ARTICLE");
