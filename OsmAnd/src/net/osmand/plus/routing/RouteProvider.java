@@ -580,7 +580,7 @@ public class RouteProvider {
 			ParserConfigurationException, FactoryConfigurationError, SAXException {
 		List<Location> res = new ArrayList<Location>();
 		StringBuilder uri = new StringBuilder();
-		uri.append("https://www.yournavigation.org/api/1.0/gosmore.php?format=kml"); //$NON-NLS-1$
+		uri.append("http://www.yournavigation.org/api/1.0/gosmore.php?format=kml"); //$NON-NLS-1$
 		uri.append("&flat=").append(params.start.getLatitude()); //$NON-NLS-1$
 		uri.append("&flon=").append(params.start.getLongitude()); //$NON-NLS-1$
 		uri.append("&tlat=").append(params.end.getLatitude()); //$NON-NLS-1$
