@@ -28,7 +28,7 @@ public class SeekBarPreference extends DialogPreference implements
 	private static final String DEFAULT_VALUE_ID = "defaultValue";
 	private static final String DIALOG_TEXT_ID = "text";
 	private static final String DIALOG_MESSAGE_ID = "dialogMessage";
-	private static final String ANDROID_NS = "https://schemas.android.com/apk/res/android";
+	private static final String ANDROID_NS = "http://schemas.android.com/apk/res/android";
 
 	private SeekBar seekBar;
 	private TextView dialogTextView, valueTextView;
