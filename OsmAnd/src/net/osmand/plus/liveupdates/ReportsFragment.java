@@ -51,7 +51,7 @@ public class ReportsFragment extends BaseOsmAndFragment implements CountrySelect
 
 
 	private static final Log LOG = PlatformUtil.getLog(ReportsFragment.class);
-	public static final String OSM_LIVE_URL = "http://osmand.net/osm_live";
+	public static final String OSM_LIVE_URL = "https://osmand.net/osm_live";
 
 	private TextView contributorsTextView;
 	private TextView editsTextView;

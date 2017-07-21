@@ -29,11 +29,11 @@ public class HelpActivity extends OsmandActionBarActivity implements AdapterView
 
 	//	public static final String DIALOG = "dialog";
 	@IdRes
-	public static final String OSMAND_POLL_HTML = "http://osmand.net/android-poll.html";
+	public static final String OSMAND_POLL_HTML = "https://osmand.net/android-poll.html";
 	public static final int NULL_ID = -1;
 	private ArrayAdapter<ContextMenuItem> mAdapter;
 
-	//public static final String OSMAND_MAP_LEGEND = "http://osmand.net/help/map-legend_default.png";
+	//public static final String OSMAND_MAP_LEGEND = "https://osmand.net/help/map-legend_default.png";
 
 	@Override
 	protected void onCreate(Bundle savedInstanceState) {
