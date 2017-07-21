@@ -40,7 +40,7 @@ import gnu.trove.list.array.TIntArrayList;
 
 public abstract class OsmandMapLayer {
 
-	protected static final int UPDATES_BEFORE_CHECK_LOCATION = 20;
+	protected static final int UPDATES_BEFORE_CHECK_LOCATION = 40;
 
 	protected List<LatLon> fullObjectsLatLon;
 	protected List<LatLon> smallObjectsLatLon;
