@@ -278,22 +278,22 @@ public class GPXLayer extends OsmandMapLayer implements ContextMenuLayer.IContex
 			// request to load
 			for (SelectedGpxFile g : selectedGPXFiles) {
 				List<GpxDisplayGroup> groups = g.getDisplayGroups();
-				if (groups != null) {
-					for (GpxDisplayGroup group : groups) {
-						GpxDataItem gpxDataItem = view.getApplication().getGpxDatabase().getItem(new File(g.getGpxFile().path));
-						int color = gpxDataItem.getColor();
-						if (color == 0) {
-							color = g.getModifiableGpxFile().getColor(0);
-						}
-						if (color == 0) {
-							color = cachedColor;
-						}
-
-						paintInnerRect.setColor(color);
-						paintInnerRect.setAlpha(179);
-						List<GpxDisplayItem> items = group.getModifiableList();
-						drawSplitItems(canvas, tileBox, items, settings);
+				if (groups != null && !groups.isEmpty()) {
+					GpxDataItem gpxDataItem = view.getApplication().getGpxDatabase().getItem(new File(g.getGpxFile().path));
+					int color = gpxDataItem.getColor();
+					if (color == 0) {
+						color = g.getModifiableGpxFile().getColor(0);
 					}
+					if (color == 0) {
+						color = cachedColor;
+					}
+
+					paintInnerRect.setColor(color);
+					paintInnerRect.setAlpha(179);
+
+					List<GpxDisplayItem> items = groups.get(0).getModifiableList();
+
+					drawSplitItems(canvas, tileBox, items, settings);
 				}
 			}
 		}
