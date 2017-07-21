@@ -542,8 +542,8 @@ public class SearchPhrase {
 
 				@Override
 				public int compare(BinaryMapIndexReader o1, BinaryMapIndexReader o2) {
- 					LatLon rc1 = getLocation(o1);
-					LatLon rc2 = getLocation(o2);
+ 					LatLon rc1 = o1 == null ? null : getLocation(o1);
+					LatLon rc2 = o2 == null ? null : getLocation(o2);
 					double d1 = rc1 == null ? 10000000d : MapUtils.getDistance(rc1, ll);
 					double d2 = rc2 == null ? 10000000d : MapUtils.getDistance(rc2, ll);
 					return Double.compare(d1, d2);
