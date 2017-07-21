@@ -33,6 +33,7 @@ public class MapMarkersWidgetsFactory {
 
 	public static final int MIN_DIST_OK_VISIBLE = 40; // meters
 	public static final int MIN_DIST_2ND_ROW_SHOW = 150; // meters
+	private static final int UPDATES_BEFORE_CHECK_LOCATION = 20;
 
 	private final MapActivity map;
 	private MapMarkersHelper helper;
@@ -57,6 +58,8 @@ public class MapMarkersWidgetsFactory {
 
 	private LatLon loc;
 	private Location lastKnownPosition;
+
+	private int updatesCounter;
 
 	public MapMarkersWidgetsFactory(final MapActivity map) {
 		this.map = map;
@@ -193,7 +196,7 @@ public class MapMarkersWidgetsFactory {
 				lastKnownPosition = l;
 			} else if (lastKnownPosition == null) {
 				loc = null;
-			} else {
+			} else if (updatesCounter == 0) {
 				if (System.currentTimeMillis() - lastKnownPosition.getTime() < OsmAndLocationProvider.STALE_LOCATION_TIMEOUT) {
 					loc = new LatLon(lastKnownPosition.getLatitude(), lastKnownPosition.getLongitude());
 				} else {
@@ -201,6 +204,12 @@ public class MapMarkersWidgetsFactory {
 					lastKnownPosition = null;
 				}
 			}
+		}
+
+		if (updatesCounter == UPDATES_BEFORE_CHECK_LOCATION) {
+			updatesCounter = 0;
+		} else {
+			updatesCounter++;
 		}
 
 		List<MapMarker> markers = helper.getMapMarkers();
