@@ -2487,7 +2487,7 @@ Indikas lokon:  %1$s x %2$s"</string>
     <string name="routing_attr_relief_smoothness_factor_hills_name">Malebena</string>
     <string name="routing_attr_relief_smoothness_factor_plains_name">Malpli ebena</string>
     <string name="routing_attr_relief_smoothness_factor_more_plains_name">Ebena</string>
-    <string name="routing_attr_driving_style_speed_name">Akcepti ĉefajn vojojn</string>
+    <string name="routing_attr_driving_style_speed_name">Pli mallongaj vojoj</string>
     <string name="routing_attr_driving_style_balance_name">Ekvilibra</string>
     <string name="routing_attr_driving_style_safety_name">Preferi flankajn vojojn</string>
     <string name="routing_attr_relief_smoothness_factor_name">Elekti nivel-ombruman glatecon</string>
@@ -2732,4 +2732,6 @@ Indikas lokon:  %1$s x %2$s"</string>
     <string name="quick_action_show_navigation_finish_dialog">Montri fenestron fini navigadon</string>
     <string name="quick_action_start_stop_navigation">Ekigi/ĉesigi navigadon</string>
     <string name="quick_action_start_stop_navigation_descr">Premu tiun ĉi butonon por ekigi navigadon aŭ por ĉesigi ĝin se ĝi estas jam aktivigita.</string>
+    <string name="live_monitoring_max_interval_to_send">Temp-bufro por enreta registrado</string>
+    <string name="live_monitoring_max_interval_to_send_desrc">Difinu temp-bufron por konservi sendendajn poziciojn seninterrete</string>
     </resources>
