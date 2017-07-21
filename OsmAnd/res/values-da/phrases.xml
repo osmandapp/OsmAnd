@@ -3509,4 +3509,30 @@
 	<string name="poi_spaceport">Rumhavn</string>
 
 <string name="poi_animal_shelter_purpose_release_yes">Løslade: ja</string>
-	</resources>
+	<string name="poi_direction_n">Retning: nord</string>
+	<string name="poi_direction_nne">Retning: nord-nordøst</string>
+	<string name="poi_direction_ne">Retning: nordøst</string>
+	<string name="poi_direction_ene">Retning: øst-nordøst</string>
+	<string name="poi_direction_e">Retning: øst</string>
+	<string name="poi_direction_ese">Retning: øst-sydøst</string>
+	<string name="poi_direction_se">Retning: sydøst</string>
+	<string name="poi_direction_sse">Retning: syd-sydøst</string>
+	<string name="poi_direction_s">Retning: syd</string>
+	<string name="poi_direction_ssw">Retning: syd-sydvest</string>
+	<string name="poi_direction_sw">Retning: sydvest</string>
+	<string name="poi_direction_wsw">Retning: vest-sydvest</string>
+	<string name="poi_direction_w">Retning: vest</string>
+	<string name="poi_direction_wnw">Retning: vest-nordvest</string>
+	<string name="poi_direction_nw">Retning: nordvest</string>
+	<string name="poi_direction_nnw">Retning: nord-nordvest</string>
+	<string name="poi_direction_forward">Retning: fremad</string>
+	<string name="poi_direction_backward">Retning: bagud</string>
+	<string name="poi_direction_clockwise">Retning: med uret</string>
+	<string name="poi_direction_anticlockwise">Retning: mod uret</string>
+	<string name="poi_direction_up">Retning: op</string>
+	<string name="poi_direction_down">Retning: ned</string>
+	<string name="poi_direction_entrance">Retning: indgang</string>
+	<string name="poi_direction_exit">Retning: udgang</string>
+	<string name="poi_direction_all">Retning: alle</string>
+
+</resources>
