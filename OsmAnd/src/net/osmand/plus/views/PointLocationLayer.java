@@ -8,6 +8,7 @@ import android.graphics.Paint;
 import android.graphics.Paint.Style;
 import android.graphics.PointF;
 import android.graphics.RectF;
+
 import net.osmand.Location;
 import net.osmand.PlatformUtil;
 import net.osmand.data.LatLon;
@@ -25,6 +26,8 @@ import java.util.List;
 public class PointLocationLayer extends OsmandMapLayer implements ContextMenuLayer.IContextMenuProvider {
 	private static final Log LOG = PlatformUtil.getLog(PointLocationLayer.class);
 
+	private static final int UPDATES_BEFORE_CHECK_LOCATION = 20;
+
 	protected final static int RADIUS = 7;
 
 	private Paint locationPaint;
@@ -32,7 +35,7 @@ public class PointLocationLayer extends OsmandMapLayer implements ContextMenuLay
 	private Paint aroundArea;
 
 	private OsmandMapTileView view;
-	
+
 	private ApplicationMode appMode;
 	private Bitmap bearingIcon;
 	private Bitmap headingIcon;
@@ -40,7 +43,9 @@ public class PointLocationLayer extends OsmandMapLayer implements ContextMenuLay
 	private OsmAndLocationProvider locationProvider;
 	private MapViewTrackingUtilities mapViewTrackingUtilities;
 	private boolean nm;
-	
+	private int updatesCounter;
+	private boolean locationOutdated;
+
 	public PointLocationLayer(MapViewTrackingUtilities mv) {
 		this.mapViewTrackingUtilities = mv;
 	}
@@ -53,30 +58,43 @@ public class PointLocationLayer extends OsmandMapLayer implements ContextMenuLay
 
 		area = new Paint();
 		area.setColor(view.getResources().getColor(R.color.pos_area));
-		
+
 		aroundArea = new Paint();
 		aroundArea.setColor(view.getResources().getColor(R.color.pos_around));
 		aroundArea.setStyle(Style.STROKE);
 		aroundArea.setStrokeWidth(1);
 		aroundArea.setAntiAlias(true);
-		
-		updateIcons(view.getSettings().getApplicationMode(), false);
+
 		locationProvider = view.getApplication().getLocationProvider();
+		updateIcons(view.getSettings().getApplicationMode(), false, isLocationOutdated());
 	}
-	
+
 	@Override
 	public void initLayer(OsmandMapTileView view) {
 		this.view = view;
 		initUI();
 	}
 
+	private boolean isLocationOutdated() {
+		if (locationProvider.getLastKnownLocation() != null && updatesCounter == 0) {
+			updatesCounter++;
+			return System.currentTimeMillis() - locationProvider.getLastKnownLocation().getTime() >
+					OsmAndLocationProvider.STALE_LOCATION_TIMEOUT_FOR_ICON;
+		} else {
+			if (updatesCounter == UPDATES_BEFORE_CHECK_LOCATION) {
+				updatesCounter = 0;
+			} else {
+				updatesCounter++;
+			}
+		}
+		return locationOutdated;
+	}
 
-	
 	private RectF getHeadingRect(int locationX, int locationY){
 		int rad = (int) (view.getDensity() * 60);
 		return new RectF(locationX - rad, locationY - rad, locationX + rad, locationY + rad);
 	}
-	
+
 	@Override
 	public void onDraw(Canvas canvas, RotatedTileBox box, DrawSettings nightMode) {
 		if(box.getZoom() < 3) {
@@ -84,7 +102,7 @@ public class PointLocationLayer extends OsmandMapLayer implements ContextMenuLay
 		}
 		// draw
 		boolean nm = nightMode != null && nightMode.isNightMode();
-		updateIcons(view.getSettings().getApplicationMode(), nm);
+		updateIcons(view.getSettings().getApplicationMode(), nm, isLocationOutdated());
 		Location lastKnownLocation = locationProvider.getLastKnownLocation();
 		if(lastKnownLocation == null || view == null){
 			return;
@@ -103,7 +121,7 @@ public class PointLocationLayer extends OsmandMapLayer implements ContextMenuLay
 
 		final double dist = box.getDistance(0, box.getPixHeight() / 2, box.getPixWidth(), box.getPixHeight() / 2);
 		int radius = (int) (((double) box.getPixWidth()) / dist * lastKnownLocation.getAccuracy());
-		
+
 		if (radius > RADIUS * box.getDensity()) {
 			int allowedRad = Math.min(box.getPixWidth() / 2, box.getPixHeight() / 2);
 			canvas.drawCircle(locationX, locationY, Math.min(radius, allowedRad), area);
@@ -139,16 +157,17 @@ public class PointLocationLayer extends OsmandMapLayer implements ContextMenuLay
 	public boolean isLocationVisible(RotatedTileBox tb, Location l) {
 		return l != null && tb.containsLatLon(l.getLatitude(), l.getLongitude());
 	}
-	
+
 
 	@Override
 	public void destroyLayer() {
-		
+
 	}
-	public void updateIcons(ApplicationMode appMode, boolean nighMode) {
-		if (appMode != this.appMode || this.nm != nighMode) {
+	public void updateIcons(ApplicationMode appMode, boolean nighMode, boolean locationOutdated) {
+		if (appMode != this.appMode || this.nm != nighMode || this.locationOutdated != locationOutdated) {
 			this.appMode = appMode;
 			this.nm = nighMode;
+			this.locationOutdated = locationOutdated;
 			final int resourceBearingDay = appMode.getResourceBearingDay();
 			final int resourceBearingNight = appMode.getResourceBearingNight();
 			final int resourceBearing = nighMode ? resourceBearingNight : resourceBearingDay;
@@ -159,13 +178,19 @@ public class PointLocationLayer extends OsmandMapLayer implements ContextMenuLay
 			final int resourceHeading = nighMode ? resourceHeadingNight : resourceHeadingDay;
 			headingIcon = BitmapFactory.decodeResource(view.getResources(), resourceHeading);
 
-			final int resourceLocationDay = appMode.getResourceLocationDay();
-			final int resourceLocationNight = appMode.getResourceLocationNight();
+			final int resourceLocationDay;
+			final int resourceLocationNight;
+			if (locationOutdated) {
+				resourceLocationDay = appMode.getResourceLocationDayLost();
+				resourceLocationNight = appMode.getResourceLocationNightLost();
+			} else {
+				resourceLocationDay = appMode.getResourceLocationDay();
+				resourceLocationNight = appMode.getResourceLocationNight();
+			}
 			final int resourceLocation = nighMode ? resourceLocationNight : resourceLocationDay;
 			locationIcon = BitmapFactory.decodeResource(view.getResources(), resourceLocation);
 			area.setColor(view.getResources().getColor(!nm ? R.color.pos_area : R.color.pos_area_night));
 		}
-		
 	}
 	@Override
 	public boolean drawInScreenPixels() {
