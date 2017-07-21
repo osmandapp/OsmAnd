@@ -3486,7 +3486,7 @@
 	<string name="poi_direction_s">Dirección: Sur</string>
 	<string name="poi_direction_ssw">Dirección: Sudsudoeste</string>
 	<string name="poi_direction_sw">Dirección: Sudoeste</string>
-	<string name="poi_direction_wsw">Dirección: Oestesudoeste</string>
+	<string name="poi_direction_wsw">Dirección: Oesudoeste</string>
 	<string name="poi_direction_w">Dirección: Oeste</string>
 	<string name="poi_direction_wnw">Dirección: Oesnoroeste</string>
 	<string name="poi_direction_nw">Dirección: Noroeste</string>
