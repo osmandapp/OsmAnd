@@ -32,7 +32,6 @@ public class MapMarkersWidgetsFactory {
 
 	public static final int MIN_DIST_OK_VISIBLE = 40; // meters
 	public static final int MIN_DIST_2ND_ROW_SHOW = 150; // meters
-	private static final int UPDATES_BEFORE_CHECK_LOCATION = 20;
 
 	private final MapActivity map;
 	private MapMarkersHelper helper;
