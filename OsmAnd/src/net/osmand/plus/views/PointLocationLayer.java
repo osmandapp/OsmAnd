@@ -76,9 +76,16 @@ public class PointLocationLayer extends OsmandMapLayer implements ContextMenuLay
 	}
 
 	private boolean isLocationOutdated() {
-		if (locationProvider.getLastKnownLocation() != null) {
+		if (locationProvider.getLastKnownLocation() != null && updatesCounter == 0) {
+			updatesCounter++;
 			return System.currentTimeMillis() - locationProvider.getLastKnownLocation().getTime() >
 					OsmAndLocationProvider.STALE_LOCATION_TIMEOUT_FOR_ICON;
+		} else {
+			if (updatesCounter == UPDATES_BEFORE_CHECK_LOCATION) {
+				updatesCounter = 0;
+			} else {
+				updatesCounter++;
+			}
 		}
 		return false;
 	}
@@ -95,11 +102,7 @@ public class PointLocationLayer extends OsmandMapLayer implements ContextMenuLay
 		}
 		// draw
 		boolean nm = nightMode != null && nightMode.isNightMode();
-		if (updatesCounter == 0) {
-			updateIcons(view.getSettings().getApplicationMode(), nm, isLocationOutdated());
-		} else {
-			updateIcons(view.getSettings().getApplicationMode(), nm, false);
-		}
+		updateIcons(view.getSettings().getApplicationMode(), nm, isLocationOutdated());
 		Location lastKnownLocation = locationProvider.getLastKnownLocation();
 		if(lastKnownLocation == null || view == null){
 			return;
@@ -148,11 +151,6 @@ public class PointLocationLayer extends OsmandMapLayer implements ContextMenuLay
 						locationY - locationIcon.getHeight() / 2, locationPaint);
 			}
 
-		}
-		if (updatesCounter == UPDATES_BEFORE_CHECK_LOCATION) {
-			updatesCounter = 0;
-		} else {
-			updatesCounter++;
 		}
 	}
 
