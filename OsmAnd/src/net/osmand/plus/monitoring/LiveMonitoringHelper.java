@@ -9,6 +9,7 @@ import java.net.URL;
 import java.text.MessageFormat;
 import java.util.ArrayList;
 import java.util.List;
+import java.util.concurrent.ConcurrentLinkedQueue;
 
 import javax.net.ssl.HostnameVerifier;
 import javax.net.ssl.HttpsURLConnection;
@@ -33,17 +34,20 @@ public class LiveMonitoringHelper  {
 	private OsmandSettings settings;
 	private long lastTimeUpdated;
 	private LatLon lastPoint;
-	private final static Log log = PlatformUtil.getLog(LiveMonitoringHelper.class); 
+	private final static Log log = PlatformUtil.getLog(LiveMonitoringHelper.class);
+	private ConcurrentLinkedQueue<LiveMonitoringData> queue;
+	private boolean started = false;
 
 	public LiveMonitoringHelper(Context ctx){
 		this.ctx = ctx;
 		settings = ((OsmandApplication) ctx.getApplicationContext()).getSettings();
+		queue = new ConcurrentLinkedQueue<>();
 	}
 	
 	public boolean isLiveMonitoringEnabled(){
 		return settings.LIVE_MONITORING.get() && (settings.SAVE_TRACK_TO_GPX.get() || settings.SAVE_GLOBAL_TRACK_TO_GPX.get());
 	}
-	
+
 	public void updateLocation(net.osmand.Location location) {
 		boolean record = false;
 		long locationTime = System.currentTimeMillis();
@@ -67,10 +71,18 @@ public class LiveMonitoringHelper  {
 				record = false;
 			}
 		}
+		if (isLiveMonitoringEnabled()) {
+			if (!started) {
+				new LiveSender().execute(queue);
+				started = true;
+			}
+		} else {
+			started = false;
+		}
 		if(record) {
 			LiveMonitoringData data = new LiveMonitoringData((float)location.getLatitude(), (float)location.getLongitude(),
 					(float)location.getAltitude(), location.getSpeed(), location.getAccuracy(), location.getBearing(), locationTime);
-			new LiveSender().execute(data);
+			queue.add(data);
 			lastPoint = new LatLon(location.getLatitude(), location.getLongitude());
 			lastTimeUpdated = locationTime;
 		}
@@ -99,16 +111,22 @@ public class LiveMonitoringHelper  {
 		
 	}
 	
-	private class LiveSender extends AsyncTask<LiveMonitoringData, Void, Void> {
+	private class LiveSender extends AsyncTask<ConcurrentLinkedQueue<LiveMonitoringData>, Void, Void> {
 
 		@Override
-		protected Void doInBackground(LiveMonitoringData... params) {
-			for(LiveMonitoringData d : params){
-				sendData(d);
+		protected Void doInBackground(ConcurrentLinkedQueue<LiveMonitoringData>... concurrentLinkedQueues) {
+			while (isLiveMonitoringEnabled()) {
+				for (ConcurrentLinkedQueue queue : concurrentLinkedQueues) {
+					if (!queue.isEmpty()) {
+						LiveMonitoringData data = (LiveMonitoringData) queue.poll();
+						if (!(System.currentTimeMillis() - data.time > settings.LIVE_MONITORING_MAX_INTERVAL_TO_SEND.get())) {
+							sendData(data);
+						}
+					}
+				}
 			}
 			return null;
 		}
-		
 	}
 
 	public void sendData(LiveMonitoringData data) {
