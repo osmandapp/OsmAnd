@@ -31,5 +31,5 @@
     <string name="default_changeset_delete">Delete</string>
     <string name="default_changeset_reopen">Reopen</string>
     <string name="items_modified">items modified</string>
-
+    <string name="osmand_unlimited">OsmAnd Unlimited</string>
 </resources>
