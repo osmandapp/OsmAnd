@@ -118,9 +118,11 @@ public class LiveMonitoringHelper  {
 			while (isLiveMonitoringEnabled()) {
 				for (ConcurrentLinkedQueue queue : concurrentLinkedQueues) {
 					if (!queue.isEmpty()) {
-						LiveMonitoringData data = (LiveMonitoringData) queue.poll();
+						LiveMonitoringData data = (LiveMonitoringData) queue.peek();
 						if (!(System.currentTimeMillis() - data.time > settings.LIVE_MONITORING_MAX_INTERVAL_TO_SEND.get())) {
 							sendData(data);
+						} else {
+							queue.poll();
 						}
 					}
 				}
@@ -197,6 +199,7 @@ public class LiveMonitoringHelper  {
 						urlConnection.getResponseMessage();
 				log.error("Error sending monitor request: " +  msg);
 			} else {
+				queue.poll();
 				InputStream is = urlConnection.getInputStream();
 				StringBuilder responseBody = new StringBuilder();
 				if (is != null) {
