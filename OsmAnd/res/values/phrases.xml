@@ -3412,4 +3412,30 @@
 
 	<string name="poi_spaceport">Spaceport</string>
 
+	<string name="poi_direction_n">Direction: north</string>
+	<string name="poi_direction_nne">Direction: north-northeast</string>
+	<string name="poi_direction_ne">Direction: northeast</string>
+	<string name="poi_direction_ene">Direction: east-northeast</string>
+	<string name="poi_direction_e">Direction: east</string>
+	<string name="poi_direction_ese">Direction: east-southeast</string>
+	<string name="poi_direction_se">Direction: southeast</string>
+	<string name="poi_direction_sse">Direction: south-southeast</string>
+	<string name="poi_direction_s">Direction: south</string>
+	<string name="poi_direction_ssw">Direction: south-southwest</string>
+	<string name="poi_direction_sw">Direction: southwest</string>
+	<string name="poi_direction_wsw">Direction: west-southwest</string>
+	<string name="poi_direction_w">Direction: west</string>
+	<string name="poi_direction_wnw">Direction: west-northwest</string>
+	<string name="poi_direction_nw">Direction: northwest</string>
+	<string name="poi_direction_nnw">Direction: north-northwest</string>
+	<string name="poi_direction_forward">Direction: forward</string>
+	<string name="poi_direction_backward">Direction: backward</string>
+	<string name="poi_direction_clockwise">Direction: clockwise</string>
+	<string name="poi_direction_anticlockwise">Direction: anticlockwise</string>
+	<string name="poi_direction_up">Direction: up</string>
+	<string name="poi_direction_down">Direction: down</string>
+	<string name="poi_direction_entrance">Direction: entrance</string>
+	<string name="poi_direction_exit">Direction: exit</string>
+	<string name="poi_direction_all">Direction: all</string>
+
 </resources>
