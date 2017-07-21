@@ -639,8 +639,7 @@ public class QuickSearchCoordinatesFragment extends DialogFragment implements Os
 		View compassView = view.findViewById(R.id.compass_layout);
 		Location ll = getMyApplication().getLocationProvider().getLastKnownLocation();
 		boolean showCompass = currentLatLon != null && location != null;
-		boolean gpsFixed = ll != null && System.currentTimeMillis() - ll.getTime() < 1000 * 60 * 60 * 20;
-		if (gpsFixed && showCompass) {
+		if (ll != null && showCompass) {
 			updateDistanceDirection(view, location, currentLatLon, heading);
 			compassView.setVisibility(View.VISIBLE);
 		} else {

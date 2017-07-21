@@ -48,7 +48,7 @@ public class OsmAndLocationProvider implements SensorEventListener {
 
 	public static final String SIMULATED_PROVIDER = "OsmAnd";
 
-	public static final long STALE_LOCATION_TIMEOUT = 1000 * 60 * 60; // 60 minutes
+	private static final long STALE_LOCATION_TIMEOUT = 1000 * 60 * 60; // 60 minutes
 	public static final long STALE_LOCATION_TIMEOUT_FOR_ICON = 1000 * 60 * 5; // 5 minutes
 
 	public interface OsmAndLocationListener {
@@ -861,6 +861,9 @@ public class OsmAndLocationProvider implements SensorEventListener {
 	}
 
 	public net.osmand.Location getLastKnownLocation() {
+		if (location != null && (System.currentTimeMillis() - location.getTime()) > STALE_LOCATION_TIMEOUT) {
+			setLocation(null);
+		}
 		return location;
 	}
 

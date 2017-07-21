@@ -12,7 +12,6 @@ import net.osmand.plus.IconsCache;
 import net.osmand.plus.MapMarkersHelper;
 import net.osmand.plus.MapMarkersHelper.MapMarker;
 import net.osmand.plus.OsmAndFormatter;
-import net.osmand.plus.OsmAndLocationProvider;
 import net.osmand.plus.R;
 import net.osmand.plus.activities.MapActivity;
 import net.osmand.plus.dashboard.DashLocationFragment;
@@ -57,9 +56,6 @@ public class MapMarkersWidgetsFactory {
 	private ImageButton moreButton2nd;
 
 	private LatLon loc;
-	private Location lastKnownPosition;
-
-	private int updatesCounter;
 
 	public MapMarkersWidgetsFactory(final MapActivity map) {
 		this.map = map;
@@ -193,23 +189,9 @@ public class MapMarkersWidgetsFactory {
 			Location l = map.getMapViewTrackingUtilities().getMyLocation();
 			if (l != null) {
 				loc = new LatLon(l.getLatitude(), l.getLongitude());
-				lastKnownPosition = l;
-			} else if (lastKnownPosition == null) {
+			} else {
 				loc = null;
-			} else if (updatesCounter == 0) {
-				if (System.currentTimeMillis() - lastKnownPosition.getTime() < OsmAndLocationProvider.STALE_LOCATION_TIMEOUT) {
-					loc = new LatLon(lastKnownPosition.getLatitude(), lastKnownPosition.getLongitude());
-				} else {
-					loc = null;
-					lastKnownPosition = null;
-				}
 			}
-		}
-
-		if (updatesCounter == UPDATES_BEFORE_CHECK_LOCATION) {
-			updatesCounter = 0;
-		} else {
-			updatesCounter++;
 		}
 
 		List<MapMarker> markers = helper.getMapMarkers();

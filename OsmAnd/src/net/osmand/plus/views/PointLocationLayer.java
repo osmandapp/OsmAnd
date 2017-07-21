@@ -87,7 +87,7 @@ public class PointLocationLayer extends OsmandMapLayer implements ContextMenuLay
 				updatesCounter++;
 			}
 		}
-		return false;
+		return locationOutdated;
 	}
 
 	private RectF getHeadingRect(int locationX, int locationY){
