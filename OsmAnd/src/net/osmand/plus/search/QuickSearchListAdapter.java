@@ -450,8 +450,7 @@ public class QuickSearchListAdapter extends ArrayAdapter<QuickSearchListItem> {
 		View compassView = view.findViewById(R.id.compass_layout);
 		Location ll = app.getLocationProvider().getLastKnownLocation();
 		boolean showCompass = location != null && listItem.getSearchResult().location != null;
-		boolean gpsFixed = ll != null && System.currentTimeMillis() - ll.getTime() < 1000 * 60 * 60 * 20;
-		if ((gpsFixed || useMapCenter) && showCompass) {
+		if ((ll != null || useMapCenter) && showCompass) {
 			updateDistanceDirection(view, listItem);
 			compassView.setVisibility(View.VISIBLE);
 		} else {

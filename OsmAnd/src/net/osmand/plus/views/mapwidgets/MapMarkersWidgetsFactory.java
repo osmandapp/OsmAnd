@@ -55,7 +55,6 @@ public class MapMarkersWidgetsFactory {
 	private ImageButton moreButton2nd;
 
 	private LatLon loc;
-	private LatLon lastKnownPosition;
 
 	public MapMarkersWidgetsFactory(final MapActivity map) {
 		this.map = map;
@@ -189,9 +188,8 @@ public class MapMarkersWidgetsFactory {
 			Location l = map.getMapViewTrackingUtilities().getMyLocation();
 			if (l != null) {
 				loc = new LatLon(l.getLatitude(), l.getLongitude());
-				lastKnownPosition = loc;
 			} else {
-				loc = lastKnownPosition;
+				loc = null;
 			}
 		}
 
