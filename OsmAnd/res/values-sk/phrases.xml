@@ -127,7 +127,7 @@
 	<string name="poi_gate">Brána</string>
 	<string name="poi_city_wall">Mestské hradby</string>
 	<string name="poi_lift_gate">Závora</string>
-	<string name="poi_toll_booth">Mýtna búdka</string>
+	<string name="poi_toll_booth">Mýtna stanica</string>
 	<string name="poi_border_control">Hraničná kontrola</string>
 	<string name="poi_traffic_calming_bump">Malý spomaľovač</string>
 	<string name="poi_traffic_calming_table">Veľký spomaľovač</string>
@@ -990,11 +990,11 @@
 	<string name="poi_monitoring_station">Meracia stanica</string>
 	<string name="poi_capital">Hlavné mesto</string>
 	<string name="poi_shower">Sprcha</string>
-	<string name="poi_animal_shelter_bird">Typ prístrešku: vtáky</string>
+	<string name="poi_animal_shelter_bird">Vtáky</string>
 
-<string name="poi_animal_shelter_dog">Typ prístrešku: psy</string>
-	<string name="poi_animal_shelter_cat">Typ prístrešku: mačky</string>
-	<string name="poi_animal_shelter_dog_cat">Typ prístrešku: psy a mačky</string>
+<string name="poi_animal_shelter_dog">Psy</string>
+	<string name="poi_animal_shelter_cat">Mačky</string>
+	<string name="poi_animal_shelter_dog_cat">Psy a mačky</string>
 	<string name="poi_fee_no">Nie</string>
 	<string name="poi_drinking_water_yes">Áno</string>
 	<string name="poi_drinking_water_no">Nie</string>
@@ -1913,8 +1913,8 @@
 
 	<string name="poi_telescope">Teleskop/Ďalekohľad</string>
 	<string name="poi_telescope_type_optical">Optický</string>
-	<string name="poi_telescope_type_radio">Teleskop: rádiový</string>
-	<string name="poi_telescope_type_gamma">Teleskop: gamma-žiarenie</string>
+	<string name="poi_telescope_type_radio">Rádiový</string>
+	<string name="poi_telescope_type_gamma">Gamma-žiarenie</string>
 	<string name="poi_nuclear_explosion_crater_diameter">Výbuch: priemer krátera</string>
 	<string name="poi_fire_hydrant_diameter">Priemer hydrantu</string>
 	<string name="poi_telescope_diameter">Priemer</string>
