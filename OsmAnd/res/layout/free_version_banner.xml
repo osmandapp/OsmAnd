@@ -118,7 +118,7 @@
                             android:id="@+id/fullVersionTitle"
                             android:layout_width="match_parent"
                             android:layout_height="wrap_content"
-                            android:text="OsmAnd+"
+                            android:text="@string/osmand_unlimited"
                             android:textSize="@dimen/default_list_text_size_large"
                             android:textStyle="bold"/>
 
