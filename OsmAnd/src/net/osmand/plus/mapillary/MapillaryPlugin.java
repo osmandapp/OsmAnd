@@ -189,7 +189,7 @@ public class MapillaryPlugin extends OsmandPlugin {
 
 	private TextInfoWidget createMonitoringControl(final MapActivity map) {
 		mapillaryControl = new TextInfoWidget(map);
-		mapillaryControl.setText("", map.getString(R.string.mapillary));
+		mapillaryControl.setText(map.getString(R.string.mapillary), "");
 		mapillaryControl.setIcons(R.drawable.widget_mapillary_day, R.drawable.widget_mapillary_night);
 		mapillaryControl.setOnClickListener(new View.OnClickListener() {
 			@Override
