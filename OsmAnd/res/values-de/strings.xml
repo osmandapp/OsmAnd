@@ -1,4 +1,5 @@
-<?xml version="1.0" encoding="UTF-8" standalone="no"?><resources>
+<?xml version='1.0' encoding='UTF-8'?>
+<resources>
     <string name="distance_moving">Korrigierte Distanz</string>
     <string name="wiki_around">Wikipedia-Artikel zur Umgebung</string>
     
@@ -2762,4 +2763,8 @@ Abgedeckte Fläche: %1$s x %2$s</string>
     <string name="moving_time">Zeit in Bewegung</string>
     <string name="mapillary_menu_filter_description">Sie können Bilder nach Übermittler oder Datum filtern. Filter gelten nur für nahe Zoomstufen.</string>
     <string name="min_max">min/max</string>
+    <string name="quick_action_resume_pause_navigation_descr">Taste drücken, um Navigation zu pausieren oder fortzusetzen, wenn sie bereits pausiert ist.</string>
+    <string name="quick_action_show_navigation_finish_dialog">Dialog bei Navigationsende anzeigen</string>
+    <string name="quick_action_start_stop_navigation_descr">Taste drücken, um Navigation zu starten oder zu beenden, wenn sie bereits gestartet ist.</string>
+    <string name="quick_action_start_stop_navigation">Start/Stopp - Navigation</string>
     </resources>
