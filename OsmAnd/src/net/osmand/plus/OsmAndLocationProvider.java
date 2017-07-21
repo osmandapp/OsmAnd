@@ -48,9 +48,6 @@ public class OsmAndLocationProvider implements SensorEventListener {
 
 	public static final String SIMULATED_PROVIDER = "OsmAnd";
 
-	private static final long STALE_LOCATION_TIMEOUT = 1000 * 60 * 60; // 60 minutes
-	public static final long STALE_LOCATION_TIMEOUT_FOR_ICON = 1000 * 60 * 5; // 5 minutes
-
 	public interface OsmAndLocationListener {
 		void updateLocation(net.osmand.Location location);
 	}
@@ -71,6 +68,12 @@ public class OsmAndLocationProvider implements SensorEventListener {
 	private static final int GPS_TIMEOUT_REQUEST = 0;
 	private static final int GPS_DIST_REQUEST = 0;
 	private static final int NOT_SWITCH_TO_NETWORK_WHEN_GPS_LOST_MS = 12000;
+
+	private static final long STALE_LOCATION_TIMEOUT = 1000 * 60 * 60; // 60 minutes
+	public static final long STALE_LOCATION_TIMEOUT_FOR_ICON = 1000 * 60 * 5; // 5 minutes
+
+	private static final int UPDATES_BEFORE_CHECK_LOCATION = 100;
+	private int updatesCounter;
 
 	private long lastTimeGPSLocationFixed = 0;
 	private boolean gpsSignalLost;
@@ -861,8 +864,14 @@ public class OsmAndLocationProvider implements SensorEventListener {
 	}
 
 	public net.osmand.Location getLastKnownLocation() {
-		if (location != null && (System.currentTimeMillis() - location.getTime()) > STALE_LOCATION_TIMEOUT) {
+		if (location != null && (System.currentTimeMillis() - location.getTime()) > STALE_LOCATION_TIMEOUT &&
+				updatesCounter == 0) {
 			setLocation(null);
+		}
+		if (updatesCounter == UPDATES_BEFORE_CHECK_LOCATION) {
+			updatesCounter = 0;
+		} else {
+			updatesCounter++;
 		}
 		return location;
 	}
