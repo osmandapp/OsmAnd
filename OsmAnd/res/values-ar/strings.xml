@@ -2715,5 +2715,5 @@
     <string name="quick_action_start_stop_navigation">بدء/انهاء الملاحة</string>
     <string name="quick_action_start_stop_navigation_descr">اضغط على هذا الزر لبدء الملاحة، أو لوقفها إذا ما كانت قد بدأت مسبقا.</string>
     <string name="live_monitoring_max_interval_to_send">الوقت الإضافي المخزن المؤقت للتتبع على الإنترنت</string>
-    <string name="live_monitoring_max_interval_to_send_desrc">تحديد الوقت الإضافي المخزن للابقاء على المواقع وإرسالها دون اتصال</string>
+    <string name="live_monitoring_max_interval_to_send_desrc">تحديد الوقت الإضافي المخزن للحفاظ على المواقع وإرسالها دون اتصال</string>
     </resources>
