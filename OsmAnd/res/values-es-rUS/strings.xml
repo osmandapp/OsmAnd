@@ -2463,7 +2463,7 @@ Proporciona un código completo</string>
     <string name="routing_attr_relief_smoothness_factor_hills_name">Empinado</string>
     <string name="routing_attr_relief_smoothness_factor_plains_name">Poco empinado</string>
     <string name="routing_attr_relief_smoothness_factor_more_plains_name">Plano (llanura)</string>
-    <string name="routing_attr_driving_style_speed_name">Preferir caminos principales</string>
+    <string name="routing_attr_driving_style_speed_name">Rutas más cortas</string>
     <string name="routing_attr_driving_style_balance_name">Equilibrado</string>
     <string name="routing_attr_driving_style_safety_name">Preferir caminos secundarios</string>
     <string name="relief_smoothness_factor_descr">Terreno preferido: llano o empinado</string>
@@ -2694,4 +2694,6 @@ Proporciona un código completo</string>
     <string name="quick_action_show_navigation_finish_dialog">Mostrar diálogo de Finalizar navegación</string>
     <string name="quick_action_start_stop_navigation">Iniciar/Parar navegación</string>
     <string name="quick_action_start_stop_navigation_descr">Pulsa este botón para iniciar la navegación, o para finalizarla si ya se había iniciado.</string>
+    <string name="live_monitoring_max_interval_to_send">Tiempo del búfer para el seguimiento en línea</string>
+    <string name="live_monitoring_max_interval_to_send_desrc">Especifica el tiempo del búfer para mantener lugares para enviar sin conexión</string>
     </resources>
