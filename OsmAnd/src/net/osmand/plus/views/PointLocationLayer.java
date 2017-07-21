@@ -26,7 +26,6 @@ import java.util.List;
 public class PointLocationLayer extends OsmandMapLayer implements ContextMenuLayer.IContextMenuProvider {
 	private static final Log LOG = PlatformUtil.getLog(PointLocationLayer.class);
 
-	private static final int UPDATES_BEFORE_CHECK_LOCATION = 20;
 
 	protected final static int RADIUS = 7;
 
@@ -43,7 +42,6 @@ public class PointLocationLayer extends OsmandMapLayer implements ContextMenuLay
 	private OsmAndLocationProvider locationProvider;
 	private MapViewTrackingUtilities mapViewTrackingUtilities;
 	private boolean nm;
-	private int updatesCounter;
 	private boolean locationOutdated;
 
 	public PointLocationLayer(MapViewTrackingUtilities mv) {
@@ -66,28 +64,14 @@ public class PointLocationLayer extends OsmandMapLayer implements ContextMenuLay
 		aroundArea.setAntiAlias(true);
 
 		locationProvider = view.getApplication().getLocationProvider();
-		updateIcons(view.getSettings().getApplicationMode(), false, isLocationOutdated());
+		updateIcons(view.getSettings().getApplicationMode(), false,
+				isLocationOutdated(locationProvider.getLastKnownLocation()));
 	}
 
 	@Override
 	public void initLayer(OsmandMapTileView view) {
 		this.view = view;
 		initUI();
-	}
-
-	private boolean isLocationOutdated() {
-		if (locationProvider.getLastKnownLocation() != null && updatesCounter == 0) {
-			updatesCounter++;
-			return System.currentTimeMillis() - locationProvider.getLastKnownLocation().getTime() >
-					OsmAndLocationProvider.STALE_LOCATION_TIMEOUT_FOR_ICON;
-		} else {
-			if (updatesCounter == UPDATES_BEFORE_CHECK_LOCATION) {
-				updatesCounter = 0;
-			} else {
-				updatesCounter++;
-			}
-		}
-		return locationOutdated;
 	}
 
 	private RectF getHeadingRect(int locationX, int locationY){
@@ -102,7 +86,8 @@ public class PointLocationLayer extends OsmandMapLayer implements ContextMenuLay
 		}
 		// draw
 		boolean nm = nightMode != null && nightMode.isNightMode();
-		updateIcons(view.getSettings().getApplicationMode(), nm, isLocationOutdated());
+		updateIcons(view.getSettings().getApplicationMode(), nm,
+				isLocationOutdated(locationProvider.getLastKnownLocation()));
 		Location lastKnownLocation = locationProvider.getLastKnownLocation();
 		if(lastKnownLocation == null || view == null){
 			return;
