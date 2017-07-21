@@ -1,4 +1,5 @@
-<?xml version="1.0" encoding="UTF-8" standalone="no"?><resources><string name="close_changeset">Değişiklik listesini kapat</string>
+<?xml version='1.0' encoding='UTF-8'?>
+<resources><string name="close_changeset">Değişiklik listesini kapat</string>
 	<string name="zxing_barcode_scanner_not_found">ZXing Barcode Scanner uygulaması kurulu değil. Uygulama marketinde aramak ister misiniz?</string>
 	<string name="rendering_attr_roadColors_description">Yol renk şemasını seç:</string>
 	<string name="rendering_attr_roadColors_name">Yol renk şeması</string>
@@ -20,10 +21,10 @@
     <string name="new_destination_point_dialog">Hedef konumu zaten ayarlandı.</string>
     <string name="target_points">Varış noktaları</string>
     <string name="intermediate_point_too_far">Ara hedef %1$s çok uzak en yakın yol var.</string>
-    <string name="arrived_at_intermediate_point">Ara hedefinize ulaştınız</string>
+    <string name="arrived_at_intermediate_point">Ara hedefine ulaştın</string>
     <string name="context_menu_item_intermediate_point">Ara hedef olarak eklemek</string>
     <string name="map_widget_intermediate_distance">Ara hedef</string>
-    <string name="ending_point_too_far">Bitiş noktası en yakın yola çok fazla uzaklıkta.</string>
+    <string name="ending_point_too_far">Bitiş noktası en yakın yoldan çok uzak</string>
     <string name="add_tag">Etiket Ekle</string>
     <string name="btn_advanced_mode">Gelişmiş Kip…</string>
     <string name="poi_filter_parking">Park Etme</string>
@@ -218,7 +219,7 @@
 	<string name="download_hillshade_maps">Tepe gölgelendirme tabakaları</string>
     <string name="email">e-posta</string>
 <string name="osmand_parking_position_description_add_time">Araba park edilmiş</string>
-	<string name="starting_point_too_far">Başlangıç noktası en yakın yoldan çok uzakta.</string>
+	<string name="starting_point_too_far">Başlangıç noktası en yakın yoldan çok uzak</string>
 	<string name="osmand_parking_delete_confirm">Arabayı park ettiğiniz konumu silmek istiyor musunuz?</string>
 	<string name="osmand_parking_lim_text">Zaman-sınırlı</string>
 	<string name="osmand_parking_no_lim_text">Zaman-sınırsız</string>
