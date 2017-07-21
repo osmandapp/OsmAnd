@@ -2810,4 +2810,6 @@ Tidligere destination bliver sidste mellemliggende punkt.</string>
     <string name="quick_action_show_navigation_finish_dialog">Vis Stop navigation dialog</string>
     <string name="quick_action_start_stop_navigation">Start/stop navigation</string>
     <string name="quick_action_start_stop_navigation_descr">Tryk på knappen for at starte navigation eller stoppe, hvis den allerede var begyndt.</string>
+    <string name="live_monitoring_max_interval_to_send">Tidsbuffer til online sporing</string>
+    <string name="live_monitoring_max_interval_to_send_desrc">Angiv en tidsbuffer for at beholde steder at sende uden forbindelse</string>
     </resources>
