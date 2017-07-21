@@ -792,7 +792,8 @@ public class MapControlsLayer extends OsmandMapLayer {
 	}
 
 	private void updateMyLocation(RoutingHelper rh, boolean dialogOpened) {
-		boolean enabled = mapActivity.getMyApplication().getLocationProvider().getLastKnownLocation() != null;
+		boolean enabled = mapActivity.getMyApplication().getLocationProvider().getLastKnownLocation() != null &&
+				!isLocationOutdated(mapActivity.getMyApplication().getLocationProvider().getLastKnownLocation());
 		boolean tracked = mapActivity.getMapViewTrackingUtilities().isMapLinkedToLocation();
 
 		if (!enabled) {
