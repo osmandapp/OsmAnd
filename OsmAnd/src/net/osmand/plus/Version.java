@@ -33,7 +33,7 @@ public class Version {
 		} else if (isGooglePlayEnabled(ctx)) {
 			return "market://search?q=pname:";
 		} 
-		return "http://osmand.net/apps?id="; 
+		return "https://osmand.net/apps?id=";
 	}
 	
 	private static boolean isAmazonEnabled(OsmandApplication ctx) {

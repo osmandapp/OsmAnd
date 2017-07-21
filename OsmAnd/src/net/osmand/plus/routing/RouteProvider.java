@@ -580,7 +580,7 @@ public class RouteProvider {
 			ParserConfigurationException, FactoryConfigurationError, SAXException {
 		List<Location> res = new ArrayList<Location>();
 		StringBuilder uri = new StringBuilder();
-		uri.append("http://www.yournavigation.org/api/1.0/gosmore.php?format=kml"); //$NON-NLS-1$
+		uri.append("https://www.yournavigation.org/api/1.0/gosmore.php?format=kml"); //$NON-NLS-1$
 		uri.append("&flat=").append(params.start.getLatitude()); //$NON-NLS-1$
 		uri.append("&flon=").append(params.start.getLongitude()); //$NON-NLS-1$
 		uri.append("&tlat=").append(params.end.getLatitude()); //$NON-NLS-1$
@@ -998,7 +998,7 @@ public class RouteProvider {
 		}
 
 		StringBuilder request = new StringBuilder();
-		request.append("http://openls.geog.uni-heidelberg.de/osm/eu/routing?").append("start=").append(params.start.getLongitude()).append(',')
+		request.append("https://openls.geog.uni-heidelberg.de/osm/eu/routing?").append("start=").append(params.start.getLongitude()).append(',')
 				.append(params.start.getLatitude()).append("&end=").append(params.end.getLongitude()).append(',').append(params.end.getLatitude())
 				.append("&preference=").append(rpref);
 		// TODO if we would get instructions from the service, we could use this language setting
@@ -1170,7 +1170,7 @@ public class RouteProvider {
 
 	protected RouteCalculationResult findOSRMRoute(RouteCalculationParams params)
 			throws MalformedURLException, IOException, JSONException {
-		// http://router.project-osrm.org/route/v1/driving/4.83,52.28;4.95,52.28
+		// https://router.project-osrm.org/route/v1/driving/4.83,52.28;4.95,52.28
 		List<Location> res = new ArrayList<Location>();
 		StringBuilder uri = new StringBuilder();
 		// possibly hide that API key because it is privacy of osmand

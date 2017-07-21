@@ -41,7 +41,7 @@ import java.util.Locale;
 
 public class ReportsFragment extends BaseOsmAndFragment implements CountrySelectionFragment.OnFragmentInteractionListener {
 	public static final int TITLE = R.string.report;
-	public static final String DOMAIN = "http://download.osmand.net/";
+	public static final String DOMAIN = "https://download.osmand.net/";
 	public static final String TOTAL_CHANGES_BY_MONTH_URL_PATTERN = DOMAIN +
 			"reports/query_report.php?report=total_changes_by_month&month=%s&region=%s";
 	public static final String USERS_RANKING_BY_MONTH =  DOMAIN +
@@ -51,7 +51,7 @@ public class ReportsFragment extends BaseOsmAndFragment implements CountrySelect
 
 
 	private static final Log LOG = PlatformUtil.getLog(ReportsFragment.class);
-	public static final String OSM_LIVE_URL = "http://osmand.net/osm_live";
+	public static final String OSM_LIVE_URL = "https://osmand.net/osm_live";
 
 	private TextView contributorsTextView;
 	private TextView editsTextView;

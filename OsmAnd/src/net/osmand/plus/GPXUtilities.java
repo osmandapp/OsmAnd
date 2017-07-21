@@ -1024,7 +1024,7 @@ public class GPXUtilities {
 			format.setTimeZone(TimeZone.getTimeZone("UTC"));
 			XmlSerializer serializer = PlatformUtil.newSerializer();
 			serializer.setOutput(output);
-			serializer.setFeature("http://xmlpull.org/v1/doc/features.html#indent-output", true); //$NON-NLS-1$
+			serializer.setFeature("https://xmlpull.org/v1/doc/features.html#indent-output", true); //$NON-NLS-1$
 			serializer.startDocument("UTF-8", true); //$NON-NLS-1$
 			serializer.startTag(null, "gpx"); //$NON-NLS-1$
 			serializer.attribute(null, "version", "1.1"); //$NON-NLS-1$ //$NON-NLS-2$

@@ -443,7 +443,7 @@ public class OsmandRasterMapsPlugin extends OsmandPlugin {
 		final OsmandApplication app = (OsmandApplication) activity.getApplication();
 		final OsmandSettings settings = app.getSettings();
 		final Map<String, String> entriesMap = settings.getTileSourceEntries(false);
-		TileSourceTemplate ts = new TileSourceTemplate("NewMapnik", "http://mapnik.osmand.net/{0}/{1}/{2}.png",
+		TileSourceTemplate ts = new TileSourceTemplate("NewMapnik", "https://mapnik.osmand.net/{0}/{1}/{2}.png",
 				"png", 17, 5, 256, 16, 32000);
 		final TileSourceTemplate[] result = new TileSourceTemplate[]{ts};
 		AlertDialog.Builder bld = new AlertDialog.Builder(activity);

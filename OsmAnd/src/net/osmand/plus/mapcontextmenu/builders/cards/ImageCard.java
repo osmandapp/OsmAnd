@@ -410,7 +410,7 @@ public abstract class ImageCard extends AbstractCard {
 				if (!Algorithms.isEmpty(preferredLang)) {
 					pms.put("lang", preferredLang);
 				}
-				String response = AndroidNetworkUtils.sendRequest(app, "http://osmand.net/api/cm_place.php", pms,
+				String response = AndroidNetworkUtils.sendRequest(app, "https://osmand.net/api/cm_place.php", pms,
 						"Requesting location images...", false, false);
 
 				if (!Algorithms.isEmpty(response)) {
