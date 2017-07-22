@@ -164,6 +164,9 @@ public class LiveUpdatesFragment extends BaseOsmAndFragment implements InAppList
 	public void updateSubscriptionHeader() {
 		View subscriptionBanner = subscriptionHeader.findViewById(R.id.subscription_banner);
 		View subscriptionInfo = subscriptionHeader.findViewById(R.id.subscription_info);
+		if (getActivity() == null) {
+			return;
+		}
 		if (getSettings().LIVE_UPDATES_PURCHASED.get()) {
 			ImageView statusIcon = (ImageView) subscriptionHeader.findViewById(R.id.statusIcon);
 			TextView statusTextView = (TextView) subscriptionHeader.findViewById(R.id.statusTextView);
