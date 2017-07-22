@@ -138,7 +138,7 @@
 	<string name="poi_fort">Erőd</string>
 	<string name="poi_fountain">Szökőkút</string>
 	<string name="poi_historic_ruins">Történelmi rom</string>
-	<string name="poi_monument">Kiemelkedően jelentős emlékmű</string>
+	<string name="poi_monument">Monumentális, épületszerű emlékmű</string>
 	<string name="poi_zoo">Állatkert</string>
 	<string name="poi_theme_park">Vidámpark</string>
 
@@ -792,7 +792,7 @@
 	<string name="poi_educational_institution">Oktatási intézmény irodája</string>
 	<string name="poi_studio">Stúdió</string>
 	<string name="poi_bookmaker">Fogadóiroda</string>
-	<string name="poi_office_religion">Vallási iroda</string>
+	<string name="poi_office_religion">Egyházi iroda</string>
 	<string name="poi_association">Egyesületi iroda</string>
 	<string name="poi_financial">Pénzügyi vállalat irodája</string>
 	<string name="poi_political_party">Pártiroda</string>
