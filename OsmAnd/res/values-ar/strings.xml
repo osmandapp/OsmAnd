@@ -2569,7 +2569,7 @@
     <string name="driving_region_automatic">آلي</string>
     <string name="parking_options">خيارات مواقف السيارات</string>
     <string name="full_version_thanks">شكرا لكم لاقتناء النسخة الكاملة من أوسماند !</string>
-    <string name="routing_attr_driving_style_speed_name">قبول الطرق الرئيسية</string>
+    <string name="routing_attr_driving_style_speed_name">طرق أقصر</string>
     <string name="routing_attr_driving_style_safety_name">تفضيل الشوارع الجانبية</string>
     <string name="gpx_track">المسار</string>
     <string name="select_gpx_folder">إختر مجلد المسار</string>
@@ -2714,4 +2714,6 @@
     <string name="quick_action_show_navigation_finish_dialog">إظهار حوار انتهاء الملاحة</string>
     <string name="quick_action_start_stop_navigation">بدء/انهاء الملاحة</string>
     <string name="quick_action_start_stop_navigation_descr">اضغط على هذا الزر لبدء الملاحة، أو لوقفها إذا ما كانت قد بدأت مسبقا.</string>
+    <string name="live_monitoring_max_interval_to_send">الوقت الإضافي المخزن المؤقت للتتبع على الإنترنت</string>
+    <string name="live_monitoring_max_interval_to_send_desrc">تحديد الوقت الإضافي المخزن للحفاظ على المواقع وإرسالها دون اتصال</string>
     </resources>

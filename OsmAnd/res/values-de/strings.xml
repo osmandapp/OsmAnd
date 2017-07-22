@@ -1,4 +1,5 @@
-<?xml version="1.0" encoding="UTF-8" standalone="no"?><resources>
+<?xml version='1.0' encoding='UTF-8'?>
+<resources>
     <string name="distance_moving">Korrigierte Distanz</string>
     <string name="wiki_around">Wikipedia-Artikel zur Umgebung</string>
     
@@ -1765,14 +1766,14 @@ Mit Neuanmeldung fortfahren?</string>
     <string name="rename_failed">Umbenennen fehlgeschlagen.</string>
 	<string name="shared_string_currently_recording_track">Momentane Track-Aufzeichnung</string>
 	<string name="back_to_map">Zurück zur Karte</string>
-	<string name="plugin_nautical_descr">"Die Erweiterung bereichert OsmAnd um die zusätzliche Darstellungsmöglichkeit nautischer Karten für Bootfahrer, Segler oder andere Wassersportler. 
+	<string name="plugin_nautical_descr">Die Erweiterung bereichert OsmAnd um die zusätzliche Darstellungsmöglichkeit nautischer Karten für Bootfahrer, Segler oder andere Wassersportler. 
 \n
-\nEine spezielle Kartenergänzung für OsmAnd (\'Seezeichen (weltweit)\') enthält alle nautischen Navigationsmarken und Kartensymbole zur Navigation auf Binnengewässern und in Küstennähe. Die Beschreibung jeder Navigationsmarke liefert die notwendigen Einzelheiten zu deren Bestimmung und Bedeutung (Kategorie, Form, Farbe, Reihenfolge, Verweis usw.).
-\n
-\nUm zur herkömmlichen Kartendarstellung in OsmAnd zurückzukehren, kann diese Ansicht hier wieder deaktiviert oder die \'Kartendarstellung\' unter \'Karte konfigurieren\' wie gewünscht geändert werden. "</string>
-	<string name="plugin_ski_descr">"Diese Erweiterung aktiviert die spezielle Kartendarstellung \'Winter- und Skikarte\', die global Skiabfahrten, Langlaufrouten, alpine Skirouten, Skilifte und Bergbahnen enthält. Routen und Pisten werden farbcodiert nach Schwierigkeit, Landschaftselemente nach winterlichen Gesichtspunkten (Assimilierung einer Schneedecke) angezeigt.
-\n
-\nDiese spezielle Kartendarstellung kann zurückgestellt werden, indem sie hier wieder deaktiviert oder indem die \'Kartendarstellung\' unter \'Karte konfigurieren\' wie gewünscht geändert wird. "</string>
+\nEine spezielle Kartenergänzung für OsmAnd (\'Seezeichen (weltweit)\') enthält alle nautischen Navigationsmarken und Kartensymbole zur Navigation auf Binnengewässern und in Küstennähe. Die Beschreibung jeder Navigationsmarke liefert die notwendigen Einzelheiten zu deren Bestimmung und Bedeutung (Kategorie, Form, Farbe, Reihenfolge, Verweis usw.). 
+\n 
+\nUm zur herkömmlichen Kartendarstellung in OsmAnd zurückzukehren, kann diese Ansicht hier wieder deaktiviert oder die \'Kartendarstellung\' unter \'Karte konfigurieren\' wie gewünscht geändert werden.</string>
+	<string name="plugin_ski_descr">Diese Erweiterung aktiviert die spezielle Kartendarstellung \'Winter- und Skikarte\', die global Skiabfahrten, Langlaufrouten, alpine Skirouten, Skilifte und Bergbahnen enthält. Routen und Pisten werden farbcodiert nach Schwierigkeit, Landschaftselemente nach winterlichen Gesichtspunkten (Assimilierung einer Schneedecke) angezeigt. 
+\n 
+\nDiese spezielle Kartendarstellung kann zurückgestellt werden, indem sie hier wieder deaktiviert oder indem die \'Kartendarstellung\' unter \'Karte konfigurieren\' wie gewünscht geändert wird.</string>
 	<string name="plugin_touringview_descr">"Bei Aktivierung dieser Ansicht wechselt die Kartendarstellung zur \'Tourenkarte\', einer besonders detaillierten Darstellung für Fernreisende und Berufsfahrer.
 \n
 \nDiese Darstellung liefert für jeden Maßstab den größtmöglichen Umfang an Details zu Fernreisen, die die Kartendaten enthalten (insbesondere alle Straßen, Wege, Pfade und Orientierungspunkte). 
@@ -2062,23 +2063,23 @@ Lon %2$s</string>
     <string name="access_from_map_description">Menütaste zeigt Dashboard, nicht das Menü</string>
     <string name="show_on_start_description">\"Aus\" startet direkt die Kartenansicht</string>
     <string name="copied_to_clipboard">In die Zwischenablage kopiert</string>
-    <string name="release_2_2">" • Neue kontextbezogene Benutzeroberfläche bei Auswahl von Orten auf der Karte und anderen Ansichten
-\n
-\n • Kartenansicht wird nun direkt gestartet, außer bei Auswahl von \'Zeige Dashboard bei App-Start\'
-\n
-\n • Auswahl der anzuzeigenden Elemente im Dashboard möglich
-\n
-\n • Dashboard kann umgangen werden, falls menübasierte App-Steuerung gewünscht ist
-\n
-\n • Zum Herunterladen von Kartendateien können nun Regionen direkt durch Tippen auf der Weltkarte ausgewählt werden
-\n
-\n • Die POI-Suche ermöglicht nun speziellere Abfragen
-\n
-\n • Verbesserungen beim Editieren von POI- und OSM-Objekten
-\n
-\n • Oberfläche und Struktur zum Herunterladen der Karten wurden überarbeitet
-\n
-\n und mehr … "</string>
+    <string name="release_2_2">\\022 Neue kontextbezogene Benutzeroberfläche bei Auswahl von Orten auf der Karte und anderen Ansichten 
+\n 
+\n • Kartenansicht wird nun direkt gestartet, außer bei Auswahl von \'Zeige Dashboard bei App-Start\' 
+\n 
+\n • Auswahl der anzuzeigenden Elemente im Dashboard möglich 
+\n 
+\n • Dashboard kann umgangen werden, falls menübasierte App-Steuerung gewünscht ist 
+\n 
+\n • Zum Herunterladen von Kartendateien können nun Regionen direkt durch Tippen auf der Weltkarte ausgewählt werden 
+\n 
+\n • Die POI-Suche ermöglicht nun speziellere Abfragen 
+\n 
+\n • Verbesserungen beim Editieren von POI- und OSM-Objekten 
+\n 
+\n • Oberfläche und Struktur zum Herunterladen der Karten wurden überarbeitet 
+\n 
+\n und mehr …</string>
     <string name="osm_save_offline">Offline speichern</string>
     <string name="osm_edit_modified_poi">Geänderter OSM-POI</string>
     <string name="osm_edit_deleted_poi">Gelöschter OSM-POI</string>
@@ -2262,8 +2263,17 @@ Wenn Sie OsmAnd und OSM lieben und unterstützen wollen, so ist dies die perfekt
     <string name="avoid_road">Straßen vermeiden</string>
     <string name="storage_directory_readonly_desc">Der momentan gewählte Speicherort ist schreibgeschützt. Es wurde vorübergehend zum internen Speicher gewechselt. Bitte einen gültigen Speicherort wählen.</string>
     <string name="storage_directory_shared">Gemeinsamer Speicher</string>
-    <string name="release_2_3">" • OSM Live. Unterstütze Karten-Mitwirkende und Entwickler und erhalte stündliche Karten Aktualisierungen.\n\n • Kartenmarkierung. Eine neue Methode Orte auf der Karte schnell auszuwählen.\n\n • Detailliertere OSM Karten mit länderspezifischen Straßenschildern und vielen neuen Kartenmerkmalen.\n\n • Verbessertes Aussehen und Verhalten der Routenerstellung.\n\n • Viele Verbesserungen im Kontextmenü der Karte, wie beispielsweise kontextabhängige Adresssuche.
-\n\n und mehr… "</string>
+    <string name="release_2_3">\\022 OSM Live. Unterstütze Karten-Mitwirkende und Entwickler und erhalte stündliche Karten Aktualisierungen.
+\n
+\n • Kartenmarkierung. Eine neue Methode Orte auf der Karte schnell auszuwählen.
+\n
+\n • Detailliertere OSM Karten mit länderspezifischen Straßenschildern und vielen neuen Kartenmerkmalen.
+\n
+\n • Verbessertes Aussehen und Verhalten der Routenerstellung.
+\n
+\n • Viele Verbesserungen im Kontextmenü der Karte, wie beispielsweise kontextabhängige Adresssuche. 
+\n
+\n und mehr…</string>
     <string name="full_report">Vollständiger Bericht</string>
     <string name="open_street_map_login_and_pass">OpenStreetMap-Zugang und Passwort</string>
     <string name="osm_live_email_desc">Wird benötigt, um Ihnen Informationen zu Beiträgen bereitstellen zu können</string>
@@ -2340,19 +2350,19 @@ Wenn Sie OsmAnd und OSM lieben und unterstützen wollen, so ist dies die perfekt
     <string name="back_to_search">Zurück zur Suche</string>
     <string name="confirmation_to_delete_history_items">Ausgewählte Elemente aus dem Verlauf löschen?</string>
     <string name="show_something_on_map">%1$s auf der Karte anzeigen</string>
-    <string name="release_2_4">" • Neue sehr leistungsfähige Freitextsuche
-\n
-\n • Audio-Integration mit Fahrzeug-Soundanlage / Freisprecheinrichtung über Bluetooth
-\n
-\n • Verbesserte Navigationsansagen, Sprachinformationen und Abbiegespurhinweise
-\n
-\n • Verbesserte Anzeige der ÖPNV Linien mit Routenanzeige
-\n
-\n • Mehr Sprachen hinzugefügt und Unterstützung für regionale Sprachen
-\n
-\n • Viele andere Verbesserungen und Problembehebungen
-\n
-\n und mehr… "</string>
+    <string name="release_2_4">\\022 Neue sehr leistungsfähige Freitextsuche 
+\n 
+\n • Audio-Integration mit Fahrzeug-Soundanlage / Freisprecheinrichtung über Bluetooth 
+\n 
+\n • Verbesserte Navigationsansagen, Sprachinformationen und Abbiegespurhinweise 
+\n 
+\n • Verbesserte Anzeige der ÖPNV Linien mit Routenanzeige 
+\n 
+\n • Mehr Sprachen hinzugefügt und Unterstützung für regionale Sprachen 
+\n 
+\n • Viele andere Verbesserungen und Problembehebungen 
+\n 
+\n und mehr…</string>
     
     <string name="share_history_subject">geteilt über OsmAnd</string>
     <string name="dist_away_from_my_location">Suche %1$s entfernt</string>
@@ -2430,19 +2440,19 @@ Wenn Sie OsmAnd und OSM lieben und unterstützen wollen, so ist dies die perfekt
     <string name="gpx_logging_no_data">Keine Daten</string>
     <string name="shared_string_trip">Strecke</string>
     <string name="shared_string_record">Aufzeichnen</string>
-    <string name="release_2_5">" • Anklickbare Symbole auf der Karte
-\n
-\n• leistungsstarke POI Filtersuche z.B. Restaurants nach Küchenart, Campingplätze nach spezifischen Bedürfnissen, ...
-\n
-\n• neue OsmAnd Topo Stil, für Radfahrer und Wanderer
-\n
-\n• verbesserte Streckenaufzeichnung (neue Einstellungen)
-\n
-\n• verbesserte Navigationsbenachrichtigungen (Android Wear)
-\n
-\n• viele weitere Verbesserungen und Fehlerbehebungen
-\n
-\nund vieles mehr ... "</string>
+    <string name="release_2_5">\\022 Anklickbare Symbole auf der Karte 
+\n 
+\n• leistungsstarke POI Filtersuche z.B. Restaurants nach Küchenart, Campingplätze nach spezifischen Bedürfnissen, ... 
+\n 
+\n• neue OsmAnd Topo Stil, für Radfahrer und Wanderer 
+\n 
+\n• verbesserte Streckenaufzeichnung (neue Einstellungen) 
+\n 
+\n• verbesserte Navigationsbenachrichtigungen (Android Wear) 
+\n 
+\n• viele weitere Verbesserungen und Fehlerbehebungen 
+\n 
+\nund vieles mehr …</string>
     <string name="trip_rec_notification_settings">Streckenaufzeichnung (keine Daten)</string>
     <string name="trip_rec_notification_settings_desc">Benachrichtigung einblenden, in der die Streckenaufzeichnung durch Betätigen der Taste \'Aufzeichnen\' gestartet werden kann.</string>
     <string name="shared_string_notifications">Benachrichtigungen</string>
@@ -2559,27 +2569,27 @@ Abgedeckte Fläche: %1$s x %2$s</string>
 	<string name="auto_split_recording_descr">Nach 6 min Pause neues Segment, nach 2 h neuen Track und nach Pause mit Datumsänderung neue Datei beginnen.</string>
     <string name="navigate_point_olc">Offener Standortcode (OLC)</string>
     <string name="quick_action_page_list_descr">Drücken der Aktionstaste blättert die untere Liste durch.</string>
-    <string name="release_2_6">" • Neue Funktion: Schnellaktionstaste
-\n
-\n • Verbessertes Ansprechen auf Bildschirmgesten
-\n
-\n • Neue Kartenschriftarten, die weitere Sprachen abdecken
-\n
-\n • TTS-Unterstützung regionaler Dialekte
-\n
-\n • Verbesserungen der Sichtbarkeit bei einigen Kartenstilen und Wikipedia
-\n
-\n • Unterstützung des Offenen Standortcodes (OLC)
-\n
-\n • Anzeige eines Höhen-, Steigungs- und Geschwindigkeitsprofils für aufgezeichnete GPX-Tracks und errechnete Routen
-\n
-\n • \"Fahrstil\"-Einstellungen und logische Verbesserungen bei der Rad-Wegführung
-\n
-\n • Einstellungen zur Verwendung von Höhendaten in der Rad-Wegführung
-\n
-\n • Verschiedene Verbesserungen und Fehlerbehebungen
-\n
-\n und mehr… "</string>
+    <string name="release_2_6">\\022 Neue Funktion: Schnellaktionstaste 
+\n 
+\n • Verbessertes Ansprechen auf Bildschirmgesten 
+\n 
+\n • Neue Kartenschriftarten, die weitere Sprachen abdecken 
+\n 
+\n • TTS-Unterstützung regionaler Dialekte 
+\n 
+\n • Verbesserungen der Sichtbarkeit bei einigen Kartenstilen und Wikipedia 
+\n 
+\n • Unterstützung des Offenen Standortcodes (OLC) 
+\n 
+\n • Anzeige eines Höhen-, Steigungs- und Geschwindigkeitsprofils für aufgezeichnete GPX-Tracks und errechnete Routen 
+\n 
+\n • \"Fahrstil\"-Einstellungen und logische Verbesserungen bei der Rad-Wegführung 
+\n 
+\n • Einstellungen zur Verwendung von Höhendaten in der Rad-Wegführung 
+\n 
+\n • Verschiedene Verbesserungen und Fehlerbehebungen 
+\n 
+\n und mehr…</string>
 	
     <string name="routing_attr_height_relief_smoothness_factor_description">Ebenen oder Berge betonen</string>
     <string name="routing_attr_height_obstacles_name">Höhendaten verwenden</string>
@@ -2632,9 +2642,9 @@ Abgedeckte Fläche: %1$s x %2$s</string>
     <string name="routing_attr_relief_smoothness_factor_hills_name">Bergig</string>
     <string name="routing_attr_relief_smoothness_factor_plains_name">Weniger bergig</string>
     <string name="routing_attr_relief_smoothness_factor_more_plains_name">Flach</string>
-    <string name="routing_attr_driving_style_speed_name">Schnell</string>
+    <string name="routing_attr_driving_style_speed_name">Kürzere Routen</string>
     <string name="routing_attr_driving_style_balance_name">Ausgewogen</string>
-    <string name="routing_attr_driving_style_safety_name">Sicher</string>
+    <string name="routing_attr_driving_style_safety_name">Nebenstraßen bevorzugen</string>
     <string name="routing_attr_relief_smoothness_factor_name">Steigung wählen</string>
     <string name="driving_region_automatic">Automatisch</string>
     <string name="osmand_extended_description_part1">" OsmAnd (OSM Automated Navigation Directions) ist eine Karten- und Navigationsanwendung mit Zugriff auf die kostenlosen, weltweiten und qualitativ hochwertigen Daten von OpenStreetMap (OSM). Erfreuen Sie sich an der akustischen und visuellen Navigation, der Betrachtung von POIs (points of interest), der Erstellung und Verwaltung von GPX-Tracks, der Visualisierung von Höhenlinien und -angaben (über ein Erweiterungsmodul), den Auswahlmöglichkeiten zwischen Auto-, Fahrrad- und Fußgänger-Betriebsart, der Möglichkeit an OSM mitzuarbeiten und vielem mehr. "</string>
@@ -2762,4 +2772,21 @@ Abgedeckte Fläche: %1$s x %2$s</string>
     <string name="moving_time">Zeit in Bewegung</string>
     <string name="mapillary_menu_filter_description">Sie können Bilder nach Übermittler oder Datum filtern. Filter gelten nur für nahe Zoomstufen.</string>
     <string name="min_max">min/max</string>
+    <string name="quick_action_resume_pause_navigation_descr">Taste drücken, um Navigation zu pausieren oder fortzusetzen, wenn sie bereits pausiert ist.</string>
+    <string name="quick_action_show_navigation_finish_dialog">Dialog bei Navigationsende anzeigen</string>
+    <string name="quick_action_start_stop_navigation_descr">Taste drücken, um Navigation zu starten oder zu beenden, wenn sie bereits gestartet ist.</string>
+    <string name="quick_action_start_stop_navigation">Start/Stopp - Navigation</string>
+    <string name="quick_action_resume_pause_navigation">Pause - Navigation</string>
+    <string name="release_2_7">\\022 Mapillary-Erweiterung mit Vor-Ort-Bildern
+\n
+\n • Lineal-Widget zur Entfernungsmessung
+\n
+\n • GPX-Teilabschnitte mit detaillierten Informationen zum Track
+\n
+\n • Weitere Verbesserungen und Fehlerkorrekturen
+\n
+\n</string>
+    <string name="rendering_value_translucent_pink_name">Transparentes Rosa</string>
+    <string name="live_monitoring_max_interval_to_send">Zeitpuffer für Track-Liveübertragung</string>
+    <string name="live_monitoring_max_interval_to_send_desrc">Zeitpuffer festlegen, in dem zu sendende Positionen erhalten bleiben sollen, wenn keine Verbindung besteht</string>
     </resources>

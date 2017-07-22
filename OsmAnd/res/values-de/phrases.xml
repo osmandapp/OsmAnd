@@ -2830,12 +2830,12 @@
 	<string name="poi_fire_hydrant_pressure">Hydrantdruck</string>
 	<string name="poi_fire_hydrant_count">Hydrantanzahl</string>
 	<string name="poi_fire_hydrant_flow_capacity">Hydrantdurchflusskapazität</string>
-	<string name="poi_fire_hydrant_position_sidewalk">Hydrantstandort: Bürgersteig</string>
-	<string name="poi_fire_hydrant_position_green">Hydrantstandort: Wiese</string>
-	<string name="poi_fire_hydrant_position_lane">Hydrantstandort: Fahrbahn</string>
-	<string name="poi_fire_hydrant_position_parking_lot">Hydrantstandort: Parkplatz</string>
-	<string name="poi_fire_hydrant_position_street">Hydrantstandort: Straße</string>
-	<string name="poi_fire_hydrant_position_underground">Hydrantstandort: Unterflur</string>
+	<string name="poi_fire_hydrant_position_sidewalk">Bürgersteig</string>
+	<string name="poi_fire_hydrant_position_green">Wiese</string>
+	<string name="poi_fire_hydrant_position_lane">Fahrbahn</string>
+	<string name="poi_fire_hydrant_position_parking_lot">Parkplatz</string>
+	<string name="poi_fire_hydrant_position_street">Straße</string>
+	<string name="poi_fire_hydrant_position_underground">Unterflur</string>
 	<string name="poi_fire_hydrant_style_wsh">Hydrantart: Schacht</string>
 	<string name="poi_fire_hydrant_style_water_source_main">Haupt</string>
 	<string name="poi_fire_hydrant_style_water_source_pond">Teich</string>
@@ -2896,9 +2896,9 @@
 	<string name="poi_payment_troika_no">Troika-Karte nicht akzeptiert</string>
 
 	<string name="poi_telescope">Teleskop</string>
-	<string name="poi_telescope_type_optical">Teleskop: optisch</string>
-	<string name="poi_telescope_type_radio">Teleskop: Radio</string>
-	<string name="poi_telescope_type_gamma">Teleskop: Gamma</string>
+	<string name="poi_telescope_type_optical">Optisch</string>
+	<string name="poi_telescope_type_radio">Radio</string>
+	<string name="poi_telescope_type_gamma">Gamma</string>
 	<string name="poi_telescope_diameter">Durchmesser</string>
 	<string name="poi_telescope_spectrum">Spektrum</string>
 	<string name="poi_telescope_usage_education">Nutzung: Bildung</string>
@@ -2985,7 +2985,7 @@
 
 	<string name="poi_diplomatic_consulate">Konsulat</string>
 	<string name="poi_diplomatic_permanent_mission">Ständige Vertretung</string>
-	<string name="poi_diplomatic_ambassadors_residence">Residenz des Botschafters</string>
+	<string name="poi_diplomatic_ambassadors_residence">Botschaft</string>
 	<string name="poi_toilets_disposal_flush">Toilettenspülung: Wasserspülung</string>
 	<string name="poi_toilets_disposal_chemical">Toilettenspülung: chemisch</string>
 	<string name="poi_toilets_disposal_bucket">Toilettenspülung: Eimer</string>
@@ -3414,5 +3414,13 @@
 	<string name="poi_animal_shelter_purpose">Bestimmung</string>
 
 <string name="poi_owner">Eigentümer</string>
+
+	<string name="poi_spaceport">Raumfahrtzentrum</string>
+
+<string name="poi_lock_basin">Schiffsschleuse</string>
+	<string name="poi_animal_shelter_purpose_adoption_yes">Vermittlung: ja</string>
+	<string name="poi_animal_shelter_purpose_adoption_no">Vermittlung: nein</string>
+	<string name="poi_animal_shelter_purpose_release_yes">Freisetzung: ja</string>
+	<string name="poi_animal_shelter_purpose_release_no">Freisetzung: nein</string>
 
 	</resources>

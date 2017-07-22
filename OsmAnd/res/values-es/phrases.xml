@@ -3464,4 +3464,30 @@
 
 	<string name="poi_spaceport">Puerto espacial</string>
 
+<string name="poi_direction_n">Dirección: Norte</string>
+	<string name="poi_direction_nne">Dirección: Nornordeste</string>
+	<string name="poi_direction_ne">Dirección: Nordeste</string>
+	<string name="poi_direction_ene">Dirección: Estenordeste</string>
+	<string name="poi_direction_e">Dirección: Este</string>
+	<string name="poi_direction_ese">Dirección: Estesudeste</string>
+	<string name="poi_direction_se">Dirección: Sudeste</string>
+	<string name="poi_direction_sse">Dirección: Sudsudeste</string>
+	<string name="poi_direction_s">Dirección: Sur</string>
+	<string name="poi_direction_ssw">Dirección: Sudsudoeste</string>
+	<string name="poi_direction_sw">Dirección: Sudoeste</string>
+	<string name="poi_direction_wsw">Dirección: Oesudoeste</string>
+	<string name="poi_direction_w">Dirección: Oeste</string>
+	<string name="poi_direction_wnw">Dirección: Oesnoroeste</string>
+	<string name="poi_direction_nw">Dirección: Noroeste</string>
+	<string name="poi_direction_nnw">Dirección: Nornoroeste</string>
+	<string name="poi_direction_forward">Dirección: En el sentido de la vía</string>
+	<string name="poi_direction_backward">Dirección: En el sentido contrario de la vía</string>
+	<string name="poi_direction_clockwise">Dirección: Hacia la derecha (según las agujas del reloj)</string>
+	<string name="poi_direction_anticlockwise">Dirección: Hacia la izquierda (contrario a las agujas del reloj)</string>
+	<string name="poi_direction_up">Dirección: Hacia arriba</string>
+	<string name="poi_direction_down">Dirección: Hacia abajo</string>
+	<string name="poi_direction_entrance">Dirección: Entrada</string>
+	<string name="poi_direction_exit">Dirección: Salida</string>
+	<string name="poi_direction_all">Dirección: Todas</string>
+
 </resources>

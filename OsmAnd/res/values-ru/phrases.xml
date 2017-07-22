@@ -3444,5 +3444,30 @@
 
 	<string name="poi_spaceport">Космодром</string>
 
+	<string name="poi_direction_n">Направление: север</string>
+	<string name="poi_direction_nne">Направление: северо-северо-восток</string>
+	<string name="poi_direction_ne">Направление: северо-восток</string>
+	<string name="poi_direction_ene">Направление: востоко-северо-восток</string>
+	<string name="poi_direction_e">Направление: восток</string>
+	<string name="poi_direction_ese">Направление: востоко-юго-восток</string>
+	<string name="poi_direction_se">Направление: юго-восток</string>
+	<string name="poi_direction_sse">Направление: юго-юго-восток</string>
+	<string name="poi_direction_s">Направление: юг</string>
+	<string name="poi_direction_ssw">Направление: юго-юго-запад</string>
+	<string name="poi_direction_sw">Направление: юго-запад</string>
+	<string name="poi_direction_wsw">Направление: западо-юго-запад</string>
+	<string name="poi_direction_w">Направление: запад</string>
+	<string name="poi_direction_wnw">Направление: западо-северо-запад</string>
+	<string name="poi_direction_nw">Направление: северо-запад</string>
+	<string name="poi_direction_nnw">Направление: северо-северо-запад</string>
+	<string name="poi_direction_forward">Направление: вперёд</string>
+	<string name="poi_direction_backward">Направление: назад</string>
+	<string name="poi_direction_clockwise">Направление: по часовой стрелке</string>
+	<string name="poi_direction_anticlockwise">Направление: против часовой стрелки</string>
+	<string name="poi_direction_up">Направление: вверх</string>
+	<string name="poi_direction_down">Направление: вниз</string>
+	<string name="poi_direction_entrance">Направление: вход</string>
+	<string name="poi_direction_exit">Направление: выход</string>
+	<string name="poi_direction_all">Направление: во все стороны</string>
 
 </resources>
