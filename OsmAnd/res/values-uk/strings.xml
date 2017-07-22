@@ -2668,7 +2668,7 @@
     <string name="right_side_navigation">Правосторонній рух</string>
     <string name="routing_attr_driving_style_balance_name">Збалансований</string>
     <string name="routing_attr_driving_style_safety_name">Надавати перевагу путівцям</string>
-    <string name="routing_attr_driving_style_speed_name">Враховувати основні дороги</string>
+    <string name="routing_attr_driving_style_speed_name">Коротші маршрути</string>
     <string name="animate_my_location">Анімувати моє місце розташування</string>
     <string name="animate_my_location_desc">Задіяти анімацію мого місця розташування під час навігації</string>
     <string name="do_not_show_startup_messages">Не показувати повідомлення при запуску</string>
@@ -2949,4 +2949,6 @@
     <string name="quick_action_show_navigation_finish_dialog">Показати вікно, щоб завершити навігацію</string>
     <string name="quick_action_start_stop_navigation">Початок/завершення навігації</string>
     <string name="quick_action_start_stop_navigation_descr">Натисніть цю кнопку, щоб запустити навігацію або зупинити її, якщо вона вже була запущена.</string>
+    <string name="live_monitoring_max_interval_to_send">Час буферизації для онлайн-стеження</string>
+    <string name="live_monitoring_max_interval_to_send_desrc">Задає час буферизації для збереження місць для відправки в автономному режимі</string>
     </resources>
