@@ -165,7 +165,7 @@ public class DashTrackFragment extends DashBaseFragment {
 			info.subfolder = "";
 			info.file = f;
 			View v = inflater.inflate(R.layout.dash_gpx_track_item, null, false);
-			AvailableGPXFragment.udpateGpxInfoView(v, info, app, true);
+			AvailableGPXFragment.updateGpxInfoView(v, info, app, true);
 			
 			v.setOnClickListener(new View.OnClickListener() {
 				@Override
@@ -257,7 +257,7 @@ public class DashTrackFragment extends DashBaseFragment {
 					AvailableGPXFragment.GpxInfo info = new AvailableGPXFragment.GpxInfo();
 					info.subfolder = "";
 					info.file = f;
-					AvailableGPXFragment.udpateGpxInfoView(pView, info, app, true);
+					AvailableGPXFragment.updateGpxInfoView(pView, info, app, true);
 					updateShowOnMap(app, f, v, showOnMap);
 				}
 			});
