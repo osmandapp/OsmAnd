@@ -189,8 +189,6 @@ public class MapActivity extends OsmandActionBarActivity implements DownloadEven
 	private boolean mIsDestroyed = false;
 	private InAppHelper inAppHelper;
 
-	private SecondSplashScreenFragment secondSplashScreenFragment;
-
 	@Override
 	public void onCreate(Bundle savedInstanceState) {
 		setRequestedOrientation(AndroidUiHelper.getScreenOrientation(this));
@@ -694,8 +692,11 @@ public class MapActivity extends OsmandActionBarActivity implements DownloadEven
 		}
 		FirstUsageWelcomeFragment.SHOW = false;
 		if (SecondSplashScreenFragment.SHOW) {
-			secondSplashScreenFragment = new SecondSplashScreenFragment();
-			getSupportFragmentManager().beginTransaction().add(R.id.fragmentContainer, secondSplashScreenFragment, SecondSplashScreenFragment.TAG).commitAllowingStateLoss();
+			SecondSplashScreenFragment.SHOW = false;
+			getSupportFragmentManager()
+					.beginTransaction()
+					.add(R.id.fragmentContainer, new SecondSplashScreenFragment(), SecondSplashScreenFragment.TAG)
+					.commitAllowingStateLoss();
 		} else {
 			setRequestedOrientation(ActivityInfo.SCREEN_ORIENTATION_UNSPECIFIED);
 			if (settings.MAP_SCREEN_ORIENTATION.get() != getRequestedOrientation()) {
@@ -707,7 +708,10 @@ public class MapActivity extends OsmandActionBarActivity implements DownloadEven
 
 	public void dismissSecondSplashScreen() {
 		SecondSplashScreenFragment.SHOW = false;
-		getSupportFragmentManager().beginTransaction().remove(secondSplashScreenFragment).commitAllowingStateLoss();
+		getSupportFragmentManager()
+				.beginTransaction()
+				.remove(getSupportFragmentManager().findFragmentByTag(SecondSplashScreenFragment.TAG))
+				.commitAllowingStateLoss();
 		setRequestedOrientation(ActivityInfo.SCREEN_ORIENTATION_UNSPECIFIED);
 		if (app.getSettings().MAP_SCREEN_ORIENTATION.get() != getRequestedOrientation()) {
 			setRequestedOrientation(app.getSettings().MAP_SCREEN_ORIENTATION.get());
