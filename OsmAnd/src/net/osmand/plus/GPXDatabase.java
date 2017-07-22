@@ -13,7 +13,7 @@ import java.util.List;
 public class GPXDatabase {
 
 	private static final String DB_NAME = "gpx_database";
-	private static final int DB_VERSION = 4;
+	private static final int DB_VERSION = 5;
 	private static final String GPX_TABLE_NAME = "gpxTable";
 	private static final String GPX_COL_NAME = "fileName";
 	private static final String GPX_COL_DIR = "fileDir";
@@ -183,11 +183,43 @@ public class GPXDatabase {
 			db.execSQL("ALTER TABLE " + GPX_TABLE_NAME + " ADD " + GPX_COL_SPLIT_TYPE + " int");
 			db.execSQL("ALTER TABLE " + GPX_TABLE_NAME + " ADD " + GPX_COL_SPLIT_INTERVAL + " double");
 		}
-		
-		if (oldVersion < 3) {	
-			List<GpxDataItem> items = getItems();
-			for (GpxDataItem item : items) {
-				updateLastModifiedTime(item);
+
+		if (oldVersion < 5) {
+			boolean colorColumnExists = false;
+			boolean fileLastModifiedTimeColumnExists = false;
+			boolean splitTypeColumnExists = false;
+			boolean splitIntervalColumnExists = false;
+			SQLiteCursor cursor = db.rawQuery("PRAGMA table_info(" + GPX_TABLE_NAME + ")", null);
+			if (cursor.moveToFirst()) {
+				do {
+					String columnName = cursor.getString(1);
+					if (!colorColumnExists && columnName.equals(GPX_COL_COLOR)) {
+						colorColumnExists = true;
+					} else if (!fileLastModifiedTimeColumnExists && columnName.equals(GPX_COL_FILE_LAST_MODIFIED_TIME)) {
+						fileLastModifiedTimeColumnExists = true;
+					} else if (!splitTypeColumnExists && columnName.equals(GPX_COL_SPLIT_TYPE)) {
+						splitTypeColumnExists = true;
+					} else if (!splitIntervalColumnExists && columnName.equals(GPX_COL_SPLIT_INTERVAL)) {
+						splitIntervalColumnExists = true;
+					}
+				} while (cursor.moveToNext());
+			}
+			cursor.close();
+			if (!colorColumnExists) {
+				db.execSQL("ALTER TABLE " + GPX_TABLE_NAME + " ADD " + GPX_COL_COLOR + " TEXT");
+			}
+			if (!fileLastModifiedTimeColumnExists) {
+				db.execSQL("ALTER TABLE " + GPX_TABLE_NAME + " ADD " + GPX_COL_FILE_LAST_MODIFIED_TIME + " long");
+				List<GpxDataItem> items = getItems();
+				for (GpxDataItem item : items) {
+					updateLastModifiedTime(item);
+				}
+			}
+			if (!splitTypeColumnExists) {
+				db.execSQL("ALTER TABLE " + GPX_TABLE_NAME + " ADD " + GPX_COL_SPLIT_TYPE + " int");
+			}
+			if (!splitIntervalColumnExists) {
+				db.execSQL("ALTER TABLE " + GPX_TABLE_NAME + " ADD " + GPX_COL_SPLIT_INTERVAL + " double");
 			}
 		}
 	}

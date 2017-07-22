@@ -1048,7 +1048,7 @@ public class AvailableGPXFragment extends OsmandExpandableListFragment {
 				LayoutInflater inflater = getActivity().getLayoutInflater();
 				v = inflater.inflate(R.layout.dash_gpx_track_item, parent, false);
 			}
-			udpateGpxInfoView(v, child, app, false);
+			updateGpxInfoView(v, child, app, false);
 
 			ImageView icon = (ImageView) v.findViewById(R.id.icon);
 			ImageButton options = (ImageButton) v.findViewById(R.id.options);
@@ -1752,7 +1752,7 @@ public class AvailableGPXFragment extends OsmandExpandableListFragment {
 		}
 	}
 
-	public static void udpateGpxInfoView(View v, GpxInfo child, OsmandApplication app, boolean isDashItem) {
+	public static void updateGpxInfoView(View v, GpxInfo child, OsmandApplication app, boolean isDashItem) {
 		TextView viewName = ((TextView) v.findViewById(R.id.name));
 		if (!isDashItem) {
 			v.findViewById(R.id.divider_list).setVisibility(View.VISIBLE);
