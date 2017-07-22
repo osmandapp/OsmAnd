@@ -25,11 +25,10 @@ public class SecondSplashScreenFragment extends Fragment {
     public static boolean SHOW = true;
     private static final int SECOND_SPLASH_TIME_OUT = 8000;
     private boolean started = false;
-    private FragmentActivity activity;
     private OsmandApplication app;
 
     public OsmandApplication getMyApplication() {
-        return ((OsmandApplication) activity.getApplication());
+        return ((OsmandApplication) getActivity().getApplication());
     }
 
     private boolean hasNavBar() {
@@ -78,10 +77,9 @@ public class SecondSplashScreenFragment extends Fragment {
     @Nullable
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
-        activity = getActivity();
         app = getMyApplication();
 
-        RelativeLayout view = new RelativeLayout(activity);
+        RelativeLayout view = new RelativeLayout(getActivity());
         view.setOnClickListener(null);
         view.setBackgroundColor(getResources().getColor(R.color.map_background_color_light));
 
@@ -94,7 +92,7 @@ public class SecondSplashScreenFragment extends Fragment {
         RelativeLayout.LayoutParams logoLayoutParams = new RelativeLayout.LayoutParams(RelativeLayout.LayoutParams.WRAP_CONTENT, RelativeLayout.LayoutParams.WRAP_CONTENT);
         logoLayoutParams.addRule(RelativeLayout.ALIGN_PARENT_TOP);
         logoLayoutParams.addRule(RelativeLayout.CENTER_HORIZONTAL);
-        ImageView text = new ImageView(activity);
+        ImageView text = new ImageView(getActivity());
         if (Version.isFreeVersion(app)) {
             if ((InAppHelper.isSubscribedToLiveUpdates() && InAppHelper.isFullVersionPurchased()) || InAppHelper.isSubscribedToLiveUpdates()) {
                 text.setImageDrawable(getResources().getDrawable(R.drawable.image_text_osmand_osmlive));
@@ -122,10 +120,10 @@ public class SecondSplashScreenFragment extends Fragment {
         int textPaddingLeft = 0;
         int textPaddingRight = 0;
         if (android.os.Build.VERSION.SDK_INT >= android.os.Build.VERSION_CODES.N_MR1) {
-            if (AndroidUiHelper.getScreenOrientation(activity) == ActivityInfo.SCREEN_ORIENTATION_LANDSCAPE) {
+            if (AndroidUiHelper.getScreenOrientation(getActivity()) == ActivityInfo.SCREEN_ORIENTATION_LANDSCAPE) {
                 logoPaddingLeft = getNavigationBarWidth();
                 textPaddingLeft = getNavigationBarWidth();
-            } else if (AndroidUiHelper.getScreenOrientation(activity) == ActivityInfo.SCREEN_ORIENTATION_REVERSE_LANDSCAPE) {
+            } else if (AndroidUiHelper.getScreenOrientation(getActivity()) == ActivityInfo.SCREEN_ORIENTATION_REVERSE_LANDSCAPE) {
                 logoPaddingRight = getNavigationBarWidth();
                 textPaddingRight = getNavigationBarWidth();
             }
@@ -148,18 +146,18 @@ public class SecondSplashScreenFragment extends Fragment {
     @Override
     public void onResume() {
         super.onResume();
-        if (activity instanceof MapActivity) {
-            ((MapActivity) activity).disableDrawer();
+        if (getActivity() instanceof MapActivity) {
+            ((MapActivity) getActivity()).disableDrawer();
         }
         if (!started) {
             started = true;
-            SecondSplashScreenFragment.SHOW = false;
             new Handler().postDelayed(new Runnable() {
 
                 @Override
                 public void run() {
-                    if (activity instanceof MapActivity && !((MapActivity) activity).isActivityDestroyed()) {
-                        ((MapActivity)activity).dismissSecondSplashScreen();
+                    if (getActivity() instanceof MapActivity
+                            && (getActivity().getSupportFragmentManager().findFragmentByTag(SecondSplashScreenFragment.TAG) != null)) {
+                        ((MapActivity)getActivity()).dismissSecondSplashScreen();
                     }
                 }
             }, SECOND_SPLASH_TIME_OUT);
@@ -169,8 +167,8 @@ public class SecondSplashScreenFragment extends Fragment {
     @Override
     public void onPause() {
         super.onPause();
-        if (activity instanceof MapActivity) {
-            ((MapActivity) activity).enableDrawer();
+        if (getActivity() instanceof MapActivity) {
+            ((MapActivity) getActivity()).enableDrawer();
         }
     }
 }
