@@ -1637,7 +1637,7 @@ Proporcia memoro %4$s MB (limito de Android %5$s MB, Dalvik %6$s MB).</string>
     <string name="search_history_building">Domo: {0}, {1}, {2}</string>
     <string name="search_nothing_found">Trovis nenion</string>
     <string name="searching">Serĉado…</string>
-    <string name="searching_address">Serĉado de adreso…</string>
+    <string name="searching_address">Determinado de adreso…</string>
     <string name="search_offline_address">Serĉi eksterrete</string>
     <string name="search_online_address">Serĉi enrete</string>
     <string name="address">Adreso</string>
@@ -1765,7 +1765,7 @@ Provizore estas uzata enreta servo CloudMade.</string>
     <string name="context_menu_item_search_transport">Serĉi transporton publikan</string>
     <string name="transport_searching_transport">Serĉrezultoj pri transporto (sen celo):</string>
     <string name="transport_searching_route">Serĉrezultoj pri transporto ({0} al celo):</string>
-    <string name="transport_search_again">Rekomencigi serĉado de transporto</string>
+    <string name="transport_search_again">Rekomencigi serĉadon de transporto</string>
     <string name="voice">Registrita voĉo</string>
     <string name="voices">Voĉaj avertoj</string>
     <string name="no_vector_map_loaded">Ne ŝargis vektorajn mapojn</string>
