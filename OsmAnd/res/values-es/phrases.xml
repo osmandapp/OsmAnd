@@ -1801,7 +1801,7 @@
 	<string name="poi_bin_no">Sin cesto de basura</string>
 
 	<string name="poi_shelter_type_public_transport">Transporte público</string>
-	<string name="poi_shelter_type_picnic_shelter">Picnic</string>
+	<string name="poi_shelter_type_picnic_shelter">Pabellón de jardín</string>
 	<string name="poi_shelter_type_weather_shelter">Inclemencias meteorológicas</string>
 	<string name="poi_shelter_type_lean_to">Marquesina</string>
 	<string name="poi_shelter_type_basic_hut">Cabaña precaria</string>
