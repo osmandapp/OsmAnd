@@ -2566,7 +2566,7 @@ Pro praghere iscrie su còdighe intreu</string>
     <string name="routing_attr_relief_smoothness_factor_hills_name">Cùcuros/montigros</string>
     <string name="routing_attr_relief_smoothness_factor_plains_name">Pagos cùcuros</string>
     <string name="routing_attr_relief_smoothness_factor_more_plains_name">Terrinu in paris</string>
-    <string name="routing_attr_driving_style_speed_name">Privilègia sas istradas printzipales</string>
+    <string name="routing_attr_driving_style_speed_name">Àndalas prus curtzas</string>
     <string name="routing_attr_driving_style_balance_name">Bilantziadu</string>
     <string name="routing_attr_driving_style_safety_name">Privilègia sas istradas segundàrias</string>
     <string name="routing_attr_relief_smoothness_factor_name">Valore de variatzione de s\'artària</string>
