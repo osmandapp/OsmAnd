@@ -3450,4 +3450,30 @@
 
 	<string name="poi_spaceport">太空中心</string>
 
+<string name="poi_direction_n">方向：北方</string>
+	<string name="poi_direction_nne">方向：北北東方</string>
+	<string name="poi_direction_ne">方向：東北方</string>
+	<string name="poi_direction_ene">方向：東北東方</string>
+	<string name="poi_direction_e">方向：東方</string>
+	<string name="poi_direction_ese">方向：東南東方</string>
+	<string name="poi_direction_se">方向：東南方</string>
+	<string name="poi_direction_sse">方向：南南東方</string>
+	<string name="poi_direction_s">方向：南方</string>
+	<string name="poi_direction_ssw">方向：南南西方</string>
+	<string name="poi_direction_sw">方向：西南方</string>
+	<string name="poi_direction_wsw">方向：西南西方</string>
+	<string name="poi_direction_w">方向：西方</string>
+	<string name="poi_direction_wnw">方向：西北西方</string>
+	<string name="poi_direction_nw">方向：西北方</string>
+	<string name="poi_direction_nnw">方向：北北西方</string>
+	<string name="poi_direction_forward">方向：前方</string>
+	<string name="poi_direction_backward">方向：後方</string>
+	<string name="poi_direction_clockwise">方向：順時鐘</string>
+	<string name="poi_direction_anticlockwise">方向：逆時鐘</string>
+	<string name="poi_direction_up">方向：上方</string>
+	<string name="poi_direction_down">方向：下方</string>
+	<string name="poi_direction_entrance">方向：入口</string>
+	<string name="poi_direction_exit">方向：出口</string>
+	<string name="poi_direction_all">方向：全部</string>
+
 </resources>
