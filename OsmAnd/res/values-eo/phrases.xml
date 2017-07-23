@@ -3427,4 +3427,30 @@
 
 	<string name="poi_spaceport">Kosmodromo</string>
 
+<string name="poi_direction_n">Direkto: nordo</string>
+	<string name="poi_direction_nne">Direkto: nord-nord-orienta</string>
+	<string name="poi_direction_ne">Direkto: nord-orienta</string>
+	<string name="poi_direction_ene">Direkto: orient-nord-orienta</string>
+	<string name="poi_direction_e">Direkto: orienta</string>
+	<string name="poi_direction_ese">Direkto: orient-sud-orienta</string>
+	<string name="poi_direction_se">Direkto: sud-orienta</string>
+	<string name="poi_direction_sse">Direkto: sud-sud-orienta</string>
+	<string name="poi_direction_s">Direkto: suda</string>
+	<string name="poi_direction_ssw">Direkto: sud-sud-okcidenta</string>
+	<string name="poi_direction_sw">Direkto: sud-okcidenta</string>
+	<string name="poi_direction_wsw">Direkto: okcident-sud-okcidenta</string>
+	<string name="poi_direction_w">Direkto: okcidenta</string>
+	<string name="poi_direction_wnw">Direkto: okcident-nord-okcidenta</string>
+	<string name="poi_direction_nw">Direkto: nord-okcidenta</string>
+	<string name="poi_direction_nnw">Direkto: nord-nord-okcidenta</string>
+	<string name="poi_direction_forward">Direkto: antaŭen</string>
+	<string name="poi_direction_backward">Direkto: malantaŭen</string>
+	<string name="poi_direction_clockwise">Direkto: horloĝdirekten</string>
+	<string name="poi_direction_anticlockwise">Direkto: malhorloĝdirekten</string>
+	<string name="poi_direction_up">Direkto: supren</string>
+	<string name="poi_direction_down">Direkto: malsupren</string>
+	<string name="poi_direction_entrance">Direkto: eniro</string>
+	<string name="poi_direction_exit">Direkto: eliro</string>
+	<string name="poi_direction_all">Direkto: ĉiuj</string>
+
 </resources>
