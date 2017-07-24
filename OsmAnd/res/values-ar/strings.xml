@@ -469,7 +469,7 @@
 	<string name="av_photo_play_sound_descr">فعّل هذا في حال رغبتك بسماع نغمة التقاط الصّور</string>
 <string name="edit_tilesource_elliptic_tile">نموذج مركتور البيضوي</string>
     
-    <string name="route_descr_lat_lon">خط عرض %1$.‎f3، خط طول %2$.f3</string>
+    <string name="route_descr_lat_lon">خط عرض %1$.3f، خط طول %2$.3f</string>
     
 	
 	
