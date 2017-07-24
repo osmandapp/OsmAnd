@@ -1077,7 +1077,7 @@ OSM er et i fællesskab drevet, globalt offentligt domæne kortlægningsprojekt.
     <string name="available_downloads_left">%1$d filer kan hentes</string>
     <string name="use_magnetic_sensor">Magnetisk sensor</string>
     <string name="local_indexes_cat_srtm">Højdekurver</string>
-    <string name="use_magnetic_sensor_descr">For kompaslæsning, brug magnetisksensoren i stedet for orienteringssensoren</string>
+    <string name="use_magnetic_sensor_descr">For kompaslæsning, brug den magnetiskesensor i stedet for orienteringssensoren</string>
     <string name="use_kalman_filter_compass_descr">Reducerer støj i kompasaflæsninger, men tilføjer inerti</string>
     <string name="use_kalman_filter_compass">Kalman filter</string>
     <string name="wait_current_task_finished">Vent - mens aktuel opgave bliver færdig</string>
@@ -2799,7 +2799,7 @@ Tidligere destination bliver sidste mellemliggende punkt.</string>
 \n 
 \n • Lineal modul til afstandsmåling 
 \n 
-\n • GPX split intervaller med detaljeret info om spor 
+\n • GPX opdelingsintervaller med detaljeret info om sporet
 \n 
 \n • Andre forbedringer og fejlrettelser
 \n
@@ -2811,5 +2811,5 @@ Tidligere destination bliver sidste mellemliggende punkt.</string>
     <string name="quick_action_start_stop_navigation">Start/stop navigation</string>
     <string name="quick_action_start_stop_navigation_descr">Tryk på knappen for at starte navigation eller stoppe, hvis den allerede var begyndt.</string>
     <string name="live_monitoring_max_interval_to_send">Tidsbuffer til online sporing</string>
-    <string name="live_monitoring_max_interval_to_send_desrc">Angiv en tidsbuffer for at beholde steder at sende uden forbindelse</string>
+    <string name="live_monitoring_max_interval_to_send_desrc">Angiv en tidsbuffer til at opbevare steder, når der ingen forbindelse er</string>
     </resources>
