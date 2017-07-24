@@ -2416,4 +2416,20 @@
     <string name="map_widget_ruler_control">Радиус-линейка</string>
     <string name="open_mapillary">Открыть Mapillary</string>
     <string name="shared_string_install">Установить</string>
+    <string name="release_2_7">\\022 Плагин Mapillary с фотографиями улиц
+\n
+\n• Виджет линейка для измерения расстояний
+\n
+\n• Разбивка Gpx на интервалы с подробной информацией о вашем треке
+\n
+\n• Другие улучшения и исправления ошибок
+\n
+\n</string>
+    <string name="shared_string_paused">Приостановлено</string>
+    <string name="rendering_value_fine_name"/>
+    <string name="average">Средняя</string>
+    <string name="ascent_descent">Подъем/Спуск</string>
+    <string name="moving_time">Время движения</string>
+    <string name="max_min">Макс/Мин</string>
+    <string name="min_max">Мин/Макс</string>
     </resources>
