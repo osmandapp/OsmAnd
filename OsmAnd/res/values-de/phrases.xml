@@ -999,7 +999,7 @@
 	<string name="poi_crossing_uncontrolled">Unkontrolliert</string>
 	<string name="poi_crossing_unmarked">Unmarkiert</string>
 
-	<string name="poi_access_private">Privatweg</string>
+	<string name="poi_access_private">Privater Zugang</string>
 	<string name="poi_access_destination">Anlieger frei</string>
 	<string name="poi_access_permissive">Zutritt erlaubt</string>
 	<string name="poi_animal_shelter_dog">Hunde</string>
