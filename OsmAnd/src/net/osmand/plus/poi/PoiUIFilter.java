@@ -579,7 +579,11 @@ public class PoiUIFilter implements SearchPoiTypeFilter, Comparable<PoiUIFilter>
 	private void putAllAcceptedTypes(Map<PoiCategory, LinkedHashSet<String>> types) {
 		for (PoiCategory category : types.keySet()) {
 			if (acceptedTypes.containsKey(category)) {
-				acceptedTypes.get(category).addAll(types.get(category));
+				if (acceptedTypes.get(category) != null && types.get(category) != null) {
+					acceptedTypes.get(category).addAll(types.get(category));
+				} else {
+					acceptedTypes.put(category, null);
+				}
 			} else {
 				acceptedTypes.put(category, types.get(category));
 			}
