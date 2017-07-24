@@ -1,4 +1,5 @@
-<?xml version="1.0" encoding="UTF-8" standalone="no"?><resources>
+<?xml version='1.0' encoding='UTF-8'?>
+<resources>
     <string name="favorite_empty_place_name">Место</string>
     <string name="private_access_routing_req">Пункт назначения находится в области с частным доступом. Вы хотите разрешить доступ к частным дорогам для этой поездки?</string>
     <string name="restart_search">Искать снова</string>
@@ -2400,4 +2401,19 @@
     <string name="mapillary">Mapillary</string>
     <string name="plugin_mapillary_descr">Уличные фотографии для всех. Исследуйте места, сотрудничайте, снимайте мир.</string>
     <string name="save_poi_too_many_uppercase">Название содержит слишком много заглавных букв. Вы действительно хотите продолжить?</string>
+    <string name="quick_action_resume_pause_navigation_descr">Нажмите эту кнопку, чтобы приостановить навигацию или возобновить ее, если она уже приостановлена.</string>
+    <string name="quick_action_show_navigation_finish_dialog">Показывать диалог завершения навигации</string>
+    <string name="quick_action_start_stop_navigation">Старт/финиш навигации</string>
+    <string name="quick_action_start_stop_navigation_descr">Нажмите эту кнопку, чтобы начать навигацию, или остановить ее, если она уже была запущена.</string>
+    <string name="store_tracks_in_monthly_directories">Сохранять записанные треки в папках помесячно</string>
+    <string name="store_tracks_in_monthly_directories_descrp">Сохранять записанные треки в подпапках с записью месяца (например, 2017-01).</string>
+    <string name="mapillary_menu_title_tile_cache">Кэш тайлов</string>
+    <string name="wrong_user_name">Неверное имя пользователя!</string>
+    <string name="mapillary_menu_descr_dates">Просмотр фотографий, добавленных в определенный период.</string>
+    <string name="mapillary_menu_title_dates">Даты</string>
+    <string name="mapillary_menu_descr_username">Просмотр фотографий, добавленных определенным пользователем.</string>
+    <string name="mapillary_menu_title_username">Имя пользователя</string>
+    <string name="map_widget_ruler_control">Радиус-линейка</string>
+    <string name="open_mapillary">Открыть Mapillary</string>
+    <string name="shared_string_install">Установить</string>
     </resources>
