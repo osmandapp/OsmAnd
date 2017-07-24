@@ -3494,7 +3494,7 @@
 
 <string name="poi_owner">Ejer</string>
 
-<string name="poi_animal_shelter_type">Dyr accepteret</string>
+<string name="poi_animal_shelter_type">Dyr accepteres</string>
 	<string name="poi_animal_shelter_purpose">Formål</string>
 
 <string name="poi_animal_shelter_wildlife">Vilde dyr og planter</string>
@@ -3504,11 +3504,11 @@
 
 	<string name="poi_animal_shelter_purpose_adoption_yes">Adoption: ja</string>
 	<string name="poi_animal_shelter_purpose_adoption_no">Adoption: nej</string>
-	<string name="poi_animal_shelter_purpose_release_no">Løslade: nej</string>
+	<string name="poi_animal_shelter_purpose_release_no">Frigivelse: nej</string>
 
 	<string name="poi_spaceport">Rumhavn</string>
 
-<string name="poi_animal_shelter_purpose_release_yes">Løslade: ja</string>
+<string name="poi_animal_shelter_purpose_release_yes">Frigivelse: ja</string>
 	<string name="poi_direction_n">Retning: nord</string>
 	<string name="poi_direction_nne">Retning: nord-nordøst</string>
 	<string name="poi_direction_ne">Retning: nordøst</string>
