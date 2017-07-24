@@ -339,8 +339,8 @@ public class MapViewTrackingUtilities implements OsmAndLocationListener, IMapLoc
 			OsmAndLocationProvider locationProvider = app.getLocationProvider();
 			if (!isMapLinkedToLocation()) {
 				setMapLinkedToLocation(true);
-				if (locationProvider.getLastKnownLocation() != null) {
-					net.osmand.Location lastKnownLocation = locationProvider.getLastKnownLocation();
+				net.osmand.Location lastKnownLocation = locationProvider.getLastKnownLocation();
+				if (lastKnownLocation != null) {
 					AnimateDraggingMapThread thread = mapView.getAnimatedDraggingThread();
 					int fZoom = mapView.getZoom() < zoom ? zoom : mapView.getZoom();
 					movingToMyLocation = true;
