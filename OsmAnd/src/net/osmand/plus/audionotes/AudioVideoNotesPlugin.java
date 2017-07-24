@@ -862,14 +862,16 @@ public class AudioVideoNotesPlugin extends OsmandPlugin {
 	}
 
 	private void initRecMenu(AVActionType actionType, double lat, double lon) {
-		currentRecording = new CurrentRecording(actionType);
-		if (actionType == AVActionType.REC_PHOTO) {
-			recordingMenu = new AudioVideoNoteRecordingMenuFullScreen(this, lat, lon);
-		} else {
-			recordingMenu = new AudioVideoNoteRecordingMenu(this, lat, lon);
+		if (mapActivity != null) {
+			currentRecording = new CurrentRecording(actionType);
+			if (actionType == AVActionType.REC_PHOTO) {
+				recordingMenu = new AudioVideoNoteRecordingMenuFullScreen(this, lat, lon);
+			} else {
+				recordingMenu = new AudioVideoNoteRecordingMenu(this, lat, lon);
+			}
+			recordingDone = false;
+			lockScreenOrientation();
 		}
-		recordingDone = false;
-		lockScreenOrientation();
 	}
 
 	public void recordVideo(final double lat, final double lon, final MapActivity mapActivity) {
