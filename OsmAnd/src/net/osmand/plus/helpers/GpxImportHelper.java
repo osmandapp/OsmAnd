@@ -73,9 +73,17 @@ public class GpxImportHelper {
 	public boolean handleGpxImport(final Uri contentUri, final boolean useImportDir) {
 		final String name = getNameFromContentUri(contentUri);
 		final boolean isOsmandSubdir = isSubDirectory(app.getAppPath(IndexConstants.GPX_INDEX_DIR), new File(contentUri.getPath()));
-		if (!isOsmandSubdir && name != null && name.endsWith(GPX_SUFFIX)) {
-			handleGpxImport(contentUri, name, true, useImportDir);
-			return true;
+		if (!isOsmandSubdir && name != null) {
+			if (name.endsWith(GPX_SUFFIX)) {
+				handleGpxImport(contentUri, name, true, useImportDir);
+				return true;
+			} else if (name.endsWith(KML_SUFFIX)) {
+				handleKmlImport(contentUri, name, true, useImportDir);
+				return true;
+			} else if (name.endsWith(KMZ_SUFFIX)) {
+				handleKmzImport(contentUri, name, true, useImportDir);
+				return true;
+			}
 		}
 		return false;
 	}
