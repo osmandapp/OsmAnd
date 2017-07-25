@@ -1,4 +1,5 @@
-<?xml version="1.0" encoding="UTF-8" standalone="no"?><resources>
+<?xml version='1.0' encoding='UTF-8'?>
+<resources>
 <string name="nothing_found">Heç nə tapılmadı :(</string>
     <string name="restart_search">Axtarışı yenidən başlat</string>
     <string name="change_color">Rəngi dəyiş</string>
@@ -8,7 +9,7 @@
     <string name="subscribe_email_error">Səhv</string>
     <string name="fonts_header">Xəritə üçün şriftlər</string>
     <string name="driving_region_automatic">Avtomatik</string>
-    <string name="routing_attr_driving_style_speed_name">Sürət</string>
+    <string name="routing_attr_driving_style_speed_name">Qısa marşrutlar</string>
     <string name="add_new_folder">Yeni qovluq əlavə et</string>
     <string name="max_speed">Maksimum sürət</string>
     <string name="shared_string_max">Maksimum</string>
@@ -1629,4 +1630,15 @@
     <string name="file_name_containes_illegal_char">Fayl adında dəstəklənməyən simvol var</string>
     <string name="store_tracks_in_monthly_directories">Qeyd edilən izləri aylıq qovluqlarda saxla</string>
     <string name="store_tracks_in_monthly_directories_descrp">İzləri hər qeyd edildiyi aya görə alt qovluqlarda saxla (2017-01 kimi).</string>
+    <string name="routing_attr_driving_style_balance_name">Balanslı</string>
+    <string name="wake_on_voice_descr">Döngəyə yaxınlaşdıqda cihazın ekranını yandır (sönülüdürsə)</string>
+    <string name="fav_point_dublicate_message">Göstərilən favorit adı artıq istifadə olunur, təkrarlanmaması üçün ad %1$s olaraq dəyişdirildi.</string>
+    <string name="of">%1$d / %2$d</string>
+    <string name="gpx_timespan">Ümumi vaxt: %1$s</string>
+    <string name="gpx_timemoving">Hərəkət vaxtı: %1$s</string>
+    <string name="gpx_selection_route_points">%1$s
+\nMarşrut nöqtələri %2$s</string>
+    <string name="old_poi_file_should_be_deleted">POI məlumat faylı “%1$s” lazımsızdır və silinə bilər.</string>
+    <string name="favorite_delete_multiple">%1$d favoriti və %2$d favorit qrupu silmək üzrəsiniz. Əminsiniz?</string>
+    <string name="downloads_left_template">%1$s endirmə qalıb</string>
     </resources>
