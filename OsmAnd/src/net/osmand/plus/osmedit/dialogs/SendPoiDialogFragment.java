@@ -216,7 +216,11 @@ public class SendPoiDialogFragment extends DialogFragment {
 						modifiedItemsOutOfLimit += quantity;
 						if (!stringModifiedIfExceeded) {
 							if (pos == 0) {
-								comment = comment.substring(0, comment.length() - action.length() - 3).concat("; ");
+								if (comment.length() - action.length() - 3 >= 0) {
+									comment = comment.substring(0, comment.length() - action.length() - 3).concat("; ");
+								} else {
+									comment = comment.substring(0, comment.length() - action.length() - 1).concat("; ");
+								}
 							} else {
 								comment = comment.substring(0, comment.length() - 2).concat("; ");
 							}
