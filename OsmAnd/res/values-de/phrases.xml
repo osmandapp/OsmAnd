@@ -3423,4 +3423,28 @@
 	<string name="poi_animal_shelter_purpose_release_yes">Freisetzung: ja</string>
 	<string name="poi_animal_shelter_purpose_release_no">Freisetzung: nein</string>
 
-	</resources>
+	<string name="poi_direction_n">Richtung: Nord</string>
+	<string name="poi_direction_nne">Richtung: Nord-Nordost</string>
+	<string name="poi_direction_ne">Richtung: Nordost</string>
+	<string name="poi_direction_ene">Richtung: Ost-Nordost</string>
+	<string name="poi_direction_e">Richtung: Ost</string>
+	<string name="poi_direction_ese">Richtung: Ost-Südost</string>
+	<string name="poi_direction_se">Richtung: Südost</string>
+	<string name="poi_direction_sse">Richtung: Süd-Südost</string>
+	<string name="poi_direction_s">Richtung: Süd</string>
+	<string name="poi_direction_ssw">Richtung: Süd-Südwest</string>
+	<string name="poi_direction_sw">Richtung: Südwest</string>
+	<string name="poi_direction_wsw">Richtung: West-Südwest</string>
+	<string name="poi_direction_w">Richtung: West</string>
+	<string name="poi_direction_wnw">Richtung: West-Nordwest</string>
+	<string name="poi_direction_nw">Richtung: Nordwest</string>
+	<string name="poi_direction_nnw">Richtung: Nord-Nordwest</string>
+	<string name="poi_direction_forward">Richtung: vorwärts</string>
+	<string name="poi_direction_backward">Richtung: rückwärts</string>
+	<string name="poi_direction_clockwise">Richtung: im Uhrzeigersinn</string>
+	<string name="poi_direction_anticlockwise">Richtung: gegen Uhrzeigersinn</string>
+	<string name="poi_direction_up">Richtung: aufwärts</string>
+	<string name="poi_direction_down">Richtung: abwärts</string>
+	<string name="poi_direction_all">Richtung: alle</string>
+
+</resources>
