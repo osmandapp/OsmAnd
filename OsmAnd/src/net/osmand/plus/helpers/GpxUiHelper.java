@@ -80,9 +80,7 @@ import net.osmand.plus.activities.SettingsActivity;
 import net.osmand.plus.dialogs.ConfigureMapMenu;
 import net.osmand.plus.dialogs.ConfigureMapMenu.AppearanceListItem;
 import net.osmand.plus.dialogs.ConfigureMapMenu.GpxAppearanceAdapter;
-import net.osmand.plus.download.ui.LocalIndexesFragment;
 import net.osmand.plus.monitoring.OsmandMonitoringPlugin;
-import net.osmand.plus.rastermaps.OsmandRasterMapsPlugin;
 import net.osmand.render.RenderingRuleProperty;
 import net.osmand.render.RenderingRulesStorage;
 import net.osmand.util.Algorithms;
@@ -107,8 +105,8 @@ import static net.osmand.plus.OsmAndFormatter.METERS_IN_ONE_NAUTICALMILE;
 import static net.osmand.plus.OsmAndFormatter.YARDS_IN_ONE_METER;
 import static net.osmand.plus.dialogs.ConfigureMapMenu.CURRENT_TRACK_COLOR_ATTR;
 import static net.osmand.plus.dialogs.ConfigureMapMenu.CURRENT_TRACK_WIDTH_ATTR;
-import static net.osmand.plus.download.DownloadActivity.formatMb;
 import static net.osmand.plus.download.DownloadActivity.formatKb;
+import static net.osmand.plus.download.DownloadActivity.formatMb;
 
 public class GpxUiHelper {
 
@@ -1416,7 +1414,7 @@ public class GpxUiHelper {
 			}
 		}
 
-		if (values == null) {
+		if (values == null || values.size() == 0) {
 			if (useRightAxis) {
 				yAxis.setEnabled(false);
 			}
