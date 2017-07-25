@@ -2599,9 +2599,9 @@ Area honi dagokio: %1$s x %2$s</string>
     <string name="routing_attr_relief_smoothness_factor_hills_name">Menditsua</string>
     <string name="routing_attr_relief_smoothness_factor_plains_name">Ez oso menditsua</string>
     <string name="routing_attr_relief_smoothness_factor_more_plains_name">Laua</string>
-    <string name="routing_attr_driving_style_speed_name">Abiadura</string>
+    <string name="routing_attr_driving_style_speed_name">Ibilbide laburragoak</string>
     <string name="routing_attr_driving_style_balance_name">Orekatua</string>
-    <string name="routing_attr_driving_style_safety_name">Segurtasuna</string>
+    <string name="routing_attr_driving_style_safety_name">Hobetsi errepide sekundarioak</string>
     <string name="relief_smoothness_factor_descr">Gogoko terrenoa: laua ala menditsua</string>
     <string name="routing_attr_relief_smoothness_factor_name">Hautatu elebazioaren fluktuazioa</string>
     <string name="type_city_town">Idatzi hiria edo herria</string>
@@ -2739,4 +2739,11 @@ Area honi dagokio: %1$s x %2$s</string>
     <string name="osmand_plus_extended_description_part5">Segurtasun-funtzioak • Aukerazko egun/gau ikuspegien arteko aldaketa • Aukeran abiadura muga bistaratu, eta gainditzekotan ohartarazi • Abiaduraren araberako zoom maila aukeran • Partekatu zure kokalekua lagunek aurkitu zaitzaten</string>
     <string name="osmand_plus_extended_description_part7">Egin ekarpenak zuzenean OSMen• Jakinarazi datuen erroreak • Igo GPX lorratzak zuzenean OSMra aplikaziotik • Gehitu POIak eta igo zuzenean OSMra (edo geroago, konektatzen zarenean) • Aukeran, grabatu bidaia bigarren planoan (gailua lo dagoela) 
 \nOsmAnd librea da eta garapen aktiboan dago. Edonork egin ditzake ekarpenak, arazoen berri emanez, itzulpenak hobetuz, edo ezaugarri berriak programatuz. Proiektua hobekuntza jarraituan dago garatzaile eta erabiltzaileen arteko hartu-eman hauei esker. Funtzio berriak programatu eta frogatzeko, proiektuak diru-laguntzak behar ditu.</string>
+    <string name="quick_action_resume_pause_navigation">Jarraitu/Pausatu nabigazioa</string>
+    <string name="quick_action_resume_pause_navigation_descr">Sakatu botoi hau nabigazioa pausatzeko, edo berau jarraitzeko pausatuta bazegoen.</string>
+    <string name="quick_action_show_navigation_finish_dialog">Erakutsi Bukatu nabigazio-botoia</string>
+    <string name="quick_action_start_stop_navigation">Hasi/Bukatu nabigazioa</string>
+    <string name="quick_action_start_stop_navigation_descr">Sakatu boti hau nabigazioa hasteko, edo gelditzeko hasita bazegoen.</string>
+    <string name="live_monitoring_max_interval_to_send">Lineako jarraipenaren denbora-bufferra</string>
+    <string name="live_monitoring_max_interval_to_send_desrc">Zehaztu bidaltzeke dauden kokalekuak gordetzeko denbora-buffer bat</string>
     </resources>
