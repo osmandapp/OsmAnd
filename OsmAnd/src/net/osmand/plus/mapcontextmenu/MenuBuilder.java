@@ -45,6 +45,7 @@ import net.osmand.plus.mapcontextmenu.builders.cards.ImageCard.GetImageCardsTask
 import net.osmand.plus.mapcontextmenu.builders.cards.ImageCard.GetImageCardsTask.GetImageCardsListener;
 import net.osmand.plus.mapcontextmenu.builders.cards.NoImagesCard;
 import net.osmand.plus.render.RenderingIcons;
+import net.osmand.util.Algorithms;
 import net.osmand.util.MapUtils;
 
 import java.util.ArrayList;
@@ -648,6 +649,10 @@ public class MenuBuilder {
 
 	protected boolean processNearstWiki() {
 		if (showNearestWiki && latLon != null) {
+			String preferredLang = app.getSettings().MAP_PREFERRED_LOCALE.get();
+			if (Algorithms.isEmpty(preferredLang)) {
+				preferredLang = app.getLanguage();
+			}
 			QuadRect rect = MapUtils.calculateLatLonBbox(
 					latLon.getLatitude(), latLon.getLongitude(), 250);
 			nearestWiki = app.getResourceManager().searchAmenities(
@@ -673,12 +678,14 @@ public class MenuBuilder {
 			});
 			Long id = objectId;
 			if (id != 0) {
+				List<Amenity> wikiList = new ArrayList<>();
 				for (Amenity wiki : nearestWiki) {
-					if (wiki.getId().equals(id)) {
-						nearestWiki.remove(wiki);
-						break;
+					String lng = wiki.getContentLanguage("content", preferredLang, "en");
+					if (wiki.getId().equals(id) || (!lng.equals("en") && !lng.equals(preferredLang))) {
+						wikiList.add(wiki);
 					}
 				}
+				nearestWiki.removeAll(wikiList);
 			}
 			return true;
 		}
