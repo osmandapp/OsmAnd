@@ -137,6 +137,9 @@ public class SendPoiDialogFragment extends DialogFragment {
 
 	private String createDefaultChangeSet() {
 		Map<String, PoiType> allTranslatedSubTypes = getMyApplication().getPoiTypes().getAllTranslatedNames(true);
+		if (allTranslatedSubTypes == null) {
+			return "";
+		}
 		Map<String, Integer> addGroup = new HashMap<>();
 		Map<String, Integer> editGroup = new HashMap<>();
 		Map<String, Integer> deleteGroup = new HashMap<>();
@@ -178,7 +181,6 @@ public class SendPoiDialogFragment extends DialogFragment {
 			}
 		}
 		int modifiedItemsOutOfLimit = 0;
-		boolean stringModifiedIfExceeded = false;
 		for (int i = 0; i < 4; i++) {
 			String action;
 			Map<String, Integer> group;
@@ -205,37 +207,27 @@ public class SendPoiDialogFragment extends DialogFragment {
 			}
 
 			if (!group.isEmpty()) {
-				if (modifiedItemsOutOfLimit == 0) {
-					comment = comment.concat(action).concat(" ");
-				}
 				int pos = 0;
 				for (Map.Entry<String, Integer> entry : group.entrySet()) {
 					String type = entry.getKey();
 					int quantity = entry.getValue();
 					if (comment.length() > 200) {
 						modifiedItemsOutOfLimit += quantity;
-						if (!stringModifiedIfExceeded) {
-							if (pos == 0) {
-								comment = comment.substring(0, comment.length() - action.length() - 3).concat("; ");
-							} else {
-								comment = comment.substring(0, comment.length() - 2).concat("; ");
-							}
-							stringModifiedIfExceeded = true;
-						}
 					} else {
-						comment = comment.concat(quantity == 1 ? "" : quantity + " ").concat(type + ", ");
+						if (pos == 0) {
+							comment = comment.concat(comment.length() == 0 ? "" : "; ").concat(action).concat(" ").concat(quantity == 1 ? "" : quantity + "").concat(type);
+						} else {
+							comment = comment.concat(", ").concat(quantity == 1 ? "" : quantity + "").concat(type);
+						}
 					}
 					pos++;
-				}
-				if (modifiedItemsOutOfLimit == 0) {
-					comment = comment.substring(0, comment.length() - 2).concat("; ");
 				}
 			}
 		}
 		if (modifiedItemsOutOfLimit != 0) {
-			comment = comment.concat(modifiedItemsOutOfLimit + " ").concat(getString(R.string.items_modified)).concat(".");
+			comment = comment.concat("; ").concat(modifiedItemsOutOfLimit + " ").concat(getString(R.string.items_modified)).concat(".");
 		} else if (!comment.equals("")){
-			comment = comment.substring(0, comment.length() - 2).concat(".");
+			comment = comment.concat(".");
 		}
 		return comment;
 	}
