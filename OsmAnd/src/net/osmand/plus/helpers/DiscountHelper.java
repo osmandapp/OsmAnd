@@ -43,16 +43,17 @@ public class DiscountHelper {
 
 
 	public static void checkAndDisplay(final MapActivity mapActivity) {
-		if (mapActivity.getMyApplication().getSettings().DO_NOT_SHOW_STARTUP_MESSAGES.get()) {
+		OsmandApplication app = mapActivity.getMyApplication();
+		OsmandSettings settings = app.getSettings();
+		if (settings.DO_NOT_SHOW_STARTUP_MESSAGES.get() || !settings.INAPPS_READ.get()) {
 			return;
 		}
 		if (mBannerVisible) {
 			showDiscountBanner(mapActivity, mTitle, mDescription, mIcon, mUrl);
 		}
-		OsmandApplication app = mapActivity.getMyApplication();
 		if (System.currentTimeMillis() - mLastCheckTime < 1000 * 60 * 60 * 24
-				|| !app.getSettings().isInternetConnectionAvailable()
-				|| app.getSettings().NO_DISCOUNT_INFO.get()) {
+				|| !settings.isInternetConnectionAvailable()
+				|| settings.NO_DISCOUNT_INFO.get()) {
 			return;
 		}
 		mLastCheckTime = System.currentTimeMillis();
