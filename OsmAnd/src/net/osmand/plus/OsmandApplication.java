@@ -157,6 +157,7 @@ public class OsmandApplication extends MultiDexApplication {
 			externalStorageDirectoryReadOnly = true;
 			externalStorageDirectory = osmandSettings.getInternalAppPath();
 		}
+		osmandSettings.USE_MAP_MARKERS.set(true);
 		
 		checkPreferredLocale();
 		appInitializer.onCreateApplication();
