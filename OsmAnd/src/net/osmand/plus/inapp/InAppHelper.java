@@ -363,9 +363,11 @@ public class InAppHelper {
 				mFullVersionPrice = fullPriceDetails.getPrice();
 			}
 
+			OsmandSettings settings = ctx.getSettings();
+			settings.INAPPS_READ.set(true);
+
 			boolean needSendToken = false;
 			if (!isDeveloperVersion && liveUpdatesPurchase != null) {
-				OsmandSettings settings = ctx.getSettings();
 				if ((Algorithms.isEmpty(settings.BILLING_USER_ID.get()) || Algorithms.isEmpty(settings.BILLING_USER_TOKEN.get()))
 						&& !Algorithms.isEmpty(liveUpdatesPurchase.getDeveloperPayload())) {
 					String payload = liveUpdatesPurchase.getDeveloperPayload();
