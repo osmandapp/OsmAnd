@@ -29,7 +29,6 @@ import android.view.WindowManager;
 import android.widget.Toast;
 
 import net.osmand.PlatformUtil;
-import net.osmand.SecondSplashScreenFragment;
 import net.osmand.access.AccessibilityActionsProvider;
 import net.osmand.core.android.MapRendererView;
 import net.osmand.data.LatLon;
@@ -109,6 +108,10 @@ public class OsmandMapTileView implements IMapDownloaderCallback {
 		public boolean onPressEvent(PointF point);
 	}
 
+	public interface OnDrawMapListener {
+		public void onDrawOverMap();
+	}
+
 	public int getDefaultColor() {
 		return defaultColor;
 	}
@@ -141,6 +144,8 @@ public class OsmandMapTileView implements IMapDownloaderCallback {
 	private BaseMapLayer mainLayer;
 
 	private Map<OsmandMapLayer, Float> zOrders = new HashMap<OsmandMapLayer, Float>();
+
+	private OnDrawMapListener onDrawMapListener;
 
 	// UI Part
 	// handler to refresh map (in ui thread - ui thread is not necessary, but msg queue is required).
@@ -448,6 +453,10 @@ public class OsmandMapTileView implements IMapDownloaderCallback {
 		return locationListener;
 	}
 
+	public void setOnDrawMapListener(OnDrawMapListener onDrawMapListener) {
+		this.onDrawMapListener = onDrawMapListener;
+	}
+
 	// ////////////////////////////// DRAWING MAP PART /////////////////////////////////////////////
 	public BaseMapLayer getMainLayer() {
 		return mainLayer;
@@ -663,10 +672,10 @@ public class OsmandMapTileView implements IMapDownloaderCallback {
 			}
 		}
 
-		if (activity instanceof MapActivity && !((MapActivity) activity).isActivityDestroyed() &&
-				((MapActivity) activity).getSupportFragmentManager().findFragmentByTag(SecondSplashScreenFragment.TAG) != null) {
-			((MapActivity) activity).dismissSecondSplashScreen();
+		if (onDrawMapListener != null) {
+			onDrawMapListener.onDrawOverMap();
 		}
+
 		for (int i = 0; i < layers.size(); i++) {
 			try {
 				OsmandMapLayer layer = layers.get(i);
