@@ -580,14 +580,18 @@ public class MapInfoWidgetsFactory {
 				titleView.setSingleLine(false);
 			}
 
-			if (controller.closeBtnVisible && closeButton.getVisibility() == View.GONE) {
-				closeButton.setVisibility(View.VISIBLE);
-			} else {
+			if (controller.closeBtnVisible) {
+				if (closeButton.getVisibility() == View.GONE) {
+					closeButton.setVisibility(View.VISIBLE);
+				}
+			} else if (closeButton.getVisibility() == View.VISIBLE) {
 				closeButton.setVisibility(View.GONE);
 			}
-			if (controller.refreshBtnVisible && refreshButton.getVisibility() == View.GONE) {
-				refreshButton.setVisibility(View.VISIBLE);
-			} else {
+			if (controller.refreshBtnVisible) {
+				if (refreshButton.getVisibility() == View.GONE) {
+					refreshButton.setVisibility(View.VISIBLE);
+				}
+			} else if (refreshButton.getVisibility() == View.VISIBLE) {
 				refreshButton.setVisibility(View.GONE);
 			}
 		}
