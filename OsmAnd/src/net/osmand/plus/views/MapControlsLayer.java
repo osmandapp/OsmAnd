@@ -247,6 +247,7 @@ public class MapControlsLayer extends OsmandMapLayer {
 		configureMap.setOnClickListener(new View.OnClickListener() {
 			@Override
 			public void onClick(View v) {
+				mapActivity.dismissCardDialog();
 				MapActivity.clearPrevActivityIntent();
 				mapActivity.getDashboard().setDashboardVisibility(true, DashboardType.CONFIGURE_MAP);
 			}
@@ -273,6 +274,7 @@ public class MapControlsLayer extends OsmandMapLayer {
 		search.setOnClickListener(new View.OnClickListener() {
 			@Override
 			public void onClick(View v) {
+				mapActivity.dismissCardDialog();
 				mapActivity.showQuickSearch(ShowQuickSearchMode.NEW_IF_EXPIRED, false);
 			}
 		});
@@ -408,6 +410,7 @@ public class MapControlsLayer extends OsmandMapLayer {
 			public void onClick(View v) {
 				MapActivity.clearPrevActivityIntent();
 				if (dash) {
+					mapActivity.dismissCardDialog();
 					mapActivity.getDashboard().setDashboardVisibility(true, DashboardType.DASHBOARD);
 				} else {
 					mapActivity.openDrawer();
