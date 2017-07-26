@@ -1641,4 +1641,7 @@
     <string name="old_poi_file_should_be_deleted">POI məlumat faylı “%1$s” lazımsızdır və silinə bilər.</string>
     <string name="favorite_delete_multiple">%1$d favoriti və %2$d favorit qrupu silmək üzrəsiniz. Əminsiniz?</string>
     <string name="downloads_left_template">%1$s endirmə qalıb</string>
+    <string name="quick_action_resume_pause_navigation"/>
+    <string name="quick_action_resume_pause_navigation_descr"/>
+    <string name="quick_action_show_navigation_finish_dialog"></string>
     </resources>
