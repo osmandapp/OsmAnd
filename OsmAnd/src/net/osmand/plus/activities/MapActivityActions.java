@@ -921,6 +921,7 @@ public class MapActivityActions implements DialogProvider {
 		menuItemsListView.setOnItemClickListener(new AdapterView.OnItemClickListener() {
 			@Override
 			public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
+				mapActivity.dismissCardDialog();
 				ContextMenuItem item = contextMenuAdapter.getItem(position);
 				ContextMenuAdapter.ItemClickListener click = item.getItemClickListener();
 				if (click != null && click.onContextMenuClick(simpleListAdapter, item.getTitleId(),

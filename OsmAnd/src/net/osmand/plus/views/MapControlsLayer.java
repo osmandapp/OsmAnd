@@ -423,6 +423,7 @@ public class MapControlsLayer extends OsmandMapLayer {
 		routePlanButton.setOnClickListener(new View.OnClickListener() {
 			@Override
 			public void onClick(View v) {
+				mapActivity.dismissCardDialog();
 				doRoute(false);
 			}
 		});
