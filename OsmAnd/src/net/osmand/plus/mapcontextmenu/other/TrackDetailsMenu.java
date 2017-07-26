@@ -305,7 +305,8 @@ public class TrackDetailsMenu {
 
 		if (trackChartPoints == null) {
 			trackChartPoints = new TrackChartPoints();
-			int segmentColor = getTrackSegment(chart).getColor(0);
+			TrkSegment segment = getTrackSegment(chart);
+			int segmentColor = segment != null ? segment.getColor(0) : 0;
 			trackChartPoints.setSegmentColor(segmentColor);
 			trackChartPoints.setGpx(getGpxItem().group.getGpx());
 		}
