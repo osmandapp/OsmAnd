@@ -13,6 +13,8 @@ import net.osmand.plus.quickaction.QuickAction;
 public class NavVoiceAction extends QuickAction {
 	public static final int TYPE = 11;
 
+	private boolean voiceMute;
+
 	public NavVoiceAction() {
 		super(TYPE);
 	}
@@ -43,16 +45,21 @@ public class NavVoiceAction extends QuickAction {
 	}
 
 	@Override
+	public void checkState(OsmandApplication app) {
+		voiceMute = app.getSettings().VOICE_MUTE.get();
+	}
+
+	@Override
 	public String getActionText(OsmandApplication application) {
 
-		return application.getSettings().VOICE_MUTE.get()
+		return voiceMute
 				? application.getString(R.string.quick_action_navigation_voice_off)
 				: application.getString(R.string.quick_action_navigation_voice_on);
 	}
 
 	@Override
-	public boolean isActionWithSlash(OsmandApplication application) {
+	public boolean isActionWithSlash() {
 
-		return application.getSettings().VOICE_MUTE.get();
+		return voiceMute;
 	}
 }

@@ -23,7 +23,6 @@ import net.osmand.plus.activities.MapActivity;
 import net.osmand.plus.poi.PoiFiltersHelper;
 import net.osmand.plus.poi.PoiUIFilter;
 import net.osmand.plus.quickaction.QuickAction;
-import net.osmand.plus.quickaction.QuickActionFactory;
 import net.osmand.plus.render.RenderingIcons;
 
 import java.util.ArrayList;
@@ -47,18 +46,25 @@ public class ShowHidePoiAction extends QuickAction {
 		super(quickAction);
 	}
 
+	private boolean isCurrentFilters;
+	private PoiUIFilter filter;
+
+	@Override
+	public void checkState(OsmandApplication app) {
+		isCurrentFilters = isCurrentFilters(app);
+	}
+
 	@Override
 	public String getActionText(OsmandApplication application) {
-
-		return !isCurrentFilters(application)
+		return !isCurrentFilters
 				? application.getString(R.string.quick_action_poi_show, getName(application))
 				: application.getString(R.string.quick_action_poi_hide, getName(application));
 	}
 
 	@Override
-	public boolean isActionWithSlash(OsmandApplication application) {
+	public boolean isActionWithSlash() {
 
-		return isCurrentFilters(application);
+		return isCurrentFilters;
 	}
 
 	@Override
@@ -76,18 +82,12 @@ public class ShowHidePoiAction extends QuickAction {
 		} else {
 
 			OsmandApplication app = (OsmandApplication) context.getApplicationContext();
-			List<String> filters = new ArrayList<>();
-
-			String filtersId = getParams().get(KEY_FILTERS);
-			Collections.addAll(filters, filtersId.split(","));
 
 			if (app.getPoiFilters() == null) return super.getIconRes();
 
-			PoiUIFilter filter = app.getPoiFilters().getFilterById(filters.get(0));
+			if (this.filter == null) return super.getIconRes();
 
-			if (filter == null) return super.getIconRes();
-
-			Object res = filter.getIconResource();
+			Object res = this.filter.getIconResource();
 
 			if (res instanceof String && RenderingIcons.containsBigIcon(res.toString())) {
 
@@ -260,10 +260,11 @@ public class ShowHidePoiAction extends QuickAction {
 
 		List<PoiUIFilter> poiFilters = new ArrayList<>();
 
-		for (String f : filters) {
-
-			PoiUIFilter filter = helper.getFilterById(f);
-
+		for (int i = 0; i < filters.size(); i++){
+			PoiUIFilter filter = helper.getFilterById(filters.get(i));
+			if (i == 0) {
+				this.filter = filter;
+			}
 			if (filter != null) {
 				poiFilters.add(filter);
 			}

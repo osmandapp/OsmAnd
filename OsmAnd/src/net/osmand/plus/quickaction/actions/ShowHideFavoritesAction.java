@@ -14,6 +14,8 @@ public class ShowHideFavoritesAction extends QuickAction {
 
 	public static final int TYPE = 4;
 
+	private boolean showFavorites;
+
 	public ShowHideFavoritesAction() {
 		super(TYPE);
 	}
@@ -44,16 +46,21 @@ public class ShowHideFavoritesAction extends QuickAction {
 	}
 
 	@Override
+	public void checkState(OsmandApplication app) {
+		showFavorites = app.getSettings().SHOW_FAVORITES.get();
+	}
+
+	@Override
 	public String getActionText(OsmandApplication application) {
 
-		return application.getSettings().SHOW_FAVORITES.get()
+		return showFavorites
 				? application.getString(R.string.quick_action_favorites_hide)
 				: application.getString(R.string.quick_action_favorites_show);
 	}
 
 	@Override
-	public boolean isActionWithSlash(OsmandApplication application) {
+	public boolean isActionWithSlash() {
 
-		return application.getSettings().SHOW_FAVORITES.get();
+		return showFavorites;
 	}
 }

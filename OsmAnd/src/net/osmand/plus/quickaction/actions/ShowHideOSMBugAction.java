@@ -9,13 +9,14 @@ import net.osmand.plus.OsmandApplication;
 import net.osmand.plus.OsmandPlugin;
 import net.osmand.plus.R;
 import net.osmand.plus.activities.MapActivity;
-import net.osmand.plus.dialogs.ConfigureMapMenu;
 import net.osmand.plus.osmedit.OsmEditingPlugin;
 import net.osmand.plus.quickaction.QuickAction;
 
 public class ShowHideOSMBugAction extends QuickAction {
 
 	public static final int TYPE = 24;
+
+	private boolean showOsmBugs;
 
 	public ShowHideOSMBugAction() {
 		super(TYPE);
@@ -51,16 +52,21 @@ public class ShowHideOSMBugAction extends QuickAction {
 	}
 
 	@Override
+	public void checkState(OsmandApplication app) {
+		showOsmBugs = app.getSettings().SHOW_OSM_BUGS.get();
+	}
+
+	@Override
 	public String getActionText(OsmandApplication application) {
 
-		return application.getSettings().SHOW_OSM_BUGS.get()
+		return showOsmBugs
 				? application.getString(R.string.quick_action_osmbugs_hide)
 				: application.getString(R.string.quick_action_osmbugs_show);
 	}
 
 	@Override
-	public boolean isActionWithSlash(OsmandApplication application) {
+	public boolean isActionWithSlash() {
 
-		return application.getSettings().SHOW_OSM_BUGS.get();
+		return showOsmBugs;
 	}
 }
