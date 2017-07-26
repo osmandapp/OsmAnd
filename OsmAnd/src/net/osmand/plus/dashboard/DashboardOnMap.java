@@ -793,6 +793,7 @@ public class DashboardOnMap implements ObservableScrollViewCallbacks, DynamicLis
 		if (swipeDismissListener != null) {
 			swipeDismissListener.discardUndo();
 		}
+		removeMapillaryFiltersFragment();
 
 		if (visible) {
 			mapActivity.getContextMenu().hideMenues();
@@ -818,7 +819,6 @@ public class DashboardOnMap implements ObservableScrollViewCallbacks, DynamicLis
 			View listViewLayout = dashboardView.findViewById(R.id.dash_list_view_layout);
 			ScrollView scrollView = (ScrollView) dashboardView.findViewById(R.id.main_scroll);
 			if (visibleType == DashboardType.DASHBOARD || visibleType == DashboardType.MAPILLARY) {
-				removeMapillaryFiltersFragment();
 				if (visibleType == DashboardType.DASHBOARD) {
 					addOrUpdateDashboardFragments();
 				} else {
