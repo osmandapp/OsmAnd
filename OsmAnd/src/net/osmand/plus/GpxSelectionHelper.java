@@ -528,10 +528,9 @@ public class GpxSelectionHelper {
 		public void processPoints() {
 			update();
 			this.processedPointsToDisplay = gpxFile.proccessPoints();
-			List<TrkSegment> processedRoutePointsToDisplay = gpxFile.processRoutePoints();
-			if (!processedRoutePointsToDisplay.isEmpty()) {
-				this.processedPointsToDisplay.addAll(processedRoutePointsToDisplay);
-				routePoints = !processedRoutePointsToDisplay.isEmpty();
+			if (this.processedPointsToDisplay.isEmpty()) {
+				this.processedPointsToDisplay = gpxFile.processRoutePoints();
+				routePoints = !this.processedPointsToDisplay.isEmpty();
 			}
 		}
 
