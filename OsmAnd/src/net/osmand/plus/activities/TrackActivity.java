@@ -78,11 +78,52 @@ public class TrackActivity extends TabActivity {
 		setContentView(R.layout.tab_content);
 	}
 
-	@Override
-	protected void onStart() {
-		super.onStart();
-		stopped = false;
+	protected void setGpxDataItem(GpxDataItem gpxDataItem) {
+		this.gpxDataItem = gpxDataItem;
+	}
 
+	protected void setGpx(GPXFile result) {
+		this.gpxFile = result;
+		if (file == null) {
+			this.gpxFile = getMyApplication().getSavingTrackHelper().getCurrentGpx();
+		}
+	}
+
+	public List<GpxDisplayGroup> getGpxFile(boolean useDisplayGroups) {
+		if (gpxFile == null) {
+			return new ArrayList<>();
+		}
+		if (gpxFile.modifiedTime != modifiedTime) {
+			modifiedTime = gpxFile.modifiedTime;
+			GpxSelectionHelper selectedGpxHelper = ((OsmandApplication) getApplication()).getSelectedGpxHelper();
+			displayGroups = selectedGpxHelper.collectDisplayGroups(gpxFile);
+			originalGroups.clear();
+			for (GpxDisplayGroup g : displayGroups) {
+				originalGroups.add(g.cloneInstance());
+			}
+			if (file != null) {
+				SelectedGpxFile sf = selectedGpxHelper.getSelectedFileByPath(gpxFile.path);
+				if (sf != null && file != null && sf.getDisplayGroups() != null) {
+					displayGroups = sf.getDisplayGroups();
+				}
+			}
+		}
+		if (useDisplayGroups) {
+			return displayGroups;
+		} else {
+			return originalGroups;
+		}
+	}
+
+	@Override
+	public void onAttachFragment(Fragment fragment) {
+		fragList.add(new WeakReference<>(fragment));
+	}
+
+	@Override
+	protected void onResume() {
+		super.onResume();
+		stopped = false;
 		slidingTabLayout = (PagerSlidingTabStrip) findViewById(R.id.sliding_tabs);
 		if (slidingTabLayout != null) {
 			slidingTabLayout.setShouldExpand(true);
@@ -157,53 +198,6 @@ public class TrackActivity extends TabActivity {
 		}
 	}
 
-	protected void setGpxDataItem(GpxDataItem gpxDataItem) {
-		this.gpxDataItem = gpxDataItem;
-	}
-
-	protected void setGpx(GPXFile result) {
-		this.gpxFile = result;
-		if (file == null) {
-			this.gpxFile = getMyApplication().getSavingTrackHelper().getCurrentGpx();
-		}
-	}
-
-	public List<GpxDisplayGroup> getGpxFile(boolean useDisplayGroups) {
-		if (gpxFile == null) {
-			return new ArrayList<>();
-		}
-		if (gpxFile.modifiedTime != modifiedTime) {
-			modifiedTime = gpxFile.modifiedTime;
-			GpxSelectionHelper selectedGpxHelper = ((OsmandApplication) getApplication()).getSelectedGpxHelper();
-			displayGroups = selectedGpxHelper.collectDisplayGroups(gpxFile);
-			originalGroups.clear();
-			for (GpxDisplayGroup g : displayGroups) {
-				originalGroups.add(g.cloneInstance());
-			}
-			if (file != null) {
-				SelectedGpxFile sf = selectedGpxHelper.getSelectedFileByPath(gpxFile.path);
-				if (sf != null && file != null && sf.getDisplayGroups() != null) {
-					displayGroups = sf.getDisplayGroups();
-				}
-			}
-		}
-		if (useDisplayGroups) {
-			return displayGroups;
-		} else {
-			return originalGroups;
-		}
-	}
-
-	@Override
-	public void onAttachFragment(Fragment fragment) {
-		fragList.add(new WeakReference<>(fragment));
-	}
-
-	@Override
-	protected void onResume() {
-		super.onResume();
-	}
-
 	public OsmandApplication getMyApplication() {
 		return (OsmandApplication) getApplication();
 	}
@@ -233,33 +227,33 @@ public class TrackActivity extends TabActivity {
 	public boolean onOptionsItemSelected(MenuItem item) {
 		int itemId = item.getItemId();
 		switch (itemId) {
-		case android.R.id.home:
-			int backStackEntriesCount = getSupportFragmentManager().getBackStackEntryCount();
-			if (backStackEntriesCount > 0) {
-				FragmentManager.BackStackEntry backStackEntry = getSupportFragmentManager().getBackStackEntryAt(getSupportFragmentManager().getBackStackEntryCount() - 1);
-				if (backStackEntry.getName().equals(SplitSegmentFragment.TAG)) {
-					for (WeakReference<Fragment> f : fragList) {
-						Fragment frag = f.get();
-						if (frag instanceof TrackSegmentFragment) {
-							((TrackSegmentFragment) frag).updateSplitView();
+			case android.R.id.home:
+				int backStackEntriesCount = getSupportFragmentManager().getBackStackEntryCount();
+				if (backStackEntriesCount > 0) {
+					FragmentManager.BackStackEntry backStackEntry = getSupportFragmentManager().getBackStackEntryAt(getSupportFragmentManager().getBackStackEntryCount() - 1);
+					if (backStackEntry.getName().equals(SplitSegmentFragment.TAG)) {
+						for (WeakReference<Fragment> f : fragList) {
+							Fragment frag = f.get();
+							if (frag instanceof TrackSegmentFragment) {
+								((TrackSegmentFragment) frag).updateSplitView();
+							}
 						}
+						getSupportFragmentManager().popBackStack();
+						if (isHavingWayPoints() || isHavingRoutePoints()) {
+							getSlidingTabLayout().setVisibility(View.VISIBLE);
+						}
+						return true;
 					}
-					getSupportFragmentManager().popBackStack();
-					if (isHavingWayPoints() || isHavingRoutePoints()) {
-						getSlidingTabLayout().setVisibility(View.VISIBLE);
-					}
-					return true;
 				}
-			}
-			if (getIntent().hasExtra(MapActivity.INTENT_KEY_PARENT_MAP_ACTIVITY)) {
-				OsmAndAppCustomization appCustomization = getMyApplication().getAppCustomization();
-				final Intent favorites = new Intent(this, appCustomization.getFavoritesActivity());
-				getMyApplication().getSettings().FAVORITES_TAB.set(FavoritesActivity.GPX_TAB);
-				favorites.setFlags(Intent.FLAG_ACTIVITY_REORDER_TO_FRONT);
-				startActivity(favorites);
-			}
-			finish();
-			return true;
+				if (getIntent().hasExtra(MapActivity.INTENT_KEY_PARENT_MAP_ACTIVITY)) {
+					OsmAndAppCustomization appCustomization = getMyApplication().getAppCustomization();
+					final Intent favorites = new Intent(this, appCustomization.getFavoritesActivity());
+					getMyApplication().getSettings().FAVORITES_TAB.set(FavoritesActivity.GPX_TAB);
+					favorites.setFlags(Intent.FLAG_ACTIVITY_REORDER_TO_FRONT);
+					startActivity(favorites);
+				}
+				finish();
+				return true;
 
 		}
 		return false;
@@ -287,11 +281,11 @@ public class TrackActivity extends TabActivity {
 		super.onBackPressed();
 	}
 
-	boolean isHavingWayPoints(){
+	boolean isHavingWayPoints() {
 		return getGpx() != null && getGpx().hasWptPt();
 	}
 
-	boolean isHavingRoutePoints(){
+	boolean isHavingRoutePoints() {
 		return getGpx() != null && getGpx().hasRtePt();
 	}
 
@@ -303,4 +297,3 @@ public class TrackActivity extends TabActivity {
 		return gpxDataItem;
 	}
 }
-
