@@ -76,12 +76,6 @@ public class TrackActivity extends TabActivity {
 			actionBar.setElevation(0);
 		}
 		setContentView(R.layout.tab_content);
-	}
-
-	@Override
-	protected void onStart() {
-		super.onStart();
-		stopped = false;
 
 		slidingTabLayout = (PagerSlidingTabStrip) findViewById(R.id.sliding_tabs);
 		if (slidingTabLayout != null) {
