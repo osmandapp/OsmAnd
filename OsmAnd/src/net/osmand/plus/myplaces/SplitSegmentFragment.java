@@ -322,29 +322,28 @@ public class SplitSegmentFragment extends OsmAndListFragment {
     }
 
     private List<GpxDisplayGroup> filterGroups(boolean useDisplayGroups) {
-        if (getTrackActivity() == null) {
-            return null;
-        }
-        List<GpxDisplayGroup> result = getTrackActivity().getGpxFile(useDisplayGroups);
         List<GpxDisplayGroup> groups = new ArrayList<>();
-        for (GpxDisplayGroup group : result) {
-            boolean add = hasFilterType(group.getType());
-            if (isArgumentTrue(ARG_TO_FILTER_SHORT_TRACKS)) {
-                Iterator<GpxDisplayItem> item = group.getModifiableList().iterator();
-                while (item.hasNext()) {
-                    GpxDisplayItem it2 = item.next();
-                    if (it2.analysis != null && it2.analysis.totalDistance < 100) {
-                        item.remove();
+        if (getTrackActivity() != null) {
+            List<GpxDisplayGroup> result = getTrackActivity().getGpxFile(useDisplayGroups);
+            for (GpxDisplayGroup group : result) {
+                boolean add = hasFilterType(group.getType());
+                if (isArgumentTrue(ARG_TO_FILTER_SHORT_TRACKS)) {
+                    Iterator<GpxDisplayItem> item = group.getModifiableList().iterator();
+                    while (item.hasNext()) {
+                        GpxDisplayItem it2 = item.next();
+                        if (it2.analysis != null && it2.analysis.totalDistance < 100) {
+                            item.remove();
+                        }
+                    }
+                    if (group.getModifiableList().isEmpty()) {
+                        add = false;
                     }
                 }
-                if (group.getModifiableList().isEmpty()) {
-                    add = false;
+                if (add) {
+                    groups.add(group);
                 }
-            }
-            if (add) {
-                groups.add(group);
-            }
 
+            }
         }
         return groups;
     }
@@ -657,9 +656,6 @@ public class SplitSegmentFragment extends OsmAndListFragment {
             }
             if (mSelectedGpxFile != null) {
                 List<GpxDisplayGroup> groups = getDisplayGroups();
-                if (groups == null) {
-                    return;
-                }
                 mSelectedGpxFile.setDisplayGroups(groups);
             }
             updateContent();
