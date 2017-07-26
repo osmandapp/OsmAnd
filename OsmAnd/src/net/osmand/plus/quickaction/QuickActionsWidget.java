@@ -223,13 +223,15 @@ public class QuickActionsWidget extends LinearLayout {
                 final QuickAction action = QuickActionFactory.produceAction(
                         actions.get(i + (position * ELEMENT_PER_PAGE)));
 
+				action.checkState(application);
+
                 ((ImageView) view.findViewById(imageView))
                         .setImageResource(action.getIconRes(getContext()));
 
                 ((TextView) view.findViewById(R.id.title))
                         .setText(action.getActionText(application));
 
-                if (action.isActionWithSlash(application)) {
+                if (action.isActionWithSlash()) {
 
                     ((ImageView) view.findViewById(R.id.imageSlash))
                             .setImageResource(light

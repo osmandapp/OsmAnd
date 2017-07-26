@@ -23,7 +23,6 @@ import net.osmand.plus.activities.MapActivity;
 import net.osmand.plus.poi.PoiFiltersHelper;
 import net.osmand.plus.poi.PoiUIFilter;
 import net.osmand.plus.quickaction.QuickAction;
-import net.osmand.plus.quickaction.QuickActionFactory;
 import net.osmand.plus.render.RenderingIcons;
 
 import java.util.ArrayList;
@@ -47,18 +46,24 @@ public class ShowHidePoiAction extends QuickAction {
 		super(quickAction);
 	}
 
+	private boolean isCurrentFilters;
+
+	@Override
+	public void checkState(OsmandApplication app) {
+		isCurrentFilters = isCurrentFilters(app);
+	}
+
 	@Override
 	public String getActionText(OsmandApplication application) {
-
-		return !isCurrentFilters(application)
+		return !isCurrentFilters
 				? application.getString(R.string.quick_action_poi_show, getName(application))
 				: application.getString(R.string.quick_action_poi_hide, getName(application));
 	}
 
 	@Override
-	public boolean isActionWithSlash(OsmandApplication application) {
+	public boolean isActionWithSlash() {
 
-		return isCurrentFilters(application);
+		return isCurrentFilters;
 	}
 
 	@Override

@@ -16,6 +16,8 @@ public class NavAutoZoomMapAction extends QuickAction {
 
 	public static final int TYPE = 23;
 
+	private boolean autoZoomMap;
+
 	public NavAutoZoomMapAction() {
 		super(TYPE);
 	}
@@ -46,15 +48,21 @@ public class NavAutoZoomMapAction extends QuickAction {
 	}
 
 	@Override
-	public String getActionText(OsmandApplication application) {
-
-		return application.getSettings().AUTO_ZOOM_MAP.get()
-				? application.getString(R.string.quick_action_auto_zoom_off) : application.getString(R.string.quick_action_auto_zoom_on);
+	public void checkState(OsmandApplication app) {
+		autoZoomMap = app.getSettings().AUTO_ZOOM_MAP.get();
 	}
 
 	@Override
-	public boolean isActionWithSlash(OsmandApplication application) {
+	public String getActionText(OsmandApplication application) {
 
-		return application.getSettings().AUTO_ZOOM_MAP.get();
+		return autoZoomMap
+				? application.getString(R.string.quick_action_auto_zoom_off)
+				: application.getString(R.string.quick_action_auto_zoom_on);
+	}
+
+	@Override
+	public boolean isActionWithSlash() {
+
+		return autoZoomMap;
 	}
 }
