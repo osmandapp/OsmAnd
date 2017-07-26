@@ -1314,10 +1314,12 @@ public class AvailableGPXFragment extends OsmandExpandableListFragment {
 				}
 				if (gpxItem.analysis.hasSpeedData) {
 					list.add(GPXDataSetType.SPEED);
-				} else {
+				} else if (gpxItem.analysis.hasElevationData) {
 					list.add(GPXDataSetType.SLOPE);
 				}
-				gpxItem.chartTypes = list.toArray(new GPXDataSetType[list.size()]);
+				if (list.size() > 0) {
+					gpxItem.chartTypes = list.toArray(new GPXDataSetType[list.size()]);
+				}
 				if (gpxItem.group.getGpx() != null) {
 					gpxItem.wasHidden = app.getSelectedGpxHelper().getSelectedFileByPath(gpxInfo.file.getAbsolutePath()) == null;
 					app.getSelectedGpxHelper().setGpxFileToDisplay(gpxItem.group.getGpx());
