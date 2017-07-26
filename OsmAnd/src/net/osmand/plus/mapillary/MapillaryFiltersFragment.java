@@ -79,6 +79,7 @@ public class MapillaryFiltersFragment extends BaseOsmAndFragment {
         final Drawable drawable = getIcon(toggleIconId, toggleIconColorId);
         ((AppCompatImageView) toggleRow.findViewById(R.id.toggle_row_icon)).setImageDrawable(drawable);
         final CompoundButton toggle = (CompoundButton) toggleRow.findViewById(R.id.toggle_row_toggle);
+		toggle.setOnCheckedChangeListener(null);
         toggle.setChecked(selected);
         toggle.setOnCheckedChangeListener(new CompoundButton.OnCheckedChangeListener() {
             @Override
