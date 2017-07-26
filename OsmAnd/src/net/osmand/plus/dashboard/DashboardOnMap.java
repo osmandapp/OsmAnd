@@ -796,6 +796,7 @@ public class DashboardOnMap implements ObservableScrollViewCallbacks, DynamicLis
 		removeMapillaryFiltersFragment();
 
 		if (visible) {
+			mapActivity.dismissCardDialog();
 			mapActivity.getContextMenu().hideMenues();
 			mapViewLocation = mapActivity.getMapLocation();
 			mapRotation = mapActivity.getMapRotate();
