@@ -273,6 +273,7 @@ public class MapControlsLayer extends OsmandMapLayer {
 		search.setOnClickListener(new View.OnClickListener() {
 			@Override
 			public void onClick(View v) {
+				mapActivity.dismissCardDialog();
 				mapActivity.showQuickSearch(ShowQuickSearchMode.NEW_IF_EXPIRED, false);
 			}
 		});
@@ -423,6 +424,7 @@ public class MapControlsLayer extends OsmandMapLayer {
 		routePlanButton.setOnClickListener(new View.OnClickListener() {
 			@Override
 			public void onClick(View v) {
+				mapActivity.dismissCardDialog();
 				doRoute(false);
 			}
 		});
