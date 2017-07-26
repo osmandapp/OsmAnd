@@ -78,11 +78,52 @@ public class TrackActivity extends TabActivity {
 		setContentView(R.layout.tab_content);
 	}
 
-	@Override
-	protected void onStart() {
-		super.onStart();
-		stopped = false;
+	protected void setGpxDataItem(GpxDataItem gpxDataItem) {
+		this.gpxDataItem = gpxDataItem;
+	}
 
+	protected void setGpx(GPXFile result) {
+		this.gpxFile = result;
+		if (file == null) {
+			this.gpxFile = getMyApplication().getSavingTrackHelper().getCurrentGpx();
+		}
+	}
+
+	public List<GpxDisplayGroup> getGpxFile(boolean useDisplayGroups) {
+		if (gpxFile == null) {
+			return new ArrayList<>();
+		}
+		if (gpxFile.modifiedTime != modifiedTime) {
+			modifiedTime = gpxFile.modifiedTime;
+			GpxSelectionHelper selectedGpxHelper = ((OsmandApplication) getApplication()).getSelectedGpxHelper();
+			displayGroups = selectedGpxHelper.collectDisplayGroups(gpxFile);
+			originalGroups.clear();
+			for (GpxDisplayGroup g : displayGroups) {
+				originalGroups.add(g.cloneInstance());
+			}
+			if (file != null) {
+				SelectedGpxFile sf = selectedGpxHelper.getSelectedFileByPath(gpxFile.path);
+				if (sf != null && file != null && sf.getDisplayGroups() != null) {
+					displayGroups = sf.getDisplayGroups();
+				}
+			}
+		}
+		if (useDisplayGroups) {
+			return displayGroups;
+		} else {
+			return originalGroups;
+		}
+	}
+
+	@Override
+	public void onAttachFragment(Fragment fragment) {
+		fragList.add(new WeakReference<>(fragment));
+	}
+
+	@Override
+	protected void onResume() {
+		super.onResume();
+		stopped = false;
 		slidingTabLayout = (PagerSlidingTabStrip) findViewById(R.id.sliding_tabs);
 		if (slidingTabLayout != null) {
 			slidingTabLayout.setShouldExpand(true);
@@ -155,53 +196,6 @@ public class TrackActivity extends TabActivity {
 				}
 			}.execute((Void) null);
 		}
-	}
-
-	protected void setGpxDataItem(GpxDataItem gpxDataItem) {
-		this.gpxDataItem = gpxDataItem;
-	}
-
-	protected void setGpx(GPXFile result) {
-		this.gpxFile = result;
-		if (file == null) {
-			this.gpxFile = getMyApplication().getSavingTrackHelper().getCurrentGpx();
-		}
-	}
-
-	public List<GpxDisplayGroup> getGpxFile(boolean useDisplayGroups) {
-		if (gpxFile == null) {
-			return new ArrayList<>();
-		}
-		if (gpxFile.modifiedTime != modifiedTime) {
-			modifiedTime = gpxFile.modifiedTime;
-			GpxSelectionHelper selectedGpxHelper = ((OsmandApplication) getApplication()).getSelectedGpxHelper();
-			displayGroups = selectedGpxHelper.collectDisplayGroups(gpxFile);
-			originalGroups.clear();
-			for (GpxDisplayGroup g : displayGroups) {
-				originalGroups.add(g.cloneInstance());
-			}
-			if (file != null) {
-				SelectedGpxFile sf = selectedGpxHelper.getSelectedFileByPath(gpxFile.path);
-				if (sf != null && file != null && sf.getDisplayGroups() != null) {
-					displayGroups = sf.getDisplayGroups();
-				}
-			}
-		}
-		if (useDisplayGroups) {
-			return displayGroups;
-		} else {
-			return originalGroups;
-		}
-	}
-
-	@Override
-	public void onAttachFragment(Fragment fragment) {
-		fragList.add(new WeakReference<>(fragment));
-	}
-
-	@Override
-	protected void onResume() {
-		super.onResume();
 	}
 
 	public OsmandApplication getMyApplication() {
