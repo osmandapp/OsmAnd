@@ -1542,9 +1542,6 @@ public class TrackSegmentFragment extends OsmAndListFragment {
 			}
 			if (mSelectedGpxFile != null) {
 				List<GpxDisplayGroup> groups = getDisplayGroups();
-				if (groups == null) {
-					return;
-				}
 				mSelectedGpxFile.setDisplayGroups(groups);
 			}
 			if (mFragment.isVisible()) {
