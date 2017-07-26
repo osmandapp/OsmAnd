@@ -121,16 +121,16 @@ public class TrackPointFragment extends OsmandExpandableListFragment {
 		return view;
 	}
 
-	public TrackActivity getMyActivity() {
+	public TrackActivity getTrackActivity() {
 		return (TrackActivity) getActivity();
 	}
 
 	private GPXFile getGpx() {
-		return getMyActivity().getGpx();
+		return getTrackActivity().getGpx();
 	}
 
 	private GpxDataItem getGpxDataItem() {
-		return getMyActivity().getGpxDataItem();
+		return getTrackActivity().getGpxDataItem();
 	}
 
 	private void expandAllGroups() {
@@ -160,26 +160,28 @@ public class TrackPointFragment extends OsmandExpandableListFragment {
 	}
 
 	private List<GpxDisplayGroup> filterGroups() {
-		List<GpxDisplayGroup> result = getMyActivity().getGpxFile(false);
 		List<GpxDisplayGroup> groups = new ArrayList<>();
-		for (GpxDisplayGroup group : result) {
-			boolean add = hasFilterType(group.getType());
-			if (isArgumentTrue(ARG_TO_FILTER_SHORT_TRACKS)) {
-				Iterator<GpxDisplayItem> item = group.getModifiableList().iterator();
-				while (item.hasNext()) {
-					GpxDisplayItem it2 = item.next();
-					if (it2.analysis != null && it2.analysis.totalDistance < 100) {
-						item.remove();
+		if (getTrackActivity() != null) {
+			List<GpxDisplayGroup> result = getTrackActivity().getGpxFile(false);
+			for (GpxDisplayGroup group : result) {
+				boolean add = hasFilterType(group.getType());
+				if (isArgumentTrue(ARG_TO_FILTER_SHORT_TRACKS)) {
+					Iterator<GpxDisplayItem> item = group.getModifiableList().iterator();
+					while (item.hasNext()) {
+						GpxDisplayItem it2 = item.next();
+						if (it2.analysis != null && it2.analysis.totalDistance < 100) {
+							item.remove();
+						}
+					}
+					if (group.getModifiableList().isEmpty()) {
+						add = false;
 					}
 				}
-				if (group.getModifiableList().isEmpty()) {
-					add = false;
+				if (add) {
+					groups.add(group);
 				}
-			}
-			if (add) {
-				groups.add(group);
-			}
 
+			}
 		}
 		return groups;
 	}
@@ -537,8 +539,8 @@ public class TrackPointFragment extends OsmandExpandableListFragment {
 
 	private void selectFavoritesImpl() {
 		if (!selectedItems.isEmpty()) {
-			AlertDialog.Builder b = new AlertDialog.Builder(getMyActivity());
-			final EditText editText = new EditText(getMyActivity());
+			AlertDialog.Builder b = new AlertDialog.Builder(getTrackActivity());
+			final EditText editText = new EditText(getTrackActivity());
 			String name = selectedItems.iterator().next().group.getName();
 			if(name.indexOf('\n') > 0) {
 				name = name.substring(0, name.indexOf('\n'));
@@ -818,7 +820,7 @@ public class TrackPointFragment extends OsmandExpandableListFragment {
 					groupColor = gpxItem.locationStart.getColor(groupColor);
 				}
 				if (groupColor == 0) {
-					groupColor = getMyActivity().getResources().getColor(R.color.gpx_color_point);
+					groupColor = getTrackActivity().getResources().getColor(R.color.gpx_color_point);
 				}
 				icon.setImageDrawable(FavoriteImageDrawable.getOrCreate(getActivity(), groupColor, false));
 			} else {
