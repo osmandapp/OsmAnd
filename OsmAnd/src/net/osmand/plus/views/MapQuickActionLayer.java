@@ -80,8 +80,10 @@ public class MapQuickActionLayer extends OsmandMapLayer implements QuickActionRe
         quickActionButton.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                if (!showTutorialIfNeeded())
+				mapActivity.dismissCardDialog();
+                if (!showTutorialIfNeeded()) {
                     setLayerState(!isWidgetVisible());
+                }
             }
         });
 
