@@ -285,7 +285,7 @@ public class TrackSegmentFragment extends OsmAndListFragment {
 					final OsmandSettings settings = app.getSettings();
 					settings.setMapLocationToShow(location.getLatitude(), location.getLongitude(),
 							settings.getLastKnownMapZoom(),
-							new PointDescription(PointDescription.POINT_TYPE_WPT, getGpxDataItem().getFile().getName()),
+							new PointDescription(PointDescription.POINT_TYPE_WPT, getGpxDataItem() != null ? getGpxDataItem().getFile().getName() : ""),
 							false,
 							getRect()
 					);
