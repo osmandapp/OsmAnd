@@ -194,7 +194,7 @@ public class PoiFiltersHelper {
 	}
 
 	public List<PoiUIFilter> getTopDefinedPoiFilters() {
-//		if (cacheTopStandardFilters == null) {
+		if (cacheTopStandardFilters == null) {
 			List<PoiUIFilter> top = new ArrayList<PoiUIFilter>();
 			// user defined
 			top.addAll(getUserDefinedPoiFilters());
@@ -209,7 +209,7 @@ public class PoiFiltersHelper {
 			}
 			Collections.sort(top);
 			cacheTopStandardFilters = top;
-//		}
+		}
 		List<PoiUIFilter> result = new ArrayList<PoiUIFilter>();
 		result.addAll(cacheTopStandardFilters);
 		result.add(getShowAllPOIFilter());
