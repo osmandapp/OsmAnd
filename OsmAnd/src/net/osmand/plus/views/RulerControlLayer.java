@@ -205,8 +205,8 @@ public class RulerControlLayer extends OsmandMapLayer {
 			drawCenterIcon(canvas, tb, center, settings.isNightMode(), mode);
 			Location currentLoc = app.getLocationProvider().getLastKnownLocation();
 			if (showDistBetweenFingerAndLocation && currentLoc != null) {
-				float x = tb.getPixXFromLonNoRot(touchPointLatLon.getLongitude());
-				float y = tb.getPixYFromLatNoRot(touchPointLatLon.getLatitude());
+				float x = tb.getPixXFromLatLon(touchPointLatLon.getLatitude(), touchPointLatLon.getLongitude());
+				float y = tb.getPixYFromLatLon(touchPointLatLon.getLatitude(), touchPointLatLon.getLongitude());
 				drawDistBetweenFingerAndLocation(canvas, tb, x, y, currentLoc, settings.isNightMode());
 			} else if (showTwoFingersDistance) {
 				LatLon firstTouchPoint = view.getFirstTouchPointLatLon();
@@ -272,21 +272,31 @@ public class RulerControlLayer extends OsmandMapLayer {
 
 	private void drawDistBetweenFingerAndLocation(Canvas canvas, RotatedTileBox tb, float x, float y,
 												  Location currentLoc, boolean nightMode) {
-		int currX = tb.getPixXFromLonNoRot(currentLoc.getLongitude());
-		int currY = tb.getPixYFromLatNoRot(currentLoc.getLatitude());
-		distancePath.reset();
-		tx.clear();
-		ty.clear();
+		int currX = (int) tb.getPixXFromLatLon(currentLoc.getLatitude(), currentLoc.getLongitude());
+		int currY = (int) tb.getPixYFromLatLon(currentLoc.getLatitude(), currentLoc.getLongitude());
+		int width = tb.getPixWidth();
+		int height = tb.getPixHeight();
 
-		tx.add(currX);
-		ty.add(currY);
-		tx.add((int) x);
-		ty.add((int) y);
+		if (currX < 0 || currY < 0 || currX > width || currY > height) {
+			float xNew = (currX + x) / 2;
+			float yNew = (currY + y) / 2;
 
-		calculatePath(tb, tx, ty, distancePath);
-		canvas.drawPath(distancePath, lineAttrs.paint);
-//		canvas.drawLine(currX, currY, x, y, lineAttrs.paint);
+			while (true) {
+				if (xNew < 0 || yNew < 0 || xNew > width || yNew > height) {
+					currX = (int) xNew;
+					currY = (int) yNew;
+				} else {
+					break;
+				}
+				xNew = (xNew + x) / 2;
+				yNew = (yNew + y) / 2;
+			}
+		}
+
+		canvas.rotate(-tb.getRotate(), tb.getCenterPixelX(), tb.getCenterPixelY());
+		canvas.drawLine(currX, currY, x, y, lineAttrs.paint);
 		drawFingerTouchIcon(canvas, x, y, nightMode);
+		canvas.rotate(tb.getRotate(), tb.getCenterPixelX(), tb.getCenterPixelY());
 	}
 
 	private void updateData(RotatedTileBox tb, QuadPoint center) {
