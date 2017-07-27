@@ -727,9 +727,10 @@ public class MapInfoWidgetsFactory {
 				if (text == null) {
 					text = "";
 				} else {
-					if(!Algorithms.isEmpty(text) && locationProvider.getLastKnownLocation() != null) {
+					Location lastKnownLocation = locationProvider.getLastKnownLocation();
+					if(!Algorithms.isEmpty(text) && lastKnownLocation != null) {
 						double dist =
-								CurrentPositionHelper.getOrthogonalDistance(rt, locationProvider.getLastKnownLocation());
+								CurrentPositionHelper.getOrthogonalDistance(rt, lastKnownLocation);
 						if(dist < 50) {
 							showMarker = true;
 						} else {
