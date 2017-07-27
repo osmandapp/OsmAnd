@@ -27,6 +27,7 @@ import android.widget.SeekBar;
 import android.widget.TextView;
 
 import net.osmand.AndroidUtils;
+import net.osmand.Location;
 import net.osmand.core.android.MapRendererContext;
 import net.osmand.data.LatLon;
 import net.osmand.data.PointDescription;
@@ -794,8 +795,8 @@ public class MapControlsLayer extends OsmandMapLayer {
 	}
 
 	private void updateMyLocation(RoutingHelper rh, boolean dialogOpened) {
-		boolean enabled = mapActivity.getMyApplication().getLocationProvider().getLastKnownLocation() != null &&
-				!isLocationOutdated(mapActivity.getMyApplication().getLocationProvider().getLastKnownLocation());
+		Location lastKnownLocation = mapActivity.getMyApplication().getLocationProvider().getLastKnownLocation();
+		boolean enabled = lastKnownLocation != null && !isLocationOutdated(lastKnownLocation);
 		boolean tracked = mapActivity.getMapViewTrackingUtilities().isMapLinkedToLocation();
 
 		if (!enabled) {
