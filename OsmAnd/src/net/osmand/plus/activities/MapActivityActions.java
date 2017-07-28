@@ -48,6 +48,7 @@ import net.osmand.plus.dashboard.DashboardOnMap.DashboardType;
 import net.osmand.plus.dialogs.FavoriteDialogs;
 import net.osmand.plus.download.IndexItem;
 import net.osmand.plus.liveupdates.OsmLiveActivity;
+import net.osmand.plus.measurementtool.MeasurementToolFragment;
 import net.osmand.plus.monitoring.OsmandMonitoringPlugin;
 import net.osmand.plus.routing.RouteProvider.GPXRouteParamsBuilder;
 import net.osmand.plus.routing.RoutingHelper;
@@ -691,6 +692,21 @@ public class MapActivityActions implements DialogProvider {
 						app.logEvent(mapActivity, "drawer_config_map_open");
 						MapActivity.clearPrevActivityIntent();
 						mapActivity.getDashboard().setDashboardVisibility(true, DashboardType.CONFIGURE_MAP);
+						return false;
+					}
+				}).createItem());
+
+		optionsMenuHelper.addItem(new ContextMenuItem.ItemBuilder().setTitleId(R.string.measurement_tool, mapActivity)
+				.setIcon(R.drawable.ic_action_ruler)
+				.setListener(new ContextMenuAdapter.ItemClickListener() {
+					@Override
+					public boolean onContextMenuClick(ArrayAdapter<ContextMenuItem> adapter, int itemId, int position, boolean isChecked) {
+						MeasurementToolFragment fragment = new MeasurementToolFragment();
+						mapActivity.getSupportFragmentManager()
+								.beginTransaction()
+								.add(R.id.bottomFragmentContainer, fragment, MeasurementToolFragment.TAG)
+								.addToBackStack(MeasurementToolFragment.TAG)
+								.commitAllowingStateLoss();
 						return false;
 					}
 				}).createItem());

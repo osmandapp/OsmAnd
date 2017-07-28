@@ -1,0 +1,119 @@
+<?xml version="1.0" encoding="utf-8"?>
+<FrameLayout
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:background="@color/color_transparent"
+    android:clickable="true">
+
+    <LinearLayout
+        android:id="@+id/main_view"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_gravity="bottom"
+        android:background="@drawable/bg_bottom_menu_dark"
+        android:clickable="true"
+        android:orientation="vertical">
+
+        <RelativeLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:minHeight="60dp">
+
+            <ImageButton
+                android:id="@+id/ruler_icon"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_alignParentLeft="true"
+                android:layout_alignParentStart="true"
+                android:layout_centerVertical="true"
+                android:layout_margin="16dp"
+                android:background="@null"
+                tools:src="@drawable/ic_action_ruler"/>
+
+            <ImageButton
+                android:id="@+id/up_down_icon"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_alignParentEnd="true"
+                android:layout_alignParentRight="true"
+                android:layout_centerVertical="true"
+                android:layout_margin="16dp"
+                android:background="@null"
+                tools:src="@drawable/ic_action_arrow_down"/>
+
+            <TextView
+                android:id="@+id/distance_text_view"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_centerVertical="true"
+                android:layout_toEndOf="@id/ruler_icon"
+                android:layout_toRightOf="@id/ruler_icon"
+                android:text="724 m, "
+                android:textAppearance="@style/TextAppearance.ListItemTitle"
+                tools:text="724 m, "/>
+
+            <TextView
+                android:id="@+id/dots_text_view"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_centerVertical="true"
+                android:layout_toEndOf="@id/distance_text_view"
+                android:layout_toLeftOf="@id/up_down_icon"
+                android:layout_toRightOf="@id/distance_text_view"
+                android:layout_toStartOf="@id/up_down_icon"
+                android:text="3 dots"
+                android:textColor="?android:textColorSecondary"
+                android:textSize="@dimen/default_desc_text_size"
+                tools:text="3 dots"/>
+        </RelativeLayout>
+
+        <View
+            android:layout_width="match_parent"
+            android:layout_height="1dp"
+            android:background="?attr/dashboard_divider"/>
+
+        <RelativeLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:minHeight="60dp">
+
+            <ImageButton
+                android:id="@+id/previous_dot_icon"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_alignParentLeft="true"
+                android:layout_alignParentStart="true"
+                android:layout_centerVertical="true"
+                android:layout_margin="16dp"
+                android:background="@null"
+                tools:src="@drawable/ic_action_undo_dark"/>
+
+            <ImageButton
+                android:id="@+id/next_dot_icon"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_centerVertical="true"
+                android:layout_margin="16dp"
+                android:layout_toEndOf="@id/previous_dot_icon"
+                android:layout_toRightOf="@id/previous_dot_icon"
+                android:background="@null"
+                tools:src="@drawable/ic_action_redo_dark"/>
+
+            <Button
+                style="@style/DialogActionButton"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_alignParentEnd="true"
+                android:layout_alignParentRight="true"
+                android:layout_centerVertical="true"
+                android:layout_marginEnd="8dp"
+                android:layout_marginRight="8dp"
+                android:drawableLeft="@drawable/ic_action_plus"
+                android:text="@string/shared_string_add"/>
+        </RelativeLayout>
+
+    </LinearLayout>
+
+</FrameLayout>
