@@ -585,7 +585,7 @@ public class PoiUIFilter implements SearchPoiTypeFilter, Comparable<PoiUIFilter>
 					acceptedTypes.put(category, null);
 				}
 			} else {
-				acceptedTypes.put(category, (LinkedHashSet<String>) types.get(category).clone());
+				acceptedTypes.put(category, new LinkedHashSet<>(types.get(category)));
 			}
 		}
 	}
