@@ -576,7 +576,12 @@ public class SplitSegmentFragment extends OsmAndListFragment {
 
                         String maxSpeed = OsmAndFormatter.getFormattedSpeed(analysis.maxSpeed, app);
                         String minSpeed = OsmAndFormatter.getFormattedSpeed(analysis.minSpeed, app);
-                        String maxMinSpeed = maxSpeed.substring(0, maxSpeed.indexOf(" ")).concat("/").concat(minSpeed);
+                        String maxMinSpeed;
+                        if (maxSpeed.contains(" ")) {
+                            maxMinSpeed = maxSpeed.substring(0, maxSpeed.indexOf(" ")).concat("/").concat(minSpeed);
+                        } else {
+                            maxMinSpeed = maxSpeed.substring(0, maxSpeed.indexOf("-")).concat("/").concat(minSpeed);
+                        }
 
                         if (minMaxSpeedLayoutWidth == 0) {
                             DisplayMetrics metrics = new DisplayMetrics();
