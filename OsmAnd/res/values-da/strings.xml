@@ -2757,7 +2757,7 @@ Tidligere destination bliver sidste mellemliggende punkt.</string>
     <string name="mapillary_descr">Online fotos for alle på gadenivea. Oplev steder, samarbejd, indfang verden.</string>
     <string name="shared_string_add_photos">Tilføj fotos</string>
     <string name="mapillary_action_descr">Bidrag med visninger af placeringen på gadeniveau via Mapillary.</string>
-    <string name="plugin_mapillary_descr">Billeder på gadeniveau for alle. Opdag steder, samarbejd, indfang verden.</string>
+    <string name="plugin_mapillary_descr">Fotos på gadeniveau for alle. Opdag steder, samarbejd, indfang verden.</string>
     <string name="online_photos">Online fotos</string>
     <string name="no_photos_descr">Ingen fotos til denne placering</string>
     <string name="shared_string_install">Installer</string>
@@ -2813,5 +2813,5 @@ Tidligere destination bliver sidste mellemliggende punkt.</string>
     <string name="live_monitoring_max_interval_to_send">Tidsbuffer til online sporing</string>
     <string name="live_monitoring_max_interval_to_send_desrc">Angiv en tidsbuffer til at opbevare steder, når der ingen forbindelse er</string>
     <string name="retry">Prøv igen</string>
-<string name="mappilary_no_internet_desc">Du skal have internet adgang, for at se fotos fra Mapillary</string>
+<string name="mappilary_no_internet_desc">Internetforbindelse er nødvendig for at se fotos fra Mapillary</string>
     </resources>
