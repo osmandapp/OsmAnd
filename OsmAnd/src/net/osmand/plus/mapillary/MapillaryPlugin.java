@@ -236,7 +236,7 @@ public class MapillaryPlugin extends OsmandPlugin {
 	}
 
 	public static boolean installMapillary(OsmandApplication app) {
-		boolean success = execInstall(app, "market://search?q=pname:" + MAPILLARY_PACKAGE_ID);
+		boolean success = execInstall(app, "market://details?id=" + MAPILLARY_PACKAGE_ID);
 		if (!success) {
 			success = execInstall(app, "https://play.google.com/store/apps/details?id=" + MAPILLARY_PACKAGE_ID);
 		}
