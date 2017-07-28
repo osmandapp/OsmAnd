@@ -308,7 +308,7 @@ Lon %2$s</string>
     <string name="osmo_track_interval_descr">Elige el lapso de tiempo para enviar la ubicación</string>
     <string name="osmo_track_interval">Intervalo de registro</string>
     <string name="osmo_share_session">Compartir sesión</string>
-    <string name="osmo_session_not_available">Sesión no disponible, comprueba que \'Enviar localizaciones\' este activado.</string>
+    <string name="osmo_session_not_available">Sesión no disponible, comprueba que «Enviar ubicaciones» este activado.</string>
     <string name="osmo_group_info">Información</string>
     <string name="osmo_edit_color">Mostrar color</string>
     <string name="osmo_edit_device">Cambiar propiedades de usuario</string>
@@ -448,7 +448,7 @@ Lon %2$s</string>
     <string name="wake_on_voice">Encender pantalla</string>
     <string name="osmand_rastermaps_plugin_description">Este complemento puede acceder a muchos tipos de mapas en línea (llamados teselas o ráster), desde teselas predefinidas de OpenStreetMap (como Mapnik) a imágenes satelitales y capas de propósito especial como mapas del tiempo, mapas del clima, mapas geológicos, capas de sombreado, etc. 
 \n 
-\nCualquiera de estos mapas puede ser usado como el mapa (base) principal que se mostrará en la pantalla del mapa de OsmAnd, o como una superposición o subyacencia de otro mapa base (como los mapas estándar de OsmAnd en línea). Para hacer más visible cualquier mapa subyacente, ciertos elementos de los mapas vectoriales OsmAnd se pueden ocultar fácilmente a través del menú \'Configurar mapa\' cuando lo desees. 
+\nCualquiera de estos mapas puede ser usado como el mapa (base) principal que se mostrará en la pantalla del mapa de OsmAnd, o como una superposición o subyacencia de otro mapa base (como los mapas estándar de OsmAnd en línea). Para hacer más visible cualquier mapa subyacente, ciertos elementos de los mapas vectoriales OsmAnd se pueden ocultar fácilmente a través del menú «Configurar mapa» cuando lo desees. 
 \n 
 \nLos mapas de teselas se pueden obtener directamente a través de fuentes en línea, o se pueden preparar para tu uso sin conexión (y copiar manualmente en la carpeta de datos OsmAnd) como una base de datos SQLite que puede ser producida por una variedad de herramientas de preparación de mapas de terceros.</string>
     <string name="record_plugin_description">Este complemento activa la funcionalidad para registrar y guardar tus trazas manualmente tocando el control de grabación GPX en la pantalla del mapa, o automáticamente registrando todas tus rutas navegadas en un archivo GPX. 
@@ -466,26 +466,26 @@ Lon %2$s</string>
     <string name="srtm_plugin_description">Este complemento proporciona tanto una capa superpuesta de curvas de nivel y una capa (de relieve) sombreada, que se pueden visualizar sobre los mapas descargados de OsmAnd. Esta funcionalidad será muy apreciada por atletas, caminantes, excursionistas, y cualquiera interesado en la estructura de relieve de un paisaje. (Note que las curvas de nivel y/o los datos de relieve están disponibles en descargas adicionales separadas luego de activar el complemento.) 
 \n 
 \nLos datos globales (entre 70 grados norte y 70 grados sur) se basan en mediciones de SRTM (Shuttle Radar Topography Mission, o en español Misión de Topografía por Radar Shuffle) y ASTER (Advanced Spaceborne Thermal Emission and Reflection Radiometer, o en español Radiómetro Espacial Avanzado de Emisión Térmica y Reflexión), un instrumento de captura de imágenes a bordo de Terra, el satélite insignia del Sistema de Observación de la Tierra de la NASA. ASTER es un esfuerzo cooperativo entre la NASA, el Ministerio de Economía, Comercio e Industria de Japón (METI) y Sistemas Espaciales de Japón (J-spacesystems).</string>
-    <string name="plugin_touringview_descr">Activando esta vista cambia el estilo del mapa OsmAnd a la \'Vista turística\', que es una vista de alto detalle, especial para viajeros y conductores profesionales. 
+    <string name="plugin_touringview_descr">Activando esta vista cambia el estilo del mapa OsmAnd a la «Vista turística», que es una vista de alto detalle, especial para viajeros y conductores profesionales. 
 \n 
 \nEsta vista proporciona, en cualquier nivel de ampliación del mapa, la máxima cantidad de detalles de viaje disponible en los datos del mapa (especialmente carreteras, senderos, caminos y marcas de orientación). 
-\n
+\n 
 \nTambién representa claramente todos los tipos de caminos sin ambigüedades por códigos de color, que es útil, por ejemplo, cuando se conducen vehículos grandes. 
 \n 
 \nY proporciona opciones especiales de turismo, como mostrar las rutas ciclistas o rutas de montaña alpina. 
 \n 
 \nNo es necesario descargar un mapa especial, la vista es creada a partir de nuestros mapas estándar. 
-\n
-\nEsta vista puede ser revertida desactivando de nuevo aquí, o cambiando el \'Estilo del mapa\' desde \'Configurar mapa\' cuando lo desees.</string>
+\n 
+\nEsta vista puede ser revertida desactivando de nuevo aquí, o cambiando el «Estilo del mapa» desde «Configurar mapa» cuando lo desees.</string>
     <string name="plugin_nautical_descr">Este complemento enriquece el mapa y la navegación de OsmAnd al producir también mapas náuticos para el canotaje, vela y otros tipos de deportes acuáticos. 
-\n
+\n 
 \nUn mapa especial complementado para OsmAnd proporcionará toda las marcas de navegación náutica y símbolos cartográficos para el interior, así como para la navegación cerca de la costa. La descripción de cada marca de navegación proporciona los datos necesarios para su identificación y su significado (categoría, forma, color, número, referencia, etc.). 
-\n
-\nPara volver a uno de los estilos del mapas convencionales de OsmAnd, simplemente desactiva este complemento de nuevo, o cambia el \'Estilo del mapa\' en \'Configurar mapa\' cuando lo desees.</string>
-    <string name="plugin_ski_descr">Este complemento para OsmAnd pone a tu alcance detalles sobre pistas de esquí de descenso, de travesía, rutas de esquí alpino, teleféricos y remontes a nivel mundial. Las rutas y pistas se muestran por código de color en función de su dificultad y representados con un estilo del mapa especial \'Invierno\' que lo asemeja a un paisaje invernal nevado. 
-\n
-\nActivando esta vista, cambia el estilo del mapa a \'Invierno y esquí\', mostrando las características del terreno en condiciones invernales. Esta vista se puede revertir desactivando de nuevo aquí o cambiando el \'Estilo del mapa\' en \'Configurar mapa\' cuando lo desees.</string>
-    <string name="audionotes_plugin_description">El complemento de notas multimedia, proporciona la funcionalidad para tomar notas de audio/fotografía/video durante un viaje, usando un botón en la pantalla del mapa, o directamente en el menú contextual para cualquier ubicación en el mapa.</string>
+\n 
+\nPara volver a uno de los estilos del mapas convencionales de OsmAnd, simplemente desactiva este complemento de nuevo, o cambia el «Estilo del mapa» en «Configurar mapa» cuando lo desees.</string>
+    <string name="plugin_ski_descr">Este complemento para OsmAnd pone a tu alcance detalles sobre pistas de esquí de descenso, de travesía, rutas de esquí alpino, teleféricos y remontes a nivel mundial. Las rutas y pistas se muestran por código de color en función de su dificultad y representados con un estilo del mapa especial «Invierno» que lo asemeja a un paisaje invernal nevado. 
+\n 
+\nActivando esta vista, cambia el estilo del mapa a «Invierno y esquí», mostrando las características del terreno en condiciones invernales. Esta vista se puede revertir desactivando de nuevo aquí o cambiando el «Estilo del mapa» en «Configurar mapa» cuando lo desees.</string>
+    <string name="audionotes_plugin_description">El complemento de notas multimedia, proporciona la funcionalidad para tomar notas de audio, fotografía y/o video durante un viaje, usando un botón en la pantalla del mapa, o directamente en el menú contextual para cualquier ubicación en el mapa.</string>
     <string name="osmand_parking_plugin_description">Este complemento, te recuerda fácilmente dónde se estacionó el automóvil y cuánto tiempo queda si el estacionamiento está limitado por tiempo.
 
 Tanto la ubicación como el tiempo del estacionamiento se muestran en el menú principal y en el control del mapa. Puedes añadir una notificación al calendario, en el caso de que desees tener un recordatorio al respecto.</string>
@@ -1023,7 +1023,7 @@ Se aprecia la participación activa, y las contribuciones pueden hacerse directa
     <string name="unknown_location">Ubicación desconocida</string>
     <string name="modify_transparency">Modificar transparencia (0 - transparente, 255 - opaco)</string>
     <string name="confirm_interrupt_download">¿Cancelar la descarga del archivo?</string>
-    <string name="first_time_msg">Gracias por usar OsmAnd. Para muchas funciones de la aplicación, necesitas algunos datos regionales sin conexión que puedes descargar mediante \'Ajustes\' → \'Gestionar mapas\'. Luego serás capaz de ver los mapas, ubicar direcciones, buscar PDIs y transporte público.</string>
+    <string name="first_time_msg">Gracias por usar OsmAnd. Para muchas funciones de la aplicación, necesitas algunos datos regionales sin conexión que puedes descargar mediante «Ajustes» → «Gestionar mapas». Luego serás capaz de ver los mapas, ubicar direcciones, buscar PDIs y transporte público.</string>
     <string name="basemap_was_selected_to_download">Para el correcto funcionamiento de la aplicación, se necesita el mapa base (World Basemap) y se marcó para tu descarga.</string>
     <string name="local_indexes_cat_tile">Mapas de teselas en línea y en caché</string>
     <string name="local_indexes_cat_map">Mapas descargados (vectores)</string>
@@ -1121,7 +1121,7 @@ Se aprecia la participación activa, y las contribuciones pueden hacerse directa
     <string name="live_monitoring_interval">Intervalo de registro en vivo</string>
     <string name="live_monitoring_url_descr">Indica la dirección web con sintaxis de parámetros : lat={0}, lon={1}, timestamp={2}, hdop={3}, altitude={4}, speed={5}, bearing={6}</string>
     <string name="live_monitoring_url">Dirección web de registro en vivo</string>
-    <string name="gpx_monitoring_disabled_warn">Registra trazas usando el control GPX o mediante la opción \'Grabar viaje\'.</string>
+    <string name="gpx_monitoring_disabled_warn">Registra trazas usando el control GPX o mediante la opción «Grabar viaje».</string>
     <string name="show_current_gpx_title">Mostrar traza actual</string>
     <string name="free_version_message">Esta versión gratuita de OsmAnd está limitada a %1$s descargas y no soporta artículos de Wikipedia sin conexión.</string>
     <string name="free_version_title">Versión gratuita</string>
@@ -1193,7 +1193,7 @@ Se aprecia la participación activa, y las contribuciones pueden hacerse directa
     <string name="poi_query_by_name_matches_categories">Encontradas varias categorías de PDI que responden a la pregunta:</string>
     <string name="data_to_search_poi_not_available">Sin datos locales para buscar PDI.</string>
     <string name="poi_filter_by_name">Buscar por nombre</string>
-    <string name="old_poi_file_should_be_deleted">El archivo de datos del PDI \'%1$s\' es redundante y puede quitarlo.</string>
+    <string name="old_poi_file_should_be_deleted">El archivo de datos del PDI «%1$s» es redundante y puede quitarlo.</string>
     <string name="update_poi_file_not_found">El archivo local para guardar cambios de PDI, no se encontró ni se creó.</string>
     <string name="button_upgrade_osmandplus">Actualizar a OsmAnd+</string>
     <string name="map_version_changed_info">El servidor contiene archivos de mapas incompatibles con la versión actual de la aplicación. Para descargarlos y usarlos, actualiza la aplicación a una versión más reciente.</string>
@@ -1207,7 +1207,7 @@ Se aprecia la participación activa, y las contribuciones pueden hacerse directa
     <string name="search_position_map_view">Vista actual del mapa</string>
     <string name="select_search_position">Origen:</string>
     <string name="context_menu_item_search">Buscar cerca</string>
-    <string name="route_successfully_saved_at">Ruta guardada correctamente como \'%1$s\'.</string>
+    <string name="route_successfully_saved_at">Ruta guardada correctamente como «%1$s».</string>
     <string name="filename_input">Nombre del archivo:</string>
     <string name="file_with_name_already_exist">Ya existe un archivo con el mismo nombre.</string>
     <string name="local_index_upload_gpx_description">Envía archivos GPX a la comunidad OSM. Serán utilizados para mejorar los mapas.</string>
@@ -1225,7 +1225,7 @@ Se aprecia la participación activa, y las contribuciones pueden hacerse directa
     <string name="favourites_edit_dialog_category">Categoría</string>
     <string name="shared_string_no_thanks">No, gracias</string>
     <string name="basemap_missing">El mapa base mundial (abarca todo el mundo en ampliaciones pequeñas), no está disponible. Considera descargar World_basemap_x.obf para una vista global.</string>
-    <string name="vector_data_missing">Sin datos (\'descargados\') en la tarjeta SD. Considera descargarlos para usar los mapas sin conexión.</string>
+    <string name="vector_data_missing">Sin datos («descargados») en la tarjeta SD. Considera descargarlos para usar los mapas sin conexión.</string>
     <string name="shared_string_release">Liberado</string>
     <string name="local_index_installed">Versión local</string>
     <string name="local_index_items_backuped">%1$d de %2$d elemento(s) correctamente desactivado(s).</string>
@@ -1260,8 +1260,9 @@ Se aprecia la participación activa, y las contribuciones pueden hacerse directa
     <string name="gpx_option_reverse_route">Invertir la dirección GPX</string>
     <string name="gpx_option_destination_point">Usar destino actual</string>
     <string name="gpx_option_from_start_point">Pasar a lo largo de la traza completa</string>
-    <string name="switch_to_vector_map_to_see">Mapa vectorial presente para esta ubicación.
-\n\t\n\tPara usarlo activa \'Menú\'→\'Configurar mapa\'→\'Fuente del mapa…\'→\'Mapas vectoriales descargados\'.</string>
+    <string name="switch_to_vector_map_to_see">Mapa vectorial presente para esta ubicación. 
+\n\t 
+\n\tPara usarlo activa «Menú» → «Configurar mapa» → «Fuente del mapa…» → «Mapas vectoriales descargados».</string>
     <string name="choose_audio_stream">Salida de indicaciones por voz</string>
     <string name="choose_audio_stream_descr">Elige que altavoz reproducirá indicaciones por voz</string>
     <string name="voice_stream_voice_call">Audio de llamada telefónica (también en altavoces estéreos con Bluetooth)</string>
@@ -1286,7 +1287,7 @@ Se aprecia la participación activa, y las contribuciones pueden hacerse directa
     <string name="level_to_switch_vector_raster">Mínimo nivel de ampliación vectorial</string>
     <string name="create_poi_link_to_osm_doc"><u>OSM en línea</u> clasificación de mapa con imágenes</string>
     <string name="error_doing_search">Ocurrió un error en la búsqueda</string>
-    <string name="search_offline_geo_error">No se pudo analizar el filtro \'%s\'</string>
+    <string name="search_offline_geo_error">No se pudo analizar el filtro «%s»</string>
     <string name="search_osm_offline">Buscar dirección geográfica</string>
     <string name="system_locale">Sistema</string>
     <string name="preferred_locale_descr">Elige el idioma de visualización (por favor, reinicia OsmAnd luego del cambio)</string>
@@ -1306,7 +1307,7 @@ Se aprecia la participación activa, y las contribuciones pueden hacerse directa
     <string name="send_location_email_pattern">Para ver la ubicación, sigue el enlace del navegador %1$s o el enlace del interno de Android %2$s</string>
     <string name="send_location">Enviar ubicación</string>
     <string name="context_menu_item_share_location">Compartir ubicación</string>
-    <string name="add_waypoint_dialog_added">El punto de ruta GPX \'\'{0}\'\' se añadió correctamente</string>
+    <string name="add_waypoint_dialog_added">El punto de ruta GPX «{0}» se añadió correctamente</string>
     <string name="add_waypoint_dialog_title">Añadir punto de ruta a la traza GPX grabada</string>
     <string name="context_menu_item_add_waypoint">Añadir punto de ruta GPX</string>
     <string name="amenity_type_administrative">Administrativo</string>
@@ -1337,13 +1338,13 @@ Se aprecia la participación activa, y las contribuciones pueden hacerse directa
     <string name="km">km</string>
     <string name="km_h">km/h</string>
     <string name="m">m</string>
-    <string name="old_map_index_is_not_supported">No se soporta el formato \'\'{0}\'\' de datos obsoletos</string>
+    <string name="old_map_index_is_not_supported">No se soporta el formato «{0}» de datos obsoletos</string>
     <string name="poi_filter_closest_poi">PDIs más cercanos</string>
     <string name="poi_filter_custom_filter">Filtro propio</string>
     <string name="poi_filter_namefinder">NameFinder en línea</string>
     <string name="reading_cached_tiles">Leyendo teselas guardadas…</string>
-    <string name="version_index_is_big_for_memory">La versión \'\'{0}\'\' de índices no cabe en memoria</string>
-    <string name="version_index_is_not_supported">No se soporta la versión \'\'{0}\'\' de índices</string>
+    <string name="version_index_is_big_for_memory">La versión «{0}» de índices no cabe en memoria</string>
+    <string name="version_index_is_not_supported">No se soporta la versión «{0}» de índices</string>
     
     
     <string name="osmand_routing_experimental">La navegación sin conexión OsmAnd es una característica experimental y no funciona para distancias mayores a 20 km.\n\nEl servicio de navegación se cambia temporalmente al servicio en línea CloudMade.</string>
@@ -1356,7 +1357,7 @@ Se aprecia la participación activa, y las contribuciones pueden hacerse directa
     <string name="loading_builds">Cargando compilaciones OsmAnd…</string>
     <string name="select_build_to_install">Elige una compilación OsmAnd a instalar</string>
     <string name="gps_status_app_not_found">La aplicación GPS Status no está instalada. ¿Buscar en la Tienda?</string>
-    <string name="voice_is_not_available_msg">Las indicaciones por voz no están disponibles, vaya a \'Opciones\' → \'General\' → \'Indicaciones por voz\' y elige o descarga un paquete de indicaciones por voz.</string>
+    <string name="voice_is_not_available_msg">Las indicaciones por voz no están disponibles, vaya a «Ajustes» → «Ajustes de navegación» → «Indicaciones por voz» y elige o descarga un paquete de indicaciones por voz.</string>
     <string name="voice_is_not_available_title">No se eligieron indicaciones por voz</string>
     <string name="daynight_mode_day">Día</string>
     <string name="daynight_mode_night">Noche</string>
@@ -1621,10 +1622,10 @@ Se aprecia la participación activa, y las contribuciones pueden hacerse directa
     <string name="context_menu_item_create_poi">Crear PDI</string>
     <string name="add_favorite_dialog_top_text">Ingresa nombre de favorito</string>
     <string name="add_favorite_dialog_default_favourite_name">Favorito</string>
-    <string name="add_favorite_dialog_favourite_added_template">El punto favorito \'\'{0}\'\' se añadió correctamente.</string>
+    <string name="add_favorite_dialog_favourite_added_template">El punto favorito «{0}» se añadió correctamente.</string>
     <string name="favourites_context_menu_edit">Editar favorito</string>
     <string name="favourites_context_menu_delete">Borrar favorito</string>
-    <string name="favourites_remove_dialog_msg">¿Quieres borrar el favorito \'%s\'?</string>
+    <string name="favourites_remove_dialog_msg">¿Quieres borrar el favorito «%s»?</string>
     <string name="favourites_remove_dialog_success">El punto favorito {0} se borró correctamente.</string>
     
     
@@ -1932,7 +1933,7 @@ Se aprecia la participación activa, y las contribuciones pueden hacerse directa
 	<string name="osm_save_offline">Guardar sin conexión</string>
     <string name="release_2_2">• Nueva interfaz de usuario sensible al contexto para aprovechar lugares en el mapa y en otra pantallas. 
 \n 
-\n• La pantalla del mapa ahora se inicia directamente, a menos que \'Mostrar panel de control al iniciar la aplicación\', este seleccionado. 
+\n• La pantalla del mapa ahora se inicia directamente, a menos que «Mostrar panel de control al iniciar la aplicación», este seleccionado. 
 \n 
 \n• Configura cuál y cómo se mostrarán las tarjetas en el panel de control. 
 \n 
@@ -2643,7 +2644,7 @@ Proporciona un código completo</string>
     <string name="mapillary_action_descr">Contribuye con tus propias vistas a nivel de calle de esta ubicación a través de Mapillary.</string>
     <string name="plugin_mapillary_descr">Fotos a nivel de calle para todos. Descubre lugares, colabora, captura el mundo.</string>
     <string name="online_photos">Fotos en línea</string>
-    <string name="no_photos_descr">No tenemos fotos de esta ubicación</string>
+    <string name="no_photos_descr">No se encontraron fotos en esta ubicación</string>
     <string name="shared_string_install">Instalar</string>
     <string name="improve_coverage_mapillary">Mejorar cobertura de fotos con Mapillary</string>
     <string name="improve_coverage_install_mapillary_desc">Puedes tomar tus propias fotos o serie de fotos y añadirlas a esta ubicación del mapa.
@@ -2696,4 +2697,6 @@ Proporciona un código completo</string>
     <string name="quick_action_start_stop_navigation_descr">Pulsa este botón para iniciar la navegación, o para finalizarla si ya se había iniciado.</string>
     <string name="live_monitoring_max_interval_to_send">Tiempo del búfer para el seguimiento en línea</string>
     <string name="live_monitoring_max_interval_to_send_desrc">Especifica el tiempo del búfer para mantener lugares para enviar sin conexión</string>
-    </resources>
+    <string name="mappilary_no_internet_desc">Debes tener conexión a Internet para ver fotos de Mapillary</string>
+    <string name="retry">Reintentar</string>
+</resources>
