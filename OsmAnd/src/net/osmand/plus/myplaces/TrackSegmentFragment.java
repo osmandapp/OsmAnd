@@ -278,22 +278,24 @@ public class TrackSegmentFragment extends OsmAndListFragment {
 		imageView.setOnClickListener(new View.OnClickListener() {
 			@Override
 			public void onClick(View view) {
-				WptPt pointToShow = getGpx() != null ? getGpx().findPointToShow() : null;
+				GpxDataItem gpxDataItem = getGpxDataItem();
+				GPXFile gpx = getGpx();
+				WptPt pointToShow = gpx != null ? gpx.findPointToShow() : null;
 				if (pointToShow != null) {
 					LatLon location = new LatLon(pointToShow.getLatitude(),
 							pointToShow.getLongitude());
 					final OsmandSettings settings = app.getSettings();
-					String typeName = "";
-					if (getGpx().showCurrentTrack) {
-						typeName = getString(R.string.shared_string_currently_recording_track);
-					} else if (getGpxDataItem() != null) {
-						typeName = getGpxDataItem().getFile().getName();
-					} else if (getGpx() != null) {
-						typeName = getGpx().path;
+					String trackName = "";
+					if (gpx.showCurrentTrack) {
+						trackName = getString(R.string.shared_string_currently_recording_track);
+					} else if (gpxDataItem != null) {
+						trackName = gpxDataItem.getFile().getName();
+					} else {
+						trackName = gpx.path;
 					}
 					settings.setMapLocationToShow(location.getLatitude(), location.getLongitude(),
 							settings.getLastKnownMapZoom(),
-							new PointDescription(PointDescription.POINT_TYPE_WPT, typeName),
+							new PointDescription(PointDescription.POINT_TYPE_WPT, trackName),
 							false,
 							getRect()
 					);
