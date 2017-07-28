@@ -283,17 +283,17 @@ public class TrackSegmentFragment extends OsmAndListFragment {
 					LatLon location = new LatLon(pointToShow.getLatitude(),
 							pointToShow.getLongitude());
 					final OsmandSettings settings = app.getSettings();
-					String typeName = "";
+					String trackName = "";
 					if (getGpx().showCurrentTrack) {
-						typeName = getString(R.string.shared_string_currently_recording_track);
+						trackName = getString(R.string.shared_string_currently_recording_track);
 					} else if (getGpxDataItem() != null) {
-						typeName = getGpxDataItem().getFile().getName();
+						trackName = getGpxDataItem().getFile().getName();
 					} else if (getGpx() != null) {
-						typeName = getGpx().path;
+						trackName = getGpx().path;
 					}
 					settings.setMapLocationToShow(location.getLatitude(), location.getLongitude(),
 							settings.getLastKnownMapZoom(),
-							new PointDescription(PointDescription.POINT_TYPE_WPT, typeName),
+							new PointDescription(PointDescription.POINT_TYPE_WPT, trackName),
 							false,
 							getRect()
 					);
