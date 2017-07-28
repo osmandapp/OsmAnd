@@ -576,7 +576,12 @@ public class SplitSegmentFragment extends OsmAndListFragment {
 
                         String maxSpeed = OsmAndFormatter.getFormattedSpeed(analysis.maxSpeed, app);
                         String minSpeed = OsmAndFormatter.getFormattedSpeed(analysis.minSpeed, app);
-                        String maxMinSpeed = maxSpeed.substring(0, maxSpeed.indexOf(" ")).concat("/").concat(minSpeed);
+                        String maxMinSpeed;
+                        if (maxSpeed.contains(" ")) {
+                            maxMinSpeed = maxSpeed.substring(0, maxSpeed.indexOf(" ")).concat("/").concat(minSpeed);
+                        } else {
+                            maxMinSpeed = maxSpeed.substring(0, maxSpeed.indexOf("-")).concat("/").concat(minSpeed);
+                        }
 
                         if (minMaxSpeedLayoutWidth == 0) {
                             DisplayMetrics metrics = new DisplayMetrics();
@@ -591,7 +596,7 @@ public class SplitSegmentFragment extends OsmAndListFragment {
                         minMaxSpeedPaint.getTextBounds(maxMinSpeed, 0, maxMinSpeed.length(), minMaxSpeedTextBounds);
                         int minMaxStringWidth = minMaxSpeedTextBounds.width();
 
-                        if (minSpeed.substring(0, minSpeed.indexOf(" ")).equals("0") || minSpeed.substring(0, minSpeed.indexOf(" ")).equals("0.0")) {
+                        if (analysis.minSpeed == 0) {
                             (convertView.findViewById(R.id.max_speed_value))
                                     .setVisibility(View.VISIBLE);
                             (convertView.findViewById(R.id.min_speed_value))
