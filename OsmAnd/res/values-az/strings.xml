@@ -983,7 +983,7 @@
     <string name="routing_attr_relief_smoothness_factor_hills_name">Dağlıq</string>
     <string name="routing_attr_relief_smoothness_factor_plains_name">Az dağlıq</string>
     <string name="routing_attr_relief_smoothness_factor_more_plains_name">Düzənlik</string>
-    <string name="routing_attr_driving_style_safety_name">Təhlükəsiz</string>
+    <string name="routing_attr_driving_style_safety_name">Yolları üstün tut</string>
     <string name="relief_smoothness_factor_descr">Üstün tutulan relyef: düzənlik və ya dağlıq</string>
     <string name="shared_string_slope">Yamac</string>
     <string name="points_delete_multiple_succesful">Nöqtə(lər) uğurla silindi.</string>
@@ -1641,7 +1641,21 @@
     <string name="old_poi_file_should_be_deleted">POI məlumat faylı “%1$s” lazımsızdır və silinə bilər.</string>
     <string name="favorite_delete_multiple">%1$d favoriti və %2$d favorit qrupu silmək üzrəsiniz. Əminsiniz?</string>
     <string name="downloads_left_template">%1$s endirmə qalıb</string>
-    <string name="quick_action_resume_pause_navigation">Naviqasiyaya Davam et/Fasilə ver</string>
-    <string name="quick_action_resume_pause_navigation_descr"/>
-    <string name="quick_action_show_navigation_finish_dialog"/>
+    <string name="quick_action_resume_pause_navigation">Naviqasiyaya davam/fasilə</string>
+    <string name="quick_action_resume_pause_navigation_descr">Naviqasiyaya fasilə vermək üçün və ya fasilə verilibsə, davam etmək üçün bu düyməni basın.</string>
+    <string name="quick_action_show_navigation_finish_dialog">Naviqasiyanın bitmə dialoqunu göstər</string>
+    <string name="quick_action_start_stop_navigation">Naviqasiyanı başlat/bitir</string>
+    <string name="quick_action_start_stop_navigation_descr">Naviqasiyanı başlatmaq üçün və ya artıq başladılıbsa, dayandırmaq üçün bu düyməni basın.</string>
+    <string name="mappilary_no_internet_desc">Mapillary-dən şəkillərə baxmaq üçün internetiniz olmalıdır</string>
+    <string name="retry">Təkrar cəhd</string>
+<string name="osm_edit_modified_poi">Dəyişdirilmiş OSM POI</string>
+    <string name="osm_edit_deleted_poi">Silinmiş OSM POI</string>
+    <string name="osm_edit_reopened_note">Yenidən açılmış OSM qeydi</string>
+    <string name="osm_edit_commented_note">Rəy yazılmış OSM qeydi</string>
+    <string name="osm_edit_removed_note">Silinmiş OSM qeydi</string>
+    <string name="osm_edit_created_note">Yaradılmış OSM qeydi</string>
+    <string name="shared_string_commit">Təsdiq et</string>
+    <string name="osm_edit_created_poi">Yaradılmış OSM POI</string>
+    <string name="rendering_value_translucent_pink_name">Şəffaf çəhrayı</string>
+    <string name="confirm_usage_speed_cameras">Bir çox ölkələrdə (Almaniya, Fransa, İtaliya və s.) sürət kamerası xəbərdarlıqlarının istifadə edilməsinə qanunla icazə verilmir. Qanunu pozarsanız, OsmAnd heç bir məsuliyyət daşımır. Yalnız bu xüsusiyyətdən istifadəyə icazə varsa, Bəli düyməsinə toxunun.</string>
     </resources>
