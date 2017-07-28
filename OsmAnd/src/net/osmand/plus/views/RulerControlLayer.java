@@ -156,7 +156,7 @@ public class RulerControlLayer extends OsmandMapLayer {
 				if (d > acceptableTouchRadius) {
 					touchOutside = true;
 				}
-			} else if (event.getAction() == MotionEvent.ACTION_UP) {
+			} else if (event.getAction() == MotionEvent.ACTION_UP || event.getAction() == MotionEvent.ACTION_CANCEL) {
 				touched = false;
 				touchEndTime = System.currentTimeMillis();
 				refreshMapDelayed();
