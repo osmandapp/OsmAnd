@@ -2715,4 +2715,8 @@ Pro praghere iscrie su còdighe intreu</string>
     <string name="quick_action_show_navigation_finish_dialog">Ammustra sa ventana pro sa fine de su nàvigu</string>
     <string name="quick_action_start_stop_navigation">Incumintza/Acaba su nàvigu</string>
     <string name="quick_action_start_stop_navigation_descr">Incarca custu butone pro incumintzare su nàvigu, o pro l\'acabare si est giai incumintzadu.</string>
-    </resources>
+    <string name="live_monitoring_max_interval_to_send">Intervallu de tempus pro s\'arrastamentu in lìnia</string>
+    <string name="live_monitoring_max_interval_to_send_desrc">Dislinda un\'intervallu de tempus pro mantènnere sas positziones de imbiare cando non b\'est connessione</string>
+    <string name="mappilary_no_internet_desc">Tenes bisòngiu de ìnternet pro bìdere sas fotografias de Mapillary</string>
+    <string name="retry">Torra a proare</string>
+</resources>
