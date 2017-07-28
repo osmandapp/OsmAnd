@@ -2812,4 +2812,6 @@ Tidligere destination bliver sidste mellemliggende punkt.</string>
     <string name="quick_action_start_stop_navigation_descr">Tryk på knappen for at starte navigation eller stoppe, hvis den allerede var begyndt.</string>
     <string name="live_monitoring_max_interval_to_send">Tidsbuffer til online sporing</string>
     <string name="live_monitoring_max_interval_to_send_desrc">Angiv en tidsbuffer til at opbevare steder, når der ingen forbindelse er</string>
+    <string name="retry">Prøv igen</string>
+<string name="mappilary_no_internet_desc">Du skal have internet adgang, for at se fotos fra Mapillary</string>
     </resources>
