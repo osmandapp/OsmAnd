@@ -718,20 +718,18 @@ public class MapInfoWidgetsFactory {
 					settings.SHOW_STREET_NAME.get()) {
 				RouteDataObject rt = locationProvider.getLastKnownRouteSegment();
 				if (rt != null) {
-					Location lastKnownLocation = locationProvider.getLastKnownLocation();
 					text = RoutingHelper.formatStreetName(
 							rt.getName(settings.MAP_PREFERRED_LOCALE.get(), settings.MAP_TRANSLITERATE_NAMES.get()),
-							rt.getRef(settings.MAP_PREFERRED_LOCALE.get(), settings.MAP_TRANSLITERATE_NAMES.get(), rt.bearingVsRouteDirection(lastKnownLocation)),
-							rt.getDestinationName(settings.MAP_PREFERRED_LOCALE.get(), settings.MAP_TRANSLITERATE_NAMES.get(), rt.bearingVsRouteDirection(lastKnownLocation)),
+							rt.getRef(settings.MAP_PREFERRED_LOCALE.get(), settings.MAP_TRANSLITERATE_NAMES.get(), rt.bearingVsRouteDirection(locationProvider.getLastKnownLocation())),
+							rt.getDestinationName(settings.MAP_PREFERRED_LOCALE.get(), settings.MAP_TRANSLITERATE_NAMES.get(), rt.bearingVsRouteDirection(locationProvider.getLastKnownLocation())),
 									"»");
 				}
 				if (text == null) {
 					text = "";
 				} else {
-					Location lastKnownLocation = locationProvider.getLastKnownLocation();
-					if(!Algorithms.isEmpty(text) && lastKnownLocation != null) {
+					if(!Algorithms.isEmpty(text) && locationProvider.getLastKnownLocation() != null) {
 						double dist =
-								CurrentPositionHelper.getOrthogonalDistance(rt, lastKnownLocation);
+								CurrentPositionHelper.getOrthogonalDistance(rt, locationProvider.getLastKnownLocation());
 						if(dist < 50) {
 							showMarker = true;
 						} else {

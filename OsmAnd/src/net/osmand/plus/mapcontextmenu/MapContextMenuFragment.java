@@ -980,7 +980,8 @@ public class MapContextMenuFragment extends Fragment implements DownloadEvents {
 		if (app != null && view != null) {
 			View compassView = view.findViewById(R.id.compass_layout);
 			Location ll = app.getLocationProvider().getLastKnownLocation();
-			if (ll != null && menu.displayDistanceDirection() && menu.getCurrentMenuState() != MenuState.FULL_SCREEN) {
+			boolean gpsFixed = ll != null && System.currentTimeMillis() - ll.getTime() < 1000 * 60 * 60 * 20;
+			if (gpsFixed && menu.displayDistanceDirection() && menu.getCurrentMenuState() != MenuState.FULL_SCREEN) {
 				updateDistanceDirection();
 				compassView.setVisibility(View.VISIBLE);
 			} else {

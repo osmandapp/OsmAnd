@@ -632,8 +632,8 @@ OSM er et i fællesskab drevet, globalt offentligt domæne kortlægningsprojekt.
     <string name="incomplete_locale">ufuldstændig</string>
 
 
-    <string name="unit_of_length_descr">Ændre enhed for længde</string>
-    <string name="unit_of_length">Længdeenhed</string>
+    <string name="unit_of_length_descr">Vælg enhed for afstand</string>
+    <string name="unit_of_length">Afstand</string>
     <string name="si_mi_feet">Mil/fod</string>
     <string name="si_mi_yard">Mil/yards</string>
     <string name="si_km_m">Km/m</string>
@@ -855,7 +855,7 @@ OSM er et i fællesskab drevet, globalt offentligt domæne kortlægningsprojekt.
     <string name="transport_search_after">Efterfølgende ruteplan</string>
     <string name="transport_search_before">Forudgående ruteplan</string>
     <string name="transport_finish_search">Stop søgning</string>
-    <string name="transport_to_go_after">forudgående afstand</string>
+    <string name="transport_to_go_after">tidligere afstand</string>
     <string name="transport_to_go_before">efterfølgende afstand</string>
     <string name="transport_route_distance">Rutelængde</string>
     <string name="transport">Transport</string>
@@ -1119,7 +1119,7 @@ OSM er et i fællesskab drevet, globalt offentligt domæne kortlægningsprojekt.
     <string name="av_camera_focus">Kameraets fokustype</string>
     <string name="av_camera_focus_descr">Vælg fokustype på intern kamera</string>
     <string name="av_camera_focus_auto">Autofokus</string>
-    <string name="av_camera_focus_hiperfocal">Hyperfocal fokus</string>
+    <string name="av_camera_focus_hiperfocal">Hyperfokalafstand</string>
     <string name="av_camera_focus_infinity">Uendelig fokus</string>
     <string name="av_camera_focus_macro">Makrofokustilstand (nærbillede)</string>
     <string name="av_camera_focus_edof">Udvidet dybdeskarphed (EDOF)</string>
@@ -1185,7 +1185,7 @@ OSM er et i fællesskab drevet, globalt offentligt domæne kortlægningsprojekt.
 
     
     <string name="auto_zoom_none">Ingen autozoom</string>
-    <string name="auto_zoom_far">Mellemafstand</string>
+    <string name="auto_zoom_far">Middelafstand</string>
     <string name="auto_zoom_farthest">Lange afstande</string>
     <string name="auto_zoom_close">Tæt på</string>
 
@@ -2634,8 +2634,8 @@ Repræsenterer område: %1$s x %2$s</string>
     <string name="shared_string_move">Flyt</string>
     <string name="shared_string_time_span">Varighed</string>
     <string name="shared_string_max">Maks</string>
-    <string name="shared_string_start_time">Starttid</string>
-    <string name="shared_string_end_time">Sluttid</string>
+    <string name="shared_string_start_time">Starttidspunkt</string>
+    <string name="shared_string_end_time">Sluttidspunkt</string>
     <string name="shared_string_color">Farve</string>
     <string name="shared_string_time_moving">Tid i bevægelse</string>
     <string name="max_speed">Maks-hastighed</string>

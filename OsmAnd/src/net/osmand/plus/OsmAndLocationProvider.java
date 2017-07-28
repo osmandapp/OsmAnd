@@ -499,8 +499,8 @@ public class OsmAndLocationProvider implements SensorEventListener {
 	}
 
 	private float calcGeoMagneticCorrection(float val) {
-		net.osmand.Location l = getLastKnownLocation();
-		if (previousCorrectionValue == 360 && l != null) {
+		if (previousCorrectionValue == 360 && getLastKnownLocation() != null) {
+			net.osmand.Location l = getLastKnownLocation();
 			GeomagneticField gf = new GeomagneticField((float) l.getLatitude(), (float) l.getLongitude(), (float) l.getAltitude(),
 					System.currentTimeMillis());
 			previousCorrectionValue = gf.getDeclination();
