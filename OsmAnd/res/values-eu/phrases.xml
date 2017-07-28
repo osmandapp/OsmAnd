@@ -2174,28 +2174,4 @@
 	<string name="poi_motorcycle_services">Zerbitzuak</string>
 	<string name="poi_motorcycle_type">Motor mota</string>
 
-<string name="poi_animal_shelter_type">Animalia onartuak</string>
-	<string name="poi_animal_shelter_purpose">Helburu zehatza</string>
-
-<string name="poi_buoy_lateral">Alboko buia</string>
-	<string name="poi_buoy_safe_water">Ur bareen buia</string>
-	<string name="poi_buoy_special_purpose">Helburu bereziko buia</string>
-	<string name="poi_daymark">Eguneko seinalea</string>
-	<string name="poi_distance_mark">Distantzia marka</string>
-	<string name="poi_dry_dock">Dike lehorra</string>
-	<string name="poi_seamark_dyke">Dike-seinalea</string>
-	<string name="poi_floating_dock">dike flotatzailea</string>
-	<string name="poi_fog_signal">Laino seinalea</string>
-	<string name="poi_harbour_basin">Nasa</string>
-	<string name="poi_seamark_harbour">Kaia</string>
-	<string name="poi_landmark">Lurreko marka</string>
-	<string name="poi_seamark_light">Itsas argia</string>
-	<string name="poi_seamark_light_major">Itsas argi nagusia</string>
-	<string name="poi_seamark_light_minor">Itsas argi txikia</string>
-	<string name="poi_seamark_light_float">Itsas argi flotatzailea</string>
-	<string name="poi_seamark_light_vessel">Itsasargi ontzia</string>
-	<string name="poi_mooring">Amarratze</string>
-	<string name="poi_lock_basin">Esklusako atea</string>
-	<string name="poi_notice">Itsas oharra</string>
-	<string name="poi_pile">Pilote</string>
-	</resources>
+</resources>

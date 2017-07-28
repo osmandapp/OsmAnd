@@ -2429,7 +2429,7 @@
     <string name="rendering_value_fine_name"/>
     <string name="average">Средняя</string>
     <string name="ascent_descent">Подъём/Спуск</string>
-    <string name="moving_time">Время в движении</string>
+    <string name="moving_time">Время движения</string>
     <string name="max_min">Макс/Мин</string>
     <string name="min_max">Мин/Макс</string>
     <string name="quick_action_resume_pause_navigation">Возобновить/Приостановить навигацию</string>
