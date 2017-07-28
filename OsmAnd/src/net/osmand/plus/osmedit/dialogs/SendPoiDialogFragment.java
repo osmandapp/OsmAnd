@@ -149,6 +149,9 @@ public class SendPoiDialogFragment extends DialogFragment {
 			if (p.getGroup() == OsmPoint.Group.POI) {
 				OsmPoint.Action action = p.getAction();
 				String type = ((OpenstreetmapPoint) p).getEntity().getTag(EditPoiData.POI_TYPE_TAG);
+				if (type == null) {
+					continue;
+				}
 				PoiType localizedPoiType = allTranslatedSubTypes.get(type.toLowerCase().trim());
 				if (localizedPoiType != null) {
 					type = Algorithms.capitalizeFirstLetter(localizedPoiType.getKeyName().replace('_', ' '));

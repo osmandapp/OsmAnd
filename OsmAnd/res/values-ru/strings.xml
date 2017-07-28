@@ -2429,7 +2429,15 @@
     <string name="rendering_value_fine_name"/>
     <string name="average">Средняя</string>
     <string name="ascent_descent">Подъём/Спуск</string>
-    <string name="moving_time">Время движения</string>
+    <string name="moving_time">Время в движении</string>
     <string name="max_min">Макс/Мин</string>
     <string name="min_max">Мин/Макс</string>
+    <string name="quick_action_resume_pause_navigation">Возобновить/Приостановить навигацию</string>
+    <string name="mapillary_menu_descr_tile_cache">Перезагрузка тайлов для отображения актуальных данных.</string>
+    <string name="mapillary_menu_edit_text_hint">Введите имя пользователя</string>
+    <string name="shared_string_reset">Сбросить</string>
+    <string name="shared_string_to">До</string>
+    <string name="mapillary_menu_date_from">От</string>
+    <string name="shared_string_reload">Обновить</string>
+    <string name="mapillary_menu_filter_description">Вы можете фильтровать изображения по отправителю или по дате. Фильтры применяются только для больших масштабов.</string>
     </resources>

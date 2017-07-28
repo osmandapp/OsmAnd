@@ -86,9 +86,9 @@ public class PointLocationLayer extends OsmandMapLayer implements ContextMenuLay
 		}
 		// draw
 		boolean nm = nightMode != null && nightMode.isNightMode();
-		updateIcons(view.getSettings().getApplicationMode(), nm,
-				isLocationOutdated(locationProvider.getLastKnownLocation()));
 		Location lastKnownLocation = locationProvider.getLastKnownLocation();
+		updateIcons(view.getSettings().getApplicationMode(), nm,
+				isLocationOutdated(lastKnownLocation));
 		if(lastKnownLocation == null || view == null){
 			return;
 		}
