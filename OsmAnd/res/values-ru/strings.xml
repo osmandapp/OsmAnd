@@ -94,7 +94,7 @@
     <string name="average_speed">Средняя скорость</string>
     <string name="shared_string_time_moving">Время в движении</string>
     <string name="shared_string_time_span">Общее время</string>
-    <string name="shared_string_max">Макс.</string>
+    <string name="shared_string_max">Максимальная</string>
     <string name="shared_string_start_time">Время начала</string>
     <string name="shared_string_end_time">Время окончания</string>
     <string name="shared_string_color">Цвет</string>
@@ -2440,4 +2440,8 @@
     <string name="mapillary_menu_date_from">От</string>
     <string name="shared_string_reload">Обновить</string>
     <string name="mapillary_menu_filter_description">Вы можете фильтровать изображения по отправителю или по дате. Фильтры применяются только для больших масштабов.</string>
+    <string name="import_gpx_failed_descr">OsmAnd не удается импортировать файл. Проверьте имеет ли OsmAnd разрешение на чтение файла из его местоположения.</string>
+    <string name="distance_moving">Откорректированное расстояние</string>
+    <string name="improve_coverage_install_mapillary_desc">Вы можете взять ваши собственные фотографии или серии фотографий и прикрепить их к этому месту на карте. Для этого Вам необходимо установить с Goggle Play маркета приложение Mapillary.</string>
+    <string name="route_altitude">Высота маршрута</string>
     </resources>
