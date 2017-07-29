@@ -1,6 +1,7 @@
 package net.osmand.plus.base;
 
 import android.content.Context;
+import android.os.AsyncTask;
 import android.support.v4.util.Pair;
 import android.view.WindowManager;
 
@@ -150,28 +151,45 @@ public class MapViewTrackingUtilities implements OsmAndLocationListener, IMapLoc
 		return movingToMyLocation;
 	}
 
+	private void detectDrivingRegion(final LatLon latLon) {
+
+		new AsyncTask<LatLon, Void, BinaryMapDataObject>() {
+
+			@Override
+			protected BinaryMapDataObject doInBackground(LatLon... latLons) {
+				try {
+					if (latLons != null && latLons.length > 0) {
+						return app.getRegions().findBinaryMapDataObject(latLons[0]);
+					}
+				} catch (IOException e) {
+					// ignore
+				}
+				return null;
+			}
+
+			@Override
+			protected void onPostExecute(BinaryMapDataObject o) {
+				if (o != null) {
+					String fullName = app.getRegions().getFullName(o);
+					WorldRegion worldRegion = app.getRegions().getRegionData(fullName);
+					if (worldRegion != null) {
+						app.setupDrivingRegion(worldRegion);
+					}
+				}
+			}
+
+		}.executeOnExecutor(AsyncTask.THREAD_POOL_EXECUTOR, latLon);
+	}
+
 	@Override
 	public void updateLocation(Location location) {
 		myLocation = location;
 		showViewAngle = false;
 		if (location != null) {
 			locationProvider = location.getProvider();
-			if (settings.DRIVING_REGION_AUTOMATIC.get() && !drivingRegionUpdated) {
-				try {
-					BinaryMapDataObject o = app.getRegions().findBinaryMapDataObject(
-							new LatLon(location.getLatitude(), location.getLongitude()));
-					if (o != null) {
-						String fullName = app.getRegions().getFullName(o);
-						WorldRegion worldRegion = app.getRegions().getRegionData(fullName);
-						if (worldRegion != null) {
-							app.setupDrivingRegion(worldRegion);
-						}
-					}
-					drivingRegionUpdated = true;
-
-				} catch (IOException e) {
-					// ignore
-				}
+			if (settings.DRIVING_REGION_AUTOMATIC.get() && !drivingRegionUpdated && !app.isApplicationInitializing()) {
+				drivingRegionUpdated = true;
+				detectDrivingRegion(new LatLon(location.getLatitude(), location.getLongitude()));
 			}
 		}
 		if (mapView != null) {
