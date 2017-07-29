@@ -8,6 +8,7 @@ import android.os.Bundle;
 import android.os.Handler;
 import android.support.annotation.NonNull;
 import android.support.annotation.Nullable;
+import android.support.design.widget.FloatingActionButton;
 import android.support.v4.view.MenuItemCompat;
 import android.support.v7.app.AlertDialog;
 import android.support.v7.view.ActionMode;
@@ -89,6 +90,7 @@ public class TrackPointFragment extends OsmandExpandableListFragment {
 	private Set<Integer> selectedGroups = new LinkedHashSet<>();
 	private ActionMode actionMode;
 	private SearchView searchView;
+	private FloatingActionButton fab;
 
 	@Override
 	public void onCreate(@Nullable Bundle savedInstanceState) {
@@ -106,9 +108,40 @@ public class TrackPointFragment extends OsmandExpandableListFragment {
 
 	@Override
 	public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
-		View view = inflater.inflate(R.layout.favorites_tree, container, false);
+		View view = inflater.inflate(R.layout.points_tree, container, false);
 		ExpandableListView listView = (ExpandableListView) view.findViewById(android.R.id.list);
 		setHasOptionsMenu(true);
+
+		fab = (FloatingActionButton) view.findViewById(R.id.fabButton);
+
+		fab.setOnClickListener(new View.OnClickListener() {
+			@Override
+			public void onClick(View view) {
+				GpxDisplayItem item = null;
+				int groupCount = adapter.getGroupCount();
+				for (int i = 0; i < groupCount; i++) {
+					GpxDisplayGroup group = adapter.getGroup(i);
+					if (group.getType() == GpxDisplayItemType.TRACK_POINTS) {
+						int childrenCount = adapter.getChildrenCount(i);
+						item = adapter.getChild(i, childrenCount - 1);
+					}
+				}
+				if (item != null) {
+					if (item.group.getGpx() != null) {
+						app.getSelectedGpxHelper().setGpxFileToDisplay(item.group.getGpx());
+					}
+					final OsmandSettings settings = app.getSettings();
+					LatLon location = new LatLon(item.locationStart.lat, item.locationStart.lon);
+					settings.setMapLocationToShow(location.getLatitude(), location.getLongitude(),
+							settings.getLastKnownMapZoom(),
+							new PointDescription(PointDescription.POINT_TYPE_WPT, item.name),
+							false,
+							item.locationStart);
+
+					MapActivity.launchMapActivityMoveToTop(getActivity());
+				}
+			}
+		});
 
 		TextView tv = new TextView(getActivity());
 		tv.setText(R.string.none_selected_gpx);
