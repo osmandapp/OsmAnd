@@ -922,10 +922,10 @@
     <string name="lang_en_gb">İngiliscə (Birləşmiş Krallıq)</string>
     <string name="lang_af">Afrikanca</string>
     <string name="lang_al">Albanca</string>
-    <string name="lang_eu">Bask dili</string>
+    <string name="lang_eu">Baskca</string>
     <string name="lang_hu_formal">Macarca (rəsmi)</string>
-    <string name="lang_id">İndoneziya dili</string>
-    <string name="lang_ko">Koreya dili</string>
+    <string name="lang_id">İndonezcə</string>
+    <string name="lang_ko">Koreyaca</string>
     <string name="route_descr_select_destination">Təyinat nöqtəsi seçin</string>
     <string name="routing_attr_avoid_toll_description">Pullu yollardan yayın</string>
     <string name="routing_attr_avoid_unpaved_name">Asfaltsız yollardan yayın</string>
@@ -1658,4 +1658,21 @@
     <string name="osm_edit_created_poi">Yaradılmış OSM POI</string>
     <string name="rendering_value_translucent_pink_name">Şəffaf çəhrayı</string>
     <string name="confirm_usage_speed_cameras">Bir çox ölkələrdə (Almaniya, Fransa, İtaliya və s.) sürət kamerası xəbərdarlıqlarının istifadə edilməsinə qanunla icazə verilmir. Qanunu pozarsanız, OsmAnd heç bir məsuliyyət daşımır. Yalnız bu xüsusiyyətdən istifadəyə icazə varsa, Bəli düyməsinə toxunun.</string>
+    <string name="lang_ml">Malayalamca</string>
+    <string name="lang_sw">Suahilicə</string>
+    <string name="lang_bs">Boşnakca</string>
+    <string name="lang_bg">Bolqarca</string>
+    <string name="lang_ca">Katalanca</string>
+    <string name="lang_hr">Xorvatca</string>
+    <string name="lang_da">Danimarkaca</string>
+    <string name="lang_kn">Kannadaca</string>
+    <string name="lang_lv">Latışca</string>
+    <string name="lang_lt">Litvaca</string>
+    <string name="lang_mr">Marathicə</string>
+    <string name="lang_no">Norveçcə</string>
+    <string name="lang_pl">Polyakca</string>
+    <string name="lang_sr">Serbcə</string>
+    <string name="lang_sr_latn">Serbcə (Latın)</string>
+    <string name="lang_sk">Slovakca</string>
+    <string name="lang_sl">Slovencə</string>
     </resources>
