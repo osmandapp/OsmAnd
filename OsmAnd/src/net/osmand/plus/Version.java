@@ -31,7 +31,7 @@ public class Version {
 		if (isAmazonEnabled(ctx)) {
 			return "amzn://apps/android?p=";
 		} else if (isGooglePlayEnabled(ctx)) {
-			return "market://search?q=pname:";
+			return "market://details?id=";
 		} 
 		return "https://osmand.net/apps?id=";
 	}
