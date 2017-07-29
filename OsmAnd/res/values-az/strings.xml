@@ -1675,4 +1675,23 @@
     <string name="lang_sr_latn">Serbcə (Latın)</string>
     <string name="lang_sk">Slovakca</string>
     <string name="lang_sl">Slovencə</string>
+    <string name="use_high_res_maps">Yüksək dəqiqlikli ekran</string>
+    <string name="transport_searching_transport">Nəqliyyat nəticələri (təyinat nöqtəsi yoxdur):</string>
+    <string name="transport_searching_route">Nəqliyyat nəticələri (təyinat nöqtəsinə {0}):</string>
+    <string name="transport_search_again">Nəqliyyat axtarışını sıfırla</string>
+    <string name="voice">Qeyd edilən səs</string>
+    <string name="no_vector_map_loaded">Vektor xəritələr yüklənməyib</string>
+    <string name="vector_data">Offlayn vektor xəritələr</string>
+    <string name="transport_context_menu">Dayanacaqda nəqliyyat axtar</string>
+    <string name="show_route">Marşrut detalları</string>
+    <string name="no_fav_to_save">Yadda saxlanacaq favorit nöqtələr yoxdur</string>
+    <string name="share_fav_subject">Favoritlər OsmAnd ilə paylaşılıb</string>
+    <string name="error_occurred_loading_gpx">GPX yüklənərkən səhv baş verdi</string>
+    <string name="thanks_yandex_traffic">Trafik məlumatları üçün Yandex-ə təşəkkürlər.</string>
+    <string name="layer_yandex_traffic">Yandex trafik</string>
+    <string name="layer_route">Marşrut</string>
+    <string name="layer_osm_bugs">OSM qeydlər (onlayn)</string>
+    <string name="search_near_map">Hazırki xəritə mərkəzinin yaxınında axtar</string>
+    <string name="transport_Routes">Marşrutlar</string>
+    <string name="transport_Stop">Dayanacaq</string>
     </resources>
