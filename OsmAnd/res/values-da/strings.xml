@@ -2449,7 +2449,7 @@ Hvis du  ønsker at støtte OsmAnd og OSM, er dette en god måde at gøre det p�
     <string name="christmas_desc_q">Vis jule-interessepunkter (IP)?</string>
     <string name="save_track_min_speed">Minimumshastighed for logning</string>
     <string name="save_track_min_speed_descr">Filter: Angiv minimumshastighed før et punkt logges</string>
-    <string name="save_track_min_distance">Logning ved minimum bevægelse</string>
+    <string name="save_track_min_distance">Logning ved minimum forskydning</string>
     <string name="save_track_min_distance_descr">Filter: Indstil minimumsafstand fra sidste position før et punkt logges</string>
     <string name="save_track_precision">Mindste nøjagtighed for logning</string>
     <string name="save_track_precision_descr">Filter: Indstil minimum nøjagtighed før et punkt logges</string>
@@ -2779,7 +2779,7 @@ Tidligere destination bliver sidste mellemliggende punkt.</string>
     <string name="mapillary_menu_edit_text_hint">Indtast brugernavn</string>
     <string name="mapillary_menu_descr_username">Se billeder tilføjet af en bestemt bruger.</string>
     <string name="mapillary_menu_title_username">Brugernavn</string>
-    <string name="mapillary_menu_filter_description">Filtrer billeder efter indsender eller dato. Filter gælder kun for højere zoom.</string>
+    <string name="mapillary_menu_filter_description">Filtrer billeder efter indsender eller dato. Filter gælder kun for højere zoomniveauer.</string>
     <string name="mapillary_menu_descr_dates">Se billeder tilføjet i en bestemt periode.</string>
     <string name="shared_string_reload">Genindlæs</string>
     <string name="mapillary_menu_descr_tile_cache">Genindlæs kortbrikker for at se opdaterede data.</string>
