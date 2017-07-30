@@ -1494,7 +1494,7 @@ OsmAnd (Automated Navigation Directions) 是一個地圖和導航的應用程式
 
     <string name="rendering_attr_showCycleRoutes_name">顯示自行車路線</string>
     <string name="map_preferred_locale">地圖上優先的語言</string>
-    <string name="local_map_names">本地名稱</string>
+    <string name="local_map_names">當地的名稱</string>
     <string name="lang_sw">斯瓦希里</string>
     <string name="lang_he">希伯來</string>
     <string name="forward">往前</string>
@@ -1506,7 +1506,7 @@ OsmAnd (Automated Navigation Directions) 是一個地圖和導航的應用程式
     <string name="gpx_monitoring_stop">停止 GPX 記錄</string>
     <string name="gpx_start_new_segment">開始新區段</string>
     <string name="lang_fa">波斯</string>
-    <string name="map_preferred_locale_descr">在地圖標簽上優先的語言(如果優先的語言無法使用，將會切換成英文或本地名稱)</string>
+    <string name="map_preferred_locale_descr">在地圖標簽上優先的語言(如果優先的語言無法使用，將會切換成英文或當地名稱)</string>
     <string name="live_monitoring_m_descr">如果已啟用了 GPX 記錄，傳送軌跡資料到指定的 web 服務。</string>
     <string name="keep_navigation_service">保持</string>
     <string name="stop_navigation_service">中止</string>
