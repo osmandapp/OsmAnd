@@ -2049,7 +2049,7 @@
     <string name="gpx_timespan">时间跨度：%1$s</string>
     <string name="gpx_timemoving">时间移动：%1$s</string>
     <string name="gpx_selection_segment_title">区段</string>
-    <string name="gpx_selection_number_of_points">" %1$s 的标点"</string>
+    <string name="gpx_selection_number_of_points">%1$s 的标点</string>
     <string name="gpx_selection_point">标点 %1$s</string>
     <string name="gpx_selection_route_points">%1$s 
 \n路线标点 %2$s</string>
@@ -2105,9 +2105,9 @@
     <string name="osmo_connected_devices">已连接的设备</string>
     <string name="osmo_session_token">会话令牌: %1$s</string>
     <string name="osmo_auth_pending">正在等待授权…</string>
-    <string name="osmo_locations_sent">"位置已发送 %1$d（缓冲区 %2$d） "</string>
-    <string name="osmo_conn_successfull">"建立的连接: %1$s "</string>
-    <string name="osmo_io_error">"OsMo 连接问题： "</string>
+    <string name="osmo_locations_sent">位置已发送 %1$d（缓冲区 %2$d）</string>
+    <string name="osmo_conn_successfull">连接已建立: %1$s</string>
+    <string name="osmo_io_error">OsMo 连接问题：</string>
     <string name="osmo_settings_uuid">独特的设备 id</string>
     <string name="use_points_as_intermediates">计算两点之间的路线</string>
     <string name="osmo_mode_restart">重新启动 OsMo 会话</string>
@@ -2212,7 +2212,7 @@
     <string name="app_mode_aircraft">航空器</string>
     <string name="local_osm_changes_delete_all_confirm">要删除 %1$d 个 OSM 更新。是否确定？</string>
     <string name="animate_routing_route_not_calculated">请先计算路线</string>
-    <string name="animate_routing_route">"模拟使用计算的路线 "</string>
+    <string name="animate_routing_route">使用计算的路线进行模拟</string>
     <string name="animate_routing_gpx">模拟使用 GPX 轨迹</string>
     <string name="route_is_too_long_v2">这条路线可能太长，无法推算。如果在10分钟内没有结果，请添加中继节点。</string>
     <string name="auto_zoom_none">不自动缩放</string>
@@ -2633,4 +2633,19 @@
     <string name="of">%2$d 中的 %1$d</string>
     <string name="moving_time">移动时间</string>
     <string name="min_max">最小/最大</string>
+    <string name="quick_action_resume_pause_navigation">继续/暂停导航</string>
+    <string name="quick_action_resume_pause_navigation_descr">点击该按钮以暂停导航，或者在已暂停时恢复导航。</string>
+    <string name="quick_action_show_navigation_finish_dialog">显示导航完成对话框</string>
+    <string name="quick_action_start_stop_navigation">开始/结束导航</string>
+    <string name="quick_action_start_stop_navigation_descr">点击该按钮以开始导航，或者在导航已经开始的情况下结束导航。</string>
+    <string name="release_2_7">\\022 带有街道等级图像的 Mapillary 插件
+\n
+\n• 用于距离测量的量尺小部件
+\n
+\n • GPX 切分间隔，带有您的路径的详细信息
+\n
+\n • 其它改进和问题修复
+\n
+\n</string>
+    <string name="rendering_value_translucent_pink_name">半透明粉红色</string>
     </resources>
