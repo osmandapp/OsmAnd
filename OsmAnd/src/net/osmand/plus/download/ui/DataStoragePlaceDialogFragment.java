@@ -198,6 +198,10 @@ public class DataStoragePlaceDialogFragment extends BottomSheetDialogFragment {
 		return sz;
 	}
 
+	private void checkAssets() {
+		getMyApplication().getResourceManager().checkAssets(IProgress.EMPTY_PROGRESS, true);
+	}
+
 	private void updateDownloadIndexes() {
 		DownloadIndexesThread downloadIndexesThread = getMyApplication().getDownloadThread();
 		downloadIndexesThread.runReloadIndexFilesSilent();
@@ -208,7 +212,7 @@ public class DataStoragePlaceDialogFragment extends BottomSheetDialogFragment {
 				@Override
 				public void onClick(View v) {
 					saveFilesLocation(deviceStorageType, deviceStorage, getActivity());
-					getMyApplication().getResourceManager().checkAssets(IProgress.EMPTY_PROGRESS, true);
+					checkAssets();
 					updateDownloadIndexes();
 					isInterestedInFirstTime = false;
 					dismiss();
@@ -220,7 +224,7 @@ public class DataStoragePlaceDialogFragment extends BottomSheetDialogFragment {
 				@Override
 				public void onClick(View v) {
 					saveFilesLocation(sharedStorageType, sharedStorage, getActivity());
-					getMyApplication().getResourceManager().checkAssets(IProgress.EMPTY_PROGRESS, true);
+					checkAssets();
 					updateDownloadIndexes();
 					isInterestedInFirstTime = false;
 					dismiss();
@@ -232,7 +236,7 @@ public class DataStoragePlaceDialogFragment extends BottomSheetDialogFragment {
 				@Override
 				public void onClick(View v) {
 					boolean res = saveFilesLocation(cardStorageType, cardStorage, getActivity());
-					getMyApplication().getResourceManager().checkAssets(IProgress.EMPTY_PROGRESS, true);
+					checkAssets();
 					updateDownloadIndexes();
 					isInterestedInFirstTime = false;
 					if (res) {
