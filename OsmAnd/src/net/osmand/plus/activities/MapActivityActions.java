@@ -707,7 +707,7 @@ public class MapActivityActions implements DialogProvider {
 								.add(R.id.bottomFragmentContainer, fragment, MeasurementToolFragment.TAG)
 								.addToBackStack(MeasurementToolFragment.TAG)
 								.commitAllowingStateLoss();
-						return false;
+						return true;
 					}
 				}).createItem());
 

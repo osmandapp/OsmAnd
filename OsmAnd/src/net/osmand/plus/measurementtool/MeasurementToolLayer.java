@@ -8,6 +8,16 @@ import net.osmand.plus.views.OsmandMapTileView;
 
 public class MeasurementToolLayer extends OsmandMapLayer {
 
+	private boolean inMeasurementMode;
+
+	public boolean isInMeasurementMode() {
+		return inMeasurementMode;
+	}
+
+	public void setInMeasurementMode(boolean inMeasurementMode) {
+		this.inMeasurementMode = inMeasurementMode;
+	}
+
 	@Override
 	public void initLayer(OsmandMapTileView view) {
 
