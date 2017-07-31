@@ -18,6 +18,7 @@ import net.osmand.data.QuadPoint;
 import net.osmand.data.RotatedTileBox;
 import net.osmand.plus.OsmAndFormatter;
 import net.osmand.plus.OsmandApplication;
+import net.osmand.plus.OsmandSettings;
 import net.osmand.plus.OsmandSettings.RulerMode;
 import net.osmand.plus.R;
 import net.osmand.plus.activities.MapActivity;
@@ -46,6 +47,8 @@ public class RulerControlLayer extends OsmandMapLayer {
 	private int acceptableTouchRadius;
 
 	private QuadPoint cacheCenter;
+	private float cacheMapDensity;
+	private OsmandSettings.OsmandPreference<Float> mapDensity;
 	private int cacheIntZoom;
 	private double cacheTileX;
 	private double cacheTileY;
@@ -87,6 +90,8 @@ public class RulerControlLayer extends OsmandMapLayer {
 	public void initLayer(final OsmandMapTileView view) {
 		app = mapActivity.getMyApplication();
 		this.view = view;
+		mapDensity = mapActivity.getMyApplication().getSettings().MAP_DENSITY;
+		cacheMapDensity = mapDensity.get();
 		cacheDistances = new ArrayList<>();
 		cacheCenter = new QuadPoint();
 		maxRadiusInDp = mapActivity.getResources().getDimensionPixelSize(R.dimen.map_ruler_width);
@@ -298,12 +303,13 @@ public class RulerControlLayer extends OsmandMapLayer {
 			}
 
 			boolean move = tb.getZoom() != cacheIntZoom || Math.abs(tb.getCenterTileX() - cacheTileX) > 1 ||
-					Math.abs(tb.getCenterTileY() - cacheTileY) > 1;
+					Math.abs(tb.getCenterTileY() - cacheTileY) > 1 || mapDensity.get() != cacheMapDensity;
 
 			if (!tb.isZoomAnimated() && move) {
 				cacheIntZoom = tb.getZoom();
 				cacheTileX = tb.getCenterTileX();
 				cacheTileY = tb.getCenterTileY();
+				cacheMapDensity = mapDensity.get();
 				cacheDistances.clear();
 				updateDistance(tb);
 			}
