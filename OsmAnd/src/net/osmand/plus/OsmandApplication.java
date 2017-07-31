@@ -436,6 +436,12 @@ public class OsmandApplication extends MultiDexApplication {
 						}
 					}
 				});
+				builder.setNeutralButton(R.string.shared_string_do_not_use, new DialogInterface.OnClickListener() {
+					@Override
+					public void onClick(DialogInterface dialogInterface, int i) {
+						osmandSettings.VOICE_PROVIDER.set(OsmandSettings.VOICE_PROVIDER_NOT_USE);
+					}
+				});
 
 				builder.setView(view);
 				builder.show();
