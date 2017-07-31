@@ -17,6 +17,7 @@ import android.widget.ImageView;
 import android.widget.TextView;
 import android.widget.Toast;
 
+import net.osmand.IndexConstants;
 import net.osmand.plus.OnDismissDialogFragmentListener;
 import net.osmand.plus.OsmandApplication;
 import net.osmand.plus.OsmandSettings;
@@ -26,6 +27,10 @@ import net.osmand.plus.dashboard.DashChooseAppDirFragment;
 import net.osmand.plus.download.DownloadActivity;
 
 import java.io.File;
+import java.io.FileInputStream;
+import java.io.FileOutputStream;
+import java.io.IOException;
+import java.nio.channels.FileChannel;
 
 public class DataStoragePlaceDialogFragment extends BottomSheetDialogFragment {
 
@@ -196,6 +201,62 @@ public class DataStoragePlaceDialogFragment extends BottomSheetDialogFragment {
 		return sz;
 	}
 
+	public static void copyDirectory(File sourceDir, File destDir) throws IOException {
+		if (!destDir.exists()) {
+			destDir.mkdirs();
+		}
+
+		if (!sourceDir.exists()) {
+			throw new IllegalArgumentException("sourceDir does not exist");
+		}
+
+		if (sourceDir.isFile() || destDir.isFile()) {
+			throw new IllegalArgumentException(
+					"Either sourceDir or destDir is not a directory");
+		}
+
+		copyDirectoryImpl(sourceDir, destDir);
+	}
+
+	private static void copyDirectoryImpl(File sourceDir, File destDir) throws IOException {
+		File[] items = sourceDir.listFiles();
+		if (items != null && items.length > 0) {
+			for (File anItem : items) {
+				if (anItem.isDirectory()) {
+					File newDir = new File(destDir, anItem.getName());
+					newDir.mkdir();
+
+					copyDirectory(anItem, newDir);
+				} else {
+					File destFile = new File(destDir, anItem.getName());
+					copySingleFile(anItem, destFile);
+				}
+			}
+		}
+	}
+
+	private static void copySingleFile(File sourceFile, File destFile) throws IOException {
+		if (!destFile.exists()) {
+			destFile.createNewFile();
+		}
+
+		FileChannel sourceChannel = null;
+		FileChannel destChannel = null;
+
+		try {
+			sourceChannel = new FileInputStream(sourceFile).getChannel();
+			destChannel = new FileOutputStream(destFile).getChannel();
+			sourceChannel.transferTo(0, sourceChannel.size(), destChannel);
+		} finally {
+			if (sourceChannel != null) {
+				sourceChannel.close();
+			}
+			if (destChannel != null) {
+				destChannel.close();
+			}
+		}
+	}
+
 	private View.OnClickListener deviceMemoryOnClickListener =
 			new View.OnClickListener() {
 				@Override
@@ -231,8 +292,19 @@ public class DataStoragePlaceDialogFragment extends BottomSheetDialogFragment {
 	public boolean saveFilesLocation(int type, File selectedFile, Activity context) {
 		boolean wr = OsmandSettings.isWritable(selectedFile);
 		if (wr) {
+			File sourceStorage = ((OsmandApplication) getActivity().getApplication())
+					.getAppPath(IndexConstants.VOICE_INDEX_DIR);
 			((OsmandApplication) context.getApplication())
 					.setExternalStorageDirectory(type, selectedFile.getAbsolutePath());
+			File destStorage = ((OsmandApplication) getActivity().getApplication())
+					.getAppPath(IndexConstants.VOICE_INDEX_DIR);
+			if (!destStorage.exists()) {
+				try {
+					copyDirectory(sourceStorage, destStorage);
+				} catch (IOException e) {
+					e.printStackTrace();
+				}
+			}
 			reloadData();
 		} else {
 			Toast.makeText(context, R.string.specified_directiory_not_writeable,
