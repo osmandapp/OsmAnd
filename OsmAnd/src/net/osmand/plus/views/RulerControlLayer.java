@@ -5,7 +5,6 @@ import android.graphics.BitmapFactory;
 import android.graphics.Canvas;
 import android.graphics.Paint;
 import android.graphics.Paint.Style;
-import android.graphics.Path;
 import android.graphics.PointF;
 import android.graphics.Rect;
 import android.os.Handler;
@@ -24,8 +23,6 @@ import net.osmand.plus.R;
 import net.osmand.plus.activities.MapActivity;
 
 import java.util.ArrayList;
-
-import gnu.trove.list.array.TIntArrayList;
 
 public class RulerControlLayer extends OsmandMapLayer {
 
@@ -54,9 +51,6 @@ public class RulerControlLayer extends OsmandMapLayer {
 	private double cacheTileY;
 	private long cacheMultiTouchEndTime;
 	private ArrayList<String> cacheDistances;
-	private Path distancePath;
-	private TIntArrayList tx;
-	private TIntArrayList ty;
 	private LatLon touchPointLatLon;
 	private PointF touchPoint;
 	private long touchStartTime;
@@ -97,9 +91,6 @@ public class RulerControlLayer extends OsmandMapLayer {
 		cacheCenter = new QuadPoint();
 		maxRadiusInDp = mapActivity.getResources().getDimensionPixelSize(R.dimen.map_ruler_width);
 		rightWidgetsPanel = mapActivity.findViewById(R.id.map_right_widgets_panel);
-		distancePath = new Path();
-		tx = new TIntArrayList();
-		ty = new TIntArrayList();
 		touchPoint = new PointF();
 		acceptableTouchRadius = mapActivity.getResources().getDimensionPixelSize(R.dimen.acceptable_touch_radius);
 
