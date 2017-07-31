@@ -2716,4 +2716,6 @@
     <string name="quick_action_start_stop_navigation_descr">اضغط على هذا الزر لبدء الملاحة، أو لوقفها إذا ما كانت قد بدأت مسبقا.</string>
     <string name="live_monitoring_max_interval_to_send">الوقت الإضافي المخزن المؤقت للتتبع على الإنترنت</string>
     <string name="live_monitoring_max_interval_to_send_desrc">تحديد الوقت الإضافي المخزن للحفاظ على المواقع وإرسالها دون اتصال</string>
-    </resources>
+    <string name="mappilary_no_internet_desc">أنت بحاجة إلى إنترنت لعرض الصور من Mapillary</string>
+    <string name="retry">اعد المحاولة</string>
+</resources>

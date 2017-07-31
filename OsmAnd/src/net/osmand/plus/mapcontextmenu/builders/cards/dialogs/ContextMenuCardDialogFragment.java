@@ -109,7 +109,7 @@ public class ContextMenuCardDialogFragment extends Fragment {
 		fragment.dialog = menu;
 		menu.getMapActivity().getSupportFragmentManager().beginTransaction()
 				.replace(R.id.topFragmentContainer, fragment, TAG)
-				.addToBackStack(TAG).commit();
+				.addToBackStack(TAG).commitAllowingStateLoss();
 	}
 
 	public void dismiss() {

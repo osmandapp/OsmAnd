@@ -1,4 +1,5 @@
-<?xml version="1.0" encoding="UTF-8" standalone="no"?><resources><string name="fav_point_dublicate_message">O nome do punto favorito xa está usado; foi cambiado a %1$s para evitar os duplicados.</string>
+<?xml version='1.0' encoding='UTF-8'?>
+<resources><string name="fav_point_dublicate_message">O nome do punto favorito xa está usado; foi cambiado a %1$s para evitar os duplicados.</string>
     <string name="text_size_descr">Configurar o tamaño da letra no mapa.</string>
     <string name="text_size">Tamaño da letra</string>
     <string name="traffic_warning_speed_limit">Límite de velocidade</string>
@@ -2494,7 +2495,7 @@ Pódese pechar esta vista desactivándoa aquí ou cambiando o «Estilo de mapa»
     <string name="total_distance">Distancia total</string>
     <string name="routing_attr_height_obstacles_name">Empregar datos de elevación</string>
     <string name="shared_string_plugin">Engadido</string>
-    <string name="srtm_purchase_header">Para ver as liñas de nivel no mapa hai que comprar e instalar un engadido</string>
+    <string name="srtm_purchase_header">Para ver as liñas de nivel no mapa hai que comprar e instalar o engadido Liñas de Nivel</string>
     <string name="srtm_color_scheme">Esquema de cores</string>
     <string name="routing_attr_allow_private_name">Permitir acceso privado</string>
     <string name="routing_attr_allow_private_description">Permitir acceso a zonas privadas</string>
@@ -2505,10 +2506,45 @@ Pódese pechar esta vista desactivándoa aquí ou cambiando o «Estilo de mapa»
     <string name="lang_ber">Bérber</string>
     <string name="lang_kn">Kannada</string>
     <string name="shared_string_install">Instalar</string>
-    <string name="improve_coverage_mapillary">Mellorar a cobertura con Mapillary</string>
+    <string name="improve_coverage_mapillary">Mellorar a cobertura de fotos con Mapillary</string>
     <string name="open_mapillary">Abrir Mapillary</string>
-    <string name="improve_coverage_install_mapillary_desc">Podes facer as túas propias fotos ou serie de fotos e engadilas a esta localización do mapa.
-\n
-\nPara facer isto, tes que instalar a aplicación Mapillary dende Google Play.</string>
-    <string name="online_photos">Fotos en liña</string>
+    <string name="improve_coverage_install_mapillary_desc">Podes facer as túas propias fotos ou serie de fotos e engadilas a este lugar do mapa. 
+\n 
+\nPara facer isto, hai que instalar a aplicación Mapillary dende Google Play.</string>
+    <string name="online_photos">Fotos da rede</string>
+    <string name="quick_action_resume_pause_navigation">Retomar/Deter a navegación</string>
+    <string name="quick_action_resume_pause_navigation_descr">Prema neste botón para deter a navegación, ou para retomala se xa estaba detida.</string>
+    <string name="quick_action_start_stop_navigation">Iniciar/Rematar a navegación</string>
+    <string name="quick_action_start_stop_navigation_descr">Prema neste botón para iniciar a navegación, ou para detela se xa estaba iniciada.</string>
+    <string name="store_tracks_in_monthly_directories">Almacenar as pistas gravadas en cartafoles mensuais</string>
+    <string name="store_tracks_in_monthly_directories_descrp">Almacenar as pistas gravadas en sub-cartafoles segundo o mes de gravación (como 2017-01).</string>
+    <string name="shared_string_reset">Restaurar</string>
+    <string name="shared_string_reload">Recargar</string>
+    <string name="mapillary_menu_descr_tile_cache">Recargar as teselas para ver datos actualizados.</string>
+    <string name="mapillary_menu_title_tile_cache">Caché de teselas</string>
+    <string name="wrong_user_name">O nome de usuario é incorrecto!</string>
+    <string name="shared_string_to">A</string>
+    <string name="mapillary_menu_date_from">Desde</string>
+    <string name="mapillary_menu_descr_dates">Ver as imaxes engadidas nun período determinado.</string>
+    <string name="mapillary_menu_title_dates">Datas</string>
+    <string name="mapillary_menu_edit_text_hint">Escriba o nome de usuario</string>
+    <string name="mapillary_menu_descr_username">Ver as imaxes engadidas por un usuario determinado.</string>
+    <string name="mapillary_menu_title_username">Nome de usuario</string>
+    <string name="mapillary_menu_filter_description">Pode filtrar as imaxes por quen as enviou ou pola data. Os filtros só se aplican na ampliación próxima.</string>
+    <string name="shared_string_permissions">Permisos</string>
+    <string name="import_gpx_failed_descr">O OsmAnd non pode importar o ficheiro. Comprobe se o OsmAnd ten permiso para ler o ficheiro neste sitio.</string>
+    <string name="distance_moving">Distancia corrixida</string>
+    <string name="mapillary_image">Imaxe de Mapillary</string>
+    <string name="shared_string_add_photos">Engadir fotos</string>
+    <string name="no_photos_descr">Non dispomos de fotos deste lugar</string>
+    <string name="mapillary_widget">Trebello de Mapillary</string>
+    <string name="mapillary">Mapillary</string>
+    <string name="restart_search">Reiniciar a busca</string>
+    <string name="increase_search_radius">Aumentar o radio de busca</string>
+    <string name="nothing_found">Non se atopou nada :(</string>
+    <string name="quick_action_showhide_osmbugs_title">Mostrar/Agochar as notas de OSM</string>
+    <string name="quick_action_osmbugs_show">Mostrar as notas de OSM</string>
+    <string name="quick_action_osmbugs_hide">Agochar as notas de OSM</string>
+    <string name="sorted_by_distance">Ordenado por distancia</string>
+    <string name="search_favorites">Buscar nos favoritos</string>
     </resources>

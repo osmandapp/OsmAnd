@@ -2815,4 +2815,6 @@ Zodpovedá oblasti: %1$s x %2$s</string>
     <string name="min_max">Min/Max</string>
     <string name="live_monitoring_max_interval_to_send">Časový zásobník pre online sledovanie</string>
     <string name="live_monitoring_max_interval_to_send_desrc">Zadajte čas pokiaľ budú udržované pozície na odoslanie kým nie je pripojenie</string>
-    </resources>
+    <string name="mappilary_no_internet_desc">Na zobrazovanie fotografií z Mapillary potrebujete pripojenie na Internet</string>
+    <string name="retry">Skúsiť znova</string>
+</resources>

@@ -1428,4 +1428,6 @@
 	<string name="poi_payment_sms_yes">Pagamentos por SMS</string>
 	<string name="poi_payment_sms_no">Non acepta pagamentos por SMS</string>
 	<string name="poi_payment_ov_chipkaart_yes">OV-Chipkaart</string>
+	<string name="poi_cafeteria">Cafetaría</string>
+	<string name="poi_zoo_type">Tipo</string>
 	</resources>

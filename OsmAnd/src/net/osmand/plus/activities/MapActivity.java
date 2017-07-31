@@ -752,7 +752,11 @@ public class MapActivity extends OsmandActionBarActivity implements DownloadEven
 	}
 
 	public void dismissCardDialog() {
-		getSupportFragmentManager().popBackStack(ContextMenuCardDialogFragment.TAG, FragmentManager.POP_BACK_STACK_INCLUSIVE);
+		try {
+			getSupportFragmentManager().popBackStack(ContextMenuCardDialogFragment.TAG, FragmentManager.POP_BACK_STACK_INCLUSIVE);
+		} catch (Exception e) {
+			e.printStackTrace();
+		}
 	}
 
 	@Override

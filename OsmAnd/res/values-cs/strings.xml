@@ -2554,7 +2554,7 @@ Pokud potřebujete pomoci s aplikací OsmAnd, prosím kontaktujte naši podporu
     <string name="routing_attr_relief_smoothness_factor_hills_name">Kopcovitý</string>
     <string name="routing_attr_relief_smoothness_factor_plains_name">Méně kopcovitý</string>
     <string name="routing_attr_relief_smoothness_factor_more_plains_name">Rovinatý</string>
-    <string name="routing_attr_driving_style_speed_name">Preferovat hlavní silnice</string>
+    <string name="routing_attr_driving_style_speed_name">Kratší trasy</string>
     <string name="routing_attr_driving_style_balance_name">Vyvážený</string>
     <string name="routing_attr_driving_style_safety_name">Preferovat vedlejší silnice</string>
     <string name="relief_smoothness_factor_descr">Priorita terénu: rovinatý nebo kopcovitý</string>
@@ -2676,4 +2676,19 @@ Pokud potřebujete pomoci s aplikací OsmAnd, prosím kontaktujte naši podporu
     <string name="max_min">Max/Min</string>
     
     <string name="min_max">Min/Max</string>
+    <string name="quick_action_resume_pause_navigation">Pokračovat/Pozastavit navigaci</string>
+    <string name="quick_action_resume_pause_navigation_descr">Stiskněte toto tlačítko na pozastavení navigace, nebo pokračování pokud je pozastavená.</string>
+    <string name="quick_action_show_navigation_finish_dialog">Zobrazit zprávu o ukončení navigace</string>
+    <string name="quick_action_start_stop_navigation">Spustit/Ukončit navigaci</string>
+    <string name="quick_action_start_stop_navigation_descr">Stiskněte toto tlačítko pro spuštění navigace, nebo zastavení, pokud již byla spuštěna.</string>
+    <string name="release_2_7">"\\022 Modul Mapillary se snímky ulic
+\n
+\n • Pravítko pro měření vzdálenosti
+\n
+\n • Intervaly rozdělení GPX  s detailními informacemi o trase
+\n
+\n • další vylepšení a opravy chyb
+\n
+\n"</string>
+    <string name="rendering_value_translucent_pink_name">Průhledná růžová</string>
     </resources>

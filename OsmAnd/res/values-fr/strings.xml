@@ -2854,4 +2854,6 @@ Fonctionnalités principales :
     <string name="quick_action_show_navigation_finish_dialog">Afficher la fenêtre de fin de navigation</string>
     <string name="quick_action_start_stop_navigation">Démarrer / Arrêter la Navigation</string>
     <string name="quick_action_start_stop_navigation_descr">Appuyez sur ce bouton pour démarrer la navigation ou l\'arrêter lorsqu\'elle est en cours.</string>
-    </resources>
+    <string name="mappilary_no_internet_desc">Vous devez être connecté à Internet pour afficher les photos Mapillary</string>
+    <string name="retry">Essayer à nouveau</string>
+</resources>
