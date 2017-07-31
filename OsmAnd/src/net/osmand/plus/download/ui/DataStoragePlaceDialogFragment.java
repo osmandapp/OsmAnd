@@ -17,6 +17,7 @@ import android.widget.ImageView;
 import android.widget.TextView;
 import android.widget.Toast;
 
+import net.osmand.IProgress;
 import net.osmand.plus.OnDismissDialogFragmentListener;
 import net.osmand.plus.OsmandApplication;
 import net.osmand.plus.OsmandSettings;
@@ -24,6 +25,7 @@ import net.osmand.plus.R;
 import net.osmand.plus.base.BottomSheetDialogFragment;
 import net.osmand.plus.dashboard.DashChooseAppDirFragment;
 import net.osmand.plus.download.DownloadActivity;
+import net.osmand.plus.download.DownloadIndexesThread;
 
 import java.io.File;
 
@@ -196,11 +198,22 @@ public class DataStoragePlaceDialogFragment extends BottomSheetDialogFragment {
 		return sz;
 	}
 
+	private void checkAssets() {
+		getMyApplication().getResourceManager().checkAssets(IProgress.EMPTY_PROGRESS, true);
+	}
+
+	private void updateDownloadIndexes() {
+		DownloadIndexesThread downloadIndexesThread = getMyApplication().getDownloadThread();
+		downloadIndexesThread.runReloadIndexFilesSilent();
+	}
+
 	private View.OnClickListener deviceMemoryOnClickListener =
 			new View.OnClickListener() {
 				@Override
 				public void onClick(View v) {
 					saveFilesLocation(deviceStorageType, deviceStorage, getActivity());
+					checkAssets();
+					updateDownloadIndexes();
 					isInterestedInFirstTime = false;
 					dismiss();
 				}
@@ -211,6 +224,8 @@ public class DataStoragePlaceDialogFragment extends BottomSheetDialogFragment {
 				@Override
 				public void onClick(View v) {
 					saveFilesLocation(sharedStorageType, sharedStorage, getActivity());
+					checkAssets();
+					updateDownloadIndexes();
 					isInterestedInFirstTime = false;
 					dismiss();
 				}
@@ -221,6 +236,8 @@ public class DataStoragePlaceDialogFragment extends BottomSheetDialogFragment {
 				@Override
 				public void onClick(View v) {
 					boolean res = saveFilesLocation(cardStorageType, cardStorage, getActivity());
+					checkAssets();
+					updateDownloadIndexes();
 					isInterestedInFirstTime = false;
 					if (res) {
 						dismiss();

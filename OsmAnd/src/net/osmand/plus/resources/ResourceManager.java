@@ -350,7 +350,7 @@ public class ResourceManager {
 	public List<String> reloadIndexesOnStart(AppInitializer progress, List<String> warnings){
 		close();
 		// check we have some assets to copy to sdcard
-		warnings.addAll(checkAssets(progress));
+		warnings.addAll(checkAssets(progress, false));
 		progress.notifyEvent(InitEvents.ASSETS_COPIED);
 		reloadIndexes(progress, warnings);
 		progress.notifyEvent(InitEvents.MAPS_INITIALIZED);
@@ -414,9 +414,9 @@ public class ResourceManager {
 		return warnings;
 	}
 	
-	private List<String> checkAssets(IProgress progress) {
+	public List<String> checkAssets(IProgress progress, boolean forceUpdate) {
 		String fv = Version.getFullVersion(context);
-		if (!fv.equalsIgnoreCase(context.getSettings().PREVIOUS_INSTALLED_VERSION.get())) {
+		if (!fv.equalsIgnoreCase(context.getSettings().PREVIOUS_INSTALLED_VERSION.get()) || forceUpdate) {
 			File applicationDataDir = context.getAppPath(null);
 			applicationDataDir.mkdirs();
 			if (applicationDataDir.canWrite()) {
@@ -424,7 +424,7 @@ public class ResourceManager {
 					progress.startTask(context.getString(R.string.installing_new_resources), -1);
 					AssetManager assetManager = context.getAssets();
 					boolean isFirstInstall = context.getSettings().PREVIOUS_INSTALLED_VERSION.get().equals("");
-					unpackBundledAssets(assetManager, applicationDataDir, progress, isFirstInstall);
+					unpackBundledAssets(assetManager, applicationDataDir, progress, isFirstInstall || forceUpdate);
 					context.getSettings().PREVIOUS_INSTALLED_VERSION.set(fv);
 					copyRegionsBoundaries();
 					// see Issue #3381
