@@ -1048,6 +1048,8 @@ public class RouteInfoWidgetsFactory {
 		private MapActivity ma;
 		private String cacheRulerText;
 		private int maxWidth;
+		private float cacheMapDensity;
+		private OsmandSettings.OsmandPreference<Float> mapDensity;
 		private int cacheRulerZoom;
 		private double cacheRulerTileX;
 		private double cacheRulerTileY;
@@ -1061,6 +1063,8 @@ public class RouteInfoWidgetsFactory {
 			textShadow = (TextView) ma.findViewById(R.id.map_ruler_text_shadow);
 			maxWidth = ma.getResources().getDimensionPixelSize(R.dimen.map_ruler_width);
 			orientationPortrait = AndroidUiHelper.isOrientationPortrait(ma);
+			mapDensity = ma.getMyApplication().getSettings().MAP_DENSITY;
+			cacheMapDensity = mapDensity.get();
 		}
 		
 		public void updateTextSize(boolean isNight, int textColor, int textShadowColor, int shadowRadius) {
@@ -1077,10 +1081,12 @@ public class RouteInfoWidgetsFactory {
 			} else if (!orientationPortrait && ma.getRoutingHelper().isRoutePlanningMode()) {
 				visible = false;
 			} else if (!tb.isZoomAnimated() && (tb.getZoom() != cacheRulerZoom || Math.abs(tb.getCenterTileX() - cacheRulerTileX) > 1 || Math
-					.abs(tb.getCenterTileY() - cacheRulerTileY) > 1) && tb.getPixWidth() > 0 && maxWidth > 0) {
+					.abs(tb.getCenterTileY() - cacheRulerTileY) > 1 || mapDensity.get() != cacheMapDensity) &&
+					tb.getPixWidth() > 0 && maxWidth > 0) {
 				cacheRulerZoom = tb.getZoom();
 				cacheRulerTileX = tb.getCenterTileX();
 				cacheRulerTileY = tb.getCenterTileY();
+				cacheMapDensity = mapDensity.get();
 				final double dist = tb.getDistance(0, tb.getPixHeight() / 2, tb.getPixWidth(), tb.getPixHeight() / 2);
 				double pixDensity = tb.getPixWidth() / dist;
 				double roundedDist = OsmAndFormatter.calculateRoundedDist(maxWidth / 
