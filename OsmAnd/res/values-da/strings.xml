@@ -2814,4 +2814,5 @@ Tidligere destination bliver sidste mellemliggende punkt.</string>
     <string name="live_monitoring_max_interval_to_send_desrc">Angiv en buffer for hvor lang tid positioner skal gemmes, når der ingen internetforbindelse er</string>
     <string name="retry">Prøv igen</string>
 <string name="mappilary_no_internet_desc">Internetforbindelse er nødvendig for at se fotos fra Mapillary</string>
+    <string name="measurement_tool">Måleværktøj</string>
     </resources>
