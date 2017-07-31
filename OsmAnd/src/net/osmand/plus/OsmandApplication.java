@@ -396,8 +396,8 @@ public class OsmandApplication extends MultiDexApplication {
 	public void initVoiceCommandPlayer(final Activity uiContext, ApplicationMode applicationMode,
 									   boolean warningNoneProvider, Runnable run, boolean showDialog, boolean force) {
 		String voiceProvider = osmandSettings.VOICE_PROVIDER.get();
-		if (voiceProvider == null || OsmandSettings.VOICE_PROVIDER_NOT_USE.equals(voiceProvider)) {
-			if (warningNoneProvider && voiceProvider == null) {
+		if (voiceProvider == null) {
+			if (warningNoneProvider) {
 				final AlertDialog.Builder builder = new AlertDialog.Builder(uiContext);
 
 				View view = uiContext.getLayoutInflater().inflate(R.layout.select_voice_first, null);
@@ -434,6 +434,12 @@ public class OsmandApplication extends MultiDexApplication {
 						if (!Algorithms.isEmpty(firstSelectedVoiceProvider)) {
 							RoutePreferencesMenu.applyVoiceProvider((MapActivity) uiContext, firstSelectedVoiceProvider);
 						}
+					}
+				});
+				builder.setNeutralButton(R.string.shared_string_do_not_use, new DialogInterface.OnClickListener() {
+					@Override
+					public void onClick(DialogInterface dialogInterface, int i) {
+						osmandSettings.VOICE_PROVIDER.set(OsmandSettings.VOICE_PROVIDER_NOT_USE);
 					}
 				});
 
