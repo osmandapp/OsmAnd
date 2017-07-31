@@ -59,9 +59,9 @@ public class MeasurementToolFragment extends Fragment {
 	private void enterMeasurementMode() {
 		measurementLayer.setInMeasurementMode(true);
 		mapActivity.disableDrawer();
-		mark(View.INVISIBLE, R.id.map_left_widgets_panel, R.id.map_right_widgets_panel, R.id.map_center_info,
-				R.id.map_route_info_button, R.id.map_menu_button, R.id.map_compass_button, R.id.map_layers_button,
-				R.id.map_search_button);
+		mark(View.INVISIBLE, R.id.map_left_widgets_panel, R.id.map_right_widgets_panel, R.id.map_center_info);
+		mark(View.GONE, R.id.map_route_info_button, R.id.map_menu_button, R.id.map_compass_button, R.id.map_layers_button,
+				R.id.map_search_button, R.id.map_quick_actions_button);
 
 		View collapseButton = mapActivity.findViewById(R.id.map_collapse_button);
 		if (collapseButton != null && collapseButton.getVisibility() == View.VISIBLE) {
@@ -77,7 +77,7 @@ public class MeasurementToolFragment extends Fragment {
 		mapActivity.enableDrawer();
 		mark(View.VISIBLE, R.id.map_left_widgets_panel, R.id.map_right_widgets_panel, R.id.map_center_info,
 				R.id.map_route_info_button, R.id.map_menu_button, R.id.map_compass_button, R.id.map_layers_button,
-				R.id.map_search_button);
+				R.id.map_search_button, R.id.map_quick_actions_button);
 
 		View collapseButton = mapActivity.findViewById(R.id.map_collapse_button);
 		if (collapseButton != null && wasCollapseButtonVisible) {

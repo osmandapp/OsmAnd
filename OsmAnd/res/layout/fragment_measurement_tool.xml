@@ -19,7 +19,8 @@
         <RelativeLayout
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:minHeight="60dp">
+            android:paddingBottom="12dp"
+            android:paddingTop="12dp">
 
             <ImageButton
                 android:id="@+id/ruler_icon"
@@ -28,7 +29,10 @@
                 android:layout_alignParentLeft="true"
                 android:layout_alignParentStart="true"
                 android:layout_centerVertical="true"
-                android:layout_margin="16dp"
+                android:layout_marginEnd="16dp"
+                android:layout_marginLeft="16dp"
+                android:layout_marginRight="16dp"
+                android:layout_marginStart="16dp"
                 android:background="@null"
                 tools:src="@drawable/ic_action_ruler"/>
 
@@ -39,7 +43,10 @@
                 android:layout_alignParentEnd="true"
                 android:layout_alignParentRight="true"
                 android:layout_centerVertical="true"
-                android:layout_margin="16dp"
+                android:layout_marginEnd="16dp"
+                android:layout_marginLeft="16dp"
+                android:layout_marginRight="16dp"
+                android:layout_marginStart="16dp"
                 android:background="@null"
                 tools:src="@drawable/ic_action_arrow_down"/>
 
@@ -48,6 +55,8 @@
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_centerVertical="true"
+                android:layout_marginLeft="8dp"
+                android:layout_marginStart="8dp"
                 android:layout_toEndOf="@id/ruler_icon"
                 android:layout_toRightOf="@id/ruler_icon"
                 android:text="724 m, "
@@ -65,7 +74,7 @@
                 android:layout_toStartOf="@id/up_down_icon"
                 android:text="3 dots"
                 android:textColor="?android:textColorSecondary"
-                android:textSize="@dimen/default_desc_text_size"
+                android:textSize="@dimen/default_list_text_size"
                 tools:text="3 dots"/>
         </RelativeLayout>
 
@@ -76,8 +85,7 @@
 
         <RelativeLayout
             android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:minHeight="60dp">
+            android:layout_height="wrap_content">
 
             <ImageButton
                 android:id="@+id/previous_dot_icon"
@@ -86,7 +94,10 @@
                 android:layout_alignParentLeft="true"
                 android:layout_alignParentStart="true"
                 android:layout_centerVertical="true"
-                android:layout_margin="16dp"
+                android:layout_marginEnd="16dp"
+                android:layout_marginLeft="16dp"
+                android:layout_marginRight="16dp"
+                android:layout_marginStart="16dp"
                 android:background="@null"
                 tools:src="@drawable/ic_action_undo_dark"/>
 
@@ -95,7 +106,8 @@
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_centerVertical="true"
-                android:layout_margin="16dp"
+                android:layout_marginLeft="8dp"
+                android:layout_marginStart="8dp"
                 android:layout_toEndOf="@id/previous_dot_icon"
                 android:layout_toRightOf="@id/previous_dot_icon"
                 android:background="@null"
@@ -103,16 +115,22 @@
 
             <Button
                 android:id="@+id/add_dot_button"
-                style="@style/DialogActionButton"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_alignParentEnd="true"
                 android:layout_alignParentRight="true"
                 android:layout_centerVertical="true"
+                android:layout_marginBottom="8dp"
                 android:layout_marginEnd="8dp"
                 android:layout_marginRight="8dp"
+                android:layout_marginTop="8dp"
+                android:background="@drawable/btn_round_blue"
                 android:drawableLeft="@drawable/ic_action_plus"
-                android:text="@string/shared_string_add"/>
+                android:minHeight="36dp"
+                android:paddingLeft="8dp"
+                android:paddingRight="8dp"
+                android:text="@string/shared_string_add"
+                android:textColor="@color/color_white"/>
         </RelativeLayout>
 
     </LinearLayout>
