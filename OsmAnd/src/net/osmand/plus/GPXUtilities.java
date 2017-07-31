@@ -102,6 +102,21 @@ public class GPXUtilities {
 		public float speed;
 	}
 
+	public static class CreatedGpxWaypoint {
+		private WptPt point;
+
+		public CreatedGpxWaypoint() {
+		}
+
+		public WptPt getPoint() {
+			return point;
+		}
+
+		public void setPoint(WptPt point) {
+			this.point = point;
+		}
+	}
+
 	public static class WptPt extends GPXExtensions implements LocationPoint {
 		public boolean firstPoint = false;
 		public boolean lastPoint = false;

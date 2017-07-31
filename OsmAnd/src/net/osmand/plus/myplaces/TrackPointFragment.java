@@ -36,7 +36,9 @@ import net.osmand.data.PointDescription;
 import net.osmand.plus.FavouritesDbHelper;
 import net.osmand.plus.GPXDatabase.GpxDataItem;
 import net.osmand.plus.GPXUtilities;
+import net.osmand.plus.GPXUtilities.WptPt;
 import net.osmand.plus.GPXUtilities.GPXFile;
+import net.osmand.plus.GPXUtilities.CreatedGpxWaypoint;
 import net.osmand.plus.GpxSelectionHelper.GpxDisplayGroup;
 import net.osmand.plus.GpxSelectionHelper.GpxDisplayItem;
 import net.osmand.plus.GpxSelectionHelper.GpxDisplayItemType;
@@ -91,11 +93,13 @@ public class TrackPointFragment extends OsmandExpandableListFragment {
 	private ActionMode actionMode;
 	private SearchView searchView;
 	private FloatingActionButton fab;
+	private CreatedGpxWaypoint createdGpxWaypoint;
 
 	@Override
 	public void onCreate(@Nullable Bundle savedInstanceState) {
 		super.onCreate(savedInstanceState);
 		this.app = getMyApplication();
+		this.createdGpxWaypoint = new CreatedGpxWaypoint();
 	}
 
 	@Override
@@ -117,26 +121,16 @@ public class TrackPointFragment extends OsmandExpandableListFragment {
 		fab.setOnClickListener(new View.OnClickListener() {
 			@Override
 			public void onClick(View view) {
-				GpxDisplayItem item = null;
-				int groupCount = adapter.getGroupCount();
-				for (int i = 0; i < groupCount; i++) {
-					GpxDisplayGroup group = adapter.getGroup(i);
-					if (group.getType() == GpxDisplayItemType.TRACK_POINTS) {
-						int childrenCount = adapter.getChildrenCount(i);
-						item = adapter.getChild(i, childrenCount - 1);
-					}
-				}
-				if (item != null) {
-					if (item.group.getGpx() != null) {
-						app.getSelectedGpxHelper().setGpxFileToDisplay(item.group.getGpx());
-					}
-					final OsmandSettings settings = app.getSettings();
-					LatLon location = new LatLon(item.locationStart.lat, item.locationStart.lon);
+				final OsmandSettings settings = app.getSettings();
+				GPXFile gpx = getGpx();
+				WptPt pointToShow = gpx != null ? gpx.findPointToShow() : null;
+				if (pointToShow != null) {
+					LatLon location = new LatLon(pointToShow.lat, pointToShow.lon);
 					settings.setMapLocationToShow(location.getLatitude(), location.getLongitude(),
 							settings.getLastKnownMapZoom(),
-							new PointDescription(PointDescription.POINT_TYPE_WPT, item.name),
+							new PointDescription(PointDescription.POINT_TYPE_WPT, getString(R.string.context_menu_item_add_waypoint)),
 							false,
-							item.locationStart);
+							createdGpxWaypoint);
 
 					MapActivity.launchMapActivityMoveToTop(getActivity());
 				}
