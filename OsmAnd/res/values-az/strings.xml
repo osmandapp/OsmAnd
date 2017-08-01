@@ -1694,4 +1694,9 @@
     <string name="search_near_map">Hazırki xəritə mərkəzinin yaxınında axtar</string>
     <string name="transport_Routes">Marşrutlar</string>
     <string name="transport_Stop">Dayanacaq</string>
+    <string name="osmand_parking_lim_text">Vaxt-limitli</string>
+    <string name="osmand_parking_no_lim_text">Vaxt-limitsiz</string>
+    <string name="pref_vector_map">Vektor xəritə parametrləri</string>
+    <string name="file_with_name_already_exists">Bu adda fayl artıq mövcuddur.</string>
+    <string name="gpx_navigation">GPX marşrut</string>
     </resources>
