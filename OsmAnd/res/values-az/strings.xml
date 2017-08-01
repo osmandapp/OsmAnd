@@ -973,7 +973,7 @@
     <string name="open_mapillary">Mapillary-ni aç</string>
     <string name="no_photos_descr">Bu məkan üçün şəkillərimiz yoxdur</string>
     <string name="subscribe_email_desc">Proqramın endirimləri haqqında e-poçt siyahımıza abunə olun və əlavə 3 xəritə endirməsi əldə edin!</string>
-    <string name="sea_depth_thanks">Dəniz dərinliyi konturlarını aldığınız üçün təşəkkürlər!</string>
+    <string name="sea_depth_thanks">Dəniz dərinliyi konturlarını aldığınız üçün təşəkkür edirik!</string>
     <string name="index_item_depth_contours_osmand_ext">Dəniz dərinliyi konturları</string>
     <string name="index_item_depth_points_southern_hemisphere">Dəniz dərinliyi cənub yarımkürəsində göstərilir</string>
     <string name="download_depth_countours">Dəniz dərinliyi konturları</string>
@@ -1050,7 +1050,7 @@
     <string name="rendering_value_americanRoadAtlas_name">Amerika yol atlası</string>
     <string name="impassable_road">Yollardan yayın…</string>
     <string name="routing_attr_avoid_toll_name">Pullu yollardan yayın</string>
-    <string name="ending_point_too_far">Son nöqtə ən yaxın yoldan çox uzaqdadır.</string>
+    <string name="ending_point_too_far">Son nöqtə ən yaxın yoldan çox uzaqdır.</string>
     <string name="snap_to_road_descr">Naviqasiya zamanı mövqeni yollara bərkit</string>
     <string name="snap_to_road">Yola bərkit</string>
     <string name="avoid_unpaved">Asfaltsız yollardan yayın</string>
