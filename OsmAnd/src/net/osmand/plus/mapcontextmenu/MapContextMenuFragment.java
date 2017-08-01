@@ -101,6 +101,7 @@ public class MapContextMenuFragment extends Fragment implements DownloadEvents {
 	private float skipHalfScreenStateLimit;
 
 	private int screenOrientation;
+	private boolean created;
 
 	@TargetApi(Build.VERSION_CODES.HONEYCOMB)
 	@Override
@@ -463,6 +464,7 @@ public class MapContextMenuFragment extends Fragment implements DownloadEvents {
 
 		//getMapActivity().getMapLayers().getMapControlsLayer().setControlsClickable(false);
 
+		created = true;
 		return view;
 	}
 
@@ -853,16 +855,25 @@ public class MapContextMenuFragment extends Fragment implements DownloadEvents {
 							View titleButtonContainer = view.findViewById(R.id.title_button_container);
 							if (titleButtonContainer.getVisibility() == View.VISIBLE) {
 								titleButtonHeight = titleButtonContainer.getMeasuredHeight() - dp16;
+								if (titleButtonHeight < 0) {
+									titleButtonHeight = 0;
+								}
 							}
 							int downloadButtonsHeight = 0;
 							View downloadButtonsContainer = view.findViewById(R.id.download_buttons_container);
 							if (downloadButtonsContainer.getVisibility() == View.VISIBLE) {
 								downloadButtonsHeight = downloadButtonsContainer.getMeasuredHeight() - dp16;
+								if (downloadButtonsHeight < 0) {
+									downloadButtonsHeight = 0;
+								}
 							}
 							int titleProgressHeight = 0;
 							View titleProgressContainer = view.findViewById(R.id.title_progress_container);
 							if (titleProgressContainer.getVisibility() == View.VISIBLE) {
 								titleProgressHeight = titleProgressContainer.getMeasuredHeight() - dp16;
+								if (titleProgressHeight < 0) {
+									titleProgressHeight = 0;
+								}
 							}
 
 							if (menuTopViewHeight != 0) {
@@ -1285,9 +1296,11 @@ public class MapContextMenuFragment extends Fragment implements DownloadEvents {
 	}
 
 	public void updateMenu() {
-		menu.updateData();
-		updateButtonsAndProgress();
-		runLayoutListener();
+		if (created) {
+			menu.updateData();
+			updateButtonsAndProgress();
+			runLayoutListener();
+		}
 	}
 
 	private MapActivity getMapActivity() {
