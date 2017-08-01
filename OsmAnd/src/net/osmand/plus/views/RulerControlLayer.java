@@ -5,7 +5,6 @@ import android.graphics.BitmapFactory;
 import android.graphics.Canvas;
 import android.graphics.Paint;
 import android.graphics.Paint.Style;
-import android.graphics.Path;
 import android.graphics.PointF;
 import android.graphics.Rect;
 import android.os.Handler;
@@ -19,13 +18,12 @@ import net.osmand.data.QuadPoint;
 import net.osmand.data.RotatedTileBox;
 import net.osmand.plus.OsmAndFormatter;
 import net.osmand.plus.OsmandApplication;
+import net.osmand.plus.OsmandSettings;
 import net.osmand.plus.OsmandSettings.RulerMode;
 import net.osmand.plus.R;
 import net.osmand.plus.activities.MapActivity;
 
 import java.util.ArrayList;
-
-import gnu.trove.list.array.TIntArrayList;
 
 public class RulerControlLayer extends OsmandMapLayer {
 
@@ -49,14 +47,13 @@ public class RulerControlLayer extends OsmandMapLayer {
 	private int acceptableTouchRadius;
 
 	private QuadPoint cacheCenter;
+	private float cacheMapDensity;
+	private OsmandSettings.OsmandPreference<Float> mapDensity;
 	private int cacheIntZoom;
 	private double cacheTileX;
 	private double cacheTileY;
 	private long cacheMultiTouchEndTime;
 	private ArrayList<String> cacheDistances;
-	private Path distancePath;
-	private TIntArrayList tx;
-	private TIntArrayList ty;
 	private LatLon touchPointLatLon;
 	private PointF touchPoint;
 	private long touchStartTime;
@@ -93,13 +90,12 @@ public class RulerControlLayer extends OsmandMapLayer {
 	public void initLayer(final OsmandMapTileView view) {
 		app = mapActivity.getMyApplication();
 		this.view = view;
+		mapDensity = mapActivity.getMyApplication().getSettings().MAP_DENSITY;
+		cacheMapDensity = mapDensity.get();
 		cacheDistances = new ArrayList<>();
 		cacheCenter = new QuadPoint();
 		maxRadiusInDp = mapActivity.getResources().getDimensionPixelSize(R.dimen.map_ruler_width);
 		rightWidgetsPanel = mapActivity.findViewById(R.id.map_right_widgets_panel);
-		distancePath = new Path();
-		tx = new TIntArrayList();
-		ty = new TIntArrayList();
 		touchPoint = new PointF();
 		acceptableTouchRadius = mapActivity.getResources().getDimensionPixelSize(R.dimen.acceptable_touch_radius);
 
@@ -307,12 +303,13 @@ public class RulerControlLayer extends OsmandMapLayer {
 			}
 
 			boolean move = tb.getZoom() != cacheIntZoom || Math.abs(tb.getCenterTileX() - cacheTileX) > 1 ||
-					Math.abs(tb.getCenterTileY() - cacheTileY) > 1;
+					Math.abs(tb.getCenterTileY() - cacheTileY) > 1 || mapDensity.get() != cacheMapDensity;
 
 			if (!tb.isZoomAnimated() && move) {
 				cacheIntZoom = tb.getZoom();
 				cacheTileX = tb.getCenterTileX();
 				cacheTileY = tb.getCenterTileY();
+				cacheMapDensity = mapDensity.get();
 				cacheDistances.clear();
 				updateDistance(tb);
 			}

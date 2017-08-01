@@ -712,7 +712,7 @@ public class MapControlsLayer extends OsmandMapLayer {
 				((app.accessibilityEnabled() || (System.currentTimeMillis() - touchEvent < TIMEOUT_TO_SHOW_BUTTONS)) && routeFollowingMode);
 		updateMyLocation(rh, routeDialogOpened || trackDialogOpened);
 		boolean showButtons = (showRouteCalculationControls || !routeFollowingMode)
-				&& !isInMovingMarkerMode() && !isInGpxDetailsMode();
+				&& !isInMovingMarkerMode() && !isInGpxDetailsMode() && !isInMeasurementToolMode();
 		//routePlanningBtn.setIconResId(routeFollowingMode ? R.drawable.ic_action_gabout_dark : R.drawable.map_directions);
 		if (rh.isFollowingMode()) {
 			routePlanningBtn.setIconResId(R.drawable.map_start_navigation);
@@ -729,13 +729,14 @@ public class MapControlsLayer extends OsmandMapLayer {
 
 		mapZoomIn.updateVisibility(!routeDialogOpened);
 		mapZoomOut.updateVisibility(!routeDialogOpened);
-		compassHud.updateVisibility(!routeDialogOpened && !trackDialogOpened && shouldShowCompass());
+		compassHud.updateVisibility(!routeDialogOpened && !trackDialogOpened && shouldShowCompass() &&
+				!isInMeasurementToolMode());
 
 		if (layersHud.setIconResId(settings.getApplicationMode().getMapIconId())) {
 			layersHud.update(app, isNight);
 		}
-		layersHud.updateVisibility(!routeDialogOpened && !trackDialogOpened);
-		quickSearchHud.updateVisibility(!routeDialogOpened && !trackDialogOpened);
+		layersHud.updateVisibility(!routeDialogOpened && !trackDialogOpened && !isInMeasurementToolMode());
+		quickSearchHud.updateVisibility(!routeDialogOpened && !trackDialogOpened && !isInMeasurementToolMode());
 
 		if (!routePlanningMode && !routeFollowingMode) {
 			if (mapView.isZooming()) {
@@ -1125,6 +1126,10 @@ public class MapControlsLayer extends OsmandMapLayer {
 
 	private boolean isInGpxDetailsMode() {
 		return contextMenuLayer.isInGpxDetailsMode();
+	}
+
+	private boolean isInMeasurementToolMode() {
+		return mapActivity.getMapLayers().getMeasurementToolLayer().isInMeasurementMode();
 	}
 
 	public static View.OnLongClickListener getOnClickMagnifierListener(final OsmandMapTileView view) {

@@ -705,7 +705,7 @@ OSM er et i fællesskab drevet, globalt offentligt domæne kortlægningsprojekt.
 
     <string name="amenity_type_landuse">Arealanvendelse</string>
     <string name="amenity_type_sustenance">Mad og drikke</string>
-    <string name="voice_is_not_available_msg">Talevejledning er ikke tilgængelig. Gå til \'Indstillinger\' → \'Generelt\' → \'Talevejledning\' og vælg eller hent en talevejledning.</string>
+    <string name="voice_is_not_available_msg">Talevejledning er ikke tilgængelig. Gå til \'Indstillinger\' → \'Navigation\' → \'Talevejledning\' og vælg eller hent en talevejledning.</string>
     <string name="items_were_selected">{0} emner valgt</string>
     <string name="filter_existing_indexes">Hentet</string>
     <string name="fast_route_mode">Hurtigste rute</string>
@@ -2449,7 +2449,7 @@ Hvis du  ønsker at støtte OsmAnd og OSM, er dette en god måde at gøre det p�
     <string name="christmas_desc_q">Vis jule-interessepunkter (IP)?</string>
     <string name="save_track_min_speed">Minimumshastighed for logning</string>
     <string name="save_track_min_speed_descr">Filter: Angiv minimumshastighed før et punkt logges</string>
-    <string name="save_track_min_distance">Logning ved minimum bevægelse</string>
+    <string name="save_track_min_distance">Logning ved minimum forskydning</string>
     <string name="save_track_min_distance_descr">Filter: Indstil minimumsafstand fra sidste position før et punkt logges</string>
     <string name="save_track_precision">Mindste nøjagtighed for logning</string>
     <string name="save_track_precision_descr">Filter: Indstil minimum nøjagtighed før et punkt logges</string>
@@ -2723,7 +2723,7 @@ Tidligere destination bliver sidste mellemliggende punkt.</string>
     <string name="shared_string_in_name">i %1$s</string>
     <string name="shared_string_overview">Oversigt</string>
     <string name="animate_my_location">Animér position</string>
-    <string name="animate_my_location_desc">Aktiver kort panorering animation af position under navigation</string>
+    <string name="animate_my_location_desc">Aktiver panorering af positionen under navigation</string>
     <string name="favorite_group_name">Gruppenavn</string>
     <string name="change_color">Skift farve</string>
     <string name="edit_name">Rediger navn</string>
@@ -2779,7 +2779,7 @@ Tidligere destination bliver sidste mellemliggende punkt.</string>
     <string name="mapillary_menu_edit_text_hint">Indtast brugernavn</string>
     <string name="mapillary_menu_descr_username">Se billeder tilføjet af en bestemt bruger.</string>
     <string name="mapillary_menu_title_username">Brugernavn</string>
-    <string name="mapillary_menu_filter_description">Filtrer billeder efter indsender eller dato. Filter gælder kun for højere zoom.</string>
+    <string name="mapillary_menu_filter_description">Filtrer billeder efter indsender eller dato. Filter gælder kun for højere zoomniveauer.</string>
     <string name="mapillary_menu_descr_dates">Se billeder tilføjet i en bestemt periode.</string>
     <string name="shared_string_reload">Genindlæs</string>
     <string name="mapillary_menu_descr_tile_cache">Genindlæs kortbrikker for at se opdaterede data.</string>
@@ -2811,7 +2811,7 @@ Tidligere destination bliver sidste mellemliggende punkt.</string>
     <string name="quick_action_start_stop_navigation">Start/stop navigation</string>
     <string name="quick_action_start_stop_navigation_descr">Tryk på knappen for at starte navigation eller stoppe, hvis den allerede var begyndt.</string>
     <string name="live_monitoring_max_interval_to_send">Tidsbuffer til online sporing</string>
-    <string name="live_monitoring_max_interval_to_send_desrc">Angiv en tidsbuffer til at opbevare steder, når der ingen forbindelse er</string>
+    <string name="live_monitoring_max_interval_to_send_desrc">Angiv en buffer for hvor lang tid positioner skal gemmes, når der ingen internetforbindelse er</string>
     <string name="retry">Prøv igen</string>
 <string name="mappilary_no_internet_desc">Internetforbindelse er nødvendig for at se fotos fra Mapillary</string>
     </resources>

@@ -178,7 +178,7 @@ public abstract class OsmandPlugin {
 			allPlugins.add(srtm);
 		} else {
 			if (marketEnabled) {
-				srtm.setInstallURL(Version.marketPrefix(app) + id);
+				srtm.setInstallURL(Version.getUrlWithUtmRef(app, id));
 				allPlugins.add(srtm);
 			}
 		}

@@ -2654,9 +2654,9 @@ Koda predstavlja območje: %1$s x %2$s</string>
     <string name="routing_attr_relief_smoothness_factor_hills_name">Gričevnato</string>
     <string name="routing_attr_relief_smoothness_factor_plains_name">Manj gričevnato</string>
     <string name="routing_attr_relief_smoothness_factor_more_plains_name">Ravninsko</string>
-    <string name="routing_attr_driving_style_speed_name">Hitro</string>
+    <string name="routing_attr_driving_style_speed_name">Krajše poti</string>
     <string name="routing_attr_driving_style_balance_name">Pretehtano</string>
-    <string name="routing_attr_driving_style_safety_name">Varno</string>
+    <string name="routing_attr_driving_style_safety_name">Vodi po stranpoteh</string>
     <string name="relief_smoothness_factor_descr">Prednostna izbira terena: ravninsko ali gričevnato</string>
     <string name="routing_attr_relief_smoothness_factor_name">Izbor razgibanosti terena</string>
     <string name="do_not_send_anonymous_app_usage">Ne pošiljaj statističnih podatkov uporabe programa</string>
@@ -2798,4 +2798,11 @@ Koda predstavlja območje: %1$s x %2$s</string>
 \n
 \n</string>
     <string name="rendering_value_translucent_pink_name">Prosojna rožnata</string>
-    </resources>
+    <string name="quick_action_resume_pause_navigation_descr">Pritisnite gumb, če želite začasno zaustaviti navigacijo ali pa jo nadaljevati, če je gumb že pritisnjen.</string>
+    <string name="quick_action_show_navigation_finish_dialog">Pokaži pogovorno okno končanja navigacije</string>
+    <string name="quick_action_start_stop_navigation_descr">"Pritisnite gumb, če želite začeti navigacijo ali pa jo zaustaviti, če je že  začeta."</string>
+    <string name="live_monitoring_max_interval_to_send">Časovni medpomnilnik za spletno sledenje</string>
+    <string name="live_monitoring_max_interval_to_send_desrc">Določitev časovnega medpomnilnika za ohranjanje trenutnega mesta pri pošiljanju brez povezave</string>
+    <string name="mappilary_no_internet_desc">Za ogled slik prek Mapillary je zahtevana omrežna povezava</string>
+    <string name="retry">Poskusi znova</string>
+</resources>

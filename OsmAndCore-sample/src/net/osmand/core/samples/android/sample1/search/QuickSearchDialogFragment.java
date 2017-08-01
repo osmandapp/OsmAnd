@@ -203,7 +203,7 @@ public class QuickSearchDialogFragment extends DialogFragment implements SampleC
 		);
 
 		toolbar = (Toolbar) view.findViewById(R.id.toolbar);
-		toolbar.setNavigationIcon(app.getIconsCache().getThemedIcon(R.drawable.abc_ic_ab_back_mtrl_am_alpha));
+		toolbar.setNavigationIcon(app.getIconsCache().getThemedIcon(R.drawable.ic_arrow_back));
 		toolbar.setNavigationContentDescription(app.getString("access_shared_string_navigate_up"));
 		toolbar.setNavigationOnClickListener(
 				new OnClickListener() {

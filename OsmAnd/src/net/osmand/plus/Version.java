@@ -13,7 +13,7 @@ public class Version {
 	private final static String FREE_VERSION_NAME = "net.osmand";
 	private final static String FREE_DEV_VERSION_NAME = "net.osmand.dev";
 	private final static String SHERPAFY_VERSION_NAME = "net.osmand.sherpafy";
-	
+	private final static String UTM_REF = "&referrer=utm_source%3Dosmand";
 	
 	public static boolean isGpsStatusEnabled(OsmandApplication ctx) {
 		return isGooglePlayEnabled(ctx) && !isBlackberry(ctx);
@@ -31,9 +31,13 @@ public class Version {
 		if (isAmazonEnabled(ctx)) {
 			return "amzn://apps/android?p=";
 		} else if (isGooglePlayEnabled(ctx)) {
-			return "market://search?q=pname:";
+			return "market://details?id=";
 		} 
 		return "https://osmand.net/apps?id=";
+	}
+
+	public static String getUrlWithUtmRef(OsmandApplication ctx, String appName) {
+		return marketPrefix(ctx) + appName + UTM_REF;
 	}
 	
 	private static boolean isAmazonEnabled(OsmandApplication ctx) {

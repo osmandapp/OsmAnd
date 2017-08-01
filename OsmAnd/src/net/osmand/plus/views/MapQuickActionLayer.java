@@ -25,6 +25,7 @@ import net.osmand.plus.R;
 import net.osmand.plus.activities.MapActivity;
 import net.osmand.plus.helpers.AndroidUiHelper;
 import net.osmand.plus.mapcontextmenu.MapContextMenu;
+import net.osmand.plus.measurementtool.MeasurementToolLayer;
 import net.osmand.plus.quickaction.QuickAction;
 import net.osmand.plus.quickaction.QuickActionFactory;
 import net.osmand.plus.quickaction.QuickActionRegistry;
@@ -39,6 +40,7 @@ import static net.osmand.plus.views.ContextMenuLayer.VIBRATE_SHORT;
 public class MapQuickActionLayer extends OsmandMapLayer implements QuickActionRegistry.QuickActionUpdatesListener, QuickAction.QuickActionSelectionListener {
 
     private final ContextMenuLayer    contextMenuLayer;
+	private final MeasurementToolLayer measurementToolLayer;
     private       ImageView           contextMarker;
     private final MapActivity         mapActivity;
     private final OsmandApplication   app;
@@ -63,6 +65,7 @@ public class MapQuickActionLayer extends OsmandMapLayer implements QuickActionRe
         app = activity.getMyApplication();
         settings = activity.getMyApplication().getSettings();
         quickActionRegistry = activity.getMapLayers().getQuickActionRegistry();
+		measurementToolLayer = mapActivity.getMapLayers().getMeasurementToolLayer();
     }
 
 
@@ -319,6 +322,7 @@ public class MapQuickActionLayer extends OsmandMapLayer implements QuickActionRe
         boolean hideQuickButton = !isLayerOn ||
                 contextMenuLayer.isInChangeMarkerPositionMode() ||
 				contextMenuLayer.isInGpxDetailsMode() ||
+				measurementToolLayer.isInMeasurementMode() ||
                 mapActivity.getContextMenu().isVisible() && !mapActivity.getContextMenu().findMenuFragment().get().isRemoving() ||
                 mapActivity.getContextMenu().isVisible() && mapActivity.getContextMenu().findMenuFragment().get().isAdded() ||
                 mapActivity.getContextMenu().getMultiSelectionMenu().isVisible() && mapActivity.getContextMenu().getMultiSelectionMenu().getFragmentByTag().isAdded() ||

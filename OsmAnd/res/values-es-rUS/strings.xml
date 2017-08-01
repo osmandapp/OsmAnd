@@ -225,7 +225,7 @@ Lon %2$s</string>
     <string name="enable_sleep_mode">Activar modo reposo del GPS</string>
     <string name="save_current_track_descr">Guarda ahora la traza actual en la SD</string>
     <string name="save_current_track">Guardar traza GPX actual</string>
-    <string name="save_track_interval_globally">Intervalo de guardado</string>
+    <string name="save_track_interval_globally">Intervalo de registro</string>
     <string name="voice_provider">Indicaciones por voz</string>
     <string name="enable_proxy_title">Activar Proxy HTTP</string>
     <string name="proxy_port_title">Puerto Proxy</string>
@@ -517,14 +517,14 @@ Se aprecia la participación activa, y las contribuciones pueden hacerse directa
     <string name="background_service_is_enabled_question">El servicio de fondo, aún está funcionando. ¿Quieres pararlo también?</string>
     <string name="sleep_mode_stop_dialog">¿Parar modo reposo del GPS?</string>
     <string name="save_global_track_interval_descr">Elige el intervalo de registro para la grabación de trazas general (activar mediante el control de grabación GPX en el mapa)</string>
-    <string name="save_global_track_interval">Intervalo general de guardado</string>
+    <string name="save_global_track_interval">Intervalo de registro general</string>
     <string name="background_service_int">Intervalo de activación del GPS</string>
     <string name="save_track_to_gpx_globally">Guardar traza en archivo GPX</string>
     <string name="save_track_to_gpx_globally_headline">Registro de trazas bajo demanda</string>
     <string name="save_track_to_gpx_globally_descr">Registra la ubicación en un archivo GPX, pudiendo des/activarlo usando el control de grabación GPX en la pantalla del mapa</string>
     <string name="save_track_to_gpx">Guardar la traza automáticamente durante la navegación</string>
     <string name="save_track_to_gpx_descrp">Una traza GPX se guardará automáticamente en la carpeta de trazas durante la navegación</string>
-    <string name="save_track_interval">Intervalo de guardado durante navegación</string>
+    <string name="save_track_interval">Intervalo de registro durante navegación</string>
     <string name="save_track_interval_descr">Elige el intervalo de registro de trazas durante la navegación</string>
     <string name="voice_provider_descr">Elige las indicaciones por voz para la navegación</string>
     <string name="enable_proxy_descr">Configura un Proxy HTTP para todas las peticiones de red</string>
@@ -2088,7 +2088,7 @@ Si amas a OsmAnd, OSM y quieres apoyarlos, esta es una perfecta manera de hacerl
     <string name="select_map_marker">Elegir marcador del mapa</string>
     <string name="map_markers_other">Otros marcadores</string>
     <string name="upload_anonymously">Subir anónimamente</string>
-    <string name="show_transparency_seekbar">Mostrar transparencia en barra de búsqueda</string>
+    <string name="show_transparency_seekbar">Mostrar barra de transparencia en el mapa</string>
     <string name="upload_osm_note_description">Puedes subir informes de problemas anónimos o usar tu perfil de OpenStreetMap.org.</string>
     <string name="upload_osm_note">Subir problema(s) del mapa</string>
     <string name="recalculate_route">Recalcular ruta</string>
@@ -2696,7 +2696,7 @@ Proporciona un código completo</string>
     <string name="quick_action_start_stop_navigation">Iniciar/Parar navegación</string>
     <string name="quick_action_start_stop_navigation_descr">Pulsa este botón para iniciar la navegación, o para finalizarla si ya se había iniciado.</string>
     <string name="live_monitoring_max_interval_to_send">Tiempo del búfer para el seguimiento en línea</string>
-    <string name="live_monitoring_max_interval_to_send_desrc">Especifica el tiempo del búfer para mantener lugares para enviar sin conexión</string>
+    <string name="live_monitoring_max_interval_to_send_desrc">Especifica el tiempo que el búfer mantendrá los lugares para enviar sin conexión</string>
     <string name="mappilary_no_internet_desc">Debes tener conexión a Internet para ver fotos de Mapillary</string>
     <string name="retry">Reintentar</string>
 </resources>
