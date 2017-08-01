@@ -19,7 +19,6 @@ public class MeasurementToolFragment extends Fragment {
 
 	public static final String TAG = "MeasurementToolFragment";
 
-	private MapActivity mapActivity;
 	private MeasurementToolLayer measurementLayer;
 
 	private TextView distanceTv;
@@ -31,7 +30,7 @@ public class MeasurementToolFragment extends Fragment {
 	@Nullable
 	@Override
 	public View onCreateView(LayoutInflater inflater, @Nullable ViewGroup container, @Nullable Bundle savedInstanceState) {
-		mapActivity = (MapActivity) getActivity();
+		MapActivity mapActivity = (MapActivity) getActivity();
 		measurementLayer = mapActivity.getMapLayers().getMeasurementToolLayer();
 		IconsCache iconsCache = mapActivity.getMyApplication().getIconsCache();
 		final boolean nightMode = mapActivity.getMyApplication().getDaynightHelper().isNightModeForMapControls();
@@ -75,51 +74,64 @@ public class MeasurementToolFragment extends Fragment {
 		exitMeasurementMode();
 	}
 
+	private MapActivity getMapActivity() {
+		return (MapActivity) getActivity();
+	}
+
 	private void updateText() {
 		distanceTv.setText(measurementLayer.getDistanceSt() + ",");
 		pointsTv.setText(pointsSt + ": " + measurementLayer.getPointsCount());
 	}
 
 	private void enterMeasurementMode() {
-		measurementLayer.setInMeasurementMode(true);
-		mapActivity.refreshMap();
-		mapActivity.disableDrawer();
-		mark(View.INVISIBLE, R.id.map_left_widgets_panel, R.id.map_right_widgets_panel, R.id.map_center_info);
-		mark(View.GONE, R.id.map_route_info_button, R.id.map_menu_button, R.id.map_compass_button, R.id.map_layers_button,
-				R.id.map_search_button, R.id.map_quick_actions_button);
+		MapActivity mapActivity = getMapActivity();
+		if (mapActivity != null) {
+			measurementLayer.setInMeasurementMode(true);
+			mapActivity.refreshMap();
+			mapActivity.disableDrawer();
+			mark(View.INVISIBLE, R.id.map_left_widgets_panel, R.id.map_right_widgets_panel, R.id.map_center_info);
+			mark(View.GONE, R.id.map_route_info_button, R.id.map_menu_button, R.id.map_compass_button, R.id.map_layers_button,
+					R.id.map_search_button, R.id.map_quick_actions_button);
 
-		View collapseButton = mapActivity.findViewById(R.id.map_collapse_button);
-		if (collapseButton != null && collapseButton.getVisibility() == View.VISIBLE) {
-			wasCollapseButtonVisible = true;
-			collapseButton.setVisibility(View.INVISIBLE);
-		} else {
-			wasCollapseButtonVisible = false;
+			View collapseButton = mapActivity.findViewById(R.id.map_collapse_button);
+			if (collapseButton != null && collapseButton.getVisibility() == View.VISIBLE) {
+				wasCollapseButtonVisible = true;
+				collapseButton.setVisibility(View.INVISIBLE);
+			} else {
+				wasCollapseButtonVisible = false;
+			}
+
+			updateText();
 		}
-
-		updateText();
 	}
 
 	private void exitMeasurementMode() {
-		measurementLayer.setInMeasurementMode(false);
-		mapActivity.refreshMap();
-		mapActivity.enableDrawer();
-		mark(View.VISIBLE, R.id.map_left_widgets_panel, R.id.map_right_widgets_panel, R.id.map_center_info,
-				R.id.map_route_info_button, R.id.map_menu_button, R.id.map_compass_button, R.id.map_layers_button,
-				R.id.map_search_button, R.id.map_quick_actions_button);
+		MapActivity mapActivity = getMapActivity();
+		if (mapActivity != null) {
+			measurementLayer.setInMeasurementMode(false);
+			mapActivity.refreshMap();
+			mapActivity.enableDrawer();
+			mark(View.VISIBLE, R.id.map_left_widgets_panel, R.id.map_right_widgets_panel, R.id.map_center_info,
+					R.id.map_route_info_button, R.id.map_menu_button, R.id.map_compass_button, R.id.map_layers_button,
+					R.id.map_search_button, R.id.map_quick_actions_button);
 
-		View collapseButton = mapActivity.findViewById(R.id.map_collapse_button);
-		if (collapseButton != null && wasCollapseButtonVisible) {
-			collapseButton.setVisibility(View.VISIBLE);
+			View collapseButton = mapActivity.findViewById(R.id.map_collapse_button);
+			if (collapseButton != null && wasCollapseButtonVisible) {
+				collapseButton.setVisibility(View.VISIBLE);
+			}
+
+			measurementLayer.clearPoints();
 		}
-
-		measurementLayer.clearPoints();
 	}
 
 	private void mark(int status, int... widgets) {
-		for (int widget : widgets) {
-			View v = mapActivity.findViewById(widget);
-			if (v != null) {
-				v.setVisibility(status);
+		MapActivity mapActivity = getMapActivity();
+		if (mapActivity != null) {
+			for (int widget : widgets) {
+				View v = mapActivity.findViewById(widget);
+				if (v != null) {
+					v.setVisibility(status);
+				}
 			}
 		}
 	}
