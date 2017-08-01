@@ -484,16 +484,10 @@ public class ContextMenuLayer extends OsmandMapLayer {
 				renderedObjects = nativeLib.searchRenderedObjectsFromContext(rc, (int) (point.x - x), (int) (point.y - y));
 			}
 			if (renderedObjects != null) {
-				// double tx = c.first/ (rc->tileDivisor);
-				// double ty = c.second / (rc->tileDivisor);
-				// float dTileX = tx - rc->getLeft();
-				// float dTileY = ty - rc->getTop();
-				// rc->calcX = rc->cosRotateTileSize * dTileX - rc->sinRotateTileSize * dTileY;
-				// rc->calcY = rc->sinRotateTileSize * dTileX + rc->cosRotateTileSize * dTileY;
 				int TILE_SIZE = 256;
 				double cosRotateTileSize = Math.cos(Math.toRadians(rc.rotate)) * TILE_SIZE;
 				double sinRotateTileSize  = Math.sin(Math.toRadians(rc.rotate)) * TILE_SIZE;
-				for(RenderedObject r : renderedObjects) {
+				for (RenderedObject r : renderedObjects) {
 					double cx = r.getBbox().centerX();
 					double cy = r.getBbox().centerY();
 					double dTileX = (cx * cosRotateTileSize + cy * sinRotateTileSize) / (TILE_SIZE * TILE_SIZE);
@@ -544,15 +538,14 @@ public class ContextMenuLayer extends OsmandMapLayer {
 		}
 		if (selectedObjects.size() == 1) {
 			Object selectedObj = selectedObjects.keySet().iterator().next();
-			LatLon latLon = null;
+			LatLon latLon = objectLatLon;
 			PointDescription pointDescription = null;
 			final IContextMenuProvider provider = selectedObjects.get(selectedObj);
 			if (provider != null) {
-				latLon = provider.getObjectLocation(selectedObj);
+				if (latLon == null) {
+					latLon = provider.getObjectLocation(selectedObj);
+				}
 				pointDescription = provider.getObjectName(selectedObj);
-			}
-			if (latLon == null) {
-				latLon = objectLatLon;
 			}
 			if (latLon == null) {
 				latLon = getLatLon(point, tileBox);
