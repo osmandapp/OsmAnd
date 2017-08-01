@@ -18,6 +18,8 @@ import net.osmand.util.MapUtils;
 
 import java.util.LinkedList;
 
+import gnu.trove.list.array.TIntArrayList;
+
 public class MeasurementToolLayer extends OsmandMapLayer {
 
 	private OsmandMapTileView view;
@@ -27,10 +29,12 @@ public class MeasurementToolLayer extends OsmandMapLayer {
 	private Bitmap centerIconNight;
 	private Bitmap pointIcon;
 	private Paint bitmapPaint;
-	private RenderingLineAttributes lineAttrs;
-	private Path path;
+	private RenderingLineAttributes lineAttrs = new RenderingLineAttributes("rulerLine");
+	private Path path = new Path();
 	private int marginX;
 	private int marginY;
+	private TIntArrayList tx = new TIntArrayList();
+	private TIntArrayList ty = new TIntArrayList();
 
 	@Override
 	public void initLayer(OsmandMapTileView view) {
@@ -45,9 +49,6 @@ public class MeasurementToolLayer extends OsmandMapLayer {
 		bitmapPaint.setDither(true);
 		bitmapPaint.setFilterBitmap(true);
 
-		lineAttrs = new RenderingLineAttributes("rulerLine");
-
-		path = new Path();
 		marginY = pointIcon.getHeight() / 2;
 		marginX = pointIcon.getWidth() / 2;
 	}
@@ -87,6 +88,8 @@ public class MeasurementToolLayer extends OsmandMapLayer {
 
 			if (measurementPoints.size() > 0) {
 				path.reset();
+				tx.reset();
+				ty.reset();
 				for (int i = 0; i < measurementPoints.size(); i++) {
 					WptPt pt = measurementPoints.get(i);
 					int locX = tb.getPixXFromLonNoRot(pt.lon);
@@ -96,12 +99,17 @@ public class MeasurementToolLayer extends OsmandMapLayer {
 					} else {
 						path.lineTo(locX, locY);
 					}
+					tx.add(locX);
+					ty.add(locY);
 
 					if (tb.containsLatLon(pt.lat, pt.lon)) {
 						canvas.drawBitmap(pointIcon, locX - marginX, locY - marginY, bitmapPaint);
 					}
 				}
 				path.lineTo(tb.getCenterPixelX(), tb.getCenterPixelY());
+				tx.add(tb.getCenterPixelX());
+				ty.add(tb.getCenterPixelY());
+				calculatePath(tb, tx, ty, path);
 				canvas.drawPath(path, lineAttrs.paint);
 			}
 		}
