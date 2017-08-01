@@ -51,31 +51,31 @@
                 tools:src="@drawable/ic_action_arrow_down"/>
 
             <TextView
-                android:id="@+id/distance_text_view"
+                android:id="@+id/measurement_distance_text_view"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_centerVertical="true"
+                android:layout_marginEnd="4dp"
                 android:layout_marginLeft="8dp"
+                android:layout_marginRight="4dp"
                 android:layout_marginStart="8dp"
                 android:layout_toEndOf="@id/ruler_icon"
                 android:layout_toRightOf="@id/ruler_icon"
-                android:text="724 m, "
                 android:textAppearance="@style/TextAppearance.ListItemTitle"
-                tools:text="724 m, "/>
+                tools:text="724 m,"/>
 
             <TextView
-                android:id="@+id/dots_text_view"
+                android:id="@+id/measurement_points_text_view"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_centerVertical="true"
-                android:layout_toEndOf="@id/distance_text_view"
+                android:layout_toEndOf="@id/measurement_distance_text_view"
                 android:layout_toLeftOf="@id/up_down_icon"
-                android:layout_toRightOf="@id/distance_text_view"
+                android:layout_toRightOf="@id/measurement_distance_text_view"
                 android:layout_toStartOf="@id/up_down_icon"
-                android:text="3 dots"
                 android:textColor="?android:textColorSecondary"
                 android:textSize="@dimen/default_list_text_size"
-                tools:text="3 dots"/>
+                tools:text="points: 3"/>
         </RelativeLayout>
 
         <View
@@ -114,7 +114,7 @@
                 tools:src="@drawable/ic_action_redo_dark"/>
 
             <Button
-                android:id="@+id/add_dot_button"
+                android:id="@+id/add_point_button"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_alignParentEnd="true"
