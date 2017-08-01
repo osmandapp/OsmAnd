@@ -609,7 +609,8 @@ public class MapContextMenu extends MenuTitleController implements StateChangedL
 
 	public void onSingleTapOnMap() {
 		if (menuController == null || !menuController.handleSingleTapOnMap()) {
-			hide();
+			updateMapCenter(null);
+			close();
 			if (mapActivity.getMapLayers().getMapQuickActionLayer().isLayerOn()) {
 				mapActivity.getMapLayers().getMapQuickActionLayer().refreshLayer();
 			}
