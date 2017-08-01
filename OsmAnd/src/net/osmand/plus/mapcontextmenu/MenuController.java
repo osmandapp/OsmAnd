@@ -1,6 +1,7 @@
 package net.osmand.plus.mapcontextmenu;
 
 import android.graphics.drawable.Drawable;
+import android.os.AsyncTask;
 import android.support.annotation.NonNull;
 import android.view.View;
 import android.view.View.OnClickListener;
@@ -86,6 +87,7 @@ public abstract class MenuController extends BaseMenuController {
 		MULTI_LINE
 	}
 
+	protected MapContextMenu mapContextMenu;
 	protected MenuBuilder builder;
 	private int currentMenuState;
 	private MenuType menuType = MenuType.STANDARD;
@@ -115,6 +117,10 @@ public abstract class MenuController extends BaseMenuController {
 		this.builder = builder;
 		this.currentMenuState = getInitialMenuState();
 		this.builder.setLight(isLight());
+	}
+
+	public void setMapContextMenu(MapContextMenu mapContextMenu) {
+		this.mapContextMenu = mapContextMenu;
 	}
 
 	public void build(View rootView) {
@@ -531,114 +537,137 @@ public abstract class MenuController extends BaseMenuController {
 		}
 	}
 
-	public void buildMapDownloadButton(LatLon latLon) {
-		int point31x = MapUtils.get31TileNumberX(latLon.getLongitude());
-		int point31y = MapUtils.get31TileNumberY(latLon.getLatitude());
+	public void buildMapDownloadButton(final LatLon latLon) {
+		new AsyncTask<Void, Void, BinaryMapDataObject>() {
 
-		ResourceManager rm = getMapActivity().getMyApplication().getResourceManager();
-		OsmandRegions osmandRegions = rm.getOsmandRegions();
-
-		List<BinaryMapDataObject> mapDataObjects = null;
-		try {
-			mapDataObjects = osmandRegions.queryBbox(point31x, point31x, point31y, point31y);
-		} catch (IOException e) {
-			e.printStackTrace();
-		}
-
-		if (mapDataObjects != null) {
-			Iterator<BinaryMapDataObject> it = mapDataObjects.iterator();
-			while (it.hasNext()) {
-				BinaryMapDataObject o = it.next();
-				if (o.getTypes() != null) {
-					boolean isRegion = true;
-					for (int i = 0; i < o.getTypes().length; i++) {
-						TagValuePair tp = o.getMapIndex().decodeType(o.getTypes()[i]);
-						if ("boundary".equals(tp.value)) {
-							isRegion = false;
-							break;
-						}
-					}
-					if (!isRegion || !osmandRegions.contain(o, point31x, point31y)) {
-						it.remove();
-					}
-				}
-			}
+			ResourceManager rm;
+			OsmandRegions osmandRegions;
 			String selectedFullName = "";
-			double smallestArea = -1;
-			downloadMapDataObject = null;
-			for (BinaryMapDataObject o : mapDataObjects) {
-				String downloadName = osmandRegions.getDownloadName(o);
-				if (!Algorithms.isEmpty(downloadName)) {
-					boolean downloaded = checkIfObjectDownloaded(rm, downloadName);
-					if (downloaded) {
-						downloadMapDataObject = null;
-						break;
-					} else {
-						String fullName = osmandRegions.getFullName(o);
-						WorldRegion region = osmandRegions.getRegionData(fullName);
-						if (region != null && region.isRegionMapDownload()) {
-							double area = OsmandRegions.getArea(o);
-							if (smallestArea == -1) {
-								smallestArea = area;
-								selectedFullName = fullName;
-								downloadMapDataObject = o;
-							} else if (area < smallestArea) {
-								smallestArea = area;
-								selectedFullName = fullName;
-								downloadMapDataObject = o;
+
+			@Override
+			protected void onPreExecute() {
+				rm = getMapActivity().getMyApplication().getResourceManager();
+				osmandRegions = rm.getOsmandRegions();
+			}
+
+			@Override
+			protected BinaryMapDataObject doInBackground(Void... voids) {
+
+				int point31x = MapUtils.get31TileNumberX(latLon.getLongitude());
+				int point31y = MapUtils.get31TileNumberY(latLon.getLatitude());
+
+				List<BinaryMapDataObject> mapDataObjects = null;
+				try {
+					mapDataObjects = osmandRegions.queryBbox(point31x, point31x, point31y, point31y);
+				} catch (IOException e) {
+					e.printStackTrace();
+				}
+
+				BinaryMapDataObject binaryMapDataObject = null;
+				if (mapDataObjects != null) {
+					Iterator<BinaryMapDataObject> it = mapDataObjects.iterator();
+					while (it.hasNext()) {
+						BinaryMapDataObject o = it.next();
+						if (o.getTypes() != null) {
+							boolean isRegion = true;
+							for (int i = 0; i < o.getTypes().length; i++) {
+								TagValuePair tp = o.getMapIndex().decodeType(o.getTypes()[i]);
+								if ("boundary".equals(tp.value)) {
+									isRegion = false;
+									break;
+								}
+							}
+							if (!isRegion || !osmandRegions.contain(o, point31x, point31y)) {
+								it.remove();
+							}
+						}
+					}
+					double smallestArea = -1;
+					for (BinaryMapDataObject o : mapDataObjects) {
+						String downloadName = osmandRegions.getDownloadName(o);
+						if (!Algorithms.isEmpty(downloadName)) {
+							boolean downloaded = checkIfObjectDownloaded(rm, downloadName);
+							if (downloaded) {
+								binaryMapDataObject = null;
+								break;
+							} else {
+								String fullName = osmandRegions.getFullName(o);
+								WorldRegion region = osmandRegions.getRegionData(fullName);
+								if (region != null && region.isRegionMapDownload()) {
+									double area = OsmandRegions.getArea(o);
+									if (smallestArea == -1) {
+										smallestArea = area;
+										selectedFullName = fullName;
+										binaryMapDataObject = o;
+									} else if (area < smallestArea) {
+										smallestArea = area;
+										selectedFullName = fullName;
+										binaryMapDataObject = o;
+									}
+								}
 							}
 						}
 					}
 				}
+
+				return binaryMapDataObject;
 			}
 
-			downloaded = downloadMapDataObject == null;
-			if (!downloaded) {
-				downloadThread = getMapActivity().getMyApplication().getDownloadThread();
-				downloadRegion = osmandRegions.getRegionData(selectedFullName);
-				if (downloadRegion != null && downloadRegion.isRegionMapDownload()) {
-					List<IndexItem> indexItems = downloadThread.getIndexes().getIndexItems(downloadRegion);
-					for (IndexItem item : indexItems) {
-						if (item.getType() == DownloadActivityType.NORMAL_FILE
-								&& (item.isDownloaded() || downloadThread.isDownloading(item))) {
-							indexItem = item;
-						}
-					}
-				}
-
-				leftDownloadButtonController = new TitleButtonController() {
-					@Override
-					public void buttonPressed() {
-						if (indexItem != null) {
-							if (indexItem.getType() == DownloadActivityType.NORMAL_FILE) {
-								new DownloadValidationManager(getMapActivity().getMyApplication())
-										.startDownload(getMapActivity(), indexItem);
+			@Override
+			protected void onPostExecute(BinaryMapDataObject binaryMapDataObject) {
+				downloadMapDataObject = binaryMapDataObject;
+				downloaded = downloadMapDataObject == null;
+				if (!downloaded) {
+					downloadThread = getMapActivity().getMyApplication().getDownloadThread();
+					downloadRegion = osmandRegions.getRegionData(selectedFullName);
+					if (downloadRegion != null && downloadRegion.isRegionMapDownload()) {
+						List<IndexItem> indexItems = downloadThread.getIndexes().getIndexItems(downloadRegion);
+						for (IndexItem item : indexItems) {
+							if (item.getType() == DownloadActivityType.NORMAL_FILE
+									&& (item.isDownloaded() || downloadThread.isDownloading(item))) {
+								indexItem = item;
 							}
 						}
 					}
-				};
-				leftDownloadButtonController.caption =
-						downloadRegion != null ? downloadRegion.getLocaleName() : getMapActivity().getString(R.string.shared_string_download);
-				leftDownloadButtonController.leftIconId = R.drawable.ic_action_import;
 
-				titleProgressController = new TitleProgressController() {
-					@Override
-					public void buttonPressed() {
-						if (indexItem != null) {
-							downloadThread.cancelDownload(indexItem);
+					leftDownloadButtonController = new TitleButtonController() {
+						@Override
+						public void buttonPressed() {
+							if (indexItem != null) {
+								if (indexItem.getType() == DownloadActivityType.NORMAL_FILE) {
+									new DownloadValidationManager(getMapActivity().getMyApplication())
+											.startDownload(getMapActivity(), indexItem);
+								}
+							}
+						}
+					};
+					leftDownloadButtonController.caption =
+							downloadRegion != null ? downloadRegion.getLocaleName() : getMapActivity().getString(R.string.shared_string_download);
+					leftDownloadButtonController.leftIconId = R.drawable.ic_action_import;
+
+					titleProgressController = new TitleProgressController() {
+						@Override
+						public void buttonPressed() {
+							if (indexItem != null) {
+								downloadThread.cancelDownload(indexItem);
+							}
+						}
+					};
+
+					if (!downloadThread.getIndexes().isDownloadedFromInternet) {
+						if (getMapActivity().getMyApplication().getSettings().isInternetConnectionAvailable()) {
+							downloadThread.runReloadIndexFiles();
 						}
 					}
-				};
 
-				if (!downloadThread.getIndexes().isDownloadedFromInternet) {
-					if (getMapActivity().getMyApplication().getSettings().isInternetConnectionAvailable()) {
-						downloadThread.runReloadIndexFiles();
+					if (mapContextMenu != null) {
+						mapContextMenu.updateMenuUI();
 					}
 				}
-
-				updateData();
 			}
-		}
+
+		}.executeOnExecutor(AsyncTask.THREAD_POOL_EXECUTOR);
+
 	}
 
 	private boolean checkIfObjectDownloaded(ResourceManager rm, String downloadName) {

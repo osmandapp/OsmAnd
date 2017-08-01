@@ -305,6 +305,9 @@ public class MapContextMenu extends MenuTitleController implements StateChangedL
 		appModeChanged = false;
 
 		if (needAcquireMenuController) {
+			if (menuController != null) {
+				menuController.setMapContextMenu(null);
+			}
 			if (!acquireMenuController(restorePrevious)) {
 				active = false;
 				clearSelectedObject(object);
@@ -375,6 +378,13 @@ public class MapContextMenu extends MenuTitleController implements StateChangedL
 	public void update(LatLon latLon, PointDescription pointDescription, Object object) {
 		WeakReference<MapContextMenuFragment> fragmentRef = findMenuFragment();
 		init(latLon, pointDescription, object, true, false);
+		if (fragmentRef != null) {
+			fragmentRef.get().rebuildMenu();
+		}
+	}
+
+	public void rebuildMenu() {
+		WeakReference<MapContextMenuFragment> fragmentRef = findMenuFragment();
 		if (fragmentRef != null) {
 			fragmentRef.get().rebuildMenu();
 		}
@@ -526,6 +536,7 @@ public class MapContextMenu extends MenuTitleController implements StateChangedL
 		}
 		menuController = MenuController.getMenuController(mapActivity, latLon, pointDescription, object, MenuType.STANDARD);
 		if (menuController.setActive(true)) {
+			menuController.setMapContextMenu(this);
 			if (menuData != null && (object != menuData.getObject())
 					&& (menuController.hasBackAction() || menuData.hasBackAction())) {
 				historyStack.add(menuData);
@@ -599,16 +610,18 @@ public class MapContextMenu extends MenuTitleController implements StateChangedL
 	public void onSingleTapOnMap() {
 		if (menuController == null || !menuController.handleSingleTapOnMap()) {
 			hide();
-			if (mapActivity.getMapLayers().getMapQuickActionLayer().isLayerOn())
+			if (mapActivity.getMapLayers().getMapQuickActionLayer().isLayerOn()) {
 				mapActivity.getMapLayers().getMapQuickActionLayer().refreshLayer();
+			}
 		}
 	}
 
 	@Override
 	public void onSearchAddressDone() {
 		WeakReference<MapContextMenuFragment> fragmentRef = findMenuFragment();
-		if (fragmentRef != null)
+		if (fragmentRef != null) {
 			fragmentRef.get().refreshTitle();
+		}
 
 		if (searchDoneAction != null) {
 				if (searchDoneAction.dlg != null) {
