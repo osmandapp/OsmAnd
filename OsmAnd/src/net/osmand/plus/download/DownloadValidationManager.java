@@ -224,8 +224,7 @@ public class DownloadValidationManager {
 					@Override
 					public void onClick(DialogInterface dialog, int which) {
 						Intent intent = new Intent(Intent.ACTION_VIEW,
-								Uri.parse(Version.marketPrefix(getMyApplication())
-										+ "net.osmand.plus"));
+								Uri.parse(Version.getUrlWithUtmRef(getMyApplication(), "net.osmand.plus")));
 						try {
 							startActivity(intent);
 						} catch (ActivityNotFoundException e) {

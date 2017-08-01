@@ -35,8 +35,7 @@ public class MapillaryInstallDialogFragment extends DialogFragment {
 			@Override
 			public void onClick(DialogInterface dialog, int which) {
 				dialog.dismiss();
-				mapActivity.getMyApplication().logEvent(mapActivity, "click_install_mapillary");
-				MapillaryPlugin.installMapillary(mapActivity.getMyApplication());
+				MapillaryPlugin.installMapillary(mapActivity, mapActivity.getMyApplication());
 			}
 		});
 

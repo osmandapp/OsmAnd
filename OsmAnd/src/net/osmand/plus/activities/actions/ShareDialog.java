@@ -198,8 +198,7 @@ public class ShareDialog {
 				builder.setPositiveButton(activity.getString(R.string.shared_string_yes), new DialogInterface.OnClickListener() {
 					@Override
 					public void onClick(DialogInterface dialog, int which) {
-						Intent intent = new Intent(Intent.ACTION_VIEW, Uri.parse(Version.marketPrefix((OsmandApplication) activity.getApplication()) 
-								+ ZXING_BARCODE_SCANNER_COMPONENT));
+						Intent intent = new Intent(Intent.ACTION_VIEW, Uri.parse(Version.getUrlWithUtmRef((OsmandApplication) activity.getApplication(), ZXING_BARCODE_SCANNER_COMPONENT)));
 						try {
 							activity.startActivity(intent);
 						} catch (ActivityNotFoundException e) {
