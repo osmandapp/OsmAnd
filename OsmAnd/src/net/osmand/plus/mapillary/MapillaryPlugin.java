@@ -2,6 +2,7 @@ package net.osmand.plus.mapillary;
 
 import android.app.Activity;
 import android.content.ActivityNotFoundException;
+import android.content.Context;
 import android.content.Intent;
 import android.net.Uri;
 import android.os.Bundle;
@@ -23,6 +24,7 @@ import net.osmand.plus.OsmandApplication;
 import net.osmand.plus.OsmandPlugin;
 import net.osmand.plus.OsmandSettings;
 import net.osmand.plus.R;
+import net.osmand.plus.Version;
 import net.osmand.plus.activities.MapActivity;
 import net.osmand.plus.activities.MapActivityLayers;
 import net.osmand.plus.base.BottomSheetDialogFragment;
@@ -34,6 +36,7 @@ import net.osmand.plus.views.mapwidgets.MapWidgetRegistry.MapWidgetRegInfo;
 import net.osmand.plus.views.mapwidgets.TextInfoWidget;
 import net.osmand.util.Algorithms;
 
+import java.lang.reflect.Method;
 import java.text.MessageFormat;
 import java.util.List;
 
@@ -235,8 +238,9 @@ public class MapillaryPlugin extends OsmandPlugin {
 		return success;
 	}
 
-	public static boolean installMapillary(OsmandApplication app) {
-		boolean success = execInstall(app, "market://details?id=" + MAPILLARY_PACKAGE_ID);
+	public static boolean installMapillary(Activity activity, OsmandApplication app) {
+		app.logEvent(activity, "install_mapillary");
+		boolean success = execInstall(app, Version.getUrlWithUtmRef(app, MAPILLARY_PACKAGE_ID));
 		if (!success) {
 			success = execInstall(app, "https://play.google.com/store/apps/details?id=" + MAPILLARY_PACKAGE_ID);
 		}

@@ -248,7 +248,7 @@ public class DownloadActivity extends AbstractDownloadActivity implements Downlo
 			} else {
 				app.logEvent(this, "paid_version_redirect");
 				Intent intent = new Intent(Intent.ACTION_VIEW,
-						Uri.parse(Version.marketPrefix(app) + "net.osmand.plus"));
+						Uri.parse(Version.getUrlWithUtmRef(app, "net.osmand.plus")));
 				try {
 					startActivity(intent);
 				} catch (ActivityNotFoundException e) {

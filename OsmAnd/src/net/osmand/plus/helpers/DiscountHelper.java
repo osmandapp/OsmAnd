@@ -147,7 +147,7 @@ public class DiscountHelper {
 			int i = url.indexOf("osmand-market-app:");
 			if (i != -1) {
 				String appName = url.substring(i + 18);
-				return Version.marketPrefix(app) + appName;
+				return Version.getUrlWithUtmRef(app, appName);
 			}
 		}
 		return url;
