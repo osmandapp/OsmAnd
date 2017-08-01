@@ -24,7 +24,6 @@ public class MeasurementToolFragment extends Fragment {
 
 	private TextView distanceTv;
 	private TextView pointsTv;
-	private String distanceSt;
 	private String pointsSt;
 
 	private boolean wasCollapseButtonVisible;
@@ -38,8 +37,7 @@ public class MeasurementToolFragment extends Fragment {
 		final boolean nightMode = mapActivity.getMyApplication().getDaynightHelper().isNightModeForMapControls();
 		final int themeRes = nightMode ? R.style.OsmandDarkTheme : R.style.OsmandLightTheme;
 
-		distanceSt = mapActivity.getString(R.string.measurement_distance);
-		pointsSt = mapActivity.getString(R.string.measurement_points);
+		pointsSt = mapActivity.getString(R.string.points).toLowerCase();
 
 		View view = View.inflate(new ContextThemeWrapper(getContext(), themeRes), R.layout.fragment_measurement_tool, null);
 
@@ -78,8 +76,8 @@ public class MeasurementToolFragment extends Fragment {
 	}
 
 	private void updateText() {
-		distanceTv.setText(String.format(distanceSt, measurementLayer.getDistanceSt()));
-		pointsTv.setText(String.format(pointsSt, measurementLayer.getPointsCount()));
+		distanceTv.setText(measurementLayer.getDistanceSt() + ",");
+		pointsTv.setText(pointsSt + ": " + measurementLayer.getPointsCount());
 	}
 
 	private void enterMeasurementMode() {
