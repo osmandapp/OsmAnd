@@ -78,6 +78,7 @@ public class MeasurementToolLayer extends OsmandMapLayer {
 
 	void clearPoints() {
 		measurementPoints.clear();
+		view.refreshMap();
 	}
 
 	@Override

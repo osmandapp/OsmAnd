@@ -1,0 +1,11 @@
+<?xml version="1.0" encoding="utf-8"?>
+<menu xmlns:android="http://schemas.android.com/apk/res/android">
+    <item
+        android:id="@+id/action_save_as_gpx"
+        android:icon="@drawable/ic_action_polygom_dark"
+        android:title="@string/shared_string_save_as_gpx"/>
+    <item
+        android:id="@+id/action_clear_all"
+        android:icon="@drawable/ic_action_reset_to_default_dark"
+        android:title="@string/shared_string_clear_all"/>
+</menu>
