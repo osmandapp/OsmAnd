@@ -223,6 +223,9 @@
         <include layout="@layout/move_marker_bottom_sheet"
                  tools:visibility="gone"/>
 
+        <include layout="@layout/add_gpx_waypoint_bottom_sheet"
+                 tools:visibility="gone"/>
+
         <FrameLayout
             android:id="@+id/bottomFragmentContainer"
             android:layout_width="match_parent"

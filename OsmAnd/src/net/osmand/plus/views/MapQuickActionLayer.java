@@ -52,7 +52,7 @@ public class MapQuickActionLayer extends OsmandMapLayer implements QuickActionRe
     private boolean           wasCollapseButtonVisible;
     private int               previousMapPosition;
 
-    private boolean inChangeMarkerPositionMode;
+    private boolean inMovingMarkerMode;
     private boolean isLayerOn;
 
 	private boolean nightMode;
@@ -233,7 +233,7 @@ public class MapQuickActionLayer extends OsmandMapLayer implements QuickActionRe
         double lon = rb.getLonFromPixel(tileBox.getCenterPixelX(), tileBox.getCenterPixelY());
         view.setLatLon(lat, lon);
 
-        inChangeMarkerPositionMode = true;
+        inMovingMarkerMode = true;
         mark(View.INVISIBLE, R.id.map_ruler_layout,
                 R.id.map_left_widgets_panel, R.id.map_right_widgets_panel, R.id.map_center_info);
 
@@ -268,7 +268,7 @@ public class MapQuickActionLayer extends OsmandMapLayer implements QuickActionRe
         }
         view.setMapPosition(previousMapPosition);
 
-        inChangeMarkerPositionMode = false;
+        inMovingMarkerMode = false;
         mark(View.VISIBLE, R.id.map_ruler_layout,
                 R.id.map_left_widgets_panel, R.id.map_right_widgets_panel, R.id.map_center_info);
 
@@ -290,7 +290,7 @@ public class MapQuickActionLayer extends OsmandMapLayer implements QuickActionRe
 
     @Override
     public boolean onSingleTap(PointF point, RotatedTileBox tileBox) {
-        if (isInChangeMarkerPositionMode() && !pressedQuickActionWidget(point.x, point.y)) {
+        if (isInMovingMarkerMode() && !pressedQuickActionWidget(point.x, point.y)) {
             setLayerState(false);
             return true;
         } else
@@ -304,7 +304,7 @@ public class MapQuickActionLayer extends OsmandMapLayer implements QuickActionRe
     @Override
     public void onDraw(Canvas canvas, RotatedTileBox box, DrawSettings settings) {
 		boolean nightMode = settings != null && settings.isNightMode();
-        if (isInChangeMarkerPositionMode()) {
+        if (isInMovingMarkerMode()) {
             canvas.translate(box.getCenterPixelX() - contextMarker.getWidth() / 2, box.getCenterPixelY() - contextMarker.getHeight());
             contextMarker.draw(canvas);
         }
@@ -352,8 +352,8 @@ public class MapQuickActionLayer extends OsmandMapLayer implements QuickActionRe
         return new PointF(tb.getPixWidth() / 2, tb.getPixHeight() / 2);
     }
 
-    public boolean isInChangeMarkerPositionMode() {
-        return isLayerOn && inChangeMarkerPositionMode;
+    public boolean isInMovingMarkerMode() {
+        return isLayerOn && inMovingMarkerMode;
     }
 
     public boolean isLayerOn() {

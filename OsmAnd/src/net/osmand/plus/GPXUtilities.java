@@ -102,18 +102,15 @@ public class GPXUtilities {
 		public float speed;
 	}
 
-	public static class CreatedGpxWaypoint {
-		private WptPt point;
+	public static class NewGpxWaypoint {
+		private GPXFile gpx;
 
-		public CreatedGpxWaypoint() {
+		public NewGpxWaypoint(GPXFile gpx) {
+			this.gpx = gpx;
 		}
 
-		public WptPt getPoint() {
-			return point;
-		}
-
-		public void setPoint(WptPt point) {
-			this.point = point;
+		public GPXFile getGpx() {
+			return gpx;
 		}
 	}
 

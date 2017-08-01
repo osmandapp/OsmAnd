@@ -712,7 +712,7 @@ public class MapControlsLayer extends OsmandMapLayer {
 				((app.accessibilityEnabled() || (System.currentTimeMillis() - touchEvent < TIMEOUT_TO_SHOW_BUTTONS)) && routeFollowingMode);
 		updateMyLocation(rh, routeDialogOpened || trackDialogOpened);
 		boolean showButtons = (showRouteCalculationControls || !routeFollowingMode)
-				&& !isInChangeMarkerPositionMode() && !isInGpxDetailsMode();
+				&& !isInMovingMarkerMode() && !isInGpxDetailsMode();
 		//routePlanningBtn.setIconResId(routeFollowingMode ? R.drawable.ic_action_gabout_dark : R.drawable.map_directions);
 		if (rh.isFollowingMode()) {
 			routePlanningBtn.setIconResId(R.drawable.map_start_navigation);
@@ -1118,9 +1118,9 @@ public class MapControlsLayer extends OsmandMapLayer {
 		this.mapQuickActionLayer = mapQuickActionLayer;
 	}
 
-	private boolean isInChangeMarkerPositionMode(){
-		return mapQuickActionLayer == null ? contextMenuLayer.isInChangeMarkerPositionMode() :
-				mapQuickActionLayer.isInChangeMarkerPositionMode() || contextMenuLayer.isInChangeMarkerPositionMode();
+	private boolean isInMovingMarkerMode(){
+		return mapQuickActionLayer == null ? contextMenuLayer.isInChangeMarkerPositionMode() || contextMenuLayer.isInAddGpxWaypointMode():
+				mapQuickActionLayer.isInMovingMarkerMode() || contextMenuLayer.isInChangeMarkerPositionMode() || contextMenuLayer.isInAddGpxWaypointMode();
 	}
 
 	private boolean isInGpxDetailsMode() {

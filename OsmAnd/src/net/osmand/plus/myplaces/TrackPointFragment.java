@@ -30,6 +30,7 @@ import android.widget.ListView;
 import android.widget.TextView;
 
 import net.osmand.AndroidUtils;
+import net.osmand.Location;
 import net.osmand.data.FavouritePoint;
 import net.osmand.data.LatLon;
 import net.osmand.data.PointDescription;
@@ -38,7 +39,7 @@ import net.osmand.plus.GPXDatabase.GpxDataItem;
 import net.osmand.plus.GPXUtilities;
 import net.osmand.plus.GPXUtilities.WptPt;
 import net.osmand.plus.GPXUtilities.GPXFile;
-import net.osmand.plus.GPXUtilities.CreatedGpxWaypoint;
+import net.osmand.plus.GPXUtilities.NewGpxWaypoint;
 import net.osmand.plus.GpxSelectionHelper.GpxDisplayGroup;
 import net.osmand.plus.GpxSelectionHelper.GpxDisplayItem;
 import net.osmand.plus.GpxSelectionHelper.GpxDisplayItemType;
@@ -93,13 +94,11 @@ public class TrackPointFragment extends OsmandExpandableListFragment {
 	private ActionMode actionMode;
 	private SearchView searchView;
 	private FloatingActionButton fab;
-	private CreatedGpxWaypoint createdGpxWaypoint;
 
 	@Override
 	public void onCreate(@Nullable Bundle savedInstanceState) {
 		super.onCreate(savedInstanceState);
 		this.app = getMyApplication();
-		this.createdGpxWaypoint = new CreatedGpxWaypoint();
 	}
 
 	@Override
@@ -123,14 +122,13 @@ public class TrackPointFragment extends OsmandExpandableListFragment {
 			public void onClick(View view) {
 				final OsmandSettings settings = app.getSettings();
 				GPXFile gpx = getGpx();
-				WptPt pointToShow = gpx != null ? gpx.findPointToShow() : null;
-				if (pointToShow != null) {
-					LatLon location = new LatLon(pointToShow.lat, pointToShow.lon);
+				Location location = app.getLocationProvider().getLastKnownLocation();
+				if (location != null) {
 					settings.setMapLocationToShow(location.getLatitude(), location.getLongitude(),
 							settings.getLastKnownMapZoom(),
 							new PointDescription(PointDescription.POINT_TYPE_WPT, getString(R.string.context_menu_item_add_waypoint)),
 							false,
-							createdGpxWaypoint);
+							new NewGpxWaypoint(gpx));
 
 					MapActivity.launchMapActivityMoveToTop(getActivity());
 				}

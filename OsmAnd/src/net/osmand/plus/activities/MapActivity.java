@@ -57,7 +57,8 @@ import net.osmand.plus.AppInitializer;
 import net.osmand.plus.AppInitializer.AppInitializeListener;
 import net.osmand.plus.AppInitializer.InitEvents;
 import net.osmand.plus.ApplicationMode;
-import net.osmand.plus.GPXUtilities.WptPt;
+import net.osmand.plus.GPXUtilities;
+import net.osmand.plus.GPXUtilities.NewGpxWaypoint;
 import net.osmand.plus.GpxSelectionHelper.GpxDisplayItem;
 import net.osmand.plus.MapMarkersHelper.MapMarker;
 import net.osmand.plus.MapMarkersHelper.MapMarkerChangedListener;
@@ -913,10 +914,10 @@ public class MapActivity extends OsmandActionBarActivity implements DownloadEven
 				} else if (toShow instanceof QuadRect) {
 					QuadRect qr = (QuadRect) toShow;
 					mapView.fitRectToMap(qr.left, qr.right, qr.top, qr.bottom, (int) qr.width(), (int) qr.height(), 0);
-				} else if (toShow instanceof WptPt) {
-					WptPt createdGpxWaypoint = (WptPt) toShow;
-				}
-				else {
+				} else if (toShow instanceof NewGpxWaypoint) {
+					NewGpxWaypoint newGpxWaypoint = (NewGpxWaypoint) toShow;
+					getMapLayers().getContextMenuLayer().enterAddGpxWaypointMode(newGpxWaypoint);
+				} else {
 					mapContextMenu.show(latLonToShow, mapLabelToShow, toShow);
 				}
 				if (editToShow) {
