@@ -26,7 +26,6 @@ import net.osmand.AndroidUtils;
 import net.osmand.plus.R;
 import net.osmand.plus.Version;
 import net.osmand.plus.activities.MapActivity;
-import net.osmand.plus.views.OsmandMapTileView;
 
 public class StartGPSStatus extends OsmAndAction {
 
@@ -178,7 +177,7 @@ public class StartGPSStatus extends OsmAndAction {
 				builder.setPositiveButton(mapActivity.getString(R.string.shared_string_yes), new DialogInterface.OnClickListener() {
 					@Override
 					public void onClick(DialogInterface dialog, int which) {
-						Intent intent = new Intent(Intent.ACTION_VIEW, Uri.parse(Version.marketPrefix(getMyApplication()) + g.appName));
+						Intent intent = new Intent(Intent.ACTION_VIEW, Uri.parse(Version.getUrlWithUtmRef(getMyApplication(), g.appName)));
 						try {
 							mapActivity.startActivity(intent);
 						} catch (ActivityNotFoundException e) {

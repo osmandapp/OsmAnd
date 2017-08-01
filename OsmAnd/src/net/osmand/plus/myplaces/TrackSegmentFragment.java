@@ -236,7 +236,11 @@ public class TrackSegmentFragment extends OsmAndListFragment {
 	}
 
 	private GPXFile getGpx() {
-		return getTrackActivity().getGpx();
+		TrackActivity activity = getTrackActivity();
+		if (activity == null) {
+			return null;
+		}
+		return activity.getGpx();
 	}
 
 	private GpxDataItem getGpxDataItem() {
