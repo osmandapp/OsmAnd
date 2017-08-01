@@ -19,8 +19,6 @@ public class MeasurementToolFragment extends Fragment {
 
 	public static final String TAG = "MeasurementToolFragment";
 
-	private MeasurementToolLayer measurementLayer;
-
 	private TextView distanceTv;
 	private TextView pointsTv;
 	private String pointsSt;
@@ -31,7 +29,7 @@ public class MeasurementToolFragment extends Fragment {
 	@Override
 	public View onCreateView(LayoutInflater inflater, @Nullable ViewGroup container, @Nullable Bundle savedInstanceState) {
 		MapActivity mapActivity = (MapActivity) getActivity();
-		measurementLayer = mapActivity.getMapLayers().getMeasurementToolLayer();
+		final MeasurementToolLayer measurementLayer = mapActivity.getMapLayers().getMeasurementToolLayer();
 		IconsCache iconsCache = mapActivity.getMyApplication().getIconsCache();
 		final boolean nightMode = mapActivity.getMyApplication().getDaynightHelper().isNightModeForMapControls();
 		final int themeRes = nightMode ? R.style.OsmandDarkTheme : R.style.OsmandLightTheme;
@@ -78,14 +76,26 @@ public class MeasurementToolFragment extends Fragment {
 		return (MapActivity) getActivity();
 	}
 
+	private MeasurementToolLayer getMeasurementLayer() {
+		MapActivity mapActivity = getMapActivity();
+		if (mapActivity != null) {
+			return mapActivity.getMapLayers().getMeasurementToolLayer();
+		}
+		return null;
+	}
+
 	private void updateText() {
-		distanceTv.setText(measurementLayer.getDistanceSt() + ",");
-		pointsTv.setText(pointsSt + ": " + measurementLayer.getPointsCount());
+		MeasurementToolLayer measurementLayer = getMeasurementLayer();
+		if (measurementLayer != null) {
+			distanceTv.setText(measurementLayer.getDistanceSt() + ",");
+			pointsTv.setText(pointsSt + ": " + measurementLayer.getPointsCount());
+		}
 	}
 
 	private void enterMeasurementMode() {
 		MapActivity mapActivity = getMapActivity();
-		if (mapActivity != null) {
+		MeasurementToolLayer measurementLayer = getMeasurementLayer();
+		if (mapActivity != null && measurementLayer != null) {
 			measurementLayer.setInMeasurementMode(true);
 			mapActivity.refreshMap();
 			mapActivity.disableDrawer();
@@ -107,7 +117,8 @@ public class MeasurementToolFragment extends Fragment {
 
 	private void exitMeasurementMode() {
 		MapActivity mapActivity = getMapActivity();
-		if (mapActivity != null) {
+		MeasurementToolLayer measurementLayer = getMeasurementLayer();
+		if (mapActivity != null && measurementLayer != null) {
 			measurementLayer.setInMeasurementMode(false);
 			mapActivity.refreshMap();
 			mapActivity.enableDrawer();
