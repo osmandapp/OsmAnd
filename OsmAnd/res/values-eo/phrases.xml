@@ -79,7 +79,7 @@
 	<string name="poi_boutique">Galanteriejo</string>
 	<string name="poi_camera">Fotiloj-k-lensoj vendejo</string>
 	<string name="poi_carpet">Tapiŝ-vendejo</string>
-	<string name="poi_chemist">Drogejo</string>
+	<string name="poi_chemist">Purigaĵ-vendejo</string>
 	<string name="poi_charity">Almoza vendejo</string>
 	<string name="poi_clothes">Vest-vendejo</string>
 	<string name="poi_clothes_children">Infanvest-vendejo</string>
@@ -1775,19 +1775,19 @@
 	<string name="poi_bin_yes">Kun rubujo</string>
 	<string name="poi_bin_no">Sen rubujo</string>
 
-	<string name="poi_shelter_type_public_transport">Publik-transporta</string>
+	<string name="poi_shelter_type_public_transport">publik-transporta</string>
 	<string name="poi_shelter_type_tent">Ŝirmeja-speco: tendo</string>
 	<string name="poi_shelter_type_abandoned">Ŝirmeja-speco: forlasita objekto</string>
 
-	<string name="poi_shelter_type_sun_shelter">Kontraŭ-suna</string>
-	<string name="poi_shelter_type_building">Konstruaĵo</string>
-	<string name="poi_shelter_type_wildlife_hide">Best-observejo</string>
-	<string name="poi_shelter_type_rock_shelter">Groto</string>
-	<string name="poi_shelter_type_picnic_shelter">Senflankmura (piknika)</string>
-	<string name="poi_shelter_type_lean_to">Duon-ferma</string>
-	<string name="poi_shelter_type_weather_shelter">Budo kontraŭ-vetera</string>
-	<string name="poi_shelter_type_basic_hut">Kabano</string>
-	<string name="poi_shelter_type_field_shelter">Best-ŝirmejo</string>
+	<string name="poi_shelter_type_sun_shelter">kontraŭsuna</string>
+	<string name="poi_shelter_type_building">konstruaĵo</string>
+	<string name="poi_shelter_type_wildlife_hide">best-observejo</string>
+	<string name="poi_shelter_type_rock_shelter">groto</string>
+	<string name="poi_shelter_type_picnic_shelter">senflankmura (piknika)</string>
+	<string name="poi_shelter_type_lean_to">duon-ferma</string>
+	<string name="poi_shelter_type_weather_shelter">budo kontraŭvetera</string>
+	<string name="poi_shelter_type_basic_hut">kabano</string>
+	<string name="poi_shelter_type_field_shelter">best-ŝirmejo</string>
 	<string name="poi_internet_access_type_wlan">sendrata</string>
 	<string name="poi_internet_access_type_terminal">terminalo</string>
 	<string name="poi_internet_access_type_wired">drata</string>
