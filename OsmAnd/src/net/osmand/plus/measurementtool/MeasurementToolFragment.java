@@ -57,7 +57,7 @@ public class MeasurementToolFragment extends Fragment {
 		((ImageView) mainView.findViewById(R.id.ruler_icon))
 				.setImageDrawable(iconsCache.getIcon(R.drawable.ic_action_ruler, R.color.color_myloc_distance));
 
-		ImageButton upDownBtn = ((ImageButton) mainView.findViewById(R.id.up_down_button));
+		final ImageButton upDownBtn = ((ImageButton) mainView.findViewById(R.id.up_down_button));
 		upDownBtn.setImageDrawable(iconsCache.getThemedIcon(R.drawable.ic_action_arrow_up));
 		upDownBtn.setOnClickListener(new View.OnClickListener() {
 			@Override
@@ -66,21 +66,34 @@ public class MeasurementToolFragment extends Fragment {
 			}
 		});
 
-		ImageButton undoBtn = ((ImageButton) mainView.findViewById(R.id.undo_point_button));
+		final ImageButton undoBtn = ((ImageButton) mainView.findViewById(R.id.undo_point_button));
+		final ImageButton redoBtn = ((ImageButton) mainView.findViewById(R.id.redo_point_button));
+
 		undoBtn.setImageDrawable(iconsCache.getThemedIcon(R.drawable.ic_action_undo_dark));
 		undoBtn.setOnClickListener(new View.OnClickListener() {
 			@Override
 			public void onClick(View view) {
-
+				if (measurementLayer.undoPointOnClick()) {
+					enable(undoBtn);
+				} else {
+					disable(undoBtn);
+				}
+				enable(redoBtn);
+				updateText();
 			}
 		});
 
-		ImageButton redoBtn = ((ImageButton) mainView.findViewById(R.id.redo_point_button));
 		redoBtn.setImageDrawable(iconsCache.getThemedIcon(R.drawable.ic_action_redo_dark));
 		redoBtn.setOnClickListener(new View.OnClickListener() {
 			@Override
 			public void onClick(View view) {
-
+				if (measurementLayer.redoPointOnClick()) {
+					enable(redoBtn);
+				} else {
+					disable(redoBtn);
+				}
+				enable(undoBtn);
+				updateText();
 			}
 		});
 
@@ -88,6 +101,8 @@ public class MeasurementToolFragment extends Fragment {
 			@Override
 			public void onClick(View view) {
 				measurementLayer.addPointOnClick();
+				enable(undoBtn);
+				disable(redoBtn);
 				updateText();
 			}
 		});
@@ -123,6 +138,7 @@ public class MeasurementToolFragment extends Fragment {
 									return true;
 								case R.id.action_clear_all:
 									measurementLayer.clearPoints();
+									disable(undoBtn, redoBtn);
 									updateText();
 									return true;
 							}
