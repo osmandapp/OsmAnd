@@ -261,4 +261,11 @@
         android:layout_gravity="bottom|left"
         tools:visibility="visible"/>
 
+    <include
+        layout="@layout/add_gpx_waypoint_bottom_sheet"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_gravity="bottom|left"
+        tools:visibility="visible"/>
+
 </LinearLayout>

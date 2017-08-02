@@ -78,6 +78,7 @@ public class MeasurementToolLayer extends OsmandMapLayer {
 
 	void clearPoints() {
 		measurementPoints.clear();
+		view.refreshMap();
 	}
 
 	@Override
@@ -133,7 +134,13 @@ public class MeasurementToolLayer extends OsmandMapLayer {
 		WptPt pt = new WptPt();
 		pt.lat = l.getLatitude();
 		pt.lon = l.getLongitude();
-		measurementPoints.add(pt);
+		if (measurementPoints.size() > 0) {
+			if (!measurementPoints.get(measurementPoints.size() - 1).equals(pt)) {
+				measurementPoints.add(pt);
+			}
+		} else {
+			measurementPoints.add(pt);
+		}
 		view.refreshMap();
 	}
 
