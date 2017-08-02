@@ -28,6 +28,7 @@ import net.osmand.plus.R;
 import net.osmand.plus.SQLiteTileSource;
 import net.osmand.plus.activities.MapActivity.ShowQuickSearchMode;
 import net.osmand.plus.helpers.GpxUiHelper;
+import net.osmand.plus.measurementtool.MeasurementToolLayer;
 import net.osmand.plus.poi.PoiFiltersHelper;
 import net.osmand.plus.poi.PoiUIFilter;
 import net.osmand.plus.quickaction.QuickActionRegistry;
@@ -88,6 +89,7 @@ public class MapActivityLayers {
 	private DownloadedRegionsLayer downloadedRegionsLayer;
 	private MapWidgetRegistry mapWidgetRegistry;
 	private QuickActionRegistry quickActionRegistry;
+	private MeasurementToolLayer measurementToolLayer;
 
 	private StateChangedListener<Integer> transparencyListener;
 
@@ -148,6 +150,9 @@ public class MapActivityLayers {
 		// 4. favorites layer
 		mFavouritesLayer = new FavouritesLayer();
 		mapView.addLayer(mFavouritesLayer, 4);
+		// 4.6 measurement tool layer
+		measurementToolLayer = new MeasurementToolLayer();
+		mapView.addLayer(measurementToolLayer, 4.6f);
 		// 5. transport layer
 		transportStopsLayer = new TransportStopsLayer(activity);
 		mapView.addLayer(transportStopsLayer, 5);
@@ -581,6 +586,10 @@ public class MapActivityLayers {
 
 	public FavouritesLayer getFavouritesLayer() {
 		return mFavouritesLayer;
+	}
+
+	public MeasurementToolLayer getMeasurementToolLayer() {
+		return measurementToolLayer;
 	}
 
 	public MapTextLayer getMapTextLayer() {
