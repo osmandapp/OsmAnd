@@ -5,20 +5,28 @@ import android.support.annotation.Nullable;
 import android.support.v4.app.Fragment;
 import android.view.ContextThemeWrapper;
 import android.view.LayoutInflater;
+import android.view.Menu;
+import android.view.MenuItem;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.ImageView;
 import android.widget.TextView;
+import android.widget.Toast;
 
 import net.osmand.AndroidUtils;
 import net.osmand.plus.IconsCache;
 import net.osmand.plus.R;
 import net.osmand.plus.activities.MapActivity;
+import net.osmand.plus.helpers.AndroidUiHelper;
+import net.osmand.plus.views.mapwidgets.MapInfoWidgetsFactory;
+import net.osmand.plus.views.mapwidgets.MapInfoWidgetsFactory.TopToolbarController;
+import net.osmand.plus.widgets.IconPopupMenu;
 
 public class MeasurementToolFragment extends Fragment {
 
 	public static final String TAG = "MeasurementToolFragment";
 
+	private MeasurementToolBarController toolBarController;
 	private TextView distanceTv;
 	private TextView pointsTv;
 	private String pointsSt;
@@ -28,11 +36,12 @@ public class MeasurementToolFragment extends Fragment {
 	@Nullable
 	@Override
 	public View onCreateView(LayoutInflater inflater, @Nullable ViewGroup container, @Nullable Bundle savedInstanceState) {
-		MapActivity mapActivity = (MapActivity) getActivity();
+		final MapActivity mapActivity = (MapActivity) getActivity();
 		final MeasurementToolLayer measurementLayer = mapActivity.getMapLayers().getMeasurementToolLayer();
 		IconsCache iconsCache = mapActivity.getMyApplication().getIconsCache();
 		final boolean nightMode = mapActivity.getMyApplication().getDaynightHelper().isNightModeForMapControls();
 		final int themeRes = nightMode ? R.style.OsmandDarkTheme : R.style.OsmandLightTheme;
+		boolean portrait = AndroidUiHelper.isOrientationPortrait(mapActivity);
 
 		pointsSt = mapActivity.getString(R.string.points).toLowerCase();
 
@@ -62,6 +71,45 @@ public class MeasurementToolFragment extends Fragment {
 		});
 
 		enterMeasurementMode();
+
+		if (portrait) {
+			toolBarController = new MeasurementToolBarController();
+			toolBarController.setTitle(mapActivity.getString(R.string.measurement_tool_action_bar));
+			toolBarController.setOnBackButtonClickListener(new View.OnClickListener() {
+				@Override
+				public void onClick(View v) {
+					mapActivity.onBackPressed();
+				}
+			});
+			toolBarController.setOnCloseButtonClickListener(new View.OnClickListener() {
+				@Override
+				public void onClick(View v) {
+					IconPopupMenu popup = new IconPopupMenu(mapActivity, mapActivity.findViewById(R.id.widget_top_bar_close_button));
+					popup.getMenuInflater().inflate(R.menu.measurement_tool_menu, popup.getMenu());
+					final Menu menu = popup.getMenu();
+					IconsCache ic = mapActivity.getMyApplication().getIconsCache();
+					menu.findItem(R.id.action_save_as_gpx).setIcon(ic.getThemedIcon(R.drawable.ic_action_polygom_dark));
+					menu.findItem(R.id.action_clear_all).setIcon(ic.getThemedIcon(R.drawable.ic_action_reset_to_default_dark));
+					popup.setOnMenuItemClickListener(new IconPopupMenu.OnMenuItemClickListener() {
+						@Override
+						public boolean onMenuItemClick(MenuItem menuItem) {
+							switch (menuItem.getItemId()) {
+								case R.id.action_save_as_gpx:
+									Toast.makeText(mapActivity, "Save as gpx", Toast.LENGTH_SHORT).show();
+									return true;
+								case R.id.action_clear_all:
+									measurementLayer.clearPoints();
+									updateText();
+									return true;
+							}
+							return false;
+						}
+					});
+					popup.show();
+				}
+			});
+			mapActivity.showTopToolbar(toolBarController);
+		}
 
 		return view;
 	}
@@ -119,6 +167,9 @@ public class MeasurementToolFragment extends Fragment {
 		MapActivity mapActivity = getMapActivity();
 		MeasurementToolLayer measurementLayer = getMeasurementLayer();
 		if (mapActivity != null && measurementLayer != null) {
+			if (toolBarController != null) {
+				mapActivity.hideTopToolbar(toolBarController);
+			}
 			measurementLayer.setInMeasurementMode(false);
 			mapActivity.refreshMap();
 			mapActivity.enableDrawer();
@@ -144,6 +195,28 @@ public class MeasurementToolFragment extends Fragment {
 					v.setVisibility(status);
 				}
 			}
+		}
+	}
+
+	private static class MeasurementToolBarController extends TopToolbarController {
+
+		MeasurementToolBarController() {
+			super(MapInfoWidgetsFactory.TopToolbarControllerType.MEASUREMENT_TOOL);
+			setBackBtnIconClrIds(0, 0);
+			setCloseBtnIconClrIds(0, 0);
+			setTitleTextClrIds(R.color.primary_text_dark, R.color.primary_text_dark);
+			setDescrTextClrIds(R.color.primary_text_dark, R.color.primary_text_dark);
+			setBgIds(R.drawable.gradient_toolbar, R.drawable.gradient_toolbar,
+					R.drawable.gradient_toolbar, R.drawable.gradient_toolbar);
+			setCloseBtnIconIds(R.drawable.ic_overflow_menu_white, R.drawable.ic_overflow_menu_white);
+			setBackBtnIconIds(R.drawable.ic_action_remove_dark, R.drawable.ic_action_remove_dark);
+			setSingleLineTitle(false);
+		}
+
+		@Override
+		public void updateToolbar(MapInfoWidgetsFactory.TopToolbarView view) {
+			super.updateToolbar(view);
+			view.getShadowView().setVisibility(View.GONE);
 		}
 	}
 }
