@@ -22,7 +22,7 @@
             android:paddingBottom="12dp"
             android:paddingTop="12dp">
 
-            <ImageButton
+            <ImageView
                 android:id="@+id/ruler_icon"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
@@ -37,7 +37,7 @@
                 tools:src="@drawable/ic_action_ruler"/>
 
             <ImageButton
-                android:id="@+id/up_down_icon"
+                android:id="@+id/up_down_button"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_alignParentEnd="true"
@@ -70,9 +70,9 @@
                 android:layout_height="wrap_content"
                 android:layout_centerVertical="true"
                 android:layout_toEndOf="@id/measurement_distance_text_view"
-                android:layout_toLeftOf="@id/up_down_icon"
+                android:layout_toLeftOf="@id/up_down_button"
                 android:layout_toRightOf="@id/measurement_distance_text_view"
-                android:layout_toStartOf="@id/up_down_icon"
+                android:layout_toStartOf="@id/up_down_button"
                 android:textColor="?android:textColorSecondary"
                 android:textSize="@dimen/default_list_text_size"
                 tools:text="points: 3"/>
@@ -88,7 +88,7 @@
             android:layout_height="wrap_content">
 
             <ImageButton
-                android:id="@+id/previous_dot_icon"
+                android:id="@+id/undo_point_button"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_alignParentLeft="true"
@@ -102,14 +102,14 @@
                 tools:src="@drawable/ic_action_undo_dark"/>
 
             <ImageButton
-                android:id="@+id/next_dot_icon"
+                android:id="@+id/redo_point_button"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_centerVertical="true"
                 android:layout_marginLeft="8dp"
                 android:layout_marginStart="8dp"
-                android:layout_toEndOf="@id/previous_dot_icon"
-                android:layout_toRightOf="@id/previous_dot_icon"
+                android:layout_toEndOf="@id/undo_point_button"
+                android:layout_toRightOf="@id/undo_point_button"
                 android:background="@null"
                 tools:src="@drawable/ic_action_redo_dark"/>
 

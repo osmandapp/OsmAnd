@@ -9,6 +9,7 @@ import android.view.Menu;
 import android.view.MenuItem;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.ImageButton;
 import android.widget.ImageView;
 import android.widget.TextView;
 import android.widget.Toast;
@@ -55,12 +56,33 @@ public class MeasurementToolFragment extends Fragment {
 
 		((ImageView) mainView.findViewById(R.id.ruler_icon))
 				.setImageDrawable(iconsCache.getIcon(R.drawable.ic_action_ruler, R.color.color_myloc_distance));
-		((ImageView) mainView.findViewById(R.id.up_down_icon))
-				.setImageDrawable(iconsCache.getThemedIcon(R.drawable.ic_action_arrow_up));
-		((ImageView) mainView.findViewById(R.id.previous_dot_icon))
-				.setImageDrawable(iconsCache.getThemedIcon(R.drawable.ic_action_undo_dark));
-		((ImageView) mainView.findViewById(R.id.next_dot_icon))
-				.setImageDrawable(iconsCache.getThemedIcon(R.drawable.ic_action_redo_dark));
+
+		ImageButton upDownBtn = ((ImageButton) mainView.findViewById(R.id.up_down_button));
+		upDownBtn.setImageDrawable(iconsCache.getThemedIcon(R.drawable.ic_action_arrow_up));
+		upDownBtn.setOnClickListener(new View.OnClickListener() {
+			@Override
+			public void onClick(View view) {
+				Toast.makeText(getActivity(), "Up / Down", Toast.LENGTH_SHORT).show();
+			}
+		});
+
+		ImageButton undoBtn = ((ImageButton) mainView.findViewById(R.id.undo_point_button));
+		undoBtn.setImageDrawable(iconsCache.getThemedIcon(R.drawable.ic_action_undo_dark));
+		undoBtn.setOnClickListener(new View.OnClickListener() {
+			@Override
+			public void onClick(View view) {
+
+			}
+		});
+
+		ImageButton redoBtn = ((ImageButton) mainView.findViewById(R.id.redo_point_button));
+		redoBtn.setImageDrawable(iconsCache.getThemedIcon(R.drawable.ic_action_redo_dark));
+		redoBtn.setOnClickListener(new View.OnClickListener() {
+			@Override
+			public void onClick(View view) {
+
+			}
+		});
 
 		mainView.findViewById(R.id.add_point_button).setOnClickListener(new View.OnClickListener() {
 			@Override
@@ -69,6 +91,8 @@ public class MeasurementToolFragment extends Fragment {
 				updateText();
 			}
 		});
+
+		disable(undoBtn, redoBtn);
 
 		enterMeasurementMode();
 
@@ -130,6 +154,20 @@ public class MeasurementToolFragment extends Fragment {
 			return mapActivity.getMapLayers().getMeasurementToolLayer();
 		}
 		return null;
+	}
+
+	private void enable(View... views) {
+		for (View view : views) {
+			view.setEnabled(true);
+			view.setAlpha(1);
+		}
+	}
+
+	private void disable(View... views) {
+		for (View view : views) {
+			view.setEnabled(false);
+			view.setAlpha(.5f);
+		}
 	}
 
 	private void updateText() {
