@@ -1699,4 +1699,5 @@
     <string name="pref_vector_map">Vektor xəritə parametrləri</string>
     <string name="file_with_name_already_exists">Bu adda fayl artıq mövcuddur.</string>
     <string name="gpx_navigation">GPX marşrut</string>
+    <string name="measurement_tool">Ölçmə aləti</string>
     </resources>
