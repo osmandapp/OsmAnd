@@ -3386,4 +3386,13 @@
 <string name="poi_animal_shelter_type">Zvířata povolena</string>
 	<string name="poi_animal_shelter_purpose">Účel</string>
 
-</resources>
+<string name="poi_animal_shelter_wildlife">Divoká zvěř</string>
+	<string name="poi_animal_shelter_horse">Koně</string>
+	<string name="poi_animal_shelter_mammal">Savci</string>
+	<string name="poi_animal_shelter_fish">Ryby</string>
+
+	<string name="poi_cuisine_ramen">Rámen</string>
+	<string name="poi_cuisine_bubble_tea">Bubble tea</string>
+	<string name="poi_motorcycle_sales_yes">Slevy</string>
+	<string name="poi_motorcycle_repair_yes">Opravit</string>
+	</resources>
