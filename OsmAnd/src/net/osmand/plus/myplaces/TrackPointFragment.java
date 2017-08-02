@@ -8,6 +8,7 @@ import android.os.Bundle;
 import android.os.Handler;
 import android.support.annotation.NonNull;
 import android.support.annotation.Nullable;
+import android.support.design.widget.FloatingActionButton;
 import android.support.v4.view.MenuItemCompat;
 import android.support.v7.app.AlertDialog;
 import android.support.v7.view.ActionMode;
@@ -29,13 +30,16 @@ import android.widget.ListView;
 import android.widget.TextView;
 
 import net.osmand.AndroidUtils;
+import net.osmand.Location;
 import net.osmand.data.FavouritePoint;
 import net.osmand.data.LatLon;
 import net.osmand.data.PointDescription;
 import net.osmand.plus.FavouritesDbHelper;
 import net.osmand.plus.GPXDatabase.GpxDataItem;
 import net.osmand.plus.GPXUtilities;
+import net.osmand.plus.GPXUtilities.WptPt;
 import net.osmand.plus.GPXUtilities.GPXFile;
+import net.osmand.plus.GPXUtilities.NewGpxWaypoint;
 import net.osmand.plus.GpxSelectionHelper.GpxDisplayGroup;
 import net.osmand.plus.GpxSelectionHelper.GpxDisplayItem;
 import net.osmand.plus.GpxSelectionHelper.GpxDisplayItemType;
@@ -89,6 +93,7 @@ public class TrackPointFragment extends OsmandExpandableListFragment {
 	private Set<Integer> selectedGroups = new LinkedHashSet<>();
 	private ActionMode actionMode;
 	private SearchView searchView;
+	private FloatingActionButton fab;
 
 	@Override
 	public void onCreate(@Nullable Bundle savedInstanceState) {
@@ -106,9 +111,29 @@ public class TrackPointFragment extends OsmandExpandableListFragment {
 
 	@Override
 	public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
-		View view = inflater.inflate(R.layout.favorites_tree, container, false);
+		View view = inflater.inflate(R.layout.points_tree, container, false);
 		ExpandableListView listView = (ExpandableListView) view.findViewById(android.R.id.list);
 		setHasOptionsMenu(true);
+
+		fab = (FloatingActionButton) view.findViewById(R.id.fabButton);
+
+		fab.setOnClickListener(new View.OnClickListener() {
+			@Override
+			public void onClick(View view) {
+				final OsmandSettings settings = app.getSettings();
+				GPXFile gpx = getGpx();
+				Location location = app.getLocationProvider().getLastKnownLocation();
+				if (location != null) {
+					settings.setMapLocationToShow(location.getLatitude(), location.getLongitude(),
+							settings.getLastKnownMapZoom(),
+							new PointDescription(PointDescription.POINT_TYPE_WPT, getString(R.string.context_menu_item_add_waypoint)),
+							false,
+							new NewGpxWaypoint(gpx));
+
+					MapActivity.launchMapActivityMoveToTop(getActivity());
+				}
+			}
+		});
 
 		TextView tv = new TextView(getActivity());
 		tv.setText(R.string.none_selected_gpx);
