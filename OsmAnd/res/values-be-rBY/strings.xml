@@ -2750,14 +2750,20 @@ U vypadku, kali vy lubіcie OsmAnd і OSM і chočacie padtrymać jaho, heta іd
     
     <string name="range_min_max">Adliehlasć = Min./Maks.</string>
     <string name="min_max">Min./Maks.</string>
-    <string name="release_2_7">\\022 Dadatak Mapillary z vuličnymi vyjavami
+    <string name="release_2_7">• Dadatak Mapillary z vuličnymi vyjavami 
 \n
-\n • Vidžet-liniejka dlia vymiarenniaŭ dystancyj
-\n
-\n • Razdzielienyja GPX-intervaly z padrabiaznaj infarmacyjaj ab vašym treku
-\n
+\n • Vidžet-liniejka dlia vymiarenniaŭ dystancyj 
+\n 
+\n • Razdzielienyja GPX-intervaly z padrabiaznaj infarmacyjaj ab vašym treku 
+\n 
 \n • Inšyja paliapšenni i vypraŭlienni chibaŭ
 \n
 \n</string>
     <string name="rendering_value_translucent_pink_name">Paŭprazrysty ružovy</string>
+    <string name="measurement_tool">Vymiareńnie</string>
+    <string name="quick_action_resume_pause_navigation">Adnavić/Prypynić Navihacyju</string>
+    <string name="quick_action_resume_pause_navigation_descr">Naciśnicie hetuju knopku, kab prypynić navihacyju ci adnavić jaje, kali jana ŭžo była prypynienaja.</string>
+    <string name="quick_action_show_navigation_finish_dialog">Pakazvać dyjałoh Zaviaršeńnie navihacyi</string>
+    <string name="quick_action_start_stop_navigation">Start/Finiš Navihacyi</string>
+    <string name="quick_action_start_stop_navigation_descr">Naciśnicie hetuju knopku, kab pačać navihacyju ci spynić jaje, kali jana ŭžo pačałasia.</string>
     </resources>
