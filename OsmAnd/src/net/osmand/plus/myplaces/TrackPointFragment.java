@@ -122,7 +122,7 @@ public class TrackPointFragment extends OsmandExpandableListFragment {
 			public void onClick(View view) {
 				final OsmandSettings settings = app.getSettings();
 				GPXFile gpx = getGpx();
-				Location location = app.getLocationProvider().getLastKnownLocation();
+				LatLon location = settings.getLastKnownMapLocation();
 				if (location != null) {
 					settings.setMapLocationToShow(location.getLatitude(), location.getLongitude(),
 							settings.getLastKnownMapZoom(),
