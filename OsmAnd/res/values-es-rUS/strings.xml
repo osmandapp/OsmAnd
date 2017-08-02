@@ -2699,4 +2699,8 @@ Proporciona un código completo</string>
     <string name="live_monitoring_max_interval_to_send_desrc">Especifica el tiempo que el búfer mantendrá los lugares para enviar sin conexión</string>
     <string name="mappilary_no_internet_desc">Debes tener conexión a Internet para ver fotos de Mapillary</string>
     <string name="retry">Reintentar</string>
+<string name="measurement_tool_action_bar">Elige una ubicación en el mapa y pulsa «Añadir» para añadir un punto en la regla.</string>
+    <string name="measurement_tool">Herramienta de medición</string>
+    <string name="add_gpx_waypoint_bottom_sheet_title">Añadir punto de ruta GPX</string>
+    <string name="shared_string_create">Crear</string>
 </resources>
