@@ -327,6 +327,9 @@ public class AvailableGPXFragment extends OsmandExpandableListFragment {
 		}
 		footerView = inflater.inflate(R.layout.list_shadow_footer, null, false);
 		listView.addFooterView(footerView);
+		TextView emptyTextView = (TextView) v.findViewById(android.R.id.empty);
+		emptyTextView.setText("There are no gpx items");
+		listView.setEmptyView(emptyTextView);
 		if (this.adapter != null) {
 			listView.setAdapter(this.adapter);
 		}

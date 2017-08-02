@@ -2,6 +2,7 @@
 <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
 			  android:layout_width="match_parent"
 			  android:layout_height="match_parent"
+              android:background="?attr/ctx_menu_info_view_bg"
 			  android:orientation="vertical">
 
  	<ExpandableListView
@@ -16,5 +17,10 @@
         android:dividerHeight="0dp"
         android:drawSelectorOnTop="false"
 		android:groupIndicator="@android:color/transparent"/>
+
+	<TextView
+		android:id="@android:id/empty"
+		android:layout_width="wrap_content"
+		android:layout_height="wrap_content"/>
 
 </LinearLayout>

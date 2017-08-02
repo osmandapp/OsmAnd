@@ -148,9 +148,7 @@ public class FavoritesActivity extends TabActivity {
 
 		List<TabItem> mTabs = new ArrayList<>();
 		mTabs.add(getTabIndicator(FAV_TAB, FavoritesTreeFragment.class));
-		if (hasGpx) {
-			mTabs.add(getTabIndicator(GPX_TAB, AvailableGPXFragment.class));
-		}
+		mTabs.add(getTabIndicator(GPX_TAB, AvailableGPXFragment.class));
 		OsmandPlugin.addMyPlacesTabPlugins(this, mTabs, getIntent());
 		return mTabs;
 	}
