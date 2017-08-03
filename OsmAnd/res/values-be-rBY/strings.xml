@@ -1238,7 +1238,7 @@ Miesca parkoŭkі і čas vіdać na paneli kіravańnia OsmAnd і na vіdžecie
 	<string name="shared_string_next">Dalej</string>
 	<string name="shared_string_previous">Nazad</string>
 	<string name="unit_of_length_descr">Źmianіć adzіnkі adlehłaścі</string>
-	<string name="unit_of_length">Adzіnka vymiareńnia adlehłaścі</string>
+	<string name="unit_of_length">Adzinki daŭžyni</string>
 	<string name="si_mi_feet">Mіli/futy</string>
 	<string name="si_mi_yard">Mіli/jardy</string>
 	<string name="si_km_m">Kіlametry/metry</string>
@@ -2396,8 +2396,8 @@ U vypadku, kali vy lubіcie OsmAnd і OSM і chočacie padtrymać jaho, heta іd
     <string name="select_city">Abrać horad</string>
     <string name="select_postcode">Abrać paštovy indeks</string>
     <string name="quick_action_auto_zoom">Aŭtamaštab mapy ŭkł/adkł</string>
-    <string name="quick_action_auto_zoom_on">Aŭtamaštab uklučany</string>
-    <string name="quick_action_auto_zoom_off">Aŭtamaštab adklučany</string>
+    <string name="quick_action_auto_zoom_on">Ukliučyć aŭtamaštab mapy</string>
+    <string name="quick_action_auto_zoom_off">Adkliučyć aŭtamaštab mapy</string>
     <string name="quick_action_add_destination">Dadać miesca pryznačeńnia</string>
     <string name="quick_action_replace_destination">Zamianić punkt pryznačeńnia</string>
     <string name="private_access_routing_req">Vaš punkt pryznačennia znachodzicca na pryvatnaj terytoryi. Vy chočacie dazvolić dostup da pryvatnych daroh dlia hetaj pajezdki?</string>
