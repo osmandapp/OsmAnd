@@ -1,6 +1,8 @@
 package net.osmand.plus.measurementtool;
 
+import android.app.ProgressDialog;
 import android.content.DialogInterface;
+import android.os.AsyncTask;
 import android.os.Bundle;
 import android.support.annotation.Nullable;
 import android.support.v4.app.Fragment;
@@ -37,6 +39,7 @@ import java.util.Locale;
 public class MeasurementToolFragment extends Fragment {
 
 	public static final String TAG = "MeasurementToolFragment";
+	private static final String EXT = ".gpx";
 
 	private MeasurementToolBarController toolBarController;
 	private TextView distanceTv;
@@ -167,22 +170,23 @@ public class MeasurementToolFragment extends Fragment {
 
 	private void saveAsGpxOnClick(MapActivity mapActivity) {
 		final File dir = mapActivity.getMyApplication().getAppPath(IndexConstants.GPX_INDEX_DIR);
-		LayoutInflater inflater = getLayoutInflater();
+		final LayoutInflater inflater = getLayoutInflater();
 		final View view = inflater.inflate(R.layout.save_gpx_dialog, null);
-		EditText nameEt = view.findViewById(R.id.gpx_name_et);
+		final EditText nameEt = view.findViewById(R.id.gpx_name_et);
 		final TextView fileExistsTv = view.findViewById(R.id.file_exists_text_view);
 
 		final String suggestedName = new SimpleDateFormat("dd-M-yyyy hh:mm", Locale.US).format(new Date());
 		String displayedName = String.copyValueOf(suggestedName.toCharArray());
-		File fout = new File(dir, suggestedName + ".gpx");
+		File fout = new File(dir, suggestedName + EXT);
 		int ind = 1;
 		while (fout.exists()) {
 			displayedName = suggestedName + " " + (++ind);
-			fout = new File(dir, displayedName + ".gpx");
+			fout = new File(dir, displayedName + EXT);
 		}
 		nameEt.setText(displayedName);
 		nameEt.setSelection(displayedName.length());
 
+		final boolean[] textChanged = new boolean[1];
 		nameEt.addTextChangedListener(new TextWatcher() {
 			@Override
 			public void beforeTextChanged(CharSequence charSequence, int i, int i1, int i2) {
@@ -196,11 +200,12 @@ public class MeasurementToolFragment extends Fragment {
 
 			@Override
 			public void afterTextChanged(Editable editable) {
-				if (new File(dir, editable.toString() + ".gpx").exists()) {
+				if (new File(dir, editable.toString() + EXT).exists()) {
 					fileExistsTv.setVisibility(View.VISIBLE);
 				} else {
 					fileExistsTv.setVisibility(View.INVISIBLE);
 				}
+				textChanged[0] = true;
 			}
 		});
 
@@ -210,11 +215,44 @@ public class MeasurementToolFragment extends Fragment {
 				.setPositiveButton(R.string.shared_string_save, new DialogInterface.OnClickListener() {
 					@Override
 					public void onClick(DialogInterface dialog, int which) {
-
+						final String name = nameEt.getText().toString();
+						String fileName = String.copyValueOf(name.toCharArray()) + EXT;
+						if (textChanged[0]) {
+							File fout = new File(dir, fileName);
+							int ind = 1;
+							while (fout.exists()) {
+								fileName = name + " " + (++ind) + EXT;
+								fout = new File(dir, fileName);
+							}
+						}
+						saveGpx(fileName);
 					}
 				})
 				.setNegativeButton(R.string.shared_string_cancel, null)
 				.show();
+	}
+
+	private void saveGpx(final String fileName) {
+		new AsyncTask<Void, Void, String>() {
+
+			private ProgressDialog progressDialog;
+			private File toSave;
+
+			@Override
+			protected void onPreExecute() {
+				super.onPreExecute();
+			}
+
+			@Override
+			protected String doInBackground(Void... voids) {
+				return null;
+			}
+
+			@Override
+			protected void onPostExecute(String s) {
+				super.onPostExecute(s);
+			}
+		}.execute();
 	}
 
 	@Override
