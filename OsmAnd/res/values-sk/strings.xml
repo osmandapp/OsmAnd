@@ -2817,4 +2817,8 @@ Zodpovedá oblasti: %1$s x %2$s</string>
     <string name="live_monitoring_max_interval_to_send_desrc">Zadajte čas pokiaľ budú udržované pozície na odoslanie kým nie je pripojenie</string>
     <string name="mappilary_no_internet_desc">Na zobrazovanie fotografií z Mapillary potrebujete pripojenie na Internet</string>
     <string name="retry">Skúsiť znova</string>
+<string name="measurement_tool_action_bar">Zvoľte miesto na mape a kliknite Pridať pre pridanie bodu pre pravítko.</string>
+    <string name="measurement_tool">Nástroj na meranie</string>
+    <string name="add_gpx_waypoint_bottom_sheet_title">Pridať prechodný bod GPX</string>
+    <string name="shared_string_create">Vytvoriť</string>
 </resources>

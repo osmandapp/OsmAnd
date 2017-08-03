@@ -1563,4 +1563,5 @@
 	<string name="poi_animal_shelter_type">الحيوانات مسموح بها</string>
 	<string name="poi_animal_shelter_purpose">الغرض</string>
 
-</resources>
+<string name="poi_direction_entrance">الوجهة: مدخل</string>
+	</resources>

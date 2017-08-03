@@ -2784,4 +2784,6 @@ Reprezentuje obszar: %1$s x %2$s</string>
 \n • Inne ulepszenia i naprawione błędy
 \n
 \n</string>
+    <string name="measurement_tool_action_bar">Proszę wskazać położenie na mapie i nacisnąć Dodaj, aby dodać punkt do pomiaru.</string>
+    <string name="measurement_tool">Mierzenie odległości</string>
     </resources>

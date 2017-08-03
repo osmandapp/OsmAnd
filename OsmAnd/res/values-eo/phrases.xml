@@ -1260,9 +1260,9 @@
 	<string name="poi_pump_no">sen pumpilo</string>
 	<string name="poi_pump_yes">jes</string>
 
-	<string name="poi_water_characteristic_mineral">Minerala</string>
+	<string name="poi_water_characteristic_mineral">minerala</string>
 	<string name="poi_water_characteristic_mud">Akvospeco: sediment-riĉa</string>
-	<string name="poi_water_characteristic_sulfuric">Sulfat(6)-oza</string>
+	<string name="poi_water_characteristic_sulfuric">sulfat(6)-oza</string>
 
 	<string name="poi_water_point">Akvoĉerpejo</string>
 
@@ -2727,8 +2727,8 @@
 	<string name="poi_crossing_supervision_attendant">Gardado: gardisto</string>
 	<string name="poi_crossing_supervision_camera">Gardado: kamero</string>
 
-	<string name="poi_dispensing_yes">Jes</string>
-	<string name="poi_dispensing_no">Medikamentoj je recepto: ne</string>
+	<string name="poi_dispensing_yes">jes</string>
+	<string name="poi_dispensing_no">Medikamentoj je preskribo: ne</string>
 
 	<string name="poi_valley_balka">Abismo</string>
 

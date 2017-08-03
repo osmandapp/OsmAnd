@@ -2111,7 +2111,7 @@ Lon %2$s</string>
 	<string name="osn_close_dialog_success">Note lukket</string>
 	<string name="osm_edit_modified_poi">Ændret OSM IP</string>
     <string name="osm_edit_deleted_poi">Slettet OSM IP</string>
-    <string name="release_2_2">\\u2022 Ny kontekstafhængig brugergrænseflade når der vælges lokationer på kortet og på andre skærme
+    <string name="release_2_2">• Ny kontekstafhængig brugergrænseflade når der vælges lokationer på kortet og på andre skærme 
 \n 
 \n • Kortskærmen vises direkte, medmindre \'Vis betjeningspanel ved start\' er valgt 
 \n 
@@ -2285,16 +2285,25 @@ Hvis du  ønsker at støtte OsmAnd og OSM, er dette en god måde at gøre det p�
     <string name="finish_navigation">Stop navigation</string>
     <string name="shared_string_move_up">Flyt op</string>
     <string name="shared_string_move_down">Flyt ned</string>
-    <string name="release_2_3">"\\u2022 OSM Live. Støt bidragsyderne og udviklere af kortet og få kortopdateringer hver time.
+    <string name="release_2_3">"• OSM Live. Støt bidragsyderne og udviklere af kortet og få kortopdateringer hver time. 
 \n 
+\n
 \n • Kortmarkører. En ny måde til hurtigt at vælge steder på kortet. 
+\n
 \n 
+\n
 \n • Mere detaljerede OSM kort med landespecifikke vejskilte og masser af nye kortfunktioner. 
+\n
 \n 
+\n
 \n • Forbedret ruteplanlægning. 
+\n
 \n 
+\n
 \n • Mange forbedringer i kontekstmenuen på kortet, såsom indholdsbestemt adresseopslag. 
+\n
 \n 
+\n
 \n  og mere…"</string>
     <string name="full_report">Fuldstændig rapport</string>
     <string name="open_street_map_login_and_pass">OpenStreetMap brugernavn og adgangskode</string>
@@ -2368,18 +2377,29 @@ Hvis du  ønsker at støtte OsmAnd og OSM, er dette en god måde at gøre det p�
     <string name="lang_hsb">Øvresorbisk</string>
     <string name="share_history_subject">delt via OsmAnd</string>
     
-    <string name="release_2_4">"\\u2022 Ny meget stærk fritekstsøgning
+    <string name="release_2_4">"• Ny meget stærk fritekstsøgning 
 \n 
+\n
 \n  • Integration med bilens lydsystem og telefon via Bluetooth 
+\n
 \n 
+\n
 \n  • Forbedret rutevejledning, talevejledning og angivelse af svingbaner 
+\n
 \n 
+\n
 \n • Forbedret transportlag med rutekort 
+\n
 \n 
+\n
 \n  • Tilføjet flere sprog og understøtter nu regionale sprog 
+\n
 \n 
+\n
 \n  • Mange andre forbedringer og fejlrettelser 
+\n
 \n 
+\n
 \n  og mere…"</string>
     <string name="show_something_on_map">Vis %1$s på kortet</string>
     <string name="dist_away_from_my_location">Søg %1$s væk</string>
@@ -2460,7 +2480,7 @@ Hvis du  ønsker at støtte OsmAnd og OSM, er dette en god måde at gøre det p�
     <string name="shared_string_recorded">Optaget</string>
     <string name="shared_string_record">Optag</string>
     <string name="gpx_logging_no_data">Ingen data</string>
-    <string name="release_2_5">\\u2022 Klikbare ikoner på kortet
+    <string name="release_2_5">• Klikbare ikoner på kortet 
 \n 
 \n  • Fleksibel IP-filter søgning: Søg fx. restauranter efter køkkenstil, eller campingpladser med særlige faciliteter 
 \n 
@@ -2470,7 +2490,7 @@ Hvis du  ønsker at støtte OsmAnd og OSM, er dette en god måde at gøre det p�
 \n 
 \n  • Forbedrede navigationsmeddelelser (Android Wear) 
 \n 
-\n  • Mange andre forbedringer og fejlrettelser
+\n  • Mange andre forbedringer og fejlrettelser 
 \n 
 \n  og mere…</string>
     <string name="trip_rec_notification_settings">Tur optagelse (ingen data)</string>
@@ -2591,7 +2611,7 @@ Repræsenterer område: %1$s x %2$s</string>
     <string name="quick_action_page_list_descr">Tryk på genvejen vil gennemløbe nedenstående liste.</string>
     <string name="auto_split_recording_title">Opdel automatisk optagelser efter et ophold</string>
 	<string name="auto_split_recording_descr">Start et nyt segment efter ophold på 6 min., et nyt spor efter 2 t, eller en ny fil efter længere ophold, hvis datoen er ændret.</string>
-    <string name="release_2_6">\\u2022 Ny funktion: Genvejsknap
+    <string name="release_2_6">• Ny funktion: Genvejsknap 
 \n 
 \n  • Forbedret respons på berøringsskærm (fx. samtidig panorering og zoom) 
 \n 
@@ -2795,11 +2815,11 @@ Tidligere destination bliver sidste mellemliggende punkt.</string>
     
     <string name="range_min_max">Interval = min/maks</string>
     <string name="min_max">Min/maks</string>
-    <string name="release_2_7">\\u2022 Mapillary udvidelse med billeder på gadeniveau 
+    <string name="release_2_7">• Mapillary udvidelse med billeder på gadeniveau 
 \n 
 \n • Lineal modul til afstandsmåling 
 \n 
-\n • GPX opdelingsintervaller med detaljeret info om sporet
+\n • GPX opdelingsintervaller med detaljeret info om sporet 
 \n 
 \n • Andre forbedringer og fejlrettelser
 \n
