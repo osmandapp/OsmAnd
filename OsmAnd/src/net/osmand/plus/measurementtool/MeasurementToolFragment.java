@@ -7,6 +7,7 @@ import android.os.Bundle;
 import android.support.annotation.Nullable;
 import android.support.v4.app.Fragment;
 import android.support.v7.app.AlertDialog;
+import android.support.v7.widget.SwitchCompat;
 import android.text.Editable;
 import android.text.TextWatcher;
 import android.view.ContextThemeWrapper;
@@ -23,6 +24,9 @@ import android.widget.Toast;
 
 import net.osmand.AndroidUtils;
 import net.osmand.IndexConstants;
+import net.osmand.plus.GPXUtilities;
+import net.osmand.plus.GPXUtilities.Route;
+import net.osmand.plus.GPXUtilities.WptPt;
 import net.osmand.plus.IconsCache;
 import net.osmand.plus.R;
 import net.osmand.plus.activities.MapActivity;
@@ -32,9 +36,13 @@ import net.osmand.plus.views.mapwidgets.MapInfoWidgetsFactory.TopToolbarControll
 import net.osmand.plus.widgets.IconPopupMenu;
 
 import java.io.File;
+import java.text.MessageFormat;
 import java.text.SimpleDateFormat;
 import java.util.Date;
+import java.util.LinkedList;
 import java.util.Locale;
+
+import static net.osmand.plus.GPXUtilities.GPXFile;
 
 public class MeasurementToolFragment extends Fragment {
 
@@ -148,7 +156,12 @@ public class MeasurementToolFragment extends Fragment {
 						public boolean onMenuItemClick(MenuItem menuItem) {
 							switch (menuItem.getItemId()) {
 								case R.id.action_save_as_gpx:
-									saveAsGpxOnClick(mapActivity);
+									if (measurementLayer.getPointsCount() > 0) {
+										saveAsGpxOnClick(mapActivity);
+									} else {
+										//todo
+										Toast.makeText(mapActivity, "There must be at least one point", Toast.LENGTH_SHORT).show();
+									}
 									return true;
 								case R.id.action_clear_all:
 									measurementLayer.clearPoints();
@@ -172,10 +185,11 @@ public class MeasurementToolFragment extends Fragment {
 		final File dir = mapActivity.getMyApplication().getAppPath(IndexConstants.GPX_INDEX_DIR);
 		final LayoutInflater inflater = getLayoutInflater();
 		final View view = inflater.inflate(R.layout.save_gpx_dialog, null);
-		final EditText nameEt = view.findViewById(R.id.gpx_name_et);
-		final TextView fileExistsTv = view.findViewById(R.id.file_exists_text_view);
+		final EditText nameEt = (EditText) view.findViewById(R.id.gpx_name_et);
+		final TextView fileExistsTv = (TextView) view.findViewById(R.id.file_exists_text_view);
+		final SwitchCompat showOnMapToggle = (SwitchCompat) view.findViewById(R.id.toggle_show_on_map);
 
-		final String suggestedName = new SimpleDateFormat("dd-M-yyyy hh:mm", Locale.US).format(new Date());
+		final String suggestedName = new SimpleDateFormat("yyyy-M-dd hh-mm E", Locale.US).format(new Date());
 		String displayedName = String.copyValueOf(suggestedName.toCharArray());
 		File fout = new File(dir, suggestedName + EXT);
 		int ind = 1;
@@ -225,14 +239,14 @@ public class MeasurementToolFragment extends Fragment {
 								fout = new File(dir, fileName);
 							}
 						}
-						saveGpx(fileName);
+						saveGpx(dir, fileName, showOnMapToggle.isChecked());
 					}
 				})
 				.setNegativeButton(R.string.shared_string_cancel, null)
 				.show();
 	}
 
-	private void saveGpx(final String fileName) {
+	private void saveGpx(final File dir, final String fileName, final boolean showOnMap) {
 		new AsyncTask<Void, Void, String>() {
 
 			private ProgressDialog progressDialog;
@@ -240,17 +254,54 @@ public class MeasurementToolFragment extends Fragment {
 
 			@Override
 			protected void onPreExecute() {
-				super.onPreExecute();
+				MapActivity activity = getMapActivity();
+				if (activity != null) {
+					progressDialog = new ProgressDialog(activity);
+					progressDialog.setMessage(activity.getString(R.string.saving_gpx_tracks));
+					progressDialog.show();
+				}
 			}
 
 			@Override
 			protected String doInBackground(Void... voids) {
+				toSave = new File(dir, fileName);
+				GPXFile gpx = new GPXFile();
+				MeasurementToolLayer measurementLayer = getMeasurementLayer();
+				if (measurementLayer != null) {
+					LinkedList<WptPt> points = measurementLayer.getMeasurementPoints();
+					if (points.size() == 1) {
+						gpx.points.add(points.getFirst());
+					} else if (points.size() > 1) {
+						Route rt = new Route();
+						gpx.routes.add(rt);
+						rt.points.addAll(points);
+					}
+				}
+				MapActivity activity = getMapActivity();
+				if (activity != null) {
+					// todo
+					String res = GPXUtilities.writeGpxFile(toSave, gpx, activity.getMyApplication());
+					activity.getMyApplication().getSelectedGpxHelper().selectGpxFile(gpx, showOnMap, false);
+					return res;
+				}
 				return null;
 			}
 
 			@Override
-			protected void onPostExecute(String s) {
-				super.onPostExecute(s);
+			protected void onPostExecute(String warning) {
+				MapActivity activity = getMapActivity();
+				if (activity != null) {
+					if (warning == null) {
+						Toast.makeText(activity,
+								MessageFormat.format(activity.getString(R.string.gpx_saved_sucessfully), toSave.getAbsolutePath()),
+								Toast.LENGTH_LONG).show();
+					} else {
+						Toast.makeText(activity, warning, Toast.LENGTH_LONG).show();
+					}
+				}
+				if (progressDialog != null && progressDialog.isShowing()) {
+					progressDialog.dismiss();
+				}
 			}
 		}.execute();
 	}

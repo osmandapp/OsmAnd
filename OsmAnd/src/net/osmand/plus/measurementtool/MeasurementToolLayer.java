@@ -66,6 +66,10 @@ public class MeasurementToolLayer extends OsmandMapLayer {
 		return measurementPoints.size();
 	}
 
+	public LinkedList<WptPt> getMeasurementPoints() {
+		return measurementPoints;
+	}
+
 	String getDistanceSt() {
 		float dist = 0;
 		if (measurementPoints.size() > 0) {
