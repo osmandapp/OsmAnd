@@ -1083,7 +1083,7 @@ Memòria in proportzione %4$s MB (lìmite de Android %5$s MB, Dalvik %6$s MB).</
     <string name="shared_string_next">Sighi</string>
     <string name="shared_string_previous">Pretzedente</string>
     <string name="unit_of_length_descr">Muda sas unidades de longària</string>
-    <string name="unit_of_length">Unidade de longària</string>
+    <string name="unit_of_length">Unidades de longària</string>
     <string name="si_mi_feet">Mìglios/pedes</string>
     <string name="si_mi_yard">Mìglios/iardas</string>
     <string name="si_km_m">Chilòmetros/metros</string>
@@ -2600,8 +2600,8 @@ Pro praghere iscrie su còdighe intreu</string>
     <string name="analyze_on_map">Analiza in sa mapa</string>
     <string name="quick_action_auto_zoom">Ismanniamentu atomàticu mapa allutu/istudadu</string>
     <string name="quick_action_auto_zoom_desc">Incarchende su butone as a istudare o allùghere s\'ismanniamentu mapa chi sighit sa lestresa tua.</string>
-    <string name="quick_action_auto_zoom_on">Ismanniamentu automàticu mapa allutu</string>
-    <string name="quick_action_auto_zoom_off">Ismanniamentu automàticu mapa istudadu</string>
+    <string name="quick_action_auto_zoom_on">Abìlita s\'ismanniamentu automàticu mapa</string>
+    <string name="quick_action_auto_zoom_off">Disabìlita s\'ismanniamentu automàticu mapa</string>
     <string name="quick_action_add_destination">Annanghe una destinatzione</string>
     <string name="quick_action_replace_destination">Muda sa destinatzione</string>
     <string name="quick_action_add_first_intermediate">Annanghe su primu puntu de coladòrgiu</string>
