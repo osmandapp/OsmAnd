@@ -2859,4 +2859,13 @@ Fonctionnalités principales :
     <string name="measurement_tool">Outil de mesure</string>
     <string name="shared_string_create">Créer</string>
 <string name="add_gpx_waypoint_bottom_sheet_title">Ajouter un point GPX</string>
+    <string name="release_2_7">\\022 Greffon Mapillary avec les images de rue
+\n
+\n• Widget règle pour la mesure de distance
+\n
+\n• Les intervalles GPX ont des informations détaillées sur votre trace
+\n
+\n• D\'autres améliorations et corrections de bug
+\n
+\n</string>
     </resources>
