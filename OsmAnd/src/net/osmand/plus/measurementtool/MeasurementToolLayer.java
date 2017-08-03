@@ -108,16 +108,19 @@ public class MeasurementToolLayer extends OsmandMapLayer {
 					}
 					tx.add(locX);
 					ty.add(locY);
-
-					if (tb.containsLatLon(pt.lat, pt.lon)) {
-						canvas.drawBitmap(pointIcon, locX - marginX, locY - marginY, bitmapPaint);
-					}
 				}
 				path.lineTo(tb.getCenterPixelX(), tb.getCenterPixelY());
 				tx.add(tb.getCenterPixelX());
 				ty.add(tb.getCenterPixelY());
 				calculatePath(tb, tx, ty, path);
 				canvas.drawPath(path, lineAttrs.paint);
+				for (WptPt pt : measurementPoints) {
+					if (tb.containsLatLon(pt.lat, pt.lon)) {
+						int locX = tb.getPixXFromLonNoRot(pt.lon);
+						int locY = tb.getPixYFromLatNoRot(pt.lat);
+						canvas.drawBitmap(pointIcon, locX - marginX, locY - marginY, bitmapPaint);
+					}
+				}
 			}
 		}
 	}
