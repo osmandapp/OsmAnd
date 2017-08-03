@@ -2771,4 +2771,6 @@ U vypadku, kali vy lubіcie OsmAnd і OSM і chočacie padtrymać jaho, heta іd
     <string name="add_gpx_waypoint_bottom_sheet_title">Dadać GPX šlach</string>
     <string name="shared_string_create">Stvaryć</string>
 <string name="measurement_tool_action_bar">Vyłučycie miesća na mapie i naćisnicie knopku Dadać, kab dadać kropku da liniejcy.</string>
+    <string name="live_monitoring_max_interval_to_send">Čas bufieryzacyi dlia anlajn sačennia</string>
+    <string name="live_monitoring_max_interval_to_send_desrc">Zadaje čas bufieryzacyi dlia zbieražennia miescaŭ dlia adpraŭki biez zlučennia</string>
     </resources>
