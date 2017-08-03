@@ -159,8 +159,7 @@ public class MeasurementToolFragment extends Fragment {
 									if (measurementLayer.getPointsCount() > 0) {
 										saveAsGpxOnClick(mapActivity);
 									} else {
-										//todo
-										Toast.makeText(mapActivity, "There must be at least one point", Toast.LENGTH_SHORT).show();
+										Toast.makeText(mapActivity, mapActivity.getString(R.string.none_point_error), Toast.LENGTH_SHORT).show();
 									}
 									return true;
 								case R.id.action_clear_all:
