@@ -877,7 +877,7 @@
 	<string name="shared_string_next">التالي</string>
 	<string name="shared_string_previous">السابق</string>
 	<string name="unit_of_length_descr">تغيير وحدات الطول</string>
-	<string name="unit_of_length">وحدة الطول</string>
+	<string name="unit_of_length">وحدات الطول</string>
 	<string name="si_mi_feet">ميل/قدم</string>
 	<string name="si_mi_yard">ميل/ ياردة</string>
 	<string name="si_km_m">كيلومتر/متر</string>
@@ -2589,8 +2589,8 @@
     <string name="sorted_by_distance">ترتيب حسب المسافة</string>
     <string name="shared_string_overview">نظرة عامة</string>
     <string name="quick_action_auto_zoom">التكبير الآلي للخريطة تفعيل/تعطيل</string>
-    <string name="quick_action_auto_zoom_on">التكبير الآلي للخريطة مفعل</string>
-    <string name="quick_action_auto_zoom_off">التكبير الآلي للخريطة معطل</string>
+    <string name="quick_action_auto_zoom_on">تفعيل التكبير الآلي للخريطة</string>
+    <string name="quick_action_auto_zoom_off">تعيطل التكبير الآلي للخريطة</string>
     <string name="quick_action_add_first_intermediate">أضف وجهة وسيطة</string>
     <string name="analyze_on_map">إفحص على الخريطة</string>
     <string name="shared_string_visible">ظاهر</string>
