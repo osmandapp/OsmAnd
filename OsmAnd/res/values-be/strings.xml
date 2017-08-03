@@ -759,7 +759,7 @@
 	
 	
 	<string name="unit_of_length_descr">Зьмяніць адзінкі адлегласьці</string>
-	<string name="unit_of_length">Адзінка вымярэньня адлегласьці</string>
+	<string name="unit_of_length">Адзінкі даўжыні</string>
 	<string name="si_mi_feet">Мілі/футы</string>
 	<string name="si_mi_yard">Мілі/ярды</string>
 	<string name="si_km_m">Кіламетры/метры</string>
@@ -2659,8 +2659,8 @@
     <string name="quick_action_replace_destination">Замяніць пункт прызначэння</string>
     <string name="quick_action_add_first_intermediate">Дадаць прамежкавы пункт</string>
     <string name="subscribe_email_error">Памылка</string>
-    <string name="quick_action_auto_zoom_on">Аўтамаштаб уключаны</string>
-    <string name="quick_action_auto_zoom_off">Аўтамаштаб адключаны</string>
+    <string name="quick_action_auto_zoom_on">Уключыць аўтамаштаб мапы</string>
+    <string name="quick_action_auto_zoom_off">Адключыць аўтамаштаб мапы</string>
     <string name="select_street">Выберыце вуліцу</string>
     <string name="shared_string_in_name">у %1$s</string>
     <string name="type_address">Увядзіце адрас</string>
