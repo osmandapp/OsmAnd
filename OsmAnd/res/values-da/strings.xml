@@ -633,7 +633,7 @@ OSM er et i fællesskab drevet, globalt offentligt domæne kortlægningsprojekt.
 
 
     <string name="unit_of_length_descr">Ændre enhed for længde</string>
-    <string name="unit_of_length">Længdeenhed</string>
+    <string name="unit_of_length">Længdeenheder</string>
     <string name="si_mi_feet">Mil/fod</string>
     <string name="si_mi_yard">Mil/yards</string>
     <string name="si_km_m">Km/m</string>
@@ -2730,8 +2730,8 @@ Tidligere destination bliver sidste mellemliggende punkt.</string>
     <string name="quick_action_add_first_intermediate_desc">Tryk på genvejen vil tilføje et første mellemliggende punkt på skærmens centrum.</string>
     <string name="quick_action_auto_zoom">Auto kortzoom til/fra</string>
     <string name="quick_action_auto_zoom_desc">Tryk på genvejen vil skifte den hastighedafhænige kortzoom til/fra.</string>
-    <string name="quick_action_auto_zoom_on">Auto kortzoom til</string>
-    <string name="quick_action_auto_zoom_off">Auto kortzoom fra</string>
+    <string name="quick_action_auto_zoom_on">"Aktiver automatisk  kortzoom"</string>
+    <string name="quick_action_auto_zoom_off">"Deaktiver automatisk  kortzoom"</string>
     <string name="shared_string_paused">Pauset</string>
     <string name="type_city_town">Indtast by eller bydel</string>
     <string name="type_postcode">Indtast postnummer</string>
