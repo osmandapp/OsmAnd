@@ -2855,6 +2855,8 @@ Fonctionnalités principales :
     <string name="quick_action_start_stop_navigation_descr">Appuyez sur ce bouton pour démarrer la navigation ou l\'arrêter lorsqu\'elle est en cours.</string>
     <string name="mappilary_no_internet_desc">Vous devez être connecté à Internet pour afficher les photos Mapillary</string>
     <string name="retry">Essayer à nouveau</string>
-<string name="measurement_tool_action_bar">Sélectionner une localisation sur la carte et cliquer Ajouter pour ajouter un point à la mesure.</string>
+<string name="measurement_tool_action_bar">Sélectionnez un emplacement sur la carte et cliquez sur Ajouter pour l\'ajouter sur la règle.</string>
     <string name="measurement_tool">Outil de mesure</string>
+    <string name="shared_string_create">Créer</string>
+<string name="add_gpx_waypoint_bottom_sheet_title">Ajouter un point GPX</string>
     </resources>
