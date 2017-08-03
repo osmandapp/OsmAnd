@@ -25,7 +25,7 @@ public class MeasurementToolLayer extends OsmandMapLayer {
 	private OsmandMapTileView view;
 	private boolean inMeasurementMode;
 	private LinkedList<WptPt> measurementPoints = new LinkedList<>();
-	private LinkedList<WptPt> cacheMeasurementPoints;
+	private LinkedList<WptPt> cacheMeasurementPoints = new LinkedList<>();
 	private Bitmap centerIconDay;
 	private Bitmap centerIconNight;
 	private Bitmap pointIcon;

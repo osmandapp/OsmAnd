@@ -1,14 +1,17 @@
 package net.osmand.plus.measurementtool;
 
+import android.content.DialogInterface;
 import android.os.Bundle;
 import android.support.annotation.Nullable;
 import android.support.v4.app.Fragment;
+import android.support.v7.app.AlertDialog;
 import android.view.ContextThemeWrapper;
 import android.view.LayoutInflater;
 import android.view.Menu;
 import android.view.MenuItem;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.EditText;
 import android.widget.ImageButton;
 import android.widget.ImageView;
 import android.widget.TextView;
@@ -134,7 +137,7 @@ public class MeasurementToolFragment extends Fragment {
 						public boolean onMenuItemClick(MenuItem menuItem) {
 							switch (menuItem.getItemId()) {
 								case R.id.action_save_as_gpx:
-									Toast.makeText(mapActivity, "Save as gpx", Toast.LENGTH_SHORT).show();
+									saveAsGpxOnClick(mapActivity);
 									return true;
 								case R.id.action_clear_all:
 									measurementLayer.clearPoints();
@@ -152,6 +155,24 @@ public class MeasurementToolFragment extends Fragment {
 		}
 
 		return view;
+	}
+
+	private void saveAsGpxOnClick(MapActivity mapActivity) {
+		LayoutInflater inflater = getLayoutInflater();
+		final View view = inflater.inflate(R.layout.save_gpx_dialog, null);
+		EditText nameEt = view.findViewById(R.id.gpx_name_et);
+
+		new AlertDialog.Builder(mapActivity)
+				.setTitle(R.string.enter_gpx_name)
+				.setView(view)
+				.setPositiveButton(R.string.shared_string_save, new DialogInterface.OnClickListener() {
+					@Override
+					public void onClick(DialogInterface dialog, int which) {
+
+					}
+				})
+				.setNegativeButton(R.string.shared_string_cancel, null)
+				.show();
 	}
 
 	@Override
