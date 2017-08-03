@@ -35,13 +35,13 @@ import net.osmand.osm.PoiFilter;
 import net.osmand.osm.PoiType;
 import net.osmand.plus.ContextMenuAdapter;
 import net.osmand.plus.ContextMenuItem;
-import net.osmand.plus.GPXUtilities.NewGpxWaypoint;
 import net.osmand.plus.R;
 import net.osmand.plus.activities.MapActivity;
 import net.osmand.plus.mapcontextmenu.MapContextMenu;
 import net.osmand.plus.mapcontextmenu.other.MapMultiSelectionMenu;
 import net.osmand.plus.render.MapRenderRepositories;
 import net.osmand.plus.render.NativeOsmandLibrary;
+import net.osmand.plus.views.AddGpxPointBottomSheetHelper.NewPoint;
 import net.osmand.util.Algorithms;
 import net.osmand.util.MapUtils;
 
@@ -76,14 +76,14 @@ public class ContextMenuLayer extends OsmandMapLayer {
 	private GestureDetector movementListener;
 
 	private final MoveMarkerBottomSheetHelper mMoveMarkerBottomSheetHelper;
-	private final AddWaypointBottomSheetHelper mAddWaypointBottomSheetHelper;
+	private final AddGpxPointBottomSheetHelper mAddGpxPointBottomSheetHelper;
 	private boolean mInChangeMarkerPositionMode;
 	private IContextMenuProvider selectedObjectContextMenuProvider;
 	private boolean cancelApplyingNewMarkerPosition;
 	private LatLon applyingMarkerLatLon;
 	private boolean wasCollapseButtonVisible;
 	private boolean mInGpxDetailsMode;
-	private boolean mInAddGpxWaypointMode;
+	private boolean mInAddGpxPointMode;
 
 	private List<String> publicTransportTypes;
 	private Object selectedObject;
@@ -94,7 +94,11 @@ public class ContextMenuLayer extends OsmandMapLayer {
 		multiSelectionMenu = menu.getMultiSelectionMenu();
 		movementListener = new GestureDetector(activity, new MenuLayerOnGestureListener());
 		mMoveMarkerBottomSheetHelper = new MoveMarkerBottomSheetHelper(activity, this);
-		mAddWaypointBottomSheetHelper = new AddWaypointBottomSheetHelper(activity, this);
+		mAddGpxPointBottomSheetHelper = new AddGpxPointBottomSheetHelper(activity, this);
+	}
+
+	public AddGpxPointBottomSheetHelper getAddGpxPointBottomSheetHelper() {
+		return mAddGpxPointBottomSheetHelper;
 	}
 
 	@Override
@@ -207,10 +211,10 @@ public class ContextMenuLayer extends OsmandMapLayer {
 				contextMarker.draw(canvas);
 			}
 			mMoveMarkerBottomSheetHelper.onDraw(box);
-		} else if (mInAddGpxWaypointMode) {
+		} else if (mInAddGpxPointMode) {
 			canvas.translate(box.getPixWidth() / 2 - contextMarker.getWidth() / 2, box.getPixHeight() / 2 - contextMarker.getHeight());
 			contextMarker.draw(canvas);
-			mAddWaypointBottomSheetHelper.onDraw(box);
+			mAddGpxPointBottomSheetHelper.onDraw(box);
 		} else if (menu.isActive()) {
 			LatLon latLon = menu.getLatLon();
 			int x = (int) box.getPixXFromLatLon(latLon.getLatitude(), latLon.getLongitude());
@@ -289,7 +293,7 @@ public class ContextMenuLayer extends OsmandMapLayer {
 	}
 
 	public Object getMoveableObject() {
-		return mInChangeMarkerPositionMode || mInAddGpxWaypointMode ? menu.getObject() : null;
+		return mInChangeMarkerPositionMode ? menu.getObject() : null;
 	}
 
 	public boolean isInChangeMarkerPositionMode() {
@@ -301,7 +305,7 @@ public class ContextMenuLayer extends OsmandMapLayer {
 	}
 
 	public boolean isInAddGpxWaypointMode() {
-		return mInAddGpxWaypointMode;
+		return mInAddGpxPointMode;
 	}
 
 	public boolean isObjectMoveable(Object o) {
@@ -318,14 +322,14 @@ public class ContextMenuLayer extends OsmandMapLayer {
 	}
 
 	public void applyMovedObject(Object o, LatLon position, ApplyMovedObjectCallback callback) {
-		if (selectedObjectContextMenuProvider != null) {
+		if (selectedObjectContextMenuProvider != null && !isInAddGpxWaypointMode()) {
 			if (selectedObjectContextMenuProvider instanceof IMoveObjectProvider) {
 				final IMoveObjectProvider l = (IMoveObjectProvider) selectedObjectContextMenuProvider;
 				if (l.isObjectMovable(o)) {
 					l.applyNewObjectPosition(o, position, callback);
 				}
 			}
-		} else if (mInChangeMarkerPositionMode || mInAddGpxWaypointMode) {
+		} else if (mInChangeMarkerPositionMode || mInAddGpxPointMode) {
 			callback.onApplyMovedObject(true, null);
 		}
 	}
@@ -351,11 +355,7 @@ public class ContextMenuLayer extends OsmandMapLayer {
 					mMoveMarkerBottomSheetHelper.hide();
 					quitMovingMarker();
 
-					PointDescription pointDescription = null;
-					if (selectedObjectContextMenuProvider != null) {
-						pointDescription = selectedObjectContextMenuProvider.getObjectName(newObject);
-					}
-					menu.show(ll, pointDescription, newObject);
+
 					view.refreshMap();
 				}
 				selectedObjectContextMenuProvider = null;
@@ -369,9 +369,9 @@ public class ContextMenuLayer extends OsmandMapLayer {
 		});
 	}
 
-	public void createGpxWaypoint() {
-		if (!mInAddGpxWaypointMode) {
-			throw new IllegalStateException("Not in add gpx waypoint mode");
+	public void createGpxPoint() {
+		if (!mInAddGpxPointMode) {
+			throw new IllegalStateException("Not in add gpx point mode");
 		}
 
 		RotatedTileBox tileBox = activity.getMapView().getCurrentRotatedTileBox();
@@ -381,14 +381,14 @@ public class ContextMenuLayer extends OsmandMapLayer {
 
 		Object obj = getMoveableObject();
 		cancelApplyingNewMarkerPosition = false;
-		mAddWaypointBottomSheetHelper.enterApplyPositionMode();
+		mAddGpxPointBottomSheetHelper.enterApplyPositionMode();
 		applyMovedObject(obj, ll, new ApplyMovedObjectCallback() {
 			@Override
 			public void onApplyMovedObject(boolean success, @Nullable Object newObject) {
-				mAddWaypointBottomSheetHelper.exitApplyPositionMode();
+				mAddGpxPointBottomSheetHelper.exitApplyPositionMode();
 				if (success && !cancelApplyingNewMarkerPosition) {
-					mAddWaypointBottomSheetHelper.hide();
-					quitAddGpxWaipoint();
+					mAddGpxPointBottomSheetHelper.hide();
+					quitAddGpxPoint();
 
 					PointDescription pointDescription = null;
 					if (selectedObjectContextMenuProvider != null) {
@@ -449,8 +449,8 @@ public class ContextMenuLayer extends OsmandMapLayer {
 		}
 	}
 
-	private void quitAddGpxWaipoint() {
-		mInAddGpxWaypointMode = false;
+	private void quitAddGpxPoint() {
+		mInAddGpxPointMode = false;
 		mark(View.VISIBLE, R.id.map_ruler_layout,
 				R.id.map_left_widgets_panel, R.id.map_right_widgets_panel, R.id.map_center_info);
 
@@ -460,14 +460,14 @@ public class ContextMenuLayer extends OsmandMapLayer {
 		}
 	}
 
-	public void enterAddGpxWaypointMode(NewGpxWaypoint newGpxWaypoint) {
+	public void enterAddGpxPointMode(NewPoint newPoint) {
 		menu.updateMapCenter(null);
 		menu.hide();
 
 		activity.disableDrawer();
 
-		mInAddGpxWaypointMode = true;
-		mAddWaypointBottomSheetHelper.show(menu.getLeftIcon(), newGpxWaypoint);
+		mInAddGpxPointMode = true;
+		mAddGpxPointBottomSheetHelper.show(menu.getLeftIcon(), newPoint);
 		mark(View.INVISIBLE, R.id.map_ruler_layout,
 				R.id.map_left_widgets_panel, R.id.map_right_widgets_panel, R.id.map_center_info);
 
@@ -529,9 +529,9 @@ public class ContextMenuLayer extends OsmandMapLayer {
 		applyingMarkerLatLon = null;
 	}
 
-	public void cancelAddGpxWaypoint() {
+	public void cancelAddGpxPoint() {
 		cancelApplyingNewMarkerPosition = true;
-		quitAddGpxWaipoint();
+		quitAddGpxPoint();
 		activity.getContextMenu().show();
 		applyingMarkerLatLon = null;
 	}
@@ -648,10 +648,9 @@ public class ContextMenuLayer extends OsmandMapLayer {
 			if (latLon == null) {
 				latLon = getLatLon(point, tileBox);
 			}
-			if (mInAddGpxWaypointMode) {
-				if (pointDescription != null) {
-					mAddWaypointBottomSheetHelper.setTitle(pointDescription.getName());
-				}
+			if (mInAddGpxPointMode) {
+				String title = pointDescription == null ? "" : pointDescription.getName();
+				mAddGpxPointBottomSheetHelper.setTitle(title);
 				view.getAnimatedDraggingThread().startMoving(latLon.getLatitude(), latLon.getLongitude(), view.getZoom(), true);
 			} else {
 				showContextMenu(latLon, pointDescription, selectedObj, provider);
@@ -668,7 +667,12 @@ public class ContextMenuLayer extends OsmandMapLayer {
 			selectedObjectContextMenuProvider = null;
 			LatLon latLon = getLatLon(point, tileBox);
 			activity.getMapViewTrackingUtilities().setMapLinkedToLocation(false);
-			menu.show(latLon, null, null);
+			if (mInAddGpxPointMode) {
+				mAddGpxPointBottomSheetHelper.setTitle("");
+				view.getAnimatedDraggingThread().startMoving(latLon.getLatitude(), latLon.getLongitude(), view.getZoom(), true);
+			} else {
+				menu.show(latLon, null, null);
+			}
 			return true;
 		}
 		return false;
@@ -697,7 +701,7 @@ public class ContextMenuLayer extends OsmandMapLayer {
 	}
 
 	public boolean disableLongPressOnMap() {
-		if (mInChangeMarkerPositionMode || mInGpxDetailsMode || mInAddGpxWaypointMode) {
+		if (mInChangeMarkerPositionMode || mInGpxDetailsMode || mInAddGpxPointMode) {
 			return true;
 		}
 		boolean res = false;

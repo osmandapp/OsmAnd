@@ -10,26 +10,25 @@ import android.widget.TextView;
 import net.osmand.data.LatLon;
 import net.osmand.data.PointDescription;
 import net.osmand.data.RotatedTileBox;
-import net.osmand.plus.GPXUtilities;
 import net.osmand.plus.GPXUtilities.GPXFile;
-import net.osmand.plus.GPXUtilities.NewGpxWaypoint;
 import net.osmand.plus.IconsCache;
 import net.osmand.plus.R;
 import net.osmand.plus.activities.MapActivity;
 import net.osmand.plus.mapcontextmenu.MapContextMenu;
 
-public class AddWaypointBottomSheetHelper {
+public class AddGpxPointBottomSheetHelper {
 	private final View view;
 	private final TextView title;
-	private String titleText = "";
+	private String titleText;
 	private final TextView description;
 	private final Context context;
 	private final MapContextMenu contextMenu;
 	private final ContextMenuLayer contextMenuLayer;
 	private boolean applyingPositionMode;
-	private NewGpxWaypoint newGpxWaypoint;
+	private NewPoint newPoint;
+	private PointDescription pointDescription;
 
-	public AddWaypointBottomSheetHelper(final MapActivity activity, ContextMenuLayer ctxMenuLayer) {
+	public AddGpxPointBottomSheetHelper(final MapActivity activity, ContextMenuLayer ctxMenuLayer) {
 		this.contextMenuLayer = ctxMenuLayer;
 		view = activity.findViewById(R.id.add_gpx_waypoint_bottom_sheet);
 		title = (TextView) view.findViewById(R.id.add_gpx_waypoint_bottom_sheet_title);
@@ -43,17 +42,17 @@ public class AddWaypointBottomSheetHelper {
 		view.findViewById(R.id.create_button).setOnClickListener(new View.OnClickListener() {
 			@Override
 			public void onClick(View v) {
-				contextMenuLayer.createGpxWaypoint();
-				GPXFile gpx = newGpxWaypoint.getGpx();
+				contextMenuLayer.createGpxPoint();
+				GPXFile gpx = newPoint.getGpx();
 				LatLon latLon = contextMenu.getLatLon();
-				activity.getContextMenu().getWptPtPointEditor().add(gpx, latLon, titleText);
+				activity.getContextMenu().getWptPtPointEditor().add(gpx, latLon, titleText, pointDescription);
 			}
 		});
 		view.findViewById(R.id.cancel_button).setOnClickListener(new View.OnClickListener() {
 			@Override
 			public void onClick(View v) {
 				hide();
-				contextMenuLayer.cancelAddGpxWaypoint();
+				contextMenuLayer.cancelAddGpxPoint();
 			}
 		});
 	}
@@ -74,8 +73,14 @@ public class AddWaypointBottomSheetHelper {
 		return view.getVisibility() == View.VISIBLE;
 	}
 
-	public void show(Drawable drawable, NewGpxWaypoint newGpxWaypoint) {
-		this.newGpxWaypoint = newGpxWaypoint;
+	public void show(Drawable drawable, NewPoint newPoint) {
+		this.newPoint = newPoint;
+		pointDescription = newPoint.getPointDescription();
+		if (pointDescription.isWpt()) {
+			setTitle(context.getString(R.string.add_gpx_waypoint));
+		} else if (pointDescription.isRoutePoint()) {
+			setTitle(context.getString(R.string.add_route_point));
+		}
 		exitApplyPositionMode();
 		view.setVisibility(View.VISIBLE);
 		((ImageView) view.findViewById(R.id.icon)).setImageDrawable(drawable);
@@ -97,6 +102,24 @@ public class AddWaypointBottomSheetHelper {
 		if (applyingPositionMode) {
 			applyingPositionMode = false;
 			view.findViewById(R.id.create_button).setEnabled(true);
+		}
+	}
+
+	public static class NewPoint {
+		private PointDescription pointDescription;
+		private GPXFile gpx;
+
+		public NewPoint(GPXFile gpx, PointDescription pointDescription) {
+			this.gpx = gpx;
+			this.pointDescription = pointDescription;
+		}
+
+		public GPXFile getGpx() {
+			return gpx;
+		}
+
+		public PointDescription getPointDescription() {
+			return pointDescription;
 		}
 	}
 }

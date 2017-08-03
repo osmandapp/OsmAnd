@@ -102,18 +102,6 @@ public class GPXUtilities {
 		public float speed;
 	}
 
-	public static class NewGpxWaypoint {
-		private GPXFile gpx;
-
-		public NewGpxWaypoint(GPXFile gpx) {
-			this.gpx = gpx;
-		}
-
-		public GPXFile getGpx() {
-			return gpx;
-		}
-	}
-
 	public static class WptPt extends GPXExtensions implements LocationPoint {
 		public boolean firstPoint = false;
 		public boolean lastPoint = false;
@@ -860,7 +848,7 @@ public class GPXUtilities {
 			return false;
 		}
 
-		public WptPt addWptPt(double lat, double lon, long time, String description, String name, String category, int color) {
+		public WptPt addWptPt(double lat, double lon, long time, String description, String name, String category, int color, PointDescription pointDescription) {
 			double latAdjusted = Double.parseDouble(latLonFormat.format(lat));
 			double lonAdjusted = Double.parseDouble(latLonFormat.format(lon));
 			final WptPt pt = new WptPt(latAdjusted, lonAdjusted, time, Double.NaN, 0, Double.NaN);
@@ -871,7 +859,15 @@ public class GPXUtilities {
 				pt.setColor(color);
 			}
 
-			points.add(pt);
+			if (pointDescription.isWpt()) {
+				points.add(pt);
+			} else if (pointDescription.isRoutePoint()) {
+				if (routes.size() == 0) {
+					routes.add(new Route());
+				}
+				Route currentRoute = routes.get(routes.size() -1);
+				currentRoute.points.add(pt);
+			}
 			modifiedTime = System.currentTimeMillis();
 
 			return pt;

@@ -31,7 +31,7 @@
             android:layout_marginLeft="16dp"
             android:layout_marginRight="16dp"
             android:layout_marginTop="16dp"
-            android:text="@string/add_gpx_waypoint_bottom_sheet_title"/>
+            tools:text="@string/add_gpx_waypoint"/>
 
         <TextView
             android:id="@+id/description"

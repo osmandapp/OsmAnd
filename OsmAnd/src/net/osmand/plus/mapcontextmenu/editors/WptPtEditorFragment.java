@@ -10,6 +10,7 @@ import android.support.annotation.Nullable;
 import android.view.View;
 
 import net.osmand.data.LatLon;
+import net.osmand.data.PointDescription;
 import net.osmand.plus.FavouritesDbHelper.FavoriteGroup;
 import net.osmand.plus.GPXUtilities;
 import net.osmand.plus.GPXUtilities.GPXFile;
@@ -152,6 +153,7 @@ public class WptPtEditorFragment extends PointEditorFragment {
 		}
 
 		GPXFile gpx = editor.getGpxFile();
+		PointDescription pointDescription = editor.getPointDescription();
 		if (gpx != null) {
 			if (gpx.showCurrentTrack) {
 				wpt = savingTrackHelper.insertPointData(wpt.getLatitude(), wpt.getLongitude(),
@@ -161,7 +163,7 @@ public class WptPtEditorFragment extends PointEditorFragment {
 				}
 			} else {
 				wpt = gpx.addWptPt(wpt.getLatitude(), wpt.getLongitude(),
-						System.currentTimeMillis(), description, name, category, color);
+						System.currentTimeMillis(), description, name, category, color, pointDescription);
 				new SaveGpxAsyncTask(getMyApplication(), gpx, editor.isGpxSelected()).execute();
 			}
 		}
