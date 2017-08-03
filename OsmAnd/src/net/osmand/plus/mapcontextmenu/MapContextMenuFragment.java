@@ -884,7 +884,7 @@ public class MapContextMenuFragment extends Fragment implements DownloadEvents {
 								newMenuTopViewHeight = menuTopViewHeightExcludingTitle + titleHeight + titleButtonHeight + downloadButtonsHeight + titleProgressHeight;
 								dy = Math.max(0, newMenuTopViewHeight - menuTopViewHeight - (newMenuTopShadowAllHeight - menuTopShadowAllHeight));
 							} else {
-								menuTopViewHeightExcludingTitle = newMenuTopViewHeight - line1.getMeasuredHeight() - line2MeasuredHeight;
+								menuTopViewHeightExcludingTitle = newMenuTopViewHeight - line1.getMeasuredHeight() - line2MeasuredHeight - titleButtonHeight - downloadButtonsHeight - titleProgressHeight;
 								menuTitleTopBottomPadding = (line1.getMeasuredHeight() - line1.getLineCount() * line1.getLineHeight())
 										+ (line2MeasuredHeight - line2LineCount * line2LineHeight);
 							}
@@ -1128,8 +1128,13 @@ public class MapContextMenuFragment extends Fragment implements DownloadEvents {
 		RotatedTileBox box = map.getCurrentRotatedTileBox().copy();
 		box.setCenterLocation(0.5f, map.getMapPosition() == OsmandSettings.BOTTOM_CONSTANT ? 0.15f : 0.5f);
 		box.setZoom(zoom);
-		int markerMapCenterX = (int) box.getPixXFromLatLon(mapCenter.getLatitude(), mapCenter.getLongitude());
-		int markerMapCenterY = (int) box.getPixYFromLatLon(mapCenter.getLatitude(), mapCenter.getLongitude());
+		boolean hasMapCenter = mapCenter != null;
+		int markerMapCenterX = 0;
+		int markerMapCenterY = 0;
+		if (hasMapCenter) {
+			markerMapCenterX = (int) box.getPixXFromLatLon(mapCenter.getLatitude(), mapCenter.getLongitude());
+			markerMapCenterY = (int) box.getPixYFromLatLon(mapCenter.getLatitude(), mapCenter.getLongitude());
+		}
 		float cpyOrig = box.getCenterPixelPoint().y;
 
 		box.setCenterLocation(0.5f, 0.5f);
@@ -1146,7 +1151,7 @@ public class MapContextMenuFragment extends Fragment implements DownloadEvents {
 		float origMarkerY = this.origMarkerY + cpyDelta;
 
 		LatLon latlon;
-		if (center) {
+		if (center || !hasMapCenter) {
 			latlon = reqMarkerLocation;
 		} else {
 			latlon = box.getLatLonFromPixel(markerMapCenterX, markerMapCenterY);

@@ -2718,4 +2718,8 @@
     <string name="live_monitoring_max_interval_to_send_desrc">تحديد الوقت الإضافي المخزن للحفاظ على المواقع وإرسالها دون اتصال</string>
     <string name="mappilary_no_internet_desc">أنت بحاجة إلى إنترنت لعرض الصور من Mapillary</string>
     <string name="retry">اعد المحاولة</string>
+<string name="measurement_tool_action_bar">حدد موقعا على الخريطة وانقر على إضافة لإضافة نقطة إلى المسطرة.</string>
+    <string name="measurement_tool">أداة القياس</string>
+    <string name="add_gpx_waypoint_bottom_sheet_title">إضافة إحداثية وجهة gpx</string>
+    <string name="shared_string_create">إنشاء</string>
 </resources>

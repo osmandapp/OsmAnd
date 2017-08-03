@@ -187,7 +187,7 @@ public class AvailableGPXFragment extends OsmandExpandableListFragment {
 				allGpxAdapter.notifyDataSetChanged();
 			}
 			asyncProcessor = new ProcessGpxTask();
-			asyncProcessor.execute();
+			asyncProcessor.executeOnExecutor(AsyncTask.THREAD_POOL_EXECUTOR);
 		}
 		updateCurrentTrack();
 

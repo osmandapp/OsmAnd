@@ -638,7 +638,7 @@
     <string name="osmand_accessibility_description">Umożliwia korzystanie ze specjalnych ułatwień dostępu urządzenia bezpośrednio w OsmAnd. Pozwala na np. dostosowanie szybkości mowy syntezowanych komunikatów głosowych, skonfigurowanie poruszania się po ekranie za pomocą pada kierunkowego, użycie trackballa do zmiany przybliżenia lub użycie syntezowanych komunikatów głosowych np. do automatycznego powiadamiania o położeniu.</string>
 
 
-    <string name="osmand_development_plugin_description">Wyświetla ustawienia dotyczące rozwoju i diagnozowania błędów. Dodaje możliwość symulacji nawigacji, wyświetlania informacji o wydajności renderowania, czy też testowania wskazówek głosowych. Te funkcje oraz ustawienia przeznaczone są dla twórców oprogramowania. Zwykły użytkownik nie potrzebuje ich do prawidłowego działania programu.</string>
+    <string name="osmand_development_plugin_description">Wyświetla ustawienia dotyczące rozwoju i diagnozowania błędów. Dodaje możliwość symulacji nawigacji, wyświetlania informacji o wydajności renderowania, czy też testowania komunikatów głosowych. Te funkcje oraz ustawienia przeznaczone są dla twórców oprogramowania. Zwykły użytkownik nie potrzebuje ich do prawidłowego działania programu.</string>
     <string name="plugins_screen">Wtyczki</string>
 
     <string name="prefs_plugins_descr">Aktywuje zaawansowane ustawienia i dodatkową funkcjonalność</string>
@@ -859,7 +859,7 @@ Miejsce parkowania oraz czas można znaleźć na karcie w panelu oraz na widżec
     <string name="map_widget_speed">Prędkość</string>
     <string name="map_widget_distance">Cel trasy</string>
     <string name="map_widget_altitude">Wysokość</string>
-    <string name="map_widget_time">Czas do celu</string>
+    <string name="map_widget_time">Czas do osiągnięcia celu</string>
     <string name="map_widget_next_turn">Następny zakręt</string>
     <string name="map_widget_next_turn_small">Następny zakręt (mały)</string>
     <string name="map_widget_next_next_turn">Drugi zakręt</string>
@@ -946,26 +946,24 @@ OsmAnd jest otwarto-źródłowym programem do nawigacji z dostępem do szerokiej
     <string name="poi_filter_accomodation">Zakwaterowanie</string>
     <string name="poi_filter_restaurants">Restauracje</string>
     <string name="poi_filter_sightseeing">Zwiedzanie</string>
-    <string name="osmand_plus_long_description_1000_chars">"
- OsmAnd+ (OSM Automatyczne Nawigowanie Do celu)
-
- OsmAnd jest otwarto-źródłowym programem do nawigacji z dostępem do szerokiej gamy globalnych map OpenStreetMap (OSM). Wszystkie dane map (wektorowe lub kafelkowe) mogą być przechowywane na karcie pamięci telefonu w użycia offline. OsmAnd oferuje również funkcjonalność wyznaczania tras w trybie offline i online z zapowiedziami głosowymi.
-
-OsmAnd+ jest płatną wersją programu, kupując program wspierasz projekt, nowe funkcje i otrzymujesz najnowsze uaktualnienia.
-
-Niektóre z podstawowych funkcji:
- - Działa trybie offline (przechowuje pobrane mapy wektorowych lub kafelkowe w pamięci urządzenia)
- - Dostępne kompaktowe mapy w trybie offlinie dla całego świata
- - Pobieranie map kraju lub regionu bezpośrednio z aplikacji
- - Możliwość nakładania kilku warstw map, takich jak GPX lub tras nawigacji, ciekawe miejsc, ulubionych, linii konturu, przystanków komunikacji miejskiej, dodatkowe mapy z konfigurowalną przejrzystością
- - Wyszukiwanie Offline adresów i miejsc (POI)
- - Wyznaczanie w trybie Offline tras na średnich dystansach
- - Tryby samochodowy, rowerowy i pieszy z:
- - opcjonalnym automatycznym przełączaniem widoku dzień/noc
- - opcjonalnie skalowanie map w zależności od prędkości
- - opcjonalne wyrównanie map według kompasu lub kierunku ruchu
- - opcjonalne wyświetlanie wskazywanie pasów, ograniczeń prędkości, nagrane i syntezowane komunikaty głosowe.
- "</string>
+    <string name="osmand_plus_long_description_1000_chars">OsmAnd+ (OSM Automatyczne Nawigowanie Do celu)
+\n
+\n OsmAnd jest otwarto-źródłowym programem do nawigacji z dostępem do szerokiej gamy globalnych map OpenStreetMap (OSM). Wszystkie dane map (wektorowe lub kafelkowe) mogą być przechowywane na karcie pamięci telefonu do użycia bez połączenia z siecią. OsmAnd umożliwia również wyznaczanie tras zarówno w trybie offline i online z komunikatami głosowymi.
+\n
+\nOsmAnd+ jest płatną wersją programu, kupując program wspierasz projekt, nowe funkcje i otrzymujesz najnowsze uaktualnienia.
+\n
+\nNiektóre z podstawowych funkcji:
+\n - Działa trybie offline (przechowuje pobrane mapy wektorowych lub kafelkowe w pamięci urządzenia)
+\n - Dostępne kompaktowe mapy w trybie offlinie dla całego świata
+\n - Pobieranie map kraju lub regionu bezpośrednio z aplikacji
+\n - Możliwość nakładania kilku warstw map, takich jak GPX lub tras nawigacji, ciekawe miejsc, ulubionych, linii konturu, przystanków komunikacji miejskiej, dodatkowe mapy z konfigurowalną przejrzystością
+\n - Wyszukiwanie Offline adresów i miejsc (POI)
+\n - Wyznaczanie w trybie Offline tras na średnich dystansach
+\n - Tryby samochodowy, rowerowy i pieszy z:
+\n - opcjonalnym automatycznym przełączaniem widoku dzień/noc
+\n - opcjonalnie skalowanie map w zależności od prędkości
+\n - opcjonalne wyrównanie map według kompasu lub kierunku ruchu
+\n - opcjonalne wyświetlanie wskazywanie pasów, ograniczeń prędkości, nagrane i syntezowane komunikaty głosowe.</string>
     <string name="select_navigation_mode">Wybierz tryb poruszania się</string>
 
 
@@ -1010,7 +1008,7 @@ Niektóre z podstawowych funkcji:
     <string name="map_widget_max_speed">Ograniczenie prędkości</string>
 
 
-    <string name="monitoring_control_start">GPX</string>
+    <string name="monitoring_control_start">Ślad GPX</string>
 
     <string name="download_srtm_maps">Poziomice</string>
     <string name="download_select_map_types">Inne mapy</string>
@@ -1138,8 +1136,8 @@ Niektóre z podstawowych funkcji:
     <string name="plugin_distance_point_ele">wysokość</string>
     <string name="plugin_distance_point">Punkt</string>
     <string name="gpx_file_name">Nazwa pliku GPX</string>
-    <string name="gpx_saved_sucessfully">Plik GPX został pomyślnie zapisany do {0}</string>
-    <string name="osmand_distance_planning_plugin_description">Dodaje widżet za pomocą, którego można tworzyć ślady klikając na mapie. Dostarcza również możliwość użycia lub modyfikacji istniejących już plików GPX, co przydaje się do planowania wycieczek lub mierzenia odległości pomiędzy punktami. Wynik może zostać zapisany jako plik GPX i użyty ponownie.</string>
+    <string name="gpx_saved_sucessfully">Zapisano plik GPX do {0}</string>
+    <string name="osmand_distance_planning_plugin_description">Dodaje widżet za pomocą, którego można tworzyć ślady klikając na mapie. Dostarcza również możliwość użycia lub modyfikowania istniejących już plików GPX, co przydaje się do planowania wycieczek lub mierzenia odległości pomiędzy punktami. Wynik może zostać zapisany jako plik GPX i użyty ponownie.</string>
     <string name="osmand_distance_planning_plugin_name">Kalkulator odległości i narzędzie planowania</string>
     <string name="use_distance_measurement_help">* Naciśnij, aby zaznaczyć punkt.
 \n * Naciśnij i przytrzymaj mapę, aby usunąć poprzedni punkt.
@@ -1205,7 +1203,7 @@ Niektóre z podstawowych funkcji:
     <string name="driving_region_descr">Wybiera region poruszania się: Stany Zjednoczone, Europa, Wielka Brytania, Azja oraz inne</string>
     <string name="driving_region">Region ruchu</string>
     <string name="driving_region_canada">Kanada</string>
-    <string name="map_widget_fps_info">Informacje diagnozowania błędów FPS</string>
+    <string name="map_widget_fps_info">Diagnozowanie błędów FPS</string>
     <string name="local_index_tile_data_zooms">Pobrane stopnie przybliżenia: %1$s</string>
     <string name="local_index_tile_data_expire">Wygaśnięcie (minuty): %1$s</string>
     <string name="local_index_tile_data_downloadable">Do pobrania: %1$s</string>
@@ -1294,7 +1292,7 @@ Niektóre z podstawowych funkcji:
     <string name="routing_attr_avoid_motorway_description">Omijanie autostrad</string>
     <string name="routing_attr_weight_name">Ograniczenie wagi</string>
     <string name="routing_attr_weight_description">Określa maksymalną, dozwoloną masę pojazdu</string>
-    <string name="select_gpx">Wybierz GPX…</string>
+    <string name="select_gpx">Wybierz ślad GPX…</string>
     <string name="route_descr_select_destination">Proszę wybrać cel trasy</string>
     <string name="shared_string_select_on_map">Wskaż na mapie</string>
     <string name="shared_string_favorite">Ulubione</string>
@@ -1395,7 +1393,7 @@ Niektóre z podstawowych funkcji:
     <string name="osmo_auth_pending">Oczekiwanie na uwierzytelnienie…</string>
     <string name="osmo_conn_successfull">Nawiązano połączenie: %1$s</string>
     <string name="osmo_mode_restart">Uruchom ponownie sesję OsMo</string>
-    <string name="osmo_settings_debug">Informacje diagnozowania błędów</string>
+    <string name="osmo_settings_debug">Diagnozowanie błędów</string>
     <string name="hours_ago">godzin temu</string>
     <string name="minutes_ago">minut temu</string>
     <string name="seconds_ago">sekund temu</string>
@@ -1462,7 +1460,7 @@ Niektóre z podstawowych funkcji:
     <string name="osmo_user_left">Użytkownik %1$s opuścił grupę %2$s</string>
     <string name="osmo_show_group_notifications">Wyświetlanie powiadomień grup</string>
     <string name="osmo_show_group_notifications_descr">Wyświetla powiadomienia, gdy użytkownik dołącza do grupy lub opuszcza grupę</string>
-    <string name="gpx_file_is_empty">Plik GPX jest pusty</string>
+    <string name="gpx_file_is_empty">Ślad GPX jest pusty</string>
 
     <string name="shared_string_my_tracks">Ślady</string>
     <string name="shared_string_my_favorites">Ulubione</string>
@@ -1545,8 +1543,8 @@ Niektóre z podstawowych funkcji:
     <string name="live_monitoring_m">Śledzenie online (wymagane GPX)</string>
     <string name="live_monitoring_start">Rozpocznij śledzenie online</string>
     <string name="live_monitoring_stop">Zatrzymaj śledzenie online</string>
-    <string name="gpx_monitoring_start">Rozpocznij rejestrowanie GPX</string>
-    <string name="gpx_monitoring_stop">Zatrzymaj rejestrowanie GPX</string>
+    <string name="gpx_monitoring_start">Rozpocznij rejestrowanie śladu GPX</string>
+    <string name="gpx_monitoring_stop">Zatrzymaj rejestrowanie śladu GPX</string>
     <string name="gpx_start_new_segment">Rozpocznij nowy segment</string>
     <string name="rendering_attr_hideBuildings_name">Budynki</string>
     <string name="rendering_attr_hideNonVehicleHighways_name">Trasy niedostępne dla aut</string>
@@ -1608,11 +1606,11 @@ Niektóre z podstawowych funkcji:
     <string name="save_track_to_gpx_globally">Rejestrowanie śladu do pliku GPX</string>
     <string name="save_track_to_gpx_globally_descr">Rejestrowanie położenia do pliku GPX można włączyć lub wyłączyć używając widżetu rejestrowania GPX na ekranie mapy</string>
     <string name="save_track_interval_globally">Częstość rejestrowania</string>
-	<string name="record_plugin_description">Aktywuje funkcje rejestrowania i zapisywania śladów za pomocą widżetu rejestrowania śladów GPX na ekranie mapy lub automatyczne rejestruje przebiegi wszystkich tras do plików GPX.
-\n
-\nNagrane ślady można udostępnić znajomym lub wykorzystać na rzecz rozwoju mapy OpenStreetMap. Sportowcy mogą korzystać z nagranych śladów do monitorowania treningów. W tym celu OsmAnd udostępnia podstawowe informacje takie jak czasy okrążeń, średnia prędkość itp. Ślady mogą być później analizowane w specjalnych narzędziach do analizy przygotowanych przez innych dostawców.</string>
+	<string name="record_plugin_description">Aktywuje funkcje rejestrowania i zapisywania śladów za pomocą widżetu rejestrowania śladów GPX na ekranie mapy lub automatyczne rejestruje przebiegi wszystkich tras do plików GPX. 
+\n 
+\nZarejestrowane ślady można udostępnić znajomym lub wykorzystać na rzecz rozwoju mapy OpenStreetMap. Sportowcy mogą korzystać ze śladów do monitorowania treningów. W tym celu OsmAnd udostępnia podstawowe informacje takie jak czasy okrążeń, średnia prędkość itp. Ślady mogą być później analizowane w specjalnych narzędziach do analizy przygotowanych przez innych dostawców oprogramowania.</string>
     <string name="confirm_every_run">Ponawianie pytania</string>
-    <string name="save_global_track_interval_descr">Wybierz tempo rejestrowania dla nagrywania ścieżki (włączonego poprzez widżet rejestrowania GPX na mapie)</string>
+    <string name="save_global_track_interval_descr">Wybierz tempo rejestrowania śladu (włączonego poprzez widżet rejestrowania GPX na mapie)</string>
     <string name="save_global_track_interval">Ogólna częstość rejestrowania</string>
     <string name="traffic_warning_speed_limit">Ograniczenie prędkości</string>
     <string name="traffic_warning_border_control">Kontrola graniczna</string>
@@ -1957,7 +1955,7 @@ Długość %2$s</string>
     <string name="poi_dialog_poi_type">Rodzaj użytecznego miejsca</string>
     <string name="poi_action_delete">usuń</string>
     <string name="building_number">Numer budynku</string>
-    <string name="av_locations_descr">Plik GPS z notatkami o położeniach</string>
+    <string name="av_locations_descr">Plik śladu GPX z notatkami o położeniach</string>
     <string name="rendering_value_boldOutline_name">Pogrubione kontury</string>
     <string name="download_live_updates">Aktualizowanie na bieżąco</string>
     <string name="commit_poi">Wyślij użyteczne miejsce</string>
@@ -2100,7 +2098,7 @@ Długość %2$s</string>
     <string name="osn_reopen_dialog_title">Otwórz notatkę ponownie</string>
     <string name="osn_close_dialog_title">Zamknij notatkę</string>
     <string name="osn_add_dialog_success">Utworzono uwagę</string>
-    <string name="context_menu_item_delete_waypoint">Usunąć punkt GPX?</string>
+    <string name="context_menu_item_delete_waypoint">Usunąć punkt śladu GPX?</string>
     <string name="shared_string_location">Położenie</string>
     <string name="share_osm_edits_subject">Edycje OSM udostępnione przez OsmAnd</string>
     <string name="lang_fy">Fryzyjski</string>
@@ -2124,7 +2122,7 @@ Długość %2$s</string>
     <string name="osn_close_dialog_error">Wystąpił błąd: nie zamknięto uwagi</string>
     <string name="shared_string_commit">Zatwierdź</string>
 
-    <string name="context_menu_item_edit_waypoint">Edytuj punkt GPX</string>
+    <string name="context_menu_item_edit_waypoint">Edytuj punkt śladu GPX</string>
     <string name="lang_nds">Dolno Saksoński</string>
     <string name="lang_mk">Macedoński</string>
     <string name="lang_als">Albański (Tosk)</string>
@@ -2777,4 +2775,13 @@ Reprezentuje obszar: %1$s x %2$s</string>
     <string name="quick_action_start_stop_navigation">Rozpocznij/zakończ nawigowanie</string>
     <string name="quick_action_start_stop_navigation_descr">Rozpoczyna lub zatrzymuje rozpoczęte nawigowanie.</string>
     <string name="quick_action_show_navigation_finish_dialog">Wyświetl ekran kończenia nawigowania</string>
+    <string name="release_2_7">• Wtyczka Mapillary z obrazami miejsc
+\n
+\n • Widżet linijki do mierzenia odległości
+\n
+\n • Interwały podziału śladu GPX ze szczegółowymi informacjami na temat śladu
+\n
+\n • Inne ulepszenia i naprawione błędy
+\n
+\n</string>
     </resources>

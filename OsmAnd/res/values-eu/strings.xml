@@ -2748,4 +2748,8 @@ Area honi dagokio: %1$s x %2$s</string>
     <string name="live_monitoring_max_interval_to_send_desrc">Zehaztu bidaltzeke dauden kokalekuak gordetzeko denbora-buffer bat</string>
     <string name="mappilary_no_internet_desc">Internet behar duzu Mapillary-ko argazkiak ikusteko</string>
     <string name="retry">Saiatu berriro</string>
+<string name="measurement_tool">Neurtzeko tresna</string>
+    <string name="measurement_tool_action_bar">Hautatu kokaleku bat mapan eta egin klik Gehitu botoian erregelan puntu bat gehitzeko.</string>
+    <string name="add_gpx_waypoint_bottom_sheet_title">Gehitu gpx bide-puntua</string>
+    <string name="shared_string_create">Sortu</string>
 </resources>

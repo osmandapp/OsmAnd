@@ -9,6 +9,7 @@
          3. All your modified/created strings are in the top of the file (to make easier find what\'s translated).
     PLEASE: Have a look at http://code.google.com/p/osmand/wiki/UIConsistency, it may really improve your and our work  :-)  Thx - Hardy
     -->
+    <string name="measurement_tool_action_bar">Select a location on the map and click "Add" to add a point to the ruler.</string>
     <string name="measurement_tool">Measurement tool</string>
     <string name="quick_action_resume_pause_navigation">Resume/Pause Navigation</string>
     <string name="quick_action_resume_pause_navigation_descr">Press this button to pause the navigation, or to resume it if it was already paused.</string>
@@ -2659,4 +2660,6 @@
     <string name="shared_string_action_name">Action name</string>
     <string name="mappilary_no_internet_desc">You need internet to view photos from Mapillary</string>
     <string name="retry">Retry</string>
+    <string name="add_gpx_waypoint_bottom_sheet_title">Add gpx waypoint</string>
+    <string name="shared_string_create">Create</string>
 </resources>

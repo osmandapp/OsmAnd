@@ -2719,4 +2719,8 @@ Pro praghere iscrie su còdighe intreu</string>
     <string name="live_monitoring_max_interval_to_send_desrc">Dislinda un\'intervallu de tempus pro mantènnere sas positziones de imbiare cando non b\'est connessione</string>
     <string name="mappilary_no_internet_desc">Tenes bisòngiu de ìnternet pro bìdere sas fotografias de Mapillary</string>
     <string name="retry">Torra a proare</string>
+<string name="measurement_tool_action_bar">Issèbera una positzione in sa mapa e incarca Annanghe pro annànghere unu puntu a su righellu.</string>
+    <string name="measurement_tool">Aina de medidura</string>
+    <string name="add_gpx_waypoint_bottom_sheet_title">Annanghe unu puntu de coladòrgiu gpx</string>
+    <string name="shared_string_create">Crea</string>
 </resources>

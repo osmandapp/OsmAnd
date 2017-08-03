@@ -2814,4 +2814,8 @@ Tidligere destination bliver sidste mellemliggende punkt.</string>
     <string name="live_monitoring_max_interval_to_send_desrc">Angiv en buffer for hvor lang tid positioner skal gemmes, når der ingen internetforbindelse er</string>
     <string name="retry">Prøv igen</string>
 <string name="mappilary_no_internet_desc">Internetforbindelse er nødvendig for at se fotos fra Mapillary</string>
-    </resources>
+    <string name="measurement_tool">Måleværktøj</string>
+    <string name="measurement_tool_action_bar">Vælg en placering på kortet og klik på Tilføj for at føje et punkt til linealen.</string>
+    <string name="add_gpx_waypoint_bottom_sheet_title">Tilføj gpx rutepunkt</string>
+    <string name="shared_string_create">Opret</string>
+</resources>

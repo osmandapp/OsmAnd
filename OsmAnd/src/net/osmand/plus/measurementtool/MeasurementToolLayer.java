@@ -25,6 +25,7 @@ public class MeasurementToolLayer extends OsmandMapLayer {
 	private OsmandMapTileView view;
 	private boolean inMeasurementMode;
 	private LinkedList<WptPt> measurementPoints = new LinkedList<>();
+	private LinkedList<WptPt> cacheMeasurementPoints;
 	private Bitmap centerIconDay;
 	private Bitmap centerIconNight;
 	private Bitmap pointIcon;
@@ -78,6 +79,8 @@ public class MeasurementToolLayer extends OsmandMapLayer {
 
 	void clearPoints() {
 		measurementPoints.clear();
+		cacheMeasurementPoints.clear();
+		view.refreshMap();
 	}
 
 	@Override
@@ -133,8 +136,29 @@ public class MeasurementToolLayer extends OsmandMapLayer {
 		WptPt pt = new WptPt();
 		pt.lat = l.getLatitude();
 		pt.lon = l.getLongitude();
-		measurementPoints.add(pt);
+		if (measurementPoints.size() > 0) {
+			if (!measurementPoints.get(measurementPoints.size() - 1).equals(pt)) {
+				measurementPoints.add(pt);
+			}
+		} else {
+			measurementPoints.add(pt);
+		}
+		cacheMeasurementPoints = new LinkedList<>(measurementPoints);
 		view.refreshMap();
+	}
+
+	boolean undoPointOnClick() {
+		measurementPoints.remove(measurementPoints.size() - 1);
+		WptPt pt = measurementPoints.get(measurementPoints.size() - 1);
+		view.getAnimatedDraggingThread().startMoving(pt.getLatitude(), pt.getLongitude(), view.getZoom(), true);
+		return measurementPoints.size() > 0;
+	}
+
+	boolean redoPointOnClick() {
+		WptPt pt = cacheMeasurementPoints.get(measurementPoints.size());
+		measurementPoints.add(pt);
+		view.getAnimatedDraggingThread().startMoving(pt.getLatitude(), pt.getLongitude(), view.getZoom(), true);
+		return cacheMeasurementPoints.size() > measurementPoints.size();
 	}
 
 	@Override

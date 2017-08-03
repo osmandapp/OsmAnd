@@ -2807,4 +2807,7 @@ OsmAnd (Automated Navigation Directions) 是一個地圖和導航的應用程式
     <string name="mappilary_no_internet_desc">您需要網際網路才能從 Mapillary 檢視照片</string>
     <string name="retry">重試</string>
 <string name="measurement_tool">測量工具</string>
-    </resources>
+    <string name="measurement_tool_action_bar">在地圖上選擇一個位置，然後輕點增加以便增加一個標點到尺規。</string>
+    <string name="add_gpx_waypoint_bottom_sheet_title">增加 gpx 航點</string>
+    <string name="shared_string_create">建立</string>
+</resources>

@@ -1699,4 +1699,7 @@
     <string name="pref_vector_map">Vektor xəritə parametrləri</string>
     <string name="file_with_name_already_exists">Bu adda fayl artıq mövcuddur.</string>
     <string name="gpx_navigation">GPX marşrut</string>
-    </resources>
+    <string name="measurement_tool">Ölçmə aləti</string>
+    <string name="add_gpx_waypoint_bottom_sheet_title">GPX yol nöqtəsi əlavə et</string>
+    <string name="shared_string_create">Yarat</string>
+</resources>

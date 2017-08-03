@@ -2419,8 +2419,8 @@ U vypadku, kali vy lubіcie OsmAnd і OSM і chočacie padtrymać jaho, heta іd
     <string name="full_version_thanks">Dziakuj Vam za nabyćcio poŭnaj versii OsmAnd!</string>
     <string name="routing_attr_relief_smoothness_factor_hills_name">Ŭzhorysty</string>
     <string name="routing_attr_relief_smoothness_factor_more_plains_name">Raŭninny</string>
-    <string name="routing_attr_driving_style_safety_name">Biaśpiečny</string>
-    <string name="routing_attr_driving_style_speed_name">Chutkasny</string>
+    <string name="routing_attr_driving_style_safety_name">Addavać pieravahu vakolnym daroham</string>
+    <string name="routing_attr_driving_style_speed_name">Bolš za karotkija maršruty</string>
     <string name="routing_attr_driving_style_balance_name">Zbałansavany</string>
     <string name="shared_string_slope">Schił</string>
     <string name="add_new_folder">Dadać novuju tečku</string>
@@ -2750,14 +2750,27 @@ U vypadku, kali vy lubіcie OsmAnd і OSM і chočacie padtrymać jaho, heta іd
     
     <string name="range_min_max">Adliehlasć = Min./Maks.</string>
     <string name="min_max">Min./Maks.</string>
-    <string name="release_2_7">\\022 Dadatak Mapillary z vuličnymi vyjavami
+    <string name="release_2_7">• Dadatak Mapillary z vuličnymi vyjavami 
 \n
-\n • Vidžet-liniejka dlia vymiarenniaŭ dystancyj
-\n
-\n • Razdzielienyja GPX-intervaly z padrabiaznaj infarmacyjaj ab vašym treku
-\n
+\n • Vidžet-liniejka dlia vymiarenniaŭ dystancyj 
+\n 
+\n • Razdzielienyja GPX-intervaly z padrabiaznaj infarmacyjaj ab vašym treku 
+\n 
 \n • Inšyja paliapšenni i vypraŭlienni chibaŭ
 \n
 \n</string>
     <string name="rendering_value_translucent_pink_name">Paŭprazrysty ružovy</string>
+    <string name="measurement_tool">Vymiareńnie</string>
+    <string name="quick_action_resume_pause_navigation">Adnavić/Prypynić Navihacyju</string>
+    <string name="quick_action_resume_pause_navigation_descr">Naciśnicie hetuju knopku, kab prypynić navihacyju ci adnavić jaje, kali jana ŭžo była prypynienaja.</string>
+    <string name="quick_action_show_navigation_finish_dialog">Pakazvać dyjałoh Zaviaršeńnie navihacyi</string>
+    <string name="quick_action_start_stop_navigation">Start/Finiš Navihacyi</string>
+    <string name="quick_action_start_stop_navigation_descr">Naciśnicie hetuju knopku, kab pačać navihacyju ci spynić jaje, kali jana ŭžo pačałasia.</string>
+    <string name="mappilary_no_internet_desc">Vam patrebien Internet dla prahladu fatahrafij z Mapillary</string>
+    <string name="retry">Paŭtaryć sprobu</string>
+    <string name="add_gpx_waypoint_bottom_sheet_title">Dadać GPX šlach</string>
+    <string name="shared_string_create">Stvaryć</string>
+<string name="measurement_tool_action_bar">Vyłučycie miesća na mapie i naćisnicie knopku Dadać, kab dadać kropku da liniejcy.</string>
+    <string name="live_monitoring_max_interval_to_send">Čas bufieryzacyi dlia anlajn sačennia</string>
+    <string name="live_monitoring_max_interval_to_send_desrc">Zadaje čas bufieryzacyi dlia zbieražennia miescaŭ dlia adpraŭki biez zlučennia</string>
     </resources>

@@ -2734,4 +2734,10 @@ Indikas lokon:  %1$s x %2$s"</string>
     <string name="quick_action_start_stop_navigation_descr">Premu tiun ĉi butonon por ekigi navigadon aŭ por ĉesigi ĝin se ĝi estas jam aktivigita.</string>
     <string name="live_monitoring_max_interval_to_send">Temp-bufro por enreta registrado</string>
     <string name="live_monitoring_max_interval_to_send_desrc">Difini temp-bufron por konservi sendendajn poziciojn seninterrete</string>
-    </resources>
+    <string name="measurement_tool">Mezurilo</string>
+    <string name="mappilary_no_internet_desc">Vi bezonas interret-konekton por vidi fotojn de Mapillary</string>
+    <string name="retry">Reprovi</string>
+<string name="measurement_tool_action_bar">Elektu pozicion sur la mapo kaj premu ‘Aldoni’ por aldoni punkton al mezuri.</string>
+    <string name="add_gpx_waypoint_bottom_sheet_title">Aldoni GPX-navigadpunkton</string>
+    <string name="shared_string_create">Krei</string>
+</resources>
