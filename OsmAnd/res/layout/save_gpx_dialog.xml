@@ -3,7 +3,6 @@
     xmlns:android="http://schemas.android.com/apk/res/android"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:animateLayoutChanges="true"
     android:orientation="vertical">
 
     <EditText
@@ -24,12 +23,12 @@
         android:gravity="center_horizontal"
         android:text="@string/file_with_name_already_exists"
         android:textColor="@color/marker_red"
-        android:visibility="gone"/>
+        android:visibility="invisible"/>
 
     <View
         android:layout_width="match_parent"
         android:layout_height="1dp"
-        android:layout_marginTop="16dp"
+        android:layout_marginTop="8dp"
         android:background="?attr/dashboard_divider"/>
 
     <RelativeLayout

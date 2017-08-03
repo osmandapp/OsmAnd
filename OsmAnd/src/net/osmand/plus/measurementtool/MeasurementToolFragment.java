@@ -5,6 +5,8 @@ import android.os.Bundle;
 import android.support.annotation.Nullable;
 import android.support.v4.app.Fragment;
 import android.support.v7.app.AlertDialog;
+import android.text.Editable;
+import android.text.TextWatcher;
 import android.view.ContextThemeWrapper;
 import android.view.LayoutInflater;
 import android.view.Menu;
@@ -18,6 +20,7 @@ import android.widget.TextView;
 import android.widget.Toast;
 
 import net.osmand.AndroidUtils;
+import net.osmand.IndexConstants;
 import net.osmand.plus.IconsCache;
 import net.osmand.plus.R;
 import net.osmand.plus.activities.MapActivity;
@@ -25,6 +28,11 @@ import net.osmand.plus.helpers.AndroidUiHelper;
 import net.osmand.plus.views.mapwidgets.MapInfoWidgetsFactory;
 import net.osmand.plus.views.mapwidgets.MapInfoWidgetsFactory.TopToolbarController;
 import net.osmand.plus.widgets.IconPopupMenu;
+
+import java.io.File;
+import java.text.SimpleDateFormat;
+import java.util.Date;
+import java.util.Locale;
 
 public class MeasurementToolFragment extends Fragment {
 
@@ -158,9 +166,43 @@ public class MeasurementToolFragment extends Fragment {
 	}
 
 	private void saveAsGpxOnClick(MapActivity mapActivity) {
+		final File dir = mapActivity.getMyApplication().getAppPath(IndexConstants.GPX_INDEX_DIR);
 		LayoutInflater inflater = getLayoutInflater();
 		final View view = inflater.inflate(R.layout.save_gpx_dialog, null);
 		EditText nameEt = view.findViewById(R.id.gpx_name_et);
+		final TextView fileExistsTv = view.findViewById(R.id.file_exists_text_view);
+
+		final String suggestedName = new SimpleDateFormat("dd-M-yyyy hh:mm", Locale.US).format(new Date());
+		String displayedName = String.copyValueOf(suggestedName.toCharArray());
+		File fout = new File(dir, suggestedName + ".gpx");
+		int ind = 1;
+		while (fout.exists()) {
+			displayedName = suggestedName + " " + (++ind);
+			fout = new File(dir, displayedName + ".gpx");
+		}
+		nameEt.setText(displayedName);
+		nameEt.setSelection(displayedName.length());
+
+		nameEt.addTextChangedListener(new TextWatcher() {
+			@Override
+			public void beforeTextChanged(CharSequence charSequence, int i, int i1, int i2) {
+
+			}
+
+			@Override
+			public void onTextChanged(CharSequence charSequence, int i, int i1, int i2) {
+
+			}
+
+			@Override
+			public void afterTextChanged(Editable editable) {
+				if (new File(dir, editable.toString() + ".gpx").exists()) {
+					fileExistsTv.setVisibility(View.VISIBLE);
+				} else {
+					fileExistsTv.setVisibility(View.INVISIBLE);
+				}
+			}
+		});
 
 		new AlertDialog.Builder(mapActivity)
 				.setTitle(R.string.enter_gpx_name)
