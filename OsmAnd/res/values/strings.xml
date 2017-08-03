@@ -2662,4 +2662,8 @@
     <string name="retry">Retry</string>
     <string name="add_gpx_waypoint_bottom_sheet_title">Add gpx waypoint</string>
     <string name="shared_string_create">Create</string>
+    <string name="empty_state_my_tracks">Add and Record Tracks</string>
+    <string name="empty_state_my_tracks_desc">Record or import tracks to view</string>
+    <string name="empty_state_favourites">Add Favorites</string>
+    <string name="empty_state_favourites_desc">Add favorites on map or import them from filesystem</string>
 </resources>

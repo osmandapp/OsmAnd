@@ -21,6 +21,7 @@ import android.view.MenuInflater;
 import android.view.MenuItem;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.Button;
 import android.widget.CheckBox;
 import android.widget.ExpandableListView;
 import android.widget.Filter;
@@ -76,6 +77,7 @@ public class FavoritesTreeFragment extends OsmandExpandableListFragment {
 	private FavouritesAdapter favouritesAdapter = new FavouritesAdapter();
 	private FavouritesDbHelper helper;
 
+	private OsmandApplication app;
 	private boolean selectionMode = false;
 	private Set<FavouritePoint> favoritesSelected = new LinkedHashSet<>();
 	private Set<FavoriteGroup> groupsToDelete = new LinkedHashSet<>();
@@ -88,6 +90,7 @@ public class FavoritesTreeFragment extends OsmandExpandableListFragment {
 	@Override
 	public void onAttach(Context context) {
 		super.onAttach(context);
+		this.app = (OsmandApplication) getActivity().getApplication();
 
 		helper = getMyApplication().getFavorites();
 		favouritesAdapter.synchronizeGroups();
@@ -156,6 +159,17 @@ public class FavoritesTreeFragment extends OsmandExpandableListFragment {
 			footerView = inflater.inflate(R.layout.list_shadow_footer, null, false);
 			listView.addFooterView(footerView);
 		}
+		View emptyView = view.findViewById(android.R.id.empty);
+		ImageView emptyImageView = (ImageView) emptyView.findViewById(R.id.empty_state_image_view);
+		emptyImageView.setImageResource(app.getSettings().isLightContent() ? R.drawable.ic_empty_state_favorites_day_result : R.drawable.ic_empty_state_favorites_night_result);
+		Button importButton = (Button) emptyView.findViewById(R.id.import_button);
+		importButton.setOnClickListener(new View.OnClickListener() {
+			@Override
+			public void onClick(View view) {
+				addTrack();
+			}
+		});
+		listView.setEmptyView(emptyView);
 		listView.setAdapter(favouritesAdapter);
 		setListView(listView);
 		setHasOptionsMenu(true);
@@ -465,6 +479,10 @@ public class FavoritesTreeFragment extends OsmandExpandableListFragment {
 		} else {
 			shareFavorites(null);
 		}
+	}
+
+	private void addTrack() {
+		((FavoritesActivity) getActivity()).addTrack();
 	}
 
 	public void shareFavorites(final FavoriteGroup group) {
