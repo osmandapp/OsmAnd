@@ -1946,7 +1946,7 @@
 	<string name="poi_social_facility_food_bank">Banque alimentaire</string>
 	<string name="poi_historic_civilization_ancient_greek">Civilisation : Grèce antique</string>
 	<string name="poi_payment_pro100_no">Cartes PRO100 non acceptées</string>
-	<string name="poi_payment_pro100_yes">"PRO100 "</string>
+	<string name="poi_payment_pro100_yes">PRO100</string>
 	<string name="poi_fair_trade_no">Commerce équitable : non</string>
 	<string name="poi_fair_trade_only">Uniquement des produits issus du commerce équitable</string>
 
@@ -3003,4 +3003,35 @@
 	<string name="poi_vending_water">Vente d\'eau</string>
 	<string name="poi_fuel_autogas">GPL/LPG</string>
 	<string name="poi_crop_rape">Culture : colza</string>
+	<string name="poi_animal_shelter_type">Animaux acceptés</string>
+	<string name="poi_animal_shelter_purpose">Objet</string>
+
+<string name="poi_seamark_dyke">Digue marine</string>
+	<string name="poi_lock_basin">Bassin fermé</string>
+	<string name="poi_animal_shelter_wildlife">Faune</string>
+	<string name="poi_animal_shelter_horse">Chevaux</string>
+	<string name="poi_animal_shelter_mammal">Mammifères</string>
+	<string name="poi_animal_shelter_fish">Poissons</string>
+
+	<string name="poi_information_trail_blaze">Balise de voie</string>
+	<string name="poi_traffic_signals_sound_walk">Autorisé uniquement à pied</string>
+
+	<string name="poi_piste_grooming_backcountry">Arrière-pays</string>
+	<string name="poi_aerialway_occupancy">Cabine/Siège/capacité de voiture</string>
+	<string name="poi_payment_account_cards_yes">Cartes de comptes</string>
+	<string name="poi_payment_account_cards_no">Cartes de compte non acceptées</string>
+	<string name="poi_payment_ep_cash_yes">Carte de paiement</string>
+	<string name="poi_payment_ep_cash_no">carte de paiement non acceptée</string>
+	<string name="poi_full_service_yes">Service complet</string>
+	<string name="poi_resource_dimension_stone">Pierre de taille</string>
+	<string name="poi_artwork_type_relief">Type d\'oeuvre : secours</string>
+	<string name="poi_architecture_timber_frame">Architecture : Cadre en bois</string>
+	<string name="poi_architecture_oldrussian">Architecture : russe ancien</string>
+	<string name="poi_architecture_wilhelminian_style">Architecture : Style wilhelminien</string>
+	<string name="poi_tunnel_waterway">Tunnel d\'eau</string>
+	<string name="poi_bridge_waterway">Pont de voie navigable</string>
+	<string name="poi_payment_ep_minicash_yes">MiniCash</string>
+	<string name="poi_payment_ep_monedero4b_yes">Monedero 4B</string>
+	<string name="poi_payment_ep_monedero_yes">Monedero</string>
+	<string name="poi_brushless_no">Sans brosse : non</string>
 	</resources>
