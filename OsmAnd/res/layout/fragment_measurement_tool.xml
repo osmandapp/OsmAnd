@@ -43,11 +43,9 @@
                 android:layout_alignParentEnd="true"
                 android:layout_alignParentRight="true"
                 android:layout_centerVertical="true"
-                android:layout_marginEnd="16dp"
-                android:layout_marginLeft="16dp"
-                android:layout_marginRight="16dp"
-                android:layout_marginStart="16dp"
                 android:background="@null"
+                android:paddingEnd="16dp"
+                android:paddingStart="16dp"
                 tools:src="@drawable/ic_action_arrow_down"/>
 
             <TextView
@@ -83,6 +81,28 @@
             android:layout_height="1dp"
             android:background="?attr/dashboard_divider"/>
 
+        <LinearLayout
+            android:id="@+id/points_list_container"
+            android:layout_width="match_parent"
+            android:layout_height="220dp"
+            android:background="@color/ctx_menu_info_view_bg_dark"
+            android:orientation="vertical"
+            android:visibility="gone">
+
+            <include layout="@layout/card_bottom_divider"/>
+
+            <android.support.v7.widget.RecyclerView
+                android:id="@+id/points_recycler_view"
+                android:layout_width="match_parent"
+                android:layout_height="215dp"/>
+
+            <ImageView
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:scaleType="fitXY"
+                android:src="@drawable/bg_shadow_onmap"/>
+        </LinearLayout>
+
         <RelativeLayout
             android:layout_width="match_parent"
             android:layout_height="wrap_content">
@@ -94,11 +114,9 @@
                 android:layout_alignParentLeft="true"
                 android:layout_alignParentStart="true"
                 android:layout_centerVertical="true"
-                android:layout_marginEnd="16dp"
-                android:layout_marginLeft="16dp"
-                android:layout_marginRight="16dp"
-                android:layout_marginStart="16dp"
                 android:background="@null"
+                android:paddingEnd="16dp"
+                android:paddingStart="16dp"
                 tools:src="@drawable/ic_action_undo_dark"/>
 
             <ImageButton
@@ -106,11 +124,11 @@
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_centerVertical="true"
-                android:layout_marginLeft="8dp"
-                android:layout_marginStart="8dp"
                 android:layout_toEndOf="@id/undo_point_button"
                 android:layout_toRightOf="@id/undo_point_button"
                 android:background="@null"
+                android:paddingEnd="8dp"
+                android:paddingStart="8dp"
                 tools:src="@drawable/ic_action_redo_dark"/>
 
             <Button

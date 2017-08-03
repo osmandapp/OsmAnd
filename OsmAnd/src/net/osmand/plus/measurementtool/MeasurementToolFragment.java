@@ -2,10 +2,12 @@ package net.osmand.plus.measurementtool;
 
 import android.app.ProgressDialog;
 import android.content.DialogInterface;
+import android.graphics.drawable.Drawable;
 import android.os.AsyncTask;
 import android.os.Bundle;
 import android.support.annotation.Nullable;
 import android.support.v4.app.Fragment;
+import android.support.v4.content.ContextCompat;
 import android.support.v7.app.AlertDialog;
 import android.support.v7.widget.SwitchCompat;
 import android.text.Editable;
@@ -55,15 +57,18 @@ public class MeasurementToolFragment extends Fragment {
 	private String pointsSt;
 
 	private boolean wasCollapseButtonVisible;
+	private boolean pointsDetailsOpened;
 
 	@Nullable
 	@Override
 	public View onCreateView(LayoutInflater inflater, @Nullable ViewGroup container, @Nullable Bundle savedInstanceState) {
 		final MapActivity mapActivity = (MapActivity) getActivity();
 		final MeasurementToolLayer measurementLayer = mapActivity.getMapLayers().getMeasurementToolLayer();
-		IconsCache iconsCache = mapActivity.getMyApplication().getIconsCache();
+		final IconsCache iconsCache = mapActivity.getMyApplication().getIconsCache();
 		final boolean nightMode = mapActivity.getMyApplication().getDaynightHelper().isNightModeForMapControls();
 		final int themeRes = nightMode ? R.style.OsmandDarkTheme : R.style.OsmandLightTheme;
+		final int backgroundColor = ContextCompat.getColor(getActivity(),
+				nightMode ? R.color.ctx_menu_info_view_bg_dark : R.color.ctx_menu_info_view_bg_light);
 		boolean portrait = AndroidUiHelper.isOrientationPortrait(mapActivity);
 
 		pointsSt = mapActivity.getString(R.string.points).toLowerCase();
@@ -72,6 +77,7 @@ public class MeasurementToolFragment extends Fragment {
 
 		final View mainView = view.findViewById(R.id.main_view);
 		AndroidUtils.setBackground(mapActivity, mainView, nightMode, R.drawable.bg_bottom_menu_light, R.drawable.bg_bottom_menu_dark);
+		view.findViewById(R.id.points_list_container).setBackgroundColor(backgroundColor);
 
 		distanceTv = (TextView) mainView.findViewById(R.id.measurement_distance_text_view);
 		pointsTv = (TextView) mainView.findViewById(R.id.measurement_points_text_view);
@@ -84,7 +90,11 @@ public class MeasurementToolFragment extends Fragment {
 		upDownBtn.setOnClickListener(new View.OnClickListener() {
 			@Override
 			public void onClick(View view) {
-				Toast.makeText(getActivity(), "Up / Down", Toast.LENGTH_SHORT).show();
+				if (!pointsDetailsOpened) {
+					upBtnOnClick(mainView, iconsCache.getThemedIcon(R.drawable.ic_action_arrow_down));
+				} else {
+					downBtnOnClick(mainView, iconsCache.getThemedIcon(R.drawable.ic_action_arrow_up));
+				}
 			}
 		});
 
@@ -123,13 +133,13 @@ public class MeasurementToolFragment extends Fragment {
 			@Override
 			public void onClick(View view) {
 				measurementLayer.addPointOnClick();
-				enable(undoBtn);
+				enable(undoBtn, upDownBtn);
 				disable(redoBtn);
 				updateText();
 			}
 		});
 
-		disable(undoBtn, redoBtn);
+		disable(undoBtn, redoBtn, upDownBtn);
 
 		enterMeasurementMode();
 
@@ -164,7 +174,7 @@ public class MeasurementToolFragment extends Fragment {
 									return true;
 								case R.id.action_clear_all:
 									measurementLayer.clearPoints();
-									disable(undoBtn, redoBtn);
+									disable(undoBtn, redoBtn, upDownBtn);
 									updateText();
 									return true;
 							}
@@ -178,6 +188,18 @@ public class MeasurementToolFragment extends Fragment {
 		}
 
 		return view;
+	}
+
+	private void upBtnOnClick(View view, Drawable icon) {
+		pointsDetailsOpened = true;
+		view.findViewById(R.id.points_list_container).setVisibility(View.VISIBLE);
+		((ImageButton) view.findViewById(R.id.up_down_button)).setImageDrawable(icon);
+	}
+
+	private void downBtnOnClick(View view, Drawable icon) {
+		pointsDetailsOpened = false;
+		view.findViewById(R.id.points_list_container).setVisibility(View.GONE);
+		((ImageButton) view.findViewById(R.id.up_down_button)).setImageDrawable(icon);
 	}
 
 	private void saveAsGpxOnClick(MapActivity mapActivity) {
