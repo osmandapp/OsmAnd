@@ -87,8 +87,8 @@
     <string name="select_postcode">Select postcode</string>
     <string name="quick_action_auto_zoom">Auto zoom map on/off</string>
     <string name="quick_action_auto_zoom_desc">Tapping the action button will turn on/off auto zoom map according to your speed.</string>
-    <string name="quick_action_auto_zoom_on">Auto zoom map on</string>
-    <string name="quick_action_auto_zoom_off">Auto zoom map off</string>
+    <string name="quick_action_auto_zoom_on">Enable auto zoom map</string>
+    <string name="quick_action_auto_zoom_off">Disable auto zoom map</string>
     <string name="quick_action_add_destination">Add destination</string>
     <string name="quick_action_replace_destination">Replace destination</string>
     <string name="quick_action_add_first_intermediate">Add first intermediate</string>
@@ -2108,7 +2108,7 @@
     <string name="preferred_locale">Display language</string>
     <string name="incomplete_locale">incomplete</string>
     <string name="unit_of_length_descr">Change units of length</string>
-    <string name="unit_of_length">Unit of length</string>
+    <string name="unit_of_length">Units of length</string>
     <string name="si_mi_feet">Miles/feet</string>
     <string name="si_mi_yard">Miles/yards</string>
     <string name="si_km_m">Kilometers/meters</string>
