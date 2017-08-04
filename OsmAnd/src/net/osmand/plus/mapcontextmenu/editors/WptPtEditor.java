@@ -7,12 +7,41 @@ import net.osmand.plus.GPXUtilities.WptPt;
 import net.osmand.plus.GpxSelectionHelper.SelectedGpxFile;
 import net.osmand.plus.activities.MapActivity;
 
-public class WptPtEditor extends GpxPointEditor {
+public class WptPtEditor extends PointEditor {
+
+	private OnDismissListener onDismissListener;
+	private GPXFile gpxFile;
+	private WptPt wpt;
+	private boolean gpxSelected;
 
 	public static final String TAG = "WptPtEditorFragment";
 
 	public WptPtEditor(MapActivity mapActivity) {
 		super(mapActivity);
+	}
+
+	public interface OnDismissListener {
+		void openTrackActivity();
+	}
+
+	public void setOnDismissListener(OnDismissListener listener) {
+		onDismissListener = listener;
+	}
+
+	public OnDismissListener getOnDismissListener() {
+		return onDismissListener;
+	}
+
+	public GPXFile getGpxFile() {
+		return gpxFile;
+	}
+
+	public boolean isGpxSelected() {
+		return gpxSelected;
+	}
+
+	public WptPt getWptPt() {
+		return wpt;
 	}
 
 	@Override
@@ -34,7 +63,7 @@ public class WptPtEditor extends GpxPointEditor {
 		wpt = new WptPt(latLon.getLatitude(), latLon.getLongitude(),
 				System.currentTimeMillis(), Double.NaN, 0, Double.NaN);
 		wpt.name = title;
-		WptPtEditorFragment.showInstance(mapActivity);
+		showEditorFragment();
 	}
 
 	public void add(GPXFile gpxFile, LatLon latLon, String title, String categoryName, int categoryColor, boolean skipDialog) {
@@ -70,7 +99,7 @@ public class WptPtEditor extends GpxPointEditor {
 
 		wpt.category = categoryName;
 
-		WptPtEditorFragment.showInstance(mapActivity, skipDialog);
+		showEditorFragment(skipDialog);
 	}
 
 	public void edit(WptPt wpt) {
@@ -85,6 +114,14 @@ public class WptPtEditor extends GpxPointEditor {
 			gpxFile = selectedGpxFile.getGpxFile();
 		}
 		this.wpt = wpt;
+		showEditorFragment();
+	}
+
+	public void showEditorFragment() {
 		WptPtEditorFragment.showInstance(mapActivity);
+	}
+
+	public void showEditorFragment(boolean skipDialog) {
+		WptPtEditorFragment.showInstance(mapActivity, skipDialog);
 	}
 }

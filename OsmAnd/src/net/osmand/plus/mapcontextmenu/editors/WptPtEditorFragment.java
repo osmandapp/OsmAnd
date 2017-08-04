@@ -26,7 +26,8 @@ import net.osmand.util.Algorithms;
 import java.io.File;
 
 public class WptPtEditorFragment extends PointEditorFragment {
-	private WptPtEditor editor;
+
+	protected WptPtEditor editor;
 	private WptPt wpt;
 	private SavingTrackHelper savingTrackHelper;
 	private GpxSelectionHelper selectedGpxHelper;
@@ -34,15 +35,19 @@ public class WptPtEditorFragment extends PointEditorFragment {
 	private boolean saved;
 	private int color;
 	private int defaultColor;
-	private boolean skipDialog;
+	protected boolean skipDialog;
 
 	@Override
 	public void onAttach(Activity activity) {
 		super.onAttach(activity);
 		savingTrackHelper = getMapActivity().getMyApplication().getSavingTrackHelper();
 		selectedGpxHelper = getMapActivity().getMyApplication().getSelectedGpxHelper();
-		editor = getMapActivity().getContextMenu().getWptPtPointEditor();
+		assignEditor();
 		defaultColor = getResources().getColor(R.color.gpx_color_point);
+	}
+
+	protected void assignEditor() {
+		editor = getMapActivity().getContextMenu().getWptPtPointEditor();
 	}
 
 	@Override
@@ -67,6 +72,16 @@ public class WptPtEditorFragment extends PointEditorFragment {
 		if (skipDialog) {
 			save(true);
 		}
+	}
+
+	@Override
+	public void dismiss() {
+		super.dismiss();
+		WptPtEditor.OnDismissListener listener = editor.getOnDismissListener();
+		if (listener != null) {
+			listener.openTrackActivity();
+		}
+		editor.setOnDismissListener(null);
 	}
 
 	@Override
