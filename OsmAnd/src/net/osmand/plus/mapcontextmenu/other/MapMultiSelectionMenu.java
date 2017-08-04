@@ -12,6 +12,7 @@ import net.osmand.plus.mapcontextmenu.MenuController.MenuType;
 import net.osmand.plus.mapcontextmenu.MenuTitleController;
 import net.osmand.plus.views.ContextMenuLayer;
 import net.osmand.plus.views.ContextMenuLayer.IContextMenuProvider;
+import net.osmand.plus.views.OsmandMapTileView;
 
 import java.util.Collections;
 import java.util.Comparator;
@@ -194,8 +195,8 @@ public class MapMultiSelectionMenu extends BaseMenuController {
 	public void openContextMenu(@NonNull MenuObject menuObject) {
 		IContextMenuProvider provider = selectedObjects.remove(menuObject.getObject());
 		hide();
-		getMapActivity().getMapLayers().getContextMenuLayer().showContextMenu(
-				menuObject.getLatLon(), menuObject.getPointDescription(), menuObject.getObject(), provider);
+		ContextMenuLayer contextMenuLayer = getMapActivity().getMapLayers().getContextMenuLayer();
+		contextMenuLayer.showContextMenu(menuObject.getLatLon(), menuObject.getPointDescription(), menuObject.getObject(), provider);
 	}
 
 	private void clearSelectedObjects() {

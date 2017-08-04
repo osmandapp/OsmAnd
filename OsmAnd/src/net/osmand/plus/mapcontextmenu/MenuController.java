@@ -348,6 +348,10 @@ public abstract class MenuController extends BaseMenuController {
 		return false;
 	}
 
+	public boolean isClosable() {
+		return true;
+	}
+
 	public boolean needStreetName() {
 		return !displayDistanceDirection();
 	}

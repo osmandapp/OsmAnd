@@ -696,21 +696,6 @@ public class MapActivityActions implements DialogProvider {
 					}
 				}).createItem());
 
-		optionsMenuHelper.addItem(new ContextMenuItem.ItemBuilder().setTitleId(R.string.measurement_tool, mapActivity)
-				.setIcon(R.drawable.ic_action_ruler)
-				.setListener(new ContextMenuAdapter.ItemClickListener() {
-					@Override
-					public boolean onContextMenuClick(ArrayAdapter<ContextMenuItem> adapter, int itemId, int position, boolean isChecked) {
-						MeasurementToolFragment fragment = new MeasurementToolFragment();
-						mapActivity.getSupportFragmentManager()
-								.beginTransaction()
-								.add(R.id.bottomFragmentContainer, fragment, MeasurementToolFragment.TAG)
-								.addToBackStack(MeasurementToolFragment.TAG)
-								.commitAllowingStateLoss();
-						return true;
-					}
-				}).createItem());
-
 		optionsMenuHelper.addItem(new ItemBuilder().setTitleId(R.string.get_directions, mapActivity)
 				.setIcon(R.drawable.ic_action_gdirections_dark)
 				.setListener(new ContextMenuAdapter.ItemClickListener() {
@@ -773,6 +758,21 @@ public class MapActivityActions implements DialogProvider {
 					}
 				}).createItem());
 		*/
+
+		optionsMenuHelper.addItem(new ContextMenuItem.ItemBuilder().setTitleId(R.string.measurement_tool, mapActivity)
+				.setIcon(R.drawable.ic_action_ruler)
+				.setListener(new ContextMenuAdapter.ItemClickListener() {
+					@Override
+					public boolean onContextMenuClick(ArrayAdapter<ContextMenuItem> adapter, int itemId, int position, boolean isChecked) {
+						MeasurementToolFragment fragment = new MeasurementToolFragment();
+						mapActivity.getSupportFragmentManager()
+								.beginTransaction()
+								.add(R.id.bottomFragmentContainer, fragment, MeasurementToolFragment.TAG)
+								.addToBackStack(MeasurementToolFragment.TAG)
+								.commitAllowingStateLoss();
+						return true;
+					}
+				}).createItem());
 
 		optionsMenuHelper.addItem(new ItemBuilder().setTitleId(R.string.prefs_plugins, mapActivity)
 				.setIcon(R.drawable.ic_extension_dark)
@@ -843,16 +843,16 @@ public class MapActivityActions implements DialogProvider {
 		//////////// Others
 		OsmandPlugin.registerOptionsMenu(mapActivity, optionsMenuHelper);
 
-		int pluginsItemIndex = -1;
+		int measureDistanceItemIndex = -1;
 		for (int i = 0; i < optionsMenuHelper.length(); i++) {
-			if (optionsMenuHelper.getItem(i).getTitleId() == R.string.prefs_plugins) {
-				pluginsItemIndex = i;
+			if (optionsMenuHelper.getItem(i).getTitleId() == R.string.measurement_tool) {
+				measureDistanceItemIndex = i;
 				break;
 			}
 		}
 
 		ItemBuilder divider = new ItemBuilder().setLayout(R.layout.drawer_divider);
-		divider.setPosition(pluginsItemIndex >= 0 ? pluginsItemIndex : 7);
+		divider.setPosition(measureDistanceItemIndex >= 0 ? measureDistanceItemIndex : 8);
 		optionsMenuHelper.addItem(divider.createItem());
 
 		getMyApplication().getAppCustomization().prepareOptionsMenu(mapActivity, optionsMenuHelper);

@@ -5,27 +5,31 @@ import android.graphics.BitmapFactory;
 import android.graphics.Canvas;
 import android.graphics.Paint;
 import android.graphics.Path;
+import android.graphics.PointF;
 
 import net.osmand.data.LatLon;
+import net.osmand.data.PointDescription;
 import net.osmand.data.QuadPoint;
 import net.osmand.data.RotatedTileBox;
 import net.osmand.plus.GPXUtilities.WptPt;
 import net.osmand.plus.OsmAndFormatter;
 import net.osmand.plus.R;
+import net.osmand.plus.views.ContextMenuLayer;
 import net.osmand.plus.views.OsmandMapLayer;
 import net.osmand.plus.views.OsmandMapTileView;
 import net.osmand.util.MapUtils;
 
 import java.util.LinkedList;
+import java.util.List;
 
 import gnu.trove.list.array.TIntArrayList;
 
-public class MeasurementToolLayer extends OsmandMapLayer {
+public class MeasurementToolLayer extends OsmandMapLayer implements ContextMenuLayer.IContextMenuProvider {
 
 	private OsmandMapTileView view;
 	private boolean inMeasurementMode;
 	private LinkedList<WptPt> measurementPoints = new LinkedList<>();
-	private LinkedList<WptPt> cacheMeasurementPoints;
+	private LinkedList<WptPt> cacheMeasurementPoints = new LinkedList<>();
 	private Bitmap centerIconDay;
 	private Bitmap centerIconNight;
 	private Bitmap pointIcon;
@@ -66,6 +70,10 @@ public class MeasurementToolLayer extends OsmandMapLayer {
 		return measurementPoints.size();
 	}
 
+	public LinkedList<WptPt> getMeasurementPoints() {
+		return measurementPoints;
+	}
+
 	String getDistanceSt() {
 		float dist = 0;
 		if (measurementPoints.size() > 0) {
@@ -104,16 +112,19 @@ public class MeasurementToolLayer extends OsmandMapLayer {
 					}
 					tx.add(locX);
 					ty.add(locY);
-
-					if (tb.containsLatLon(pt.lat, pt.lon)) {
-						canvas.drawBitmap(pointIcon, locX - marginX, locY - marginY, bitmapPaint);
-					}
 				}
 				path.lineTo(tb.getCenterPixelX(), tb.getCenterPixelY());
 				tx.add(tb.getCenterPixelX());
 				ty.add(tb.getCenterPixelY());
 				calculatePath(tb, tx, ty, path);
 				canvas.drawPath(path, lineAttrs.paint);
+				for (WptPt pt : measurementPoints) {
+					if (tb.containsLatLon(pt.lat, pt.lon)) {
+						int locX = tb.getPixXFromLonNoRot(pt.lon);
+						int locY = tb.getPixYFromLatNoRot(pt.lat);
+						canvas.drawBitmap(pointIcon, locX - marginX, locY - marginY, bitmapPaint);
+					}
+				}
 			}
 		}
 	}
@@ -149,8 +160,10 @@ public class MeasurementToolLayer extends OsmandMapLayer {
 
 	boolean undoPointOnClick() {
 		measurementPoints.remove(measurementPoints.size() - 1);
-		WptPt pt = measurementPoints.get(measurementPoints.size() - 1);
-		view.getAnimatedDraggingThread().startMoving(pt.getLatitude(), pt.getLongitude(), view.getZoom(), true);
+		if (measurementPoints.size() > 0) {
+			WptPt pt = measurementPoints.get(measurementPoints.size() - 1);
+			view.getAnimatedDraggingThread().startMoving(pt.getLatitude(), pt.getLongitude(), view.getZoom(), true);
+		}
 		return measurementPoints.size() > 0;
 	}
 
@@ -169,5 +182,35 @@ public class MeasurementToolLayer extends OsmandMapLayer {
 	@Override
 	public boolean drawInScreenPixels() {
 		return false;
+	}
+
+	@Override
+	public void collectObjectsFromPoint(PointF point, RotatedTileBox tileBox, List<Object> o) {
+
+	}
+
+	@Override
+	public LatLon getObjectLocation(Object o) {
+		return null;
+	}
+
+	@Override
+	public PointDescription getObjectName(Object o) {
+		return null;
+	}
+
+	@Override
+	public boolean disableSingleTap() {
+		return isInMeasurementMode();
+	}
+
+	@Override
+	public boolean disableLongPressOnMap() {
+		return isInMeasurementMode();
+	}
+
+	@Override
+	public boolean isObjectClickable(Object o) {
+		return !isInMeasurementMode();
 	}
 }

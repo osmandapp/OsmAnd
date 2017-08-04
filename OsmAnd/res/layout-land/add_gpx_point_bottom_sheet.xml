@@ -1,6 +1,6 @@
 <?xml version="1.0" encoding="utf-8"?>
 <LinearLayout
-    android:id="@+id/add_gpx_waypoint_bottom_sheet"
+    android:id="@+id/add_gpx_point_bottom_sheet"
     xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
@@ -25,14 +25,14 @@
         android:orientation="vertical">
 
         <TextView
-            android:id="@+id/add_gpx_waypoint_bottom_sheet_title"
+            android:id="@+id/add_gpx_point_bottom_sheet_title"
             style="@style/TextAppearance.ContextMenuTitle"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_marginLeft="16dp"
             android:layout_marginRight="16dp"
             android:layout_marginTop="16dp"
-            android:text="@string/add_gpx_waypoint_bottom_sheet_title"/>
+            android:text="@string/waypoint_one"/>
 
         <TextView
             android:id="@+id/description"
@@ -53,7 +53,7 @@
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_gravity="center_vertical"
-        android:text="@string/shared_string_create"/>
+        android:text="@string/shared_string_add"/>
 
     <android.support.v7.widget.AppCompatButton
         android:id="@+id/cancel_button"
