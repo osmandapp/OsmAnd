@@ -756,8 +756,12 @@ public class ContextMenuLayer extends OsmandMapLayer {
 
 		if (movementListener.onTouchEvent(event)) {
 			if (menu.isVisible()) {
-				menu.updateMapCenter(null);
-				menu.close();
+				if (!menu.isClosable()) {
+					menu.hide();
+				} else {
+					menu.updateMapCenter(null);
+					menu.close();
+				}
 			}
 			if (multiSelectionMenu.isVisible()) {
 				multiSelectionMenu.hide();
