@@ -97,6 +97,7 @@ import net.osmand.plus.mapcontextmenu.other.DestinationReachedMenu;
 import net.osmand.plus.mapcontextmenu.other.MapRouteInfoMenu;
 import net.osmand.plus.mapcontextmenu.other.MapRouteInfoMenuFragment;
 import net.osmand.plus.mapcontextmenu.other.TrackDetailsMenu;
+import net.osmand.plus.measurementtool.MeasurementToolFragment;
 import net.osmand.plus.render.RendererRegistry;
 import net.osmand.plus.resources.ResourceManager;
 import net.osmand.plus.routing.RoutingHelper;
@@ -499,6 +500,10 @@ public class MapActivity extends OsmandActionBarActivity implements DownloadEven
 			if (prevActivityIntent == null) {
 				return;
 			}
+		}
+		if (getMeasurementToolFragment() != null) {
+			getMeasurementToolFragment().showQuitDialog();
+			return;
 		}
 		if (prevActivityIntent != null && getSupportFragmentManager().getBackStackEntryCount() == 0) {
 			prevActivityIntent.addFlags(Intent.FLAG_ACTIVITY_REORDER_TO_FRONT);
@@ -1673,6 +1678,11 @@ public class MapActivity extends OsmandActionBarActivity implements DownloadEven
 	public QuickSearchDialogFragment getQuickSearchDialogFragment() {
 		Fragment fragment = getSupportFragmentManager().findFragmentByTag(QuickSearchDialogFragment.TAG);
 		return fragment!= null && !fragment.isDetached() && !fragment.isRemoving() ? (QuickSearchDialogFragment) fragment : null;
+	}
+
+	public MeasurementToolFragment getMeasurementToolFragment() {
+		Fragment fragment = getSupportFragmentManager().findFragmentByTag(MeasurementToolFragment.TAG);
+		return fragment != null && !fragment.isDetached() && !fragment.isRemoving() ? (MeasurementToolFragment) fragment : null;
 	}
 
 	public boolean isTopToolbarActive() {

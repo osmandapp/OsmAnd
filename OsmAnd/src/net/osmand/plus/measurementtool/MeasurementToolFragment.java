@@ -7,6 +7,7 @@ import android.os.AsyncTask;
 import android.os.Bundle;
 import android.support.annotation.Nullable;
 import android.support.v4.app.Fragment;
+import android.support.v4.app.FragmentManager;
 import android.support.v4.content.ContextCompat;
 import android.support.v7.app.AlertDialog;
 import android.support.v7.widget.SwitchCompat;
@@ -71,7 +72,7 @@ public class MeasurementToolFragment extends Fragment {
 				nightMode ? R.color.ctx_menu_info_view_bg_dark : R.color.ctx_menu_info_view_bg_light);
 		boolean portrait = AndroidUiHelper.isOrientationPortrait(mapActivity);
 
-		pointsSt = mapActivity.getString(R.string.points).toLowerCase();
+		pointsSt = getString(R.string.points).toLowerCase();
 
 		View view = View.inflate(new ContextThemeWrapper(getContext(), themeRes), R.layout.fragment_measurement_tool, null);
 
@@ -145,11 +146,11 @@ public class MeasurementToolFragment extends Fragment {
 
 		if (portrait) {
 			toolBarController = new MeasurementToolBarController();
-			toolBarController.setTitle(mapActivity.getString(R.string.measurement_tool_action_bar));
+			toolBarController.setTitle(getString(R.string.measurement_tool_action_bar));
 			toolBarController.setOnBackButtonClickListener(new View.OnClickListener() {
 				@Override
 				public void onClick(View v) {
-					mapActivity.onBackPressed();
+					showQuitDialog();
 				}
 			});
 			toolBarController.setOnCloseButtonClickListener(new View.OnClickListener() {
@@ -169,7 +170,7 @@ public class MeasurementToolFragment extends Fragment {
 									if (measurementLayer.getPointsCount() > 0) {
 										saveAsGpxOnClick(mapActivity);
 									} else {
-										Toast.makeText(mapActivity, mapActivity.getString(R.string.none_point_error), Toast.LENGTH_SHORT).show();
+										Toast.makeText(mapActivity, getString(R.string.none_point_error), Toast.LENGTH_SHORT).show();
 									}
 									return true;
 								case R.id.action_clear_all:
@@ -279,7 +280,7 @@ public class MeasurementToolFragment extends Fragment {
 				MapActivity activity = getMapActivity();
 				if (activity != null) {
 					progressDialog = new ProgressDialog(activity);
-					progressDialog.setMessage(activity.getString(R.string.saving_gpx_tracks));
+					progressDialog.setMessage(getString(R.string.saving_gpx_tracks));
 					progressDialog.show();
 				}
 			}
@@ -301,7 +302,6 @@ public class MeasurementToolFragment extends Fragment {
 				}
 				MapActivity activity = getMapActivity();
 				if (activity != null) {
-					// todo
 					String res = GPXUtilities.writeGpxFile(toSave, gpx, activity.getMyApplication());
 					gpx.path = toSave.getAbsolutePath();
 					if (showOnMap) {
@@ -318,7 +318,7 @@ public class MeasurementToolFragment extends Fragment {
 				if (activity != null) {
 					if (warning == null) {
 						Toast.makeText(activity,
-								MessageFormat.format(activity.getString(R.string.gpx_saved_sucessfully), toSave.getAbsolutePath()),
+								MessageFormat.format(getString(R.string.gpx_saved_sucessfully), toSave.getAbsolutePath()),
 								Toast.LENGTH_LONG).show();
 					} else {
 						Toast.makeText(activity, warning, Toast.LENGTH_LONG).show();
@@ -427,6 +427,36 @@ public class MeasurementToolFragment extends Fragment {
 					v.setVisibility(status);
 				}
 			}
+		}
+	}
+
+	public void showQuitDialog() {
+		final MapActivity mapActivity = getMapActivity();
+		MeasurementToolLayer measurementLayer = getMeasurementLayer();
+		if (mapActivity != null && measurementLayer != null) {
+			if (measurementLayer.getPointsCount() < 1) {
+				dismiss(mapActivity);
+				return;
+			}
+			new AlertDialog.Builder(mapActivity)
+					.setTitle(getString(R.string.are_you_sure))
+					.setMessage(getString(R.string.unsaved_changes_will_be_lost))
+					.setPositiveButton(R.string.shared_string_ok, new DialogInterface.OnClickListener() {
+						@Override
+						public void onClick(DialogInterface dialog, int which) {
+							dismiss(mapActivity);
+						}
+					})
+					.setNegativeButton(R.string.shared_string_cancel, null)
+					.show();
+		}
+	}
+
+	private void dismiss(MapActivity mapActivity) {
+		try {
+			mapActivity.getSupportFragmentManager().popBackStackImmediate(TAG, FragmentManager.POP_BACK_STACK_INCLUSIVE);
+		} catch (Exception e) {
+			// ignore
 		}
 	}
 

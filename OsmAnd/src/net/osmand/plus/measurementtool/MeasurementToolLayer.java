@@ -160,8 +160,10 @@ public class MeasurementToolLayer extends OsmandMapLayer implements ContextMenuL
 
 	boolean undoPointOnClick() {
 		measurementPoints.remove(measurementPoints.size() - 1);
-		WptPt pt = measurementPoints.get(measurementPoints.size() - 1);
-		view.getAnimatedDraggingThread().startMoving(pt.getLatitude(), pt.getLongitude(), view.getZoom(), true);
+		if (measurementPoints.size() > 0) {
+			WptPt pt = measurementPoints.get(measurementPoints.size() - 1);
+			view.getAnimatedDraggingThread().startMoving(pt.getLatitude(), pt.getLongitude(), view.getZoom(), true);
+		}
 		return measurementPoints.size() > 0;
 	}
 
