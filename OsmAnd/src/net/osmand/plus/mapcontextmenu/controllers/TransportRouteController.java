@@ -27,6 +27,7 @@ public class TransportRouteController extends MenuController {
 									final TransportStopRoute transportRoute) {
 		super(new MenuBuilder(mapActivity), pointDescription, mapActivity);
 		this.transportRoute = transportRoute;
+		builder.setShowOnlinePhotos(false);
 		toolbarController = new ContextMenuToolbarController(this);
 		toolbarController.setTitle(getNameStr());
 		toolbarController.setOnBackButtonClickListener(new OnClickListener() {
@@ -83,6 +84,10 @@ public class TransportRouteController extends MenuController {
 		return false;
 	}
 
+	@Override
+	public boolean isClosable() {
+		return false;
+	}
 
 	@Override
 	public boolean buttonsVisible() {
@@ -157,12 +162,13 @@ public class TransportRouteController extends MenuController {
 							MapContextMenu menu = getMapActivity().getContextMenu();
 							PointDescription pd = new PointDescription(PointDescription.POINT_TYPE_TRANSPORT_STOP,
 									getMapActivity().getString(R.string.transport_Stop), name);
-							resetRoute();
-							menu.show(stop.getLocation(), pd, stop);
-							WeakReference<MapContextMenuFragment> rr = menu.findMenuFragment();
-							if (rr != null && rr.get() != null) {
-								rr.get().centerMarkerLocation();
-							}
+
+							//resetRoute();
+							LatLon stopLocation = stop.getLocation();
+							getMapActivity().getMyApplication().getSettings()
+									.setMapLocationToShow(stopLocation.getLatitude(), stopLocation.getLongitude(),
+									15, pd, false, stop);
+							MapActivity.launchMapActivityMoveToTop(getMapActivity());
 						}
 					});
 		}

@@ -69,6 +69,7 @@ public class MenuBuilder {
 	private LatLon latLon;
 	private boolean hidden;
 	private boolean showNearestWiki = false;
+	private boolean showOnlinePhotos = true;
 	protected List<Amenity> nearestWiki = new ArrayList<>();
 	private List<OsmandPlugin> menuPlugins = new ArrayList<>();
 	private CardsRowBuilder onlinePhotoCardsRow;
@@ -207,6 +208,14 @@ public class MenuBuilder {
 		this.showNearestWiki = showNearestWiki;
 	}
 
+	public boolean isShowOnlinePhotos() {
+		return showOnlinePhotos;
+	}
+
+	public void setShowOnlinePhotos(boolean showOnlinePhotos) {
+		this.showOnlinePhotos = showOnlinePhotos;
+	}
+
 	public void setShowNearestWiki(boolean showNearestWiki, long objectId) {
 		this.objectId = objectId;
 		this.showNearestWiki = showNearestWiki;
@@ -228,7 +237,9 @@ public class MenuBuilder {
 			buildPlainMenuItems(view);
 		}
 		buildInternal(view);
-		buildNearestPhotosRow(view);
+		if (showOnlinePhotos) {
+			buildNearestPhotosRow(view);
+		}
 		buildPluginRows(view);
 		buildAfter(view);
 	}

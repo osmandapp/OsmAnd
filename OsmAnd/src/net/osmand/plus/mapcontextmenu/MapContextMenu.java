@@ -609,8 +609,12 @@ public class MapContextMenu extends MenuTitleController implements StateChangedL
 
 	public void onSingleTapOnMap() {
 		if (menuController == null || !menuController.handleSingleTapOnMap()) {
-			updateMapCenter(null);
-			close();
+			if (menuController != null && !menuController.isClosable()) {
+				hide();
+			} else {
+				updateMapCenter(null);
+				close();
+			}
 			if (mapActivity.getMapLayers().getMapQuickActionLayer().isLayerOn()) {
 				mapActivity.getMapLayers().getMapQuickActionLayer().refreshLayer();
 			}
@@ -992,6 +996,10 @@ public class MapContextMenu extends MenuTitleController implements StateChangedL
 
 	public boolean fabVisible() {
 		return menuController == null || menuController.fabVisible();
+	}
+
+	public boolean isClosable() {
+		return menuController == null || menuController.isClosable();
 	}
 
 	public boolean buttonsVisible() {
