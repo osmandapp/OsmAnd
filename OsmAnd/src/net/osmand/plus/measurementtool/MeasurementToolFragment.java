@@ -209,9 +209,10 @@ public class MeasurementToolFragment extends Fragment {
 		final EditText nameEt = (EditText) view.findViewById(R.id.gpx_name_et);
 		final TextView fileExistsTv = (TextView) view.findViewById(R.id.file_exists_text_view);
 		final SwitchCompat showOnMapToggle = (SwitchCompat) view.findViewById(R.id.toggle_show_on_map);
+		showOnMapToggle.setChecked(true);
 
 		final String suggestedName = new SimpleDateFormat("yyyy-M-dd hh-mm E", Locale.US).format(new Date());
-		String displayedName = String.copyValueOf(suggestedName.toCharArray());
+		String displayedName = suggestedName;
 		File fout = new File(dir, suggestedName + EXT);
 		int ind = 1;
 		while (fout.exists()) {
@@ -251,7 +252,7 @@ public class MeasurementToolFragment extends Fragment {
 					@Override
 					public void onClick(DialogInterface dialog, int which) {
 						final String name = nameEt.getText().toString();
-						String fileName = String.copyValueOf(name.toCharArray()) + EXT;
+						String fileName = name + EXT;
 						if (textChanged[0]) {
 							File fout = new File(dir, fileName);
 							int ind = 1;
@@ -302,7 +303,9 @@ public class MeasurementToolFragment extends Fragment {
 				if (activity != null) {
 					// todo
 					String res = GPXUtilities.writeGpxFile(toSave, gpx, activity.getMyApplication());
-					activity.getMyApplication().getSelectedGpxHelper().selectGpxFile(gpx, showOnMap, false);
+					if (showOnMap) {
+						activity.getMyApplication().getSelectedGpxHelper().selectGpxFile(gpx, true, false);
+					}
 					return res;
 				}
 				return null;
