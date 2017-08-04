@@ -379,15 +379,9 @@ public class MapContextMenu extends MenuTitleController implements StateChangedL
 		WeakReference<MapContextMenuFragment> fragmentRef = findMenuFragment();
 		init(latLon, pointDescription, object, true, false);
 		if (fragmentRef != null) {
-			fragmentRef.get().rebuildMenu();
+			fragmentRef.get().rebuildMenu(centerMarker);
 		}
-	}
-
-	public void rebuildMenu() {
-		WeakReference<MapContextMenuFragment> fragmentRef = findMenuFragment();
-		if (fragmentRef != null) {
-			fragmentRef.get().rebuildMenu();
-		}
+		centerMarker = false;
 	}
 
 	public void showOrUpdate(LatLon latLon, PointDescription pointDescription, Object object) {
