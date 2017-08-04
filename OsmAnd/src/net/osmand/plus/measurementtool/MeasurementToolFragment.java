@@ -303,6 +303,7 @@ public class MeasurementToolFragment extends Fragment {
 				if (activity != null) {
 					// todo
 					String res = GPXUtilities.writeGpxFile(toSave, gpx, activity.getMyApplication());
+					gpx.path = toSave.getAbsolutePath();
 					if (showOnMap) {
 						activity.getMyApplication().getSelectedGpxHelper().selectGpxFile(gpx, true, false);
 					}
