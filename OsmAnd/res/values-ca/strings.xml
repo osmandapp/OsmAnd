@@ -2220,7 +2220,7 @@ L\'ús de memòria serà de {3} MB temporalment i {1} MB permanentment.
     <string name="shared_string_pause">Pausa</string>
     <string name="shared_string_trip">Viatge</string>
     <string name="shared_string_recorded">Enregistrat</string>
-    <string name="shared_string_record">Enegistra</string>
+    <string name="shared_string_record">Enregistra</string>
     <string name="gpx_logging_no_data">No hi ha dades</string>
     <string name="release_2_5">"\\u2022 Icones per clicar al mapa
 \n 
@@ -2573,6 +2573,6 @@ Abasta l\'àrea: %1$s x %2$s</string>
     <string name="measurement_tool">Eina de mesurament</string>
     <string name="mappilary_no_internet_desc">Necessiteu internet per veure les fotografies de Mapillary</string>
     <string name="retry">Torneu a provar</string>
-    <string name="add_gpx_waypoint_bottom_sheet_title">Afegiu punt de referència gpx</string>
+    <string name="add_gpx_waypoint_bottom_sheet_title">Afegiu una fita gpx</string>
     <string name="shared_string_create">Crea</string>
 </resources>
