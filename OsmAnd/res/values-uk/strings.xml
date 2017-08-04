@@ -370,7 +370,7 @@
   <string name="shared_string_next">Наступний</string>
   <string name="shared_string_previous">Попередній</string>
   <string name="unit_of_length_descr">Змінити одиниці вимірювання довжини</string>
-  <string name="unit_of_length">Одиниці вимірювання довжини</string>
+  <string name="unit_of_length">Одиниці довжини</string>
   <string name="si_mi_feet">Милі, фути</string>
   <string name="si_mi_yard">Милі, ярди</string>
   <string name="si_km_m">Кілометри, метри</string>
@@ -2710,8 +2710,8 @@
     <string name="select_postcode">Виберіть поштовий індекс</string>
     <string name="quick_action_auto_zoom">Автомасштаб мапи вкл/викл</string>
     <string name="quick_action_auto_zoom_desc">Натискання на кнопку дії увімкне чи вимкне автомасштабування мапи за швидкістю.</string>
-    <string name="quick_action_auto_zoom_on">Автомасштабування мапи увімкено</string>
-    <string name="quick_action_auto_zoom_off">Автомасштабування мапи вимкнуто</string>
+    <string name="quick_action_auto_zoom_on">Увімкнути автомасштабування мапи</string>
+    <string name="quick_action_auto_zoom_off">Вимкнути автомасштабування мапи</string>
     <string name="quick_action_add_destination">Додати пункт призначення</string>
     <string name="quick_action_replace_destination">Замінити пункт призначення</string>
     <string name="quick_action_add_first_intermediate">Додати першу проміжну точку</string>
@@ -2953,4 +2953,8 @@
     <string name="live_monitoring_max_interval_to_send_desrc">Задає час буферизації для збереження місць для відправки в автономному режимі</string>
     <string name="mappilary_no_internet_desc">Вам потрібен Інтернет для перегляду фотографій від Mapillary</string>
     <string name="retry">Повторити</string>
+<string name="measurement_tool_action_bar">Виберіть місце на мапі та натисніть кнопку „Додати“, щоб додати точку до лінійки.</string>
+    <string name="measurement_tool">Інструмент вимірювання</string>
+    <string name="add_gpx_waypoint_bottom_sheet_title">Додати шляхову точку в GPX</string>
+    <string name="shared_string_create">Створити</string>
 </resources>
