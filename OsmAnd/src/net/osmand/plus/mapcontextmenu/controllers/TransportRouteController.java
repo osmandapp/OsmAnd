@@ -96,6 +96,8 @@ public class TransportRouteController extends MenuController {
 	public String getTypeStr() {
 		if (transportRoute.refStop != null) {
 			return transportRoute.refStop.getName();
+		} else if (transportRoute.stop != null) {
+			return transportRoute.stop.getName();
 		} else {
 			return getPointDescription().getTypeName();
 		}
