@@ -52,10 +52,12 @@ public class AddGpxPointBottomSheetHelper implements OnDismissListener {
 				if (pointDescription.isWpt()) {
 					WptPtEditor editor = activity.getContextMenu().getWptPtPointEditor();
 					editor.setOnDismissListener(AddGpxPointBottomSheetHelper.this);
+					editor.setNewGpxPointProcessing(true);
 					editor.add(gpx, latLon, titleText);
 				} else if (pointDescription.isRte()) {
 					RtePtEditor editor = activity.getContextMenu().getRtePtPointEditor();
 					editor.setOnDismissListener(AddGpxPointBottomSheetHelper.this);
+					editor.setNewGpxPointProcessing(true);
 					editor.add(gpx, latLon, titleText);
 				}
 			}
@@ -126,9 +128,10 @@ public class AddGpxPointBottomSheetHelper implements OnDismissListener {
 	}
 
 	@Override
-	public void openTrackActivity() {
+	public void onDismiss() {
 		Intent newIntent = new Intent(mapActivity, mapActivity.getMyApplication().getAppCustomization().getTrackActivity());
 		newIntent.putExtra(TrackActivity.TRACK_FILE_NAME, newGpxPoint.getGpx().path);
+		newIntent.putExtra(TrackActivity.OPEN_POINTS_TAB, true);
 		newIntent.setFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP);
 		mapActivity.startActivity(newIntent);
 	}

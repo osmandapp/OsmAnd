@@ -36,6 +36,7 @@ import java.util.List;
 public class TrackActivity extends TabActivity {
 
 	public static final String TRACK_FILE_NAME = "TRACK_FILE_NAME";
+	public static final String OPEN_POINTS_TAB = "OPEN_POINTS_TAB";
 	public static final String CURRENT_RECORDING = "CURRENT_RECORDING";
 	protected List<WeakReference<Fragment>> fragList = new ArrayList<>();
 	protected PagerSlidingTabStrip slidingTabLayout;
@@ -47,6 +48,7 @@ public class TrackActivity extends TabActivity {
 	private List<GpxDisplayGroup> displayGroups;
 	private List<GpxDisplayGroup> originalGroups = new ArrayList<>();
 	private boolean stopped = false;
+	public boolean openPointsTab = false;
 
 	public PagerSlidingTabStrip getSlidingTabLayout() {
 		return slidingTabLayout;
@@ -74,6 +76,9 @@ public class TrackActivity extends TabActivity {
 				actionBar.setTitle(getString(R.string.shared_string_currently_recording_track));
 			}
 			actionBar.setElevation(0);
+		}
+		if (intent.hasExtra(OPEN_POINTS_TAB)) {
+			openPointsTab = true;
 		}
 		setContentView(R.layout.tab_content);
 	}
@@ -188,6 +193,9 @@ public class TrackActivity extends TabActivity {
 						if (isHavingWayPoints() || isHavingRoutePoints()) {
 							((OsmandFragmentPagerAdapter) mViewPager.getAdapter()).addTab(
 									getTabIndicator(R.string.points, TrackPointFragment.class));
+							if (openPointsTab) {
+								mViewPager.setCurrentItem(1, false);
+							}
 						} else {
 							slidingTabLayout.setVisibility(View.GONE);
 							getSupportActionBar().setElevation(AndroidUtils.dpToPx(getMyApplication(), 4f));

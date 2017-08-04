@@ -14,6 +14,7 @@ import net.osmand.plus.FavouritesDbHelper.FavoriteGroup;
 import net.osmand.plus.GPXUtilities;
 import net.osmand.plus.GPXUtilities.GPXFile;
 import net.osmand.plus.GPXUtilities.WptPt;
+import net.osmand.plus.mapcontextmenu.editors.WptPtEditor.OnDismissListener;
 import net.osmand.plus.GpxSelectionHelper;
 import net.osmand.plus.OsmandApplication;
 import net.osmand.plus.R;
@@ -75,12 +76,13 @@ public class WptPtEditorFragment extends PointEditorFragment {
 	}
 
 	@Override
-	public void dismiss() {
-		super.dismiss();
-		WptPtEditor.OnDismissListener listener = editor.getOnDismissListener();
+	public void dismiss(boolean includingMenu) {
+		super.dismiss(includingMenu);
+		OnDismissListener listener = editor.getOnDismissListener();
 		if (listener != null) {
-			listener.openTrackActivity();
+			listener.onDismiss();
 		}
+		editor.setNewGpxPointProcessing(false);
 		editor.setOnDismissListener(null);
 	}
 
@@ -91,10 +93,14 @@ public class WptPtEditorFragment extends PointEditorFragment {
 
 	@Override
 	public String getToolbarTitle() {
-		if (editor.isNew()) {
-			return getMapActivity().getResources().getString(R.string.context_menu_item_add_waypoint);
+		if (editor.isNewGpxPointProcessing()) {
+			return getMapActivity().getResources().getString(R.string.save_gpx_waypoint);
 		} else {
-			return getMapActivity().getResources().getString(R.string.shared_string_edit);
+			if (editor.isNew()) {
+				return getMapActivity().getResources().getString(R.string.context_menu_item_add_waypoint);
+			} else {
+				return getMapActivity().getResources().getString(R.string.shared_string_edit);
+			}
 		}
 	}
 

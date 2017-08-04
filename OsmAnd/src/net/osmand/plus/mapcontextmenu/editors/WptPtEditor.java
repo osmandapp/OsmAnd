@@ -13,6 +13,7 @@ public class WptPtEditor extends PointEditor {
 	private GPXFile gpxFile;
 	private WptPt wpt;
 	private boolean gpxSelected;
+	private boolean newGpxPointProcessing;
 
 	public static final String TAG = "WptPtEditorFragment";
 
@@ -20,8 +21,16 @@ public class WptPtEditor extends PointEditor {
 		super(mapActivity);
 	}
 
+	public void setNewGpxPointProcessing(boolean newGpxPointProcessing) {
+		this.newGpxPointProcessing = newGpxPointProcessing;
+	}
+
+	public boolean isNewGpxPointProcessing() {
+		return newGpxPointProcessing;
+	}
+
 	public interface OnDismissListener {
-		void openTrackActivity();
+		void onDismiss();
 	}
 
 	public void setOnDismissListener(OnDismissListener listener) {

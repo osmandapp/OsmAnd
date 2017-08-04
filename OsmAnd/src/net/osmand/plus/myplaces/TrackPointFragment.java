@@ -178,6 +178,10 @@ public class TrackPointFragment extends OsmandExpandableListFragment {
 	}
 
 	private void addPoint(PointDescription pointDescription) {
+		Intent currentIntent = getTrackActivity().getIntent();
+		if (currentIntent != null) {
+			currentIntent.putExtra(TrackActivity.OPEN_POINTS_TAB, true);
+		}
 		final OsmandSettings settings = app.getSettings();
 		GPXFile gpx = getGpx();
 		LatLon location = settings.getLastKnownMapLocation();
@@ -339,6 +343,7 @@ public class TrackPointFragment extends OsmandExpandableListFragment {
 	@Override
 	public void onCreateOptionsMenu(Menu menu, MenuInflater inflater) {
 		menu.clear();
+		getTrackActivity().getClearToolbar(false);
 		MenuItem mi = createMenuItem(menu, SEARCH_ID, R.string.search_poi_filter, R.drawable.ic_action_search_dark,
 				R.drawable.ic_action_search_dark, MenuItemCompat.SHOW_AS_ACTION_ALWAYS | MenuItemCompat.SHOW_AS_ACTION_COLLAPSE_ACTION_VIEW);
 		searchView = new SearchView(getActivity());
