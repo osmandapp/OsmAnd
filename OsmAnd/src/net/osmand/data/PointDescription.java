@@ -24,6 +24,7 @@ public class PointDescription {
 
 	public static final String POINT_TYPE_FAVORITE = "favorite";
 	public static final String POINT_TYPE_WPT = "wpt";
+	public static final String POINT_TYPE_RTE = "rte";
 	public static final String POINT_TYPE_POI = "poi";
 	public static final String POINT_TYPE_ADDRESS = "address";
 	public static final String POINT_TYPE_OSM_NOTE= "osm_note";
@@ -210,6 +211,10 @@ public class PointDescription {
 	
 	public boolean isWpt() {
 		return POINT_TYPE_WPT.equals(type);
+	}
+
+	public boolean isRte() {
+		return POINT_TYPE_RTE.equals(type);
 	}
 	
 	public boolean isPoi() {
