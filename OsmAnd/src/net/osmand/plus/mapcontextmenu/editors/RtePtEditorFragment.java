@@ -10,7 +10,7 @@ import android.support.annotation.Nullable;
 import android.view.View;
 
 import net.osmand.data.LatLon;
-import net.osmand.plus.FavouritesDbHelper.FavoriteGroup;
+import net.osmand.plus.FavouritesDbHelper;
 import net.osmand.plus.GPXUtilities;
 import net.osmand.plus.GPXUtilities.GPXFile;
 import net.osmand.plus.GPXUtilities.WptPt;
@@ -25,7 +25,7 @@ import net.osmand.util.Algorithms;
 
 import java.io.File;
 
-public class WptPtEditorFragment extends PointEditorFragment {
+public class RtePtEditorFragment extends PointEditorFragment{
 	private WptPtEditor editor;
 	private WptPt wpt;
 	private SavingTrackHelper savingTrackHelper;
@@ -51,7 +51,7 @@ public class WptPtEditorFragment extends PointEditorFragment {
 
 		wpt = editor.getWptPt();
 
-		FavoriteGroup group = getMyApplication().getFavorites().getGroup(wpt.category);
+		FavouritesDbHelper.FavoriteGroup group = getMyApplication().getFavorites().getGroup(wpt.category);
 
 		if (group == null) {
 			color = wpt.getColor(0);
@@ -76,19 +76,15 @@ public class WptPtEditorFragment extends PointEditorFragment {
 
 	@Override
 	public String getToolbarTitle() {
-		if (editor.isNew()) {
-			return getMapActivity().getResources().getString(R.string.context_menu_item_add_waypoint);
-		} else {
-			return getMapActivity().getResources().getString(R.string.shared_string_edit);
-		}
+		return getMapActivity().getResources().getString(R.string.save_route_point);
 	}
 
 	public static void showInstance(final MapActivity mapActivity) {
-		WptPtEditor editor = mapActivity.getContextMenu().getWptPtPointEditor();
+		RtePtEditor editor = mapActivity.getContextMenu().getRtePtPointEditor();
 		//int slideInAnim = editor.getSlideInAnimation();
 		//int slideOutAnim = editor.getSlideOutAnimation();
 
-		WptPtEditorFragment fragment = new WptPtEditorFragment();
+		RtePtEditorFragment fragment = new RtePtEditorFragment();
 		mapActivity.getSupportFragmentManager().beginTransaction()
 				//.setCustomAnimations(slideInAnim, slideOutAnim, slideInAnim, slideOutAnim)
 				.add(R.id.fragmentContainer, fragment, editor.getFragmentTag())
@@ -96,11 +92,11 @@ public class WptPtEditorFragment extends PointEditorFragment {
 	}
 
 	public static void showInstance(final MapActivity mapActivity, boolean skipDialog) {
-		WptPtEditor editor = mapActivity.getContextMenu().getWptPtPointEditor();
+		RtePtEditor editor = mapActivity.getContextMenu().getRtePtPointEditor();
 		//int slideInAnim = editor.getSlideInAnimation();
 		//int slideOutAnim = editor.getSlideOutAnimation();
 
-		WptPtEditorFragment fragment = new WptPtEditorFragment();
+		RtePtEditorFragment fragment = new RtePtEditorFragment();
 		fragment.skipDialog = skipDialog;
 
 		mapActivity.getSupportFragmentManager().beginTransaction()
@@ -115,7 +111,7 @@ public class WptPtEditorFragment extends PointEditorFragment {
 	}
 
 	@Override
-	protected void save(final boolean needDismiss) {
+	protected void save(boolean needDismiss) {
 		String name = Algorithms.isEmpty(getNameTextValue()) ? null : getNameTextValue();
 		String category = Algorithms.isEmpty(getCategoryTextValue()) ? null : getCategoryTextValue();
 		String description = Algorithms.isEmpty(getDescriptionTextValue()) ? null : getDescriptionTextValue();
@@ -160,9 +156,9 @@ public class WptPtEditorFragment extends PointEditorFragment {
 					selectedGpxHelper.setGpxFileToDisplay(gpx);
 				}
 			} else {
-				wpt = gpx.addWptPt(wpt.getLatitude(), wpt.getLongitude(),
+				wpt = gpx.addRtePt(wpt.getLatitude(), wpt.getLongitude(),
 						System.currentTimeMillis(), description, name, category, color);
-				new SaveGpxAsyncTask(getMyApplication(), gpx, editor.isGpxSelected()).execute();
+				new RtePtEditorFragment.SaveGpxAsyncTask(getMyApplication(), gpx, editor.isGpxSelected()).execute();
 			}
 		}
 	}
@@ -179,7 +175,7 @@ public class WptPtEditorFragment extends PointEditorFragment {
 			} else {
 				gpx.updateWptPt(wpt, wpt.getLatitude(), wpt.getLongitude(),
 						System.currentTimeMillis(), description, name, category, color);
-				new SaveGpxAsyncTask(getMyApplication(), gpx, editor.isGpxSelected()).execute();
+				new RtePtEditorFragment.SaveGpxAsyncTask(getMyApplication(), gpx, editor.isGpxSelected()).execute();
 			}
 		}
 	}
@@ -199,7 +195,7 @@ public class WptPtEditorFragment extends PointEditorFragment {
 						savingTrackHelper.deletePointData(wpt);
 					} else {
 						gpx.deleteWptPt(wpt);
-						new SaveGpxAsyncTask(getMyApplication(), gpx, editor.isGpxSelected()).execute();
+						new RtePtEditorFragment.SaveGpxAsyncTask(getMyApplication(), gpx, editor.isGpxSelected()).execute();
 					}
 				}
 				saved = true;
@@ -216,7 +212,7 @@ public class WptPtEditorFragment extends PointEditorFragment {
 
 	@Override
 	public void setCategory(String name) {
-		FavoriteGroup group = getMyApplication().getFavorites().getGroup(name);
+		FavouritesDbHelper.FavoriteGroup group = getMyApplication().getFavorites().getGroup(name);
 		if (group != null) {
 			color = group.color;
 		}

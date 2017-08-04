@@ -196,15 +196,7 @@ public class MapMultiSelectionMenu extends BaseMenuController {
 		IContextMenuProvider provider = selectedObjects.remove(menuObject.getObject());
 		hide();
 		ContextMenuLayer contextMenuLayer = getMapActivity().getMapLayers().getContextMenuLayer();
-		if (contextMenuLayer.isInAddGpxWaypointMode()) {
-			PointDescription pointDescription = menuObject.getPointDescription();
-			String title = pointDescription == null ? "" : pointDescription.getName();
-			contextMenuLayer.getAddGpxPointBottomSheetHelper().setTitle(title);
-			OsmandMapTileView view = menuObject.getMapActivity().getMapView();
-			view.getAnimatedDraggingThread().startMoving(latLon.getLatitude(), latLon.getLongitude(), view.getZoom(), true);
-		} else {
-			contextMenuLayer.showContextMenu(menuObject.getLatLon(), menuObject.getPointDescription(), menuObject.getObject(), provider);
-		}
+		contextMenuLayer.showContextMenu(menuObject.getLatLon(), menuObject.getPointDescription(), menuObject.getObject(), provider);
 	}
 
 	private void clearSelectedObjects() {

@@ -848,7 +848,7 @@ public class GPXUtilities {
 			return false;
 		}
 
-		public WptPt addWptPt(double lat, double lon, long time, String description, String name, String category, int color, PointDescription pointDescription) {
+		public WptPt addWptPt(double lat, double lon, long time, String description, String name, String category, int color) {
 			double latAdjusted = Double.parseDouble(latLonFormat.format(lat));
 			double lonAdjusted = Double.parseDouble(latLonFormat.format(lon));
 			final WptPt pt = new WptPt(latAdjusted, lonAdjusted, time, Double.NaN, 0, Double.NaN);
@@ -859,15 +859,30 @@ public class GPXUtilities {
 				pt.setColor(color);
 			}
 
-			if (pointDescription == null || pointDescription.isWpt()) {
-				points.add(pt);
-			} else if (pointDescription.isRoutePoint()) {
-				if (routes.size() == 0) {
-					routes.add(new Route());
-				}
-				Route currentRoute = routes.get(routes.size() -1);
-				currentRoute.points.add(pt);
+			points.add(pt);
+
+			modifiedTime = System.currentTimeMillis();
+
+			return pt;
+		}
+
+		public WptPt addRtePt(double lat, double lon, long time, String description, String name, String category, int color) {
+			double latAdjusted = Double.parseDouble(latLonFormat.format(lat));
+			double lonAdjusted = Double.parseDouble(latLonFormat.format(lon));
+			final WptPt pt = new WptPt(latAdjusted, lonAdjusted, time, Double.NaN, 0, Double.NaN);
+			pt.name = name;
+			pt.category = category;
+			pt.desc = description;
+			if (color != 0) {
+				pt.setColor(color);
 			}
+
+			if (routes.size() == 0) {
+				routes.add(new Route());
+			}
+			Route currentRoute = routes.get(routes.size() -1);
+			currentRoute.points.add(pt);
+
 			modifiedTime = System.currentTimeMillis();
 
 			return pt;

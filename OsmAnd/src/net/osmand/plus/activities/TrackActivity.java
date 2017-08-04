@@ -37,7 +37,6 @@ public class TrackActivity extends TabActivity {
 
 	public static final String TRACK_FILE_NAME = "TRACK_FILE_NAME";
 	public static final String CURRENT_RECORDING = "CURRENT_RECORDING";
-	public static boolean openPointsTab = false;
 	protected List<WeakReference<Fragment>> fragList = new ArrayList<>();
 	protected PagerSlidingTabStrip slidingTabLayout;
 	private File file = null;

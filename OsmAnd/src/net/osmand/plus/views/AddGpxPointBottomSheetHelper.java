@@ -12,7 +12,6 @@ import net.osmand.data.PointDescription;
 import net.osmand.data.RotatedTileBox;
 import net.osmand.plus.GPXUtilities.GPXFile;
 import net.osmand.plus.IconsCache;
-import net.osmand.plus.OsmandApplication;
 import net.osmand.plus.R;
 import net.osmand.plus.activities.MapActivity;
 import net.osmand.plus.mapcontextmenu.MapContextMenu;
@@ -28,7 +27,7 @@ public class AddGpxPointBottomSheetHelper {
 	private final IconsCache iconsCache;
 	private String titleText;
 	private boolean applyingPositionMode;
-	private NewPoint newPoint;
+	private NewGpxPoint newPoint;
 	private PointDescription pointDescription;
 
 	public AddGpxPointBottomSheetHelper(final MapActivity activity, ContextMenuLayer ctxMenuLayer) {
@@ -47,7 +46,11 @@ public class AddGpxPointBottomSheetHelper {
 				contextMenuLayer.createGpxPoint();
 				GPXFile gpx = newPoint.getGpx();
 				LatLon latLon = contextMenu.getLatLon();
-				activity.getContextMenu().getWptPtPointEditor().add(gpx, latLon, titleText, pointDescription);
+				if (pointDescription.isWpt()) {
+					activity.getContextMenu().getWptPtPointEditor().add(gpx, latLon, titleText);
+				} else if (pointDescription.isRte()) {
+					activity.getContextMenu().getRtePtPointEditor().add(gpx, latLon, titleText);
+				}
 			}
 		});
 		view.findViewById(R.id.cancel_button).setOnClickListener(new View.OnClickListener() {
@@ -70,7 +73,7 @@ public class AddGpxPointBottomSheetHelper {
 		if (title.equals("")) {
 			if (pointDescription.isWpt()) {
 				title = context.getString(R.string.waypoint_one);
-			} else if (pointDescription.isRoutePoint()) {
+			} else if (pointDescription.isRte()) {
 				title = context.getString(R.string.route_point_one);
 			}
 		}
@@ -82,13 +85,13 @@ public class AddGpxPointBottomSheetHelper {
 		return view.getVisibility() == View.VISIBLE;
 	}
 
-	public void show(NewPoint newPoint) {
+	public void show(NewGpxPoint newPoint) {
 		this.newPoint = newPoint;
 		pointDescription = newPoint.getPointDescription();
 		if (pointDescription.isWpt()) {
 			setTitle(context.getString(R.string.waypoint_one));
 			icon.setImageDrawable(iconsCache.getThemedIcon(R.drawable.ic_action_marker_dark));
-		} else if (pointDescription.isRoutePoint()) {
+		} else if (pointDescription.isRte()) {
 			setTitle(context.getString(R.string.route_point_one));
 			icon.setImageDrawable(iconsCache.getThemedIcon(R.drawable.ic_action_markers_dark));
 		}
@@ -115,11 +118,11 @@ public class AddGpxPointBottomSheetHelper {
 		}
 	}
 
-	public static class NewPoint {
+	public static class NewGpxPoint {
 		private PointDescription pointDescription;
 		private GPXFile gpx;
 
-		public NewPoint(GPXFile gpx, PointDescription pointDescription) {
+		public NewGpxPoint(GPXFile gpx, PointDescription pointDescription) {
 			this.gpx = gpx;
 			this.pointDescription = pointDescription;
 		}

@@ -4,14 +4,14 @@ import net.osmand.data.LatLon;
 import net.osmand.plus.FavouritesDbHelper;
 import net.osmand.plus.GPXUtilities.GPXFile;
 import net.osmand.plus.GPXUtilities.WptPt;
-import net.osmand.plus.GpxSelectionHelper.SelectedGpxFile;
+import net.osmand.plus.GpxSelectionHelper;
 import net.osmand.plus.activities.MapActivity;
 
-public class WptPtEditor extends GpxPointEditor {
+public class RtePtEditor extends GpxPointEditor {
 
-	public static final String TAG = "WptPtEditorFragment";
+	public static final String TAG = "RtePtEditorFragment";
 
-	public WptPtEditor(MapActivity mapActivity) {
+	public RtePtEditor(MapActivity mapActivity) {
 		super(mapActivity);
 	}
 
@@ -27,14 +27,14 @@ public class WptPtEditor extends GpxPointEditor {
 		isNew = true;
 
 		this.gpxFile = gpxFile;
-		SelectedGpxFile selectedGpxFile =
+		GpxSelectionHelper.SelectedGpxFile selectedGpxFile =
 				mapActivity.getMyApplication().getSelectedGpxHelper().getSelectedFileByPath(gpxFile.path);
 		gpxSelected = selectedGpxFile != null;
 
 		wpt = new WptPt(latLon.getLatitude(), latLon.getLongitude(),
 				System.currentTimeMillis(), Double.NaN, 0, Double.NaN);
 		wpt.name = title;
-		WptPtEditorFragment.showInstance(mapActivity);
+		RtePtEditorFragment.showInstance(mapActivity);
 	}
 
 	public void add(GPXFile gpxFile, LatLon latLon, String title, String categoryName, int categoryColor, boolean skipDialog) {
@@ -44,7 +44,7 @@ public class WptPtEditor extends GpxPointEditor {
 		isNew = true;
 
 		this.gpxFile = gpxFile;
-		SelectedGpxFile selectedGpxFile =
+		GpxSelectionHelper.SelectedGpxFile selectedGpxFile =
 				mapActivity.getMyApplication().getSelectedGpxHelper().getSelectedFileByPath(gpxFile.path);
 		gpxSelected = selectedGpxFile != null;
 
@@ -70,7 +70,7 @@ public class WptPtEditor extends GpxPointEditor {
 
 		wpt.category = categoryName;
 
-		WptPtEditorFragment.showInstance(mapActivity, skipDialog);
+		RtePtEditorFragment.showInstance(mapActivity, skipDialog);
 	}
 
 	public void edit(WptPt wpt) {
@@ -78,13 +78,13 @@ public class WptPtEditor extends GpxPointEditor {
 			return;
 		}
 		isNew = false;
-		SelectedGpxFile selectedGpxFile =
+		GpxSelectionHelper.SelectedGpxFile selectedGpxFile =
 				mapActivity.getMyApplication().getSelectedGpxHelper().getSelectedGPXFile(wpt);
 		if (selectedGpxFile != null) {
 			gpxSelected = true;
 			gpxFile = selectedGpxFile.getGpxFile();
 		}
 		this.wpt = wpt;
-		WptPtEditorFragment.showInstance(mapActivity);
+		RtePtEditorFragment.showInstance(mapActivity);
 	}
 }

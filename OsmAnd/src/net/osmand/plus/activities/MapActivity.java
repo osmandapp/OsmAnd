@@ -103,7 +103,7 @@ import net.osmand.plus.routing.RoutingHelper.RouteCalculationProgressCallback;
 import net.osmand.plus.search.QuickSearchDialogFragment;
 import net.osmand.plus.search.QuickSearchDialogFragment.QuickSearchTab;
 import net.osmand.plus.search.QuickSearchDialogFragment.QuickSearchType;
-import net.osmand.plus.views.AddGpxPointBottomSheetHelper.NewPoint;
+import net.osmand.plus.views.AddGpxPointBottomSheetHelper.NewGpxPoint;
 import net.osmand.plus.views.AnimateDraggingMapThread;
 import net.osmand.plus.views.MapControlsLayer;
 import net.osmand.plus.views.MapInfoLayer;
@@ -917,9 +917,9 @@ public class MapActivity extends OsmandActionBarActivity implements DownloadEven
 				} else if (toShow instanceof QuadRect) {
 					QuadRect qr = (QuadRect) toShow;
 					mapView.fitRectToMap(qr.left, qr.right, qr.top, qr.bottom, (int) qr.width(), (int) qr.height(), 0);
-				} else if (toShow instanceof NewPoint) {
-					NewPoint newPoint = (NewPoint) toShow;
-					getMapLayers().getContextMenuLayer().enterAddGpxPointMode(newPoint);
+				} else if (toShow instanceof NewGpxPoint) {
+					NewGpxPoint newGpxPoint = (NewGpxPoint) toShow;
+					getMapLayers().getContextMenuLayer().enterAddGpxPointMode(newGpxPoint);
 				} else {
 					mapContextMenu.show(latLonToShow, mapLabelToShow, toShow);
 				}

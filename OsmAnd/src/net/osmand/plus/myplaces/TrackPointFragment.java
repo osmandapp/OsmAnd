@@ -57,7 +57,7 @@ import net.osmand.plus.activities.TrackActivity;
 import net.osmand.plus.base.FavoriteImageDrawable;
 import net.osmand.plus.base.OsmandExpandableListFragment;
 import net.osmand.plus.dialogs.DirectionsDialogs;
-import net.osmand.plus.views.AddGpxPointBottomSheetHelper.NewPoint;
+import net.osmand.plus.views.AddGpxPointBottomSheetHelper.NewGpxPoint;
 import net.osmand.util.Algorithms;
 
 import java.io.File;
@@ -160,7 +160,7 @@ public class TrackPointFragment extends OsmandExpandableListFragment {
 		routePointFab.setOnClickListener(new View.OnClickListener() {
 			@Override
 			public void onClick(View view) {
-				PointDescription pointDescription = new PointDescription(PointDescription.POINT_TYPE_ROUTE, getString(R.string.add_route_point));
+				PointDescription pointDescription = new PointDescription(PointDescription.POINT_TYPE_RTE, getString(R.string.add_route_point));
 				addPoint(pointDescription);
 			}
 		});
@@ -186,7 +186,7 @@ public class TrackPointFragment extends OsmandExpandableListFragment {
 					settings.getLastKnownMapZoom(),
 					pointDescription,
 					false,
-					new NewPoint(gpx, pointDescription));
+					new NewGpxPoint(gpx, pointDescription));
 
 			MapActivity.launchMapActivityMoveToTop(getActivity());
 		}

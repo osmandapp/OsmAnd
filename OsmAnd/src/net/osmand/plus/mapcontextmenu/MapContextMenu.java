@@ -40,6 +40,7 @@ import net.osmand.plus.mapcontextmenu.MenuController.TitleProgressController;
 import net.osmand.plus.mapcontextmenu.controllers.MapDataMenuController;
 import net.osmand.plus.mapcontextmenu.editors.FavoritePointEditor;
 import net.osmand.plus.mapcontextmenu.editors.PointEditor;
+import net.osmand.plus.mapcontextmenu.editors.RtePtEditor;
 import net.osmand.plus.mapcontextmenu.editors.WptPtEditor;
 import net.osmand.plus.mapcontextmenu.other.MapMultiSelectionMenu;
 import net.osmand.plus.mapcontextmenu.other.ShareMenu;
@@ -64,6 +65,7 @@ public class MapContextMenu extends MenuTitleController implements StateChangedL
 
 	private FavoritePointEditor favoritePointEditor;
 	private WptPtEditor wptPtEditor;
+	private RtePtEditor rtePtEditor;
 
 	private boolean active;
 	private LatLon latLon;
@@ -147,6 +149,9 @@ public class MapContextMenu extends MenuTitleController implements StateChangedL
 		if (wptPtEditor != null) {
 			wptPtEditor.setMapActivity(mapActivity);
 		}
+		if (rtePtEditor != null) {
+			rtePtEditor.setMapActivity(mapActivity);
+		}
 
 		if (active) {
 			acquireMenuController(false);
@@ -196,11 +201,20 @@ public class MapContextMenu extends MenuTitleController implements StateChangedL
 		return wptPtEditor;
 	}
 
+	public RtePtEditor getRtePtPointEditor() {
+		if (rtePtEditor == null) {
+			rtePtEditor = new RtePtEditor(mapActivity);
+		}
+		return rtePtEditor;
+	}
+
 	public PointEditor getPointEditor(String tag) {
 		if (favoritePointEditor != null && favoritePointEditor.getFragmentTag().equals(tag)) {
 			return favoritePointEditor;
 		} else if (wptPtEditor != null && wptPtEditor.getFragmentTag().equals(tag)) {
 			return wptPtEditor;
+		} else if (rtePtEditor != null && rtePtEditor.getFragmentTag().equals(tag)) {
+			return rtePtEditor;
 		}
 		return null;
 	}

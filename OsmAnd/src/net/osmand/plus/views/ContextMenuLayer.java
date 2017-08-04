@@ -41,7 +41,7 @@ import net.osmand.plus.mapcontextmenu.MapContextMenu;
 import net.osmand.plus.mapcontextmenu.other.MapMultiSelectionMenu;
 import net.osmand.plus.render.MapRenderRepositories;
 import net.osmand.plus.render.NativeOsmandLibrary;
-import net.osmand.plus.views.AddGpxPointBottomSheetHelper.NewPoint;
+import net.osmand.plus.views.AddGpxPointBottomSheetHelper.NewGpxPoint;
 import net.osmand.util.Algorithms;
 import net.osmand.util.MapUtils;
 
@@ -304,7 +304,7 @@ public class ContextMenuLayer extends OsmandMapLayer {
 		return mInGpxDetailsMode;
 	}
 
-	public boolean isInAddGpxWaypointMode() {
+	public boolean isInAddGpxPointMode() {
 		return mInAddGpxPointMode;
 	}
 
@@ -322,7 +322,7 @@ public class ContextMenuLayer extends OsmandMapLayer {
 	}
 
 	public void applyMovedObject(Object o, LatLon position, ApplyMovedObjectCallback callback) {
-		if (selectedObjectContextMenuProvider != null && !isInAddGpxWaypointMode()) {
+		if (selectedObjectContextMenuProvider != null && !isInAddGpxPointMode()) {
 			if (selectedObjectContextMenuProvider instanceof IMoveObjectProvider) {
 				final IMoveObjectProvider l = (IMoveObjectProvider) selectedObjectContextMenuProvider;
 				if (l.isObjectMovable(o)) {
@@ -460,14 +460,14 @@ public class ContextMenuLayer extends OsmandMapLayer {
 		}
 	}
 
-	public void enterAddGpxPointMode(NewPoint newPoint) {
+	public void enterAddGpxPointMode(NewGpxPoint newGpxPoint) {
 		menu.updateMapCenter(null);
 		menu.hide();
 
 		activity.disableDrawer();
 
 		mInAddGpxPointMode = true;
-		mAddGpxPointBottomSheetHelper.show(newPoint);
+		mAddGpxPointBottomSheetHelper.show(newGpxPoint);
 		mark(View.INVISIBLE, R.id.map_ruler_layout,
 				R.id.map_left_widgets_panel, R.id.map_right_widgets_panel, R.id.map_center_info);
 
@@ -547,15 +547,21 @@ public class ContextMenuLayer extends OsmandMapLayer {
 								   @Nullable PointDescription pointDescription,
 								   @Nullable Object object,
 								   @Nullable IContextMenuProvider provider) {
-		selectedObjectContextMenuProvider = provider;
-		hideVisibleMenues();
-		activity.getMapViewTrackingUtilities().setMapLinkedToLocation(false);
-		if (!activity.getMapView().getCurrentRotatedTileBox().containsLatLon(latLon)) {
-			menu.setMapCenter(latLon);
-			menu.setMapPosition(activity.getMapView().getMapPosition());
-			menu.setCenterMarker(true);
+		if (mInAddGpxPointMode) {
+			String title = pointDescription == null ? "" : pointDescription.getName();
+			mAddGpxPointBottomSheetHelper.setTitle(title);
+			view.getAnimatedDraggingThread().startMoving(latLon.getLatitude(), latLon.getLongitude(), view.getZoom(), true);
+		} else {
+			selectedObjectContextMenuProvider = provider;
+			hideVisibleMenues();
+			activity.getMapViewTrackingUtilities().setMapLinkedToLocation(false);
+			if (!activity.getMapView().getCurrentRotatedTileBox().containsLatLon(latLon)) {
+				menu.setMapCenter(latLon);
+				menu.setMapPosition(activity.getMapView().getMapPosition());
+				menu.setCenterMarker(true);
+			}
+			menu.show(latLon, pointDescription, object);
 		}
-		menu.show(latLon, pointDescription, object);
 		return true;
 	}
 
