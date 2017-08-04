@@ -505,6 +505,10 @@ public class MapActivity extends OsmandActionBarActivity implements DownloadEven
 			getMeasurementToolFragment().showQuitDialog();
 			return;
 		}
+		if (mapContextMenu.isVisible() && mapContextMenu.isClosable()) {
+			mapContextMenu.close();
+			return;
+		}
 		if (prevActivityIntent != null && getSupportFragmentManager().getBackStackEntryCount() == 0) {
 			prevActivityIntent.addFlags(Intent.FLAG_ACTIVITY_REORDER_TO_FRONT);
 			LatLon loc = getMapLocation();
