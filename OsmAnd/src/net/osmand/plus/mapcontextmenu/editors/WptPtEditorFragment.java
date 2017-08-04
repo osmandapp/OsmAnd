@@ -77,6 +77,14 @@ public class WptPtEditorFragment extends PointEditorFragment {
 
 	@Override
 	public String getToolbarTitle() {
+		PointDescription pointDescription = editor.getPointDescription();
+		if (pointDescription != null) {
+			if (pointDescription.isWpt()) {
+				return getMapActivity().getResources().getString(R.string.save_gpx_waypoint);
+			} else if (pointDescription.isRoutePoint()) {
+				return getMapActivity().getResources().getString(R.string.save_route_point);
+			}
+		}
 		if (editor.isNew()) {
 			return getMapActivity().getResources().getString(R.string.context_menu_item_add_waypoint);
 		} else {
@@ -113,6 +121,12 @@ public class WptPtEditorFragment extends PointEditorFragment {
 	@Override
 	protected boolean wasSaved() {
 		return saved;
+	}
+
+	@Override
+	public void onDestroyView() {
+		super.onDestroyView();
+		editor.setPointDescription(null);
 	}
 
 	@Override

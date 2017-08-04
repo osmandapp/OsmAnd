@@ -859,7 +859,7 @@ public class GPXUtilities {
 				pt.setColor(color);
 			}
 
-			if (pointDescription.isWpt()) {
+			if (pointDescription == null || pointDescription.isWpt()) {
 				points.add(pt);
 			} else if (pointDescription.isRoutePoint()) {
 				if (routes.size() == 0) {

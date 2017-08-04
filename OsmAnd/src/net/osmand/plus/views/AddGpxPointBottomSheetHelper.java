@@ -12,6 +12,7 @@ import net.osmand.data.PointDescription;
 import net.osmand.data.RotatedTileBox;
 import net.osmand.plus.GPXUtilities.GPXFile;
 import net.osmand.plus.IconsCache;
+import net.osmand.plus.OsmandApplication;
 import net.osmand.plus.R;
 import net.osmand.plus.activities.MapActivity;
 import net.osmand.plus.mapcontextmenu.MapContextMenu;
@@ -19,26 +20,27 @@ import net.osmand.plus.mapcontextmenu.MapContextMenu;
 public class AddGpxPointBottomSheetHelper {
 	private final View view;
 	private final TextView title;
-	private String titleText;
 	private final TextView description;
+	private final ImageView icon;
 	private final Context context;
 	private final MapContextMenu contextMenu;
 	private final ContextMenuLayer contextMenuLayer;
+	private final IconsCache iconsCache;
+	private String titleText;
 	private boolean applyingPositionMode;
 	private NewPoint newPoint;
 	private PointDescription pointDescription;
 
 	public AddGpxPointBottomSheetHelper(final MapActivity activity, ContextMenuLayer ctxMenuLayer) {
 		this.contextMenuLayer = ctxMenuLayer;
-		view = activity.findViewById(R.id.add_gpx_waypoint_bottom_sheet);
-		title = (TextView) view.findViewById(R.id.add_gpx_waypoint_bottom_sheet_title);
-		description = (TextView) view.findViewById(R.id.description);
+		iconsCache = activity.getMyApplication().getIconsCache();
 		context = activity;
 		contextMenu = activity.getContextMenu();
-		ImageView icon = (ImageView) view.findViewById(R.id.icon);
+		view = activity.findViewById(R.id.add_gpx_point_bottom_sheet);
+		title = (TextView) view.findViewById(R.id.add_gpx_point_bottom_sheet_title);
+		description = (TextView) view.findViewById(R.id.description);
+		icon = (ImageView) view.findViewById(R.id.icon);
 
-		IconsCache iconsCache = activity.getMyApplication().getIconsCache();
-		icon.setImageDrawable(iconsCache.getIcon(R.drawable.ic_action_photo_dark, R.color.marker_green));
 		view.findViewById(R.id.create_button).setOnClickListener(new View.OnClickListener() {
 			@Override
 			public void onClick(View v) {
@@ -65,6 +67,13 @@ public class AddGpxPointBottomSheetHelper {
 	}
 
 	public void setTitle(String title) {
+		if (title.equals("")) {
+			if (pointDescription.isWpt()) {
+				title = context.getString(R.string.waypoint_one);
+			} else if (pointDescription.isRoutePoint()) {
+				title = context.getString(R.string.route_point_one);
+			}
+		}
 		titleText = title;
 		this.title.setText(titleText);
 	}
@@ -73,17 +82,18 @@ public class AddGpxPointBottomSheetHelper {
 		return view.getVisibility() == View.VISIBLE;
 	}
 
-	public void show(Drawable drawable, NewPoint newPoint) {
+	public void show(NewPoint newPoint) {
 		this.newPoint = newPoint;
 		pointDescription = newPoint.getPointDescription();
 		if (pointDescription.isWpt()) {
-			setTitle(context.getString(R.string.add_gpx_waypoint));
+			setTitle(context.getString(R.string.waypoint_one));
+			icon.setImageDrawable(iconsCache.getThemedIcon(R.drawable.ic_action_marker_dark));
 		} else if (pointDescription.isRoutePoint()) {
-			setTitle(context.getString(R.string.add_route_point));
+			setTitle(context.getString(R.string.route_point_one));
+			icon.setImageDrawable(iconsCache.getThemedIcon(R.drawable.ic_action_markers_dark));
 		}
 		exitApplyPositionMode();
 		view.setVisibility(View.VISIBLE);
-		((ImageView) view.findViewById(R.id.icon)).setImageDrawable(drawable);
 	}
 
 	public void hide() {

@@ -467,7 +467,7 @@ public class ContextMenuLayer extends OsmandMapLayer {
 		activity.disableDrawer();
 
 		mInAddGpxPointMode = true;
-		mAddGpxPointBottomSheetHelper.show(menu.getLeftIcon(), newPoint);
+		mAddGpxPointBottomSheetHelper.show(newPoint);
 		mark(View.INVISIBLE, R.id.map_ruler_layout,
 				R.id.map_left_widgets_panel, R.id.map_right_widgets_panel, R.id.map_center_info);
 

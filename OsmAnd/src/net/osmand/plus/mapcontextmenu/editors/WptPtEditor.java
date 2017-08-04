@@ -34,6 +34,10 @@ public class WptPtEditor extends PointEditor {
 		return pointDescription;
 	}
 
+	public void setPointDescription(PointDescription pointDescription) {
+		this.pointDescription = pointDescription;
+	}
+
 	public boolean isGpxSelected() {
 		return gpxSelected;
 	}

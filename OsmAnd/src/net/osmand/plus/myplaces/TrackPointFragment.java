@@ -21,6 +21,7 @@ import android.view.MenuInflater;
 import android.view.MenuItem;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.AbsListView;
 import android.widget.CheckBox;
 import android.widget.EditText;
 import android.widget.ExpandableListView;
@@ -108,6 +109,20 @@ public class TrackPointFragment extends OsmandExpandableListFragment {
 	@Override
 	public void onActivityCreated(Bundle savedInstanceState) {
 		super.onActivityCreated(savedInstanceState);
+		listView.setOnScrollListener(new AbsListView.OnScrollListener() {
+			@Override
+			public void onScrollStateChanged(AbsListView absListView, int i) {
+				if (i == AbsListView.OnScrollListener.SCROLL_STATE_TOUCH_SCROLL) {
+					if (menuOpened) {
+						closeMenu();
+					}
+				}
+			}
+
+			@Override
+			public void onScroll(AbsListView absListView, int i, int i1, int i2) {
+			}
+		});
 		listView.setBackgroundColor(getResources().getColor(
 				getMyApplication().getSettings().isLightContent() ? R.color.ctx_menu_info_view_bg_light
 						: R.color.ctx_menu_info_view_bg_dark));
@@ -135,7 +150,7 @@ public class TrackPointFragment extends OsmandExpandableListFragment {
 		waypointFab.setOnClickListener(new View.OnClickListener() {
 			@Override
 			public void onClick(View view) {
-				PointDescription pointDescription = new PointDescription(PointDescription.POINT_TYPE_WPT, getString(R.string.context_menu_item_add_waypoint));
+				PointDescription pointDescription = new PointDescription(PointDescription.POINT_TYPE_WPT, getString(R.string.add_waypoint));
 				addPoint(pointDescription);
 			}
 		});
@@ -217,6 +232,11 @@ public class TrackPointFragment extends OsmandExpandableListFragment {
 		if (!adapter.isEmpty() && listView.getHeaderViewsCount() == 0) {
 			listView.addHeaderView(getActivity().getLayoutInflater().inflate(R.layout.list_shadow_header, null, false));
 			listView.addFooterView(getActivity().getLayoutInflater().inflate(R.layout.list_shadow_footer, null, false));
+			View view = new View(getActivity());
+			view.setLayoutParams(new AbsListView.LayoutParams(
+					AbsListView.LayoutParams.MATCH_PARENT,
+					AndroidUtils.dpToPx(getActivity(), 72)));
+			listView.addFooterView(view);
 		}
 	}
 

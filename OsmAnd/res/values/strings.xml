@@ -2659,8 +2659,10 @@
     <string name="shared_string_action_name">Action name</string>
     <string name="mappilary_no_internet_desc">You need internet to view photos from Mapillary</string>
     <string name="retry">Retry</string>
-    <string name="add_gpx_waypoint">Add GPX waypoint</string>
-    <string name="shared_string_create">Create</string>
-    <string name="route_point">Route point</string>
-    <string name="add_route_point">Add route point</string>
+    <string name="add_route_point">Add Route Point</string>
+    <string name="add_waypoint">Add Waypoint</string>
+    <string name="save_gpx_waypoint">Save GPX Waypoint</string>
+    <string name="save_route_point">Save Route Point</string>
+    <string name="waypoint_one">Waypoint 1</string>
+    <string name="route_point_one">Route Point 1</string>
 </resources>
