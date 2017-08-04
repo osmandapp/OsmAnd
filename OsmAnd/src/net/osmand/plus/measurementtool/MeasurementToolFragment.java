@@ -45,11 +45,11 @@ import java.util.LinkedList;
 import java.util.Locale;
 
 import static net.osmand.plus.GPXUtilities.GPXFile;
+import static net.osmand.plus.helpers.GpxImportHelper.GPX_SUFFIX;
 
 public class MeasurementToolFragment extends Fragment {
 
 	public static final String TAG = "MeasurementToolFragment";
-	private static final String EXT = ".gpx";
 
 	private MeasurementToolBarController toolBarController;
 	private TextView distanceTv;
@@ -211,13 +211,13 @@ public class MeasurementToolFragment extends Fragment {
 		final SwitchCompat showOnMapToggle = (SwitchCompat) view.findViewById(R.id.toggle_show_on_map);
 		showOnMapToggle.setChecked(true);
 
-		final String suggestedName = new SimpleDateFormat("yyyy-M-dd hh-mm E", Locale.US).format(new Date());
+		final String suggestedName = new SimpleDateFormat("yyyy-M-dd_HH-mm_EEE", Locale.US).format(new Date());
 		String displayedName = suggestedName;
-		File fout = new File(dir, suggestedName + EXT);
+		File fout = new File(dir, suggestedName + GPX_SUFFIX);
 		int ind = 1;
 		while (fout.exists()) {
-			displayedName = suggestedName + " " + (++ind);
-			fout = new File(dir, displayedName + EXT);
+			displayedName = suggestedName + "_" + (++ind);
+			fout = new File(dir, displayedName + GPX_SUFFIX);
 		}
 		nameEt.setText(displayedName);
 		nameEt.setSelection(displayedName.length());
@@ -236,7 +236,7 @@ public class MeasurementToolFragment extends Fragment {
 
 			@Override
 			public void afterTextChanged(Editable editable) {
-				if (new File(dir, editable.toString() + EXT).exists()) {
+				if (new File(dir, editable.toString() + GPX_SUFFIX).exists()) {
 					fileExistsTv.setVisibility(View.VISIBLE);
 				} else {
 					fileExistsTv.setVisibility(View.INVISIBLE);
@@ -252,12 +252,12 @@ public class MeasurementToolFragment extends Fragment {
 					@Override
 					public void onClick(DialogInterface dialog, int which) {
 						final String name = nameEt.getText().toString();
-						String fileName = name + EXT;
+						String fileName = name + GPX_SUFFIX;
 						if (textChanged[0]) {
 							File fout = new File(dir, fileName);
 							int ind = 1;
 							while (fout.exists()) {
-								fileName = name + " " + (++ind) + EXT;
+								fileName = name + "_" + (++ind) + GPX_SUFFIX;
 								fout = new File(dir, fileName);
 							}
 						}
@@ -322,6 +322,7 @@ public class MeasurementToolFragment extends Fragment {
 					} else {
 						Toast.makeText(activity, warning, Toast.LENGTH_LONG).show();
 					}
+					activity.refreshMap();
 				}
 				if (progressDialog != null && progressDialog.isShowing()) {
 					progressDialog.dismiss();
