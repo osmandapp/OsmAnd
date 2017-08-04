@@ -9,8 +9,11 @@
          3. All your modified/created strings are in the top of the file (to make easier find what\'s translated).
     PLEASE: Have a look at http://code.google.com/p/osmand/wiki/UIConsistency, it may really improve your and our work  :-)  Thx - Hardy
     -->
-    <string name="measurement_tool_action_bar">Select a location on the map and click "Add" to add a point to the ruler.</string>
-    <string name="measurement_tool">Measurement tool</string>
+    <string name="none_point_error">You need to add at least one point.</string>
+    <string name="enter_gpx_name">Enter name for GPX</string>
+    <string name="show_on_map_after_saving">Show on map after saving</string>
+    <string name="measurement_tool_action_bar">Browse map and add points to a line</string>
+    <string name="measurement_tool">Measure distance</string>
     <string name="quick_action_resume_pause_navigation">Resume/Pause Navigation</string>
     <string name="quick_action_resume_pause_navigation_descr">Press this button to pause the navigation, or to resume it if it was already paused.</string>
     <string name="quick_action_show_navigation_finish_dialog">Show Finish navigation dialog</string>
