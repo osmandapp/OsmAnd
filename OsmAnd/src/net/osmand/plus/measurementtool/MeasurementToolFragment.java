@@ -10,6 +10,8 @@ import android.support.v4.app.Fragment;
 import android.support.v4.app.FragmentManager;
 import android.support.v4.content.ContextCompat;
 import android.support.v7.app.AlertDialog;
+import android.support.v7.widget.LinearLayoutManager;
+import android.support.v7.widget.RecyclerView;
 import android.support.v7.widget.SwitchCompat;
 import android.text.Editable;
 import android.text.TextWatcher;
@@ -187,6 +189,10 @@ public class MeasurementToolFragment extends Fragment {
 			});
 			mapActivity.showTopToolbar(toolBarController);
 		}
+
+		RecyclerView rv = mainView.findViewById(R.id.measure_points_recycler_view);
+		rv.setLayoutManager(new LinearLayoutManager(getContext()));
+		rv.setAdapter(new MeasurementToolAdapter(getMapActivity(), measurementLayer.getMeasurementPoints()));
 
 		return view;
 	}

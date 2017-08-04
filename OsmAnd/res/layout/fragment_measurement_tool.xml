@@ -92,7 +92,7 @@
             <include layout="@layout/card_bottom_divider"/>
 
             <android.support.v7.widget.RecyclerView
-                android:id="@+id/points_recycler_view"
+                android:id="@+id/measure_points_recycler_view"
                 android:layout_width="match_parent"
                 android:layout_height="215dp"/>
 
