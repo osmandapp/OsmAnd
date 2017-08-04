@@ -2760,7 +2760,7 @@ U vypadku, kali vy lubіcie OsmAnd і OSM і chočacie padtrymać jaho, heta іd
 \n
 \n</string>
     <string name="rendering_value_translucent_pink_name">Paŭprazrysty ružovy</string>
-    <string name="measurement_tool">Vymiareńnie</string>
+    <string name="measurement_tool">Vymiarać adliehlasć</string>
     <string name="quick_action_resume_pause_navigation">Adnavić/Prypynić Navihacyju</string>
     <string name="quick_action_resume_pause_navigation_descr">Naciśnicie hetuju knopku, kab prypynić navihacyju ci adnavić jaje, kali jana ŭžo była prypynienaja.</string>
     <string name="quick_action_show_navigation_finish_dialog">Pakazvać dyjałoh Zaviaršeńnie navihacyi</string>
@@ -2770,7 +2770,16 @@ U vypadku, kali vy lubіcie OsmAnd і OSM і chočacie padtrymać jaho, heta іd
     <string name="retry">Paŭtaryć sprobu</string>
     <string name="add_gpx_waypoint_bottom_sheet_title">Dadać GPX šlach</string>
     <string name="shared_string_create">Stvaryć</string>
-<string name="measurement_tool_action_bar">Vyłučycie miesća na mapie i naćisnicie knopku Dadać, kab dadać kropku da liniejcy.</string>
+<string name="measurement_tool_action_bar">Prahliadzieć mapu i dadać kropki da linii</string>
     <string name="live_monitoring_max_interval_to_send">Čas bufieryzacyi dlia anłajn sačeńnia</string>
     <string name="live_monitoring_max_interval_to_send_desrc">Zadaje čas bufieryzacyi dlia zbieražeńnia miescaŭ dlia adpraŭki biez zlučeńnia</string>
-    </resources>
+    <string name="none_point_error">Vy pavinny dadać pa mienšaj miery adnu kropku.</string>
+    <string name="enter_gpx_name">Uviadzicie nazvu dlia GPX</string>
+    <string name="show_on_map_after_saving">Pakazać mapu paslia zachavannia</string>
+    <string name="add_route_point">Dadać kropku maršrutu</string>
+    <string name="add_waypoint">Dadać kropku šliachu</string>
+    <string name="save_gpx_waypoint">Zachavać GPX-kropku šliachu</string>
+    <string name="save_route_point">Zachavać kropku maršrutu</string>
+    <string name="waypoint_one">Kropka šliachu 1</string>
+    <string name="route_point_one">Kropka maršrutu 1</string>
+</resources>
