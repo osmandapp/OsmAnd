@@ -301,7 +301,7 @@
     <string name="shared_string_next">Další</string>
     <string name="shared_string_previous">Předchozí</string>
     <string name="unit_of_length_descr">Zvolte jednotku vzdálenosti</string>
-    <string name="unit_of_length">Jednotka vzdálenosti</string>
+    <string name="unit_of_length">Jednotky vzdálenosti</string>
     <string name="si_mi_feet">Míle/stopy</string>
     <string name="si_mi_yard">Míle/yardy</string>
     <string name="si_km_m">Kilometry/metry</string>
@@ -2579,8 +2579,8 @@ Pokud potřebujete pomoci s aplikací OsmAnd, prosím kontaktujte naši podporu
     <string name="select_postcode">Zvolte směrovací číslo</string>
     <string name="quick_action_auto_zoom">Automatické přiblížení mapy</string>
     <string name="quick_action_auto_zoom_desc">Stisknutím akčního tlačítka zapnete/vypnete automatické přibližování mapy v závislosti na vaší rychlosti.</string>
-    <string name="quick_action_auto_zoom_on">Automatické přiblížení zapnuto</string>
-    <string name="quick_action_auto_zoom_off">Automatické přiblížení vypnuto</string>
+    <string name="quick_action_auto_zoom_on">Zapnout automatické přiblížení mapy</string>
+    <string name="quick_action_auto_zoom_off">Vypnout automatické přiblížení mapy</string>
     <string name="quick_action_add_destination">Přidat cíl</string>
     <string name="quick_action_replace_destination">Nahradit cíl</string>
     <string name="quick_action_add_first_intermediate">Přidat první mezicíl</string>
@@ -2691,4 +2691,9 @@ Pokud potřebujete pomoci s aplikací OsmAnd, prosím kontaktujte naši podporu
 \n
 \n"</string>
     <string name="rendering_value_translucent_pink_name">Průhledná růžová</string>
+    <string name="none_point_error">Musíte přidat alespoň jeden bod.</string>
+    <string name="enter_gpx_name">Zadejte název pro GPX</string>
+    <string name="show_on_map_after_saving">Po uložení zobrazit na mapě</string>
+    <string name="measurement_tool_action_bar">Prohlížet mapu a přidat body do linie</string>
+    <string name="measurement_tool">Měřit vzdálenost</string>
     </resources>
