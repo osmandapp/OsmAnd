@@ -2834,8 +2834,17 @@ Tidligere destination bliver sidste mellemliggende punkt.</string>
     <string name="live_monitoring_max_interval_to_send_desrc">Angiv en buffer for hvor lang tid positioner skal gemmes, når der ingen internetforbindelse er</string>
     <string name="retry">Prøv igen</string>
 <string name="mappilary_no_internet_desc">Internetforbindelse er nødvendig for at se fotos fra Mapillary</string>
-    <string name="measurement_tool">Måleværktøj</string>
-    <string name="measurement_tool_action_bar">Vælg en placering på kortet og klik på Tilføj for at føje et punkt til linealen.</string>
+    <string name="measurement_tool">Mål afstand</string>
+    <string name="measurement_tool_action_bar">Gennemse kort og tilføj punkter til en linje</string>
     <string name="add_gpx_waypoint_bottom_sheet_title">Tilføj gpx rutepunkt</string>
     <string name="shared_string_create">Opret</string>
+<string name="none_point_error">Du skal tilføje mindst ét punkt.</string>
+    <string name="enter_gpx_name">Angiv navn til GPX</string>
+    <string name="show_on_map_after_saving">Vis på kort, når du har gemt</string>
+    <string name="add_route_point">Tilføj rutepunkt</string>
+    <string name="add_waypoint">Tilføj Rutepunkt</string>
+    <string name="save_gpx_waypoint">Gem GPX rutepunkt</string>
+    <string name="save_route_point">Gem rutepunkt</string>
+    <string name="waypoint_one">Rutepunkt 1</string>
+    <string name="route_point_one">Rutepunkt 1</string>
 </resources>
