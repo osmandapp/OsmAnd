@@ -2724,8 +2724,8 @@ Fonctionnalités principales :
     <string name="quick_action_replace_destination_desc">Appuyez sur le bouton d\'action pour remplacer la destination par le centre de la carte.</string>
     <string name="quick_action_auto_zoom">Zoom automatique de la carte Actif / Inactif</string>
     <string name="quick_action_auto_zoom_desc">Appuyez sur le bouton pour activer ou désactiver le zoom automatique de la carte en fonction de votre vitesse.</string>
-    <string name="quick_action_auto_zoom_on">Activer l\'auto zoom</string>
-    <string name="quick_action_auto_zoom_off">Zoom automatique désactivé</string>
+    <string name="quick_action_auto_zoom_on">Activer le zoom automatique</string>
+    <string name="quick_action_auto_zoom_off">Désactiver le zoom automatique</string>
     <string name="shared_string_paused">Mis en pause</string>
     <string name="type_city_town">Entrer la ville ou le village</string>
     <string name="type_postcode">Entrer le code postal</string>
