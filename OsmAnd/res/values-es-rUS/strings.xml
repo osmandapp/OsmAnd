@@ -1294,7 +1294,7 @@ Se aprecia la participación activa, y las contribuciones pueden hacerse directa
     <string name="preferred_locale">Idioma de la pantalla</string>
     <string name="incomplete_locale">incompleto</string>
     <string name="unit_of_length_descr">Cambia las unidades de longitud</string>
-    <string name="unit_of_length">Unidad de longitud</string>
+    <string name="unit_of_length">Unidades de longitud</string>
     <string name="si_mi_feet">Millas/pies</string>
     <string name="si_mi_yard">Millas/yardas</string>
     <string name="si_km_m">Kilómetros/metros</string>
@@ -2589,8 +2589,8 @@ Proporciona un código completo</string>
     <string name="no_underlay">Sin subyacencia</string>
     <string name="quick_action_auto_zoom">Alternar ampliación automática del mapa</string>
     <string name="quick_action_auto_zoom_desc">Pulsar el botón de acción alternará la ampliación automática del mapa de acuerdo a la velocidad.</string>
-    <string name="quick_action_auto_zoom_on">Ampliación automática del mapa activada</string>
-    <string name="quick_action_auto_zoom_off">Ampliación automática del mapa desactivada</string>
+    <string name="quick_action_auto_zoom_on">Activar ampliación automática del mapa</string>
+    <string name="quick_action_auto_zoom_off">Desactivar ampliación automática del mapa</string>
     <string name="quick_action_add_destination">Añadir destino</string>
     <string name="quick_action_replace_destination">Reemplazar destino</string>
     <string name="quick_action_add_first_intermediate">Añadir primer destino intermedio</string>
@@ -2699,8 +2699,17 @@ Proporciona un código completo</string>
     <string name="live_monitoring_max_interval_to_send_desrc">Especifica el tiempo que el búfer mantendrá los lugares para enviar sin conexión</string>
     <string name="mappilary_no_internet_desc">Debes tener conexión a Internet para ver fotos de Mapillary</string>
     <string name="retry">Reintentar</string>
-<string name="measurement_tool_action_bar">Elige una ubicación en el mapa y pulsa «Añadir» para añadir un punto en la regla.</string>
-    <string name="measurement_tool">Herramienta de medición</string>
+<string name="measurement_tool_action_bar">Navega por el mapa y añade puntos para un línea</string>
+    <string name="measurement_tool">Medir distancia</string>
     <string name="add_gpx_waypoint_bottom_sheet_title">Añadir punto de ruta GPX</string>
     <string name="shared_string_create">Crear</string>
+<string name="none_point_error">Debes añadir al menos un punto.</string>
+    <string name="enter_gpx_name">Ingresa el nombre del GPX</string>
+    <string name="show_on_map_after_saving">Mostrar en el mapa después de guardar</string>
+    <string name="add_route_point">Añadir punto de ruta</string>
+    <string name="add_waypoint">Añadir punto de ruta</string>
+    <string name="save_gpx_waypoint">Guardar punto de ruta GPX</string>
+    <string name="save_route_point">Guardar punto de ruta</string>
+    <string name="waypoint_one">Punto de ruta 1</string>
+    <string name="route_point_one">Punto de ruta 1</string>
 </resources>
