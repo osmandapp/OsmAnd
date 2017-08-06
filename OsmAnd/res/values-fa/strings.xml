@@ -1,4 +1,5 @@
-<?xml version="1.0" encoding="UTF-8" standalone="no"?><resources><string name="local_osm_changes_backup_failed">پشتیبان‌گیری از تغییرات OsmAnd ناموفق بود</string>
+<?xml version='1.0' encoding='UTF-8'?>
+<resources><string name="local_osm_changes_backup_failed">پشتیبان‌گیری از تغییرات OsmAnd ناموفق بود</string>
     <string name="plugin_distance_point_time">زمان</string>
     <string name="plugin_distance_point_hdop">دقت</string>
     <string name="plugin_distance_point_speed">سرعت</string>
@@ -869,7 +870,7 @@
     
     <string name="download_hillshade_maps">تپه سایه</string>
     
-    <string name="osmand_srtm_long_description_1000_chars">"این افزونه، منحنی‌های هم‌تراز را که در نقشه‌&#157;های آفلاین OsmAnd نمایش داده میشوند فراهم میکند. داده‌های جهانی (بین 70 درجه شمالی و 70 درجه جنوبی) در این زمینه براساس اندازه گیری‌های SRTM (مأموریت توپوگرافی رادار شاتل) و ASTER (رادیومتر انعکاسی و پرتویی حرارتی هوایی پیشرفته)، یک ابزار تصویربرداری پردازنده ترا و ماهواره فوق پیشرفته سیستم نظارتی زمین ناسا مییباشند. ASTER محصول تلاش مشترک میان ناسا، وزارت اقتصاد ژاپن، صنعت و تجارت (متی)، و سیستم های فضایی ژاپن (جی-اسپیس سیستم) است. "</string>
+    <string name="osmand_srtm_long_description_1000_chars">"این افزونه، منحنی‌های هم‌تراز را که در نقشه‌های آفلاین OsmAnd نمایش داده میشوند فراهم میکند. داده‌های جهانی (بین 70 درجه شمالی و 70 درجه جنوبی) در این زمینه براساس اندازه گیری‌های SRTM (مأموریت توپوگرافی رادار شاتل) و ASTER (رادیومتر انعکاسی و پرتویی حرارتی هوایی پیشرفته)، یک ابزار تصویربرداری پردازنده ترا و ماهواره فوق پیشرفته سیستم نظارتی زمین ناسا مییباشند. ASTER محصول تلاش مشترک میان ناسا، وزارت اقتصاد ژاپن، صنعت و تجارت (متی)، و سیستم های فضایی ژاپن (جی-اسپیس سیستم) است. "</string>
     <string name="srtm_plugin_description">"این افزونه هم یک لایه خطوط هم‌تراز و هم یک لایه تپه سایه بر روی نقشه‌های استاندارد OsmAnd اضافه میکند. این قابلیت بسیار به درد قهرمانان، کوهنوردان، جهانگردان و هرکسی که به ساختار زمین علاقمند است می‌خورد.\nداده‌های جهانی (بین ۷۰ درجه شمالی و ۷۰ درجه جنوبی) توسط اندازه‌گیریهای SRTM (مأموریت رادار توپوگرافی شاتل) و ASTER (تابش حرارتی فضاپایه پیشرفته و رادیومتری انعکاسی)، ایزار تصویربرداری Terra، ماهواره پرچمدار سیستم نظاره‌گر زمین ناسا انجام شده است. ASTER یک پروژه همکاری مشترک بین ناسا، وزارت اقتصاد ژاپن، وزارت صنعت و بازرگانی و سیستمهای فضایی ژاپن (J-spacesystems) می‌باشد. "</string>
     <string name="monitoring_control_start">جی پی ایکس</string>
     <string name="rendering_attr_noPolygons_description">محو کردن همه عوارض زمین روی نقشه</string>
@@ -1249,7 +1250,7 @@
     
     <string name="route_descr_destination">مقصد</string>
     <string name="create_poi_link_to_osm_doc">  <u>Online OSM</u> map classification with images</string>
-	<string name="app_mode_hiking">پیاده‌&#157;روی</string>
+	<string name="app_mode_hiking">پیاده‌روی</string>
     <string name="app_mode_motorcycle">موتورسیکلت</string>
     <string name="app_mode_boat">قایق</string>
     <string name="app_mode_aircraft">هواپیما</string>
@@ -2150,4 +2151,13 @@
     <string name="delete_filter">حذف فیلتر</string>
     <string name="new_filter">فیلتر جدید</string>
     <string name="new_filter_desc">لطفا یک نام برای فیلتر جدید را وارد کنید، این نام به عنوان دسته جدید اضافه میشود.</string>
+    <string name="enter_gpx_name">نام فایل gpx را وارد نمایید</string>
+    <string name="show_on_map_after_saving">مشاهده بر روی نقشه پس از ذخیره شدن</string>
+    <string name="measurement_tool_action_bar">مرور نقشه و افزودن نقاط به خط</string>
+    <string name="measurement_tool">اندازه گیری فاصله</string>
+    <string name="quick_action_resume_pause_navigation">ادامه/توقف مسیریابی</string>
+    <string name="quick_action_show_navigation_finish_dialog">مشاهده پیغام اتمام مسیریابی</string>
+    <string name="quick_action_start_stop_navigation">شروع/اتمام مسیریابی</string>
+    <string name="shared_string_reset">تنظیم مجدد</string>
+    <string name="shared_string_reload">بارگذاری مجدد</string>
     </resources>
