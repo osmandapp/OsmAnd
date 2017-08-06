@@ -1096,13 +1096,10 @@ OSM er et i fællesskab drevet, globalt offentligt domæne kortlægningsprojekt.
     <string name="plugin_distance_point_ele">højde</string>
     <string name="osmand_distance_planning_plugin_description">"Udvidelsen giver et modul som gør det muligt at oprette stier, ved at trykke på kortet, eller bruge eller ændre en  eksisterende GPX-fil, til at planlægge en tur og måle afstanden mellem punkter. Resultaterne kan gemmes som en GPX-fil, som senere kan bruges til rutevejledning."</string>
     <string name="osmand_distance_planning_plugin_name">Afstandsberegner &amp; planlægningsværktøj</string>
-    <string name="use_distance_measurement_help">* Tryk for at markere et punkt.
- 
-* Langt tryk på kortet for at slette tidligere punkt.
-
- * Langt tryk på punkt for at se og vedhæfte beskrivelse.
-
- * Klik på målemodul for at se flere handlinger.</string>
+    <string name="use_distance_measurement_help">* Tryk for at markere et punkt. 
+\n* Langt tryk på kortet for at slette tidligere punkt. 
+\n* Langt tryk på punkt for at se og vedhæfte beskrivelse. 
+\n* Tryk på målemodul for at se flere handlinger.</string>
     <string name="delete_point">Slet punkt</string>
     <string name="local_osm_changes_backup_failed">Sikkerhedskopiering af OSM-data ændringer mislykkedes</string>
     <string name="local_osm_changes_backup_successful">OSM-data ændringsfilen %1$s genereret</string>
@@ -1341,7 +1338,7 @@ OSM er et i fællesskab drevet, globalt offentligt domæne kortlægningsprojekt.
     <string name="osmo_auto_send_locations_descr">Start tur automatisk og send placeringer efter start af programmet</string>
     <string name="osmo_auto_send_locations">Start tur automatisk</string>
     <string name="osmo_tracker_id">Sporings-ID</string>
-    <string name="osmo_tracker_id_descr">Klik for at se tracker-ID</string>
+    <string name="osmo_tracker_id_descr">Tryk for at se tracker-ID</string>
     <string name="osmo_session_token">Sessiontoken: %1$s</string>
     <string name="osmo_auth_pending">Venter på autorisation…</string>
     <string name="osmo_locations_sent">Placeringer sendt %1$d (i buffer %2$d) </string>
@@ -1350,13 +1347,13 @@ OSM er et i fællesskab drevet, globalt offentligt domæne kortlægningsprojekt.
     <string name="osmo_settings_debug">Fejlsøgningsinformation</string>
     <string name="osmo_group_info">Info</string>
     <string name="osmo_group">OsMo gruppe</string>
-    <string name="osmo_group_share">For at oprette forbindelse til gruppen %2$s, angiv gruppe-id (%1$s) eller klik på %3$s.</string>
+    <string name="osmo_group_share">For at oprette forbindelse til gruppen %2$s, angiv gruppe-id (%1$s) eller tryk på %3$s.</string>
     <string name="osmo_share_connect_device">Følg enheden permanent</string>
     <string name="osmo_share_current_session">Del den aktuelle session i browser</string>
     <string name="osmo_session_not_available">Sessionen er ikke tilgængelig, kontroller at \'Send placering\' er til.</string>
     <string name="osmo_share_session">Del sessionen</string>
     <string name="osmo_session_id_share">Session url til at spore enhed (%1$s)</string>
-    <string name="osmo_tracker_id_share">For at oprette forbindelse til målenheden %2$s, klik på linket %3$s eller angiv sporings-id (%1$s)</string>
+    <string name="osmo_tracker_id_share">For at oprette forbindelse til målenheden %2$s, tryk på linket %3$s eller angiv sporings-id (%1$s)</string>
     <string name="osmo_track_interval">Logningsinterval</string>
     <string name="osmo_track_interval_descr">Vælg tidsinterval til at sende placering</string>
     <string name="int_days">dage</string>
@@ -1558,7 +1555,7 @@ OSM er et i fællesskab drevet, globalt offentligt domæne kortlægningsprojekt.
     <string name="traffic_warning_calming">Trafikdæmpning</string>
     <string name="traffic_warning_speed_camera">Fartkamera</string>
     <string name="traffic_warning">Trafikadvarsel</string>
-    <string name="local_index_description">Klik på et eksisterende emne for at se flere detaljer, langt tryk for at deaktivere eller slette. Aktuelle data på enhed (%1$s ledig):</string>
+    <string name="local_index_description">Tryk på et eksisterende emne for at se flere detaljer, langt tryk for at deaktivere eller slette. Aktuelle data på enhed (%1$s ledig):</string>
     <string name="text_size_descr">Vælg tekststørrelsen på kortet.</string>
     <string name="text_size">Tekststørrelse</string>
     <string name="fav_point_dublicate">Favoritnavn dublet</string>
@@ -1822,7 +1819,7 @@ Lon %2$s</string>
     <string name="welcome_select_region">For korrekt at afspejle trafikskilte og regler, vælg område:</string>
     <string name="welcome_header">Velkommen</string>
     <string name="welcome_text">OsmAnd giver globale offline kortvisninger, og global offline navigation!</string>
-    <string name="confirm_usage_speed_cameras">I mange lande (Tyskland, Frankrig, Italien og andre) er anvendelse af fartkamera advarsler ikke tilladt ved lov. OsmAnd påtager sig ikke ansvaret, hvis loven overtrædes. Klik kun på Ja, hvis det er berettiget at bruge denne funktion.</string>
+    <string name="confirm_usage_speed_cameras">I mange lande (Tyskland, Frankrig, Italien og andre) er anvendelse af fartkamera advarsler ikke tilladt ved lov. OsmAnd påtager sig ikke ansvaret, hvis loven overtrædes. Tryk kun på Ja, hvis det er berettiget at bruge denne funktion.</string>
     <string name="agps_info">A-GPS information</string>
     <string name="agps_data_last_downloaded">A-GPS data sidst hentet: %1$s</string>
     <string name="shared_string_message">Meddelelse</string>
@@ -2480,7 +2477,7 @@ Hvis du  ønsker at støtte OsmAnd og OSM, er dette en god måde at gøre det p�
     <string name="shared_string_recorded">Optaget</string>
     <string name="shared_string_record">Optag</string>
     <string name="gpx_logging_no_data">Ingen data</string>
-    <string name="release_2_5">• Klikbare ikoner på kortet 
+    <string name="release_2_5">• Trykbare ikoner på kortet 
 \n 
 \n  • Fleksibel IP-filter søgning: Søg fx. restauranter efter køkkenstil, eller campingpladser med særlige faciliteter 
 \n 
@@ -2838,11 +2835,11 @@ Tidligere destination bliver sidste mellemliggende punkt.</string>
     <string name="measurement_tool_action_bar">Gennemse kort og tilføj punkter til en linje</string>
     <string name="add_gpx_waypoint_bottom_sheet_title">Tilføj gpx rutepunkt</string>
     <string name="shared_string_create">Opret</string>
-<string name="none_point_error">Du skal tilføje mindst ét punkt.</string>
-    <string name="enter_gpx_name">Angiv navn til GPX</string>
-    <string name="show_on_map_after_saving">Vis på kort, når du har gemt</string>
+<string name="none_point_error">Tilføj mindst ét punkt.</string>
+    <string name="enter_gpx_name">Indtast et navn for GPX</string>
+    <string name="show_on_map_after_saving">Vis på kort efter at have gemt</string>
     <string name="add_route_point">Tilføj rutepunkt</string>
-    <string name="add_waypoint">Tilføj Rutepunkt</string>
+    <string name="add_waypoint">Tilføj rutepunkt</string>
     <string name="save_gpx_waypoint">Gem GPX rutepunkt</string>
     <string name="save_route_point">Gem rutepunkt</string>
     <string name="waypoint_one">Rutepunkt 1</string>
