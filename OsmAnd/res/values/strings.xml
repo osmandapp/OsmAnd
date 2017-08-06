@@ -9,16 +9,16 @@
          3. All your modified/created strings are in the top of the file (to make easier find what\'s translated).
     PLEASE: Have a look at http://code.google.com/p/osmand/wiki/UIConsistency, it may really improve your and our work  :-)  Thx - Hardy
     -->
-    <string name="none_point_error">You need to add at least one point.</string>
-    <string name="enter_gpx_name">Enter name for GPX</string>
+    <string name="none_point_error">Please add at least one point.</string>
+    <string name="enter_gpx_name">GPX file name:</string>
     <string name="show_on_map_after_saving">Show on map after saving</string>
-    <string name="measurement_tool_action_bar">Browse map and add points to a line</string>
+    <string name="measurement_tool_action_bar">Browse the map and add points</string>
     <string name="measurement_tool">Measure distance</string>
     <string name="quick_action_resume_pause_navigation">Resume/Pause Navigation</string>
-    <string name="quick_action_resume_pause_navigation_descr">Press this button to pause the navigation, or to resume it if it was already paused.</string>
-    <string name="quick_action_show_navigation_finish_dialog">Show Finish navigation dialog</string>
-    <string name="quick_action_start_stop_navigation">Start/Finish Navigation</string>
-    <string name="quick_action_start_stop_navigation_descr">Press this button to start the navigation, or to stop it if it was already started.</string>
+    <string name="quick_action_resume_pause_navigation_descr">Tap this button to pause or resume the navigation.</string>
+    <string name="quick_action_show_navigation_finish_dialog">Show Navigation finished dialog</string>
+    <string name="quick_action_start_stop_navigation">Start/Stop Navigation</string>
+    <string name="quick_action_start_stop_navigation_descr">Tap this button to start or end the navigation.</string>
     <string name="store_tracks_in_monthly_directories">Store recorded tracks in monthly folders</string>
     <string name="store_tracks_in_monthly_directories_descrp">Store recorded tracks in sub-folders per recording month (like 2017-01).</string>
     <string name="shared_string_reset">Reset</string>
@@ -209,7 +209,7 @@
     <string name="osmo_pause_location">Pause</string>
     <string name="osmo_service_running">OsMo service is running</string>
     <string name="trip_rec_notification_settings">Trip recording (no data)</string>
-    <string name="trip_rec_notification_settings_desc">Show notification which allows to start trip recording by pressing Record button</string>
+    <string name="trip_rec_notification_settings_desc">Display a system notification allowing to start trip recording</string>
     <string name="shared_string_notifications">Notifications</string>
     <string name="shared_string_continue">Continue</string>
     <string name="shared_string_pause">Pause</string>
@@ -1087,7 +1087,7 @@
     <string name="osmo_gpx_track_downloaded">OsMo track %1$s downloaded.</string>
     <string name="no_index_file_to_download">Downloads not found, please check your Internet connection.</string>
     <string name="select_index_file_to_download">Nothing was found. If you can\'t find your region, you can make it yourself (see http://osmand.net).</string>
-    <string name="none_selected_gpx">No GPX files selected. In order to select press and hold on available track.</string>
+    <string name="none_selected_gpx">No GPX files selected. To select one long-tap an available track.</string>
     <string name="local_index_select_gpx_file">Select to show</string>
     <string name="gpx_split_interval">Split interval</string>
     <string name="sort_by_distance">Sort by distance</string>
@@ -1100,9 +1100,9 @@
     <string name="loading_smth">Loading %1$s…</string>
     <string name="map_widget_plain_time">Current time</string>
     <string name="gpx_wpt">Waypoint</string>
-    <string name="selected_gpx_info_show">\n\nPress and hold to see on map</string>
+    <string name="selected_gpx_info_show">\n\nLong-tap to view on the map</string>
     <string name="delay_navigation_start">Start turn-by-turn guidance automatically</string>
-    <string name="local_index_gpx_info_show">\n\nPress and hold for options</string>
+    <string name="local_index_gpx_info_show">\n\nLong-tap for options</string>
     <string name="gpx_info_subtracks">Subtracks: %1$s </string>
     <string name="gpx_info_waypoints">Waypoints: %1$s </string>
     <string name="gpx_info_distance">Distance: %1$s (%2$s points) </string>
@@ -1376,8 +1376,8 @@
     <string name="gpx_file_name">GPX file name</string>
     <string name="gpx_saved_sucessfully">GPX file successfully saved to {0}</string>
     <string name="use_distance_measurement_help">* Tap to mark a point.\n
-        * Press and hold on the map to delete previous point.\n
-        * Press and hold on point to view and attach description.\n
+        * Long-tap on the map to delete previous point.\n
+        * Long-tap on a point to view and attach description.\n
         * Click on measurement widget to see more actions.</string>
     <string name="distance_measurement_start_editing">Start editing</string>
     <string name="distance_measurement_finish_editing">Finish editing</string>
@@ -1450,7 +1450,7 @@
     <string name="av_settings">Audio/video settings </string>
     <string name="recording_error">Error occurred while recording </string>
     <string name="recording_camera_not_available">Camera is not available</string>
-    <string name="recording_is_recorded">Audio/video is being recorded. To stop it press the AV widget.</string>
+    <string name="recording_is_recorded">Audio/video is being recorded. To stop it tap the AV widget.</string>
     <string name="recording_playing">An audio from the specified recording is being played.\n%1$s</string>
     <string name="recording_open_external_player">Open external player</string>
     <string name="recording_delete_confirm">Do you want to delete this recording?</string>
@@ -1537,7 +1537,7 @@
     <string name="auto_zoom_map">Auto zoom map</string>
     <string name="snap_to_road_descr">Snap position to roads during navigation</string>
     <string name="snap_to_road">Snap to road</string>
-    <string name="interrupt_music_descr">Fully pause any music during voice prompts (not just lower its volume)</string>
+    <string name="interrupt_music_descr">Voice prompts pause, not just subdue, music playback</string>
     <string name="interrupt_music">Pause music</string>
     <string name="osmand_play_title_30_chars">OsmAnd Maps &amp; Navigation</string>
     <string name="osmand_short_description_80_chars">Global Mobile Map Viewing &amp; Navigation for Offline and Online OSM Maps</string>
@@ -1753,7 +1753,7 @@
     <string name="bg_service_sleep_mode_on">Stop\n running in background</string>
     <string name="gps_wakeup_interval">GPS wake-up interval: %s</string>
     <string name="int_continuosly">Continuous</string>
-    <string name="screen_is_locked">To unlock screen press lock icon</string>
+    <string name="screen_is_locked">To unlock screen tap the lock icon</string>
     <string name="map_widget_top_text">Street name</string>
     <string name="map_widget_config">Configure screen</string>
     <string name="map_widget_back_to_loc">Where am I</string>
@@ -1838,7 +1838,7 @@
     <string name="offline_navigation_not_available">OsmAnd offline navigation is temporarily not available.</string>
     <string name="left_side_navigation">Left-hand driving</string>
     <string name="left_side_navigation_descr">Select for countries with left-hand traffic</string>
-    <string name="local_index_description">Click any existing item to see more details, press and hold to deactivate or delete. Current data on device (%1$s free):</string>
+    <string name="local_index_description">Tap any existing item to see more details, long-tap to deactivate or delete. Current data on device (%1$s free):</string>
     <string name="unknown_from_location">Starting point is not yet determined</string>
     <string name="unknown_location">Position not yet known</string>
     <string name="modify_transparency">Modify transparency (0 - transparent, 255 - opaque)</string>
@@ -2659,7 +2659,7 @@
     <string name="quick_action_map_source_action">Add map source</string>
     <string name="quick_action_map_source_switch">The map source has been changed to \"%s\".</string>
     <string name="quick_action_btn_tutorial_title">Change button position</string>
-    <string name="quick_action_btn_tutorial_descr">Long tap and drag the button to change its position on the screen</string>
+    <string name="quick_action_btn_tutorial_descr">Long-tap and drag the button to change its position on the screen</string>
     <string name="shared_string_action_name">Action name</string>
     <string name="mappilary_no_internet_desc">You need internet to view photos from Mapillary</string>
     <string name="retry">Retry</string>
