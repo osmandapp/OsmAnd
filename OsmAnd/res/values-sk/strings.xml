@@ -995,10 +995,10 @@ Niektoré z hlavných funkcií:
     <string name="intermediate_items_sort_by_distance">Zoptimalizuj od dverí k dverám</string>
     <string name="osmand_distance_planning_plugin_description">Tento modul poskytuje nástroj umožňujúci vytvorenie cesty kliknutím na mapu alebo použiť/upraviť existujúce GPX súbory na naplánovanie cesty a na meranie vzdialenosti medzi bodmi. Výsledok je možné uložiť ako GPX, čo možno použiť neskôr ako pomôcku.</string>
     <string name="osmand_distance_planning_plugin_name">Kalkulačka vzdialenosti a plánovač cesty</string>
-    <string name="use_distance_measurement_help">* Kliknutím označiť miesto.\n
-    * Stlačte a podržte na mape na odstránenie predchádzajúceho bodu.\n
-    * Stlačte a podržte na bode pre zobrazenie alebo pridanie popisu.\n
-    * Kliknite na iconu merania pre ďaľšie možnosti.</string>
+    <string name="use_distance_measurement_help">* Kliknutím označiť miesto.
+\n * Stlačte a podržte na mape na odstránenie predchádzajúceho bodu.
+\n * Stlačte a podržte na bode pre zobrazenie alebo pridanie popisu.
+\n     * Stlačte ikonu merania pre ďalšie možnosti.</string>
     <string name="distance_measurement_start_editing">Začni úpravy</string>
     <string name="distance_measurement_finish_editing">Ukonči úpravy</string>
     <string name="distance_measurement_finish_subtrack">Začnite novú podtrasu</string>
@@ -1277,7 +1277,7 @@ Afganistan, Albánsko, Alžírsko, Andora, Angola, Anguilla, Antigua a Barbuda, 
     <string name="osmo_auto_send_locations_descr">Automaticky spustiť výlet a odosielať polohu po spustení aplikácie</string>
     <string name="osmo_auto_send_locations">Automaticky spustiť výlet</string>
     <string name="osmo_tracker_id">ID sledovacieho zariadenia</string>
-    <string name="osmo_tracker_id_descr">Kliknite pre zobrazenie ID sledovacieho zariadenia</string>
+    <string name="osmo_tracker_id_descr">Stlačte pre zobrazenie ID sledovacieho zariadenia</string>
     <string name="osmo_session_token">Token relácie: %1$s</string>
     <string name="osmo_auth_pending">Čaká sa na autorizáciu…</string>
     <string name="osmo_locations_sent">Odoslané polohy %1$d (v zásobníku %2$d) </string>
@@ -1323,13 +1323,13 @@ Afganistan, Albánsko, Alžírsko, Andora, Angola, Anguilla, Antigua a Barbuda, 
     <string name="osmo_use_server_name">Registrované meno</string>
     <string name="osmo_connect_to_my_nickname">Prezývka</string>
     <string name="osmo_user_name">Používateľ</string>
-    <string name="osmo_group_share">Na pripojenie do skupiny %2$s, zadajte ID skupiny (%1$s) alebo kliknite %3$s.</string>
+    <string name="osmo_group_share">Na pripojenie do skupiny %2$s, zadajte ID skupiny (%1$s) alebo stlačte %3$s.</string>
     <string name="osmo_share_connect_device">Trvale sledovať toto zariadenie</string>
     <string name="osmo_share_current_session">Zdieľať aktuálnu reláciu v prehliadači</string>
     <string name="osmo_session_not_available">Relácia nie je k dispozícii, prosím skontrolujte či je \'Odosielať pozície\' zapnuté.</string>
     <string name="osmo_share_session">Zdieľať reláciu</string>
     <string name="osmo_session_id_share">URL relácie pre sledovanie zariadenia (%1$s)</string>
-    <string name="osmo_tracker_id_share">Pre pripojenie cieľového zariadenia %2$s, kliknite linku %3$s alebo zadajte ID sledovacieho zariadenia (%1$s)</string>
+    <string name="osmo_tracker_id_share">Pre pripojenie cieľového zariadenia %2$s stlačte linku %3$s alebo zadajte ID sledovacieho zariadenia (%1$s)</string>
     <string name="osmo_track_interval">Interval logovania</string>
     <string name="osmo_track_interval_descr">Vyberte časový interval odosielania pozície</string>
     <string name="int_days">dní</string>
@@ -1368,7 +1368,7 @@ Afganistan, Albánsko, Alžírsko, Andora, Angola, Anguilla, Antigua a Barbuda, 
     <string name="show_zoom_buttons_navigation">Zobraziť tlačidlá priblíženia</string>
     <string name="sort_by_distance">Zoradiť podľa vzdialenosti</string>
     <string name="sort_by_name">Zoradiť podľa názvu</string>
-    <string name="none_selected_gpx">Žiadny súbor GPX nebol vybraný. Podržaním vyberte z dostupných stôp.</string>
+    <string name="none_selected_gpx">Žiadny súbor GPX nebol vybraný. Podržte jednu z dostupných stôp pre jej zvolenie.</string>
     <string name="local_index_select_gpx_file">Vybrať na zobrazenie</string>
     <string name="route_descr_destination">Cieľ</string>
     <string name="no_index_file_to_download">Nenašlo sa nič na stiahnutie, prosím skontrolujte pripojenie na Internet.</string>
@@ -2340,7 +2340,7 @@ Ak máte radi OsmAnd a OSM a chcete ich podporiť, toto je výborný spôsob ako
     <string name="shared_string_record">Záznam</string>
     <string name="gpx_logging_no_data">Žiadne údaje</string>
     <string name="trip_rec_notification_settings">Záznam výletu (žiadne dáta)</string>
-    <string name="trip_rec_notification_settings_desc">Zobraziť oznámenie, ktoré umožňuje spustiť nahrávanie stlačením tlačidla Nahrať</string>
+    <string name="trip_rec_notification_settings_desc">Zobraziť systémové oznámenie, ktoré umožňuje spustiť nahrávanie</string>
     <string name="shared_string_notifications">Oznámenia</string>
     <string name="release_2_5">\\u2022 Aktivovateľné ikony na mape
 \n 
@@ -2798,10 +2798,10 @@ Zodpovedá oblasti: %1$s x %2$s</string>
     
     <string name="range_min_max">Rozsah = Min/Max</string>
     <string name="quick_action_resume_pause_navigation">Pokračovať/Pozastaviť navigáciu</string>
-    <string name="quick_action_resume_pause_navigation_descr">Použite toto tlačidlo pre pozastavenie navigácie, alebo jej obnovenie ak je pozastavená.</string>
+    <string name="quick_action_resume_pause_navigation_descr">Použite toto tlačidlo pre pozastavenie alebo obnovenie navigácie.</string>
     <string name="quick_action_show_navigation_finish_dialog">Zobraziť správu o ukončení navigácie</string>
     <string name="quick_action_start_stop_navigation">Spustiť/Ukončiť navigáciu</string>
-    <string name="quick_action_start_stop_navigation_descr">Použite toto tlačidlo pre spustenie navigácie, alebo jej ukončenie ak už prebieha.</string>
+    <string name="quick_action_start_stop_navigation_descr">Použite toto tlačidlo pre spustenie alebo ukončenie navigácie.</string>
     <string name="release_2_7">\\022 Modul Mapillary s fotografiami z ulíc
 \n
 \n • Pravítko pre meranie vzdialeností
@@ -2817,12 +2817,12 @@ Zodpovedá oblasti: %1$s x %2$s</string>
     <string name="live_monitoring_max_interval_to_send_desrc">Zadajte čas pokiaľ budú udržované pozície na odoslanie kým nie je pripojenie</string>
     <string name="mappilary_no_internet_desc">Na zobrazovanie fotografií z Mapillary potrebujete pripojenie na Internet</string>
     <string name="retry">Skúsiť znova</string>
-<string name="measurement_tool_action_bar">Prezerať mapu a pridať body do čiary</string>
+<string name="measurement_tool_action_bar">Prezerať mapu a pridať body</string>
     <string name="measurement_tool">Merať vzdialenosť</string>
     <string name="add_gpx_waypoint_bottom_sheet_title">Pridať prechodný bod GPX</string>
     <string name="shared_string_create">Vytvoriť</string>
-<string name="none_point_error">Musíte pridať aspoň jeden bod.</string>
-    <string name="enter_gpx_name">Zadajte názov pre GPX</string>
+<string name="none_point_error">Prosím pridajte aspoň jeden bod.</string>
+    <string name="enter_gpx_name">Názov súboru GPX:</string>
     <string name="show_on_map_after_saving">Po uložení zobraziť na mape</string>
     <string name="add_route_point">Pridať bod trasy</string>
     <string name="add_waypoint">Pridať prechodný bod</string>
