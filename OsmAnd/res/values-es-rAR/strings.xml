@@ -2230,7 +2230,7 @@ Se aprecia la participación activa, y las contribuciones pueden hacerse directa
     <string name="get_for">Obtener por %1$s</string>
     <string name="get_for_month">Obtener por %1$s al mes</string>
     <string name="osm_live_banner_desc">Obtén descargas ilimitada de mapas y más actualizaciones de mapas por mes: cada semana, día u hora.</string>
-    <string name="osmand_plus_banner_desc">Versión OsmAnd de pago con descargas ilimitadas y actualizaciones mensuales de mapas.</string>
+    <string name="osmand_plus_banner_desc">Descargas ilimitadas de mapas, actualizaciones y complemento de Wikipedia.</string>
     <string name="get_it">Obtener</string>
     <string name="osm_live_payment_desc">La suscripción se pagará mensualmente y siempre podrás cancelar tu suscripción en Google Play.</string>
     <string name="donation_to_osm">Donaciones a la comunidad de OpenStreetMap</string>
