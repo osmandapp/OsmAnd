@@ -81,7 +81,7 @@
     <string name="bg_service_sleep_mode_on">停止\n在背景執行</string>
     <string name="gps_wakeup_interval">GPS 喚醒間隔：%s</string>
     <string name="int_continuosly">連續</string>
-    <string name="screen_is_locked">要解鎖螢幕，按下鎖圖示</string>
+    <string name="screen_is_locked">要解鎖螢幕，輕點鎖圖示</string>
     <string name="map_widget_top_text">街道名稱</string>
     <string name="map_widget_config">組態螢幕顯示</string>
 
@@ -904,13 +904,7 @@
     <string name="local_osm_changes_backup_failed">備份 OSM 的變更失敗</string>
     <string name="local_osm_changes_backup">備份 OSM 的變更</string>
     <string name="plugin_distance_point_hdop">精確度</string>
-    <string name="use_distance_measurement_help">* 點選標記一個標點。
-
- * 在地圖上按住去刪除先前的標點。
-
- * 在標點上按住以檢視並附加敘述。
-
- * 在測量小工具上點擊可看到更多的作用。</string>
+    <string name="use_distance_measurement_help">* 點選標記一個標點。 * 在地圖上長按去刪除先前的標點。 * 在標點上長按以檢視並附加敘述。 * 在測量小工具上輕點可看到更多的作用。</string>
     <string name="distance_measurement_start_editing">開始編輯</string>
     <string name="distance_measurement_finish_editing">結束編輯</string>
     <string name="distance_measurement_finish_subtrack">開始一個新的子軌跡</string>
@@ -994,7 +988,7 @@
     <string name="av_use_external_recorder">使用系統錄製</string>
     <string name="av_use_external_camera_descr">使用系統應用程式拍照</string>
     <string name="av_use_external_camera">使用相機應用程式</string>
-    <string name="recording_is_recorded">音訊/視訊開始錄製。要停止時按下 AV 小工具。</string>
+    <string name="recording_is_recorded">音訊/視訊開始錄製。要停止時輕點 AV 小工具。</string>
     <string name="recording_can_not_be_played">不能播放記錄</string>
     <string name="recording_context_menu_delete">刪除錄製</string>
     <string name="recording_context_menu_play">播放</string>
@@ -1317,7 +1311,7 @@ OsmAnd (Automated Navigation Directions) 是一個地圖和導航的應用程式
     <string name="always_center_position_on_map">位置顯示始終處於中心</string>
     <string name="voice_pref_title">聲音</string>
     <string name="localization_pref_title">在地化</string>
-    <string name="interrupt_music_descr">在語音提示期間完全暫停任何音樂（不是只降低其音量）</string>
+    <string name="interrupt_music_descr">語音提示暫停，而不僅僅是抑制音樂播放</string>
     <string name="interrupt_music">暫停音樂</string>
     <string name="misc_pref_title">雜項</string>
     <string name="share_route_as_gpx">以 GPX 檔案分享路線</string>
@@ -1578,7 +1572,7 @@ OsmAnd (Automated Navigation Directions) 是一個地圖和導航的應用程式
     <string name="traffic_warning_calming">交通寧靜區</string>
     <string name="traffic_warning_speed_camera">測速照相</string>
     <string name="traffic_warning">交通流量警示</string>
-    <string name="local_index_description">點觸任何現有的項目，查看更詳細的資訊，長按則停用或刪除。目前在裝置上的資料有 (%1$s 可用)：</string>
+    <string name="local_index_description">輕點任何現有的項目，查看更詳細的資訊，長按則停用或刪除。目前在裝置上的資料有 (%1$s 可用)：</string>
     <string name="text_size_descr">設定地圖上的文字大小。</string>
     <string name="text_size">文字大小</string>
     <string name="fav_point_dublicate">我的收藏標點，名稱重複</string>
