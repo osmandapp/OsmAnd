@@ -792,7 +792,7 @@ public class MapContextMenuFragment extends Fragment implements DownloadEvents {
 		menu.setMapZoom(0);
 	}
 
-	public void rebuildMenu() {
+	public void rebuildMenu(boolean centered) {
 		OsmandApplication app = getMyApplication();
 		if (app != null && view != null) {
 			IconsCache iconsCache = app.getIconsCache();
@@ -807,6 +807,10 @@ public class MapContextMenuFragment extends Fragment implements DownloadEvents {
 			bottomLayout.removeAllViews();
 			buildBottomView();
 
+			if (centered) {
+				this.initLayout = true;
+				this.centered = true;
+			}
 			runLayoutListener();
 		}
 	}
@@ -1284,7 +1288,7 @@ public class MapContextMenuFragment extends Fragment implements DownloadEvents {
 	public void downloadHasFinished() {
 		updateOnDownload();
 		if (menu != null && menu.isVisible() && menu.isMapDownloaded()) {
-			rebuildMenu();
+			rebuildMenu(false);
 		}
 	}
 

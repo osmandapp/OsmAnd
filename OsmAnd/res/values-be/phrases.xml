@@ -3490,4 +3490,14 @@
 	<string name="poi_direction_exit">Напрамак: выхад</string>
 	<string name="poi_direction_all">Напрамак: на ўсе бакі</string>
 
+<string name="poi_winter_room_yes">Зімні пакой: так</string>
+	<string name="poi_winter_room_no">Зімні пакой: не</string>
+	<string name="poi_reservation_required">Замова: патрабуецца</string>
+	<string name="poi_reservation_recommended">Замова: рэкамендуецца</string>
+	<string name="poi_reservation_yes">Замова: так</string>
+	<string name="poi_reservation_no">Замова: не</string>
+	<string name="poi_reservation_members_only">Замова: толькі для чальцоў</string>
+
+	<string name="poi_beds">Ложкі</string>
+
 </resources>

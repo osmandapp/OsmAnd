@@ -296,7 +296,7 @@ Memòria proporcional %4$s MB (límit de l\'Android %5$s MB, Dalvik %6$s MB).</s
     <string name="shared_string_next">Endavant</string>
     <string name="shared_string_previous">Enrere</string>
     <string name="unit_of_length_descr">Canvia les unitats de longitud</string>
-    <string name="unit_of_length">Unitat de longitud</string>
+    <string name="unit_of_length">Unitats de longitud</string>
     <string name="si_mi_feet">Milles/peus</string>
     <string name="si_mi_yard">Milles/iardes</string>
     <string name="si_km_m">Quilòmetres/metres</string>
@@ -2220,7 +2220,7 @@ L\'ús de memòria serà de {3} MB temporalment i {1} MB permanentment.
     <string name="shared_string_pause">Pausa</string>
     <string name="shared_string_trip">Viatge</string>
     <string name="shared_string_recorded">Enregistrat</string>
-    <string name="shared_string_record">Enegistra</string>
+    <string name="shared_string_record">Enregistra</string>
     <string name="gpx_logging_no_data">No hi ha dades</string>
     <string name="release_2_5">"\\u2022 Icones per clicar al mapa
 \n 
@@ -2452,8 +2452,8 @@ Abasta l\'àrea: %1$s x %2$s</string>
     <string name="nautical_maps">Cartes nàutiques</string>
     <string name="quick_action_auto_zoom">Escala automàtica del mapa activa/desactiva</string>
     <string name="quick_action_auto_zoom_desc">Prement el botó d\'acció commutareu l\'escala automàtica del mapa en funció de la vostra velocitat.</string>
-    <string name="quick_action_auto_zoom_on">Escala automàtica del mapa activada</string>
-    <string name="quick_action_auto_zoom_off">Escala automàtica del mapa desactivada</string>
+    <string name="quick_action_auto_zoom_on">Activa l\'escala automàtica del mapa</string>
+    <string name="quick_action_auto_zoom_off">Desactiva l\'escala automàtica del mapa</string>
     <string name="quick_action_add_destination">Afegeix destinació</string>
     <string name="quick_action_replace_destination">Substitueix destinació</string>
     <string name="quick_action_add_first_intermediate">Afegeix primer intermedi</string>
@@ -2553,9 +2553,9 @@ Abasta l\'àrea: %1$s x %2$s</string>
     <string name="range_min_max">Interval = Mín/Màx</string>
     <string name="min_max">Mín/Màx</string>
     <string name="quick_action_resume_pause_navigation">Continua/Atura la navegació</string>
-    <string name="quick_action_resume_pause_navigation_descr">Premeu aquest botó per aturar la navegació, o per continuar-la si ja estava aturada.</string>
+    <string name="quick_action_resume_pause_navigation_descr">Premeu aquest botó per aturar o reprendre la navegació.</string>
     <string name="quick_action_show_navigation_finish_dialog">Mostra el diàleg de finalització de la navegació</string>
-    <string name="quick_action_start_stop_navigation">Inicia/Finalitza la navegació</string>
+    <string name="quick_action_start_stop_navigation">Inicia/atura la navegació</string>
     <string name="quick_action_start_stop_navigation_descr">Premeu aquest botó per iniciar la navegació o per aturar-la si ja estava començada.</string>
     <string name="release_2_7">\\022 Connector Mapillary amb imatges a nivell de carrer
 \n
@@ -2569,4 +2569,19 @@ Abasta l\'àrea: %1$s x %2$s</string>
     <string name="rendering_value_translucent_pink_name">Rosa translúcid</string>
     <string name="live_monitoring_max_interval_to_send">Memòria intermèdia temporal pel seguiment en línia</string>
     <string name="live_monitoring_max_interval_to_send_desrc">Especifiqueu una memòria intermèdia temporal per desar les ubicacions a enviar mentre no hi ha connexió</string>
-    </resources>
+    <string name="measurement_tool_action_bar">Consulteu el mapa i afegiu punts</string>
+    <string name="measurement_tool">Mesurament de distàncies</string>
+    <string name="mappilary_no_internet_desc">Necessiteu internet per veure les fotografies de Mapillary</string>
+    <string name="retry">Torneu a provar</string>
+    <string name="add_gpx_waypoint_bottom_sheet_title">Afegiu una fita gpx</string>
+    <string name="shared_string_create">Crea</string>
+<string name="none_point_error">Afegiu un punt si més no.</string>
+    <string name="enter_gpx_name">Nom del fitxer GPX:</string>
+    <string name="show_on_map_after_saving">Mostra al mapa després de desar</string>
+    <string name="add_route_point">Afegeix un punt de ruta</string>
+    <string name="add_waypoint">Afegeix una fita</string>
+    <string name="save_gpx_waypoint">Desa la fita GPX</string>
+    <string name="save_route_point">Desa el punt de ruta</string>
+    <string name="waypoint_one">Fita 1</string>
+    <string name="route_point_one">Punt de ruta 1</string>
+</resources>

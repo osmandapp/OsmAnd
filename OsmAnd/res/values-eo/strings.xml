@@ -546,7 +546,7 @@ Lon: %2$s</string>
     <string name="map_widget_show_ruler">Mezurilo</string>
     <string name="osmand_rastermaps_plugin_description">Per tiu ĉi kromprogramo vi povas atingi multajn enretajn (ankaŭ nomitaj kiel kahelajn aŭ rastrumajn) mapojn, ekzemple: antaŭgeneritaj OpenStreetMap kaheloj (kiel Mapnik), satelitaj fotoj kaj mapoj por specialaj uzoj: veteraj, klimataj, tersciencaj mapoj, tavoloj de nivel-ombrumo, ktp. 
 \n 
-\nĈiuj de tiuj mapoj oni eblas uzi kiel ĉefan (bazan) mapon por OsmAnd, aŭ kiel supran aŭ malsupran tavolon por alia bazmapo (ekz. por norma OsmAnd-a eksterreta mapo). Por fari malsupran tavolon de mapo pli klara, kelkaj elementoj de vektoraj OSM-aj mapoj oni eblas facile kaŝi per menuo \'Agordi mapon\'. 
+\nĈiuj de tiuj mapoj oni eblas uzi kiel ĉefan (bazan) mapon por OsmAnd, aŭ kiel supran aŭ malsupran tavolon por alia bazmapo (ekz. por norma OsmAnd-a eksterreta mapo). Por fari malsupran tavolon de mapo pli klara, kelkaj elementoj de vektoraj OSM-aj mapoj oni eblas facile kaŝi per la menuo ‘agordi mapon. 
 \n 
 \nKahelajn mapojn oni povas elŝuti senpere de Interreto, aŭ prepari por eksterreta uzado (kaj permane kopii al OSM-a datum-dosierujo) kiel SQLite-an datumbazon kiu povas esti farita uzante diversajn eksterajn ilojn por prepari mapojn.</string>
     <string name="shared_string_accessibility">Alirebleco</string>
@@ -745,7 +745,7 @@ Lon: %2$s</string>
     <string name="sort_by_distance">Ordigi laŭ distanco</string>
     <string name="sort_by_name">Ordigi laŭ nomo</string>
     <string name="plugin_touringview_name">Turisma map-vido</string>
-	<string name="plugin_touringview_descr">Aktivigo de tiu ĉi ŝanĝas OsmAnd-an map-stilon al ‘Turisma vido’, tiu ĉi estas speciala altdetala vido por vojaĝantoj kaj aŭtistoj. 
+	<string name="plugin_touringview_descr">Aktivigo de tiu ĉi ŝanĝas OsmAnd-an map-stilon al ‘turisma vido’, tiu ĉi estas speciala altdetala vido por vojaĝantoj kaj aŭtistoj. 
 \n 
 \nTiu ĉi vido ebligas ĉe iu ajna skalo maksimuman kvanton de vojaĝaj detaloj disponeblaj (precipe vojoj, kursoj, padoj kaj rekoniloj). 
 \n 
@@ -755,7 +755,7 @@ Lon: %2$s</string>
 \n 
 \nElŝutado de speciala mapo ne endas, la vido estas kreita de normalaj mapoj. 
 \n 
-\nTiu ĉi vido oni povas nuligi per malaktivigi ĝin tie ĉi, aŭ per ŝanĝi la ‘Map-aspekton’ en menuo ‘Agordi mapon’.</string>
+\nTiu ĉi vido oni povas nuligi per malaktivigi ĝin tie ĉi, aŭ per ŝanĝi la ‘map-aspekton’ en la menuo ‘agordi mapon’.</string>
     <string name="show_zoom_buttons_navigation_descr">Montri butonojn por pligrandigo kaj malgrandigo dum navigado</string>
     <string name="show_zoom_buttons_navigation">Montri butonojn de skalado</string>
     <string name="save_as_favorites_points">Konservi kiel grupon da ŝatatoj</string>
@@ -1106,7 +1106,7 @@ Premtenu por vidi sur la mapo</string>
     <string name="dropbox_plugin_description">La kromprogramo Dropbox ebligas al vi samtempigi kursojn kaj aŭdia-/videa-notojn kun via Dropbox-a konto.</string>
     <string name="dropbox_plugin_name">Dropbox kromprogramo</string>
     <string name="intermediate_points_change_order">Ŝanĝi ordon</string>
-    <string name="srtm_paid_version_msg">Bonvolu konsideri aĉeti la Nivelkurbo kromprogramo en la Market por subteni pluan disvolviĝon.</string>
+    <string name="srtm_paid_version_msg">Bonvolu konsideri aĉeti la kromprogramon ‘Nivelkurboj’ en la Market por subteni pluan disvolviĝon.</string>
     <string name="av_def_action_choose">Elekti laŭvole</string>
     <string name="av_def_action_video">Registri videon</string>
     <string name="av_def_action_audio">Registri sonon</string>
@@ -1170,7 +1170,7 @@ Premtenu por vidi sur la mapo</string>
     <string name="rendering_attr_roadColors_description">Elektu skemkoloron de vojoj:</string>
     <string name="rendering_attr_roadColors_name">Skemkoloro de vojoj</string>
     <string name="map_widget_show_destination_arrow">Montri celdirekton</string>
-    <string name="enable_plugin_monitoring_services">Aktivigu la Registrado de kurso kromprogramo por uzi pozici-registradajn servojn (GPX-registrado, enreta kurs-registrado)</string>
+    <string name="enable_plugin_monitoring_services">Aktivigu la kromprogramo ‘Kurs-registrilo’ por uzi pozici-registradajn servojn (GPX-registrado, enreta kurs-registrado)</string>
     <string name="non_optimal_route_calculation">Kalkuli verŝajne neplejbonajn kursojn por malproksimaj distancoj</string>
     <string name="gps_not_available">Bonvolu aktivigi GPS-on en agordoj</string>
     <string name="map_widget_monitoring_services">Kurso-registradaj servoj</string>
@@ -1662,18 +1662,18 @@ Proporcia memoro %4$s MB (limito de Android %5$s MB, Dalvik %6$s MB).</string>
 \n 
 \nSpeciala map-aldonaĵo al OsmAnd aldonas navigadajn punktojn kaj markojn por enlanda kaj apudborda navigado. Priskribo por iu ajn navigadpunkto liveras detalojn bezonatajn por identigi ilin kiel: kategorio, formo, koloro, vicsekvo, referenco, ktp. 
 \n 
-\nPor reveni al unu de normaj mapaj aspektoj de OsmAnd, simple aŭ malaktivigi la kromprogramon, aŭ ŝanĝi ‘Map-aspekton’ en ‘Agordi mapon.</string>
+\nPor reveni al unu de normaj mapaj aspektoj de OsmAnd, simple aŭ malaktivigi la kromprogramon, aŭ ŝanĝi ‘map-aspekton’ en la menuo ‘agordi mapon’.</string>
     <string name="plugin_ski_name">Skiada map-vido</string>
-	<string name="plugin_ski_descr">Tiu ĉi kromprogramo aldonas al OsmAnd detalojn pri descendejoj, skivojoj, montaraj skivojoj, kablovojoj kaj skiliftoj. Kursoj kaj vojoj estas kolorigitaj laŭ facileco kaj montrataj kiel speciala \'Vintra\' map-aspekto kiu ŝajnas kiel neĝ-kovrita landvidaĵo. 
+	<string name="plugin_ski_descr">Tiu ĉi kromprogramo aldonas al OsmAnd detalojn pri descendejoj, skivojoj, montaraj skivojoj, kablovojoj kaj skiliftoj. Kursoj kaj vojoj estas kolorigitaj laŭ facileco kaj montrataj kiel speciala ‘vintra map-aspekto kiu ŝajnas kiel neĝ-kovrita landvidaĵo. 
 \n 
-\nAktivigo de tiu ĉi map-vido ŝanĝas map-aspekton al ‘Vintro kaj skiado’, montranta ĉiun terenon kovritan de neĝo. La vidon oni povas malaktivigi, per malaktivigi la kromprogramon tie ĉi, aŭ per ŝanĝi de ‘Map-aspekto’ en ‘Agordi mapon.</string>
+\nAktivigo de tiu ĉi map-vido ŝanĝas map-aspekton al ‘vintro kaj skiado’, montranta ĉiun terenon kovritan de neĝo. La vidon oni povas malaktivigi, per malaktivigi la kromprogramon tie ĉi, aŭ per ŝanĝi de ‘map-aspekto’ en la menuo ‘agordi mapon.</string>
     <string name="osmand_parking_plugin_name">Parkumeja pozicio</string>
 	<string name="osmand_parking_plugin_description">Tiu ĉi kromprogramo plifaciligas al vi memori kie via aŭto estas parkumata kaj kiom da parkumeja tempo restas (se ĝi estas limigita).
 
 Kaj la loko kaj tempo estas montrataj en la OsmAnd-a stirpanelo, kaj sur la fenestraĵo sur la mapekrano. Memorigo povas esti aldonita al la Androida kalendaro.</string>
     <string name="osmand_distance_planning_plugin_name">Kalkulilo de distanco kaj planilo</string>
     <string name="osmand_distance_planning_plugin_description">Tiu ĉi kromprogramo liveras mapekranan fenestraĵon por krei kursojn tuŝante sur la mapo, aŭ por uzi aŭ modifi ekzistajn GPX-dosierojn por plani ekskurson aŭ mezuri distancon inter punktoj. Rezultoj povas esti konservitaj kiel GPX-dosieroj, kiuj oni povas estonte uzi por gvidado.</string>
-    <string name="osm_settings">OSM redaktado</string>
+    <string name="osm_settings">OSM-redaktilo</string>
     <string name="osm_editing_plugin_description">Per tiu ĉi kromprogramo OsmAnd povas esti uzata por kontribui al OSM per krei aŭ redakti OSM-interesejojn, per raporti aŭ komenti OSM-rimarkojn, per aldoni registritajn GPX-dosierojn. OSM estas komunuma, tutmonda, publika map-projekto. Por detaloj, legu: https://openstreetmap.org. Aktiva kontribuado estas laŭdinda, kaj vi povas kontribui senpere per OsmAnd, se vi entajpos viajn OSM-ajn ensalutilojn en la aplikaĵo.</string>
     <string name="debugging_and_development">OsmAnd programado</string>
     <string name="osmand_development_plugin_description">Montras agordojn por programado kaj senerarigado kiel testado aŭ simulado de kurso, efikeco de ekran-bildigado, aŭ voĉaj sciigoj. Tiuj ĉi agordoj taŭgas por programistoj kaj ne estas bezonataj por norma uzanto.</string>
@@ -2632,8 +2632,8 @@ Indikas lokon:  %1$s x %2$s"</string>
     <string name="subscribe_email_desc">Abonu nian dissendoliston pri rabatoj de aplikaĵo kaj havigu 3 pliajn map-elŝutojn!</string>
     <string name="quick_action_auto_zoom">Aŭtomata map-skalado ek/for</string>
     <string name="quick_action_auto_zoom_desc">Premado sur la ag-butono aŭtomate aktivigos/malaktivigos map-skaladon laŭ via rapido.</string>
-    <string name="quick_action_auto_zoom_on">Aŭtomata map-skalado ek</string>
-    <string name="quick_action_auto_zoom_off">Aŭtomata map-skalado for</string>
+    <string name="quick_action_auto_zoom_on">Aktivigi aŭtomatan map-skaladon</string>
+    <string name="quick_action_auto_zoom_off">Malaktivigi aŭtomatan map-skaladon</string>
     <string name="shared_string_paused">Paŭzigita</string>
     <string name="type_city_town">Entajpu urbon</string>
     <string name="type_postcode">Entajpu poŝtkodon</string>
@@ -2658,9 +2658,9 @@ Indikas lokon:  %1$s x %2$s"</string>
     <string name="save_poi_too_many_uppercase">Nomo enhavas tro multe da grandaj literoj? Ĉu vi volas pluigi?</string>
     <string name="srtm_menu_download_descr">Por vidi nivelkurbojn sur la mapo, vi devas elŝuti nivelkurban mapon de tiu ĉi regiono.</string>
     <string name="shared_string_plugin">Kromprogramo</string>
-    <string name="srtm_purchase_header">Por vidi nivelkurbojn sur la mapo, vi devas aĉeti kaj instali la kromprogramon \'Nivelkurboj\'</string>
+    <string name="srtm_purchase_header">Por vidi nivelkurbojn sur la mapo, vi devas aĉeti kaj instali la kromprogramon ‘Nivelkurboj</string>
     <string name="hillshade_menu_download_descr">Por vidi nivel-ombrumon sub la mapo, vi devas elŝuti nivel-ombruman mapon de tiu ĉi regiono.</string>
-    <string name="hillshade_purchase_header">Por vidi nivel-ombrumon sub la mapo, vi devas aĉeti kaj instali kromprogramon \'Nivelkurboj\'</string>
+    <string name="hillshade_purchase_header">Por vidi nivel-ombrumon sub la mapo, vi devas aĉeti kaj instali kromprogramon ‘Nivelkurboj</string>
     <string name="hide_from_zoom_level">Kaŝi de skal-nivelo</string>
     <string name="sorted_by_distance">Ordigitaj laŭ distanco</string>
     <string name="search_favorites">Serĉi en ŝatataj</string>
@@ -2737,7 +2737,7 @@ Indikas lokon:  %1$s x %2$s"</string>
     <string name="measurement_tool">Mezurilo</string>
     <string name="mappilary_no_internet_desc">Vi bezonas interret-konekton por vidi fotojn de Mapillary</string>
     <string name="retry">Reprovi</string>
-<string name="measurement_tool_action_bar">Elektu pozicion sur la mapo kaj premu ‘Aldoni’ por aldoni punkton por mezuri.</string>
+<string name="measurement_tool_action_bar">Elektu pozicion sur la mapo kaj premu ‘aldoni’ por aldoni punkton por mezuri.</string>
     <string name="add_gpx_waypoint_bottom_sheet_title">Aldoni GPX-navigadpunkton</string>
     <string name="shared_string_create">Krei</string>
 </resources>

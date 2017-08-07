@@ -3438,4 +3438,14 @@
 	<string name="poi_direction_exit">Direction: exit</string>
 	<string name="poi_direction_all">Direction: all</string>
 
+	<string name="poi_winter_room_yes">Winter room: yes</string>
+	<string name="poi_winter_room_no">Winter room: no</string>
+	<string name="poi_reservation_required">Reservation: required</string>
+	<string name="poi_reservation_recommended">Reservation: recommended</string>
+	<string name="poi_reservation_yes">Reservation: yes</string>
+	<string name="poi_reservation_no">Reservation: no</string>
+	<string name="poi_reservation_members_only">Reservation: members only</string>
+
+	<string name="poi_beds">Beds</string>
+
 </resources>

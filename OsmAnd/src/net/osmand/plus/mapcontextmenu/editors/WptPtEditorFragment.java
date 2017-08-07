@@ -14,6 +14,7 @@ import net.osmand.plus.FavouritesDbHelper.FavoriteGroup;
 import net.osmand.plus.GPXUtilities;
 import net.osmand.plus.GPXUtilities.GPXFile;
 import net.osmand.plus.GPXUtilities.WptPt;
+import net.osmand.plus.mapcontextmenu.editors.WptPtEditor.OnDismissListener;
 import net.osmand.plus.GpxSelectionHelper;
 import net.osmand.plus.OsmandApplication;
 import net.osmand.plus.R;
@@ -26,7 +27,8 @@ import net.osmand.util.Algorithms;
 import java.io.File;
 
 public class WptPtEditorFragment extends PointEditorFragment {
-	private WptPtEditor editor;
+
+	protected WptPtEditor editor;
 	private WptPt wpt;
 	private SavingTrackHelper savingTrackHelper;
 	private GpxSelectionHelper selectedGpxHelper;
@@ -34,15 +36,19 @@ public class WptPtEditorFragment extends PointEditorFragment {
 	private boolean saved;
 	private int color;
 	private int defaultColor;
-	private boolean skipDialog;
+	protected boolean skipDialog;
 
 	@Override
 	public void onAttach(Activity activity) {
 		super.onAttach(activity);
 		savingTrackHelper = getMapActivity().getMyApplication().getSavingTrackHelper();
 		selectedGpxHelper = getMapActivity().getMyApplication().getSelectedGpxHelper();
-		editor = getMapActivity().getContextMenu().getWptPtPointEditor();
+		assignEditor();
 		defaultColor = getResources().getColor(R.color.gpx_color_point);
+	}
+
+	protected void assignEditor() {
+		editor = getMapActivity().getContextMenu().getWptPtPointEditor();
 	}
 
 	@Override
@@ -70,16 +76,31 @@ public class WptPtEditorFragment extends PointEditorFragment {
 	}
 
 	@Override
+	public void dismiss(boolean includingMenu) {
+		super.dismiss(includingMenu);
+		OnDismissListener listener = editor.getOnDismissListener();
+		if (listener != null) {
+			listener.onDismiss();
+		}
+		editor.setNewGpxPointProcessing(false);
+		editor.setOnDismissListener(null);
+	}
+
+	@Override
 	public PointEditor getEditor() {
 		return editor;
 	}
 
 	@Override
 	public String getToolbarTitle() {
-		if (editor.isNew()) {
-			return getMapActivity().getResources().getString(R.string.context_menu_item_add_waypoint);
+		if (editor.isNewGpxPointProcessing()) {
+			return getMapActivity().getResources().getString(R.string.save_gpx_waypoint);
 		} else {
-			return getMapActivity().getResources().getString(R.string.shared_string_edit);
+			if (editor.isNew()) {
+				return getMapActivity().getResources().getString(R.string.context_menu_item_add_waypoint);
+			} else {
+				return getMapActivity().getResources().getString(R.string.shared_string_edit);
+			}
 		}
 	}
 

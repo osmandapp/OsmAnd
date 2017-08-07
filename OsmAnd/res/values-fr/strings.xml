@@ -2724,8 +2724,8 @@ Fonctionnalités principales :
     <string name="quick_action_replace_destination_desc">Appuyez sur le bouton d\'action pour remplacer la destination par le centre de la carte.</string>
     <string name="quick_action_auto_zoom">Zoom automatique de la carte Actif / Inactif</string>
     <string name="quick_action_auto_zoom_desc">Appuyez sur le bouton pour activer ou désactiver le zoom automatique de la carte en fonction de votre vitesse.</string>
-    <string name="quick_action_auto_zoom_on">Zoom automatique activé</string>
-    <string name="quick_action_auto_zoom_off">Zoom automatique désactivé</string>
+    <string name="quick_action_auto_zoom_on">Activer le zoom automatique</string>
+    <string name="quick_action_auto_zoom_off">Désactiver le zoom automatique</string>
     <string name="shared_string_paused">Mis en pause</string>
     <string name="type_city_town">Entrer la ville ou le village</string>
     <string name="type_postcode">Entrer le code postal</string>
@@ -2855,6 +2855,17 @@ Fonctionnalités principales :
     <string name="quick_action_start_stop_navigation_descr">Appuyez sur ce bouton pour démarrer la navigation ou l\'arrêter lorsqu\'elle est en cours.</string>
     <string name="mappilary_no_internet_desc">Vous devez être connecté à Internet pour afficher les photos Mapillary</string>
     <string name="retry">Essayer à nouveau</string>
-<string name="measurement_tool_action_bar">Sélectionner une localisation sur la carte et cliquer Ajouter pour ajouter un point à la mesure.</string>
+<string name="measurement_tool_action_bar">Sélectionnez un emplacement sur la carte et cliquez sur Ajouter pour l\'ajouter sur la règle.</string>
     <string name="measurement_tool">Outil de mesure</string>
+    <string name="shared_string_create">Créer</string>
+<string name="add_gpx_waypoint_bottom_sheet_title">Ajouter un point GPX</string>
+    <string name="release_2_7">\\022 Greffon Mapillary avec les images de rue
+\n
+\n• Widget règle pour la mesure de distance
+\n
+\n• Les intervalles GPX ont des informations détaillées sur votre trace
+\n
+\n• D\'autres améliorations et corrections de bug
+\n
+\n</string>
     </resources>
