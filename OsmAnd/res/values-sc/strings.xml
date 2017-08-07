@@ -166,7 +166,7 @@
 
     <string name="osb_author_or_password_not_specified">Pro praghere dislinda su nùmene impitadore OSM e sa crae (password) in sas Impostatziones</string>
     <string name="clear_intermediate_points">Iscantzella sas tapas intermèdias</string>
-    <string name="keep_intermediate_points">Mantènne sas tapas intermèdias</string>
+    <string name="keep_intermediate_points">Mantene sas tapas intermèdias</string>
     <string name="new_directions_point_dialog">Tenes giai tapas intermèdias impostadas.</string>
     <string name="context_menu_item_directions_to">Indicatziones cara a</string>
     <string name="context_menu_item_directions_from">Indicatziones dae</string>
@@ -429,7 +429,7 @@
     <string name="day_night_info_description">Arbèschida: %1$s \nIntrinada: %2$s</string>
     <string name="day_night_info">Informatziones die/note</string>
     
-    <string name="keep_navigation_service">Mantènne</string>
+    <string name="keep_navigation_service">Mantene</string>
     <string name="stop_navigation_service">Firma</string>
     <string name="enable_sleep_mode">Abìlita sa modalidade GPS \"de isfundu\"</string>
     <string name="gps_wake_up_timer">Intervallu ischidada GPS</string>
@@ -480,7 +480,7 @@ Boles protzèdere cun una registratzione noa?</string>
     <string name="osmo_gpx_track_downloaded">Iscarrigadas rastas %1$s de OsMo.</string>
     <string name="no_index_file_to_download">Nudda de iscarrigare, pro praghere còmpida sa connessione ìnternet.</string>
     <string name="select_index_file_to_download">No est istadu agatadu nudda. Si no agatades sa zona vostra la podies ingendrare bois (bie http://osmand.net).</string>
-    <string name="none_selected_gpx">Perunu documentu GPX ischertadu. Pro nde ischertare unu mantenne incarcada una de sas rastas disponìbiles.</string>
+    <string name="none_selected_gpx">Perunu documentu GPX ischertadu. Pro nde ischertare unu mantene incarcada una de sas rastas disponìbiles.</string>
 
     <string name="local_index_select_gpx_file">Ischerta pro l\'ammustrare</string>
     <string name="gpx_split_interval">Intervallu partidura</string>
@@ -715,8 +715,8 @@ Memòria in proportzione %4$s MB (lìmite de Android %5$s MB, Dalvik %6$s MB).</
 
     <string name="share_route_as_gpx">Cumpartzi s’àndala comente documentu GPX</string>
     <string name="share_route_subject">Àndala cumpartzida tràmite OsmAnd</string>
-    <string name="route_kl">Mantène sa manca e sighi</string>
-    <string name="route_kr">Mantène sa destra e sighi</string>
+    <string name="route_kl">Mantene sa manca e sighi</string>
+    <string name="route_kr">Mantene sa destra e sighi</string>
     <string name="rendering_attr_noPolygons_name">Polìgonos</string>
     <string name="rendering_attr_appMode_name">Modalidade de disinnu</string>
     <string name="rendering_attr_contourLines_name">Ammustra curvas de livellu</string>
