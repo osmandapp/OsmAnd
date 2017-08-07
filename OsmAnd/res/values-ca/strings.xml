@@ -2553,9 +2553,9 @@ Abasta l\'àrea: %1$s x %2$s</string>
     <string name="range_min_max">Interval = Mín/Màx</string>
     <string name="min_max">Mín/Màx</string>
     <string name="quick_action_resume_pause_navigation">Continua/Atura la navegació</string>
-    <string name="quick_action_resume_pause_navigation_descr">Premeu aquest botó per aturar la navegació, o per continuar-la si ja estava aturada.</string>
+    <string name="quick_action_resume_pause_navigation_descr">Premeu aquest botó per aturar o reprendre la navegació.</string>
     <string name="quick_action_show_navigation_finish_dialog">Mostra el diàleg de finalització de la navegació</string>
-    <string name="quick_action_start_stop_navigation">Inicia/Finalitza la navegació</string>
+    <string name="quick_action_start_stop_navigation">Inicia/atura la navegació</string>
     <string name="quick_action_start_stop_navigation_descr">Premeu aquest botó per iniciar la navegació o per aturar-la si ja estava començada.</string>
     <string name="release_2_7">\\022 Connector Mapillary amb imatges a nivell de carrer
 \n
@@ -2569,14 +2569,14 @@ Abasta l\'àrea: %1$s x %2$s</string>
     <string name="rendering_value_translucent_pink_name">Rosa translúcid</string>
     <string name="live_monitoring_max_interval_to_send">Memòria intermèdia temporal pel seguiment en línia</string>
     <string name="live_monitoring_max_interval_to_send_desrc">Especifiqueu una memòria intermèdia temporal per desar les ubicacions a enviar mentre no hi ha connexió</string>
-    <string name="measurement_tool_action_bar">Segueix el mapa i afegeix els punts d\'una línia</string>
+    <string name="measurement_tool_action_bar">Consulteu el mapa i afegiu punts</string>
     <string name="measurement_tool">Mesurament de distàncies</string>
     <string name="mappilary_no_internet_desc">Necessiteu internet per veure les fotografies de Mapillary</string>
     <string name="retry">Torneu a provar</string>
     <string name="add_gpx_waypoint_bottom_sheet_title">Afegiu una fita gpx</string>
     <string name="shared_string_create">Crea</string>
-<string name="none_point_error">Us cal afegir un punt com a mínim.</string>
-    <string name="enter_gpx_name">Introduïu el nom del GPX</string>
+<string name="none_point_error">Afegiu un punt si més no.</string>
+    <string name="enter_gpx_name">Nom del fitxer GPX:</string>
     <string name="show_on_map_after_saving">Mostra al mapa després de desar</string>
     <string name="add_route_point">Afegeix un punt de ruta</string>
     <string name="add_waypoint">Afegeix una fita</string>
