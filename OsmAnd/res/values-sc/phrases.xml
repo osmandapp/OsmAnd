@@ -2642,4 +2642,12 @@
 
 <string name="poi_spaceport">Portu ispatziale</string>
 
-</resources>
+<string name="poi_beds">Letos</string>
+
+<string name="poi_reservation_required">Prenotatzione: netzessària</string>
+	<string name="poi_reservation_recommended">Prenotatzione: racumandada</string>
+	<string name="poi_reservation_yes">Prenotatzione: eja</string>
+	<string name="poi_reservation_no">Prenotatzione: nono</string>
+	<string name="poi_reservation_members_only">Prenotatzione: membros ebbia</string>
+
+	</resources>
