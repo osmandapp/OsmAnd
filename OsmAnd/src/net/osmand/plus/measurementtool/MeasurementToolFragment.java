@@ -36,6 +36,7 @@ import net.osmand.plus.IconsCache;
 import net.osmand.plus.R;
 import net.osmand.plus.activities.MapActivity;
 import net.osmand.plus.helpers.AndroidUiHelper;
+import net.osmand.plus.views.OsmandMapTileView;
 import net.osmand.plus.views.mapwidgets.MapInfoWidgetsFactory;
 import net.osmand.plus.views.mapwidgets.MapInfoWidgetsFactory.TopToolbarController;
 import net.osmand.plus.widgets.IconPopupMenu;
@@ -48,6 +49,7 @@ import java.util.LinkedList;
 import java.util.Locale;
 
 import static net.osmand.plus.GPXUtilities.GPXFile;
+import static net.osmand.plus.OsmandSettings.MIDDLE_TOP_CONSTANT;
 import static net.osmand.plus.helpers.GpxImportHelper.GPX_SUFFIX;
 
 public class MeasurementToolFragment extends Fragment {
@@ -62,6 +64,7 @@ public class MeasurementToolFragment extends Fragment {
 
 	private boolean wasCollapseButtonVisible;
 	private boolean pointsDetailsOpened;
+	private int previousMapPosition;
 
 	@Nullable
 	@Override
@@ -229,12 +232,28 @@ public class MeasurementToolFragment extends Fragment {
 		pointsDetailsOpened = true;
 		view.findViewById(R.id.points_list_container).setVisibility(View.VISIBLE);
 		((ImageButton) view.findViewById(R.id.up_down_button)).setImageDrawable(icon);
+		MapActivity mapActivity = getMapActivity();
+		if (mapActivity != null) {
+			OsmandMapTileView tileView = mapActivity.getMapView();
+			previousMapPosition = tileView.getMapPosition();
+			tileView.setMapPosition(MIDDLE_TOP_CONSTANT);
+			mapActivity.refreshMap();
+		}
 	}
 
 	private void downBtnOnClick(View view, Drawable icon) {
 		pointsDetailsOpened = false;
 		view.findViewById(R.id.points_list_container).setVisibility(View.GONE);
 		((ImageButton) view.findViewById(R.id.up_down_button)).setImageDrawable(icon);
+		setPreviousMapPosition();
+	}
+
+	private void setPreviousMapPosition() {
+		MapActivity mapActivity = getMapActivity();
+		if (mapActivity != null) {
+			mapActivity.getMapView().setMapPosition(previousMapPosition);
+			mapActivity.refreshMap();
+		}
 	}
 
 	private void saveAsGpxOnClick(MapActivity mapActivity) {
@@ -371,6 +390,9 @@ public class MeasurementToolFragment extends Fragment {
 		super.onDestroyView();
 		exitMeasurementMode();
 		adapter.setRemovePointListener(null);
+		if (pointsDetailsOpened) {
+			setPreviousMapPosition();
+		}
 	}
 
 	private MapActivity getMapActivity() {

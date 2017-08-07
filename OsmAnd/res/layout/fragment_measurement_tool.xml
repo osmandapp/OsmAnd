@@ -84,7 +84,7 @@
         <FrameLayout
             android:id="@+id/points_list_container"
             android:layout_width="match_parent"
-            android:layout_height="180dp"
+            android:layout_height="220dp"
             android:background="@color/ctx_menu_info_view_bg_dark"
             android:visibility="gone">
 
