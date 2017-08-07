@@ -240,9 +240,7 @@ Proportional hukommelse %4$s MB (Android grænse %5$s MB, Dalvik %6$s MB).</stri
     <string name="osmand_parking_position_description_add">Afhent bilen:</string>
     <string name="osmand_parking_am">AM</string>
     <string name="osmand_parking_position_name">Parkeringsplads</string>
-    <string name="osmand_parking_plugin_description">Parkeringsplads udvidelsen kan huske hvor bilen er parkeret, og hvor meget tid der er tilbage (hvis der er en tidsfrist).
-
-Både placering og tid er synlige på betjeningspanel samt i modul på kortskærmen. En alarm kan tilføjes til kalenderen, som en påmindelse.</string>
+    <string name="osmand_parking_plugin_description">Parkeringsplads udvidelsen kan huske hvor bilen er parkeret, og hvor meget tid der er tilbage (hvis der er en tidsfrist). Både placering og tid er synlige på betjeningspanel samt i modul på skærmen. En alarm kan tilføjes til kalenderen, som en påmindelse.</string>
     <string name="osmand_parking_plugin_name">Parkering</string>
     <string name="context_menu_item_add_parking_point">Marker som parkeringsplads</string>
     <string name="context_menu_item_delete_parking_point">Slet en parkeringsmarkør</string>
@@ -304,7 +302,7 @@ Både placering og tid er synlige på betjeningspanel samt i modul på kortskær
 	
 	<string name="osmand_rastermaps_plugin_description">Udvidelsen giver adgang til mange typer af online (såkaldte brikker eller raster) kort, fra foruddefinerede OpenStreetMap kortbrikker (som Mapnik) til satellitbilleder og lag til særlig anvendelse som vejr-, klima- eller geologiskekort og reliefskygger osv. 
 \n 
-\nAlle disse kort kan enten bruges som det vigtigste (primær) kort, der skal vises på kortskærmen, eller som en over- eller underlejring til et andet basiskort (såsom OsmAnd standard offline kort). For at gøre underlejringskortet mere synlig, kan visse elementer af OsmAnd vektorkort nemt skjules via \'Konfigurer kort\' menuen som ønsket. 
+\nAlle disse kort kan enten bruges som det vigtigste (primær) kort, der skal vises på skærmen, eller som en over- eller underlejring til et andet basiskort (såsom OsmAnd standard offline kort). For at gøre underlejringskortet mere synlig, kan visse elementer af OsmAnd vektorkort nemt skjules via \'Konfigurer kort\' menuen som ønsket. 
 \n 
 \nKortbrikker kan hentes direkte via online-kilder, eller kan fremstilles til offline brug (og manuelt kopieres til OsmAnd datamappen) som en SQLite database. Kort kan fremstilles ved hjælp af en række 3. parts kortværktøjer.</string>
 
@@ -751,7 +749,7 @@ OSM er et i fællesskab drevet, globalt offentligt domæne kortlægningsprojekt.
     <string name="rotate_map_compass_opt">Efter kompas</string>
     <string name="rotate_map_bearing_opt">Efter bevægelsesretningen</string>
     <string name="rotate_map_none_opt">Ingen rotation (nord er op)</string>
-    <string name="rotate_map_to_bearing_descr">Vælg justering af kortskærmen</string>
+    <string name="rotate_map_to_bearing_descr">Vælg justering af skærmen</string>
     <string name="rotate_map_to_bearing">Kortorientering</string>
     <string name="show_route">Rutedetaljer</string>
     <string name="fav_imported_sucessfully">Favoritter er importeret</string>
@@ -1299,7 +1297,7 @@ OSM er et i fællesskab drevet, globalt offentligt domæne kortlægningsprojekt.
     <string name="voice_pref_title">Tale</string>
     <string name="misc_pref_title">Diverse</string>
     <string name="localization_pref_title">Lokalisering</string>
-    <string name="interrupt_music_descr">Pause musik under talemeddelelser (sænk ikke kun volumen)</string>
+    <string name="interrupt_music_descr">Stemmemeddelelser pause, ikke bare dæmpe musikafspilning</string>
     <string name="interrupt_music">Pause musik</string>
     <string name="share_route_as_gpx">Del rute som GPX-fil</string>
     <string name="share_route_subject">Ruten deles via OsmAnd</string>
@@ -1427,7 +1425,9 @@ OSM er et i fællesskab drevet, globalt offentligt domæne kortlægningsprojekt.
     <string name="gpx_info_subtracks">Underspor: %1$s </string>
     <string name="map_widget_plain_time">Aktuel tid</string>
     <string name="gpx_wpt">Rutepunkt</string>
-    <string name="selected_gpx_info_show">\n\nLangt tryk for at se på kort</string>
+    <string name="selected_gpx_info_show">"
+\n
+\nLangt tryk for at se på kortet"</string>
     <string name="delay_navigation_start">Start sving-for-sving vejledning automatisk</string>
     <string name="gpx_split_interval">Opdelingsinterval</string>
     <string name="loading_smth">Indlæser %1$s…</string>
@@ -1440,7 +1440,7 @@ OSM er et i fællesskab drevet, globalt offentligt domæne kortlægningsprojekt.
 
     <string name="sort_by_distance">Sorter efter afstand</string>
     <string name="sort_by_name">Sorter efter navn</string>
-    <string name="none_selected_gpx">Ingen GPX filer valgt. Langt tryk for at vælge et tilgængeligt spor.</string>
+    <string name="none_selected_gpx">Ingen GPX filer er valgt. Langt tryk for at vælge et tilgængeligt spor.</string>
     <string name="local_index_select_gpx_file">Vælg at få vist</string>
 
     <string name="no_index_file_to_download">Ingenting at hente, kontroller internetforbindelsen.</string>
@@ -1488,7 +1488,7 @@ OSM er et i fællesskab drevet, globalt offentligt domæne kortlægningsprojekt.
     <string name="gpx_monitoring_stop">Stop GPX logning</string>
     <string name="gpx_start_new_segment">Start nyt segment</string>
     <string name="lang_fa">Persisk</string>
-    <string name="map_preferred_locale_descr">Foretrukket sprog for etiketter på kortet (hvis sprog ikke findes skiftes til engelsk eller lokale navne)</string>
+    <string name="map_preferred_locale_descr">Foretrukket sprog for etiketter på kortet (hvis sproget ikke findes skiftes til engelsk eller lokale navne)</string>
     <string name="map_preferred_locale">Foretrukket sprog på kort</string>
     <string name="stop_navigation_service">Stop</string>
     <string name="enable_sleep_mode">Aktiver GPS baggrundstilstand</string>
@@ -1538,7 +1538,7 @@ OSM er et i fællesskab drevet, globalt offentligt domæne kortlægningsprojekt.
     <string name="duration">Varighed</string>
     <string name="int_hour">t</string>
     <string name="record_plugin_name">Optag ture</string>
-    <string name="record_plugin_description">Udvidelsen aktiverer funktionalitet til at optage og gemme spor ved at klikke på GPX logning modul på kortskærmen, eller også for automatisk at logge alle navigationsruter til en GPX-fil. 
+    <string name="record_plugin_description">Udvidelsen aktiverer funktionalitet til at optage og gemme spor ved at klikke på GPX logning modul på skærmen, eller også for automatisk at logge alle navigationsruter til en GPX-fil. 
 \n 
 \nOptagede spor kan deles med venner eller anvendes til OSM bidrag. Sportsfolk kan bruge optagede spor til at monitere træning. Nogle grundlæggende spor analyse kan udføres direkte i OsmAnd, såsom omgangstider, gennemsnitshastighed mv, og spor kan selvfølgelig også senere analyseres i særlige 3. parts analyseværktøjer.</string>
     <string name="rendering_attr_publicTransportMode_name">Bus-, trolleybus-, shuttlebusruter</string>
@@ -1546,7 +1546,7 @@ OSM er et i fællesskab drevet, globalt offentligt domæne kortlægningsprojekt.
     <string name="save_track_interval_globally">Logningsinterval</string>
     <string name="save_track_to_gpx_globally_descr">Generel positionsslogning til en GPX-fil kan slås til/fra med \'GPX logning\' på hovedskærmen</string>
     <string name="confirm_every_run">Spørg altid</string>
-    <string name="save_global_track_interval_descr">Vælg logningsinterval for den almindelige optagelse af spor(aktiveres via \'GPX logning\' på hovedskærmen)</string>
+    <string name="save_global_track_interval_descr">Vælg logningsinterval for den almindelige optagelse af spor (aktiveres via \'GPX logning\' på hovedskærmen)</string>
     <string name="save_global_track_interval">Generelt logningsinterval</string>
     <string name="traffic_warning_speed_limit">Hastighedsgrænse</string>
     <string name="traffic_warning_border_control">Grænsekontrol</string>
@@ -2040,7 +2040,7 @@ Lon %2$s</string>
     <string name="application_dir_description">Vælg hvor kort- og andre datafiler skal gemmes.</string>
     <string name="show_on_start_description">\'Fra\' starter direkte på kortet</string>
     <string name="map_downloaded">Kort hentet</string>
-    <string name="map_downloaded_descr">Kort over %1$s er nu hentet og kan anvendes.</string>
+    <string name="map_downloaded_descr">Kortet over %1$s er nu hentet og kan anvendes.</string>
     <string name="go_to_map">Vis kortet</string>
     <string name="shared_string_qr_code">QR kode</string>
     <string name="enter_country_name">Angiv landenavn</string>
@@ -2284,23 +2284,14 @@ Hvis du  ønsker at støtte OsmAnd og OSM, er dette en god måde at gøre det p�
     <string name="shared_string_move_down">Flyt ned</string>
     <string name="release_2_3">"• OSM Live. Støt bidragsyderne og udviklere af kortet og få kortopdateringer hver time. 
 \n 
-\n
 \n • Kortmarkører. En ny måde til hurtigt at vælge steder på kortet. 
-\n
 \n 
-\n
 \n • Mere detaljerede OSM kort med landespecifikke vejskilte og masser af nye kortfunktioner. 
 \n
-\n 
-\n
 \n • Forbedret ruteplanlægning. 
-\n
 \n 
-\n
 \n • Mange forbedringer i kontekstmenuen på kortet, såsom indholdsbestemt adresseopslag. 
-\n
 \n 
-\n
 \n  og mere…"</string>
     <string name="full_report">Fuldstændig rapport</string>
     <string name="open_street_map_login_and_pass">OpenStreetMap brugernavn og adgangskode</string>
@@ -2491,7 +2482,7 @@ Hvis du  ønsker at støtte OsmAnd og OSM, er dette en god måde at gøre det p�
 \n 
 \n  og mere…</string>
     <string name="trip_rec_notification_settings">Tur optagelse (ingen data)</string>
-    <string name="trip_rec_notification_settings_desc">Vis meddelelse, som giver mulighed for at starte turoptagelse ved at trykke på knappen Optag</string>
+    <string name="trip_rec_notification_settings_desc">Vis en systemmeddelelse, der giver mulighed for at starte optagelse af turen</string>
     <string name="shared_string_notifications">Meddelelser</string>
     <string name="osmo_share_location">Del</string>
     <string name="osmo_pause_location">Pause</string>
@@ -2823,20 +2814,20 @@ Tidligere destination bliver sidste mellemliggende punkt.</string>
 \n</string>
     <string name="rendering_value_translucent_pink_name">Gennemsigtig lyserød</string>
     <string name="quick_action_resume_pause_navigation">Genoptag/pause navigation</string>
-    <string name="quick_action_resume_pause_navigation_descr">Tryk på knappen pause navigation eller genoptag, hvis den allerede var sat på pause.</string>
-    <string name="quick_action_show_navigation_finish_dialog">Vis Stop navigation dialog</string>
+    <string name="quick_action_resume_pause_navigation_descr">Tryk på knappen for at pause eller genoptage navigationen.</string>
+    <string name="quick_action_show_navigation_finish_dialog">Vis Navigation færdig dialogboks</string>
     <string name="quick_action_start_stop_navigation">Start/stop navigation</string>
-    <string name="quick_action_start_stop_navigation_descr">Tryk på knappen for at starte navigation eller stoppe, hvis den allerede var begyndt.</string>
+    <string name="quick_action_start_stop_navigation_descr">Tryk på knappen for at starte eller stoppe navigationen.</string>
     <string name="live_monitoring_max_interval_to_send">Tidsbuffer til online sporing</string>
     <string name="live_monitoring_max_interval_to_send_desrc">Angiv en buffer for hvor lang tid positioner skal gemmes, når der ingen internetforbindelse er</string>
     <string name="retry">Prøv igen</string>
 <string name="mappilary_no_internet_desc">Internetforbindelse er nødvendig for at se fotos fra Mapillary</string>
     <string name="measurement_tool">Mål afstand</string>
-    <string name="measurement_tool_action_bar">Gennemse kort og tilføj punkter til en linje</string>
+    <string name="measurement_tool_action_bar">Gennemse kortet og tilføj punkter</string>
     <string name="add_gpx_waypoint_bottom_sheet_title">Tilføj gpx rutepunkt</string>
     <string name="shared_string_create">Opret</string>
 <string name="none_point_error">Tilføj mindst ét punkt.</string>
-    <string name="enter_gpx_name">Indtast et navn for GPX</string>
+    <string name="enter_gpx_name">GPX filnavn:</string>
     <string name="show_on_map_after_saving">Vis på kort efter at have gemt</string>
     <string name="add_route_point">Tilføj rutepunkt</string>
     <string name="add_waypoint">Tilføj rutepunkt</string>
