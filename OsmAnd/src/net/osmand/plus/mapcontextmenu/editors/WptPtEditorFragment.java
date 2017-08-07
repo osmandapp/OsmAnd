@@ -29,7 +29,7 @@ import java.io.File;
 public class WptPtEditorFragment extends PointEditorFragment {
 
 	protected WptPtEditor editor;
-	private WptPt wpt;
+	protected WptPt wpt;
 	private SavingTrackHelper savingTrackHelper;
 	private GpxSelectionHelper selectedGpxHelper;
 
@@ -181,11 +181,15 @@ public class WptPtEditorFragment extends PointEditorFragment {
 					selectedGpxHelper.setGpxFileToDisplay(gpx);
 				}
 			} else {
-				wpt = gpx.addWptPt(wpt.getLatitude(), wpt.getLongitude(),
-						System.currentTimeMillis(), description, name, category, color);
+				addWpt(gpx, description, name, category, color);
 				new SaveGpxAsyncTask(getMyApplication(), gpx, editor.isGpxSelected()).execute();
 			}
 		}
+	}
+
+	protected void addWpt(GPXFile gpx, String description, String name, String category, int color) {
+		wpt = gpx.addWptPt(wpt.getLatitude(), wpt.getLongitude(),
+				System.currentTimeMillis(), description, name, category, color);
 	}
 
 	private void doUpdateWpt(String name, String category, String description) {
