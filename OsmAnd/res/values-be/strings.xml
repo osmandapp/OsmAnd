@@ -80,12 +80,9 @@
     <string name="osmand_distance_planning_plugin_description">Модуль дадае віджэт на экран мапы, які дазваляе ствараць маршруты, націснуўшы на мапе, а таксама выкарыстоўваць ці зьмяняць наяўныя файлы GPX, планаваць паездку і вымяраць адлегласьць паміж пунктамі. Вынікі могуць быць захаваны ў выглядзе файла GPX, які пасля можа быць выкарыстаны для навігацыі.</string>
     <string name="osmand_distance_planning_plugin_name">Прылада для разьліку адлегласьцей й плянаваньня</string>
     <string name="use_distance_measurement_help">* Націсніце, каб адзначыць пункт.
-
- * Націсьніце і ўтрымлівайце на мапе, каб выдаліць папярэдні пункт.
-
- * Націсьніце і ўтрымлівайце на пункце, каб паглядзець і дадаць апісаньне.
-
- * Націсніце на віджэце вымярэньня, каб убачыць больш дзеяньняў.</string>
+\n * Доўга ўтрымлівайце на мапе, каб выдаліць папярэдні пункт.
+\n * Доўга ўтрымлівайце на пункце, каб паглядзець і дадаць апісанне.
+\n * Націсніце на віджэце вымярэння, каб убачыць больш дзеянняў.</string>
     <string name="distance_measurement_start_editing">Пачаць рэдагаваньне</string>
     <string name="distance_measurement_finish_editing">Скончыць рэдагаваньне</string>
     <string name="distance_measurement_finish_subtrack">Пачаць новы падтрэк</string>
@@ -170,7 +167,7 @@
     <string name="av_settings">Налады аўдыё і відэа </string>
     <string name="recording_error">Адбылася памылка падчас запісу </string>
     <string name="recording_camera_not_available">Камера не даступная</string>
-    <string name="recording_is_recorded">Аўдыё/відэа запісваецца. Каб спыніць, націсьніце на віджэт AV.</string>
+    <string name="recording_is_recorded">Аўдыё/відэа запісваецца. Каб спыніць, націсніце на віджэт AV.</string>
     <string name="recording_playing">Прайграецца аўдыё з абранага запісу.\n%1$s</string>
     <string name="recording_open_external_player">Адкрыць зьнешні прайгравальнік</string>
     <string name="recording_delete_confirm">Вы хочаце зьнішчыць гэты запіс?</string>
@@ -341,7 +338,7 @@
 	<string name="bg_service_sleep_mode_on">Спынiць\n фонавы рэжым</string>
 	<string name="gps_wakeup_interval">Iнтэрвал абуджэньня GPS: %s</string>
 	<string name="int_continuosly">Безперапынны</string>
-	<string name="screen_is_locked">Для разблакоўкі экрана дакраніцеся да значка блакаваньня</string>
+	<string name="screen_is_locked">Для разблакоўкі экрана дакраніцеся да значка блакавання</string>
 	<string name="map_widget_top_text">Назва вуліцы</string>
 	<string name="map_widget_config">Сканфігураваць экран</string>
 	<string name="map_widget_back_to_loc">Дзе я</string>
@@ -674,7 +671,9 @@
 	<string name="shared_string_no_thanks">Не, дзякуй</string>
 	<string name="basemap_missing">Няма асноўнай мапы сьвету (якая пакрывае ўвесь сьвет на малых маштабах). Каб мець агляд усяго сьвету трэба сьцягнуць World_basemap_x.obf.</string>
 	<string name="vector_data_missing">Няма пазасеціўных зьвестак на картцы SD. Каб карыстацца мапай па-за сеткай, трэба іх сьцягнуць.</string>
-	<string name="local_index_gpx_info_show">\n\nНаціснуць і трымаць для наладаў</string>
+	<string name="local_index_gpx_info_show">"
+\n
+\nДоўга ўтрымлівайце для наладаў"</string>
 	
 	
 	
@@ -1302,7 +1301,7 @@
     <string name="osmo_settings">OsMo</string>
    	<string name="always_center_position_on_map">Паказваць становішча заўсёды ў цэнтры</string>
     <string name="route_descr_destination">Пункт прызначэньня</string>
-    <string name="interrupt_music_descr">Цалкам прыпыніць любую музыку падчас галасавых падказак (а не толькі знізіць яе гучнасьць)</string>
+    <string name="interrupt_music_descr">Галасавыя падказкі прыпыняць музыку, а не толькі прыглушаць яе</string>
 	<string name="share_route_as_gpx">Падзяліцца маршрутам праз GPX файл</string>
 	<string name="share_route_subject">Маршрут апублікаваны з дапамогай OsmAnd</string>
 	<string name="navigation_intent_invalid">Няправільны фармат: %s</string>
@@ -1357,7 +1356,7 @@
     <string name="osmo_groups">Групы OsMo</string>
     <string name="osmo_group_info">Інфармацыя</string>
     <string name="osmo_group">Група OsMo</string>
-    <string name="osmo_group_share">Каб падключыцца да групы %2$s, задайце ID групы (%1$s) або націсьніце %3$s.</string>
+    <string name="osmo_group_share">Каб падключыцца да групы %2$s, задайце ID групы (%1$s) або націсніце %3$s.</string>
     <string name="osmo_share_connect_device">Дазволіць пастаянна адсочваць дадзенае прыстасаваньне</string>
     <string name="osmo_share_current_session">Падзяліцца дзейнай сесіяй у браўзэры</string>
     <string name="osmo_share_session">Падзяліцца сэсыяй</string>
@@ -1382,7 +1381,7 @@
 	<string name="osmo_expire_group">Тэрмін дзеяньня скончыцца праз</string>
     <string name="osmo_control">Хуткі доступ OsMo</string>
     <string name="osmo_session_not_available">Сэсыя не даступная, калі ласка, пераканайцеся, што пункт \'Адсылаць месцазнаходжаньне\' уключаны.</string>
-    <string name="osmo_tracker_id_share">Каб падключыцца да патрэбнага прыстасаваньня %2$s націсьніце на спасылку %3$s альбо задайце ідэнтыфікатар трэкеру (%1$s)</string>
+    <string name="osmo_tracker_id_share">Каб падключыцца да патрэбнага прыстасавання %2$s націсніце на спасылку %3$s альбо задайце ідэнтыфікатар трэкеру (%1$s)</string>
     
 	<string name="rendering_value_pink_name">ружовы</string>
 	
@@ -1439,7 +1438,9 @@
     <string name="loading_smth">Чытаньне %1$s…</string>
     <string name="map_widget_plain_time">Цяперашні час</string>
     <string name="gpx_wpt">Пункт шляху</string>
-    <string name="selected_gpx_info_show">\n\nНацісьніце і ўтрымлівайце, каб убачыць на мапе</string>
+    <string name="selected_gpx_info_show">"
+\n
+\nДоўга ўтрымлівайце, каб убачыць на мапе"</string>
     <string name="delay_navigation_start">Аўтаматычна пачаць навігацыю</string>
     <string name="gpx_info_diff_altitude">Перапад вышынь: %1$s</string>
 	<string name="save_as_favorites_points">Захаваць як групу упадабаных</string>
@@ -1450,7 +1451,7 @@
     
     <string name="sort_by_distance">Сартаваць паводле адлегласьці</string>
     <string name="sort_by_name">Сартаваць паводле назвы</string>
-    <string name="none_selected_gpx">GPX файлы ня выбраныя. Каб выбраць націсьніце і ўтрымлівайце наяўны сьлед.</string>
+    <string name="none_selected_gpx">GPX-файлы не выбраныя. Каб выбраць доўга утрымлівайце наяўны трэк.</string>
     
     <string name="local_index_select_gpx_file">Выбраць для паказу</string>
     <string name="no_index_file_to_download">Няма чаго сьцягваць, калі-ласка, праверце ваша Інтэрнэт-злучэньне.</string>
@@ -1577,7 +1578,7 @@
     <string name="fav_point_dublicate_message">Улюбёны пункт з такой назвай ўжо існуе, таму будзе выкарыстана %1$s для прадухіленьня дубляваньня імёнаў.</string>
     
     
-    <string name="local_index_description">Націсьніце на любы элемэнт сьпісу для прагляду больш падрабязнай інфармацыі, націсьніце і ўтрымлівайце, каб зьмясьціць у архіў ці выдаліць. Наяўныя дадзеныя на прыстасаваньні (%1$s вольна):</string>
+    <string name="local_index_description">Націсніце на любы элемент спісу для прагляду больш падрабязнай інфармацыі, доўга ўтрымлівайце, каб змясьціць у архіў ці выдаліць. Наяўныя дадзеныя на прыстасаванні (%1$s вольна):</string>
 	<string name="osmo_device_not_found">Прыстасаваньне ня знойдзена</string>
     <string name="anonymous_user">Ананімны карыстальнік</string>
     <string name="logged_as">Вы ўвайшлі як %1$s</string>
@@ -2436,7 +2437,7 @@
     <string name="gpx_add_track">Дадаць сьлед</string>
     <string name="gpx_appearance">Выгляд</string>
     <string name="osmo_service_running">OsMo запушчаны</string>
-    <string name="trip_rec_notification_settings_desc">Паказваць апавяшчэньне, якое дазволіць пачаць запіс з дапамогай кнопкі \"Запіс падарожжа\"</string>
+    <string name="trip_rec_notification_settings_desc">Паказваць апавяшчэнне, якое дазволіць пачаць запіс падарожжа</string>
     <string name="christmas_poi">Калядныя POI</string>
     <string name="christmas_desc_q">Паказаць калядныя POI?</string>
     <string name="rendering_value_light_brown_name">Сьветла-карычневы</string>
@@ -2465,7 +2466,7 @@
     <string name="rendering_attr_hideWaterPolygons_description">Ваду</string>
     <string name="show_legacy_search_desc">Дадаць састарэлы пошук у спісе, што раскрываецца</string>
     <string name="rendering_attr_contourWidth_name">Таўшчыня гарызанталяў</string>
-    <string name="release_2_5">\\u2022 Іконкі на мапе, якія можа націскаць,
+    <string name="release_2_5">\\u2022 Іконкі на мапе, якія можа націскаць
 \n 
 \n • Пошук любых POI: Пошук рэстаранаў паводле кухні або кемпінгаў з пэўнымі выгодамі, 
 \n 
@@ -2631,7 +2632,7 @@
     <string name="quick_action_map_underlay_title">Падкладка мапы</string>
     <string name="quick_action_map_underlay_action">Дадаць падкладку</string>
     <string name="quick_action_map_source">Змяніць крыніцу мапы</string>
-    <string name="quick_action_btn_tutorial_descr">Доўгі націск і перацягванне дазвальці перамясціць кропку</string>
+    <string name="quick_action_btn_tutorial_descr">Доўгі націск і перацягванне дазвальці перамясціць пазіцыю на экране</string>
 	<string name="route_points_category_name">Павароты на маршруце</string>
     <string name="relief_smoothness_factor_descr">Пераважны рэльеф: раўнінны ці гарысты</string>
     <string name="routing_attr_relief_smoothness_factor_hills_name">Гарысты</string>
