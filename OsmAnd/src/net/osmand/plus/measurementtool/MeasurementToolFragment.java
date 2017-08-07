@@ -55,6 +55,7 @@ public class MeasurementToolFragment extends Fragment {
 	public static final String TAG = "MeasurementToolFragment";
 
 	private MeasurementToolBarController toolBarController;
+	private MeasurementToolAdapter adapter;
 	private TextView distanceTv;
 	private TextView pointsTv;
 	private String pointsSt;
@@ -111,10 +112,13 @@ public class MeasurementToolFragment extends Fragment {
 				if (measurementLayer.undoPointOnClick()) {
 					enable(undoBtn);
 				} else {
-					disable(undoBtn);
+					disable(undoBtn, upDownBtn);
+					downBtnOnClick(mainView, iconsCache.getThemedIcon(R.drawable.ic_action_arrow_up));
 				}
+				adapter.notifyDataSetChanged();
 				enable(redoBtn);
 				updateText();
+				mapActivity.refreshMap();
 			}
 		});
 
@@ -127,8 +131,10 @@ public class MeasurementToolFragment extends Fragment {
 				} else {
 					disable(redoBtn);
 				}
-				enable(undoBtn);
+				adapter.notifyDataSetChanged();
+				enable(undoBtn, upDownBtn);
 				updateText();
+				mapActivity.refreshMap();
 			}
 		});
 
@@ -139,6 +145,7 @@ public class MeasurementToolFragment extends Fragment {
 				enable(undoBtn, upDownBtn);
 				disable(redoBtn);
 				updateText();
+				adapter.notifyDataSetChanged();
 			}
 		});
 
@@ -190,9 +197,24 @@ public class MeasurementToolFragment extends Fragment {
 			mapActivity.showTopToolbar(toolBarController);
 		}
 
+		adapter = new MeasurementToolAdapter(getMapActivity(), measurementLayer.getMeasurementPoints());
+		adapter.setListener(new MeasurementToolAdapter.RemovePointListener() {
+			@Override
+			public void onPointRemove() {
+				adapter.notifyDataSetChanged();
+				measurementLayer.resetCachePoints();
+				disable(redoBtn);
+				updateText();
+				mapActivity.refreshMap();
+				if (measurementLayer.getPointsCount() < 1) {
+					downBtnOnClick(mainView, iconsCache.getThemedIcon(R.drawable.ic_action_arrow_up));
+					disable(upDownBtn, undoBtn);
+				}
+			}
+		});
 		RecyclerView rv = mainView.findViewById(R.id.measure_points_recycler_view);
 		rv.setLayoutManager(new LinearLayoutManager(getContext()));
-		rv.setAdapter(new MeasurementToolAdapter(getMapActivity(), measurementLayer.getMeasurementPoints()));
+		rv.setAdapter(adapter);
 
 		return view;
 	}
@@ -342,6 +364,7 @@ public class MeasurementToolFragment extends Fragment {
 	public void onDestroyView() {
 		super.onDestroyView();
 		exitMeasurementMode();
+		adapter.setListener(null);
 	}
 
 	private MapActivity getMapActivity() {

@@ -7,7 +7,6 @@ import android.view.ViewGroup;
 import android.widget.ImageButton;
 import android.widget.ImageView;
 import android.widget.TextView;
-import android.widget.Toast;
 
 import net.osmand.plus.GPXUtilities.WptPt;
 import net.osmand.plus.IconsCache;
@@ -22,10 +21,15 @@ class MeasurementToolAdapter extends RecyclerView.Adapter<MeasurementToolAdapter
 
 	private MapActivity mapActivity;
 	private List<WptPt> points;
+	private RemovePointListener listener;
 
-	public MeasurementToolAdapter(MapActivity mapActivity, List<WptPt> points) {
+	MeasurementToolAdapter(MapActivity mapActivity, List<WptPt> points) {
 		this.mapActivity = mapActivity;
 		this.points = points;
+	}
+
+	public void setListener(RemovePointListener listener) {
+		this.listener = listener;
 	}
 
 	@Override
@@ -53,7 +57,8 @@ class MeasurementToolAdapter extends RecyclerView.Adapter<MeasurementToolAdapter
 		holder.deleteBtn.setOnClickListener(new View.OnClickListener() {
 			@Override
 			public void onClick(View view) {
-				Toast.makeText(mapActivity, "Remove: " + holder.getAdapterPosition(), Toast.LENGTH_SHORT).show();
+				points.remove(holder.getAdapterPosition());
+				listener.onPointRemove();
 			}
 		});
 	}
@@ -70,12 +75,16 @@ class MeasurementToolAdapter extends RecyclerView.Adapter<MeasurementToolAdapter
 		final TextView descr;
 		final ImageButton deleteBtn;
 
-		public Holder(View view) {
+		Holder(View view) {
 			super(view);
 			icon = (ImageView) view.findViewById(R.id.measure_point_icon);
 			title = (TextView) view.findViewById(R.id.measure_point_title);
 			descr = (TextView) view.findViewById(R.id.measure_point_descr);
 			deleteBtn = (ImageButton) view.findViewById(R.id.measure_point_remove_image_button);
 		}
+	}
+
+	interface RemovePointListener {
+		void onPointRemove();
 	}
 }

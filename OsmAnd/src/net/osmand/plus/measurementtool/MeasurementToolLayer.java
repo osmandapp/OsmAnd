@@ -34,7 +34,7 @@ public class MeasurementToolLayer extends OsmandMapLayer implements ContextMenuL
 	private Bitmap centerIconNight;
 	private Bitmap pointIcon;
 	private Paint bitmapPaint;
-	private RenderingLineAttributes lineAttrs = new RenderingLineAttributes("rulerLine");
+	private RenderingLineAttributes lineAttrs = new RenderingLineAttributes("measureDistanceLine");
 	private Path path = new Path();
 	private int marginX;
 	private int marginY;
@@ -70,7 +70,7 @@ public class MeasurementToolLayer extends OsmandMapLayer implements ContextMenuL
 		return measurementPoints.size();
 	}
 
-	public LinkedList<WptPt> getMeasurementPoints() {
+	LinkedList<WptPt> getMeasurementPoints() {
 		return measurementPoints;
 	}
 
@@ -141,6 +141,10 @@ public class MeasurementToolLayer extends OsmandMapLayer implements ContextMenuL
 		canvas.rotate(tb.getRotate(), center.x, center.y);
 	}
 
+	void resetCachePoints() {
+		cacheMeasurementPoints = new LinkedList<>(measurementPoints);
+	}
+
 	void addPointOnClick() {
 		RotatedTileBox tb = view.getCurrentRotatedTileBox();
 		LatLon l = tb.getLatLonFromPixel(tb.getCenterPixelX(), tb.getCenterPixelY());
@@ -154,7 +158,7 @@ public class MeasurementToolLayer extends OsmandMapLayer implements ContextMenuL
 		} else {
 			measurementPoints.add(pt);
 		}
-		cacheMeasurementPoints = new LinkedList<>(measurementPoints);
+		resetCachePoints();
 		view.refreshMap();
 	}
 
