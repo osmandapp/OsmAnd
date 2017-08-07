@@ -105,7 +105,7 @@
 	
 	<string name="gps_wakeup_interval">الفاصل الزمني لإستيقاظ نظام تحديد المواقع: %s</string>
 	<string name="int_continuosly">متواصل</string>
-	<string name="screen_is_locked">لفتح قفل الشاشة اضغط على أيقونة القفل</string>
+	<string name="screen_is_locked">لفتح قفل الشاشة انقر على أيقونة القفل</string>
 	<string name="map_widget_top_text">اسم الشارع</string>
 	<string name="map_widget_reset">إعادة التعيين إلى الافتراضي</string>
 	<string name="map_widget_parking">موقف سيارات</string>
@@ -346,7 +346,7 @@
     <string name="local_openstreetmap_act_title">تغييرات OSM</string>
     
 	<string name="intermediate_points_change_order">تغيير الفرز</string>
-    <string name="recording_is_recorded">جاري تسجيل الصوت / الفيديو. لوقفه اضغط على ودجة AV.</string>
+    <string name="recording_is_recorded">جاري تسجيل الصوت/الفيديو. لوقفه انقر على أداة AV.</string>
     <string name="recording_open_external_player">افتح مشغلًا خارجيًا</string>
     <string name="recording_context_menu_arecord">خذ ملاحظة صوتية</string>
     <string name="recording_context_menu_vrecord">خذ ملاحظة فيديو</string>
@@ -573,10 +573,10 @@
 	<string name="av_camera_focus_auto">تركيز تلقائي</string>
 	<string name="av_camera_focus_hiperfocal">التركيز البؤري</string>
 	<string name="av_camera_focus">نوع الكاميرا</string>
-	<string name="use_distance_measurement_help">* انقر لتُعلّم نقطة.\n 
-        * استمر بالضّغط على الخريطة لتحذف النقطة السّابقة.\n
-        * استمر بالضّغط على النّقطة لتظهر أو ترفق وصفًا.\n
-        * انقر على منطقة القياس لترَ مزيدًا من الأنشطة.</string>
+	<string name="use_distance_measurement_help">* انقر لتُعلّم نقطة.
+\n * انقر مطولا على الخريطة لتحذف النقطة السّابقة.
+\n * انقر مطولا على النقطة لعرضها و ارفاق وصف.
+\n * انقر على أداة القياس لعرض المزيد من الأنشطة.</string>
     <string name="layer_hillshade">طبقة التضاريس</string>
     
     
@@ -779,7 +779,9 @@
 	<string name="shared_string_no_thanks">لا"شكرا</string>
 	<string name="basemap_missing">خريطة العالم الأساسية (التي تغطي العالم كله بتقريب صغير) مفقودة. يرجى القيام بتنزيل World_basemap_x.obf للحصول على نظرة شاملة.</string>
 	<string name="vector_data_missing">البيانات المحلية (التي لا تحتاج الى ربط بالانترنت ) غير موجودة على بطاقة الذاكرة. يرجى إعادة تنزيلها بغرض إستخدام الخرائط من دون إتصال.</string>
-	<string name="local_index_gpx_info_show">\n\nاضغط باستمرار لعرض الخيارات</string>
+	<string name="local_index_gpx_info_show">"
+\n
+\nاضغط مطولا للخيارات"</string>
 	
 	
 	
@@ -954,11 +956,13 @@
     
 	<string name="copying_osmand_files">جاري نسخ ملفات بيانات OsmAnd…</string>
     <string name="guidance_preferences_descr">تفضيلات الملاحة</string>
-    <string name="interrupt_music_descr">إقطع تشغيل الموسيقى عند ورود إعلان ما</string>
+    <string name="interrupt_music_descr">الصوت يطالب مؤقتاً، وليس مجرد إخضاع، تشغيل الموسيقى</string>
 	<string name="interrupt_music">إيقاف الموسيقى</string>
 	
     <string name="loading_smth">جاري التحميل %1$s …</string>
-    <string name="selected_gpx_info_show">\n\nاضغط باستمرار للرؤية على الخريطة</string>
+    <string name="selected_gpx_info_show">"
+\n
+\nاضغط مطولا للعرض على الخريطة"</string>
     
 	<string name="rendering_value_pink_name">وردي</string>
 	
@@ -1286,7 +1290,7 @@
     <string name="rendering_attr_showSurfaceGrade_name">إظهار جودة الطريق</string>
     <string name="osmo_group_by_invite">أدخل بدعوة</string>
     <string name="no_index_file_to_download">لم يتم العثور على تنزيلات، الرجاء التحقق من ربطك بالإنترنت.</string>
-    <string name="none_selected_gpx">لم يتم تحديد ملفات GPX. من أجل تحديد اضغط وانتظر على المسار المتاح.</string>
+    <string name="none_selected_gpx">لم يتم تحديد ملفات GPX. لتحديد ملف اضغط مطولا على المسار المتاح.</string>
     <string name="local_index_select_gpx_file">اختر للعرض</string>
     <string name="gpx_split_interval">فاصل التقسيم</string>
     <string name="sort_by_distance">ترتيب حسب المسافة</string>
@@ -1295,7 +1299,7 @@
     <string name="select_destination_and_intermediate_points">حدد الوجهات</string>
     <string name="gpx_wpt">إحداثية</string>
     <string name="rendering_attr_hideHouseNumbers_name">أرقام المنازل</string>
-    <string name="confirm_usage_speed_cameras">غير مسموح استخدام تحذيرات كاميرا السرعة بالقانون في العديد من البلدان (ألمانيا وفرنسا، وإيطاليا، وغيرها). أوسماند لا تتحمل أي مسؤولية إذا كنت تنتهك القانون. الرجاء انقر فوق \"نعم\" فقط إذا كنت مؤهلاً استخدام هذه الميزة.</string>
+    <string name="confirm_usage_speed_cameras">غير مسموح استخدام تحذيرات كاميرا السرعة بالقانون في العديد من البلدان (ألمانيا وفرنسا، وإيطاليا، وغيرها). أوسماند لا تتحمل أي مسؤولية إذا كنت تنتهك القانون. الرجاء انقر نعم فقط إذا كنت مؤهلاً استخدام هذه الميزة.</string>
 	<string name="osm_changes_added_to_local_edits">تم إضافة تعديلات OSM إلى التغييرات المحلية</string>
    	<string name="local_osm_changes_upload_all_confirm">ستقوم برفع %1$d تغيير إلى الموقع. هل أنت متأكد؟</string>
     <string name="delay_to_start_navigation_descr">تحديد وقت الانتظار للبقاء في شاشة تخطيط الطريق</string>
@@ -1690,7 +1694,7 @@
     <string name="osmo_connect_to_device_tracker_id">معرف المتعقب</string>
     <string name="osmo_connect_to_group_id">معرف المجموعة</string>
     <string name="osmo_tracker_id">هوية المتعقب</string>
-    <string name="osmo_tracker_id_descr">اضغط لمعاينة معرف المتعقب</string>
+    <string name="osmo_tracker_id_descr">انقر لعرض معرف المتعقب</string>
     <string name="osmo_share_my_location">إرسال الموقع</string>
     <string name="hello">تطبيق الملاحة أوسماند OSMAnd</string>
     <string name="update_poi_error_loading">حدث خطأ أثناء تحميل البيانات من السيرفر</string>
@@ -2182,7 +2186,7 @@
     <string name="rendering_attr_hikingRoutesOSMC_name">غطاء رمز التنزه</string>
     <string name="rendering_attr_hikingRoutesOSMC_description">تقديم مسارات وفقا لآثار OSMC</string>
 
-    <string name="local_index_description">انقر فوق أي عنصر لمعرفة المزيد من التفاصيل، اضغط وواصل الضغط للتعطيل أو الحذف. البيانات الحالية على الجهاز (%1$s متاحة):</string>
+    <string name="local_index_description">انقر على أي عنصر موجود لمعرفة المزيد من التفاصيل، انقر مطولا للتعطيل أو الحذف. البيانات الحالية في الجهاز (%1$s متاحة):</string>
     <string name="keep_informing_descr">إعادة إعلان تعليمات الملاحة في فترات منتظمة</string>
     <string name="shared_string_others">آخرى</string>
     <string name="local_index_action_do">أنت على وشك %1$s %2$s عنصر. تواصل؟</string>
@@ -2373,7 +2377,7 @@
     <string name="osmo_pause_location">إيقاف مؤقت</string>
     <string name="osmo_service_running">خدمة OsMo مشغلة</string>
     <string name="trip_rec_notification_settings">تسجيل الرحلة (لا توجد بيانات)</string>
-    <string name="trip_rec_notification_settings_desc">إظهار إشعار يسمح ببدء تسجيل الرحلة بالضغط على زر التسجيل</string>
+    <string name="trip_rec_notification_settings_desc">عرض اشعار نظامي للسماح ببدء تسجيل الرحلة</string>
     <string name="shared_string_notifications">الإشعارات</string>
     <string name="gpx_no_tracks_title_folder">يمكنك أيضا إضافة مسارات إلى المجلد</string>
     <string name="gpx_add_track">إضافة مسار</string>
@@ -2496,7 +2500,7 @@
     <string name="navigate_point_olc">رمز التَّمَوْضُع المفتوح</string>
     <string name="navigate_point_olc_info_invalid">خطآ فيي الرمز المفتوح للتَّمَوْضُع
 </string>
-    <string name="quick_action_btn_tutorial_descr">قم بالغط على الزر لفترة أطوَل ثم اسحبه للتمكن من تغيير مكانه على الشاشة</string>
+    <string name="quick_action_btn_tutorial_descr">انقر مطولا واسحب الزر لتغيير مكانه على الشاشة</string>
 	<string name="rendering_attr_depthContours_name">معالم العمق البحري</string>
 	<string name="auto_split_recording_title">تقسيم التسجيلات آليا إلى أجزاء بعد كل فراغ</string>
 	<string name="navigate_point_olc_info_short">تقصير رمز التموضع المفتوح يُرجى تقديم رمزٍ كامل</string>
@@ -2692,8 +2696,8 @@
     <string name="mapillary_menu_descr_tile_cache">إعادة تحميل أجزاء الخريطة لمشاهدة البيانات المحدثة.</string>
     <string name="mapillary_menu_title_tile_cache">التخزين المؤقت لأجزاء الخريطة</string>
     <string name="shared_string_reset">إعادة تعيين</string>
-    <string name="store_tracks_in_monthly_directories">تخزين المسارات المسجل في مجلدات شهرية</string>
-    <string name="store_tracks_in_monthly_directories_descrp">تخزين المسارات المسجلة في المجلدات الفرعية لكل تسجيل شهري (مثل 2017-01).</string>
+    <string name="store_tracks_in_monthly_directories">تخزين المسارات المسجلة في المجلدات الشهرية</string>
+    <string name="store_tracks_in_monthly_directories_descrp">تخزين المسارات المسجلة في مجلدات فرعية لكل تسجيل شهري (مثل 01-2017).</string>
     <string name="average">متوسط</string>
     <string name="of">%1$d من %2$d</string>
     <string name="ascent_descent">صعود/نزول</string>
@@ -2710,20 +2714,20 @@
 \n</string>
     <string name="rendering_value_translucent_pink_name">وردي شفاف</string>
     <string name="quick_action_resume_pause_navigation">استئناف/وقف الملاحة</string>
-    <string name="quick_action_resume_pause_navigation_descr">اضغط على هذا الزر لإيقاف الملاحة، أو استئنافها إذا كانت موقفة مسبقا.</string>
-    <string name="quick_action_show_navigation_finish_dialog">إظهار حوار انتهاء الملاحة</string>
+    <string name="quick_action_resume_pause_navigation_descr">اضغط هذا الزر لإيقاف أو استئناف الملاحة.</string>
+    <string name="quick_action_show_navigation_finish_dialog">إظهار انتهاء الملاحة</string>
     <string name="quick_action_start_stop_navigation">بدء/انهاء الملاحة</string>
-    <string name="quick_action_start_stop_navigation_descr">اضغط على هذا الزر لبدء الملاحة، أو لوقفها إذا ما كانت قد بدأت مسبقا.</string>
+    <string name="quick_action_start_stop_navigation_descr">اضغط هذا الزر لبدء أو إنهاء الملاحة.</string>
     <string name="live_monitoring_max_interval_to_send">الوقت الإضافي المخزن المؤقت للتتبع على الإنترنت</string>
     <string name="live_monitoring_max_interval_to_send_desrc">تحديد الوقت الإضافي المخزن للحفاظ على المواقع وإرسالها دون اتصال</string>
     <string name="mappilary_no_internet_desc">أنت بحاجة إلى إنترنت لعرض الصور من Mapillary</string>
     <string name="retry">اعد المحاولة</string>
-<string name="measurement_tool_action_bar">تصفح الخريطة وأضف النقاط إلى خط</string>
+<string name="measurement_tool_action_bar">تصفح الخريطة واضف نقاط</string>
     <string name="measurement_tool">قياس المسافة</string>
     <string name="add_gpx_waypoint_bottom_sheet_title">إضافة إحداثية وجهة gpx</string>
     <string name="shared_string_create">إنشاء</string>
-<string name="none_point_error">تحتاج إلى إضافة نقطة واحدة على الأقل.</string>
-    <string name="enter_gpx_name">قم بإدخال اسم لـ GPX</string>
+<string name="none_point_error">الرجاء إضافة نقطة واحدة على الأقل.</string>
+    <string name="enter_gpx_name">اسم ملف GPX:</string>
     <string name="show_on_map_after_saving">إظهار على الخريطة بعد الحفظ</string>
     <string name="add_route_point">إضافة نقطة مسار</string>
     <string name="add_waypoint">إضافة إحداثية</string>
