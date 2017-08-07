@@ -21,7 +21,7 @@
     <string name="shared_string_show_description">Mostrar información</string>
     <string name="shared_string_message">Mensaje</string>
     <string name="agps_data_last_downloaded">Últimos datos A-GPS descargados: %1$s</string>
-    <string name="confirm_usage_speed_cameras">En muchos países (Alemania, Francia, Italia y otros) el uso de avisos de radares no está permitido por la ley. OsmAnd no asume ninguna responsabilidad si usted viola la ley. Haga clic en si, sólo si es elegible para usar esta función.</string>
+    <string name="confirm_usage_speed_cameras">En muchos países (Alemania, Francia, Italia y otros) el uso de avisos de radares no está permitido por la ley. OsmAnd no asume ninguna responsabilidad si usted viola la ley. Pulsa en «sí», sólo si es elegible para usar esta función.</string>
     <string name="welmode_download_maps">Descargar mapas</string>
     <string name="welcome_select_region">Para reflejar correctamente las señales y normas de tráfico, elige tu región de conducción:</string>
     <string name="welcome_text">¡OsmAnd ofrece visualización de mapas y navegación global sin conexión!</string>
@@ -272,7 +272,9 @@ Lon %2$s</string>
     <string name="loading_smth">Cargando %1$s…</string>
     <string name="map_widget_plain_time">Tiempo actual</string>
     <string name="gpx_wpt">Punto de ruta</string>
-    <string name="selected_gpx_info_show">\n\nMantén pulsado para ver el mapa</string>
+    <string name="selected_gpx_info_show">"
+\n
+\nMantén pulsado para ver en el mapa"</string>
     <string name="local_index_gpx_info_show">\n\nMantén pulsado para opciones</string>
     <string name="gpx_info_subtracks">Subtrazas: %1$s</string>
     <string name="gpx_info_waypoints">Puntos de ruta: %1$s</string>
@@ -569,7 +571,7 @@ Se aprecia la participación activa, y las contribuciones pueden hacerse directa
     <string name="osmo_gpx_track_downloaded">Traza OsMo %1$s descargada.</string>
     <string name="no_index_file_to_download">No se encontraron descargas, comprueba tu conexión a Internet.</string>
     <string name="select_index_file_to_download">No se encontró nada. Si no encuentras tu región, puedes hacerla tu mismo (Vea http://osmand.net).</string>
-    <string name="none_selected_gpx">Sin archivos GPX seleccionados. Para elegir, mantén pulsado en la traza disponible.</string>
+    <string name="none_selected_gpx">Sin archivos GPX seleccionados. Para elegir uno, mantén pulsado en la traza disponible.</string>
     <string name="gpx_split_interval">Intervalo de división</string>
     <string name="save_as_favorites_points">Guardar como grupo de favoritos</string>
     <string name="delay_navigation_start">Iniciar automáticamente la navegación giro a giro</string>
@@ -703,12 +705,9 @@ Se aprecia la participación activa, y las contribuciones pueden hacerse directa
     <string name="gpx_file_name">Nombre del archivo GPX</string>
     <string name="gpx_saved_sucessfully">Archivo GPX guardado correctamente en {0}</string>
     <string name="use_distance_measurement_help">* Pulsa para marcar un punto.
-
- * Mantén pulsado el mapa para quitar el punto anterior.
-
- * Mantén pulsado el punto para ver e incluir descripción.
-
- * Pulsa en el control de medición para ver más acciones.</string>
+\n * Mantén pulsado el mapa para quitar el punto anterior.
+\n * Mantén pulsado en un punto para ver e incluir la descripción.
+\n * Pulsa en el control de medición para ver más acciones.</string>
     <string name="distance_measurement_start_editing">Comenzar edición</string>
     <string name="distance_measurement_finish_editing">Terminar edición</string>
     <string name="distance_measurement_finish_subtrack">Iniciar subtraza nueva</string>
@@ -866,7 +865,7 @@ Se aprecia la participación activa, y las contribuciones pueden hacerse directa
     <string name="auto_zoom_map">Ampliación automática del mapa</string>
     <string name="snap_to_road_descr">﻿Ajusta la ubicación al camino durante la navegación</string>
     <string name="snap_to_road">Ajustar al camino</string>
-    <string name="interrupt_music_descr">Pausa totalmente cualquier sonido al realizar anuncios (no sólo reduce el volumen)</string>
+    <string name="interrupt_music_descr">Pausa cualquier sonido al realizar avisos por voz (no sólo reduce el volumen)</string>
     <string name="interrupt_music">Pausar música</string>
     <string name="osmand_play_title_30_chars">Navegación y Mapas OsmAnd</string>
     <string name="osmand_short_description_80_chars">Visor y navegador móvil global de mapas OSM con y sin conexión</string>
@@ -2287,7 +2286,7 @@ Si amas a OsmAnd, OSM y quieres apoyarlos, esta es una perfecta manera de hacerl
 \n 
 \n y más…</string>
     <string name="trip_rec_notification_settings">Grabando viaje (sin datos)</string>
-    <string name="trip_rec_notification_settings_desc">Muestra una notificación con el botón Grabar, el cuál permite iniciar la grabación del viaje</string>
+    <string name="trip_rec_notification_settings_desc">Muestra una notificación del sistema que permite iniciar la grabación del viaje</string>
     <string name="shared_string_notifications">Notificaciones</string>
     <string name="osmo_share_location">Compartir</string>
     <string name="osmo_pause_location">Pausar</string>
@@ -2390,7 +2389,7 @@ Si amas a OsmAnd, OSM y quieres apoyarlos, esta es una perfecta manera de hacerl
     <string name="quick_action_map_source_action">Añadir fuente del mapa</string>
     <string name="quick_action_map_source_switch">La fuente del mapa se cambió a «%s».</string>
     <string name="quick_action_btn_tutorial_title">Cambiar ubicación del botón</string>
-    <string name="quick_action_btn_tutorial_descr">Mantener pulsado y arrastrar el botón para mover la ubicación en la pantalla</string>
+    <string name="quick_action_btn_tutorial_descr">Mantén pulsado y arrastra el botón para mover la ubicación en la pantalla</string>
 <string name="quick_action_interim_dialog">Mostrar un diálogo temporal</string>
     <string name="navigate_point_olc">Código de Ubicación Abierto (OLC)</string>
     <string name="navigate_point_olc_info_invalid">OLC inválido
@@ -2690,21 +2689,21 @@ Proporciona un código completo</string>
 \n
 \n</string>
     <string name="rendering_value_translucent_pink_name">Rosa translúcido</string>
-    <string name="quick_action_resume_pause_navigation">Reanudar/Pausar navegación</string>
-    <string name="quick_action_resume_pause_navigation_descr">Pulsa este botón para pausar la navegación, o para reanudarla si ya estaba pausada.</string>
-    <string name="quick_action_show_navigation_finish_dialog">Mostrar diálogo de Finalizar navegación</string>
-    <string name="quick_action_start_stop_navigation">Iniciar/Parar navegación</string>
-    <string name="quick_action_start_stop_navigation_descr">Pulsa este botón para iniciar la navegación, o para finalizarla si ya se había iniciado.</string>
+    <string name="quick_action_resume_pause_navigation">Reanudar/pausar navegación</string>
+    <string name="quick_action_resume_pause_navigation_descr">Pulsa este botón para pausar o reanudar la navegación.</string>
+    <string name="quick_action_show_navigation_finish_dialog">Mostrar diálogo de fin de navegación</string>
+    <string name="quick_action_start_stop_navigation">Iniciar/parar navegación</string>
+    <string name="quick_action_start_stop_navigation_descr">Pulsa este botón para iniciar o parar la navegación.</string>
     <string name="live_monitoring_max_interval_to_send">Tiempo del búfer para el seguimiento en línea</string>
     <string name="live_monitoring_max_interval_to_send_desrc">Especifica el tiempo que el búfer mantendrá los lugares para enviar sin conexión</string>
     <string name="mappilary_no_internet_desc">Debes tener conexión a Internet para ver fotos de Mapillary</string>
     <string name="retry">Reintentar</string>
-<string name="measurement_tool_action_bar">Navega por el mapa y añade puntos para un línea</string>
+<string name="measurement_tool_action_bar">Navega por el mapa y añade puntos</string>
     <string name="measurement_tool">Medir distancia</string>
     <string name="add_gpx_waypoint_bottom_sheet_title">Añadir punto de ruta GPX</string>
     <string name="shared_string_create">Crear</string>
-<string name="none_point_error">Debes añadir al menos un punto.</string>
-    <string name="enter_gpx_name">Ingresa el nombre del GPX</string>
+<string name="none_point_error">Añadir al menos un punto.</string>
+    <string name="enter_gpx_name">Nombre del GPX:</string>
     <string name="show_on_map_after_saving">Mostrar en el mapa después de guardar</string>
     <string name="add_route_point">Añadir punto de ruta</string>
     <string name="add_waypoint">Añadir punto de ruta</string>
