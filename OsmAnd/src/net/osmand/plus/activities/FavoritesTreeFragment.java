@@ -72,6 +72,7 @@ public class FavoritesTreeFragment extends OsmandExpandableListFragment {
 	public static final int SHARE_ID = 4;
 	public static final int SELECT_MAP_MARKERS_ID = 5;
 	public static final int SELECT_MAP_MARKERS_ACTION_MODE_ID = 6;
+	public static final int IMPORT_FAVOURITES_ID = 7;
 	public static final String GROUP_EXPANDED_POSTFIX = "_group_expanded";
 
 	private FavouritesAdapter favouritesAdapter = new FavouritesAdapter();
@@ -166,7 +167,7 @@ public class FavoritesTreeFragment extends OsmandExpandableListFragment {
 		importButton.setOnClickListener(new View.OnClickListener() {
 			@Override
 			public void onClick(View view) {
-				addTrack();
+				importFavourites();
 			}
 		});
 		listView.setEmptyView(emptyView);
@@ -251,6 +252,9 @@ public class FavoritesTreeFragment extends OsmandExpandableListFragment {
 		} else if (item.getItemId() == DELETE_ACTION_ID) {
 			deleteFavoritesAction();
 			return true;
+		} else if (item.getItemId() == IMPORT_FAVOURITES_ID) {
+			importFavourites();
+			return true;
 		} else {
 			return super.onOptionsItemSelected(item);
 		}
@@ -282,6 +286,8 @@ public class FavoritesTreeFragment extends OsmandExpandableListFragment {
 
 
 		if (!MenuItemCompat.isActionViewExpanded(mi)) {
+			createMenuItem(menu, IMPORT_FAVOURITES_ID, R.string.shared_string_add_to_favorites, R.drawable.ic_action_plus,
+					R.drawable.ic_action_plus, MenuItemCompat.SHOW_AS_ACTION_ALWAYS);
 			createMenuItem(menu, SHARE_ID, R.string.shared_string_share, R.drawable.ic_action_gshare_dark,
 					R.drawable.ic_action_gshare_dark, MenuItemCompat.SHOW_AS_ACTION_ALWAYS);
 			if (getSettings().USE_MAP_MARKERS.get()) {
@@ -481,8 +487,8 @@ public class FavoritesTreeFragment extends OsmandExpandableListFragment {
 		}
 	}
 
-	private void addTrack() {
-		((FavoritesActivity) getActivity()).addTrack();
+	private void importFavourites() {
+		((FavoritesActivity) getActivity()).importFavourites();
 	}
 
 	public void shareFavorites(final FavoriteGroup group) {

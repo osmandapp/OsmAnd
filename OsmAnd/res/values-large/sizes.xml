@@ -85,6 +85,10 @@
 	<dimen name="my_places_empty_state_button_margin_top">30dp</dimen>
 	<dimen name="my_places_empty_state_text_size">20sp</dimen>
 	<dimen name="my_places_empty_state_text_desc_size">18sp</dimen>
-	<dimen name="empty_state_text_desc_margin">68dp</dimen>
+	<dimen name="my_places_empty_state_text_desc_margin">68dp</dimen>
+	<dimen name="my_places_empty_state_image_margin_left">138dp</dimen>
+	<dimen name="my_places_empty_state_text_button_padding_left">72dp</dimen>
+	<dimen name="my_places_empty_state_text_button_padding_right">90dp</dimen>
+	<dimen name="my_places_empty_state_text_button_padding_top">96dp</dimen>
     
 </resources>

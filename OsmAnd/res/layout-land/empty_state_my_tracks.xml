@@ -5,21 +5,28 @@
               android:id="@android:id/empty"
               android:layout_width="match_parent"
               android:layout_height="match_parent"
-              android:gravity="center"
               android:orientation="horizontal">
 
     <ImageView
+        android:layout_marginTop="@dimen/my_places_empty_state_image_margin_top"
+        android:layout_marginBottom="@dimen/my_places_empty_state_image_margin_bottom"
+        android:adjustViewBounds="true"
+        android:layout_marginLeft="@dimen/my_places_empty_state_image_margin_left"
+        android:layout_marginStart="@dimen/my_places_empty_state_image_margin_left"
         android:id="@+id/empty_state_image_view"
-        android:layout_width="0dp"
-        android:layout_height="wrap_content"
-        android:layout_weight="1"
+        android:layout_width="wrap_content"
+        android:layout_height="match_parent"
         tools:src="@drawable/ic_empty_state_trip_night_result"/>
 
     <LinearLayout
-        android:layout_width="0dp"
+        android:clipToPadding="false"
+        android:paddingLeft="@dimen/my_places_empty_state_text_button_padding_left"
+        android:paddingStart="@dimen/my_places_empty_state_text_button_padding_left"
+        android:paddingRight="@dimen/my_places_empty_state_text_button_padding_right"
+        android:paddingEnd="@dimen/my_places_empty_state_text_button_padding_right"
+        android:paddingTop="@dimen/my_places_empty_state_text_button_padding_top"
+        android:layout_width="wrap_content"
         android:layout_height="match_parent"
-        android:layout_weight="1"
-        android:gravity="center"
         android:orientation="vertical">
 
         <net.osmand.plus.widgets.TextViewEx
@@ -35,10 +42,7 @@
         <TextView
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:layout_marginLeft="@dimen/empty_state_text_desc_margin"
-            android:layout_marginRight="@dimen/empty_state_text_desc_margin"
             android:background="@null"
-            android:gravity="center"
             android:text="@string/empty_state_my_tracks_desc"
             android:textColor="?android:attr/textColorSecondary"
             android:textSize="@dimen/my_places_empty_state_text_desc_size"/>

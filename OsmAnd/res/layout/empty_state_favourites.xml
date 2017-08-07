@@ -31,8 +31,8 @@
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:background="@null"
-        android:layout_marginLeft="@dimen/empty_state_text_desc_margin"
-        android:layout_marginRight="@dimen/empty_state_text_desc_margin"
+        android:layout_marginLeft="@dimen/my_places_empty_state_text_desc_margin"
+        android:layout_marginRight="@dimen/my_places_empty_state_text_desc_margin"
         android:text="@string/empty_state_favourites_desc"
         android:textColor="?android:attr/textColorSecondary"
         android:textSize="@dimen/my_places_empty_state_text_desc_size"/>
