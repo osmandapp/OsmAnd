@@ -3,7 +3,8 @@
     xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
-    android:layout_height="48dp">
+    android:layout_height="48dp"
+    android:descendantFocusability="blocksDescendants">
 
     <android.support.v7.widget.AppCompatImageView
         android:id="@+id/measure_point_icon"
@@ -26,6 +27,7 @@
         android:layout_alignParentRight="true"
         android:layout_centerVertical="true"
         android:background="@null"
+        android:focusableInTouchMode="true"
         android:paddingBottom="12dp"
         android:paddingEnd="16dp"
         android:paddingStart="16dp"

@@ -178,6 +178,11 @@ public class MeasurementToolLayer extends OsmandMapLayer implements ContextMenuL
 		return cacheMeasurementPoints.size() > measurementPoints.size();
 	}
 
+	void moveMapToPoint(int pos) {
+		WptPt pt = measurementPoints.get(pos);
+		view.getAnimatedDraggingThread().startMoving(pt.getLatitude(), pt.getLongitude(), view.getZoom(), true);
+	}
+
 	@Override
 	public void destroyLayer() {
 

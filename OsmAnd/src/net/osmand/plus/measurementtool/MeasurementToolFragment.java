@@ -19,6 +19,7 @@ import android.view.Menu;
 import android.view.MenuItem;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.AdapterView;
 import android.widget.EditText;
 import android.widget.ImageButton;
 import android.widget.ImageView;
@@ -214,6 +215,12 @@ public class MeasurementToolFragment extends Fragment {
 		ListView lv = mainView.findViewById(R.id.measure_points_list_view);
 		lv.setDivider(null);
 		lv.setAdapter(adapter);
+		lv.setOnItemClickListener(new AdapterView.OnItemClickListener() {
+			@Override
+			public void onItemClick(AdapterView<?> adapterView, View view, int pos, long l) {
+				measurementLayer.moveMapToPoint(pos);
+			}
+		});
 
 		return view;
 	}
