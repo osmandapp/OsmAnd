@@ -2809,8 +2809,8 @@
 \n • Іншыя паляпшэнні і выпраўленні хібаў
 \n
 \n</string>
-    <string name="measurement_tool_action_bar">Вылучыце месца на мапе і націсніце кнопку Дадаць, каб дадаць кропку да лінейкі.</string>
-    <string name="measurement_tool">Вымярэнне</string>
+    <string name="measurement_tool_action_bar">Праглядзець мапу і дадаць кропкі да лініі</string>
+    <string name="measurement_tool">Вымяраць адлегласць</string>
     <string name="quick_action_resume_pause_navigation">Аднавіць/прыпыніць навігацыю</string>
     <string name="quick_action_resume_pause_navigation_descr">Націсніце гэтую кропку, каб прыпыніць навігацыю ці аднавіць яе, калі яна ўжо была прыпынена.</string>
     <string name="quick_action_show_navigation_finish_dialog">Паказаць дыялог завяршэння навігацыі</string>
@@ -2822,4 +2822,13 @@
     <string name="retry">Паўтарыць</string>
     <string name="add_gpx_waypoint_bottom_sheet_title">Дадаць GPX-кропку</string>
     <string name="shared_string_create">Стварыць</string>
+<string name="none_point_error">Вы павінны дадаць па меншай меры адну кропку.</string>
+    <string name="enter_gpx_name">Увядзіце назву для GPX</string>
+    <string name="show_on_map_after_saving">Паказаць мапу пасля захавання</string>
+    <string name="add_route_point">Дадаць кропку маршруту</string>
+    <string name="add_waypoint">Дадаць кропку шляху</string>
+    <string name="save_gpx_waypoint">Захаваць GPX-кропку шляху</string>
+    <string name="save_route_point">Захаваць кропку маршруту</string>
+    <string name="waypoint_one">Кропка шляху 1</string>
+    <string name="route_point_one">Кропка маршруту 1</string>
 </resources>

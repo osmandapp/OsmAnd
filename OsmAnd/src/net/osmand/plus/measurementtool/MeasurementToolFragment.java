@@ -211,7 +211,7 @@ public class MeasurementToolFragment extends Fragment {
 
 	private void saveAsGpxOnClick(MapActivity mapActivity) {
 		final File dir = mapActivity.getMyApplication().getAppPath(IndexConstants.GPX_INDEX_DIR);
-		final LayoutInflater inflater = getLayoutInflater();
+		final LayoutInflater inflater = mapActivity.getLayoutInflater();
 		final View view = inflater.inflate(R.layout.save_gpx_dialog, null);
 		final EditText nameEt = (EditText) view.findViewById(R.id.gpx_name_et);
 		final TextView fileExistsTv = (TextView) view.findViewById(R.id.file_exists_text_view);

@@ -2806,8 +2806,17 @@ OsmAnd (Automated Navigation Directions) 是一個地圖和導航的應用程式
     <string name="live_monitoring_max_interval_to_send_desrc">指定一段緩衝時間以保持位置，而無需連接發送</string>
     <string name="mappilary_no_internet_desc">您需要網際網路才能從 Mapillary 檢視照片</string>
     <string name="retry">重試</string>
-<string name="measurement_tool">測量工具</string>
-    <string name="measurement_tool_action_bar">在地圖上選擇一個位置，然後輕點增加以便增加一個標點到尺規。</string>
+<string name="measurement_tool">測量距離</string>
+    <string name="measurement_tool_action_bar">瀏覽地圖並增加標點到行列</string>
     <string name="add_gpx_waypoint_bottom_sheet_title">增加 gpx 航點</string>
     <string name="shared_string_create">建立</string>
+<string name="none_point_error">您最起碼需要增加一個標點。</string>
+    <string name="enter_gpx_name">為 GPX 輸入名稱</string>
+    <string name="show_on_map_after_saving">儲存後在地圖上顯示</string>
+    <string name="add_route_point">增加路線標點</string>
+    <string name="add_waypoint">增加航點</string>
+    <string name="save_gpx_waypoint">儲存 GPX 航點</string>
+    <string name="save_route_point">儲存路線標點</string>
+    <string name="waypoint_one">航點 1</string>
+    <string name="route_point_one">路線標點 1</string>
 </resources>

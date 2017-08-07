@@ -57,8 +57,6 @@ import net.osmand.plus.AppInitializer;
 import net.osmand.plus.AppInitializer.AppInitializeListener;
 import net.osmand.plus.AppInitializer.InitEvents;
 import net.osmand.plus.ApplicationMode;
-import net.osmand.plus.GPXUtilities;
-import net.osmand.plus.GPXUtilities.NewGpxWaypoint;
 import net.osmand.plus.GpxSelectionHelper.GpxDisplayItem;
 import net.osmand.plus.MapMarkersHelper.MapMarker;
 import net.osmand.plus.MapMarkersHelper.MapMarkerChangedListener;
@@ -106,6 +104,7 @@ import net.osmand.plus.routing.RoutingHelper.RouteCalculationProgressCallback;
 import net.osmand.plus.search.QuickSearchDialogFragment;
 import net.osmand.plus.search.QuickSearchDialogFragment.QuickSearchTab;
 import net.osmand.plus.search.QuickSearchDialogFragment.QuickSearchType;
+import net.osmand.plus.views.AddGpxPointBottomSheetHelper.NewGpxPoint;
 import net.osmand.plus.views.AnimateDraggingMapThread;
 import net.osmand.plus.views.MapControlsLayer;
 import net.osmand.plus.views.MapInfoLayer;
@@ -503,6 +502,10 @@ public class MapActivity extends OsmandActionBarActivity implements DownloadEven
 		}
 		if (getMeasurementToolFragment() != null) {
 			getMeasurementToolFragment().showQuitDialog();
+			return;
+		}
+		if (mapContextMenu.isVisible() && mapContextMenu.isClosable()) {
+			mapContextMenu.close();
 			return;
 		}
 		if (prevActivityIntent != null && getSupportFragmentManager().getBackStackEntryCount() == 0) {
@@ -923,9 +926,9 @@ public class MapActivity extends OsmandActionBarActivity implements DownloadEven
 				} else if (toShow instanceof QuadRect) {
 					QuadRect qr = (QuadRect) toShow;
 					mapView.fitRectToMap(qr.left, qr.right, qr.top, qr.bottom, (int) qr.width(), (int) qr.height(), 0);
-				} else if (toShow instanceof NewGpxWaypoint) {
-					NewGpxWaypoint newGpxWaypoint = (NewGpxWaypoint) toShow;
-					getMapLayers().getContextMenuLayer().enterAddGpxWaypointMode(newGpxWaypoint);
+				} else if (toShow instanceof NewGpxPoint) {
+					NewGpxPoint newGpxPoint = (NewGpxPoint) toShow;
+					getMapLayers().getContextMenuLayer().enterAddGpxPointMode(newGpxPoint);
 				} else {
 					mapContextMenu.show(latLonToShow, mapLabelToShow, toShow);
 				}

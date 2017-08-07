@@ -2718,8 +2718,17 @@
     <string name="live_monitoring_max_interval_to_send_desrc">تحديد الوقت الإضافي المخزن للحفاظ على المواقع وإرسالها دون اتصال</string>
     <string name="mappilary_no_internet_desc">أنت بحاجة إلى إنترنت لعرض الصور من Mapillary</string>
     <string name="retry">اعد المحاولة</string>
-<string name="measurement_tool_action_bar">حدد موقعا على الخريطة وانقر على إضافة لإضافة نقطة إلى المسطرة.</string>
-    <string name="measurement_tool">أداة القياس</string>
+<string name="measurement_tool_action_bar">تصفح الخريطة وأضف النقاط إلى خط</string>
+    <string name="measurement_tool">قياس المسافة</string>
     <string name="add_gpx_waypoint_bottom_sheet_title">إضافة إحداثية وجهة gpx</string>
     <string name="shared_string_create">إنشاء</string>
+<string name="none_point_error">تحتاج إلى إضافة نقطة واحدة على الأقل.</string>
+    <string name="enter_gpx_name">قم بإدخال اسم لـ GPX</string>
+    <string name="show_on_map_after_saving">إظهار على الخريطة بعد الحفظ</string>
+    <string name="add_route_point">إضافة نقطة مسار</string>
+    <string name="add_waypoint">إضافة إحداثية</string>
+    <string name="save_gpx_waypoint">حفظ إحداثية GPX</string>
+    <string name="save_route_point">حفظ نقطة مسار</string>
+    <string name="waypoint_one">إحداثية 1</string>
+    <string name="route_point_one">نقطة المسار 1</string>
 </resources>

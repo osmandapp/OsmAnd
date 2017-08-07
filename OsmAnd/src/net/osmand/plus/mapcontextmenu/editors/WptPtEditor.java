@@ -9,9 +9,11 @@ import net.osmand.plus.activities.MapActivity;
 
 public class WptPtEditor extends PointEditor {
 
+	private OnDismissListener onDismissListener;
 	private GPXFile gpxFile;
 	private WptPt wpt;
 	private boolean gpxSelected;
+	private boolean newGpxPointProcessing;
 
 	public static final String TAG = "WptPtEditorFragment";
 
@@ -19,9 +21,24 @@ public class WptPtEditor extends PointEditor {
 		super(mapActivity);
 	}
 
-	@Override
-	public String getFragmentTag() {
-		return TAG;
+	public void setNewGpxPointProcessing(boolean newGpxPointProcessing) {
+		this.newGpxPointProcessing = newGpxPointProcessing;
+	}
+
+	public boolean isNewGpxPointProcessing() {
+		return newGpxPointProcessing;
+	}
+
+	public interface OnDismissListener {
+		void onDismiss();
+	}
+
+	public void setOnDismissListener(OnDismissListener listener) {
+		onDismissListener = listener;
+	}
+
+	public OnDismissListener getOnDismissListener() {
+		return onDismissListener;
 	}
 
 	public GPXFile getGpxFile() {
@@ -34,6 +51,11 @@ public class WptPtEditor extends PointEditor {
 
 	public WptPt getWptPt() {
 		return wpt;
+	}
+
+	@Override
+	public String getFragmentTag() {
+		return TAG;
 	}
 
 	public void add(GPXFile gpxFile, LatLon latLon, String title) {
@@ -50,7 +72,7 @@ public class WptPtEditor extends PointEditor {
 		wpt = new WptPt(latLon.getLatitude(), latLon.getLongitude(),
 				System.currentTimeMillis(), Double.NaN, 0, Double.NaN);
 		wpt.name = title;
-		WptPtEditorFragment.showInstance(mapActivity);
+		showEditorFragment();
 	}
 
 	public void add(GPXFile gpxFile, LatLon latLon, String title, String categoryName, int categoryColor, boolean skipDialog) {
@@ -86,7 +108,7 @@ public class WptPtEditor extends PointEditor {
 
 		wpt.category = categoryName;
 
-		WptPtEditorFragment.showInstance(mapActivity, skipDialog);
+		showEditorFragment(skipDialog);
 	}
 
 	public void edit(WptPt wpt) {
@@ -101,6 +123,14 @@ public class WptPtEditor extends PointEditor {
 			gpxFile = selectedGpxFile.getGpxFile();
 		}
 		this.wpt = wpt;
+		showEditorFragment();
+	}
+
+	public void showEditorFragment() {
 		WptPtEditorFragment.showInstance(mapActivity);
+	}
+
+	public void showEditorFragment(boolean skipDialog) {
+		WptPtEditorFragment.showInstance(mapActivity, skipDialog);
 	}
 }

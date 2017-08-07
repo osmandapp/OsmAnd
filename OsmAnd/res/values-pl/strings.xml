@@ -231,7 +231,7 @@
     <string name="contribution_activity">Wersje instalacyjne</string>
     <string name="gps_status_app_not_found">Nie zainstalowano aplikacji GPS status. Wyszukać ją w Market?</string>
     <string name="voice_is_not_available_msg">Nawigacja głosowa jest niedostępna. Proszę przejść do „Ustawienia”→„Ogólne”→„Głos komunikatów”, wybrać zestaw komunikatów głosowych i zainstalować go.</string>
-    <string name="voice_is_not_available_title">Nie wybrano nawigacji głosowej</string>
+    <string name="voice_is_not_available_title">Nie wybrano komunikatów głosowych</string>
     <string name="daynight_mode_day">Dzienny</string>
     <string name="daynight_mode_night">Nocny</string>
     <string name="daynight_mode_auto">Wschód/zachód Słońca</string>
@@ -466,7 +466,7 @@
     <string name="shared_string_close">Zamknij</string>
     <string name="loading_data">Wczytywanie danych…</string>
     <string name="reading_indexes">Wczytywanie danych lokalnych…</string>
-    <string name="previous_run_crashed">Program wcześniej uległ awarii. Dziennik z informacjami znajduje się w {0}. Proszę wysłać zgłoszenie błędu i załączyć plik dziennika.</string>
+    <string name="previous_run_crashed">Program wcześniej uległ awarii. Plik dziennika znajduje się w {0}. Proszę wysłać zgłoszenie błędu i załączyć plik dziennika.</string>
     <string name="saving_gpx_tracks">Zapisywanie śladów GPX na kartę SD…</string>
     <string name="finished_task">Zakończono</string>
 
@@ -884,7 +884,7 @@ Miejsce parkowania oraz czas można znaleźć na karcie w panelu oraz na widżec
     <string name="show_warnings_descr">Wyświetla ostrzeżenia ruchu drogowego, ostrzeżenia o fotoradarach i informacje o pasach</string>
 
 
-    <string name="osmand_short_description_80_chars">OsmAnd to aplikacja nawigacyjna open source  wspierająca mapy kafelkowe oraz wektorowe</string>
+    <string name="osmand_short_description_80_chars">Mapy dla całego świata i nawigacja działająca w oparciu o stacjonarne jak i sieciowe mapy OSM</string>
     <string name="osmand_long_description_1000_chars">"
  OsmAnd (OSM Automatyczne Nawigowanie Do celu)
 
@@ -946,24 +946,26 @@ OsmAnd jest otwarto-źródłowym programem do nawigacji z dostępem do szerokiej
     <string name="poi_filter_accomodation">Zakwaterowanie</string>
     <string name="poi_filter_restaurants">Restauracje</string>
     <string name="poi_filter_sightseeing">Zwiedzanie</string>
-    <string name="osmand_plus_long_description_1000_chars">OsmAnd+ (OSM Automatyczne Nawigowanie Do celu)
+    <string name="osmand_plus_long_description_1000_chars">OsmAnd+ (OSM Automated Navigation Directions)
 \n
-\n OsmAnd jest otwarto-źródłowym programem do nawigacji z dostępem do szerokiej gamy globalnych map OpenStreetMap (OSM). Wszystkie dane map (wektorowe lub kafelkowe) mogą być przechowywane na karcie pamięci telefonu do użycia bez połączenia z siecią. OsmAnd umożliwia również wyznaczanie tras zarówno w trybie offline i online z komunikatami głosowymi.
+\nOsmAnd+ jest otwarto-źródłowym programem do nawigacji z dostępem do szerokiej gamy globalnych map OpenStreetMap (OSM). Wszystkie dane map (wektorowe lub kafelkowe) mogą być przechowywane na karcie pamięci telefonu do użycia bez połączenia z siecią. OsmAnd umożliwia również wyznaczanie tras oraz nawigowanie zarówno w trybie stacjonarnym jak i sieciowym z komunikatami głosowymi. 
 \n
-\nOsmAnd+ jest płatną wersją programu, kupując program wspierasz projekt, nowe funkcje i otrzymujesz najnowsze uaktualnienia.
+\nOsmAnd+ jest płatną wersją programu. Zakup programu wspiera projekt, umożliwia dodawanie nowych funkcji, w zamian za najnowsze uaktualnienia.
 \n
 \nNiektóre z podstawowych funkcji:
-\n - Działa trybie offline (przechowuje pobrane mapy wektorowych lub kafelkowe w pamięci urządzenia)
-\n - Dostępne kompaktowe mapy w trybie offlinie dla całego świata
-\n - Pobieranie map kraju lub regionu bezpośrednio z aplikacji
-\n - Możliwość nakładania kilku warstw map, takich jak GPX lub tras nawigacji, ciekawe miejsc, ulubionych, linii konturu, przystanków komunikacji miejskiej, dodatkowe mapy z konfigurowalną przejrzystością
-\n - Wyszukiwanie Offline adresów i miejsc (POI)
-\n - Wyznaczanie w trybie Offline tras na średnich dystansach
-\n - Tryby samochodowy, rowerowy i pieszy z:
-\n - opcjonalnym automatycznym przełączaniem widoku dzień/noc
-\n - opcjonalnie skalowanie map w zależności od prędkości
-\n - opcjonalne wyrównanie map według kompasu lub kierunku ruchu
-\n - opcjonalne wyświetlanie wskazywanie pasów, ograniczeń prędkości, nagrane i syntezowane komunikaty głosowe.</string>
+\n - działanie w trybie stacjonarnym (przechowuje pobrane mapy wektorowe lub kafelkowe w pamięci urządzenia),
+\n - dostępne kompaktowe mapy stacjonarne dla całego świata,
+\n - pobieranie map kraju lub regionu bez ograniczeń ilościowych, bezpośrednio z aplikacji,
+\n - stacjonarne dane Wikipedia - doskonałe do zwiedzania,
+\n - możliwość nakładania kilku warstw map, takich jak śladów GPX, tras nawigacji, użytecznych i ulubionych miejsc, linii konturu, przystanków komunikacji miejskiej, dodatkowych map z konfigurowalną przejrzystością,
+\n - wyszukiwanie adresów i użytecznych miejsc bez połączenia z siecią,
+\n - wyznaczanie tras na średnich dystansach bez połączenia z siecią,
+\n - tryby samochodowy, rowerowy i pieszy z:
+\n
+\n - opcjonalnym, automatycznym przełączaniem widoku dziennego/nocnego,
+\n - opcjonalnym skalowanie map w zależności od prędkości, 
+\n - opcjonalnym wyrównanie map według kompasu lub kierunku ruchu,
+\n - opcjonalnymi nagranymi lub syntezowanymi komunikatami o pasach ruchu, ograniczeniami prędkości.</string>
     <string name="select_navigation_mode">Wybierz tryb poruszania się</string>
 
 
@@ -1008,7 +1010,7 @@ OsmAnd jest otwarto-źródłowym programem do nawigacji z dostępem do szerokiej
     <string name="map_widget_max_speed">Ograniczenie prędkości</string>
 
 
-    <string name="monitoring_control_start">Ślad GPX</string>
+    <string name="monitoring_control_start">Ślad</string>
 
     <string name="download_srtm_maps">Poziomice</string>
     <string name="download_select_map_types">Inne mapy</string>
@@ -1041,7 +1043,7 @@ OsmAnd jest otwarto-źródłowym programem do nawigacji z dostępem do szerokiej
     <string name="recording_is_recorded">Dźwięk/obraz jest nagrywany. Aby zatrzymać naciśnij przycisk stop na widżecie.</string>
     <string name="recording_playing">Dźwięk z wybranego nagrania jest odtwarzany.\n%1$s</string>
     <string name="recording_open_external_player">Otwórz zewnętrzny odtwarzacz</string>
-    <string name="recording_delete_confirm">Usunąć to nagranie?</string>
+    <string name="recording_delete_confirm">Usunąć ten ślad?</string>
 
     <string name="recording_unavailable">niedostępne</string>
     <string name="layer_recordings">Warstwa nagrywania</string>
@@ -1100,7 +1102,7 @@ OsmAnd jest otwarto-źródłowym programem do nawigacji z dostępem do szerokiej
     <string name="osmand_play_title_30_chars">Mapy i nawigacja OsmAnd</string>
 
 
-    <string name="osmand_plus_play_title_30_chars">OsmAnd+ Mapy i Nawigacja</string>
+    <string name="osmand_plus_play_title_30_chars">OsmAnd+ mapy i nawigacja</string>
     <string name="street_name">Nazwa ulicy</string>
     <string name="hno">Numer domu</string>
     <string name="choose_osmand_theme">Styl</string>
@@ -1603,7 +1605,7 @@ OsmAnd jest otwarto-źródłowym programem do nawigacji z dostępem do szerokiej
     <string name="way_alarms">Ostrzeżenia ruchu drogowego</string>
     <string name="speak_favorites">Pobliskie ulubione miejsca</string>
     <string name="speak_poi">Pobliskie użyteczne miejsca</string>
-    <string name="save_track_to_gpx_globally">Rejestrowanie śladu do pliku GPX</string>
+    <string name="save_track_to_gpx_globally">Rejestrowanie śladu GPX</string>
     <string name="save_track_to_gpx_globally_descr">Rejestrowanie położenia do pliku GPX można włączyć lub wyłączyć używając widżetu rejestrowania GPX na ekranie mapy</string>
     <string name="save_track_interval_globally">Częstość rejestrowania</string>
 	<string name="record_plugin_description">Aktywuje funkcje rejestrowania i zapisywania śladów za pomocą widżetu rejestrowania śladów GPX na ekranie mapy lub automatyczne rejestruje przebiegi wszystkich tras do plików GPX. 
@@ -2784,6 +2786,11 @@ Reprezentuje obszar: %1$s x %2$s</string>
 \n • Inne ulepszenia i naprawione błędy
 \n
 \n</string>
-    <string name="measurement_tool_action_bar">Proszę wskazać położenie na mapie i nacisnąć Dodaj, aby dodać punkt do pomiaru.</string>
+    <string name="measurement_tool_action_bar">Proszę dodać położenia do pomiaru.</string>
     <string name="measurement_tool">Mierzenie odległości</string>
+    <string name="enter_gpx_name">Proszę wprowadzić nazwę pliku GPX</string>
+    <string name="none_point_error">Należy dodać co najmniej jedno położenie.</string>
+    <string name="show_on_map_after_saving">Wyświetlanie na mapie po zapisaniu</string>
+    <string name="rendering_value_translucent_pink_name">Przezroczysty różowy</string>
+    <string name="min_max">Min./Maks.</string>
     </resources>

@@ -9,6 +9,7 @@ import android.os.Handler;
 import android.support.annotation.NonNull;
 import android.support.annotation.Nullable;
 import android.support.design.widget.FloatingActionButton;
+import android.support.v4.content.ContextCompat;
 import android.support.v4.view.MenuItemCompat;
 import android.support.v7.app.AlertDialog;
 import android.support.v7.view.ActionMode;
@@ -20,6 +21,7 @@ import android.view.MenuInflater;
 import android.view.MenuItem;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.AbsListView;
 import android.widget.CheckBox;
 import android.widget.EditText;
 import android.widget.ExpandableListView;
@@ -30,16 +32,13 @@ import android.widget.ListView;
 import android.widget.TextView;
 
 import net.osmand.AndroidUtils;
-import net.osmand.Location;
 import net.osmand.data.FavouritePoint;
 import net.osmand.data.LatLon;
 import net.osmand.data.PointDescription;
 import net.osmand.plus.FavouritesDbHelper;
 import net.osmand.plus.GPXDatabase.GpxDataItem;
 import net.osmand.plus.GPXUtilities;
-import net.osmand.plus.GPXUtilities.WptPt;
 import net.osmand.plus.GPXUtilities.GPXFile;
-import net.osmand.plus.GPXUtilities.NewGpxWaypoint;
 import net.osmand.plus.GpxSelectionHelper.GpxDisplayGroup;
 import net.osmand.plus.GpxSelectionHelper.GpxDisplayItem;
 import net.osmand.plus.GpxSelectionHelper.GpxDisplayItemType;
@@ -58,6 +57,7 @@ import net.osmand.plus.activities.TrackActivity;
 import net.osmand.plus.base.FavoriteImageDrawable;
 import net.osmand.plus.base.OsmandExpandableListFragment;
 import net.osmand.plus.dialogs.DirectionsDialogs;
+import net.osmand.plus.views.AddGpxPointBottomSheetHelper.NewGpxPoint;
 import net.osmand.util.Algorithms;
 
 import java.io.File;
@@ -93,7 +93,12 @@ public class TrackPointFragment extends OsmandExpandableListFragment {
 	private Set<Integer> selectedGroups = new LinkedHashSet<>();
 	private ActionMode actionMode;
 	private SearchView searchView;
-	private FloatingActionButton fab;
+	private boolean menuOpened = false;
+	private FloatingActionButton menuFab;
+	private FloatingActionButton waypointFab;
+	private View waypointTextLayout;
+	private FloatingActionButton routePointFab;
+	private View routePointTextLayout;
 
 	@Override
 	public void onCreate(@Nullable Bundle savedInstanceState) {
@@ -104,6 +109,20 @@ public class TrackPointFragment extends OsmandExpandableListFragment {
 	@Override
 	public void onActivityCreated(Bundle savedInstanceState) {
 		super.onActivityCreated(savedInstanceState);
+		listView.setOnScrollListener(new AbsListView.OnScrollListener() {
+			@Override
+			public void onScrollStateChanged(AbsListView absListView, int i) {
+				if (i == AbsListView.OnScrollListener.SCROLL_STATE_TOUCH_SCROLL) {
+					if (menuOpened) {
+						closeMenu();
+					}
+				}
+			}
+
+			@Override
+			public void onScroll(AbsListView absListView, int i, int i1, int i2) {
+			}
+		});
 		listView.setBackgroundColor(getResources().getColor(
 				getMyApplication().getSettings().isLightContent() ? R.color.ctx_menu_info_view_bg_light
 						: R.color.ctx_menu_info_view_bg_dark));
@@ -115,25 +134,37 @@ public class TrackPointFragment extends OsmandExpandableListFragment {
 		ExpandableListView listView = (ExpandableListView) view.findViewById(android.R.id.list);
 		setHasOptionsMenu(true);
 
-		fab = (FloatingActionButton) view.findViewById(R.id.fabButton);
-
-		fab.setOnClickListener(new View.OnClickListener() {
+		menuFab = (FloatingActionButton) view.findViewById(R.id.menu_fab);
+		menuFab.setOnClickListener(new View.OnClickListener() {
 			@Override
 			public void onClick(View view) {
-				final OsmandSettings settings = app.getSettings();
-				GPXFile gpx = getGpx();
-				Location location = app.getLocationProvider().getLastKnownLocation();
-				if (location != null) {
-					settings.setMapLocationToShow(location.getLatitude(), location.getLongitude(),
-							settings.getLastKnownMapZoom(),
-							new PointDescription(PointDescription.POINT_TYPE_WPT, getString(R.string.context_menu_item_add_waypoint)),
-							false,
-							new NewGpxWaypoint(gpx));
-
-					MapActivity.launchMapActivityMoveToTop(getActivity());
+				if (menuOpened) {
+					closeMenu();
+				} else {
+					openMenu();
 				}
 			}
 		});
+
+		waypointFab = (FloatingActionButton) view.findViewById(R.id.waypoint_fab);
+		waypointFab.setOnClickListener(new View.OnClickListener() {
+			@Override
+			public void onClick(View view) {
+				PointDescription pointDescription = new PointDescription(PointDescription.POINT_TYPE_WPT, getString(R.string.add_waypoint));
+				addPoint(pointDescription);
+			}
+		});
+		waypointTextLayout = view.findViewById(R.id.waypoint_text_layout);
+
+		routePointFab = (FloatingActionButton) view.findViewById(R.id.route_fab);
+		routePointFab.setOnClickListener(new View.OnClickListener() {
+			@Override
+			public void onClick(View view) {
+				PointDescription pointDescription = new PointDescription(PointDescription.POINT_TYPE_RTE, getString(R.string.add_route_point));
+				addPoint(pointDescription);
+			}
+		});
+		routePointTextLayout = view.findViewById(R.id.route_text_layout);
 
 		TextView tv = new TextView(getActivity());
 		tv.setText(R.string.none_selected_gpx);
@@ -144,6 +175,43 @@ public class TrackPointFragment extends OsmandExpandableListFragment {
 		setListView(listView);
 		expandAllGroups();
 		return view;
+	}
+
+	private void addPoint(PointDescription pointDescription) {
+		Intent currentIntent = getTrackActivity().getIntent();
+		if (currentIntent != null) {
+			currentIntent.putExtra(TrackActivity.OPEN_POINTS_TAB, true);
+		}
+		final OsmandSettings settings = app.getSettings();
+		GPXFile gpx = getGpx();
+		LatLon location = settings.getLastKnownMapLocation();
+		if (gpx != null && location != null) {
+			settings.setMapLocationToShow(location.getLatitude(), location.getLongitude(),
+					settings.getLastKnownMapZoom(),
+					pointDescription,
+					false,
+					new NewGpxPoint(gpx, pointDescription));
+
+			MapActivity.launchMapActivityMoveToTop(getActivity());
+		}
+	}
+
+	private void openMenu() {
+		menuFab.setImageDrawable(ContextCompat.getDrawable(getContext(), R.drawable.ic_action_remove_dark));
+		waypointFab.setVisibility(View.VISIBLE);
+		waypointTextLayout.setVisibility(View.VISIBLE);
+		routePointFab.setVisibility(View.VISIBLE);
+		routePointTextLayout.setVisibility(View.VISIBLE);
+		menuOpened = true;
+	}
+
+	private void closeMenu() {
+		menuFab.setImageDrawable(ContextCompat.getDrawable(getContext(), R.drawable.ic_action_plus));
+		waypointFab.setVisibility(View.GONE);
+		waypointTextLayout.setVisibility(View.GONE);
+		routePointFab.setVisibility(View.GONE);
+		routePointTextLayout.setVisibility(View.GONE);
+		menuOpened = false;
 	}
 
 	public TrackActivity getTrackActivity() {
@@ -168,6 +236,11 @@ public class TrackPointFragment extends OsmandExpandableListFragment {
 		if (!adapter.isEmpty() && listView.getHeaderViewsCount() == 0) {
 			listView.addHeaderView(getActivity().getLayoutInflater().inflate(R.layout.list_shadow_header, null, false));
 			listView.addFooterView(getActivity().getLayoutInflater().inflate(R.layout.list_shadow_footer, null, false));
+			View view = new View(getActivity());
+			view.setLayoutParams(new AbsListView.LayoutParams(
+					AbsListView.LayoutParams.MATCH_PARENT,
+					AndroidUtils.dpToPx(getActivity(), 72)));
+			listView.addFooterView(view);
 		}
 	}
 
@@ -270,6 +343,7 @@ public class TrackPointFragment extends OsmandExpandableListFragment {
 	@Override
 	public void onCreateOptionsMenu(Menu menu, MenuInflater inflater) {
 		menu.clear();
+		getTrackActivity().getClearToolbar(false);
 		MenuItem mi = createMenuItem(menu, SEARCH_ID, R.string.search_poi_filter, R.drawable.ic_action_search_dark,
 				R.drawable.ic_action_search_dark, MenuItemCompat.SHOW_AS_ACTION_ALWAYS | MenuItemCompat.SHOW_AS_ACTION_COLLAPSE_ACTION_VIEW);
 		searchView = new SearchView(getActivity());

@@ -2171,8 +2171,8 @@ Representerer området: %1$s x %2$s</string>
     <string name="select_city">Velg by</string>
     <string name="select_postcode">Velg postnummer</string>
     <string name="quick_action_auto_zoom">Auto-zoom på/av</string>
-    <string name="quick_action_auto_zoom_on">Auto-zoom på</string>
-    <string name="quick_action_auto_zoom_off">Auto-zoom av</string>
+    <string name="quick_action_auto_zoom_on">Aktiver auto-zoom</string>
+    <string name="quick_action_auto_zoom_off">Deaktiver auto-zoom</string>
     <string name="quick_action_add_destination">Legg til reisemål</string>
     <string name="quick_action_replace_destination">Erstatt reisemål</string>
     <string name="quick_action_add_first_intermediate">Legg til første mellomliggende punkt</string>
@@ -2282,4 +2282,18 @@ Representerer området: %1$s x %2$s</string>
     <string name="mapillary_menu_edit_text_hint">Skriv inn brukernavn</string>
     <string name="mapillary_menu_title_username">Brukernavn</string>
     <string name="shared_string_reset">Tilbakestill</string>
-    </resources>
+    <string name="show_on_map_after_saving">Vis på kart etter lagring</string>
+    <string name="measurement_tool_action_bar">Se gjennom kart og legg til punkter på en linje</string>
+    <string name="measurement_tool">Mål avstand</string>
+    <string name="quick_action_show_navigation_finish_dialog">Vis dialog ved navigeringsslutt</string>
+    <string name="quick_action_start_stop_navigation">Start/Avslutt navigering</string>
+    <string name="map_widget_ruler_control">Radiusmåler</string>
+    <string name="quick_action_btn_tutorial_title">Endre knappeplassering</string>
+    <string name="retry">Prøv igjen</string>
+    <string name="add_route_point">Legg til rutepunkt</string>
+    <string name="add_waypoint">Legg til rutepunkt</string>
+    <string name="save_gpx_waypoint">Lagre GPX-rutepunkt</string>
+    <string name="save_route_point">Lagre rutepunkt</string>
+    <string name="waypoint_one">Rutepunkt 1</string>
+    <string name="route_point_one">Rutepunkt 1</string>
+</resources>

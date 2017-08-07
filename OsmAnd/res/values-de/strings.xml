@@ -1297,7 +1297,7 @@ Proportionaler Speicher %4$s MB (Android Limit %5$s MB, Dalvik %6$s MB).</string
 	<string name="keep_and_add_destination_point">Als letztes Ziel hinzufügen</string>
 	<string name="select_gpx">GPX-Datei auswählen…</string>
 	<string name="route_descr_select_destination">Ziel wählen</string>
-	<string name="interrupt_music_descr">Musik für Sprachhinweise pausieren (nicht nur leiser spielen)</string>
+	<string name="interrupt_music_descr">Sprachansagen pausieren (nicht nur dämpfen) Musikwiedergabe</string>
 	<string name="always_center_position_on_map">Standort immer in Bildschirmmitte anzeigen</string>
 	<string name="voice_pref_title">Stimme</string>
 	<string name="misc_pref_title">Verschiedenes</string>
@@ -2454,7 +2454,7 @@ Wenn Sie OsmAnd und OSM lieben und unterstützen wollen, so ist dies die perfekt
 \n 
 \nund vieles mehr …</string>
     <string name="trip_rec_notification_settings">Streckenaufzeichnung (keine Daten)</string>
-    <string name="trip_rec_notification_settings_desc">Benachrichtigung einblenden, in der die Streckenaufzeichnung durch Betätigen der Taste \'Aufzeichnen\' gestartet werden kann.</string>
+    <string name="trip_rec_notification_settings_desc">Anzeige einer Systembenachrichtigung mit der die Streckenaufzeichnung gestartet werden kann.</string>
     <string name="shared_string_notifications">Benachrichtigungen</string>
     <string name="osmo_service_running">OsMo-Dienst wird ausgeführt</string>
     <string name="osmo_pause_location">Pause</string>
@@ -2546,7 +2546,7 @@ Wenn Sie OsmAnd und OSM lieben und unterstützen wollen, so ist dies die perfekt
     <string name="quick_action_add_gpx_descr">Drücken der Aktionstaste fügt einen GPX-Wegpunkt am Bildschirmmittelpunkt ein.</string>
     <string name="quick_action_add_osm_bug_descr">Drücken der Aktionstaste fügt eine OSM-Notiz am Bildschirmmittelpunkt ein.</string>
     <string name="quick_action_add_poi_descr">Drücken der Aktionstaste fügt einen POI am Bildschirmmittelpunkt ein.</string>
-    <string name="quick_action_navigation_voice_descr">Drücken der Aktionstaste deaktiviert oder aktiviert die Sprachhinweise bei der Navigation.</string>
+    <string name="quick_action_navigation_voice_descr">Drücken der Aktionstaste deaktiviert oder aktiviert die Sprachansagen bei der Navigation.</string>
     <string name="quick_action_add_parking_descr">Drücken der Aktionstaste fügt eine Parkposition am Bildschirmmittelpunkt ein.</string>
     <string name="quick_action_interim_dialog">Dialog zum Bearbeiten zeigen</string>
     <string name="favorite_autofill_toast_text">" wird gespeichert unter "</string>
@@ -2771,9 +2771,9 @@ Abgedeckte Fläche: %1$s x %2$s</string>
     <string name="moving_time">Zeit in Bewegung</string>
     <string name="mapillary_menu_filter_description">Sie können Bilder nach Übermittler oder Datum filtern. Filter gelten nur für nahe Zoomstufen.</string>
     <string name="min_max">min/max</string>
-    <string name="quick_action_resume_pause_navigation_descr">Drücken Sie diese Taste, um die Navigation zu pausieren oder fortzusetzen, wenn sie bereits pausiert ist.</string>
+    <string name="quick_action_resume_pause_navigation_descr">Drücken Sie diese Taste, um die Navigation zu pausieren oder fortzusetzen.</string>
     <string name="quick_action_show_navigation_finish_dialog">Dialog bei Navigationsende anzeigen</string>
-    <string name="quick_action_start_stop_navigation_descr">Taste drücken, um Navigation zu starten oder zu beenden, wenn sie bereits gestartet ist.</string>
+    <string name="quick_action_start_stop_navigation_descr">Taste drücken, um Navigation zu starten oder zu beenden.</string>
     <string name="quick_action_start_stop_navigation">Navigation starten/beenden</string>
     <string name="quick_action_resume_pause_navigation">Navigation fortsetzen/pausieren</string>
     <string name="release_2_7">\\022 Mapillary-Erweiterung mit Vor-Ort-Bildern
@@ -2789,4 +2789,11 @@ Abgedeckte Fläche: %1$s x %2$s</string>
     <string name="live_monitoring_max_interval_to_send">Zeitpuffer für Track-Liveübertragung</string>
     <string name="live_monitoring_max_interval_to_send_desrc">Zeitpuffer festlegen, in dem zu sendende Positionen erhalten bleiben sollen, wenn keine Verbindung besteht</string>
     <string name="measurement_tool">Messwerkzeug</string>
-    </resources>
+    <string name="measurement_tool_action_bar">Wählen Sie einen Standort auf der Karte, und klicken Sie auf Hinzufügen, um einen Punkt auf das Lineal hinzuzufügen.</string>
+    <string name="mappilary_no_internet_desc">Sie benötigen Internet, um Fotos von Mapillary ansehen zu können</string>
+    <string name="retry">Wiederholen</string>
+    <string name="add_gpx_waypoint_bottom_sheet_title">GPX-Wegpunkt hinzufügen</string>
+    <string name="shared_string_create">Erstellen</string>
+	<string name="none_point_error">Bitte mindestens einen Punkt hinzufügen.</string>
+	<string name="enter_gpx_name">GPX Dateiname:</string>
+</resources>

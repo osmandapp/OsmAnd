@@ -2703,8 +2703,8 @@ Zodpovedá oblasti: %1$s x %2$s</string>
     <string name="shared_string_visible">Viditeľné</string>
     <string name="quick_action_auto_zoom">Automatické priblíženie mapy zap/vyp</string>
     <string name="quick_action_auto_zoom_desc">Aktivovaním tlačidla akcie sa zapne/vypne automatické priblíženie mapy podľa vašej rýchlosti.</string>
-    <string name="quick_action_auto_zoom_on">Automatické priblíženie mapy zapnuté</string>
-    <string name="quick_action_auto_zoom_off">Automatické priblíženie mapy vypnuté</string>
+    <string name="quick_action_auto_zoom_on">Zapnúť automatické priblíženie mapy</string>
+    <string name="quick_action_auto_zoom_off">Vypnúť automatické priblíženie mapy</string>
     <string name="quick_action_add_destination">Pridať cieľ</string>
     <string name="quick_action_replace_destination">Nahradiť cieľ</string>
     <string name="quick_action_add_first_intermediate">Pridať prvý prechodný bod</string>
@@ -2817,8 +2817,17 @@ Zodpovedá oblasti: %1$s x %2$s</string>
     <string name="live_monitoring_max_interval_to_send_desrc">Zadajte čas pokiaľ budú udržované pozície na odoslanie kým nie je pripojenie</string>
     <string name="mappilary_no_internet_desc">Na zobrazovanie fotografií z Mapillary potrebujete pripojenie na Internet</string>
     <string name="retry">Skúsiť znova</string>
-<string name="measurement_tool_action_bar">Zvoľte miesto na mape a kliknite Pridať pre pridanie bodu pre pravítko.</string>
-    <string name="measurement_tool">Nástroj na meranie</string>
+<string name="measurement_tool_action_bar">Prezerať mapu a pridať body do čiary</string>
+    <string name="measurement_tool">Merať vzdialenosť</string>
     <string name="add_gpx_waypoint_bottom_sheet_title">Pridať prechodný bod GPX</string>
     <string name="shared_string_create">Vytvoriť</string>
+<string name="none_point_error">Musíte pridať aspoň jeden bod.</string>
+    <string name="enter_gpx_name">Zadajte názov pre GPX</string>
+    <string name="show_on_map_after_saving">Po uložení zobraziť na mape</string>
+    <string name="add_route_point">Pridať bod trasy</string>
+    <string name="add_waypoint">Pridať prechodný bod</string>
+    <string name="save_gpx_waypoint">Uložiť prechodný bod GPX</string>
+    <string name="save_route_point">Uložiť bod trasy</string>
+    <string name="waypoint_one">Prechodný bod 1</string>
+    <string name="route_point_one">Bod trasy 1</string>
 </resources>
