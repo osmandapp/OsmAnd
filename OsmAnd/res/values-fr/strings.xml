@@ -2869,4 +2869,5 @@ Fonctionnalités principales :
 \n
 \n</string>
     <string name="show_on_map_after_saving">Afficher sur la carte après enregistrement.</string>
-    </resources>
+    <string name="route_point_one">Premier point du trajet</string>
+</resources>
