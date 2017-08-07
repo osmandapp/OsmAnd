@@ -25,9 +25,11 @@
         android:layout_alignParentEnd="true"
         android:layout_alignParentRight="true"
         android:layout_centerVertical="true"
-        android:layout_marginEnd="16dp"
-        android:layout_marginStart="16dp"
         android:background="@null"
+        android:paddingBottom="12dp"
+        android:paddingEnd="16dp"
+        android:paddingStart="16dp"
+        android:paddingTop="12dp"
         tools:src="@drawable/ic_action_remove_dark"/>
 
     <LinearLayout
@@ -58,6 +60,7 @@
     </LinearLayout>
 
     <View
+        android:id="@+id/points_divider"
         android:layout_width="wrap_content"
         android:layout_height="1dp"
         android:layout_alignParentBottom="true"

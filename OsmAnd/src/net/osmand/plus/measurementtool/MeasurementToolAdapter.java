@@ -35,6 +35,10 @@ class MeasurementToolAdapter extends RecyclerView.Adapter<MeasurementToolAdapter
 	@Override
 	public Holder onCreateViewHolder(ViewGroup viewGroup, int i) {
 		View view = LayoutInflater.from(viewGroup.getContext()).inflate(R.layout.measure_points_list_item, viewGroup, false);
+		final boolean nightMode = mapActivity.getMyApplication().getDaynightHelper().isNightModeForMapControls();
+		if (!nightMode) {
+			view.findViewById(R.id.points_divider).setBackgroundResource(R.drawable.divider);
+		}
 		return new Holder(view);
 	}
 
