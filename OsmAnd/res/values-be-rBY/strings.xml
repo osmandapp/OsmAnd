@@ -2299,7 +2299,7 @@ U vypadku, kali vy lubіcie OsmAnd і OSM і chočacie padtrymać jaho, heta іd
     <string name="get_for">Atrymać za %1$s</string>
     <string name="get_for_month">Atrymać za %1$s u miesiac</string>
     <string name="osm_live_banner_desc">Atrymajecie nieabmiežavanyja zahruzki mapaŭ i abnaŭlieńni boĺš za adzin raz na miesiac: štotydzień, štodzień ci štohadzinu.</string>
-    <string name="osmand_plus_banner_desc">Poŭnaja versіja OsmAnd ź nieabmiežavanaj zahruzkaj mapaŭ і štomiesiačnych abnaŭleńniaŭ mapy.</string>
+    <string name="osmand_plus_banner_desc">Nieabmiežavanaja zahruzka mapaŭ, abnaŭlienniaŭ i Wikipedia-dadatka.</string>
     <string name="si_mi_meters">Mіli/metry</string>
     <string name="skip_map_downloading">Prapuścіć ściahvańnie mapaŭ</string>
     <string name="skip_map_downloading_desc">U vas niama zahružanych mapaŭ. Vy možacie vybrać mapu sa śpіsu abo ściahnuć jaje paźniej praz meniu - %1$s.</string>
