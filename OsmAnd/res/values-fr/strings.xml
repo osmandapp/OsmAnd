@@ -848,7 +848,7 @@ Mémoire proportionnelle %4$s Mo (limite Android %5$s Mo, Dalvik %6$s Mo).</stri
     <string name="show_traffic_warnings">Informations de circulation</string>
     <string name="avoid_toll_roads">Éviter les routes à péage</string>
 
-    <string name="screen_is_locked">Déverrouiller l\'écran en appuyant sur le cadenas</string>
+    <string name="screen_is_locked">Pour déverrouiller l\'écran, appuyez sur l\'icône cadenas</string>
     <string name="map_widget_top_text">Nom de rue</string>
     <string name="map_widget_config">Configuration</string>
 
@@ -1359,7 +1359,7 @@ Les données globales (entre 70 degrés Nord et 70 degrés Sud) sont basées sur
     <string name="osmo_mode_restart">Redémarrer la session OsMo</string>
     <string name="osmo_settings_debug">Informations de débogage</string>
     <string name="osmo_tracker_id">Identifiant de suivi</string>
-	<string name="osmo_tracker_id_descr">Cliquer pour afficher l\'identifiant de suivi</string>
+	<string name="osmo_tracker_id_descr">Cliquez pour afficher l\'identifiant de suivi</string>
     <string name="osmo_session_token">Jeton de session : %1$s</string>
     <string name="osmo_auth_pending">En attente d\'autorisation…</string>
     <string name="osmo_locations_sent">Positions envoyées : %1$d (en attente : %2$d)</string>
@@ -1612,7 +1612,7 @@ Les traces ainsi enregistrées peuvent être partagées avec vos amis ou utilis�
     <string name="traffic_warning_calming">Ralentisseur</string>
     <string name="traffic_warning_speed_camera">Radar de vitesse</string>
     <string name="traffic_warning">Alerte de circulation</string>
-    <string name="local_index_description">Cliquez sur n\'importe quel élément pour voir plus de détails, maintenez appuyé pour désactiver ou supprimer. Données actuellement sur l\'appareil (%1$s libre) :</string>
+    <string name="local_index_description">Cliquez sur un élément pour voir plus de détails, maintenez appuyé pour désactiver ou supprimer. Données actuellement sur l\'appareil (%1$s libre) :</string>
     <string name="text_size">Taille du texte</string>
     <string name="fav_point_dublicate">Ce nom est déjà utilisé pour un favori.</string>
     <string name="fav_point_dublicate_message">Nous avons modifié le nom de votre favori en %1$s pour éviter un doublon.</string>
@@ -2464,7 +2464,7 @@ Si vous appréciez OsmAnd et OSM et que vous souhaitez soutenir ces projets, c\'
 \n et bien plus…</string>
     <string name="shared_string_notifications">Notifications</string>
     <string name="trip_rec_notification_settings">Enregistrement de l\'itinéraire (aucune donnée)</string>
-    <string name="trip_rec_notification_settings_desc">Afficher une notification contenant un bouton pour débuter l’Enregistrement de l\'itinéraire</string>
+    <string name="trip_rec_notification_settings_desc">Afficher une notification permettant de débuter l’Enregistrement de l\'itinéraire</string>
     <string name="osmo_share_location">Partager</string>
     <string name="osmo_service_running">Le service OsMo est actif</string>
     <string name="osmo_pause_location">Mettre en pause</string>
@@ -2855,8 +2855,8 @@ Fonctionnalités principales :
     <string name="quick_action_start_stop_navigation_descr">Appuyez sur ce bouton pour démarrer la navigation ou l\'arrêter lorsqu\'elle est en cours.</string>
     <string name="mappilary_no_internet_desc">Vous devez être connecté à Internet pour afficher les photos Mapillary</string>
     <string name="retry">Essayer à nouveau</string>
-<string name="measurement_tool_action_bar">Sélectionnez un emplacement sur la carte et cliquez sur Ajouter pour l\'ajouter sur la règle.</string>
-    <string name="measurement_tool">Outil de mesure</string>
+<string name="measurement_tool_action_bar">Parcourez la carte et ajoutez des points</string>
+    <string name="measurement_tool">Mesurer de distance</string>
     <string name="shared_string_create">Créer</string>
 <string name="add_gpx_waypoint_bottom_sheet_title">Ajouter un point GPX</string>
     <string name="release_2_7">\\022 Greffon Mapillary avec les images de rue
@@ -2868,6 +2868,13 @@ Fonctionnalités principales :
 \n• D\'autres améliorations et corrections de bug
 \n
 \n</string>
-    <string name="show_on_map_after_saving">Afficher sur la carte après enregistrement.</string>
-    <string name="route_point_one">Premier point du trajet</string>
-</resources>
+    <string name="show_on_map_after_saving">Afficher sur la carte après enregistrement</string>
+    <string name="route_point_one">Point 1 de l\'itinéraire</string>
+<string name="none_point_error">Merci d\'ajouter au moins un point.</string>
+    <string name="enter_gpx_name">Nom du fichier GPX :</string>
+    <string name="waypoint_one">Étape 1</string>
+    <string name="save_route_point">Enregistrer comme point d\'itinéraire</string>
+    <string name="add_route_point">Ajouter un point à l\'itinéraire</string>
+    <string name="add_waypoint">Ajouter une étape</string>
+    <string name="save_gpx_waypoint">Enregistrer le point GPX</string>
+    </resources>
