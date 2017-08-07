@@ -302,7 +302,7 @@ Einige der Kernfunktionen:
 	<string name="poi_context_menu_showdescription">Zeige POI-Beschreibung</string>
 	<string name="index_name_north_america">Nordamerika</string>
 	<string name="index_name_us">Nordamerika - USA</string>
-	<string name="index_name_central_america">Zentralamerika</string>
+	<string name="index_name_central_america">Mittelamerika</string>
 	<string name="index_name_south_america">Südamerika</string>
 	<string name="index_name_europe">Europa</string>
 	<string name="index_name_france">Europa - Frankreich</string>
@@ -421,7 +421,9 @@ Einige der Kernfunktionen:
 	<string name="shared_string_no_thanks">Nicht verwendet</string>
 	<string name="basemap_missing">Die Offline-Weltkarte für kleine Vergrößerungen fehlt. Bitte das herunterladen der \'Übersichtskarte der Welt\' in Erwägung ziehen.</string>
 	<string name="vector_data_missing">An Bord (\"Offline\") sind keine Daten auf der SD-Karte vorhanden. Bitte ggf. herunterladen, damit Karten offline verwendet werden können.</string>
-	<string name="local_index_gpx_info_show">"\n\nLang klicken für Optionen"</string>
+	<string name="local_index_gpx_info_show">"
+\n
+\nLang tippen für Optionen"</string>
 
 	<string name="local_index_installed">Lokale Version</string>
 	<string name="local_index_items_backuped">%1$d von %2$d Datei(en) erfolgreich deaktiviert.</string>
@@ -1178,9 +1180,9 @@ Proportionaler Speicher %4$s MB (Android Limit %5$s MB, Dalvik %6$s MB).</string
 	<string name="search_street_in_neighborhood_cities">Straßennamen in benachbarten Orten suchen</string>
 	<string name="intermediate_items_sort_by_distance">Tür-zu-Tür sortieren</string>
 	<string name="use_distance_measurement_help">* Tippen, um einen Punkt zu setzen.
-* Lange auf die Karte tippen, um einen vorigen Punkt zu löschen.
-* Lange auf einen Punkt tippen, um eine Beschreibung zu lesen oder hinzuzufügen.
-* Mehr Aktionen durch Tippen auf das Entfernungsmesser-Widget.</string>
+\n * Lange auf die Karte tippen, um einen vorigen Punkt zu löschen.
+\n * Lange auf einen Punkt tippen, um eine Beschreibung zu lesen oder hinzuzufügen.
+\n * Mehr Aktionen durch Tippen auf das Entfernungsmesser-Widget.</string>
 	<string name="distance_measurement_start_editing">Messung beginnen</string>
 	<string name="distance_measurement_finish_editing">Messung beenden</string>
 	<string name="distance_measurement_finish_subtrack">Weitere Messung anlegen</string>
@@ -1321,9 +1323,9 @@ Proportionaler Speicher %4$s MB (Android Limit %5$s MB, Dalvik %6$s MB).</string
 	<string name="shared_string_my_places">Meine Orte</string>
 	<string name="loading_smth">%1$s wird geladen …</string>
 	<string name="map_widget_plain_time">Aktuelle Zeit</string>
-	<string name="selected_gpx_info_show">
-
-Zur Darstellung auf der Karte lange drücken</string>
+	<string name="selected_gpx_info_show">"
+\n
+\nZur Darstellung auf der Karte lange drücken"</string>
 	<string name="delay_navigation_start">Navigation automatisch starten</string>
 	<string name="save_as_favorites_points">als Favoritengruppe speichern</string>
 	<string name="select_destination_and_intermediate_points">Ziele auswählen</string>
@@ -2454,7 +2456,7 @@ Wenn Sie OsmAnd und OSM lieben und unterstützen wollen, so ist dies die perfekt
 \n 
 \nund vieles mehr …</string>
     <string name="trip_rec_notification_settings">Streckenaufzeichnung (keine Daten)</string>
-    <string name="trip_rec_notification_settings_desc">Anzeige einer Systembenachrichtigung mit der die Streckenaufzeichnung gestartet werden kann.</string>
+    <string name="trip_rec_notification_settings_desc">Anzeige einer Systembenachrichtigung mit der die Streckenaufzeichnung gestartet werden kann</string>
     <string name="shared_string_notifications">Benachrichtigungen</string>
     <string name="osmo_service_running">OsMo-Dienst wird ausgeführt</string>
     <string name="osmo_pause_location">Pause</string>
@@ -2797,4 +2799,10 @@ Abgedeckte Fläche: %1$s x %2$s</string>
 	<string name="none_point_error">Bitte mindestens einen Punkt hinzufügen.</string>
 	<string name="enter_gpx_name">GPX Dateiname:</string>
 <string name="show_on_map_after_saving">Nach dem Speichern auf der Karte anzeigen</string>
-    </resources>
+    <string name="add_route_point">Routenpunkt hinzufügen</string>
+    <string name="add_waypoint">Wegpunkt hinzufügen</string>
+    <string name="save_gpx_waypoint">GPX Wegpunkt speichern</string>
+    <string name="save_route_point">Routenpunkt speichern</string>
+    <string name="waypoint_one">Wegpunkt 1</string>
+    <string name="route_point_one">Routenpunkt 1</string>
+</resources>
