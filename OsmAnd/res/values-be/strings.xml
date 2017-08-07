@@ -2809,21 +2809,21 @@
 \n • Іншыя паляпшэнні і выпраўленні хібаў
 \n
 \n</string>
-    <string name="measurement_tool_action_bar">Праглядзець мапу і дадаць кропкі да лініі</string>
+    <string name="measurement_tool_action_bar">Прагляд мапы і даданне кропак</string>
     <string name="measurement_tool">Вымяраць адлегласць</string>
     <string name="quick_action_resume_pause_navigation">Аднавіць/прыпыніць навігацыю</string>
-    <string name="quick_action_resume_pause_navigation_descr">Націсніце гэтую кропку, каб прыпыніць навігацыю ці аднавіць яе, калі яна ўжо была прыпынена.</string>
+    <string name="quick_action_resume_pause_navigation_descr">Націсніце гэтую кнопку, каб прыпыніць ці аднавіць навігацыю.</string>
     <string name="quick_action_show_navigation_finish_dialog">Паказаць дыялог завяршэння навігацыі</string>
     <string name="quick_action_start_stop_navigation">Пачаць/спыніць навігацыю</string>
-    <string name="quick_action_start_stop_navigation_descr">Націсніце гэтую кнопку, каб пачаць навігацыю ці спыніць яе, калі яна ўжо пачалася.</string>
+    <string name="quick_action_start_stop_navigation_descr">Націсніце гэтую кнопку, каб пачаць або скончыць навігацыю.</string>
     <string name="live_monitoring_max_interval_to_send">Час буферызацыі для анлайн сачэння</string>
     <string name="live_monitoring_max_interval_to_send_desrc">Задае час буферызацыі для зберажэння месцаў для адпраўкі без злучэння</string>
     <string name="mappilary_no_internet_desc">Вам патрэбен Інтэрнэт для прагляду фатаграфій з Mapillary</string>
     <string name="retry">Паўтарыць</string>
     <string name="add_gpx_waypoint_bottom_sheet_title">Дадаць GPX-кропку</string>
     <string name="shared_string_create">Стварыць</string>
-<string name="none_point_error">Вы павінны дадаць па меншай меры адну кропку.</string>
-    <string name="enter_gpx_name">Увядзіце назву для GPX</string>
+<string name="none_point_error">Калі ласка, дадайце па меншай меры адну кропку.</string>
+    <string name="enter_gpx_name">Імя файла GPX:</string>
     <string name="show_on_map_after_saving">Паказаць мапу пасля захавання</string>
     <string name="add_route_point">Дадаць кропку маршруту</string>
     <string name="add_waypoint">Дадаць кропку шляху</string>
