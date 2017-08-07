@@ -2404,7 +2404,7 @@
     <string name="get_for_month">Атрымаць за %1$s у месяц</string>
     <string name="get_it">Атрымаць</string>
     <string name="osm_live_banner_desc">Атрымаеце неабмежаваныя загрузкі мапаў і абнаўленьні больш за адзін раз на месяц: штотыдзень, штодзень ці штогадзіну.</string>
-    <string name="osmand_plus_banner_desc">Поўная вэрсія OsmAnd зь неабмежаванай загрузкай мапаў і штомесячных абнаўленьняў мапы.</string>
+    <string name="osmand_plus_banner_desc">Неабмежаваная загрузка мапаў, абнаўленняў і Wikipedia-дадатка.</string>
     <string name="si_mi_meters">Мілі/метры</string>
     <string name="osm_live_payment_desc">Абаненцкая плата спаганяецца штомесяц. Вы зможаце адмяніць падпіску на Google Play у любы момант.</string>
     <string name="donation_to_osm">Ахвяраванне OpenStreetMap супольнасці</string>
