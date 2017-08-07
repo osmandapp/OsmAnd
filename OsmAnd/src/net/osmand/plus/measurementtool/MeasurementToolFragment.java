@@ -10,8 +10,6 @@ import android.support.v4.app.Fragment;
 import android.support.v4.app.FragmentManager;
 import android.support.v4.content.ContextCompat;
 import android.support.v7.app.AlertDialog;
-import android.support.v7.widget.LinearLayoutManager;
-import android.support.v7.widget.RecyclerView;
 import android.support.v7.widget.SwitchCompat;
 import android.text.Editable;
 import android.text.TextWatcher;
@@ -24,6 +22,7 @@ import android.view.ViewGroup;
 import android.widget.EditText;
 import android.widget.ImageButton;
 import android.widget.ImageView;
+import android.widget.ListView;
 import android.widget.TextView;
 import android.widget.Toast;
 
@@ -197,8 +196,8 @@ public class MeasurementToolFragment extends Fragment {
 			mapActivity.showTopToolbar(toolBarController);
 		}
 
-		adapter = new MeasurementToolAdapter(getMapActivity(), measurementLayer.getMeasurementPoints());
-		adapter.setListener(new MeasurementToolAdapter.RemovePointListener() {
+		adapter = new MeasurementToolAdapter(getMapActivity(), R.layout.measure_points_list_item, measurementLayer.getMeasurementPoints());
+		adapter.setRemovePointListener(new MeasurementToolAdapter.RemovePointListener() {
 			@Override
 			public void onPointRemove() {
 				adapter.notifyDataSetChanged();
@@ -212,9 +211,9 @@ public class MeasurementToolFragment extends Fragment {
 				}
 			}
 		});
-		RecyclerView rv = mainView.findViewById(R.id.measure_points_recycler_view);
-		rv.setLayoutManager(new LinearLayoutManager(getContext()));
-		rv.setAdapter(adapter);
+		ListView lv = mainView.findViewById(R.id.measure_points_list_view);
+		lv.setDivider(null);
+		lv.setAdapter(adapter);
 
 		return view;
 	}
@@ -364,7 +363,7 @@ public class MeasurementToolFragment extends Fragment {
 	public void onDestroyView() {
 		super.onDestroyView();
 		exitMeasurementMode();
-		adapter.setListener(null);
+		adapter.setRemovePointListener(null);
 	}
 
 	private MapActivity getMapActivity() {

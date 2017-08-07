@@ -1,9 +1,13 @@
 package net.osmand.plus.measurementtool;
 
-import android.support.v7.widget.RecyclerView;
+import android.content.Context;
+import android.support.annotation.LayoutRes;
+import android.support.annotation.NonNull;
+import android.support.annotation.Nullable;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.ArrayAdapter;
 import android.widget.ImageButton;
 import android.widget.ImageView;
 import android.widget.TextView;
@@ -17,33 +21,39 @@ import net.osmand.util.MapUtils;
 
 import java.util.List;
 
-class MeasurementToolAdapter extends RecyclerView.Adapter<MeasurementToolAdapter.Holder> {
+class MeasurementToolAdapter extends ArrayAdapter<WptPt> {
 
 	private MapActivity mapActivity;
 	private List<WptPt> points;
 	private RemovePointListener listener;
 
-	MeasurementToolAdapter(MapActivity mapActivity, List<WptPt> points) {
-		this.mapActivity = mapActivity;
+	MeasurementToolAdapter(@NonNull Context context, @LayoutRes int resource, List<WptPt> points) {
+		super(context, resource, points);
+		this.mapActivity = (MapActivity) context;
 		this.points = points;
 	}
 
-	public void setListener(RemovePointListener listener) {
+	void setRemovePointListener(RemovePointListener listener) {
 		this.listener = listener;
 	}
 
+	@NonNull
 	@Override
-	public Holder onCreateViewHolder(ViewGroup viewGroup, int i) {
-		View view = LayoutInflater.from(viewGroup.getContext()).inflate(R.layout.measure_points_list_item, viewGroup, false);
-		final boolean nightMode = mapActivity.getMyApplication().getDaynightHelper().isNightModeForMapControls();
-		if (!nightMode) {
-			view.findViewById(R.id.points_divider).setBackgroundResource(R.drawable.divider);
-		}
-		return new Holder(view);
-	}
+	public View getView(final int pos, @Nullable View view, @NonNull ViewGroup parent) {
+		ViewHolder holder;
 
-	@Override
-	public void onBindViewHolder(final Holder holder, int pos) {
+		if (view == null) {
+			view = LayoutInflater.from(parent.getContext()).inflate(R.layout.measure_points_list_item, parent, false);
+			final boolean nightMode = mapActivity.getMyApplication().getDaynightHelper().isNightModeForMapControls();
+			if (!nightMode) {
+				view.findViewById(R.id.points_divider).setBackgroundResource(R.drawable.divider);
+			}
+			holder = new ViewHolder(view);
+			view.setTag(holder);
+		} else {
+			holder = (ViewHolder) view.getTag();
+		}
+
 		IconsCache iconsCache = mapActivity.getMyApplication().getIconsCache();
 		holder.icon.setImageDrawable(iconsCache.getThemedIcon(R.drawable.ic_action_measure_point));
 		holder.title.setText(mapActivity.getString(R.string.plugin_distance_point) + " - " + (pos + 1));
@@ -61,26 +71,22 @@ class MeasurementToolAdapter extends RecyclerView.Adapter<MeasurementToolAdapter
 		holder.deleteBtn.setOnClickListener(new View.OnClickListener() {
 			@Override
 			public void onClick(View view) {
-				points.remove(holder.getAdapterPosition());
+				points.remove(pos);
 				listener.onPointRemove();
 			}
 		});
+
+		return view;
 	}
 
-	@Override
-	public int getItemCount() {
-		return points.size();
-	}
-
-	static class Holder extends RecyclerView.ViewHolder {
+	private static class ViewHolder {
 
 		final ImageView icon;
 		final TextView title;
 		final TextView descr;
 		final ImageButton deleteBtn;
 
-		Holder(View view) {
-			super(view);
+		ViewHolder(View view) {
 			icon = (ImageView) view.findViewById(R.id.measure_point_icon);
 			title = (TextView) view.findViewById(R.id.measure_point_title);
 			descr = (TextView) view.findViewById(R.id.measure_point_descr);
