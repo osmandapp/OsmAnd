@@ -23,8 +23,8 @@ import java.util.List;
 
 class MeasurementToolAdapter extends ArrayAdapter<WptPt> {
 
-	private MapActivity mapActivity;
-	private List<WptPt> points;
+	private final MapActivity mapActivity;
+	private final List<WptPt> points;
 	private RemovePointListener listener;
 
 	MeasurementToolAdapter(@NonNull Context context, @LayoutRes int resource, List<WptPt> points) {

@@ -28,18 +28,18 @@ public class MeasurementToolLayer extends OsmandMapLayer implements ContextMenuL
 
 	private OsmandMapTileView view;
 	private boolean inMeasurementMode;
-	private LinkedList<WptPt> measurementPoints = new LinkedList<>();
+	private final LinkedList<WptPt> measurementPoints = new LinkedList<>();
 	private LinkedList<WptPt> cacheMeasurementPoints = new LinkedList<>();
 	private Bitmap centerIconDay;
 	private Bitmap centerIconNight;
 	private Bitmap pointIcon;
 	private Paint bitmapPaint;
-	private RenderingLineAttributes lineAttrs = new RenderingLineAttributes("measureDistanceLine");
-	private Path path = new Path();
+	private final RenderingLineAttributes lineAttrs = new RenderingLineAttributes("measureDistanceLine");
+	private final Path path = new Path();
 	private int marginX;
 	private int marginY;
-	private TIntArrayList tx = new TIntArrayList();
-	private TIntArrayList ty = new TIntArrayList();
+	private final TIntArrayList tx = new TIntArrayList();
+	private final TIntArrayList ty = new TIntArrayList();
 
 	@Override
 	public void initLayer(OsmandMapTileView view) {
