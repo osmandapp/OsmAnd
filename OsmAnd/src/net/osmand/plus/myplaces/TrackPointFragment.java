@@ -130,6 +130,32 @@ public class TrackPointFragment extends OsmandExpandableListFragment {
 						: R.color.ctx_menu_info_view_bg_dark));
 	}
 
+	private View.OnClickListener onFabClickListener = new View.OnClickListener() {
+		@Override
+		public void onClick(View view) {
+			switch (view.getId()) {
+				case R.id.menu_fab:
+					if (menuOpened) {
+						closeMenu();
+					} else {
+						openMenu();
+					}
+					break;
+				case R.id.waypoint_fab:
+					PointDescription pointWptDescription = new PointDescription(PointDescription.POINT_TYPE_WPT, getString(R.string.add_waypoint));
+					addPoint(pointWptDescription);
+					break;
+				case R.id.route_fab:
+					PointDescription pointRteDescription = new PointDescription(PointDescription.POINT_TYPE_RTE, getString(R.string.add_route_point));
+					addPoint(pointRteDescription);
+					break;
+				case R.id.line_fab:
+					addLine();
+					break;
+			}
+		}
+	};
+
 	@Override
 	public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
 		View view = inflater.inflate(R.layout.points_tree, container, false);
@@ -137,44 +163,18 @@ public class TrackPointFragment extends OsmandExpandableListFragment {
 		setHasOptionsMenu(true);
 
 		menuFab = (FloatingActionButton) view.findViewById(R.id.menu_fab);
-		menuFab.setOnClickListener(new View.OnClickListener() {
-			@Override
-			public void onClick(View view) {
-				if (menuOpened) {
-					closeMenu();
-				} else {
-					openMenu();
-				}
-			}
-		});
+		menuFab.setOnClickListener(onFabClickListener);
 
 		waypointFab = (FloatingActionButton) view.findViewById(R.id.waypoint_fab);
-		waypointFab.setOnClickListener(new View.OnClickListener() {
-			@Override
-			public void onClick(View view) {
-				PointDescription pointDescription = new PointDescription(PointDescription.POINT_TYPE_WPT, getString(R.string.add_waypoint));
-				addPoint(pointDescription);
-			}
-		});
+		waypointFab.setOnClickListener(onFabClickListener);
 		waypointTextLayout = view.findViewById(R.id.waypoint_text_layout);
 
 		routePointFab = (FloatingActionButton) view.findViewById(R.id.route_fab);
-		routePointFab.setOnClickListener(new View.OnClickListener() {
-			@Override
-			public void onClick(View view) {
-				PointDescription pointDescription = new PointDescription(PointDescription.POINT_TYPE_RTE, getString(R.string.add_route_point));
-				addPoint(pointDescription);
-			}
-		});
+		routePointFab.setOnClickListener(onFabClickListener);
 		routePointTextLayout = view.findViewById(R.id.route_text_layout);
 
 		lineFab = (FloatingActionButton) view.findViewById(R.id.line_fab);
-		lineFab.setOnClickListener(new View.OnClickListener() {
-			@Override
-			public void onClick(View view) {
-				addLine();
-			}
-		});
+		lineFab.setOnClickListener(onFabClickListener);
 		lineTextLayout = view.findViewById(R.id.line_text_layout);
 
 		TextView tv = new TextView(getActivity());
