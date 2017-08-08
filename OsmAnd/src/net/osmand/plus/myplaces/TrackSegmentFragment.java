@@ -17,6 +17,7 @@ import android.os.Handler;
 import android.support.annotation.ColorInt;
 import android.support.annotation.NonNull;
 import android.support.annotation.Nullable;
+import android.support.design.widget.FloatingActionButton;
 import android.support.v4.content.ContextCompat;
 import android.support.v4.view.MenuItemCompat;
 import android.support.v4.view.PagerAdapter;
@@ -140,6 +141,12 @@ public class TrackSegmentFragment extends OsmAndListFragment {
 	private Bitmap mapBitmap;
 	private Bitmap mapTrackBitmap;
 	private boolean chartClicked;
+	private boolean menuOpened = false;
+	private FloatingActionButton menuFab;
+	private FloatingActionButton waypointFab;
+	private View waypointTextLayout;
+	private FloatingActionButton routePointFab;
+	private View routePointTextLayout;
 
 	@Override
 	public void onCreate(@Nullable Bundle savedInstanceState) {
@@ -158,8 +165,7 @@ public class TrackSegmentFragment extends OsmAndListFragment {
 	@Override
 	public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
 		setHasOptionsMenu(true);
-		View view = getActivity().getLayoutInflater().inflate(R.layout.update_index, container, false);
-		view.findViewById(R.id.header_layout).setVisibility(View.GONE);
+		View view = getActivity().getLayoutInflater().inflate(R.layout.track_segments_tree, container, false);
 
 		ListView listView = (ListView) view.findViewById(android.R.id.list);
 		listView.setDivider(null);
@@ -169,6 +175,38 @@ public class TrackSegmentFragment extends OsmAndListFragment {
 		tv.setText(R.string.none_selected_gpx);
 		tv.setTextSize(24);
 		listView.setEmptyView(tv);
+
+		menuFab = (FloatingActionButton) view.findViewById(R.id.menu_fab);
+		menuFab.setOnClickListener(new View.OnClickListener() {
+			@Override
+			public void onClick(View view) {
+				if (menuOpened) {
+					closeMenu();
+				} else {
+					openMenu();
+				}
+			}
+		});
+
+		waypointFab = (FloatingActionButton) view.findViewById(R.id.waypoint_fab);
+		waypointFab.setOnClickListener(new View.OnClickListener() {
+			@Override
+			public void onClick(View view) {
+				PointDescription pointDescription = new PointDescription(PointDescription.POINT_TYPE_WPT, getString(R.string.add_waypoint));
+				addPoint(pointDescription);
+			}
+		});
+		waypointTextLayout = view.findViewById(R.id.waypoint_text_layout);
+
+		routePointFab = (FloatingActionButton) view.findViewById(R.id.route_fab);
+		routePointFab.setOnClickListener(new View.OnClickListener() {
+			@Override
+			public void onClick(View view) {
+				PointDescription pointDescription = new PointDescription(PointDescription.POINT_TYPE_RTE, getString(R.string.add_route_point));
+				addPoint(pointDescription);
+			}
+		});
+		routePointTextLayout = view.findViewById(R.id.route_text_layout);
 
 		paint = new Paint();
 		paint.setStyle(Paint.Style.STROKE);
@@ -186,6 +224,28 @@ public class TrackSegmentFragment extends OsmAndListFragment {
 		updateHeader();
 		setListAdapter(adapter);
 		return view;
+	}
+
+	private void addPoint(PointDescription pointDescription) {
+		getTrackActivity().addPoint(pointDescription);
+	}
+
+	private void openMenu() {
+		menuFab.setImageDrawable(ContextCompat.getDrawable(getContext(), R.drawable.ic_action_remove_dark));
+		waypointFab.setVisibility(View.VISIBLE);
+		waypointTextLayout.setVisibility(View.VISIBLE);
+		routePointFab.setVisibility(View.VISIBLE);
+		routePointTextLayout.setVisibility(View.VISIBLE);
+		menuOpened = true;
+	}
+
+	private void closeMenu() {
+		menuFab.setImageDrawable(ContextCompat.getDrawable(getContext(), R.drawable.ic_action_plus));
+		waypointFab.setVisibility(View.GONE);
+		waypointTextLayout.setVisibility(View.GONE);
+		routePointFab.setVisibility(View.GONE);
+		routePointTextLayout.setVisibility(View.GONE);
+		menuOpened = false;
 	}
 
 	public TrackActivity getTrackActivity() {

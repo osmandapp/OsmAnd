@@ -13,6 +13,8 @@ import android.view.MenuItem;
 import android.view.View;
 
 import net.osmand.AndroidUtils;
+import net.osmand.data.LatLon;
+import net.osmand.data.PointDescription;
 import net.osmand.plus.GPXDatabase.GpxDataItem;
 import net.osmand.plus.GPXUtilities;
 import net.osmand.plus.GPXUtilities.GPXFile;
@@ -21,11 +23,13 @@ import net.osmand.plus.GpxSelectionHelper.GpxDisplayGroup;
 import net.osmand.plus.GpxSelectionHelper.SelectedGpxFile;
 import net.osmand.plus.OsmAndAppCustomization;
 import net.osmand.plus.OsmandApplication;
+import net.osmand.plus.OsmandSettings;
 import net.osmand.plus.R;
 import net.osmand.plus.myplaces.FavoritesActivity;
 import net.osmand.plus.myplaces.SplitSegmentFragment;
 import net.osmand.plus.myplaces.TrackPointFragment;
 import net.osmand.plus.myplaces.TrackSegmentFragment;
+import net.osmand.plus.views.AddGpxPointBottomSheetHelper;
 import net.osmand.plus.views.controls.PagerSlidingTabStrip;
 
 import java.io.File;
@@ -39,6 +43,7 @@ public class TrackActivity extends TabActivity {
 	public static final String OPEN_POINTS_TAB = "OPEN_POINTS_TAB";
 	public static final String CURRENT_RECORDING = "CURRENT_RECORDING";
 	protected List<WeakReference<Fragment>> fragList = new ArrayList<>();
+	private OsmandApplication app;
 	protected PagerSlidingTabStrip slidingTabLayout;
 	private File file = null;
 	private GPXFile gpxFile;
@@ -56,7 +61,8 @@ public class TrackActivity extends TabActivity {
 
 	@Override
 	public void onCreate(Bundle icicle) {
-		((OsmandApplication) getApplication()).applyTheme(this);
+		this.app = getMyApplication();
+		app.applyTheme(this);
 		super.onCreate(icicle);
 		Intent intent = getIntent();
 		if (intent == null || (!intent.hasExtra(TRACK_FILE_NAME) &&
@@ -81,6 +87,25 @@ public class TrackActivity extends TabActivity {
 			openPointsTab = true;
 		}
 		setContentView(R.layout.tab_content);
+	}
+
+	public void addPoint(PointDescription pointDescription) {
+		Intent currentIntent = getIntent();
+		if (currentIntent != null) {
+			currentIntent.putExtra(TrackActivity.OPEN_POINTS_TAB, true);
+		}
+		final OsmandSettings settings = app.getSettings();
+		GPXFile gpx = getGpx();
+		LatLon location = settings.getLastKnownMapLocation();
+		if (gpx != null && location != null) {
+			settings.setMapLocationToShow(location.getLatitude(), location.getLongitude(),
+					settings.getLastKnownMapZoom(),
+					pointDescription,
+					false,
+					new AddGpxPointBottomSheetHelper.NewGpxPoint(gpx, pointDescription));
+
+			MapActivity.launchMapActivityMoveToTop(this);
+		}
 	}
 
 	protected void setGpxDataItem(GpxDataItem gpxDataItem) {

@@ -178,22 +178,7 @@ public class TrackPointFragment extends OsmandExpandableListFragment {
 	}
 
 	private void addPoint(PointDescription pointDescription) {
-		Intent currentIntent = getTrackActivity().getIntent();
-		if (currentIntent != null) {
-			currentIntent.putExtra(TrackActivity.OPEN_POINTS_TAB, true);
-		}
-		final OsmandSettings settings = app.getSettings();
-		GPXFile gpx = getGpx();
-		LatLon location = settings.getLastKnownMapLocation();
-		if (gpx != null && location != null) {
-			settings.setMapLocationToShow(location.getLatitude(), location.getLongitude(),
-					settings.getLastKnownMapZoom(),
-					pointDescription,
-					false,
-					new NewGpxPoint(gpx, pointDescription));
-
-			MapActivity.launchMapActivityMoveToTop(getActivity());
-		}
+		getTrackActivity().addPoint(pointDescription);
 	}
 
 	private void openMenu() {
