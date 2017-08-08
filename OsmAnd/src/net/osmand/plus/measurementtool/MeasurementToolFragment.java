@@ -38,6 +38,9 @@ import net.osmand.plus.R;
 import net.osmand.plus.activities.MapActivity;
 import net.osmand.plus.activities.TrackActivity.NewGpxLine;
 import net.osmand.plus.helpers.AndroidUiHelper;
+import net.osmand.plus.measurementtool.command.AddPointCommand;
+import net.osmand.plus.measurementtool.command.CommandManager;
+import net.osmand.plus.measurementtool.command.RemovePointCommand;
 import net.osmand.plus.views.OsmandMapTileView;
 import net.osmand.plus.views.mapwidgets.MapInfoWidgetsFactory;
 import net.osmand.plus.views.mapwidgets.MapInfoWidgetsFactory.TopToolbarController;
@@ -59,6 +62,7 @@ public class MeasurementToolFragment extends Fragment {
 
 	public static final String TAG = "MeasurementToolFragment";
 
+	private CommandManager commandManager = new CommandManager();
 	private MeasurementToolBarController toolBarController;
 	private MeasurementToolAdapter adapter;
 	private TextView distanceTv;
@@ -121,7 +125,8 @@ public class MeasurementToolFragment extends Fragment {
 		undoBtn.setOnClickListener(new View.OnClickListener() {
 			@Override
 			public void onClick(View view) {
-				if (measurementLayer.undoPointOnClick()) {
+				commandManager.undo();
+				if (commandManager.canUndo()) {
 					enable(undoBtn);
 				} else {
 					disable(undoBtn, upDownBtn);
@@ -130,7 +135,6 @@ public class MeasurementToolFragment extends Fragment {
 				adapter.notifyDataSetChanged();
 				enable(redoBtn);
 				updateText();
-				mapActivity.refreshMap();
 			}
 		});
 
@@ -138,7 +142,8 @@ public class MeasurementToolFragment extends Fragment {
 		redoBtn.setOnClickListener(new View.OnClickListener() {
 			@Override
 			public void onClick(View view) {
-				if (measurementLayer.redoPointOnClick()) {
+				commandManager.redo();
+				if (commandManager.canRedo()) {
 					enable(redoBtn);
 				} else {
 					disable(redoBtn);
@@ -146,7 +151,6 @@ public class MeasurementToolFragment extends Fragment {
 				adapter.notifyDataSetChanged();
 				enable(undoBtn, upDownBtn);
 				updateText();
-				mapActivity.refreshMap();
 			}
 		});
 
@@ -213,8 +217,10 @@ public class MeasurementToolFragment extends Fragment {
 									return true;
 								case R.id.action_clear_all:
 									measurementLayer.clearPoints();
+									downBtnOnClick(mainView, iconsCache.getThemedIcon(R.drawable.ic_action_arrow_up));
 									disable(undoBtn, redoBtn, upDownBtn);
 									updateText();
+									commandManager.clear();
 									return true;
 							}
 							return false;
@@ -230,15 +236,17 @@ public class MeasurementToolFragment extends Fragment {
 		final RecyclerView rv = mainView.findViewById(R.id.measure_points_recycler_view);
 		adapter.setRemovePointListener(new MeasurementToolAdapter.RemovePointListener() {
 			@Override
-			public void onPointRemove() {
+			public void onPointRemove(int position) {
+				commandManager.execute(new RemovePointCommand(measurementLayer, position));
 				adapter.notifyDataSetChanged();
-				measurementLayer.resetCachePoints();
 				disable(redoBtn);
 				updateText();
-				mapActivity.refreshMap();
 				if (measurementLayer.getPointsCount() < 1) {
 					downBtnOnClick(mainView, iconsCache.getThemedIcon(R.drawable.ic_action_arrow_up));
-					disable(upDownBtn, undoBtn);
+					disable(upDownBtn);
+					if (!commandManager.canUndo()) {
+						disable(undoBtn);
+					}
 				}
 			}
 		});
@@ -258,7 +266,7 @@ public class MeasurementToolFragment extends Fragment {
 	private void addPoint(View undoBtn, View upDownBtn, View redoBtn) {
 		MeasurementToolLayer measurementLayer = getMeasurementLayer();
 		if (measurementLayer != null) {
-			measurementLayer.addPointOnClick();
+			commandManager.execute(new AddPointCommand(measurementLayer));
 			enable(undoBtn, upDownBtn);
 			disable(redoBtn);
 			updateText();

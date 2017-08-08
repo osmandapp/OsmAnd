@@ -30,7 +30,6 @@ public class MeasurementToolLayer extends OsmandMapLayer implements ContextMenuL
 	private OsmandMapTileView view;
 	private boolean inMeasurementMode;
 	private final LinkedList<WptPt> measurementPoints = new LinkedList<>();
-	private LinkedList<WptPt> cacheMeasurementPoints = new LinkedList<>();
 	private Bitmap centerIconDay;
 	private Bitmap centerIconNight;
 	private Bitmap pointIcon;
@@ -60,7 +59,7 @@ public class MeasurementToolLayer extends OsmandMapLayer implements ContextMenuL
 		marginX = pointIcon.getWidth() / 2;
 	}
 
-	public void setOnSingleTapListener(OnSingleTapListener listener) {
+	void setOnSingleTapListener(OnSingleTapListener listener) {
 		this.singleTapListener = listener;
 	}
 
@@ -72,7 +71,7 @@ public class MeasurementToolLayer extends OsmandMapLayer implements ContextMenuL
 		this.inMeasurementMode = inMeasurementMode;
 	}
 
-	int getPointsCount() {
+	public int getPointsCount() {
 		return measurementPoints.size();
 	}
 
@@ -93,7 +92,6 @@ public class MeasurementToolLayer extends OsmandMapLayer implements ContextMenuL
 
 	void clearPoints() {
 		measurementPoints.clear();
-		cacheMeasurementPoints.clear();
 		view.refreshMap();
 	}
 
@@ -160,11 +158,12 @@ public class MeasurementToolLayer extends OsmandMapLayer implements ContextMenuL
 		canvas.rotate(tb.getRotate(), center.x, center.y);
 	}
 
-	void resetCachePoints() {
-		cacheMeasurementPoints = new LinkedList<>(measurementPoints);
+	public void addPoint(int position, WptPt point) {
+		measurementPoints.add(position, point);
+		view.refreshMap();
 	}
 
-	void addPointOnClick() {
+	public WptPt addPoint(int position) {
 		RotatedTileBox tb = view.getCurrentRotatedTileBox();
 		LatLon l = tb.getLatLonFromPixel(tb.getCenterPixelX(), tb.getCenterPixelY());
 		WptPt pt = new WptPt();
@@ -172,34 +171,34 @@ public class MeasurementToolLayer extends OsmandMapLayer implements ContextMenuL
 		pt.lon = l.getLongitude();
 		if (measurementPoints.size() > 0) {
 			if (!measurementPoints.get(measurementPoints.size() - 1).equals(pt)) {
-				measurementPoints.add(pt);
+				measurementPoints.add(position, pt);
+				view.refreshMap();
+				return pt;
 			}
 		} else {
-			measurementPoints.add(pt);
+			measurementPoints.add(position, pt);
+			view.refreshMap();
+			return pt;
 		}
-		resetCachePoints();
-		view.refreshMap();
+		return null;
 	}
 
-	boolean undoPointOnClick() {
-		measurementPoints.remove(measurementPoints.size() - 1);
+	public WptPt removePoint(int position) {
+		WptPt res = measurementPoints.remove(position);
+		view.refreshMap();
+		return res;
+	}
+
+	public void moveMapToPoint(int pos) {
 		if (measurementPoints.size() > 0) {
-			WptPt pt = measurementPoints.get(measurementPoints.size() - 1);
+			if (pos >= measurementPoints.size()) {
+				pos = measurementPoints.size() - 1;
+			} else if (pos < 0) {
+				pos = 0;
+			}
+			WptPt pt = measurementPoints.get(pos);
 			view.getAnimatedDraggingThread().startMoving(pt.getLatitude(), pt.getLongitude(), view.getZoom(), true);
 		}
-		return measurementPoints.size() > 0;
-	}
-
-	boolean redoPointOnClick() {
-		WptPt pt = cacheMeasurementPoints.get(measurementPoints.size());
-		measurementPoints.add(pt);
-		view.getAnimatedDraggingThread().startMoving(pt.getLatitude(), pt.getLongitude(), view.getZoom(), true);
-		return cacheMeasurementPoints.size() > measurementPoints.size();
-	}
-
-	void moveMapToPoint(int pos) {
-		WptPt pt = measurementPoints.get(pos);
-		view.getAnimatedDraggingThread().startMoving(pt.getLatitude(), pt.getLongitude(), view.getZoom(), true);
 	}
 
 	@Override
