@@ -3479,4 +3479,14 @@
 <string name="poi_generator_output_hot_water">熱水輸出電力</string>
 	<string name="poi_generator_output_compressed_air">壓縮空氣輸出電力</string>
 	<string name="poi_generator_output_biogas">沼氣輸出電力</string>
-	</resources>
+	<string name="poi_winter_room_yes">冬季房間：是的</string>
+	<string name="poi_winter_room_no">冬季房間：無</string>
+	<string name="poi_reservation_required">預訂：需要</string>
+	<string name="poi_reservation_recommended">預訂：建議</string>
+	<string name="poi_reservation_yes">預訂：是的</string>
+	<string name="poi_reservation_no">預訂：不用</string>
+	<string name="poi_reservation_members_only">預訂：僅會員</string>
+
+	<string name="poi_beds">床</string>
+
+</resources>

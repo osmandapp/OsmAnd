@@ -3470,4 +3470,14 @@
 	<string name="poi_direction_exit">Направление: выход</string>
 	<string name="poi_direction_all">Направление: во все стороны</string>
 
+	<string name="poi_winter_room_yes">Зимняя комната: есть</string>
+	<string name="poi_winter_room_no">Зимняя комната: нет</string>
+	<string name="poi_reservation_required">Бронирование: требуется</string>
+	<string name="poi_reservation_recommended">Бронирование: рекомендуется</string>
+	<string name="poi_reservation_yes">Бронирование: возможно</string>
+	<string name="poi_reservation_no">Бронирование: не предусмотрено</string>
+	<string name="poi_reservation_members_only">Бронирование: для узкого круга лиц</string>
+
+	<string name="poi_beds">Кровати</string>
+
 </resources>

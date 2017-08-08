@@ -3535,4 +3535,14 @@
 	<string name="poi_direction_exit">Retning: udgang</string>
 	<string name="poi_direction_all">Retning: alle</string>
 
+<string name="poi_winter_room_yes">Vinterværelse: ja</string>
+	<string name="poi_winter_room_no">Vinterværelse: nej</string>
+	<string name="poi_reservation_required">Reservation: påkrævet</string>
+	<string name="poi_reservation_recommended">Reservation: anbefalet</string>
+	<string name="poi_reservation_yes">Reservation: ja</string>
+	<string name="poi_reservation_no">Reservation: nej</string>
+	<string name="poi_reservation_members_only">Reservation: kun for medlemmer</string>
+
+	<string name="poi_beds">Senge</string>
+
 </resources>
