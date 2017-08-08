@@ -92,9 +92,10 @@ public class MeasurementToolFragment extends Fragment {
 		((ImageView) mainView.findViewById(R.id.ruler_icon))
 				.setImageDrawable(iconsCache.getIcon(R.drawable.ic_action_ruler, R.color.color_myloc_distance));
 
-		final ImageButton upDownBtn = ((ImageButton) mainView.findViewById(R.id.up_down_button));
+		final ImageView upDownBtn = ((ImageView) mainView.findViewById(R.id.up_down_button));
 		upDownBtn.setImageDrawable(iconsCache.getThemedIcon(R.drawable.ic_action_arrow_up));
-		upDownBtn.setOnClickListener(new View.OnClickListener() {
+
+		mainView.findViewById(R.id.up_down_row).setOnClickListener(new View.OnClickListener() {
 			@Override
 			public void onClick(View view) {
 				if (!pointsDetailsOpened) {
@@ -232,7 +233,7 @@ public class MeasurementToolFragment extends Fragment {
 	private void upBtnOnClick(View view, Drawable icon) {
 		pointsDetailsOpened = true;
 		view.findViewById(R.id.points_list_container).setVisibility(View.VISIBLE);
-		((ImageButton) view.findViewById(R.id.up_down_button)).setImageDrawable(icon);
+		((ImageView) view.findViewById(R.id.up_down_button)).setImageDrawable(icon);
 		MapActivity mapActivity = getMapActivity();
 		if (mapActivity != null) {
 			OsmandMapTileView tileView = mapActivity.getMapView();
@@ -245,7 +246,7 @@ public class MeasurementToolFragment extends Fragment {
 	private void downBtnOnClick(View view, Drawable icon) {
 		pointsDetailsOpened = false;
 		view.findViewById(R.id.points_list_container).setVisibility(View.GONE);
-		((ImageButton) view.findViewById(R.id.up_down_button)).setImageDrawable(icon);
+		((ImageView) view.findViewById(R.id.up_down_button)).setImageDrawable(icon);
 		setPreviousMapPosition();
 	}
 
