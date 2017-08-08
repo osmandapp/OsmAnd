@@ -2669,4 +2669,10 @@
     <string name="save_route_point">Save Route Point</string>
     <string name="waypoint_one">Waypoint 1</string>
     <string name="route_point_one">Route Point 1</string>
+    <string name="empty_state_my_tracks">Add and Record Tracks</string>
+    <string name="empty_state_my_tracks_desc">Record or import tracks to view</string>
+    <string name="empty_state_favourites">Add Favorites</string>
+    <string name="empty_state_favourites_desc">Add favorites on map or import them from filesystem</string>
+    <string name="import_track">Import track</string>
+    <string name="import_track_desc">File %1$s does not contain waypoints, import it as a track?</string>
 </resources>
