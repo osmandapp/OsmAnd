@@ -41,6 +41,10 @@ import java.util.List;
 public class FavoritesActivity extends TabActivity {
 
 	private static final int OPEN_GPX_DOCUMENT_REQUEST = 1006;
+	private static final int IMPORT_FAVOURITES_REQUEST = 1007;
+
+	public static final String OPEN_FAVOURITES_TAB = "open_favourites_tab";
+	public static final String OPEN_MY_PLACES_TAB = "open_my_places_tab";
 
 	public static final int  GPX_TAB = R.string.shared_string_my_tracks;
 	public static final int  FAV_TAB = R.string.shared_string_my_favorites;
@@ -67,6 +71,16 @@ public class FavoritesActivity extends TabActivity {
 		List<TabItem> mTabs = getTabItems();
 		setTabs(mTabs);
 		// setupHomeButton();
+
+		ViewPager mViewPager = (ViewPager) findViewById(R.id.pager);
+		Intent intent = getIntent();
+		if (intent != null) {
+			if (intent.hasExtra(OPEN_FAVOURITES_TAB) && intent.getBooleanExtra(OPEN_FAVOURITES_TAB, false)) {
+				mViewPager.setCurrentItem(0, false);
+			} else if (intent.hasExtra(OPEN_MY_PLACES_TAB) && intent.getBooleanExtra(OPEN_MY_PLACES_TAB, false)) {
+				mViewPager.setCurrentItem(1, false);
+			}
+		}
 	}
 
 	@TargetApi(Build.VERSION_CODES.KITKAT)
@@ -74,6 +88,13 @@ public class FavoritesActivity extends TabActivity {
 		Intent intent = new Intent(Intent.ACTION_OPEN_DOCUMENT);
 		intent.setType("*/*");
 		startActivityForResult(intent, OPEN_GPX_DOCUMENT_REQUEST);
+	}
+
+	@TargetApi(Build.VERSION_CODES.KITKAT)
+	public void importFavourites() {
+		Intent intent = new Intent(Intent.ACTION_OPEN_DOCUMENT);
+		intent.setType("*/*");
+		startActivityForResult(intent, IMPORT_FAVOURITES_REQUEST);
 	}
 
 	@Override
@@ -100,6 +121,11 @@ public class FavoritesActivity extends TabActivity {
 						gpxFragment.finishImport(false);
 					}
 				}
+			}
+		} else if (requestCode == IMPORT_FAVOURITES_REQUEST && resultCode == Activity.RESULT_OK) {
+			if (data != null) {
+				Uri uri = data.getData();
+				gpxImportHelper.handleFavouritesImport(uri);
 			}
 		} else {
 			super.onActivityResult(requestCode, resultCode, data);
@@ -135,22 +161,9 @@ public class FavoritesActivity extends TabActivity {
 	}
 
 	private List<TabItem> getTabItems() {
-		File[] lf = ((OsmandApplication) getApplication()).getAppPath(IndexConstants.GPX_INDEX_DIR).listFiles();
-		boolean hasGpx = false;
-		if (lf != null) {
-			for (File t : lf) {
-				if (t.isDirectory() || (t.getName().toLowerCase().endsWith(".gpx"))) {
-					hasGpx = true;
-					break;
-				}
-			}
-		}
-
 		List<TabItem> mTabs = new ArrayList<>();
 		mTabs.add(getTabIndicator(FAV_TAB, FavoritesTreeFragment.class));
-		if (hasGpx) {
-			mTabs.add(getTabIndicator(GPX_TAB, AvailableGPXFragment.class));
-		}
+		mTabs.add(getTabIndicator(GPX_TAB, AvailableGPXFragment.class));
 		OsmandPlugin.addMyPlacesTabPlugins(this, mTabs, getIntent());
 		return mTabs;
 	}
