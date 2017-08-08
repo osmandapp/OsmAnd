@@ -23,7 +23,7 @@
         android:layout_alignParentRight="true"
         android:layout_margin="16dp"
         android:contentDescription="@string/quick_action_new_action"
-        tools:src="@drawable/ic_action_plus"
+        android:src="@drawable/ic_action_plus"
         app:backgroundTint="@color/dashboard_blue"
         app:fabSize="normal"/>
 
