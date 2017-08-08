@@ -1,5 +1,6 @@
 package net.osmand.plus.mapcontextmenu.editors;
 
+import net.osmand.plus.GPXUtilities;
 import net.osmand.plus.R;
 import net.osmand.plus.activities.MapActivity;
 
@@ -39,5 +40,11 @@ public class RtePtEditorFragment extends WptPtEditorFragment {
 				//.setCustomAnimations(slideInAnim, slideOutAnim, slideInAnim, slideOutAnim)
 				.add(R.id.fragmentContainer, fragment, editor.getFragmentTag())
 				.addToBackStack(null).commit();
+	}
+
+	@Override
+	protected void addWpt(GPXUtilities.GPXFile gpx, String description, String name, String category, int color) {
+		wpt = gpx.addRtePt(wpt.getLatitude(), wpt.getLongitude(),
+				System.currentTimeMillis(), description, name, category, color);
 	}
 }
