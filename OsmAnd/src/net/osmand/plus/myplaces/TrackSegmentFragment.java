@@ -148,6 +148,8 @@ public class TrackSegmentFragment extends OsmAndListFragment {
 	private View waypointTextLayout;
 	private FloatingActionButton routePointFab;
 	private View routePointTextLayout;
+	private FloatingActionButton lineFab;
+	private View lineTextLayout;
 
 	@Override
 	public void onCreate(@Nullable Bundle savedInstanceState) {
@@ -158,6 +160,20 @@ public class TrackSegmentFragment extends OsmAndListFragment {
 	@Override
 	public void onActivityCreated(Bundle savedInstanceState) {
 		super.onActivityCreated(savedInstanceState);
+		getListView().setOnScrollListener(new AbsListView.OnScrollListener() {
+			@Override
+			public void onScrollStateChanged(AbsListView absListView, int i) {
+				if (i == AbsListView.OnScrollListener.SCROLL_STATE_TOUCH_SCROLL) {
+					if (menuOpened) {
+						closeMenu();
+					}
+				}
+			}
+
+			@Override
+			public void onScroll(AbsListView absListView, int i, int i1, int i2) {
+			}
+		});
 		getListView().setBackgroundColor(getResources().getColor(
 				getMyApplication().getSettings().isLightContent() ? R.color.ctx_menu_info_view_bg_light
 						: R.color.ctx_menu_info_view_bg_dark));
@@ -209,6 +225,15 @@ public class TrackSegmentFragment extends OsmAndListFragment {
 		});
 		routePointTextLayout = view.findViewById(R.id.route_text_layout);
 
+		lineFab = (FloatingActionButton) view.findViewById(R.id.line_fab);
+		lineFab.setOnClickListener(new View.OnClickListener() {
+			@Override
+			public void onClick(View view) {
+				addLine();
+			}
+		});
+		lineTextLayout = view.findViewById(R.id.line_text_layout);
+
 		paint = new Paint();
 		paint.setStyle(Paint.Style.STROKE);
 		paint.setAntiAlias(true);
@@ -236,12 +261,18 @@ public class TrackSegmentFragment extends OsmAndListFragment {
 		getTrackActivity().addPoint(pointDescription);
 	}
 
+	private void addLine() {
+		getTrackActivity().addLine();
+	}
+
 	private void openMenu() {
 		menuFab.setImageDrawable(ContextCompat.getDrawable(getContext(), R.drawable.ic_action_remove_dark));
 		waypointFab.setVisibility(View.VISIBLE);
 		waypointTextLayout.setVisibility(View.VISIBLE);
 		routePointFab.setVisibility(View.VISIBLE);
 		routePointTextLayout.setVisibility(View.VISIBLE);
+		lineFab.setVisibility(View.VISIBLE);
+		lineTextLayout.setVisibility(View.VISIBLE);
 		menuOpened = true;
 	}
 
@@ -251,6 +282,8 @@ public class TrackSegmentFragment extends OsmAndListFragment {
 		waypointTextLayout.setVisibility(View.GONE);
 		routePointFab.setVisibility(View.GONE);
 		routePointTextLayout.setVisibility(View.GONE);
+		lineFab.setVisibility(View.GONE);
+		lineTextLayout.setVisibility(View.GONE);
 		menuOpened = false;
 	}
 

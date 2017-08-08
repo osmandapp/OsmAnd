@@ -108,6 +108,10 @@ public class TrackActivity extends TabActivity {
 		}
 	}
 
+	public void addLine() {
+
+	}
+
 	protected void setGpxDataItem(GpxDataItem gpxDataItem) {
 		this.gpxDataItem = gpxDataItem;
 	}

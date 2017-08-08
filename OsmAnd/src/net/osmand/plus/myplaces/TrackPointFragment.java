@@ -99,6 +99,8 @@ public class TrackPointFragment extends OsmandExpandableListFragment {
 	private View waypointTextLayout;
 	private FloatingActionButton routePointFab;
 	private View routePointTextLayout;
+	private FloatingActionButton lineFab;
+	private View lineTextLayout;
 
 	@Override
 	public void onCreate(@Nullable Bundle savedInstanceState) {
@@ -166,6 +168,15 @@ public class TrackPointFragment extends OsmandExpandableListFragment {
 		});
 		routePointTextLayout = view.findViewById(R.id.route_text_layout);
 
+		lineFab = (FloatingActionButton) view.findViewById(R.id.line_fab);
+		lineFab.setOnClickListener(new View.OnClickListener() {
+			@Override
+			public void onClick(View view) {
+				addLine();
+			}
+		});
+		lineTextLayout = view.findViewById(R.id.line_text_layout);
+
 		TextView tv = new TextView(getActivity());
 		tv.setText(R.string.none_selected_gpx);
 		tv.setTextSize(24);
@@ -181,12 +192,18 @@ public class TrackPointFragment extends OsmandExpandableListFragment {
 		getTrackActivity().addPoint(pointDescription);
 	}
 
+	private void addLine() {
+		getTrackActivity().addLine();
+	}
+
 	private void openMenu() {
 		menuFab.setImageDrawable(ContextCompat.getDrawable(getContext(), R.drawable.ic_action_remove_dark));
 		waypointFab.setVisibility(View.VISIBLE);
 		waypointTextLayout.setVisibility(View.VISIBLE);
 		routePointFab.setVisibility(View.VISIBLE);
 		routePointTextLayout.setVisibility(View.VISIBLE);
+		lineFab.setVisibility(View.VISIBLE);
+		lineTextLayout.setVisibility(View.VISIBLE);
 		menuOpened = true;
 	}
 
@@ -196,6 +213,8 @@ public class TrackPointFragment extends OsmandExpandableListFragment {
 		waypointTextLayout.setVisibility(View.GONE);
 		routePointFab.setVisibility(View.GONE);
 		routePointTextLayout.setVisibility(View.GONE);
+		lineFab.setVisibility(View.GONE);
+		lineTextLayout.setVisibility(View.GONE);
 		menuOpened = false;
 	}
 
