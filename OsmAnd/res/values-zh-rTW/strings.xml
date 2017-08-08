@@ -1029,8 +1029,7 @@
     <string name="background_service_is_enabled_question">OsmAnd 服務仍在背景執行，您想要中止嗎？</string>
     <string name="osmand_play_title_30_chars">OsmAnd 地圖和導航</string>
     <string name="osmand_plus_play_title_30_chars">OsmAnd+ 地圖和導航</string>
-    <string name="native_app_allocated_memory_descr">本地記憶體總計由應用程式 %1$s MB (Dalvik %2$s MB，其它 %3$s MB) 。
-比例記憶體 %4$s MB (Android 限制 %5$s MB，Dalvik %6$s MB)分配佔用。</string>
+    <string name="native_app_allocated_memory_descr">本機記憶體總計由應用程式 %1$s MB (Dalvik %2$s MB，其它 %3$s MB)，比例記憶體 %4$s MB (Android 限制 %5$s MB，Dalvik %6$s MB)分配佔用。</string>
     <string name="context_menu_item_destination_point">設定為目的地</string>
     <string name="please_select_address">首先選擇城市或街道</string>
     <string name="available_downloads_left">還可下載檔案 %1$d 次</string>
@@ -1572,7 +1571,7 @@ OsmAnd (Automated Navigation Directions) 是一個地圖和導航的應用程式
     <string name="traffic_warning_calming">交通寧靜區</string>
     <string name="traffic_warning_speed_camera">測速照相</string>
     <string name="traffic_warning">交通流量警示</string>
-    <string name="local_index_description">輕點任何現有的項目，查看更詳細的資訊，長按則停用或刪除。目前在裝置上的資料有 (%1$s 可用)：</string>
+    <string name="local_index_description">輕點任何現有的項目，查看更詳細的資訊，長按則停用或刪除。裝置上目前的資料有 (%1$s 可用)：</string>
     <string name="text_size_descr">設定地圖上的文字大小。</string>
     <string name="text_size">文字大小</string>
     <string name="fav_point_dublicate">我的收藏標點，名稱重複</string>
@@ -1789,7 +1788,7 @@ OsmAnd (Automated Navigation Directions) 是一個地圖和導航的應用程式
     <string name="general_settings_2">一般設定</string>
     <string name="waypoint_visit_after">隨後造訪</string>
     <string name="waypoint_visit_before">先造訪</string>
-    <string name="shared_string_dismiss">離開</string>
+    <string name="shared_string_dismiss">退出</string>
     <string name="shared_string_collapse">收合</string>
     <string name="drawer">平面清單</string>
     <string name="osm_edits">OSM 編輯</string>
@@ -2472,7 +2471,7 @@ OsmAnd (Automated Navigation Directions) 是一個地圖和導航的應用程式
     <string name="gpx_appearance">外表</string>
     <string name="osmo_share_location">分享</string>
     <string name="trip_rec_notification_settings">旅程記錄（無資料）</string>
-    <string name="trip_rec_notification_settings_desc">顯示允許旅程出發錄製的系統通知</string>
+    <string name="trip_rec_notification_settings_desc">顯示允許行程開始錄製的系統通知</string>
     <string name="rendering_value_fine_name">精細</string>
     <string name="route_calculation">路線估算</string>
     <string name="upload_poi">上傳 POI</string>
