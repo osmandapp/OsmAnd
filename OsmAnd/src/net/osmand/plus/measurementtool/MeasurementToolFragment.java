@@ -10,6 +10,8 @@ import android.support.v4.app.Fragment;
 import android.support.v4.app.FragmentManager;
 import android.support.v4.content.ContextCompat;
 import android.support.v7.app.AlertDialog;
+import android.support.v7.widget.LinearLayoutManager;
+import android.support.v7.widget.RecyclerView;
 import android.support.v7.widget.SwitchCompat;
 import android.text.Editable;
 import android.text.TextWatcher;
@@ -34,6 +36,7 @@ import net.osmand.plus.IconsCache;
 import net.osmand.plus.R;
 import net.osmand.plus.activities.MapActivity;
 import net.osmand.plus.helpers.AndroidUiHelper;
+import net.osmand.plus.views.OsmandMapTileView;
 import net.osmand.plus.views.mapwidgets.MapInfoWidgetsFactory;
 import net.osmand.plus.views.mapwidgets.MapInfoWidgetsFactory.TopToolbarController;
 import net.osmand.plus.widgets.IconPopupMenu;
@@ -46,6 +49,7 @@ import java.util.LinkedList;
 import java.util.Locale;
 
 import static net.osmand.plus.GPXUtilities.GPXFile;
+import static net.osmand.plus.OsmandSettings.MIDDLE_TOP_CONSTANT;
 import static net.osmand.plus.helpers.GpxImportHelper.GPX_SUFFIX;
 
 public class MeasurementToolFragment extends Fragment {
@@ -53,12 +57,14 @@ public class MeasurementToolFragment extends Fragment {
 	public static final String TAG = "MeasurementToolFragment";
 
 	private MeasurementToolBarController toolBarController;
+	private MeasurementToolAdapter adapter;
 	private TextView distanceTv;
 	private TextView pointsTv;
 	private String pointsSt;
 
 	private boolean wasCollapseButtonVisible;
 	private boolean pointsDetailsOpened;
+	private int previousMapPosition;
 
 	@Nullable
 	@Override
@@ -109,10 +115,13 @@ public class MeasurementToolFragment extends Fragment {
 				if (measurementLayer.undoPointOnClick()) {
 					enable(undoBtn);
 				} else {
-					disable(undoBtn);
+					disable(undoBtn, upDownBtn);
+					downBtnOnClick(mainView, iconsCache.getThemedIcon(R.drawable.ic_action_arrow_up));
 				}
+				adapter.notifyDataSetChanged();
 				enable(redoBtn);
 				updateText();
+				mapActivity.refreshMap();
 			}
 		});
 
@@ -125,8 +134,10 @@ public class MeasurementToolFragment extends Fragment {
 				} else {
 					disable(redoBtn);
 				}
-				enable(undoBtn);
+				adapter.notifyDataSetChanged();
+				enable(undoBtn, upDownBtn);
 				updateText();
+				mapActivity.refreshMap();
 			}
 		});
 
@@ -137,6 +148,7 @@ public class MeasurementToolFragment extends Fragment {
 				enable(undoBtn, upDownBtn);
 				disable(redoBtn);
 				updateText();
+				adapter.notifyDataSetChanged();
 			}
 		});
 
@@ -188,6 +200,32 @@ public class MeasurementToolFragment extends Fragment {
 			mapActivity.showTopToolbar(toolBarController);
 		}
 
+		adapter = new MeasurementToolAdapter(getMapActivity(), measurementLayer.getMeasurementPoints());
+		final RecyclerView rv = mainView.findViewById(R.id.measure_points_recycler_view);
+		adapter.setRemovePointListener(new MeasurementToolAdapter.RemovePointListener() {
+			@Override
+			public void onPointRemove() {
+				adapter.notifyDataSetChanged();
+				measurementLayer.resetCachePoints();
+				disable(redoBtn);
+				updateText();
+				mapActivity.refreshMap();
+				if (measurementLayer.getPointsCount() < 1) {
+					downBtnOnClick(mainView, iconsCache.getThemedIcon(R.drawable.ic_action_arrow_up));
+					disable(upDownBtn, undoBtn);
+				}
+			}
+		});
+		adapter.setItemClickListener(new MeasurementToolAdapter.ItemClickListener() {
+			@Override
+			public void onItemClick(View view) {
+				int pos = rv.indexOfChild(view);
+				measurementLayer.moveMapToPoint(pos);
+			}
+		});
+		rv.setLayoutManager(new LinearLayoutManager(getContext()));
+		rv.setAdapter(adapter);
+
 		return view;
 	}
 
@@ -195,12 +233,28 @@ public class MeasurementToolFragment extends Fragment {
 		pointsDetailsOpened = true;
 		view.findViewById(R.id.points_list_container).setVisibility(View.VISIBLE);
 		((ImageButton) view.findViewById(R.id.up_down_button)).setImageDrawable(icon);
+		MapActivity mapActivity = getMapActivity();
+		if (mapActivity != null) {
+			OsmandMapTileView tileView = mapActivity.getMapView();
+			previousMapPosition = tileView.getMapPosition();
+			tileView.setMapPosition(MIDDLE_TOP_CONSTANT);
+			mapActivity.refreshMap();
+		}
 	}
 
 	private void downBtnOnClick(View view, Drawable icon) {
 		pointsDetailsOpened = false;
 		view.findViewById(R.id.points_list_container).setVisibility(View.GONE);
 		((ImageButton) view.findViewById(R.id.up_down_button)).setImageDrawable(icon);
+		setPreviousMapPosition();
+	}
+
+	private void setPreviousMapPosition() {
+		MapActivity mapActivity = getMapActivity();
+		if (mapActivity != null) {
+			mapActivity.getMapView().setMapPosition(previousMapPosition);
+			mapActivity.refreshMap();
+		}
 	}
 
 	private void saveAsGpxOnClick(MapActivity mapActivity) {
@@ -336,6 +390,11 @@ public class MeasurementToolFragment extends Fragment {
 	public void onDestroyView() {
 		super.onDestroyView();
 		exitMeasurementMode();
+		adapter.setRemovePointListener(null);
+		adapter.setItemClickListener(null);
+		if (pointsDetailsOpened) {
+			setPreviousMapPosition();
+		}
 	}
 
 	private MapActivity getMapActivity() {

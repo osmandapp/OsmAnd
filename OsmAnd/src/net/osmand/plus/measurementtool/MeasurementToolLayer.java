@@ -28,18 +28,18 @@ public class MeasurementToolLayer extends OsmandMapLayer implements ContextMenuL
 
 	private OsmandMapTileView view;
 	private boolean inMeasurementMode;
-	private LinkedList<WptPt> measurementPoints = new LinkedList<>();
+	private final LinkedList<WptPt> measurementPoints = new LinkedList<>();
 	private LinkedList<WptPt> cacheMeasurementPoints = new LinkedList<>();
 	private Bitmap centerIconDay;
 	private Bitmap centerIconNight;
 	private Bitmap pointIcon;
 	private Paint bitmapPaint;
-	private RenderingLineAttributes lineAttrs = new RenderingLineAttributes("rulerLine");
-	private Path path = new Path();
+	private final RenderingLineAttributes lineAttrs = new RenderingLineAttributes("measureDistanceLine");
+	private final Path path = new Path();
 	private int marginX;
 	private int marginY;
-	private TIntArrayList tx = new TIntArrayList();
-	private TIntArrayList ty = new TIntArrayList();
+	private final TIntArrayList tx = new TIntArrayList();
+	private final TIntArrayList ty = new TIntArrayList();
 
 	@Override
 	public void initLayer(OsmandMapTileView view) {
@@ -70,7 +70,7 @@ public class MeasurementToolLayer extends OsmandMapLayer implements ContextMenuL
 		return measurementPoints.size();
 	}
 
-	public LinkedList<WptPt> getMeasurementPoints() {
+	LinkedList<WptPt> getMeasurementPoints() {
 		return measurementPoints;
 	}
 
@@ -141,6 +141,10 @@ public class MeasurementToolLayer extends OsmandMapLayer implements ContextMenuL
 		canvas.rotate(tb.getRotate(), center.x, center.y);
 	}
 
+	void resetCachePoints() {
+		cacheMeasurementPoints = new LinkedList<>(measurementPoints);
+	}
+
 	void addPointOnClick() {
 		RotatedTileBox tb = view.getCurrentRotatedTileBox();
 		LatLon l = tb.getLatLonFromPixel(tb.getCenterPixelX(), tb.getCenterPixelY());
@@ -154,7 +158,7 @@ public class MeasurementToolLayer extends OsmandMapLayer implements ContextMenuL
 		} else {
 			measurementPoints.add(pt);
 		}
-		cacheMeasurementPoints = new LinkedList<>(measurementPoints);
+		resetCachePoints();
 		view.refreshMap();
 	}
 
@@ -172,6 +176,11 @@ public class MeasurementToolLayer extends OsmandMapLayer implements ContextMenuL
 		measurementPoints.add(pt);
 		view.getAnimatedDraggingThread().startMoving(pt.getLatitude(), pt.getLongitude(), view.getZoom(), true);
 		return cacheMeasurementPoints.size() > measurementPoints.size();
+	}
+
+	void moveMapToPoint(int pos) {
+		WptPt pt = measurementPoints.get(pos);
+		view.getAnimatedDraggingThread().startMoving(pt.getLatitude(), pt.getLongitude(), view.getZoom(), true);
 	}
 
 	@Override
