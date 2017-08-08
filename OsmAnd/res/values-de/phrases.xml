@@ -2658,7 +2658,7 @@
 	<string name="poi_free_flying_hanggliding_no">Drachenfliegen: Nein</string>
 	<string name="poi_free_flying_rigid_yes">Strikt</string>
 	<string name="poi_free_flying_rigid_no">Freies Fliegen strikt: Nein</string>
-	<string name="poi_free_flying_site_orientation_n">Freier Flugplatz Ausrichtung: N</string>
+	<string name="poi_free_flying_site_orientation_n">Freeflying Ausrichtung: N</string>
 	<string name="poi_free_flying_site_orientation_ne">Freier Flugplatz Ausrichtung: NO</string>
 	<string name="poi_free_flying_site_orientation_e">Freier Flugplatz Ausrichtung: O</string>
 	<string name="poi_free_flying_site_orientation_se">Freier Flugplatz Ausrichtung: SO</string>
