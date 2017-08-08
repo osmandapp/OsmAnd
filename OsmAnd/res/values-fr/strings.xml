@@ -2877,4 +2877,6 @@ Fonctionnalités principales :
     <string name="add_route_point">Ajouter un point à l\'itinéraire</string>
     <string name="add_waypoint">Ajouter une étape</string>
     <string name="save_gpx_waypoint">Enregistrer le point GPX</string>
+    <string name="live_monitoring_max_interval_to_send">Durée de mémorisation pour le suivi en ligne</string>
+    <string name="live_monitoring_max_interval_to_send_desrc">Indiquez une durée de mémorisation des positions en l\'absence de connexion</string>
     </resources>
