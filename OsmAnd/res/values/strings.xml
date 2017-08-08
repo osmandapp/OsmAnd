@@ -2665,6 +2665,7 @@
     <string name="retry">Retry</string>
     <string name="add_route_point">Add Route Point</string>
     <string name="add_waypoint">Add Waypoint</string>
+    <string name="add_line">Add Line</string>
     <string name="save_gpx_waypoint">Save GPX Waypoint</string>
     <string name="save_route_point">Save Route Point</string>
     <string name="waypoint_one">Waypoint 1</string>
