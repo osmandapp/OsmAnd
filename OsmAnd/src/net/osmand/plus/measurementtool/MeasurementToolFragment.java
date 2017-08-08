@@ -145,11 +145,14 @@ public class MeasurementToolFragment extends Fragment {
 		mainView.findViewById(R.id.add_point_button).setOnClickListener(new View.OnClickListener() {
 			@Override
 			public void onClick(View view) {
-				measurementLayer.addPointOnClick();
-				enable(undoBtn, upDownBtn);
-				disable(redoBtn);
-				updateText();
-				adapter.notifyDataSetChanged();
+				addPoint(undoBtn, upDownBtn, redoBtn);
+			}
+		});
+
+		measurementLayer.setOnSingleTapListener(new MeasurementToolLayer.OnSingleTapListener() {
+			@Override
+			public void onSingleTap() {
+				addPoint(undoBtn, upDownBtn, redoBtn);
 			}
 		});
 
@@ -228,6 +231,17 @@ public class MeasurementToolFragment extends Fragment {
 		rv.setAdapter(adapter);
 
 		return view;
+	}
+
+	private void addPoint(View undoBtn, View upDownBtn, View redoBtn) {
+		MeasurementToolLayer measurementLayer = getMeasurementLayer();
+		if (measurementLayer != null) {
+			measurementLayer.addPointOnClick();
+			enable(undoBtn, upDownBtn);
+			disable(redoBtn);
+			updateText();
+			adapter.notifyDataSetChanged();
+		}
 	}
 
 	private void upBtnOnClick(View view, Drawable icon) {
@@ -395,6 +409,10 @@ public class MeasurementToolFragment extends Fragment {
 		adapter.setItemClickListener(null);
 		if (pointsDetailsOpened) {
 			setPreviousMapPosition();
+		}
+		MeasurementToolLayer layer = getMeasurementLayer();
+		if (layer != null) {
+			layer.setOnSingleTapListener(null);
 		}
 	}
 
