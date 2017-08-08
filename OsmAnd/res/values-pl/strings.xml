@@ -68,7 +68,9 @@
     <string name="shared_string_no_thanks">Niepotrzebne</string>
     <string name="basemap_missing">Nie zainstalowano podstawowej mapy świata. Proszę pobrać plik World_basemap_x.obf, aby wyświetlać mapę poglądową całego świata.</string>
     <string name="vector_data_missing">Brak danych (\'offline\') w urządzeniu na karcie SD. Proszę zwrócić uwagę pobierając ją, aby używać map w trybie offline.</string>
-    <string name="local_index_gpx_info_show">\n\nProszę nacisnąć i przytrzymać, aby wyświetlić opcje</string>
+    <string name="local_index_gpx_info_show">"
+\n
+\nPrzytrzymaj nacisk, aby wyświetlić opcje"</string>
 
 
     <string name="local_index_installed">Wersja lokalna</string>
@@ -1406,7 +1408,7 @@ OsmAnd jest otwarto-źródłowym programem do nawigacji z dostępem do szerokiej
 
     <string name="osmo_connected_devices">Podłączone urządzenia</string>
     <string name="osmo_groups">Grupy OsMo</string>
-    <string name="osmo_tracker_id_descr">Wyświetla identyfikator serwera śledzącego</string>
+    <string name="osmo_tracker_id_descr">Naciśnij, aby wyświetlić identyfikator serwera śledzącego</string>
     <string name="osmo_locations_sent">Położenie wysłane %1$d (w buforze %2$d) </string>
 
     <string name="rendering_value_pink_name">Różowy</string>
@@ -1489,7 +1491,9 @@ OsmAnd jest otwarto-źródłowym programem do nawigacji z dostępem do szerokiej
     <string name="gpx_selection_points">%1$s \nPunkty</string>
     <string name="gpx_selection_track">%1$s \nTrasa %2$s</string>
 
-    <string name="selected_gpx_info_show">\n\nNaciśnij i przytrzymaj, aby zobaczyć na mapie</string>
+    <string name="selected_gpx_info_show">"
+\n
+\nPrzytrzymaj nacisk, aby zobaczyć na mapie"</string>
     <string name="delay_navigation_start">Rozpocznij nawigację automatycznie</string>
     <string name="shared_string_selected_lowercase">wybrano</string>
     <string name="gpx_split_interval">Interwał podziału</string>
@@ -1504,7 +1508,7 @@ OsmAnd jest otwarto-źródłowym programem do nawigacji z dostępem do szerokiej
     <string name="show_zoom_buttons_navigation">Przyciski zbliżania</string>
     <string name="sort_by_distance">Sortuj wg odległości</string>
     <string name="sort_by_name">Sortuj wg nazwy</string>
-    <string name="none_selected_gpx">Nie wybrano żadnego pliku GPX. Aby wybrać proszę nacisnąć i przytrzymać dostępną ścieżkę.</string>
+    <string name="none_selected_gpx">Nie wybrano żadnego pliku GPX. Aby wybrać przytrzymaj nacisk na dostępnej ścieżce.</string>
 
     <string name="local_index_select_gpx_file">Wybierz aby wyświetlić</string>
     <string name="osmo_group_by_invite">Dołącz do grupy przez zaproszenie</string>
@@ -2384,7 +2388,7 @@ Długość %2$s</string>
     <string name="get_for">Pobierz na %1$s</string>
     <string name="get_for_month">Pobierz na %1$s miesięcy</string>
     <string name="osm_live_banner_desc">Zdobądź nieograniczoną liczbę pobrań map i aktualizacji map częściej niż raz na miesiąc: co tydzień, codziennie lub co godzinę.</string>
-    <string name="osmand_plus_banner_desc">Pełna wersja OsmAnd z nieograniczoną liczbą pobrań map i aktualizacjami co miesiąc.</string>
+    <string name="osmand_plus_banner_desc">Nieograniczona liczba pobrań map, aktualizacje i wtyczka Wikipedii.</string>
     <string name="si_mi_meters">Mile/metry</string>
     <string name="search_map">Wyszukiwanie map…</string>
     <string name="first_usage_wizard_desc">Program OsmAnd określi aktualne położenie i zasugeruje pobranie mapy dla tego regionu.</string>
@@ -2633,9 +2637,9 @@ Reprezentuje obszar: %1$s x %2$s</string>
     <string name="routing_attr_relief_smoothness_factor_hills_name">Górzysty</string>
     <string name="routing_attr_relief_smoothness_factor_plains_name">Mniej górzysty</string>
     <string name="routing_attr_relief_smoothness_factor_more_plains_name">Płaski</string>
-    <string name="routing_attr_driving_style_speed_name">Szybki</string>
+    <string name="routing_attr_driving_style_speed_name">Krótsze trasy</string>
     <string name="routing_attr_driving_style_balance_name">Zrównoważony</string>
-    <string name="routing_attr_driving_style_safety_name">Bezpieczny</string>
+    <string name="routing_attr_driving_style_safety_name">Preferuj drogi poboczne</string>
     <string name="routing_attr_relief_smoothness_factor_name">Wybierz gładkość cieniowanie rzeźby terenu</string>
     <string name="do_not_send_anonymous_app_usage">Nie wysyłaj anonimowych statystyk użytkowania</string>
     <string name="do_not_send_anonymous_app_usage_desc">OsmAnd zbiera informacje o tym, z których części aplikacji korzysta użytkownik. Twoja lokalizacja nie jest nigdy wysyłana, tak jak teksty wpisywane w aplikacji i szczegóły dotyczące przeglądanych, wyszukiwanych i pobieranych obszarów.</string>
@@ -2653,8 +2657,8 @@ Reprezentuje obszar: %1$s x %2$s</string>
     <string name="subscribe_email_error">Błąd</string>
     <string name="quick_action_add_destination">Dodaj cel trasy</string>
     <string name="quick_action_replace_destination">Zastąp cel trasy</string>
-    <string name="quick_action_auto_zoom_on">Włączono automatyczne przybliżanie</string>
-    <string name="quick_action_auto_zoom_off">Wyłączono automatyczne przybliżanie</string>
+    <string name="quick_action_auto_zoom_on">Włącz automatyczne przybliżanie mapy</string>
+    <string name="quick_action_auto_zoom_off">Wyłącz automatyczne przybliżanie mapy</string>
     <string name="quick_action_auto_zoom">Przełącz automatyczne przybliżanie</string>
     <string name="quick_action_add_first_intermediate">Dodaj pierwszy pośredni cel trasy</string>
     <string name="quick_action_auto_zoom_desc">Przełącza automatyczne przybliżanie mapy zależne od prędkości ruchu.</string>
@@ -2773,10 +2777,10 @@ Reprezentuje obszar: %1$s x %2$s</string>
     <string name="max_min">Maks./min.</string>
     
     <string name="quick_action_resume_pause_navigation">Wznów/wstrzymaj nawigowanie</string>
-    <string name="quick_action_resume_pause_navigation_descr">Wstrzymuje lub wznawia wstrzymane nawigowanie.</string>
-    <string name="quick_action_start_stop_navigation">Rozpocznij/zakończ nawigowanie</string>
-    <string name="quick_action_start_stop_navigation_descr">Rozpoczyna lub zatrzymuje rozpoczęte nawigowanie.</string>
-    <string name="quick_action_show_navigation_finish_dialog">Wyświetl ekran kończenia nawigowania</string>
+    <string name="quick_action_resume_pause_navigation_descr">Naciśnij ten przycisk, aby wstrzymać lub wznowić nawigowanie.</string>
+    <string name="quick_action_start_stop_navigation">Rozpocznij/zatrzymaj nawigowanie</string>
+    <string name="quick_action_start_stop_navigation_descr">Naciśnij ten przycisk, aby rozpocząć lub zakończyć nawigowanie.</string>
+    <string name="quick_action_show_navigation_finish_dialog">Wyświetl ekran końca nawigowania</string>
     <string name="release_2_7">• Wtyczka Mapillary z obrazami miejsc
 \n
 \n • Widżet linijki do mierzenia odległości
@@ -2786,11 +2790,22 @@ Reprezentuje obszar: %1$s x %2$s</string>
 \n • Inne ulepszenia i naprawione błędy
 \n
 \n</string>
-    <string name="measurement_tool_action_bar">Proszę dodać położenia do pomiaru.</string>
+    <string name="measurement_tool_action_bar">Przeglądaj mapę i dodawaj punkty</string>
     <string name="measurement_tool">Mierzenie odległości</string>
-    <string name="enter_gpx_name">Proszę wprowadzić nazwę pliku GPX</string>
-    <string name="none_point_error">Należy dodać co najmniej jedno położenie.</string>
+    <string name="enter_gpx_name">Nazwa pliku GPX:</string>
+    <string name="none_point_error">Należy dodać co najmniej jeden punkt.</string>
     <string name="show_on_map_after_saving">Wyświetlanie na mapie po zapisaniu</string>
     <string name="rendering_value_translucent_pink_name">Przezroczysty różowy</string>
     <string name="min_max">Min./Maks.</string>
+    <string name="retry">Ponów</string>
+    <string name="add_route_point">Dodaj punkt trasy</string>
+    <string name="save_route_point">Zapisz punkt trasy</string>
+    <string name="route_point_one">Punkt 1 trasy</string>
+<string name="osmand_extended_description_part7">Pomagaj rozwijać OSM • Raportowanie o błędach danych • Przesyłaj bezpośrednio z aplikacji ślady GPX do OSM • Dodawaj miejsca POI i przesyłaj je bezpośrednio do OSM (lub później, jeśli jesteś offline)</string>
+    <string name="live_monitoring_max_interval_to_send">Bufor czasowy do śledzenia online</string>
+    <string name="live_monitoring_max_interval_to_send_desrc">Określ bufor czasu, który umożliwia przechowywanie lokalizacji bez połączenia</string>
+    <string name="mappilary_no_internet_desc">Potrzebujesz połączenia z Internetem, aby oglądać zdjęcia z Mapillary</string>
+    <string name="add_waypoint">Dodaj punkt orientacyjny</string>
+    <string name="save_gpx_waypoint">Zapisz punkt orientacyjny GPX</string>
+    <string name="waypoint_one">Punkt orientacyjny 1</string>
     </resources>
