@@ -35,6 +35,7 @@ import android.view.MotionEvent;
 import android.view.View;
 import android.view.ViewGroup;
 import android.view.WindowManager;
+import android.widget.AbsListView;
 import android.widget.AdapterView;
 import android.widget.ArrayAdapter;
 import android.widget.CompoundButton;
@@ -221,6 +222,11 @@ public class TrackSegmentFragment extends OsmAndListFragment {
 		headerView = getActivity().getLayoutInflater().inflate(R.layout.gpx_item_list_header, null, false);
 		listView.addHeaderView(headerView);
 		listView.addFooterView(getActivity().getLayoutInflater().inflate(R.layout.list_shadow_footer, null, false));
+		View emptyView = new View(getActivity());
+		emptyView.setLayoutParams(new AbsListView.LayoutParams(
+				AbsListView.LayoutParams.MATCH_PARENT,
+				AndroidUtils.dpToPx(getActivity(), 72)));
+		listView.addFooterView(emptyView);
 		updateHeader();
 		setListAdapter(adapter);
 		return view;
