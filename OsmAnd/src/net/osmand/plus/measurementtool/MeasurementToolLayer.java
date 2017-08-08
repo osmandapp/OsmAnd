@@ -6,6 +6,7 @@ import android.graphics.Canvas;
 import android.graphics.Paint;
 import android.graphics.Path;
 import android.graphics.PointF;
+import android.view.MotionEvent;
 
 import net.osmand.data.LatLon;
 import net.osmand.data.PointDescription;
@@ -40,6 +41,7 @@ public class MeasurementToolLayer extends OsmandMapLayer implements ContextMenuL
 	private int marginY;
 	private final TIntArrayList tx = new TIntArrayList();
 	private final TIntArrayList ty = new TIntArrayList();
+	private OnSingleTapListener singleTapListener;
 
 	@Override
 	public void initLayer(OsmandMapTileView view) {
@@ -56,6 +58,10 @@ public class MeasurementToolLayer extends OsmandMapLayer implements ContextMenuL
 
 		marginY = pointIcon.getHeight() / 2;
 		marginX = pointIcon.getWidth() / 2;
+	}
+
+	public void setOnSingleTapListener(OnSingleTapListener listener) {
+		this.singleTapListener = listener;
 	}
 
 	public boolean isInMeasurementMode() {
@@ -89,6 +95,19 @@ public class MeasurementToolLayer extends OsmandMapLayer implements ContextMenuL
 		measurementPoints.clear();
 		cacheMeasurementPoints.clear();
 		view.refreshMap();
+	}
+
+	@Override
+	public boolean onSingleTap(PointF point, RotatedTileBox tileBox) {
+		if (inMeasurementMode && singleTapListener != null) {
+			singleTapListener.onSingleTap();
+		}
+		return false;
+	}
+
+	@Override
+	public boolean onTouchEvent(MotionEvent event, RotatedTileBox tileBox) {
+		return super.onTouchEvent(event, tileBox);
 	}
 
 	@Override
@@ -221,5 +240,9 @@ public class MeasurementToolLayer extends OsmandMapLayer implements ContextMenuL
 	@Override
 	public boolean isObjectClickable(Object o) {
 		return !isInMeasurementMode();
+	}
+
+	interface OnSingleTapListener {
+		void onSingleTap();
 	}
 }
