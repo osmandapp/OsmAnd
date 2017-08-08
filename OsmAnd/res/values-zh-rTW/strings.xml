@@ -2402,7 +2402,7 @@ OsmAnd (Automated Navigation Directions) 是一個地圖和導航的應用程式
     <string name="search_my_location">尋找我的位置</string>
     <string name="no_update_info">不要顯示更新</string>
     <string name="osm_live_banner_desc">獲得無限制的地圖下載和每個月超過一次以上的地圖更新︰每週、每天或每小時。</string>
-    <string name="osmand_plus_banner_desc">OsmAnd 完整版擁有無限制的地圖下載和每個月的地圖更新。</string>
+    <string name="osmand_plus_banner_desc">沒有限制的地圖下載和維基百科外掛元件</string>
     <string name="si_mi_meters">英哩/公尺</string>
     <string name="first_usage_wizard_desc">讓 OsmAnd 確定您所在的位置和建議下載該區域的地圖。</string>
     <string name="get_for">獲得 %1$s</string>
