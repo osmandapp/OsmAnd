@@ -1418,7 +1418,7 @@ Afganistan, Albanija, Alžirija, Andora, Angola, Angvila, Antigva in Barbuda, Ar
     <string name="osmo_edit_color">Barva oznake točke:</string>
     <string name="osmo_group_info">Podrobnosti</string>
     <string name="osmo_group">Skupina OsMo</string>
-    <string name="osmo_group_share">Za povezavo v skupino %2$s določite ID skupine (%1$s) ali kliknite %3$s.</string>
+    <string name="osmo_group_share">Za povezavo v skupino %2$s določite ID skupine (%1$s) ali pritisnite %3$s.</string>
     <string name="osmo_share_connect_device">Trajno dovoli sledenje tej napravi</string>
     <string name="osmo_share_current_session">Objavi trenutno sejo v brskalniku</string>
     <string name="osmo_session_not_available">Seja ni na voljo. Preverite, ali je \'Pošiljanje trenutne točke\' omogočeno.</string>
@@ -1513,10 +1513,10 @@ Afganistan, Albanija, Alžirija, Andora, Angola, Angvila, Antigva in Barbuda, Ar
     <string name="osmo_groups">Skupine OsMo</string>
     <string name="osmo_auto_send_locations">Samodejno začni potovanje</string>
     <string name="osmo_tracker_id">ID sledilnika</string>
-    <string name="osmo_tracker_id_descr">Kliknite za ogled ID sledilnika</string>
+    <string name="osmo_tracker_id_descr">Pritisnite za ogled ID sledilnika</string>
     <string name="osmo_mode_restart">Ponovno zaženi sejo OsMo</string>
 
-    <string name="osmo_tracker_id_share">Za povezavo s ciljno napravo %2$s, kliknite na povezavo %3$s ali določite ID sledilnika (%1$s)</string>
+    <string name="osmo_tracker_id_share">Za povezavo s ciljno napravo %2$s, pritisnite na povezavo %3$s ali določite ID sledilnika (%1$s)</string>
     <string name="osmo_connect_to_device_tracker_id">ID sledilnika</string>
     <string name="osmo_auto_send_locations_descr">Samodejno začni potovanje in pošiljaj trenutno mesto po zagonu programa</string>
 
@@ -2466,18 +2466,18 @@ Del prihodka se vrne skupnosti OSM in se izplačuje za vsako opravljeno dejavnos
     <string name="save_track_precision_descr">Filter: nastavitev najmanjše natančnosti beleženja točk na zemljevidu</string>
     <string name="osmo_share_location">Objavi</string>
     <string name="trip_rec_notification_settings_desc">Pokaži obvestilo, ki omogoča začetek beleženja potovanja s pritiskom na gumb za beleženje</string>
-    <string name="release_2_5">\\u2022 Kljikljive ikone na zemljevidu
-\n
+    <string name="release_2_5">\\022 Dejavne ikone na zemljevidu 
+\n 
 \n • Zmogljivo iskanje točk POI: iskanje na primer restavracij po vrsti kuhinje, ali pa prostore za kampiranje s posebnimi zahtevami 
-\n
+\n 
 \n • Topo – Nov slog zemljevida za kolesarje in pohodnike 
-\n
+\n 
 \n • Izboljšano beleženje potovanja 
-\n
+\n 
 \n • Prilagojena obvestila navigacije za različne naprave (Android Wear) 
-\n
+\n 
 \n • Mnogo posodobitev in razrešenih hroščev 
-\n
+\n 
 \n in še veliko več …</string>
     <string name="rendering_attr_contourColorScheme_description">Barvna shema izohips</string>
     <string name="christmas_desc">Ob koncu leta je mogoče izbrati prikaz točk POI, ki so povezane z božičnimi in novoletnimi dogodki: božična in novoletna drevesca, prodajalne, razstave ...</string>
@@ -2668,8 +2668,8 @@ Koda predstavlja območje: %1$s x %2$s</string>
     <string name="right_side_navigation">Promet po desni strani</string>
     <string name="driving_region_automatic">Samodejno</string>
     <string name="quick_action_auto_zoom">Omogoči/Onemogoči samodejno približanje zemljevida</string>
-    <string name="quick_action_auto_zoom_on">Samodejno približanje zemljevida je omogočeno.</string>
-    <string name="quick_action_auto_zoom_off">Samodejno približanje zemljevida je onemogočeno.</string>
+    <string name="quick_action_auto_zoom_on">Omogoči samodejno približanje zemljevida</string>
+    <string name="quick_action_auto_zoom_off">Onemogoči samodejno približanje zemljevida</string>
     <string name="quick_action_add_destination">Dodaj cilj</string>
     <string name="quick_action_replace_destination">Zamenjaj cilj</string>
     <string name="subscribe_email_error">Napaka</string>
@@ -2798,11 +2798,15 @@ Koda predstavlja območje: %1$s x %2$s</string>
 \n
 \n</string>
     <string name="rendering_value_translucent_pink_name">Prosojna rožnata</string>
-    <string name="quick_action_resume_pause_navigation_descr">Pritisnite gumb, če želite začasno zaustaviti navigacijo ali pa jo nadaljevati, če je gumb že pritisnjen.</string>
+    <string name="quick_action_resume_pause_navigation_descr">Pritisnite gumb, če želite začasno ustaviti oziroma nadaljevati navigacijo.</string>
     <string name="quick_action_show_navigation_finish_dialog">Pokaži pogovorno okno končanja navigacije</string>
-    <string name="quick_action_start_stop_navigation_descr">"Pritisnite gumb, če želite začeti navigacijo ali pa jo zaustaviti, če je že  začeta."</string>
+    <string name="quick_action_start_stop_navigation_descr">Pritisnite gumb, če želite začeti ali končati navigacijo.</string>
     <string name="live_monitoring_max_interval_to_send">Časovni medpomnilnik za spletno sledenje</string>
     <string name="live_monitoring_max_interval_to_send_desrc">Določitev časovnega medpomnilnika za ohranjanje trenutnega mesta pri pošiljanju brez povezave</string>
     <string name="mappilary_no_internet_desc">Za ogled slik prek Mapillary je zahtevana omrežna povezava</string>
     <string name="retry">Poskusi znova</string>
-</resources>
+<string name="none_point_error">Dodati je treba vsaj eno točko.</string>
+    <string name="enter_gpx_name">Ime datoteke GPX:</string>
+    <string name="show_on_map_after_saving">Po shranjevanju pokaži na zemljevidu</string>
+    <string name="measurement_tool">Izmeri razdaljo</string>
+    </resources>
