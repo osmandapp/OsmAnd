@@ -69,10 +69,7 @@
   <string name="gpx_saved_sucessfully">GPX fitxategia ongi gorde da hona {0}</string>
   <string name="osmand_distance_planning_plugin_description">Gehigarri honek maparen pantailan trepeta bat ezartzen du, non ibilbideak sortu daitezkeen mapan ukituz, edo aurretik dituzun GPX fitxategiak aldatu, bidaia prestatzeko eta puntuen arteko distantzia neurtzeko. Emaitza GPX fitxategi gisa gorde daiteke, eta gero gidaritzarako erabili.</string>
   <string name="osmand_distance_planning_plugin_name">Distantzia kalkulagailua eta planifikatzailea</string>
-  <string name="use_distance_measurement_help">* Ukitu puntu bat markatzeko.
-* Sakatu mapan eta mantendu aurreko puntua ezabatzeko.
-* Sakatu puntu bat eta mantendu deskribapena ikusi eta atxikitzeko.
-* Sakatu neurgailuan ekintza gehiago ikusteko.</string>
+  <string name="use_distance_measurement_help">* Ukitu puntu bat markatzeko. * Sakatu luze mapan aurreko puntua ezabatzeko. * Sakatu luze puntu bat deskribapena ikusi eta atxikitzeko. * Sakatu neurgailuan ekintza gehiago ikusteko.</string>
   <string name="shared_string_do_not_show_again">Ez erakutsi berriro</string>
   <string name="distance_measurement_start_editing">Editatzen hasi</string>
   <string name="distance_measurement_finish_editing">Editatzen bukatu</string>
@@ -160,7 +157,7 @@
   <string name="av_settings">Audio/bideo ezarpenak</string>
   <string name="recording_error">Errorea gertatu da grabatzean</string>
   <string name="recording_camera_not_available">Kamera ez dago eskugarri</string>
-  <string name="recording_is_recorded">Audioa/bideoa grabatzen ari da. Gelditzeko, AV widgetan sakatu.</string>
+  <string name="recording_is_recorded">Audioa/bideoa grabatzen ari da. Gelditzeko sakatu AV widgeta.</string>
   <string name="recording_playing">Aukeratutako grabaketaren audioa erreproduzitzen.⏎\n%1$s</string>
   <string name="recording_open_external_player">Ireki kanpoko erreproduzitzailea</string>
   <string name="recording_delete_confirm">Grabaketa hau ezabatu nahi al duzu?</string>
@@ -306,7 +303,7 @@
   <string name="bg_service_sleep_mode_on">Gelditu\nbigarren planoko aplikazioa</string>
   <string name="gps_wakeup_interval">GPSaren esnatze tartea: %s</string>
   <string name="int_continuosly">Etengabeko</string>
-  <string name="screen_is_locked">Pantaila desblokeatzeko sakatu giltrarrapoearen ikonoa</string>
+  <string name="screen_is_locked">Pantaila desblokeatzeko sakatu giltzarrapoaren ikonoa</string>
   <string name="map_widget_top_text">Kale izena</string>
   <string name="map_widget_config">Konfiguratu pantaila</string>
   <string name="map_widget_back_to_loc">Non nago</string>
@@ -646,7 +643,9 @@ Biltegiratzean {1} MB erabiliko dira.
   <string name="shared_string_no_thanks">Ez, milesker</string>
   <string name="basemap_missing">Oinarrizko munduko mapa (mundu guztia estaliz zoom maila txikietan) falta da. Mesedez kontsideratu World_basemap_x.obf deskargatzea ikuspegi globala eduki ahal izateko.</string>
   <string name="vector_data_missing">Datu lokalak (lineaz kanpokoak) ez daude SD txartelean. Lineaz kanpoko mapak erabili nahi badituzu, jaitsi beharko zenituzke.</string>
-  <string name="local_index_gpx_info_show">\n\nZanpatuta mantendu aukerentzat</string>
+  <string name="local_index_gpx_info_show">"
+\n
+\nSakatu luze aukerentzat"</string>
   
   
   
@@ -1264,7 +1263,7 @@ Biltegiratzean {1} MB erabiliko dira.
     <string name="arrival_distance_descr">Noizko nahi duzu iristearen iragarkia?</string>
     <string name="share_route_subject">Ibilbidea OsmAnd bidez partekatu da</string>
 	<string name="share_route_as_gpx">Partekatu ibilbidea GPX fitxategi bezala</string>
-	<string name="interrupt_music_descr">Eten musika guztiz ahots bidezko iragarkiak egiterakoan (eta ez bolumena jaitsi besterik gabe)</string>
+	<string name="interrupt_music_descr">Ahots bidezko iragarkiek musika pausatzen dute, ez bolumena jaitsi besterik gabe</string>
 	<string name="interrupt_music">Eten musika</string>
 	<string name="index_item_world_altitude_correction">Munduko Altitude Zuzenketa</string>
 	<string name="rendering_attr_alpineHiking_name">SAC Alpetar ibilbide ikuspegia (Suitzako klub alpinoa)</string>
@@ -1302,7 +1301,9 @@ Biltegiratzean {1} MB erabiliko dira.
     
     <string name="loading_smth">Kargatzen %1$s…</string>
     <string name="map_widget_plain_time">Oraingo ordua</string>
-    <string name="selected_gpx_info_show">\n\nZanpatuta mantendu mapan ikusteko</string>
+    <string name="selected_gpx_info_show">"
+\n
+\nSakatu luze mapan ikusteko"</string>
     <string name="shared_string_selected_lowercase">hautatua</string>
     <string name="gpx_info_distance">Distantzia: %1$s (%2$s puntu)</string>
 	<string name="gpx_info_start_time">Hasiera-ordua: %1$tF, %1$tT</string>
@@ -1705,7 +1706,7 @@ Lorratza %2$s</string>
     <string name="save_global_track_interval_descr">Hautatu lorratzen grabatze orokorrerako erregistratze maiztasun bat (Mapan GPX erregistratze trepetaren bidez gaitzen da)</string>
     <string name="save_track_to_gpx_globally">Erregistratu lorratza GPX fitxategian</string>
     <string name="save_track_to_gpx_globally_headline">Eskaerapeko lorratz erregistroa</string>
-    <string name="none_selected_gpx">Ez da GPX fitxategirik aukeratu. Aukeratzeko sakatu eta mantendu eskuragarri dagoen lorratzean.</string>
+    <string name="none_selected_gpx">Ez da GPX fitxategirik aukeratu. Bat aukeratzeko sakatu luze lorratz eskuragarri batean.</string>
     <string name="gpx_info_subtracks">Azpi-lorratzak: %1$s</string>
     <string name="gpx_file_is_empty">GPX lorratza hutsik dago</string>
     <string name="osmo_auto_send_locations_descr">Hasi bidaia eta bidali kokapenak automatikoki aplikazioa abiatzean</string>
@@ -2213,7 +2214,7 @@ Erregistro berria burutu nahi duzu?</string>
     <string name="auto_zoom_far">Erdibideko irismena</string>
     <string name="route_descr_destination">Helburua</string>
     <string name="download_wikipedia_maps">Wikipedia</string>
-    <string name="local_index_description">Sakatu edozein elementu xehetasun gehiagorako, sakatu eta mantendu desgaitu edo ezabatzeko. Gailuan dauden datuak (%1$s libre):</string>
+    <string name="local_index_description">Sakatu edozein elementu xehetasun gehiagorako, sakatu luze desgaitu edo ezabatzeko. Gailuan dauden datuak (%1$s libre):</string>
     <string name="index_name_netherlands">Europa - Herbehereak</string>
     <string name="shared_string_others">Beste batzuk</string>
     <string name="shared_string_release">Kaleratua</string>
@@ -2384,27 +2385,27 @@ mapak eta nabigazioa</string>
     <string name="shared_string_recorded">Grabatuta</string>
     <string name="shared_string_record">Grabatu</string>
     <string name="gpx_logging_no_data">Daturik ez</string>
-    <string name="release_2_5">\\u2022 klikatu daitezkeen ikonoak mapan
-\n
-\n
-\n • Iragazki bidezko POI bilaketa ahaltsua: bilatu adibidez jatetxeak sukaldaritza motaren arabera, edo behar zehatzetarako kanpingak
-\n
-\n
-\n • Topo estilo berria txirrindularieta mendizaleentzat
-\n
-\n
-\n • Hobetutako bidai grabaketa
-\n
-\n
-\n • Jakinarazpen hobetuak nabigazioan (Android Wear)
-\n
-\n
-\n • Beste hobekuntza eta konponketa ugari
-\n
-\n
+    <string name="release_2_5">\\u2022 Sakatu daitezkeen ikonoak mapan 
+\n 
+\n 
+\n • Iragazki bidezko POI bilaketa ahaltsua: bilatu adibidez jatetxeak sukaldaritza motaren arabera, edo behar zehatzetarako kanpingak 
+\n 
+\n 
+\n • Topo estilo berria txirrindularieta mendizaleentzat 
+\n 
+\n 
+\n • Hobetutako bidai grabaketa 
+\n 
+\n 
+\n • Jakinarazpen hobetuak nabigazioan (Android Wear) 
+\n 
+\n 
+\n • Beste hobekuntza eta konponketa ugari 
+\n 
+\n 
 \n eta gehiago…</string>
     <string name="trip_rec_notification_settings">Bidaiaren grabaketa (daturik ez)</string>
-    <string name="trip_rec_notification_settings_desc">Erakutsi grabatu botoia zapalduz bidaiaren grabaketa abiatzea baimentzen duen jakinarazpen bat</string>
+    <string name="trip_rec_notification_settings_desc">Bistaratu bidaiaren grabaketa abiatzea baimentzen duen jakinarazpen bat</string>
     <string name="shared_string_notifications">Jakinarazpenak</string>
     <string name="osmo_share_location">Partekatu</string>
     <string name="osmo_pause_location">Pausatu</string>
@@ -2513,7 +2514,7 @@ Area honi dagokio: %1$s x %2$s</string>
     <string name="quick_action_map_source_action">Gehitu mapa-iturria</string>
     <string name="quick_action_map_source_switch">Mapa-iturria \"%s\" izatera aldatu da.</string>
     <string name="quick_action_btn_tutorial_title">Aldatu botoiaren posizioa</string>
-    <string name="quick_action_btn_tutorial_descr">Sakatze-luze eta arrastatu botoia bere pantailako posizioa aldatzeko</string>
+    <string name="quick_action_btn_tutorial_descr">Sakatze luze eta arrastatu botoia bere pantailako posizioa aldatzeko</string>
 	<string name="shared_string_action_name">Ekintzaren izena</string>
 <string name="quick_action_duplicates">Zehaztutako ekintza-izena erabilita dago aurretik, bikoizketa ekiditeko %1$s izatera aldatu da.</string>
     <string name="quick_action_showhide_favorites_descr">Ekintza botoia sakatzean mapan gogoko puntuak erakutsi edo ezkutatu egingo dira.</string>
@@ -2611,8 +2612,8 @@ Area honi dagokio: %1$s x %2$s</string>
     <string name="select_postcode">Aukeratu posta-kodea</string>
     <string name="quick_action_auto_zoom">Maparen zoom automatikoa bai/ez</string>
     <string name="quick_action_auto_zoom_desc">Ekintza botoia sakatzean abiaduraren araberako maparen zoom automatikoa gaitu edo desgaituko da.</string>
-    <string name="quick_action_auto_zoom_on">Maparen zoom automatikoa gaituta</string>
-    <string name="quick_action_auto_zoom_off">Maparen zoom automatikoa desgaituta</string>
+    <string name="quick_action_auto_zoom_on">Gaitu maparen zoom automatikoa</string>
+    <string name="quick_action_auto_zoom_off">Desgaitu maparen zoom automatikoa</string>
     <string name="quick_action_add_destination">Gehitu helburua</string>
     <string name="quick_action_replace_destination">Ordeztu helburua</string>
     <string name="quick_action_add_first_intermediate">Gehitu lehen tartekoa</string>
@@ -2739,17 +2740,26 @@ Area honi dagokio: %1$s x %2$s</string>
     <string name="osmand_plus_extended_description_part5">Segurtasun-funtzioak • Aukerazko egun/gau ikuspegien arteko aldaketa • Aukeran abiadura muga bistaratu, eta gainditzekotan ohartarazi • Abiaduraren araberako zoom maila aukeran • Partekatu zure kokalekua lagunek aurkitu zaitzaten</string>
     <string name="osmand_plus_extended_description_part7">Egin ekarpenak zuzenean OSMen• Jakinarazi datuen erroreak • Igo GPX lorratzak zuzenean OSMra aplikaziotik • Gehitu POIak eta igo zuzenean OSMra (edo geroago, konektatzen zarenean) • Aukeran, grabatu bidaia bigarren planoan (gailua lo dagoela) 
 \nOsmAnd librea da eta garapen aktiboan dago. Edonork egin ditzake ekarpenak, arazoen berri emanez, itzulpenak hobetuz, edo ezaugarri berriak programatuz. Proiektua hobekuntza jarraituan dago garatzaile eta erabiltzaileen arteko hartu-eman hauei esker. Funtzio berriak programatu eta frogatzeko, proiektuak diru-laguntzak behar ditu.</string>
-    <string name="quick_action_resume_pause_navigation">Jarraitu/Pausatu nabigazioa</string>
-    <string name="quick_action_resume_pause_navigation_descr">Sakatu botoi hau nabigazioa pausatzeko, edo berau jarraitzeko pausatuta bazegoen.</string>
-    <string name="quick_action_show_navigation_finish_dialog">Erakutsi Bukatu nabigazio-botoia</string>
-    <string name="quick_action_start_stop_navigation">Hasi/Bukatu nabigazioa</string>
-    <string name="quick_action_start_stop_navigation_descr">Sakatu boti hau nabigazioa hasteko, edo gelditzeko hasita bazegoen.</string>
+    <string name="quick_action_resume_pause_navigation">Jarraitu/pausatu nabigazioa</string>
+    <string name="quick_action_resume_pause_navigation_descr">Sakatu botoi hau nabigazioa pausatzeko edo jarraitzeko.</string>
+    <string name="quick_action_show_navigation_finish_dialog">Erakutsi nabigazioa amaituta elkarrizketa-koadroa</string>
+    <string name="quick_action_start_stop_navigation">Hasi/amaitu nabigazioa</string>
+    <string name="quick_action_start_stop_navigation_descr">Sakatu botoi hau nabigazioa hasi edo amaitzeko.</string>
     <string name="live_monitoring_max_interval_to_send">Lineako jarraipenaren denbora-bufferra</string>
     <string name="live_monitoring_max_interval_to_send_desrc">Zehaztu bidaltzeke dauden kokalekuak gordetzeko denbora-buffer bat</string>
     <string name="mappilary_no_internet_desc">Internet behar duzu Mapillary-ko argazkiak ikusteko</string>
     <string name="retry">Saiatu berriro</string>
-<string name="measurement_tool">Neurtzeko tresna</string>
-    <string name="measurement_tool_action_bar">Hautatu kokaleku bat mapan eta egin klik Gehitu botoian erregelan puntu bat gehitzeko.</string>
+<string name="measurement_tool">Neurtu distantzia</string>
+    <string name="measurement_tool_action_bar">Arakatu mapa eta gehitu puntuak</string>
     <string name="add_gpx_waypoint_bottom_sheet_title">Gehitu gpx bide-puntua</string>
     <string name="shared_string_create">Sortu</string>
+<string name="none_point_error">Gehitu puntu bat gutxienez.</string>
+    <string name="enter_gpx_name">GPX fitxategiaren izena:</string>
+    <string name="show_on_map_after_saving">Erakutsi mapan gorde eta gero</string>
+    <string name="add_route_point">Gehitu puntua ibilbidean</string>
+    <string name="add_waypoint">Gehitu bide-puntua</string>
+    <string name="save_gpx_waypoint">Gorde GPX bide-puntua</string>
+    <string name="save_route_point">Gorde ibilbideko puntua</string>
+    <string name="waypoint_one">1. bide-puntua</string>
+    <string name="route_point_one">1. ibilbide-puntua</string>
 </resources>
