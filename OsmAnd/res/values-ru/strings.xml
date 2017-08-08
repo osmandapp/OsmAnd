@@ -2313,7 +2313,7 @@
     <string name="get_for_month">Получить за %1$s в месяц</string>
     <string name="get_it">Получить</string>
     <string name="osm_live_banner_desc">Получите неограниченные загрузки для карт, а также обновления карт чаще чем один раз в месяц: еженедельно, ежедневно или ежечасно.</string>
-    <string name="osmand_plus_banner_desc">Полная версия OsmAnd с неограниченным количеством загрузок и ежемесячных обновлений для карт.</string>
+    <string name="osmand_plus_banner_desc">Неограниченный доступ к картам, обновлениям и плагину Wikipedia.</string>
     <string name="select_voice_provider">Выберите голосовое сопровождение</string>
     <string name="osm_live_payment_desc">Абонентская плата будет взиматься ежемесячно. Отменить подписку можно на Google Play в любой момент.</string>
     <string name="donation_to_osm">Пожертвование для сообщества OpenStreetMap</string>
