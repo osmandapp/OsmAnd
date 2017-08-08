@@ -2659,14 +2659,14 @@
 	<string name="poi_free_flying_rigid_yes">Strikt</string>
 	<string name="poi_free_flying_rigid_no">Freies Fliegen strikt: Nein</string>
 	<string name="poi_free_flying_site_orientation_n">Freeflying Ausrichtung: N</string>
-	<string name="poi_free_flying_site_orientation_ne">Freier Flugplatz Ausrichtung: NO</string>
+	<string name="poi_free_flying_site_orientation_ne">Freeflying Ausrichtung: NO</string>
 	<string name="poi_free_flying_site_orientation_e">Freier Flugplatz Ausrichtung: O</string>
-	<string name="poi_free_flying_site_orientation_se">Freier Flugplatz Ausrichtung: SO</string>
-	<string name="poi_free_flying_site_orientation_s">Freier Flugplatz Ausrichtung: S</string>
-	<string name="poi_free_flying_site_orientation_sw">Freier Flugplatz Ausrichtung: SW</string>
-	<string name="poi_free_flying_site_orientation_w">Freier Flugplatz Ausrichtung: W</string>
-	<string name="poi_free_flying_site_orientation_nw">Freier Flugplatz Ausrichtung: NW</string>
-	<string name="poi_free_flying_no_flight_time">Keine Flugzeit (freies Fliegen)</string>
+	<string name="poi_free_flying_site_orientation_se">Freeflying Ausrichtung: SO</string>
+	<string name="poi_free_flying_site_orientation_s">Freeflying Ausrichtung: S</string>
+	<string name="poi_free_flying_site_orientation_sw">Freeflying Ausrichtung: SW</string>
+	<string name="poi_free_flying_site_orientation_w">Freeflying Ausrichtung: W</string>
+	<string name="poi_free_flying_site_orientation_nw">Freeflying Ausrichtung: NW</string>
+	<string name="poi_free_flying_no_flight_time">Keine Flugzeit (Freeflying)</string>
 	<string name="poi_free_flying_guest_guidelines_yes">Gästerichtlinien: ja</string>
 	<string name="poi_free_flying_guest_guidelines_no">Gästerichtlinien: Nein</string>
 
@@ -3001,7 +3001,7 @@
 	<string name="poi_generator_output_hot_water">Ausgangsleistung: heißes Wasser</string>
 	<string name="poi_generator_output_compressed_air">Ausgangsleistung: Druckluft</string>
 	<string name="poi_generator_output_biogas">Ausgangsleistung: Biogas</string>
-	<string name="poi_support_billboard">Abstützung: Reklametafel</string>
+	<string name="poi_support_billboard">Reklametafel</string>
 	<string name="poi_diplomatic_high_commission">Hochkommissar</string>
 
 	<string name="poi_fire_operator">Feueroperator</string>
@@ -3086,7 +3086,7 @@
 	<string name="poi_xmas_day_date">Weihnachten: Zeit für die Veranstaltung</string>
 	<string name="poi_xmas_note">Weihnachten: Hinweis</string>
 	<string name="poi_xmas_opening_hours">Weihnachten: Öffnungszeiten</string>
-	<string name="poi_xmas_location">Weihnachten: Ort</string>
+	<string name="poi_xmas_location">Weihnachten: Örtlichkeit</string>
 	<string name="poi_xmas_url">Weihnachten: Internetseite</string>
 
 <string name="poi_vending_type">Verkaufsart</string>
@@ -3124,7 +3124,7 @@
 	<string name="poi_cuisine_sushi">Sushi</string>
 	<string name="poi_cuisine_fish_and_chips">Fisch und Pommes</string>
 	<string name="poi_cuisine_seafood">Meeresfrüchte</string>
-	<string name="poi_cuisine_barbecue">Grill</string>
+	<string name="poi_cuisine_barbecue">BBQ-Grill</string>
 	<string name="poi_cuisine_noodle">Nudel</string>
 	<string name="poi_cuisine_donut">Donut</string>
 	<string name="poi_cuisine_crepe">Crepes</string>
