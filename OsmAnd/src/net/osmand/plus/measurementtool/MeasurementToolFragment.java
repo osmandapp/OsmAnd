@@ -10,6 +10,8 @@ import android.support.v4.app.Fragment;
 import android.support.v4.app.FragmentManager;
 import android.support.v4.content.ContextCompat;
 import android.support.v7.app.AlertDialog;
+import android.support.v7.widget.LinearLayoutManager;
+import android.support.v7.widget.RecyclerView;
 import android.support.v7.widget.SwitchCompat;
 import android.text.Editable;
 import android.text.TextWatcher;
@@ -19,11 +21,9 @@ import android.view.Menu;
 import android.view.MenuItem;
 import android.view.View;
 import android.view.ViewGroup;
-import android.widget.AdapterView;
 import android.widget.EditText;
 import android.widget.ImageButton;
 import android.widget.ImageView;
-import android.widget.ListView;
 import android.widget.TextView;
 import android.widget.Toast;
 
@@ -200,7 +200,7 @@ public class MeasurementToolFragment extends Fragment {
 			mapActivity.showTopToolbar(toolBarController);
 		}
 
-		adapter = new MeasurementToolAdapter(getMapActivity(), R.layout.measure_points_list_item, measurementLayer.getMeasurementPoints());
+		adapter = new MeasurementToolAdapter(getMapActivity(), measurementLayer.getMeasurementPoints());
 		adapter.setRemovePointListener(new MeasurementToolAdapter.RemovePointListener() {
 			@Override
 			public void onPointRemove() {
@@ -215,12 +215,13 @@ public class MeasurementToolFragment extends Fragment {
 				}
 			}
 		});
-		ListView lv = mainView.findViewById(R.id.measure_points_list_view);
-		lv.setDivider(null);
-		lv.setAdapter(adapter);
-		lv.setOnItemClickListener(new AdapterView.OnItemClickListener() {
+		final RecyclerView rv = mainView.findViewById(R.id.measure_points_recycler_view);
+		rv.setLayoutManager(new LinearLayoutManager(getContext()));
+		rv.setAdapter(adapter);
+		adapter.setItemClickListener(new MeasurementToolAdapter.ItemClickListener() {
 			@Override
-			public void onItemClick(AdapterView<?> adapterView, View view, int pos, long l) {
+			public void onItemClick(View view) {
+				int pos = rv.indexOfChild(view);
 				measurementLayer.moveMapToPoint(pos);
 			}
 		});

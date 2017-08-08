@@ -1,13 +1,9 @@
 package net.osmand.plus.measurementtool;
 
-import android.content.Context;
-import android.support.annotation.LayoutRes;
-import android.support.annotation.NonNull;
-import android.support.annotation.Nullable;
+import android.support.v7.widget.RecyclerView;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
-import android.widget.ArrayAdapter;
 import android.widget.ImageButton;
 import android.widget.ImageView;
 import android.widget.TextView;
@@ -21,39 +17,44 @@ import net.osmand.util.MapUtils;
 
 import java.util.List;
 
-class MeasurementToolAdapter extends ArrayAdapter<WptPt> {
+class MeasurementToolAdapter extends RecyclerView.Adapter<MeasurementToolAdapter.Holder> {
 
-	private final MapActivity mapActivity;
-	private final List<WptPt> points;
-	private RemovePointListener listener;
+	private MapActivity mapActivity;
+	private List<WptPt> points;
+	private RemovePointListener removePointListener;
+	private ItemClickListener itemClickListener;
 
-	MeasurementToolAdapter(@NonNull Context context, @LayoutRes int resource, List<WptPt> points) {
-		super(context, resource, points);
-		this.mapActivity = (MapActivity) context;
+	MeasurementToolAdapter(MapActivity mapActivity, List<WptPt> points) {
+		this.mapActivity = mapActivity;
 		this.points = points;
 	}
 
 	void setRemovePointListener(RemovePointListener listener) {
-		this.listener = listener;
+		this.removePointListener = listener;
 	}
 
-	@NonNull
+	public void setItemClickListener(ItemClickListener itemClickListener) {
+		this.itemClickListener = itemClickListener;
+	}
+
 	@Override
-	public View getView(final int pos, @Nullable View view, @NonNull ViewGroup parent) {
-		ViewHolder holder;
-
-		if (view == null) {
-			view = LayoutInflater.from(parent.getContext()).inflate(R.layout.measure_points_list_item, parent, false);
-			final boolean nightMode = mapActivity.getMyApplication().getDaynightHelper().isNightModeForMapControls();
-			if (!nightMode) {
-				view.findViewById(R.id.points_divider).setBackgroundResource(R.drawable.divider);
-			}
-			holder = new ViewHolder(view);
-			view.setTag(holder);
-		} else {
-			holder = (ViewHolder) view.getTag();
+	public Holder onCreateViewHolder(ViewGroup viewGroup, int i) {
+		View view = LayoutInflater.from(viewGroup.getContext()).inflate(R.layout.measure_points_list_item, viewGroup, false);
+		final boolean nightMode = mapActivity.getMyApplication().getDaynightHelper().isNightModeForMapControls();
+		if (!nightMode) {
+			view.findViewById(R.id.points_divider).setBackgroundResource(R.drawable.divider);
 		}
+		view.setOnClickListener(new View.OnClickListener() {
+			@Override
+			public void onClick(View view) {
+				itemClickListener.onItemClick(view);
+			}
+		});
+		return new Holder(view);
+	}
 
+	@Override
+	public void onBindViewHolder(final Holder holder, int pos) {
 		IconsCache iconsCache = mapActivity.getMyApplication().getIconsCache();
 		holder.icon.setImageDrawable(iconsCache.getThemedIcon(R.drawable.ic_action_measure_point));
 		holder.title.setText(mapActivity.getString(R.string.plugin_distance_point) + " - " + (pos + 1));
@@ -71,22 +72,26 @@ class MeasurementToolAdapter extends ArrayAdapter<WptPt> {
 		holder.deleteBtn.setOnClickListener(new View.OnClickListener() {
 			@Override
 			public void onClick(View view) {
-				points.remove(pos);
-				listener.onPointRemove();
+				points.remove(holder.getAdapterPosition());
+				removePointListener.onPointRemove();
 			}
 		});
-
-		return view;
 	}
 
-	private static class ViewHolder {
+	@Override
+	public int getItemCount() {
+		return points.size();
+	}
+
+	static class Holder extends RecyclerView.ViewHolder {
 
 		final ImageView icon;
 		final TextView title;
 		final TextView descr;
 		final ImageButton deleteBtn;
 
-		ViewHolder(View view) {
+		Holder(View view) {
+			super(view);
 			icon = (ImageView) view.findViewById(R.id.measure_point_icon);
 			title = (TextView) view.findViewById(R.id.measure_point_title);
 			descr = (TextView) view.findViewById(R.id.measure_point_descr);
@@ -96,5 +101,9 @@ class MeasurementToolAdapter extends ArrayAdapter<WptPt> {
 
 	interface RemovePointListener {
 		void onPointRemove();
+	}
+
+	interface ItemClickListener {
+		void onItemClick(View view);
 	}
 }
