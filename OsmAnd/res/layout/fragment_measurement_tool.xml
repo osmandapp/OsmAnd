@@ -17,6 +17,7 @@
         android:orientation="vertical">
 
         <RelativeLayout
+            android:id="@+id/up_down_row"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:paddingBottom="12dp"
@@ -36,16 +37,16 @@
                 android:background="@null"
                 tools:src="@drawable/ic_action_ruler"/>
 
-            <ImageButton
+            <ImageView
                 android:id="@+id/up_down_button"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_alignParentEnd="true"
                 android:layout_alignParentRight="true"
                 android:layout_centerVertical="true"
+                android:layout_marginEnd="16dp"
+                android:layout_marginStart="16dp"
                 android:background="@null"
-                android:paddingEnd="16dp"
-                android:paddingStart="16dp"
                 tools:src="@drawable/ic_action_arrow_down"/>
 
             <TextView
