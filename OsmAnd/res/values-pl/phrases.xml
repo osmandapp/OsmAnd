@@ -569,7 +569,7 @@
 	<string name="poi_place_farm">Gospodarstwo rolne</string>
 	<string name="poi_residential">Teren zamieszkania</string>
 
-	<string name="poi_podiatrist">Podiatra</string>
+	<string name="poi_podiatrist">Podolog</string>
 	<string name="poi_it">Biuro IT</string>
 	<string name="poi_architect">Biuro architekta</string>
 	<string name="poi_leisure_track">Tor sportowy</string>
@@ -1077,10 +1077,10 @@
 	<string name="poi_leaf_type_leafless">Bezlistne</string>
 	<string name="poi_species">Gatunki</string>
 	<string name="poi_trees_oil">Olejowiec (palma gwinejska)</string>
-	<string name="poi_animal_shelter_dog">Typ schronienia: dla psów</string>
-	<string name="poi_animal_shelter_cat">Typ schronienia: dla kotów</string>
-	<string name="poi_animal_shelter_dog_cat">Typ schronienia: dla psów i kotów</string>
-	<string name="poi_animal_shelter_bird">Typ schronienia: dla ptaków</string>
+	<string name="poi_animal_shelter_dog">Psy</string>
+	<string name="poi_animal_shelter_cat">Koty</string>
+	<string name="poi_animal_shelter_dog_cat">Psy, koty</string>
+	<string name="poi_animal_shelter_bird">Ptaki</string>
 
 	<string name="poi_seats">Siedzenia</string>
 	<string name="poi_backrest_yes">Oparcia: tak</string>
@@ -1545,9 +1545,9 @@
 	<string name="poi_ventilation_shaft">Szyb wentylacyjny</string>
 
 	<string name="poi_telescope">Teleskop</string>
-	<string name="poi_telescope_type_optical">Teleskop: optyczny</string>
-	<string name="poi_telescope_type_radio">Teleskop: radioteleskop</string>
-	<string name="poi_telescope_type_gamma">Teleskop: promieniowanie gamma</string>
+	<string name="poi_telescope_type_optical">Optyczny</string>
+	<string name="poi_telescope_type_radio">Radioteleskop</string>
+	<string name="poi_telescope_type_gamma">Promieniowanie gamma</string>
 	<string name="poi_pumping_station">Pompownia</string>
 
 	<string name="poi_spoil_heap">Hałda górnicza</string>
@@ -1573,7 +1573,7 @@
 
 	<string name="poi_love_hotel">Hotel miłości</string>
 
-	<string name="poi_scout_yes">Obóz harcerski: tak</string>
+	<string name="poi_scout_yes">Tak</string>
 	<string name="poi_scout_no">Obóz harcerski: nie</string>
 	<string name="poi_club_scout">Drużyna harcerska</string>
 
@@ -1845,7 +1845,7 @@
 	<string name="poi_payment_gift_card_no">Karty podarunkowe nieakceptowane</string>
 	<string name="poi_payment_golden_crown_yes">Golden Crown</string>
 	<string name="poi_payment_golden_crown_no">Karty Golden Crown nieakceptowane</string>
-	<string name="poi_payment_pro100_yes">"PRO100 "</string>
+	<string name="poi_payment_pro100_yes">PRO100</string>
 	<string name="poi_payment_pro100_no">Karty PRO100 nieakceptowane</string>
 	<string name="poi_payment_union_card_yes">Union Card</string>
 	<string name="poi_payment_union_card_no">Karty Union Card nieakceptowane</string>
@@ -2528,12 +2528,12 @@
 	<string name="poi_fire_hydrant_pressure">Ciśnienie hydrantu</string>
 	<string name="poi_fire_hydrant_count">Hydrantów</string>
 	<string name="poi_fire_hydrant_flow_capacity">Prędkość przepływu wody</string>
-	<string name="poi_fire_hydrant_position_sidewalk">Umiejscowienie hydrantu: chodnik</string>
-	<string name="poi_fire_hydrant_position_green">Umiejscowienie hydrantu: trawnik</string>
-	<string name="poi_fire_hydrant_position_lane">Umiejscowienie hydrantu: jezdnia</string>
-	<string name="poi_fire_hydrant_position_parking_lot">Umiejscowienie hydrantu: parking</string>
-	<string name="poi_fire_hydrant_position_street">Umiejscowienie hydrantu: ulica</string>
-	<string name="poi_fire_hydrant_position_underground">Umiejscowienie hydrantu: pod ziemią</string>
+	<string name="poi_fire_hydrant_position_sidewalk">Chodnik</string>
+	<string name="poi_fire_hydrant_position_green">Trawnik</string>
+	<string name="poi_fire_hydrant_position_lane">Jezdnia</string>
+	<string name="poi_fire_hydrant_position_parking_lot">Parking</string>
+	<string name="poi_fire_hydrant_position_street">Ulica</string>
+	<string name="poi_fire_hydrant_position_underground">Pod ziemią</string>
 	<string name="poi_fire_hydrant_style_wsh">Typ hydrantu: wsh</string>
 	<string name="poi_fire_hydrant_style_water_source_main">Sieć</string>
 	<string name="poi_fire_hydrant_style_water_source_pond">Staw</string>
@@ -2699,7 +2699,7 @@
 	<string name="poi_historic_period_old_kingdom">Okres: Stare Państwo (2686 – 2181 p.n.e.)</string>
 	<string name="poi_historic_period_first_intermediate_period">Okres: Pierwszy Okres Przejściowy (2181 – 2055 p.n.e.)</string>
 	<string name="poi_historic_period_second_intermediate_period">Okres: Drugi Okres Przejściowy (1650 – 1550 p.n.e.)</string>
-	<string name="poi_historic_period_third_intermediate_period">"Okres: Trzeci Okres Przejściowy (1069 – 664 p.n.e.) "</string>
+	<string name="poi_historic_period_third_intermediate_period">Okres historyczny: trzeci okres przejściowy (1069 – 664 p.n.e.)</string>
 	<string name="poi_historic_period_first_persian_period">Okres: pierwszy najazd perski</string>
 	<string name="poi_historic_period_late_period">Okres: Okres Późny (664 – 332 p.n.e.)</string>
 	<string name="poi_historic_period_second_persian_period">Okres: drugi najazd perski</string>
@@ -2892,7 +2892,7 @@
 	<string name="poi_health_facility_type_nursing_home">Placówka medyczna: hospicjum</string>
 	<string name="poi_health_facility_type_support_group_home">Placówka medyczna: dom opieki</string>
 
-	<string name="poi_health_specialty_palliative_medicine_yes">Specjalizacja: medycyna paliatywna</string>
+	<string name="poi_health_specialty_palliative_medicine_yes">Medycyna paliatywna</string>
 
 	<string name="poi_health_person_type_assistant">Pracownik służby zdrowia: asystent</string>
 	<string name="poi_health_person_type_healer">Pracownik słųżby zdrowia: lekarz</string>
@@ -3041,8 +3041,8 @@
 	<string name="poi_additional_type">Dodatkowy</string>
 <string name="poi_shop_craft">Sklep z materiałami dla rzemieślników</string>
 
-	<string name="poi_service_bicycle_charging_yes">Ładowanie rowerów: tak</string>
-	<string name="poi_service_bicycle_charging_no">Ładowanie rowerów: nie</string>
+	<string name="poi_service_bicycle_charging_yes">Ładowanie: tak</string>
+	<string name="poi_service_bicycle_charging_no">Ładowanie: nie</string>
 
 <string name="poi_fuel_avia_type">Rodzaj</string>
 	<string name="poi_payment_fuel_type">Karty paliwowe</string>
@@ -3150,7 +3150,7 @@
 	<string name="poi_cuisine_chicken">Kurczak</string>
 	<string name="poi_cuisine_ice_cream">Lody</string>
 	<string name="poi_cuisine_sushi">Sushi</string>
-	<string name="poi_cuisine_fish_and_chips">Frytki z rybą</string>
+	<string name="poi_cuisine_fish_and_chips">Ryba z frytkami</string>
 	<string name="poi_cuisine_seafood">Owoce morza</string>
 	<string name="poi_cuisine_barbecue">Grill</string>
 	<string name="poi_cuisine_noodle">Azjatyckie nudle</string>
@@ -3428,4 +3428,55 @@
 	<string name="poi_motorcycle_type_dualsport">dual-sport</string>
 	<string name="poi_motorcycle_type_standard">standardowe</string>
 
-</resources>
+<string name="poi_animal_shelter_type">Akceptacja zwierząt</string>
+	<string name="poi_lock_basin">Zbiornik zamknięty</string>
+	<string name="poi_animal_shelter_wildlife">Dzikie zwierzęta</string>
+	<string name="poi_animal_shelter_horse">Konie</string>
+	<string name="poi_animal_shelter_mammal">Ssaki</string>
+	<string name="poi_animal_shelter_fish">Rybki</string>
+
+	<string name="poi_owner">Właściciel</string>
+
+	<string name="poi_animal_shelter_purpose_adoption_yes">Adopcja: tak</string>
+	<string name="poi_animal_shelter_purpose_adoption_no">Adopcja: nie</string>
+	<string name="poi_generator_output_electricity_no">Wyjście (elektryczne): nie</string>
+
+	<string name="poi_direction_n">Kierunek: północ</string>
+	<string name="poi_direction_nne">Kierunek: północ-północnowschodni</string>
+	<string name="poi_direction_ne">Kierunek: północny wschód</string>
+	<string name="poi_direction_ene">Kierunek: wschód-północny wschód</string>
+	<string name="poi_direction_e">Kierunek: wschód</string>
+	<string name="poi_direction_s">Kierunek: południe</string>
+	<string name="poi_direction_ese">Kierunek: wschód-południowy wschód</string>
+	<string name="poi_direction_se">Kierunek: południowy wschód</string>
+	<string name="poi_direction_sse">Kierunek: południe-południowy wschód</string>
+	<string name="poi_direction_ssw">Kierunek: południe-południowy zachód</string>
+	<string name="poi_direction_sw">Kierunek: południowy zachód</string>
+	<string name="poi_direction_wsw">Kierunek: zachód-południowy zachód</string>
+	<string name="poi_direction_w">Kierunek: zachód</string>
+	<string name="poi_direction_wnw">Kierunek: zachód-północny zachód</string>
+	<string name="poi_direction_nw">Kierunek: północny zachód</string>
+	<string name="poi_direction_nnw">Kierunek: północ-północny zachód</string>
+	<string name="poi_direction_forward">Kierunek: naprzód</string>
+	<string name="poi_direction_backward">Kierunek: wstecz</string>
+	<string name="poi_direction_exit">Kierunek: wyjście</string>
+	<string name="poi_direction_all">Kierunek: wszystkie</string>
+
+	<string name="poi_direction_entrance">Kierunek: wejście</string>
+	<string name="poi_reservation_required">Rezerwacja: wymagana</string>
+	<string name="poi_reservation_recommended">Rezerwacja: polecana</string>
+	<string name="poi_reservation_yes">Rezerwacja: tak</string>
+	<string name="poi_reservation_no">Rezerwacja: nie</string>
+	<string name="poi_reservation_members_only">Rezerwacja: tylko dla członków</string>
+
+	<string name="poi_beds">Łóżka</string>
+
+<string name="poi_animal_shelter_purpose">Przeznaczenie</string>
+
+<string name="poi_direction_clockwise">Kierunek: zgodny z ruchem wskazówek zegara</string>
+	<string name="poi_direction_anticlockwise">Kierunek: przeciwny do ruchu wskazówek zegara</string>
+	<string name="poi_direction_up">Kierunek: góra</string>
+	<string name="poi_direction_down">Kierunek: dół</string>
+	<string name="poi_winter_room_yes">Pokój zimowy: tak</string>
+	<string name="poi_winter_room_no">Pokój zimowy: nie</string>
+	</resources>
