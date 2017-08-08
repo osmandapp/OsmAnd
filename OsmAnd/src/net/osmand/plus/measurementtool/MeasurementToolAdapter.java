@@ -19,8 +19,8 @@ import java.util.List;
 
 class MeasurementToolAdapter extends RecyclerView.Adapter<MeasurementToolAdapter.Holder> {
 
-	private MapActivity mapActivity;
-	private List<WptPt> points;
+	private final MapActivity mapActivity;
+	private final List<WptPt> points;
 	private RemovePointListener removePointListener;
 	private ItemClickListener itemClickListener;
 

@@ -201,6 +201,7 @@ public class MeasurementToolFragment extends Fragment {
 		}
 
 		adapter = new MeasurementToolAdapter(getMapActivity(), measurementLayer.getMeasurementPoints());
+		final RecyclerView rv = mainView.findViewById(R.id.measure_points_recycler_view);
 		adapter.setRemovePointListener(new MeasurementToolAdapter.RemovePointListener() {
 			@Override
 			public void onPointRemove() {
@@ -215,9 +216,6 @@ public class MeasurementToolFragment extends Fragment {
 				}
 			}
 		});
-		final RecyclerView rv = mainView.findViewById(R.id.measure_points_recycler_view);
-		rv.setLayoutManager(new LinearLayoutManager(getContext()));
-		rv.setAdapter(adapter);
 		adapter.setItemClickListener(new MeasurementToolAdapter.ItemClickListener() {
 			@Override
 			public void onItemClick(View view) {
@@ -225,6 +223,8 @@ public class MeasurementToolFragment extends Fragment {
 				measurementLayer.moveMapToPoint(pos);
 			}
 		});
+		rv.setLayoutManager(new LinearLayoutManager(getContext()));
+		rv.setAdapter(adapter);
 
 		return view;
 	}
@@ -391,6 +391,7 @@ public class MeasurementToolFragment extends Fragment {
 		super.onDestroyView();
 		exitMeasurementMode();
 		adapter.setRemovePointListener(null);
+		adapter.setItemClickListener(null);
 		if (pointsDetailsOpened) {
 			setPreviousMapPosition();
 		}
