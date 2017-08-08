@@ -338,7 +338,9 @@ Memòria proporcional %4$s MB (límit de l\'Android %5$s MB, Dalvik %6$s MB).</s
     <string name="pref_vector_map">Configuració del mapa de vectors</string>
     <string name="button_upgrade_osmandplus">Actualitza a l\'OsmAnd+</string>
     <string name="favorite_home_category">Casa</string>
-    <string name="local_index_gpx_info_show">\n\nPremeu i manteniu per veure les opcions</string>
+    <string name="local_index_gpx_info_show">"
+\n
+\nPremeu contínuament per veure les opcions"</string>
     <string name="local_index_no_items_to_do">No hi ha ítems per %1$s</string>
     <string name="internet_connection_required_for_online_route">S\'ha seleccionat un servei de navegació en línia però no hi ha cap connexió a Internet disponible.</string>
     <string name="tts_missing_language_data_title">Falten dades</string>
@@ -968,12 +970,9 @@ Memòria proporcional %4$s MB (límit de l\'Android %5$s MB, Dalvik %6$s MB).</s
     <string name="context_menu_item_destination_point">Estableix com a destinació</string>
     <string name="local_osm_changes_backup_successful">Fitxer de canvis OSM %1$s generat correctament</string>
     <string name="use_distance_measurement_help">* Toqueu per marcar un punt.
-
- * Premeu i aguanteu al mapa per suprimir el punt anterior.
- 
-* Premeu i aguanteu un punt per veure\'n i afegir-hi una descripció.
-
-* Feu clic al giny de mesura per veure més accions.</string>
+\n * Premeu contínuament al mapa per suprimir el punt anterior.
+\n * Premeu contínuament un punt per veure\'n i afegir-hi una descripció.
+\n * Premeu en el giny de mesura per veure més accions.</string>
     <string name="av_def_action_choose">Selecciona sota demanda</string>
     <string name="background_service_provider">Proveïdor de la ubicació</string>
     <string name="converting_names">S\'estan convertint els noms nadius / en anglès…</string>
@@ -1222,13 +1221,13 @@ Memòria proporcional %4$s MB (límit de l\'Android %5$s MB, Dalvik %6$s MB).</s
     <string name="osmo_groups">Grups OsMo</string>
     <string name="osmo_group_info">Informació</string>
     <string name="osmo_group">Grup OsMo</string>
-    <string name="osmo_group_share">Per connectar amb el grup %2$s, indiqueu l\'identificador de grup (%1$s) o feu clic a %3$s.</string>
+    <string name="osmo_group_share">Per connectar amb el grup %2$s, indiqueu l\'identificador de grup (%1$s) o premeu a %3$s.</string>
     <string name="osmo_share_connect_device">Permet el seguiment d\'aquest dispositiu permanentment</string>
     <string name="osmo_share_current_session">Comparteix la sessió actual al navegador</string>
     <string name="osmo_session_not_available">La sessió no és disponible. Verifiqueu que «Envia les ubicacions» està activat.</string>
     <string name="osmo_share_session">Comparteix la sessió</string>
     <string name="osmo_session_id_share">L\'URL de la sessió per seguir el dispositiu (%1$s)</string>
-    <string name="osmo_tracker_id_share">Per connectar al dispositiu objectiu %2$s, feu clic a l\'enllaç %3$s o especifiqueu l\'identificador de seguiment (%1$s)</string>
+    <string name="osmo_tracker_id_share">Per connectar al dispositiu objectiu %2$s, premeu a l\'enllaç %3$s o especifiqueu l\'identificador de seguiment (%1$s)</string>
     <string name="osmo_track_interval">Freqüència de registre</string>
     <string name="osmo_track_interval_descr">Seleccioneu la freqüència d\'enviament de la ubicació</string>
     <string name="int_days">dies</string>
@@ -1287,7 +1286,9 @@ Memòria proporcional %4$s MB (límit de l\'Android %5$s MB, Dalvik %6$s MB).</s
     <string name="loading_smth">S\'està carregant %1$s…</string>
     <string name="map_widget_plain_time">Hora actual</string>
     <string name="gpx_wpt">Fita</string>
-    <string name="selected_gpx_info_show">\n\nPremeu i manteniu per veure al mapa</string>
+    <string name="selected_gpx_info_show">"
+\n
+\nPremeu contínuament per veure al mapa"</string>
     <string name="delay_navigation_start">Inicia automàticament el guiatge turn-by-turn</string>
     <string name="shared_string_selected_lowercase">seleccionat</string>
     <string name="gpx_split_interval">Divideix l\'interval</string>
@@ -1308,7 +1309,7 @@ Memòria proporcional %4$s MB (límit de l\'Android %5$s MB, Dalvik %6$s MB).</s
     <string name="show_zoom_buttons_navigation">Mostra els botons de zoom</string>
     <string name="sort_by_distance">Ordena per distància</string>
     <string name="sort_by_name">Ordena per nom</string>
-    <string name="none_selected_gpx">Cap fitxer GPX seleccionat. Per seleccionar-ne un premeu i mantingueu sobre una traça disponible.</string>
+    <string name="none_selected_gpx">Cap fitxer GPX seleccionat. Per seleccionar-ne un, premeu contínuament una traça disponible.</string>
     <string name="local_index_select_gpx_file">Selecciona per mostrar</string>
     <string name="no_index_file_to_download">No s\'ha trobat cap baixada, verifiqueu la connexió a Internet.</string>
     <string name="osmo_gpx_points_downloaded">S\'han baixat %1$s punts OsMo.</string>
@@ -1605,7 +1606,7 @@ Memòria proporcional %4$s MB (límit de l\'Android %5$s MB, Dalvik %6$s MB).</s
     <string name="shared_string_release">Alliberat</string>
     <string name="shared_string_message">Missatge</string>
     <string name="agps_data_last_downloaded">Darreres dades A-GPS baixades: %1$s</string>
-    <string name="confirm_usage_speed_cameras">A molts països (Alemanya, França, Itàlia i altres) l\'ús d\'avisadors de radars no és permès per la llei. L\'OsmAnd no assumeix cap responsabilitat si decidiu violar la llei. Feu clic a «sí» només si se us permet utilitzar aquesta funció.</string>
+    <string name="confirm_usage_speed_cameras">A molts països (Alemanya, França, Itàlia i altres) l\'ús d\'avisadors de radars no és permès per la llei. L\'OsmAnd no assumeix cap responsabilitat si decidiu violar la llei. Premeu a «sí» només si se us permet utilitzar aquesta funció.</string>
     <string name="agps_info">Informació A-GPS</string>
     <string name="shared_string_show_description">Mostra la descripció</string>
     <string name="shared_string_do_not_use">No utilitzeu</string>
@@ -2180,7 +2181,7 @@ L\'ús de memòria serà de {3} MB temporalment i {1} MB permanentment.
     <string name="get_for">Obteniu-lo per %1$s</string>
     <string name="get_for_month">Obteniu-lo per %1$s mesos</string>
     <string name="osm_live_banner_desc">Obteniu nous mapes i actualitzacions sense límit més sovint d\'un cop al mes: cada hora, dia o setmana.</string>
-    <string name="osmand_plus_banner_desc">Versió completa d\'OsmAnd amb baixada de mapes sense límit i amb actualitzacions mensuals de mapes.</string>
+    <string name="osmand_plus_banner_desc">Baixada il·limitada de mapes i connector de Viquipèdia</string>
     <string name="get_it">Obteniu-lo</string>
     <string name="osm_live_payment_desc">El cost de subscripció es carregarà mensualment. Podeu cancel·lar la subscripció a Google Play quan vulgueu.</string>
     <string name="donation_to_osm">Donació a la comunitat OpenStreetMap</string>
@@ -2222,22 +2223,22 @@ L\'ús de memòria serà de {3} MB temporalment i {1} MB permanentment.
     <string name="shared_string_recorded">Enregistrat</string>
     <string name="shared_string_record">Enregistra</string>
     <string name="gpx_logging_no_data">No hi ha dades</string>
-    <string name="release_2_5">"\\u2022 Icones per clicar al mapa
+    <string name="release_2_5">"\\022 Icones per tocar al mapa 
 \n 
 \n • Potent filtre de cerca de PDIs: cerca, p.e.  restaurants per tipus de cuina o càmpings amb equipaments determinats 
-\n 
+\n
 \n • Nou estil de mapa topològic per ciclistes i senderistes 
-\n 
-\n • Enregistrament de la ruta millorat 
-\n 
+\n
+\n • Enregistrament de ruta millorat 
+\n
 \n • Notificacions de navegació millorades (Android Wear) 
-\n 
+\n
 \n • Moltes més millores i correccions d\'errors 
-\n 
+\n
 \n i més…"</string>
     <string name="shared_string_notifications">Notificacions</string>
     <string name="trip_rec_notification_settings">Enregistrament de la ruta (no hi ha dades)</string>
-    <string name="trip_rec_notification_settings_desc">Mostra una notificació que permet començar l\'enregistrament de la ruta prement el botó Enregistra</string>
+    <string name="trip_rec_notification_settings_desc">Mostra una notificació de sistema en permetre començar l\'enregistrament de la ruta</string>
     <string name="osmo_share_location">Comparteix</string>
     <string name="osmo_pause_location">Atura</string>
     <string name="osmo_service_running">S\'està executant el servei OsmMo</string>
@@ -2556,7 +2557,7 @@ Abasta l\'àrea: %1$s x %2$s</string>
     <string name="quick_action_resume_pause_navigation_descr">Premeu aquest botó per aturar o reprendre la navegació.</string>
     <string name="quick_action_show_navigation_finish_dialog">Mostra el diàleg de finalització de la navegació</string>
     <string name="quick_action_start_stop_navigation">Inicia/atura la navegació</string>
-    <string name="quick_action_start_stop_navigation_descr">Premeu aquest botó per iniciar la navegació o per aturar-la si ja estava començada.</string>
+    <string name="quick_action_start_stop_navigation_descr">Premeu aquest botó per iniciar o per aturar la navegació.</string>
     <string name="release_2_7">\\022 Connector Mapillary amb imatges a nivell de carrer
 \n
 \n• Giny mètric per el mesurament de distàncies
