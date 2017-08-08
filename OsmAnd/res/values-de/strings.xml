@@ -2398,7 +2398,7 @@ Wenn Sie OsmAnd und OSM lieben und unterstützen wollen, so ist dies die perfekt
     <string name="skip_map_downloading">Herunterladen der Karten überspringen</string>
     <string name="no_update_info_desc">Keine Versionsaktualisierungen oder OsmAnd-Angebote abfragen</string>
     <string name="si_mi_meters">Meilen/Meter</string>
-    <string name="osm_live_banner_desc">Unbegrenzt Karten herunterladen und sie nicht nur einmal pro Monat, sondern wöchentlich, täglich oder stündlich aktualisieren.</string>
+    <string name="osm_live_banner_desc">Unbegrenzte Karten-Downloads, Updates und Wikipedia-Plugin.</string>
     <string name="osmand_plus_banner_desc">Vollversion von OsmAnd mit unbegrenzten Karten-Downloads und monatlichen Kartenaktualisierungen.</string>
     <string name="get_for">Für %1$s abonnieren</string>
     <string name="get_for_month">Für %1$s pro Monat abonnieren</string>
