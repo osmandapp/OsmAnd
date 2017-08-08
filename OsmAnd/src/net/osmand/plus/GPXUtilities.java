@@ -880,12 +880,32 @@ public class GPXUtilities {
 			if (routes.size() == 0) {
 				routes.add(new Route());
 			}
-			Route currentRoute = routes.get(routes.size() -1);
+			Route currentRoute = routes.get(routes.size() - 1);
 			currentRoute.points.add(pt);
 
 			modifiedTime = System.currentTimeMillis();
 
 			return pt;
+		}
+
+		public void addTrkSegment(List<WptPt> points) {
+			Track generalTrack = getGeneralTrack();
+			if (generalTrack != null) {
+				tracks.remove(generalTrack);
+				this.generalTrack = null;
+				this.generalSegment = null;
+			}
+
+			TrkSegment segment = new TrkSegment();
+			segment.points.addAll(points);
+
+			if (tracks.size() == 0) {
+				tracks.add(new Track());
+			}
+			Track lastTrack = tracks.get(tracks.size() - 1);
+			lastTrack.segments.add(segment);
+
+			modifiedTime = System.currentTimeMillis();
 		}
 
 		public void updateWptPt(WptPt pt, double lat, double lon, long time, String description, String name, String category, int color) {

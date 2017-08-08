@@ -1,6 +1,11 @@
 <?xml version="1.0" encoding="utf-8"?>
 <menu xmlns:android="http://schemas.android.com/apk/res/android">
     <item
+        android:visible="false"
+        android:id="@+id/action_save_as_new_segment"
+        android:icon="@drawable/ic_action_polygom_dark"
+        android:title="@string/save_as_new_segment"/>
+    <item
         android:id="@+id/action_save_as_gpx"
         android:icon="@drawable/ic_action_polygom_dark"
         android:title="@string/shared_string_save_as_gpx"/>

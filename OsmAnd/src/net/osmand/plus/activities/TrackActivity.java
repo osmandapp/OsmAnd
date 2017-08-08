@@ -18,6 +18,7 @@ import net.osmand.data.PointDescription;
 import net.osmand.plus.GPXDatabase.GpxDataItem;
 import net.osmand.plus.GPXUtilities;
 import net.osmand.plus.GPXUtilities.GPXFile;
+import net.osmand.plus.GPXUtilities.WptPt;
 import net.osmand.plus.GpxSelectionHelper;
 import net.osmand.plus.GpxSelectionHelper.GpxDisplayGroup;
 import net.osmand.plus.GpxSelectionHelper.SelectedGpxFile;
@@ -109,7 +110,21 @@ public class TrackActivity extends TabActivity {
 	}
 
 	public void addLine() {
+		GPXFile gpxFile = getGpx();
+		NewGpxLine newGpxLine = new NewGpxLine(gpxFile);
+		WptPt pointToShow = gpxFile != null ? gpxFile.findPointToShow() : null;
+		if (pointToShow != null) {
+			LatLon location = new LatLon(pointToShow.getLatitude(), pointToShow.getLongitude());
+			final OsmandSettings settings = app.getSettings();
+			settings.setMapLocationToShow(location.getLatitude(), location.getLongitude(),
+					settings.getLastKnownMapZoom(),
+					new PointDescription(PointDescription.POINT_TYPE_WPT, getString(R.string.add_line)),
+					false,
+					newGpxLine
+			);
 
+			MapActivity.launchMapActivityMoveToTop(this);
+		}
 	}
 
 	protected void setGpxDataItem(GpxDataItem gpxDataItem) {
@@ -332,5 +347,17 @@ public class TrackActivity extends TabActivity {
 
 	public GpxDataItem getGpxDataItem() {
 		return gpxDataItem;
+	}
+
+	public static class NewGpxLine {
+		private GPXFile gpxFile;
+
+		public NewGpxLine(GPXFile gpxFile) {
+			this.gpxFile = gpxFile;
+		}
+
+		public GPXFile getGpxFile() {
+			return gpxFile;
+		}
 	}
 }

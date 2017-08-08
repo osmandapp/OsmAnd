@@ -32,9 +32,11 @@ import net.osmand.IndexConstants;
 import net.osmand.plus.GPXUtilities;
 import net.osmand.plus.GPXUtilities.Route;
 import net.osmand.plus.GPXUtilities.WptPt;
+import net.osmand.plus.GpxSelectionHelper.SelectedGpxFile;
 import net.osmand.plus.IconsCache;
 import net.osmand.plus.R;
 import net.osmand.plus.activities.MapActivity;
+import net.osmand.plus.activities.TrackActivity.NewGpxLine;
 import net.osmand.plus.helpers.AndroidUiHelper;
 import net.osmand.plus.views.OsmandMapTileView;
 import net.osmand.plus.views.mapwidgets.MapInfoWidgetsFactory;
@@ -46,6 +48,7 @@ import java.text.MessageFormat;
 import java.text.SimpleDateFormat;
 import java.util.Date;
 import java.util.LinkedList;
+import java.util.List;
 import java.util.Locale;
 
 import static net.osmand.plus.GPXUtilities.GPXFile;
@@ -65,6 +68,11 @@ public class MeasurementToolFragment extends Fragment {
 	private boolean wasCollapseButtonVisible;
 	private boolean pointsDetailsOpened;
 	private int previousMapPosition;
+	private NewGpxLine newGpxLine;
+
+	public void setNewGpxLine(NewGpxLine newGpxLine) {
+		this.newGpxLine = newGpxLine;
+	}
 
 	@Nullable
 	@Override
@@ -173,12 +181,26 @@ public class MeasurementToolFragment extends Fragment {
 					popup.getMenuInflater().inflate(R.menu.measurement_tool_menu, popup.getMenu());
 					final Menu menu = popup.getMenu();
 					IconsCache ic = mapActivity.getMyApplication().getIconsCache();
-					menu.findItem(R.id.action_save_as_gpx).setIcon(ic.getThemedIcon(R.drawable.ic_action_polygom_dark));
+					MenuItem saveAsNewSegmentMenuItem = menu.findItem(R.id.action_save_as_new_segment);
+					MenuItem saveAsGpxTrack = menu.findItem(R.id.action_save_as_gpx);
+					saveAsNewSegmentMenuItem.setIcon(ic.getThemedIcon(R.drawable.ic_action_polygom_dark));
+					saveAsGpxTrack.setIcon(ic.getThemedIcon(R.drawable.ic_action_polygom_dark));
+					if (newGpxLine != null) {
+						saveAsNewSegmentMenuItem.setVisible(true);
+						saveAsGpxTrack.setVisible(false);
+					}
 					menu.findItem(R.id.action_clear_all).setIcon(ic.getThemedIcon(R.drawable.ic_action_reset_to_default_dark));
 					popup.setOnMenuItemClickListener(new IconPopupMenu.OnMenuItemClickListener() {
 						@Override
 						public boolean onMenuItemClick(MenuItem menuItem) {
 							switch (menuItem.getItemId()) {
+								case R.id.action_save_as_new_segment:
+									if (measurementLayer.getPointsCount() > 0) {
+										saveAsNewSegment(mapActivity);
+									} else {
+										Toast.makeText(mapActivity, getString(R.string.none_point_error), Toast.LENGTH_SHORT).show();
+									}
+									return true;
 								case R.id.action_save_as_gpx:
 									if (measurementLayer.getPointsCount() > 0) {
 										saveAsGpxOnClick(mapActivity);
@@ -256,6 +278,13 @@ public class MeasurementToolFragment extends Fragment {
 			mapActivity.getMapView().setMapPosition(previousMapPosition);
 			mapActivity.refreshMap();
 		}
+	}
+
+	private void saveAsNewSegment(MapActivity mapActivity) {
+		GPXFile gpx = newGpxLine.getGpxFile();
+		SelectedGpxFile selectedGpxFile = mapActivity.getMyApplication().getSelectedGpxHelper().getSelectedFileByPath(gpx.path);
+		boolean showOnMap = selectedGpxFile != null;
+		saveGpx(null, null, showOnMap);
 	}
 
 	private void saveAsGpxOnClick(MapActivity mapActivity) {
@@ -342,23 +371,35 @@ public class MeasurementToolFragment extends Fragment {
 
 			@Override
 			protected String doInBackground(Void... voids) {
-				toSave = new File(dir, fileName);
-				GPXFile gpx = new GPXFile();
 				MeasurementToolLayer measurementLayer = getMeasurementLayer();
-				if (measurementLayer != null) {
-					LinkedList<WptPt> points = measurementLayer.getMeasurementPoints();
-					if (points.size() == 1) {
-						gpx.points.add(points.getFirst());
-					} else if (points.size() > 1) {
-						Route rt = new Route();
-						gpx.routes.add(rt);
-						rt.points.addAll(points);
+				GPXFile gpx;
+				if (newGpxLine != null) {
+					gpx = newGpxLine.getGpxFile();
+					toSave = new File(gpx.path);
+					if (measurementLayer != null) {
+						List<WptPt> points = measurementLayer.getMeasurementPoints();
+						gpx.addTrkSegment(points);
+					}
+				} else {
+					gpx = new GPXFile();
+					toSave = new File(dir, fileName);
+					if (measurementLayer != null) {
+						LinkedList<WptPt> points = measurementLayer.getMeasurementPoints();
+						if (points.size() == 1) {
+							gpx.points.add(points.getFirst());
+						} else if (points.size() > 1) {
+							Route rt = new Route();
+							gpx.routes.add(rt);
+							rt.points.addAll(points);
+						}
 					}
 				}
 				MapActivity activity = getMapActivity();
 				if (activity != null) {
 					String res = GPXUtilities.writeGpxFile(toSave, gpx, activity.getMyApplication());
-					gpx.path = toSave.getAbsolutePath();
+					if (newGpxLine == null) {
+						gpx.path = toSave.getAbsolutePath();
+					}
 					if (showOnMap) {
 						activity.getMyApplication().getSelectedGpxHelper().selectGpxFile(gpx, true, false);
 					}
