@@ -160,6 +160,20 @@ public class TrackSegmentFragment extends OsmAndListFragment {
 	@Override
 	public void onActivityCreated(Bundle savedInstanceState) {
 		super.onActivityCreated(savedInstanceState);
+		getListView().setOnScrollListener(new AbsListView.OnScrollListener() {
+			@Override
+			public void onScrollStateChanged(AbsListView absListView, int i) {
+				if (i == AbsListView.OnScrollListener.SCROLL_STATE_TOUCH_SCROLL) {
+					if (menuOpened) {
+						closeMenu();
+					}
+				}
+			}
+
+			@Override
+			public void onScroll(AbsListView absListView, int i, int i1, int i2) {
+			}
+		});
 		getListView().setBackgroundColor(getResources().getColor(
 				getMyApplication().getSettings().isLightContent() ? R.color.ctx_menu_info_view_bg_light
 						: R.color.ctx_menu_info_view_bg_dark));
