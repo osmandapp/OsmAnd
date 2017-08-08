@@ -139,6 +139,7 @@ public class TrackSegmentFragment extends OsmAndListFragment {
 	private RotatedTileBox rotatedTileBox;
 	private Bitmap mapBitmap;
 	private Bitmap mapTrackBitmap;
+	private boolean chartClicked;
 
 	@Override
 	public void onCreate(@Nullable Bundle savedInstanceState) {
@@ -1073,6 +1074,7 @@ public class TrackSegmentFragment extends OsmAndListFragment {
 		@Override
 		public Object instantiateItem(ViewGroup container, int position) {
 
+			chartClicked = false;
 			GPXTabItemType tabType = tabTypes[position];
 			View view = null;
 			switch (tabType) {
@@ -1091,102 +1093,112 @@ public class TrackSegmentFragment extends OsmAndListFragment {
 				if (gpxItem != null) {
 					GPXTrackAnalysis analysis = gpxItem.analysis;
 					final LineChart chart = (LineChart) view.findViewById(R.id.chart);
-					chart.setOnTouchListener(new View.OnTouchListener() {
+					chart.setHighlightPerDragEnabled(false);
+					chart.setOnClickListener(new View.OnClickListener() {
 						@Override
-						public boolean onTouch(View v, MotionEvent event) {
-							getListView().requestDisallowInterceptTouchEvent(true);
-							switch (event.getAction()) {
-								case android.view.MotionEvent.ACTION_DOWN:
-									listViewYPos = event.getRawY();
-									break;
-								case android.view.MotionEvent.ACTION_MOVE:
-									scrollBy(Math.round(listViewYPos - event.getRawY()));
-									listViewYPos = event.getRawY();
-									break;
-							}
-							return false;
-						}
-					});
-					chart.setOnChartValueSelectedListener(new OnChartValueSelectedListener() {
-						@Override
-						public void onValueSelected(Entry e, Highlight h) {
-							WptPt wpt = getPoint(chart, h.getX());
-							if (wpt != null) {
-								selectedPointLatLon = new LatLon(wpt.lat, wpt.lon);
-								Bitmap bmp = drawSelectedPoint();
-								imageView.setImageDrawable(new BitmapDrawable(app.getResources(), bmp));
-							}
-						}
-
-						@Override
-						public void onNothingSelected() {
-
-						}
-					});
-					final View finalView = view;
-					chart.setOnChartGestureListener(new OnChartGestureListener() {
-
-						float highlightDrawX = -1;
-
-						@Override
-						public void onChartGestureStart(MotionEvent me, ChartGesture lastPerformedGesture) {
-							if (chart.getHighlighted() != null && chart.getHighlighted().length > 0) {
-								highlightDrawX = chart.getHighlighted()[0].getDrawX();
-							} else {
-								highlightDrawX = -1;
-							}
-						}
-
-						@Override
-						public void onChartGestureEnd(MotionEvent me, ChartGesture lastPerformedGesture) {
-							gpxItem.chartMatrix = new Matrix(chart.getViewPortHandler().getMatrixTouch());
-							Highlight[] highlights = chart.getHighlighted();
-							if (highlights != null && highlights.length > 0) {
-								gpxItem.chartHighlightPos = highlights[0].getX();
-							} else {
-								gpxItem.chartHighlightPos = -1;
-							}
-							for (int i = 0; i < getCount(); i++) {
-								View v = getViewAtPosition(i);
-								if (v != finalView) {
-									updateChart(i);
-								}
-							}
-						}
-
-						@Override
-						public void onChartLongPressed(MotionEvent me) {
-						}
-
-						@Override
-						public void onChartDoubleTapped(MotionEvent me) {
-						}
-
-						@Override
-						public void onChartSingleTapped(MotionEvent me) {
-						}
-
-						@Override
-						public void onChartFling(MotionEvent me1, MotionEvent me2, float velocityX, float velocityY) {
-						}
-
-						@Override
-						public void onChartScale(MotionEvent me, float scaleX, float scaleY) {
-						}
-
-						@Override
-						public void onChartTranslate(MotionEvent me, float dX, float dY) {
-							if (highlightDrawX != -1) {
-								Highlight h = chart.getHighlightByTouchPoint(highlightDrawX, 0f);
-								if (h != null) {
-									chart.highlightValue(h);
-									WptPt wpt = getPoint(chart, h.getX());
-									if (wpt != null) {
-										selectedPointLatLon = new LatLon(wpt.lat, wpt.lon);
-										Bitmap bmp = drawSelectedPoint();
-										imageView.setImageDrawable(new BitmapDrawable(app.getResources(), bmp));
+						public void onClick(View view) {
+							if (!chartClicked) {
+								chartClicked = true;
+								chart.setHighlightPerDragEnabled(true);
+								chart.setOnTouchListener(new View.OnTouchListener() {
+									@Override
+									public boolean onTouch(View v, MotionEvent event) {
+										getListView().requestDisallowInterceptTouchEvent(true);
+										switch (event.getAction()) {
+											case android.view.MotionEvent.ACTION_DOWN:
+												listViewYPos = event.getRawY();
+												break;
+											case android.view.MotionEvent.ACTION_MOVE:
+												scrollBy(Math.round(listViewYPos - event.getRawY()));
+												listViewYPos = event.getRawY();
+												break;
+										}
+										return false;
 									}
-								}
+								});
+								chart.setOnChartValueSelectedListener(new OnChartValueSelectedListener() {
+									@Override
+									public void onValueSelected(Entry e, Highlight h) {
+										WptPt wpt = getPoint(chart, h.getX());
+										if (wpt != null) {
+											selectedPointLatLon = new LatLon(wpt.lat, wpt.lon);
+											Bitmap bmp = drawSelectedPoint();
+											imageView.setImageDrawable(new BitmapDrawable(app.getResources(), bmp));
+										}
+									}
+
+									@Override
+									public void onNothingSelected() {
+
+									}
+								});
+								final View finalView = view;
+								chart.setOnChartGestureListener(new OnChartGestureListener() {
+
+									float highlightDrawX = -1;
+
+									@Override
+									public void onChartGestureStart(MotionEvent me, ChartGesture lastPerformedGesture) {
+										if (chart.getHighlighted() != null && chart.getHighlighted().length > 0) {
+											highlightDrawX = chart.getHighlighted()[0].getDrawX();
+										} else {
+											highlightDrawX = -1;
+										}
+									}
+
+									@Override
+									public void onChartGestureEnd(MotionEvent me, ChartGesture lastPerformedGesture) {
+										gpxItem.chartMatrix = new Matrix(chart.getViewPortHandler().getMatrixTouch());
+										Highlight[] highlights = chart.getHighlighted();
+										if (highlights != null && highlights.length > 0) {
+											gpxItem.chartHighlightPos = highlights[0].getX();
+										} else {
+											gpxItem.chartHighlightPos = -1;
+										}
+										for (int i = 0; i < getCount(); i++) {
+											View v = getViewAtPosition(i);
+											if (v != finalView) {
+												updateChart(i);
+											}
+										}
+									}
+
+									@Override
+									public void onChartLongPressed(MotionEvent me) {
+									}
+
+									@Override
+									public void onChartDoubleTapped(MotionEvent me) {
+									}
+
+									@Override
+									public void onChartSingleTapped(MotionEvent me) {
+									}
+
+									@Override
+									public void onChartFling(MotionEvent me1, MotionEvent me2, float velocityX, float velocityY) {
+									}
+
+									@Override
+									public void onChartScale(MotionEvent me, float scaleX, float scaleY) {
+									}
+
+									@Override
+									public void onChartTranslate(MotionEvent me, float dX, float dY) {
+										if (highlightDrawX != -1) {
+											Highlight h = chart.getHighlightByTouchPoint(highlightDrawX, 0f);
+											if (h != null) {
+												chart.highlightValue(h);
+												WptPt wpt = getPoint(chart, h.getX());
+												if (wpt != null) {
+													selectedPointLatLon = new LatLon(wpt.lat, wpt.lon);
+													Bitmap bmp = drawSelectedPoint();
+													imageView.setImageDrawable(new BitmapDrawable(app.getResources(), bmp));
+												}
+											}
+										}
+									}
+								});
 							}
 						}
 					});
