@@ -1,4 +1,4 @@
-<?xml version='1.0' encoding='utf-8'?>
+<?xml version='1.0' encoding='UTF-8'?>
 <resources> 
 	<string name="poi_bakery">Булочная</string>
 	<string name="poi_alcohol">Винно-водочный магазин</string>
@@ -720,7 +720,7 @@
 	<string name="poi_town">Город (небольшой)</string>
 	<string name="poi_village">Деревня</string>
 	<string name="poi_hamlet">Деревня (небольшая)</string>
-	<string name="poi_suburb">Район</string>
+	<string name="poi_suburb">Пригород (suburb)</string>
 	<string name="poi_isolated_dwelling">Хутор</string>
 	<string name="poi_locality">Урочище</string>
 
@@ -786,7 +786,7 @@
 	<string name="poi_healthcare">Здоровье</string>
 	<string name="poi_sustenance">Еда</string>
 	<string name="poi_lodging">Проживание</string>
-	<string name="poi_man_made">Рукотворное</string>
+	<string name="poi_man_made">Сооружения</string>
 	<string name="poi_administrative">Административные объекты</string>
 	<string name="poi_seamark">Морские объекты</string>
 	<string name="poi_internet_access_wlan">Доступ в Интернет: беспроводной</string>
