@@ -74,6 +74,12 @@ public class MeasurementToolFragment extends Fragment {
 	private TextView distanceTv;
 	private TextView pointsTv;
 	private String pointsSt;
+	private Drawable upIcon;
+	private Drawable downIcon;
+	private View pointsListContainer;
+	private ImageView upDownBtn;
+	private ImageButton undoBtn;
+	private ImageButton redoBtn;
 
 	private boolean wasCollapseButtonVisible;
 	private boolean pointsListOpened;
@@ -95,6 +101,8 @@ public class MeasurementToolFragment extends Fragment {
 		final int backgroundColor = ContextCompat.getColor(getActivity(),
 				nightMode ? R.color.ctx_menu_info_view_bg_dark : R.color.ctx_menu_info_view_bg_light);
 		boolean portrait = AndroidUiHelper.isOrientationPortrait(mapActivity);
+		upIcon = iconsCache.getThemedIcon(R.drawable.ic_action_arrow_up);
+		downIcon = iconsCache.getThemedIcon(R.drawable.ic_action_arrow_down);
 
 		pointsSt = getString(R.string.points).toLowerCase();
 
@@ -102,7 +110,8 @@ public class MeasurementToolFragment extends Fragment {
 
 		final View mainView = view.findViewById(R.id.main_view);
 		AndroidUtils.setBackground(mapActivity, mainView, nightMode, R.drawable.bg_bottom_menu_light, R.drawable.bg_bottom_menu_dark);
-		view.findViewById(R.id.points_list_container).setBackgroundColor(backgroundColor);
+		pointsListContainer = view.findViewById(R.id.points_list_container);
+		pointsListContainer.setBackgroundColor(backgroundColor);
 
 		distanceTv = (TextView) mainView.findViewById(R.id.measurement_distance_text_view);
 		pointsTv = (TextView) mainView.findViewById(R.id.measurement_points_text_view);
@@ -110,22 +119,22 @@ public class MeasurementToolFragment extends Fragment {
 		((ImageView) mainView.findViewById(R.id.ruler_icon))
 				.setImageDrawable(iconsCache.getIcon(R.drawable.ic_action_ruler, R.color.color_myloc_distance));
 
-		final ImageView upDownBtn = ((ImageView) mainView.findViewById(R.id.up_down_button));
+		upDownBtn = ((ImageView) mainView.findViewById(R.id.up_down_button));
 		upDownBtn.setImageDrawable(iconsCache.getThemedIcon(R.drawable.ic_action_arrow_up));
 
 		mainView.findViewById(R.id.up_down_row).setOnClickListener(new View.OnClickListener() {
 			@Override
 			public void onClick(View view) {
 				if (!pointsListOpened && measurementLayer.getPointsCount() > 0) {
-					showPointsList(mainView, iconsCache.getThemedIcon(R.drawable.ic_action_arrow_down));
+					showPointsList();
 				} else {
-					hidePointsList(mainView, iconsCache.getThemedIcon(R.drawable.ic_action_arrow_up));
+					hidePointsList();
 				}
 			}
 		});
 
-		final ImageButton undoBtn = ((ImageButton) mainView.findViewById(R.id.undo_point_button));
-		final ImageButton redoBtn = ((ImageButton) mainView.findViewById(R.id.redo_point_button));
+		undoBtn = ((ImageButton) mainView.findViewById(R.id.undo_point_button));
+		redoBtn = ((ImageButton) mainView.findViewById(R.id.redo_point_button));
 
 		undoBtn.setImageDrawable(iconsCache.getThemedIcon(R.drawable.ic_action_undo_dark));
 		undoBtn.setOnClickListener(new View.OnClickListener() {
@@ -136,7 +145,7 @@ public class MeasurementToolFragment extends Fragment {
 					enable(undoBtn);
 				} else {
 					disable(undoBtn, upDownBtn);
-					hidePointsList(mainView, iconsCache.getThemedIcon(R.drawable.ic_action_arrow_up));
+					hidePointsList();
 				}
 				adapter.notifyDataSetChanged();
 				enable(redoBtn);
@@ -163,14 +172,14 @@ public class MeasurementToolFragment extends Fragment {
 		mainView.findViewById(R.id.add_point_button).setOnClickListener(new View.OnClickListener() {
 			@Override
 			public void onClick(View view) {
-				addPoint(undoBtn, upDownBtn, redoBtn);
+				addPoint();
 			}
 		});
 
 		measurementLayer.setOnSingleTapListener(new MeasurementToolLayer.OnSingleTapListener() {
 			@Override
 			public void onSingleTap() {
-				addPoint(undoBtn, upDownBtn, redoBtn);
+				addPoint();
 			}
 		});
 
@@ -223,7 +232,7 @@ public class MeasurementToolFragment extends Fragment {
 									return true;
 								case R.id.action_clear_all:
 									measurementLayer.clearPoints();
-									hidePointsList(mainView, iconsCache.getThemedIcon(R.drawable.ic_action_arrow_up));
+									hidePointsList();
 									disable(undoBtn, redoBtn, upDownBtn);
 									updateText();
 									commandManager.clear();
@@ -254,7 +263,7 @@ public class MeasurementToolFragment extends Fragment {
 				disable(redoBtn);
 				updateText();
 				if (measurementLayer.getPointsCount() < 1) {
-					hidePointsList(mainView, iconsCache.getThemedIcon(R.drawable.ic_action_arrow_up));
+					hidePointsList();
 					disable(upDownBtn);
 					if (!commandManager.canUndo()) {
 						disable(undoBtn);
@@ -290,7 +299,7 @@ public class MeasurementToolFragment extends Fragment {
 		return view;
 	}
 
-	private void addPoint(View undoBtn, View upDownBtn, View redoBtn) {
+	private void addPoint() {
 		MeasurementToolLayer measurementLayer = getMeasurementLayer();
 		if (measurementLayer != null) {
 			commandManager.execute(new AddPointCommand(measurementLayer));
@@ -301,10 +310,10 @@ public class MeasurementToolFragment extends Fragment {
 		}
 	}
 
-	private void showPointsList(View view, Drawable icon) {
+	private void showPointsList() {
 		pointsListOpened = true;
-		view.findViewById(R.id.points_list_container).setVisibility(View.VISIBLE);
-		((ImageView) view.findViewById(R.id.up_down_button)).setImageDrawable(icon);
+		pointsListContainer.setVisibility(View.VISIBLE);
+		upDownBtn.setImageDrawable(downIcon);
 		MapActivity mapActivity = getMapActivity();
 		if (mapActivity != null) {
 			OsmandMapTileView tileView = mapActivity.getMapView();
@@ -314,10 +323,10 @@ public class MeasurementToolFragment extends Fragment {
 		}
 	}
 
-	private void hidePointsList(View view, Drawable icon) {
+	private void hidePointsList() {
 		pointsListOpened = false;
-		view.findViewById(R.id.points_list_container).setVisibility(View.GONE);
-		((ImageView) view.findViewById(R.id.up_down_button)).setImageDrawable(icon);
+		pointsListContainer.setVisibility(View.GONE);
+		upDownBtn.setImageDrawable(upIcon);
 		setPreviousMapPosition();
 	}
 
