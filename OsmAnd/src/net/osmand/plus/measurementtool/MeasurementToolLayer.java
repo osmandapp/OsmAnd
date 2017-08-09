@@ -119,7 +119,7 @@ public class MeasurementToolLayer extends OsmandMapLayer implements ContextMenuL
 
 	@Override
 	public boolean onSingleTap(PointF point, RotatedTileBox tileBox) {
-		if (inMeasurementMode && singleTapListener != null) {
+		if (inMeasurementMode && !inMovePointMode && singleTapListener != null) {
 			singleTapListener.onSingleTap();
 		}
 		return false;
