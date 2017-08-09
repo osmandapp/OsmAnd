@@ -20,6 +20,7 @@
             android:id="@+id/up_down_row"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
+            android:background="?attr/selectableItemBackground"
             android:paddingBottom="12dp"
             android:paddingTop="12dp">
 
@@ -116,7 +117,7 @@
                 android:layout_alignParentLeft="true"
                 android:layout_alignParentStart="true"
                 android:layout_centerVertical="true"
-                android:background="@null"
+                android:background="?attr/selectableItemBackground"
                 android:paddingBottom="14dp"
                 android:paddingEnd="12dp"
                 android:paddingLeft="16dp"
@@ -132,7 +133,7 @@
                 android:layout_centerVertical="true"
                 android:layout_toEndOf="@id/undo_point_button"
                 android:layout_toRightOf="@id/undo_point_button"
-                android:background="@null"
+                android:background="?attr/selectableItemBackground"
                 android:paddingBottom="14dp"
                 android:paddingEnd="16dp"
                 android:paddingLeft="12dp"

@@ -4,19 +4,30 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="48dp"
+    android:background="?attr/selectableItemBackground"
     android:descendantFocusability="blocksDescendants">
 
     <android.support.v7.widget.AppCompatImageView
-        android:id="@+id/measure_point_icon"
+        android:id="@+id/measure_point_reorder_icon"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_alignParentLeft="true"
         android:layout_alignParentStart="true"
         android:layout_centerVertical="true"
-        android:layout_marginEnd="24dp"
-        android:layout_marginLeft="16dp"
-        android:layout_marginRight="24dp"
+        android:layout_marginEnd="16dp"
         android:layout_marginStart="16dp"
+        android:tint="?attr/secondary_icon_color"
+        tools:src="@drawable/ic_action_reorder"/>
+
+    <android.support.v7.widget.AppCompatImageView
+        android:id="@+id/measure_point_icon"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_centerVertical="true"
+        android:layout_marginEnd="16dp"
+        android:layout_marginRight="16dp"
+        android:layout_toEndOf="@id/measure_point_reorder_icon"
+        android:layout_toRightOf="@id/measure_point_reorder_icon"
         tools:src="@drawable/ic_action_measure_point"/>
 
     <ImageButton
@@ -26,7 +37,7 @@
         android:layout_alignParentEnd="true"
         android:layout_alignParentRight="true"
         android:layout_centerVertical="true"
-        android:background="@null"
+        android:background="?attr/selectableItemBackground"
         android:focusableInTouchMode="true"
         android:paddingBottom="12dp"
         android:paddingEnd="16dp"
@@ -66,8 +77,8 @@
         android:layout_width="wrap_content"
         android:layout_height="1dp"
         android:layout_alignParentBottom="true"
-        android:layout_toEndOf="@+id/measure_point_icon"
-        android:layout_toRightOf="@+id/measure_point_icon"
+        android:layout_toEndOf="@+id/measure_point_reorder_icon"
+        android:layout_toRightOf="@+id/measure_point_reorder_icon"
         android:background="?attr/dashboard_divider"/>
 
 </RelativeLayout>
