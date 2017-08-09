@@ -698,56 +698,7 @@ public class TrackSegmentFragment extends OsmAndListFragment {
 	}
 
 	private QuadRect getRect() {
-		double left = 0, right = 0;
-		double top = 0, bottom = 0;
-		if (getGpx() != null) {
-			for (Track track : getGpx().tracks) {
-				for (TrkSegment segment : track.segments) {
-					for (WptPt p : segment.points) {
-						if (left == 0 && right == 0) {
-							left = p.getLongitude();
-							right = p.getLongitude();
-							top = p.getLatitude();
-							bottom = p.getLatitude();
-						} else {
-							left = Math.min(left, p.getLongitude());
-							right = Math.max(right, p.getLongitude());
-							top = Math.max(top, p.getLatitude());
-							bottom = Math.min(bottom, p.getLatitude());
-						}
-					}
-				}
-			}
-			for (WptPt p : getGpx().points) {
-				if (left == 0 && right == 0) {
-					left = p.getLongitude();
-					right = p.getLongitude();
-					top = p.getLatitude();
-					bottom = p.getLatitude();
-				} else {
-					left = Math.min(left, p.getLongitude());
-					right = Math.max(right, p.getLongitude());
-					top = Math.max(top, p.getLatitude());
-					bottom = Math.min(bottom, p.getLatitude());
-				}
-			}
-			for (Route route : getGpx().routes) {
-				for (WptPt p : route.points) {
-					if (left == 0 && right == 0) {
-						left = p.getLongitude();
-						right = p.getLongitude();
-						top = p.getLatitude();
-						bottom = p.getLatitude();
-					} else {
-						left = Math.min(left, p.getLongitude());
-						right = Math.max(right, p.getLongitude());
-						top = Math.max(top, p.getLatitude());
-						bottom = Math.min(bottom, p.getLatitude());
-					}
-				}
-			}
-		}
-		return new QuadRect(left, top, right, bottom);
+		return getTrackActivity().getRect();
 	}
 
 	private List<GpxDisplayGroup> getOriginalGroups() {
