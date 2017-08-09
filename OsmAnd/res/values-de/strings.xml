@@ -1630,7 +1630,7 @@ Mit Neuanmeldung fortfahren?</string>
 	<string name="record_plugin_name">Streckenaufzeichnung</string>
     <string name="int_hour">h</string>
     <string name="duration">Dauer</string>
-    <string name="distance">Distanz</string>
+    <string name="distance">Entfernung</string>
     <string name="index_tours">Touren</string>
     <string name="shared_string_all">Alle</string>
     <string name="waypoints">Wegpunkte</string>
@@ -2778,7 +2778,7 @@ Abgedeckte Fläche: %1$s x %2$s</string>
     <string name="quick_action_start_stop_navigation_descr">Taste drücken, um Navigation zu starten oder zu beenden.</string>
     <string name="quick_action_start_stop_navigation">Navigation starten/beenden</string>
     <string name="quick_action_resume_pause_navigation">Navigation fortsetzen/pausieren</string>
-    <string name="release_2_7">\\022 Mapillary-Erweiterung mit Vor-Ort-Bildern
+    <string name="release_2_7">• Mapillary-Erweiterung mit Vor-Ort-Bildern
 \n
 \n • Lineal-Widget zur Entfernungsmessung
 \n
@@ -2790,8 +2790,8 @@ Abgedeckte Fläche: %1$s x %2$s</string>
     <string name="rendering_value_translucent_pink_name">Transparentes Rosa</string>
     <string name="live_monitoring_max_interval_to_send">Zeitpuffer für Track-Liveübertragung</string>
     <string name="live_monitoring_max_interval_to_send_desrc">Zeitpuffer festlegen, in dem zu sendende Positionen erhalten bleiben sollen, wenn keine Verbindung besteht</string>
-    <string name="measurement_tool">Messe Distanz</string>
-    <string name="measurement_tool_action_bar">Wählen Sie einen Standort auf der Karte, und klicken Sie auf Hinzufügen, um einen Punkt auf das Lineal hinzuzufügen.</string>
+    <string name="measurement_tool">Entfernungsmesser</string>
+    <string name="measurement_tool_action_bar">Erkunden Sie die Karte und fügen Sie Punkte hinzu</string>
     <string name="mappilary_no_internet_desc">Sie benötigen Internet, um Fotos von Mapillary ansehen zu können</string>
     <string name="retry">Wiederholen</string>
     <string name="add_gpx_waypoint_bottom_sheet_title">GPX-Wegpunkt hinzufügen</string>
