@@ -44,6 +44,7 @@ import net.osmand.plus.helpers.AndroidUiHelper;
 import net.osmand.plus.measurementtool.adapter.MeasurementToolAdapter;
 import net.osmand.plus.measurementtool.adapter.MeasurementToolItemTouchHelperCallback;
 import net.osmand.plus.measurementtool.command.AddPointCommand;
+import net.osmand.plus.measurementtool.command.ClearPointsCommand;
 import net.osmand.plus.measurementtool.command.CommandManager;
 import net.osmand.plus.measurementtool.command.RemovePointCommand;
 import net.osmand.plus.measurementtool.command.ReorderPointCommand;
@@ -145,9 +146,9 @@ public class MeasurementToolFragment extends Fragment {
 				if (commandManager.canUndo()) {
 					enable(undoBtn);
 				} else {
-					disable(undoBtn, upDownBtn);
-					hidePointsList();
+					disable(undoBtn);
 				}
+				hidePointsListIfNeeded();
 				adapter.notifyDataSetChanged();
 				enable(redoBtn);
 				updateText();
@@ -164,8 +165,9 @@ public class MeasurementToolFragment extends Fragment {
 				} else {
 					disable(redoBtn);
 				}
+				hidePointsListIfNeeded();
 				adapter.notifyDataSetChanged();
-				enable(undoBtn, upDownBtn);
+				enable(undoBtn);
 				updateText();
 			}
 		});
@@ -232,11 +234,10 @@ public class MeasurementToolFragment extends Fragment {
 									}
 									return true;
 								case R.id.action_clear_all:
-									measurementLayer.clearPoints();
-									hidePointsList();
-									disable(undoBtn, redoBtn, upDownBtn);
+									commandManager.execute(new ClearPointsCommand(measurementLayer));
+									hidePointsListIfNeeded();
+									disable(redoBtn);
 									updateText();
-									commandManager.clear();
 									saved = false;
 									return true;
 							}
@@ -265,13 +266,7 @@ public class MeasurementToolFragment extends Fragment {
 				disable(redoBtn);
 				updateText();
 				saved = false;
-				if (measurementLayer.getPointsCount() < 1) {
-					hidePointsList();
-					disable(upDownBtn);
-					if (!commandManager.canUndo()) {
-						disable(undoBtn);
-					}
-				}
+				hidePointsListIfNeeded();
 			}
 
 			@Override
@@ -301,6 +296,18 @@ public class MeasurementToolFragment extends Fragment {
 		rv.setAdapter(adapter);
 
 		return view;
+	}
+
+	private void hidePointsListIfNeeded() {
+		MeasurementToolLayer measurementLayer = getMeasurementLayer();
+		if (measurementLayer != null) {
+			if (measurementLayer.getPointsCount() < 1) {
+				disable(upDownBtn);
+				if (pointsListOpened) {
+					hidePointsList();
+				}
+			}
+		}
 	}
 
 	private void addPoint() {

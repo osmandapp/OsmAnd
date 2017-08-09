@@ -89,7 +89,7 @@ public class MeasurementToolLayer extends OsmandMapLayer implements ContextMenuL
 		return OsmAndFormatter.getFormattedDistance(dist, view.getApplication());
 	}
 
-	void clearPoints() {
+	public void clearPoints() {
 		measurementPoints.clear();
 		view.refreshMap();
 	}

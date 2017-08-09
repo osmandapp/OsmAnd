@@ -38,9 +38,4 @@ public class CommandManager {
 			command.redo();
 		}
 	}
-
-	public void clear() {
-		undoCommands.clear();
-		redoCommands.clear();
-	}
 }
