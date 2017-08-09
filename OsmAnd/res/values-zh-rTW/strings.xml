@@ -81,7 +81,7 @@
     <string name="bg_service_sleep_mode_on">停止\n在背景執行</string>
     <string name="gps_wakeup_interval">GPS 喚醒間隔：%s</string>
     <string name="int_continuosly">連續</string>
-    <string name="screen_is_locked">要解鎖螢幕，輕點鎖圖示</string>
+    <string name="screen_is_locked">要解鎖螢幕，輕點鎖的圖示</string>
     <string name="map_widget_top_text">街道名稱</string>
     <string name="map_widget_config">組態螢幕顯示</string>
 
