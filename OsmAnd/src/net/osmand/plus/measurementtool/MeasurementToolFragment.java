@@ -14,6 +14,7 @@ import android.support.v7.app.AlertDialog;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
 import android.support.v7.widget.SwitchCompat;
+import android.support.v7.widget.helper.ItemTouchHelper;
 import android.text.Editable;
 import android.text.TextWatcher;
 import android.view.ContextThemeWrapper;
@@ -41,6 +42,7 @@ import net.osmand.plus.activities.TrackActivity;
 import net.osmand.plus.activities.TrackActivity.NewGpxLine;
 import net.osmand.plus.helpers.AndroidUiHelper;
 import net.osmand.plus.measurementtool.adapter.MeasurementToolAdapter;
+import net.osmand.plus.measurementtool.adapter.MeasurementToolItemTouchHelperCallback;
 import net.osmand.plus.measurementtool.command.AddPointCommand;
 import net.osmand.plus.measurementtool.command.CommandManager;
 import net.osmand.plus.measurementtool.command.RemovePointCommand;
@@ -237,6 +239,8 @@ public class MeasurementToolFragment extends Fragment {
 
 		adapter = new MeasurementToolAdapter(getMapActivity(), measurementLayer.getMeasurementPoints());
 		final RecyclerView rv = mainView.findViewById(R.id.measure_points_recycler_view);
+		final ItemTouchHelper touchHelper = new ItemTouchHelper(new MeasurementToolItemTouchHelperCallback(adapter));
+		touchHelper.attachToRecyclerView(rv);
 		adapter.setAdapterListener(new MeasurementToolAdapter.MeasurementAdapterListener() {
 			@Override
 			public void onPointRemove(int position) {
@@ -257,6 +261,11 @@ public class MeasurementToolFragment extends Fragment {
 			public void onItemClick(View view) {
 				int pos = rv.indexOfChild(view);
 				measurementLayer.moveMapToPoint(pos);
+			}
+
+			@Override
+			public void onDragStarted(RecyclerView.ViewHolder holder) {
+				touchHelper.startDrag(holder);
 			}
 		});
 		rv.setLayoutManager(new LinearLayoutManager(getContext()));

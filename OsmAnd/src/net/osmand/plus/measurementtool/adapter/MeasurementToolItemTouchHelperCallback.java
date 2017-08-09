@@ -6,18 +6,39 @@ import android.support.v7.widget.helper.ItemTouchHelper;
 
 public class MeasurementToolItemTouchHelperCallback extends ItemTouchHelper.Callback {
 
-	@Override
-	public int getMovementFlags(RecyclerView recyclerView, RecyclerView.ViewHolder viewHolder) {
-		return 0;
+	private final ItemTouchHelperAdapter adapter;
+
+	public MeasurementToolItemTouchHelperCallback(ItemTouchHelperAdapter adapter) {
+		this.adapter = adapter;
 	}
 
 	@Override
-	public boolean onMove(RecyclerView recyclerView, RecyclerView.ViewHolder viewHolder, RecyclerView.ViewHolder viewHolder1) {
+	public boolean isLongPressDragEnabled() {
 		return false;
+	}
+
+	@Override
+	public boolean isItemViewSwipeEnabled() {
+		return false;
+	}
+
+	@Override
+	public int getMovementFlags(RecyclerView recyclerView, RecyclerView.ViewHolder viewHolder) {
+		final int dragFlags = ItemTouchHelper.UP | ItemTouchHelper.DOWN;
+		return makeMovementFlags(dragFlags, 0);
+	}
+
+	@Override
+	public boolean onMove(RecyclerView recyclerView, RecyclerView.ViewHolder source, RecyclerView.ViewHolder target) {
+		return adapter.onItemMove(source.getAdapterPosition(), target.getAdapterPosition());
 	}
 
 	@Override
 	public void onSwiped(RecyclerView.ViewHolder viewHolder, int i) {
 
+	}
+
+	interface ItemTouchHelperAdapter {
+		boolean onItemMove(int from, int to);
 	}
 }
