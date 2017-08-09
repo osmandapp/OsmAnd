@@ -85,7 +85,7 @@ public class MeasurementToolAdapter extends RecyclerView.Adapter<MeasurementTool
 		holder.deleteBtn.setOnClickListener(new View.OnClickListener() {
 			@Override
 			public void onClick(View view) {
-				listener.onPointRemove(holder.getAdapterPosition());
+				listener.onRemoveClick(holder.getAdapterPosition());
 			}
 		});
 	}
@@ -127,7 +127,7 @@ public class MeasurementToolAdapter extends RecyclerView.Adapter<MeasurementTool
 
 	public interface MeasurementAdapterListener {
 
-		void onPointRemove(int position);
+		void onRemoveClick(int position);
 
 		void onItemClick(View view);
 

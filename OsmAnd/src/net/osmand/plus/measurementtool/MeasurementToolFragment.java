@@ -248,7 +248,7 @@ public class MeasurementToolFragment extends Fragment {
 			private int toPosition;
 
 			@Override
-			public void onPointRemove(int position) {
+			public void onRemoveClick(int position) {
 				commandManager.execute(new RemovePointCommand(measurementLayer, position));
 				adapter.notifyDataSetChanged();
 				disable(redoBtn);
