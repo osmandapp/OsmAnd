@@ -110,7 +110,7 @@ public class MeasurementToolFragment extends Fragment {
 		mainView.findViewById(R.id.up_down_row).setOnClickListener(new View.OnClickListener() {
 			@Override
 			public void onClick(View view) {
-				if (!pointsListOpened) {
+				if (!pointsListOpened && measurementLayer.getPointsCount() > 0) {
 					showPointsList(mainView, iconsCache.getThemedIcon(R.drawable.ic_action_arrow_down));
 				} else {
 					hidePointsList(mainView, iconsCache.getThemedIcon(R.drawable.ic_action_arrow_up));
