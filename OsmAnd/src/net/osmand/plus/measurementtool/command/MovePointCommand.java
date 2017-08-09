@@ -17,7 +17,6 @@ public class MovePointCommand implements Command {
 		this.position = position;
 	}
 
-
 	@Override
 	public boolean execute() {
 		return true;

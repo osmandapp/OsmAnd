@@ -84,12 +84,6 @@ public class MeasurementToolFragment extends Fragment {
 	private ImageView upDownBtn;
 	private ImageView undoBtn;
 	private ImageView redoBtn;
-	private TextViewEx cancelButton;
-	private ImageView movePointIcon;
-	private TextView movePointText;
-	private ImageView rulerIcon;
-	private Button addPointButton;
-	private Button applyMovePointButton;
 
 	private boolean wasCollapseButtonVisible;
 	private boolean pointsListOpened;
@@ -127,18 +121,16 @@ public class MeasurementToolFragment extends Fragment {
 		distanceTv = (TextView) mainView.findViewById(R.id.measurement_distance_text_view);
 		pointsTv = (TextView) mainView.findViewById(R.id.measurement_points_text_view);
 
-		rulerIcon = (ImageView) mainView.findViewById(R.id.ruler_icon);
-		rulerIcon.setImageDrawable(iconsCache.getIcon(R.drawable.ic_action_ruler, R.color.color_myloc_distance));
+		((ImageView) mainView.findViewById(R.id.ruler_icon))
+				.setImageDrawable(iconsCache.getIcon(R.drawable.ic_action_ruler, R.color.color_myloc_distance));
 
-		movePointIcon = (ImageView) mainView.findViewById(R.id.move_point_icon);
-		movePointIcon.setImageDrawable(iconsCache.getIcon(R.drawable.ic_action_measure_point, R.color.color_myloc_distance));
-		movePointText = (TextView) mainView.findViewById(R.id.move_point_text);
+		((ImageView) mainView.findViewById(R.id.move_point_icon))
+				.setImageDrawable(iconsCache.getIcon(R.drawable.ic_action_measure_point, R.color.color_myloc_distance));
 
 		upDownBtn = (ImageView) mainView.findViewById(R.id.up_down_button);
 		upDownBtn.setImageDrawable(iconsCache.getThemedIcon(R.drawable.ic_action_arrow_up));
 
-		cancelButton = (TextViewEx) mainView.findViewById(R.id.cancel_button);
-		cancelButton.setOnClickListener(new View.OnClickListener() {
+		((TextViewEx) mainView.findViewById(R.id.cancel_button)).setOnClickListener(new View.OnClickListener() {
 			@Override
 			public void onClick(View view) {
 				cancelMovePointMode();
@@ -156,13 +148,13 @@ public class MeasurementToolFragment extends Fragment {
 			}
 		});
 
-		applyMovePointButton = (Button) mainView.findViewById(R.id.apply_point_button);
-		applyMovePointButton.setOnClickListener(new View.OnClickListener() {
-			@Override
-			public void onClick(View view) {
-				applyMovePointMode();
-			}
-		});
+		((Button) mainView.findViewById(R.id.apply_point_button))
+				.setOnClickListener(new View.OnClickListener() {
+					@Override
+					public void onClick(View view) {
+						applyMovePointMode();
+					}
+				});
 
 		undoBtn = ((ImageButton) mainView.findViewById(R.id.undo_point_button));
 		redoBtn = ((ImageButton) mainView.findViewById(R.id.redo_point_button));
@@ -207,13 +199,13 @@ public class MeasurementToolFragment extends Fragment {
 			}
 		});
 
-		addPointButton = (Button) mainView.findViewById(R.id.add_point_button);
-		addPointButton.setOnClickListener(new View.OnClickListener() {
-			@Override
-			public void onClick(View view) {
-				addPoint();
-			}
-		});
+		((Button) mainView.findViewById(R.id.add_point_button))
+				.setOnClickListener(new View.OnClickListener() {
+					@Override
+					public void onClick(View view) {
+						addPoint();
+					}
+				});
 
 		measurementLayer.setOnSingleTapListener(new MeasurementToolLayer.OnSingleTapListener() {
 			@Override
@@ -375,31 +367,35 @@ public class MeasurementToolFragment extends Fragment {
 	}
 
 	private void enterMovePointMode() {
-		rulerIcon.setVisibility(View.GONE);
-		distanceTv.setVisibility(View.GONE);
-		pointsTv.setVisibility(View.GONE);
-		upDownBtn.setVisibility(View.GONE);
-		undoBtn.setVisibility(View.GONE);
-		redoBtn.setVisibility(View.GONE);
-		addPointButton.setVisibility(View.GONE);
-		movePointIcon.setVisibility(View.VISIBLE);
-		movePointText.setVisibility(View.VISIBLE);
-		cancelButton.setVisibility(View.VISIBLE);
-		applyMovePointButton.setVisibility(View.VISIBLE);
+		mark(View.GONE,
+				R.id.ruler_icon,
+				R.id.measurement_distance_text_view,
+				R.id.measurement_points_text_view,
+				R.id.up_down_button,
+				R.id.undo_point_button,
+				R.id.redo_point_button,
+				R.id.add_point_button);
+		mark(View.VISIBLE,
+				R.id.move_point_icon,
+				R.id.move_point_text,
+				R.id.cancel_button,
+				R.id.apply_point_button);
 	}
 
 	private void exitMovePointMode() {
-		movePointIcon.setVisibility(View.GONE);
-		movePointText.setVisibility(View.GONE);
-		cancelButton.setVisibility(View.GONE);
-		applyMovePointButton.setVisibility(View.GONE);
-		rulerIcon.setVisibility(View.VISIBLE);
-		distanceTv.setVisibility(View.VISIBLE);
-		pointsTv.setVisibility(View.VISIBLE);
-		upDownBtn.setVisibility(View.VISIBLE);
-		undoBtn.setVisibility(View.VISIBLE);
-		redoBtn.setVisibility(View.VISIBLE);
-		addPointButton.setVisibility(View.VISIBLE);
+		mark(View.GONE,
+				R.id.move_point_icon,
+				R.id.move_point_text,
+				R.id.cancel_button,
+				R.id.apply_point_button);
+		mark(View.VISIBLE,
+				R.id.ruler_icon,
+				R.id.measurement_distance_text_view,
+				R.id.measurement_points_text_view,
+				R.id.up_down_button,
+				R.id.undo_point_button,
+				R.id.redo_point_button,
+				R.id.add_point_button);
 	}
 
 	private void hidePointsListIfNoPoints() {
