@@ -40,6 +40,7 @@ import net.osmand.plus.activities.MapActivity;
 import net.osmand.plus.activities.TrackActivity;
 import net.osmand.plus.activities.TrackActivity.NewGpxLine;
 import net.osmand.plus.helpers.AndroidUiHelper;
+import net.osmand.plus.measurementtool.adapter.MeasurementToolAdapter;
 import net.osmand.plus.measurementtool.command.AddPointCommand;
 import net.osmand.plus.measurementtool.command.CommandManager;
 import net.osmand.plus.measurementtool.command.RemovePointCommand;

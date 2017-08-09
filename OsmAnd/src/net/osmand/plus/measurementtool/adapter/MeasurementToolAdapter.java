@@ -1,4 +1,4 @@
-package net.osmand.plus.measurementtool;
+package net.osmand.plus.measurementtool.adapter;
 
 import android.support.v7.widget.RecyclerView;
 import android.view.LayoutInflater;
@@ -17,23 +17,23 @@ import net.osmand.util.MapUtils;
 
 import java.util.List;
 
-class MeasurementToolAdapter extends RecyclerView.Adapter<MeasurementToolAdapter.Holder> {
+public class MeasurementToolAdapter extends RecyclerView.Adapter<MeasurementToolAdapter.MeasureToolItemVH> {
 
 	private final MapActivity mapActivity;
 	private final List<WptPt> points;
 	private MeasurementAdapterListener adapterListener;
 
-	MeasurementToolAdapter(MapActivity mapActivity, List<WptPt> points) {
+	public MeasurementToolAdapter(MapActivity mapActivity, List<WptPt> points) {
 		this.mapActivity = mapActivity;
 		this.points = points;
 	}
 
-	void setAdapterListener(MeasurementAdapterListener listener) {
+	public void setAdapterListener(MeasurementAdapterListener listener) {
 		this.adapterListener = listener;
 	}
 
 	@Override
-	public Holder onCreateViewHolder(ViewGroup viewGroup, int i) {
+	public MeasureToolItemVH onCreateViewHolder(ViewGroup viewGroup, int i) {
 		View view = LayoutInflater.from(viewGroup.getContext()).inflate(R.layout.measure_points_list_item, viewGroup, false);
 		final boolean nightMode = mapActivity.getMyApplication().getDaynightHelper().isNightModeForMapControls();
 		if (!nightMode) {
@@ -45,11 +45,11 @@ class MeasurementToolAdapter extends RecyclerView.Adapter<MeasurementToolAdapter
 				adapterListener.onItemClick(view);
 			}
 		});
-		return new Holder(view);
+		return new MeasureToolItemVH(view);
 	}
 
 	@Override
-	public void onBindViewHolder(final Holder holder, int pos) {
+	public void onBindViewHolder(final MeasureToolItemVH holder, int pos) {
 		IconsCache iconsCache = mapActivity.getMyApplication().getIconsCache();
 		holder.iconReorder.setImageDrawable(iconsCache.getThemedIcon(R.drawable.ic_action_reorder));
 		holder.icon.setImageDrawable(iconsCache.getThemedIcon(R.drawable.ic_action_measure_point));
@@ -78,7 +78,7 @@ class MeasurementToolAdapter extends RecyclerView.Adapter<MeasurementToolAdapter
 		return points.size();
 	}
 
-	static class Holder extends RecyclerView.ViewHolder {
+	static class MeasureToolItemVH extends RecyclerView.ViewHolder {
 
 		final ImageView iconReorder;
 		final ImageView icon;
@@ -86,7 +86,7 @@ class MeasurementToolAdapter extends RecyclerView.Adapter<MeasurementToolAdapter
 		final TextView descr;
 		final ImageButton deleteBtn;
 
-		Holder(View view) {
+		MeasureToolItemVH(View view) {
 			super(view);
 			iconReorder = (ImageView) view.findViewById(R.id.measure_point_reorder_icon);
 			icon = (ImageView) view.findViewById(R.id.measure_point_icon);
@@ -96,7 +96,7 @@ class MeasurementToolAdapter extends RecyclerView.Adapter<MeasurementToolAdapter
 		}
 	}
 
-	interface MeasurementAdapterListener {
+	public interface MeasurementAdapterListener {
 
 		void onPointRemove(int position);
 
