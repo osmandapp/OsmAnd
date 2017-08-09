@@ -344,6 +344,7 @@ public class MeasurementToolFragment extends Fragment {
 		MeasurementToolLayer measurementToolLayer = getMeasurementLayer();
 		if (measurementToolLayer != null) {
 			measurementToolLayer.exitMovePointMode();
+			measurementToolLayer.refreshMap();
 		}
 	}
 
