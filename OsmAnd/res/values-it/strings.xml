@@ -2857,15 +2857,15 @@ Copertura e qualità approssimativamente:
     <string name="max_min">Max/Min</string>
     <string name="min_max">Min/Max</string>
     <string name="quick_action_resume_pause_navigation">Riprendi/Sospendi la Navigazione</string>
-    <string name="release_2_7">\\022 Componente aggiuntivo Mapillary con immagini stradali
-\n
-\n • Widget righello per la misurazione della distanza
-\n
-\n • Informazioni dettagliate e suddivisore delle tue tracce GPX
-\n
+    <string name="release_2_7">• Componente aggiuntivo Mapillary con immagini stradali 
+\n 
+\n • Widget righello per la misurazione della distanza 
+\n 
+\n • Informazioni dettagliate e suddivisore delle tue tracce GPX 
+\n 
 \n • Altre migliorie e correzioni di errori
 \n
 \n</string>
-    <string name="measurement_tool_action_bar">Seleziona una posizione sulla mappa e clicca Aggiungi per aggiungere un punto al righello.</string>
-    <string name="measurement_tool">Righello</string>
+    <string name="measurement_tool_action_bar">Esplora la mappa e aggiungi punti</string>
+    <string name="measurement_tool">Distanziometro</string>
     </resources>
