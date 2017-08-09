@@ -83,6 +83,7 @@ public class MeasurementToolFragment extends Fragment {
 
 	private boolean wasCollapseButtonVisible;
 	private boolean pointsListOpened;
+	private boolean saved;
 	private int previousMapPosition;
 	private NewGpxLine newGpxLine;
 
@@ -236,6 +237,7 @@ public class MeasurementToolFragment extends Fragment {
 									disable(undoBtn, redoBtn, upDownBtn);
 									updateText();
 									commandManager.clear();
+									saved = false;
 									return true;
 							}
 							return false;
@@ -262,6 +264,7 @@ public class MeasurementToolFragment extends Fragment {
 				adapter.notifyDataSetChanged();
 				disable(redoBtn);
 				updateText();
+				saved = false;
 				if (measurementLayer.getPointsCount() < 1) {
 					hidePointsList();
 					disable(upDownBtn);
@@ -290,6 +293,7 @@ public class MeasurementToolFragment extends Fragment {
 					commandManager.execute(new ReorderPointCommand(measurementLayer, fromPosition, toPosition));
 					adapter.notifyDataSetChanged();
 					mapActivity.refreshMap();
+					saved = false;
 				}
 			}
 		});
@@ -307,6 +311,7 @@ public class MeasurementToolFragment extends Fragment {
 			disable(redoBtn);
 			updateText();
 			adapter.notifyDataSetChanged();
+			saved = false;
 		}
 	}
 
@@ -475,6 +480,7 @@ public class MeasurementToolFragment extends Fragment {
 						Toast.makeText(activity,
 								MessageFormat.format(getString(R.string.gpx_saved_sucessfully), toSave.getAbsolutePath()),
 								Toast.LENGTH_LONG).show();
+						saved = true;
 					} else {
 						Toast.makeText(activity, warning, Toast.LENGTH_LONG).show();
 					}
@@ -597,25 +603,25 @@ public class MeasurementToolFragment extends Fragment {
 		final MapActivity mapActivity = getMapActivity();
 		MeasurementToolLayer measurementLayer = getMeasurementLayer();
 		if (mapActivity != null && measurementLayer != null) {
-			if (measurementLayer.getPointsCount() < 1) {
+			if (pointsListOpened && hidePointsListFirst) {
+				hidePointsList();
+				return;
+			}
+			if (measurementLayer.getPointsCount() < 1 || saved) {
 				dismiss(mapActivity);
 				return;
 			}
-			if (pointsListOpened && hidePointsListFirst) {
-				hidePointsList();
-			} else {
-				new AlertDialog.Builder(mapActivity)
-						.setTitle(getString(R.string.are_you_sure))
-						.setMessage(getString(R.string.unsaved_changes_will_be_lost))
-						.setPositiveButton(R.string.shared_string_ok, new DialogInterface.OnClickListener() {
-							@Override
-							public void onClick(DialogInterface dialog, int which) {
-								dismiss(mapActivity);
-							}
-						})
-						.setNegativeButton(R.string.shared_string_cancel, null)
-						.show();
-			}
+			new AlertDialog.Builder(mapActivity)
+					.setTitle(getString(R.string.are_you_sure))
+					.setMessage(getString(R.string.unsaved_changes_will_be_lost))
+					.setPositiveButton(R.string.shared_string_ok, new DialogInterface.OnClickListener() {
+						@Override
+						public void onClick(DialogInterface dialog, int which) {
+							dismiss(mapActivity);
+						}
+					})
+					.setNegativeButton(R.string.shared_string_cancel, null)
+					.show();
 		}
 	}
 
