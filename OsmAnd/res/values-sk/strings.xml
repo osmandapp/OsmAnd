@@ -89,7 +89,7 @@
     <string name="prefs_plugins">Zásuvné moduly</string>
     <string name="osm_editing_plugin_description">Pomocou tohto modulu môže byť OsmAnd použitý na prispievanie do OSM, napr. vytváraním alebo úpravami OSM objektov záujmu, otváraním alebo komentovaním OSM poznámok a prispievaním zaznamenanými GPX súbormi. OSM je celosvetový komunitný projekt. Pozri https://openstreetmap.org pre podrobnosti. Aktívna účasť je vítaná a príspevky môžu byť vytvárané priamo v OsmAnd, ak v aplikácii uvediete svoje registračné údaje do OSM.</string>
     <string name="vector_maps_may_display_faster_on_some_devices">Vektorové mapy môžu byť zobrazované rýchlejšie. Nemusí správne fungovať na niektorých zariadeniach.</string>
-    <string name="play_commands_of_currently_selected_voice">Prehrať povely zvoleného hlasu</string>
+    <string name="play_commands_of_currently_selected_voice">Zvoľte hlas a otestujte prehraním povelov</string>
     <string name="debugging_and_development">Vývoj OsmAndu</string>
     <string name="native_rendering">Natívne vykresľovanie</string>
     <string name="test_voice_prompts">Test hlasových povelov</string>
@@ -325,7 +325,7 @@
     <string name="preferred_locale_descr">Zmeniť zobrazovaný jazyk (po zmene je potrebné reštartovať OsmAnd)</string>
     <string name="preferred_locale">Jazyk zobrazenia</string>
     <string name="unit_of_length_descr">Zmeniť jednotky dĺžky</string>
-    <string name="unit_of_length">Jednotka dĺžky</string>
+    <string name="unit_of_length">Jednotky dĺžky</string>
     <string name="si_mi_feet">Míle/stopy</string>
     <string name="si_mi_yard">Míle/yardy</string>
     <string name="si_km_m">Kilometre/metre</string>
@@ -446,7 +446,7 @@
     <string name="poi_context_menu_delete">Vymazať bod záujmu (POI)</string>
     <string name="rotate_map_compass_opt">Podľa kompasu</string>
     <string name="rotate_map_bearing_opt">Podľa smeru pohybu</string>
-    <string name="rotate_map_none_opt">Neotáčať</string>
+    <string name="rotate_map_none_opt">Neotáčať (sever je hore)</string>
     <string name="rotate_map_to_bearing_descr">Výber spôsobu otáčania mapy</string>
     <string name="rotate_map_to_bearing">Otáčanie mapy</string>
     <string name="show_route">Zobraziť cestu</string>
@@ -798,7 +798,7 @@ Proporčná pamäť %4$s MB (Limit Androidu %5$s MB, Dalvik %6$s MB).</string>
     <string name="show_cameras">Rýchlostné radary</string>
     <string name="show_traffic_warnings">Rýchlostné varovania</string>
     <string name="avoid_toll_roads">Vyhnúť sa spoplatneným cestám</string>
-    <string name="screen_is_locked">Na odomknutie obrazovky, kliknite na ikonu zámky</string>
+    <string name="screen_is_locked">Na odomknutie obrazovky, stlačte ikonu zámku</string>
     <string name="bg_service_screen_unlock">Odomknúť obrazovku</string>
     <string name="email">email</string>
     <string name="filterpoi_activity">Vytvoriť POI filter</string>
@@ -1206,7 +1206,7 @@ Afganistan, Albánsko, Alžírsko, Andora, Angola, Anguilla, Antigua a Barbuda, 
     <string name="lang_zh">Čínsky (中国的)</string>
     <string name="index_name_canada">Severná Amerika - Kanada</string>
     <string name="interrupt_music">Pozastaviť hudbu</string>
-    <string name="interrupt_music_descr">Pozastaviť hudbu keď prichádza hlasový povel (nie len znížiť hlasitosť)</string>
+    <string name="interrupt_music_descr">Hlasové povely pozastavia hudbu, nie len znížia hlasitosť</string>
     <string name="always_center_position_on_map">Zobraziť pozíciu vždy v strede</string>
     <string name="voice_pref_title">Hlas</string>
     <string name="misc_pref_title">Rôzne</string>
@@ -1481,7 +1481,7 @@ Chcete pokračovať v novej registrácii?</string>
     <string name="traffic_warning_calming">Spomaľovač</string>
     <string name="traffic_warning_speed_camera">Rýchlostný radar/kamera</string>
     <string name="traffic_warning">Dopravné varovanie</string>
-    <string name="local_index_description">Kliknite na existujúcu položku pre zobrazenie detailov. Podržte pre vypnutie alebo odstránenie. Dát je v súčasnosti na zariadení (%1$s voľné):</string>
+    <string name="local_index_description">Stlačte existujúcu položku pre zobrazenie detailov. Podržte pre vypnutie alebo odstránenie. Dát je v súčasnosti na zariadení (%1$s voľné):</string>
     <string name="text_size_descr">Nastaviť veľkosť textu na mape.</string>
     <string name="text_size">Veľkosť textu</string>
     <string name="fav_point_dublicate">Duplicitný názov obľúbeného bodu</string>
@@ -1755,7 +1755,7 @@ Dĺžka %2$s</string>
     <string name="routing_attr_height_name">Výškový limit</string>
     <string name="routing_attr_height_description">Zadajte výšku vozidla aká musí byť povolená na cestách</string>
     <string name="use_fast_recalculation">Inteligentné prepočítanie trasy</string>
-    <string name="use_fast_recalculation_desc">Prepočítať iba začiatočný úsek trasy pri dlhých výletoch</string>
+    <string name="use_fast_recalculation_desc">Pri dlhých výletoch prepočítať iba začiatočný úsek trasy</string>
     <string name="osmo_share_my_location">Odosielať polohu</string>
     <string name="shared_string_logoff">Odhlásiť</string>
     <string name="rendering_value_disabled_name">Vypnuté</string>
@@ -2297,7 +2297,7 @@ Ak máte radi OsmAnd a OSM a chcete ich podporiť, toto je výborný spôsob ako
     <string name="get_for">Získať za %1$s</string>
     <string name="get_for_month">Získať za %1$s mesiac</string>
     <string name="osm_live_banner_desc">Získajte neobmedzené sťahovanie máp a aktualizácií častejšie ako raz za mesiac: každý týždeň, deň alebo hodinu.</string>
-    <string name="osmand_plus_banner_desc">Plná verzia OsmAnd s neobmedzeným sťahovaním máp a mesačnými aktualizáciami.</string>
+    <string name="osmand_plus_banner_desc">Neobmedzené sťahovanie máp, aktualizácií a modul Wikipedia.</string>
     <string name="si_mi_meters">Míle/metre</string>
     <string name="osm_live_payment_desc">Poplatok za predplatné bude strhnutý každý mesiac. Predplatné môžete zrušiť kedykoľvek na Google Play.</string>
     <string name="donation_to_osm">Príspevok komunite OpenStreetMap</string>
