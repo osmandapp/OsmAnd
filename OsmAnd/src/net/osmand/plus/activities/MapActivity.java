@@ -70,6 +70,7 @@ import net.osmand.plus.TargetPointsHelper;
 import net.osmand.plus.TargetPointsHelper.TargetPoint;
 import net.osmand.plus.Version;
 import net.osmand.plus.activities.search.SearchActivity;
+import net.osmand.plus.activities.TrackActivity.NewGpxLine;
 import net.osmand.plus.base.FailSafeFuntions;
 import net.osmand.plus.base.MapViewTrackingUtilities;
 import net.osmand.plus.dashboard.DashboardOnMap;
@@ -501,7 +502,7 @@ public class MapActivity extends OsmandActionBarActivity implements DownloadEven
 			}
 		}
 		if (getMeasurementToolFragment() != null) {
-			getMeasurementToolFragment().showQuitDialog();
+			getMeasurementToolFragment().showQuitDialog(true);
 			return;
 		}
 		if (mapContextMenu.isVisible() && mapContextMenu.isClosable()) {
@@ -929,6 +930,11 @@ public class MapActivity extends OsmandActionBarActivity implements DownloadEven
 				} else if (toShow instanceof NewGpxPoint) {
 					NewGpxPoint newGpxPoint = (NewGpxPoint) toShow;
 					getMapLayers().getContextMenuLayer().enterAddGpxPointMode(newGpxPoint);
+				} else if (toShow instanceof NewGpxLine) {
+					NewGpxLine newGpxLine = (NewGpxLine) toShow;
+					QuadRect qr = newGpxLine.getRect();
+					mapView.fitRectToMap(qr.left, qr.right, qr.top, qr.bottom, (int) qr.width(), (int) qr.height(), 0);
+					openAddingNewGpxLine(newGpxLine);
 				} else {
 					mapContextMenu.show(latLonToShow, mapLabelToShow, toShow);
 				}
@@ -940,6 +946,16 @@ public class MapActivity extends OsmandActionBarActivity implements DownloadEven
 						latLonToShow.getLongitude(), settings.getMapZoomToShow(), true);
 			}
 		}
+	}
+
+	private void openAddingNewGpxLine(NewGpxLine newGpxLine) {
+		MeasurementToolFragment fragment = new MeasurementToolFragment();
+		fragment.setNewGpxLine(newGpxLine);
+		getSupportFragmentManager()
+				.beginTransaction()
+				.add(R.id.bottomFragmentContainer, fragment, MeasurementToolFragment.TAG)
+				.addToBackStack(MeasurementToolFragment.TAG)
+				.commitAllowingStateLoss();
 	}
 
 	public OsmandApplication getMyApplication() {

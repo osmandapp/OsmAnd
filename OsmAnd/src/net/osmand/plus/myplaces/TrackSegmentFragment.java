@@ -17,6 +17,7 @@ import android.os.Handler;
 import android.support.annotation.ColorInt;
 import android.support.annotation.NonNull;
 import android.support.annotation.Nullable;
+import android.support.design.widget.FloatingActionButton;
 import android.support.v4.content.ContextCompat;
 import android.support.v4.view.MenuItemCompat;
 import android.support.v4.view.PagerAdapter;
@@ -34,6 +35,7 @@ import android.view.MotionEvent;
 import android.view.View;
 import android.view.ViewGroup;
 import android.view.WindowManager;
+import android.widget.AbsListView;
 import android.widget.AdapterView;
 import android.widget.ArrayAdapter;
 import android.widget.CompoundButton;
@@ -139,6 +141,15 @@ public class TrackSegmentFragment extends OsmAndListFragment {
 	private RotatedTileBox rotatedTileBox;
 	private Bitmap mapBitmap;
 	private Bitmap mapTrackBitmap;
+	private boolean chartClicked;
+	private boolean menuOpened = false;
+	private FloatingActionButton menuFab;
+	private FloatingActionButton waypointFab;
+	private View waypointTextLayout;
+	private FloatingActionButton routePointFab;
+	private View routePointTextLayout;
+	private FloatingActionButton lineFab;
+	private View lineTextLayout;
 
 	@Override
 	public void onCreate(@Nullable Bundle savedInstanceState) {
@@ -149,16 +160,55 @@ public class TrackSegmentFragment extends OsmAndListFragment {
 	@Override
 	public void onActivityCreated(Bundle savedInstanceState) {
 		super.onActivityCreated(savedInstanceState);
+		getListView().setOnScrollListener(new AbsListView.OnScrollListener() {
+			@Override
+			public void onScrollStateChanged(AbsListView absListView, int i) {
+				if (i == AbsListView.OnScrollListener.SCROLL_STATE_TOUCH_SCROLL) {
+					if (menuOpened) {
+						closeMenu();
+					}
+				}
+			}
+
+			@Override
+			public void onScroll(AbsListView absListView, int i, int i1, int i2) {
+			}
+		});
 		getListView().setBackgroundColor(getResources().getColor(
 				getMyApplication().getSettings().isLightContent() ? R.color.ctx_menu_info_view_bg_light
 						: R.color.ctx_menu_info_view_bg_dark));
 	}
 
+	private View.OnClickListener onFabClickListener = new View.OnClickListener() {
+		@Override
+		public void onClick(View view) {
+			switch (view.getId()) {
+				case R.id.menu_fab:
+					if (menuOpened) {
+						closeMenu();
+					} else {
+						openMenu();
+					}
+					break;
+				case R.id.waypoint_fab:
+					PointDescription pointWptDescription = new PointDescription(PointDescription.POINT_TYPE_WPT, getString(R.string.add_waypoint));
+					addPoint(pointWptDescription);
+					break;
+				case R.id.route_fab:
+					PointDescription pointRteDescription = new PointDescription(PointDescription.POINT_TYPE_RTE, getString(R.string.add_route_point));
+					addPoint(pointRteDescription);
+					break;
+				case R.id.line_fab:
+					addLine();
+					break;
+			}
+		}
+	};
+
 	@Override
 	public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
 		setHasOptionsMenu(true);
-		View view = getActivity().getLayoutInflater().inflate(R.layout.update_index, container, false);
-		view.findViewById(R.id.header_layout).setVisibility(View.GONE);
+		View view = getActivity().getLayoutInflater().inflate(R.layout.track_segments_tree, container, false);
 
 		ListView listView = (ListView) view.findViewById(android.R.id.list);
 		listView.setDivider(null);
@@ -168,6 +218,21 @@ public class TrackSegmentFragment extends OsmAndListFragment {
 		tv.setText(R.string.none_selected_gpx);
 		tv.setTextSize(24);
 		listView.setEmptyView(tv);
+
+		menuFab = (FloatingActionButton) view.findViewById(R.id.menu_fab);
+		menuFab.setOnClickListener(onFabClickListener);
+
+		waypointFab = (FloatingActionButton) view.findViewById(R.id.waypoint_fab);
+		waypointFab.setOnClickListener(onFabClickListener);
+		waypointTextLayout = view.findViewById(R.id.waypoint_text_layout);
+
+		routePointFab = (FloatingActionButton) view.findViewById(R.id.route_fab);
+		routePointFab.setOnClickListener(onFabClickListener);
+		routePointTextLayout = view.findViewById(R.id.route_text_layout);
+
+		lineFab = (FloatingActionButton) view.findViewById(R.id.line_fab);
+		lineFab.setOnClickListener(onFabClickListener);
+		lineTextLayout = view.findViewById(R.id.line_text_layout);
 
 		paint = new Paint();
 		paint.setStyle(Paint.Style.STROKE);
@@ -182,9 +247,44 @@ public class TrackSegmentFragment extends OsmAndListFragment {
 		headerView = getActivity().getLayoutInflater().inflate(R.layout.gpx_item_list_header, null, false);
 		listView.addHeaderView(headerView);
 		listView.addFooterView(getActivity().getLayoutInflater().inflate(R.layout.list_shadow_footer, null, false));
+		View emptyView = new View(getActivity());
+		emptyView.setLayoutParams(new AbsListView.LayoutParams(
+				AbsListView.LayoutParams.MATCH_PARENT,
+				AndroidUtils.dpToPx(getActivity(), 72)));
+		listView.addFooterView(emptyView);
 		updateHeader();
 		setListAdapter(adapter);
 		return view;
+	}
+
+	private void addPoint(PointDescription pointDescription) {
+		getTrackActivity().addPoint(pointDescription);
+	}
+
+	private void addLine() {
+		getTrackActivity().addLine();
+	}
+
+	private void openMenu() {
+		menuFab.setImageDrawable(ContextCompat.getDrawable(getContext(), R.drawable.ic_action_remove_dark));
+		waypointFab.setVisibility(View.VISIBLE);
+		waypointTextLayout.setVisibility(View.VISIBLE);
+		routePointFab.setVisibility(View.VISIBLE);
+		routePointTextLayout.setVisibility(View.VISIBLE);
+		lineFab.setVisibility(View.VISIBLE);
+		lineTextLayout.setVisibility(View.VISIBLE);
+		menuOpened = true;
+	}
+
+	private void closeMenu() {
+		menuFab.setImageDrawable(ContextCompat.getDrawable(getContext(), R.drawable.ic_action_plus));
+		waypointFab.setVisibility(View.GONE);
+		waypointTextLayout.setVisibility(View.GONE);
+		routePointFab.setVisibility(View.GONE);
+		routePointTextLayout.setVisibility(View.GONE);
+		lineFab.setVisibility(View.GONE);
+		lineTextLayout.setVisibility(View.GONE);
+		menuOpened = false;
 	}
 
 	public TrackActivity getTrackActivity() {
@@ -598,56 +698,7 @@ public class TrackSegmentFragment extends OsmAndListFragment {
 	}
 
 	private QuadRect getRect() {
-		double left = 0, right = 0;
-		double top = 0, bottom = 0;
-		if (getGpx() != null) {
-			for (Track track : getGpx().tracks) {
-				for (TrkSegment segment : track.segments) {
-					for (WptPt p : segment.points) {
-						if (left == 0 && right == 0) {
-							left = p.getLongitude();
-							right = p.getLongitude();
-							top = p.getLatitude();
-							bottom = p.getLatitude();
-						} else {
-							left = Math.min(left, p.getLongitude());
-							right = Math.max(right, p.getLongitude());
-							top = Math.max(top, p.getLatitude());
-							bottom = Math.min(bottom, p.getLatitude());
-						}
-					}
-				}
-			}
-			for (WptPt p : getGpx().points) {
-				if (left == 0 && right == 0) {
-					left = p.getLongitude();
-					right = p.getLongitude();
-					top = p.getLatitude();
-					bottom = p.getLatitude();
-				} else {
-					left = Math.min(left, p.getLongitude());
-					right = Math.max(right, p.getLongitude());
-					top = Math.max(top, p.getLatitude());
-					bottom = Math.min(bottom, p.getLatitude());
-				}
-			}
-			for (Route route : getGpx().routes) {
-				for (WptPt p : route.points) {
-					if (left == 0 && right == 0) {
-						left = p.getLongitude();
-						right = p.getLongitude();
-						top = p.getLatitude();
-						bottom = p.getLatitude();
-					} else {
-						left = Math.min(left, p.getLongitude());
-						right = Math.max(right, p.getLongitude());
-						top = Math.max(top, p.getLatitude());
-						bottom = Math.min(bottom, p.getLatitude());
-					}
-				}
-			}
-		}
-		return new QuadRect(left, top, right, bottom);
+		return getTrackActivity().getRect();
 	}
 
 	private List<GpxDisplayGroup> getOriginalGroups() {
@@ -1073,6 +1124,7 @@ public class TrackSegmentFragment extends OsmAndListFragment {
 		@Override
 		public Object instantiateItem(ViewGroup container, int position) {
 
+			chartClicked = false;
 			GPXTabItemType tabType = tabTypes[position];
 			View view = null;
 			switch (tabType) {
@@ -1091,102 +1143,112 @@ public class TrackSegmentFragment extends OsmAndListFragment {
 				if (gpxItem != null) {
 					GPXTrackAnalysis analysis = gpxItem.analysis;
 					final LineChart chart = (LineChart) view.findViewById(R.id.chart);
-					chart.setOnTouchListener(new View.OnTouchListener() {
+					chart.setHighlightPerDragEnabled(false);
+					chart.setOnClickListener(new View.OnClickListener() {
 						@Override
-						public boolean onTouch(View v, MotionEvent event) {
-							getListView().requestDisallowInterceptTouchEvent(true);
-							switch (event.getAction()) {
-								case android.view.MotionEvent.ACTION_DOWN:
-									listViewYPos = event.getRawY();
-									break;
-								case android.view.MotionEvent.ACTION_MOVE:
-									scrollBy(Math.round(listViewYPos - event.getRawY()));
-									listViewYPos = event.getRawY();
-									break;
-							}
-							return false;
-						}
-					});
-					chart.setOnChartValueSelectedListener(new OnChartValueSelectedListener() {
-						@Override
-						public void onValueSelected(Entry e, Highlight h) {
-							WptPt wpt = getPoint(chart, h.getX());
-							if (wpt != null) {
-								selectedPointLatLon = new LatLon(wpt.lat, wpt.lon);
-								Bitmap bmp = drawSelectedPoint();
-								imageView.setImageDrawable(new BitmapDrawable(app.getResources(), bmp));
-							}
-						}
-
-						@Override
-						public void onNothingSelected() {
-
-						}
-					});
-					final View finalView = view;
-					chart.setOnChartGestureListener(new OnChartGestureListener() {
-
-						float highlightDrawX = -1;
-
-						@Override
-						public void onChartGestureStart(MotionEvent me, ChartGesture lastPerformedGesture) {
-							if (chart.getHighlighted() != null && chart.getHighlighted().length > 0) {
-								highlightDrawX = chart.getHighlighted()[0].getDrawX();
-							} else {
-								highlightDrawX = -1;
-							}
-						}
-
-						@Override
-						public void onChartGestureEnd(MotionEvent me, ChartGesture lastPerformedGesture) {
-							gpxItem.chartMatrix = new Matrix(chart.getViewPortHandler().getMatrixTouch());
-							Highlight[] highlights = chart.getHighlighted();
-							if (highlights != null && highlights.length > 0) {
-								gpxItem.chartHighlightPos = highlights[0].getX();
-							} else {
-								gpxItem.chartHighlightPos = -1;
-							}
-							for (int i = 0; i < getCount(); i++) {
-								View v = getViewAtPosition(i);
-								if (v != finalView) {
-									updateChart(i);
-								}
-							}
-						}
-
-						@Override
-						public void onChartLongPressed(MotionEvent me) {
-						}
-
-						@Override
-						public void onChartDoubleTapped(MotionEvent me) {
-						}
-
-						@Override
-						public void onChartSingleTapped(MotionEvent me) {
-						}
-
-						@Override
-						public void onChartFling(MotionEvent me1, MotionEvent me2, float velocityX, float velocityY) {
-						}
-
-						@Override
-						public void onChartScale(MotionEvent me, float scaleX, float scaleY) {
-						}
-
-						@Override
-						public void onChartTranslate(MotionEvent me, float dX, float dY) {
-							if (highlightDrawX != -1) {
-								Highlight h = chart.getHighlightByTouchPoint(highlightDrawX, 0f);
-								if (h != null) {
-									chart.highlightValue(h);
-									WptPt wpt = getPoint(chart, h.getX());
-									if (wpt != null) {
-										selectedPointLatLon = new LatLon(wpt.lat, wpt.lon);
-										Bitmap bmp = drawSelectedPoint();
-										imageView.setImageDrawable(new BitmapDrawable(app.getResources(), bmp));
+						public void onClick(View view) {
+							if (!chartClicked) {
+								chartClicked = true;
+								chart.setHighlightPerDragEnabled(true);
+								chart.setOnTouchListener(new View.OnTouchListener() {
+									@Override
+									public boolean onTouch(View v, MotionEvent event) {
+										getListView().requestDisallowInterceptTouchEvent(true);
+										switch (event.getAction()) {
+											case android.view.MotionEvent.ACTION_DOWN:
+												listViewYPos = event.getRawY();
+												break;
+											case android.view.MotionEvent.ACTION_MOVE:
+												scrollBy(Math.round(listViewYPos - event.getRawY()));
+												listViewYPos = event.getRawY();
+												break;
+										}
+										return false;
 									}
-								}
+								});
+								chart.setOnChartValueSelectedListener(new OnChartValueSelectedListener() {
+									@Override
+									public void onValueSelected(Entry e, Highlight h) {
+										WptPt wpt = getPoint(chart, h.getX());
+										if (wpt != null) {
+											selectedPointLatLon = new LatLon(wpt.lat, wpt.lon);
+											Bitmap bmp = drawSelectedPoint();
+											imageView.setImageDrawable(new BitmapDrawable(app.getResources(), bmp));
+										}
+									}
+
+									@Override
+									public void onNothingSelected() {
+
+									}
+								});
+								final View finalView = view;
+								chart.setOnChartGestureListener(new OnChartGestureListener() {
+
+									float highlightDrawX = -1;
+
+									@Override
+									public void onChartGestureStart(MotionEvent me, ChartGesture lastPerformedGesture) {
+										if (chart.getHighlighted() != null && chart.getHighlighted().length > 0) {
+											highlightDrawX = chart.getHighlighted()[0].getDrawX();
+										} else {
+											highlightDrawX = -1;
+										}
+									}
+
+									@Override
+									public void onChartGestureEnd(MotionEvent me, ChartGesture lastPerformedGesture) {
+										gpxItem.chartMatrix = new Matrix(chart.getViewPortHandler().getMatrixTouch());
+										Highlight[] highlights = chart.getHighlighted();
+										if (highlights != null && highlights.length > 0) {
+											gpxItem.chartHighlightPos = highlights[0].getX();
+										} else {
+											gpxItem.chartHighlightPos = -1;
+										}
+										for (int i = 0; i < getCount(); i++) {
+											View v = getViewAtPosition(i);
+											if (v != finalView) {
+												updateChart(i);
+											}
+										}
+									}
+
+									@Override
+									public void onChartLongPressed(MotionEvent me) {
+									}
+
+									@Override
+									public void onChartDoubleTapped(MotionEvent me) {
+									}
+
+									@Override
+									public void onChartSingleTapped(MotionEvent me) {
+									}
+
+									@Override
+									public void onChartFling(MotionEvent me1, MotionEvent me2, float velocityX, float velocityY) {
+									}
+
+									@Override
+									public void onChartScale(MotionEvent me, float scaleX, float scaleY) {
+									}
+
+									@Override
+									public void onChartTranslate(MotionEvent me, float dX, float dY) {
+										if (highlightDrawX != -1) {
+											Highlight h = chart.getHighlightByTouchPoint(highlightDrawX, 0f);
+											if (h != null) {
+												chart.highlightValue(h);
+												WptPt wpt = getPoint(chart, h.getX());
+												if (wpt != null) {
+													selectedPointLatLon = new LatLon(wpt.lat, wpt.lon);
+													Bitmap bmp = drawSelectedPoint();
+													imageView.setImageDrawable(new BitmapDrawable(app.getResources(), bmp));
+												}
+											}
+										}
+									}
+								});
 							}
 						}
 					});

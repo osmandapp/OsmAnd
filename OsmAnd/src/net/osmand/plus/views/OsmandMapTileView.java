@@ -578,8 +578,10 @@ public class OsmandMapTileView implements IMapDownloaderCallback {
 		final float ratioy;
 		if (mapPosition == OsmandSettings.BOTTOM_CONSTANT) {
 			ratioy = 0.85f;
-		} else if (mapPosition == OsmandSettings.MIDDLE_CONSTANT) {
+		} else if (mapPosition == OsmandSettings.MIDDLE_BOTTOM_CONSTANT) {
 			ratioy = 0.70f;
+		} else if (mapPosition == OsmandSettings.MIDDLE_TOP_CONSTANT) {
+			ratioy = 0.25f;
 		} else {
 			ratioy = 0.5f;
 		}

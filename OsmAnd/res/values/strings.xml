@@ -790,7 +790,7 @@
     <string name="shared_string_clear">Clear</string>
     <string name="shared_string_clear_all">Clear all</string>
     <string name="shared_string_save">Save</string>
-    <string name="shared_string_save_as_gpx">Save as GPX track</string>
+    <string name="shared_string_save_as_gpx">Save as Track</string>
     <string name="shared_string_rename">Rename</string>
     <string name="shared_string_delete">Delete</string>
     <string name="shared_string_delete_all">Delete all</string>
@@ -2665,8 +2665,17 @@
     <string name="retry">Retry</string>
     <string name="add_route_point">Add Route Point</string>
     <string name="add_waypoint">Add Waypoint</string>
+    <string name="add_line">Add Line</string>
     <string name="save_gpx_waypoint">Save GPX Waypoint</string>
     <string name="save_route_point">Save Route Point</string>
     <string name="waypoint_one">Waypoint 1</string>
     <string name="route_point_one">Route Point 1</string>
+    <string name="empty_state_my_tracks">Add and Record Tracks</string>
+    <string name="empty_state_my_tracks_desc">Record or import tracks to view</string>
+    <string name="empty_state_favourites">Add Favorites</string>
+    <string name="empty_state_favourites_desc">Add favorites on map or import them from filesystem</string>
+    <string name="import_track">Import track</string>
+    <string name="import_track_desc">File %1$s does not contain waypoints, import it as a track?</string>
+    <string name="save_as_new_segment">Save as new segment</string>
+    <string name="move_point">Move Point</string>
 </resources>

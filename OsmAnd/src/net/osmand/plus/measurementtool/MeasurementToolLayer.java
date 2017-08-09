@@ -6,6 +6,7 @@ import android.graphics.Canvas;
 import android.graphics.Paint;
 import android.graphics.Path;
 import android.graphics.PointF;
+import android.util.Log;
 
 import net.osmand.data.LatLon;
 import net.osmand.data.PointDescription;
@@ -28,18 +29,23 @@ public class MeasurementToolLayer extends OsmandMapLayer implements ContextMenuL
 
 	private OsmandMapTileView view;
 	private boolean inMeasurementMode;
-	private LinkedList<WptPt> measurementPoints = new LinkedList<>();
-	private LinkedList<WptPt> cacheMeasurementPoints = new LinkedList<>();
+	private boolean inMovePointMode;
+	private final LinkedList<WptPt> measurementPoints = new LinkedList<>();
 	private Bitmap centerIconDay;
 	private Bitmap centerIconNight;
 	private Bitmap pointIcon;
+	private Bitmap movePointIcon;
 	private Paint bitmapPaint;
-	private RenderingLineAttributes lineAttrs = new RenderingLineAttributes("rulerLine");
-	private Path path = new Path();
+	private final RenderingLineAttributes lineAttrs = new RenderingLineAttributes("measureDistanceLine");
+	private final Path path = new Path();
 	private int marginX;
 	private int marginY;
-	private TIntArrayList tx = new TIntArrayList();
-	private TIntArrayList ty = new TIntArrayList();
+	private final TIntArrayList tx = new TIntArrayList();
+	private final TIntArrayList ty = new TIntArrayList();
+	private OnSingleTapListener singleTapListener;
+	private OnEnterMovePointModeListener enterMovePointModeListener;
+	private int movePointPos;
+	private WptPt previouslyMovedPoint;
 
 	@Override
 	public void initLayer(OsmandMapTileView view) {
@@ -48,6 +54,7 @@ public class MeasurementToolLayer extends OsmandMapLayer implements ContextMenuL
 		centerIconDay = BitmapFactory.decodeResource(view.getResources(), R.drawable.map_ruler_center_day);
 		centerIconNight = BitmapFactory.decodeResource(view.getResources(), R.drawable.map_ruler_center_night);
 		pointIcon = BitmapFactory.decodeResource(view.getResources(), R.drawable.map_pedestrian_location);
+		movePointIcon = BitmapFactory.decodeResource(view.getResources(), R.drawable.map_mapillary_location);
 
 		bitmapPaint = new Paint();
 		bitmapPaint.setAntiAlias(true);
@@ -58,15 +65,35 @@ public class MeasurementToolLayer extends OsmandMapLayer implements ContextMenuL
 		marginX = pointIcon.getWidth() / 2;
 	}
 
+	void setOnSingleTapListener(OnSingleTapListener listener) {
+		this.singleTapListener = listener;
+	}
+
+	void setOnEnterMovePointModeListener(OnEnterMovePointModeListener listener) {
+		this.enterMovePointModeListener = listener;
+	}
+
+	WptPt getPreviouslyMovedPoint() {
+		return previouslyMovedPoint;
+	}
+
+	int getMovePointPosition() {
+		return movePointPos;
+	}
+
 	public boolean isInMeasurementMode() {
 		return inMeasurementMode;
+	}
+
+	public boolean isInMovePointMode() {
+		return inMovePointMode;
 	}
 
 	void setInMeasurementMode(boolean inMeasurementMode) {
 		this.inMeasurementMode = inMeasurementMode;
 	}
 
-	int getPointsCount() {
+	public int getPointsCount() {
 		return measurementPoints.size();
 	}
 
@@ -85,17 +112,63 @@ public class MeasurementToolLayer extends OsmandMapLayer implements ContextMenuL
 		return OsmAndFormatter.getFormattedDistance(dist, view.getApplication());
 	}
 
-	void clearPoints() {
+	public void clearPoints() {
 		measurementPoints.clear();
-		cacheMeasurementPoints.clear();
 		view.refreshMap();
+	}
+
+	@Override
+	public boolean onSingleTap(PointF point, RotatedTileBox tileBox) {
+		if (inMeasurementMode && singleTapListener != null) {
+			singleTapListener.onSingleTap();
+		}
+		return false;
+	}
+
+	@Override
+	public boolean onLongPressEvent(PointF point, RotatedTileBox tileBox) {
+		if (inMovePointMode || measurementPoints.size() == 0) {
+			return false;
+		}
+		double pressedPointLat = tileBox.getLatFromPixel(point.x, point.y);
+		double pressedPointLon = tileBox.getLonFromPixel(point.x, point.y);
+		getPointToMove(pressedPointLat, pressedPointLon);
+		if (movePointPos != -1) {
+			enterMovingPointMode();
+			if (inMeasurementMode && inMovePointMode && enterMovePointModeListener != null) {
+				enterMovePointModeListener.onEnterMovePointMode();
+			}
+		}
+		return false;
+	}
+
+	private void enterMovingPointMode() {
+		inMovePointMode = true;
+		moveMapToPoint(movePointPos);
+	}
+
+	private void getPointToMove(double lat, double lon) {
+		double lowestDistance = Double.MAX_VALUE;
+		for (int i = 0; i < measurementPoints.size(); i++) {
+			WptPt pt = measurementPoints.get(i);
+			double latDiff = pt.getLatitude() - lat;
+			double lonDiff = pt.getLongitude() - lon;
+			double distToPoint = Math.sqrt(Math.pow(latDiff, 2) + Math.pow(lonDiff, 2));
+			if (distToPoint < lowestDistance) {
+				lowestDistance = distToPoint;
+				previouslyMovedPoint = new WptPt(pt);
+				movePointPos = i;
+			}
+		}
 	}
 
 	@Override
 	public void onDraw(Canvas canvas, RotatedTileBox tb, DrawSettings settings) {
 		if (inMeasurementMode) {
 			lineAttrs.updatePaints(view, settings, tb);
-			drawCenterIcon(canvas, tb, tb.getCenterPixelPoint(), settings.isNightMode());
+			if (!inMovePointMode) {
+				drawCenterIcon(canvas, tb, tb.getCenterPixelPoint(), settings.isNightMode());
+			}
 
 			if (measurementPoints.size() > 0) {
 				path.reset();
@@ -103,8 +176,15 @@ public class MeasurementToolLayer extends OsmandMapLayer implements ContextMenuL
 				ty.reset();
 				for (int i = 0; i < measurementPoints.size(); i++) {
 					WptPt pt = measurementPoints.get(i);
-					int locX = tb.getPixXFromLonNoRot(pt.lon);
-					int locY = tb.getPixYFromLatNoRot(pt.lat);
+					int locX;
+					int locY;
+					if (inMovePointMode && movePointPos == i) {
+						locX = tb.getCenterPixelX();
+						locY = tb.getCenterPixelY();
+					} else {
+						locX = tb.getPixXFromLonNoRot(pt.lon);
+						locY = tb.getPixYFromLatNoRot(pt.lat);
+					}
 					if (i == 0) {
 						path.moveTo(locX, locY);
 					} else {
@@ -113,20 +193,35 @@ public class MeasurementToolLayer extends OsmandMapLayer implements ContextMenuL
 					tx.add(locX);
 					ty.add(locY);
 				}
-				path.lineTo(tb.getCenterPixelX(), tb.getCenterPixelY());
-				tx.add(tb.getCenterPixelX());
-				ty.add(tb.getCenterPixelY());
+				if (!inMovePointMode) {
+					path.lineTo(tb.getCenterPixelX(), tb.getCenterPixelY());
+					tx.add(tb.getCenterPixelX());
+					ty.add(tb.getCenterPixelY());
+				}
 				calculatePath(tb, tx, ty, path);
 				canvas.drawPath(path, lineAttrs.paint);
-				for (WptPt pt : measurementPoints) {
-					if (tb.containsLatLon(pt.lat, pt.lon)) {
-						int locX = tb.getPixXFromLonNoRot(pt.lon);
-						int locY = tb.getPixYFromLatNoRot(pt.lat);
-						canvas.drawBitmap(pointIcon, locX - marginX, locY - marginY, bitmapPaint);
+				for (int i = 0; i < measurementPoints.size(); i++) {
+					WptPt pt = measurementPoints.get(i);
+					if (inMovePointMode && i == movePointPos) {
+						int locX = tb.getCenterPixelX();
+						int locY = tb.getCenterPixelY();
+						canvas.drawBitmap(movePointIcon, locX - marginX, locY - marginY, bitmapPaint);
+					} else {
+						if (tb.containsLatLon(pt.lat, pt.lon)) {
+							int locX = tb.getPixXFromLonNoRot(pt.lon);
+							int locY = tb.getPixYFromLatNoRot(pt.lat);
+							canvas.drawBitmap(pointIcon, locX - marginX, locY - marginY, bitmapPaint);
+						}
 					}
 				}
 			}
 		}
+	}
+
+	void exitMovePointMode() {
+		inMovePointMode = false;
+		movePointPos = -1;
+		previouslyMovedPoint = null;
 	}
 
 	private void drawCenterIcon(Canvas canvas, RotatedTileBox tb, QuadPoint center, boolean nightMode) {
@@ -141,7 +236,12 @@ public class MeasurementToolLayer extends OsmandMapLayer implements ContextMenuL
 		canvas.rotate(tb.getRotate(), center.x, center.y);
 	}
 
-	void addPointOnClick() {
+	public void addPoint(int position, WptPt point) {
+		measurementPoints.add(position, point);
+		view.refreshMap();
+	}
+
+	public WptPt addPoint(int position) {
 		RotatedTileBox tb = view.getCurrentRotatedTileBox();
 		LatLon l = tb.getLatLonFromPixel(tb.getCenterPixelX(), tb.getCenterPixelY());
 		WptPt pt = new WptPt();
@@ -149,29 +249,47 @@ public class MeasurementToolLayer extends OsmandMapLayer implements ContextMenuL
 		pt.lon = l.getLongitude();
 		if (measurementPoints.size() > 0) {
 			if (!measurementPoints.get(measurementPoints.size() - 1).equals(pt)) {
-				measurementPoints.add(pt);
+				measurementPoints.add(position, pt);
+				view.refreshMap();
+				return pt;
 			}
 		} else {
-			measurementPoints.add(pt);
+			measurementPoints.add(position, pt);
+			view.refreshMap();
+			return pt;
 		}
-		cacheMeasurementPoints = new LinkedList<>(measurementPoints);
-		view.refreshMap();
+		return null;
 	}
 
-	boolean undoPointOnClick() {
-		measurementPoints.remove(measurementPoints.size() - 1);
+	WptPt getMovedPointToApply() {
+		RotatedTileBox tb = view.getCurrentRotatedTileBox();
+		LatLon latLon = tb.getCenterLatLon();
+		WptPt pt = measurementPoints.get(movePointPos);
+		pt.lat = latLon.getLatitude();
+		pt.lon = latLon.getLongitude();
+		return pt;
+	}
+
+	public WptPt removePoint(int position) {
+		WptPt res = measurementPoints.remove(position);
+		view.refreshMap();
+		return res;
+	}
+
+	public void moveMapToPoint(int pos) {
 		if (measurementPoints.size() > 0) {
-			WptPt pt = measurementPoints.get(measurementPoints.size() - 1);
+			if (pos >= measurementPoints.size()) {
+				pos = measurementPoints.size() - 1;
+			} else if (pos < 0) {
+				pos = 0;
+			}
+			WptPt pt = measurementPoints.get(pos);
 			view.getAnimatedDraggingThread().startMoving(pt.getLatitude(), pt.getLongitude(), view.getZoom(), true);
 		}
-		return measurementPoints.size() > 0;
 	}
 
-	boolean redoPointOnClick() {
-		WptPt pt = cacheMeasurementPoints.get(measurementPoints.size());
-		measurementPoints.add(pt);
-		view.getAnimatedDraggingThread().startMoving(pt.getLatitude(), pt.getLongitude(), view.getZoom(), true);
-		return cacheMeasurementPoints.size() > measurementPoints.size();
+	public void refreshMap() {
+		view.refreshMap();
 	}
 
 	@Override
@@ -212,5 +330,13 @@ public class MeasurementToolLayer extends OsmandMapLayer implements ContextMenuL
 	@Override
 	public boolean isObjectClickable(Object o) {
 		return !isInMeasurementMode();
+	}
+
+	interface OnSingleTapListener {
+		void onSingleTap();
+	}
+
+	interface OnEnterMovePointModeListener {
+		void onEnterMovePointMode();
 	}
 }
