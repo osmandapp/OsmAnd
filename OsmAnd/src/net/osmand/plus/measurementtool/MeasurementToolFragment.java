@@ -178,6 +178,9 @@ public class MeasurementToolFragment extends Fragment {
 					disable(undoBtn);
 				}
 				hidePointsListIfNoPoints();
+				if (measurementLayer.getPointsCount() > 0) {
+					enable(upDownBtn);
+				}
 				adapter.notifyDataSetChanged();
 				enable(redoBtn);
 				updateText();
@@ -195,6 +198,9 @@ public class MeasurementToolFragment extends Fragment {
 					disable(redoBtn);
 				}
 				hidePointsListIfNoPoints();
+				if (measurementLayer.getPointsCount() > 0) {
+					enable(upDownBtn);
+				}
 				adapter.notifyDataSetChanged();
 				enable(undoBtn);
 				updateText();
