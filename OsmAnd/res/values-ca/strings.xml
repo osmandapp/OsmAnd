@@ -834,7 +834,7 @@ Memòria proporcional %4$s MB (límit de l\'Android %5$s MB, Dalvik %6$s MB).</s
     <string name="srtm_paid_version_title">Connector de corbes de nivell</string>
     <string name="av_video_format">Format de sortida de vídeo</string>
     <string name="av_use_external_recorder_descr">Usa l\'enregistrament de vídeo del sistema</string>
-    <string name="recording_is_recorded">S\'està enregistrant àudio/vídeo. Per aturar-ho, premeu el botó d\'aturada del giny.</string>
+    <string name="recording_is_recorded">S\'està enregistrant àudio/vídeo. Per aturar-ho, premeu el botó del giny AV.</string>
     <string name="map_widget_audionotes">Notes d\'àudio</string>
     <string name="recording_playing">S\'està reproduint l\'àudio de l\'enregistrament especificat.\n%1$s</string>
     <string name="shared_string_control_start">Comença</string>
@@ -1173,7 +1173,7 @@ Memòria proporcional %4$s MB (límit de l\'Android %5$s MB, Dalvik %6$s MB).</s
     <string name="voice_pref_title">Veu</string>
     <string name="misc_pref_title">Miscel·lània</string>
     <string name="localization_pref_title">Ubicació</string>
-    <string name="interrupt_music_descr">Atura completament qualsevol música mentre les indicacions de veu (no tant sols baixar-ne el volum)</string>
+    <string name="interrupt_music_descr">Les indicacions de veu suspenen la reproducció de música, no s\'hi superposen</string>
     <string name="interrupt_music">Interrompre la música</string>
     <string name="osmo_settings_uuid">Identificador únic del dispositiu</string>
     <string name="osmo_settings_descr">Configureu els paràmetres de monitorització i el canal de seguiment personal</string>
@@ -1422,7 +1422,7 @@ Memòria proporcional %4$s MB (límit de l\'Android %5$s MB, Dalvik %6$s MB).</s
     <string name="traffic_warning_calming">Ressalt</string>
     <string name="traffic_warning_speed_camera">Radar de trànsit</string>
     <string name="traffic_warning">Avís de circulació</string>
-    <string name="local_index_description">Premeu qualsevol indicació existent per veure més detalls, mantingueu premuda per desactivar o esborrar. Dades actuals al dispositiu (%1$s lliure):</string>
+    <string name="local_index_description">Premeu qualsevol indicació existent per veure més detalls, premeu contínuament per desactivar o esborrar. Dades actuals al dispositiu (%1$s lliure):</string>
     <string name="text_size_descr">Definiu la mida del text en el mapa.</string>
     <string name="text_size">Mida del text</string>
     <string name="fav_point_dublicate">Nom de punt preferit duplicat</string>
@@ -2181,7 +2181,7 @@ L\'ús de memòria serà de {3} MB temporalment i {1} MB permanentment.
     <string name="get_for">Obteniu-lo per %1$s</string>
     <string name="get_for_month">Obteniu-lo per %1$s mesos</string>
     <string name="osm_live_banner_desc">Obteniu nous mapes i actualitzacions sense límit més sovint d\'un cop al mes: cada hora, dia o setmana.</string>
-    <string name="osmand_plus_banner_desc">Baixada il·limitada de mapes i connector de Viquipèdia</string>
+    <string name="osmand_plus_banner_desc">Baixada il·limitada de mapes, actualitzacions i el connector Viquipèdia.</string>
     <string name="get_it">Obteniu-lo</string>
     <string name="osm_live_payment_desc">El cost de subscripció es carregarà mensualment. Podeu cancel·lar la subscripció a Google Play quan vulgueu.</string>
     <string name="donation_to_osm">Donació a la comunitat OpenStreetMap</string>
@@ -2339,7 +2339,7 @@ L\'ús de memòria serà de {3} MB temporalment i {1} MB permanentment.
     <string name="quick_action_map_source_action">Afegeix origen del mapa</string>
     <string name="quick_action_map_source_switch">L\'origen del mapa s\'ha canviat al de \"%s\".</string>
     <string name="quick_action_btn_tutorial_title">Modifica la posició del botó</string>
-    <string name="quick_action_btn_tutorial_descr">Premeu el botó sense deixar-lo i arrossegueu per la pantalla per canviar-li la posició</string>
+    <string name="quick_action_btn_tutorial_descr">Premeu contínuament i arrossegueu el botó per canviar-li la posició a la pantalla</string>
 <string name="quick_action_interim_dialog">Mostra un diàleg provisional</string>
     <string name="quick_action_sh_poi_descr">Podeu afegir una o més categories de PDI per mostrar-les al mapa.</string>
     <string name="shared_string_action_name">Nom de l\'acció</string>
