@@ -74,7 +74,7 @@ public class MeasurementToolLayer extends OsmandMapLayer implements ContextMenuL
 		return measurementPoints.size();
 	}
 
-	LinkedList<WptPt> getMeasurementPoints() {
+	public LinkedList<WptPt> getMeasurementPoints() {
 		return measurementPoints;
 	}
 
@@ -193,6 +193,10 @@ public class MeasurementToolLayer extends OsmandMapLayer implements ContextMenuL
 			WptPt pt = measurementPoints.get(pos);
 			view.getAnimatedDraggingThread().startMoving(pt.getLatitude(), pt.getLongitude(), view.getZoom(), true);
 		}
+	}
+
+	public void refreshMap() {
+		view.refreshMap();
 	}
 
 	@Override

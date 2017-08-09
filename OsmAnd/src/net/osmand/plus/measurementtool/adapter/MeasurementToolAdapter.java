@@ -26,7 +26,7 @@ public class MeasurementToolAdapter extends RecyclerView.Adapter<MeasurementTool
 
 	private final MapActivity mapActivity;
 	private final List<WptPt> points;
-	private MeasurementAdapterListener adapterListener;
+	private MeasurementAdapterListener listener;
 
 	public MeasurementToolAdapter(MapActivity mapActivity, List<WptPt> points) {
 		this.mapActivity = mapActivity;
@@ -34,7 +34,7 @@ public class MeasurementToolAdapter extends RecyclerView.Adapter<MeasurementTool
 	}
 
 	public void setAdapterListener(MeasurementAdapterListener listener) {
-		this.adapterListener = listener;
+		this.listener = listener;
 	}
 
 	@Override
@@ -50,7 +50,7 @@ public class MeasurementToolAdapter extends RecyclerView.Adapter<MeasurementTool
 		view.setOnClickListener(new View.OnClickListener() {
 			@Override
 			public void onClick(View view) {
-				adapterListener.onItemClick(view);
+				listener.onItemClick(view);
 			}
 		});
 		return new MeasureToolItemVH(view);
@@ -64,7 +64,7 @@ public class MeasurementToolAdapter extends RecyclerView.Adapter<MeasurementTool
 			@Override
 			public boolean onTouch(View view, MotionEvent event) {
 				if (MotionEventCompat.getActionMasked(event) == MotionEvent.ACTION_DOWN) {
-					adapterListener.onDragStarted(holder);
+					listener.onDragStarted(holder);
 				}
 				return false;
 			}
@@ -85,7 +85,7 @@ public class MeasurementToolAdapter extends RecyclerView.Adapter<MeasurementTool
 		holder.deleteBtn.setOnClickListener(new View.OnClickListener() {
 			@Override
 			public void onClick(View view) {
-				adapterListener.onPointRemove(holder.getAdapterPosition());
+				listener.onPointRemove(holder.getAdapterPosition());
 			}
 		});
 	}
@@ -100,6 +100,11 @@ public class MeasurementToolAdapter extends RecyclerView.Adapter<MeasurementTool
 		Collections.swap(points, from, to);
 		notifyItemMoved(from, to);
 		return true;
+	}
+
+	@Override
+	public void onItemDismiss(RecyclerView.ViewHolder holder) {
+		listener.onDragEnded(holder);
 	}
 
 	static class MeasureToolItemVH extends RecyclerView.ViewHolder {
@@ -127,5 +132,7 @@ public class MeasurementToolAdapter extends RecyclerView.Adapter<MeasurementTool
 		void onItemClick(View view);
 
 		void onDragStarted(RecyclerView.ViewHolder holder);
+
+		void onDragEnded(RecyclerView.ViewHolder holder);
 	}
 }

@@ -38,7 +38,16 @@ public class MeasurementToolItemTouchHelperCallback extends ItemTouchHelper.Call
 
 	}
 
+	@Override
+	public void clearView(RecyclerView recyclerView, RecyclerView.ViewHolder viewHolder) {
+		super.clearView(recyclerView, viewHolder);
+		adapter.onItemDismiss(viewHolder);
+	}
+
 	interface ItemTouchHelperAdapter {
+
 		boolean onItemMove(int from, int to);
+
+		void onItemDismiss(RecyclerView.ViewHolder holder);
 	}
 }

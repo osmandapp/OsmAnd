@@ -46,6 +46,7 @@ import net.osmand.plus.measurementtool.adapter.MeasurementToolItemTouchHelperCal
 import net.osmand.plus.measurementtool.command.AddPointCommand;
 import net.osmand.plus.measurementtool.command.CommandManager;
 import net.osmand.plus.measurementtool.command.RemovePointCommand;
+import net.osmand.plus.measurementtool.command.ReorderPointCommand;
 import net.osmand.plus.views.OsmandMapTileView;
 import net.osmand.plus.views.mapwidgets.MapInfoWidgetsFactory;
 import net.osmand.plus.views.mapwidgets.MapInfoWidgetsFactory.TopToolbarController;
@@ -242,6 +243,10 @@ public class MeasurementToolFragment extends Fragment {
 		final ItemTouchHelper touchHelper = new ItemTouchHelper(new MeasurementToolItemTouchHelperCallback(adapter));
 		touchHelper.attachToRecyclerView(rv);
 		adapter.setAdapterListener(new MeasurementToolAdapter.MeasurementAdapterListener() {
+
+			private int fromPosition;
+			private int toPosition;
+
 			@Override
 			public void onPointRemove(int position) {
 				commandManager.execute(new RemovePointCommand(measurementLayer, position));
@@ -265,7 +270,18 @@ public class MeasurementToolFragment extends Fragment {
 
 			@Override
 			public void onDragStarted(RecyclerView.ViewHolder holder) {
+				fromPosition = holder.getAdapterPosition();
 				touchHelper.startDrag(holder);
+			}
+
+			@Override
+			public void onDragEnded(RecyclerView.ViewHolder holder) {
+				toPosition = holder.getAdapterPosition();
+				if (toPosition != fromPosition) {
+					commandManager.execute(new ReorderPointCommand(measurementLayer, fromPosition, toPosition));
+					adapter.notifyDataSetChanged();
+					mapActivity.refreshMap();
+				}
 			}
 		});
 		rv.setLayoutManager(new LinearLayoutManager(getContext()));
