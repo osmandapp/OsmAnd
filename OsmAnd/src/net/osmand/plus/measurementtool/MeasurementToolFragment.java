@@ -576,7 +576,9 @@ public class MeasurementToolFragment extends Fragment {
 					}
 					if (showOnMap) {
 						SelectedGpxFile sf = activity.getMyApplication().getSelectedGpxHelper().selectGpxFile(gpx, true, false);
-						sf.processPoints();
+						if (newGpxLine != null && sf != null) {
+							sf.processPoints();
+						}
 					}
 					return res;
 				}
