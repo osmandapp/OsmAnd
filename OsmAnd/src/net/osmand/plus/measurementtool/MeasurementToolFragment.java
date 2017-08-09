@@ -130,7 +130,7 @@ public class MeasurementToolFragment extends Fragment {
 		upDownBtn = (ImageView) mainView.findViewById(R.id.up_down_button);
 		upDownBtn.setImageDrawable(iconsCache.getThemedIcon(R.drawable.ic_action_arrow_up));
 
-		((TextViewEx) mainView.findViewById(R.id.cancel_button)).setOnClickListener(new View.OnClickListener() {
+		((TextViewEx) mainView.findViewById(R.id.cancel_point_button)).setOnClickListener(new View.OnClickListener() {
 			@Override
 			public void onClick(View view) {
 				cancelMovePointMode();
@@ -378,7 +378,7 @@ public class MeasurementToolFragment extends Fragment {
 		mark(View.VISIBLE,
 				R.id.move_point_icon,
 				R.id.move_point_text,
-				R.id.cancel_button,
+				R.id.cancel_point_button,
 				R.id.apply_point_button);
 	}
 
@@ -386,7 +386,7 @@ public class MeasurementToolFragment extends Fragment {
 		mark(View.GONE,
 				R.id.move_point_icon,
 				R.id.move_point_text,
-				R.id.cancel_button,
+				R.id.cancel_point_button,
 				R.id.apply_point_button);
 		mark(View.VISIBLE,
 				R.id.ruler_icon,
