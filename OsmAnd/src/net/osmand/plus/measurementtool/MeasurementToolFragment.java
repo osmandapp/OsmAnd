@@ -193,7 +193,7 @@ public class MeasurementToolFragment extends Fragment {
 			toolBarController.setOnBackButtonClickListener(new View.OnClickListener() {
 				@Override
 				public void onClick(View v) {
-					showQuitDialog();
+					showQuitDialog(false);
 				}
 			});
 			toolBarController.setOnCloseButtonClickListener(new View.OnClickListener() {
@@ -593,7 +593,7 @@ public class MeasurementToolFragment extends Fragment {
 		}
 	}
 
-	public void showQuitDialog() {
+	public void showQuitDialog(boolean hidePointsListFirst) {
 		final MapActivity mapActivity = getMapActivity();
 		MeasurementToolLayer measurementLayer = getMeasurementLayer();
 		if (mapActivity != null && measurementLayer != null) {
@@ -601,17 +601,21 @@ public class MeasurementToolFragment extends Fragment {
 				dismiss(mapActivity);
 				return;
 			}
-			new AlertDialog.Builder(mapActivity)
-					.setTitle(getString(R.string.are_you_sure))
-					.setMessage(getString(R.string.unsaved_changes_will_be_lost))
-					.setPositiveButton(R.string.shared_string_ok, new DialogInterface.OnClickListener() {
-						@Override
-						public void onClick(DialogInterface dialog, int which) {
-							dismiss(mapActivity);
-						}
-					})
-					.setNegativeButton(R.string.shared_string_cancel, null)
-					.show();
+			if (pointsListOpened && hidePointsListFirst) {
+				hidePointsList();
+			} else {
+				new AlertDialog.Builder(mapActivity)
+						.setTitle(getString(R.string.are_you_sure))
+						.setMessage(getString(R.string.unsaved_changes_will_be_lost))
+						.setPositiveButton(R.string.shared_string_ok, new DialogInterface.OnClickListener() {
+							@Override
+							public void onClick(DialogInterface dialog, int which) {
+								dismiss(mapActivity);
+							}
+						})
+						.setNegativeButton(R.string.shared_string_cancel, null)
+						.show();
+			}
 		}
 	}
 

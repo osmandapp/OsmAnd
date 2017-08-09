@@ -502,7 +502,7 @@ public class MapActivity extends OsmandActionBarActivity implements DownloadEven
 			}
 		}
 		if (getMeasurementToolFragment() != null) {
-			getMeasurementToolFragment().showQuitDialog();
+			getMeasurementToolFragment().showQuitDialog(true);
 			return;
 		}
 		if (mapContextMenu.isVisible() && mapContextMenu.isClosable()) {
