@@ -2,6 +2,7 @@ package net.osmand.plus.measurementtool;
 
 import android.app.ProgressDialog;
 import android.content.DialogInterface;
+import android.content.Intent;
 import android.graphics.drawable.Drawable;
 import android.os.AsyncTask;
 import android.os.Bundle;
@@ -36,6 +37,7 @@ import net.osmand.plus.GpxSelectionHelper.SelectedGpxFile;
 import net.osmand.plus.IconsCache;
 import net.osmand.plus.R;
 import net.osmand.plus.activities.MapActivity;
+import net.osmand.plus.activities.TrackActivity;
 import net.osmand.plus.activities.TrackActivity.NewGpxLine;
 import net.osmand.plus.helpers.AndroidUiHelper;
 import net.osmand.plus.measurementtool.command.AddPointCommand;
@@ -422,7 +424,8 @@ public class MeasurementToolFragment extends Fragment {
 						gpx.path = toSave.getAbsolutePath();
 					}
 					if (showOnMap) {
-						activity.getMyApplication().getSelectedGpxHelper().selectGpxFile(gpx, true, false);
+						SelectedGpxFile sf = activity.getMyApplication().getSelectedGpxHelper().selectGpxFile(gpx, true, false);
+						sf.processPoints();
 					}
 					return res;
 				}
@@ -579,6 +582,13 @@ public class MeasurementToolFragment extends Fragment {
 
 	private void dismiss(MapActivity mapActivity) {
 		try {
+			if (newGpxLine != null) {
+				GPXFile gpx = newGpxLine.getGpxFile();
+				Intent newIntent = new Intent(mapActivity, mapActivity.getMyApplication().getAppCustomization().getTrackActivity());
+				newIntent.putExtra(TrackActivity.TRACK_FILE_NAME, gpx.path);
+				newIntent.setFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP);
+				startActivity(newIntent);
+			}
 			mapActivity.getSupportFragmentManager().popBackStackImmediate(TAG, FragmentManager.POP_BACK_STACK_INCLUSIVE);
 		} catch (Exception e) {
 			// ignore
