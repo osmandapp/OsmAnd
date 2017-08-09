@@ -5,8 +5,8 @@ import net.osmand.plus.measurementtool.MeasurementToolLayer;
 
 public class AddPointCommand implements Command {
 
-	private MeasurementToolLayer measurementLayer;
-	private int position;
+	private final MeasurementToolLayer measurementLayer;
+	private final int position;
 	private WptPt point;
 
 	public AddPointCommand(MeasurementToolLayer measurementLayer, int position) {

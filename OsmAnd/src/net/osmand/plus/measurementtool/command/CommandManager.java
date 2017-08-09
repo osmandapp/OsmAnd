@@ -5,8 +5,8 @@ import java.util.LinkedList;
 
 public class CommandManager {
 
-	private Deque<Command> undoCommands = new LinkedList<>();
-	private Deque<Command> redoCommands = new LinkedList<>();
+	private final Deque<Command> undoCommands = new LinkedList<>();
+	private final Deque<Command> redoCommands = new LinkedList<>();
 
 	public boolean canUndo() {
 		return undoCommands.size() > 0;

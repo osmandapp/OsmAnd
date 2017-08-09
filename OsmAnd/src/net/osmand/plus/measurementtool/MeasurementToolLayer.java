@@ -6,7 +6,6 @@ import android.graphics.Canvas;
 import android.graphics.Paint;
 import android.graphics.Path;
 import android.graphics.PointF;
-import android.view.MotionEvent;
 
 import net.osmand.data.LatLon;
 import net.osmand.data.PointDescription;
@@ -101,11 +100,6 @@ public class MeasurementToolLayer extends OsmandMapLayer implements ContextMenuL
 			singleTapListener.onSingleTap();
 		}
 		return false;
-	}
-
-	@Override
-	public boolean onTouchEvent(MotionEvent event, RotatedTileBox tileBox) {
-		return super.onTouchEvent(event, tileBox);
 	}
 
 	@Override

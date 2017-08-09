@@ -21,20 +21,15 @@ class MeasurementToolAdapter extends RecyclerView.Adapter<MeasurementToolAdapter
 
 	private final MapActivity mapActivity;
 	private final List<WptPt> points;
-	private RemovePointListener removePointListener;
-	private ItemClickListener itemClickListener;
+	private MeasurementAdapterListener adapterListener;
 
 	MeasurementToolAdapter(MapActivity mapActivity, List<WptPt> points) {
 		this.mapActivity = mapActivity;
 		this.points = points;
 	}
 
-	void setRemovePointListener(RemovePointListener listener) {
-		this.removePointListener = listener;
-	}
-
-	void setItemClickListener(ItemClickListener itemClickListener) {
-		this.itemClickListener = itemClickListener;
+	void setAdapterListener(MeasurementAdapterListener listener) {
+		this.adapterListener = listener;
 	}
 
 	@Override
@@ -47,7 +42,7 @@ class MeasurementToolAdapter extends RecyclerView.Adapter<MeasurementToolAdapter
 		view.setOnClickListener(new View.OnClickListener() {
 			@Override
 			public void onClick(View view) {
-				itemClickListener.onItemClick(view);
+				adapterListener.onItemClick(view);
 			}
 		});
 		return new Holder(view);
@@ -72,7 +67,7 @@ class MeasurementToolAdapter extends RecyclerView.Adapter<MeasurementToolAdapter
 		holder.deleteBtn.setOnClickListener(new View.OnClickListener() {
 			@Override
 			public void onClick(View view) {
-				removePointListener.onPointRemove(holder.getAdapterPosition());
+				adapterListener.onPointRemove(holder.getAdapterPosition());
 			}
 		});
 	}
@@ -98,11 +93,10 @@ class MeasurementToolAdapter extends RecyclerView.Adapter<MeasurementToolAdapter
 		}
 	}
 
-	interface RemovePointListener {
-		void onPointRemove(int position);
-	}
+	interface MeasurementAdapterListener {
 
-	interface ItemClickListener {
+		void onPointRemove(int position);
+
 		void onItemClick(View view);
 	}
 }

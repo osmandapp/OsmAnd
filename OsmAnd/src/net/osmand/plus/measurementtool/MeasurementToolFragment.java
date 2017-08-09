@@ -62,7 +62,7 @@ public class MeasurementToolFragment extends Fragment {
 
 	public static final String TAG = "MeasurementToolFragment";
 
-	private CommandManager commandManager = new CommandManager();
+	private final CommandManager commandManager = new CommandManager();
 	private MeasurementToolBarController toolBarController;
 	private MeasurementToolAdapter adapter;
 	private TextView distanceTv;
@@ -70,7 +70,7 @@ public class MeasurementToolFragment extends Fragment {
 	private String pointsSt;
 
 	private boolean wasCollapseButtonVisible;
-	private boolean pointsDetailsOpened;
+	private boolean pointsListOpened;
 	private int previousMapPosition;
 	private NewGpxLine newGpxLine;
 
@@ -110,10 +110,10 @@ public class MeasurementToolFragment extends Fragment {
 		mainView.findViewById(R.id.up_down_row).setOnClickListener(new View.OnClickListener() {
 			@Override
 			public void onClick(View view) {
-				if (!pointsDetailsOpened) {
-					upBtnOnClick(mainView, iconsCache.getThemedIcon(R.drawable.ic_action_arrow_down));
+				if (!pointsListOpened) {
+					showPointsList(mainView, iconsCache.getThemedIcon(R.drawable.ic_action_arrow_down));
 				} else {
-					downBtnOnClick(mainView, iconsCache.getThemedIcon(R.drawable.ic_action_arrow_up));
+					hidePointsList(mainView, iconsCache.getThemedIcon(R.drawable.ic_action_arrow_up));
 				}
 			}
 		});
@@ -130,7 +130,7 @@ public class MeasurementToolFragment extends Fragment {
 					enable(undoBtn);
 				} else {
 					disable(undoBtn, upDownBtn);
-					downBtnOnClick(mainView, iconsCache.getThemedIcon(R.drawable.ic_action_arrow_up));
+					hidePointsList(mainView, iconsCache.getThemedIcon(R.drawable.ic_action_arrow_up));
 				}
 				adapter.notifyDataSetChanged();
 				enable(redoBtn);
@@ -217,7 +217,7 @@ public class MeasurementToolFragment extends Fragment {
 									return true;
 								case R.id.action_clear_all:
 									measurementLayer.clearPoints();
-									downBtnOnClick(mainView, iconsCache.getThemedIcon(R.drawable.ic_action_arrow_up));
+									hidePointsList(mainView, iconsCache.getThemedIcon(R.drawable.ic_action_arrow_up));
 									disable(undoBtn, redoBtn, upDownBtn);
 									updateText();
 									commandManager.clear();
@@ -234,7 +234,7 @@ public class MeasurementToolFragment extends Fragment {
 
 		adapter = new MeasurementToolAdapter(getMapActivity(), measurementLayer.getMeasurementPoints());
 		final RecyclerView rv = mainView.findViewById(R.id.measure_points_recycler_view);
-		adapter.setRemovePointListener(new MeasurementToolAdapter.RemovePointListener() {
+		adapter.setAdapterListener(new MeasurementToolAdapter.MeasurementAdapterListener() {
 			@Override
 			public void onPointRemove(int position) {
 				commandManager.execute(new RemovePointCommand(measurementLayer, position));
@@ -242,15 +242,14 @@ public class MeasurementToolFragment extends Fragment {
 				disable(redoBtn);
 				updateText();
 				if (measurementLayer.getPointsCount() < 1) {
-					downBtnOnClick(mainView, iconsCache.getThemedIcon(R.drawable.ic_action_arrow_up));
+					hidePointsList(mainView, iconsCache.getThemedIcon(R.drawable.ic_action_arrow_up));
 					disable(upDownBtn);
 					if (!commandManager.canUndo()) {
 						disable(undoBtn);
 					}
 				}
 			}
-		});
-		adapter.setItemClickListener(new MeasurementToolAdapter.ItemClickListener() {
+
 			@Override
 			public void onItemClick(View view) {
 				int pos = rv.indexOfChild(view);
@@ -274,8 +273,8 @@ public class MeasurementToolFragment extends Fragment {
 		}
 	}
 
-	private void upBtnOnClick(View view, Drawable icon) {
-		pointsDetailsOpened = true;
+	private void showPointsList(View view, Drawable icon) {
+		pointsListOpened = true;
 		view.findViewById(R.id.points_list_container).setVisibility(View.VISIBLE);
 		((ImageView) view.findViewById(R.id.up_down_button)).setImageDrawable(icon);
 		MapActivity mapActivity = getMapActivity();
@@ -287,8 +286,8 @@ public class MeasurementToolFragment extends Fragment {
 		}
 	}
 
-	private void downBtnOnClick(View view, Drawable icon) {
-		pointsDetailsOpened = false;
+	private void hidePointsList(View view, Drawable icon) {
+		pointsListOpened = false;
 		view.findViewById(R.id.points_list_container).setVisibility(View.GONE);
 		((ImageView) view.findViewById(R.id.up_down_button)).setImageDrawable(icon);
 		setPreviousMapPosition();
@@ -454,9 +453,8 @@ public class MeasurementToolFragment extends Fragment {
 	public void onDestroyView() {
 		super.onDestroyView();
 		exitMeasurementMode();
-		adapter.setRemovePointListener(null);
-		adapter.setItemClickListener(null);
-		if (pointsDetailsOpened) {
+		adapter.setAdapterListener(null);
+		if (pointsListOpened) {
 			setPreviousMapPosition();
 		}
 		MeasurementToolLayer layer = getMeasurementLayer();
