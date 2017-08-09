@@ -25,10 +25,12 @@ public class ClearPointsCommand implements Command {
 	@Override
 	public void undo() {
 		measurementLayer.getMeasurementPoints().addAll(points);
+		measurementLayer.refreshMap();
 	}
 
 	@Override
 	public void redo() {
 		measurementLayer.clearPoints();
+		measurementLayer.refreshMap();
 	}
 }

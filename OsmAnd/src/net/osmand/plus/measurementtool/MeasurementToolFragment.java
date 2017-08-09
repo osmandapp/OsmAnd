@@ -148,7 +148,7 @@ public class MeasurementToolFragment extends Fragment {
 				} else {
 					disable(undoBtn);
 				}
-				hidePointsListIfNeeded();
+				hidePointsListIfNoPoints();
 				adapter.notifyDataSetChanged();
 				enable(redoBtn);
 				updateText();
@@ -165,7 +165,7 @@ public class MeasurementToolFragment extends Fragment {
 				} else {
 					disable(redoBtn);
 				}
-				hidePointsListIfNeeded();
+				hidePointsListIfNoPoints();
 				adapter.notifyDataSetChanged();
 				enable(undoBtn);
 				updateText();
@@ -235,8 +235,10 @@ public class MeasurementToolFragment extends Fragment {
 									return true;
 								case R.id.action_clear_all:
 									commandManager.execute(new ClearPointsCommand(measurementLayer));
-									hidePointsListIfNeeded();
-									disable(redoBtn);
+									if (pointsListOpened) {
+										hidePointsList();
+									}
+									disable(redoBtn, upDownBtn);
 									updateText();
 									saved = false;
 									return true;
@@ -266,7 +268,7 @@ public class MeasurementToolFragment extends Fragment {
 				disable(redoBtn);
 				updateText();
 				saved = false;
-				hidePointsListIfNeeded();
+				hidePointsListIfNoPoints();
 			}
 
 			@Override
@@ -287,6 +289,7 @@ public class MeasurementToolFragment extends Fragment {
 				if (toPosition != fromPosition) {
 					commandManager.execute(new ReorderPointCommand(measurementLayer, fromPosition, toPosition));
 					adapter.notifyDataSetChanged();
+					disable(redoBtn);
 					mapActivity.refreshMap();
 					saved = false;
 				}
@@ -298,7 +301,7 @@ public class MeasurementToolFragment extends Fragment {
 		return view;
 	}
 
-	private void hidePointsListIfNeeded() {
+	private void hidePointsListIfNoPoints() {
 		MeasurementToolLayer measurementLayer = getMeasurementLayer();
 		if (measurementLayer != null) {
 			if (measurementLayer.getPointsCount() < 1) {
