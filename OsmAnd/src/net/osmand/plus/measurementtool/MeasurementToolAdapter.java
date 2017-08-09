@@ -51,6 +51,7 @@ class MeasurementToolAdapter extends RecyclerView.Adapter<MeasurementToolAdapter
 	@Override
 	public void onBindViewHolder(final Holder holder, int pos) {
 		IconsCache iconsCache = mapActivity.getMyApplication().getIconsCache();
+		holder.iconReorder.setImageDrawable(iconsCache.getThemedIcon(R.drawable.ic_action_reorder));
 		holder.icon.setImageDrawable(iconsCache.getThemedIcon(R.drawable.ic_action_measure_point));
 		holder.title.setText(mapActivity.getString(R.string.plugin_distance_point) + " - " + (pos + 1));
 		if (pos < 1) {
@@ -79,6 +80,7 @@ class MeasurementToolAdapter extends RecyclerView.Adapter<MeasurementToolAdapter
 
 	static class Holder extends RecyclerView.ViewHolder {
 
+		final ImageView iconReorder;
 		final ImageView icon;
 		final TextView title;
 		final TextView descr;
@@ -86,6 +88,7 @@ class MeasurementToolAdapter extends RecyclerView.Adapter<MeasurementToolAdapter
 
 		Holder(View view) {
 			super(view);
+			iconReorder = (ImageView) view.findViewById(R.id.measure_point_reorder_icon);
 			icon = (ImageView) view.findViewById(R.id.measure_point_icon);
 			title = (TextView) view.findViewById(R.id.measure_point_title);
 			descr = (TextView) view.findViewById(R.id.measure_point_descr);
