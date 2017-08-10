@@ -91,6 +91,8 @@ public class MeasurementToolFragment extends Fragment {
 	private int previousMapPosition;
 	private NewGpxLine newGpxLine;
 
+	private boolean inMovePointMode;
+
 	public void setNewGpxLine(NewGpxLine newGpxLine) {
 		this.newGpxLine = newGpxLine;
 	}
@@ -220,6 +222,7 @@ public class MeasurementToolFragment extends Fragment {
 				if (pointsListOpened) {
 					hidePointsList();
 				}
+				inMovePointMode = true;
 				enterMovePointMode();
 			}
 		});
@@ -340,7 +343,10 @@ public class MeasurementToolFragment extends Fragment {
 	}
 
 	private void cancelMovePointMode() {
-		exitMovePointMode();
+		if (inMovePointMode) {
+			exitMovePointMode();
+			inMovePointMode = false;
+		}
 		MeasurementToolLayer measurementToolLayer = getMeasurementLayer();
 		if (measurementToolLayer != null) {
 			measurementToolLayer.exitMovePointMode();
@@ -349,7 +355,10 @@ public class MeasurementToolFragment extends Fragment {
 	}
 
 	private void applyMovePointMode() {
-		exitMovePointMode();
+		if (inMovePointMode) {
+			exitMovePointMode();
+			inMovePointMode = false;
+		}
 		MeasurementToolLayer measurementLayer = getMeasurementLayer();
 		if (measurementLayer != null) {
 			WptPt newPoint = measurementLayer.getMovedPointToApply();
@@ -737,6 +746,14 @@ public class MeasurementToolFragment extends Fragment {
 
 	private void dismiss(MapActivity mapActivity) {
 		try {
+			if (inMovePointMode) {
+				exitMovePointMode();
+				inMovePointMode = false;
+			}
+			MeasurementToolLayer measurementToolLayer = getMeasurementLayer();
+			if (measurementToolLayer != null && measurementToolLayer.isInMovePointMode()) {
+				measurementToolLayer.exitMovePointMode();
+			}
 			if (newGpxLine != null) {
 				GPXFile gpx = newGpxLine.getGpxFile();
 				Intent newIntent = new Intent(mapActivity, mapActivity.getMyApplication().getAppCustomization().getTrackActivity());
