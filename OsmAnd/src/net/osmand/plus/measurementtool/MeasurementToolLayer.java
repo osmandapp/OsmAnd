@@ -45,7 +45,7 @@ public class MeasurementToolLayer extends OsmandMapLayer implements ContextMenuL
 	private OnSingleTapListener singleTapListener;
 	private OnEnterMovePointModeListener enterMovePointModeListener;
 	private int movePointPos;
-	private WptPt previouslyMovedPoint;
+	private WptPt pointBeforeMovement;
 
 	@Override
 	public void initLayer(OsmandMapTileView view) {
@@ -73,8 +73,8 @@ public class MeasurementToolLayer extends OsmandMapLayer implements ContextMenuL
 		this.enterMovePointModeListener = listener;
 	}
 
-	WptPt getPreviouslyMovedPoint() {
-		return previouslyMovedPoint;
+	WptPt getPointBeforeMovement() {
+		return pointBeforeMovement;
 	}
 
 	int getMovePointPosition() {
@@ -156,7 +156,7 @@ public class MeasurementToolLayer extends OsmandMapLayer implements ContextMenuL
 			double distToPoint = Math.sqrt(Math.pow(latDiff, 2) + Math.pow(lonDiff, 2));
 			if (distToPoint < lowestDistance) {
 				lowestDistance = distToPoint;
-				previouslyMovedPoint = new WptPt(pt);
+				pointBeforeMovement = new WptPt(pt);
 				movePointPos = i;
 			}
 		}
@@ -221,7 +221,7 @@ public class MeasurementToolLayer extends OsmandMapLayer implements ContextMenuL
 	void exitMovePointMode() {
 		inMovePointMode = false;
 		movePointPos = -1;
-		previouslyMovedPoint = null;
+		pointBeforeMovement = null;
 	}
 
 	private void drawCenterIcon(Canvas canvas, RotatedTileBox tb, QuadPoint center, boolean nightMode) {

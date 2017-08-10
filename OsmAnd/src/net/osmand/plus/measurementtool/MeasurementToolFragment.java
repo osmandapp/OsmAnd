@@ -353,7 +353,7 @@ public class MeasurementToolFragment extends Fragment {
 		MeasurementToolLayer measurementLayer = getMeasurementLayer();
 		if (measurementLayer != null) {
 			WptPt newPoint = measurementLayer.getMovedPointToApply();
-			WptPt oldPoint = measurementLayer.getPreviouslyMovedPoint();
+			WptPt oldPoint = measurementLayer.getPointBeforeMovement();
 			int position = measurementLayer.getMovePointPosition();
 			commandManager.execute(new MovePointCommand(measurementLayer, oldPoint, newPoint, position));
 			enable(undoBtn, upDownBtn);
