@@ -2418,7 +2418,7 @@ Por favor proporciona un código completo</string>
     <string name="add_new_folder">Añadir nueva carpeta</string>
     <string name="points_delete_multiple_succesful">Punto(s) eliminados con éxito.</string>
     <string name="points_delete_multiple">¿Seguro que quiere borrar %1$d punto(s)?</string>
-    <string name="route_points_category_name">Giros en la ruta a pasar</string>
+    <string name="route_points_category_name">Giros a pasar en esta ruta</string>
     <string name="track_points_category_name">Puntos destacados en esta ruta</string>
     <string name="gpx_track">Traza</string>
     <string name="max_speed">Velocidad máxima</string>
