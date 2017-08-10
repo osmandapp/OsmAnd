@@ -20,7 +20,7 @@
 	<string name="delay_to_start_navigation_descr">Wartezeit festlegen, um mit der Routenführung zu beginnen</string>
 	<string name="simulate_your_location">Standort simulieren</string>
 	<string name="rendering_attr_OSMMapperAssistant_name">OSM-Mapper-Assistent</string>
-	<string name="traffic_warning_speed_limit">Geschwindigkeitsbegrenzung</string>
+	<string name="traffic_warning_speed_limit">Tempolimit</string>
 	<string name="traffic_warning_border_control">Grenzkontrolle</string>
 	<string name="traffic_warning_payment">Mautstelle</string>
 	<string name="traffic_warning_stop">Stoppzeichen</string>
@@ -977,7 +977,7 @@ Proportionaler Speicher %4$s MB (Android Limit %5$s MB, Dalvik %6$s MB).</string
 	<string name="route_updated_loc_found">Route wird neu berechnet sobald Standort ermittelt</string>
 	<string name="continue_follow_previous_route_auto">Vorherige Navigation wurde nicht beendet. Der Route weiter folgen? (%1$s Sekunden)</string>
 
-	<string name="show_cameras">Radarfallen</string>
+	<string name="show_cameras">Blitzer</string>
 	<string name="show_traffic_warnings">Verkehrswarnungen</string>
 	<string name="avoid_toll_roads">Mautstraßen vermeiden</string>
 	<string name="map_widget_top_text">Straßenname</string>
@@ -1221,7 +1221,7 @@ Proportionaler Speicher %4$s MB (Android Limit %5$s MB, Dalvik %6$s MB).</string
 	<string name="driving_region_japan">Japan</string>
 	<string name="driving_region_us">USA</string>
 	<string name="driving_region_canada">Kanada</string>
-	<string name="driving_region_europe_asia">Europa, Asien, Lateinamerika, &amp; ähnliche</string>
+	<string name="driving_region_europe_asia">Europa, Asien, Lateinamerika &amp; ähnliche</string>
 	<string name="driving_region_uk">UK, Indien &amp; andere</string>
 	<string name="driving_region_australia">Australien</string>
 	<string name="announce_gpx_waypoints">GPX-Wegpunkte</string>
