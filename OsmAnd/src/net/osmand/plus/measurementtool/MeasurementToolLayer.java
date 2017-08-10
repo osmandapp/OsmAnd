@@ -203,12 +203,11 @@ public class MeasurementToolLayer extends OsmandMapLayer implements ContextMenuL
 				}
 				calculatePath(tb, tx, ty, path);
 				canvas.drawPath(path, lineAttrs.paint);
+				WptPt pointToDrawOnTop = null;
 				for (int i = 0; i < measurementPoints.size(); i++) {
 					WptPt pt = measurementPoints.get(i);
 					if (inMovePointMode && i == movePointPos) {
-						int locX = tb.getCenterPixelX();
-						int locY = tb.getCenterPixelY();
-						canvas.drawBitmap(movePointIcon, locX - marginX, locY - marginY, bitmapPaint);
+						pointToDrawOnTop = pt;
 					} else {
 						if (tb.containsLatLon(pt.lat, pt.lon)) {
 							int locX = tb.getPixXFromLonNoRot(pt.lon);
@@ -216,6 +215,11 @@ public class MeasurementToolLayer extends OsmandMapLayer implements ContextMenuL
 							canvas.drawBitmap(pointIcon, locX - marginX, locY - marginY, bitmapPaint);
 						}
 					}
+				}
+				if (pointToDrawOnTop != null) {
+					int locX = tb.getCenterPixelX();
+					int locY = tb.getCenterPixelY();
+					canvas.drawBitmap(movePointIcon, locX - marginX, locY - marginY, bitmapPaint);
 				}
 			}
 		}
