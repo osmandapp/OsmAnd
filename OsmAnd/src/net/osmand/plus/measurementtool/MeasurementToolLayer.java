@@ -133,7 +133,7 @@ public class MeasurementToolLayer extends OsmandMapLayer implements ContextMenuL
 		double pressedPointLat = tileBox.getLatFromPixel(point.x, point.y);
 		double pressedPointLon = tileBox.getLonFromPixel(point.x, point.y);
 		getPointToMove(pressedPointLat, pressedPointLon);
-		if (movePointPos != -1) {
+		if (pointBeforeMovement != null && movePointPos != -1) {
 			enterMovingPointMode();
 			if (inMeasurementMode && inMovePointMode && enterMovePointModeListener != null) {
 				enterMovePointModeListener.onEnterMovePointMode();
@@ -148,16 +148,19 @@ public class MeasurementToolLayer extends OsmandMapLayer implements ContextMenuL
 	}
 
 	private void getPointToMove(double lat, double lon) {
+		RotatedTileBox tb = view.getCurrentRotatedTileBox();
 		double lowestDistance = Double.MAX_VALUE;
 		for (int i = 0; i < measurementPoints.size(); i++) {
 			WptPt pt = measurementPoints.get(i);
-			double latDiff = pt.getLatitude() - lat;
-			double lonDiff = pt.getLongitude() - lon;
-			double distToPoint = Math.sqrt(Math.pow(latDiff, 2) + Math.pow(lonDiff, 2));
-			if (distToPoint < lowestDistance) {
-				lowestDistance = distToPoint;
-				pointBeforeMovement = new WptPt(pt);
-				movePointPos = i;
+			if (tb.containsLatLon(pt.getLatitude(), pt.getLongitude())) {
+				double latDiff = pt.getLatitude() - lat;
+				double lonDiff = pt.getLongitude() - lon;
+				double distToPoint = Math.sqrt(Math.pow(latDiff, 2) + Math.pow(lonDiff, 2));
+				if (distToPoint < lowestDistance) {
+					lowestDistance = distToPoint;
+					pointBeforeMovement = new WptPt(pt);
+					movePointPos = i;
+				}
 			}
 		}
 	}
