@@ -35,10 +35,12 @@ public class MovePointCommand implements Command {
 	private void replacePointWithOldOne() {
 		measurementLayer.getMeasurementPoints().remove(position);
 		measurementLayer.getMeasurementPoints().add(position, oldPoint);
+		measurementLayer.refreshMap();
 	}
 
 	private void replacePointWithNewOne() {
 		measurementLayer.getMeasurementPoints().remove(position);
 		measurementLayer.getMeasurementPoints().add(position, newPoint);
+		measurementLayer.refreshMap();
 	}
 }
