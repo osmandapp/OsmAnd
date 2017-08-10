@@ -61,7 +61,6 @@ import net.osmand.plus.widgets.TextViewEx;
 import java.io.File;
 import java.text.MessageFormat;
 import java.text.SimpleDateFormat;
-import java.util.ArrayList;
 import java.util.Date;
 import java.util.LinkedList;
 import java.util.List;
@@ -261,6 +260,7 @@ public class MeasurementToolFragment extends Fragment {
 						saveAsGpxTrack.setVisible(false);
 						addSegmentToTrack.setVisible(false);
 					}
+					menu.findItem(R.id.action_snap_to_road).setIcon(ic.getThemedIcon(R.drawable.ic_action_snap_to_road));
 					menu.findItem(R.id.action_clear_all).setIcon(ic.getThemedIcon(R.drawable.ic_action_reset_to_default_dark));
 					popup.setOnMenuItemClickListener(new IconPopupMenu.OnMenuItemClickListener() {
 						@Override
@@ -273,6 +273,7 @@ public class MeasurementToolFragment extends Fragment {
 										Toast.makeText(mapActivity, getString(R.string.none_point_error), Toast.LENGTH_SHORT).show();
 									}
 									return true;
+
 								case R.id.action_add_segment_to_track:
 									if (measurementLayer.getPointsCount() > 0) {
 //										showAddSegmentDialog(mapActivity);
@@ -280,6 +281,7 @@ public class MeasurementToolFragment extends Fragment {
 										Toast.makeText(mapActivity, getString(R.string.none_point_error), Toast.LENGTH_SHORT).show();
 									}
 									return true;
+
 								case R.id.action_save_as_gpx:
 									if (measurementLayer.getPointsCount() > 0) {
 										saveAsGpxOnClick(mapActivity);
@@ -287,6 +289,12 @@ public class MeasurementToolFragment extends Fragment {
 										Toast.makeText(mapActivity, getString(R.string.none_point_error), Toast.LENGTH_SHORT).show();
 									}
 									return true;
+
+								case R.id.action_snap_to_road:
+									SnapToRoadBottomSheetDialogFragment fragment = new SnapToRoadBottomSheetDialogFragment();
+									fragment.show(mapActivity.getSupportFragmentManager(), SnapToRoadBottomSheetDialogFragment.TAG);
+									return true;
+
 								case R.id.action_clear_all:
 									commandManager.execute(new ClearPointsCommand(measurementLayer));
 									if (pointsListOpened) {
