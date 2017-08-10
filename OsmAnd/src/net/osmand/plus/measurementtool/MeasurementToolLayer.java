@@ -6,7 +6,6 @@ import android.graphics.Canvas;
 import android.graphics.Paint;
 import android.graphics.Path;
 import android.graphics.PointF;
-import android.util.Log;
 
 import net.osmand.data.LatLon;
 import net.osmand.data.PointDescription;
@@ -85,7 +84,7 @@ public class MeasurementToolLayer extends OsmandMapLayer implements ContextMenuL
 		return inMeasurementMode;
 	}
 
-	public boolean isInMovePointMode() {
+	boolean isInMovePointMode() {
 		return inMovePointMode;
 	}
 
@@ -110,11 +109,6 @@ public class MeasurementToolLayer extends OsmandMapLayer implements ContextMenuL
 			}
 		}
 		return OsmAndFormatter.getFormattedDistance(dist, view.getApplication());
-	}
-
-	public void clearPoints() {
-		measurementPoints.clear();
-		view.refreshMap();
 	}
 
 	@Override
@@ -203,6 +197,7 @@ public class MeasurementToolLayer extends OsmandMapLayer implements ContextMenuL
 				}
 				calculatePath(tb, tx, ty, path);
 				canvas.drawPath(path, lineAttrs.paint);
+
 				WptPt pointToDrawOnTop = null;
 				for (int i = 0; i < measurementPoints.size(); i++) {
 					WptPt pt = measurementPoints.get(i);
@@ -243,26 +238,15 @@ public class MeasurementToolLayer extends OsmandMapLayer implements ContextMenuL
 		canvas.rotate(tb.getRotate(), center.x, center.y);
 	}
 
-	public void addPoint(int position, WptPt point) {
-		measurementPoints.add(position, point);
-		view.refreshMap();
-	}
-
 	public WptPt addPoint(int position) {
 		RotatedTileBox tb = view.getCurrentRotatedTileBox();
 		LatLon l = tb.getLatLonFromPixel(tb.getCenterPixelX(), tb.getCenterPixelY());
 		WptPt pt = new WptPt();
 		pt.lat = l.getLatitude();
 		pt.lon = l.getLongitude();
-		if (measurementPoints.size() > 0) {
-			if (!measurementPoints.get(measurementPoints.size() - 1).equals(pt)) {
-				measurementPoints.add(position, pt);
-				view.refreshMap();
-				return pt;
-			}
-		} else {
+		boolean allowed = measurementPoints.size() == 0 || !measurementPoints.get(measurementPoints.size() - 1).equals(pt);
+		if (allowed) {
 			measurementPoints.add(position, pt);
-			view.refreshMap();
 			return pt;
 		}
 		return null;
@@ -275,12 +259,6 @@ public class MeasurementToolLayer extends OsmandMapLayer implements ContextMenuL
 		pt.lat = latLon.getLatitude();
 		pt.lon = latLon.getLongitude();
 		return pt;
-	}
-
-	public WptPt removePoint(int position) {
-		WptPt res = measurementPoints.remove(position);
-		view.refreshMap();
-		return res;
 	}
 
 	public void moveMapToPoint(int pos) {

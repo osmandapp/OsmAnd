@@ -16,18 +16,21 @@ public class RemovePointCommand implements Command {
 
 	@Override
 	public boolean execute() {
-		point = measurementLayer.removePoint(position);
+		point = measurementLayer.getMeasurementPoints().remove(position);
+		measurementLayer.refreshMap();
 		return true;
 	}
 
 	@Override
 	public void undo() {
-		measurementLayer.addPoint(position, point);
+		measurementLayer.getMeasurementPoints().add(position, point);
+		measurementLayer.refreshMap();
 		measurementLayer.moveMapToPoint(position);
 	}
 
 	@Override
 	public void redo() {
-		measurementLayer.removePoint(position);
+		measurementLayer.getMeasurementPoints().remove(position);
+		measurementLayer.refreshMap();
 	}
 }

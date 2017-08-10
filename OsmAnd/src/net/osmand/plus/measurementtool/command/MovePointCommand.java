@@ -10,7 +10,7 @@ public class MovePointCommand implements Command {
 	private final WptPt newPoint;
 	private final int position;
 
-	public MovePointCommand (MeasurementToolLayer measurementLayer, WptPt oldPoint, WptPt newPoint, int position) {
+	public MovePointCommand(MeasurementToolLayer measurementLayer, WptPt oldPoint, WptPt newPoint, int position) {
 		this.measurementLayer = measurementLayer;
 		this.oldPoint = oldPoint;
 		this.newPoint = newPoint;
@@ -24,21 +24,13 @@ public class MovePointCommand implements Command {
 
 	@Override
 	public void undo() {
-		replacePointWithOldOne();
-	}
-
-	@Override
-	public void redo() {
-		replacePointWithNewOne();
-	}
-
-	private void replacePointWithOldOne() {
 		measurementLayer.getMeasurementPoints().remove(position);
 		measurementLayer.getMeasurementPoints().add(position, oldPoint);
 		measurementLayer.refreshMap();
 	}
 
-	private void replacePointWithNewOne() {
+	@Override
+	public void redo() {
 		measurementLayer.getMeasurementPoints().remove(position);
 		measurementLayer.getMeasurementPoints().add(position, newPoint);
 		measurementLayer.refreshMap();

@@ -21,17 +21,21 @@ public class AddPointCommand implements Command {
 
 	@Override
 	public boolean execute() {
-		return (point = measurementLayer.addPoint(position)) != null;
+		point = measurementLayer.addPoint(position);
+		measurementLayer.refreshMap();
+		return point != null;
 	}
 
 	@Override
 	public void undo() {
-		measurementLayer.removePoint(position);
+		measurementLayer.getMeasurementPoints().remove(position);
+		measurementLayer.refreshMap();
 	}
 
 	@Override
 	public void redo() {
-		measurementLayer.addPoint(position, point);
+		measurementLayer.getMeasurementPoints().add(position, point);
+		measurementLayer.refreshMap();
 		measurementLayer.moveMapToPoint(position);
 	}
 }

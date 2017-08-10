@@ -110,9 +110,9 @@ public class MeasurementToolFragment extends Fragment {
 		final int backgroundColor = ContextCompat.getColor(getActivity(),
 				nightMode ? R.color.ctx_menu_info_view_bg_dark : R.color.ctx_menu_info_view_bg_light);
 		boolean portrait = AndroidUiHelper.isOrientationPortrait(mapActivity);
+
 		upIcon = iconsCache.getThemedIcon(R.drawable.ic_action_arrow_up);
 		downIcon = iconsCache.getThemedIcon(R.drawable.ic_action_arrow_down);
-
 		pointsSt = getString(R.string.points).toLowerCase();
 
 		View view = View.inflate(new ContextThemeWrapper(getContext(), themeRes), R.layout.fragment_measurement_tool, null);
@@ -203,13 +203,12 @@ public class MeasurementToolFragment extends Fragment {
 			}
 		});
 
-		((Button) mainView.findViewById(R.id.add_point_button))
-				.setOnClickListener(new View.OnClickListener() {
-					@Override
-					public void onClick(View view) {
-						addPoint();
-					}
-				});
+		mainView.findViewById(R.id.add_point_button).setOnClickListener(new View.OnClickListener() {
+			@Override
+			public void onClick(View view) {
+				addPoint();
+			}
+		});
 
 		measurementLayer.setOnSingleTapListener(new MeasurementToolLayer.OnSingleTapListener() {
 			@Override
@@ -224,7 +223,6 @@ public class MeasurementToolFragment extends Fragment {
 				if (pointsListOpened) {
 					hidePointsList();
 				}
-				inMovePointMode = true;
 				enterMovePointMode();
 			}
 		});
@@ -335,8 +333,7 @@ public class MeasurementToolFragment extends Fragment {
 
 			@Override
 			public void onItemClick(View view) {
-				int pos = rv.indexOfChild(view);
-				measurementLayer.moveMapToPoint(pos);
+				measurementLayer.moveMapToPoint(rv.indexOfChild(view));
 			}
 
 			@Override
@@ -381,7 +378,6 @@ public class MeasurementToolFragment extends Fragment {
 	private void cancelMovePointMode() {
 		if (inMovePointMode) {
 			exitMovePointMode();
-			inMovePointMode = false;
 		}
 		MeasurementToolLayer measurementToolLayer = getMeasurementLayer();
 		if (measurementToolLayer != null) {
@@ -393,7 +389,6 @@ public class MeasurementToolFragment extends Fragment {
 	private void applyMovePointMode() {
 		if (inMovePointMode) {
 			exitMovePointMode();
-			inMovePointMode = false;
 		}
 		MeasurementToolLayer measurementLayer = getMeasurementLayer();
 		if (measurementLayer != null) {
@@ -409,10 +404,10 @@ public class MeasurementToolFragment extends Fragment {
 			measurementLayer.exitMovePointMode();
 			measurementLayer.refreshMap();
 		}
-
 	}
 
 	private void enterMovePointMode() {
+		inMovePointMode = true;
 		mark(View.GONE,
 				R.id.ruler_icon,
 				R.id.measurement_distance_text_view,
@@ -429,6 +424,7 @@ public class MeasurementToolFragment extends Fragment {
 	}
 
 	private void exitMovePointMode() {
+		inMovePointMode = false;
 		mark(View.GONE,
 				R.id.move_point_icon,
 				R.id.move_point_text,
@@ -747,9 +743,18 @@ public class MeasurementToolFragment extends Fragment {
 			measurementLayer.setInMeasurementMode(true);
 			mapActivity.refreshMap();
 			mapActivity.disableDrawer();
-			mark(View.INVISIBLE, R.id.map_left_widgets_panel, R.id.map_right_widgets_panel, R.id.map_center_info);
-			mark(View.GONE, R.id.map_route_info_button, R.id.map_menu_button, R.id.map_compass_button, R.id.map_layers_button,
-					R.id.map_search_button, R.id.map_quick_actions_button);
+
+			mark(View.INVISIBLE,
+					R.id.map_left_widgets_panel,
+					R.id.map_right_widgets_panel,
+					R.id.map_center_info);
+			mark(View.GONE,
+					R.id.map_route_info_button,
+					R.id.map_menu_button,
+					R.id.map_compass_button,
+					R.id.map_layers_button,
+					R.id.map_search_button,
+					R.id.map_quick_actions_button);
 
 			View collapseButton = mapActivity.findViewById(R.id.map_collapse_button);
 			if (collapseButton != null && collapseButton.getVisibility() == View.VISIBLE) {
@@ -771,18 +776,26 @@ public class MeasurementToolFragment extends Fragment {
 				mapActivity.hideTopToolbar(toolBarController);
 			}
 			measurementLayer.setInMeasurementMode(false);
-			mapActivity.refreshMap();
 			mapActivity.enableDrawer();
-			mark(View.VISIBLE, R.id.map_left_widgets_panel, R.id.map_right_widgets_panel, R.id.map_center_info,
-					R.id.map_route_info_button, R.id.map_menu_button, R.id.map_compass_button, R.id.map_layers_button,
-					R.id.map_search_button, R.id.map_quick_actions_button);
+
+			mark(View.VISIBLE,
+					R.id.map_left_widgets_panel,
+					R.id.map_right_widgets_panel,
+					R.id.map_center_info,
+					R.id.map_route_info_button,
+					R.id.map_menu_button,
+					R.id.map_compass_button,
+					R.id.map_layers_button,
+					R.id.map_search_button,
+					R.id.map_quick_actions_button);
 
 			View collapseButton = mapActivity.findViewById(R.id.map_collapse_button);
 			if (collapseButton != null && wasCollapseButtonVisible) {
 				collapseButton.setVisibility(View.VISIBLE);
 			}
 
-			measurementLayer.clearPoints();
+			measurementLayer.getMeasurementPoints().clear();
+			mapActivity.refreshMap();
 		}
 	}
 
@@ -828,7 +841,6 @@ public class MeasurementToolFragment extends Fragment {
 		try {
 			if (inMovePointMode) {
 				exitMovePointMode();
-				inMovePointMode = false;
 			}
 			MeasurementToolLayer measurementToolLayer = getMeasurementLayer();
 			if (measurementToolLayer != null && measurementToolLayer.isInMovePointMode()) {

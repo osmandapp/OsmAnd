@@ -17,8 +17,10 @@ public class ClearPointsCommand implements Command {
 
 	@Override
 	public boolean execute() {
-		points = new LinkedList<>(measurementLayer.getMeasurementPoints());
-		measurementLayer.clearPoints();
+		List<GPXUtilities.WptPt> pts = measurementLayer.getMeasurementPoints();
+		points = new LinkedList<>(pts);
+		pts.clear();
+		measurementLayer.refreshMap();
 		return true;
 	}
 
@@ -30,7 +32,7 @@ public class ClearPointsCommand implements Command {
 
 	@Override
 	public void redo() {
-		measurementLayer.clearPoints();
+		measurementLayer.getMeasurementPoints().clear();
 		measurementLayer.refreshMap();
 	}
 }
