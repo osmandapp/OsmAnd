@@ -235,9 +235,9 @@ Lon %2$s</string>
     <string name="duration">Duración</string>
     <string name="distance">Distancia</string>
     <string name="shared_string_all">Todos</string>
-    <string name="waypoints">Puntos de ruta</string>
+    <string name="waypoints">Puntos de referencia</string>
     <string name="targets">Destinos</string>
-    <string name="announce_gpx_waypoints">Puntos de ruta GPX</string>
+    <string name="announce_gpx_waypoints">Puntos GPX</string>
     <string name="download_additional_maps">¿Descargar los %1$s mapas que faltan (%2$d MB)?</string>
     <string name="rendering_value_bicycle_name">Bicicleta</string>
     <string name="rendering_value_pedestrian_name">Peatón</string>
@@ -271,13 +271,13 @@ Lon %2$s</string>
     <string name="layer_amenity_label">Etiquetas de punto</string>
     <string name="loading_smth">Cargando %1$s…</string>
     <string name="map_widget_plain_time">Tiempo actual</string>
-    <string name="gpx_wpt">Punto de ruta</string>
+    <string name="gpx_wpt">Punto de referencia</string>
     <string name="selected_gpx_info_show">"
 \n
 \nMantén pulsado para ver en el mapa"</string>
     <string name="local_index_gpx_info_show">\n\nMantén pulsado para opciones</string>
     <string name="gpx_info_subtracks">Subtrazas: %1$s</string>
-    <string name="gpx_info_waypoints">Puntos de ruta: %1$s</string>
+    <string name="gpx_info_waypoints">Puntos de referencia: %1$s</string>
     <string name="gpx_info_distance">Distancia: %1$s (%2$s puntos)</string>
     <string name="gpx_info_average_speed">Velocidad media: %1$s</string>
     <string name="gpx_info_maximum_speed">Velocidad máxima: %1$s</string>
@@ -865,7 +865,7 @@ Se aprecia la participación activa, y las contribuciones pueden hacerse directa
     <string name="auto_zoom_map">Ampliación automática del mapa</string>
     <string name="snap_to_road_descr">﻿Ajusta la ubicación al camino durante la navegación</string>
     <string name="snap_to_road">Ajustar al camino</string>
-    <string name="interrupt_music_descr">El aviso por voz pausa la reproducción de música (no sólo reduce el volumen)</string>
+    <string name="interrupt_music_descr">El aviso por voz, pausa la reproducción de música (no sólo reduce el volumen)</string>
     <string name="interrupt_music">Pausar música</string>
     <string name="osmand_play_title_30_chars">Navegación y Mapas OsmAnd</string>
     <string name="osmand_short_description_80_chars">Visor y navegador móvil global de mapas OSM con y sin conexión</string>
@@ -1306,9 +1306,9 @@ Se aprecia la participación activa, y las contribuciones pueden hacerse directa
     <string name="send_location_email_pattern">Para ver la ubicación, sigue el enlace del navegador %1$s o el enlace del interno de Android %2$s</string>
     <string name="send_location">Enviar ubicación</string>
     <string name="context_menu_item_share_location">Compartir ubicación</string>
-    <string name="add_waypoint_dialog_added">El punto de ruta GPX «{0}» se añadió correctamente</string>
-    <string name="add_waypoint_dialog_title">Añadir punto de ruta a la traza GPX grabada</string>
-    <string name="context_menu_item_add_waypoint">Añadir punto de ruta GPX</string>
+    <string name="add_waypoint_dialog_added">El punto GPX «{0}» se añadió correctamente</string>
+    <string name="add_waypoint_dialog_title">Añadir punto a la traza GPX grabada</string>
+    <string name="context_menu_item_add_waypoint">Añadir punto GPX</string>
     <string name="amenity_type_administrative">Administrativo</string>
     <string name="amenity_type_barrier">Barrera</string>
     <string name="amenity_type_education">Educación</string>
@@ -1409,7 +1409,7 @@ Se aprecia la participación activa, y las contribuciones pueden hacerse directa
     <string name="rotate_map_to_bearing">Orientación del mapa</string>
     <string name="show_route">Detalle de la ruta</string>
     <string name="fav_imported_sucessfully">Favoritos importados correctamente</string>
-    <string name="import_file_favourites">¿Guardar datos en un archivo GPX o importar puntos de ruta a Favoritos?</string>
+    <string name="import_file_favourites">¿Guardar datos en un archivo GPX o importar puntos a Favoritos?</string>
     <string name="fav_file_to_load_not_found">El archivo GPX de favoritos no se encontró en {0}</string>
     <string name="fav_saved_sucessfully">Los puntos favoritos se guardaron correctamente en {0}</string>
     <string name="no_fav_to_save">Sin puntos favoritos que guardar</string>
@@ -1507,7 +1507,7 @@ Se aprecia la participación activa, y las contribuciones pueden hacerse directa
     <string name="favorite">Favorito</string>
     <string name="uploading_data">Subiendo datos…</string>
     <string name="uploading">Subiendo…</string>
-    <string name="search_nothing_found">No se encontró nada</string>
+    <string name="search_nothing_found">Nada encontrado</string>
     <string name="searching">Buscando…</string>
     <string name="searching_address">Buscando dirección…</string>
     <string name="search_osm_nominatim">Buscar en línea usando OSM Nominatim</string>
@@ -1546,7 +1546,7 @@ Se aprecia la participación activa, y las contribuciones pueden hacerse directa
     <string name="loading_cities">Cargando ciudades…</string>
     <string name="poi">PDI</string>
     <string name="error_occurred_saving_gpx">Ocurrió un error al guardar el GPX</string>
-    <string name="error_calculating_route">Error calculando ruta</string>
+    <string name="error_calculating_route">Error calculando la ruta</string>
     <string name="error_calculating_route_occured">Ocurrió un error al calcular la ruta</string>
     <string name="empty_route_calculated">Error: La ruta calculada está vacía</string>
     <string name="new_route_calculated_dist">Nueva ruta calculada, distancia</string>
@@ -1923,8 +1923,8 @@ Se aprecia la participación activa, y las contribuciones pueden hacerse directa
 	<string name="osn_close_dialog_error">Error: no se cerró el informe</string>
 	<string name="shared_string_commit">Confirmar</string>
 	
-    <string name="context_menu_item_delete_waypoint">¿Quieres borrar el punto de ruta GPX?</string>
-    <string name="context_menu_item_edit_waypoint">Editar punto de ruta GPX</string>
+    <string name="context_menu_item_delete_waypoint">¿Borrar el punto GPX?</string>
+    <string name="context_menu_item_edit_waypoint">Editar el punto GPX</string>
     <string name="rendering_attr_currentTrackColor_description">Color del GPX</string>
     <string name="rendering_attr_currentTrackWidth_description">Ancho del GPX</string>
     <string name="rendering_attr_roadStyle_description">Estilo del camino</string>
@@ -2115,7 +2115,7 @@ Si amas a OsmAnd, OSM y quieres apoyarlos, esta es una perfecta manera de hacerl
     <string name="report">Informe</string>
     <string name="file_name_containes_illegal_char">El nombre del archivo contiene caracteres ilegales</string>
 <string name="no_map_markers_found">Añade marcadores a través del mapa</string>
-    <string name="no_waypoints_found">No se encontraron puntos de ruta</string>
+    <string name="no_waypoints_found">No se encontraron puntos de referencia</string>
     <string name="rendering_value_thin_name">Fino</string>
     <string name="rendering_value_medium_name">Mediano</string>
     <string name="rendering_value_bold_name">Grueso</string>
@@ -2226,11 +2226,11 @@ Si amas a OsmAnd, OSM y quieres apoyarlos, esta es una perfecta manera de hacerl
     <string name="give_permission">Conceder permiso</string>
     <string name="allow_access_location">Permitir acceso a la ubicación</string>
     <string name="first_usage_greeting">Obtén direcciones y descubre lugares nuevos sin conexión a Internet</string>
-    <string name="si_mi_meters">Millas/Metros</string>
+    <string name="si_mi_meters">Millas/metros</string>
     <string name="get_for">Obtener por %1$s</string>
     <string name="get_for_month">Obtener por %1$s al mes</string>
     <string name="osm_live_banner_desc">Obtén descargas ilimitada de mapas y más actualizaciones de mapas por mes: cada semana, día u hora.</string>
-    <string name="osmand_plus_banner_desc">Descargas de mapas ilimitadas, actualizaciones y complemento de Wikipedia.</string>
+    <string name="osmand_plus_banner_desc">Descargas ilimitadas de mapas, actualizaciones y complemento de Wikipedia.</string>
     <string name="get_it">Obtener</string>
     <string name="osm_live_payment_desc">La suscripción se pagará mensualmente y siempre podrás cancelar tu suscripción en Google Play.</string>
     <string name="donation_to_osm">Donaciones a la comunidad de OpenStreetMap</string>
@@ -2332,7 +2332,7 @@ Si amas a OsmAnd, OSM y quieres apoyarlos, esta es una perfecta manera de hacerl
     <string name="quick_action_navigation_voice">Alternar activación de voz</string>
     <string name="quick_action_navigation_voice_off">Voz desactivada</string>
     <string name="quick_action_navigation_voice_on">Voz activada</string>
-    <string name="quick_action_add_gpx">Añadir punto de ruta GPX</string>
+    <string name="quick_action_add_gpx">Añadir punto GPX</string>
     <string name="quick_action_add_parking">Añadir lugar de estacionamiento</string>
     <string name="quick_action_new_action">Añadir acción</string>
     <string name="quick_action_edit_action">Editar acción</string>
@@ -2344,7 +2344,7 @@ Si amas a OsmAnd, OSM y quieres apoyarlos, esta es una perfecta manera de hacerl
     <string name="quick_favorites_name_preset">Nombre predefinido</string>
     <string name="shared_string_action_name">Nombre de la acción</string>
     <string name="quick_action_add_marker_descr">Pulsar el botón de acción añadirá un marcador en la ubicación central de la pantalla.</string>
-    <string name="quick_action_add_gpx_descr">Pulsar el botón de acción añadirá un punto de ruta GPX en la ubicación central de la pantalla.</string>
+    <string name="quick_action_add_gpx_descr">Pulsar el botón de acción añadirá un punto GPX en la ubicación central de la pantalla.</string>
     <string name="quick_action_take_audio_note_descr">Pulsar el botón de acción añadirá una nota de audio en la ubicación central de la pantalla.</string>
     <string name="quick_action_take_video_note_descr">Pulsar el botón de acción añadirá una nota de video en la ubicación central de la pantalla.</string>
     <string name="quick_action_take_photo_note_descr">Pulsar el botón de acción añadirá una nota fotográfica en la ubicación central de la pantalla.</string>
@@ -2632,7 +2632,7 @@ Proporciona un código completo</string>
     <string name="search_favorites">Buscar favoritos</string>
     <string name="restart_search">Reiniciar búsqueda</string>
     <string name="increase_search_radius">Aumentar radio de búsqueda</string>
-    <string name="nothing_found">Nada encontrado :(</string>
+    <string name="nothing_found">Nada encontrado 😞</string>
     <string name="nothing_found_descr">Modifica la consulta de búsqueda o aumenta el radio de búsqueda</string>
     <string name="private_access_routing_req">El destino se ubica en un área de acceso privado. ¿Quieres acceder en este viaje a los caminos privados?</string>
     <string name="mapillary">Mapillary</string>
@@ -2664,7 +2664,7 @@ Proporciona un código completo</string>
     <string name="mapillary_menu_edit_text_hint">Tipo de nombre de usuario</string>
     <string name="mapillary_menu_descr_username">Ver imágenes añadidas por un determinado usuario.</string>
     <string name="mapillary_menu_title_username">Nombre de usuario</string>
-    <string name="mapillary_menu_filter_description">Puedes filtrar imágenes por usuario o por fecha. Los filtros aplican para los primeros acercamientos.</string>
+    <string name="mapillary_menu_filter_description">Puedes filtrar imágenes por usuario o por fecha. Los filtros sólo aplican para los primeros acercamientos.</string>
     <string name="shared_string_reload">Recargar</string>
     <string name="mapillary_menu_descr_tile_cache">Recargar teselas para ver la información actualizada.</string>
     <string name="mapillary_menu_title_tile_cache">Caché de teselas</string>
@@ -2707,8 +2707,8 @@ Proporciona un código completo</string>
     <string name="show_on_map_after_saving">Mostrar en el mapa después de guardar</string>
     <string name="add_route_point">Añadir punto de ruta</string>
     <string name="add_waypoint">Añadir punto de ruta</string>
-    <string name="save_gpx_waypoint">Guardar punto de ruta GPX</string>
+    <string name="save_gpx_waypoint">Guardar punto GPX</string>
     <string name="save_route_point">Guardar punto de ruta</string>
-    <string name="waypoint_one">Punto de ruta 1</string>
+    <string name="waypoint_one">Punto de referencia 1</string>
     <string name="route_point_one">Punto de ruta 1</string>
 </resources>
