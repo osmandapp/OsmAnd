@@ -250,14 +250,14 @@
     <string name="north_north_west">北北西</string>
     <string name="front">往前</string>
     <string name="front_right">右前方</string>
-    <string name="right">向右方</string>
+    <string name="right">往右邊</string>
     <string name="back_right">右後方</string>
     <string name="back">往後</string>
     <string name="back_left">左後方</string>
-    <string name="left">向左方</string>
+    <string name="left">往左邊</string>
     <string name="front_left">左前方</string>
     <string name="oclock">點鐘</string>
-    <string name="towards">朝向</string>
+    <string name="towards">向</string>
     <string name="accuracy">精確性</string>
     <string name="altitude">海拔高度</string>
     <string name="no_info">沒有數據</string>
