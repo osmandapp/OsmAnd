@@ -33,26 +33,35 @@
             android:textSize="@dimen/default_desc_text_size"/>
     </LinearLayout>
 
-    <FrameLayout
+    <LinearLayout
         android:id="@+id/navigation_types_container"
         android:layout_width="match_parent"
-        android:layout_height="wrap_content"/>
+        android:layout_height="wrap_content"
+        android:orientation="vertical"/>
 
-    <RelativeLayout
+    <View
+        android:id="@+id/divider"
         android:layout_width="match_parent"
-        android:layout_height="52dp">
+        android:layout_height="1dp"
+        android:layout_marginTop="8dp"
+        android:background="?attr/dashboard_divider"/>
 
-        <android.support.v7.widget.AppCompatButton
-            android:id="@+id/cancel_button"
-            style="@style/Widget.AppCompat.Button.Borderless.Colored"
+    <FrameLayout
+        android:id="@+id/cancel_row"
+        android:layout_width="match_parent"
+        android:layout_height="48dp"
+        android:background="?attr/selectableItemBackground">
+
+        <TextView
+            android:id="@+id/cancel_row_text"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:layout_alignParentEnd="true"
-            android:layout_alignParentRight="true"
-            android:layout_centerVertical="true"
-            android:layout_marginEnd="8dp"
-            android:layout_marginRight="8dp"
-            android:text="@string/shared_string_cancel"/>
-    </RelativeLayout>
+            android:layout_gravity="center"
+            android:text="@string/shared_string_cancel"
+            android:textAllCaps="true"
+            android:textColor="@color/dashboard_general_button_text_light"
+            android:textSize="14sp"
+            android:textStyle="bold"/>
+    </FrameLayout>
 
 </LinearLayout>
