@@ -57,7 +57,6 @@ import net.osmand.plus.activities.TrackActivity;
 import net.osmand.plus.base.FavoriteImageDrawable;
 import net.osmand.plus.base.OsmandExpandableListFragment;
 import net.osmand.plus.dialogs.DirectionsDialogs;
-import net.osmand.plus.views.AddGpxPointBottomSheetHelper.NewGpxPoint;
 import net.osmand.util.Algorithms;
 
 import java.io.File;
@@ -101,6 +100,7 @@ public class TrackPointFragment extends OsmandExpandableListFragment {
 	private View routePointTextLayout;
 	private FloatingActionButton lineFab;
 	private View lineTextLayout;
+	private View overlayView;
 
 	@Override
 	public void onCreate(@Nullable Bundle savedInstanceState) {
@@ -130,51 +130,63 @@ public class TrackPointFragment extends OsmandExpandableListFragment {
 						: R.color.ctx_menu_info_view_bg_dark));
 	}
 
-	private View.OnClickListener onFabClickListener = new View.OnClickListener() {
-		@Override
-		public void onClick(View view) {
-			switch (view.getId()) {
-				case R.id.menu_fab:
-					if (menuOpened) {
-						closeMenu();
-					} else {
-						openMenu();
-					}
-					break;
-				case R.id.waypoint_fab:
-					PointDescription pointWptDescription = new PointDescription(PointDescription.POINT_TYPE_WPT, getString(R.string.add_waypoint));
-					addPoint(pointWptDescription);
-					break;
-				case R.id.route_fab:
-					PointDescription pointRteDescription = new PointDescription(PointDescription.POINT_TYPE_RTE, getString(R.string.add_route_point));
-					addPoint(pointRteDescription);
-					break;
-				case R.id.line_fab:
-					addLine();
-					break;
-			}
-		}
-	};
+	private void hideTransparentOverlay() {
+		overlayView.setVisibility(View.GONE);
+	}
+
+	private void showTransparentOverlay() {
+		overlayView.setVisibility(View.VISIBLE);
+	}
 
 	@Override
 	public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
-		View view = inflater.inflate(R.layout.points_tree, container, false);
+		View view = inflater.inflate(R.layout.track_points_tree, container, false);
 		ExpandableListView listView = (ExpandableListView) view.findViewById(android.R.id.list);
 		setHasOptionsMenu(true);
 
+		overlayView = view.findViewById(R.id.overlay_view);
+
 		menuFab = (FloatingActionButton) view.findViewById(R.id.menu_fab);
-		menuFab.setOnClickListener(onFabClickListener);
+		menuFab.setOnClickListener(new View.OnClickListener() {
+			@Override
+			public void onClick(View view) {
+				if (menuOpened) {
+					hideTransparentOverlay();
+					closeMenu();
+				} else {
+					showTransparentOverlay();
+					openMenu();
+				}
+			}
+		});
 
 		waypointFab = (FloatingActionButton) view.findViewById(R.id.waypoint_fab);
-		waypointFab.setOnClickListener(onFabClickListener);
+		waypointFab.setOnClickListener(new View.OnClickListener() {
+			@Override
+			public void onClick(View view) {
+				PointDescription pointDescription = new PointDescription(PointDescription.POINT_TYPE_WPT, getString(R.string.add_waypoint));
+				addPoint(pointDescription);
+			}
+		});
 		waypointTextLayout = view.findViewById(R.id.waypoint_text_layout);
 
 		routePointFab = (FloatingActionButton) view.findViewById(R.id.route_fab);
-		routePointFab.setOnClickListener(onFabClickListener);
+		routePointFab.setOnClickListener(new View.OnClickListener() {
+			@Override
+			public void onClick(View view) {
+				PointDescription pointDescription = new PointDescription(PointDescription.POINT_TYPE_RTE, getString(R.string.add_route_point));
+				addPoint(pointDescription);
+			}
+		});
 		routePointTextLayout = view.findViewById(R.id.route_text_layout);
 
 		lineFab = (FloatingActionButton) view.findViewById(R.id.line_fab);
-		lineFab.setOnClickListener(onFabClickListener);
+		lineFab.setOnClickListener(new View.OnClickListener() {
+			@Override
+			public void onClick(View view) {
+				addLine();
+			}
+		});
 		lineTextLayout = view.findViewById(R.id.line_text_layout);
 
 		TextView tv = new TextView(getActivity());

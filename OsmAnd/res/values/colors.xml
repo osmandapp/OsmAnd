@@ -257,4 +257,6 @@
 	<color name="map_background_color_light">#fafafa</color>
 	<color name="map_background_color_dark">#101821</color>
 
+	<color name="fab_green">#46bd2a</color>
+
 </resources>
