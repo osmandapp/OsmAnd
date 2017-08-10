@@ -3420,8 +3420,8 @@
 <string name="poi_lock_basin">Schiffsschleuse</string>
 	<string name="poi_animal_shelter_purpose_adoption_yes">Vermittlung: ja</string>
 	<string name="poi_animal_shelter_purpose_adoption_no">Vermittlung: nein</string>
-	<string name="poi_animal_shelter_purpose_release_yes">Freisetzung: ja</string>
-	<string name="poi_animal_shelter_purpose_release_no">Freisetzung: nein</string>
+	<string name="poi_animal_shelter_purpose_release_yes">Auswilderung: ja</string>
+	<string name="poi_animal_shelter_purpose_release_no">Auswilderung: nein</string>
 
 	<string name="poi_direction_n">Richtung: Nord</string>
 	<string name="poi_direction_nne">Richtung: Nord-Nordost</string>
