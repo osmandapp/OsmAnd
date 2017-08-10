@@ -2521,7 +2521,7 @@ Se ami OsmAnd e OSM e vuoi sostenerli, questo è un modo perfetto per farlo.</st
     <string name="osmo_service_running">Il servizio OsMo è avviato</string>
     <string name="rendering_value_fine_name">Sottile</string>
     <string name="upload_poi">Upload PDI</string>
-    <string name="route_roundabout_short">"Prendere la  %1$d uscita e proseguire"</string>
+    <string name="route_roundabout_short">Prendere la %1$d uscita e proseguire</string>
     <string name="wiki_around">Articoli Wikipedia vicini</string>
     <string name="search_map_hint">Cerca città o regione</string>
     <string name="show_legacy_search">Mostra la ricerca vecchia</string>
