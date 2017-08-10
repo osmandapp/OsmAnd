@@ -125,7 +125,7 @@ Lon %2$s</string>
     <string name="shared_string_audio">Audio</string>
     <string name="shared_string_video">Video</string>
     <string name="shared_string_photo">Fotografía</string>
-    <string name="route_points">Puntos de ruta</string>
+    <string name="route_points">Puntos de la ruta</string>
     <string name="track_segments">Segmentos de la traza</string>
     <string name="track_points">Puntos de la traza</string>
     <string name="shared_string_online_maps">Mapas en línea</string>
@@ -235,7 +235,7 @@ Lon %2$s</string>
     <string name="duration">Duración</string>
     <string name="distance">Distancia</string>
     <string name="shared_string_all">Todos</string>
-    <string name="waypoints">Puntos de ruta</string>
+    <string name="waypoints">Puntos de referencia</string>
     <string name="targets">Destinos</string>
     <string name="announce_gpx_waypoints">Puntos GPX</string>
     <string name="download_additional_maps">¿Descargar los %1$s mapas que faltan (%2$d MB)?</string>
@@ -271,13 +271,13 @@ Lon %2$s</string>
     <string name="layer_amenity_label">Etiquetas de punto</string>
     <string name="loading_smth">Cargando %1$s…</string>
     <string name="map_widget_plain_time">Tiempo actual</string>
-    <string name="gpx_wpt">Punto de ruta</string>
+    <string name="gpx_wpt">Punto de referencia</string>
     <string name="selected_gpx_info_show">"
 \n
 \nMantén pulsado para ver en el mapa"</string>
     <string name="local_index_gpx_info_show">\n\nMantén pulsado para opciones</string>
     <string name="gpx_info_subtracks">Subtrazas: %1$s</string>
-    <string name="gpx_info_waypoints">Puntos de ruta: %1$s</string>
+    <string name="gpx_info_waypoints">Puntos de referencia: %1$s</string>
     <string name="gpx_info_distance">Distancia: %1$s (%2$s puntos)</string>
     <string name="gpx_info_average_speed">Velocidad media: %1$s</string>
     <string name="gpx_info_maximum_speed">Velocidad máxima: %1$s</string>
@@ -865,7 +865,7 @@ Se aprecia la participación activa, y las contribuciones pueden hacerse directa
     <string name="auto_zoom_map">Ampliación automática del mapa</string>
     <string name="snap_to_road_descr">﻿Ajusta la ubicación al camino durante la navegación</string>
     <string name="snap_to_road">Ajustar al camino</string>
-    <string name="interrupt_music_descr">Pausa cualquier sonido al realizar avisos por voz</string>
+    <string name="interrupt_music_descr">El aviso por voz, pausa la reproducción de música (no sólo reduce el volumen)</string>
     <string name="interrupt_music">Pausar música</string>
     <string name="osmand_play_title_30_chars">Navegación y Mapas OsmAnd</string>
     <string name="osmand_short_description_80_chars">Visor y navegador móvil global de mapas OSM con y sin conexión</string>
@@ -1507,7 +1507,7 @@ Se aprecia la participación activa, y las contribuciones pueden hacerse directa
     <string name="favorite">Favorito</string>
     <string name="uploading_data">Subiendo datos…</string>
     <string name="uploading">Subiendo…</string>
-    <string name="search_nothing_found">No se encontró nada</string>
+    <string name="search_nothing_found">Nada encontrado</string>
     <string name="searching">Buscando…</string>
     <string name="searching_address">Buscando dirección…</string>
     <string name="search_osm_nominatim">Buscar en línea usando OSM Nominatim</string>
@@ -1546,7 +1546,7 @@ Se aprecia la participación activa, y las contribuciones pueden hacerse directa
     <string name="loading_cities">Cargando ciudades…</string>
     <string name="poi">PDI</string>
     <string name="error_occurred_saving_gpx">Ocurrió un error al guardar el GPX</string>
-    <string name="error_calculating_route">Error calculando ruta</string>
+    <string name="error_calculating_route">Error calculando la ruta</string>
     <string name="error_calculating_route_occured">Ocurrió un error al calcular la ruta</string>
     <string name="empty_route_calculated">Error: La ruta calculada está vacía</string>
     <string name="new_route_calculated_dist">Nueva ruta calculada, distancia</string>
@@ -2204,7 +2204,7 @@ Se aprecia la participación activa, y las contribuciones pueden hacerse directa
 
     <string name="replace_favorite_confirmation">¿Quieres reemplazar el favorito %1$s?</string>
     <string name="routing_attr_short_way_name">Ruta de bajo consumo (corta)</string>
-    <string name="routing_attr_short_way_description">Usa la ruta con menor consumo en combustible (usualmente la más corta)</string>
+    <string name="routing_attr_short_way_description">Usa la ruta de menor consumo en combustible (usualmente la más corta)</string>
     <string name="shared_string_change">Cambiar</string>
     <string name="get_started">Empezar</string>
     <string name="update_all_maps_now">¿Quieres actualizar ahora todos los mapas?</string>
@@ -2344,7 +2344,7 @@ Se aprecia la participación activa, y las contribuciones pueden hacerse directa
     <string name="quick_favorites_name_preset">Nombre predefinido</string>
     <string name="shared_string_action_name">Nombre de la acción</string>
     <string name="quick_action_add_marker_descr">Pulsar el botón de acción añadirá un marcador en la ubicación central de la pantalla.</string>
-    <string name="quick_action_add_gpx_descr">Pulsar el botón de acción añadirá un punto de ruta GPX en la ubicación central de la pantalla.</string>
+    <string name="quick_action_add_gpx_descr">Pulsar el botón de acción añadirá un punto GPX en la ubicación central de la pantalla.</string>
     <string name="quick_action_take_audio_note_descr">Pulsar el botón de acción añadirá una nota de audio en la ubicación central de la pantalla.</string>
     <string name="quick_action_take_video_note_descr">Pulsar el botón de acción añadirá una nota de video en la ubicación central de la pantalla.</string>
     <string name="quick_action_take_photo_note_descr">Pulsar el botón de acción añadirá una nota fotográfica en la ubicación central de la pantalla.</string>
@@ -2705,9 +2705,9 @@ Proporciona un código completo</string>
     <string name="enter_gpx_name">Nombre del GPX:</string>
     <string name="show_on_map_after_saving">Mostrar en el mapa después de guardar</string>
     <string name="add_route_point">Añadir punto de ruta</string>
-    <string name="add_waypoint">Añadir punto de ruta</string>
+    <string name="add_waypoint">Añadir punto de referencia</string>
     <string name="save_gpx_waypoint">Guardar punto GPX</string>
     <string name="save_route_point">Guardar punto de ruta</string>
-    <string name="waypoint_one">Punto de ruta 1</string>
+    <string name="waypoint_one">Punto de referencia 1</string>
     <string name="route_point_one">Punto de ruta 1</string>
 </resources>
