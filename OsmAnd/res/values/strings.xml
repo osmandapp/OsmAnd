@@ -2678,4 +2678,5 @@
     <string name="import_track_desc">File %1$s does not contain waypoints, import it as a track?</string>
     <string name="save_as_new_segment">Save as new segment</string>
     <string name="move_point">Move Point</string>
+    <string name="add_segment_to_the_track">Add segment to the track</string>
 </resources>

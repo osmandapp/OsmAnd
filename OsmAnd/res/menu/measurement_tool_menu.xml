@@ -10,6 +10,10 @@
         android:icon="@drawable/ic_action_polygom_dark"
         android:title="@string/shared_string_save_as_gpx"/>
     <item
+        android:id="@+id/action_add_segment_to_track"
+        android:icon="@drawable/ic_action_polygom_dark"
+        android:title="@string/add_segment_to_the_track"/>
+    <item
         android:id="@+id/action_clear_all"
         android:icon="@drawable/ic_action_reset_to_default_dark"
         android:title="@string/shared_string_clear_all"/>
