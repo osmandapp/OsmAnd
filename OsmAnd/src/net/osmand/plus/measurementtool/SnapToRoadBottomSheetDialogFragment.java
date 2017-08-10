@@ -1,5 +1,6 @@
 package net.osmand.plus.measurementtool;
 
+import android.content.res.Configuration;
 import android.os.Bundle;
 import android.support.annotation.Nullable;
 import android.support.v4.content.ContextCompat;
@@ -58,5 +59,35 @@ public class SnapToRoadBottomSheetDialogFragment extends BottomSheetDialogFragme
 		}
 
 		return view;
+	}
+
+	private boolean hasNavBar() {
+		int id = getResources().getIdentifier("config_showNavigationBar", "bool", "android");
+		return id > 0 && getResources().getBoolean(id);
+	}
+
+	private int getStatusBarHeight() {
+		int statusBarHeight = 0;
+		int resourceId = getResources().getIdentifier("status_bar_height", "dimen", "android");
+		if (resourceId > 0) {
+			statusBarHeight = getResources().getDimensionPixelSize(resourceId);
+		}
+		return statusBarHeight;
+	}
+
+	private int getNavigationBarHeight() {
+		if (!hasNavBar()) {
+			return 0;
+		}
+		boolean landscape = getResources().getConfiguration().orientation == Configuration.ORIENTATION_LANDSCAPE;
+		boolean isSmartphone = getResources().getConfiguration().smallestScreenWidthDp < 600;
+		if (isSmartphone && landscape) {
+			return 0;
+		}
+		int id = getResources().getIdentifier(landscape ? "navigation_bar_height_landscape" : "navigation_bar_height", "dimen", "android");
+		if (id > 0) {
+			return getResources().getDimensionPixelSize(id);
+		}
+		return 0;
 	}
 }
