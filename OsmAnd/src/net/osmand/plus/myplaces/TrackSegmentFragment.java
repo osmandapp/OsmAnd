@@ -166,6 +166,7 @@ public class TrackSegmentFragment extends OsmAndListFragment {
 			public void onScrollStateChanged(AbsListView absListView, int i) {
 				if (i == AbsListView.OnScrollListener.SCROLL_STATE_TOUCH_SCROLL) {
 					if (menuOpened) {
+						hideTransparentOverlay();
 						closeMenu();
 					}
 				}
