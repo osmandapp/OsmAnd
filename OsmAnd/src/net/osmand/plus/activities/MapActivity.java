@@ -509,6 +509,9 @@ public class MapActivity extends OsmandActionBarActivity implements DownloadEven
 			mapContextMenu.close();
 			return;
 		}
+		if (getMapLayers().getContextMenuLayer().isInAddGpxPointMode()) {
+			quitAddGpxPointMode();
+		}
 		if (prevActivityIntent != null && getSupportFragmentManager().getBackStackEntryCount() == 0) {
 			prevActivityIntent.addFlags(Intent.FLAG_ACTIVITY_REORDER_TO_FRONT);
 			LatLon loc = getMapLocation();
@@ -526,6 +529,11 @@ public class MapActivity extends OsmandActionBarActivity implements DownloadEven
 
 		super.onBackPressed();
 
+	}
+
+	private void quitAddGpxPointMode() {
+		getMapLayers().getContextMenuLayer().getAddGpxPointBottomSheetHelper().hide();
+		getMapLayers().getContextMenuLayer().quitAddGpxPoint();
 	}
 
 	@Override
