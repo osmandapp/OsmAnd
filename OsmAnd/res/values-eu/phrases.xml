@@ -2201,4 +2201,18 @@
 	<string name="poi_wiki_lang_bs">Wikia bosnieraz</string>
 	<string name="poi_bicycle_parking_wall_loops">Hormako begiztak</string>
 	<string name="poi_capacity">Ahalmena</string>
+	<string name="poi_crossing_activation_automatic">Bidegurutzearen aktibazioa: automatikoa</string>
+	<string name="poi_crossing_activation_local">Bidegurutzearen aktibazioa: lokala</string>
+	<string name="poi_crossing_activation_remote">Bidegurutzearen aktibazioa: urrunekoa</string>
+	<string name="poi_crossing_barrier_no">Barrera bidegurutzean: ez</string>
+	<string name="poi_crossing_barrier_yes">Barrera bidegurutzean</string>
+	<string name="poi_crossing_barrier_full">Barrera bidegurutzean: osoa</string>
+	<string name="poi_crossing_barrier_half">Barrera bidegurutzean: erdia</string>
+	<string name="poi_crossing_barrier_double_half">Barrera bidegurutzean: erdi bikoitza</string>
+	<string name="poi_crossing_bell_yes">Bidegurutze kanpaia</string>
+	<string name="poi_crossing_bell_no">Bidegurutze kanpaia: ez</string>
+	<string name="poi_crossing_light_yes">Bidegurutze argia</string>
+	<string name="poi_crossing_light_no">Bidegurutze argia: ez</string>
+	<string name="poi_crossing_on_demand_yes">Eskapeko bidegurutzea</string>
+	<string name="poi_crossing_on_demand_no">Eskapeko bidegurutzea: ez</string>
 	</resources>
