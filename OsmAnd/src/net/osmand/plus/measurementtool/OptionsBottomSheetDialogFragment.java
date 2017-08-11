@@ -1,6 +1,8 @@
 package net.osmand.plus.measurementtool;
 
+import android.graphics.drawable.Drawable;
 import android.os.Bundle;
+import android.support.annotation.DrawableRes;
 import android.support.annotation.Nullable;
 import android.view.ContextThemeWrapper;
 import android.view.LayoutInflater;
@@ -8,6 +10,7 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.widget.ImageView;
 
+import net.osmand.AndroidUtils;
 import net.osmand.plus.R;
 import net.osmand.plus.base.BottomSheetDialogFragment;
 
@@ -33,6 +36,7 @@ public class OptionsBottomSheetDialogFragment extends BottomSheetDialogFragment 
 		final int themeRes = nightMode ? R.style.OsmandDarkTheme : R.style.OsmandLightTheme;
 
 		final View mainView = View.inflate(new ContextThemeWrapper(getContext(), themeRes), R.layout.fragment_options_bottom_sheet_dialog, null);
+		AndroidUtils.setBackground(getActivity(), mainView, nightMode, R.drawable.bg_bottom_menu_light, R.drawable.bg_bottom_menu_dark);
 
 		((ImageView) mainView.findViewById(R.id.snap_to_road_icon)).setImageDrawable(getContentIcon(R.drawable.ic_action_snap_to_road));
 		((ImageView) mainView.findViewById(R.id.clear_all_icon)).setImageDrawable(getContentIcon(R.drawable.ic_action_reset_to_default_dark));
@@ -102,6 +106,11 @@ public class OptionsBottomSheetDialogFragment extends BottomSheetDialogFragment 
 		});
 
 		return mainView;
+	}
+
+	@Override
+	protected Drawable getContentIcon(@DrawableRes int id) {
+		return getIcon(id, getMyApplication().getSettings().isLightContent() ? R.color.on_map_icon_color : 0);
 	}
 
 	interface OptionsOnClickListener {
