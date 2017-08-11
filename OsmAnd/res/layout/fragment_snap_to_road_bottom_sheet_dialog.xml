@@ -51,13 +51,12 @@
         android:background="?attr/selectableItemBackground">
 
         <TextView
-            android:id="@+id/cancel_row_text"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_gravity="center"
             android:text="@string/shared_string_cancel"
             android:textAllCaps="true"
-            android:textColor="@color/dashboard_general_button_text_light"
+            android:textColor="?attr/color_dialog_buttons"
             android:textSize="14sp"
             android:textStyle="bold"/>
     </FrameLayout>

@@ -4,7 +4,6 @@ import android.content.res.Configuration;
 import android.os.Build;
 import android.os.Bundle;
 import android.support.annotation.Nullable;
-import android.support.v4.content.ContextCompat;
 import android.util.DisplayMetrics;
 import android.view.ContextThemeWrapper;
 import android.view.LayoutInflater;
@@ -36,10 +35,7 @@ public class SnapToRoadBottomSheetDialogFragment extends BottomSheetDialogFragme
 		final int themeRes = nightMode ? R.style.OsmandDarkTheme : R.style.OsmandLightTheme;
 
 		final View view = View.inflate(new ContextThemeWrapper(getContext(), themeRes), R.layout.fragment_snap_to_road_bottom_sheet_dialog, container);
-		if (nightMode) {
-			((TextView) view.findViewById(R.id.cancel_row_text))
-					.setTextColor(ContextCompat.getColor(getActivity(), R.color.dashboard_general_button_text_dark));
-		}
+
 		view.findViewById(R.id.cancel_row).setOnClickListener(new View.OnClickListener() {
 			@Override
 			public void onClick(View view) {

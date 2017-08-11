@@ -23,7 +23,6 @@ import android.view.Menu;
 import android.view.MenuItem;
 import android.view.View;
 import android.view.ViewGroup;
-import android.widget.Button;
 import android.widget.EditText;
 import android.widget.ImageButton;
 import android.widget.ImageView;
@@ -56,7 +55,6 @@ import net.osmand.plus.views.OsmandMapTileView;
 import net.osmand.plus.views.mapwidgets.MapInfoWidgetsFactory;
 import net.osmand.plus.views.mapwidgets.MapInfoWidgetsFactory.TopToolbarController;
 import net.osmand.plus.widgets.IconPopupMenu;
-import net.osmand.plus.widgets.TextViewEx;
 
 import java.io.File;
 import java.text.MessageFormat;
@@ -134,7 +132,7 @@ public class MeasurementToolFragment extends Fragment {
 		upDownBtn = (ImageView) mainView.findViewById(R.id.up_down_button);
 		upDownBtn.setImageDrawable(iconsCache.getThemedIcon(R.drawable.ic_action_arrow_up));
 
-		((TextViewEx) mainView.findViewById(R.id.cancel_point_button)).setOnClickListener(new View.OnClickListener() {
+		mainView.findViewById(R.id.cancel_point_button).setOnClickListener(new View.OnClickListener() {
 			@Override
 			public void onClick(View view) {
 				cancelMovePointMode();
@@ -152,13 +150,19 @@ public class MeasurementToolFragment extends Fragment {
 			}
 		});
 
-		((Button) mainView.findViewById(R.id.apply_point_button))
-				.setOnClickListener(new View.OnClickListener() {
-					@Override
-					public void onClick(View view) {
-						applyMovePointMode();
-					}
-				});
+		mainView.findViewById(R.id.apply_point_button).setOnClickListener(new View.OnClickListener() {
+			@Override
+			public void onClick(View view) {
+				applyMovePointMode();
+			}
+		});
+
+		mainView.findViewById(R.id.options_button).setOnClickListener(new View.OnClickListener() {
+			@Override
+			public void onClick(View view) {
+				Toast.makeText(getActivity(), "options", Toast.LENGTH_SHORT).show();
+			}
+		});
 
 		undoBtn = ((ImageButton) mainView.findViewById(R.id.undo_point_button));
 		redoBtn = ((ImageButton) mainView.findViewById(R.id.redo_point_button));
@@ -413,6 +417,7 @@ public class MeasurementToolFragment extends Fragment {
 				R.id.measurement_distance_text_view,
 				R.id.measurement_points_text_view,
 				R.id.up_down_button,
+				R.id.options_button,
 				R.id.undo_point_button,
 				R.id.redo_point_button,
 				R.id.add_point_button);
@@ -435,6 +440,7 @@ public class MeasurementToolFragment extends Fragment {
 				R.id.measurement_distance_text_view,
 				R.id.measurement_points_text_view,
 				R.id.up_down_button,
+				R.id.options_button,
 				R.id.undo_point_button,
 				R.id.redo_point_button,
 				R.id.add_point_button);
