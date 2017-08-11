@@ -284,7 +284,11 @@ public class MeasurementToolFragment extends Fragment {
 
 		if (portrait) {
 			toolBarController = new MeasurementToolBarController();
-			toolBarController.setTitle(getString(R.string.measurement_tool_action_bar));
+			if (newGpxLine != null) {
+				toolBarController.setTitle(getString(R.string.add_line));
+			} else {
+				toolBarController.setTitle(getString(R.string.measurement_tool_action_bar));
+			}
 			toolBarController.setOnBackButtonClickListener(new View.OnClickListener() {
 				@Override
 				public void onClick(View v) {
