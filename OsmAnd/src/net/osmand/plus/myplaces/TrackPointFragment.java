@@ -139,6 +139,41 @@ public class TrackPointFragment extends OsmandExpandableListFragment {
 		overlayView.setVisibility(View.VISIBLE);
 	}
 
+	private View.OnClickListener onFabClickListener = new View.OnClickListener() {
+		@Override
+		public void onClick(View view) {
+			switch (view.getId()) {
+				case R.id.overlay_view:
+					hideTransparentOverlay();
+					closeMenu();
+					break;
+				case R.id.menu_fab:
+					if (menuOpened) {
+						hideTransparentOverlay();
+						closeMenu();
+					} else {
+						showTransparentOverlay();
+						openMenu();
+					}
+					break;
+				case R.id.waypoint_text_layout:
+				case R.id.waypoint_fab:
+					PointDescription pointWptDescription = new PointDescription(PointDescription.POINT_TYPE_WPT, getString(R.string.add_waypoint));
+					addPoint(pointWptDescription);
+					break;
+				case R.id.route_text_layout:
+				case R.id.route_fab:
+					PointDescription pointRteDescription = new PointDescription(PointDescription.POINT_TYPE_RTE, getString(R.string.add_route_point));
+					addPoint(pointRteDescription);
+					break;
+				case R.id.line_text_layout:
+				case R.id.line_fab:
+					addLine();
+					break;
+			}
+		}
+	};
+
 	@Override
 	public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
 		View view = inflater.inflate(R.layout.track_points_tree, container, false);
@@ -146,49 +181,25 @@ public class TrackPointFragment extends OsmandExpandableListFragment {
 		setHasOptionsMenu(true);
 
 		overlayView = view.findViewById(R.id.overlay_view);
+		overlayView.setOnClickListener(onFabClickListener);
 
 		menuFab = (FloatingActionButton) view.findViewById(R.id.menu_fab);
-		menuFab.setOnClickListener(new View.OnClickListener() {
-			@Override
-			public void onClick(View view) {
-				if (menuOpened) {
-					hideTransparentOverlay();
-					closeMenu();
-				} else {
-					showTransparentOverlay();
-					openMenu();
-				}
-			}
-		});
+		menuFab.setOnClickListener(onFabClickListener);
 
 		waypointFab = (FloatingActionButton) view.findViewById(R.id.waypoint_fab);
-		waypointFab.setOnClickListener(new View.OnClickListener() {
-			@Override
-			public void onClick(View view) {
-				PointDescription pointDescription = new PointDescription(PointDescription.POINT_TYPE_WPT, getString(R.string.add_waypoint));
-				addPoint(pointDescription);
-			}
-		});
+		waypointFab.setOnClickListener(onFabClickListener);
 		waypointTextLayout = view.findViewById(R.id.waypoint_text_layout);
+		waypointTextLayout.setOnClickListener(onFabClickListener);
 
 		routePointFab = (FloatingActionButton) view.findViewById(R.id.route_fab);
-		routePointFab.setOnClickListener(new View.OnClickListener() {
-			@Override
-			public void onClick(View view) {
-				PointDescription pointDescription = new PointDescription(PointDescription.POINT_TYPE_RTE, getString(R.string.add_route_point));
-				addPoint(pointDescription);
-			}
-		});
+		routePointFab.setOnClickListener(onFabClickListener);
 		routePointTextLayout = view.findViewById(R.id.route_text_layout);
+		routePointTextLayout.setOnClickListener(onFabClickListener);
 
 		lineFab = (FloatingActionButton) view.findViewById(R.id.line_fab);
-		lineFab.setOnClickListener(new View.OnClickListener() {
-			@Override
-			public void onClick(View view) {
-				addLine();
-			}
-		});
+		lineFab.setOnClickListener(onFabClickListener);
 		lineTextLayout = view.findViewById(R.id.line_text_layout);
+		lineTextLayout.setOnClickListener(onFabClickListener);
 
 		TextView tv = new TextView(getActivity());
 		tv.setText(R.string.none_selected_gpx);
