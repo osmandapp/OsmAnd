@@ -402,15 +402,11 @@ public class MeasurementToolFragment extends Fragment {
 				R.id.measurement_distance_text_view,
 				R.id.measurement_points_text_view,
 				R.id.up_down_button,
-				R.id.options_button,
-				R.id.undo_point_button,
-				R.id.redo_point_button,
-				R.id.add_point_button);
+				R.id.measure_mode_controls);
 		mark(View.VISIBLE,
 				R.id.move_point_icon,
 				R.id.move_point_text,
-				R.id.cancel_point_button,
-				R.id.apply_point_button);
+				R.id.move_point_mode_controls);
 	}
 
 	private void exitMovePointMode() {
@@ -418,17 +414,13 @@ public class MeasurementToolFragment extends Fragment {
 		mark(View.GONE,
 				R.id.move_point_icon,
 				R.id.move_point_text,
-				R.id.cancel_point_button,
-				R.id.apply_point_button);
+				R.id.move_point_mode_controls);
 		mark(View.VISIBLE,
 				R.id.ruler_icon,
 				R.id.measurement_distance_text_view,
 				R.id.measurement_points_text_view,
 				R.id.up_down_button,
-				R.id.options_button,
-				R.id.undo_point_button,
-				R.id.redo_point_button,
-				R.id.add_point_button);
+				R.id.measure_mode_controls);
 	}
 
 	private void hidePointsListIfNoPoints() {
