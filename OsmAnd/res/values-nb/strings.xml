@@ -871,7 +871,7 @@
     <string name="selected_gpx_info_show">"
 \n
 \nLangt trykk for å vise på kartet"</string>
-    <string name="gpx_info_waypoints">"Rutepunkter: %1$s "</string>
+    <string name="gpx_info_waypoints">Rutepunkter: %1$s</string>
     <string name="loading_streets">Laster gater…</string>
     <string name="loading_cities">Laster byer…</string>
     <string name="invalid_locations">Koordinater er ugyldige!</string>
@@ -925,7 +925,7 @@
     <string name="recording_context_menu_show">Vis</string>
     <string name="srtm_paid_version_title">Programtillegg for koter</string>
     <string name="av_settings_descr">Still inn lyd og video</string>
-    <string name="av_settings">"Lyd/video-innstillinger "</string>
+    <string name="av_settings">Lyd/video-innstillinger</string>
     <string name="osmand_srtm_short_description_80_chars">OsmAnd-programtillegg for (nett)frakoblede koter</string>
     <string name="map_widget_distancemeasurement">Avstandsmåling</string>
 
@@ -1020,11 +1020,11 @@
     <string name="local_index_select_gpx_file">Velg for å vise</string>
     <string name="save_as_favorites_points">Lagre som gruppe av favoritter</string>
     <string name="loading_smth">Laster %1$s…</string>
-    <string name="gpx_info_distance">"Avstand: %1$s (%2$s punkter) "</string>
-    <string name="gpx_info_start_time">"Starttid: %1$tF, %1$tT "</string>
-    <string name="gpx_info_end_time">"Sluttid: %1$tF, %1$tT "</string>
-    <string name="gpx_info_average_speed">"Gjennomsnittsfart: %1$s "</string>
-    <string name="gpx_info_maximum_speed">"Maksimal fart: %1$s "</string>
+    <string name="gpx_info_distance">Avstand: %1$s (%2$s punkter)</string>
+    <string name="gpx_info_start_time">Starttid: %1$tF, %1$tT</string>
+    <string name="gpx_info_end_time">Sluttid: %1$tF, %1$tT</string>
+    <string name="gpx_info_average_speed">Gjennomsnittsfart: %1$s</string>
+    <string name="gpx_info_maximum_speed">Maksimal fart: %1$s</string>
     <string name="gpx_info_avg_altitude">Gjennomsnittshøyde: %1$s</string>
     <string name="gpx_info_diff_altitude">Høydeforskjell: %1$s</string>
 	<string name="gpx_selection_route_points">%1$s
@@ -1569,7 +1569,7 @@
     <string name="shared_string_logoff">Logg av</string>
     <string name="rendering_value_walkingRoutesOSMC_name">Fargelegging i henhold til OSMC-vandresymbol</string>
     <string name="proxy_pref_title">Mellomtjener</string>
-    <string name="gpx_selection_number_of_points">" %1$s punkter"</string>
+    <string name="gpx_selection_number_of_points">%1$s punkter</string>
     <string name="osmo_group_policy">Praksis</string>
     <string name="osmo_connect_to_device_name">Brukernavn</string>
     <string name="osmo_group_name">Gruppenavn</string>
