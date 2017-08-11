@@ -2845,10 +2845,10 @@ Copertura e qualità approssimativamente:
     <string name="store_tracks_in_monthly_directories">Salva le tracce registrate in cartelle mensili</string>
     <string name="store_tracks_in_monthly_directories_descrp">Salva le tracce registrate in sottocartelle per mese di registrazione (come 2017-01).</string>
     <string name="shared_string_reset">Reimposta</string>
-    <string name="quick_action_resume_pause_navigation_descr">Premi il pulsante per mettere in pausa la navigazione, oppure per riprenderla se è già in pausa.</string>
-    <string name="quick_action_show_navigation_finish_dialog">Mostra la finestra di dialogo Fine</string>
-    <string name="quick_action_start_stop_navigation">Inizio/Fine Navigazione</string>
-    <string name="quick_action_start_stop_navigation_descr">Premi questo pulsante per avviare la navigazione, o per fermarla se già avviata.</string>
+    <string name="quick_action_resume_pause_navigation_descr">Premi il pulsante per mettere in pausa o riprendere la navigazione.</string>
+    <string name="quick_action_show_navigation_finish_dialog">Mostra la finestra di dialogo Fine navigazione</string>
+    <string name="quick_action_start_stop_navigation">Avvia/ferma navigazione</string>
+    <string name="quick_action_start_stop_navigation_descr">Premi questo pulsante per avviare o fermare la navigazione.</string>
     <string name="rendering_value_translucent_pink_name">Rosa traslucido</string>
     <string name="average">Media</string>
     <string name="of">%1$d di %2$d</string>
@@ -2856,7 +2856,7 @@ Copertura e qualità approssimativamente:
     <string name="moving_time">Tempo in movimento</string>
     <string name="max_min">Max/Min</string>
     <string name="min_max">Min/Max</string>
-    <string name="quick_action_resume_pause_navigation">Riprendi/Sospendi la Navigazione</string>
+    <string name="quick_action_resume_pause_navigation">Riprendi/sospendi la navigazione</string>
     <string name="release_2_7">• Componente aggiuntivo Mapillary con immagini stradali 
 \n 
 \n • Widget righello per la misurazione della distanza 
@@ -2868,4 +2868,7 @@ Copertura e qualità approssimativamente:
 \n</string>
     <string name="measurement_tool_action_bar">Esplora la mappa e aggiungi punti</string>
     <string name="measurement_tool">Distanziometro</string>
+    <string name="none_point_error">Aggiungi almeno un punto.</string>
+    <string name="enter_gpx_name">Nome del file GPX:</string>
+    <string name="show_on_map_after_saving">Mostra sulla mappa dopo averlo salvato</string>
     </resources>
