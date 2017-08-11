@@ -160,7 +160,54 @@ public class MeasurementToolFragment extends Fragment {
 		mainView.findViewById(R.id.options_button).setOnClickListener(new View.OnClickListener() {
 			@Override
 			public void onClick(View view) {
-				Toast.makeText(getActivity(), "options", Toast.LENGTH_SHORT).show();
+				OptionsBottomSheetDialogFragment fragment = new OptionsBottomSheetDialogFragment();
+				fragment.setOptionsOnClickListener(new OptionsBottomSheetDialogFragment.OptionsOnClickListener() {
+					@Override
+					public void snapToRoadOnCLick() {
+						SnapToRoadBottomSheetDialogFragment fragment = new SnapToRoadBottomSheetDialogFragment();
+						fragment.show(mapActivity.getSupportFragmentManager(), SnapToRoadBottomSheetDialogFragment.TAG);
+					}
+
+					@Override
+					public void saveAsNewSegmentOnClick() {
+						if (measurementLayer.getPointsCount() > 0) {
+							saveAsNewSegment(mapActivity);
+						} else {
+							Toast.makeText(mapActivity, getString(R.string.none_point_error), Toast.LENGTH_SHORT).show();
+						}
+					}
+
+					@Override
+					public void saveAsNewTrackOnClick() {
+						if (measurementLayer.getPointsCount() > 0) {
+							saveAsGpxOnClick(mapActivity);
+						} else {
+							Toast.makeText(mapActivity, getString(R.string.none_point_error), Toast.LENGTH_SHORT).show();
+						}
+					}
+
+					@Override
+					public void addToTheTrackOnClick() {
+						if (measurementLayer.getPointsCount() > 0) {
+//										showAddSegmentDialog(mapActivity);
+						} else {
+							Toast.makeText(mapActivity, getString(R.string.none_point_error), Toast.LENGTH_SHORT).show();
+						}
+					}
+
+					@Override
+					public void clearAllOnClick() {
+						commandManager.execute(new ClearPointsCommand(measurementLayer));
+						if (pointsListOpened) {
+							hidePointsList();
+						}
+						disable(redoBtn, upDownBtn);
+						updateText();
+						saved = false;
+					}
+				});
+				fragment.setAddLineMode(newGpxLine != null);
+				fragment.show(mapActivity.getSupportFragmentManager(), OptionsBottomSheetDialogFragment.TAG);
 			}
 		});
 

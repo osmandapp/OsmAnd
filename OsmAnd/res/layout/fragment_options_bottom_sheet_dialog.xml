@@ -17,6 +17,7 @@
         android:textAppearance="@style/TextAppearance.ListItemTitle"/>
 
     <RelativeLayout
+        android:id="@+id/snap_to_road_row"
         android:layout_width="match_parent"
         android:layout_height="48dp"
         android:background="?attr/selectableItemBackground"
@@ -151,6 +152,7 @@
         android:background="?attr/dashboard_divider"/>
 
     <RelativeLayout
+        android:id="@+id/clear_all_row"
         android:layout_width="match_parent"
         android:layout_height="48dp"
         android:background="?attr/selectableItemBackground"
