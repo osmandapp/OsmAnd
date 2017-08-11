@@ -817,12 +817,10 @@ public class MeasurementToolFragment extends Fragment {
 		}
 	}
 
-	private static class MeasurementToolBarController extends TopToolbarController {
-		private NewGpxLine newGpxLine;
+	private class MeasurementToolBarController extends TopToolbarController {
 
 		MeasurementToolBarController(NewGpxLine newGpxLine) {
 			super(MapInfoWidgetsFactory.TopToolbarControllerType.MEASUREMENT_TOOL);
-			this.newGpxLine = newGpxLine;
 			setBackBtnIconClrIds(0, 0);
 			setTitleTextClrIds(R.color.primary_text_dark, R.color.primary_text_dark);
 			setDescrTextClrIds(R.color.primary_text_dark, R.color.primary_text_dark);
