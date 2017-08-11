@@ -1,17 +1,21 @@
 package net.osmand.plus.measurementtool;
 
 import android.content.res.Configuration;
+import android.os.Build;
 import android.os.Bundle;
 import android.support.annotation.Nullable;
 import android.support.v4.content.ContextCompat;
+import android.util.DisplayMetrics;
 import android.view.ContextThemeWrapper;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.view.ViewTreeObserver;
 import android.widget.ImageView;
 import android.widget.LinearLayout;
 import android.widget.TextView;
 
+import net.osmand.AndroidUtils;
 import net.osmand.plus.ApplicationMode;
 import net.osmand.plus.OsmandSettings;
 import net.osmand.plus.R;
@@ -33,7 +37,7 @@ public class SnapToRoadBottomSheetDialogFragment extends BottomSheetDialogFragme
 		final int backgroundColor = ContextCompat.getColor(getActivity(),
 				nightMode ? R.color.ctx_menu_info_view_bg_dark : R.color.ctx_menu_info_view_bg_light);
 
-		View view = View.inflate(new ContextThemeWrapper(getContext(), themeRes), R.layout.fragment_snap_to_road_bottom_sheet_dialog, container);
+		final View view = View.inflate(new ContextThemeWrapper(getContext(), themeRes), R.layout.fragment_snap_to_road_bottom_sheet_dialog, container);
 		view.setBackgroundColor(backgroundColor);
 		if (nightMode) {
 			((TextView) view.findViewById(R.id.cancel_row_text))
@@ -58,12 +62,33 @@ public class SnapToRoadBottomSheetDialogFragment extends BottomSheetDialogFragme
 			navContainer.addView(row);
 		}
 
-		return view;
-	}
+		DisplayMetrics metrics = new DisplayMetrics();
+		getActivity().getWindowManager().getDefaultDisplay().getMetrics(metrics);
+		final int height = metrics.heightPixels;
 
-	private boolean hasNavBar() {
-		int id = getResources().getIdentifier("config_showNavigationBar", "bool", "android");
-		return id > 0 && getResources().getBoolean(id);
+		view.getViewTreeObserver().addOnGlobalLayoutListener(new ViewTreeObserver.OnGlobalLayoutListener() {
+			@Override
+			public void onGlobalLayout() {
+				final View scrollView = view.findViewById(R.id.navigation_types_scroll_view);
+				int scrollViewHeight = scrollView.getHeight();
+				int dividerHeight = AndroidUtils.dpToPx(getContext(), 1);
+				int cancelButtonHeight = getContext().getResources().getDimensionPixelSize(R.dimen.snap_to_road_bottom_sheet_cancel_button_height);
+				int spaceForScrollView = height - getStatusBarHeight() - getNavBarHeight() - dividerHeight - cancelButtonHeight;
+				if (scrollViewHeight > spaceForScrollView) {
+					scrollView.getLayoutParams().height = spaceForScrollView;
+					scrollView.requestLayout();
+				}
+
+				ViewTreeObserver obs = view.getViewTreeObserver();
+				if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.JELLY_BEAN) {
+					obs.removeOnGlobalLayoutListener(this);
+				} else {
+					obs.removeGlobalOnLayoutListener(this);
+				}
+			}
+		});
+
+		return view;
 	}
 
 	private int getStatusBarHeight() {
@@ -75,7 +100,7 @@ public class SnapToRoadBottomSheetDialogFragment extends BottomSheetDialogFragme
 		return statusBarHeight;
 	}
 
-	private int getNavigationBarHeight() {
+	private int getNavBarHeight() {
 		if (!hasNavBar()) {
 			return 0;
 		}
@@ -89,5 +114,10 @@ public class SnapToRoadBottomSheetDialogFragment extends BottomSheetDialogFragme
 			return getResources().getDimensionPixelSize(id);
 		}
 		return 0;
+	}
+
+	private boolean hasNavBar() {
+		int id = getResources().getIdentifier("config_showNavigationBar", "bool", "android");
+		return id > 0 && getResources().getBoolean(id);
 	}
 }

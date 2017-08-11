@@ -155,4 +155,6 @@
 	<dimen name="my_places_empty_state_text_button_padding_left">48dp</dimen>
 	<dimen name="my_places_empty_state_text_button_padding_right">60dp</dimen>
 	<dimen name="my_places_empty_state_text_button_padding_top">64dp</dimen>
+
+    <dimen name="snap_to_road_bottom_sheet_cancel_button_height">48dp</dimen>
 </resources>

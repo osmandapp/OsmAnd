@@ -47,7 +47,7 @@
     <FrameLayout
         android:id="@+id/cancel_row"
         android:layout_width="match_parent"
-        android:layout_height="48dp"
+        android:layout_height="@dimen/snap_to_road_bottom_sheet_cancel_button_height"
         android:background="?attr/selectableItemBackground">
 
         <TextView
