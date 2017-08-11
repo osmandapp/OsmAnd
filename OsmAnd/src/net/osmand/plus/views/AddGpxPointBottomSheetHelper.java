@@ -129,6 +129,7 @@ public class AddGpxPointBottomSheetHelper implements OnDismissListener {
 
 	@Override
 	public void onDismiss() {
+		mapActivity.getContextMenu().close();
 		Intent newIntent = new Intent(mapActivity, mapActivity.getMyApplication().getAppCustomization().getTrackActivity());
 		newIntent.putExtra(TrackActivity.TRACK_FILE_NAME, newGpxPoint.getGpx().path);
 		newIntent.putExtra(TrackActivity.OPEN_POINTS_TAB, true);
