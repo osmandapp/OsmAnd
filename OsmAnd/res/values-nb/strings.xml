@@ -264,7 +264,9 @@
     <string name="favourites_edit_dialog_category">Kategori</string>
     <string name="shared_string_no_thanks">Nei takk</string>
     <string name="basemap_missing">Basiskart verden (som dekker hele verden ved lav zoom) mangler. Vurder å laste ned World_basemap_x.obf for en global oversikt.</string>
-    <string name="local_index_gpx_info_show">\n\nTrykk og hold for alternativer</string>
+    <string name="local_index_gpx_info_show">"
+\n
+\nLangt trykk for alternativer"</string>
     <string name="local_index_descr_title">Karthåndtering</string>
     <string name="local_index_mi_restore">Aktiver</string>
     <string name="local_index_mi_backup">Deaktiver</string>
@@ -829,7 +831,7 @@
     <string name="gpxup_public">Offentlig</string>
     <string name="rendering_attr_appMode_description">Optimaliser kart for</string>
     <string name="rendering_attr_contourLines_description">Vis fra zoom-nivå (krever kotedata):</string>
-    <string name="local_index_description">Klikk på et eksisterende element for å se flere detaljer, trykk og hold for å deaktivere eller slette. Gjeldende data på enheten (%1$s ledig):</string>
+    <string name="local_index_description">Trykk på et eksisterende element for å se flere detaljer, langt trykk for å deaktivere eller slette. Gjeldende data på enheten (%1$s ledig):</string>
     <string name="send_files_to_osm">Sende GPX-filer til OSM?</string>
     <string name="arrival_distance_factor_early">Tidlig</string>
     <string name="arrival_distance_factor_normally">Normal</string>
@@ -1731,11 +1733,11 @@
     <string name="osm_live_subscription_desc">Abonnement muliggjør oppdateringer hver time, daglig, ukentlig og ubegrensede nedlastinger av alle kart globalt.</string>
     <string name="get_it">Få det</string>
     <string name="get_for">Få for %1$s</string>
-    <string name="osmand_plus_banner_desc">Fullversjon av OsmAnd med ubegrensede kartnedlastinger og månedlige kartoppdateringer.</string>
+    <string name="osmand_plus_banner_desc">Ubegrensede kartnedlastinger, oppdateringer og Wikipedia-tillegg.</string>
     <string name="first_usage_wizard_desc">La OsmAnd bestemme din posisjon og foreslå kart å laste ned for den regionen.</string>
     <string name="location_not_found">Posisjon ikke funnet</string>
     <string name="search_location">Søker etter posisjon…</string>
-    <string name="search_my_location">Søk etter min posisjon</string>
+    <string name="search_my_location">Finn min posisjon</string>
     <string name="search_map">Kartsøking…</string>
     <string name="driving_region_australia">Australia</string>
     <string name="no_update_info">Ikke vis oppdateringer</string>
@@ -2063,8 +2065,8 @@ Representerer området: %1$s x %2$s</string>
     <string name="map_widget_av_notes">Lyd-/video -notiser</string>
     <string name="map_widget_audionotes">Lydnotiser</string>
     <string name="index_srtm_parts">deler</string>
-    <string name="rendering_attr_alpineHiking_description">Tegn stier i henhold til SAC-skala</string>
-    <string name="rendering_attr_hikingRoutesOSMC_description">Tegn stier i henhold til OSMC-spor</string>
+    <string name="rendering_attr_alpineHiking_description">Gjengi stier i henhold til SAC-skala</string>
+    <string name="rendering_attr_hikingRoutesOSMC_description">Gjengi stier i henhold til OSMC-spor</string>
 
     <string name="rendering_attr_noAdminboundaries_description">Undertrykk visning av regionsbestemte avgrensninger (administrasjonsnivå 5-9)</string>
     <string name="close_changeset">Lukk endringssett</string>
@@ -2286,10 +2288,10 @@ Representerer området: %1$s x %2$s</string>
     <string name="mapillary_menu_title_username">Brukernavn</string>
     <string name="shared_string_reset">Tilbakestill</string>
     <string name="show_on_map_after_saving">Vis på kart etter lagring</string>
-    <string name="measurement_tool_action_bar">Se gjennom kart og legg til punkter på en linje</string>
+    <string name="measurement_tool_action_bar">Se gjennom kartet og legg til punkter</string>
     <string name="measurement_tool">Mål avstand</string>
     <string name="quick_action_show_navigation_finish_dialog">Vis dialog ved navigeringsslutt</string>
-    <string name="quick_action_start_stop_navigation">Start/Avslutt navigering</string>
+    <string name="quick_action_start_stop_navigation">Start/stopp navigering</string>
     <string name="map_widget_ruler_control">Radiusmåler</string>
     <string name="quick_action_btn_tutorial_title">Endre knappeplassering</string>
     <string name="retry">Prøv igjen</string>
@@ -2299,4 +2301,9 @@ Representerer området: %1$s x %2$s</string>
     <string name="save_route_point">Lagre rutepunkt</string>
     <string name="waypoint_one">Rutepunkt 1</string>
     <string name="route_point_one">Rutepunkt 1</string>
-</resources>
+<string name="none_point_error">Legg til minst et punkt.</string>
+    <string name="enter_gpx_name">GPX-filnavn:</string>
+    <string name="quick_action_resume_pause_navigation">Navigering: gjenoppta/sett på pause</string>
+    <string name="quick_action_resume_pause_navigation_descr">Trykk på denne knappen for å sette på pause eller gjenoppta navigeringen.</string>
+    <string name="right_side_navigation">Høyrekjøring</string>
+    </resources>
