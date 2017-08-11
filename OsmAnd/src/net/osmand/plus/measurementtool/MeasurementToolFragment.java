@@ -280,7 +280,7 @@ public class MeasurementToolFragment extends Fragment {
 		enterMeasurementMode();
 
 		if (portrait) {
-			toolBarController = new MeasurementToolBarController();
+			toolBarController = new MeasurementToolBarController(newGpxLine);
 			if (newGpxLine != null) {
 				toolBarController.setTitle(getString(R.string.add_line));
 			} else {
@@ -292,10 +292,14 @@ public class MeasurementToolFragment extends Fragment {
 					showQuitDialog(false);
 				}
 			});
-			toolBarController.setOnCloseButtonClickListener(new View.OnClickListener() {
+			toolBarController.setOnSaveViewClickListener(new View.OnClickListener() {
 				@Override
 				public void onClick(View v) {
-					// Pasha, do your stuff here :)
+					if (measurementLayer.getPointsCount() > 0) {
+						saveAsNewSegment(mapActivity);
+					} else {
+						Toast.makeText(mapActivity, getString(R.string.none_point_error), Toast.LENGTH_SHORT).show();
+					}
 				}
 			});
 			mapActivity.showTopToolbar(toolBarController);
@@ -810,16 +814,17 @@ public class MeasurementToolFragment extends Fragment {
 	}
 
 	private static class MeasurementToolBarController extends TopToolbarController {
+		private NewGpxLine newGpxLine;
 
-		MeasurementToolBarController() {
+		MeasurementToolBarController(NewGpxLine newGpxLine) {
 			super(MapInfoWidgetsFactory.TopToolbarControllerType.MEASUREMENT_TOOL);
+			this.newGpxLine = newGpxLine;
 			setBackBtnIconClrIds(0, 0);
-			setCloseBtnIconClrIds(0, 0);
 			setTitleTextClrIds(R.color.primary_text_dark, R.color.primary_text_dark);
 			setDescrTextClrIds(R.color.primary_text_dark, R.color.primary_text_dark);
 			setBgIds(R.drawable.gradient_toolbar, R.drawable.gradient_toolbar,
 					R.drawable.gradient_toolbar, R.drawable.gradient_toolbar);
-			setCloseBtnIconIds(R.drawable.ic_overflow_menu_white, R.drawable.ic_overflow_menu_white); // Pasha, change this icon :)
+			setCloseBtnVisible(false);
 			setBackBtnIconIds(R.drawable.ic_action_remove_dark, R.drawable.ic_action_remove_dark);
 			setSingleLineTitle(false);
 		}
@@ -828,6 +833,9 @@ public class MeasurementToolFragment extends Fragment {
 		public void updateToolbar(MapInfoWidgetsFactory.TopToolbarView view) {
 			super.updateToolbar(view);
 			view.getShadowView().setVisibility(View.GONE);
+			if (newGpxLine != null) {
+				view.getSaveView().setVisibility(View.VISIBLE);
+			}
 		}
 	}
 }

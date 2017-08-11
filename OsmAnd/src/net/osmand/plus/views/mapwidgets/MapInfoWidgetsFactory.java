@@ -247,6 +247,7 @@ public class MapInfoWidgetsFactory {
 		OnClickListener onTitleClickListener;
 		OnClickListener onCloseButtonClickListener;
 		OnClickListener onRefreshButtonClickListener;
+		OnClickListener onSaveViewClickListener;
 
 		Runnable onCloseToolbarListener;
 
@@ -343,6 +344,10 @@ public class MapInfoWidgetsFactory {
 			this.onCloseButtonClickListener = onCloseButtonClickListener;
 		}
 
+		public void setOnSaveViewClickListener(OnClickListener onSaveViewClickListener) {
+			this.onSaveViewClickListener = onSaveViewClickListener;
+		}
+
 		public void setOnRefreshButtonClickListener(OnClickListener onRefreshButtonClickListener) {
 			this.onRefreshButtonClickListener = onRefreshButtonClickListener;
 		}
@@ -393,6 +398,7 @@ public class MapInfoWidgetsFactory {
 		private TextView descrView;
 		private ImageButton refreshButton;
 		private ImageButton closeButton;
+		private TextView saveView;
 		private View shadowView;
 		private boolean nightMode;
 
@@ -407,6 +413,7 @@ public class MapInfoWidgetsFactory {
 			refreshButton = (ImageButton) map.findViewById(R.id.widget_top_bar_refresh_button);
 			closeButton = (ImageButton) map.findViewById(R.id.widget_top_bar_close_button);
 			titleView = (TextView) map.findViewById(R.id.widget_top_bar_title);
+			saveView = (TextView) map.findViewById(R.id.widget_top_bar_save);
 			descrView = (TextView) map.findViewById(R.id.widget_top_bar_description);
 			shadowView = map.findViewById(R.id.widget_top_bar_shadow);
 			updateVisibility(false);
@@ -442,6 +449,10 @@ public class MapInfoWidgetsFactory {
 
 		public ImageButton getCloseButton() {
 			return closeButton;
+		}
+
+		public TextView getSaveView() {
+			return saveView;
 		}
 
 		public ImageButton getRefreshButton() {
@@ -515,6 +526,7 @@ public class MapInfoWidgetsFactory {
 			topBarTitleLayout.setOnClickListener(controller.onTitleClickListener);
 			closeButton.setOnClickListener(controller.onCloseButtonClickListener);
 			refreshButton.setOnClickListener(controller.onRefreshButtonClickListener);
+			saveView.setOnClickListener(controller.onSaveViewClickListener);
 		}
 
 		public void updateInfo() {
@@ -553,6 +565,7 @@ public class MapInfoWidgetsFactory {
 				int descrColor = map.getResources().getColor(controller.descrTextClrDarkId);
 				titleView.setTextColor(titleColor);
 				descrView.setTextColor(descrColor);
+				saveView.setTextColor(titleColor);
 			} else {
 				topBarLayout.setBackgroundResource(AndroidUiHelper.isOrientationPortrait(map) ? controller.bgLightId : controller.bgLightLandId);
 				if (controller.backBtnIconLightId == 0) {
@@ -574,6 +587,7 @@ public class MapInfoWidgetsFactory {
 				int descrColor = map.getResources().getColor(controller.descrTextClrLightId);
 				titleView.setTextColor(titleColor);
 				descrView.setTextColor(descrColor);
+				saveView.setTextColor(titleColor);
 			}
 			if (controller.singleLineTitle) {
 				titleView.setSingleLine(true);
