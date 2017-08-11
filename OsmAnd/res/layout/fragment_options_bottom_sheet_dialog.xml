@@ -1,0 +1,205 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    android:background="?attr/bg_color"
+    android:orientation="vertical">
+
+    <TextView
+        android:layout_width="match_parent"
+        android:layout_height="52dp"
+        android:gravity="center_vertical"
+        android:paddingEnd="16dp"
+        android:paddingStart="16dp"
+        android:text="@string/shared_string_options"
+        android:textAppearance="@style/TextAppearance.ListItemTitle"/>
+
+    <RelativeLayout
+        android:layout_width="match_parent"
+        android:layout_height="48dp"
+        android:background="?attr/selectableItemBackground"
+        android:minHeight="48dp"
+        android:paddingEnd="16dp"
+        android:paddingStart="16dp">
+
+        <ImageView
+            android:id="@+id/snap_to_road_icon"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_centerVertical="true"
+            android:layout_marginEnd="24dp"
+            android:layout_marginRight="24dp"
+            tools:src="@drawable/ic_action_snap_to_road"/>
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_centerVertical="true"
+            android:layout_toEndOf="@id/snap_to_road_icon"
+            android:layout_toRightOf="@id/snap_to_road_icon"
+            android:maxLines="1"
+            android:text="@string/snap_to_road"
+            android:textAppearance="@style/TextAppearance.ListItemTitle"/>
+    </RelativeLayout>
+
+    <View
+        android:layout_width="wrap_content"
+        android:layout_height="1dp"
+        android:layout_marginBottom="8dp"
+        android:layout_marginLeft="64dp"
+        android:layout_marginStart="64dp"
+        android:layout_marginTop="7dp"
+        android:background="?attr/dashboard_divider"/>
+
+    <RelativeLayout
+        android:id="@+id/save_as_new_segment_row"
+        android:layout_width="match_parent"
+        android:layout_height="48dp"
+        android:background="?attr/selectableItemBackground"
+        android:minHeight="48dp"
+        android:paddingEnd="16dp"
+        android:paddingStart="16dp"
+        android:visibility="gone">
+
+        <ImageView
+            android:id="@+id/save_as_new_segment_icon"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_centerVertical="true"
+            android:layout_marginEnd="24dp"
+            android:layout_marginRight="24dp"
+            tools:src="@drawable/ic_action_polygom_dark"/>
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_centerVertical="true"
+            android:layout_toEndOf="@id/save_as_new_segment_icon"
+            android:layout_toRightOf="@id/save_as_new_segment_icon"
+            android:maxLines="1"
+            android:text="@string/save_as_new_segment"
+            android:textAppearance="@style/TextAppearance.ListItemTitle"/>
+    </RelativeLayout>
+
+    <RelativeLayout
+        android:id="@+id/save_as_new_track_row"
+        android:layout_width="match_parent"
+        android:layout_height="48dp"
+        android:background="?attr/selectableItemBackground"
+        android:minHeight="48dp"
+        android:paddingEnd="16dp"
+        android:paddingStart="16dp">
+
+        <ImageView
+            android:id="@+id/save_as_new_track_icon"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_centerVertical="true"
+            android:layout_marginEnd="24dp"
+            android:layout_marginRight="24dp"
+            tools:src="@drawable/ic_action_polygom_dark"/>
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_centerVertical="true"
+            android:layout_toEndOf="@id/save_as_new_track_icon"
+            android:layout_toRightOf="@id/save_as_new_track_icon"
+            android:maxLines="1"
+            android:text="@string/shared_string_save_as_gpx"
+            android:textAppearance="@style/TextAppearance.ListItemTitle"/>
+    </RelativeLayout>
+
+    <RelativeLayout
+        android:id="@+id/add_to_the_track_row"
+        android:layout_width="match_parent"
+        android:layout_height="48dp"
+        android:background="?attr/selectableItemBackground"
+        android:minHeight="48dp"
+        android:paddingEnd="16dp"
+        android:paddingStart="16dp">
+
+        <ImageView
+            android:id="@+id/add_to_the_track_icon"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_centerVertical="true"
+            android:layout_marginEnd="24dp"
+            android:layout_marginRight="24dp"
+            tools:src="@drawable/ic_action_split_interval"/>
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_centerVertical="true"
+            android:layout_toEndOf="@id/add_to_the_track_icon"
+            android:layout_toRightOf="@id/add_to_the_track_icon"
+            android:maxLines="1"
+            android:text="@string/add_segment_to_the_track"
+            android:textAppearance="@style/TextAppearance.ListItemTitle"/>
+    </RelativeLayout>
+
+    <View
+        android:layout_width="wrap_content"
+        android:layout_height="1dp"
+        android:layout_marginBottom="8dp"
+        android:layout_marginLeft="64dp"
+        android:layout_marginStart="64dp"
+        android:layout_marginTop="7dp"
+        android:background="?attr/dashboard_divider"/>
+
+    <RelativeLayout
+        android:layout_width="match_parent"
+        android:layout_height="48dp"
+        android:background="?attr/selectableItemBackground"
+        android:minHeight="48dp"
+        android:paddingEnd="16dp"
+        android:paddingStart="16dp">
+
+        <ImageView
+            android:id="@+id/clear_all_icon"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_centerVertical="true"
+            android:layout_marginEnd="24dp"
+            android:layout_marginRight="24dp"
+            tools:src="@drawable/ic_action_reset_to_default_dark"/>
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_centerVertical="true"
+            android:layout_toEndOf="@id/clear_all_icon"
+            android:layout_toRightOf="@id/clear_all_icon"
+            android:maxLines="1"
+            android:text="@string/shared_string_clear_all"
+            android:textAppearance="@style/TextAppearance.ListItemTitle"/>
+    </RelativeLayout>
+
+    <View
+        android:layout_width="match_parent"
+        android:layout_height="1dp"
+        android:layout_marginTop="8dp"
+        android:background="?attr/dashboard_divider"/>
+
+    <FrameLayout
+        android:id="@+id/cancel_row"
+        android:layout_width="match_parent"
+        android:layout_height="@dimen/snap_to_road_bottom_sheet_cancel_button_height"
+        android:background="?attr/selectableItemBackground">
+
+        <TextView
+            android:id="@+id/cancel_row_text"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_gravity="center"
+            android:text="@string/shared_string_cancel"
+            android:textAllCaps="true"
+            android:textColor="@color/dashboard_general_button_text_light"
+            android:textSize="14sp"
+            android:textStyle="bold"/>
+    </FrameLayout>
+
+</LinearLayout>

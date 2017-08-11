@@ -34,16 +34,11 @@ public class SnapToRoadBottomSheetDialogFragment extends BottomSheetDialogFragme
 		final OsmandSettings settings = getMyApplication().getSettings();
 		final boolean nightMode = getMyApplication().getDaynightHelper().isNightModeForMapControls();
 		final int themeRes = nightMode ? R.style.OsmandDarkTheme : R.style.OsmandLightTheme;
-		final int backgroundColor = ContextCompat.getColor(getActivity(),
-				nightMode ? R.color.ctx_menu_info_view_bg_dark : R.color.ctx_menu_info_view_bg_light);
 
 		final View view = View.inflate(new ContextThemeWrapper(getContext(), themeRes), R.layout.fragment_snap_to_road_bottom_sheet_dialog, container);
-		view.setBackgroundColor(backgroundColor);
 		if (nightMode) {
 			((TextView) view.findViewById(R.id.cancel_row_text))
 					.setTextColor(ContextCompat.getColor(getActivity(), R.color.dashboard_general_button_text_dark));
-		} else {
-			view.findViewById(R.id.divider).setBackgroundResource(R.drawable.divider);
 		}
 		view.findViewById(R.id.cancel_row).setOnClickListener(new View.OnClickListener() {
 			@Override

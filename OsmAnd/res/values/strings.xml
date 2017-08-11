@@ -9,6 +9,7 @@
          3. All your modified/created strings are in the top of the file (to make easier find what\'s translated).
     PLEASE: Have a look at http://code.google.com/p/osmand/wiki/UIConsistency, it may really improve your and our work  :-)  Thx - Hardy
     -->
+    <string name="shared_string_options">Options</string>
     <string name="measurement_tool_snap_to_road_descr">OsmAnd will add additional points, depending on the navigation type.</string>
     <string name="choose_navigation_type">Choose navigation type</string>
     <string name="none_point_error">Please add at least one point.</string>
@@ -792,7 +793,7 @@
     <string name="shared_string_clear">Clear</string>
     <string name="shared_string_clear_all">Clear all</string>
     <string name="shared_string_save">Save</string>
-    <string name="shared_string_save_as_gpx">Save as Track</string>
+    <string name="shared_string_save_as_gpx">Save as new Track</string>
     <string name="shared_string_rename">Rename</string>
     <string name="shared_string_delete">Delete</string>
     <string name="shared_string_delete_all">Delete all</string>
@@ -2680,5 +2681,5 @@
     <string name="import_track_desc">File %1$s does not contain waypoints, import it as a track?</string>
     <string name="save_as_new_segment">Save as new segment</string>
     <string name="move_point">Move Point</string>
-    <string name="add_segment_to_the_track">Add segment to the track</string>
+    <string name="add_segment_to_the_track">Add to a track</string>
 </resources>
