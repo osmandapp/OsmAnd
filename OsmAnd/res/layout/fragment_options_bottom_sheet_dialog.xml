@@ -82,7 +82,7 @@
             android:layout_toEndOf="@id/save_as_new_segment_icon"
             android:layout_toRightOf="@id/save_as_new_segment_icon"
             android:maxLines="1"
-            android:text="@string/save_as_new_segment"
+            android:text="@string/shared_string_save"
             android:textAppearance="@style/TextAppearance.ListItemTitle"/>
     </RelativeLayout>
 
