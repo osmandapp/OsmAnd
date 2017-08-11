@@ -553,14 +553,14 @@ public class MeasurementToolFragment extends Fragment {
 	}
 
 	private void saveNewGpx(File dir, String fileName, boolean checked) {
-		saveGpx(dir, fileName, checked, null);
+		saveGpx(dir, fileName, checked, null, false);
 	}
 
 	private void saveExistingGpx(GPXFile gpx, boolean showOnMap) {
-		saveGpx(null, null, showOnMap, gpx);
+		saveGpx(null, null, showOnMap, gpx, true);
 	}
 
-	private void saveGpx(final File dir, final String fileName, final boolean showOnMap, final GPXFile gpx) {
+	private void saveGpx(final File dir, final String fileName, final boolean showOnMap, final GPXFile gpx, final boolean openTrackActivity) {
 		new AsyncTask<Void, Void, String>() {
 
 			private ProgressDialog progressDialog;
@@ -624,19 +624,23 @@ public class MeasurementToolFragment extends Fragment {
 			@Override
 			protected void onPostExecute(String warning) {
 				MapActivity activity = getMapActivity();
+				if (progressDialog != null && progressDialog.isShowing()) {
+					progressDialog.dismiss();
+				}
 				if (activity != null) {
+					activity.refreshMap();
 					if (warning == null) {
-						Toast.makeText(activity,
-								MessageFormat.format(getString(R.string.gpx_saved_sucessfully), toSave.getAbsolutePath()),
-								Toast.LENGTH_LONG).show();
 						saved = true;
+						if (openTrackActivity) {
+							dismiss(activity);
+						} else {
+							Toast.makeText(activity,
+									MessageFormat.format(getString(R.string.gpx_saved_sucessfully), toSave.getAbsolutePath()),
+									Toast.LENGTH_LONG).show();
+						}
 					} else {
 						Toast.makeText(activity, warning, Toast.LENGTH_LONG).show();
 					}
-					activity.refreshMap();
-				}
-				if (progressDialog != null && progressDialog.isShowing()) {
-					progressDialog.dismiss();
 				}
 			}
 		}.execute();
