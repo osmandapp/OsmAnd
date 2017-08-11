@@ -868,7 +868,9 @@
     <string name="rendering_attr_lessDetailed_name">Færre detaljer</string>
     <string name="sort_by_distance">Sorter etter avstand</string>
     <string name="sort_by_name">Sorter etter navn</string>
-    <string name="selected_gpx_info_show">\n\nTrykk og hold for å se på kartet</string>
+    <string name="selected_gpx_info_show">"
+\n
+\nLangt trykk for å vise på kartet"</string>
     <string name="gpx_info_waypoints">"Rutepunkter: %1$s "</string>
     <string name="loading_streets">Laster gater…</string>
     <string name="loading_cities">Laster byer…</string>
