@@ -18,6 +18,7 @@
         android:drawSelectorOnTop="false"
 		android:groupIndicator="@android:color/transparent"/>
 
-	<include layout="@layout/empty_state_my_tracks"/>
+	<include layout="@layout/empty_state_my_tracks"
+		android:id="@android:id/empty"/>
 
 </LinearLayout>

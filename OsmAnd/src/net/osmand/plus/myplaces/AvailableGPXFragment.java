@@ -124,6 +124,7 @@ public class AvailableGPXFragment extends OsmandExpandableListFragment {
 	private View currentGpxView;
 	private View footerView;
 	private boolean importing = false;
+	private View emptyView;
 
 	@Override
 	public void onAttach(Context activity) {
@@ -327,7 +328,7 @@ public class AvailableGPXFragment extends OsmandExpandableListFragment {
 		}
 		footerView = inflater.inflate(R.layout.list_shadow_footer, null, false);
 		listView.addFooterView(footerView);
-		View emptyView = v.findViewById(android.R.id.empty);
+		emptyView = v.findViewById(android.R.id.empty);
 		ImageView emptyImageView = (ImageView) emptyView.findViewById(R.id.empty_state_image_view);
 		emptyImageView.setImageResource(app.getSettings().isLightContent() ? R.drawable.ic_empty_state_trip_day_result : R.drawable.ic_empty_state_trip_night_result);
 		Button importButton = (Button) emptyView.findViewById(R.id.import_button);
@@ -337,7 +338,6 @@ public class AvailableGPXFragment extends OsmandExpandableListFragment {
 				addTrack();
 			}
 		});
-		listView.setEmptyView(emptyView);
 		if (this.adapter != null) {
 			listView.setAdapter(this.adapter);
 		}
@@ -1608,6 +1608,7 @@ public class AvailableGPXFragment extends OsmandExpandableListFragment {
 		@Override
 		protected void onPostExecute(Void aVoid) {
 			asyncProcessor = null;
+			listView.setEmptyView(emptyView);
 		}
 	}
 

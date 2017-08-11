@@ -19,6 +19,7 @@
         android:drawSelectorOnTop="false"
         android:groupIndicator="@android:color/transparent"/>
 
-    <include layout="@layout/empty_state_favourites"/>
+    <include layout="@layout/empty_state_favourites"
+        android:id="@android:id/empty"/>
 
 </LinearLayout>
