@@ -6,6 +6,7 @@ import android.graphics.Canvas;
 import android.graphics.Color;
 import android.graphics.Paint;
 import android.support.annotation.ColorInt;
+import android.text.TextUtils;
 
 import net.osmand.Location;
 import net.osmand.PlatformUtil;
@@ -1033,6 +1034,19 @@ public class GPXUtilities {
 				}
 			}
 			return count;
+		}
+
+		public List<String> getWaypointCategories() {
+			List<String> categories = new ArrayList<>();
+			for (WptPt pt : points) {
+				String category = pt.category;
+				if (!TextUtils.isEmpty(category)) {
+					if (!categories.contains(category)) {
+						categories.add(category);
+					}
+				}
+			}
+			return categories;
 		}
 	}
 
