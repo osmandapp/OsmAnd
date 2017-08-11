@@ -230,6 +230,7 @@ public class MapInfoWidgetsFactory {
 		int refreshBtnIconClrLightId = R.color.icon_color;
 		int refreshBtnIconClrDarkId = 0;
 		boolean refreshBtnVisible = false;
+		boolean saveViewVisible = false;
 
 		int titleTextClrLightId = R.color.primary_text_light;
 		int titleTextClrDarkId = R.color.primary_text_dark;
@@ -320,6 +321,10 @@ public class MapInfoWidgetsFactory {
 
 		public void setRefreshBtnVisible(boolean visible) {
 			this.refreshBtnVisible = visible;
+		}
+
+		public void setSaveViewVisible(boolean visible) {
+			this.saveViewVisible = visible;
 		}
 
 		public void setTitleTextClrIds(int titleTextClrLightId, int titleTextClrDarkId) {
@@ -608,6 +613,13 @@ public class MapInfoWidgetsFactory {
 				}
 			} else if (refreshButton.getVisibility() == View.VISIBLE) {
 				refreshButton.setVisibility(View.GONE);
+			}
+			if (controller.saveViewVisible) {
+				if (saveView.getVisibility() == View.GONE) {
+					saveView.setVisibility(View.VISIBLE);
+				}
+			} else if (saveView.getVisibility() == View.VISIBLE) {
+				saveView.setVisibility(View.GONE);
 			}
 		}
 

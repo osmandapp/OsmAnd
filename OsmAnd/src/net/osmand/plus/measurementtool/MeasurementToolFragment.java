@@ -829,6 +829,9 @@ public class MeasurementToolFragment extends Fragment {
 			setBgIds(R.drawable.gradient_toolbar, R.drawable.gradient_toolbar,
 					R.drawable.gradient_toolbar, R.drawable.gradient_toolbar);
 			setCloseBtnVisible(false);
+			if (newGpxLine != null) {
+				setSaveViewVisible(true);
+			}
 			setBackBtnIconIds(R.drawable.ic_action_remove_dark, R.drawable.ic_action_remove_dark);
 			setSingleLineTitle(false);
 		}
@@ -837,9 +840,6 @@ public class MeasurementToolFragment extends Fragment {
 		public void updateToolbar(MapInfoWidgetsFactory.TopToolbarView view) {
 			super.updateToolbar(view);
 			view.getShadowView().setVisibility(View.GONE);
-			if (newGpxLine != null) {
-				view.getSaveView().setVisibility(View.VISIBLE);
-			}
 		}
 	}
 }
