@@ -19,8 +19,6 @@ import android.text.Editable;
 import android.text.TextWatcher;
 import android.view.ContextThemeWrapper;
 import android.view.LayoutInflater;
-import android.view.Menu;
-import android.view.MenuItem;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.EditText;
@@ -54,7 +52,6 @@ import net.osmand.plus.measurementtool.command.ReorderPointCommand;
 import net.osmand.plus.views.OsmandMapTileView;
 import net.osmand.plus.views.mapwidgets.MapInfoWidgetsFactory;
 import net.osmand.plus.views.mapwidgets.MapInfoWidgetsFactory.TopToolbarController;
-import net.osmand.plus.widgets.IconPopupMenu;
 
 import java.io.File;
 import java.text.MessageFormat;
@@ -298,70 +295,7 @@ public class MeasurementToolFragment extends Fragment {
 			toolBarController.setOnCloseButtonClickListener(new View.OnClickListener() {
 				@Override
 				public void onClick(View v) {
-					IconPopupMenu popup = new IconPopupMenu(mapActivity, mapActivity.findViewById(R.id.widget_top_bar_close_button));
-					popup.getMenuInflater().inflate(R.menu.measurement_tool_menu, popup.getMenu());
-					final Menu menu = popup.getMenu();
-					IconsCache ic = mapActivity.getMyApplication().getIconsCache();
-					MenuItem saveAsNewSegmentMenuItem = menu.findItem(R.id.action_save_as_new_segment);
-					MenuItem saveAsGpxTrack = menu.findItem(R.id.action_save_as_gpx);
-					MenuItem addSegmentToTrack = menu.findItem(R.id.action_add_segment_to_track);
-					addSegmentToTrack.setIcon(ic.getThemedIcon(R.drawable.ic_action_polygom_dark));
-					saveAsNewSegmentMenuItem.setIcon(ic.getThemedIcon(R.drawable.ic_action_polygom_dark));
-					saveAsGpxTrack.setIcon(ic.getThemedIcon(R.drawable.ic_action_polygom_dark));
-					if (newGpxLine != null) {
-						saveAsNewSegmentMenuItem.setVisible(true);
-						saveAsGpxTrack.setVisible(false);
-						addSegmentToTrack.setVisible(false);
-					}
-					menu.findItem(R.id.action_snap_to_road).setIcon(ic.getThemedIcon(R.drawable.ic_action_snap_to_road));
-					menu.findItem(R.id.action_clear_all).setIcon(ic.getThemedIcon(R.drawable.ic_action_reset_to_default_dark));
-					popup.setOnMenuItemClickListener(new IconPopupMenu.OnMenuItemClickListener() {
-						@Override
-						public boolean onMenuItemClick(MenuItem menuItem) {
-							switch (menuItem.getItemId()) {
-								case R.id.action_save_as_new_segment:
-									if (measurementLayer.getPointsCount() > 0) {
-										saveAsNewSegment(mapActivity);
-									} else {
-										Toast.makeText(mapActivity, getString(R.string.none_point_error), Toast.LENGTH_SHORT).show();
-									}
-									return true;
-
-								case R.id.action_add_segment_to_track:
-									if (measurementLayer.getPointsCount() > 0) {
-//										showAddSegmentDialog(mapActivity);
-									} else {
-										Toast.makeText(mapActivity, getString(R.string.none_point_error), Toast.LENGTH_SHORT).show();
-									}
-									return true;
-
-								case R.id.action_save_as_gpx:
-									if (measurementLayer.getPointsCount() > 0) {
-										saveAsGpxOnClick(mapActivity);
-									} else {
-										Toast.makeText(mapActivity, getString(R.string.none_point_error), Toast.LENGTH_SHORT).show();
-									}
-									return true;
-
-								case R.id.action_snap_to_road:
-									SnapToRoadBottomSheetDialogFragment fragment = new SnapToRoadBottomSheetDialogFragment();
-									fragment.show(mapActivity.getSupportFragmentManager(), SnapToRoadBottomSheetDialogFragment.TAG);
-									return true;
-
-								case R.id.action_clear_all:
-									commandManager.execute(new ClearPointsCommand(measurementLayer));
-									if (pointsListOpened) {
-										hidePointsList();
-									}
-									disable(redoBtn, upDownBtn);
-									updateText();
-									saved = false;
-									return true;
-							}
-							return false;
-						}
-					});
-					popup.show();
+					// Pasha, do your stuff here :)
 				}
 			});
 			mapActivity.showTopToolbar(toolBarController);
@@ -893,7 +827,7 @@ public class MeasurementToolFragment extends Fragment {
 			setDescrTextClrIds(R.color.primary_text_dark, R.color.primary_text_dark);
 			setBgIds(R.drawable.gradient_toolbar, R.drawable.gradient_toolbar,
 					R.drawable.gradient_toolbar, R.drawable.gradient_toolbar);
-			setCloseBtnIconIds(R.drawable.ic_overflow_menu_white, R.drawable.ic_overflow_menu_white);
+			setCloseBtnIconIds(R.drawable.ic_overflow_menu_white, R.drawable.ic_overflow_menu_white); // Pasha, change this icon :)
 			setBackBtnIconIds(R.drawable.ic_action_remove_dark, R.drawable.ic_action_remove_dark);
 			setSingleLineTitle(false);
 		}
