@@ -213,8 +213,8 @@
   <string name="local_index_upload_gpx_description">Augšupielādēt GPX failus OSM kopienai. Tie tiks izmantoti, lai uzlabotu kartes.</string>
   <string name="local_index_items_uploaded">%1$d no %2$d vienība(s) veiksmīgi augšupielādētas.</string>
   <string name="local_index_mi_upload_gpx">Nosūtīt uz OSM</string>
-  <string name="show_more_map_detail">Rādīt kartē vairāk detaļu</string>
-  <string name="show_more_map_detail_descr">Rādīt kartē vairāk detaļu (ceļus u.t.t.) zemākos mērogos</string>
+  <string name="show_more_map_detail">Detalizētāka karte</string>
+  <string name="show_more_map_detail_descr">Rādīt vairāk detaļas uz kartes (ceļus u.t.t.) sākot ar lielākiem mērogiem</string>
   <string name="favourites_delete_multiple_succesful">Izlases punkts(i) veiksmīgi izdzēsts.</string>
   <string name="favorite_delete_multiple">Jūs izdzēsīsiet %1$d izlases un %2$d izlases grupu. Vai tiešām vēlaties to darīt?</string>
   <string name="favorite_home_category">Mājas</string>
@@ -549,7 +549,7 @@
   <string name="transport_route_distance">Maršruta garums</string>
   <string name="transport">Transports</string>
   <string name="shared_string_ok">Labi</string>
-  <string name="show_transport_over_map_description">Rādīt kartē sabiedriskā transporta pieturas</string>
+  <string name="show_transport_over_map_description">Rādīt uz kartes sabiedriskā transporta pieturas</string>
   <string name="show_transport_over_map">Rādīt pieturas</string>
   <string name="hello">OsmAnd navigācija</string>
   <string name="update_poi_success">POI dati tika veiksmīgi augšuplādēti ({0} tika ielādēti)</string>
@@ -709,7 +709,7 @@
   <string name="navigate_point_format_D">DDD.DD</string>
   <string name="navigate_point_format_DM">DDD MM.MM</string>
   <string name="navigate_point_format_DMS">DDD MM SS.SS</string>
-  <string name="shared_string_show_on_map">Rādīt kartē</string>
+  <string name="shared_string_show_on_map">Rādīt uz kartes</string>
   
   <string name="search_address_top_text">Izvēlēties adresi</string>
   <string name="search_address_region">Reģions</string>
@@ -934,7 +934,7 @@ Vietas koordinātes un laiks redzami arī atsevišķā sadaļā Manā Izvēlnē.
     <string name="intermediate_point_too_far">Starpposma punkts %1$s ir pārāk tālu no tuvākā ceļa.</string>
     <string name="arrived_at_intermediate_point">Jūs esat nokļuvis starpposma punktā</string>
     <string name="context_menu_item_intermediate_point">Pievienot kā starpposma punktu</string>
-    <string name="map_widget_intermediate_distance">Starpposma punkts</string>
+    <string name="map_widget_intermediate_distance">Starpposmu punkti</string>
     <string name="ending_point_too_far">Noslēdzošais punkts ir pārāk tālu no tuvākā ceļa.</string>
     <string name="add_tag">Pievienot tagu</string>
     <string name="btn_advanced_mode">Paplašinātais režīms…</string>
@@ -1186,7 +1186,7 @@ OsmAnd ir atvērtā koda navigācijas aplikācija ar piekļuvi vispusīgiem Open
     
     
 	
-	<string name="map_widget_max_speed">Ātruma limits</string>
+	<string name="map_widget_max_speed">Ātruma limiti</string>
     <string name="monitoring_control_start">GPX</string>
     <string name="no_buildings_found">Nav atrastas ēkas.</string>
     <string name="search_villages_and_postcodes">Meklēt apdzīvotās vietas/pasta indeksus</string>
@@ -1694,7 +1694,7 @@ Vai gribat veikt jaunu reģistrāciju?</string>
     <string name="rendering_category_details">Detaļas</string>
     <string name="rendering_category_transport">Transports</string>
     <string name="rendering_category_others">Citi kartes atribūti</string>
-    <string name="map_widget_appearance_rem">Atlikušie elementi</string>
+    <string name="map_widget_appearance_rem">Pārējie elementi</string>
     <string name="map_widget_top">Statusa josla</string>
 	<string name="map_widget_right">Labā puse</string>
 	<string name="map_widget_left">Kreisā puse</string>
@@ -2170,7 +2170,7 @@ Vai gribat veikt jaunu reģistrāciju?</string>
     <string name="commit_poi">Iesūtīt POI</string>
     <string name="tab_title_basic">Pamata</string>
     <string name="tab_title_advanced">Paplašināts</string>
-    <string name="building_number">Būvējuma numurs</string>
+    <string name="building_number">Mājas numurs</string>
     <string name="next_proceed">Nākošais</string>
     <string name="opening_at">Atvērt</string>
     <string name="closing_at">Aizvērt</string>
@@ -2728,10 +2728,10 @@ Apraksta laukumu: %1$s x %2$s</string>
     <string name="shared_string_plugin">Spraudnis</string>
     <string name="srtm_purchase_header">Lai redzētu kontūrlīnijas kartē, ir nepieciešams nopirkt un instalēt Kontūrlīniju spraudni</string>
     <string name="srtm_color_scheme">Krāsu shēma</string>
-    <string name="routing_attr_allow_private_name">Atļaut privātās zemes</string>
-    <string name="favorite_group_name">Grupas vārds</string>
-    <string name="change_color">Mainīt krāsu</string>
-    <string name="edit_name">Labot vārdu</string>
+    <string name="routing_attr_allow_private_name">Privātās teritorijas</string>
+    <string name="favorite_group_name">Nosaukums</string>
+    <string name="change_color">Nomainīt krāsu</string>
+    <string name="edit_name">Pārdēvēt</string>
     <string name="animate_my_location">Animēt atrašanās vietu</string>
     <string name="shared_string_overview">Pārskats</string>
     <string name="select_street">Izvēlieties ielu</string>
@@ -2750,7 +2750,7 @@ Apraksta laukumu: %1$s x %2$s</string>
     <string name="nothing_found">Neko neatradu :(</string>
     <string name="nothing_found_descr">Meklējiet pēc cita vārda vai palieliniet meklēšanas rādiusu, ietverot blakus teritorijas</string>
     <string name="quick_action_showhide_osmbugs_title">Rādīt/nerādīt OSM piezīmes</string>
-    <string name="routing_attr_allow_private_description">Atļaut piekļūšanu privātajām zemēm</string>
+    <string name="routing_attr_allow_private_description">Atļaut piekļūšanu privātajām teritorijām</string>
     <string name="animate_my_location_desc">Maršruta gaitā turpināt rādīt kustīgu animāciju arī pie īslaicīgiem pārrāvumiem atrašanās vietas noteikšanā</string>
     <string name="quick_action_auto_zoom_desc">Spiežot darbības pogu, tiks ieslēgta vai izslēgta automātiskā kartes mērogošana, atkarībā no kustības ātruma.</string>
     <string name="quick_action_add_destination">Pievienot mērķi</string>
@@ -2922,15 +2922,13 @@ No Afganistānas līdz Zimbabvei, no Austrālijas līdz ASV, Argentīna, Brazīl
 
  • Izvēle starp pilna reģiona datiem vai tikai ceļa sazarojumu (piemērs: visa Japāna 700MB vai 200MB tikai ar ceļa sazarojumu)
  "</string>
-    <string name="osmand_plus_extended_description_part6">"
- Velosipēdistu un kājāmgājēju iespējas
- • Skatīt gājēju, pārgājienu un baiku ceļus, ideāli ārpus mājas aktivitātēm
- • Speciāli maršruta un ekrāna režīmi baikiem un kājāmgājējiem
- • Optionāli sabiedriskā transporta pieturas, iekļaujot peronu nosaukumus
- • Optionāli ceļa ierakstīšana lokālā GPX failā vai tiešsaistes servisā
- • Optionāli ātruma un altitūtas rādīšana
- • Konktūrlīniju un kalnu ēnojuma attēlošana (caur atsevišķu spraudni)
- "</string>
+    <string name="osmand_plus_extended_description_part6">Velobraucēju un kājāmgājēju iespējas
+\n • Skatīt gājēju, pārgājienu un baiku ceļus, ideāli ārpus mājas aktivitātēm
+\n • Speciāli maršruta un ekrāna režīmi baikiem un kājāmgājējiem
+\n • Optionāli sabiedriskā transporta pieturas, iekļaujot peronu nosaukumus
+\n • Optionāli ceļa ierakstīšana lokālā GPX failā vai tiešsaistes servisā
+\n • Optionāli ātruma un altitūtas rādīšana
+\n • Konktūrlīniju un kalnu ēnojuma attēlošana (caur atsevišķu spraudni)</string>
     <string name="osmand_plus_extended_description_part7">"
  Piedalieties OSM veidošanā
  • Ziņojiet par datu kļūdām
@@ -2959,4 +2957,15 @@ No Afganistānas līdz Zimbabvei, no Austrālijas līdz ASV, Argentīna, Brazīl
     <string name="mapillary_image">Mapillary bilde</string>
     <string name="import_gpx_failed_descr">OsmAnd nevar importēt failu. Pārliecinieties vai OsmAnd ir atļauja nolasīt failu dotajā mapē.</string>
     <string name="shared_string_permissions">Atļaujas</string>
+    <string name="none_point_error">Lūdzu pievienojiet vismaz vienu punktu.</string>
+    <string name="enter_gpx_name">GPX faila vārds:</string>
+    <string name="show_on_map_after_saving">Pēc saglabāšanas rādīt uz kartes</string>
+    <string name="quick_action_resume_pause_navigation">Atsākt/pauzēt navigāciju</string>
+    <string name="quick_action_resume_pause_navigation_descr">Pieskarieties pogai, lai nopauzētu vai atsāktu navigāciju.</string>
+    <string name="quick_action_show_navigation_finish_dialog">Rādīt Navigācija pabeigta dialogu</string>
+    <string name="quick_action_start_stop_navigation">Sākt/apturēt navigāciju</string>
+    <string name="quick_action_start_stop_navigation_descr">Pieskarieties šai pogai, lai sāktu vai apturētu navigācijas norādes.</string>
+    <string name="store_tracks_in_monthly_directories">Saglabāt treka ierakstus mēneša mapēs</string>
+    <string name="store_tracks_in_monthly_directories_descrp">Ierakstītie treki tiks saglabāti apakšmapēs pēc mēneša datuma (piemēram, 2017-01).</string>
+    <string name="map_widget_ruler_control">Rādiusa lineāls</string>
     </resources>
