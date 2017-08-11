@@ -32,14 +32,7 @@ public class ReorderPointCommand implements Command {
 	}
 
 	private void swap() {
-		// todo: fix exception
-		try {
-			Collections.swap(measurementLayer.getMeasurementPoints(), from, to);
-		} catch (Exception e) {
-			// index out of bounds
-			// an exception occurs when to == -1 basically
-			// but maybe from == measurementPoints.size() sometimes so there is an exception
-		}
+		Collections.swap(measurementLayer.getMeasurementPoints(), from, to);
 		measurementLayer.refreshMap();
 	}
 }

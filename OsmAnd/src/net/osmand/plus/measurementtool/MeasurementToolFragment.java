@@ -334,7 +334,7 @@ public class MeasurementToolFragment extends Fragment {
 			@Override
 			public void onDragEnded(RecyclerView.ViewHolder holder) {
 				toPosition = holder.getAdapterPosition();
-				if (toPosition != fromPosition) {
+				if (toPosition >= 0 && fromPosition >= 0 && toPosition != fromPosition) {
 					commandManager.execute(new ReorderPointCommand(measurementLayer, fromPosition, toPosition));
 					adapter.notifyDataSetChanged();
 					disable(redoBtn);
