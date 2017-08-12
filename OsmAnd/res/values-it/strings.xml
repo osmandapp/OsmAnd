@@ -2711,8 +2711,8 @@ Rappresenta l\'area: %1$s x %2$s</string>
     <string name="subscribe_email_desc">Sottoscrivi la mailing list della nostra applicazione e avrai ulteriori 3 download di mappe!</string>
     <string name="quick_action_auto_zoom">Zoom della mappa automatico acceso/spento</string>
     <string name="quick_action_auto_zoom_desc">Toccando il pulsante azione accenderà o spegnerà lo zoom automatico della mappa in base alla tua velocità.</string>
-    <string name="quick_action_auto_zoom_on">Zoom della mappa automatico attivato</string>
-    <string name="quick_action_auto_zoom_off">Zoom della mappa automatico disattivato</string>
+    <string name="quick_action_auto_zoom_on">Abilita lo oom della mappa automatico della mappa</string>
+    <string name="quick_action_auto_zoom_off">Disattiva lo zoom automatico della mappa</string>
     <string name="quick_action_add_destination">Aggiungi una destinazione</string>
     <string name="quick_action_replace_destination">Sostituisci la destinazione</string>
     <string name="quick_action_add_first_intermediate">Aggiungi il primo intermedio</string>
