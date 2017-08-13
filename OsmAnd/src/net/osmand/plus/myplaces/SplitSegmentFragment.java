@@ -78,7 +78,7 @@ public class SplitSegmentFragment extends OsmAndListFragment {
     public void onViewCreated(View view, Bundle savedInstanceState) {
         super.onViewCreated(view, savedInstanceState);
         updateContent();
-        updateHeader();
+        // Obsolete: updateHeader();
     }
 
     @Override
@@ -213,7 +213,7 @@ public class SplitSegmentFragment extends OsmAndListFragment {
         adapter.add(overviewSegments);
         List<GpxDisplayItem> splitSegments = getSplitSegments();
         adapter.addAll(splitSegments);
-        adapter.setNotifyOnChange(true);
+        // Obsolete: adapter.setNotifyOnChange(true);
         adapter.notifyDataSetChanged();
         getListView().setSelection(0);
         headerView.setTranslationY(0);
