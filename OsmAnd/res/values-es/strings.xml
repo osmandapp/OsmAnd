@@ -2636,7 +2636,7 @@ Por favor proporciona un código completo</string>
     <string name="quick_action_start_stop_navigation_descr">Pulsa este botón para iniciar o parar la navegación.</string>
     <string name="live_monitoring_max_interval_to_send">Tiempo del búfer para el seguimiento en línea</string>
     <string name="live_monitoring_max_interval_to_send_desrc">Especifica el tiempo del búfer para mantener lugares para enviar sin conexión</string>
-    <string name="none_point_error">Por favor, añada al menos un punto.</string>
+    <string name="none_point_error">Por favor, añade al menos un punto.</string>
     <string name="enter_gpx_name">Nombre del archivo GPX:</string>
     <string name="show_on_map_after_saving">Mostrar en el mapa después de guardar</string>
     <string name="measurement_tool_action_bar">Navega por el mapa y añade puntos</string>
@@ -2645,7 +2645,8 @@ Por favor proporciona un código completo</string>
     <string name="retry">Reintentar</string>
     <string name="add_route_point">Añadir punto de ruta</string>
     <string name="add_waypoint">Añadir punto de ruta</string>
-    <string name="save_gpx_waypoint">Guardar punto GPX</string>
+    <string name="save_gpx_waypoint">Guardar punto de ruta GPX</string>
     <string name="save_route_point">Guardar punto de ruta</string>
     <string name="route_point_one">Punto de ruta 1</string>
-</resources>
+<string name="waypoint_one">Punto de ruta 1</string>
+    </resources>
