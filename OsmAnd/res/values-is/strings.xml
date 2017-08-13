@@ -2269,7 +2269,7 @@ Stendur fyrir svæði: %1$s x %2$s</string>
     <string name="osmo_session_not_available">Seta ekki tiltæk, gakktu úr skugga um að kveikt sé á \'Senda staðsetningu\'.</string>
     <string name="osmo_track_interval_descr">Veldu tíma milli þess sem staðsetning er send</string>
     <string name="enter_gpx_name">Nafn GPX skráar:</string>
-    <string name="show_on_map_after_saving">Sýna í korti eftir vistun.</string>
+    <string name="show_on_map_after_saving">Sýna í korti eftir vistun</string>
     <string name="measurement_tool">Mæla vegalengd</string>
     <string name="store_tracks_in_monthly_directories_descrp">Geyma skráða ferla í undirmöppum fyrir hvern skráningamánuð (svo sem 2017-01).</string>
     </resources>
