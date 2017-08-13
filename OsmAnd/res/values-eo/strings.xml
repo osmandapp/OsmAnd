@@ -2740,10 +2740,10 @@ Indikas lokon:  %1$s x %2$s"</string>
 <string name="none_point_error">Bonvolu aldoni almenaŭ unu punkton.</string>
     <string name="enter_gpx_name">GPX-dosiera nomo:</string>
     <string name="show_on_map_after_saving">Montri sur mapo post konservi</string>
-    <string name="add_route_point">Aldoni kurs-punkton</string>
+    <string name="add_route_point">Aldoni kurspunkton</string>
     <string name="add_waypoint">Aldoni navigadpunkton</string>
     <string name="save_gpx_waypoint">Konservi GPX-navigadpunkton</string>
-    <string name="save_route_point">Konservi kurs-punkton</string>
+    <string name="save_route_point">Konservi kurspunkton</string>
     <string name="waypoint_one">Navigadpunkto 1</string>
     <string name="route_point_one">Kurspunkto 1</string>
 </resources>
