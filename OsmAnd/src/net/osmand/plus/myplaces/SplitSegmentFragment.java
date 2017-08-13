@@ -213,6 +213,7 @@ public class SplitSegmentFragment extends OsmAndListFragment {
         adapter.add(overviewSegments);
         List<GpxDisplayItem> splitSegments = getSplitSegments();
         adapter.addAll(splitSegments);
+        adapter.setNotifyOnChange(true);
         adapter.notifyDataSetChanged();
         getListView().setSelection(0);
         headerView.setTranslationY(0);
