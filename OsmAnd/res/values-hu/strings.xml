@@ -482,13 +482,13 @@ Ehhez {1} MB helyre van szükség.
     <string name="sd_unmounted">Az SD kártya nem érhető el.\nÍgy a térkép nem jeleníthető meg és nem tudsz keresni.</string>
     <string name="sd_mounted_ro">Az SD kártya csak olvasható.\nÍgy csak az előre letöltött térkép használható, nem tudsz újabbat letölteni az internetről.</string>
     <string name="unzipping_file">Fájl kitömörítése (unzip)…</string>
-    <string name="route_tr">Fordulj jobbra, menj</string>
-    <string name="route_tshr">Fordulj élesen jobbra, menj</string>
-    <string name="route_tslr">Fordulj enyhén jobbra, menj</string>
-    <string name="route_tl">Fordulj balra, menj</string>
-    <string name="route_tshl">Fordulj élesen balra, menj</string>
-    <string name="route_tsll">Fordulj enyhén balra, menj</string>
-    <string name="route_tu">Fordulj meg, menj</string>
+    <string name="route_tr">Fordulj jobbra és menj</string>
+    <string name="route_tshr">Fordulj élesen jobbra és menj</string>
+    <string name="route_tslr">Fordulj enyhén jobbra és menj</string>
+    <string name="route_tl">Fordulj balra és menj</string>
+    <string name="route_tshl">Fordulj élesen balra és menj</string>
+    <string name="route_tsll">Fordulj enyhén balra és menj</string>
+    <string name="route_tu">Fordulj meg és menj</string>
     <string name="route_head">Előre</string>
     <string name="first_time_continue">Tovább</string>
     <string name="first_time_download">Térképadatok letöltése</string>
@@ -584,7 +584,7 @@ Ehhez {1} MB helyre van szükség.
     <string name="error_occurred_saving_gpx">Hiba történt a GPX fájl mentéskor</string>
     <string name="error_calculating_route">Útvonaltervezési hiba</string>
     <string name="error_calculating_route_occured">Hiba történt az útvonaltervezés közben</string>
-    <string name="empty_route_calculated">Üres útvonal lett tervezve</string>
+    <string name="empty_route_calculated">Hiba: üres útvonal lett tervezve</string>
     <string name="new_route_calculated_dist">Új útvonal tervezve, távolság</string>
     <string name="arrived_at_destination">Megérkeztél a célponthoz</string>
     <string name="invalid_locations">Érvénytelen koordináták!</string>
@@ -1172,7 +1172,7 @@ Néhány fontosabb funkció:
     <string name="context_menu_item_directions_from">Navigáció innen</string>
     <string name="route_descr_map_location">Térkép: </string>
     <string name="route_to">Ide:</string>
-    <string name="route_via">Át:</string>
+    <string name="route_via">Ezen keresztül:</string>
     <string name="route_from">Innen:</string>
 
 
@@ -1201,7 +1201,7 @@ Néhány fontosabb funkció:
     <string name="driving_region_us">USA</string>
     <string name="driving_region_canada">Kanada</string>
     <string name="driving_region_europe_asia">Európa, Ázsia, Latin-Amerika és hasonlók</string>
-    <string name="driving_region_uk">UK, India, Ausztrália, stb.</string>
+    <string name="driving_region_uk">UK, India és hasonlók</string>
 
 
     <string name="announce_gpx_waypoints">GPX útpontok</string>
@@ -2063,7 +2063,7 @@ Hosszúság: %2$s</string>
     <string name="si_nm">Tengeri mérföld</string>
     <string name="si_kmh">Kilométer per óra</string>
     <string name="si_mph">Mérföld per óra</string>
-    <string name="si_m_s">Méter per szekundum</string>
+    <string name="si_m_s">Méter per másodperc</string>
     <string name="si_min_km">Perc per kilométer</string>
     <string name="si_min_m">Perc per mérföld</string>
     <string name="si_nm_h">Tengeri mérföld per óra (csomó)</string>
@@ -2751,7 +2751,7 @@ Kérlek adj meg egy teljes kódot</string>
     <string name="shared_string_paused">Szüneteltetve</string>
     <string name="select_city">Válassz települést</string>
     <string name="select_postcode">Válassz irányítószámot</string>
-    <string name="select_street">Utca választása</string>
+    <string name="select_street">Válassz utcát</string>
     <string name="shared_string_in_name">itt: %1$s</string>
     <string name="type_address">Add meg a címet</string>
     <string name="quick_action_showhide_osmbugs_title">OSM megjegyzések megjelenítése/elrejtése</string>
