@@ -568,7 +568,7 @@
 	<string name="poi_volcano">Vulkan</string>
 	<string name="poi_volleyball">Volleyball</string>
 	<string name="poi_waste_basket">Mülleimer</string>
-	<string name="poi_waste_disposal">Mülldeponie</string>
+	<string name="poi_waste_disposal">Müllcontainer</string>
 	<string name="poi_wastewater_plant">Abwasseranlage</string>
 	<string name="poi_craft_watchmaker">Uhrmacher</string>
 	<string name="poi_watermill">Wassermühle</string>
@@ -1425,7 +1425,7 @@
 	<string name="poi_windfall">Fallobst</string>
 	<string name="poi_dead_wood">Todwald</string>
 
-	<string name="poi_level">Stockwerk</string>
+	<string name="poi_level">In Etage</string>
 	<string name="poi_rtsa_scale">RTSA Skala</string>
 
 	<string name="poi_piste_difficulty_easy">Einfach</string>
