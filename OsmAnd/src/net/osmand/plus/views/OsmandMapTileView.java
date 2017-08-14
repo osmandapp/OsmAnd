@@ -585,7 +585,12 @@ public class OsmandMapTileView implements IMapDownloaderCallback {
 		} else {
 			ratioy = 0.5f;
 		}
-		final float ratiox = mapPositionX == 0 ? 0.5f : 0.75f;
+		final float ratiox;
+		if (mapPosition == OsmandSettings.LANDSCAPE_MIDDLE_RIGHT_CONSTANT) {
+			ratiox = 0.7f;
+		} else {
+			ratiox = mapPositionX == 0 ? 0.5f : 0.75f;
+		}
 		final int cy = (int) (ratioy * view.getHeight());
 		final int cx = (int) (ratiox * view.getWidth());
 		if (currentViewport.getPixWidth() != view.getWidth() || currentViewport.getPixHeight() != view.getHeight() ||
