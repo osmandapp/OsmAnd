@@ -1132,7 +1132,7 @@
 	<string name="poi_backrest_yes">Rückenlehne: ja</string>
 	<string name="poi_backrest_no">Rückenlehne: nein</string>
 
-	<string name="poi_intermittent">wechselnd</string>
+	<string name="poi_intermittent">Zeitweise</string>
 
 	<string name="poi_deadlock">toter Punkt</string>
 
@@ -2537,7 +2537,7 @@
 	<string name="poi_badminton">Federball</string>
 	<string name="poi_judo">Judo</string>
 	<string name="poi_disc_golf">Discgolf</string>
-	<string name="poi_rc_car">RC-Car-Rennen</string>
+	<string name="poi_rc_car">Funkferngesteuertes Modellautorennen</string>
 	<string name="poi_squash">Squash</string>
 	<string name="poi_shuffleboard">Shuffleboard</string>
 	<string name="poi_boxing">Boxen</string>
