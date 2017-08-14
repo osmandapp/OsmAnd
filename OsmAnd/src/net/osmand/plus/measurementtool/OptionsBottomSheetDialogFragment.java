@@ -8,6 +8,8 @@ import android.view.ContextThemeWrapper;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.view.Window;
+import android.view.WindowManager;
 import android.widget.ImageView;
 
 import net.osmand.AndroidUtils;
@@ -21,6 +23,7 @@ public class OptionsBottomSheetDialogFragment extends BottomSheetDialogFragment 
 
 	private OptionsOnClickListener listener;
 	private boolean addLineMode;
+	private boolean portrait;
 
 	public void setOptionsOnClickListener(OptionsOnClickListener listener) {
 		this.listener = listener;
@@ -35,7 +38,7 @@ public class OptionsBottomSheetDialogFragment extends BottomSheetDialogFragment 
 	public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
 		final boolean nightMode = getMyApplication().getDaynightHelper().isNightModeForMapControls();
 		final int themeRes = nightMode ? R.style.OsmandDarkTheme : R.style.OsmandLightTheme;
-		boolean portrait = AndroidUiHelper.isOrientationPortrait(getActivity());
+		portrait = AndroidUiHelper.isOrientationPortrait(getActivity());
 
 		final View mainView = View.inflate(new ContextThemeWrapper(getContext(), themeRes), R.layout.fragment_options_bottom_sheet_dialog, null);
 		if (portrait) {
@@ -110,6 +113,17 @@ public class OptionsBottomSheetDialogFragment extends BottomSheetDialogFragment 
 		});
 
 		return mainView;
+	}
+
+	@Override
+	public void onStart() {
+		super.onStart();
+		if (!portrait) {
+			final Window window = getDialog().getWindow();
+			WindowManager.LayoutParams params = window.getAttributes();
+			params.width = getActivity().getResources().getDimensionPixelSize(R.dimen.landscape_bottom_sheet_dialog_fragment_width);
+			window.setAttributes(params);
+		}
 	}
 
 	@Override

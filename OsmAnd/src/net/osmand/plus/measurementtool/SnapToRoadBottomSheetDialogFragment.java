@@ -9,6 +9,8 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.view.ViewTreeObserver;
+import android.view.Window;
+import android.view.WindowManager;
 import android.widget.ImageView;
 import android.widget.LinearLayout;
 import android.widget.TextView;
@@ -18,6 +20,7 @@ import net.osmand.plus.ApplicationMode;
 import net.osmand.plus.OsmandSettings;
 import net.osmand.plus.R;
 import net.osmand.plus.base.BottomSheetDialogFragment;
+import net.osmand.plus.helpers.AndroidUiHelper;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -78,6 +81,17 @@ public class SnapToRoadBottomSheetDialogFragment extends BottomSheetDialogFragme
 		});
 
 		return view;
+	}
+
+	@Override
+	public void onStart() {
+		super.onStart();
+		if (!AndroidUiHelper.isOrientationPortrait(getActivity())) {
+			final Window window = getDialog().getWindow();
+			WindowManager.LayoutParams params = window.getAttributes();
+			params.width = getActivity().getResources().getDimensionPixelSize(R.dimen.landscape_bottom_sheet_dialog_fragment_width);
+			window.setAttributes(params);
+		}
 	}
 
 	private int getNavBarHeight() {

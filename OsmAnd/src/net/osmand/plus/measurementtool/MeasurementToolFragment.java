@@ -62,6 +62,7 @@ import java.util.List;
 import java.util.Locale;
 
 import static net.osmand.plus.GPXUtilities.GPXFile;
+import static net.osmand.plus.OsmandSettings.LANDSCAPE_MIDDLE_RIGHT_CONSTANT;
 import static net.osmand.plus.OsmandSettings.MIDDLE_TOP_CONSTANT;
 import static net.osmand.plus.helpers.GpxImportHelper.GPX_SUFFIX;
 
@@ -471,7 +472,11 @@ public class MeasurementToolFragment extends Fragment {
 			}
 			OsmandMapTileView tileView = mapActivity.getMapView();
 			previousMapPosition = tileView.getMapPosition();
-			tileView.setMapPosition(MIDDLE_TOP_CONSTANT);
+			if (portrait) {
+				tileView.setMapPosition(MIDDLE_TOP_CONSTANT);
+			} else {
+				tileView.setMapPosition(LANDSCAPE_MIDDLE_RIGHT_CONSTANT);
+			}
 			mapActivity.refreshMap();
 		}
 	}
