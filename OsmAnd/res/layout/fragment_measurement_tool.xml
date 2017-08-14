@@ -52,7 +52,37 @@
                 android:layout_marginStart="16dp"
                 android:background="@null"
                 android:visibility="gone"
-                tools:src="@drawable/ic_action_measure_point"/>
+                tools:src="@drawable/ic_action_move_point"/>
+
+            <ImageView
+                android:id="@+id/add_point_after_icon"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_alignParentLeft="true"
+                android:layout_alignParentStart="true"
+                android:layout_centerVertical="true"
+                android:layout_marginEnd="16dp"
+                android:layout_marginLeft="16dp"
+                android:layout_marginRight="16dp"
+                android:layout_marginStart="16dp"
+                android:background="@null"
+                android:visibility="gone"
+                tools:src="@drawable/ic_action_addpoint_above"/>
+
+            <ImageView
+                android:id="@+id/add_point_before_icon"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_alignParentLeft="true"
+                android:layout_alignParentStart="true"
+                android:layout_centerVertical="true"
+                android:layout_marginEnd="16dp"
+                android:layout_marginLeft="16dp"
+                android:layout_marginRight="16dp"
+                android:layout_marginStart="16dp"
+                android:background="@null"
+                android:visibility="gone"
+                tools:src="@drawable/ic_action_addpoint_below"/>
 
             <ImageView
                 android:id="@+id/up_down_button"
@@ -105,6 +135,36 @@
                 android:layout_toEndOf="@id/move_point_icon"
                 android:layout_toRightOf="@id/move_point_icon"
                 android:text="@string/move_point"
+                android:textAppearance="@style/TextAppearance.ListItemTitle"
+                android:visibility="gone"/>
+
+            <TextView
+                android:id="@+id/add_point_after_text"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_centerVertical="true"
+                android:layout_marginEnd="4dp"
+                android:layout_marginLeft="8dp"
+                android:layout_marginRight="4dp"
+                android:layout_marginStart="8dp"
+                android:layout_toEndOf="@id/add_point_after_icon"
+                android:layout_toRightOf="@id/add_point_after_icon"
+                android:text="@string/add_point_after"
+                android:textAppearance="@style/TextAppearance.ListItemTitle"
+                android:visibility="gone"/>
+
+            <TextView
+                android:id="@+id/add_point_before_text"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_centerVertical="true"
+                android:layout_marginEnd="4dp"
+                android:layout_marginLeft="8dp"
+                android:layout_marginRight="4dp"
+                android:layout_marginStart="8dp"
+                android:layout_toEndOf="@id/add_point_before_icon"
+                android:layout_toRightOf="@id/add_point_before_icon"
+                android:text="@string/add_point_before"
                 android:textAppearance="@style/TextAppearance.ListItemTitle"
                 android:visibility="gone"/>
         </RelativeLayout>
@@ -225,7 +285,7 @@
         </LinearLayout>
 
         <RelativeLayout
-            android:id="@+id/move_point_mode_controls"
+            android:id="@+id/selected_point_controls"
             android:layout_width="match_parent"
             android:layout_height="52dp"
             android:visibility="gone">

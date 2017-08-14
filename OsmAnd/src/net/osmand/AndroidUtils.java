@@ -172,6 +172,27 @@ public class AndroidUtils {
 		return result;
 	}
 
+	public static int getNavBarHeight(Context ctx) {
+		if (!hasNavBar(ctx)) {
+			return 0;
+		}
+		boolean landscape = ctx.getResources().getConfiguration().orientation == Configuration.ORIENTATION_LANDSCAPE;
+		boolean isSmartphone = ctx.getResources().getConfiguration().smallestScreenWidthDp < 600;
+		if (isSmartphone && landscape) {
+			return 0;
+		}
+		int id = ctx.getResources().getIdentifier(landscape ? "navigation_bar_height_landscape" : "navigation_bar_height", "dimen", "android");
+		if (id > 0) {
+			return ctx.getResources().getDimensionPixelSize(id);
+		}
+		return 0;
+	}
+
+	public static boolean hasNavBar(Context ctx) {
+		int id = ctx.getResources().getIdentifier("config_showNavigationBar", "bool", "android");
+		return id > 0 && ctx.getResources().getBoolean(id);
+	}
+
 	public static int getScreenHeight(Activity activity) {
 		DisplayMetrics dm = new DisplayMetrics();
 		activity.getWindowManager().getDefaultDisplay().getMetrics(dm);

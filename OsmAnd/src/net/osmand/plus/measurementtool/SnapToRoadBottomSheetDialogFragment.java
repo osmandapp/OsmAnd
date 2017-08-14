@@ -64,8 +64,8 @@ public class SnapToRoadBottomSheetDialogFragment extends BottomSheetDialogFragme
 				final View scrollView = view.findViewById(R.id.navigation_types_scroll_view);
 				int scrollViewHeight = scrollView.getHeight();
 				int dividerHeight = AndroidUtils.dpToPx(getContext(), 1);
-				int cancelButtonHeight = getContext().getResources().getDimensionPixelSize(R.dimen.snap_to_road_bottom_sheet_cancel_button_height);
-				int spaceForScrollView = height - statusbarHeight - getNavBarHeight() - dividerHeight - cancelButtonHeight;
+				int cancelButtonHeight = getContext().getResources().getDimensionPixelSize(R.dimen.measure_distance_bottom_sheet_cancel_button_height);
+				int spaceForScrollView = height - statusbarHeight - AndroidUtils.getNavBarHeight(getActivity()) - dividerHeight - cancelButtonHeight;
 				if (scrollViewHeight > spaceForScrollView) {
 					scrollView.getLayoutParams().height = spaceForScrollView;
 					scrollView.requestLayout();
@@ -92,26 +92,5 @@ public class SnapToRoadBottomSheetDialogFragment extends BottomSheetDialogFragme
 			params.width = getActivity().getResources().getDimensionPixelSize(R.dimen.landscape_bottom_sheet_dialog_fragment_width);
 			window.setAttributes(params);
 		}
-	}
-
-	private int getNavBarHeight() {
-		if (!hasNavBar()) {
-			return 0;
-		}
-		boolean landscape = getResources().getConfiguration().orientation == Configuration.ORIENTATION_LANDSCAPE;
-		boolean isSmartphone = getResources().getConfiguration().smallestScreenWidthDp < 600;
-		if (isSmartphone && landscape) {
-			return 0;
-		}
-		int id = getResources().getIdentifier(landscape ? "navigation_bar_height_landscape" : "navigation_bar_height", "dimen", "android");
-		if (id > 0) {
-			return getResources().getDimensionPixelSize(id);
-		}
-		return 0;
-	}
-
-	private boolean hasNavBar() {
-		int id = getResources().getIdentifier("config_showNavigationBar", "bool", "android");
-		return id > 0 && getResources().getBoolean(id);
 	}
 }
