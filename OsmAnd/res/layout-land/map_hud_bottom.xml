@@ -268,4 +268,9 @@
         android:layout_gravity="bottom|left"
         tools:visibility="visible"/>
 
+    <FrameLayout
+        android:id="@+id/bottomFragmentContainer"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"/>
+
 </LinearLayout>

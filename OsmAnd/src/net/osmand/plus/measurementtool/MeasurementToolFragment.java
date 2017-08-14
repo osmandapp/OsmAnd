@@ -104,7 +104,6 @@ public class MeasurementToolFragment extends Fragment {
 		final int themeRes = nightMode ? R.style.OsmandDarkTheme : R.style.OsmandLightTheme;
 		final int backgroundColor = ContextCompat.getColor(getActivity(),
 				nightMode ? R.color.ctx_menu_info_view_bg_dark : R.color.ctx_menu_info_view_bg_light);
-		boolean portrait = AndroidUiHelper.isOrientationPortrait(mapActivity);
 
 		upIcon = iconsCache.getThemedIcon(R.drawable.ic_action_arrow_up);
 		downIcon = iconsCache.getThemedIcon(R.drawable.ic_action_arrow_down);
@@ -279,31 +278,29 @@ public class MeasurementToolFragment extends Fragment {
 
 		enterMeasurementMode();
 
-		if (portrait) {
-			toolBarController = new MeasurementToolBarController(newGpxLine);
-			if (newGpxLine != null) {
-				toolBarController.setTitle(getString(R.string.add_line));
-			} else {
-				toolBarController.setTitle(getString(R.string.measurement_tool_action_bar));
-			}
-			toolBarController.setOnBackButtonClickListener(new View.OnClickListener() {
-				@Override
-				public void onClick(View v) {
-					showQuitDialog(false);
-				}
-			});
-			toolBarController.setOnSaveViewClickListener(new View.OnClickListener() {
-				@Override
-				public void onClick(View v) {
-					if (measurementLayer.getPointsCount() > 0) {
-						saveAsNewSegment(mapActivity);
-					} else {
-						Toast.makeText(mapActivity, getString(R.string.none_point_error), Toast.LENGTH_SHORT).show();
-					}
-				}
-			});
-			mapActivity.showTopToolbar(toolBarController);
+		toolBarController = new MeasurementToolBarController(newGpxLine);
+		if (newGpxLine != null) {
+			toolBarController.setTitle(getString(R.string.add_line));
+		} else {
+			toolBarController.setTitle(getString(R.string.measurement_tool_action_bar));
 		}
+		toolBarController.setOnBackButtonClickListener(new View.OnClickListener() {
+			@Override
+			public void onClick(View v) {
+				showQuitDialog(false);
+			}
+		});
+		toolBarController.setOnSaveViewClickListener(new View.OnClickListener() {
+			@Override
+			public void onClick(View v) {
+				if (measurementLayer.getPointsCount() > 0) {
+					saveAsNewSegment(mapActivity);
+				} else {
+					Toast.makeText(mapActivity, getString(R.string.none_point_error), Toast.LENGTH_SHORT).show();
+				}
+			}
+		});
+		mapActivity.showTopToolbar(toolBarController);
 
 		adapter = new MeasurementToolAdapter(getMapActivity(), measurementLayer.getMeasurementPoints());
 		final RecyclerView rv = mainView.findViewById(R.id.measure_points_recycler_view);
@@ -701,8 +698,9 @@ public class MeasurementToolFragment extends Fragment {
 			measurementLayer.setInMeasurementMode(true);
 			mapActivity.refreshMap();
 			mapActivity.disableDrawer();
+			boolean portrait = AndroidUiHelper.isOrientationPortrait(mapActivity);
 
-			mark(View.INVISIBLE,
+			mark(portrait ? View.INVISIBLE : View.GONE,
 					R.id.map_left_widgets_panel,
 					R.id.map_right_widgets_panel,
 					R.id.map_center_info);
@@ -837,7 +835,10 @@ public class MeasurementToolFragment extends Fragment {
 		@Override
 		public void updateToolbar(MapInfoWidgetsFactory.TopToolbarView view) {
 			super.updateToolbar(view);
-			view.getShadowView().setVisibility(View.GONE);
+			View shadow = view.getShadowView();
+			if (shadow != null) {
+				shadow.setVisibility(View.GONE);
+			}
 		}
 	}
 }
