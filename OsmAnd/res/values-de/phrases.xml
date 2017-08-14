@@ -2752,8 +2752,8 @@
 
 	<string name="poi_counselling_type_addiction_yes">"Beratung (Sucht):  ja"</string>
 	<string name="poi_counselling_type_addiction_no">Beratung (Sucht): Nein</string>
-	<string name="poi_counselling_type_antenatal_yes">Beratung (vorgeburtliche): ja</string>
-	<string name="poi_counselling_type_antenatal_no">Beratung (vorgeburtliche): Nein</string>
+	<string name="poi_counselling_type_antenatal_yes">Beratung (Schwangerschaft): Ja</string>
+	<string name="poi_counselling_type_antenatal_no">Beratung (Schwangerschaft): Nein</string>
 	<string name="poi_counselling_type_child_guidance_yes">Beratung (Erziehung): ja</string>
 	<string name="poi_counselling_type_child_guidance_no">Beratung (Erziehung): Nein</string>
 	<string name="poi_counselling_type_couple_yes">Beratung (Paar): ja</string>
