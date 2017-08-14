@@ -70,7 +70,7 @@ public class MeasurementToolFragment extends Fragment {
 	public static final String TAG = "MeasurementToolFragment";
 
 	private final CommandManager commandManager = new CommandManager();
-	private RecyclerView rv;
+	private RecyclerView pointsRv;
 	private MeasurementToolBarController toolBarController;
 	private MeasurementToolAdapter adapter;
 	private TextView distanceTv;
@@ -311,12 +311,12 @@ public class MeasurementToolFragment extends Fragment {
 
 		adapter = new MeasurementToolAdapter(getMapActivity(), measurementLayer.getMeasurementPoints());
 		if (portrait) {
-			rv = mainView.findViewById(R.id.measure_points_recycler_view);
+			pointsRv = mainView.findViewById(R.id.measure_points_recycler_view);
 		} else {
-			rv = new RecyclerView(getActivity());
+			pointsRv = new RecyclerView(getActivity());
 		}
 		final ItemTouchHelper touchHelper = new ItemTouchHelper(new MeasurementToolItemTouchHelperCallback(adapter));
-		touchHelper.attachToRecyclerView(rv);
+		touchHelper.attachToRecyclerView(pointsRv);
 		adapter.setAdapterListener(new MeasurementToolAdapter.MeasurementAdapterListener() {
 
 			private int fromPosition;
@@ -334,7 +334,7 @@ public class MeasurementToolFragment extends Fragment {
 
 			@Override
 			public void onItemClick(View view) {
-				measurementLayer.moveMapToPoint(rv.indexOfChild(view));
+				measurementLayer.moveMapToPoint(pointsRv.indexOfChild(view));
 			}
 
 			@Override
@@ -355,8 +355,8 @@ public class MeasurementToolFragment extends Fragment {
 				}
 			}
 		});
-		rv.setLayoutManager(new LinearLayoutManager(getContext()));
-		rv.setAdapter(adapter);
+		pointsRv.setLayoutManager(new LinearLayoutManager(getContext()));
+		pointsRv.setAdapter(adapter);
 
 		return view;
 	}
@@ -492,7 +492,7 @@ public class MeasurementToolFragment extends Fragment {
 		if (mapActivity != null) {
 			PointsListFragment fragment = new PointsListFragment();
 			int screenHeight = AndroidUtils.getScreenHeight(mapActivity) - AndroidUtils.getStatusBarHeight(mapActivity);
-			fragment.setRv(rv);
+			fragment.setRecyclerView(pointsRv);
 			fragment.setWidth(upDownRow.getWidth());
 			fragment.setHeight(screenHeight - upDownRow.getHeight());
 			mapActivity.getSupportFragmentManager().beginTransaction()

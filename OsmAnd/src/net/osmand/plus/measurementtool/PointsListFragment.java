@@ -5,10 +5,13 @@ import android.support.annotation.Nullable;
 import android.support.v4.app.Fragment;
 import android.support.v4.content.ContextCompat;
 import android.support.v7.widget.RecyclerView;
+import android.view.Gravity;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
-import android.widget.LinearLayout;
+import android.widget.FrameLayout;
+import android.widget.ImageView;
+import android.widget.LinearLayout.LayoutParams;
 
 import net.osmand.plus.R;
 import net.osmand.plus.activities.MapActivity;
@@ -20,9 +23,9 @@ public class PointsListFragment extends Fragment {
 	private RecyclerView rv;
 	private int height;
 	private int width;
-	private LinearLayout ll;
+	private FrameLayout parent;
 
-	public void setRv(RecyclerView rv) {
+	public void setRecyclerView(RecyclerView rv) {
 		this.rv = rv;
 	}
 
@@ -42,20 +45,27 @@ public class PointsListFragment extends Fragment {
 		final int backgroundColor = ContextCompat.getColor(getActivity(),
 				nightMode ? R.color.ctx_menu_info_view_bg_dark : R.color.ctx_menu_info_view_bg_light);
 
-		ll = new LinearLayout(mapActivity);
-		ll.setLayoutParams(new LinearLayout.LayoutParams(width, height));
-		ll.setOrientation(LinearLayout.VERTICAL);
-		ll.setBackgroundColor(backgroundColor);
-		ll.addView(rv);
+		parent = new FrameLayout(mapActivity);
+		parent.setLayoutParams(new LayoutParams(width, height));
+		parent.setBackgroundColor(backgroundColor);
+		parent.addView(rv);
 
-		return ll;
+		ImageView shadow = new ImageView(mapActivity);
+		FrameLayout.LayoutParams params = new FrameLayout.LayoutParams(ViewGroup.LayoutParams.MATCH_PARENT, ViewGroup.LayoutParams.WRAP_CONTENT);
+		params.gravity = Gravity.BOTTOM;
+		shadow.setLayoutParams(params);
+		shadow.setScaleType(ImageView.ScaleType.FIT_XY);
+		shadow.setImageResource(R.drawable.bg_shadow_onmap);
+		parent.addView(shadow);
+
+		return parent;
 	}
 
 	@Override
 	public void onDestroyView() {
 		super.onDestroyView();
-		if (ll != null) {
-			ll.removeAllViews();
+		if (parent != null) {
+			parent.removeAllViews();
 		}
 	}
 }
