@@ -4,7 +4,6 @@ import android.content.res.Configuration;
 import android.os.Build;
 import android.os.Bundle;
 import android.support.annotation.Nullable;
-import android.util.DisplayMetrics;
 import android.view.ContextThemeWrapper;
 import android.view.LayoutInflater;
 import android.view.View;
@@ -53,9 +52,8 @@ public class SnapToRoadBottomSheetDialogFragment extends BottomSheetDialogFragme
 			navContainer.addView(row);
 		}
 
-		DisplayMetrics metrics = new DisplayMetrics();
-		getActivity().getWindowManager().getDefaultDisplay().getMetrics(metrics);
-		final int height = metrics.heightPixels;
+		final int height = AndroidUtils.getScreenHeight(getActivity());
+		final int statusbarHeight = AndroidUtils.getStatusBarHeight(getActivity());
 
 		view.getViewTreeObserver().addOnGlobalLayoutListener(new ViewTreeObserver.OnGlobalLayoutListener() {
 			@Override
@@ -64,7 +62,7 @@ public class SnapToRoadBottomSheetDialogFragment extends BottomSheetDialogFragme
 				int scrollViewHeight = scrollView.getHeight();
 				int dividerHeight = AndroidUtils.dpToPx(getContext(), 1);
 				int cancelButtonHeight = getContext().getResources().getDimensionPixelSize(R.dimen.snap_to_road_bottom_sheet_cancel_button_height);
-				int spaceForScrollView = height - getStatusBarHeight() - getNavBarHeight() - dividerHeight - cancelButtonHeight;
+				int spaceForScrollView = height - statusbarHeight - getNavBarHeight() - dividerHeight - cancelButtonHeight;
 				if (scrollViewHeight > spaceForScrollView) {
 					scrollView.getLayoutParams().height = spaceForScrollView;
 					scrollView.requestLayout();
@@ -80,15 +78,6 @@ public class SnapToRoadBottomSheetDialogFragment extends BottomSheetDialogFragme
 		});
 
 		return view;
-	}
-
-	private int getStatusBarHeight() {
-		int statusBarHeight = 0;
-		int resourceId = getResources().getIdentifier("status_bar_height", "dimen", "android");
-		if (resourceId > 0) {
-			statusBarHeight = getResources().getDimensionPixelSize(resourceId);
-		}
-		return statusBarHeight;
 	}
 
 	private int getNavBarHeight() {
