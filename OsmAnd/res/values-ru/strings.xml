@@ -2449,4 +2449,6 @@
     <string name="measurement_tool_action_bar">Просмотрите карту и добавьте точки</string>
     <string name="measurement_tool">Измерить расстояние</string>
     <string name="none_point_error">Необходимо добавить хотя бы одну точку.</string>
+    <string name="mapillary_image">Отправить изображение в Mapillary</string>
+    <string name="improve_coverage_mapillary">Улучшить фотопокрытие через Mapillary</string>
     </resources>
