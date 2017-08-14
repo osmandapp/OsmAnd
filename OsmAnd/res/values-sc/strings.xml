@@ -1355,7 +1355,7 @@ Memòria in proportzione %4$s MB (lìmite de Android %5$s MB, Dalvik %6$s MB).</
     <string name="loading_streets">Carrigamentu istradas…</string>
     <string name="loading_cities">Carrigamentu tzitades…</string>
     <string name="error_occurred_saving_gpx">Errore durante su sarvamentu de su GPX</string>
-    <string name="error_calculating_route">Errore de càlculu de s’àndala</string>
+    <string name="error_calculating_route">Errore in su càlculu de s\'àndala</string>
     <string name="error_calculating_route_occured">S’est verificadu un\'errore durante su càlculu de s’àndala</string>
     <string name="empty_route_calculated">Errore: s’àndala calculada est bòida</string>
     <string name="new_route_calculated_dist">Àndala noa calculada, distàntzia</string>

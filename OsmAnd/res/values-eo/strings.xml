@@ -462,7 +462,7 @@
     <string name="osmo_auto_send_locations_descr">Aŭtomate komenci registrigi ekskurson kaj sendi lokojn post starto de aplikaĵo</string>
     <string name="osmo_auto_send_locations">Aŭtomate ekigi ekskurs-registrilon</string>
     <string name="osmo_tracker_id">Kursospurila ID</string>
-    <string name="osmo_tracker_id_descr">Alklaku por vidi identigilon de kursospurilo</string>
+    <string name="osmo_tracker_id_descr">Premu por vidi identigilon de kursospurilo</string>
     <string name="osmo_connect_to_my_nickname">Kaŝnomo</string>
     <string name="osmo_plugin_name">OpenStreetMap Observado</string>
     <string name="osmo_plugin_description">Tiu ĉi kromprogramo parte liveras eblojn de la OpenStreetMap Observado, rigardu https://osmo.mobi 
@@ -480,7 +480,7 @@
     <string name="rendering_attr_OSMMapperAssistant_name">OSM-mapiga helpilo</string>
     <string name="shared_string_manage">Administri</string>
     <string name="agps_data_last_downloaded">Lasta elŝuto de A-GPS datumoj: %1$s</string>
-    <string name="confirm_usage_speed_cameras">En multaj landoj (Germanujo, Francujo, Italujo kaj aliaj) uzado de sciigoj pri rapid-kontroliloj estas kontraŭleĝa. Aŭtoroj de OsmAnd ne respondumos, se vi rompos leĝon. Bonvolu elekti \'Jes\' nur tiam kiam vi havas rajton por uzi tiun ĉi funkcion.</string>
+    <string name="confirm_usage_speed_cameras">En multaj landoj (Germanujo, Francujo, Italujo kaj aliaj) uzado de sciigoj pri rapid-kontroliloj estas kontraŭleĝa. Aŭtoroj de OsmAnd ne respondumos, se vi rompos leĝon. Bonvolu elekti ‘jes’ nur tiam kiam vi havas rajton por uzi tiun ĉi funkcion.</string>
     <string name="welcome_select_region">Por korekte prezenti trafiksignojn kaj regulojn, bonvolu elekti vian trafikan regionon:</string>
     <string name="welcome_text">OsmAnd ebligas uzi tutmondajn mapojn kaj navigadon eksterrete!</string>
     <string name="current_route">Nuna kurso</string>
@@ -739,7 +739,7 @@ Lon: %2$s</string>
 \nLa mondaj datumoj (inter 70-a norda kaj 70-a suda grado de latitudo) estas bazitaj sur mezuroj de la SRTM (Shuttle Radar Topography Mission) kaj de la ASTER (Advanced Spaceborne Thermal Emission and Reflection Radiometer), bildiga aparato en la Terra - ĉefa satelito de Sistemo de Tera Observado de NASA. ASTER estas kunlaboraĵo de NASA, de Japana Ministerio pri Ekonomio, Komerco kaj Industrio (METI) kaj de Japanaj Spacaj Sistemoj (J-spacesystems).</string>
     <string name="no_index_file_to_download">Elŝutoj ne trovitaj, bonvolu kontroli vian retkonekton.</string>
     <string name="select_index_file_to_download">Trovis nenion. Se vi ne povas trovi vian regionon, vi povas fari ĝin mem (rigardu http://osmand.net).</string>
-    <string name="none_selected_gpx">Neniu GPX-dosiero elektita. Por elekti bonvolu premteni disponeblan kurson.</string>
+    <string name="none_selected_gpx">Neniu GPX-dosiero elektita. Por elekti premtenu disponeblan kurson.</string>
     <string name="local_index_select_gpx_file">Elektu por montri</string>
     <string name="gpx_split_interval">Divid-intervalo</string>
     <string name="sort_by_distance">Ordigi laŭ distanco</string>
@@ -802,9 +802,9 @@ Lon: %2$s</string>
     <string name="loading_smth">Ŝargado de %1$s…</string>
     <string name="map_widget_plain_time">Nuna tempo</string>
     <string name="gpx_wpt">Navigadpunkto</string>
-    <string name="selected_gpx_info_show">
-
-Premtenu por vidi sur la mapo</string>
+    <string name="selected_gpx_info_show">"
+\n
+\nPremtenu por vidigi sur la mapo"</string>
     <string name="delay_navigation_start">Ekigi navigadon turnon-post-turno aŭtomate</string>
     <string name="local_index_gpx_info_show">\n\nPremtenu por montri agordojn</string>
     <string name="gpx_info_waypoints">Navigadpunktoj: %1$s</string>
@@ -844,14 +844,14 @@ Premtenu por vidi sur la mapo</string>
     <string name="osmo_edit_color">Vidiga koloro</string>
     <string name="osmo_group_info">Informoj</string>
     <string name="osmo_group">OsMo-grupo</string>
-    <string name="osmo_group_share">Por konekti la grupon %2$s, difinu grupan identigilon aŭ alklaku %3$s.</string>
+    <string name="osmo_group_share">Por konekti la grupon %2$s, difinu grupan identigilon aŭ premu %3$s.</string>
     <string name="osmo_share_connect_device">Permesu por permanenta spurado de tiu ĉi aparato</string>
     <string name="osmo_share_current_session">Kunhavigi nuntempan seancon per ret-foliumilo</string>
     <string name="osmo_share_session">Kunhavigi seancon</string>
     <string name="osmo_session_not_available">Seanco ne disponebla, bonvolu kontroli ĉu \'Sendi poziciojn\' estas ŝaltita.</string>
     <string name="osmo_show_group_notifications">Montri atentigojn pri grupo</string>
     <string name="osmo_session_id_share">Seanca retadreso por spuri aparaton (%1$s)</string>
-    <string name="osmo_tracker_id_share">Por konekti al cela aparato %2$s, alklaku ligilon %3$s aŭ difinu identigilon de kursospurilo (%1$s)</string>
+    <string name="osmo_tracker_id_share">Por konekti al cela aparato %2$s, premu ligilon %3$s aŭ difinu identigilon de kursospurilo (%1$s)</string>
     <string name="osmo_track_interval">Protokolada intervalo</string>
     <string name="osmo_track_interval_descr">Agordu oftecon de sendado de pozicio</string>
     <string name="int_days">tagoj</string>
@@ -1047,12 +1047,9 @@ Premtenu por vidi sur la mapo</string>
     <string name="gpx_file_name">Nomo de GPX-dosiero</string>
     <string name="gpx_saved_sucessfully">GPX-dosiero konservita sukcesa al {0}</string>
     <string name="use_distance_measurement_help">* Tuŝu por marki punkton.
-
- * Premtenu sur la mapo por forigi antaŭan punkton.
-
- * Premtenu punkton por vidi kaj aldoni priskribon.
-
- * Tuŝu mezur-fenestraĵon por vidi pliajn agojn.</string>
+\n* Premtenu sur la mapo por forigi antaŭan punkton.
+\n* Premtenu punkton por vidi kaj aldoni priskribon.
+\n* Tuŝu mezur-fenestraĵon por vidi pliajn agojn.</string>
     <string name="distance_measurement_start_editing">Ekigi redaktadon</string>
     <string name="distance_measurement_finish_editing">Fini redaktadon</string>
     <string name="distance_measurement_clear_route">Forviŝi ĉiujn punktojn</string>
@@ -1258,7 +1255,7 @@ Premtenu por vidi sur la mapo</string>
     <string name="bg_service_sleep_mode_on">Ĉesigi\n fon-laboradon de aplikaĵo</string>
     <string name="gps_wakeup_interval">GPS-a vekintervalo: %s</string>
     <string name="int_continuosly">Konstanta</string>
-    <string name="screen_is_locked">Por malŝlosi ekranon, tuŝetu simbolon de pendseruro</string>
+    <string name="screen_is_locked">Por malŝlosi ekranon, frapetu simbolon de pendseruro</string>
     <string name="map_widget_top_text">Stratnomo</string>
     <string name="map_widget_config">Agordi ekranon</string>
     <string name="map_widget_back_to_loc">Kie mi estas</string>
@@ -1345,7 +1342,7 @@ Proporcia memoro %4$s MB (limito de Android %5$s MB, Dalvik %6$s MB).</string>
     <string name="offline_navigation_not_available">OsmAnd eksterreta navigado estas dumtempe nealirebla.</string>
     <string name="left_side_navigation">Maldekstr-flanka trafiko</string>
     <string name="left_side_navigation_descr">Elektu por landoj kun maldekstr-flanka trafiko</string>
-    <string name="local_index_description">Alklaku ekzistantan elementon por vidi pli detalojn, premtenu por malaktivigi aŭ forigi. Datumoj en aparato nuntempe (%1$s malokupiĝa):</string>
+    <string name="local_index_description">Frapetu ekzistantan elementon por vidi pliajn detalojn, premtenu por malaktivigi aŭ forigi. Datumoj en aparato nuntempe (%1$s malokupiĝa):</string>
     <string name="unknown_location">Pozicio ankoraŭ ne estas konata</string>
     <string name="unknown_from_location">Komencpunkto ne estas ankoraŭ precizigita</string>
     <string name="modify_transparency">Modifi diafanecon (0 - travidebla, 255 - maldiafana)</string>
@@ -2253,7 +2250,7 @@ Se vi bezonas helpon pri OsmAnd aplikaĵo, bonvolu kontakti nian helpantaron: su
     <string name="get_for">Havigi ĝin por %1$s</string>
     <string name="get_for_month">Havigi ĝin por %1$s monatoj</string>
     <string name="osm_live_banner_desc">Havigu senlimigitan mapojn kaj map-ĝisdatigojn pli ofte ol unu foje en monato: ĉiusemajne, ĉiutage aŭ ĉiuhore.</string>
-    <string name="osmand_plus_banner_desc">Plena versio de OsmAnd kun senlimigitaj mapoj kaj ĝisdatigoj ĉiumonate.</string>
+    <string name="osmand_plus_banner_desc">Senlimigitaj map-elŝutoj, ĝisdatigoj kaj kromprogramo Vikipedio.</string>
     <string name="si_mi_meters">Mejloj/metroj</string>
     <string name="osm_live_payment_desc">Abon-pagoj estos prenitaj ĉiumonate. Vi ĉiam povos rezigni el la abono per Google Play.</string>
     <string name="donation_to_osm">Donacoj por OpenStreetMap-komunumo</string>
@@ -2309,7 +2306,7 @@ Se vi bezonas helpon pri OsmAnd aplikaĵo, bonvolu kontakti nian helpantaron: su
 \n 
 \nkaj pli…</string>
     <string name="trip_rec_notification_settings">Registrado de kurso (neniuj datumoj)</string>
-    <string name="trip_rec_notification_settings_desc">Montri sciigon, kiu ebligos ekigi registradon de kurso per premo de la butono \'registri\'</string>
+    <string name="trip_rec_notification_settings_desc">Montri sisteman sciigon kun eblo ekigi registradon de kurso</string>
     <string name="shared_string_notifications">Sciigoj</string>
     <string name="osmo_share_location">Kunhavigi</string>
     <string name="osmo_service_running">OsMo-servo estas aktiva</string>
@@ -2728,16 +2725,25 @@ Indikas lokon:  %1$s x %2$s"</string>
 \n</string>
     <string name="rendering_value_translucent_pink_name">Rozkolora diafana</string>
     <string name="quick_action_resume_pause_navigation">Daŭrigi/paŭzigi navigadon</string>
-    <string name="quick_action_resume_pause_navigation_descr">Premu tiun ĉi butonon por paŭzigi navigadon aŭ por reaktivigi ĝin se ĝi estas jam paŭzigita.</string>
-    <string name="quick_action_show_navigation_finish_dialog">Montri fenestron fini navigadon</string>
+    <string name="quick_action_resume_pause_navigation_descr">Premu tiun ĉi butonon por paŭzigi aŭ reaktivigi navigadon.</string>
+    <string name="quick_action_show_navigation_finish_dialog">Montri fenestron de navigada fino</string>
     <string name="quick_action_start_stop_navigation">Ekigi/ĉesigi navigadon</string>
-    <string name="quick_action_start_stop_navigation_descr">Premu tiun ĉi butonon por ekigi navigadon aŭ por ĉesigi ĝin se ĝi estas jam aktivigita.</string>
+    <string name="quick_action_start_stop_navigation_descr">Premu tiun ĉi butonon por ekigi aŭ ĉesigi navigadon.</string>
     <string name="live_monitoring_max_interval_to_send">Temp-bufro por enreta registrado</string>
     <string name="live_monitoring_max_interval_to_send_desrc">Difini temp-bufron por konservi sendendajn poziciojn seninterrete</string>
-    <string name="measurement_tool">Mezurilo</string>
+    <string name="measurement_tool">Distanc-mezurilo</string>
     <string name="mappilary_no_internet_desc">Vi bezonas interret-konekton por vidi fotojn de Mapillary</string>
     <string name="retry">Reprovi</string>
-<string name="measurement_tool_action_bar">Elektu pozicion sur la mapo kaj premu ‘aldoni’ por aldoni punkton por mezuri.</string>
+<string name="measurement_tool_action_bar">Esplori mapon kaj aldoni punktojn</string>
     <string name="add_gpx_waypoint_bottom_sheet_title">Aldoni GPX-navigadpunkton</string>
     <string name="shared_string_create">Krei</string>
+<string name="none_point_error">Bonvolu aldoni almenaŭ unu punkton.</string>
+    <string name="enter_gpx_name">GPX-dosiera nomo:</string>
+    <string name="show_on_map_after_saving">Montri sur mapo post konservi</string>
+    <string name="add_route_point">Aldoni kurs-punkton</string>
+    <string name="add_waypoint">Aldoni navigadpunkton</string>
+    <string name="save_gpx_waypoint">Konservi GPX-navigadpunkton</string>
+    <string name="save_route_point">Konservi kurs-punkton</string>
+    <string name="waypoint_one">Navigadpunkto 1</string>
+    <string name="route_point_one">Kurspunkto 1</string>
 </resources>

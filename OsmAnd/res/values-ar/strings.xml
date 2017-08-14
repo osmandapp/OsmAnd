@@ -956,7 +956,7 @@
     
 	<string name="copying_osmand_files">جاري نسخ ملفات بيانات OsmAnd…</string>
     <string name="guidance_preferences_descr">تفضيلات الملاحة</string>
-    <string name="interrupt_music_descr">الصوت يطالب مؤقتاً، وليس مجرد إخضاع، تشغيل الموسيقى</string>
+    <string name="interrupt_music_descr">الاشعارات الصوتية لا تخفض الموسيقى فقط بل توقفها مؤقتا</string>
 	<string name="interrupt_music">إيقاف الموسيقى</string>
 	
     <string name="loading_smth">جاري التحميل %1$s …</string>

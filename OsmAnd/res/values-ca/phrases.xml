@@ -3113,4 +3113,9 @@
 	<string name="poi_historic_period_principate">Període històric: principat (27 aC - 284 dC)</string>
 	<string name="poi_cuisine_baguette">Baguets</string>
 	<string name="poi_cuisine_pastel">Pastissos</string>
+	<string name="poi_historic_era_paleolithic">Període històric: paleolític (2,6 milions d\'anys - 10000 aC)</string>
+	<string name="poi_historic_era_mesolithic">Període històric: mesolític</string>
+	<string name="poi_historic_stone">Roca històrica</string>
+	<string name="poi_stone_type_coat_of_arms">Tipus: Escut d\'armes</string>
+
 	</resources>

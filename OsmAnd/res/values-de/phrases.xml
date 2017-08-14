@@ -568,7 +568,7 @@
 	<string name="poi_volcano">Vulkan</string>
 	<string name="poi_volleyball">Volleyball</string>
 	<string name="poi_waste_basket">Mülleimer</string>
-	<string name="poi_waste_disposal">Mülldeponie</string>
+	<string name="poi_waste_disposal">Müllcontainer</string>
 	<string name="poi_wastewater_plant">Abwasseranlage</string>
 	<string name="poi_craft_watchmaker">Uhrmacher</string>
 	<string name="poi_watermill">Wassermühle</string>
@@ -1132,7 +1132,7 @@
 	<string name="poi_backrest_yes">Rückenlehne: ja</string>
 	<string name="poi_backrest_no">Rückenlehne: nein</string>
 
-	<string name="poi_intermittent">wechselnd</string>
+	<string name="poi_intermittent">Zeitweise</string>
 
 	<string name="poi_deadlock">toter Punkt</string>
 
@@ -1425,7 +1425,7 @@
 	<string name="poi_windfall">Fallobst</string>
 	<string name="poi_dead_wood">Todwald</string>
 
-	<string name="poi_level">Stockwerk</string>
+	<string name="poi_level">In Etage</string>
 	<string name="poi_rtsa_scale">RTSA Skala</string>
 
 	<string name="poi_piste_difficulty_easy">Einfach</string>
@@ -2537,7 +2537,7 @@
 	<string name="poi_badminton">Federball</string>
 	<string name="poi_judo">Judo</string>
 	<string name="poi_disc_golf">Discgolf</string>
-	<string name="poi_rc_car">RC-Car-Rennen</string>
+	<string name="poi_rc_car">Modellautorennen</string>
 	<string name="poi_squash">Squash</string>
 	<string name="poi_shuffleboard">Shuffleboard</string>
 	<string name="poi_boxing">Boxen</string>
@@ -2752,8 +2752,8 @@
 
 	<string name="poi_counselling_type_addiction_yes">"Beratung (Sucht):  ja"</string>
 	<string name="poi_counselling_type_addiction_no">Beratung (Sucht): Nein</string>
-	<string name="poi_counselling_type_antenatal_yes">Beratung (vorgeburtliche): ja</string>
-	<string name="poi_counselling_type_antenatal_no">Beratung (vorgeburtliche): Nein</string>
+	<string name="poi_counselling_type_antenatal_yes">Beratung (Schwangerschaft): Ja</string>
+	<string name="poi_counselling_type_antenatal_no">Beratung (Schwangerschaft): Nein</string>
 	<string name="poi_counselling_type_child_guidance_yes">Beratung (Erziehung): ja</string>
 	<string name="poi_counselling_type_child_guidance_no">Beratung (Erziehung): Nein</string>
 	<string name="poi_counselling_type_couple_yes">Beratung (Paar): ja</string>

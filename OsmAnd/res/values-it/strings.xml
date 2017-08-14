@@ -2521,7 +2521,7 @@ Se ami OsmAnd e OSM e vuoi sostenerli, questo è un modo perfetto per farlo.</st
     <string name="osmo_service_running">Il servizio OsMo è avviato</string>
     <string name="rendering_value_fine_name">Sottile</string>
     <string name="upload_poi">Upload PDI</string>
-    <string name="route_roundabout_short">"Prendere la  %1$d uscita e proseguire"</string>
+    <string name="route_roundabout_short">Prendere la %1$d uscita e proseguire</string>
     <string name="wiki_around">Articoli Wikipedia vicini</string>
     <string name="search_map_hint">Cerca città o regione</string>
     <string name="show_legacy_search">Mostra la ricerca vecchia</string>
@@ -2711,8 +2711,8 @@ Rappresenta l\'area: %1$s x %2$s</string>
     <string name="subscribe_email_desc">Sottoscrivi la mailing list della nostra applicazione e avrai ulteriori 3 download di mappe!</string>
     <string name="quick_action_auto_zoom">Zoom della mappa automatico acceso/spento</string>
     <string name="quick_action_auto_zoom_desc">Toccando il pulsante azione accenderà o spegnerà lo zoom automatico della mappa in base alla tua velocità.</string>
-    <string name="quick_action_auto_zoom_on">Zoom della mappa automatico attivato</string>
-    <string name="quick_action_auto_zoom_off">Zoom della mappa automatico disattivato</string>
+    <string name="quick_action_auto_zoom_on">Abilita lo oom della mappa automatico della mappa</string>
+    <string name="quick_action_auto_zoom_off">Disattiva lo zoom automatico della mappa</string>
     <string name="quick_action_add_destination">Aggiungi una destinazione</string>
     <string name="quick_action_replace_destination">Sostituisci la destinazione</string>
     <string name="quick_action_add_first_intermediate">Aggiungi il primo intermedio</string>
@@ -2845,10 +2845,10 @@ Copertura e qualità approssimativamente:
     <string name="store_tracks_in_monthly_directories">Salva le tracce registrate in cartelle mensili</string>
     <string name="store_tracks_in_monthly_directories_descrp">Salva le tracce registrate in sottocartelle per mese di registrazione (come 2017-01).</string>
     <string name="shared_string_reset">Reimposta</string>
-    <string name="quick_action_resume_pause_navigation_descr">Premi il pulsante per mettere in pausa la navigazione, oppure per riprenderla se è già in pausa.</string>
-    <string name="quick_action_show_navigation_finish_dialog">Mostra la finestra di dialogo Fine</string>
-    <string name="quick_action_start_stop_navigation">Inizio/Fine Navigazione</string>
-    <string name="quick_action_start_stop_navigation_descr">Premi questo pulsante per avviare la navigazione, o per fermarla se già avviata.</string>
+    <string name="quick_action_resume_pause_navigation_descr">Premi il pulsante per mettere in pausa o riprendere la navigazione.</string>
+    <string name="quick_action_show_navigation_finish_dialog">Mostra la finestra di dialogo Fine navigazione</string>
+    <string name="quick_action_start_stop_navigation">Avvia/ferma navigazione</string>
+    <string name="quick_action_start_stop_navigation_descr">Premi questo pulsante per avviare o fermare la navigazione.</string>
     <string name="rendering_value_translucent_pink_name">Rosa traslucido</string>
     <string name="average">Media</string>
     <string name="of">%1$d di %2$d</string>
@@ -2856,16 +2856,19 @@ Copertura e qualità approssimativamente:
     <string name="moving_time">Tempo in movimento</string>
     <string name="max_min">Max/Min</string>
     <string name="min_max">Min/Max</string>
-    <string name="quick_action_resume_pause_navigation">Riprendi/Sospendi la Navigazione</string>
-    <string name="release_2_7">\\022 Componente aggiuntivo Mapillary con immagini stradali
-\n
-\n • Widget righello per la misurazione della distanza
-\n
-\n • Informazioni dettagliate e suddivisore delle tue tracce GPX
-\n
+    <string name="quick_action_resume_pause_navigation">Riprendi/sospendi la navigazione</string>
+    <string name="release_2_7">• Componente aggiuntivo Mapillary con immagini stradali 
+\n 
+\n • Widget righello per la misurazione della distanza 
+\n 
+\n • Informazioni dettagliate e suddivisore delle tue tracce GPX 
+\n 
 \n • Altre migliorie e correzioni di errori
 \n
 \n</string>
-    <string name="measurement_tool_action_bar">Seleziona una posizione sulla mappa e clicca Aggiungi per aggiungere un punto al righello.</string>
-    <string name="measurement_tool">Righello</string>
+    <string name="measurement_tool_action_bar">Esplora la mappa e aggiungi punti</string>
+    <string name="measurement_tool">Distanziometro</string>
+    <string name="none_point_error">Aggiungi almeno un punto.</string>
+    <string name="enter_gpx_name">Nome del file GPX:</string>
+    <string name="show_on_map_after_saving">Mostra sulla mappa dopo averlo salvato</string>
     </resources>

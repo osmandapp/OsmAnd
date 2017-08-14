@@ -183,7 +183,9 @@
     <string name="shared_string_no_thanks">Není potřeba</string>
     <string name="basemap_missing">Chybí základní mapa světa (pokrývající celý svět v malém přiblížení). Prosím zvažte stažení World_basemap_x.obf pro celkový přehled.</string>
     <string name="vector_data_missing">Na SD kartě nejsou uložena žádná off-line data. Prosím zvažte jejich stažení pro použití bez připojení k Internetu.</string>
-    <string name="local_index_gpx_info_show">\n\nDlouhým kliknutím zobrazíte na mapě</string>
+    <string name="local_index_gpx_info_show">"
+\n
+\nStiskněte a podržte pro možnosti"</string>
     <string name="local_index_installed">Místní verze</string>
     <string name="local_index_items_backuped">Zálohováno %1$d položek z %2$d.</string>
     <string name="local_index_items_deleted">Smazáno %1$d položek z %2$d.</string>
@@ -786,7 +788,7 @@ Proporcionální paměť %4$s MB (limit Androidu %5$s MB, Dalvik %6$s MB).</stri
     <string name="bg_service_screen_lock">Zámek obrazovky</string>
     <string name="bg_service_screen_lock_toast">Obrazovka je zamčena</string>
     <string name="bg_service_interval">Interval sledování polohy:</string>
-    <string name="screen_is_locked">Klikněte na ikonu zámku pro odemčení obrazovky</string>
+    <string name="screen_is_locked">Stiskněte ikonu zámku pro odemčení obrazovky</string>
     <string name="bg_service_screen_unlock">Odemknout obrazovku</string>
     <string name="bg_service_sleep_mode_off">Zapnout\nslužbu na pozadí</string>
     <string name="bg_service_sleep_mode_on">Vypnout\nslužbu na pozadí</string>
@@ -1011,13 +1013,10 @@ Proporcionální paměť %4$s MB (limit Androidu %5$s MB, Dalvik %6$s MB).</stri
     <string name="gpx_file_name">Jméno GPX souboru</string>
     <string name="gpx_saved_sucessfully">Soubor GPX úspěšně uložen do {0}</string>
     <string name="osmand_distance_planning_plugin_name">Výpočet vzdálenosti a plánovač</string>
-    <string name="use_distance_measurement_help">* Klikněte pro označení bodu.
-
- * Stiskněte dlouze na mapě pro smazání předchozího bodu.
-
- * Stiskněte dlouze bod pro zobrazení a přidání popisku.
-
- * Klikněte na modul měření pro další možnosti.</string>
+    <string name="use_distance_measurement_help">* Stiskněte pro označení bodu.
+\n* Stiskněte dlouze na mapě pro smazání předchozího bodu.
+\n* Stiskněte dlouze bod pro zobrazení a přidání popisku.
+\n* Stiskněte nástroj měření pro další možnosti.</string>
     <string name="shared_string_do_not_show_again">Již nezobrazovat</string>
     <string name="distance_measurement_start_editing">Začít editaci</string>
     <string name="distance_measurement_finish_editing">Ukončit editaci</string>
@@ -1224,13 +1223,13 @@ Proporcionální paměť %4$s MB (limit Androidu %5$s MB, Dalvik %6$s MB).</stri
     <string name="osmo_edit_color">Zobrazit barvu</string>
     <string name="osmo_group_info">Informace</string>
     <string name="osmo_group">Skupina OsMo</string>
-    <string name="osmo_group_share">Aby se bylo možné připojit ke skupině %2$s, určete id skupiny (%1$s) nebo klikněte %3$s.</string>
+    <string name="osmo_group_share">Aby se bylo možné připojit ke skupině %2$s, určete id skupiny (%1$s) nebo stiskněte %3$s.</string>
     <string name="osmo_share_connect_device">Trvale sledovat toto zařízení</string>
     <string name="osmo_share_current_session">Sdílet aktuální relaci v prohlížeči</string>
     <string name="osmo_session_not_available">Relace není k dispozici, prosím zkontrolujte že je zapnuta volba \'Odesílat pozice\'.</string>
     <string name="osmo_share_session">Sdílet relaci</string>
     <string name="osmo_session_id_share">Relace URL k sledování zařízení (%1$s)</string>
-    <string name="osmo_tracker_id_share">Aby bylo možné připojit cílové zařízení %2$s, klikněte na link %3$s nebo určete ID sledovaného zařízení (%1$s)</string>
+    <string name="osmo_tracker_id_share">Aby bylo možné připojit cílové zařízení %2$s, stiskněte link %3$s nebo určete ID sledovaného zařízení (%1$s)</string>
     <string name="osmo_track_interval">Interval logování</string>
     <string name="osmo_track_interval_descr">Vyberte časový interval odesílání polohy</string>
     <string name="int_days">dnů</string>
@@ -1258,14 +1257,14 @@ Proporcionální paměť %4$s MB (limit Androidu %5$s MB, Dalvik %6$s MB).</stri
     <string name="osmo_auto_send_locations_descr">Automaticky spustit cestu a odesílat polohu po spuštění aplikace</string>
     <string name="osmo_auto_send_locations">Automaticky spustit cestu</string>
     <string name="osmo_tracker_id">ID sledovaného zařízení</string>
-    <string name="osmo_tracker_id_descr">Klikněte pro zobrazení ID sledovaného zařízení</string>
+    <string name="osmo_tracker_id_descr">Stiskněte pro zobrazení ID sledovaného zařízení</string>
     <string name="osmo_session_token">Token relace: %1$s</string>
     <string name="osmo_auth_pending">Čekání na autorizaci…</string>
     <string name="osmo_locations_sent">Odeslané polohy %1$d (v zásobníku %2$d) </string>
     <string name="osmo_conn_successfull">Vytvořená spojení: %1$s </string>
     <string name="osmo_io_error">Problém s připojením OsMo: </string>
     <string name="osmo_settings_uuid">Jedinečné ID zařízení</string>
-    <string name="interrupt_music_descr">Přerušit hudbu při oznámení</string>
+    <string name="interrupt_music_descr"/>
     <string name="interrupt_music">Pozastavit hudbu</string>
     <string name="share_route_as_gpx">Sdílet trasu jako GPX soubor</string>
     <string name="share_route_subject">Trasa sdílena pomocí OsmAnd</string>
@@ -1323,7 +1322,9 @@ Proporcionální paměť %4$s MB (limit Androidu %5$s MB, Dalvik %6$s MB).</stri
     <string name="gpx_selection_points">%1$s \nBody</string>
     <string name="gpx_selection_track">%1$s \nTrasa %2$s</string>
     <string name="gpx_wpt">Bod na trase</string>
-    <string name="selected_gpx_info_show">\n\nStiskněte a podržte pro zobrazení na mapě</string>
+    <string name="selected_gpx_info_show">"
+\n
+\nStiskněte a podržte pro zobrazení na mapě"</string>
     <string name="save_as_favorites_points">Uložit jako skupinu oblíbených</string>
     <string name="select_destination_and_intermediate_points">Vybrat cíle</string>
     <string name="layer_amenity_label">Popisky bodů</string>
@@ -1340,7 +1341,7 @@ Proporcionální paměť %4$s MB (limit Androidu %5$s MB, Dalvik %6$s MB).</stri
     <string name="osmo_start_service">OsMo služba</string>
     <string name="osmo_gpx_track_downloaded">OsMo trasa %1$s stažena.</string>
     <string name="no_index_file_to_download">Není nic ke stažení, prosím zkontrolujte své připojení k Internetu.</string>
-    <string name="none_selected_gpx">Nebyl vybrán žádný GPX soubor. Podržením vyberte z dostupných tras.</string>
+    <string name="none_selected_gpx">Nebyl vybrán žádný GPX soubor. Podržením vyberte jednu z dostupných tras.</string>
     <string name="rendering_attr_hideBuildings_name">Budovy</string>
     <string name="rendering_attr_hideText_name">Text</string>
     <string name="rendering_attr_hideWoodScrubs_name">Lesy a křoviny</string>
@@ -1443,7 +1444,7 @@ Proporcionální paměť %4$s MB (limit Androidu %5$s MB, Dalvik %6$s MB).</stri
     <string name="traffic_warning_speed_camera">Rychlostní radar</string>
     <string name="traffic_warning">Dopravní varování</string>
     <string name="route_descr_destination">Cíl</string>
-    <string name="local_index_description">Klikněte na existující položku k zobrazení více detailů, podržte pro vypnutí nebo smazání. V zařízení je %1$s volného místa:</string>
+    <string name="local_index_description">Stiskněte existující položku k zobrazení více detailů, podržte pro vypnutí nebo smazání. V zařízení je %1$s volného místa:</string>
     <string name="text_size">Velikost písma</string>
     <string name="text_size_descr">Nastavit velikost písma na mapě.</string>
     <string name="fav_point_dublicate">Název oblíbeného bodu je již použit</string>
@@ -2268,7 +2269,7 @@ Pokud máte rádi OsmAnd a OSM a chcete je podpořit, toto je výborný způsob,
     <string name="get_for">Získat za %1$s</string>
     <string name="get_for_month">Získat za %1$s měsíčně</string>
     <string name="osm_live_banner_desc">Získejte neomezené stahování map a aktualizace více než jednou za měsíc: každý týden, den nebo hodinu.</string>
-    <string name="osmand_plus_banner_desc">Plná verze OsmAnd s neomezeným stahováním map a měsíčními aktualizacemi.</string>
+    <string name="osmand_plus_banner_desc">Neomezené stahování map, aktualizací a modul Wikipedie.</string>
     <string name="si_mi_meters">Míle/metry</string>
     <string name="lang_hsb">Hornolužická srbština</string>
     <string name="gpx_no_tracks_title">Nemáte zatím žádné trasy</string>
@@ -2279,7 +2280,7 @@ Pokud máte rádi OsmAnd a OSM a chcete je podpořit, toto je výborný způsob,
     <string name="osmo_pause_location">Pozastavit</string>
     <string name="osmo_service_running">Služba OsMo běží</string>
     <string name="trip_rec_notification_settings">Záznam cesty (žádná data)</string>
-    <string name="trip_rec_notification_settings_desc">Zobrazit oznámení, které umožňuje spouštět nahrávání cesty stisknutím tlačítka „Záznam“</string>
+    <string name="trip_rec_notification_settings_desc">Zobrazit systémové oznámení, které umožňuje spustit nahrávání</string>
     <string name="shared_string_notifications">Oznámení</string>
     <string name="shared_string_continue">Pokračovat</string>
     <string name="shared_string_pause">Pozastavit</string>
@@ -2328,18 +2329,18 @@ Pokud máte rádi OsmAnd a OSM a chcete je podpořit, toto je výborný způsob,
     <string name="wiki_around">Články Wikipedie v okolí</string>
     <string name="search_map_hint">Hledat město nebo oblast</string>
     <string name="show_legacy_search_desc">Přidat starší hledání do úvodního panelu</string>
-    <string name="release_2_5">• Klikatelné ikony na mapě
+    <string name="release_2_5">\\022 Klikatelné ikony na mapě 
 \n 
-\n • Podrobné filtrování POI: Například hledání restaurace dle kuchyně, kempy se speciálními službami, apod.
-\n
-\n • Nový styl topo mapy pro cyklisty a turisty
-\n
-\n • Vylepšení nahrávání cesty
-\n
-\n • Vylepšené notifikace navigace (Android Wear)
-\n
-\n • Mnohá další vylepšení a opravy chyb
-\n
+\n • Podrobné filtrování POI: Například hledání restaurace dle kuchyně, kempy se speciálními službami, apod. 
+\n 
+\n • Nový styl topo mapy pro cyklisty a turisty 
+\n 
+\n • Vylepšení nahrávání cesty 
+\n 
+\n • Vylepšené notifikace navigace (Android Wear) 
+\n 
+\n • Mnohá další vylepšení a opravy chyb 
+\n 
 \n a další…</string>
     <string name="release_2_3">• OSM Live. Podpořte tvůrce map a vývojáře a získejte aktualizace map každou hodinu.
 \n
@@ -2433,7 +2434,7 @@ Pokud máte rádi OsmAnd a OSM a chcete je podpořit, toto je výborný způsob,
     <string name="quick_action_map_source_action">Přidat zdroj mapy</string>
     <string name="quick_action_map_source_switch">Zdroj mapy se změnil na \"%s\".</string>
     <string name="quick_action_btn_tutorial_title">Změnit polohu tlačítka</string>
-    <string name="quick_action_btn_tutorial_descr">Dlouze klepněte a přetáhněte tlačítko pro změnu jeho umístění na obrazovce</string>
+    <string name="quick_action_btn_tutorial_descr">Dlouze stiskněte a přetáhněte tlačítko pro změnu jeho umístění na obrazovce</string>
 	<string name="shared_string_action_name">Název akce</string>
 <string name="navigate_point_olc_info_invalid">Neplatný OLC
 </string>
@@ -2676,11 +2677,11 @@ Pokud potřebujete pomoci s aplikací OsmAnd, prosím kontaktujte naši podporu
     <string name="max_min">Max/Min</string>
     
     <string name="min_max">Min/Max</string>
-    <string name="quick_action_resume_pause_navigation">Pokračovat/Pozastavit navigaci</string>
-    <string name="quick_action_resume_pause_navigation_descr">Stiskněte toto tlačítko na pozastavení navigace, nebo pokračování pokud je pozastavená.</string>
+    <string name="quick_action_resume_pause_navigation">Pokračovat/pozastavit navigaci</string>
+    <string name="quick_action_resume_pause_navigation_descr">Stiskněte toto tlačítko na pozastavení, nebo pokračování navigace.</string>
     <string name="quick_action_show_navigation_finish_dialog">Zobrazit zprávu o ukončení navigace</string>
-    <string name="quick_action_start_stop_navigation">Spustit/Ukončit navigaci</string>
-    <string name="quick_action_start_stop_navigation_descr">Stiskněte toto tlačítko pro spuštění navigace, nebo zastavení, pokud již byla spuštěna.</string>
+    <string name="quick_action_start_stop_navigation">Spustit/ukončit navigaci</string>
+    <string name="quick_action_start_stop_navigation_descr">Stiskněte toto tlačítko pro spuštění, nebo zastavení navigace.</string>
     <string name="release_2_7">"\\022 Modul Mapillary se snímky ulic
 \n
 \n • Pravítko pro měření vzdálenosti
@@ -2691,9 +2692,19 @@ Pokud potřebujete pomoci s aplikací OsmAnd, prosím kontaktujte naši podporu
 \n
 \n"</string>
     <string name="rendering_value_translucent_pink_name">Průhledná růžová</string>
-    <string name="none_point_error">Musíte přidat alespoň jeden bod.</string>
-    <string name="enter_gpx_name">Zadejte název pro GPX</string>
+    <string name="none_point_error">Prosím přidejte alespoň jeden bod.</string>
+    <string name="enter_gpx_name">Název souboru GPX:</string>
     <string name="show_on_map_after_saving">Po uložení zobrazit na mapě</string>
-    <string name="measurement_tool_action_bar">Prohlížet mapu a přidat body do linie</string>
+    <string name="measurement_tool_action_bar">Prohlížet mapu a přidat body</string>
     <string name="measurement_tool">Měřit vzdálenost</string>
-    </resources>
+    <string name="live_monitoring_max_interval_to_send">Časový zásobník pro online sledování</string>
+    <string name="live_monitoring_max_interval_to_send_desrc">Zadejte čas pro podržení pozic k odeslání, pokud není připojení</string>
+    <string name="mappilary_no_internet_desc">Pro zobrazení fotografií z Mapillary potřebujete Internet</string>
+    <string name="retry">Zkusit znovu</string>
+    <string name="add_route_point">Přidat bod trasy</string>
+    <string name="add_waypoint">Přidat trasový bod</string>
+    <string name="save_gpx_waypoint">Uložit trasový bod GPX</string>
+    <string name="save_route_point">Uložit bod trasy</string>
+    <string name="waypoint_one">Trasový bod 1</string>
+    <string name="route_point_one">Bod trasy 1</string>
+</resources>

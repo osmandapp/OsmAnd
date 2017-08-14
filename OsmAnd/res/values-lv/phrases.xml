@@ -80,8 +80,8 @@
 	<string name="poi_vacuum_cleaner_filter">Putekļsūcējs</string>
 	<string name="poi_shop">Veikali</string>
 	<string name="poi_shop_food">Pārtikas veikali un lielveikali</string>
-	<string name="poi_emergency">Ārkārtas dienesti</string>
-	<string name="poi_emergency_infrastructure">Ārkārtas dienestu infrastruktūra</string>
+	<string name="poi_emergency">Palīdzības dienesti</string>
+	<string name="poi_emergency_infrastructure">Palīdzības dienestu infrastruktūra</string>
 	<string name="poi_transportation">Transports</string>
 	<string name="poi_road_obstacle">Ceļa šķēršļi</string>
 	<string name="poi_filling_station">Degvielas uzpildes stacijas</string>
@@ -310,7 +310,7 @@
 	<string name="poi_herbalist">Augu un zāļu veikals</string>
 	<string name="poi_tableware">Virtuves trauki</string>
 	<string name="poi_model">Modelēšana</string>
-	<string name="poi_emergency_access_point">Ārkārtas situācijas infodēlis</string>
+	<string name="poi_emergency_access_point">Palīdzības infodēlis</string>
 
 	<string name="poi_traffic_calming_chicane">Guļošie policisti (cits)</string>
 	<string name="poi_traffic_calming_rumble_strip">Guļošie policisti (cits)</string>
@@ -515,7 +515,7 @@
 	<string name="poi_newspaper">Izdevniecība</string>
 	<string name="poi_architect">Arhitektūra</string>
 	<string name="poi_advertising_agency">Reklāmas ağentūra</string>
-	<string name="poi_educational_institution">Izglītības institūts</string>
+	<string name="poi_educational_institution">Izglītības iestāde</string>
 	<string name="poi_studio">Studija</string>
 	<string name="poi_bookmaker">Bukmeikers</string>
 	<string name="poi_office_religion">Reliğiskā organizācija</string>
@@ -2902,8 +2902,8 @@
 	<string name="poi_treat_inpatient_only">Stacionārie pakalpojumi: tikai</string>
 	<string name="poi_counselling_yes">Konsultācijas: ir</string>
 	<string name="poi_counselling_no">Konsultācijas: nav</string>
-	<string name="poi_emergency_yes">Ārkārtas servisi: ir</string>
-	<string name="poi_emergency_no">Ārkārtas servisi: nav</string>
+	<string name="poi_emergency_yes">Palīdzības dienesti: ir</string>
+	<string name="poi_emergency_no">Palīdzības dienesti: nav</string>
 	<string name="poi_disease_ebola_yes">Ebola: jā</string>
 	<string name="poi_disease_ebola_no">Ebola: nē</string>
 	<string name="poi_disease_autism_yes">Autisms: jā</string>

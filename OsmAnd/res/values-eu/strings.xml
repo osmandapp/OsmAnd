@@ -2342,7 +2342,7 @@ mapak eta nabigazioa</string>
     <string name="get_for">Eskuratu %1$sren truke</string>
     <string name="get_for_month">Eskuratu hilean %1$s(r)en truke</string>
     <string name="osm_live_banner_desc">Deskargatu nahi beste mapa, eta jaso mapen eguneraketak hilean behin baino sarriago: astero, egunero, edo orduero.</string>
-    <string name="osmand_plus_banner_desc">OsmAnd bertsio osoa mapen deskarga mugagabearekin eta hileroko mapen eguneraketa.</string>
+    <string name="osmand_plus_banner_desc">Mapen deskarga eta eguneraketa mugagabea, Wikipedia plugina.</string>
     <string name="si_mi_meters">Miliak/metroak</string>
     <string name="get_it">Eskuratu</string>
     <string name="osm_live_payment_desc">Harpidetzaren kuota hilabetero kargatuko da. Zure harpidetza noiznahi eten dezakezu Google Play bitartez.</string>

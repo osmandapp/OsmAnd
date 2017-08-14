@@ -2444,4 +2444,11 @@
     <string name="distance_moving">Откорректированное расстояние</string>
     <string name="improve_coverage_install_mapillary_desc">Вы можете взять ваши собственные фотографии или серии фотографий и прикрепить их к этому месту на карте. Для этого Вам необходимо установить с Goggle Play маркета приложение Mapillary.</string>
     <string name="route_altitude">Высота маршрута</string>
+    <string name="enter_gpx_name">Имя GPX файла:</string>
+    <string name="show_on_map_after_saving">Показать на карте после сохранения</string>
+    <string name="measurement_tool_action_bar">Просмотрите карту и добавьте точки</string>
+    <string name="measurement_tool">Измерить расстояние</string>
+    <string name="none_point_error">Необходимо добавить хотя бы одну точку.</string>
+    <string name="mapillary_image">Отправить изображение в Mapillary</string>
+    <string name="improve_coverage_mapillary">Улучшить фотопокрытие через Mapillary</string>
     </resources>

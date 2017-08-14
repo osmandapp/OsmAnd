@@ -42,7 +42,7 @@
     <string name="index_srtm_parts">dele</string>
     <string name="index_srtm_ele">Højdekurver</string>
     <string name="srtm_plugin_description">"Udvidelsen giver både en højdekurver overlejring og et reliefskygger, der vises ovenpå OsmAnds standard kort. Funktionaliteten er meget værdsat af sportsfolk, vandrere, og enhver interesseret i en relief struktur af landskabet.(Bemærk, at højdekurver og/eller relieflag er separate, yderligere data er tilgængelige efter aktivering af udvidelse.) 
-\n 
+\n
 \nDe globale data (mellem 70 grader nord og 70 grader syd) er baseret på målinger af SRTM (Shuttle Radar Topografi Mission) og ASTER (Advanced Spaceborne Thermal Emission and Reflection Radiometer), et billeddannende instrument ombord på Terra satellitten, flagskibet i NASAs Earth Observering system. ASTER er et samarbejde mellem NASA, Japans Ministry of Economy, Trade and Industry  (METI), og Japan Space Systems (J-spacesystems)."</string>
     <string name="srtm_plugin_name">Højdekurver</string>
     <string name="download_select_map_types">Andre kort</string>
@@ -140,7 +140,7 @@
     <string name="av_use_external_camera">Brug kamera</string>
 
     <string name="monitoring_control_start">GPX</string>
-    <string name="route_descr_lat_lon">Lat %1$.3f, Long %2$.3f</string>
+    <string name="route_descr_lat_lon">Lat %1$.3f, Lon %2$.3f</string>
     <string name="intermediate_point">Mellemliggende destination %1$s</string>
     <string name="snap_to_road_descr">Hold position på vejen under navigation</string>
     <string name="snap_to_road">Fastgør til vejen</string>
@@ -400,7 +400,7 @@ OSM er et i fællesskab drevet, globalt offentligt domæne kortlægningsprojekt.
 
     <string name="live_monitoring_interval_descr">Indstil interval for onlinesporing</string>
     <string name="live_monitoring_interval">Interval for online sporing</string>
-    <string name="live_monitoring_url_descr">Angiv webadressen med parametersyntaks: lat={0}, long={1}, tidspunkt={2}, hdop={3}, højde={4}, hastighed={5}, kurs={6}</string>
+    <string name="live_monitoring_url_descr">Angiv webadressen med parametersyntaks: lat={0}, lon={1}, tidspunkt={2}, hdop={3}, højde={4}, hastighed={5}, kurs={6}</string>
     <string name="live_monitoring_url">Webadresse for online sporing</string>
     <string name="gpx_monitoring_disabled_warn">Log spor med GPX modul eller via indstillinger \'Tur optagelse\'.</string>
     <string name="show_current_gpx_title">Vis aktuelt spor</string>
@@ -1022,7 +1022,7 @@ OSM er et i fællesskab drevet, globalt offentligt domæne kortlægningsprojekt.
     <string name="app_mode_pedestrian">Fodgænger</string>
     <string name="position_on_map_center">Centrum</string>
     <string name="position_on_map_bottom">Bunden</string>
-    <string name="navigate_point_top_text">Angiv bredde(lat)- og længdegrad(long) i det valgte format (D - grader, M - minutter, S - sekunder)</string>
+    <string name="navigate_point_top_text">Angiv bredde(lat)- og længdegrad(lon) i det valgte format (D - grader, M - minutter, S - sekunder)</string>
     <string name="navigate_point_latitude">Breddegrad</string>
     <string name="navigate_point_longitude">Længdegrad</string>
     <string name="navigate_point_format_D">DDD.DD</string>
@@ -1701,7 +1701,9 @@ OSM er et i fællesskab drevet, globalt offentligt domæne kortlægningsprojekt.
 \nEt særligt kort er ikke nødvendigt, visningen er skabt ud fra standardkort. 
 \n
 \nVisningen kan altid nulstilles ved enten at deaktivere den igen her, eller ved at ændre \'Kortformat\' under \'Konfigurer kort\' som ønsket.</string>
-    <string name="location_on_map">Placering:\n Lat %1$s\n Long %2$s</string>
+    <string name="location_on_map">Placering:
+\n Lat %1$s
+\n Lon %2$s</string>
     <string name="days_behind">dage gammel</string>
     <string name="rename_failed">Fejl ved omdøbning.</string>
     <string name="back_to_map">Tilbage til kortet</string>
@@ -1782,8 +1784,8 @@ OSM er et i fællesskab drevet, globalt offentligt domæne kortlægningsprojekt.
 
     <string name="simulate_your_location">Simuler position</string>
     <string name="drawer">Enkel liste</string>
-    <string name="short_location_on_map">Lat %1$s
-Lon %2$s</string>
+    <string name="short_location_on_map">Lat %1$s 
+\nLon %2$s</string>
     <string name="tips_and_tricks_descr">Ofte stillede spørgsmål, de seneste ændringer og andre oplysninger</string>
     <string name="routing_settings_2">Navigationsindstillinger</string>
     <string name="general_settings_2">Generelle indstillinger</string>

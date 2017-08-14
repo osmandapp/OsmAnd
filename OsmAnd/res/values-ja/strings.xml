@@ -1,4 +1,5 @@
-<?xml version="1.0" encoding="UTF-8" standalone="no"?><resources><string name="installing_new_resources">新しいデータを展開中…</string>
+<?xml version='1.0' encoding='UTF-8'?>
+<resources><string name="installing_new_resources">新しいデータを展開中…</string>
      <string name="internet_connection_required_for_online_route">オンライン経路案内を使用しようとしていますが
 インターネット接続されていません。</string>
      <string name="tts_language_not_supported_title">未サポート言語</string>
@@ -603,7 +604,7 @@ POIの更新は利用できません</string>
 <string name="poi_dialog_comment_default">POI 変更</string>
 <string name="poi_dialog_other_tags_message">他のタグは全て保存されました</string>
 <string name="default_buttons_commit">コミット</string>
-<string name="shared_string_clear">条件のクリア</string>
+<string name="shared_string_clear">クリア</string>
 <string name="filter_current_poiButton">フィルタ</string>
 
 <string name="edit_filter_save_as_menu_item">名前をつけて保存</string>

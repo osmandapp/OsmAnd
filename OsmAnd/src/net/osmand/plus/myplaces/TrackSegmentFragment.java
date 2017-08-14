@@ -833,7 +833,7 @@ public class TrackSegmentFragment extends OsmAndListFragment {
 		for (GpxDisplayItem i : flatten(groups)) {
 			adapter.add(i);
 		}
-		adapter.setNotifyOnChange(true);
+		// Obsolete: adapter.setNotifyOnChange(true);
 		adapter.notifyDataSetChanged();
 		if (getActivity() != null) {
 			updateHeader();

@@ -2074,7 +2074,6 @@ El espacio de almacenamiento usado es {3} MB temporalmente y {1} MB permanenteme
 \n • Mapas de OSM más detallados con escudos de carreteras específicos de cada país y un montón de nuevas características del mapa. 
 \n 
 \n • Mejor aspecto visual en la preparación de la ruta. 
-\n
 \n 
 \n • Muchas mejoras en el menú contextual del mapa como la búsqueda de direcciones contextual. 
 \n 
@@ -2159,27 +2158,16 @@ El espacio de almacenamiento usado es {3} MB temporalmente y {1} MB permanenteme
     <string name="show_something_on_map">Mostrar %1$s en el mapa</string>
     <string name="dist_away_from_my_location">Buscar en %1$s alrededor</string>
     <string name="release_2_4">"• Nueva y muy poderosa búsqueda por texto libre 
-\n 
 \n
 \n • Integración con el sistema de audio y  el micrófono del automóvil vía Bluetooth 
 \n
-\n 
-\n
 \n • Mejoras en la guía de ruta,  avisos por voz e indicaciones de carriles de giro 
-\n
-\n 
 \n
 \n • Mejoras en la capa de transporte con dibujado de rutas 
 \n
-\n 
-\n
 \n • Se agregaron más idiomas y ahora soporta idiomas regionales 
 \n
-\n 
-\n
 \n • Muchas otras mejoras y correcciones de errores 
-\n
-\n 
 \n
 \n y más…"</string>
     <string name="route_stops_before">%1$s parada(s) anterior(es)</string>
@@ -2375,42 +2363,23 @@ El espacio de almacenamiento usado es {3} MB temporalmente y {1} MB permanenteme
 	<string name="shared_string_action_name">Nombre de acción</string>
 <string name="release_2_6">"• Nueva función: Botón de acción rápida 
 \n 
-\n
 \n • Mejorada la respuesta de gestos táctiles (p.e. desplazamiento y acercamiento simultáneos) 
-\n
-\n 
 \n
 \n • El nuevo tipo de letra del mapa abarca más regiones 
 \n
-\n 
-\n
 \n • Soporte TTS para idiomas regionales (y acentos) 
-\n
-\n 
 \n
 \n • Mejorada la visibilidad en varios estilos de mapas y Wikipedia 
 \n
-\n 
-\n
 \n • Soporte para «Código  de Ubicación Abierto» (Open Location Code) 
-\n
-\n 
 \n
 \n • Visualización del perfil de elevación, pendiente y velocidad para las trazas GPX grabadas y la ruta calculada 
 \n
-\n 
-\n
 \n • Opción «Estilo de conducción» y mejoras lógicas en el cálculo de rutas para bicicleta 
-\n
-\n 
 \n
 \n • Opciones para usar los datos de altitud en el cálculo de rutas para bicicleta 
 \n
-\n 
-\n
 \n • Varias otras mejoras y corrección de errores 
-\n
-\n 
 \n
 \n y más…"</string>
 	<string name="select_gpx_folder">Seleccionar carpeta de traza</string>
@@ -2449,7 +2418,7 @@ Por favor proporciona un código completo</string>
     <string name="add_new_folder">Añadir nueva carpeta</string>
     <string name="points_delete_multiple_succesful">Punto(s) eliminados con éxito.</string>
     <string name="points_delete_multiple">¿Seguro que quiere borrar %1$d punto(s)?</string>
-    <string name="route_points_category_name">Giros en la ruta a pasar</string>
+    <string name="route_points_category_name">Giros a pasar en esta ruta</string>
     <string name="track_points_category_name">Puntos destacados en esta ruta</string>
     <string name="gpx_track">Traza</string>
     <string name="max_speed">Velocidad máxima</string>
@@ -2656,8 +2625,8 @@ Por favor proporciona un código completo</string>
 \n 
 \n • División de intervalos GPX con información detallada sobre la traza 
 \n 
-\n • Otras mejoras y corrección de errores 
-\n 
+\n • Otras mejoras y corrección de errores
+\n
 \n</string>
     <string name="rendering_value_translucent_pink_name">Rosa translúcido</string>
     <string name="quick_action_resume_pause_navigation">Reanudar/pausar navegación</string>
@@ -2667,7 +2636,7 @@ Por favor proporciona un código completo</string>
     <string name="quick_action_start_stop_navigation_descr">Pulsa este botón para iniciar o parar la navegación.</string>
     <string name="live_monitoring_max_interval_to_send">Tiempo del búfer para el seguimiento en línea</string>
     <string name="live_monitoring_max_interval_to_send_desrc">Especifica el tiempo del búfer para mantener lugares para enviar sin conexión</string>
-    <string name="none_point_error">Por favor, añada al menos un punto.</string>
+    <string name="none_point_error">Por favor, añade al menos un punto.</string>
     <string name="enter_gpx_name">Nombre del archivo GPX:</string>
     <string name="show_on_map_after_saving">Mostrar en el mapa después de guardar</string>
     <string name="measurement_tool_action_bar">Navega por el mapa y añade puntos</string>
@@ -2676,7 +2645,8 @@ Por favor proporciona un código completo</string>
     <string name="retry">Reintentar</string>
     <string name="add_route_point">Añadir punto de ruta</string>
     <string name="add_waypoint">Añadir punto de ruta</string>
-    <string name="save_gpx_waypoint">Guardar punto GPX</string>
+    <string name="save_gpx_waypoint">Guardar punto de ruta GPX</string>
     <string name="save_route_point">Guardar punto de ruta</string>
     <string name="route_point_one">Punto de ruta 1</string>
-</resources>
+<string name="waypoint_one">Punto de ruta 1</string>
+    </resources>

@@ -1117,10 +1117,10 @@
 	<string name="poi_enforcement_toll">Forgalomellenőrzés: útdíj</string>
 
 	<string name="poi_animal_shelter">Állatmenhely</string>
-	<string name="poi_animal_shelter_dog">Kutyamenhely</string>
-	<string name="poi_animal_shelter_cat">Macskamenhely</string>
-	<string name="poi_animal_shelter_dog_cat">Kutya- és macskamenhely</string>
-	<string name="poi_animal_shelter_bird">Madármenhely</string>
+	<string name="poi_animal_shelter_dog">Kutyák</string>
+	<string name="poi_animal_shelter_cat">Macskák</string>
+	<string name="poi_animal_shelter_dog_cat">Kutyák &amp; macskák</string>
+	<string name="poi_animal_shelter_bird">Madarak</string>
 
 	<string name="poi_seats">Ülőhelyek</string>
 	<string name="poi_backrest_yes">Támla van</string>
@@ -1385,7 +1385,7 @@
 
 	<string name="poi_bench_yes">van</string>
 	<string name="poi_bench_no">Pad nincs</string>
-	<string name="poi_bin_yes">Szemeteskosár van</string>
+	<string name="poi_bin_yes">Szemétkosár van</string>
 	<string name="poi_bin_no">Szemétkosár nincs</string>
 
 	<string name="poi_resource_antimony">Antimon</string>
@@ -2412,7 +2412,7 @@
 	<string name="poi_historic_period_predynastic_egypt">Történelmi kor: predinasztikus Egyiptom</string>
 	<string name="poi_historic_period_middle_kingdom">Történelmi kor: középbirodalom (Kr. e. 2055–1650)</string>
 	<string name="poi_historic_period_second_intermediate_period">Történelmi kor: második átmeneti kor (Kr. e. 1650–1550)</string>
-	<string name="poi_historic_period_third_intermediate_period">"Történelmi kor: harmadik átmeneti kor (Kr. e. 1069–664) "</string>
+	<string name="poi_historic_period_third_intermediate_period">Történelmi kor: harmadik átmeneti kor (Kr. e. 1069–664)</string>
 	<string name="poi_historic_period_first_persian_period">Történelmi kor: első perzsa kor</string>
 	<string name="poi_historic_period_late_period">Történelmi kor: késői kor (Kr. e. 664–332)</string>
 	<string name="poi_historic_period_second_persian_period">Történelmi kor: második perzsa kor</string>
@@ -2476,7 +2476,7 @@
 	<string name="poi_social_facility_for_mental_health">Értelmi fogyatékos betegek</string>
 	<string name="poi_social_facility_for_migrant">Bevándorlók</string>
 	<string name="poi_health_specialty_social_paediatrics_yes">Szociális gyermekgyógyászat</string>
-	<string name="poi_scout_yes">Cserkésztáborhely</string>
+	<string name="poi_scout_yes">van</string>
 	<string name="poi_scout_no">Cserkésztáborhely nincs</string>
 	<string name="poi_cuisine_steak">Steak</string>
 	<string name="poi_cuisine_tapas">Tapas</string>
@@ -2621,7 +2621,7 @@
 	<string name="poi_provided_for_boy_no">Fiúk számára nincs</string>
 
 	<string name="poi_telescope">Teleszkóp</string>
-	<string name="poi_telescope_type_optical">Optikai teleszkóp</string>
+	<string name="poi_telescope_type_optical">Optikai</string>
 	<string name="poi_telescope_type_radio">Rádióteleszkóp</string>
 	<string name="poi_telescope_type_gamma">Gammateleszkóp</string>
 	<string name="poi_telescope_diameter">Átmérő</string>
@@ -3426,4 +3426,40 @@
 	<string name="poi_spaceport">Űrrepülőtér</string>
 
 <string name="poi_lock_basin">Zsilipmedence</string>
+	<string name="poi_direction_n">Irány: észak</string>
+	<string name="poi_direction_nne">Irány: észak-északkelet</string>
+	<string name="poi_direction_ne">Irány: északkelet</string>
+	<string name="poi_direction_ene">Irány: kelet-északkelet</string>
+	<string name="poi_direction_e">Irány: kelet</string>
+	<string name="poi_direction_ese">Irány: kelet-délkelet</string>
+	<string name="poi_direction_se">Irány: délkelet</string>
+	<string name="poi_direction_sse">Irány: dél-délkelet</string>
+	<string name="poi_direction_s">Irány: dél</string>
+	<string name="poi_direction_ssw">Irány: dél-délnyugat</string>
+	<string name="poi_direction_sw">Irány: délnyugat</string>
+	<string name="poi_direction_wsw">Irány: nyugat-délnyugat</string>
+	<string name="poi_direction_w">Irány: nyugat</string>
+	<string name="poi_direction_wnw">Irány: nyugat-északnyugat</string>
+	<string name="poi_direction_nw">Irány: északnyugat</string>
+	<string name="poi_direction_nnw">Irány: észak-északnyugat</string>
+	<string name="poi_direction_forward">Irány: előre</string>
+	<string name="poi_direction_backward">Irány: hátra</string>
+	<string name="poi_direction_clockwise">Irány: az óramutató járása szerint</string>
+	<string name="poi_direction_anticlockwise">Irány: az óramutató járásával ellentétesen</string>
+	<string name="poi_direction_up">Irány: fölfelé</string>
+	<string name="poi_direction_down">Irány: lefelé</string>
+	<string name="poi_direction_entrance">Irány: bejárat</string>
+	<string name="poi_direction_exit">Irány: kijárat</string>
+	<string name="poi_direction_all">Irány: minden irányba</string>
+
+	<string name="poi_winter_room_yes">Mindig nyitott téli helyiség van</string>
+	<string name="poi_winter_room_no">Mindig nyitott téli helyiség nincs</string>
+	<string name="poi_beds">Ágyak</string>
+
+<string name="poi_reservation_required">Előzetes foglalás szükséges</string>
+	<string name="poi_reservation_recommended">Előzetes foglalás ajánlott</string>
+	<string name="poi_reservation_yes">Előzetes foglalás van</string>
+	<string name="poi_reservation_no">Előzetes foglalás nincs</string>
+	<string name="poi_reservation_members_only">Előzetes foglalás csak tagoknak</string>
+
 	</resources>
