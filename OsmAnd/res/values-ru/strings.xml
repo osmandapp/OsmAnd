@@ -2448,4 +2448,5 @@
     <string name="show_on_map_after_saving">Показать на карте после сохранения</string>
     <string name="measurement_tool_action_bar">Просмотрите карту и добавьте точки</string>
     <string name="measurement_tool">Измерить расстояние</string>
+    <string name="none_point_error">Необходимо добавить хотя бы одну точку.</string>
     </resources>
