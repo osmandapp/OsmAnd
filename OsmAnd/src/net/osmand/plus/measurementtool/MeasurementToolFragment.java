@@ -495,14 +495,14 @@ public class MeasurementToolFragment extends Fragment {
 	private void showPointsListFragment() {
 		MapActivity mapActivity = getMapActivity();
 		if (mapActivity != null) {
-			PointsListFragment fragment = new PointsListFragment();
+			MeasurePointsListFragment fragment = new MeasurePointsListFragment();
 			int screenHeight = AndroidUtils.getScreenHeight(mapActivity) - AndroidUtils.getStatusBarHeight(mapActivity);
 			fragment.setRecyclerView(pointsRv);
 			fragment.setWidth(upDownRow.getWidth());
 			fragment.setHeight(screenHeight - upDownRow.getHeight());
 			mapActivity.getSupportFragmentManager().beginTransaction()
-					.add(R.id.fragmentContainer, fragment, PointsListFragment.TAG)
-					.addToBackStack(PointsListFragment.TAG)
+					.add(R.id.fragmentContainer, fragment, MeasurePointsListFragment.TAG)
+					.addToBackStack(MeasurePointsListFragment.TAG)
 					.commitAllowingStateLoss();
 		}
 	}
@@ -512,7 +512,7 @@ public class MeasurementToolFragment extends Fragment {
 		if (mapActivity != null) {
 			try {
 				mapActivity.getSupportFragmentManager()
-						.popBackStackImmediate(PointsListFragment.TAG, FragmentManager.POP_BACK_STACK_INCLUSIVE);
+						.popBackStackImmediate(MeasurePointsListFragment.TAG, FragmentManager.POP_BACK_STACK_INCLUSIVE);
 			} catch (Exception e) {
 				// ignore
 			}

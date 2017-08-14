@@ -5,6 +5,7 @@ import android.support.annotation.Nullable;
 import android.support.v4.app.Fragment;
 import android.support.v4.content.ContextCompat;
 import android.support.v7.widget.RecyclerView;
+import android.util.TypedValue;
 import android.view.Gravity;
 import android.view.LayoutInflater;
 import android.view.View;
@@ -13,17 +14,19 @@ import android.widget.FrameLayout;
 import android.widget.ImageView;
 import android.widget.LinearLayout.LayoutParams;
 
+import net.osmand.AndroidUtils;
 import net.osmand.plus.R;
 import net.osmand.plus.activities.MapActivity;
 
-public class PointsListFragment extends Fragment {
+public class MeasurePointsListFragment extends Fragment {
 
-	public static final String TAG = "pointsListFragment";
+	public static final String TAG = "MeasurePointsListFragment";
 
 	private RecyclerView rv;
 	private int height;
 	private int width;
 	private FrameLayout parent;
+	private FrameLayout mainView;
 
 	public void setRecyclerView(RecyclerView rv) {
 		this.rv = rv;
@@ -44,11 +47,16 @@ public class PointsListFragment extends Fragment {
 		final boolean nightMode = mapActivity.getMyApplication().getDaynightHelper().isNightModeForMapControls();
 		final int backgroundColor = ContextCompat.getColor(getActivity(),
 				nightMode ? R.color.ctx_menu_info_view_bg_dark : R.color.ctx_menu_info_view_bg_light);
+		final TypedValue typedValueAttr = new TypedValue();
+		getActivity().getTheme().resolveAttribute(R.attr.left_menu_view_bg, typedValueAttr, true);
 
 		parent = new FrameLayout(mapActivity);
-		parent.setLayoutParams(new LayoutParams(width, height));
-		parent.setBackgroundColor(backgroundColor);
-		parent.addView(rv);
+		parent.setLayoutParams(new LayoutParams(width + AndroidUtils.dpToPx(getActivity(), 16), height));
+		parent.setBackgroundResource(typedValueAttr.resourceId);
+
+		mainView = new FrameLayout(mapActivity);
+		mainView.setLayoutParams(new LayoutParams(ViewGroup.LayoutParams.MATCH_PARENT, ViewGroup.LayoutParams.MATCH_PARENT));
+		mainView.setBackgroundColor(backgroundColor);
 
 		ImageView shadow = new ImageView(mapActivity);
 		FrameLayout.LayoutParams params = new FrameLayout.LayoutParams(ViewGroup.LayoutParams.MATCH_PARENT, ViewGroup.LayoutParams.WRAP_CONTENT);
@@ -56,7 +64,10 @@ public class PointsListFragment extends Fragment {
 		shadow.setLayoutParams(params);
 		shadow.setScaleType(ImageView.ScaleType.FIT_XY);
 		shadow.setImageResource(R.drawable.bg_shadow_onmap);
-		parent.addView(shadow);
+
+		mainView.addView(rv);
+		mainView.addView(shadow);
+		parent.addView(mainView);
 
 		return parent;
 	}
@@ -64,8 +75,9 @@ public class PointsListFragment extends Fragment {
 	@Override
 	public void onDestroyView() {
 		super.onDestroyView();
-		if (parent != null) {
+		if (parent != null && mainView != null) {
 			parent.removeAllViews();
+			mainView.removeAllViews();
 		}
 	}
 }
