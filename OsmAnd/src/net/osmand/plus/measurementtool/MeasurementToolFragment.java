@@ -40,6 +40,7 @@ import net.osmand.plus.R;
 import net.osmand.plus.activities.MapActivity;
 import net.osmand.plus.activities.TrackActivity;
 import net.osmand.plus.activities.TrackActivity.NewGpxLine;
+import net.osmand.plus.activities.TrackActivity.NewGpxLine.LineType;
 import net.osmand.plus.helpers.AndroidUiHelper;
 import net.osmand.plus.helpers.GpxUiHelper;
 import net.osmand.plus.measurementtool.adapter.MeasurementToolAdapter;
@@ -198,9 +199,9 @@ public class MeasurementToolFragment extends Fragment {
 					}
 
 					@Override
-					public void saveAsNewSegmentOnClick() {
+					public void addToGpxOnClick() {
 						if (measurementLayer.getPointsCount() > 0) {
-							saveAsNewSegment(mapActivity);
+							addToGpx(mapActivity);
 						} else {
 							Toast.makeText(mapActivity, getString(R.string.none_point_error), Toast.LENGTH_SHORT).show();
 						}
@@ -332,7 +333,7 @@ public class MeasurementToolFragment extends Fragment {
 			@Override
 			public void onClick(View v) {
 				if (measurementLayer.getPointsCount() > 0) {
-					saveAsNewSegment(mapActivity);
+					addToGpx(mapActivity);
 				} else {
 					Toast.makeText(mapActivity, getString(R.string.none_point_error), Toast.LENGTH_SHORT).show();
 				}
@@ -729,11 +730,12 @@ public class MeasurementToolFragment extends Fragment {
 		}
 	}
 
-	private void saveAsNewSegment(MapActivity mapActivity) {
+	private void addToGpx(MapActivity mapActivity) {
 		GPXFile gpx = newGpxLine.getGpxFile();
 		SelectedGpxFile selectedGpxFile = mapActivity.getMyApplication().getSelectedGpxHelper().getSelectedFileByPath(gpx.path);
 		boolean showOnMap = selectedGpxFile != null;
-		saveExistingGpx(gpx, showOnMap);
+		LineType lineType = newGpxLine.getLineType();
+		saveExistingGpx(gpx, showOnMap, lineType);
 	}
 
 	private void saveAsGpxOnClick(MapActivity mapActivity) {
@@ -803,14 +805,14 @@ public class MeasurementToolFragment extends Fragment {
 	}
 
 	private void saveNewGpx(File dir, String fileName, boolean checked) {
-		saveGpx(dir, fileName, checked, null, false);
+		saveGpx(dir, fileName, checked, null, false, null);
 	}
 
-	private void saveExistingGpx(GPXFile gpx, boolean showOnMap) {
-		saveGpx(null, null, showOnMap, gpx, true);
+	private void saveExistingGpx(GPXFile gpx, boolean showOnMap, LineType lineType) {
+		saveGpx(null, null, showOnMap, gpx, true, lineType);
 	}
 
-	private void saveGpx(final File dir, final String fileName, final boolean showOnMap, final GPXFile gpx, final boolean openTrackActivity) {
+	private void saveGpx(final File dir, final String fileName, final boolean showOnMap, final GPXFile gpx, final boolean openTrackActivity, final LineType lineType) {
 		new AsyncTask<Void, Void, String>() {
 
 			private ProgressDialog progressDialog;
@@ -855,14 +857,23 @@ public class MeasurementToolFragment extends Fragment {
 					toSave = new File(gpx.path);
 					if (measurementLayer != null) {
 						List<WptPt> points = measurementLayer.getMeasurementPoints();
-						gpx.addTrkSegment(points);
+						switch (lineType) {
+							case SEGMENT:
+								gpx.addTrkSegment(points);
+								break;
+							case ROUTE_POINTS:
+								gpx.addRtePts(points);
+								break;
+						}
 					}
 					if (activity != null) {
 						String res = GPXUtilities.writeGpxFile(toSave, gpx, activity.getMyApplication());
 						if (showOnMap) {
 							SelectedGpxFile sf = activity.getMyApplication().getSelectedGpxHelper().selectGpxFile(gpx, true, false);
 							if (sf != null) {
-								sf.processPoints();
+								if (lineType == LineType.SEGMENT) {
+									sf.processPoints();
+								}
 							}
 						}
 						return res;

@@ -59,12 +59,12 @@ import net.osmand.data.PointDescription;
 import net.osmand.data.QuadRect;
 import net.osmand.data.RotatedTileBox;
 import net.osmand.data.RotatedTileBox.RotatedTileBoxBuilder;
+import net.osmand.plus.activities.TrackActivity.NewGpxLine.LineType;
 import net.osmand.plus.GPXDatabase;
 import net.osmand.plus.GPXDatabase.GpxDataItem;
 import net.osmand.plus.GPXUtilities;
 import net.osmand.plus.GPXUtilities.GPXFile;
 import net.osmand.plus.GPXUtilities.GPXTrackAnalysis;
-import net.osmand.plus.GPXUtilities.Route;
 import net.osmand.plus.GPXUtilities.Track;
 import net.osmand.plus.GPXUtilities.TrkSegment;
 import net.osmand.plus.GPXUtilities.WptPt;
@@ -213,12 +213,11 @@ public class TrackSegmentFragment extends OsmAndListFragment {
 					break;
 				case R.id.route_text_layout:
 				case R.id.route_fab:
-					PointDescription pointRteDescription = new PointDescription(PointDescription.POINT_TYPE_RTE, getString(R.string.add_route_point));
-					addPoint(pointRteDescription);
+					addLine(LineType.ROUTE_POINTS);
 					break;
 				case R.id.line_text_layout:
 				case R.id.line_fab:
-					addLine();
+					addLine(LineType.SEGMENT);
 					break;
 			}
 		}
@@ -286,8 +285,8 @@ public class TrackSegmentFragment extends OsmAndListFragment {
 		getTrackActivity().addPoint(pointDescription);
 	}
 
-	private void addLine() {
-		getTrackActivity().addLine();
+	private void addLine(LineType lineType) {
+		getTrackActivity().addLine(lineType);
 	}
 
 	private void openMenu() {

@@ -16,6 +16,7 @@ import net.osmand.AndroidUtils;
 import net.osmand.data.LatLon;
 import net.osmand.data.PointDescription;
 import net.osmand.data.QuadRect;
+import net.osmand.plus.activities.TrackActivity.NewGpxLine.LineType;
 import net.osmand.plus.GPXDatabase.GpxDataItem;
 import net.osmand.plus.GPXUtilities;
 import net.osmand.plus.GPXUtilities.GPXFile;
@@ -112,10 +113,10 @@ public class TrackActivity extends TabActivity {
 		}
 	}
 
-	public void addLine() {
+	public void addLine(LineType lineType) {
 		GPXFile gpxFile = getGpx();
 		QuadRect rect = getRect();
-		NewGpxLine newGpxLine = new NewGpxLine(gpxFile, rect);
+		NewGpxLine newGpxLine = new NewGpxLine(gpxFile, rect, lineType);
 		WptPt pointToShow = gpxFile != null ? gpxFile.findPointToShow() : null;
 		if (pointToShow != null) {
 			LatLon location = new LatLon(pointToShow.getLatitude(), pointToShow.getLongitude());
@@ -407,12 +408,16 @@ public class TrackActivity extends TabActivity {
 	}
 
 	public static class NewGpxLine {
+		public enum LineType { SEGMENT, ROUTE_POINTS }
+
 		private GPXFile gpxFile;
 		private QuadRect rect;
+		private LineType lineType;
 
-		public NewGpxLine(GPXFile gpxFile, QuadRect rect) {
+		public NewGpxLine(GPXFile gpxFile, QuadRect rect, LineType lineType) {
 			this.gpxFile = gpxFile;
 			this.rect = rect;
+			this.lineType = lineType;
 		}
 
 		public GPXFile getGpxFile() {
@@ -421,6 +426,10 @@ public class TrackActivity extends TabActivity {
 
 		public QuadRect getRect() {
 			return rect;
+		}
+
+		public LineType getLineType() {
+			return lineType;
 		}
 	}
 }

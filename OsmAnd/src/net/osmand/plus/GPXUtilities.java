@@ -909,6 +909,16 @@ public class GPXUtilities {
 			modifiedTime = System.currentTimeMillis();
 		}
 
+		public void addRtePts(List<WptPt> points) {
+			if (routes.size() == 0) {
+				routes.add(new Route());
+			}
+			Route currentRoute = routes.get(routes.size() - 1);
+			currentRoute.points.addAll(points);
+
+			modifiedTime = System.currentTimeMillis();
+		}
+
 		public void updateWptPt(WptPt pt, double lat, double lon, long time, String description, String name, String category, int color) {
 			int index = points.indexOf(pt);
 

@@ -106,7 +106,7 @@ public class OptionsBottomSheetDialogFragment extends BottomSheetDialogFragment 
 				@Override
 				public void onClick(View view) {
 					if (listener != null) {
-						listener.saveAsNewSegmentOnClick();
+						listener.addToGpxOnClick();
 					}
 					dismiss();
 				}
@@ -168,7 +168,7 @@ public class OptionsBottomSheetDialogFragment extends BottomSheetDialogFragment 
 
 		void snapToRoadOnCLick();
 
-		void saveAsNewSegmentOnClick();
+		void addToGpxOnClick();
 
 		void saveAsNewTrackOnClick();
 
