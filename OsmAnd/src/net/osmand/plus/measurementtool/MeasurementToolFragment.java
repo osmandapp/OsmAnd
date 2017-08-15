@@ -315,7 +315,15 @@ public class MeasurementToolFragment extends Fragment {
 			}
 		});
 
-		disable(undoBtn, redoBtn, upDownBtn);
+		if (!commandManager.canUndo()) {
+			disable(undoBtn);
+		}
+		if (!commandManager.canRedo()) {
+			disable(redoBtn);
+		}
+		if (measurementLayer.getPointsCount() < 1) {
+			disable(upDownBtn);
+		}
 
 		toolBarController = new MeasurementToolBarController(newGpxLine);
 		if (newGpxLine != null) {
@@ -405,6 +413,21 @@ public class MeasurementToolFragment extends Fragment {
 		enterMeasurementMode();
 
 		return view;
+	}
+
+	@Override
+	public void onDestroyView() {
+		super.onDestroyView();
+		exitMeasurementMode();
+		adapter.setAdapterListener(null);
+		if (pointsListOpened) {
+			setPreviousMapPosition();
+		}
+		MeasurementToolLayer layer = getMeasurementLayer();
+		if (layer != null) {
+			layer.setOnSingleTapListener(null);
+			layer.setOnEnterMovePointModeListener(null);
+		}
 	}
 
 	private void openSelectedPointMenu(MapActivity mapActivity) {
@@ -876,20 +899,6 @@ public class MeasurementToolFragment extends Fragment {
 				}
 			}
 		}.execute();
-	}
-
-	@Override
-	public void onDestroyView() {
-		super.onDestroyView();
-		exitMeasurementMode();
-		adapter.setAdapterListener(null);
-		if (pointsListOpened) {
-			setPreviousMapPosition();
-		}
-		MeasurementToolLayer layer = getMeasurementLayer();
-		if (layer != null) {
-			layer.setOnSingleTapListener(null);
-		}
 	}
 
 	private MapActivity getMapActivity() {
