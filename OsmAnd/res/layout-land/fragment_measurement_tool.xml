@@ -202,39 +202,31 @@
                     osmand:typeface="@string/font_roboto_medium"/>
             </FrameLayout>
 
-            <LinearLayout
-                android:id="@+id/redo_undo_container"
-                android:layout_width="0dp"
-                android:layout_height="match_parent"
-                android:layout_weight="1"
-                android:gravity="center_horizontal">
+            <ImageButton
+                android:id="@+id/undo_point_button"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:background="?attr/selectableItemBackground"
+                android:paddingBottom="14dp"
+                android:paddingEnd="12dp"
+                android:paddingLeft="16dp"
+                android:paddingRight="12dp"
+                android:paddingStart="16dp"
+                android:paddingTop="14dp"
+                tools:src="@drawable/ic_action_undo_dark"/>
 
-                <ImageButton
-                    android:id="@+id/undo_point_button"
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:background="?attr/selectableItemBackground"
-                    android:paddingBottom="14dp"
-                    android:paddingEnd="12dp"
-                    android:paddingLeft="16dp"
-                    android:paddingRight="12dp"
-                    android:paddingStart="16dp"
-                    android:paddingTop="14dp"
-                    tools:src="@drawable/ic_action_undo_dark"/>
-
-                <ImageButton
-                    android:id="@+id/redo_point_button"
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:background="?attr/selectableItemBackground"
-                    android:paddingBottom="14dp"
-                    android:paddingEnd="16dp"
-                    android:paddingLeft="12dp"
-                    android:paddingRight="16dp"
-                    android:paddingStart="12dp"
-                    android:paddingTop="14dp"
-                    tools:src="@drawable/ic_action_redo_dark"/>
-            </LinearLayout>
+            <ImageButton
+                android:id="@+id/redo_point_button"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:background="?attr/selectableItemBackground"
+                android:paddingBottom="14dp"
+                android:paddingEnd="16dp"
+                android:paddingLeft="12dp"
+                android:paddingRight="16dp"
+                android:paddingStart="12dp"
+                android:paddingTop="14dp"
+                tools:src="@drawable/ic_action_redo_dark"/>
 
             <FrameLayout
                 android:layout_width="0dp"
