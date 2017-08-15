@@ -13,10 +13,10 @@
         android:layout_height="wrap_content">
 
         <LinearLayout
-            android:paddingBottom="8dp"
-            android:orientation="vertical"
             android:layout_width="match_parent"
-            android:layout_height="wrap_content">
+            android:layout_height="wrap_content"
+            android:orientation="vertical"
+            android:paddingBottom="8dp">
 
             <RelativeLayout
                 android:layout_width="match_parent"
@@ -35,30 +35,30 @@
                     tools:src="@drawable/ic_action_measure_point"/>
 
                 <LinearLayout
-                    android:orientation="vertical"
                     android:layout_width="wrap_content"
                     android:layout_height="match_parent"
                     android:layout_toEndOf="@id/selected_point_icon"
                     android:layout_toRightOf="@id/selected_point_icon"
-                    android:gravity="center_vertical">
+                    android:gravity="center_vertical"
+                    android:orientation="vertical">
 
                     <TextView
                         android:id="@+id/selected_point_title"
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
                         android:maxLines="1"
-                        tools:text="Point 2"
-                        android:textAppearance="@style/TextAppearance.ListItemTitle"/>
+                        android:textAppearance="@style/TextAppearance.ListItemTitle"
+                        tools:text="Point 2"/>
 
                     <TextView
                         android:id="@+id/selected_point_distance"
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
                         android:maxLines="1"
+                        android:textAppearance="@style/TextAppearance.ListItemTitle"
                         android:textColor="?android:textColorSecondary"
                         android:textSize="@dimen/default_list_text_size"
-                        tools:text="386 m"
-                        android:textAppearance="@style/TextAppearance.ListItemTitle"/>
+                        tools:text="386 m"/>
 
                 </LinearLayout>
 
@@ -67,8 +67,8 @@
             <View
                 android:layout_width="match_parent"
                 android:layout_height="1dp"
-                android:background="?attr/dashboard_divider"
-                android:layout_marginBottom="8dp"/>
+                android:layout_marginBottom="8dp"
+                android:background="?attr/dashboard_divider"/>
 
             <RelativeLayout
                 android:id="@+id/move_point_row"

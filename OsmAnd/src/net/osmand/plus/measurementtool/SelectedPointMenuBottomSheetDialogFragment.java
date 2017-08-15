@@ -27,7 +27,7 @@ import net.osmand.util.MapUtils;
 
 import java.util.List;
 
-public class SelectedPointMenuBottomSheetDialogFragment extends BottomSheetDialogFragment{
+public class SelectedPointMenuBottomSheetDialogFragment extends BottomSheetDialogFragment {
 	public final static String TAG = "SelectedPointMenuBottomSheetDialogFragment";
 
 	private SelectedPointOptionOnClickListener listener;
@@ -115,7 +115,8 @@ public class SelectedPointMenuBottomSheetDialogFragment extends BottomSheetDialo
 		}
 
 		final int height = AndroidUtils.getScreenHeight(getActivity());
-		final int statusbarHeight = AndroidUtils.getStatusBarHeight(getActivity());
+		final int statusBarHeight = AndroidUtils.getStatusBarHeight(getActivity());
+		final int navBarHeight = AndroidUtils.getNavBarHeight(getActivity());
 
 		mainView.getViewTreeObserver().addOnGlobalLayoutListener(new ViewTreeObserver.OnGlobalLayoutListener() {
 			@Override
@@ -124,7 +125,7 @@ public class SelectedPointMenuBottomSheetDialogFragment extends BottomSheetDialo
 				int scrollViewHeight = scrollView.getHeight();
 				int dividerHeight = AndroidUtils.dpToPx(getContext(), 1);
 				int cancelButtonHeight = getContext().getResources().getDimensionPixelSize(R.dimen.measure_distance_bottom_sheet_cancel_button_height);
-				int spaceForScrollView = height - statusbarHeight - AndroidUtils.getNavBarHeight(getActivity()) - dividerHeight - cancelButtonHeight;
+				int spaceForScrollView = height - statusBarHeight - navBarHeight - dividerHeight - cancelButtonHeight;
 				if (scrollViewHeight > spaceForScrollView) {
 					scrollView.getLayoutParams().height = spaceForScrollView;
 					scrollView.requestLayout();

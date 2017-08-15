@@ -20,7 +20,7 @@
             android:id="@+id/up_down_row"
             android:layout_width="0dp"
             android:layout_height="wrap_content"
-            android:layout_weight="0.4"
+            android:layout_weight="0.45"
             android:background="?attr/selectableItemBackground"
             android:paddingBottom="14dp"
             android:paddingTop="14dp">
@@ -178,7 +178,7 @@
             android:id="@+id/measure_mode_controls"
             android:layout_width="0dp"
             android:layout_height="52dp"
-            android:layout_weight="0.6">
+            android:layout_weight="0.55">
 
             <FrameLayout
                 android:layout_width="0dp"

@@ -1,6 +1,5 @@
 package net.osmand.plus.measurementtool;
 
-import android.content.res.Configuration;
 import android.os.Build;
 import android.os.Bundle;
 import android.support.annotation.Nullable;
@@ -56,7 +55,8 @@ public class SnapToRoadBottomSheetDialogFragment extends BottomSheetDialogFragme
 		}
 
 		final int height = AndroidUtils.getScreenHeight(getActivity());
-		final int statusbarHeight = AndroidUtils.getStatusBarHeight(getActivity());
+		final int statusBarHeight = AndroidUtils.getStatusBarHeight(getActivity());
+		final int navBarHeight =  AndroidUtils.getNavBarHeight(getActivity());
 
 		view.getViewTreeObserver().addOnGlobalLayoutListener(new ViewTreeObserver.OnGlobalLayoutListener() {
 			@Override
@@ -65,7 +65,7 @@ public class SnapToRoadBottomSheetDialogFragment extends BottomSheetDialogFragme
 				int scrollViewHeight = scrollView.getHeight();
 				int dividerHeight = AndroidUtils.dpToPx(getContext(), 1);
 				int cancelButtonHeight = getContext().getResources().getDimensionPixelSize(R.dimen.measure_distance_bottom_sheet_cancel_button_height);
-				int spaceForScrollView = height - statusbarHeight - AndroidUtils.getNavBarHeight(getActivity()) - dividerHeight - cancelButtonHeight;
+				int spaceForScrollView = height - statusBarHeight - navBarHeight - dividerHeight - cancelButtonHeight;
 				if (scrollViewHeight > spaceForScrollView) {
 					scrollView.getLayoutParams().height = spaceForScrollView;
 					scrollView.requestLayout();

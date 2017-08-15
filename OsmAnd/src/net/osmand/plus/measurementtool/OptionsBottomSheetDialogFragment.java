@@ -1,6 +1,7 @@
 package net.osmand.plus.measurementtool;
 
 import android.graphics.drawable.Drawable;
+import android.os.Build;
 import android.os.Bundle;
 import android.support.annotation.DrawableRes;
 import android.support.annotation.Nullable;
@@ -8,6 +9,7 @@ import android.view.ContextThemeWrapper;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.view.ViewTreeObserver;
 import android.view.Window;
 import android.view.WindowManager;
 import android.widget.ImageView;
@@ -109,6 +111,32 @@ public class OptionsBottomSheetDialogFragment extends BottomSheetDialogFragment 
 			@Override
 			public void onClick(View view) {
 				dismiss();
+			}
+		});
+
+		final int height = AndroidUtils.getScreenHeight(getActivity());
+		final int statusBarHeight = AndroidUtils.getStatusBarHeight(getActivity());
+		final int navBarHeight = AndroidUtils.getNavBarHeight(getActivity());
+
+		mainView.getViewTreeObserver().addOnGlobalLayoutListener(new ViewTreeObserver.OnGlobalLayoutListener() {
+			@Override
+			public void onGlobalLayout() {
+				final View scrollView = mainView.findViewById(R.id.measure_options_scroll_view);
+				int scrollViewHeight = scrollView.getHeight();
+				int dividerHeight = AndroidUtils.dpToPx(getContext(), 1);
+				int cancelButtonHeight = getContext().getResources().getDimensionPixelSize(R.dimen.measure_distance_bottom_sheet_cancel_button_height);
+				int spaceForScrollView = height - statusBarHeight - navBarHeight - dividerHeight - cancelButtonHeight;
+				if (scrollViewHeight > spaceForScrollView) {
+					scrollView.getLayoutParams().height = spaceForScrollView;
+					scrollView.requestLayout();
+				}
+
+				ViewTreeObserver obs = mainView.getViewTreeObserver();
+				if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.JELLY_BEAN) {
+					obs.removeOnGlobalLayoutListener(this);
+				} else {
+					obs.removeGlobalOnLayoutListener(this);
+				}
 			}
 		});
 
