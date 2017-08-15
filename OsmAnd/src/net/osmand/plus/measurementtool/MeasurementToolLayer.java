@@ -351,11 +351,11 @@ public class MeasurementToolLayer extends OsmandMapLayer implements ContextMenuL
 			WptPt pt = new WptPt();
 			pt.lat = pressedPointLatLon.getLatitude();
 			pt.lon = pressedPointLatLon.getLongitude();
+			pressedPointLatLon = null;
 			boolean allowed = measurementPoints.size() == 0 || !measurementPoints.get(measurementPoints.size() - 1).equals(pt);
 			if (allowed) {
 				measurementPoints.add(position, pt);
 				moveMapToPoint(position);
-				pressedPointLatLon = null;
 				return pt;
 			}
 		}
