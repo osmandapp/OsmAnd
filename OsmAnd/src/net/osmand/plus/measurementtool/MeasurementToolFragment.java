@@ -96,12 +96,15 @@ public class MeasurementToolFragment extends Fragment {
 	private boolean nightMode;
 	private int previousMapPosition;
 	private NewGpxLine newGpxLine;
+	private boolean routePointsAdded;
 
 	private boolean inMovePointMode;
 	private boolean inAddPointAfterMode;
 	private boolean inAddPointBeforeMode;
 
 	private int positionToAddPoint = -1;
+
+	private List<WptPt> measurementPoints = new LinkedList<>();
 
 	public void setNewGpxLine(NewGpxLine newGpxLine) {
 		this.newGpxLine = newGpxLine;
@@ -112,6 +115,10 @@ public class MeasurementToolFragment extends Fragment {
 	public View onCreateView(LayoutInflater inflater, @Nullable ViewGroup container, @Nullable Bundle savedInstanceState) {
 		final MapActivity mapActivity = (MapActivity) getActivity();
 		final MeasurementToolLayer measurementLayer = mapActivity.getMapLayers().getMeasurementToolLayer();
+		measurementLayer.setMeasurementPoints(measurementPoints);
+		measurementLayer.setInMovePointMode(inMovePointMode);
+		measurementLayer.setInAddPointBeforeMode(inAddPointBeforeMode);
+		measurementLayer.setInAddPointAfterMode(inAddPointAfterMode);
 		iconsCache = mapActivity.getMyApplication().getIconsCache();
 		nightMode = mapActivity.getMyApplication().getDaynightHelper().isNightModeForMapControls();
 		final int themeRes = nightMode ? R.style.OsmandDarkTheme : R.style.OsmandLightTheme;
@@ -417,10 +424,11 @@ public class MeasurementToolFragment extends Fragment {
 
 		enterMeasurementMode();
 
-		if (newGpxLine != null) {
+		if (newGpxLine != null && !routePointsAdded) {
 			LineType lineType = newGpxLine.getLineType();
 			if (lineType == LineType.ROUTE_POINTS) {
 				displayRoutePoints(mapActivity);
+				routePointsAdded = true;
 			}
 		}
 
@@ -435,8 +443,21 @@ public class MeasurementToolFragment extends Fragment {
 		if (pointsListOpened) {
 			setPreviousMapPosition();
 		}
+		if (inMovePointMode) {
+			switchMovePointMode(false);
+		}
+		if (inAddPointAfterMode) {
+			switchAddPointAfterMode(false);
+		}
+		if (inAddPointBeforeMode) {
+			switchAddPointBeforeMode(false);
+		}
 		MeasurementToolLayer layer = getMeasurementLayer();
 		if (layer != null) {
+			layer.clearSelection();
+			layer.exitMovePointMode();
+			layer.exitAddPointAfterMode();
+			layer.exitAddPointBeforeMode();
 			layer.setOnSingleTapListener(null);
 			layer.setOnEnterMovePointModeListener(null);
 		}
@@ -448,7 +469,7 @@ public class MeasurementToolFragment extends Fragment {
 		GPXFile gpx = newGpxLine.getGpxFile();
 		List<WptPt> points = gpx.getLastRoutePoints();
 		if (measurementLayer != null) {
-			measurementLayer.setMeasurementPoints(points);
+			measurementPoints.addAll(points);
 			adapter.notifyDataSetChanged();
 			updateText();
 		}
@@ -866,9 +887,9 @@ public class MeasurementToolFragment extends Fragment {
 					toSave = new File(dir, fileName);
 					GPXFile gpx = new GPXFile();
 					if (measurementLayer != null) {
-						LinkedList<WptPt> points = measurementLayer.getMeasurementPoints();
+						List<WptPt> points = measurementLayer.getMeasurementPoints();
 						if (points.size() == 1) {
-							gpx.points.add(points.getFirst());
+							gpx.points.add(points.get(0));
 						} else if (points.size() > 1) {
 							Route rt = new Route();
 							gpx.routes.add(rt);
@@ -1033,7 +1054,6 @@ public class MeasurementToolFragment extends Fragment {
 				collapseButton.setVisibility(View.VISIBLE);
 			}
 
-			measurementLayer.getMeasurementPoints().clear();
 			mapActivity.refreshMap();
 		}
 	}
@@ -1078,21 +1098,9 @@ public class MeasurementToolFragment extends Fragment {
 
 	private void dismiss(MapActivity mapActivity) {
 		try {
-			if (inMovePointMode) {
-				switchMovePointMode(false);
-			}
-			if (inAddPointAfterMode) {
-				switchAddPointAfterMode(false);
-			}
-			if (inAddPointBeforeMode) {
-				switchAddPointBeforeMode(false);
-			}
 			MeasurementToolLayer measurementToolLayer = getMeasurementLayer();
 			if (measurementToolLayer != null) {
-				measurementToolLayer.clearSelection();
-				measurementToolLayer.exitMovePointMode();
-				measurementToolLayer.exitAddPointAfterMode();
-				measurementToolLayer.exitAddPointBeforeMode();
+				measurementToolLayer.getMeasurementPoints().clear();
 			}
 			if (newGpxLine != null) {
 				GPXFile gpx = newGpxLine.getGpxFile();

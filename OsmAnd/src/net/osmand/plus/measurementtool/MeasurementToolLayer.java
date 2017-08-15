@@ -32,7 +32,7 @@ public class MeasurementToolLayer extends OsmandMapLayer implements ContextMenuL
 	private boolean inMovePointMode;
 	private boolean inAddPointAfterMode;
 	private boolean inAddPointBeforeMode;
-	private final LinkedList<WptPt> measurementPoints = new LinkedList<>();
+	private List<WptPt> measurementPoints = new LinkedList<>();
 	private Bitmap centerIconDay;
 	private Bitmap centerIconNight;
 	private Bitmap pointIcon;
@@ -104,17 +104,28 @@ public class MeasurementToolLayer extends OsmandMapLayer implements ContextMenuL
 		this.inMeasurementMode = inMeasurementMode;
 	}
 
+	void setInMovePointMode(boolean inMovePointMode) {
+		this.inMovePointMode = inMovePointMode;
+	}
+
+	void setInAddPointAfterMode(boolean inAddPointAfterMode) {
+		this.inAddPointAfterMode = inAddPointAfterMode;
+	}
+
+	void setInAddPointBeforeMode(boolean inAddPointBeforeMode) {
+		this.inAddPointBeforeMode = inAddPointBeforeMode;
+	}
+
 	public int getPointsCount() {
 		return measurementPoints.size();
 	}
 
-	public LinkedList<WptPt> getMeasurementPoints() {
+	public List<WptPt> getMeasurementPoints() {
 		return measurementPoints;
 	}
 
 	public void setMeasurementPoints(List<WptPt> points) {
-		measurementPoints.clear();
-		measurementPoints.addAll(points);
+		measurementPoints = points;
 	}
 
 	String getDistanceSt() {
