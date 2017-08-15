@@ -31,7 +31,7 @@ import net.osmand.plus.myplaces.FavoritesActivity;
 import net.osmand.plus.myplaces.SplitSegmentFragment;
 import net.osmand.plus.myplaces.TrackPointFragment;
 import net.osmand.plus.myplaces.TrackSegmentFragment;
-import net.osmand.plus.views.AddGpxPointBottomSheetHelper;
+import net.osmand.plus.views.AddGpxPointBottomSheetHelper.NewGpxPoint;
 import net.osmand.plus.views.controls.PagerSlidingTabStrip;
 
 import java.io.File;
@@ -99,12 +99,14 @@ public class TrackActivity extends TabActivity {
 		final OsmandSettings settings = app.getSettings();
 		GPXFile gpx = getGpx();
 		LatLon location = settings.getLastKnownMapLocation();
+		QuadRect rect = getRect();
+		NewGpxPoint newGpxPoint = new NewGpxPoint(gpx, pointDescription, rect);
 		if (gpx != null && location != null) {
 			settings.setMapLocationToShow(location.getLatitude(), location.getLongitude(),
 					settings.getLastKnownMapZoom(),
 					pointDescription,
 					false,
-					new AddGpxPointBottomSheetHelper.NewGpxPoint(gpx, pointDescription));
+					newGpxPoint);
 
 			MapActivity.launchMapActivityMoveToTop(this);
 		}

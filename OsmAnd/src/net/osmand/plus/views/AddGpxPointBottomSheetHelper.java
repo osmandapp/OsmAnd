@@ -8,6 +8,7 @@ import android.widget.TextView;
 
 import net.osmand.data.LatLon;
 import net.osmand.data.PointDescription;
+import net.osmand.data.QuadRect;
 import net.osmand.data.RotatedTileBox;
 import net.osmand.plus.GPXUtilities.GPXFile;
 import net.osmand.plus.IconsCache;
@@ -143,10 +144,12 @@ public class AddGpxPointBottomSheetHelper implements OnDismissListener {
 	public static class NewGpxPoint {
 		private PointDescription pointDescription;
 		private GPXFile gpx;
+		private QuadRect rect;
 
-		public NewGpxPoint(GPXFile gpx, PointDescription pointDescription) {
+		public NewGpxPoint(GPXFile gpx, PointDescription pointDescription, QuadRect rect) {
 			this.gpx = gpx;
 			this.pointDescription = pointDescription;
+			this.rect = rect;
 		}
 
 		public GPXFile getGpx() {
@@ -155,6 +158,10 @@ public class AddGpxPointBottomSheetHelper implements OnDismissListener {
 
 		public PointDescription getPointDescription() {
 			return pointDescription;
+		}
+
+		public QuadRect getRect() {
+			return rect;
 		}
 	}
 }

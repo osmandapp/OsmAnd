@@ -937,6 +937,8 @@ public class MapActivity extends OsmandActionBarActivity implements DownloadEven
 					mapView.fitRectToMap(qr.left, qr.right, qr.top, qr.bottom, (int) qr.width(), (int) qr.height(), 0);
 				} else if (toShow instanceof NewGpxPoint) {
 					NewGpxPoint newGpxPoint = (NewGpxPoint) toShow;
+					QuadRect qr = newGpxPoint.getRect();
+					mapView.fitRectToMap(qr.left, qr.right, qr.top, qr.bottom, (int) qr.width(), (int) qr.height(), 0);
 					getMapLayers().getContextMenuLayer().enterAddGpxPointMode(newGpxPoint);
 				} else if (toShow instanceof NewGpxLine) {
 					NewGpxLine newGpxLine = (NewGpxLine) toShow;
