@@ -275,7 +275,9 @@
   <string name="shared_string_no_thanks">Ні, дякую</string>
   <string name="basemap_missing">Відсутня базова мапа, що покриває весь світ на дрібному масштабі. Будь ласка, звантажте World_basemap_x.obf для повноцінний роботи програми.</string>
   <string name="vector_data_missing">SD-карта не містить завантажених даних. Будь ласка, завантажте їх, щоб використовувати мапу без інтернету.</string>
-  <string name="local_index_gpx_info_show">\n\nТривале натискання для перегляду на мапі</string>
+  <string name="local_index_gpx_info_show">"
+\n
+\nДовго утримуйте для налаштувань"</string>
   
   
   
@@ -312,7 +314,7 @@
   
   
   <string name="installing_new_resources">Розпаковуються нові дані…</string>
-  <string name="internet_connection_required_for_online_route">Ви хочете використовувати Інтернет-сервіси, але у вас немає активного Інтернет з’єднання.</string>
+  <string name="internet_connection_required_for_online_route">Обраний навігаційний онлайн-сервіс, але немає з’єднання з Інтернетом.</string>
   <string name="tts_language_not_supported_title">Мова не підтримується</string>
   <string name="tts_language_not_supported">Вибрана мова не підтримується встановленим рушієм Android TTS (перетворення тексту в мову). Ви бажаєте пошукати інший рушій TTS? Якщо ні, буде використовуватись інша встановлена мова рушія TTS.</string>
   <string name="tts_missing_language_data_title">Дані відсутні</string>
@@ -655,9 +657,9 @@
   
   <string name="poi">POI</string>
   <string name="error_occurred_saving_gpx">Помилка збереження шляху в GPX файл</string>
-  <string name="error_calculating_route">Помилка прокладання маршруту</string>
+  <string name="error_calculating_route">Помилка розрахунку маршруту</string>
   <string name="error_calculating_route_occured">Помилка прокладання маршруту</string>
-  <string name="empty_route_calculated">Неможливо побудувати маршрут</string>
+  <string name="empty_route_calculated">Помилка: розрахований маршрут порожній</string>
   <string name="new_route_calculated_dist">Новий маршрут прокладено, відстань</string>
   <string name="arrived_at_destination">Ви прибули в пункт призначення</string>
   <string name="invalid_locations">Неправильні координати!</string>
@@ -888,7 +890,7 @@
   <string name="bg_service_screen_lock">Блокування екрану</string>
   <string name="bg_service_screen_lock_toast">Екран заблоковано</string>
   <string name="bg_service_interval">Встановити інтервал пробудження:</string>
-  <string name="screen_is_locked">Для розблокування екрану доторкніться до іконки блокування</string>
+  <string name="screen_is_locked">Для розблокування екрану доторкніться до значка блокування</string>
   <string name="bg_service_screen_unlock">Розблокувати екран</string>
   <string name="bg_service_sleep_mode_off">Запустити\n додаток у фоновому режимі</string>
   <string name="bg_service_sleep_mode_on">Вимкнути\nфоновий режим</string>
@@ -1192,13 +1194,10 @@
     <string name="context_menu_item_destination_point">Встановити як пункт призначення</string>
     <string name="local_osm_changes_backup_failed">Збій резервного копіювання файлу змін OSM</string>
     <string name="local_osm_changes_backup">Резервне копіювання файлу змін OSM</string>
-    <string name="use_distance_measurement_help">* Натисніть, щоб позначити точку.
-\n
-\n * Натисніть та утримуйте мапу для вилучення попередньої точки.
-\n
-\n * Натисніть та утримуйте точку для перегляду та додавання опису.
-\n
-\n * Натисніть на масштабну лінійку, щоб побачити більше дій.</string>
+    <string name="use_distance_measurement_help">* Натисніть, щоб позначити точку. 
+\n * Довго утримуйте на мапі для вилучення попередньої точки. 
+\n * Довго утримуйте на точці для перегляду й додавання опису. 
+\n * Натисніть на віджет вимірювання, щоб побачити більше дій.</string>
     <string name="use_magnetic_sensor_descr">Використовувати магнітометр для визначення сторін світу замість датчика орієнтації</string>
     
 	<string name="destination_point">Пункт призначення %1$s</string>
@@ -1235,7 +1234,7 @@
     
     <string name="keep_intermediate_points">Лишити проміжні точки</string>
     <string name="route_via">Через:</string>
-    <string name="route_from">З:</string>
+    <string name="route_from">Від:</string>
 	
 	    
 	<string name="osb_author_dialog_password">Пароль OSM (необов’язково)</string>
@@ -1291,7 +1290,7 @@
     <string name="osmo_auto_send_locations_descr">Автоматичний початок подорожі та надсилання місцезнаходження після запуска застосунка</string>
     <string name="osmo_auto_send_locations">Автоматичний запуск подорожі</string>
     <string name="osmo_tracker_id">ID трекера</string>
-    <string name="osmo_tracker_id_descr">Натисніть, щоб подивитись ID трекера</string>
+    <string name="osmo_tracker_id_descr">Натисніть, щоб подивитися ідентифікатор трекера</string>
     <string name="osmo_server_operation_failed">OsMo Server збій виконання операції</string>
     <string name="osmo_activity">OpenStreetMap Моніторинг</string>
     <string name="osmo_control">OsMo швидкий доступ</string>
@@ -1382,7 +1381,7 @@
     <string name="osmo_start_service">Служба OsMo</string>
     <string name="osmo_gpx_track_downloaded">Завантажено %1$s треків OsMo.</string>
     <string name="no_index_file_to_download">Завантажень не знайдено. Будь ласка, перевірте з’єднання з Інтернет.</string>
-    <string name="none_selected_gpx">Немає вибраних файлів GPX. Використовуйте тривале натискання для вибору доступного треку.</string>
+    <string name="none_selected_gpx">GPX-файли не вибрані. Щоб вибрати довго утримуйте наявний трек.</string>
     
     <string name="local_index_select_gpx_file">Позначити для показу</string>
     <string name="gpx_split_interval">Інтервал розбиття</string>
@@ -1397,7 +1396,9 @@
     <string name="loading_smth">Завантаження %1$s…</string>
     <string name="map_widget_plain_time">Поточний час</string>
     <string name="gpx_wpt">Маршрутна точка</string>
-    <string name="selected_gpx_info_show">\n\nНатиснути і утримувати для перегляду на мапі</string>
+    <string name="selected_gpx_info_show">"
+\n
+\nДовго утримуйте, щоб побачити на мапі"</string>
     <string name="delay_navigation_start">Запускати навігацію автоматично</string>
     <string name="shared_string_selected_lowercase">виділені</string>
     <string name="gpx_info_subtracks">Під-треки: %1$s</string>
@@ -1590,7 +1591,7 @@
     
     
     <string name="route_descr_destination">Місце призначення</string>
-    <string name="interrupt_music_descr">Переривати будь яку музику під час оголошення (не лише зменшуючи гучність)</string>
+    <string name="interrupt_music_descr">Голосові підказки призупиняють музику, а не лише зменшують гучність</string>
 	<string name="interrupt_music">Пауза музики</string>
 	<string name="share_route_as_gpx">Поділитись маршрутом за допомоги файлу GPX</string>
 	<string name="share_route_subject">Маршрут наданий через OsmAnd</string>
@@ -1711,7 +1712,7 @@
     <string name="traffic_warning_calming">Зниження швидкості</string>
     <string name="traffic_warning_speed_camera">Камера контролю швидкості</string>
     <string name="traffic_warning">Попередження на дорозі</string>
-	<string name="local_index_description">Клацніть будь-який наявний елемент для перегляду додаткових відомостей, натисніть і утримуйте, щоб деактивувати або вилучити. Поточні дані на пристрої (%1$s вільно):</string>
+	<string name="local_index_description">Натисніть на будь-який наявний елемент для перегляду додаткових відомостей, довго утримуйте, щоб деактивувати або вилучити. Наявні дані на пристрої (%1$s вільно):</string>
 	<string name="watch">Годинник</string>
 	<string name="rendering_attr_pisteRoutes_name">Лижні траси</string>
 	<string name="rendering_attr_pisteGrooming_name">Тип лижні</string>
@@ -1847,7 +1848,7 @@
 	<string name="shared_string_show_description">Показати опис</string>
 	<string name="shared_string_message">Повідомлення</string>
 	<string name="agps_data_last_downloaded">Останні завантажені дані A-GPS: %1$s</string>
-    <string name="confirm_usage_speed_cameras">У багатьох країнах (Німеччині, Франції, Італії та інших) використання попереджень про камери контролю швидкості не дозволено законом. OsmAnd не несе ніякої відповідальності, якщо ви порушите закон. Будь ласка, натисніть \"Так\", тільки якщо ви маєте право використовувати цю функцію.</string>
+    <string name="confirm_usage_speed_cameras">У багатьох країнах (Німеччині, Франції, Італії та інших) використання попереджень про камери контролю швидкості не дозволено законом. OsmAnd не несе ніякої відповідальності, якщо Ви порушите закон. Будь ласка, натисніть „Так“, тільки якщо Ви маєте право використовувати цю функцію.</string>
 	<string name="welmode_download_maps">Завантажити мапи</string>
 	<string name="welcome_select_region">Щоб правильно показувати дорожні знаки та правила дорожнього руху, будь ласка, виберіть ваш регіон:</string>
 	<string name="welcome_text">OsmAnd забезпечує повністю автономний (оффлайн) перегляд мап і навігацію!</string>
@@ -2397,7 +2398,7 @@
     <string name="osmo_pause_location">Пауза</string>
     <string name="osmo_service_running">Сервіс OsMo запущений</string>
     <string name="trip_rec_notification_settings">Запис подорожі (немає даних)</string>
-    <string name="trip_rec_notification_settings_desc">Показувати сповіщення, яке дозволить почати запис за допомогою кнопки „Запис подорожі“</string>
+    <string name="trip_rec_notification_settings_desc">Показувати сповіщення, яке дозволить почати запис подорожі</string>
     <string name="shared_string_notifications">Повідомлення</string>
     <string name="shared_string_continue">Продовжити</string>
     <string name="shared_string_pause">Пауза</string>
@@ -2405,14 +2406,14 @@
     <string name="shared_string_recorded">Записано</string>
     <string name="shared_string_record">Запис</string>
     <string name="gpx_logging_no_data">Немає даних</string>
-    <string name="release_2_5">\\u2022 Клікабельні іконки на мапі
+    <string name="release_2_5">Клікабельні іконки на мапі 
 \n 
 \n• Гнучка фільтрація POI в пошуку: шукайте ресторани за типом кухні, кемпінги за наявністю зручностей 
 \n 
 \n• Новий стиль мапи Topo для пішого туризму і велосипедистів 
-\n
+\n 
 \n• Покращений запис поїздки (нові налаштування) 
-\n
+\n 
 \n• Покращені навігаційні повідомлення (Android Wear) 
 \n 
 \n• Безліч інших поліпшень й виправлень помилок 
@@ -2454,7 +2455,7 @@
     <string name="get_for">Отримати на %1$s</string>
     <string name="get_for_month">Отримати за %1$s на місяць</string>
     <string name="osm_live_banner_desc">Отримайте необмежені завантаження для мап, а також оновлення мап частіше ніж один раз на місяць: щотижня, щодня або щогодини.</string>
-    <string name="osmand_plus_banner_desc">Повна версія OsmAnd з необмеженою кількістю завантажень і щомісячних оновлень для мап.</string>
+    <string name="osmand_plus_banner_desc">Необмежений доступ до мап, оновлень й втулка Wikipedia.</string>
     <string name="si_mi_meters">Милі, метри</string>
     <string name="skip_map_downloading">Пропустити завантаження мап</string>
     <string name="skip_map_downloading_desc">У вас немає завантажених мап. Ви можете вибрати мапу зі списку або завантажити її пізніше за допомогою меню — %1$s.</string>
@@ -2945,16 +2946,25 @@
 \n</string>
     <string name="rendering_value_translucent_pink_name">Напівпрозорий рожевий</string>
     <string name="quick_action_resume_pause_navigation">Відновити/призупинити навігацію</string>
-    <string name="quick_action_resume_pause_navigation_descr">Натисніть цю кнопку, щоб призупинити навігацію або відновити її, якщо вона вже була призупинена.</string>
-    <string name="quick_action_show_navigation_finish_dialog">Показати вікно, щоб завершити навігацію</string>
-    <string name="quick_action_start_stop_navigation">Початок/завершення навігації</string>
-    <string name="quick_action_start_stop_navigation_descr">Натисніть цю кнопку, щоб запустити навігацію або зупинити її, якщо вона вже була запущена.</string>
+    <string name="quick_action_resume_pause_navigation_descr">Натисніть цю кнопку, щоб призупинити або відновити навігацію.</string>
+    <string name="quick_action_show_navigation_finish_dialog">Показати діалог завершення навігації</string>
+    <string name="quick_action_start_stop_navigation">Почати/зупинити навігацію</string>
+    <string name="quick_action_start_stop_navigation_descr">Натисніть цю кнопку, щоб почати або закінчити навігацію.</string>
     <string name="live_monitoring_max_interval_to_send">Час буферизації для онлайн-стеження</string>
     <string name="live_monitoring_max_interval_to_send_desrc">Задає час буферизації для збереження місць для відправки в автономному режимі</string>
     <string name="mappilary_no_internet_desc">Вам потрібен Інтернет для перегляду фотографій від Mapillary</string>
     <string name="retry">Повторити</string>
-<string name="measurement_tool_action_bar">Виберіть місце на мапі та натисніть кнопку „Додати“, щоб додати точку до лінійки.</string>
-    <string name="measurement_tool">Інструмент вимірювання</string>
+<string name="measurement_tool_action_bar">Перегляньте мапу і додайте точки</string>
+    <string name="measurement_tool">Виміряти відстань</string>
     <string name="add_gpx_waypoint_bottom_sheet_title">Додати шляхову точку в GPX</string>
     <string name="shared_string_create">Створити</string>
+<string name="none_point_error">Необхідно додати хоча б одну точку.</string>
+    <string name="enter_gpx_name">Ім’я GPX файлу:</string>
+    <string name="show_on_map_after_saving">Показати на мапі після збереження</string>
+    <string name="add_route_point">Додати точку маршруту</string>
+    <string name="add_waypoint">Додати шляхову точку</string>
+    <string name="save_gpx_waypoint">Зберегти GPX-точку шляху</string>
+    <string name="save_route_point">Зберегти точку маршруту</string>
+    <string name="waypoint_one">Шляхова точка 1</string>
+    <string name="route_point_one">Точка маршруту 1</string>
 </resources>
