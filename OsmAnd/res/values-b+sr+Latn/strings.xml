@@ -1,4 +1,5 @@
-<?xml version="1.0" encoding="UTF-8" standalone="no"?><resources>
+<?xml version='1.0' encoding='UTF-8'?>
+<resources>
     <string name="about_version">Verzija:</string>
     
     <string name="about_settings_descr">Verzija info, licence, članovi projekta</string>
@@ -406,4 +407,12 @@
     <string name="quick_action_add_configure_map">Konfiguracija mape</string>
     <string name="quick_action_poi_show">Prikazati %1$s</string>
     <string name="quick_action_poi_hide">Sakriti %1$s</string>
+    <string name="none_point_error">Molimo dodajte barem jednu tačku.</string>
+    <string name="enter_gpx_name">GPX ime datoteke:</string>
+    <string name="show_on_map_after_saving">Prikazati na karti nakon snimanja</string>
+    <string name="measurement_tool_action_bar">Pretražite mapu i dodajte tačke</string>
+    <string name="measurement_tool">Mera za daljinu</string>
+    <string name="quick_action_resume_pause_navigation">Nastaviti/pauzirati navigaciju</string>
+    <string name="quick_action_resume_pause_navigation_descr">Dodirnite ovo dugme da biste zaustavili ili nastavili navigaciju.</string>
+    <string name="quick_action_show_navigation_finish_dialog">Prikazati navigacioni završni dijalog</string>
     </resources>
