@@ -19,6 +19,7 @@
             android:paddingBottom="8dp">
 
             <TextView
+                android:id="@+id/choose_navigation_title"
                 android:layout_width="match_parent"
                 android:layout_height="52dp"
                 android:gravity="center_vertical"

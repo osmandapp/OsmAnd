@@ -28,9 +28,11 @@ import net.osmand.util.MapUtils;
 import java.util.List;
 
 public class SelectedPointMenuBottomSheetDialogFragment extends BottomSheetDialogFragment {
+
 	public final static String TAG = "SelectedPointMenuBottomSheetDialogFragment";
 
 	private SelectedPointOptionOnClickListener listener;
+	private boolean nightMode;
 
 	public void setSelectedPointOptionOnClickListener(SelectedPointOptionOnClickListener listener) {
 		this.listener = listener;
@@ -44,7 +46,7 @@ public class SelectedPointMenuBottomSheetDialogFragment extends BottomSheetDialo
 		final MeasurementToolLayer measurementLayer = mapActivity.getMapLayers().getMeasurementToolLayer();
 		final boolean portrait = AndroidUiHelper.isOrientationPortrait(mapActivity);
 
-		final boolean nightMode = getMyApplication().getDaynightHelper().isNightModeForMapControls();
+		nightMode = getMyApplication().getDaynightHelper().isNightModeForMapControls();
 		final int themeRes = nightMode ? R.style.OsmandDarkTheme : R.style.OsmandLightTheme;
 
 		final View mainView = View.inflate(new ContextThemeWrapper(getContext(), themeRes), R.layout.fragment_selected_menu_bottom_sheet_dialog, null);
@@ -156,7 +158,7 @@ public class SelectedPointMenuBottomSheetDialogFragment extends BottomSheetDialo
 
 	@Override
 	protected Drawable getContentIcon(@DrawableRes int id) {
-		return getIcon(id, getMyApplication().getSettings().isLightContent() ? R.color.on_map_icon_color : 0);
+		return getIcon(id, nightMode ? R.color.ctx_menu_info_text_dark : R.color.on_map_icon_color);
 	}
 
 	interface SelectedPointOptionOnClickListener {

@@ -20,6 +20,7 @@
             android:paddingBottom="8dp">
 
             <net.osmand.plus.widgets.TextViewEx
+                android:id="@+id/options_title"
                 android:layout_width="match_parent"
                 android:layout_height="52dp"
                 android:gravity="center_vertical"

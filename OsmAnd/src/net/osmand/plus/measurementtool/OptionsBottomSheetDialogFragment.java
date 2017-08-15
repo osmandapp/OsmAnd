@@ -18,6 +18,7 @@ import net.osmand.AndroidUtils;
 import net.osmand.plus.R;
 import net.osmand.plus.base.BottomSheetDialogFragment;
 import net.osmand.plus.helpers.AndroidUiHelper;
+import net.osmand.plus.widgets.TextViewEx;
 
 public class OptionsBottomSheetDialogFragment extends BottomSheetDialogFragment {
 
@@ -26,6 +27,7 @@ public class OptionsBottomSheetDialogFragment extends BottomSheetDialogFragment 
 	private OptionsOnClickListener listener;
 	private boolean addLineMode;
 	private boolean portrait;
+	private boolean nightMode;
 
 	public void setOptionsOnClickListener(OptionsOnClickListener listener) {
 		this.listener = listener;
@@ -38,7 +40,7 @@ public class OptionsBottomSheetDialogFragment extends BottomSheetDialogFragment 
 	@Nullable
 	@Override
 	public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
-		final boolean nightMode = getMyApplication().getDaynightHelper().isNightModeForMapControls();
+		nightMode = getMyApplication().getDaynightHelper().isNightModeForMapControls();
 		final int themeRes = nightMode ? R.style.OsmandDarkTheme : R.style.OsmandLightTheme;
 		portrait = AndroidUiHelper.isOrientationPortrait(getActivity());
 
@@ -47,6 +49,9 @@ public class OptionsBottomSheetDialogFragment extends BottomSheetDialogFragment 
 			AndroidUtils.setBackground(getActivity(), mainView, nightMode, R.drawable.bg_bottom_menu_light, R.drawable.bg_bottom_menu_dark);
 		}
 
+		if (nightMode) {
+			((TextViewEx) mainView.findViewById(R.id.options_title)).setTextColor(getResources().getColor(R.color.ctx_menu_info_text_dark));
+		}
 		((ImageView) mainView.findViewById(R.id.snap_to_road_icon)).setImageDrawable(getContentIcon(R.drawable.ic_action_snap_to_road));
 		((ImageView) mainView.findViewById(R.id.clear_all_icon)).setImageDrawable(getContentIcon(R.drawable.ic_action_reset_to_default_dark));
 		if (!addLineMode) {
@@ -156,7 +161,7 @@ public class OptionsBottomSheetDialogFragment extends BottomSheetDialogFragment 
 
 	@Override
 	protected Drawable getContentIcon(@DrawableRes int id) {
-		return getIcon(id, getMyApplication().getSettings().isLightContent() ? R.color.on_map_icon_color : 0);
+		return getIcon(id, nightMode ? R.color.ctx_menu_info_text_dark : R.color.on_map_icon_color);
 	}
 
 	interface OptionsOnClickListener {

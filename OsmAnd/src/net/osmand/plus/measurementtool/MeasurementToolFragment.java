@@ -6,6 +6,7 @@ import android.content.Intent;
 import android.graphics.drawable.Drawable;
 import android.os.AsyncTask;
 import android.os.Bundle;
+import android.support.annotation.DrawableRes;
 import android.support.annotation.Nullable;
 import android.support.v4.app.Fragment;
 import android.support.v4.app.FragmentManager;
@@ -71,6 +72,7 @@ public class MeasurementToolFragment extends Fragment {
 	public static final String TAG = "MeasurementToolFragment";
 
 	private final CommandManager commandManager = new CommandManager();
+	private IconsCache iconsCache;
 	private RecyclerView pointsRv;
 	private MeasurementToolBarController toolBarController;
 	private MeasurementToolAdapter adapter;
@@ -89,6 +91,7 @@ public class MeasurementToolFragment extends Fragment {
 	private boolean pointsListOpened;
 	private boolean saved;
 	private boolean portrait;
+	private boolean nightMode;
 	private int previousMapPosition;
 	private NewGpxLine newGpxLine;
 
@@ -107,15 +110,15 @@ public class MeasurementToolFragment extends Fragment {
 	public View onCreateView(LayoutInflater inflater, @Nullable ViewGroup container, @Nullable Bundle savedInstanceState) {
 		final MapActivity mapActivity = (MapActivity) getActivity();
 		final MeasurementToolLayer measurementLayer = mapActivity.getMapLayers().getMeasurementToolLayer();
-		final IconsCache iconsCache = mapActivity.getMyApplication().getIconsCache();
-		final boolean nightMode = mapActivity.getMyApplication().getDaynightHelper().isNightModeForMapControls();
+		iconsCache = mapActivity.getMyApplication().getIconsCache();
+		nightMode = mapActivity.getMyApplication().getDaynightHelper().isNightModeForMapControls();
 		final int themeRes = nightMode ? R.style.OsmandDarkTheme : R.style.OsmandLightTheme;
 		final int backgroundColor = ContextCompat.getColor(getActivity(),
 				nightMode ? R.color.ctx_menu_info_view_bg_dark : R.color.ctx_menu_info_view_bg_light);
 		portrait = AndroidUiHelper.isOrientationPortrait(getActivity());
 
-		upIcon = iconsCache.getThemedIcon(R.drawable.ic_action_arrow_up);
-		downIcon = iconsCache.getThemedIcon(R.drawable.ic_action_arrow_down);
+		upIcon = getContentIcon(R.drawable.ic_action_arrow_up);
+		downIcon = getContentIcon(R.drawable.ic_action_arrow_down);
 		pointsSt = getString(R.string.points).toLowerCase();
 
 		View view = View.inflate(new ContextThemeWrapper(getContext(), themeRes), R.layout.fragment_measurement_tool, null);
@@ -131,19 +134,19 @@ public class MeasurementToolFragment extends Fragment {
 		pointsTv = (TextView) mainView.findViewById(R.id.measurement_points_text_view);
 
 		((ImageView) mainView.findViewById(R.id.ruler_icon))
-				.setImageDrawable(iconsCache.getIcon(R.drawable.ic_action_ruler, R.color.color_myloc_distance));
+				.setImageDrawable(iconsCache.getIcon(R.drawable.ic_action_ruler, nightMode ? R.color.osmand_orange : R.color.color_myloc_distance));
 
 		((ImageView) mainView.findViewById(R.id.move_point_icon))
-				.setImageDrawable(iconsCache.getIcon(R.drawable.ic_action_move_point, R.color.color_myloc_distance));
+				.setImageDrawable(iconsCache.getIcon(R.drawable.ic_action_move_point, nightMode ? R.color.osmand_orange : R.color.color_myloc_distance));
 
 		((ImageView) mainView.findViewById(R.id.add_point_after_icon))
-				.setImageDrawable(iconsCache.getIcon(R.drawable.ic_action_addpoint_above, R.color.color_myloc_distance));
+				.setImageDrawable(iconsCache.getIcon(R.drawable.ic_action_addpoint_above, nightMode ? R.color.osmand_orange : R.color.color_myloc_distance));
 
 		((ImageView) mainView.findViewById(R.id.add_point_before_icon))
-				.setImageDrawable(iconsCache.getIcon(R.drawable.ic_action_addpoint_below, R.color.color_myloc_distance));
+				.setImageDrawable(iconsCache.getIcon(R.drawable.ic_action_addpoint_below, nightMode ? R.color.osmand_orange : R.color.color_myloc_distance));
 
 		upDownBtn = (ImageView) mainView.findViewById(R.id.up_down_button);
-		upDownBtn.setImageDrawable(iconsCache.getThemedIcon(R.drawable.ic_action_arrow_up));
+		upDownBtn.setImageDrawable(upIcon);
 
 		mainView.findViewById(R.id.cancel_point_button).setOnClickListener(new View.OnClickListener() {
 			@Override
@@ -240,7 +243,7 @@ public class MeasurementToolFragment extends Fragment {
 		undoBtn = ((ImageButton) mainView.findViewById(R.id.undo_point_button));
 		redoBtn = ((ImageButton) mainView.findViewById(R.id.redo_point_button));
 
-		undoBtn.setImageDrawable(iconsCache.getThemedIcon(R.drawable.ic_action_undo_dark));
+		undoBtn.setImageDrawable(getContentIcon(R.drawable.ic_action_undo_dark));
 		undoBtn.setOnClickListener(new View.OnClickListener() {
 			@Override
 			public void onClick(View view) {
@@ -260,7 +263,7 @@ public class MeasurementToolFragment extends Fragment {
 			}
 		});
 
-		redoBtn.setImageDrawable(iconsCache.getThemedIcon(R.drawable.ic_action_redo_dark));
+		redoBtn.setImageDrawable(getContentIcon(R.drawable.ic_action_redo_dark));
 		redoBtn.setOnClickListener(new View.OnClickListener() {
 			@Override
 			public void onClick(View view) {
@@ -917,6 +920,10 @@ public class MeasurementToolFragment extends Fragment {
 			return mapActivity.getMapLayers().getMeasurementToolLayer();
 		}
 		return null;
+	}
+
+	private Drawable getContentIcon(@DrawableRes int id) {
+		return iconsCache.getIcon(id, nightMode ? R.color.ctx_menu_info_text_dark : R.color.icon_color);
 	}
 
 	private void enable(View... views) {

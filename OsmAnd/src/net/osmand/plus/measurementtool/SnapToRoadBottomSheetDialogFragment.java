@@ -1,7 +1,9 @@
 package net.osmand.plus.measurementtool;
 
+import android.graphics.drawable.Drawable;
 import android.os.Build;
 import android.os.Bundle;
+import android.support.annotation.DrawableRes;
 import android.support.annotation.Nullable;
 import android.view.ContextThemeWrapper;
 import android.view.LayoutInflater;
@@ -28,11 +30,13 @@ public class SnapToRoadBottomSheetDialogFragment extends BottomSheetDialogFragme
 
 	public static final String TAG = "SnapToRoadBottomSheetDialogFragment";
 
+	private boolean nightMode;
+
 	@Nullable
 	@Override
 	public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
 		final OsmandSettings settings = getMyApplication().getSettings();
-		final boolean nightMode = getMyApplication().getDaynightHelper().isNightModeForMapControls();
+		nightMode = getMyApplication().getDaynightHelper().isNightModeForMapControls();
 		final int themeRes = nightMode ? R.style.OsmandDarkTheme : R.style.OsmandLightTheme;
 
 		final View view = View.inflate(new ContextThemeWrapper(getContext(), themeRes), R.layout.fragment_snap_to_road_bottom_sheet_dialog, container);
@@ -43,6 +47,9 @@ public class SnapToRoadBottomSheetDialogFragment extends BottomSheetDialogFragme
 				dismiss();
 			}
 		});
+		if (nightMode) {
+			((TextView) view.findViewById(R.id.choose_navigation_title)).setTextColor(getResources().getColor(R.color.ctx_menu_info_text_dark));
+		}
 
 		LinearLayout navContainer = (LinearLayout) view.findViewById(R.id.navigation_types_container);
 		final List<ApplicationMode> modes = new ArrayList<>(ApplicationMode.values(settings));
@@ -56,7 +63,7 @@ public class SnapToRoadBottomSheetDialogFragment extends BottomSheetDialogFragme
 
 		final int height = AndroidUtils.getScreenHeight(getActivity());
 		final int statusBarHeight = AndroidUtils.getStatusBarHeight(getActivity());
-		final int navBarHeight =  AndroidUtils.getNavBarHeight(getActivity());
+		final int navBarHeight = AndroidUtils.getNavBarHeight(getActivity());
 
 		view.getViewTreeObserver().addOnGlobalLayoutListener(new ViewTreeObserver.OnGlobalLayoutListener() {
 			@Override
@@ -92,5 +99,10 @@ public class SnapToRoadBottomSheetDialogFragment extends BottomSheetDialogFragme
 			params.width = getActivity().getResources().getDimensionPixelSize(R.dimen.landscape_bottom_sheet_dialog_fragment_width);
 			window.setAttributes(params);
 		}
+	}
+
+	@Override
+	protected Drawable getContentIcon(@DrawableRes int id) {
+		return getIcon(id, nightMode ? R.color.ctx_menu_info_text_dark : R.color.on_map_icon_color);
 	}
 }

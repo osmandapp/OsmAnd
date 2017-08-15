@@ -27,6 +27,7 @@ public class MeasurementToolAdapter extends RecyclerView.Adapter<MeasurementTool
 	private final MapActivity mapActivity;
 	private final List<WptPt> points;
 	private MeasurementAdapterListener listener;
+	private boolean nightMode;
 
 	public MeasurementToolAdapter(MapActivity mapActivity, List<WptPt> points) {
 		this.mapActivity = mapActivity;
@@ -40,7 +41,7 @@ public class MeasurementToolAdapter extends RecyclerView.Adapter<MeasurementTool
 	@Override
 	public MeasureToolItemVH onCreateViewHolder(ViewGroup viewGroup, int i) {
 		View view = LayoutInflater.from(viewGroup.getContext()).inflate(R.layout.measure_points_list_item, viewGroup, false);
-		final boolean nightMode = mapActivity.getMyApplication().getDaynightHelper().isNightModeForMapControls();
+		nightMode = mapActivity.getMyApplication().getDaynightHelper().isNightModeForMapControls();
 		if (!nightMode) {
 			view.findViewById(R.id.points_divider).setBackgroundResource(R.drawable.divider);
 		}
@@ -69,7 +70,8 @@ public class MeasurementToolAdapter extends RecyclerView.Adapter<MeasurementTool
 				return false;
 			}
 		});
-		holder.icon.setImageDrawable(iconsCache.getThemedIcon(R.drawable.ic_action_measure_point));
+		holder.icon.setImageDrawable(iconsCache.getIcon(R.drawable.ic_action_measure_point,
+				nightMode ? R.color.ctx_menu_info_text_dark : R.color.icon_color));
 		holder.title.setText(mapActivity.getString(R.string.plugin_distance_point) + " - " + (pos + 1));
 		if (pos < 1) {
 			holder.descr.setText(mapActivity.getString(R.string.shared_string_control_start));
@@ -81,7 +83,8 @@ public class MeasurementToolAdapter extends RecyclerView.Adapter<MeasurementTool
 			}
 			holder.descr.setText(OsmAndFormatter.getFormattedDistance(dist, mapActivity.getMyApplication()));
 		}
-		holder.deleteBtn.setImageDrawable(iconsCache.getThemedIcon(R.drawable.ic_action_remove_dark));
+		holder.deleteBtn.setImageDrawable(iconsCache.getIcon(R.drawable.ic_action_remove_dark,
+				nightMode ? R.color.ctx_menu_info_text_dark : R.color.icon_color));
 		holder.deleteBtn.setOnClickListener(new View.OnClickListener() {
 			@Override
 			public void onClick(View view) {
