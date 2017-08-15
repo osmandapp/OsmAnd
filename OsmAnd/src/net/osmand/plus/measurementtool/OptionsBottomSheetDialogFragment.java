@@ -40,8 +40,8 @@ public class OptionsBottomSheetDialogFragment extends BottomSheetDialogFragment 
 	@Nullable
 	@Override
 	public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
-		nightMode = getMyApplication().getDaynightHelper().isNightModeForMapControls();
 		final int themeRes = nightMode ? R.style.OsmandDarkTheme : R.style.OsmandLightTheme;
+		nightMode = getMyApplication().getDaynightHelper().isNightModeForMapControls();
 		portrait = AndroidUiHelper.isOrientationPortrait(getActivity());
 
 		final View mainView = View.inflate(new ContextThemeWrapper(getContext(), themeRes), R.layout.fragment_options_bottom_sheet_dialog, null);
@@ -119,7 +119,7 @@ public class OptionsBottomSheetDialogFragment extends BottomSheetDialogFragment 
 			}
 		});
 
-		final int height = AndroidUtils.getScreenHeight(getActivity());
+		final int screenHeight = AndroidUtils.getScreenHeight(getActivity());
 		final int statusBarHeight = AndroidUtils.getStatusBarHeight(getActivity());
 		final int navBarHeight = AndroidUtils.getNavBarHeight(getActivity());
 
@@ -130,10 +130,21 @@ public class OptionsBottomSheetDialogFragment extends BottomSheetDialogFragment 
 				int scrollViewHeight = scrollView.getHeight();
 				int dividerHeight = AndroidUtils.dpToPx(getContext(), 1);
 				int cancelButtonHeight = getContext().getResources().getDimensionPixelSize(R.dimen.measure_distance_bottom_sheet_cancel_button_height);
-				int spaceForScrollView = height - statusBarHeight - navBarHeight - dividerHeight - cancelButtonHeight;
+				int spaceForScrollView = screenHeight - statusBarHeight - navBarHeight - dividerHeight - cancelButtonHeight;
 				if (scrollViewHeight > spaceForScrollView) {
 					scrollView.getLayoutParams().height = spaceForScrollView;
 					scrollView.requestLayout();
+				}
+
+				if (!portrait) {
+					if (screenHeight - statusBarHeight - mainView.getHeight()
+							>= AndroidUtils.dpToPx(getActivity(), 8)) {
+						AndroidUtils.setBackground(getActivity(), mainView, nightMode,
+								R.drawable.bg_bottom_sheet_topsides_landscape_light, R.drawable.bg_bottom_sheet_topsides_landscape_dark);
+					} else {
+						AndroidUtils.setBackground(getActivity(), mainView, nightMode,
+								R.drawable.bg_bottom_sheet_sides_landscape_light, R.drawable.bg_bottom_sheet_sides_landscape_dark);
+					}
 				}
 
 				ViewTreeObserver obs = mainView.getViewTreeObserver();
