@@ -1,5 +1,6 @@
 package net.osmand.plus.measurementtool;
 
+import android.content.DialogInterface;
 import android.graphics.drawable.Drawable;
 import android.os.Build;
 import android.os.Bundle;
@@ -161,6 +162,22 @@ public class SelectedPointMenuBottomSheetDialogFragment extends BottomSheetDialo
 		return getIcon(id, nightMode ? R.color.ctx_menu_info_text_dark : R.color.on_map_icon_color);
 	}
 
+	@Override
+	public void dismiss() {
+		if (listener != null) {
+			listener.onCloseMenu();
+		}
+		super.dismiss();
+	}
+
+	@Override
+	public void onCancel(DialogInterface dialog) {
+		if (listener != null) {
+			listener.onCloseMenu();
+		}
+		super.onCancel(dialog);
+	}
+
 	interface SelectedPointOptionOnClickListener {
 
 		void moveOnClick();
@@ -170,5 +187,7 @@ public class SelectedPointMenuBottomSheetDialogFragment extends BottomSheetDialo
 		void addPointAfterOnClick();
 
 		void addPointBeforeOnClick();
+
+		void onCloseMenu();
 	}
 }

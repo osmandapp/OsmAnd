@@ -299,6 +299,9 @@ public class MeasurementToolFragment extends Fragment {
 
 			@Override
 			public void onSelectPoint() {
+				if (pointsListOpened) {
+					hidePointsList();
+				}
 				openSelectedPointMenu(mapActivity);
 			}
 		});
@@ -366,7 +369,19 @@ public class MeasurementToolFragment extends Fragment {
 
 			@Override
 			public void onItemClick(View view) {
-				measurementLayer.moveMapToPoint(pointsRv.indexOfChild(view));
+				int position = pointsRv.indexOfChild(view);
+				if (pointsListOpened) {
+					hidePointsList();
+				}
+				OsmandMapTileView tileView = mapActivity.getMapView();
+				if (portrait) {
+					previousMapPosition = tileView.getMapPosition();
+					tileView.setMapPosition(MIDDLE_TOP_CONSTANT);
+				}
+				mapActivity.refreshMap();
+				measurementLayer.moveMapToPoint(position);
+				measurementLayer.selectPoint(position);
+				openSelectedPointMenu(mapActivity);
 			}
 
 			@Override
@@ -436,6 +451,11 @@ public class MeasurementToolFragment extends Fragment {
 					measurementLayer.enterAddingPointBeforeMode();
 				}
 				enterAddPointBeforeMode();
+			}
+
+			@Override
+			public void onCloseMenu() {
+				setPreviousMapPosition();
 			}
 		});
 		fragment.show(mapActivity.getSupportFragmentManager(), SelectedPointMenuBottomSheetDialogFragment.TAG);

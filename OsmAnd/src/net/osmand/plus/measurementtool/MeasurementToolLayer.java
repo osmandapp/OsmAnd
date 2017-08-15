@@ -176,7 +176,7 @@ public class MeasurementToolLayer extends OsmandMapLayer implements ContextMenuL
 	private void selectPoint(double x, double y) {
 		clearSelection();
 		RotatedTileBox tb = view.getCurrentRotatedTileBox();
-		double lowestDistance = AndroidUtils.dpToPx(view.getContext(), 10);
+		double lowestDistance = AndroidUtils.dpToPx(view.getContext(), 20);
 		for (int i = 0; i < measurementPoints.size(); i++) {
 			WptPt pt = measurementPoints.get(i);
 			if (tb.containsLatLon(pt.getLatitude(), pt.getLongitude())) {
@@ -190,6 +190,12 @@ public class MeasurementToolLayer extends OsmandMapLayer implements ContextMenuL
 				}
 			}
 		}
+	}
+
+	public void selectPoint(int position) {
+		clearSelection();
+		selectedCachedPoint = new WptPt(measurementPoints.get(position));
+		selectedPointPos = position;
 	}
 
 	@Override
