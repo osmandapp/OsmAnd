@@ -955,7 +955,7 @@ public class MeasurementToolFragment extends Fragment {
 		MeasurementToolLayer measurementLayer = getMeasurementLayer();
 		if (measurementLayer != null) {
 			distanceTv.setText(measurementLayer.getDistanceSt() + ",");
-			pointsTv.setText(pointsSt + ": " + measurementLayer.getPointsCount());
+			pointsTv.setText((portrait ? pointsSt + ": " : "") + measurementLayer.getPointsCount());
 		}
 	}
 

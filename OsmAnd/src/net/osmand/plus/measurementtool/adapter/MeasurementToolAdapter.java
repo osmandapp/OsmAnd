@@ -72,6 +72,9 @@ public class MeasurementToolAdapter extends RecyclerView.Adapter<MeasurementTool
 		});
 		holder.icon.setImageDrawable(iconsCache.getIcon(R.drawable.ic_action_measure_point,
 				nightMode ? R.color.ctx_menu_info_text_dark : R.color.icon_color));
+		if (nightMode) {
+			holder.title.setTextColor(mapActivity.getMyApplication().getResources().getColor(R.color.primary_text_dark));
+		}
 		holder.title.setText(mapActivity.getString(R.string.plugin_distance_point) + " - " + (pos + 1));
 		if (pos < 1) {
 			holder.descr.setText(mapActivity.getString(R.string.shared_string_control_start));
