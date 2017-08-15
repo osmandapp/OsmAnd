@@ -824,6 +824,14 @@ public class GPXUtilities {
 			return g;
 		}
 
+		public List<WptPt> getLastRoutePoints() {
+			List<WptPt> points = new ArrayList<>();
+			if (routes.size() > 0) {
+				Route rt = routes.get(routes.size() - 1);
+				points.addAll(rt.points);
+			}
+			return points;
+		}
 
 		public boolean hasRtePt() {
 			for (Route r : routes) {
@@ -909,11 +917,12 @@ public class GPXUtilities {
 			modifiedTime = System.currentTimeMillis();
 		}
 
-		public void addRtePts(List<WptPt> points) {
+		public void setLastRoutePoints(List<WptPt> points) {
 			if (routes.size() == 0) {
 				routes.add(new Route());
 			}
 			Route currentRoute = routes.get(routes.size() - 1);
+			currentRoute.points.clear();
 			currentRoute.points.addAll(points);
 
 			modifiedTime = System.currentTimeMillis();

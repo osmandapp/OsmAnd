@@ -111,6 +111,11 @@ public class MeasurementToolLayer extends OsmandMapLayer implements ContextMenuL
 		return measurementPoints;
 	}
 
+	public void setMeasurementPoints(List<WptPt> points) {
+		measurementPoints.clear();
+		measurementPoints.addAll(points);
+	}
+
 	String getDistanceSt() {
 		float dist = 0;
 		if (measurementPoints.size() > 0) {

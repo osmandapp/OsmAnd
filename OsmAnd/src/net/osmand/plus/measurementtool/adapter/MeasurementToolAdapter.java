@@ -3,6 +3,7 @@ package net.osmand.plus.measurementtool.adapter;
 import android.support.v4.content.ContextCompat;
 import android.support.v4.view.MotionEventCompat;
 import android.support.v7.widget.RecyclerView;
+import android.text.TextUtils;
 import android.view.LayoutInflater;
 import android.view.MotionEvent;
 import android.view.View;
@@ -75,7 +76,13 @@ public class MeasurementToolAdapter extends RecyclerView.Adapter<MeasurementTool
 		if (nightMode) {
 			holder.title.setTextColor(mapActivity.getMyApplication().getResources().getColor(R.color.primary_text_dark));
 		}
-		holder.title.setText(mapActivity.getString(R.string.plugin_distance_point) + " - " + (pos + 1));
+		WptPt pt = points.get(pos);
+		String pointTitle = pt.name;
+		if (!TextUtils.isEmpty(pointTitle)) {
+			holder.title.setText(pointTitle);
+		} else {
+			holder.title.setText(mapActivity.getString(R.string.plugin_distance_point) + " - " + (pos + 1));
+		}
 		if (pos < 1) {
 			holder.descr.setText(mapActivity.getString(R.string.shared_string_control_start));
 		} else {

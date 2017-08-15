@@ -327,7 +327,12 @@ public class MeasurementToolFragment extends Fragment {
 
 		toolBarController = new MeasurementToolBarController(newGpxLine);
 		if (newGpxLine != null) {
-			toolBarController.setTitle(getString(R.string.add_line));
+			LineType lineType = newGpxLine.getLineType();
+			if (lineType == LineType.ROUTE_POINTS) {
+				toolBarController.setTitle(getString(R.string.add_route_points));
+			} else if (lineType == LineType.SEGMENT) {
+				toolBarController.setTitle(getString(R.string.add_line));
+			}
 		} else {
 			toolBarController.setTitle(getString(R.string.measurement_tool_action_bar));
 		}
@@ -412,6 +417,13 @@ public class MeasurementToolFragment extends Fragment {
 
 		enterMeasurementMode();
 
+		if (newGpxLine != null) {
+			LineType lineType = newGpxLine.getLineType();
+			if (lineType == LineType.ROUTE_POINTS) {
+				displayRoutePoints(mapActivity);
+			}
+		}
+
 		return view;
 	}
 
@@ -427,6 +439,18 @@ public class MeasurementToolFragment extends Fragment {
 		if (layer != null) {
 			layer.setOnSingleTapListener(null);
 			layer.setOnEnterMovePointModeListener(null);
+		}
+	}
+
+	private void displayRoutePoints(MapActivity mapActivity) {
+		final MeasurementToolLayer measurementLayer = mapActivity.getMapLayers().getMeasurementToolLayer();
+
+		GPXFile gpx = newGpxLine.getGpxFile();
+		List<WptPt> points = gpx.getLastRoutePoints();
+		if (measurementLayer != null) {
+			measurementLayer.setMeasurementPoints(points);
+			adapter.notifyDataSetChanged();
+			updateText();
 		}
 	}
 
@@ -856,7 +880,7 @@ public class MeasurementToolFragment extends Fragment {
 								gpx.addTrkSegment(points);
 								break;
 							case ROUTE_POINTS:
-								gpx.addRtePts(points);
+								gpx.setLastRoutePoints(points);
 								break;
 						}
 					}

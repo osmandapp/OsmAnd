@@ -6,6 +6,7 @@ import android.os.Build;
 import android.os.Bundle;
 import android.support.annotation.DrawableRes;
 import android.support.annotation.Nullable;
+import android.text.TextUtils;
 import android.view.ContextThemeWrapper;
 import android.view.LayoutInflater;
 import android.view.View;
@@ -106,7 +107,13 @@ public class SelectedPointMenuBottomSheetDialogFragment extends BottomSheetDialo
 
 		List<WptPt> points = measurementLayer.getMeasurementPoints();
 		int pos = measurementLayer.getSelectedPointPos();
-		((TextView) mainView.findViewById(R.id.selected_point_title)).setText(mapActivity.getString(R.string.plugin_distance_point) + " " + (pos + 1));
+		WptPt pt = points.get(pos);
+		String pointTitle = pt.name;
+		if (!TextUtils.isEmpty(pointTitle)) {
+			((TextView) mainView.findViewById(R.id.selected_point_title)).setText(pointTitle);
+		} else {
+			((TextView) mainView.findViewById(R.id.selected_point_title)).setText(mapActivity.getString(R.string.plugin_distance_point) + " - " + (pos + 1));
+		}
 		if (pos < 1) {
 			((TextView) mainView.findViewById(R.id.selected_point_distance)).setText(mapActivity.getString(R.string.shared_string_control_start));
 		} else {
