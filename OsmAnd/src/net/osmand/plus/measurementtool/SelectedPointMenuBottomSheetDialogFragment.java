@@ -45,18 +45,19 @@ public class SelectedPointMenuBottomSheetDialogFragment extends BottomSheetDialo
 	@Override
 	public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
 		final MapActivity mapActivity = (MapActivity) getActivity();
+		nightMode = getMyApplication().getDaynightHelper().isNightModeForMapControls();
+		portrait = AndroidUiHelper.isOrientationPortrait(mapActivity);
 		final IconsCache iconsCache = mapActivity.getMyApplication().getIconsCache();
 		final MeasurementToolLayer measurementLayer = mapActivity.getMapLayers().getMeasurementToolLayer();
 		final int themeRes = nightMode ? R.style.OsmandDarkTheme : R.style.OsmandLightTheme;
-		nightMode = getMyApplication().getDaynightHelper().isNightModeForMapControls();
-		portrait = AndroidUiHelper.isOrientationPortrait(mapActivity);
 
 		final View mainView = View.inflate(new ContextThemeWrapper(getContext(), themeRes), R.layout.fragment_selected_menu_bottom_sheet_dialog, null);
 		if (portrait) {
 			AndroidUtils.setBackground(getActivity(), mainView, nightMode, R.drawable.bg_bottom_menu_light, R.drawable.bg_bottom_menu_dark);
 		}
 
-		((ImageView) mainView.findViewById(R.id.selected_point_icon)).setImageDrawable(iconsCache.getIcon(R.drawable.ic_action_measure_point, R.color.color_myloc_distance));
+		int color = nightMode ? R.color.osmand_orange : R.color.color_myloc_distance;
+		((ImageView) mainView.findViewById(R.id.selected_point_icon)).setImageDrawable(iconsCache.getIcon(R.drawable.ic_action_measure_point, color));
 		((ImageView) mainView.findViewById(R.id.move_point_icon)).setImageDrawable(getContentIcon(R.drawable.ic_action_move_point));
 		((ImageView) mainView.findViewById(R.id.delete_point_icon)).setImageDrawable(getContentIcon(R.drawable.ic_action_remove_dark));
 		((ImageView) mainView.findViewById(R.id.add_point_after_icon)).setImageDrawable(getContentIcon(R.drawable.ic_action_addpoint_above));

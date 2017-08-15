@@ -36,10 +36,10 @@ public class SnapToRoadBottomSheetDialogFragment extends BottomSheetDialogFragme
 	@Nullable
 	@Override
 	public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
-		final OsmandSettings settings = getMyApplication().getSettings();
-		final int themeRes = nightMode ? R.style.OsmandDarkTheme : R.style.OsmandLightTheme;
 		nightMode = getMyApplication().getDaynightHelper().isNightModeForMapControls();
 		portrait = AndroidUiHelper.isOrientationPortrait(getActivity());
+		final OsmandSettings settings = getMyApplication().getSettings();
+		final int themeRes = nightMode ? R.style.OsmandDarkTheme : R.style.OsmandLightTheme;
 
 		final View mainView = View.inflate(new ContextThemeWrapper(getContext(), themeRes), R.layout.fragment_snap_to_road_bottom_sheet_dialog, container);
 
