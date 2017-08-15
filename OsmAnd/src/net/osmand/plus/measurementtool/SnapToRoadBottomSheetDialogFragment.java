@@ -31,27 +31,29 @@ public class SnapToRoadBottomSheetDialogFragment extends BottomSheetDialogFragme
 	public static final String TAG = "SnapToRoadBottomSheetDialogFragment";
 
 	private boolean nightMode;
+	private boolean portrait;
 
 	@Nullable
 	@Override
 	public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
 		final OsmandSettings settings = getMyApplication().getSettings();
-		nightMode = getMyApplication().getDaynightHelper().isNightModeForMapControls();
 		final int themeRes = nightMode ? R.style.OsmandDarkTheme : R.style.OsmandLightTheme;
+		nightMode = getMyApplication().getDaynightHelper().isNightModeForMapControls();
+		portrait = AndroidUiHelper.isOrientationPortrait(getActivity());
 
-		final View view = View.inflate(new ContextThemeWrapper(getContext(), themeRes), R.layout.fragment_snap_to_road_bottom_sheet_dialog, container);
+		final View mainView = View.inflate(new ContextThemeWrapper(getContext(), themeRes), R.layout.fragment_snap_to_road_bottom_sheet_dialog, container);
 
-		view.findViewById(R.id.cancel_row).setOnClickListener(new View.OnClickListener() {
+		mainView.findViewById(R.id.cancel_row).setOnClickListener(new View.OnClickListener() {
 			@Override
 			public void onClick(View view) {
 				dismiss();
 			}
 		});
 		if (nightMode) {
-			((TextView) view.findViewById(R.id.choose_navigation_title)).setTextColor(getResources().getColor(R.color.ctx_menu_info_text_dark));
+			((TextView) mainView.findViewById(R.id.choose_navigation_title)).setTextColor(getResources().getColor(R.color.ctx_menu_info_text_dark));
 		}
 
-		LinearLayout navContainer = (LinearLayout) view.findViewById(R.id.navigation_types_container);
+		LinearLayout navContainer = (LinearLayout) mainView.findViewById(R.id.navigation_types_container);
 		final List<ApplicationMode> modes = new ArrayList<>(ApplicationMode.values(settings));
 		modes.remove(ApplicationMode.DEFAULT);
 		for (ApplicationMode mode : modes) {
@@ -61,24 +63,35 @@ public class SnapToRoadBottomSheetDialogFragment extends BottomSheetDialogFragme
 			navContainer.addView(row);
 		}
 
-		final int height = AndroidUtils.getScreenHeight(getActivity());
+		final int screenHeight = AndroidUtils.getScreenHeight(getActivity());
 		final int statusBarHeight = AndroidUtils.getStatusBarHeight(getActivity());
 		final int navBarHeight = AndroidUtils.getNavBarHeight(getActivity());
 
-		view.getViewTreeObserver().addOnGlobalLayoutListener(new ViewTreeObserver.OnGlobalLayoutListener() {
+		mainView.getViewTreeObserver().addOnGlobalLayoutListener(new ViewTreeObserver.OnGlobalLayoutListener() {
 			@Override
 			public void onGlobalLayout() {
-				final View scrollView = view.findViewById(R.id.navigation_types_scroll_view);
+				final View scrollView = mainView.findViewById(R.id.navigation_types_scroll_view);
 				int scrollViewHeight = scrollView.getHeight();
 				int dividerHeight = AndroidUtils.dpToPx(getContext(), 1);
 				int cancelButtonHeight = getContext().getResources().getDimensionPixelSize(R.dimen.measure_distance_bottom_sheet_cancel_button_height);
-				int spaceForScrollView = height - statusBarHeight - navBarHeight - dividerHeight - cancelButtonHeight;
+				int spaceForScrollView = screenHeight - statusBarHeight - navBarHeight - dividerHeight - cancelButtonHeight;
 				if (scrollViewHeight > spaceForScrollView) {
 					scrollView.getLayoutParams().height = spaceForScrollView;
 					scrollView.requestLayout();
 				}
 
-				ViewTreeObserver obs = view.getViewTreeObserver();
+				if (!portrait) {
+					if (screenHeight - statusBarHeight - mainView.getHeight()
+							>= AndroidUtils.dpToPx(getActivity(), 8)) {
+						AndroidUtils.setBackground(getActivity(), mainView, nightMode,
+								R.drawable.bg_bottom_sheet_topsides_landscape_light, R.drawable.bg_bottom_sheet_topsides_landscape_dark);
+					} else {
+						AndroidUtils.setBackground(getActivity(), mainView, nightMode,
+								R.drawable.bg_bottom_sheet_sides_landscape_light, R.drawable.bg_bottom_sheet_sides_landscape_dark);
+					}
+				}
+
+				ViewTreeObserver obs = mainView.getViewTreeObserver();
 				if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.JELLY_BEAN) {
 					obs.removeOnGlobalLayoutListener(this);
 				} else {
@@ -87,13 +100,13 @@ public class SnapToRoadBottomSheetDialogFragment extends BottomSheetDialogFragme
 			}
 		});
 
-		return view;
+		return mainView;
 	}
 
 	@Override
 	public void onStart() {
 		super.onStart();
-		if (!AndroidUiHelper.isOrientationPortrait(getActivity())) {
+		if (!portrait) {
 			final Window window = getDialog().getWindow();
 			WindowManager.LayoutParams params = window.getAttributes();
 			params.width = getActivity().getResources().getDimensionPixelSize(R.dimen.landscape_bottom_sheet_dialog_fragment_width);

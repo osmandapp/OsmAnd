@@ -2426,7 +2426,7 @@
 \n
 \n</string>
     <string name="shared_string_paused">Приостановлено</string>
-    <string name="rendering_value_fine_name"/>
+    <string name="rendering_value_fine_name">Правильно</string>
     <string name="average">Средняя</string>
     <string name="ascent_descent">Подъём/Спуск</string>
     <string name="moving_time">Время в движении</string>
@@ -2451,4 +2451,24 @@
     <string name="none_point_error">Необходимо добавить хотя бы одну точку.</string>
     <string name="mapillary_image">Отправить изображение в Mapillary</string>
     <string name="improve_coverage_mapillary">Улучшить фотопокрытие через Mapillary</string>
+    <string name="hide_from_zoom_level">Скрыть от шкалы приближения</string>
+    <string name="release_2_2">"\\022 Новый контекстно-зависимый Графический Интерфейс для выделения локаций на карте  и других экранов
+\n
+\n • Теперь экран карты запускается напрямую, если не был выбран пункт \'Показать панель управления при запуске приложения\'
+\n
+\n • Настройка отображения вида и типа карт на панели управления
+\n
+\n • Пропускать панель управления, если вы предпочитаете управлять из основного меню
+\n
+\n • Чтобы загрузить карты, вам необходимо выбрать регионы на карте мира
+\n
+\n • Теперь поиск достопримечательностей (POI) поддерживает более конкретные запросы
+\n
+\n • Улучшена функциональность редактирования POI и OSM
+\n
+\n • Переработанны интерфейс труктура загрузки данных карты
+\n
+\nи прочее…"</string>
+    <string name="rendering_value_translucent_pink_name">Прозрачно-розовый</string>
+    <string name="lang_ber">Берберский язык</string>
     </resources>
