@@ -764,12 +764,7 @@ public class MapActivityActions implements DialogProvider {
 				.setListener(new ContextMenuAdapter.ItemClickListener() {
 					@Override
 					public boolean onContextMenuClick(ArrayAdapter<ContextMenuItem> adapter, int itemId, int position, boolean isChecked) {
-						MeasurementToolFragment fragment = new MeasurementToolFragment();
-						mapActivity.getSupportFragmentManager()
-								.beginTransaction()
-								.add(R.id.bottomFragmentContainer, fragment, MeasurementToolFragment.TAG)
-								.addToBackStack(MeasurementToolFragment.TAG)
-								.commitAllowingStateLoss();
+						MeasurementToolFragment.showInstance(mapActivity.getSupportFragmentManager(), null);
 						return true;
 					}
 				}).createItem());

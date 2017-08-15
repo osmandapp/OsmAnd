@@ -944,7 +944,7 @@ public class MapActivity extends OsmandActionBarActivity implements DownloadEven
 					NewGpxLine newGpxLine = (NewGpxLine) toShow;
 					QuadRect qr = newGpxLine.getRect();
 					mapView.fitRectToMap(qr.left, qr.right, qr.top, qr.bottom, (int) qr.width(), (int) qr.height(), 0);
-					openAddingNewGpxLine(newGpxLine);
+					MeasurementToolFragment.showInstance(getSupportFragmentManager(), newGpxLine);
 				} else {
 					mapContextMenu.show(latLonToShow, mapLabelToShow, toShow);
 				}
@@ -956,16 +956,6 @@ public class MapActivity extends OsmandActionBarActivity implements DownloadEven
 						latLonToShow.getLongitude(), settings.getMapZoomToShow(), true);
 			}
 		}
-	}
-
-	private void openAddingNewGpxLine(NewGpxLine newGpxLine) {
-		MeasurementToolFragment fragment = new MeasurementToolFragment();
-		fragment.setNewGpxLine(newGpxLine);
-		getSupportFragmentManager()
-				.beginTransaction()
-				.add(R.id.bottomFragmentContainer, fragment, MeasurementToolFragment.TAG)
-				.addToBackStack(MeasurementToolFragment.TAG)
-				.commitAllowingStateLoss();
 	}
 
 	public OsmandApplication getMyApplication() {

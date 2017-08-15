@@ -1101,7 +1101,7 @@ public class MeasurementToolFragment extends Fragment {
 				newIntent.setFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP);
 				startActivity(newIntent);
 			}
-			mapActivity.getSupportFragmentManager().popBackStackImmediate(TAG, FragmentManager.POP_BACK_STACK_INCLUSIVE);
+			mapActivity.getSupportFragmentManager().beginTransaction().remove(this).commitAllowingStateLoss();
 		} catch (Exception e) {
 			// ignore
 		}
@@ -1131,6 +1131,21 @@ public class MeasurementToolFragment extends Fragment {
 			if (shadow != null) {
 				shadow.setVisibility(View.GONE);
 			}
+		}
+	}
+
+	public static boolean showInstance(FragmentManager fragmentManager, NewGpxLine newGpxLine) {
+		try {
+			MeasurementToolFragment fragment = new MeasurementToolFragment();
+			fragment.setNewGpxLine(newGpxLine);
+			fragment.setRetainInstance(true);
+			fragmentManager
+					.beginTransaction()
+					.add(R.id.bottomFragmentContainer, fragment, MeasurementToolFragment.TAG)
+					.commitAllowingStateLoss();
+			return true;
+		} catch (Exception e) {
+			return false;
 		}
 	}
 }
