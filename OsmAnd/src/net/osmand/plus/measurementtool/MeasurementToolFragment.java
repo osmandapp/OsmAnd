@@ -1045,15 +1045,9 @@ public class MeasurementToolFragment extends Fragment {
 			MeasurementToolLayer measurementToolLayer = getMeasurementLayer();
 			if (measurementToolLayer != null) {
 				measurementToolLayer.clearSelection();
-				if (measurementToolLayer.isInMovePointMode()) {
-					measurementToolLayer.exitMovePointMode();
-				}
-				if (measurementToolLayer.isInAddPointAfterMode()) {
-					measurementToolLayer.exitAddPointAfterMode();
-				}
-				if (measurementToolLayer.isInAddPointBeforeMode()) {
-					measurementToolLayer.exitAddPointBeforeMode();
-				}
+				measurementToolLayer.exitMovePointMode();
+				measurementToolLayer.exitAddPointAfterMode();
+				measurementToolLayer.exitAddPointBeforeMode();
 			}
 			if (newGpxLine != null) {
 				GPXFile gpx = newGpxLine.getGpxFile();

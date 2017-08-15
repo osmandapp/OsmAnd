@@ -137,7 +137,7 @@ public class MeasurementToolLayer extends OsmandMapLayer implements ContextMenuL
 		return false;
 	}
 
-	public void clearSelection() {
+	void clearSelection() {
 		selectedPointPos = -1;
 		selectedCachedPoint = null;
 	}
@@ -158,17 +158,17 @@ public class MeasurementToolLayer extends OsmandMapLayer implements ContextMenuL
 		return false;
 	}
 
-	public void enterMovingPointMode() {
+	void enterMovingPointMode() {
 		inMovePointMode = true;
 		moveMapToPoint(selectedPointPos);
 	}
 
-	public void enterAddingPointAfterMode() {
+	void enterAddingPointAfterMode() {
 		inAddPointAfterMode = true;
 		moveMapToPoint(selectedPointPos);
 	}
 
-	public void enterAddingPointBeforeMode() {
+	void enterAddingPointBeforeMode() {
 		inAddPointBeforeMode = true;
 		moveMapToPoint(selectedPointPos);
 	}
@@ -192,7 +192,7 @@ public class MeasurementToolLayer extends OsmandMapLayer implements ContextMenuL
 		}
 	}
 
-	public void selectPoint(int position) {
+	void selectPoint(int position) {
 		clearSelection();
 		selectedCachedPoint = new WptPt(measurementPoints.get(position));
 		selectedPointPos = position;
@@ -305,11 +305,11 @@ public class MeasurementToolLayer extends OsmandMapLayer implements ContextMenuL
 		inMovePointMode = false;
 	}
 
-	public void exitAddPointAfterMode() {
+	void exitAddPointAfterMode() {
 		inAddPointAfterMode = false;
 	}
 
-	public void exitAddPointBeforeMode() {
+	void exitAddPointBeforeMode() {
 		inAddPointBeforeMode = false;
 	}
 
