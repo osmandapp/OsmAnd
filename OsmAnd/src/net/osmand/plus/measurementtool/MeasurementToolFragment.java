@@ -1107,6 +1107,20 @@ public class MeasurementToolFragment extends Fragment {
 		}
 	}
 
+	public static boolean showInstance(FragmentManager fragmentManager, NewGpxLine newGpxLine) {
+		try {
+			MeasurementToolFragment fragment = new MeasurementToolFragment();
+			fragment.setNewGpxLine(newGpxLine);
+			fragment.setRetainInstance(true);
+			fragmentManager.beginTransaction()
+					.add(R.id.bottomFragmentContainer, fragment, MeasurementToolFragment.TAG)
+					.commitAllowingStateLoss();
+			return true;
+		} catch (Exception e) {
+			return false;
+		}
+	}
+
 	private class MeasurementToolBarController extends TopToolbarController {
 
 		MeasurementToolBarController(NewGpxLine newGpxLine) {
@@ -1131,21 +1145,6 @@ public class MeasurementToolFragment extends Fragment {
 			if (shadow != null) {
 				shadow.setVisibility(View.GONE);
 			}
-		}
-	}
-
-	public static boolean showInstance(FragmentManager fragmentManager, NewGpxLine newGpxLine) {
-		try {
-			MeasurementToolFragment fragment = new MeasurementToolFragment();
-			fragment.setNewGpxLine(newGpxLine);
-			fragment.setRetainInstance(true);
-			fragmentManager
-					.beginTransaction()
-					.add(R.id.bottomFragmentContainer, fragment, MeasurementToolFragment.TAG)
-					.commitAllowingStateLoss();
-			return true;
-		} catch (Exception e) {
-			return false;
 		}
 	}
 }
