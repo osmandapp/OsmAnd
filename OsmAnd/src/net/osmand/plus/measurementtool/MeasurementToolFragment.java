@@ -286,7 +286,7 @@ public class MeasurementToolFragment extends Fragment {
 		mainView.findViewById(R.id.add_point_button).setOnClickListener(new View.OnClickListener() {
 			@Override
 			public void onClick(View view) {
-				addPoint();
+				addCenterPoint();
 			}
 		});
 
@@ -660,7 +660,19 @@ public class MeasurementToolFragment extends Fragment {
 	private void addPoint() {
 		MeasurementToolLayer measurementLayer = getMeasurementLayer();
 		if (measurementLayer != null) {
-			commandManager.execute(new AddPointCommand(measurementLayer));
+			commandManager.execute(new AddPointCommand(measurementLayer, false));
+			enable(undoBtn, upDownBtn);
+			disable(redoBtn);
+			updateText();
+			adapter.notifyDataSetChanged();
+			saved = false;
+		}
+	}
+
+	private void addCenterPoint() {
+		MeasurementToolLayer measurementLayer = getMeasurementLayer();
+		if (measurementLayer != null) {
+			commandManager.execute(new AddPointCommand(measurementLayer, true));
 			enable(undoBtn, upDownBtn);
 			disable(redoBtn);
 			updateText();

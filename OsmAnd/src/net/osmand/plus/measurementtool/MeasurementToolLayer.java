@@ -48,6 +48,7 @@ public class MeasurementToolLayer extends OsmandMapLayer implements ContextMenuL
 	private OnEnterMovePointModeListener enterMovePointModeListener;
 	private int selectedPointPos = -1;
 	private WptPt selectedCachedPoint;
+	private LatLon pressedPointLatLon;
 
 	@Override
 	public void initLayer(OsmandMapTileView view) {
@@ -135,6 +136,7 @@ public class MeasurementToolLayer extends OsmandMapLayer implements ContextMenuL
 				if (selectedPointPos != -1) {
 					singleTapListener.onSelectPoint();
 				} else {
+					pressedPointLatLon = tileBox.getLatLonFromPixel(point.x, point.y);
 					singleTapListener.onAddPoint();
 				}
 			}
@@ -330,7 +332,7 @@ public class MeasurementToolLayer extends OsmandMapLayer implements ContextMenuL
 		canvas.rotate(tb.getRotate(), center.x, center.y);
 	}
 
-	public WptPt addPoint(int position) {
+	public WptPt addCenterPoint(int position) {
 		RotatedTileBox tb = view.getCurrentRotatedTileBox();
 		LatLon l = tb.getLatLonFromPixel(tb.getCenterPixelX(), tb.getCenterPixelY());
 		WptPt pt = new WptPt();
@@ -340,6 +342,22 @@ public class MeasurementToolLayer extends OsmandMapLayer implements ContextMenuL
 		if (allowed) {
 			measurementPoints.add(position, pt);
 			return pt;
+		}
+		return null;
+	}
+
+	public WptPt addPoint(int position) {
+		if (pressedPointLatLon != null) {
+			WptPt pt = new WptPt();
+			pt.lat = pressedPointLatLon.getLatitude();
+			pt.lon = pressedPointLatLon.getLongitude();
+			boolean allowed = measurementPoints.size() == 0 || !measurementPoints.get(measurementPoints.size() - 1).equals(pt);
+			if (allowed) {
+				measurementPoints.add(position, pt);
+				moveMapToPoint(position);
+				pressedPointLatLon = null;
+				return pt;
+			}
 		}
 		return null;
 	}

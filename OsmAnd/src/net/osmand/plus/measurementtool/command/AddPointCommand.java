@@ -8,20 +8,26 @@ public class AddPointCommand implements Command {
 	private final MeasurementToolLayer measurementLayer;
 	private final int position;
 	private WptPt point;
+	private boolean center;
 
 	public AddPointCommand(MeasurementToolLayer measurementLayer, int position) {
 		this.measurementLayer = measurementLayer;
 		this.position = position;
 	}
 
-	public AddPointCommand(MeasurementToolLayer measurementLayer) {
+	public AddPointCommand(MeasurementToolLayer measurementLayer, boolean center) {
 		this.measurementLayer = measurementLayer;
+		this.center = center;
 		position = measurementLayer.getPointsCount();
 	}
 
 	@Override
 	public boolean execute() {
-		point = measurementLayer.addPoint(position);
+		if (center) {
+			point = measurementLayer.addCenterPoint(position);
+		} else {
+			point = measurementLayer.addPoint(position);
+		}
 		measurementLayer.refreshMap();
 		return point != null;
 	}
