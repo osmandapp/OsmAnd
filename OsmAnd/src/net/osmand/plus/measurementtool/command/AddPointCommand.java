@@ -12,6 +12,7 @@ public class AddPointCommand implements Command {
 
 	public AddPointCommand(MeasurementToolLayer measurementLayer, int position) {
 		this.measurementLayer = measurementLayer;
+		this.center = true;
 		this.position = position;
 	}
 
