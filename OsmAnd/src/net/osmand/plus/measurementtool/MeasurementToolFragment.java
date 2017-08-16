@@ -1106,6 +1106,9 @@ public class MeasurementToolFragment extends Fragment {
 			if (measurementToolLayer != null) {
 				measurementToolLayer.getMeasurementPoints().clear();
 			}
+			if (pointsListOpened) {
+				hidePointsList();
+			}
 			if (newGpxLine != null) {
 				GPXFile gpx = newGpxLine.getGpxFile();
 				Intent newIntent = new Intent(mapActivity, mapActivity.getMyApplication().getAppCustomization().getTrackActivity());
