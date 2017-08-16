@@ -76,6 +76,14 @@ public class MeasurementToolLayer extends OsmandMapLayer implements ContextMenuL
 		this.enterMovePointModeListener = listener;
 	}
 
+	void setSelectedPointPos(int pos) {
+		selectedPointPos = pos;
+	}
+
+	void setSelectedCachedPoint(WptPt selectedCachedPoint) {
+		this.selectedCachedPoint = selectedCachedPoint;
+	}
+
 	WptPt getSelectedCachedPoint() {
 		return selectedCachedPoint;
 	}
@@ -131,10 +139,8 @@ public class MeasurementToolLayer extends OsmandMapLayer implements ContextMenuL
 	public boolean onSingleTap(PointF point, RotatedTileBox tileBox) {
 		if (singleTapListener != null) {
 			if (inMeasurementMode && !inMovePointMode && !inAddPointAfterMode && !inAddPointBeforeMode) {
-				selectPoint(point.x, point.y);
-				if (selectedPointPos != -1) {
-					singleTapListener.onSelectPoint();
-				} else {
+				selectPoint(point.x, point.y, true);
+				if (selectedPointPos == -1) {
 					pressedPointLatLon = tileBox.getLatLonFromPixel(point.x, point.y);
 					singleTapListener.onAddPoint();
 				}
@@ -152,7 +158,7 @@ public class MeasurementToolLayer extends OsmandMapLayer implements ContextMenuL
 	public boolean onLongPressEvent(PointF point, RotatedTileBox tileBox) {
 		if (inMeasurementMode) {
 			if (!inMovePointMode && !inAddPointAfterMode && !inAddPointBeforeMode && measurementPoints.size() > 0) {
-				selectPoint(point.x, point.y);
+				selectPoint(point.x, point.y, false);
 				if (selectedCachedPoint != null && selectedPointPos != -1) {
 					enterMovingPointMode();
 					if (inMeasurementMode && inMovePointMode && enterMovePointModeListener != null) {
@@ -179,7 +185,7 @@ public class MeasurementToolLayer extends OsmandMapLayer implements ContextMenuL
 		moveMapToPoint(selectedPointPos);
 	}
 
-	private void selectPoint(double x, double y) {
+	private void selectPoint(double x, double y, boolean singleTap) {
 		clearSelection();
 		RotatedTileBox tb = view.getCurrentRotatedTileBox();
 		double lowestDistance = AndroidUtils.dpToPx(view.getContext(), 20);
@@ -196,12 +202,18 @@ public class MeasurementToolLayer extends OsmandMapLayer implements ContextMenuL
 				}
 			}
 		}
+		if (singleTap && singleTapListener != null) {
+			singleTapListener.onSelectPoint(selectedPointPos, selectedCachedPoint);
+		}
 	}
 
 	void selectPoint(int position) {
 		clearSelection();
 		selectedCachedPoint = new WptPt(measurementPoints.get(position));
 		selectedPointPos = position;
+		if (singleTapListener != null) {
+			singleTapListener.onSelectPoint(selectedPointPos, selectedCachedPoint);
+		}
 	}
 
 	@Override
@@ -430,7 +442,7 @@ public class MeasurementToolLayer extends OsmandMapLayer implements ContextMenuL
 
 		void onAddPoint();
 
-		void onSelectPoint();
+		void onSelectPoint(int selectedPointPos, WptPt selectedCachedPoint);
 	}
 
 	interface OnEnterMovePointModeListener {
