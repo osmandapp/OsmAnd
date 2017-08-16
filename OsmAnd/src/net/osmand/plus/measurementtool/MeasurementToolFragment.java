@@ -112,58 +112,6 @@ public class MeasurementToolFragment extends Fragment {
 		this.newGpxLine = newGpxLine;
 	}
 
-	private SelectedPointOptionOnClickListener createSelectedPointOptionOnClickListener() {
-		final MeasurementToolLayer measurementLayer = getMeasurementLayer();
-
-		return new SelectedPointOptionOnClickListener() {
-			@Override
-			public void moveOnClick() {
-				if (measurementLayer != null) {
-					measurementLayer.enterMovingPointMode();
-				}
-				switchMovePointMode(true);
-			}
-
-			@Override
-			public void deleteOnClick() {
-				clearSelection();
-				if (measurementLayer != null) {
-					int position = measurementLayer.getSelectedPointPos();
-					commandManager.execute(new RemovePointCommand(measurementLayer, position));
-					adapter.notifyDataSetChanged();
-					disable(redoBtn);
-					updateText();
-					saved = false;
-					hidePointsListIfNoPoints();
-					measurementLayer.clearSelection();
-				}
-			}
-
-			@Override
-			public void addPointAfterOnClick() {
-				if (measurementLayer != null) {
-					positionToAddPoint = measurementLayer.getSelectedPointPos() + 1;
-					measurementLayer.enterAddingPointAfterMode();
-				}
-				switchAddPointAfterMode(true);
-			}
-
-			@Override
-			public void addPointBeforeOnClick() {
-				if (measurementLayer != null) {
-					positionToAddPoint = measurementLayer.getSelectedPointPos();
-					measurementLayer.enterAddingPointBeforeMode();
-				}
-				switchAddPointBeforeMode(true);
-			}
-
-			@Override
-			public void onCloseMenu() {
-				setPreviousMapPosition();
-			}
-		};
-	}
-
 	@Nullable
 	@Override
 	public View onCreateView(LayoutInflater inflater, @Nullable ViewGroup container, @Nullable Bundle savedInstanceState) {
@@ -531,6 +479,58 @@ public class MeasurementToolFragment extends Fragment {
 			layer.setOnSingleTapListener(null);
 			layer.setOnEnterMovePointModeListener(null);
 		}
+	}
+
+	private SelectedPointOptionOnClickListener createSelectedPointOptionOnClickListener() {
+		final MeasurementToolLayer measurementLayer = getMeasurementLayer();
+
+		return new SelectedPointOptionOnClickListener() {
+			@Override
+			public void moveOnClick() {
+				if (measurementLayer != null) {
+					measurementLayer.enterMovingPointMode();
+				}
+				switchMovePointMode(true);
+			}
+
+			@Override
+			public void deleteOnClick() {
+				clearSelection();
+				if (measurementLayer != null) {
+					int position = measurementLayer.getSelectedPointPos();
+					commandManager.execute(new RemovePointCommand(measurementLayer, position));
+					adapter.notifyDataSetChanged();
+					disable(redoBtn);
+					updateText();
+					saved = false;
+					hidePointsListIfNoPoints();
+					measurementLayer.clearSelection();
+				}
+			}
+
+			@Override
+			public void addPointAfterOnClick() {
+				if (measurementLayer != null) {
+					positionToAddPoint = measurementLayer.getSelectedPointPos() + 1;
+					measurementLayer.enterAddingPointAfterMode();
+				}
+				switchAddPointAfterMode(true);
+			}
+
+			@Override
+			public void addPointBeforeOnClick() {
+				if (measurementLayer != null) {
+					positionToAddPoint = measurementLayer.getSelectedPointPos();
+					measurementLayer.enterAddingPointBeforeMode();
+				}
+				switchAddPointBeforeMode(true);
+			}
+
+			@Override
+			public void onCloseMenu() {
+				setPreviousMapPosition();
+			}
+		};
 	}
 
 	private void displayRoutePoints(MapActivity mapActivity) {
