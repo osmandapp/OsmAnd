@@ -158,7 +158,16 @@ public class MeasurementToolFragment extends Fragment {
 		pointsTv = (TextView) mainView.findViewById(R.id.measurement_points_text_view);
 
 		int color = nightMode ? R.color.osmand_orange : R.color.color_myloc_distance;
-		((ImageView) mainView.findViewById(R.id.ruler_icon)).setImageDrawable(iconsCache.getIcon(R.drawable.ic_action_ruler, color));
+		if (newGpxLine != null) {
+			LineType lineType = newGpxLine.getLineType();
+			if (lineType == LineType.ADD_SEGMENT || lineType == LineType.EDIT_SEGMENT) {
+				((ImageView) mainView.findViewById(R.id.ruler_icon)).setImageDrawable(iconsCache.getIcon(R.drawable.ic_action_polygom_dark, color));
+			} else {
+				((ImageView) mainView.findViewById(R.id.ruler_icon)).setImageDrawable(iconsCache.getIcon(R.drawable.ic_action_markers_dark, color));
+			}
+		} else {
+			((ImageView) mainView.findViewById(R.id.ruler_icon)).setImageDrawable(iconsCache.getIcon(R.drawable.ic_action_ruler, color));
+		}
 		((ImageView) mainView.findViewById(R.id.move_point_icon)).setImageDrawable(iconsCache.getIcon(R.drawable.ic_action_move_point, color));
 		((ImageView) mainView.findViewById(R.id.add_point_after_icon)).setImageDrawable(iconsCache.getIcon(R.drawable.ic_action_addpoint_above, color));
 		((ImageView) mainView.findViewById(R.id.add_point_before_icon)).setImageDrawable(iconsCache.getIcon(R.drawable.ic_action_addpoint_below, color));
