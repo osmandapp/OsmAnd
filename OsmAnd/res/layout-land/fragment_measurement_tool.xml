@@ -26,7 +26,7 @@
             android:paddingTop="14dp">
 
             <ImageView
-                android:id="@+id/ruler_icon"
+                android:id="@+id/main_icon"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_alignParentLeft="true"
@@ -38,51 +38,6 @@
                 android:layout_marginStart="16dp"
                 android:background="@null"
                 tools:src="@drawable/ic_action_ruler"/>
-
-            <ImageView
-                android:id="@+id/move_point_icon"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:layout_alignParentLeft="true"
-                android:layout_alignParentStart="true"
-                android:layout_centerVertical="true"
-                android:layout_marginEnd="16dp"
-                android:layout_marginLeft="16dp"
-                android:layout_marginRight="16dp"
-                android:layout_marginStart="16dp"
-                android:background="@null"
-                android:visibility="gone"
-                tools:src="@drawable/ic_action_move_point"/>
-
-            <ImageView
-                android:id="@+id/add_point_after_icon"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:layout_alignParentLeft="true"
-                android:layout_alignParentStart="true"
-                android:layout_centerVertical="true"
-                android:layout_marginEnd="16dp"
-                android:layout_marginLeft="16dp"
-                android:layout_marginRight="16dp"
-                android:layout_marginStart="16dp"
-                android:background="@null"
-                android:visibility="gone"
-                tools:src="@drawable/ic_action_addpoint_above"/>
-
-            <ImageView
-                android:id="@+id/add_point_before_icon"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:layout_alignParentLeft="true"
-                android:layout_alignParentStart="true"
-                android:layout_centerVertical="true"
-                android:layout_marginEnd="16dp"
-                android:layout_marginLeft="16dp"
-                android:layout_marginRight="16dp"
-                android:layout_marginStart="16dp"
-                android:background="@null"
-                android:visibility="gone"
-                tools:src="@drawable/ic_action_addpoint_below"/>
 
             <ImageView
                 android:id="@+id/up_down_button"
@@ -105,8 +60,8 @@
                 android:layout_marginLeft="8dp"
                 android:layout_marginRight="4dp"
                 android:layout_marginStart="8dp"
-                android:layout_toEndOf="@id/ruler_icon"
-                android:layout_toRightOf="@id/ruler_icon"
+                android:layout_toEndOf="@id/main_icon"
+                android:layout_toRightOf="@id/main_icon"
                 android:textAppearance="@style/TextAppearance.ListItemTitle"
                 tools:text="724 m,"/>
 
@@ -132,8 +87,8 @@
                 android:layout_marginLeft="8dp"
                 android:layout_marginRight="4dp"
                 android:layout_marginStart="8dp"
-                android:layout_toEndOf="@id/move_point_icon"
-                android:layout_toRightOf="@id/move_point_icon"
+                android:layout_toEndOf="@id/main_icon"
+                android:layout_toRightOf="@id/main_icon"
                 android:text="@string/move_point"
                 android:textAppearance="@style/TextAppearance.ListItemTitle"
                 android:visibility="gone"/>
@@ -147,8 +102,8 @@
                 android:layout_marginLeft="8dp"
                 android:layout_marginRight="4dp"
                 android:layout_marginStart="8dp"
-                android:layout_toEndOf="@id/add_point_after_icon"
-                android:layout_toRightOf="@id/add_point_after_icon"
+                android:layout_toEndOf="@id/main_icon"
+                android:layout_toRightOf="@id/main_icon"
                 android:text="@string/add_point_after"
                 android:textAppearance="@style/TextAppearance.ListItemTitle"
                 android:visibility="gone"/>
@@ -162,8 +117,8 @@
                 android:layout_marginLeft="8dp"
                 android:layout_marginRight="4dp"
                 android:layout_marginStart="8dp"
-                android:layout_toEndOf="@id/add_point_before_icon"
-                android:layout_toRightOf="@id/add_point_before_icon"
+                android:layout_toEndOf="@id/main_icon"
+                android:layout_toRightOf="@id/main_icon"
                 android:text="@string/add_point_before"
                 android:textAppearance="@style/TextAppearance.ListItemTitle"
                 android:visibility="gone"/>
