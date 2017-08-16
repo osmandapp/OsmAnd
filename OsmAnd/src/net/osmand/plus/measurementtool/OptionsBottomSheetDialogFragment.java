@@ -5,6 +5,7 @@ import android.os.Build;
 import android.os.Bundle;
 import android.support.annotation.DrawableRes;
 import android.support.annotation.Nullable;
+import android.support.v7.widget.SwitchCompat;
 import android.view.ContextThemeWrapper;
 import android.view.LayoutInflater;
 import android.view.View;
@@ -28,6 +29,7 @@ public class OptionsBottomSheetDialogFragment extends BottomSheetDialogFragment 
 	private boolean addLineMode;
 	private boolean portrait;
 	private boolean nightMode;
+	private boolean snapToRoadEnabled;
 
 	public void setOptionsOnClickListener(OptionsOnClickListener listener) {
 		this.listener = listener;
@@ -35,6 +37,10 @@ public class OptionsBottomSheetDialogFragment extends BottomSheetDialogFragment 
 
 	public void setAddLineMode(boolean addLineMode) {
 		this.addLineMode = addLineMode;
+	}
+
+	public void setSnapToRoadEnabled(boolean snapToRoadEnabled) {
+		this.snapToRoadEnabled = snapToRoadEnabled;
 	}
 
 	@Nullable
@@ -52,7 +58,13 @@ public class OptionsBottomSheetDialogFragment extends BottomSheetDialogFragment 
 		if (nightMode) {
 			((TextViewEx) mainView.findViewById(R.id.options_title)).setTextColor(getResources().getColor(R.color.ctx_menu_info_text_dark));
 		}
-		((ImageView) mainView.findViewById(R.id.snap_to_road_icon)).setImageDrawable(getContentIcon(R.drawable.ic_action_snap_to_road));
+		if (snapToRoadEnabled) {
+			mainView.findViewById(R.id.snap_to_road_enabled_text_view).setVisibility(View.VISIBLE);
+			((SwitchCompat) mainView.findViewById(R.id.snap_to_road_switch)).setChecked(true);
+		}
+		((ImageView) mainView.findViewById(R.id.snap_to_road_icon)).setImageDrawable(snapToRoadEnabled
+				? getActiveIcon(R.drawable.ic_action_snap_to_road)
+				: getContentIcon(R.drawable.ic_action_snap_to_road));
 		((ImageView) mainView.findViewById(R.id.clear_all_icon)).setImageDrawable(getContentIcon(R.drawable.ic_action_reset_to_default_dark));
 		if (!addLineMode) {
 			((ImageView) mainView.findViewById(R.id.save_as_new_track_icon)).setImageDrawable(getContentIcon(R.drawable.ic_action_polygom_dark));
@@ -173,6 +185,10 @@ public class OptionsBottomSheetDialogFragment extends BottomSheetDialogFragment 
 	@Override
 	protected Drawable getContentIcon(@DrawableRes int id) {
 		return getIcon(id, nightMode ? R.color.ctx_menu_info_text_dark : R.color.on_map_icon_color);
+	}
+
+	private Drawable getActiveIcon(@DrawableRes int id) {
+		return getIcon(id, nightMode ? R.color.osmand_orange : R.color.color_myloc_distance);
 	}
 
 	interface OptionsOnClickListener {

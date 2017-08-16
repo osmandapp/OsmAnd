@@ -22,6 +22,7 @@ import android.view.ContextThemeWrapper;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.CompoundButton;
 import android.widget.EditText;
 import android.widget.ImageButton;
 import android.widget.ImageView;
@@ -101,6 +102,7 @@ public class MeasurementToolFragment extends Fragment {
 	private int previousMapPosition;
 	private NewGpxLine newGpxLine;
 	private boolean routePointsAdded;
+	private boolean snapToRoadEnabled;
 
 	private boolean inMovePointMode;
 	private boolean inAddPointAfterMode;
@@ -209,15 +211,20 @@ public class MeasurementToolFragment extends Fragment {
 			@Override
 			public void onClick(View view) {
 				OptionsBottomSheetDialogFragment fragment = new OptionsBottomSheetDialogFragment();
+				fragment.setSnapToRoadEnabled(snapToRoadEnabled);
 				fragment.setOptionsOnClickListener(new OptionsBottomSheetDialogFragment.OptionsOnClickListener() {
 					@Override
 					public void snapToRoadOnCLick() {
-						previousToolBarTitle = toolBarController.getTitle();
-						toolBarController.setTitle(getString(R.string.snap_to_road));
-						mapActivity.refreshMap();
-						SnapToRoadBottomSheetDialogFragment fragment = new SnapToRoadBottomSheetDialogFragment();
-						fragment.setListener(createSnapToRoadListener());
-						fragment.show(mapActivity.getSupportFragmentManager(), SnapToRoadBottomSheetDialogFragment.TAG);
+						if (!snapToRoadEnabled) {
+							previousToolBarTitle = toolBarController.getTitle();
+							toolBarController.setTitle(getString(R.string.snap_to_road));
+							mapActivity.refreshMap();
+							SnapToRoadBottomSheetDialogFragment fragment = new SnapToRoadBottomSheetDialogFragment();
+							fragment.setListener(createSnapToRoadListener());
+							fragment.show(mapActivity.getSupportFragmentManager(), SnapToRoadBottomSheetDialogFragment.TAG);
+						} else {
+							disableSnapToRoadMode();
+						}
 					}
 
 					@Override
@@ -376,6 +383,15 @@ public class MeasurementToolFragment extends Fragment {
 					addToGpx(mapActivity);
 				} else {
 					Toast.makeText(mapActivity, getString(R.string.none_point_error), Toast.LENGTH_SHORT).show();
+				}
+			}
+		});
+
+		toolBarController.setOnSwitchCheckedChangeListener(new CompoundButton.OnCheckedChangeListener() {
+			@Override
+			public void onCheckedChanged(CompoundButton compoundButton, boolean checked) {
+				if (!checked) {
+					disableSnapToRoadMode();
 				}
 			}
 		});
@@ -556,9 +572,25 @@ public class MeasurementToolFragment extends Fragment {
 
 			@Override
 			public void onApplicationModeItemClick(ApplicationMode mode) {
-				Toast.makeText(getActivity(), mode.toHumanString(getActivity()), Toast.LENGTH_SHORT).show();
+				toolBarController.setTopBarSwitchVisible(true);
+				toolBarController.setTopBarSwitchChecked(true);
+				snapToRoadEnabled = true;
+				MapActivity mapActivity = getMapActivity();
+				if (mapActivity != null) {
+					mapActivity.refreshMap();
+				}
 			}
 		};
+	}
+
+	private void disableSnapToRoadMode() {
+		MapActivity mapActivity = getMapActivity();
+		if (mapActivity != null) {
+			toolBarController.setTopBarSwitchVisible(false);
+			toolBarController.setTitle(previousToolBarTitle);
+			snapToRoadEnabled = false;
+			mapActivity.refreshMap();
+		}
 	}
 
 	private void displayRoutePoints(MapActivity mapActivity) {

@@ -1,8 +1,10 @@
 package net.osmand.plus.views.mapwidgets;
 
 import android.graphics.drawable.Drawable;
+import android.support.v7.widget.SwitchCompat;
 import android.view.View;
 import android.view.View.OnClickListener;
+import android.widget.CompoundButton.OnCheckedChangeListener;
 import android.widget.ImageButton;
 import android.widget.ImageView;
 import android.widget.LinearLayout;
@@ -229,8 +231,11 @@ public class MapInfoWidgetsFactory {
 		int refreshBtnIconDarkId = R.drawable.ic_action_refresh_dark;
 		int refreshBtnIconClrLightId = R.color.icon_color;
 		int refreshBtnIconClrDarkId = 0;
+
 		boolean refreshBtnVisible = false;
 		boolean saveViewVisible = false;
+		protected boolean topBarSwitchVisible = false;
+		protected boolean topBarSwitchChecked = false;
 
 		int titleTextClrLightId = R.color.primary_text_light;
 		int titleTextClrDarkId = R.color.primary_text_dark;
@@ -249,6 +254,7 @@ public class MapInfoWidgetsFactory {
 		OnClickListener onCloseButtonClickListener;
 		OnClickListener onRefreshButtonClickListener;
 		OnClickListener onSaveViewClickListener;
+		OnCheckedChangeListener onSwitchCheckedChangeListener;
 
 		Runnable onCloseToolbarListener;
 
@@ -331,6 +337,14 @@ public class MapInfoWidgetsFactory {
 			this.saveViewVisible = visible;
 		}
 
+		public void setTopBarSwitchVisible(boolean visible) {
+			this.topBarSwitchVisible = visible;
+		}
+
+		public void setTopBarSwitchChecked(boolean checked) {
+			this.topBarSwitchChecked = checked;
+		}
+
 		public void setTitleTextClrIds(int titleTextClrLightId, int titleTextClrDarkId) {
 			this.titleTextClrLightId = titleTextClrLightId;
 			this.titleTextClrDarkId = titleTextClrDarkId;
@@ -357,6 +371,10 @@ public class MapInfoWidgetsFactory {
 			this.onSaveViewClickListener = onSaveViewClickListener;
 		}
 
+		public void setOnSwitchCheckedChangeListener(OnCheckedChangeListener onSwitchCheckedChangeListener) {
+			this.onSwitchCheckedChangeListener = onSwitchCheckedChangeListener;
+		}
+
 		public void setOnRefreshButtonClickListener(OnClickListener onRefreshButtonClickListener) {
 			this.onRefreshButtonClickListener = onRefreshButtonClickListener;
 		}
@@ -369,6 +387,7 @@ public class MapInfoWidgetsFactory {
 			TextView titleView = view.getTitleView();
 			TextView descrView = view.getDescrView();
 			LinearLayout bottomViewLayout = view.getBottomViewLayout();
+			SwitchCompat switchCompat = view.getTopBarSwitch();
 			if (title != null) {
 				titleView.setText(title);
 				view.updateVisibility(titleView, true);
@@ -387,6 +406,10 @@ public class MapInfoWidgetsFactory {
 				view.updateVisibility(bottomViewLayout, true);
 			} else {
 				view.updateVisibility(bottomViewLayout, false);
+			}
+			view.updateVisibility(switchCompat, topBarSwitchVisible);
+			if (topBarSwitchVisible) {
+				switchCompat.setChecked(topBarSwitchChecked);
 			}
 			if (view.getShadowView() != null) {
 				view.getShadowView().setVisibility(View.VISIBLE);
@@ -408,6 +431,7 @@ public class MapInfoWidgetsFactory {
 		private ImageButton refreshButton;
 		private ImageButton closeButton;
 		private TextView saveView;
+		private SwitchCompat topBarSwitch;
 		private View shadowView;
 		private boolean nightMode;
 
@@ -424,6 +448,7 @@ public class MapInfoWidgetsFactory {
 			titleView = (TextView) map.findViewById(R.id.widget_top_bar_title);
 			saveView = (TextView) map.findViewById(R.id.widget_top_bar_save);
 			descrView = (TextView) map.findViewById(R.id.widget_top_bar_description);
+			topBarSwitch = (SwitchCompat) map.findViewById(R.id.widget_top_bar_switch);
 			shadowView = map.findViewById(R.id.widget_top_bar_shadow);
 			updateVisibility(false);
 		}
@@ -462,6 +487,10 @@ public class MapInfoWidgetsFactory {
 
 		public TextView getSaveView() {
 			return saveView;
+		}
+
+		public SwitchCompat getTopBarSwitch() {
+			return topBarSwitch;
 		}
 
 		public ImageButton getRefreshButton() {
@@ -536,6 +565,7 @@ public class MapInfoWidgetsFactory {
 			closeButton.setOnClickListener(controller.onCloseButtonClickListener);
 			refreshButton.setOnClickListener(controller.onRefreshButtonClickListener);
 			saveView.setOnClickListener(controller.onSaveViewClickListener);
+			topBarSwitch.setOnCheckedChangeListener(controller.onSwitchCheckedChangeListener);
 		}
 
 		public void updateInfo() {

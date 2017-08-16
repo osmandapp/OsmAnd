@@ -56,7 +56,11 @@
                     android:layout_alignParentRight="true"
                     android:layout_centerVertical="true"
                     android:layout_marginLeft="16dp"
-                    android:layout_marginStart="16dp"/>
+                    android:layout_marginStart="16dp"
+                    android:background="@null"
+                    android:clickable="false"
+                    android:focusable="false"
+                    android:focusableInTouchMode="false"/>
 
                 <LinearLayout
                     android:layout_width="match_parent"
