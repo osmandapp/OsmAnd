@@ -19,6 +19,7 @@ import net.osmand.data.QuadRect;
 import net.osmand.plus.activities.TrackActivity.NewGpxLine.LineType;
 import net.osmand.plus.GPXDatabase.GpxDataItem;
 import net.osmand.plus.GPXUtilities;
+import net.osmand.plus.GPXUtilities.TrkSegment;
 import net.osmand.plus.GPXUtilities.GPXFile;
 import net.osmand.plus.GPXUtilities.WptPt;
 import net.osmand.plus.GpxSelectionHelper;
@@ -114,9 +115,13 @@ public class TrackActivity extends TabActivity {
 	}
 
 	public void addLine(LineType lineType) {
+		addLine(lineType, null);
+	}
+
+	public void addLine(LineType lineType, TrkSegment segment) {
 		GPXFile gpxFile = getGpx();
 		QuadRect rect = getRect();
-		NewGpxLine newGpxLine = new NewGpxLine(gpxFile, rect, lineType);
+		NewGpxLine newGpxLine = new NewGpxLine(gpxFile, rect, lineType, segment);
 		WptPt pointToShow = gpxFile != null ? gpxFile.findPointToShow() : null;
 		if (pointToShow != null) {
 			LatLon location = new LatLon(pointToShow.getLatitude(), pointToShow.getLongitude());
@@ -408,16 +413,18 @@ public class TrackActivity extends TabActivity {
 	}
 
 	public static class NewGpxLine {
-		public enum LineType { SEGMENT, ROUTE_POINTS }
+		public enum LineType { ADD_SEGMENT, ADD_ROUTE_POINTS, EDIT_SEGMENT }
 
 		private GPXFile gpxFile;
+		private TrkSegment trkSegment;
 		private QuadRect rect;
 		private LineType lineType;
 
-		public NewGpxLine(GPXFile gpxFile, QuadRect rect, LineType lineType) {
+		public NewGpxLine(GPXFile gpxFile, QuadRect rect, LineType lineType, TrkSegment trkSegment) {
 			this.gpxFile = gpxFile;
 			this.rect = rect;
 			this.lineType = lineType;
+			this.trkSegment = trkSegment;
 		}
 
 		public GPXFile getGpxFile() {
@@ -430,6 +437,10 @@ public class TrackActivity extends TabActivity {
 
 		public LineType getLineType() {
 			return lineType;
+		}
+
+		public TrkSegment getTrkSegment() {
+			return trkSegment;
 		}
 	}
 }

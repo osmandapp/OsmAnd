@@ -34,7 +34,9 @@ import net.osmand.CallbackWithObject;
 import net.osmand.IndexConstants;
 import net.osmand.plus.ApplicationMode;
 import net.osmand.plus.GPXUtilities;
+import net.osmand.plus.GPXUtilities.GPXFile;
 import net.osmand.plus.GPXUtilities.Route;
+import net.osmand.plus.GPXUtilities.TrkSegment;
 import net.osmand.plus.GPXUtilities.WptPt;
 import net.osmand.plus.GpxSelectionHelper.SelectedGpxFile;
 import net.osmand.plus.IconsCache;
@@ -67,7 +69,6 @@ import java.util.LinkedList;
 import java.util.List;
 import java.util.Locale;
 
-import static net.osmand.plus.GPXUtilities.GPXFile;
 import static net.osmand.plus.OsmandSettings.LANDSCAPE_MIDDLE_RIGHT_CONSTANT;
 import static net.osmand.plus.OsmandSettings.MIDDLE_TOP_CONSTANT;
 import static net.osmand.plus.helpers.GpxImportHelper.GPX_SUFFIX;
@@ -101,7 +102,7 @@ public class MeasurementToolFragment extends Fragment {
 	private boolean nightMode;
 	private int previousMapPosition;
 	private NewGpxLine newGpxLine;
-	private boolean routePointsAdded;
+	private boolean gpxPointsAdded;
 	private boolean snapToRoadEnabled;
 
 	private boolean inMovePointMode;
@@ -362,10 +363,12 @@ public class MeasurementToolFragment extends Fragment {
 		toolBarController = new MeasurementToolBarController(newGpxLine);
 		if (newGpxLine != null) {
 			LineType lineType = newGpxLine.getLineType();
-			if (lineType == LineType.ROUTE_POINTS) {
+			if (lineType == LineType.ADD_ROUTE_POINTS) {
 				toolBarController.setTitle(getString(R.string.add_route_points));
-			} else if (lineType == LineType.SEGMENT) {
+			} else if (lineType == LineType.ADD_SEGMENT) {
 				toolBarController.setTitle(getString(R.string.add_line));
+			} else if (lineType == LineType.EDIT_SEGMENT) {
+				toolBarController.setTitle(getString(R.string.edit_line));
 			}
 		} else {
 			toolBarController.setTitle(getString(R.string.measurement_tool_action_bar));
@@ -466,11 +469,14 @@ public class MeasurementToolFragment extends Fragment {
 			hidePointsListFragment();
 		}
 
-		if (newGpxLine != null && !routePointsAdded) {
+		if (newGpxLine != null && !gpxPointsAdded) {
 			LineType lineType = newGpxLine.getLineType();
-			if (lineType == LineType.ROUTE_POINTS) {
-				displayRoutePoints(mapActivity);
-				routePointsAdded = true;
+			if (lineType == LineType.ADD_ROUTE_POINTS) {
+				displayRoutePoints();
+				gpxPointsAdded = true;
+			} else if (lineType == LineType.EDIT_SEGMENT) {
+				displaySegmentPoints();
+				gpxPointsAdded = true;
 			}
 		}
 
@@ -593,11 +599,23 @@ public class MeasurementToolFragment extends Fragment {
 		}
 	}
 
-	private void displayRoutePoints(MapActivity mapActivity) {
-		final MeasurementToolLayer measurementLayer = mapActivity.getMapLayers().getMeasurementToolLayer();
+	private void displayRoutePoints() {
+		final MeasurementToolLayer measurementLayer = getMeasurementLayer();
 
 		GPXFile gpx = newGpxLine.getGpxFile();
 		List<WptPt> points = gpx.getLastRoutePoints();
+		if (measurementLayer != null) {
+			measurementPoints.addAll(points);
+			adapter.notifyDataSetChanged();
+			updateText();
+		}
+	}
+
+	private void displaySegmentPoints() {
+		final MeasurementToolLayer measurementLayer = getMeasurementLayer();
+
+		TrkSegment segment = newGpxLine.getTrkSegment();
+		List<WptPt> points = segment.points;
 		if (measurementLayer != null) {
 			measurementPoints.addAll(points);
 			adapter.notifyDataSetChanged();
@@ -1007,11 +1025,16 @@ public class MeasurementToolFragment extends Fragment {
 					if (measurementLayer != null) {
 						List<WptPt> points = measurementLayer.getMeasurementPoints();
 						switch (lineType) {
-							case SEGMENT:
+							case ADD_SEGMENT:
 								gpx.addTrkSegment(points);
 								break;
-							case ROUTE_POINTS:
+							case ADD_ROUTE_POINTS:
 								gpx.setLastRoutePoints(points);
+								break;
+							case EDIT_SEGMENT:
+								TrkSegment segment = new TrkSegment();
+								segment.points.addAll(points);
+								gpx.replaceSegment(newGpxLine.getTrkSegment(), segment);
 								break;
 						}
 					}
@@ -1020,7 +1043,7 @@ public class MeasurementToolFragment extends Fragment {
 						if (showOnMap) {
 							SelectedGpxFile sf = activity.getMyApplication().getSelectedGpxHelper().selectGpxFile(gpx, true, false);
 							if (sf != null) {
-								if (lineType == LineType.SEGMENT) {
+								if (lineType == LineType.ADD_SEGMENT || lineType == LineType.EDIT_SEGMENT) {
 									sf.processPoints();
 								}
 							}

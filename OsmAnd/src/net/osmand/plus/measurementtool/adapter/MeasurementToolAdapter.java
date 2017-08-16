@@ -83,15 +83,20 @@ public class MeasurementToolAdapter extends RecyclerView.Adapter<MeasurementTool
 		} else {
 			holder.title.setText(mapActivity.getString(R.string.plugin_distance_point) + " - " + (pos + 1));
 		}
-		if (pos < 1) {
-			holder.descr.setText(mapActivity.getString(R.string.shared_string_control_start));
+		String pointDesc = pt.desc;
+		if (!TextUtils.isEmpty(pointDesc)) {
+			holder.descr.setText(pointDesc);
 		} else {
-			float dist = 0;
-			for (int i = 1; i <= pos; i++) {
-				dist += MapUtils.getDistance(points.get(i - 1).lat, points.get(i - 1).lon,
-						points.get(i).lat, points.get(i).lon);
+			if (pos < 1) {
+				holder.descr.setText(mapActivity.getString(R.string.shared_string_control_start));
+			} else {
+				float dist = 0;
+				for (int i = 1; i <= pos; i++) {
+					dist += MapUtils.getDistance(points.get(i - 1).lat, points.get(i - 1).lon,
+							points.get(i).lat, points.get(i).lon);
+				}
+				holder.descr.setText(OsmAndFormatter.getFormattedDistance(dist, mapActivity.getMyApplication()));
 			}
-			holder.descr.setText(OsmAndFormatter.getFormattedDistance(dist, mapActivity.getMyApplication()));
 		}
 		holder.deleteBtn.setImageDrawable(iconsCache.getIcon(R.drawable.ic_action_remove_dark,
 				nightMode ? R.color.ctx_menu_info_text_dark : R.color.icon_color));

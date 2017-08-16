@@ -164,11 +164,11 @@ public class TrackPointFragment extends OsmandExpandableListFragment {
 					break;
 				case R.id.route_text_layout:
 				case R.id.route_fab:
-					addLine(LineType.ROUTE_POINTS);
+					addLine(LineType.ADD_ROUTE_POINTS);
 					break;
 				case R.id.line_text_layout:
 				case R.id.line_fab:
-					addLine(LineType.SEGMENT);
+					addLine(LineType.ADD_SEGMENT);
 					break;
 			}
 		}

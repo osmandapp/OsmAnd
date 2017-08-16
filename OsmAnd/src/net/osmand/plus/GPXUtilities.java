@@ -248,6 +248,7 @@ public class GPXUtilities {
 		public String name = null;
 		public String desc = null;
 		public List<TrkSegment> segments = new ArrayList<>();
+		public boolean generalTrack = false;
 
 	}
 
@@ -773,6 +774,7 @@ public class GPXUtilities {
 				track.segments = new ArrayList<>();
 				track.segments.add(generalSegment);
 				generalTrack = track;
+				track.generalTrack = true;
 			}
 			return generalTrack;
 		}
@@ -898,12 +900,7 @@ public class GPXUtilities {
 		}
 
 		public void addTrkSegment(List<WptPt> points) {
-			Track generalTrack = getGeneralTrack();
-			if (generalTrack != null) {
-				tracks.remove(generalTrack);
-				this.generalTrack = null;
-				this.generalSegment = null;
-			}
+			removeGeneralTrackIfExists();
 
 			TrkSegment segment = new TrkSegment();
 			segment.points.addAll(points);
@@ -915,6 +912,26 @@ public class GPXUtilities {
 			lastTrack.segments.add(segment);
 
 			modifiedTime = System.currentTimeMillis();
+		}
+
+		public boolean replaceSegment(TrkSegment oldSegment, TrkSegment newSegment) {
+			removeGeneralTrackIfExists();
+
+			for (int i = 0; i < tracks.size(); i++) {
+				Track currentTrack = tracks.get(i);
+				for (int j = 0; j < currentTrack.segments.size(); j++) {
+					int segmentIndex = currentTrack.segments.indexOf(oldSegment);
+					if (segmentIndex != -1) {
+						currentTrack.segments.remove(segmentIndex);
+						currentTrack.segments.add(segmentIndex, newSegment);
+						addGeneralTrack();
+						return true;
+					}
+				}
+			}
+
+			addGeneralTrack();
+			return false;
 		}
 
 		public void setLastRoutePoints(List<WptPt> points) {
@@ -948,6 +965,33 @@ public class GPXUtilities {
 				points.set(index, pt);
 			}
 			modifiedTime = System.currentTimeMillis();
+		}
+
+		private void removeGeneralTrackIfExists() {
+			Track generalTrack = getGeneralTrack();
+			if (generalTrack != null) {
+				tracks.remove(generalTrack);
+				this.generalTrack = null;
+				this.generalSegment = null;
+			}
+		}
+
+		public boolean removeTrkSegment(TrkSegment segment) {
+			removeGeneralTrackIfExists();
+
+			modifiedTime = System.currentTimeMillis();
+
+			for (int i = 0; i < tracks.size(); i++) {
+				Track currentTrack = tracks.get(i);
+				for (int j = 0; j < currentTrack.segments.size(); j++) {
+					if (currentTrack.segments.remove(segment)) {
+						addGeneralTrack();
+						return true;
+					}
+				}
+			}
+			addGeneralTrack();
+			return false;
 		}
 
 		public boolean deleteWptPt(WptPt pt) {

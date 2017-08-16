@@ -97,6 +97,7 @@ import net.osmand.plus.views.controls.PagerSlidingTabStrip;
 import net.osmand.plus.views.controls.PagerSlidingTabStrip.CustomTabProvider;
 import net.osmand.plus.views.controls.WrapContentHeightViewPager;
 import net.osmand.plus.views.controls.WrapContentHeightViewPager.ViewAtPositionInterface;
+import net.osmand.plus.widgets.IconPopupMenu;
 import net.osmand.render.RenderingRulesStorage;
 import net.osmand.util.Algorithms;
 
@@ -136,6 +137,7 @@ public class TrackSegmentFragment extends OsmAndListFragment {
 	private int defPointColor;
 	private Paint paintIcon;
 	private Bitmap pointSmall;
+	private SwitchCompat vis;
 
 	private ImageView imageView;
 	private RotatedTileBox rotatedTileBox;
@@ -213,11 +215,11 @@ public class TrackSegmentFragment extends OsmAndListFragment {
 					break;
 				case R.id.route_text_layout:
 				case R.id.route_fab:
-					addLine(LineType.ROUTE_POINTS);
+					addLine(LineType.ADD_ROUTE_POINTS);
 					break;
 				case R.id.line_text_layout:
 				case R.id.line_fab:
-					addLine(LineType.SEGMENT);
+					addLine(LineType.ADD_SEGMENT);
 					break;
 			}
 		}
@@ -287,6 +289,10 @@ public class TrackSegmentFragment extends OsmAndListFragment {
 
 	private void addLine(LineType lineType) {
 		getTrackActivity().addLine(lineType);
+	}
+
+	private void addLine(LineType lineType, TrkSegment segment) {
+		getTrackActivity().addLine(lineType, segment);
 	}
 
 	private void openMenu() {
@@ -436,7 +442,7 @@ public class TrackSegmentFragment extends OsmAndListFragment {
 		final View divider = headerView.findViewById(R.id.divider);
 		final View splitIntervalView = headerView.findViewById(R.id.split_interval_view);
 		final View colorView = headerView.findViewById(R.id.color_view);
-		final SwitchCompat vis = (SwitchCompat) headerView.findViewById(R.id.showOnMapToggle);
+		vis = (SwitchCompat) headerView.findViewById(R.id.showOnMapToggle);
 		final ProgressBar progressBar = (ProgressBar) headerView.findViewById(R.id.mapLoadProgress);
 		final boolean selected = getGpx() != null &&
 				((getGpx().showCurrentTrack && app.getSelectedGpxHelper().getSelectedCurrentRecordingTrack() != null) ||
@@ -1277,7 +1283,7 @@ public class TrackSegmentFragment extends OsmAndListFragment {
 						}
 					});
 
-					IconsCache ic = app.getIconsCache();
+					final IconsCache ic = app.getIconsCache();
 					switch (tabType) {
 						case GPX_TAB_ITEM_GENERAL:
 							if (analysis != null) {
@@ -1340,6 +1346,45 @@ public class TrackSegmentFragment extends OsmAndListFragment {
 									}
 								});
 							}
+							if (!gpxItem.group.getTrack().generalTrack) {
+								view.findViewById(R.id.overflow_menu).setVisibility(View.VISIBLE);
+								view.findViewById(R.id.overflow_menu).setOnClickListener(new View.OnClickListener() {
+									@Override
+									public void onClick(View view) {
+										IconPopupMenu popupMenu = new IconPopupMenu(getTrackActivity(), view.findViewById(R.id.overflow_menu));
+										Menu menu = popupMenu.getMenu();
+										popupMenu.getMenuInflater().inflate(R.menu.track_segment_menu, menu);
+										menu.findItem(R.id.action_edit).setIcon(ic.getThemedIcon(R.drawable.ic_action_edit_dark));
+										menu.findItem(R.id.action_delete).setIcon(ic.getThemedIcon(R.drawable.ic_action_remove_dark));
+										popupMenu.setOnMenuItemClickListener(new IconPopupMenu.OnMenuItemClickListener() {
+											@Override
+											public boolean onMenuItemClick(MenuItem item) {
+												switch (item.getItemId()) {
+													case R.id.action_edit:
+														TrkSegment segment = getTrkSegment();
+														if (segment != null) {
+															addLine(LineType.EDIT_SEGMENT, segment);
+														}
+														return true;
+													case R.id.action_delete:
+														if (deleteSegment()) {
+															GPXFile gpx = getGpx();
+															if (gpx != null) {
+																SelectedGpxFile sf = app.getSelectedGpxHelper().selectGpxFile(gpx, vis.isChecked(), false);
+																new SaveGpxAsyncTask(gpx, vis.isChecked() ? sf : null).execute();
+															}
+														}
+														return true;
+												}
+												return false;
+											}
+										});
+										popupMenu.show();
+									}
+								});
+							} else {
+								view.findViewById(R.id.overflow_menu).setVisibility(View.GONE);
+							}
 
 							break;
 						case GPX_TAB_ITEM_ALTITUDE:
@@ -1394,6 +1439,45 @@ public class TrackSegmentFragment extends OsmAndListFragment {
 									}
 								});
 							}
+							if (!gpxItem.group.getTrack().generalTrack) {
+								view.findViewById(R.id.overflow_menu).setVisibility(View.VISIBLE);
+								view.findViewById(R.id.overflow_menu).setOnClickListener(new View.OnClickListener() {
+									@Override
+									public void onClick(View view) {
+										IconPopupMenu popupMenu = new IconPopupMenu(getTrackActivity(), view.findViewById(R.id.overflow_menu));
+										Menu menu = popupMenu.getMenu();
+										popupMenu.getMenuInflater().inflate(R.menu.track_segment_menu, menu);
+										menu.findItem(R.id.action_edit).setIcon(ic.getThemedIcon(R.drawable.ic_action_edit_dark));
+										menu.findItem(R.id.action_delete).setIcon(ic.getThemedIcon(R.drawable.ic_action_remove_dark));
+										popupMenu.setOnMenuItemClickListener(new IconPopupMenu.OnMenuItemClickListener() {
+											@Override
+											public boolean onMenuItemClick(MenuItem item) {
+												switch (item.getItemId()) {
+													case R.id.action_edit:
+														TrkSegment segment = getTrkSegment();
+														if (segment != null) {
+															addLine(LineType.EDIT_SEGMENT, segment);
+														}
+														return true;
+													case R.id.action_delete:
+														if (deleteSegment()) {
+															GPXFile gpx = getGpx();
+															if (gpx != null) {
+																SelectedGpxFile sf = app.getSelectedGpxHelper().selectGpxFile(gpx, vis.isChecked(), false);
+																new SaveGpxAsyncTask(gpx, vis.isChecked() ? sf : null).execute();
+															}
+														}
+														return true;
+												}
+												return false;
+											}
+										});
+										popupMenu.show();
+									}
+								});
+							} else {
+								view.findViewById(R.id.overflow_menu).setVisibility(View.GONE);
+							}
 
 							break;
 						case GPX_TAB_ITEM_SPEED:
@@ -1447,6 +1531,46 @@ public class TrackSegmentFragment extends OsmAndListFragment {
 									}
 								});
 							}
+							if (!gpxItem.group.getTrack().generalTrack) {
+								view.findViewById(R.id.overflow_menu).setVisibility(View.VISIBLE);
+								view.findViewById(R.id.overflow_menu).setOnClickListener(new View.OnClickListener() {
+									@Override
+									public void onClick(View view) {
+										IconPopupMenu popupMenu = new IconPopupMenu(getTrackActivity(), view.findViewById(R.id.overflow_menu));
+										Menu menu = popupMenu.getMenu();
+										popupMenu.getMenuInflater().inflate(R.menu.track_segment_menu, menu);
+										menu.findItem(R.id.action_edit).setIcon(ic.getThemedIcon(R.drawable.ic_action_edit_dark));
+										menu.findItem(R.id.action_delete).setIcon(ic.getThemedIcon(R.drawable.ic_action_remove_dark));
+										popupMenu.setOnMenuItemClickListener(new IconPopupMenu.OnMenuItemClickListener() {
+											@Override
+											public boolean onMenuItemClick(MenuItem item) {
+												switch (item.getItemId()) {
+													case R.id.action_edit:
+														TrkSegment segment = getTrkSegment();
+														if (segment != null) {
+															addLine(LineType.EDIT_SEGMENT, segment);
+														}
+														return true;
+													case R.id.action_delete:
+														if (deleteSegment()) {
+															GPXFile gpx = getGpx();
+															if (gpx != null) {
+																SelectedGpxFile sf = app.getSelectedGpxHelper().selectGpxFile(gpx, vis.isChecked(), false);
+																new SaveGpxAsyncTask(gpx, vis.isChecked() ? sf : null).execute();
+															}
+														}
+														return true;
+												}
+												return false;
+											}
+										});
+										popupMenu.show();
+									}
+								});
+							} else {
+								view.findViewById(R.id.overflow_menu).setVisibility(View.GONE);
+							}
+
 							break;
 					}
 				}
@@ -1455,6 +1579,17 @@ public class TrackSegmentFragment extends OsmAndListFragment {
 			container.addView(view, 0);
 			views.put(position, view);
 			return view;
+		}
+
+		private boolean deleteSegment() {
+			TrkSegment segment = getTrkSegment();
+			if (segment != null) {
+				GPXFile gpx = getGpx();
+				if (gpx != null) {
+					return gpx.removeTrkSegment(segment);
+				}
+			}
+			return false;
 		}
 
 		@Override
@@ -1549,6 +1684,17 @@ public class TrackSegmentFragment extends OsmAndListFragment {
 			}
 		}
 
+		private TrkSegment getTrkSegment() {
+			for (Track t : gpxItem.group.getGpx().tracks) {
+				for (TrkSegment s : t.segments) {
+					if (s.points.size() > 0 && s.points.get(0).equals(gpxItem.analysis.locationStart)) {
+						return s;
+					}
+				}
+			}
+			return null;
+		}
+
 		void openAnalyzeOnMap(GPXTabItemType tabType) {
 			LatLon location = null;
 			WptPt wpt = null;
@@ -1619,6 +1765,42 @@ public class TrackSegmentFragment extends OsmAndListFragment {
 				.addToBackStack(SplitSegmentFragment.TAG)
 				.commit();
 		getTrackActivity().getSlidingTabLayout().setVisibility(View.GONE);
+	}
+
+	private class SaveGpxAsyncTask extends AsyncTask<Void, Void, Void> {
+		private final GPXFile mGpx;
+		private final SelectedGpxFile mSelectedGpx;
+		private final TrackActivity mActivity;
+
+		SaveGpxAsyncTask(GPXFile gpx, SelectedGpxFile selectedGpxFile) {
+			mGpx = gpx;
+			mActivity = getTrackActivity();
+			mSelectedGpx = selectedGpxFile;
+		}
+
+		@Override
+		protected void onPreExecute() {
+			mActivity.setSupportProgressBarIndeterminateVisibility(true);
+		}
+
+		@Override
+		protected Void doInBackground(Void... params) {
+			GPXUtilities.writeGpxFile(new File(mGpx.path), mGpx, app);
+			return null;
+		}
+
+		@Override
+		protected void onPostExecute(Void aVoid) {
+			if (mSelectedGpx != null) {
+				List<GpxDisplayGroup> groups = getDisplayGroups();
+				mSelectedGpx.setDisplayGroups(groups);
+				mSelectedGpx.processPoints();
+			}
+			updateContent();
+			if (!mActivity.isFinishing()) {
+				mActivity.setSupportProgressBarIndeterminateVisibility(false);
+			}
+		}
 	}
 
 	private class SplitTrackAsyncTask extends AsyncTask<Void, Void, Void> {
