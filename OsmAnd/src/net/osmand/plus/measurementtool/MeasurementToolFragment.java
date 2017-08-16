@@ -94,6 +94,7 @@ public class MeasurementToolFragment extends Fragment {
 	private ImageView upDownBtn;
 	private ImageView undoBtn;
 	private ImageView redoBtn;
+	private ImageView mainIcon;
 
 	private boolean wasCollapseButtonVisible;
 	private boolean pointsListOpened;
@@ -157,20 +158,17 @@ public class MeasurementToolFragment extends Fragment {
 		distanceTv = (TextView) mainView.findViewById(R.id.measurement_distance_text_view);
 		pointsTv = (TextView) mainView.findViewById(R.id.measurement_points_text_view);
 
-		int color = nightMode ? R.color.osmand_orange : R.color.color_myloc_distance;
+		mainIcon = (ImageView) mainView.findViewById(R.id.main_icon);
 		if (newGpxLine != null) {
 			LineType lineType = newGpxLine.getLineType();
 			if (lineType == LineType.ADD_SEGMENT || lineType == LineType.EDIT_SEGMENT) {
-				((ImageView) mainView.findViewById(R.id.ruler_icon)).setImageDrawable(iconsCache.getIcon(R.drawable.ic_action_polygom_dark, color));
+				mainIcon.setImageDrawable(getActiveIcon(R.drawable.ic_action_polygom_dark));
 			} else {
-				((ImageView) mainView.findViewById(R.id.ruler_icon)).setImageDrawable(iconsCache.getIcon(R.drawable.ic_action_markers_dark, color));
+				mainIcon.setImageDrawable(getActiveIcon(R.drawable.ic_action_markers_dark));
 			}
 		} else {
-			((ImageView) mainView.findViewById(R.id.ruler_icon)).setImageDrawable(iconsCache.getIcon(R.drawable.ic_action_ruler, color));
+			mainIcon.setImageDrawable(getActiveIcon(R.drawable.ic_action_ruler));
 		}
-		((ImageView) mainView.findViewById(R.id.move_point_icon)).setImageDrawable(iconsCache.getIcon(R.drawable.ic_action_move_point, color));
-		((ImageView) mainView.findViewById(R.id.add_point_after_icon)).setImageDrawable(iconsCache.getIcon(R.drawable.ic_action_addpoint_above, color));
-		((ImageView) mainView.findViewById(R.id.add_point_before_icon)).setImageDrawable(iconsCache.getIcon(R.drawable.ic_action_addpoint_below, color));
 
 		upDownBtn = (ImageView) mainView.findViewById(R.id.up_down_button);
 		upDownBtn.setImageDrawable(upIcon);
@@ -587,23 +585,29 @@ public class MeasurementToolFragment extends Fragment {
 
 			@Override
 			public void onApplicationModeItemClick(ApplicationMode mode) {
-				toolBarController.setTopBarSwitchVisible(true);
-				toolBarController.setTopBarSwitchChecked(true);
-				snapToRoadEnabled = true;
-				MapActivity mapActivity = getMapActivity();
-				if (mapActivity != null) {
-					mapActivity.refreshMap();
-				}
+				enableSnapToRoadMode();
 			}
 		};
 	}
 
-	private void disableSnapToRoadMode() {
+	private void enableSnapToRoadMode() {
+		toolBarController.setTopBarSwitchVisible(true);
+		toolBarController.setTopBarSwitchChecked(true);
+		snapToRoadEnabled = true;
+		mainIcon.setImageDrawable(getActiveIcon(R.drawable.ic_action_snap_to_road));
 		MapActivity mapActivity = getMapActivity();
 		if (mapActivity != null) {
-			toolBarController.setTopBarSwitchVisible(false);
-			toolBarController.setTitle(previousToolBarTitle);
-			snapToRoadEnabled = false;
+			mapActivity.refreshMap();
+		}
+	}
+
+	private void disableSnapToRoadMode() {
+		toolBarController.setTopBarSwitchVisible(false);
+		toolBarController.setTitle(previousToolBarTitle);
+		snapToRoadEnabled = false;
+		mainIcon.setImageDrawable(getActiveIcon(R.drawable.ic_action_ruler));
+		MapActivity mapActivity = getMapActivity();
+		if (mapActivity != null) {
 			mapActivity.refreshMap();
 		}
 	}
@@ -633,8 +637,6 @@ public class MeasurementToolFragment extends Fragment {
 	}
 
 	private void openSelectedPointMenu(MapActivity mapActivity) {
-		final MeasurementToolLayer measurementLayer = mapActivity.getMapLayers().getMeasurementToolLayer();
-
 		SelectedPointMenuBottomSheetDialogFragment fragment = new SelectedPointMenuBottomSheetDialogFragment();
 		fragment.setSelectedPointOptionOnClickListener(createSelectedPointOptionOnClickListener());
 		fragment.show(mapActivity.getSupportFragmentManager(), SelectedPointMenuBottomSheetDialogFragment.TAG);
@@ -757,32 +759,37 @@ public class MeasurementToolFragment extends Fragment {
 		inMovePointMode = enable;
 		markGeneralComponents(enable ? View.GONE : View.VISIBLE);
 		mark(enable ? View.VISIBLE : View.GONE,
-				R.id.move_point_icon,
 				R.id.move_point_text,
 				R.id.selected_point_controls);
+		mainIcon.setImageDrawable(getActiveIcon(enable
+				? R.drawable.ic_action_move_point
+				: R.drawable.ic_action_ruler));
 	}
 
 	private void switchAddPointAfterMode(boolean enable) {
 		inAddPointAfterMode = enable;
 		markGeneralComponents(enable ? View.GONE : View.VISIBLE);
 		mark(enable ? View.VISIBLE : View.GONE,
-				R.id.add_point_after_icon,
 				R.id.add_point_after_text,
 				R.id.selected_point_controls);
+		mainIcon.setImageDrawable(getActiveIcon(enable
+				? R.drawable.ic_action_addpoint_above
+				: R.drawable.ic_action_ruler));
 	}
 
 	private void switchAddPointBeforeMode(boolean enable) {
 		inAddPointBeforeMode = enable;
 		markGeneralComponents(enable ? View.GONE : View.VISIBLE);
 		mark(enable ? View.VISIBLE : View.GONE,
-				R.id.add_point_before_icon,
 				R.id.add_point_before_text,
 				R.id.selected_point_controls);
+		mainIcon.setImageDrawable(getActiveIcon(enable
+				? R.drawable.ic_action_addpoint_below
+				: R.drawable.ic_action_ruler));
 	}
 
 	private void markGeneralComponents(int status) {
 		mark(status,
-				R.id.ruler_icon,
 				R.id.measurement_distance_text_view,
 				R.id.measurement_points_text_view,
 				R.id.up_down_button,
@@ -1102,6 +1109,10 @@ public class MeasurementToolFragment extends Fragment {
 
 	private Drawable getContentIcon(@DrawableRes int id) {
 		return iconsCache.getIcon(id, nightMode ? R.color.ctx_menu_info_text_dark : R.color.icon_color);
+	}
+
+	private Drawable getActiveIcon(@DrawableRes int id) {
+		return iconsCache.getIcon(id, nightMode ? R.color.osmand_orange : R.color.color_myloc_distance);
 	}
 
 	private void enable(View... views) {
