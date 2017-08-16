@@ -48,7 +48,7 @@ import net.osmand.plus.measurementtool.adapter.MeasurementToolAdapter;
 import net.osmand.plus.measurementtool.adapter.MeasurementToolItemTouchHelperCallback;
 import net.osmand.plus.measurementtool.command.AddPointCommand;
 import net.osmand.plus.measurementtool.command.ClearPointsCommand;
-import net.osmand.plus.measurementtool.command.CommandManager;
+import net.osmand.plus.measurementtool.command.MeasurementCommandManager;
 import net.osmand.plus.measurementtool.command.MovePointCommand;
 import net.osmand.plus.measurementtool.command.RemovePointCommand;
 import net.osmand.plus.measurementtool.command.ReorderPointCommand;
@@ -73,7 +73,7 @@ public class MeasurementToolFragment extends Fragment {
 
 	public static final String TAG = "MeasurementToolFragment";
 
-	private final CommandManager commandManager = new CommandManager();
+	private final MeasurementCommandManager commandManager = new MeasurementCommandManager();
 	private List<WptPt> measurementPoints = new LinkedList<>();
 	private IconsCache iconsCache;
 	private RecyclerView pointsRv;
@@ -115,6 +115,7 @@ public class MeasurementToolFragment extends Fragment {
 		final MapActivity mapActivity = (MapActivity) getActivity();
 		final MeasurementToolLayer measurementLayer = mapActivity.getMapLayers().getMeasurementToolLayer();
 		measurementLayer.setMeasurementPoints(measurementPoints);
+		commandManager.resetMeasurementLayer(measurementLayer);
 		iconsCache = mapActivity.getMyApplication().getIconsCache();
 		nightMode = mapActivity.getMyApplication().getDaynightHelper().isNightModeForMapControls();
 		final int themeRes = nightMode ? R.style.OsmandDarkTheme : R.style.OsmandLightTheme;

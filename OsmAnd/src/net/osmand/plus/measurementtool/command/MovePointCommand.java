@@ -3,9 +3,8 @@ package net.osmand.plus.measurementtool.command;
 import net.osmand.plus.GPXUtilities.WptPt;
 import net.osmand.plus.measurementtool.MeasurementToolLayer;
 
-public class MovePointCommand implements Command {
+public class MovePointCommand extends MeasurementModeCommand {
 
-	private final MeasurementToolLayer measurementLayer;
 	private final WptPt oldPoint;
 	private final WptPt newPoint;
 	private final int position;

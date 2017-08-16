@@ -6,9 +6,8 @@ import net.osmand.plus.measurementtool.MeasurementToolLayer;
 import java.util.LinkedList;
 import java.util.List;
 
-public class ClearPointsCommand implements Command {
+public class ClearPointsCommand extends MeasurementModeCommand {
 
-	private final MeasurementToolLayer measurementLayer;
 	private List<GPXUtilities.WptPt> points;
 
 	public ClearPointsCommand(MeasurementToolLayer measurementLayer) {

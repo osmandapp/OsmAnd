@@ -4,9 +4,8 @@ import net.osmand.plus.measurementtool.MeasurementToolLayer;
 
 import java.util.Collections;
 
-public class ReorderPointCommand implements Command {
+public class ReorderPointCommand extends MeasurementModeCommand {
 
-	private final MeasurementToolLayer measurementLayer;
 	private final int from;
 	private final int to;
 

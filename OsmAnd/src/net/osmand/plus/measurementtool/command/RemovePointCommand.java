@@ -3,9 +3,8 @@ package net.osmand.plus.measurementtool.command;
 import net.osmand.plus.GPXUtilities.WptPt;
 import net.osmand.plus.measurementtool.MeasurementToolLayer;
 
-public class RemovePointCommand implements Command {
+public class RemovePointCommand extends MeasurementModeCommand {
 
-	private final MeasurementToolLayer measurementLayer;
 	private final int position;
 	private WptPt point;
 
