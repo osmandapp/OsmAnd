@@ -48,15 +48,44 @@
                     android:layout_marginRight="24dp"
                     tools:src="@drawable/ic_action_snap_to_road"/>
 
-                <TextView
+                <android.support.v7.widget.SwitchCompat
+                    android:id="@+id/snap_to_road_switch"
                     android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_alignParentEnd="true"
+                    android:layout_alignParentRight="true"
+                    android:layout_centerVertical="true"
+                    android:layout_marginLeft="16dp"
+                    android:layout_marginStart="16dp"/>
+
+                <LinearLayout
+                    android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     android:layout_centerVertical="true"
                     android:layout_toEndOf="@id/snap_to_road_icon"
+                    android:layout_toLeftOf="@id/snap_to_road_switch"
                     android:layout_toRightOf="@id/snap_to_road_icon"
-                    android:maxLines="1"
-                    android:text="@string/snap_to_road"
-                    android:textAppearance="@style/TextAppearance.ListItemTitle"/>
+                    android:layout_toStartOf="@id/snap_to_road_switch"
+                    android:orientation="vertical">
+
+                    <TextView
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:maxLines="1"
+                        android:text="@string/snap_to_road"
+                        android:textAppearance="@style/TextAppearance.ListItemTitle"/>
+
+                    <TextView
+                        android:id="@+id/snap_to_road_enabled_text_view"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:text="@string/shared_string_enabled"
+                        android:textColor="?android:textColorSecondary"
+                        android:textSize="@dimen/default_desc_text_size"
+                        android:visibility="gone"
+                        tools:visibility="visible"/>
+                </LinearLayout>
+
             </RelativeLayout>
 
             <View
