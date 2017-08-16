@@ -30,8 +30,14 @@ public class SnapToRoadBottomSheetDialogFragment extends BottomSheetDialogFragme
 
 	public static final String TAG = "SnapToRoadBottomSheetDialogFragment";
 
+	private SnapToRoadListener listener;
 	private boolean nightMode;
 	private boolean portrait;
+	private boolean snapToRoadEnabled;
+
+	public void setListener(SnapToRoadListener listener) {
+		this.listener = listener;
+	}
 
 	@Nullable
 	@Override
@@ -56,10 +62,23 @@ public class SnapToRoadBottomSheetDialogFragment extends BottomSheetDialogFragme
 		LinearLayout navContainer = (LinearLayout) mainView.findViewById(R.id.navigation_types_container);
 		final List<ApplicationMode> modes = new ArrayList<>(ApplicationMode.values(settings));
 		modes.remove(ApplicationMode.DEFAULT);
-		for (ApplicationMode mode : modes) {
+		View.OnClickListener onClickListener = new View.OnClickListener() {
+			@Override
+			public void onClick(View view) {
+				snapToRoadEnabled = true;
+				if (listener != null) {
+					listener.onApplicationModeItemClick(modes.get((int) view.getTag()));
+				}
+				dismiss();
+			}
+		};
+		for (int i = 0; i < modes.size(); i++) {
+			ApplicationMode mode = modes.get(i);
 			View row = View.inflate(new ContextThemeWrapper(getContext(), themeRes), R.layout.list_item_icon_and_title, null);
 			((ImageView) row.findViewById(R.id.icon)).setImageDrawable(getContentIcon(mode.getSmallIconDark()));
 			((TextView) row.findViewById(R.id.title)).setText(mode.toHumanString(getContext()));
+			row.setOnClickListener(onClickListener);
+			row.setTag(i);
 			navContainer.addView(row);
 		}
 
@@ -115,7 +134,22 @@ public class SnapToRoadBottomSheetDialogFragment extends BottomSheetDialogFragme
 	}
 
 	@Override
+	public void onDestroyView() {
+		if (listener != null) {
+			listener.onDestroyView(snapToRoadEnabled);
+		}
+		super.onDestroyView();
+	}
+
+	@Override
 	protected Drawable getContentIcon(@DrawableRes int id) {
 		return getIcon(id, nightMode ? R.color.ctx_menu_info_text_dark : R.color.on_map_icon_color);
+	}
+
+	interface SnapToRoadListener {
+
+		void onDestroyView(boolean snapToRoadEnabled);
+
+		void onApplicationModeItemClick(ApplicationMode mode);
 	}
 }

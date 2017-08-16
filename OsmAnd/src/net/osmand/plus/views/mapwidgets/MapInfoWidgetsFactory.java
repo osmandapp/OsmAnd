@@ -266,6 +266,10 @@ public class MapInfoWidgetsFactory {
 			this.title = title;
 		}
 
+		public String getTitle() {
+			return title;
+		}
+
 		public void setBottomView(View bottomView) {
 			this.bottomView = bottomView;
 		}

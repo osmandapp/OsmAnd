@@ -31,6 +31,7 @@ import android.widget.Toast;
 import net.osmand.AndroidUtils;
 import net.osmand.CallbackWithObject;
 import net.osmand.IndexConstants;
+import net.osmand.plus.ApplicationMode;
 import net.osmand.plus.GPXUtilities;
 import net.osmand.plus.GPXUtilities.Route;
 import net.osmand.plus.GPXUtilities.WptPt;
@@ -44,6 +45,7 @@ import net.osmand.plus.activities.TrackActivity.NewGpxLine.LineType;
 import net.osmand.plus.helpers.AndroidUiHelper;
 import net.osmand.plus.helpers.GpxUiHelper;
 import net.osmand.plus.measurementtool.SelectedPointMenuBottomSheetDialogFragment.SelectedPointOptionOnClickListener;
+import net.osmand.plus.measurementtool.SnapToRoadBottomSheetDialogFragment.SnapToRoadListener;
 import net.osmand.plus.measurementtool.adapter.MeasurementToolAdapter;
 import net.osmand.plus.measurementtool.adapter.MeasurementToolItemTouchHelperCallback;
 import net.osmand.plus.measurementtool.command.AddPointCommand;
@@ -77,6 +79,7 @@ public class MeasurementToolFragment extends Fragment {
 	private List<WptPt> measurementPoints = new LinkedList<>();
 	private IconsCache iconsCache;
 	private RecyclerView pointsRv;
+	private String previousToolBarTitle = "";
 	private MeasurementToolBarController toolBarController;
 	private MeasurementToolAdapter adapter;
 	private TextView distanceTv;
@@ -209,7 +212,11 @@ public class MeasurementToolFragment extends Fragment {
 				fragment.setOptionsOnClickListener(new OptionsBottomSheetDialogFragment.OptionsOnClickListener() {
 					@Override
 					public void snapToRoadOnCLick() {
+						previousToolBarTitle = toolBarController.getTitle();
+						toolBarController.setTitle(getString(R.string.snap_to_road));
+						mapActivity.refreshMap();
 						SnapToRoadBottomSheetDialogFragment fragment = new SnapToRoadBottomSheetDialogFragment();
+						fragment.setListener(createSnapToRoadListener());
 						fragment.show(mapActivity.getSupportFragmentManager(), SnapToRoadBottomSheetDialogFragment.TAG);
 					}
 
@@ -529,6 +536,27 @@ public class MeasurementToolFragment extends Fragment {
 			@Override
 			public void onCloseMenu() {
 				setPreviousMapPosition();
+			}
+		};
+	}
+
+	private SnapToRoadListener createSnapToRoadListener() {
+		return new SnapToRoadListener() {
+
+			@Override
+			public void onDestroyView(boolean snapToRoadEnabled) {
+				if (!snapToRoadEnabled) {
+					toolBarController.setTitle(previousToolBarTitle);
+					MapActivity mapActivity = getMapActivity();
+					if (mapActivity != null) {
+						mapActivity.refreshMap();
+					}
+				}
+			}
+
+			@Override
+			public void onApplicationModeItemClick(ApplicationMode mode) {
+				Toast.makeText(getActivity(), mode.toHumanString(getActivity()), Toast.LENGTH_SHORT).show();
 			}
 		};
 	}
