@@ -116,9 +116,6 @@ public class MeasurementToolFragment extends Fragment {
 		final MapActivity mapActivity = (MapActivity) getActivity();
 		final MeasurementToolLayer measurementLayer = mapActivity.getMapLayers().getMeasurementToolLayer();
 		measurementLayer.setMeasurementPoints(measurementPoints);
-		measurementLayer.setInMovePointMode(inMovePointMode);
-		measurementLayer.setInAddPointBeforeMode(inAddPointBeforeMode);
-		measurementLayer.setInAddPointAfterMode(inAddPointAfterMode);
 		iconsCache = mapActivity.getMyApplication().getIconsCache();
 		nightMode = mapActivity.getMyApplication().getDaynightHelper().isNightModeForMapControls();
 		final int themeRes = nightMode ? R.style.OsmandDarkTheme : R.style.OsmandLightTheme;
