@@ -612,7 +612,7 @@ public class MeasurementToolFragment extends Fragment {
 		final MeasurementToolLayer measurementLayer = getMeasurementLayer();
 
 		GPXFile gpx = newGpxLine.getGpxFile();
-		List<WptPt> points = gpx.getLastRoutePoints();
+		List<WptPt> points = gpx.getRoutePoints();
 		if (measurementLayer != null) {
 			measurementPoints.addAll(points);
 			adapter.notifyDataSetChanged();
@@ -1038,7 +1038,7 @@ public class MeasurementToolFragment extends Fragment {
 								gpx.addTrkSegment(points);
 								break;
 							case ADD_ROUTE_POINTS:
-								gpx.setLastRoutePoints(points);
+								gpx.replaceRoutePoints(points);
 								break;
 							case EDIT_SEGMENT:
 								TrkSegment segment = new TrkSegment();

@@ -826,10 +826,10 @@ public class GPXUtilities {
 			return g;
 		}
 
-		public List<WptPt> getLastRoutePoints() {
+		public List<WptPt> getRoutePoints() {
 			List<WptPt> points = new ArrayList<>();
-			if (routes.size() > 0) {
-				Route rt = routes.get(routes.size() - 1);
+			for (int i = 0; i < routes.size(); i++) {
+				Route rt = routes.get(i);
 				points.addAll(rt.points);
 			}
 			return points;
@@ -925,6 +925,7 @@ public class GPXUtilities {
 						currentTrack.segments.remove(segmentIndex);
 						currentTrack.segments.add(segmentIndex, newSegment);
 						addGeneralTrack();
+						modifiedTime = System.currentTimeMillis();
 						return true;
 					}
 				}
@@ -934,12 +935,10 @@ public class GPXUtilities {
 			return false;
 		}
 
-		public void setLastRoutePoints(List<WptPt> points) {
-			if (routes.size() == 0) {
-				routes.add(new Route());
-			}
+		public void replaceRoutePoints(List<WptPt> points) {
+			routes.clear();
+			routes.add(new Route());
 			Route currentRoute = routes.get(routes.size() - 1);
-			currentRoute.points.clear();
 			currentRoute.points.addAll(points);
 
 			modifiedTime = System.currentTimeMillis();
@@ -979,13 +978,12 @@ public class GPXUtilities {
 		public boolean removeTrkSegment(TrkSegment segment) {
 			removeGeneralTrackIfExists();
 
-			modifiedTime = System.currentTimeMillis();
-
 			for (int i = 0; i < tracks.size(); i++) {
 				Track currentTrack = tracks.get(i);
 				for (int j = 0; j < currentTrack.segments.size(); j++) {
 					if (currentTrack.segments.remove(segment)) {
 						addGeneralTrack();
+						modifiedTime = System.currentTimeMillis();
 						return true;
 					}
 				}
