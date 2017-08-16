@@ -74,6 +74,7 @@ public class MeasurementToolFragment extends Fragment {
 	public static final String TAG = "MeasurementToolFragment";
 
 	private final CommandManager commandManager = new CommandManager();
+	private List<WptPt> measurementPoints = new LinkedList<>();
 	private IconsCache iconsCache;
 	private RecyclerView pointsRv;
 	private MeasurementToolBarController toolBarController;
@@ -103,8 +104,6 @@ public class MeasurementToolFragment extends Fragment {
 	private boolean inAddPointBeforeMode;
 
 	private int positionToAddPoint = -1;
-
-	private List<WptPt> measurementPoints = new LinkedList<>();
 
 	public void setNewGpxLine(NewGpxLine newGpxLine) {
 		this.newGpxLine = newGpxLine;
@@ -420,6 +419,12 @@ public class MeasurementToolFragment extends Fragment {
 		pointsRv.setAdapter(adapter);
 
 		enterMeasurementMode();
+
+		// If rotate the screen from landscape to portrait when the list of points is displayed then
+		// the PointsListFragment will exist without view. This is necessary to remove it.
+		if (portrait) {
+			hidePointsListFragment();
+		}
 
 		if (newGpxLine != null && !routePointsAdded) {
 			LineType lineType = newGpxLine.getLineType();
