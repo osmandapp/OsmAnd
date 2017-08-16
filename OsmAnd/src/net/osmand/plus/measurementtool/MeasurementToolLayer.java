@@ -112,7 +112,7 @@ public class MeasurementToolLayer extends OsmandMapLayer implements ContextMenuL
 		return measurementPoints;
 	}
 
-	public void setMeasurementPoints(List<WptPt> points) {
+	void setMeasurementPoints(List<WptPt> points) {
 		measurementPoints = points;
 	}
 

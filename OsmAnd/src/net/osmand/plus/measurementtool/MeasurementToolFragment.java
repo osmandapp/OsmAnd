@@ -438,7 +438,7 @@ public class MeasurementToolFragment extends Fragment {
 		exitMeasurementMode();
 		adapter.setAdapterListener(null);
 		if (pointsListOpened) {
-			setPreviousMapPosition();
+			hidePointsList();
 		}
 		if (inMovePointMode) {
 			switchMovePointMode(false);
@@ -746,14 +746,13 @@ public class MeasurementToolFragment extends Fragment {
 	private void showPointsListFragment() {
 		MapActivity mapActivity = getMapActivity();
 		if (mapActivity != null) {
-			MeasurePointsListFragment fragment = new MeasurePointsListFragment();
 			int screenHeight = AndroidUtils.getScreenHeight(mapActivity) - AndroidUtils.getStatusBarHeight(mapActivity);
+			MeasurePointsListFragment fragment = new MeasurePointsListFragment();
 			fragment.setRecyclerView(pointsRv);
 			fragment.setWidth(upDownRow.getWidth());
 			fragment.setHeight(screenHeight - upDownRow.getHeight());
 			mapActivity.getSupportFragmentManager().beginTransaction()
 					.add(R.id.fragmentContainer, fragment, MeasurePointsListFragment.TAG)
-					.addToBackStack(MeasurePointsListFragment.TAG)
 					.commitAllowingStateLoss();
 		}
 	}
@@ -762,8 +761,11 @@ public class MeasurementToolFragment extends Fragment {
 		MapActivity mapActivity = getMapActivity();
 		if (mapActivity != null) {
 			try {
-				mapActivity.getSupportFragmentManager()
-						.popBackStackImmediate(MeasurePointsListFragment.TAG, FragmentManager.POP_BACK_STACK_INCLUSIVE);
+				FragmentManager manager = mapActivity.getSupportFragmentManager();
+				Fragment fragment = manager.findFragmentByTag(MeasurePointsListFragment.TAG);
+				if (fragment != null) {
+					manager.beginTransaction().remove(fragment).commitAllowingStateLoss();
+				}
 			} catch (Exception e) {
 				// ignore
 			}
