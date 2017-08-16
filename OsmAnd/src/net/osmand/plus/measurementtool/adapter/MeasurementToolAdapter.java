@@ -17,6 +17,7 @@ import net.osmand.plus.IconsCache;
 import net.osmand.plus.OsmAndFormatter;
 import net.osmand.plus.R;
 import net.osmand.plus.activities.MapActivity;
+import net.osmand.plus.activities.TrackActivity.NewGpxLine.LineType;
 import net.osmand.util.MapUtils;
 
 import java.util.Collections;
@@ -29,10 +30,12 @@ public class MeasurementToolAdapter extends RecyclerView.Adapter<MeasurementTool
 	private final List<WptPt> points;
 	private MeasurementAdapterListener listener;
 	private boolean nightMode;
+	private LineType lineType;
 
-	public MeasurementToolAdapter(MapActivity mapActivity, List<WptPt> points) {
+	public MeasurementToolAdapter(MapActivity mapActivity, List<WptPt> points, LineType lineType) {
 		this.mapActivity = mapActivity;
 		this.points = points;
+		this.lineType = lineType;
 	}
 
 	public void setAdapterListener(MeasurementAdapterListener listener) {
@@ -81,7 +84,11 @@ public class MeasurementToolAdapter extends RecyclerView.Adapter<MeasurementTool
 		if (!TextUtils.isEmpty(pointTitle)) {
 			holder.title.setText(pointTitle);
 		} else {
-			holder.title.setText(mapActivity.getString(R.string.plugin_distance_point) + " - " + (pos + 1));
+			if (lineType == LineType.ADD_ROUTE_POINTS) {
+				holder.title.setText(mapActivity.getString(R.string.route_point) + " - " + (pos + 1));
+			} else {
+				holder.title.setText(mapActivity.getString(R.string.plugin_distance_point) + " - " + (pos + 1));
+			}
 		}
 		String pointDesc = pt.desc;
 		if (!TextUtils.isEmpty(pointDesc)) {

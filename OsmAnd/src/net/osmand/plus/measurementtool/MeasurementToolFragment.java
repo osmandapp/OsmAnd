@@ -407,7 +407,7 @@ public class MeasurementToolFragment extends Fragment {
 		});
 		mapActivity.showTopToolbar(toolBarController);
 
-		adapter = new MeasurementToolAdapter(getMapActivity(), measurementLayer.getMeasurementPoints());
+		adapter = new MeasurementToolAdapter(getMapActivity(), measurementLayer.getMeasurementPoints(), newGpxLine != null ? newGpxLine.getLineType() : null);
 		if (portrait) {
 			pointsRv = mainView.findViewById(R.id.measure_points_recycler_view);
 		} else {
