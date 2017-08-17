@@ -26,6 +26,7 @@ import android.widget.CompoundButton;
 import android.widget.EditText;
 import android.widget.ImageButton;
 import android.widget.ImageView;
+import android.widget.ProgressBar;
 import android.widget.TextView;
 import android.widget.Toast;
 
@@ -91,6 +92,7 @@ public class MeasurementToolFragment extends Fragment {
 	private Drawable downIcon;
 	private View pointsListContainer;
 	private View upDownRow;
+	private View mainView;
 	private ImageView upDownBtn;
 	private ImageView undoBtn;
 	private ImageView redoBtn;
@@ -150,7 +152,7 @@ public class MeasurementToolFragment extends Fragment {
 
 		View view = View.inflate(new ContextThemeWrapper(getContext(), themeRes), R.layout.fragment_measurement_tool, null);
 
-		final View mainView = view.findViewById(R.id.main_view);
+		mainView = view.findViewById(R.id.main_view);
 		AndroidUtils.setBackground(mapActivity, mainView, nightMode, R.drawable.bg_bottom_menu_light, R.drawable.bg_bottom_menu_dark);
 		pointsListContainer = view.findViewById(R.id.points_list_container);
 		if (portrait && pointsListContainer != null) {
@@ -615,13 +617,19 @@ public class MeasurementToolFragment extends Fragment {
 				ImageButton snapToRoadBtn = (ImageButton) mapActivity.findViewById(R.id.snap_to_road_image_button);
 				snapToRoadBtn.setBackgroundResource(nightMode ? R.drawable.btn_circle_night : R.drawable.btn_circle);
 				snapToRoadBtn.setImageDrawable(getActiveIcon(snapToRoadAppMode.getSmallIconDark()));
-				snapToRoadBtn.setVisibility(View.VISIBLE);
 				snapToRoadBtn.setOnClickListener(new View.OnClickListener() {
 					@Override
 					public void onClick(View view) {
 						showSnapToRoadMenu();
 					}
 				});
+				snapToRoadBtn.setVisibility(View.VISIBLE);
+
+				ProgressBar snapToRoadProgressBar = (ProgressBar) mainView.findViewById(R.id.snap_to_road_progress_bar);
+				snapToRoadProgressBar.setMinimumHeight(0);
+				snapToRoadProgressBar.setProgress(45);
+				snapToRoadProgressBar.setVisibility(View.VISIBLE);
+
 				mapActivity.refreshMap();
 			}
 		}
@@ -635,6 +643,7 @@ public class MeasurementToolFragment extends Fragment {
 		MapActivity mapActivity = getMapActivity();
 		if (mapActivity != null) {
 			mapActivity.findViewById(R.id.snap_to_road_image_button).setVisibility(View.GONE);
+			mainView.findViewById(R.id.snap_to_road_progress_bar).setVisibility(View.GONE);
 			mapActivity.refreshMap();
 		}
 	}
