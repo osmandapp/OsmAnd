@@ -1814,7 +1814,7 @@
 	<string name="poi_shelter_type_wildlife_hide">遮蔽類型：野生動物的偽裝</string>
 	<string name="poi_shelter_type_rock_shelter">遮蔽類型：懸巖遮蔽</string>
 	<string name="poi_shelter_type_sun_shelter">遮蔽類型：陽光遮避</string>
-	<string name="poi_shelter_type_field_shelter">遮蔽類型：牧場遮蓋屋</string>
+	<string name="poi_shelter_type_field_shelter">牧場遮蓋屋</string>
 	<string name="poi_shelter_type_tent">遮蔽類型：帳篷</string>
 	<string name="poi_shelter_type_abandoned">遮蔽類型：被遺棄</string>
 
@@ -2423,7 +2423,7 @@
 	<string name="poi_payment_type">支付型式</string>
 	<string name="poi_payment_fuel_type">燃料卡</string>
 	<string name="poi_additional_type">附加</string>
-	<string name="poi_internet_access_type">網際網路存取型式</string>
+	<string name="poi_internet_access_type">網際網路存取類型</string>
 	<string name="poi_vending_type">販賣機類型</string>
 	<string name="poi_bicycle_service">自行車服務</string>
 	<string name="poi_clothes_type">類型</string>
@@ -2482,7 +2482,7 @@
 	<string name="poi_fee">費用</string>
 	<string name="poi_smoking">吸煙</string>
 	<string name="poi_delivery">遞送</string>
-	<string name="poi_gambling_type">類別</string>
+	<string name="poi_gambling_type">類型</string>
 	<string name="poi_pump_type_gravity">泵浦類型︰重力</string>
 	<string name="poi_public_bookcase_type_phone_box">類型︰電話亭</string>
 	<string name="poi_public_bookcase_type_reading_box">類型︰讀本盒</string>
