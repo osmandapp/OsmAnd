@@ -37,6 +37,7 @@ import net.osmand.plus.ApplicationMode;
 import net.osmand.plus.GPXUtilities;
 import net.osmand.plus.GPXUtilities.GPXFile;
 import net.osmand.plus.GPXUtilities.Route;
+import net.osmand.plus.GPXUtilities.Track;
 import net.osmand.plus.GPXUtilities.TrkSegment;
 import net.osmand.plus.GPXUtilities.WptPt;
 import net.osmand.plus.GpxSelectionHelper.SelectedGpxFile;
@@ -48,6 +49,7 @@ import net.osmand.plus.activities.TrackActivity.NewGpxLine;
 import net.osmand.plus.activities.TrackActivity.NewGpxLine.LineType;
 import net.osmand.plus.helpers.AndroidUiHelper;
 import net.osmand.plus.helpers.GpxUiHelper;
+import net.osmand.plus.measurementtool.SaveAsNewTrackBottomSheetDialogFragment.SaveAsNewTrackFragmentListener;
 import net.osmand.plus.measurementtool.OptionsBottomSheetDialogFragment.OptionsFragmentListener;
 import net.osmand.plus.measurementtool.SelectedPointBottomSheetDialogFragment.SelectedPointFragmentListener;
 import net.osmand.plus.measurementtool.SnapToRoadBottomSheetDialogFragment.SnapToRoadFragmentListener;
@@ -119,6 +121,8 @@ public class MeasurementToolFragment extends Fragment {
 
 	private int positionToAddPoint = -1;
 
+	private enum SaveType { ROUTE_POINT, LINE };
+
 	public void setNewGpxLine(NewGpxLine newGpxLine) {
 		this.newGpxLine = newGpxLine;
 	}
@@ -148,6 +152,11 @@ public class MeasurementToolFragment extends Fragment {
 		Fragment snapToRoadFragment = fragmentManager.findFragmentByTag(SnapToRoadBottomSheetDialogFragment.TAG);
 		if (snapToRoadFragment != null) {
 			((SnapToRoadBottomSheetDialogFragment) snapToRoadFragment).setListener(createSnapToRoadFragmentListener());
+		}
+		Fragment saveAsNewTrackFragment = mapActivity.getSupportFragmentManager().findFragmentByTag(SaveAsNewTrackBottomSheetDialogFragment.TAG);
+		if (saveAsNewTrackFragment != null) {
+			SaveAsNewTrackBottomSheetDialogFragment saveAsNewTrackBottomSheetDialogFragment = (SaveAsNewTrackBottomSheetDialogFragment) saveAsNewTrackFragment;
+			saveAsNewTrackBottomSheetDialogFragment.setListener(createSaveAsNewTrackFragmentListener());
 		}
 
 		commandManager.resetMeasurementLayer(measurementLayer);
@@ -527,7 +536,7 @@ public class MeasurementToolFragment extends Fragment {
 			public void saveAsNewTrackOnClick() {
 				if (mapActivity != null && measurementLayer != null) {
 					if (measurementLayer.getPointsCount() > 0) {
-						saveAsGpxOnClick(mapActivity);
+						openSaveAsNewTrackMenu(mapActivity);
 					} else {
 						Toast.makeText(mapActivity, getString(R.string.none_point_error), Toast.LENGTH_SHORT).show();
 					}
@@ -703,6 +712,26 @@ public class MeasurementToolFragment extends Fragment {
 		fragment.setLineType(newGpxLine != null ? newGpxLine.getLineType() : null);
 		fragment.setListener(createSelectedPointFragmentListener());
 		fragment.show(mapActivity.getSupportFragmentManager(), SelectedPointBottomSheetDialogFragment.TAG);
+	}
+
+	private void openSaveAsNewTrackMenu(MapActivity mapActivity) {
+		SaveAsNewTrackBottomSheetDialogFragment fragment = new SaveAsNewTrackBottomSheetDialogFragment();
+		fragment.setListener(createSaveAsNewTrackFragmentListener());
+		fragment.show(mapActivity.getSupportFragmentManager(), SaveAsNewTrackBottomSheetDialogFragment.TAG);
+	}
+
+	private SaveAsNewTrackFragmentListener createSaveAsNewTrackFragmentListener() {
+		return new SaveAsNewTrackFragmentListener() {
+			@Override
+			public void saveAsRoutePointOnClick() {
+				saveAsGpx(SaveType.ROUTE_POINT);
+			}
+
+			@Override
+			public void saveAsLineOnClick() {
+				saveAsGpx(SaveType.LINE);
+			}
+		};
 	}
 
 	private AlertDialog showAddSegmentDialog(final MapActivity mapActivity) {
@@ -984,81 +1013,84 @@ public class MeasurementToolFragment extends Fragment {
 		saveExistingGpx(gpx, showOnMap, lineType);
 	}
 
-	private void saveAsGpxOnClick(MapActivity mapActivity) {
-		final File dir = mapActivity.getMyApplication().getAppPath(IndexConstants.GPX_INDEX_DIR);
-		final LayoutInflater inflater = mapActivity.getLayoutInflater();
-		final View view = inflater.inflate(R.layout.save_gpx_dialog, null);
-		final EditText nameEt = (EditText) view.findViewById(R.id.gpx_name_et);
-		final TextView fileExistsTv = (TextView) view.findViewById(R.id.file_exists_text_view);
-		final SwitchCompat showOnMapToggle = (SwitchCompat) view.findViewById(R.id.toggle_show_on_map);
-		showOnMapToggle.setChecked(true);
+	private void saveAsGpx(final SaveType saveType) {
+		MapActivity mapActivity = getMapActivity();
+		if (mapActivity != null) {
+			final File dir = mapActivity.getMyApplication().getAppPath(IndexConstants.GPX_INDEX_DIR);
+			final LayoutInflater inflater = mapActivity.getLayoutInflater();
+			final View view = inflater.inflate(R.layout.save_gpx_dialog, null);
+			final EditText nameEt = (EditText) view.findViewById(R.id.gpx_name_et);
+			final TextView fileExistsTv = (TextView) view.findViewById(R.id.file_exists_text_view);
+			final SwitchCompat showOnMapToggle = (SwitchCompat) view.findViewById(R.id.toggle_show_on_map);
+			showOnMapToggle.setChecked(true);
 
-		final String suggestedName = new SimpleDateFormat("yyyy-M-dd_HH-mm_EEE", Locale.US).format(new Date());
-		String displayedName = suggestedName;
-		File fout = new File(dir, suggestedName + GPX_SUFFIX);
-		int ind = 1;
-		while (fout.exists()) {
-			displayedName = suggestedName + "_" + (++ind);
-			fout = new File(dir, displayedName + GPX_SUFFIX);
-		}
-		nameEt.setText(displayedName);
-		nameEt.setSelection(displayedName.length());
-
-		final boolean[] textChanged = new boolean[1];
-		nameEt.addTextChangedListener(new TextWatcher() {
-			@Override
-			public void beforeTextChanged(CharSequence charSequence, int i, int i1, int i2) {
-
+			final String suggestedName = new SimpleDateFormat("yyyy-M-dd_HH-mm_EEE", Locale.US).format(new Date());
+			String displayedName = suggestedName;
+			File fout = new File(dir, suggestedName + GPX_SUFFIX);
+			int ind = 1;
+			while (fout.exists()) {
+				displayedName = suggestedName + "_" + (++ind);
+				fout = new File(dir, displayedName + GPX_SUFFIX);
 			}
+			nameEt.setText(displayedName);
+			nameEt.setSelection(displayedName.length());
 
-			@Override
-			public void onTextChanged(CharSequence charSequence, int i, int i1, int i2) {
+			final boolean[] textChanged = new boolean[1];
+			nameEt.addTextChangedListener(new TextWatcher() {
+				@Override
+				public void beforeTextChanged(CharSequence charSequence, int i, int i1, int i2) {
 
-			}
-
-			@Override
-			public void afterTextChanged(Editable editable) {
-				if (new File(dir, editable.toString() + GPX_SUFFIX).exists()) {
-					fileExistsTv.setVisibility(View.VISIBLE);
-				} else {
-					fileExistsTv.setVisibility(View.INVISIBLE);
 				}
-				textChanged[0] = true;
-			}
-		});
 
-		new AlertDialog.Builder(mapActivity)
-				.setTitle(R.string.enter_gpx_name)
-				.setView(view)
-				.setPositiveButton(R.string.shared_string_save, new DialogInterface.OnClickListener() {
-					@Override
-					public void onClick(DialogInterface dialog, int which) {
-						final String name = nameEt.getText().toString();
-						String fileName = name + GPX_SUFFIX;
-						if (textChanged[0]) {
-							File fout = new File(dir, fileName);
-							int ind = 1;
-							while (fout.exists()) {
-								fileName = name + "_" + (++ind) + GPX_SUFFIX;
-								fout = new File(dir, fileName);
-							}
-						}
-						saveNewGpx(dir, fileName, showOnMapToggle.isChecked());
+				@Override
+				public void onTextChanged(CharSequence charSequence, int i, int i1, int i2) {
+
+				}
+
+				@Override
+				public void afterTextChanged(Editable editable) {
+					if (new File(dir, editable.toString() + GPX_SUFFIX).exists()) {
+						fileExistsTv.setVisibility(View.VISIBLE);
+					} else {
+						fileExistsTv.setVisibility(View.INVISIBLE);
 					}
-				})
-				.setNegativeButton(R.string.shared_string_cancel, null)
-				.show();
+					textChanged[0] = true;
+				}
+			});
+
+			new AlertDialog.Builder(mapActivity)
+					.setTitle(R.string.enter_gpx_name)
+					.setView(view)
+					.setPositiveButton(R.string.shared_string_save, new DialogInterface.OnClickListener() {
+						@Override
+						public void onClick(DialogInterface dialog, int which) {
+							final String name = nameEt.getText().toString();
+							String fileName = name + GPX_SUFFIX;
+							if (textChanged[0]) {
+								File fout = new File(dir, fileName);
+								int ind = 1;
+								while (fout.exists()) {
+									fileName = name + "_" + (++ind) + GPX_SUFFIX;
+									fout = new File(dir, fileName);
+								}
+							}
+							saveNewGpx(dir, fileName, showOnMapToggle.isChecked(), saveType);
+						}
+					})
+					.setNegativeButton(R.string.shared_string_cancel, null)
+					.show();
+		}
 	}
 
-	private void saveNewGpx(File dir, String fileName, boolean checked) {
-		saveGpx(dir, fileName, checked, null, false, null);
+	private void saveNewGpx(File dir, String fileName, boolean checked, SaveType saveType) {
+		saveGpx(dir, fileName, checked, null, false, null, saveType);
 	}
 
 	private void saveExistingGpx(GPXFile gpx, boolean showOnMap, LineType lineType) {
-		saveGpx(null, null, showOnMap, gpx, true, lineType);
+		saveGpx(null, null, showOnMap, gpx, true, lineType, null);
 	}
 
-	private void saveGpx(final File dir, final String fileName, final boolean showOnMap, final GPXFile gpx, final boolean openTrackActivity, final LineType lineType) {
+	private void saveGpx(final File dir, final String fileName, final boolean showOnMap, final GPXFile gpx, final boolean openTrackActivity, final LineType lineType, final SaveType saveType) {
 		new AsyncTask<Void, Void, String>() {
 
 			private ProgressDialog progressDialog;
@@ -1083,9 +1115,13 @@ public class MeasurementToolFragment extends Fragment {
 					GPXFile gpx = new GPXFile();
 					if (measurementLayer != null) {
 						List<WptPt> points = measurementLayer.getMeasurementPoints();
-						if (points.size() == 1) {
-							gpx.points.add(points.get(0));
-						} else if (points.size() > 1) {
+						if (saveType == SaveType.LINE) {
+							TrkSegment segment = new TrkSegment();
+							segment.points.addAll(points);
+							Track track = new Track();
+							track.segments.add(segment);
+							gpx.tracks.add(track);
+						} else if (saveType == SaveType.ROUTE_POINT) {
 							Route rt = new Route();
 							gpx.routes.add(rt);
 							rt.points.addAll(points);
