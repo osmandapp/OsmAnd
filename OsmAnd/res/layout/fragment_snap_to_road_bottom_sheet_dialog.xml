@@ -1,15 +1,15 @@
 <?xml version="1.0" encoding="utf-8"?>
-<LinearLayout
+<android.support.v4.widget.NestedScrollView
     xmlns:android="http://schemas.android.com/apk/res/android"
     android:layout_width="match_parent"
     android:layout_height="wrap_content"
-    android:background="?attr/bg_color"
-    android:orientation="vertical">
+    android:background="@drawable/bg_bottom_menu_dark">
 
-    <ScrollView
-        android:id="@+id/navigation_types_scroll_view"
+    <LinearLayout
         android:layout_width="match_parent"
-        android:layout_height="wrap_content">
+        android:layout_height="wrap_content"
+        android:background="?attr/bg_color"
+        android:orientation="vertical">
 
         <LinearLayout
             android:id="@+id/navigation_types_container"
@@ -38,28 +38,28 @@
                 android:textSize="@dimen/default_desc_text_size"/>
         </LinearLayout>
 
-    </ScrollView>
+        <View
+            android:layout_width="match_parent"
+            android:layout_height="1dp"
+            android:background="?attr/dashboard_divider"/>
 
-    <View
-        android:layout_width="match_parent"
-        android:layout_height="1dp"
-        android:background="?attr/dashboard_divider"/>
+        <FrameLayout
+            android:id="@+id/cancel_row"
+            android:layout_width="match_parent"
+            android:layout_height="@dimen/measure_distance_bottom_sheet_cancel_button_height"
+            android:background="?attr/selectableItemBackground">
 
-    <FrameLayout
-        android:id="@+id/cancel_row"
-        android:layout_width="match_parent"
-        android:layout_height="@dimen/measure_distance_bottom_sheet_cancel_button_height"
-        android:background="?attr/selectableItemBackground">
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_gravity="center"
+                android:text="@string/shared_string_cancel"
+                android:textAllCaps="true"
+                android:textColor="?attr/color_dialog_buttons"
+                android:textSize="14sp"
+                android:textStyle="bold"/>
+        </FrameLayout>
 
-        <TextView
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_gravity="center"
-            android:text="@string/shared_string_cancel"
-            android:textAllCaps="true"
-            android:textColor="?attr/color_dialog_buttons"
-            android:textSize="14sp"
-            android:textStyle="bold"/>
-    </FrameLayout>
+    </LinearLayout>
 
-</LinearLayout>
+</android.support.v4.widget.NestedScrollView>
