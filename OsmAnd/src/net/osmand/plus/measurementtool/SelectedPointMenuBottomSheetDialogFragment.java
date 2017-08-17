@@ -23,6 +23,7 @@ import net.osmand.plus.IconsCache;
 import net.osmand.plus.OsmAndFormatter;
 import net.osmand.plus.R;
 import net.osmand.plus.activities.MapActivity;
+import net.osmand.plus.activities.TrackActivity;
 import net.osmand.plus.base.BottomSheetDialogFragment;
 import net.osmand.plus.helpers.AndroidUiHelper;
 import net.osmand.util.MapUtils;
@@ -36,9 +37,14 @@ public class SelectedPointMenuBottomSheetDialogFragment extends BottomSheetDialo
 	private SelectedPointOptionOnClickListener listener;
 	private boolean nightMode;
 	private boolean portrait;
+	private TrackActivity.NewGpxLine.LineType lineType;
 
 	public void setSelectedPointOptionOnClickListener(SelectedPointOptionOnClickListener listener) {
 		this.listener = listener;
+	}
+
+	public void setLineType(TrackActivity.NewGpxLine.LineType lineType) {
+		this.lineType = lineType;
 	}
 
 	@Nullable
@@ -113,16 +119,25 @@ public class SelectedPointMenuBottomSheetDialogFragment extends BottomSheetDialo
 		if (!TextUtils.isEmpty(pointTitle)) {
 			((TextView) mainView.findViewById(R.id.selected_point_title)).setText(pointTitle);
 		} else {
-			((TextView) mainView.findViewById(R.id.selected_point_title)).setText(mapActivity.getString(R.string.plugin_distance_point) + " - " + (pos + 1));
-		}
-		if (pos < 1) {
-			((TextView) mainView.findViewById(R.id.selected_point_distance)).setText(mapActivity.getString(R.string.shared_string_control_start));
-		} else {
-			float dist = 0;
-			for (int i = 1; i <= pos; i++) {
-				dist += MapUtils.getDistance(points.get(i - 1).lat, points.get(i - 1).lon, points.get(i).lat, points.get(i).lon);
+			if (lineType == TrackActivity.NewGpxLine.LineType.ADD_ROUTE_POINTS) {
+				((TextView) mainView.findViewById(R.id.selected_point_title)).setText(mapActivity.getString(R.string.route_point) + " - " + (pos + 1));
+			} else {
+				((TextView) mainView.findViewById(R.id.selected_point_title)).setText(mapActivity.getString(R.string.plugin_distance_point) + " - " + (pos + 1));
 			}
-			((TextView) mainView.findViewById(R.id.selected_point_distance)).setText(OsmAndFormatter.getFormattedDistance(dist, mapActivity.getMyApplication()));
+		}
+		String pointDesc = pt.desc;
+		if (!TextUtils.isEmpty(pointDesc)) {
+			((TextView) mainView.findViewById(R.id.selected_point_distance)).setText(pointDesc);
+		} else {
+			if (pos < 1) {
+				((TextView) mainView.findViewById(R.id.selected_point_distance)).setText(mapActivity.getString(R.string.shared_string_control_start));
+			} else {
+				float dist = 0;
+				for (int i = 1; i <= pos; i++) {
+					dist += MapUtils.getDistance(points.get(i - 1).lat, points.get(i - 1).lon, points.get(i).lat, points.get(i).lon);
+				}
+				((TextView) mainView.findViewById(R.id.selected_point_distance)).setText(OsmAndFormatter.getFormattedDistance(dist, mapActivity.getMyApplication()));
+			}
 		}
 
 		final int screenHeight = AndroidUtils.getScreenHeight(getActivity());

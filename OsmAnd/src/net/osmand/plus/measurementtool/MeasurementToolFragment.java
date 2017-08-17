@@ -132,6 +132,7 @@ public class MeasurementToolFragment extends Fragment {
 		Fragment fragment = mapActivity.getSupportFragmentManager().findFragmentByTag(SelectedPointMenuBottomSheetDialogFragment.TAG);
 		if (fragment != null) {
 			SelectedPointMenuBottomSheetDialogFragment selectedPointMenuBottomSheetDialogFragment = (SelectedPointMenuBottomSheetDialogFragment) fragment;
+			selectedPointMenuBottomSheetDialogFragment.setLineType(newGpxLine != null ? newGpxLine.getLineType() : null);
 			selectedPointMenuBottomSheetDialogFragment.setSelectedPointOptionOnClickListener(createSelectedPointOptionOnClickListener());
 		}
 		commandManager.resetMeasurementLayer(measurementLayer);
@@ -638,6 +639,7 @@ public class MeasurementToolFragment extends Fragment {
 
 	private void openSelectedPointMenu(MapActivity mapActivity) {
 		SelectedPointMenuBottomSheetDialogFragment fragment = new SelectedPointMenuBottomSheetDialogFragment();
+		fragment.setLineType(newGpxLine != null ? newGpxLine.getLineType() : null);
 		fragment.setSelectedPointOptionOnClickListener(createSelectedPointOptionOnClickListener());
 		fragment.show(mapActivity.getSupportFragmentManager(), SelectedPointMenuBottomSheetDialogFragment.TAG);
 	}
