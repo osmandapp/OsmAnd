@@ -48,8 +48,9 @@ import net.osmand.plus.activities.TrackActivity.NewGpxLine;
 import net.osmand.plus.activities.TrackActivity.NewGpxLine.LineType;
 import net.osmand.plus.helpers.AndroidUiHelper;
 import net.osmand.plus.helpers.GpxUiHelper;
-import net.osmand.plus.measurementtool.SelectedPointMenuBottomSheetDialogFragment.SelectedPointOptionOnClickListener;
-import net.osmand.plus.measurementtool.SnapToRoadBottomSheetDialogFragment.SnapToRoadListener;
+import net.osmand.plus.measurementtool.OptionsBottomSheetDialogFragment.OptionsFragmentListener;
+import net.osmand.plus.measurementtool.SelectedPointBottomSheetDialogFragment.SelectedPointFragmentListener;
+import net.osmand.plus.measurementtool.SnapToRoadBottomSheetDialogFragment.SnapToRoadFragmentListener;
 import net.osmand.plus.measurementtool.adapter.MeasurementToolAdapter;
 import net.osmand.plus.measurementtool.adapter.MeasurementToolItemTouchHelperCallback;
 import net.osmand.plus.measurementtool.command.AddPointCommand;
@@ -132,12 +133,23 @@ public class MeasurementToolFragment extends Fragment {
 			measurementLayer.setSelectedPointPos(selectedPointPos);
 			measurementLayer.setSelectedCachedPoint(selectedCachedPoint);
 		}
-		Fragment fragment = mapActivity.getSupportFragmentManager().findFragmentByTag(SelectedPointMenuBottomSheetDialogFragment.TAG);
-		if (fragment != null) {
-			SelectedPointMenuBottomSheetDialogFragment selectedPointMenuBottomSheetDialogFragment = (SelectedPointMenuBottomSheetDialogFragment) fragment;
-			selectedPointMenuBottomSheetDialogFragment.setLineType(newGpxLine != null ? newGpxLine.getLineType() : null);
-			selectedPointMenuBottomSheetDialogFragment.setSelectedPointOptionOnClickListener(createSelectedPointOptionOnClickListener());
+
+		FragmentManager fragmentManager = mapActivity.getSupportFragmentManager();
+		Fragment selectedPointFragment = fragmentManager.findFragmentByTag(SelectedPointBottomSheetDialogFragment.TAG);
+		if (selectedPointFragment != null) {
+			SelectedPointBottomSheetDialogFragment fragment = (SelectedPointBottomSheetDialogFragment) selectedPointFragment;
+			fragment.setLineType(newGpxLine != null ? newGpxLine.getLineType() : null);
+			fragment.setListener(createSelectedPointFragmentListener());
 		}
+		Fragment optionsFragment = fragmentManager.findFragmentByTag(OptionsBottomSheetDialogFragment.TAG);
+		if (optionsFragment != null) {
+			((OptionsBottomSheetDialogFragment) optionsFragment).setListener(createOptionsFragmentListener());
+		}
+		Fragment snapToRoadFragment = fragmentManager.findFragmentByTag(SnapToRoadBottomSheetDialogFragment.TAG);
+		if (snapToRoadFragment != null) {
+			((SnapToRoadBottomSheetDialogFragment) snapToRoadFragment).setListener(createSnapToRoadFragmentListener());
+		}
+
 		commandManager.resetMeasurementLayer(measurementLayer);
 		iconsCache = mapActivity.getMyApplication().getIconsCache();
 		nightMode = mapActivity.getMyApplication().getDaynightHelper().isNightModeForMapControls();
@@ -224,54 +236,7 @@ public class MeasurementToolFragment extends Fragment {
 			public void onClick(View view) {
 				OptionsBottomSheetDialogFragment fragment = new OptionsBottomSheetDialogFragment();
 				fragment.setSnapToRoadEnabled(snapToRoadEnabled);
-				fragment.setOptionsOnClickListener(new OptionsBottomSheetDialogFragment.OptionsOnClickListener() {
-					@Override
-					public void snapToRoadOnCLick() {
-						if (!snapToRoadEnabled) {
-							showSnapToRoadMenu();
-						} else {
-							disableSnapToRoadMode();
-						}
-					}
-
-					@Override
-					public void addToGpxOnClick() {
-						if (measurementLayer.getPointsCount() > 0) {
-							addToGpx(mapActivity);
-						} else {
-							Toast.makeText(mapActivity, getString(R.string.none_point_error), Toast.LENGTH_SHORT).show();
-						}
-					}
-
-					@Override
-					public void saveAsNewTrackOnClick() {
-						if (measurementLayer.getPointsCount() > 0) {
-							saveAsGpxOnClick(mapActivity);
-						} else {
-							Toast.makeText(mapActivity, getString(R.string.none_point_error), Toast.LENGTH_SHORT).show();
-						}
-					}
-
-					@Override
-					public void addToTheTrackOnClick() {
-						if (measurementLayer.getPointsCount() > 0) {
-//										showAddSegmentDialog(mapActivity);
-						} else {
-							Toast.makeText(mapActivity, getString(R.string.none_point_error), Toast.LENGTH_SHORT).show();
-						}
-					}
-
-					@Override
-					public void clearAllOnClick() {
-						commandManager.execute(new ClearPointsCommand(measurementLayer));
-						if (pointsListOpened) {
-							hidePointsList();
-						}
-						disable(redoBtn, upDownBtn);
-						updateText();
-						saved = false;
-					}
-				});
+				fragment.setListener(createOptionsFragmentListener());
 				fragment.setAddLineMode(newGpxLine != null);
 				fragment.show(mapActivity.getSupportFragmentManager(), OptionsBottomSheetDialogFragment.TAG);
 			}
@@ -527,15 +492,77 @@ public class MeasurementToolFragment extends Fragment {
 			toolBarController.setTitle(getString(R.string.snap_to_road));
 			mapActivity.refreshMap();
 			SnapToRoadBottomSheetDialogFragment fragment = new SnapToRoadBottomSheetDialogFragment();
-			fragment.setListener(createSnapToRoadListener());
+			fragment.setListener(createSnapToRoadFragmentListener());
 			fragment.show(mapActivity.getSupportFragmentManager(), SnapToRoadBottomSheetDialogFragment.TAG);
 		}
 	}
 
-	private SelectedPointOptionOnClickListener createSelectedPointOptionOnClickListener() {
+	private OptionsFragmentListener createOptionsFragmentListener() {
+
+		final MapActivity mapActivity = getMapActivity();
 		final MeasurementToolLayer measurementLayer = getMeasurementLayer();
 
-		return new SelectedPointOptionOnClickListener() {
+		return new OptionsFragmentListener() {
+			@Override
+			public void snapToRoadOnCLick() {
+				if (!snapToRoadEnabled) {
+					showSnapToRoadMenu();
+				} else {
+					disableSnapToRoadMode();
+				}
+			}
+
+			@Override
+			public void addToGpxOnClick() {
+				if (mapActivity != null && measurementLayer != null) {
+					if (measurementLayer.getPointsCount() > 0) {
+						addToGpx(mapActivity);
+					} else {
+						Toast.makeText(mapActivity, getString(R.string.none_point_error), Toast.LENGTH_SHORT).show();
+					}
+				}
+			}
+
+			@Override
+			public void saveAsNewTrackOnClick() {
+				if (mapActivity != null && measurementLayer != null) {
+					if (measurementLayer.getPointsCount() > 0) {
+						saveAsGpxOnClick(mapActivity);
+					} else {
+						Toast.makeText(mapActivity, getString(R.string.none_point_error), Toast.LENGTH_SHORT).show();
+					}
+				}
+			}
+
+			@Override
+			public void addToTheTrackOnClick() {
+				if (mapActivity != null && measurementLayer != null) {
+					if (measurementLayer.getPointsCount() > 0) {
+//										showAddSegmentDialog(mapActivity);
+					} else {
+						Toast.makeText(mapActivity, getString(R.string.none_point_error), Toast.LENGTH_SHORT).show();
+					}
+				}
+			}
+
+			@Override
+			public void clearAllOnClick() {
+				commandManager.execute(new ClearPointsCommand(measurementLayer));
+				if (pointsListOpened) {
+					hidePointsList();
+				}
+				disable(redoBtn, upDownBtn);
+				updateText();
+				saved = false;
+			}
+		};
+	}
+
+	private SelectedPointFragmentListener createSelectedPointFragmentListener() {
+
+		final MeasurementToolLayer measurementLayer = getMeasurementLayer();
+
+		return new SelectedPointFragmentListener() {
 			@Override
 			public void moveOnClick() {
 				if (measurementLayer != null) {
@@ -584,9 +611,8 @@ public class MeasurementToolFragment extends Fragment {
 		};
 	}
 
-	private SnapToRoadListener createSnapToRoadListener() {
-		return new SnapToRoadListener() {
-
+	private SnapToRoadFragmentListener createSnapToRoadFragmentListener() {
+		return new SnapToRoadFragmentListener() {
 			@Override
 			public void onDestroyView(boolean snapToRoadEnabled) {
 				if (!snapToRoadEnabled) {
@@ -673,10 +699,10 @@ public class MeasurementToolFragment extends Fragment {
 	}
 
 	private void openSelectedPointMenu(MapActivity mapActivity) {
-		SelectedPointMenuBottomSheetDialogFragment fragment = new SelectedPointMenuBottomSheetDialogFragment();
+		SelectedPointBottomSheetDialogFragment fragment = new SelectedPointBottomSheetDialogFragment();
 		fragment.setLineType(newGpxLine != null ? newGpxLine.getLineType() : null);
-		fragment.setSelectedPointOptionOnClickListener(createSelectedPointOptionOnClickListener());
-		fragment.show(mapActivity.getSupportFragmentManager(), SelectedPointMenuBottomSheetDialogFragment.TAG);
+		fragment.setListener(createSelectedPointFragmentListener());
+		fragment.show(mapActivity.getSupportFragmentManager(), SelectedPointBottomSheetDialogFragment.TAG);
 	}
 
 	private AlertDialog showAddSegmentDialog(final MapActivity mapActivity) {

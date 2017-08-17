@@ -30,12 +30,12 @@ public class SnapToRoadBottomSheetDialogFragment extends BottomSheetDialogFragme
 
 	public static final String TAG = "SnapToRoadBottomSheetDialogFragment";
 
-	private SnapToRoadListener listener;
+	private SnapToRoadFragmentListener listener;
 	private boolean nightMode;
 	private boolean portrait;
 	private boolean snapToRoadEnabled;
 
-	public void setListener(SnapToRoadListener listener) {
+	public void setListener(SnapToRoadFragmentListener listener) {
 		this.listener = listener;
 	}
 
@@ -146,7 +146,7 @@ public class SnapToRoadBottomSheetDialogFragment extends BottomSheetDialogFragme
 		return getIcon(id, nightMode ? R.color.ctx_menu_info_text_dark : R.color.on_map_icon_color);
 	}
 
-	interface SnapToRoadListener {
+	interface SnapToRoadFragmentListener {
 
 		void onDestroyView(boolean snapToRoadEnabled);
 

@@ -25,13 +25,13 @@ public class OptionsBottomSheetDialogFragment extends BottomSheetDialogFragment 
 
 	public final static String TAG = "OptionsBottomSheetDialogFragment";
 
-	private OptionsOnClickListener listener;
+	private OptionsFragmentListener listener;
 	private boolean addLineMode;
 	private boolean portrait;
 	private boolean nightMode;
 	private boolean snapToRoadEnabled;
 
-	public void setOptionsOnClickListener(OptionsOnClickListener listener) {
+	public void setListener(OptionsFragmentListener listener) {
 		this.listener = listener;
 	}
 
@@ -191,7 +191,7 @@ public class OptionsBottomSheetDialogFragment extends BottomSheetDialogFragment 
 		return getIcon(id, nightMode ? R.color.osmand_orange : R.color.color_myloc_distance);
 	}
 
-	interface OptionsOnClickListener {
+	interface OptionsFragmentListener {
 
 		void snapToRoadOnCLick();
 

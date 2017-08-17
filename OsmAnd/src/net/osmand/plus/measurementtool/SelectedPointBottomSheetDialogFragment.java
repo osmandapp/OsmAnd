@@ -30,16 +30,16 @@ import net.osmand.util.MapUtils;
 
 import java.util.List;
 
-public class SelectedPointMenuBottomSheetDialogFragment extends BottomSheetDialogFragment {
+public class SelectedPointBottomSheetDialogFragment extends BottomSheetDialogFragment {
 
-	public final static String TAG = "SelectedPointMenuBottomSheetDialogFragment";
+	public final static String TAG = "SelectedPointBottomSheetDialogFragment";
 
-	private SelectedPointOptionOnClickListener listener;
+	private SelectedPointFragmentListener listener;
 	private boolean nightMode;
 	private boolean portrait;
 	private TrackActivity.NewGpxLine.LineType lineType;
 
-	public void setSelectedPointOptionOnClickListener(SelectedPointOptionOnClickListener listener) {
+	public void setListener(SelectedPointFragmentListener listener) {
 		this.listener = listener;
 	}
 
@@ -212,7 +212,7 @@ public class SelectedPointMenuBottomSheetDialogFragment extends BottomSheetDialo
 		super.onCancel(dialog);
 	}
 
-	interface SelectedPointOptionOnClickListener {
+	interface SelectedPointFragmentListener {
 
 		void moveOnClick();
 
