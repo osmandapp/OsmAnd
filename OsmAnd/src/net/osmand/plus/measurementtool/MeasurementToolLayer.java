@@ -193,7 +193,7 @@ public class MeasurementToolLayer extends OsmandMapLayer implements ContextMenuL
 	private void selectPoint(double x, double y, boolean singleTap) {
 		clearSelection();
 		RotatedTileBox tb = view.getCurrentRotatedTileBox();
-		double lowestDistance = AndroidUtils.dpToPx(view.getContext(), 20);
+		double lowestDistance = view.getResources().getDimension(R.dimen.measurement_tool_select_radius);
 		for (int i = 0; i < measurementPoints.size(); i++) {
 			WptPt pt = measurementPoints.get(i);
 			if (tb.containsLatLon(pt.getLatitude(), pt.getLongitude())) {
