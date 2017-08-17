@@ -85,12 +85,23 @@
                     android:layout_height="wrap_content"
                     android:layout_centerVertical="true"
                     android:layout_toEndOf="@id/measurement_distance_text_view"
-                    android:layout_toLeftOf="@id/up_down_button"
                     android:layout_toRightOf="@id/measurement_distance_text_view"
-                    android:layout_toStartOf="@id/up_down_button"
                     android:textColor="?android:textColorSecondary"
                     android:textSize="@dimen/default_list_text_size"
                     tools:text="points: 3"/>
+
+                <TextView
+                    android:id="@+id/distance_to_center_text_view"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_centerVertical="true"
+                    android:layout_toEndOf="@id/measurement_points_text_view"
+                    android:layout_toLeftOf="@id/up_down_button"
+                    android:layout_toRightOf="@id/measurement_points_text_view"
+                    android:layout_toStartOf="@id/up_down_button"
+                    android:textColor="?android:textColorSecondary"
+                    android:textSize="@dimen/default_list_text_size"
+                    tools:text=" – 700 m"/>
 
                 <TextView
                     android:id="@+id/move_point_text"

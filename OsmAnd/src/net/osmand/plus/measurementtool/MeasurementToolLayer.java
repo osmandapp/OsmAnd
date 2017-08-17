@@ -44,6 +44,7 @@ public class MeasurementToolLayer extends OsmandMapLayer implements ContextMenuL
 	private int marginY;
 	private final TIntArrayList tx = new TIntArrayList();
 	private final TIntArrayList ty = new TIntArrayList();
+	private OnMeasureDistanceToCenter measureDistanceToCenterListener;
 	private OnSingleTapListener singleTapListener;
 	private OnEnterMovePointModeListener enterMovePointModeListener;
 	private int selectedPointPos = -1;
@@ -74,6 +75,10 @@ public class MeasurementToolLayer extends OsmandMapLayer implements ContextMenuL
 
 	void setOnEnterMovePointModeListener(OnEnterMovePointModeListener listener) {
 		this.enterMovePointModeListener = listener;
+	}
+
+	void setOnMeasureDistanceToCenterListener(OnMeasureDistanceToCenter listener) {
+		this.measureDistanceToCenterListener = listener;
 	}
 
 	void setSelectedPointPos(int pos) {
@@ -222,6 +227,15 @@ public class MeasurementToolLayer extends OsmandMapLayer implements ContextMenuL
 			lineAttrs.updatePaints(view, settings, tb);
 			if (!inMovePointMode && !inAddPointAfterMode && !inAddPointBeforeMode) {
 				drawCenterIcon(canvas, tb, tb.getCenterPixelPoint(), settings.isNightMode());
+				if (measureDistanceToCenterListener != null) {
+					float distance = 0;
+					if (measurementPoints.size() > 0) {
+						WptPt lastPoint = measurementPoints.get(measurementPoints.size() - 1);
+						LatLon centerLatLon = tb.getCenterLatLon();
+						distance = (float) MapUtils.getDistance(lastPoint.lat, lastPoint.lon, centerLatLon.getLatitude(), centerLatLon.getLongitude());
+					}
+					measureDistanceToCenterListener.onMeasure(distance);
+				}
 			}
 
 			if (measurementPoints.size() > 0) {
@@ -447,5 +461,9 @@ public class MeasurementToolLayer extends OsmandMapLayer implements ContextMenuL
 
 	interface OnEnterMovePointModeListener {
 		void onEnterMovePointMode();
+	}
+
+	interface OnMeasureDistanceToCenter {
+		void onMeasure(float distance);
 	}
 }

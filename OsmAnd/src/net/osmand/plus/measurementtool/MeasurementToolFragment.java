@@ -42,6 +42,7 @@ import net.osmand.plus.GPXUtilities.TrkSegment;
 import net.osmand.plus.GPXUtilities.WptPt;
 import net.osmand.plus.GpxSelectionHelper.SelectedGpxFile;
 import net.osmand.plus.IconsCache;
+import net.osmand.plus.OsmAndFormatter;
 import net.osmand.plus.R;
 import net.osmand.plus.activities.MapActivity;
 import net.osmand.plus.activities.TrackActivity;
@@ -91,6 +92,7 @@ public class MeasurementToolFragment extends Fragment {
 	private MeasurementToolAdapter adapter;
 	private TextView distanceTv;
 	private TextView pointsTv;
+	private TextView distanceToCenterTv;
 	private String pointsSt;
 	private Drawable upIcon;
 	private Drawable downIcon;
@@ -186,6 +188,7 @@ public class MeasurementToolFragment extends Fragment {
 
 		distanceTv = (TextView) mainView.findViewById(R.id.measurement_distance_text_view);
 		pointsTv = (TextView) mainView.findViewById(R.id.measurement_points_text_view);
+		distanceToCenterTv = (TextView) mainView.findViewById(R.id.distance_to_center_text_view);
 
 		mainIcon = (ImageView) mainView.findViewById(R.id.main_icon);
 		if (newGpxLine != null) {
@@ -321,6 +324,14 @@ public class MeasurementToolFragment extends Fragment {
 				if (selectedPointPos != -1 && selectedCachedPoint != null) {
 					openSelectedPointMenu(mapActivity);
 				}
+			}
+		});
+
+		measurementLayer.setOnMeasureDistanceToCenterListener(new MeasurementToolLayer.OnMeasureDistanceToCenter() {
+			@Override
+			public void onMeasure(float distance) {
+				String distStr = OsmAndFormatter.getFormattedDistance(distance, mapActivity.getMyApplication());
+				distanceToCenterTv.setText(" – " + distStr);
 			}
 		});
 
@@ -921,6 +932,7 @@ public class MeasurementToolFragment extends Fragment {
 		mark(status,
 				R.id.measurement_distance_text_view,
 				R.id.measurement_points_text_view,
+				R.id.distance_to_center_text_view,
 				R.id.up_down_button,
 				R.id.measure_mode_controls);
 	}
