@@ -17,6 +17,15 @@
         android:clickable="true"
         android:orientation="vertical">
 
+        <ProgressBar
+            android:id="@+id/snap_to_road_progress_bar"
+            style="?android:attr/progressBarStyleHorizontal"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:minHeight="0dp"
+            android:visibility="gone"
+            tools:visibility="visible"/>
+
         <RelativeLayout
             android:id="@+id/up_down_row"
             android:layout_width="match_parent"
