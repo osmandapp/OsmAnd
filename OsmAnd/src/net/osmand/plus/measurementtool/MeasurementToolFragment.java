@@ -533,7 +533,7 @@ public class MeasurementToolFragment extends Fragment {
 			public void addToTheTrackOnClick() {
 				if (mapActivity != null && measurementLayer != null) {
 					if (measurementLayer.getPointsCount() > 0) {
-//										showAddSegmentDialog(mapActivity);
+						showAddSegmentDialog(mapActivity);
 					} else {
 						Toast.makeText(mapActivity, getString(R.string.none_point_error), Toast.LENGTH_SHORT).show();
 					}
@@ -789,6 +789,9 @@ public class MeasurementToolFragment extends Fragment {
 				GPXFile gpxFile;
 				if (result != null && result.length > 0) {
 					gpxFile = result[0];
+					SelectedGpxFile selectedGpxFile = mapActivity.getMyApplication().getSelectedGpxHelper().getSelectedFileByPath(gpxFile.path);
+					boolean showOnMap = selectedGpxFile != null;
+					saveExistingGpx(gpxFile, showOnMap, null, false);
 				}
 				return true;
 			}
@@ -1059,7 +1062,7 @@ public class MeasurementToolFragment extends Fragment {
 		SelectedGpxFile selectedGpxFile = mapActivity.getMyApplication().getSelectedGpxHelper().getSelectedFileByPath(gpx.path);
 		boolean showOnMap = selectedGpxFile != null;
 		LineType lineType = newGpxLine.getLineType();
-		saveExistingGpx(gpx, showOnMap, lineType);
+		saveExistingGpx(gpx, showOnMap, lineType, true);
 	}
 
 	private void saveAsGpx(final SaveType saveType) {
@@ -1135,8 +1138,8 @@ public class MeasurementToolFragment extends Fragment {
 		saveGpx(dir, fileName, checked, null, false, null, saveType);
 	}
 
-	private void saveExistingGpx(GPXFile gpx, boolean showOnMap, LineType lineType) {
-		saveGpx(null, null, showOnMap, gpx, true, lineType, null);
+	private void saveExistingGpx(GPXFile gpx, boolean showOnMap, LineType lineType, boolean openTrackActivity) {
+		saveGpx(null, null, showOnMap, gpx, openTrackActivity, lineType, null);
 	}
 
 	private void saveGpx(final File dir,
@@ -1195,18 +1198,22 @@ public class MeasurementToolFragment extends Fragment {
 					toSave = new File(gpx.path);
 					if (measurementLayer != null) {
 						List<WptPt> points = measurementLayer.getMeasurementPoints();
-						switch (lineType) {
-							case ADD_SEGMENT:
-								gpx.addTrkSegment(points);
-								break;
-							case ADD_ROUTE_POINTS:
-								gpx.replaceRoutePoints(points);
-								break;
-							case EDIT_SEGMENT:
-								TrkSegment segment = new TrkSegment();
-								segment.points.addAll(points);
-								gpx.replaceSegment(newGpxLine.getTrkSegment(), segment);
-								break;
+						if (lineType != null) {
+							switch (lineType) {
+								case ADD_SEGMENT:
+									gpx.addTrkSegment(points);
+									break;
+								case ADD_ROUTE_POINTS:
+									gpx.replaceRoutePoints(points);
+									break;
+								case EDIT_SEGMENT:
+									TrkSegment segment = new TrkSegment();
+									segment.points.addAll(points);
+									gpx.replaceSegment(newGpxLine.getTrkSegment(), segment);
+									break;
+							}
+						} else {
+							gpx.addRoutePoints(points);
 						}
 					}
 					if (activity != null) {

@@ -935,6 +935,19 @@ public class GPXUtilities {
 			return false;
 		}
 
+		public void addRoutePoints(List<WptPt> points) {
+			if (routes.size() == 0) {
+				Route route = new Route();
+				routes.add(route);
+			}
+
+			Route lastRoute = routes.get(routes.size() - 1);
+
+			lastRoute.points.addAll(points);
+
+			modifiedTime = System.currentTimeMillis();
+		}
+
 		public void replaceRoutePoints(List<WptPt> points) {
 			routes.clear();
 			routes.add(new Route());
