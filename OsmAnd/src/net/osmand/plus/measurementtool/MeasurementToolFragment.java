@@ -480,10 +480,12 @@ public class MeasurementToolFragment extends Fragment {
 		return iconsCache.getIcon(id, nightMode ? R.color.osmand_orange : R.color.color_myloc_distance);
 	}
 
-	private void showSnapToRoadMenu() {
+	private void showSnapToRoadMenu(boolean rememberPreviousTitle) {
 		MapActivity mapActivity = getMapActivity();
 		if (mapActivity != null) {
-			previousToolBarTitle = toolBarController.getTitle();
+			if (rememberPreviousTitle) {
+				previousToolBarTitle = toolBarController.getTitle();
+			}
 			toolBarController.setTitle(getString(R.string.snap_to_road));
 			mapActivity.refreshMap();
 			SnapToRoadBottomSheetDialogFragment fragment = new SnapToRoadBottomSheetDialogFragment();
@@ -501,7 +503,7 @@ public class MeasurementToolFragment extends Fragment {
 			@Override
 			public void snapToRoadOnCLick() {
 				if (!snapToRoadEnabled) {
-					showSnapToRoadMenu();
+					showSnapToRoadMenu(true);
 				} else {
 					disableSnapToRoadMode();
 				}
@@ -717,7 +719,7 @@ public class MeasurementToolFragment extends Fragment {
 				snapToRoadBtn.setOnClickListener(new View.OnClickListener() {
 					@Override
 					public void onClick(View view) {
-						showSnapToRoadMenu();
+						showSnapToRoadMenu(false);
 					}
 				});
 				snapToRoadBtn.setVisibility(View.VISIBLE);
