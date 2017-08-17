@@ -32,9 +32,78 @@
                 android:layout_height="44dp"
                 android:paddingEnd="16dp"
                 android:paddingStart="16dp"
-                android:text="@string/measurement_tool_snap_to_road_descr"
+                android:text="@string/measurement_tool_save_as_new_track_descr"
                 android:textColor="?android:textColorSecondary"
                 android:textSize="@dimen/default_desc_text_size"/>
+
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:orientation="horizontal">
+
+                <RelativeLayout
+                    android:layout_width="0dp"
+                    android:layout_height="wrap_content"
+                    android:layout_marginEnd="8dp"
+                    android:layout_marginLeft="16dp"
+                    android:layout_marginRight="8dp"
+                    android:layout_marginStart="16dp"
+                    android:layout_weight="1">
+
+                    <ImageView
+                        android:id="@+id/route_point_image"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:layout_centerInParent="true"
+                        android:adjustViewBounds="true"
+                        android:foreground="?attr/selectableItemBackground"
+                        tools:src="@drawable/img_help_trip_route_points_night"/>
+
+                    <TextView
+                        android:id="@+id/route_point_text"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_alignLeft="@id/route_point_image"
+                        android:layout_alignStart="@id/route_point_image"
+                        android:layout_margin="8dp"
+                        android:text="@string/route_point"
+                        android:textColor="?android:textColorSecondary"
+                        android:textSize="@dimen/default_split_segments_sub"/>
+
+                </RelativeLayout>
+
+                <RelativeLayout
+                    android:layout_width="0dp"
+                    android:layout_height="wrap_content"
+                    android:layout_marginEnd="16dp"
+                    android:layout_marginLeft="8dp"
+                    android:layout_marginRight="16dp"
+                    android:layout_marginStart="8dp"
+                    android:layout_weight="1">
+
+                    <ImageView
+                        android:id="@+id/line_image"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:layout_centerInParent="true"
+                        android:adjustViewBounds="true"
+                        android:foreground="?attr/selectableItemBackground"
+                        tools:src="@drawable/img_help_trip_track_night"/>
+
+                    <TextView
+                        android:id="@+id/line_text"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_alignLeft="@id/line_image"
+                        android:layout_alignStart="@id/line_image"
+                        android:layout_margin="8dp"
+                        android:text="@string/line"
+                        android:textColor="?android:textColorSecondary"
+                        android:textSize="@dimen/default_split_segments_sub"/>
+
+                </RelativeLayout>
+
+            </LinearLayout>
 
             <RelativeLayout
                 android:id="@+id/save_as_route_point_row"
