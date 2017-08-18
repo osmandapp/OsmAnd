@@ -32,6 +32,7 @@ public class MeasurementToolLayer extends OsmandMapLayer implements ContextMenuL
 	private boolean inAddPointAfterMode;
 	private boolean inAddPointBeforeMode;
 	private List<WptPt> measurementPoints = new LinkedList<>();
+	private List<WptPt> snappedToRoadPoints = new LinkedList<>();
 	private Bitmap centerIconDay;
 	private Bitmap centerIconNight;
 	private Bitmap pointIcon;
@@ -132,6 +133,14 @@ public class MeasurementToolLayer extends OsmandMapLayer implements ContextMenuL
 
 	void setMeasurementPoints(List<WptPt> points) {
 		measurementPoints = points;
+	}
+
+	public List<WptPt> getSnappedToRoadPoints() {
+		return snappedToRoadPoints;
+	}
+
+	public void setSnappedToRoadPoints(List<WptPt> snappedToRoadPoints) {
+		this.snappedToRoadPoints = snappedToRoadPoints;
 	}
 
 	String getDistanceSt() {
@@ -244,13 +253,19 @@ public class MeasurementToolLayer extends OsmandMapLayer implements ContextMenuL
 				}
 			}
 
-			if (measurementPoints.size() > 0) {
+			List<WptPt> drawPoints;
+			if (snappedToRoadPoints.size() > 0) {
+				drawPoints = snappedToRoadPoints;
+			} else {
+				drawPoints = measurementPoints;
+			}
+			if (drawPoints.size() > 0) {
 				path.reset();
 				tx.reset();
 				ty.reset();
 
-				for (int i = 0; i < measurementPoints.size(); i++) {
-					WptPt pt = measurementPoints.get(i);
+				for (int i = 0; i < drawPoints.size(); i++) {
+					WptPt pt = drawPoints.get(i);
 					int locX;
 					int locY;
 					if (selectedPointPos == i && (inMovePointMode || inAddPointAfterMode || inAddPointBeforeMode)) {

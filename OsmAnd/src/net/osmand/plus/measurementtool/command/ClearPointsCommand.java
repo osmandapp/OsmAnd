@@ -19,6 +19,7 @@ public class ClearPointsCommand extends MeasurementModeCommand {
 		List<GPXUtilities.WptPt> pts = measurementLayer.getMeasurementPoints();
 		points = new LinkedList<>(pts);
 		pts.clear();
+		measurementLayer.getSnappedToRoadPoints().clear();
 		measurementLayer.refreshMap();
 		return true;
 	}

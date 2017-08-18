@@ -94,6 +94,7 @@ public class MeasurementToolFragment extends Fragment {
 
 	private final MeasurementCommandManager commandManager = new MeasurementCommandManager();
 	private List<WptPt> measurementPoints = new LinkedList<>();
+	private List<WptPt> snappedToRoadPoints = new LinkedList<>();
 	private IconsCache iconsCache;
 	private RecyclerView pointsRv;
 	private String previousToolBarTitle = "";
@@ -151,6 +152,7 @@ public class MeasurementToolFragment extends Fragment {
 		final MeasurementToolLayer measurementLayer = mapActivity.getMapLayers().getMeasurementToolLayer();
 
 		measurementLayer.setMeasurementPoints(measurementPoints);
+		measurementLayer.setSnappedToRoadPoints(snappedToRoadPoints);
 		if (selectedPointPos != -1 && selectedCachedPoint != null) {
 			measurementLayer.setSelectedPointPos(selectedPointPos);
 			measurementLayer.setSelectedCachedPoint(selectedCachedPoint);
@@ -1614,12 +1616,12 @@ public class MeasurementToolFragment extends Fragment {
 		@Override
 		protected void onPostExecute(RouteCalculationResult result) {
 			calculated = true;
-			measurementPoints.clear();
+			snappedToRoadPoints.clear();
 			for (Location loc : result.getRouteLocations()) {
 				WptPt pt = new WptPt();
 				pt.lat = loc.getLatitude();
 				pt.lon = loc.getLongitude();
-				measurementPoints.add(pt);
+				snappedToRoadPoints.add(pt);
 			}
 			mapActivity.refreshMap();
 			super.onPostExecute(result);
