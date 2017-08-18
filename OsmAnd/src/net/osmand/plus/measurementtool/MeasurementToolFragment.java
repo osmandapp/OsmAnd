@@ -865,13 +865,14 @@ public class MeasurementToolFragment extends Fragment {
 	private void addPointAfter() {
 		MeasurementToolLayer measurementLayer = getMeasurementLayer();
 		if (measurementLayer != null && positionToAddPoint != -1) {
-			addPointToPosition(positionToAddPoint);
-			selectedPointPos += 1;
-			selectedCachedPoint = new WptPt(measurementLayer.getMeasurementPoints().get(selectedPointPos));
-			measurementLayer.setSelectedPointPos(selectedPointPos);
-			measurementLayer.setSelectedCachedPoint(selectedCachedPoint);
-			measurementLayer.refreshMap();
-			positionToAddPoint += 1;
+			if (addPointToPosition(positionToAddPoint)) {
+				selectedPointPos += 1;
+				selectedCachedPoint = new WptPt(measurementLayer.getMeasurementPoints().get(selectedPointPos));
+				measurementLayer.setSelectedPointPos(selectedPointPos);
+				measurementLayer.setSelectedCachedPoint(selectedCachedPoint);
+				measurementLayer.refreshMap();
+				positionToAddPoint += 1;
+			}
 		}
 	}
 
@@ -906,11 +907,12 @@ public class MeasurementToolFragment extends Fragment {
 	private void addPointBefore() {
 		MeasurementToolLayer measurementLayer = getMeasurementLayer();
 		if (measurementLayer != null && positionToAddPoint != -1) {
-			addPointToPosition(positionToAddPoint);
-			selectedCachedPoint = new WptPt(measurementLayer.getMeasurementPoints().get(selectedPointPos));
-			measurementLayer.setSelectedPointPos(selectedPointPos);
-			measurementLayer.setSelectedCachedPoint(selectedCachedPoint);
-			measurementLayer.refreshMap();
+			if (addPointToPosition(positionToAddPoint)) {
+				selectedCachedPoint = new WptPt(measurementLayer.getMeasurementPoints().get(selectedPointPos));
+				measurementLayer.setSelectedPointPos(selectedPointPos);
+				measurementLayer.setSelectedCachedPoint(selectedCachedPoint);
+				measurementLayer.refreshMap();
+			}
 		}
 	}
 
@@ -1013,16 +1015,18 @@ public class MeasurementToolFragment extends Fragment {
 		}
 	}
 
-	private void addPointToPosition(int position) {
+	private boolean addPointToPosition(int position) {
+		boolean added = false;
 		MeasurementToolLayer measurementLayer = getMeasurementLayer();
 		if (measurementLayer != null) {
-			commandManager.execute(new AddPointCommand(measurementLayer, position));
+			added = commandManager.execute(new AddPointCommand(measurementLayer, position));
 			enable(undoBtn, upDownBtn);
 			disable(redoBtn);
 			updateText();
 			adapter.notifyDataSetChanged();
 			saved = false;
 		}
+		return added;
 	}
 
 	private void showPointsList() {

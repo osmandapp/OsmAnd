@@ -18,11 +18,13 @@ public class MeasurementCommandManager {
 		return redoCommands.size() > 0;
 	}
 
-	public void execute(MeasurementModeCommand command) {
+	public boolean execute(MeasurementModeCommand command) {
 		if (command.execute()) {
 			undoCommands.push(command);
 			redoCommands.clear();
+			return true;
 		}
+		return false;
 	}
 
 	public void undo() {
