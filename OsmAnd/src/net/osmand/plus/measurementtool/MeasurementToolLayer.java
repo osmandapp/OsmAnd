@@ -249,23 +249,6 @@ public class MeasurementToolLayer extends OsmandMapLayer implements ContextMenuL
 				tx.reset();
 				ty.reset();
 
-				int leftPointPos = -1;
-				for (int i = 0; i < measurementPoints.size(); i++) {
-					WptPt pt = measurementPoints.get(i);
-					if (tb.containsLatLon(pt.lat, pt.lon)) {
-						leftPointPos = i;
-						break;
-					}
-				}
-				int rightPointPos = -1;
-				for (int i = measurementPoints.size() - 1; i >= leftPointPos; i--) {
-					WptPt pt = measurementPoints.get(i);
-					if (tb.containsLatLon(pt.lat, pt.lon)) {
-						rightPointPos = i;
-						break;
-					}
-				}
-
 				for (int i = 0; i < measurementPoints.size(); i++) {
 					WptPt pt = measurementPoints.get(i);
 					int locX;
@@ -320,6 +303,23 @@ public class MeasurementToolLayer extends OsmandMapLayer implements ContextMenuL
 				}
 				calculatePath(tb, tx, ty, path);
 				canvas.drawPath(path, lineAttrs.paint);
+
+				int leftPointPos = -1;
+				for (int i = 0; i < measurementPoints.size(); i++) {
+					WptPt pt = measurementPoints.get(i);
+					if (tb.containsLatLon(pt.lat, pt.lon)) {
+						leftPointPos = i;
+						break;
+					}
+				}
+				int rightPointPos = -1;
+				for (int i = measurementPoints.size() - 1; i >= leftPointPos; i--) {
+					WptPt pt = measurementPoints.get(i);
+					if (tb.containsLatLon(pt.lat, pt.lon)) {
+						rightPointPos = i;
+						break;
+					}
+				}
 
 				if (leftPointPos != -1 && rightPointPos != -1) {
 					int pointToDraw = rightPointPos - leftPointPos;
