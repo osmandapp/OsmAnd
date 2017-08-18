@@ -145,6 +145,7 @@ public class MeasurementToolFragment extends Fragment {
 			measurementLayer.setSelectedCachedPoint(selectedCachedPoint);
 		}
 
+		// Handling screen rotation
 		FragmentManager fragmentManager = mapActivity.getSupportFragmentManager();
 		Fragment selectedPointFragment = fragmentManager.findFragmentByTag(SelectedPointBottomSheetDialogFragment.TAG);
 		if (selectedPointFragment != null) {
@@ -163,6 +164,11 @@ public class MeasurementToolFragment extends Fragment {
 		Fragment saveAsNewTrackFragment = mapActivity.getSupportFragmentManager().findFragmentByTag(SaveAsNewTrackBottomSheetDialogFragment.TAG);
 		if (saveAsNewTrackFragment != null) {
 			((SaveAsNewTrackBottomSheetDialogFragment) saveAsNewTrackFragment).setListener(createSaveAsNewTrackFragmentListener());
+		}
+		// If rotate the screen from landscape to portrait when the list of points is displayed then
+		// the PointsListFragment will exist without view. This is necessary to remove it.
+		if (portrait) {
+			hidePointsListFragment();
 		}
 
 		commandManager.resetMeasurementLayer(measurementLayer);
@@ -433,12 +439,6 @@ public class MeasurementToolFragment extends Fragment {
 		pointsRv.setAdapter(adapter);
 
 		enterMeasurementMode();
-
-		// If rotate the screen from landscape to portrait when the list of points is displayed then
-		// the PointsListFragment will exist without view. This is necessary to remove it.
-		if (portrait) {
-			hidePointsListFragment();
-		}
 
 		if (snapToRoadEnabled) {
 			enableSnapToRoadMode();
