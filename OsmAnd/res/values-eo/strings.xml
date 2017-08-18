@@ -2734,7 +2734,7 @@ Indikas lokon:  %1$s x %2$s"</string>
     <string name="measurement_tool">Distanc-mezurilo</string>
     <string name="mappilary_no_internet_desc">Vi bezonas interret-konekton por vidi fotojn de Mapillary</string>
     <string name="retry">Reprovi</string>
-<string name="measurement_tool_action_bar">Esplori mapon kaj aldoni punktojn</string>
+<string name="measurement_tool_action_bar">Esploru mapon kaj aldonu punktojn</string>
     <string name="add_gpx_waypoint_bottom_sheet_title">Aldoni GPX-navigadpunkton</string>
     <string name="shared_string_create">Krei</string>
 <string name="none_point_error">Bonvolu aldoni almenaŭ unu punkton.</string>

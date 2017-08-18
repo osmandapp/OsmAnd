@@ -145,7 +145,7 @@
 	<string name="poi_hotel">Szálloda</string>
 	<string name="poi_guest_house">Vendégház</string>
 	<string name="poi_motel">Motel</string>
-	<string name="poi_alpine_hut">Menedékház</string>
+	<string name="poi_alpine_hut">Menedékház (személyzettel)</string>
 	<string name="poi_place_of_worship">Istentiszteleti hely</string>
 	<string name="poi_religion_christian">Keresztény</string>
 	<string name="poi_religion_jewish">Zsidó</string>
@@ -839,7 +839,7 @@
 	<string name="poi_hostel">Turistaszálló</string>
 	<string name="poi_chalet">Alpesi faház</string>
 	<string name="poi_apartment">Apartman</string>
-	<string name="poi_wilderness_hut">Menedékház</string>
+	<string name="poi_wilderness_hut">Menedékház (személyzet nélkül)</string>
 	<string name="poi_lean_to">Esőbeálló</string>
 	<string name="poi_religion_voodoo">Vudu</string>
 	<string name="poi_religion_unitarian_universalist">Unitárius univerzalista</string>

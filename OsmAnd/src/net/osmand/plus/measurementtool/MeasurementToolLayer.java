@@ -60,8 +60,8 @@ public class MeasurementToolLayer extends OsmandMapLayer implements ContextMenuL
 
 		centerIconDay = BitmapFactory.decodeResource(view.getResources(), R.drawable.map_ruler_center_day);
 		centerIconNight = BitmapFactory.decodeResource(view.getResources(), R.drawable.map_ruler_center_night);
-		pointIcon = BitmapFactory.decodeResource(view.getResources(), R.drawable.map_pedestrian_location);
-		applyingPointIcon = BitmapFactory.decodeResource(view.getResources(), R.drawable.map_mapillary_location);
+		pointIcon = BitmapFactory.decodeResource(view.getResources(), R.drawable.map_measure_point_day);
+		applyingPointIcon = BitmapFactory.decodeResource(view.getResources(), R.drawable.map_measure_point_move_day);
 
 		bitmapPaint = new Paint();
 		bitmapPaint.setAntiAlias(true);
