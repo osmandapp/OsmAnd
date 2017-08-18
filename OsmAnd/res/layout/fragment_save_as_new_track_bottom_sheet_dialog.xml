@@ -1,9 +1,9 @@
 <?xml version="1.0" encoding="utf-8"?>
 <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+              xmlns:osmand="http://schemas.android.com/apk/res-auto"
               xmlns:tools="http://schemas.android.com/tools"
               android:layout_width="match_parent"
               android:layout_height="wrap_content"
-              xmlns:osmand="http://schemas.android.com/apk/res-auto"
               android:background="?attr/bg_color"
               android:orientation="vertical">
 
@@ -24,6 +24,8 @@
                 android:layout_height="52dp"
                 android:gravity="center_vertical"
                 android:paddingEnd="16dp"
+                android:paddingLeft="16dp"
+                android:paddingRight="16dp"
                 android:paddingStart="16dp"
                 android:text="@string/shared_string_save_as_gpx"
                 android:textAppearance="@style/TextAppearance.ListItemTitle"
@@ -33,6 +35,8 @@
                 android:layout_width="match_parent"
                 android:layout_height="44dp"
                 android:paddingEnd="16dp"
+                android:paddingLeft="16dp"
+                android:paddingRight="16dp"
                 android:paddingStart="16dp"
                 android:text="@string/measurement_tool_save_as_new_track_descr"
                 android:textColor="?android:textColorSecondary"
@@ -41,8 +45,8 @@
             <LinearLayout
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:orientation="horizontal"
-                android:layout_marginBottom="16dp">
+                android:layout_marginBottom="16dp"
+                android:orientation="horizontal">
 
                 <RelativeLayout
                     android:layout_width="0dp"
@@ -68,13 +72,12 @@
                         android:layout_height="wrap_content"
                         android:layout_alignLeft="@id/route_point_image"
                         android:layout_alignStart="@id/route_point_image"
-                        android:layout_marginTop="8dp"
                         android:layout_marginLeft="10dp"
                         android:layout_marginStart="10dp"
+                        android:layout_marginTop="8dp"
                         android:text="@string/route_point"
                         android:textColor="?android:textColorSecondary"
                         android:textSize="@dimen/default_split_segments_sub"/>
-
                 </RelativeLayout>
 
                 <RelativeLayout
@@ -101,13 +104,12 @@
                         android:layout_height="wrap_content"
                         android:layout_alignLeft="@id/line_image"
                         android:layout_alignStart="@id/line_image"
-                        android:layout_marginTop="8dp"
                         android:layout_marginLeft="10dp"
                         android:layout_marginStart="10dp"
+                        android:layout_marginTop="8dp"
                         android:text="@string/line"
                         android:textColor="?android:textColorSecondary"
                         android:textSize="@dimen/default_split_segments_sub"/>
-
                 </RelativeLayout>
 
             </LinearLayout>
@@ -119,6 +121,8 @@
                 android:background="?attr/selectableItemBackground"
                 android:minHeight="48dp"
                 android:paddingEnd="16dp"
+                android:paddingLeft="16dp"
+                android:paddingRight="16dp"
                 android:paddingStart="16dp">
 
                 <ImageView
@@ -148,6 +152,8 @@
                 android:background="?attr/selectableItemBackground"
                 android:minHeight="48dp"
                 android:paddingEnd="16dp"
+                android:paddingLeft="16dp"
+                android:paddingRight="16dp"
                 android:paddingStart="16dp">
 
                 <ImageView

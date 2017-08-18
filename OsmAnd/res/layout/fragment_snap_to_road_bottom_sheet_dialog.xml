@@ -24,6 +24,8 @@
                 android:layout_height="52dp"
                 android:gravity="center_vertical"
                 android:paddingEnd="16dp"
+                android:paddingLeft="16dp"
+                android:paddingRight="16dp"
                 android:paddingStart="16dp"
                 android:text="@string/choose_navigation_type"
                 android:textAppearance="@style/TextAppearance.ListItemTitle"/>
@@ -32,6 +34,8 @@
                 android:layout_width="match_parent"
                 android:layout_height="44dp"
                 android:paddingEnd="16dp"
+                android:paddingLeft="16dp"
+                android:paddingRight="16dp"
                 android:paddingStart="16dp"
                 android:text="@string/measurement_tool_snap_to_road_descr"
                 android:textColor="?android:textColorSecondary"

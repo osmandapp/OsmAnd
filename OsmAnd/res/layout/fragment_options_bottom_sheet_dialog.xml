@@ -25,6 +25,8 @@
                 android:layout_height="52dp"
                 android:gravity="center_vertical"
                 android:paddingEnd="16dp"
+                android:paddingLeft="16dp"
+                android:paddingRight="16dp"
                 android:paddingStart="16dp"
                 android:text="@string/shared_string_options"
                 android:textAppearance="@style/TextAppearance.ListItemTitle"
@@ -37,6 +39,8 @@
                 android:background="?attr/selectableItemBackground"
                 android:minHeight="48dp"
                 android:paddingEnd="16dp"
+                android:paddingLeft="16dp"
+                android:paddingRight="16dp"
                 android:paddingStart="16dp">
 
                 <ImageView
@@ -108,6 +112,8 @@
                 android:background="?attr/selectableItemBackground"
                 android:minHeight="48dp"
                 android:paddingEnd="16dp"
+                android:paddingLeft="16dp"
+                android:paddingRight="16dp"
                 android:paddingStart="16dp"
                 android:visibility="gone">
 
@@ -138,6 +144,8 @@
                 android:background="?attr/selectableItemBackground"
                 android:minHeight="48dp"
                 android:paddingEnd="16dp"
+                android:paddingLeft="16dp"
+                android:paddingRight="16dp"
                 android:paddingStart="16dp">
 
                 <ImageView
@@ -167,6 +175,8 @@
                 android:background="?attr/selectableItemBackground"
                 android:minHeight="48dp"
                 android:paddingEnd="16dp"
+                android:paddingLeft="16dp"
+                android:paddingRight="16dp"
                 android:paddingStart="16dp">
 
                 <ImageView
@@ -205,6 +215,8 @@
                 android:background="?attr/selectableItemBackground"
                 android:minHeight="48dp"
                 android:paddingEnd="16dp"
+                android:paddingLeft="16dp"
+                android:paddingRight="16dp"
                 android:paddingStart="16dp">
 
                 <ImageView

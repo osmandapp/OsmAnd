@@ -23,6 +23,8 @@
                 android:layout_height="56dp"
                 android:minHeight="56dp"
                 android:paddingEnd="16dp"
+                android:paddingLeft="16dp"
+                android:paddingRight="16dp"
                 android:paddingStart="16dp">
 
                 <ImageView
@@ -59,7 +61,6 @@
                         android:textColor="?android:textColorSecondary"
                         android:textSize="@dimen/default_list_text_size"
                         tools:text="386 m"/>
-
                 </LinearLayout>
 
             </RelativeLayout>
@@ -77,6 +78,8 @@
                 android:background="?attr/selectableItemBackground"
                 android:minHeight="48dp"
                 android:paddingEnd="16dp"
+                android:paddingLeft="16dp"
+                android:paddingRight="16dp"
                 android:paddingStart="16dp">
 
                 <ImageView
@@ -106,6 +109,8 @@
                 android:background="?attr/selectableItemBackground"
                 android:minHeight="48dp"
                 android:paddingEnd="16dp"
+                android:paddingLeft="16dp"
+                android:paddingRight="16dp"
                 android:paddingStart="16dp">
 
                 <ImageView
@@ -144,6 +149,8 @@
                 android:background="?attr/selectableItemBackground"
                 android:minHeight="48dp"
                 android:paddingEnd="16dp"
+                android:paddingLeft="16dp"
+                android:paddingRight="16dp"
                 android:paddingStart="16dp">
 
                 <ImageView
@@ -173,6 +180,8 @@
                 android:background="?attr/selectableItemBackground"
                 android:minHeight="48dp"
                 android:paddingEnd="16dp"
+                android:paddingLeft="16dp"
+                android:paddingRight="16dp"
                 android:paddingStart="16dp">
 
                 <ImageView
