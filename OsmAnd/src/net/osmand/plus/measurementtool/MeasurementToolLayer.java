@@ -39,10 +39,13 @@ public class MeasurementToolLayer extends OsmandMapLayer implements ContextMenuL
 	private Paint bitmapPaint;
 	private final RenderingLineAttributes lineAttrs = new RenderingLineAttributes("measureDistanceLine");
 	private final Path path = new Path();
-	private int marginX;
-	private int marginY;
+	private int marginPointIconX;
+	private int marginPointIconY;
+	private int marginApplyingPointIconX;
+	private int marginApplyingPointIconY;
 	private final TIntArrayList tx = new TIntArrayList();
 	private final TIntArrayList ty = new TIntArrayList();
+	private final TIntArrayList drawnPointsPositions = new TIntArrayList();
 	private OnMeasureDistanceToCenter measureDistanceToCenterListener;
 	private OnSingleTapListener singleTapListener;
 	private OnEnterMovePointModeListener enterMovePointModeListener;
@@ -64,8 +67,11 @@ public class MeasurementToolLayer extends OsmandMapLayer implements ContextMenuL
 		bitmapPaint.setDither(true);
 		bitmapPaint.setFilterBitmap(true);
 
-		marginY = pointIcon.getHeight() / 2;
-		marginX = pointIcon.getWidth() / 2;
+		marginPointIconY = pointIcon.getHeight() / 2;
+		marginPointIconX = pointIcon.getWidth() / 2;
+
+		marginApplyingPointIconY = applyingPointIcon.getHeight() / 2;
+		marginApplyingPointIconX = applyingPointIcon.getWidth() / 2;
 	}
 
 	void setOnSingleTapListener(OnSingleTapListener listener) {
@@ -195,7 +201,7 @@ public class MeasurementToolLayer extends OsmandMapLayer implements ContextMenuL
 		double lowestDistance = view.getResources().getDimension(R.dimen.measurement_tool_select_radius);
 		for (int i = 0; i < measurementPoints.size(); i++) {
 			WptPt pt = measurementPoints.get(i);
-			if (tb.containsLatLon(pt.getLatitude(), pt.getLongitude())) {
+			if (drawnPointsPositions.contains(i) && tb.containsLatLon(pt.getLatitude(), pt.getLongitude())) {
 				double xDiff = tb.getPixXFromLonNoRot(pt.getLongitude()) - x;
 				double yDiff = tb.getPixYFromLatNoRot(pt.getLatitude()) - y;
 				double distToPoint = Math.sqrt(Math.pow(xDiff, 2) + Math.pow(yDiff, 2));
@@ -223,6 +229,7 @@ public class MeasurementToolLayer extends OsmandMapLayer implements ContextMenuL
 	@Override
 	public void onDraw(Canvas canvas, RotatedTileBox tb, DrawSettings settings) {
 		if (inMeasurementMode) {
+			drawnPointsPositions.clear();
 			lineAttrs.updatePaints(view, settings, tb);
 			if (!inMovePointMode && !inAddPointAfterMode && !inAddPointBeforeMode) {
 				drawCenterIcon(canvas, tb, tb.getCenterPixelPoint(), settings.isNightMode());
@@ -241,6 +248,24 @@ public class MeasurementToolLayer extends OsmandMapLayer implements ContextMenuL
 				path.reset();
 				tx.reset();
 				ty.reset();
+
+				int leftPointPos = -1;
+				for (int i = 0; i < measurementPoints.size(); i++) {
+					WptPt pt = measurementPoints.get(i);
+					if (tb.containsLatLon(pt.lat, pt.lon)) {
+						leftPointPos = i;
+						break;
+					}
+				}
+				int rightPointPos = -1;
+				for (int i = measurementPoints.size() - 1; i > leftPointPos; i--) {
+					WptPt pt = measurementPoints.get(i);
+					if (tb.containsLatLon(pt.lat, pt.lon)) {
+						rightPointPos = i;
+						break;
+					}
+				}
+
 				for (int i = 0; i < measurementPoints.size(); i++) {
 					WptPt pt = measurementPoints.get(i);
 					int locX;
@@ -296,23 +321,34 @@ public class MeasurementToolLayer extends OsmandMapLayer implements ContextMenuL
 				calculatePath(tb, tx, ty, path);
 				canvas.drawPath(path, lineAttrs.paint);
 
-				WptPt pointToDrawOnTop = null;
-				for (int i = 0; i < measurementPoints.size(); i++) {
-					WptPt pt = measurementPoints.get(i);
-					if (inMovePointMode && i == selectedPointPos) {
-						pointToDrawOnTop = pt;
-					} else {
-						if (tb.containsLatLon(pt.lat, pt.lon)) {
+				if (leftPointPos != -1 && rightPointPos != -1) {
+					int pointToDraw = rightPointPos - leftPointPos;
+					int step = 1;
+					if (pointToDraw > 50) {
+						step = pointToDraw / 50;
+					}
+					for (int i = leftPointPos; i <= rightPointPos; i += step) {
+						WptPt pt = measurementPoints.get(i);
+						if (!(inMovePointMode && i == selectedPointPos)) {
 							int locX = tb.getPixXFromLonNoRot(pt.lon);
 							int locY = tb.getPixYFromLatNoRot(pt.lat);
-							canvas.drawBitmap(pointIcon, locX - marginX, locY - marginY, bitmapPaint);
+							canvas.drawBitmap(pointIcon, locX - marginPointIconX, locY - marginPointIconY, bitmapPaint);
+							drawnPointsPositions.add(i);
 						}
 					}
+				} else if (leftPointPos != -1) {
+					WptPt pt = measurementPoints.get(leftPointPos);
+					if (!(inMovePointMode && leftPointPos == selectedPointPos)) {
+						int locX = tb.getPixXFromLonNoRot(pt.lon);
+						int locY = tb.getPixYFromLatNoRot(pt.lat);
+						canvas.drawBitmap(pointIcon, locX - marginPointIconX, locY - marginPointIconY, bitmapPaint);
+						drawnPointsPositions.add(leftPointPos);
+					}
 				}
-				if (inAddPointAfterMode || inAddPointBeforeMode || pointToDrawOnTop != null) {
+				if (inAddPointAfterMode || inAddPointBeforeMode || inMovePointMode) {
 					int locX = tb.getCenterPixelX();
 					int locY = tb.getCenterPixelY();
-					canvas.drawBitmap(applyingPointIcon, locX - marginX, locY - marginY, bitmapPaint);
+					canvas.drawBitmap(applyingPointIcon, locX - marginApplyingPointIconX, locY - marginApplyingPointIconY, bitmapPaint);
 				}
 			}
 		}
