@@ -73,7 +73,7 @@ public class SaveAsNewTrackBottomSheetDialogFragment extends BottomSheetDialogFr
 					return false;
 				}
 			});
-			routePointImage.setOnClickListener(saveAsLineOnClickListener);
+			routePointImage.setOnClickListener(saveAsRoutePointOnClickListener);
 		}
 
 		if (nightMode) {
