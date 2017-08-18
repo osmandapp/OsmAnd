@@ -560,7 +560,7 @@ public class MeasurementToolFragment extends Fragment {
 			public void addToTheTrackOnClick() {
 				if (mapActivity != null && measurementLayer != null) {
 					if (measurementLayer.getPointsCount() > 0) {
-						showAddSegmentDialog(mapActivity);
+						showAddToTrackDialog(mapActivity);
 					} else {
 						Toast.makeText(mapActivity, getString(R.string.none_point_error), Toast.LENGTH_SHORT).show();
 					}
@@ -809,7 +809,7 @@ public class MeasurementToolFragment extends Fragment {
 		fragment.show(mapActivity.getSupportFragmentManager(), SaveAsNewTrackBottomSheetDialogFragment.TAG);
 	}
 
-	private AlertDialog showAddSegmentDialog(final MapActivity mapActivity) {
+	private AlertDialog showAddToTrackDialog(final MapActivity mapActivity) {
 		CallbackWithObject<GPXFile[]> callbackWithObject = new CallbackWithObject<GPXFile[]>() {
 			@Override
 			public boolean processResult(GPXFile[] result) {
@@ -824,7 +824,7 @@ public class MeasurementToolFragment extends Fragment {
 			}
 		};
 
-		return GpxUiHelper.selectSingleGPXFile(mapActivity, false, callbackWithObject);
+		return GpxUiHelper.selectGPXFile(mapActivity, false, false, callbackWithObject);
 	}
 
 	private void applyMovePointMode() {
