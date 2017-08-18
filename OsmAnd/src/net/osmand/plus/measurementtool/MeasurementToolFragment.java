@@ -73,6 +73,7 @@ import net.osmand.plus.routing.RouteProvider;
 import net.osmand.plus.views.OsmandMapTileView;
 import net.osmand.plus.views.mapwidgets.MapInfoWidgetsFactory;
 import net.osmand.plus.views.mapwidgets.MapInfoWidgetsFactory.TopToolbarController;
+import net.osmand.router.RouteCalculationProgress;
 
 import java.io.File;
 import java.text.MessageFormat;
@@ -768,11 +769,10 @@ public class MeasurementToolFragment extends Fragment {
 
 				ProgressBar snapToRoadProgressBar = (ProgressBar) mainView.findViewById(R.id.snap_to_road_progress_bar);
 				snapToRoadProgressBar.setMinimumHeight(0);
-				snapToRoadProgressBar.setProgress(45);
 				snapToRoadProgressBar.setVisibility(View.VISIBLE);
 
 				if (measurementPoints.size() > 1) {
-					new SnapToRoadTask(mapActivity).execute();
+					new SnapToRoadTask(mapActivity, snapToRoadProgressBar).execute();
 				}
 
 				mapActivity.refreshMap();
@@ -1538,9 +1538,13 @@ public class MeasurementToolFragment extends Fragment {
 	private class SnapToRoadTask extends AsyncTask<Void, Void, RouteCalculationResult> {
 
 		private MapActivity mapActivity;
+		private ProgressBar progressBar;
+		private boolean calculated;
 
-		SnapToRoadTask(MapActivity mapActivity) {
+		SnapToRoadTask(MapActivity mapActivity, ProgressBar progressBar) {
 			this.mapActivity = mapActivity;
+			this.progressBar = progressBar;
+			progressBar.setProgress(0);
 		}
 
 		@Override
@@ -1564,6 +1568,7 @@ public class MeasurementToolFragment extends Fragment {
 			params.type = settings.ROUTER_SERVICE.getModeValue(snapToRoadAppMode);
 			params.mode = snapToRoadAppMode;
 			params.ctx = app;
+			params.calculationProgress = new RouteCalculationProgress();
 
 			List<LatLon> intermediates = new ArrayList<>();
 			if (measurementPoints.size() > 2) {
@@ -1574,11 +1579,32 @@ public class MeasurementToolFragment extends Fragment {
 				params.intermediates = intermediates;
 			}
 
+			updateProgress(params.calculationProgress);
+
 			return new RouteProvider().calculateRouteImpl(params);
+		}
+
+		private void updateProgress(final RouteCalculationProgress progress) {
+			mapActivity.getMyApplication().runInUIThread(new Runnable() {
+
+				@Override
+				public void run() {
+					float p = Math.max(progress.distanceFromBegin, progress.distanceFromEnd);
+					float all = progress.totalEstimatedDistance * 1.25f;
+					if (all > 0) {
+						int t = (int) Math.min(p * p / (all * all) * 100f, 99);
+						progressBar.setProgress(t);
+					}
+					if (!calculated) {
+						updateProgress(progress);
+					}
+				}
+			}, 100);
 		}
 
 		@Override
 		protected void onPostExecute(RouteCalculationResult result) {
+			calculated = true;
 			measurementPoints.clear();
 			for (Location loc : result.getRouteLocations()) {
 				WptPt pt = new WptPt();
