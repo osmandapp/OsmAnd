@@ -314,7 +314,7 @@
                     android:layout_marginEnd="8dp"
                     android:layout_marginRight="8dp"
                     android:layout_marginTop="8dp"
-                    android:background="@drawable/btn_round_white_border"
+                    android:background="?attr/btn_round_border"
                     android:minHeight="36dp"
                     android:paddingLeft="8dp"
                     android:paddingRight="8dp"
