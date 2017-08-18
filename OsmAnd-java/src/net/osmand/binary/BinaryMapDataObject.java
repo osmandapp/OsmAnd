@@ -1,5 +1,6 @@
 package net.osmand.binary;
 
+import java.util.Arrays;
 import java.util.LinkedHashMap;
 import java.util.Map;
 
@@ -42,7 +43,7 @@ public class BinaryMapDataObject {
 	
 	public String getName(){
 		if(objectNames == null){
-			return "";
+			return null;
 		}
 		String name = objectNames.get(mapIndex.nameEncodingType);
 		if(name == null){
@@ -57,6 +58,9 @@ public class BinaryMapDataObject {
 	}
 	
 	public Map<Integer, String> getOrderedObjectNames() {
+		if (namesOrder == null) {
+			return null;
+		}
 		LinkedHashMap<Integer, String> lm = new LinkedHashMap<Integer, String> ();
 		for (int i = 0; i < namesOrder.size(); i++) {
 			int nm = namesOrder.get(i);
@@ -182,6 +186,22 @@ public class BinaryMapDataObject {
 
 	public int getPoint31XTile(int ind) {
 		return coordinates[2 * ind];
+	}
+	
+	public boolean compareBinary(BinaryMapDataObject thatObj) {
+		if (this.getName().equals(thatObj.getName()) 
+				&& Arrays.equals(this.types, thatObj.types) 
+				&& this.getPointsLength() == thatObj.getPointsLength() 
+				&& this.getSimpleLayer() == thatObj.getSimpleLayer()
+				&& Arrays.equals(this.additionalTypes, thatObj.additionalTypes)
+				&& Arrays.equals(this.polygonInnerCoordinates, thatObj.polygonInnerCoordinates)) {
+			return true;
+		}
+		return false;
+	}
+	
+	public int[] getCoordinates() {
+		return coordinates;
 	}
 	
 
