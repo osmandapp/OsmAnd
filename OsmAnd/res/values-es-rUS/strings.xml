@@ -1231,7 +1231,7 @@ Se aprecia la participación activa, y las contribuciones pueden hacerse directa
     <string name="local_index_items_deleted">%1$d de %2$d elemento(s) correctamente borrado(s).</string>
     <string name="local_index_items_restored">%1$d de %2$d elemento(s) correctamente activado(s).</string>
     <string name="local_index_no_items_to_do">Sin elementos para %1$s</string>
-    <string name="local_index_action_do">Va a %1$s %2$s elemento(s). ¿Continuar?</string>
+    <string name="local_index_action_do">¿Quieres %1$s %2$s elemento(s)?</string>
     <string name="local_index_descr_title">Gestionar mapas</string>
     <string name="local_index_mi_restore">Activar</string>
     <string name="local_index_mi_backup">Desactivar</string>
@@ -2354,7 +2354,7 @@ Si amas a OsmAnd, OSM y quieres apoyarlos, esta es una perfecta manera de hacerl
     <string name="quick_action_add_parking_descr">Pulsar el botón de acción añadirá un lugar de estacionamiento en la ubicación central de la pantalla.</string>
     <string name="favorite_autofill_toast_text">" se guardó como "</string>
     <string name="favorite_empty_place_name">Lugar</string>
-    <string name="quick_action_duplicates">El nombre de la acción rápida ya existe y se cambió a %1$s para evitar duplicados.</string>
+    <string name="quick_action_duplicates">El nombre de la acción rápida ya existe y se cambió a «%1$s» para evitar duplicados.</string>
     <string name="quick_action_duplicate">Nombre de la acción rápida duplicado</string>
     <string name="quick_action_showhide_favorites_descr">Pulsar el botón de acción mostrará u ocultará los favoritos en el mapa.</string>
     <string name="quick_action_showhide_poi_descr">Pulsar el botón de acción mostrará u ocultará los PDIs en el mapa.</string>
@@ -2704,9 +2704,9 @@ Proporciona un código completo</string>
     <string name="shared_string_create">Crear</string>
 <string name="none_point_error">Añadir al menos un punto.</string>
     <string name="enter_gpx_name">Nombre del GPX:</string>
-    <string name="show_on_map_after_saving">Mostrar en el mapa después de guardar</string>
+    <string name="show_on_map_after_saving">Mostrar en el mapa al guardar</string>
     <string name="add_route_point">Añadir punto de ruta</string>
-    <string name="add_waypoint">Añadir punto de ruta</string>
+    <string name="add_waypoint">Añadir punto de referencia</string>
     <string name="save_gpx_waypoint">Guardar punto GPX</string>
     <string name="save_route_point">Guardar punto de ruta</string>
     <string name="waypoint_one">Punto de referencia 1</string>
