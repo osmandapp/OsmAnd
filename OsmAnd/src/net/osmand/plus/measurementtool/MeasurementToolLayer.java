@@ -7,7 +7,6 @@ import android.graphics.Paint;
 import android.graphics.Path;
 import android.graphics.PointF;
 
-import net.osmand.AndroidUtils;
 import net.osmand.data.LatLon;
 import net.osmand.data.PointDescription;
 import net.osmand.data.QuadPoint;
@@ -253,54 +252,40 @@ public class MeasurementToolLayer extends OsmandMapLayer implements ContextMenuL
 						locX = tb.getPixXFromLonNoRot(pt.lon);
 						locY = tb.getPixYFromLatNoRot(pt.lat);
 					}
-					if (i == 0) {
-						if (inAddPointAfterMode) {
-							int previousLocX = tb.getPixXFromLonNoRot(pt.lon);
-							int previousLocY = tb.getPixYFromLatNoRot(pt.lat);
+					if (inAddPointAfterMode) {
+						int previousLocX = tb.getPixXFromLonNoRot(pt.lon);
+						int previousLocY = tb.getPixYFromLatNoRot(pt.lat);
+						if (i == 0) {
 							path.moveTo(previousLocX, previousLocY);
-							tx.add(previousLocX);
-							ty.add(previousLocY);
-							path.lineTo(locX, locY);
-							tx.add(locX);
-							ty.add(locY);
-						} else if (inAddPointBeforeMode) {
-							path.moveTo(locX, locY);
-							tx.add(locX);
-							ty.add(locY);
-							int followingLocX = tb.getPixXFromLonNoRot(pt.lon);
-							int followingLocY = tb.getPixYFromLatNoRot(pt.lat);
-							path.lineTo(followingLocX, followingLocY);
-							tx.add(followingLocX);
-							ty.add(followingLocY);
 						} else {
-							path.moveTo(locX, locY);
-							tx.add(locX);
-							ty.add(locY);
-						}
-					} else {
-						if (inAddPointAfterMode) {
-							int previousLocX = tb.getPixXFromLonNoRot(pt.lon);
-							int previousLocY = tb.getPixYFromLatNoRot(pt.lat);
 							path.lineTo(previousLocX, previousLocY);
-							tx.add(previousLocX);
-							ty.add(previousLocY);
-							path.lineTo(locX, locY);
-							tx.add(locX);
-							ty.add(locY);
-						} else if (inAddPointBeforeMode) {
-							path.lineTo(locX, locY);
-							tx.add(locX);
-							ty.add(locY);
-							int followingLocX = tb.getPixXFromLonNoRot(pt.lon);
-							int followingLocY = tb.getPixYFromLatNoRot(pt.lat);
-							path.lineTo(followingLocX, followingLocY);
-							tx.add(followingLocX);
-							ty.add(followingLocY);
+						}
+						tx.add(previousLocX);
+						ty.add(previousLocY);
+						path.lineTo(locX, locY);
+						tx.add(locX);
+						ty.add(locY);
+					} else if (inAddPointBeforeMode) {
+						if (i == 0) {
+							path.moveTo(locX, locY);
 						} else {
 							path.lineTo(locX, locY);
-							tx.add(locX);
-							ty.add(locY);
 						}
+						tx.add(locX);
+						ty.add(locY);
+						int followingLocX = tb.getPixXFromLonNoRot(pt.lon);
+						int followingLocY = tb.getPixYFromLatNoRot(pt.lat);
+						path.lineTo(followingLocX, followingLocY);
+						tx.add(followingLocX);
+						ty.add(followingLocY);
+					} else {
+						if (i == 0) {
+							path.moveTo(locX, locY);
+						} else {
+							path.lineTo(locX, locY);
+						}
+						tx.add(locX);
+						ty.add(locY);
 					}
 				}
 				if (!inMovePointMode && !inAddPointAfterMode && !inAddPointBeforeMode) {
