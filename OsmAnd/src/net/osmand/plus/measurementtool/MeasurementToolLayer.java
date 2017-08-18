@@ -258,7 +258,7 @@ public class MeasurementToolLayer extends OsmandMapLayer implements ContextMenuL
 					}
 				}
 				int rightPointPos = -1;
-				for (int i = measurementPoints.size() - 1; i > leftPointPos; i--) {
+				for (int i = measurementPoints.size() - 1; i >= leftPointPos; i--) {
 					WptPt pt = measurementPoints.get(i);
 					if (tb.containsLatLon(pt.lat, pt.lon)) {
 						rightPointPos = i;
@@ -335,14 +335,6 @@ public class MeasurementToolLayer extends OsmandMapLayer implements ContextMenuL
 							canvas.drawBitmap(pointIcon, locX - marginPointIconX, locY - marginPointIconY, bitmapPaint);
 							drawnPointsPositions.add(i);
 						}
-					}
-				} else if (leftPointPos != -1) {
-					WptPt pt = measurementPoints.get(leftPointPos);
-					if (!(inMovePointMode && leftPointPos == selectedPointPos)) {
-						int locX = tb.getPixXFromLonNoRot(pt.lon);
-						int locY = tb.getPixYFromLatNoRot(pt.lat);
-						canvas.drawBitmap(pointIcon, locX - marginPointIconX, locY - marginPointIconY, bitmapPaint);
-						drawnPointsPositions.add(leftPointPos);
 					}
 				}
 				if (inAddPointAfterMode || inAddPointBeforeMode || inMovePointMode) {
