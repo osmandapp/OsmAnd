@@ -387,6 +387,11 @@ public class MeasurementToolFragment extends Fragment {
 		}
 
 		toolBarController = new MeasurementToolBarController(newGpxLine);
+		if (inMovePointMode || inAddPointAfterMode || inAddPointBeforeMode) {
+			toolBarController.setBackBtnIconIds(R.drawable.ic_action_mode_back, R.drawable.ic_action_mode_back);
+		} else {
+			toolBarController.setBackBtnIconIds(R.drawable.ic_action_remove_dark, R.drawable.ic_action_remove_dark);
+		}
 		if (newGpxLine != null) {
 			LineType lineType = newGpxLine.getLineType();
 			if (lineType == LineType.ADD_ROUTE_POINTS) {
@@ -402,7 +407,7 @@ public class MeasurementToolFragment extends Fragment {
 		toolBarController.setOnBackButtonClickListener(new View.OnClickListener() {
 			@Override
 			public void onClick(View v) {
-				showQuitDialog(false);
+				quit(false);
 			}
 		});
 		toolBarController.setOnSaveViewClickListener(new View.OnClickListener() {
@@ -951,6 +956,15 @@ public class MeasurementToolFragment extends Fragment {
 
 	private void switchMovePointMode(boolean enable) {
 		inMovePointMode = enable;
+		if (inMovePointMode) {
+			toolBarController.setBackBtnIconIds(R.drawable.ic_action_mode_back, R.drawable.ic_action_mode_back);
+		} else {
+			toolBarController.setBackBtnIconIds(R.drawable.ic_action_remove_dark, R.drawable.ic_action_remove_dark);
+		}
+		MapActivity mapActivity = getMapActivity();
+		if (mapActivity != null) {
+			mapActivity.showTopToolbar(toolBarController);
+		}
 		markGeneralComponents(enable ? View.GONE : View.VISIBLE);
 		mark(enable ? View.VISIBLE : View.GONE,
 				R.id.move_point_text,
@@ -962,6 +976,15 @@ public class MeasurementToolFragment extends Fragment {
 
 	private void switchAddPointAfterMode(boolean enable) {
 		inAddPointAfterMode = enable;
+		if (inAddPointAfterMode) {
+			toolBarController.setBackBtnIconIds(R.drawable.ic_action_mode_back, R.drawable.ic_action_mode_back);
+		} else {
+			toolBarController.setBackBtnIconIds(R.drawable.ic_action_remove_dark, R.drawable.ic_action_remove_dark);
+		}
+		MapActivity mapActivity = getMapActivity();
+		if (mapActivity != null) {
+			mapActivity.showTopToolbar(toolBarController);
+		}
 		markGeneralComponents(enable ? View.GONE : View.VISIBLE);
 		mark(enable ? View.VISIBLE : View.GONE,
 				R.id.add_point_after_text,
@@ -973,6 +996,15 @@ public class MeasurementToolFragment extends Fragment {
 
 	private void switchAddPointBeforeMode(boolean enable) {
 		inAddPointBeforeMode = enable;
+		if (inAddPointBeforeMode) {
+			toolBarController.setBackBtnIconIds(R.drawable.ic_action_mode_back, R.drawable.ic_action_mode_back);
+		} else {
+			toolBarController.setBackBtnIconIds(R.drawable.ic_action_remove_dark, R.drawable.ic_action_remove_dark);
+		}
+		MapActivity mapActivity = getMapActivity();
+		if (mapActivity != null) {
+			mapActivity.showTopToolbar(toolBarController);
+		}
 		markGeneralComponents(enable ? View.GONE : View.VISIBLE);
 		mark(enable ? View.VISIBLE : View.GONE,
 				R.id.add_point_before_text,
@@ -1406,7 +1438,23 @@ public class MeasurementToolFragment extends Fragment {
 		}
 	}
 
-	public void showQuitDialog(boolean hidePointsListFirst) {
+	public void quit(boolean hidePointsListFirst) {
+		if (inMovePointMode) {
+			cancelMovePointMode();
+			return;
+		}
+		if (inAddPointAfterMode) {
+			cancelAddPointAfterMode();
+			return;
+		}
+		if (inAddPointBeforeMode) {
+			cancelAddPointBeforeMode();
+			return;
+		}
+		showQuitDialog(hidePointsListFirst);
+	}
+
+	private void showQuitDialog(boolean hidePointsListFirst) {
 		final MapActivity mapActivity = getMapActivity();
 		MeasurementToolLayer measurementLayer = getMeasurementLayer();
 		if (mapActivity != null && measurementLayer != null) {
@@ -1484,7 +1532,6 @@ public class MeasurementToolFragment extends Fragment {
 			if (newGpxLine != null) {
 				setSaveViewVisible(true);
 			}
-			setBackBtnIconIds(R.drawable.ic_action_remove_dark, R.drawable.ic_action_remove_dark);
 			setSingleLineTitle(false);
 		}
 
