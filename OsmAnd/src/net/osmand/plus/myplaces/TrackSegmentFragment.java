@@ -1,6 +1,7 @@
 package net.osmand.plus.myplaces;
 
 import android.content.Context;
+import android.content.DialogInterface;
 import android.content.Intent;
 import android.graphics.Bitmap;
 import android.graphics.BitmapFactory;
@@ -22,6 +23,7 @@ import android.support.v4.content.ContextCompat;
 import android.support.v4.view.MenuItemCompat;
 import android.support.v4.view.PagerAdapter;
 import android.support.v4.view.ViewCompat;
+import android.support.v7.app.AlertDialog;
 import android.support.v7.widget.ListPopupWindow;
 import android.support.v7.widget.SwitchCompat;
 import android.util.DisplayMetrics;
@@ -1368,13 +1370,22 @@ public class TrackSegmentFragment extends OsmAndListFragment {
 														}
 														return true;
 													case R.id.action_delete:
-														if (deleteSegment()) {
-															GPXFile gpx = getGpx();
-															if (gpx != null) {
-																SelectedGpxFile sf = app.getSelectedGpxHelper().selectGpxFile(gpx, vis.isChecked(), false);
-																new SaveGpxAsyncTask(gpx, vis.isChecked() ? sf : null).execute();
+														AlertDialog.Builder builder = new AlertDialog.Builder(getActivity());
+														builder.setMessage(R.string.recording_delete_confirm);
+														builder.setPositiveButton(R.string.shared_string_yes, new DialogInterface.OnClickListener() {
+															@Override
+															public void onClick(DialogInterface dialog, int which) {
+																if (deleteSegment()) {
+																	GPXFile gpx = getGpx();
+																	if (gpx != null) {
+																		SelectedGpxFile sf = app.getSelectedGpxHelper().selectGpxFile(gpx, vis.isChecked(), false);
+																		new SaveGpxAsyncTask(gpx, vis.isChecked() ? sf : null).execute();
+																	}
+																}
 															}
-														}
+														});
+														builder.setNegativeButton(R.string.shared_string_cancel, null);
+														builder.show();
 														return true;
 												}
 												return false;
