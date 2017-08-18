@@ -189,12 +189,14 @@ public class BinaryMapDataObject {
 	}
 	
 	public boolean compareBinary(BinaryMapDataObject thatObj) {
-		if (this.getName().equals(thatObj.getName()) 
+		if (this.objectType == thatObj.objectType 
 				&& Arrays.equals(this.types, thatObj.types) 
-				&& this.getPointsLength() == thatObj.getPointsLength() 
-				&& this.getSimpleLayer() == thatObj.getSimpleLayer()
+				&& this.area == thatObj.area
 				&& Arrays.equals(this.additionalTypes, thatObj.additionalTypes)
-				&& Arrays.equals(this.polygonInnerCoordinates, thatObj.polygonInnerCoordinates)) {
+				&& Arrays.equals(this.polygonInnerCoordinates, thatObj.polygonInnerCoordinates)
+				&& Arrays.equals(this.coordinates, thatObj.coordinates)
+				&& this.id == thatObj.id
+				&& Arrays.equals(this.objectNames.values(), thatObj.objectNames.values())) {
 			return true;
 		}
 		return false;
