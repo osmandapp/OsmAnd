@@ -112,6 +112,8 @@ public class MeasurementToolFragment extends Fragment {
 	private ImageView undoBtn;
 	private ImageView redoBtn;
 	private ImageView mainIcon;
+	private SnapToRoadTask currentSnapToRoadTask;
+	private ProgressBar snapToRoadProgressBar;
 
 	private boolean wasCollapseButtonVisible;
 	private boolean pointsListOpened;
@@ -767,12 +769,19 @@ public class MeasurementToolFragment extends Fragment {
 				});
 				snapToRoadBtn.setVisibility(View.VISIBLE);
 
-				ProgressBar snapToRoadProgressBar = (ProgressBar) mainView.findViewById(R.id.snap_to_road_progress_bar);
-				snapToRoadProgressBar.setMinimumHeight(0);
+				if (snapToRoadProgressBar == null) {
+					snapToRoadProgressBar = (ProgressBar) mainView.findViewById(R.id.snap_to_road_progress_bar);
+					snapToRoadProgressBar.setMinimumHeight(0);
+				}
 				snapToRoadProgressBar.setVisibility(View.VISIBLE);
+				snapToRoadProgressBar.setProgress(0);
 
 				if (measurementPoints.size() > 1) {
-					new SnapToRoadTask(mapActivity, snapToRoadProgressBar).execute();
+					if (currentSnapToRoadTask != null && !currentSnapToRoadTask.isCancelled()) {
+						currentSnapToRoadTask.cancel(true);
+					}
+					currentSnapToRoadTask = new SnapToRoadTask(mapActivity);
+					currentSnapToRoadTask.execute();
 				}
 
 				mapActivity.refreshMap();
@@ -790,6 +799,9 @@ public class MeasurementToolFragment extends Fragment {
 			mapActivity.findViewById(R.id.snap_to_road_image_button).setVisibility(View.GONE);
 			mainView.findViewById(R.id.snap_to_road_progress_bar).setVisibility(View.GONE);
 			mapActivity.refreshMap();
+		}
+		if (currentSnapToRoadTask != null && !currentSnapToRoadTask.isCancelled()) {
+			currentSnapToRoadTask.cancel(true);
 		}
 	}
 
@@ -1538,13 +1550,10 @@ public class MeasurementToolFragment extends Fragment {
 	private class SnapToRoadTask extends AsyncTask<Void, Void, RouteCalculationResult> {
 
 		private MapActivity mapActivity;
-		private ProgressBar progressBar;
 		private boolean calculated;
 
-		SnapToRoadTask(MapActivity mapActivity, ProgressBar progressBar) {
+		SnapToRoadTask(MapActivity mapActivity) {
 			this.mapActivity = mapActivity;
-			this.progressBar = progressBar;
-			progressBar.setProgress(0);
 		}
 
 		@Override
@@ -1593,9 +1602,9 @@ public class MeasurementToolFragment extends Fragment {
 					float all = progress.totalEstimatedDistance * 1.25f;
 					if (all > 0) {
 						int t = (int) Math.min(p * p / (all * all) * 100f, 99);
-						progressBar.setProgress(t);
+						snapToRoadProgressBar.setProgress(t);
 					}
-					if (!calculated) {
+					if (!calculated && !isCancelled()) {
 						updateProgress(progress);
 					}
 				}
