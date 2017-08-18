@@ -61,6 +61,8 @@
                     android:layout_alignParentRight="true"
                     android:layout_centerVertical="true"
                     android:layout_marginEnd="16dp"
+                    android:layout_marginLeft="16dp"
+                    android:layout_marginRight="16dp"
                     android:layout_marginStart="16dp"
                     android:background="@null"
                     tools:src="@drawable/ic_action_arrow_down"/>
@@ -278,8 +280,8 @@
             <LinearLayout
                 android:id="@+id/add_point_before_after_controls"
                 android:layout_width="0dp"
-                android:layout_weight="0.6"
                 android:layout_height="52dp"
+                android:layout_weight="0.6"
                 android:gravity="center_vertical"
                 android:orientation="horizontal"
                 android:visibility="gone">
