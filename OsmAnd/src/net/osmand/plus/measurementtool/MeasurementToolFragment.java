@@ -114,7 +114,7 @@ public class MeasurementToolFragment extends Fragment {
 
 	private boolean wasCollapseButtonVisible;
 	private boolean pointsListOpened;
-	private boolean saved;
+	private Boolean saved;
 	private boolean portrait;
 	private boolean nightMode;
 	private int previousMapPosition;
@@ -466,6 +466,10 @@ public class MeasurementToolFragment extends Fragment {
 				displaySegmentPoints();
 				gpxPointsAdded = true;
 			}
+		}
+
+		if (saved == null) {
+			saved = newGpxLine != null && newGpxLine.getLineType() == LineType.ADD_ROUTE_POINTS;
 		}
 
 		return view;
