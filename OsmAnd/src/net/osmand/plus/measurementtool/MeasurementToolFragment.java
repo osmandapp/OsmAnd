@@ -33,6 +33,8 @@ import android.widget.Toast;
 import net.osmand.AndroidUtils;
 import net.osmand.CallbackWithObject;
 import net.osmand.IndexConstants;
+import net.osmand.Location;
+import net.osmand.data.LatLon;
 import net.osmand.plus.ApplicationMode;
 import net.osmand.plus.GPXUtilities;
 import net.osmand.plus.GPXUtilities.GPXFile;
@@ -43,6 +45,8 @@ import net.osmand.plus.GPXUtilities.WptPt;
 import net.osmand.plus.GpxSelectionHelper.SelectedGpxFile;
 import net.osmand.plus.IconsCache;
 import net.osmand.plus.OsmAndFormatter;
+import net.osmand.plus.OsmandApplication;
+import net.osmand.plus.OsmandSettings;
 import net.osmand.plus.R;
 import net.osmand.plus.activities.MapActivity;
 import net.osmand.plus.activities.TrackActivity;
@@ -63,6 +67,9 @@ import net.osmand.plus.measurementtool.command.MeasurementCommandManager;
 import net.osmand.plus.measurementtool.command.MovePointCommand;
 import net.osmand.plus.measurementtool.command.RemovePointCommand;
 import net.osmand.plus.measurementtool.command.ReorderPointCommand;
+import net.osmand.plus.routing.RouteCalculationParams;
+import net.osmand.plus.routing.RouteCalculationResult;
+import net.osmand.plus.routing.RouteProvider;
 import net.osmand.plus.views.OsmandMapTileView;
 import net.osmand.plus.views.mapwidgets.MapInfoWidgetsFactory;
 import net.osmand.plus.views.mapwidgets.MapInfoWidgetsFactory.TopToolbarController;
@@ -70,6 +77,7 @@ import net.osmand.plus.views.mapwidgets.MapInfoWidgetsFactory.TopToolbarControll
 import java.io.File;
 import java.text.MessageFormat;
 import java.text.SimpleDateFormat;
+import java.util.ArrayList;
 import java.util.Date;
 import java.util.LinkedList;
 import java.util.List;
@@ -758,6 +766,10 @@ public class MeasurementToolFragment extends Fragment {
 				snapToRoadProgressBar.setMinimumHeight(0);
 				snapToRoadProgressBar.setProgress(45);
 				snapToRoadProgressBar.setVisibility(View.VISIBLE);
+
+				if (measurementPoints.size() > 1) {
+					new SnapToRoadTask(mapActivity).execute();
+				}
 
 				mapActivity.refreshMap();
 			}
@@ -1516,6 +1528,62 @@ public class MeasurementToolFragment extends Fragment {
 			return true;
 		} catch (Exception e) {
 			return false;
+		}
+	}
+
+	private class SnapToRoadTask extends AsyncTask<Void, Void, RouteCalculationResult> {
+
+		private MapActivity mapActivity;
+
+		SnapToRoadTask(MapActivity mapActivity) {
+			this.mapActivity = mapActivity;
+		}
+
+		@Override
+		protected RouteCalculationResult doInBackground(Void... voids) {
+			OsmandApplication app = mapActivity.getMyApplication();
+			OsmandSettings settings = app.getSettings();
+			RouteCalculationParams params = new RouteCalculationParams();
+
+			Location start = new Location("");
+			WptPt first = measurementPoints.get(0);
+			start.setLatitude(first.getLatitude());
+			start.setLongitude(first.getLongitude());
+
+			WptPt last = measurementPoints.get(measurementPoints.size() - 1);
+			LatLon end = new LatLon(last.getLatitude(), last.getLongitude());
+
+			params.start = start;
+			params.end = end;
+			params.leftSide = settings.DRIVING_REGION.get().leftHandDriving;
+			params.fast = settings.FAST_ROUTE_MODE.getModeValue(snapToRoadAppMode);
+			params.type = settings.ROUTER_SERVICE.getModeValue(snapToRoadAppMode);
+			params.mode = snapToRoadAppMode;
+			params.ctx = app;
+
+			List<LatLon> intermediates = new ArrayList<>();
+			if (measurementPoints.size() > 2) {
+				for (int i = 1; i < measurementPoints.size() - 1; i++) {
+					WptPt pt = measurementPoints.get(i);
+					intermediates.add(new LatLon(pt.getLatitude(), pt.getLongitude()));
+				}
+				params.intermediates = intermediates;
+			}
+
+			return new RouteProvider().calculateRouteImpl(params);
+		}
+
+		@Override
+		protected void onPostExecute(RouteCalculationResult result) {
+			measurementPoints.clear();
+			for (Location loc : result.getRouteLocations()) {
+				WptPt pt = new WptPt();
+				pt.lat = loc.getLatitude();
+				pt.lon = loc.getLongitude();
+				measurementPoints.add(pt);
+			}
+			mapActivity.refreshMap();
+			super.onPostExecute(result);
 		}
 	}
 
