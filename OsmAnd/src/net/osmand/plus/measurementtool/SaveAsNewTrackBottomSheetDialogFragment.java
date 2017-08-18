@@ -18,6 +18,7 @@ import android.widget.TextView;
 
 import net.osmand.AndroidUtils;
 import net.osmand.plus.R;
+import net.osmand.plus.Version;
 import net.osmand.plus.base.BottomSheetDialogFragment;
 import net.osmand.plus.helpers.AndroidUiHelper;
 
@@ -45,37 +46,44 @@ public class SaveAsNewTrackBottomSheetDialogFragment extends BottomSheetDialogFr
 			AndroidUtils.setBackground(getActivity(), mainView, nightMode, R.drawable.bg_bottom_menu_light, R.drawable.bg_bottom_menu_dark);
 		}
 
-		final ImageView routePointImage = (ImageView) mainView.findViewById(R.id.route_point_image);
-		ImageView lineImage = (ImageView) mainView.findViewById(R.id.line_image);
+		if (android.os.Build.VERSION.SDK_INT < android.os.Build.VERSION_CODES.JELLY_BEAN_MR1) {
+			mainView.findViewById(R.id.images_row).setVisibility(View.GONE);
+		} else {
+			final ImageView routePointImage = (ImageView) mainView.findViewById(R.id.route_point_image);
+			ImageView lineImage = (ImageView) mainView.findViewById(R.id.line_image);
+			if (nightMode) {
+				routePointImage.setImageResource(R.drawable.img_help_trip_route_points_night);
+				lineImage.setImageResource(R.drawable.img_help_trip_track_night);
+			} else {
+				routePointImage.setImageResource(R.drawable.img_help_trip_route_points_day);
+				lineImage.setImageResource(R.drawable.img_help_trip_track_day);
+			}
+
+			mainView.findViewById(R.id.line_text).setOnTouchListener(new View.OnTouchListener() {
+				@Override
+				public boolean onTouch(View view, MotionEvent motionEvent) {
+					return false;
+				}
+			});
+			lineImage.setOnClickListener(saveAsLineOnClickListener);
+
+			mainView.findViewById(R.id.route_point_text).setOnTouchListener(new View.OnTouchListener() {
+				@Override
+				public boolean onTouch(View view, MotionEvent motionEvent) {
+					return false;
+				}
+			});
+			routePointImage.setOnClickListener(saveAsLineOnClickListener);
+		}
+
 		if (nightMode) {
 			((TextView) mainView.findViewById(R.id.save_as_new_track_title)).setTextColor(getResources().getColor(R.color.ctx_menu_info_text_dark));
-
-			routePointImage.setImageResource(R.drawable.img_help_trip_route_points_night);
-			lineImage.setImageResource(R.drawable.img_help_trip_track_night);
-		} else {
-			routePointImage.setImageResource(R.drawable.img_help_trip_route_points_day);
-			lineImage.setImageResource(R.drawable.img_help_trip_track_day);
 		}
 
 		((ImageView) mainView.findViewById(R.id.route_point_icon)).setImageDrawable(getContentIcon(R.drawable.ic_action_route_points));
 		((ImageView) mainView.findViewById(R.id.line_icon)).setImageDrawable(getContentIcon(R.drawable.ic_action_split_interval));
 
-		mainView.findViewById(R.id.line_text).setOnTouchListener(new View.OnTouchListener() {
-			@Override
-			public boolean onTouch(View view, MotionEvent motionEvent) {
-				return false;
-			}
-		});
-		lineImage.setOnClickListener(saveAsLineOnClickListener);
 		mainView.findViewById(R.id.save_as_line_row).setOnClickListener(saveAsLineOnClickListener);
-
-		mainView.findViewById(R.id.route_point_text).setOnTouchListener(new View.OnTouchListener() {
-			@Override
-			public boolean onTouch(View view, MotionEvent motionEvent) {
-				return false;
-			}
-		});
-		routePointImage.setOnClickListener(saveAsLineOnClickListener);
 		mainView.findViewById(R.id.save_as_route_point_row).setOnClickListener(saveAsRoutePointOnClickListener);
 
 		mainView.findViewById(R.id.cancel_row).setOnClickListener(new View.OnClickListener() {
