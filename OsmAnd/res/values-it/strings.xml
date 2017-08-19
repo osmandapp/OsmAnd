@@ -2845,7 +2845,7 @@ Copertura e qualità approssimativamente:
     <string name="store_tracks_in_monthly_directories">Salva le tracce registrate in cartelle mensili</string>
     <string name="store_tracks_in_monthly_directories_descrp">Salva le tracce registrate in sottocartelle per mese di registrazione (come 2017-01).</string>
     <string name="shared_string_reset">Reimposta</string>
-    <string name="quick_action_resume_pause_navigation_descr">Premi il pulsante per mettere in pausa o riprendere la navigazione.</string>
+    <string name="quick_action_resume_pause_navigation_descr">Premi questo pulsante per mettere in pausa o riprendere la navigazione.</string>
     <string name="quick_action_show_navigation_finish_dialog">Mostra la finestra di dialogo Fine navigazione</string>
     <string name="quick_action_start_stop_navigation">Avvia/ferma navigazione</string>
     <string name="quick_action_start_stop_navigation_descr">Premi questo pulsante per avviare o fermare la navigazione.</string>
