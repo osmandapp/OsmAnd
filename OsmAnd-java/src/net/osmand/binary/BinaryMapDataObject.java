@@ -6,8 +6,10 @@ import gnu.trove.map.hash.TIntObjectHashMap;
 import java.util.Arrays;
 import java.util.LinkedHashMap;
 import java.util.Map;
+import java.util.TreeSet;
 
 import net.osmand.binary.BinaryMapIndexReader.MapIndex;
+import net.osmand.binary.BinaryMapIndexReader.TagValuePair;
 import net.osmand.render.RenderingRulesStorage;
 
 public class BinaryMapDataObject {
@@ -28,12 +30,17 @@ public class BinaryMapDataObject {
 	public BinaryMapDataObject(){
 	}
 	
-	public BinaryMapDataObject(int[] coordinates, int[] types, int[][] polygonInnerCoordinates, long id){
+
+	
+	public BinaryMapDataObject(long id, int[] coordinates, int[][] polygonInnerCoordinates, int objectType, boolean area, 
+			int[] types, int[] additionalTypes){
 		this.polygonInnerCoordinates = polygonInnerCoordinates;
 		this.coordinates = coordinates;
-		this.additionalTypes = new int[0];
+		this.additionalTypes = additionalTypes;
 		this.types = types;
 		this.id = id;
+		this.objectType = objectType;
+		this.area = area;
 	}
 	
 	protected void setCoordinates(int[] coordinates) {
@@ -185,17 +192,79 @@ public class BinaryMapDataObject {
 		return coordinates[2 * ind];
 	}
 	
+	
 	public boolean compareBinary(BinaryMapDataObject thatObj) {
-		if (this.objectType == thatObj.objectType 
-				&& Arrays.equals(this.types, thatObj.types)
-				&& this.area == thatObj.area 
-				&& Arrays.equals(this.additionalTypes, thatObj.additionalTypes)
-				&& Arrays.equals(this.polygonInnerCoordinates, thatObj.polygonInnerCoordinates)
-				&& Arrays.equals(this.coordinates, thatObj.coordinates) 
+		if(this.objectType == thatObj.objectType
 				&& this.id == thatObj.id
-				&& Arrays.equals(this.objectNames.values(), thatObj.objectNames.values())) {
-			return true;
+				&& this.area == thatObj.area 
+				&& Arrays.equals(this.polygonInnerCoordinates, thatObj.polygonInnerCoordinates)
+				&& Arrays.equals(this.coordinates, thatObj.coordinates) ) {
+			boolean equals = true;
+			if(equals) {
+				if(types == null || thatObj.types == null) {
+					equals = types == thatObj.types; 
+				} else if(types.length != thatObj.types.length){
+					equals = false;
+				} else {
+					for(int i = 0; i < types.length && equals; i++) {
+						TagValuePair o = mapIndex.decodeType(types[i]);
+						TagValuePair s = thatObj.mapIndex.decodeType(thatObj.types[i]);
+						equals = o.equals(s);
+					}
+				}
+			}
+			if(equals) {
+				if(additionalTypes == null || thatObj.additionalTypes == null) {
+					equals = additionalTypes == thatObj.additionalTypes; 
+				} else if(additionalTypes.length != thatObj.additionalTypes.length){
+					equals = false;
+				} else {
+					for(int i = 0; i < additionalTypes.length && equals; i++) {
+						TagValuePair o = mapIndex.decodeType(additionalTypes[i]);
+						TagValuePair s = thatObj.mapIndex.decodeType(thatObj.additionalTypes[i]);
+						equals = o.equals(s);
+					}
+				}
+			}
+			if(equals) {
+				if(namesOrder == null || thatObj.namesOrder == null) {
+					equals = namesOrder == thatObj.namesOrder; 
+				} else if(namesOrder.size() != thatObj.namesOrder.size()){
+					equals = false;
+				} else {
+					for(int i = 0; i < namesOrder.size() && equals; i++) {
+						TagValuePair o = mapIndex.decodeType(namesOrder.get(i));
+						TagValuePair s = thatObj.mapIndex.decodeType(thatObj.namesOrder.get(i));
+						equals = o.equals(s);
+					}
+				}
+			}
+			if(equals) {
+				// here we now that name indexes are equal & it is enough to check the value sets
+				if(objectNames == null || thatObj.objectNames == null) {
+					equals = objectNames == thatObj.objectNames; 
+				} else if(objectNames.size() != thatObj.objectNames.size()){
+					equals = false;
+				} else {
+					TreeSet<String> st = new TreeSet<String>(Arrays.asList(objectNames.values()));
+					TreeSet<String> ot = new TreeSet<String>(Arrays.asList(thatObj.objectNames.values()));
+					equals = st.equals(ot);
+				}
+			}
+			
+			return equals;
 		}
+		
 		return false;
+	}
+
+
+	public int[] getCoordinates() {
+		return coordinates;
+	}
+	
+	
+	public int getObjectType() {
+		return objectType;
 	}
 }
