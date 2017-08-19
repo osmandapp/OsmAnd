@@ -1,11 +1,12 @@
 package net.osmand.binary;
 
+import gnu.trove.list.array.TIntArrayList;
+import gnu.trove.map.hash.TIntObjectHashMap;
+
+import java.util.Arrays;
 import java.util.LinkedHashMap;
 import java.util.Map;
 
-
-import gnu.trove.list.array.TIntArrayList;
-import gnu.trove.map.hash.TIntObjectHashMap;
 import net.osmand.binary.BinaryMapIndexReader.MapIndex;
 import net.osmand.render.RenderingRulesStorage;
 
@@ -184,5 +185,17 @@ public class BinaryMapDataObject {
 		return coordinates[2 * ind];
 	}
 	
-
+	public boolean compareBinary(BinaryMapDataObject thatObj) {
+		if (this.objectType == thatObj.objectType 
+				&& Arrays.equals(this.types, thatObj.types)
+				&& this.area == thatObj.area 
+				&& Arrays.equals(this.additionalTypes, thatObj.additionalTypes)
+				&& Arrays.equals(this.polygonInnerCoordinates, thatObj.polygonInnerCoordinates)
+				&& Arrays.equals(this.coordinates, thatObj.coordinates) 
+				&& this.id == thatObj.id
+				&& Arrays.equals(this.objectNames.values(), thatObj.objectNames.values())) {
+			return true;
+		}
+		return false;
+	}
 }
