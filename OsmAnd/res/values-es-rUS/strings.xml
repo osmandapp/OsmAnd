@@ -206,7 +206,7 @@ Lon %2$s</string>
     <string name="osmo_device_not_found">Dispositivo no encontrado</string>
     <string name="osmo_no_connection_msg">No se pudo conectar con el servicio OsMo:\n- comprueba tu conexión a Internet;\n- comprueba los ajustes;\n- visita nuestro Twitter: https://twitter.com/OsMomobi</string>
     <string name="anonymous_user">Usuario anónimo</string>
-    <string name="logged_as">Conectado como %1$s</string>
+    <string name="logged_as">Conectado como «%1$s»</string>
     <string name="speed_limit_exceed">Tolerancia de límite de velocidad</string>
     <string name="print_route">Imprimir ruta</string>
     <string name="text_size">Tamaño del texto</string>
@@ -512,9 +512,9 @@ Se aprecia la participación activa, y las contribuciones pueden hacerse directa
     <string name="map_widget_vector_attributes">Atributos de renderizado</string>
     <string name="anonymous_user_hint">Un usuario anónimo no puede:\n- crear grupos;\n- sincronizar grupos y dispositivos con el servidor;\n- gestionar grupos y dispositivos en el panel de control personal del sitio web.</string>
     <string name="speed_limit_exceed_message">Elige el margen de tolerancia sobre el límite de velocidad, en el cual recibirás un aviso de voz.</string>
-    <string name="fav_point_emoticons_message">El nombre de punto favorito ha sido cambiado a %1$s, para facilitar el guardado de la cadena con emoticonos a un archivo.</string>
+    <string name="fav_point_emoticons_message">El nombre de punto favorito ha sido cambiado a «%1$s», para facilitar el guardado de la cadena con emoticonos a un archivo.</string>
     <string name="fav_point_dublicate">Nombre de punto favorito duplicado</string>
-    <string name="fav_point_dublicate_message">Nombre del favorito en uso, se cambió a %1$s para evitar duplicación.</string>
+    <string name="fav_point_dublicate_message">Nombre del favorito en uso, se cambió a «%1$s» para evitar duplicación.</string>
     <string name="text_size_descr">Define el tamaño del texto en el mapa.</string>
     <string name="background_service_is_enabled_question">El servicio de fondo, aún está funcionando. ¿Quieres pararlo también?</string>
     <string name="sleep_mode_stop_dialog">¿Parar modo reposo del GPS?</string>
@@ -537,7 +537,7 @@ Se aprecia la participación activa, y las contribuciones pueden hacerse directa
     <string name="rendering_value_browse_map_name">Ver mapa</string>
     <string name="rendering_value_car_name">Automóvil</string>
     <string name="rendering_attr_coloredBuildings_name">Colorear edificios según el tipo</string>
-    <string name="osmo_leave_confirmation_msg">¿Quieres abandonar el grupo %1$s?</string>
+    <string name="osmo_leave_confirmation_msg">¿Quieres abandonar el grupo «%1$s»?</string>
     <string name="osmo_specify_tracker_id">Indica el ID</string>
     <string name="gps_wake_up_timer">Intervalo para despertar GPS</string>
     <string name="map_preferred_locale_descr">Idioma preferido para las etiquetas en el mapa (si no está disponible, se cambiará a inglés o a nombres locales)</string>
@@ -581,18 +581,18 @@ Se aprecia la participación activa, y las contribuciones pueden hacerse directa
     <string name="gpx_selection_route_points">%1$s
 \nPuntos de ruta %2$s</string>
     <string name="gpx_selection_points">%1$s\nPuntos</string>
-    <string name="osmo_user_joined">El usuario %1$s se unió al grupo %2$s</string>
-    <string name="osmo_user_left">El usuario %1$s abandonó el grupo %2$s</string>
+    <string name="osmo_user_joined">El usuario «%1$s» se unió al grupo «%2$s»</string>
+    <string name="osmo_user_left">El usuario «%1$s» abandonó el grupo «%2$s»</string>
     <string name="osmo_show_group_notifications_descr">Muestra mensajes emergentes cuando los usuarios se unen o abandonan el grupo</string>
     <string name="osmo_sign_in">Ingresar</string>
     <string name="osmo_create_groups_confirm">Para crear grupos es necesario ser usuario registrado de OsMo.</string>
     <string name="osmo_regenerate_login_ids_confirm">¿Estás seguro de regenerar los identificadores personales? Todos los dispositivos conectados a ti, no serán capaces de seguirte nunca más.</string>
     <string name="osmo_cancel_moving_target">Cancelar el objetivo móvil</string>
     <string name="osmo_set_moving_target">Definir como objetivo móvil</string>
-    <string name="osmo_group_share">Para conectarte al grupo %2$s, indica el id del grupo (%1$s) o pulsa %3$s.</string>
+    <string name="osmo_group_share">Para conectarte al grupo «%2$s», indica el id del grupo (%1$s) o pulsa «%3$s».</string>
     <string name="osmo_share_connect_device">Seguir permanentemente este dispositivo</string>
     <string name="osmo_session_id_share">URL de sesión para seguir dispositivo (%1$s)</string>
-    <string name="osmo_tracker_id_share">Para conectarte al dispositivo %2$s, pulsa en el enlace %3$s o indica el id de rastreo (%1$s)</string>
+    <string name="osmo_tracker_id_share">Para conectarte al dispositivo «%2$s», pulsa en el enlace «%3$s» o indica el id de rastreo (%1$s)</string>
     <string name="osmo_server_operation_failed">Fallo de operación de Servidor OsMo</string>
     <string name="osmo_auto_send_locations_descr">Iniciar viaje automáticamente y enviar ubicaciones luego de iniciar la aplicación</string>
     <string name="osmo_tracker_id">ID de rastreo</string>
@@ -649,7 +649,7 @@ Se aprecia la participación activa, y las contribuciones pueden hacerse directa
     <string name="local_index_tile_data_maxzoom">Ampliación máxima: %1$s</string>
     <string name="local_index_tile_data_minzoom">Ampliación mínima: %1$s</string>
     <string name="local_index_tile_data_name">Datos de teselas: %1$s</string>
-    <string name="edit_tilesource_successfully">Fuente de teselas %1$s guardada correctamente</string>
+    <string name="edit_tilesource_successfully">Fuente de teselas «%1$s» guardada correctamente</string>
     <string name="edit_tilesource_elliptic_tile">Mercator elíptica</string>
     <string name="edit_tilesource_maxzoom">Máxima ampliación</string>
     <string name="edit_tilesource_expiration_time">Expira (minutos)</string>
@@ -752,7 +752,7 @@ Se aprecia la participación activa, y las contribuciones pueden hacerse directa
     <string name="local_indexes_cat_srtm">Curvas de nivel</string>
     <string name="local_indexes_cat_av">Datos multimedia</string>
     <string name="stop_routing_confirm">¿Quieres parar la navegación?</string>
-    <string name="clear_dest_confirm">¿Quieres quitar tu destino (y los destinos intermedios)?</string>
+    <string name="clear_dest_confirm">¿Quieres quitar el destino (y los destinos intermedios)?</string>
     <string name="precise_routing_mode_descr">Habilita el cálculo de rutas precisas sin interferencias. Aún está limitado por la distancia y es lento.</string>
     <string name="precise_routing_mode">Enrutado preciso (alfa)</string>
     <string name="recording_context_menu_show">Mostrar</string>
@@ -829,8 +829,8 @@ Se aprecia la participación activa, y las contribuciones pueden hacerse directa
     <string name="map_widget_monitoring_services">Servicios de registro</string>
     <string name="no_route">Sin ruta</string>
     <string name="delete_target_point">Quitar destino</string>
-    <string name="target_point">Destino %1$s</string>
-    <string name="intermediate_point">Destino intermedio %1$s</string>
+    <string name="target_point">Destino «%1$s»</string>
+    <string name="intermediate_point">Destino intermedio «%1$s»</string>
     <string name="context_menu_item_last_intermediate_point">Añadir como último destino intermedio</string>
     <string name="context_menu_item_first_intermediate_point">Añadir como primer destino intermedio</string>
     <string name="add_as_last_destination_point">Añadir como último destino intermedio</string>
@@ -838,8 +838,8 @@ Se aprecia la participación activa, y las contribuciones pueden hacerse directa
     <string name="replace_destination_point">Reemplazar destino</string>
     <string name="new_destination_point_dialog">Ya se estableció el destino:</string>
     <string name="target_points">Destinos</string>
-    <string name="intermediate_point_too_far">Destino intermedio, %1$s demasiado lejos del camino.</string>
-    <string name="arrived_at_intermediate_point">Has llegado a tu destino intermedio</string>
+    <string name="intermediate_point_too_far">Destino intermedio «%1$s» demasiado lejos del camino.</string>
+    <string name="arrived_at_intermediate_point">Has llegado al destino intermedio</string>
     <string name="context_menu_item_intermediate_point">Añadir como destino intermedio</string>
     <string name="map_widget_intermediate_distance">Destino intermedio</string>
     <string name="ending_point_too_far">Punto final demasiado lejos del camino más cercano.</string>
@@ -1230,7 +1230,7 @@ Se aprecia la participación activa, y las contribuciones pueden hacerse directa
     <string name="local_index_items_backuped">%1$d de %2$d elemento(s) correctamente desactivado(s).</string>
     <string name="local_index_items_deleted">%1$d de %2$d elemento(s) correctamente borrado(s).</string>
     <string name="local_index_items_restored">%1$d de %2$d elemento(s) correctamente activado(s).</string>
-    <string name="local_index_no_items_to_do">Sin elementos para %1$s</string>
+    <string name="local_index_no_items_to_do">Sin elementos para «%1$s»</string>
     <string name="local_index_action_do">¿Quieres %1$s %2$s elemento(s)?</string>
     <string name="local_index_descr_title">Gestionar mapas</string>
     <string name="local_index_mi_restore">Activar</string>
@@ -1303,7 +1303,7 @@ Se aprecia la participación activa, y las contribuciones pueden hacerse directa
     <string name="mile">mi</string>
     <string name="send_location_way_choose_title">Compartir ubicación usando</string>
     <string name="send_location_sms_pattern">Ubicación: %1$s\n%2$s</string>
-    <string name="send_location_email_pattern">Para ver la ubicación, sigue el enlace del navegador %1$s o el enlace del interno de Android %2$s</string>
+    <string name="send_location_email_pattern">Para ver la ubicación, sigue el enlace del navegador «%1$s» o el enlace del interno de Android «%2$s»</string>
     <string name="send_location">Enviar ubicación</string>
     <string name="context_menu_item_share_location">Compartir ubicación</string>
     <string name="add_waypoint_dialog_added">El punto GPX «{0}» se añadió correctamente</string>
@@ -1550,7 +1550,7 @@ Se aprecia la participación activa, y las contribuciones pueden hacerse directa
     <string name="error_calculating_route_occured">Ocurrió un error al calcular la ruta</string>
     <string name="empty_route_calculated">Error: La ruta calculada está vacía</string>
     <string name="new_route_calculated_dist">Nueva ruta calculada, distancia</string>
-    <string name="arrived_at_destination">Has llegado a tu destino</string>
+    <string name="arrived_at_destination">Has llegado al destino</string>
     <string name="invalid_locations">¡Las coordenadas son inválidas!</string>
     <string name="go_back_to_osmand">Volver al mapa OsmAnd</string>
     <string name="loading_data">Cargando datos…</string>
@@ -2194,7 +2194,7 @@ Si amas a OsmAnd, OSM y quieres apoyarlos, esta es una perfecta manera de hacerl
 \n 
 \n y más…</string>
     <string name="confirmation_to_delete_history_items">¿Quieres quitar del historial los elementos marcados?</string>
-    <string name="show_something_on_map">Mostrar %1$s en el mapa</string>
+    <string name="show_something_on_map">Mostrar «%1$s» en el mapa</string>
     <string name="dist_away_from_my_location">Buscar en %1$s alrededor</string>
     <string name="back_to_search">Volver a la búsqueda</string>
     <string name="coords_search">Búsqueda de coordenadas</string>
@@ -2204,7 +2204,7 @@ Si amas a OsmAnd, OSM y quieres apoyarlos, esta es una perfecta manera de hacerl
 
     <string name="routing_attr_short_way_name">Ruta de menor consumo (corta)</string>
     <string name="routing_attr_short_way_description">Usa la ruta de menor consumo en combustible (usualmente la más corta)</string>
-    <string name="replace_favorite_confirmation">¿Quieres reemplazar el favorito %1$s?</string>
+    <string name="replace_favorite_confirmation">¿Quieres reemplazar el favorito «%1$s»?</string>
     <string name="shared_string_change">Cambiar</string>
     <string name="get_started">Empezar</string>
     <string name="update_all_maps_now">¿Quieres actualizar ahora todos los mapas?</string>
@@ -2213,7 +2213,7 @@ Si amas a OsmAnd, OSM y quieres apoyarlos, esta es una perfecta manera de hacerl
     <string name="no_update_info_desc">Omite la búsqueda de nuevas actualizaciones o descuentos relacionados con OsmAnd</string>
     <string name="no_update_info">Ocultar actualizaciones</string>
     <string name="skip_map_downloading">Omitir descargas de mapas</string>
-    <string name="skip_map_downloading_desc">Sin mapas descargados. Puedes elegir uno de la lista o descargarlos luego mediante el Menú - %1$s.</string>
+    <string name="skip_map_downloading_desc">Sin mapas descargados. Puedes elegir uno de la lista o descargarlos luego mediante el menú «%1$s».</string>
     <string name="search_another_country">Elegir otra región</string>
     <string name="search_map">Buscando mapas…</string>
     <string name="first_usage_wizard_desc">Deja que OsmAnd determine tu ubicación y sugiera mapas a descargar para esa región.</string>
