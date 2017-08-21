@@ -3392,8 +3392,74 @@
 	<string name="poi_animal_shelter_fish">Ryby</string>
 
 	<string name="poi_cuisine_ramen">Rámen</string>
-	<string name="poi_cuisine_bubble_tea">Bubble tea</string>
-	<string name="poi_motorcycle_sales_yes">Slevy</string>
-	<string name="poi_motorcycle_repair_yes">Opravit</string>
+	<string name="poi_cuisine_bubble_tea">Perlivý čaj</string>
+	<string name="poi_motorcycle_sales_yes">Prodej</string>
+	<string name="poi_motorcycle_repair_yes">Opravy</string>
 	<string name="poi_cuisine_burrito">Burrito</string>
-	</resources>
+	<string name="poi_stands">Stojany</string>
+
+	<string name="poi_motorcycle_sales_no">Prodej: ne</string>
+	<string name="poi_motorcycle_sales_yes_used">Prodej: ano; použité</string>
+	<string name="poi_motorcycle_sales_used">Prodej: použité</string>
+	<string name="poi_motorcycle_rental_yes">Půjčovna</string>
+	<string name="poi_motorcycle_rental_no">Půjčovna: ne</string>
+	<string name="poi_motorcycle_repair_no">Opravy: ne</string>
+	<string name="poi_motorcycle_parts_yes">Náhradní díly</string>
+	<string name="poi_motorcycle_parts_no">Náhradní díly: ne</string>
+	<string name="poi_motorcycle_tyres_yes">Pneumatiky</string>
+	<string name="poi_motorcycle_tyres_no">Pneumatiky: ne</string>
+	<string name="poi_motorcycle_clothes_yes">Oblečení pro motorkáře</string>
+	<string name="poi_motorcycle_clothes_no">Oblečení pro motorkáře : ne</string>
+	<string name="poi_motorcycle_type_scooter">Skútr</string>
+	<string name="poi_motorcycle_type_sportbike">Závodní</string>
+	<string name="poi_motorcycle_type_offroad">Terénní</string>
+	<string name="poi_motorcycle_type_standard">Standardní</string>
+
+	<string name="poi_generator_output_electricity_no">Výstup (elektřina): ne</string>
+
+	<string name="poi_owner">Vlastník</string>
+
+	<string name="poi_animal_shelter_purpose_adoption_yes">Adopce: ano</string>
+	<string name="poi_animal_shelter_purpose_adoption_no">Adopce: ne</string>
+	<string name="poi_animal_shelter_purpose_release_yes">K vypuštění (rehabilitace): ano</string>
+	<string name="poi_animal_shelter_purpose_release_no">K vypuštění (rehabilitace): ne</string>
+
+	<string name="poi_spaceport">Kosmodrom</string>
+
+	<string name="poi_direction_n">Směr: sever</string>
+	<string name="poi_direction_nne">Směr: severo-severovýchod</string>
+	<string name="poi_direction_ne">Směr: severovýchod</string>
+	<string name="poi_direction_ene">Směr: východo-severovýchod</string>
+	<string name="poi_direction_e">Směr: východ</string>
+	<string name="poi_direction_ese">Směr: východo-jihovýchod</string>
+	<string name="poi_direction_se">Směr: jihovýchod</string>
+	<string name="poi_direction_sse">Směr: jiho-jihovýchod</string>
+	<string name="poi_direction_s">Směr: jih</string>
+	<string name="poi_direction_ssw">Směr: jiho-jihozápad</string>
+	<string name="poi_direction_sw">Směr: jihozápad</string>
+	<string name="poi_direction_wsw">Směr: západo-jihozápad</string>
+	<string name="poi_direction_w">Směr: západ</string>
+	<string name="poi_direction_wnw">Směr: západo-severozápad</string>
+	<string name="poi_direction_nw">Směr: severozápad</string>
+	<string name="poi_direction_nnw">Směr: severo-severozápad</string>
+	<string name="poi_direction_forward">Směr: vpřed</string>
+	<string name="poi_direction_backward">Směr: vzad</string>
+	<string name="poi_direction_clockwise">Směr: ve směru hodinových ručiček</string>
+	<string name="poi_direction_anticlockwise">Směr: proti směru hodinových ručiček</string>
+	<string name="poi_direction_up">Směr: nahoru</string>
+	<string name="poi_direction_down">Směr: dolů</string>
+	<string name="poi_direction_entrance">Směr: vchod</string>
+	<string name="poi_direction_exit">Směr: odchod</string>
+	<string name="poi_direction_all">Směr: všechny</string>
+
+	<string name="poi_winter_room_yes">Zimní místnost: ano</string>
+	<string name="poi_winter_room_no">Zimní místnost: ne</string>
+	<string name="poi_reservation_required">Rezervace: nutná</string>
+	<string name="poi_reservation_recommended">Rezervace: doporučená</string>
+	<string name="poi_reservation_yes">Rezervace: ano</string>
+	<string name="poi_reservation_no">Rezervace: ne</string>
+	<string name="poi_reservation_members_only">Rezervace: pouze pro členy</string>
+
+	<string name="poi_beds">Postele</string>
+
+</resources>
