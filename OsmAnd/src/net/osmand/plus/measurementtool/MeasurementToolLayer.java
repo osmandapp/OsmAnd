@@ -7,6 +7,7 @@ import android.graphics.Paint;
 import android.graphics.Path;
 import android.graphics.PointF;
 
+import net.osmand.AndroidUtils;
 import net.osmand.data.LatLon;
 import net.osmand.data.PointDescription;
 import net.osmand.data.QuadPoint;
@@ -319,38 +320,27 @@ public class MeasurementToolLayer extends OsmandMapLayer implements ContextMenuL
 				calculatePath(tb, tx, ty, path);
 				canvas.drawPath(path, lineAttrs.paint);
 
-				int leftPointPos = -1;
+				int previousDrawnLocX = -1;
+				int previousDrawnLocY = -1;
 				for (int i = 0; i < measurementPoints.size(); i++) {
 					WptPt pt = measurementPoints.get(i);
 					if (tb.containsLatLon(pt.lat, pt.lon)) {
-						leftPointPos = i;
-						break;
-					}
-				}
-				int rightPointPos = -1;
-				if (leftPointPos != -1) {
-					for (int i = measurementPoints.size() - 1; i >= leftPointPos; i--) {
-						WptPt pt = measurementPoints.get(i);
-						if (tb.containsLatLon(pt.lat, pt.lon)) {
-							rightPointPos = i;
-							break;
-						}
-					}
-				}
-
-				if (leftPointPos != -1 && rightPointPos != -1) {
-					int pointToDraw = rightPointPos - leftPointPos;
-					int step = 1;
-					if (pointToDraw > 50) {
-						step = pointToDraw / 50;
-					}
-					for (int i = leftPointPos; i <= rightPointPos; i += step) {
-						WptPt pt = measurementPoints.get(i);
 						if (!(inMovePointMode && i == selectedPointPos)) {
 							int locX = tb.getPixXFromLonNoRot(pt.lon);
 							int locY = tb.getPixYFromLatNoRot(pt.lat);
-							canvas.drawBitmap(pointIcon, locX - marginPointIconX, locY - marginPointIconY, bitmapPaint);
-							drawnPointsPositions.add(i);
+							boolean xOverlap = false;
+							boolean yOverlap = false;
+							if (previousDrawnLocX != -1 && previousDrawnLocY != -1) {
+								int iconSize = AndroidUtils.dpToPx(view.getContext(), 14);
+								xOverlap = (Math.abs(locX - previousDrawnLocX)) < iconSize;
+								yOverlap = (Math.abs(locY - previousDrawnLocY)) < iconSize;
+							}
+							if (!xOverlap || !yOverlap) {
+								canvas.drawBitmap(pointIcon, locX - marginPointIconX, locY - marginPointIconY, bitmapPaint);
+								previousDrawnLocX = locX;
+								previousDrawnLocY = locY;
+								drawnPointsPositions.add(i);
+							}
 						}
 					}
 				}
