@@ -1394,7 +1394,7 @@ Les données globales (entre 70 degrés Nord et 70 degrés Sud) sont basées sur
     <string name="osmo_enable_tracker">Envoyer mes positions</string>
     <string name="osmo_share_session">Partager la session</string>
     <string name="osmo_session_id_share">L\'URL de la session pour suivre l\'appareil (%1$s)</string>
-    <string name="osmo_tracker_id_share">Pour vous connecter à l\'appareil cible %2$s, veuillez spécifier l\'identifiant de suivi (%1$s)</string>
+    <string name="osmo_tracker_id_share">Pour vous connecter à l\'appareil cible %2$s, cliquer sur le lien %3$s ou spécifier l\'identifiant de suivi (%1$s)</string>
     <string name="osmo_track_interval">Fréquence d\'enregistrement</string>
     <string name="osmo_track_interval_descr">Choisir la fréquence d\'envoi de la position</string>
     <string name="int_days">jours</string>
