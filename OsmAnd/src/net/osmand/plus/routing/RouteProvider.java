@@ -44,11 +44,13 @@ import net.osmand.plus.TargetPointsHelper.TargetPoint;
 import net.osmand.plus.Version;
 import net.osmand.plus.activities.SettingsNavigationActivity;
 import net.osmand.plus.render.NativeOsmandLibrary;
+import net.osmand.plus.routing.RoutingHelper.RouteCalculationProgressCallback;
 import net.osmand.router.GeneralRouter;
 import net.osmand.router.GeneralRouter.GeneralRouterProfile;
 import net.osmand.router.GeneralRouter.RoutingParameter;
 import net.osmand.router.GeneralRouter.RoutingParameterType;
 import net.osmand.router.PrecalculatedRouteDirection;
+import net.osmand.router.RouteCalculationProgress;
 import net.osmand.router.RoutePlannerFrontEnd;
 import net.osmand.router.RoutePlannerFrontEnd.RouteCalculationMode;
 import net.osmand.router.RouteSegmentResult;
@@ -279,6 +281,19 @@ public class RouteProvider {
 				}
 			}
 			return this;
+		}
+	}
+
+	public static class SnapToRoadParams {
+
+		public ApplicationMode applicationMode;
+		public RouteCalculationProgress calculationProgress;
+		public RouteCalculationProgressCallback calculationProgressCallback;
+		public SnapToRoadListener listener;
+		public List<Location> points;
+
+		public interface SnapToRoadListener {
+			void onSnapToRoadDone();
 		}
 	}
 

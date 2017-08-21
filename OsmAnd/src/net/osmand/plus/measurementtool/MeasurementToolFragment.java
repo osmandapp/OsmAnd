@@ -45,8 +45,6 @@ import net.osmand.plus.GPXUtilities.WptPt;
 import net.osmand.plus.GpxSelectionHelper.SelectedGpxFile;
 import net.osmand.plus.IconsCache;
 import net.osmand.plus.OsmAndFormatter;
-import net.osmand.plus.OsmandApplication;
-import net.osmand.plus.OsmandSettings;
 import net.osmand.plus.R;
 import net.osmand.plus.activities.MapActivity;
 import net.osmand.plus.activities.TrackActivity;
@@ -67,9 +65,8 @@ import net.osmand.plus.measurementtool.command.MeasurementCommandManager;
 import net.osmand.plus.measurementtool.command.MovePointCommand;
 import net.osmand.plus.measurementtool.command.RemovePointCommand;
 import net.osmand.plus.measurementtool.command.ReorderPointCommand;
-import net.osmand.plus.routing.RouteCalculationParams;
-import net.osmand.plus.routing.RouteCalculationResult;
-import net.osmand.plus.routing.RouteProvider;
+import net.osmand.plus.routing.RouteProvider.SnapToRoadParams;
+import net.osmand.plus.routing.RoutingHelper;
 import net.osmand.plus.views.OsmandMapTileView;
 import net.osmand.plus.views.mapwidgets.MapInfoWidgetsFactory;
 import net.osmand.plus.views.mapwidgets.MapInfoWidgetsFactory.TopToolbarController;
@@ -113,8 +110,8 @@ public class MeasurementToolFragment extends Fragment {
 	private ImageView undoBtn;
 	private ImageView redoBtn;
 	private ImageView mainIcon;
-	private SnapToRoadTask currentSnapToRoadTask;
 	private ProgressBar snapToRoadProgressBar;
+	private RouteCalculationProgress calculationProgress;
 
 	private boolean wasCollapseButtonVisible;
 	private boolean pointsListOpened;
@@ -758,7 +755,7 @@ public class MeasurementToolFragment extends Fragment {
 			toolBarController.setTopBarSwitchChecked(true);
 			snapToRoadEnabled = true;
 			mainIcon.setImageDrawable(getActiveIcon(R.drawable.ic_action_snap_to_road));
-			MapActivity mapActivity = getMapActivity();
+			final MapActivity mapActivity = getMapActivity();
 			if (mapActivity != null) {
 				ImageButton snapToRoadBtn = (ImageButton) mapActivity.findViewById(R.id.snap_to_road_image_button);
 				snapToRoadBtn.setBackgroundResource(nightMode ? R.drawable.btn_circle_night : R.drawable.btn_circle);
@@ -775,15 +772,11 @@ public class MeasurementToolFragment extends Fragment {
 					snapToRoadProgressBar = (ProgressBar) mainView.findViewById(R.id.snap_to_road_progress_bar);
 					snapToRoadProgressBar.setMinimumHeight(0);
 				}
-				snapToRoadProgressBar.setVisibility(View.VISIBLE);
-				snapToRoadProgressBar.setProgress(0);
 
 				if (measurementPoints.size() > 1) {
-					if (currentSnapToRoadTask != null && !currentSnapToRoadTask.isCancelled()) {
-						currentSnapToRoadTask.cancel(true);
-					}
-					currentSnapToRoadTask = new SnapToRoadTask(mapActivity);
-					currentSnapToRoadTask.execute();
+					snapToRoadProgressBar.setVisibility(View.VISIBLE);
+					snapToRoadProgressBar.setProgress(0);
+					doSnapToRoad(mapActivity);
 				}
 
 				mapActivity.refreshMap();
@@ -791,19 +784,70 @@ public class MeasurementToolFragment extends Fragment {
 		}
 	}
 
+	private void doSnapToRoad(final MapActivity mapActivity) {
+		Location start = new Location("");
+		WptPt first = measurementPoints.get(0);
+		start.setLatitude(first.getLatitude());
+		start.setLongitude(first.getLongitude());
+
+		WptPt last = measurementPoints.get(measurementPoints.size() - 1);
+		LatLon end = new LatLon(last.getLatitude(), last.getLongitude());
+
+		List<LatLon> intermediates = new ArrayList<>();
+		if (measurementPoints.size() > 2) {
+			for (int i = 1; i < measurementPoints.size() - 1; i++) {
+				WptPt pt = measurementPoints.get(i);
+				intermediates.add(new LatLon(pt.getLatitude(), pt.getLongitude()));
+			}
+		}
+
+		final SnapToRoadParams params = new SnapToRoadParams();
+		params.applicationMode = snapToRoadAppMode;
+		params.calculationProgress = calculationProgress = new RouteCalculationProgress();
+		params.calculationProgressCallback = new RoutingHelper.RouteCalculationProgressCallback() {
+			@Override
+			public void updateProgress(int progress) {
+				snapToRoadProgressBar.setProgress(progress);
+			}
+
+			@Override
+			public void requestPrivateAccessRouting() {
+
+			}
+
+			@Override
+			public void finish() {
+				snapToRoadProgressBar.setVisibility(View.GONE);
+			}
+		};
+		params.listener = new SnapToRoadParams.SnapToRoadListener() {
+			@Override
+			public void onSnapToRoadDone() {
+				snappedToRoadPoints.clear();
+				for (Location loc : params.points) {
+					WptPt pt = new WptPt();
+					pt.lat = loc.getLatitude();
+					pt.lon = loc.getLongitude();
+					snappedToRoadPoints.add(pt);
+				}
+				mapActivity.refreshMap();
+			}
+		};
+
+		mapActivity.getMyApplication().getRoutingHelper().recalculateSnapToRoad(start, end, intermediates, params);
+	}
+
 	private void disableSnapToRoadMode() {
 		toolBarController.setTopBarSwitchVisible(false);
 		toolBarController.setTitle(previousToolBarTitle);
 		snapToRoadEnabled = false;
 		mainIcon.setImageDrawable(getActiveIcon(R.drawable.ic_action_ruler));
+		calculationProgress.isCancelled = true;
 		MapActivity mapActivity = getMapActivity();
 		if (mapActivity != null) {
 			mapActivity.findViewById(R.id.snap_to_road_image_button).setVisibility(View.GONE);
 			mainView.findViewById(R.id.snap_to_road_progress_bar).setVisibility(View.GONE);
 			mapActivity.refreshMap();
-		}
-		if (currentSnapToRoadTask != null && !currentSnapToRoadTask.isCancelled()) {
-			currentSnapToRoadTask.cancel(true);
 		}
 	}
 
@@ -1547,85 +1591,6 @@ public class MeasurementToolFragment extends Fragment {
 			return true;
 		} catch (Exception e) {
 			return false;
-		}
-	}
-
-	private class SnapToRoadTask extends AsyncTask<Void, Void, RouteCalculationResult> {
-
-		private MapActivity mapActivity;
-		private boolean calculated;
-
-		SnapToRoadTask(MapActivity mapActivity) {
-			this.mapActivity = mapActivity;
-		}
-
-		@Override
-		protected RouteCalculationResult doInBackground(Void... voids) {
-			OsmandApplication app = mapActivity.getMyApplication();
-			OsmandSettings settings = app.getSettings();
-			RouteCalculationParams params = new RouteCalculationParams();
-
-			Location start = new Location("");
-			WptPt first = measurementPoints.get(0);
-			start.setLatitude(first.getLatitude());
-			start.setLongitude(first.getLongitude());
-
-			WptPt last = measurementPoints.get(measurementPoints.size() - 1);
-			LatLon end = new LatLon(last.getLatitude(), last.getLongitude());
-
-			params.start = start;
-			params.end = end;
-			params.leftSide = settings.DRIVING_REGION.get().leftHandDriving;
-			params.fast = settings.FAST_ROUTE_MODE.getModeValue(snapToRoadAppMode);
-			params.type = settings.ROUTER_SERVICE.getModeValue(snapToRoadAppMode);
-			params.mode = snapToRoadAppMode;
-			params.ctx = app;
-			params.calculationProgress = new RouteCalculationProgress();
-
-			List<LatLon> intermediates = new ArrayList<>();
-			if (measurementPoints.size() > 2) {
-				for (int i = 1; i < measurementPoints.size() - 1; i++) {
-					WptPt pt = measurementPoints.get(i);
-					intermediates.add(new LatLon(pt.getLatitude(), pt.getLongitude()));
-				}
-				params.intermediates = intermediates;
-			}
-
-			updateProgress(params.calculationProgress);
-
-			return new RouteProvider().calculateRouteImpl(params);
-		}
-
-		private void updateProgress(final RouteCalculationProgress progress) {
-			mapActivity.getMyApplication().runInUIThread(new Runnable() {
-
-				@Override
-				public void run() {
-					float p = Math.max(progress.distanceFromBegin, progress.distanceFromEnd);
-					float all = progress.totalEstimatedDistance * 1.25f;
-					if (all > 0) {
-						int t = (int) Math.min(p * p / (all * all) * 100f, 99);
-						snapToRoadProgressBar.setProgress(t);
-					}
-					if (!calculated && !isCancelled()) {
-						updateProgress(progress);
-					}
-				}
-			}, 100);
-		}
-
-		@Override
-		protected void onPostExecute(RouteCalculationResult result) {
-			calculated = true;
-			snappedToRoadPoints.clear();
-			for (Location loc : result.getRouteLocations()) {
-				WptPt pt = new WptPt();
-				pt.lat = loc.getLatitude();
-				pt.lon = loc.getLongitude();
-				snappedToRoadPoints.add(pt);
-			}
-			mapActivity.refreshMap();
-			super.onPostExecute(result);
 		}
 	}
 
