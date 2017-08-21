@@ -65,6 +65,7 @@ import net.osmand.plus.measurementtool.command.MeasurementCommandManager;
 import net.osmand.plus.measurementtool.command.MovePointCommand;
 import net.osmand.plus.measurementtool.command.RemovePointCommand;
 import net.osmand.plus.measurementtool.command.ReorderPointCommand;
+import net.osmand.plus.measurementtool.command.SnapToRoadCommand;
 import net.osmand.plus.routing.RouteProvider.SnapToRoadParams;
 import net.osmand.plus.routing.RoutingHelper;
 import net.osmand.plus.views.OsmandMapTileView;
@@ -827,16 +828,16 @@ public class MeasurementToolFragment extends Fragment {
 		params.listener = new SnapToRoadParams.SnapToRoadListener() {
 			@Override
 			public void onSnapToRoadDone() {
-				snappedToRoadPoints.clear();
+				ArrayList<WptPt> pts = new ArrayList<>(params.points.size());
 				for (Location loc : params.points) {
 					WptPt pt = new WptPt();
 					pt.lat = loc.getLatitude();
 					pt.lon = loc.getLongitude();
-					snappedToRoadPoints.add(pt);
+					pts.add(pt);
 				}
-				MapActivity mapActivity = getMapActivity();
-				if (mapActivity != null) {
-					mapActivity.refreshMap();
+				MeasurementToolLayer layer = getMeasurementLayer();
+				if (layer != null) {
+					commandManager.execute(new SnapToRoadCommand(layer, pts));
 				}
 			}
 		};
