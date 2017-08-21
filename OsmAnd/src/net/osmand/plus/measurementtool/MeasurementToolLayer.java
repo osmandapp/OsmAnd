@@ -327,10 +327,10 @@ public class MeasurementToolLayer extends OsmandMapLayer implements ContextMenuL
 				int previousDrawnLocY = -1;
 				for (int i = 0; i < measurementPoints.size(); i++) {
 					WptPt pt = measurementPoints.get(i);
-					if (tb.containsLatLon(pt.lat, pt.lon)) {
+					int locX = tb.getPixXFromLonNoRot(pt.lon);
+					int locY = tb.getPixYFromLatNoRot(pt.lat);
+					if (locX >= 0 && locX <= tb.getPixWidth() && locY >= 0 && locY <= tb.getPixHeight()) {
 						if (!(inMovePointMode && i == selectedPointPos)) {
-							int locX = tb.getPixXFromLonNoRot(pt.lon);
-							int locY = tb.getPixYFromLatNoRot(pt.lat);
 							boolean xOverlap = false;
 							boolean yOverlap = false;
 							if (previousDrawnLocX != -1 && previousDrawnLocY != -1) {
