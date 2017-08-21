@@ -769,6 +769,9 @@ public class RouteProvider {
 				paramsR.put(key, vl);
 			}
 		}
+		if (params.snapToRoadParams != null) {
+			paramsR.put(GeneralRouter.ALLOW_PRIVATE, "true");
+		}
 		float mb = (1 << 20);
 		Runtime rt = Runtime.getRuntime();
 		// make visible
