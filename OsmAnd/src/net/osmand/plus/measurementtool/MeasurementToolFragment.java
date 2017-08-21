@@ -471,7 +471,7 @@ public class MeasurementToolFragment extends Fragment {
 		}
 
 		if (saved == null) {
-			saved = newGpxLine != null && newGpxLine.getLineType() == LineType.ADD_ROUTE_POINTS;
+			saved = newGpxLine != null && (newGpxLine.getLineType() == LineType.ADD_ROUTE_POINTS || newGpxLine.getLineType() == LineType.EDIT_SEGMENT);
 		}
 
 		return view;

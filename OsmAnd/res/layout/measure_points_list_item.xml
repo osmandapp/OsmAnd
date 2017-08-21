@@ -72,14 +72,45 @@
                 android:textColor="?android:textColorPrimary"
                 android:textSize="@dimen/default_desc_text_size"
                 tools:text="@string/plugin_distance_point"/>
-
-            <android.support.v7.widget.AppCompatTextView
-                android:id="@+id/measure_point_descr"
+            
+            <RelativeLayout
                 android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:textColor="?android:textColorSecondary"
-                android:textSize="@dimen/default_sub_text_size"
-                tools:text="@string/shared_string_control_start"/>
+                android:layout_height="wrap_content">
+
+                <android.support.v7.widget.AppCompatTextView
+                    android:maxLines="1"
+                    android:id="@+id/measure_point_descr"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:textColor="?android:textColorSecondary"
+                    android:textSize="@dimen/default_sub_text_size"
+                    tools:text="@string/shared_string_control_start"/>
+
+                <android.support.v7.widget.AppCompatTextView
+                    android:maxLines="1"
+                    android:id="@+id/measure_point_ele"
+                    android:layout_toEndOf="@id/measure_point_descr"
+                    android:layout_toRightOf="@id/measure_point_descr"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:textColor="?android:textColorSecondary"
+                    android:textSize="@dimen/default_sub_text_size"
+                    android:layout_marginLeft="8dp"
+                    android:layout_marginRight="8dp"
+                    tools:text="Altitude: 345 m"/>
+
+                <android.support.v7.widget.AppCompatTextView
+                    android:maxLines="1"
+                    android:id="@+id/measure_point_speed"
+                    android:layout_toEndOf="@id/measure_point_ele"
+                    android:layout_toRightOf="@id/measure_point_ele"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:textColor="?android:textColorSecondary"
+                    android:textSize="@dimen/default_sub_text_size"
+                    tools:text="Speed: 45 km/h"/>
+
+            </RelativeLayout>
         </LinearLayout>
 
         <View
