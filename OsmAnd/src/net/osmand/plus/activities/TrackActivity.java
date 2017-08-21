@@ -45,6 +45,7 @@ public class TrackActivity extends TabActivity {
 
 	public static final String TRACK_FILE_NAME = "TRACK_FILE_NAME";
 	public static final String OPEN_POINTS_TAB = "OPEN_POINTS_TAB";
+	public static final String OPEN_TRACKS_LIST = "OPEN_TRACKS_LIST";
 	public static final String CURRENT_RECORDING = "CURRENT_RECORDING";
 	protected List<WeakReference<Fragment>> fragList = new ArrayList<>();
 	private OsmandApplication app;
@@ -57,7 +58,8 @@ public class TrackActivity extends TabActivity {
 	private List<GpxDisplayGroup> displayGroups;
 	private List<GpxDisplayGroup> originalGroups = new ArrayList<>();
 	private boolean stopped = false;
-	public boolean openPointsTab = false;
+	private boolean openPointsTab = false;
+	private boolean openTracksList = false;
 
 	public PagerSlidingTabStrip getSlidingTabLayout() {
 		return slidingTabLayout;
@@ -89,6 +91,9 @@ public class TrackActivity extends TabActivity {
 		}
 		if (intent.hasExtra(OPEN_POINTS_TAB)) {
 			openPointsTab = true;
+		}
+		if (intent.hasExtra(OPEN_TRACKS_LIST)) {
+			openTracksList = true;
 		}
 		setContentView(R.layout.tab_content);
 	}
@@ -360,7 +365,7 @@ public class TrackActivity extends TabActivity {
 						return true;
 					}
 				}
-				if (getIntent().hasExtra(MapActivity.INTENT_KEY_PARENT_MAP_ACTIVITY)) {
+				if (getIntent().hasExtra(MapActivity.INTENT_KEY_PARENT_MAP_ACTIVITY) || openTracksList) {
 					OsmAndAppCustomization appCustomization = getMyApplication().getAppCustomization();
 					final Intent favorites = new Intent(this, appCustomization.getFavoritesActivity());
 					getMyApplication().getSettings().FAVORITES_TAB.set(FavoritesActivity.GPX_TAB);
@@ -392,6 +397,13 @@ public class TrackActivity extends TabActivity {
 				}
 				return;
 			}
+		}
+		if (openTracksList) {
+			OsmAndAppCustomization appCustomization = getMyApplication().getAppCustomization();
+			final Intent favorites = new Intent(this, appCustomization.getFavoritesActivity());
+			getMyApplication().getSettings().FAVORITES_TAB.set(FavoritesActivity.GPX_TAB);
+			favorites.setFlags(Intent.FLAG_ACTIVITY_REORDER_TO_FRONT);
+			startActivity(favorites);
 		}
 		super.onBackPressed();
 	}

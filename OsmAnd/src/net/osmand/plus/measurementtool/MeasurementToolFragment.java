@@ -1526,6 +1526,7 @@ public class MeasurementToolFragment extends Fragment {
 				GPXFile gpx = newGpxLine.getGpxFile();
 				Intent newIntent = new Intent(mapActivity, mapActivity.getMyApplication().getAppCustomization().getTrackActivity());
 				newIntent.putExtra(TrackActivity.TRACK_FILE_NAME, gpx.path);
+				newIntent.putExtra(TrackActivity.OPEN_TRACKS_LIST, true);
 				newIntent.setFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP);
 				startActivity(newIntent);
 			}
