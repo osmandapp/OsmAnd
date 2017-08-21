@@ -456,7 +456,7 @@ public class MeasurementToolFragment extends Fragment {
 		enterMeasurementMode();
 
 		if (snapToRoadEnabled) {
-			enableSnapToRoadMode();
+			enableSnapToRoadMode(true);
 		}
 
 		if (newGpxLine != null && !gpxPointsAdded) {
@@ -668,7 +668,7 @@ public class MeasurementToolFragment extends Fragment {
 			@Override
 			public void onApplicationModeItemClick(ApplicationMode mode) {
 				snapToRoadAppMode = mode;
-				enableSnapToRoadMode();
+				enableSnapToRoadMode(false);
 			}
 		};
 	}
@@ -749,7 +749,7 @@ public class MeasurementToolFragment extends Fragment {
 		};
 	}
 
-	private void enableSnapToRoadMode() {
+	private void enableSnapToRoadMode(boolean enableAfterRotating) {
 		if (snapToRoadAppMode != null) {
 			toolBarController.setTopBarSwitchVisible(true);
 			toolBarController.setTopBarSwitchChecked(true);
@@ -768,15 +768,14 @@ public class MeasurementToolFragment extends Fragment {
 				});
 				snapToRoadBtn.setVisibility(View.VISIBLE);
 
-				if (snapToRoadProgressBar == null) {
-					snapToRoadProgressBar = (ProgressBar) mainView.findViewById(R.id.snap_to_road_progress_bar);
-					snapToRoadProgressBar.setMinimumHeight(0);
-				}
+				snapToRoadProgressBar = (ProgressBar) mainView.findViewById(R.id.snap_to_road_progress_bar);
+				snapToRoadProgressBar.setMinimumHeight(0);
 
 				if (measurementPoints.size() > 1) {
-					snapToRoadProgressBar.setVisibility(View.VISIBLE);
-					snapToRoadProgressBar.setProgress(0);
-					doSnapToRoad(mapActivity);
+					if (!enableAfterRotating) {
+						snapToRoadProgressBar.setProgress(0);
+						doSnapToRoad(mapActivity);
+					}
 				}
 
 				mapActivity.refreshMap();
@@ -807,6 +806,7 @@ public class MeasurementToolFragment extends Fragment {
 		params.calculationProgressCallback = new RoutingHelper.RouteCalculationProgressCallback() {
 			@Override
 			public void updateProgress(int progress) {
+				snapToRoadProgressBar.setVisibility(View.VISIBLE);
 				snapToRoadProgressBar.setProgress(progress);
 			}
 
@@ -818,6 +818,10 @@ public class MeasurementToolFragment extends Fragment {
 			@Override
 			public void finish() {
 				snapToRoadProgressBar.setVisibility(View.GONE);
+				MapActivity mapActivity = getMapActivity();
+				if (mapActivity != null) {
+					mapActivity.refreshMap();
+				}
 			}
 		};
 		params.listener = new SnapToRoadParams.SnapToRoadListener() {
@@ -830,7 +834,10 @@ public class MeasurementToolFragment extends Fragment {
 					pt.lon = loc.getLongitude();
 					snappedToRoadPoints.add(pt);
 				}
-				mapActivity.refreshMap();
+				MapActivity mapActivity = getMapActivity();
+				if (mapActivity != null) {
+					mapActivity.refreshMap();
+				}
 			}
 		};
 
