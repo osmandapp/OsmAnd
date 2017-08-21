@@ -328,11 +328,13 @@ public class MeasurementToolLayer extends OsmandMapLayer implements ContextMenuL
 					}
 				}
 				int rightPointPos = -1;
-				for (int i = measurementPoints.size() - 1; i >= leftPointPos; i--) {
-					WptPt pt = measurementPoints.get(i);
-					if (tb.containsLatLon(pt.lat, pt.lon)) {
-						rightPointPos = i;
-						break;
+				if (leftPointPos != -1) {
+					for (int i = measurementPoints.size() - 1; i >= leftPointPos; i--) {
+						WptPt pt = measurementPoints.get(i);
+						if (tb.containsLatLon(pt.lat, pt.lon)) {
+							rightPointPos = i;
+							break;
+						}
 					}
 				}
 
