@@ -105,6 +105,20 @@ public class MeasurementToolAdapter extends RecyclerView.Adapter<MeasurementTool
 				holder.descr.setText(OsmAndFormatter.getFormattedDistance(dist, mapActivity.getMyApplication()));
 			}
 		}
+		if (lineType == LineType.EDIT_SEGMENT) {
+			double elevation = pt.ele;
+			if (!Double.isNaN(elevation)) {
+				holder.elevation.setText(mapActivity.getString(R.string.measurement_tool_altitude, OsmAndFormatter.getFormattedAlt(elevation, mapActivity.getMyApplication())));
+			} else {
+				holder.elevation.setText("");
+			}
+			float speed = (float) pt.speed;
+			if (speed != 0) {
+				holder.speed.setText(mapActivity.getString(R.string.measurement_tool_speed, OsmAndFormatter.getFormattedSpeed(speed, mapActivity.getMyApplication())));
+			} else {
+				holder.speed.setText("");
+			}
+		}
 		holder.deleteBtn.setImageDrawable(iconsCache.getIcon(R.drawable.ic_action_remove_dark,
 				nightMode ? R.color.ctx_menu_info_text_dark : R.color.icon_color));
 		holder.deleteBtn.setOnClickListener(new View.OnClickListener() {
@@ -138,6 +152,8 @@ public class MeasurementToolAdapter extends RecyclerView.Adapter<MeasurementTool
 		final ImageView icon;
 		final TextView title;
 		final TextView descr;
+		final TextView elevation;
+		final TextView speed;
 		final ImageButton deleteBtn;
 
 		MeasureToolItemVH(View view) {
@@ -146,6 +162,8 @@ public class MeasurementToolAdapter extends RecyclerView.Adapter<MeasurementTool
 			icon = (ImageView) view.findViewById(R.id.measure_point_icon);
 			title = (TextView) view.findViewById(R.id.measure_point_title);
 			descr = (TextView) view.findViewById(R.id.measure_point_descr);
+			elevation = (TextView) view.findViewById(R.id.measure_point_ele);
+			speed = (TextView) view.findViewById(R.id.measure_point_speed);
 			deleteBtn = (ImageButton) view.findViewById(R.id.measure_point_remove_image_button);
 		}
 	}

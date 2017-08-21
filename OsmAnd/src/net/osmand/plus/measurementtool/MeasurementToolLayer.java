@@ -54,6 +54,7 @@ public class MeasurementToolLayer extends OsmandMapLayer implements ContextMenuL
 	private int selectedPointPos = -1;
 	private WptPt selectedCachedPoint;
 	private LatLon pressedPointLatLon;
+	private int iconSize;
 
 	@Override
 	public void initLayer(OsmandMapTileView view) {
@@ -74,6 +75,8 @@ public class MeasurementToolLayer extends OsmandMapLayer implements ContextMenuL
 
 		marginApplyingPointIconY = applyingPointIcon.getHeight() / 2;
 		marginApplyingPointIconX = applyingPointIcon.getWidth() / 2;
+
+		iconSize = AndroidUtils.dpToPx(view.getContext(), 14);
 	}
 
 	void setOnSingleTapListener(OnSingleTapListener listener) {
@@ -331,7 +334,6 @@ public class MeasurementToolLayer extends OsmandMapLayer implements ContextMenuL
 							boolean xOverlap = false;
 							boolean yOverlap = false;
 							if (previousDrawnLocX != -1 && previousDrawnLocY != -1) {
-								int iconSize = AndroidUtils.dpToPx(view.getContext(), 14);
 								xOverlap = (Math.abs(locX - previousDrawnLocX)) < iconSize;
 								yOverlap = (Math.abs(locY - previousDrawnLocY)) < iconSize;
 							}
