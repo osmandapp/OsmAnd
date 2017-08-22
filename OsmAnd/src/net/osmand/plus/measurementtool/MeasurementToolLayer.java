@@ -53,8 +53,8 @@ public class MeasurementToolLayer extends OsmandMapLayer implements ContextMenuL
 	private int selectedPointPos = -1;
 	private WptPt selectedCachedPoint;
 	private LatLon pressedPointLatLon;
-	private int iconSize;
 	private boolean overlapped;
+	private int pointsToDraw = 50;
 
 	@Override
 	public void initLayer(OsmandMapTileView view) {
@@ -75,8 +75,6 @@ public class MeasurementToolLayer extends OsmandMapLayer implements ContextMenuL
 
 		marginApplyingPointIconY = applyingPointIcon.getHeight() / 2;
 		marginApplyingPointIconX = applyingPointIcon.getWidth() / 2;
-
-		iconSize = AndroidUtils.dpToPx(view.getContext(), 14);
 	}
 
 	void setOnSingleTapListener(OnSingleTapListener listener) {
@@ -323,24 +321,15 @@ public class MeasurementToolLayer extends OsmandMapLayer implements ContextMenuL
 				canvas.drawPath(path, lineAttrs.paint);
 
 				overlapped = false;
-				int previousDrawnLocX = -1;
-				int previousDrawnLocY = -1;
+				int drawn = 0;
 				for (int i = 0; i < measurementPoints.size(); i++) {
 					WptPt pt = measurementPoints.get(i);
 					int locX = tb.getPixXFromLonNoRot(pt.lon);
 					int locY = tb.getPixYFromLatNoRot(pt.lat);
 					if (locX >= 0 && locX <= tb.getPixWidth() && locY >= 0 && locY <= tb.getPixHeight()) {
 						if (!(inMovePointMode && i == selectedPointPos)) {
-							boolean xOverlap = false;
-							boolean yOverlap = false;
-							if (previousDrawnLocX != -1 && previousDrawnLocY != -1) {
-								xOverlap = (Math.abs(locX - previousDrawnLocX)) < iconSize;
-								yOverlap = (Math.abs(locY - previousDrawnLocY)) < iconSize;
-							}
-							if (!xOverlap || !yOverlap) {
-								previousDrawnLocX = locX;
-								previousDrawnLocY = locY;
-							} else {
+							drawn++;
+							if (drawn > pointsToDraw) {
 								overlapped = true;
 								break;
 							}
