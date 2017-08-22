@@ -449,7 +449,7 @@ public class ContextMenuLayer extends OsmandMapLayer {
 		}
 	}
 
-	private void quitAddGpxPoint() {
+	public void quitAddGpxPoint() {
 		mInAddGpxPointMode = false;
 		mark(View.VISIBLE, R.id.map_ruler_layout,
 				R.id.map_left_widgets_panel, R.id.map_right_widgets_panel, R.id.map_center_info);

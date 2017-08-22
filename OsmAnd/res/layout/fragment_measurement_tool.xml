@@ -1,6 +1,7 @@
 <?xml version="1.0" encoding="utf-8"?>
 <FrameLayout
     xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:osmand="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
@@ -16,14 +17,25 @@
         android:clickable="true"
         android:orientation="vertical">
 
-        <RelativeLayout
+        <ProgressBar
+            android:id="@+id/snap_to_road_progress_bar"
+            style="?android:attr/progressBarStyleHorizontal"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
+            android:minHeight="0dp"
+            android:visibility="gone"
+            tools:visibility="visible"/>
+
+        <RelativeLayout
+            android:id="@+id/up_down_row"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:background="?attr/selectableItemBackground"
             android:paddingBottom="12dp"
             android:paddingTop="12dp">
 
             <ImageView
-                android:id="@+id/ruler_icon"
+                android:id="@+id/main_icon"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_alignParentLeft="true"
@@ -36,16 +48,18 @@
                 android:background="@null"
                 tools:src="@drawable/ic_action_ruler"/>
 
-            <ImageButton
+            <ImageView
                 android:id="@+id/up_down_button"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_alignParentEnd="true"
                 android:layout_alignParentRight="true"
                 android:layout_centerVertical="true"
+                android:layout_marginEnd="16dp"
+                android:layout_marginLeft="16dp"
+                android:layout_marginRight="16dp"
+                android:layout_marginStart="16dp"
                 android:background="@null"
-                android:paddingEnd="16dp"
-                android:paddingStart="16dp"
                 tools:src="@drawable/ic_action_arrow_down"/>
 
             <TextView
@@ -57,8 +71,8 @@
                 android:layout_marginLeft="8dp"
                 android:layout_marginRight="4dp"
                 android:layout_marginStart="8dp"
-                android:layout_toEndOf="@id/ruler_icon"
-                android:layout_toRightOf="@id/ruler_icon"
+                android:layout_toEndOf="@id/main_icon"
+                android:layout_toRightOf="@id/main_icon"
                 android:textAppearance="@style/TextAppearance.ListItemTitle"
                 tools:text="724 m,"/>
 
@@ -68,12 +82,68 @@
                 android:layout_height="wrap_content"
                 android:layout_centerVertical="true"
                 android:layout_toEndOf="@id/measurement_distance_text_view"
-                android:layout_toLeftOf="@id/up_down_button"
                 android:layout_toRightOf="@id/measurement_distance_text_view"
-                android:layout_toStartOf="@id/up_down_button"
                 android:textColor="?android:textColorSecondary"
                 android:textSize="@dimen/default_list_text_size"
                 tools:text="points: 3"/>
+
+            <TextView
+                android:id="@+id/distance_to_center_text_view"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_centerVertical="true"
+                android:layout_toEndOf="@id/measurement_points_text_view"
+                android:layout_toLeftOf="@id/up_down_button"
+                android:layout_toRightOf="@id/measurement_points_text_view"
+                android:layout_toStartOf="@id/up_down_button"
+                android:textColor="?android:textColorSecondary"
+                android:textSize="@dimen/default_list_text_size"
+                tools:text=" – 700 m"/>
+
+            <TextView
+                android:id="@+id/move_point_text"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_centerVertical="true"
+                android:layout_marginEnd="4dp"
+                android:layout_marginLeft="8dp"
+                android:layout_marginRight="4dp"
+                android:layout_marginStart="8dp"
+                android:layout_toEndOf="@id/main_icon"
+                android:layout_toRightOf="@id/main_icon"
+                android:text="@string/move_point"
+                android:textAppearance="@style/TextAppearance.ListItemTitle"
+                android:visibility="gone"/>
+
+            <TextView
+                android:id="@+id/add_point_after_text"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_centerVertical="true"
+                android:layout_marginEnd="4dp"
+                android:layout_marginLeft="8dp"
+                android:layout_marginRight="4dp"
+                android:layout_marginStart="8dp"
+                android:layout_toEndOf="@id/main_icon"
+                android:layout_toRightOf="@id/main_icon"
+                android:text="@string/add_point_after"
+                android:textAppearance="@style/TextAppearance.ListItemTitle"
+                android:visibility="gone"/>
+
+            <TextView
+                android:id="@+id/add_point_before_text"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_centerVertical="true"
+                android:layout_marginEnd="4dp"
+                android:layout_marginLeft="8dp"
+                android:layout_marginRight="4dp"
+                android:layout_marginStart="8dp"
+                android:layout_toEndOf="@id/main_icon"
+                android:layout_toRightOf="@id/main_icon"
+                android:text="@string/add_point_before"
+                android:textAppearance="@style/TextAppearance.ListItemTitle"
+                android:visibility="gone"/>
         </RelativeLayout>
 
         <View
@@ -81,63 +151,197 @@
             android:layout_height="1dp"
             android:background="?attr/dashboard_divider"/>
 
-        <LinearLayout
+        <FrameLayout
             android:id="@+id/points_list_container"
             android:layout_width="match_parent"
             android:layout_height="220dp"
             android:background="@color/ctx_menu_info_view_bg_dark"
-            android:orientation="vertical"
             android:visibility="gone">
+
+            <android.support.v7.widget.RecyclerView
+                android:id="@+id/measure_points_recycler_view"
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"/>
 
             <include layout="@layout/card_bottom_divider"/>
 
-            <android.support.v7.widget.RecyclerView
-                android:id="@+id/points_recycler_view"
-                android:layout_width="match_parent"
-                android:layout_height="215dp"/>
-
             <ImageView
                 android:layout_width="match_parent"
-                android:layout_height="wrap_content"
+                android:layout_height="5dp"
+                android:layout_gravity="bottom"
+                android:alpha="0.5"
                 android:scaleType="fitXY"
                 android:src="@drawable/bg_shadow_onmap"/>
-        </LinearLayout>
+        </FrameLayout>
 
-        <RelativeLayout
+        <LinearLayout
+            android:id="@+id/measure_mode_controls"
             android:layout_width="match_parent"
-            android:layout_height="wrap_content">
+            android:layout_height="52dp">
+
+            <FrameLayout
+                android:layout_width="0dp"
+                android:layout_height="match_parent"
+                android:layout_weight="1">
+
+                <net.osmand.plus.widgets.TextViewEx
+                    android:id="@+id/options_button"
+                    android:layout_width="wrap_content"
+                    android:layout_height="match_parent"
+                    android:background="?attr/selectableItemBackground"
+                    android:ellipsize="end"
+                    android:gravity="center_vertical"
+                    android:maxLines="1"
+                    android:paddingEnd="12dp"
+                    android:paddingLeft="16dp"
+                    android:paddingRight="12dp"
+                    android:paddingStart="16dp"
+                    android:text="@string/shared_string_options"
+                    android:textColor="?attr/color_dialog_buttons"
+                    osmand:textAllCapsCompat="true"
+                    osmand:typeface="@string/font_roboto_medium"/>
+            </FrameLayout>
 
             <ImageButton
                 android:id="@+id/undo_point_button"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:layout_alignParentLeft="true"
-                android:layout_alignParentStart="true"
-                android:layout_centerVertical="true"
-                android:background="@null"
-                android:paddingEnd="16dp"
+                android:background="?attr/selectableItemBackground"
+                android:paddingBottom="14dp"
+                android:paddingEnd="12dp"
+                android:paddingLeft="16dp"
+                android:paddingRight="12dp"
                 android:paddingStart="16dp"
+                android:paddingTop="14dp"
                 tools:src="@drawable/ic_action_undo_dark"/>
 
             <ImageButton
                 android:id="@+id/redo_point_button"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:layout_centerVertical="true"
-                android:layout_toEndOf="@id/undo_point_button"
-                android:layout_toRightOf="@id/undo_point_button"
-                android:background="@null"
-                android:paddingEnd="8dp"
-                android:paddingStart="8dp"
+                android:background="?attr/selectableItemBackground"
+                android:paddingBottom="14dp"
+                android:paddingEnd="16dp"
+                android:paddingLeft="12dp"
+                android:paddingRight="16dp"
+                android:paddingStart="12dp"
+                android:paddingTop="14dp"
                 tools:src="@drawable/ic_action_redo_dark"/>
 
+            <FrameLayout
+                android:layout_width="0dp"
+                android:layout_height="match_parent"
+                android:layout_weight="1">
+
+                <Button
+                    android:id="@+id/add_point_button"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_gravity="end"
+                    android:layout_marginBottom="8dp"
+                    android:layout_marginEnd="8dp"
+                    android:layout_marginRight="8dp"
+                    android:layout_marginTop="8dp"
+                    android:background="@drawable/btn_round_blue"
+                    android:drawableLeft="@drawable/ic_action_plus"
+                    android:ellipsize="end"
+                    android:maxLines="1"
+                    android:minHeight="36dp"
+                    android:paddingLeft="8dp"
+                    android:paddingRight="8dp"
+                    android:text="@string/shared_string_add"
+                    android:textColor="@color/color_white"/>
+            </FrameLayout>
+
+        </LinearLayout>
+
+        <RelativeLayout
+            android:id="@+id/move_point_controls"
+            android:layout_width="match_parent"
+            android:layout_height="52dp"
+            android:visibility="gone">
+
             <Button
-                android:id="@+id/add_point_button"
+                android:id="@+id/apply_move_point_button"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_alignParentEnd="true"
                 android:layout_alignParentRight="true"
                 android:layout_centerVertical="true"
+                android:layout_marginBottom="8dp"
+                android:layout_marginEnd="8dp"
+                android:layout_marginRight="8dp"
+                android:layout_marginTop="8dp"
+                android:background="@drawable/btn_round_blue"
+                android:minHeight="36dp"
+                android:paddingLeft="8dp"
+                android:paddingRight="8dp"
+                android:text="@string/shared_string_apply"
+                android:textColor="@color/color_white"/>
+
+            <net.osmand.plus.widgets.TextViewEx
+                android:id="@+id/cancel_move_point_button"
+                android:layout_width="wrap_content"
+                android:layout_height="match_parent"
+                android:background="?attr/selectableItemBackground"
+                android:gravity="center_vertical"
+                android:paddingEnd="12dp"
+                android:paddingLeft="16dp"
+                android:paddingRight="12dp"
+                android:paddingStart="16dp"
+                android:text="@string/shared_string_cancel"
+                android:textColor="?attr/color_dialog_buttons"
+                osmand:textAllCapsCompat="true"
+                osmand:typeface="@string/font_roboto_medium"/>
+        </RelativeLayout>
+
+        <LinearLayout
+            android:id="@+id/add_point_before_after_controls"
+            android:layout_width="match_parent"
+            android:layout_height="52dp"
+            android:gravity="center_vertical"
+            android:orientation="horizontal"
+            android:visibility="gone">
+
+            <net.osmand.plus.widgets.TextViewEx
+                android:id="@+id/cancel_point_before_after_button"
+                android:layout_width="wrap_content"
+                android:layout_height="match_parent"
+                android:background="?attr/selectableItemBackground"
+                android:gravity="center_vertical"
+                android:paddingEnd="12dp"
+                android:paddingLeft="16dp"
+                android:paddingRight="12dp"
+                android:paddingStart="16dp"
+                android:text="@string/shared_string_cancel"
+                android:textColor="?attr/color_dialog_buttons"
+                osmand:textAllCapsCompat="true"
+                osmand:typeface="@string/font_roboto_medium"/>
+
+            <View
+                android:layout_width="0dp"
+                android:layout_height="match_parent"
+                android:layout_weight="1"/>
+
+            <Button
+                android:id="@+id/apply_point_before_after_point_button"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginBottom="8dp"
+                android:layout_marginEnd="8dp"
+                android:layout_marginRight="8dp"
+                android:layout_marginTop="8dp"
+                android:background="?attr/btn_round_border"
+                android:minHeight="36dp"
+                android:paddingLeft="8dp"
+                android:paddingRight="8dp"
+                android:text="@string/shared_string_apply"
+                android:textColor="?attr/color_dialog_buttons"/>
+
+            <Button
+                android:id="@+id/add_point_before_after_button"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
                 android:layout_marginBottom="8dp"
                 android:layout_marginEnd="8dp"
                 android:layout_marginRight="8dp"
@@ -149,7 +353,7 @@
                 android:paddingRight="8dp"
                 android:text="@string/shared_string_add"
                 android:textColor="@color/color_white"/>
-        </RelativeLayout>
+        </LinearLayout>
 
     </LinearLayout>
 

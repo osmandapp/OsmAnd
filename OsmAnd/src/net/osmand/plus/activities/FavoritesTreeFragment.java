@@ -21,6 +21,7 @@ import android.view.MenuInflater;
 import android.view.MenuItem;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.Button;
 import android.widget.CheckBox;
 import android.widget.ExpandableListView;
 import android.widget.Filter;
@@ -71,11 +72,13 @@ public class FavoritesTreeFragment extends OsmandExpandableListFragment {
 	public static final int SHARE_ID = 4;
 	public static final int SELECT_MAP_MARKERS_ID = 5;
 	public static final int SELECT_MAP_MARKERS_ACTION_MODE_ID = 6;
+	public static final int IMPORT_FAVOURITES_ID = 7;
 	public static final String GROUP_EXPANDED_POSTFIX = "_group_expanded";
 
 	private FavouritesAdapter favouritesAdapter = new FavouritesAdapter();
 	private FavouritesDbHelper helper;
 
+	private OsmandApplication app;
 	private boolean selectionMode = false;
 	private Set<FavouritePoint> favoritesSelected = new LinkedHashSet<>();
 	private Set<FavoriteGroup> groupsToDelete = new LinkedHashSet<>();
@@ -88,6 +91,7 @@ public class FavoritesTreeFragment extends OsmandExpandableListFragment {
 	@Override
 	public void onAttach(Context context) {
 		super.onAttach(context);
+		this.app = (OsmandApplication) getActivity().getApplication();
 
 		helper = getMyApplication().getFavorites();
 		favouritesAdapter.synchronizeGroups();
@@ -156,6 +160,17 @@ public class FavoritesTreeFragment extends OsmandExpandableListFragment {
 			footerView = inflater.inflate(R.layout.list_shadow_footer, null, false);
 			listView.addFooterView(footerView);
 		}
+		View emptyView = view.findViewById(android.R.id.empty);
+		ImageView emptyImageView = (ImageView) emptyView.findViewById(R.id.empty_state_image_view);
+		emptyImageView.setImageResource(app.getSettings().isLightContent() ? R.drawable.ic_empty_state_favorites_day_result : R.drawable.ic_empty_state_favorites_night_result);
+		Button importButton = (Button) emptyView.findViewById(R.id.import_button);
+		importButton.setOnClickListener(new View.OnClickListener() {
+			@Override
+			public void onClick(View view) {
+				importFavourites();
+			}
+		});
+		listView.setEmptyView(emptyView);
 		listView.setAdapter(favouritesAdapter);
 		setListView(listView);
 		setHasOptionsMenu(true);
@@ -237,6 +252,9 @@ public class FavoritesTreeFragment extends OsmandExpandableListFragment {
 		} else if (item.getItemId() == DELETE_ACTION_ID) {
 			deleteFavoritesAction();
 			return true;
+		} else if (item.getItemId() == IMPORT_FAVOURITES_ID) {
+			importFavourites();
+			return true;
 		} else {
 			return super.onOptionsItemSelected(item);
 		}
@@ -268,6 +286,8 @@ public class FavoritesTreeFragment extends OsmandExpandableListFragment {
 
 
 		if (!MenuItemCompat.isActionViewExpanded(mi)) {
+			createMenuItem(menu, IMPORT_FAVOURITES_ID, R.string.shared_string_add_to_favorites, R.drawable.ic_action_plus,
+					R.drawable.ic_action_plus, MenuItemCompat.SHOW_AS_ACTION_ALWAYS);
 			createMenuItem(menu, SHARE_ID, R.string.shared_string_share, R.drawable.ic_action_gshare_dark,
 					R.drawable.ic_action_gshare_dark, MenuItemCompat.SHOW_AS_ACTION_ALWAYS);
 			if (getSettings().USE_MAP_MARKERS.get()) {
@@ -465,6 +485,10 @@ public class FavoritesTreeFragment extends OsmandExpandableListFragment {
 		} else {
 			shareFavorites(null);
 		}
+	}
+
+	private void importFavourites() {
+		((FavoritesActivity) getActivity()).importFavourites();
 	}
 
 	public void shareFavorites(final FavoriteGroup group) {

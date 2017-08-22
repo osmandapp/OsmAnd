@@ -1,5 +1,7 @@
 package net.osmand.plus.mapcontextmenu.editors;
 
+import android.support.v4.app.DialogFragment;
+
 import net.osmand.plus.GPXUtilities;
 import net.osmand.plus.R;
 import net.osmand.plus.activities.MapActivity;
@@ -14,6 +16,11 @@ public class RtePtEditorFragment extends WptPtEditorFragment {
 	@Override
 	public String getToolbarTitle() {
 		return getMapActivity().getResources().getString(R.string.save_route_point);
+	}
+
+	@Override
+	protected DialogFragment createSelectCategoryDialog() {
+		return SelectCategoryDialogFragment.createInstance(getEditor().getFragmentTag());
 	}
 
 	public static void showInstance(final MapActivity mapActivity) {

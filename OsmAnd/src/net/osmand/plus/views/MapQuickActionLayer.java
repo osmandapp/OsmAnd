@@ -218,7 +218,7 @@ public class MapQuickActionLayer extends OsmandMapLayer implements QuickActionRe
 
     private void enterMovingMode(RotatedTileBox tileBox) {
         previousMapPosition = view.getMapPosition();
-        view.setMapPosition(OsmandSettings.MIDDLE_CONSTANT);
+        view.setMapPosition(OsmandSettings.MIDDLE_BOTTOM_CONSTANT);
         MapContextMenu menu = mapActivity.getContextMenu();
 
         LatLon ll = menu.isActive() && tileBox.containsLatLon(menu.getLatLon()) ? menu.getLatLon() : tileBox.getCenterLatLon();

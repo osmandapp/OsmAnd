@@ -15,6 +15,7 @@ import android.widget.Button;
 import android.widget.LinearLayout;
 
 import net.osmand.plus.FavouritesDbHelper;
+import net.osmand.plus.GPXUtilities.GPXFile;
 import net.osmand.plus.IconsCache;
 import net.osmand.plus.OsmandApplication;
 import net.osmand.plus.R;
@@ -40,6 +41,15 @@ public class SelectCategoryDialogFragment extends DialogFragment {
 
 	private String editorTag;
 	private CategorySelectionListener selectionListener;
+	private GPXFile gpxFile;
+
+	public void setGpxFile(GPXFile gpxFile) {
+		this.gpxFile = gpxFile;
+	}
+
+	public GPXFile getGpxFile() {
+		return gpxFile;
+	}
 
 	@NonNull
 	@Override
@@ -58,36 +68,16 @@ public class SelectCategoryDialogFragment extends DialogFragment {
 		LinearLayout ll = (LinearLayout) v.findViewById(R.id.list_container);
 
 		final FavouritesDbHelper helper = ((OsmandApplication) getActivity().getApplication()).getFavorites();
-		List<FavouritesDbHelper.FavoriteGroup> gs = helper.getFavoriteGroups();
-		for (final FavouritesDbHelper.FavoriteGroup category : gs) {
-			View itemView = getActivity().getLayoutInflater().inflate(R.layout.favorite_category_dialog_item, null);
-			Button button = (Button)itemView.findViewById(R.id.button);
-			if (category.color != 0) {
-				button.setCompoundDrawablesWithIntrinsicBounds(getIcon(getActivity(), R.drawable.ic_action_folder, category.color), null, null, null);
-			} else {
-				button.setCompoundDrawablesWithIntrinsicBounds(getIcon(getActivity(), R.drawable.ic_action_folder, getResources().getColor(R.color.color_favorite)), null, null, null);
+		if (gpxFile != null) {
+			List<String> categories = gpxFile.getWaypointCategories();
+			for (final String category : categories) {
+				addCategory(ll, category, 0);
 			}
-			button.setCompoundDrawablePadding(dpToPx(15f));
-			String name = category.name.length() == 0 ? getString(R.string.shared_string_favorites) : category.name;
-			button.setText(name);
-			button.setOnClickListener(new View.OnClickListener() {
-				@Override
-				public void onClick(View v) {
-
-					PointEditor editor = ((MapActivity) getActivity()).getContextMenu().getPointEditor(editorTag);
-
-					if (editor != null) {
-						editor.setCategory(category.name);
-					}
-
-					if (selectionListener != null) {
-						selectionListener.onCategorySelected(category.name, category.color);
-					}
-
-					dismiss();
-				}
-			});
-			ll.addView(itemView);
+		} else {
+			List<FavouritesDbHelper.FavoriteGroup> gs = helper.getFavoriteGroups();
+			for (final FavouritesDbHelper.FavoriteGroup category : gs) {
+				addCategory(ll, category.name, category.color);
+			}
 		}
 		View itemView = getActivity().getLayoutInflater().inflate(R.layout.favorite_category_dialog_item, null);
 		Button button = (Button)itemView.findViewById(R.id.button);
@@ -109,6 +99,40 @@ public class SelectCategoryDialogFragment extends DialogFragment {
 		builder.setNegativeButton(R.string.shared_string_cancel, null);
 
 		return builder.create();
+	}
+
+	private void addCategory(LinearLayout ll, final String categoryName, final int categoryColor) {
+		View itemView = getActivity().getLayoutInflater().inflate(R.layout.favorite_category_dialog_item, null);
+		Button button = (Button)itemView.findViewById(R.id.button);
+		if (categoryColor != 0) {
+			button.setCompoundDrawablesWithIntrinsicBounds(getIcon(getActivity(), R.drawable.ic_action_folder, categoryColor), null, null, null);
+		} else {
+			button.setCompoundDrawablesWithIntrinsicBounds(getIcon(getActivity(), R.drawable.ic_action_folder, getResources().getColor(R.color.color_favorite)), null, null, null);
+		}
+		button.setCompoundDrawablePadding(dpToPx(15f));
+		String name = categoryName.length() == 0 ? getString(R.string.shared_string_favorites) : categoryName;
+		button.setText(name);
+		button.setOnClickListener(new View.OnClickListener() {
+			@Override
+			public void onClick(View v) {
+
+				PointEditor editor = ((MapActivity) getActivity()).getContextMenu().getPointEditor(editorTag);
+
+				if (editor != null) {
+					editor.setCategory(categoryName);
+					if (gpxFile != null && editor instanceof WptPtEditor) {
+						((WptPtEditor) editor).getWptPt().category = categoryName;
+					}
+				}
+
+				if (selectionListener != null) {
+					selectionListener.onCategorySelected(categoryName, categoryColor);
+				}
+
+				dismiss();
+			}
+		});
+		ll.addView(itemView);
 	}
 
 	public static SelectCategoryDialogFragment createInstance(String editorTag) {

@@ -3,7 +3,6 @@ package net.osmand.plus.mapcontextmenu.builders.cards.dialogs;
 import android.os.Bundle;
 import android.support.annotation.NonNull;
 import android.view.Menu;
-import android.view.MenuItem;
 import android.view.View;
 
 import net.osmand.plus.OsmandSettings;
@@ -11,8 +10,6 @@ import net.osmand.plus.activities.MapActivity;
 import net.osmand.plus.helpers.AndroidUiHelper;
 import net.osmand.plus.mapillary.MapillaryImageDialog;
 import net.osmand.plus.views.OsmandMapTileView;
-
-import java.util.List;
 
 public abstract class ContextMenuCardDialog {
 
@@ -109,9 +106,9 @@ public abstract class ContextMenuCardDialog {
 	private void shiftMapPosition() {
 		OsmandMapTileView mapView = mapActivity.getMapView();
 		if (AndroidUiHelper.isOrientationPortrait(mapActivity)) {
-			if (mapView.getMapPosition() != OsmandSettings.MIDDLE_CONSTANT) {
+			if (mapView.getMapPosition() != OsmandSettings.MIDDLE_BOTTOM_CONSTANT) {
 				prevMapPosition = mapView.getMapPosition();
-				mapView.setMapPosition(OsmandSettings.MIDDLE_CONSTANT);
+				mapView.setMapPosition(OsmandSettings.MIDDLE_BOTTOM_CONSTANT);
 			}
 		} else {
 			mapView.setMapPositionX(1);

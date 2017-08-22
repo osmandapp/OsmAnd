@@ -7,6 +7,7 @@ import android.graphics.drawable.Drawable;
 import android.os.AsyncTask;
 import android.os.Bundle;
 import android.support.annotation.Nullable;
+import android.support.v4.app.DialogFragment;
 import android.view.View;
 
 import net.osmand.data.LatLon;
@@ -45,6 +46,16 @@ public class WptPtEditorFragment extends PointEditorFragment {
 		selectedGpxHelper = getMapActivity().getMyApplication().getSelectedGpxHelper();
 		assignEditor();
 		defaultColor = getResources().getColor(R.color.gpx_color_point);
+	}
+
+	@Override
+	protected DialogFragment createSelectCategoryDialog() {
+		SelectCategoryDialogFragment selectCategoryDialogFragment = SelectCategoryDialogFragment.createInstance(getEditor().getFragmentTag());
+		GPXFile gpx = editor.getGpxFile();
+		if (gpx != null) {
+			selectCategoryDialogFragment.setGpxFile(gpx);
+		}
+		return selectCategoryDialogFragment;
 	}
 
 	protected void assignEditor() {
