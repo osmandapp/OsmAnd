@@ -16,7 +16,6 @@ import net.osmand.AndroidUtils;
 import net.osmand.data.LatLon;
 import net.osmand.data.PointDescription;
 import net.osmand.data.QuadRect;
-import net.osmand.plus.activities.TrackActivity.NewGpxLine.LineType;
 import net.osmand.plus.GPXDatabase.GpxDataItem;
 import net.osmand.plus.GPXUtilities;
 import net.osmand.plus.GPXUtilities.TrkSegment;
@@ -29,6 +28,7 @@ import net.osmand.plus.OsmAndAppCustomization;
 import net.osmand.plus.OsmandApplication;
 import net.osmand.plus.OsmandSettings;
 import net.osmand.plus.R;
+import net.osmand.plus.measurementtool.NewGpxData;
 import net.osmand.plus.myplaces.FavoritesActivity;
 import net.osmand.plus.myplaces.SplitSegmentFragment;
 import net.osmand.plus.myplaces.TrackPointFragment;
@@ -119,14 +119,14 @@ public class TrackActivity extends TabActivity {
 		}
 	}
 
-	public void addLine(LineType lineType) {
-		addLine(lineType, null);
+	public void addNewGpxData(NewGpxData.ActionType actionType) {
+		addNewGpxData(actionType, null);
 	}
 
-	public void addLine(LineType lineType, TrkSegment segment) {
+	public void addNewGpxData(NewGpxData.ActionType actionType, TrkSegment segment) {
 		GPXFile gpxFile = getGpx();
 		QuadRect rect = getRect();
-		NewGpxLine newGpxLine = new NewGpxLine(gpxFile, rect, lineType, segment);
+		NewGpxData newGpxData = new NewGpxData(gpxFile, rect, actionType, segment);
 		WptPt pointToShow = gpxFile != null ? gpxFile.findPointToShow() : null;
 		if (pointToShow != null) {
 			LatLon location = new LatLon(pointToShow.getLatitude(), pointToShow.getLongitude());
@@ -135,7 +135,7 @@ public class TrackActivity extends TabActivity {
 					settings.getLastKnownMapZoom(),
 					new PointDescription(PointDescription.POINT_TYPE_WPT, getString(R.string.add_line)),
 					false,
-					newGpxLine
+					newGpxData
 			);
 
 			MapActivity.launchMapActivityMoveToTop(this);
@@ -422,37 +422,5 @@ public class TrackActivity extends TabActivity {
 
 	public GpxDataItem getGpxDataItem() {
 		return gpxDataItem;
-	}
-
-	public static class NewGpxLine {
-		public enum LineType { ADD_SEGMENT, ADD_ROUTE_POINTS, EDIT_SEGMENT }
-
-		private GPXFile gpxFile;
-		private TrkSegment trkSegment;
-		private QuadRect rect;
-		private LineType lineType;
-
-		public NewGpxLine(GPXFile gpxFile, QuadRect rect, LineType lineType, TrkSegment trkSegment) {
-			this.gpxFile = gpxFile;
-			this.rect = rect;
-			this.lineType = lineType;
-			this.trkSegment = trkSegment;
-		}
-
-		public GPXFile getGpxFile() {
-			return gpxFile;
-		}
-
-		public QuadRect getRect() {
-			return rect;
-		}
-
-		public LineType getLineType() {
-			return lineType;
-		}
-
-		public TrkSegment getTrkSegment() {
-			return trkSegment;
-		}
 	}
 }

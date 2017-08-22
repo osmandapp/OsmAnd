@@ -70,7 +70,6 @@ import net.osmand.plus.TargetPointsHelper;
 import net.osmand.plus.TargetPointsHelper.TargetPoint;
 import net.osmand.plus.Version;
 import net.osmand.plus.activities.search.SearchActivity;
-import net.osmand.plus.activities.TrackActivity.NewGpxLine;
 import net.osmand.plus.base.FailSafeFuntions;
 import net.osmand.plus.base.MapViewTrackingUtilities;
 import net.osmand.plus.dashboard.DashboardOnMap;
@@ -97,6 +96,7 @@ import net.osmand.plus.mapcontextmenu.other.MapRouteInfoMenu;
 import net.osmand.plus.mapcontextmenu.other.MapRouteInfoMenuFragment;
 import net.osmand.plus.mapcontextmenu.other.TrackDetailsMenu;
 import net.osmand.plus.measurementtool.MeasurementToolFragment;
+import net.osmand.plus.measurementtool.NewGpxData;
 import net.osmand.plus.render.RendererRegistry;
 import net.osmand.plus.resources.ResourceManager;
 import net.osmand.plus.routing.RoutingHelper;
@@ -940,11 +940,11 @@ public class MapActivity extends OsmandActionBarActivity implements DownloadEven
 					QuadRect qr = newGpxPoint.getRect();
 					mapView.fitRectToMap(qr.left, qr.right, qr.top, qr.bottom, (int) qr.width(), (int) qr.height(), 0);
 					getMapLayers().getContextMenuLayer().enterAddGpxPointMode(newGpxPoint);
-				} else if (toShow instanceof NewGpxLine) {
-					NewGpxLine newGpxLine = (NewGpxLine) toShow;
-					QuadRect qr = newGpxLine.getRect();
+				} else if (toShow instanceof NewGpxData) {
+					NewGpxData newGpxData = (NewGpxData) toShow;
+					QuadRect qr = newGpxData.getRect();
 					mapView.fitRectToMap(qr.left, qr.right, qr.top, qr.bottom, (int) qr.width(), (int) qr.height(), 0);
-					MeasurementToolFragment.showInstance(getSupportFragmentManager(), newGpxLine);
+					MeasurementToolFragment.showInstance(getSupportFragmentManager(), newGpxData);
 				} else {
 					mapContextMenu.show(latLonToShow, mapLabelToShow, toShow);
 				}

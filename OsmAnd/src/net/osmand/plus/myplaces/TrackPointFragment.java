@@ -35,7 +35,6 @@ import net.osmand.AndroidUtils;
 import net.osmand.data.FavouritePoint;
 import net.osmand.data.LatLon;
 import net.osmand.data.PointDescription;
-import net.osmand.plus.activities.TrackActivity.NewGpxLine.LineType;
 import net.osmand.plus.FavouritesDbHelper;
 import net.osmand.plus.GPXDatabase.GpxDataItem;
 import net.osmand.plus.GPXUtilities;
@@ -58,6 +57,7 @@ import net.osmand.plus.activities.TrackActivity;
 import net.osmand.plus.base.FavoriteImageDrawable;
 import net.osmand.plus.base.OsmandExpandableListFragment;
 import net.osmand.plus.dialogs.DirectionsDialogs;
+import net.osmand.plus.measurementtool.NewGpxData;
 import net.osmand.util.Algorithms;
 
 import java.io.File;
@@ -164,11 +164,11 @@ public class TrackPointFragment extends OsmandExpandableListFragment {
 					break;
 				case R.id.route_text_layout:
 				case R.id.route_fab:
-					addLine(LineType.ADD_ROUTE_POINTS);
+					addNewGpxData(NewGpxData.ActionType.ADD_ROUTE_POINTS);
 					break;
 				case R.id.line_text_layout:
 				case R.id.line_fab:
-					addLine(LineType.ADD_SEGMENT);
+					addNewGpxData(NewGpxData.ActionType.ADD_SEGMENT);
 					break;
 			}
 		}
@@ -216,8 +216,8 @@ public class TrackPointFragment extends OsmandExpandableListFragment {
 		getTrackActivity().addPoint(pointDescription);
 	}
 
-	private void addLine(LineType lineType) {
-		getTrackActivity().addLine(lineType);
+	private void addNewGpxData(NewGpxData.ActionType actionType) {
+		getTrackActivity().addNewGpxData(actionType);
 	}
 
 	private void openMenu() {

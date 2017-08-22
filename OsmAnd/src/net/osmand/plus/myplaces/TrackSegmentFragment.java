@@ -61,7 +61,6 @@ import net.osmand.data.PointDescription;
 import net.osmand.data.QuadRect;
 import net.osmand.data.RotatedTileBox;
 import net.osmand.data.RotatedTileBox.RotatedTileBoxBuilder;
-import net.osmand.plus.activities.TrackActivity.NewGpxLine.LineType;
 import net.osmand.plus.GPXDatabase;
 import net.osmand.plus.GPXDatabase.GpxDataItem;
 import net.osmand.plus.GPXUtilities;
@@ -90,6 +89,7 @@ import net.osmand.plus.helpers.GpxUiHelper;
 import net.osmand.plus.helpers.GpxUiHelper.GPXDataSetAxisType;
 import net.osmand.plus.helpers.GpxUiHelper.GPXDataSetType;
 import net.osmand.plus.helpers.GpxUiHelper.OrderedLineDataSet;
+import net.osmand.plus.measurementtool.NewGpxData;
 import net.osmand.plus.render.MapRenderRepositories;
 import net.osmand.plus.resources.AsyncLoadingThread;
 import net.osmand.plus.resources.ResourceManager;
@@ -217,11 +217,11 @@ public class TrackSegmentFragment extends OsmAndListFragment {
 					break;
 				case R.id.route_text_layout:
 				case R.id.route_fab:
-					addLine(LineType.ADD_ROUTE_POINTS);
+					addNewGpxData(NewGpxData.ActionType.ADD_ROUTE_POINTS);
 					break;
 				case R.id.line_text_layout:
 				case R.id.line_fab:
-					addLine(LineType.ADD_SEGMENT);
+					addNewGpxData(NewGpxData.ActionType.ADD_SEGMENT);
 					break;
 			}
 		}
@@ -289,12 +289,12 @@ public class TrackSegmentFragment extends OsmAndListFragment {
 		getTrackActivity().addPoint(pointDescription);
 	}
 
-	private void addLine(LineType lineType) {
-		getTrackActivity().addLine(lineType);
+	private void addNewGpxData(NewGpxData.ActionType actionType) {
+		getTrackActivity().addNewGpxData(actionType);
 	}
 
-	private void addLine(LineType lineType, TrkSegment segment) {
-		getTrackActivity().addLine(lineType, segment);
+	private void addNewGpxData(NewGpxData.ActionType actionType, TrkSegment segment) {
+		getTrackActivity().addNewGpxData(actionType, segment);
 	}
 
 	private void openMenu() {
@@ -1366,7 +1366,7 @@ public class TrackSegmentFragment extends OsmAndListFragment {
 													case R.id.action_edit:
 														TrkSegment segment = getTrkSegment();
 														if (segment != null) {
-															addLine(LineType.EDIT_SEGMENT, segment);
+															addNewGpxData(NewGpxData.ActionType.EDIT_SEGMENT, segment);
 														}
 														return true;
 													case R.id.action_delete:
@@ -1469,7 +1469,7 @@ public class TrackSegmentFragment extends OsmAndListFragment {
 													case R.id.action_edit:
 														TrkSegment segment = getTrkSegment();
 														if (segment != null) {
-															addLine(LineType.EDIT_SEGMENT, segment);
+															addNewGpxData(NewGpxData.ActionType.EDIT_SEGMENT, segment);
 														}
 														return true;
 													case R.id.action_delete:
@@ -1562,7 +1562,7 @@ public class TrackSegmentFragment extends OsmAndListFragment {
 													case R.id.action_edit:
 														TrkSegment segment = getTrkSegment();
 														if (segment != null) {
-															addLine(LineType.EDIT_SEGMENT, segment);
+															addNewGpxData(NewGpxData.ActionType.EDIT_SEGMENT, segment);
 														}
 														return true;
 													case R.id.action_delete:

@@ -37,14 +37,14 @@ public class SelectedPointBottomSheetDialogFragment extends BottomSheetDialogFra
 	private SelectedPointFragmentListener listener;
 	private boolean nightMode;
 	private boolean portrait;
-	private TrackActivity.NewGpxLine.LineType lineType;
+	private NewGpxData.ActionType actionType;
 
 	public void setListener(SelectedPointFragmentListener listener) {
 		this.listener = listener;
 	}
 
-	public void setLineType(TrackActivity.NewGpxLine.LineType lineType) {
-		this.lineType = lineType;
+	public void setActionType(NewGpxData.ActionType actionType) {
+		this.actionType = actionType;
 	}
 
 	@Nullable
@@ -119,7 +119,7 @@ public class SelectedPointBottomSheetDialogFragment extends BottomSheetDialogFra
 		if (!TextUtils.isEmpty(pointTitle)) {
 			((TextView) mainView.findViewById(R.id.selected_point_title)).setText(pointTitle);
 		} else {
-			if (lineType == TrackActivity.NewGpxLine.LineType.ADD_ROUTE_POINTS) {
+			if (actionType == NewGpxData.ActionType.ADD_ROUTE_POINTS) {
 				((TextView) mainView.findViewById(R.id.selected_point_title)).setText(mapActivity.getString(R.string.route_point) + " - " + (pos + 1));
 			} else {
 				((TextView) mainView.findViewById(R.id.selected_point_title)).setText(mapActivity.getString(R.string.plugin_distance_point) + " - " + (pos + 1));

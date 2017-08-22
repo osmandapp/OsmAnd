@@ -17,7 +17,7 @@ import net.osmand.plus.IconsCache;
 import net.osmand.plus.OsmAndFormatter;
 import net.osmand.plus.R;
 import net.osmand.plus.activities.MapActivity;
-import net.osmand.plus.activities.TrackActivity.NewGpxLine.LineType;
+import net.osmand.plus.measurementtool.NewGpxData;
 import net.osmand.util.MapUtils;
 
 import java.util.Collections;
@@ -30,12 +30,12 @@ public class MeasurementToolAdapter extends RecyclerView.Adapter<MeasurementTool
 	private final List<WptPt> points;
 	private MeasurementAdapterListener listener;
 	private boolean nightMode;
-	private LineType lineType;
+	private NewGpxData.ActionType actionType;
 
-	public MeasurementToolAdapter(MapActivity mapActivity, List<WptPt> points, LineType lineType) {
+	public MeasurementToolAdapter(MapActivity mapActivity, List<WptPt> points, NewGpxData.ActionType actionType) {
 		this.mapActivity = mapActivity;
 		this.points = points;
-		this.lineType = lineType;
+		this.actionType = actionType;
 	}
 
 	public void setAdapterListener(MeasurementAdapterListener listener) {
@@ -84,7 +84,7 @@ public class MeasurementToolAdapter extends RecyclerView.Adapter<MeasurementTool
 		if (!TextUtils.isEmpty(pointTitle)) {
 			holder.title.setText(pointTitle);
 		} else {
-			if (lineType == LineType.ADD_ROUTE_POINTS) {
+			if (actionType == NewGpxData.ActionType.ADD_ROUTE_POINTS) {
 				holder.title.setText(mapActivity.getString(R.string.route_point) + " - " + (pos + 1));
 			} else {
 				holder.title.setText(mapActivity.getString(R.string.plugin_distance_point) + " - " + (pos + 1));
@@ -105,7 +105,7 @@ public class MeasurementToolAdapter extends RecyclerView.Adapter<MeasurementTool
 				holder.descr.setText(OsmAndFormatter.getFormattedDistance(dist, mapActivity.getMyApplication()));
 			}
 		}
-		if (lineType == LineType.EDIT_SEGMENT) {
+		if (actionType == NewGpxData.ActionType.EDIT_SEGMENT) {
 			double elevation = pt.ele;
 			if (!Double.isNaN(elevation)) {
 				holder.elevation.setText(mapActivity.getString(R.string.measurement_tool_altitude, OsmAndFormatter.getFormattedAlt(elevation, mapActivity.getMyApplication())));
