@@ -1116,12 +1116,9 @@ Facilita il download delle linee di elevazione e l\'ombreggiamento dei rilievi (
     <string name="osmand_distance_planning_plugin_description">Questo plugin fornisce un widget nella finestra della mappa che permette di creare percorsi toccando la mappa o usare o modificare file GPX esistenti, per pianificare un viaggio e misurare la distanza tra i punti. I risultati possono essere salvati come file GPX, che possono essere utilizzati in seguito come guida.</string>
     <string name="osmand_distance_planning_plugin_name">Strumento calcolatore di distanza &amp; pianificazione</string>
     <string name="use_distance_measurement_help">* Toccare per segnare un punto.
-
- * Premere e tenere premuto sulla mappa per eliminare il punto precedente.
-
- * Premere e tenere premuto sul punto per vedere e allegare una descrizione.
-
- * Fare clic sul widget di misura per vedere ulteriori azioni.</string>
+\n* Premere e tenere premuto sulla mappa per eliminare il punto precedente.
+\n* Premere e tenere premuto sul punto per vedere e allegare una descrizione.
+\n* Fare clic sul widget di misura per vedere ulteriori azioni.</string>
     <string name="distance_measurement_start_editing">Iniza a modificare</string>
     <string name="distance_measurement_finish_editing">Finisci di modificare</string>
     <string name="distance_measurement_finish_subtrack">Inizia una nuova sottotraccia</string>
@@ -1371,13 +1368,13 @@ Facilita il download delle linee di elevazione e l\'ombreggiamento dei rilievi (
     <string name="osmo_groups">Gruppi OsMo</string>
     <string name="osmo_group_info">Informazioni</string>
     <string name="osmo_group">Gruppo OsMo</string>
-    <string name="osmo_group_share">Per collegarsi al gruppo %2$s, specificare l\'id del gruppo (%1$s) o cliccare %3$s.</string>
+    <string name="osmo_group_share">Per collegarsi al gruppo %2$s, specificare l\'id del gruppo (%1$s) o tappare %3$s.</string>
     <string name="osmo_share_connect_device">Permetti di seguire permanentemente questo dispositivo</string>
     <string name="osmo_share_current_session">Condividi questa sessione nel browser</string>
     <string name="osmo_session_not_available">Sessione non disponibile, per favore controllare che \'Invia posizioni\' sia attivo.</string>
     <string name="osmo_share_session">Condividi sessione</string>
     <string name="osmo_session_id_share">Url della sessione per tracciare il dispositivo (%1$s)</string>
-    <string name="osmo_tracker_id_share">Per collegarsi al dispositivo desiderato %2$s, cliccare sul link %3$s o specificarne l\'id di monitoraggio (%1$s)</string>
+    <string name="osmo_tracker_id_share">Per collegarsi al dispositivo desiderato %2$s, tappa sul link %3$s o specificarne l\'id di monitoraggio (%1$s)</string>
     <string name="osmo_track_interval">Intervallo di registrazione</string>
     <string name="osmo_track_interval_descr">Scegli l\'intervallo di tempo per l\'invio della posizione</string>
     <string name="int_days">giorni</string>
