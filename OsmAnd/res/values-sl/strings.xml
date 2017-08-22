@@ -686,7 +686,7 @@ Omogoča tudi dodajanje opomb v koledar za prikaz opomnikov ob daljših časih p
     <string name="poi_filter_nominatim">Spletni Nominatim</string>
     <string name="search_position_current_location_search">Iskanje trenutnega mesta …</string>
     <string name="search_position_current_location_found">Trenutno mesto (določeno)</string>
-    <string name="shared_string_save_as_gpx">Shrani pot kot sled GPX</string>
+    <string name="shared_string_save_as_gpx">Shrani kot novo sled GPX</string>
     <string name="route_successfully_saved_at">Pot je bila uspešno shranjena kot \'%1$s\'.</string>
     <string name="filename_input">Ime datoteke: </string>
     <string name="file_with_name_already_exist">Datoteka z istim imenom že obstaja.</string>
@@ -1372,7 +1372,7 @@ Afganistan, Albanija, Alžirija, Andora, Angola, Angvila, Antigva in Barbuda, Ar
     <string name="route_preferences">Nastavitve poti</string>
     <string name="route_info">Podrobnosti poti</string>
     <string name="calculate_osmand_route_gpx">Izračun poti brez povezave</string>
-    <string name="interrupt_music_descr">Ob najavah prekini predvajanje glasbe (in ne le zmanjšaj glasnosti)</string>
+    <string name="interrupt_music_descr">Ob najavah prekini (in ne le utišaj) predvajanje glasbe</string>
     <string name="interrupt_music">Prekini predvajanje glasbe</string>
     <string name="share_route_as_gpx">Objavi pot kot datoteko GPX</string>
     <string name="share_route_subject">Objavi pot preko spletišča OsmAnd</string>
@@ -2434,7 +2434,7 @@ Del prihodka se vrne skupnosti OSM in se izplačuje za vsako opravljeno dejavnos
     <string name="donation_to_osm_desc">Del donacije bo poslan uporabnikom OSM, ki so poslali spremembe na OpenStreetMap. Vsota naročnine ostaja nespremenjena.</string>
     <string name="osm_live_subscription_desc">Naročnina omogoča urne, dnevne ali tedenske posodobitve in neomejene prejeme kateregakoli zemljevida.</string>
     <string name="osm_live_banner_desc">Pridobite si neomejene prejeme zemljevidov in drugih posodobitev več kot le enkrat mesečno: tedensko, dnevno ali vsako uro.</string>
-    <string name="osmand_plus_banner_desc">Polna različica OsmAnd z neomejenimi posodobitvami zemljevidov in mesečne posodobitve.</string>
+    <string name="osmand_plus_banner_desc">Neomejene posodobitve zemljevidov, programske posodobitve in vstavek za Wikipedijo.</string>
     <string name="edit_filter">Uredi kategorije</string>
     <string name="subcategories">Podkategorije</string>
     <string name="selected_categories">Izbrane kategorije</string>
@@ -2465,7 +2465,7 @@ Del prihodka se vrne skupnosti OSM in se izplačuje za vsako opravljeno dejavnos
     <string name="save_track_precision">Najmanjša natančnost beleženja</string>
     <string name="save_track_precision_descr">Filter: nastavitev najmanjše natančnosti beleženja točk na zemljevidu</string>
     <string name="osmo_share_location">Objavi</string>
-    <string name="trip_rec_notification_settings_desc">Pokaži obvestilo, ki omogoča začetek beleženja potovanja s pritiskom na gumb za beleženje</string>
+    <string name="trip_rec_notification_settings_desc">Pokaži obvestilo za možnost začetka beleženja potovanja</string>
     <string name="release_2_5">\\022 Dejavne ikone na zemljevidu 
 \n 
 \n • Zmogljivo iskanje točk POI: iskanje na primer restavracij po vrsti kuhinje, ali pa prostore za kampiranje s posebnimi zahtevami 
@@ -2809,4 +2809,9 @@ Koda predstavlja območje: %1$s x %2$s</string>
     <string name="enter_gpx_name">Ime datoteke GPX:</string>
     <string name="show_on_map_after_saving">Po shranjevanju pokaži na zemljevidu</string>
     <string name="measurement_tool">Izmeri razdaljo</string>
+    <string name="measurement_tool_altitude">Nadmorska višina: %1$s</string>
+    <string name="measurement_tool_speed">Hitrost: %1$s</string>
+    <string name="shared_string_options">Možnosti</string>
+    <string name="empty_state_favourites">Dodaj priljubljene</string>
+    <string name="import_track">Uvozi sled</string>
     </resources>
