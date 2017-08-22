@@ -47,7 +47,6 @@ public class MeasurementToolLayer extends OsmandMapLayer implements ContextMenuL
 	private int marginApplyingPointIconY;
 	private final TIntArrayList tx = new TIntArrayList();
 	private final TIntArrayList ty = new TIntArrayList();
-	private final TIntArrayList drawnPointsPositions = new TIntArrayList();
 	private OnMeasureDistanceToCenter measureDistanceToCenterListener;
 	private OnSingleTapListener singleTapListener;
 	private OnEnterMovePointModeListener enterMovePointModeListener;
@@ -55,6 +54,7 @@ public class MeasurementToolLayer extends OsmandMapLayer implements ContextMenuL
 	private WptPt selectedCachedPoint;
 	private LatLon pressedPointLatLon;
 	private int iconSize;
+	private boolean overlapped;
 
 	@Override
 	public void initLayer(OsmandMapTileView view) {
@@ -158,7 +158,11 @@ public class MeasurementToolLayer extends OsmandMapLayer implements ContextMenuL
 	public boolean onSingleTap(PointF point, RotatedTileBox tileBox) {
 		if (singleTapListener != null) {
 			if (inMeasurementMode && !inMovePointMode && !inAddPointAfterMode && !inAddPointBeforeMode) {
-				selectPoint(point.x, point.y, true);
+				if (overlapped) {
+					clearSelection();
+				} else {
+					selectPoint(point.x, point.y, true);
+				}
 				if (selectedPointPos == -1) {
 					pressedPointLatLon = tileBox.getLatLonFromPixel(point.x, point.y);
 					singleTapListener.onAddPoint();
@@ -176,7 +180,7 @@ public class MeasurementToolLayer extends OsmandMapLayer implements ContextMenuL
 	@Override
 	public boolean onLongPressEvent(PointF point, RotatedTileBox tileBox) {
 		if (inMeasurementMode) {
-			if (!inMovePointMode && !inAddPointAfterMode && !inAddPointBeforeMode && measurementPoints.size() > 0) {
+			if (!overlapped && !inMovePointMode && !inAddPointAfterMode && !inAddPointBeforeMode && measurementPoints.size() > 0) {
 				selectPoint(point.x, point.y, false);
 				if (selectedCachedPoint != null && selectedPointPos != -1) {
 					enterMovingPointMode();
@@ -210,7 +214,7 @@ public class MeasurementToolLayer extends OsmandMapLayer implements ContextMenuL
 		double lowestDistance = view.getResources().getDimension(R.dimen.measurement_tool_select_radius);
 		for (int i = 0; i < measurementPoints.size(); i++) {
 			WptPt pt = measurementPoints.get(i);
-			if (drawnPointsPositions.contains(i) && tb.containsLatLon(pt.getLatitude(), pt.getLongitude())) {
+			if (tb.containsLatLon(pt.getLatitude(), pt.getLongitude())) {
 				double xDiff = tb.getPixXFromLonNoRot(pt.getLongitude()) - x;
 				double yDiff = tb.getPixYFromLatNoRot(pt.getLatitude()) - y;
 				double distToPoint = Math.sqrt(Math.pow(xDiff, 2) + Math.pow(yDiff, 2));
@@ -238,7 +242,6 @@ public class MeasurementToolLayer extends OsmandMapLayer implements ContextMenuL
 	@Override
 	public void onDraw(Canvas canvas, RotatedTileBox tb, DrawSettings settings) {
 		if (inMeasurementMode) {
-			drawnPointsPositions.clear();
 			lineAttrs.updatePaints(view, settings, tb);
 			if (!inMovePointMode && !inAddPointAfterMode && !inAddPointBeforeMode) {
 				drawCenterIcon(canvas, tb, tb.getCenterPixelPoint(), settings.isNightMode());
@@ -319,6 +322,7 @@ public class MeasurementToolLayer extends OsmandMapLayer implements ContextMenuL
 				calculatePath(tb, tx, ty, path);
 				canvas.drawPath(path, lineAttrs.paint);
 
+				overlapped = false;
 				int previousDrawnLocX = -1;
 				int previousDrawnLocY = -1;
 				for (int i = 0; i < measurementPoints.size(); i++) {
@@ -334,10 +338,23 @@ public class MeasurementToolLayer extends OsmandMapLayer implements ContextMenuL
 								yOverlap = (Math.abs(locY - previousDrawnLocY)) < iconSize;
 							}
 							if (!xOverlap || !yOverlap) {
-								canvas.drawBitmap(pointIcon, locX - marginPointIconX, locY - marginPointIconY, bitmapPaint);
 								previousDrawnLocX = locX;
 								previousDrawnLocY = locY;
-								drawnPointsPositions.add(i);
+							} else {
+								overlapped = true;
+								break;
+							}
+						}
+					}
+				}
+				if (!overlapped) {
+					for (int i = 0; i < measurementPoints.size(); i++) {
+						WptPt pt = measurementPoints.get(i);
+						int locX = tb.getPixXFromLonNoRot(pt.lon);
+						int locY = tb.getPixYFromLatNoRot(pt.lat);
+						if (locX >= 0 && locX <= tb.getPixWidth() && locY >= 0 && locY <= tb.getPixHeight()) {
+							if (!(inMovePointMode && i == selectedPointPos)) {
+								canvas.drawBitmap(pointIcon, locX - marginPointIconX, locY - marginPointIconY, bitmapPaint);
 							}
 						}
 					}
