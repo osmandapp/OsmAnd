@@ -18,7 +18,7 @@ public class AddPointCommand extends MeasurementModeCommand {
 	public AddPointCommand(MeasurementToolLayer measurementLayer, boolean center) {
 		this.measurementLayer = measurementLayer;
 		this.center = center;
-		position = measurementLayer.getPointsCount();
+		position = measurementLayer.getMeasurementPoints().size();
 	}
 
 	@Override

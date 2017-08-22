@@ -127,10 +127,6 @@ public class MeasurementToolLayer extends OsmandMapLayer implements ContextMenuL
 		this.inMeasurementMode = inMeasurementMode;
 	}
 
-	public int getPointsCount() {
-		return measurementPoints.size();
-	}
-
 	public List<WptPt> getMeasurementPoints() {
 		return measurementPoints;
 	}

@@ -247,7 +247,7 @@ public class MeasurementToolFragment extends Fragment {
 			@Override
 			public void onClick(View view) {
 				if (!pointsListOpened
-						&& measurementLayer.getPointsCount() > 0
+						&& measurementPoints.size() > 0
 						&& !measurementLayer.isInMovePointMode()
 						&& !measurementLayer.isInAddPointAfterMode()
 						&& !measurementLayer.isInAddPointBeforeMode()) {
@@ -314,7 +314,7 @@ public class MeasurementToolFragment extends Fragment {
 					disable(undoBtn);
 				}
 				hidePointsListIfNoPoints();
-				if (measurementLayer.getPointsCount() > 0) {
+				if (measurementPoints.size() > 0) {
 					enable(upDownBtn);
 				}
 				adapter.notifyDataSetChanged();
@@ -334,7 +334,7 @@ public class MeasurementToolFragment extends Fragment {
 					disable(redoBtn);
 				}
 				hidePointsListIfNoPoints();
-				if (measurementLayer.getPointsCount() > 0) {
+				if (measurementPoints.size() > 0) {
 					enable(upDownBtn);
 				}
 				adapter.notifyDataSetChanged();
@@ -393,7 +393,7 @@ public class MeasurementToolFragment extends Fragment {
 		if (!commandManager.canRedo()) {
 			disable(redoBtn);
 		}
-		if (measurementLayer.getPointsCount() < 1) {
+		if (measurementPoints.size() < 1) {
 			disable(upDownBtn);
 		}
 
@@ -424,7 +424,7 @@ public class MeasurementToolFragment extends Fragment {
 		toolBarController.setOnSaveViewClickListener(new View.OnClickListener() {
 			@Override
 			public void onClick(View v) {
-				if (measurementLayer.getPointsCount() > 0) {
+				if (measurementPoints.size() > 0) {
 					addToGpx(mapActivity);
 				} else {
 					Toast.makeText(mapActivity, getString(R.string.none_point_error), Toast.LENGTH_SHORT).show();
@@ -557,7 +557,7 @@ public class MeasurementToolFragment extends Fragment {
 			@Override
 			public void addToGpxOnClick() {
 				if (mapActivity != null && measurementLayer != null) {
-					if (measurementLayer.getPointsCount() > 0) {
+					if (measurementPoints.size() > 0) {
 						addToGpx(mapActivity);
 					} else {
 						Toast.makeText(mapActivity, getString(R.string.none_point_error), Toast.LENGTH_SHORT).show();
@@ -568,7 +568,7 @@ public class MeasurementToolFragment extends Fragment {
 			@Override
 			public void saveAsNewTrackOnClick() {
 				if (mapActivity != null && measurementLayer != null) {
-					if (measurementLayer.getPointsCount() > 0) {
+					if (measurementPoints.size() > 0) {
 						openSaveAsNewTrackMenu(mapActivity);
 					} else {
 						Toast.makeText(mapActivity, getString(R.string.none_point_error), Toast.LENGTH_SHORT).show();
@@ -579,7 +579,7 @@ public class MeasurementToolFragment extends Fragment {
 			@Override
 			public void addToTheTrackOnClick() {
 				if (mapActivity != null && measurementLayer != null) {
-					if (measurementLayer.getPointsCount() > 0) {
+					if (measurementPoints.size() > 0) {
 						showAddToTrackDialog(mapActivity);
 					} else {
 						Toast.makeText(mapActivity, getString(R.string.none_point_error), Toast.LENGTH_SHORT).show();
@@ -772,11 +772,9 @@ public class MeasurementToolFragment extends Fragment {
 				snapToRoadProgressBar = (ProgressBar) mainView.findViewById(R.id.snap_to_road_progress_bar);
 				snapToRoadProgressBar.setMinimumHeight(0);
 
-				if (measurementPoints.size() > 1) {
-					if (!enableAfterRotating) {
-						snapToRoadProgressBar.setProgress(0);
-						doSnapToRoad();
-					}
+				if (!enableAfterRotating) {
+					snapToRoadProgressBar.setProgress(0);
+					doSnapToRoad();
 				}
 
 				mapActivity.refreshMap();
@@ -786,7 +784,7 @@ public class MeasurementToolFragment extends Fragment {
 
 	private void doSnapToRoad() {
 		MapActivity mapActivity = getMapActivity();
-		if (mapActivity != null) {
+		if (mapActivity != null && measurementPoints.size() > 1) {
 			Location start = new Location("");
 			WptPt first = measurementPoints.get(0);
 			start.setLatitude(first.getLatitude());
@@ -845,6 +843,8 @@ public class MeasurementToolFragment extends Fragment {
 			};
 
 			mapActivity.getMyApplication().getRoutingHelper().recalculateSnapToRoad(start, end, intermediates, params);
+		} else {
+			calculationProgress.isCancelled = true;
 		}
 	}
 
@@ -1181,7 +1181,7 @@ public class MeasurementToolFragment extends Fragment {
 	private void hidePointsListIfNoPoints() {
 		MeasurementToolLayer measurementLayer = getMeasurementLayer();
 		if (measurementLayer != null) {
-			if (measurementLayer.getPointsCount() < 1) {
+			if (measurementPoints.size() < 1) {
 				disable(upDownBtn);
 				if (pointsListOpened) {
 					hidePointsList();
@@ -1445,7 +1445,7 @@ public class MeasurementToolFragment extends Fragment {
 		MeasurementToolLayer measurementLayer = getMeasurementLayer();
 		if (measurementLayer != null) {
 			distanceTv.setText(measurementLayer.getDistanceSt() + ",");
-			pointsTv.setText((portrait ? pointsSt + ": " : "") + measurementLayer.getPointsCount());
+			pointsTv.setText((portrait ? pointsSt + ": " : "") + measurementPoints.size());
 		}
 	}
 
@@ -1547,7 +1547,7 @@ public class MeasurementToolFragment extends Fragment {
 				hidePointsList();
 				return;
 			}
-			if (measurementLayer.getPointsCount() < 1 || saved) {
+			if (measurementPoints.size() < 1 || saved) {
 				dismiss(mapActivity);
 				return;
 			}
