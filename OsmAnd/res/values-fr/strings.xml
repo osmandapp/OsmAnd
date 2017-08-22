@@ -2879,4 +2879,27 @@ Fonctionnalités principales :
     <string name="save_gpx_waypoint">Enregistrer le point GPX</string>
     <string name="live_monitoring_max_interval_to_send">Durée de mémorisation pour le suivi en ligne</string>
     <string name="live_monitoring_max_interval_to_send_desrc">Indiquez une durée de mémorisation des positions en l\'absence de connexion</string>
-    </resources>
+    <string name="measurement_tool_altitude">Altitude : %1$s</string>
+    <string name="measurement_tool_speed">Vitesse : %1$s</string>
+    <string name="line">Ligne</string>
+    <string name="save_as_route_point">Enregistrer comme point de passage</string>
+    <string name="save_as_line">Enregistrer comme ligne</string>
+    <string name="route_point">Point de passage</string>
+    <string name="edit_line">Modifier la ligne</string>
+    <string name="add_point_before">Ajouter un point avant</string>
+    <string name="add_point_after">Ajouter un point après</string>
+    <string name="shared_string_options">Options</string>
+    <string name="measurement_tool_snap_to_road_descr">OsmAnd ajoutera des points supplémentaires adaptés au type de navigation.</string>
+    <string name="measurement_tool_save_as_new_track_descr">Vous pouvez enregistrer les points soit comme points de passage soit comme ligne.</string>
+    <string name="choose_navigation_type">Sélectionnez le type de navigation</string>
+    <string name="add_route_points">Ajouter des points à la route</string>
+    <string name="add_line">Ajouter une ligne</string>
+    <string name="empty_state_my_tracks">Ajouter et enregistrer la trace</string>
+    <string name="empty_state_my_tracks_desc">Enregistrer ou importer les traces à afficher</string>
+    <string name="empty_state_favourites">Ajouter des favoris</string>
+    <string name="empty_state_favourites_desc">Ajouter des favoris sur le carte ou importer les depuis un fichier</string>
+    <string name="import_track">Importer la trace</string>
+    <string name="import_track_desc">Le fichier %1$s ne contient aucune étape, l\'importer comme trace ?</string>
+    <string name="move_point">Déplacer le point</string>
+    <string name="add_segment_to_the_track">Ajouter à la trace</string>
+</resources>
