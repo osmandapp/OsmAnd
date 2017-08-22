@@ -228,7 +228,7 @@ S\'ocuparà una memòria de {1} MB
     <string name="search_position_undefined">Indefinida</string>
     
     <string name="context_menu_item_search">Cerca prop d\'aquí</string>
-    <string name="shared_string_save_as_gpx">Desa la ruta com una traça GPX</string>
+    <string name="shared_string_save_as_gpx">Desa com una nova traça</string>
     <string name="route_successfully_saved_at">La ruta s\'ha desat correctament com a «%1$s».</string>
     <string name="filename_input">Nom del fitxer: </string>
     <string name="shared_string_save">Desa</string>
@@ -2585,4 +2585,27 @@ Abasta l\'àrea: %1$s x %2$s</string>
     <string name="save_route_point">Desa el punt de ruta</string>
     <string name="waypoint_one">Fita 1</string>
     <string name="route_point_one">Punt de ruta 1</string>
+<string name="measurement_tool_altitude">Altitud: %1$s</string>
+    <string name="measurement_tool_speed">Velocitat: %1$s</string>
+    <string name="line">Línia</string>
+    <string name="save_as_route_point">Desa com un punt de la ruta</string>
+    <string name="save_as_line">Desa com a línia</string>
+    <string name="route_point">Punt de la ruta</string>
+    <string name="edit_line">Edita Línia</string>
+    <string name="add_point_before">Afegeix un punt abans de</string>
+    <string name="add_point_after">Afegeix un punt després de</string>
+    <string name="shared_string_options">Opcions</string>
+    <string name="measurement_tool_snap_to_road_descr">OsmAnd afegirà punts addicionals, en funció del tipus de navegació.</string>
+    <string name="measurement_tool_save_as_new_track_descr">Podeu desar punts, ja sigui com a punts de la ruta o com una línia.</string>
+    <string name="choose_navigation_type">Escolliu el tipus de navegació</string>
+    <string name="add_route_points">Afegeix punts de la ruta</string>
+    <string name="add_line">Afegeix una línia</string>
+    <string name="empty_state_my_tracks">Afegeix i enregistra traces</string>
+    <string name="empty_state_my_tracks_desc">Enregistra o importa traces per veure</string>
+    <string name="empty_state_favourites">Afegeix als preferits</string>
+    <string name="empty_state_favourites_desc">Afegeix preferits del mapa o importa\'ls del sistema de fitxers</string>
+    <string name="import_track">Importa traça</string>
+    <string name="import_track_desc">El fitxer %1$s no conté fites, voleu importar-lo com una traça?</string>
+    <string name="move_point">Mou punt</string>
+    <string name="add_segment_to_the_track">Afegeix a una traça</string>
 </resources>
