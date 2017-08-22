@@ -1131,7 +1131,7 @@ Miesca parkoŭkі і čas vіdać na paneli kіravańnia OsmAnd і na vіdžecie
 	<string name="select_search_position">Pačatak:</string>
 	<string name="context_menu_item_search">Šukać navokał</string>
 	
-	<string name="shared_string_save_as_gpx">Zachavać jak GPX śled</string>
+	<string name="shared_string_save_as_gpx">Zachavać jak novy slied</string>
 	<string name="route_successfully_saved_at">Maršrut paśpiachova zachavany jak \'%1$s\'.</string>
 	<string name="filename_input">Imia fajla:</string>
 	<string name="file_with_name_already_exist">Fajł z takoj nazvaj užo іsnuje.</string>
@@ -2783,4 +2783,27 @@ U vypadku, kali vy lubіcie OsmAnd і OSM і chočacie padtrymać jaho, heta іd
     <string name="save_route_point">Zachavać kropku maršrutu</string>
     <string name="waypoint_one">Kropka šliachu 1</string>
     <string name="route_point_one">Kropka maršrutu 1</string>
+<string name="measurement_tool_altitude">Vyšynia: %1$s</string>
+    <string name="measurement_tool_speed">Chutkasć: %1$s</string>
+    <string name="line">Linija</string>
+    <string name="save_as_route_point">Zachavać jak kropku maršrutu</string>
+    <string name="save_as_line">Zachavać jak liniju</string>
+    <string name="route_point">Kropka maršrutu</string>
+    <string name="edit_line">Redahavać liniju</string>
+    <string name="add_point_before">Dadać kropku pierad</string>
+    <string name="add_point_after">Dadać kropku paslia</string>
+    <string name="shared_string_options">Opcyi</string>
+    <string name="measurement_tool_snap_to_road_descr">OsmAnd dadasć dadatkovyja kropki ŭ zaliežnasci ad typu navihacyi.</string>
+    <string name="measurement_tool_save_as_new_track_descr">Vy možać zachavać kropki, jak kropki maršrutu ci jak liniju.</string>
+    <string name="choose_navigation_type">Vybrać typ navihacyi</string>
+    <string name="add_route_points">Dadać kropki maršrutu</string>
+    <string name="add_line">Dadać liniju</string>
+    <string name="empty_state_my_tracks">Dadact i zapisać sliady</string>
+    <string name="empty_state_my_tracks_desc">Zapisać ci impartavać sliady dlia prahliadu</string>
+    <string name="empty_state_favourites">Dadać u abranaje</string>
+    <string name="empty_state_favourites_desc">Dadać abranaje na mapie ci impartavać z fajlavaj sistemy</string>
+    <string name="import_track">Impartavać slied</string>
+    <string name="import_track_desc">Fajl %1$s nie zmiaščaje kropki šliachu, impartavać jak slied?</string>
+    <string name="move_point">Pieramiascić kropku</string>
+    <string name="add_segment_to_the_track">Dadać u slied</string>
 </resources>
