@@ -33,4 +33,9 @@ public class SnapToRoadCommand extends MeasurementModeCommand {
 		measurementLayer.getSnappedToRoadPoints().addAll(snappedPoints);
 		measurementLayer.refreshMap();
 	}
+
+	@Override
+	MeasurementCommandType getType() {
+		return MeasurementCommandType.SNAP_TO_ROAD;
+	}
 }

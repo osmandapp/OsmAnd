@@ -1,6 +1,9 @@
 package net.osmand.plus.measurementtool.command;
 
+import android.support.annotation.Nullable;
+
 import net.osmand.plus.measurementtool.MeasurementToolLayer;
+import net.osmand.plus.measurementtool.command.MeasurementModeCommand.MeasurementCommandType;
 
 import java.util.Deque;
 import java.util.LinkedList;
@@ -27,20 +30,26 @@ public class MeasurementCommandManager {
 		return false;
 	}
 
-	public void undo() {
+	@Nullable
+	public MeasurementCommandType undo() {
 		if (canUndo()) {
 			MeasurementModeCommand command = undoCommands.pop();
 			redoCommands.push(command);
 			command.undo();
+			return command.getType();
 		}
+		return null;
 	}
 
-	public void redo() {
+	@Nullable
+	public MeasurementCommandType redo() {
 		if (canRedo()) {
 			MeasurementModeCommand command = redoCommands.pop();
 			undoCommands.push(command);
 			command.redo();
+			return command.getType();
 		}
+		return null;
 	}
 
 	public void resetMeasurementLayer(MeasurementToolLayer layer) {

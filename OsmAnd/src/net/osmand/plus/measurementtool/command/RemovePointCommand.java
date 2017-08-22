@@ -32,4 +32,9 @@ public class RemovePointCommand extends MeasurementModeCommand {
 		measurementLayer.getMeasurementPoints().remove(position);
 		measurementLayer.refreshMap();
 	}
+
+	@Override
+	MeasurementCommandType getType() {
+		return MeasurementCommandType.REMOVE_POINT;
+	}
 }

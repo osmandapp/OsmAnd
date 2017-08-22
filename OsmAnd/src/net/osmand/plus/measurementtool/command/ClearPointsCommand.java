@@ -40,4 +40,9 @@ public class ClearPointsCommand extends MeasurementModeCommand {
 		measurementLayer.getSnappedToRoadPoints().clear();
 		measurementLayer.refreshMap();
 	}
+
+	@Override
+	MeasurementCommandType getType() {
+		return MeasurementCommandType.CLEAR_POINTS;
+	}
 }

@@ -44,4 +44,9 @@ public class AddPointCommand extends MeasurementModeCommand {
 		measurementLayer.refreshMap();
 		measurementLayer.moveMapToPoint(position);
 	}
+
+	@Override
+	MeasurementCommandType getType() {
+		return MeasurementCommandType.ADD_POINT;
+	}
 }

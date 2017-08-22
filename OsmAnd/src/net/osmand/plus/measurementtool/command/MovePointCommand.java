@@ -34,4 +34,9 @@ public class MovePointCommand extends MeasurementModeCommand {
 		measurementLayer.getMeasurementPoints().add(position, newPoint);
 		measurementLayer.refreshMap();
 	}
+
+	@Override
+	MeasurementCommandType getType() {
+		return MeasurementCommandType.MOVE_POINT;
+	}
 }

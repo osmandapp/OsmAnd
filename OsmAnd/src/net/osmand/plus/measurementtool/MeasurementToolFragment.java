@@ -62,6 +62,7 @@ import net.osmand.plus.measurementtool.adapter.MeasurementToolItemTouchHelperCal
 import net.osmand.plus.measurementtool.command.AddPointCommand;
 import net.osmand.plus.measurementtool.command.ClearPointsCommand;
 import net.osmand.plus.measurementtool.command.MeasurementCommandManager;
+import net.osmand.plus.measurementtool.command.MeasurementModeCommand.MeasurementCommandType;
 import net.osmand.plus.measurementtool.command.MovePointCommand;
 import net.osmand.plus.measurementtool.command.RemovePointCommand;
 import net.osmand.plus.measurementtool.command.ReorderPointCommand;
@@ -307,7 +308,10 @@ public class MeasurementToolFragment extends Fragment {
 		undoBtn.setOnClickListener(new View.OnClickListener() {
 			@Override
 			public void onClick(View view) {
-				commandManager.undo();
+				MeasurementCommandType type = commandManager.undo();
+				if (type != null && type != MeasurementCommandType.SNAP_TO_ROAD) {
+					recalculateSnapToRoadIfNedeed();
+				}
 				if (commandManager.canUndo()) {
 					enable(undoBtn);
 				} else {
@@ -328,6 +332,7 @@ public class MeasurementToolFragment extends Fragment {
 			@Override
 			public void onClick(View view) {
 				commandManager.redo();
+				recalculateSnapToRoadIfNedeed();
 				if (commandManager.canRedo()) {
 					enable(redoBtn);
 				} else {
@@ -478,6 +483,15 @@ public class MeasurementToolFragment extends Fragment {
 		return view;
 	}
 
+	private void recalculateSnapToRoadIfNedeed() {
+		if (calculationProgress != null) {
+			calculationProgress.isCancelled = true;
+		}
+		if (isInSnapToRoadMode) {
+			doSnapToRoad();
+		}
+	}
+
 	@Override
 	public void onDestroyView() {
 		super.onDestroyView();
@@ -590,6 +604,9 @@ public class MeasurementToolFragment extends Fragment {
 			@Override
 			public void clearAllOnClick() {
 				commandManager.execute(new ClearPointsCommand(measurementLayer));
+				if (calculationProgress != null) {
+					calculationProgress.isCancelled = true;
+				}
 				if (pointsListOpened) {
 					hidePointsList();
 				}
@@ -617,13 +634,7 @@ public class MeasurementToolFragment extends Fragment {
 			public void deleteOnClick() {
 				clearSelection();
 				if (measurementLayer != null) {
-					int position = measurementLayer.getSelectedPointPos();
-					commandManager.execute(new RemovePointCommand(measurementLayer, position));
-					adapter.notifyDataSetChanged();
-					disable(redoBtn);
-					updateText();
-					saved = false;
-					hidePointsListIfNoPoints();
+					removePoint(measurementLayer, measurementLayer.getSelectedPointPos());
 					measurementLayer.clearSelection();
 				}
 			}
@@ -674,6 +685,16 @@ public class MeasurementToolFragment extends Fragment {
 		};
 	}
 
+	private void removePoint(MeasurementToolLayer layer, int position) {
+		commandManager.execute(new RemovePointCommand(layer, position));
+		recalculateSnapToRoadIfNedeed();
+		adapter.notifyDataSetChanged();
+		disable(redoBtn);
+		updateText();
+		saved = false;
+		hidePointsListIfNoPoints();
+	}
+
 	private SaveAsNewTrackFragmentListener createSaveAsNewTrackFragmentListener() {
 		return new SaveAsNewTrackFragmentListener() {
 			@Override
@@ -699,12 +720,7 @@ public class MeasurementToolFragment extends Fragment {
 			@Override
 			public void onRemoveClick(int position) {
 				if (measurementLayer != null) {
-					commandManager.execute(new RemovePointCommand(measurementLayer, position));
-					adapter.notifyDataSetChanged();
-					disable(redoBtn);
-					updateText();
-					saved = false;
-					hidePointsListIfNoPoints();
+					removePoint(measurementLayer, position);
 				}
 			}
 
@@ -739,6 +755,7 @@ public class MeasurementToolFragment extends Fragment {
 					toPosition = holder.getAdapterPosition();
 					if (toPosition >= 0 && fromPosition >= 0 && toPosition != fromPosition) {
 						commandManager.execute(new ReorderPointCommand(measurementLayer, fromPosition, toPosition));
+						recalculateSnapToRoadIfNedeed();
 						adapter.notifyDataSetChanged();
 						disable(redoBtn);
 						updateText();
@@ -807,7 +824,6 @@ public class MeasurementToolFragment extends Fragment {
 			params.calculationProgressCallback = new RoutingHelper.RouteCalculationProgressCallback() {
 				@Override
 				public void updateProgress(int progress) {
-					snapToRoadProgressBar.setVisibility(View.VISIBLE);
 					snapToRoadProgressBar.setProgress(progress);
 				}
 
@@ -841,9 +857,10 @@ public class MeasurementToolFragment extends Fragment {
 					}
 				}
 			};
+			snapToRoadProgressBar.setVisibility(View.VISIBLE);
 
 			mapActivity.getMyApplication().getRoutingHelper().recalculateSnapToRoad(start, end, intermediates, params);
-		} else {
+		} else if (calculationProgress != null) {
 			calculationProgress.isCancelled = true;
 		}
 	}
@@ -853,7 +870,9 @@ public class MeasurementToolFragment extends Fragment {
 		toolBarController.setTitle(previousToolBarTitle);
 		isInSnapToRoadMode = false;
 		mainIcon.setImageDrawable(getActiveIcon(R.drawable.ic_action_ruler));
-		calculationProgress.isCancelled = true;
+		if (calculationProgress != null) {
+			calculationProgress.isCancelled = true;
+		}
 		MapActivity mapActivity = getMapActivity();
 		if (mapActivity != null) {
 			mapActivity.findViewById(R.id.snap_to_road_image_button).setVisibility(View.GONE);
@@ -928,11 +947,7 @@ public class MeasurementToolFragment extends Fragment {
 			WptPt oldPoint = measurementLayer.getSelectedCachedPoint();
 			int position = measurementLayer.getSelectedPointPos();
 			commandManager.execute(new MovePointCommand(measurementLayer, oldPoint, newPoint, position));
-			enable(undoBtn, upDownBtn);
-			disable(redoBtn);
-			updateText();
-			adapter.notifyDataSetChanged();
-			saved = false;
+			doAddOrMovePointCommonStuff();
 			measurementLayer.exitMovePointMode();
 			measurementLayer.clearSelection();
 			measurementLayer.refreshMap();
@@ -1112,11 +1127,7 @@ public class MeasurementToolFragment extends Fragment {
 		MeasurementToolLayer measurementLayer = getMeasurementLayer();
 		if (measurementLayer != null) {
 			commandManager.execute(new AddPointCommand(measurementLayer, false));
-			enable(undoBtn, upDownBtn);
-			disable(redoBtn);
-			updateText();
-			adapter.notifyDataSetChanged();
-			saved = false;
+			doAddOrMovePointCommonStuff();
 		}
 	}
 
@@ -1124,11 +1135,7 @@ public class MeasurementToolFragment extends Fragment {
 		MeasurementToolLayer measurementLayer = getMeasurementLayer();
 		if (measurementLayer != null) {
 			commandManager.execute(new AddPointCommand(measurementLayer, true));
-			enable(undoBtn, upDownBtn);
-			disable(redoBtn);
-			updateText();
-			adapter.notifyDataSetChanged();
-			saved = false;
+			doAddOrMovePointCommonStuff();
 		}
 	}
 
@@ -1137,13 +1144,18 @@ public class MeasurementToolFragment extends Fragment {
 		MeasurementToolLayer measurementLayer = getMeasurementLayer();
 		if (measurementLayer != null) {
 			added = commandManager.execute(new AddPointCommand(measurementLayer, position));
-			enable(undoBtn, upDownBtn);
-			disable(redoBtn);
-			updateText();
-			adapter.notifyDataSetChanged();
-			saved = false;
+			doAddOrMovePointCommonStuff();
 		}
 		return added;
+	}
+
+	private void doAddOrMovePointCommonStuff() {
+		recalculateSnapToRoadIfNedeed();
+		enable(undoBtn, upDownBtn);
+		disable(redoBtn);
+		updateText();
+		adapter.notifyDataSetChanged();
+		saved = false;
 	}
 
 	private void showPointsList() {

@@ -34,4 +34,9 @@ public class ReorderPointCommand extends MeasurementModeCommand {
 		Collections.swap(measurementLayer.getMeasurementPoints(), from, to);
 		measurementLayer.refreshMap();
 	}
+
+	@Override
+	MeasurementCommandType getType() {
+		return MeasurementCommandType.REORDER_POINT;
+	}
 }
