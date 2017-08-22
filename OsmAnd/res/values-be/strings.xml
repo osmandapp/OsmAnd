@@ -1730,7 +1730,7 @@
 	<string name="shared_string_clear">Ачысьціць</string>
 	
 	<string name="shared_string_save">Захаваць</string>
-	<string name="shared_string_save_as_gpx">Захаваць як GPX сьлед</string>
+	<string name="shared_string_save_as_gpx">Захаваць як новы след</string>
 	<string name="shared_string_rename">Пераназваць</string>
 	<string name="shared_string_delete">Выдаліць</string>
 	<string name="shared_string_delete_all">Выдаліць усё</string>
@@ -2832,4 +2832,27 @@
     <string name="save_route_point">Захаваць кропку маршруту</string>
     <string name="waypoint_one">Кропка шляху 1</string>
     <string name="route_point_one">Кропка маршруту 1</string>
+<string name="measurement_tool_altitude">Вышыня: %1$s</string>
+    <string name="measurement_tool_speed">Хуткасць: %1$s</string>
+    <string name="line">Лінія</string>
+    <string name="save_as_route_point">Захаваць як кропку маршруту</string>
+    <string name="save_as_line">Захаваць як лінію</string>
+    <string name="route_point">Кропка маршруту</string>
+    <string name="edit_line">Рэдагаваць лінію</string>
+    <string name="add_point_before">Дадаць кропку перад</string>
+    <string name="add_point_after">Дадаць кропку пасля</string>
+    <string name="shared_string_options">Опцыі</string>
+    <string name="measurement_tool_snap_to_road_descr">OsmAnd дадасць дадатковыя кропкі ў залежнасці ад тыпу навігацыі.</string>
+    <string name="measurement_tool_save_as_new_track_descr">Вы можаць захаваць кропкі, як кропкі маршруту ці як лінію.</string>
+    <string name="choose_navigation_type">Выбраць тып навігацыі</string>
+    <string name="add_route_points">Дадаць кропкі маршруту</string>
+    <string name="add_line">Дадаць лінію</string>
+    <string name="empty_state_my_tracks">Дадацт і запісаць сляды</string>
+    <string name="empty_state_my_tracks_desc">Запісаць ці імпартаваць сляды для прагляду</string>
+    <string name="empty_state_favourites">Дадаць у абранае</string>
+    <string name="empty_state_favourites_desc">Дадаць абранае на мапе ці імпартаваць з файлавай сістэмы</string>
+    <string name="import_track">Імпартаваць след</string>
+    <string name="import_track_desc">Файл %1$s не змяшчае кропкі шляху, імпартаваць як след?</string>
+    <string name="move_point">Перамясціць кропку</string>
+    <string name="add_segment_to_the_track">Дадаць у след</string>
 </resources>
