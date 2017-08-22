@@ -565,6 +565,7 @@ public class GpxImportHelper {
 				if (p.desc != null) {
 					fp.setDescription(p.desc);
 				}
+				fp.setColor(p.getColor(0));
 				favourites.add(fp);
 			}
 		}
