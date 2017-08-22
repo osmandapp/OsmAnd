@@ -21,6 +21,7 @@ import net.osmand.plus.GPXUtilities.GPXFile;
 import net.osmand.plus.OsmandApplication;
 import net.osmand.plus.R;
 import net.osmand.plus.activities.MapActivity;
+import net.osmand.plus.myplaces.FavoritesActivity;
 import net.osmand.plus.views.OsmandMapTileView;
 
 import java.io.ByteArrayInputStream;
@@ -88,6 +89,21 @@ public class GpxImportHelper {
 		return false;
 	}
 
+	public void handleFavouritesImport(Uri uri) {
+		String scheme = uri.getScheme();
+		boolean isFileIntent = "file".equals(scheme);
+		boolean isContentIntent = "content".equals(scheme);
+		boolean isOsmandSubdir = isSubDirectory(app.getAppPath(IndexConstants.GPX_INDEX_DIR), new File(uri.getPath()));
+		final boolean saveFile = !isFileIntent || !isOsmandSubdir;
+		String fileName = "";
+		if (isFileIntent) {
+			fileName = new File(uri.getPath()).getName();
+		} else if (isContentIntent) {
+			fileName = getNameFromContentUri(uri);
+		}
+		handleFavouritesImport(uri, fileName, saveFile, false, true);
+	}
+
 	public void handleFileImport(final Uri intentUri, final String fileName, final boolean useImportDir) {
 		final boolean isFileIntent = "file".equals(intentUri.getScheme());
 		final boolean isOsmandSubdir = isSubDirectory(app.getAppPath(IndexConstants.GPX_INDEX_DIR), new File(intentUri.getPath()));
@@ -99,7 +115,7 @@ public class GpxImportHelper {
 		} else if (fileName != null && fileName.endsWith(KMZ_SUFFIX)) {
 			handleKmzImport(intentUri, fileName, saveFile, useImportDir);
 		} else {
-			handleFavouritesImport(intentUri, fileName, saveFile, useImportDir);
+			handleFavouritesImport(intentUri, fileName, saveFile, useImportDir, false);
 		}
 	}
 
@@ -155,12 +171,12 @@ public class GpxImportHelper {
 			@Override
 			protected void onPostExecute(GPXFile result) {
 				progress.dismiss();
-				handleResult(result, fileName, save, useImportDir);
+				handleResult(result, fileName, save, useImportDir, false);
 			}
 		}.execute();
 	}
 
-	private void handleFavouritesImport(final Uri gpxFile, final String fileName, final boolean save, final boolean useImportDir) {
+	private void handleFavouritesImport(final Uri gpxFile, final String fileName, final boolean save, final boolean useImportDir, final boolean forceImportFavourites) {
 		new AsyncTask<Void, Void, GPXFile>() {
 			ProgressDialog progress = null;
 
@@ -193,12 +209,12 @@ public class GpxImportHelper {
 			@Override
 			protected void onPostExecute(final GPXFile result) {
 				progress.dismiss();
-				importFavourites(result, fileName, save, useImportDir);
+				importFavourites(result, fileName, save, useImportDir, forceImportFavourites);
 			}
 		}.execute();
 	}
 
-	private void importFavoritesImpl(final GPXFile gpxFile) {
+	private void importFavoritesImpl(final GPXFile gpxFile, final String fileName, final boolean forceImportFavourites) {
 		new AsyncTask<Void, Void, GPXFile>() {
 			ProgressDialog progress = null;
 
@@ -209,7 +225,7 @@ public class GpxImportHelper {
 
 			@Override
 			protected GPXFile doInBackground(Void... nothing) {
-				final List<FavouritePoint> favourites = asFavourites(gpxFile.points);
+				final List<FavouritePoint> favourites = asFavourites(gpxFile.points, fileName, forceImportFavourites);
 				final FavouritesDbHelper favoritesHelper = app.getFavorites();
 				for (final FavouritePoint favourite : favourites) {
 					favoritesHelper.deleteFavourite(favourite, false);
@@ -225,6 +241,8 @@ public class GpxImportHelper {
 				progress.dismiss();
 				Toast.makeText(activity, R.string.fav_imported_sucessfully, Toast.LENGTH_LONG).show();
 				final Intent newIntent = new Intent(activity, app.getAppCustomization().getFavoritesActivity());
+				newIntent.addFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP);
+				newIntent.putExtra(FavoritesActivity.OPEN_FAVOURITES_TAB, true);
 				activity.startActivity(newIntent);
 			}
 		}.execute();
@@ -277,7 +295,7 @@ public class GpxImportHelper {
 			@Override
 			protected void onPostExecute(GPXFile result) {
 				progress.dismiss();
-				handleResult(result, name, save, useImportDir);
+				handleResult(result, name, save, useImportDir, false);
 			}
 
 		}.execute();
@@ -322,13 +340,13 @@ public class GpxImportHelper {
 			@Override
 			protected void onPostExecute(GPXFile result) {
 				progress.dismiss();
-				handleResult(result, name, save, useImportDir);
+				handleResult(result, name, save, useImportDir, false);
 			}
 		}.execute();
 	}
 
 	private void handleResult(final GPXFile result, final String name, final boolean save,
-							  final boolean useImportDir) {
+							  final boolean useImportDir, boolean forceImportFavourites) {
 		if (result != null) {
 			if (result.warning != null) {
 				Toast.makeText(activity, result.warning, Toast.LENGTH_LONG).show();
@@ -371,6 +389,12 @@ public class GpxImportHelper {
 						}
 					})
 					.show();
+		}
+		if (forceImportFavourites) {
+			final Intent newIntent = new Intent(activity, app.getAppCustomization().getFavoritesActivity());
+			newIntent.addFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP);
+			newIntent.putExtra(FavoritesActivity.OPEN_MY_PLACES_TAB, true);
+			activity.startActivity(newIntent);
 		}
 	}
 
@@ -467,38 +491,76 @@ public class GpxImportHelper {
 	}
 
 	private void importFavourites(final GPXFile gpxFile, final String fileName, final boolean save,
-								  final boolean useImportDir) {
+								  final boolean useImportDir, final boolean forceImportFavourites) {
 		if (gpxFile == null || gpxFile.points == null || gpxFile.points.size() == 0) {
-			handleResult(gpxFile, fileName, save, useImportDir);
-			return;
-		}
-		final DialogInterface.OnClickListener importFavouritesListener = new DialogInterface.OnClickListener() {
-			@Override
-			public void onClick(DialogInterface dialog, int which) {
-				switch (which) {
-					case DialogInterface.BUTTON_POSITIVE:
-						importFavoritesImpl(gpxFile);
-						break;
-					case DialogInterface.BUTTON_NEGATIVE:
-						handleResult(gpxFile, fileName, save, useImportDir);
-						break;
-				}
-			}
-		};
+			if (forceImportFavourites) {
+				final DialogInterface.OnClickListener importAsTrackListener = new DialogInterface.OnClickListener() {
+					@Override
+					public void onClick(DialogInterface dialog, int which) {
+						switch (which) {
+							case DialogInterface.BUTTON_POSITIVE:
+								handleResult(gpxFile, fileName, save, useImportDir, true);
+								break;
+							case DialogInterface.BUTTON_NEGATIVE:
+								dialog.dismiss();
+								break;
+						}
+					}
+				};
 
-		new AlertDialog.Builder(activity)
-				.setTitle(R.string.shared_string_import2osmand)
-				.setMessage(R.string.import_file_favourites)
-				.setPositiveButton(R.string.shared_string_import, importFavouritesListener)
-				.setNegativeButton(R.string.shared_string_save, importFavouritesListener)
-				.show();
+				new AlertDialog.Builder(activity)
+						.setTitle(R.string.import_track)
+						.setMessage(activity.getString(R.string.import_track_desc, fileName))
+						.setPositiveButton(R.string.shared_string_import, importAsTrackListener)
+						.setNegativeButton(R.string.shared_string_cancel, importAsTrackListener)
+						.show();
+				return;
+			} else {
+				handleResult(gpxFile, fileName, save, useImportDir, false);
+				return;
+			}
+		}
+
+		if (forceImportFavourites) {
+			importFavoritesImpl(gpxFile, fileName, true);
+		} else {
+			final DialogInterface.OnClickListener importFavouritesListener = new DialogInterface.OnClickListener() {
+				@Override
+				public void onClick(DialogInterface dialog, int which) {
+					switch (which) {
+						case DialogInterface.BUTTON_POSITIVE:
+							importFavoritesImpl(gpxFile, fileName, false);
+							break;
+						case DialogInterface.BUTTON_NEGATIVE:
+							handleResult(gpxFile, fileName, save, useImportDir, false);
+							break;
+					}
+				}
+			};
+
+			new AlertDialog.Builder(activity)
+					.setTitle(R.string.shared_string_import2osmand)
+					.setMessage(R.string.import_file_favourites)
+					.setPositiveButton(R.string.shared_string_import, importFavouritesListener)
+					.setNegativeButton(R.string.shared_string_save, importFavouritesListener)
+					.show();
+		}
 	}
 
-	private List<FavouritePoint> asFavourites(final List<GPXUtilities.WptPt> wptPts) {
+	private List<FavouritePoint> asFavourites(final List<GPXUtilities.WptPt> wptPts, String fileName, boolean forceImportFavourites) {
 		final List<FavouritePoint> favourites = new ArrayList<>();
 		for (GPXUtilities.WptPt p : wptPts) {
 			if (p.name != null) {
-				final String fpCat = (p.category != null) ? p.category : "";
+				final String fpCat;
+				if (p.category == null) {
+					if (forceImportFavourites) {
+						fpCat = fileName;
+					} else {
+						fpCat = "";
+					}
+				} else {
+					fpCat = p.category;
+				}
 				final FavouritePoint fp = new FavouritePoint(p.lat, p.lon, p.name, fpCat);
 				if (p.desc != null) {
 					fp.setDescription(p.desc);

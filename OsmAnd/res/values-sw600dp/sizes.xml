@@ -2,4 +2,6 @@
 <resources>
     <dimen name="splash_screen_logo_top">300dp</dimen>
     <dimen name="splash_screen_text_bottom">200dp</dimen>
+
+    <dimen name="measurement_tool_select_radius">48dp</dimen>
 </resources>

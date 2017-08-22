@@ -8,6 +8,7 @@ import android.widget.TextView;
 
 import net.osmand.data.LatLon;
 import net.osmand.data.PointDescription;
+import net.osmand.data.QuadRect;
 import net.osmand.data.RotatedTileBox;
 import net.osmand.plus.GPXUtilities.GPXFile;
 import net.osmand.plus.IconsCache;
@@ -67,6 +68,7 @@ public class AddGpxPointBottomSheetHelper implements OnDismissListener {
 			public void onClick(View v) {
 				hide();
 				contextMenuLayer.cancelAddGpxPoint();
+				openTrackActivity();
 			}
 		});
 	}
@@ -129,6 +131,14 @@ public class AddGpxPointBottomSheetHelper implements OnDismissListener {
 
 	@Override
 	public void onDismiss() {
+		MapContextMenu contextMenu = mapActivity.getContextMenu();
+		if (contextMenu.isVisible() && contextMenu.isClosable()) {
+			contextMenu.close();
+		}
+		openTrackActivity();
+	}
+
+	private void openTrackActivity() {
 		Intent newIntent = new Intent(mapActivity, mapActivity.getMyApplication().getAppCustomization().getTrackActivity());
 		newIntent.putExtra(TrackActivity.TRACK_FILE_NAME, newGpxPoint.getGpx().path);
 		newIntent.putExtra(TrackActivity.OPEN_POINTS_TAB, true);
@@ -139,10 +149,12 @@ public class AddGpxPointBottomSheetHelper implements OnDismissListener {
 	public static class NewGpxPoint {
 		private PointDescription pointDescription;
 		private GPXFile gpx;
+		private QuadRect rect;
 
-		public NewGpxPoint(GPXFile gpx, PointDescription pointDescription) {
+		public NewGpxPoint(GPXFile gpx, PointDescription pointDescription, QuadRect rect) {
 			this.gpx = gpx;
 			this.pointDescription = pointDescription;
+			this.rect = rect;
 		}
 
 		public GPXFile getGpx() {
@@ -151,6 +163,10 @@ public class AddGpxPointBottomSheetHelper implements OnDismissListener {
 
 		public PointDescription getPointDescription() {
 			return pointDescription;
+		}
+
+		public QuadRect getRect() {
+			return rect;
 		}
 	}
 }
