@@ -154,7 +154,7 @@ public class MeasurementEditingContext {
 					before.points.addAll(pts);
 				} else {
 					if (inSnapToRoadMode) {
-						snapToRoadPairsToCalculate.add(pair);
+						scheduleRouteCalculateIfNotEmpty(progressBar);
 					}
 					before.points.add(pair.first);
 					before.points.add(pair.second);
@@ -188,7 +188,10 @@ public class MeasurementEditingContext {
 			return;
 		}
 		for (int i = 0; i < measurementPoints.size() - 1; i++) {
-			snapToRoadPairsToCalculate.add(new Pair<>(measurementPoints.get(i), measurementPoints.get(i + 1)));
+			Pair<WptPt, WptPt> pair = new Pair<>(measurementPoints.get(i), measurementPoints.get(i + 1));
+			if (snappedToRoadPoints.get(pair) == null && !snapToRoadPairsToCalculate.contains(pair)) {
+				snapToRoadPairsToCalculate.add(pair);
+			}
 		}
 		inSnapToRoadMode = true;
 		this.progressBar = progressBar;
