@@ -65,6 +65,9 @@ public class BinaryMapDataObject {
 	}
 	
 	public Map<Integer, String> getOrderedObjectNames() {
+		if (namesOrder == null) {
+			return null;
+		}
 		LinkedHashMap<Integer, String> lm = new LinkedHashMap<Integer, String> ();
 		for (int i = 0; i < namesOrder.size(); i++) {
 			int nm = namesOrder.get(i);
@@ -240,14 +243,18 @@ public class BinaryMapDataObject {
 				}
 			}
 			if(equals) {
-				// here we now that name indexes are equal & it is enough to check the value sets
+				// here we know that name indexes are equal & it is enough to check the value sets
 				if(objectNames == null || thatObj.objectNames == null) {
 					equals = objectNames == thatObj.objectNames; 
 				} else if(objectNames.size() != thatObj.objectNames.size()){
 					equals = false;
 				} else {
-					TreeSet<String> st = new TreeSet<String>(Arrays.asList(objectNames.values()));
-					TreeSet<String> ot = new TreeSet<String>(Arrays.asList(thatObj.objectNames.values()));
+					Object[] thisNames = objectNames.values();
+					Object[] thatNames = thatObj.objectNames.values();
+					String[] thisStrings = Arrays.copyOf(thisNames, thisNames.length, String[].class);
+					String[] thatStrings = Arrays.copyOf(thatNames, thatNames.length, String[].class);
+					TreeSet<String> st = new TreeSet<String>(Arrays.asList(thisStrings));
+					TreeSet<String> ot = new TreeSet<String>(Arrays.asList(thatStrings));
 					equals = st.equals(ot);
 				}
 			}
