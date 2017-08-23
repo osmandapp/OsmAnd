@@ -2882,4 +2882,5 @@ Copertura e qualità approssimativamente:
     <string name="add_point_before">Aggiungi un punto prima</string>
     <string name="add_point_after">Aggiungi un punto dopo</string>
     <string name="shared_string_options">Opzioni</string>
+    <string name="measurement_tool_snap_to_road_descr">OsmAnd aggiugerà dei punti, in base al tipo di navigazione.</string>
     </resources>
