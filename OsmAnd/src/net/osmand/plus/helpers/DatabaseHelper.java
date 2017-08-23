@@ -23,10 +23,10 @@ public class DatabaseHelper {
     private OsmandApplication app;
 
     public static class HistoryDownloadEntry {
-        long count;
+    	int count;
         String name;
 
-        public HistoryDownloadEntry(String name, long count){
+        public HistoryDownloadEntry(String name, int count){
             this.count = count;
             this.name = name;
 
@@ -36,7 +36,7 @@ public class DatabaseHelper {
             return name;
         }
 
-        public long getCount() {
+        public int getCount() {
             return count;
         }
     }
