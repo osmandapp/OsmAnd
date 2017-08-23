@@ -757,7 +757,7 @@
 	<string name="select_search_position">المنطلق:</string>
 	<string name="context_menu_item_search">بحث بالقرب من هنا</string>
 	
-	<string name="shared_string_save_as_gpx">حفظ الطريق كمسار GPX</string>
+	<string name="shared_string_save_as_gpx">حفظ كمسار جديد</string>
 	<string name="route_successfully_saved_at">تم حفظ المسار بنجاح ك \'%1$s\'.</string>
 	<string name="filename_input">اسم الملف:</string>
 	<string name="file_with_name_already_exist">يوجد ملف بنفس الاسم موجود مسبقا.</string>
@@ -2735,4 +2735,27 @@
     <string name="save_route_point">حفظ نقطة مسار</string>
     <string name="waypoint_one">إحداثية 1</string>
     <string name="route_point_one">نقطة المسار 1</string>
+<string name="measurement_tool_altitude">الارتفاع: %1$s</string>
+    <string name="measurement_tool_speed">السرعة: %1$s</string>
+    <string name="line">خط</string>
+    <string name="save_as_route_point">حفظ كنقطة مسار</string>
+    <string name="save_as_line">حفظ كخط</string>
+    <string name="route_point">نقطة مسار</string>
+    <string name="edit_line">تعديل خط</string>
+    <string name="add_point_before">إضافة نقطة قبل</string>
+    <string name="add_point_after">إضافة نقطة بعد</string>
+    <string name="shared_string_options">خيارات</string>
+    <string name="measurement_tool_snap_to_road_descr">التطبيق سيضيف نقاط إضافية، اعتماداً على نوع الملاحة.</string>
+    <string name="measurement_tool_save_as_new_track_descr">يمكنك حفظ النقاط كنقاط مسار أو كخط.</string>
+    <string name="choose_navigation_type">اختر نوع الملاحة</string>
+    <string name="add_route_points">إضافة نقاط مسار</string>
+    <string name="add_line">إضافة خط</string>
+    <string name="empty_state_my_tracks">إضافة وتسجيل المسارات</string>
+    <string name="empty_state_my_tracks_desc">تسجيل أو استيراد مسارات للعرض</string>
+    <string name="empty_state_favourites">إضافة المفضلات</string>
+    <string name="empty_state_favourites_desc">إضافة المفضلة على الخريطة أو استيرادها من نظام الملفات</string>
+    <string name="import_track">استيراد مسار</string>
+    <string name="import_track_desc">الملف %1$s لا يحتوي على نقاط وجهة، هل تود ادخاله كمسار؟</string>
+    <string name="move_point">تحريك نقطة</string>
+    <string name="add_segment_to_the_track">إضافة إلى المسار</string>
 </resources>
