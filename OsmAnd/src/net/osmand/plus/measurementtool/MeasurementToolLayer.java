@@ -20,7 +20,6 @@ import net.osmand.plus.views.OsmandMapLayer;
 import net.osmand.plus.views.OsmandMapTileView;
 import net.osmand.util.MapUtils;
 
-import java.util.LinkedList;
 import java.util.List;
 
 import gnu.trove.list.array.TIntArrayList;
@@ -29,7 +28,6 @@ public class MeasurementToolLayer extends OsmandMapLayer implements ContextMenuL
 
 	private OsmandMapTileView view;
 	private boolean inMeasurementMode;
-	private List<WptPt> snappedToRoadPoints = new LinkedList<>();
 	private Bitmap centerIconDay;
 	private Bitmap centerIconNight;
 	private Bitmap pointIcon;
@@ -116,10 +114,6 @@ public class MeasurementToolLayer extends OsmandMapLayer implements ContextMenuL
 
 	void setInMeasurementMode(boolean inMeasurementMode) {
 		this.inMeasurementMode = inMeasurementMode;
-	}
-
-	public List<WptPt> getSnappedToRoadPoints() {
-		return snappedToRoadPoints;
 	}
 
 	String getDistanceSt() {
@@ -255,12 +249,7 @@ public class MeasurementToolLayer extends OsmandMapLayer implements ContextMenuL
 				}
 			}
 
-			List<WptPt> drawPoints;
-			if (snappedToRoadPoints.size() > 0) {
-				drawPoints = snappedToRoadPoints;
-			} else {
-				drawPoints = editingCtx.getPoints();
-			}
+			List<WptPt> drawPoints = editingCtx.getPoints();
 
 			if (drawPoints.size() > 0) {
 				path.reset();
