@@ -3511,11 +3511,11 @@
 
 	<string name="poi_beds">Camas</string>
 
-<string name="poi_boat_rental_type">Barcos alquilados</string>
+<string name="poi_boat_rental_type">Barcos de alquiler</string>
 
 <string name="poi_boat_rental">Alquiler de barcos</string>
-	<string name="poi_boat_motorboat_rental_yes">Barcos a motor: Sí</string>
-	<string name="poi_boat_motorboat_rental_no">Barcos a motor: No</string>
+	<string name="poi_boat_motorboat_rental_yes">Lanchas de motor: Sí</string>
+	<string name="poi_boat_motorboat_rental_no">Lanchas de motor: No</string>
 	<string name="poi_boat_houseboat_rental_yes">Casas flotantes: Sí</string>
 	<string name="poi_boat_houseboat_rental_no">Casas flotantes: No</string>
 	<string name="poi_boat_pedalboat_rental_yes">Barcos a pedal: Sí</string>
@@ -3524,8 +3524,8 @@
 	<string name="poi_boat_jetski_rental_no">Motos de agua: No</string>
 	<string name="poi_boat_sailboat_rental_yes">Veleros: Sí</string>
 	<string name="poi_boat_sailboat_rental_no">Veleros: No</string>
-	<string name="poi_boat_dinghy_rental_rental_yes">Bote: Sí</string>
-	<string name="poi_boat_dinghy_rental_rental_no">Bote: No</string>
+	<string name="poi_boat_dinghy_rental_rental_yes">Botes: Sí</string>
+	<string name="poi_boat_dinghy_rental_rental_no">Botes: No</string>
 	<string name="poi_boat_kayak_rental_rental_yes">Kayaks: Sí</string>
 	<string name="poi_boat_kayak_rental_rental_no">Kayaks: No</string>
 	<string name="poi_boat_canoe_rental_rental_yes">Canoas: Sí</string>
