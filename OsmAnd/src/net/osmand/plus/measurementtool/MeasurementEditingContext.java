@@ -1,12 +1,23 @@
 package net.osmand.plus.measurementtool;
 
 import android.util.Pair;
+import android.view.View;
+import android.widget.ProgressBar;
 
+import net.osmand.Location;
+import net.osmand.data.LatLon;
 import net.osmand.plus.ApplicationMode;
 import net.osmand.plus.GPXUtilities.TrkSegment;
 import net.osmand.plus.GPXUtilities.WptPt;
+import net.osmand.plus.OsmandApplication;
+import net.osmand.plus.OsmandSettings;
+import net.osmand.plus.activities.MapActivity;
+import net.osmand.plus.routing.RouteCalculationParams;
+import net.osmand.plus.routing.RoutingHelper;
 import net.osmand.plus.views.Renderable;
+import net.osmand.router.RouteCalculationProgress;
 
+import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.LinkedList;
 import java.util.List;
@@ -14,6 +25,8 @@ import java.util.Map;
 import java.util.Queue;
 
 public class MeasurementEditingContext {
+
+	private MapActivity mapActivity;
 
 	private TrkSegment before = new TrkSegment();
 	// cache should be deleted if after changed or snappedToRoadPoints
@@ -27,13 +40,18 @@ public class MeasurementEditingContext {
 	private boolean inAddPointBeforeMode;
 	private boolean inAddPointAfterMode;
 
-	private boolean isInSnapToRoadMode;
+	private ProgressBar progressBar;
+	private boolean inSnapToRoadMode;
 	private ApplicationMode snapToRoadAppMode;
-	private Pair<WptPt, WptPt> currentPair;
+	private RouteCalculationProgress calculationProgress;
 	private Queue<Pair<WptPt, WptPt>> snapToRoadPairsToCalculate = new LinkedList<>();
 	private Map<Pair<WptPt, WptPt>, List<WptPt>> snappedToRoadPoints = new HashMap<>();
 
 	private List<WptPt> measurementPoints = new LinkedList<>();
+
+	public void setMapActivity(MapActivity mapActivity) {
+		this.mapActivity = mapActivity;
+	}
 
 	public void setBefore(TrkSegment before) {
 		this.before = before;
@@ -62,7 +80,7 @@ public class MeasurementEditingContext {
 	}
 
 	public boolean isInSnapToRoadMode() {
-		return isInSnapToRoadMode;
+		return inSnapToRoadMode;
 	}
 
 	public void setInAddPointBeforeMode(boolean inAddPointBeforeMode) {
@@ -82,7 +100,7 @@ public class MeasurementEditingContext {
 	}
 
 	public void setInSnapToRoadMode(boolean inSnapToRoadMode) {
-		isInSnapToRoadMode = inSnapToRoadMode;
+		inSnapToRoadMode = inSnapToRoadMode;
 	}
 
 	public ApplicationMode getSnapToRoadAppMode() {
@@ -126,10 +144,6 @@ public class MeasurementEditingContext {
 		return after;
 	}
 
-	public void scheduleRouteCalculateIfNotEmpty() {
-
-	}
-
 	public void recreateSegments() {
 		before = new TrkSegment();
 		before.points.addAll(measurementPoints);
@@ -151,5 +165,90 @@ public class MeasurementEditingContext {
 	public void clearSegments() {
 		before = new TrkSegment();
 		after = new TrkSegment();
+	}
+
+	public void scheduleRouteCalculateIfNotEmpty(ProgressBar progressBar) {
+		if (mapActivity == null || measurementPoints.size() < 1) {
+			return;
+		}
+		for (int i = 0; i < measurementPoints.size() - 1; i++) {
+			snapToRoadPairsToCalculate.add(new Pair<>(measurementPoints.get(i), measurementPoints.get(i + 1)));
+		}
+		this.progressBar = progressBar;
+		if (!snapToRoadPairsToCalculate.isEmpty()) {
+			mapActivity.getMyApplication().getRoutingHelper().startRouteCalculationThread(getParams(), true, true);
+			progressBar.setVisibility(View.VISIBLE);
+		}
+	}
+
+	public void cancelSnapToRoad() {
+		if (calculationProgress != null) {
+			calculationProgress.isCancelled = true;
+		}
+	}
+
+	private RouteCalculationParams getParams() {
+		OsmandApplication app = mapActivity.getMyApplication();
+		OsmandSettings settings = app.getSettings();
+
+		final Pair<WptPt, WptPt> currentPair = snapToRoadPairsToCalculate.poll();
+
+		Location start = new Location("");
+		start.setLatitude(currentPair.first.getLatitude());
+		start.setLongitude(currentPair.first.getLongitude());
+
+		LatLon end = new LatLon(currentPair.second.getLatitude(), currentPair.second.getLongitude());
+
+		final RouteCalculationParams params = new RouteCalculationParams();
+		params.start = start;
+		params.end = end;
+		params.leftSide = settings.DRIVING_REGION.get().leftHandDriving;
+		params.fast = settings.FAST_ROUTE_MODE.getModeValue(snapToRoadAppMode);
+		params.type = settings.ROUTER_SERVICE.getModeValue(snapToRoadAppMode);
+		params.mode = snapToRoadAppMode;
+		params.ctx = app;
+		params.calculationProgress = calculationProgress = new RouteCalculationProgress();
+		params.calculationProgressCallback = new RoutingHelper.RouteCalculationProgressCallback() {
+			@Override
+			public void updateProgress(int progress) {
+				progressBar.setProgress(progress);
+			}
+
+			@Override
+			public void requestPrivateAccessRouting() {
+
+			}
+
+			@Override
+			public void finish() {
+				mapActivity.refreshMap();
+			}
+		};
+		params.resultListener = new RouteCalculationParams.RouteCalculationResultListener() {
+			@Override
+			public void onRouteCalculated(List<Location> locations) {
+				ArrayList<WptPt> pts = new ArrayList<>(locations.size());
+				for (Location loc : locations) {
+					WptPt pt = new WptPt();
+					pt.lat = loc.getLatitude();
+					pt.lon = loc.getLongitude();
+					pts.add(pt);
+				}
+				snappedToRoadPoints.put(currentPair, pts);
+
+				if (!snapToRoadPairsToCalculate.isEmpty()) {
+					mapActivity.getMyApplication().getRoutingHelper().startRouteCalculationThread(getParams(), true, true);
+				} else {
+					mapActivity.getMyApplication().runInUIThread(new Runnable() {
+						@Override
+						public void run() {
+							progressBar.setVisibility(View.GONE);
+						}
+					});
+				}
+			}
+		};
+
+		return params;
 	}
 }

@@ -33,8 +33,6 @@ import android.widget.Toast;
 import net.osmand.AndroidUtils;
 import net.osmand.CallbackWithObject;
 import net.osmand.IndexConstants;
-import net.osmand.Location;
-import net.osmand.data.LatLon;
 import net.osmand.plus.ApplicationMode;
 import net.osmand.plus.GPXUtilities;
 import net.osmand.plus.GPXUtilities.GPXFile;
@@ -45,8 +43,6 @@ import net.osmand.plus.GPXUtilities.WptPt;
 import net.osmand.plus.GpxSelectionHelper.SelectedGpxFile;
 import net.osmand.plus.IconsCache;
 import net.osmand.plus.OsmAndFormatter;
-import net.osmand.plus.OsmandApplication;
-import net.osmand.plus.OsmandSettings;
 import net.osmand.plus.R;
 import net.osmand.plus.activities.MapActivity;
 import net.osmand.plus.activities.TrackActivity;
@@ -65,18 +61,13 @@ import net.osmand.plus.measurementtool.command.MeasurementCommandManager;
 import net.osmand.plus.measurementtool.command.MovePointCommand;
 import net.osmand.plus.measurementtool.command.RemovePointCommand;
 import net.osmand.plus.measurementtool.command.ReorderPointCommand;
-import net.osmand.plus.measurementtool.command.SnapToRoadCommand;
-import net.osmand.plus.routing.RouteCalculationParams;
-import net.osmand.plus.routing.RoutingHelper;
 import net.osmand.plus.views.OsmandMapTileView;
 import net.osmand.plus.views.mapwidgets.MapInfoWidgetsFactory;
 import net.osmand.plus.views.mapwidgets.MapInfoWidgetsFactory.TopToolbarController;
-import net.osmand.router.RouteCalculationProgress;
 
 import java.io.File;
 import java.text.MessageFormat;
 import java.text.SimpleDateFormat;
-import java.util.ArrayList;
 import java.util.Date;
 import java.util.List;
 import java.util.Locale;
@@ -108,8 +99,6 @@ public class MeasurementToolFragment extends Fragment {
 	private ImageView undoBtn;
 	private ImageView redoBtn;
 	private ImageView mainIcon;
-	private ProgressBar snapToRoadProgressBar;
-	private RouteCalculationProgress calculationProgress;
 
 	private boolean wasCollapseButtonVisible;
 	private boolean pointsListOpened;
@@ -145,6 +134,7 @@ public class MeasurementToolFragment extends Fragment {
 		final MapActivity mapActivity = (MapActivity) getActivity();
 		final MeasurementToolLayer measurementLayer = mapActivity.getMapLayers().getMeasurementToolLayer();
 
+		editingCtx.setMapActivity(mapActivity);
 		measurementLayer.setEditingCtx(editingCtx);
 
 		if (selectedPointPos != -1 && selectedCachedPoint != null) {
@@ -473,11 +463,9 @@ public class MeasurementToolFragment extends Fragment {
 	}
 
 	private void recalculateSnapToRoadIfNedeed() {
-		if (calculationProgress != null) {
-			calculationProgress.isCancelled = true;
-		}
+		editingCtx.cancelSnapToRoad();
 		if (isInSnapToRoadMode) {
-			doSnapToRoad();
+//			doSnapToRoad();
 		}
 	}
 
@@ -594,9 +582,7 @@ public class MeasurementToolFragment extends Fragment {
 			public void clearAllOnClick() {
 				commandManager.execute(new ClearPointsCommand(measurementLayer));
 				editingCtx.clearSegments();
-				if (calculationProgress != null) {
-					calculationProgress.isCancelled = true;
-				}
+				editingCtx.cancelSnapToRoad();
 				if (pointsListOpened) {
 					hidePointsList();
 				}
@@ -781,92 +767,16 @@ public class MeasurementToolFragment extends Fragment {
 				});
 				snapToRoadBtn.setVisibility(View.VISIBLE);
 
-				snapToRoadProgressBar = (ProgressBar) mainView.findViewById(R.id.snap_to_road_progress_bar);
+				ProgressBar snapToRoadProgressBar = (ProgressBar) mainView.findViewById(R.id.snap_to_road_progress_bar);
 				snapToRoadProgressBar.setMinimumHeight(0);
 
 				if (!enableAfterRotating) {
 					snapToRoadProgressBar.setProgress(0);
-					doSnapToRoad();
+//					doSnapToRoad();
 				}
 
 				mapActivity.refreshMap();
 			}
-		}
-	}
-
-	private void doSnapToRoad() {
-		MapActivity mapActivity = getMapActivity();
-		if (mapActivity != null && editingCtx.getPointsCount() > 1) {
-			Location start = new Location("");
-			WptPt first = editingCtx.getPoints().get(0);
-			start.setLatitude(first.getLatitude());
-			start.setLongitude(first.getLongitude());
-
-			WptPt last = editingCtx.getPoints().get(editingCtx.getPointsCount() - 1);
-			LatLon end = new LatLon(last.getLatitude(), last.getLongitude());
-
-			List<LatLon> intermediates = new ArrayList<>();
-			if (editingCtx.getPointsCount() > 2) {
-				for (int i = 1; i < editingCtx.getPointsCount() - 1; i++) {
-					WptPt pt = editingCtx.getPoints().get(i);
-					intermediates.add(new LatLon(pt.getLatitude(), pt.getLongitude()));
-				}
-			}
-
-			OsmandApplication app = mapActivity.getMyApplication();
-			OsmandSettings settings = app.getSettings();
-			final RouteCalculationParams params = new RouteCalculationParams();
-			params.start = start;
-			params.end = end;
-			params.intermediates = intermediates; // todo delete
-			params.leftSide = settings.DRIVING_REGION.get().leftHandDriving;
-			params.fast = settings.FAST_ROUTE_MODE.getModeValue(snapToRoadAppMode);
-			params.type = settings.ROUTER_SERVICE.getModeValue(snapToRoadAppMode);
-			params.mode = snapToRoadAppMode;
-			params.ctx = app;
-			params.calculationProgress = calculationProgress = new RouteCalculationProgress();
-			params.calculationProgressCallback = new RoutingHelper.RouteCalculationProgressCallback() {
-				@Override
-				public void updateProgress(int progress) {
-					snapToRoadProgressBar.setProgress(progress);
-				}
-
-				@Override
-				public void requestPrivateAccessRouting() {
-
-				}
-
-				@Override
-				public void finish() {
-					snapToRoadProgressBar.setVisibility(View.GONE);
-					MapActivity mapActivity = getMapActivity();
-					if (mapActivity != null) {
-						mapActivity.refreshMap();
-					}
-				}
-			};
-			params.resultListener = new RouteCalculationParams.RouteCalculationResultListener() {
-				@Override
-				public void onRouteCalculated(List<Location> locations) {
-					ArrayList<WptPt> pts = new ArrayList<>(locations.size());
-					for (Location loc : locations) {
-						WptPt pt = new WptPt();
-						pt.lat = loc.getLatitude();
-						pt.lon = loc.getLongitude();
-						pts.add(pt);
-					}
-					MeasurementToolLayer layer = getMeasurementLayer();
-					if (layer != null) {
-						commandManager.execute(new SnapToRoadCommand(layer, pts));
-						editingCtx.recreateSegments();
-					}
-				}
-			};
-			snapToRoadProgressBar.setVisibility(View.VISIBLE);
-
-			mapActivity.getMyApplication().getRoutingHelper().startRouteCalculationThread(params, true, true);
-		} else if (calculationProgress != null) {
-			calculationProgress.isCancelled = true;
 		}
 	}
 
@@ -875,9 +785,7 @@ public class MeasurementToolFragment extends Fragment {
 		toolBarController.setTitle(previousToolBarTitle);
 		isInSnapToRoadMode = false;
 		mainIcon.setImageDrawable(getActiveIcon(R.drawable.ic_action_ruler));
-		if (calculationProgress != null) {
-			calculationProgress.isCancelled = true;
-		}
+		editingCtx.cancelSnapToRoad();
 		MapActivity mapActivity = getMapActivity();
 		if (mapActivity != null) {
 			mapActivity.findViewById(R.id.snap_to_road_image_button).setVisibility(View.GONE);
