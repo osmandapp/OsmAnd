@@ -135,6 +135,21 @@ public class MeasurementEditingContext {
 		before.points.addAll(measurementPoints);
 		addBeforeRenders();
 		after = new TrkSegment();
-		addAfterRenders();
+	}
+
+	public void recreateSegments(int position) {
+		before = new TrkSegment();
+		before.points.addAll(measurementPoints.subList(0, position));
+		addBeforeRenders();
+		after = new TrkSegment();
+		if (position != measurementPoints.size() - 1) {
+			after.points.addAll(measurementPoints.subList(position + 1, measurementPoints.size()));
+			addAfterRenders();
+		}
+	}
+
+	public void clearSegments() {
+		before = new TrkSegment();
+		after = new TrkSegment();
 	}
 }

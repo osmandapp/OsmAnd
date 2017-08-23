@@ -18,7 +18,7 @@ public class AddPointCommand extends MeasurementModeCommand {
 	public AddPointCommand(MeasurementToolLayer measurementLayer, boolean center) {
 		this.measurementLayer = measurementLayer;
 		this.center = center;
-		position = measurementLayer.getMeasurementPoints().size();
+		position = measurementLayer.getEditingCtx().getPointsCount();
 	}
 
 	@Override
@@ -34,13 +34,13 @@ public class AddPointCommand extends MeasurementModeCommand {
 
 	@Override
 	public void undo() {
-		measurementLayer.getMeasurementPoints().remove(position);
+		measurementLayer.getEditingCtx().getPoints().remove(position);
 		measurementLayer.refreshMap();
 	}
 
 	@Override
 	public void redo() {
-		measurementLayer.getMeasurementPoints().add(position, point);
+		measurementLayer.getEditingCtx().getPoints().add(position, point);
 		measurementLayer.refreshMap();
 		measurementLayer.moveMapToPoint(position);
 	}

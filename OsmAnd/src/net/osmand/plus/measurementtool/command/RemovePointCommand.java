@@ -15,21 +15,21 @@ public class RemovePointCommand extends MeasurementModeCommand {
 
 	@Override
 	public boolean execute() {
-		point = measurementLayer.getMeasurementPoints().remove(position);
+		point = measurementLayer.getEditingCtx().getPoints().remove(position);
 		measurementLayer.refreshMap();
 		return true;
 	}
 
 	@Override
 	public void undo() {
-		measurementLayer.getMeasurementPoints().add(position, point);
+		measurementLayer.getEditingCtx().getPoints().add(position, point);
 		measurementLayer.refreshMap();
 		measurementLayer.moveMapToPoint(position);
 	}
 
 	@Override
 	public void redo() {
-		measurementLayer.getMeasurementPoints().remove(position);
+		measurementLayer.getEditingCtx().getPoints().remove(position);
 		measurementLayer.refreshMap();
 	}
 
