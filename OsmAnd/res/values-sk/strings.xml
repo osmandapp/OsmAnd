@@ -1646,7 +1646,7 @@ Chcete pokračovať v novej registrácii?</string>
     <string name="shared_string_deselect_all">Zrušiť výber všetkých</string>
     <string name="shared_string_clear">Vymazať</string>
     <string name="shared_string_save">Uložiť</string>
-    <string name="shared_string_save_as_gpx">Uložiť ako GPX stopu</string>
+    <string name="shared_string_save_as_gpx">Uložiť ako novú stopu</string>
     <string name="shared_string_rename">Premenovať</string>
     <string name="shared_string_delete">Odstrániť</string>
     <string name="shared_string_delete_all">Odstrániť všetko</string>
@@ -2830,4 +2830,27 @@ Zodpovedá oblasti: %1$s x %2$s</string>
     <string name="save_route_point">Uložiť bod trasy</string>
     <string name="waypoint_one">Prechodný bod 1</string>
     <string name="route_point_one">Bod trasy 1</string>
+<string name="measurement_tool_altitude">Nadm.výška: %1$s</string>
+    <string name="measurement_tool_speed">Rýchlosť: %1$s</string>
+    <string name="line">Čiara</string>
+    <string name="save_as_route_point">Uložiť ako bod trasy</string>
+    <string name="save_as_line">Uložiť ako čiaru</string>
+    <string name="route_point">Bod trasy</string>
+    <string name="edit_line">Upraviť čiaru</string>
+    <string name="add_point_before">Pridať bod pred</string>
+    <string name="add_point_after">Pridať bod za</string>
+    <string name="shared_string_options">Možnosti</string>
+    <string name="measurement_tool_snap_to_road_descr">OsmAnd pridá ďalšie body podľa typu navigácie.</string>
+    <string name="measurement_tool_save_as_new_track_descr">Body môžete uložiť ako body trasy alebo ako čiaru.</string>
+    <string name="choose_navigation_type">Zvoľte typ navigácie</string>
+    <string name="add_route_points">Pridať body trasy</string>
+    <string name="add_line">Pridať čiaru</string>
+    <string name="empty_state_my_tracks">Pridať a nahrať stopy</string>
+    <string name="empty_state_my_tracks_desc">Nahrať alebo importovať stopy na zobrazenie</string>
+    <string name="empty_state_favourites">Pridať obľúbené</string>
+    <string name="empty_state_favourites_desc">Pridať obľúbené na mape alebo ich naimportovať zo súboru</string>
+    <string name="import_track">Importovať stopu</string>
+    <string name="import_track_desc">Súbor %1$s neobsahuje body trasy, naimportovať ako stopu?</string>
+    <string name="move_point">Presunúť bod</string>
+    <string name="add_segment_to_the_track">Pridať do stopy</string>
 </resources>
