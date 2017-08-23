@@ -146,7 +146,23 @@ public class MeasurementEditingContext {
 
 	public void recreateSegments() {
 		before = new TrkSegment();
-		before.points.addAll(measurementPoints);
+		if (measurementPoints.size() > 1) {
+			for (int i = 0; i < measurementPoints.size(); i++) {
+				Pair<WptPt, WptPt> pair = new Pair<>(measurementPoints.get(i), measurementPoints.get(i + 1));
+				List<WptPt> pts = snappedToRoadPoints.get(pair);
+				if (pts != null) {
+					before.points.addAll(pts);
+				} else {
+					if (inSnapToRoadMode) {
+						snapToRoadPairsToCalculate.add(pair);
+					}
+					before.points.add(pair.first);
+					before.points.add(pair.second);
+				}
+			}
+		} else {
+			before.points.addAll(measurementPoints);
+		}
 		addBeforeRenders();
 		after = new TrkSegment();
 	}
@@ -174,8 +190,9 @@ public class MeasurementEditingContext {
 		for (int i = 0; i < measurementPoints.size() - 1; i++) {
 			snapToRoadPairsToCalculate.add(new Pair<>(measurementPoints.get(i), measurementPoints.get(i + 1)));
 		}
+		inSnapToRoadMode = true;
 		this.progressBar = progressBar;
-		if (!snapToRoadPairsToCalculate.isEmpty()) {
+		if (!snapToRoadPairsToCalculate.isEmpty() && this.progressBar != null) {
 			mapActivity.getMyApplication().getRoutingHelper().startRouteCalculationThread(getParams(), true, true);
 			progressBar.setVisibility(View.VISIBLE);
 		}
