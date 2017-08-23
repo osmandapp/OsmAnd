@@ -2808,4 +2808,13 @@ Reprezentuje obszar: %1$s x %2$s</string>
     <string name="add_waypoint">Dodaj punkt orientacyjny</string>
     <string name="save_gpx_waypoint">Zapisz punkt orientacyjny GPX</string>
     <string name="waypoint_one">Punkt orientacyjny 1</string>
+    <string name="measurement_tool_altitude">Wysokość: %1$s</string>
+    <string name="measurement_tool_speed">Prędkość: %1$s</string>
+    <string name="line">Linia</string>
+    <string name="save_as_route_point">Zapisz jako punkt trasy</string>
+    <string name="save_as_line">Zapisz jako linia</string>
+    <string name="route_point">Punkt trasy</string>
+    <string name="shared_string_options">Opcje</string>
+    <string name="measurement_tool_save_as_new_track_descr">Można zapisać punkty jako punkty trasy lub linię.</string>
+    <string name="choose_navigation_type">Proszę wybrać rodzaj nawigacji</string>
     </resources>
