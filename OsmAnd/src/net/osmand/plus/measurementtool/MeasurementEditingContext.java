@@ -15,11 +15,11 @@ import java.util.Queue;
 
 public class MeasurementEditingContext {
 
-	private TrkSegment before;
+	private TrkSegment before = new TrkSegment();
 	// cache should be deleted if after changed or snappedToRoadPoints
 	private TrkSegment beforeCacheForSnap;
 
-	private TrkSegment after;
+	private TrkSegment after = new TrkSegment();
 	// cache should be deleted if after changed or snappedToRoadPoints
 	private TrkSegment afterCacheForSnap;
 

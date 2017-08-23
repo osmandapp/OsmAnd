@@ -133,6 +133,8 @@ public class MeasurementToolFragment extends Fragment {
 
 	private int positionToAddPoint = -1;
 
+	private MeasurementEditingContext measurementEditingContext = new MeasurementEditingContext();
+
 	private enum SaveType {
 		ROUTE_POINT,
 		LINE
@@ -147,6 +149,8 @@ public class MeasurementToolFragment extends Fragment {
 	public View onCreateView(LayoutInflater inflater, @Nullable ViewGroup container, @Nullable Bundle savedInstanceState) {
 		final MapActivity mapActivity = (MapActivity) getActivity();
 		final MeasurementToolLayer measurementLayer = mapActivity.getMapLayers().getMeasurementToolLayer();
+
+		measurementLayer.setMeasurementEditingContext(measurementEditingContext);
 
 		measurementLayer.setMeasurementPoints(measurementPoints);
 		measurementLayer.setSnappedToRoadPoints(snappedToRoadPoints);

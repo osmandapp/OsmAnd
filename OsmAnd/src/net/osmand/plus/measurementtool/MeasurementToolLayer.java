@@ -60,6 +60,7 @@ public class MeasurementToolLayer extends OsmandMapLayer implements ContextMenuL
 	private LatLon pressedPointLatLon;
 	private boolean overlapped;
 	private int pointsToDraw = 50;
+	private MeasurementEditingContext measurementEditingContext;
 
 	@Override
 	public void initLayer(OsmandMapTileView view) {
@@ -84,6 +85,10 @@ public class MeasurementToolLayer extends OsmandMapLayer implements ContextMenuL
 
 	void setOnSingleTapListener(OnSingleTapListener listener) {
 		this.singleTapListener = listener;
+	}
+
+	void setMeasurementEditingContext(MeasurementEditingContext measurementEditingContext) {
+		this.measurementEditingContext = measurementEditingContext;
 	}
 
 	void setOnEnterMovePointModeListener(OnEnterMovePointModeListener listener) {
