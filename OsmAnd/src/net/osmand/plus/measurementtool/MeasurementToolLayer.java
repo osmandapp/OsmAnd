@@ -199,7 +199,6 @@ public class MeasurementToolLayer extends OsmandMapLayer implements ContextMenuL
 					lowestDistance = distToPoint;
 					selectedCachedPoint = new WptPt(pt);
 					selectedPointPos = i;
-					editingCtx.recreateSegments(selectedPointPos);
 				}
 			}
 		}
@@ -251,20 +250,34 @@ public class MeasurementToolLayer extends OsmandMapLayer implements ContextMenuL
 
 			List<WptPt> drawPoints = editingCtx.getPoints();
 
-			if (drawPoints.size() > 0) {
+			TrkSegment before = editingCtx.getBeforeTrkSegmentLine();
+			TrkSegment after = editingCtx.getAfterTrkSegmentLine();
+
+			if (before.points.size() > 0 || after.points.size() > 0) {
 				path.reset();
 				tx.reset();
 				ty.reset();
 
-				WptPt pt = drawPoints.get(drawPoints.size() - 1);
-				int locX = tb.getPixXFromLonNoRot(pt.lon);
-				int locY = tb.getPixYFromLatNoRot(pt.lat);
-				path.moveTo(locX, locY);
-				tx.add(locX);
-				ty.add(locY);
-				path.lineTo(tb.getCenterPixelX(), tb.getCenterPixelY());
-				tx.add(tb.getCenterPixelX());
-				ty.add(tb.getCenterPixelY());
+				if (before.points.size() > 0) {
+					WptPt pt = before.points.get(before.points.size() - 1);
+					int locX = tb.getPixXFromLonNoRot(pt.lon);
+					int locY = tb.getPixYFromLatNoRot(pt.lat);
+					path.moveTo(locX, locY);
+					tx.add(locX);
+					ty.add(locY);
+					path.lineTo(tb.getCenterPixelX(), tb.getCenterPixelY());
+					tx.add(tb.getCenterPixelX());
+					ty.add(tb.getCenterPixelY());
+				}
+				if (after.points.size() > 0) {
+					WptPt pt = after.points.get(0);
+					int locX = tb.getPixXFromLonNoRot(pt.lon);
+					int locY = tb.getPixYFromLatNoRot(pt.lat);
+					path.lineTo(locX, locY);
+					tx.add(locX);
+					ty.add(locY);
+				}
+
 				calculatePath(tb, tx, ty, path);
 				canvas.drawPath(path, lineAttrs.paint);
 			}

@@ -602,6 +602,7 @@ public class MeasurementToolFragment extends Fragment {
 			public void moveOnClick() {
 				if (measurementLayer != null) {
 					measurementLayer.enterMovingPointMode();
+					editingCtx.recreateSegments(measurementLayer.getSelectedPointPos(), false, false);
 				}
 				switchMovePointMode(true);
 			}
@@ -618,6 +619,7 @@ public class MeasurementToolFragment extends Fragment {
 			public void addPointAfterOnClick() {
 				if (measurementLayer != null) {
 					positionToAddPoint = measurementLayer.getSelectedPointPos() + 1;
+					editingCtx.recreateSegments(measurementLayer.getSelectedPointPos(), true, false);
 					measurementLayer.enterAddingPointAfterMode();
 				}
 				switchAddPointAfterMode(true);
@@ -627,6 +629,7 @@ public class MeasurementToolFragment extends Fragment {
 			public void addPointBeforeOnClick() {
 				if (measurementLayer != null) {
 					positionToAddPoint = measurementLayer.getSelectedPointPos();
+					editingCtx.recreateSegments(measurementLayer.getSelectedPointPos(), false, true);
 					measurementLayer.enterAddingPointBeforeMode();
 				}
 				switchAddPointBeforeMode(true);
@@ -873,12 +876,13 @@ public class MeasurementToolFragment extends Fragment {
 			measurementToolLayer.refreshMap();
 		}
 		clearSelection();
+		editingCtx.recreateSegments();
 	}
 
 	private void addPointAfter() {
 		MeasurementToolLayer measurementLayer = getMeasurementLayer();
 		if (measurementLayer != null && positionToAddPoint != -1) {
-			if (addPointToPosition(positionToAddPoint)) {
+			if (addPointToPosition(positionToAddPoint, true, false)) {
 				selectedPointPos += 1;
 				selectedCachedPoint = new WptPt(editingCtx.getPoints().get(selectedPointPos));
 				measurementLayer.setSelectedPointPos(selectedPointPos);
@@ -898,6 +902,7 @@ public class MeasurementToolFragment extends Fragment {
 		}
 		clearSelection();
 		positionToAddPoint = -1;
+		editingCtx.recreateSegments();
 	}
 
 	private void cancelAddPointAfterMode() {
@@ -909,12 +914,13 @@ public class MeasurementToolFragment extends Fragment {
 		}
 		clearSelection();
 		positionToAddPoint = -1;
+		editingCtx.recreateSegments();
 	}
 
 	private void addPointBefore() {
 		MeasurementToolLayer measurementLayer = getMeasurementLayer();
 		if (measurementLayer != null && positionToAddPoint != -1) {
-			if (addPointToPosition(positionToAddPoint)) {
+			if (addPointToPosition(positionToAddPoint, false, true)) {
 				selectedCachedPoint = new WptPt(editingCtx.getPoints().get(selectedPointPos));
 				measurementLayer.setSelectedPointPos(selectedPointPos);
 				measurementLayer.setSelectedCachedPoint(selectedCachedPoint);
@@ -932,6 +938,7 @@ public class MeasurementToolFragment extends Fragment {
 		}
 		clearSelection();
 		positionToAddPoint = -1;
+		editingCtx.recreateSegments();
 	}
 
 	private void cancelAddPointBeforeMode() {
@@ -943,6 +950,7 @@ public class MeasurementToolFragment extends Fragment {
 		}
 		clearSelection();
 		positionToAddPoint = -1;
+		editingCtx.recreateSegments();
 	}
 
 	private void clearSelection() {
@@ -1038,12 +1046,12 @@ public class MeasurementToolFragment extends Fragment {
 		}
 	}
 
-	private boolean addPointToPosition(int position) {
+	private boolean addPointToPosition(int position, boolean addAfter, boolean addBefore) {
 		boolean added = false;
 		MeasurementToolLayer measurementLayer = getMeasurementLayer();
 		if (measurementLayer != null) {
 			added = commandManager.execute(new AddPointCommand(measurementLayer, position));
-			editingCtx.recreateSegments(position);
+			editingCtx.recreateSegments(position, addAfter, addBefore);
 			doAddOrMovePointCommonStuff();
 		}
 		return added;

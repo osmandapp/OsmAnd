@@ -167,13 +167,21 @@ public class MeasurementEditingContext {
 		after = new TrkSegment();
 	}
 
-	public void recreateSegments(int position) {
+	public void recreateSegments(int position, boolean addAfter, boolean addBefore) {
 		before = new TrkSegment();
-		before.points.addAll(measurementPoints.subList(0, position));
+		if (addAfter) {
+			before.points.addAll(measurementPoints.subList(0, position + 1));
+		} else {
+			before.points.addAll(measurementPoints.subList(0, position));
+		}
 		addBeforeRenders();
 		after = new TrkSegment();
 		if (position != measurementPoints.size() - 1) {
-			after.points.addAll(measurementPoints.subList(position + 1, measurementPoints.size()));
+			if (addBefore) {
+				after.points.addAll(measurementPoints.subList(position, measurementPoints.size()));
+			} else {
+				after.points.addAll(measurementPoints.subList(position + 1, measurementPoints.size()));
+			}
 			addAfterRenders();
 		}
 	}
