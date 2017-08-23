@@ -1762,7 +1762,7 @@ Attivando questa vista lo stile della mappa diventerà \'Inverno e sci\', mostra
     <string name="shared_string_clear">Pulisci</string>
 
     <string name="shared_string_save">Salva</string>
-    <string name="shared_string_save_as_gpx">Salva come traccia GPX</string>
+    <string name="shared_string_save_as_gpx">Salva come nuova Traccia</string>
     <string name="shared_string_rename">Rinomina</string>
     <string name="shared_string_delete">Elimina</string>
     <string name="shared_string_delete_all">Elimina tutto</string>
@@ -2883,4 +2883,6 @@ Copertura e qualità approssimativamente:
     <string name="add_point_after">Aggiungi un punto dopo</string>
     <string name="shared_string_options">Opzioni</string>
     <string name="measurement_tool_snap_to_road_descr">OsmAnd aggiugerà dei punti, in base al tipo di navigazione.</string>
+    <string name="measurement_tool_save_as_new_track_descr">Puoi salvare dei punti sia come punto di un percorso oppure come linea.</string>
+    <string name="choose_navigation_type">Scegli la modalità di navigazione</string>
     </resources>
