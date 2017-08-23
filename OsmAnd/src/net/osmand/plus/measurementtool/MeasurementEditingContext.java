@@ -193,10 +193,10 @@ public class MeasurementEditingContext {
 				snapToRoadPairsToCalculate.add(pair);
 			}
 		}
-		inSnapToRoadMode = true;
 		this.progressBar = progressBar;
 		if (!snapToRoadPairsToCalculate.isEmpty() && this.progressBar != null) {
 			mapActivity.getMyApplication().getRoutingHelper().startRouteCalculationThread(getParams(), true, true);
+			inSnapToRoadMode = true;
 			progressBar.setVisibility(View.VISIBLE);
 		}
 	}
