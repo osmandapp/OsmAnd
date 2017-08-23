@@ -45,6 +45,8 @@ import net.osmand.plus.GPXUtilities.WptPt;
 import net.osmand.plus.GpxSelectionHelper.SelectedGpxFile;
 import net.osmand.plus.IconsCache;
 import net.osmand.plus.OsmAndFormatter;
+import net.osmand.plus.OsmandApplication;
+import net.osmand.plus.OsmandSettings;
 import net.osmand.plus.R;
 import net.osmand.plus.activities.MapActivity;
 import net.osmand.plus.activities.TrackActivity;
@@ -65,7 +67,7 @@ import net.osmand.plus.measurementtool.command.MovePointCommand;
 import net.osmand.plus.measurementtool.command.RemovePointCommand;
 import net.osmand.plus.measurementtool.command.ReorderPointCommand;
 import net.osmand.plus.measurementtool.command.SnapToRoadCommand;
-import net.osmand.plus.routing.RouteProvider.SnapToRoadParams;
+import net.osmand.plus.routing.RouteCalculationParams;
 import net.osmand.plus.routing.RoutingHelper;
 import net.osmand.plus.views.OsmandMapTileView;
 import net.osmand.plus.views.mapwidgets.MapInfoWidgetsFactory;
@@ -823,8 +825,17 @@ public class MeasurementToolFragment extends Fragment {
 				}
 			}
 
-			final SnapToRoadParams params = new SnapToRoadParams();
-			params.applicationMode = snapToRoadAppMode;
+			OsmandApplication app = mapActivity.getMyApplication();
+			OsmandSettings settings = app.getSettings();
+			final RouteCalculationParams params = new RouteCalculationParams();
+			params.start = start;
+			params.end = end;
+			params.intermediates = intermediates; // todo delete
+			params.leftSide = settings.DRIVING_REGION.get().leftHandDriving;
+			params.fast = settings.FAST_ROUTE_MODE.getModeValue(snapToRoadAppMode);
+			params.type = settings.ROUTER_SERVICE.getModeValue(snapToRoadAppMode);
+			params.mode = snapToRoadAppMode;
+			params.ctx = app;
 			params.calculationProgress = calculationProgress = new RouteCalculationProgress();
 			params.calculationProgressCallback = new RoutingHelper.RouteCalculationProgressCallback() {
 				@Override
@@ -846,11 +857,11 @@ public class MeasurementToolFragment extends Fragment {
 					}
 				}
 			};
-			params.listener = new SnapToRoadParams.SnapToRoadListener() {
+			params.resultListener = new RouteCalculationParams.RouteCalculationResultListener() {
 				@Override
-				public void onSnapToRoadDone() {
-					ArrayList<WptPt> pts = new ArrayList<>(params.points.size());
-					for (Location loc : params.points) {
+				public void onRouteCalculated(List<Location> locations) {
+					ArrayList<WptPt> pts = new ArrayList<>(locations.size());
+					for (Location loc : locations) {
 						WptPt pt = new WptPt();
 						pt.lat = loc.getLatitude();
 						pt.lon = loc.getLongitude();
@@ -864,7 +875,7 @@ public class MeasurementToolFragment extends Fragment {
 			};
 			snapToRoadProgressBar.setVisibility(View.VISIBLE);
 
-			mapActivity.getMyApplication().getRoutingHelper().recalculateSnapToRoad(start, end, intermediates, params);
+			mapActivity.getMyApplication().getRoutingHelper().startRouteCalculationThread(params, true, true);
 		} else if (calculationProgress != null) {
 			calculationProgress.isCancelled = true;
 		}
