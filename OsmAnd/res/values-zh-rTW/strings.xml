@@ -1628,8 +1628,8 @@ OsmAnd (Automated Navigation Directions) 是一個地圖和導航的應用程式
     <string name="download_tab_downloads">全部下載</string>
     <string name="download_tab_updates">可更新</string>
     <string name="download_tab_local">本機</string>
-    <string name="navigate_point_northing">北距</string>
-    <string name="navigate_point_easting">東距</string>
+    <string name="navigate_point_northing">北行線</string>
+    <string name="navigate_point_easting">東行線</string>
     <string name="navigate_point_zone">地區</string>
     <string name="map_locale">地圖上的語言</string>
     <string name="rendering_attr_transportStops_name">公車站牌</string>
@@ -1742,7 +1742,7 @@ OsmAnd (Automated Navigation Directions) 是一個地圖和導航的應用程式
     <string name="shared_string_clear">清除</string>
     <string name="shared_string_clear_all">全部清除</string>
     <string name="shared_string_save">儲存</string>
-    <string name="shared_string_save_as_gpx">另存為 GPX 軌跡</string>
+    <string name="shared_string_save_as_gpx">另存為新的軌跡</string>
     <string name="shared_string_rename">更名</string>
     <string name="shared_string_delete">删除</string>
     <string name="shared_string_delete_all">全部刪除</string>
@@ -2816,4 +2816,27 @@ OsmAnd (Automated Navigation Directions) 是一個地圖和導航的應用程式
     <string name="save_route_point">儲存路線標點</string>
     <string name="waypoint_one">航點 1</string>
     <string name="route_point_one">路線標點 1</string>
+<string name="measurement_tool_altitude">海拔：%1$s</string>
+    <string name="measurement_tool_speed">速度：%1$s</string>
+    <string name="line">線路</string>
+    <string name="save_as_route_point">另存為路線標點</string>
+    <string name="save_as_line">另存為線路</string>
+    <string name="route_point">路線標點</string>
+    <string name="edit_line">編輯線路</string>
+    <string name="add_point_before">增加標點之前</string>
+    <string name="add_point_after">增加標點之後</string>
+    <string name="shared_string_options">選項</string>
+    <string name="measurement_tool_snap_to_road_descr">OsmAnd 將依據導航類型，增加輔助的標點。</string>
+    <string name="measurement_tool_save_as_new_track_descr">您可以將標點儲存為路線標點或是一條線路。</string>
+    <string name="choose_navigation_type">選擇導航類型</string>
+    <string name="add_route_points">增加路線標點</string>
+    <string name="add_line">增加線路</string>
+    <string name="empty_state_my_tracks">增加並錄製軌跡</string>
+    <string name="empty_state_my_tracks_desc">錄製或匯入軌跡以便查看</string>
+    <string name="empty_state_favourites">增加到我的收藏</string>
+    <string name="empty_state_favourites_desc">從地圖上加入我的收藏或由檔案系統匯入</string>
+    <string name="import_track">匯入軌跡</string>
+    <string name="import_track_desc">%1$s 檔案不包含航點，要將其匯入軌跡嗎？</string>
+    <string name="move_point">移動標點</string>
+    <string name="add_segment_to_the_track">增加到軌跡</string>
 </resources>
