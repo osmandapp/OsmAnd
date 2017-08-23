@@ -2841,20 +2841,20 @@ Tidligere destination bliver sidste mellemliggende punkt.</string>
     <string name="save_as_line">Gem som linje</string>
     <string name="route_point">Rutepunkt</string>
     <string name="edit_line">Rediger linje</string>
-    <string name="add_point_before">Tilføj punkt, før</string>
+    <string name="add_point_before">Tilføj punkt før</string>
     <string name="add_point_after">Tilføj punkt efter</string>
     <string name="shared_string_options">Indstillinger</string>
-    <string name="measurement_tool_snap_to_road_descr">OsmAnd vil tilføje yderligere punkter, afhængig navigationstypen.</string>
-    <string name="measurement_tool_save_as_new_track_descr">Gem punkter, enten som rutepunkter eller som en linje.</string>
+    <string name="measurement_tool_snap_to_road_descr">OsmAnd vil tilføje yderligere punkter, tilpasset typen af navigation.</string>
+    <string name="measurement_tool_save_as_new_track_descr">Gem punkter enten som rutepunkter eller som en linje.</string>
     <string name="choose_navigation_type">Vælg navigationstype</string>
     <string name="add_route_points">Tilføj rutepunkter</string>
     <string name="add_line">Tilføj linje</string>
     <string name="empty_state_my_tracks">Tilføj og optag spor</string>
-    <string name="empty_state_my_tracks_desc">Optag eller importer spor for at få vist</string>
+    <string name="empty_state_my_tracks_desc">Gem eller importer spor, der skal vises</string>
     <string name="empty_state_favourites">Tilføj favoritter</string>
-    <string name="empty_state_favourites_desc">Tilføj favoritter på kortet, eller importer dem fra filsystem</string>
+    <string name="empty_state_favourites_desc">Tilføj favoritter til kortet, eller importer dem fra en fil</string>
     <string name="import_track">Importer spor</string>
-    <string name="import_track_desc">Filen %1$s indeholder ikke rutepunkter, importer som et spor?</string>
+    <string name="import_track_desc">Filen %1$s indeholder ingen rutepunkter, importer den som et spor?</string>
     <string name="move_point">Flyt punkt</string>
     <string name="add_segment_to_the_track">Tilføj til et spor</string>
 </resources>
