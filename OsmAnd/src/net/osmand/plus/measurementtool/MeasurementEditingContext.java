@@ -6,9 +6,8 @@ import net.osmand.plus.ApplicationMode;
 import net.osmand.plus.GPXUtilities.TrkSegment;
 import net.osmand.plus.GPXUtilities.WptPt;
 import net.osmand.plus.views.Renderable;
-import net.osmand.router.RoutingContext;
 
-import java.util.LinkedHashMap;
+import java.util.HashMap;
 import java.util.LinkedList;
 import java.util.List;
 import java.util.Map;
@@ -30,9 +29,11 @@ public class MeasurementEditingContext {
 
 	private boolean isInSnapToRoadMode;
 	private ApplicationMode snapToRoadAppMode;
-	private RoutingContext routingContext;
+	private Pair<WptPt, WptPt> currentPair;
 	private Queue<Pair<WptPt, WptPt>> snapToRoadPairsToCalculate = new LinkedList<>();
-	private Map<Pair<WptPt, WptPt>, List<WptPt>> snappedToRoadPoints = new LinkedHashMap<>();
+	private Map<Pair<WptPt, WptPt>, List<WptPt>> snappedToRoadPoints = new HashMap<>();
+
+	private List<WptPt> measurementPoints = new LinkedList<>();
 
 	public void setBefore(TrkSegment before) {
 		this.before = before;
@@ -92,14 +93,6 @@ public class MeasurementEditingContext {
 		this.snapToRoadAppMode = snapToRoadAppMode;
 	}
 
-	public RoutingContext getRoutingContext() {
-		return routingContext;
-	}
-
-	public void setRoutingContext(RoutingContext routingContext) {
-		this.routingContext = routingContext;
-	}
-
 	public Queue<Pair<WptPt, WptPt>> getSnapToRoadPairsToCalculate() {
 		return snapToRoadPairsToCalculate;
 	}
@@ -108,12 +101,16 @@ public class MeasurementEditingContext {
 		this.snapToRoadPairsToCalculate = snapToRoadPairsToCalculate;
 	}
 
-	public Map<Pair<WptPt, WptPt>, List<WptPt>> getSnappedToRoadPoints() {
+	public Map<Pair<WptPt, WptPt>, List<WptPt>> getSnappedPoints() {
 		return snappedToRoadPoints;
 	}
 
-	public void setSnappedToRoadPoints(Map<Pair<WptPt, WptPt>, List<WptPt>> snappedToRoadPoints) {
-		this.snappedToRoadPoints = snappedToRoadPoints;
+	public List<WptPt> getPoints() {
+		return measurementPoints;
+	}
+
+	public int getPointsCount() {
+		return measurementPoints.size();
 	}
 
 	public TrkSegment getBeforeTrkSegmentLine() {
@@ -133,7 +130,7 @@ public class MeasurementEditingContext {
 
 	}
 
-	public void recreateSegments(List<WptPt> measurementPoints) {
+	public void recreateSegments() {
 		before = new TrkSegment();
 		before.points.addAll(measurementPoints);
 		addBeforeRenders();

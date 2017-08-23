@@ -79,7 +79,6 @@ import java.text.MessageFormat;
 import java.text.SimpleDateFormat;
 import java.util.ArrayList;
 import java.util.Date;
-import java.util.LinkedList;
 import java.util.List;
 import java.util.Locale;
 
@@ -92,8 +91,6 @@ public class MeasurementToolFragment extends Fragment {
 	public static final String TAG = "MeasurementToolFragment";
 
 	private final MeasurementCommandManager commandManager = new MeasurementCommandManager();
-	private List<WptPt> measurementPoints = new LinkedList<>();
-	private List<WptPt> snappedToRoadPoints = new LinkedList<>();
 	private IconsCache iconsCache;
 	private RecyclerView pointsRv;
 	private String previousToolBarTitle = "";
@@ -132,7 +129,7 @@ public class MeasurementToolFragment extends Fragment {
 
 	private int positionToAddPoint = -1;
 
-	private MeasurementEditingContext measurementEditingContext = new MeasurementEditingContext();
+	private MeasurementEditingContext editingCtx = new MeasurementEditingContext();
 
 	private enum SaveType {
 		ROUTE_POINT,
@@ -149,10 +146,8 @@ public class MeasurementToolFragment extends Fragment {
 		final MapActivity mapActivity = (MapActivity) getActivity();
 		final MeasurementToolLayer measurementLayer = mapActivity.getMapLayers().getMeasurementToolLayer();
 
-		measurementLayer.setMeasurementEditingContext(measurementEditingContext);
+		measurementLayer.setMeasurementEditingContext(editingCtx);
 
-		measurementLayer.setMeasurementPoints(measurementPoints);
-		measurementLayer.setSnappedToRoadPoints(snappedToRoadPoints);
 		if (selectedPointPos != -1 && selectedCachedPoint != null) {
 			measurementLayer.setSelectedPointPos(selectedPointPos);
 			measurementLayer.setSelectedCachedPoint(selectedCachedPoint);
@@ -234,9 +229,9 @@ public class MeasurementToolFragment extends Fragment {
 		mainView.findViewById(R.id.cancel_point_before_after_button).setOnClickListener(new View.OnClickListener() {
 			@Override
 			public void onClick(View view) {
-				if (measurementEditingContext.isInAddPointAfterMode()) {
+				if (editingCtx.isInAddPointAfterMode()) {
 					cancelAddPointAfterMode();
-				} else if (measurementEditingContext.isInAddPointBeforeMode()) {
+				} else if (editingCtx.isInAddPointBeforeMode()) {
 					cancelAddPointBeforeMode();
 				}
 			}
@@ -247,10 +242,10 @@ public class MeasurementToolFragment extends Fragment {
 			@Override
 			public void onClick(View view) {
 				if (!pointsListOpened
-						&& measurementPoints.size() > 0
-						&& !measurementEditingContext.isInMovePointMode()
-						&& !measurementEditingContext.isInAddPointAfterMode()
-						&& !measurementEditingContext.isInAddPointBeforeMode()) {
+						&& editingCtx.getPointsCount() > 0
+						&& !editingCtx.isInMovePointMode()
+						&& !editingCtx.isInAddPointAfterMode()
+						&& !editingCtx.isInAddPointBeforeMode()) {
 					showPointsList();
 				} else {
 					hidePointsList();
@@ -268,9 +263,9 @@ public class MeasurementToolFragment extends Fragment {
 		mainView.findViewById(R.id.apply_point_before_after_point_button).setOnClickListener(new View.OnClickListener() {
 			@Override
 			public void onClick(View view) {
-				if (measurementEditingContext.isInAddPointAfterMode()) {
+				if (editingCtx.isInAddPointAfterMode()) {
 					applyAddPointAfterMode();
-				} else if (measurementEditingContext.isInAddPointBeforeMode()) {
+				} else if (editingCtx.isInAddPointBeforeMode()) {
 					applyAddPointBeforeMode();
 				}
 			}
@@ -279,9 +274,9 @@ public class MeasurementToolFragment extends Fragment {
 		mainView.findViewById(R.id.add_point_before_after_button).setOnClickListener(new View.OnClickListener() {
 			@Override
 			public void onClick(View view) {
-				if (measurementEditingContext.isInAddPointAfterMode()) {
+				if (editingCtx.isInAddPointAfterMode()) {
 					addPointAfter();
-				} else if (measurementEditingContext.isInAddPointBeforeMode()) {
+				} else if (editingCtx.isInAddPointBeforeMode()) {
 					addPointBefore();
 				}
 			}
@@ -306,17 +301,14 @@ public class MeasurementToolFragment extends Fragment {
 			@Override
 			public void onClick(View view) {
 				MeasurementCommandType type = commandManager.undo();
-				measurementEditingContext.recreateSegments(measurementPoints);
-				if (type != null && type != MeasurementCommandType.SNAP_TO_ROAD) {
-					recalculateSnapToRoadIfNedeed();
-				}
+				editingCtx.recreateSegments();
 				if (commandManager.canUndo()) {
 					enable(undoBtn);
 				} else {
 					disable(undoBtn);
 				}
 				hidePointsListIfNoPoints();
-				if (measurementPoints.size() > 0) {
+				if (editingCtx.getPointsCount() > 0) {
 					enable(upDownBtn);
 				}
 				adapter.notifyDataSetChanged();
@@ -330,15 +322,14 @@ public class MeasurementToolFragment extends Fragment {
 			@Override
 			public void onClick(View view) {
 				commandManager.redo();
-				measurementEditingContext.recreateSegments(measurementPoints);
-				recalculateSnapToRoadIfNedeed();
+				editingCtx.recreateSegments();
 				if (commandManager.canRedo()) {
 					enable(redoBtn);
 				} else {
 					disable(redoBtn);
 				}
 				hidePointsListIfNoPoints();
-				if (measurementPoints.size() > 0) {
+				if (editingCtx.getPointsCount() > 0) {
 					enable(upDownBtn);
 				}
 				adapter.notifyDataSetChanged();
@@ -397,12 +388,12 @@ public class MeasurementToolFragment extends Fragment {
 		if (!commandManager.canRedo()) {
 			disable(redoBtn);
 		}
-		if (measurementPoints.size() < 1) {
+		if (editingCtx.getPointsCount() < 1) {
 			disable(upDownBtn);
 		}
 
 		toolBarController = new MeasurementToolBarController(newGpxData);
-		if (measurementEditingContext.isInAddPointAfterMode() || measurementEditingContext.isInAddPointBeforeMode() || measurementEditingContext.isInMovePointMode()) {
+		if (editingCtx.isInAddPointAfterMode() || editingCtx.isInAddPointBeforeMode() || editingCtx.isInMovePointMode()) {
 			toolBarController.setBackBtnIconIds(R.drawable.ic_action_mode_back, R.drawable.ic_action_mode_back);
 		} else {
 			toolBarController.setBackBtnIconIds(R.drawable.ic_action_remove_dark, R.drawable.ic_action_remove_dark);
@@ -428,7 +419,7 @@ public class MeasurementToolFragment extends Fragment {
 		toolBarController.setOnSaveViewClickListener(new View.OnClickListener() {
 			@Override
 			public void onClick(View v) {
-				if (measurementPoints.size() > 0) {
+				if (editingCtx.getPointsCount() > 0) {
 					addToGpx(mapActivity);
 				} else {
 					Toast.makeText(mapActivity, getString(R.string.none_point_error), Toast.LENGTH_SHORT).show();
@@ -499,13 +490,13 @@ public class MeasurementToolFragment extends Fragment {
 		if (pointsListOpened) {
 			hidePointsList();
 		}
-		if (measurementEditingContext.isInMovePointMode()) {
+		if (editingCtx.isInMovePointMode()) {
 			switchMovePointMode(false);
 		}
-		if (measurementEditingContext.isInAddPointAfterMode()) {
+		if (editingCtx.isInAddPointAfterMode()) {
 			switchAddPointAfterMode(false);
 		}
-		if (measurementEditingContext.isInAddPointBeforeMode()) {
+		if (editingCtx.isInAddPointBeforeMode()) {
 			switchAddPointBeforeMode(false);
 		}
 		MeasurementToolLayer layer = getMeasurementLayer();
@@ -570,7 +561,7 @@ public class MeasurementToolFragment extends Fragment {
 			@Override
 			public void addToGpxOnClick() {
 				if (mapActivity != null && measurementLayer != null) {
-					if (measurementPoints.size() > 0) {
+					if (editingCtx.getPointsCount() > 0) {
 						addToGpx(mapActivity);
 					} else {
 						Toast.makeText(mapActivity, getString(R.string.none_point_error), Toast.LENGTH_SHORT).show();
@@ -581,7 +572,7 @@ public class MeasurementToolFragment extends Fragment {
 			@Override
 			public void saveAsNewTrackOnClick() {
 				if (mapActivity != null && measurementLayer != null) {
-					if (measurementPoints.size() > 0) {
+					if (editingCtx.getPointsCount() > 0) {
 						openSaveAsNewTrackMenu(mapActivity);
 					} else {
 						Toast.makeText(mapActivity, getString(R.string.none_point_error), Toast.LENGTH_SHORT).show();
@@ -592,7 +583,7 @@ public class MeasurementToolFragment extends Fragment {
 			@Override
 			public void addToTheTrackOnClick() {
 				if (mapActivity != null && measurementLayer != null) {
-					if (measurementPoints.size() > 0) {
+					if (editingCtx.getPointsCount() > 0) {
 						showAddToTrackDialog(mapActivity);
 					} else {
 						Toast.makeText(mapActivity, getString(R.string.none_point_error), Toast.LENGTH_SHORT).show();
@@ -603,7 +594,7 @@ public class MeasurementToolFragment extends Fragment {
 			@Override
 			public void clearAllOnClick() {
 				commandManager.execute(new ClearPointsCommand(measurementLayer));
-				measurementEditingContext.recreateSegments(measurementPoints);
+				editingCtx.recreateSegments();
 				if (calculationProgress != null) {
 					calculationProgress.isCancelled = true;
 				}
@@ -691,7 +682,7 @@ public class MeasurementToolFragment extends Fragment {
 
 	private void removePoint(MeasurementToolLayer layer, int position) {
 		commandManager.execute(new RemovePointCommand(layer, position));
-		measurementEditingContext.recreateSegments(measurementPoints);
+		editingCtx.recreateSegments();
 		recalculateSnapToRoadIfNedeed();
 		adapter.notifyDataSetChanged();
 		disable(redoBtn);
@@ -759,7 +750,7 @@ public class MeasurementToolFragment extends Fragment {
 					toPosition = holder.getAdapterPosition();
 					if (toPosition >= 0 && fromPosition >= 0 && toPosition != fromPosition) {
 						commandManager.execute(new ReorderPointCommand(measurementLayer, fromPosition, toPosition));
-						measurementEditingContext.recreateSegments(measurementPoints);
+						editingCtx.recreateSegments();
 						recalculateSnapToRoadIfNedeed();
 						adapter.notifyDataSetChanged();
 						disable(redoBtn);
@@ -806,19 +797,19 @@ public class MeasurementToolFragment extends Fragment {
 
 	private void doSnapToRoad() {
 		MapActivity mapActivity = getMapActivity();
-		if (mapActivity != null && measurementPoints.size() > 1) {
+		if (mapActivity != null && editingCtx.getPointsCount() > 1) {
 			Location start = new Location("");
-			WptPt first = measurementPoints.get(0);
+			WptPt first = editingCtx.getPoints().get(0);
 			start.setLatitude(first.getLatitude());
 			start.setLongitude(first.getLongitude());
 
-			WptPt last = measurementPoints.get(measurementPoints.size() - 1);
+			WptPt last = editingCtx.getPoints().get(editingCtx.getPointsCount() - 1);
 			LatLon end = new LatLon(last.getLatitude(), last.getLongitude());
 
 			List<LatLon> intermediates = new ArrayList<>();
-			if (measurementPoints.size() > 2) {
-				for (int i = 1; i < measurementPoints.size() - 1; i++) {
-					WptPt pt = measurementPoints.get(i);
+			if (editingCtx.getPointsCount() > 2) {
+				for (int i = 1; i < editingCtx.getPointsCount() - 1; i++) {
+					WptPt pt = editingCtx.getPoints().get(i);
 					intermediates.add(new LatLon(pt.getLatitude(), pt.getLongitude()));
 				}
 			}
@@ -868,7 +859,7 @@ public class MeasurementToolFragment extends Fragment {
 					MeasurementToolLayer layer = getMeasurementLayer();
 					if (layer != null) {
 						commandManager.execute(new SnapToRoadCommand(layer, pts));
-						measurementEditingContext.recreateSegments(measurementPoints);
+						editingCtx.recreateSegments();
 					}
 				}
 			};
@@ -902,7 +893,7 @@ public class MeasurementToolFragment extends Fragment {
 		GPXFile gpx = newGpxData.getGpxFile();
 		List<WptPt> points = gpx.getRoutePoints();
 		if (measurementLayer != null) {
-			measurementPoints.addAll(points);
+			editingCtx.getPoints().addAll(points);
 			adapter.notifyDataSetChanged();
 			updateText();
 		}
@@ -914,7 +905,7 @@ public class MeasurementToolFragment extends Fragment {
 		TrkSegment segment = newGpxData.getTrkSegment();
 		List<WptPt> points = segment.points;
 		if (measurementLayer != null) {
-			measurementPoints.addAll(points);
+			editingCtx.getPoints().addAll(points);
 			adapter.notifyDataSetChanged();
 			updateText();
 		}
@@ -959,7 +950,7 @@ public class MeasurementToolFragment extends Fragment {
 			WptPt oldPoint = measurementLayer.getSelectedCachedPoint();
 			int position = measurementLayer.getSelectedPointPos();
 			commandManager.execute(new MovePointCommand(measurementLayer, oldPoint, newPoint, position));
-			measurementEditingContext.recreateSegments(measurementPoints);
+			editingCtx.recreateSegments();
 			doAddOrMovePointCommonStuff();
 			measurementLayer.exitMovePointMode();
 			measurementLayer.refreshMap();
@@ -1057,7 +1048,7 @@ public class MeasurementToolFragment extends Fragment {
 	}
 
 	private void switchMovePointMode(boolean enable) {
-		if (measurementEditingContext.isInMovePointMode()) {
+		if (editingCtx.isInMovePointMode()) {
 			toolBarController.setBackBtnIconIds(R.drawable.ic_action_mode_back, R.drawable.ic_action_mode_back);
 		} else {
 			toolBarController.setBackBtnIconIds(R.drawable.ic_action_remove_dark, R.drawable.ic_action_remove_dark);
@@ -1076,7 +1067,7 @@ public class MeasurementToolFragment extends Fragment {
 	}
 
 	private void switchAddPointAfterMode(boolean enable) {
-		if (measurementEditingContext.isInAddPointAfterMode()) {
+		if (editingCtx.isInAddPointAfterMode()) {
 			toolBarController.setBackBtnIconIds(R.drawable.ic_action_mode_back, R.drawable.ic_action_mode_back);
 		} else {
 			toolBarController.setBackBtnIconIds(R.drawable.ic_action_remove_dark, R.drawable.ic_action_remove_dark);
@@ -1095,7 +1086,7 @@ public class MeasurementToolFragment extends Fragment {
 	}
 
 	private void switchAddPointBeforeMode(boolean enable) {
-		if (measurementEditingContext.isInAddPointBeforeMode()) {
+		if (editingCtx.isInAddPointBeforeMode()) {
 			toolBarController.setBackBtnIconIds(R.drawable.ic_action_mode_back, R.drawable.ic_action_mode_back);
 		} else {
 			toolBarController.setBackBtnIconIds(R.drawable.ic_action_remove_dark, R.drawable.ic_action_remove_dark);
@@ -1126,21 +1117,21 @@ public class MeasurementToolFragment extends Fragment {
 		MeasurementToolLayer measurementLayer = getMeasurementLayer();
 		if (measurementLayer != null) {
 			commandManager.execute(new AddPointCommand(measurementLayer, false));
-			measurementEditingContext.recreateSegments(measurementPoints);
+			editingCtx.recreateSegments();
 			doAddOrMovePointCommonStuff();
 		}
 		TrkSegment before = new TrkSegment();
-		before.points.addAll(measurementPoints);
-		measurementEditingContext.setBefore(before);
+		before.points.addAll(editingCtx.getPoints());
+		editingCtx.setBefore(before);
 		TrkSegment after = new TrkSegment();
-		measurementEditingContext.setAfter(after);
+		editingCtx.setAfter(after);
 	}
 
 	private void addCenterPoint() {
 		MeasurementToolLayer measurementLayer = getMeasurementLayer();
 		if (measurementLayer != null) {
 			commandManager.execute(new AddPointCommand(measurementLayer, true));
-			measurementEditingContext.recreateSegments(measurementPoints);
+			editingCtx.recreateSegments();
 			doAddOrMovePointCommonStuff();
 		}
 	}
@@ -1150,7 +1141,7 @@ public class MeasurementToolFragment extends Fragment {
 		MeasurementToolLayer measurementLayer = getMeasurementLayer();
 		if (measurementLayer != null) {
 			added = commandManager.execute(new AddPointCommand(measurementLayer, position));
-			measurementEditingContext.recreateSegments(measurementPoints);
+			editingCtx.recreateSegments();
 			doAddOrMovePointCommonStuff();
 		}
 		return added;
@@ -1200,7 +1191,7 @@ public class MeasurementToolFragment extends Fragment {
 	private void hidePointsListIfNoPoints() {
 		MeasurementToolLayer measurementLayer = getMeasurementLayer();
 		if (measurementLayer != null) {
-			if (measurementPoints.size() < 1) {
+			if (editingCtx.getPointsCount() < 1) {
 				disable(upDownBtn);
 				if (pointsListOpened) {
 					hidePointsList();
@@ -1464,7 +1455,7 @@ public class MeasurementToolFragment extends Fragment {
 		MeasurementToolLayer measurementLayer = getMeasurementLayer();
 		if (measurementLayer != null) {
 			distanceTv.setText(measurementLayer.getDistanceSt() + ",");
-			pointsTv.setText((portrait ? pointsSt + ": " : "") + measurementPoints.size());
+			pointsTv.setText((portrait ? pointsSt + ": " : "") + editingCtx.getPointsCount());
 		}
 	}
 
@@ -1543,15 +1534,15 @@ public class MeasurementToolFragment extends Fragment {
 	}
 
 	public void quit(boolean hidePointsListFirst) {
-		if (measurementEditingContext.isInMovePointMode()) {
+		if (editingCtx.isInMovePointMode()) {
 			cancelMovePointMode();
 			return;
 		}
-		if (measurementEditingContext.isInAddPointAfterMode()) {
+		if (editingCtx.isInAddPointAfterMode()) {
 			cancelAddPointAfterMode();
 			return;
 		}
-		if (measurementEditingContext.isInAddPointBeforeMode()) {
+		if (editingCtx.isInAddPointBeforeMode()) {
 			cancelAddPointBeforeMode();
 			return;
 		}
@@ -1566,7 +1557,7 @@ public class MeasurementToolFragment extends Fragment {
 				hidePointsList();
 				return;
 			}
-			if (measurementPoints.size() < 1 || saved) {
+			if (editingCtx.getPointsCount() < 1 || saved) {
 				dismiss(mapActivity);
 				return;
 			}
