@@ -29,9 +29,6 @@ public class MeasurementToolLayer extends OsmandMapLayer implements ContextMenuL
 
 	private OsmandMapTileView view;
 	private boolean inMeasurementMode;
-	private boolean inMovePointMode;
-	private boolean inAddPointAfterMode;
-	private boolean inAddPointBeforeMode;
 	private List<WptPt> measurementPoints = new LinkedList<>();
 	private List<WptPt> snappedToRoadPoints = new LinkedList<>();
 	private Bitmap centerIconDay;
@@ -114,18 +111,6 @@ public class MeasurementToolLayer extends OsmandMapLayer implements ContextMenuL
 		return inMeasurementMode;
 	}
 
-	boolean isInMovePointMode() {
-		return inMovePointMode;
-	}
-
-	boolean isInAddPointAfterMode() {
-		return inAddPointAfterMode;
-	}
-
-	boolean isInAddPointBeforeMode() {
-		return inAddPointBeforeMode;
-	}
-
 	void setInMeasurementMode(boolean inMeasurementMode) {
 		this.inMeasurementMode = inMeasurementMode;
 	}
@@ -160,7 +145,10 @@ public class MeasurementToolLayer extends OsmandMapLayer implements ContextMenuL
 	@Override
 	public boolean onSingleTap(PointF point, RotatedTileBox tileBox) {
 		if (singleTapListener != null) {
-			if (inMeasurementMode && !inMovePointMode && !inAddPointAfterMode && !inAddPointBeforeMode) {
+			if (inMeasurementMode
+					&& !measurementEditingContext.isInMovePointMode()
+					&& !measurementEditingContext.isInAddPointBeforeMode()
+					&& !measurementEditingContext.isInAddPointAfterMode()) {
 				if (!overlapped) {
 					selectPoint(point.x, point.y, true);
 				}
@@ -181,11 +169,14 @@ public class MeasurementToolLayer extends OsmandMapLayer implements ContextMenuL
 	@Override
 	public boolean onLongPressEvent(PointF point, RotatedTileBox tileBox) {
 		if (inMeasurementMode) {
-			if (!overlapped && !inMovePointMode && !inAddPointAfterMode && !inAddPointBeforeMode && measurementPoints.size() > 0) {
+			if (!overlapped && !measurementEditingContext.isInMovePointMode()
+					&& !measurementEditingContext.isInAddPointBeforeMode()
+					&& !measurementEditingContext.isInAddPointAfterMode()
+					&& measurementPoints.size() > 0) {
 				selectPoint(point.x, point.y, false);
 				if (selectedCachedPoint != null && selectedPointPos != -1) {
 					enterMovingPointMode();
-					if (inMeasurementMode && inMovePointMode && enterMovePointModeListener != null) {
+					if (inMeasurementMode && measurementEditingContext.isInMovePointMode() && enterMovePointModeListener != null) {
 						enterMovePointModeListener.onEnterMovePointMode();
 					}
 				}
@@ -195,17 +186,17 @@ public class MeasurementToolLayer extends OsmandMapLayer implements ContextMenuL
 	}
 
 	void enterMovingPointMode() {
-		inMovePointMode = true;
+		measurementEditingContext.setInMovePointMode(true);
 		moveMapToPoint(selectedPointPos);
 	}
 
 	void enterAddingPointAfterMode() {
-		inAddPointAfterMode = true;
+		measurementEditingContext.setInAddPointAfterMode(true);
 		moveMapToPoint(selectedPointPos);
 	}
 
 	void enterAddingPointBeforeMode() {
-		inAddPointBeforeMode = true;
+		measurementEditingContext.setInAddPointBeforeMode(true);
 		moveMapToPoint(selectedPointPos);
 	}
 
@@ -256,7 +247,9 @@ public class MeasurementToolLayer extends OsmandMapLayer implements ContextMenuL
 		if (inMeasurementMode) {
 			lineAttrs.updatePaints(view, settings, tb);
 
-			if (!inMovePointMode && !inAddPointAfterMode && !inAddPointBeforeMode) {
+			if (!measurementEditingContext.isInMovePointMode()
+					&& !measurementEditingContext.isInAddPointBeforeMode()
+					&& !measurementEditingContext.isInAddPointAfterMode()) {
 				drawCenterIcon(canvas, tb, tb.getCenterPixelPoint(), settings.isNightMode());
 				if (measureDistanceToCenterListener != null) {
 					float distance = 0;
@@ -301,7 +294,7 @@ public class MeasurementToolLayer extends OsmandMapLayer implements ContextMenuL
 				int locX = tb.getPixXFromLonNoRot(pt.lon);
 				int locY = tb.getPixYFromLatNoRot(pt.lat);
 				if (locX >= 0 && locX <= tb.getPixWidth() && locY >= 0 && locY <= tb.getPixHeight()) {
-					if (!(inMovePointMode && i == selectedPointPos)) {
+					if (!(measurementEditingContext.isInMovePointMode() && i == selectedPointPos)) {
 						drawn++;
 						if (drawn > pointsToDraw) {
 							overlapped = true;
@@ -315,7 +308,7 @@ public class MeasurementToolLayer extends OsmandMapLayer implements ContextMenuL
 				int locX = tb.getPixXFromLonNoRot(pt.lon);
 				int locY = tb.getPixYFromLatNoRot(pt.lat);
 				if (locX >= 0 && locX <= tb.getPixWidth() && locY >= 0 && locY <= tb.getPixHeight()) {
-					if (!(inMovePointMode && 0 == selectedPointPos)) {
+					if (!(measurementEditingContext.isInMovePointMode() && 0 == selectedPointPos)) {
 						canvas.drawBitmap(pointIcon, locX - marginPointIconX, locY - marginPointIconY, bitmapPaint);
 					}
 				}
@@ -323,7 +316,7 @@ public class MeasurementToolLayer extends OsmandMapLayer implements ContextMenuL
 				locX = tb.getPixXFromLonNoRot(pt.lon);
 				locY = tb.getPixYFromLatNoRot(pt.lat);
 				if (locX >= 0 && locX <= tb.getPixWidth() && locY >= 0 && locY <= tb.getPixHeight()) {
-					if (!(inMovePointMode && measurementPoints.size() - 1 == selectedPointPos)) {
+					if (!(measurementEditingContext.isInMovePointMode() && measurementPoints.size() - 1 == selectedPointPos)) {
 						canvas.drawBitmap(pointIcon, locX - marginPointIconX, locY - marginPointIconY, bitmapPaint);
 					}
 				}
@@ -333,14 +326,16 @@ public class MeasurementToolLayer extends OsmandMapLayer implements ContextMenuL
 					int locX = tb.getPixXFromLonNoRot(pt.lon);
 					int locY = tb.getPixYFromLatNoRot(pt.lat);
 					if (locX >= 0 && locX <= tb.getPixWidth() && locY >= 0 && locY <= tb.getPixHeight()) {
-						if (!(inMovePointMode && i == selectedPointPos)) {
+						if (!(measurementEditingContext.isInMovePointMode() && i == selectedPointPos)) {
 							canvas.drawBitmap(pointIcon, locX - marginPointIconX, locY - marginPointIconY, bitmapPaint);
 						}
 					}
 				}
 			}
 
-			if (inAddPointAfterMode || inAddPointBeforeMode || inMovePointMode) {
+			if (measurementEditingContext.isInMovePointMode()
+					|| measurementEditingContext.isInAddPointBeforeMode()
+					|| measurementEditingContext.isInAddPointAfterMode()) {
 				int locX = tb.getCenterPixelX();
 				int locY = tb.getCenterPixelY();
 				canvas.drawBitmap(applyingPointIcon, locX - marginApplyingPointIconX, locY - marginApplyingPointIconY, bitmapPaint);
@@ -349,15 +344,15 @@ public class MeasurementToolLayer extends OsmandMapLayer implements ContextMenuL
 	}
 
 	void exitMovePointMode() {
-		inMovePointMode = false;
+		measurementEditingContext.setInMovePointMode(false);
 	}
 
 	void exitAddPointAfterMode() {
-		inAddPointAfterMode = false;
+		measurementEditingContext.setInAddPointAfterMode(false);
 	}
 
 	void exitAddPointBeforeMode() {
-		inAddPointBeforeMode = false;
+		measurementEditingContext.setInAddPointBeforeMode(false);
 	}
 
 	private void drawCenterIcon(Canvas canvas, RotatedTileBox tb, QuadPoint center, boolean nightMode) {

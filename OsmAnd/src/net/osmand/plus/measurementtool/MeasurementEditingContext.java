@@ -44,11 +44,11 @@ public class MeasurementEditingContext {
 		addAfterRenders();
 	}
 
-	public void addBeforeRenders() {
+	private void addBeforeRenders() {
 		before.renders.add(new Renderable.StandardTrack(before.points, 17.2));
 	}
 
-	public void addAfterRenders() {
+	private void addAfterRenders() {
 		after.renders.add(new Renderable.StandardTrack(after.points, 17.2));
 	}
 
@@ -131,5 +131,13 @@ public class MeasurementEditingContext {
 
 	public void scheduleRouteCalculateIfNotEmpty() {
 
+	}
+
+	public void recreateSegments(List<WptPt> measurementPoints) {
+		before = new TrkSegment();
+		before.points.addAll(measurementPoints);
+		addBeforeRenders();
+		after = new TrkSegment();
+		addAfterRenders();
 	}
 }
