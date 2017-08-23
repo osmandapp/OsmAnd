@@ -2321,4 +2321,8 @@ Representerer området: %1$s x %2$s</string>
     <string name="edit_line">Rediger linje</string>
     <string name="add_point_before">Legg til punkt før</string>
     <string name="add_point_after">Legg til punkt etter</string>
+    <string name="shared_string_options">Alternativer</string>
+    <string name="measurement_tool_snap_to_road_descr">OsmAnd vil legge til flere punkter, avhengig av navigeringstypen.</string>
+    <string name="measurement_tool_save_as_new_track_descr">Lagre punkter enten som rutepunkter eller som en linje.</string>
+    <string name="choose_navigation_type">Velg navigeringstype</string>
     </resources>
