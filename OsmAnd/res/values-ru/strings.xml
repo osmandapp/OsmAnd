@@ -213,7 +213,7 @@
     <string name="translit_names">Транслитерация названий</string>
     <string name="edit_filter">Редактировать категории</string>
     <string name="subcategories">Подкатегории</string>
-    <string name="selected_categories">Выбранные подкатегории</string>
+    <string name="selected_categories">Выбранные категории</string>
     <string name="create_custom_poi">Настройка поиска</string>
     <string name="custom_search">Настроить поиск</string>
     <string name="shared_string_filters">Фильтры</string>
@@ -1133,7 +1133,7 @@
     <string name="arrived_at_intermediate_point">Вы достигли промежуточного пункта</string>
     <string name="context_menu_item_intermediate_point">Добавить промежуточный пункт</string>
     <string name="map_widget_intermediate_distance">Промежуточный пункт</string>
-    <string name="ending_point_too_far">Начало маршрута слишком далеко от ближайшей дороги.</string>
+    <string name="ending_point_too_far">Конец маршрута слишком далеко от ближайшей дороги.</string>
     <string name="add_tag">Добавить тег</string>
     <string name="btn_advanced_mode">Расширенный режим…</string>
     <string name="poi_filter_parking">Парковки</string>
