@@ -2872,4 +2872,14 @@ Copertura e qualità approssimativamente:
     <string name="add_waypoint">Aggiungi Waypoint</string>
     <string name="save_gpx_waypoint">Salva Waypoint GPX</string>
     <string name="waypoint_one">Waypoint 1</string>
+    <string name="measurement_tool_altitude">Altitudine: %1$s</string>
+    <string name="measurement_tool_speed">Velocità %1$s</string>
+    <string name="line">Linea</string>
+    <string name="save_as_route_point">Salva come Punto di un Percorso</string>
+    <string name="save_as_line">Salva come linea</string>
+    <string name="route_point">Punto percorso</string>
+    <string name="edit_line">Modifica la linea</string>
+    <string name="add_point_before">Aggiungi un punto prima</string>
+    <string name="add_point_after">Aggiungi un punto dopo</string>
+    <string name="shared_string_options">Opzioni</string>
     </resources>
