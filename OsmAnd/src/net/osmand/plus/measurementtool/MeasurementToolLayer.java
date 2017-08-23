@@ -379,7 +379,7 @@ public class MeasurementToolLayer extends OsmandMapLayer implements ContextMenuL
 					}
 					if (rightTx.size() > 1) {
 						calculatePath(tb, rightTx, rightTy, rightPath);
-						canvas.drawPath(rightPath, lineAttrs.paint3);
+						canvas.drawPath(rightPath, lineAttrs.paint);
 					}
 				}
 
@@ -535,7 +535,7 @@ public class MeasurementToolLayer extends OsmandMapLayer implements ContextMenuL
 					}
 
 					calculatePath(tb, centerTx, centerTy, centerPath);
-					canvas.drawPath(centerPath, lineAttrs.paint_1);
+					canvas.drawPath(centerPath, lineAttrs.paint);
 				} else {
 					centerPath.reset();
 					centerTx.reset();
@@ -552,7 +552,7 @@ public class MeasurementToolLayer extends OsmandMapLayer implements ContextMenuL
 					centerTy.add(tb.getCenterPixelY());
 
 					calculatePath(tb, centerTx, centerTy, centerPath);
-					canvas.drawPath(centerPath, lineAttrs.paint_1);
+					canvas.drawPath(centerPath, lineAttrs.paint);
 				}
 			}
 			if (inAddPointAfterMode || inAddPointBeforeMode || inMovePointMode) {
