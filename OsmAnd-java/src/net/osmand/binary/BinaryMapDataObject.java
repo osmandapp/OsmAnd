@@ -11,6 +11,7 @@ import java.util.TreeSet;
 import net.osmand.binary.BinaryMapIndexReader.MapIndex;
 import net.osmand.binary.BinaryMapIndexReader.TagValuePair;
 import net.osmand.render.RenderingRulesStorage;
+import net.osmand.util.Algorithms;
 
 public class BinaryMapDataObject {
 	protected int[] coordinates = null;
@@ -249,13 +250,11 @@ public class BinaryMapDataObject {
 				} else if(objectNames.size() != thatObj.objectNames.size()){
 					equals = false;
 				} else {
-					Object[] thisNames = objectNames.values();
-					Object[] thatNames = thatObj.objectNames.values();
-					String[] thisStrings = Arrays.copyOf(thisNames, thisNames.length, String[].class);
-					String[] thatStrings = Arrays.copyOf(thatNames, thatNames.length, String[].class);
-					TreeSet<String> st = new TreeSet<String>(Arrays.asList(thisStrings));
-					TreeSet<String> ot = new TreeSet<String>(Arrays.asList(thatStrings));
-					equals = st.equals(ot);
+					for(int i = 0; i < namesOrder.size() && equals; i++) {
+						String o = objectNames.get(namesOrder.get(i));
+						String s = thatObj.objectNames.get(thatObj.namesOrder.get(i));
+						equals = Algorithms.objectEquals(o, s);
+					}
 				}
 			}
 			
