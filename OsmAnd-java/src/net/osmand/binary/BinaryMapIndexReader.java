@@ -1762,7 +1762,7 @@ public class BinaryMapIndexReader {
 		}
 
 		public void finishInitializingTags() {
-			int free = decodingRules.size() * 2 + 1;
+			int free = decodingRules.size();
 			coastlineBrokenEncodingType = free++;
 			initMapEncodingRule(0, coastlineBrokenEncodingType, "natural", "coastline_broken");
 			if (landEncodingType == -1) {
