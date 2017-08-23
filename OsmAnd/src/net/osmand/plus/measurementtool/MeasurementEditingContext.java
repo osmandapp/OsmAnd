@@ -5,6 +5,7 @@ import android.util.Pair;
 import net.osmand.plus.ApplicationMode;
 import net.osmand.plus.GPXUtilities.TrkSegment;
 import net.osmand.plus.GPXUtilities.WptPt;
+import net.osmand.plus.views.Renderable;
 import net.osmand.router.RoutingContext;
 
 import java.util.LinkedHashMap;
@@ -24,6 +25,8 @@ public class MeasurementEditingContext {
 	private TrkSegment afterCacheForSnap;
 
 	private boolean inMovePointMode;
+	private boolean inAddPointBeforeMode;
+	private boolean inAddPointAfterMode;
 
 	private boolean isInSnapToRoadMode;
 	private ApplicationMode snapToRoadAppMode;
@@ -33,10 +36,20 @@ public class MeasurementEditingContext {
 
 	public void setBefore(TrkSegment before) {
 		this.before = before;
+		addBeforeRenders();
 	}
 
 	public void setAfter(TrkSegment after) {
 		this.after = after;
+		addAfterRenders();
+	}
+
+	public void addBeforeRenders() {
+		before.renders.add(new Renderable.StandardTrack(before.points, 17.2));
+	}
+
+	public void addAfterRenders() {
+		after.renders.add(new Renderable.StandardTrack(after.points, 17.2));
 	}
 
 	public boolean isInMovePointMode() {
@@ -49,6 +62,22 @@ public class MeasurementEditingContext {
 
 	public boolean isInSnapToRoadMode() {
 		return isInSnapToRoadMode;
+	}
+
+	public void setInAddPointBeforeMode(boolean inAddPointBeforeMode) {
+		this.inAddPointBeforeMode = inAddPointBeforeMode;
+	}
+
+	public boolean isInAddPointBeforeMode() {
+		return inAddPointBeforeMode;
+	}
+
+	public void setInAddPointAfterMode(boolean inAddPointAfterMode) {
+		this.inAddPointAfterMode = inAddPointAfterMode;
+	}
+
+	public boolean isInAddPointAfterMode() {
+		return inAddPointAfterMode;
 	}
 
 	public void setInSnapToRoadMode(boolean inSnapToRoadMode) {
@@ -93,11 +122,11 @@ public class MeasurementEditingContext {
 //			return	beforeCacheForSnap;
 //		}
 		// calculate beforeCacheForSnap
-		return null;
+		return before;
 	}
 
 	public TrkSegment getAfterTrkSegmentLine() {
-		return null;
+		return after;
 	}
 
 	public void scheduleRouteCalculateIfNotEmpty() {
