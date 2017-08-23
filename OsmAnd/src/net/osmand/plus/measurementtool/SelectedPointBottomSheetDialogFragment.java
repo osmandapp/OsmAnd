@@ -108,6 +108,9 @@ public class SelectedPointBottomSheetDialogFragment extends BottomSheetDialogFra
 		mainView.findViewById(R.id.cancel_row).setOnClickListener(new View.OnClickListener() {
 			@Override
 			public void onClick(View view) {
+				if (listener != null) {
+					listener.onClearSelection();
+				}
 				dismiss();
 			}
 		});
@@ -208,6 +211,7 @@ public class SelectedPointBottomSheetDialogFragment extends BottomSheetDialogFra
 	public void onCancel(DialogInterface dialog) {
 		if (listener != null) {
 			listener.onCloseMenu();
+			listener.onClearSelection();
 		}
 		super.onCancel(dialog);
 	}
@@ -223,5 +227,7 @@ public class SelectedPointBottomSheetDialogFragment extends BottomSheetDialogFra
 		void addPointBeforeOnClick();
 
 		void onCloseMenu();
+
+		void onClearSelection();
 	}
 }

@@ -630,11 +630,10 @@ public class MeasurementToolFragment extends Fragment {
 
 			@Override
 			public void deleteOnClick() {
-				clearSelection();
 				if (measurementLayer != null) {
 					removePoint(measurementLayer, measurementLayer.getSelectedPointPos());
-					measurementLayer.clearSelection();
 				}
+				clearSelection();
 			}
 
 			@Override
@@ -658,6 +657,11 @@ public class MeasurementToolFragment extends Fragment {
 			@Override
 			public void onCloseMenu() {
 				setPreviousMapPosition();
+			}
+
+			@Override
+			public void onClearSelection() {
+				clearSelection();
 			}
 		};
 	}
@@ -725,7 +729,6 @@ public class MeasurementToolFragment extends Fragment {
 			@Override
 			public void onItemClick(View view) {
 				if (mapActivity != null && measurementLayer != null) {
-					clearSelection();
 					int position = pointsRv.indexOfChild(view);
 					if (pointsListOpened) {
 						hidePointsList();
@@ -938,7 +941,6 @@ public class MeasurementToolFragment extends Fragment {
 		if (inMovePointMode) {
 			switchMovePointMode(false);
 		}
-		clearSelection();
 		MeasurementToolLayer measurementLayer = getMeasurementLayer();
 		if (measurementLayer != null) {
 			WptPt newPoint = measurementLayer.getMovedPointToApply();
@@ -947,22 +949,21 @@ public class MeasurementToolFragment extends Fragment {
 			commandManager.execute(new MovePointCommand(measurementLayer, oldPoint, newPoint, position));
 			doAddOrMovePointCommonStuff();
 			measurementLayer.exitMovePointMode();
-			measurementLayer.clearSelection();
 			measurementLayer.refreshMap();
 		}
+		clearSelection();
 	}
 
 	private void cancelMovePointMode() {
 		if (inMovePointMode) {
 			switchMovePointMode(false);
 		}
-		clearSelection();
 		MeasurementToolLayer measurementToolLayer = getMeasurementLayer();
 		if (measurementToolLayer != null) {
 			measurementToolLayer.exitMovePointMode();
-			measurementToolLayer.clearSelection();
 			measurementToolLayer.refreshMap();
 		}
+		clearSelection();
 	}
 
 	private void addPointAfter() {
@@ -983,13 +984,12 @@ public class MeasurementToolFragment extends Fragment {
 		if (inAddPointAfterMode) {
 			switchAddPointAfterMode(false);
 		}
-		clearSelection();
 		MeasurementToolLayer measurementLayer = getMeasurementLayer();
 		if (measurementLayer != null) {
 			measurementLayer.exitAddPointAfterMode();
-			measurementLayer.clearSelection();
 			measurementLayer.refreshMap();
 		}
+		clearSelection();
 		positionToAddPoint = -1;
 	}
 
@@ -997,13 +997,12 @@ public class MeasurementToolFragment extends Fragment {
 		if (inAddPointAfterMode) {
 			switchAddPointAfterMode(false);
 		}
-		clearSelection();
 		MeasurementToolLayer measurementToolLayer = getMeasurementLayer();
 		if (measurementToolLayer != null) {
 			measurementToolLayer.exitAddPointAfterMode();
-			measurementToolLayer.clearSelection();
 			measurementToolLayer.refreshMap();
 		}
+		clearSelection();
 		positionToAddPoint = -1;
 	}
 
@@ -1023,13 +1022,12 @@ public class MeasurementToolFragment extends Fragment {
 		if (inAddPointBeforeMode) {
 			switchAddPointBeforeMode(false);
 		}
-		clearSelection();
 		MeasurementToolLayer measurementLayer = getMeasurementLayer();
 		if (measurementLayer != null) {
 			measurementLayer.exitAddPointBeforeMode();
-			measurementLayer.clearSelection();
 			measurementLayer.refreshMap();
 		}
+		clearSelection();
 		positionToAddPoint = -1;
 	}
 
@@ -1037,19 +1035,22 @@ public class MeasurementToolFragment extends Fragment {
 		if (inAddPointBeforeMode) {
 			switchAddPointBeforeMode(false);
 		}
-		clearSelection();
 		MeasurementToolLayer measurementToolLayer = getMeasurementLayer();
 		if (measurementToolLayer != null) {
 			measurementToolLayer.exitAddPointBeforeMode();
-			measurementToolLayer.clearSelection();
 			measurementToolLayer.refreshMap();
 		}
+		clearSelection();
 		positionToAddPoint = -1;
 	}
 
 	private void clearSelection() {
 		selectedPointPos = -1;
 		selectedCachedPoint = null;
+		MeasurementToolLayer measurementToolLayer = getMeasurementLayer();
+		if (measurementToolLayer != null) {
+			measurementToolLayer.clearSelection();
+		}
 	}
 
 	private void switchMovePointMode(boolean enable) {
