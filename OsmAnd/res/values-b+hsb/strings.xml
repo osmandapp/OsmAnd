@@ -935,4 +935,5 @@
     <string name="import_gpx_failed_descr">OsmAnd njemóže importować dataju. Prošu přepruwuj hač ma OsmAnd dowolnosć za začitanje dataje z tutoho městna.</string>
     <string name="distance_moving">Zdalenosć skorigowana</string>
     <string name="mapillary_image">Wobraz z Mapillary</string>
+    <string name="open_mapillary">Mapillary wočinić</string>
     </resources>
