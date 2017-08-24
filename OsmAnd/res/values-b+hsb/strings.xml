@@ -936,4 +936,7 @@
     <string name="distance_moving">Zdalenosć skorigowana</string>
     <string name="mapillary_image">Wobraz z Mapillary</string>
     <string name="open_mapillary">Mapillary wočinić</string>
+    <string name="improve_coverage_install_mapillary_desc">Móžeš swójske wobrazy abo seriju wobrazow wzać a z tutym městnom zwjazać
+\n
+\nZa to dyrbiš instalować aplikaciju Mapillary z Google Play.</string>
     </resources>
