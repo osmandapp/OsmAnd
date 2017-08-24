@@ -3500,4 +3500,24 @@
 
 	<string name="poi_beds">Ложкі</string>
 
+<string name="poi_boat_rental_type">Арэндныя лодкі</string>
+
+<string name="poi_boat_rental">Пракат лодак</string>
+	<string name="poi_boat_motorboat_rental_yes">Маторныя лодкі: так</string>
+	<string name="poi_boat_motorboat_rental_no">Маторныя лодкі: не</string>
+	<string name="poi_boat_houseboat_rental_yes">Плывучыя дамы: так</string>
+	<string name="poi_boat_houseboat_rental_no">Плывучыя дамы: не</string>
+	<string name="poi_boat_pedalboat_rental_yes">Педальныя лодкі: так</string>
+	<string name="poi_boat_pedalboat_rental_no">Педальныя лодкі: не</string>
+	<string name="poi_boat_jetski_rental_yes">Гідрацыклы: так</string>
+	<string name="poi_boat_jetski_rental_no">Гідрацыклы: не</string>
+	<string name="poi_boat_sailboat_rental_yes">Ветразнікі: так</string>
+	<string name="poi_boat_sailboat_rental_no">Ветразнікі: не</string>
+	<string name="poi_boat_dinghy_rental_rental_yes">Шлюпкі: так</string>
+	<string name="poi_boat_dinghy_rental_rental_no">Шлюркі: не</string>
+	<string name="poi_boat_kayak_rental_rental_yes">Каякі: так</string>
+	<string name="poi_boat_kayak_rental_rental_no">Каякі: не</string>
+	<string name="poi_boat_canoe_rental_rental_yes">Каноэ: так</string>
+	<string name="poi_boat_canoe_rental_rental_no">Каноэ: не</string>
+
 </resources>
