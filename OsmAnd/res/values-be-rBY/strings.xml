@@ -1131,7 +1131,7 @@ Miesca parkoŭkі і čas vіdać na paneli kіravańnia OsmAnd і na vіdžecie
 	<string name="select_search_position">Pačatak:</string>
 	<string name="context_menu_item_search">Šukać navokał</string>
 	
-	<string name="shared_string_save_as_gpx">Zachavać jak novy slied</string>
+	<string name="shared_string_save_as_gpx">Zachavać jak novy GPX-slied</string>
 	<string name="route_successfully_saved_at">Maršrut paśpiachova zachavany jak \'%1$s\'.</string>
 	<string name="filename_input">Imia fajla:</string>
 	<string name="file_with_name_already_exist">Fajł z takoj nazvaj užo іsnuje.</string>
@@ -2786,7 +2786,7 @@ U vypadku, kali vy lubіcie OsmAnd і OSM і chočacie padtrymać jaho, heta іd
 <string name="measurement_tool_altitude">Vyšynia: %1$s</string>
     <string name="measurement_tool_speed">Chutkasć: %1$s</string>
     <string name="line">Linija</string>
-    <string name="save_as_route_point">Zachavać jak kropku maršrutu</string>
+    <string name="save_as_route_point">Zachavać jak kropki maršrutu</string>
     <string name="save_as_line">Zachavać jak liniju</string>
     <string name="route_point">Kropka maršrutu</string>
     <string name="edit_line">Redahavać liniju</string>
@@ -2805,5 +2805,5 @@ U vypadku, kali vy lubіcie OsmAnd і OSM і chočacie padtrymać jaho, heta іd
     <string name="import_track">Impartavać slied</string>
     <string name="import_track_desc">Fajl %1$s nie zmiaščaje kropki šliachu, impartavać jak slied?</string>
     <string name="move_point">Pieramiascić kropku</string>
-    <string name="add_segment_to_the_track">Dadać u slied</string>
+    <string name="add_segment_to_the_track">Dadać u GPX-slied</string>
 </resources>
