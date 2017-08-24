@@ -1,8 +1,6 @@
 package net.osmand.plus.measurementtool;
 
 import android.util.Pair;
-import android.view.View;
-import android.widget.ProgressBar;
 
 import net.osmand.Location;
 import net.osmand.data.LatLon;
@@ -17,6 +15,7 @@ import net.osmand.plus.views.Renderable;
 import net.osmand.router.RouteCalculationProgress;
 
 import java.util.ArrayList;
+import java.util.Arrays;
 import java.util.HashMap;
 import java.util.LinkedList;
 import java.util.List;
@@ -39,8 +38,8 @@ public class MeasurementEditingContext {
 	private boolean inAddPointBeforeMode;
 	private boolean inAddPointAfterMode;
 
-	private ProgressBar progressBar;
 	private boolean inSnapToRoadMode;
+	private SnapToRoadProgressListener progressListener;
 	private ApplicationMode snapToRoadAppMode;
 	private RouteCalculationProgress calculationProgress;
 	private Queue<Pair<WptPt, WptPt>> snapToRoadPairsToCalculate = new LinkedList<>();
@@ -102,6 +101,14 @@ public class MeasurementEditingContext {
 		inSnapToRoadMode = inSnapToRoadMode;
 	}
 
+	public SnapToRoadProgressListener getProgressListener() {
+		return progressListener;
+	}
+
+	public void setProgressListener(SnapToRoadProgressListener progressListener) {
+		this.progressListener = progressListener;
+	}
+
 	public ApplicationMode getSnapToRoadAppMode() {
 		return snapToRoadAppMode;
 	}
@@ -146,17 +153,16 @@ public class MeasurementEditingContext {
 	public void recreateSegments() {
 		before = new TrkSegment();
 		if (measurementPoints.size() > 1) {
-			for (int i = 0; i < measurementPoints.size(); i++) {
+			for (int i = 0; i < measurementPoints.size() - 1; i++) {
 				Pair<WptPt, WptPt> pair = new Pair<>(measurementPoints.get(i), measurementPoints.get(i + 1));
 				List<WptPt> pts = snappedToRoadPoints.get(pair);
 				if (pts != null) {
 					before.points.addAll(pts);
 				} else {
 					if (inSnapToRoadMode) {
-						scheduleRouteCalculateIfNotEmpty(progressBar);
+						scheduleRouteCalculateIfNotEmpty();
 					}
-					before.points.add(pair.first);
-					before.points.add(pair.second);
+					before.points.addAll(Arrays.asList(pair.first, pair.second));
 				}
 			}
 		} else {
@@ -190,25 +196,32 @@ public class MeasurementEditingContext {
 		after = new TrkSegment();
 	}
 
-	public void scheduleRouteCalculateIfNotEmpty(ProgressBar progressBar) {
+	void scheduleRouteCalculateIfNotEmpty() {
 		if (application == null || measurementPoints.size() < 1) {
 			return;
 		}
+		inSnapToRoadMode = true;
 		for (int i = 0; i < measurementPoints.size() - 1; i++) {
 			Pair<WptPt, WptPt> pair = new Pair<>(measurementPoints.get(i), measurementPoints.get(i + 1));
 			if (snappedToRoadPoints.get(pair) == null && !snapToRoadPairsToCalculate.contains(pair)) {
 				snapToRoadPairsToCalculate.add(pair);
 			}
 		}
-		this.progressBar = progressBar;
-		if (!snapToRoadPairsToCalculate.isEmpty() && this.progressBar != null) {
+		if (!snapToRoadPairsToCalculate.isEmpty() && progressListener != null) {
 			application.getRoutingHelper().startRouteCalculationThread(getParams(), true, true);
 			inSnapToRoadMode = true;
-			progressBar.setVisibility(View.VISIBLE);
+			application.runInUIThread(new Runnable() {
+				@Override
+				public void run() {
+					progressListener.showProgressBar();
+				}
+			});
 		}
 	}
 
-	public void cancelSnapToRoad() {
+	void cancelSnapToRoad() {
+		inSnapToRoadMode = false;
+		progressListener.hideProgressBar();
 		if (calculationProgress != null) {
 			calculationProgress.isCancelled = true;
 		}
@@ -237,7 +250,7 @@ public class MeasurementEditingContext {
 		params.calculationProgressCallback = new RoutingHelper.RouteCalculationProgressCallback() {
 			@Override
 			public void updateProgress(int progress) {
-				progressBar.setProgress(progress);
+				progressListener.updateProgress(progress);
 			}
 
 			@Override
@@ -247,8 +260,7 @@ public class MeasurementEditingContext {
 
 			@Override
 			public void finish() {
-				//todo: create listener, extract progress bar and refresh map
-//				mapActivity.refreshMap();
+				progressListener.refreshMap();
 			}
 		};
 		params.resultListener = new RouteCalculationParams.RouteCalculationResultListener() {
@@ -262,14 +274,17 @@ public class MeasurementEditingContext {
 					pts.add(pt);
 				}
 				snappedToRoadPoints.put(currentPair, pts);
-
+				// todo change logic
+				// todo fix strange exceptions when snap to road calculates
+				recreateSegments();
+				progressListener.refreshMap();
 				if (!snapToRoadPairsToCalculate.isEmpty()) {
 					application.getRoutingHelper().startRouteCalculationThread(getParams(), true, true);
 				} else {
 					application.runInUIThread(new Runnable() {
 						@Override
 						public void run() {
-							progressBar.setVisibility(View.GONE);
+							progressListener.hideProgressBar();
 						}
 					});
 				}
@@ -277,5 +292,16 @@ public class MeasurementEditingContext {
 		};
 
 		return params;
+	}
+
+	interface SnapToRoadProgressListener {
+
+		void showProgressBar();
+
+		void updateProgress(int progress);
+
+		void hideProgressBar();
+
+		void refreshMap();
 	}
 }

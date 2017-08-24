@@ -108,9 +108,6 @@ public class MeasurementToolFragment extends Fragment {
 	private int previousMapPosition;
 	private NewGpxData newGpxData;
 	private boolean gpxPointsAdded;
-	private ApplicationMode snapToRoadAppMode;
-
-	private boolean isInSnapToRoadMode;
 
 	private int selectedPointPos = -1;
 	private WptPt selectedCachedPoint;
@@ -135,6 +132,31 @@ public class MeasurementToolFragment extends Fragment {
 		final MeasurementToolLayer measurementLayer = mapActivity.getMapLayers().getMeasurementToolLayer();
 
 		editingCtx.setApplication(mapActivity.getMyApplication());
+		editingCtx.setProgressListener(new MeasurementEditingContext.SnapToRoadProgressListener() {
+			@Override
+			public void showProgressBar() {
+				ProgressBar progressBar = (ProgressBar) mainView.findViewById(R.id.snap_to_road_progress_bar);
+				progressBar.setVisibility(View.VISIBLE);
+				progressBar.setMinimumHeight(0);
+				progressBar.setProgress(0);
+			}
+
+			@Override
+			public void updateProgress(int progress) {
+				((ProgressBar) mainView.findViewById(R.id.snap_to_road_progress_bar)).setProgress(progress);
+			}
+
+			@Override
+			public void hideProgressBar() {
+				((ProgressBar) mainView.findViewById(R.id.snap_to_road_progress_bar)).setVisibility(View.GONE);
+			}
+
+			@Override
+			public void refreshMap() {
+				measurementLayer.refreshMap();
+			}
+		});
+
 		measurementLayer.setEditingCtx(editingCtx);
 
 		if (selectedPointPos != -1 && selectedCachedPoint != null) {
@@ -275,7 +297,7 @@ public class MeasurementToolFragment extends Fragment {
 			@Override
 			public void onClick(View view) {
 				OptionsBottomSheetDialogFragment fragment = new OptionsBottomSheetDialogFragment();
-				fragment.setSnapToRoadEnabled(isInSnapToRoadMode);
+				fragment.setSnapToRoadEnabled(editingCtx.isInSnapToRoadMode());
 				fragment.setListener(createOptionsFragmentListener());
 				fragment.setAddLineMode(newGpxData != null);
 				fragment.show(mapActivity.getSupportFragmentManager(), OptionsBottomSheetDialogFragment.TAG);
@@ -440,8 +462,8 @@ public class MeasurementToolFragment extends Fragment {
 
 		enterMeasurementMode();
 
-		if (isInSnapToRoadMode) {
-			enableSnapToRoadMode(true);
+		if (editingCtx.isInSnapToRoadMode()) {
+			showSnapToRoadControls();
 		}
 
 		if (newGpxData != null && !gpxPointsAdded) {
@@ -460,13 +482,6 @@ public class MeasurementToolFragment extends Fragment {
 		}
 
 		return view;
-	}
-
-	private void recalculateSnapToRoadIfNedeed() {
-		editingCtx.cancelSnapToRoad();
-		if (isInSnapToRoadMode) {
-//			doSnapToRoad();
-		}
 	}
 
 	@Override
@@ -538,7 +553,7 @@ public class MeasurementToolFragment extends Fragment {
 
 			@Override
 			public void snapToRoadOnCLick() {
-				if (!isInSnapToRoadMode) {
+				if (!editingCtx.isInSnapToRoadMode()) {
 					showSnapToRoadMenu(true);
 				} else {
 					disableSnapToRoadMode();
@@ -662,8 +677,7 @@ public class MeasurementToolFragment extends Fragment {
 
 			@Override
 			public void onApplicationModeItemClick(ApplicationMode mode) {
-				snapToRoadAppMode = mode;
-				enableSnapToRoadMode(false);
+				enableSnapToRoadMode(mode);
 			}
 		};
 	}
@@ -671,7 +685,6 @@ public class MeasurementToolFragment extends Fragment {
 	private void removePoint(MeasurementToolLayer layer, int position) {
 		commandManager.execute(new RemovePointCommand(layer, position));
 		editingCtx.recreateSegments();
-		recalculateSnapToRoadIfNedeed();
 		adapter.notifyDataSetChanged();
 		disable(redoBtn);
 		updateText();
@@ -739,7 +752,6 @@ public class MeasurementToolFragment extends Fragment {
 					if (toPosition >= 0 && fromPosition >= 0 && toPosition != fromPosition) {
 						commandManager.execute(new ReorderPointCommand(measurementLayer, fromPosition, toPosition));
 						editingCtx.recreateSegments();
-						recalculateSnapToRoadIfNedeed();
 						adapter.notifyDataSetChanged();
 						disable(redoBtn);
 						updateText();
@@ -751,42 +763,38 @@ public class MeasurementToolFragment extends Fragment {
 		};
 	}
 
-	private void enableSnapToRoadMode(boolean enableAfterRotating) {
-		if (snapToRoadAppMode != null) {
+	private void enableSnapToRoadMode(ApplicationMode appMode) {
+		editingCtx.setSnapToRoadAppMode(appMode);
+		editingCtx.scheduleRouteCalculateIfNotEmpty();
+		showSnapToRoadControls();
+	}
+
+	private void showSnapToRoadControls() {
+		final MapActivity mapActivity = getMapActivity();
+		final ApplicationMode appMode = editingCtx.getSnapToRoadAppMode();
+		if (mapActivity != null && appMode != null) {
 			toolBarController.setTopBarSwitchVisible(true);
 			toolBarController.setTopBarSwitchChecked(true);
-			isInSnapToRoadMode = true;
 			mainIcon.setImageDrawable(getActiveIcon(R.drawable.ic_action_snap_to_road));
-			final MapActivity mapActivity = getMapActivity();
-			if (mapActivity != null) {
-				ImageButton snapToRoadBtn = (ImageButton) mapActivity.findViewById(R.id.snap_to_road_image_button);
-				snapToRoadBtn.setBackgroundResource(nightMode ? R.drawable.btn_circle_night : R.drawable.btn_circle);
-				snapToRoadBtn.setImageDrawable(getActiveIcon(snapToRoadAppMode.getSmallIconDark()));
-				snapToRoadBtn.setOnClickListener(new View.OnClickListener() {
-					@Override
-					public void onClick(View view) {
-						showSnapToRoadMenu(false);
-					}
-				});
-				snapToRoadBtn.setVisibility(View.VISIBLE);
 
-				ProgressBar snapToRoadProgressBar = (ProgressBar) mainView.findViewById(R.id.snap_to_road_progress_bar);
-				snapToRoadProgressBar.setMinimumHeight(0);
-
-				if (!enableAfterRotating) {
-					snapToRoadProgressBar.setProgress(0);
-//					doSnapToRoad();
+			ImageButton snapToRoadBtn = (ImageButton) mapActivity.findViewById(R.id.snap_to_road_image_button);
+			snapToRoadBtn.setBackgroundResource(nightMode ? R.drawable.btn_circle_night : R.drawable.btn_circle);
+			snapToRoadBtn.setImageDrawable(getActiveIcon(appMode.getSmallIconDark()));
+			snapToRoadBtn.setOnClickListener(new View.OnClickListener() {
+				@Override
+				public void onClick(View view) {
+					showSnapToRoadMenu(false);
 				}
+			});
+			snapToRoadBtn.setVisibility(View.VISIBLE);
 
-				mapActivity.refreshMap();
-			}
+			mapActivity.refreshMap();
 		}
 	}
 
 	private void disableSnapToRoadMode() {
 		toolBarController.setTopBarSwitchVisible(false);
 		toolBarController.setTitle(previousToolBarTitle);
-		isInSnapToRoadMode = false;
 		mainIcon.setImageDrawable(getActiveIcon(R.drawable.ic_action_ruler));
 		editingCtx.cancelSnapToRoad();
 		MapActivity mapActivity = getMapActivity();
@@ -1058,7 +1066,6 @@ public class MeasurementToolFragment extends Fragment {
 	}
 
 	private void doAddOrMovePointCommonStuff() {
-		recalculateSnapToRoadIfNedeed();
 		enable(undoBtn, upDownBtn);
 		disable(redoBtn);
 		updateText();
@@ -1491,7 +1498,7 @@ public class MeasurementToolFragment extends Fragment {
 			if (pointsListOpened) {
 				hidePointsList();
 			}
-			if (isInSnapToRoadMode) {
+			if (editingCtx.isInSnapToRoadMode()) {
 				disableSnapToRoadMode();
 			}
 			if (newGpxData != null) {
