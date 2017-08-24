@@ -941,4 +941,5 @@
 \nZa to dyrbiš instalować aplikaciju Mapillary z Google Play.</string>
     <string name="online_photos">Fota online</string>
     <string name="mapillary_widget">Asistent Mapillary</string>
+    <string name="private_access_routing_req">Twój cil leži w priwatnej kónčinje. Chceš dowolić za tutu jězbu přistup k priwatnym pućam?</string>
     </resources>
