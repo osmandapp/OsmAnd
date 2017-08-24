@@ -85,7 +85,7 @@ Lon %2$s</string>
     <string name="shared_string_clear">Borrar</string>
     <string name="shared_string_clear_all">Borrar todo</string>
     <string name="shared_string_save">Guardar</string>
-    <string name="shared_string_save_as_gpx">Guardar como traza nueva</string>
+    <string name="shared_string_save_as_gpx">Guardar como nueva traza GPX</string>
     <string name="shared_string_rename">Renombrar</string>
     <string name="shared_string_delete">Borrar</string>
     <string name="shared_string_delete_all">Borrar todo</string>
