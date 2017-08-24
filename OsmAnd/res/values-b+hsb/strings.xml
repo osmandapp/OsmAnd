@@ -104,7 +104,7 @@
     <string name="world_map_download_descr">Zakładna karta swěta pobrachuje abo njeje aktualna. Prošu sćehńće swětowu kartu, zo byšće měli dospołnu kartowu wokolinu.</string>
     <string name="shared_string_qr_code">QR-kod</string>
     <string name="map_downloaded">Karta sćehnjena</string>
-    <string name="map_downloaded_descr">Karta %1$s je so składowała. Wróćće so ke karće, zo byšće ju wužiwał(a).</string>
+    <string name="map_downloaded_descr">Karta %1$s je so sćahnyła, móžeće ju nětko wužiwać.</string>
     <string name="go_to_map">Dźi ke karće</string>
     <string name="share_menu_location">Stejišćo zdźělić</string>
     <string name="shared_string_send">Pósłać</string>
