@@ -131,9 +131,9 @@ public class DatabaseHelper {
         return false;
     }
 
-    public long getCount(String name, int type) {
+    public int getCount(String name, int type) {
         SQLiteAPI.SQLiteConnection db = openConnection(true);
-        long count = 0;
+        int count = 0;
         if(db != null){
             try {
                 SQLiteAPI.SQLiteCursor query;

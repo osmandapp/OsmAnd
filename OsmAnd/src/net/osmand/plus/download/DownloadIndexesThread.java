@@ -429,7 +429,7 @@ public class DownloadIndexesThread {
 				if (o instanceof IndexItem) {
 					IndexItem item = (IndexItem) o;
 					String name = item.getBasename();
-					long count = dbHelper.getCount(name, DatabaseHelper.DOWNLOAD_ENTRY) + 1;
+					int count = dbHelper.getCount(name, DatabaseHelper.DOWNLOAD_ENTRY) + 1;
 					item.setDownloaded(true);
 					DatabaseHelper.HistoryDownloadEntry entry = new DatabaseHelper.HistoryDownloadEntry(name, count);
 					if (count == 1) {
