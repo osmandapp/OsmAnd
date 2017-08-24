@@ -1742,7 +1742,7 @@ OsmAnd (Automated Navigation Directions) 是一個地圖和導航的應用程式
     <string name="shared_string_clear">清除</string>
     <string name="shared_string_clear_all">全部清除</string>
     <string name="shared_string_save">儲存</string>
-    <string name="shared_string_save_as_gpx">另存為新的軌跡</string>
+    <string name="shared_string_save_as_gpx">另存為新的 GPX 軌跡</string>
     <string name="shared_string_rename">更名</string>
     <string name="shared_string_delete">删除</string>
     <string name="shared_string_delete_all">全部刪除</string>
@@ -2838,5 +2838,5 @@ OsmAnd (Automated Navigation Directions) 是一個地圖和導航的應用程式
     <string name="import_track">匯入軌跡</string>
     <string name="import_track_desc">%1$s 檔案不包含航點，要將其匯入軌跡嗎？</string>
     <string name="move_point">移動標點</string>
-    <string name="add_segment_to_the_track">增加到軌跡</string>
+    <string name="add_segment_to_the_track">增加到 GPX 軌跡</string>
 </resources>
