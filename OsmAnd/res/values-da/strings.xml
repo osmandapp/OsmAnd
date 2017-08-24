@@ -1740,7 +1740,7 @@ OSM er et i fællesskab drevet, globalt offentligt domæne kortlægningsprojekt.
     <string name="shared_string_clear">Slet</string>
 
     <string name="shared_string_save">Gem</string>
-    <string name="shared_string_save_as_gpx">Gem som nyt spor</string>
+    <string name="shared_string_save_as_gpx">Gem som et nyt GPX-spor</string>
     <string name="shared_string_rename">Omdøb</string>
     <string name="shared_string_delete">Slet</string>
     <string name="shared_string_delete_all">Slet alle</string>
@@ -2845,7 +2845,7 @@ Tidligere destination bliver sidste mellemliggende punkt.</string>
     <string name="add_point_after">Tilføj punkt efter</string>
     <string name="shared_string_options">Indstillinger</string>
     <string name="measurement_tool_snap_to_road_descr">OsmAnd vil tilføje yderligere punkter, tilpasset typen af navigation.</string>
-    <string name="measurement_tool_save_as_new_track_descr">Gem punkter enten som rutepunkter eller som en linje.</string>
+    <string name="measurement_tool_save_as_new_track_descr">Gem punkterne enten som rutepunkter eller som en linje.</string>
     <string name="choose_navigation_type">Vælg navigationstype</string>
     <string name="add_route_points">Tilføj rutepunkter</string>
     <string name="add_line">Tilføj linje</string>
@@ -2856,5 +2856,5 @@ Tidligere destination bliver sidste mellemliggende punkt.</string>
     <string name="import_track">Importer spor</string>
     <string name="import_track_desc">Filen %1$s indeholder ingen rutepunkter, importer den som et spor?</string>
     <string name="move_point">Flyt punkt</string>
-    <string name="add_segment_to_the_track">Tilføj til et spor</string>
+    <string name="add_segment_to_the_track">Tilføj til et GPX-spor</string>
 </resources>
