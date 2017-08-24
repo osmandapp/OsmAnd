@@ -942,4 +942,7 @@
     <string name="online_photos">Fota online</string>
     <string name="mapillary_widget">Asistent Mapillary</string>
     <string name="private_access_routing_req">Twój cil leži w priwatnej kónčinje. Chceš dowolić za tutu jězbu přistup k priwatnym pućam?</string>
+    <string name="restart_search">Pytanje wospjetować</string>
+    <string name="increase_search_radius">Pytanski radius powjetšić</string>
+    <string name="nothing_found">Žadyn pytanski wuslědk :(</string>
     </resources>
