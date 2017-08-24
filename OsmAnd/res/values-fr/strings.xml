@@ -119,7 +119,7 @@
     <string name="select_search_position">Autour de :</string>
     <string name="context_menu_item_search">Rechercher autour de ce point</string>
 
-    <string name="shared_string_save_as_gpx">Enregistrer l\'itinéraire en GPX</string>
+    <string name="shared_string_save_as_gpx">Enregistrer comme nouvelle trace GPX</string>
     <string name="route_successfully_saved_at">Itinéraire enregistré avec succès sous \'%1$s\'.</string>
     <string name="filename_input">Nom du fichier : </string>
     <string name="file_with_name_already_exist">Le même nom existe déjà.</string>
@@ -2882,7 +2882,7 @@ Fonctionnalités principales :
     <string name="measurement_tool_altitude">Altitude : %1$s</string>
     <string name="measurement_tool_speed">Vitesse : %1$s</string>
     <string name="line">Ligne</string>
-    <string name="save_as_route_point">Enregistrer comme point de passage</string>
+    <string name="save_as_route_point">Enregistrer comme points de passage</string>
     <string name="save_as_line">Enregistrer comme ligne</string>
     <string name="route_point">Point de passage</string>
     <string name="edit_line">Modifier la ligne</string>
@@ -2901,5 +2901,5 @@ Fonctionnalités principales :
     <string name="import_track">Importer la trace</string>
     <string name="import_track_desc">Le fichier %1$s ne contient aucune étape, l\'importer comme trace ?</string>
     <string name="move_point">Déplacer le point</string>
-    <string name="add_segment_to_the_track">Ajouter à la trace</string>
+    <string name="add_segment_to_the_track">Ajouter à une trace GPX</string>
 </resources>
