@@ -1175,7 +1175,7 @@
     <string name="shared_string_history">Historikk</string>
     <string name="shared_string_select_on_map">Velg på kart</string>
     <string name="shared_string_save">Lagre</string>
-    <string name="shared_string_save_as_gpx">Lagre som GPX-spor</string>
+    <string name="shared_string_save_as_gpx">Lagre som nytt GPX-spor</string>
     <string name="shared_string_rename">Endre navn</string>
     <string name="shared_string_delete">Slett</string>
     <string name="shared_string_share">Del</string>
