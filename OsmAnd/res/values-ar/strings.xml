@@ -757,7 +757,7 @@
 	<string name="select_search_position">المنطلق:</string>
 	<string name="context_menu_item_search">بحث بالقرب من هنا</string>
 	
-	<string name="shared_string_save_as_gpx">حفظ كمسار جديد</string>
+	<string name="shared_string_save_as_gpx">حفظ كمسار GPX جديد</string>
 	<string name="route_successfully_saved_at">تم حفظ المسار بنجاح ك \'%1$s\'.</string>
 	<string name="filename_input">اسم الملف:</string>
 	<string name="file_with_name_already_exist">يوجد ملف بنفس الاسم موجود مسبقا.</string>
@@ -2738,7 +2738,7 @@
 <string name="measurement_tool_altitude">الارتفاع: %1$s</string>
     <string name="measurement_tool_speed">السرعة: %1$s</string>
     <string name="line">خط</string>
-    <string name="save_as_route_point">حفظ كنقطة مسار</string>
+    <string name="save_as_route_point">حفظ كنقاط مسار</string>
     <string name="save_as_line">حفظ كخط</string>
     <string name="route_point">نقطة مسار</string>
     <string name="edit_line">تعديل خط</string>
@@ -2757,5 +2757,5 @@
     <string name="import_track">استيراد مسار</string>
     <string name="import_track_desc">الملف %1$s لا يحتوي على نقاط وجهة، هل تود ادخاله كمسار؟</string>
     <string name="move_point">تحريك نقطة</string>
-    <string name="add_segment_to_the_track">إضافة إلى مسار</string>
+    <string name="add_segment_to_the_track">إضافة إلى مسار GPX</string>
 </resources>
