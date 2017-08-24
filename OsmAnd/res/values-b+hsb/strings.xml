@@ -913,4 +913,5 @@
     <string name="shared_string_permissions">Prawa</string>
     <string name="shared_string_install">Instalować</string>
     <string name="shared_string_add_photos">Wobrazy přidać</string>
+    <string name="no_photos_descr">Za tute městno fota nimamy</string>
     </resources>
