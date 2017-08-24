@@ -929,4 +929,6 @@
     <string name="measurement_tool">zdalenosć měrić</string>
     <string name="quick_action_resume_pause_navigation">Nawigaciju znowa startować/přetorhnyć</string>
     <string name="shared_string_to">Do</string>
+    <string name="mapillary_menu_descr_dates">Wobrazy z wěsteje doby pokazać.</string>
+    <string name="mapillary_menu_descr_username">Wobrazy wěsteho wužiwarja pokazać.</string>
     </resources>
