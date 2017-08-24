@@ -376,8 +376,8 @@
     <string name="driving_region_japan">Japanska</string>
     <string name="driving_region_us">Zjednoćene staty Ameriki</string>
     <string name="driving_region_canada">Kanada</string>
-    <string name="driving_region_europe_asia">Europa a Azija</string>
-    <string name="driving_region_uk">Zjednoćene kralestwo, Indiska, Awstralska atd.</string>
+    <string name="driving_region_europe_asia">Europa, Azija, Łaćonska Amerika a podobne</string>
+    <string name="driving_region_uk">Zjednoćene kralestwo, Indiska a podobne</string>
     <string name="speak_street_names">Dróhowe mjena (TTS)</string>
     <string name="speak_cameras">Błyskače</string>
     <string name="speak_traffic_warnings">Wobchadne warnowanja</string>
@@ -411,7 +411,7 @@
     <string name="choose_osmand_theme">Napohlad aplikacije</string>
     <string name="index_name_openmaps">OpenMaps EU</string>
     <string name="download_wikipedia_maps">Wikipedija</string>
-    <string name="recording_error">"Zmylk occurred while recording "</string>
+    <string name="recording_error">Při nahrawanju je zmylk wustupił</string>
     <string name="safe_mode_description">Aplikacija běži w zawěsćenym modusu (za pomałše wersije Androida).</string>
     <string name="safe_mode">Zawěsćeny modus</string>
     <string name="native_library_not_running">Aplikacija běži w zawěsćenym modusu (hodźi so w nastajenjach wupinyć).</string>
@@ -433,8 +433,8 @@
     <string name="add_as_last_destination_point">Jako posledni mjezycil postajić</string>
     <string name="add_as_first_destination_point">Jako prěni mjezycil postajić</string>
 
-    <string name="replace_destination_point">Cilowy dypk narunać</string>
-    <string name="new_destination_point_dialog">Cilowy dypk bu hižo postajeny.</string>
+    <string name="replace_destination_point">Cil narunać</string>
+    <string name="new_destination_point_dialog">Cil bu hižo postajeny:</string>
     <string name="target_points">Cile</string>
     <string name="intermediate_point_too_far">Mjezycil %1$s je předaloko preč wot najblišeho puća.</string>
     <string name="arrived_at_intermediate_point">Mjezycil docpěty</string>
