@@ -11,7 +11,6 @@ import net.osmand.plus.GPXUtilities.TrkSegment;
 import net.osmand.plus.GPXUtilities.WptPt;
 import net.osmand.plus.OsmandApplication;
 import net.osmand.plus.OsmandSettings;
-import net.osmand.plus.activities.MapActivity;
 import net.osmand.plus.routing.RouteCalculationParams;
 import net.osmand.plus.routing.RoutingHelper;
 import net.osmand.plus.views.Renderable;
@@ -26,10 +25,10 @@ import java.util.Queue;
 
 public class MeasurementEditingContext {
 
-	private MapActivity mapActivity;
+	private OsmandApplication application;
 
 	private TrkSegment before = new TrkSegment();
-	// cache should be deleted if after changed or snappedToRoadPoints
+	// cache should be deleted if before changed or snappedToRoadPoints
 	private TrkSegment beforeCacheForSnap;
 
 	private TrkSegment after = new TrkSegment();
@@ -49,8 +48,8 @@ public class MeasurementEditingContext {
 
 	private List<WptPt> measurementPoints = new LinkedList<>();
 
-	public void setMapActivity(MapActivity mapActivity) {
-		this.mapActivity = mapActivity;
+	public void setApplication(OsmandApplication application) {
+		this.application = application;
 	}
 
 	public void setBefore(TrkSegment before) {
@@ -192,7 +191,7 @@ public class MeasurementEditingContext {
 	}
 
 	public void scheduleRouteCalculateIfNotEmpty(ProgressBar progressBar) {
-		if (mapActivity == null || measurementPoints.size() < 1) {
+		if (application == null || measurementPoints.size() < 1) {
 			return;
 		}
 		for (int i = 0; i < measurementPoints.size() - 1; i++) {
@@ -203,7 +202,7 @@ public class MeasurementEditingContext {
 		}
 		this.progressBar = progressBar;
 		if (!snapToRoadPairsToCalculate.isEmpty() && this.progressBar != null) {
-			mapActivity.getMyApplication().getRoutingHelper().startRouteCalculationThread(getParams(), true, true);
+			application.getRoutingHelper().startRouteCalculationThread(getParams(), true, true);
 			inSnapToRoadMode = true;
 			progressBar.setVisibility(View.VISIBLE);
 		}
@@ -216,8 +215,7 @@ public class MeasurementEditingContext {
 	}
 
 	private RouteCalculationParams getParams() {
-		OsmandApplication app = mapActivity.getMyApplication();
-		OsmandSettings settings = app.getSettings();
+		OsmandSettings settings = application.getSettings();
 
 		final Pair<WptPt, WptPt> currentPair = snapToRoadPairsToCalculate.poll();
 
@@ -234,7 +232,7 @@ public class MeasurementEditingContext {
 		params.fast = settings.FAST_ROUTE_MODE.getModeValue(snapToRoadAppMode);
 		params.type = settings.ROUTER_SERVICE.getModeValue(snapToRoadAppMode);
 		params.mode = snapToRoadAppMode;
-		params.ctx = app;
+		params.ctx = application;
 		params.calculationProgress = calculationProgress = new RouteCalculationProgress();
 		params.calculationProgressCallback = new RoutingHelper.RouteCalculationProgressCallback() {
 			@Override
@@ -249,7 +247,8 @@ public class MeasurementEditingContext {
 
 			@Override
 			public void finish() {
-				mapActivity.refreshMap();
+				//todo: create listener, extract progress bar and refresh map
+//				mapActivity.refreshMap();
 			}
 		};
 		params.resultListener = new RouteCalculationParams.RouteCalculationResultListener() {
@@ -265,9 +264,9 @@ public class MeasurementEditingContext {
 				snappedToRoadPoints.put(currentPair, pts);
 
 				if (!snapToRoadPairsToCalculate.isEmpty()) {
-					mapActivity.getMyApplication().getRoutingHelper().startRouteCalculationThread(getParams(), true, true);
+					application.getRoutingHelper().startRouteCalculationThread(getParams(), true, true);
 				} else {
-					mapActivity.getMyApplication().runInUIThread(new Runnable() {
+					application.runInUIThread(new Runnable() {
 						@Override
 						public void run() {
 							progressBar.setVisibility(View.GONE);

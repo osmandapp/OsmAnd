@@ -134,7 +134,7 @@ public class MeasurementToolFragment extends Fragment {
 		final MapActivity mapActivity = (MapActivity) getActivity();
 		final MeasurementToolLayer measurementLayer = mapActivity.getMapLayers().getMeasurementToolLayer();
 
-		editingCtx.setMapActivity(mapActivity);
+		editingCtx.setApplication(mapActivity.getMyApplication());
 		measurementLayer.setEditingCtx(editingCtx);
 
 		if (selectedPointPos != -1 && selectedCachedPoint != null) {
