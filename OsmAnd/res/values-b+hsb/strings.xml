@@ -105,7 +105,7 @@
     <string name="shared_string_qr_code">QR-kod</string>
     <string name="map_downloaded">Karta sćehnjena</string>
     <string name="map_downloaded_descr">Karta %1$s je so sćahnyła, móžeće ju nětko wužiwać.</string>
-    <string name="go_to_map">Dźi ke karće</string>
+    <string name="go_to_map">Na kartu hladać</string>
     <string name="share_menu_location">Stejišćo zdźělić</string>
     <string name="shared_string_send">Pósłać</string>
     <string name="favorite_category_dublicate_message">Kategorija pod tutym mjenom hižo eksistuje. Prošu zapodajće hinaše mjeno.</string>
