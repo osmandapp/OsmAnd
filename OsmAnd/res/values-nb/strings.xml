@@ -2332,5 +2332,7 @@ Representerer området: %1$s x %2$s</string>
     <string name="import_track">Importer spor</string>
     <string name="import_track_desc">Filen %1$s inneholder ingen rutepunkter, importere den som et spor?</string>
     <string name="move_point">Flytt punkt</string>
-    <string name="add_segment_to_the_track">Legg til i et spor</string>
-</resources>
+    <string name="add_segment_to_the_track">Legg til i et GPX-spor</string>
+<string name="add_route_points">Legg til rutepunkter</string>
+    <string name="add_line">Legg til linje</string>
+    </resources>
