@@ -63,7 +63,7 @@
   <string name="plugin_distance_point_time">denbora</string>
   <string name="plugin_distance_point_hdop">zehaztasuna</string>
   <string name="plugin_distance_point_speed">abiadura</string>
-  <string name="plugin_distance_point_ele">altuera</string>
+  <string name="plugin_distance_point_ele">elebazioa</string>
   <string name="plugin_distance_point">Puntua</string>
   <string name="gpx_file_name">GPX fitxategi izena</string>
   <string name="gpx_saved_sucessfully">GPX fitxategia ongi gorde da hona {0}</string>
@@ -1265,7 +1265,7 @@ Biltegiratzean {1} MB erabiliko dira.
 	<string name="share_route_as_gpx">Partekatu ibilbidea GPX fitxategi bezala</string>
 	<string name="interrupt_music_descr">Ahots bidezko iragarkiek musika pausatzen dute, ez bolumena jaitsi besterik gabe</string>
 	<string name="interrupt_music">Eten musika</string>
-	<string name="index_item_world_altitude_correction">Munduko Altitude Zuzenketa</string>
+	<string name="index_item_world_altitude_correction">Munduko garaiera zuzenketa</string>
 	<string name="rendering_attr_alpineHiking_name">SAC Alpetar ibilbide ikuspegia (Suitzako klub alpinoa)</string>
     <string name="rendering_attr_alpineHiking_description">Marraztu bideak SAC eskalaren arabera</string>
     <string name="rendering_attr_hikingRoutesOSMC_name">Mendi-ibilaldi sinboloen gain-azala</string>
@@ -1311,7 +1311,7 @@ Biltegiratzean {1} MB erabiliko dira.
 	<string name="gpx_info_average_speed">Batezbesteko abiadura: %1$s</string>
 	<string name="gpx_info_maximum_speed">Abiadura maximoa: %1$s</string>
 	<string name="gpx_info_avg_altitude">Batezbesteko altitudea: %1$s</string>
-	<string name="gpx_info_diff_altitude">Altitude tartea: %1$s</string>
+	<string name="gpx_info_diff_altitude">Garaiera-barrutia: %1$s</string>
 	<string name="gpx_info_asc_altitude">Jaitsiera/igoera: %1$s</string>
     <string name="gpx_timespan">Denbora tartea: %1$s</string>
 	<string name="gpx_timemoving">Denbora mugitzen: %1$s</string>
@@ -2524,36 +2524,36 @@ Area honi dagokio: %1$s x %2$s</string>
 	<string name="auto_split_recording_descr">Hasi segmentu berria 6 minututako hutsune bat eta gero, lorratz berria bi ordu eta gero, edo fitxategi berria data aldatzean.</string>
     <string name="rendering_attr_depthContours_description">Erakutsi sakonera sestra-kurbak eta puntuak</string>
     <string name="rendering_attr_depthContours_name">Sakonera nautikoaren sestra-kurbak</string>
-	<string name="release_2_6">\\u2022 Ezaugarri berria: Ekintza azkarren botoia
-\n
-\n
-\n • Pantaila ukigarriaren keinuen erantzuna hobetua
-\n
-\n
-\n • Hizkuntza gehiago barne-hartzen dituen mapetarako letra-tipoa
-\n
-\n
-\n • Tokiko hizkuntzen aldaerentzako TTS euskarria
-\n
-\n
-\n • Ikusgaitasun hobekuntzak hainbat mapa estiloetan eta wikipedian
-\n
-\n
-\n • Open Location Code (OLC) euskarria
-\n
-\n
-\n • Grabatutako GPX fitxategietan altuera eta malda profila, abiadura eta kalkulatutako ibilbidea
-\n
-\n
-\n • \"Gidatzeko estiloa\" ezarpena eta hobekuntzak bizikletentzako ibilbideetarako logikan
-\n
-\n
-\n • Bizikletentzako ibilbideetan altuera-datuak erabiltzeko ezarpenak
-\n
-\n
-\n • Beste hainbat hobekuntza eta arazoen konponketa
-\n
-\n
+	<string name="release_2_6">\\u2022 Ezaugarri berria: Ekintza azkarren botoia 
+\n 
+\n 
+\n • Pantaila ukigarriaren keinuen erantzuna hobetua 
+\n 
+\n 
+\n • Hizkuntza gehiago barne-hartzen dituen mapetarako letra-tipoa 
+\n 
+\n 
+\n • Tokiko hizkuntzen aldaerentzako TTS euskarria 
+\n 
+\n 
+\n • Ikusgaitasun hobekuntzak hainbat mapa estiloetan eta wikipedian 
+\n 
+\n 
+\n • Open Location Code (OLC) euskarria 
+\n 
+\n 
+\n • Bistaratu elebazioa, malda, eta abiadura profilak grabatutako GPX fitxategietan eta kalkulatutako ibilbidea 
+\n 
+\n 
+\n • \"Gidatzeko estiloa\" ezarpena eta hobekuntzak bizikletentzako ibilbideetarako logikan 
+\n 
+\n 
+\n • Bizikletentzako ibilbideetan altuera-datuak erabiltzeko ezarpenak 
+\n 
+\n 
+\n • Beste hainbat hobekuntza eta arazoen konponketa 
+\n 
+\n 
 \neta gehiago…</string>
 	<string name="add_new_folder">Gehitu karpeta berria</string>
     <string name="points_delete_multiple_succesful">Puntuak ongi ezabatu dira.</string>
@@ -2575,11 +2575,11 @@ Area honi dagokio: %1$s x %2$s</string>
     <string name="shared_string_tracks">Lorratzak</string>
     <string name="routing_attr_driving_style_name">Gidatzeko estiloa</string>
     
-    <string name="route_altitude">Ibilbidearen altitudea</string>
+    <string name="route_altitude">Ibilbidearen elebazioa</string>
     <string name="altitude_descent">Jaitsiera</string>
     <string name="altitude_ascent">Igoera</string>
-    <string name="altitude_range">Altuera-barrutia</string>
-    <string name="average_altitude">Batezbesteko altuera</string>
+    <string name="altitude_range">Garaiera-barrutia</string>
+    <string name="average_altitude">Batezbesteko garaiera</string>
     <string name="shared_string_time">Denbora</string>
     <string name="total_distance">Distantzia guztira</string>
     
@@ -2636,7 +2636,7 @@ Area honi dagokio: %1$s x %2$s</string>
     <string name="restore_purchases">Berreskuratu erosketak</string>
     <string name="fonts_header">Maparen letra-tipoak</string>
     <string name="shared_string_paused">Pausatua</string>
-    <string name="osmand_extended_description_part1">"OsmAnd (OSM Automated Navigation Directions) mapa eta nabigazio aplikazio bat da. Doako, mundu osoko eta kalitate altuko OpenStreetMap (OSM) mapak eskura jartzen dizkizuna. Gozatu ahots bidezko nabigazioa edo nabigazio grafikoa, ikusi interesezko puntuak (POI),  sortu eta kudeatu GPX lorratzak, erabili sestra-kurbak eta altuera datuak (gehigarri abtek bidez), aukeratu kotxe, bizikleta eta oinezko moduen artean, editatu OSM, eta askoz gehiago."</string>
+    <string name="osmand_extended_description_part1">"OsmAnd (OSM Automated Navigation Directions) mapa eta nabigazio aplikazio bat da. Doako, mundu osoko eta kalitate altuko OpenStreetMap (OSM) mapak eskura jartzen dizkizuna. Gozatu ahots bidezko nabigazioa edo nabigazio grafikoa, ikusi interesezko puntuak (POI),  sortu eta kudeatu GPX lorratzak, erabili sestra-kurbak eta garaiera datuak (gehigarri baten bidez), aukeratu kotxe, bizikleta eta oinezko moduen artean, editatu OSM, eta askoz gehiago."</string>
     <string name="type_address">Idatzi helbidea</string>
     <string name="osmand_extended_description_part2">GPS nabigazioa • Lineaz kanpo (Ibiltaritza kargurik ez atzerrian zaudenean) edo konektatuta (azkarragoa) aritzea erabaki dezakezu • Biraz-birako ahots gidaketa bidean daramakizu (grabatutako eta sintetizatutako ahotsak) • Ibilbidea berregin egiten da bidetik ateratzen bazara • Erraien gida, kaleen izenak, eta heltzeko orduaren estimazioa bidean lagunduko zaituzte • Bidaia seguruagoa egiteko, egun/gau moduak automatikoki aldatzen dira • Abiadura muga bistaratzea aukeratu dezakezu, eta gainditzen baduzu abisuak jasotzea • Maparen zooma abiadurara egokitzen da • Helbidea, mota (adib. aparkalekua, jatetxea, hotela, gasolindegia, museoa) edo koordenatu geografikoen arabera bilatu ditzakezu helburuak • Ibilbidean tarteko puntuentzat euskarria du • Zure ibilbidea grabatu dezakezu edo GPX lorratz bat kargatu eta jarraitu dezakezu</string>
     <string name="shared_string_overview">Ikuspegi orokorra</string>
@@ -2718,8 +2718,8 @@ Area honi dagokio: %1$s x %2$s</string>
     
     <string name="range_min_max">Barrutia = Min/Max</string>
     <string name="osmand_extended_description_part3">Mapa • Bistaratu inguruko interesezko puntuak (POI) • Egokitu mapa zure mugimenduaren (edo iparrorratzaren) norabidera • Non zauden eta nora begiratzen duzun erakusten du • Partekatu zure kokalekua lagunek aurkitu zaitzaten • Gorde zuretzat garrantzitsuak diren tokiak gogokoetan • Mapan izenak nola bistaratu aukeratzen uzten dizu: zure hizkuntzan, tokiko hizkuntzan, edo ahoskera fonetikoa • Interneteko tesela mapak erakusten ditu, satelite ikuspegia (Bingek eskainia), hainbat gainazal, esaterako turismorako edo nabigaziorako GPX lorratzak eta azal gehigarriak gardentasun aldagarriarekin</string>
-    <string name="osmand_extended_description_part5">Bizikleta • Bizikletentzako bideak aurki ditzakezu mapan • Bizikletarako GPS nabigazioak ibilbideak bizikletentzako bideak erabiliz eraikiko du • Zure abiadura eta altuera ikusi ditzakezu • GPX grabaketak zure bidaia grabatu eta partekatzea ahalbidetzen dizu • Gehigarriekin sestra-kurbak eta erliebe-itzalak gaitu ditzakezu</string>
-    <string name="osmand_plus_extended_description_part6">Bizikleta eta oinezkoentzako ezaugarriak • Oinez, mendian, eta bizikletarekin egiteko bideak eta aktibitateak ikusi • Bizikleta eta oinezkoentzako ibilbide eta ikuspegi bereziak • Aukeran garraio publikoaren geltokiak (autobusa, tranbia, trena) lineen izenak barne • Aukeran bidaiaren grabaketa tokiko GPX fitxategira edo interneteko zerbitzari batera • AUkeran abiadura eta altuera bistaratu • Biostaratu sestra-kurbak eta erliebe-itzalak (plug-in gehigarriarekin)</string>
+    <string name="osmand_extended_description_part5">Bizikleta • Bizikletentzako bideak aurki ditzakezu mapan • Bizikletarako GPS nabigazioak ibilbideak bizikletentzako bideak erabiliz eraikiko du • Zure abiadura eta garaiera ikusi ditzakezu • GPX grabaketak zure bidaia grabatu eta partekatzea ahalbidetzen dizu • Gehigarriekin sestra-kurbak eta erliebe-itzalak gaitu ditzakezu</string>
+    <string name="osmand_plus_extended_description_part6">Bizikleta eta oinezkoentzako ezaugarriak • Oinez, mendian, eta bizikletarekin egiteko bideak eta aktibitateak ikusi • Bizikleta eta oinezkoentzako ibilbide eta ikuspegi bereziak • Aukeran garraio publikoaren geltokiak (autobusa, tranbia, trena) lineen izenak barne • Aukeran bidaiaren grabaketa tokiko GPX fitxategira edo interneteko zerbitzari batera • Aukeran abiadura eta garaiera bistaratu • Bistaratu sestra-kurbak eta erliebe-itzalak (plug-in gehigarriarekin)</string>
     <string name="min_max">Min/Max</string>
     <string name="release_2_7">\\u2022 Mapillary gehigarria kale-mailako argazkiekin
 \n
@@ -2733,7 +2733,7 @@ Area honi dagokio: %1$s x %2$s</string>
     <string name="rendering_value_translucent_pink_name">Arrosa gardena</string>
     <string name="osmand_extended_description_part6">Oinez, mendian, hirian • Makak oinezko eta mendizaleentzako ibilbideak erakutsiko dizkizu • Wikipediak asko kontatu ahal dizu hiri bat bisitatzean zuk nahiago duzun hizkuntzan • Garraio publikoaren geltokiak (autobusa, tranbia, trena), lineen izenak barne, hirian ibiltzeko laguntza • GPS nabigazioak oinezkoen moduan ibilbidea oinezkoentzako bideak barne-hartuz sortuko du • GPX ibilbide bat igo eta jarraitu dezakezu edo zurea grabatu eta partekatu</string>
     <string name="osmand_extended_description_part8">OsmAnd librea da eta garapen aktiboan dago. Edonork egin ditzake ekarpenak, arazoen berri emanez, itzulpenak hobetuz, edo ezaugarri berriak programatuz. Proiektua hobekuntza jarraituan murgilduta dago garatzaile eta erabiltzaileen arteko elkarrekintza hau dela eta. Proiektuak diru-laguntzak eta dohaintzak behar ditu ere kodeketa lana ordaindu eta ezaugarri berriak probatzeko. Gutxi gora-behrako mapen kalitatea: • Mendebaldeko Europa: **** • Ekialdeko Europa: *** • Errusia: *** • Ipar Amerika: *** • Hego Aerika: ** • Asia: ** • Japonia eta Korea: *** • Ekialde hurbila: ** • Afrika: ** • Antartika: * Munduko herrialde gehienetako maopak deskargatu daitezke! Eskuratu nabigatzaile fidagarri bat zuretzat - Frantzian, Alemanian, Mexikon, Erresuma Batuan, Espainian, Herbehereetan, Estatu Batuetan, Errusian, Brasilen, edonon.</string>
-    <string name="osmand_plus_extended_description_part1">OsmAnd+ (OSM Automated Navigation Directions) mapa eta nabigazio aplikazio bat da, mundu osoko, kalitate oneko OpenStreetMaps (OSM) mapak erabiltzen baimentzen dizkizu. Gozatu ahots bidezko ibilbide jarraipena Einteresezko puntuak (POI), sortu eta kudeatu GPX lorratzak, erabili sestra-kurbak eta altitude-informazioa, aukeratu kotxe, bizikleta eta oinezko moduen artean, editatu OSM eta askoz gehiago. OsmAnd+ ordainpeko bertsioa da. Erosten baduzu proiektua babesten duzu eta ezaugarri berrien gartapena, eta azken eguneraketak izango dituzu. Ezaugarri nagusietako batzuk:</string>
+    <string name="osmand_plus_extended_description_part1">OsmAnd+ (OSM Automated Navigation Directions) mapa eta nabigazio aplikazio bat da, mundu osoko, kalitate oneko OpenStreetMaps (OSM) mapak erabiltzen baimentzen dizkizu. Gozatu ahots bidezko ibilbide jarraipena interesezko puntuak (POI), sortu eta kudeatu GPX lorratzak, erabili sestra-kurbak eta garaiera-informazioa, aukeratu kotxe, bizikleta eta oinezko moduen artean, editatu OSM eta askoz gehiago. OsmAnd+ ordainpeko bertsioa da. Erosten baduzu proiektua babesten duzu eta ezaugarri berrien garapena, eta azken eguneraketak izango dituzu. Ezaugarri nagusietako batzuk:</string>
     <string name="osmand_plus_extended_description_part2">Nabigazioa • Internetera konektatua zein deskonektatuta dabil (ibiltaritza gasturik ez atzerriak zaudenean) • Bide-gurutzetik bide-gurutzera ahots gidaritza (grabatutako eta sintetizatutako ahotsekin) • Aukeran erraia gidaritza, kale izenaren bistaratzea, eta iritsiera orduaren estimazioa • Ibilbidean tarteko puntuak onartzen ditu • Ibilbidea uzten baduzu automatikoki birkalkulatzen du • Bilatu tokiak motaren arabera (esaterako, jatetxeak, hotelak, gasolindegiak, mudeoak), edo kokaleku geografikoaren arabera</string>
     <string name="osmand_plus_extended_description_part3">Maparen kontsulta • Bistaratu zure kokaleku eta norabidea • Aukeran alineatu irudia iparorratzarekin edo zure mugimenduaren norabidearekin • Gorde zure leku garrantzitsuak gogoko gisa • Bistaratu zure inguruko interesezko puntuak (POI) • Bistaratu interneteko tesela-mapa bereziak, satelite ikuspegia (Bing), edo gardentasun aldagarria duten turismorako gainazalak edo GPX lorratzak • Aukerak bistaratu izenak zure hizkuntzan, tokiko hizkuntzan edo idazkera fonetikoan</string>
     <string name="osmand_plus_extended_description_part4">Erabili OSM eta Wikipediako datuak • Kalitate handiko informazioa elkarlanean sortutako munduko proiektu onenen eskutik • OSM datua herrialdeko edo eskualdeko daude eskuragarri • Wikipedia POIak, ezinhonbeak bistak ikusteko • Mugarik gabeko deskargak aplikaziotik bertatik • Tamainaz txikitu deskargatutako bektore-mapak hilean behin gutxienez • Eskualdeko datu guztiak edo errepide sarearen datuak besterik ez deskargatzeko aukera (Adibidea: Japoinia osoa 700 MB dira eta errepide sarea bakarrik 200 MB)</string>
@@ -2762,4 +2762,5 @@ Area honi dagokio: %1$s x %2$s</string>
     <string name="save_route_point">Gorde ibilbideko puntua</string>
     <string name="waypoint_one">1. bide-puntua</string>
     <string name="route_point_one">1. ibilbide-puntua</string>
-</resources>
+<string name="measurement_tool_altitude">Garaiera: %1$s</string>
+    </resources>
