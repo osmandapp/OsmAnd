@@ -932,4 +932,7 @@
     <string name="mapillary_menu_descr_dates">Wobrazy z wěsteje doby pokazać.</string>
     <string name="mapillary_menu_descr_username">Wobrazy wěsteho wužiwarja pokazać.</string>
     <string name="mapillary_menu_title_username">Wužiwarske mjeno</string>
+    <string name="import_gpx_failed_descr">OsmAnd njemóže importować dataju. Prošu přepruwuj hač ma OsmAnd dowolnosć za začitanje dataje z tutoho městna.</string>
+    <string name="distance_moving">Zdalenosć skorigowana</string>
+    <string name="mapillary_image">Wobraz z Mapillary</string>
     </resources>
