@@ -12,15 +12,15 @@
     <string name="measurement_tool_altitude">Altitude: %1$s</string>
     <string name="measurement_tool_speed">Speed: %1$s</string>
     <string name="line">Line</string>
-    <string name="save_as_route_point">Save as Route Point</string>
+    <string name="save_as_route_point">Save as route points</string>
     <string name="save_as_line">Save as line</string>
     <string name="route_point">Route point</string>
-    <string name="edit_line">Edit Line</string>
+    <string name="edit_line">Edit line</string>
     <string name="add_point_before">Add point before</string>
     <string name="add_point_after">Add point after</string>
     <string name="shared_string_options">Options</string>
     <string name="measurement_tool_snap_to_road_descr">OsmAnd will add additional points, depending on the navigation type.</string>
-    <string name="measurement_tool_save_as_new_track_descr">You can save points either as route points or as a line.</string>
+    <string name="measurement_tool_save_as_new_track_descr">You can save the points either as route points or as a line.</string>
     <string name="choose_navigation_type">Choose navigation type</string>
     <string name="none_point_error">Please add at least one point.</string>
     <string name="enter_gpx_name">GPX file name:</string>
@@ -803,7 +803,7 @@
     <string name="shared_string_clear">Clear</string>
     <string name="shared_string_clear_all">Clear all</string>
     <string name="shared_string_save">Save</string>
-    <string name="shared_string_save_as_gpx">Save as new Track</string>
+    <string name="shared_string_save_as_gpx">Save as new GPX track</string>
     <string name="shared_string_rename">Rename</string>
     <string name="shared_string_delete">Delete</string>
     <string name="shared_string_delete_all">Delete all</string>
@@ -2690,5 +2690,5 @@
     <string name="import_track">Import track</string>
     <string name="import_track_desc">File %1$s does not contain waypoints, import it as a track?</string>
     <string name="move_point">Move Point</string>
-    <string name="add_segment_to_the_track">Add to a track</string>
+    <string name="add_segment_to_the_track">Add to a GPX track</string>
 </resources>
