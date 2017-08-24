@@ -121,4 +121,26 @@ public class FavouritePoint implements Serializable, LocationPoint {
 		return "Favourite " + getName(); //$NON-NLS-1$
 	}
 
+
+	@Override
+	public boolean equals(Object o) {
+		if (this == o) return true;
+
+		if (!(o instanceof FavouritePoint)) return false;
+
+		FavouritePoint fp = (FavouritePoint)o;
+
+		return (this.latitude == fp.latitude)
+				   && (this.longitude == fp.longitude)
+				   && (this.name.equals(fp.name));
+	}
+
+	@Override
+	public int hashCode() {
+		int hash = (int)latitude*1000 + (int)longitude*1000;
+		hash += (name != null) ? name.hashCode() : 0;
+		return hash;
+	}
+
 }
+

@@ -87,7 +87,7 @@ public class SQLiteAPIImpl implements SQLiteAPI {
 				}
 
 				@Override
-				public long getInt(int ind) {
+				public int getInt(int ind) {
 					return c.getInt(ind);
 				}
 

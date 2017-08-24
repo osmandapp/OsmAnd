@@ -45,7 +45,7 @@ public interface SQLiteAPI {
 		
 		long getLong(int ind);
 		
-		long getInt(int ind);
+		int getInt(int ind);
 		
 		byte[] getBlob(int ind);
 		

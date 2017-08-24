@@ -2834,8 +2834,8 @@ Tidligere destination bliver sidste mellemliggende punkt.</string>
     <string name="save_route_point">Gem rutepunkt</string>
     <string name="waypoint_one">Rutepunkt 1</string>
     <string name="route_point_one">Rutepunkt 1</string>
-<string name="measurement_tool_altitude">Højde: %1$s</string>
-    <string name="measurement_tool_speed">Hastighed: %1$ s</string>
+    <string name="measurement_tool_altitude">Højde: %1$s</string>
+    <string name="measurement_tool_speed">Hastighed: %1$s</string>
     <string name="line">Linje</string>
     <string name="save_as_route_point">Gem som rutepunkt</string>
     <string name="save_as_line">Gem som linje</string>
