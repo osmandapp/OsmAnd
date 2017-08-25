@@ -2650,4 +2650,24 @@
 	<string name="poi_reservation_no">Prenotatzione: nono</string>
 	<string name="poi_reservation_members_only">Prenotatzione: membros ebbia</string>
 
-	</resources>
+	<string name="poi_boat_rental_type">Barcas a nolu</string>
+
+<string name="poi_boat_rental">Nolu de barcas</string>
+	<string name="poi_boat_motorboat_rental_yes">Motoscafos: eja</string>
+	<string name="poi_boat_motorboat_rental_no">Motoscafos: nono</string>
+	<string name="poi_boat_houseboat_rental_yes">Domos gallegiantes: eja</string>
+	<string name="poi_boat_houseboat_rental_no">Domos gallegiantes: nono</string>
+	<string name="poi_boat_pedalboat_rental_yes">Pedalòs: eja</string>
+	<string name="poi_boat_pedalboat_rental_no">Pedalòs: nono</string>
+	<string name="poi_boat_jetski_rental_yes">Jetskis: eja</string>
+	<string name="poi_boat_jetski_rental_no">Jetskis: nono</string>
+	<string name="poi_boat_sailboat_rental_yes">Barcas a vela: eja</string>
+	<string name="poi_boat_sailboat_rental_no">Barcas a vela: nono</string>
+	<string name="poi_boat_dinghy_rental_rental_yes">Iscialupa: eja</string>
+	<string name="poi_boat_dinghy_rental_rental_no">Iscialupa: nono</string>
+	<string name="poi_boat_kayak_rental_rental_yes">Kayaks: eja</string>
+	<string name="poi_boat_kayak_rental_rental_no">Kayaks: nono</string>
+	<string name="poi_boat_canoe_rental_rental_yes">Canoas: eja</string>
+	<string name="poi_boat_canoe_rental_rental_no">Canoas: nono</string>
+
+</resources>
