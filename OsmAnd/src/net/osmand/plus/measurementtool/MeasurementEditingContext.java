@@ -34,10 +34,6 @@ public class MeasurementEditingContext {
 	// cache should be deleted if after changed or snappedToRoadPoints
 	private TrkSegment afterCacheForSnap;
 
-	private boolean inMovePointMode;
-	private boolean inAddPointBeforeMode;
-	private boolean inAddPointAfterMode;
-
 	private int selectedPointPosition = -1;
 	private WptPt originalPointToMove;
 
@@ -56,28 +52,8 @@ public class MeasurementEditingContext {
 		return commandManager;
 	}
 
-	public boolean isInMovePointMode() {
-		return inMovePointMode;
-	}
-
-	public void setInMovePointMode(boolean inMovePointMode) {
-		this.inMovePointMode = inMovePointMode;
-	}
-
 	public boolean isInSnapToRoadMode() {
 		return inSnapToRoadMode;
-	}
-
-	public void setInAddPointBeforeMode(boolean inAddPointBeforeMode) {
-		this.inAddPointBeforeMode = inAddPointBeforeMode;
-	}
-
-	public boolean isInAddPointBeforeMode() {
-		return inAddPointBeforeMode;
-	}
-
-	public void setInAddPointAfterMode(boolean inAddPointAfterMode) {
-		this.inAddPointAfterMode = inAddPointAfterMode;
 	}
 
 	public int getSelectedPointPosition() {
@@ -94,10 +70,6 @@ public class MeasurementEditingContext {
 
 	public void setOriginalPointToMove(WptPt originalPointToMove) {
 		this.originalPointToMove = originalPointToMove;
-	}
-
-	public boolean isInAddPointAfterMode() {
-		return inAddPointAfterMode;
 	}
 
 	public void setInSnapToRoadMode(boolean inSnapToRoadMode) {

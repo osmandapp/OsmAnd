@@ -231,11 +231,7 @@ public class MeasurementToolFragment extends Fragment {
 		mainView.findViewById(R.id.cancel_point_before_after_button).setOnClickListener(new View.OnClickListener() {
 			@Override
 			public void onClick(View view) {
-				if (editingCtx.isInAddPointAfterMode()) {
-					cancelAddPointAfterMode();
-				} else if (editingCtx.isInAddPointBeforeMode()) {
-					cancelAddPointBeforeMode();
-				}
+				cancelAddPointBeforeOrAfterMode();
 			}
 		});
 
@@ -243,11 +239,7 @@ public class MeasurementToolFragment extends Fragment {
 		upDownRow.setOnClickListener(new View.OnClickListener() {
 			@Override
 			public void onClick(View view) {
-				if (!pointsListOpened
-						&& editingCtx.getPointsCount() > 0
-						&& !editingCtx.isInMovePointMode()
-						&& !editingCtx.isInAddPointAfterMode()
-						&& !editingCtx.isInAddPointBeforeMode()) {
+				if (!pointsListOpened && editingCtx.getPointsCount() > 0 && editingCtx.getSelectedPointPosition() == -1) {
 					showPointsList();
 				} else {
 					hidePointsList();
@@ -265,22 +257,14 @@ public class MeasurementToolFragment extends Fragment {
 		mainView.findViewById(R.id.apply_point_before_after_point_button).setOnClickListener(new View.OnClickListener() {
 			@Override
 			public void onClick(View view) {
-				if (editingCtx.isInAddPointAfterMode()) {
-					applyAddPointAfterMode();
-				} else if (editingCtx.isInAddPointBeforeMode()) {
-					applyAddPointBeforeMode();
-				}
+				applyAddPointBeforeOrAfterMode();
 			}
 		});
 
 		mainView.findViewById(R.id.add_point_before_after_button).setOnClickListener(new View.OnClickListener() {
 			@Override
 			public void onClick(View view) {
-				if (editingCtx.isInAddPointAfterMode()) {
-					addPointAfter();
-				} else if (editingCtx.isInAddPointBeforeMode()) {
-					addPointBefore();
-				}
+				addPointBeforeOrAfter();
 			}
 		});
 
@@ -391,7 +375,7 @@ public class MeasurementToolFragment extends Fragment {
 		}
 
 		toolBarController = new MeasurementToolBarController(newGpxData);
-		if (editingCtx.isInAddPointAfterMode() || editingCtx.isInAddPointBeforeMode() || editingCtx.isInMovePointMode()) {
+		if (editingCtx.getSelectedPointPosition() != -1) {
 			toolBarController.setBackBtnIconIds(R.drawable.ic_action_mode_back, R.drawable.ic_action_mode_back);
 		} else {
 			toolBarController.setBackBtnIconIds(R.drawable.ic_action_remove_dark, R.drawable.ic_action_remove_dark);
@@ -479,22 +463,16 @@ public class MeasurementToolFragment extends Fragment {
 		if (pointsListOpened) {
 			hidePointsList();
 		}
-		if (editingCtx.isInMovePointMode()) {
+		if (editingCtx.getOriginalPointToMove() != null) {
 			switchMovePointMode(false);
-		}
-		if (editingCtx.isInAddPointAfterMode()) {
-			switchAddPointAfterMode(false);
-		}
-		if (editingCtx.isInAddPointBeforeMode()) {
-			switchAddPointBeforeMode(false);
+		} else if (editingCtx.getSelectedPointPosition() != -1) {
+			switchAddPointBeforeAfterMode(false);
 		}
 		MeasurementToolLayer layer = getMeasurementLayer();
 		if (layer != null) {
-			if (editingCtx.isInMovePointMode()) {
+			if (editingCtx.getOriginalPointToMove() != null) {
 				layer.exitMovePointMode(true);
 			}
-			layer.exitAddPointAfterMode();
-			layer.exitAddPointBeforeMode();
 			layer.setOnSingleTapListener(null);
 			layer.setOnEnterMovePointModeListener(null);
 		}
@@ -632,7 +610,8 @@ public class MeasurementToolFragment extends Fragment {
 					editingCtx.splitSegments(editingCtx.getSelectedPointPosition());
 					measurementLayer.enterAddingPointAfterMode();
 				}
-				switchAddPointAfterMode(true);
+				((TextView) mainView.findViewById(R.id.add_point_before_after_text)).setText(mainView.getResources().getString(R.string.add_point_after));
+				switchAddPointBeforeAfterMode(true);
 			}
 
 			@Override
@@ -641,7 +620,8 @@ public class MeasurementToolFragment extends Fragment {
 					editingCtx.splitSegments(editingCtx.getSelectedPointPosition());
 					measurementLayer.enterAddingPointBeforeMode();
 				}
-				switchAddPointBeforeMode(true);
+				((TextView) mainView.findViewById(R.id.add_point_before_after_text)).setText(mainView.getResources().getString(R.string.add_point_before));
+				switchAddPointBeforeAfterMode(true);
 			}
 
 			@Override
@@ -877,63 +857,31 @@ public class MeasurementToolFragment extends Fragment {
 		}
 	}
 
-	private void addPointAfter() {
+	private void addPointBeforeOrAfter() {
 		MeasurementToolLayer measurementLayer = getMeasurementLayer();
 		if (measurementLayer != null) {
-			if (addPointToPosition(editingCtx.getSelectedPointPosition())) {
-				editingCtx.setSelectedPointPosition(editingCtx.getSelectedPointPosition() + 1);
+			if (addPointToPosition(editingCtx.getPointsCount())) {
+				editingCtx.setSelectedPointPosition(editingCtx.getPointsCount());
 				editingCtx.splitSegments(editingCtx.getSelectedPointPosition());
 				measurementLayer.refreshMap();
 			}
 		}
 	}
 
-	private void applyAddPointAfterMode() {
+	private void applyAddPointBeforeOrAfterMode() {
 		switchAddPointAfterMode(false);
 		editingCtx.setSelectedPointPosition(-1);
 		MeasurementToolLayer measurementLayer = getMeasurementLayer();
 		if (measurementLayer != null) {
-			measurementLayer.exitAddPointAfterMode();
 			measurementLayer.refreshMap();
 		}
 	}
 
-	private void cancelAddPointAfterMode() {
-		switchAddPointAfterMode(false);
+	private void cancelAddPointBeforeOrAfterMode() {
+		switchAddPointBeforeAfterMode(false);
 		editingCtx.setSelectedPointPosition(-1);
 		MeasurementToolLayer measurementToolLayer = getMeasurementLayer();
 		if (measurementToolLayer != null) {
-			measurementToolLayer.exitAddPointAfterMode();
-			measurementToolLayer.refreshMap();
-		}
-	}
-
-	private void addPointBefore() {
-		MeasurementToolLayer measurementLayer = getMeasurementLayer();
-		if (measurementLayer != null) {
-			if (addPointToPosition(editingCtx.getSelectedPointPosition())) {
-				editingCtx.splitSegments(editingCtx.getSelectedPointPosition());
-				measurementLayer.refreshMap();
-			}
-		}
-	}
-
-	private void applyAddPointBeforeMode() {
-		switchAddPointBeforeMode(false);
-		editingCtx.setSelectedPointPosition(-1);
-		MeasurementToolLayer measurementLayer = getMeasurementLayer();
-		if (measurementLayer != null) {
-			measurementLayer.exitAddPointBeforeMode();
-			measurementLayer.refreshMap();
-		}
-	}
-
-	private void cancelAddPointBeforeMode() {
-		switchAddPointBeforeMode(false);
-		editingCtx.setSelectedPointPosition(-1);
-		MeasurementToolLayer measurementToolLayer = getMeasurementLayer();
-		if (measurementToolLayer != null) {
-			measurementToolLayer.exitAddPointBeforeMode();
 			measurementToolLayer.refreshMap();
 		}
 	}
@@ -969,14 +917,14 @@ public class MeasurementToolFragment extends Fragment {
 		}
 		markGeneralComponents(enable ? View.GONE : View.VISIBLE);
 		mark(enable ? View.VISIBLE : View.GONE,
-				R.id.add_point_after_text,
+				R.id.add_point_before_after_text,
 				R.id.add_point_before_after_controls);
 		mainIcon.setImageDrawable(getActiveIcon(enable
 				? R.drawable.ic_action_addpoint_above
 				: R.drawable.ic_action_ruler));
 	}
 
-	private void switchAddPointBeforeMode(boolean enable) {
+	private void switchAddPointBeforeAfterMode(boolean enable) {
 		if (enable) {
 			toolBarController.setBackBtnIconIds(R.drawable.ic_action_mode_back, R.drawable.ic_action_mode_back);
 		} else {
@@ -988,7 +936,7 @@ public class MeasurementToolFragment extends Fragment {
 		}
 		markGeneralComponents(enable ? View.GONE : View.VISIBLE);
 		mark(enable ? View.VISIBLE : View.GONE,
-				R.id.add_point_before_text,
+				R.id.add_point_before_after_text,
 				R.id.add_point_before_after_controls);
 		mainIcon.setImageDrawable(getActiveIcon(enable
 				? R.drawable.ic_action_addpoint_below
@@ -1417,16 +1365,11 @@ public class MeasurementToolFragment extends Fragment {
 	}
 
 	public void quit(boolean hidePointsListFirst) {
-		if (editingCtx.isInMovePointMode()) {
+		if (editingCtx.getOriginalPointToMove() != null) {
 			cancelMovePointMode();
 			return;
-		}
-		if (editingCtx.isInAddPointAfterMode()) {
-			cancelAddPointAfterMode();
-			return;
-		}
-		if (editingCtx.isInAddPointBeforeMode()) {
-			cancelAddPointBeforeMode();
+		} else if (editingCtx.getSelectedPointPosition() != -1) {
+			cancelAddPointBeforeOrAfterMode();
 			return;
 		}
 		showQuitDialog(hidePointsListFirst);
