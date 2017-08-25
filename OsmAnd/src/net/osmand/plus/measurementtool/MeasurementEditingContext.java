@@ -196,10 +196,8 @@ public class MeasurementEditingContext {
 		before.points.addAll(measurementPoints.subList(0, position));
 		addBeforeRenders();
 		after = new TrkSegment();
-		if (position != measurementPoints.size() - 1) {
-			after.points.addAll(measurementPoints.subList(position, measurementPoints.size()));
-			addAfterRenders();
-		}
+		after.points.addAll(measurementPoints.subList(position, measurementPoints.size()));
+		addAfterRenders();
 	}
 
 	public void clearSegments() {
