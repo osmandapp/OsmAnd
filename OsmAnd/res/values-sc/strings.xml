@@ -849,7 +849,7 @@ Memòria in proportzione %4$s MB (lìmite de Android %5$s MB, Dalvik %6$s MB).</
     <string name="search_position_favorites">Preferidos…</string>
     <string name="select_search_position">Chirca a curtzu de:</string>
     <string name="context_menu_item_search">Chirca a curtzu de inoghe</string>
-    <string name="shared_string_save_as_gpx">Sarva s’àndala comente rasta GPX</string>
+    <string name="shared_string_save_as_gpx">Sarva s’àndala comente rasta GPX noa</string>
     <string name="route_successfully_saved_at">Àndala sarvada comente \'%1$s\'.</string>
     <string name="filename_input">Nùmene documentu:</string>
     <string name="file_with_name_already_exist">Esistit giai unu documentu cun su matessi numene.</string>
@@ -2733,4 +2733,27 @@ Pro praghere iscrie su còdighe intreu</string>
     <string name="save_route_point">Sarva puntu de s\'àndala</string>
     <string name="waypoint_one">Puntu de coladòrgiu 1</string>
     <string name="route_point_one">Puntu de s\'àndala 1</string>
+<string name="measurement_tool_altitude">Artària: %1$s</string>
+    <string name="measurement_tool_speed">Lestresa: %1$s</string>
+    <string name="line">Lìnia</string>
+    <string name="save_as_route_point">Sarva comente puntos de s\'àndala</string>
+    <string name="save_as_line">Sarva comente lìnia</string>
+    <string name="route_point">Puntu de s\'àndala</string>
+    <string name="edit_line">Acontza sa lìnia</string>
+    <string name="add_point_before">Annanghe unu puntu in antis</string>
+    <string name="add_point_after">Annanghe unu puntu a pustis</string>
+    <string name="shared_string_options">Optziones</string>
+    <string name="measurement_tool_snap_to_road_descr">OsmAnd at a annànghere puntos in prus, a segunda de sa casta de nàvigu.</string>
+    <string name="measurement_tool_save_as_new_track_descr">Podes sarvare sos puntos comente puntos de s\'àndala o comente lìnia.</string>
+    <string name="choose_navigation_type">Issèbera sa casta de nàvigu</string>
+    <string name="add_route_points">Annanghe puntos a s\'àndala</string>
+    <string name="add_line">Annanghe una lìnia</string>
+    <string name="empty_state_my_tracks">Annanghe e registra rastas</string>
+    <string name="empty_state_my_tracks_desc">Registra o importa rastas de bìdere</string>
+    <string name="empty_state_favourites">Annanghe preferidos</string>
+    <string name="empty_state_favourites_desc">Annanghe preferidos a sa mapa o importa·los dae documentos</string>
+    <string name="import_track">Importa una rasta</string>
+    <string name="import_track_desc">Su documentu %1$s non cuntenit puntos de coladòrgiu, importare comente rasta?</string>
+    <string name="move_point">Move puntu</string>
+    <string name="add_segment_to_the_track">Annanghe a una rasta GPX</string>
 </resources>
