@@ -607,7 +607,7 @@ public class MeasurementToolFragment extends Fragment {
 			public void moveOnClick() {
 				if (measurementLayer != null) {
 					measurementLayer.enterMovingPointMode();
-					editingCtx.recreateSegments(editingCtx.getSelectedPointPosition());
+					editingCtx.splitSegments(editingCtx.getSelectedPointPosition());
 				}
 				switchMovePointMode(true);
 			}
@@ -624,7 +624,7 @@ public class MeasurementToolFragment extends Fragment {
 			public void addPointAfterOnClick() {
 				if (measurementLayer != null) {
 					editingCtx.setSelectedPointPosition(editingCtx.getSelectedPointPosition() + 1);
-					editingCtx.recreateSegments(editingCtx.getSelectedPointPosition());
+					editingCtx.splitSegments(editingCtx.getSelectedPointPosition());
 					measurementLayer.enterAddingPointAfterMode();
 				}
 				switchAddPointAfterMode(true);
@@ -633,7 +633,7 @@ public class MeasurementToolFragment extends Fragment {
 			@Override
 			public void addPointBeforeOnClick() {
 				if (measurementLayer != null) {
-					editingCtx.recreateSegments(editingCtx.getSelectedPointPosition());
+					editingCtx.splitSegments(editingCtx.getSelectedPointPosition());
 					measurementLayer.enterAddingPointBeforeMode();
 				}
 				switchAddPointBeforeMode(true);
@@ -884,7 +884,7 @@ public class MeasurementToolFragment extends Fragment {
 		if (measurementLayer != null) {
 			if (addPointToPosition(editingCtx.getSelectedPointPosition())) {
 				editingCtx.setSelectedPointPosition(editingCtx.getSelectedPointPosition() + 1);
-				editingCtx.recreateSegments(editingCtx.getSelectedPointPosition());
+				editingCtx.splitSegments(editingCtx.getSelectedPointPosition());
 				measurementLayer.refreshMap();
 			}
 		}
@@ -916,7 +916,7 @@ public class MeasurementToolFragment extends Fragment {
 		MeasurementToolLayer measurementLayer = getMeasurementLayer();
 		if (measurementLayer != null) {
 			if (addPointToPosition(editingCtx.getSelectedPointPosition())) {
-				editingCtx.recreateSegments(editingCtx.getSelectedPointPosition());
+				editingCtx.splitSegments(editingCtx.getSelectedPointPosition());
 				measurementLayer.refreshMap();
 			}
 		}
@@ -1040,7 +1040,7 @@ public class MeasurementToolFragment extends Fragment {
 		MeasurementToolLayer measurementLayer = getMeasurementLayer();
 		if (measurementLayer != null) {
 			added = commandManager.execute(new AddPointCommand(measurementLayer, position));
-			editingCtx.recreateSegments(position);
+			editingCtx.splitSegments(position);
 			doAddOrMovePointCommonStuff();
 		}
 		return added;

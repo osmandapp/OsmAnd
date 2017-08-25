@@ -249,6 +249,11 @@ public class MeasurementToolLayer extends OsmandMapLayer implements ContextMenuL
 					ty.add(tb.getCenterPixelY());
 				}
 				if (after.points.size() > 0) {
+					if (before.points.size() == 0) {
+						path.moveTo(tb.getCenterPixelX(), tb.getCenterPixelY());
+						tx.add(tb.getCenterPixelX());
+						ty.add(tb.getCenterPixelY());
+					}
 					WptPt pt = after.points.get(0);
 					int locX = tb.getPixXFromLonNoRot(pt.lon);
 					int locY = tb.getPixYFromLatNoRot(pt.lat);

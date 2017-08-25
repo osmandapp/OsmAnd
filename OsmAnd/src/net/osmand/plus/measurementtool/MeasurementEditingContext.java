@@ -191,7 +191,7 @@ public class MeasurementEditingContext {
 		after = new TrkSegment();
 	}
 
-	public void recreateSegments(int position) {
+	public void splitSegments(int position) {
 		before = new TrkSegment();
 		before.points.addAll(measurementPoints.subList(0, position));
 		addBeforeRenders();
