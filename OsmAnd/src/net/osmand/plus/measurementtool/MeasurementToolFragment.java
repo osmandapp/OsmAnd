@@ -881,6 +881,7 @@ public class MeasurementToolFragment extends Fragment {
 
 	private void cancelAddPointBeforeOrAfterMode() {
 		switchAddPointBeforeAfterMode(false);
+		editingCtx.splitSegments(editingCtx.getBeforePoints().size() + editingCtx.getAfterPoints().size());
 		editingCtx.setSelectedPointPosition(-1);
 		MeasurementToolLayer measurementToolLayer = getMeasurementLayer();
 		if (measurementToolLayer != null) {
