@@ -129,10 +129,6 @@ public class MeasurementToolLayer extends OsmandMapLayer implements ContextMenuL
 		return false;
 	}
 
-	void clearSelection() {
-		editingCtx.setSelectedPointPosition(-1);
-	}
-
 	@Override
 	public boolean onLongPressEvent(PointF point, RotatedTileBox tileBox) {
 		if (inMeasurementMode) {
@@ -323,7 +319,9 @@ public class MeasurementToolLayer extends OsmandMapLayer implements ContextMenuL
 			WptPt pt = editingCtx.getOriginalPointToMove();
 			editingCtx.getPoints().add(editingCtx.getSelectedPointPosition(), pt);
 		}
+		editingCtx.recreateSegments();
 		editingCtx.setOriginalPointToMove(null);
+		editingCtx.setSelectedPointPosition(-1);
 	}
 
 	void exitAddPointAfterMode() {
