@@ -209,6 +209,8 @@ public class MeasurementEditingContext {
 					cache.points.addAll(Arrays.asList(pair.first, pair.second));
 				}
 			}
+		} else {
+			cache.points.addAll(original.points);
 		}
 	}
 
