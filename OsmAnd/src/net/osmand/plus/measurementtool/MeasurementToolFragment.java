@@ -595,7 +595,6 @@ public class MeasurementToolFragment extends Fragment {
 			@Override
 			public void clearAllOnClick() {
 				editingCtx.getCommandManager().execute(new ClearPointsCommand(measurementLayer));
-				editingCtx.clearSegments();
 				editingCtx.cancelSnapToRoad();
 				if (pointsListOpened) {
 					hidePointsList();
