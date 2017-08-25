@@ -952,7 +952,7 @@ public class MeasurementToolFragment extends Fragment {
 	}
 
 	private void switchMovePointMode(boolean enable) {
-		if (editingCtx.isInMovePointMode()) {
+		if (enable) {
 			toolBarController.setBackBtnIconIds(R.drawable.ic_action_mode_back, R.drawable.ic_action_mode_back);
 		} else {
 			toolBarController.setBackBtnIconIds(R.drawable.ic_action_remove_dark, R.drawable.ic_action_remove_dark);
@@ -971,7 +971,7 @@ public class MeasurementToolFragment extends Fragment {
 	}
 
 	private void switchAddPointAfterMode(boolean enable) {
-		if (editingCtx.isInAddPointAfterMode()) {
+		if (enable) {
 			toolBarController.setBackBtnIconIds(R.drawable.ic_action_mode_back, R.drawable.ic_action_mode_back);
 		} else {
 			toolBarController.setBackBtnIconIds(R.drawable.ic_action_remove_dark, R.drawable.ic_action_remove_dark);
@@ -990,7 +990,7 @@ public class MeasurementToolFragment extends Fragment {
 	}
 
 	private void switchAddPointBeforeMode(boolean enable) {
-		if (editingCtx.isInAddPointBeforeMode()) {
+		if (enable) {
 			toolBarController.setBackBtnIconIds(R.drawable.ic_action_mode_back, R.drawable.ic_action_mode_back);
 		} else {
 			toolBarController.setBackBtnIconIds(R.drawable.ic_action_remove_dark, R.drawable.ic_action_remove_dark);
