@@ -327,9 +327,9 @@ public class MeasurementToolLayer extends OsmandMapLayer implements ContextMenuL
 			WptPt pt = editingCtx.getOriginalPointToMove();
 			editingCtx.addPoint(pt);
 		}
-//		editingCtx.recreateSegments();
 		editingCtx.setOriginalPointToMove(null);
 		editingCtx.setSelectedPointPosition(-1);
+		editingCtx.splitSegments(editingCtx.getBeforePoints().size() + editingCtx.getAfterPoints().size());
 	}
 
 	void exitAddPointAfterMode() {

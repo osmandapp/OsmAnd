@@ -135,30 +135,6 @@ public class MeasurementEditingContext {
 		return after;
 	}
 
-//	public void recreateSegments() {
-//		List<WptPt> points = new ArrayList<>();
-//		points.addAll(before.points);
-//		points.addAll(after.points);
-//		before.points.clear();
-//		if (points.size() > 1) {
-//			for (int i = 0; i < points.size() - 1; i++) {
-//				Pair<WptPt, WptPt> pair = new Pair<>(points.get(i), points.get(i + 1));
-//				List<WptPt> pts = snappedToRoadPoints.get(pair);
-//				if (pts != null) {
-//					before.points.addAll(pts);
-//				} else {
-//					if (inSnapToRoadMode) {
-//						scheduleRouteCalculateIfNotEmpty();
-//					}
-//					before.points.addAll(Arrays.asList(pair.first, pair.second));
-//				}
-//			}
-//		} else {
-//			before.points.addAll(points);
-//		}
-//		after.points.clear();
-//	}
-
 	public List<WptPt> getPoints() {
 		return getBeforePoints();
 	}
@@ -168,7 +144,7 @@ public class MeasurementEditingContext {
 	}
 
 	public List<WptPt> getAfterPoints() {
-		return  after.points;
+		return after.points;
 	}
 
 	public int getPointsCount() {
@@ -180,9 +156,13 @@ public class MeasurementEditingContext {
 		points.addAll(before.points);
 		points.addAll(after.points);
 		before.points.clear();
-		before.points.addAll(points.subList(0, position));
 		after.points.clear();
-		after.points.addAll(points.subList(position, points.size()));
+		if (position == before.points.size() + after.points.size()) {
+			before.points.addAll(points);
+		} else {
+			before.points.addAll(points.subList(0, position));
+			after.points.addAll(points.subList(position, points.size()));
+		}
 	}
 
 	public void addPoint(WptPt pt) {
@@ -283,7 +263,6 @@ public class MeasurementEditingContext {
 					pts.add(pt);
 				}
 				snappedToRoadPoints.put(currentPair, pts);
-//				recreateSegments();
 				progressListener.refreshMap();
 				if (!snapToRoadPairsToCalculate.isEmpty()) {
 					application.getRoutingHelper().startRouteCalculationThread(getParams(), true, true);
