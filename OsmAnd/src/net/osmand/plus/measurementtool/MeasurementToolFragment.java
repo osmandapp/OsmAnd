@@ -303,7 +303,7 @@ public class MeasurementToolFragment extends Fragment {
 			@Override
 			public void onClick(View view) {
 				editingCtx.getCommandManager().undo();
-				editingCtx.recreateSegments();
+//				editingCtx.recreateSegments();
 				if (editingCtx.getCommandManager().canUndo()) {
 					enable(undoBtn);
 				} else {
@@ -324,7 +324,7 @@ public class MeasurementToolFragment extends Fragment {
 			@Override
 			public void onClick(View view) {
 				editingCtx.getCommandManager().redo();
-				editingCtx.recreateSegments();
+//				editingCtx.recreateSegments();
 				if (editingCtx.getCommandManager().canRedo()) {
 					enable(redoBtn);
 				} else {
@@ -625,7 +625,7 @@ public class MeasurementToolFragment extends Fragment {
 				if (measurementLayer != null) {
 					removePoint(measurementLayer, editingCtx.getSelectedPointPosition());
 				}
-				editingCtx.recreateSegments();
+//				editingCtx.recreateSegments();
 				editingCtx.setSelectedPointPosition(-1);
 			}
 
@@ -682,7 +682,7 @@ public class MeasurementToolFragment extends Fragment {
 
 	private void removePoint(MeasurementToolLayer layer, int position) {
 		editingCtx.getCommandManager().execute(new RemovePointCommand(layer, position));
-		editingCtx.recreateSegments();
+//		editingCtx.recreateSegments();
 		adapter.notifyDataSetChanged();
 		disable(redoBtn);
 		updateText();
@@ -749,7 +749,7 @@ public class MeasurementToolFragment extends Fragment {
 					toPosition = holder.getAdapterPosition();
 					if (toPosition >= 0 && fromPosition >= 0 && toPosition != fromPosition) {
 						editingCtx.getCommandManager().execute(new ReorderPointCommand(measurementLayer, fromPosition, toPosition));
-						editingCtx.recreateSegments();
+//						editingCtx.recreateSegments();
 						adapter.notifyDataSetChanged();
 						disable(redoBtn);
 						updateText();
@@ -811,7 +811,7 @@ public class MeasurementToolFragment extends Fragment {
 		GPXFile gpx = newGpxData.getGpxFile();
 		List<WptPt> points = gpx.getRoutePoints();
 		if (measurementLayer != null) {
-			editingCtx.getPoints().addAll(points);
+			editingCtx.addPoints(points);
 			adapter.notifyDataSetChanged();
 			updateText();
 		}
@@ -823,7 +823,7 @@ public class MeasurementToolFragment extends Fragment {
 		TrkSegment segment = newGpxData.getTrkSegment();
 		List<WptPt> points = segment.points;
 		if (measurementLayer != null) {
-			editingCtx.getPoints().addAll(points);
+			editingCtx.addPoints(points);
 			adapter.notifyDataSetChanged();
 			updateText();
 		}
@@ -868,7 +868,7 @@ public class MeasurementToolFragment extends Fragment {
 			WptPt oldPoint = editingCtx.getOriginalPointToMove();
 			int position = editingCtx.getSelectedPointPosition();
 			editingCtx.getCommandManager().execute(new MovePointCommand(measurementLayer, oldPoint, newPoint, position));
-			editingCtx.getPoints().add(position, newPoint);
+			editingCtx.addPoint(newPoint);
 			doAddOrMovePointCommonStuff();
 			measurementLayer.exitMovePointMode(false);
 			measurementLayer.refreshMap();
@@ -898,7 +898,7 @@ public class MeasurementToolFragment extends Fragment {
 	private void applyAddPointAfterMode() {
 		switchAddPointAfterMode(false);
 		editingCtx.setSelectedPointPosition(-1);
-		editingCtx.recreateSegments();
+//		editingCtx.recreateSegments();
 		MeasurementToolLayer measurementLayer = getMeasurementLayer();
 		if (measurementLayer != null) {
 			measurementLayer.exitAddPointAfterMode();
@@ -909,7 +909,7 @@ public class MeasurementToolFragment extends Fragment {
 	private void cancelAddPointAfterMode() {
 		switchAddPointAfterMode(false);
 		editingCtx.setSelectedPointPosition(-1);
-		editingCtx.recreateSegments();
+//		editingCtx.recreateSegments();
 		MeasurementToolLayer measurementToolLayer = getMeasurementLayer();
 		if (measurementToolLayer != null) {
 			measurementToolLayer.exitAddPointAfterMode();
@@ -930,7 +930,7 @@ public class MeasurementToolFragment extends Fragment {
 	private void applyAddPointBeforeMode() {
 		switchAddPointBeforeMode(false);
 		editingCtx.setSelectedPointPosition(-1);
-		editingCtx.recreateSegments();
+//		editingCtx.recreateSegments();
 		MeasurementToolLayer measurementLayer = getMeasurementLayer();
 		if (measurementLayer != null) {
 			measurementLayer.exitAddPointBeforeMode();
@@ -941,7 +941,7 @@ public class MeasurementToolFragment extends Fragment {
 	private void cancelAddPointBeforeMode() {
 		switchAddPointBeforeMode(false);
 		editingCtx.setSelectedPointPosition(-1);
-		editingCtx.recreateSegments();
+//		editingCtx.recreateSegments();
 		MeasurementToolLayer measurementToolLayer = getMeasurementLayer();
 		if (measurementToolLayer != null) {
 			measurementToolLayer.exitAddPointBeforeMode();
@@ -1019,7 +1019,6 @@ public class MeasurementToolFragment extends Fragment {
 		MeasurementToolLayer measurementLayer = getMeasurementLayer();
 		if (measurementLayer != null) {
 			editingCtx.getCommandManager().execute(new AddPointCommand(measurementLayer, false));
-			editingCtx.recreateSegments();
 			doAddOrMovePointCommonStuff();
 		}
 	}
@@ -1028,7 +1027,6 @@ public class MeasurementToolFragment extends Fragment {
 		MeasurementToolLayer measurementLayer = getMeasurementLayer();
 		if (measurementLayer != null) {
 			editingCtx.getCommandManager().execute(new AddPointCommand(measurementLayer, true));
-			editingCtx.recreateSegments();
 			doAddOrMovePointCommonStuff();
 		}
 	}
@@ -1473,7 +1471,7 @@ public class MeasurementToolFragment extends Fragment {
 
 	private void dismiss(MapActivity mapActivity) {
 		try {
-			editingCtx.getPoints().clear();
+			editingCtx.clearSegments();
 			if (pointsListOpened) {
 				hidePointsList();
 			}

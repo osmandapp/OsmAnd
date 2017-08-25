@@ -25,13 +25,13 @@ public class ClearPointsCommand extends MeasurementModeCommand {
 
 	@Override
 	public void undo() {
-		measurementLayer.getEditingCtx().getPoints().addAll(points);
+		measurementLayer.getEditingCtx().addPoints(points);
 		measurementLayer.refreshMap();
 	}
 
 	@Override
 	public void redo() {
-		measurementLayer.getEditingCtx().getPoints().clear();
+		measurementLayer.getEditingCtx().clearSegments();
 		measurementLayer.refreshMap();
 	}
 

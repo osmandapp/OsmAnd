@@ -50,32 +50,12 @@ public class MeasurementEditingContext {
 	private Queue<Pair<WptPt, WptPt>> snapToRoadPairsToCalculate = new LinkedList<>();
 	private Map<Pair<WptPt, WptPt>, List<WptPt>> snappedToRoadPoints = new ConcurrentHashMap<>();
 
-	private List<WptPt> measurementPoints = new LinkedList<>();
-
 	public void setApplication(OsmandApplication application) {
 		this.application = application;
 	}
 
 	public MeasurementCommandManager getCommandManager() {
 		return commandManager;
-	}
-
-	public void setBefore(TrkSegment before) {
-		this.before = before;
-		addBeforeRenders();
-	}
-
-	public void setAfter(TrkSegment after) {
-		this.after = after;
-		addAfterRenders();
-	}
-
-	private void addBeforeRenders() {
-		before.renders.add(new Renderable.StandardTrack(before.points, 17.2));
-	}
-
-	private void addAfterRenders() {
-		after.renders.add(new Renderable.StandardTrack(after.points, 17.2));
 	}
 
 	public boolean isInMovePointMode() {
@@ -142,14 +122,6 @@ public class MeasurementEditingContext {
 		return snappedToRoadPoints;
 	}
 
-	public List<WptPt> getPoints() {
-		return measurementPoints;
-	}
-
-	public int getPointsCount() {
-		return measurementPoints.size();
-	}
-
 	public TrkSegment getBeforeTrkSegmentLine() {
 		// check if all segments calculated for snap to road
 //		if(beforeCacheForSnap != null) {
@@ -163,48 +135,83 @@ public class MeasurementEditingContext {
 		return after;
 	}
 
-	public void recreateSegments() {
-		before = new TrkSegment();
-		if (measurementPoints.size() > 1) {
-			for (int i = 0; i < measurementPoints.size() - 1; i++) {
-				Pair<WptPt, WptPt> pair = new Pair<>(measurementPoints.get(i), measurementPoints.get(i + 1));
-				List<WptPt> pts = snappedToRoadPoints.get(pair);
-				if (pts != null) {
-					before.points.addAll(pts);
-				} else {
-					if (inSnapToRoadMode) {
-						scheduleRouteCalculateIfNotEmpty();
-					}
-					before.points.addAll(Arrays.asList(pair.first, pair.second));
-				}
-			}
-		} else {
-			before.points.addAll(measurementPoints);
-		}
-		addBeforeRenders();
-		after = new TrkSegment();
+//	public void recreateSegments() {
+//		List<WptPt> points = new ArrayList<>();
+//		points.addAll(before.points);
+//		points.addAll(after.points);
+//		before.points.clear();
+//		if (points.size() > 1) {
+//			for (int i = 0; i < points.size() - 1; i++) {
+//				Pair<WptPt, WptPt> pair = new Pair<>(points.get(i), points.get(i + 1));
+//				List<WptPt> pts = snappedToRoadPoints.get(pair);
+//				if (pts != null) {
+//					before.points.addAll(pts);
+//				} else {
+//					if (inSnapToRoadMode) {
+//						scheduleRouteCalculateIfNotEmpty();
+//					}
+//					before.points.addAll(Arrays.asList(pair.first, pair.second));
+//				}
+//			}
+//		} else {
+//			before.points.addAll(points);
+//		}
+//		after.points.clear();
+//	}
+
+	public List<WptPt> getPoints() {
+		return getBeforePoints();
+	}
+
+	public List<WptPt> getBeforePoints() {
+		return before.points;
+	}
+
+	public List<WptPt> getAfterPoints() {
+		return  after.points;
+	}
+
+	public int getPointsCount() {
+		return before.points.size();
 	}
 
 	public void splitSegments(int position) {
-		before = new TrkSegment();
-		before.points.addAll(measurementPoints.subList(0, position));
-		addBeforeRenders();
-		after = new TrkSegment();
-		after.points.addAll(measurementPoints.subList(position, measurementPoints.size()));
-		addAfterRenders();
+		List<WptPt> points = new ArrayList<>();
+		points.addAll(before.points);
+		points.addAll(after.points);
+		before.points.clear();
+		before.points.addAll(points.subList(0, position));
+		after.points.clear();
+		after.points.addAll(points.subList(position, points.size()));
+	}
+
+	public void addPoint(WptPt pt) {
+		before.points.add(pt);
+	}
+
+	public void addPoint(int position, WptPt pt) {
+		before.points.add(position, pt);
+	}
+
+	public void addPoints(List<WptPt> points) {
+		before.points.addAll(points);
+	}
+
+	public WptPt removePoint(int position) {
+		return before.points.remove(position);
 	}
 
 	public void clearSegments() {
-		before = new TrkSegment();
-		after = new TrkSegment();
+		before.points.clear();
+		after.points.clear();
 	}
 
 	void scheduleRouteCalculateIfNotEmpty() {
-		if (application == null || measurementPoints.size() < 1) {
+		if (application == null || before.points.size() < 1) {
 			return;
 		}
-		for (int i = 0; i < measurementPoints.size() - 1; i++) {
-			Pair<WptPt, WptPt> pair = new Pair<>(measurementPoints.get(i), measurementPoints.get(i + 1));
+		for (int i = 0; i < before.points.size() - 1; i++) {
+			Pair<WptPt, WptPt> pair = new Pair<>(before.points.get(i), before.points.get(i + 1));
 			if (snappedToRoadPoints.get(pair) == null && !snapToRoadPairsToCalculate.contains(pair)) {
 				snapToRoadPairsToCalculate.add(pair);
 			}
@@ -276,7 +283,7 @@ public class MeasurementEditingContext {
 					pts.add(pt);
 				}
 				snappedToRoadPoints.put(currentPair, pts);
-				recreateSegments();
+//				recreateSegments();
 				progressListener.refreshMap();
 				if (!snapToRoadPairsToCalculate.isEmpty()) {
 					application.getRoutingHelper().startRouteCalculationThread(getParams(), true, true);
