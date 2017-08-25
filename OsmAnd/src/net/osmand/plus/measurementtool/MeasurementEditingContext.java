@@ -211,16 +211,15 @@ public class MeasurementEditingContext {
 		if (application == null || measurementPoints.size() < 1) {
 			return;
 		}
-		inSnapToRoadMode = true;
 		for (int i = 0; i < measurementPoints.size() - 1; i++) {
 			Pair<WptPt, WptPt> pair = new Pair<>(measurementPoints.get(i), measurementPoints.get(i + 1));
 			if (snappedToRoadPoints.get(pair) == null && !snapToRoadPairsToCalculate.contains(pair)) {
 				snapToRoadPairsToCalculate.add(pair);
 			}
 		}
-		if (!snapToRoadPairsToCalculate.isEmpty() && progressListener != null) {
-			application.getRoutingHelper().startRouteCalculationThread(getParams(), true, true);
-			inSnapToRoadMode = true;
+		RoutingHelper routingHelper = application.getRoutingHelper();
+		if (!snapToRoadPairsToCalculate.isEmpty() && progressListener != null && !routingHelper.isRouteBeingCalculated()) {
+			routingHelper.startRouteCalculationThread(getParams(), true, true);
 			application.runInUIThread(new Runnable() {
 				@Override
 				public void run() {
@@ -231,7 +230,6 @@ public class MeasurementEditingContext {
 	}
 
 	void cancelSnapToRoad() {
-		inSnapToRoadMode = false;
 		progressListener.hideProgressBar();
 		if (calculationProgress != null) {
 			calculationProgress.isCancelled = true;

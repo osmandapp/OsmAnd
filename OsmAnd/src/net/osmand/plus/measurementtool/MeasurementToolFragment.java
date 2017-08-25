@@ -754,6 +754,7 @@ public class MeasurementToolFragment extends Fragment {
 
 	private void enableSnapToRoadMode(ApplicationMode appMode) {
 		editingCtx.setSnapToRoadAppMode(appMode);
+		editingCtx.setInSnapToRoadMode(true);
 		editingCtx.scheduleRouteCalculateIfNotEmpty();
 		showSnapToRoadControls();
 	}
@@ -785,6 +786,7 @@ public class MeasurementToolFragment extends Fragment {
 		toolBarController.setTopBarSwitchVisible(false);
 		toolBarController.setTitle(previousToolBarTitle);
 		mainIcon.setImageDrawable(getActiveIcon(R.drawable.ic_action_ruler));
+		editingCtx.setInSnapToRoadMode(false);
 		editingCtx.cancelSnapToRoad();
 		MapActivity mapActivity = getMapActivity();
 		if (mapActivity != null) {
