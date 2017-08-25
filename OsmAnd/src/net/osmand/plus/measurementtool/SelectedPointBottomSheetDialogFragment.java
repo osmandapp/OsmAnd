@@ -116,7 +116,7 @@ public class SelectedPointBottomSheetDialogFragment extends BottomSheetDialogFra
 		});
 
 		List<WptPt> points = measurementLayer.getEditingCtx().getPoints();
-		int pos = measurementLayer.getSelectedPointPos();
+		int pos = measurementLayer.getEditingCtx().getSelectedPointPosition();
 		WptPt pt = points.get(pos);
 		String pointTitle = pt.name;
 		if (!TextUtils.isEmpty(pointTitle)) {

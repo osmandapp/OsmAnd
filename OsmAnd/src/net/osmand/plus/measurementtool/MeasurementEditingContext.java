@@ -38,6 +38,9 @@ public class MeasurementEditingContext {
 	private boolean inAddPointBeforeMode;
 	private boolean inAddPointAfterMode;
 
+	private int selectedPointPosition = -1;
+	private WptPt originalPointToMove;
+
 	private boolean inSnapToRoadMode;
 	private SnapToRoadProgressListener progressListener;
 	private ApplicationMode snapToRoadAppMode;
@@ -91,6 +94,22 @@ public class MeasurementEditingContext {
 
 	public void setInAddPointAfterMode(boolean inAddPointAfterMode) {
 		this.inAddPointAfterMode = inAddPointAfterMode;
+	}
+
+	public int getSelectedPointPosition() {
+		return selectedPointPosition;
+	}
+
+	public void setSelectedPointPosition(int selectedPointPosition) {
+		this.selectedPointPosition = selectedPointPosition;
+	}
+
+	public WptPt getOriginalPointToMove() {
+		return originalPointToMove;
+	}
+
+	public void setOriginalPointToMove(WptPt originalPointToMove) {
+		this.originalPointToMove = originalPointToMove;
 	}
 
 	public boolean isInAddPointAfterMode() {
@@ -172,21 +191,13 @@ public class MeasurementEditingContext {
 		after = new TrkSegment();
 	}
 
-	public void recreateSegments(int position, boolean addAfter, boolean addBefore) {
+	public void recreateSegments(int position) {
 		before = new TrkSegment();
-		if (addAfter) {
-			before.points.addAll(measurementPoints.subList(0, position + 1));
-		} else {
-			before.points.addAll(measurementPoints.subList(0, position));
-		}
+		before.points.addAll(measurementPoints.subList(0, position));
 		addBeforeRenders();
 		after = new TrkSegment();
 		if (position != measurementPoints.size() - 1) {
-			if (addBefore) {
-				after.points.addAll(measurementPoints.subList(position, measurementPoints.size()));
-			} else {
-				after.points.addAll(measurementPoints.subList(position + 1, measurementPoints.size()));
-			}
+			after.points.addAll(measurementPoints.subList(position, measurementPoints.size()));
 			addAfterRenders();
 		}
 	}

@@ -25,6 +25,7 @@ import java.util.List;
 import gnu.trove.list.array.TIntArrayList;
 
 public class MeasurementToolLayer extends OsmandMapLayer implements ContextMenuLayer.IContextMenuProvider {
+	private static final int POINTS_TO_DRAW = 50;
 
 	private OsmandMapTileView view;
 	private boolean inMeasurementMode;
@@ -44,11 +45,8 @@ public class MeasurementToolLayer extends OsmandMapLayer implements ContextMenuL
 	private OnMeasureDistanceToCenter measureDistanceToCenterListener;
 	private OnSingleTapListener singleTapListener;
 	private OnEnterMovePointModeListener enterMovePointModeListener;
-	private int selectedPointPos = -1;
-	private WptPt selectedCachedPoint;
 	private LatLon pressedPointLatLon;
 	private boolean overlapped;
-	private int pointsToDraw = 50;
 	private MeasurementEditingContext editingCtx;
 
 	@Override
@@ -88,22 +86,6 @@ public class MeasurementToolLayer extends OsmandMapLayer implements ContextMenuL
 		this.measureDistanceToCenterListener = listener;
 	}
 
-	void setSelectedPointPos(int pos) {
-		selectedPointPos = pos;
-	}
-
-	void setSelectedCachedPoint(WptPt selectedCachedPoint) {
-		this.selectedCachedPoint = selectedCachedPoint;
-	}
-
-	WptPt getSelectedCachedPoint() {
-		return selectedCachedPoint;
-	}
-
-	int getSelectedPointPos() {
-		return selectedPointPos;
-	}
-
 	public MeasurementEditingContext getEditingCtx() {
 		return editingCtx;
 	}
@@ -138,7 +120,7 @@ public class MeasurementToolLayer extends OsmandMapLayer implements ContextMenuL
 				if (!overlapped) {
 					selectPoint(point.x, point.y, true);
 				}
-				if (selectedPointPos == -1) {
+				if (editingCtx.getSelectedPointPosition() == -1) {
 					pressedPointLatLon = tileBox.getLatLonFromPixel(point.x, point.y);
 					singleTapListener.onAddPoint();
 				}
@@ -148,8 +130,7 @@ public class MeasurementToolLayer extends OsmandMapLayer implements ContextMenuL
 	}
 
 	void clearSelection() {
-		selectedPointPos = -1;
-		selectedCachedPoint = null;
+		editingCtx.setSelectedPointPosition(-1);
 	}
 
 	@Override
@@ -160,9 +141,9 @@ public class MeasurementToolLayer extends OsmandMapLayer implements ContextMenuL
 					&& !editingCtx.isInAddPointAfterMode()
 					&& editingCtx.getPointsCount() > 0) {
 				selectPoint(point.x, point.y, false);
-				if (selectedCachedPoint != null && selectedPointPos != -1) {
+				if (editingCtx.getSelectedPointPosition() != -1) {
 					enterMovingPointMode();
-					if (inMeasurementMode && editingCtx.isInMovePointMode() && enterMovePointModeListener != null) {
+					if (inMeasurementMode && enterMovePointModeListener != null) {
 						enterMovePointModeListener.onEnterMovePointMode();
 					}
 				}
@@ -173,17 +154,19 @@ public class MeasurementToolLayer extends OsmandMapLayer implements ContextMenuL
 
 	void enterMovingPointMode() {
 		editingCtx.setInMovePointMode(true);
-		moveMapToPoint(selectedPointPos);
+		moveMapToPoint(editingCtx.getSelectedPointPosition());
+		WptPt pt = editingCtx.getPoints().remove(editingCtx.getSelectedPointPosition());
+		editingCtx.setOriginalPointToMove(pt);
 	}
 
 	void enterAddingPointAfterMode() {
 		editingCtx.setInAddPointAfterMode(true);
-		moveMapToPoint(selectedPointPos);
+		moveMapToPoint(editingCtx.getSelectedPointPosition() - 1);
 	}
 
 	void enterAddingPointBeforeMode() {
 		editingCtx.setInAddPointBeforeMode(true);
-		moveMapToPoint(selectedPointPos);
+		moveMapToPoint(editingCtx.getSelectedPointPosition());
 	}
 
 	private void selectPoint(double x, double y, boolean singleTap) {
@@ -197,21 +180,19 @@ public class MeasurementToolLayer extends OsmandMapLayer implements ContextMenuL
 				double distToPoint = Math.sqrt(Math.pow(xDiff, 2) + Math.pow(yDiff, 2));
 				if (distToPoint < lowestDistance) {
 					lowestDistance = distToPoint;
-					selectedCachedPoint = new WptPt(pt);
-					selectedPointPos = i;
+					editingCtx.setSelectedPointPosition(i);
 				}
 			}
 		}
 		if (singleTap && singleTapListener != null) {
-			singleTapListener.onSelectPoint(selectedPointPos, selectedCachedPoint);
+			singleTapListener.onSelectPoint(editingCtx.getSelectedPointPosition());
 		}
 	}
 
 	void selectPoint(int position) {
-		selectedCachedPoint = new WptPt(editingCtx.getPoints().get(position));
-		selectedPointPos = position;
+		editingCtx.setSelectedPointPosition(position);
 		if (singleTapListener != null) {
-			singleTapListener.onSelectPoint(selectedPointPos, selectedCachedPoint);
+			singleTapListener.onSelectPoint(editingCtx.getSelectedPointPosition());
 		}
 	}
 
@@ -247,8 +228,6 @@ public class MeasurementToolLayer extends OsmandMapLayer implements ContextMenuL
 					measureDistanceToCenterListener.onMeasure(distance);
 				}
 			}
-
-			List<WptPt> drawPoints = editingCtx.getPoints();
 
 			TrkSegment before = editingCtx.getBeforeTrkSegmentLine();
 			TrkSegment after = editingCtx.getAfterTrkSegmentLine();
@@ -290,12 +269,10 @@ public class MeasurementToolLayer extends OsmandMapLayer implements ContextMenuL
 				int locX = tb.getPixXFromLonNoRot(pt.lon);
 				int locY = tb.getPixYFromLatNoRot(pt.lat);
 				if (locX >= 0 && locX <= tb.getPixWidth() && locY >= 0 && locY <= tb.getPixHeight()) {
-					if (!(editingCtx.isInMovePointMode() && i == selectedPointPos)) {
-						drawn++;
-						if (drawn > pointsToDraw) {
-							overlapped = true;
-							break;
-						}
+					drawn++;
+					if (drawn > POINTS_TO_DRAW) {
+						overlapped = true;
+						break;
 					}
 				}
 			}
@@ -304,17 +281,14 @@ public class MeasurementToolLayer extends OsmandMapLayer implements ContextMenuL
 				int locX = tb.getPixXFromLonNoRot(pt.lon);
 				int locY = tb.getPixYFromLatNoRot(pt.lat);
 				if (locX >= 0 && locX <= tb.getPixWidth() && locY >= 0 && locY <= tb.getPixHeight()) {
-					if (!(editingCtx.isInMovePointMode() && 0 == selectedPointPos)) {
-						canvas.drawBitmap(pointIcon, locX - marginPointIconX, locY - marginPointIconY, bitmapPaint);
-					}
+					canvas.drawBitmap(pointIcon, locX - marginPointIconX, locY - marginPointIconY, bitmapPaint);
 				}
 				pt = measurementPoints.get(measurementPoints.size() - 1);
 				locX = tb.getPixXFromLonNoRot(pt.lon);
 				locY = tb.getPixYFromLatNoRot(pt.lat);
 				if (locX >= 0 && locX <= tb.getPixWidth() && locY >= 0 && locY <= tb.getPixHeight()) {
-					if (!(editingCtx.isInMovePointMode() && measurementPoints.size() - 1 == selectedPointPos)) {
-						canvas.drawBitmap(pointIcon, locX - marginPointIconX, locY - marginPointIconY, bitmapPaint);
-					}
+					canvas.drawBitmap(pointIcon, locX - marginPointIconX, locY - marginPointIconY, bitmapPaint);
+
 				}
 			} else {
 				for (int i = 0; i < measurementPoints.size(); i++) {
@@ -322,9 +296,7 @@ public class MeasurementToolLayer extends OsmandMapLayer implements ContextMenuL
 					int locX = tb.getPixXFromLonNoRot(pt.lon);
 					int locY = tb.getPixYFromLatNoRot(pt.lat);
 					if (locX >= 0 && locX <= tb.getPixWidth() && locY >= 0 && locY <= tb.getPixHeight()) {
-						if (!(editingCtx.isInMovePointMode() && i == selectedPointPos)) {
-							canvas.drawBitmap(pointIcon, locX - marginPointIconX, locY - marginPointIconY, bitmapPaint);
-						}
+						canvas.drawBitmap(pointIcon, locX - marginPointIconX, locY - marginPointIconY, bitmapPaint);
 					}
 				}
 			}
@@ -339,8 +311,13 @@ public class MeasurementToolLayer extends OsmandMapLayer implements ContextMenuL
 		}
 	}
 
-	void exitMovePointMode() {
+	void exitMovePointMode(boolean saveOriginalPoint) {
 		editingCtx.setInMovePointMode(false);
+		if (saveOriginalPoint) {
+			WptPt pt = editingCtx.getOriginalPointToMove();
+			editingCtx.getPoints().add(editingCtx.getSelectedPointPosition(), pt);
+		}
+		editingCtx.setOriginalPointToMove(null);
 	}
 
 	void exitAddPointAfterMode() {
@@ -396,7 +373,7 @@ public class MeasurementToolLayer extends OsmandMapLayer implements ContextMenuL
 	WptPt getMovedPointToApply() {
 		RotatedTileBox tb = view.getCurrentRotatedTileBox();
 		LatLon latLon = tb.getCenterLatLon();
-		WptPt pt = editingCtx.getPoints().get(selectedPointPos);
+		WptPt pt = new WptPt(editingCtx.getOriginalPointToMove());
 		pt.lat = latLon.getLatitude();
 		pt.lon = latLon.getLongitude();
 		return pt;
@@ -462,7 +439,7 @@ public class MeasurementToolLayer extends OsmandMapLayer implements ContextMenuL
 
 		void onAddPoint();
 
-		void onSelectPoint(int selectedPointPos, WptPt selectedCachedPoint);
+		void onSelectPoint(int selectedPointPos);
 	}
 
 	interface OnEnterMovePointModeListener {
