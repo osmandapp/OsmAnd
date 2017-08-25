@@ -12,16 +12,14 @@ import net.osmand.plus.OsmandSettings;
 import net.osmand.plus.measurementtool.command.MeasurementCommandManager;
 import net.osmand.plus.routing.RouteCalculationParams;
 import net.osmand.plus.routing.RoutingHelper;
-import net.osmand.plus.views.Renderable;
 import net.osmand.router.RouteCalculationProgress;
 
 import java.util.ArrayList;
-import java.util.Arrays;
-import java.util.LinkedList;
 import java.util.List;
 import java.util.Map;
 import java.util.Queue;
 import java.util.concurrent.ConcurrentHashMap;
+import java.util.concurrent.ConcurrentLinkedQueue;
 
 public class MeasurementEditingContext {
 
@@ -47,7 +45,7 @@ public class MeasurementEditingContext {
 	private SnapToRoadProgressListener progressListener;
 	private ApplicationMode snapToRoadAppMode;
 	private RouteCalculationProgress calculationProgress;
-	private Queue<Pair<WptPt, WptPt>> snapToRoadPairsToCalculate = new LinkedList<>();
+	private Queue<Pair<WptPt, WptPt>> snapToRoadPairsToCalculate = new ConcurrentLinkedQueue<>();
 	private Map<Pair<WptPt, WptPt>, List<WptPt>> snappedToRoadPoints = new ConcurrentHashMap<>();
 
 	public void setApplication(OsmandApplication application) {
@@ -190,9 +188,10 @@ public class MeasurementEditingContext {
 		if (application == null || before.points.size() < 1) {
 			return;
 		}
+		snapToRoadPairsToCalculate.clear();
 		for (int i = 0; i < before.points.size() - 1; i++) {
 			Pair<WptPt, WptPt> pair = new Pair<>(before.points.get(i), before.points.get(i + 1));
-			if (snappedToRoadPoints.get(pair) == null && !snapToRoadPairsToCalculate.contains(pair)) {
+			if (snappedToRoadPoints.get(pair) == null) {
 				snapToRoadPairsToCalculate.add(pair);
 			}
 		}

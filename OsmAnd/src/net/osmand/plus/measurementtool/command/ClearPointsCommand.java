@@ -19,6 +19,7 @@ public class ClearPointsCommand extends MeasurementModeCommand {
 		List<WptPt> pts = measurementLayer.getEditingCtx().getPoints();
 		points = new LinkedList<>(pts);
 		pts.clear();
+		measurementLayer.getEditingCtx().clearSegments();
 		measurementLayer.refreshMap();
 		return true;
 	}
