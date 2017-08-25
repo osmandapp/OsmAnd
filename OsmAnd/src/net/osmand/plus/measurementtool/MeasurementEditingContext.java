@@ -16,11 +16,11 @@ import net.osmand.router.RouteCalculationProgress;
 
 import java.util.ArrayList;
 import java.util.Arrays;
-import java.util.HashMap;
 import java.util.LinkedList;
 import java.util.List;
 import java.util.Map;
 import java.util.Queue;
+import java.util.concurrent.ConcurrentHashMap;
 
 public class MeasurementEditingContext {
 
@@ -46,7 +46,7 @@ public class MeasurementEditingContext {
 	private ApplicationMode snapToRoadAppMode;
 	private RouteCalculationProgress calculationProgress;
 	private Queue<Pair<WptPt, WptPt>> snapToRoadPairsToCalculate = new LinkedList<>();
-	private Map<Pair<WptPt, WptPt>, List<WptPt>> snappedToRoadPoints = new HashMap<>();
+	private Map<Pair<WptPt, WptPt>, List<WptPt>> snappedToRoadPoints = new ConcurrentHashMap<>();
 
 	private List<WptPt> measurementPoints = new LinkedList<>();
 
@@ -117,11 +117,7 @@ public class MeasurementEditingContext {
 	}
 
 	public void setInSnapToRoadMode(boolean inSnapToRoadMode) {
-		inSnapToRoadMode = inSnapToRoadMode;
-	}
-
-	public SnapToRoadProgressListener getProgressListener() {
-		return progressListener;
+		this.inSnapToRoadMode = inSnapToRoadMode;
 	}
 
 	public void setProgressListener(SnapToRoadProgressListener progressListener) {
@@ -134,14 +130,6 @@ public class MeasurementEditingContext {
 
 	public void setSnapToRoadAppMode(ApplicationMode snapToRoadAppMode) {
 		this.snapToRoadAppMode = snapToRoadAppMode;
-	}
-
-	public Queue<Pair<WptPt, WptPt>> getSnapToRoadPairsToCalculate() {
-		return snapToRoadPairsToCalculate;
-	}
-
-	public void setSnapToRoadPairsToCalculate(Queue<Pair<WptPt, WptPt>> snapToRoadPairsToCalculate) {
-		this.snapToRoadPairsToCalculate = snapToRoadPairsToCalculate;
 	}
 
 	public Map<Pair<WptPt, WptPt>, List<WptPt>> getSnappedPoints() {
@@ -229,6 +217,7 @@ public class MeasurementEditingContext {
 
 	void cancelSnapToRoad() {
 		progressListener.hideProgressBar();
+		snapToRoadPairsToCalculate.clear();
 		if (calculationProgress != null) {
 			calculationProgress.isCancelled = true;
 		}
@@ -281,8 +270,6 @@ public class MeasurementEditingContext {
 					pts.add(pt);
 				}
 				snappedToRoadPoints.put(currentPair, pts);
-				// todo change logic
-				// todo fix strange exceptions when snap to road calculates
 				recreateSegments();
 				progressListener.refreshMap();
 				if (!snapToRoadPairsToCalculate.isEmpty()) {

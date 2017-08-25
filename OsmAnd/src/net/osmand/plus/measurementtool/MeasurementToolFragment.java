@@ -101,6 +101,7 @@ public class MeasurementToolFragment extends Fragment {
 	private ImageView mainIcon;
 
 	private boolean wasCollapseButtonVisible;
+	private boolean progressBarVisible;
 	private boolean pointsListOpened;
 	private Boolean saved;
 	private boolean portrait;
@@ -130,10 +131,7 @@ public class MeasurementToolFragment extends Fragment {
 		editingCtx.setProgressListener(new MeasurementEditingContext.SnapToRoadProgressListener() {
 			@Override
 			public void showProgressBar() {
-				ProgressBar progressBar = (ProgressBar) mainView.findViewById(R.id.snap_to_road_progress_bar);
-				progressBar.setVisibility(View.VISIBLE);
-				progressBar.setMinimumHeight(0);
-				progressBar.setProgress(0);
+				MeasurementToolFragment.this.showProgressBar();
 			}
 
 			@Override
@@ -144,6 +142,7 @@ public class MeasurementToolFragment extends Fragment {
 			@Override
 			public void hideProgressBar() {
 				((ProgressBar) mainView.findViewById(R.id.snap_to_road_progress_bar)).setVisibility(View.GONE);
+				progressBarVisible = false;
 			}
 
 			@Override
@@ -199,6 +198,10 @@ public class MeasurementToolFragment extends Fragment {
 		pointsListContainer = view.findViewById(R.id.points_list_container);
 		if (portrait && pointsListContainer != null) {
 			pointsListContainer.setBackgroundColor(backgroundColor);
+		}
+
+		if (progressBarVisible) {
+			showProgressBar();
 		}
 
 		distanceTv = (TextView) mainView.findViewById(R.id.measurement_distance_text_view);
@@ -519,6 +522,14 @@ public class MeasurementToolFragment extends Fragment {
 
 	private Drawable getActiveIcon(@DrawableRes int id) {
 		return iconsCache.getIcon(id, nightMode ? R.color.osmand_orange : R.color.color_myloc_distance);
+	}
+
+	private void showProgressBar() {
+		ProgressBar progressBar = (ProgressBar) mainView.findViewById(R.id.snap_to_road_progress_bar);
+		progressBar.setVisibility(View.VISIBLE);
+		progressBar.setMinimumHeight(0);
+		progressBar.setProgress(0);
+		progressBarVisible = true;
 	}
 
 	private void showSnapToRoadMenu(boolean rememberPreviousTitle) {
