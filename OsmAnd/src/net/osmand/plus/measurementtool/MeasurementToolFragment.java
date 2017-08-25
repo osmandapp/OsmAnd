@@ -607,7 +607,6 @@ public class MeasurementToolFragment extends Fragment {
 			public void moveOnClick() {
 				if (measurementLayer != null) {
 					measurementLayer.enterMovingPointMode();
-					editingCtx.splitSegments(editingCtx.getSelectedPointPosition());
 				}
 				switchMovePointMode(true);
 			}
