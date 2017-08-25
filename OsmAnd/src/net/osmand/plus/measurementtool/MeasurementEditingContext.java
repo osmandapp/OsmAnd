@@ -15,6 +15,7 @@ import net.osmand.plus.routing.RoutingHelper;
 import net.osmand.router.RouteCalculationProgress;
 
 import java.util.ArrayList;
+import java.util.Arrays;
 import java.util.List;
 import java.util.Map;
 import java.util.Queue;
@@ -121,15 +122,16 @@ public class MeasurementEditingContext {
 	}
 
 	public TrkSegment getBeforeTrkSegmentLine() {
-		// check if all segments calculated for snap to road
-//		if(beforeCacheForSnap != null) {
-//			return	beforeCacheForSnap;
-//		}
-		// calculate beforeCacheForSnap
+		if (beforeCacheForSnap != null) {
+			return beforeCacheForSnap;
+		}
 		return before;
 	}
 
 	public TrkSegment getAfterTrkSegmentLine() {
+		if (afterCacheForSnap != null) {
+			return afterCacheForSnap;
+		}
 		return after;
 	}
 
@@ -161,40 +163,43 @@ public class MeasurementEditingContext {
 			before.points.addAll(points.subList(0, position));
 			after.points.addAll(points.subList(position, points.size()));
 		}
+		updateCacheForSnapIfNeeded(true);
 	}
 
 	public void addPoint(WptPt pt) {
 		before.points.add(pt);
+		updateCacheForSnapIfNeeded(false);
 	}
 
 	public void addPoint(int position, WptPt pt) {
 		before.points.add(position, pt);
+		updateCacheForSnapIfNeeded(false);
 	}
 
 	public void addPoints(List<WptPt> points) {
 		before.points.addAll(points);
+		updateCacheForSnapIfNeeded(false);
 	}
 
 	public WptPt removePoint(int position) {
-		return before.points.remove(position);
+		WptPt pt = before.points.remove(position);
+		updateCacheForSnapIfNeeded(false);
+		return pt;
 	}
 
 	public void clearSegments() {
 		before.points.clear();
 		after.points.clear();
+		beforeCacheForSnap = null;
+		afterCacheForSnap = null;
 	}
 
 	void scheduleRouteCalculateIfNotEmpty() {
-		if (application == null || before.points.size() < 1) {
+		if (application == null || (before.points.size() < 1 && after.points.size() < 1)) {
 			return;
 		}
 		snapToRoadPairsToCalculate.clear();
-		for (int i = 0; i < before.points.size() - 1; i++) {
-			Pair<WptPt, WptPt> pair = new Pair<>(before.points.get(i), before.points.get(i + 1));
-			if (snappedToRoadPoints.get(pair) == null) {
-				snapToRoadPairsToCalculate.add(pair);
-			}
-		}
+		findPointsToCalculate(Arrays.asList(before.points, after.points));
 		RoutingHelper routingHelper = application.getRoutingHelper();
 		if (!snapToRoadPairsToCalculate.isEmpty() && progressListener != null && !routingHelper.isRouteBeingCalculated()) {
 			routingHelper.startRouteCalculationThread(getParams(), true, true);
@@ -204,6 +209,43 @@ public class MeasurementEditingContext {
 					progressListener.showProgressBar();
 				}
 			});
+		}
+	}
+
+	private void findPointsToCalculate(List<List<WptPt>> pointsList) {
+		for (List<WptPt> points : pointsList) {
+			for (int i = 0; i < points.size() - 1; i++) {
+				Pair<WptPt, WptPt> pair = new Pair<>(points.get(i), points.get(i + 1));
+				if (snappedToRoadPoints.get(pair) == null) {
+					snapToRoadPairsToCalculate.add(pair);
+				}
+			}
+		}
+	}
+
+	private void recreateCacheForSnap(TrkSegment cache, TrkSegment original) {
+		if (original.points.size() > 1) {
+			for (int i = 0; i < original.points.size() - 1; i++) {
+				Pair<WptPt, WptPt> pair = new Pair<>(original.points.get(i), original.points.get(i + 1));
+				List<WptPt> pts = snappedToRoadPoints.get(pair);
+				if (pts != null) {
+					cache.points.addAll(pts);
+				} else {
+					if (inSnapToRoadMode) {
+						scheduleRouteCalculateIfNotEmpty();
+					}
+					cache.points.addAll(Arrays.asList(pair.first, pair.second));
+				}
+			}
+		}
+	}
+
+	private void updateCacheForSnapIfNeeded(boolean both) {
+		if (inSnapToRoadMode) {
+			recreateCacheForSnap(beforeCacheForSnap = new TrkSegment(), before);
+			if (both) {
+				recreateCacheForSnap(afterCacheForSnap = new TrkSegment(), after);
+			}
 		}
 	}
 
@@ -262,6 +304,7 @@ public class MeasurementEditingContext {
 					pts.add(pt);
 				}
 				snappedToRoadPoints.put(currentPair, pts);
+				updateCacheForSnapIfNeeded(true);
 				progressListener.refreshMap();
 				if (!snapToRoadPairsToCalculate.isEmpty()) {
 					application.getRoutingHelper().startRouteCalculationThread(getParams(), true, true);
