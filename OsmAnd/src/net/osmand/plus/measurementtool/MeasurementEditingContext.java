@@ -9,6 +9,7 @@ import net.osmand.plus.GPXUtilities.TrkSegment;
 import net.osmand.plus.GPXUtilities.WptPt;
 import net.osmand.plus.OsmandApplication;
 import net.osmand.plus.OsmandSettings;
+import net.osmand.plus.measurementtool.command.MeasurementCommandManager;
 import net.osmand.plus.routing.RouteCalculationParams;
 import net.osmand.plus.routing.RoutingHelper;
 import net.osmand.plus.views.Renderable;
@@ -25,6 +26,7 @@ import java.util.concurrent.ConcurrentHashMap;
 public class MeasurementEditingContext {
 
 	private OsmandApplication application;
+	private final MeasurementCommandManager commandManager = new MeasurementCommandManager();
 
 	private TrkSegment before = new TrkSegment();
 	// cache should be deleted if before changed or snappedToRoadPoints
@@ -52,6 +54,10 @@ public class MeasurementEditingContext {
 
 	public void setApplication(OsmandApplication application) {
 		this.application = application;
+	}
+
+	public MeasurementCommandManager getCommandManager() {
+		return commandManager;
 	}
 
 	public void setBefore(TrkSegment before) {
