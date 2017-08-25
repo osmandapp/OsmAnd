@@ -2805,4 +2805,5 @@ Abgedeckte Fläche: %1$s x %2$s</string>
     <string name="save_route_point">Routenpunkt speichern</string>
     <string name="waypoint_one">Wegpunkt 1</string>
     <string name="route_point_one">Routenpunkt 1</string>
-</resources>
+<string name="measurement_tool_altitude">Höhe: %1$s</string>
+    </resources>
