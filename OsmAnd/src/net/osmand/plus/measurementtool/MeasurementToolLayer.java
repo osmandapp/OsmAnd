@@ -151,11 +151,7 @@ public class MeasurementToolLayer extends OsmandMapLayer implements ContextMenuL
 		editingCtx.splitSegments(editingCtx.getSelectedPointPosition());
 	}
 
-	void enterAddingPointAfterMode() {
-		moveMapToPoint(editingCtx.getSelectedPointPosition() - 1);
-	}
-
-	void enterAddingPointBeforeMode() {
+	void enterAddingPointBeforeAfterMode() {
 		moveMapToPoint(editingCtx.getSelectedPointPosition());
 	}
 

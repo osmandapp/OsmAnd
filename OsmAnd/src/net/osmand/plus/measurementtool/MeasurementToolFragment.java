@@ -608,7 +608,7 @@ public class MeasurementToolFragment extends Fragment {
 				if (measurementLayer != null) {
 					editingCtx.setSelectedPointPosition(editingCtx.getSelectedPointPosition() + 1);
 					editingCtx.splitSegments(editingCtx.getSelectedPointPosition());
-					measurementLayer.enterAddingPointAfterMode();
+					measurementLayer.enterAddingPointBeforeAfterMode();
 				}
 				((TextView) mainView.findViewById(R.id.add_point_before_after_text)).setText(mainView.getResources().getString(R.string.add_point_after));
 				switchAddPointBeforeAfterMode(true);
@@ -618,7 +618,7 @@ public class MeasurementToolFragment extends Fragment {
 			public void addPointBeforeOnClick() {
 				if (measurementLayer != null) {
 					editingCtx.splitSegments(editingCtx.getSelectedPointPosition());
-					measurementLayer.enterAddingPointBeforeMode();
+					measurementLayer.enterAddingPointBeforeAfterMode();
 				}
 				((TextView) mainView.findViewById(R.id.add_point_before_after_text)).setText(mainView.getResources().getString(R.string.add_point_before));
 				switchAddPointBeforeAfterMode(true);
@@ -842,8 +842,9 @@ public class MeasurementToolFragment extends Fragment {
 			WptPt oldPoint = editingCtx.getOriginalPointToMove();
 			int position = editingCtx.getSelectedPointPosition();
 			editingCtx.getCommandManager().execute(new MovePointCommand(measurementLayer, oldPoint, newPoint, position));
-			doAddOrMovePointCommonStuff();
+			editingCtx.addPoint(newPoint);
 			measurementLayer.exitMovePointMode(false);
+			doAddOrMovePointCommonStuff();
 			measurementLayer.refreshMap();
 		}
 	}
@@ -862,7 +863,6 @@ public class MeasurementToolFragment extends Fragment {
 		if (measurementLayer != null) {
 			if (addPointToPosition(editingCtx.getPointsCount())) {
 				editingCtx.setSelectedPointPosition(editingCtx.getPointsCount());
-				editingCtx.splitSegments(editingCtx.getSelectedPointPosition());
 				measurementLayer.refreshMap();
 			}
 		}
@@ -870,11 +870,13 @@ public class MeasurementToolFragment extends Fragment {
 
 	private void applyAddPointBeforeOrAfterMode() {
 		switchAddPointAfterMode(false);
+		editingCtx.splitSegments(editingCtx.getBeforePoints().size() + editingCtx.getAfterPoints().size());
 		editingCtx.setSelectedPointPosition(-1);
 		MeasurementToolLayer measurementLayer = getMeasurementLayer();
 		if (measurementLayer != null) {
 			measurementLayer.refreshMap();
 		}
+		updateText();
 	}
 
 	private void cancelAddPointBeforeOrAfterMode() {
@@ -973,7 +975,6 @@ public class MeasurementToolFragment extends Fragment {
 		MeasurementToolLayer measurementLayer = getMeasurementLayer();
 		if (measurementLayer != null) {
 			added = editingCtx.getCommandManager().execute(new AddPointCommand(measurementLayer, position));
-			editingCtx.splitSegments(position);
 			doAddOrMovePointCommonStuff();
 		}
 		return added;
