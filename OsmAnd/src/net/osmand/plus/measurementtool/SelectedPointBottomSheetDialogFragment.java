@@ -23,9 +23,9 @@ import net.osmand.plus.IconsCache;
 import net.osmand.plus.OsmAndFormatter;
 import net.osmand.plus.R;
 import net.osmand.plus.activities.MapActivity;
-import net.osmand.plus.activities.TrackActivity;
 import net.osmand.plus.base.BottomSheetDialogFragment;
 import net.osmand.plus.helpers.AndroidUiHelper;
+import net.osmand.plus.measurementtool.NewGpxData.ActionType;
 import net.osmand.util.MapUtils;
 
 import java.util.List;
@@ -37,14 +37,9 @@ public class SelectedPointBottomSheetDialogFragment extends BottomSheetDialogFra
 	private SelectedPointFragmentListener listener;
 	private boolean nightMode;
 	private boolean portrait;
-	private NewGpxData.ActionType actionType;
 
 	public void setListener(SelectedPointFragmentListener listener) {
 		this.listener = listener;
-	}
-
-	public void setActionType(NewGpxData.ActionType actionType) {
-		this.actionType = actionType;
 	}
 
 	@Nullable
@@ -108,19 +103,28 @@ public class SelectedPointBottomSheetDialogFragment extends BottomSheetDialogFra
 		mainView.findViewById(R.id.cancel_row).setOnClickListener(new View.OnClickListener() {
 			@Override
 			public void onClick(View view) {
+				if (listener != null) {
+					listener.onClearSelection();
+				}
 				dismiss();
 			}
 		});
 
-		List<WptPt> points = measurementLayer.getMeasurementPoints();
-		int pos = measurementLayer.getSelectedPointPos();
+		List<WptPt> points = measurementLayer.getEditingCtx().getPoints();
+		int pos = measurementLayer.getEditingCtx().getSelectedPointPosition();
 		WptPt pt = points.get(pos);
 		String pointTitle = pt.name;
 		if (!TextUtils.isEmpty(pointTitle)) {
 			((TextView) mainView.findViewById(R.id.selected_point_title)).setText(pointTitle);
 		} else {
-			if (actionType == NewGpxData.ActionType.ADD_ROUTE_POINTS) {
-				((TextView) mainView.findViewById(R.id.selected_point_title)).setText(mapActivity.getString(R.string.route_point) + " - " + (pos + 1));
+			NewGpxData newGpxData = measurementLayer.getEditingCtx().getNewGpxData();
+			if (newGpxData != null) {
+				ActionType actionType = measurementLayer.getEditingCtx().getNewGpxData().getActionType();
+				if (actionType == ActionType.ADD_ROUTE_POINTS) {
+					((TextView) mainView.findViewById(R.id.selected_point_title)).setText(mapActivity.getString(R.string.route_point) + " - " + (pos + 1));
+				} else {
+					((TextView) mainView.findViewById(R.id.selected_point_title)).setText(mapActivity.getString(R.string.plugin_distance_point) + " - " + (pos + 1));
+				}
 			} else {
 				((TextView) mainView.findViewById(R.id.selected_point_title)).setText(mapActivity.getString(R.string.plugin_distance_point) + " - " + (pos + 1));
 			}
@@ -137,6 +141,19 @@ public class SelectedPointBottomSheetDialogFragment extends BottomSheetDialogFra
 					dist += MapUtils.getDistance(points.get(i - 1).lat, points.get(i - 1).lon, points.get(i).lat, points.get(i).lon);
 				}
 				((TextView) mainView.findViewById(R.id.selected_point_distance)).setText(OsmAndFormatter.getFormattedDistance(dist, mapActivity.getMyApplication()));
+			}
+		}
+		NewGpxData newGpxData = measurementLayer.getEditingCtx().getNewGpxData();
+		if (newGpxData != null && newGpxData.getActionType() == ActionType.EDIT_SEGMENT) {
+			double elevation = pt.ele;
+			if (!Double.isNaN(elevation)) {
+				String eleStr = (mapActivity.getString(R.string.altitude)).substring(0, 1);
+				((TextView) mainView.findViewById(R.id.selected_point_ele)).setText(eleStr + ": " + OsmAndFormatter.getFormattedAlt(elevation, mapActivity.getMyApplication()));
+			}
+			float speed = (float) pt.speed;
+			if (speed != 0) {
+				String speedStr = (mapActivity.getString(R.string.map_widget_speed)).substring(0, 1);
+				((TextView) mainView.findViewById(R.id.selected_point_speed)).setText(speedStr + ": " + OsmAndFormatter.getFormattedSpeed(speed, mapActivity.getMyApplication()));
 			}
 		}
 
@@ -208,6 +225,7 @@ public class SelectedPointBottomSheetDialogFragment extends BottomSheetDialogFra
 	public void onCancel(DialogInterface dialog) {
 		if (listener != null) {
 			listener.onCloseMenu();
+			listener.onClearSelection();
 		}
 		super.onCancel(dialog);
 	}
@@ -223,5 +241,7 @@ public class SelectedPointBottomSheetDialogFragment extends BottomSheetDialogFra
 		void addPointBeforeOnClick();
 
 		void onCloseMenu();
+
+		void onClearSelection();
 	}
 }

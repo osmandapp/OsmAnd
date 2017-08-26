@@ -1,26 +1,9 @@
 package net.osmand.plus.routing;
 
 
-import java.io.BufferedReader;
-import java.io.ByteArrayInputStream;
-import java.io.FileNotFoundException;
-import java.io.IOException;
-import java.io.InputStream;
-import java.io.InputStreamReader;
-import java.io.StringReader;
-import java.net.MalformedURLException;
-import java.net.URLConnection;
-import java.util.ArrayList;
-import java.util.Collections;
-import java.util.Iterator;
-import java.util.LinkedHashMap;
-import java.util.List;
-import java.util.Map;
-
-import javax.xml.parsers.DocumentBuilder;
-import javax.xml.parsers.DocumentBuilderFactory;
-import javax.xml.parsers.FactoryConfigurationError;
-import javax.xml.parsers.ParserConfigurationException;
+import android.content.Context;
+import android.os.Build;
+import android.os.Bundle;
 
 import net.osmand.Location;
 import net.osmand.PlatformUtil;
@@ -44,13 +27,11 @@ import net.osmand.plus.TargetPointsHelper.TargetPoint;
 import net.osmand.plus.Version;
 import net.osmand.plus.activities.SettingsNavigationActivity;
 import net.osmand.plus.render.NativeOsmandLibrary;
-import net.osmand.plus.routing.RoutingHelper.RouteCalculationProgressCallback;
 import net.osmand.router.GeneralRouter;
 import net.osmand.router.GeneralRouter.GeneralRouterProfile;
 import net.osmand.router.GeneralRouter.RoutingParameter;
 import net.osmand.router.GeneralRouter.RoutingParameterType;
 import net.osmand.router.PrecalculatedRouteDirection;
-import net.osmand.router.RouteCalculationProgress;
 import net.osmand.router.RoutePlannerFrontEnd;
 import net.osmand.router.RoutePlannerFrontEnd.RouteCalculationMode;
 import net.osmand.router.RouteSegmentResult;
@@ -59,22 +40,36 @@ import net.osmand.router.RoutingConfiguration.Builder;
 import net.osmand.router.RoutingContext;
 import net.osmand.router.TurnType;
 import net.osmand.util.Algorithms;
-import net.osmand.util.MapUtils;
 import net.osmand.util.GeoPolylineParserUtil;
+import net.osmand.util.MapUtils;
 
-import org.json.JSONObject;
-import org.json.JSONArray;
 import org.json.JSONException;
+import org.json.JSONObject;
 import org.w3c.dom.Document;
-import org.w3c.dom.Element;
 import org.w3c.dom.Node;
 import org.w3c.dom.NodeList;
 import org.xml.sax.InputSource;
 import org.xml.sax.SAXException;
 
-import android.content.Context;
-import android.os.Build;
-import android.os.Bundle;
+import java.io.BufferedReader;
+import java.io.ByteArrayInputStream;
+import java.io.FileNotFoundException;
+import java.io.IOException;
+import java.io.InputStreamReader;
+import java.net.MalformedURLException;
+import java.net.URLConnection;
+import java.util.ArrayList;
+import java.util.Collections;
+import java.util.Iterator;
+import java.util.LinkedHashMap;
+import java.util.List;
+import java.util.Map;
+
+import javax.xml.parsers.DocumentBuilder;
+import javax.xml.parsers.DocumentBuilderFactory;
+import javax.xml.parsers.FactoryConfigurationError;
+import javax.xml.parsers.ParserConfigurationException;
+
 import btools.routingapp.IBRouterService;
 
 
@@ -281,19 +276,6 @@ public class RouteProvider {
 				}
 			}
 			return this;
-		}
-	}
-
-	public static class SnapToRoadParams {
-
-		public ApplicationMode applicationMode;
-		public RouteCalculationProgress calculationProgress;
-		public RouteCalculationProgressCallback calculationProgressCallback;
-		public SnapToRoadListener listener;
-		public List<Location> points;
-
-		public interface SnapToRoadListener {
-			void onSnapToRoadDone();
 		}
 	}
 
@@ -769,7 +751,7 @@ public class RouteProvider {
 				paramsR.put(key, vl);
 			}
 		}
-		if (params.snapToRoadParams != null) {
+		if (params.inSnapToRoadMode) {
 			paramsR.put(GeneralRouter.ALLOW_PRIVATE, "true");
 		}
 		float mb = (1 << 20);

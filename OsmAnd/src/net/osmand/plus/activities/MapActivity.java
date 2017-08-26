@@ -95,6 +95,7 @@ import net.osmand.plus.mapcontextmenu.other.DestinationReachedMenu;
 import net.osmand.plus.mapcontextmenu.other.MapRouteInfoMenu;
 import net.osmand.plus.mapcontextmenu.other.MapRouteInfoMenuFragment;
 import net.osmand.plus.mapcontextmenu.other.TrackDetailsMenu;
+import net.osmand.plus.measurementtool.MeasurementEditingContext;
 import net.osmand.plus.measurementtool.MeasurementToolFragment;
 import net.osmand.plus.measurementtool.NewGpxData;
 import net.osmand.plus.render.RendererRegistry;
@@ -944,7 +945,9 @@ public class MapActivity extends OsmandActionBarActivity implements DownloadEven
 					NewGpxData newGpxData = (NewGpxData) toShow;
 					QuadRect qr = newGpxData.getRect();
 					mapView.fitRectToMap(qr.left, qr.right, qr.top, qr.bottom, (int) qr.width(), (int) qr.height(), 0);
-					MeasurementToolFragment.showInstance(getSupportFragmentManager(), newGpxData);
+					MeasurementEditingContext editingContext = new MeasurementEditingContext();
+					editingContext.setNewGpxData(newGpxData);
+					MeasurementToolFragment.showInstance(getSupportFragmentManager(), editingContext);
 				} else {
 					mapContextMenu.show(latLonToShow, mapLabelToShow, toShow);
 				}

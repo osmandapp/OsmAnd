@@ -108,13 +108,15 @@ public class MeasurementToolAdapter extends RecyclerView.Adapter<MeasurementTool
 		if (actionType == NewGpxData.ActionType.EDIT_SEGMENT) {
 			double elevation = pt.ele;
 			if (!Double.isNaN(elevation)) {
-				holder.elevation.setText(mapActivity.getString(R.string.measurement_tool_altitude, OsmAndFormatter.getFormattedAlt(elevation, mapActivity.getMyApplication())));
+				String eleStr = (mapActivity.getString(R.string.altitude)).substring(0, 1);
+				holder.elevation.setText(eleStr + ": " + OsmAndFormatter.getFormattedAlt(elevation, mapActivity.getMyApplication()));
 			} else {
 				holder.elevation.setText("");
 			}
 			float speed = (float) pt.speed;
 			if (speed != 0) {
-				holder.speed.setText(mapActivity.getString(R.string.measurement_tool_speed, OsmAndFormatter.getFormattedSpeed(speed, mapActivity.getMyApplication())));
+				String speedStr = (mapActivity.getString(R.string.map_widget_speed)).substring(0, 1);
+				holder.speed.setText(speedStr + ": " + OsmAndFormatter.getFormattedSpeed(speed, mapActivity.getMyApplication()));
 			} else {
 				holder.speed.setText("");
 			}

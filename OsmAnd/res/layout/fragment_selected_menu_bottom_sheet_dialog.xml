@@ -52,15 +52,42 @@
                         android:textAppearance="@style/TextAppearance.ListItemTitle"
                         tools:text="Point 2"/>
 
-                    <TextView
-                        android:id="@+id/selected_point_distance"
+                    <LinearLayout
                         android:layout_width="wrap_content"
-                        android:layout_height="wrap_content"
-                        android:maxLines="1"
-                        android:textAppearance="@style/TextAppearance.ListItemTitle"
-                        android:textColor="?android:textColorSecondary"
-                        android:textSize="@dimen/default_list_text_size"
-                        tools:text="386 m"/>
+                        android:layout_height="wrap_content">
+
+                        <TextView
+                            android:id="@+id/selected_point_distance"
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:maxLines="1"
+                            android:textAppearance="@style/TextAppearance.ListItemTitle"
+                            android:textColor="?android:textColorSecondary"
+                            android:textSize="@dimen/default_list_text_size"
+                            tools:text="386 m"/>
+
+                        <android.support.v7.widget.AppCompatTextView
+                            android:maxLines="1"
+                            android:id="@+id/selected_point_ele"
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:textAppearance="@style/TextAppearance.ListItemTitle"
+                            android:textColor="?android:textColorSecondary"
+                            android:textSize="@dimen/default_list_text_size"
+                            android:layout_marginLeft="8dp"
+                            android:layout_marginRight="8dp"
+                            tools:text="Altitude: 345 m"/>
+
+                        <android.support.v7.widget.AppCompatTextView
+                            android:maxLines="1"
+                            android:id="@+id/selected_point_speed"
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:textAppearance="@style/TextAppearance.ListItemTitle"
+                            android:textColor="?android:textColorSecondary"
+                            android:textSize="@dimen/default_list_text_size"
+                            tools:text="Speed: 45 km/h"/>
+                    </LinearLayout>
                 </LinearLayout>
 
             </RelativeLayout>
