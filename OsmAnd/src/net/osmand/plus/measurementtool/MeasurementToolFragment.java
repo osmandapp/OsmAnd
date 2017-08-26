@@ -610,6 +610,7 @@ public class MeasurementToolFragment extends Fragment {
 					measurementLayer.moveMapToPoint(editingCtx.getSelectedPointPosition());
 				}
 				((TextView) mainView.findViewById(R.id.add_point_before_after_text)).setText(mainView.getResources().getString(R.string.add_point_after));
+				mainIcon.setImageDrawable(getActiveIcon(R.drawable.ic_action_addpoint_above));
 				switchAddPointBeforeAfterMode(true);
 			}
 
@@ -620,6 +621,7 @@ public class MeasurementToolFragment extends Fragment {
 					measurementLayer.moveMapToPoint(editingCtx.getSelectedPointPosition());
 				}
 				((TextView) mainView.findViewById(R.id.add_point_before_after_text)).setText(mainView.getResources().getString(R.string.add_point_before));
+				mainIcon.setImageDrawable(getActiveIcon(R.drawable.ic_action_addpoint_below));
 				switchAddPointBeforeAfterMode(true);
 			}
 
@@ -926,9 +928,9 @@ public class MeasurementToolFragment extends Fragment {
 		mark(enable ? View.VISIBLE : View.GONE,
 				R.id.add_point_before_after_text,
 				R.id.add_point_before_after_controls);
-		mainIcon.setImageDrawable(getActiveIcon(enable
-				? R.drawable.ic_action_addpoint_below
-				: R.drawable.ic_action_ruler));
+		if (!enable) {
+			mainIcon.setImageDrawable(getActiveIcon(R.drawable.ic_action_ruler));
+		}
 	}
 
 	private void markGeneralComponents(int status) {
