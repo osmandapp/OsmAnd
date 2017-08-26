@@ -48,6 +48,7 @@ import net.osmand.plus.activities.MapActivity;
 import net.osmand.plus.activities.TrackActivity;
 import net.osmand.plus.helpers.AndroidUiHelper;
 import net.osmand.plus.helpers.GpxUiHelper;
+import net.osmand.plus.measurementtool.NewGpxData.ActionType;
 import net.osmand.plus.measurementtool.OptionsBottomSheetDialogFragment.OptionsFragmentListener;
 import net.osmand.plus.measurementtool.SaveAsNewTrackBottomSheetDialogFragment.SaveAsNewTrackFragmentListener;
 import net.osmand.plus.measurementtool.SelectedPointBottomSheetDialogFragment.SelectedPointFragmentListener;
@@ -60,7 +61,6 @@ import net.osmand.plus.measurementtool.command.ClearPointsCommand;
 import net.osmand.plus.measurementtool.command.MovePointCommand;
 import net.osmand.plus.measurementtool.command.RemovePointCommand;
 import net.osmand.plus.measurementtool.command.ReorderPointCommand;
-import net.osmand.plus.measurementtool.NewGpxData.ActionType;
 import net.osmand.plus.views.OsmandMapTileView;
 import net.osmand.plus.views.mapwidgets.MapInfoWidgetsFactory;
 import net.osmand.plus.views.mapwidgets.MapInfoWidgetsFactory.TopToolbarController;
@@ -115,7 +115,7 @@ public class MeasurementToolFragment extends Fragment {
 		LINE
 	}
 
-	public void setEditingCtx(MeasurementEditingContext editingCtx) {
+	private void setEditingCtx(MeasurementEditingContext editingCtx) {
 		this.editingCtx = editingCtx;
 	}
 
@@ -606,7 +606,7 @@ public class MeasurementToolFragment extends Fragment {
 			@Override
 			public void addPointAfterOnClick() {
 				if (measurementLayer != null) {
-                    measurementLayer.moveMapToPoint(editingCtx.getSelectedPointPosition());
+					measurementLayer.moveMapToPoint(editingCtx.getSelectedPointPosition());
 					editingCtx.splitSegments(editingCtx.getSelectedPointPosition() + 1);
 				}
 				((TextView) mainView.findViewById(R.id.add_point_before_after_text)).setText(mainView.getResources().getString(R.string.add_point_after));
@@ -617,7 +617,7 @@ public class MeasurementToolFragment extends Fragment {
 			@Override
 			public void addPointBeforeOnClick() {
 				if (measurementLayer != null) {
-                    measurementLayer.moveMapToPoint(editingCtx.getSelectedPointPosition());
+					measurementLayer.moveMapToPoint(editingCtx.getSelectedPointPosition());
 					editingCtx.splitSegments(editingCtx.getSelectedPointPosition());
 				}
 				((TextView) mainView.findViewById(R.id.add_point_before_after_text)).setText(mainView.getResources().getString(R.string.add_point_before));
@@ -861,9 +861,9 @@ public class MeasurementToolFragment extends Fragment {
 	private void addPointBeforeAfter() {
 		MeasurementToolLayer measurementLayer = getMeasurementLayer();
 		if (measurementLayer != null) {
-			int selectedPoint = editingCtx.getSelectedPointPosition(); //after = 1; before = 1;
-			int pointsCount = editingCtx.getPointsCount(); //after = 2; before = 1;
-			if (addCenterPoint()) { //выбрать вторую точку
+			int selectedPoint = editingCtx.getSelectedPointPosition(); // after = 1; before = 1;
+			int pointsCount = editingCtx.getPointsCount(); // after = 2; before = 1;
+			if (addCenterPoint()) { // select second point
 				if (selectedPoint == pointsCount) {
 					editingCtx.splitSegments(editingCtx.getPointsCount() - 1);
 				} else {

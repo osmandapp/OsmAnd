@@ -18,7 +18,6 @@ import android.widget.TextView;
 
 import net.osmand.AndroidUtils;
 import net.osmand.plus.R;
-import net.osmand.plus.Version;
 import net.osmand.plus.base.BottomSheetDialogFragment;
 import net.osmand.plus.helpers.AndroidUiHelper;
 

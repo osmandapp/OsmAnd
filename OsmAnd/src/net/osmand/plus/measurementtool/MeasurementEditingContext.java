@@ -27,12 +27,9 @@ public class MeasurementEditingContext {
 	private OsmandApplication application;
 	private final MeasurementCommandManager commandManager = new MeasurementCommandManager();
 
-	private TrkSegment before = new TrkSegment();
-	// cache should be deleted if before changed or snappedToRoadPoints
+	private final TrkSegment before = new TrkSegment();
 	private TrkSegment beforeCacheForSnap;
-
-	private TrkSegment after = new TrkSegment();
-	// cache should be deleted if after changed or snappedToRoadPoints
+	private final TrkSegment after = new TrkSegment();
 	private TrkSegment afterCacheForSnap;
 
 	private NewGpxData newGpxData;
@@ -44,42 +41,42 @@ public class MeasurementEditingContext {
 	private SnapToRoadProgressListener progressListener;
 	private ApplicationMode snapToRoadAppMode;
 	private RouteCalculationProgress calculationProgress;
-	private Queue<Pair<WptPt, WptPt>> snapToRoadPairsToCalculate = new ConcurrentLinkedQueue<>();
-	private Map<Pair<WptPt, WptPt>, List<WptPt>> snappedToRoadPoints = new ConcurrentHashMap<>();
+	private final Queue<Pair<WptPt, WptPt>> snapToRoadPairsToCalculate = new ConcurrentLinkedQueue<>();
+	private final Map<Pair<WptPt, WptPt>, List<WptPt>> snappedToRoadPoints = new ConcurrentHashMap<>();
 
 	public void setApplication(OsmandApplication application) {
 		this.application = application;
 	}
 
-	public MeasurementCommandManager getCommandManager() {
+	MeasurementCommandManager getCommandManager() {
 		return commandManager;
 	}
 
-	public boolean isInSnapToRoadMode() {
+	boolean isInSnapToRoadMode() {
 		return inSnapToRoadMode;
 	}
 
-	public int getSelectedPointPosition() {
+	int getSelectedPointPosition() {
 		return selectedPointPosition;
 	}
 
-	public void setSelectedPointPosition(int selectedPointPosition) {
+	void setSelectedPointPosition(int selectedPointPosition) {
 		this.selectedPointPosition = selectedPointPosition;
 	}
 
-	public WptPt getOriginalPointToMove() {
+	WptPt getOriginalPointToMove() {
 		return originalPointToMove;
 	}
 
-	public void setOriginalPointToMove(WptPt originalPointToMove) {
+	void setOriginalPointToMove(WptPt originalPointToMove) {
 		this.originalPointToMove = originalPointToMove;
 	}
 
-	public void setInSnapToRoadMode(boolean inSnapToRoadMode) {
+	void setInSnapToRoadMode(boolean inSnapToRoadMode) {
 		this.inSnapToRoadMode = inSnapToRoadMode;
 	}
 
-	public NewGpxData getNewGpxData() {
+	NewGpxData getNewGpxData() {
 		return newGpxData;
 	}
 
@@ -87,30 +84,26 @@ public class MeasurementEditingContext {
 		this.newGpxData = newGpxData;
 	}
 
-	public void setProgressListener(SnapToRoadProgressListener progressListener) {
+	void setProgressListener(SnapToRoadProgressListener progressListener) {
 		this.progressListener = progressListener;
 	}
 
-	public ApplicationMode getSnapToRoadAppMode() {
+	ApplicationMode getSnapToRoadAppMode() {
 		return snapToRoadAppMode;
 	}
 
-	public void setSnapToRoadAppMode(ApplicationMode snapToRoadAppMode) {
+	void setSnapToRoadAppMode(ApplicationMode snapToRoadAppMode) {
 		this.snapToRoadAppMode = snapToRoadAppMode;
 	}
 
-	public Map<Pair<WptPt, WptPt>, List<WptPt>> getSnappedPoints() {
-		return snappedToRoadPoints;
-	}
-
-	public TrkSegment getBeforeTrkSegmentLine() {
+	TrkSegment getBeforeTrkSegmentLine() {
 		if (beforeCacheForSnap != null) {
 			return beforeCacheForSnap;
 		}
 		return before;
 	}
 
-	public TrkSegment getAfterTrkSegmentLine() {
+	TrkSegment getAfterTrkSegmentLine() {
 		if (afterCacheForSnap != null) {
 			return afterCacheForSnap;
 		}
@@ -121,11 +114,11 @@ public class MeasurementEditingContext {
 		return getBeforePoints();
 	}
 
-	public List<WptPt> getBeforePoints() {
+	List<WptPt> getBeforePoints() {
 		return before.points;
 	}
 
-	public List<WptPt> getAfterPoints() {
+	List<WptPt> getAfterPoints() {
 		return after.points;
 	}
 
@@ -133,7 +126,7 @@ public class MeasurementEditingContext {
 		return before.points.size();
 	}
 
-	public void splitSegments(int position) {
+	void splitSegments(int position) {
 		List<WptPt> points = new ArrayList<>();
 		points.addAll(before.points);
 		points.addAll(after.points);
