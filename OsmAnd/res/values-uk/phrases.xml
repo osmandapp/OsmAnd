@@ -3454,4 +3454,24 @@
 
 	<string name="poi_beds">Ліжка</string>
 
+<string name="poi_boat_rental_type">Оренда човнів</string>
+
+<string name="poi_boat_rental">Прокат човнів</string>
+	<string name="poi_boat_motorboat_rental_yes">Моторні човни: так</string>
+	<string name="poi_boat_motorboat_rental_no">Моторні човни: немає</string>
+	<string name="poi_boat_houseboat_rental_yes">Плавучі будинки: так</string>
+	<string name="poi_boat_houseboat_rental_no">Плавучі будинки: немає</string>
+	<string name="poi_boat_pedalboat_rental_yes">Педальні човни: так</string>
+	<string name="poi_boat_pedalboat_rental_no">Педальні човни: немає</string>
+	<string name="poi_boat_jetski_rental_yes">Гідроцикли: так</string>
+	<string name="poi_boat_jetski_rental_no">Гідроцикли: немає</string>
+	<string name="poi_boat_sailboat_rental_yes">Вітрильники: так</string>
+	<string name="poi_boat_sailboat_rental_no">Вітрильники: немає</string>
+	<string name="poi_boat_dinghy_rental_rental_yes">Човни: так</string>
+	<string name="poi_boat_dinghy_rental_rental_no">Човни: немає</string>
+	<string name="poi_boat_kayak_rental_rental_yes">Байдарки: так</string>
+	<string name="poi_boat_kayak_rental_rental_no">Байдарки: немає</string>
+	<string name="poi_boat_canoe_rental_rental_yes">Каное: так</string>
+	<string name="poi_boat_canoe_rental_rental_no">Каное: немає</string>
+
 </resources>
