@@ -1527,8 +1527,8 @@
     <string name="use_displayed_track_for_navigation">Бажаєте використовувати показаний трек для навігації?</string>
     <string name="keep_and_add_destination_point">Додати як наступний пункт призначення</string>
     <string name="select_gpx">Обрати GPX…</string>
-    <string name="route_descr_select_destination">Обрати місце призначення</string>
-    <string name="shared_string_select_on_map">Вибрати на мапі</string>
+    <string name="route_descr_select_destination">Виберіть пункт призначення</string>
+    <string name="shared_string_select_on_map">Виберіть на мапі</string>
     <string name="shared_string_favorite">Закладки</string>
     <string name="route_preferences">Уподобання маршруту</string>
     <string name="route_info">Інформація про маршрут</string>
@@ -1745,7 +1745,7 @@
     <string name="settings_privacy">Приватність</string>
     <string name="points">Точки</string>
     
-    <string name="shared_string_my_location">Моє місцезнаходження</string>
+    <string name="shared_string_my_location">Моя позиція</string>
     
     
 	<string name="navigation_over_track">Почати навігацію по треку?</string>
@@ -2967,4 +2967,22 @@
     <string name="save_route_point">Зберегти точку маршруту</string>
     <string name="waypoint_one">Шляхова точка 1</string>
     <string name="route_point_one">Точка маршруту 1</string>
-</resources>
+<string name="measurement_tool_altitude">Висота: %1$s</string>
+    <string name="measurement_tool_speed">Швидкість: %1$s</string>
+    <string name="line">Лінія</string>
+    <string name="save_as_route_point">Зберегти як точки маршруту</string>
+    <string name="save_as_line">Зберегти як лінію</string>
+    <string name="route_point">Точка маршруту</string>
+    <string name="edit_line">Редагувати лінію</string>
+    <string name="add_point_before">Додати точку раніше</string>
+    <string name="add_point_after">Додати точку опісля</string>
+    <string name="shared_string_options">Параметри</string>
+    <string name="measurement_tool_snap_to_road_descr">OsmAnd додасть додаткові точки в залежності від типу навігації.</string>
+    <string name="measurement_tool_save_as_new_track_descr">Ви може зберегти точки, як точки маршруту або як лінію.</string>
+    <string name="choose_navigation_type">Вибрати тип навігації</string>
+    <string name="add_route_points">Додати точки маршруту</string>
+    <string name="add_line">Додати лінію</string>
+    <string name="empty_state_my_tracks">Додавати і записувати треки</string>
+    <string name="empty_state_my_tracks_desc">Записати або імпортувати треки для перегляду</string>
+    <string name="empty_state_favourites">Додати у закладки</string>
+    </resources>
