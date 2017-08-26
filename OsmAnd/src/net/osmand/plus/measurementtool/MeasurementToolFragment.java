@@ -607,7 +607,7 @@ public class MeasurementToolFragment extends Fragment {
 			public void addPointAfterOnClick() {
 				if (measurementLayer != null) {
 					editingCtx.splitSegments(editingCtx.getSelectedPointPosition() + 1);
-					measurementLayer.enterAddingPointBeforeAfterMode();
+					measurementLayer.moveMapToPoint(editingCtx.getSelectedPointPosition());
 				}
 				((TextView) mainView.findViewById(R.id.add_point_before_after_text)).setText(mainView.getResources().getString(R.string.add_point_after));
 				switchAddPointBeforeAfterMode(true);
@@ -617,7 +617,7 @@ public class MeasurementToolFragment extends Fragment {
 			public void addPointBeforeOnClick() {
 				if (measurementLayer != null) {
 					editingCtx.splitSegments(editingCtx.getSelectedPointPosition());
-					measurementLayer.enterAddingPointBeforeAfterMode();
+					measurementLayer.moveMapToPoint(editingCtx.getSelectedPointPosition());
 				}
 				((TextView) mainView.findViewById(R.id.add_point_before_after_text)).setText(mainView.getResources().getString(R.string.add_point_before));
 				switchAddPointBeforeAfterMode(true);

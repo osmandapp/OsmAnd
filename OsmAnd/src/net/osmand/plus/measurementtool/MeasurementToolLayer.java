@@ -151,10 +151,6 @@ public class MeasurementToolLayer extends OsmandMapLayer implements ContextMenuL
 		editingCtx.splitSegments(editingCtx.getSelectedPointPosition());
 	}
 
-	void enterAddingPointBeforeAfterMode() {
-		moveMapToPoint(editingCtx.getSelectedPointPosition());
-	}
-
 	private void selectPoint(double x, double y, boolean singleTap) {
 		RotatedTileBox tb = view.getCurrentRotatedTileBox();
 		double lowestDistance = view.getResources().getDimension(R.dimen.measurement_tool_select_radius);
@@ -372,13 +368,22 @@ public class MeasurementToolLayer extends OsmandMapLayer implements ContextMenuL
 	}
 
 	public void moveMapToPoint(int pos) {
-		if (editingCtx.getPointsCount() > 0) {
+		if (editingCtx.getBeforePoints().size() > 0 || editingCtx.getAfterPoints().size() > 0) {
+			WptPt pt = null;
 			if (pos >= editingCtx.getPointsCount()) {
-				pos = editingCtx.getPointsCount() - 1;
+				if (editingCtx.getAfterPoints().size() >= pos - editingCtx.getPointsCount()) {
+					pt = editingCtx.getAfterPoints().get(pos - editingCtx.getPointsCount());
+				} else {
+					pos = editingCtx.getPointsCount() - 1;
+					pt = editingCtx.getPoints().get(pos);
+				}
 			} else if (pos < 0) {
 				pos = 0;
+				pt = editingCtx.getPoints().get(pos);
 			}
-			WptPt pt = editingCtx.getPoints().get(pos);
+			if (pt == null) {
+				pt = editingCtx.getPoints().get(pos);
+			}
 			moveMapToLatLon(pt.getLatitude(), pt.getLongitude());
 		}
 	}
