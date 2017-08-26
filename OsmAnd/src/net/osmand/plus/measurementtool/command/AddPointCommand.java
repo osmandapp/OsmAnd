@@ -9,12 +9,6 @@ public class AddPointCommand extends MeasurementModeCommand {
 	private WptPt point;
 	private boolean center;
 
-	public AddPointCommand(MeasurementToolLayer measurementLayer, int position) {
-		this.measurementLayer = measurementLayer;
-		this.center = true;
-		this.position = position;
-	}
-
 	public AddPointCommand(MeasurementToolLayer measurementLayer, boolean center) {
 		this.measurementLayer = measurementLayer;
 		this.center = center;

@@ -862,7 +862,7 @@ public class MeasurementToolFragment extends Fragment {
 		if (measurementLayer != null) {
 			int selectedPoint = editingCtx.getSelectedPointPosition(); //after = 1; before = 1;
 			int pointsCount = editingCtx.getPointsCount(); //after = 2; before = 1;
-			if (addPointToPosition(editingCtx.getPointsCount())) { //выбрать вторую точку
+			if (addCenterPoint()) { //выбрать вторую точку
 				if (selectedPoint == pointsCount) {
 					editingCtx.splitSegments(editingCtx.getPointsCount() - 1);
 				} else {
@@ -949,19 +949,11 @@ public class MeasurementToolFragment extends Fragment {
 		}
 	}
 
-	private void addCenterPoint() {
-		MeasurementToolLayer measurementLayer = getMeasurementLayer();
-		if (measurementLayer != null) {
-			editingCtx.getCommandManager().execute(new AddPointCommand(measurementLayer, true));
-			doAddOrMovePointCommonStuff();
-		}
-	}
-
-	private boolean addPointToPosition(int position) {
+	private boolean addCenterPoint() {
 		boolean added = false;
 		MeasurementToolLayer measurementLayer = getMeasurementLayer();
 		if (measurementLayer != null) {
-			added = editingCtx.getCommandManager().execute(new AddPointCommand(measurementLayer, position));
+			added = editingCtx.getCommandManager().execute(new AddPointCommand(measurementLayer, true));
 			doAddOrMovePointCommonStuff();
 		}
 		return added;
