@@ -253,7 +253,7 @@
   <string name="search_position_map_view">Поточний центр мапи</string>
   <string name="select_search_position">Початок:</string>
   <string name="context_menu_item_search">Шукати поруч</string>
-  <string name="shared_string_save_as_gpx">Зберегти маршрут як GPX трек</string>
+  <string name="shared_string_save_as_gpx">Зберегти як новий GPX-трек</string>
   <string name="route_successfully_saved_at">Маршрут успішно збережено в \'%1$s\'.</string>
   <string name="filename_input">Ім’я файлу: </string>
   <string name="file_with_name_already_exist">Файл з таким ім’ям вже існує.</string>
@@ -2985,4 +2985,9 @@
     <string name="empty_state_my_tracks">Додавати і записувати треки</string>
     <string name="empty_state_my_tracks_desc">Записати або імпортувати треки для перегляду</string>
     <string name="empty_state_favourites">Додати у закладки</string>
-    </resources>
+    <string name="empty_state_favourites_desc">Додати закладки на мапу або імпортувати їх з файлової системи</string>
+    <string name="import_track">Імпорт треку</string>
+    <string name="import_track_desc">Файл %1$s не містить шляхових точок, імпортувати його в якості треку?</string>
+    <string name="move_point">Перемістити точку</string>
+    <string name="add_segment_to_the_track">Додати до GPX-треку</string>
+</resources>
