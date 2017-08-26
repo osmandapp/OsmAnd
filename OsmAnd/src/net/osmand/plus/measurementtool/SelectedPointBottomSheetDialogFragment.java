@@ -143,6 +143,19 @@ public class SelectedPointBottomSheetDialogFragment extends BottomSheetDialogFra
 				((TextView) mainView.findViewById(R.id.selected_point_distance)).setText(OsmAndFormatter.getFormattedDistance(dist, mapActivity.getMyApplication()));
 			}
 		}
+		NewGpxData newGpxData = measurementLayer.getEditingCtx().getNewGpxData();
+		if (newGpxData != null && newGpxData.getActionType() == ActionType.EDIT_SEGMENT) {
+			double elevation = pt.ele;
+			if (!Double.isNaN(elevation)) {
+				String eleStr = (mapActivity.getString(R.string.altitude)).substring(0, 1);
+				((TextView) mainView.findViewById(R.id.selected_point_ele)).setText(eleStr + ": " + OsmAndFormatter.getFormattedAlt(elevation, mapActivity.getMyApplication()));
+			}
+			float speed = (float) pt.speed;
+			if (speed != 0) {
+				String speedStr = (mapActivity.getString(R.string.map_widget_speed)).substring(0, 1);
+				((TextView) mainView.findViewById(R.id.selected_point_speed)).setText(speedStr + ": " + OsmAndFormatter.getFormattedSpeed(speed, mapActivity.getMyApplication()));
+			}
+		}
 
 		final int screenHeight = AndroidUtils.getScreenHeight(getActivity());
 		final int statusBarHeight = AndroidUtils.getStatusBarHeight(getActivity());
