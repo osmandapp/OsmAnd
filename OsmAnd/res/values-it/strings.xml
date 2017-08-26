@@ -1762,7 +1762,7 @@ Attivando questa vista lo stile della mappa diventerà \'Inverno e sci\', mostra
     <string name="shared_string_clear">Pulisci</string>
 
     <string name="shared_string_save">Salva</string>
-    <string name="shared_string_save_as_gpx">Salva come nuova Traccia</string>
+    <string name="shared_string_save_as_gpx">Salva come nuova traccia gpx</string>
     <string name="shared_string_rename">Rinomina</string>
     <string name="shared_string_delete">Elimina</string>
     <string name="shared_string_delete_all">Elimina tutto</string>
@@ -2875,7 +2875,7 @@ Copertura e qualità approssimativamente:
     <string name="measurement_tool_altitude">Altitudine: %1$s</string>
     <string name="measurement_tool_speed">Velocità %1$s</string>
     <string name="line">Linea</string>
-    <string name="save_as_route_point">Salva come Punto di un Percorso</string>
+    <string name="save_as_route_point">Salva come punto di un percorso</string>
     <string name="save_as_line">Salva come linea</string>
     <string name="route_point">Punto percorso</string>
     <string name="edit_line">Modifica la linea</string>
@@ -2883,6 +2883,6 @@ Copertura e qualità approssimativamente:
     <string name="add_point_after">Aggiungi un punto dopo</string>
     <string name="shared_string_options">Opzioni</string>
     <string name="measurement_tool_snap_to_road_descr">OsmAnd aggiugerà dei punti, in base al tipo di navigazione.</string>
-    <string name="measurement_tool_save_as_new_track_descr">Puoi salvare dei punti sia come punto di un percorso oppure come linea.</string>
+    <string name="measurement_tool_save_as_new_track_descr">Puoi salvare i punti sia come punti di un percorso che come linea.</string>
     <string name="choose_navigation_type">Scegli la modalità di navigazione</string>
     </resources>
