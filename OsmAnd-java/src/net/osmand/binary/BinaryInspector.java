@@ -81,8 +81,8 @@ public class BinaryInspector {
 //					"-vstreets", "-vbuildings", "-vintersections",
 //					"-lang=ru",
 //					"-bbox=30.4981,50.4424,30.5195,50.4351",
-//					"-osm="+System.getProperty("maps.dir")+"/map_full.obf.osm",
-					System.getProperty("maps.dir")+"/Map.obf"
+					"-osm="+System.getProperty("maps.dir")+"/map_full.obf.osm",
+					System.getProperty("maps.dir")+"/2017_08_24_15_00.obf"
 //					System.getProperty("maps.dir")+"../temp/kiev/Ukraine_kiev-city_europe_17_06_05.obf",
 //					System.getProperty("maps.dir")+"Ukraine_kiev-city_europe_2.obf",
 			});
@@ -1004,7 +1004,8 @@ public class BinaryInspector {
 			if (rt == null) {
 				throw new NullPointerException("Type " + types[j] + "was not found");
 			}
-			tags.append("\t<tag k='").append(rt.getTag()).append("' v='").append(rt.getValue()).append("' />\n");
+			String value = quoteName(rt.getValue());
+			tags.append("\t<tag k='").append(rt.getTag()).append("' v='").append(value).append("' />\n");
 		}
 		TIntObjectHashMap<String> names = obj.getNames();
 		if (names != null && !names.isEmpty()) {
@@ -1042,7 +1043,8 @@ public class BinaryInspector {
 				int[] keys = obj.getPointTypes(i);
 				for (int j = 0; j < keys.length; j++) {
 					RouteTypeRule rt = obj.region.quickGetEncodingRule(keys[j]);
-					tags.append("\t\t<tag k='").append(rt.getTag()).append("' v='").append(rt.getValue()).append("' />\n");
+					String value = quoteName(rt.getValue());
+					tags.append("\t\t<tag k='").append(rt.getTag()).append("' v='").append(value).append("' />\n");
 				}
 			}
 			b.append("\t</node >\n");
@@ -1068,7 +1070,12 @@ public class BinaryInspector {
 	}
 
 	private String quoteName(String name) {
+		if(name == null || name.length() == 0) {
+			return "EMPTY";
+		}
 		name = name.replace("'", "&apos;");
+		name = name.replace("<", "&lt;");
+		name = name.replace(">", "&gt;");
 		name = name.replace("&", "&amp;");
 		return name;
 	}
@@ -1083,7 +1090,7 @@ public class BinaryInspector {
 			if (pair == null) {
 				throw new NullPointerException("Type " + types[j] + "was not found");
 			}
-			tags.append("\t<tag k='").append(pair.tag).append("' v='").append(pair.value).append("' />\n");
+			tags.append("\t<tag k='").append(pair.tag).append("' v='").append(quoteName(pair.value)).append("' />\n");
 		}
 		if (obj.getAdditionalTypes() != null && obj.getAdditionalTypes().length > 0) {
 			for (int j = 0; j < obj.getAdditionalTypes().length; j++) {
@@ -1092,7 +1099,7 @@ public class BinaryInspector {
 				if (pair == null) {
 					throw new NullPointerException("Type " + obj.getAdditionalTypes()[j] + "was not found");
 				}
-				tags.append("\t<tag k='").append(pair.tag).append("' v='").append(pair.value).append("' />\n");
+				tags.append("\t<tag k='").append(pair.tag).append("' v='").append(quoteName(pair.value)).append("' />\n");
 			}
 		}
 		TIntObjectHashMap<String> names = obj.getObjectNames();
