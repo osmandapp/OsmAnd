@@ -257,14 +257,14 @@ public class MeasurementToolFragment extends Fragment {
 		mainView.findViewById(R.id.apply_point_before_after_point_button).setOnClickListener(new View.OnClickListener() {
 			@Override
 			public void onClick(View view) {
-				applyAddPointBeforeOrAfterMode();
+				applyAddPointBeforeAfterMode();
 			}
 		});
 
 		mainView.findViewById(R.id.add_point_before_after_button).setOnClickListener(new View.OnClickListener() {
 			@Override
 			public void onClick(View view) {
-				addPointBeforeOrAfter();
+				addPointBeforeAfter();
 			}
 		});
 
@@ -606,8 +606,7 @@ public class MeasurementToolFragment extends Fragment {
 			@Override
 			public void addPointAfterOnClick() {
 				if (measurementLayer != null) {
-					editingCtx.setSelectedPointPosition(editingCtx.getSelectedPointPosition() + 1);
-					editingCtx.splitSegments(editingCtx.getSelectedPointPosition());
+					editingCtx.splitSegments(editingCtx.getSelectedPointPosition() + 1);
 					measurementLayer.enterAddingPointBeforeAfterMode();
 				}
 				((TextView) mainView.findViewById(R.id.add_point_before_after_text)).setText(mainView.getResources().getString(R.string.add_point_after));
@@ -858,18 +857,24 @@ public class MeasurementToolFragment extends Fragment {
 		}
 	}
 
-	private void addPointBeforeOrAfter() {
+	private void addPointBeforeAfter() {
 		MeasurementToolLayer measurementLayer = getMeasurementLayer();
 		if (measurementLayer != null) {
-			if (addPointToPosition(editingCtx.getPointsCount())) {
-				editingCtx.setSelectedPointPosition(editingCtx.getPointsCount());
+			int selectedPoint = editingCtx.getSelectedPointPosition(); //after = 1; before = 1;
+			int pointsCount = editingCtx.getPointsCount(); //after = 2; before = 1;
+			if (addPointToPosition(editingCtx.getPointsCount())) { //выбрать вторую точку
+				if (selectedPoint == pointsCount) {
+					editingCtx.splitSegments(editingCtx.getPointsCount() - 1);
+				} else {
+					editingCtx.setSelectedPointPosition(selectedPoint + 1);
+				}
 				measurementLayer.refreshMap();
 			}
 		}
 	}
 
-	private void applyAddPointBeforeOrAfterMode() {
-		switchAddPointAfterMode(false);
+	private void applyAddPointBeforeAfterMode() {
+		switchAddPointBeforeAfterMode(false);
 		editingCtx.splitSegments(editingCtx.getBeforePoints().size() + editingCtx.getAfterPoints().size());
 		editingCtx.setSelectedPointPosition(-1);
 		MeasurementToolLayer measurementLayer = getMeasurementLayer();
@@ -905,25 +910,6 @@ public class MeasurementToolFragment extends Fragment {
 				R.id.move_point_controls);
 		mainIcon.setImageDrawable(getActiveIcon(enable
 				? R.drawable.ic_action_move_point
-				: R.drawable.ic_action_ruler));
-	}
-
-	private void switchAddPointAfterMode(boolean enable) {
-		if (enable) {
-			toolBarController.setBackBtnIconIds(R.drawable.ic_action_mode_back, R.drawable.ic_action_mode_back);
-		} else {
-			toolBarController.setBackBtnIconIds(R.drawable.ic_action_remove_dark, R.drawable.ic_action_remove_dark);
-		}
-		MapActivity mapActivity = getMapActivity();
-		if (mapActivity != null) {
-			mapActivity.showTopToolbar(toolBarController);
-		}
-		markGeneralComponents(enable ? View.GONE : View.VISIBLE);
-		mark(enable ? View.VISIBLE : View.GONE,
-				R.id.add_point_before_after_text,
-				R.id.add_point_before_after_controls);
-		mainIcon.setImageDrawable(getActiveIcon(enable
-				? R.drawable.ic_action_addpoint_above
 				: R.drawable.ic_action_ruler));
 	}
 

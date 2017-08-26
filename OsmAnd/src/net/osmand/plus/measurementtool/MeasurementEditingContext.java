@@ -129,12 +129,8 @@ public class MeasurementEditingContext {
 		points.addAll(after.points);
 		before.points.clear();
 		after.points.clear();
-		if (position == before.points.size() + after.points.size()) {
-			before.points.addAll(points);
-		} else {
-			before.points.addAll(points.subList(0, position));
-			after.points.addAll(points.subList(position, points.size()));
-		}
+		before.points.addAll(points.subList(0, position));
+		after.points.addAll(points.subList(position, points.size()));
 		updateCacheForSnapIfNeeded(true);
 	}
 
