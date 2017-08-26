@@ -93,6 +93,11 @@ public class MeasurementEditingContext {
 	}
 
 	void setSnapToRoadAppMode(ApplicationMode snapToRoadAppMode) {
+		if (this.snapToRoadAppMode != null
+				&& !this.snapToRoadAppMode.getStringKey().equals(snapToRoadAppMode.getStringKey())) {
+			snappedToRoadPoints.clear();
+			updateCacheForSnapIfNeeded(true);
+		}
 		this.snapToRoadAppMode = snapToRoadAppMode;
 	}
 
