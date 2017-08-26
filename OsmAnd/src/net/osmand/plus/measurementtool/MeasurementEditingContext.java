@@ -35,6 +35,8 @@ public class MeasurementEditingContext {
 	// cache should be deleted if after changed or snappedToRoadPoints
 	private TrkSegment afterCacheForSnap;
 
+	private NewGpxData newGpxData;
+
 	private int selectedPointPosition = -1;
 	private WptPt originalPointToMove;
 
@@ -75,6 +77,14 @@ public class MeasurementEditingContext {
 
 	public void setInSnapToRoadMode(boolean inSnapToRoadMode) {
 		this.inSnapToRoadMode = inSnapToRoadMode;
+	}
+
+	public NewGpxData getNewGpxData() {
+		return newGpxData;
+	}
+
+	public void setNewGpxData(NewGpxData newGpxData) {
+		this.newGpxData = newGpxData;
 	}
 
 	public void setProgressListener(SnapToRoadProgressListener progressListener) {

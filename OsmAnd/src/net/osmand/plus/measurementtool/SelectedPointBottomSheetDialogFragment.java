@@ -23,9 +23,9 @@ import net.osmand.plus.IconsCache;
 import net.osmand.plus.OsmAndFormatter;
 import net.osmand.plus.R;
 import net.osmand.plus.activities.MapActivity;
-import net.osmand.plus.activities.TrackActivity;
 import net.osmand.plus.base.BottomSheetDialogFragment;
 import net.osmand.plus.helpers.AndroidUiHelper;
+import net.osmand.plus.measurementtool.NewGpxData.ActionType;
 import net.osmand.util.MapUtils;
 
 import java.util.List;
@@ -37,14 +37,9 @@ public class SelectedPointBottomSheetDialogFragment extends BottomSheetDialogFra
 	private SelectedPointFragmentListener listener;
 	private boolean nightMode;
 	private boolean portrait;
-	private NewGpxData.ActionType actionType;
 
 	public void setListener(SelectedPointFragmentListener listener) {
 		this.listener = listener;
-	}
-
-	public void setActionType(NewGpxData.ActionType actionType) {
-		this.actionType = actionType;
 	}
 
 	@Nullable
@@ -122,8 +117,14 @@ public class SelectedPointBottomSheetDialogFragment extends BottomSheetDialogFra
 		if (!TextUtils.isEmpty(pointTitle)) {
 			((TextView) mainView.findViewById(R.id.selected_point_title)).setText(pointTitle);
 		} else {
-			if (actionType == NewGpxData.ActionType.ADD_ROUTE_POINTS) {
-				((TextView) mainView.findViewById(R.id.selected_point_title)).setText(mapActivity.getString(R.string.route_point) + " - " + (pos + 1));
+			NewGpxData newGpxData = measurementLayer.getEditingCtx().getNewGpxData();
+			if (newGpxData != null) {
+				ActionType actionType = measurementLayer.getEditingCtx().getNewGpxData().getActionType();
+				if (actionType == ActionType.ADD_ROUTE_POINTS) {
+					((TextView) mainView.findViewById(R.id.selected_point_title)).setText(mapActivity.getString(R.string.route_point) + " - " + (pos + 1));
+				} else {
+					((TextView) mainView.findViewById(R.id.selected_point_title)).setText(mapActivity.getString(R.string.plugin_distance_point) + " - " + (pos + 1));
+				}
 			} else {
 				((TextView) mainView.findViewById(R.id.selected_point_title)).setText(mapActivity.getString(R.string.plugin_distance_point) + " - " + (pos + 1));
 			}

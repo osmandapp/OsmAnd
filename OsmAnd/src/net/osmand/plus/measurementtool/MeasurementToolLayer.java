@@ -185,12 +185,12 @@ public class MeasurementToolLayer extends OsmandMapLayer implements ContextMenuL
 
 			TrkSegment before = editingCtx.getBeforeTrkSegmentLine();
 			before.renders.clear();
-			before.renders.add(new Renderable.StandardTrack(before.points, 17.2));
+			before.renders.add(new Renderable.StandardTrack(new ArrayList<>(before.points), 17.2));
 			before.drawRenderers(view.getZoom(), lineAttrs.paint, canvas, tb);
 
 			TrkSegment after = editingCtx.getAfterTrkSegmentLine();
 			after.renders.clear();
-			after.renders.add(new Renderable.StandardTrack(after.points, 17.2));
+			after.renders.add(new Renderable.StandardTrack(new ArrayList<>(after.points), 17.2));
 			after.drawRenderers(view.getZoom(), lineAttrs.paint, canvas, tb);
 		}
 	}

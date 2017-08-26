@@ -60,6 +60,7 @@ import net.osmand.plus.measurementtool.command.ClearPointsCommand;
 import net.osmand.plus.measurementtool.command.MovePointCommand;
 import net.osmand.plus.measurementtool.command.RemovePointCommand;
 import net.osmand.plus.measurementtool.command.ReorderPointCommand;
+import net.osmand.plus.measurementtool.NewGpxData.ActionType;
 import net.osmand.plus.views.OsmandMapTileView;
 import net.osmand.plus.views.mapwidgets.MapInfoWidgetsFactory;
 import net.osmand.plus.views.mapwidgets.MapInfoWidgetsFactory.TopToolbarController;
@@ -105,7 +106,6 @@ public class MeasurementToolFragment extends Fragment {
 	private boolean portrait;
 	private boolean nightMode;
 	private int previousMapPosition;
-	private NewGpxData newGpxData;
 	private boolean gpxPointsAdded;
 
 	private MeasurementEditingContext editingCtx = new MeasurementEditingContext();
@@ -115,8 +115,8 @@ public class MeasurementToolFragment extends Fragment {
 		LINE
 	}
 
-	public void setNewGpxData(NewGpxData newGpxData) {
-		this.newGpxData = newGpxData;
+	public void setEditingCtx(MeasurementEditingContext editingCtx) {
+		this.editingCtx = editingCtx;
 	}
 
 	@Nullable
@@ -156,7 +156,6 @@ public class MeasurementToolFragment extends Fragment {
 		Fragment selectedPointFragment = fragmentManager.findFragmentByTag(SelectedPointBottomSheetDialogFragment.TAG);
 		if (selectedPointFragment != null) {
 			SelectedPointBottomSheetDialogFragment fragment = (SelectedPointBottomSheetDialogFragment) selectedPointFragment;
-			fragment.setActionType(newGpxData != null ? newGpxData.getActionType() : null);
 			fragment.setListener(createSelectedPointFragmentListener());
 		}
 		Fragment optionsFragment = fragmentManager.findFragmentByTag(OptionsBottomSheetDialogFragment.TAG);
@@ -207,9 +206,10 @@ public class MeasurementToolFragment extends Fragment {
 		distanceToCenterTv = (TextView) mainView.findViewById(R.id.distance_to_center_text_view);
 
 		mainIcon = (ImageView) mainView.findViewById(R.id.main_icon);
-		if (newGpxData != null) {
-			NewGpxData.ActionType actionType = newGpxData.getActionType();
-			if (actionType == NewGpxData.ActionType.ADD_SEGMENT || actionType == NewGpxData.ActionType.EDIT_SEGMENT) {
+		final NewGpxData newGpxData = editingCtx.getNewGpxData();
+		if (editingCtx.getNewGpxData() != null) {
+			ActionType actionType = newGpxData.getActionType();
+			if (actionType == ActionType.ADD_SEGMENT || actionType == ActionType.EDIT_SEGMENT) {
 				mainIcon.setImageDrawable(getActiveIcon(R.drawable.ic_action_polygom_dark));
 			} else {
 				mainIcon.setImageDrawable(getActiveIcon(R.drawable.ic_action_markers_dark));
@@ -781,7 +781,7 @@ public class MeasurementToolFragment extends Fragment {
 	private void displayRoutePoints() {
 		final MeasurementToolLayer measurementLayer = getMeasurementLayer();
 
-		GPXFile gpx = newGpxData.getGpxFile();
+		GPXFile gpx = editingCtx.getNewGpxData().getGpxFile();
 		List<WptPt> points = gpx.getRoutePoints();
 		if (measurementLayer != null) {
 			editingCtx.addPoints(points);
@@ -793,7 +793,7 @@ public class MeasurementToolFragment extends Fragment {
 	private void displaySegmentPoints() {
 		final MeasurementToolLayer measurementLayer = getMeasurementLayer();
 
-		TrkSegment segment = newGpxData.getTrkSegment();
+		TrkSegment segment = editingCtx.getNewGpxData().getTrkSegment();
 		List<WptPt> points = segment.points;
 		if (measurementLayer != null) {
 			editingCtx.addPoints(points);
@@ -804,7 +804,6 @@ public class MeasurementToolFragment extends Fragment {
 
 	private void openSelectedPointMenu(MapActivity mapActivity) {
 		SelectedPointBottomSheetDialogFragment fragment = new SelectedPointBottomSheetDialogFragment();
-		fragment.setActionType(newGpxData != null ? newGpxData.getActionType() : null);
 		fragment.setListener(createSelectedPointFragmentListener());
 		fragment.show(mapActivity.getSupportFragmentManager(), SelectedPointBottomSheetDialogFragment.TAG);
 	}
@@ -1049,10 +1048,10 @@ public class MeasurementToolFragment extends Fragment {
 	}
 
 	private void addToGpx(MapActivity mapActivity) {
-		GPXFile gpx = newGpxData.getGpxFile();
+		GPXFile gpx = editingCtx.getNewGpxData().getGpxFile();
 		SelectedGpxFile selectedGpxFile = mapActivity.getMyApplication().getSelectedGpxHelper().getSelectedFileByPath(gpx.path);
 		boolean showOnMap = selectedGpxFile != null;
-		NewGpxData.ActionType actionType = newGpxData.getActionType();
+		ActionType actionType = editingCtx.getNewGpxData().getActionType();
 		saveExistingGpx(gpx, showOnMap, actionType, true);
 	}
 
@@ -1200,7 +1199,7 @@ public class MeasurementToolFragment extends Fragment {
 								case EDIT_SEGMENT:
 									TrkSegment segment = new TrkSegment();
 									segment.points.addAll(points);
-									gpx.replaceSegment(newGpxData.getTrkSegment(), segment);
+									gpx.replaceSegment(editingCtx.getNewGpxData().getTrkSegment(), segment);
 									break;
 							}
 						} else {
@@ -1390,8 +1389,8 @@ public class MeasurementToolFragment extends Fragment {
 			if (editingCtx.isInSnapToRoadMode()) {
 				disableSnapToRoadMode();
 			}
-			if (newGpxData != null) {
-				GPXFile gpx = newGpxData.getGpxFile();
+			if (editingCtx.getNewGpxData() != null) {
+				GPXFile gpx = editingCtx.getNewGpxData().getGpxFile();
 				Intent newIntent = new Intent(mapActivity, mapActivity.getMyApplication().getAppCustomization().getTrackActivity());
 				newIntent.putExtra(TrackActivity.TRACK_FILE_NAME, gpx.path);
 				newIntent.putExtra(TrackActivity.OPEN_TRACKS_LIST, true);
@@ -1404,10 +1403,23 @@ public class MeasurementToolFragment extends Fragment {
 		}
 	}
 
-	public static boolean showInstance(FragmentManager fragmentManager, NewGpxData newGpxData) {
+	public static boolean showInstance(FragmentManager fragmentManager, MeasurementEditingContext editingCtx) {
 		try {
 			MeasurementToolFragment fragment = new MeasurementToolFragment();
-			fragment.setNewGpxData(newGpxData);
+			fragment.setEditingCtx(editingCtx);
+			fragment.setRetainInstance(true);
+			fragmentManager.beginTransaction()
+					.add(R.id.bottomFragmentContainer, fragment, MeasurementToolFragment.TAG)
+					.commitAllowingStateLoss();
+			return true;
+		} catch (Exception e) {
+			return false;
+		}
+	}
+
+	public static boolean showInstance(FragmentManager fragmentManager) {
+		try {
+			MeasurementToolFragment fragment = new MeasurementToolFragment();
 			fragment.setRetainInstance(true);
 			fragmentManager.beginTransaction()
 					.add(R.id.bottomFragmentContainer, fragment, MeasurementToolFragment.TAG)
