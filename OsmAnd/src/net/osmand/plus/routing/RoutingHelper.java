@@ -19,7 +19,6 @@ import net.osmand.plus.notifications.OsmandNotification.NotificationType;
 import net.osmand.plus.routing.RouteCalculationResult.NextDirectionInfo;
 import net.osmand.plus.routing.RouteProvider.GPXRouteParamsBuilder;
 import net.osmand.plus.routing.RouteProvider.RouteService;
-import net.osmand.plus.routing.RouteProvider.SnapToRoadParams;
 import net.osmand.router.RouteCalculationProgress;
 import net.osmand.router.RouteSegmentResult;
 import net.osmand.router.TurnType;
@@ -388,7 +387,7 @@ public class RoutingHelper {
 
 		if (calculateRoute) {
 			recalculateRouteInBackground(currentLocation, finalLocation, intermediatePoints, currentGPXRoute,
-					previousRoute.isCalculated() ? previousRoute : null, false, !targetPointsChanged, null);
+					previousRoute.isCalculated() ? previousRoute : null, false, !targetPointsChanged);
 		} else {
 			Thread job = currentRunningJob;
 			if(job instanceof RouteRecalculationThread) {
@@ -871,11 +870,8 @@ public class RoutingHelper {
 			synchronized (RoutingHelper.this) {
 				if (res.isCalculated()) {
 					route = res;
-					if (params.snapToRoadParams != null) {
-						params.snapToRoadParams.points = res.getRouteLocations();
-						if (params.snapToRoadParams.listener != null) {
-							params.snapToRoadParams.listener.onSnapToRoadDone();
-						}
+					if (params.resultListener != null) {
+						params.resultListener.onRouteCalculated(res.getRouteLocations());
 					}
 				} else {
 					evalWaitInterval = Math.max(3000, evalWaitInterval * 3 / 2); // for Issue #3899
@@ -911,18 +907,13 @@ public class RoutingHelper {
 		}
 	}
 
-	public void recalculateSnapToRoad(final Location start, final LatLon end, final List<LatLon> intermediates, SnapToRoadParams params) {
-		recalculateRouteInBackground(start, end, intermediates, null, route, true, false, params);
-	}
-
 	public void recalculateRouteDueToSettingsChange() {
 		clearCurrentRoute(finalLocation, intermediatePoints);
-		recalculateRouteInBackground(lastFixedLocation, finalLocation, intermediatePoints, currentGPXRoute, route, true, false, null);
+		recalculateRouteInBackground(lastFixedLocation, finalLocation, intermediatePoints, currentGPXRoute, route, true, false);
 	}
 
 	private void recalculateRouteInBackground(final Location start, final LatLon end, final List<LatLon> intermediates,
-			final GPXRouteParamsBuilder gpxRoute, final RouteCalculationResult previousRoute, boolean paramsChanged, boolean onlyStartPointChanged,
-			final SnapToRoadParams snapToRoadParams){
+			final GPXRouteParamsBuilder gpxRoute, final RouteCalculationResult previousRoute, boolean paramsChanged, boolean onlyStartPointChanged){
 		if (start == null || end == null) {
 			return;
 		}
@@ -944,42 +935,39 @@ public class RoutingHelper {
 				recalculateCountInInterval = 0;
 			}
 			params.leftSide = settings.DRIVING_REGION.get().leftHandDriving;
-			ApplicationMode mode;
-			if (snapToRoadParams != null && snapToRoadParams.applicationMode != null) {
-				params.snapToRoadParams = snapToRoadParams;
-				mode = snapToRoadParams.applicationMode;
-			} else {
-				mode = this.mode;
-			}
 			params.fast = settings.FAST_ROUTE_MODE.getModeValue(mode);
 			params.type = settings.ROUTER_SERVICE.getModeValue(mode);
 			params.mode = mode;
 			params.ctx = app;
+			boolean updateProgress = false;
 			if (params.type == RouteService.OSMAND) {
-				if (snapToRoadParams != null && snapToRoadParams.calculationProgress != null) {
-					params.calculationProgress = snapToRoadParams.calculationProgress;
-				} else {
-					params.calculationProgress = new RouteCalculationProgress();
-				}
-				updateProgress(params);
+				params.calculationProgress = new RouteCalculationProgress();
+				updateProgress = true;
 			}
-			synchronized (this) {
-				final Thread prevRunningJob = currentRunningJob;
-				RouteRecalculationThread newThread = new RouteRecalculationThread(
-						"Calculating route", params, paramsChanged); //$NON-NLS-1$
-				currentRunningJob = newThread;
-				if (prevRunningJob != null) {
-					newThread.setWaitPrevJob(prevRunningJob);
-				}
-				currentRunningJob.start();
+			startRouteCalculationThread(params, paramsChanged, updateProgress);
+		}
+	}
+
+	public void startRouteCalculationThread(RouteCalculationParams params, boolean paramsChanged, boolean updateProgress) {
+		if (updateProgress) {
+			updateProgress(params);
+		}
+		synchronized (this) {
+			final Thread prevRunningJob = currentRunningJob;
+			RouteRecalculationThread newThread = new RouteRecalculationThread(
+					"Calculating route", params, paramsChanged); //$NON-NLS-1$
+			currentRunningJob = newThread;
+			if (prevRunningJob != null) {
+				newThread.setWaitPrevJob(prevRunningJob);
 			}
+			currentRunningJob.start();
 		}
 	}
 
 	private void updateProgress(final RouteCalculationParams params) {
 		final RouteCalculationProgressCallback progressRoute;
-		if (params.snapToRoadParams != null) {
-			progressRoute = params.snapToRoadParams.calculationProgressCallback;
+		if (params.calculationProgressCallback != null) {
+			progressRoute = params.calculationProgressCallback;
 		} else {
 			progressRoute = this.progressRoute;
 		}

@@ -9,24 +9,18 @@ public class AddPointCommand extends MeasurementModeCommand {
 	private WptPt point;
 	private boolean center;
 
-	public AddPointCommand(MeasurementToolLayer measurementLayer, int position) {
-		this.measurementLayer = measurementLayer;
-		this.center = true;
-		this.position = position;
-	}
-
 	public AddPointCommand(MeasurementToolLayer measurementLayer, boolean center) {
 		this.measurementLayer = measurementLayer;
 		this.center = center;
-		position = measurementLayer.getMeasurementPoints().size();
+		position = measurementLayer.getEditingCtx().getPointsCount();
 	}
 
 	@Override
 	public boolean execute() {
 		if (center) {
-			point = measurementLayer.addCenterPoint(position);
+			point = measurementLayer.addCenterPoint();
 		} else {
-			point = measurementLayer.addPoint(position);
+			point = measurementLayer.addPoint();
 		}
 		measurementLayer.refreshMap();
 		return point != null;
@@ -34,13 +28,13 @@ public class AddPointCommand extends MeasurementModeCommand {
 
 	@Override
 	public void undo() {
-		measurementLayer.getMeasurementPoints().remove(position);
+		measurementLayer.getEditingCtx().removePoint(position);
 		measurementLayer.refreshMap();
 	}
 
 	@Override
 	public void redo() {
-		measurementLayer.getMeasurementPoints().add(position, point);
+		measurementLayer.getEditingCtx().addPoint(position, point);
 		measurementLayer.refreshMap();
 		measurementLayer.moveMapToPoint(position);
 	}
