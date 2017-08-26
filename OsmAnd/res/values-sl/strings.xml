@@ -2814,4 +2814,27 @@ Koda predstavlja območje: %1$s x %2$s</string>
     <string name="shared_string_options">Možnosti</string>
     <string name="empty_state_favourites">Dodaj priljubljene</string>
     <string name="import_track">Uvozi sled</string>
-    </resources>
+    <string name="line">Črta</string>
+    <string name="save_as_route_point">Shrani kot točke poti</string>
+    <string name="save_as_line">Shrani kot črto</string>
+    <string name="route_point">Točka poti</string>
+    <string name="edit_line">Uredi črto</string>
+    <string name="add_point_before">Dodaj točko pred</string>
+    <string name="add_point_after">Dodaj točko za</string>
+    <string name="measurement_tool_snap_to_road_descr">Program bo dodal točke glede na vrsto navigacije.</string>
+    <string name="measurement_tool_save_as_new_track_descr">Točke je mogoče shraniti kot točke poti ali kot črto.</string>
+    <string name="choose_navigation_type">Izbor vrste navigacije</string>
+    <string name="measurement_tool_action_bar">Prebrskajte zemljevid in dodajte točke</string>
+    <string name="add_route_points">Dodaj točke poti</string>
+    <string name="add_waypoint">Dodaj vmesno točko</string>
+    <string name="add_line">Dodaj črto</string>
+    <string name="save_gpx_waypoint">Shrani vmesno točko GPX</string>
+    <string name="save_route_point">Shrani točko poti</string>
+    <string name="waypoint_one">Vmesna točka 1</string>
+    <string name="route_point_one">Točka poti 1</string>
+    <string name="empty_state_my_tracks">Dodajanje in beleženje sledi</string>
+    <string name="empty_state_my_tracks_desc">Beleženje in uvoz sledi za ogled</string>
+    <string name="import_track_desc">Datoteka %1$s ne vključuje nobene vmesne točke. Ali želite pot uvoziti kot sled?</string>
+    <string name="move_point">Premakni točko</string>
+    <string name="add_segment_to_the_track">Dodaj na sled GPX</string>
+</resources>
