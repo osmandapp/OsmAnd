@@ -606,8 +606,8 @@ public class MeasurementToolFragment extends Fragment {
 			@Override
 			public void addPointAfterOnClick() {
 				if (measurementLayer != null) {
+                    measurementLayer.moveMapToPoint(editingCtx.getSelectedPointPosition());
 					editingCtx.splitSegments(editingCtx.getSelectedPointPosition() + 1);
-					measurementLayer.moveMapToPoint(editingCtx.getSelectedPointPosition());
 				}
 				((TextView) mainView.findViewById(R.id.add_point_before_after_text)).setText(mainView.getResources().getString(R.string.add_point_after));
 				mainIcon.setImageDrawable(getActiveIcon(R.drawable.ic_action_addpoint_above));
@@ -617,8 +617,8 @@ public class MeasurementToolFragment extends Fragment {
 			@Override
 			public void addPointBeforeOnClick() {
 				if (measurementLayer != null) {
+                    measurementLayer.moveMapToPoint(editingCtx.getSelectedPointPosition());
 					editingCtx.splitSegments(editingCtx.getSelectedPointPosition());
-					measurementLayer.moveMapToPoint(editingCtx.getSelectedPointPosition());
 				}
 				((TextView) mainView.findViewById(R.id.add_point_before_after_text)).setText(mainView.getResources().getString(R.string.add_point_before));
 				mainIcon.setImageDrawable(getActiveIcon(R.drawable.ic_action_addpoint_below));

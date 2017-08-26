@@ -367,26 +367,17 @@ public class MeasurementToolLayer extends OsmandMapLayer implements ContextMenuL
 		view.getAnimatedDraggingThread().startMoving(lat, lon, view.getZoom(), true);
 	}
 
-	public void moveMapToPoint(int pos) {
-		if (editingCtx.getBeforePoints().size() > 0 || editingCtx.getAfterPoints().size() > 0) {
-			WptPt pt = null;
-			if (pos >= editingCtx.getPointsCount()) {
-				if (editingCtx.getAfterPoints().size() >= pos - editingCtx.getPointsCount()) {
-					pt = editingCtx.getAfterPoints().get(pos - editingCtx.getPointsCount());
-				} else {
-					pos = editingCtx.getPointsCount() - 1;
-					pt = editingCtx.getPoints().get(pos);
-				}
-			} else if (pos < 0) {
-				pos = 0;
-				pt = editingCtx.getPoints().get(pos);
-			}
-			if (pt == null) {
-				pt = editingCtx.getPoints().get(pos);
-			}
-			moveMapToLatLon(pt.getLatitude(), pt.getLongitude());
-		}
-	}
+    public void moveMapToPoint(int pos) {
+        if (editingCtx.getPointsCount() > 0) {
+            if (pos >= editingCtx.getPointsCount()) {
+                pos = editingCtx.getPointsCount() - 1;
+            } else if (pos < 0) {
+                pos = 0;
+            }
+            WptPt pt = editingCtx.getPoints().get(pos);
+            moveMapToLatLon(pt.getLatitude(), pt.getLongitude());
+        }
+    }
 
 	public void refreshMap() {
 		view.refreshMap();
