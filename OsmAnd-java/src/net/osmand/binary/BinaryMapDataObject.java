@@ -6,7 +6,6 @@ import gnu.trove.map.hash.TIntObjectHashMap;
 import java.util.Arrays;
 import java.util.LinkedHashMap;
 import java.util.Map;
-import java.util.TreeSet;
 
 import net.osmand.binary.BinaryMapIndexReader.MapIndex;
 import net.osmand.binary.BinaryMapIndexReader.TagValuePair;

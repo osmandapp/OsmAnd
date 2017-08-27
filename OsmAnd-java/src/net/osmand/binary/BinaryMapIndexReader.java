@@ -1742,6 +1742,7 @@ public class BinaryMapIndexReader {
 			}
 			return null;
 		}
+		
 
 		public LatLon getCenterLatLon() {
 			if(roots.size() == 0) {
@@ -1759,6 +1760,14 @@ public class BinaryMapIndexReader {
 
 		public TagValuePair decodeType(int type) {
 			return decodingRules.get(type);
+		}
+		
+		public Integer getRule(TagValuePair tv) {
+			Map<String, Integer> m = encodingRules.get(tv.tag);
+			if (m != null) {
+				return m.get(tv.value);
+			}
+			return null;
 		}
 
 		public void finishInitializingTags() {
@@ -1823,6 +1832,69 @@ public class BinaryMapIndexReader {
 
 		public int getFieldNumber() {
 			return OsmandOdb.OsmAndStructure.MAPINDEX_FIELD_NUMBER;
+		}
+
+		public BinaryMapDataObject adoptMapObject(BinaryMapDataObject o) {
+			if(o.mapIndex == this) {
+				return o;
+			}
+			if(encodingRules.isEmpty()) {
+				encodingRules.putAll(o.mapIndex.encodingRules);
+				decodingRules.putAll(o.mapIndex.decodingRules);
+				return o;
+			}
+			TIntArrayList types = new TIntArrayList();
+			TIntArrayList additionalTypes = new TIntArrayList();
+			if (o.types != null) {
+				for (int i = 0; i < o.types.length; i++) {
+					TagValuePair tp = o.mapIndex.decodeType(o.types[i]);
+					Integer r = getRule(tp);
+					if(r != null) {
+						types.add(r);
+					} else {
+						int nid = decodingRules.size();
+						initMapEncodingRule(tp.additionalAttribute, decodingRules.size(), tp.tag, tp.value);
+						types.add(nid);
+					}
+				}
+			}
+			if (o.additionalTypes != null) {
+				for (int i = 0; i < o.additionalTypes.length; i++) {
+					TagValuePair tp = o.mapIndex.decodeType(o.additionalTypes[i]);
+					Integer r = getRule(tp);
+					if(r != null) {
+						additionalTypes.add(r);
+					} else {
+						int nid = decodingRules.size();
+						initMapEncodingRule(tp.additionalAttribute, decodingRules.size(), tp.tag, tp.value);
+						additionalTypes.add(nid);
+					}
+				}
+			}
+				
+			BinaryMapDataObject bm = 
+					new BinaryMapDataObject(o.id, o.coordinates, o.polygonInnerCoordinates, o.objectType, o.area, 
+							types.toArray(), additionalTypes.isEmpty() ? null : additionalTypes.toArray());
+			if (o.namesOrder != null) {
+				bm.objectNames = new TIntObjectHashMap<>();
+				bm.namesOrder = new TIntArrayList();
+				for (int i = 0; i < o.namesOrder.size(); i++) {
+					int nameType = o.namesOrder.get(i);
+					String name = o.objectNames.get(nameType);
+					TagValuePair tp = o.mapIndex.decodeType(nameType);
+					Integer r = getRule(tp);
+					if(r != null) {
+						bm.namesOrder.add(r);
+						bm.objectNames.put(r, name);
+					} else {
+						int nid = decodingRules.size();
+						initMapEncodingRule(tp.additionalAttribute, decodingRules.size(), tp.tag, tp.value);
+						additionalTypes.add(nid);
+						bm.objectNames.put(nid, name);
+					}
+				}
+			}
+			return bm;
 		}
 	}
 
