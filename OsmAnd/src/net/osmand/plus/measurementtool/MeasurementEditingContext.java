@@ -259,6 +259,7 @@ public class MeasurementEditingContext {
 		LatLon end = new LatLon(currentPair.second.getLatitude(), currentPair.second.getLongitude());
 
 		final RouteCalculationParams params = new RouteCalculationParams();
+		params.inSnapToRoadMode = true;
 		params.start = start;
 		params.end = end;
 		params.leftSide = settings.DRIVING_REGION.get().leftHandDriving;
