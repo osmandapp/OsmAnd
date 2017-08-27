@@ -1682,7 +1682,7 @@ Kaj la loko kaj tempo estas montrataj en la OsmAnd-a stirpanelo, kaj sur la fene
     <string name="search_offline_geo_error">Ne povis interpreti \'%s\'</string>
     <string name="search_osm_offline">Serĉi geo-lokon</string>
     <string name="preferred_locale_descr">Elekti lingvon de fasado (bonvolu restarti OsmAnd post ŝanĝo)</string>
-    <string name="unit_of_length">Long-unuo</string>
+    <string name="unit_of_length">Long-unuoj</string>
     <string name="unit_of_length_descr">Ŝanĝi unuon de longo</string>
     <string name="si_mi_feet">Mejloj/futoj</string>
     <string name="si_mi_yard">Mejloj/jardoj</string>
