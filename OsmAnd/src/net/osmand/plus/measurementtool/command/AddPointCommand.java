@@ -28,7 +28,7 @@ public class AddPointCommand extends MeasurementModeCommand {
 
 	@Override
 	public void undo() {
-		measurementLayer.getEditingCtx().removePoint(position);
+		measurementLayer.getEditingCtx().removePoint(position, true);
 		measurementLayer.refreshMap();
 	}
 

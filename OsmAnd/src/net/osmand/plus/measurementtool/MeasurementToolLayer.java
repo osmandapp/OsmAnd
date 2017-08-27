@@ -146,7 +146,7 @@ public class MeasurementToolLayer extends OsmandMapLayer implements ContextMenuL
 
 	void enterMovingPointMode() {
 		moveMapToPoint(editingCtx.getSelectedPointPosition());
-		WptPt pt = editingCtx.removePoint(editingCtx.getSelectedPointPosition());
+		WptPt pt = editingCtx.removePoint(editingCtx.getSelectedPointPosition(), false);
 		editingCtx.setOriginalPointToMove(pt);
 		editingCtx.splitSegments(editingCtx.getSelectedPointPosition());
 	}

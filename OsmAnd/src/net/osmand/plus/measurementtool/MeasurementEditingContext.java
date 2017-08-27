@@ -167,9 +167,11 @@ public class MeasurementEditingContext {
 		updateCacheForSnapIfNeeded(false);
 	}
 
-	public WptPt removePoint(int position) {
+	public WptPt removePoint(int position, boolean updateSnapToRoad) {
 		WptPt pt = before.points.remove(position);
-		updateCacheForSnapIfNeeded(false);
+		if (updateSnapToRoad) {
+			updateCacheForSnapIfNeeded(false);
+		}
 		return pt;
 	}
 
