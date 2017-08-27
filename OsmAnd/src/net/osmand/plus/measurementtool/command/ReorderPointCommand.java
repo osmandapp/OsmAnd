@@ -31,7 +31,7 @@ public class ReorderPointCommand extends MeasurementModeCommand {
 	}
 
 	private void swap() {
-		Collections.swap(measurementLayer.getMeasurementPoints(), from, to);
+		Collections.swap(measurementLayer.getEditingCtx().getPoints(), from, to);
 		measurementLayer.refreshMap();
 	}
 

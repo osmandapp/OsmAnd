@@ -1646,7 +1646,7 @@ Chcete pokračovať v novej registrácii?</string>
     <string name="shared_string_deselect_all">Zrušiť výber všetkých</string>
     <string name="shared_string_clear">Vymazať</string>
     <string name="shared_string_save">Uložiť</string>
-    <string name="shared_string_save_as_gpx">Uložiť ako novú stopu</string>
+    <string name="shared_string_save_as_gpx">Uložiť ako novú GPX stopu</string>
     <string name="shared_string_rename">Premenovať</string>
     <string name="shared_string_delete">Odstrániť</string>
     <string name="shared_string_delete_all">Odstrániť všetko</string>
@@ -2833,7 +2833,7 @@ Zodpovedá oblasti: %1$s x %2$s</string>
 <string name="measurement_tool_altitude">Nadm.výška: %1$s</string>
     <string name="measurement_tool_speed">Rýchlosť: %1$s</string>
     <string name="line">Čiara</string>
-    <string name="save_as_route_point">Uložiť ako bod trasy</string>
+    <string name="save_as_route_point">Uložiť ako body trasy</string>
     <string name="save_as_line">Uložiť ako čiaru</string>
     <string name="route_point">Bod trasy</string>
     <string name="edit_line">Upraviť čiaru</string>

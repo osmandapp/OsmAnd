@@ -16,21 +16,21 @@ public class SnapToRoadCommand extends MeasurementModeCommand {
 
 	@Override
 	public boolean execute() {
-		measurementLayer.getSnappedToRoadPoints().clear();
-		measurementLayer.getSnappedToRoadPoints().addAll(snappedPoints);
-		measurementLayer.refreshMap();
+//		measurementLayer.getSnappedToRoadPoints().clear();
+//		measurementLayer.getSnappedToRoadPoints().addAll(snappedPoints);
+//		measurementLayer.refreshMap();
 		return true;
 	}
 
 	@Override
 	public void undo() {
-		measurementLayer.getSnappedToRoadPoints().clear();
+//		measurementLayer.getSnappedToRoadPoints().clear();
 		measurementLayer.refreshMap();
 	}
 
 	@Override
 	public void redo() {
-		measurementLayer.getSnappedToRoadPoints().addAll(snappedPoints);
+//		measurementLayer.getSnappedToRoadPoints().addAll(snappedPoints);
 		measurementLayer.refreshMap();
 	}
 

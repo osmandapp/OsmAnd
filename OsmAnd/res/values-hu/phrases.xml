@@ -281,7 +281,7 @@
 	<string name="poi_shoes">Cipőbolt</string>
 	<string name="poi_computer">Számítástechnikai bolt</string>
 	<string name="poi_curtain">Függönybolt</string>
-	<string name="poi_fabric">Rövidáru, méteráru</string>
+	<string name="poi_fabric">Méteráru</string>
 	<string name="poi_bedding">Ágyneműbolt</string>
 	<string name="poi_dive">Búvárfelszerelés</string>
 	<string name="poi_doityourself">Barkácsáruház</string>
@@ -365,7 +365,7 @@
 	<string name="poi_lock_gate">Zsilipkapu</string>
 	<string name="poi_waterway_turning_point">Megfordulóhely hajóknak</string>
 	<string name="poi_weir">Bukógát</string>
-	<string name="poi_dam">Völgyzáró gát</string>
+	<string name="poi_dam">Duzzasztógát</string>
 	<string name="poi_watermill">Vízimalom</string>
 
 	<string name="poi_power_substation">Áramelosztó alállomás</string>
@@ -726,7 +726,7 @@
 	<string name="poi_electronics">Elektronikai bolt</string>
 	<string name="poi_atv">Quadkereskedés</string>
 	<string name="poi_cosmetics">Kozmetikai bolt</string>
-	<string name="poi_sewing">Varrógép-szaküzlet</string>
+	<string name="poi_sewing">Rövidárubolt</string>
 	<string name="poi_watches">Órabolt (karóra)</string>
 	<string name="poi_swimming_pool_shop">Uszodatechnika-bolt</string>
 	<string name="poi_games">Játékok</string>
@@ -3185,7 +3185,7 @@
 
 	<string name="poi_ref">Azonosító szám</string>
 
-	<string name="poi_fitness_centre">Fitneszklub</string>
+	<string name="poi_fitness_centre">Edzőterem</string>
 	<string name="poi_hackerspace">Hackerspace</string>
 
 
@@ -3462,4 +3462,24 @@
 	<string name="poi_reservation_no">Előzetes foglalás nincs</string>
 	<string name="poi_reservation_members_only">Előzetes foglalás csak tagoknak</string>
 
-	</resources>
+	<string name="poi_boat_rental_type">Bérelt hajók</string>
+
+<string name="poi_boat_rental">Csónakkölcsönző</string>
+	<string name="poi_boat_motorboat_rental_yes">Motorcsónak</string>
+	<string name="poi_boat_motorboat_rental_no">Motorcsónak nincs</string>
+	<string name="poi_boat_houseboat_rental_yes">Lakóhajó</string>
+	<string name="poi_boat_houseboat_rental_no">Lakóhajó nincs</string>
+	<string name="poi_boat_pedalboat_rental_yes">Vízibicikli</string>
+	<string name="poi_boat_pedalboat_rental_no">Vízibicikli nincs</string>
+	<string name="poi_boat_jetski_rental_yes">Jetski</string>
+	<string name="poi_boat_jetski_rental_no">Jetski nincs</string>
+	<string name="poi_boat_sailboat_rental_yes">Vitorlás</string>
+	<string name="poi_boat_sailboat_rental_no">Vitorlás nincs</string>
+	<string name="poi_boat_dinghy_rental_rental_yes">Evezős csónak</string>
+	<string name="poi_boat_dinghy_rental_rental_no">Evezős csónak nincs</string>
+	<string name="poi_boat_kayak_rental_rental_yes">Kajak</string>
+	<string name="poi_boat_kayak_rental_rental_no">Kajak nincs</string>
+	<string name="poi_boat_canoe_rental_rental_yes">Kenu</string>
+	<string name="poi_boat_canoe_rental_rental_no">Kenu nincs</string>
+
+</resources>
