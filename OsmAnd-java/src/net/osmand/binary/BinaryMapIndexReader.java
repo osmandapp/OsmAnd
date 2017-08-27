@@ -1906,6 +1906,11 @@ public class BinaryMapIndexReader {
 		}
 
 		private List<MapTree> trees = null;
+
+
+		public MapZooms.MapZoomPair getMapZoom() {
+			return new MapZooms.MapZoomPair(minZoom, maxZoom);
+		}
 	}
 
 	private static class MapTree {
