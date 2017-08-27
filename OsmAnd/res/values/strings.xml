@@ -9,8 +9,6 @@
          3. All your modified/created strings are in the top of the file (to make easier find what\'s translated).
     PLEASE: Have a look at http://code.google.com/p/osmand/wiki/UIConsistency, it may really improve your and our work  :-)  Thx - Hardy
     -->
-    <string name="measurement_tool_altitude">Altitude: %1$s</string>
-    <string name="measurement_tool_speed">Speed: %1$s</string>
     <string name="line">Line</string>
     <string name="save_as_route_point">Save as route points</string>
     <string name="save_as_line">Save as line</string>

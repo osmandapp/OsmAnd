@@ -9,7 +9,6 @@ import java.util.List;
 public class ClearPointsCommand extends MeasurementModeCommand {
 
 	private List<WptPt> points;
-	private List<WptPt> snappedToRoadPoints;
 
 	public ClearPointsCommand(MeasurementToolLayer measurementLayer) {
 		this.measurementLayer = measurementLayer;
@@ -17,27 +16,23 @@ public class ClearPointsCommand extends MeasurementModeCommand {
 
 	@Override
 	public boolean execute() {
-		List<WptPt> pts = measurementLayer.getMeasurementPoints();
-		List<WptPt> snappedPts = measurementLayer.getSnappedToRoadPoints();
+		List<WptPt> pts = measurementLayer.getEditingCtx().getPoints();
 		points = new LinkedList<>(pts);
-		snappedToRoadPoints = new LinkedList<>(snappedPts);
 		pts.clear();
-		snappedPts.clear();
+		measurementLayer.getEditingCtx().clearSegments();
 		measurementLayer.refreshMap();
 		return true;
 	}
 
 	@Override
 	public void undo() {
-		measurementLayer.getMeasurementPoints().addAll(points);
-		measurementLayer.getSnappedToRoadPoints().addAll(snappedToRoadPoints);
+		measurementLayer.getEditingCtx().addPoints(points);
 		measurementLayer.refreshMap();
 	}
 
 	@Override
 	public void redo() {
-		measurementLayer.getMeasurementPoints().clear();
-		measurementLayer.getSnappedToRoadPoints().clear();
+		measurementLayer.getEditingCtx().clearSegments();
 		measurementLayer.refreshMap();
 	}
 
