@@ -38,6 +38,7 @@ public class MeasurementEditingContext {
 	private WptPt originalPointToMove;
 
 	private boolean inSnapToRoadMode;
+	private boolean needUpdateCacheForSnap;
 	private SnapToRoadProgressListener progressListener;
 	private ApplicationMode snapToRoadAppMode;
 	private RouteCalculationProgress calculationProgress;
@@ -54,6 +55,15 @@ public class MeasurementEditingContext {
 
 	boolean isInSnapToRoadMode() {
 		return inSnapToRoadMode;
+	}
+
+	public boolean isNeedUpdateCacheForSnap() {
+		return needUpdateCacheForSnap;
+	}
+
+	public void setNeedUpdateCacheForSnap(boolean needUpdateCacheForSnap) {
+		this.needUpdateCacheForSnap = needUpdateCacheForSnap;
+		updateCacheForSnapIfNeeded(true);
 	}
 
 	int getSelectedPointPosition() {
@@ -168,9 +178,11 @@ public class MeasurementEditingContext {
 		after.points.clear();
 		beforeCacheForSnap = null;
 		afterCacheForSnap = null;
+		needUpdateCacheForSnap = false;
 	}
 
 	void scheduleRouteCalculateIfNotEmpty() {
+		needUpdateCacheForSnap = true;
 		if (application == null || (before.points.size() < 1 && after.points.size() < 1)) {
 			return;
 		}
@@ -219,7 +231,7 @@ public class MeasurementEditingContext {
 	}
 
 	private void updateCacheForSnapIfNeeded(boolean both) {
-		if (inSnapToRoadMode) {
+		if (needUpdateCacheForSnap) {
 			recreateCacheForSnap(beforeCacheForSnap = new TrkSegment(), before);
 			if (both) {
 				recreateCacheForSnap(afterCacheForSnap = new TrkSegment(), after);

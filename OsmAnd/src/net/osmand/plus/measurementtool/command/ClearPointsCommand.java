@@ -9,6 +9,7 @@ import java.util.List;
 public class ClearPointsCommand extends MeasurementModeCommand {
 
 	private List<WptPt> points;
+	private boolean needUpdateCache;
 
 	public ClearPointsCommand(MeasurementToolLayer measurementLayer) {
 		this.measurementLayer = measurementLayer;
@@ -17,6 +18,7 @@ public class ClearPointsCommand extends MeasurementModeCommand {
 	@Override
 	public boolean execute() {
 		List<WptPt> pts = measurementLayer.getEditingCtx().getPoints();
+		needUpdateCache = measurementLayer.getEditingCtx().isNeedUpdateCacheForSnap();
 		points = new LinkedList<>(pts);
 		pts.clear();
 		measurementLayer.getEditingCtx().clearSegments();
@@ -27,6 +29,9 @@ public class ClearPointsCommand extends MeasurementModeCommand {
 	@Override
 	public void undo() {
 		measurementLayer.getEditingCtx().addPoints(points);
+		if (needUpdateCache) {
+			measurementLayer.getEditingCtx().setNeedUpdateCacheForSnap(true);
+		}
 		measurementLayer.refreshMap();
 	}
 
