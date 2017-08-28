@@ -1387,7 +1387,7 @@ public class MeasurementToolFragment extends Fragment {
 				final SwitchCompat showOnMapToggle = (SwitchCompat) view.findViewById(R.id.toggle_show_on_map);
 
 				builder.setView(view);
-				builder.setPositiveButton(R.string.shared_string_save, new DialogInterface.OnClickListener() {
+				builder.setPositiveButton(R.string.shared_string_ok, new DialogInterface.OnClickListener() {
 					@Override
 					public void onClick(DialogInterface dialog, int which) {
 						final String name = new SimpleDateFormat("yyyy-M-dd_HH-mm_EEE", Locale.US).format(new Date());
