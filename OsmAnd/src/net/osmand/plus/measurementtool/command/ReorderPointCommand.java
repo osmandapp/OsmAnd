@@ -1,8 +1,9 @@
 package net.osmand.plus.measurementtool.command;
 
+import net.osmand.plus.GPXUtilities.WptPt;
 import net.osmand.plus.measurementtool.MeasurementToolLayer;
 
-import java.util.Collections;
+import java.util.List;
 
 public class ReorderPointCommand extends MeasurementModeCommand {
 
@@ -22,16 +23,17 @@ public class ReorderPointCommand extends MeasurementModeCommand {
 
 	@Override
 	public void undo() {
-		swap();
+		reorder(from, to);
 	}
 
 	@Override
 	public void redo() {
-		swap();
+		reorder(to, from);
 	}
 
-	private void swap() {
-		Collections.swap(measurementLayer.getEditingCtx().getPoints(), from, to);
+	private void reorder(int addTo, int removeFrom) {
+		List<WptPt> points = measurementLayer.getEditingCtx().getPoints();
+		points.add(addTo, points.remove(removeFrom));
 		measurementLayer.refreshMap();
 	}
 
