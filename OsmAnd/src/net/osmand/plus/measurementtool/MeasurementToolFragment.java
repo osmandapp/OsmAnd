@@ -1074,7 +1074,7 @@ public class MeasurementToolFragment extends Fragment {
 			final SwitchCompat showOnMapToggle = (SwitchCompat) view.findViewById(R.id.toggle_show_on_map);
 			showOnMapToggle.setChecked(true);
 
-			final String suggestedName = new SimpleDateFormat("yyyy-M-dd_HH-mm_EEE", Locale.US).format(new Date());
+			final String suggestedName = new SimpleDateFormat("yyyy-MM-dd_HH-mm_EEE", Locale.US).format(new Date());
 			String displayedName = suggestedName;
 			File fout = new File(dir, suggestedName + GPX_SUFFIX);
 			int ind = 1;
@@ -1390,7 +1390,7 @@ public class MeasurementToolFragment extends Fragment {
 				builder.setPositiveButton(R.string.shared_string_ok, new DialogInterface.OnClickListener() {
 					@Override
 					public void onClick(DialogInterface dialog, int which) {
-						final String name = new SimpleDateFormat("yyyy-M-dd_HH-mm_EEE", Locale.US).format(new Date());
+						final String name = new SimpleDateFormat("yyyy-MM-dd_HH-mm_EEE", Locale.US).format(new Date());
 						String fileName = name + GPX_SUFFIX;
 						File fout = new File(dir, fileName);
 						int ind = 1;
