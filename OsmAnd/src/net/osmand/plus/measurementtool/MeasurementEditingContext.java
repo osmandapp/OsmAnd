@@ -39,6 +39,7 @@ public class MeasurementEditingContext {
 
 	private boolean inSnapToRoadMode;
 	private boolean needUpdateCacheForSnap;
+	private int calculatedPairs;
 	private SnapToRoadProgressListener progressListener;
 	private ApplicationMode snapToRoadAppMode;
 	private RouteCalculationProgress calculationProgress;
@@ -273,6 +274,11 @@ public class MeasurementEditingContext {
 		params.calculationProgressCallback = new RoutingHelper.RouteCalculationProgressCallback() {
 			@Override
 			public void updateProgress(int progress) {
+				int pairs = calculatedPairs + snapToRoadPairsToCalculate.size();
+				if (pairs != 0) {
+					int pairProgress = 100 / pairs;
+					progress = calculatedPairs * pairProgress + progress / pairs;
+				}
 				progressListener.updateProgress(progress);
 			}
 
@@ -283,6 +289,7 @@ public class MeasurementEditingContext {
 
 			@Override
 			public void finish() {
+				calculatedPairs = 0;
 				progressListener.refreshMap();
 			}
 		};
@@ -296,6 +303,7 @@ public class MeasurementEditingContext {
 					pt.lon = loc.getLongitude();
 					pts.add(pt);
 				}
+				calculatedPairs++;
 				snappedToRoadPoints.put(currentPair, pts);
 				updateCacheForSnapIfNeeded(true);
 				progressListener.refreshMap();
