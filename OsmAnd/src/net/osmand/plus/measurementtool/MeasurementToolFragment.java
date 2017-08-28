@@ -48,6 +48,7 @@ import net.osmand.plus.activities.MapActivity;
 import net.osmand.plus.activities.TrackActivity;
 import net.osmand.plus.helpers.AndroidUiHelper;
 import net.osmand.plus.helpers.GpxUiHelper;
+import net.osmand.plus.measurementtool.NewGpxData.ActionType;
 import net.osmand.plus.measurementtool.OptionsBottomSheetDialogFragment.OptionsFragmentListener;
 import net.osmand.plus.measurementtool.SaveAsNewTrackBottomSheetDialogFragment.SaveAsNewTrackFragmentListener;
 import net.osmand.plus.measurementtool.SelectedPointBottomSheetDialogFragment.SelectedPointFragmentListener;
@@ -60,7 +61,6 @@ import net.osmand.plus.measurementtool.command.ClearPointsCommand;
 import net.osmand.plus.measurementtool.command.MovePointCommand;
 import net.osmand.plus.measurementtool.command.RemovePointCommand;
 import net.osmand.plus.measurementtool.command.ReorderPointCommand;
-import net.osmand.plus.measurementtool.NewGpxData.ActionType;
 import net.osmand.plus.views.OsmandMapTileView;
 import net.osmand.plus.views.mapwidgets.MapInfoWidgetsFactory;
 import net.osmand.plus.views.mapwidgets.MapInfoWidgetsFactory.TopToolbarController;
@@ -115,7 +115,7 @@ public class MeasurementToolFragment extends Fragment {
 		LINE
 	}
 
-	public void setEditingCtx(MeasurementEditingContext editingCtx) {
+	private void setEditingCtx(MeasurementEditingContext editingCtx) {
 		this.editingCtx = editingCtx;
 	}
 
@@ -144,8 +144,9 @@ public class MeasurementToolFragment extends Fragment {
 			}
 
 			@Override
-			public void refreshMap() {
+			public void refresh() {
 				measurementLayer.refreshMap();
+				updateText();
 			}
 		});
 
@@ -463,16 +464,9 @@ public class MeasurementToolFragment extends Fragment {
 		if (pointsListOpened) {
 			hidePointsList();
 		}
-		if (editingCtx.getOriginalPointToMove() != null) {
-			switchMovePointMode(false);
-		} else if (editingCtx.getSelectedPointPosition() != -1) {
-			switchAddPointBeforeAfterMode(false);
-		}
+		closeModes();
 		MeasurementToolLayer layer = getMeasurementLayer();
 		if (layer != null) {
-			if (editingCtx.getOriginalPointToMove() != null) {
-				layer.exitMovePointMode(true);
-			}
 			layer.setOnSingleTapListener(null);
 			layer.setOnEnterMovePointModeListener(null);
 		}
@@ -606,7 +600,7 @@ public class MeasurementToolFragment extends Fragment {
 			@Override
 			public void addPointAfterOnClick() {
 				if (measurementLayer != null) {
-                    measurementLayer.moveMapToPoint(editingCtx.getSelectedPointPosition());
+					measurementLayer.moveMapToPoint(editingCtx.getSelectedPointPosition());
 					editingCtx.splitSegments(editingCtx.getSelectedPointPosition() + 1);
 				}
 				((TextView) mainView.findViewById(R.id.add_point_before_after_text)).setText(mainView.getResources().getString(R.string.add_point_after));
@@ -617,7 +611,7 @@ public class MeasurementToolFragment extends Fragment {
 			@Override
 			public void addPointBeforeOnClick() {
 				if (measurementLayer != null) {
-                    measurementLayer.moveMapToPoint(editingCtx.getSelectedPointPosition());
+					measurementLayer.moveMapToPoint(editingCtx.getSelectedPointPosition());
 					editingCtx.splitSegments(editingCtx.getSelectedPointPosition());
 				}
 				((TextView) mainView.findViewById(R.id.add_point_before_after_text)).setText(mainView.getResources().getString(R.string.add_point_before));
@@ -858,12 +852,24 @@ public class MeasurementToolFragment extends Fragment {
 		}
 	}
 
+	private void closeModes() {
+		if (editingCtx.getOriginalPointToMove() != null) {
+			switchMovePointMode(false);
+		} else if (editingCtx.getSelectedPointPosition() != -1) {
+			switchAddPointBeforeAfterMode(false);
+		}
+		MeasurementToolLayer layer = getMeasurementLayer();
+		if (layer != null && editingCtx.getOriginalPointToMove() != null) {
+			layer.exitMovePointMode(true);
+		}
+	}
+
 	private void addPointBeforeAfter() {
 		MeasurementToolLayer measurementLayer = getMeasurementLayer();
 		if (measurementLayer != null) {
-			int selectedPoint = editingCtx.getSelectedPointPosition(); //after = 1; before = 1;
-			int pointsCount = editingCtx.getPointsCount(); //after = 2; before = 1;
-			if (addCenterPoint()) { //выбрать вторую точку
+			int selectedPoint = editingCtx.getSelectedPointPosition();
+			int pointsCount = editingCtx.getPointsCount();
+			if (addCenterPoint()) {
 				if (selectedPoint == pointsCount) {
 					editingCtx.splitSegments(editingCtx.getPointsCount() - 1);
 				} else {
@@ -1118,7 +1124,7 @@ public class MeasurementToolFragment extends Fragment {
 									fout = new File(dir, fileName);
 								}
 							}
-							saveNewGpx(dir, fileName, showOnMapToggle.isChecked(), saveType);
+							saveNewGpx(dir, fileName, showOnMapToggle.isChecked(), saveType, false);
 						}
 					})
 					.setNegativeButton(R.string.shared_string_cancel, null)
@@ -1126,12 +1132,12 @@ public class MeasurementToolFragment extends Fragment {
 		}
 	}
 
-	private void saveNewGpx(File dir, String fileName, boolean checked, SaveType saveType) {
-		saveGpx(dir, fileName, checked, null, false, null, saveType);
+	private void saveNewGpx(File dir, String fileName, boolean checked, SaveType saveType, boolean close) {
+		saveGpx(dir, fileName, checked, null, false, null, saveType, close);
 	}
 
 	private void saveExistingGpx(GPXFile gpx, boolean showOnMap, NewGpxData.ActionType actionType, boolean openTrackActivity) {
-		saveGpx(null, null, showOnMap, gpx, openTrackActivity, actionType, null);
+		saveGpx(null, null, showOnMap, gpx, openTrackActivity, actionType, null, false);
 	}
 
 	private void saveGpx(final File dir,
@@ -1140,7 +1146,8 @@ public class MeasurementToolFragment extends Fragment {
 						 final GPXFile gpx,
 						 final boolean openTrackActivity,
 						 final NewGpxData.ActionType actionType,
-						 final SaveType saveType) {
+						 final SaveType saveType,
+						 final boolean close) {
 
 		new AsyncTask<Void, Void, String>() {
 
@@ -1149,6 +1156,7 @@ public class MeasurementToolFragment extends Fragment {
 
 			@Override
 			protected void onPreExecute() {
+				closeModes();
 				MapActivity activity = getMapActivity();
 				if (activity != null) {
 					progressDialog = new ProgressDialog(activity);
@@ -1240,6 +1248,9 @@ public class MeasurementToolFragment extends Fragment {
 							Toast.makeText(activity,
 									MessageFormat.format(getString(R.string.gpx_saved_sucessfully), toSave.getAbsolutePath()),
 									Toast.LENGTH_LONG).show();
+							if (close) {
+								dismiss(activity);
+							}
 						}
 					} else {
 						Toast.makeText(activity, warning, Toast.LENGTH_LONG).show();
@@ -1368,17 +1379,49 @@ public class MeasurementToolFragment extends Fragment {
 				dismiss(mapActivity);
 				return;
 			}
-			new AlertDialog.Builder(mapActivity)
-					.setTitle(getString(R.string.are_you_sure))
+			AlertDialog.Builder builder = new AlertDialog.Builder(mapActivity);
+			if (editingCtx.getNewGpxData() == null) {
+				final File dir = mapActivity.getMyApplication().getAppPath(IndexConstants.GPX_INDEX_DIR);
+				final LayoutInflater inflater = mapActivity.getLayoutInflater();
+				final View view = inflater.inflate(R.layout.close_measurement_tool_dialog, null);
+				final SwitchCompat showOnMapToggle = (SwitchCompat) view.findViewById(R.id.toggle_show_on_map);
+
+				builder.setView(view);
+				builder.setPositiveButton(R.string.shared_string_ok, new DialogInterface.OnClickListener() {
+					@Override
+					public void onClick(DialogInterface dialog, int which) {
+						final String name = new SimpleDateFormat("yyyy-M-dd_HH-mm_EEE", Locale.US).format(new Date());
+						String fileName = name + GPX_SUFFIX;
+						File fout = new File(dir, fileName);
+						int ind = 1;
+						while (fout.exists()) {
+							fileName = name + "_" + (++ind) + GPX_SUFFIX;
+							fout = new File(dir, fileName);
+						}
+						saveNewGpx(dir, fileName, showOnMapToggle.isChecked(), SaveType.LINE, true);
+					}
+				});
+			} else {
+				builder.setPositiveButton(R.string.shared_string_ok, new DialogInterface.OnClickListener() {
+					@Override
+					public void onClick(DialogInterface dialogInterface, int i) {
+						GPXFile gpx = editingCtx.getNewGpxData().getGpxFile();
+						SelectedGpxFile selectedGpxFile = mapActivity.getMyApplication().getSelectedGpxHelper().getSelectedFileByPath(gpx.path);
+						boolean showOnMap = selectedGpxFile != null;
+						ActionType actionType = editingCtx.getNewGpxData().getActionType();
+						saveExistingGpx(gpx, showOnMap, actionType, true);
+					}
+				});
+			}
+			builder.setTitle(getString(R.string.exit_without_saving))
 					.setMessage(getString(R.string.unsaved_changes_will_be_lost))
-					.setPositiveButton(R.string.shared_string_ok, new DialogInterface.OnClickListener() {
+					.setNegativeButton(R.string.shared_string_cancel, new DialogInterface.OnClickListener() {
 						@Override
-						public void onClick(DialogInterface dialog, int which) {
+						public void onClick(DialogInterface dialogInterface, int i) {
 							dismiss(mapActivity);
 						}
-					})
-					.setNegativeButton(R.string.shared_string_cancel, null)
-					.show();
+					});
+			builder.show();
 		}
 	}
 

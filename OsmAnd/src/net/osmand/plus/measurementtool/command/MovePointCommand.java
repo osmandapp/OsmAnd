@@ -23,14 +23,14 @@ public class MovePointCommand extends MeasurementModeCommand {
 
 	@Override
 	public void undo() {
-		measurementLayer.getEditingCtx().removePoint(position);
+		measurementLayer.getEditingCtx().removePoint(position, false);
 		measurementLayer.getEditingCtx().addPoint(position, oldPoint);
 		measurementLayer.refreshMap();
 	}
 
 	@Override
 	public void redo() {
-		measurementLayer.getEditingCtx().removePoint(position);
+		measurementLayer.getEditingCtx().removePoint(position, false);
 		measurementLayer.getEditingCtx().addPoint(position, newPoint);
 		measurementLayer.refreshMap();
 	}

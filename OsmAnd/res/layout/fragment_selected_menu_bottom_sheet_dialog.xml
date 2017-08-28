@@ -16,24 +16,24 @@
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:orientation="vertical"
-            android:paddingBottom="8dp">
+            android:paddingBottom="@dimen/measurement_tool_content_padding_small">
 
             <RelativeLayout
                 android:layout_width="match_parent"
-                android:layout_height="56dp"
-                android:minHeight="56dp"
-                android:paddingEnd="16dp"
-                android:paddingLeft="16dp"
-                android:paddingRight="16dp"
-                android:paddingStart="16dp">
+                android:layout_height="@dimen/measurement_tool_selected_point_title_height"
+                android:minHeight="@dimen/measurement_tool_selected_point_title_height"
+                android:paddingEnd="@dimen/measurement_tool_content_padding"
+                android:paddingLeft="@dimen/measurement_tool_content_padding"
+                android:paddingRight="@dimen/measurement_tool_content_padding"
+                android:paddingStart="@dimen/measurement_tool_content_padding">
 
                 <ImageView
                     android:id="@+id/selected_point_icon"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:layout_centerVertical="true"
-                    android:layout_marginEnd="24dp"
-                    android:layout_marginRight="24dp"
+                    android:layout_marginEnd="@dimen/measurement_tool_bottom_icon_margin"
+                    android:layout_marginRight="@dimen/measurement_tool_bottom_icon_margin"
                     tools:src="@drawable/ic_action_measure_point"/>
 
                 <LinearLayout
@@ -74,9 +74,9 @@
                             android:textAppearance="@style/TextAppearance.ListItemTitle"
                             android:textColor="?android:textColorSecondary"
                             android:textSize="@dimen/default_list_text_size"
-                            android:layout_marginLeft="8dp"
-                            android:layout_marginRight="8dp"
-                            tools:text="Altitude: 345 m"/>
+                            android:layout_marginLeft="@dimen/measurement_tool_content_margin_small"
+                            android:layout_marginRight="@dimen/measurement_tool_content_margin_small"
+                            tools:text="A: 345 m"/>
 
                         <android.support.v7.widget.AppCompatTextView
                             android:maxLines="1"
@@ -86,7 +86,7 @@
                             android:textAppearance="@style/TextAppearance.ListItemTitle"
                             android:textColor="?android:textColorSecondary"
                             android:textSize="@dimen/default_list_text_size"
-                            tools:text="Speed: 45 km/h"/>
+                            tools:text="S: 45 km/h"/>
                     </LinearLayout>
                 </LinearLayout>
 
@@ -95,27 +95,27 @@
             <View
                 android:layout_width="match_parent"
                 android:layout_height="1dp"
-                android:layout_marginBottom="8dp"
+                android:layout_marginBottom="@dimen/measurement_tool_divider_margin"
                 android:background="?attr/dashboard_divider"/>
 
             <RelativeLayout
                 android:id="@+id/move_point_row"
                 android:layout_width="match_parent"
-                android:layout_height="48dp"
+                android:layout_height="@dimen/measurement_tool_bottom_list_item_height"
                 android:background="?attr/selectableItemBackground"
-                android:minHeight="48dp"
-                android:paddingEnd="16dp"
-                android:paddingLeft="16dp"
-                android:paddingRight="16dp"
-                android:paddingStart="16dp">
+                android:minHeight="@dimen/measurement_tool_bottom_list_item_height"
+                android:paddingEnd="@dimen/measurement_tool_content_padding"
+                android:paddingLeft="@dimen/measurement_tool_content_padding"
+                android:paddingRight="@dimen/measurement_tool_content_padding"
+                android:paddingStart="@dimen/measurement_tool_content_padding">
 
                 <ImageView
                     android:id="@+id/move_point_icon"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:layout_centerVertical="true"
-                    android:layout_marginEnd="24dp"
-                    android:layout_marginRight="24dp"
+                    android:layout_marginEnd="@dimen/measurement_tool_bottom_icon_margin"
+                    android:layout_marginRight="@dimen/measurement_tool_bottom_icon_margin"
                     tools:src="@drawable/ic_action_move_point"/>
 
                 <TextView
@@ -132,21 +132,21 @@
             <RelativeLayout
                 android:id="@+id/delete_point_row"
                 android:layout_width="match_parent"
-                android:layout_height="48dp"
+                android:layout_height="@dimen/measurement_tool_bottom_list_item_height"
                 android:background="?attr/selectableItemBackground"
-                android:minHeight="48dp"
-                android:paddingEnd="16dp"
-                android:paddingLeft="16dp"
-                android:paddingRight="16dp"
-                android:paddingStart="16dp">
+                android:minHeight="@dimen/measurement_tool_bottom_list_item_height"
+                android:paddingEnd="@dimen/measurement_tool_content_padding"
+                android:paddingLeft="@dimen/measurement_tool_content_padding"
+                android:paddingRight="@dimen/measurement_tool_content_padding"
+                android:paddingStart="@dimen/measurement_tool_content_padding">
 
                 <ImageView
                     android:id="@+id/delete_point_icon"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:layout_centerVertical="true"
-                    android:layout_marginEnd="24dp"
-                    android:layout_marginRight="24dp"
+                    android:layout_marginEnd="@dimen/measurement_tool_bottom_icon_margin"
+                    android:layout_marginRight="@dimen/measurement_tool_bottom_icon_margin"
                     tools:src="@drawable/ic_action_remove_dark"/>
 
                 <TextView
@@ -163,30 +163,30 @@
             <View
                 android:layout_width="wrap_content"
                 android:layout_height="1dp"
-                android:layout_marginBottom="8dp"
-                android:layout_marginLeft="64dp"
-                android:layout_marginStart="64dp"
-                android:layout_marginTop="7dp"
+                android:layout_marginBottom="@dimen/measurement_tool_bottom_divider_margin_bottom"
+                android:layout_marginLeft="@dimen/measurement_tool_bottom_divider_margin_start"
+                android:layout_marginStart="@dimen/measurement_tool_bottom_divider_margin_start"
+                android:layout_marginTop="@dimen/measurement_tool_bottom_divider_margin_top"
                 android:background="?attr/dashboard_divider"/>
 
             <RelativeLayout
                 android:id="@+id/add_point_after_row"
                 android:layout_width="match_parent"
-                android:layout_height="48dp"
+                android:layout_height="@dimen/measurement_tool_bottom_list_item_height"
                 android:background="?attr/selectableItemBackground"
-                android:minHeight="48dp"
-                android:paddingEnd="16dp"
-                android:paddingLeft="16dp"
-                android:paddingRight="16dp"
-                android:paddingStart="16dp">
+                android:minHeight="@dimen/measurement_tool_bottom_list_item_height"
+                android:paddingEnd="@dimen/measurement_tool_content_padding"
+                android:paddingLeft="@dimen/measurement_tool_content_padding"
+                android:paddingRight="@dimen/measurement_tool_content_padding"
+                android:paddingStart="@dimen/measurement_tool_content_padding">
 
                 <ImageView
                     android:id="@+id/add_point_after_icon"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:layout_centerVertical="true"
-                    android:layout_marginEnd="24dp"
-                    android:layout_marginRight="24dp"
+                    android:layout_marginEnd="@dimen/measurement_tool_bottom_icon_margin"
+                    android:layout_marginRight="@dimen/measurement_tool_bottom_icon_margin"
                     tools:src="@drawable/ic_action_addpoint_above"/>
 
                 <TextView
@@ -203,21 +203,21 @@
             <RelativeLayout
                 android:id="@+id/add_point_before_row"
                 android:layout_width="match_parent"
-                android:layout_height="48dp"
+                android:layout_height="@dimen/measurement_tool_bottom_list_item_height"
                 android:background="?attr/selectableItemBackground"
-                android:minHeight="48dp"
-                android:paddingEnd="16dp"
-                android:paddingLeft="16dp"
-                android:paddingRight="16dp"
-                android:paddingStart="16dp">
+                android:minHeight="@dimen/measurement_tool_bottom_list_item_height"
+                android:paddingEnd="@dimen/measurement_tool_content_padding"
+                android:paddingLeft="@dimen/measurement_tool_content_padding"
+                android:paddingRight="@dimen/measurement_tool_content_padding"
+                android:paddingStart="@dimen/measurement_tool_content_padding">
 
                 <ImageView
                     android:id="@+id/add_point_before_icon"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:layout_centerVertical="true"
-                    android:layout_marginEnd="24dp"
-                    android:layout_marginRight="24dp"
+                    android:layout_marginEnd="@dimen/measurement_tool_bottom_icon_margin"
+                    android:layout_marginRight="@dimen/measurement_tool_bottom_icon_margin"
                     tools:src="@drawable/ic_action_addpoint_below"/>
 
                 <TextView
@@ -254,7 +254,7 @@
             android:text="@string/shared_string_close"
             android:textAllCaps="true"
             android:textColor="?attr/color_dialog_buttons"
-            android:textSize="14sp"
+            android:textSize="@dimen/default_desc_text_size"
             android:textStyle="bold"/>
     </FrameLayout>
 

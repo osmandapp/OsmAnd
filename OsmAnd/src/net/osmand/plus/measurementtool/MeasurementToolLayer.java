@@ -41,9 +41,9 @@ public class MeasurementToolLayer extends OsmandMapLayer implements ContextMenuL
 	private int marginPointIconY;
 	private int marginApplyingPointIconX;
 	private int marginApplyingPointIconY;
-	private Path path = new Path();
-	private TIntArrayList tx = new TIntArrayList();
-	private TIntArrayList ty = new TIntArrayList();
+	private final Path path = new Path();
+	private final TIntArrayList tx = new TIntArrayList();
+	private final TIntArrayList ty = new TIntArrayList();
 	private OnMeasureDistanceToCenter measureDistanceToCenterListener;
 	private OnSingleTapListener singleTapListener;
 	private OnEnterMovePointModeListener enterMovePointModeListener;
@@ -102,7 +102,7 @@ public class MeasurementToolLayer extends OsmandMapLayer implements ContextMenuL
 
 	String getDistanceSt() {
 		float dist = 0;
-		List<WptPt> points = editingCtx.getPoints();
+		List<WptPt> points = editingCtx.getBeforeTrkSegmentLine().points;
 		if (points.size() > 0) {
 			for (int i = 1; i < points.size(); i++) {
 				dist += MapUtils.getDistance(points.get(i - 1).lat, points.get(i - 1).lon,
@@ -131,7 +131,7 @@ public class MeasurementToolLayer extends OsmandMapLayer implements ContextMenuL
 	@Override
 	public boolean onLongPressEvent(PointF point, RotatedTileBox tileBox) {
 		if (inMeasurementMode) {
-			if (!overlapped && getEditingCtx().getSelectedPointPosition() == -1	&& editingCtx.getPointsCount() > 0) {
+			if (!overlapped && getEditingCtx().getSelectedPointPosition() == -1 && editingCtx.getPointsCount() > 0) {
 				selectPoint(point.x, point.y, false);
 				if (editingCtx.getSelectedPointPosition() != -1) {
 					enterMovingPointMode();
@@ -146,7 +146,7 @@ public class MeasurementToolLayer extends OsmandMapLayer implements ContextMenuL
 
 	void enterMovingPointMode() {
 		moveMapToPoint(editingCtx.getSelectedPointPosition());
-		WptPt pt = editingCtx.removePoint(editingCtx.getSelectedPointPosition());
+		WptPt pt = editingCtx.removePoint(editingCtx.getSelectedPointPosition(), false);
 		editingCtx.setOriginalPointToMove(pt);
 		editingCtx.splitSegments(editingCtx.getSelectedPointPosition());
 	}
@@ -367,17 +367,17 @@ public class MeasurementToolLayer extends OsmandMapLayer implements ContextMenuL
 		view.getAnimatedDraggingThread().startMoving(lat, lon, view.getZoom(), true);
 	}
 
-    public void moveMapToPoint(int pos) {
-        if (editingCtx.getPointsCount() > 0) {
-            if (pos >= editingCtx.getPointsCount()) {
-                pos = editingCtx.getPointsCount() - 1;
-            } else if (pos < 0) {
-                pos = 0;
-            }
-            WptPt pt = editingCtx.getPoints().get(pos);
-            moveMapToLatLon(pt.getLatitude(), pt.getLongitude());
-        }
-    }
+	public void moveMapToPoint(int pos) {
+		if (editingCtx.getPointsCount() > 0) {
+			if (pos >= editingCtx.getPointsCount()) {
+				pos = editingCtx.getPointsCount() - 1;
+			} else if (pos < 0) {
+				pos = 0;
+			}
+			WptPt pt = editingCtx.getPoints().get(pos);
+			moveMapToLatLon(pt.getLatitude(), pt.getLongitude());
+		}
+	}
 
 	public void refreshMap() {
 		view.refreshMap();

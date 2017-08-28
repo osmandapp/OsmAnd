@@ -4,7 +4,12 @@ import net.osmand.data.QuadRect;
 import net.osmand.plus.GPXUtilities;
 
 public class NewGpxData {
-	public enum ActionType { ADD_SEGMENT, ADD_ROUTE_POINTS, EDIT_SEGMENT }
+
+	public enum ActionType {
+		ADD_SEGMENT,
+		ADD_ROUTE_POINTS,
+		EDIT_SEGMENT
+	}
 
 	private GPXUtilities.GPXFile gpxFile;
 	private GPXUtilities.TrkSegment trkSegment;
