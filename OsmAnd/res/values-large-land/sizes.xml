@@ -2,4 +2,6 @@
 <resources>
     <dimen name="my_places_empty_state_image_margin_top">59dp</dimen>
     <dimen name="my_places_empty_state_image_margin_bottom">59dp</dimen>
+
+    <dimen name="measurement_tool_content_padding_medium">21dp</dimen>
 </resources>

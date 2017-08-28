@@ -27,12 +27,9 @@ public class MeasurementEditingContext {
 	private OsmandApplication application;
 	private final MeasurementCommandManager commandManager = new MeasurementCommandManager();
 
-	private TrkSegment before = new TrkSegment();
-	// cache should be deleted if before changed or snappedToRoadPoints
+	private final TrkSegment before = new TrkSegment();
 	private TrkSegment beforeCacheForSnap;
-
-	private TrkSegment after = new TrkSegment();
-	// cache should be deleted if after changed or snappedToRoadPoints
+	private final TrkSegment after = new TrkSegment();
 	private TrkSegment afterCacheForSnap;
 
 	private NewGpxData newGpxData;
@@ -41,45 +38,56 @@ public class MeasurementEditingContext {
 	private WptPt originalPointToMove;
 
 	private boolean inSnapToRoadMode;
+	private boolean needUpdateCacheForSnap;
+	private int calculatedPairs;
 	private SnapToRoadProgressListener progressListener;
 	private ApplicationMode snapToRoadAppMode;
 	private RouteCalculationProgress calculationProgress;
-	private Queue<Pair<WptPt, WptPt>> snapToRoadPairsToCalculate = new ConcurrentLinkedQueue<>();
-	private Map<Pair<WptPt, WptPt>, List<WptPt>> snappedToRoadPoints = new ConcurrentHashMap<>();
+	private final Queue<Pair<WptPt, WptPt>> snapToRoadPairsToCalculate = new ConcurrentLinkedQueue<>();
+	private final Map<Pair<WptPt, WptPt>, List<WptPt>> snappedToRoadPoints = new ConcurrentHashMap<>();
 
 	public void setApplication(OsmandApplication application) {
 		this.application = application;
 	}
 
-	public MeasurementCommandManager getCommandManager() {
+	MeasurementCommandManager getCommandManager() {
 		return commandManager;
 	}
 
-	public boolean isInSnapToRoadMode() {
+	boolean isInSnapToRoadMode() {
 		return inSnapToRoadMode;
 	}
 
-	public int getSelectedPointPosition() {
+	public boolean isNeedUpdateCacheForSnap() {
+		return needUpdateCacheForSnap;
+	}
+
+	public void setNeedUpdateCacheForSnap(boolean needUpdateCacheForSnap) {
+		this.needUpdateCacheForSnap = needUpdateCacheForSnap;
+		updateCacheForSnapIfNeeded(true);
+	}
+
+	int getSelectedPointPosition() {
 		return selectedPointPosition;
 	}
 
-	public void setSelectedPointPosition(int selectedPointPosition) {
+	void setSelectedPointPosition(int selectedPointPosition) {
 		this.selectedPointPosition = selectedPointPosition;
 	}
 
-	public WptPt getOriginalPointToMove() {
+	WptPt getOriginalPointToMove() {
 		return originalPointToMove;
 	}
 
-	public void setOriginalPointToMove(WptPt originalPointToMove) {
+	void setOriginalPointToMove(WptPt originalPointToMove) {
 		this.originalPointToMove = originalPointToMove;
 	}
 
-	public void setInSnapToRoadMode(boolean inSnapToRoadMode) {
+	void setInSnapToRoadMode(boolean inSnapToRoadMode) {
 		this.inSnapToRoadMode = inSnapToRoadMode;
 	}
 
-	public NewGpxData getNewGpxData() {
+	NewGpxData getNewGpxData() {
 		return newGpxData;
 	}
 
@@ -87,30 +95,31 @@ public class MeasurementEditingContext {
 		this.newGpxData = newGpxData;
 	}
 
-	public void setProgressListener(SnapToRoadProgressListener progressListener) {
+	void setProgressListener(SnapToRoadProgressListener progressListener) {
 		this.progressListener = progressListener;
 	}
 
-	public ApplicationMode getSnapToRoadAppMode() {
+	ApplicationMode getSnapToRoadAppMode() {
 		return snapToRoadAppMode;
 	}
 
-	public void setSnapToRoadAppMode(ApplicationMode snapToRoadAppMode) {
+	void setSnapToRoadAppMode(ApplicationMode snapToRoadAppMode) {
+		if (this.snapToRoadAppMode != null
+				&& !this.snapToRoadAppMode.getStringKey().equals(snapToRoadAppMode.getStringKey())) {
+			snappedToRoadPoints.clear();
+			updateCacheForSnapIfNeeded(true);
+		}
 		this.snapToRoadAppMode = snapToRoadAppMode;
 	}
 
-	public Map<Pair<WptPt, WptPt>, List<WptPt>> getSnappedPoints() {
-		return snappedToRoadPoints;
-	}
-
-	public TrkSegment getBeforeTrkSegmentLine() {
+	TrkSegment getBeforeTrkSegmentLine() {
 		if (beforeCacheForSnap != null) {
 			return beforeCacheForSnap;
 		}
 		return before;
 	}
 
-	public TrkSegment getAfterTrkSegmentLine() {
+	TrkSegment getAfterTrkSegmentLine() {
 		if (afterCacheForSnap != null) {
 			return afterCacheForSnap;
 		}
@@ -121,11 +130,11 @@ public class MeasurementEditingContext {
 		return getBeforePoints();
 	}
 
-	public List<WptPt> getBeforePoints() {
+	List<WptPt> getBeforePoints() {
 		return before.points;
 	}
 
-	public List<WptPt> getAfterPoints() {
+	List<WptPt> getAfterPoints() {
 		return after.points;
 	}
 
@@ -133,7 +142,7 @@ public class MeasurementEditingContext {
 		return before.points.size();
 	}
 
-	public void splitSegments(int position) {
+	void splitSegments(int position) {
 		List<WptPt> points = new ArrayList<>();
 		points.addAll(before.points);
 		points.addAll(after.points);
@@ -159,21 +168,31 @@ public class MeasurementEditingContext {
 		updateCacheForSnapIfNeeded(false);
 	}
 
-	public WptPt removePoint(int position) {
+	public WptPt removePoint(int position, boolean updateSnapToRoad) {
 		WptPt pt = before.points.remove(position);
-		updateCacheForSnapIfNeeded(false);
+		if (updateSnapToRoad) {
+			updateCacheForSnapIfNeeded(false);
+		}
 		return pt;
 	}
 
 	public void clearSegments() {
 		before.points.clear();
 		after.points.clear();
-		beforeCacheForSnap = null;
-		afterCacheForSnap = null;
+		if (inSnapToRoadMode) {
+			beforeCacheForSnap.points.clear();
+			afterCacheForSnap.points.clear();
+			needUpdateCacheForSnap = true;
+		} else {
+			beforeCacheForSnap = null;
+			afterCacheForSnap = null;
+			needUpdateCacheForSnap = false;
+		}
 	}
 
 	void scheduleRouteCalculateIfNotEmpty() {
-		if (application == null || (before.points.size() < 1 && after.points.size() < 1)) {
+		needUpdateCacheForSnap = true;
+		if (application == null || (before.points.size() == 0 && after.points.size() == 0)) {
 			return;
 		}
 		snapToRoadPairsToCalculate.clear();
@@ -221,7 +240,7 @@ public class MeasurementEditingContext {
 	}
 
 	private void updateCacheForSnapIfNeeded(boolean both) {
-		if (inSnapToRoadMode) {
+		if (needUpdateCacheForSnap) {
 			recreateCacheForSnap(beforeCacheForSnap = new TrkSegment(), before);
 			if (both) {
 				recreateCacheForSnap(afterCacheForSnap = new TrkSegment(), after);
@@ -249,6 +268,7 @@ public class MeasurementEditingContext {
 		LatLon end = new LatLon(currentPair.second.getLatitude(), currentPair.second.getLongitude());
 
 		final RouteCalculationParams params = new RouteCalculationParams();
+		params.inSnapToRoadMode = true;
 		params.start = start;
 		params.end = end;
 		params.leftSide = settings.DRIVING_REGION.get().leftHandDriving;
@@ -260,6 +280,11 @@ public class MeasurementEditingContext {
 		params.calculationProgressCallback = new RoutingHelper.RouteCalculationProgressCallback() {
 			@Override
 			public void updateProgress(int progress) {
+				int pairs = calculatedPairs + snapToRoadPairsToCalculate.size();
+				if (pairs != 0) {
+					int pairProgress = 100 / pairs;
+					progress = calculatedPairs * pairProgress + progress / pairs;
+				}
 				progressListener.updateProgress(progress);
 			}
 
@@ -270,7 +295,7 @@ public class MeasurementEditingContext {
 
 			@Override
 			public void finish() {
-				progressListener.refreshMap();
+				calculatedPairs = 0;
 			}
 		};
 		params.resultListener = new RouteCalculationParams.RouteCalculationResultListener() {
@@ -283,9 +308,15 @@ public class MeasurementEditingContext {
 					pt.lon = loc.getLongitude();
 					pts.add(pt);
 				}
+				calculatedPairs++;
 				snappedToRoadPoints.put(currentPair, pts);
 				updateCacheForSnapIfNeeded(true);
-				progressListener.refreshMap();
+				application.runInUIThread(new Runnable() {
+					@Override
+					public void run() {
+						progressListener.refresh();
+					}
+				});
 				if (!snapToRoadPairsToCalculate.isEmpty()) {
 					application.getRoutingHelper().startRouteCalculationThread(getParams(), true, true);
 				} else {
@@ -310,6 +341,6 @@ public class MeasurementEditingContext {
 
 		void hideProgressBar();
 
-		void refreshMap();
+		void refresh();
 	}
 }

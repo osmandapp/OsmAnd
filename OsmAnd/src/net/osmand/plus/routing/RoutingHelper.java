@@ -869,7 +869,9 @@ public class RoutingHelper {
 			RouteCalculationResult prev = route;
 			synchronized (RoutingHelper.this) {
 				if (res.isCalculated()) {
-					route = res;
+					if (!params.inSnapToRoadMode) {
+						route = res;
+					}
 					if (params.resultListener != null) {
 						params.resultListener.onRouteCalculated(res.getRouteLocations());
 					}
@@ -880,8 +882,9 @@ public class RoutingHelper {
 				currentRunningJob = null;
 			}
 			if(res.isCalculated()){
-				setNewRoute(prev, res, params.start);
-
+				if (!params.inSnapToRoadMode) {
+					setNewRoute(prev, res, params.start);
+				}
 			} else if (onlineSourceWithoutInternet) {
 				lastRouteCalcError = app.getString(R.string.error_calculating_route)
 						+ ":\n" + app.getString(R.string.internet_connection_required_for_online_route);

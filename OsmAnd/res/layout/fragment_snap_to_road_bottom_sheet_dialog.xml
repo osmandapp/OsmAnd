@@ -16,27 +16,27 @@
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:orientation="vertical"
-            android:paddingBottom="8dp">
+            android:paddingBottom="@dimen/measurement_tool_content_padding_small">
 
             <TextView
                 android:id="@+id/choose_navigation_title"
                 android:layout_width="match_parent"
-                android:layout_height="52dp"
+                android:layout_height="@dimen/measurement_tool_bottom_title_height"
                 android:gravity="center_vertical"
-                android:paddingEnd="16dp"
-                android:paddingLeft="16dp"
-                android:paddingRight="16dp"
-                android:paddingStart="16dp"
+                android:paddingEnd="@dimen/measurement_tool_content_padding"
+                android:paddingLeft="@dimen/measurement_tool_content_padding"
+                android:paddingRight="@dimen/measurement_tool_content_padding"
+                android:paddingStart="@dimen/measurement_tool_content_padding"
                 android:text="@string/choose_navigation_type"
                 android:textAppearance="@style/TextAppearance.ListItemTitle"/>
 
             <TextView
                 android:layout_width="match_parent"
-                android:layout_height="44dp"
-                android:paddingEnd="16dp"
-                android:paddingLeft="16dp"
-                android:paddingRight="16dp"
-                android:paddingStart="16dp"
+                android:layout_height="@dimen/measurement_tool_bottom_descr_height"
+                android:paddingEnd="@dimen/measurement_tool_content_padding"
+                android:paddingLeft="@dimen/measurement_tool_content_padding"
+                android:paddingRight="@dimen/measurement_tool_content_padding"
+                android:paddingStart="@dimen/measurement_tool_content_padding"
                 android:text="@string/measurement_tool_snap_to_road_descr"
                 android:textColor="?android:textColorSecondary"
                 android:textSize="@dimen/default_desc_text_size"/>
@@ -60,7 +60,7 @@
                 android:text="@string/shared_string_cancel"
                 android:textAllCaps="true"
                 android:textColor="?attr/color_dialog_buttons"
-                android:textSize="14sp"
+                android:textSize="@dimen/default_desc_text_size"
                 android:textStyle="bold"/>
         </FrameLayout>
 

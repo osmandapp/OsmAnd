@@ -7,7 +7,7 @@ public class AddPointCommand extends MeasurementModeCommand {
 
 	private final int position;
 	private WptPt point;
-	private boolean center;
+	private final boolean center;
 
 	public AddPointCommand(MeasurementToolLayer measurementLayer, boolean center) {
 		this.measurementLayer = measurementLayer;
@@ -28,7 +28,7 @@ public class AddPointCommand extends MeasurementModeCommand {
 
 	@Override
 	public void undo() {
-		measurementLayer.getEditingCtx().removePoint(position);
+		measurementLayer.getEditingCtx().removePoint(position, true);
 		measurementLayer.refreshMap();
 	}
 

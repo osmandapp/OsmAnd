@@ -1,6 +1,6 @@
 package net.osmand.plus.measurementtool.command;
 
-public interface Command {
+interface Command {
 
 	boolean execute();
 
