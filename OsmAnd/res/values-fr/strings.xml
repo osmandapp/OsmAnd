@@ -2902,4 +2902,6 @@ Fonctionnalités principales :
     <string name="import_track_desc">Le fichier %1$s ne contient aucune étape, l\'importer comme trace ?</string>
     <string name="move_point">Déplacer le point</string>
     <string name="add_segment_to_the_track">Ajouter à une trace GPX</string>
-</resources>
+<string name="keep_showing_on_map">Toujours afficher sur la carte</string>
+    <string name="exit_without_saving">Quitter sans enregistrer ?</string>
+    </resources>
