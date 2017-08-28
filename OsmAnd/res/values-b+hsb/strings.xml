@@ -1083,4 +1083,13 @@
     <string name="empty_state_favourites">Fawority dodać</string>
     <string name="import_track">Čaru importować</string>
     <string name="move_point">Dypk přesunyć</string>
+    <string name="show_something_on_map">%1$s na karće pokazać</string>
+    <string name="text_size_descr">Postaj wulkosć teksta na karće.</string>
+    <string name="local_index_items_uploaded">%1$d wot %2$d objektow wuspěšnje nahraty.</string>
+    <string name="local_index_mi_upload_gpx">Na OSM pósłać</string>
+    <string name="show_more_map_detail">wjace detailow na karće pokazać</string>
+    <string name="show_more_map_detail_descr">někotre kartowe detaile (n. př. puće) hižo w nišich zoom-runinach pokazać</string>
+    <string name="favourites_delete_multiple_succesful">Faworitowe dypki wuspěšnje wotstronjene.</string>
+    <string name="favorite_delete_multiple">Chceš %1$d faworit(ow) a %2$d skupin faworitow wotstronić. Sy sej wěsty/a?</string>
+    <string name="basemap_missing">Zakładna karta swěta (pokrywajo cyły swět na niskich zoom-runinach) pobrachuje. Prošu wobstaraj sej World_basemap_x.obf za globalny přehlad.</string>
     </resources>
