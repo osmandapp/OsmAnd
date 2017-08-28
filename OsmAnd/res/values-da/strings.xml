@@ -2844,7 +2844,7 @@ Tidligere destination bliver sidste mellemliggende punkt.</string>
     <string name="add_point_before">Tilføj punkt før</string>
     <string name="add_point_after">Tilføj punkt efter</string>
     <string name="shared_string_options">Indstillinger</string>
-    <string name="measurement_tool_snap_to_road_descr">OsmAnd vil tilføje yderligere punkter, tilpasset typen af navigation.</string>
+    <string name="measurement_tool_snap_to_road_descr">Tilføjer yderligere punkter, tilpasset typen af navigation.</string>
     <string name="measurement_tool_save_as_new_track_descr">Gem punkterne enten som rutepunkter eller som en linje.</string>
     <string name="choose_navigation_type">Vælg navigationstype</string>
     <string name="add_route_points">Tilføj rutepunkter</string>
