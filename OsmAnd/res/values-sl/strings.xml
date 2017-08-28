@@ -2837,4 +2837,5 @@ Koda predstavlja območje: %1$s x %2$s</string>
     <string name="import_track_desc">Datoteka %1$s ne vključuje nobene vmesne točke. Ali želite pot uvoziti kot sled?</string>
     <string name="move_point">Premakni točko</string>
     <string name="add_segment_to_the_track">Dodaj na sled GPX</string>
-</resources>
+<string name="empty_state_favourites_desc">Dodaj priljubljene na zemljevid ali pa jih uvozi iz datoteke</string>
+    </resources>
