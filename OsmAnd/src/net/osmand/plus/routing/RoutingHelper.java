@@ -869,7 +869,9 @@ public class RoutingHelper {
 			RouteCalculationResult prev = route;
 			synchronized (RoutingHelper.this) {
 				if (res.isCalculated()) {
-					route = res;
+					if (!params.inSnapToRoadMode) {
+						route = res;
+					}
 					if (params.resultListener != null) {
 						params.resultListener.onRouteCalculated(res.getRouteLocations());
 					}
