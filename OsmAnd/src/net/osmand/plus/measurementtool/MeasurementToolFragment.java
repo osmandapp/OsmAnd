@@ -861,9 +861,9 @@ public class MeasurementToolFragment extends Fragment {
 	private void addPointBeforeAfter() {
 		MeasurementToolLayer measurementLayer = getMeasurementLayer();
 		if (measurementLayer != null) {
-			int selectedPoint = editingCtx.getSelectedPointPosition(); // after = 1; before = 1;
-			int pointsCount = editingCtx.getPointsCount(); // after = 2; before = 1;
-			if (addCenterPoint()) { // select second point
+			int selectedPoint = editingCtx.getSelectedPointPosition();
+			int pointsCount = editingCtx.getPointsCount();
+			if (addCenterPoint()) {
 				if (selectedPoint == pointsCount) {
 					editingCtx.splitSegments(editingCtx.getPointsCount() - 1);
 				} else {
