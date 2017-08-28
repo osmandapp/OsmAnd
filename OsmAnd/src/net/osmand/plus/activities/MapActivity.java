@@ -1404,7 +1404,11 @@ public class MapActivity extends OsmandActionBarActivity implements DownloadEven
 
 	public void openDrawer() {
 		mapActions.updateDrawerMenu();
-		drawerLayout.openDrawer(Gravity.LEFT);
+		boolean animate = true;
+		if (settings.DO_NOT_USE_ANIMATIONS.get()) {
+			animate = false;
+		}
+		drawerLayout.openDrawer(Gravity.LEFT, animate);
 	}
 
 	public void disableDrawer() {
@@ -1422,7 +1426,11 @@ public class MapActivity extends OsmandActionBarActivity implements DownloadEven
 	}
 
 	public void closeDrawer() {
-		drawerLayout.closeDrawer(Gravity.LEFT);
+		boolean animate = true;
+		if (settings.DO_NOT_USE_ANIMATIONS.get()) {
+			animate = false;
+		}
+		drawerLayout.closeDrawer(Gravity.LEFT, animate);
 	}
 
 	public void toggleDrawer() {

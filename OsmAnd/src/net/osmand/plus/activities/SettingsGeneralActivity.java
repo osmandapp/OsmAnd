@@ -478,6 +478,7 @@ public class SettingsGeneralActivity extends SettingsBaseActivity implements OnR
 			misc.addPreference(createCheckBoxPreference(settings.DO_NOT_SEND_ANONYMOUS_APP_USAGE, R.string.do_not_send_anonymous_app_usage, R.string.do_not_send_anonymous_app_usage_desc));
 		}
 		misc.addPreference(createCheckBoxPreference(settings.DO_NOT_SHOW_STARTUP_MESSAGES, R.string.do_not_show_startup_messages, R.string.do_not_show_startup_messages_desc));
+		misc.addPreference(createCheckBoxPreference(settings.DO_NOT_USE_ANIMATIONS, R.string.do_not_use_animations, R.string.do_not_use_animations_descr));
 	}
 
 
