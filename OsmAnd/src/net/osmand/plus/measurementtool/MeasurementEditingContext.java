@@ -186,7 +186,7 @@ public class MeasurementEditingContext {
 
 	void scheduleRouteCalculateIfNotEmpty() {
 		needUpdateCacheForSnap = true;
-		if (application == null || (before.points.size() < 1 && after.points.size() < 1)) {
+		if (application == null || (before.points.size() == 0 && after.points.size() == 0)) {
 			return;
 		}
 		snapToRoadPairsToCalculate.clear();
@@ -290,7 +290,6 @@ public class MeasurementEditingContext {
 			@Override
 			public void finish() {
 				calculatedPairs = 0;
-				progressListener.refreshMap();
 			}
 		};
 		params.resultListener = new RouteCalculationParams.RouteCalculationResultListener() {
@@ -306,7 +305,12 @@ public class MeasurementEditingContext {
 				calculatedPairs++;
 				snappedToRoadPoints.put(currentPair, pts);
 				updateCacheForSnapIfNeeded(true);
-				progressListener.refreshMap();
+				application.runInUIThread(new Runnable() {
+					@Override
+					public void run() {
+						progressListener.refresh();
+					}
+				});
 				if (!snapToRoadPairsToCalculate.isEmpty()) {
 					application.getRoutingHelper().startRouteCalculationThread(getParams(), true, true);
 				} else {
@@ -331,6 +335,6 @@ public class MeasurementEditingContext {
 
 		void hideProgressBar();
 
-		void refreshMap();
+		void refresh();
 	}
 }
