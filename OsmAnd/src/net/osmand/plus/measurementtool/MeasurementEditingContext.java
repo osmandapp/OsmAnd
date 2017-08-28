@@ -39,6 +39,7 @@ public class MeasurementEditingContext {
 
 	private boolean inSnapToRoadMode;
 	private boolean needUpdateCacheForSnap;
+	private int calculatedPairs;
 	private SnapToRoadProgressListener progressListener;
 	private ApplicationMode snapToRoadAppMode;
 	private RouteCalculationProgress calculationProgress;
@@ -185,7 +186,7 @@ public class MeasurementEditingContext {
 
 	void scheduleRouteCalculateIfNotEmpty() {
 		needUpdateCacheForSnap = true;
-		if (application == null || (before.points.size() < 1 && after.points.size() < 1)) {
+		if (application == null || (before.points.size() == 0 && after.points.size() == 0)) {
 			return;
 		}
 		snapToRoadPairsToCalculate.clear();
@@ -273,6 +274,11 @@ public class MeasurementEditingContext {
 		params.calculationProgressCallback = new RoutingHelper.RouteCalculationProgressCallback() {
 			@Override
 			public void updateProgress(int progress) {
+				int pairs = calculatedPairs + snapToRoadPairsToCalculate.size();
+				if (pairs != 0) {
+					int pairProgress = 100 / pairs;
+					progress = calculatedPairs * pairProgress + progress / pairs;
+				}
 				progressListener.updateProgress(progress);
 			}
 
@@ -283,7 +289,7 @@ public class MeasurementEditingContext {
 
 			@Override
 			public void finish() {
-				progressListener.refreshMap();
+				calculatedPairs = 0;
 			}
 		};
 		params.resultListener = new RouteCalculationParams.RouteCalculationResultListener() {
@@ -296,9 +302,15 @@ public class MeasurementEditingContext {
 					pt.lon = loc.getLongitude();
 					pts.add(pt);
 				}
+				calculatedPairs++;
 				snappedToRoadPoints.put(currentPair, pts);
 				updateCacheForSnapIfNeeded(true);
-				progressListener.refreshMap();
+				application.runInUIThread(new Runnable() {
+					@Override
+					public void run() {
+						progressListener.refresh();
+					}
+				});
 				if (!snapToRoadPairsToCalculate.isEmpty()) {
 					application.getRoutingHelper().startRouteCalculationThread(getParams(), true, true);
 				} else {
@@ -323,6 +335,6 @@ public class MeasurementEditingContext {
 
 		void hideProgressBar();
 
-		void refreshMap();
+		void refresh();
 	}
 }

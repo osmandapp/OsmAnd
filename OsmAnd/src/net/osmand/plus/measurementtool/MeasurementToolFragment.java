@@ -144,8 +144,9 @@ public class MeasurementToolFragment extends Fragment {
 			}
 
 			@Override
-			public void refreshMap() {
+			public void refresh() {
 				measurementLayer.refreshMap();
+				updateText();
 			}
 		});
 

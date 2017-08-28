@@ -102,7 +102,7 @@ public class MeasurementToolLayer extends OsmandMapLayer implements ContextMenuL
 
 	String getDistanceSt() {
 		float dist = 0;
-		List<WptPt> points = editingCtx.getPoints();
+		List<WptPt> points = editingCtx.getBeforeTrkSegmentLine().points;
 		if (points.size() > 0) {
 			for (int i = 1; i < points.size(); i++) {
 				dist += MapUtils.getDistance(points.get(i - 1).lat, points.get(i - 1).lon,
