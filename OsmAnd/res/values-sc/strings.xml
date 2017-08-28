@@ -2756,4 +2756,6 @@ Pro praghere iscrie su còdighe intreu</string>
     <string name="import_track_desc">Su documentu %1$s non cuntenit puntos de coladòrgiu, importare comente rasta?</string>
     <string name="move_point">Move puntu</string>
     <string name="add_segment_to_the_track">Annanghe a una rasta GPX</string>
-</resources>
+<string name="keep_showing_on_map">Sighi a l\'ammustrare in sa mapa</string>
+    <string name="exit_without_saving">Essire chene sarvare?</string>
+    </resources>
