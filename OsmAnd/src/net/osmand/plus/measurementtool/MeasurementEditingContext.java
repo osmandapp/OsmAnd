@@ -179,9 +179,15 @@ public class MeasurementEditingContext {
 	public void clearSegments() {
 		before.points.clear();
 		after.points.clear();
-		beforeCacheForSnap = null;
-		afterCacheForSnap = null;
-		needUpdateCacheForSnap = false;
+		if (inSnapToRoadMode) {
+			beforeCacheForSnap.points.clear();
+			afterCacheForSnap.points.clear();
+			needUpdateCacheForSnap = true;
+		} else {
+			beforeCacheForSnap = null;
+			afterCacheForSnap = null;
+			needUpdateCacheForSnap = false;
+		}
 	}
 
 	void scheduleRouteCalculateIfNotEmpty() {
