@@ -8,8 +8,6 @@ You are welcome to discuss any question regarding the project at the Google grou
 <img src="https://raw.githubusercontent.com/osmandapp/osmandapp.github.io/9fc59e5136b6a07045eb96d052b3ce6ddde805c3/website/images/help/badge_store_google_play.png" alt="Get it on Google Play" height="60"/></a>
 <a href="https://www.amazon.com/OsmAnd-Maps-Navigation/dp/B00D0SA8I8" target="_blank">
 <img src="https://raw.githubusercontent.com/osmandapp/osmandapp.github.io/9fc59e5136b6a07045eb96d052b3ce6ddde805c3/website/images/help/badge_store_amazon.png" alt="Get it on Amazon" height="60"/></a>
-<a href="https://f-droid.org/repository/browse/?fdid=net.osmand.plus" target="_blank">
-<img src="https://raw.githubusercontent.com/osmandapp/osmandapp.github.io/9fc59e5136b6a07045eb96d052b3ce6ddde805c3/website/images/help/badge_store_fdroid.png" alt="Get it on F-Droid" height="60"/></a>
 <a href="https://itunes.apple.com/app/apple-store/id934850257?mt=8" target="_blank">
 <img src="https://raw.githubusercontent.com/osmandapp/osmandapp.github.io/9fc59e5136b6a07045eb96d052b3ce6ddde805c3/website/images/help/badge_store_appstore.png" alt="Get it on AppStore" height="60"/></a>
 
