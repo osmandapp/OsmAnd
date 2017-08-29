@@ -4,6 +4,7 @@ import android.os.Bundle;
 import android.support.v4.app.Fragment;
 import android.support.v4.app.FragmentActivity;
 import android.support.v4.app.FragmentManager;
+import android.support.v4.app.FragmentTransaction;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -94,10 +95,15 @@ public class MapRouteInfoMenuFragment extends Fragment {
 	}
 
 	public void show(MapActivity mapActivity) {
-		int slideInAnim = R.anim.slide_in_bottom;
-		int slideOutAnim = R.anim.slide_out_bottom;
+		int slideInAnim = 0;
+		int slideOutAnim = 0;
+		if (!mapActivity.getMyApplication().getSettings().DO_NOT_USE_ANIMATIONS.get()) {
+			slideInAnim = R.anim.slide_in_bottom;
+			slideOutAnim = R.anim.slide_out_bottom;
+		}
 
-		mapActivity.getSupportFragmentManager().beginTransaction()
+		mapActivity.getSupportFragmentManager()
+				.beginTransaction()
 				.setCustomAnimations(slideInAnim, slideOutAnim, slideInAnim, slideOutAnim)
 				.add(R.id.routeMenuContainer, this, TAG)
 				.addToBackStack(TAG)
@@ -165,10 +171,10 @@ public class MapRouteInfoMenuFragment extends Fragment {
 	}
 
 	public static boolean showInstance(final MapActivity mapActivity) {
-		try {
-			boolean portrait = AndroidUiHelper.isOrientationPortrait(mapActivity);
-			int slideInAnim;
-			int slideOutAnim;
+		boolean portrait = AndroidUiHelper.isOrientationPortrait(mapActivity);
+		int slideInAnim = 0;
+		int slideOutAnim = 0;
+		if (!mapActivity.getMyApplication().getSettings().DO_NOT_USE_ANIMATIONS.get()) {
 			if (portrait) {
 				slideInAnim = R.anim.slide_in_bottom;
 				slideOutAnim = R.anim.slide_out_bottom;
@@ -176,14 +182,18 @@ public class MapRouteInfoMenuFragment extends Fragment {
 				slideInAnim = R.anim.slide_in_left;
 				slideOutAnim = R.anim.slide_out_left;
 			}
+		}
 
+		try {
 			mapActivity.getContextMenu().hideMenues();
 
 			MapRouteInfoMenuFragment fragment = new MapRouteInfoMenuFragment();
-			mapActivity.getSupportFragmentManager().beginTransaction()
+			mapActivity.getSupportFragmentManager()
+					.beginTransaction()
 					.setCustomAnimations(slideInAnim, slideOutAnim, slideInAnim, slideOutAnim)
 					.add(R.id.routeMenuContainer, fragment, TAG)
-					.addToBackStack(TAG).commitAllowingStateLoss();
+					.addToBackStack(TAG)
+					.commitAllowingStateLoss();
 
 			return true;
 
