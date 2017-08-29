@@ -7,10 +7,12 @@ import android.support.design.widget.BottomNavigationView;
 import android.support.v4.app.Fragment;
 import android.support.v4.app.FragmentManager;
 import android.support.v4.app.FragmentPagerAdapter;
+import android.support.v7.widget.Toolbar;
 import android.view.LayoutInflater;
 import android.view.MenuItem;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.Toast;
 
 import net.osmand.plus.LockableViewPager;
 import net.osmand.plus.OsmandApplication;
@@ -38,6 +40,21 @@ public class MapMarkersDialogFragment extends android.support.v4.app.DialogFragm
 	@Override
 	public View onCreateView(LayoutInflater inflater, @Nullable ViewGroup container, Bundle savedInstanceState) {
 		View mainView = inflater.inflate(R.layout.fragment_map_markers_dialog, container);
+
+		Toolbar toolbar = (Toolbar) mainView.findViewById(R.id.map_markers_toolbar);
+		toolbar.setNavigationIcon(getMyApplication().getIconsCache().getIcon(R.drawable.ic_arrow_back));
+		toolbar.setNavigationOnClickListener(new View.OnClickListener() {
+			@Override
+			public void onClick(View view) {
+				dismiss();
+			}
+		});
+		mainView.findViewById(R.id.options_button).setOnClickListener(new View.OnClickListener() {
+			@Override
+			public void onClick(View view) {
+				Toast.makeText(getContext(), "Options", Toast.LENGTH_SHORT).show();
+			}
+		});
 
 		final LockableViewPager viewPager = mainView.findViewById(R.id.map_markers_view_pager);
 		viewPager.setSwipeLocked(true);
