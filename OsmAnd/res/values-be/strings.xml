@@ -2857,4 +2857,6 @@
     <string name="add_segment_to_the_track">Дадаць у GPX-след</string>
 <string name="keep_showing_on_map">Працягваць паказваць на мапе</string>
     <string name="exit_without_saving">Выйсці без захавання?</string>
+    <string name="do_not_use_animations">Не ўжываць анімацыю</string>
+    <string name="do_not_use_animations_descr">Гэта адключае анімацыю ў праграме</string>
     </resources>
