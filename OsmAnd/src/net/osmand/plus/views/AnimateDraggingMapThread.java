@@ -345,7 +345,8 @@ public class AnimateDraggingMapThread {
 	}
 
 	public void startZooming(final int zoomEnd, final double zoomPart, final boolean notifyListener){
-		final float animationTime = ZOOM_ANIMATION_TIME;
+		boolean doNotUseAnimations = tileView.getSettings().DO_NOT_USE_ANIMATIONS.get();
+		final float animationTime = doNotUseAnimations ? 0 : ZOOM_ANIMATION_TIME;
 		startThreadAnimating(new Runnable(){
 			@Override
 			public void run() {
