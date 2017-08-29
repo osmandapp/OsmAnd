@@ -694,19 +694,10 @@ public class OsmandApplication extends MultiDexApplication {
 
 	public void applyTheme(Context c) {
 		int t = R.style.OsmandDarkTheme;
-		boolean doNotUseAnimations = osmandSettings.DO_NOT_USE_ANIMATIONS.get();
 		if (osmandSettings.OSMAND_THEME.get() == OsmandSettings.OSMAND_DARK_THEME) {
-			if (doNotUseAnimations) {
-				t = R.style.OsmandDarkTheme_NoAnimation;
-			} else {
-				t = R.style.OsmandDarkTheme;
-			}
+			t = R.style.OsmandDarkTheme;
 		} else if (osmandSettings.OSMAND_THEME.get() == OsmandSettings.OSMAND_LIGHT_THEME) {
-			if (doNotUseAnimations) {
-				t = R.style.OsmandLightTheme_NoAnimation;
-			} else {
-				t = R.style.OsmandLightTheme;
-			}
+			t = R.style.OsmandLightTheme;
 		}
 		setLanguage(c);
 		c.setTheme(t);
