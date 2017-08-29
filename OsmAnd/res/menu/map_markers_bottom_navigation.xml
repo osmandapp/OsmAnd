@@ -1,0 +1,12 @@
+<?xml version="1.0" encoding="utf-8"?>
+<menu xmlns:android="http://schemas.android.com/apk/res/android">
+    <item
+        android:id="@+id/action_active"
+        android:icon="@drawable/ic_map"
+        android:title="@string/osm_live_active"/>
+
+    <item
+        android:id="@+id/action_history"
+        android:icon="@drawable/ic_action_history2"
+        android:title="@string/shared_string_history"/>
+</menu>
