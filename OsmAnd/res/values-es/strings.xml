@@ -94,7 +94,7 @@ El espacio de almacenamiento usado es {1} MB.
     <string name="city_type_village">Pueblo</string>
     <string name="city_type_town">Ciudad pequeña</string>
     <string name="city_type_city">Ciudad</string>
-    <string name="animate_route_off">Detener simulación</string>
+    <string name="animate_route_off">Parar simulación</string>
     <string name="animate_route">Iniciar simulación</string>
     <string name="file_can_not_be_renamed">El archivo no se puede renombrar.</string>
     <string name="file_with_name_already_exists">Ya existe un archivo con ese nombre.</string>
@@ -225,9 +225,9 @@ El espacio de almacenamiento usado es {1} MB.
     <string name="send_location_email_pattern">Para ver la ubicación sigue el enlace del navegador %1$s o el enlace interno de Android %2$s</string>
     <string name="send_location">Enviar ubicación</string>
     <string name="context_menu_item_share_location">Compartir ubicación</string>
-    <string name="add_waypoint_dialog_added">El punto de ruta GPX «{0}» fue añadido correctamente</string>
-    <string name="add_waypoint_dialog_title">Añadir el punto de ruta a la traza GPX grabada</string>
-    <string name="context_menu_item_add_waypoint">Añadir punto de ruta GPX</string>
+    <string name="add_waypoint_dialog_added">El punto GPX «{0}» fue añadido correctamente</string>
+    <string name="add_waypoint_dialog_title">Añadir el punto de referencia a la traza GPX grabada</string>
+    <string name="context_menu_item_add_waypoint">Añadir punto GPX</string>
     <string name="amenity_type_administrative">Administrativo</string>
     <string name="amenity_type_barrier">Barrera</string>
     <string name="amenity_type_education">Educación</string>
@@ -237,8 +237,8 @@ El espacio de almacenamiento usado es {1} MB.
     <string name="amenity_type_geocache">Geo-caché</string>
     <string name="amenity_type_healthcare">Salud</string>
     <string name="amenity_type_historic">Histórico</string>
-    <string name="amenity_type_landuse">Uso de Suelo</string>
-    <string name="amenity_type_leisure">Placer</string>
+    <string name="amenity_type_landuse">Uso del suelo</string>
+    <string name="amenity_type_leisure">Ocio</string>
     <string name="amenity_type_man_made">Artificial</string>
     <string name="amenity_type_military">Militar</string>
     <string name="amenity_type_natural">Naturaleza</string>
@@ -1040,7 +1040,7 @@ Tanto la ubicación como el tiempo de estacionamiento se muestran en el panel de
     <string name="speak_cameras">Radares</string>
     <string name="speak_traffic_warnings">Avisos de tráfico</string>
     <string name="osb_author_dialog_password">Contraseña OSM (opcional)</string>
-    <string name="announce_gpx_waypoints">Puntos de ruta GPX</string>
+    <string name="announce_gpx_waypoints">Puntos GPX</string>
     <string name="speak_title">Anunciar…</string>
     <string name="speak_descr">Configura el anuncio de nombres de calles, advertencias de tráfico (paradas, badenes), advertencias de radares de velocidad, límites de velocidad</string>
     <string name="speak_street_names">Nombres de calles (TTS)</string>
@@ -1091,7 +1091,7 @@ Tanto la ubicación como el tiempo de estacionamiento se muestran en el panel de
     <string name="animate_routing_route">Simular, utilizando la ruta calculada</string>
     <string name="animate_routing_gpx">Simular, utilizando la traza GPX</string>
     <string name="app_mode_hiking">Senderismo</string>
-    <string name="app_mode_motorcycle">Moto</string>
+    <string name="app_mode_motorcycle">Motocicleta</string>
     <string name="app_mode_boat">Barco</string>
     <string name="app_mode_aircraft">Avión</string>
     <string name="local_osm_changes_delete_all_confirm">Borrará %1$d cambio(s) de OSM. ¿Está seguro?</string>
@@ -1271,7 +1271,7 @@ Tanto la ubicación como el tiempo de estacionamiento se muestran en el panel de
     <string name="osmo_session_token">Token de sesión: %1$s</string>
     <string name="osmo_mode_restart">Reiniciar sesión OsMo</string>
     <string name="osmo_settings_debug">Información de depuración</string>
-    <string name="import_file_favourites">"¿Guardar  datos como archivo GPX o importar los puntos de ruta a Favoritos?"</string>
+    <string name="import_file_favourites">¿Guardar datos como archivo GPX o importar los puntos de referencia a Favoritos?</string>
     <string name="osmo_follow">Seguir</string>
     <string name="osmo_sign_in">Ingresar</string>
     <string name="osmo_create_groups_confirm">Con el fin de crear grupos es necesario ser usuario registrado de OsMo.</string>
@@ -1308,7 +1308,7 @@ Tanto la ubicación como el tiempo de estacionamiento se muestran en el panel de
     <string name="shared_string_selected_lowercase">seleccionado</string>
     <string name="gpx_split_interval">Intervalo de división</string>
     <string name="gpx_info_subtracks">Subtrazas: %1$s</string>
-    <string name="gpx_info_waypoints">Puntos de ruta: %1$s</string>
+    <string name="gpx_info_waypoints">Puntos de referencia: %1$s</string>
     <string name="gpx_info_distance">Distancia: %1$s (%2$s puntos) </string>
     <string name="gpx_info_start_time">Hora inicio: %1$tF, %1$tT</string>
     <string name="gpx_info_end_time">Hora fin: %1$tF, %1$tT</string>
@@ -1318,7 +1318,7 @@ Tanto la ubicación como el tiempo de estacionamiento se muestran en el panel de
     <string name="gpx_info_diff_altitude">Rango de altitud: %1$s</string>
     <string name="gpx_info_asc_altitude">Descenso/ascenso: %1$s</string>
     <string name="map_widget_plain_time">Tiempo actual</string>
-    <string name="gpx_wpt">Punto de ruta</string>
+    <string name="gpx_wpt">Punto de referencia</string>
     <string name="select_destination_and_intermediate_points">Marque los destinos</string>
     <string name="layer_amenity_label">Etiquetas de los puntos</string>
     <string name="save_as_favorites_points">Guardar como grupo de favoritos</string>
@@ -1412,7 +1412,7 @@ Tanto la ubicación como el tiempo de estacionamiento se muestran en el panel de
     <string name="rendering_value_pedestrian_name">Peatón</string>
     <string name="shared_string_more">Más…</string>
     <string name="download_additional_maps">¿Descargar los mapas que faltan %1$s (%2$d MB)?</string>
-    <string name="waypoints">Puntos de ruta</string>
+    <string name="waypoints">Puntos de referencia</string>
     <string name="targets">Destinos</string>
     <string name="way_alarms">Advertencias de tráfico</string>
     <string name="speak_favorites">Favoritos cercanos</string>
@@ -1880,8 +1880,8 @@ Lon %2$s</string>
     <string name="save_poi_without_poi_type_message">¿Realmente quieres guardar el PDI sin especificar el tipo?</string>
     <string name="shared_string_location">Ubicación</string>
     <string name="poi_context_menu_modify_osm_change">Modificar cambio OSM</string>
-    <string name="context_menu_item_delete_waypoint">¿Borrar punto de ruta GPX?</string>
-    <string name="context_menu_item_edit_waypoint">Editar punto de ruta GPX</string>
+    <string name="context_menu_item_delete_waypoint">¿Borrar punto GPX?</string>
+    <string name="context_menu_item_edit_waypoint">Editar punto GPX</string>
 
 <string name="context_menu_item_open_note">Abrir nota OSM</string>
     <string name="osm_edit_reopened_note">Nota OSM reabierta</string>
@@ -2086,7 +2086,7 @@ El espacio de almacenamiento usado es {3} MB temporalmente y {1} MB permanenteme
     <string name="open_street_map_login_and_pass">Usuario y contraseña de OpenStreetMap</string>
     <string name="report">Informe</string>
     <string name="no_map_markers_found">Por favor, añade marcadores a través del mapa</string>
-    <string name="no_waypoints_found">No se han encontrado puntos de ruta</string>
+    <string name="no_waypoints_found">No se han encontrado puntos de referencia</string>
     <string name="file_name_containes_illegal_char">El nombre de archivo contiene caracteres ilegales</string>
 <string name="map_mode">Modo del mapa</string>
     <string name="number_of_gpx_files_selected_pattern">%s archivos GPX seleccionados</string>
@@ -2101,7 +2101,7 @@ El espacio de almacenamiento usado es {3} MB temporalmente y {1} MB permanenteme
     <string name="access_smart_autoannounce_descr">Sólo notifica cuando se cambia la dirección al punto de destino</string>
     <string name="access_autoannounce_period">"Período de  autoanuncio"</string>
     <string name="access_autoannounce_period_descr">Intervalo mínimo de tiempo entre anuncios</string>
-    <string name="access_default_color">Color por defecto</string>
+    <string name="access_default_color">Color predefinido</string>
     <string name="access_category_choice">Elegir categoría</string>
     <string name="access_hint_enter_name">Introducir nombre</string>
     <string name="access_hint_enter_category">Introducir categoría</string>
@@ -2302,7 +2302,7 @@ El espacio de almacenamiento usado es {3} MB temporalmente y {1} MB permanenteme
     <string name="quick_action_navigation_voice">Voz sí/no</string>
     <string name="quick_action_navigation_voice_off">La voz está apagada</string>
     <string name="quick_action_navigation_voice_on">La voz está encendida</string>
-    <string name="quick_action_add_gpx">Añadir punto de ruta GPX</string>
+    <string name="quick_action_add_gpx">Añadir punto GPX</string>
     <string name="quick_action_add_parking">Añadir lugar de estacionamiento</string>
     <string name="quick_action_new_action">Añadir acción</string>
     <string name="quick_action_edit_action">Editar acción</string>
@@ -2506,7 +2506,7 @@ Por favor proporciona un código completo</string>
     <string name="change_color">Cambiar color</string>
     <string name="edit_name">Editar nombre</string>
     <string name="animate_my_location">Animar mi ubicación</string>
-    <string name="animate_my_location_desc">Activa la animación de mi ubicación durante la navegación</string>
+    <string name="animate_my_location_desc">Activa la ubicación panorámica animada del mapa durante la navegación</string>
     <string name="shared_string_overview">Resumen</string>
     <string name="osmand_plus_extended_description_part2">"Navegación GPS 
 \n • Funciona en línea (rápido) o sin conexión (sin cargos de roaming al viajar al extranjero) 
@@ -2644,11 +2644,11 @@ Por favor proporciona un código completo</string>
     <string name="mappilary_no_internet_desc">Debes tener conexión a Internet para ver fotos de Mapillary</string>
     <string name="retry">Reintentar</string>
     <string name="add_route_point">Añadir punto de ruta</string>
-    <string name="add_waypoint">Añadir punto de ruta</string>
-    <string name="save_gpx_waypoint">Guardar punto de ruta GPX</string>
+    <string name="add_waypoint">Añadir punto de referencia</string>
+    <string name="save_gpx_waypoint">Guardar punto GPX</string>
     <string name="save_route_point">Guardar punto de ruta</string>
     <string name="route_point_one">Punto de ruta 1</string>
-<string name="waypoint_one">Punto de ruta 1</string>
+<string name="waypoint_one">Punto de referencia 1</string>
     <string name="do_not_use_animations">No usar animaciones</string>
     <string name="do_not_use_animations_descr">Desactiva las animaciones en la aplicación</string>
     <string name="keep_showing_on_map">Mantener en el mapa</string>
