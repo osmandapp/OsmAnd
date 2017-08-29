@@ -202,7 +202,6 @@ public class MapActivity extends OsmandActionBarActivity implements DownloadEven
 	@Override
 	public void onCreate(Bundle savedInstanceState) {
 		setRequestedOrientation(AndroidUiHelper.getScreenOrientation(this));
-		overridePendingTransition(0, 0);
 		long tm = System.currentTimeMillis();
 		app = getMyApplication();
 		settings = app.getSettings();
