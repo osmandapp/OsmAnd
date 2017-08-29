@@ -114,8 +114,13 @@ public class MapMultiSelectionMenuFragment extends Fragment implements AdapterVi
 
 		MapMultiSelectionMenu menu = mapActivity.getContextMenu().getMultiSelectionMenu();
 
-		int slideInAnim = menu.getSlideInAnimation();
-		int slideOutAnim = menu.getSlideOutAnimation();
+		int slideInAnim = 0;
+		int slideOutAnim = 0;
+
+		if (!mapActivity.getMyApplication().getSettings().DO_NOT_USE_ANIMATIONS.get()) {
+			slideInAnim = menu.getSlideInAnimation();
+			slideOutAnim = menu.getSlideOutAnimation();
+		}
 
 		MapMultiSelectionMenuFragment fragment = new MapMultiSelectionMenuFragment();
 		menu.getMapActivity().getSupportFragmentManager().beginTransaction()
