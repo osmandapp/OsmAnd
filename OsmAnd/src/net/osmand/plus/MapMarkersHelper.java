@@ -463,4 +463,34 @@ public class MapMarkersHelper {
 			ctx.getGeocodingLookupService().cancel(latLon);
 		}
 	}
+
+	public static int getMapMarkerColorId(int colorIndex) {
+		int colorId;
+		switch (colorIndex) {
+			case 0:
+				colorId = R.color.marker_blue;
+				break;
+			case 1:
+				colorId = R.color.marker_green;
+				break;
+			case 2:
+				colorId = R.color.marker_orange;
+				break;
+			case 3:
+				colorId = R.color.marker_red;
+				break;
+			case 4:
+				colorId = R.color.marker_yellow;
+				break;
+			case 5:
+				colorId = R.color.marker_teal;
+				break;
+			case 6:
+				colorId = R.color.marker_purple;
+				break;
+			default:
+				colorId = R.color.marker_blue;
+		}
+		return colorId;
+	}
 }

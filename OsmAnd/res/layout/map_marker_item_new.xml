@@ -4,37 +4,41 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="56dp"
+    android:background="?attr/bg_color"
     android:descendantFocusability="blocksDescendants">
 
     <RelativeLayout
         android:layout_width="match_parent"
         android:layout_height="match_parent"
-        android:background="?attr/bg_color">
+        android:background="?attr/selectableItemBackground">
 
         <android.support.v7.widget.AppCompatImageView
-            android:id="@+id/marker_reorder_icon"
+            android:id="@+id/map_marker_reorder_icon"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_alignParentLeft="true"
             android:layout_alignParentStart="true"
             android:layout_centerVertical="true"
-            android:padding="16dp"
+            android:paddingBottom="16dp"
+            android:paddingLeft="16dp"
+            android:paddingStart="16dp"
+            android:paddingTop="16dp"
             android:tint="?attr/secondary_icon_color"
             tools:src="@drawable/ic_action_reorder"/>
 
         <android.support.v7.widget.AppCompatImageView
-            android:id="@+id/marker_icon"
+            android:id="@+id/map_marker_icon"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_centerVertical="true"
-            android:layout_marginEnd="16dp"
+            android:layout_marginLeft="16dp"
             android:layout_marginRight="16dp"
-            android:layout_toEndOf="@id/marker_reorder_icon"
-            android:layout_toRightOf="@id/marker_reorder_icon"
+            android:layout_toEndOf="@id/map_marker_reorder_icon"
+            android:layout_toRightOf="@id/map_marker_reorder_icon"
             tools:src="@drawable/ic_action_flag_dark"/>
 
         <ImageButton
-            android:id="@+id/marker_options_button"
+            android:id="@+id/map_marker_options_button"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_alignParentEnd="true"
@@ -52,14 +56,14 @@
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:layout_centerVertical="true"
-            android:layout_toEndOf="@+id/marker_icon"
-            android:layout_toLeftOf="@id/marker_options_button"
-            android:layout_toRightOf="@+id/marker_icon"
-            android:layout_toStartOf="@id/marker_options_button"
+            android:layout_toEndOf="@+id/map_marker_icon"
+            android:layout_toLeftOf="@id/map_marker_options_button"
+            android:layout_toRightOf="@+id/map_marker_icon"
+            android:layout_toStartOf="@id/map_marker_options_button"
             android:orientation="vertical">
 
             <android.support.v7.widget.AppCompatTextView
-                android:id="@+id/measure_point_title"
+                android:id="@+id/map_marker_title"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:textColor="?android:textColorPrimary"
@@ -71,13 +75,13 @@
                 android:layout_height="wrap_content">
 
                 <ImageView
-                    android:id="@+id/direction_icon"
+                    android:id="@+id/map_marker_direction_icon"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     tools:src="@drawable/ic_direction_arrow"/>
 
                 <android.support.v7.widget.AppCompatTextView
-                    android:id="@+id/marker_distance"
+                    android:id="@+id/map_marker_distance"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:layout_marginLeft="4dp"
@@ -88,7 +92,7 @@
                     tools:text="213 m"/>
 
                 <android.support.v7.widget.AppCompatTextView
-                    android:id="@+id/point_icon_text_view"
+                    android:id="@+id/map_marker_point_text_view"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:text="•"
@@ -96,7 +100,7 @@
                     android:textSize="@dimen/default_sub_text_size"/>
 
                 <android.support.v7.widget.AppCompatTextView
-                    android:id="@+id/marker_description"
+                    android:id="@+id/map_marker_description"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:layout_marginLeft="4dp"
@@ -110,12 +114,11 @@
         </LinearLayout>
 
         <View
-            android:id="@+id/points_divider"
             android:layout_width="wrap_content"
             android:layout_height="1dp"
             android:layout_alignParentBottom="true"
-            android:layout_toEndOf="@+id/marker_reorder_icon"
-            android:layout_toRightOf="@+id/marker_reorder_icon"
+            android:layout_marginLeft="56dp"
+            android:layout_marginStart="56dp"
             android:background="?attr/dashboard_divider"/>
     </RelativeLayout>
 
