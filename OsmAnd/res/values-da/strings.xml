@@ -2857,4 +2857,6 @@ Tidligere destination bliver sidste mellemliggende punkt.</string>
     <string name="import_track_desc">Filen %1$s indeholder ingen rutepunkter, importer den som et spor?</string>
     <string name="move_point">Flyt punkt</string>
     <string name="add_segment_to_the_track">Tilføj til et GPX-spor</string>
-</resources>
+<string name="keep_showing_on_map">Fortsæt med at vise på kortet</string>
+    <string name="exit_without_saving">Afslut uden at gemme?</string>
+    </resources>
