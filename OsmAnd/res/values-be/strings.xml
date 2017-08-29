@@ -2855,4 +2855,6 @@
     <string name="import_track_desc">Файл %1$s не змяшчае кропкі шляху, імпартаваць як след?</string>
     <string name="move_point">Перамясціць кропку</string>
     <string name="add_segment_to_the_track">Дадаць у GPX-след</string>
-</resources>
+<string name="keep_showing_on_map">Працягваць паказваць на мапе</string>
+    <string name="exit_without_saving">Выйсці без захавання?</string>
+    </resources>

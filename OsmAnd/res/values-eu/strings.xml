@@ -2763,4 +2763,12 @@ Area honi dagokio: %1$s x %2$s</string>
     <string name="waypoint_one">1. bide-puntua</string>
     <string name="route_point_one">1. ibilbide-puntua</string>
 <string name="measurement_tool_altitude">Garaiera: %1$s</string>
+    <string name="line">Linea</string>
+    <string name="save_as_route_point">Gorde ibilbideko puntuak gisa</string>
+    <string name="save_as_line">Gorde linea gisa</string>
+    <string name="route_point">Ibilbideko puntua</string>
+    <string name="edit_line">Editatu linea</string>
+    <string name="add_point_before">Gehitu puntua aurretik</string>
+    <string name="add_point_after">Gehitu puntua atzetik</string>
+    <string name="shared_string_options">Aukerak</string>
     </resources>

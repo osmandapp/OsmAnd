@@ -2806,4 +2806,6 @@ U vypadku, kali vy lubіcie OsmAnd і OSM і chočacie padtrymać jaho, heta іd
     <string name="import_track_desc">Fajl %1$s nie zmiaščaje kropki šliachu, impartavać jak slied?</string>
     <string name="move_point">Pieramiascić kropku</string>
     <string name="add_segment_to_the_track">Dadać u GPX-slied</string>
-</resources>
+<string name="keep_showing_on_map">Praciahvać pakazvać na mapie</string>
+    <string name="exit_without_saving">Vyjsci biez zachavannia?</string>
+    </resources>

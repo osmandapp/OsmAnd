@@ -1143,10 +1143,10 @@ OsmAnd jest otwarto-źródłowym programem do nawigacji z dostępem do szerokiej
     <string name="gpx_saved_sucessfully">Zapisano plik GPX do {0}</string>
     <string name="osmand_distance_planning_plugin_description">Dodaje widżet za pomocą, którego można tworzyć ślady klikając na mapie. Dostarcza również możliwość użycia lub modyfikowania istniejących już plików GPX, co przydaje się do planowania wycieczek lub mierzenia odległości pomiędzy punktami. Wynik może zostać zapisany jako plik GPX i użyty ponownie.</string>
     <string name="osmand_distance_planning_plugin_name">Kalkulator odległości i narzędzie planowania</string>
-    <string name="use_distance_measurement_help">* Naciśnij, aby zaznaczyć punkt.
-\n * Naciśnij i przytrzymaj mapę, aby usunąć poprzedni punkt.
-\n * Naciśnij i przytrzymaj punkt, aby przejrzeć i dołączyć opis.
-\n * Kliknij na widgecie obliczania odległości, aby zobaczyć więcej czynności.</string>
+    <string name="use_distance_measurement_help">* Naciśnij, aby zaznaczyć punkt. 
+\n * Naciśnij i przytrzymaj mapę, aby usunąć poprzedni punkt. 
+\n * Naciśnij i przytrzymaj punkt, aby przejrzeć i dołączyć opis. 
+\n * Kliknij na widżecie obliczania odległości, aby zobaczyć więcej czynności.</string>
     <string name="shared_string_do_not_show_again">Nie pokazuj ponownie</string>
     <string name="distance_measurement_start_editing">Rozpocznij edycję</string>
     <string name="distance_measurement_finish_editing">Zakończ edycję</string>
@@ -1359,7 +1359,7 @@ OsmAnd jest otwarto-źródłowym programem do nawigacji z dostępem do szerokiej
     <string name="index_item_nation_addresses">Adresy krajowe</string>
     <string name="index_item_world_basemap">Podstawowa mapa świata</string>
     <string name="index_item_world_ski">Światowa mapa tras narciarskich</string>
-    <string name="interrupt_music_descr">Wstrzymuje odtwarzanie każdej muzyki podczas komunikatów (nie tylko ją przycisza)</string>
+    <string name="interrupt_music_descr">Całkowicie wstrzymuje odtwarzanie muzyki podczas komunikatów (nie tylko ją przycisza)</string>
     <string name="interrupt_music">Przerywanie muzyki</string>
     <string name="always_center_position_on_map">Zawsze wyśrodkowane położenie</string>
     <string name="voice_pref_title">Głos</string>
@@ -2459,7 +2459,7 @@ Długość %2$s</string>
 \n 
 \n i więcej…</string>
     <string name="trip_rec_notification_settings">Rejestrowanie śladu (brak danych)</string>
-    <string name="trip_rec_notification_settings_desc">Wyświetla komunikat umożliwiający rozpoczęcie rejestrowania śladu po naciśnięciu przycisku</string>
+    <string name="trip_rec_notification_settings_desc">Wyświetl powiadomienie systemowe z opcję rozpoczęcia rejestrowania śladu</string>
     <string name="shared_string_notifications">Powiadomienia</string>
     <string name="osmo_share_location">Udostępnij</string>
     <string name="osmo_pause_location">Wstrzymaj</string>
@@ -2820,4 +2820,15 @@ Reprezentuje obszar: %1$s x %2$s</string>
     <string name="edit_line">Zmodyfikuj linię</string>
     <string name="add_point_before">Dodaj punkt wcześniej</string>
     <string name="add_point_after">Dodaj punkt dalej</string>
-    </resources>
+    <string name="measurement_tool_snap_to_road_descr">OsmAnd doda dalsze punkty w zależności od rodzaju nawigacji.</string>
+    <string name="add_route_points">Dodaj punkty trasy</string>
+    <string name="add_line">Dodaj linię</string>
+    <string name="empty_state_my_tracks">Dodaj i nagraj ślady</string>
+    <string name="empty_state_my_tracks_desc">Zarejestruj lub zaimportuj ślady do wyświetlenia</string>
+    <string name="empty_state_favourites">Dodaj do ulubionych</string>
+    <string name="empty_state_favourites_desc">Dodaj ulubione punkty na mapę lub zaimportuj je z pamięci</string>
+    <string name="import_track">Importuj ślad</string>
+    <string name="import_track_desc">Plik %1$s nie zawiera punktów trasy, czy zaimportować go jako ślad?</string>
+    <string name="move_point">Przesuń punkt</string>
+    <string name="add_segment_to_the_track">Dodaj do śladu GPX</string>
+</resources>

@@ -2608,4 +2608,6 @@ Abasta l\'àrea: %1$s x %2$s</string>
     <string name="import_track_desc">El fitxer %1$s no conté fites, voleu importar-lo com una traça?</string>
     <string name="move_point">Mou punt</string>
     <string name="add_segment_to_the_track">Afegeix a una traça GPX</string>
-</resources>
+<string name="keep_showing_on_map">Continua mostrant al mapa</string>
+    <string name="exit_without_saving">Voleu sortir sense desar?</string>
+    </resources>

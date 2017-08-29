@@ -300,16 +300,6 @@ public class MeasurementToolLayer extends OsmandMapLayer implements ContextMenuL
 		}
 	}
 
-	void exitMovePointMode(boolean saveOriginalPoint) {
-		if (saveOriginalPoint) {
-			WptPt pt = editingCtx.getOriginalPointToMove();
-			editingCtx.addPoint(pt);
-		}
-		editingCtx.setOriginalPointToMove(null);
-		editingCtx.setSelectedPointPosition(-1);
-		editingCtx.splitSegments(editingCtx.getBeforePoints().size() + editingCtx.getAfterPoints().size());
-	}
-
 	private void drawCenterIcon(Canvas canvas, RotatedTileBox tb, QuadPoint center, boolean nightMode) {
 		canvas.rotate(-tb.getRotate(), center.x, center.y);
 		if (nightMode) {
