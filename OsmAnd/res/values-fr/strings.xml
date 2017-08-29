@@ -2904,4 +2904,6 @@ Fonctionnalités principales :
     <string name="add_segment_to_the_track">Ajouter à une trace GPX</string>
 <string name="keep_showing_on_map">Toujours afficher sur la carte</string>
     <string name="exit_without_saving">Quitter sans enregistrer ?</string>
+    <string name="do_not_use_animations">Ne pas utiliser les animations</string>
+    <string name="do_not_use_animations_descr">Désactive les animations dans l\'application</string>
     </resources>
