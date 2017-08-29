@@ -81,8 +81,8 @@ public class BinaryInspector {
 //					"-vstreets", "-vbuildings", "-vintersections",
 //					"-lang=ru",
 //					"-bbox=30.4981,50.4424,30.5195,50.4351",
-					"-osm="+System.getProperty("maps.dir")+"/map_full.obf.osm",
-					System.getProperty("maps.dir")+"/2017_08_24_15_00.obf"
+//					"-osm="+System.getProperty("maps.dir")+"/map_full.obf.osm",
+					System.getProperty("maps.dir")+"/diff/2017_08_28_01_00.obf"
 //					System.getProperty("maps.dir")+"../temp/kiev/Ukraine_kiev-city_europe_17_06_05.obf",
 //					System.getProperty("maps.dir")+"Ukraine_kiev-city_europe_2.obf",
 			});
