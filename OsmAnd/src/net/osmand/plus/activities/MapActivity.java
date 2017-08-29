@@ -1412,6 +1412,9 @@ public class MapActivity extends OsmandActionBarActivity implements DownloadEven
 
 	public void disableDrawer() {
 		drawerDisabled = true;
+		if (settings.DO_NOT_USE_ANIMATIONS.get()) {
+			closeDrawer();
+		}
 		drawerLayout.setDrawerLockMode(DrawerLayout.LOCK_MODE_LOCKED_CLOSED);
 	}
 
