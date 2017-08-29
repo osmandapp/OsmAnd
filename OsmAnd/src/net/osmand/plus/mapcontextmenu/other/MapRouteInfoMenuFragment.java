@@ -4,6 +4,7 @@ import android.os.Bundle;
 import android.support.v4.app.Fragment;
 import android.support.v4.app.FragmentActivity;
 import android.support.v4.app.FragmentManager;
+import android.support.v4.app.FragmentTransaction;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -97,11 +98,14 @@ public class MapRouteInfoMenuFragment extends Fragment {
 		int slideInAnim = R.anim.slide_in_bottom;
 		int slideOutAnim = R.anim.slide_out_bottom;
 
-		mapActivity.getSupportFragmentManager().beginTransaction()
-				.setCustomAnimations(slideInAnim, slideOutAnim, slideInAnim, slideOutAnim)
+		FragmentTransaction transaction = mapActivity.getSupportFragmentManager()
+				.beginTransaction()
 				.add(R.id.routeMenuContainer, this, TAG)
-				.addToBackStack(TAG)
-				.commitAllowingStateLoss();
+				.addToBackStack(TAG);
+		if (!mapActivity.getMyApplication().getSettings().DO_NOT_USE_ANIMATIONS.get()) {
+			transaction.setCustomAnimations(slideInAnim, slideOutAnim, slideInAnim, slideOutAnim);
+		}
+		transaction.commitAllowingStateLoss();
 	}
 
 	public void dismiss() {
@@ -166,24 +170,28 @@ public class MapRouteInfoMenuFragment extends Fragment {
 
 	public static boolean showInstance(final MapActivity mapActivity) {
 		try {
-			boolean portrait = AndroidUiHelper.isOrientationPortrait(mapActivity);
-			int slideInAnim;
-			int slideOutAnim;
-			if (portrait) {
-				slideInAnim = R.anim.slide_in_bottom;
-				slideOutAnim = R.anim.slide_out_bottom;
-			} else {
-				slideInAnim = R.anim.slide_in_left;
-				slideOutAnim = R.anim.slide_out_left;
-			}
-
 			mapActivity.getContextMenu().hideMenues();
 
 			MapRouteInfoMenuFragment fragment = new MapRouteInfoMenuFragment();
-			mapActivity.getSupportFragmentManager().beginTransaction()
-					.setCustomAnimations(slideInAnim, slideOutAnim, slideInAnim, slideOutAnim)
+			FragmentTransaction transaction = mapActivity.getSupportFragmentManager()
+					.beginTransaction()
 					.add(R.id.routeMenuContainer, fragment, TAG)
-					.addToBackStack(TAG).commitAllowingStateLoss();
+					.addToBackStack(TAG);
+			if (!mapActivity.getMyApplication().getSettings().DO_NOT_USE_ANIMATIONS.get()) {
+				boolean portrait = AndroidUiHelper.isOrientationPortrait(mapActivity);
+				int slideInAnim;
+				int slideOutAnim;
+				if (portrait) {
+					slideInAnim = R.anim.slide_in_bottom;
+					slideOutAnim = R.anim.slide_out_bottom;
+				} else {
+					slideInAnim = R.anim.slide_in_left;
+					slideOutAnim = R.anim.slide_out_left;
+				}
+
+				transaction.setCustomAnimations(slideInAnim, slideOutAnim, slideInAnim, slideOutAnim);
+			}
+			transaction.commitAllowingStateLoss();
 
 			return true;
 
