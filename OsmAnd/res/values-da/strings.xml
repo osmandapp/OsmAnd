@@ -2859,4 +2859,6 @@ Tidligere destination bliver sidste mellemliggende punkt.</string>
     <string name="add_segment_to_the_track">Tilføj til et GPX-spor</string>
 <string name="keep_showing_on_map">Fortsæt med at vise på kortet</string>
     <string name="exit_without_saving">Afslut uden at gemme?</string>
+    <string name="do_not_use_animations">Brug ikke animationer</string>
+    <string name="do_not_use_animations_descr">Deaktiverer animationer i programmet</string>
     </resources>
