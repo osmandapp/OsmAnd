@@ -2990,4 +2990,6 @@
     <string name="import_track_desc">Файл %1$s не містить шляхових точок, імпортувати його в якості треку?</string>
     <string name="move_point">Перемістити точку</string>
     <string name="add_segment_to_the_track">Додати до GPX-треку</string>
-</resources>
+<string name="keep_showing_on_map">Продовжувати показувати на мапі</string>
+    <string name="exit_without_saving">Вийти без збереження?</string>
+    </resources>
