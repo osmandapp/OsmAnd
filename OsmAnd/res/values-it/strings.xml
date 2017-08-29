@@ -2885,4 +2885,5 @@ Copertura e qualità approssimativamente:
     <string name="measurement_tool_snap_to_road_descr">OsmAnd aggiungerà dei punti, in base al tipo di navigazione.</string>
     <string name="measurement_tool_save_as_new_track_descr">Puoi salvare i punti sia come punti di un percorso che come linea.</string>
     <string name="choose_navigation_type">Scegli la modalità di navigazione</string>
+    <string name="exit_without_saving">Uscire senza salvare?</string>
     </resources>
