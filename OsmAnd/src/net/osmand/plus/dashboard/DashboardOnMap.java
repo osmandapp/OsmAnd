@@ -757,7 +757,8 @@ public class DashboardOnMap implements ObservableScrollViewCallbacks, DynamicLis
 	}
 
 	public void setDashboardVisibility(boolean visible, DashboardType type) {
-		setDashboardVisibility(visible, type, this.visible ? visibleType : null, true);
+		boolean animate = !getMyApplication().getSettings().DO_NOT_USE_ANIMATIONS.get();
+		setDashboardVisibility(visible, type, this.visible ? visibleType : null, animate);
 	}
 
 	public void setDashboardVisibility(boolean visible, DashboardType type, boolean animation) {
@@ -1187,7 +1188,8 @@ public class DashboardOnMap implements ObservableScrollViewCallbacks, DynamicLis
 			mapActivity.getMapViewTrackingUtilities().switchToRoutePlanningMode();
 			mapActivity.refreshMap();
 		}
-		hideDashboard(true);
+		boolean animate = !getMyApplication().getSettings().DO_NOT_USE_ANIMATIONS.get();
+		hideDashboard(animate);
 	}
 
 

@@ -262,6 +262,14 @@
         <item name="android:textColorSecondary">@color/color_white</item>
     </style>
 
+    <style name="OsmandDarkTheme.NoAnimation">
+        <item name="alertDialogTheme">@style/Theme.AppCompat.Dialog.Alert.NoAnimation</item>
+    </style>
+
+    <style name="OsmandLightTheme.NoAnimation">
+        <item name="alertDialogTheme">@style/Theme.AppCompat.Light.Dialog.Alert.NoAnimation</item>
+    </style>
+
     <style name="OsmandDarkTheme" parent="Theme.AppCompat">
         <item name="mapBackground">@color/map_background_color_dark</item>
         <item name="chart_marker_background">@drawable/chart_marker_background_dark</item>
@@ -339,6 +347,14 @@
         <item name="android:textColor">@color/color_white</item>
     </style>
 
+    <style name="Theme.AppCompat.Dialog.Alert.NoAnimation">
+        <item name="android:windowAnimationStyle">@null</item>
+    </style>
+
+    <style name="Theme.AppCompat.Light.Dialog.Alert.NoAnimation">
+        <item name="android:windowAnimationStyle">@null</item>
+    </style>
+
     <!-- Standard action bar override -->
     <style name="Widget.Styled.ActionBarDark" parent="Widget.AppCompat.Light.ActionBar.Solid.Inverse">
         <item name="background">@color/actionbar_dark_color</item>
@@ -374,6 +390,11 @@
 
     <!-- Dialog popup -->
     <style name="Animations"/>
+
+    <style name="Animations.NoAnimation">
+        <item name="@android:windowEnterAnimation">@null</item>
+        <item name="@android:windowExitAnimation">@null</item>
+    </style>
     <!-- PopDownMenu -->
     <style name="Animations.PopDownMenu"/>
 

@@ -11,6 +11,7 @@ import android.view.ContextThemeWrapper;
 import android.view.View;
 import android.view.Window;
 import android.view.WindowManager;
+import android.view.animation.Animation;
 import android.widget.FrameLayout;
 import android.widget.ImageView;
 import android.widget.LinearLayout;
@@ -43,6 +44,9 @@ public class SnapToRoadBottomSheetDialogFragment extends android.support.design.
 	@Override
 	public void setupDialog(Dialog dialog, int style) {
 		super.setupDialog(dialog, style);
+		if (getMyApplication().getSettings().DO_NOT_USE_ANIMATIONS.get()) {
+			dialog.getWindow().setWindowAnimations(R.style.Animations_NoAnimation);
+		}
 
 		nightMode = getMyApplication().getDaynightHelper().isNightModeForMapControls();
 		portrait = AndroidUiHelper.isOrientationPortrait(getActivity());
