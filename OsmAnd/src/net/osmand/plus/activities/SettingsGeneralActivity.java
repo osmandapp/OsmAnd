@@ -519,6 +519,8 @@ public class SettingsGeneralActivity extends SettingsBaseActivity implements OnR
 			restartApp();
 		} else if (id.equals(settings.METRIC_SYSTEM.getId())) {
 			settings.METRIC_SYSTEM_CHANGED_MANUALLY.set(true);
+		} else if (id.equals(settings.DO_NOT_USE_ANIMATIONS.getId())) {
+			restartApp();
 		} else {
 			updateAllSettings();
 		}

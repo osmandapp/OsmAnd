@@ -1406,7 +1406,7 @@ public class MapActivity extends OsmandActionBarActivity implements DownloadEven
 
 	public void openDrawer() {
 		mapActions.updateDrawerMenu();
-		boolean animate = settings.DO_NOT_USE_ANIMATIONS.get();
+		boolean animate = !settings.DO_NOT_USE_ANIMATIONS.get();
 		drawerLayout.openDrawer(Gravity.LEFT, animate);
 	}
 
@@ -1441,7 +1441,7 @@ public class MapActivity extends OsmandActionBarActivity implements DownloadEven
 	}
 
 	public void closeDrawer() {
-		boolean animate = settings.DO_NOT_USE_ANIMATIONS.get();
+		boolean animate = !settings.DO_NOT_USE_ANIMATIONS.get();
 		drawerLayout.closeDrawer(Gravity.LEFT, animate);
 	}
 
