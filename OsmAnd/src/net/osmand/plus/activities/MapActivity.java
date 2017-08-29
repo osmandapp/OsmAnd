@@ -11,6 +11,7 @@ import android.content.DialogInterface;
 import android.content.Intent;
 import android.content.IntentFilter;
 import android.content.pm.PackageManager;
+import android.graphics.Rect;
 import android.media.AudioManager;
 import android.net.Uri;
 import android.os.AsyncTask;
@@ -39,6 +40,7 @@ import android.widget.ProgressBar;
 import android.widget.TextView;
 import android.widget.Toast;
 
+import net.osmand.AndroidUtils;
 import net.osmand.Location;
 import net.osmand.PlatformUtil;
 import net.osmand.SecondSplashScreenFragment;
@@ -1404,10 +1406,7 @@ public class MapActivity extends OsmandActionBarActivity implements DownloadEven
 
 	public void openDrawer() {
 		mapActions.updateDrawerMenu();
-		boolean animate = true;
-		if (settings.DO_NOT_USE_ANIMATIONS.get()) {
-			animate = false;
-		}
+		boolean animate = settings.DO_NOT_USE_ANIMATIONS.get();
 		drawerLayout.openDrawer(Gravity.LEFT, animate);
 	}
 
@@ -1425,11 +1424,24 @@ public class MapActivity extends OsmandActionBarActivity implements DownloadEven
 		return drawerDisabled;
 	}
 
-	public void closeDrawer() {
-		boolean animate = true;
+	@Override
+	public boolean dispatchTouchEvent(MotionEvent event) {
 		if (settings.DO_NOT_USE_ANIMATIONS.get()) {
-			animate = false;
+			if (event.getAction() == MotionEvent.ACTION_DOWN) {
+				if (drawerLayout.isDrawerOpen(Gravity.LEFT)) {
+					int width = AndroidUtils.dpToPx(this, 280);
+					if (event.getRawX() > width) {
+						closeDrawer();
+					}
+
+				}
+			}
 		}
+		return super.dispatchTouchEvent(event);
+	}
+
+	public void closeDrawer() {
+		boolean animate = settings.DO_NOT_USE_ANIMATIONS.get();
 		drawerLayout.closeDrawer(Gravity.LEFT, animate);
 	}
 
