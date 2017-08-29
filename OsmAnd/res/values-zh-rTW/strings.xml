@@ -2839,4 +2839,6 @@ OsmAnd (Automated Navigation Directions) 是一個地圖和導航的應用程式
     <string name="import_track_desc">%1$s 檔案不包含航點，要將其匯入軌跡嗎？</string>
     <string name="move_point">移動標點</string>
     <string name="add_segment_to_the_track">增加到 GPX 軌跡</string>
-</resources>
+<string name="keep_showing_on_map">在地圖上維持著顯示</string>
+    <string name="exit_without_saving">離開而不儲存嗎？</string>
+    </resources>
