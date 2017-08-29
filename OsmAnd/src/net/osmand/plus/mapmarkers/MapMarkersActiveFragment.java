@@ -1,6 +1,5 @@
 package net.osmand.plus.mapmarkers;
 
-import android.app.Activity;
 import android.os.Bundle;
 import android.support.annotation.Nullable;
 import android.support.v4.app.Fragment;
@@ -11,7 +10,7 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.widget.Toast;
 
-import net.osmand.plus.OsmandApplication;
+import net.osmand.plus.activities.MapActivity;
 import net.osmand.plus.mapmarkers.adapters.MapMarkersActiveAdapter;
 import net.osmand.plus.mapmarkers.adapters.MapMarkersActiveAdapter.MapMarkersActiveAdapterListener;
 
@@ -22,9 +21,9 @@ public class MapMarkersActiveFragment extends Fragment {
 	public View onCreateView(LayoutInflater inflater, @Nullable ViewGroup container, @Nullable Bundle savedInstanceState) {
 		final RecyclerView recyclerView = new RecyclerView(getContext());
 		recyclerView.setLayoutManager(new LinearLayoutManager(getContext()));
-		OsmandApplication app = getMyApplication();
-		if (app != null) {
-			MapMarkersActiveAdapter adapter = new MapMarkersActiveAdapter(app);
+		MapActivity mapActivity = (MapActivity) getActivity();
+		if (mapActivity != null) {
+			MapMarkersActiveAdapter adapter = new MapMarkersActiveAdapter(mapActivity);
 			adapter.setAdapterListener(new MapMarkersActiveAdapterListener() {
 				@Override
 				public void onItemClick(View view) {
@@ -34,13 +33,5 @@ public class MapMarkersActiveFragment extends Fragment {
 			recyclerView.setAdapter(adapter);
 		}
 		return recyclerView;
-	}
-
-	private OsmandApplication getMyApplication() {
-		Activity activity = getActivity();
-		if (activity != null) {
-			return (OsmandApplication) activity.getApplication();
-		}
-		return null;
 	}
 }
