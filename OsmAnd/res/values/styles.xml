@@ -390,6 +390,11 @@
 
     <!-- Dialog popup -->
     <style name="Animations"/>
+
+    <style name="Animations.NoAnimation">
+        <item name="@android:windowEnterAnimation">@null</item>
+        <item name="@android:windowExitAnimation">@null</item>
+    </style>
     <!-- PopDownMenu -->
     <style name="Animations.PopDownMenu"/>
 
