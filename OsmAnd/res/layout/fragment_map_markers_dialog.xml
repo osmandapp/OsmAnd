@@ -1,0 +1,38 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:background="?attr/bg_color">
+
+    <FrameLayout
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:layout_above="@+id/map_markers_bottom_navigation"
+        android:layout_alignParentTop="true">
+
+        <net.osmand.plus.LockableViewPager
+            android:id="@+id/map_markers_view_pager"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"/>
+
+        <ImageView
+            android:layout_width="match_parent"
+            android:layout_height="5dp"
+            android:layout_gravity="bottom"
+            android:alpha="0.5"
+            android:scaleType="fitXY"
+            android:src="@drawable/bg_shadow_onmap"/>
+    </FrameLayout>
+
+    <android.support.design.widget.BottomNavigationView
+        android:id="@+id/map_markers_bottom_navigation"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_alignParentBottom="true"
+        app:itemBackground="?attr/bg_color"
+        app:itemIconTint="@color/bottom_navigation_color_selector"
+        app:itemTextColor="@color/bottom_navigation_color_selector"
+        app:menu="@menu/map_markers_bottom_navigation"/>
+</RelativeLayout>
