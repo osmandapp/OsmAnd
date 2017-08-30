@@ -12,18 +12,17 @@ import java.util.Calendar;
 import java.util.Collections;
 import java.util.Comparator;
 import java.util.List;
+import java.util.Map;
 
 import net.osmand.PlatformUtil;
 import net.osmand.ResultMatcher;
 import net.osmand.binary.BinaryMapIndexReader.SearchRequest;
-import net.osmand.binary.BinaryMapIndexReader.TagValuePair;
 import net.osmand.binary.OsmandOdb.IdTable;
 import net.osmand.binary.OsmandOdb.OsmAndRoutingIndex.RouteDataBlock;
 import net.osmand.binary.OsmandOdb.OsmAndRoutingIndex.RouteDataBox;
 import net.osmand.binary.OsmandOdb.OsmAndRoutingIndex.RouteEncodingRule;
 import net.osmand.binary.OsmandOdb.RestrictionData;
 import net.osmand.binary.OsmandOdb.RouteData;
-import net.osmand.util.Algorithms;
 import net.osmand.util.MapUtils;
 import net.osmand.util.OpeningHoursParser;
 
@@ -208,6 +207,7 @@ public class BinaryMapRouteReaderAdapter {
 	public static class RouteRegion extends BinaryIndexPart {
 		public int regionsRead;
 		public List<RouteTypeRule> routeEncodingRules = new ArrayList<BinaryMapRouteReaderAdapter.RouteTypeRule>();
+		public Map<String, Integer> decodingRules = null;
 		List<RouteSubregion> subregions = new ArrayList<RouteSubregion>();
 		List<RouteSubregion> basesubregions = new ArrayList<RouteSubregion>();
 		
@@ -227,12 +227,16 @@ public class BinaryMapRouteReaderAdapter {
 		}
 		
 		private int searchRouteEncodingRule(String tag, String value) {
-			// TODO cache;
-			for(int k = 0; k < routeEncodingRules.size(); k++) {
-				RouteTypeRule rt = routeEncodingRules.get(k);
-				if(Algorithms.objectEquals(rt.getTag(), tag) && Algorithms.objectEquals(rt.getValue(), value)) {
-					return k;
+			if(decodingRules == null) {
+				for(int i = 0; i < routeEncodingRules.size(); i++) {
+					RouteTypeRule rt = routeEncodingRules.get(i);
+					String ks = rt.getTag() +"#" + rt.getValue();
+					decodingRules.put(ks, i);
 				}
+			}
+			String k = tag +"#" +value;
+			if(decodingRules.containsKey(k)) {
+				return decodingRules.get(k).intValue();
 			}
 			return -1;
 		}
@@ -242,6 +246,7 @@ public class BinaryMapRouteReaderAdapter {
 		}
 
 		public void initRouteEncodingRule(int id, String tags, String val) {
+			decodingRules = null;
 			while (routeEncodingRules.size() <= id) {
 				routeEncodingRules.add(null);
 			}
@@ -356,32 +361,45 @@ public class BinaryMapRouteReaderAdapter {
 					}
 				}
 			}
-			// TODO
-			// rdo.nameIds rdo.names;
-			// rdo.pointNameTypes rdo.pointNames
-//			BinaryMapDataObject bm = 
-//					new BinaryMapDataObject(o.id, o.coordinates, o.polygonInnerCoordinates, o.objectType, o.area, 
-//							types.toArray(), additionalTypes.isEmpty() ? null : additionalTypes.toArray());
-//			if (o.namesOrder != null) {
-//				bm.objectNames = new TIntObjectHashMap<>();
-//				bm.namesOrder = new TIntArrayList();
-//				for (int i = 0; i < o.namesOrder.size(); i++) {
-//					int nameType = o.namesOrder.get(i);
-//					String name = o.objectNames.get(nameType);
-//					TagValuePair tp = o.mapIndex.decodeType(nameType);
-//					Integer r = getRule(tp);
-//					if(r != null) {
-//						bm.namesOrder.add(r);
-//						bm.objectNames.put(r, name);
-//					} else {
-//						int nid = decodingRules.size() + 1;
-//						initMapEncodingRule(tp.additionalAttribute, nid, tp.tag, tp.value);
-//						additionalTypes.add(nid);
-//						bm.objectNames.put(nid, name);
-//					}
-//				}
-//			}
-//			return bm;
+			if (o.nameIds != null) {
+				rdo.nameIds = new int[o.nameIds.length];
+				rdo.names = new TIntObjectHashMap<>();
+				for (int i = 0; i < o.nameIds.length; i++) {
+					RouteTypeRule tp = o.region.routeEncodingRules.get(o.nameIds[i]);
+					int ruleId = searchRouteEncodingRule(tp.getTag(), null);
+					if(ruleId != -1) {
+						rdo.nameIds[i] = ruleId;
+					} else {
+						ruleId = routeEncodingRules.size() ;
+						initRouteEncodingRule(ruleId, tp.getTag(), null);
+						rdo.nameIds[i] = ruleId;
+					}
+					rdo.names.put(ruleId, o.names.get(o.nameIds[i]));
+				}
+			}
+			rdo.pointNames = o.pointNames;
+			if (o.pointNameTypes != null) {
+				rdo.pointNameTypes = new int[o.pointNameTypes.length][];
+				// rdo.pointNames = new String[o.pointNameTypes.length][];
+				for (int i = 0; i < o.pointNameTypes.length; i++) {
+					if (o.pointNameTypes[i] != null) {
+						rdo.pointNameTypes[i] = new int[o.pointNameTypes[i].length];
+						// rdo.pointNames[i] = new String[o.pointNameTypes[i].length];
+						for (int j = 0; j < o.pointNameTypes[i].length; j++) {
+							RouteTypeRule tp = o.region.routeEncodingRules.get(o.pointNameTypes[i][j]);
+							int ruleId = searchRouteEncodingRule(tp.getTag(), null);
+							if(ruleId != -1) {
+								rdo.pointNameTypes[i][j] = ruleId;
+							} else {
+								ruleId = routeEncodingRules.size() ;
+								initRouteEncodingRule(ruleId, tp.getTag(), tp.getValue());
+								rdo.pointNameTypes[i][j] = ruleId;
+							}
+							// rdo.pointNames[i][j] = o.pointNames[i][j];
+						}
+					}
+				}
+			}
 			return rdo;
 		}
 
