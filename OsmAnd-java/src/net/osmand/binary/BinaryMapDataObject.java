@@ -202,6 +202,12 @@ public class BinaryMapDataObject {
 				&& this.area == thatObj.area 
 				&& Arrays.equals(this.polygonInnerCoordinates, thatObj.polygonInnerCoordinates)
 				&& Arrays.equals(this.coordinates, thatObj.coordinates) ) {
+			if(mapIndex == null) {
+				throw new IllegalStateException("Illegal binary object: " + id);
+			}
+			if(thatObj.mapIndex == null) {
+				throw new IllegalStateException("Illegal binary object: " + thatObj.id);
+			}
 			boolean equals = true;
 			if(equals) {
 				if(types == null || thatObj.types == null) {

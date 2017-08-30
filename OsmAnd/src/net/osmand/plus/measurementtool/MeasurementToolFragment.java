@@ -820,7 +820,7 @@ public class MeasurementToolFragment extends Fragment {
 					gpxFile = result[0];
 					SelectedGpxFile selectedGpxFile = mapActivity.getMyApplication().getSelectedGpxHelper().getSelectedFileByPath(gpxFile.path);
 					boolean showOnMap = selectedGpxFile != null;
-					saveExistingGpx(gpxFile, showOnMap, null, false);
+					saveExistingGpx(gpxFile, showOnMap, ActionType.ADD_SEGMENT, false);
 				}
 				return true;
 			}

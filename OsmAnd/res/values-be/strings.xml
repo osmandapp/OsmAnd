@@ -1791,7 +1791,7 @@
     <string name="general_settings_2">Агульныя налады</string>
 	<string name="shared_string_clear_all">Ачысьціць ўсё</string>
 	<string name="shared_string_collapse">Згарнуць</string>
-	<string name="shared_string_my_location">Маё месцазнаходжаньне</string>
+	<string name="shared_string_my_location">Маё месцазнаходжанне</string>
 	<string name="shared_string_my_tracks">Мае сьляды</string>
 	<string name="shared_string_currently_recording_track">Сьлед, які цяпер запісваецца</string>
 	<string name="plugin_touringview_name">Турыстычная мапа</string>
@@ -2386,7 +2386,7 @@
     <string name="no_update_info_desc">Не правяраць абнаўленні версій і зніжкі ад OsmAnd</string>
     <string name="no_update_info">Не паказваць абнаўленні</string>
     <string name="skip_map_downloading">Прапусьціць сьцягванне мапаў</string>
-    <string name="skip_map_downloading_desc">У вас няма загружаных мапаў. Вы можаце выбраць мапу са сьпісу або сьцягнуць яе пазьней праз мэню - %1$s.</string>
+    <string name="skip_map_downloading_desc">У вас няма загружаных мапаў. Вы можаце выбраць мапу са спісу або сцягнуць яе пазней праз меню - %1$s.</string>
     <string name="search_another_country">Абраць іншы рэгіён</string>
     <string name="search_map">Пошук мапаў…</string>
     <string name="first_usage_wizard_desc">OsmAnd вызначыць ваша месцазнаходжанне і прапануе спампаваць мапы для гэтага рэгіёну.</string>
@@ -2857,4 +2857,6 @@
     <string name="add_segment_to_the_track">Дадаць у GPX-след</string>
 <string name="keep_showing_on_map">Працягваць паказваць на мапе</string>
     <string name="exit_without_saving">Выйсці без захавання?</string>
+    <string name="do_not_use_animations">Не ўжываць анімацыю</string>
+    <string name="do_not_use_animations_descr">Гэта адключае анімацыю ў праграме</string>
     </resources>

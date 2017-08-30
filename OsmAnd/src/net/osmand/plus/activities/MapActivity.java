@@ -11,6 +11,7 @@ import android.content.DialogInterface;
 import android.content.Intent;
 import android.content.IntentFilter;
 import android.content.pm.PackageManager;
+import android.graphics.Rect;
 import android.media.AudioManager;
 import android.net.Uri;
 import android.os.AsyncTask;
@@ -39,6 +40,7 @@ import android.widget.ProgressBar;
 import android.widget.TextView;
 import android.widget.Toast;
 
+import net.osmand.AndroidUtils;
 import net.osmand.Location;
 import net.osmand.PlatformUtil;
 import net.osmand.SecondSplashScreenFragment;
@@ -200,7 +202,6 @@ public class MapActivity extends OsmandActionBarActivity implements DownloadEven
 	@Override
 	public void onCreate(Bundle savedInstanceState) {
 		setRequestedOrientation(AndroidUiHelper.getScreenOrientation(this));
-		overridePendingTransition(0, 0);
 		long tm = System.currentTimeMillis();
 		app = getMyApplication();
 		settings = app.getSettings();
@@ -1404,11 +1405,15 @@ public class MapActivity extends OsmandActionBarActivity implements DownloadEven
 
 	public void openDrawer() {
 		mapActions.updateDrawerMenu();
-		drawerLayout.openDrawer(Gravity.LEFT);
+		boolean animate = !settings.DO_NOT_USE_ANIMATIONS.get();
+		drawerLayout.openDrawer(Gravity.LEFT, animate);
 	}
 
 	public void disableDrawer() {
 		drawerDisabled = true;
+		if (settings.DO_NOT_USE_ANIMATIONS.get()) {
+			closeDrawer();
+		}
 		drawerLayout.setDrawerLockMode(DrawerLayout.LOCK_MODE_LOCKED_CLOSED);
 	}
 
@@ -1421,8 +1426,25 @@ public class MapActivity extends OsmandActionBarActivity implements DownloadEven
 		return drawerDisabled;
 	}
 
+	@Override
+	public boolean dispatchTouchEvent(MotionEvent event) {
+		if (settings.DO_NOT_USE_ANIMATIONS.get()) {
+			if (event.getAction() == MotionEvent.ACTION_DOWN) {
+				if (drawerLayout.isDrawerOpen(Gravity.LEFT)) {
+					int width = AndroidUtils.dpToPx(this, 280);
+					if (event.getRawX() > width) {
+						closeDrawer();
+					}
+
+				}
+			}
+		}
+		return super.dispatchTouchEvent(event);
+	}
+
 	public void closeDrawer() {
-		drawerLayout.closeDrawer(Gravity.LEFT);
+		boolean animate = !settings.DO_NOT_USE_ANIMATIONS.get();
+		drawerLayout.closeDrawer(Gravity.LEFT, animate);
 	}
 
 	public void toggleDrawer() {

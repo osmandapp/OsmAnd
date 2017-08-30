@@ -2758,4 +2758,6 @@ Pro praghere iscrie su còdighe intreu</string>
     <string name="add_segment_to_the_track">Annanghe a una rasta GPX</string>
 <string name="keep_showing_on_map">Sighi a l\'ammustrare in sa mapa</string>
     <string name="exit_without_saving">Essire chene sarvare?</string>
+    <string name="do_not_use_animations">No imprees sas animatziones</string>
+    <string name="do_not_use_animations_descr">Disabilitat sas animatziones in s\'aplicatzione</string>
     </resources>
