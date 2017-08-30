@@ -58,7 +58,8 @@ public class MapMarkersDialogFragment extends android.support.v4.app.DialogFragm
 
 		final LockableViewPager viewPager = mainView.findViewById(R.id.map_markers_view_pager);
 		viewPager.setSwipeLocked(true);
-		viewPager.setAdapter(new MapMarkersViewPagerAdapter(getChildFragmentManager()));
+		final MapMarkersViewPagerAdapter adapter = new MapMarkersViewPagerAdapter(getChildFragmentManager());
+		viewPager.setAdapter(adapter);
 
 		BottomNavigationView bottomNav = mainView.findViewById(R.id.map_markers_bottom_navigation);
 		bottomNav.setOnNavigationItemSelectedListener(new BottomNavigationView.OnNavigationItemSelectedListener() {
@@ -66,9 +67,11 @@ public class MapMarkersDialogFragment extends android.support.v4.app.DialogFragm
 			public boolean onNavigationItemSelected(@NonNull MenuItem menuItem) {
 				switch (menuItem.getItemId()) {
 					case R.id.action_active:
+						((MapMarkersActiveFragment) adapter.getItem(0)).startLocationUpdate();
 						viewPager.setCurrentItem(0);
 						return true;
 					case R.id.action_history:
+						((MapMarkersActiveFragment) adapter.getItem(0)).stopLocationUpdate();
 						viewPager.setCurrentItem(1);
 						return true;
 				}

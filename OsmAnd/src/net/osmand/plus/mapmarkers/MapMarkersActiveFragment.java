@@ -28,6 +28,7 @@ public class MapMarkersActiveFragment extends Fragment implements OsmAndCompassL
 	private MapMarkersActiveAdapter adapter;
 	private Location location;
 	private Float heading;
+	private boolean locationUpdateStarted;
 
 	@Nullable
 	@Override
@@ -119,9 +120,10 @@ public class MapMarkersActiveFragment extends Fragment implements OsmAndCompassL
 		}
 	}
 
-	private void startLocationUpdate() {
+	void startLocationUpdate() {
 		OsmandApplication app = getMyApplication();
-		if (app != null) {
+		if (app != null && !locationUpdateStarted) {
+			locationUpdateStarted = true;
 			app.getLocationProvider().removeCompassListener(app.getLocationProvider().getNavigationInfo());
 			app.getLocationProvider().addCompassListener(this);
 			app.getLocationProvider().addLocationListener(this);
@@ -129,9 +131,10 @@ public class MapMarkersActiveFragment extends Fragment implements OsmAndCompassL
 		}
 	}
 
-	private void stopLocationUpdate() {
+	void stopLocationUpdate() {
 		OsmandApplication app = getMyApplication();
-		if (app != null) {
+		if (app != null && locationUpdateStarted) {
+			locationUpdateStarted = false;
 			app.getLocationProvider().removeLocationListener(this);
 			app.getLocationProvider().removeCompassListener(this);
 			app.getLocationProvider().addCompassListener(app.getLocationProvider().getNavigationInfo());
