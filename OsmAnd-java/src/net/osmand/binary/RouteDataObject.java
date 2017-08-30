@@ -4,6 +4,7 @@ package net.osmand.binary;
 import gnu.trove.map.hash.TIntObjectHashMap;
 
 import java.text.MessageFormat;
+import java.util.Arrays;
 
 import net.osmand.binary.BinaryMapRouteReaderAdapter.RouteRegion;
 import net.osmand.binary.BinaryMapRouteReaderAdapter.RouteTypeRule;
@@ -61,6 +62,43 @@ public class RouteDataObject {
 		this.pointNames = copy.pointNames;
 		this.pointNameTypes = copy.pointNameTypes;
 		this.id = copy.id;
+	}
+	
+	public boolean compareRoute(RouteDataObject thatObj) {
+		if (this.id == thatObj.id
+				&& Arrays.equals(this.pointNames, thatObj.pointNames)
+				&& Arrays.equals(this.pointsX, thatObj.pointsX)
+				&& Arrays.equals(this.pointsY, thatObj.pointsY)
+				&& Arrays.equals(this.restrictions, thatObj.restrictions)) {
+			if (this.region == null) {
+				throw new IllegalStateException("Illegal routing object: " + id);
+			}
+			if (thatObj.region == null) {
+				throw new IllegalStateException("Illegal routing object: " + thatObj.id);
+			}
+			boolean equals = true;
+			if (equals) {
+				if (this.names != null && thatObj.names != null) {
+					equals = Arrays.equals(this.names.values(), thatObj.names.values());
+				}
+			}
+			if (equals) {
+				if (this.types == null || thatObj.types == null) {
+					equals = this.types == thatObj.types;
+				} else if (types.length != thatObj.types.length) {
+					equals = false;
+				} else {
+					for (int i = 0; i < this.types.length && equals; i++) {
+						String thisTag = region.routeEncodingRules.get(types[i]).getTag();
+						String thisValue = region.routeEncodingRules.get(types[i]).getValue();
+						String thatTag = thatObj.region.routeEncodingRules.get(thatObj.types[i]).getTag();
+						String thatValue = thatObj.region.routeEncodingRules.get(thatObj.types[i]).getValue();
+						equals = (thisTag.equals(thatTag) && thisValue.equals(thatValue));
+					}
+				}
+			}
+		}
+		return false;
 	}
 	
 	public float[] calculateHeightArray() {
