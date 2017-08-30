@@ -230,7 +230,7 @@ public class BinaryMapRouteReaderAdapter {
 		public int searchRouteEncodingRule(String tag, String value) {
 			if(decodingRules == null) {
 				decodingRules = new LinkedHashMap<String, Integer>();
-				for(int i = 0; i < routeEncodingRules.size(); i++) {
+				for(int i = 1; i < routeEncodingRules.size(); i++) {
 					RouteTypeRule rt = routeEncodingRules.get(i);
 					String ks = rt.getTag() +"#" + (rt.getValue() == null ? "" : rt.getValue());
 					decodingRules.put(ks, i);
