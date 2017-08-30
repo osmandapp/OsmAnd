@@ -226,7 +226,7 @@ public class BinaryMapRouteReaderAdapter {
 			return OsmandOdb.OsmAndStructure.ROUTINGINDEX_FIELD_NUMBER;
 		}
 		
-		private int searchRouteEncodingRule(String tag, String value) {
+		public int searchRouteEncodingRule(String tag, String value) {
 			if(decodingRules == null) {
 				for(int i = 0; i < routeEncodingRules.size(); i++) {
 					RouteTypeRule rt = routeEncodingRules.get(i);
