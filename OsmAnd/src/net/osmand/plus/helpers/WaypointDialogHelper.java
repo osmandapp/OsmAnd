@@ -761,6 +761,13 @@ public class WaypointDialogHelper {
 						public void dismiss() {
 							if (app.getPoiFilters().isShowingAnyPoi()) {
 								enableType(running, listAdapter, type, enable);
+							} else {
+								running[0] = -1;
+								if (helperCallbacks != null) {
+									helperCallbacks.reloadAdapter();
+								} else {
+									reloadListAdapter(listAdapter);
+								}
 							}
 						}
 					});
