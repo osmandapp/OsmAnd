@@ -2717,7 +2717,7 @@ OsmAnd (Automated Navigation Directions) 是一個地圖和導航的應用程式
     <string name="change_color">更改顏色</string>
     <string name="edit_name">編輯名稱</string>
     <string name="save_poi_too_many_uppercase">名稱中包含太多的大寫字母。您想要繼續嗎？</string>
-    <string name="route_is_too_long_v2">這條路線可能太長，無法推算。如果在10分鐘內沒有結果，請增加中轉節點。</string>
+    <string name="route_is_too_long_v2">這條路線可能太長，無法估算。如果在10分鐘內沒有結果，請增加中轉節點。</string>
     <string name="display_zoom_level">顯示縮放級別：%1$s</string>
     <string name="srtm_color_scheme">色調配置</string>
     <string name="show_from_zoom_level">由縮放級別來顯示</string>
