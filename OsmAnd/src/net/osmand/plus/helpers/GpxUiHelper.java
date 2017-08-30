@@ -467,7 +467,7 @@ public class GpxUiHelper {
 
 				final ContextMenuItem item = adapter.getItem(position);
 				GPXInfo info = list.get(position);
-				udpateGpxInfoView(v, item, info, getDataItem(info), showCurrentGpx && position == 0, app);
+				updateGpxInfoView(v, item, info, getDataItem(info), showCurrentGpx && position == 0, app);
 
 				if (item.getSelected() == null) {
 					v.findViewById(R.id.check_item).setVisibility(View.GONE);
@@ -704,7 +704,7 @@ public class GpxUiHelper {
 		return dlg;
 	}
 
-	public static void udpateGpxInfoView(View v, ContextMenuItem item, GPXInfo info, GpxDataItem dataItem, boolean currentlyRecordingTrack, OsmandApplication app) {
+	public static void updateGpxInfoView(View v, ContextMenuItem item, GPXInfo info, GpxDataItem dataItem, boolean currentlyRecordingTrack, OsmandApplication app) {
 		TextView viewName = ((TextView) v.findViewById(R.id.name));
 		viewName.setText(item.getTitle().replace("/", " • ").trim());
 		ImageView icon = (ImageView) v.findViewById(R.id.icon);
