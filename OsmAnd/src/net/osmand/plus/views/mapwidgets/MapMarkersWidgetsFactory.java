@@ -250,7 +250,7 @@ public class MapMarkersWidgetsFactory {
 		} else {
 			dd = (DirectionDrawable) arrowImg.getDrawable();
 		}
-		dd.setImage(R.drawable.ic_arrow_marker_diretion, MapMarkersHelper.getMapMarkerColorId(marker.colorIndex));
+		dd.setImage(R.drawable.ic_arrow_marker_diretion, MapMarker.getColorId(marker.colorIndex));
 		if (heading != null && loc != null) {
 			dd.setAngle(mes[1] - heading + 180 + screenOrientation);
 		}
@@ -364,7 +364,7 @@ public class MapMarkersWidgetsFactory {
 					setImageDrawable(map.getMyApplication().getIconsCache()
 							.getIcon(isNight() ? R.drawable.widget_marker_night : R.drawable.widget_marker_day,
 									R.drawable.widget_marker_triangle,
-									MapMarkersHelper.getMapMarkerColorId(marker.colorIndex)));
+									MapMarker.getColorId(marker.colorIndex)));
 					cachedMarkerColorIndex = marker.colorIndex;
 					cachedNightMode = isNight();
 					res = true;

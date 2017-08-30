@@ -783,7 +783,7 @@ public class MapMarkerDialogHelper {
 	}
 
 	public static Drawable getMapMarkerIcon(OsmandApplication app, int colorIndex) {
-		return app.getIconsCache().getIcon(R.drawable.ic_action_flag_dark, MapMarkersHelper.getMapMarkerColorId(colorIndex));
+		return app.getIconsCache().getIcon(R.drawable.ic_action_flag_dark, MapMarker.getColorId(colorIndex));
 	}
 
 	public void updateLocation(ListView listView, boolean compassChanged) {
@@ -865,7 +865,7 @@ public class MapMarkerDialogHelper {
 			WptPt wpt = new WptPt();
 			wpt.lat = marker.getLatitude();
 			wpt.lon = marker.getLongitude();
-			wpt.setColor(mapActivity.getResources().getColor(MapMarkersHelper.getMapMarkerColorId(marker.colorIndex)));
+			wpt.setColor(mapActivity.getResources().getColor(MapMarker.getColorId(marker.colorIndex)));
 			wpt.name = marker.getOnlyName();
 			//wpt.link = r.getFileName();
 			//wpt.time = r.getFile().lastModified();

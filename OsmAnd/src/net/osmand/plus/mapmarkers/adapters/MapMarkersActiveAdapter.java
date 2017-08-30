@@ -9,7 +9,6 @@ import android.view.ViewGroup;
 import net.osmand.Location;
 import net.osmand.data.LatLon;
 import net.osmand.plus.IconsCache;
-import net.osmand.plus.MapMarkersHelper;
 import net.osmand.plus.MapMarkersHelper.MapMarker;
 import net.osmand.plus.OsmAndFormatter;
 import net.osmand.plus.R;
@@ -63,7 +62,7 @@ public class MapMarkersActiveAdapter extends RecyclerView.Adapter<MapMarkerItemV
 			}
 		});
 
-		int color = MapMarkersHelper.getMapMarkerColorId(marker.colorIndex);
+		int color = MapMarker.getColorId(marker.colorIndex);
 		holder.icon.setImageDrawable(iconsCache.getIcon(R.drawable.ic_action_flag_dark, color));
 
 		holder.title.setText(marker.getName(mapActivity));
