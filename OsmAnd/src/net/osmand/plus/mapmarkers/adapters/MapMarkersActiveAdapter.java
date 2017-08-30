@@ -1,5 +1,6 @@
 package net.osmand.plus.mapmarkers.adapters;
 
+import android.support.v4.content.ContextCompat;
 import android.support.v7.widget.RecyclerView;
 import android.view.LayoutInflater;
 import android.view.MotionEvent;
@@ -13,8 +14,8 @@ import net.osmand.plus.MapMarkersHelper.MapMarker;
 import net.osmand.plus.OsmAndFormatter;
 import net.osmand.plus.R;
 import net.osmand.plus.activities.MapActivity;
+import net.osmand.plus.base.MapViewTrackingUtilities;
 import net.osmand.plus.dashboard.DashLocationFragment;
-import net.osmand.plus.dashboard.DashboardOnMap;
 import net.osmand.plus.views.DirectionDrawable;
 
 import java.util.List;
@@ -27,6 +28,7 @@ public class MapMarkersActiveAdapter extends RecyclerView.Adapter<MapMarkerItemV
 
 	private LatLon location;
 	private Float heading;
+	private boolean useCenter;
 
 	public MapMarkersActiveAdapter(MapActivity mapActivity) {
 		this.mapActivity = mapActivity;
@@ -53,6 +55,7 @@ public class MapMarkersActiveAdapter extends RecyclerView.Adapter<MapMarkerItemV
 	public void onBindViewHolder(MapMarkerItemViewHolder holder, int pos) {
 		IconsCache iconsCache = mapActivity.getMyApplication().getIconsCache();
 		MapMarker marker = markers.get(pos);
+		calculateLocationParams();
 
 		holder.iconReorder.setImageDrawable(iconsCache.getThemedIcon(R.drawable.ic_action_reorder));
 		holder.iconReorder.setOnTouchListener(new View.OnTouchListener() {
@@ -67,13 +70,12 @@ public class MapMarkersActiveAdapter extends RecyclerView.Adapter<MapMarkerItemV
 
 		holder.title.setText(marker.getName(mapActivity));
 
-		calculateLocationParams();
 		float[] mes = new float[2];
 		if (location != null && marker.point != null) {
 			Location.distanceBetween(marker.getLatitude(), marker.getLongitude(), location.getLatitude(), location.getLongitude(), mes);
 		}
 		DirectionDrawable dd = new DirectionDrawable(mapActivity, holder.iconDirection.getWidth(), holder.iconDirection.getHeight());
-		dd.setImage(R.drawable.ic_direction_arrow, R.color.marker_blue);
+		dd.setImage(R.drawable.ic_direction_arrow, useCenter ? R.color.color_distance : R.color.color_myloc_distance);
 		if (location == null || heading == null || marker.point == null) {
 			dd.setAngle(0);
 		} else {
@@ -81,6 +83,7 @@ public class MapMarkersActiveAdapter extends RecyclerView.Adapter<MapMarkerItemV
 		}
 		holder.iconDirection.setImageDrawable(dd);
 
+		holder.distance.setTextColor(ContextCompat.getColor(mapActivity, useCenter ? R.color.color_distance : R.color.color_myloc_distance));
 		holder.distance.setText(OsmAndFormatter.getFormattedDistance((int) mes[0], mapActivity.getMyApplication()));
 	}
 
@@ -90,20 +93,17 @@ public class MapMarkersActiveAdapter extends RecyclerView.Adapter<MapMarkerItemV
 	}
 
 	private void calculateLocationParams() {
-		DashboardOnMap d = mapActivity.getDashboard();
-		if (d == null) {
-			return;
-		}
+		MapViewTrackingUtilities utilities = mapActivity.getMapViewTrackingUtilities();
 
-		float head = d.getHeading();
-		float mapRotation = d.getMapRotation();
-		LatLon mw = d.getMapViewLocation();
-		Location l = d.getMyLocation();
-		boolean mapLinked = d.isMapLinkedToLocation() && l != null;
-		LatLon myLoc = l == null ? null : new LatLon(l.getLatitude(), l.getLongitude());
-		boolean useCenter = !mapLinked;
-		location = (useCenter ? mw : myLoc);
-		heading = useCenter ? -mapRotation : head;
+		Float utHeading = utilities.getHeading();
+		float mapRotation = mapActivity.getMapRotate();
+		LatLon mapLoc = mapActivity.getMapLocation();
+		Location lastLoc = mapActivity.getMyApplication().getLocationProvider().getLastKnownLocation();
+		boolean mapLinked = utilities.isMapLinkedToLocation() && lastLoc != null;
+		LatLon myLoc = lastLoc == null ? null : new LatLon(lastLoc.getLatitude(), lastLoc.getLongitude());
+		useCenter = !mapLinked;
+		location = (useCenter ? mapLoc : myLoc);
+		heading = useCenter ? -mapRotation : utHeading;
 	}
 
 	public interface MapMarkersActiveAdapterListener {
