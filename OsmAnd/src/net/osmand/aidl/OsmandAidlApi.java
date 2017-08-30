@@ -29,9 +29,11 @@ import net.osmand.plus.GpxSelectionHelper.SelectedGpxFile;
 import net.osmand.plus.MapMarkersHelper;
 import net.osmand.plus.MapMarkersHelper.MapMarker;
 import net.osmand.plus.OsmandApplication;
+import net.osmand.plus.OsmandPlugin;
 import net.osmand.plus.activities.MapActivity;
 import net.osmand.plus.dialogs.ConfigureMapMenu;
 import net.osmand.plus.helpers.ColorDialogs;
+import net.osmand.plus.monitoring.OsmandMonitoringPlugin;
 import net.osmand.plus.views.AidlMapLayer;
 import net.osmand.plus.views.MapInfoLayer;
 import net.osmand.plus.views.OsmandMapLayer;
@@ -840,5 +842,25 @@ public class OsmandAidlApi {
 		intent.putExtra(AIDL_ANIMATED, animated);
 		app.sendBroadcast(intent);
 		return true;
+	}
+
+	boolean startGpxRecording() {
+		final OsmandMonitoringPlugin plugin = OsmandPlugin.getEnabledPlugin(OsmandMonitoringPlugin.class);
+		if (plugin != null) {
+			plugin.startGPXMonitoring(null);
+			plugin.updateControl();
+			return true;
+		}
+		return false;
+	}
+
+	boolean stopGpxRecording() {
+		final OsmandMonitoringPlugin plugin = OsmandPlugin.getEnabledPlugin(OsmandMonitoringPlugin.class);
+		if (plugin != null) {
+			plugin.stopRecording();
+			plugin.updateControl();
+			return true;
+		}
+		return false;
 	}
 }

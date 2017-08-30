@@ -320,5 +320,23 @@ public class OsmandAidlService extends Service {
 				return true;
 			}
 		}
+
+		@Override
+		public boolean startGpxRecording() throws RemoteException {
+			try {
+				return getApi().startGpxRecording();
+			} catch (Exception e) {
+				return false;
+			}
+		}
+
+		@Override
+		public boolean stopGpxRecording() throws RemoteException {
+			try {
+				return getApi().stopGpxRecording();
+			} catch (Exception e) {
+				return false;
+			}
+		}
 	};
 }
