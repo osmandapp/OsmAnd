@@ -10,7 +10,7 @@
     PLEASE: Have a look at http://code.google.com/p/osmand/wiki/UIConsistency, it may really improve your and our work  :-)  Thx - Hardy
     -->
     <string name="do_not_use_animations">Do not use animations</string>
-    <string name="do_not_use_animations_descr">Disables animations in app</string>
+    <string name="do_not_use_animations_descr">Disables animations in the app</string>
     <string name="keep_showing_on_map">Keep showing on map</string>
     <string name="exit_without_saving">Exit without saving?</string>
     <string name="line">Line</string>
@@ -133,7 +133,7 @@
     <string name="do_not_send_anonymous_app_usage">Do not send anonymous app usage statistics</string>
     <string name="do_not_send_anonymous_app_usage_desc">OsmAnd collects information about which parts of the app you open. Your location is never sent, nor is anything you enter into the app or details of areas you view, search, or download.</string>
     <string name="do_not_show_startup_messages">Do not show messages at startup</string>
-    <string name="do_not_show_startup_messages_desc"<Suppresses displaying app discounts &amp; special local event messages</string>
+    <string name="do_not_show_startup_messages_desc">Suppresses displaying app discounts &amp; special local event messages</string>
     <string name="parking_options">Parking options</string>
     <string name="full_version_thanks">Thank you for purchasing the full version of OsmAnd!</string>
     <string name="routing_attr_relief_smoothness_factor_hills_name">Hilly</string>
