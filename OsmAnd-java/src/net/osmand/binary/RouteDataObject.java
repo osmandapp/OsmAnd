@@ -66,17 +66,17 @@ public class RouteDataObject {
 	
 	public boolean compareRoute(RouteDataObject thatObj) {
 		if (this.id == thatObj.id
-				&& Arrays.equals(this.pointNames, thatObj.pointNames)
 				&& Arrays.equals(this.pointsX, thatObj.pointsX)
-				&& Arrays.equals(this.pointsY, thatObj.pointsY)
-				&& Arrays.equals(this.restrictions, thatObj.restrictions)) {
+				&& Arrays.equals(this.pointsY, thatObj.pointsY)) {
 			if (this.region == null) {
 				throw new IllegalStateException("Illegal routing object: " + id);
 			}
 			if (thatObj.region == null) {
 				throw new IllegalStateException("Illegal routing object: " + thatObj.id);
 			}
+			
 			boolean equals = true;
+			equals = equals && Arrays.equals(this.restrictions, thatObj.restrictions);
 			if (equals) {
 				if (this.names != null && thatObj.names != null) {
 					equals = Arrays.equals(this.names.values(), thatObj.names.values());
@@ -97,6 +97,46 @@ public class RouteDataObject {
 					}
 				}
 			}
+			if (equals) {
+				if (this.nameIds == null || thatObj.nameIds == null) {
+					equals = this.nameIds == thatObj.nameIds;
+				} else if (nameIds.length != thatObj.nameIds.length) {
+					equals = false;
+				} else {
+					for (int i = 0; i < this.nameIds.length && equals; i++) {
+						String thisTag = region.routeEncodingRules.get(nameIds[i]).getTag();
+						String thisValue = names.get(nameIds[i]);
+						String thatTag = thatObj.region.routeEncodingRules.get(thatObj.nameIds[i]).getTag();
+						String thatValue = thatObj.names.get(thatObj.nameIds[i]);
+						equals = (Algorithms.objectEquals(thisTag, thatTag) && Algorithms.objectEquals(thisValue, thatValue));
+					}
+				}
+			}
+			
+			if (equals) {
+				if (this.pointNameTypes == null || thatObj.pointNameTypes == null) {
+					equals = this.pointNameTypes == thatObj.pointNameTypes;
+				} else if (pointNameTypes.length != thatObj.pointNameTypes.length) {
+					equals = false;
+				} else {
+					for (int i = 0; i < this.pointNameTypes.length && equals; i++) {
+						if (this.pointNameTypes[i] == null || thatObj.pointNameTypes[i] == null) {
+							equals = this.pointNameTypes[i] == thatObj.pointNameTypes[i];
+						} else if (pointNameTypes[i].length != thatObj.pointNameTypes[i].length) {
+							equals = false;
+						} else  {
+							for (int j = 0; j < this.pointNameTypes[i].length && equals; j++) {
+								String thisTag = region.routeEncodingRules.get(pointNameTypes[i][j]).getTag();
+								String thisValue = pointNames[i][j];
+								String thatTag = thatObj.region.routeEncodingRules.get(thatObj.pointNameTypes[i][j]).getTag();
+								String thatValue = thatObj.pointNames[i][j];
+								equals = (Algorithms.objectEquals(thisTag, thatTag) && Algorithms.objectEquals(thisValue, thatValue));
+							}
+						}
+					}
+				}
+			}
+			
 		}
 		return false;
 	}

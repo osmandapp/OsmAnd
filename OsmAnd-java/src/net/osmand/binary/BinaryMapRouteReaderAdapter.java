@@ -205,9 +205,9 @@ public class BinaryMapRouteReaderAdapter {
 
 	public static class RouteRegion extends BinaryIndexPart {
 		public int regionsRead;
+		public List<RouteTypeRule> routeEncodingRules = new ArrayList<BinaryMapRouteReaderAdapter.RouteTypeRule>();
 		List<RouteSubregion> subregions = new ArrayList<RouteSubregion>();
 		List<RouteSubregion> basesubregions = new ArrayList<RouteSubregion>();
-		List<RouteTypeRule> routeEncodingRules = new ArrayList<BinaryMapRouteReaderAdapter.RouteTypeRule>();
 		
 		int nameTypeRule = -1;
 		int refTypeRule = -1;
@@ -227,7 +227,7 @@ public class BinaryMapRouteReaderAdapter {
 			return routeEncodingRules.get(id);
 		}
 
-		private void initRouteEncodingRule(int id, String tags, String val) {
+		public void initRouteEncodingRule(int id, String tags, String val) {
 			while (routeEncodingRules.size() <= id) {
 				routeEncodingRules.add(null);
 			}
@@ -290,6 +290,12 @@ public class BinaryMapRouteReaderAdapter {
 				}
 			}
 			return false;
+		}
+
+
+		public RouteDataObject adopt(RouteDataObject obj) {
+			// TODO Auto-generated method stub
+			return null;
 		}
 	}
 	
@@ -360,7 +366,7 @@ public class BinaryMapRouteReaderAdapter {
 	
 	
 	protected void readRouteIndex(RouteRegion region) throws IOException {
-		int routeEncodingRule =1;
+		int routeEncodingRule = 1;
 		while(true){
 			int t = codedIS.readTag();
 			int tag = WireFormat.getTagFieldNumber(t);
