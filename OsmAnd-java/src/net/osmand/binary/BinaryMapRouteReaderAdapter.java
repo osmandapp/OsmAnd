@@ -16,12 +16,14 @@ import java.util.List;
 import net.osmand.PlatformUtil;
 import net.osmand.ResultMatcher;
 import net.osmand.binary.BinaryMapIndexReader.SearchRequest;
+import net.osmand.binary.BinaryMapIndexReader.TagValuePair;
 import net.osmand.binary.OsmandOdb.IdTable;
 import net.osmand.binary.OsmandOdb.OsmAndRoutingIndex.RouteDataBlock;
 import net.osmand.binary.OsmandOdb.OsmAndRoutingIndex.RouteDataBox;
 import net.osmand.binary.OsmandOdb.OsmAndRoutingIndex.RouteEncodingRule;
 import net.osmand.binary.OsmandOdb.RestrictionData;
 import net.osmand.binary.OsmandOdb.RouteData;
+import net.osmand.util.Algorithms;
 import net.osmand.util.MapUtils;
 import net.osmand.util.OpeningHoursParser;
 
@@ -213,6 +215,7 @@ public class BinaryMapRouteReaderAdapter {
 		int refTypeRule = -1;
 		int destinationTypeRule = -1;
 		int destinationRefTypeRule = -1;
+		private RouteRegion referenceRouteRegion;
 		
 		public String getPartName() {
 			return "Routing";
@@ -221,6 +224,17 @@ public class BinaryMapRouteReaderAdapter {
 
 		public int getFieldNumber() {
 			return OsmandOdb.OsmAndStructure.ROUTINGINDEX_FIELD_NUMBER;
+		}
+		
+		private int searchRouteEncodingRule(String tag, String value) {
+			// TODO cache;
+			for(int k = 0; k < routeEncodingRules.size(); k++) {
+				RouteTypeRule rt = routeEncodingRules.get(k);
+				if(Algorithms.objectEquals(rt.getTag(), tag) && Algorithms.objectEquals(rt.getValue(), value)) {
+					return k;
+				}
+			}
+			return -1;
 		}
 		
 		public RouteTypeRule quickGetEncodingRule(int id) {
@@ -293,10 +307,86 @@ public class BinaryMapRouteReaderAdapter {
 		}
 
 
-		public RouteDataObject adopt(RouteDataObject obj) {
-			// TODO Auto-generated method stub
-			return null;
+		public RouteDataObject adopt(RouteDataObject o) {
+			if(o.region == this || o.region == referenceRouteRegion) {
+				return o;
+			}
+			
+			if(routeEncodingRules.isEmpty()) {
+				routeEncodingRules.addAll(o.region.routeEncodingRules);
+				referenceRouteRegion= o.region;
+				return o;
+			}
+			RouteDataObject rdo = new RouteDataObject(this);
+			rdo.pointsX = o.pointsX;
+			rdo.pointsY = o.pointsY;
+			rdo.id = o.id;
+			rdo.restrictions = o.restrictions;
+
+			if (o.types != null) {
+				rdo.types = new int[o.types.length];
+				for (int i = 0; i < o.types.length; i++) {
+					RouteTypeRule tp = o.region.routeEncodingRules.get(o.types[i]);
+					int ruleId = searchRouteEncodingRule(tp.getTag(), tp.getValue());
+					if(ruleId != -1) {
+						rdo.types[i] = ruleId;
+					} else {
+						ruleId = routeEncodingRules.size() ;
+						initRouteEncodingRule(ruleId, tp.getTag(), tp.getValue());
+						rdo.types[i] = ruleId;
+					}
+				}
+			}
+			if (o.pointTypes != null) {
+				rdo.pointTypes = new int[o.pointTypes.length][];
+				for (int i = 0; i < o.pointTypes.length; i++) {
+					if (o.pointTypes[i] != null) {
+						rdo.pointTypes[i] = new int[o.pointTypes[i].length];
+						for (int j = 0; j < o.pointTypes[i].length; j++) {
+							RouteTypeRule tp = o.region.routeEncodingRules.get(o.pointTypes[i][j]);
+							int ruleId = searchRouteEncodingRule(tp.getTag(), tp.getValue());
+							if(ruleId != -1) {
+								rdo.pointTypes[i][j] = ruleId;
+							} else {
+								ruleId = routeEncodingRules.size() ;
+								initRouteEncodingRule(ruleId, tp.getTag(), tp.getValue());
+								rdo.pointTypes[i][j] = ruleId;
+							}
+						}
+					}
+				}
+			}
+			// TODO
+			// rdo.nameIds rdo.names;
+			// rdo.pointNameTypes rdo.pointNames
+//			BinaryMapDataObject bm = 
+//					new BinaryMapDataObject(o.id, o.coordinates, o.polygonInnerCoordinates, o.objectType, o.area, 
+//							types.toArray(), additionalTypes.isEmpty() ? null : additionalTypes.toArray());
+//			if (o.namesOrder != null) {
+//				bm.objectNames = new TIntObjectHashMap<>();
+//				bm.namesOrder = new TIntArrayList();
+//				for (int i = 0; i < o.namesOrder.size(); i++) {
+//					int nameType = o.namesOrder.get(i);
+//					String name = o.objectNames.get(nameType);
+//					TagValuePair tp = o.mapIndex.decodeType(nameType);
+//					Integer r = getRule(tp);
+//					if(r != null) {
+//						bm.namesOrder.add(r);
+//						bm.objectNames.put(r, name);
+//					} else {
+//						int nid = decodingRules.size() + 1;
+//						initMapEncodingRule(tp.additionalAttribute, nid, tp.tag, tp.value);
+//						additionalTypes.add(nid);
+//						bm.objectNames.put(nid, name);
+//					}
+//				}
+//			}
+//			return bm;
+			return rdo;
 		}
+
+
+		
 	}
 	
 	// Used in C++
