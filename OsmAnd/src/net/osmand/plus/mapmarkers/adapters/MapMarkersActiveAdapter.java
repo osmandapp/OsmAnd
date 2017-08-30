@@ -92,6 +92,10 @@ public class MapMarkersActiveAdapter extends RecyclerView.Adapter<MapMarkerItemV
 		return markers.size();
 	}
 
+	public MapMarker getItem(int position) {
+		return markers.get(position);
+	}
+
 	private void calculateLocationParams() {
 		MapViewTrackingUtilities utilities = mapActivity.getMapViewTrackingUtilities();
 
