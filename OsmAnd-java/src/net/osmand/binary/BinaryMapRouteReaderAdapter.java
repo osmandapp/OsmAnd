@@ -230,11 +230,11 @@ public class BinaryMapRouteReaderAdapter {
 			if(decodingRules == null) {
 				for(int i = 0; i < routeEncodingRules.size(); i++) {
 					RouteTypeRule rt = routeEncodingRules.get(i);
-					String ks = rt.getTag() +"#" + rt.getValue();
+					String ks = rt.getTag() +"#" + (rt.getValue() == null ? "" : rt.getValue());
 					decodingRules.put(ks, i);
 				}
 			}
-			String k = tag +"#" +value;
+			String k = tag +"#" + (value == null ? "" : value);
 			if(decodingRules.containsKey(k)) {
 				return decodingRules.get(k).intValue();
 			}
