@@ -603,7 +603,7 @@ Se aprecia la participación activa, y las contribuciones pueden hacerse directa
     <string name="index_item_nation_addresses">direcciones nacionales</string>
     <string name="calculate_osmand_route_without_internet">Calcular el segmento de la ruta OsmAnd sin Internet</string>
     <string name="gpx_option_calculate_first_last_segment">Calcular la ruta OsmAnd para el primer y último segmento de ruta</string>
-    <string name="use_displayed_track_for_navigation">¿Deseas usar la ruta mostrada para la navegación?</string>
+    <string name="use_displayed_track_for_navigation">¿Quieres usar la ruta mostrada para la navegación?</string>
     <string name="routing_attr_avoid_ferries_name">Evitar ferris/transbordadores</string>
     <string name="routing_attr_avoid_ferries_description">Evita usar ferris/transbordadores</string>
     <string name="android_19_location_disabled">Desde la versión Android 4.4 (KitKat), no puedes descargar ni actualizar los mapas en la carpeta de almacenamiento anterior (%s). ¿Quieres cambiar a la ubicación de almacenamiento permitida y copiar todos los archivos de OsmAnd allí?
