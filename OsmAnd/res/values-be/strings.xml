@@ -2825,7 +2825,7 @@
     <string name="shared_string_create">Стварыць</string>
 <string name="none_point_error">Калі ласка, дадайце па меншай меры адну кропку.</string>
     <string name="enter_gpx_name">Імя файла GPX:</string>
-    <string name="show_on_map_after_saving">Паказаць мапу пасля захавання</string>
+    <string name="show_on_map_after_saving">Паказаць на мапе пасля захавання</string>
     <string name="add_route_point">Дадаць кропку маршруту</string>
     <string name="add_waypoint">Дадаць кропку шляху</string>
     <string name="save_gpx_waypoint">Захаваць GPX-кропку шляху</string>
