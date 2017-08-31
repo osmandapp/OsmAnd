@@ -1,5 +1,6 @@
 package net.osmand.plus.mapmarkers.adapters;
 
+import android.support.v4.view.MotionEventCompat;
 import android.support.v7.widget.RecyclerView;
 import android.view.LayoutInflater;
 import android.view.MotionEvent;
@@ -13,9 +14,11 @@ import net.osmand.plus.R;
 import net.osmand.plus.activities.MapActivity;
 import net.osmand.plus.dashboard.DashLocationFragment;
 
+import java.util.Collections;
 import java.util.List;
 
-public class MapMarkersActiveAdapter extends RecyclerView.Adapter<MapMarkerItemViewHolder> {
+public class MapMarkersActiveAdapter extends RecyclerView.Adapter<MapMarkerItemViewHolder>
+		implements MapMarkersItemTouchHelperCallback.ItemTouchHelperAdapter {
 
 	private MapActivity mapActivity;
 	private List<MapMarker> markers;
@@ -64,14 +67,17 @@ public class MapMarkersActiveAdapter extends RecyclerView.Adapter<MapMarkerItemV
 	}
 
 	@Override
-	public void onBindViewHolder(MapMarkerItemViewHolder holder, int pos) {
+	public void onBindViewHolder(final MapMarkerItemViewHolder holder, int pos) {
 		IconsCache iconsCache = mapActivity.getMyApplication().getIconsCache();
 		MapMarker marker = markers.get(pos);
 
 		holder.iconReorder.setImageDrawable(iconsCache.getThemedIcon(R.drawable.ic_action_reorder));
 		holder.iconReorder.setOnTouchListener(new View.OnTouchListener() {
 			@Override
-			public boolean onTouch(View view, MotionEvent motionEvent) {
+			public boolean onTouch(View view, MotionEvent event) {
+				if (MotionEventCompat.getActionMasked(event) == MotionEvent.ACTION_DOWN) {
+					listener.onDragStarted(holder);
+				}
 				return false;
 			}
 		});
@@ -96,8 +102,28 @@ public class MapMarkersActiveAdapter extends RecyclerView.Adapter<MapMarkerItemV
 		return markers.get(position);
 	}
 
+	public List<MapMarker> getItems() {
+		return markers;
+	}
+
+	@Override
+	public boolean onItemMove(int from, int to) {
+		Collections.swap(markers, from, to);
+		notifyItemMoved(from, to);
+		return true;
+	}
+
+	@Override
+	public void onItemDismiss(RecyclerView.ViewHolder holder) {
+		listener.onDragEnded(holder);
+	}
+
 	public interface MapMarkersActiveAdapterListener {
 
 		void onItemClick(View view);
+
+		void onDragStarted(RecyclerView.ViewHolder holder);
+
+		void onDragEnded(RecyclerView.ViewHolder holder);
 	}
 }
