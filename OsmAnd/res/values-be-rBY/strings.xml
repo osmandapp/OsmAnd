@@ -2568,7 +2568,7 @@ U vypadku, kali vy lubіcie OsmAnd і OSM і chočacie padtrymać jaho, heta іd
     <string name="analyze_on_map">Analizuj na mapie</string>
     <string name="do_not_send_anonymous_app_usage">Na adsylać ananimnaj statystyki vykarystannia</string>
     <string name="do_not_send_anonymous_app_usage_desc">OsmAnd zbiraje infarmacyju ab tym, jaki častki prahramy vykarystoŭvajucca vami. Vaša miescaznachodžannie nikoli nie adpraŭliajecca, jak i ŭsio, što vy ŭvodzicie, jakija voblasci prahliadajecie, što šukajecie ci spampoŭvajecie.</string>
-    <string name="do_not_show_startup_messages_desc">Pakazvaje paviedamlienni pra znižki i spiecyjaĺnyja lakaĺnyja padziei</string>
+    <string name="do_not_show_startup_messages_desc">Zahlušaje adlustravańnie paviedamleńniaŭ pra znižki i spiecyjalnyja łakalnyja padziei</string>
     <string name="routing_attr_relief_smoothness_factor_plains_name">Pahorysty</string>
     <string name="route_points_category_name">Pavaroty na maršrucie</string>
     <string name="track_points_category_name">Značnyja kropki maršruta</string>
@@ -2809,5 +2809,5 @@ U vypadku, kali vy lubіcie OsmAnd і OSM і chočacie padtrymać jaho, heta іd
 <string name="keep_showing_on_map">Praciahvać pakazvać na mapie</string>
     <string name="exit_without_saving">Vyjsci biez zachavańnia?</string>
     <string name="do_not_use_animations">Nie ŭžyvać animacyju</string>
-    <string name="do_not_use_animations_descr">Heta adkliučaje animacyju ŭ prahramie</string>
+    <string name="do_not_use_animations_descr">Adklučaje animacyju ŭ prahramie</string>
     </resources>
