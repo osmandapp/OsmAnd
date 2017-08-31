@@ -6,6 +6,7 @@ import android.support.v4.app.DialogFragment;
 import android.support.v4.app.Fragment;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
+import android.support.v7.widget.helper.ItemTouchHelper;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -21,6 +22,7 @@ import net.osmand.plus.base.MapViewTrackingUtilities;
 import net.osmand.plus.dashboard.DashLocationFragment;
 import net.osmand.plus.mapmarkers.adapters.MapMarkersActiveAdapter;
 import net.osmand.plus.mapmarkers.adapters.MapMarkersActiveAdapter.MapMarkersActiveAdapterListener;
+import net.osmand.plus.mapmarkers.adapters.MapMarkersItemTouchHelperCallback;
 import net.osmand.util.MapUtils;
 
 public class MapMarkersActiveFragment extends Fragment implements OsmAndCompassListener, OsmAndLocationListener {
@@ -38,7 +40,13 @@ public class MapMarkersActiveFragment extends Fragment implements OsmAndCompassL
 		final MapActivity mapActivity = (MapActivity) getActivity();
 
 		adapter = new MapMarkersActiveAdapter(mapActivity);
+		final ItemTouchHelper touchHelper = new ItemTouchHelper(new MapMarkersItemTouchHelperCallback(adapter));
+		touchHelper.attachToRecyclerView(recyclerView);
 		adapter.setAdapterListener(new MapMarkersActiveAdapterListener() {
+
+			private int fromPosition;
+			private int toPosition;
+
 			@Override
 			public void onItemClick(View view) {
 				int pos = recyclerView.indexOfChild(view);
@@ -47,6 +55,20 @@ public class MapMarkersActiveFragment extends Fragment implements OsmAndCompassL
 						15, marker.getPointDescription(mapActivity), true, marker);
 				MapActivity.launchMapActivityMoveToTop(mapActivity);
 				((DialogFragment) getParentFragment()).dismiss();
+			}
+
+			@Override
+			public void onDragStarted(RecyclerView.ViewHolder holder) {
+				fromPosition = holder.getAdapterPosition();
+				touchHelper.startDrag(holder);
+			}
+
+			@Override
+			public void onDragEnded(RecyclerView.ViewHolder holder) {
+				toPosition = holder.getAdapterPosition();
+				if (toPosition >= 0 && fromPosition >= 0 && toPosition != fromPosition) {
+					mapActivity.getMyApplication().getMapMarkersHelper().saveMapMarkers(adapter.getItems(), null);
+				}
 			}
 		});
 		recyclerView.setAdapter(adapter);
