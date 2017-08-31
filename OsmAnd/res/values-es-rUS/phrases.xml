@@ -3276,8 +3276,8 @@
 <string name="poi_boat_rental_type">Barcos de alquiler</string>
 
 <string name="poi_boat_rental">Alquiler de barcos</string>
-	<string name="poi_boat_motorboat_rental_yes">Barcos a motor: Sí</string>
-	<string name="poi_boat_motorboat_rental_no">Barcos a motor: No</string>
+	<string name="poi_boat_motorboat_rental_yes">Lanchas de motor: Sí</string>
+	<string name="poi_boat_motorboat_rental_no">Lanchas de motor: No</string>
 	<string name="poi_boat_houseboat_rental_yes">Casas flotantes: Sí</string>
 	<string name="poi_boat_houseboat_rental_no">Casas flotantes: No</string>
 	<string name="poi_boat_pedalboat_rental_yes">Barcos a pedal: Sí</string>
