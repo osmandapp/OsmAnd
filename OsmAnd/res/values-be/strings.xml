@@ -2644,7 +2644,7 @@
     <string name="do_not_send_anonymous_app_usage">На адсылаць ананімнай статыстыкі выкарыстання</string>
     <string name="do_not_send_anonymous_app_usage_desc">OsmAnd збірае інфармацыю аб тым, які часткі праграмы выкарыстоўваюцца вамі. Ваша месцазнаходжанне ніколі не адпраўляецца, як і ўсё, што вы ўводзіце, якія вобласці праглядаеце, што шукаеце ці спампоўваеце.</string>
     <string name="do_not_show_startup_messages">Не паказваць паведамленні пры старце</string>
-    <string name="do_not_show_startup_messages_desc">Паказвае паведамленні пра зніжкі і спецыяльныя лакальныя падзеі</string>
+    <string name="do_not_show_startup_messages_desc">Заглушае адлюстраваньне паведамленьняў пра зніжкі і спецыяльныя лакальныя падзеі</string>
     <string name="parking_options">Опцыі паркоўкі</string>
     <string name="full_version_thanks">Дякуй вам за набыццё поўнай версіі OsmAnd!</string>
     <string name="routing_attr_relief_smoothness_factor_name">Абраць перасечанасць мясцовасці</string>
@@ -2858,5 +2858,5 @@
 <string name="keep_showing_on_map">Працягваць паказваць на мапе</string>
     <string name="exit_without_saving">Выйсці без захавання?</string>
     <string name="do_not_use_animations">Не ўжываць анімацыю</string>
-    <string name="do_not_use_animations_descr">Гэта адключае анімацыю ў праграме</string>
+    <string name="do_not_use_animations_descr">Адключэньне анімацыі ў праграме</string>
     </resources>
