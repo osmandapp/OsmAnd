@@ -19,6 +19,7 @@ import net.osmand.plus.OsmandApplication;
 import net.osmand.plus.OsmandSettings;
 import net.osmand.plus.R;
 import net.osmand.plus.activities.MapActivity;
+import net.osmand.plus.mapmarkers.MarkerOptionsBottomSheetDialogFragment.MarkerOptionsFragmentListener;
 
 import java.util.Arrays;
 import java.util.List;
@@ -39,6 +40,12 @@ public class MapMarkersDialogFragment extends android.support.v4.app.DialogFragm
 	@Nullable
 	@Override
 	public View onCreateView(LayoutInflater inflater, @Nullable ViewGroup container, Bundle savedInstanceState) {
+		FragmentManager fragmentManager = getChildFragmentManager();
+		Fragment markerOptionsFragment = fragmentManager.findFragmentByTag(MarkerOptionsBottomSheetDialogFragment.TAG);
+		if (markerOptionsFragment != null) {
+			((MarkerOptionsBottomSheetDialogFragment) markerOptionsFragment).setListener(createMarkerOptionsFragmentListener());
+		}
+
 		View mainView = inflater.inflate(R.layout.fragment_map_markers_dialog, container);
 
 		Toolbar toolbar = (Toolbar) mainView.findViewById(R.id.map_markers_toolbar);
@@ -53,7 +60,9 @@ public class MapMarkersDialogFragment extends android.support.v4.app.DialogFragm
 		optionsButton.setOnClickListener(new View.OnClickListener() {
 			@Override
 			public void onClick(View view) {
-				Toast.makeText(getContext(), "Options", Toast.LENGTH_SHORT).show();
+				MarkerOptionsBottomSheetDialogFragment fragment = new MarkerOptionsBottomSheetDialogFragment();
+				fragment.setListener(createMarkerOptionsFragmentListener());
+				fragment.show(getChildFragmentManager(), MarkerOptionsBottomSheetDialogFragment.TAG);
 			}
 		});
 
@@ -88,6 +97,36 @@ public class MapMarkersDialogFragment extends android.support.v4.app.DialogFragm
 	private OsmandApplication getMyApplication() {
 		return (OsmandApplication) getActivity().getApplication();
 	}
+
+	private MarkerOptionsFragmentListener createMarkerOptionsFragmentListener() {
+		return new MarkerOptionsFragmentListener() {
+			@Override
+			public void sortByOnClick() {
+				Toast.makeText(getContext(), "Sort by", Toast.LENGTH_SHORT).show();
+			}
+
+			@Override
+			public void showDirectionOnClick() {
+				Toast.makeText(getContext(), "Show direction", Toast.LENGTH_SHORT).show();
+			}
+
+			@Override
+			public void buildRouteOnClick() {
+				Toast.makeText(getContext(), "Build route", Toast.LENGTH_SHORT).show();
+			}
+
+			@Override
+			public void saveAsNewTrackOnClick() {
+				Toast.makeText(getContext(), "Save as new track", Toast.LENGTH_SHORT).show();
+			}
+
+			@Override
+			public void moveAllToHistoryOnClick() {
+				Toast.makeText(getContext(), "Move all to history", Toast.LENGTH_SHORT).show();
+			}
+		};
+	}
+
 
 	public static boolean showInstance(@NonNull MapActivity mapActivity) {
 		try {
