@@ -2424,7 +2424,7 @@ Abasta l\'àrea: %1$s x %2$s</string>
     <string name="do_not_send_anonymous_app_usage">No enviïs anònimament les estadístiques d\'us de l\'aplicació</string>
     <string name="do_not_send_anonymous_app_usage_desc">OsmAnd recull informació respecte com utilitzeu l\'aplicació. No s\'envia mai la vostra localització, tampoc les entrades que feu ni els detalls de les zones que consulteu, cerqueu o baixeu.</string>
     <string name="do_not_show_startup_messages">No mostris missatges en engegar</string>
-    <string name="do_not_show_startup_messages_desc">Mostra descomptes de l\'aplicació i missatges de fets locals destacats</string>
+    <string name="do_not_show_startup_messages_desc">No mostris descomptes d\'aplicacions ni missatges d\'esdeveniments locals destacats</string>
     <string name="parking_options">Opcions d\'aparcament</string>
     <string name="right_side_navigation">Conducció per la dreta</string>
     <string name="driving_region_automatic">Automàtic</string>
@@ -2611,5 +2611,5 @@ Abasta l\'àrea: %1$s x %2$s</string>
 <string name="keep_showing_on_map">Continua mostrant al mapa</string>
     <string name="exit_without_saving">Voleu sortir sense desar?</string>
     <string name="do_not_use_animations">Sense ús d\'animacions</string>
-    <string name="do_not_use_animations_descr">Això desactiva les animacions a l\'aplicació</string>
+    <string name="do_not_use_animations_descr">Desactiva les animacions a l\'aplicació</string>
     </resources>
