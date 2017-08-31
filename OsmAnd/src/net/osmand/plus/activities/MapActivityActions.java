@@ -48,6 +48,7 @@ import net.osmand.plus.dashboard.DashboardOnMap.DashboardType;
 import net.osmand.plus.dialogs.FavoriteDialogs;
 import net.osmand.plus.download.IndexItem;
 import net.osmand.plus.liveupdates.OsmLiveActivity;
+import net.osmand.plus.mapmarkers.MapMarkersDialogFragment;
 import net.osmand.plus.measurementtool.MeasurementToolFragment;
 import net.osmand.plus.monitoring.OsmandMonitoringPlugin;
 import net.osmand.plus.routing.RouteProvider.GPXRouteParamsBuilder;
@@ -621,6 +622,18 @@ public class MapActivityActions implements DialogProvider {
 							MapActivity.clearPrevActivityIntent();
 							mapActivity.getDashboard().setDashboardVisibility(true, DashboardType.MAP_MARKERS);
 							return false;
+						}
+					}).createItem());
+
+			optionsMenuHelper.addItem(new ItemBuilder().setTitle("New map markers")
+					.setIcon(R.drawable.ic_action_flag_dark)
+					.setListener(new ContextMenuAdapter.ItemClickListener() {
+						@Override
+						public boolean onContextMenuClick(ArrayAdapter<ContextMenuItem> adapter, int itemId, int pos, boolean isChecked) {
+							app.logEvent(mapActivity, "drawer_markers_open");
+							MapActivity.clearPrevActivityIntent();
+							MapMarkersDialogFragment.showInstance(mapActivity);
+							return true;
 						}
 					}).createItem());
 		} else {
