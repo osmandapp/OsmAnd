@@ -1,15 +1,15 @@
 <?xml version="1.0" encoding="utf-8"?>
-<RelativeLayout
+<LinearLayout
     xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     android:layout_width="match_parent"
-    android:layout_height="match_parent">
+    android:layout_height="match_parent"
+    android:orientation="vertical">
 
     <android.support.v7.widget.Toolbar
         android:id="@+id/map_markers_toolbar"
         android:layout_width="match_parent"
         android:layout_height="@dimen/dashboard_map_toolbar"
-        android:layout_alignParentTop="true"
         android:background="@color/osmand_orange"
         android:minHeight="@dimen/dashboard_map_toolbar"
         android:theme="?attr/toolbar_theme"
@@ -44,9 +44,8 @@
 
     <FrameLayout
         android:layout_width="match_parent"
-        android:layout_height="match_parent"
-        android:layout_above="@+id/map_markers_bottom_navigation"
-        android:layout_below="@+id/map_markers_toolbar">
+        android:layout_height="0dp"
+        android:layout_weight="1">
 
         <net.osmand.plus.LockableViewPager
             android:id="@+id/map_markers_view_pager"
@@ -66,10 +65,9 @@
         android:id="@+id/map_markers_bottom_navigation"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:layout_alignParentBottom="true"
         android:background="?attr/bg_color"
         app:itemBackground="?attr/bg_color"
         app:itemIconTint="@color/bottom_navigation_color_selector"
         app:itemTextColor="@color/bottom_navigation_color_selector"
         app:menu="@menu/map_markers_bottom_navigation"/>
-</RelativeLayout>
+</LinearLayout>
