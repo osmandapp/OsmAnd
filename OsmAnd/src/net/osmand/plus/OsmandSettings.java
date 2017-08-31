@@ -256,19 +256,27 @@ public class OsmandSettings {
 	}
 
 	public boolean isWifiConnected() {
-		ConnectivityManager mgr = (ConnectivityManager) ctx.getSystemService(Context.CONNECTIVITY_SERVICE);
-		NetworkInfo ni = mgr.getActiveNetworkInfo();
-		return ni != null && ni.getType() == ConnectivityManager.TYPE_WIFI;
+		try {
+			ConnectivityManager mgr = (ConnectivityManager) ctx.getSystemService(Context.CONNECTIVITY_SERVICE);
+			NetworkInfo ni = mgr.getActiveNetworkInfo();
+			return ni != null && ni.getType() == ConnectivityManager.TYPE_WIFI;
+		} catch (Exception e) {
+			return false;
+		}
 	}
 
 	private boolean isInternetConnected() {
-		ConnectivityManager mgr = (ConnectivityManager) ctx.getSystemService(Context.CONNECTIVITY_SERVICE);
-		NetworkInfo active = mgr.getActiveNetworkInfo();
-		if (active == null) {
+		try {
+			ConnectivityManager mgr = (ConnectivityManager) ctx.getSystemService(Context.CONNECTIVITY_SERVICE);
+			NetworkInfo active = mgr.getActiveNetworkInfo();
+			if (active == null) {
+				return false;
+			} else {
+				NetworkInfo.State state = active.getState();
+				return state != NetworkInfo.State.DISCONNECTED && state != NetworkInfo.State.DISCONNECTING;
+			}
+		} catch (Exception e) {
 			return false;
-		} else {
-			NetworkInfo.State state = active.getState();
-			return state != NetworkInfo.State.DISCONNECTED && state != NetworkInfo.State.DISCONNECTING;
 		}
 	}
 

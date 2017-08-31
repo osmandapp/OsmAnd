@@ -51,11 +51,6 @@ public class SettingsDevelopmentActivity extends SettingsBaseActivity {
 		cat.addPreference(createCheckBoxPreference(settings.USE_FAST_RECALCULATION,
 				R.string.use_fast_recalculation, R.string.use_fast_recalculation_desc));
 
-
-		cat.addPreference(createCheckBoxPreference(settings.USE_MAGNETIC_FIELD_SENSOR_COMPASS,
-				R.string.use_magnetic_sensor,
-				R.string.use_magnetic_sensor_descr));
-
 		final CheckBoxPreference openGlRender = createCheckBoxPreference(settings.USE_OPENGL_RENDER, R.string.use_opengl_render,R.string.use_opengl_render_descr);
 		cat.addPreference(openGlRender);
 
