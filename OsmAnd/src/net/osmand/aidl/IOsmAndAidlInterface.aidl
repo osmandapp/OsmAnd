@@ -22,6 +22,8 @@ import net.osmand.aidl.calculateroute.CalculateRouteParams;
 
 import net.osmand.aidl.gpx.ImportGpxParams;
 import net.osmand.aidl.gpx.ShowGpxParams;
+import net.osmand.aidl.gpx.StartGpxRecordingParams;
+import net.osmand.aidl.gpx.StopGpxRecordingParams;
 import net.osmand.aidl.gpx.HideGpxParams;
 import net.osmand.aidl.gpx.ASelectedGpxFile;
 
@@ -76,5 +78,8 @@ interface IOsmAndAidlInterface {
     boolean addFavorite(in AddFavoriteParams params);
     boolean removeFavorite(in RemoveFavoriteParams params);
     boolean updateFavorite(in UpdateFavoriteParams params);
+
+    boolean startGpxRecording(in StartGpxRecordingParams params);
+    boolean stopGpxRecording(in StopGpxRecordingParams params);
 
 }
