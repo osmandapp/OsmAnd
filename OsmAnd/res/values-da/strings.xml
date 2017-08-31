@@ -2668,7 +2668,7 @@ Repræsenterer område: %1$s x %2$s</string>
     <string name="do_not_send_anonymous_app_usage">Send ikke anonyme brugsstatistikker</string>
     <string name="do_not_send_anonymous_app_usage_desc">Osmand indsamler oplysninger om hvilke dele der åbnes. Placering bliver aldrig sendt, heller ikke noget der indtastes eller oplysninger om områder der søges eller hentes.</string>
     <string name="do_not_show_startup_messages">Vis ikke meddelelser ved opstart</string>
-    <string name="do_not_show_startup_messages_desc">Viser meddelelser om rabatter &amp; særlige lokale arrangementer</string>
+    <string name="do_not_show_startup_messages_desc">Undertrykker visning af rabatter &amp; særlige lokale hændelsesmeddelelser</string>
     <string name="right_side_navigation">Højrekørsel</string>
     <string name="driving_region_automatic">Automatisk</string>
     <string name="osmand_extended_description_part1">OsmAnd (OSM Automated Navigation Directions) er et kort- og navigationsprogram med adgang til gratis, verdensomspændende og af høj kvalitet OpenStreetMap (OSM) data. 
