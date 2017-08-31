@@ -2440,7 +2440,7 @@ Por favor proporciona un código completo</string>
     <string name="do_not_send_anonymous_app_usage">No enviar estadísticas de uso anónimas de la aplicación</string>
     <string name="do_not_send_anonymous_app_usage_desc">OsmAnd recopila información acerca de las secciones que abres en la aplicación. No recopilamos datos de ubicación, ingresos en la aplicación o datos relacionados con las áreas que visualizas, buscas o descargas.</string>
     <string name="do_not_show_startup_messages">No mostrar los mensajes en el inicio</string>
-    <string name="do_not_show_startup_messages_desc">Muestra descuentos de la aplicación y mensajes de eventos locales</string>
+    <string name="do_not_show_startup_messages_desc">Oculta los descuentos de la aplicación y los mensajes especiales de eventos locales</string>
     <string name="parking_options">Opciones de aparcamiento</string>
     <string name="full_version_thanks">¡Gracias por comprar la versión completa de OsmAnd!</string>
     <string name="routing_attr_relief_smoothness_factor_name">Seleccionar la fluctuación de elevación</string>
