@@ -7,7 +7,7 @@
     android:background="?attr/bg_color"
     android:descendantFocusability="blocksDescendants">
 
-    <RelativeLayout
+    <LinearLayout
         android:layout_width="match_parent"
         android:layout_height="match_parent"
         android:background="?attr/selectableItemBackground">
@@ -16,9 +16,7 @@
             android:id="@+id/map_marker_reorder_icon"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:layout_alignParentLeft="true"
-            android:layout_alignParentStart="true"
-            android:layout_centerVertical="true"
+            android:layout_gravity="center_vertical"
             android:paddingBottom="16dp"
             android:paddingLeft="16dp"
             android:paddingStart="16dp"
@@ -30,36 +28,16 @@
             android:id="@+id/map_marker_icon"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:layout_centerVertical="true"
+            android:layout_gravity="center_vertical"
             android:layout_marginLeft="16dp"
             android:layout_marginRight="16dp"
-            android:layout_toEndOf="@id/map_marker_reorder_icon"
-            android:layout_toRightOf="@id/map_marker_reorder_icon"
             tools:src="@drawable/ic_action_flag_dark"/>
 
-        <ImageButton
-            android:id="@+id/map_marker_options_button"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_alignParentEnd="true"
-            android:layout_alignParentRight="true"
-            android:layout_centerVertical="true"
-            android:layout_marginBottom="16dp"
-            android:layout_marginLeft="14dp"
-            android:layout_marginRight="14dp"
-            android:layout_marginTop="16dp"
-            android:background="?attr/selectableItemBackground"
-            android:focusableInTouchMode="true"
-            tools:src="@drawable/ic_overflow_menu_white"/>
-
         <LinearLayout
-            android:layout_width="match_parent"
+            android:layout_width="0dp"
             android:layout_height="wrap_content"
-            android:layout_centerVertical="true"
-            android:layout_toEndOf="@+id/map_marker_icon"
-            android:layout_toLeftOf="@id/map_marker_options_button"
-            android:layout_toRightOf="@+id/map_marker_icon"
-            android:layout_toStartOf="@id/map_marker_options_button"
+            android:layout_gravity="center_vertical"
+            android:layout_weight="1"
             android:orientation="vertical">
 
             <android.support.v7.widget.AppCompatTextView
@@ -109,6 +87,7 @@
                     android:layout_gravity="center_vertical"
                     android:layout_marginLeft="4dp"
                     android:layout_marginRight="4dp"
+                    android:ellipsize="end"
                     android:maxLines="1"
                     android:textColor="?android:textColorSecondary"
                     android:textSize="@dimen/default_sub_text_size"
@@ -117,13 +96,27 @@
 
         </LinearLayout>
 
-        <View
+        <ImageButton
+            android:id="@+id/map_marker_options_button"
             android:layout_width="wrap_content"
-            android:layout_height="1dp"
-            android:layout_alignParentBottom="true"
-            android:layout_marginLeft="56dp"
-            android:layout_marginStart="56dp"
-            android:background="?attr/dashboard_divider"/>
-    </RelativeLayout>
+            android:layout_height="wrap_content"
+            android:layout_gravity="center_vertical|end"
+            android:layout_marginBottom="16dp"
+            android:layout_marginLeft="14dp"
+            android:layout_marginRight="14dp"
+            android:layout_marginTop="16dp"
+            android:background="?attr/selectableItemBackground"
+            android:focusableInTouchMode="true"
+            tools:src="@drawable/ic_overflow_menu_white"/>
+
+    </LinearLayout>
+
+    <View
+        android:layout_width="wrap_content"
+        android:layout_height="1dp"
+        android:layout_gravity="bottom"
+        android:layout_marginLeft="56dp"
+        android:layout_marginStart="56dp"
+        android:background="?attr/dashboard_divider"/>
 
 </FrameLayout>
