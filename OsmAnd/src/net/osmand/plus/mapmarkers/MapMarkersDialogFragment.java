@@ -49,7 +49,8 @@ public class MapMarkersDialogFragment extends android.support.v4.app.DialogFragm
 				dismiss();
 			}
 		});
-		mainView.findViewById(R.id.options_button).setOnClickListener(new View.OnClickListener() {
+		final View optionsButton = mainView.findViewById(R.id.options_button);
+		optionsButton.setOnClickListener(new View.OnClickListener() {
 			@Override
 			public void onClick(View view) {
 				Toast.makeText(getContext(), "Options", Toast.LENGTH_SHORT).show();
@@ -69,10 +70,12 @@ public class MapMarkersDialogFragment extends android.support.v4.app.DialogFragm
 					case R.id.action_active:
 						((MapMarkersActiveFragment) adapter.getItem(0)).startLocationUpdate();
 						viewPager.setCurrentItem(0);
+						optionsButton.setVisibility(View.VISIBLE);
 						return true;
 					case R.id.action_history:
 						((MapMarkersActiveFragment) adapter.getItem(0)).stopLocationUpdate();
 						viewPager.setCurrentItem(1);
+						optionsButton.setVisibility(View.GONE);
 						return true;
 				}
 				return false;
