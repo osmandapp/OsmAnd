@@ -87,6 +87,8 @@ public class MapMarkersActiveAdapter extends RecyclerView.Adapter<MapMarkerItemV
 
 		holder.title.setText(marker.getName(mapActivity));
 
+		holder.description.setText(marker.creationDate + "");
+
 		DashLocationFragment.updateLocationView(useCenter, location,
 				heading, holder.iconDirection, holder.distance,
 				marker.getLatitude(), marker.getLongitude(),

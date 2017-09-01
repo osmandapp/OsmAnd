@@ -78,7 +78,8 @@
                     android:text="•"
                     android:textColor="?android:textColorSecondary"
                     android:textSize="@dimen/default_sub_text_size"
-                    android:visibility="gone"/>
+                    android:visibility="gone"
+                    tools:visibility="visible"/>
 
                 <android.support.v7.widget.AppCompatTextView
                     android:id="@+id/map_marker_description"
