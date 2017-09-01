@@ -69,7 +69,7 @@ public class NavigateParams implements Parcelable {
 		return profile;
 	}
 
-	public boolean getForce() {
+	public boolean isForce() {
 		return force;
 	}
 

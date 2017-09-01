@@ -386,7 +386,7 @@ public class OsmandAidlService extends Service {
 		@Override
 		public boolean navigate(NavigateParams params) throws RemoteException {
 			try {
-				return params != null && getApi().navigate(params.getStartName(), params.getStartLat(), params.getStartLon(), params.getDestName(), params.getDestLat(), params.getDestLon(), params.getProfile(), params.getForce());
+				return params != null && getApi().navigate(params.getStartName(), params.getStartLat(), params.getStartLon(), params.getDestName(), params.getDestLat(), params.getDestLon(), params.getProfile(), params.isForce());
 			} catch (Exception e) {
 				return false;
 			}
