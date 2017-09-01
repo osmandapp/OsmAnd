@@ -1,5 +1,6 @@
 package net.osmand.plus.mapmarkers.adapters;
 
+import android.support.design.widget.Snackbar;
 import android.support.v4.view.MotionEventCompat;
 import android.support.v7.widget.RecyclerView;
 import android.view.LayoutInflater;
@@ -93,8 +94,19 @@ public class MapMarkersActiveAdapter extends RecyclerView.Adapter<MapMarkerItemV
 		holder.optionsBtn.setOnClickListener(new View.OnClickListener() {
 			@Override
 			public void onClick(View view) {
-				int position = holder.getAdapterPosition();
-				MapMarker marker = markers.get(position);
+				final int position = holder.getAdapterPosition();
+				final MapMarker marker = markers.get(position);
+
+				Snackbar.make(holder.itemView, R.string.item_removed, Snackbar.LENGTH_LONG)
+						.setAction(R.string.shared_string_undo, new View.OnClickListener() {
+							@Override
+							public void onClick(View view) {
+//								mapActivity.getMyApplication().getMapMarkersHelper().removeMapMarkerHistory(marker);
+								mapActivity.getMyApplication().getMapMarkersHelper().addMapMarker(marker, position);
+								notifyItemInserted(position);
+							}
+						}).show();
+
 				mapActivity.getMyApplication().getMapMarkersHelper().removeMapMarker(marker.index);
 				mapActivity.getMyApplication().getMapMarkersHelper().addMapMarkerHistory(marker);
 				notifyItemRemoved(position);

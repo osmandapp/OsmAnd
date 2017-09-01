@@ -58,7 +58,7 @@ public class MapMarkersHistoryAdapter extends RecyclerView.Adapter<MapMarkerItem
 				int position = holder.getAdapterPosition();
 				MapMarker marker = markers.get(position);
 				app.getMapMarkersHelper().removeMapMarkerHistory(marker);
-				app.getMapMarkersHelper().addMapMarker(marker);
+				app.getMapMarkersHelper().addMapMarker(marker, 0);
 				notifyItemRemoved(position);
 			}
 		});

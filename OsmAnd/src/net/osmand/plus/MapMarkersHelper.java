@@ -321,9 +321,9 @@ public class MapMarkersHelper {
 		refresh();
 	}
 
-	public void addMapMarker(MapMarker marker) {
+	public void addMapMarker(MapMarker marker, int index) {
 		settings.insertMapMarker(marker.getLatitude(), marker.getLongitude(), marker.pointDescription,
-				marker.colorIndex, marker.selected, marker.creationDate, 0);
+				marker.colorIndex, marker.selected, marker.creationDate, index);
 		readFromSettings();
 	}
 
