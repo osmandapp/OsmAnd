@@ -42,6 +42,7 @@ import net.osmand.aidl.maplayer.RemoveMapLayerParams;
 import net.osmand.aidl.maplayer.UpdateMapLayerParams;
 
 import net.osmand.aidl.navigation.NavigateParams;
+import net.osmand.aidl.navigation.NavigateGpxParams;
 
 import net.osmand.aidl.note.TakePhotoNoteParams;
 import net.osmand.aidl.note.StartVideoRecordingParams;
@@ -95,5 +96,6 @@ interface IOsmAndAidlInterface {
     boolean stopRecording(in StopRecordingParams params);
 
     boolean navigate(in NavigateParams params);
+    boolean navigateGpx(in NavigateGpxParams params);
 
 }

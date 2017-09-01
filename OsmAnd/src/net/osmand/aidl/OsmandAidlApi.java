@@ -7,6 +7,7 @@ import android.content.Intent;
 import android.content.IntentFilter;
 import android.net.Uri;
 import android.os.AsyncTask;
+import android.os.Build;
 import android.os.ParcelFileDescriptor;
 import android.support.v7.app.AlertDialog;
 import android.view.View;
@@ -55,6 +56,7 @@ import java.io.ByteArrayInputStream;
 import java.io.File;
 import java.io.FileDescriptor;
 import java.io.FileInputStream;
+import java.io.FileNotFoundException;
 import java.io.FileOutputStream;
 import java.io.IOException;
 import java.io.InputStream;
@@ -78,6 +80,8 @@ public class OsmandAidlApi {
 	private static final String AIDL_DEST_LAT = "aidl_dest_lat";
 	private static final String AIDL_DEST_LON = "aidl_dest_lon";
 	private static final String AIDL_PROFILE = "aidl_profile";
+	private static final String AIDL_DATA = "aidl_data";
+	private static final String AIDL_URI = "aidl_uri";
 	private static final String AIDL_FORCE = "aidl_force";
 
 	private static final String AIDL_OBJECT_ID = "aidl_object_id";
@@ -94,6 +98,7 @@ public class OsmandAidlApi {
 	private static final String AIDL_STOP_RECORDING = "aidl_stop_recording";
 
 	private static final String AIDL_NAVIGATE = "aidl_navigate";
+	private static final String AIDL_NAVIGATE_GPX = "aidl_navigate_gpx";
 
 	private static final ApplicationMode DEFAULT_PROFILE = ApplicationMode.CAR;
 
@@ -120,6 +125,7 @@ public class OsmandAidlApi {
 	private BroadcastReceiver startAudioRecordingReceiver;
 	private BroadcastReceiver stopRecordingReceiver;
 	private BroadcastReceiver navigateReceiver;
+	private BroadcastReceiver navigateGpxReceiver;
 
 	public OsmandAidlApi(OsmandApplication app) {
 		this.app = app;
@@ -137,6 +143,7 @@ public class OsmandAidlApi {
 		registerStartAudioRecordingReceiver(mapActivity);
 		registerStopRecordingReceiver(mapActivity);
 		registerNavigateReceiver(mapActivity);
+		registerNavigateGpxReceiver(mapActivity);
 	}
 
 	public void onDestroyMapActivity(final MapActivity mapActivity) {
@@ -230,6 +237,14 @@ public class OsmandAidlApi {
 				e.printStackTrace();
 			}
 			navigateReceiver = null;
+		}
+		if (navigateGpxReceiver != null) {
+			try {
+				mapActivity.unregisterReceiver(navigateGpxReceiver);
+			} catch (IllegalArgumentException e) {
+				e.printStackTrace();
+			}
+			navigateGpxReceiver = null;
 		}
 	}
 
@@ -501,6 +516,58 @@ public class OsmandAidlApi {
 			}
 		};
 		mapActivity.registerReceiver(navigateReceiver, new IntentFilter(AIDL_NAVIGATE));
+	}
+
+	private void registerNavigateGpxReceiver(final MapActivity mapActivity) {
+		navigateGpxReceiver = new BroadcastReceiver() {
+			@Override
+			public void onReceive(Context context, Intent intent) {
+				boolean force = intent.getBooleanExtra(AIDL_FORCE, false);
+
+				GPXFile gpx = null;
+				if (intent.getStringExtra(AIDL_DATA) != null) {
+					String gpxStr = intent.getStringExtra(AIDL_DATA);
+					if (!Algorithms.isEmpty(gpxStr)) {
+						gpx = GPXUtilities.loadGPXFile(mapActivity, new ByteArrayInputStream(gpxStr.getBytes()));
+					}
+				} else if (intent.getParcelableExtra(AIDL_URI) != null) {
+					if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.JELLY_BEAN) {
+						Uri gpxUri = intent.getParcelableExtra(AIDL_URI);
+
+						ParcelFileDescriptor gpxParcelDescriptor = null;
+						try {
+							gpxParcelDescriptor = mapActivity.getContentResolver().openFileDescriptor(gpxUri, "r");
+						} catch (FileNotFoundException e) {
+							e.printStackTrace();
+						}
+						if (gpxParcelDescriptor != null) {
+							FileDescriptor fileDescriptor = gpxParcelDescriptor.getFileDescriptor();
+							gpx = GPXUtilities.loadGPXFile(mapActivity, new FileInputStream(fileDescriptor));
+						}
+					}
+				}
+
+				if (gpx != null) {
+					final RoutingHelper routingHelper = app.getRoutingHelper();
+					if (routingHelper.isFollowingMode() && !force) {
+						final GPXFile gpxFile = gpx;
+						AlertDialog dlg = mapActivity.getMapActions().stopNavigationActionConfirm();
+						dlg.setOnDismissListener(new DialogInterface.OnDismissListener() {
+
+							@Override
+							public void onDismiss(DialogInterface dialog) {
+								if (!routingHelper.isFollowingMode()) {
+									startNavigation(mapActivity, gpxFile, null, null, null, null, null);
+								}
+							}
+						});
+					} else {
+						startNavigation(mapActivity, gpx, null, null, null, null, null);
+					}
+				}
+			}
+		};
+		mapActivity.registerReceiver(navigateGpxReceiver, new IntentFilter(AIDL_NAVIGATE_GPX));
 	}
 
 	private void startNavigation(MapActivity mapActivity,
@@ -1140,6 +1207,16 @@ public class OsmandAidlApi {
 		intent.putExtra(AIDL_DEST_LAT, destLat);
 		intent.putExtra(AIDL_DEST_LON, destLon);
 		intent.putExtra(AIDL_PROFILE, profile);
+		intent.putExtra(AIDL_FORCE, force);
+		app.sendBroadcast(intent);
+		return true;
+	}
+
+	boolean navigateGpx(String data, Uri uri, boolean force) {
+		Intent intent = new Intent();
+		intent.setAction(AIDL_NAVIGATE_GPX);
+		intent.putExtra(AIDL_DATA, data);
+		intent.putExtra(AIDL_URI, uri);
 		intent.putExtra(AIDL_FORCE, force);
 		app.sendBroadcast(intent);
 		return true;
