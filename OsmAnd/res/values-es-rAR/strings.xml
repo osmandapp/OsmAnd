@@ -2737,4 +2737,9 @@ Proporciona un código completo</string>
     <string name="exit_without_saving">¿Salir sin guardar?</string>
     <string name="do_not_use_animations">No usar animaciones</string>
     <string name="do_not_use_animations_descr">Desactiva las animaciones en la aplicación</string>
+    <string name="move_all_to_history">Mover todo al historial</string>
+    <string name="build_route">Crear ruta</string>
+    <string name="show_direction">Mostrar dirección</string>
+    <string name="sort_by">Ordenar por</string>
+    <string name="marker_options">Opciones del marcador</string>
     </resources>
