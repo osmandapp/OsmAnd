@@ -72,6 +72,14 @@ public class Amenity extends MapObject {
 		}
 		return x;
 	}
+	
+	public void setX(TIntArrayList x) {
+		this.x = x;
+	}
+	
+	public void setY(TIntArrayList y) {
+		this.y = y;
+	}
 
 	public TIntArrayList getY() {
 		if (y == null) {
@@ -276,16 +284,22 @@ public class Amenity extends MapObject {
 		if (this.type.getKeyName().equals(thatObj.type.getKeyName())) {
 			boolean equals = true;
 			if (equals) {
-				equals = this.x.size() == thatObj.x.size();
-				if (equals) {
+				if (this.x == null || thatObj.x == null) {
+					equals = this.x == thatObj.x;
+				} else if (this.x.size() != thatObj.x.size()){
+					equals = false;
+				} else {
 					for (int i = 0; i < x.size() && equals; i++) {
 						equals = this.x.get(i) == thatObj.x.get(i);
 					}
 				}
 			}
 			if (equals) {
-				equals = this.y.size() == thatObj.y.size();
-				if (equals) {
+				if (this.y == null || thatObj.y == null) {
+					equals = this.y == thatObj.y;
+				} else if (this.y.size() != thatObj.y.size()){
+					equals = false;
+				} else {
 					for (int i = 0; i < y.size() && equals; i++) {
 						equals = this.y.get(i) == thatObj.y.get(i);
 					}
@@ -295,10 +309,23 @@ public class Amenity extends MapObject {
 				equals = subType.equals(thatObj.subType);
 			}
 			if (equals) {
-				equals = this.additionalInfo.equals(thatObj.additionalInfo);
+				if (this.additionalInfo == null || thatObj.additionalInfo == null) {
+					equals = this.additionalInfo == thatObj.additionalInfo;
+				} else {
+					equals = this.additionalInfo.equals(thatObj.additionalInfo);
+				}
+				
 			}
 			if (equals) {
-				equals = this.openingHours.equals(thatObj.openingHours);
+				if (this.openingHours == null || thatObj.openingHours == null) {
+					if (this.openingHours == thatObj.openingHours) {
+						equals = true;
+					} else {
+						equals = false;
+					}
+				} else {
+					equals = this.openingHours.equals(thatObj.openingHours);
+				}
 			}
 			if (equals) {
 				equals = this.routePoint == thatObj.routePoint;
