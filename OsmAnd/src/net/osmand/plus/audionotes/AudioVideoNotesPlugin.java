@@ -651,7 +651,7 @@ public class AudioVideoNotesPlugin extends OsmandPlugin {
 				.setListener(new ItemClickListener() {
 					@Override
 					public boolean onContextMenuClick(ArrayAdapter<ContextMenuItem> adapter, int itemId, int pos, boolean isChecked) {
-						takePhoto(latitude, longitude, mapActivity, false);
+						takePhoto(latitude, longitude, mapActivity, false, false);
 						return true;
 					}
 
@@ -771,7 +771,7 @@ public class AudioVideoNotesPlugin extends OsmandPlugin {
 		if (action == AV_DEFAULT_ACTION_VIDEO) {
 			recordVideo(lat, lon, mapActivity);
 		} else if (action == AV_DEFAULT_ACTION_TAKEPICTURE) {
-			takePhoto(lat, lon, mapActivity, false);
+			takePhoto(lat, lon, mapActivity, false, false);
 		} else if (action == AV_DEFAULT_ACTION_AUDIO) {
 			recordAudio(lat, lon, mapActivity);
 		}
@@ -1192,10 +1192,10 @@ public class AudioVideoNotesPlugin extends OsmandPlugin {
     }
 
 	public void takePhoto(final double lat, final double lon, final MapActivity mapActivity,
-						  final boolean forceInternal) {
+						  final boolean forceInternal, final boolean forceExternal) {
 		if (ActivityCompat.checkSelfPermission(mapActivity, Manifest.permission.CAMERA)
 				== PackageManager.PERMISSION_GRANTED) {
-			if (!AV_EXTERNAL_PHOTO_CAM.get() || forceInternal) {
+			if ((!AV_EXTERNAL_PHOTO_CAM.get() || forceInternal) && !forceExternal) {
 				takePhotoInternalOrExternal(lat, lon, mapActivity);
 			} else {
 				takePhotoExternal(lat, lon, mapActivity);

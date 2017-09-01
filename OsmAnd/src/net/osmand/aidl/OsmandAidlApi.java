@@ -391,7 +391,7 @@ public class OsmandAidlApi {
 				if (plugin != null) {
 					double lat = intent.getDoubleExtra(AIDL_LATITUDE, Double.NaN);
 					double lon = intent.getDoubleExtra(AIDL_LONGITUDE, Double.NaN);
-					plugin.takePhoto(lat, lon, mapActivity, false);
+					plugin.takePhoto(lat, lon, mapActivity, false, true);
 				}
 			}
 		};
