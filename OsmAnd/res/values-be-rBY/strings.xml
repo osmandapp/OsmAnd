@@ -2810,4 +2810,9 @@ U vypadku, kali vy lubіcie OsmAnd і OSM і chočacie padtrymać jaho, heta іd
     <string name="exit_without_saving">Vyjsci biez zachavańnia?</string>
     <string name="do_not_use_animations">Nie ŭžyvać animacyju</string>
     <string name="do_not_use_animations_descr">Adklučeńnie animacyi ŭ prahramie</string>
+    <string name="move_all_to_history">Pieramiascić usio ŭ historyju</string>
+    <string name="build_route">Pabudavać maršrut</string>
+    <string name="show_direction">Pakazać napramak</string>
+    <string name="sort_by">Sartavać pa</string>
+    <string name="marker_options">Nalady markiera</string>
     </resources>
