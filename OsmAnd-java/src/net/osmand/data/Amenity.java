@@ -10,6 +10,7 @@ import java.io.ByteArrayInputStream;
 import java.io.IOException;
 import java.io.InputStreamReader;
 import java.util.ArrayList;
+import java.util.Arrays;
 import java.util.Collections;
 import java.util.Iterator;
 import java.util.LinkedHashMap;
@@ -269,6 +270,51 @@ public class Amenity extends MapObject {
 
 	public void setOpeningHours(String openingHours) {
 		setAdditionalInfo(OPENING_HOURS, openingHours);
+	}
+	
+	public boolean comparePoi(Amenity thatObj) {
+		if (this.type.getKeyName().equals(thatObj.type.getKeyName())) {
+			boolean equals = true;
+			if (equals) {
+				equals = this.x.size() == thatObj.x.size();
+				if (equals) {
+					for (int i = 0; i < x.size() && equals; i++) {
+						equals = this.x.get(i) == thatObj.x.get(i);
+					}
+				}
+			}
+			if (equals) {
+				equals = this.y.size() == thatObj.y.size();
+				if (equals) {
+					for (int i = 0; i < y.size() && equals; i++) {
+						equals = this.y.get(i) == thatObj.y.get(i);
+					}
+				}
+			}
+			if (equals) {
+				equals = subType.equals(thatObj.subType);
+			}
+			if (equals) {
+				equals = this.additionalInfo.equals(thatObj.additionalInfo);
+			}
+			if (equals) {
+				equals = this.openingHours.equals(thatObj.openingHours);
+			}
+			if (equals) {
+				equals = this.routePoint.deviationDirectionRight == thatObj.routePoint.deviationDirectionRight;
+				if (equals) {
+					equals = this.routePoint.deviateDistance == thatObj.routePoint.deviateDistance;
+				}
+				if (equals) {
+					equals = this.routePoint.pointA.equals(thatObj.routePoint.pointA);
+				}
+				if (equals) {
+					equals = this.routePoint.pointB.equals(thatObj.routePoint.pointB);
+				}
+			}
+			return equals;
+		}
+		return false;
 	}
 	
 	@Override
