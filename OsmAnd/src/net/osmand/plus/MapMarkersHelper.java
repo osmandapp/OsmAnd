@@ -321,6 +321,12 @@ public class MapMarkersHelper {
 		refresh();
 	}
 
+	public void addMapMarker(MapMarker marker) {
+		settings.insertMapMarker(marker.getLatitude(), marker.getLongitude(), marker.pointDescription,
+				marker.colorIndex, marker.selected, marker.creationDate, 0);
+		readFromSettings();
+	}
+
 	public void addMapMarker(LatLon point, PointDescription historyName) {
 		List<LatLon> points = new ArrayList<>(1);
 		List<PointDescription> historyNames = new ArrayList<>(1);

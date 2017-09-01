@@ -40,7 +40,7 @@ public class MapMarkersHistoryAdapter extends RecyclerView.Adapter<MapMarkerItem
 	}
 
 	@Override
-	public void onBindViewHolder(MapMarkerItemViewHolder holder, int pos) {
+	public void onBindViewHolder(final MapMarkerItemViewHolder holder, int pos) {
 		IconsCache iconsCache = app.getIconsCache();
 		MapMarker marker = markers.get(pos);
 
@@ -50,6 +50,18 @@ public class MapMarkersHistoryAdapter extends RecyclerView.Adapter<MapMarkerItem
 		holder.icon.setImageDrawable(iconsCache.getIcon(R.drawable.ic_action_flag_dark, color));
 
 		holder.title.setText(marker.getName(app));
+
+		holder.optionsBtn.setImageDrawable(iconsCache.getThemedIcon(R.drawable.ic_action_refresh_dark));
+		holder.optionsBtn.setOnClickListener(new View.OnClickListener() {
+			@Override
+			public void onClick(View view) {
+				int position = holder.getAdapterPosition();
+				MapMarker marker = markers.get(position);
+				app.getMapMarkersHelper().removeMapMarkerHistory(marker);
+				app.getMapMarkersHelper().addMapMarker(marker);
+				notifyItemRemoved(position);
+			}
+		});
 	}
 
 	@Override

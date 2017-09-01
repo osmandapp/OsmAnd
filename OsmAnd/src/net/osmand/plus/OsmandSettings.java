@@ -2179,8 +2179,8 @@ public class OsmandSettings {
 		}
 
 		public boolean insertPoint(double latitude, double longitude,
-								   PointDescription historyDescription, int colorIndex, int pos,
-								   boolean selected, int index) {
+								   PointDescription historyDescription, int colorIndex,
+								   boolean selected, long creationDate, int index) {
 			List<LatLon> ps = getPoints();
 			List<String> ds = getPointDescriptions(ps.size());
 			List<Integer> cs = getColors(ps.size());
@@ -2190,7 +2190,7 @@ public class OsmandSettings {
 			ds.add(index, PointDescription.serializeToString(historyDescription));
 			cs.add(index, colorIndex);
 			bs.add(index, selected);
-			cds.add(index, System.currentTimeMillis());
+			cds.add(index, creationDate == 0 ? System.currentTimeMillis() : creationDate);
 			if (historyDescription != null && !historyDescription.isSearchingAddress(ctx)) {
 				SearchHistoryHelper.getInstance(ctx).addNewItemToHistory(latitude, longitude, historyDescription);
 			}
@@ -2562,10 +2562,10 @@ public class OsmandSettings {
 	}
 
 	public boolean insertMapMarker(double latitude, double longitude,
-								   PointDescription historyDescription, int colorIndex, int pos,
-								   boolean selected, int index) {
+								   PointDescription historyDescription, int colorIndex,
+								   boolean selected, long creationDate, int index) {
 		return mapMarkersStorage.insertPoint(latitude, longitude, historyDescription, colorIndex,
-				index, selected, pos);
+				selected, creationDate, index);
 	}
 
 	public boolean insertMapMarkers(double[] latitudes, double[] longitudes,
