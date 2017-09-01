@@ -14,6 +14,8 @@ import net.osmand.plus.mapmarkers.adapters.MapMarkersHistoryAdapter;
 
 public class MapMarkersHistoryFragment extends Fragment {
 
+	MapMarkersHistoryAdapter adapter;
+
 	@Nullable
 	@Override
 	public View onCreateView(LayoutInflater inflater, @Nullable ViewGroup container, @Nullable Bundle savedInstanceState) {
@@ -21,8 +23,15 @@ public class MapMarkersHistoryFragment extends Fragment {
 		recyclerView.setLayoutManager(new LinearLayoutManager(getContext()));
 		final MapActivity mapActivity = (MapActivity) getActivity();
 
-		recyclerView.setAdapter(new MapMarkersHistoryAdapter(mapActivity.getMyApplication()));
+		adapter = new MapMarkersHistoryAdapter(mapActivity.getMyApplication());
+		recyclerView.setAdapter(adapter);
 
 		return recyclerView;
+	}
+
+	void updateAdapter() {
+		if (adapter != null) {
+			adapter.notifyDataSetChanged();
+		}
 	}
 }

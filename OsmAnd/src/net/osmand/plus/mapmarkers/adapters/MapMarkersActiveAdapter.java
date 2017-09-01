@@ -89,6 +89,18 @@ public class MapMarkersActiveAdapter extends RecyclerView.Adapter<MapMarkerItemV
 
 		holder.description.setText(marker.creationDate + "");
 
+		holder.optionsBtn.setImageDrawable(iconsCache.getThemedIcon(R.drawable.ic_action_remove_dark));
+		holder.optionsBtn.setOnClickListener(new View.OnClickListener() {
+			@Override
+			public void onClick(View view) {
+				int position = holder.getAdapterPosition();
+				MapMarker marker = markers.get(position);
+				mapActivity.getMyApplication().getMapMarkersHelper().removeMapMarker(marker.index);
+				mapActivity.getMyApplication().getMapMarkersHelper().addMapMarkerHistory(marker);
+				notifyItemRemoved(position);
+			}
+		});
+
 		DashLocationFragment.updateLocationView(useCenter, location,
 				heading, holder.iconDirection, holder.distance,
 				marker.getLatitude(), marker.getLongitude(),

@@ -39,8 +39,6 @@ public class MapMarkersHistoryAdapter extends RecyclerView.Adapter<MapMarkerItem
 		holder.icon.setImageDrawable(iconsCache.getIcon(R.drawable.ic_action_flag_dark, color));
 
 		holder.title.setText(marker.getName(app));
-
-		holder.description.setText(marker.creationDate + "");
 	}
 
 	@Override
