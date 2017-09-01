@@ -16,15 +16,26 @@ public class MapMarkersHistoryAdapter extends RecyclerView.Adapter<MapMarkerItem
 
 	private OsmandApplication app;
 	private List<MapMarker> markers;
+	private MapMarkersHistoryAdapterListener listener;
 
 	public MapMarkersHistoryAdapter(OsmandApplication app) {
 		this.app = app;
 		markers = app.getMapMarkersHelper().getMapMarkersHistory();
 	}
 
+	public void setAdapterListener(MapMarkersHistoryAdapterListener listener) {
+		this.listener = listener;
+	}
+
 	@Override
 	public MapMarkerItemViewHolder onCreateViewHolder(ViewGroup viewGroup, int i) {
 		View view = LayoutInflater.from(viewGroup.getContext()).inflate(R.layout.map_marker_item_new, viewGroup, false);
+		view.setOnClickListener(new View.OnClickListener() {
+			@Override
+			public void onClick(View view) {
+				listener.onItemClick(view);
+			}
+		});
 		return new MapMarkerItemViewHolder(view);
 	}
 
@@ -44,5 +55,14 @@ public class MapMarkersHistoryAdapter extends RecyclerView.Adapter<MapMarkerItem
 	@Override
 	public int getItemCount() {
 		return markers.size();
+	}
+
+	public MapMarker getItem(int position) {
+		return markers.get(position);
+	}
+
+	public interface MapMarkersHistoryAdapterListener {
+
+		void onItemClick(View view);
 	}
 }
