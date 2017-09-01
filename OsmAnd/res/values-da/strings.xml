@@ -2861,4 +2861,9 @@ Tidligere destination bliver sidste mellemliggende punkt.</string>
     <string name="exit_without_saving">Afslut uden at gemme?</string>
     <string name="do_not_use_animations">Brug ikke animationer</string>
     <string name="do_not_use_animations_descr">Deaktiverer animationer i programmet</string>
+    <string name="move_all_to_history">Flyt alle til historik</string>
+    <string name="build_route">Byg rute</string>
+    <string name="show_direction">Vis retning</string>
+    <string name="sort_by">Sorter efter</string>
+    <string name="marker_options">Markør indstillinger</string>
     </resources>
