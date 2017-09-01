@@ -1099,7 +1099,7 @@ Proportionaler Speicher %4$s MB (Android Limit %5$s MB, Dalvik %6$s MB).</string
 	<string name="osmand_srtm_long_description_1000_chars">Diese Erweiterung beinhaltet Höhenlinien und Relief-Schattierungen, die als Ergänzung zu den Standard-Offline-Karten von OsmAnd angezeigt werden können. Diese Funktionalität ist vor allem für Sportler, Wanderer, Radfahrer, Trekker und jeden interessant, der sich für das Geländerelief einer Landschaft interessiert. 
 \n 
 \nDie globalen Daten (zwischen 70° Nord und 70° Süd) basieren auf Messungen von SRTM (Shuttle Radar Topography Mission) und ASTER (Advanced Spaceborne Thermal Emission and Reflection Radiometer), einem bildgebenden System an Bord des Satelliten Terra, dem Flaggschiff des NASA-Erd-Beobachtungsprogramms. ASTER beruht auf der erfolgreichen Zusammenarbeit zwischen der NASA, dem japanischen Ministerium für Wirtschaft, Handel und Industrie und dem japanischen Raumfahrtprogramm (J-spacesystems).</string>
-	<string name="stop_routing_confirm">Wollen Sie die Navigation wirklich beenden?</string>
+	<string name="stop_routing_confirm">Sind Sie sicher, dass Sie die Navigation stoppen möchten?</string>
 	<string name="clear_dest_confirm">Sind Sie sicher, dass Sie Ihr Ziel (und die Zwischenziele) löschen möchten?</string>
 	<string name="precise_routing_mode_descr">Aktivieren, um Routen fehlerfrei zu berechnen. Diese Funktion ist weiterhin auf kurze Entfernung begrenzt und langsam.</string>
 	<string name="precise_routing_mode">Präzises Routing (experimentell)</string>
@@ -1131,7 +1131,7 @@ Proportionaler Speicher %4$s MB (Android Limit %5$s MB, Dalvik %6$s MB).</string
 	<string name="available_downloads_left">Es können noch %1$d Dateien herunter geladen werden.</string>
 	<string name="install_paid">Vollversion</string>
 	<string name="cancel_navigation">Navigation stoppen</string>
-	<string name="cancel_route">Route verwerfen</string>
+	<string name="cancel_route">Route ablehnen</string>
 	<string name="use_kalman_filter_compass_descr">Kompass-Rauschreduzierung (erhöht die Kompassträgheit etwas)</string>
 	<string name="use_kalman_filter_compass">Kalman-Filter verwenden</string>
 	<string name="use_magnetic_sensor_descr">Für den Kompass Magnetsensor statt Lagesensor verwenden</string>
@@ -1183,9 +1183,9 @@ Proportionaler Speicher %4$s MB (Android Limit %5$s MB, Dalvik %6$s MB).</string
 	<string name="new_directions_point_dialog">Es sind bereits Zwischenziele gesetzt.</string>
 	<string name="context_menu_item_directions_to">Navigiere zu</string>
 	<string name="route_descr_map_location">Karte:</string>
-	<string name="route_to">nach:</string>
-	<string name="route_via">über:</string>
-	<string name="route_from">von:</string>
+	<string name="route_to">Nach:</string>
+	<string name="route_via">Über:</string>
+	<string name="route_from">Von:</string>
 	<string name="osb_author_dialog_password">OSM-Passwort (optional)</string>
 	<string name="context_menu_item_directions_from">Navigiere von</string>
 	<string name="av_camera_focus_hiperfocal">Hyperfokaler Fokus</string>
@@ -1273,10 +1273,10 @@ Proportionaler Speicher %4$s MB (Android Limit %5$s MB, Dalvik %6$s MB).</string
 	<string name="route_preferences">Routing-Einstellungen</string>
 	<string name="route_info">Routen-Informationen</string>
 	<string name="calculate_osmand_route_without_internet">OsmAnd-Route ohne Internetverbindung berechnen</string>
-	<string name="use_displayed_track_for_navigation">Soll der angezeigte Track zum Navigieren genutzt werden?</string>
+	<string name="use_displayed_track_for_navigation">Möchten Sie die angezeigte Strecke zur Navigation verwenden?</string>
 	<string name="keep_and_add_destination_point">Als letztes Ziel hinzufügen</string>
 	<string name="select_gpx">GPX-Datei auswählen…</string>
-	<string name="route_descr_select_destination">Ziel wählen</string>
+	<string name="route_descr_select_destination">Ziel auswählen</string>
 	<string name="interrupt_music_descr">Sprachansagen pausieren (nicht nur dämpfen) Musikwiedergabe</string>
 	<string name="always_center_position_on_map">Standort immer in Bildschirmmitte anzeigen</string>
 	<string name="voice_pref_title">Stimme</string>
@@ -1284,7 +1284,7 @@ Proportionaler Speicher %4$s MB (Android Limit %5$s MB, Dalvik %6$s MB).</string
 	<string name="share_route_as_gpx">Route als GPX-Datei teilen</string>
 	<string name="share_route_subject">Route über OsmAnd teilen</string>
 	<string name="localization_pref_title">Ländereinstellungen</string>
-	<string name="interrupt_music">Musikwiedergabe pausieren</string>
+	<string name="interrupt_music">Musik pausieren</string>
 	<string name="navigation_intent_invalid">Ungültiges Format: %s</string>
 	<string name="shared_string_share">Teilen</string>
 	<string name="share_fav_subject">Über OsmAnd geteilte Favoriten</string>
@@ -1308,7 +1308,7 @@ Proportionaler Speicher %4$s MB (Android Limit %5$s MB, Dalvik %6$s MB).</string
 	<string name="save_as_favorites_points">als Favoritengruppe speichern</string>
 	<string name="select_destination_and_intermediate_points">Ziele auswählen</string>
 	<string name="sort_by_distance">Nach Entfernung sortieren</string>
-	<string name="sort_by_name">Nach Namen sortieren</string>
+	<string name="sort_by_name">Nach Name sortieren</string>
 	
 	<string name="show_zoom_buttons_navigation_descr">Zoomtasten bei Navigation anzeigen</string>
 	<string name="show_zoom_buttons_navigation">Zoomtasten anzeigen</string>
@@ -1717,9 +1717,9 @@ Mit Neuanmeldung fortfahren?</string>
     <string name="settings_privacy">Privatsphäre</string>
     <string name="points">Punkte</string>
     
-    <string name="shared_string_my_location">Mein Standort</string>
+    <string name="shared_string_my_location">Meine Position</string>
 
-    <string name="navigation_over_track">Navigation der Strecke entlang starten?</string>
+    <string name="navigation_over_track">Navigation entlang der Strecke starten?</string>
     <string name="avoid_roads_msg">Sie können die Route ändern, indem Sie Straßen auswählen, die vermieden werden sollen</string>
     <string name="enable_proxy_title">HTTP-Proxy aktivieren</string>
     <string name="enable_proxy_descr">HTTP-Proxy für alle Netzwerkanfragen einrichten</string>
@@ -2687,7 +2687,7 @@ Abgedeckte Fläche: %1$s x %2$s</string>
     <string name="edit_name">Namen ändern</string>
     <string name="animate_my_location">Meine Position animieren</string>
     <string name="animate_my_location_desc">Animation meiner Position während der Navigation aktivieren</string>
-    <string name="route_is_too_long_v2">Die Route ist für eine Berechnung unter Umständen zu lang. Fügen Sie bitte Zwischenstopps ein, wenn nach 10 Minuten kein Routenvorschlag erscheint.</string>
+    <string name="route_is_too_long_v2">Diese Route könnte zu lang sein, um berechnet zu werden. Bitte fügen Sie Zwischenziele hinzu, wenn innerhalb von 10 Minuten kein Ergebnis gefunden wird.</string>
     <string name="save_poi_too_many_uppercase">Der Name enthält zu viele Großbuchstaben. Möchten Sie den Vorgang fortsetzen?</string>
     <string name="display_zoom_level">Darstellung ab Zoomstufe: %1$s</string>
     <string name="routing_attr_allow_private_name">Privatwege erlauben</string>
