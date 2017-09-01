@@ -2617,7 +2617,7 @@ Abgedeckte Fläche: %1$s x %2$s</string>
     <string name="do_not_send_anonymous_app_usage">Keine anonymen App-Nutzungsdaten versenden</string>
     <string name="do_not_send_anonymous_app_usage_desc">OsmAnd sammelt Informationen über durch Sie geöffnete App-Teile. Es wird niemals Ihre Position noch irgendeine Ihrer App-Eingaben oder Einzelheiten zu den von Ihnen betrachteten, gesuchten oder heruntergeladenen Gebieten versandt.</string>
     <string name="do_not_show_startup_messages">Keine Meldungen beim App-Start einblenden</string>
-    <string name="do_not_show_startup_messages_desc">Unterdrückt Meldungen zu App-Angeboten und besonde lokale Ereignisse</string>
+    <string name="do_not_show_startup_messages_desc">Unterdrückt Meldungen zu App-Sonderangeboten und besonderen lokalen Ereignissen</string>
     <string name="parking_options">Parkmöglichkeiten</string>
     <string name="full_version_thanks">Vielen Dank, dass Sie die Vollversion von OsmAnd erworben haben!</string>
     <string name="routing_attr_relief_smoothness_factor_hills_name">Bergig</string>
