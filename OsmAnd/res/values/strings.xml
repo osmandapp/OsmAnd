@@ -9,6 +9,8 @@
          3. All your modified/created strings are in the top of the file (to make easier find what\'s translated).
     PLEASE: Have a look at http://code.google.com/p/osmand/wiki/UIConsistency, it may really improve your and our work  :-)  Thx - Hardy
     -->
+    <string name="speed_for_map_to_direction_of_movement">Speed for map to direction of movement</string>
+    <string name="speed_for_map_to_direction_of_movement_descr">Specify speed when map should rotate to direction of movement instead of compass</string>
     <string name="move_all_to_history">Move all to history</string>
     <string name="build_route">Build route</string>
     <string name="show_direction">Show direction</string>
