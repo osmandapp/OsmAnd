@@ -2651,26 +2651,24 @@ représentant la zone : %1$s x %2$s</string>
 \n • Signalez des anomalies
 \n • Envoyez des traces GPX vers OSM directement depuis l\'application
 \n • Ajoutez des Points d\'Intérêt et envoyez-les vers OSM (immédiatement ou plus tard si vous êtes hors-ligne)</string>
-    <string name="osmand_plus_extended_description_part8">" Couverture et qualité des cartes (de 1 à 4 étoiles)
-\n • Europe de l\'Ouest : **** (4)
-\n • Europe de l\'Est : *** (3)
-\n • Russie : *** (3)
-\n • Amérique du Nord : *** (3)
-\n • Amérique du Sud : ** (2)
-\n • Asie : ** (2)
-\n • Japon et Corée : *** (3)
-\n • Moyen-Orient : ** (2)
-\n • Afrique : ** (2)
-\n • Antarctique : * (1)
-\n La grande majorité des pays sont couverts de l\'Afghanistan au Zimbabwe, téléchargez les cartes dont vous avez besoin ! "</string>
+    <string name="osmand_plus_extended_description_part8">Couverture et qualité des cartes (de 1 à 4 étoiles) 
+\n • Europe de l\'Ouest : **** (4) 
+\n • Europe de l\'Est : *** (3) 
+\n • Russie : *** (3) 
+\n • Amérique du Nord : *** (3) 
+\n • Amérique du Sud : ** (2) 
+\n • Asie : ** (2) 
+\n • Japon et Corée : *** (3) 
+\n • Moyen-Orient : ** (2) 
+\n • Afrique : ** (2) 
+\n • Antarctique : * (1) 
+\n La grande majorité des pays sont couverts de l\'Afghanistan au Zimbabwe, téléchargez les cartes dont vous avez besoin !</string>
     <string name="fonts_header">Polices pour les textes de la carte</string>
-    <string name="osmand_plus_extended_description_part5">"
- Fonctionnalités liées à la sécurité
- • Bascule automatique en mode jour / nuit (option)
- • Affichage des limitations de vitesse avec rappels en cas de dépassement (option)
- • Zoom adapté à la vitesse (option)
- • Partage de votre position pour que n\'importe qui puisse vous rejoindre rapidement
- "</string>
+    <string name="osmand_plus_extended_description_part5">Fonctions liées à la sécurité
+\n • Bascule automatique en mode jour / nuit (option)
+\n • Affichage des limitations de vitesse avec rappels en cas de dépassement (option)
+\n • Zoom adapté à la vitesse (option)
+\n • Partage de votre position afin qu\'on puisse vous rejoindre rapidement</string>
     <string name="restore_purchases">Restaurer vos achats</string>
     <string name="shared_string_visible">Visible</string>
     <string name="osmand_plus_extended_description_part7">"
@@ -2722,15 +2720,13 @@ Fonctionnalités principales :
     <string name="shared_string_overview">Vue d\'ensemble</string>
     <string name="animate_my_location_desc">Activer l\'animation de votre position pendant la navigation</string>
     <string name="animate_my_location">Animer ma position</string>
-    <string name="osmand_plus_extended_description_part6">"
- Fonctionnalités adaptées aux cyclistes et piétons
- • Affichage des itinéraires piétons et des circuits de randonnée ou encore des pistes cyclables; idéal pour les activités de plein air
- • Modes de guidage adaptés aux cyclistes et piétons
- • Affichage des arrêts de transports publics (bus, tram, train) avec identification des lignes (option)
- • Enregistrement GPX du trajet en local ou en ligne (option)
- • Affichage de la vitesse et de l\'altitude (option)
- • Affichage des courbes de niveaux et ombrage du relief (nécessite un greffon additionnel)
- "</string>
+    <string name="osmand_plus_extended_description_part6">Fonctions adaptées aux cyclistes et piétons
+\n • Affichage des itinéraires piétons et des circuits de randonnée ou encore des pistes cyclables; idéal pour les activités de plein air
+\n • Modes de guidage adaptés aux cyclistes et piétons
+\n • Affichage des arrêts de transports publics (bus, tram, train) avec identification des lignes (option)
+\n • Enregistrement GPX du trajet en local ou en ligne (option)
+\n • Affichage de la vitesse et de l\'altitude (option)
+\n • Affichage des courbes de niveaux et ombrage du relief (nécessite un greffon additionnel)</string>
     <string name="favorite_group_name">Nom du groupe</string>
     <string name="change_color">Modifier la couleur</string>
     <string name="edit_name">Modifier le nom</string>
@@ -2890,4 +2886,9 @@ Fonctionnalités principales :
 \n• Arrêts de transports publics (bus, tram, train), incluant les noms de lignes, pour vous aider dans vos déplacements en ville
 \n• Guidage de navigation piéton en suivant les itinéraires piétons
 \n• Vous pouvez charger et suivre une trace GPX existante; enregistrer et partager un nouvel itinéraire GPX</string>
+    <string name="move_all_to_history">Déplacer tout dans l\'historique</string>
+    <string name="build_route">Calculer l\'itinéraire</string>
+    <string name="show_direction">Afficher les indications de direction</string>
+    <string name="sort_by">Trier par</string>
+    <string name="marker_options">Options de la marque</string>
     </resources>
