@@ -406,7 +406,7 @@ public class OsmandAidlApi {
 				if (plugin != null) {
 					double lat = intent.getDoubleExtra(AIDL_LATITUDE, Double.NaN);
 					double lon = intent.getDoubleExtra(AIDL_LONGITUDE, Double.NaN);
-					plugin.recordVideo(lat, lon, mapActivity);
+					plugin.recordVideo(lat, lon, mapActivity, true);
 				}
 			}
 		};

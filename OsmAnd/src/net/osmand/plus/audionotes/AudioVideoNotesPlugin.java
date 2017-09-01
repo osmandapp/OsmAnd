@@ -641,7 +641,7 @@ public class AudioVideoNotesPlugin extends OsmandPlugin {
 
 					@Override
 					public boolean onContextMenuClick(ArrayAdapter<ContextMenuItem> adapter, int itemId, int pos, boolean isChecked) {
-						recordVideo(latitude, longitude, mapActivity);
+						recordVideo(latitude, longitude, mapActivity, false);
 						return true;
 					}
 				})
@@ -769,7 +769,7 @@ public class AudioVideoNotesPlugin extends OsmandPlugin {
 
 	private void takeAction(final MapActivity mapActivity, double lon, double lat, int action) {
 		if (action == AV_DEFAULT_ACTION_VIDEO) {
-			recordVideo(lat, lon, mapActivity);
+			recordVideo(lat, lon, mapActivity, false);
 		} else if (action == AV_DEFAULT_ACTION_TAKEPICTURE) {
 			takePhoto(lat, lon, mapActivity, false, false);
 		} else if (action == AV_DEFAULT_ACTION_AUDIO) {
@@ -874,8 +874,8 @@ public class AudioVideoNotesPlugin extends OsmandPlugin {
 		}
 	}
 
-	public void recordVideo(final double lat, final double lon, final MapActivity mapActivity) {
-		if (AV_EXTERNAL_RECORDER.get()) {
+	public void recordVideo(final double lat, final double lon, final MapActivity mapActivity, final boolean forceExternal) {
+		if (AV_EXTERNAL_RECORDER.get() || forceExternal) {
 			captureVideoExternal(lat, lon, mapActivity);
 		} else {
 			if (ActivityCompat.checkSelfPermission(mapActivity, Manifest.permission.CAMERA)
