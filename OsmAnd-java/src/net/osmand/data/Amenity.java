@@ -301,16 +301,7 @@ public class Amenity extends MapObject {
 				equals = this.openingHours.equals(thatObj.openingHours);
 			}
 			if (equals) {
-				equals = this.routePoint.deviationDirectionRight == thatObj.routePoint.deviationDirectionRight;
-				if (equals) {
-					equals = this.routePoint.deviateDistance == thatObj.routePoint.deviateDistance;
-				}
-				if (equals) {
-					equals = this.routePoint.pointA.equals(thatObj.routePoint.pointA);
-				}
-				if (equals) {
-					equals = this.routePoint.pointB.equals(thatObj.routePoint.pointB);
-				}
+				equals = this.routePoint == thatObj.routePoint;
 			}
 			return equals;
 		}
