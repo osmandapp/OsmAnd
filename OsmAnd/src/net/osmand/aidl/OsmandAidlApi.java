@@ -2,11 +2,13 @@ package net.osmand.aidl;
 
 import android.content.BroadcastReceiver;
 import android.content.Context;
+import android.content.DialogInterface;
 import android.content.Intent;
 import android.content.IntentFilter;
 import android.net.Uri;
 import android.os.AsyncTask;
 import android.os.ParcelFileDescriptor;
+import android.support.v7.app.AlertDialog;
 import android.view.View;
 
 import net.osmand.IndexConstants;
@@ -22,6 +24,7 @@ import net.osmand.aidl.mapwidget.AMapWidget;
 import net.osmand.data.FavouritePoint;
 import net.osmand.data.LatLon;
 import net.osmand.data.PointDescription;
+import net.osmand.plus.ApplicationMode;
 import net.osmand.plus.FavouritesDbHelper;
 import net.osmand.plus.GPXDatabase.GpxDataItem;
 import net.osmand.plus.GPXUtilities;
@@ -32,11 +35,13 @@ import net.osmand.plus.MapMarkersHelper;
 import net.osmand.plus.MapMarkersHelper.MapMarker;
 import net.osmand.plus.OsmandApplication;
 import net.osmand.plus.OsmandPlugin;
+import net.osmand.plus.TargetPointsHelper;
 import net.osmand.plus.activities.MapActivity;
 import net.osmand.plus.audionotes.AudioVideoNotesPlugin;
 import net.osmand.plus.dialogs.ConfigureMapMenu;
 import net.osmand.plus.helpers.ColorDialogs;
 import net.osmand.plus.monitoring.OsmandMonitoringPlugin;
+import net.osmand.plus.routing.RoutingHelper;
 import net.osmand.plus.views.AidlMapLayer;
 import net.osmand.plus.views.MapInfoLayer;
 import net.osmand.plus.views.OsmandMapLayer;
@@ -66,6 +71,15 @@ public class OsmandAidlApi {
 	private static final String AIDL_ZOOM = "aidl_zoom";
 	private static final String AIDL_ANIMATED = "aidl_animated";
 
+	private static final String AIDL_START_NAME = "aidl_start_name";
+	private static final String AIDL_START_LAT = "aidl_start_lat";
+	private static final String AIDL_START_LON = "aidl_start_lon";
+	private static final String AIDL_DEST_NAME = "aidl_dest_name";
+	private static final String AIDL_DEST_LAT = "aidl_dest_lat";
+	private static final String AIDL_DEST_LON = "aidl_dest_lon";
+	private static final String AIDL_PROFILE = "aidl_profile";
+	private static final String AIDL_FORCE = "aidl_force";
+
 	private static final String AIDL_OBJECT_ID = "aidl_object_id";
 
 	private static final String AIDL_ADD_MAP_WIDGET = "aidl_add_map_widget";
@@ -78,6 +92,16 @@ public class OsmandAidlApi {
 	private static final String AIDL_START_VIDEO_RECORDING = "aidl_start_video_recording";
 	private static final String AIDL_START_AUDIO_RECORDING = "aidl_start_audio_recording";
 	private static final String AIDL_STOP_RECORDING = "aidl_stop_recording";
+
+	private static final String AIDL_NAVIGATE = "aidl_navigate";
+
+	private static final ApplicationMode DEFAULT_PROFILE = ApplicationMode.CAR;
+
+	private static final ApplicationMode[] VALID_PROFILES = new ApplicationMode[]{
+			ApplicationMode.CAR,
+			ApplicationMode.BICYCLE,
+			ApplicationMode.PEDESTRIAN
+	};
 
 	private OsmandApplication app;
 	private Map<String, AMapWidget> widgets = new ConcurrentHashMap<>();
@@ -95,6 +119,7 @@ public class OsmandAidlApi {
 	private BroadcastReceiver startVideoRecordingReceiver;
 	private BroadcastReceiver startAudioRecordingReceiver;
 	private BroadcastReceiver stopRecordingReceiver;
+	private BroadcastReceiver navigateReceiver;
 
 	public OsmandAidlApi(OsmandApplication app) {
 		this.app = app;
@@ -111,6 +136,7 @@ public class OsmandAidlApi {
 		registerStartVideoRecordingReceiver(mapActivity);
 		registerStartAudioRecordingReceiver(mapActivity);
 		registerStopRecordingReceiver(mapActivity);
+		registerNavigateReceiver(mapActivity);
 	}
 
 	public void onDestroyMapActivity(final MapActivity mapActivity) {
@@ -196,6 +222,14 @@ public class OsmandAidlApi {
 				e.printStackTrace();
 			}
 			stopRecordingReceiver = null;
+		}
+		if (navigateReceiver != null) {
+			try {
+				mapActivity.unregisterReceiver(navigateReceiver);
+			} catch (IllegalArgumentException e) {
+				e.printStackTrace();
+			}
+			navigateReceiver = null;
 		}
 	}
 
@@ -405,6 +439,98 @@ public class OsmandAidlApi {
 			}
 		};
 		mapActivity.registerReceiver(stopRecordingReceiver, new IntentFilter(AIDL_STOP_RECORDING));
+	}
+
+	private void registerNavigateReceiver(final MapActivity mapActivity) {
+		navigateReceiver = new BroadcastReceiver() {
+			@Override
+			public void onReceive(Context context, Intent intent) {
+				String profileStr = intent.getStringExtra(AIDL_PROFILE);
+				final ApplicationMode profile = ApplicationMode.valueOfStringKey(profileStr, DEFAULT_PROFILE);
+				boolean validProfile = false;
+				for (ApplicationMode mode : VALID_PROFILES) {
+					if (mode == profile) {
+						validProfile = true;
+						break;
+					}
+				}
+				if (validProfile) {
+					String startName = intent.getStringExtra(AIDL_START_NAME);
+					if (Algorithms.isEmpty(startName)) {
+						startName = "";
+					}
+					String destName = intent.getStringExtra(AIDL_DEST_NAME);
+					if (Algorithms.isEmpty(destName)) {
+						destName = "";
+					}
+
+					final LatLon start;
+					final PointDescription startDesc;
+					double startLat = intent.getDoubleExtra(AIDL_START_LAT, 0);
+					double startLon = intent.getDoubleExtra(AIDL_START_LON, 0);
+					if (startLat != 0 && startLon != 0) {
+						start = new LatLon(startLat, startLon);
+						startDesc = new PointDescription(PointDescription.POINT_TYPE_LOCATION, startName);
+					} else {
+						start = null;
+						startDesc = null;
+					}
+
+					double destLat = intent.getDoubleExtra(AIDL_DEST_LAT, 0);
+					double destLon = intent.getDoubleExtra(AIDL_DEST_LON, 0);
+					final LatLon dest = new LatLon(destLat, destLon);
+					final PointDescription destDesc = new PointDescription(PointDescription.POINT_TYPE_LOCATION, destName);
+
+					final RoutingHelper routingHelper = app.getRoutingHelper();
+					boolean force = intent.getBooleanExtra(AIDL_FORCE, true);
+					if (routingHelper.isFollowingMode() && !force) {
+						AlertDialog dlg = mapActivity.getMapActions().stopNavigationActionConfirm();
+						dlg.setOnDismissListener(new DialogInterface.OnDismissListener() {
+
+							@Override
+							public void onDismiss(DialogInterface dialog) {
+								if (!routingHelper.isFollowingMode()) {
+									startNavigation(mapActivity, null, start, startDesc, dest, destDesc, profile);
+								}
+							}
+						});
+					} else {
+						startNavigation(mapActivity, null, start, startDesc, dest, destDesc, profile);
+					}
+				}
+			}
+		};
+		mapActivity.registerReceiver(navigateReceiver, new IntentFilter(AIDL_NAVIGATE));
+	}
+
+	private void startNavigation(MapActivity mapActivity,
+								 GPXFile gpx,
+								 LatLon from, PointDescription fromDesc,
+								 LatLon to, PointDescription toDesc,
+								 ApplicationMode mode) {
+		OsmandApplication app = mapActivity.getMyApplication();
+		RoutingHelper routingHelper = app.getRoutingHelper();
+		if (gpx == null) {
+			app.getSettings().APPLICATION_MODE.set(mode);
+			final TargetPointsHelper targets = mapActivity.getMyApplication().getTargetPointsHelper();
+			targets.removeAllWayPoints(false, true);
+			targets.navigateToPoint(to, true, -1, toDesc);
+		}
+		mapActivity.getMapActions().enterRoutePlanningModeGivenGpx(gpx, from, fromDesc, true, false);
+		if (!app.getTargetPointsHelper().checkPointToNavigateShort()) {
+			mapActivity.getMapLayers().getMapControlsLayer().getMapRouteInfoMenu().show();
+		} else {
+			if (app.getSettings().APPLICATION_MODE.get() != routingHelper.getAppMode()) {
+				app.getSettings().APPLICATION_MODE.set(routingHelper.getAppMode());
+			}
+			mapActivity.getMapViewTrackingUtilities().backToLocationImpl();
+			app.getSettings().FOLLOW_THE_ROUTE.set(true);
+			routingHelper.setFollowingMode(true);
+			routingHelper.setRoutePlanningMode(false);
+			mapActivity.getMapViewTrackingUtilities().switchToRoutePlanningMode();
+			app.getRoutingHelper().notifyIfRouteIsCalculated();
+			routingHelper.setCurrentLocation(app.getLocationProvider().getLastKnownLocation(), false);
+		}
 	}
 
 	public void registerMapLayers(MapActivity mapActivity) {
@@ -1000,6 +1126,21 @@ public class OsmandAidlApi {
 	boolean stopRecording() {
 		Intent intent = new Intent();
 		intent.setAction(AIDL_STOP_RECORDING);
+		app.sendBroadcast(intent);
+		return true;
+	}
+
+	boolean navigate(String startName, double startLat, double startLon, String destName, double destLat, double destLon, String profile, boolean force) {
+		Intent intent = new Intent();
+		intent.setAction(AIDL_NAVIGATE);
+		intent.putExtra(AIDL_START_NAME, startName);
+		intent.putExtra(AIDL_START_LAT, startLat);
+		intent.putExtra(AIDL_START_LON, startLon);
+		intent.putExtra(AIDL_DEST_NAME, destName);
+		intent.putExtra(AIDL_DEST_LAT, destLat);
+		intent.putExtra(AIDL_DEST_LON, destLon);
+		intent.putExtra(AIDL_PROFILE, profile);
+		intent.putExtra(AIDL_FORCE, force);
 		app.sendBroadcast(intent);
 		return true;
 	}

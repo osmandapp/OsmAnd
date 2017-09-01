@@ -31,6 +31,7 @@ import net.osmand.aidl.mapmarker.UpdateMapMarkerParams;
 import net.osmand.aidl.mapwidget.AddMapWidgetParams;
 import net.osmand.aidl.mapwidget.RemoveMapWidgetParams;
 import net.osmand.aidl.mapwidget.UpdateMapWidgetParams;
+import net.osmand.aidl.navigation.NavigateParams;
 import net.osmand.aidl.note.StartAudioRecordingParams;
 import net.osmand.aidl.note.StopRecordingParams;
 import net.osmand.aidl.note.TakePhotoNoteParams;
@@ -376,6 +377,15 @@ public class OsmandAidlService extends Service {
 		public boolean stopRecording(StopRecordingParams params) throws RemoteException {
 			try {
 				return getApi().stopRecording();
+			} catch (Exception e) {
+				return false;
+			}
+		}
+
+		@Override
+		public boolean navigate(NavigateParams params) throws RemoteException {
+			try {
+				return params != null && getApi().navigate(params.getStartName(), params.getStartLat(), params.getStartLon(), params.getDestName(), params.getDestLat(), params.getDestLon(), params.getProfile(), params.getForce());
 			} catch (Exception e) {
 				return false;
 			}
