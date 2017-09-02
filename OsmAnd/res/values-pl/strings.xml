@@ -2835,4 +2835,9 @@ Reprezentuje obszar: %1$s x %2$s</string>
     <string name="exit_without_saving">Czy wyjść bez zapisywania?</string>
     <string name="do_not_use_animations">Wyłącz animacje</string>
     <string name="do_not_use_animations_descr">Wyłącz animacje w programie</string>
+    <string name="move_all_to_history">Przenieś wszystkie do historii</string>
+    <string name="build_route">Oblicz trasę</string>
+    <string name="show_direction">Pokaż kierunek</string>
+    <string name="sort_by">Sortuj według</string>
+    <string name="marker_options">Opcje znacznika</string>
     </resources>
