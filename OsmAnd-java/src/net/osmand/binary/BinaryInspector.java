@@ -74,15 +74,16 @@ public class BinaryInspector {
 			in.inspector(new String[] {
 
 //					"-vpoi",
-					"-vmap", "-vmapobjects", // "-vmapcoordinates",
-//					"-vrouting",
+//					"-vmap", "-vmapobjects", 
+					"-vmapcoordinates",
+					"-vrouting",
 //					"-vtransport",
 //					"-vaddress", "-vcities","-vstreetgroups",
 //					"-vstreets", "-vbuildings", "-vintersections",
 //					"-lang=ru",
 //					"-bbox=30.4981,50.4424,30.5195,50.4351",
 //					"-osm="+System.getProperty("maps.dir")+"/map_full.obf.osm",
-					System.getProperty("maps.dir")+"/diff/Diff.obf"
+					System.getProperty("maps.dir")+"/diff/17_08_29_22_00.diff.obf"
 //					System.getProperty("maps.dir")+"../temp/kiev/Ukraine_kiev-city_europe_17_06_05.obf",
 //					System.getProperty("maps.dir")+"Ukraine_kiev-city_europe_2.obf",
 			});
@@ -923,7 +924,7 @@ public class BinaryInspector {
 	}
 
 
-	private static void printMapDetails(BinaryMapDataObject obj, StringBuilder b, boolean vmapCoordinates) {
+	public static void printMapDetails(BinaryMapDataObject obj, StringBuilder b, boolean vmapCoordinates) {
 		boolean multipolygon = obj.getPolygonInnerCoordinates() != null && obj.getPolygonInnerCoordinates().length > 0;
 		if (multipolygon) {
 			b.append("Multipolygon");

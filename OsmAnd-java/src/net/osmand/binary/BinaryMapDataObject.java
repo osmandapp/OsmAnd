@@ -283,7 +283,8 @@ public class BinaryMapDataObject {
 			
 			return equals;
 		}
-		
+//		thatObj.mapIndex.decodeType(thatObj.types[0])
+//		mapIndex.decodeType(types[0]) id >>7
 		return false;
 	}
 
