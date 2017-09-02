@@ -2777,5 +2777,5 @@ Indikas lokon:  %1$s x %2$s"</string>
     <string name="build_route">Kalkuli kurson</string>
     <string name="show_direction">Montri direkton</string>
     <string name="sort_by">Ordigi laŭ</string>
-    <string name="marker_options">Markaj agordoj</string>
+    <string name="marker_options">Agordo de marko</string>
     </resources>
