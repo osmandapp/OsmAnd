@@ -397,6 +397,10 @@ public class RouteDataObject {
 	public int getRestrictionType(int i) {
 		return (int) (restrictions[i] & RESTRICTION_MASK);
 	}
+	
+	public long getRawRestriction(int i) {
+		return restrictions[i];
+	}
 
 	public long getRestrictionId(int i) {
 		return restrictions[i] >> RESTRICTION_SHIFT;
