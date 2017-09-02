@@ -200,7 +200,6 @@ public class BinaryMapDataObject {
 		if(this.objectType == thatObj.objectType
 				&& this.id == thatObj.id
 				&& this.area == thatObj.area 
-				&& Arrays.equals(this.polygonInnerCoordinates, thatObj.polygonInnerCoordinates)
 				&& Arrays.equals(this.coordinates, thatObj.coordinates) ) {
 			if(mapIndex == null) {
 				throw new IllegalStateException("Illegal binary object: " + id);
@@ -208,7 +207,26 @@ public class BinaryMapDataObject {
 			if(thatObj.mapIndex == null) {
 				throw new IllegalStateException("Illegal binary object: " + thatObj.id);
 			}
+			
 			boolean equals = true;
+			if(equals) {
+				if(polygonInnerCoordinates == null || thatObj.polygonInnerCoordinates == null) {
+					equals = polygonInnerCoordinates == thatObj.polygonInnerCoordinates; 
+				} else if(polygonInnerCoordinates.length != thatObj.polygonInnerCoordinates.length){
+					equals = false;
+				} else {
+					for(int i = 0; i < polygonInnerCoordinates.length && equals; i++) {
+						if(polygonInnerCoordinates[i] == null || thatObj.polygonInnerCoordinates[i] == null) {
+							equals = polygonInnerCoordinates[i] == thatObj.polygonInnerCoordinates[i]; 
+						} else if(polygonInnerCoordinates[i].length != thatObj.polygonInnerCoordinates[i].length){
+							equals = false;
+						} else {
+							equals = Arrays.equals(polygonInnerCoordinates[i], thatObj.polygonInnerCoordinates[i]);
+						}
+					}
+				}
+			}
+			
 			if(equals) {
 				if(types == null || thatObj.types == null) {
 					equals = types == thatObj.types; 
@@ -218,7 +236,7 @@ public class BinaryMapDataObject {
 					for(int i = 0; i < types.length && equals; i++) {
 						TagValuePair o = mapIndex.decodeType(types[i]);
 						TagValuePair s = thatObj.mapIndex.decodeType(thatObj.types[i]);
-						equals = o.equals(s);
+						equals = o.equals(s) && equals;
 					}
 				}
 			}

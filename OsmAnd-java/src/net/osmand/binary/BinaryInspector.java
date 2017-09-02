@@ -74,8 +74,8 @@ public class BinaryInspector {
 			in.inspector(new String[] {
 
 //					"-vpoi",
-//					"-vmap", "-vmapobjects", // "-vmapcoordinates",
-					"-vrouting",
+					"-vmap", "-vmapobjects", // "-vmapcoordinates",
+//					"-vrouting",
 //					"-vtransport",
 //					"-vaddress", "-vcities","-vstreetgroups",
 //					"-vstreets", "-vbuildings", "-vintersections",
