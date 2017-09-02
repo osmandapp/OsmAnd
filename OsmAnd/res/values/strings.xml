@@ -9,6 +9,11 @@
          3. All your modified/created strings are in the top of the file (to make easier find what\'s translated).
     PLEASE: Have a look at http://code.google.com/p/osmand/wiki/UIConsistency, it may really improve your and our work  :-)  Thx - Hardy
     -->
+    <string name="move_all_to_history">Move all to history</string>
+    <string name="build_route">Build route</string>
+    <string name="show_direction">Show direction</string>
+    <string name="sort_by">Sort by</string>
+    <string name="marker_options">Marker options</string>
     <string name="do_not_use_animations">Do not use animations</string>
     <string name="do_not_use_animations_descr">Disables animations in the app</string>
     <string name="keep_showing_on_map">Keep showing on map</string>

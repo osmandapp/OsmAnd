@@ -3565,4 +3565,6 @@
 	<string name="poi_boat_canoe_rental_rental_yes">Kano: ja</string>
 	<string name="poi_boat_canoe_rental_rental_no">Kano: nej</string>
 
+<string name="poi_network">Netværk</string>
+
 </resources>

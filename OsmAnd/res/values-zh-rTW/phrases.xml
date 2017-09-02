@@ -3509,4 +3509,6 @@
 	<string name="poi_boat_canoe_rental_rental_yes">獨木舟：有</string>
 	<string name="poi_boat_canoe_rental_rental_no">獨木舟：無</string>
 
+<string name="poi_network">網路</string>
+
 </resources>

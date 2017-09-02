@@ -2772,5 +2772,10 @@ Indikas lokon:  %1$s x %2$s"</string>
 <string name="keep_showing_on_map">Daŭre montri sur mapo</string>
     <string name="exit_without_saving">Ĉu eliri sen konservi?</string>
     <string name="do_not_use_animations">Ne uzi movbildojn</string>
-    <string name="do_not_use_animations_descr">Malaktivigi animaciojn en aplikaĵo</string>
+    <string name="do_not_use_animations_descr">Malaktivigi animaciojn en la aplikaĵo</string>
+    <string name="move_all_to_history">Movi ĉiujn al historio</string>
+    <string name="build_route">Kalkuli kurson</string>
+    <string name="show_direction">Montri direkton</string>
+    <string name="sort_by">Ordigi laŭ</string>
+    <string name="marker_options">Markaj agordoj</string>
     </resources>

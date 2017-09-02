@@ -3520,4 +3520,6 @@
 	<string name="poi_boat_canoe_rental_rental_yes">Каноэ: так</string>
 	<string name="poi_boat_canoe_rental_rental_no">Каноэ: не</string>
 
+<string name="poi_network">Сетка</string>
+
 </resources>
