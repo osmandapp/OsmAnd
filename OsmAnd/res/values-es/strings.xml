@@ -2674,4 +2674,9 @@ Por favor proporciona un código completo</string>
     <string name="import_track_desc">El archivo «%1$s» no contiene puntos de referencia, ¿Quiere importarlo como una traza?</string>
     <string name="move_point">Mover punto</string>
     <string name="add_segment_to_the_track">Añadir a una traza GPX</string>
-</resources>
+<string name="move_all_to_history">Mover todo al historial</string>
+    <string name="build_route">Crear ruta</string>
+    <string name="show_direction">Mostrar dirección</string>
+    <string name="sort_by">Ordenar por</string>
+    <string name="marker_options">Opciones del marcador</string>
+    </resources>
