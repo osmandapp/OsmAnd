@@ -306,7 +306,11 @@ public class Amenity extends MapObject {
 				}
 			}
 			if (equals) {
-				equals = subType.equals(thatObj.subType);
+				if (this.subType == null || thatObj.subType == null) {
+					equals = this.subType == thatObj.subType;
+				} else {
+					equals = subType.equals(thatObj.subType);
+				}
 			}
 			if (equals) {
 				if (this.additionalInfo == null || thatObj.additionalInfo == null) {
@@ -324,7 +328,11 @@ public class Amenity extends MapObject {
 						equals = false;
 					}
 				} else {
-					equals = this.openingHours.equals(thatObj.openingHours);
+					if (this.openingHours == null || thatObj.openingHours == null) {
+						equals = this.openingHours == thatObj.openingHours;
+					} else {
+						equals = this.openingHours.equals(thatObj.openingHours);
+					}
 				}
 			}
 			if (equals) {
