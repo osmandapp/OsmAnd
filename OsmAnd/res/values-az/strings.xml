@@ -1706,4 +1706,14 @@
     <string name="enter_gpx_name">GPX fayl adı:</string>
     <string name="move_all_to_history">Hamısını tarixçəyə daşı</string>
     <string name="show_direction">İstiqaməti göstər</string>
+    <string name="sort_by">Sırala</string>
+    <string name="marker_options">İşarə seçimləri</string>
+    <string name="exit_without_saving">Yadda saxlamadan çıxılsın?</string>
+    <string name="save_as_route_point">Marşrut nöqtələri kimi saxla</string>
+    <string name="route_point">Marşrut nöqtəsi</string>
+    <string name="show_on_map_after_saving">Saxladıqdan sonra xəritədə göstər</string>
+    <string name="measurement_tool_action_bar">Xəritəyə baxın və nöqtələr əlavə edin</string>
+    <string name="add_route_points">Marşrut nöqtələri əlavə et</string>
+    <string name="add_waypoint">Yol nöqtəsi əlavə et</string>
+    <string name="empty_state_favourites">Favoritlər əlavə et</string>
     </resources>
