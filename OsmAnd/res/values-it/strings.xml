@@ -71,7 +71,7 @@ La memoria utilizzata è  {1} MB.
     <string name="auto_follow_route_navigation_descr">Centra automaticamente la visione della mappa solo durante la navigazione.</string>
     <string name="auto_follow_location_enabled">Visualizzazione mappa centrata automaticamente.</string>
     <string name="pref_vector_rendering">Opzioni specifiche per la rappresentazione vettoriale</string>
-    <string name="pref_overlay">﻿Sovrapposizione / sfondo</string>
+    <string name="pref_overlay">Sovrapposizione / sfondo</string>
     <string name="pref_raster_map">Impostazioni della fonte mappa</string>
     <string name="pref_vector_map">Impostazioni della mappa vettoriale</string>
     <string name="delete_confirmation_msg">Eliminare %1$s?</string>
@@ -856,18 +856,18 @@ Memoria in proporzione %4$s MB (limite di Android %5$s MB, Dalvik %6$s MB).</str
     <string name="show_lanes">Corsie</string>
     <string name="avoid_unpaved">Evita le strade non asfaltate</string>
     <string name="avoid_ferries">Evita i traghetti</string>
-    <string name="avoid_in_routing_title">﻿Evita…</string>
+    <string name="avoid_in_routing_title">Evita…</string>
     <string name="avoid_in_routing_descr">Evita strade a pagamento, sterrate, traghetti</string>
     <string name="show_warnings_title">Mostra avvisi…</string>
     <string name="show_warnings_descr">Configura gli avvisi sul traffico (limiti velocità, fermate forzate, dossi rallentatori), avvisi autovelox e indicazioni di corsia</string>
     <string name="map_widget_fluorescent">Itinerari fluorescenti</string>
     <string name="map_widget_show_ruler">Righello</string>
 
-    <string name="map_widget_view_direction">﻿Direzione della visuale</string>
+    <string name="map_widget_view_direction">Direzione della visuale</string>
     <string name="map_widget_transparent">Widget trasparenti</string>
 
 
-    <string name="gps_wakeup_interval">﻿Intervallo di risveglio GPS: %s</string>
+    <string name="gps_wakeup_interval">Intervallo di risveglio GPS: %s</string>
     <string name="int_continuosly">Continuo</string>
     <string name="email">e-mail</string>
 
