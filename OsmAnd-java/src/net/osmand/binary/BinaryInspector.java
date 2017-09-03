@@ -72,8 +72,8 @@ public class BinaryInspector {
 		if ("test".equals(args[0])) {
 			in.inspector(new String[] {
 
-//					"-vpoi",
-					"-vmap", "-vmapobjects", 
+					"-vpoi",
+//					"-vmap", "-vmapobjects", 
 //					"-vmapcoordinates",
 //					"-vrouting",
 //					"-vtransport",
@@ -81,11 +81,9 @@ public class BinaryInspector {
 //					"-vstreets", "-vbuildings", "-vintersections",
 //					"-lang=ru",
 //					"-bbox=30.4981,50.4424,30.5195,50.4351",
-					"-osm="+System.getProperty("maps.dir")+"/map_full_1.obf.osm",
-					System.getProperty("maps.dir")+"/diff/Diff.obf"
-//					System.getProperty("maps.dir")+"/diff/Ukraine_kiev-city_europe.obf"
-//					System.getProperty("maps.dir")+"../temp/kiev/Ukraine_kiev-city_europe_17_06_05.obf",
-//					System.getProperty("maps.dir")+"Ukraine_kiev-city_europe_2.obf",
+//					"-osm="+System.getProperty("maps.dir")+"/map_full_1.obf.osm",
+					System.getProperty("maps.dir")+"/diff/Russia_vladimir_asia_17_08_30_2.obf"
+//					System.getProperty("maps.dir")+"/Ukraine_kiev-city_europe_2.obf"
 			});
 		} else {
 			in.inspector(args);

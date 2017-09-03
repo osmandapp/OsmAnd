@@ -36,8 +36,6 @@ public class Amenity extends MapObject {
 	private String openingHours;
 	private Map<String, String> additionalInfo;
 	private AmenityRoutePoint routePoint; // for search on path
-	private TIntArrayList x;
-	private TIntArrayList y;
 
 	public Amenity() {
 	}
@@ -63,20 +61,6 @@ public class Amenity extends MapObject {
 
 	public void setSubType(String subType) {
 		this.subType = subType;
-	}
-
-	public TIntArrayList getX() {
-		if (x == null) {
-			x = new TIntArrayList();
-		}
-		return x;
-	}
-
-	public TIntArrayList getY() {
-		if (y == null) {
-			y = new TIntArrayList();
-		}
-		return y;
 	}
 
 	public String getOpeningHours() {
@@ -269,6 +253,19 @@ public class Amenity extends MapObject {
 
 	public void setOpeningHours(String openingHours) {
 		setAdditionalInfo(OPENING_HOURS, openingHours);
+	}
+	
+
+	public boolean comparePoi(Amenity thatObj) {
+		if (this.id == thatObj.id &&
+				Algorithms.objectEquals(this.type.getKeyName(), thatObj.type.getKeyName()) && 
+				Algorithms.objectEquals(getLocation(), thatObj.getLocation()) &&
+				Algorithms.objectEquals(this.subType, thatObj.subType) &&
+				Algorithms.objectEquals(this.additionalInfo, thatObj.additionalInfo) &&
+				Algorithms.objectEquals(this.getNamesMap(true), thatObj.getNamesMap(true))) {
+			return true;
+		}
+		return false;
 	}
 	
 	@Override
