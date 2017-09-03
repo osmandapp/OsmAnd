@@ -15,7 +15,6 @@ import java.io.RandomAccessFile;
 import java.text.DecimalFormat;
 import java.text.MessageFormat;
 import java.util.ArrayList;
-import java.util.Arrays;
 import java.util.Collections;
 import java.util.Comparator;
 import java.util.Date;
@@ -82,7 +81,7 @@ public class BinaryInspector {
 //					"-vstreets", "-vbuildings", "-vintersections",
 //					"-lang=ru",
 //					"-bbox=30.4981,50.4424,30.5195,50.4351",
-					"-osm="+System.getProperty("maps.dir")+"/map_full_2.obf.osm",
+					"-osm="+System.getProperty("maps.dir")+"/map_full_1.obf.osm",
 					System.getProperty("maps.dir")+"/diff/Diff.obf"
 //					System.getProperty("maps.dir")+"/diff/Ukraine_kiev-city_europe.obf"
 //					System.getProperty("maps.dir")+"../temp/kiev/Ukraine_kiev-city_europe_17_06_05.obf",

@@ -13,7 +13,6 @@ import net.osmand.render.RenderingRulesStorage;
 import net.osmand.util.Algorithms;
 
 public class BinaryMapDataObject {
-	private static final int COORDINATES_PRECISION_COMPARE = 0;
 	protected int[] coordinates = null;
 	protected int[][] polygonInnerCoordinates = null;
 	protected boolean area = false;
@@ -197,11 +196,11 @@ public class BinaryMapDataObject {
 	}
 	
 	
-	public boolean compareBinary(BinaryMapDataObject thatObj) {
+	public boolean compareBinary(BinaryMapDataObject thatObj, int coordinatesPrecision) {
 		if(this.objectType == thatObj.objectType
 				&& this.id == thatObj.id
 				&& this.area == thatObj.area 
-				&& compareCoordinates(this.coordinates, thatObj.coordinates, COORDINATES_PRECISION_COMPARE) ) {
+				&& compareCoordinates(this.coordinates, thatObj.coordinates, coordinatesPrecision) ) {
 			if(mapIndex == null) {
 				throw new IllegalStateException("Illegal binary object: " + id);
 			}
@@ -222,7 +221,7 @@ public class BinaryMapDataObject {
 						} else if(polygonInnerCoordinates[i].length != thatObj.polygonInnerCoordinates[i].length){
 							equals = false;
 						} else {
-							equals = compareCoordinates(polygonInnerCoordinates[i], thatObj.polygonInnerCoordinates[i], COORDINATES_PRECISION_COMPARE);
+							equals = compareCoordinates(polygonInnerCoordinates[i], thatObj.polygonInnerCoordinates[i], coordinatesPrecision);
 						}
 					}
 				}
