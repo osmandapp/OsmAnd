@@ -10,6 +10,7 @@ import java.io.ByteArrayInputStream;
 import java.io.IOException;
 import java.io.InputStreamReader;
 import java.util.ArrayList;
+import java.util.Arrays;
 import java.util.Collections;
 import java.util.Iterator;
 import java.util.LinkedHashMap;
@@ -70,6 +71,14 @@ public class Amenity extends MapObject {
 			x = new TIntArrayList();
 		}
 		return x;
+	}
+	
+	public void setX(TIntArrayList x) {
+		this.x = x;
+	}
+	
+	public void setY(TIntArrayList y) {
+		this.y = y;
 	}
 
 	public TIntArrayList getY() {
@@ -269,6 +278,69 @@ public class Amenity extends MapObject {
 
 	public void setOpeningHours(String openingHours) {
 		setAdditionalInfo(OPENING_HOURS, openingHours);
+	}
+	
+	public boolean comparePoi(Amenity thatObj) {
+		if (this.type.getKeyName().equals(thatObj.type.getKeyName())) {
+			boolean equals = true;
+			if (equals) {
+				if (this.x == null || thatObj.x == null) {
+					equals = this.x == thatObj.x;
+				} else if (this.x.size() != thatObj.x.size()){
+					equals = false;
+				} else {
+					for (int i = 0; i < x.size() && equals; i++) {
+						equals = this.x.get(i) == thatObj.x.get(i);
+					}
+				}
+			}
+			if (equals) {
+				if (this.y == null || thatObj.y == null) {
+					equals = this.y == thatObj.y;
+				} else if (this.y.size() != thatObj.y.size()){
+					equals = false;
+				} else {
+					for (int i = 0; i < y.size() && equals; i++) {
+						equals = this.y.get(i) == thatObj.y.get(i);
+					}
+				}
+			}
+			if (equals) {
+				if (this.subType == null || thatObj.subType == null) {
+					equals = this.subType == thatObj.subType;
+				} else {
+					equals = subType.equals(thatObj.subType);
+				}
+			}
+			if (equals) {
+				if (this.additionalInfo == null || thatObj.additionalInfo == null) {
+					equals = this.additionalInfo == thatObj.additionalInfo;
+				} else {
+					equals = this.additionalInfo.equals(thatObj.additionalInfo);
+				}
+				
+			}
+			if (equals) {
+				if (this.openingHours == null || thatObj.openingHours == null) {
+					if (this.openingHours == thatObj.openingHours) {
+						equals = true;
+					} else {
+						equals = false;
+					}
+				} else {
+					if (this.openingHours == null || thatObj.openingHours == null) {
+						equals = this.openingHours == thatObj.openingHours;
+					} else {
+						equals = this.openingHours.equals(thatObj.openingHours);
+					}
+				}
+			}
+			if (equals) {
+				equals = this.routePoint == thatObj.routePoint;
+			}
+			return equals;
+		}
+		return false;
 	}
 	
 	@Override
