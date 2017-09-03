@@ -257,7 +257,7 @@ public class Amenity extends MapObject {
 	
 
 	public boolean comparePoi(Amenity thatObj) {
-		if (this.id == thatObj.id &&
+		if (this.id.longValue() == thatObj.id.longValue() &&
 				Algorithms.objectEquals(this.type.getKeyName(), thatObj.type.getKeyName()) && 
 				Algorithms.objectEquals(getLocation(), thatObj.getLocation()) &&
 				Algorithms.objectEquals(this.subType, thatObj.subType) &&
