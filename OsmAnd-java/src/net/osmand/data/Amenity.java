@@ -36,6 +36,9 @@ public class Amenity extends MapObject {
 	private String openingHours;
 	private Map<String, String> additionalInfo;
 	private AmenityRoutePoint routePoint; // for search on path
+	// context menu geometry;
+	private TIntArrayList y;
+	private TIntArrayList x;
 
 	public Amenity() {
 	}
@@ -289,5 +292,19 @@ public class Amenity extends MapObject {
 					&& Algorithms.stringsEqual(((Amenity) o).getSubType(), getSubType());
 		}
 		return res;
+	}
+
+	public TIntArrayList getY() {
+		if(y == null) {
+			y = new TIntArrayList();
+		}
+		return y;
+	}
+	
+	public TIntArrayList getX() {
+		if (x == null) {
+			x = new TIntArrayList();
+		}
+		return x;
 	}
 }
