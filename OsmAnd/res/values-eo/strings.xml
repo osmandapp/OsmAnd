@@ -1351,7 +1351,7 @@ Proporcia memoro %4$s MB (limito de Android %5$s MB, Dalvik %6$s MB).</string>
     <string name="basemap_was_selected_to_download">Bazmapo endas por ĝusta agado de aplikaĵo kaj ĝi estas elektita por elŝuto.</string>
     <string name="plugins_screen">Kromprogramoj</string>
     <string name="local_indexes_cat_tile">Enretaj mapoj kaj kaŝmemorigitaj kaheloj</string>
-    <string name="local_indexes_cat_map">Normalaj mapoj (vektoraj)</string>
+    <string name="local_indexes_cat_map">Normaj mapoj (vektoraj)</string>
     <string name="index_settings_descr">Elŝuti kaj administri eksterretajn mapojn konservitajn en via aparato</string>
     <string name="i_am_here">Mi estas tie ĉi</string>
     <string name="free_version_title">Senpaga versio</string>
