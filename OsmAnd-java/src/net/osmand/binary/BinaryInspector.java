@@ -71,7 +71,6 @@ public class BinaryInspector {
 		// test cases show info
 		if ("test".equals(args[0])) {
 			in.inspector(new String[] {
-
 					"-vpoi",
 //					"-vmap", "-vmapobjects", 
 //					"-vmapcoordinates",
@@ -82,7 +81,7 @@ public class BinaryInspector {
 //					"-lang=ru",
 //					"-bbox=30.4981,50.4424,30.5195,50.4351",
 //					"-osm="+System.getProperty("maps.dir")+"/map_full_1.obf.osm",
-					System.getProperty("maps.dir")+"/diff/Russia_vladimir_asia_17_08_30_2.obf"
+					System.getProperty("maps.dir")+"/diff/Brazil_southamerica_01_00.obf"
 //					System.getProperty("maps.dir")+"/Ukraine_kiev-city_europe_2.obf"
 			});
 		} else {
@@ -894,11 +893,9 @@ public class BinaryInspector {
 								} catch (IOException e) {
 									throw new RuntimeException(e);
 								}
-							} else if(obj.getId() == 50209165195l) {
-								println(b.toString());
 							} else {
-//								printMapDetails(obj, b, vInfo.vmapCoordinates);
-//								println(b.toString());
+								printMapDetails(obj, b, vInfo.vmapCoordinates);
+								println(b.toString());
 							}
 						}
 						return false;
@@ -1242,7 +1239,7 @@ public class BinaryInspector {
 							}
 						}
 
-						println(object.getType().getKeyName() + " : " + object.getSubType() + " " + object.getName() + " " + object.getLocation() + " id=" + (object.getId() >> 1) + " " + s);
+						println(object.getType().getKeyName() + ": " + object.getSubType() + " " + object.getName() + " " + object.getLocation() + " osmid=" + (object.getId() >> 1) + " " + s);
 						return false;
 					}
 
