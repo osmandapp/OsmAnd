@@ -150,12 +150,12 @@ public class Amenity extends MapObject {
 
 	@Override
 	public String toStringEn() {
-		return super.toStringEn() + ":" + type.getKeyName() + ":" + subType;
+		return super.toStringEn() + ": " + type.getKeyName() + ":" + subType;
 	}
 
 	@Override
 	public String toString() {
-		return type.getKeyName() + " : " + subType + " " + getName();
+		return type.getKeyName() + ": " + subType + " " + getName();
 	}
 
 	public String getSite() {
