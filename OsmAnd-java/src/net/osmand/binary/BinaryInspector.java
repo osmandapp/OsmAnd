@@ -74,16 +74,17 @@ public class BinaryInspector {
 			in.inspector(new String[] {
 
 //					"-vpoi",
-//					"-vmap", "-vmapobjects", 
-					"-vmapcoordinates",
-					"-vrouting",
+					"-vmap", "-vmapobjects", 
+//					"-vmapcoordinates",
+//					"-vrouting",
 //					"-vtransport",
 //					"-vaddress", "-vcities","-vstreetgroups",
 //					"-vstreets", "-vbuildings", "-vintersections",
 //					"-lang=ru",
 //					"-bbox=30.4981,50.4424,30.5195,50.4351",
-//					"-osm="+System.getProperty("maps.dir")+"/map_full.obf.osm",
-					System.getProperty("maps.dir")+"/diff/17_08_29_22_00.diff.obf"
+					"-osm="+System.getProperty("maps.dir")+"/map_full_2.obf.osm",
+					System.getProperty("maps.dir")+"/diff/Diff.obf"
+//					System.getProperty("maps.dir")+"/diff/Ukraine_kiev-city_europe.obf"
 //					System.getProperty("maps.dir")+"../temp/kiev/Ukraine_kiev-city_europe_17_06_05.obf",
 //					System.getProperty("maps.dir")+"Ukraine_kiev-city_europe_2.obf",
 			});
@@ -896,10 +897,11 @@ public class BinaryInspector {
 								} catch (IOException e) {
 									throw new RuntimeException(e);
 								}
-//							} else if(obj.getId() >> 1 == 205743436l) {
-							} else {
-								printMapDetails(obj, b, vInfo.vmapCoordinates);
+							} else if(obj.getId() == 50209165195l) {
 								println(b.toString());
+							} else {
+//								printMapDetails(obj, b, vInfo.vmapCoordinates);
+//								println(b.toString());
 							}
 						}
 						return false;
