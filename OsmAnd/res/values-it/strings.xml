@@ -2889,8 +2889,8 @@ Copertura e qualità approssimativamente:
     <string name="do_not_use_animations">Non utilizzare le animazioni</string>
     <string name="do_not_use_animations_descr">Disabilita le animazioni nell\'app</string>
     <string name="keep_showing_on_map">Mantieni visualizzato nella mappa</string>
-    <string name="live_monitoring_max_interval_to_send">Tempo cuscinetto per il tracciamento online</string>
-    <string name="live_monitoring_max_interval_to_send_desrc">Specifica un tempo del cuscinetto per mantenere le localizzazioni quando non c\'è connessione</string>
+    <string name="live_monitoring_max_interval_to_send">Tempo tampone per il tracciamento online</string>
+    <string name="live_monitoring_max_interval_to_send_desrc">Specifica un tempo della memoria tampone per memorizzare le localizzazioni quando non c\'è connessione</string>
     <string name="retry">Riprova</string>
     <string name="add_route_points">Aggiungi nuovi punti al percorso</string>
     <string name="add_line">Aggiungi una linea</string>
