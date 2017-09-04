@@ -856,7 +856,7 @@ public class OsmandSettings {
 			new FloatPreference("speed_limit_exceed", 5f).makeProfile();
 
 	public final OsmandPreference<Float> SWITCH_TO_MAP_DIRECTION =
-			new FloatPreference("speed_for_map_to_direction_of_movement", 5f).makeProfile();
+			new FloatPreference("speed_for_map_to_direction_of_movement", 0f).makeProfile();
 
 	// this value string is synchronized with settings_pref.xml preference name
 	public final OsmandPreference<Boolean> USE_TRACKBALL_FOR_MOVEMENTS =
