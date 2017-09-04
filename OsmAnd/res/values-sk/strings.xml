@@ -494,7 +494,7 @@
     <string name="menu_mute_off">Zvuk zapnutý</string>
     <string name="menu_mute_on">Zvuk vypnutý</string>
     <string name="voice_provider_descr">Výber hlasových údajov pre navigáciu</string>
-    <string name="voice_provider">Hlasové údaje</string>
+    <string name="voice_provider">Hlasové pokyny</string>
     <string name="voice_data_initializing">Inicializácia hlasových údajov…</string>
     <string name="voice_data_not_supported">Nepodporovaná verzia hlasových údajov</string>
     <string name="voice_data_corrupted">Vybrané hlasové údaje sú poškodené</string>
@@ -2857,4 +2857,9 @@ Zodpovedá oblasti: %1$s x %2$s</string>
     <string name="do_not_use_animations_descr">Vypne animácie v aplikácii</string>
     <string name="keep_showing_on_map">Zobrazovať ďalej na mape</string>
     <string name="exit_without_saving">Ukončiť bez uloženia?</string>
+    <string name="move_all_to_history">Presunúť všetko do histórie</string>
+    <string name="build_route">Zostaviť trasu</string>
+    <string name="show_direction">Zobraziť smer</string>
+    <string name="sort_by">Zotriediť podľa</string>
+    <string name="marker_options">Možnosti značiek</string>
     </resources>
