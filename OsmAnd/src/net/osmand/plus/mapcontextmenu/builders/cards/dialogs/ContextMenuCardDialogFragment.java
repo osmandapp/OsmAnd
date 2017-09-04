@@ -13,9 +13,11 @@ import android.webkit.WebView;
 import android.widget.LinearLayout;
 import android.widget.TextView;
 
+import net.osmand.plus.OsmandPlugin;
 import net.osmand.plus.R;
 import net.osmand.plus.activities.MapActivity;
 import net.osmand.plus.dialogs.DirectionsDialogs;
+import net.osmand.plus.mapillary.MapillaryPlugin;
 import net.osmand.util.Algorithms;
 
 public class ContextMenuCardDialogFragment extends Fragment {
@@ -115,6 +117,14 @@ public class ContextMenuCardDialogFragment extends Fragment {
 	public void dismiss() {
 		MapActivity activity = dialog.getMapActivity();
 		if (activity != null) {
+			if (dialog.getType() == ContextMenuCardDialog.CardDialogType.MAPILLARY) {
+				if (!activity.getMyApplication().getSettings().SHOW_MAPILLARY.get()) {
+					MapillaryPlugin mapillaryPlugin = OsmandPlugin.getPlugin(MapillaryPlugin.class);
+					if (mapillaryPlugin != null) {
+						mapillaryPlugin.updateLayers(activity.getMapView(), activity);
+					}
+				}
+			}
 			try {
 				activity.getSupportFragmentManager().popBackStack(TAG,
 						FragmentManager.POP_BACK_STACK_INCLUSIVE);
