@@ -29,6 +29,7 @@ public class MapMarkersHelper {
 	}
 
 	public static class MapMarker implements LocationPoint {
+		public int id;
 		public LatLon point;
 		private PointDescription pointDescription;
 		public int colorIndex;
@@ -39,6 +40,7 @@ public class MapMarkersHelper {
 		public long creationDate;
 		public long visitedDate;
 		public DisplayPlace displayPlace;
+		public int nextKey;
 
 		public enum DisplayPlace {
 			WIDGET,

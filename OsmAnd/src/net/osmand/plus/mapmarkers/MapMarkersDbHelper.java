@@ -1,5 +1,7 @@
 package net.osmand.plus.mapmarkers;
 
+import android.util.SparseArray;
+
 import net.osmand.data.LatLon;
 import net.osmand.data.PointDescription;
 import net.osmand.plus.MapMarkersHelper.MapMarker;
@@ -7,7 +9,6 @@ import net.osmand.plus.OsmandApplication;
 import net.osmand.plus.api.SQLiteAPI.SQLiteConnection;
 import net.osmand.plus.api.SQLiteAPI.SQLiteCursor;
 
-import java.util.ArrayList;
 import java.util.List;
 
 import static net.osmand.plus.MapMarkersHelper.MapMarker.DisplayPlace.TOPBAR;
@@ -19,6 +20,7 @@ public class MapMarkersDbHelper {
 	private static final String DB_NAME = "map_markers_db";
 
 	private static final String MARKERS_TABLE_NAME = "map_markers";
+	private static final String MARKERS_COL_ID = "_id";
 	private static final String MARKERS_COL_LAT = "marker_latitude";
 	private static final String MARKERS_COL_LON = "marker_longitude";
 	private static final String MARKERS_COL_DESCRIPTION = "marker_description";
@@ -35,7 +37,7 @@ public class MapMarkersDbHelper {
 			MARKERS_COL_LAT + " double, " +
 			MARKERS_COL_LON + " double, " +
 			MARKERS_COL_DESCRIPTION + " TEXT, " +
-			MARKERS_COL_ACTIVE + " int default 1, " + // 1 = true, 0 = false
+			MARKERS_COL_ACTIVE + " int, " + // 1 = true, 0 = false
 			MARKERS_COL_ADDED + " long, " +
 			MARKERS_COL_VISITED + " long, " +
 			MARKERS_COL_GROUP_KEY + " int, " +
@@ -44,6 +46,7 @@ public class MapMarkersDbHelper {
 			MARKERS_COL_NEXT_KEY + " int);";
 
 	private static final String MARKERS_TABLE_SELECT = "SELECT " +
+			MARKERS_COL_ID + ", " +
 			MARKERS_COL_LAT + ", " +
 			MARKERS_COL_LON + ", " +
 			MARKERS_COL_DESCRIPTION + ", " +
@@ -68,6 +71,8 @@ public class MapMarkersDbHelper {
 			GROUPS_COL_ADDED + " long);";
 
 	private OsmandApplication context;
+	private List<MapMarker> mapMarkers;
+	private List<MapMarker> mapMarkersHistory;
 
 	public MapMarkersDbHelper(OsmandApplication context) {
 		this.context = context;
@@ -106,7 +111,7 @@ public class MapMarkersDbHelper {
 		SQLiteConnection db = openConnection(false);
 		if (db != null) {
 			try {
-				insert(marker, db);
+				insert(db, marker);
 			} finally {
 				db.close();
 			}
@@ -115,54 +120,73 @@ public class MapMarkersDbHelper {
 		return false;
 	}
 
-	private void insert(MapMarker marker, SQLiteConnection db) {
+	private int insert(SQLiteConnection db, MapMarker marker) {
+		double lat = marker.getLatitude();
+		double lon = marker.getLongitude();
+		String descr = marker.getName(context);
+		int active = marker.history ? 0 : 1;
+		long added = System.currentTimeMillis();
+		long visited = 0;
+		int groupKey = 0;
+		int colorIndex = marker.colorIndex;
+		int displayPlace = marker.displayPlace == WIDGET ? 0 : 1;
+		int next = marker.nextKey;
 
+		db.execSQL("INSERT INTO " + MARKERS_TABLE_NAME + " VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?, ?",
+				new Object[]{lat, lon, descr, active, added, visited, groupKey, colorIndex, displayPlace, next == -1 ? null : next});
+		return -1;
 	}
 
 	public List<MapMarker> getMapMarkers() {
-		return getItems(true);
+		return mapMarkers;
 	}
 
 	public List<MapMarker> getMapMarkersHistory() {
-		return getItems(false);
+		return mapMarkersHistory;
 	}
 
-	private List<MapMarker> getItems(boolean active) {
-		List<MapMarker> result = new ArrayList<>();
+	private void loadMapMarkers() {
 		SQLiteConnection db = openConnection(true);
+		SparseArray<MapMarker> markers = new SparseArray<>();
 		if (db != null) {
 			try {
-				SQLiteCursor query = db.rawQuery(MARKERS_TABLE_SELECT + " WHERE " + MARKERS_COL_ACTIVE + " = ?",
-						new String[]{String.valueOf(active ? 1 : 0)});
+				SQLiteCursor query = db.rawQuery(MARKERS_TABLE_SELECT, null);
 				if (query.moveToFirst()) {
 					do {
-						result.add(readItem(query));
+						MapMarker marker = readItem(query);
+						markers.put(marker.id, marker);
 					} while (query.moveToNext());
 				}
 				query.close();
 			} finally {
 				db.close();
 			}
+			for (int i = 0; i < markers.size(); i++) {
+				int key = markers.keyAt(i);
+				MapMarker marker = markers.get(key);
+			}
 		}
-		return result;
 	}
 
 	private MapMarker readItem(SQLiteCursor query) {
-		double lat = query.getDouble(0);
-		double lon = query.getDouble(1);
-		String desc = query.getString(2);
-		boolean active = query.getInt(3) == 1;
-		long added = query.getLong(4);
-		long visited = query.getLong(5);
-		int groupKey = query.getInt(6);
-		int colorIndex = query.getInt(7);
-		int displayPlace = query.getInt(8);
-		int nextKey = query.getInt(9);
+		int id = query.getInt(0);
+		double lat = query.getDouble(1);
+		double lon = query.getDouble(2);
+		String desc = query.getString(3);
+		boolean active = query.getInt(4) == 1;
+		long added = query.getLong(5);
+		long visited = query.getLong(6);
+		int groupKey = query.getInt(7);
+		int colorIndex = query.getInt(8);
+		int displayPlace = query.getInt(9);
+		int nextKey = query.getInt(10);
 
 		LatLon latLon = new LatLon(lat, lon);
 		MapMarker marker = new MapMarker(latLon, PointDescription.deserializeFromString(desc, latLon),
 				colorIndex, false, added, visited, displayPlace == 0 ? WIDGET : TOPBAR, 0);
 		marker.history = !active;
+		marker.nextKey = nextKey;
+		marker.id = id;
 
 		return marker;
 	}
