@@ -7,7 +7,9 @@ import android.os.AsyncTask;
 import android.os.Bundle;
 import android.support.annotation.NonNull;
 import android.support.annotation.Nullable;
+import android.support.v4.app.DialogFragment;
 import android.support.v7.widget.ListPopupWindow;
+import android.support.v7.widget.Toolbar;
 import android.util.DisplayMetrics;
 import android.view.Gravity;
 import android.view.LayoutInflater;
@@ -32,9 +34,9 @@ import net.osmand.plus.GpxSelectionHelper.GpxDisplayItem;
 import net.osmand.plus.IconsCache;
 import net.osmand.plus.OsmAndFormatter;
 import net.osmand.plus.OsmandApplication;
+import net.osmand.plus.OsmandSettings;
 import net.osmand.plus.R;
 import net.osmand.plus.activities.TrackActivity;
-import net.osmand.plus.base.OsmAndListFragment;
 import net.osmand.plus.helpers.FontCache;
 import net.osmand.util.Algorithms;
 
@@ -49,7 +51,7 @@ import gnu.trove.list.array.TIntArrayList;
 
 import static net.osmand.plus.myplaces.TrackSegmentFragment.ARG_TO_FILTER_SHORT_TRACKS;
 
-public class SplitSegmentFragment extends OsmAndListFragment {
+public class SplitSegmentFragment extends DialogFragment {
 
     public final static String TAG = "SPLIT_SEGMENT_FRAGMENT";
     private OsmandApplication app;
@@ -66,25 +68,22 @@ public class SplitSegmentFragment extends OsmAndListFragment {
     private int minMaxSpeedLayoutWidth;
     private Paint minMaxSpeedPaint;
     private Rect minMaxSpeedTextBounds;
+	private ListView listView;
 
     @Override
     public void onCreate(@Nullable Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        app = getMyApplication();
+		app = getMyApplication();
         ic = app.getIconsCache();
-    }
-
-    @Override
-    public void onViewCreated(View view, Bundle savedInstanceState) {
-        super.onViewCreated(view, savedInstanceState);
-        updateContent();
-        // Obsolete: updateHeader();
+		boolean isLightTheme = app.getSettings().OSMAND_THEME.get() == OsmandSettings.OSMAND_LIGHT_THEME;
+		int themeId = isLightTheme ? R.style.OsmandLightTheme : R.style.OsmandDarkTheme;
+		setStyle(STYLE_NO_FRAME, themeId);
     }
 
     @Override
     public void onActivityCreated(Bundle savedInstanceState) {
         super.onActivityCreated(savedInstanceState);
-        getListView().setBackgroundColor(getResources().getColor(
+        listView.setBackgroundColor(getResources().getColor(
                 getMyApplication().getSettings().isLightContent() ? R.color.ctx_menu_info_view_bg_light
                         : R.color.ctx_menu_info_view_bg_dark));
         getTrackActivity().onAttachFragment(this);
@@ -97,14 +96,7 @@ public class SplitSegmentFragment extends OsmAndListFragment {
     }
 
     @Override
-    public ArrayAdapter<?> getAdapter() {
-        return adapter;
-    }
-
-    @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
-        setHasOptionsMenu(true);
-
         minMaxSpeedPaint = new Paint();
         minMaxSpeedPaint.setTextSize(getResources().getDimension(R.dimen.default_split_segments_data));
         minMaxSpeedPaint.setTypeface(FontCache.getFont(getContext(), "fonts/Roboto-Medium.ttf"));
@@ -113,7 +105,16 @@ public class SplitSegmentFragment extends OsmAndListFragment {
 
         final View view = getActivity().getLayoutInflater().inflate(R.layout.split_segments_layout, container, false);
 
-        final ListView listView = (ListView) view.findViewById(android.R.id.list);
+        Toolbar toolbar = (Toolbar) view.findViewById(R.id.split_interval_toolbar);
+        toolbar.setNavigationIcon(getMyApplication().getIconsCache().getIcon(R.drawable.ic_arrow_back));
+        toolbar.setNavigationOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                dismiss();
+            }
+        });
+
+        listView = (ListView) view.findViewById(R.id.list);
         listView.setDivider(null);
         listView.setDividerHeight(0);
 
@@ -123,8 +124,6 @@ public class SplitSegmentFragment extends OsmAndListFragment {
 
         listView.addHeaderView(getActivity().getLayoutInflater().inflate(R.layout.gpx_split_segments_empty_header, null, false));
         listView.addFooterView(getActivity().getLayoutInflater().inflate(R.layout.list_shadow_footer, null, false));
-
-        setListAdapter(adapter);
 
         listView.setOnScrollListener(new AbsListView.OnScrollListener() {
             int previousYPos = -1;
@@ -159,7 +158,15 @@ public class SplitSegmentFragment extends OsmAndListFragment {
             }
         });
 
+		listView.setAdapter(adapter);
+
         return view;
+    }
+
+    @Override
+    public void onViewCreated(View view, Bundle savedInstanceState) {
+        super.onViewCreated(view, savedInstanceState);
+        updateContent();
     }
 
     private void updateHeader() {
@@ -213,9 +220,8 @@ public class SplitSegmentFragment extends OsmAndListFragment {
         adapter.add(overviewSegments);
         List<GpxDisplayItem> splitSegments = getSplitSegments();
         adapter.addAll(splitSegments);
-        // Obsolete: adapter.setNotifyOnChange(true);
         adapter.notifyDataSetChanged();
-        getListView().setSelection(0);
+        listView.setSelection(0);
         headerView.setTranslationY(0);
         updateHeader();
     }
@@ -687,4 +693,18 @@ public class SplitSegmentFragment extends OsmAndListFragment {
             return null;
         }
     }
+
+	private OsmandApplication getMyApplication() {
+		return (OsmandApplication) getActivity().getApplication();
+	}
+
+	public static boolean showInstance(TrackActivity trackActivity) {
+		try {
+			SplitSegmentFragment fragment = new SplitSegmentFragment();
+			fragment.show(trackActivity.getSupportFragmentManager(), TAG);
+			return true;
+		} catch (RuntimeException e) {
+			return false;
+		}
+	}
 }

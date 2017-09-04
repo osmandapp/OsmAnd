@@ -1773,12 +1773,7 @@ public class TrackSegmentFragment extends OsmAndListFragment {
 	}
 
 	void openSplitIntervalScreen() {
-		getTrackActivity().getSupportFragmentManager()
-				.beginTransaction()
-				.replace(R.id.track_activity_layout, new SplitSegmentFragment())
-				.addToBackStack(SplitSegmentFragment.TAG)
-				.commit();
-		getTrackActivity().getSlidingTabLayout().setVisibility(View.GONE);
+		SplitSegmentFragment.showInstance(getTrackActivity());
 	}
 
 	private class SaveGpxAsyncTask extends AsyncTask<Void, Void, Void> {
