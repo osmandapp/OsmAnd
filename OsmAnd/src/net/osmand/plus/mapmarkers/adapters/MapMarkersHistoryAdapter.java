@@ -56,6 +56,9 @@ public class MapMarkersHistoryAdapter extends RecyclerView.Adapter<MapMarkerItem
 			@Override
 			public void onClick(View view) {
 				int position = holder.getAdapterPosition();
+				if (position < 0) {
+					return;
+				}
 				MapMarker marker = markers.get(position);
 				app.getMapMarkersHelper().removeMapMarkerHistory(marker);
 				app.getMapMarkersHelper().addMapMarker(marker, 0);
