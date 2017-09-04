@@ -2756,9 +2756,9 @@ Indikas lokon:  %1$s x %2$s"</string>
     <string name="add_point_before">Aldoni punkton antaŭe</string>
     <string name="add_point_after">Aldoni punkton sekve</string>
     <string name="shared_string_options">Agordoj</string>
-    <string name="measurement_tool_snap_to_road_descr">OsmAnd aldonos pliajn punktojn depende de speco de navigado.</string>
+    <string name="measurement_tool_snap_to_road_descr">OsmAnd kunigos punktojn al vojojn ĉe la elektita profilo.</string>
     <string name="measurement_tool_save_as_new_track_descr">Vi povas konservi punktojn kiel kurspunktojn aŭ linion.</string>
-    <string name="choose_navigation_type">Elektu specon de navigado</string>
+    <string name="choose_navigation_type">Elektu profilon de navigado</string>
     <string name="add_route_points">Aldoni kurspunktojn</string>
     <string name="add_line">Aldoni linion</string>
     <string name="empty_state_my_tracks">Aldoni kaj registri spurojn</string>
