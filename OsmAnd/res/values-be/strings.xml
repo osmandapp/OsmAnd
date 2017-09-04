@@ -631,7 +631,7 @@
 	
 	<string name="file_can_not_be_renamed">Файл ня можа быць пераназваны.</string>
 	<string name="file_with_name_already_exists">Файл з такой назвай ужо існуе.</string>
-	<string name="gpx_navigation">GPX маршрут</string>
+	<string name="gpx_navigation">GPX-маршрут</string>
 	<string name="poi_query_by_name_matches_categories">Некалькі катэгорый POI знойдзены, што адпавядаюць запыту:</string>
 	<string name="data_to_search_poi_not_available">Лякальных зьвестак для пошуку POI няма.</string>
 	<string name="poi_filter_by_name">Пошук па назве</string>
@@ -715,7 +715,7 @@
 	<string name="tts_missing_language_data">Няма ўсталяваных дадзеных для абранай мовы. Вы хочаце пайсьці на Google Play, каб усталяваць?</string>
 	<string name="gpx_option_reverse_route">Развярнуць кірунак GPX</string>
 	<string name="gpx_option_destination_point">Выкарыстоўваць цяперашні пункт прызначэньня</string>
-	<string name="gpx_option_from_start_point">Прайсьці ўвесь шлях спачатку</string>
+	<string name="gpx_option_from_start_point">Прайсці ўвесь шлях</string>
 	<string name="switch_to_vector_map_to_see">Для гэтага рэгіёну даступныя лякальныя вэктарныя мапы.\n\t\n\tДля іх выкарыстаньня абярыце пункт мэню \'Налада мапы\' → \'Крыніца мапы…\' → \'Лякальныя вэктарныя мапы\'.</string>
 	<string name="choose_audio_stream">Вывад галасавых падказак</string>
 	<string name="choose_audio_stream_descr">Абярыце канал для галасавых падказак</string>
@@ -1223,8 +1223,8 @@
 	<string name="index_name_canada">Паўночная Амэрыка - Канада</string>
     <string name="index_name_italy">Эўропа - Італія</string>
     <string name="index_name_gb">Эўропа - Вялікабрытанія</string>
-    <string name="calculate_osmand_route_without_internet">Вылічыць адрэзак маршруту OsmAnd без Інтэрнэту</string>
-    <string name="gpx_option_calculate_first_last_segment">Вылічыць маршрут OsmAnd для першага і апошняга ўчастка маршруту</string>
+    <string name="calculate_osmand_route_without_internet">Разлічыць адрэзак маршруту OsmAnd без Інтэрнэту</string>
+    <string name="gpx_option_calculate_first_last_segment">Разлічыць маршрут OsmAnd для першага і апошняга ўчастка маршруту</string>
     <string name="use_displayed_track_for_navigation">Ці хочаце вы выкарыстоўваць адлюстраваны сьлед для навігацыі?</string>
     <string name="route_info">Інфармацыя пра маршрут</string>
     <string name="routing_attr_prefer_motorway_name">Аддаваць перавагу аўтамагістралям</string>
@@ -1289,7 +1289,7 @@
     <string name="voice_pref_title">Голас</string>
     <string name="misc_pref_title">Рознае</string>
     <string name="localization_pref_title">Лякалізацыя</string>
-    <string name="interrupt_music">Перапыненьне музыкі</string>
+    <string name="interrupt_music">Прыпыніць музыку</string>
 	<string name="osmo_settings_uuid">Унікальны ідэнтыфікатар прылады</string>
     <string name="osmo_settings_descr">Глянуць унікальны рэгістрацыйны ключ прыстасаваньня і наладзіць асабісты канал адсочваньня</string>
     <string name="osmo_plugin_description">Гэты модуль дае некаторыя функцыянальныя магчымасці для маніторынгу OpenStreetMap гл. https://osmo.mobi 
@@ -1605,7 +1605,7 @@
     <string name="rendering_attr_shareTaxiRoutes_name">Маршрутныя таксі</string>
     <string name="rendering_attr_tramTrainRoutes_name">Маршруты трамваяў і цягнікоў</string>
     
-    <string name="impassable_road">Пазьбягаць дарогі…</string>
+    <string name="impassable_road">Пазбягаць дарог…</string>
     <string name="rendering_category_hide">Схаваць</string>
     <string name="wake_on_voice">Уключыць экран</string>
     <string name="wake_on_voice_descr">Уключаць экран прыстасаваньня пры набліжэньні да павароту</string>
@@ -2170,7 +2170,7 @@
     <string name="live_updates">Аўтаматычныя абнаўленні</string>
     <string name="select_voice_provider">Выберыце галасавыя ўказаньні</string>
     <string name="select_voice_provider_descr">Выберыце ці сьцягніце галасавыя ўказаньні для вашай мовы</string>
-    <string name="impassable_road_desc">Выберыце дарогі, якія вы хочаце пазьбягаць падчас навігацыі</string>
+    <string name="impassable_road_desc">Абярыце дарогі, якія вы хочаце пазбягаць падчас навігацыі</string>
     
     <string name="update_time">Час абнаўленьня</string>
 <string name="updates_size">Абнаўленьні: %s</string>
