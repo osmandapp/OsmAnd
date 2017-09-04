@@ -2897,4 +2897,9 @@ Copertura e qualità approssimativamente:
     <string name="save_route_point">Salva il Punto Percorso</string>
     <string name="route_point_one">Punto Percorso 1</string>
     <string name="empty_state_my_tracks">Aggiungi e registra Tracce</string>
+    <string name="move_all_to_history">Sposta tutto nella cronologia</string>
+    <string name="build_route">Costruisci un percorso</string>
+    <string name="show_direction">Mostra la direzione</string>
+    <string name="sort_by">Ordina per</string>
+    <string name="marker_options">Opzioni marcatori</string>
     </resources>
