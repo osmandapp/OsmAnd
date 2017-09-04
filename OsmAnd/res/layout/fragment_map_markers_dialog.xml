@@ -47,10 +47,16 @@
         android:layout_height="0dp"
         android:layout_weight="1">
 
-        <net.osmand.plus.LockableViewPager
-            android:id="@+id/map_markers_view_pager"
+        <!-- Coordinator layout is needed in order to display the snackbar above the bottom navigation -->
+        <android.support.design.widget.CoordinatorLayout
             android:layout_width="match_parent"
-            android:layout_height="match_parent"/>
+            android:layout_height="wrap_content">
+
+            <net.osmand.plus.LockableViewPager
+                android:id="@+id/map_markers_view_pager"
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"/>
+        </android.support.design.widget.CoordinatorLayout>
 
         <ImageView
             android:layout_width="match_parent"
