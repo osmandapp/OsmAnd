@@ -80,6 +80,7 @@ public class MapillaryImageDialog extends ContextMenuCardDialog {
 	private String viewerUrl;
 	private LatLon latLon;
 	private double ca = Double.NaN;
+	private boolean sync;
 
 	private View staticImageView;
 	private View noInternetView;
@@ -97,7 +98,7 @@ public class MapillaryImageDialog extends ContextMenuCardDialog {
 	}
 
 	public MapillaryImageDialog(MapActivity mapActivity, String key, String sKey, String imageUrl,
-								String viewerUrl, LatLon latLon, double ca, String title, String description) {
+								String viewerUrl, LatLon latLon, double ca, String title, String description, boolean sync) {
 		super(mapActivity, CardDialogType.MAPILLARY);
 		this.title = title;
 		this.description = description;
@@ -108,6 +109,7 @@ public class MapillaryImageDialog extends ContextMenuCardDialog {
 		this.latLon = latLon;
 		this.ca = ca;
 		this.ic = mapActivity.getMyApplication().getIconsCache();
+		this.sync = sync;
 	}
 
 	public String getKey() {
@@ -475,7 +477,12 @@ public class MapillaryImageDialog extends ContextMenuCardDialog {
 					// asking tile image async
 					boolean imgExist = mgr.tileExistOnFileSystem(tileId, map, tileX, tileY, TILE_ZOOM);
 					if (imgExist) {
-						tile = mgr.getGeometryTilesCache().getTileForMapAsync(tileId, map, tileX, tileY, TILE_ZOOM, false);
+						if (sync) {
+							tile = mgr.getGeometryTilesCache().getTileForMapSync(tileId, map, tileX, tileY, TILE_ZOOM, false);
+							sync = false;
+						} else {
+							tile = mgr.getGeometryTilesCache().getTileForMapAsync(tileId, map, tileX, tileY, TILE_ZOOM, false);
+						}
 					}
 					if (tile != null) {
 						tiles.put(tileId, new Pair<>(new QuadPointDouble(tileX,  tileY), tile));
@@ -492,7 +499,16 @@ public class MapillaryImageDialog extends ContextMenuCardDialog {
 											String viewerUrl, LatLon latLon, double ca,
 											String title, String description) {
 		MapillaryImageDialog dialog = new MapillaryImageDialog(mapActivity, key, null, imageUrl,
-				viewerUrl, latLon, ca, title, description);
+				viewerUrl, latLon, ca, title, description, false);
+		ContextMenuCardDialogFragment.showInstance(dialog);
+		return dialog;
+	}
+
+	public static MapillaryImageDialog show(MapActivity mapActivity, String key, String imageUrl,
+											String viewerUrl, LatLon latLon, double ca,
+											String title, String description, boolean sync) {
+		MapillaryImageDialog dialog = new MapillaryImageDialog(mapActivity, key, null, imageUrl,
+				viewerUrl, latLon, ca, title, description, sync);
 		ContextMenuCardDialogFragment.showInstance(dialog);
 		return dialog;
 	}
@@ -503,7 +519,7 @@ public class MapillaryImageDialog extends ContextMenuCardDialog {
 		String viewerUrl = MAPILLARY_VIEWER_URL_TEMPLATE + key;
 		LatLon latLon = new LatLon(latitude, longitude);
 		MapillaryImageDialog dialog = new MapillaryImageDialog(mapActivity, key, sKey, imageUrl, viewerUrl,
-				latLon, ca, title, description);
+				latLon, ca, title, description, false);
 		ContextMenuCardDialogFragment.showInstance(dialog);
 		return dialog;
 	}
