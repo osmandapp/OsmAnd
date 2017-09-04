@@ -1523,7 +1523,7 @@
     <string name="index_name_italy">Європа - Італія</string>
     <string name="index_name_gb">Європа - Великобританія</string>
     <string name="calculate_osmand_route_without_internet">Розрахувати відрізок маршруту OsmAnd без Інтернету</string>
-    <string name="gpx_option_calculate_first_last_segment">Розрахувати маршрут OsmAnd для першого і останнього відрізку маршруту</string>
+    <string name="gpx_option_calculate_first_last_segment">Обчислити маршрут OsmAnd для першого та останнього сегментів маршруту</string>
     <string name="use_displayed_track_for_navigation">Бажаєте використовувати показаний трек для навігації?</string>
     <string name="keep_and_add_destination_point">Додати як наступний пункт призначення</string>
     <string name="select_gpx">Обрати GPX…</string>
@@ -2992,4 +2992,5 @@
     <string name="add_segment_to_the_track">Додати до GPX-треку</string>
 <string name="keep_showing_on_map">Продовжувати показувати на мапі</string>
     <string name="exit_without_saving">Вийти без збереження?</string>
+    <string name="move_all_to_history">Перемістити усе в історію</string>
     </resources>
