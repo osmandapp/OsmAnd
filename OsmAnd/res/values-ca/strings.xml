@@ -636,7 +636,7 @@ Memòria proporcional %4$s MB (límit de l\'Android %5$s MB, Dalvik %6$s MB).</s
     <string name="basemap_missing">No es troba el mapa base mundial (cobreix tot el món però amb poc detall). És recomanable que us baixeu el fitxer World_basemap_x.obf per gaudir d\'una perspectiva global.</string>
     <string name="vector_data_missing">No s\'ha trobat les dades descarregades («fora de línia») a la targeta SD. És recomanable que les baixeu per utilitzar mapes sense connexió.</string>
     <string name="tts_missing_language_data">No hi ha dades instal·lades per la llengua seleccionada. Voleu anar al Market per instal·lar-ne?</string>
-    <string name="gpx_option_from_start_point">Passa al llarg de la traça sencera</string>
+    <string name="gpx_option_from_start_point">Passa per tota la traça sencera</string>
     <string name="switch_to_vector_map_to_see">Hi ha un mapa de vectors fora de línia per aquesta localització.
 \n\t\n\tPer activar-lo aneu a «Menú» → «Configuració del mapa» → «Font de mapes…» → «Mapes de vectors fora de línia».</string>
     <string name="overlay_transparency_descr">Modifiqueu l\'opacitat de la capa superposada</string>
@@ -1116,7 +1116,7 @@ Memòria proporcional %4$s MB (límit de l\'Android %5$s MB, Dalvik %6$s MB).</s
 \nLes dades globals (entre 70 graus nord i 70 graus sud) estan basades en mesures del SRTM (Shuttle Radar Topography Mission) i del ASTER (Advanced Spaceborne Thermal Emission and Reflection Radiometer), un instrument de generació d\'imatges a bord de Terra, el satèl·lit insígnia del Sistema d\'Observació de la Terra de la NASA. ASTER és un esforç de col·laboració entre la NASA, el Ministeri d\'Economia i Comerç del Japó (METI) i la fundació Japan Space Systems (J-spacesystems).</string>
     <string name="keep_and_add_destination_point">Afegeix com el següent punt de destinació</string>
     <string name="calculate_osmand_route_without_internet">Calcula un segment de ruta a l\'OsmAnd sense Internet</string>
-    <string name="gpx_option_calculate_first_last_segment">Calcula una ruta a l\'OsmAnd pels seus segments primer i darrer</string>
+    <string name="gpx_option_calculate_first_last_segment">Calcula una ruta OsmAnd al primer i al darrer segment de la ruta</string>
     <string name="use_displayed_track_for_navigation">Voleu utilitzar la traça visualitzada per la navegació?</string>
     <string name="index_item_nation_addresses">adreces per tot el país</string>
     <string name="index_item_world_altitude_correction">Correcció d\'altitud mundial</string>
@@ -1174,7 +1174,7 @@ Memòria proporcional %4$s MB (límit de l\'Android %5$s MB, Dalvik %6$s MB).</s
     <string name="misc_pref_title">Miscel·lània</string>
     <string name="localization_pref_title">Ubicació</string>
     <string name="interrupt_music_descr">Les indicacions de veu suspenen la reproducció de música, no s\'hi superposen</string>
-    <string name="interrupt_music">Interrompre la música</string>
+    <string name="interrupt_music">Atura la música</string>
     <string name="osmo_settings_uuid">Identificador únic del dispositiu</string>
     <string name="osmo_settings_descr">Configureu els paràmetres de monitorització i el canal de seguiment personal</string>
     <string name="osmo_plugin_description">"Aquest connector us ofereix parcialment la funcionalitat de la Monitorització OpenStreetmap, consulteu http://osmo.mobi. 
