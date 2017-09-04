@@ -6,6 +6,7 @@ import android.support.annotation.Nullable;
 import net.osmand.data.LatLon;
 import net.osmand.data.LocationPoint;
 import net.osmand.data.PointDescription;
+import net.osmand.plus.MapMarkersHelper.MapMarker.DisplayPlace;
 import net.osmand.util.Algorithms;
 
 import java.util.ArrayList;
@@ -36,9 +37,17 @@ public class MapMarkersHelper {
 		public boolean selected;
 		public int dist;
 		public long creationDate;
+		public long visitedDate;
+		public DisplayPlace displayPlace;
+
+		public enum DisplayPlace {
+			WIDGET,
+			TOPBAR
+		}
 
 		public MapMarker(LatLon point, PointDescription name, int colorIndex,
-						 boolean selected, long creationDate, int index) {
+						 boolean selected, long creationDate, long visitedDate,
+						 DisplayPlace displayPlace, int index) {
 			this.point = point;
 			this.pointDescription = name;
 			this.colorIndex = colorIndex;
@@ -179,7 +188,7 @@ public class MapMarkersHelper {
 			}
 			MapMarker mapMarker = new MapMarker(ips.get(i),
 					PointDescription.deserializeFromString(desc.get(i), ips.get(i)), colorIndex,
-					selections.get(i), creationDates.get(i), i);
+					selections.get(i), creationDates.get(i), 0, DisplayPlace.WIDGET, i);
 			mapMarkers.add(mapMarker);
 		}
 
@@ -193,7 +202,7 @@ public class MapMarkersHelper {
 			}
 			MapMarker mapMarker = new MapMarker(ips.get(i),
 					PointDescription.deserializeFromString(desc.get(i), ips.get(i)),
-					colorIndex, false, creationDates.get(i), i);
+					colorIndex, false, creationDates.get(i), 0, DisplayPlace.WIDGET, i);
 			mapMarker.history = true;
 			mapMarkersHistory.add(mapMarker);
 		}
@@ -305,7 +314,7 @@ public class MapMarkersHelper {
 
 	public void removeActiveMarkers() {
 		cancelAddressRequests();
-		for (int i = mapMarkers.size() - 1; i>= 0; i--) {
+		for (int i = mapMarkers.size() - 1; i >= 0; i--) {
 			MapMarker marker = mapMarkers.get(i);
 			addMapMarkerHistory(marker);
 		}
