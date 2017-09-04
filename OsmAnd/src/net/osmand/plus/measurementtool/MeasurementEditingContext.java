@@ -180,8 +180,10 @@ public class MeasurementEditingContext {
 		before.points.clear();
 		after.points.clear();
 		if (inSnapToRoadMode) {
-			beforeCacheForSnap.points.clear();
-			afterCacheForSnap.points.clear();
+			if (beforeCacheForSnap != null && afterCacheForSnap != null) {
+				beforeCacheForSnap.points.clear();
+				afterCacheForSnap.points.clear();
+			}
 			needUpdateCacheForSnap = true;
 		} else {
 			beforeCacheForSnap = null;
