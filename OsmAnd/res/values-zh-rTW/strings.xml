@@ -2826,9 +2826,9 @@ OsmAnd (Automated Navigation Directions) 是一個地圖和導航的應用程式
     <string name="add_point_before">增加標點之前</string>
     <string name="add_point_after">增加標點之後</string>
     <string name="shared_string_options">選項</string>
-    <string name="measurement_tool_snap_to_road_descr">OsmAnd 將依據導航類型，增加輔助的標點。</string>
+    <string name="measurement_tool_snap_to_road_descr">OsmAnd 將連接標點與已選取設定檔的路線。</string>
     <string name="measurement_tool_save_as_new_track_descr">您可以將標點儲存為路線標點或是一條線路。</string>
-    <string name="choose_navigation_type">選擇導航類型</string>
+    <string name="choose_navigation_type">選擇導航設定檔</string>
     <string name="add_route_points">增加路線標點</string>
     <string name="add_line">增加線路</string>
     <string name="empty_state_my_tracks">增加並錄製軌跡</string>
