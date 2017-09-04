@@ -78,11 +78,17 @@ public class MapMarkersDialogFragment extends android.support.v4.app.DialogFragm
 				switch (menuItem.getItemId()) {
 					case R.id.action_active:
 						((MapMarkersActiveFragment) adapter.getItem(0)).startLocationUpdate();
+						if (viewPager.getCurrentItem() != 0) {
+							((MapMarkersActiveFragment) adapter.getItem(0)).updateAdapter();
+						}
 						viewPager.setCurrentItem(0);
 						optionsButton.setVisibility(View.VISIBLE);
 						return true;
 					case R.id.action_history:
 						((MapMarkersActiveFragment) adapter.getItem(0)).stopLocationUpdate();
+						if (viewPager.getCurrentItem() != 1) {
+							((MapMarkersHistoryFragment) adapter.getItem(1)).updateAdapter();
+						}
 						viewPager.setCurrentItem(1);
 						optionsButton.setVisibility(View.GONE);
 						return true;

@@ -17,7 +17,7 @@ public class MapMarkerItemViewHolder extends RecyclerView.ViewHolder {
 	final TextView distance;
 	final TextView point;
 	final TextView description;
-	final ImageButton options;
+	final ImageButton optionsBtn;
 
 	public MapMarkerItemViewHolder(View view) {
 		super(view);
@@ -28,6 +28,6 @@ public class MapMarkerItemViewHolder extends RecyclerView.ViewHolder {
 		distance = (TextView) view.findViewById(R.id.map_marker_distance);
 		point = (TextView) view.findViewById(R.id.map_marker_point_text_view);
 		description = (TextView) view.findViewById(R.id.map_marker_description);
-		options = (ImageButton) view.findViewById(R.id.map_marker_options_button);
+		optionsBtn = (ImageButton) view.findViewById(R.id.map_marker_options_button);
 	}
 }
