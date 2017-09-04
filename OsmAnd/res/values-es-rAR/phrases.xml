@@ -3531,4 +3531,6 @@
 	<string name="poi_boat_canoe_rental_rental_yes">Canoas: Sí</string>
 	<string name="poi_boat_canoe_rental_rental_no">Canoas: No</string>
 
+<string name="poi_network">Red</string>
+
 </resources>

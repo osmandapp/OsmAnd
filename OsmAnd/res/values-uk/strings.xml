@@ -232,7 +232,7 @@
   
   <string name="file_can_not_be_renamed">Файл не можна перейменувати.</string>
   <string name="file_with_name_already_exists">Файл з таким ім’ям вже існує.</string>
-  <string name="gpx_navigation">GPX маршрут</string>
+  <string name="gpx_navigation">Маршрут GPX</string>
   <string name="poi_query_by_name_matches_categories">Деякі категорії POI відповідають запиту, можете використовувати їх для створення фільтра:</string>
   <string name="data_to_search_poi_not_available">Локальні дані для пошуку POI за іменем не знайдено.</string>
   <string name="poi_filter_by_name">Пошук за назвою</string>
@@ -319,9 +319,9 @@
   <string name="tts_language_not_supported">Вибрана мова не підтримується встановленим рушієм Android TTS (перетворення тексту в мову). Ви бажаєте пошукати інший рушій TTS? Якщо ні, буде використовуватись інша встановлена мова рушія TTS.</string>
   <string name="tts_missing_language_data_title">Дані відсутні</string>
   <string name="tts_missing_language_data">Для даної мови відсутні дані TTS. Завантажити дані з Маркету?</string>
-  <string name="gpx_option_reverse_route">Виберіть зворотній напрямок</string>
+  <string name="gpx_option_reverse_route">Зворотній напрямок GPX</string>
   <string name="gpx_option_destination_point">Використовувати поточний пункт призначення</string>
-  <string name="gpx_option_from_start_point">Пройти увесь шлях спочатку</string>
+  <string name="gpx_option_from_start_point">Пройдіть по усьому треку</string>
   <string name="switch_to_vector_map_to_see">Для цього регіону доступні оффлайн векторні мапи\n\t\n\tДля їх використання виберіть пункт меню \'Налаштування Мапи\' → \'Джерело мапи…\' → \'Локальні векторні мапи\'.</string>
   <string name="choose_audio_stream">Голосові інструкції</string>
   <string name="choose_audio_stream_descr">Виберіть канал для голосових інструкцій</string>
@@ -1522,8 +1522,8 @@
 	<string name="index_name_canada">Північна Америка - Канада</string>
     <string name="index_name_italy">Європа - Італія</string>
     <string name="index_name_gb">Європа - Великобританія</string>
-    <string name="calculate_osmand_route_without_internet">Розрахувати відрізок маршруту OsmAnd без Інтернету</string>
-    <string name="gpx_option_calculate_first_last_segment">Розрахувати маршрут OsmAnd для першого і останнього відрізку маршруту</string>
+    <string name="calculate_osmand_route_without_internet">Розрахувати ділянку маршруту OsmAnd без Інтернету</string>
+    <string name="gpx_option_calculate_first_last_segment">Обчислити маршрут OsmAnd для першого та останнього сегментів маршруту</string>
     <string name="use_displayed_track_for_navigation">Бажаєте використовувати показаний трек для навігації?</string>
     <string name="keep_and_add_destination_point">Додати як наступний пункт призначення</string>
     <string name="select_gpx">Обрати GPX…</string>
@@ -1669,7 +1669,7 @@
     <string name="wake_on_voice_descr">Вмикати екран телефону (якщо він вимкнутий) під час наближення до повороту</string>
     <string name="shared_string_never">Ніколи</string>
     
-    <string name="impassable_road">Уникати дороги…</string>
+    <string name="impassable_road">Уникати доріг…</string>
     
     <string name="rendering_attr_trainLightrailRoutes_name">Маршрути поїздів</string>
     <string name="rendering_attr_tramRoutes_name">Маршрути трамваїв</string>
@@ -1814,7 +1814,7 @@
     <string name="short_location_on_map">Шир %1$s↵
 Дов %2$s</string>
     <string name="tips_and_tricks_descr">Запитання та відповіді, останні зміни та інше</string>
-    <string name="routing_settings_2">Параметри навігації</string>
+    <string name="routing_settings_2">Налаштування навігації</string>
     <string name="general_settings_2">Загальні налаштування</string>
 	<string name="shared_string_ellipsis">…</string>
 	<string name="shared_string_selected">Вибрані</string>
@@ -2172,7 +2172,7 @@
     <string name="available_maps">Доступні мапи</string>
     <string name="select_voice_provider">Виберіть голосові вказівки</string>
     <string name="select_voice_provider_descr">Виберіть або завантажте голосові вказівки для вашої мови</string>
-    <string name="impassable_road_desc">Виберіть дороги, яких ви бажаєте уникати під час навігації</string>
+    <string name="impassable_road_desc">Виберіть дороги, які потрібно уникнути під час навігації</string>
     <string name="shared_string_sound">Звук</string>
     <string name="poi_deleted_localy">POI буде вилучено після того, як ви вивантажите ваші зміни</string>
     <string name="confirm_download_roadmaps">Ви впевнені, що бажаєте завантажити мапу з дорогами, хоча ви вже маєете стандартну (повну) мапу?</string>
@@ -2674,7 +2674,7 @@
     <string name="animate_my_location_desc">Задіяти анімацію мого місця розташування під час навігації</string>
     <string name="do_not_show_startup_messages">Не показувати повідомлення при запуску</string>
     <string name="subscribe_email_desc">Підпишіться на наше email-розсилання про знижки на OsmAnd та отримаєте 3 додаткові завантаження мап!</string>
-    <string name="do_not_show_startup_messages_desc">Відображаються знижки та спеціальні повідомлення про місцеві події</string>
+    <string name="do_not_show_startup_messages_desc">Пригнічує відображення знижок на застосунок та спеціальні повідомлення про місцеві події</string>
     <string name="restart_search">Шукати знову</string>
     <string name="increase_search_radius">Збільшити радіус пошуку</string>
     <string name="nothing_found">Нічого не знайдено :(</string>
@@ -2977,9 +2977,9 @@
     <string name="add_point_before">Додати точку раніше</string>
     <string name="add_point_after">Додати точку опісля</string>
     <string name="shared_string_options">Параметри</string>
-    <string name="measurement_tool_snap_to_road_descr">OsmAnd додасть додаткові точки в залежності від типу навігації.</string>
+    <string name="measurement_tool_snap_to_road_descr">OsmAnd з’єднає точки з маршрутами для обраного профілю.</string>
     <string name="measurement_tool_save_as_new_track_descr">Ви може зберегти точки, як точки маршруту або як лінію.</string>
-    <string name="choose_navigation_type">Вибрати тип навігації</string>
+    <string name="choose_navigation_type">Виберіть профіль навігації</string>
     <string name="add_route_points">Додати точки маршруту</string>
     <string name="add_line">Додати лінію</string>
     <string name="empty_state_my_tracks">Додавати і записувати треки</string>
@@ -2992,4 +2992,11 @@
     <string name="add_segment_to_the_track">Додати до GPX-треку</string>
 <string name="keep_showing_on_map">Продовжувати показувати на мапі</string>
     <string name="exit_without_saving">Вийти без збереження?</string>
+    <string name="move_all_to_history">Перемістити усе в історію</string>
+    <string name="build_route">Побудувати маршрут</string>
+    <string name="show_direction">Показати напрямок</string>
+    <string name="sort_by">Сортувати за</string>
+    <string name="marker_options">Параметри маркера</string>
+    <string name="do_not_use_animations">Не застосовувати анімацію</string>
+    <string name="do_not_use_animations_descr">Відключення анімації в програмі</string>
     </resources>

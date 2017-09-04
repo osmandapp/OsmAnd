@@ -15,7 +15,6 @@ import java.io.RandomAccessFile;
 import java.text.DecimalFormat;
 import java.text.MessageFormat;
 import java.util.ArrayList;
-import java.util.Arrays;
 import java.util.Collections;
 import java.util.Comparator;
 import java.util.Date;
@@ -72,19 +71,19 @@ public class BinaryInspector {
 		// test cases show info
 		if ("test".equals(args[0])) {
 			in.inspector(new String[] {
-
-//					"-vpoi",
-					"-vmap", "-vmapobjects", // "-vmapcoordinates",
+					"-vpoi",
+//					"-vmap", "-vmapobjects", 
+//					"-vmapcoordinates",
 //					"-vrouting",
 //					"-vtransport",
 //					"-vaddress", "-vcities","-vstreetgroups",
 //					"-vstreets", "-vbuildings", "-vintersections",
 //					"-lang=ru",
 //					"-bbox=30.4981,50.4424,30.5195,50.4351",
-//					"-osm="+System.getProperty("maps.dir")+"/map_full.obf.osm",
-					System.getProperty("maps.dir")+"/diff/2017_08_28_01_00.obf"
-//					System.getProperty("maps.dir")+"../temp/kiev/Ukraine_kiev-city_europe_17_06_05.obf",
-//					System.getProperty("maps.dir")+"Ukraine_kiev-city_europe_2.obf",
+//					"-osm="+System.getProperty("maps.dir")+"/map_full_1.obf.osm",
+					System.getProperty("maps.dir")+"/diff/Bulgaria_europe_01_00.obf"
+//					System.getProperty("maps.dir")+"/diff/Diff.obf"
+//					System.getProperty("maps.dir")+"/Ukraine_kiev-city_europe_2.obf"
 			});
 		} else {
 			in.inspector(args);
@@ -895,7 +894,6 @@ public class BinaryInspector {
 								} catch (IOException e) {
 									throw new RuntimeException(e);
 								}
-//							} else if(obj.getId() >> 1 == 205743436l) {
 							} else {
 								printMapDetails(obj, b, vInfo.vmapCoordinates);
 								println(b.toString());
@@ -923,7 +921,7 @@ public class BinaryInspector {
 	}
 
 
-	private static void printMapDetails(BinaryMapDataObject obj, StringBuilder b, boolean vmapCoordinates) {
+	public static void printMapDetails(BinaryMapDataObject obj, StringBuilder b, boolean vmapCoordinates) {
 		boolean multipolygon = obj.getPolygonInnerCoordinates() != null && obj.getPolygonInnerCoordinates().length > 0;
 		if (multipolygon) {
 			b.append("Multipolygon");
@@ -1242,7 +1240,7 @@ public class BinaryInspector {
 							}
 						}
 
-						println(object.getType().getKeyName() + " : " + object.getSubType() + " " + object.getName() + " " + object.getLocation() + " id=" + (object.getId() >> 1) + " " + s);
+						println(object.getType().getKeyName() + ": " + object.getSubType() + " " + object.getName() + " " + object.getLocation() + " osmid=" + (object.getId() >> 1) + " " + s);
 						return false;
 					}
 

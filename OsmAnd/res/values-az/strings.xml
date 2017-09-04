@@ -336,7 +336,7 @@
     <string name="map_widget_plain_time">Hazırki vaxt</string>
     <string name="selected_gpx_info_show">"
 \n
-\nXəritədə görmək üçün basıb saxlayın"</string>
+\nXəritədə görmək üçün uzun basın"</string>
     <string name="local_index_gpx_info_show">"
 \n
 \nSeçimlər üçün basıb saxlayın"</string>
@@ -472,7 +472,7 @@
     <string name="map_widget_renderer">Xəritə stili</string>
     <string name="map_widget_show_ruler">Xətkeş</string>
     <string name="map_widget_transparent">Şəffaf widget-lər</string>
-    <string name="screen_is_locked">Ekran kilidini açmaq üçün kilid ikonuna basın</string>
+    <string name="screen_is_locked">Ekran kilidini açmaq üçün kilid ikonuna toxunun</string>
     <string name="map_widget_top_text">Küçə adı</string>
     <string name="map_widget_back_to_loc">Haradayam</string>
     <string name="map_widget_compass">Kompas</string>
@@ -842,7 +842,7 @@
     <string name="osm_live_subscription_desc">Abunəlik bütün qlobal xəritələr üçün saatlıq, günlük, həftəlik yenilənmələri və limitsiz endirmələri təmin edir.</string>
     <string name="get_for">%1$s ödəyib al</string>
     <string name="get_for_month">Aylıq %1$s ödəyib al</string>
-    <string name="osmand_plus_banner_desc">Limitsiz xəritə endirmələri və aylıq xəritə yenilənmələri ilə OsmAnd-ın tam versiyası.</string>
+    <string name="osmand_plus_banner_desc">Limitsiz xəritə endirmələri, yenilənmələri və Vikipediya qoşması.</string>
     <string name="skip_map_downloading">Endirilən xəritələri keç</string>
     <string name="skip_map_downloading_desc">Quraşdırılmış offlayn xəritəniz yoxdur. Siyahıdan bir xəritə seçə və ya xəritələri daha sonra Menyudan endirə bilərsiniz - %1$s.</string>
     <string name="search_another_country">Başqa region seçin</string>
@@ -1348,7 +1348,7 @@
     <string name="av_use_external_recorder_descr">Video çəkmək üçün sistem proqramını istifadə et</string>
     <string name="av_use_external_recorder">Sistem proqramını istifadə et</string>
     <string name="recording_error">Qeydetmə zamanı səhv baş verdi</string>
-    <string name="recording_is_recorded">Səs/video qeyd edilir. Dayandırmaq üçün AV widget-inə basın.</string>
+    <string name="recording_is_recorded">Səs/video qeyd edilir. Dayandırmaq üçün AV widget-inə toxunun.</string>
     <string name="building_number">Bina nömrəsi</string>
     <string name="shared_string_permissions">İcazələr</string>
     <string name="import_gpx_failed_descr">OsmAnd faylı idxal edə bilmir. OsmAnd-ın həmin yerdən fayl oxumaq icazəsi olub-olmadığını yoxlayın.</string>
@@ -1365,7 +1365,7 @@
     <string name="gpx_no_tracks_title_folder">Qovluğa izlər əlavə edə də bilərsiniz</string>
     <string name="gpx_add_track">İz əlavə et</string>
     <string name="storage_place_description">OsmAnd-ın məlumat saxlama yeri (xəritələr, izlər və s.): %1$s.</string>
-    <string name="shared_string_save_as_gpx">GPX izi olaraq saxla</string>
+    <string name="shared_string_save_as_gpx">Yeni GPX izi olaraq saxla</string>
     <string name="shared_string_my_tracks">İzlərim</string>
     <string name="shared_string_currently_recording_track">Hazırki qeyd edilən iz</string>
     <string name="track_segments">İz seqmentləri</string>
@@ -1513,7 +1513,7 @@
     <string name="routing_attr_allow_motorway_name">Avtomagistrallara icazə ver</string>
     <string name="routing_attr_allow_motorway_description">Avtomagistrallara icazə ver</string>
     <string name="trip_rec_notification_settings">Səyahət qeydetmə (məlumat yoxdur)</string>
-    <string name="trip_rec_notification_settings_desc">“Qeyd et” düyməsinə basaraq səyahət qeydetməni başlatmağa icazə verən bildirişi göstər</string>
+    <string name="trip_rec_notification_settings_desc">Səyahət qeydinə başlamağa imkan verən sistem bildirişi göstər</string>
     <string name="save_track_min_speed">Minimum qeydiyyat sürəti</string>
     <string name="new_filter_desc">Yeni filtr üçün ad daxil edin. Bu, sizin Kateqoriyalar bölmənizə əlavə olunur.</string>
     <string name="donation_to_osm">OpenStreetMap cəmiyyəti üçün ianə</string>
@@ -1704,4 +1704,16 @@
     <string name="shared_string_create">Yarat</string>
 <string name="shared_string_options">Seçimlər</string>
     <string name="enter_gpx_name">GPX fayl adı:</string>
+    <string name="move_all_to_history">Hamısını tarixçəyə daşı</string>
+    <string name="show_direction">İstiqaməti göstər</string>
+    <string name="sort_by">Sırala</string>
+    <string name="marker_options">İşarə seçimləri</string>
+    <string name="exit_without_saving">Yadda saxlamadan çıxılsın?</string>
+    <string name="save_as_route_point">Marşrut nöqtələri kimi saxla</string>
+    <string name="route_point">Marşrut nöqtəsi</string>
+    <string name="show_on_map_after_saving">Saxladıqdan sonra xəritədə göstər</string>
+    <string name="measurement_tool_action_bar">Xəritəyə baxın və nöqtələr əlavə edin</string>
+    <string name="add_route_points">Marşrut nöqtələri əlavə et</string>
+    <string name="add_waypoint">Yol nöqtəsi əlavə et</string>
+    <string name="empty_state_favourites">Favoritlər əlavə et</string>
     </resources>

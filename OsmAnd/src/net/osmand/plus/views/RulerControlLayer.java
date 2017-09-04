@@ -30,6 +30,7 @@ public class RulerControlLayer extends OsmandMapLayer {
 	private static final long DRAW_TIME = 2000;
 	private static final long DELAY_BEFORE_DRAW = 500;
 	private static final int TEXT_SIZE = 14;
+	private static final int MAX_ITERATIONS = 50;
 
 	private final MapActivity mapActivity;
 	private OsmandApplication app;
@@ -272,12 +273,18 @@ public class RulerControlLayer extends OsmandMapLayer {
 		int currY = (int) tb.getPixYFromLatLon(currentLoc.getLatitude(), currentLoc.getLongitude());
 		int width = tb.getPixWidth();
 		int height = tb.getPixHeight();
+		boolean needDraw = true;
 
-		if (currX < 0 || currY < 0 || currX > width || currY > height) {
+		if ((currX < 0 && x == 0) || (currY < 0 && y == 0)
+				|| (currX > width && x == width) || (currY > height && y == height)) {
+			needDraw = false;
+		} else if (currX < 0 || currY < 0 || currX > width || currY > height) {
 			float xNew = (currX + x) / 2;
 			float yNew = (currY + y) / 2;
+			int count = 0;
 
-			while (true) {
+			while (count < MAX_ITERATIONS) {
+				count++;
 				if (xNew < 0 || yNew < 0 || xNew > width || yNew > height) {
 					currX = (int) xNew;
 					currY = (int) yNew;
@@ -289,10 +296,12 @@ public class RulerControlLayer extends OsmandMapLayer {
 			}
 		}
 
-		canvas.rotate(-tb.getRotate(), tb.getCenterPixelX(), tb.getCenterPixelY());
-		canvas.drawLine(currX, currY, x, y, lineAttrs.paint);
-		drawFingerTouchIcon(canvas, x, y, nightMode);
-		canvas.rotate(tb.getRotate(), tb.getCenterPixelX(), tb.getCenterPixelY());
+		if (needDraw) {
+			canvas.rotate(-tb.getRotate(), tb.getCenterPixelX(), tb.getCenterPixelY());
+			canvas.drawLine(currX, currY, x, y, lineAttrs.paint);
+			drawFingerTouchIcon(canvas, x, y, nightMode);
+			canvas.rotate(tb.getRotate(), tb.getCenterPixelX(), tb.getCenterPixelY());
+		}
 	}
 
 	private void updateData(RotatedTileBox tb, QuadPoint center) {

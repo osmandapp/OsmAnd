@@ -2595,9 +2595,9 @@ Abasta l\'àrea: %1$s x %2$s</string>
     <string name="add_point_before">Afegeix un punt abans de</string>
     <string name="add_point_after">Afegeix un punt després de</string>
     <string name="shared_string_options">Opcions</string>
-    <string name="measurement_tool_snap_to_road_descr">OsmAnd afegirà punts addicionals, en funció del tipus de navegació.</string>
+    <string name="measurement_tool_snap_to_road_descr">OsmAnd enllaçarà els punts amb rutes segons el perfil seleccionat.</string>
     <string name="measurement_tool_save_as_new_track_descr">Podeu desar els punts, ja sigui com a punts de la ruta o com una línia.</string>
-    <string name="choose_navigation_type">Escolliu el tipus de navegació</string>
+    <string name="choose_navigation_type">Escolliu el perfil de navegació</string>
     <string name="add_route_points">Afegeix punts de la ruta</string>
     <string name="add_line">Afegeix una línia</string>
     <string name="empty_state_my_tracks">Afegeix i enregistra traces</string>
@@ -2612,4 +2612,9 @@ Abasta l\'àrea: %1$s x %2$s</string>
     <string name="exit_without_saving">Voleu sortir sense desar?</string>
     <string name="do_not_use_animations">Sense ús d\'animacions</string>
     <string name="do_not_use_animations_descr">Desactiva les animacions a l\'aplicació</string>
+    <string name="move_all_to_history">Mou tot a l\'històric</string>
+    <string name="build_route">Calcula la ruta</string>
+    <string name="show_direction">Mostra la direcció</string>
+    <string name="sort_by">Ordena per</string>
+    <string name="marker_options">Opcions de marcador</string>
     </resources>

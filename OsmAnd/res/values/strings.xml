@@ -28,9 +28,9 @@
     <string name="add_point_before">Add point before</string>
     <string name="add_point_after">Add point after</string>
     <string name="shared_string_options">Options</string>
-    <string name="measurement_tool_snap_to_road_descr">OsmAnd will add additional points, depending on the navigation type.</string>
+    <string name="measurement_tool_snap_to_road_descr">OsmAnd will connect the points with routes for the selected profile.</string>
     <string name="measurement_tool_save_as_new_track_descr">You can save the points either as route points or as a line.</string>
-    <string name="choose_navigation_type">Choose navigation type</string>
+    <string name="choose_navigation_type">Select navigation profile</string>
     <string name="none_point_error">Please add at least one point.</string>
     <string name="enter_gpx_name">GPX file name:</string>
     <string name="show_on_map_after_saving">Show on map after saving</string>

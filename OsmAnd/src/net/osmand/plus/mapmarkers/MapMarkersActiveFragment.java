@@ -121,6 +121,12 @@ public class MapMarkersActiveFragment extends Fragment implements OsmAndCompassL
 		return null;
 	}
 
+	void updateAdapter() {
+		if (adapter != null) {
+			adapter.notifyDataSetChanged();
+		}
+	}
+
 	private void updateLocationUi() {
 		final MapActivity mapActivity = (MapActivity) getActivity();
 		if (mapActivity != null) {

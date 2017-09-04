@@ -863,7 +863,7 @@ Se aprecia la participación activa, y las contribuciones pueden hacerse directa
     <string name="avoid_motorway">Evitar autopistas</string>
     <string name="auto_zoom_map_descr">Ampliación automática del mapa, según la velocidad (mientras el mapa se sincroniza con la ubicación actual)</string>
     <string name="auto_zoom_map">Ampliación automática del mapa</string>
-    <string name="snap_to_road_descr">﻿Ajusta la ubicación al camino durante la navegación</string>
+    <string name="snap_to_road_descr">Ajusta la ubicación al camino durante la navegación</string>
     <string name="snap_to_road">Ajustar al camino</string>
     <string name="interrupt_music_descr">El aviso por voz, pausa la reproducción de música (no sólo reduce el volumen)</string>
     <string name="interrupt_music">Pausar música</string>
@@ -2720,9 +2720,9 @@ Proporciona un código completo</string>
     <string name="add_point_before">Añadir punto anterior</string>
     <string name="add_point_after">Añadir punto posterior</string>
     <string name="shared_string_options">Opciones</string>
-    <string name="measurement_tool_snap_to_road_descr">OsmAnd añadirá puntos adicionales, según el tipo de navegación utilizado.</string>
+    <string name="measurement_tool_snap_to_road_descr">OsmAnd conectará los puntos con las rutas del perfil elegido.</string>
     <string name="measurement_tool_save_as_new_track_descr">Puedes guardar los puntos, ya sea como puntos de ruta o como una línea.</string>
-    <string name="choose_navigation_type">Elegir tipo de navegación</string>
+    <string name="choose_navigation_type">Elegir perfil de navegación</string>
     <string name="add_route_points">Añadir puntos de ruta</string>
     <string name="add_line">Añadir línea</string>
     <string name="empty_state_my_tracks">Añadir y grabar trazas</string>
@@ -2737,4 +2737,9 @@ Proporciona un código completo</string>
     <string name="exit_without_saving">¿Salir sin guardar?</string>
     <string name="do_not_use_animations">No usar animaciones</string>
     <string name="do_not_use_animations_descr">Desactiva las animaciones en la aplicación</string>
+    <string name="move_all_to_history">Mover todo al historial</string>
+    <string name="build_route">Crear ruta</string>
+    <string name="show_direction">Mostrar dirección</string>
+    <string name="sort_by">Ordenar por</string>
+    <string name="marker_options">Opciones del marcador</string>
     </resources>

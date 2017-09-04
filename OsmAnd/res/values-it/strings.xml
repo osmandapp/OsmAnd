@@ -71,7 +71,7 @@ La memoria utilizzata è  {1} MB.
     <string name="auto_follow_route_navigation_descr">Centra automaticamente la visione della mappa solo durante la navigazione.</string>
     <string name="auto_follow_location_enabled">Visualizzazione mappa centrata automaticamente.</string>
     <string name="pref_vector_rendering">Opzioni specifiche per la rappresentazione vettoriale</string>
-    <string name="pref_overlay">﻿Sovrapposizione / sfondo</string>
+    <string name="pref_overlay">Sovrapposizione / sfondo</string>
     <string name="pref_raster_map">Impostazioni della fonte mappa</string>
     <string name="pref_vector_map">Impostazioni della mappa vettoriale</string>
     <string name="delete_confirmation_msg">Eliminare %1$s?</string>
@@ -856,18 +856,18 @@ Memoria in proporzione %4$s MB (limite di Android %5$s MB, Dalvik %6$s MB).</str
     <string name="show_lanes">Corsie</string>
     <string name="avoid_unpaved">Evita le strade non asfaltate</string>
     <string name="avoid_ferries">Evita i traghetti</string>
-    <string name="avoid_in_routing_title">﻿Evita…</string>
+    <string name="avoid_in_routing_title">Evita…</string>
     <string name="avoid_in_routing_descr">Evita strade a pagamento, sterrate, traghetti</string>
     <string name="show_warnings_title">Mostra avvisi…</string>
     <string name="show_warnings_descr">Configura gli avvisi sul traffico (limiti velocità, fermate forzate, dossi rallentatori), avvisi autovelox e indicazioni di corsia</string>
     <string name="map_widget_fluorescent">Itinerari fluorescenti</string>
     <string name="map_widget_show_ruler">Righello</string>
 
-    <string name="map_widget_view_direction">﻿Direzione della visuale</string>
+    <string name="map_widget_view_direction">Direzione della visuale</string>
     <string name="map_widget_transparent">Widget trasparenti</string>
 
 
-    <string name="gps_wakeup_interval">﻿Intervallo di risveglio GPS: %s</string>
+    <string name="gps_wakeup_interval">Intervallo di risveglio GPS: %s</string>
     <string name="int_continuosly">Continuo</string>
     <string name="email">e-mail</string>
 
@@ -2689,7 +2689,7 @@ Rappresenta l\'area: %1$s x %2$s</string>
     <string name="do_not_send_anonymous_app_usage">Non inviare statistiche anonime sull\'utilizzo dell\'app</string>
     <string name="do_not_send_anonymous_app_usage_desc">OsmAnd raccoglie informazioni su quale parti dell\'applicazione tu utilizzi. La tua geolocalizzazione non viene mai inviata, nemmeno qualsiasi dato che tu immetti nell\'app o dettagli sulle aree che visualizzi cerchi o scarichi.</string>
     <string name="do_not_show_startup_messages">Non mostrare alcun messaggio all\'avvio</string>
-    <string name="do_not_show_startup_messages_desc">Mostra messaggi riguardo app in sconto ed eventi locali speciali</string>
+    <string name="do_not_show_startup_messages_desc">Elimina messaggi riguardo sconti dell\'app ed eventi speciali locali</string>
     <string name="parking_options">Opzioni parcheggio</string>
     <string name="full_version_thanks">Grazie per avere acquistato la versione completa di OsmAnd!</string>
     <string name="fonts_header">Caratteri della mappa</string>
@@ -2889,4 +2889,12 @@ Copertura e qualità approssimativamente:
     <string name="do_not_use_animations">Non utilizzare le animazioni</string>
     <string name="do_not_use_animations_descr">Disabilita le animazioni nell\'app</string>
     <string name="keep_showing_on_map">Mantieni visualizzato nella mappa</string>
+    <string name="live_monitoring_max_interval_to_send">Tempo tampone per il tracciamento online</string>
+    <string name="live_monitoring_max_interval_to_send_desrc">Specifica un tempo della memoria tampone per memorizzare le localizzazioni quando non c\'è connessione</string>
+    <string name="retry">Riprova</string>
+    <string name="add_route_points">Aggiungi nuovi punti al percorso</string>
+    <string name="add_line">Aggiungi una linea</string>
+    <string name="save_route_point">Salva il Punto Percorso</string>
+    <string name="route_point_one">Punto Percorso 1</string>
+    <string name="empty_state_my_tracks">Aggiungi e registra Tracce</string>
     </resources>

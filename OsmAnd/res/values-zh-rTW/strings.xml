@@ -2649,7 +2649,7 @@ OsmAnd (Automated Navigation Directions) 是一個地圖和導航的應用程式
     <string name="parking_options">停車選項</string>
     <string name="do_not_send_anonymous_app_usage">不要傳送匿名應用程式使用方式統計</string>
     <string name="do_not_show_startup_messages">不要在啟動時顯示訊息</string>
-    <string name="do_not_show_startup_messages_desc">隱匿顯示應用程式折扣和專用的在地事件訊息</string>
+    <string name="do_not_show_startup_messages_desc">封鎖顯示應用程式折扣和專用的在地事件訊息</string>
     <string name="do_not_send_anonymous_app_usage_desc">OsmAnd 收集您開了應用程式哪些部件的資訊。絕不會傳送您所在的位置，也沒有您向應用程式輸入的任何內容或您所查看區域的詳細資料、搜尋或下載。</string>
     <string name="select_street">選擇街道</string>
     <string name="shared_string_in_name">在 %1$s</string>
@@ -2826,9 +2826,9 @@ OsmAnd (Automated Navigation Directions) 是一個地圖和導航的應用程式
     <string name="add_point_before">增加標點之前</string>
     <string name="add_point_after">增加標點之後</string>
     <string name="shared_string_options">選項</string>
-    <string name="measurement_tool_snap_to_road_descr">OsmAnd 將依據導航類型，增加輔助的標點。</string>
+    <string name="measurement_tool_snap_to_road_descr">OsmAnd 將連接標點與已選取設定檔的路線。</string>
     <string name="measurement_tool_save_as_new_track_descr">您可以將標點儲存為路線標點或是一條線路。</string>
-    <string name="choose_navigation_type">選擇導航類型</string>
+    <string name="choose_navigation_type">選擇導航設定檔</string>
     <string name="add_route_points">增加路線標點</string>
     <string name="add_line">增加線路</string>
     <string name="empty_state_my_tracks">增加並錄製軌跡</string>
@@ -2843,4 +2843,9 @@ OsmAnd (Automated Navigation Directions) 是一個地圖和導航的應用程式
     <string name="exit_without_saving">離開而不儲存嗎？</string>
     <string name="do_not_use_animations">不使用動畫</string>
     <string name="do_not_use_animations_descr">停用在應用程式中的動畫</string>
+    <string name="move_all_to_history">全部移動到歷程</string>
+    <string name="build_route">建立路線</string>
+    <string name="show_direction">顯示方向</string>
+    <string name="sort_by">排序方式</string>
+    <string name="marker_options">標記選項</string>
     </resources>

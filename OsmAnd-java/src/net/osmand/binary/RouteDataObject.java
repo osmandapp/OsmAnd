@@ -77,11 +77,7 @@ public class RouteDataObject {
 			
 			boolean equals = true;
 			equals = equals && Arrays.equals(this.restrictions, thatObj.restrictions);
-			if (equals) {
-				if (this.names != null && thatObj.names != null) {
-					equals = Arrays.equals(this.names.values(), thatObj.names.values());
-				}
-			}
+			
 			if (equals) {
 				if (this.types == null || thatObj.types == null) {
 					equals = this.types == thatObj.types;
@@ -158,7 +154,7 @@ public class RouteDataObject {
 					}
 				}
 			}
-			
+			return equals;
 		}
 		return false;
 	}
@@ -396,6 +392,10 @@ public class RouteDataObject {
 
 	public int getRestrictionType(int i) {
 		return (int) (restrictions[i] & RESTRICTION_MASK);
+	}
+	
+	public long getRawRestriction(int i) {
+		return restrictions[i];
 	}
 
 	public long getRestrictionId(int i) {

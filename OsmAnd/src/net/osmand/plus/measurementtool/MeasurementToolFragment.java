@@ -1395,7 +1395,7 @@ public class MeasurementToolFragment extends Fragment {
 				hidePointsList();
 				return;
 			}
-			if (editingCtx.getPointsCount() < 1 || saved) {
+			if (editingCtx.getPointsCount() == 0 || saved) {
 				dismiss(mapActivity);
 				return;
 			}

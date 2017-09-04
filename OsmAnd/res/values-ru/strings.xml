@@ -5,7 +5,7 @@
     <string name="restart_search">Искать снова</string>
     <string name="increase_search_radius">Увеличить радиус поиска</string>
     <string name="nothing_found">Ничего не найдено :(</string>
-    <string name="nothing_found_descr">Попробуйте изменить запрос или увеличить радиус поиска</string>
+    <string name="nothing_found_descr">Изменить запрос или увеличить радиус поиска</string>
     <string name="quick_action_showhide_osmbugs_title">Показать/скрыть заметки OSM</string>
     <string name="quick_action_osmbugs_show">Показать заметки OSM</string>
     <string name="quick_action_osmbugs_hide">Скрыть заметки OSM</string>
@@ -2401,10 +2401,10 @@
     <string name="mapillary">Mapillary</string>
     <string name="plugin_mapillary_descr">Уличные фотографии для всех. Исследуйте места, сотрудничайте, снимайте мир.</string>
     <string name="save_poi_too_many_uppercase">Название содержит слишком много заглавных букв. Вы действительно хотите продолжить?</string>
-    <string name="quick_action_resume_pause_navigation_descr">Нажмите эту кнопку, чтобы приостановить навигацию или возобновить ее, если она уже приостановлена.</string>
+    <string name="quick_action_resume_pause_navigation_descr">Нажмите эту кнопку, чтобы приостановить навигацию или возобновить ее.</string>
     <string name="quick_action_show_navigation_finish_dialog">Показывать диалог завершения навигации</string>
-    <string name="quick_action_start_stop_navigation">Старт/финиш навигации</string>
-    <string name="quick_action_start_stop_navigation_descr">Нажмите эту кнопку, чтобы начать навигацию, или остановить ее, если она уже была запущена.</string>
+    <string name="quick_action_start_stop_navigation">Запуск/остановка навигации</string>
+    <string name="quick_action_start_stop_navigation_descr">Нажмите эту кнопку, чтобы начать навигацию, или остановить ее.</string>
     <string name="store_tracks_in_monthly_directories">Сохранять записанные треки в папках помесячно</string>
     <string name="store_tracks_in_monthly_directories_descrp">Сохранять записанные треки в подпапках с записью месяца (например, 2017-01).</string>
     <string name="mapillary_menu_title_tile_cache">Кэш тайлов</string>
@@ -2432,7 +2432,7 @@
     <string name="moving_time">Время в движении</string>
     <string name="max_min">Макс/Мин</string>
     <string name="min_max">Мин/Макс</string>
-    <string name="quick_action_resume_pause_navigation">Возобновить/Приостановить навигацию</string>
+    <string name="quick_action_resume_pause_navigation">Возобновить/приостановить навигацию</string>
     <string name="mapillary_menu_descr_tile_cache">Перезагрузка тайлов для отображения актуальных данных.</string>
     <string name="mapillary_menu_edit_text_hint">Введите имя пользователя</string>
     <string name="shared_string_reset">Сбросить</string>
@@ -2471,4 +2471,5 @@
 \nи прочее…"</string>
     <string name="rendering_value_translucent_pink_name">Прозрачно-розовый</string>
     <string name="lang_ber">Берберский язык</string>
+    <string name="move_all_to_history">Переместить все в историю</string>
     </resources>

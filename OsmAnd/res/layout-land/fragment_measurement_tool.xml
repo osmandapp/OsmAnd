@@ -101,7 +101,7 @@
                     android:layout_toLeftOf="@id/up_down_button"
                     android:layout_toRightOf="@id/measurement_points_text_view"
                     android:layout_toStartOf="@id/up_down_button"
-                    android:textColor="?android:textColorSecondary"
+                    android:textColor="@color/color_distance"
                     android:textSize="@dimen/default_list_text_size"
                     tools:text=" – 700 m"/>
 

@@ -835,7 +835,7 @@ Tanto la ubicación como el tiempo de estacionamiento se muestran en el panel de
 \n - Orientación del mapa opcional a la brújula o a la dirección de movimiento
 \n - Indicación de carriles, mostrar límites de velocidad, voces grabadas y generadas opcionales</string>
     <string name="avoid_motorway">Evitar autopistas</string>
-    <string name="snap_to_road_descr">﻿Ajusta la posición a las carreteras durante la navegación</string>
+    <string name="snap_to_road_descr">Ajusta la posición a las carreteras durante la navegación</string>
     <string name="snap_to_road">Ajustar a carreteras</string>
     <string name="context_menu_item_first_intermediate_point">Añadir como primer destino intermedio</string>
     <string name="context_menu_item_last_intermediate_point">Añadir como último destino intermedio</string>
@@ -2674,4 +2674,9 @@ Por favor proporciona un código completo</string>
     <string name="import_track_desc">El archivo «%1$s» no contiene puntos de referencia, ¿Quiere importarlo como una traza?</string>
     <string name="move_point">Mover punto</string>
     <string name="add_segment_to_the_track">Añadir a una traza GPX</string>
-</resources>
+<string name="move_all_to_history">Mover todo al historial</string>
+    <string name="build_route">Crear ruta</string>
+    <string name="show_direction">Mostrar dirección</string>
+    <string name="sort_by">Ordenar por</string>
+    <string name="marker_options">Opciones del marcador</string>
+    </resources>
