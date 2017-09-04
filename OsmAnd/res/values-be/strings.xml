@@ -2842,9 +2842,9 @@
     <string name="add_point_before">Дадаць кропку перад</string>
     <string name="add_point_after">Дадаць кропку пасля</string>
     <string name="shared_string_options">Опцыі</string>
-    <string name="measurement_tool_snap_to_road_descr">OsmAnd дадасць дадатковыя кропкі ў залежнасці ад тыпу навігацыі.</string>
+    <string name="measurement_tool_snap_to_road_descr">OsmAnd злучыць кропкі з маршрутам для абранага профіля.</string>
     <string name="measurement_tool_save_as_new_track_descr">Вы можаць захаваць кропкі, як кропкі маршруту ці як лінію.</string>
-    <string name="choose_navigation_type">Выбраць тып навігацыі</string>
+    <string name="choose_navigation_type">Абраць профіль навігацыі</string>
     <string name="add_route_points">Дадаць кропкі маршруту</string>
     <string name="add_line">Дадаць лінію</string>
     <string name="empty_state_my_tracks">Дадацт і запісаць сляды</string>
