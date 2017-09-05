@@ -2,14 +2,17 @@ package net.osmand.plus.liveupdates;
 
 import android.content.Intent;
 import android.content.res.Resources;
+import android.os.AsyncTask;
 import android.os.Bundle;
 import android.support.design.widget.TabLayout;
 import android.support.v4.app.Fragment;
 import android.support.v4.app.FragmentManager;
 import android.support.v4.app.FragmentPagerAdapter;
 import android.support.v4.view.ViewPager;
+import android.support.v7.app.ActionBar;
 import android.view.MenuItem;
 
+import net.osmand.AndroidNetworkUtils;
 import net.osmand.PlatformUtil;
 import net.osmand.plus.R;
 import net.osmand.plus.Version;
@@ -25,6 +28,7 @@ public class OsmLiveActivity extends AbstractDownloadActivity implements Downloa
 	private LiveUpdatesFragmentPagerAdapter pagerAdapter;
 	private InAppHelper inAppHelper;
 	private boolean openSubscription;
+	private static final String URL = "http://builder.osmand.net/osmlive/.proc_timestamp";
 
 	public InAppHelper getInAppHelper() {
 		return inAppHelper;
@@ -42,6 +46,33 @@ public class OsmLiveActivity extends AbstractDownloadActivity implements Downloa
 		if (Version.isDeveloperVersion(getMyApplication())) {
 			inAppHelper = null;
 		}
+
+		new AsyncTask<Void, Void, String>() {
+
+			@Override
+			protected void onPreExecute() {
+			}
+
+			@Override
+			protected String doInBackground(Void... params) {
+				try {
+					return AndroidNetworkUtils.sendRequest(getMyApplication(), URL, null, "Requesting map updates info...", false, false);
+				} catch (Exception e) {
+					LOG.error("Error: " + "Requesting map updates info error", e);
+					return null;
+				}
+			}
+
+			@Override
+			protected void onPostExecute(String response) {
+				if (response != null) {
+					ActionBar actionBar = getSupportActionBar();
+					if (actionBar != null) {
+						actionBar.setSubtitle(response);
+					}
+				}
+			}
+		}.execute();
 
 		Intent intent = getIntent();
 		if (intent != null && intent.getExtras() != null) {
