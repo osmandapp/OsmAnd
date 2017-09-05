@@ -44,7 +44,7 @@ public class MapMarkersDbHelper {
 			MARKERS_COL_GROUP_KEY + " int, " +
 			MARKERS_COL_COLOR + " int, " +
 			MARKERS_COL_DISPLAY_PLACE + " int, " +
-			MARKERS_COL_NEXT_KEY + " int);";
+			MARKERS_COL_NEXT_KEY + " long);";
 
 	private static final String MARKERS_TABLE_SELECT = "SELECT " +
 			MARKERS_COL_ID + ", " +
@@ -131,7 +131,7 @@ public class MapMarkersDbHelper {
 		int groupKey = 0;
 		int colorIndex = marker.colorIndex;
 		int displayPlace = marker.displayPlace == WIDGET ? 0 : 1;
-		int next = marker.nextKey;
+		long next = marker.nextKey;
 
 		db.execSQL("INSERT INTO " + MARKERS_TABLE_NAME + " VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?, ?",
 				new Object[]{lat, lon, descr, active, added, visited, groupKey, colorIndex, displayPlace, next == -1 ? null : next});
@@ -180,7 +180,7 @@ public class MapMarkersDbHelper {
 		int groupKey = query.getInt(7);
 		int colorIndex = query.getInt(8);
 		int displayPlace = query.getInt(9);
-		int nextKey = query.getInt(10);
+		long nextKey = query.getLong(10);
 
 		LatLon latLon = new LatLon(lat, lon);
 		MapMarker marker = new MapMarker(latLon, PointDescription.deserializeFromString(desc, latLon),

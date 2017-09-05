@@ -40,7 +40,7 @@ public class MapMarkersHelper {
 		public long creationDate;
 		public long visitedDate;
 		public DisplayPlace displayPlace;
-		public int nextKey;
+		public long nextKey;
 
 		public enum DisplayPlace {
 			WIDGET,
