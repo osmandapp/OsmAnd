@@ -16,9 +16,6 @@ import java.util.LinkedList;
 import java.util.List;
 import java.util.Random;
 
-import static net.osmand.plus.OsmandSettings.MapMarkersMode.TOOLBAR;
-import static net.osmand.plus.OsmandSettings.MapMarkersMode.WIDGETS;
-
 public class MapMarkersDbHelper {
 
 	private static final int DB_VERSION = 1;
@@ -34,7 +31,6 @@ public class MapMarkersDbHelper {
 	private static final String MARKERS_COL_VISITED = "marker_visited";
 	private static final String MARKERS_COL_GROUP_KEY = "group_key";
 	private static final String MARKERS_COL_COLOR = "marker_color";
-	private static final String MARKERS_COL_DISPLAY_PLACE = "marker_display_place";
 	private static final String MARKERS_COL_NEXT_KEY = "marker_next_key";
 
 	private static final String MARKERS_TABLE_CREATE = "CREATE TABLE IF NOT EXISTS " +
@@ -48,7 +44,6 @@ public class MapMarkersDbHelper {
 			MARKERS_COL_VISITED + " long, " +
 			MARKERS_COL_GROUP_KEY + " int, " +
 			MARKERS_COL_COLOR + " int, " +
-			MARKERS_COL_DISPLAY_PLACE + " int, " +
 			MARKERS_COL_NEXT_KEY + " long);";
 
 	private static final String MARKERS_TABLE_SELECT = "SELECT " +
@@ -61,7 +56,6 @@ public class MapMarkersDbHelper {
 			MARKERS_COL_VISITED + ", " +
 			MARKERS_COL_GROUP_KEY + ", " +
 			MARKERS_COL_COLOR + ", " +
-			MARKERS_COL_DISPLAY_PLACE + ", " +
 			MARKERS_COL_NEXT_KEY +
 			" FROM " + MARKERS_TABLE_NAME;
 
@@ -128,7 +122,6 @@ public class MapMarkersDbHelper {
 			MapMarker marker = new MapMarker(ips.get(i), PointDescription.deserializeFromString(desc.get(i), ips.get(i)),
 					colorIndex, false, i);
 			marker.history = false;
-			marker.displayPlace = WIDGETS; //fixme
 			addMapMarker(marker);
 		}
 
@@ -142,7 +135,6 @@ public class MapMarkersDbHelper {
 			MapMarker marker = new MapMarker(ips.get(i), PointDescription.deserializeFromString(desc.get(i), ips.get(i)),
 					colorIndex, false, i);
 			marker.history = true;
-			marker.displayPlace = WIDGETS; //fixme
 			addMapMarker(marker);
 		}
 	}
@@ -169,7 +161,6 @@ public class MapMarkersDbHelper {
 		long visited = 0;
 		int groupKey = 0;
 		int colorIndex = marker.colorIndex;
-		int displayPlace = marker.displayPlace == WIDGETS ? 0 : 1;
 
 		PointDescription pointDescription = marker.getOriginalPointDescription();
 		if (pointDescription != null && !pointDescription.isSearchingAddress(context)) {
@@ -182,8 +173,8 @@ public class MapMarkersDbHelper {
 					"WHERE " + MARKERS_COL_NEXT_KEY + " = ?", new Object[]{marker.id, TAIL_NEXT_VALUE});
 		}
 
-		db.execSQL("INSERT INTO " + MARKERS_TABLE_NAME + " VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?)",
-				new Object[]{marker.id, lat, lon, descr, active, currentTime, visited, groupKey, colorIndex, displayPlace,
+		db.execSQL("INSERT INTO " + MARKERS_TABLE_NAME + " VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?, ?)",
+				new Object[]{marker.id, lat, lon, descr, active, currentTime, visited, groupKey, colorIndex,
 						marker.history ? HISTORY_NEXT_VALUE : TAIL_NEXT_VALUE});
 	}
 
@@ -220,15 +211,13 @@ public class MapMarkersDbHelper {
 		long visited = query.getLong(6);
 		int groupKey = query.getInt(7);
 		int colorIndex = query.getInt(8);
-		int displayPlace = query.getInt(9);
-		long nextKey = query.getLong(10);
+		long nextKey = query.getLong(9);
 
 		LatLon latLon = new LatLon(lat, lon);
 		MapMarker marker = new MapMarker(latLon, PointDescription.deserializeFromString(desc, latLon),
 				colorIndex, false, 0);
 		marker.creationDate = added;
 		marker.visitedDate = visited;
-		marker.displayPlace = displayPlace == 0 ? WIDGETS : TOOLBAR;
 		marker.history = !active;
 		marker.nextKey = nextKey;
 		marker.id = id;

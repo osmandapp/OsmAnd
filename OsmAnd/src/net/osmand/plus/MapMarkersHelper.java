@@ -6,7 +6,6 @@ import android.support.annotation.Nullable;
 import net.osmand.data.LatLon;
 import net.osmand.data.LocationPoint;
 import net.osmand.data.PointDescription;
-import net.osmand.plus.OsmandSettings.MapMarkersMode;
 import net.osmand.util.Algorithms;
 
 import java.util.ArrayList;
@@ -39,7 +38,6 @@ public class MapMarkersHelper {
 		public int dist;
 		public long creationDate;
 		public long visitedDate;
-		public MapMarkersMode displayPlace;
 		public long nextKey;
 
 		public MapMarker(LatLon point, PointDescription name, int colorIndex,

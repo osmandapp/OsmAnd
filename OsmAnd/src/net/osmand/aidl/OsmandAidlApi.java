@@ -821,7 +821,6 @@ public class OsmandAidlApi {
 					MapMarker marker = new MapMarker(m.point, pd, m.colorIndex, m.selected, m.index);
 					marker.creationDate = m.creationDate;
 					marker.visitedDate = m.visitedDate;
-					marker.displayPlace = m.displayPlace;
 					markersHelper.moveMapMarker(marker, latLonNew);
 					refreshMap();
 					return true;
