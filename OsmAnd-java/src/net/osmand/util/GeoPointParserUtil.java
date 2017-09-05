@@ -220,6 +220,16 @@ public class GeoPointParserUtil {
 		actual = GeoPointParserUtil.parse(url);
 		assertGeoPoint(actual, new GeoParsedPoint(ilat, ilon, z));
 
+		url = "http://www.openstreetmap.org/search?query=" + qlat + "%2C" + qlon;
+		System.out.println("url: " + url);
+		actual = GeoPointParserUtil.parse(url);
+		assertGeoPoint(actual, new GeoParsedPoint(qlat, qlon));
+
+		url = "http://www.openstreetmap.org/search?query=" + qlat + "%20" + qlon;
+		System.out.println("url: " + url);
+		actual = GeoPointParserUtil.parse(url);
+		assertGeoPoint(actual, new GeoParsedPoint(qlat, qlon));
+
 		// http://download.osmand.net/go?lat=34.99393&lon=-106.61568&z=11
 		url = "http://download.osmand.net/go?lat=" + dlat + "&lon=" + dlon + "&z=" + z;
 		System.out.println("url: " + url);
@@ -927,6 +937,22 @@ public class GeoPointParserUtil {
 								zoom = parseZoom(vls[0]);
 								lat = parseSilentDouble(vls[1]);
 								lon = parseSilentDouble(vls[2]);
+							}
+						}
+						Map<String, String> queryMap = getQueryParameters(uri);
+						if (queryMap != null) {
+							String queryStr = queryMap.get("query");
+							if (queryStr != null) {
+								String[] vls = null;
+								if (queryStr.contains(",")) {
+									vls = queryStr.split("/|,");
+								} else if (queryStr.contains(" ")) {
+									vls = queryStr.split(" ");
+								}
+								if (vls != null && vls.length >= 2) {
+									lat = parseSilentDouble(vls[0]);
+									lon = parseSilentDouble(vls[1]);
+								}
 							}
 						}
 						// the query string sometimes has higher resolution values
