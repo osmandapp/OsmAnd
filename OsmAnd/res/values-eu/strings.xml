@@ -2780,7 +2780,7 @@ Area honi dagokio: %1$s x %2$s</string>
     <string name="do_not_use_animations_descr">Aplikazioaren animazioak desgaitzen ditu</string>
     <string name="keep_showing_on_map">Jarraitu mapan erakusten</string>
     <string name="exit_without_saving">Irten gorde gabe?</string>
-    <string name="measurement_tool_save_as_new_track_descr">Puntuak puntu ala lerro gisa gorde ditakezu</string>
+    <string name="measurement_tool_save_as_new_track_descr">Puntuak puntu ala lerro gisa gorde ditzakezu.</string>
     <string name="measurement_tool_snap_to_road_descr">OsmAndek puntuak hautatutako profilaren ibilbideekin lotuko ditu.</string>
     <string name="choose_navigation_type">Hautatu nabigazio profila</string>
     <string name="add_route_points">Gehitu ibilbide-puntuak</string>
