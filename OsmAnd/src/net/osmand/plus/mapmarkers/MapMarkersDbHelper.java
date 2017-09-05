@@ -1,5 +1,6 @@
 package net.osmand.plus.mapmarkers;
 
+import android.support.annotation.Nullable;
 import android.support.v4.util.LongSparseArray;
 
 import net.osmand.data.LatLon;
@@ -11,6 +12,7 @@ import net.osmand.plus.api.SQLiteAPI.SQLiteCursor;
 
 import java.util.LinkedList;
 import java.util.List;
+import java.util.Random;
 
 import static net.osmand.plus.MapMarkersHelper.MapMarker.DisplayPlace.TOPBAR;
 import static net.osmand.plus.MapMarkersHelper.MapMarker.DisplayPlace.WIDGET;
@@ -72,9 +74,9 @@ public class MapMarkersDbHelper {
 			GROUPS_COL_TYPE + " TEXT, " +
 			GROUPS_COL_ADDED + " long);";
 
+	private static final long TAIL_NEXT_VALUE = -1;
+
 	private OsmandApplication context;
-	private List<MapMarker> mapMarkers = new LinkedList<>();
-	private List<MapMarker> mapMarkersHistory = new LinkedList<>();
 
 	public MapMarkersDbHelper(OsmandApplication context) {
 		this.context = context;
@@ -109,7 +111,25 @@ public class MapMarkersDbHelper {
 
 	}
 
-	public boolean add(MapMarker marker) {
+	public void move(MapMarker moved, @Nullable MapMarker next) {
+		SQLiteConnection db = openConnection(false);
+		if (db != null) {
+			try {
+				db.execSQL("UPDATE " + MARKERS_TABLE_NAME + " SET " + MARKERS_COL_NEXT_KEY + " = ? " +
+						"WHERE " + MARKERS_COL_NEXT_KEY + " = ?", new Object[]{moved.nextKey, moved.id});
+
+				db.execSQL("UPDATE " + MARKERS_TABLE_NAME + " SET " + MARKERS_COL_NEXT_KEY + " = ? " +
+						"WHERE " + MARKERS_COL_NEXT_KEY + " = ?", new Object[]{moved.id, next == null ? TAIL_NEXT_VALUE : next.id});
+
+				db.execSQL("UPDATE " + MARKERS_TABLE_NAME + " SET " + MARKERS_COL_NEXT_KEY + " = ? " +
+						"WHERE " + MARKERS_COL_ID + " = ?", new Object[]{next == null ? TAIL_NEXT_VALUE : next.id, moved.id});
+			} finally {
+				db.close();
+			}
+		}
+	}
+
+	public boolean addMapMarker(MapMarker marker) {
 		SQLiteConnection db = openConnection(false);
 		if (db != null) {
 			try {
@@ -124,7 +144,7 @@ public class MapMarkersDbHelper {
 
 	private void insertLast(SQLiteConnection db, MapMarker marker) {
 		long currentTime = System.currentTimeMillis();
-		marker.id = currentTime;
+		marker.id = Long.parseLong(String.valueOf(currentTime) + String.valueOf(new Random().nextInt(900) + 100));
 		double lat = marker.getLatitude();
 		double lon = marker.getLongitude();
 		String descr = marker.getName(context); //fixme
@@ -135,39 +155,76 @@ public class MapMarkersDbHelper {
 		int displayPlace = marker.displayPlace == WIDGET ? 0 : 1;
 
 		db.execSQL("UPDATE " + MARKERS_TABLE_NAME + " SET " + MARKERS_COL_NEXT_KEY + " = ? " +
-				"WHERE " + MARKERS_COL_NEXT_KEY + " = ?", new Object[]{marker.id, null});
+				"WHERE " + MARKERS_COL_NEXT_KEY + " = ?", new Object[]{marker.id, TAIL_NEXT_VALUE});
 
 		db.execSQL("INSERT INTO " + MARKERS_TABLE_NAME + " VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?)",
-				new Object[]{marker.id, lat, lon, descr, active, currentTime, visited, groupKey, colorIndex, displayPlace, null});
+				new Object[]{marker.id, lat, lon, descr, active, currentTime, visited, groupKey, colorIndex, displayPlace, TAIL_NEXT_VALUE});
 	}
 
-	public List<MapMarker> getMapMarkers() {
-		return mapMarkers;
+	public void removeMapMarker(MapMarker marker) {
+		SQLiteConnection db = openConnection(false);
+		if (db != null) {
+			try {
+				db.execSQL("UPDATE " + MARKERS_TABLE_NAME + " SET " + MARKERS_COL_NEXT_KEY + " = ? " +
+						"WHERE " + MARKERS_COL_NEXT_KEY + " = ?", new Object[]{marker.nextKey, marker.id});
+
+				db.execSQL("UPDATE " + MARKERS_TABLE_NAME + " SET " + MARKERS_COL_ACTIVE + " = ? " +
+						"WHERE " + MARKERS_COL_ID + " = ?", new Object[]{0, marker.id});
+			} finally {
+				db.close();
+			}
+		}
 	}
 
 	public List<MapMarker> getMapMarkersHistory() {
-		return mapMarkersHistory;
-	}
-
-	private void loadMapMarkers() {
+		List<MapMarker> markers = new LinkedList<>();
 		SQLiteConnection db = openConnection(true);
-		LongSparseArray<MapMarker> markers = new LongSparseArray<>();
 		if (db != null) {
 			try {
-				SQLiteCursor query = db.rawQuery(MARKERS_TABLE_SELECT, null);
+				SQLiteCursor query = db.rawQuery(MARKERS_TABLE_SELECT + " WHERE " + MARKERS_COL_ACTIVE + " = ?",
+						new String[]{String.valueOf(0)});
 				if (query.moveToFirst()) {
 					do {
-						MapMarker marker = readItem(query);
-						markers.put(marker.id, marker);
+						markers.add(readItem(query));
 					} while (query.moveToNext());
 				}
 				query.close();
 			} finally {
 				db.close();
 			}
-			for (int i = 0; i < markers.size(); i++) {
-				long key = markers.keyAt(i);
-				MapMarker marker = markers.get(key);
+		}
+		return markers;
+	}
+
+	public List<MapMarker> getMapMarkers() {
+		List<MapMarker> res = new LinkedList<>();
+		LongSparseArray<MapMarker> markers = new LongSparseArray<>();
+		SQLiteConnection db = openConnection(true);
+		if (db != null) {
+			try {
+				SQLiteCursor query = db.rawQuery(MARKERS_TABLE_SELECT + " WHERE " + MARKERS_COL_ACTIVE + " = ?",
+						new String[]{String.valueOf(1)});
+				if (query.moveToFirst()) {
+					do {
+						MapMarker marker = readItem(query);
+						markers.put(marker.nextKey, marker);
+					} while (query.moveToNext());
+				}
+				query.close();
+			} finally {
+				db.close();
+			}
+			buildLinkedList(markers, res, markers.get(TAIL_NEXT_VALUE));
+		}
+		return res;
+	}
+
+	private void buildLinkedList(LongSparseArray<MapMarker> markers, List<MapMarker> res, MapMarker marker) {
+		if (marker != null) {
+			res.add(0, marker);
+			MapMarker prev = markers.get(marker.id);
+			if (prev != null) {
+				buildLinkedList(markers, res, prev);
 			}
 		}
 	}
