@@ -1,5 +1,6 @@
 package net.osmand.plus.myplaces;
 
+import android.content.DialogInterface;
 import android.content.res.ColorStateList;
 import android.graphics.Paint;
 import android.graphics.Rect;
@@ -8,13 +9,12 @@ import android.os.Bundle;
 import android.support.annotation.NonNull;
 import android.support.annotation.Nullable;
 import android.support.v4.app.DialogFragment;
+import android.support.v7.app.ActionBar;
 import android.support.v7.widget.ListPopupWindow;
 import android.support.v7.widget.Toolbar;
 import android.util.DisplayMetrics;
 import android.view.Gravity;
 import android.view.LayoutInflater;
-import android.view.Menu;
-import android.view.MenuInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.AbsListView;
@@ -22,6 +22,7 @@ import android.widget.AdapterView;
 import android.widget.ArrayAdapter;
 import android.widget.ImageView;
 import android.widget.ListView;
+import android.widget.ProgressBar;
 import android.widget.TextView;
 
 import net.osmand.AndroidUtils;
@@ -51,9 +52,9 @@ import gnu.trove.list.array.TIntArrayList;
 
 import static net.osmand.plus.myplaces.TrackSegmentFragment.ARG_TO_FILTER_SHORT_TRACKS;
 
-public class SplitSegmentFragment extends DialogFragment {
+public class SplitSegmentDialogFragment extends DialogFragment {
 
-    public final static String TAG = "SPLIT_SEGMENT_FRAGMENT";
+    public final static String TAG = "SPLIT_SEGMENT_DIALOG_FRAGMENT";
     private OsmandApplication app;
 
     private SplitSegmentsAdapter adapter;
@@ -69,6 +70,7 @@ public class SplitSegmentFragment extends DialogFragment {
     private Paint minMaxSpeedPaint;
     private Rect minMaxSpeedTextBounds;
 	private ListView listView;
+    private ProgressBar progressBar;
 
     @Override
     public void onCreate(@Nullable Bundle savedInstanceState) {
@@ -90,12 +92,6 @@ public class SplitSegmentFragment extends DialogFragment {
     }
 
     @Override
-    public void onCreateOptionsMenu(Menu menu, MenuInflater inflater) {
-        menu.clear();
-        getTrackActivity().getClearToolbar(false);
-    }
-
-    @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
         minMaxSpeedPaint = new Paint();
         minMaxSpeedPaint.setTextSize(getResources().getDimension(R.dimen.default_split_segments_data));
@@ -106,6 +102,16 @@ public class SplitSegmentFragment extends DialogFragment {
         final View view = getActivity().getLayoutInflater().inflate(R.layout.split_segments_layout, container, false);
 
         Toolbar toolbar = (Toolbar) view.findViewById(R.id.split_interval_toolbar);
+        TextView titleTextView = (TextView) toolbar.findViewById(R.id.title);
+        if (app.getSettings().isLightContent()) {
+            titleTextView.setTextAppearance(getContext(), R.style.Widget_Styled_LightActionBarHeader);
+        } else {
+            titleTextView.setTextAppearance(getContext(), R.style.TextAppearance_AppCompat_Widget_ActionBar_Title);
+        }
+        ActionBar trackActivityActionBar = getTrackActivity().getSupportActionBar();
+        if (trackActivityActionBar != null) {
+            titleTextView.setText(trackActivityActionBar.getTitle());
+        }
         toolbar.setNavigationIcon(getMyApplication().getIconsCache().getIcon(R.drawable.ic_arrow_back));
         toolbar.setNavigationOnClickListener(new View.OnClickListener() {
             @Override
@@ -113,6 +119,8 @@ public class SplitSegmentFragment extends DialogFragment {
                 dismiss();
             }
         });
+
+        progressBar = view.findViewById(R.id.progress_bar);
 
         listView = (ListView) view.findViewById(R.id.list);
         listView.setDivider(null);
@@ -388,12 +396,16 @@ public class SplitSegmentFragment extends DialogFragment {
         return false;
     }
 
-    public void reloadSplitFragment() {
-        getFragmentManager()
-                .beginTransaction()
-                .detach(this)
-                .attach(this)
-                .commit();
+    @Override
+    public void dismiss() {
+        getTrackActivity().updateSplitView();
+        super.dismiss();
+    }
+
+    @Override
+    public void onCancel(DialogInterface dialog) {
+        getTrackActivity().updateSplitView();
+        super.onCancel(dialog);
     }
 
     private class SplitSegmentsAdapter extends ArrayAdapter<GpxDisplayItem> {
@@ -652,41 +664,38 @@ public class SplitSegmentFragment extends DialogFragment {
     private class SplitTrackAsyncTask extends AsyncTask<Void, Void, Void> {
         @Nullable
         private final GpxSelectionHelper.SelectedGpxFile mSelectedGpxFile;
-        @NonNull private final TrackActivity mActivity;
 
         private final List<GpxDisplayGroup> groups;
 
         SplitTrackAsyncTask(@Nullable GpxSelectionHelper.SelectedGpxFile selectedGpxFile, List<GpxDisplayGroup> groups) {
             mSelectedGpxFile = selectedGpxFile;
-            mActivity = getTrackActivity();
             this.groups = groups;
         }
 
+        protected void onPreExecute() {
+            progressBar.setVisibility(View.VISIBLE);
+        }
+
         protected void onPostExecute(Void result) {
-            if (!mActivity.isFinishing()) {
-                mActivity.setSupportProgressBarIndeterminateVisibility(false);
-            }
+            progressBar.setVisibility(View.GONE);
             if (mSelectedGpxFile != null) {
                 List<GpxDisplayGroup> groups = getDisplayGroups();
                 mSelectedGpxFile.setDisplayGroups(groups);
             }
-            updateContent();
-        }
-
-        protected void onPreExecute() {
-            mActivity.setSupportProgressBarIndeterminateVisibility(true);
+            if (getTrackActivity() != null) {
+                updateContent();
+            }
         }
 
         @Override
         protected Void doInBackground(Void... params) {
             for (GpxDisplayGroup model : groups) {
-                OsmandApplication application = mActivity.getMyApplication();
                 if (selectedSplitInterval == 0) {
-                    model.noSplit(application);
+                    model.noSplit(app);
                 } else if (distanceSplit.get(selectedSplitInterval) > 0) {
-                    model.splitByDistance(application, distanceSplit.get(selectedSplitInterval));
+                    model.splitByDistance(app, distanceSplit.get(selectedSplitInterval));
                 } else if (timeSplit.get(selectedSplitInterval) > 0) {
-                    model.splitByTime(application, timeSplit.get(selectedSplitInterval));
+                    model.splitByTime(app, timeSplit.get(selectedSplitInterval));
                 }
             }
 
@@ -700,7 +709,7 @@ public class SplitSegmentFragment extends DialogFragment {
 
 	public static boolean showInstance(TrackActivity trackActivity) {
 		try {
-			SplitSegmentFragment fragment = new SplitSegmentFragment();
+			SplitSegmentDialogFragment fragment = new SplitSegmentDialogFragment();
 			fragment.show(trackActivity.getSupportFragmentManager(), TAG);
 			return true;
 		} catch (RuntimeException e) {

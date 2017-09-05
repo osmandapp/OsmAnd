@@ -840,7 +840,6 @@ public class TrackSegmentFragment extends OsmAndListFragment {
 		for (GpxDisplayItem i : flatten(groups)) {
 			adapter.add(i);
 		}
-		// Obsolete: adapter.setNotifyOnChange(true);
 		adapter.notifyDataSetChanged();
 		if (getActivity() != null) {
 			updateHeader();
@@ -1773,7 +1772,7 @@ public class TrackSegmentFragment extends OsmAndListFragment {
 	}
 
 	void openSplitIntervalScreen() {
-		SplitSegmentFragment.showInstance(getTrackActivity());
+		SplitSegmentDialogFragment.showInstance(getTrackActivity());
 	}
 
 	private class SaveGpxAsyncTask extends AsyncTask<Void, Void, Void> {
