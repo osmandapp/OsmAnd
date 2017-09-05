@@ -250,7 +250,19 @@ public class MapMarkersDbHelper {
 		}
 	}
 
-	public void restoreMarkerFromHistory(MapMarker marker) {
+	public void removeAllActiveMapMarkers() {
+		SQLiteConnection db = openConnection(false);
+		if (db != null) {
+			try {
+				db.execSQL("UPDATE " + MARKERS_TABLE_NAME + " SET " + MARKERS_COL_ACTIVE + " = ? " +
+						"WHERE " + MARKERS_COL_ACTIVE + " = ?", new Object[]{0, 1});
+			} finally {
+				db.close();
+			}
+		}
+	}
+
+	public void restoreMapMarkerFromHistory(MapMarker marker) {
 		if (!marker.history) {
 			return;
 		}
@@ -286,5 +298,32 @@ public class MapMarkersDbHelper {
 			}
 		}
 		return markers;
+	}
+
+	public void removeMapMarkerHistory(MapMarker marker) {
+		if (!marker.history) {
+			return;
+		}
+		SQLiteConnection db = openConnection(true);
+		if (db != null) {
+			try {
+				db.execSQL("DELETE FROM " + MARKERS_TABLE_NAME + " WHERE " + MARKERS_COL_ID + " = ?",
+						new Object[]{marker.id});
+			} finally {
+				db.close();
+			}
+		}
+	}
+
+	public void removeAllMapMarkersHistory() {
+		SQLiteConnection db = openConnection(true);
+		if (db != null) {
+			try {
+				db.execSQL("DELETE FROM " + MARKERS_TABLE_NAME + " WHERE " + MARKERS_COL_ACTIVE + " = ?",
+						new Object[]{0});
+			} finally {
+				db.close();
+			}
+		}
 	}
 }
