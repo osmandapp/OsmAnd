@@ -199,7 +199,25 @@ public class MapMarkersDbHelper {
 		}
 	}
 
-	public void move(MapMarker moved, @Nullable MapMarker next) {
+	public void updateMapMarker(MapMarker marker) {
+		SQLiteConnection db = openConnection(false);
+		if (db != null) {
+			try {
+				db.execSQL("UPDATE " + MARKERS_TABLE_NAME + " SET " +
+								MARKERS_COL_LAT + " = ?, " +
+								MARKERS_COL_LON + " = ?, " +
+								MARKERS_COL_DESCRIPTION + " = ?, " +
+								MARKERS_COL_COLOR + " = ? " +
+								"WHERE " + MARKERS_COL_ID + " = ?",
+						new Object[]{marker.getLatitude(), marker.getLongitude(), marker.getName(context), //fixme
+								marker.colorIndex, marker.id});
+			} finally {
+				db.close();
+			}
+		}
+	}
+
+	public void moveMapMarker(MapMarker moved, @Nullable MapMarker next) {
 		SQLiteConnection db = openConnection(false);
 		if (db != null) {
 			try {
@@ -226,6 +244,24 @@ public class MapMarkersDbHelper {
 
 				db.execSQL("UPDATE " + MARKERS_TABLE_NAME + " SET " + MARKERS_COL_ACTIVE + " = ? " +
 						"WHERE " + MARKERS_COL_ID + " = ?", new Object[]{0, marker.id});
+			} finally {
+				db.close();
+			}
+		}
+	}
+
+	public void restoreMarkerFromHistory(MapMarker marker) {
+		if (!marker.history) {
+			return;
+		}
+		SQLiteConnection db = openConnection(false);
+		if (db != null) {
+			try {
+				db.execSQL("UPDATE " + MARKERS_TABLE_NAME + " SET " +
+								MARKERS_COL_ACTIVE + " = ?, " +
+								MARKERS_COL_NEXT_KEY + " = ? " +
+								"WHERE " + MARKERS_COL_ID + " = ?",
+						new Object[]{1, getMapMarkers().get(0).id, marker.id});
 			} finally {
 				db.close();
 			}
