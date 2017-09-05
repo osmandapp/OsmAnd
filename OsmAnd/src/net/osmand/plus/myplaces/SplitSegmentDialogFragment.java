@@ -222,16 +222,18 @@ public class SplitSegmentDialogFragment extends DialogFragment {
 	}
 
 	public void updateContent() {
-		adapter.clear();
-		adapter.setNotifyOnChange(false);
-		GpxDisplayItem overviewSegments = getOverviewSegment();
-		adapter.add(overviewSegments);
-		List<GpxDisplayItem> splitSegments = getSplitSegments();
-		adapter.addAll(splitSegments);
-		adapter.notifyDataSetChanged();
-		listView.setSelection(0);
-		headerView.setTranslationY(0);
-		updateHeader();
+		if (getTrackActivity() != null) {
+			adapter.clear();
+			adapter.setNotifyOnChange(false);
+			GpxDisplayItem overviewSegments = getOverviewSegment();
+			adapter.add(overviewSegments);
+			List<GpxDisplayItem> splitSegments = getSplitSegments();
+			adapter.addAll(splitSegments);
+			adapter.notifyDataSetChanged();
+			listView.setSelection(0);
+			headerView.setTranslationY(0);
+			updateHeader();
+		}
 	}
 
 	private void updateSplit(List<GpxDisplayGroup> groups, GpxSelectionHelper.SelectedGpxFile sf) {
@@ -682,9 +684,7 @@ public class SplitSegmentDialogFragment extends DialogFragment {
 				List<GpxDisplayGroup> groups = getDisplayGroups();
 				mSelectedGpxFile.setDisplayGroups(groups);
 			}
-			if (getTrackActivity() != null) {
-				updateContent();
-			}
+			updateContent();
 		}
 
 		@Override
