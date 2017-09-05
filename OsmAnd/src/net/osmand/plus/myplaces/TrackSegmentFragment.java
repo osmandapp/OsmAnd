@@ -124,7 +124,7 @@ public class TrackSegmentFragment extends OsmAndListFragment {
 	private OsmandApplication app;
 	private SegmentGPXAdapter adapter;
 
-	private GpxDisplayItemType[] filterTypes = { GpxSelectionHelper.GpxDisplayItemType.TRACK_SEGMENT };
+	private GpxDisplayItemType[] filterTypes = {GpxSelectionHelper.GpxDisplayItemType.TRACK_SEGMENT};
 	private List<String> options = new ArrayList<>();
 	private List<Double> distanceSplit = new ArrayList<>();
 	private TIntArrayList timeSplit = new TIntArrayList();
@@ -638,10 +638,10 @@ public class TrackSegmentFragment extends OsmAndListFragment {
 
 	public void updateSplitView() {
 		if (getGpx() != null) {
-			SelectedGpxFile sf = app.getSelectedGpxHelper().selectGpxFile(getGpx(), ((SwitchCompat)headerView.findViewById(R.id.showOnMapToggle)).isChecked(), false);
+			SelectedGpxFile sf = app.getSelectedGpxHelper().selectGpxFile(getGpx(), ((SwitchCompat) headerView.findViewById(R.id.showOnMapToggle)).isChecked(), false);
 			final List<GpxDisplayGroup> groups = getDisplayGroups();
 			if (groups.size() > 0) {
-				updateSplit(groups, ((SwitchCompat)headerView.findViewById(R.id.showOnMapToggle)).isChecked() ? sf : null);
+				updateSplit(groups, ((SwitchCompat) headerView.findViewById(R.id.showOnMapToggle)).isChecked() ? sf : null);
 				if (getGpxDataItem() != null) {
 					updateSplitInDatabase();
 				}
@@ -848,7 +848,7 @@ public class TrackSegmentFragment extends OsmAndListFragment {
 
 	protected List<GpxDisplayItem> flatten(List<GpxDisplayGroup> groups) {
 		ArrayList<GpxDisplayItem> list = new ArrayList<>();
-		for(GpxDisplayGroup g : groups) {
+		for (GpxDisplayGroup g : groups) {
 			list.addAll(g.getModifiableList());
 		}
 		return list;
@@ -1644,7 +1644,7 @@ public class TrackSegmentFragment extends OsmAndListFragment {
 
 		@Override
 		public void select(View tab) {
-			GPXTabItemType tabType = GPXTabItemType.valueOf((String)tab.getTag());
+			GPXTabItemType tabType = GPXTabItemType.valueOf((String) tab.getTag());
 			ImageView img = (ImageView) tab.findViewById(R.id.tab_image);
 			int imageId = getImageId(tabType);
 			switch (tabs.getTabSelectionType()) {
@@ -1659,7 +1659,7 @@ public class TrackSegmentFragment extends OsmAndListFragment {
 
 		@Override
 		public void deselect(View tab) {
-			GPXTabItemType tabType = GPXTabItemType.valueOf((String)tab.getTag());
+			GPXTabItemType tabType = GPXTabItemType.valueOf((String) tab.getTag());
 			ImageView img = (ImageView) tab.findViewById(R.id.tab_image);
 			int imageId = getImageId(tabType);
 			switch (tabs.getTabSelectionType()) {
@@ -1814,8 +1814,10 @@ public class TrackSegmentFragment extends OsmAndListFragment {
 	private class SplitTrackAsyncTask extends AsyncTask<Void, Void, Void> {
 		@Nullable
 		private final SelectedGpxFile mSelectedGpxFile;
-		@NonNull private final TrackSegmentFragment mFragment;
-		@NonNull private final TrackActivity mActivity;
+		@NonNull
+		private final TrackSegmentFragment mFragment;
+		@NonNull
+		private final TrackActivity mActivity;
 
 		private final List<GpxDisplayGroup> groups;
 
