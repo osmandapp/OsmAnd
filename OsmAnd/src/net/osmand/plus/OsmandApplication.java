@@ -47,6 +47,7 @@ import net.osmand.plus.helpers.AvoidSpecificRoads;
 import net.osmand.plus.helpers.WaypointHelper;
 import net.osmand.plus.inapp.InAppHelper;
 import net.osmand.plus.mapcontextmenu.other.RoutePreferencesMenu;
+import net.osmand.plus.mapmarkers.MapMarkersDbHelper;
 import net.osmand.plus.monitoring.LiveMonitoringHelper;
 import net.osmand.plus.poi.PoiFiltersHelper;
 import net.osmand.plus.render.RendererRegistry;
@@ -107,6 +108,7 @@ public class OsmandApplication extends MultiDexApplication {
 	LiveMonitoringHelper liveMonitoringHelper;
 	TargetPointsHelper targetPointsHelper;
 	MapMarkersHelper mapMarkersHelper;
+	MapMarkersDbHelper mapMarkersDbHelper;
 	WaypointHelper waypointHelper;
 	DownloadIndexesThread downloadIndexesThread;
 	AvoidSpecificRoads avoidSpecificRoads;
@@ -613,6 +615,10 @@ public class OsmandApplication extends MultiDexApplication {
 
 	public MapMarkersHelper getMapMarkersHelper() {
 		return mapMarkersHelper;
+	}
+
+	public MapMarkersDbHelper getMapMarkersDbHelper() {
+		return mapMarkersDbHelper;
 	}
 
 	public void showShortToastMessage(final int msgId, final Object... args) {

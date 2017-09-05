@@ -29,6 +29,7 @@ import net.osmand.plus.download.ui.AbstractLoadLocalIndexTask;
 import net.osmand.plus.helpers.AvoidSpecificRoads;
 import net.osmand.plus.helpers.WaypointHelper;
 import net.osmand.plus.liveupdates.LiveUpdatesHelper;
+import net.osmand.plus.mapmarkers.MapMarkersDbHelper;
 import net.osmand.plus.monitoring.LiveMonitoringHelper;
 import net.osmand.plus.monitoring.OsmandMonitoringPlugin;
 import net.osmand.plus.poi.PoiFiltersHelper;
@@ -374,6 +375,7 @@ public class AppInitializer implements IProgress {
 		app.geocodingLookupService = startupInit(new GeocodingLookupService(app), GeocodingLookupService.class);
 		app.targetPointsHelper = startupInit(new TargetPointsHelper(app), TargetPointsHelper.class);
 		app.mapMarkersHelper = startupInit(new MapMarkersHelper(app), MapMarkersHelper.class);
+		app.mapMarkersDbHelper = startupInit(new MapMarkersDbHelper(app), MapMarkersDbHelper.class);
 		app.searchUICore = startupInit(new QuickSearchHelper(app), QuickSearchHelper.class);
 	}
 
