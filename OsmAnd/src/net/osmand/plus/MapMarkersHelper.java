@@ -29,7 +29,7 @@ public class MapMarkersHelper {
 	}
 
 	public static class MapMarker implements LocationPoint {
-		public int id;
+		public long id;
 		public LatLon point;
 		private PointDescription pointDescription;
 		public int colorIndex;

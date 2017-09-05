@@ -1,6 +1,6 @@
 package net.osmand.plus.mapmarkers;
 
-import android.util.SparseArray;
+import android.support.v4.util.LongSparseArray;
 
 import net.osmand.data.LatLon;
 import net.osmand.data.PointDescription;
@@ -20,7 +20,7 @@ public class MapMarkersDbHelper {
 	private static final String DB_NAME = "map_markers_db";
 
 	private static final String MARKERS_TABLE_NAME = "map_markers";
-	private static final String MARKERS_COL_ID = "_id";
+	private static final String MARKERS_COL_ID = "marker_id";
 	private static final String MARKERS_COL_LAT = "marker_latitude";
 	private static final String MARKERS_COL_LON = "marker_longitude";
 	private static final String MARKERS_COL_DESCRIPTION = "marker_description";
@@ -34,6 +34,7 @@ public class MapMarkersDbHelper {
 
 	private static final String MARKERS_TABLE_CREATE = "CREATE TABLE IF NOT EXISTS " +
 			MARKERS_TABLE_NAME + " (" +
+			MARKERS_COL_ID + " long PRIMARY KEY, " +
 			MARKERS_COL_LAT + " double, " +
 			MARKERS_COL_LON + " double, " +
 			MARKERS_COL_DESCRIPTION + " TEXT, " +
@@ -147,7 +148,7 @@ public class MapMarkersDbHelper {
 
 	private void loadMapMarkers() {
 		SQLiteConnection db = openConnection(true);
-		SparseArray<MapMarker> markers = new SparseArray<>();
+		LongSparseArray<MapMarker> markers = new LongSparseArray<>();
 		if (db != null) {
 			try {
 				SQLiteCursor query = db.rawQuery(MARKERS_TABLE_SELECT, null);
@@ -162,14 +163,14 @@ public class MapMarkersDbHelper {
 				db.close();
 			}
 			for (int i = 0; i < markers.size(); i++) {
-				int key = markers.keyAt(i);
+				long key = markers.keyAt(i);
 				MapMarker marker = markers.get(key);
 			}
 		}
 	}
 
 	private MapMarker readItem(SQLiteCursor query) {
-		int id = query.getInt(0);
+		long id = query.getLong(0);
 		double lat = query.getDouble(1);
 		double lon = query.getDouble(2);
 		String desc = query.getString(3);
