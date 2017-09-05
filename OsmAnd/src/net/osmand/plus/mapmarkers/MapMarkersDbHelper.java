@@ -10,6 +10,7 @@ import net.osmand.plus.OsmandApplication;
 import net.osmand.plus.OsmandSettings;
 import net.osmand.plus.api.SQLiteAPI.SQLiteConnection;
 import net.osmand.plus.api.SQLiteAPI.SQLiteCursor;
+import net.osmand.plus.helpers.SearchHistoryHelper;
 
 import java.util.LinkedList;
 import java.util.List;
@@ -163,12 +164,18 @@ public class MapMarkersDbHelper {
 		marker.creationDate = currentTime;
 		double lat = marker.getLatitude();
 		double lon = marker.getLongitude();
-		String descr = marker.getName(context); //fixme
+		String descr = PointDescription.serializeToString(marker.getOriginalPointDescription());
 		int active = marker.history ? 0 : 1;
 		long visited = 0;
 		int groupKey = 0;
 		int colorIndex = marker.colorIndex;
 		int displayPlace = marker.displayPlace == WIDGET ? 0 : 1;
+
+		PointDescription pointDescription = marker.getOriginalPointDescription();
+		if (pointDescription != null && !pointDescription.isSearchingAddress(context)) {
+			SearchHistoryHelper.getInstance(context)
+					.addNewItemToHistory(marker.getLatitude(), marker.getLongitude(), pointDescription);
+		}
 
 		if (!marker.history) {
 			db.execSQL("UPDATE " + MARKERS_TABLE_NAME + " SET " + MARKERS_COL_NEXT_KEY + " = ? " +
@@ -243,14 +250,14 @@ public class MapMarkersDbHelper {
 		SQLiteConnection db = openConnection(false);
 		if (db != null) {
 			try {
+				String descr = PointDescription.serializeToString(marker.getOriginalPointDescription());
 				db.execSQL("UPDATE " + MARKERS_TABLE_NAME + " SET " +
 								MARKERS_COL_LAT + " = ?, " +
 								MARKERS_COL_LON + " = ?, " +
 								MARKERS_COL_DESCRIPTION + " = ?, " +
 								MARKERS_COL_COLOR + " = ? " +
 								"WHERE " + MARKERS_COL_ID + " = ?",
-						new Object[]{marker.getLatitude(), marker.getLongitude(), marker.getName(context), //fixme
-								marker.colorIndex, marker.id});
+						new Object[]{marker.getLatitude(), marker.getLongitude(), descr, marker.colorIndex, marker.id});
 			} finally {
 				db.close();
 			}
