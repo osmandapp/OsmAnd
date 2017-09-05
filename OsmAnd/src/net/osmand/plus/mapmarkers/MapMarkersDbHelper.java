@@ -111,24 +111,6 @@ public class MapMarkersDbHelper {
 
 	}
 
-	public void move(MapMarker moved, @Nullable MapMarker next) {
-		SQLiteConnection db = openConnection(false);
-		if (db != null) {
-			try {
-				db.execSQL("UPDATE " + MARKERS_TABLE_NAME + " SET " + MARKERS_COL_NEXT_KEY + " = ? " +
-						"WHERE " + MARKERS_COL_NEXT_KEY + " = ?", new Object[]{moved.nextKey, moved.id});
-
-				db.execSQL("UPDATE " + MARKERS_TABLE_NAME + " SET " + MARKERS_COL_NEXT_KEY + " = ? " +
-						"WHERE " + MARKERS_COL_NEXT_KEY + " = ?", new Object[]{moved.id, next == null ? TAIL_NEXT_VALUE : next.id});
-
-				db.execSQL("UPDATE " + MARKERS_TABLE_NAME + " SET " + MARKERS_COL_NEXT_KEY + " = ? " +
-						"WHERE " + MARKERS_COL_ID + " = ?", new Object[]{next == null ? TAIL_NEXT_VALUE : next.id, moved.id});
-			} finally {
-				db.close();
-			}
-		}
-	}
-
 	public boolean addMapMarker(MapMarker marker) {
 		SQLiteConnection db = openConnection(false);
 		if (db != null) {
@@ -159,6 +141,80 @@ public class MapMarkersDbHelper {
 
 		db.execSQL("INSERT INTO " + MARKERS_TABLE_NAME + " VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?)",
 				new Object[]{marker.id, lat, lon, descr, active, currentTime, visited, groupKey, colorIndex, displayPlace, TAIL_NEXT_VALUE});
+	}
+
+	public List<MapMarker> getMapMarkers() {
+		List<MapMarker> res = new LinkedList<>();
+		LongSparseArray<MapMarker> markers = new LongSparseArray<>();
+		SQLiteConnection db = openConnection(true);
+		if (db != null) {
+			try {
+				SQLiteCursor query = db.rawQuery(MARKERS_TABLE_SELECT + " WHERE " + MARKERS_COL_ACTIVE + " = ?",
+						new String[]{String.valueOf(1)});
+				if (query.moveToFirst()) {
+					do {
+						MapMarker marker = readItem(query);
+						markers.put(marker.nextKey, marker);
+					} while (query.moveToNext());
+				}
+				query.close();
+			} finally {
+				db.close();
+			}
+			buildLinkedList(markers, res, markers.get(TAIL_NEXT_VALUE));
+		}
+		return res;
+	}
+
+	private MapMarker readItem(SQLiteCursor query) {
+		long id = query.getLong(0);
+		double lat = query.getDouble(1);
+		double lon = query.getDouble(2);
+		String desc = query.getString(3);
+		boolean active = query.getInt(4) == 1;
+		long added = query.getLong(5);
+		long visited = query.getLong(6);
+		int groupKey = query.getInt(7);
+		int colorIndex = query.getInt(8);
+		int displayPlace = query.getInt(9);
+		long nextKey = query.getLong(10);
+
+		LatLon latLon = new LatLon(lat, lon);
+		MapMarker marker = new MapMarker(latLon, PointDescription.deserializeFromString(desc, latLon),
+				colorIndex, false, added, visited, displayPlace == 0 ? WIDGET : TOPBAR, 0);
+		marker.history = !active;
+		marker.nextKey = nextKey;
+		marker.id = id;
+
+		return marker;
+	}
+
+	private void buildLinkedList(LongSparseArray<MapMarker> markers, List<MapMarker> res, MapMarker marker) {
+		if (marker != null) {
+			res.add(0, marker);
+			MapMarker prev = markers.get(marker.id);
+			if (prev != null) {
+				buildLinkedList(markers, res, prev);
+			}
+		}
+	}
+
+	public void move(MapMarker moved, @Nullable MapMarker next) {
+		SQLiteConnection db = openConnection(false);
+		if (db != null) {
+			try {
+				db.execSQL("UPDATE " + MARKERS_TABLE_NAME + " SET " + MARKERS_COL_NEXT_KEY + " = ? " +
+						"WHERE " + MARKERS_COL_NEXT_KEY + " = ?", new Object[]{moved.nextKey, moved.id});
+
+				db.execSQL("UPDATE " + MARKERS_TABLE_NAME + " SET " + MARKERS_COL_NEXT_KEY + " = ? " +
+						"WHERE " + MARKERS_COL_NEXT_KEY + " = ?", new Object[]{moved.id, next == null ? TAIL_NEXT_VALUE : next.id});
+
+				db.execSQL("UPDATE " + MARKERS_TABLE_NAME + " SET " + MARKERS_COL_NEXT_KEY + " = ? " +
+						"WHERE " + MARKERS_COL_ID + " = ?", new Object[]{next == null ? TAIL_NEXT_VALUE : next.id, moved.id});
+			} finally {
+				db.close();
+			}
+		}
 	}
 
 	public void removeMapMarker(MapMarker marker) {
@@ -194,61 +250,5 @@ public class MapMarkersDbHelper {
 			}
 		}
 		return markers;
-	}
-
-	public List<MapMarker> getMapMarkers() {
-		List<MapMarker> res = new LinkedList<>();
-		LongSparseArray<MapMarker> markers = new LongSparseArray<>();
-		SQLiteConnection db = openConnection(true);
-		if (db != null) {
-			try {
-				SQLiteCursor query = db.rawQuery(MARKERS_TABLE_SELECT + " WHERE " + MARKERS_COL_ACTIVE + " = ?",
-						new String[]{String.valueOf(1)});
-				if (query.moveToFirst()) {
-					do {
-						MapMarker marker = readItem(query);
-						markers.put(marker.nextKey, marker);
-					} while (query.moveToNext());
-				}
-				query.close();
-			} finally {
-				db.close();
-			}
-			buildLinkedList(markers, res, markers.get(TAIL_NEXT_VALUE));
-		}
-		return res;
-	}
-
-	private void buildLinkedList(LongSparseArray<MapMarker> markers, List<MapMarker> res, MapMarker marker) {
-		if (marker != null) {
-			res.add(0, marker);
-			MapMarker prev = markers.get(marker.id);
-			if (prev != null) {
-				buildLinkedList(markers, res, prev);
-			}
-		}
-	}
-
-	private MapMarker readItem(SQLiteCursor query) {
-		long id = query.getLong(0);
-		double lat = query.getDouble(1);
-		double lon = query.getDouble(2);
-		String desc = query.getString(3);
-		boolean active = query.getInt(4) == 1;
-		long added = query.getLong(5);
-		long visited = query.getLong(6);
-		int groupKey = query.getInt(7);
-		int colorIndex = query.getInt(8);
-		int displayPlace = query.getInt(9);
-		long nextKey = query.getLong(10);
-
-		LatLon latLon = new LatLon(lat, lon);
-		MapMarker marker = new MapMarker(latLon, PointDescription.deserializeFromString(desc, latLon),
-				colorIndex, false, added, visited, displayPlace == 0 ? WIDGET : TOPBAR, 0);
-		marker.history = !active;
-		marker.nextKey = nextKey;
-		marker.id = id;
-
-		return marker;
 	}
 }
