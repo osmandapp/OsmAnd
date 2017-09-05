@@ -9,6 +9,7 @@ import net.osmand.plus.OsmandApplication;
 import net.osmand.plus.api.SQLiteAPI.SQLiteConnection;
 import net.osmand.plus.api.SQLiteAPI.SQLiteCursor;
 
+import java.util.LinkedList;
 import java.util.List;
 
 import static net.osmand.plus.MapMarkersHelper.MapMarker.DisplayPlace.TOPBAR;
@@ -72,8 +73,8 @@ public class MapMarkersDbHelper {
 			GROUPS_COL_ADDED + " long);";
 
 	private OsmandApplication context;
-	private List<MapMarker> mapMarkers;
-	private List<MapMarker> mapMarkersHistory;
+	private List<MapMarker> mapMarkers = new LinkedList<>();
+	private List<MapMarker> mapMarkersHistory = new LinkedList<>();
 
 	public MapMarkersDbHelper(OsmandApplication context) {
 		this.context = context;
@@ -112,7 +113,7 @@ public class MapMarkersDbHelper {
 		SQLiteConnection db = openConnection(false);
 		if (db != null) {
 			try {
-				insert(db, marker);
+				insertLast(db, marker);
 			} finally {
 				db.close();
 			}
@@ -121,21 +122,23 @@ public class MapMarkersDbHelper {
 		return false;
 	}
 
-	private int insert(SQLiteConnection db, MapMarker marker) {
+	private void insertLast(SQLiteConnection db, MapMarker marker) {
+		long currentTime = System.currentTimeMillis();
+		marker.id = currentTime;
 		double lat = marker.getLatitude();
 		double lon = marker.getLongitude();
-		String descr = marker.getName(context);
+		String descr = marker.getName(context); //fixme
 		int active = marker.history ? 0 : 1;
-		long added = System.currentTimeMillis();
 		long visited = 0;
 		int groupKey = 0;
 		int colorIndex = marker.colorIndex;
 		int displayPlace = marker.displayPlace == WIDGET ? 0 : 1;
-		long next = marker.nextKey;
 
-		db.execSQL("INSERT INTO " + MARKERS_TABLE_NAME + " VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?, ?",
-				new Object[]{lat, lon, descr, active, added, visited, groupKey, colorIndex, displayPlace, next == -1 ? null : next});
-		return -1;
+		db.execSQL("UPDATE " + MARKERS_TABLE_NAME + " SET " + MARKERS_COL_NEXT_KEY + " = ? " +
+				"WHERE " + MARKERS_COL_NEXT_KEY + " = ?", new Object[]{marker.id, null});
+
+		db.execSQL("INSERT INTO " + MARKERS_TABLE_NAME + " VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?)",
+				new Object[]{marker.id, lat, lon, descr, active, currentTime, visited, groupKey, colorIndex, displayPlace, null});
 	}
 
 	public List<MapMarker> getMapMarkers() {
