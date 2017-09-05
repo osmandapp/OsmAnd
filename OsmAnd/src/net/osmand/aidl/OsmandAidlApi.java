@@ -818,8 +818,10 @@ public class OsmandAidlApi {
 				if (m.getOnlyName().equals(markerPrev.getName()) && latLon.equals(new LatLon(m.getLatitude(), m.getLongitude()))) {
 					PointDescription pd = new PointDescription(
 							PointDescription.POINT_TYPE_MAP_MARKER, markerNew.getName() != null ? markerNew.getName() : "");
-					MapMarker marker = new MapMarker(m.point, pd, m.colorIndex, m.selected,
-							m.creationDate, m.visitedDate, m.displayPlace, m.index);
+					MapMarker marker = new MapMarker(m.point, pd, m.colorIndex, m.selected, m.index);
+					marker.creationDate = m.creationDate;
+					marker.visitedDate = m.visitedDate;
+					marker.displayPlace = m.displayPlace;
 					markersHelper.moveMapMarker(marker, latLonNew);
 					refreshMap();
 					return true;

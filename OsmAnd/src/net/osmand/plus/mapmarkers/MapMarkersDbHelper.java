@@ -7,6 +7,7 @@ import net.osmand.data.LatLon;
 import net.osmand.data.PointDescription;
 import net.osmand.plus.MapMarkersHelper.MapMarker;
 import net.osmand.plus.OsmandApplication;
+import net.osmand.plus.OsmandSettings;
 import net.osmand.plus.api.SQLiteAPI.SQLiteConnection;
 import net.osmand.plus.api.SQLiteAPI.SQLiteCursor;
 
@@ -74,9 +75,10 @@ public class MapMarkersDbHelper {
 			GROUPS_COL_TYPE + " TEXT, " +
 			GROUPS_COL_ADDED + " long);";
 
-	private static final long TAIL_NEXT_VALUE = -1;
+	private static final int TAIL_NEXT_VALUE = 0;
+	private static final int HISTORY_NEXT_VALUE = -1;
 
-	private OsmandApplication context;
+	private final OsmandApplication context;
 
 	public MapMarkersDbHelper(OsmandApplication context) {
 		this.context = context;
@@ -104,14 +106,47 @@ public class MapMarkersDbHelper {
 	private void onCreate(SQLiteConnection db) {
 		db.execSQL(MARKERS_TABLE_CREATE);
 		db.execSQL(GROUPS_TABLE_CREATE);
-		//todo: load all existing markers
+		saveExistingMarkersToDb();
 	}
 
 	private void onUpgrade(SQLiteConnection db, int oldVersion, int newVersion) {
 
 	}
 
-	public boolean addMapMarker(MapMarker marker) {
+	private void saveExistingMarkersToDb() {
+		OsmandSettings settings = context.getSettings();
+
+		List<LatLon> ips = settings.getMapMarkersPoints();
+		List<String> desc = settings.getMapMarkersPointDescriptions(ips.size());
+		List<Integer> colors = settings.getMapMarkersColors(ips.size());
+		int colorIndex = 0;
+		for (int i = 0; i < ips.size(); i++) {
+			if (colors.size() > i) {
+				colorIndex = colors.get(i);
+			}
+			MapMarker marker = new MapMarker(ips.get(i), PointDescription.deserializeFromString(desc.get(i), ips.get(i)),
+					colorIndex, false, i);
+			marker.history = false;
+			marker.displayPlace = WIDGET; //fixme
+			addMapMarker(marker);
+		}
+
+		ips = settings.getMapMarkersHistoryPoints();
+		desc = settings.getMapMarkersHistoryPointDescriptions(ips.size());
+		colors = settings.getMapMarkersHistoryColors(ips.size());
+		for (int i = 0; i < ips.size(); i++) {
+			if (colors.size() > i) {
+				colorIndex = colors.get(i);
+			}
+			MapMarker marker = new MapMarker(ips.get(i), PointDescription.deserializeFromString(desc.get(i), ips.get(i)),
+					colorIndex, false, i);
+			marker.history = true;
+			marker.displayPlace = WIDGET; //fixme
+			addMapMarker(marker);
+		}
+	}
+
+	public void addMapMarker(MapMarker marker) {
 		SQLiteConnection db = openConnection(false);
 		if (db != null) {
 			try {
@@ -119,14 +154,13 @@ public class MapMarkersDbHelper {
 			} finally {
 				db.close();
 			}
-			return true;
 		}
-		return false;
 	}
 
 	private void insertLast(SQLiteConnection db, MapMarker marker) {
 		long currentTime = System.currentTimeMillis();
 		marker.id = Long.parseLong(String.valueOf(currentTime) + String.valueOf(new Random().nextInt(900) + 100));
+		marker.creationDate = currentTime;
 		double lat = marker.getLatitude();
 		double lon = marker.getLongitude();
 		String descr = marker.getName(context); //fixme
@@ -136,11 +170,14 @@ public class MapMarkersDbHelper {
 		int colorIndex = marker.colorIndex;
 		int displayPlace = marker.displayPlace == WIDGET ? 0 : 1;
 
-		db.execSQL("UPDATE " + MARKERS_TABLE_NAME + " SET " + MARKERS_COL_NEXT_KEY + " = ? " +
-				"WHERE " + MARKERS_COL_NEXT_KEY + " = ?", new Object[]{marker.id, TAIL_NEXT_VALUE});
+		if (!marker.history) {
+			db.execSQL("UPDATE " + MARKERS_TABLE_NAME + " SET " + MARKERS_COL_NEXT_KEY + " = ? " +
+					"WHERE " + MARKERS_COL_NEXT_KEY + " = ?", new Object[]{marker.id, TAIL_NEXT_VALUE});
+		}
 
 		db.execSQL("INSERT INTO " + MARKERS_TABLE_NAME + " VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?)",
-				new Object[]{marker.id, lat, lon, descr, active, currentTime, visited, groupKey, colorIndex, displayPlace, TAIL_NEXT_VALUE});
+				new Object[]{marker.id, lat, lon, descr, active, currentTime, visited, groupKey, colorIndex, displayPlace,
+						marker.history ? HISTORY_NEXT_VALUE : TAIL_NEXT_VALUE});
 	}
 
 	public List<MapMarker> getMapMarkers() {
@@ -181,7 +218,10 @@ public class MapMarkersDbHelper {
 
 		LatLon latLon = new LatLon(lat, lon);
 		MapMarker marker = new MapMarker(latLon, PointDescription.deserializeFromString(desc, latLon),
-				colorIndex, false, added, visited, displayPlace == 0 ? WIDGET : TOPBAR, 0);
+				colorIndex, false, 0);
+		marker.creationDate = added;
+		marker.visitedDate = visited;
+		marker.displayPlace = displayPlace == 0 ? WIDGET : TOPBAR;
 		marker.history = !active;
 		marker.nextKey = nextKey;
 		marker.id = id;
@@ -239,11 +279,15 @@ public class MapMarkersDbHelper {
 		SQLiteConnection db = openConnection(false);
 		if (db != null) {
 			try {
+				marker.visitedDate = System.currentTimeMillis();
+
 				db.execSQL("UPDATE " + MARKERS_TABLE_NAME + " SET " + MARKERS_COL_NEXT_KEY + " = ? " +
 						"WHERE " + MARKERS_COL_NEXT_KEY + " = ?", new Object[]{marker.nextKey, marker.id});
 
-				db.execSQL("UPDATE " + MARKERS_TABLE_NAME + " SET " + MARKERS_COL_ACTIVE + " = ? " +
-						"WHERE " + MARKERS_COL_ID + " = ?", new Object[]{0, marker.id});
+				db.execSQL("UPDATE " + MARKERS_TABLE_NAME + " SET " +
+						MARKERS_COL_ACTIVE + " = ? " +
+						MARKERS_COL_VISITED + " = ? " +
+						"WHERE " + MARKERS_COL_ID + " = ?", new Object[]{0, marker.visitedDate, marker.id});
 			} finally {
 				db.close();
 			}

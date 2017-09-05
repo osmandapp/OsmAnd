@@ -6,7 +6,6 @@ import android.support.annotation.Nullable;
 import net.osmand.data.LatLon;
 import net.osmand.data.LocationPoint;
 import net.osmand.data.PointDescription;
-import net.osmand.plus.MapMarkersHelper.MapMarker.DisplayPlace;
 import net.osmand.util.Algorithms;
 
 import java.util.ArrayList;
@@ -48,13 +47,11 @@ public class MapMarkersHelper {
 		}
 
 		public MapMarker(LatLon point, PointDescription name, int colorIndex,
-						 boolean selected, long creationDate, long visitedDate,
-						 DisplayPlace displayPlace, int index) {
+						 boolean selected, int index) {
 			this.point = point;
 			this.pointDescription = name;
 			this.colorIndex = colorIndex;
 			this.selected = selected;
-			this.creationDate = creationDate;
 			this.index = index;
 		}
 
@@ -190,7 +187,8 @@ public class MapMarkersHelper {
 			}
 			MapMarker mapMarker = new MapMarker(ips.get(i),
 					PointDescription.deserializeFromString(desc.get(i), ips.get(i)), colorIndex,
-					selections.get(i), creationDates.get(i), 0, DisplayPlace.WIDGET, i);
+					selections.get(i), i);
+			mapMarker.creationDate = creationDates.get(i);
 			mapMarkers.add(mapMarker);
 		}
 
@@ -204,8 +202,9 @@ public class MapMarkersHelper {
 			}
 			MapMarker mapMarker = new MapMarker(ips.get(i),
 					PointDescription.deserializeFromString(desc.get(i), ips.get(i)),
-					colorIndex, false, creationDates.get(i), 0, DisplayPlace.WIDGET, i);
+					colorIndex, false, i);
 			mapMarker.history = true;
+			mapMarker.creationDate = creationDates.get(i);
 			mapMarkersHistory.add(mapMarker);
 		}
 
