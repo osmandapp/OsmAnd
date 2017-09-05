@@ -16,8 +16,8 @@ import java.util.LinkedList;
 import java.util.List;
 import java.util.Random;
 
-import static net.osmand.plus.MapMarkersHelper.MapMarker.DisplayPlace.TOPBAR;
-import static net.osmand.plus.MapMarkersHelper.MapMarker.DisplayPlace.WIDGET;
+import static net.osmand.plus.OsmandSettings.MapMarkersMode.TOOLBAR;
+import static net.osmand.plus.OsmandSettings.MapMarkersMode.WIDGETS;
 
 public class MapMarkersDbHelper {
 
@@ -128,7 +128,7 @@ public class MapMarkersDbHelper {
 			MapMarker marker = new MapMarker(ips.get(i), PointDescription.deserializeFromString(desc.get(i), ips.get(i)),
 					colorIndex, false, i);
 			marker.history = false;
-			marker.displayPlace = WIDGET; //fixme
+			marker.displayPlace = WIDGETS; //fixme
 			addMapMarker(marker);
 		}
 
@@ -142,7 +142,7 @@ public class MapMarkersDbHelper {
 			MapMarker marker = new MapMarker(ips.get(i), PointDescription.deserializeFromString(desc.get(i), ips.get(i)),
 					colorIndex, false, i);
 			marker.history = true;
-			marker.displayPlace = WIDGET; //fixme
+			marker.displayPlace = WIDGETS; //fixme
 			addMapMarker(marker);
 		}
 	}
@@ -169,7 +169,7 @@ public class MapMarkersDbHelper {
 		long visited = 0;
 		int groupKey = 0;
 		int colorIndex = marker.colorIndex;
-		int displayPlace = marker.displayPlace == WIDGET ? 0 : 1;
+		int displayPlace = marker.displayPlace == WIDGETS ? 0 : 1;
 
 		PointDescription pointDescription = marker.getOriginalPointDescription();
 		if (pointDescription != null && !pointDescription.isSearchingAddress(context)) {
@@ -228,7 +228,7 @@ public class MapMarkersDbHelper {
 				colorIndex, false, 0);
 		marker.creationDate = added;
 		marker.visitedDate = visited;
-		marker.displayPlace = displayPlace == 0 ? WIDGET : TOPBAR;
+		marker.displayPlace = displayPlace == 0 ? WIDGETS : TOOLBAR;
 		marker.history = !active;
 		marker.nextKey = nextKey;
 		marker.id = id;
