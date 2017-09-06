@@ -30,7 +30,7 @@ import net.osmand.plus.OsmandSettings;
 import net.osmand.plus.R;
 import net.osmand.plus.measurementtool.NewGpxData;
 import net.osmand.plus.myplaces.FavoritesActivity;
-import net.osmand.plus.myplaces.SplitSegmentFragment;
+import net.osmand.plus.myplaces.SplitSegmentDialogFragment;
 import net.osmand.plus.myplaces.TrackPointFragment;
 import net.osmand.plus.myplaces.TrackSegmentFragment;
 import net.osmand.plus.views.AddGpxPointBottomSheetHelper.NewGpxPoint;
@@ -60,10 +60,6 @@ public class TrackActivity extends TabActivity {
 	private boolean stopped = false;
 	private boolean openPointsTab = false;
 	private boolean openTracksList = false;
-
-	public PagerSlidingTabStrip getSlidingTabLayout() {
-		return slidingTabLayout;
-	}
 
 	@Override
 	public void onCreate(Bundle icicle) {
@@ -294,8 +290,8 @@ public class TrackActivity extends TabActivity {
 							Fragment frag = f.get();
 							if (frag instanceof TrackSegmentFragment) {
 								((TrackSegmentFragment) frag).updateContent();
-							} else if (frag instanceof SplitSegmentFragment) {
-								((SplitSegmentFragment) frag).reloadSplitFragment();
+							} else if (frag instanceof SplitSegmentDialogFragment) {
+								((SplitSegmentDialogFragment) frag).updateContent();
 							} else if (frag instanceof TrackPointFragment) {
 								((TrackPointFragment) frag).setContent();
 							}
@@ -348,23 +344,6 @@ public class TrackActivity extends TabActivity {
 		int itemId = item.getItemId();
 		switch (itemId) {
 			case android.R.id.home:
-				int backStackEntriesCount = getSupportFragmentManager().getBackStackEntryCount();
-				if (backStackEntriesCount > 0) {
-					FragmentManager.BackStackEntry backStackEntry = getSupportFragmentManager().getBackStackEntryAt(getSupportFragmentManager().getBackStackEntryCount() - 1);
-					if (backStackEntry.getName().equals(SplitSegmentFragment.TAG)) {
-						for (WeakReference<Fragment> f : fragList) {
-							Fragment frag = f.get();
-							if (frag instanceof TrackSegmentFragment) {
-								((TrackSegmentFragment) frag).updateSplitView();
-							}
-						}
-						getSupportFragmentManager().popBackStack();
-						if (isHavingWayPoints() || isHavingRoutePoints()) {
-							getSlidingTabLayout().setVisibility(View.VISIBLE);
-						}
-						return true;
-					}
-				}
 				if (getIntent().hasExtra(MapActivity.INTENT_KEY_PARENT_MAP_ACTIVITY) || openTracksList) {
 					OsmAndAppCustomization appCustomization = getMyApplication().getAppCustomization();
 					final Intent favorites = new Intent(this, appCustomization.getFavoritesActivity());
@@ -379,25 +358,17 @@ public class TrackActivity extends TabActivity {
 		return false;
 	}
 
-	@Override
-	public void onBackPressed() {
-		int backStackEntriesCount = getSupportFragmentManager().getBackStackEntryCount();
-		if (backStackEntriesCount > 0) {
-			FragmentManager.BackStackEntry backStackEntry = getSupportFragmentManager().getBackStackEntryAt(getSupportFragmentManager().getBackStackEntryCount() - 1);
-			if (backStackEntry.getName().equals(SplitSegmentFragment.TAG)) {
-				for (WeakReference<Fragment> f : fragList) {
-					Fragment frag = f.get();
-					if (frag instanceof TrackSegmentFragment) {
-						((TrackSegmentFragment) frag).updateSplitView();
-					}
-				}
-				getSupportFragmentManager().popBackStack();
-				if (isHavingWayPoints() || isHavingRoutePoints()) {
-					getSlidingTabLayout().setVisibility(View.VISIBLE);
-				}
-				return;
+	public void updateSplitView() {
+		for (WeakReference<Fragment> f : fragList) {
+			Fragment frag = f.get();
+			if (frag instanceof TrackSegmentFragment) {
+				((TrackSegmentFragment) frag).updateSplitView();
 			}
 		}
+	}
+
+	@Override
+	public void onBackPressed() {
 		if (openTracksList) {
 			OsmAndAppCustomization appCustomization = getMyApplication().getAppCustomization();
 			final Intent favorites = new Intent(this, appCustomization.getFavoritesActivity());
