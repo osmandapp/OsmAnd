@@ -90,7 +90,7 @@ public class MapMarkersActiveAdapter extends RecyclerView.Adapter<MapMarkerItemV
 
 		holder.description.setText(marker.creationDate + "");
 
-		holder.optionsBtn.setImageDrawable(iconsCache.getThemedIcon(R.drawable.ic_action_remove_dark));
+		holder.optionsBtn.setImageDrawable(iconsCache.getThemedIcon(R.drawable.ic_action_marker_passed));
 		holder.optionsBtn.setOnClickListener(new View.OnClickListener() {
 			@Override
 			public void onClick(View view) {

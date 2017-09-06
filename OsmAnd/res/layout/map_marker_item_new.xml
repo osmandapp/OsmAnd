@@ -100,16 +100,14 @@
 
         <ImageButton
             android:id="@+id/map_marker_options_button"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
+            android:layout_width="28dp"
+            android:layout_height="28dp"
             android:layout_gravity="center_vertical|end"
-            android:background="?attr/selectableItemBackground"
+            android:background="@drawable/marker_circle_background_light"
             android:focusableInTouchMode="true"
-            android:paddingBottom="16dp"
-            android:paddingLeft="14dp"
-            android:paddingRight="14dp"
-            android:paddingTop="16dp"
-            tools:src="@drawable/ic_overflow_menu_white"/>
+            android:layout_marginLeft="16dp"
+            android:layout_marginRight="16dp"
+            tools:src="@drawable/ic_action_marker_passed"/>
 
     </LinearLayout>
 
