@@ -25,7 +25,7 @@ public class OsmandBackupAgent extends BackupAgentHelper {
 		SharedPreferencesBackupHelper helper = new SharedPreferencesBackupHelper(this, prefs);
 		addHelper("osmand.settings", helper);
 
-		FileBackupHelper fileBackupHelper = new FileBackupHelper(this, FavouritesDbHelper.FAVOURITE_DB_NAME);
-		addHelper("osmand.favorites", fileBackupHelper);
+		FileBackupHelper fileBackupHelper = new FileBackupHelper(this, FavouritesDbHelper.FILE_TO_BACKUP);
+		addHelper(FavouritesDbHelper.FILE_TO_BACKUP, fileBackupHelper);
 	}
 }
