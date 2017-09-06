@@ -22,6 +22,12 @@ import net.osmand.plus.inapp.InAppHelper;
 
 import org.apache.commons.logging.Log;
 
+import java.text.ParseException;
+import java.text.SimpleDateFormat;
+import java.util.Date;
+import java.util.Locale;
+import java.util.TimeZone;
+
 public class OsmLiveActivity extends AbstractDownloadActivity implements DownloadIndexesThread.DownloadEvents {
 	private final static Log LOG = PlatformUtil.getLog(OsmLiveActivity.class);
 	public final static String OPEN_SUBSCRIPTION_INTENT_PARAM = "open_subscription_intent_param";
@@ -68,7 +74,16 @@ public class OsmLiveActivity extends AbstractDownloadActivity implements Downloa
 				if (response != null) {
 					ActionBar actionBar = getSupportActionBar();
 					if (actionBar != null) {
-						actionBar.setSubtitle(response);
+						SimpleDateFormat source = new SimpleDateFormat("yyyy-MM-dd HH:mm", Locale.US);
+						source.setTimeZone(TimeZone.getTimeZone("UTC"));
+						SimpleDateFormat dest = new SimpleDateFormat("yyyy-MM-dd HH:mm", Locale.US);
+						dest.setTimeZone(TimeZone.getDefault());
+						try {
+							Date parsed = source.parse(response);
+							actionBar.setSubtitle(dest.format(parsed));
+						} catch (ParseException e) {
+							e.printStackTrace();
+						}
 					}
 				}
 			}
