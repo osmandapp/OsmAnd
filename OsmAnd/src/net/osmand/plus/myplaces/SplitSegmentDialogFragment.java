@@ -104,7 +104,7 @@ public class SplitSegmentDialogFragment extends DialogFragment {
 		Toolbar toolbar = (Toolbar) view.findViewById(R.id.split_interval_toolbar);
 		TextView titleTextView = (TextView) toolbar.findViewById(R.id.title);
 		if (app.getSettings().isLightContent()) {
-			titleTextView.setTextAppearance(getContext(), R.style.Widget_Styled_LightActionBarHeader);
+			titleTextView.setTextAppearance(getContext(), R.style.Widget_Styled_LightActionBarTitle);
 		} else {
 			titleTextView.setTextAppearance(getContext(), R.style.TextAppearance_AppCompat_Widget_ActionBar_Title);
 		}
