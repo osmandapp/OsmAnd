@@ -374,8 +374,8 @@ public class AppInitializer implements IProgress {
 		app.rendererRegistry = startupInit(new RendererRegistry(app), RendererRegistry.class);
 		app.geocodingLookupService = startupInit(new GeocodingLookupService(app), GeocodingLookupService.class);
 		app.targetPointsHelper = startupInit(new TargetPointsHelper(app), TargetPointsHelper.class);
-		app.mapMarkersHelper = startupInit(new MapMarkersHelper(app), MapMarkersHelper.class);
 		app.mapMarkersDbHelper = startupInit(new MapMarkersDbHelper(app), MapMarkersDbHelper.class);
+		app.mapMarkersHelper = startupInit(new MapMarkersHelper(app), MapMarkersHelper.class);
 		app.searchUICore = startupInit(new QuickSearchHelper(app), QuickSearchHelper.class);
 	}
 
