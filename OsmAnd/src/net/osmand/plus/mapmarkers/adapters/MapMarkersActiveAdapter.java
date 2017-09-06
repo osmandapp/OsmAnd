@@ -68,7 +68,7 @@ public class MapMarkersActiveAdapter extends RecyclerView.Adapter<MapMarkerItemV
 	}
 
 	@Override
-	public void onBindViewHolder(final MapMarkerItemViewHolder holder, int pos) {
+	public void onBindViewHolder(final MapMarkerItemViewHolder holder, final int pos) {
 		IconsCache iconsCache = mapActivity.getMyApplication().getIconsCache();
 		MapMarker marker = markers.get(pos);
 
@@ -99,26 +99,16 @@ public class MapMarkersActiveAdapter extends RecyclerView.Adapter<MapMarkerItemV
 					return;
 				}
 				final MapMarker marker = markers.get(position);
-				final boolean[] undone = new boolean[1];
 
-				mapActivity.getMyApplication().getMapMarkersHelper().removeMapMarker(marker.index);
+				mapActivity.getMyApplication().getMapMarkersHelper().moveMapMarkerToHistory(marker);
 				notifyItemRemoved(position);
 
 				Snackbar.make(holder.itemView, R.string.item_removed, Snackbar.LENGTH_LONG)
 						.setAction(R.string.shared_string_undo, new View.OnClickListener() {
 							@Override
 							public void onClick(View view) {
-								undone[0] = true;
-								mapActivity.getMyApplication().getMapMarkersHelper().addMapMarker(marker, position);
+								mapActivity.getMyApplication().getMapMarkersHelper().restoreMarkerFromHistory(marker, position);
 								notifyItemInserted(position);
-							}
-						})
-						.addCallback(new Snackbar.Callback() {
-							@Override
-							public void onDismissed(Snackbar transientBottomBar, int event) {
-								if (!undone[0]) {
-									mapActivity.getMyApplication().getMapMarkersHelper().addMapMarkerHistory(marker);
-								}
 							}
 						}).show();
 			}

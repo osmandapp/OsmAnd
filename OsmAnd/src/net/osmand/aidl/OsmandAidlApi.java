@@ -797,7 +797,7 @@ public class OsmandAidlApi {
 			List<MapMarker> mapMarkers = markersHelper.getMapMarkers();
 			for (MapMarker m : mapMarkers) {
 				if (m.getOnlyName().equals(marker.getName()) && latLon.equals(new LatLon(m.getLatitude(), m.getLongitude()))) {
-					markersHelper.removeMapMarker(m);
+					markersHelper.moveMapMarkerToHistory(m);
 					refreshMap();
 					return true;
 				}

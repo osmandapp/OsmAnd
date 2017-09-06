@@ -6,6 +6,7 @@ import android.support.annotation.Nullable;
 import net.osmand.data.LatLon;
 import net.osmand.data.LocationPoint;
 import net.osmand.data.PointDescription;
+import net.osmand.plus.mapmarkers.MapMarkersDbHelper;
 import net.osmand.util.Algorithms;
 
 import java.util.ArrayList;
@@ -19,6 +20,7 @@ public class MapMarkersHelper {
 	private OsmandSettings settings;
 	private List<MapMarkerChangedListener> listeners = new ArrayList<>();
 	private OsmandApplication ctx;
+	private MapMarkersDbHelper markersDbHelper;
 	private boolean startFromMyLocation;
 
 	public interface MapMarkerChangedListener {
@@ -144,8 +146,9 @@ public class MapMarkersHelper {
 	public MapMarkersHelper(OsmandApplication ctx) {
 		this.ctx = ctx;
 		settings = ctx.getSettings();
+		markersDbHelper = ctx.getMapMarkersDbHelper();
 		startFromMyLocation = settings.ROUTE_MAP_MARKERS_START_MY_LOC.get();
-		readFromSettings();
+		loadMarkers();
 	}
 
 	public boolean isStartFromMyLocation() {
@@ -159,55 +162,25 @@ public class MapMarkersHelper {
 
 	public void lookupAddressAll() {
 		for (MapMarker mapMarker : mapMarkers) {
-			lookupAddress(mapMarker, false);
+			lookupAddress(mapMarker);
 		}
 		for (MapMarker mapMarker : mapMarkersHistory) {
-			lookupAddress(mapMarker, true);
+			lookupAddress(mapMarker);
 		}
 	}
 
-	private void readFromSettings() {
+	private void loadMarkers() {
 		mapMarkers.clear();
 		mapMarkersHistory.clear();
-		List<LatLon> ips = settings.getMapMarkersPoints();
-		List<String> desc = settings.getMapMarkersPointDescriptions(ips.size());
-		List<Integer> colors = settings.getMapMarkersColors(ips.size());
-		List<Boolean> selections = settings.getMapMarkersSelections(ips.size());
-		List<Long> creationDates = settings.getMapMarkersCreationDates(ips.size());
-		int colorIndex = 0;
-		for (int i = 0; i < ips.size(); i++) {
-			if (colors.size() > i) {
-				colorIndex = colors.get(i);
-			}
-			MapMarker mapMarker = new MapMarker(ips.get(i),
-					PointDescription.deserializeFromString(desc.get(i), ips.get(i)), colorIndex,
-					selections.get(i), i);
-			mapMarker.creationDate = creationDates.get(i);
-			mapMarkers.add(mapMarker);
-		}
-
-		ips = settings.getMapMarkersHistoryPoints();
-		desc = settings.getMapMarkersHistoryPointDescriptions(ips.size());
-		colors = settings.getMapMarkersHistoryColors(ips.size());
-		creationDates = settings.getMapMarkersHistoryCreationDates(ips.size());
-		for (int i = 0; i < ips.size(); i++) {
-			if (colors.size() > i) {
-				colorIndex = colors.get(i);
-			}
-			MapMarker mapMarker = new MapMarker(ips.get(i),
-					PointDescription.deserializeFromString(desc.get(i), ips.get(i)),
-					colorIndex, false, i);
-			mapMarker.history = true;
-			mapMarker.creationDate = creationDates.get(i);
-			mapMarkersHistory.add(mapMarker);
-		}
+		mapMarkers.addAll(markersDbHelper.getActiveMarkers());
+		mapMarkersHistory.addAll(markersDbHelper.getMarkersHistory());
 
 		if (!ctx.isApplicationInitializing()) {
 			lookupAddressAll();
 		}
 	}
 
-	private void lookupAddress(final MapMarker mapMarker, final boolean history) {
+	private void lookupAddress(final MapMarker mapMarker) {
 		if (mapMarker != null && mapMarker.pointDescription.isSearchingAddress(ctx)) {
 			cancelPointAddressRequests(mapMarker.point);
 			GeocodingLookupService.AddressLookupRequest lookupRequest = new GeocodingLookupService.AddressLookupRequest(mapMarker.point, new GeocodingLookupService.OnAddressLookupResult() {
@@ -218,13 +191,7 @@ public class MapMarkersHelper {
 					} else {
 						mapMarker.pointDescription.setName(address);
 					}
-					if (history) {
-						settings.updateMapMarkerHistory(mapMarker.point.getLatitude(), mapMarker.point.getLongitude(),
-								mapMarker.pointDescription, mapMarker.colorIndex, mapMarker.creationDate);
-					} else {
-						settings.updateMapMarker(mapMarker.point.getLatitude(), mapMarker.point.getLongitude(),
-								mapMarker.pointDescription, mapMarker.colorIndex, mapMarker.selected, mapMarker.creationDate);
-					}
+					markersDbHelper.updateMarker(mapMarker);
 					updateMarker(mapMarker);
 				}
 			}, null);
@@ -232,15 +199,27 @@ public class MapMarkersHelper {
 		}
 	}
 
-	public void removeMapMarker(int index) {
-		settings.deleteMapMarker(index);
-		MapMarker mapMarker = mapMarkers.remove(index);
-		cancelPointAddressRequests(mapMarker.point);
-		int ind = 0;
-		for (MapMarker marker : mapMarkers) {
-			marker.index = ind++;
+	public void moveMapMarkerToHistory(MapMarker marker) {
+		if (marker != null) {
+			marker.history = true;
+			markersDbHelper.moveMarkerToHistory(marker);
+			mapMarkers.remove(marker);
+			mapMarkersHistory.add(marker);
+			cancelPointAddressRequests(marker.point);
+			refresh();
 		}
-		refresh();
+	}
+
+	public void restoreMarkerFromHistory(MapMarker marker, int position) {
+		if (marker != null) {
+			MapMarker next = position >= mapMarkers.size() ? null : mapMarkers.get(position);
+			marker.history = false;
+			mapMarkersHistory.remove(marker);
+			mapMarkers.add(position, marker);
+			markersDbHelper.restoreMapMarkerFromHistory(marker);
+			markersDbHelper.changeActiveMarkerPosition(marker, next);
+			refresh();
+		}
 	}
 
 	public List<MapMarker> getMapMarkers() {
@@ -309,26 +288,17 @@ public class MapMarkersHelper {
 
 	public void removeActiveMarkers() {
 		cancelAddressRequests();
-		for (int i = mapMarkers.size() - 1; i >= 0; i--) {
-			MapMarker marker = mapMarkers.get(i);
-			addMapMarkerHistory(marker);
-		}
-		settings.clearActiveMapMarkers();
-		readFromSettings();
+		markersDbHelper.moveAllActiveMarkersToHistory();
+		mapMarkers.clear();
+		mapMarkersHistory = markersDbHelper.getMarkersHistory();
 		refresh();
 	}
 
 	public void removeMarkersHistory() {
 		cancelAddressRequests();
-		settings.clearMapMarkersHistory();
-		readFromSettings();
+		markersDbHelper.clearAllMarkersHistory();
+		mapMarkersHistory.clear();
 		refresh();
-	}
-
-	public void addMapMarker(MapMarker marker, int index) {
-		settings.insertMapMarker(marker.getLatitude(), marker.getLongitude(), marker.pointDescription,
-				marker.colorIndex, marker.selected, marker.creationDate, index);
-		readFromSettings();
 	}
 
 	public void addMapMarker(LatLon point, PointDescription historyName) {
@@ -342,13 +312,6 @@ public class MapMarkersHelper {
 	public void addMapMarkers(List<LatLon> points, List<PointDescription> historyNames) {
 		if (points.size() > 0) {
 			int colorIndex = -1;
-			double[] latitudes = new double[points.size()];
-			double[] longitudes = new double[points.size()];
-			List<PointDescription> pointDescriptions = new ArrayList<>();
-			int[] colorIndexes = new int[points.size()];
-			int[] positions = new int[points.size()];
-			boolean[] selections = new boolean[points.size()];
-			int[] indexes = new int[points.size()];
 			for (int i = 0; i < points.size(); i++) {
 				LatLon point = points.get(i);
 				PointDescription historyName = historyNames.get(i);
@@ -371,33 +334,18 @@ public class MapMarkersHelper {
 					colorIndex = (colorIndex + 1) % MAP_MARKERS_COLORS_COUNT;
 				}
 
-				latitudes[i] = point.getLatitude();
-				longitudes[i] = point.getLongitude();
-				pointDescriptions.add(pointDescription);
-				colorIndexes[i] = colorIndex;
-				positions[i] = -1 - i;
-				selections[i] = false;
-				indexes[i] = 0;
+				MapMarker marker = new MapMarker(point, pointDescription, colorIndex, false, 0);
+				markersDbHelper.addMarker(marker);
 			}
-			/* adding map marker to second topbar's row
-			if (sortedMapMarkers.size() > 0) {
-				MapMarker firstMarker = sortedMapMarkers.get(0);
-				settings.updateMapMarker(firstMarker.getLatitude(), firstMarker.getLongitude(),
-						firstMarker.pointDescription, firstMarker.colorIndex, -points.size(), firstMarker.selected);
-			}
-			*/
-			settings.insertMapMarkers(latitudes, longitudes, pointDescriptions, colorIndexes, positions,
-					selections, indexes);
-			readFromSettings();
+			loadMarkers();
 		}
 	}
 
 	public void updateMapMarker(MapMarker marker, boolean refresh) {
 		if (marker != null) {
-			settings.updateMapMarker(marker.getLatitude(), marker.getLongitude(),
-					marker.pointDescription, marker.colorIndex, marker.selected, marker.creationDate);
+			markersDbHelper.updateMarker(marker);
 			if (refresh) {
-				readFromSettings();
+				loadMarkers();
 				refresh();
 			}
 		}
@@ -405,35 +353,9 @@ public class MapMarkersHelper {
 
 	public void moveMapMarker(@Nullable MapMarker marker, LatLon latLon) {
 		if (marker != null) {
-			settings.moveMapMarker(new LatLon(marker.getLatitude(), marker.getLongitude()), latLon,
-					marker.pointDescription, marker.colorIndex, marker.selected, marker.creationDate);
 			marker.point = new LatLon(latLon.getLatitude(), latLon.getLongitude());
-			readFromSettings();
-			refresh();
-		}
-	}
-
-	public void removeMapMarker(MapMarker marker) {
-		if (marker != null) {
-			settings.deleteMapMarker(marker.index);
-			readFromSettings();
-			refresh();
-		}
-	}
-
-	public void addMapMarkerHistory(MapMarker marker) {
-		if (marker != null) {
-			settings.insertMapMarkerHistory(marker.getLatitude(), marker.getLongitude(),
-					marker.pointDescription, marker.colorIndex, marker.creationDate, 0);
-			readFromSettings();
-			refresh();
-		}
-	}
-
-	public void removeMapMarkerHistory(MapMarker marker) {
-		if (marker != null) {
-			settings.deleteMapMarkerHistory(marker.index);
-			readFromSettings();
+			markersDbHelper.updateMarker(marker);
+			loadMarkers();
 			refresh();
 		}
 	}
@@ -470,7 +392,7 @@ public class MapMarkersHelper {
 		}
 
 		if (markers != null || markersHistory != null) {
-			readFromSettings();
+			loadMarkers();
 			refresh();
 		}
 	}

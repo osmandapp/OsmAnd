@@ -51,6 +51,8 @@ public class MapMarkersHistoryAdapter extends RecyclerView.Adapter<MapMarkerItem
 
 		holder.title.setText(marker.getName(app));
 
+		holder.description.setText(marker.visitedDate + "");
+
 		holder.optionsBtn.setImageDrawable(iconsCache.getThemedIcon(R.drawable.ic_action_refresh_dark));
 		holder.optionsBtn.setOnClickListener(new View.OnClickListener() {
 			@Override
@@ -60,8 +62,7 @@ public class MapMarkersHistoryAdapter extends RecyclerView.Adapter<MapMarkerItem
 					return;
 				}
 				MapMarker marker = markers.get(position);
-				app.getMapMarkersHelper().removeMapMarkerHistory(marker);
-				app.getMapMarkersHelper().addMapMarker(marker, 0);
+				app.getMapMarkersHelper().restoreMarkerFromHistory(marker, 0);
 				notifyItemRemoved(position);
 			}
 		});

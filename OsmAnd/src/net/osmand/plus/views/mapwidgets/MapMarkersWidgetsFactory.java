@@ -131,9 +131,7 @@ public class MapMarkersWidgetsFactory {
 
 	private void removeMarker(int index) {
 		if (helper.getMapMarkers().size() > index) {
-			MapMarker marker = helper.getMapMarkers().get(index);
-			helper.removeMapMarker(marker.index);
-			helper.addMapMarkerHistory(marker);
+			helper.moveMapMarkerToHistory(helper.getMapMarkers().get(index));
 		}
 	}
 
