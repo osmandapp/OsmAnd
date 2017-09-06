@@ -34,7 +34,7 @@ public class OsmLiveActivity extends AbstractDownloadActivity implements Downloa
 	private LiveUpdatesFragmentPagerAdapter pagerAdapter;
 	private InAppHelper inAppHelper;
 	private boolean openSubscription;
-	private static final String URL = "http://builder.osmand.net/osmlive/.proc_timestamp";
+	private static final String URL = "https://osmand.net/api/osmlive_status";
 
 	public InAppHelper getInAppHelper() {
 		return inAppHelper;
