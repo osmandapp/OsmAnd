@@ -122,7 +122,7 @@ public class MapMarkersDbHelper {
 			MapMarker marker = new MapMarker(ips.get(i), PointDescription.deserializeFromString(desc.get(i), ips.get(i)),
 					colorIndex, false, i);
 			marker.history = false;
-			addMapMarker(marker);
+			addMarker(marker);
 		}
 
 		ips = settings.getMapMarkersHistoryPoints();
@@ -135,11 +135,11 @@ public class MapMarkersDbHelper {
 			MapMarker marker = new MapMarker(ips.get(i), PointDescription.deserializeFromString(desc.get(i), ips.get(i)),
 					colorIndex, false, i);
 			marker.history = true;
-			addMapMarker(marker);
+			addMarker(marker);
 		}
 	}
 
-	public void addMapMarker(MapMarker marker) {
+	public void addMarker(MapMarker marker) {
 		SQLiteConnection db = openConnection(false);
 		if (db != null) {
 			try {
@@ -178,7 +178,7 @@ public class MapMarkersDbHelper {
 						marker.history ? HISTORY_NEXT_VALUE : TAIL_NEXT_VALUE});
 	}
 
-	public List<MapMarker> getMapMarkers() {
+	public List<MapMarker> getActiveMarkers() {
 		List<MapMarker> res = new LinkedList<>();
 		LongSparseArray<MapMarker> markers = new LongSparseArray<>();
 		SQLiteConnection db = openConnection(true);
@@ -235,7 +235,7 @@ public class MapMarkersDbHelper {
 		}
 	}
 
-	public void updateMapMarker(MapMarker marker) {
+	public void updateMarker(MapMarker marker) {
 		SQLiteConnection db = openConnection(false);
 		if (db != null) {
 			try {
@@ -253,7 +253,7 @@ public class MapMarkersDbHelper {
 		}
 	}
 
-	public void moveMapMarker(MapMarker moved, @Nullable MapMarker next) {
+	public void changeActiveMarkerPosition(MapMarker moved, @Nullable MapMarker next) {
 		SQLiteConnection db = openConnection(false);
 		if (db != null) {
 			try {
@@ -271,7 +271,7 @@ public class MapMarkersDbHelper {
 		}
 	}
 
-	public void removeMapMarker(MapMarker marker) {
+	public void moveActiveMarkerToHistory(MapMarker marker) {
 		SQLiteConnection db = openConnection(false);
 		if (db != null) {
 			try {
@@ -290,7 +290,7 @@ public class MapMarkersDbHelper {
 		}
 	}
 
-	public void removeAllActiveMapMarkers() {
+	public void moveAllActiveMarkersToHistory() {
 		SQLiteConnection db = openConnection(false);
 		if (db != null) {
 			try {
@@ -313,14 +313,14 @@ public class MapMarkersDbHelper {
 								MARKERS_COL_ACTIVE + " = ?, " +
 								MARKERS_COL_NEXT_KEY + " = ? " +
 								"WHERE " + MARKERS_COL_ID + " = ?",
-						new Object[]{1, getMapMarkers().get(0).id, marker.id});
+						new Object[]{1, getActiveMarkers().get(0).id, marker.id});
 			} finally {
 				db.close();
 			}
 		}
 	}
 
-	public List<MapMarker> getMapMarkersHistory() {
+	public List<MapMarker> getMarkersHistory() {
 		List<MapMarker> markers = new LinkedList<>();
 		SQLiteConnection db = openConnection(true);
 		if (db != null) {
@@ -340,7 +340,7 @@ public class MapMarkersDbHelper {
 		return markers;
 	}
 
-	public void removeMapMarkerHistory(MapMarker marker) {
+	public void removeMarkerFromHistory(MapMarker marker) {
 		if (!marker.history) {
 			return;
 		}
@@ -355,7 +355,7 @@ public class MapMarkersDbHelper {
 		}
 	}
 
-	public void removeAllMapMarkersHistory() {
+	public void clearAllMarkersHistory() {
 		SQLiteConnection db = openConnection(true);
 		if (db != null) {
 			try {
