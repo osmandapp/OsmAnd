@@ -201,23 +201,21 @@ public class MapMarkersHelper {
 
 	public void moveMapMarkerToHistory(MapMarker marker) {
 		if (marker != null) {
-			marker.history = true;
+			cancelPointAddressRequests(marker.point);
 			markersDbHelper.moveMarkerToHistory(marker);
 			mapMarkers.remove(marker);
+			marker.history = true;
 			mapMarkersHistory.add(marker);
-			cancelPointAddressRequests(marker.point);
 			refresh();
 		}
 	}
 
 	public void restoreMarkerFromHistory(MapMarker marker, int position) {
 		if (marker != null) {
-			MapMarker next = position >= mapMarkers.size() ? null : mapMarkers.get(position);
-			marker.history = false;
-			mapMarkersHistory.remove(marker);
-			mapMarkers.add(position, marker);
+			MapMarker next = position == mapMarkers.size() ? null : mapMarkers.get(position);
 			markersDbHelper.restoreMapMarkerFromHistory(marker);
 			markersDbHelper.changeActiveMarkerPosition(marker, next);
+			loadMarkers();
 			refresh();
 		}
 	}
@@ -326,7 +324,7 @@ public class MapMarkersHelper {
 				}
 				if (colorIndex == -1) {
 					if (mapMarkers.size() > 0) {
-						colorIndex = (mapMarkers.get(0).colorIndex + 1) % MAP_MARKERS_COLORS_COUNT;
+						colorIndex = (mapMarkers.get(mapMarkers.size() - 1).colorIndex + 1) % MAP_MARKERS_COLORS_COUNT;
 					} else {
 						colorIndex = 0;
 					}
@@ -358,6 +356,13 @@ public class MapMarkersHelper {
 			loadMarkers();
 			refresh();
 		}
+	}
+
+	public void changeActiveMarkerPositionInDb(int currentPos) {
+		MapMarker moved = mapMarkers.get(currentPos);
+		markersDbHelper.changeActiveMarkerPosition(moved,
+				currentPos == mapMarkers.size() - 1 ? null : mapMarkers.get(currentPos + 1));
+		loadMarkers();
 	}
 
 	public void saveMapMarkers(List<MapMarker> markers, List<MapMarker> markersHistory) {

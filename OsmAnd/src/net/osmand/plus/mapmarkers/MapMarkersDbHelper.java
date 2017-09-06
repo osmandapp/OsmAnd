@@ -227,7 +227,7 @@ public class MapMarkersDbHelper {
 
 	private void buildLinkedList(LongSparseArray<MapMarker> markers, List<MapMarker> res, MapMarker marker) {
 		if (marker != null) {
-			res.add(marker);
+			res.add(0, marker);
 			MapMarker prev = markers.get(marker.id);
 			if (prev != null) {
 				buildLinkedList(markers, res, prev);
