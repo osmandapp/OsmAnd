@@ -3,21 +3,21 @@
     xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
-    android:layout_height="@dimen/measurement_tool_bottom_list_item_height"
+    android:layout_height="@dimen/bottom_sheet_list_item_height"
     android:background="?attr/selectableItemBackground"
-    android:minHeight="@dimen/measurement_tool_bottom_list_item_height"
-    android:paddingEnd="@dimen/measurement_tool_content_padding"
-    android:paddingLeft="@dimen/measurement_tool_content_padding"
-    android:paddingRight="@dimen/measurement_tool_content_padding"
-    android:paddingStart="@dimen/measurement_tool_content_padding">
+    android:minHeight="@dimen/bottom_sheet_list_item_height"
+    android:paddingEnd="@dimen/bottom_sheet_content_padding"
+    android:paddingLeft="@dimen/bottom_sheet_content_padding"
+    android:paddingRight="@dimen/bottom_sheet_content_padding"
+    android:paddingStart="@dimen/bottom_sheet_content_padding">
 
     <ImageView
         android:id="@+id/icon"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_centerVertical="true"
-        android:layout_marginEnd="@dimen/measurement_tool_bottom_icon_margin"
-        android:layout_marginRight="@dimen/measurement_tool_bottom_icon_margin"
+        android:layout_marginEnd="@dimen/bottom_sheet_icon_margin"
+        android:layout_marginRight="@dimen/bottom_sheet_icon_margin"
         tools:src="@drawable/ic_action_car_dark"/>
 
     <TextView

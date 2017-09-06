@@ -141,7 +141,7 @@ public class MapMarkersActiveFragment extends Fragment implements OsmAndCompassL
 
 					adapter.setUseCenter(useCenter);
 					adapter.setLocation(useCenter ? mapActivity.getMapLocation() : new LatLon(location.getLatitude(), location.getLongitude()));
-					adapter.setHeading(useCenter ? -mapActivity.getMapRotate() : heading);
+					adapter.setHeading(useCenter ? -mapActivity.getMapRotate() : heading != null ? heading : 99);
 					adapter.notifyDataSetChanged();
 				}
 			});

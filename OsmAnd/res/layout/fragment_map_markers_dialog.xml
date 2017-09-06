@@ -74,7 +74,7 @@
         android:layout_height="wrap_content"
         android:background="?attr/bg_color"
         app:itemBackground="?attr/bg_color"
-        app:itemIconTint="@color/bottom_navigation_color_selector"
-        app:itemTextColor="@color/bottom_navigation_color_selector"
+        app:itemIconTint="@drawable/bottom_navigation_color_selector"
+        app:itemTextColor="@drawable/bottom_navigation_color_selector"
         app:menu="@menu/map_markers_bottom_navigation"/>
 </LinearLayout>

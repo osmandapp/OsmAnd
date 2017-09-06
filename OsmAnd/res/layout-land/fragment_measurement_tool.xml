@@ -46,10 +46,10 @@
                     android:layout_alignParentLeft="true"
                     android:layout_alignParentStart="true"
                     android:layout_centerVertical="true"
-                    android:layout_marginEnd="@dimen/measurement_tool_content_margin"
-                    android:layout_marginLeft="@dimen/measurement_tool_content_margin"
-                    android:layout_marginRight="@dimen/measurement_tool_content_margin"
-                    android:layout_marginStart="@dimen/measurement_tool_content_margin"
+                    android:layout_marginEnd="@dimen/bottom_sheet_content_margin"
+                    android:layout_marginLeft="@dimen/bottom_sheet_content_margin"
+                    android:layout_marginRight="@dimen/bottom_sheet_content_margin"
+                    android:layout_marginStart="@dimen/bottom_sheet_content_margin"
                     android:background="@null"
                     tools:src="@drawable/ic_action_ruler"/>
 
@@ -60,10 +60,10 @@
                     android:layout_alignParentEnd="true"
                     android:layout_alignParentRight="true"
                     android:layout_centerVertical="true"
-                    android:layout_marginEnd="@dimen/measurement_tool_content_margin"
-                    android:layout_marginLeft="@dimen/measurement_tool_content_margin"
-                    android:layout_marginRight="@dimen/measurement_tool_content_margin"
-                    android:layout_marginStart="@dimen/measurement_tool_content_margin"
+                    android:layout_marginEnd="@dimen/bottom_sheet_content_margin"
+                    android:layout_marginLeft="@dimen/bottom_sheet_content_margin"
+                    android:layout_marginRight="@dimen/bottom_sheet_content_margin"
+                    android:layout_marginStart="@dimen/bottom_sheet_content_margin"
                     android:background="@null"
                     tools:src="@drawable/ic_action_arrow_down"/>
 

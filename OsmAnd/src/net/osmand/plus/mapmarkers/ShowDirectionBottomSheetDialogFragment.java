@@ -5,6 +5,7 @@ import android.os.Bundle;
 import android.support.annotation.Nullable;
 import android.view.ContextThemeWrapper;
 import android.view.LayoutInflater;
+import android.view.MotionEvent;
 import android.view.View;
 import android.view.ViewGroup;
 import android.view.ViewTreeObserver;
@@ -18,14 +19,14 @@ import net.osmand.plus.R;
 import net.osmand.plus.base.BottomSheetDialogFragment;
 import net.osmand.plus.helpers.AndroidUiHelper;
 
-public class MarkerOptionsBottomSheetDialogFragment extends BottomSheetDialogFragment {
+public class ShowDirectionBottomSheetDialogFragment extends BottomSheetDialogFragment {
 
-	public final static String TAG = "MarkerOptionsBottomSheetDialogFragment";
+	public final static String TAG = "ShowDirectionBottomSheetDialogFragment";
 
-	private MarkerOptionsFragmentListener listener;
+	private ShowDirectionFragmentListener listener;
 	private boolean portrait;
 
-	public void setListener(MarkerOptionsFragmentListener listener) {
+	public void setListener(ShowDirectionFragmentListener listener) {
 		this.listener = listener;
 	}
 
@@ -36,69 +37,54 @@ public class MarkerOptionsBottomSheetDialogFragment extends BottomSheetDialogFra
 		boolean nightMode = getMyApplication().getDaynightHelper().isNightModeForMapControls();
 		final int themeRes = nightMode ? R.style.OsmandDarkTheme : R.style.OsmandLightTheme;
 
-		final View mainView = View.inflate(new ContextThemeWrapper(getContext(), themeRes), R.layout.fragment_marker_options_bottom_sheet_dialog, container);
+		final View mainView = View.inflate(new ContextThemeWrapper(getContext(), themeRes), R.layout.fragment_marker_show_direction_bottom_sheet_dialog, container);
 		if (portrait) {
 			AndroidUtils.setBackground(getActivity(), mainView, nightMode, R.drawable.bg_bottom_menu_light, R.drawable.bg_bottom_menu_dark);
 		}
 
-		((ImageView) mainView.findViewById(R.id.sort_by_icon))
-				.setImageDrawable(getIcon(R.drawable.ic_sort_waypoint_dark, R.color.on_map_icon_color));
-		((ImageView) mainView.findViewById(R.id.show_direction_icon))
-				.setImageDrawable(getIcon(R.drawable.ic_sort_waypoint_dark, R.color.on_map_icon_color));
-		((ImageView) mainView.findViewById(R.id.build_route_icon))
-				.setImageDrawable(getIcon(R.drawable.map_directions, R.color.on_map_icon_color));
-		((ImageView) mainView.findViewById(R.id.save_as_new_track_icon))
-				.setImageDrawable(getIcon(R.drawable.ic_action_polygom_dark, R.color.on_map_icon_color));
-		((ImageView) mainView.findViewById(R.id.move_all_to_history_icon))
-				.setImageDrawable(getIcon(R.drawable.ic_action_history2, R.color.on_map_icon_color));
+		if (android.os.Build.VERSION.SDK_INT < android.os.Build.VERSION_CODES.JELLY_BEAN_MR1) {
+			mainView.findViewById(R.id.images_row).setVisibility(View.GONE);
+		} else {
+			ImageView topBarImage = (ImageView) mainView.findViewById(R.id.top_bar_image);
+			ImageView widgetImage = (ImageView) mainView.findViewById(R.id.widget_image);
+			if (nightMode) {
+				topBarImage.setImageResource(R.drawable.img_help_markers_topbar_night);
+				widgetImage.setImageResource(R.drawable.img_help_markers_widgets_night);
+			} else {
+				topBarImage.setImageResource(R.drawable.img_help_markers_topbar_day);
+				widgetImage.setImageResource(R.drawable.img_help_markers_widgets_day);
+			}
 
-		((TextView) mainView.findViewById(R.id.show_direction_text_view)).setText("Top bar");
+			mainView.findViewById(R.id.top_bar_text).setOnTouchListener(new View.OnTouchListener() {
+				@Override
+				public boolean onTouch(View view, MotionEvent motionEvent) {
+					return false;
+				}
+			});
 
-		mainView.findViewById(R.id.sort_by_row).setOnClickListener(new View.OnClickListener() {
-			@Override
-			public void onClick(View view) {
-				if (listener != null) {
-					listener.sortByOnClick();
+			mainView.findViewById(R.id.widget_text).setOnTouchListener(new View.OnTouchListener() {
+				@Override
+				public boolean onTouch(View view, MotionEvent motionEvent) {
+					return false;
 				}
-				dismiss();
-			}
-		});
-		mainView.findViewById(R.id.show_direction_row).setOnClickListener(new View.OnClickListener() {
-			@Override
-			public void onClick(View view) {
-				if (listener != null) {
-					listener.showDirectionOnClick();
-				}
-				dismiss();
-			}
-		});
-		mainView.findViewById(R.id.build_route_row).setOnClickListener(new View.OnClickListener() {
-			@Override
-			public void onClick(View view) {
-				if (listener != null) {
-					listener.buildRouteOnClick();
-				}
-				dismiss();
-			}
-		});
-		mainView.findViewById(R.id.save_as_new_track_row).setOnClickListener(new View.OnClickListener() {
-			@Override
-			public void onClick(View view) {
-				if (listener != null) {
-					listener.saveAsNewTrackOnClick();
-				}
-				dismiss();
-			}
-		});
-		mainView.findViewById(R.id.move_all_to_history_row).setOnClickListener(new View.OnClickListener() {
-			@Override
-			public void onClick(View view) {
-				if (listener != null) {
-					listener.moveAllToHistoryOnClick();
-				}
-				dismiss();
-			}
-		});
+			});
+		}
+
+		if (nightMode) {
+			((TextView) mainView.findViewById(R.id.show_direction_title)).setTextColor(getResources().getColor(R.color.ctx_menu_info_text_dark));
+		}
+
+		ImageView topBarIcon = (ImageView) mainView.findViewById(R.id.top_bar_icon);
+		topBarIcon.setBackgroundDrawable(getIcon(R.drawable.ic_action_device_top, R.color.on_map_icon_color));
+		topBarIcon.setImageDrawable(getIcon(R.drawable.ic_action_device_topbar, R.color.dashboard_blue));
+
+		ImageView widgetIcon = (ImageView) mainView.findViewById(R.id.widget_icon);
+		widgetIcon.setBackgroundDrawable(getIcon(R.drawable.ic_action_device_top, R.color.on_map_icon_color));
+		widgetIcon.setImageDrawable(getIcon(R.drawable.ic_action_device_widget, R.color.dashboard_blue));
+
+		ImageView noneIcon = (ImageView) mainView.findViewById(R.id.none_icon);
+		noneIcon.setBackgroundDrawable(getIcon(R.drawable.ic_action_device_top, R.color.on_map_icon_color));
+
 		mainView.findViewById(R.id.cancel_row).setOnClickListener(new View.OnClickListener() {
 			@Override
 			public void onClick(View view) {
@@ -113,7 +99,7 @@ public class MarkerOptionsBottomSheetDialogFragment extends BottomSheetDialogFra
 		mainView.getViewTreeObserver().addOnGlobalLayoutListener(new ViewTreeObserver.OnGlobalLayoutListener() {
 			@Override
 			public void onGlobalLayout() {
-				final View scrollView = mainView.findViewById(R.id.marker_options_scroll_view);
+				final View scrollView = mainView.findViewById(R.id.marker_show_direction_scroll_view);
 				int scrollViewHeight = scrollView.getHeight();
 				int dividerHeight = AndroidUtils.dpToPx(getContext(), 1);
 				int cancelButtonHeight = getContext().getResources().getDimensionPixelSize(R.dimen.bottom_sheet_cancel_button_height);
@@ -157,16 +143,7 @@ public class MarkerOptionsBottomSheetDialogFragment extends BottomSheetDialogFra
 		}
 	}
 
-	interface MarkerOptionsFragmentListener {
+	interface ShowDirectionFragmentListener {
 
-		void sortByOnClick();
-
-		void showDirectionOnClick();
-
-		void buildRouteOnClick();
-
-		void saveAsNewTrackOnClick();
-
-		void moveAllToHistoryOnClick();
 	}
 }

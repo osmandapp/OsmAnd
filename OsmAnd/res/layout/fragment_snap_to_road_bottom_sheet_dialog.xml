@@ -16,27 +16,27 @@
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:orientation="vertical"
-            android:paddingBottom="@dimen/measurement_tool_content_padding_small">
+            android:paddingBottom="@dimen/bottom_sheet_content_padding_small">
 
             <TextView
                 android:id="@+id/choose_navigation_title"
                 android:layout_width="match_parent"
-                android:layout_height="@dimen/measurement_tool_bottom_title_height"
+                android:layout_height="@dimen/bottom_sheet_title_height"
                 android:gravity="center_vertical"
-                android:paddingEnd="@dimen/measurement_tool_content_padding"
-                android:paddingLeft="@dimen/measurement_tool_content_padding"
-                android:paddingRight="@dimen/measurement_tool_content_padding"
-                android:paddingStart="@dimen/measurement_tool_content_padding"
+                android:paddingEnd="@dimen/bottom_sheet_content_padding"
+                android:paddingLeft="@dimen/bottom_sheet_content_padding"
+                android:paddingRight="@dimen/bottom_sheet_content_padding"
+                android:paddingStart="@dimen/bottom_sheet_content_padding"
                 android:text="@string/choose_navigation_type"
                 android:textAppearance="@style/TextAppearance.ListItemTitle"/>
 
             <TextView
                 android:layout_width="match_parent"
-                android:layout_height="@dimen/measurement_tool_bottom_descr_height"
-                android:paddingEnd="@dimen/measurement_tool_content_padding"
-                android:paddingLeft="@dimen/measurement_tool_content_padding"
-                android:paddingRight="@dimen/measurement_tool_content_padding"
-                android:paddingStart="@dimen/measurement_tool_content_padding"
+                android:layout_height="@dimen/bottom_sheet_descr_height"
+                android:paddingEnd="@dimen/bottom_sheet_content_padding"
+                android:paddingLeft="@dimen/bottom_sheet_content_padding"
+                android:paddingRight="@dimen/bottom_sheet_content_padding"
+                android:paddingStart="@dimen/bottom_sheet_content_padding"
                 android:text="@string/measurement_tool_snap_to_road_descr"
                 android:textColor="?android:textColorSecondary"
                 android:textSize="@dimen/default_desc_text_size"/>
@@ -50,7 +50,7 @@
         <FrameLayout
             android:id="@+id/cancel_row"
             android:layout_width="match_parent"
-            android:layout_height="@dimen/measure_distance_bottom_sheet_cancel_button_height"
+            android:layout_height="@dimen/bottom_sheet_cancel_button_height"
             android:background="?attr/selectableItemBackground">
 
             <TextView

@@ -106,6 +106,9 @@ public class MapMarkersDialogFragment extends android.support.v4.app.DialogFragm
 
 	private MarkerOptionsFragmentListener createMarkerOptionsFragmentListener() {
 		return new MarkerOptionsFragmentListener() {
+
+			final MapActivity mapActivity = getMapActivity();
+
 			@Override
 			public void sortByOnClick() {
 				Toast.makeText(getContext(), "Sort by", Toast.LENGTH_SHORT).show();
@@ -113,7 +116,7 @@ public class MapMarkersDialogFragment extends android.support.v4.app.DialogFragm
 
 			@Override
 			public void showDirectionOnClick() {
-				Toast.makeText(getContext(), "Show direction", Toast.LENGTH_SHORT).show();
+				openShowDirectionMenu(mapActivity);
 			}
 
 			@Override
@@ -133,6 +136,14 @@ public class MapMarkersDialogFragment extends android.support.v4.app.DialogFragm
 		};
 	}
 
+	private void openShowDirectionMenu(MapActivity mapActivity) {
+		ShowDirectionBottomSheetDialogFragment fragment = new ShowDirectionBottomSheetDialogFragment();
+		fragment.show(mapActivity.getSupportFragmentManager(), ShowDirectionBottomSheetDialogFragment.TAG);
+	}
+
+	private MapActivity getMapActivity() {
+		return (MapActivity) getActivity();
+	}
 
 	public static boolean showInstance(@NonNull MapActivity mapActivity) {
 		try {

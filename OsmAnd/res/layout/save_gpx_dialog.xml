@@ -9,21 +9,21 @@
         android:id="@+id/gpx_name_et"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:layout_marginEnd="@dimen/measurement_tool_content_margin"
-        android:layout_marginLeft="@dimen/measurement_tool_content_margin"
-        android:layout_marginRight="@dimen/measurement_tool_content_margin"
-        android:layout_marginStart="@dimen/measurement_tool_content_margin"
-        android:layout_marginTop="@dimen/measurement_tool_content_margin"
+        android:layout_marginEnd="@dimen/bottom_sheet_content_margin"
+        android:layout_marginLeft="@dimen/bottom_sheet_content_margin"
+        android:layout_marginRight="@dimen/bottom_sheet_content_margin"
+        android:layout_marginStart="@dimen/bottom_sheet_content_margin"
+        android:layout_marginTop="@dimen/bottom_sheet_content_margin"
         android:inputType="text"/>
 
     <TextView
         android:id="@+id/file_exists_text_view"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:layout_marginEnd="@dimen/measurement_tool_content_margin"
-        android:layout_marginLeft="@dimen/measurement_tool_content_margin"
-        android:layout_marginRight="@dimen/measurement_tool_content_margin"
-        android:layout_marginStart="@dimen/measurement_tool_content_margin"
+        android:layout_marginEnd="@dimen/bottom_sheet_content_margin"
+        android:layout_marginLeft="@dimen/bottom_sheet_content_margin"
+        android:layout_marginRight="@dimen/bottom_sheet_content_margin"
+        android:layout_marginStart="@dimen/bottom_sheet_content_margin"
         android:gravity="center_horizontal"
         android:text="@string/file_with_name_already_exists"
         android:textColor="@color/marker_red"
@@ -38,7 +38,7 @@
     <RelativeLayout
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:padding="@dimen/measurement_tool_content_padding">
+        android:padding="@dimen/bottom_sheet_content_padding">
 
         <android.support.v7.widget.SwitchCompat
             android:id="@+id/toggle_show_on_map"
@@ -47,8 +47,8 @@
             android:layout_alignParentEnd="true"
             android:layout_alignParentRight="true"
             android:layout_centerVertical="true"
-            android:layout_marginLeft="@dimen/measurement_tool_content_margin"
-            android:layout_marginStart="@dimen/measurement_tool_content_margin"/>
+            android:layout_marginLeft="@dimen/bottom_sheet_content_margin"
+            android:layout_marginStart="@dimen/bottom_sheet_content_margin"/>
 
         <TextView
             android:layout_width="wrap_content"
