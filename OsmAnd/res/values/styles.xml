@@ -365,18 +365,22 @@
     <style name="Widget.Styled.ActionBarLight" parent="Widget.AppCompat.Light.ActionBar.Solid">
         <item name="background">@color/actionbar_light_color</item>
         <item name="android:background">@color/actionbar_light_color</item>
-        <item name="titleTextStyle">@style/Widget.Styled.LightActionBarHeader</item>
-        <item name="subtitleTextStyle">@style/Widget.Styled.LightActionBarHeader</item>
+        <item name="titleTextStyle">@style/Widget.Styled.LightActionBarTitle</item>
+        <item name="subtitleTextStyle">@style/Widget.Styled.LightActionBarSubtitle</item>
         <item name="actionBarWidgetTheme">@style/Theme.AppCompat</item>
 
-        <item name="android:titleTextStyle">@style/Widget.Styled.LightActionBarHeader</item>
-        <item name="android:subtitleTextStyle">@style/Widget.Styled.LightActionBarHeader</item>
+        <item name="android:titleTextStyle">@style/Widget.Styled.LightActionBarTitle</item>
+        <item name="android:subtitleTextStyle">@style/Widget.Styled.LightActionBarSubtitle</item>
         <item name="android:actionBarWidgetTheme">@style/Theme.AppCompat</item>
         <item name="elevation">0dp</item>
     </style>
 
-    <style name="Widget.Styled.LightActionBarHeader" parent="@android:style/TextAppearance">
+    <style name="Widget.Styled.LightActionBarTitle" parent="TextAppearance.AppCompat.Widget.ActionBar.Title">
         <item name="android:textColor">@color/color_white</item>
+    </style>
+
+    <style name="Widget.Styled.LightActionBarSubtitle" parent="TextAppearance.AppCompat.Widget.ActionBar.Subtitle">
+        <item name="android:textColor">@color/white_80_transparent</item>
     </style>
 
     <style name="WhiteActionMode" parent="@style/Widget.AppCompat.ActionMode">
