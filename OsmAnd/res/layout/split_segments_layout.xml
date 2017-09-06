@@ -6,33 +6,38 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:orientation="vertical">
-
-    <android.support.v7.widget.Toolbar
-        android:id="@+id/split_interval_toolbar"
+    
+    <android.support.design.widget.AppBarLayout
         android:layout_width="match_parent"
-        android:layout_height="@dimen/dashboard_map_toolbar"
-        android:minHeight="@dimen/dashboard_map_toolbar"
-        android:theme="?attr/actionBarStyle"
-        app:contentInsetLeft="54dp"
-        app:contentInsetStart="54dp">
+        android:layout_height="@dimen/dashboard_map_toolbar">
 
-        <TextView
-            android:id="@+id/title"
-            android:layout_width="wrap_content"
+        <android.support.v7.widget.Toolbar
+            android:id="@+id/split_interval_toolbar"
+            android:layout_width="match_parent"
             android:layout_height="match_parent"
-            android:ellipsize="end"
-            android:maxLines="1"
-            tools:text="2017-02-16" />
+            android:theme="?attr/actionBarStyle"
+            app:contentInsetLeft="54dp"
+            app:contentInsetStart="54dp">
 
-        <ProgressBar
-            android:id="@+id/progress_bar"
-            android:layout_width="wrap_content"
-            android:layout_height="match_parent"
-            android:indeterminate="true"
-            android:visibility="gone"
-            tools:visibility="visible" />
+            <TextView
+                android:id="@+id/title"
+                android:layout_width="wrap_content"
+                android:layout_height="match_parent"
+                android:ellipsize="end"
+                android:maxLines="1"
+                tools:text="2017-02-16" />
 
-    </android.support.v7.widget.Toolbar>
+            <ProgressBar
+                android:id="@+id/progress_bar"
+                android:layout_width="wrap_content"
+                android:layout_height="match_parent"
+                android:indeterminate="true"
+                android:visibility="gone"
+                tools:visibility="visible" />
+
+        </android.support.v7.widget.Toolbar>
+
+    </android.support.design.widget.AppBarLayout>
 
     <FrameLayout
         android:layout_width="match_parent"
