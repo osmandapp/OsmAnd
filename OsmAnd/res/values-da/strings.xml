@@ -274,7 +274,7 @@ Proportional hukommelse %4$s MB (Android grænse %5$s MB, Dalvik %6$s MB).</stri
     <string name="transport_search_desc">Kollektivtrafiksøgning</string>
     <string name="favourites_search_desc">Favoritsøgning</string>
 
-    <string name="offline_navigation_not_available">OsmAnd offline navigation er midlertidig utilgængelig.</string>
+    <string name="offline_navigation_not_available">Offline navigation er midlertidig utilgængelig.</string>
     <string name="left_side_navigation">Venstrekørsel</string>
     <string name="left_side_navigation_descr">Vælg for lande med venstrekørsel</string>
 
@@ -957,7 +957,7 @@ OSM er et i fællesskab drevet, globalt offentligt domæne kortlægningsprojekt.
     <string name="new_route_calculated_dist">Ny rute beregnet, afstand</string>
     <string name="arrived_at_destination">Ankommet til destinationen</string>
     <string name="invalid_locations">Koordinaterne er ugyldige!</string>
-    <string name="go_back_to_osmand">Tilbage til OsmAnd-kortet</string>
+    <string name="go_back_to_osmand">Tilbage til kortet</string>
     <string name="loading_data">Indlæser data…</string>
     <string name="reading_indexes">Læser lokale data…</string>
     <string name="previous_run_crashed">Sidste OsmAnd kørsel fejlede. Logfilen er i {0}. Rapporter hændelsen og vedhæft logfilen.</string>
@@ -1208,11 +1208,11 @@ OSM er et i fællesskab drevet, globalt offentligt domæne kortlægningsprojekt.
     <string name="guidance_preferences_descr">Indstillinger for navigation</string>
     <string name="routing_preferences_descr">Indstillinger for ruteplanlægning</string>
     <string name="app_mode_truck">Lastbil</string>
-    <string name="calculate_osmand_route_gpx">Beregn OsmAnd offline rute</string>
+    <string name="calculate_osmand_route_gpx">Beregn offline rute</string>
 
     <string name="copying_osmand_one_file_descr">Kopierer fil (%s) til den ny placering…</string>
-    <string name="copying_osmand_files_descr">Kopierer OsmAnd datafiler til ny destination (%s)…</string>
-    <string name="copying_osmand_files">Kopierer OsmAnd datafiler…</string>
+    <string name="copying_osmand_files_descr">Kopierer datafiler til ny destination (%s)…</string>
+    <string name="copying_osmand_files">Kopierer datafiler…</string>
     <string name="android_19_location_disabled">"Siden Android version 4.4  (KitKat) kan man ikke hente og opdatere kort i den tidligere lagerplacering (%s). Skift til den tilladte placering og kopiere alle OsmAnd  datafiler dertil?          
 \n Note 1: De gamle datafiler forbliver urørt. (men kan slettes manuelt). 
 \n Note 2: På den nye placering vil det ikke være muligt at dele filer mellem OsmAnd og OsmAnd+."</string>
@@ -1237,8 +1237,8 @@ OSM er et i fællesskab drevet, globalt offentligt domæne kortlægningsprojekt.
     <string name="keep_and_add_destination_point">Tilføj som efterfølgende destination</string>
 
     <string name="use_displayed_track_for_navigation">Brug viste spor til navigation?</string>
-    <string name="calculate_osmand_route_without_internet">Beregn OsmAnd rutesegment uden internet</string>
-    <string name="gpx_option_calculate_first_last_segment">Beregn OsmAnd rute for første og sidste rutesegment</string>
+    <string name="calculate_osmand_route_without_internet">Beregn rutesegment uden internet</string>
+    <string name="gpx_option_calculate_first_last_segment">Beregn rute for første og sidste rutesegment</string>
     <string name="lang_cy">Walisisk</string>
     <string name="index_name_italy">Europa - Italien</string>
     <string name="index_name_gb">Europa - Storbritannien</string>

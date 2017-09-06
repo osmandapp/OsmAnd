@@ -45,7 +45,8 @@
     <FrameLayout
         android:layout_width="match_parent"
         android:layout_height="0dp"
-        android:layout_weight="1">
+        android:layout_weight="1"
+        android:background="?attr/ctx_menu_info_view_bg">
 
         <!-- Coordinator layout is needed in order to display the snackbar above the bottom navigation -->
         <android.support.design.widget.CoordinatorLayout

@@ -621,7 +621,7 @@ Biltegiratzean {1} MB erabiliko dira.
   <string name="select_search_position">Jatorria:</string>
   <string name="context_menu_item_search">Bilatu honen inguruan</string>
   
-  <string name="shared_string_save_as_gpx">Gorde GPX lorratz gisa</string>
+  <string name="shared_string_save_as_gpx">Gorde GPX lorratz berri gisa</string>
   <string name="route_successfully_saved_at">Ibilbidea \'%1$s\' bezala ongi gorde da.</string>
   <string name="filename_input">Fitxategi-izena:</string>
   <string name="file_with_name_already_exist">Izen berdineko beste fitxategi bat dago dagoeneko.</string>
@@ -2594,7 +2594,7 @@ Area honi dagokio: %1$s x %2$s</string>
     <string name="do_not_send_anonymous_app_usage">Ez bidali aplikazioaren erabilera estatistika anonimoak</string>
     <string name="do_not_send_anonymous_app_usage_desc">OsmAndek aplikazioan irekitzen dituzun atalei buruzko informazioa jasotzen du. Zure kokalekua ez da inoiz bidaltzen, ezta aplikazioan idazten duzun ezer edo ikusi, bilatu edo deskargatzen dituzun zonaldeei buruzko ezer ere.</string>
     <string name="do_not_show_startup_messages">Ez erakutsi mezuak hasieran</string>
-    <string name="do_not_show_startup_messages_desc">Aplikazioen deskontuak eta tokiko gertaeren inguruko mezuak bistaratzen ditu</string>
+    <string name="do_not_show_startup_messages_desc">Aplikazioen deskontuak eta tokiko gertaera berezien mezuak ezkutatzen ditu</string>
     <string name="parking_options">Aparkatzeko aukerak</string>
     <string name="full_version_thanks">Eskerrik asko OsmAnd aplikazioaren bertsio osoa erosteagatik!</string>
     <string name="routing_attr_relief_smoothness_factor_hills_name">Menditsua</string>
@@ -2771,4 +2771,26 @@ Area honi dagokio: %1$s x %2$s</string>
     <string name="add_point_before">Gehitu puntua aurretik</string>
     <string name="add_point_after">Gehitu puntua atzetik</string>
     <string name="shared_string_options">Aukerak</string>
-    </resources>
+    <string name="move_all_to_history">Eraman guztia historialera</string>
+    <string name="build_route">Kalkulatu ibilbidea</string>
+    <string name="show_direction">Erakutsi norabidea</string>
+    <string name="sort_by">Ordenatu honela</string>
+    <string name="marker_options">Markatzaile-aukerak</string>
+    <string name="do_not_use_animations">Ez erabili animazioak</string>
+    <string name="do_not_use_animations_descr">Aplikazioaren animazioak desgaitzen ditu</string>
+    <string name="keep_showing_on_map">Jarraitu mapan erakusten</string>
+    <string name="exit_without_saving">Irten gorde gabe?</string>
+    <string name="measurement_tool_save_as_new_track_descr">Puntuak puntu ala lerro gisa gorde ditakezu</string>
+    <string name="measurement_tool_snap_to_road_descr">OsmAndek puntuak hautatutako profilaren ibilbideekin lotuko ditu.</string>
+    <string name="choose_navigation_type">Hautatu nabigazio profila</string>
+    <string name="add_route_points">Gehitu ibilbide-puntuak</string>
+    <string name="add_line">Gehitu lerroa</string>
+    <string name="empty_state_my_tracks">Gehitu eta grabatu lorratzak</string>
+    <string name="empty_state_my_tracks_desc">Grabatu edo inportatu lorratzak ikusteko</string>
+    <string name="empty_state_favourites">Gehitu gogokoak</string>
+    <string name="empty_state_favourites_desc">Gehitu gogokoak mapan edo inportatu hauek fitxategi sistematik</string>
+    <string name="import_track">Inportatu lorratza</string>
+    <string name="import_track_desc">%1$s fitxategiak ez du bide-punturik, inportatu lorratz gisa?</string>
+    <string name="move_point">Mugitu puntua</string>
+    <string name="add_segment_to_the_track">Gehitu GPX lorratzera</string>
+</resources>
