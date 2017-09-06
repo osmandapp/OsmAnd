@@ -2660,18 +2660,16 @@ représentant la zone : %1$s x %2$s</string>
 \n • Partage de votre position afin qu\'on puisse vous rejoindre rapidement</string>
     <string name="restore_purchases">Restaurer vos achats</string>
     <string name="shared_string_visible">Visible</string>
-    <string name="osmand_plus_extended_description_part7">Améliorez OSM
-\n • Signalez des erreurs sur les données
-\n • Envoyez des traces GPX directement depuis l\'application
-\n • Ajoutez des points d\'intérêt et envoyez les directement sur OSM (ou plus tard si hors-ligne)
-\n • Enregistrez vos itinéraires en arrière-plan (pendant que votre appareil est en veille)
-\n OsmAnd est une application open source très active. Toutes les contributions sont bienvenues que ce soit en signalant des bugs, en participant à la traduction ou en développant de nouvelles fonctionnalités. Grâce aux interactions entre les utilisateurs et les développeurs l\'application est en évolution permanente. Le projet est bien sûr ouvert à toute contribution financière pour accélérer encore son développement.</string>
+    <string name="osmand_plus_extended_description_part7">Contribuez facilement à l\'amélioration d\'OpenStreetMap :
+\n • Signalez des erreurs de donnée
+\n • Envoyez des traces GPX à OpenStreetMap depuis l\'application
+\n • Ajoutez des points d\'intérêt et envoyez les à OpenStreetMap (immédiatement si vous êtes en ligne ou plus tard si vous êtes hors-ligne)
+\n • Enregistrez vos itinéraires en arrière-plan (pendant que votre appareil est en veille).
+\nOsmAnd est une application open source très active. Toutes les contributions sont bienvenues que ce soit en signalant des bugs, en participant à la traduction ou en développant de nouvelles fonctionnalités. Grâce aux interactions entre les utilisateurs et les développeurs l\'application est en évolution permanente. Le projet est bien sûr ouvert à toute contribution financière pour accélérer encore son développement.</string>
     <string name="analyze_on_map">Analyser sur la carte</string>
-    <string name="osmand_plus_extended_description_part1">OsmAnd+ (OSM Automated Navigation Directions) est une application de visualisation de cartes et de navigation utilisant les données gratuites couvrant le monde entier du projet OpenStreetMap (OSM). Profitez d\'un guidage vocal comme visuel; Découvrez des points d\'intérêt; Créez et gérez des traces GPX; Installez des greffons pour visualiser l\'altitude et les courbes de niveaux; Utilisez les modes Conduite, Piéton, Cycliste; Contribuez à l\'amélioration des cartes OSM et bien plus encore !
+    <string name="osmand_plus_extended_description_part1">OsmAnd+ (OpenStreetMap Automated Navigation and Directions) est une application de visualisation de cartes et de navigation utilisant les données gratuites couvrant le monde entier du projet OpenStreetMap. Bénéficiez d\'un guidage vocal comme visuel; découvrez des points d\'intérêt; créez et gérez des traces GPX; installez des greffons pour visualiser l\'altitude et les courbes de niveaux; utilisez les modes Automobile, Piéton, Cycliste; contribuez à l\'amélioration des cartes et bien plus encore !
 \n
-\n OsmAnd+ est la version payante de l\'application, en l\'achetant vous supportez le projet, financez le développement de nouvelles fonctionnalités, et recevez les dernières mises à jour.
-\n
-\nFonctionnalités principales :</string>
+\nOsmAnd+ est la version payante de l\'application, en l\'achetant vous supportez le projet, financez le développement de nouvelles fonctionnalités, et recevez les dernières mises à jour.</string>
     <string name="sea_depth_thanks">Merci d\'avoir acheté le greffon Lignes de sonde marines !</string>
     <string name="index_item_depth_contours_osmand_ext">Lignes de sonde marines</string>
     <string name="index_item_depth_points_southern_hemisphere">Lignes de sonde marines pour l\'hémisphère sud</string>
@@ -2848,7 +2846,7 @@ représentant la zone : %1$s x %2$s</string>
     <string name="add_point_before">Ajouter un point avant</string>
     <string name="add_point_after">Ajouter un point après</string>
     <string name="shared_string_options">Options</string>
-    <string name="measurement_tool_snap_to_road_descr">OsmAnd va connecter les points avec les itinéraires pour le profil sélectionné</string>
+    <string name="measurement_tool_snap_to_road_descr">OsmAnd va relier les points pour établir un itinéraire adapté au profil sélectionné.</string>
     <string name="measurement_tool_save_as_new_track_descr">Vous pouvez enregistrer les points soit comme points de passage soit comme ligne.</string>
     <string name="choose_navigation_type">Sélectionnez le type de navigation</string>
     <string name="add_route_points">Ajouter des points à la route</string>
@@ -2877,7 +2875,25 @@ représentant la zone : %1$s x %2$s</string>
     <string name="sort_by">Trier par</string>
     <string name="marker_options">Options de la marque</string>
     <string name="osmand_extended_description_part8">OsmAnd est open-source et en développement actif. Tout le monde peut contribuer à l\'application en signalant des bugs, en améliorant les traductions ou en codant de nouvelles fonctionnalités. Le projet est dans un état d\'amélioration continue par toutes ces formes d\'interaction avec les développeurs et les utilisateurs. Les progrès du projet reposent également sur des contributions financières pour financer le codage et le test de nouvelles fonctionnalités. Couverture et qualité de carte approximative: • Europe de l\'Ouest: **** • Europe de l\'Est: *** • Russie: *** • Amérique du Nord: *** • Amérique du Sud: ** • Asie: ** • Japon et Corée: *** • Moyen-Orient: ** • Afrique: ** • Antarctique: * La plupart des pays du monde sont disponibles en téléchargement! Obtenez un navigateur fiable dans votre pays, qu\'il s\'agisse de la France, de l\'Allemagne, du Mexique, du Royaume-Uni, de l\'Espagne, des Pays-Bas, des États-Unis, de la Russie, du Brésil ou de tout autre pays.</string>
-    <string name="osmand_plus_extended_description_part2">Navigation • Fonctionne en ligne (rapide) ou hors ligne (pas de frais d\'itinérance lorsque vous êtes à l\'étranger) • Guide vocal étape par étape (voix enregistrées et synthétisées) • Guide de voie optionnel, affichage du nom de la rue et heure d\'arrivée estimée • Prise en charge des points intermédiaires sur votre itinéraire • Ré-routage automatique chaque fois que vous vous déviez de l\'itinéraire • Recherchez des lieux par adresse, par type (par exemple: restaurant, hôtel, station-service, musée) ou par coordonnées géographiques</string>
-    <string name="osmand_plus_extended_description_part3">Affichage de la carte • Affichez votre position et votre orientation • En option, alignez l\'image selon la boussole ou votre direction de mouvement • Enregistrez vos endroits les plus importants en tant que favoris • Affichez les POI (point d\'intérêts) autour de vous • Affichez des tuiles spécialisées en ligne, une vue satellite (de Bing ), différentes surcouches, comme les pistes GPX et les couches supplémentaires avec une transparence personnalisable. • Possibilité d\'afficher les noms de lieux en anglais, local ou phonétique</string>
-    <string name="osmand_plus_extended_description_part4">Utilisez les données OSM et Wikipedia • Des informations de haute qualité provenant des meilleurs projets collaboratifs du monde • Données OSM disponibles par pays ou région • POI de Wikipédia, idéal pour les visites • Téléchargements gratuits illimités, directement à partir de l\'application • Des cartes vectorielles compactes et mises à jour au moins une fois par mois • Sélection entre les données régionales complètes et le réseau routier uniquement (Exemple: l\'intégralité du Japon représente 700 Mo ou 200 Mo pour le réseau routier uniquement)</string>
+    <string name="osmand_plus_extended_description_part2">Navigation :
+\n• Fonctionnement en ligne ou hors ligne (sans aucun frais de communication)
+\n• Guidage vocal pas à pas (voix enregistrées ou synthèse vocale)
+\n• En option : indication des voies, affichage du nom des rues et de l\'heure estimée d\'arrivée
+\n• Ajout d\'étapes sur votre itinéraire
+\n• Recalcule automatique de la route si vous vous écartez de l\'itinéraire
+\n• Recherchez des lieux par adresse, par type (par exemple : restaurant, hôtel, station-service, musée) ou par coordonnées géographiques.</string>
+    <string name="osmand_plus_extended_description_part3">Affichage de la carte :
+\n• Affichez votre position et votre orientation
+\n• Orientez la carte au choix selon la boussole ou selon la direction de votre déplacement
+\n• Enregistrez les lieux importants pour vous comme favoris
+\n• Affichez les point d\'intérêts aux alentours
+\n• Affichez des tuiles spécialisées en ligne, la vue satellite (source : Bing) et de nombreuses autres couches comme des traces GPX avec une transparence personnalisable
+\n• Affichez les noms de lieux en anglais, en langue locale ou en phonétique.</string>
+    <string name="osmand_plus_extended_description_part4">Utilisez les données d\'OpenStreetMap et de Wikipedia :
+\n• Informations de haute qualité provenant de l\'un des meilleurs projets collaboratifs au monde
+\n• Données disponibles par pays ou région
+\n• Points d\'intérêt de Wikipédia, idéal pour les visites
+\n• Téléchargements gratuits illimités, directement à partir de l\'application
+\n• Cartes vectorielles compactes et mises à jour au moins une fois par mois
+\n• Sélection entre les données régionales complètes ou le réseau routier uniquement (par exemple: 700 Mo pour la carte intégrale du Japon et 200 Mo uniquement pour la carte du réseau routier japonnais).</string>
     </resources>
