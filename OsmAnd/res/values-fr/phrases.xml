@@ -2634,12 +2634,12 @@
 	<string name="poi_historic_period_old_kingdom">Période historique : Ancien Empire (2686 – 2181 av. J.C.)</string>
 	<string name="poi_historic_period_first_intermediate_period">Période historique : Première Période intermédiaire (2181 – 2055 av. J.C.)</string>
 	<string name="poi_historic_period_second_intermediate_period">Période historique : Deuxième Période intermédiaire (1650 – 1550 av. J.C.)</string>
-	<string name="poi_historic_period_third_intermediate_period">"Période historique : Troisième Période intermédiaire (1069 – 664 av. J.C.) "</string>
+	<string name="poi_historic_period_third_intermediate_period">Période historique : Troisième Période intermédiaire (1069 – 664 av. J.C.)</string>
 	<string name="poi_historic_period_greek_dark_ages">Période historique : siècles obscurs grecques (1100 – 800 av. J.C.)</string>
 	<string name="poi_historic_period_roman_greece">Période historique : Grèce romaine (146 av. J.C. – 330 ap. J.C.)</string>
 	<string name="poi_historic_period_roman_kingdom">Période historique : Royauté romaine (753 av. J.C. – 509 av. J.C.)</string>
 	<string name="poi_historic_period_dominate">Période historique : dominat (285 ap. J.C. – 476 ap. J.C.)</string>
-	<string name="poi_historic_era_paleolithic">Période historique : paléolithique (2,6 millions d\'années – 10000 AP)</string>
+	<string name="poi_historic_era_paleolithic">Période historique : paléolithique (2,6 millions d\'années – 10000 avant le présent)</string>
 	<string name="poi_historic_era_mesolithic">Période historique : mésolithique</string>
 	<string name="poi_historic_era_neolithic">Période historique : néolithique</string>
 	<string name="poi_historic_era_chalcolithic">Période historique : chalcolithique (4ème–3ème millénaire av. J.C.)</string>
@@ -3072,4 +3072,18 @@
 	<string name="poi_social_facility_for_diseased">Malade</string>
 	<string name="poi_tomb_rock_cut">Type: coupe de roche</string>
 	<string name="poi_historic_civilization_ancient_roman">Civilisation: ancien romain \'753 av. JC. - 284 ap. JC.)</string>
+	<string name="poi_historic_period_early_dynastic_period">Période historique: période dynastique antérieure (3100 - 2686 av. J.-C.)</string>
+	<string name="poi_historic_period_first_persian_period">Période historique: première période perse</string>
+	<string name="poi_historic_period_late_period">Période historique: période tardive (664 - 332 av. J.-C.)</string>
+	<string name="poi_historic_period_second_persian_period">Période historique: deuxième période perse</string>
+	<string name="poi_historic_period_ptolemaic_egypt">Période historique: egypte ptolemaïque (305 av. J.-C. - 30 av. J.-C.)</string>
+	<string name="poi_historic_period_christian_egypt">Période historique: Egypte chrétienne</string>
+	<string name="poi_historic_period_byzantine_egypt">Période historique: Egypte chrétienne</string>
+	<string name="poi_historic_period_persian_occupation">Période historique: occupation persane</string>
+	<string name="poi_historic_period_villager">Période historique: villageois (époque I, II, 1580 avant JC - 133 après JC)</string>
+	<string name="poi_historic_period_urban">Période historique: urbaine (époque III, 133 AD - 374 après JC)</string>
+	<string name="poi_historic_period_classical">Période historique: classique (époque IV, 374 ap. JC - 900 ap. JC)</string>
+	<string name="poi_historic_period_imperial">Période historique: impériale (époque V, 900 ap. JC - 1200 ap. JC)</string>
+
+	<string name="poi_stone_type_conciliation_cross">Type: croix de conciliation</string>
 	</resources>
