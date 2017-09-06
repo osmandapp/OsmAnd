@@ -3078,7 +3078,7 @@
 
 	<string name="poi_barometer_yes">Барометр</string>
 	<string name="poi_barometer_no">Барометр: отсутствует</string>
-	<string name="poi_thermometer_yes">Термометр:</string>
+	<string name="poi_thermometer_yes">Термометр</string>
 	<string name="poi_thermometer_no">Термометр: отсутствует</string>
 	<string name="poi_hygrometer_yes">Гигрометр</string>
 	<string name="poi_hygrometer_no">Гигрометр: отсутствует</string>

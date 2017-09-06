@@ -2743,9 +2743,9 @@ Pro praghere iscrie su còdighe intreu</string>
     <string name="add_point_before">Annanghe unu puntu in antis</string>
     <string name="add_point_after">Annanghe unu puntu a pustis</string>
     <string name="shared_string_options">Optziones</string>
-    <string name="measurement_tool_snap_to_road_descr">OsmAnd at a annànghere puntos in prus, a segunda de sa casta de nàvigu.</string>
+    <string name="measurement_tool_snap_to_road_descr">OsmAnd at a connètere sos puntos cun sas àndalas pro su profilu isseberadu.</string>
     <string name="measurement_tool_save_as_new_track_descr">Podes sarvare sos puntos comente puntos de s\'àndala o comente lìnia.</string>
-    <string name="choose_navigation_type">Issèbera sa casta de nàvigu</string>
+    <string name="choose_navigation_type">Issèbera su profilu de nàvigu</string>
     <string name="add_route_points">Annanghe puntos a s\'àndala</string>
     <string name="add_line">Annanghe una lìnia</string>
     <string name="empty_state_my_tracks">Annanghe e registra rastas</string>
