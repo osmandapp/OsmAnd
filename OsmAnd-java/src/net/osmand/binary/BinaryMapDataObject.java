@@ -196,13 +196,37 @@ public class BinaryMapDataObject {
 	}
 	
 	
-	public boolean compareBinary(BinaryMapDataObject thatObj) {
+	public boolean compareBinary(BinaryMapDataObject thatObj, int coordinatesPrecision) {
 		if(this.objectType == thatObj.objectType
 				&& this.id == thatObj.id
 				&& this.area == thatObj.area 
-				&& Arrays.equals(this.polygonInnerCoordinates, thatObj.polygonInnerCoordinates)
-				&& Arrays.equals(this.coordinates, thatObj.coordinates) ) {
+				&& compareCoordinates(this.coordinates, thatObj.coordinates, coordinatesPrecision) ) {
+			if(mapIndex == null) {
+				throw new IllegalStateException("Illegal binary object: " + id);
+			}
+			if(thatObj.mapIndex == null) {
+				throw new IllegalStateException("Illegal binary object: " + thatObj.id);
+			}
+			
 			boolean equals = true;
+			if(equals) {
+				if(polygonInnerCoordinates == null || thatObj.polygonInnerCoordinates == null) {
+					equals = polygonInnerCoordinates == thatObj.polygonInnerCoordinates; 
+				} else if(polygonInnerCoordinates.length != thatObj.polygonInnerCoordinates.length){
+					equals = false;
+				} else {
+					for(int i = 0; i < polygonInnerCoordinates.length && equals; i++) {
+						if(polygonInnerCoordinates[i] == null || thatObj.polygonInnerCoordinates[i] == null) {
+							equals = polygonInnerCoordinates[i] == thatObj.polygonInnerCoordinates[i]; 
+						} else if(polygonInnerCoordinates[i].length != thatObj.polygonInnerCoordinates[i].length){
+							equals = false;
+						} else {
+							equals = compareCoordinates(polygonInnerCoordinates[i], thatObj.polygonInnerCoordinates[i], coordinatesPrecision);
+						}
+					}
+				}
+			}
+			
 			if(equals) {
 				if(types == null || thatObj.types == null) {
 					equals = types == thatObj.types; 
@@ -212,7 +236,7 @@ public class BinaryMapDataObject {
 					for(int i = 0; i < types.length && equals; i++) {
 						TagValuePair o = mapIndex.decodeType(types[i]);
 						TagValuePair s = thatObj.mapIndex.decodeType(thatObj.types[i]);
-						equals = o.equals(s);
+						equals = o.equals(s) && equals;
 					}
 				}
 			}
@@ -259,9 +283,79 @@ public class BinaryMapDataObject {
 			
 			return equals;
 		}
-		
+//		thatObj.mapIndex.decodeType(thatObj.types[0])
+//		mapIndex.decodeType(types[0]) id >>7
 		return false;
 	}
+
+
+	private static boolean compareCoordinates(int[] coordinates, int[] coordinates2, int precision) {
+		if(precision == 0) {
+			return Arrays.equals(coordinates, coordinates2);
+		}
+		TIntArrayList cd = simplify(coordinates, precision);
+		TIntArrayList cd2 = simplify(coordinates2, precision);
+		return cd.equals(cd2);
+	}
+
+
+
+	private static TIntArrayList simplify(int[] c, int precision) {
+		int len = c.length / 2;
+		TIntArrayList lt = new TIntArrayList(len * 3);
+		for (int i = 0; i < len; i++) {
+			lt.add(0);
+			lt.add(c[i * 2]);
+			lt.add(c[i * 2 + 1]);
+		}
+		lt.set(0, 1);
+		lt.set((len - 1) * 3, 1);
+		simplifyLine(lt, precision, 0, len - 1);
+
+		TIntArrayList res = new TIntArrayList(len * 2);
+		for (int i = 0; i < len; i++) {
+			if (lt.get(i * 3) == 1) {
+				res.add(lt.get(i * 3 + 1));
+				res.add(lt.get(i * 3 + 2));
+			}
+		}
+		return res;
+	}
+
+	private static double orthogonalDistance(int x, int y, int x1, int y1, int x2, int y2) {
+		long A = (x - x1);
+		long B = (y - y1);
+		long C = (x2 - x1);
+		long D = (y2 - y1);
+		return Math.abs(A * D - C * B) / Math.sqrt(C * C + D * D);
+	}
+
+	private static void simplifyLine(TIntArrayList lt, int precision, int start, int end) {
+		if(start == end - 1) {
+			return;
+		}
+		int x = lt.get(start*3 + 1);
+		int y = lt.get(start*3 + 2);
+		int ex = lt.get(end*3 + 1);
+		int ey = lt.get(end*3 + 2);
+		double max = 0;
+		int maxK = -1;
+		for(int k = start + 1; k < end ; k++) {
+			double ld = orthogonalDistance(lt.get(k*3 + 1), lt.get(k*3 + 2), x, y, ex, ey);
+			if(maxK == -1 || max < ld) {
+				maxK = k;
+				max = ld;
+			}
+		}
+		if(max < precision) {
+			return;
+		}
+		lt.set(maxK*3, 1); // keep point
+		simplifyLine(lt, precision, start, maxK);
+		simplifyLine(lt, precision, maxK, end);
+		
+	}
+
 
 
 	public int[] getCoordinates() {

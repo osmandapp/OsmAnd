@@ -2657,10 +2657,10 @@
 	<string name="poi_free_flying_hanggliding_yes">Drachenfliegen</string>
 	<string name="poi_free_flying_hanggliding_no">Drachenfliegen: nein</string>
 	<string name="poi_free_flying_rigid_yes">Strikt</string>
-	<string name="poi_free_flying_rigid_no">Freies Fliegen strikt: nein</string>
+	<string name="poi_free_flying_rigid_no">Freeflying starr: nein</string>
 	<string name="poi_free_flying_site_orientation_n">Freeflying Ausrichtung: N</string>
 	<string name="poi_free_flying_site_orientation_ne">Freeflying Ausrichtung: NO</string>
-	<string name="poi_free_flying_site_orientation_e">Freier Flugplatz Ausrichtung: O</string>
+	<string name="poi_free_flying_site_orientation_e">Freeflying Standort Ausrichtung: O</string>
 	<string name="poi_free_flying_site_orientation_se">Freeflying Ausrichtung: SO</string>
 	<string name="poi_free_flying_site_orientation_s">Freeflying Ausrichtung: S</string>
 	<string name="poi_free_flying_site_orientation_sw">Freeflying Ausrichtung: SW</string>
@@ -3480,5 +3480,7 @@
 	<string name="poi_boat_kayak_rental_rental_no">Kajaks: nein</string>
 	<string name="poi_boat_canoe_rental_rental_yes">Kanus: ja</string>
 	<string name="poi_boat_canoe_rental_rental_no">Kanus: nein</string>
+
+<string name="poi_network">Netzwerk</string>
 
 </resources>

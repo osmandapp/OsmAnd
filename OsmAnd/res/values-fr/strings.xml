@@ -683,12 +683,11 @@ Au-delà la navigation bascule automatiquement sur le service en ligne CloudMade
     <string name="online_map_settings_descr">Configurer la source de la carte en ligne ou en cache</string>
 
 
-    <string name="osmand_rastermaps_plugin_description">"Ce greffon permet d\'accéder à une grand nombre de cartes en ligne (aussi appelées tuiles ou cartes raster) qui vont de cartes OpenStreetMap (comme Mapnik) jusqu\'aux images satellites en passant par des cartes spécialisées comme des cartes météo, des cartes de climat, des cartes géologiques, des couches de relief, etc.
-
-Chacune de ces cartes est utilisable soit comme carte principale soit comme sur ou sous couche d\'une autre carte. Afin de gérer au mieux la superposition des cartes, vous pouvez masquer certains éléments des cartes vectorielles hors ligne depuis le menu \"Configurer la carte\".
-
-Les cartes tuiles peuvent être obtenues directement en ligne ou peuvent être préparées pour un usage hors ligne grâce à des outils tiers puis copiées dans le dossier de données d\'OsmAnd sous forme de base de données SQLite.
- "</string>
+    <string name="osmand_rastermaps_plugin_description">Ce greffon permet d\'accéder à une grand nombre de cartes en ligne (aussi appelées tuiles ou cartes raster) qui vont de cartes OpenStreetMap (comme Mapnik) jusqu\'aux images satellites en passant par des cartes spécialisées comme des cartes météo, des cartes de climat, des cartes géologiques, des couches de relief, etc.
+\n
+\nChacune de ces cartes est utilisable, comme carte principale, sur-couche ou sous-couche d\'une autre carte. Afin de gérer au mieux la superposition des cartes, vous pouvez masquer certains éléments des cartes vectorielles hors ligne depuis le menu \"Configurer la carte\".
+\n
+\nLes cartes tuiles peuvent être obtenues directement en ligne ou peuvent être préparées pour un usage hors ligne grâce à des outils tiers puis copiées dans le dossier de données d\'OsmAnd sous forme de base de données SQLite.</string>
     <string name="osmand_background_plugin_description">Affiche les préférences afin d\'activer le suivi et la navigation en tâche de fond (écran éteint) en réveillant périodiquement le GPS.</string>
     <string name="osmand_accessibility_description">Ce greffon active dans OsmAnd les options d\'accessibilité de votre appareil (réglage de la vitesse des voix TTS, utilisation du trackball pour zoomer ou annonces vocales de votre position).</string>
 
@@ -910,9 +909,7 @@ Mémoire proportionnelle %4$s Mo (limite Android %5$s Mo, Dalvik %6$s Mo).</stri
 
     <string name="snap_to_road_descr">Déplacer la position sur la route pendant la navigation</string>
     <string name="snap_to_road">Déplacer sur la route</string>
-    <string name="osmand_long_description_1000_chars">"
- OsmAnd (OSM Automated Navigation Directions) OsmAnd est un logiciel libre de navigation exploitant une grande variété de données issues OpenStreetMap (OSM). Toutes les données (cartes vectorielles ou à base de tuiles) peuvent être stockées dans la mémoire du téléphone pour un usage hors-ligne. OsmAnd permet également le routage en ligne et hors-ligne avec des instructions vocales pas à pas. Fonctionnalités principales : - Fonctionne complètement hors-ligne (stockage des cartes téléchargées au format vectoriel ou tuile dans le périphérique de stockage) - Cartes hors-lignes compactes disponibles pour le monde entier - Téléchargement des cartes pour un pays ou une région directement depuis l\'application - Possibilité de superposer plusieurs couches, telles que des traces GPX ou de navigation, des points d\'intérêt (PI), des favoris, des courbes de niveau, les arrêts de transport public, et bien d\'autres cartes avec une transparence personnalisable - Recherche hors-ligne d\'adresses et de lieux (PI) - Navigation hors-ligne pour distances moyennes - Mode voiture, vélo et piéton avec : - Option de vue jour/nuit automatique - Option de zoom automatique lors des déplacements - Orientation automatique de la carte (fixe, boussole, cap) Limitations de la version gratuite de OsmAnd : - Nombre de téléchargement de cartes limité - Pas d\'accès aux points d\'intérêt Wikipédia hors-ligne. OsmAnd est activement développé et notre projet et ses progrès futurs dépendent des contributions financières pour financer le développement et le test de nouvelles fonctionnalités. Veuillez considérer l\'achat d\'OsmAnd+, le financement d\'une fonctionnalité spécifique ou une donation sur osmand.net.
- "</string>
+    <string name="osmand_long_description_1000_chars">OsmAnd (OSM Automated Navigation Directions) OsmAnd est un logiciel libre de navigation exploitant une grande variété de données issues OpenStreetMap (OSM). Toutes les données (cartes vectorielles ou à base de tuiles) peuvent être stockées dans la mémoire du téléphone pour un usage hors-ligne. OsmAnd permet également le routage en ligne et hors-ligne avec des instructions vocales pas à pas. Fonctionnalités principales : - Fonctionne complètement hors-ligne (stockage des cartes téléchargées au format vectoriel ou tuile dans le périphérique de stockage) - Cartes hors-lignes compactes disponibles pour le monde entier - Téléchargement des cartes pour un pays ou une région directement depuis l\'application - Possibilité de superposer plusieurs couches, telles que des traces GPX ou de navigation, des points d\'intérêt (PI), des favoris, des courbes de niveau, les arrêts de transport public, et bien d\'autres cartes avec une transparence personnalisable - Recherche hors-ligne d\'adresses et de lieux (PI) - Navigation hors-ligne pour distances moyennes - Mode voiture, vélo et piéton avec : - Option de vue jour/nuit automatique - Option de zoom automatique lors des déplacements - Orientation automatique de la carte (fixe, boussole, cap) Limitations de la version gratuite de OsmAnd : - Nombre de téléchargement de cartes limité - Pas d\'accès aux points d\'intérêt Wikipédia hors-ligne. OsmAnd est activement développé et notre projet et ses progrès futurs dépendent des contributions financières pour financer le développement et le test de nouvelles fonctionnalités. Veuillez considérer l\'achat d\'OsmAnd+, le financement d\'une fonctionnalité spécifique ou une donation sur osmand.net.</string>
     <string name="osmand_plus_long_description_1000_chars">"
  OsmAnd+ (OSM Automated Navigation Directions)
 
@@ -994,10 +991,9 @@ Fonctionnalités principales :
 
 
     <string name="index_srtm_ele">Courbes de niveau</string>
-    <string name="srtm_plugin_description">"Ce greffon permet l\'affichage de courbes de niveau ainsi que du relief (ombres) qui s\'ajoutent au-dessus des cartes standards d\'OsmAnd. Ces informations sont particulièrement utiles pour les sportifs, les randonneurs, les cyclistes et d\'une manière générale par toutes les personnes qui souhaitent connaitre le relief. Les données pour les courbes de niveau et le relief sont des données supplémentaires que vous devez télécharger après avoir activé ce greffon.↵
-↵
-Les données globales (entre 70 degrés Nord et 70 degrés Sud) sont basées sur des mesures de SRTM (Shuttle Radar Topography Mission) et ASTER (Advanced Spaceborne Thermal Emission and Reflection Radiometer), un instrument d\'imagerie embarqué à bord de Terra, le satellite phare du système d\'observation de la terre de la NASA. ASTER est un effort de coopération entre la NASA, le ministère japonais de l\'économie, du commerce et de l\'industrie (METI) et \"Japan Space Systems\" (J-Spacesystems).
- "</string>
+    <string name="srtm_plugin_description">Ce greffon permet l\'affichage de courbes de niveau ainsi que du relief (ombres) qui s\'ajoutent au-dessus des cartes standards d\'OsmAnd. Ces informations sont particulièrement utiles pour les sportifs, les randonneurs, les cyclistes et d\'une manière générale par toutes les personnes qui souhaitent connaitre le relief. Les données pour les courbes de niveau et le relief sont des données supplémentaires que vous devez télécharger après avoir activé ce greffon.
+\n
+\nLes données globales (entre 70 degrés Nord et 70 degrés Sud) sont basées sur des mesures de SRTM (Shuttle Radar Topography Mission) et ASTER (Advanced Spaceborne Thermal Emission and Reflection Radiometer), un instrument d\'imagerie embarqué à bord de Terra, le satellite phare du système d\'observation de la terre de la NASA. ASTER est un effort de coopération entre la NASA, le ministère japonais de l\'économie, du commerce et de l\'industrie (METI) et \"Japan Space Systems\" (J-Spacesystems).</string>
     <string name="srtm_plugin_name">Courbes de niveau</string>
     <string name="download_select_map_types">Autres cartes</string>
     <string name="download_srtm_maps">Courbes de niveau</string>
@@ -1011,10 +1007,9 @@ Les données globales (entre 70 degrés Nord et 70 degrés Sud) sont basées sur
     <string name="audionotes_plugin_name">Notes audio/vidéo</string>
 
     <string name="osmand_srtm_short_description_80_chars">Greffon OsmAnd pour les courbes de niveau hors-ligne</string>
-    <string name="osmand_srtm_long_description_1000_chars">"Ce greffon permet l\'affichage de courbes de niveau ainsi que du relief (ombres) qui s\'ajoutent au-dessus des cartes standard d\'OsmAnd. Ces informations sont particulièrement utiles pour les sportifs, les randonneurs, les cyclistes et d\'une manière générale par toutes les personnes qui souhaitent connaitre le relief.
-
-Les données globales (entre 70 degrés Nord et 70 degrés Sud) sont basées sur des mesures SRTM (Shuttle Radar Topography Mission) et ASTER (Advanced Spaceborne Thermal Emission and Reflection Radiometer), des instruments d\'imagerie embarqués à bord de Terra, le satellite phare du système d\'observation de la terre de la NASA. ASTER est un effort de coopération entre la NASA, le ministère japonais de l\'économie, du commerce et de l\'industrie (METI) et \"Japan Space Systems\" (J-Spacesystems).
- "</string>
+    <string name="osmand_srtm_long_description_1000_chars">Ce greffon permet l\'affichage de courbes de niveau ainsi que du relief (ombres) qui s\'ajoutent au-dessus des cartes standard d\'OsmAnd. Ces informations sont particulièrement utiles pour les sportifs, les randonneurs, les cyclistes et d\'une manière générale par toutes les personnes qui souhaitent connaitre le relief.
+\n
+\nLes données globales (entre 70 degrés Nord et 70 degrés Sud) sont basées sur des mesures SRTM (Shuttle Radar Topography Mission) et ASTER (Advanced Spaceborne Thermal Emission and Reflection Radiometer), des instruments d\'imagerie embarqués à bord de Terra, le satellite phare du système d\'observation de la terre de la NASA. ASTER est un effort de coopération entre la NASA, le ministère japonais de l\'économie, du commerce et de l\'industrie (METI) et \"Japan Space Systems\" (J-Spacesystems).</string>
 
 
     <string name="map_widget_distancemeasurement">Mesure de distance</string>
@@ -1134,12 +1129,9 @@ Les données globales (entre 70 degrés Nord et 70 degrés Sud) sont basées sur
     <string name="delete_point">Supprimer le point de mesure</string>
     <string name="plugin_distance_point">Point</string>
     <string name="use_distance_measurement_help">* Ajouter un point : appui bref sur la carte
-
-* Supprimer le dernier point : appui long sur la carte
-
-* Ajouter ou modifier une description : appui long sur le point
-
-* Autres actions : appui sur le gadget de mesure.</string>
+\n* Supprimer le dernier point : appui long sur la carte
+\n* Ajouter ou modifier la description d\'un point : appui long sur le point
+\n* Autres actions : utilisez le gadget de mesure.</string>
     <string name="distance_measurement_finish_subtrack">Ajouter une nouvelle mesure</string>
     <string name="distance_measurement_clear_route">Supprimer la mesure</string>
     <string name="shared_string_downloading">Téléchargement en cours</string>
@@ -1487,7 +1479,7 @@ Les données globales (entre 70 degrés Nord et 70 degrés Sud) sont basées sur
     <string name="sort_by_distance">Trier par distance</string>
     <string name="sort_by_name">Trier par nom</string>
     <string name="no_index_file_to_download">Aucun téléchargement trouvé, veuillez vérifier votre connexion Internet.</string>
-    <string name="none_selected_gpx">Aucun fichier GPX sélectionné. Pour sélectionner, presser longuement sur une trace disponible.</string>
+    <string name="none_selected_gpx">Aucun fichier GPX sélectionné. Pour sélectionner un fichier, pressez longuement sur une trace disponible.</string>
 
     <string name="local_index_select_gpx_file">Sélectionnez pour afficher</string>
     <string name="osmo_group_information_desc">- Créez un groupe : donnez-lui un nom et indiquez une description
@@ -1590,10 +1582,9 @@ Voulez-vous effectuer à une nouvelle inscription ?</string>
     <string name="speak_poi">Points d\'intérêt proches</string>
     <string name="shared_string_all">Tout</string>
     <string name="index_tours">Tours</string>
-    <string name="record_plugin_description">"Ce greffon permet d\'enregistrer vos itinéraires dans un fichier au format GPX : soit automatiquement soit manuellement grâce à un bouton supplémentaire affiché sur la carte.
-
-Les traces ainsi enregistrées peuvent être partagées avec vos amis ou utilisées pour contribuer à OSM. Les sportifs peuvent utiliser ces enregistrements pour leurs entraînements. Certaines analyses des traces peuvent être réalisées directement dans OmsAnd (comme la vitesse moyenne, la durée de l\'itinéraire, etc.). Enfin les fichiers GPX locaux peuvent être exportés pour être utilisés par d\'autres applications.
- "</string>
+    <string name="record_plugin_description">Ce greffon permet d\'enregistrer vos itinéraires dans un fichier au format GPX : soit automatiquement soit manuellement grâce à un bouton supplémentaire affiché sur la carte.
+\n
+\nLes traces ainsi enregistrées peuvent être partagées avec vos amis ou utilisées pour contribuer à OSM. Les sportifs peuvent utiliser ces enregistrements pour leurs entraînements. Certaines analyses des traces peuvent être réalisées directement dans OmsAnd (comme la vitesse moyenne, la durée de l\'itinéraire, etc.). Enfin les fichiers GPX locaux peuvent être exportés pour être utilisés par d\'autres applications.</string>
     <string name="record_plugin_name">Enregistrement d\'itinéraire</string>
     <string name="int_hour">h</string>
     <string name="duration">Durée</string>
@@ -1698,7 +1689,7 @@ Les traces ainsi enregistrées peuvent être partagées avec vos amis ou utilis�
     <string name="speak_pedestrian">Passages piétons</string>
 
     <string name="avoid_roads_msg">Vous pouvez générer un itinéraire alternatif en sélectionnant les routes à éviter.</string>
-    <string name="navigation_over_track">Démarrer la navigation sur cette trace ?</string>
+    <string name="navigation_over_track">Démarrer la navigation en suivant cette trace ?</string>
     <string name="save_track_to_gpx_globally_headline">Enregistrement de traces à la demande</string>
 
     <string name="proxy_pref_title">Proxy</string>
@@ -1734,7 +1725,7 @@ Les traces ainsi enregistrées peuvent être partagées avec vos amis ou utilis�
     <string name="world_ski_missing">Pour afficher les pistes de ski, une carte hors ligne doit être téléchargée.</string>
     <string name="nautical_maps_missing">Pour afficher les cartes marines, une carte hors ligne doit être téléchargée.</string>
     <string name="rendering_attr_pisteGrooming_name">Damage des pistes</string>
-    <string name="free">"%1$s libre "</string>
+    <string name="free">%1$s libre</string>
     <string name="device_memory">Mémoire de l\'appareil</string>
     <string name="notes">Notes</string>
     <string name="online_map">Carte en ligne</string>
@@ -1747,27 +1738,26 @@ Les traces ainsi enregistrées peuvent être partagées avec vos amis ou utilis�
     <string name="share_note">Partager la note</string>
 
     <string name="shared_string_export">Exporter</string>
-    <string name="plugin_ski_descr">"Ce greffon affiche le relief en conditions hivernales, ainsi que les pistes de ski (dont la difficulté est représentée par un code couleurs) et les remontées mécaniques.
-
-Cet affichage peut être annulé soit en le désactivant ici, soit en modifiant le Style de la carte dans \"Configurer la carte\".
- "</string>
-	<string name="plugin_touringview_descr">"Activer cette vue bascule vers le style d\'affichage \"Grand tourisme\", affichant une carte très détaillée adaptée aux voyageurs et chauffeurs routiers.
-
-
-Cet affichage, quel que soit le niveau de zoom, fournit le maximum de détails disponibles. Chaque type de voie (routes, pistes, chemins …) est distingué de manière explicite grâce à des codes couleurs, ce qui est particulièrement utile en cas de conduite de grands véhicules. Il existe aussi des options pour l\'affichage des itinéraires cyclables ou des chemins de randonnée.
-
-Il n\'est pas nécessaire de télécharger une carte supplémentaire, cet affichage s\'appuyant sur les cartes standards.
-
-
-Cet affichage peut être annulé soit en le désactivant ici, soit en modifiant le Style de la carte dans \"Configurer la carte\".
- "</string>
+    <string name="plugin_ski_descr">Ce greffon pour OsmAnd affiche le relief en conditions hivernales, ainsi que les pistes de ski (dont la difficulté est représentée par un code couleurs) et les remontées mécaniques.
+\n
+\nL\'activation de cette vue change le style de carte en \"Hiver et ski\", en affichant toutes les caractéristiques du paysage en condition neigeuse. Cet affichage peut être annulé soit en le désactivant ici, soit en modifiant le Style de la carte dans \"Configurer la carte\".</string>
+	<string name="plugin_touringview_descr">Activer cette vue bascule vers le style d\'affichage \"Grand tourisme\", affichant une carte très détaillée adaptée aux voyageurs et chauffeurs routiers.
+\n
+\nCet affichage, quel que soit le niveau de zoom, fournit le maximum de détails disponibles. 
+\n
+\nChaque type de voie (routes, pistes, chemins …) est distingué de manière explicite grâce à des codes couleurs, ce qui est particulièrement utile en cas de conduite de grands véhicules. 
+\n
+\nIl existe aussi des options pour l\'affichage des itinéraires cyclables ou des chemins de randonnée.
+\n
+\nIl n\'est pas nécessaire de télécharger une carte supplémentaire, cet affichage s\'appuyant sur les cartes standards.
+\n
+\nCet affichage peut être annulé soit en le désactivant ici, soit en modifiant le Style de la carte dans \"Configurer la carte\".</string>
     <string name="plugin_touringview_name">Grand tourisme</string>
-	<string name="plugin_nautical_descr">"Ce greffon enrichit la carte OsmAnd ainsi que l\'application de navigation afin d\'afficher des cartes marines pour la navigation de plaisance, la voile et tous les sports nautiques.
-
-Ce greffon OsmAnd affichera les marques nautiques et symboles graphiques utiles à la navigation aussi bien sur terre que le long des côtes. Chaque marque de navigation est détaillée afin de permettre son identification et de connaître sa signification (catégorie, forme, couleur, fréquence, référence, etc.).
-
-Pour revenir à l’un des styles de carte classique de OsmAnd, désactivez simplement ce greffon ou modifiez le « Style de carte » dans le menu « Configurer la carte ».
- "</string>
+	<string name="plugin_nautical_descr">Ce greffon enrichit la carte OsmAnd ainsi que l\'application de navigation afin d\'afficher des cartes marines pour la navigation de plaisance, la voile et tous les sports nautiques.
+\n
+\nCe greffon OsmAnd affichera les marques nautiques et symboles graphiques utiles à la navigation aussi bien sur terre que le long des côtes. Chaque marque de navigation est détaillée afin de permettre son identification et de connaître sa signification (catégorie, forme, couleur, fréquence, référence, etc.).
+\n
+\nPour revenir à l’un des styles de carte classique de OsmAnd, désactivez simplement ce greffon ou modifiez le « Style de carte » dans le menu « Configurer la carte ».</string>
     <string name="location_on_map">Position :\n Lat. %1$s\n Lon. %2$s</string>
     <string name="days_behind">jours passés</string>
     <string name="rename_failed">Échec du renommage.</string>
@@ -2651,42 +2641,34 @@ représentant la zone : %1$s x %2$s</string>
     <string name="parking_options">Choix de stationnement</string>
     <string name="do_not_send_anonymous_app_usage">N\'envoyer aucune information d\'usage sur les applications (même anonymes)</string>
     <string name="do_not_show_startup_messages">N\'afficher aucun message au démarrage</string>
-    <string name="do_not_show_startup_messages_desc">Ces messages concernent les offres spéciales d\'achat d\'applications</string>
+    <string name="do_not_show_startup_messages_desc">Retire les messages promotionnels et les annonces locales</string>
     <string name="right_side_navigation">Conduite à droite</string>
     <string name="driving_region_automatic">Automatique</string>
     <string name="do_not_send_anonymous_app_usage_desc">OsmAnd collecte des informations sur les écrans affichés lors de l\'utilisation de l\'application. Votre position n\'est jamais collectée, ni aucune des données saisies par l\'utilisateur dans l\'application comme les zones affichées, les recherches ou les téléchargements réalisés.</string>
-    <string name="osmand_extended_description_part1">"
- OsmAnd (OSM Automated Navigation Directions) est une application de visualisation de cartes et de navigation utilisant les données gratuites couvrant le monde entier du projet OpenStreetMap (OSM).
-
- Profitez d\'un guidage vocal comme visuel; Découvrez des points d\'intérêt; Créez et gérez des traces GPX; Installez des greffons pour visualiser l\'altitude et les courbes de niveaux; Utilisez les modes Conduite, Piéton, Cycliste; Contribuez à l\'amélioration des cartes OSM et bien plus encore !
- "</string>
+    <string name="osmand_extended_description_part1">OsmAnd (OSM Automated Navigation Directions) est une application de visualisation de cartes et de navigation utilisant les données gratuites couvrant le monde entier du projet OpenStreetMap (OSM). Profitez d\'un guidage vocal comme visuel; Découvrez des points d\'intérêt; Créez et gérez des traces GPX; Installez des greffons pour visualiser l\'altitude et les courbes de niveaux; Utilisez les modes Conduite, Piéton, Cycliste; Contribuez à l\'amélioration des cartes OSM et bien plus encore !</string>
     <string name="osmand_extended_description_part4">Le greffon OsmAnd ski maps permet de visualiser les pistes de ski avec leur niveau de difficulté et d\'autres informations utiles comme l\'emplacement et le type des remontées mécaniques.</string>
-    <string name="osmand_extended_description_part7">"
- Contribuez à OpenStreetMap (OSM)
- • Signalez des anomalies
- • Envoyez des traces GPX vers OSM directement depuis l\'application
- • Ajoutez des Points d\'Intérêt et envoyez-les vers OSM (immédiatement ou plus tard si vous êtes hors-ligne)
- "</string>
-    <string name="osmand_plus_extended_description_part8">" Couverture et qualité des cartes (de 1 à 4 étoiles)
-\n • Europe de l\'Ouest : **** (4)
-\n • Europe de l\'Est : *** (3)
-\n • Russie : *** (3)
-\n • Amérique du Nord : *** (3)
-\n • Amérique du Sud : ** (2)
-\n • Asie : ** (2)
-\n • Japon et Corée : *** (3)
-\n • Moyen-Orient : ** (2)
-\n • Afrique : ** (2)
-\n • Antarctique : * (1)
-\n La grande majorité des pays sont couverts de l\'Afghanistan au Zimbabwe, téléchargez les cartes dont vous avez besoin ! "</string>
+    <string name="osmand_extended_description_part7">Contribuez à OpenStreetMap (OSM)
+\n • Signalez des anomalies
+\n • Envoyez des traces GPX vers OSM directement depuis l\'application
+\n • Ajoutez des Points d\'Intérêt et envoyez-les vers OSM (immédiatement ou plus tard si vous êtes hors-ligne)</string>
+    <string name="osmand_plus_extended_description_part8">Couverture et qualité des cartes (de 1 à 4 étoiles) 
+\n • Europe de l\'Ouest : **** (4) 
+\n • Europe de l\'Est : *** (3) 
+\n • Russie : *** (3) 
+\n • Amérique du Nord : *** (3) 
+\n • Amérique du Sud : ** (2) 
+\n • Asie : ** (2) 
+\n • Japon et Corée : *** (3) 
+\n • Moyen-Orient : ** (2) 
+\n • Afrique : ** (2) 
+\n • Antarctique : * (1) 
+\n La grande majorité des pays sont couverts de l\'Afghanistan au Zimbabwe, téléchargez les cartes dont vous avez besoin !</string>
     <string name="fonts_header">Polices pour les textes de la carte</string>
-    <string name="osmand_plus_extended_description_part5">"
- Fonctionnalités liées à la sécurité
- • Bascule automatique en mode jour / nuit (option)
- • Affichage des limitations de vitesse avec rappels en cas de dépassement (option)
- • Zoom adapté à la vitesse (option)
- • Partage de votre position pour que n\'importe qui puisse vous rejoindre rapidement
- "</string>
+    <string name="osmand_plus_extended_description_part5">Fonctions liées à la sécurité
+\n • Bascule automatique en mode jour / nuit (option)
+\n • Affichage des limitations de vitesse avec rappels en cas de dépassement (option)
+\n • Zoom adapté à la vitesse (option)
+\n • Partage de votre position afin qu\'on puisse vous rejoindre rapidement</string>
     <string name="restore_purchases">Restaurer vos achats</string>
     <string name="shared_string_visible">Visible</string>
     <string name="osmand_plus_extended_description_part7">"
@@ -2738,15 +2720,13 @@ Fonctionnalités principales :
     <string name="shared_string_overview">Vue d\'ensemble</string>
     <string name="animate_my_location_desc">Activer l\'animation de votre position pendant la navigation</string>
     <string name="animate_my_location">Animer ma position</string>
-    <string name="osmand_plus_extended_description_part6">"
- Fonctionnalités adaptées aux cyclistes et piétons
- • Affichage des itinéraires piétons et des circuits de randonnée ou encore des pistes cyclables; idéal pour les activités de plein air
- • Modes de guidage adaptés aux cyclistes et piétons
- • Affichage des arrêts de transports publics (bus, tram, train) avec identification des lignes (option)
- • Enregistrement GPX du trajet en local ou en ligne (option)
- • Affichage de la vitesse et de l\'altitude (option)
- • Affichage des courbes de niveaux et ombrage du relief (nécessite un greffon additionnel)
- "</string>
+    <string name="osmand_plus_extended_description_part6">Fonctions adaptées aux cyclistes et piétons
+\n • Affichage des itinéraires piétons et des circuits de randonnée ou encore des pistes cyclables; idéal pour les activités de plein air
+\n • Modes de guidage adaptés aux cyclistes et piétons
+\n • Affichage des arrêts de transports publics (bus, tram, train) avec identification des lignes (option)
+\n • Enregistrement GPX du trajet en local ou en ligne (option)
+\n • Affichage de la vitesse et de l\'altitude (option)
+\n • Affichage des courbes de niveaux et ombrage du relief (nécessite un greffon additionnel)</string>
     <string name="favorite_group_name">Nom du groupe</string>
     <string name="change_color">Modifier la couleur</string>
     <string name="edit_name">Modifier le nom</string>
@@ -2774,37 +2754,31 @@ Fonctionnalités principales :
     <string name="increase_search_radius">Augmenter le rayon de recherche</string>
     <string name="nothing_found_descr">Modifiez la requête ou augmentez le rayon de recherche</string>
     <string name="private_access_routing_req">Votre destination se situe dans une zone privée. Souhaitez-vous autoriser l\'accès aux zones privées pour cet itinéraire ?</string>
-    <string name="osmand_extended_description_part2">"
- Navigation GPS
- • Vous pouvez naviguer en mode hors connexion (sans aucun frais de communication) ou en mode connecté
- • Guidage vocal pas-à-pas (voix enregistrées ou de synthèse)
- • L\'itinéraire est recalculé si vous vous en écartez
- • Indication des voies, des noms de rues et estimation de l\'horaire d\'arrivée faciliteront votre trajet
- • Pour rendre votre voyage plus sûr, le mode jour/nuit s\'active automatiquement
- • Vous pouvez choisir d\'afficher les limitations de vitesse et d\'être averti en cas de dépassement
- • Le niveau de zoom de la carte s\'adapte à votre vitesse
- • Vous pouvez rechercher des destination par adresse, type (par exemple : parking, restaurant, hôtel, station service, musée) ou par coordonnées géographiques
- • Possibilité d\'ajouter des points de passage à votre itinéraire
- • Vous pouvez enregistrer votre itinéraire au format GPX ou suivre une trace GPX existante
- "</string>
-    <string name="osmand_extended_description_part3">"
- Carte
- • Affichage des points d’intérêt autour de vous
- • Orientation de la carte selon votre direction de déplacement (ou selon la boussole)
- • Indication de votre position et de votre orientation
- • Partagez votre position pour que vos proches puissent vous trouver
- • Enregistrez vos endroits préférés comme Favoris
- • Sélectionnez les noms affichés sur la carte : en anglais, noms locaux ou phonétique
- • Affichez des tuiles en lignes spécialisées, la vue satellite (source Bing), un itinéraires GPX et bien d\'autres couches avec transparence personnalisée
- "</string>
-    <string name="osmand_extended_description_part5">"
- Cyclisme
- • Trouvez les pistes cyclables sur la carte
- • Le guidage GPS en mode vélo calcule votre itinéraire en empruntant les pistes cyclables
- • Affichage de votre vitesse et de votre altitude
- • Enregistrement GPX optionnel pour enregistrer et partager votre itinéraire
- • Un greffon additionnel permet d\'afficher les courbes de niveaux et les ombres du relief
- "</string>
+    <string name="osmand_extended_description_part2">Navigation GPS
+\n • Vous pouvez naviguer en mode hors connexion (sans aucun frais de communication) ou en mode connecté
+\n • Guidage vocal pas-à-pas (voix enregistrées ou de synthèse)
+\n • L\'itinéraire est recalculé si vous vous en écartez
+\n • Indication des voies, des noms de rues et estimation de l\'horaire d\'arrivée faciliteront votre trajet
+\n • Pour rendre votre voyage plus sûr, le mode jour/nuit s\'active automatiquement
+\n • Vous pouvez choisir d\'afficher les limitations de vitesse et d\'être averti en cas de dépassement
+\n • Le niveau de zoom de la carte s\'adapte à votre vitesse
+\n • Vous pouvez rechercher des destination par adresse, type (par exemple : parking, restaurant, hôtel, station service, musée) ou par coordonnées géographiques
+\n • Possibilité d\'ajouter des points de passage à votre itinéraire
+\n • Vous pouvez enregistrer votre itinéraire au format GPX ou suivre une trace GPX existante</string>
+    <string name="osmand_extended_description_part3">Carte
+\n • Affichage des points d’intérêt autour de vous
+\n • Orientation de la carte selon votre direction de déplacement (ou selon la boussole)
+\n • Indication de votre position et de votre orientation
+\n • Partagez votre position pour que vos proches puissent vous trouver
+\n • Enregistrez vos endroits préférés comme Favoris
+\n • Sélectionnez les noms affichés sur la carte : en anglais, noms locaux ou phonétique
+\n • Affichez des tuiles en lignes spécialisées, la vue satellite (source Bing), un itinéraires GPX et bien d\'autres couches avec transparence personnalisée</string>
+    <string name="osmand_extended_description_part5">Cyclisme
+\n • Trouvez les pistes cyclables sur la carte
+\n • Le guidage GPS en mode vélo calcule votre itinéraire en empruntant les pistes cyclables
+\n • Affichage de votre vitesse et de votre altitude
+\n • Enregistrement GPX optionnel pour enregistrer et partager votre itinéraire
+\n • Un greffon additionnel permet d\'afficher les courbes de niveaux et les ombres du relief</string>
     <string name="shared_string_add_photos">Ajouter des photos</string>
     <string name="online_photos">Photos en ligne</string>
     <string name="no_photos_descr">Aucune photo pour ce lieu</string>
@@ -2902,4 +2876,19 @@ Fonctionnalités principales :
     <string name="import_track_desc">Le fichier %1$s ne contient aucune étape, l\'importer comme trace ?</string>
     <string name="move_point">Déplacer le point</string>
     <string name="add_segment_to_the_track">Ajouter à une trace GPX</string>
-</resources>
+<string name="keep_showing_on_map">Toujours afficher sur la carte</string>
+    <string name="exit_without_saving">Quitter sans enregistrer ?</string>
+    <string name="do_not_use_animations">Ne pas utiliser les animations</string>
+    <string name="do_not_use_animations_descr">Désactive les animations dans l\'application</string>
+    <string name="osmand_extended_description_part6">Marche, randonnée, visite guidée
+\n• Carte des sentiers pédestres et de randonnée
+\n• Articles Wikipedia dans la langue de votre choix pour découvrir les lieux visités
+\n• Arrêts de transports publics (bus, tram, train), incluant les noms de lignes, pour vous aider dans vos déplacements en ville
+\n• Guidage de navigation piéton en suivant les itinéraires piétons
+\n• Vous pouvez charger et suivre une trace GPX existante; enregistrer et partager un nouvel itinéraire GPX</string>
+    <string name="move_all_to_history">Déplacer tout dans l\'historique</string>
+    <string name="build_route">Calculer l\'itinéraire</string>
+    <string name="show_direction">Afficher les indications de direction</string>
+    <string name="sort_by">Trier par</string>
+    <string name="marker_options">Options de la marque</string>
+    </resources>

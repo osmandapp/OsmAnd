@@ -31,7 +31,7 @@ public class TakePhotoNoteAction extends QuickAction {
 
 		AudioVideoNotesPlugin plugin = OsmandPlugin.getPlugin(AudioVideoNotesPlugin.class);
 		if (plugin != null)
-			plugin.takePhoto(latLon.getLatitude(), latLon.getLongitude(), activity, false);
+			plugin.takePhoto(latLon.getLatitude(), latLon.getLongitude(), activity, false, false);
 	}
 
 	@Override

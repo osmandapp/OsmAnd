@@ -115,32 +115,29 @@
 	<string name="snap_to_road">Auf Straße einrasten</string>
 	<string name="osmand_play_title_30_chars">OsmAnd Karten &amp; Navigation</string>
 	<string name="osmand_short_description_80_chars">Globale Landkarten- und Navigationsanwendung für Offline- und Online-OSM-Karten</string>
-	<string name="osmand_long_description_1000_chars">"
- OsmAnd (OSM Automated Navigation Directions) 
-
-OsmAnd ist eine Open-Source-Navigationsanwendung mit Zugriff auf eine große Vielfalt öffentlich zugänglicher OpenStreetMap-(OSM)-Karten weltweit. Alle Karten (Vektor- oder Kachelformate) können lokal auf der Speicherkarte abgelegt und offline verwendet werden. OsmAnd bietet ferner eine Offline- und Online-Routing-Funktion inklusive Sprachnavigation. 
-
-Einige der Kernfunktionen: 
-- Komplette Offline-Funktionalität (Kartenmaterial kann auf dem Gerät abgelegt werden) 
-- Kompakte Vektorkarten für die ganze Welt verfügbar 
-- Direktes Herunterladen von Länder- oder Regionenkarten aus der App heraus 
-- Darstellung mehrerer überlagerter Kartenschichten wie GPX oder Navigations-Tracks, POIs (Points of Interest), Favoriten, Höhenlinien, ÖPNV-Haltestellen, zusätzliche Karten mit wählbarer Transparenz 
-- Offline Adress- und POI-Suche 
-- Offlinenavigation für mittelstrecken Distanzen
-
-- Auto-, Fahrrad- und Fußgänger-Modus mit 
-- optionaler automatischer Tag-Nacht-Umschaltung der Anzeige 
-- optionalem geschwindigkeitsabhängigem Kartenmaßstab
-- optionaler Kartenausrichtung nach Kompass oder Bewegungsrichtung 
-- optionaler Fahrspuranzeige, Geschwindigkeitswarnung, aufgenommene oder TTS-Sprachansagen 
-
-Einschränkungen dieser kostenlosen Version von OsmAnd: 
-- Anzahl der Kartendownloads - 
-Kein Zugriff auf Wikipedia Offline-POIs 
-
-OsmAnd wird aktiv weiterentwickelt und das Projekt benötigt Mittel für die Entwicklung, die Komplettierung und den Test (Fahrten) neuer Funktionen. 
-Bitte erwägen Sie den Kauf von OsmAnd+, die Förderung spezieller Funktionen oder eine allgemeine Spende auf osmand.net.
- "</string>
+	<string name="osmand_long_description_1000_chars">OsmAnd (OSM Automated Navigation Directions) 
+\n
+\nOsmAnd ist eine Open-Source-Navigationsanwendung mit Zugriff auf eine große Vielfalt öffentlich zugänglicher OpenStreetMap-(OSM)-Karten weltweit. Alle Karten (Vektor- oder Kachelformate) können lokal auf der Speicherkarte abgelegt und offline verwendet werden. OsmAnd bietet ferner eine Offline- und Online-Routing-Funktion inklusive Sprachnavigation. 
+\n
+\nEinige der Kernfunktionen: 
+\n- Komplette Offline-Funktionalität (Kartenmaterial kann auf dem Gerät abgelegt werden) 
+\n- Kompakte Vektorkarten für die ganze Welt verfügbar 
+\n- Direktes Herunterladen von Länder- oder Regionenkarten aus der App heraus 
+\n- Darstellung mehrerer überlagerter Kartenschichten wie GPX oder Navigations-Tracks, POIs (Points of Interest), Favoriten, Höhenlinien, ÖPNV-Haltestellen, zusätzliche Karten mit wählbarer Transparenz 
+\n- Offline Adress- und POI-Suche 
+\n- Offlinenavigation für mittelstrecken Distanzen
+\n
+\n- Auto-, Fahrrad- und Fußgänger-Modus mit 
+\n- optionaler automatischer Tag-Nacht-Umschaltung der Anzeige 
+\n- optionalem geschwindigkeitsabhängigem Kartenmaßstab - optionaler Kartenausrichtung nach Kompass oder Bewegungsrichtung 
+\n- optionaler Fahrspuranzeige, Geschwindigkeitswarnung, aufgenommene oder TTS-Sprachansagen 
+\n
+\nEinschränkungen dieser kostenlosen Version von OsmAnd: 
+\n- Anzahl der Kartendownloads - 
+\nKein Zugriff auf Wikipedia Offline-POIs 
+\n
+\nOsmAnd wird aktiv weiterentwickelt und das Projekt benötigt Mittel für die Entwicklung, die Komplettierung und den Test (Fahrten) neuer Funktionen. 
+\nBitte erwägen Sie den Kauf von OsmAnd+, die Förderung spezieller Funktionen oder eine allgemeine Spende auf osmand.net.</string>
 	
 	<string name="osmand_plus_play_title_30_chars">OsmAnd+ Karten &amp; Navigation</string>
 	<string name="osmand_plus_short_description_80_chars">Globale Landkarten- und Navigationsanwendung für Offline- und Online-OSM-Karten</string>
@@ -1102,7 +1099,7 @@ Proportionaler Speicher %4$s MB (Android Limit %5$s MB, Dalvik %6$s MB).</string
 	<string name="osmand_srtm_long_description_1000_chars">Diese Erweiterung beinhaltet Höhenlinien und Relief-Schattierungen, die als Ergänzung zu den Standard-Offline-Karten von OsmAnd angezeigt werden können. Diese Funktionalität ist vor allem für Sportler, Wanderer, Radfahrer, Trekker und jeden interessant, der sich für das Geländerelief einer Landschaft interessiert. 
 \n 
 \nDie globalen Daten (zwischen 70° Nord und 70° Süd) basieren auf Messungen von SRTM (Shuttle Radar Topography Mission) und ASTER (Advanced Spaceborne Thermal Emission and Reflection Radiometer), einem bildgebenden System an Bord des Satelliten Terra, dem Flaggschiff des NASA-Erd-Beobachtungsprogramms. ASTER beruht auf der erfolgreichen Zusammenarbeit zwischen der NASA, dem japanischen Ministerium für Wirtschaft, Handel und Industrie und dem japanischen Raumfahrtprogramm (J-spacesystems).</string>
-	<string name="stop_routing_confirm">Wollen Sie die Navigation wirklich beenden?</string>
+	<string name="stop_routing_confirm">Sind Sie sicher, dass Sie die Navigation stoppen möchten?</string>
 	<string name="clear_dest_confirm">Sind Sie sicher, dass Sie Ihr Ziel (und die Zwischenziele) löschen möchten?</string>
 	<string name="precise_routing_mode_descr">Aktivieren, um Routen fehlerfrei zu berechnen. Diese Funktion ist weiterhin auf kurze Entfernung begrenzt und langsam.</string>
 	<string name="precise_routing_mode">Präzises Routing (experimentell)</string>
@@ -1134,7 +1131,7 @@ Proportionaler Speicher %4$s MB (Android Limit %5$s MB, Dalvik %6$s MB).</string
 	<string name="available_downloads_left">Es können noch %1$d Dateien herunter geladen werden.</string>
 	<string name="install_paid">Vollversion</string>
 	<string name="cancel_navigation">Navigation stoppen</string>
-	<string name="cancel_route">Route verwerfen</string>
+	<string name="cancel_route">Route ablehnen</string>
 	<string name="use_kalman_filter_compass_descr">Kompass-Rauschreduzierung (erhöht die Kompassträgheit etwas)</string>
 	<string name="use_kalman_filter_compass">Kalman-Filter verwenden</string>
 	<string name="use_magnetic_sensor_descr">Für den Kompass Magnetsensor statt Lagesensor verwenden</string>
@@ -1186,9 +1183,9 @@ Proportionaler Speicher %4$s MB (Android Limit %5$s MB, Dalvik %6$s MB).</string
 	<string name="new_directions_point_dialog">Es sind bereits Zwischenziele gesetzt.</string>
 	<string name="context_menu_item_directions_to">Navigiere zu</string>
 	<string name="route_descr_map_location">Karte:</string>
-	<string name="route_to">nach:</string>
-	<string name="route_via">über:</string>
-	<string name="route_from">von:</string>
+	<string name="route_to">Nach:</string>
+	<string name="route_via">Über:</string>
+	<string name="route_from">Von:</string>
 	<string name="osb_author_dialog_password">OSM-Passwort (optional)</string>
 	<string name="context_menu_item_directions_from">Navigiere von</string>
 	<string name="av_camera_focus_hiperfocal">Hyperfokaler Fokus</string>
@@ -1276,10 +1273,10 @@ Proportionaler Speicher %4$s MB (Android Limit %5$s MB, Dalvik %6$s MB).</string
 	<string name="route_preferences">Routing-Einstellungen</string>
 	<string name="route_info">Routen-Informationen</string>
 	<string name="calculate_osmand_route_without_internet">OsmAnd-Route ohne Internetverbindung berechnen</string>
-	<string name="use_displayed_track_for_navigation">Soll der angezeigte Track zum Navigieren genutzt werden?</string>
+	<string name="use_displayed_track_for_navigation">Möchten Sie die angezeigte Strecke zur Navigation verwenden?</string>
 	<string name="keep_and_add_destination_point">Als letztes Ziel hinzufügen</string>
 	<string name="select_gpx">GPX-Datei auswählen…</string>
-	<string name="route_descr_select_destination">Ziel wählen</string>
+	<string name="route_descr_select_destination">Ziel auswählen</string>
 	<string name="interrupt_music_descr">Sprachansagen pausieren (nicht nur dämpfen) Musikwiedergabe</string>
 	<string name="always_center_position_on_map">Standort immer in Bildschirmmitte anzeigen</string>
 	<string name="voice_pref_title">Stimme</string>
@@ -1287,7 +1284,7 @@ Proportionaler Speicher %4$s MB (Android Limit %5$s MB, Dalvik %6$s MB).</string
 	<string name="share_route_as_gpx">Route als GPX-Datei teilen</string>
 	<string name="share_route_subject">Route über OsmAnd teilen</string>
 	<string name="localization_pref_title">Ländereinstellungen</string>
-	<string name="interrupt_music">Musikwiedergabe pausieren</string>
+	<string name="interrupt_music">Musik pausieren</string>
 	<string name="navigation_intent_invalid">Ungültiges Format: %s</string>
 	<string name="shared_string_share">Teilen</string>
 	<string name="share_fav_subject">Über OsmAnd geteilte Favoriten</string>
@@ -1311,7 +1308,7 @@ Proportionaler Speicher %4$s MB (Android Limit %5$s MB, Dalvik %6$s MB).</string
 	<string name="save_as_favorites_points">als Favoritengruppe speichern</string>
 	<string name="select_destination_and_intermediate_points">Ziele auswählen</string>
 	<string name="sort_by_distance">Nach Entfernung sortieren</string>
-	<string name="sort_by_name">Nach Namen sortieren</string>
+	<string name="sort_by_name">Nach Name sortieren</string>
 	
 	<string name="show_zoom_buttons_navigation_descr">Zoomtasten bei Navigation anzeigen</string>
 	<string name="show_zoom_buttons_navigation">Zoomtasten anzeigen</string>
@@ -1720,9 +1717,9 @@ Mit Neuanmeldung fortfahren?</string>
     <string name="settings_privacy">Privatsphäre</string>
     <string name="points">Punkte</string>
     
-    <string name="shared_string_my_location">Mein Standort</string>
+    <string name="shared_string_my_location">Meine Position</string>
 
-    <string name="navigation_over_track">Navigation der Strecke entlang starten?</string>
+    <string name="navigation_over_track">Navigation entlang der Strecke starten?</string>
     <string name="avoid_roads_msg">Sie können die Route ändern, indem Sie Straßen auswählen, die vermieden werden sollen</string>
     <string name="enable_proxy_title">HTTP-Proxy aktivieren</string>
     <string name="enable_proxy_descr">HTTP-Proxy für alle Netzwerkanfragen einrichten</string>
@@ -2620,7 +2617,7 @@ Abgedeckte Fläche: %1$s x %2$s</string>
     <string name="do_not_send_anonymous_app_usage">Keine anonymen App-Nutzungsdaten versenden</string>
     <string name="do_not_send_anonymous_app_usage_desc">OsmAnd sammelt Informationen über durch Sie geöffnete App-Teile. Es wird niemals Ihre Position noch irgendeine Ihrer App-Eingaben oder Einzelheiten zu den von Ihnen betrachteten, gesuchten oder heruntergeladenen Gebieten versandt.</string>
     <string name="do_not_show_startup_messages">Keine Meldungen beim App-Start einblenden</string>
-    <string name="do_not_show_startup_messages_desc">Es werden Meldungen zu App-Angeboten und besonderen lokalen Ereignissen angezeigt</string>
+    <string name="do_not_show_startup_messages_desc">Unterdrückt Meldungen zu App-Sonderangeboten und besonderen lokalen Ereignissen</string>
     <string name="parking_options">Parkmöglichkeiten</string>
     <string name="full_version_thanks">Vielen Dank, dass Sie die Vollversion von OsmAnd erworben haben!</string>
     <string name="routing_attr_relief_smoothness_factor_hills_name">Bergig</string>
@@ -2690,7 +2687,7 @@ Abgedeckte Fläche: %1$s x %2$s</string>
     <string name="edit_name">Namen ändern</string>
     <string name="animate_my_location">Meine Position animieren</string>
     <string name="animate_my_location_desc">Animation meiner Position während der Navigation aktivieren</string>
-    <string name="route_is_too_long_v2">Die Route ist für eine Berechnung unter Umständen zu lang. Fügen Sie bitte Zwischenstopps ein, wenn nach 10 Minuten kein Routenvorschlag erscheint.</string>
+    <string name="route_is_too_long_v2">Diese Route könnte zu lang sein, um berechnet zu werden. Bitte fügen Sie Zwischenziele hinzu, wenn innerhalb von 10 Minuten kein Ergebnis gefunden wird.</string>
     <string name="save_poi_too_many_uppercase">Der Name enthält zu viele Großbuchstaben. Möchten Sie den Vorgang fortsetzen?</string>
     <string name="display_zoom_level">Darstellung ab Zoomstufe: %1$s</string>
     <string name="routing_attr_allow_private_name">Privatwege erlauben</string>
@@ -2797,9 +2794,9 @@ Abgedeckte Fläche: %1$s x %2$s</string>
     <string name="add_point_before">Punkt davor hinzufügen</string>
     <string name="add_point_after">Punkt dahinter hinzufügen</string>
     <string name="shared_string_options">Optionen</string>
-    <string name="measurement_tool_snap_to_road_descr">OsmAnd wird, abhängig von der Navigationsart, zusätzliche Punkte hinzufügen.</string>
+    <string name="measurement_tool_snap_to_road_descr">OsmAnd wird die Punkte mit Routen für das gewählte Profil verbinden.</string>
     <string name="measurement_tool_save_as_new_track_descr">Die Punkte können entweder als Routenpunkte oder als Strecke gespeichert werden.</string>
-    <string name="choose_navigation_type">Navigationsart auswählen</string>
+    <string name="choose_navigation_type">Navigationsprofil wählen</string>
     <string name="add_route_points">Routenpunkte hinzufügen</string>
     <string name="add_line">Strecke hinzufügen</string>
     <string name="empty_state_my_tracks">Tracks hinzufügen und aufzeichnen</string>
@@ -2810,4 +2807,13 @@ Abgedeckte Fläche: %1$s x %2$s</string>
     <string name="import_track_desc">Die Datei %1$s enthält keine Wegpunkte, soll sie als Track importiert werden?</string>
     <string name="move_point">Punkt verschieben</string>
     <string name="add_segment_to_the_track">Zu einem GPX-Track hinzufügen</string>
-</resources>
+<string name="do_not_use_animations">Verwenden Sie keine Animationen</string>
+    <string name="do_not_use_animations_descr">Deaktiviert Animationen in der App</string>
+    <string name="keep_showing_on_map">Weiterhin auf der Karte anzeigen</string>
+    <string name="exit_without_saving">Beenden ohne zu speichern?</string>
+    <string name="move_all_to_history">Alles zu Historie verschieben</string>
+    <string name="build_route">Route erstellen</string>
+    <string name="show_direction">Richtung anzeigen</string>
+    <string name="sort_by">Sortieren nach</string>
+    <string name="marker_options">Marker-Optionen</string>
+    </resources>

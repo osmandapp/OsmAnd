@@ -3474,4 +3474,6 @@
 	<string name="poi_boat_canoe_rental_rental_yes">Каное: так</string>
 	<string name="poi_boat_canoe_rental_rental_no">Каное: немає</string>
 
+<string name="poi_network">Мережа</string>
+
 </resources>

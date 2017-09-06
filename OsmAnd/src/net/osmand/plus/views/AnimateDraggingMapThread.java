@@ -212,8 +212,9 @@ public class AnimateDraggingMapThread {
 		}
 		final float mMoveX = rb.getPixXFromLatLon(startLat, startLon) - rb.getPixXFromLatLon(finalLat, finalLon);
 		final float mMoveY = rb.getPixYFromLatLon(startLat, startLon) - rb.getPixYFromLatLon(finalLat, finalLon);
-		
-		final float animationTime = Math.max(450, (Math.abs(mStX) + Math.abs(mStY)) / 1200f * MOVE_MOVE_ANIMATION_TIME);
+
+		final boolean doNotUseAnimations = tileView.getSettings().DO_NOT_USE_ANIMATIONS.get();
+		final float animationTime = doNotUseAnimations ? 0 : Math.max(450, (Math.abs(mStX) + Math.abs(mStY)) / 1200f * MOVE_MOVE_ANIMATION_TIME);
 		
 		startThreadAnimating(new Runnable() {
 			
@@ -221,7 +222,7 @@ public class AnimateDraggingMapThread {
 			public void run() {
 				setTargetValues(endZoom, finalLat, finalLon);
 				if(moveZoom != startZoom){
-					animatingZoomInThread(startZoom, startZoomFP, moveZoom, startZoomFP,ZOOM_MOVE_ANIMATION_TIME, notifyListener);
+					animatingZoomInThread(startZoom, startZoomFP, moveZoom, startZoomFP, doNotUseAnimations ? 0 : ZOOM_MOVE_ANIMATION_TIME, notifyListener);
 				}
 				
 				if(!stopped){
@@ -232,7 +233,7 @@ public class AnimateDraggingMapThread {
 				}
 				
 				if (!stopped && (moveZoom != endZoom || startZoomFP != 0)) {
-					animatingZoomInThread(moveZoom, startZoomFP, endZoom, 0, ZOOM_MOVE_ANIMATION_TIME, notifyListener);
+					animatingZoomInThread(moveZoom, startZoomFP, endZoom, 0, doNotUseAnimations ? 0 : ZOOM_MOVE_ANIMATION_TIME, notifyListener);
 				}
 				tileView.setFractionalZoom(endZoom, 0, notifyListener);
 				
@@ -345,7 +346,8 @@ public class AnimateDraggingMapThread {
 	}
 
 	public void startZooming(final int zoomEnd, final double zoomPart, final boolean notifyListener){
-		final float animationTime = ZOOM_ANIMATION_TIME;
+		boolean doNotUseAnimations = tileView.getSettings().DO_NOT_USE_ANIMATIONS.get();
+		final float animationTime = doNotUseAnimations ? 0 : ZOOM_ANIMATION_TIME;
 		startThreadAnimating(new Runnable(){
 			@Override
 			public void run() {

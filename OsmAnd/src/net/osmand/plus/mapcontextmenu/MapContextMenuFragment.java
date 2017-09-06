@@ -1251,12 +1251,16 @@ public class MapContextMenuFragment extends Fragment implements DownloadEvents {
 				return false;
 			}
 
-			int slideInAnim = R.anim.slide_in_bottom;
-			int slideOutAnim = R.anim.slide_out_bottom;
+			int slideInAnim = 0;
+			int slideOutAnim = 0;
+			if (!mapActivity.getMyApplication().getSettings().DO_NOT_USE_ANIMATIONS.get()) {
+				slideInAnim = R.anim.slide_in_bottom;
+				slideOutAnim = R.anim.slide_out_bottom;
 
-			if (menu.isExtended()) {
-				slideInAnim = menu.getSlideInAnimation();
-				slideOutAnim = menu.getSlideOutAnimation();
+				if (menu.isExtended()) {
+					slideInAnim = menu.getSlideInAnimation();
+					slideOutAnim = menu.getSlideOutAnimation();
+				}
 			}
 
 			MapContextMenuFragment fragment = new MapContextMenuFragment();

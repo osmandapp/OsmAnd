@@ -2,7 +2,6 @@ package net.osmand.plus.mapillary;
 
 import android.app.Activity;
 import android.content.ActivityNotFoundException;
-import android.content.Context;
 import android.content.Intent;
 import android.net.Uri;
 import android.os.Bundle;
@@ -36,7 +35,6 @@ import net.osmand.plus.views.mapwidgets.MapWidgetRegistry.MapWidgetRegInfo;
 import net.osmand.plus.views.mapwidgets.TextInfoWidget;
 import net.osmand.util.Algorithms;
 
-import java.lang.reflect.Method;
 import java.text.MessageFormat;
 import java.util.List;
 
@@ -96,17 +94,21 @@ public class MapillaryPlugin extends OsmandPlugin {
 
 	@Override
 	public void updateLayers(OsmandMapTileView mapView, MapActivity activity) {
-		updateMapLayers(mapView, activity.getMapLayers());
+		updateMapLayers(mapView, activity.getMapLayers(), false);
 	}
 
-	private void updateMapLayers(OsmandMapTileView mapView, final MapActivityLayers layers) {
+	public void updateLayers(OsmandMapTileView mapView, MapActivity activity, boolean force) {
+		updateMapLayers(mapView, activity.getMapLayers(), force);
+	}
+
+	private void updateMapLayers(OsmandMapTileView mapView, final MapActivityLayers layers, boolean force) {
 		if (rasterLayer == null || vectorLayer == null) {
 			createLayers();
 		}
 		if (isActive()) {
 			ITileSource rasterSource = null;
 			ITileSource vectorSource = null;
-			if (settings.SHOW_MAPILLARY.get()) {
+			if (settings.SHOW_MAPILLARY.get() || force) {
 				rasterSource = settings.getTileSourceByName(TileSourceManager.getMapillaryRasterSource().getName(), false);
 				vectorSource = settings.getTileSourceByName(TileSourceManager.getMapillaryVectorSource().getName(), false);
 			}
@@ -156,7 +158,7 @@ public class MapillaryPlugin extends OsmandPlugin {
 					OsmandMapTileView mapView = mapActivity.getMapView();
 					MapActivityLayers mapLayers = mapActivity.getMapLayers();
 					settings.SHOW_MAPILLARY.set(!settings.SHOW_MAPILLARY.get());
-					updateMapLayers(mapView, mapLayers);
+					updateMapLayers(mapView, mapLayers, false);
 					ContextMenuItem item = adapter.getItem(pos);
 					if (item != null) {
 						item.setSelected(settings.SHOW_MAPILLARY.get());

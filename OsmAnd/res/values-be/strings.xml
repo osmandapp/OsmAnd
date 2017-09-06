@@ -1791,7 +1791,7 @@
     <string name="general_settings_2">Агульныя налады</string>
 	<string name="shared_string_clear_all">Ачысьціць ўсё</string>
 	<string name="shared_string_collapse">Згарнуць</string>
-	<string name="shared_string_my_location">Маё месцазнаходжаньне</string>
+	<string name="shared_string_my_location">Маё месцазнаходжанне</string>
 	<string name="shared_string_my_tracks">Мае сьляды</string>
 	<string name="shared_string_currently_recording_track">Сьлед, які цяпер запісваецца</string>
 	<string name="plugin_touringview_name">Турыстычная мапа</string>
@@ -2386,7 +2386,7 @@
     <string name="no_update_info_desc">Не правяраць абнаўленні версій і зніжкі ад OsmAnd</string>
     <string name="no_update_info">Не паказваць абнаўленні</string>
     <string name="skip_map_downloading">Прапусьціць сьцягванне мапаў</string>
-    <string name="skip_map_downloading_desc">У вас няма загружаных мапаў. Вы можаце выбраць мапу са сьпісу або сьцягнуць яе пазьней праз мэню - %1$s.</string>
+    <string name="skip_map_downloading_desc">У вас няма загружаных мапаў. Вы можаце выбраць мапу са спісу або сцягнуць яе пазней праз меню - %1$s.</string>
     <string name="search_another_country">Абраць іншы рэгіён</string>
     <string name="search_map">Пошук мапаў…</string>
     <string name="first_usage_wizard_desc">OsmAnd вызначыць ваша месцазнаходжанне і прапануе спампаваць мапы для гэтага рэгіёну.</string>
@@ -2644,7 +2644,7 @@
     <string name="do_not_send_anonymous_app_usage">На адсылаць ананімнай статыстыкі выкарыстання</string>
     <string name="do_not_send_anonymous_app_usage_desc">OsmAnd збірае інфармацыю аб тым, які часткі праграмы выкарыстоўваюцца вамі. Ваша месцазнаходжанне ніколі не адпраўляецца, як і ўсё, што вы ўводзіце, якія вобласці праглядаеце, што шукаеце ці спампоўваеце.</string>
     <string name="do_not_show_startup_messages">Не паказваць паведамленні пры старце</string>
-    <string name="do_not_show_startup_messages_desc">Паказвае паведамленні пра зніжкі і спецыяльныя лакальныя падзеі</string>
+    <string name="do_not_show_startup_messages_desc">Заглушае адлюстраваньне паведамленьняў пра зніжкі і спецыяльную лакальную падзею</string>
     <string name="parking_options">Опцыі паркоўкі</string>
     <string name="full_version_thanks">Дякуй вам за набыццё поўнай версіі OsmAnd!</string>
     <string name="routing_attr_relief_smoothness_factor_name">Абраць перасечанасць мясцовасці</string>
@@ -2825,7 +2825,7 @@
     <string name="shared_string_create">Стварыць</string>
 <string name="none_point_error">Калі ласка, дадайце па меншай меры адну кропку.</string>
     <string name="enter_gpx_name">Імя файла GPX:</string>
-    <string name="show_on_map_after_saving">Паказаць мапу пасля захавання</string>
+    <string name="show_on_map_after_saving">Паказаць на мапе пасля захавання</string>
     <string name="add_route_point">Дадаць кропку маршруту</string>
     <string name="add_waypoint">Дадаць кропку шляху</string>
     <string name="save_gpx_waypoint">Захаваць GPX-кропку шляху</string>
@@ -2857,4 +2857,11 @@
     <string name="add_segment_to_the_track">Дадаць у GPX-след</string>
 <string name="keep_showing_on_map">Працягваць паказваць на мапе</string>
     <string name="exit_without_saving">Выйсці без захавання?</string>
+    <string name="do_not_use_animations">Не ўжываць анімацыю</string>
+    <string name="do_not_use_animations_descr">Адключэньне анімацыі ў праграме</string>
+    <string name="move_all_to_history">Перамясціць усё ў гісторыю</string>
+    <string name="build_route">Пабудаваць маршрут</string>
+    <string name="show_direction">Паказаць напрамак</string>
+    <string name="sort_by">Сартаваць па</string>
+    <string name="marker_options">Налады маркера</string>
     </resources>

@@ -2666,9 +2666,9 @@ Repræsenterer område: %1$s x %2$s</string>
     <string name="full_version_thanks">Tak for købet af den fulde version af OsmAnd!</string>
     <string name="parking_options">Parkeringsmuligheder</string>
     <string name="do_not_send_anonymous_app_usage">Send ikke anonyme brugsstatistikker</string>
-    <string name="do_not_send_anonymous_app_usage_desc">Osmand indsamler oplysninger om hvilke dele der åbnes. Placering bliver aldrig sendt, heller ikke noget der indtastes eller oplysninger om områder der søges eller hentes.</string>
+    <string name="do_not_send_anonymous_app_usage_desc">Der indsamles oplysninger om hvilke dele der åbnes. Placering bliver aldrig sendt, heller ikke noget der indtastes eller oplysninger om områder der søges eller hentes.</string>
     <string name="do_not_show_startup_messages">Vis ikke meddelelser ved opstart</string>
-    <string name="do_not_show_startup_messages_desc">Viser meddelelser om rabatter &amp; særlige lokale arrangementer</string>
+    <string name="do_not_show_startup_messages_desc">Undertrykker visning af rabatter &amp; særlige lokale hændelsesmeddelelser</string>
     <string name="right_side_navigation">Højrekørsel</string>
     <string name="driving_region_automatic">Automatisk</string>
     <string name="osmand_extended_description_part1">OsmAnd (OSM Automated Navigation Directions) er et kort- og navigationsprogram med adgang til gratis, verdensomspændende og af høj kvalitet OpenStreetMap (OSM) data. 
@@ -2705,7 +2705,7 @@ Repræsenterer område: %1$s x %2$s</string>
     <string name="nautical_maps">Søkort</string>
     <string name="depth_contour_descr">Kortsæt der indeholder dybdekonturlinjer og -punkter.</string>
     <string name="subscribe_email_error">Fejl</string>
-    <string name="subscribe_email_desc">Abonner på e-mail listen om OsmAnd rabatter og hent yderligere 3 kort!</string>
+    <string name="subscribe_email_desc">Abonner på e-mail listen om rabatter og hent yderligere 3 kort!</string>
     <string name="no_overlay">Ingen overleejring</string>
     <string name="no_underlay">Ingen underlejring</string>
     <string name="quick_action_add_destination">Tilføj destination</string>
@@ -2776,7 +2776,7 @@ Tidligere destination bliver sidste mellemliggende punkt.</string>
     <string name="mapillary_image">Mapillary foto</string>
     <string name="distance_moving">Korrigeret afstand</string>
     <string name="shared_string_permissions">Tilladelser</string>
-    <string name="import_gpx_failed_descr">OsmAnd kan ikke importere filen. Kontroller om OsmAnd har læsetilladelse på filplaceringen.</string>
+    <string name="import_gpx_failed_descr">Kan ikke importere filen. Kontroller om der er læsetilladelse på filplaceringen.</string>
     
     <string name="map_widget_ruler_control">Cirkel lineal</string>
     <string name="wrong_user_name">Forkert brugernavn!</string>
@@ -2844,9 +2844,9 @@ Tidligere destination bliver sidste mellemliggende punkt.</string>
     <string name="add_point_before">Tilføj punkt før</string>
     <string name="add_point_after">Tilføj punkt efter</string>
     <string name="shared_string_options">Indstillinger</string>
-    <string name="measurement_tool_snap_to_road_descr">Tilføjer yderligere punkter, tilpasset typen af navigation.</string>
+    <string name="measurement_tool_snap_to_road_descr">Forbinder punkterne med ruter for den valgte profil.</string>
     <string name="measurement_tool_save_as_new_track_descr">Gem punkterne enten som rutepunkter eller som en linje.</string>
-    <string name="choose_navigation_type">Vælg navigationstype</string>
+    <string name="choose_navigation_type">Vælg navigationsprofil</string>
     <string name="add_route_points">Tilføj rutepunkter</string>
     <string name="add_line">Tilføj linje</string>
     <string name="empty_state_my_tracks">Tilføj og optag spor</string>
@@ -2857,4 +2857,13 @@ Tidligere destination bliver sidste mellemliggende punkt.</string>
     <string name="import_track_desc">Filen %1$s indeholder ingen rutepunkter, importer den som et spor?</string>
     <string name="move_point">Flyt punkt</string>
     <string name="add_segment_to_the_track">Tilføj til et GPX-spor</string>
-</resources>
+<string name="keep_showing_on_map">Fortsæt med at vise på kortet</string>
+    <string name="exit_without_saving">Afslut uden at gemme?</string>
+    <string name="do_not_use_animations">Brug ikke animationer</string>
+    <string name="do_not_use_animations_descr">Deaktiverer animationer i programmet</string>
+    <string name="move_all_to_history">Flyt alle til historik</string>
+    <string name="build_route">Beregn rute</string>
+    <string name="show_direction">Vis retning</string>
+    <string name="sort_by">Sorter efter</string>
+    <string name="marker_options">Markør indstillinger</string>
+    </resources>

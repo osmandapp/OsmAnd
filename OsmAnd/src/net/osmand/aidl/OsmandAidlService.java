@@ -16,6 +16,8 @@ import net.osmand.aidl.gpx.ASelectedGpxFile;
 import net.osmand.aidl.gpx.HideGpxParams;
 import net.osmand.aidl.gpx.ImportGpxParams;
 import net.osmand.aidl.gpx.ShowGpxParams;
+import net.osmand.aidl.gpx.StartGpxRecordingParams;
+import net.osmand.aidl.gpx.StopGpxRecordingParams;
 import net.osmand.aidl.map.SetMapLocationParams;
 import net.osmand.aidl.maplayer.AddMapLayerParams;
 import net.osmand.aidl.maplayer.RemoveMapLayerParams;
@@ -29,6 +31,12 @@ import net.osmand.aidl.mapmarker.UpdateMapMarkerParams;
 import net.osmand.aidl.mapwidget.AddMapWidgetParams;
 import net.osmand.aidl.mapwidget.RemoveMapWidgetParams;
 import net.osmand.aidl.mapwidget.UpdateMapWidgetParams;
+import net.osmand.aidl.navigation.NavigateGpxParams;
+import net.osmand.aidl.navigation.NavigateParams;
+import net.osmand.aidl.note.StartAudioRecordingParams;
+import net.osmand.aidl.note.StopRecordingParams;
+import net.osmand.aidl.note.TakePhotoNoteParams;
+import net.osmand.aidl.note.StartVideoRecordingParams;
 import net.osmand.plus.OsmandApplication;
 import net.osmand.util.Algorithms;
 
@@ -318,6 +326,78 @@ public class OsmandAidlService extends Service {
 				//mapActivity.getMapActions().enterRoutePlanningModeGivenGpx(null, startPoint, startPointDescription, true, false);
 				*/
 				return true;
+			}
+		}
+
+		@Override
+		public boolean startGpxRecording(StartGpxRecordingParams params) throws RemoteException {
+			try {
+				return getApi().startGpxRecording(params);
+			} catch (Exception e) {
+				return false;
+			}
+		}
+
+		@Override
+		public boolean stopGpxRecording(StopGpxRecordingParams params) throws RemoteException {
+			try {
+				return getApi().stopGpxRecording(params);
+			} catch (Exception e) {
+				return false;
+			}
+		}
+
+		@Override
+		public boolean takePhotoNote(TakePhotoNoteParams params) throws RemoteException {
+			try {
+				return params != null && getApi().takePhotoNote(params.getLatitude(), params.getLongitude());
+			} catch (Exception e) {
+				return false;
+			}
+		}
+
+		@Override
+		public boolean startVideoRecording(StartVideoRecordingParams params) throws RemoteException {
+			try {
+				return params != null && getApi().startVideoRecording(params.getLatitude(), params.getLongitude());
+			} catch (Exception e) {
+				return false;
+			}
+		}
+
+		@Override
+		public boolean startAudioRecording(StartAudioRecordingParams params) throws RemoteException {
+			try {
+				return params != null && getApi().startAudioRecording(params.getLatitude(), params.getLongitude());
+			} catch (Exception e) {
+				return false;
+			}
+		}
+
+		@Override
+		public boolean stopRecording(StopRecordingParams params) throws RemoteException {
+			try {
+				return getApi().stopRecording();
+			} catch (Exception e) {
+				return false;
+			}
+		}
+
+		@Override
+		public boolean navigate(NavigateParams params) throws RemoteException {
+			try {
+				return params != null && getApi().navigate(params.getStartName(), params.getStartLat(), params.getStartLon(), params.getDestName(), params.getDestLat(), params.getDestLon(), params.getProfile(), params.isForce());
+			} catch (Exception e) {
+				return false;
+			}
+		}
+
+		@Override
+		public boolean navigateGpx(NavigateGpxParams params) throws RemoteException {
+			try {
+				return params != null && getApi().navigateGpx(params.getData(), params.getUri(), params.isForce());
+			} catch (Exception e) {
+				return false;
 			}
 		}
 	};

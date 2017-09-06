@@ -6,6 +6,7 @@ import android.database.sqlite.SQLiteOpenHelper;
 import android.text.format.DateFormat;
 import net.osmand.PlatformUtil;
 import net.osmand.data.LatLon;
+import net.osmand.plus.GPXDatabase.GpxDataItem;
 import net.osmand.plus.GPXUtilities;
 import net.osmand.plus.GPXUtilities.GPXFile;
 import net.osmand.plus.GPXUtilities.GPXTrackAnalysis;
@@ -226,6 +227,11 @@ public class SavingTrackHelper extends SQLiteOpenHelper {
 						warnings.add(warn);
 						return warnings;
 					}
+
+					GPXFile gpx = data.get(f);
+					GPXTrackAnalysis analysis = gpx.getAnalysis(fout.lastModified());
+					GpxDataItem item = new GpxDataItem(fout, analysis);
+					ctx.getGpxDatabase().add(item);
 				}
 			}
 		}

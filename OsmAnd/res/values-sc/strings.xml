@@ -2575,7 +2575,7 @@ Pro praghere iscrie su còdighe intreu</string>
     <string name="do_not_send_anonymous_app_usage">No imbies informatziones anònimas a pitzu de s\'impreu de s\'aplicatzione</string>
     <string name="do_not_send_anonymous_app_usage_desc">OsmAnd imbiat informatziones generales a pitzu de sas partes de s\'aplicatzione impreadas. Non retzimus perunu datu de geolocalizatzione, chi pertochet datos insertados dae s\'impreadore o a pitzu de sas àreas chi bides, chircas o iscàrrigas.</string>
     <string name="do_not_show_startup_messages">No ammustres messàgios a s\'alluìngiu</string>
-    <string name="do_not_show_startup_messages_desc">Ammustra sos iscontos pro sas aplicatziones e messàgios a pitzu de sos eventos locales</string>
+    <string name="do_not_show_startup_messages_desc">Istudat s\'ammustradura de sos iscontos pro sas aplicatziones e sos messàgios a pitzu de sos eventos locales</string>
     <string name="parking_options">Issèberos pro sos parchègios</string>
     <string name="right_side_navigation">Ghia a destra</string>
     <string name="driving_region_automatic">Automàtica</string>
@@ -2758,4 +2758,11 @@ Pro praghere iscrie su còdighe intreu</string>
     <string name="add_segment_to_the_track">Annanghe a una rasta GPX</string>
 <string name="keep_showing_on_map">Sighi a l\'ammustrare in sa mapa</string>
     <string name="exit_without_saving">Essire chene sarvare?</string>
+    <string name="do_not_use_animations">No imprees sas animatziones</string>
+    <string name="do_not_use_animations_descr">Disabilitat sas animatziones in s\'aplicatzione</string>
+    <string name="move_all_to_history">Pone totu in s\'istòria</string>
+    <string name="build_route">Càlcula s\'àndala</string>
+    <string name="show_direction">Ammustra sas indicatziones de diretzione</string>
+    <string name="sort_by">Òrdina pro</string>
+    <string name="marker_options">Optziones de sos marcadores</string>
     </resources>

@@ -890,14 +890,14 @@ Memòria proporcional %4$s MB (límit de l\'Android %5$s MB, Dalvik %6$s MB).</s
     <string name="background_service_wait_int_descr">Estableix el temps màxim d\'espera per a cada correcció de la posició en segon pla</string>
     <string name="background_service_wait_int">Espera màxima per corregir</string>
     <string name="local_indexes_cat_av">Dades d\'àudio/vídeo</string>
-    <string name="stop_routing_confirm">Esteu segurs de què voleu parar la navegació?</string>
-    <string name="clear_dest_confirm">"N\'esteu segurs que voleu eliminar la vostra destinació  (i les vostres fites)?"</string>
+    <string name="stop_routing_confirm">Esteu segur què voleu aturar la navegació?</string>
+    <string name="clear_dest_confirm">"N\'esteu segur que voleu eliminar la vostra destinació  (i les vostres fites)?"</string>
     <string name="recording_context_menu_show">Mostra</string>
     <string name="recording_photo_description">Fotografia %1$s %2$s</string>
     <string name="av_def_action_picture">Fes una fotografia</string>
     <string name="recording_context_menu_precord">Fes una fotografia</string>
     <string name="download_hillshade_maps">Ombres de relleu</string>
-    <string name="precise_routing_mode_descr">Activeu per calcular itineraris precisos sense errades. Encara és lent i de distància limitada.</string>
+    <string name="precise_routing_mode_descr">Activeu per calcular itineraris precisos sense discontinuïtats. De moment és lent i de distància limitada.</string>
     <string name="precise_routing_mode">Encaminament precís (alfa)</string>
     <string name="intermediate_point">Punt de pas %1$s</string>
     <string name="support_new_features_descr">Feu un donatiu per veure noves funcionalitats implementades a l\'aplicació</string>
@@ -2424,7 +2424,7 @@ Abasta l\'àrea: %1$s x %2$s</string>
     <string name="do_not_send_anonymous_app_usage">No enviïs anònimament les estadístiques d\'us de l\'aplicació</string>
     <string name="do_not_send_anonymous_app_usage_desc">OsmAnd recull informació respecte com utilitzeu l\'aplicació. No s\'envia mai la vostra localització, tampoc les entrades que feu ni els detalls de les zones que consulteu, cerqueu o baixeu.</string>
     <string name="do_not_show_startup_messages">No mostris missatges en engegar</string>
-    <string name="do_not_show_startup_messages_desc">Mostra descomptes de l\'aplicació i missatges de fets locals destacats</string>
+    <string name="do_not_show_startup_messages_desc">No mostris descomptes d\'aplicacions ni missatges d\'esdeveniments locals destacats</string>
     <string name="parking_options">Opcions d\'aparcament</string>
     <string name="right_side_navigation">Conducció per la dreta</string>
     <string name="driving_region_automatic">Automàtic</string>
@@ -2595,9 +2595,9 @@ Abasta l\'àrea: %1$s x %2$s</string>
     <string name="add_point_before">Afegeix un punt abans de</string>
     <string name="add_point_after">Afegeix un punt després de</string>
     <string name="shared_string_options">Opcions</string>
-    <string name="measurement_tool_snap_to_road_descr">OsmAnd afegirà punts addicionals, en funció del tipus de navegació.</string>
+    <string name="measurement_tool_snap_to_road_descr">OsmAnd enllaçarà els punts amb rutes segons el perfil seleccionat.</string>
     <string name="measurement_tool_save_as_new_track_descr">Podeu desar els punts, ja sigui com a punts de la ruta o com una línia.</string>
-    <string name="choose_navigation_type">Escolliu el tipus de navegació</string>
+    <string name="choose_navigation_type">Escolliu el perfil de navegació</string>
     <string name="add_route_points">Afegeix punts de la ruta</string>
     <string name="add_line">Afegeix una línia</string>
     <string name="empty_state_my_tracks">Afegeix i enregistra traces</string>
@@ -2610,4 +2610,11 @@ Abasta l\'àrea: %1$s x %2$s</string>
     <string name="add_segment_to_the_track">Afegeix a una traça GPX</string>
 <string name="keep_showing_on_map">Continua mostrant al mapa</string>
     <string name="exit_without_saving">Voleu sortir sense desar?</string>
+    <string name="do_not_use_animations">Sense ús d\'animacions</string>
+    <string name="do_not_use_animations_descr">Desactiva les animacions a l\'aplicació</string>
+    <string name="move_all_to_history">Mou tot a l\'històric</string>
+    <string name="build_route">Calcula la ruta</string>
+    <string name="show_direction">Mostra la direcció</string>
+    <string name="sort_by">Ordena per</string>
+    <string name="marker_options">Opcions de marcador</string>
     </resources>

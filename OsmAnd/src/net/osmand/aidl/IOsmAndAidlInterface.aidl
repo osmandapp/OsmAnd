@@ -22,6 +22,8 @@ import net.osmand.aidl.calculateroute.CalculateRouteParams;
 
 import net.osmand.aidl.gpx.ImportGpxParams;
 import net.osmand.aidl.gpx.ShowGpxParams;
+import net.osmand.aidl.gpx.StartGpxRecordingParams;
+import net.osmand.aidl.gpx.StopGpxRecordingParams;
 import net.osmand.aidl.gpx.HideGpxParams;
 import net.osmand.aidl.gpx.ASelectedGpxFile;
 
@@ -38,6 +40,14 @@ import net.osmand.aidl.maplayer.AMapLayer;
 import net.osmand.aidl.maplayer.AddMapLayerParams;
 import net.osmand.aidl.maplayer.RemoveMapLayerParams;
 import net.osmand.aidl.maplayer.UpdateMapLayerParams;
+
+import net.osmand.aidl.navigation.NavigateParams;
+import net.osmand.aidl.navigation.NavigateGpxParams;
+
+import net.osmand.aidl.note.TakePhotoNoteParams;
+import net.osmand.aidl.note.StartVideoRecordingParams;
+import net.osmand.aidl.note.StartAudioRecordingParams;
+import net.osmand.aidl.note.StopRecordingParams;
 
 // NOTE: Add new methods at the end of file!!!
 
@@ -76,5 +86,16 @@ interface IOsmAndAidlInterface {
     boolean addFavorite(in AddFavoriteParams params);
     boolean removeFavorite(in RemoveFavoriteParams params);
     boolean updateFavorite(in UpdateFavoriteParams params);
+
+    boolean startGpxRecording(in StartGpxRecordingParams params);
+    boolean stopGpxRecording(in StopGpxRecordingParams params);
+
+    boolean takePhotoNote(in TakePhotoNoteParams params);
+    boolean startVideoRecording(in StartVideoRecordingParams params);
+    boolean startAudioRecording(in StartAudioRecordingParams params);
+    boolean stopRecording(in StopRecordingParams params);
+
+    boolean navigate(in NavigateParams params);
+    boolean navigateGpx(in NavigateGpxParams params);
 
 }

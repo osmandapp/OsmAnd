@@ -2537,7 +2537,7 @@ Zodpovedá oblasti: %1$s x %2$s</string>
     <string name="do_not_send_anonymous_app_usage">Neodosielať anonymné štatistiky o používaní aplikácie</string>
     <string name="do_not_send_anonymous_app_usage_desc">OsmAnd zbiera informácie o tom, ktoré časti aplikácie otvárate. Nikdy sa neodosiela vaša poloha ani nič čo zapíšete do aplikácie ani detaily o oblastiach, ktoré si prezeráte, hľadáte alebo sťahujete.</string>
     <string name="do_not_show_startup_messages">Nezobrazovať oznamy pri štarte</string>
-    <string name="do_not_show_startup_messages_desc">Zobrazuje zľavy a oznamy o miestnych udalostiach</string>
+    <string name="do_not_show_startup_messages_desc">Zakáže zobrazovanie zľav aplikácie a oznamov o miestnych udalostiach</string>
     <string name="parking_options">Možnosti parkovania</string>
     <string name="full_version_thanks">Ďakujeme za zakúpenie plnej verzie OsmAnd!</string>
     <string name="routing_attr_relief_smoothness_factor_name">Zvoľte fluktuáciu nadmorskej výšky</string>
@@ -2852,5 +2852,9 @@ Zodpovedá oblasti: %1$s x %2$s</string>
     <string name="import_track">Importovať stopu</string>
     <string name="import_track_desc">Súbor %1$s neobsahuje body trasy, naimportovať ako stopu?</string>
     <string name="move_point">Presunúť bod</string>
-    <string name="add_segment_to_the_track">Pridať do stopy</string>
-</resources>
+    <string name="add_segment_to_the_track">Pridať do stopy GPX</string>
+<string name="do_not_use_animations">Nepoužívať animácie</string>
+    <string name="do_not_use_animations_descr">Vypne animácie v aplikácii</string>
+    <string name="keep_showing_on_map">Zobrazovať ďalej na mape</string>
+    <string name="exit_without_saving">Ukončiť bez uloženia?</string>
+    </resources>

@@ -43,7 +43,6 @@ import net.osmand.plus.views.DirectionDrawable;
 import net.osmand.plus.views.controls.DynamicListView;
 import net.osmand.plus.views.controls.ListDividerShape;
 import net.osmand.plus.views.controls.StableArrayAdapter;
-import net.osmand.util.Algorithms;
 import net.osmand.util.MapUtils;
 
 import java.io.File;
@@ -784,37 +783,7 @@ public class MapMarkerDialogHelper {
 	}
 
 	public static Drawable getMapMarkerIcon(OsmandApplication app, int colorIndex) {
-		return app.getIconsCache().getIcon(R.drawable.ic_action_flag_dark, getMapMarkerColorId(colorIndex));
-	}
-
-	public static int getMapMarkerColorId(int colorIndex) {
-		int colorId;
-		switch (colorIndex) {
-			case 0:
-				colorId = R.color.marker_blue;
-				break;
-			case 1:
-				colorId = R.color.marker_green;
-				break;
-			case 2:
-				colorId = R.color.marker_orange;
-				break;
-			case 3:
-				colorId = R.color.marker_red;
-				break;
-			case 4:
-				colorId = R.color.marker_yellow;
-				break;
-			case 5:
-				colorId = R.color.marker_teal;
-				break;
-			case 6:
-				colorId = R.color.marker_purple;
-				break;
-			default:
-				colorId = R.color.marker_blue;
-		}
-		return colorId;
+		return app.getIconsCache().getIcon(R.drawable.ic_action_flag_dark, MapMarker.getColorId(colorIndex));
 	}
 
 	public void updateLocation(ListView listView, boolean compassChanged) {
@@ -896,7 +865,7 @@ public class MapMarkerDialogHelper {
 			WptPt wpt = new WptPt();
 			wpt.lat = marker.getLatitude();
 			wpt.lon = marker.getLongitude();
-			wpt.setColor(mapActivity.getResources().getColor(getMapMarkerColorId(marker.colorIndex)));
+			wpt.setColor(mapActivity.getResources().getColor(MapMarker.getColorId(marker.colorIndex)));
 			wpt.name = marker.getOnlyName();
 			//wpt.link = r.getFileName();
 			//wpt.time = r.getFile().lastModified();

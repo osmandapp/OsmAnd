@@ -1735,6 +1735,9 @@ public class BinaryMapIndexReader {
 		public TIntHashSet positiveLayers = new TIntHashSet(2);
 		public TIntHashSet negativeLayers = new TIntHashSet(2);
 
+		// to speed up comparision
+		private MapIndex referenceMapIndex;
+
 		public Integer getRule(String t, String v) {
 			Map<String, Integer> m = encodingRules.get(t);
 			if (m != null) {
@@ -1835,12 +1838,13 @@ public class BinaryMapIndexReader {
 		}
 
 		public BinaryMapDataObject adoptMapObject(BinaryMapDataObject o) {
-			if(o.mapIndex == this) {
+			if(o.mapIndex == this || o.mapIndex == referenceMapIndex) {
 				return o;
 			}
 			if(encodingRules.isEmpty()) {
 				encodingRules.putAll(o.mapIndex.encodingRules);
 				decodingRules.putAll(o.mapIndex.decodingRules);
+				referenceMapIndex = o.mapIndex;
 				return o;
 			}
 			TIntArrayList types = new TIntArrayList();
@@ -1852,8 +1856,8 @@ public class BinaryMapIndexReader {
 					if(r != null) {
 						types.add(r);
 					} else {
-						int nid = decodingRules.size();
-						initMapEncodingRule(tp.additionalAttribute, decodingRules.size(), tp.tag, tp.value);
+						int nid = decodingRules.size() + 1;
+						initMapEncodingRule(tp.additionalAttribute, nid, tp.tag, tp.value);
 						types.add(nid);
 					}
 				}
@@ -1865,8 +1869,8 @@ public class BinaryMapIndexReader {
 					if(r != null) {
 						additionalTypes.add(r);
 					} else {
-						int nid = decodingRules.size();
-						initMapEncodingRule(tp.additionalAttribute, decodingRules.size(), tp.tag, tp.value);
+						int nid = decodingRules.size() + 1;
+						initMapEncodingRule(tp.additionalAttribute, nid, tp.tag, tp.value);
 						additionalTypes.add(nid);
 					}
 				}
@@ -1887,8 +1891,8 @@ public class BinaryMapIndexReader {
 						bm.namesOrder.add(r);
 						bm.objectNames.put(r, name);
 					} else {
-						int nid = decodingRules.size();
-						initMapEncodingRule(tp.additionalAttribute, decodingRules.size(), tp.tag, tp.value);
+						int nid = decodingRules.size() + 1;
+						initMapEncodingRule(tp.additionalAttribute, nid, tp.tag, tp.value);
 						additionalTypes.add(nid);
 						bm.objectNames.put(nid, name);
 					}

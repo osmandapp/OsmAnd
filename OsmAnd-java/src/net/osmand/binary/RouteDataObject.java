@@ -4,6 +4,7 @@ package net.osmand.binary;
 import gnu.trove.map.hash.TIntObjectHashMap;
 
 import java.text.MessageFormat;
+import java.util.Arrays;
 
 import net.osmand.binary.BinaryMapRouteReaderAdapter.RouteRegion;
 import net.osmand.binary.BinaryMapRouteReaderAdapter.RouteTypeRule;
@@ -61,6 +62,101 @@ public class RouteDataObject {
 		this.pointNames = copy.pointNames;
 		this.pointNameTypes = copy.pointNameTypes;
 		this.id = copy.id;
+	}
+	
+	public boolean compareRoute(RouteDataObject thatObj) {
+		if (this.id == thatObj.id
+				&& Arrays.equals(this.pointsX, thatObj.pointsX)
+				&& Arrays.equals(this.pointsY, thatObj.pointsY)) {
+			if (this.region == null) {
+				throw new IllegalStateException("Illegal routing object: " + id);
+			}
+			if (thatObj.region == null) {
+				throw new IllegalStateException("Illegal routing object: " + thatObj.id);
+			}
+			
+			boolean equals = true;
+			equals = equals && Arrays.equals(this.restrictions, thatObj.restrictions);
+			
+			if (equals) {
+				if (this.types == null || thatObj.types == null) {
+					equals = this.types == thatObj.types;
+				} else if (types.length != thatObj.types.length) {
+					equals = false;
+				} else {
+					for (int i = 0; i < this.types.length && equals; i++) {
+						String thisTag = region.routeEncodingRules.get(types[i]).getTag();
+						String thisValue = region.routeEncodingRules.get(types[i]).getValue();
+						String thatTag = thatObj.region.routeEncodingRules.get(thatObj.types[i]).getTag();
+						String thatValue = thatObj.region.routeEncodingRules.get(thatObj.types[i]).getValue();
+						equals = (thisTag.equals(thatTag) && thisValue.equals(thatValue));
+					}
+				}
+			}
+			if (equals) {
+				if (this.nameIds == null || thatObj.nameIds == null) {
+					equals = this.nameIds == thatObj.nameIds;
+				} else if (nameIds.length != thatObj.nameIds.length) {
+					equals = false;
+				} else {
+					for (int i = 0; i < this.nameIds.length && equals; i++) {
+						String thisTag = region.routeEncodingRules.get(nameIds[i]).getTag();
+						String thisValue = names.get(nameIds[i]);
+						String thatTag = thatObj.region.routeEncodingRules.get(thatObj.nameIds[i]).getTag();
+						String thatValue = thatObj.names.get(thatObj.nameIds[i]);
+						equals = (Algorithms.objectEquals(thisTag, thatTag) && Algorithms.objectEquals(thisValue, thatValue));
+					}
+				}
+			}
+			if (equals) {
+				if (this.pointTypes == null || thatObj.pointTypes == null) {
+					equals = this.pointTypes == thatObj.pointTypes;
+				} else if (pointTypes.length != thatObj.pointTypes.length) {
+					equals = false;
+				} else {
+					for (int i = 0; i < this.pointTypes.length && equals; i++) {
+						if (this.pointTypes[i] == null || thatObj.pointTypes[i] == null) {
+							equals = this.pointTypes[i] == thatObj.pointTypes[i];
+						} else if (pointTypes[i].length != thatObj.pointTypes[i].length) {
+							equals = false;
+						} else  {
+							for (int j = 0; j < this.pointTypes[i].length && equals; j++) {
+								String thisTag = region.routeEncodingRules.get(pointTypes[i][j]).getTag();
+								String thisValue = region.routeEncodingRules.get(pointTypes[i][j]).getValue();
+								String thatTag = thatObj.region.routeEncodingRules.get(thatObj.pointTypes[i][j]).getTag();
+								String thatValue = thatObj.region.routeEncodingRules.get(thatObj.pointTypes[i][j]).getValue();
+								equals = (Algorithms.objectEquals(thisTag, thatTag) && Algorithms.objectEquals(thisValue, thatValue));
+							}
+						}
+					}
+				}
+			}
+			if (equals) {
+				if (this.pointNameTypes == null || thatObj.pointNameTypes == null) {
+					equals = this.pointNameTypes == thatObj.pointNameTypes;
+				} else if (pointNameTypes.length != thatObj.pointNameTypes.length) {
+					equals = false;
+				} else {
+					for (int i = 0; i < this.pointNameTypes.length && equals; i++) {
+						if (this.pointNameTypes[i] == null || thatObj.pointNameTypes[i] == null) {
+							equals = this.pointNameTypes[i] == thatObj.pointNameTypes[i];
+						} else if (pointNameTypes[i].length != thatObj.pointNameTypes[i].length) {
+							equals = false;
+						} else  {
+							for (int j = 0; j < this.pointNameTypes[i].length && equals; j++) {
+								String thisTag = region.routeEncodingRules.get(pointNameTypes[i][j]).getTag();
+								String thisValue = pointNames[i][j];
+								String thatTag = thatObj.region.routeEncodingRules.get(thatObj.pointNameTypes[i][j]).getTag();
+								String thatValue = thatObj.pointNames[i][j];
+								equals = (Algorithms.objectEquals(thisTag, thatTag) && Algorithms.objectEquals(thisValue, thatValue));
+							}
+						}
+					}
+				}
+			}
+			return equals;
+		}
+		return false;
 	}
 	
 	public float[] calculateHeightArray() {
@@ -296,6 +392,10 @@ public class RouteDataObject {
 
 	public int getRestrictionType(int i) {
 		return (int) (restrictions[i] & RESTRICTION_MASK);
+	}
+	
+	public long getRawRestriction(int i) {
+		return restrictions[i];
 	}
 
 	public long getRestrictionId(int i) {

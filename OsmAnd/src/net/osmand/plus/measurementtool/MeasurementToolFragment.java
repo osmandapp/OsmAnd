@@ -1395,7 +1395,7 @@ public class MeasurementToolFragment extends Fragment {
 				hidePointsList();
 				return;
 			}
-			if (editingCtx.getPointsCount() < 1 || saved) {
+			if (editingCtx.getPointsCount() == 0 || saved) {
 				dismiss(mapActivity);
 				return;
 			}
@@ -1410,21 +1410,25 @@ public class MeasurementToolFragment extends Fragment {
 				builder.setPositiveButton(R.string.shared_string_ok, new DialogInterface.OnClickListener() {
 					@Override
 					public void onClick(DialogInterface dialog, int which) {
-						final String name = new SimpleDateFormat("yyyy-MM-dd_HH-mm_EEE", Locale.US).format(new Date());
-						String fileName = name + GPX_SUFFIX;
-						File fout = new File(dir, fileName);
-						int ind = 1;
-						while (fout.exists()) {
-							fileName = name + "_" + (++ind) + GPX_SUFFIX;
-							fout = new File(dir, fileName);
-						}
-						SaveType saveType;
-						if (editingCtx.isInSnapToRoadMode()) {
-							saveType = SaveType.SNAP_TO_ROAD;
+						if (showOnMapToggle.isChecked()) {
+							final String name = new SimpleDateFormat("yyyy-MM-dd_HH-mm_EEE", Locale.US).format(new Date());
+							String fileName = name + GPX_SUFFIX;
+							File fout = new File(dir, fileName);
+							int ind = 1;
+							while (fout.exists()) {
+								fileName = name + "_" + (++ind) + GPX_SUFFIX;
+								fout = new File(dir, fileName);
+							}
+							SaveType saveType;
+							if (editingCtx.isInSnapToRoadMode()) {
+								saveType = SaveType.SNAP_TO_ROAD;
+							} else {
+								saveType = SaveType.LINE;
+							}
+							saveNewGpx(dir, fileName, true, saveType, true);
 						} else {
-							saveType = SaveType.LINE;
+							dismiss(mapActivity);
 						}
-						saveNewGpx(dir, fileName, showOnMapToggle.isChecked(), saveType, true);
 					}
 				});
 			} else {
@@ -1441,12 +1445,7 @@ public class MeasurementToolFragment extends Fragment {
 			}
 			builder.setTitle(getString(R.string.exit_without_saving))
 					.setMessage(getString(R.string.unsaved_changes_will_be_lost))
-					.setNegativeButton(R.string.shared_string_cancel, new DialogInterface.OnClickListener() {
-						@Override
-						public void onClick(DialogInterface dialogInterface, int i) {
-							dismiss(mapActivity);
-						}
-					});
+					.setNegativeButton(R.string.shared_string_cancel, null);
 			builder.show();
 		}
 	}
