@@ -576,6 +576,13 @@ public class GeoPointParserUtil {
 		actual = GeoPointParserUtil.parse(url);
 		assertGeoPoint(actual, new GeoParsedPoint(qstr));
 
+		// http://www.openstreetmap.org/search?query=Bloemstraat+51A,+Amsterdam
+		qstr = "Bloemstraat 51A, Amsterdam";
+		url = "http://www.openstreetmap.org/search?query=" + URLEncoder.encode(qstr);
+		System.out.println("url: " + url);
+		actual = GeoPointParserUtil.parse(url);
+		assertGeoPoint(actual, new GeoParsedPoint(qstr));
+
 		// http://maps.google.com/maps?daddr=760+West+Genesee+Street+Syracuse+NY+13204
 		qstr = "760 West Genesee Street Syracuse NY 13204";
 		url = "http://www.google.com/maps?daddr=" + URLEncoder.encode(qstr);
@@ -935,6 +942,7 @@ public class GeoPointParserUtil {
 						double lat = 0;
 						double lon = 0;
 						int zoom = GeoParsedPoint.NO_ZOOM;
+						Map<String, String> queryMap = getQueryParameters(uri);
 						if (fragment != null) {
 							if (fragment.startsWith("map=")) {
 								fragment = fragment.substring("map=".length());
@@ -945,9 +953,7 @@ public class GeoPointParserUtil {
 								lat = parseSilentDouble(vls[1]);
 								lon = parseSilentDouble(vls[2]);
 							}
-						}
-						Map<String, String> queryMap = getQueryParameters(uri);
-						if (queryMap != null) {
+						} else if (queryMap != null) {
 							String queryStr = queryMap.get("query");
 							if (queryStr != null) {
 								String[] vls = null;
@@ -959,8 +965,17 @@ public class GeoPointParserUtil {
 								if (vls != null && vls.length >= 2) {
 									lat = parseSilentDouble(vls[0]);
 									lon = parseSilentDouble(vls[1]);
+									if (lat == 0 || lon == 0) {
+										if (queryStr.contains("+")) {
+											queryStr = queryStr.replace("+", " ");
+										}
+										return new GeoParsedPoint(queryStr);
+									}
 								} else {
-									return new GeoParsedPoint(URLEncoder.encode(queryStr));
+									if (queryStr.contains("+")) {
+										queryStr = queryStr.replace("+", " ");
+									}
+									return new GeoParsedPoint(queryStr);
 								}
 							}
 						}
