@@ -24,6 +24,7 @@ public class MapMarkersActiveAdapter extends RecyclerView.Adapter<MapMarkerItemV
 	private MapActivity mapActivity;
 	private List<MapMarker> markers;
 	private MapMarkersActiveAdapterListener listener;
+	private Snackbar snackbar;
 
 	private LatLon location;
 	private Float heading;
@@ -103,14 +104,15 @@ public class MapMarkersActiveAdapter extends RecyclerView.Adapter<MapMarkerItemV
 				mapActivity.getMyApplication().getMapMarkersHelper().moveMapMarkerToHistory(marker);
 				notifyItemRemoved(position);
 
-				Snackbar.make(holder.itemView, R.string.item_removed, Snackbar.LENGTH_LONG)
+				snackbar = Snackbar.make(holder.itemView, R.string.item_removed, Snackbar.LENGTH_LONG)
 						.setAction(R.string.shared_string_undo, new View.OnClickListener() {
 							@Override
 							public void onClick(View view) {
 								mapActivity.getMyApplication().getMapMarkersHelper().restoreMarkerFromHistory(marker, position);
 								notifyItemInserted(position);
 							}
-						}).show();
+						});
+				snackbar.show();
 			}
 		});
 
@@ -131,6 +133,12 @@ public class MapMarkersActiveAdapter extends RecyclerView.Adapter<MapMarkerItemV
 
 	public List<MapMarker> getItems() {
 		return markers;
+	}
+
+	public void hideSnackbar() {
+		if (snackbar != null && snackbar.isShown()) {
+			snackbar.dismiss();
+		}
 	}
 
 	@Override

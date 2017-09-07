@@ -127,6 +127,10 @@ public class MapMarkersActiveFragment extends Fragment implements OsmAndCompassL
 		}
 	}
 
+	void hideSnackbar() {
+		adapter.hideSnackbar();
+	}
+
 	private void updateLocationUi() {
 		final MapActivity mapActivity = (MapActivity) getActivity();
 		if (mapActivity != null) {
