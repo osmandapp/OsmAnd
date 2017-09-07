@@ -956,20 +956,14 @@ public class GeoPointParserUtil {
 						} else if (queryMap != null) {
 							String queryStr = queryMap.get("query");
 							if (queryStr != null) {
-								String[] vls = null;
-								if (queryStr.contains(",")) {
-									vls = queryStr.split("/|,");
-								} else if (queryStr.contains(" ")) {
-									vls = queryStr.split(" ");
-								}
+								queryStr = queryStr.replace("+", " ").replace("/|,", " ");
+								String[] vls = queryStr.split(" ");
 								if (vls != null && vls.length == 2) {
 									lat = parseSilentDouble(vls[0]);
 									lon = parseSilentDouble(vls[1]);
-									if (lat == 0 || lon == 0) {
-										return new GeoParsedPoint(queryStr.replace("+", " ").replace("/|,", " "));
-									}
-								} else {
-									return new GeoParsedPoint(queryStr.replace("+", " ").replace("/|,", " "));
+								} 
+								if (lat == 0 || lon == 0) {
+									return new GeoParsedPoint(queryStr);
 								}
 							}
 						}
