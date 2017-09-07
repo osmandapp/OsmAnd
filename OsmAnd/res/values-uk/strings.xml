@@ -549,7 +549,7 @@
   <string name="menu_mute_off">Звук увімкнено</string>
   <string name="menu_mute_on">Звук вимкнено</string>
   <string name="voice_provider_descr">Виберіть голосові вказівки для навігації</string>
-  <string name="voice_provider">Голосові дані</string>
+  <string name="voice_provider">Голосові настанови</string>
   <string name="voice_data_initializing">Ініціалізуються голосові дані…</string>
   <string name="voice_data_not_supported">Голосові дані не підтримуються поточною версією програми</string>
   <string name="voice_data_corrupted">Голосові дані неправильного формату або пошкоджені</string>
@@ -1179,7 +1179,7 @@
     <string name="distance_measurement_clear_route">Очистити всі точки</string>
     
     <string name="distance_measurement_load_gpx">Відкрити збережений GPX</string>
-    <string name="cancel_route">Відмінити маршрут</string>
+    <string name="cancel_route">Відхилити маршрут</string>
     <string name="search_street_in_neighborhood_cities">Шукати в навколишніх містах</string>
     <string name="intermediate_items_sort_return">Проміжні точки впорядковано оптимальним чином від поточної до кінцевої.</string>
     <string name="intermediate_items_sort_by_distance">Впорядкувати за відстанню</string>
@@ -1524,7 +1524,7 @@
     <string name="index_name_gb">Європа - Великобританія</string>
     <string name="calculate_osmand_route_without_internet">Розрахувати ділянку маршруту OsmAnd без Інтернету</string>
     <string name="gpx_option_calculate_first_last_segment">Обчислити маршрут OsmAnd для першого та останнього сегментів маршруту</string>
-    <string name="use_displayed_track_for_navigation">Бажаєте використовувати показаний трек для навігації?</string>
+    <string name="use_displayed_track_for_navigation">Чи Ви хочете використовувати відображення треку для навігації?</string>
     <string name="keep_and_add_destination_point">Додати як наступний пункт призначення</string>
     <string name="select_gpx">Обрати GPX…</string>
     <string name="route_descr_select_destination">Виберіть пункт призначення</string>
@@ -1592,7 +1592,7 @@
     
     <string name="route_descr_destination">Місце призначення</string>
     <string name="interrupt_music_descr">Голосові підказки призупиняють музику, а не лише зменшують гучність</string>
-	<string name="interrupt_music">Пауза музики</string>
+	<string name="interrupt_music">Призупинити музику</string>
 	<string name="share_route_as_gpx">Поділитись маршрутом за допомоги файлу GPX</string>
 	<string name="share_route_subject">Маршрут наданий через OsmAnd</string>
 	<string name="arrival_distance">Оголошення прибуття</string>
@@ -1748,7 +1748,7 @@
     <string name="shared_string_my_location">Моя позиція</string>
     
     
-	<string name="navigation_over_track">Почати навігацію по треку?</string>
+	<string name="navigation_over_track">Почати навігацію уздовж треку?</string>
 	<string name="avoid_roads_msg">Ви можете вибрати альтернативний маршрут, вибравши дороги, які варто уникати</string>
     
 	<string name="speak_pedestrian">Пішохідні переходи</string>
@@ -2261,7 +2261,7 @@
     <string name="shared_string_toolbar">Панель інструментів</string>
     <string name="shared_string_widgets">Віджети</string>
     
-    <string name="map_markers_other">Інші позначки</string>
+    <string name="map_markers_other">Інші маркери</string>
     <string name="download_files_error_not_enough_space">Недостатньо пам\'яті!
  Необхідно {3} МБ тимчасової та {1} МБ постійної пам\'яті.
  На разі доступно лише {2} МБ.</string>
@@ -2744,7 +2744,7 @@
     <string name="relief_smoothness_factor_descr">Переважний рельєф: рівнинний або гористий</string>
     <string name="routing_attr_relief_smoothness_factor_name">Вибрати пересіченість місцевості</string>
     <string name="shared_string_paused">Призупинено</string>
-    <string name="route_is_too_long_v2">Можливо, буде потрібно дуже багато часу для локального (оффлайн) розрахунку маршруту. Будь ласка, додайте один або більше проміжних пунктів на маршруті, якщо розрахунок не завершений через 10 чи більше хвилин.</string>
+    <string name="route_is_too_long_v2">Цей маршрут може бути надто довгим для розрахунку. Будь ласка, додайте проміжні пункти призначення, якщо протягом 10 хвилин не знайдено жодного результату.</string>
     <string name="osmand_extended_description_part1">"OsmAnd (OSM Автоматична Навігація До цілі) — застосунок для мап і навігації з доступом до безкоштовних високоякісних глобальних даних OpenStreetMap (OSM). 
 \n 
 \nНасолоджуйтесь голосовою та візуальною навігацією, переглядайте цікаві точки (англ. POI), створюйте та керуйте GPX-треками, переглядайте контурні лінії та дані про висоту (за допомогою зовнішнього втулка), перемикайтеся  між режимами автомобіліста, велосипедиста й пішохода, редагуйте OSM та ще багато цікавого."</string>

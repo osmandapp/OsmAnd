@@ -2472,4 +2472,20 @@
     <string name="rendering_value_translucent_pink_name">Прозрачно-розовый</string>
     <string name="lang_ber">Берберский язык</string>
     <string name="move_all_to_history">Переместить все в историю</string>
+    <string name="sort_by">Сортировать по</string>
+    <string name="marker_options">Параметры маркера</string>
+    <string name="do_not_use_animations">Не использовать анимацию</string>
+    <string name="do_not_use_animations_descr">Отключение анимации в приложении</string>
+    <string name="exit_without_saving">Выйти без сохранения?</string>
+    <string name="save_as_route_point">Сохранить как точки маршрута</string>
+    <string name="save_as_line">Сохранить как линию</string>
+    <string name="route_point">Точка маршрута</string>
+    <string name="edit_line">Редактировать линию</string>
+    <string name="add_point_before">Добавить точку перед</string>
+    <string name="add_point_after">Добавить точку после</string>
+    <string name="shared_string_options">Параметры</string>
+    <string name="measurement_tool_snap_to_road_descr">OsmAnd соединит точки с маршрутом для выбранного профиля.</string>
+    <string name="measurement_tool_save_as_new_track_descr">Вы можете сохранить точки, как точки маршрута или как линию.</string>
+    <string name="choose_navigation_type">Выберите профиль навигации</string>
+    <string name="of">%1$d из %2$d</string>
     </resources>
