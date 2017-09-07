@@ -855,7 +855,7 @@ public class OsmandSettings {
 	public final OsmandPreference<Float> SPEED_LIMIT_EXCEED =
 			new FloatPreference("speed_limit_exceed", 5f).makeProfile();
 
-	public final OsmandPreference<Float> SWITCH_TO_MAP_DIRECTION =
+	public final OsmandPreference<Float> SWITCH_MAP_DIRECTION_TO_COMPASS =
 			new FloatPreference("speed_for_map_to_direction_of_movement", 0f).makeProfile();
 
 	// this value string is synchronized with settings_pref.xml preference name

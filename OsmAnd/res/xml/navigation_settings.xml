@@ -63,8 +63,8 @@
             android:title="@string/speed_limit_exceed"/>
         <ListPreference
             android:key="speed_for_map_to_direction_of_movement"
-            android:summary="@string/speed_for_map_to_direction_of_movement_descr"
-            android:title="@string/speed_for_map_to_direction_of_movement"/>
+            android:summary="@string/map_orientation_change_in_accordance_with_speed_descr"
+            android:title="@string/map_orientation_change_in_accordance_with_speed"/>
         <!--
             <CheckBoxPreference android:title="@string/show_zoom_buttons_navigation" android:summary="@string/show_zoom_buttons_navigation_descr" android:key="show_zoom_buttons_navigation" />
         -->
