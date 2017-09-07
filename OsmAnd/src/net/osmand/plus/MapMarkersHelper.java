@@ -281,7 +281,8 @@ public class MapMarkersHelper {
 		cancelAddressRequests();
 		markersDbHelper.moveAllActiveMarkersToHistory();
 		mapMarkers.clear();
-		mapMarkersHistory = markersDbHelper.getMarkersHistory();
+		mapMarkersHistory.clear();
+		mapMarkersHistory.addAll(markersDbHelper.getMarkersHistory());
 		refresh();
 	}
 

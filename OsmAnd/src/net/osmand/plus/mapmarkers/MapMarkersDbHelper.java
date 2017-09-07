@@ -314,8 +314,11 @@ public class MapMarkersDbHelper {
 		SQLiteConnection db = openConnection(false);
 		if (db != null) {
 			try {
-				db.execSQL("UPDATE " + MARKERS_TABLE_NAME + " SET " + MARKERS_COL_ACTIVE + " = ? " +
-						"WHERE " + MARKERS_COL_ACTIVE + " = ?", new Object[]{0, 1});
+				long visitedDate = System.currentTimeMillis();
+				db.execSQL("UPDATE " + MARKERS_TABLE_NAME + " SET " +
+						MARKERS_COL_ACTIVE + " = ?, " +
+						MARKERS_COL_VISITED + " = ? " +
+						"WHERE " + MARKERS_COL_ACTIVE + " = ?", new Object[]{0, visitedDate, 1});
 			} finally {
 				db.close();
 			}
