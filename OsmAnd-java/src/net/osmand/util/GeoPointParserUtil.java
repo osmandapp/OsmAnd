@@ -962,20 +962,14 @@ public class GeoPointParserUtil {
 								} else if (queryStr.contains(" ")) {
 									vls = queryStr.split(" ");
 								}
-								if (vls != null && vls.length >= 2) {
+								if (vls != null && vls.length == 2) {
 									lat = parseSilentDouble(vls[0]);
 									lon = parseSilentDouble(vls[1]);
 									if (lat == 0 || lon == 0) {
-										if (queryStr.contains("+")) {
-											queryStr = queryStr.replace("+", " ");
-										}
-										return new GeoParsedPoint(queryStr);
+										return new GeoParsedPoint(queryStr.replace("+", " ").replace("/|,", " "));
 									}
 								} else {
-									if (queryStr.contains("+")) {
-										queryStr = queryStr.replace("+", " ");
-									}
-									return new GeoParsedPoint(queryStr);
+									return new GeoParsedPoint(queryStr.replace("+", " ").replace("/|,", " "));
 								}
 							}
 						}
