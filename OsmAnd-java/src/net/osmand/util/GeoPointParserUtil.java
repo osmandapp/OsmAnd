@@ -569,6 +569,13 @@ public class GeoPointParserUtil {
 		actual = GeoPointParserUtil.parse(url);
 		assertGeoPoint(actual, new GeoParsedPoint(qstr));
 
+		// http://www.openstreetmap.org/search?query=Amsterdam
+		qstr = "Amsterdam";
+		url = "http://www.openstreetmap.org/search?query=" + URLEncoder.encode(qstr);
+		System.out.println("url: " + url);
+		actual = GeoPointParserUtil.parse(url);
+		assertGeoPoint(actual, new GeoParsedPoint(qstr));
+
 		// http://maps.google.com/maps?daddr=760+West+Genesee+Street+Syracuse+NY+13204
 		qstr = "760 West Genesee Street Syracuse NY 13204";
 		url = "http://www.google.com/maps?daddr=" + URLEncoder.encode(qstr);
@@ -952,6 +959,8 @@ public class GeoPointParserUtil {
 								if (vls != null && vls.length >= 2) {
 									lat = parseSilentDouble(vls[0]);
 									lon = parseSilentDouble(vls[1]);
+								} else {
+									return new GeoParsedPoint(URLEncoder.encode(queryStr));
 								}
 							}
 						}
