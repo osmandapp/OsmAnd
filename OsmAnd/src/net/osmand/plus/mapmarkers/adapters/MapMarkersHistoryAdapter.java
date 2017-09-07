@@ -131,7 +131,7 @@ public class MapMarkersHistoryAdapter extends RecyclerView.Adapter<RecyclerView.
 
 			itemViewHolder.description.setText(marker.visitedDate + "");
 
-			itemViewHolder.optionsBtn.setImageDrawable(iconsCache.getThemedIcon(R.drawable.ic_action_history));
+			itemViewHolder.optionsBtn.setImageDrawable(iconsCache.getThemedIcon(R.drawable.ic_action_reset_to_default_dark));
 			itemViewHolder.optionsBtn.setOnClickListener(new View.OnClickListener() {
 				@Override
 				public void onClick(View view) {
