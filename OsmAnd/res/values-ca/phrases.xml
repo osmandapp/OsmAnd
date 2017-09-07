@@ -3120,4 +3120,9 @@
 
 	<string name="poi_boat_rental_type">Lloguer d\'embarcacions</string>
 
-</resources>
+<string name="poi_microwave_oven_yes">Forn microones: sí</string>
+	<string name="poi_microwave_oven_no">Forn microones: no</string>
+	<string name="poi_water_heater_yes">Escalfador d\'aigua: sí</string>
+	<string name="poi_water_heater_no">Escalfador d\'aigua: no</string>
+
+	</resources>
