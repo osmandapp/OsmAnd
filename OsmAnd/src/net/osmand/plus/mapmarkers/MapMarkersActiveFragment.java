@@ -67,6 +67,7 @@ public class MapMarkersActiveFragment extends Fragment implements OsmAndCompassL
 			public void onDragEnded(RecyclerView.ViewHolder holder) {
 				toPosition = holder.getAdapterPosition();
 				if (toPosition >= 0 && fromPosition >= 0 && toPosition != fromPosition) {
+					hideSnackbar();
 					mapActivity.getMyApplication().getMapMarkersHelper().changeActiveMarkerPositionInDb(toPosition);
 				}
 			}
