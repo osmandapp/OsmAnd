@@ -275,13 +275,8 @@ public class MapMarkersHelper {
 	public void reverseActiveMarkersOrder() {
 		cancelAddressRequests();
 
-		List<MapMarker> markers = new ArrayList<>(mapMarkers.size());
-		for (int i = mapMarkers.size() - 1; i >= 0; i--) {
-			MapMarker marker = mapMarkers.get(i);
-			markers.add(marker);
-		}
-		mapMarkers = markers;
-		saveMapMarkers(mapMarkers, null);
+		markersDbHelper.reverseActiveMarkersOrder();
+		loadMarkers();
 	}
 
 	public void removeActiveMarkers() {
@@ -358,11 +353,21 @@ public class MapMarkersHelper {
 		}
 	}
 
-	public void changeActiveMarkerPositionInDb(int currentPos) {
-		MapMarker moved = mapMarkers.get(currentPos);
+	public void changeActiveMarkerPositionInDb(int currentPosInMapMarkers) {
+		MapMarker moved = mapMarkers.get(currentPosInMapMarkers);
 		markersDbHelper.changeActiveMarkerPosition(moved,
-				currentPos == mapMarkers.size() - 1 ? null : mapMarkers.get(currentPos + 1));
+				currentPosInMapMarkers == mapMarkers.size() - 1 ? null : mapMarkers.get(currentPosInMapMarkers + 1));
 		loadMarkers();
+	}
+
+	public void moveMarkerToTop(MapMarker marker) {
+		int i = mapMarkers.indexOf(marker);
+		if (i != -1 && mapMarkers.size() > 1) {
+			mapMarkers.remove(i);
+			markersDbHelper.changeActiveMarkerPosition(marker, mapMarkers.get(0));
+			loadMarkers();
+			refresh();
+		}
 	}
 
 	public void saveMapMarkers(List<MapMarker> markers, List<MapMarker> markersHistory) {

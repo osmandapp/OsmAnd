@@ -139,6 +139,14 @@ public class MapMarkersDbHelper {
 		}
 	}
 
+	public void reverseActiveMarkersOrder() {
+		List<MapMarker> markers = getActiveMarkers();
+		removeAllActiveMarkers();
+		for (int i = markers.size() - 1; i >= 0; i--) {
+			addMarker(markers.get(i));
+		}
+	}
+
 	public void addMarker(MapMarker marker) {
 		SQLiteConnection db = openConnection(false);
 		if (db != null) {
@@ -265,6 +273,18 @@ public class MapMarkersDbHelper {
 
 				db.execSQL("UPDATE " + MARKERS_TABLE_NAME + " SET " + MARKERS_COL_NEXT_KEY + " = ? " +
 						"WHERE " + MARKERS_COL_ID + " = ?", new Object[]{next == null ? TAIL_NEXT_VALUE : next.id, moved.id});
+			} finally {
+				db.close();
+			}
+		}
+	}
+
+	private void removeAllActiveMarkers() {
+		SQLiteConnection db = openConnection(true);
+		if (db != null) {
+			try {
+				db.execSQL("DELETE FROM " + MARKERS_TABLE_NAME + " WHERE " + MARKERS_COL_ACTIVE + " = ?",
+						new Object[]{1});
 			} finally {
 				db.close();
 			}
