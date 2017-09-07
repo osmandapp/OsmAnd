@@ -241,9 +241,7 @@ public class MapMarkersHelper {
 		if (marker != null) {
 			cancelPointAddressRequests(marker.point);
 			markersDbHelper.moveMarkerToHistory(marker);
-			mapMarkers.remove(marker);
-			marker.history = true;
-			mapMarkersHistory.add(marker);
+			loadMarkers();
 			refresh();
 		}
 	}
@@ -321,7 +319,8 @@ public class MapMarkersHelper {
 		cancelAddressRequests();
 		markersDbHelper.moveAllActiveMarkersToHistory();
 		mapMarkers.clear();
-		mapMarkersHistory = markersDbHelper.getMarkersHistory();
+		mapMarkersHistory.clear();
+		mapMarkersHistory.addAll(markersDbHelper.getMarkersHistory());
 		refresh();
 	}
 

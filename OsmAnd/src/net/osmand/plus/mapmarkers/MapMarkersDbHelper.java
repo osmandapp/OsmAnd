@@ -314,8 +314,11 @@ public class MapMarkersDbHelper {
 		SQLiteConnection db = openConnection(false);
 		if (db != null) {
 			try {
-				db.execSQL("UPDATE " + MARKERS_TABLE_NAME + " SET " + MARKERS_COL_ACTIVE + " = ? " +
-						"WHERE " + MARKERS_COL_ACTIVE + " = ?", new Object[]{0, 1});
+				long visitedDate = System.currentTimeMillis();
+				db.execSQL("UPDATE " + MARKERS_TABLE_NAME + " SET " +
+						MARKERS_COL_ACTIVE + " = ?, " +
+						MARKERS_COL_VISITED + " = ? " +
+						"WHERE " + MARKERS_COL_ACTIVE + " = ?", new Object[]{0, visitedDate, 1});
 			} finally {
 				db.close();
 			}
@@ -323,9 +326,6 @@ public class MapMarkersDbHelper {
 	}
 
 	public void restoreMapMarkerFromHistory(MapMarker marker) {
-		if (!marker.history) {
-			return;
-		}
 		SQLiteConnection db = openConnection(false);
 		if (db != null) {
 			try {
@@ -333,8 +333,9 @@ public class MapMarkersDbHelper {
 				db.execSQL("UPDATE " + MARKERS_TABLE_NAME + " SET " +
 								MARKERS_COL_ACTIVE + " = ?, " +
 								MARKERS_COL_NEXT_KEY + " = ? " +
-								"WHERE " + MARKERS_COL_ID + " = ?",
-						new Object[]{1, active.size() > 0 ? active.get(0).id : TAIL_NEXT_VALUE, marker.id});
+								"WHERE " + MARKERS_COL_ID + " = ? " +
+								"AND " + MARKERS_COL_ACTIVE + " = ?",
+						new Object[]{1, active.size() > 0 ? active.get(0).id : TAIL_NEXT_VALUE, marker.id, 0});
 			} finally {
 				db.close();
 			}
@@ -362,14 +363,13 @@ public class MapMarkersDbHelper {
 	}
 
 	public void removeMarkerFromHistory(MapMarker marker) {
-		if (!marker.history) {
-			return;
-		}
 		SQLiteConnection db = openConnection(true);
 		if (db != null) {
 			try {
-				db.execSQL("DELETE FROM " + MARKERS_TABLE_NAME + " WHERE " + MARKERS_COL_ID + " = ?",
-						new Object[]{marker.id});
+				db.execSQL("DELETE FROM " + MARKERS_TABLE_NAME +
+								" WHERE " + MARKERS_COL_ID + " = ?" +
+								" AND " + MARKERS_COL_ACTIVE + " = ?",
+						new Object[]{marker.id, 0});
 			} finally {
 				db.close();
 			}

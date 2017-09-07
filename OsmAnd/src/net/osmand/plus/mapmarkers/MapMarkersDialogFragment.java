@@ -28,6 +28,9 @@ public class MapMarkersDialogFragment extends android.support.v4.app.DialogFragm
 
 	public static final String TAG = "MapMarkersDialogFragment";
 
+	private MapMarkersActiveFragment activeFragment;
+	private MapMarkersHistoryFragment historyFragment;
+
 	@Override
 	public void onCreate(Bundle savedInstanceState) {
 		super.onCreate(savedInstanceState);
@@ -40,6 +43,9 @@ public class MapMarkersDialogFragment extends android.support.v4.app.DialogFragm
 	@Nullable
 	@Override
 	public View onCreateView(LayoutInflater inflater, @Nullable ViewGroup container, Bundle savedInstanceState) {
+		activeFragment = new MapMarkersActiveFragment();
+		historyFragment = new MapMarkersHistoryFragment();
+
 		FragmentManager fragmentManager = getChildFragmentManager();
 		Fragment markerOptionsFragment = fragmentManager.findFragmentByTag(MarkerOptionsBottomSheetDialogFragment.TAG);
 		if (markerOptionsFragment != null) {
@@ -77,17 +83,18 @@ public class MapMarkersDialogFragment extends android.support.v4.app.DialogFragm
 			public boolean onNavigationItemSelected(@NonNull MenuItem menuItem) {
 				switch (menuItem.getItemId()) {
 					case R.id.action_active:
-						((MapMarkersActiveFragment) adapter.getItem(0)).startLocationUpdate();
+						activeFragment.startLocationUpdate();
 						if (viewPager.getCurrentItem() != 0) {
-							((MapMarkersActiveFragment) adapter.getItem(0)).updateAdapter();
+							activeFragment.updateAdapter();
 						}
 						viewPager.setCurrentItem(0);
 						optionsButton.setVisibility(View.VISIBLE);
 						return true;
 					case R.id.action_history:
-						((MapMarkersActiveFragment) adapter.getItem(0)).stopLocationUpdate();
+						activeFragment.stopLocationUpdate();
 						if (viewPager.getCurrentItem() != 1) {
-							((MapMarkersHistoryFragment) adapter.getItem(1)).updateAdapter();
+							historyFragment.updateAdapter();
+							activeFragment.hideSnackbar();
 						}
 						viewPager.setCurrentItem(1);
 						optionsButton.setVisibility(View.GONE);
@@ -131,7 +138,8 @@ public class MapMarkersDialogFragment extends android.support.v4.app.DialogFragm
 
 			@Override
 			public void moveAllToHistoryOnClick() {
-				Toast.makeText(getContext(), "Move all to history", Toast.LENGTH_SHORT).show();
+				mapActivity.getMyApplication().getMapMarkersHelper().removeActiveMarkers();
+				activeFragment.updateAdapter();
 			}
 		};
 	}
@@ -164,7 +172,7 @@ public class MapMarkersDialogFragment extends android.support.v4.app.DialogFragm
 
 		MapMarkersViewPagerAdapter(FragmentManager fm) {
 			super(fm);
-			fragments = Arrays.asList(new MapMarkersActiveFragment(), new MapMarkersHistoryFragment());
+			fragments = Arrays.asList(activeFragment, historyFragment);
 		}
 
 		@Override
