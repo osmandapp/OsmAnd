@@ -10,17 +10,87 @@ import net.osmand.plus.MapMarkersHelper.MapMarker;
 import net.osmand.plus.OsmandApplication;
 import net.osmand.plus.R;
 
+import java.text.DateFormatSymbols;
+import java.util.ArrayList;
+import java.util.Calendar;
 import java.util.List;
 
-public class MapMarkersHistoryAdapter extends RecyclerView.Adapter<MapMarkerItemViewHolder> {
+public class MapMarkersHistoryAdapter extends RecyclerView.Adapter<RecyclerView.ViewHolder> {
+
+	private static final int DATE_TYPE = 1;
+	private static final int MARKER_TYPE = 2;
+
+	private static final int TODAY_HEADER = 56;
+	private static final int YESTERDAY_HEADER = 57;
+	private static final int LAST_SEVEN_DAYS_HEADER = 58;
+	private static final int THIS_YEAR_HEADER = 59;
 
 	private OsmandApplication app;
-	private List<MapMarker> markers;
+	private List<Object> items = new ArrayList<>();
 	private MapMarkersHistoryAdapterListener listener;
 
 	public MapMarkersHistoryAdapter(OsmandApplication app) {
 		this.app = app;
-		markers = app.getMapMarkersHelper().getMapMarkersHistory();
+		createHeaders();
+	}
+
+	public void createHeaders() {
+		items.clear();
+
+		List<MapMarker> markersHistory = app.getMapMarkersHelper().getMapMarkersHistory();
+
+		int previousHeader = -1;
+		int monthsDisplayed = 0;
+
+		Calendar currentDateCalendar = Calendar.getInstance();
+		currentDateCalendar.setTimeInMillis(System.currentTimeMillis());
+		int currentDay = currentDateCalendar.get(Calendar.DAY_OF_YEAR);
+		int currentYear = currentDateCalendar.get(Calendar.YEAR);
+		Calendar markerCalendar = Calendar.getInstance();
+		for (int i = 0; i < markersHistory.size(); i++) {
+			MapMarker marker = markersHistory.get(i);
+			markerCalendar.setTimeInMillis(marker.visitedDate);
+			int markerDay = markerCalendar.get(Calendar.DAY_OF_YEAR);
+			int markerMonth = markerCalendar.get(Calendar.MONTH);
+			int markerYear = markerCalendar.get(Calendar.YEAR);
+			if (markerYear == currentYear) {
+				if (markerDay == currentDay) {
+					if (previousHeader != TODAY_HEADER) {
+						items.add(TODAY_HEADER);
+						previousHeader = TODAY_HEADER;
+					}
+					items.add(marker);
+				} else if (markerDay == currentDay - 1) {
+					if (previousHeader != YESTERDAY_HEADER) {
+						items.add(YESTERDAY_HEADER);
+						previousHeader = YESTERDAY_HEADER;
+					}
+					items.add(marker);
+				} else if (currentDay - 7 >= markerDay && markerYear != 1970) {
+					if (previousHeader != LAST_SEVEN_DAYS_HEADER) {
+						items.add(LAST_SEVEN_DAYS_HEADER);
+						previousHeader = LAST_SEVEN_DAYS_HEADER;
+					}
+					items.add(marker);
+				} else {
+					if (previousHeader != markerMonth && monthsDisplayed < 3) {
+						items.add(markerMonth);
+						previousHeader = markerMonth;
+						monthsDisplayed += 1;
+					} else if (previousHeader != markerMonth && previousHeader != THIS_YEAR_HEADER) {
+						items.add(THIS_YEAR_HEADER);
+						previousHeader = THIS_YEAR_HEADER;
+					}
+					items.add(marker);
+				}
+			} else {
+				if (previousHeader != markerYear) {
+					items.add(markerYear);
+					previousHeader = markerYear;
+				}
+				items.add(marker);
+			}
+		}
 	}
 
 	public void setAdapterListener(MapMarkersHistoryAdapterListener listener) {
@@ -28,53 +98,95 @@ public class MapMarkersHistoryAdapter extends RecyclerView.Adapter<MapMarkerItem
 	}
 
 	@Override
-	public MapMarkerItemViewHolder onCreateViewHolder(ViewGroup viewGroup, int i) {
-		View view = LayoutInflater.from(viewGroup.getContext()).inflate(R.layout.map_marker_item_new, viewGroup, false);
-		view.setOnClickListener(new View.OnClickListener() {
-			@Override
-			public void onClick(View view) {
-				listener.onItemClick(view);
-			}
-		});
-		return new MapMarkerItemViewHolder(view);
+	public RecyclerView.ViewHolder onCreateViewHolder(ViewGroup viewGroup, int viewType) {
+		if (viewType == MARKER_TYPE) {
+			View view = LayoutInflater.from(viewGroup.getContext()).inflate(R.layout.map_marker_item_new, viewGroup, false);
+			view.setOnClickListener(new View.OnClickListener() {
+				@Override
+				public void onClick(View view) {
+					listener.onItemClick(view);
+				}
+			});
+			return new MapMarkerItemViewHolder(view);
+		} else if (viewType == DATE_TYPE) {
+			View view = LayoutInflater.from(viewGroup.getContext()).inflate(R.layout.map_marker_item_date, viewGroup, false);
+			return new MapMarkerDateViewHolder(view);
+		} else {
+			throw new IllegalArgumentException("Unsupported view type");
+		}
 	}
 
 	@Override
-	public void onBindViewHolder(final MapMarkerItemViewHolder holder, int pos) {
+	public void onBindViewHolder(RecyclerView.ViewHolder holder, int position) {
 		IconsCache iconsCache = app.getIconsCache();
-		MapMarker marker = markers.get(pos);
+		if (holder instanceof MapMarkerItemViewHolder) {
+			final MapMarkerItemViewHolder itemViewHolder = (MapMarkerItemViewHolder) holder;
+			final MapMarker marker = (MapMarker) getItem(position);
+			itemViewHolder.iconReorder.setVisibility(View.GONE);
 
-		holder.iconReorder.setVisibility(View.GONE);
+			int color = MapMarker.getColorId(marker.colorIndex);
+			itemViewHolder.icon.setImageDrawable(iconsCache.getIcon(R.drawable.ic_action_flag_dark, color));
 
-		int color = MapMarker.getColorId(marker.colorIndex);
-		holder.icon.setImageDrawable(iconsCache.getIcon(R.drawable.ic_action_flag_dark, color));
+			itemViewHolder.title.setText(marker.getName(app));
 
-		holder.title.setText(marker.getName(app));
+			itemViewHolder.description.setText(marker.visitedDate + "");
 
-		holder.description.setText(marker.visitedDate + "");
-
-		holder.optionsBtn.setImageDrawable(iconsCache.getThemedIcon(R.drawable.ic_action_history));
-		holder.optionsBtn.setOnClickListener(new View.OnClickListener() {
-			@Override
-			public void onClick(View view) {
-				int position = holder.getAdapterPosition();
-				if (position < 0) {
-					return;
+			itemViewHolder.optionsBtn.setImageDrawable(iconsCache.getThemedIcon(R.drawable.ic_action_history));
+			itemViewHolder.optionsBtn.setOnClickListener(new View.OnClickListener() {
+				@Override
+				public void onClick(View view) {
+					int position = itemViewHolder.getAdapterPosition();
+					if (position < 0) {
+						return;
+					}
+					app.getMapMarkersHelper().restoreMarkerFromHistory(marker, 0);
+					notifyItemRemoved(position);
 				}
-				MapMarker marker = markers.get(position);
-				app.getMapMarkersHelper().restoreMarkerFromHistory(marker, 0);
-				notifyItemRemoved(position);
+			});
+		} else if (holder instanceof MapMarkerDateViewHolder) {
+			final MapMarkerDateViewHolder dateViewHolder = (MapMarkerDateViewHolder) holder;
+			final Integer dateHeader = (Integer) getItem(position);
+			String dateString;
+			if (dateHeader == TODAY_HEADER) {
+				dateString = app.getString(R.string.today);
+			} else if (dateHeader == YESTERDAY_HEADER) {
+				dateString = app.getString(R.string.yesterday);
+			} else if (dateHeader == LAST_SEVEN_DAYS_HEADER) {
+				dateString = app.getString(R.string.last_seven_days);
+			} else if (dateHeader == THIS_YEAR_HEADER) {
+				dateString = app.getString(R.string.this_year);
+			} else if (dateHeader % 100 == 0) {
+				dateString = getMonth(dateHeader);
+			} else {
+				dateString = String.valueOf(dateHeader);
 			}
-		});
+			dateViewHolder.date.setText(dateString);
+		}
+	}
+
+	@Override
+	public int getItemViewType(int position) {
+		Object item = items.get(position);
+		if (item instanceof MapMarker) {
+			return MARKER_TYPE;
+		} else if (item instanceof Integer) {
+			return DATE_TYPE;
+		} else {
+			throw new IllegalArgumentException("Unsupported view type");
+		}
 	}
 
 	@Override
 	public int getItemCount() {
-		return markers.size();
+		return items.size();
 	}
 
-	public MapMarker getItem(int position) {
-		return markers.get(position);
+	public Object getItem(int position) {
+		return items.get(position);
+	}
+
+	private String getMonth(int month) {
+		return new DateFormatSymbols().getMonths()[month-1];
 	}
 
 	public interface MapMarkersHistoryAdapterListener {

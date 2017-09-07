@@ -11,17 +11,28 @@ import android.view.View;
 import android.view.ViewGroup;
 
 import net.osmand.data.PointDescription;
+import net.osmand.plus.MapMarkersHelper;
 import net.osmand.plus.MapMarkersHelper.MapMarker;
+import net.osmand.plus.OsmandApplication;
 import net.osmand.plus.activities.MapActivity;
 import net.osmand.plus.mapmarkers.adapters.MapMarkersHistoryAdapter;
 
-public class MapMarkersHistoryFragment extends Fragment {
+public class MapMarkersHistoryFragment extends Fragment implements MapMarkersHelper.MapMarkerChangedListener {
 
 	MapMarkersHistoryAdapter adapter;
+	OsmandApplication app;
+
+	@Override
+	public void onCreate(@Nullable Bundle savedInstanceState) {
+		super.onCreate(savedInstanceState);
+		app = getMyApplication();
+	}
 
 	@Nullable
 	@Override
 	public View onCreateView(LayoutInflater inflater, @Nullable ViewGroup container, @Nullable Bundle savedInstanceState) {
+		app = getMyApplication();
+
 		final RecyclerView recyclerView = new RecyclerView(getContext());
 		recyclerView.setLayoutManager(new LinearLayoutManager(getContext()));
 		final MapActivity mapActivity = (MapActivity) getActivity();
@@ -31,22 +42,48 @@ public class MapMarkersHistoryFragment extends Fragment {
 			@Override
 			public void onItemClick(View view) {
 				int pos = recyclerView.indexOfChild(view);
-				MapMarker marker = adapter.getItem(pos);
-				mapActivity.getMyApplication().getSettings().setMapLocationToShow(marker.getLatitude(), marker.getLongitude(),
-						15, new PointDescription(PointDescription.POINT_TYPE_LOCATION, marker.getPointDescription(mapActivity).getName()),
-						false, null);
-				MapActivity.launchMapActivityMoveToTop(mapActivity);
-				((DialogFragment) getParentFragment()).dismiss();
+				Object item = adapter.getItem(pos);
+				if (item instanceof MapMarker) {
+					MapMarker marker = (MapMarker) item;
+					mapActivity.getMyApplication().getSettings().setMapLocationToShow(marker.getLatitude(), marker.getLongitude(),
+							15, new PointDescription(PointDescription.POINT_TYPE_LOCATION, marker.getPointDescription(mapActivity).getName()),
+							false, null);
+					MapActivity.launchMapActivityMoveToTop(mapActivity);
+					((DialogFragment) getParentFragment()).dismiss();
+				}
 			}
 		});
 		recyclerView.setAdapter(adapter);
 
+		app.getMapMarkersHelper().addListener(this);
+
 		return recyclerView;
 	}
 
+	@Override
+	public void onDestroy() {
+		app.getMapMarkersHelper().removeListener(this);
+		super.onDestroy();
+	}
+
 	void updateAdapter() {
+		adapter.createHeaders();
 		if (adapter != null) {
 			adapter.notifyDataSetChanged();
 		}
+	}
+
+	public OsmandApplication getMyApplication() {
+		return (OsmandApplication)getActivity().getApplication();
+	}
+
+	@Override
+	public void onMapMarkerChanged(MapMarker mapMarker) {
+		updateAdapter();
+	}
+
+	@Override
+	public void onMapMarkersChanged() {
+		updateAdapter();
 	}
 }

@@ -9,6 +9,10 @@
          3. All your modified/created strings are in the top of the file (to make easier find what\'s translated).
     PLEASE: Have a look at http://code.google.com/p/osmand/wiki/UIConsistency, it may really improve your and our work  :-)  Thx - Hardy
     -->
+    <string name="today">Today</string>
+    <string name="yesterday">Yesterday</string>
+    <string name="last_seven_days">Last 7 days</string>
+    <string name="this_year">This year</string>
     <string name="widget">Widget</string>
     <string name="top_bar">Top bar</string>
     <string name="move_all_to_history">Move all to history</string>

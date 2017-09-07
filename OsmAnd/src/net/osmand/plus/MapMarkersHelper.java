@@ -10,6 +10,8 @@ import net.osmand.plus.mapmarkers.MapMarkersDbHelper;
 import net.osmand.util.Algorithms;
 
 import java.util.ArrayList;
+import java.util.Collections;
+import java.util.Comparator;
 import java.util.List;
 
 public class MapMarkersHelper {
@@ -172,12 +174,48 @@ public class MapMarkersHelper {
 	private void loadMarkers() {
 		mapMarkers.clear();
 		mapMarkersHistory.clear();
-		mapMarkers.addAll(markersDbHelper.getActiveMarkers());
-		mapMarkersHistory.addAll(markersDbHelper.getMarkersHistory());
+
+		List<MapMarker> activeMarkers = markersDbHelper.getActiveMarkers();
+		sortActiveMarkers(activeMarkers);
+		mapMarkers.addAll(activeMarkers);
+
+		List<MapMarker> markersHistory = markersDbHelper.getMarkersHistory();
+		sortHistoryMarkers(markersHistory);
+		mapMarkersHistory.addAll(markersHistory);
 
 		if (!ctx.isApplicationInitializing()) {
 			lookupAddressAll();
 		}
+	}
+
+	private void sortActiveMarkers(List<MapMarker> markers) {
+		Collections.sort(markers, new Comparator<MapMarker>() {
+			@Override
+			public int compare(MapMarker mapMarker1, MapMarker mapMarker2) {
+				if (mapMarker1.creationDate > mapMarker2.creationDate) {
+					return -1;
+				} else if (mapMarker1.creationDate == mapMarker2.creationDate) {
+					return 0;
+				} else {
+					return 1;
+				}
+			}
+		});
+	}
+
+	private void sortHistoryMarkers(List<MapMarker> markers) {
+		Collections.sort(markers, new Comparator<MapMarker>() {
+			@Override
+			public int compare(MapMarker mapMarker1, MapMarker mapMarker2) {
+				if (mapMarker1.visitedDate > mapMarker2.visitedDate) {
+					return -1;
+				} else if (mapMarker1.visitedDate == mapMarker2.visitedDate) {
+					return 0;
+				} else {
+					return 1;
+				}
+			}
+		});
 	}
 
 	private void lookupAddress(final MapMarker mapMarker) {
