@@ -61,6 +61,7 @@ public class ShowDirectionBottomSheetDialogFragment extends BottomSheetDialogFra
 					return false;
 				}
 			});
+			topBarImage.setOnClickListener(topBarOnClickListener);
 
 			mainView.findViewById(R.id.widget_text).setOnTouchListener(new View.OnTouchListener() {
 				@Override
@@ -68,6 +69,7 @@ public class ShowDirectionBottomSheetDialogFragment extends BottomSheetDialogFra
 					return false;
 				}
 			});
+			widgetImage.setOnClickListener(widgetOnClickListener);
 		}
 
 		if (nightMode) {
@@ -142,6 +144,21 @@ public class ShowDirectionBottomSheetDialogFragment extends BottomSheetDialogFra
 			window.setAttributes(params);
 		}
 	}
+
+	private View.OnClickListener topBarOnClickListener = new View.OnClickListener() {
+
+		@Override
+		public void onClick(View view) {
+
+		}
+	};
+
+	private View.OnClickListener widgetOnClickListener = new View.OnClickListener() {
+		@Override
+		public void onClick(View view) {
+
+		}
+	};
 
 	interface ShowDirectionFragmentListener {
 
