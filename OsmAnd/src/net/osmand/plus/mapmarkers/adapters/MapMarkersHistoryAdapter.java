@@ -10,10 +10,12 @@ import net.osmand.plus.MapMarkersHelper.MapMarker;
 import net.osmand.plus.OsmandApplication;
 import net.osmand.plus.R;
 
-import java.text.DateFormatSymbols;
+import java.text.SimpleDateFormat;
 import java.util.ArrayList;
 import java.util.Calendar;
+import java.util.Date;
 import java.util.List;
+import java.util.Locale;
 
 public class MapMarkersHistoryAdapter extends RecyclerView.Adapter<RecyclerView.ViewHolder> {
 
@@ -36,6 +38,22 @@ public class MapMarkersHistoryAdapter extends RecyclerView.Adapter<RecyclerView.
 
 	public void createHeaders() {
 		items.clear();
+
+//		test
+//		items.add(1);
+//		items.add(2);
+//		items.add(3);
+//		items.add(4);
+//		items.add(5);
+//		items.add(6);
+//		items.add(7);
+//		items.add(8);
+//		items.add(9);
+//		items.add(10);
+//		items.add(11);
+//		items.add(12);
+//		items.add(2016);
+//		items.add(2015);
 
 		List<MapMarker> markersHistory = app.getMapMarkersHelper().getMapMarkersHistory();
 
@@ -186,7 +204,10 @@ public class MapMarkersHistoryAdapter extends RecyclerView.Adapter<RecyclerView.
 	}
 
 	private String getMonth(int month) {
-		return new DateFormatSymbols().getMonths()[month-1];
+		SimpleDateFormat dateFormat = new SimpleDateFormat("LLLL", Locale.getDefault());
+		Date date = new Date();
+		date.setMonth(month);
+		return dateFormat.format(date);
 	}
 
 	public interface MapMarkersHistoryAdapterListener {
