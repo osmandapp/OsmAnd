@@ -404,11 +404,15 @@ public class FavoritesTreeFragment extends OsmandExpandableListFragment {
 				int size = getSelectedFavoritesCount();
 				List<LatLon> points = new ArrayList<>(size);
 				List<PointDescription> names = new ArrayList<>(size);
-				for (FavouritePoint fp : getSelectedFavorites()) {
-					points.add(new LatLon(fp.getLatitude(), fp.getLongitude()));
-					names.add(new PointDescription(PointDescription.POINT_TYPE_MAP_MARKER, fp.getName()));
+				List<String> groups = new ArrayList<>(size);
+				for (Map.Entry<String, Set<FavouritePoint>> entry : favoritesSelected.entrySet()) {
+					for (FavouritePoint fp : entry.getValue()) {
+						points.add(new LatLon(fp.getLatitude(), fp.getLongitude()));
+						names.add(new PointDescription(PointDescription.POINT_TYPE_MAP_MARKER, fp.getName()));
+						groups.add(entry.getKey());
+					}
 				}
-				markersHelper.addMapMarkers(points, names);
+				markersHelper.addMapMarkers(points, names, groups);
 				MapActivity.launchMapActivityMoveToTop(getActivity());
 			} else {
 				final TargetPointsHelper targetPointsHelper = getMyApplication().getTargetPointsHelper();

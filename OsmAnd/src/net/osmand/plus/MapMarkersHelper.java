@@ -327,14 +327,18 @@ public class MapMarkersHelper {
 	}
 
 	public void addMapMarker(LatLon point, PointDescription historyName) {
-		List<LatLon> points = new ArrayList<>(1);
-		List<PointDescription> historyNames = new ArrayList<>(1);
-		points.add(point);
-		historyNames.add(historyName);
-		addMapMarkers(points, historyNames);
+		addMarkers(Collections.singletonList(point), Collections.singletonList(historyName), null);
+	}
+
+	public void addMapMarkers(List<LatLon> points, List<PointDescription> historyNames, List<String> groups) {
+		addMarkers(points, historyNames, groups);
 	}
 
 	public void addMapMarkers(List<LatLon> points, List<PointDescription> historyNames) {
+		addMarkers(points, historyNames, null);
+	}
+
+	private void addMarkers(List<LatLon> points, List<PointDescription> historyNames, @Nullable List<String> groups) {
 		if (points.size() > 0) {
 			int colorIndex = -1;
 			for (int i = 0; i < points.size(); i++) {
@@ -360,6 +364,9 @@ public class MapMarkersHelper {
 				}
 
 				MapMarker marker = new MapMarker(point, pointDescription, colorIndex, false, 0);
+				if (groups != null) {
+					marker.groupKey = markersDbHelper.createGroupIfNeeded(groups.get(i));
+				}
 				markersDbHelper.addMarker(marker);
 			}
 			loadMarkers();
