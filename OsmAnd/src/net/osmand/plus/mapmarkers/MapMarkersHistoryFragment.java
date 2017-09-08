@@ -44,12 +44,9 @@ public class MapMarkersHistoryFragment extends Fragment implements MapMarkersHel
 				int pos = recyclerView.indexOfChild(view);
 				Object item = adapter.getItem(pos);
 				if (item instanceof MapMarker) {
-					MapMarker marker = (MapMarker) item;
-					mapActivity.getMyApplication().getSettings().setMapLocationToShow(marker.getLatitude(), marker.getLongitude(),
-							15, new PointDescription(PointDescription.POINT_TYPE_LOCATION, marker.getPointDescription(mapActivity).getName()),
-							false, null);
-					MapActivity.launchMapActivityMoveToTop(mapActivity);
-					((DialogFragment) getParentFragment()).dismiss();
+					HistoryMarkerMenuBottomSheetDialogFragment fragment = new HistoryMarkerMenuBottomSheetDialogFragment();
+					fragment.setMarker((MapMarker) item);
+					fragment.show(mapActivity.getSupportFragmentManager(), HistoryMarkerMenuBottomSheetDialogFragment.TAG);
 				}
 			}
 		});
