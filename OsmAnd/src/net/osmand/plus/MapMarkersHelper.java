@@ -356,7 +356,7 @@ public class MapMarkersHelper {
 				}
 				if (colorIndex == -1) {
 					if (mapMarkers.size() > 0) {
-						colorIndex = (mapMarkers.get(mapMarkers.size() - 1).colorIndex + 1) % MAP_MARKERS_COLORS_COUNT;
+						colorIndex = (mapMarkers.get(0).colorIndex + 1) % MAP_MARKERS_COLORS_COUNT;
 					} else {
 						colorIndex = 0;
 					}
