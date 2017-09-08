@@ -345,16 +345,7 @@ public class MapWidgetRegistry {
 								@Override
 								public void onClick(DialogInterface dialog, int which) {
 									settings.MAP_MARKERS_MODE.set(MapMarkersMode.values()[which]);
-									for (MapWidgetRegInfo info : rightWidgetSet) {
-										if ("map_marker_1st".equals(info.key) || "map_marker_2nd".equals(info.key)) {
-											setVisibility(info, settings.MAP_MARKERS_MODE.get().isWidgets(), false);
-										}
-									}
-									MapInfoLayer mil = map.getMapLayers().getMapInfoLayer();
-									if (mil != null) {
-										mil.recreateControls();
-									}
-									map.refreshMap();
+									updateMapMarkersMode(map);
 									dialog.dismiss();
 									cm.getItem(pos).setDescription(settings.MAP_MARKERS_MODE.get().toHumanString(map));
 									ad.notifyDataSetChanged();
@@ -365,6 +356,19 @@ public class MapWidgetRegistry {
 						}
 					}).setLayout(R.layout.list_item_text_button).createItem());
 		}
+	}
+
+	public void updateMapMarkersMode(MapActivity mapActivity) {
+		for (MapWidgetRegInfo info : rightWidgetSet) {
+			if ("map_marker_1st".equals(info.key) || "map_marker_2nd".equals(info.key)) {
+				setVisibility(info, settings.MAP_MARKERS_MODE.get().isWidgets(), false);
+			}
+		}
+		MapInfoLayer mil = mapActivity.getMapLayers().getMapInfoLayer();
+		if (mil != null) {
+			mil.recreateControls();
+		}
+		mapActivity.refreshMap();
 	}
 
 	private void addControlId(final MapActivity map, ContextMenuAdapter cm,

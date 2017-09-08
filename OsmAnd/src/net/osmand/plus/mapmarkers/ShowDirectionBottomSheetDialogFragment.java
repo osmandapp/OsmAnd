@@ -15,6 +15,7 @@ import android.widget.ImageView;
 import android.widget.TextView;
 
 import net.osmand.AndroidUtils;
+import net.osmand.plus.OsmandSettings;
 import net.osmand.plus.R;
 import net.osmand.plus.base.BottomSheetDialogFragment;
 import net.osmand.plus.helpers.AndroidUiHelper;
@@ -61,7 +62,7 @@ public class ShowDirectionBottomSheetDialogFragment extends BottomSheetDialogFra
 					return false;
 				}
 			});
-			topBarImage.setOnClickListener(topBarOnClickListener);
+			topBarImage.setOnClickListener(showDirectionOnClickListener);
 
 			mainView.findViewById(R.id.widget_text).setOnTouchListener(new View.OnTouchListener() {
 				@Override
@@ -69,7 +70,7 @@ public class ShowDirectionBottomSheetDialogFragment extends BottomSheetDialogFra
 					return false;
 				}
 			});
-			widgetImage.setOnClickListener(widgetOnClickListener);
+			widgetImage.setOnClickListener(showDirectionOnClickListener);
 		}
 
 		if (nightMode) {
@@ -86,6 +87,10 @@ public class ShowDirectionBottomSheetDialogFragment extends BottomSheetDialogFra
 
 		ImageView noneIcon = (ImageView) mainView.findViewById(R.id.none_icon);
 		noneIcon.setBackgroundDrawable(getIcon(R.drawable.ic_action_device_top, R.color.on_map_icon_color));
+
+		mainView.findViewById(R.id.top_bar_row).setOnClickListener(showDirectionOnClickListener);
+		mainView.findViewById(R.id.widget_row).setOnClickListener(showDirectionOnClickListener);
+		mainView.findViewById(R.id.none_row).setOnClickListener(showDirectionOnClickListener);
 
 		mainView.findViewById(R.id.cancel_row).setOnClickListener(new View.OnClickListener() {
 			@Override
@@ -145,22 +150,31 @@ public class ShowDirectionBottomSheetDialogFragment extends BottomSheetDialogFra
 		}
 	}
 
-	private View.OnClickListener topBarOnClickListener = new View.OnClickListener() {
+	private View.OnClickListener showDirectionOnClickListener = new View.OnClickListener() {
 
 		@Override
 		public void onClick(View view) {
-
-		}
-	};
-
-	private View.OnClickListener widgetOnClickListener = new View.OnClickListener() {
-		@Override
-		public void onClick(View view) {
-
+			switch (view.getId()) {
+				case R.id.top_bar_image:
+				case R.id.top_bar_row:
+					getMyApplication().getSettings().MAP_MARKERS_MODE.set(OsmandSettings.MapMarkersMode.TOOLBAR);
+					break;
+				case R.id.widget_image:
+				case R.id.widget_row:
+					getMyApplication().getSettings().MAP_MARKERS_MODE.set(OsmandSettings.MapMarkersMode.WIDGETS);
+					break;
+				case R.id.none_row:
+					getMyApplication().getSettings().MAP_MARKERS_MODE.set(OsmandSettings.MapMarkersMode.NONE);
+					break;
+			}
+			if (listener != null) {
+				listener.onMapMarkersModeChanged();
+			}
+			dismiss();
 		}
 	};
 
 	interface ShowDirectionFragmentListener {
-
+		void onMapMarkersModeChanged();
 	}
 }

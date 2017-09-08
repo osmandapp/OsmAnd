@@ -52,7 +52,7 @@ public class MarkerOptionsBottomSheetDialogFragment extends BottomSheetDialogFra
 		((ImageView) mainView.findViewById(R.id.move_all_to_history_icon))
 				.setImageDrawable(getIcon(R.drawable.ic_action_history2, R.color.on_map_icon_color));
 
-		((TextView) mainView.findViewById(R.id.show_direction_text_view)).setText("Top bar");
+		((TextView) mainView.findViewById(R.id.show_direction_text_view)).setText(getMyApplication().getSettings().MAP_MARKERS_MODE.get().toHumanString(getActivity()));
 
 		mainView.findViewById(R.id.sort_by_row).setOnClickListener(new View.OnClickListener() {
 			@Override

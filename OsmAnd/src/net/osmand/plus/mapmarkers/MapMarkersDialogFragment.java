@@ -19,6 +19,7 @@ import net.osmand.plus.OsmandApplication;
 import net.osmand.plus.OsmandSettings;
 import net.osmand.plus.R;
 import net.osmand.plus.activities.MapActivity;
+import net.osmand.plus.mapmarkers.ShowDirectionBottomSheetDialogFragment.ShowDirectionFragmentListener;
 import net.osmand.plus.mapmarkers.MarkerOptionsBottomSheetDialogFragment.MarkerOptionsFragmentListener;
 
 import java.util.Arrays;
@@ -64,6 +65,10 @@ public class MapMarkersDialogFragment extends android.support.v4.app.DialogFragm
 		Fragment markerOptionsFragment = fragmentManager.findFragmentByTag(MarkerOptionsBottomSheetDialogFragment.TAG);
 		if (markerOptionsFragment != null) {
 			((MarkerOptionsBottomSheetDialogFragment) markerOptionsFragment).setListener(createMarkerOptionsFragmentListener());
+		}
+		Fragment showDirectionFragment = fragmentManager.findFragmentByTag(ShowDirectionBottomSheetDialogFragment.TAG);
+		if (showDirectionFragment != null) {
+			((ShowDirectionBottomSheetDialogFragment) showDirectionFragment).setListener(createShowDirectionFragmentListener());
 		}
 
 		View mainView = inflater.inflate(R.layout.fragment_map_markers_dialog, container);
@@ -137,7 +142,9 @@ public class MapMarkersDialogFragment extends android.support.v4.app.DialogFragm
 
 			@Override
 			public void showDirectionOnClick() {
-				openShowDirectionMenu(mapActivity);
+				ShowDirectionBottomSheetDialogFragment fragment = new ShowDirectionBottomSheetDialogFragment();
+				fragment.setListener(createShowDirectionFragmentListener());
+				fragment.show(mapActivity.getSupportFragmentManager(), ShowDirectionBottomSheetDialogFragment.TAG);
 			}
 
 			@Override
@@ -158,9 +165,16 @@ public class MapMarkersDialogFragment extends android.support.v4.app.DialogFragm
 		};
 	}
 
-	private void openShowDirectionMenu(MapActivity mapActivity) {
-		ShowDirectionBottomSheetDialogFragment fragment = new ShowDirectionBottomSheetDialogFragment();
-		fragment.show(mapActivity.getSupportFragmentManager(), ShowDirectionBottomSheetDialogFragment.TAG);
+	private ShowDirectionFragmentListener createShowDirectionFragmentListener() {
+		return new ShowDirectionFragmentListener() {
+
+			final MapActivity mapActivity = getMapActivity();
+
+			@Override
+			public void onMapMarkersModeChanged() {
+				mapActivity.getMapLayers().getMapWidgetRegistry().updateMapMarkersMode(mapActivity);
+			}
+		};
 	}
 
 	private MapActivity getMapActivity() {
