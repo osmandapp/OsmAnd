@@ -961,10 +961,8 @@ public class GeoPointParserUtil {
 								if (vls.length == 2) {
 									lat = parseSilentDouble(vls[0]);
 									lon = parseSilentDouble(vls[1]);
-									if (lat == 0 || lon == 0) {
-										return new GeoParsedPoint(queryStr);
-									}
-								} else {
+								}
+								if (lat == 0 || lon == 0) {
 									return new GeoParsedPoint(queryStr);
 								}
 							}
