@@ -43,8 +43,20 @@ public class MapMarkersDialogFragment extends android.support.v4.app.DialogFragm
 	@Nullable
 	@Override
 	public View onCreateView(LayoutInflater inflater, @Nullable ViewGroup container, Bundle savedInstanceState) {
-		activeFragment = new MapMarkersActiveFragment();
-		historyFragment = new MapMarkersHistoryFragment();
+		List<Fragment> fragments = getChildFragmentManager().getFragments();
+		for (Fragment fragment : fragments) {
+			if (fragment instanceof MapMarkersActiveFragment) {
+				activeFragment = (MapMarkersActiveFragment) fragment;
+			} else if (fragment instanceof MapMarkersHistoryFragment) {
+				historyFragment = (MapMarkersHistoryFragment) fragment;
+			}
+		}
+		if (activeFragment == null) {
+			activeFragment = new MapMarkersActiveFragment();
+		}
+		if (historyFragment == null) {
+			historyFragment = new MapMarkersHistoryFragment();
+		}
 
 		FragmentManager fragmentManager = getChildFragmentManager();
 		Fragment markerOptionsFragment = fragmentManager.findFragmentByTag(MarkerOptionsBottomSheetDialogFragment.TAG);
