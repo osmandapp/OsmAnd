@@ -12,6 +12,7 @@ import net.osmand.plus.api.SQLiteAPI.SQLiteConnection;
 import net.osmand.plus.api.SQLiteAPI.SQLiteCursor;
 import net.osmand.plus.helpers.SearchHistoryHelper;
 
+import java.util.Calendar;
 import java.util.LinkedList;
 import java.util.List;
 import java.util.Random;
@@ -122,7 +123,7 @@ public class MapMarkersDbHelper {
 			MapMarker marker = new MapMarker(ips.get(i), PointDescription.deserializeFromString(desc.get(i), ips.get(i)),
 					colorIndex, false, i);
 			marker.history = false;
-			addMarker(marker);
+			addMarker(marker, true);
 		}
 
 		ips = settings.getMapMarkersHistoryPoints();
@@ -135,7 +136,7 @@ public class MapMarkersDbHelper {
 			MapMarker marker = new MapMarker(ips.get(i), PointDescription.deserializeFromString(desc.get(i), ips.get(i)),
 					colorIndex, false, i);
 			marker.history = true;
-			addMarker(marker);
+			addMarker(marker, true);
 		}
 	}
 
@@ -148,25 +149,36 @@ public class MapMarkersDbHelper {
 	}
 
 	public void addMarker(MapMarker marker) {
+		addMarker(marker, false);
+	}
+
+	private void addMarker(MapMarker marker, boolean saveExisting) {
 		SQLiteConnection db = openConnection(false);
 		if (db != null) {
 			try {
-				insertLast(db, marker);
+				insertLast(db, marker, saveExisting);
 			} finally {
 				db.close();
 			}
 		}
 	}
 
-	private void insertLast(SQLiteConnection db, MapMarker marker) {
-		long currentTime = System.currentTimeMillis();
+	private void insertLast(SQLiteConnection db, MapMarker marker, boolean saveExisting) {
+		long currentTime;
+		if (saveExisting) {
+			Calendar cal = Calendar.getInstance();
+			cal.add(Calendar.MONTH, -1);
+			currentTime = cal.getTimeInMillis();
+		} else {
+			currentTime = System.currentTimeMillis();
+		}
 		marker.id = Long.parseLong(String.valueOf(currentTime) + String.valueOf(new Random().nextInt(900) + 100));
 		marker.creationDate = currentTime;
 		double lat = marker.getLatitude();
 		double lon = marker.getLongitude();
 		String descr = PointDescription.serializeToString(marker.getOriginalPointDescription());
 		int active = marker.history ? 0 : 1;
-		long visited = 0;
+		long visited = saveExisting ? currentTime : 0;
 		int groupKey = 0;
 		int colorIndex = marker.colorIndex;
 
