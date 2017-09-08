@@ -43,7 +43,7 @@ public class MapMarkersDbHelper {
 			MARKERS_COL_ACTIVE + " int, " + // 1 = true, 0 = false
 			MARKERS_COL_ADDED + " long, " +
 			MARKERS_COL_VISITED + " long, " +
-			MARKERS_COL_GROUP_KEY + " int, " +
+			MARKERS_COL_GROUP_KEY + " long, " +
 			MARKERS_COL_COLOR + " int, " +
 			MARKERS_COL_NEXT_KEY + " long);";
 
@@ -61,15 +61,18 @@ public class MapMarkersDbHelper {
 			" FROM " + MARKERS_TABLE_NAME;
 
 	private static final String GROUPS_TABLE_NAME = "map_markers_groups";
+	private static final String GROUPS_COL_ID = "group_id";
 	private static final String GROUPS_COL_NAME = "group_name";
-	private static final String GROUPS_COL_TYPE = "group_type";
-	private static final String GROUPS_COL_ADDED = "group_added";
 
 	private static final String GROUPS_TABLE_CREATE = "CREATE TABLE IF NOT EXISTS " +
 			GROUPS_TABLE_NAME + " (" +
-			GROUPS_COL_NAME + " TEXT, " +
-			GROUPS_COL_TYPE + " TEXT, " +
-			GROUPS_COL_ADDED + " long);";
+			GROUPS_COL_ID + " long PRIMARY KEY, " +
+			GROUPS_COL_NAME + " TEXT);";
+
+	private static final String GROUPS_TABLE_SELECT = "SELECT " +
+			GROUPS_COL_ID + ", " +
+			GROUPS_COL_NAME +
+			" FROM " + GROUPS_TABLE_NAME;
 
 	private static final int TAIL_NEXT_VALUE = 0;
 	private static final int HISTORY_NEXT_VALUE = -1;
@@ -148,6 +151,26 @@ public class MapMarkersDbHelper {
 		}
 	}
 
+	public long createGroupIfNeeded(String name) {
+		long res = -1;
+		SQLiteConnection db = openConnection(false);
+		if (db != null) {
+			try {
+				SQLiteCursor query = db.rawQuery(GROUPS_TABLE_SELECT + " WHERE " + GROUPS_COL_NAME + " = ?",
+						new String[]{name});
+				if (query.moveToFirst()) {
+					res = query.getLong(0);
+				} else {
+					res = Long.parseLong(String.valueOf(System.currentTimeMillis()) + String.valueOf(new Random().nextInt(900) + 100));
+					db.execSQL("INSERT INTO " + GROUPS_TABLE_NAME + " VALUES (?, ?)", new Object[]{res, name});
+				}
+			} finally {
+				db.close();
+			}
+		}
+		return res;
+	}
+
 	public void addMarker(MapMarker marker) {
 		addMarker(marker, false);
 	}
@@ -179,7 +202,7 @@ public class MapMarkersDbHelper {
 		String descr = PointDescription.serializeToString(marker.getOriginalPointDescription());
 		int active = marker.history ? 0 : 1;
 		long visited = saveExisting ? currentTime : 0;
-		int groupKey = 0;
+		long groupKey = marker.groupKey;
 		int colorIndex = marker.colorIndex;
 
 		PointDescription pointDescription = marker.getOriginalPointDescription();
@@ -196,6 +219,23 @@ public class MapMarkersDbHelper {
 		db.execSQL("INSERT INTO " + MARKERS_TABLE_NAME + " VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?, ?)",
 				new Object[]{marker.id, lat, lon, descr, active, currentTime, visited, groupKey, colorIndex,
 						marker.history ? HISTORY_NEXT_VALUE : TAIL_NEXT_VALUE});
+	}
+
+	public String getGroupName(long id) {
+		String res = "";
+		SQLiteConnection db = openConnection(true);
+		if (db != null) {
+			try {
+				SQLiteCursor query = db.rawQuery(GROUPS_TABLE_SELECT + " WHERE " + GROUPS_COL_ID + " = ?",
+						new String[]{String.valueOf(id)});
+				if (query.moveToFirst()) {
+					res = query.getString(1);
+				}
+			} finally {
+				db.close();
+			}
+		}
+		return res;
 	}
 
 	public List<MapMarker> getActiveMarkers() {
@@ -229,18 +269,19 @@ public class MapMarkersDbHelper {
 		boolean active = query.getInt(4) == 1;
 		long added = query.getLong(5);
 		long visited = query.getLong(6);
-		int groupKey = query.getInt(7);
+		long groupKey = query.getInt(7);
 		int colorIndex = query.getInt(8);
 		long nextKey = query.getLong(9);
 
 		LatLon latLon = new LatLon(lat, lon);
 		MapMarker marker = new MapMarker(latLon, PointDescription.deserializeFromString(desc, latLon),
 				colorIndex, false, 0);
+		marker.id = id;
+		marker.history = !active;
 		marker.creationDate = added;
 		marker.visitedDate = visited;
-		marker.history = !active;
+		marker.groupKey = groupKey;
 		marker.nextKey = nextKey;
-		marker.id = id;
 
 		return marker;
 	}

@@ -43,6 +43,7 @@ public class MapMarkersHelper {
 		public long creationDate;
 		public long visitedDate;
 		public long nextKey;
+		public long groupKey = -1;
 
 		public MapMarker(LatLon point, PointDescription name, int colorIndex,
 						 boolean selected, int index) {
@@ -191,15 +192,8 @@ public class MapMarkersHelper {
 		Collections.sort(markers, new Comparator<MapMarker>() {
 			@Override
 			public int compare(MapMarker mapMarker1, MapMarker mapMarker2) {
-				long firstMarkerDate;
-				long secondMarkerDate;
-				if (history) {
-					firstMarkerDate = mapMarker1.visitedDate;
-					secondMarkerDate = mapMarker2.visitedDate;
-				} else {
-					firstMarkerDate = mapMarker1.creationDate;
-					secondMarkerDate = mapMarker2.creationDate;
-				}
+				long firstMarkerDate = history ? mapMarker1.visitedDate : mapMarker1.creationDate;
+				long secondMarkerDate = history ? mapMarker2.visitedDate : mapMarker2.creationDate;
 				if (firstMarkerDate > secondMarkerDate) {
 					return -1;
 				} else if (firstMarkerDate == secondMarkerDate) {
@@ -228,6 +222,14 @@ public class MapMarkersHelper {
 			}, null);
 			ctx.getGeocodingLookupService().lookupAddress(lookupRequest);
 		}
+	}
+
+	public long createGroupIfNeeded(String name) {
+		return markersDbHelper.createGroupIfNeeded(name);
+	}
+
+	public String getGroupName(long id) {
+		return markersDbHelper.getGroupName(id);
 	}
 
 	public void moveMapMarkerToHistory(MapMarker marker) {
