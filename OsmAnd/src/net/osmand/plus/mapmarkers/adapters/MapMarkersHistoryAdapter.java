@@ -90,12 +90,15 @@ public class MapMarkersHistoryAdapter extends RecyclerView.Adapter<RecyclerView.
 						previousHeader = LAST_SEVEN_DAYS_HEADER;
 					}
 					items.add(marker);
-				} else {
-					if (previousHeader != markerMonth && monthsDisplayed < 3) {
+				} else if (monthsDisplayed < 3) {
+					if (previousHeader != markerMonth) {
 						items.add(markerMonth);
 						previousHeader = markerMonth;
 						monthsDisplayed += 1;
-					} else if (previousHeader != markerMonth && previousHeader != THIS_YEAR_HEADER) {
+					}
+					items.add(marker);
+				} else {
+					if (previousHeader != THIS_YEAR_HEADER) {
 						items.add(THIS_YEAR_HEADER);
 						previousHeader = THIS_YEAR_HEADER;
 					}
