@@ -19,7 +19,7 @@ import java.util.Random;
 
 public class MapMarkersDbHelper {
 
-	private static final int DB_VERSION = 1;
+	private static final int DB_VERSION = 2;
 	private static final String DB_NAME = "map_markers_db";
 
 	private static final String MARKERS_TABLE_NAME = "map_markers";
@@ -109,7 +109,9 @@ public class MapMarkersDbHelper {
 	}
 
 	private void onUpgrade(SQLiteConnection db, int oldVersion, int newVersion) {
-
+		db.execSQL("DROP TABLE " + MARKERS_TABLE_NAME);
+		db.execSQL("DROP TABLE " + GROUPS_TABLE_NAME);
+		onCreate(db);
 	}
 
 	private void saveExistingMarkersToDb() {
