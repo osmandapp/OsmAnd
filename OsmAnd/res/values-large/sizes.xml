@@ -121,6 +121,6 @@
 	<dimen name="measurement_tool_bottom_divider_margin_bottom">12dp</dimen>
 	<dimen name="measurement_tool_bottom_divider_margin_start">96dp</dimen>
 	<dimen name="bottom_sheet_image_text_margin_start">15dp</dimen>
-	<dimen name="measurement_tool_selected_point_title_height">84dp</dimen>
+	<dimen name="bottom_sheet_selected_item_title_height">84dp</dimen>
     
 </resources>
