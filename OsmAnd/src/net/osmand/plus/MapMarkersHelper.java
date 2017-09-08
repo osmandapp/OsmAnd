@@ -176,11 +176,10 @@ public class MapMarkersHelper {
 		mapMarkersHistory.clear();
 
 		List<MapMarker> activeMarkers = markersDbHelper.getActiveMarkers();
-		sortActiveMarkers(activeMarkers);
 		mapMarkers.addAll(activeMarkers);
 
 		List<MapMarker> markersHistory = markersDbHelper.getMarkersHistory();
-		sortHistoryMarkers(markersHistory);
+		sortMarkers(markersHistory, true);
 		mapMarkersHistory.addAll(markersHistory);
 
 		if (!ctx.isApplicationInitializing()) {
@@ -188,28 +187,22 @@ public class MapMarkersHelper {
 		}
 	}
 
-	private void sortActiveMarkers(List<MapMarker> markers) {
+	private void sortMarkers(List<MapMarker> markers, final boolean history) {
 		Collections.sort(markers, new Comparator<MapMarker>() {
 			@Override
 			public int compare(MapMarker mapMarker1, MapMarker mapMarker2) {
-				if (mapMarker1.creationDate > mapMarker2.creationDate) {
-					return -1;
-				} else if (mapMarker1.creationDate == mapMarker2.creationDate) {
-					return 0;
+				long firstMarkerDate;
+				long secondMarkerDate;
+				if (history) {
+					firstMarkerDate = mapMarker1.visitedDate;
+					secondMarkerDate = mapMarker2.visitedDate;
 				} else {
-					return 1;
+					firstMarkerDate = mapMarker1.creationDate;
+					secondMarkerDate = mapMarker2.creationDate;
 				}
-			}
-		});
-	}
-
-	private void sortHistoryMarkers(List<MapMarker> markers) {
-		Collections.sort(markers, new Comparator<MapMarker>() {
-			@Override
-			public int compare(MapMarker mapMarker1, MapMarker mapMarker2) {
-				if (mapMarker1.visitedDate > mapMarker2.visitedDate) {
+				if (firstMarkerDate > secondMarkerDate) {
 					return -1;
-				} else if (mapMarker1.visitedDate == mapMarker2.visitedDate) {
+				} else if (firstMarkerDate == secondMarkerDate) {
 					return 0;
 				} else {
 					return 1;
