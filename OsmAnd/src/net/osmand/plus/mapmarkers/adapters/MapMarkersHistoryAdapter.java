@@ -155,7 +155,7 @@ public class MapMarkersHistoryAdapter extends RecyclerView.Adapter<RecyclerView.
 				dateString = app.getString(R.string.last_seven_days);
 			} else if (dateHeader == THIS_YEAR_HEADER) {
 				dateString = app.getString(R.string.this_year);
-			} else if (dateHeader % 100 == 0) {
+			} else if (dateHeader / 100 == 0) {
 				dateString = getMonth(dateHeader);
 			} else {
 				dateString = String.valueOf(dateHeader);
