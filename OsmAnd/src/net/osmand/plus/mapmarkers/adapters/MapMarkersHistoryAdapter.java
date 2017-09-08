@@ -53,7 +53,7 @@ public class MapMarkersHistoryAdapter extends RecyclerView.Adapter<RecyclerView.
 			int markerDay = markerCalendar.get(Calendar.DAY_OF_YEAR);
 			int markerMonth = markerCalendar.get(Calendar.MONTH);
 			int markerYear = markerCalendar.get(Calendar.YEAR);
-			if (markerYear == currentYear) {
+			if (markerYear == currentYear || markerYear == 1970) {
 				if (markerDay == currentDay) {
 					if (previousHeader != TODAY_HEADER) {
 						items.add(TODAY_HEADER);
