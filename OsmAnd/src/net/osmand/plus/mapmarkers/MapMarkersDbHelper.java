@@ -221,8 +221,9 @@ public class MapMarkersDbHelper {
 						marker.history ? HISTORY_NEXT_VALUE : TAIL_NEXT_VALUE});
 	}
 
+	@Nullable
 	public String getGroupName(long id) {
-		String res = "";
+		String res = null;
 		SQLiteConnection db = openConnection(true);
 		if (db != null) {
 			try {

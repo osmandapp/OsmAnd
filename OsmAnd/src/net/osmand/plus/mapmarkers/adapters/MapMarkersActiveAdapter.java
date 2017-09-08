@@ -89,9 +89,16 @@ public class MapMarkersActiveAdapter extends RecyclerView.Adapter<MapMarkerItemV
 
 		holder.title.setText(marker.getName(mapActivity));
 
-		holder.description.setText(marker.groupKey == -1
-				? marker.creationDate + ""
-				: mapActivity.getMyApplication().getMapMarkersHelper().getGroupName(marker.groupKey));
+		String descr;
+		if (marker.groupKey != -1
+				&& (descr = mapActivity.getMyApplication().getMapMarkersHelper().getGroupName(marker.groupKey)) != null) {
+			if (descr.equals("")) {
+				descr = mapActivity.getString(R.string.shared_string_favorites);
+			}
+		} else {
+			descr = marker.creationDate + "";
+		}
+		holder.description.setText(descr);
 
 		holder.optionsBtn.setImageDrawable(iconsCache.getThemedIcon(R.drawable.ic_action_marker_passed));
 		holder.optionsBtn.setOnClickListener(new View.OnClickListener() {

@@ -228,6 +228,7 @@ public class MapMarkersHelper {
 		return markersDbHelper.createGroupIfNeeded(name);
 	}
 
+	@Nullable
 	public String getGroupName(long id) {
 		return markersDbHelper.getGroupName(id);
 	}
