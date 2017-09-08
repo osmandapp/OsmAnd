@@ -11,10 +11,12 @@ import android.view.ViewTreeObserver;
 import android.view.Window;
 import android.view.WindowManager;
 import android.widget.ImageView;
+import android.widget.TextView;
 
 import net.osmand.AndroidUtils;
 import net.osmand.plus.MapMarkersHelper.MapMarker;
 import net.osmand.plus.R;
+import net.osmand.plus.activities.MapActivity;
 import net.osmand.plus.base.BottomSheetDialogFragment;
 import net.osmand.plus.helpers.AndroidUiHelper;
 
@@ -37,6 +39,7 @@ public class HistoryMarkerMenuBottomSheetDialogFragment extends BottomSheetDialo
 	@Nullable
 	@Override
 	public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
+		MapActivity mapActivity = (MapActivity) getActivity();
 		portrait = AndroidUiHelper.isOrientationPortrait(getActivity());
 		boolean nightMode = getMyApplication().getDaynightHelper().isNightModeForMapControls();
 		final int themeRes = nightMode ? R.style.OsmandDarkTheme : R.style.OsmandLightTheme;
@@ -45,6 +48,14 @@ public class HistoryMarkerMenuBottomSheetDialogFragment extends BottomSheetDialo
 		if (portrait) {
 			AndroidUtils.setBackground(getActivity(), mainView, nightMode, R.drawable.bg_bottom_menu_light, R.drawable.bg_bottom_menu_dark);
 		}
+
+		if (marker != null) {
+			int color = MapMarker.getColorId(marker.colorIndex);
+			((ImageView) mainView.findViewById(R.id.map_marker_icon)).setImageDrawable(getIcon(R.drawable.ic_action_flag_dark, color));
+			((TextView) mainView.findViewById(R.id.map_marker_title)).setText(marker.getName(mapActivity));
+			((TextView) mainView.findViewById(R.id.map_marker_passed_info)).setText(String.valueOf(marker.visitedDate));
+		}
+
 		((ImageView) mainView.findViewById(R.id.make_active_icon)).setImageDrawable(getContentIcon(R.drawable.ic_action_reset_to_default_dark));
 		((ImageView) mainView.findViewById(R.id.delete_icon)).setImageDrawable(getContentIcon(R.drawable.ic_action_delete_dark));
 
