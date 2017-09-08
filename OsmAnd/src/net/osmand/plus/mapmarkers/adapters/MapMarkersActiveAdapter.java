@@ -89,7 +89,9 @@ public class MapMarkersActiveAdapter extends RecyclerView.Adapter<MapMarkerItemV
 
 		holder.title.setText(marker.getName(mapActivity));
 
-		holder.description.setText(marker.creationDate + "");
+		holder.description.setText(marker.groupKey == -1
+				? marker.creationDate + ""
+				: mapActivity.getMyApplication().getMapMarkersHelper().getGroupName(marker.groupKey));
 
 		holder.optionsBtn.setImageDrawable(iconsCache.getThemedIcon(R.drawable.ic_action_marker_passed));
 		holder.optionsBtn.setOnClickListener(new View.OnClickListener() {
