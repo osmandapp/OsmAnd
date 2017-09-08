@@ -71,7 +71,7 @@ public class MapMarkersHistoryAdapter extends RecyclerView.Adapter<RecyclerView.
 			int markerDay = markerCalendar.get(Calendar.DAY_OF_YEAR);
 			int markerMonth = markerCalendar.get(Calendar.MONTH);
 			int markerYear = markerCalendar.get(Calendar.YEAR);
-			if (markerYear == currentYear || markerYear == 1970) {
+			if (markerYear == currentYear) {
 				if (markerDay == currentDay) {
 					if (previousHeader != TODAY_HEADER) {
 						items.add(TODAY_HEADER);
@@ -84,7 +84,7 @@ public class MapMarkersHistoryAdapter extends RecyclerView.Adapter<RecyclerView.
 						previousHeader = YESTERDAY_HEADER;
 					}
 					items.add(marker);
-				} else if (currentDay - 7 >= markerDay && markerYear != 1970) {
+				} else if (currentDay - 7 >= markerDay) {
 					if (previousHeader != LAST_SEVEN_DAYS_HEADER) {
 						items.add(LAST_SEVEN_DAYS_HEADER);
 						previousHeader = LAST_SEVEN_DAYS_HEADER;
