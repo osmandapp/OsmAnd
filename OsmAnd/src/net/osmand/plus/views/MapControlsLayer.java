@@ -1193,12 +1193,15 @@ public class MapControlsLayer extends OsmandMapLayer {
 
 	public void onRequestPermissionsResult(int requestCode, String[] permissions, int[] grantResults) {
 		if (requestCode == REQUEST_LOCATION_FOR_NAVIGATION_PERMISSION
+				&& grantResults.length > 0
 				&& grantResults[0] == PackageManager.PERMISSION_GRANTED) {
 			onNavigationClick();
 		} else if (requestCode == REQUEST_LOCATION_FOR_NAVIGATION_FAB_PERMISSION
+				&& grantResults.length > 0
 				&& grantResults[0] == PackageManager.PERMISSION_GRANTED) {
 			navigateFab();
 		} else if (requestCode == REQUEST_LOCATION_FOR_ADD_DESTINATION_PERMISSION
+				&& grantResults.length > 0
 				&& grantResults[0] == PackageManager.PERMISSION_GRANTED) {
 			addDestination(requestedLatLon);
 		}
