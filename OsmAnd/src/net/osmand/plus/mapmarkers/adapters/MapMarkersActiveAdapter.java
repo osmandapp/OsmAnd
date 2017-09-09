@@ -15,8 +15,11 @@ import net.osmand.plus.R;
 import net.osmand.plus.activities.MapActivity;
 import net.osmand.plus.dashboard.DashLocationFragment;
 
+import java.text.SimpleDateFormat;
 import java.util.Collections;
+import java.util.Date;
 import java.util.List;
+import java.util.Locale;
 
 public class MapMarkersActiveAdapter extends RecyclerView.Adapter<MapMarkerItemViewHolder>
 		implements MapMarkersItemTouchHelperCallback.ItemTouchHelperAdapter {
@@ -96,7 +99,7 @@ public class MapMarkersActiveAdapter extends RecyclerView.Adapter<MapMarkerItemV
 				descr = mapActivity.getString(R.string.shared_string_favorites);
 			}
 		} else {
-			descr = marker.creationDate + "";
+			descr = new SimpleDateFormat("MMM dd", Locale.getDefault()).format(new Date(marker.creationDate));
 		}
 		holder.description.setText(descr);
 

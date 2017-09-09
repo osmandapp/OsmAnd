@@ -151,7 +151,7 @@ public class MapMarkersHistoryAdapter extends RecyclerView.Adapter<RecyclerView.
 
 			itemViewHolder.title.setText(marker.getName(app));
 
-			itemViewHolder.description.setText(marker.visitedDate + "");
+			itemViewHolder.description.setText(app.getString(R.string.passed, new SimpleDateFormat("MMM dd", Locale.getDefault()).format(new Date(marker.visitedDate))));
 
 			itemViewHolder.optionsBtn.setImageDrawable(iconsCache.getThemedIcon(R.drawable.ic_action_reset_to_default_dark));
 			itemViewHolder.optionsBtn.setOnClickListener(new View.OnClickListener() {

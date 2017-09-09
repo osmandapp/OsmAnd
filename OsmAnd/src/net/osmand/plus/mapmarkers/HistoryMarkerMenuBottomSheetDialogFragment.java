@@ -19,6 +19,10 @@ import net.osmand.plus.R;
 import net.osmand.plus.base.BottomSheetDialogFragment;
 import net.osmand.plus.helpers.AndroidUiHelper;
 
+import java.text.SimpleDateFormat;
+import java.util.Date;
+import java.util.Locale;
+
 public class HistoryMarkerMenuBottomSheetDialogFragment extends BottomSheetDialogFragment {
 
 	public final static String TAG = "HistoryMarkerMenuBottomSheetDialogFragment";
@@ -55,7 +59,7 @@ public class HistoryMarkerMenuBottomSheetDialogFragment extends BottomSheetDialo
 			long markerVisitedDate = arguments.getLong(MARKER_VISITED_DATE);
 			((TextView) mainView.findViewById(R.id.map_marker_title)).setText(markerName);
 			((ImageView) mainView.findViewById(R.id.map_marker_icon)).setImageDrawable(getIcon(R.drawable.ic_action_flag_dark, MapMarker.getColorId(markerColorIndex)));
-			((TextView) mainView.findViewById(R.id.map_marker_passed_info)).setText(String.valueOf(markerVisitedDate));
+			((TextView) mainView.findViewById(R.id.map_marker_passed_info)).setText(getString(R.string.passed, new SimpleDateFormat("MMM dd", Locale.getDefault()).format(new Date(markerVisitedDate))));
 
 			mainView.findViewById(R.id.make_active_row).setOnClickListener(new View.OnClickListener() {
 				@Override
