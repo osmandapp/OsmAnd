@@ -16,7 +16,6 @@ import android.widget.TextView;
 import net.osmand.AndroidUtils;
 import net.osmand.plus.MapMarkersHelper.MapMarker;
 import net.osmand.plus.R;
-import net.osmand.plus.activities.MapActivity;
 import net.osmand.plus.base.BottomSheetDialogFragment;
 import net.osmand.plus.helpers.AndroidUiHelper;
 
@@ -24,22 +23,20 @@ public class HistoryMarkerMenuBottomSheetDialogFragment extends BottomSheetDialo
 
 	public final static String TAG = "HistoryMarkerMenuBottomSheetDialogFragment";
 
+	public static final String MARKER_NAME = "marker_name";
+	public static final String MARKER_COLOR_INDEX = "marker_color_index";
+	public static final String MARKER_VISITED_DATE = "marker_visited_date";
+
 	private HistoryMarkerMenuFragmentListener listener;
 	private boolean portrait;
-	private MapMarker marker;
 
 	public void setListener(HistoryMarkerMenuFragmentListener listener) {
 		this.listener = listener;
 	}
 
-	public void setMarker(MapMarker marker) {
-		this.marker = marker;
-	}
-
 	@Nullable
 	@Override
 	public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
-		MapActivity mapActivity = (MapActivity) getActivity();
 		portrait = AndroidUiHelper.isOrientationPortrait(getActivity());
 		boolean nightMode = getMyApplication().getDaynightHelper().isNightModeForMapControls();
 		final int themeRes = nightMode ? R.style.OsmandDarkTheme : R.style.OsmandLightTheme;
@@ -49,11 +46,14 @@ public class HistoryMarkerMenuBottomSheetDialogFragment extends BottomSheetDialo
 			AndroidUtils.setBackground(getActivity(), mainView, nightMode, R.drawable.bg_bottom_menu_light, R.drawable.bg_bottom_menu_dark);
 		}
 
-		if (marker != null) {
-			int color = MapMarker.getColorId(marker.colorIndex);
-			((ImageView) mainView.findViewById(R.id.map_marker_icon)).setImageDrawable(getIcon(R.drawable.ic_action_flag_dark, color));
-			((TextView) mainView.findViewById(R.id.map_marker_title)).setText(marker.getName(mapActivity));
-			((TextView) mainView.findViewById(R.id.map_marker_passed_info)).setText(String.valueOf(marker.visitedDate));
+		Bundle arguments = getArguments();
+		if (arguments != null) {
+			String markerName = arguments.getString(MARKER_NAME, "");
+			int markerColorIndex = arguments.getInt(MARKER_COLOR_INDEX, 0);
+			long markerVisitedDate = arguments.getLong(MARKER_VISITED_DATE, 0);
+			((TextView) mainView.findViewById(R.id.map_marker_title)).setText(markerName);
+			((ImageView) mainView.findViewById(R.id.map_marker_icon)).setImageDrawable(getIcon(R.drawable.ic_action_flag_dark, MapMarker.getColorId(markerColorIndex)));
+			((TextView) mainView.findViewById(R.id.map_marker_passed_info)).setText(String.valueOf(markerVisitedDate));
 		}
 
 		((ImageView) mainView.findViewById(R.id.make_active_icon)).setImageDrawable(getContentIcon(R.drawable.ic_action_reset_to_default_dark));

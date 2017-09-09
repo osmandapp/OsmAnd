@@ -44,8 +44,13 @@ public class MapMarkersHistoryFragment extends Fragment implements MapMarkersHel
 				int pos = recyclerView.indexOfChild(view);
 				Object item = adapter.getItem(pos);
 				if (item instanceof MapMarker) {
+					MapMarker marker = (MapMarker) item;
 					HistoryMarkerMenuBottomSheetDialogFragment fragment = new HistoryMarkerMenuBottomSheetDialogFragment();
-					fragment.setMarker((MapMarker) item);
+					Bundle arguments = new Bundle();
+					arguments.putString(HistoryMarkerMenuBottomSheetDialogFragment.MARKER_NAME, marker.getName(mapActivity));
+					arguments.putInt(HistoryMarkerMenuBottomSheetDialogFragment.MARKER_COLOR_INDEX, marker.colorIndex);
+					arguments.putLong(HistoryMarkerMenuBottomSheetDialogFragment.MARKER_VISITED_DATE, marker.visitedDate);
+					fragment.setArguments(arguments);
 					fragment.show(mapActivity.getSupportFragmentManager(), HistoryMarkerMenuBottomSheetDialogFragment.TAG);
 				}
 			}
