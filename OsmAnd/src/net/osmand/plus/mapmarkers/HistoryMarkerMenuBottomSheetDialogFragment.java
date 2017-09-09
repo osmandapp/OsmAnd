@@ -23,6 +23,7 @@ public class HistoryMarkerMenuBottomSheetDialogFragment extends BottomSheetDialo
 
 	public final static String TAG = "HistoryMarkerMenuBottomSheetDialogFragment";
 
+	public static final String MARKER_POSITION = "marker_position";
 	public static final String MARKER_NAME = "marker_name";
 	public static final String MARKER_COLOR_INDEX = "marker_color_index";
 	public static final String MARKER_VISITED_DATE = "marker_visited_date";
@@ -48,12 +49,32 @@ public class HistoryMarkerMenuBottomSheetDialogFragment extends BottomSheetDialo
 
 		Bundle arguments = getArguments();
 		if (arguments != null) {
-			String markerName = arguments.getString(MARKER_NAME, "");
-			int markerColorIndex = arguments.getInt(MARKER_COLOR_INDEX, 0);
-			long markerVisitedDate = arguments.getLong(MARKER_VISITED_DATE, 0);
+			final int pos = arguments.getInt(MARKER_POSITION);
+			String markerName = arguments.getString(MARKER_NAME);
+			int markerColorIndex = arguments.getInt(MARKER_COLOR_INDEX);
+			long markerVisitedDate = arguments.getLong(MARKER_VISITED_DATE);
 			((TextView) mainView.findViewById(R.id.map_marker_title)).setText(markerName);
 			((ImageView) mainView.findViewById(R.id.map_marker_icon)).setImageDrawable(getIcon(R.drawable.ic_action_flag_dark, MapMarker.getColorId(markerColorIndex)));
 			((TextView) mainView.findViewById(R.id.map_marker_passed_info)).setText(String.valueOf(markerVisitedDate));
+
+			mainView.findViewById(R.id.make_active_row).setOnClickListener(new View.OnClickListener() {
+				@Override
+				public void onClick(View view) {
+					if (listener != null) {
+						listener.onMakeMarkerActive(pos);
+					}
+					dismiss();
+				}
+			});
+			mainView.findViewById(R.id.delete_row).setOnClickListener(new View.OnClickListener() {
+				@Override
+				public void onClick(View view) {
+					if (listener != null) {
+						listener.onDeleteMarker(pos);
+					}
+					dismiss();
+				}
+			});
 		}
 
 		((ImageView) mainView.findViewById(R.id.make_active_icon)).setImageDrawable(getContentIcon(R.drawable.ic_action_reset_to_default_dark));
@@ -118,6 +139,7 @@ public class HistoryMarkerMenuBottomSheetDialogFragment extends BottomSheetDialo
 	}
 
 	interface HistoryMarkerMenuFragmentListener {
-
+		void onMakeMarkerActive(int pos);
+		void onDeleteMarker(int pos);
 	}
 }

@@ -32,10 +32,15 @@ public class MapMarkersHistoryFragment extends Fragment implements MapMarkersHel
 	@Override
 	public View onCreateView(LayoutInflater inflater, @Nullable ViewGroup container, @Nullable Bundle savedInstanceState) {
 		app = getMyApplication();
+		final MapActivity mapActivity = (MapActivity) getActivity();
+
+		Fragment historyMarkerMenuFragment = mapActivity.getSupportFragmentManager().findFragmentByTag(HistoryMarkerMenuBottomSheetDialogFragment.TAG);
+		if (historyMarkerMenuFragment != null) {
+			((HistoryMarkerMenuBottomSheetDialogFragment) historyMarkerMenuFragment).setListener(createHistoryMarkerMenuListener());
+		}
 
 		final RecyclerView recyclerView = new RecyclerView(getContext());
 		recyclerView.setLayoutManager(new LinearLayoutManager(getContext()));
-		final MapActivity mapActivity = (MapActivity) getActivity();
 
 		adapter = new MapMarkersHistoryAdapter(mapActivity.getMyApplication());
 		adapter.setAdapterListener(new MapMarkersHistoryAdapter.MapMarkersHistoryAdapterListener() {
@@ -47,10 +52,12 @@ public class MapMarkersHistoryFragment extends Fragment implements MapMarkersHel
 					MapMarker marker = (MapMarker) item;
 					HistoryMarkerMenuBottomSheetDialogFragment fragment = new HistoryMarkerMenuBottomSheetDialogFragment();
 					Bundle arguments = new Bundle();
+					arguments.putInt(HistoryMarkerMenuBottomSheetDialogFragment.MARKER_POSITION, pos);
 					arguments.putString(HistoryMarkerMenuBottomSheetDialogFragment.MARKER_NAME, marker.getName(mapActivity));
 					arguments.putInt(HistoryMarkerMenuBottomSheetDialogFragment.MARKER_COLOR_INDEX, marker.colorIndex);
 					arguments.putLong(HistoryMarkerMenuBottomSheetDialogFragment.MARKER_VISITED_DATE, marker.visitedDate);
 					fragment.setArguments(arguments);
+					fragment.setListener(createHistoryMarkerMenuListener());
 					fragment.show(mapActivity.getSupportFragmentManager(), HistoryMarkerMenuBottomSheetDialogFragment.TAG);
 				}
 			}
@@ -60,6 +67,24 @@ public class MapMarkersHistoryFragment extends Fragment implements MapMarkersHel
 		app.getMapMarkersHelper().addListener(this);
 
 		return recyclerView;
+	}
+
+	private HistoryMarkerMenuBottomSheetDialogFragment.HistoryMarkerMenuFragmentListener createHistoryMarkerMenuListener() {
+		return new HistoryMarkerMenuBottomSheetDialogFragment.HistoryMarkerMenuFragmentListener() {
+			@Override
+			public void onMakeMarkerActive(int pos) {
+				Object item = adapter.getItem(pos);
+				if (item instanceof MapMarker) {
+					app.getMapMarkersHelper().restoreMarkerFromHistory((MapMarker) item, 0);
+					adapter.notifyItemRemoved(pos);
+				}
+			}
+
+			@Override
+			public void onDeleteMarker(int pos) {
+
+			}
+		};
 	}
 
 	@Override
