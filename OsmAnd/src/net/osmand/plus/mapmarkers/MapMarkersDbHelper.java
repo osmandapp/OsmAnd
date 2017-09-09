@@ -20,7 +20,7 @@ import java.util.Random;
 public class MapMarkersDbHelper {
 
 	private static final int DB_VERSION = 2;
-	private static final String DB_NAME = "map_markers_db";
+	public static final String DB_NAME = "map_markers_db";
 
 	private static final String MARKERS_TABLE_NAME = "map_markers";
 	private static final String MARKERS_COL_ID = "marker_id";
