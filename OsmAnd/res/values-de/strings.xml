@@ -1592,7 +1592,7 @@ Mit Neuanmeldung fortfahren?</string>
 	<string name="gpx_tags_txt">Tags</string>
 	<string name="gpx_description_txt">Beschreibung</string>
 	<string name="gpx_monitoring_disabled_warn">Aufzeichnung mit der GPX-Taste oder unter \'Einstellungen\' → \'Streckenaufzeichnung\' aktivieren.</string>
-	<string name="gpx_navigation">GPX-Route wählen</string>
+	<string name="gpx_navigation">GPX-Route</string>
 	<string name="gpx_option_reverse_route">GPX-Route umkehren</string>
 	<string name="gpx_option_destination_point">Derzeitiges Ziel verwenden</string>
 	<string name="gpx_option_from_start_point">Gesamten Track durchlaufen</string>
@@ -1615,7 +1615,7 @@ Mit Neuanmeldung fortfahren?</string>
     <string name="targets">Ziele</string>
     <string name="way_alarms">Verkehrswarnungen</string>
     <string name="record_plugin_description">Diese Erweiterung ermöglicht es, Tracks durch Drücken der GPX-Aufnahme-Schaltfläche auf dem Kartenbildschirm aufzunehmen bzw. alle navigierten Routen automatisch zu protokollieren und sie als lokale GPX-Datei (oder auch online über Web-Dienste) abzuspeichern. 
-\n 
+\n
 \nAufgenommene Tracks können z. B. mit Bekannten geteilt oder als Beiträge zu OSM verwendet werden. Sportler können gespeicherte Tracks zur Überwachung ihres Trainings verwenden. Einige Basisauswertungen sind direkt in OsmAnd enthalten, wie Rundenzeiten, Durchschnittsgeschwindigkeit, usw.. Die Aufzeichnungen können natürlich auch mit speziellen Analyse-Tools von Drittanbietern nachbearbeitet werden.</string>
     <string name="route_descr_destination">Ziel</string>
     <string name="local_index_description">Um Einzelheiten zu einem Eintrag zu sehen, auf einen beliebigen Eintrag drücken. Um ihn zu deaktivieren oder zu löschen, lang drücken. Aktuell auf dem Gerät vorhandene Daten (%1$s frei):</string>
@@ -1655,7 +1655,7 @@ Mit Neuanmeldung fortfahren?</string>
     <string name="wake_on_voice_descr">Bildschirm bei Navigationsanweisung aktivieren (falls aus)</string>
     <string name="shared_string_never">Niemals</string>
     
-    <string name="impassable_road">Straßen vermeiden …</string>
+    <string name="impassable_road">Straßen vermeiden…</string>
     <string name="rendering_attr_tramTrainRoutes_name">Straßen- und Eisenbahnlinien</string>
     <string name="rendering_attr_trainLightrailRoutes_name">Stadtbahnlinien</string>
     <string name="rendering_attr_shareTaxiRoutes_name">Sammeltaxi-Linien</string>
