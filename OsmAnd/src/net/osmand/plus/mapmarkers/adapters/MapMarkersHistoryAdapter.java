@@ -39,22 +39,6 @@ public class MapMarkersHistoryAdapter extends RecyclerView.Adapter<RecyclerView.
 	public void createHeaders() {
 		items.clear();
 
-//		test
-//		items.add(1);
-//		items.add(2);
-//		items.add(3);
-//		items.add(4);
-//		items.add(5);
-//		items.add(6);
-//		items.add(7);
-//		items.add(8);
-//		items.add(9);
-//		items.add(10);
-//		items.add(11);
-//		items.add(12);
-//		items.add(2016);
-//		items.add(2015);
-
 		List<MapMarker> markersHistory = app.getMapMarkersHelper().getMapMarkersHistory();
 
 		int previousHeader = -1;
@@ -85,13 +69,13 @@ public class MapMarkersHistoryAdapter extends RecyclerView.Adapter<RecyclerView.
 						previousHeader = YESTERDAY_HEADER;
 					}
 					items.add(marker);
-				} else if (currentDay - 7 >= markerDay && currentMonth == markerMonth) {
+				} else if (currentDay - markerDay <= 8) {
 					if (previousHeader != LAST_SEVEN_DAYS_HEADER) {
 						items.add(LAST_SEVEN_DAYS_HEADER);
 						previousHeader = LAST_SEVEN_DAYS_HEADER;
 					}
 					items.add(marker);
-				} else if (monthsDisplayed < 3) {
+				} else if (monthsDisplayed < 3 || currentMonth - 3 == markerMonth) {
 					if (previousHeader != markerMonth) {
 						items.add(markerMonth);
 						previousHeader = markerMonth;
