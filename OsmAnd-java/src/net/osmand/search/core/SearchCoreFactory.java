@@ -502,7 +502,7 @@ public class SearchCoreFactory {
 								return false;
 							}
 							if (ids.contains(object.getId())) {
-								object.setName(object.getName() + " (closed)");
+								object.setIsClosed(true);
 							}
 							SearchResult sr = new SearchResult(phrase);
 							sr.otherNames = object.getAllNames(true);
