@@ -57,45 +57,28 @@ public class MapMarkersHistoryAdapter extends RecyclerView.Adapter<RecyclerView.
 			int markerMonth = markerCalendar.get(Calendar.MONTH);
 			int markerYear = markerCalendar.get(Calendar.YEAR);
 			if (markerYear == currentYear) {
-				if (markerDay == currentDay) {
-					if (previousHeader != TODAY_HEADER) {
-						items.add(TODAY_HEADER);
-						previousHeader = TODAY_HEADER;
-					}
-					items.add(marker);
-				} else if (markerDay == currentDay - 1) {
-					if (previousHeader != YESTERDAY_HEADER) {
-						items.add(YESTERDAY_HEADER);
-						previousHeader = YESTERDAY_HEADER;
-					}
-					items.add(marker);
-				} else if (currentDay - markerDay <= 8) {
-					if (previousHeader != LAST_SEVEN_DAYS_HEADER) {
-						items.add(LAST_SEVEN_DAYS_HEADER);
-						previousHeader = LAST_SEVEN_DAYS_HEADER;
-					}
-					items.add(marker);
-				} else if (monthsDisplayed < 3 || currentMonth - 3 == markerMonth) {
-					if (previousHeader != markerMonth) {
-						items.add(markerMonth);
-						previousHeader = markerMonth;
-						monthsDisplayed += 1;
-					}
-					items.add(marker);
-				} else {
-					if (previousHeader != THIS_YEAR_HEADER) {
-						items.add(THIS_YEAR_HEADER);
-						previousHeader = THIS_YEAR_HEADER;
-					}
-					items.add(marker);
+				if (markerDay == currentDay && previousHeader != TODAY_HEADER) {
+					items.add(TODAY_HEADER);
+					previousHeader = TODAY_HEADER;
+				} else if (markerDay == currentDay - 1 && previousHeader != YESTERDAY_HEADER) {
+					items.add(YESTERDAY_HEADER);
+					previousHeader = YESTERDAY_HEADER;
+				} else if (currentDay - markerDay >= 2 && currentDay - markerDay <= 8 && previousHeader != LAST_SEVEN_DAYS_HEADER) {
+					items.add(LAST_SEVEN_DAYS_HEADER);
+					previousHeader = LAST_SEVEN_DAYS_HEADER;
+				} else if (currentDay - markerDay > 8 && monthsDisplayed < 3 && previousHeader != markerMonth) {
+					items.add(markerMonth);
+					previousHeader = markerMonth;
+					monthsDisplayed += 1;
+				} else if (currentMonth - markerMonth >= 4 && previousHeader != THIS_YEAR_HEADER) {
+					items.add(THIS_YEAR_HEADER);
+					previousHeader = THIS_YEAR_HEADER;
 				}
-			} else {
-				if (previousHeader != markerYear) {
-					items.add(markerYear);
-					previousHeader = markerYear;
-				}
-				items.add(marker);
+			} else if (previousHeader != markerYear) {
+				items.add(markerYear);
+				previousHeader = markerYear;
 			}
+			items.add(marker);
 		}
 	}
 
