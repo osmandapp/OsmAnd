@@ -38,12 +38,14 @@ import java.util.ArrayList;
 import java.util.Collections;
 import java.util.Comparator;
 import java.util.HashMap;
+import java.util.HashSet;
 import java.util.Iterator;
 import java.util.LinkedHashMap;
 import java.util.LinkedHashSet;
 import java.util.List;
 import java.util.Map;
 import java.util.Map.Entry;
+import java.util.Set;
 
 import gnu.trove.list.array.TIntArrayList;
 
@@ -486,6 +488,7 @@ public class SearchCoreFactory {
 					SearchPhraseDataType.POI);
 			final NameStringMatcher nm = phrase.getNameStringMatcher();
 			QuadRect bbox = phrase.getRadiusBBoxToSearch(BBOX_RADIUS_INSIDE);
+			final Set<Long> ids = new HashSet();
 			SearchRequest<Amenity> req = BinaryMapIndexReader.buildSearchPoiRequest(
 					(int)bbox.centerX(), (int)bbox.centerY(),
 					phrase.getUnknownSearchWord(),
@@ -497,6 +500,9 @@ public class SearchCoreFactory {
 						public boolean publish(Amenity object) {
 							if (limit ++ > LIMIT) {
 								return false;
+							}
+							if (ids.contains(object.getId())) {
+								object.setName(object.getName() + " (closed)");
 							}
 							SearchResult sr = new SearchResult(phrase);
 							sr.otherNames = object.getAllNames(true);
@@ -523,6 +529,7 @@ public class SearchCoreFactory {
 							phrase.countUnknownWordsMatch(sr);
 							sr.objectType = ObjectType.POI;
 							resultMatcher.publish(sr);
+							ids.add(object.getId());
 							return false;
 						}
 
