@@ -46,7 +46,7 @@ public class MapMarkersHistoryFragment extends Fragment implements MapMarkersHel
 		adapter.setAdapterListener(new MapMarkersHistoryAdapter.MapMarkersHistoryAdapterListener() {
 			@Override
 			public void onItemClick(View view) {
-				int pos = recyclerView.indexOfChild(view);
+				int pos = recyclerView.getChildAdapterPosition(view);
 				Object item = adapter.getItem(pos);
 				if (item instanceof MapMarker) {
 					MapMarker marker = (MapMarker) item;
