@@ -19,6 +19,7 @@ import net.osmand.plus.OsmandApplication;
 import net.osmand.plus.OsmandSettings;
 import net.osmand.plus.R;
 import net.osmand.plus.activities.MapActivity;
+import net.osmand.plus.dashboard.DashboardOnMap;
 import net.osmand.plus.mapmarkers.ShowDirectionBottomSheetDialogFragment.ShowDirectionFragmentListener;
 import net.osmand.plus.mapmarkers.MarkerOptionsBottomSheetDialogFragment.MarkerOptionsFragmentListener;
 
@@ -149,7 +150,8 @@ public class MapMarkersDialogFragment extends android.support.v4.app.DialogFragm
 
 			@Override
 			public void buildRouteOnClick() {
-				Toast.makeText(getContext(), "Build route", Toast.LENGTH_SHORT).show();
+				mapActivity.getDashboard().setDashboardVisibility(true, DashboardOnMap.DashboardType.MAP_MARKERS_SELECTION);
+				dismiss();
 			}
 
 			@Override
