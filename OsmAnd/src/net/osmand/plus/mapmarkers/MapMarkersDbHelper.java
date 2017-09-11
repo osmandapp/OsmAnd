@@ -166,6 +166,7 @@ public class MapMarkersDbHelper {
 					res = Long.parseLong(String.valueOf(System.currentTimeMillis()) + String.valueOf(new Random().nextInt(900) + 100));
 					db.execSQL("INSERT INTO " + GROUPS_TABLE_NAME + " VALUES (?, ?)", new Object[]{res, name});
 				}
+				query.close();
 			} finally {
 				db.close();
 			}
@@ -223,6 +224,26 @@ public class MapMarkersDbHelper {
 						marker.history ? HISTORY_NEXT_VALUE : TAIL_NEXT_VALUE});
 	}
 
+	public long getGroupId(String name) {
+		long res = -1;
+		if (name != null) {
+			SQLiteConnection db = openConnection(true);
+			if (db != null) {
+				try {
+					SQLiteCursor query = db.rawQuery(GROUPS_TABLE_SELECT + " WHERE " + GROUPS_COL_NAME + " = ?",
+							new String[]{name});
+					if (query.moveToFirst()) {
+						res = query.getLong(0);
+					}
+					query.close();
+				} finally {
+					db.close();
+				}
+			}
+		}
+		return res;
+	}
+
 	@Nullable
 	public String getGroupName(long id) {
 		String res = null;
@@ -234,6 +255,7 @@ public class MapMarkersDbHelper {
 				if (query.moveToFirst()) {
 					res = query.getString(1);
 				}
+				query.close();
 			} finally {
 				db.close();
 			}
@@ -341,6 +363,38 @@ public class MapMarkersDbHelper {
 			try {
 				db.execSQL("DELETE FROM " + MARKERS_TABLE_NAME + " WHERE " + MARKERS_COL_ACTIVE + " = ?",
 						new Object[]{1});
+			} finally {
+				db.close();
+			}
+		}
+	}
+
+	public void removeMarker(double lat, double lon, long groupId) {
+		SQLiteConnection db = openConnection(false);
+		if (db != null) {
+			try {
+				MapMarker marker = null;
+				SQLiteCursor query = db.rawQuery(MARKERS_TABLE_SELECT + " WHERE " +
+								MARKERS_COL_LAT + " = ? AND " +
+								MARKERS_COL_LON + " = ? AND " +
+								MARKERS_COL_GROUP_KEY + " = ?",
+						new String[]{String.valueOf(lat), String.valueOf(lon), String.valueOf(groupId)});
+				if (query.moveToFirst()) {
+					marker = readItem(query);
+				}
+				query.close();
+
+				if (marker != null) {
+					if (marker.history) {
+						removeMarkerFromHistory(marker);
+					} else {
+						db.execSQL("UPDATE " + MARKERS_TABLE_NAME + " SET " + MARKERS_COL_NEXT_KEY + " = ? " +
+								"WHERE " + MARKERS_COL_NEXT_KEY + " = ?", new Object[]{marker.nextKey, marker.id});
+
+						db.execSQL("DELETE FROM " + MARKERS_TABLE_NAME + " WHERE " + MARKERS_COL_ID + " = ?",
+								new Object[]{marker.id});
+					}
+				}
 			} finally {
 				db.close();
 			}
