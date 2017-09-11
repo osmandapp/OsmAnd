@@ -252,6 +252,14 @@ public class MapMarkersHelper {
 		}
 	}
 
+	public void removeMarkerFromHistory(MapMarker marker) {
+		if (marker != null) {
+			markersDbHelper.removeMarkerFromHistory(marker);
+			loadMarkers();
+			refresh();
+		}
+	}
+
 	public List<MapMarker> getMapMarkers() {
 		return mapMarkers;
 	}

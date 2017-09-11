@@ -82,7 +82,11 @@ public class MapMarkersHistoryFragment extends Fragment implements MapMarkersHel
 
 			@Override
 			public void onDeleteMarker(int pos) {
-
+				Object item = adapter.getItem(pos);
+				if (item instanceof MapMarker) {
+					app.getMapMarkersHelper().removeMarkerFromHistory((MapMarker) item);
+					adapter.notifyItemRemoved(pos);
+				}
 			}
 		};
 	}
