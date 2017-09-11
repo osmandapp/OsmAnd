@@ -24,6 +24,9 @@ import java.util.Locale;
 public class MapMarkersActiveAdapter extends RecyclerView.Adapter<MapMarkerItemViewHolder>
 		implements MapMarkersItemTouchHelperCallback.ItemTouchHelperAdapter {
 
+	private static final int ON_MAP_TYPE = 1;
+	private static final int GENERAL_TYPE = 2;
+
 	private MapActivity mapActivity;
 	private List<MapMarker> markers;
 	private MapMarkersActiveAdapterListener listener;
@@ -60,15 +63,23 @@ public class MapMarkersActiveAdapter extends RecyclerView.Adapter<MapMarkerItemV
 	}
 
 	@Override
-	public MapMarkerItemViewHolder onCreateViewHolder(ViewGroup viewGroup, int i) {
-		View view = LayoutInflater.from(viewGroup.getContext()).inflate(R.layout.map_marker_item_new, viewGroup, false);
+	public MapMarkerItemViewHolder onCreateViewHolder(ViewGroup viewGroup, int viewType) {
+		View view;
+		MapMarkerItemViewHolder holder;
+		if (viewType == ON_MAP_TYPE) {
+			view = LayoutInflater.from(viewGroup.getContext()).inflate(R.layout.map_marker_item_on_map, viewGroup, false);
+			holder = new MapMarkerItemOnMapViewHolder(view);
+		} else {
+			view = LayoutInflater.from(viewGroup.getContext()).inflate(R.layout.map_marker_item_new, viewGroup, false);
+			holder = new MapMarkerItemViewHolder(view);
+		}
 		view.setOnClickListener(new View.OnClickListener() {
 			@Override
 			public void onClick(View view) {
 				listener.onItemClick(view);
 			}
 		});
-		return new MapMarkerItemViewHolder(view);
+		return holder;
 	}
 
 	@Override
@@ -76,7 +87,20 @@ public class MapMarkersActiveAdapter extends RecyclerView.Adapter<MapMarkerItemV
 		IconsCache iconsCache = mapActivity.getMyApplication().getIconsCache();
 		MapMarker marker = markers.get(pos);
 
-		holder.iconReorder.setImageDrawable(iconsCache.getThemedIcon(R.drawable.ic_action_reorder));
+		int color = MapMarker.getColorId(marker.colorIndex);
+		if (holder instanceof MapMarkerItemOnMapViewHolder) {
+			((MapMarkerItemOnMapViewHolder) holder).iconDirection.setImageDrawable(iconsCache.getIcon(R.drawable.ic_arrow_marker_diretion, color));
+
+			holder.optionsBtn.setImageDrawable(iconsCache.getIcon(R.drawable.ic_action_marker_passed, R.color.color_white));
+
+			holder.iconReorder.setImageDrawable(iconsCache.getIcon(R.drawable.ic_action_reorder, R.color.map_markers_on_map_color));
+		} else {
+			holder.icon.setImageDrawable(iconsCache.getIcon(R.drawable.ic_action_flag_dark, color));
+
+			holder.optionsBtn.setImageDrawable(iconsCache.getThemedIcon(R.drawable.ic_action_marker_passed));
+
+			holder.iconReorder.setImageDrawable(iconsCache.getThemedIcon(R.drawable.ic_action_reorder));
+		}
 		holder.iconReorder.setOnTouchListener(new View.OnTouchListener() {
 			@Override
 			public boolean onTouch(View view, MotionEvent event) {
@@ -86,9 +110,6 @@ public class MapMarkersActiveAdapter extends RecyclerView.Adapter<MapMarkerItemV
 				return false;
 			}
 		});
-
-		int color = MapMarker.getColorId(marker.colorIndex);
-		holder.icon.setImageDrawable(iconsCache.getIcon(R.drawable.ic_action_flag_dark, color));
 
 		holder.title.setText(marker.getName(mapActivity));
 
@@ -103,7 +124,6 @@ public class MapMarkersActiveAdapter extends RecyclerView.Adapter<MapMarkerItemV
 		}
 		holder.description.setText(descr);
 
-		holder.optionsBtn.setImageDrawable(iconsCache.getThemedIcon(R.drawable.ic_action_marker_passed));
 		holder.optionsBtn.setOnClickListener(new View.OnClickListener() {
 			@Override
 			public void onClick(View view) {
@@ -132,6 +152,15 @@ public class MapMarkersActiveAdapter extends RecyclerView.Adapter<MapMarkerItemV
 				heading, holder.iconDirection, holder.distance,
 				marker.getLatitude(), marker.getLongitude(),
 				screenOrientation, mapActivity.getMyApplication(), mapActivity);
+	}
+
+	@Override
+	public int getItemViewType(int position) {
+		if (position < 2) {
+			return ON_MAP_TYPE;
+		} else {
+			return GENERAL_TYPE;
+		}
 	}
 
 	@Override
