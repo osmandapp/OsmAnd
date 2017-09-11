@@ -224,8 +224,14 @@ public class MapMarkersHelper {
 		}
 	}
 
-	public long createGroupIfNeeded(String name) {
-		return markersDbHelper.createGroupIfNeeded(name);
+	public long getGroupId(String name) {
+		return markersDbHelper.getGroupId(name);
+	}
+
+	public void removeMarker(double lat, double lon, long groupId) {
+		markersDbHelper.removeMarker(lat, lon, groupId);
+		loadMarkers();
+		refresh();
 	}
 
 	@Nullable
