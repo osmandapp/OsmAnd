@@ -43,8 +43,16 @@ public class MapMarkersHistoryFragment extends Fragment implements MapMarkersHel
 	public View onCreateView(LayoutInflater inflater, @Nullable ViewGroup container, @Nullable Bundle savedInstanceState) {
 		final boolean night = !app.getSettings().isLightContent();
 		final MapActivity mapActivity = (MapActivity) getActivity();
+
 		backgroundPaint.setColor(ContextCompat.getColor(getActivity(), night ? R.color.dashboard_divider_dark : R.color.dashboard_divider_light));
-		iconPaint.setColorFilter(new PorterDuffColorFilter(ContextCompat.getColor(getActivity(), night ? 0 : R.color.icon_color), PorterDuff.Mode.SRC_IN));
+		backgroundPaint.setStyle(Paint.Style.FILL_AND_STROKE);
+		backgroundPaint.setAntiAlias(true);
+		if (!night) {
+			iconPaint.setColorFilter(new PorterDuffColorFilter(ContextCompat.getColor(getActivity(), R.color.icon_color), PorterDuff.Mode.SRC_IN));
+		}
+		iconPaint.setAntiAlias(true);
+		iconPaint.setFilterBitmap(true);
+		iconPaint.setDither(true);
 
 		Fragment historyMarkerMenuFragment = mapActivity.getSupportFragmentManager().findFragmentByTag(HistoryMarkerMenuBottomSheetDialogFragment.TAG);
 		if (historyMarkerMenuFragment != null) {
