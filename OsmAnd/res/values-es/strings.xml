@@ -2661,7 +2661,7 @@ Por favor proporciona un código completo</string>
     <string name="add_point_before">Añadir punto anterior</string>
     <string name="add_point_after">Añadir punto posterior</string>
     <string name="shared_string_options">Opciones</string>
-    <string name="measurement_tool_snap_to_road_descr">OsmAnd conectará los puntos con las rutas para el perfil seleccionado.</string>
+    <string name="measurement_tool_snap_to_road_descr">OsmAnd conectará los puntos con rutas para el perfil seleccionado.</string>
     <string name="measurement_tool_save_as_new_track_descr">Puede guardar los puntos, ya sea como puntos de ruta o como una línea.</string>
     <string name="choose_navigation_type">Seleccionar perfil de navegación</string>
     <string name="add_route_points">Añadir puntos de ruta</string>
