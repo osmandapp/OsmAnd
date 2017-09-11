@@ -190,11 +190,14 @@ public class MapillaryImageDialog extends ContextMenuCardDialog {
 	}
 
 	public View getContentView() {
+		return getWebView();
+		/*
 		if (getMapActivity().getMyApplication().getSettings().WEBGL_SUPPORTED.get()) {
 			return getWebView();
 		} else {
 			return getStaticImageView();
 		}
+		*/
 	}
 
 	@Override
@@ -239,6 +242,7 @@ public class MapillaryImageDialog extends ContextMenuCardDialog {
 				noInternetView.setVisibility(View.VISIBLE);
 			}
 		});
+		/*
 		webView.setWebChromeClient(new WebChromeClient() {
 			@Override
 			public boolean onConsoleMessage(ConsoleMessage consoleMessage) {
@@ -249,6 +253,7 @@ public class MapillaryImageDialog extends ContextMenuCardDialog {
 				return false;
 			}
 		});
+		*/
 		noInternetView.findViewById(R.id.retry_button).setOnClickListener(new View.OnClickListener() {
 			@Override
 			public void onClick(View view) {
