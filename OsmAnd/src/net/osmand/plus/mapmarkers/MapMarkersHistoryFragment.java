@@ -6,6 +6,7 @@ import android.graphics.Canvas;
 import android.graphics.Paint;
 import android.graphics.PorterDuff;
 import android.graphics.PorterDuffColorFilter;
+import android.graphics.Rect;
 import android.os.Bundle;
 import android.support.annotation.Nullable;
 import android.support.v4.app.Fragment;
@@ -31,6 +32,7 @@ public class MapMarkersHistoryFragment extends Fragment implements MapMarkersHel
 	private OsmandApplication app;
 	private Paint backgroundPaint = new Paint();
 	private Paint iconPaint = new Paint();
+	private Paint textPaint = new Paint();
 
 	@Override
 	public void onCreate(@Nullable Bundle savedInstanceState) {
@@ -53,6 +55,18 @@ public class MapMarkersHistoryFragment extends Fragment implements MapMarkersHel
 		iconPaint.setAntiAlias(true);
 		iconPaint.setFilterBitmap(true);
 		iconPaint.setDither(true);
+		textPaint.setTextSize(getResources().getDimension(R.dimen.default_desc_text_size));
+		textPaint.setFakeBoldText(true);
+		textPaint.setColor(ContextCompat.getColor(getActivity(), R.color.dashboard_subheader_text_light));
+		textPaint.setAntiAlias(true);
+
+		final String delStr = getString(R.string.shared_string_delete).toUpperCase();
+		final String activateStr = getString(R.string.local_index_mi_restore).toUpperCase();
+		Rect bounds = new Rect();
+
+		textPaint.getTextBounds(activateStr, 0, activateStr.length(), bounds);
+		final int activateStrWidth = bounds.width();
+		final int textHeight = bounds.height();
 
 		Fragment historyMarkerMenuFragment = mapActivity.getSupportFragmentManager().findFragmentByTag(HistoryMarkerMenuBottomSheetDialogFragment.TAG);
 		if (historyMarkerMenuFragment != null) {
@@ -63,7 +77,7 @@ public class MapMarkersHistoryFragment extends Fragment implements MapMarkersHel
 		recyclerView.setLayoutManager(new LinearLayoutManager(getContext()));
 
 		ItemTouchHelper.SimpleCallback simpleItemTouchCallback = new ItemTouchHelper.SimpleCallback(0, ItemTouchHelper.LEFT | ItemTouchHelper.RIGHT) {
-			private float iconMarginSides = getResources().getDimension(R.dimen.list_content_padding);
+			private float marginSides = getResources().getDimension(R.dimen.list_content_padding);
 			private Bitmap deleteBitmap = BitmapFactory.decodeResource(getResources(), R.drawable.ic_action_delete_dark);
 			private Bitmap resetBitmap = BitmapFactory.decodeResource(getResources(), R.drawable.ic_action_reset_to_default_dark);
 
@@ -76,14 +90,17 @@ public class MapMarkersHistoryFragment extends Fragment implements MapMarkersHel
 			public void onChildDraw(Canvas c, RecyclerView recyclerView, RecyclerView.ViewHolder viewHolder, float dX, float dY, int actionState, boolean isCurrentlyActive) {
 				if (actionState == ItemTouchHelper.ACTION_STATE_SWIPE) {
 					View itemView = viewHolder.itemView;
+					float textMarginTop = ((float) itemView.getHeight() - (float) textHeight) / 2;
 					if (dX > 0) {
 						c.drawRect(itemView.getLeft(), itemView.getTop(), dX, itemView.getBottom(), backgroundPaint);
 						float iconMarginTop = ((float) itemView.getHeight() - (float) deleteBitmap.getHeight()) / 2;
-						c.drawBitmap(deleteBitmap, itemView.getLeft() + iconMarginSides,itemView.getTop() + iconMarginTop, iconPaint);
+						c.drawBitmap(deleteBitmap, itemView.getLeft() + marginSides, itemView.getTop() + iconMarginTop, iconPaint);
+						c.drawText(delStr, itemView.getLeft() + 2 * marginSides + deleteBitmap.getWidth(), itemView.getTop() + textMarginTop + textHeight, textPaint);
 					} else {
 						c.drawRect(itemView.getRight() + dX, itemView.getTop(), itemView.getRight(), itemView.getBottom(), backgroundPaint);
 						float iconMarginTop = ((float) itemView.getHeight() - (float) resetBitmap.getHeight()) / 2;
-						c.drawBitmap(resetBitmap, itemView.getRight() - resetBitmap.getWidth() - iconMarginSides, itemView.getTop() + iconMarginTop, iconPaint);
+						c.drawBitmap(resetBitmap, itemView.getRight() - resetBitmap.getWidth() - marginSides, itemView.getTop() + iconMarginTop, iconPaint);
+						c.drawText(activateStr, itemView.getRight() - resetBitmap.getWidth() - 2 * marginSides - activateStrWidth, itemView.getTop() + textMarginTop + textHeight, textPaint);
 					}
 				}
 				super.onChildDraw(c, recyclerView, viewHolder, dX, dY, actionState, isCurrentlyActive);
