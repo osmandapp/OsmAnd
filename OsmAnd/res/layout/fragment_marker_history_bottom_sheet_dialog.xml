@@ -64,7 +64,6 @@
                         android:layout_gravity="center_vertical"
                         android:ellipsize="end"
                         android:maxLines="1"
-                        android:textAppearance="@style/TextAppearance.ListItemTitle"
                         android:textColor="?android:textColorSecondary"
                         android:textSize="@dimen/default_sub_text_size"
                         tools:text="Passed: July 28"/>
