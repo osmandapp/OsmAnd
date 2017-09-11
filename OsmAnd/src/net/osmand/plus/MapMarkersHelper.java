@@ -2,17 +2,23 @@ package net.osmand.plus;
 
 import android.content.Context;
 import android.support.annotation.Nullable;
+import android.text.format.DateFormat;
 
+import net.osmand.IndexConstants;
 import net.osmand.data.LatLon;
 import net.osmand.data.LocationPoint;
 import net.osmand.data.PointDescription;
 import net.osmand.plus.mapmarkers.MapMarkersDbHelper;
 import net.osmand.util.Algorithms;
 
+import java.io.File;
+import java.text.SimpleDateFormat;
 import java.util.ArrayList;
 import java.util.Collections;
 import java.util.Comparator;
+import java.util.Date;
 import java.util.List;
+import java.util.Locale;
 
 public class MapMarkersHelper {
 	public static final int MAP_MARKERS_COLORS_COUNT = 7;
@@ -502,5 +508,29 @@ public class MapMarkersHelper {
 		if (latLon != null) {
 			ctx.getGeocodingLookupService().cancel(latLon);
 		}
+	}
+
+	public void generateGpx() {
+		final File dir = ctx.getAppPath(IndexConstants.GPX_INDEX_DIR + "/map markers");
+		if (!dir.exists()) {
+			dir.mkdirs();
+		}
+		Date date = new Date();
+		String fileName = DateFormat.format("yyyy-MM-dd", date).toString() + "_" + new SimpleDateFormat("HH-mm_EEE", Locale.US).format(date);
+		File fout = new File(dir, fileName + ".gpx");
+		int ind = 1;
+		while (fout.exists()) {
+			fout = new File(dir, fileName + "_" + (++ind) + ".gpx");
+		}
+		GPXUtilities.GPXFile file = new GPXUtilities.GPXFile();
+		for (MapMarker marker : markersDbHelper.getActiveMarkers()) {
+			GPXUtilities.WptPt wpt = new GPXUtilities.WptPt();
+			wpt.lat = marker.getLatitude();
+			wpt.lon = marker.getLongitude();
+			wpt.setColor(ctx.getResources().getColor(MapMarker.getColorId(marker.colorIndex)));
+			wpt.name = marker.getOnlyName();
+			file.points.add(wpt);
+		}
+		GPXUtilities.writeGpxFile(fout, file, ctx);
 	}
 }

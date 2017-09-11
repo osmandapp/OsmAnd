@@ -154,7 +154,7 @@ public class MapMarkersDialogFragment extends android.support.v4.app.DialogFragm
 
 			@Override
 			public void saveAsNewTrackOnClick() {
-				Toast.makeText(getContext(), "Save as new track", Toast.LENGTH_SHORT).show();
+				mapActivity.getMyApplication().getMapMarkersHelper().generateGpx();
 			}
 
 			@Override
