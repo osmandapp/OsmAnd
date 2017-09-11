@@ -14,6 +14,7 @@ import android.support.v4.content.ContextCompat;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
 import android.support.v7.widget.helper.ItemTouchHelper;
+import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -24,6 +25,7 @@ import net.osmand.plus.OsmandApplication;
 import net.osmand.plus.R;
 import net.osmand.plus.activities.MapActivity;
 import net.osmand.plus.mapmarkers.adapters.MapMarkerDateViewHolder;
+import net.osmand.plus.mapmarkers.adapters.MapMarkerItemViewHolder;
 import net.osmand.plus.mapmarkers.adapters.MapMarkersHistoryAdapter;
 
 public class MapMarkersHistoryFragment extends Fragment implements MapMarkersHelper.MapMarkerChangedListener {
@@ -82,6 +84,17 @@ public class MapMarkersHistoryFragment extends Fragment implements MapMarkersHel
 			private Bitmap resetBitmap = BitmapFactory.decodeResource(getResources(), R.drawable.ic_action_reset_to_default_dark);
 
 			@Override
+			public int getSwipeDirs(RecyclerView recyclerView, RecyclerView.ViewHolder viewHolder) {
+				if (viewHolder instanceof MapMarkerDateViewHolder) {
+					return 0;
+				}
+				if (viewHolder instanceof MapMarkerItemViewHolder) {
+					((MapMarkerItemViewHolder) viewHolder).setOptionsButtonVisibility(View.GONE);
+				}
+				return super.getSwipeDirs(recyclerView, viewHolder);
+			}
+
+			@Override
 			public boolean onMove(RecyclerView recyclerView, RecyclerView.ViewHolder viewHolder, RecyclerView.ViewHolder target) {
 				return false;
 			}
@@ -107,11 +120,11 @@ public class MapMarkersHistoryFragment extends Fragment implements MapMarkersHel
 			}
 
 			@Override
-			public int getSwipeDirs(RecyclerView recyclerView, RecyclerView.ViewHolder viewHolder) {
-				if (viewHolder instanceof MapMarkerDateViewHolder) {
-					return 0;
+			public void clearView(RecyclerView recyclerView, RecyclerView.ViewHolder viewHolder) {
+				if (viewHolder instanceof MapMarkerItemViewHolder) {
+					((MapMarkerItemViewHolder) viewHolder).setOptionsButtonVisibility(View.VISIBLE);
 				}
-				return super.getSwipeDirs(recyclerView, viewHolder);
+				super.clearView(recyclerView, viewHolder);
 			}
 
 			@Override
