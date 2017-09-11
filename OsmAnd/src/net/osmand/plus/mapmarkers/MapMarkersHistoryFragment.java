@@ -14,6 +14,7 @@ import android.support.v4.content.ContextCompat;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
 import android.support.v7.widget.helper.ItemTouchHelper;
+import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -24,6 +25,7 @@ import net.osmand.plus.OsmandApplication;
 import net.osmand.plus.R;
 import net.osmand.plus.activities.MapActivity;
 import net.osmand.plus.mapmarkers.adapters.MapMarkerDateViewHolder;
+import net.osmand.plus.mapmarkers.adapters.MapMarkerItemViewHolder;
 import net.osmand.plus.mapmarkers.adapters.MapMarkersHistoryAdapter;
 
 public class MapMarkersHistoryFragment extends Fragment implements MapMarkersHelper.MapMarkerChangedListener {
@@ -49,15 +51,11 @@ public class MapMarkersHistoryFragment extends Fragment implements MapMarkersHel
 		backgroundPaint.setColor(ContextCompat.getColor(getActivity(), night ? R.color.dashboard_divider_dark : R.color.dashboard_divider_light));
 		backgroundPaint.setStyle(Paint.Style.FILL_AND_STROKE);
 		backgroundPaint.setAntiAlias(true);
-		if (!night) {
-			iconPaint.setColorFilter(new PorterDuffColorFilter(ContextCompat.getColor(getActivity(), R.color.icon_color), PorterDuff.Mode.SRC_IN));
-		}
 		iconPaint.setAntiAlias(true);
 		iconPaint.setFilterBitmap(true);
 		iconPaint.setDither(true);
 		textPaint.setTextSize(getResources().getDimension(R.dimen.default_desc_text_size));
 		textPaint.setFakeBoldText(true);
-		textPaint.setColor(ContextCompat.getColor(getActivity(), R.color.dashboard_subheader_text_light));
 		textPaint.setAntiAlias(true);
 
 		final String delStr = getString(R.string.shared_string_delete).toUpperCase();
@@ -82,6 +80,17 @@ public class MapMarkersHistoryFragment extends Fragment implements MapMarkersHel
 			private Bitmap resetBitmap = BitmapFactory.decodeResource(getResources(), R.drawable.ic_action_reset_to_default_dark);
 
 			@Override
+			public int getSwipeDirs(RecyclerView recyclerView, RecyclerView.ViewHolder viewHolder) {
+				if (viewHolder instanceof MapMarkerDateViewHolder) {
+					return 0;
+				}
+				if (viewHolder instanceof MapMarkerItemViewHolder) {
+					((MapMarkerItemViewHolder) viewHolder).setOptionsButtonVisibility(View.GONE);
+				}
+				return super.getSwipeDirs(recyclerView, viewHolder);
+			}
+
+			@Override
 			public boolean onMove(RecyclerView recyclerView, RecyclerView.ViewHolder viewHolder, RecyclerView.ViewHolder target) {
 				return false;
 			}
@@ -90,6 +99,19 @@ public class MapMarkersHistoryFragment extends Fragment implements MapMarkersHel
 			public void onChildDraw(Canvas c, RecyclerView recyclerView, RecyclerView.ViewHolder viewHolder, float dX, float dY, int actionState, boolean isCurrentlyActive) {
 				if (actionState == ItemTouchHelper.ACTION_STATE_SWIPE) {
 					View itemView = viewHolder.itemView;
+					int colorIcon;
+					int colorText;
+					if (Math.abs(dX) > itemView.getWidth() / 2) {
+						colorIcon = R.color.map_widget_blue;
+						colorText = R.color.map_widget_blue;
+					} else {
+						colorIcon = night ? 0 : R.color.icon_color;
+						colorText = R.color.dashboard_subheader_text_light;
+					}
+					if (colorIcon != 0) {
+						iconPaint.setColorFilter(new PorterDuffColorFilter(ContextCompat.getColor(getActivity(), colorIcon), PorterDuff.Mode.SRC_IN));
+					}
+					textPaint.setColor(ContextCompat.getColor(getActivity(), colorText));
 					float textMarginTop = ((float) itemView.getHeight() - (float) textHeight) / 2;
 					if (dX > 0) {
 						c.drawRect(itemView.getLeft(), itemView.getTop(), dX, itemView.getBottom(), backgroundPaint);
@@ -107,11 +129,11 @@ public class MapMarkersHistoryFragment extends Fragment implements MapMarkersHel
 			}
 
 			@Override
-			public int getSwipeDirs(RecyclerView recyclerView, RecyclerView.ViewHolder viewHolder) {
-				if (viewHolder instanceof MapMarkerDateViewHolder) {
-					return 0;
+			public void clearView(RecyclerView recyclerView, RecyclerView.ViewHolder viewHolder) {
+				if (viewHolder instanceof MapMarkerItemViewHolder) {
+					((MapMarkerItemViewHolder) viewHolder).setOptionsButtonVisibility(View.VISIBLE);
 				}
-				return super.getSwipeDirs(recyclerView, viewHolder);
+				super.clearView(recyclerView, viewHolder);
 			}
 
 			@Override

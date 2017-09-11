@@ -30,4 +30,8 @@ public class MapMarkerItemViewHolder extends RecyclerView.ViewHolder {
 		description = (TextView) view.findViewById(R.id.map_marker_description);
 		optionsBtn = (ImageButton) view.findViewById(R.id.map_marker_options_button);
 	}
+
+	public void setOptionsButtonVisibility(int visibility) {
+		optionsBtn.setVisibility(visibility);
+	}
 }
