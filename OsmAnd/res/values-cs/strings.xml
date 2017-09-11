@@ -2730,4 +2730,12 @@ Pokud potřebujete pomoci s aplikací OsmAnd, prosím kontaktujte naši podporu
     <string name="import_track_desc">Soubor %$1s neobsahuje body trasy, importovat jako trasu?</string>
     <string name="move_point">Přesunout bod</string>
     <string name="add_segment_to_the_track">Přidat do GPX trasy</string>
+
+    <string name="map_widget_altimeter">Výškoměr</string>
+    <string name="osmand_altimeter_plugin_name">Plugin výškoměr</string>
+    <string name="osmand_altimeter_plugin_description">Tento plugin zobrazuje nadmořskou výšku vypočtenou z tlaku změřeného barometrem.</string>
+    <string name="osmand_altimeter_plugin_altitude">Nadmořská výška (m)</string>
+    <string name="osmand_altimeter_plugin_qnh">QNH (hPa)</string>
+    <string name="osmand_altimeter_plugin_use_standard_pressure">použít standardní tlak (1013.25 hPa)</string>
+    <string name="osmand_altimeter_plugin_use_gps_altitude">použít nadmořskou výšku z GPS</string>
 </resources>
