@@ -354,7 +354,7 @@ public class MapMarkerDialogHelper {
 											@Override
 											public void onClick(DialogInterface dialog, int which) {
 												listAdapter.notifyDataSetInvalidated();
-												markersHelper.removeActiveMarkers();
+												markersHelper.moveAllActiveMarkersToHistory();
 												if (markersHelper.getMapMarkersHistory().size() == 0) {
 													mapActivity.getDashboard().hideDashboard();
 												} else if (helperCallbacks != null) {

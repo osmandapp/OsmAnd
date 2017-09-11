@@ -112,16 +112,11 @@ public class FavouritesDbHelper {
 	}
 
 	public void delete(Set<FavoriteGroup> groupsToDelete, Set<FavouritePoint> favoritesSelected) {
-		MapMarkersHelper markersHelper = context.getMapMarkersHelper();
 		if (favoritesSelected != null) {
 			for (FavouritePoint p : favoritesSelected) {
 				FavoriteGroup group = flatGroups.get(p.getCategory());
 				if (group != null) {
 					group.points.remove(p);
-					long groupId = markersHelper.getGroupId(group.name);
-					if (groupId != -1) {
-						markersHelper.removeMarker(p.getLatitude(), p.getLongitude(), groupId);
-					}
 				}
 				cachedFavoritePoints.remove(p);
 			}
