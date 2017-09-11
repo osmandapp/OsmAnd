@@ -161,7 +161,7 @@ public class MapMarkersDialogFragment extends android.support.v4.app.DialogFragm
 
 			@Override
 			public void moveAllToHistoryOnClick() {
-				mapActivity.getMyApplication().getMapMarkersHelper().removeActiveMarkers();
+				mapActivity.getMyApplication().getMapMarkersHelper().moveAllActiveMarkersToHistory();
 				activeFragment.updateAdapter();
 			}
 		};
