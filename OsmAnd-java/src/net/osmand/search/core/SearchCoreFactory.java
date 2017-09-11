@@ -46,8 +46,10 @@ import java.util.List;
 import java.util.Map;
 import java.util.Map.Entry;
 import java.util.Set;
+import java.util.TreeSet;
 
 import gnu.trove.list.array.TIntArrayList;
+import gnu.trove.set.hash.TLongHashSet;
 
 
 public class SearchCoreFactory {
@@ -488,7 +490,7 @@ public class SearchCoreFactory {
 					SearchPhraseDataType.POI);
 			final NameStringMatcher nm = phrase.getNameStringMatcher();
 			QuadRect bbox = phrase.getRadiusBBoxToSearch(BBOX_RADIUS_INSIDE);
-			final Set<Long> ids = new HashSet();
+			final Set<Long> ids = new HashSet<Long>();
 			SearchRequest<Amenity> req = BinaryMapIndexReader.buildSearchPoiRequest(
 					(int)bbox.centerX(), (int)bbox.centerY(),
 					phrase.getUnknownSearchWord(),
@@ -502,7 +504,7 @@ public class SearchCoreFactory {
 								return false;
 							}
 							if (ids.contains(object.getId())) {
-								object.setIsClosed(true);
+								return false;
 							}
 							SearchResult sr = new SearchResult(phrase);
 							sr.otherNames = object.getAllNames(true);
@@ -733,8 +735,9 @@ public class SearchCoreFactory {
 
 				QuadRect bbox = phrase.getRadiusBBoxToSearch(10000);
 				List<BinaryMapIndexReader> oo = phrase.getOfflineIndexes();
+				Set<String> searchedPois = new TreeSet<>();
 				for (BinaryMapIndexReader o : oo) {
-					ResultMatcher<Amenity> rm = getResultMatcher(phrase, resultMatcher, o);
+					ResultMatcher<Amenity> rm = getResultMatcher(phrase, resultMatcher, o, searchedPois);
 					if (obj instanceof CustomSearchPoiFilter) {
 						rm = ((CustomSearchPoiFilter) obj).wrapResultMatcher(rm);
 					}
@@ -750,13 +753,20 @@ public class SearchCoreFactory {
 		}
 
 		private ResultMatcher<Amenity> getResultMatcher(final SearchPhrase phrase, final SearchResultMatcher resultMatcher,
-														final BinaryMapIndexReader selected) {
+														final BinaryMapIndexReader selected, final Set<String> searchedPois) {
 			final NameStringMatcher ns = phrase.getNameStringMatcher();
 			return new ResultMatcher<Amenity>() {
 
 				@Override
 				public boolean publish(Amenity object) {
 					SearchResult res = new SearchResult(phrase);
+					String poiID = object.getType().getKeyName() + "_" + object.getId();
+					if(!searchedPois.add(poiID)) {
+						return false;
+					}
+					if(object.isClosed()) {
+						return false;
+					}
 					res.localeName = object.getName(phrase.getSettings().getLang(), phrase.getSettings().isTransliterate());
 					res.otherNames = object.getAllNames(true);
 					if (Algorithms.isEmpty(res.localeName)) {

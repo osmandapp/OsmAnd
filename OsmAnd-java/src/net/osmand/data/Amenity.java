@@ -39,7 +39,6 @@ public class Amenity extends MapObject {
 	// context menu geometry;
 	private TIntArrayList y;
 	private TIntArrayList x;
-	private boolean isClosed = false;
 
 	public Amenity() {
 	}
@@ -309,11 +308,7 @@ public class Amenity extends MapObject {
 		return x;
 	}
 
-	public void setIsClosed(boolean closed) {
-		isClosed  = closed;
-	}
-	
 	public boolean isClosed() {
-		return isClosed;
+		return "delete".equals(getAdditionalInfo("osmand_change"));
 	}
 }

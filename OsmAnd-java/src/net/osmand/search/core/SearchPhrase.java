@@ -535,6 +535,9 @@ public class SearchPhrase {
 		if(indexes == null) {
 			indexes = new ArrayList<>(getOfflineIndexes());
 		}
+		if (indexes.get(0).getFile().getName().matches("[a-zA-Z_-]+([0-9]+_*{3}).+[a-z]+")) {
+			return;
+		}
 		final LatLon ll = getLastTokenLocation();
 		if(ll != null) {
 			Collections.sort(indexes, new Comparator<BinaryMapIndexReader>() {
