@@ -186,6 +186,7 @@ public class MapMarkersHelper {
 
 		List<MapMarker> activeMarkers = markersDbHelper.getActiveMarkers();
 		mapMarkers.addAll(activeMarkers);
+		checkAndFixActiveMarkersOrderIfNeeded();
 
 		List<MapMarker> markersHistory = markersDbHelper.getMarkersHistory();
 		sortMarkers(markersHistory, true);

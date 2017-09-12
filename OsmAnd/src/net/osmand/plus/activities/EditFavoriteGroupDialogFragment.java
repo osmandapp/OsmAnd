@@ -181,6 +181,7 @@ public class EditFavoriteGroupDialogFragment extends BottomSheetDialogFragment {
 			addToMarkersView.setOnClickListener(new View.OnClickListener() {
 				@Override
 				public void onClick(View v) {
+					// add to map markers
 					MapMarkersHelper markersHelper = getMyApplication().getMapMarkersHelper();
 					List<LatLon> points = new ArrayList<>(group.points.size());
 					List<PointDescription> names = new ArrayList<>(group.points.size());
