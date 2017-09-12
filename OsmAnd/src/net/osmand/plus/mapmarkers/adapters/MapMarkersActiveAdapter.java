@@ -110,8 +110,7 @@ public class MapMarkersActiveAdapter extends RecyclerView.Adapter<MapMarkerItemV
 		holder.title.setText(marker.getName(mapActivity));
 
 		String descr;
-		if (marker.groupKey != -1
-				&& (descr = mapActivity.getMyApplication().getMapMarkersHelper().getGroupName(marker.groupKey)) != null) {
+		if ((descr = marker.groupName) != null) {
 			if (descr.equals("")) {
 				descr = mapActivity.getString(R.string.shared_string_favorites);
 			}
