@@ -308,12 +308,14 @@ public class MapMarkersDbHelper {
 
 	private void buildLinkedList(HashMap<String, MapMarker> markers, List<MapMarker> res) {
 		if (!markers.isEmpty()) {
+			int count = 1;
 			for (MapMarker marker : markers.values()) {
-				if (!markers.keySet().contains(marker.nextKey)) {
+				if (!markers.keySet().contains(marker.nextKey) || count == markers.size()) {
 					res.add(0, marker);
 					markers.remove(marker.id);
 					break;
 				}
+				count++;
 			}
 			buildLinkedList(markers, res);
 		}
