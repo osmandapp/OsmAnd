@@ -50,7 +50,7 @@ public class MapMarkersHelper {
 		public long creationDate;
 		public long visitedDate;
 		public String nextKey;
-		public long groupKey = -1;
+		public String groupKey;
 		public String groupName;
 
 		public MapMarker(LatLon point, PointDescription name, int colorIndex,
@@ -254,19 +254,8 @@ public class MapMarkersHelper {
 		}
 	}
 
-	public long getGroupId(String name) {
-		return markersDbHelper.getGroupId(name);
-	}
+	public void addGroupToSync(String id, String name) {
 
-//	public void removeMarker(double lat, double lon, long groupId) {
-//		markersDbHelper.removeMarker(lat, lon, groupId);
-//		loadMarkers();
-//		refresh();
-//	}
-
-	@Nullable
-	public String getGroupName(long id) {
-		return markersDbHelper.getGroupName(id);
 	}
 
 	public void moveMapMarkerToHistory(MapMarker marker) {
@@ -420,7 +409,7 @@ public class MapMarkersHelper {
 
 				MapMarker marker = new MapMarker(point, pointDescription, colorIndex, false, 0);
 				if (groups != null) {
-					marker.groupKey = markersDbHelper.createGroupIfNeeded(groups.get(i));
+//					marker.groupKey = markersDbHelper.createGroupIfNeeded(groups.get(i));
 				}
 				marker.history = false;
 				marker.nextKey = MapMarkersDbHelper.TAIL_NEXT_VALUE;

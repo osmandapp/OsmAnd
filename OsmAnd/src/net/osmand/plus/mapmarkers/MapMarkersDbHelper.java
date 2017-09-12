@@ -20,7 +20,7 @@ import java.util.Random;
 
 public class MapMarkersDbHelper {
 
-	private static final int DB_VERSION = 4;
+	private static final int DB_VERSION = 5;
 	public static final String DB_NAME = "map_markers_db";
 
 	private static final String MARKERS_TABLE_NAME = "map_markers";
@@ -46,7 +46,7 @@ public class MapMarkersDbHelper {
 			MARKERS_COL_ADDED + " long, " +
 			MARKERS_COL_VISITED + " long, " +
 			MARKERS_COL_GROUP_NAME + " TEXT, " +
-			MARKERS_COL_GROUP_KEY + " long, " +
+			MARKERS_COL_GROUP_KEY + " TEXT, " +
 			MARKERS_COL_COLOR + " int, " +
 			MARKERS_COL_NEXT_KEY + " TEXT);";
 
@@ -70,7 +70,7 @@ public class MapMarkersDbHelper {
 
 	private static final String GROUPS_TABLE_CREATE = "CREATE TABLE IF NOT EXISTS " +
 			GROUPS_TABLE_NAME + " (" +
-			GROUPS_COL_ID + " long PRIMARY KEY, " +
+			GROUPS_COL_ID + " TEXT PRIMARY KEY, " +
 			GROUPS_COL_NAME + " TEXT);";
 
 	private static final String GROUPS_TABLE_SELECT = "SELECT " +
@@ -149,27 +149,6 @@ public class MapMarkersDbHelper {
 		}
 	}
 
-	public long createGroupIfNeeded(String name) {
-		long res = -1;
-		SQLiteConnection db = openConnection(false);
-		if (db != null) {
-			try {
-				SQLiteCursor query = db.rawQuery(GROUPS_TABLE_SELECT + " WHERE " + GROUPS_COL_NAME + " = ?",
-						new String[]{name});
-				if (query.moveToFirst()) {
-					res = query.getLong(0);
-				} else {
-					res = Long.parseLong(String.valueOf(System.currentTimeMillis()) + String.valueOf(new Random().nextInt(900) + 100));
-					db.execSQL("INSERT INTO " + GROUPS_TABLE_NAME + " VALUES (?, ?)", new Object[]{res, name});
-				}
-				query.close();
-			} finally {
-				db.close();
-			}
-		}
-		return res;
-	}
-
 	public void addMarker(MapMarker marker) {
 		addMarker(marker, false);
 	}
@@ -217,45 +196,6 @@ public class MapMarkersDbHelper {
 						marker.history ? HISTORY_NEXT_VALUE : TAIL_NEXT_VALUE});
 	}
 
-	public long getGroupId(String name) {
-		long res = -1;
-		if (name != null) {
-			SQLiteConnection db = openConnection(true);
-			if (db != null) {
-				try {
-					SQLiteCursor query = db.rawQuery(GROUPS_TABLE_SELECT + " WHERE " + GROUPS_COL_NAME + " = ?",
-							new String[]{name});
-					if (query.moveToFirst()) {
-						res = query.getLong(0);
-					}
-					query.close();
-				} finally {
-					db.close();
-				}
-			}
-		}
-		return res;
-	}
-
-	@Nullable
-	public String getGroupName(long id) {
-		String res = null;
-		SQLiteConnection db = openConnection(true);
-		if (db != null) {
-			try {
-				SQLiteCursor query = db.rawQuery(GROUPS_TABLE_SELECT + " WHERE " + GROUPS_COL_ID + " = ?",
-						new String[]{String.valueOf(id)});
-				if (query.moveToFirst()) {
-					res = query.getString(1);
-				}
-				query.close();
-			} finally {
-				db.close();
-			}
-		}
-		return res;
-	}
-
 	public List<MapMarker> getActiveMarkers() {
 		List<MapMarker> res = new LinkedList<>();
 		HashMap<String, MapMarker> markers = new LinkedHashMap<>();
@@ -288,7 +228,7 @@ public class MapMarkersDbHelper {
 		long added = query.getLong(5);
 		long visited = query.getLong(6);
 		String groupName = query.getString(7);
-		long groupKey = query.getLong(8);
+		String groupKey = query.getString(8);
 		int colorIndex = query.getInt(9);
 		String nextKey = query.getString(10);
 
@@ -345,38 +285,6 @@ public class MapMarkersDbHelper {
 			try {
 				db.execSQL("UPDATE " + MARKERS_TABLE_NAME + " SET " + MARKERS_COL_NEXT_KEY + " = ? " +
 						"WHERE " + MARKERS_COL_ID + " = ?", new Object[]{next == null ? TAIL_NEXT_VALUE : next.id, moved.id});
-			} finally {
-				db.close();
-			}
-		}
-	}
-
-	public void removeMarker(double lat, double lon, long groupId) {
-		SQLiteConnection db = openConnection(false);
-		if (db != null) {
-			try {
-				MapMarker marker = null;
-				SQLiteCursor query = db.rawQuery(MARKERS_TABLE_SELECT + " WHERE " +
-								MARKERS_COL_LAT + " = ? AND " +
-								MARKERS_COL_LON + " = ? AND " +
-								MARKERS_COL_GROUP_KEY + " = ?",
-						new String[]{String.valueOf(lat), String.valueOf(lon), String.valueOf(groupId)});
-				if (query.moveToFirst()) {
-					marker = readItem(query);
-				}
-				query.close();
-
-				if (marker != null) {
-					if (marker.history) {
-						removeMarkerFromHistory(marker);
-					} else {
-						db.execSQL("UPDATE " + MARKERS_TABLE_NAME + " SET " + MARKERS_COL_NEXT_KEY + " = ? " +
-								"WHERE " + MARKERS_COL_NEXT_KEY + " = ?", new Object[]{marker.nextKey, marker.id});
-
-						db.execSQL("DELETE FROM " + MARKERS_TABLE_NAME + " WHERE " + MARKERS_COL_ID + " = ?",
-								new Object[]{marker.id});
-					}
-				}
 			} finally {
 				db.close();
 			}
