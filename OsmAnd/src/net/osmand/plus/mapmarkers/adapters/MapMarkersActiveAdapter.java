@@ -1,6 +1,7 @@
 package net.osmand.plus.mapmarkers.adapters;
 
 import android.support.design.widget.Snackbar;
+import android.support.v4.content.ContextCompat;
 import android.support.v4.view.MotionEventCompat;
 import android.support.v7.widget.RecyclerView;
 import android.view.LayoutInflater;
@@ -24,9 +25,6 @@ import java.util.Locale;
 public class MapMarkersActiveAdapter extends RecyclerView.Adapter<MapMarkerItemViewHolder>
 		implements MapMarkersItemTouchHelperCallback.ItemTouchHelperAdapter {
 
-	private static final int ON_MAP_TYPE = 1;
-	private static final int GENERAL_TYPE = 2;
-
 	private MapActivity mapActivity;
 	private List<MapMarker> markers;
 	private MapMarkersActiveAdapterListener listener;
@@ -36,10 +34,12 @@ public class MapMarkersActiveAdapter extends RecyclerView.Adapter<MapMarkerItemV
 	private Float heading;
 	private boolean useCenter;
 	private int screenOrientation;
+	private boolean night;
 
 	public MapMarkersActiveAdapter(MapActivity mapActivity) {
 		this.mapActivity = mapActivity;
 		markers = mapActivity.getMyApplication().getMapMarkersHelper().getMapMarkers();
+		night = !mapActivity.getMyApplication().getSettings().isLightContent();
 	}
 
 	public void setAdapterListener(MapMarkersActiveAdapterListener listener) {
@@ -64,22 +64,14 @@ public class MapMarkersActiveAdapter extends RecyclerView.Adapter<MapMarkerItemV
 
 	@Override
 	public MapMarkerItemViewHolder onCreateViewHolder(ViewGroup viewGroup, int viewType) {
-		View view;
-		MapMarkerItemViewHolder holder;
-		if (viewType == ON_MAP_TYPE) {
-			view = LayoutInflater.from(viewGroup.getContext()).inflate(R.layout.map_marker_item_on_map, viewGroup, false);
-			holder = new MapMarkerItemOnMapViewHolder(view);
-		} else {
-			view = LayoutInflater.from(viewGroup.getContext()).inflate(R.layout.map_marker_item_new, viewGroup, false);
-			holder = new MapMarkerItemViewHolder(view);
-		}
+		View view = LayoutInflater.from(viewGroup.getContext()).inflate(R.layout.map_marker_item_new, viewGroup, false);
 		view.setOnClickListener(new View.OnClickListener() {
 			@Override
 			public void onClick(View view) {
 				listener.onItemClick(view);
 			}
 		});
-		return holder;
+		return new MapMarkerItemViewHolder(view);
 	}
 
 	@Override
@@ -88,17 +80,21 @@ public class MapMarkersActiveAdapter extends RecyclerView.Adapter<MapMarkerItemV
 		MapMarker marker = markers.get(pos);
 
 		int color = MapMarker.getColorId(marker.colorIndex);
-		if (holder instanceof MapMarkerItemOnMapViewHolder) {
-			((MapMarkerItemOnMapViewHolder) holder).iconDirection.setImageDrawable(iconsCache.getIcon(R.drawable.ic_arrow_marker_diretion, color));
-
+		if (pos < 2) {
+			holder.icon.setImageDrawable(iconsCache.getIcon(R.drawable.ic_arrow_marker_diretion, color));
+			holder.itemView.setBackgroundColor(ContextCompat.getColor(mapActivity, R.color.markers_top_bar_background));
+			holder.title.setTextColor(ContextCompat.getColor(mapActivity, R.color.color_white));
+			holder.divider.setBackgroundColor(ContextCompat.getColor(mapActivity, R.color.map_markers_on_map_divider_color));
+			holder.optionsBtn.setBackgroundDrawable(mapActivity.getResources().getDrawable(R.drawable.marker_circle_background_on_map_with_inset));
 			holder.optionsBtn.setImageDrawable(iconsCache.getIcon(R.drawable.ic_action_marker_passed, R.color.color_white));
-
 			holder.iconReorder.setImageDrawable(iconsCache.getIcon(R.drawable.ic_action_reorder, R.color.map_markers_on_map_color));
 		} else {
 			holder.icon.setImageDrawable(iconsCache.getIcon(R.drawable.ic_action_flag_dark, color));
-
+			holder.itemView.setBackgroundColor(ContextCompat.getColor(mapActivity, night ? R.color.bg_color_dark : R.color.bg_color_light));
+			holder.title.setTextColor(ContextCompat.getColor(mapActivity, night ? R.color.color_white : R.color.color_black));
+			holder.divider.setBackgroundColor(ContextCompat.getColor(mapActivity, night ? R.color.dashboard_divider_dark : R.color.dashboard_divider_light));
+			holder.optionsBtn.setBackgroundDrawable(mapActivity.getResources().getDrawable(R.drawable.marker_circle_background_light_with_inset));
 			holder.optionsBtn.setImageDrawable(iconsCache.getThemedIcon(R.drawable.ic_action_marker_passed));
-
 			holder.iconReorder.setImageDrawable(iconsCache.getThemedIcon(R.drawable.ic_action_reorder));
 		}
 		holder.iconReorder.setOnTouchListener(new View.OnTouchListener() {
@@ -152,15 +148,6 @@ public class MapMarkersActiveAdapter extends RecyclerView.Adapter<MapMarkerItemV
 				heading, holder.iconDirection, holder.distance,
 				marker.getLatitude(), marker.getLongitude(),
 				screenOrientation, mapActivity.getMyApplication(), mapActivity);
-	}
-
-	@Override
-	public int getItemViewType(int position) {
-		if (position < 2) {
-			return ON_MAP_TYPE;
-		} else {
-			return GENERAL_TYPE;
-		}
 	}
 
 	@Override

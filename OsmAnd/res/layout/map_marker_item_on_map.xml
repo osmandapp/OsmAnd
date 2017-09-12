@@ -108,6 +108,6 @@
         android:layout_height="1dp"
         android:layout_marginLeft="56dp"
         android:layout_marginStart="56dp"
-        android:background="@color/map_markers_divider_color"/>
+        android:background="@color/map_markers_on_map_divider_color"/>
 
 </LinearLayout>

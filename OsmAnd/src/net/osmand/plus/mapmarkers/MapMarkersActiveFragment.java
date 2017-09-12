@@ -70,6 +70,8 @@ public class MapMarkersActiveFragment extends Fragment implements OsmAndCompassL
 					hideSnackbar();
 					mapActivity.getMyApplication().getMapMarkersHelper().checkAndFixActiveMarkersOrderIfNeeded();
 				}
+				adapter.notifyItemChanged(fromPosition);
+				adapter.notifyItemChanged(toPosition);
 			}
 		});
 		recyclerView.setAdapter(adapter);
