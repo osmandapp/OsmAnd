@@ -5,6 +5,7 @@ import android.support.annotation.Nullable;
 import net.osmand.data.LatLon;
 import net.osmand.data.PointDescription;
 import net.osmand.plus.MapMarkersHelper.MapMarker;
+import net.osmand.plus.MapMarkersHelper.MarkersSyncGroup;
 import net.osmand.plus.OsmandApplication;
 import net.osmand.plus.OsmandSettings;
 import net.osmand.plus.api.SQLiteAPI.SQLiteConnection;
@@ -20,7 +21,7 @@ import java.util.Random;
 
 public class MapMarkersDbHelper {
 
-	private static final int DB_VERSION = 5;
+	private static final int DB_VERSION = 6;
 	public static final String DB_NAME = "map_markers_db";
 
 	private static final String MARKERS_TABLE_NAME = "map_markers";
@@ -67,15 +68,18 @@ public class MapMarkersDbHelper {
 	private static final String GROUPS_TABLE_NAME = "map_markers_groups";
 	private static final String GROUPS_COL_ID = "group_id";
 	private static final String GROUPS_COL_NAME = "group_name";
+	private static final String GROUPS_COL_TYPE = "group_type";
 
 	private static final String GROUPS_TABLE_CREATE = "CREATE TABLE IF NOT EXISTS " +
 			GROUPS_TABLE_NAME + " (" +
 			GROUPS_COL_ID + " TEXT PRIMARY KEY, " +
-			GROUPS_COL_NAME + " TEXT);";
+			GROUPS_COL_NAME + " TEXT, " +
+			GROUPS_COL_TYPE + " int);";
 
 	private static final String GROUPS_TABLE_SELECT = "SELECT " +
 			GROUPS_COL_ID + ", " +
-			GROUPS_COL_NAME +
+			GROUPS_COL_NAME + ", " +
+			GROUPS_COL_TYPE +
 			" FROM " + GROUPS_TABLE_NAME;
 
 	public static final String TAIL_NEXT_VALUE = "tail_next";
@@ -149,6 +153,43 @@ public class MapMarkersDbHelper {
 		}
 	}
 
+	public void addGroup(String id, String name, int type) {
+		SQLiteConnection db = openConnection(false);
+		if (db != null) {
+			try {
+				db.execSQL("INSERT INTO " + GROUPS_TABLE_NAME + " VALUES (?, ?, ?)", new Object[]{id, name, type});
+			} finally {
+				db.close();
+			}
+		}
+	}
+
+	@Nullable
+	public MarkersSyncGroup getGroup(String id) {
+		MarkersSyncGroup res = null;
+		SQLiteConnection db = openConnection(true);
+		if (db != null) {
+			try {
+				SQLiteCursor query = db.rawQuery(GROUPS_TABLE_SELECT + " WHERE " + GROUPS_COL_ID + " = ?", new String[]{id});
+				if (query.moveToFirst()) {
+					res = readSyncGroup(query);
+				}
+				query.close();
+			} finally {
+				db.close();
+			}
+		}
+		return res;
+	}
+
+	private MarkersSyncGroup readSyncGroup(SQLiteCursor query) {
+		String id = query.getString(0);
+		String name = query.getString(1);
+		int type = query.getInt(2);
+
+		return new MarkersSyncGroup(id, name, type);
+	}
+
 	public void addMarker(MapMarker marker) {
 		addMarker(marker, false);
 	}
@@ -173,7 +214,9 @@ public class MapMarkersDbHelper {
 		} else {
 			currentTime = System.currentTimeMillis();
 		}
-		marker.id = String.valueOf(currentTime) + String.valueOf(new Random().nextInt(900) + 100);
+		if (marker.id == null) {
+			marker.id = String.valueOf(currentTime) + String.valueOf(new Random().nextInt(900) + 100);
+		}
 		marker.creationDate = currentTime;
 		String descr = PointDescription.serializeToString(marker.getOriginalPointDescription());
 		int active = marker.history ? 0 : 1;

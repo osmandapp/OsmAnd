@@ -1,6 +1,7 @@
 package net.osmand.plus;
 
 import android.content.Context;
+import android.support.annotation.NonNull;
 import android.support.annotation.Nullable;
 import android.text.format.DateFormat;
 
@@ -154,6 +155,34 @@ public class MapMarkersHelper {
 		}
 	}
 
+	public static class MarkersSyncGroup {
+
+		public static final int FAVORITES_TYPE = 0;
+		public static final int GPX_TYPE = 1;
+
+		private String id;
+		private String name;
+		private int type;
+
+		public MarkersSyncGroup(@NonNull String id, @NonNull String name, int type) {
+			this.id = id;
+			this.name = name;
+			this.type = type;
+		}
+
+		public String getId() {
+			return id;
+		}
+
+		public String getName() {
+			return name;
+		}
+
+		public int getType() {
+			return type;
+		}
+	}
+
 	public MapMarkersHelper(OsmandApplication ctx) {
 		this.ctx = ctx;
 		settings = ctx.getSettings();
@@ -254,7 +283,7 @@ public class MapMarkersHelper {
 		}
 	}
 
-	public void addGroupToSync(String id, String name) {
+	public void syncGroup(MarkersSyncGroup group) {
 
 	}
 
@@ -374,15 +403,15 @@ public class MapMarkersHelper {
 		addMarkers(Collections.singletonList(point), Collections.singletonList(historyName), null);
 	}
 
-	public void addMapMarkers(List<LatLon> points, List<PointDescription> historyNames, List<String> groups) {
-		addMarkers(points, historyNames, groups);
+	public void addMapMarkers(List<LatLon> points, List<PointDescription> historyNames, @Nullable MarkersSyncGroup group) {
+		addMarkers(points, historyNames, group);
 	}
 
 	public void addMapMarkers(List<LatLon> points, List<PointDescription> historyNames) {
 		addMarkers(points, historyNames, null);
 	}
 
-	private void addMarkers(List<LatLon> points, List<PointDescription> historyNames, @Nullable List<String> groups) {
+	private void addMarkers(List<LatLon> points, List<PointDescription> historyNames, @Nullable MarkersSyncGroup group) {
 		if (points.size() > 0) {
 			int colorIndex = -1;
 			for (int i = 0; i < points.size(); i++) {
@@ -408,8 +437,12 @@ public class MapMarkersHelper {
 				}
 
 				MapMarker marker = new MapMarker(point, pointDescription, colorIndex, false, 0);
-				if (groups != null) {
-//					marker.groupKey = markersDbHelper.createGroupIfNeeded(groups.get(i));
+				if (group != null) {
+					if (markersDbHelper.getGroup(group.getId()) == null) {
+						markersDbHelper.addGroup(group.getId(), group.getName(), group.getType());
+					}
+					marker.id = group.getId() + marker.getName(ctx);
+					marker.groupName = group.getName();
 				}
 				marker.history = false;
 				marker.nextKey = MapMarkersDbHelper.TAIL_NEXT_VALUE;

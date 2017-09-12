@@ -36,6 +36,7 @@ import net.osmand.data.PointDescription;
 import net.osmand.plus.FavouritesDbHelper;
 import net.osmand.plus.FavouritesDbHelper.FavoriteGroup;
 import net.osmand.plus.MapMarkersHelper;
+import net.osmand.plus.MapMarkersHelper.MarkersSyncGroup;
 import net.osmand.plus.OsmAndFormatter;
 import net.osmand.plus.OsmandApplication;
 import net.osmand.plus.OsmandSettings;
@@ -57,6 +58,7 @@ import java.util.HashMap;
 import java.util.HashSet;
 import java.util.LinkedHashMap;
 import java.util.LinkedHashSet;
+import java.util.LinkedList;
 import java.util.List;
 import java.util.Map;
 import java.util.Set;
@@ -401,18 +403,22 @@ public class FavoritesTreeFragment extends OsmandExpandableListFragment {
 		if (getSelectedFavoritesCount() > 0) {
 			if (getSettings().USE_MAP_MARKERS.get()) {
 				MapMarkersHelper markersHelper = getMyApplication().getMapMarkersHelper();
-				int size = getSelectedFavoritesCount();
-				List<LatLon> points = new ArrayList<>(size);
-				List<PointDescription> names = new ArrayList<>(size);
-				List<String> groups = new ArrayList<>(size);
+				List<LatLon> points = new LinkedList<>();
+				List<PointDescription> names = new LinkedList<>();
 				for (Map.Entry<String, Set<FavouritePoint>> entry : favoritesSelected.entrySet()) {
+					MarkersSyncGroup syncGr = null;
+					FavoriteGroup favGr = helper.getGroup(entry.getKey());
+					if (entry.getValue().size() == favGr.points.size()) {
+						syncGr = new MarkersSyncGroup(favGr.name, favGr.name, MarkersSyncGroup.FAVORITES_TYPE);
+					}
 					for (FavouritePoint fp : entry.getValue()) {
 						points.add(new LatLon(fp.getLatitude(), fp.getLongitude()));
 						names.add(new PointDescription(PointDescription.POINT_TYPE_MAP_MARKER, fp.getName()));
-						groups.add(entry.getKey());
 					}
+					markersHelper.addMapMarkers(points, names, syncGr);
+					points.clear();
+					names.clear();
 				}
-				markersHelper.addMapMarkers(points, names, groups);
 				MapActivity.launchMapActivityMoveToTop(getActivity());
 			} else {
 				final TargetPointsHelper targetPointsHelper = getMyApplication().getTargetPointsHelper();
