@@ -2842,7 +2842,7 @@ Koda predstavlja območje: %1$s x %2$s</string>
     <string name="build_route">Preračunaj pot</string>
     <string name="show_direction">Pokaži smer</string>
     <string name="sort_by">Razvrsti po</string>
-    <string name="marker_options">Možnosti markerja</string>
+    <string name="marker_options">Možnosti označb</string>
     <string name="do_not_use_animations">Ne uporabljaj animacij</string>
     <string name="do_not_use_animations_descr">Onemogoči predvajanje animacij v programu</string>
     <string name="keep_showing_on_map">Prikazuj na zemljevidu</string>
