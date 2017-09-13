@@ -68,7 +68,7 @@
                         tools:src="@drawable/img_help_trip_route_points_night"/>
 
                     <TextView
-                        android:id="@+id/top_bar_text"
+                        android:id="@+id/top_bar_image_text"
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
                         android:layout_alignLeft="@id/top_bar_image"
@@ -100,7 +100,7 @@
                         tools:src="@drawable/img_help_trip_track_night"/>
 
                     <TextView
-                        android:id="@+id/widget_text"
+                        android:id="@+id/widget_image_text"
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
                         android:layout_alignLeft="@id/widget_image"
@@ -119,7 +119,7 @@
                 android:id="@+id/top_bar_row"
                 android:layout_width="match_parent"
                 android:layout_height="@dimen/bottom_sheet_list_item_height"
-                android:background="?attr/selectableItemBackground"
+                android:foreground="?attr/selectableItemBackground"
                 android:minHeight="@dimen/bottom_sheet_list_item_height"
                 android:paddingEnd="@dimen/bottom_sheet_content_padding"
                 android:paddingLeft="@dimen/bottom_sheet_content_padding"
@@ -137,6 +137,7 @@
                     tools:src="@drawable/ic_action_device_topbar"/>
 
                 <TextView
+                    android:id="@+id/top_bar_text"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:layout_centerVertical="true"
@@ -145,13 +146,24 @@
                     android:maxLines="1"
                     android:text="@string/top_bar"
                     android:textAppearance="@style/TextAppearance.ListItemTitle"/>
+
+                <RadioButton
+                    android:focusable="false"
+                    android:clickable="false"
+                    android:background="@null"
+                    android:id="@+id/top_bar_radio_button"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_centerVertical="true"
+                    android:layout_alignParentEnd="true"
+                    android:layout_alignParentRight="true"/>
             </RelativeLayout>
 
             <RelativeLayout
                 android:id="@+id/widget_row"
                 android:layout_width="match_parent"
                 android:layout_height="@dimen/bottom_sheet_list_item_height"
-                android:background="?attr/selectableItemBackground"
+                android:foreground="?attr/selectableItemBackground"
                 android:minHeight="@dimen/bottom_sheet_list_item_height"
                 android:paddingEnd="@dimen/bottom_sheet_content_padding"
                 android:paddingLeft="@dimen/bottom_sheet_content_padding"
@@ -169,6 +181,7 @@
                     tools:src="@drawable/ic_action_device_widget"/>
 
                 <TextView
+                    android:id="@+id/widget_text"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:layout_centerVertical="true"
@@ -177,13 +190,24 @@
                     android:maxLines="1"
                     android:text="@string/widget"
                     android:textAppearance="@style/TextAppearance.ListItemTitle"/>
+
+                <RadioButton
+                    android:focusable="false"
+                    android:clickable="false"
+                    android:background="@null"
+                    android:id="@+id/widget_radio_button"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_centerVertical="true"
+                    android:layout_alignParentEnd="true"
+                    android:layout_alignParentRight="true"/>
             </RelativeLayout>
 
             <RelativeLayout
                 android:id="@+id/none_row"
                 android:layout_width="match_parent"
                 android:layout_height="@dimen/bottom_sheet_list_item_height"
-                android:background="?attr/selectableItemBackground"
+                android:foreground="?attr/selectableItemBackground"
                 android:minHeight="@dimen/bottom_sheet_list_item_height"
                 android:paddingEnd="@dimen/bottom_sheet_content_padding"
                 android:paddingLeft="@dimen/bottom_sheet_content_padding"
@@ -200,6 +224,7 @@
                     tools:background="@drawable/ic_action_device_top"/>
 
                 <TextView
+                    android:id="@+id/none_text"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:layout_centerVertical="true"
@@ -208,6 +233,17 @@
                     android:maxLines="1"
                     android:text="@string/shared_string_none"
                     android:textAppearance="@style/TextAppearance.ListItemTitle"/>
+
+                <RadioButton
+                    android:focusable="false"
+                    android:clickable="false"
+                    android:background="@null"
+                    android:id="@+id/none_radio_button"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_centerVertical="true"
+                    android:layout_alignParentEnd="true"
+                    android:layout_alignParentRight="true"/>
             </RelativeLayout>
 
         </LinearLayout>
