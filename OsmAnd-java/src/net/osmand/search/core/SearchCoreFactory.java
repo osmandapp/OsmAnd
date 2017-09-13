@@ -490,7 +490,7 @@ public class SearchCoreFactory {
 					SearchPhraseDataType.POI);
 			final NameStringMatcher nm = phrase.getNameStringMatcher();
 			QuadRect bbox = phrase.getRadiusBBoxToSearch(BBOX_RADIUS_INSIDE);
-			final Set<Long> ids = new HashSet<Long>();
+			final Set<String> ids = new HashSet<String>();
 			SearchRequest<Amenity> req = BinaryMapIndexReader.buildSearchPoiRequest(
 					(int)bbox.centerX(), (int)bbox.centerY(),
 					phrase.getUnknownSearchWord(),
@@ -503,7 +503,8 @@ public class SearchCoreFactory {
 							if (limit ++ > LIMIT) {
 								return false;
 							}
-							if (ids.contains(object.getId())) {
+							String poiID = object.getType().getKeyName() + "_" + object.getId();
+							if (ids.contains(poiID)) {
 								return false;
 							}
 							SearchResult sr = new SearchResult(phrase);
@@ -531,7 +532,7 @@ public class SearchCoreFactory {
 							phrase.countUnknownWordsMatch(sr);
 							sr.objectType = ObjectType.POI;
 							resultMatcher.publish(sr);
-							ids.add(object.getId());
+							ids.add(poiID);
 							return false;
 						}
 

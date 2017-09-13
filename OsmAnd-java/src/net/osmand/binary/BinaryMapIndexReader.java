@@ -403,9 +403,9 @@ public class BinaryMapIndexReader {
 		if (rg.size() == 0) {
 			rg.add(file.getName());
 		}
-		String ls = rg.get(0);
+		String ls = new String(rg.get(0));
 		if (ls.lastIndexOf('_') != -1) {
-			return ls.substring(0, ls.lastIndexOf('_')).replace('_', ' ');
+			return ls.substring(0, ls.lastIndexOf('_')).replace('_', ' ').replaceAll("[0-9]+", "").trim();
 		}
 		return ls;
 	}
