@@ -36,4 +36,8 @@ public class MapMarkerItemViewHolder extends RecyclerView.ViewHolder {
 	public void setOptionsButtonVisibility(int visibility) {
 		optionsBtn.setVisibility(visibility);
 	}
+
+	public void setIconDirectionVisibility(int visibility) {
+		iconDirection.setVisibility(visibility);
+	}
 }

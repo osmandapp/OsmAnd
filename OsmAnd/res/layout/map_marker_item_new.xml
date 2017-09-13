@@ -60,6 +60,8 @@
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:layout_gravity="center_vertical"
+                    android:layout_marginRight="4dp"
+                    android:layout_marginEnd="4dp"
                     tools:src="@drawable/ic_direction_arrow"/>
 
                 <android.support.v7.widget.AppCompatTextView
@@ -67,8 +69,8 @@
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:layout_gravity="center_vertical"
-                    android:layout_marginLeft="4dp"
                     android:layout_marginRight="4dp"
+                    android:layout_marginEnd="4dp"
                     android:maxLines="1"
                     android:textSize="@dimen/default_desc_text_size"
                     tools:text="213 m"/>
