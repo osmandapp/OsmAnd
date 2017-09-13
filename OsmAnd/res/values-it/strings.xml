@@ -2654,7 +2654,7 @@ Rappresenta l\'area: %1$s x %2$s</string>
     <string name="total_distance">Distanza totale</string>
     
     <string name="routing_attr_height_relief_smoothness_factor_description">Più piatto o più colline</string>
-    <string name="routing_attr_height_obstacles_name">Utilizza dati di quota</string>
+    <string name="routing_attr_height_obstacles_name">Utilizza dati altitudine</string>
     <string name="routing_attr_height_obstacles_description">Utilizza i dati di elevazione del terreno forniti da SRTM, ASTER e EU-DEM</string>
 
     <string name="shared_string_time_span">Intervallo di tempo</string>
