@@ -164,6 +164,25 @@ public class MapMarkersDbHelper {
 		}
 	}
 
+	public List<MarkersSyncGroup> getAllGroups() {
+		List<MarkersSyncGroup> res = new LinkedList<>();
+		SQLiteConnection db = openConnection(true);
+		if (db != null) {
+			try {
+				SQLiteCursor query = db.rawQuery(GROUPS_TABLE_SELECT, null);
+				if (query.moveToFirst()) {
+					do {
+						res.add(readSyncGroup(query));
+					} while (query.moveToNext());
+				}
+				query.close();
+			} finally {
+				db.close();
+			}
+		}
+		return res;
+	}
+
 	@Nullable
 	public MarkersSyncGroup getGroup(String id) {
 		MarkersSyncGroup res = null;
@@ -188,6 +207,22 @@ public class MapMarkersDbHelper {
 		int type = query.getInt(2);
 
 		return new MarkersSyncGroup(id, name, type);
+	}
+
+	public void removeMarkersSyncGroup(String id) {
+		SQLiteConnection db = openConnection(true);
+		if (db != null) {
+			try {
+				db.execSQL("DELETE FROM " + MARKERS_TABLE_NAME +
+								" WHERE " + MARKERS_COL_GROUP_KEY + " = ?" +
+								" AND " + MARKERS_COL_ACTIVE + " = ?",
+						new Object[]{id, 1});
+
+				db.execSQL("DELETE FROM " + GROUPS_TABLE_NAME + " WHERE " + GROUPS_COL_ID + " = ?", new Object[]{id});
+			} finally {
+				db.close();
+			}
+		}
 	}
 
 	public void addMarker(MapMarker marker) {
@@ -237,6 +272,44 @@ public class MapMarkersDbHelper {
 				new Object[]{marker.id, marker.getLatitude(), marker.getLongitude(), descr, active,
 						currentTime, visited, marker.groupName, marker.groupKey, marker.colorIndex,
 						marker.history ? HISTORY_NEXT_VALUE : TAIL_NEXT_VALUE});
+	}
+
+	public List<MapMarker> getMarkersFromGroup(MarkersSyncGroup group) {
+		List<MapMarker> res = new LinkedList<>();
+		SQLiteConnection db = openConnection(true);
+		if (db != null) {
+			try {
+				SQLiteCursor query = db.rawQuery(MARKERS_TABLE_SELECT + " WHERE " + MARKERS_COL_GROUP_KEY + " = ?",
+						new String[]{group.getId()});
+				if (query.moveToFirst()) {
+					do {
+						res.add(readItem(query));
+					} while (query.moveToNext());
+				}
+				query.close();
+			} finally {
+				db.close();
+			}
+		}
+		return res;
+	}
+
+	@Nullable
+	public MapMarker getMarker(String id) {
+		MapMarker res = null;
+		SQLiteConnection db = openConnection(true);
+		if (db != null) {
+			try {
+				SQLiteCursor query = db.rawQuery(MARKERS_TABLE_SELECT + " WHERE " + MARKERS_COL_ID + " = ?", new String[]{id});
+				if (query.moveToFirst()) {
+					res = readItem(query);
+				}
+				query.close();
+			} finally {
+				db.close();
+			}
+		}
+		return res;
 	}
 
 	public List<MapMarker> getActiveMarkers() {
@@ -351,16 +424,15 @@ public class MapMarkersDbHelper {
 		}
 	}
 
-	public void moveAllActiveMarkersToHistory() {
+	public void moveAllActiveMarkersToHistory(long timestamp) {
 		SQLiteConnection db = openConnection(false);
 		if (db != null) {
 			try {
-				long visitedDate = System.currentTimeMillis();
 				db.execSQL("UPDATE " + MARKERS_TABLE_NAME + " SET " +
 						MARKERS_COL_ACTIVE + " = ?, " +
 						MARKERS_COL_VISITED + " = ?, " +
 						MARKERS_COL_NEXT_KEY + " = ? " +
-						"WHERE " + MARKERS_COL_ACTIVE + " = ?", new Object[]{0, visitedDate, HISTORY_NEXT_VALUE, 1});
+						"WHERE " + MARKERS_COL_ACTIVE + " = ?", new Object[]{0, timestamp, HISTORY_NEXT_VALUE, 1});
 			} finally {
 				db.close();
 			}
@@ -402,14 +474,14 @@ public class MapMarkersDbHelper {
 		return markers;
 	}
 
-	public void removeMarkerFromHistory(MapMarker marker) {
+	public void removeMarker(MapMarker marker, boolean history) {
 		SQLiteConnection db = openConnection(true);
 		if (db != null) {
 			try {
 				db.execSQL("DELETE FROM " + MARKERS_TABLE_NAME +
 								" WHERE " + MARKERS_COL_ID + " = ?" +
 								" AND " + MARKERS_COL_ACTIVE + " = ?",
-						new Object[]{marker.id, 0});
+						new Object[]{marker.id, history ? 0 : 1});
 			} finally {
 				db.close();
 			}

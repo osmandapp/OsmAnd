@@ -189,7 +189,9 @@ public class EditFavoriteGroupDialogFragment extends BottomSheetDialogFragment {
 						points.add(new LatLon(fp.getLatitude(), fp.getLongitude()));
 						names.add(new PointDescription(PointDescription.POINT_TYPE_MAP_MARKER, fp.getName()));
 					}
-					markersHelper.addMapMarkers(points, names, new MarkersSyncGroup(group.name, group.name, MarkersSyncGroup.FAVORITES_TYPE));
+					MarkersSyncGroup syncGroup = new MarkersSyncGroup(group.name, group.name, MarkersSyncGroup.FAVORITES_TYPE);
+					markersHelper.addMarkersSyncGroup(syncGroup);
+					markersHelper.addMapMarkers(points, names, syncGroup);
 					dismiss();
 					MapActivity.launchMapActivityMoveToTop(getActivity());
 				}

@@ -610,6 +610,7 @@ public class TrackPointFragment extends OsmandExpandableListFragment {
 				}
 				File gpx = getGpxDataItem().getFile();
 				MarkersSyncGroup syncGroup = new MarkersSyncGroup(gpx.getAbsolutePath(), trimExtension(gpx.getName()), MarkersSyncGroup.GPX_TYPE);
+				markersHelper.addMarkersSyncGroup(syncGroup);
 				markersHelper.addMapMarkers(points, names, syncGroup);
 				MapActivity.launchMapActivityMoveToTop(getActivity());
 			} else {
