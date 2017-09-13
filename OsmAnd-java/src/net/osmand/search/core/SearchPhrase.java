@@ -13,6 +13,7 @@ import net.osmand.util.Algorithms;
 import net.osmand.util.MapUtils;
 
 import java.util.ArrayList;
+import java.util.Arrays;
 import java.util.Collection;
 import java.util.Collections;
 import java.util.Comparator;
@@ -535,6 +536,7 @@ public class SearchPhrase {
 		if(indexes == null) {
 			indexes = new ArrayList<>(getOfflineIndexes());
 		}
+		Map<String, List<BinaryMapIndexReader>> diffsByRegion = getDiffsByRegion();
 		final LatLon ll = getLastTokenLocation();
 		if(ll != null) {
 			Collections.sort(indexes, new Comparator<BinaryMapIndexReader>() {
@@ -542,9 +544,6 @@ public class SearchPhrase {
 
 				@Override
 				public int compare(BinaryMapIndexReader o1, BinaryMapIndexReader o2) {
-					if (o1.getRegionName().equals(o2.getRegionName())) {
-						return o1.getFile().getName().compareTo(o2.getFile().getName());
-					}
  					LatLon rc1 = o1 == null ? null : getLocation(o1);
 					LatLon rc2 = o2 == null ? null : getLocation(o2);
 					double d1 = rc1 == null ? 10000000d : MapUtils.getDistance(rc1, ll);
@@ -566,9 +565,34 @@ public class SearchPhrase {
 					return rc1;
 				}
 			});
+			List<BinaryMapIndexReader> finalSort = new ArrayList<>();
+			for (int i = 0; i < indexes.size(); i++) {
+				BinaryMapIndexReader currFile = indexes.get(i);
+				finalSort.addAll(diffsByRegion.get(currFile.getRegionName()));
+				finalSort.add(currFile);
+			}
+			indexes.clear();
+			indexes.addAll(finalSort);
 		}
 	}
 	
+	private Map<String, List<BinaryMapIndexReader>> getDiffsByRegion() {
+		Map<String, List<BinaryMapIndexReader>> result = new HashMap<>();
+		for (BinaryMapIndexReader r : indexes) {
+			if (r.getFile().getName().matches("[a-zA-Z_-]+([0-9]+_*{3}).+[a-z]+")) {
+				String currRegionName = r.getRegionName();
+				if (result.containsKey(currRegionName)) {
+					result.get(currRegionName).add(r);
+				} else {
+					result.put(currRegionName, Arrays.asList(r));
+				}
+				indexes.remove(r);
+			}
+			
+		}
+		return result;
+	}
+
 	public static class NameStringMatcher implements StringMatcher {
 
 		private CollatorStringMatcher sm;
