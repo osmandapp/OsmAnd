@@ -4,120 +4,143 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="wrap_content"
-    android:background="?attr/bg_color"
     android:descendantFocusability="blocksDescendants"
     android:orientation="vertical">
 
     <LinearLayout
+        android:id="@+id/main_layout"
+        android:background="?attr/bg_color"
+        android:orientation="vertical"
         android:layout_width="match_parent"
-        android:layout_height="56dp"
-        android:background="?attr/selectableItemBackground">
-
-        <android.support.v7.widget.AppCompatImageView
-            android:id="@+id/map_marker_reorder_icon"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_gravity="center_vertical"
-            android:paddingBottom="16dp"
-            android:paddingLeft="16dp"
-            android:paddingStart="16dp"
-            android:paddingTop="16dp"
-            android:tint="?attr/secondary_icon_color"
-            tools:src="@drawable/ic_action_reorder"/>
-
-        <android.support.v7.widget.AppCompatImageView
-            android:id="@+id/map_marker_icon"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_gravity="center_vertical"
-            android:layout_marginLeft="16dp"
-            android:layout_marginRight="16dp"
-            tools:src="@drawable/ic_action_flag_dark"/>
+        android:layout_height="wrap_content">
 
         <LinearLayout
-            android:layout_width="0dp"
-            android:layout_height="wrap_content"
-            android:layout_gravity="center_vertical"
-            android:layout_weight="1"
-            android:orientation="vertical">
+            android:layout_width="match_parent"
+            android:layout_height="56dp"
+            android:background="?attr/selectableItemBackground">
 
-            <android.support.v7.widget.AppCompatTextView
-                android:id="@+id/map_marker_title"
-                android:layout_width="match_parent"
+            <android.support.v7.widget.AppCompatImageView
+                android:id="@+id/map_marker_reorder_icon"
+                android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:ellipsize="end"
-                android:maxLines="1"
-                android:textColor="?android:textColorPrimary"
-                android:textSize="@dimen/default_list_text_size"
-                tools:text="Van Gogh Museum"/>
+                android:layout_gravity="center_vertical"
+                android:paddingBottom="16dp"
+                android:paddingLeft="16dp"
+                android:paddingStart="16dp"
+                android:paddingTop="16dp"
+                android:tint="?attr/secondary_icon_color"
+                tools:src="@drawable/ic_action_reorder"/>
+
+            <android.support.v7.widget.AppCompatImageView
+                android:id="@+id/map_marker_icon"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_gravity="center_vertical"
+                android:layout_marginLeft="16dp"
+                android:layout_marginRight="16dp"
+                tools:src="@drawable/ic_action_flag_dark"/>
 
             <LinearLayout
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content">
-
-                <ImageView
-                    android:id="@+id/map_marker_direction_icon"
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:layout_gravity="center_vertical"
-                    android:layout_marginRight="4dp"
-                    android:layout_marginEnd="4dp"
-                    tools:src="@drawable/ic_direction_arrow"/>
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:layout_gravity="center_vertical"
+                android:layout_weight="1"
+                android:orientation="vertical">
 
                 <android.support.v7.widget.AppCompatTextView
-                    android:id="@+id/map_marker_distance"
-                    android:layout_width="wrap_content"
+                    android:id="@+id/map_marker_title"
+                    android:layout_width="match_parent"
                     android:layout_height="wrap_content"
-                    android:layout_gravity="center_vertical"
-                    android:layout_marginRight="4dp"
-                    android:layout_marginEnd="4dp"
-                    android:maxLines="1"
-                    android:textSize="@dimen/default_desc_text_size"
-                    tools:text="213 m"/>
-
-                <android.support.v7.widget.AppCompatTextView
-                    android:id="@+id/map_marker_point_text_view"
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:layout_gravity="center_vertical"
-                    android:text="•"
-                    android:textColor="?android:textColorSecondary"
-                    android:textSize="@dimen/default_desc_text_size"
-                    android:visibility="gone"
-                    tools:visibility="visible"/>
-
-                <android.support.v7.widget.AppCompatTextView
-                    android:id="@+id/map_marker_description"
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:layout_gravity="center_vertical"
-                    android:layout_marginLeft="4dp"
-                    android:layout_marginRight="4dp"
                     android:ellipsize="end"
                     android:maxLines="1"
-                    android:textColor="?android:textColorSecondary"
-                    android:textSize="@dimen/default_desc_text_size"
-                    tools:text="Amsterdam Weekend"/>
+                    android:textColor="?android:textColorPrimary"
+                    android:textSize="@dimen/default_list_text_size"
+                    tools:text="Van Gogh Museum"/>
+
+                <LinearLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content">
+
+                    <ImageView
+                        android:id="@+id/map_marker_direction_icon"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_gravity="center_vertical"
+                        android:layout_marginRight="4dp"
+                        android:layout_marginEnd="4dp"
+                        tools:src="@drawable/ic_direction_arrow"/>
+
+                    <android.support.v7.widget.AppCompatTextView
+                        android:id="@+id/map_marker_distance"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_gravity="center_vertical"
+                        android:layout_marginRight="4dp"
+                        android:layout_marginEnd="4dp"
+                        android:maxLines="1"
+                        android:textSize="@dimen/default_desc_text_size"
+                        tools:text="213 m"/>
+
+                    <android.support.v7.widget.AppCompatTextView
+                        android:id="@+id/map_marker_point_text_view"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_gravity="center_vertical"
+                        android:text="•"
+                        android:textColor="?android:textColorSecondary"
+                        android:textSize="@dimen/default_desc_text_size"
+                        android:visibility="gone"
+                        tools:visibility="visible"/>
+
+                    <android.support.v7.widget.AppCompatTextView
+                        android:id="@+id/map_marker_description"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_gravity="center_vertical"
+                        android:layout_marginLeft="4dp"
+                        android:layout_marginRight="4dp"
+                        android:ellipsize="end"
+                        android:maxLines="1"
+                        android:textColor="?android:textColorSecondary"
+                        android:textSize="@dimen/default_desc_text_size"
+                        tools:text="Amsterdam Weekend"/>
+                </LinearLayout>
+
             </LinearLayout>
+
+            <ImageButton
+                android:id="@+id/map_marker_options_button"
+                android:layout_width="56dp"
+                android:layout_height="56dp"
+                android:background="@drawable/marker_circle_background_light_with_inset"
+                android:focusableInTouchMode="true"
+                tools:src="@drawable/ic_action_marker_passed"/>
 
         </LinearLayout>
 
-        <ImageButton
-            android:id="@+id/map_marker_options_button"
-            android:layout_width="56dp"
-            android:layout_height="56dp"
-            android:background="@drawable/marker_circle_background_light_with_inset"
-            android:focusableInTouchMode="true"
-            tools:src="@drawable/ic_action_marker_passed"/>
+        <View
+            android:id="@+id/divider"
+            android:layout_width="wrap_content"
+            android:layout_height="1dp"
+            android:layout_marginLeft="56dp"
+            android:layout_marginStart="56dp"
+            android:background="?attr/dashboard_divider"/>
 
     </LinearLayout>
 
-    <View
-        android:id="@+id/divider"
-        android:layout_width="wrap_content"
-        android:layout_height="1dp"
-        android:layout_marginLeft="56dp"
-        android:layout_marginStart="56dp"
-        android:background="?attr/dashboard_divider"/>
+    <LinearLayout
+        tools:visibility="visible"
+        android:visibility="gone"
+        android:id="@+id/bottom_shadow"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content">
+
+        <include layout="@layout/card_bottom_divider"/>
+
+        <View
+            android:layout_width="match_parent"
+            android:layout_height="4dp"/>
+
+    </LinearLayout>
 
 </LinearLayout>

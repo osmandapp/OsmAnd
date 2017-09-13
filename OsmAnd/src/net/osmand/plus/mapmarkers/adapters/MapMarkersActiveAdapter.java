@@ -88,7 +88,7 @@ public class MapMarkersActiveAdapter extends RecyclerView.Adapter<MapMarkerItemV
 			holder.setIconDirectionVisibility(View.GONE);
 
 			holder.icon.setImageDrawable(iconsCache.getIcon(R.drawable.ic_arrow_marker_diretion, markerColor));
-			holder.itemView.setBackgroundColor(ContextCompat.getColor(mapActivity, R.color.markers_top_bar_background));
+			holder.mainLayout.setBackgroundColor(ContextCompat.getColor(mapActivity, R.color.markers_top_bar_background));
 			holder.title.setTextColor(ContextCompat.getColor(mapActivity, R.color.color_white));
 			holder.divider.setBackgroundColor(ContextCompat.getColor(mapActivity, R.color.map_markers_on_map_divider_color));
 			holder.optionsBtn.setBackgroundDrawable(mapActivity.getResources().getDrawable(R.drawable.marker_circle_background_on_map_with_inset));
@@ -102,7 +102,7 @@ public class MapMarkersActiveAdapter extends RecyclerView.Adapter<MapMarkerItemV
 			holder.setIconDirectionVisibility(View.VISIBLE);
 
 			holder.icon.setImageDrawable(iconsCache.getIcon(R.drawable.ic_action_flag_dark, markerColor));
-			holder.itemView.setBackgroundColor(ContextCompat.getColor(mapActivity, night ? R.color.bg_color_dark : R.color.bg_color_light));
+			holder.mainLayout.setBackgroundColor(ContextCompat.getColor(mapActivity, night ? R.color.bg_color_dark : R.color.bg_color_light));
 			holder.title.setTextColor(ContextCompat.getColor(mapActivity, night ? R.color.color_white : R.color.color_black));
 			holder.divider.setBackgroundColor(ContextCompat.getColor(mapActivity, night ? R.color.dashboard_divider_dark : R.color.dashboard_divider_light));
 			holder.optionsBtn.setBackgroundDrawable(mapActivity.getResources().getDrawable(R.drawable.marker_circle_background_light_with_inset));
