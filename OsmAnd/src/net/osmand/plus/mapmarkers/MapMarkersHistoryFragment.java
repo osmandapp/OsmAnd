@@ -78,14 +78,12 @@ public class MapMarkersHistoryFragment extends Fragment implements MapMarkersHel
 			private float marginSides = getResources().getDimension(R.dimen.list_content_padding);
 			private Bitmap deleteBitmap = BitmapFactory.decodeResource(getResources(), R.drawable.ic_action_delete_dark);
 			private Bitmap resetBitmap = BitmapFactory.decodeResource(getResources(), R.drawable.ic_action_reset_to_default_dark);
+			private boolean iconHidden;
 
 			@Override
 			public int getSwipeDirs(RecyclerView recyclerView, RecyclerView.ViewHolder viewHolder) {
 				if (viewHolder instanceof MapMarkerDateViewHolder) {
 					return 0;
-				}
-				if (viewHolder instanceof MapMarkerItemViewHolder) {
-					((MapMarkerItemViewHolder) viewHolder).setOptionsButtonVisibility(View.GONE);
 				}
 				return super.getSwipeDirs(recyclerView, viewHolder);
 			}
@@ -97,7 +95,11 @@ public class MapMarkersHistoryFragment extends Fragment implements MapMarkersHel
 
 			@Override
 			public void onChildDraw(Canvas c, RecyclerView recyclerView, RecyclerView.ViewHolder viewHolder, float dX, float dY, int actionState, boolean isCurrentlyActive) {
-				if (actionState == ItemTouchHelper.ACTION_STATE_SWIPE) {
+				if (actionState == ItemTouchHelper.ACTION_STATE_SWIPE && viewHolder instanceof MapMarkerItemViewHolder) {
+					if (!iconHidden && isCurrentlyActive) {
+						((MapMarkerItemViewHolder) viewHolder).setOptionsButtonVisibility(View.GONE);
+						iconHidden = true;
+					}
 					View itemView = viewHolder.itemView;
 					int colorIcon;
 					int colorText;
@@ -132,6 +134,7 @@ public class MapMarkersHistoryFragment extends Fragment implements MapMarkersHel
 			public void clearView(RecyclerView recyclerView, RecyclerView.ViewHolder viewHolder) {
 				if (viewHolder instanceof MapMarkerItemViewHolder) {
 					((MapMarkerItemViewHolder) viewHolder).setOptionsButtonVisibility(View.VISIBLE);
+					iconHidden = false;
 				}
 				super.clearView(recyclerView, viewHolder);
 			}
