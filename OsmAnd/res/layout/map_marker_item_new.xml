@@ -42,22 +42,30 @@
 
             <LinearLayout
                 android:layout_width="0dp"
-                android:layout_height="wrap_content"
-                android:layout_gravity="center_vertical"
+                android:layout_height="match_parent"
                 android:layout_weight="1"
                 android:orientation="vertical">
 
-                <android.support.v7.widget.AppCompatTextView
-                    android:id="@+id/map_marker_title"
+                <LinearLayout
                     android:layout_width="match_parent"
-                    android:layout_height="wrap_content"
-                    android:ellipsize="end"
-                    android:maxLines="1"
-                    android:textColor="?android:textColorPrimary"
-                    android:textSize="@dimen/default_list_text_size"
-                    tools:text="Van Gogh Museum"/>
+                    android:layout_height="28dp">
+
+                    <android.support.v7.widget.AppCompatTextView
+                        android:layout_marginBottom="2dp"
+                        android:layout_gravity="bottom"
+                        android:id="@+id/map_marker_title"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:ellipsize="end"
+                        android:maxLines="1"
+                        android:textColor="?android:textColorPrimary"
+                        android:textSize="@dimen/default_list_text_size"
+                        tools:text="Van Gogh Museum"/>
+
+                </LinearLayout>
 
                 <LinearLayout
+                    android:layout_marginTop="1dp"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content">
 

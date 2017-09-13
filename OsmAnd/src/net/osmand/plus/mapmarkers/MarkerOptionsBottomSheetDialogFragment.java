@@ -14,6 +14,7 @@ import android.widget.ImageView;
 import android.widget.TextView;
 
 import net.osmand.AndroidUtils;
+import net.osmand.plus.OsmandSettings;
 import net.osmand.plus.R;
 import net.osmand.plus.base.BottomSheetDialogFragment;
 import net.osmand.plus.helpers.AndroidUiHelper;
@@ -43,8 +44,21 @@ public class MarkerOptionsBottomSheetDialogFragment extends BottomSheetDialogFra
 
 		((ImageView) mainView.findViewById(R.id.sort_by_icon))
 				.setImageDrawable(getIcon(R.drawable.ic_sort_waypoint_dark, R.color.on_map_icon_color));
-		((ImageView) mainView.findViewById(R.id.show_direction_icon))
-				.setImageDrawable(getIcon(R.drawable.ic_sort_waypoint_dark, R.color.on_map_icon_color));
+		OsmandSettings.MapMarkersMode mode = getMyApplication().getSettings().MAP_MARKERS_MODE.get();
+		ImageView showDirectionIcon = (ImageView) mainView.findViewById(R.id.show_direction_icon);
+		int imageResId = 0;
+		switch (mode) {
+			case TOOLBAR:
+				imageResId = R.drawable.ic_action_device_topbar;
+				break;
+			case WIDGETS:
+				imageResId = R.drawable.ic_action_device_widget;
+				break;
+		}
+		showDirectionIcon.setBackgroundDrawable(getIcon(R.drawable.ic_action_device_top, R.color.on_map_icon_color));
+		if (imageResId != 0) {
+			showDirectionIcon.setImageDrawable(getIcon(imageResId, R.color.dashboard_blue));
+		}
 		((ImageView) mainView.findViewById(R.id.build_route_icon))
 				.setImageDrawable(getIcon(R.drawable.map_directions, R.color.on_map_icon_color));
 		((ImageView) mainView.findViewById(R.id.save_as_new_track_icon))

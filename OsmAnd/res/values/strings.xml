@@ -21,7 +21,6 @@
     <string name="build_route">Build route</string>
     <string name="show_direction">Show direction</string>
     <string name="sort_by">Sort by</string>
-    <string name="marker_options">Marker options</string>
     <string name="do_not_use_animations">Do not use animations</string>
     <string name="do_not_use_animations_descr">Disables animations in the app</string>
     <string name="keep_showing_on_map">Keep showing on map</string>

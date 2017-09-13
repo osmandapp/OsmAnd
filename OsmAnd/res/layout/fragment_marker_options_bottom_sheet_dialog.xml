@@ -27,7 +27,7 @@
                 android:paddingLeft="@dimen/bottom_sheet_content_padding"
                 android:paddingRight="@dimen/bottom_sheet_content_padding"
                 android:paddingStart="@dimen/bottom_sheet_content_padding"
-                android:text="@string/marker_options"
+                android:text="@string/shared_string_options"
                 android:textAppearance="@style/TextAppearance.ListItemTitle"
                 osmand:typeface="@string/font_roboto_medium"/>
 
@@ -78,7 +78,7 @@
                     android:layout_gravity="center_vertical"
                     android:layout_marginEnd="@dimen/bottom_sheet_icon_margin"
                     android:layout_marginRight="@dimen/bottom_sheet_icon_margin"
-                    tools:src="@drawable/ic_sort_waypoint_dark"/>
+                    tools:background="@drawable/ic_action_device_top"/>
 
                 <TextView
                     android:layout_width="0dp"

@@ -10,7 +10,7 @@
 
     <LinearLayout
         android:layout_width="match_parent"
-        android:layout_height="56dp"
+        android:layout_height="48dp"
         android:orientation="horizontal"
         android:background="?attr/bg_color">
 
@@ -18,7 +18,7 @@
             android:id="@+id/date_title"
             android:layout_width="0dp"
             android:layout_weight="1"
-            android:layout_height="56dp"
+            android:layout_height="match_parent"
             android:paddingLeft="16dp"
             android:paddingStart="16dp"
             android:gravity="center_vertical"
@@ -26,8 +26,8 @@
 
         <ImageButton
             android:id="@+id/date_options_button"
-            android:layout_width="56dp"
-            android:layout_height="56dp"
+            android:layout_width="48dp"
+            android:layout_height="48dp"
             android:layout_gravity="center_vertical|end"
             android:background="@null"
             android:focusableInTouchMode="true"
