@@ -535,9 +535,6 @@ public class SearchPhrase {
 		if(indexes == null) {
 			indexes = new ArrayList<>(getOfflineIndexes());
 		}
-		if (indexes.get(0).getFile().getName().matches("[a-zA-Z_-]+([0-9]+_*{3}).+[a-z]+")) {
-			return;
-		}
 		final LatLon ll = getLastTokenLocation();
 		if(ll != null) {
 			Collections.sort(indexes, new Comparator<BinaryMapIndexReader>() {
@@ -545,6 +542,9 @@ public class SearchPhrase {
 
 				@Override
 				public int compare(BinaryMapIndexReader o1, BinaryMapIndexReader o2) {
+					if (o1.getRegionName().equals(o2.getRegionName())) {
+						return o1.getFile().getName().compareTo(o2.getFile().getName());
+					}
  					LatLon rc1 = o1 == null ? null : getLocation(o1);
 					LatLon rc2 = o2 == null ? null : getLocation(o2);
 					double d1 = rc1 == null ? 10000000d : MapUtils.getDistance(rc1, ll);
