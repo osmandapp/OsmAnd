@@ -2882,9 +2882,9 @@ Copertura e qualità approssimativamente:
     <string name="add_point_before">Aggiungi un punto prima</string>
     <string name="add_point_after">Aggiungi un punto dopo</string>
     <string name="shared_string_options">Opzioni</string>
-    <string name="measurement_tool_snap_to_road_descr">OsmAnd aggiungerà dei punti, in base al tipo di navigazione.</string>
+    <string name="measurement_tool_snap_to_road_descr">OsmAnd aggiungerà i punti al percorso, in base al tipo di navigazione.</string>
     <string name="measurement_tool_save_as_new_track_descr">Puoi salvare i punti sia come punti di un percorso che come linea.</string>
-    <string name="choose_navigation_type">Scegli la modalità di navigazione</string>
+    <string name="choose_navigation_type">Scegli il profilo di navigazione</string>
     <string name="exit_without_saving">Uscire senza salvare?</string>
     <string name="do_not_use_animations">Non utilizzare le animazioni</string>
     <string name="do_not_use_animations_descr">Disabilita le animazioni nell\'app</string>
