@@ -106,6 +106,7 @@ public class MapMarkersDialogFragment extends android.support.v4.app.DialogFragm
 						activeFragment.startLocationUpdate();
 						if (viewPager.getCurrentItem() != 0) {
 							activeFragment.updateAdapter();
+							historyFragment.hideSnackbar();
 						}
 						viewPager.setCurrentItem(0);
 						optionsButton.setVisibility(View.VISIBLE);

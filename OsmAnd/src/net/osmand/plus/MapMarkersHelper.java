@@ -301,6 +301,20 @@ public class MapMarkersHelper {
 		}
 	}
 
+	public void addMarker(MapMarker marker) {
+		if (marker != null) {
+			markersDbHelper.addMarker(marker);
+			if (marker.history) {
+				mapMarkersHistory.add(marker);
+				sortMarkers(mapMarkersHistory, true);
+			} else {
+				mapMarkers.add(marker);
+				checkAndFixActiveMarkersOrderIfNeeded();
+			}
+			refresh();
+		}
+	}
+
 	public void restoreMarkerFromHistory(MapMarker marker, int position) {
 		if (marker != null) {
 			markersDbHelper.restoreMapMarkerFromHistory(marker);

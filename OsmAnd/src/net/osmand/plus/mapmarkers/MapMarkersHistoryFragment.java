@@ -9,12 +9,12 @@ import android.graphics.PorterDuffColorFilter;
 import android.graphics.Rect;
 import android.os.Bundle;
 import android.support.annotation.Nullable;
+import android.support.design.widget.Snackbar;
 import android.support.v4.app.Fragment;
 import android.support.v4.content.ContextCompat;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
 import android.support.v7.widget.helper.ItemTouchHelper;
-import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -35,6 +35,7 @@ public class MapMarkersHistoryFragment extends Fragment implements MapMarkersHel
 	private Paint backgroundPaint = new Paint();
 	private Paint iconPaint = new Paint();
 	private Paint textPaint = new Paint();
+	private Snackbar snackbar;
 
 	@Override
 	public void onCreate(@Nullable Bundle savedInstanceState) {
@@ -140,16 +141,29 @@ public class MapMarkersHistoryFragment extends Fragment implements MapMarkersHel
 			}
 
 			@Override
-			public void onSwiped(RecyclerView.ViewHolder viewHolder, int direction) {
-				int pos = viewHolder.getAdapterPosition();
+			public void onSwiped(RecyclerView.ViewHolder viewHolder, final int direction) {
+				final int pos = viewHolder.getAdapterPosition();
 				Object item = adapter.getItem(pos);
 				if (item instanceof MapMarker) {
+					final MapMarker marker = (MapMarker) item;
 					if (direction == ItemTouchHelper.LEFT) {
 						app.getMapMarkersHelper().restoreMarkerFromHistory((MapMarker) item, 0);
 					} else {
 						app.getMapMarkersHelper().removeMarkerFromHistory((MapMarker) item);
 					}
 					adapter.notifyItemRemoved(pos);
+					snackbar = Snackbar.make(viewHolder.itemView, R.string.item_removed, Snackbar.LENGTH_LONG)
+							.setAction(R.string.shared_string_undo, new View.OnClickListener() {
+								@Override
+								public void onClick(View view) {
+									if (direction == ItemTouchHelper.LEFT) {
+										app.getMapMarkersHelper().moveMapMarkerToHistory(marker);
+									} else {
+										app.getMapMarkersHelper().addMarker(marker);
+									}
+								}
+							});
+					snackbar.show();
 				}
 			}
 		};
@@ -181,6 +195,12 @@ public class MapMarkersHistoryFragment extends Fragment implements MapMarkersHel
 		app.getMapMarkersHelper().addListener(this);
 
 		return recyclerView;
+	}
+
+	void hideSnackbar() {
+		if (snackbar != null && snackbar.isShown()) {
+			snackbar.dismiss();
+		}
 	}
 
 	private HistoryMarkerMenuBottomSheetDialogFragment.HistoryMarkerMenuFragmentListener createHistoryMarkerMenuListener() {
