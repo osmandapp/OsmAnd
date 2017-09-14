@@ -408,7 +408,7 @@ public class FavouritesDbHelper {
 			if (p.getOriginObjectName().length() > 0) {
 				pt.comment = p.getOriginObjectName();
 			}
-			gpx.points.add(pt);
+			gpx.addPoint(pt);
 		}
 		return gpx;
 	}
@@ -560,7 +560,7 @@ public class FavouritesDbHelper {
 		if (res.warning != null) {
 			return false;
 		}
-		for (WptPt p : res.points) {
+		for (WptPt p : res.getPoints()) {
 			int c;
 			String name = p.name;
 			String categoryName = p.category != null ? p.category : "";

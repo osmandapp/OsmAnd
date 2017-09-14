@@ -76,7 +76,7 @@ public class GpxSelectionHelper {
 
 	public SelectedGpxFile getSelectedGPXFile(WptPt point) {
 		for (SelectedGpxFile g : selectedGPXFiles) {
-			if (g.getGpxFile().points.contains(point)) {
+			if (g.getGpxFile().getPoints().contains(point)) {
 				return g;
 			}
 		}
@@ -214,16 +214,16 @@ public class GpxSelectionHelper {
 			}
 		}
 
-		if (g.points.size() > 0) {
+		if (g.getPoints().size() > 0) {
 			GpxDisplayGroup group = new GpxDisplayGroup(g);
 			group.gpxName = name;
 			group.setType(GpxDisplayItemType.TRACK_POINTS);
-			group.setDescription(getString(R.string.gpx_selection_number_of_points, g.points.size()));
+			group.setDescription(getString(R.string.gpx_selection_number_of_points, g.getPoints().size()));
 			group.setName(getString(R.string.gpx_selection_points, name));
 			dg.add(group);
 			List<GpxDisplayItem> list = group.getModifiableList();
 			int k = 0;
-			for (WptPt r : g.points) {
+			for (WptPt r : g.getPoints()) {
 				GpxDisplayItem item = new GpxDisplayItem();
 				item.group = group;
 				item.description = r.desc;

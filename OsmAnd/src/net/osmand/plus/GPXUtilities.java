@@ -39,6 +39,7 @@ import java.text.NumberFormat;
 import java.text.ParseException;
 import java.text.SimpleDateFormat;
 import java.util.ArrayList;
+import java.util.Collection;
 import java.util.Collections;
 import java.util.Date;
 import java.util.LinkedHashMap;
@@ -745,7 +746,7 @@ public class GPXUtilities {
 	public static class GPXFile extends GPXExtensions {
 		public String author;
 		public List<Track> tracks = new ArrayList<>();
-		public List<WptPt> points = new ArrayList<>();
+		private List<WptPt> points = new ArrayList<>();
 		public List<Route> routes = new ArrayList<>();
 
 		public String warning = null;
@@ -755,6 +756,26 @@ public class GPXUtilities {
 
 		private Track generalTrack;
 		private TrkSegment generalSegment;
+
+		public List<WptPt> getPoints() {
+			return points;
+		}
+
+		public void clearPoints() {
+			points.clear();
+		}
+
+		public void addPoint(WptPt point) {
+			points.add(point);
+		}
+
+		public void addAllPoints(Collection<? extends WptPt> collection) {
+			points.addAll(collection);
+		}
+
+		public boolean removePoint(WptPt point) {
+			return points.remove(point);
+		}
 
 		public boolean isCloudmadeRouteFile() {
 			return "cloudmade".equalsIgnoreCase(author);
@@ -1200,7 +1221,7 @@ public class GPXUtilities {
 				serializer.endTag(null, "rte"); //$NON-NLS-1$
 			}
 
-			for (WptPt l : file.points) {
+			for (WptPt l : file.getPoints()) {
 				serializer.startTag(null, "wpt"); //$NON-NLS-1$
 				writeWpt(format, serializer, l);
 				serializer.endTag(null, "wpt"); //$NON-NLS-1$
@@ -1381,7 +1402,7 @@ public class GPXUtilities {
 							}
 							if (parser.getName().equals("wpt")) {
 								WptPt wptPt = parseWptAttributes(parser);
-								((GPXFile) parse).points.add(wptPt);
+								((GPXFile) parse).addPoint(wptPt);
 								parserState.push(wptPt);
 							}
 						} else if (parse instanceof Route) {
@@ -1556,8 +1577,8 @@ public class GPXUtilities {
 		if (from.showCurrentTrack) {
 			to.showCurrentTrack = true;
 		}
-		if (from.points != null) {
-			to.points.addAll(from.points);
+		if (from.getPoints() != null) {
+			to.addAllPoints(from.getPoints());
 		}
 		if (from.tracks != null) {
 			to.tracks.addAll(from.tracks);

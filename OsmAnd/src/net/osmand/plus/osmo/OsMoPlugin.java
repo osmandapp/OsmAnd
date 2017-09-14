@@ -345,14 +345,14 @@ public class OsMoPlugin extends OsmandPlugin implements OsMoReactor {
 					}
 					for (WptPt point : params) {
 						if (point.deleted) {
-							for (WptPt pointInTrack : g.points) {
+							for (WptPt pointInTrack : g.getPoints()) {
 								if (pointInTrack.getExtensionsToRead().get("u").equals(
 										point.getExtensionsToRead().get("u"))) {
-									g.points.remove(pointInTrack);
+									g.removePoint(pointInTrack);
 								}
 							}
 						} else {
-							g.points.add(point);
+							g.addPoint(point);
 						}
 					}
 					errors = GPXUtilities.writeGpxFile(ps, g, app);

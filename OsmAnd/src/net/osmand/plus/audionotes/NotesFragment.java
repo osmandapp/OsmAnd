@@ -311,7 +311,7 @@ public class NotesFragment extends OsmAndListFragment {
 				wpt.link = r.getFileName();
 				wpt.time = r.getFile().lastModified();
 				wpt.category = r.getSearchHistoryType();
-				file.points.add(wpt);
+				file.addPoint(wpt);
 			}
 		}
 		GPXUtilities.writeGpxFile(tmpFile, file, getMyApplication());
