@@ -589,7 +589,6 @@ public class FavouritesDbHelper {
 		return true;
 	}
 
-	//todo
 	public void editFavouriteGroup(FavoriteGroup group, String newName, int color, boolean visible) {
 		MapMarkersHelper markersHelper = context.getMapMarkersHelper();
 		if (color != 0 && group.color != color) {
