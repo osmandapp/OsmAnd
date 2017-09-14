@@ -57,4 +57,8 @@ public class MapMarkerItemViewHolder extends RecyclerView.ViewHolder {
 		leftPointSpace.setVisibility(visibility);
 		rightPointSpace.setVisibility(visibility);
 	}
+
+	public void setDividerVisibility(int visibility) {
+		divider.setVisibility(visibility);
+	}
 }

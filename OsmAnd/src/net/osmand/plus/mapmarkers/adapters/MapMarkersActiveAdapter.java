@@ -115,8 +115,10 @@ public class MapMarkersActiveAdapter extends RecyclerView.Adapter<MapMarkerItemV
 		}
 		if (pos == getItemCount() - 1) {
 			holder.setBottomShadowVisibility(View.VISIBLE);
+			holder.setDividerVisibility(View.GONE);
 		} else {
 			holder.setBottomShadowVisibility(View.GONE);
+			holder.setDividerVisibility(View.VISIBLE);
 		}
 
 		holder.iconReorder.setOnTouchListener(new View.OnTouchListener() {

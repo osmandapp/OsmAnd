@@ -136,8 +136,10 @@ public class MapMarkersHistoryAdapter extends RecyclerView.Adapter<RecyclerView.
 			itemViewHolder.setPointSpaceVisibility(View.GONE);
 			if (position == getItemCount() - 1) {
 				((MapMarkerItemViewHolder) holder).setBottomShadowVisibility(View.VISIBLE);
+				((MapMarkerItemViewHolder) holder).setDividerVisibility(View.GONE);
 			} else {
 				((MapMarkerItemViewHolder) holder).setBottomShadowVisibility(View.GONE);
+				((MapMarkerItemViewHolder) holder).setDividerVisibility(View.VISIBLE);
 			}
 		} else if (holder instanceof MapMarkerDateViewHolder) {
 			final MapMarkerDateViewHolder dateViewHolder = (MapMarkerDateViewHolder) holder;
