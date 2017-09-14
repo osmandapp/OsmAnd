@@ -306,8 +306,17 @@ public class MapMarkersHelper {
 				boolean exists = false;
 
 				for (MapMarker marker : dbMarkers) {
-					if (marker.point.equals(fpLatLon) && marker.getName(ctx).equals(fp.getName(ctx))) {
+					if (marker.id.equals(group.getId() + fp.getName(ctx))) {
 						exists = true;
+						if (!marker.history && !marker.point.equals(fpLatLon)) {
+							for (MapMarker m : mapMarkers) {
+								if (m.id.equals(marker.id)) {
+									m.point = fpLatLon;
+									updateMapMarker(m, true);
+									break;
+								}
+							}
+						}
 						dbMarkers.remove(marker);
 						break;
 					}
@@ -511,7 +520,7 @@ public class MapMarkersHelper {
 
 				MapMarker marker = new MapMarker(point, pointDescription, colorIndex, false, 0);
 				if (group != null) {
-					marker.id = group.getId() + marker.getName(ctx) + marker.getLatitude() + marker.getLongitude();
+					marker.id = group.getId() + marker.getName(ctx);
 					if (markersDbHelper.getMarker(marker.id) != null) {
 						continue;
 					}
@@ -531,7 +540,6 @@ public class MapMarkersHelper {
 		if (marker != null) {
 			markersDbHelper.updateMarker(marker);
 			if (refresh) {
-				loadMarkers();
 				refresh();
 			}
 		}
