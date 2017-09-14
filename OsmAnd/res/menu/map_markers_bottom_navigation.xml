@@ -7,7 +7,7 @@
 
     <item
         android:id="@+id/action_groups"
-        android:icon="@drawable/ic_action_group2"
+        android:icon="@drawable/ic_action_folder"
         android:title="@string/shared_string_groups" />
 
     <item
