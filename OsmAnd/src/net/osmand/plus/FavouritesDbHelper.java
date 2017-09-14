@@ -589,7 +589,6 @@ public class FavouritesDbHelper {
 		return true;
 	}
 
-	//todo
 	public void editFavouriteGroup(FavoriteGroup group, String newName, int color, boolean visible) {
 		MapMarkersHelper markersHelper = context.getMapMarkersHelper();
 		if (color != 0 && group.color != color) {
@@ -605,6 +604,7 @@ public class FavouritesDbHelper {
 			for (FavouritePoint p : gr.points) {
 				p.setVisible(visible);
 			}
+			markersHelper.syncGroup(new MarkersSyncGroup(gr.name, gr.name, MarkersSyncGroup.FAVORITES_TYPE));
 		}
 		if (!group.name.equals(newName)) {
 			FavoriteGroup gr = flatGroups.remove(group.name);
