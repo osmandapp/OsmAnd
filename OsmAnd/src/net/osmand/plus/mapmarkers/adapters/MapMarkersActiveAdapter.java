@@ -156,6 +156,8 @@ public class MapMarkersActiveAdapter extends RecyclerView.Adapter<MapMarkerItemV
 				notifyItemRemoved(position);
 				if (position < 2 && getItemCount() > 1) {
 					notifyItemChanged(1);
+				} else if (position == getItemCount()) {
+					notifyItemChanged(position - 1);
 				}
 
 				snackbar = Snackbar.make(holder.itemView, mapActivity.getString(R.string.marker_moved_to_history), Snackbar.LENGTH_LONG)
@@ -166,6 +168,8 @@ public class MapMarkersActiveAdapter extends RecyclerView.Adapter<MapMarkerItemV
 								notifyItemInserted(position);
 								if (position < 2 && getItemCount() > 2) {
 									notifyItemChanged(2);
+								} else if (position == getItemCount() - 1) {
+									notifyItemChanged(position - 1);
 								}
 							}
 						});
