@@ -232,8 +232,8 @@ public class MapMarkersHistoryFragment extends Fragment implements MapMarkersHel
 	}
 
 	void updateAdapter() {
-		adapter.createHeaders();
 		if (adapter != null) {
+			adapter.createHeaders();
 			adapter.notifyDataSetChanged();
 		}
 	}
