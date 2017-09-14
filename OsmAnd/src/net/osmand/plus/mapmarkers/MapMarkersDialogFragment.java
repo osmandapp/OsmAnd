@@ -31,6 +31,7 @@ public class MapMarkersDialogFragment extends android.support.v4.app.DialogFragm
 	public static final String TAG = "MapMarkersDialogFragment";
 
 	private MapMarkersActiveFragment activeFragment;
+	private MapMarkersGroupsFragment groupsFragment;
 	private MapMarkersHistoryFragment historyFragment;
 
 	@Override
@@ -50,6 +51,8 @@ public class MapMarkersDialogFragment extends android.support.v4.app.DialogFragm
 			for (Fragment fragment : fragments) {
 				if (fragment instanceof MapMarkersActiveFragment) {
 					activeFragment = (MapMarkersActiveFragment) fragment;
+				} else if (fragment instanceof MapMarkersGroupsFragment) {
+					groupsFragment = (MapMarkersGroupsFragment) fragment;
 				} else if (fragment instanceof MapMarkersHistoryFragment) {
 					historyFragment = (MapMarkersHistoryFragment) fragment;
 				}
@@ -57,6 +60,9 @@ public class MapMarkersDialogFragment extends android.support.v4.app.DialogFragm
 		}
 		if (activeFragment == null) {
 			activeFragment = new MapMarkersActiveFragment();
+		}
+		if (groupsFragment == null) {
+			groupsFragment = new MapMarkersGroupsFragment();
 		}
 		if (historyFragment == null) {
 			historyFragment = new MapMarkersHistoryFragment();
@@ -111,13 +117,23 @@ public class MapMarkersDialogFragment extends android.support.v4.app.DialogFragm
 						viewPager.setCurrentItem(0);
 						optionsButton.setVisibility(View.VISIBLE);
 						return true;
-					case R.id.action_history:
+					case R.id.action_groups:
 						activeFragment.stopLocationUpdate();
 						if (viewPager.getCurrentItem() != 1) {
+							groupsFragment.updateAdapter();
+							activeFragment.hideSnackbar();
+							historyFragment.hideSnackbar();
+						}
+						viewPager.setCurrentItem(1);
+						optionsButton.setVisibility(View.GONE);
+						return true;
+					case R.id.action_history:
+						activeFragment.stopLocationUpdate();
+						if (viewPager.getCurrentItem() != 2) {
 							historyFragment.updateAdapter();
 							activeFragment.hideSnackbar();
 						}
-						viewPager.setCurrentItem(1);
+						viewPager.setCurrentItem(2);
 						optionsButton.setVisibility(View.GONE);
 						return true;
 				}
@@ -203,7 +219,7 @@ public class MapMarkersDialogFragment extends android.support.v4.app.DialogFragm
 
 		MapMarkersViewPagerAdapter(FragmentManager fm) {
 			super(fm);
-			fragments = Arrays.asList(activeFragment, historyFragment);
+			fragments = Arrays.asList(activeFragment, groupsFragment, historyFragment);
 		}
 
 		@Override

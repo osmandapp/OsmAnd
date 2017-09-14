@@ -6,6 +6,11 @@
         android:title="@string/osm_live_active"/>
 
     <item
+        android:id="@+id/action_groups"
+        android:icon="@drawable/ic_action_group2"
+        android:title="@string/shared_string_groups" />
+
+    <item
         android:id="@+id/action_history"
         android:icon="@drawable/ic_action_history2"
         android:title="@string/shared_string_history"/>
