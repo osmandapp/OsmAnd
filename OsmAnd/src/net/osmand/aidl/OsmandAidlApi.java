@@ -819,6 +819,7 @@ public class OsmandAidlApi {
 					PointDescription pd = new PointDescription(
 							PointDescription.POINT_TYPE_MAP_MARKER, markerNew.getName() != null ? markerNew.getName() : "");
 					MapMarker marker = new MapMarker(m.point, pd, m.colorIndex, m.selected, m.index);
+					marker.id = m.id;
 					marker.creationDate = m.creationDate;
 					marker.visitedDate = m.visitedDate;
 					markersHelper.moveMapMarker(marker, latLonNew);
