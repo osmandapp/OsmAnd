@@ -4,17 +4,23 @@ import android.os.Bundle;
 import android.support.annotation.NonNull;
 import android.support.annotation.Nullable;
 import android.support.design.widget.BottomNavigationView;
+import android.support.design.widget.Snackbar;
 import android.support.v4.app.Fragment;
 import android.support.v4.app.FragmentManager;
 import android.support.v4.app.FragmentPagerAdapter;
+import android.support.v4.content.ContextCompat;
+import android.support.v4.view.ViewPager;
 import android.support.v7.widget.Toolbar;
+import android.support.v7.widget.helper.ItemTouchHelper;
 import android.view.LayoutInflater;
 import android.view.MenuItem;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.TextView;
 import android.widget.Toast;
 
 import net.osmand.plus.LockableViewPager;
+import net.osmand.plus.MapMarkersHelper;
 import net.osmand.plus.OsmandApplication;
 import net.osmand.plus.OsmandSettings;
 import net.osmand.plus.R;
@@ -23,8 +29,10 @@ import net.osmand.plus.dashboard.DashboardOnMap;
 import net.osmand.plus.mapmarkers.ShowDirectionBottomSheetDialogFragment.ShowDirectionFragmentListener;
 import net.osmand.plus.mapmarkers.MarkerOptionsBottomSheetDialogFragment.MarkerOptionsFragmentListener;
 
+import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.List;
+import java.util.Map;
 
 public class MapMarkersDialogFragment extends android.support.v4.app.DialogFragment {
 
@@ -33,6 +41,9 @@ public class MapMarkersDialogFragment extends android.support.v4.app.DialogFragm
 	private MapMarkersActiveFragment activeFragment;
 	private MapMarkersGroupsFragment groupsFragment;
 	private MapMarkersHistoryFragment historyFragment;
+
+	private Snackbar snackbar;
+	private LockableViewPager viewPager;
 
 	@Override
 	public void onCreate(Bundle savedInstanceState) {
@@ -98,7 +109,7 @@ public class MapMarkersDialogFragment extends android.support.v4.app.DialogFragm
 			}
 		});
 
-		final LockableViewPager viewPager = mainView.findViewById(R.id.map_markers_view_pager);
+		viewPager = mainView.findViewById(R.id.map_markers_view_pager);
 		viewPager.setSwipeLocked(true);
 		final MapMarkersViewPagerAdapter adapter = new MapMarkersViewPagerAdapter(getChildFragmentManager());
 		viewPager.setAdapter(adapter);
@@ -178,8 +189,22 @@ public class MapMarkersDialogFragment extends android.support.v4.app.DialogFragm
 
 			@Override
 			public void moveAllToHistoryOnClick() {
-				mapActivity.getMyApplication().getMapMarkersHelper().moveAllActiveMarkersToHistory();
+				final MapMarkersHelper helper = mapActivity.getMyApplication().getMapMarkersHelper();
+				final List<MapMarkersHelper.MapMarker> markers = new ArrayList<>(helper.getMapMarkers());
+				helper.moveAllActiveMarkersToHistory();
 				activeFragment.updateAdapter();
+				snackbar = Snackbar.make(viewPager, R.string.all_markers_moved_to_history, Snackbar.LENGTH_LONG)
+						.setAction(R.string.shared_string_undo, new View.OnClickListener() {
+							@Override
+							public void onClick(View view) {
+								helper.restoreMarkersFromHistory(markers);
+								activeFragment.updateAdapter();
+							}
+						});
+				View snackBarView = snackbar.getView();
+				TextView tv = (TextView) snackBarView.findViewById(android.support.design.R.id.snackbar_action);
+				tv.setTextColor(ContextCompat.getColor(mapActivity, R.color.color_dialog_buttons_dark));
+				snackbar.show();
 			}
 		};
 	}

@@ -389,6 +389,20 @@ public class MapMarkersHelper {
 		}
 	}
 
+	public void restoreMarkersFromHistory(List<MapMarker> markers) {
+		if (markers != null) {
+			for (MapMarker marker : markers) {
+				markersDbHelper.restoreMapMarkerFromHistory(marker);
+				mapMarkersHistory.remove(marker);
+				marker.history = false;
+				mapMarkers.add(marker);
+			}
+			checkAndFixActiveMarkersOrderIfNeeded();
+			sortMarkers(mapMarkersHistory, true);
+			refresh();
+		}
+	}
+
 	public void removeMarkerFromHistory(MapMarker marker) {
 		if (marker != null) {
 			markersDbHelper.removeMarker(marker, true);
