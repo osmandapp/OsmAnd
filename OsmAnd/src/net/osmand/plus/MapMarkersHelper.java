@@ -19,6 +19,7 @@ import java.util.ArrayList;
 import java.util.Collections;
 import java.util.Comparator;
 import java.util.Date;
+import java.util.Iterator;
 import java.util.LinkedList;
 import java.util.List;
 import java.util.Locale;
@@ -479,9 +480,24 @@ public class MapMarkersHelper {
 		}
 	}
 
-	public void removeMarkersSyncGroup(String id) {
+	public void removeMarkersSyncGroup(String id, boolean removeActiveMarkers) {
 		if (id != null) {
 			markersDbHelper.removeMarkersSyncGroup(id);
+			if (removeActiveMarkers) {
+				removeActiveMarkersFromSyncGroup(id);
+			}
+		}
+	}
+
+	public void removeActiveMarkersFromSyncGroup(String syncGroupId) {
+		if (syncGroupId != null) {
+			markersDbHelper.removeActiveMarkersFromSyncGroup(syncGroupId);
+			for (Iterator<MapMarker> iterator = mapMarkers.iterator(); iterator.hasNext(); ) {
+				if (iterator.next().groupKey.equals(syncGroupId)) {
+					iterator.remove();
+				}
+			}
+			checkAndFixActiveMarkersOrderIfNeeded();
 		}
 	}
 
