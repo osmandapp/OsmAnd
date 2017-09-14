@@ -605,6 +605,7 @@ public class FavouritesDbHelper {
 			for (FavouritePoint p : gr.points) {
 				p.setVisible(visible);
 			}
+			markersHelper.syncGroup(new MarkersSyncGroup(gr.name, gr.name, MarkersSyncGroup.FAVORITES_TYPE));
 		}
 		if (!group.name.equals(newName)) {
 			FavoriteGroup gr = flatGroups.remove(group.name);

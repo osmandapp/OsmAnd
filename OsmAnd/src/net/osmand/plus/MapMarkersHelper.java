@@ -301,7 +301,12 @@ public class MapMarkersHelper {
 		List<MapMarker> dbMarkers = markersDbHelper.getMarkersFromGroup(group);
 
 		if (group.getType() == MarkersSyncGroup.FAVORITES_TYPE) {
-			List<FavouritePoint> favPoints = ctx.getFavorites().getGroup(group.name).points;
+			FavouritesDbHelper.FavoriteGroup favGroup = ctx.getFavorites().getGroup(group.name);
+			if (!favGroup.visible) {
+				removeActiveMarkersFromSyncGroup(group.id);
+				return;
+			}
+			List<FavouritePoint> favPoints = favGroup.points;
 			for (FavouritePoint fp : favPoints) {
 				LatLon fpLatLon = new LatLon(fp.getLatitude(), fp.getLongitude());
 				boolean exists = false;
@@ -498,6 +503,7 @@ public class MapMarkersHelper {
 				}
 			}
 			checkAndFixActiveMarkersOrderIfNeeded();
+			refresh();
 		}
 	}
 
