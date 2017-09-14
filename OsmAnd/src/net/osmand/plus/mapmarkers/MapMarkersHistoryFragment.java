@@ -146,13 +146,16 @@ public class MapMarkersHistoryFragment extends Fragment implements MapMarkersHel
 				Object item = adapter.getItem(pos);
 				if (item instanceof MapMarker) {
 					final MapMarker marker = (MapMarker) item;
+					int snackbarStringRes;
 					if (direction == ItemTouchHelper.LEFT) {
 						app.getMapMarkersHelper().restoreMarkerFromHistory((MapMarker) item, 0);
+						snackbarStringRes = R.string.marker_moved_to_active;
 					} else {
 						app.getMapMarkersHelper().removeMarkerFromHistory((MapMarker) item);
+						snackbarStringRes = R.string.item_removed;
 					}
 					adapter.notifyItemRemoved(pos);
-					snackbar = Snackbar.make(viewHolder.itemView, R.string.item_removed, Snackbar.LENGTH_LONG)
+					snackbar = Snackbar.make(viewHolder.itemView, snackbarStringRes, Snackbar.LENGTH_LONG)
 							.setAction(R.string.shared_string_undo, new View.OnClickListener() {
 								@Override
 								public void onClick(View view) {

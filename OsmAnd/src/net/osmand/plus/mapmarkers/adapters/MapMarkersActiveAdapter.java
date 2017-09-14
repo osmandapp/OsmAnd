@@ -158,7 +158,7 @@ public class MapMarkersActiveAdapter extends RecyclerView.Adapter<MapMarkerItemV
 					notifyItemChanged(1);
 				}
 
-				snackbar = Snackbar.make(holder.itemView, R.string.item_removed, Snackbar.LENGTH_LONG)
+				snackbar = Snackbar.make(holder.itemView, mapActivity.getString(R.string.marker_moved_to_history), Snackbar.LENGTH_LONG)
 						.setAction(R.string.shared_string_undo, new View.OnClickListener() {
 							@Override
 							public void onClick(View view) {
