@@ -565,30 +565,34 @@ public class SearchPhrase {
 					return rc1;
 				}
 			});
-			List<BinaryMapIndexReader> finalSort = new ArrayList<>();
-			for (int i = 0; i < indexes.size(); i++) {
-				BinaryMapIndexReader currFile = indexes.get(i);
-				finalSort.addAll(diffsByRegion.get(currFile.getRegionName()));
-				finalSort.add(currFile);
+			if (!diffsByRegion.isEmpty()) {
+				List<BinaryMapIndexReader> finalSort = new ArrayList<>();
+				for (int i = 0; i < indexes.size(); i++) {
+					BinaryMapIndexReader currFile = indexes.get(i);
+                    if (diffsByRegion.get(currFile.getRegionName()) != null) {
+                        finalSort.addAll(diffsByRegion.get(currFile.getRegionName()));
+                        finalSort.add(currFile);
+                    }
+				}
+				indexes.clear();
+				indexes.addAll(finalSort);
 			}
-			indexes.clear();
-			indexes.addAll(finalSort);
 		}
 	}
 	
 	private Map<String, List<BinaryMapIndexReader>> getDiffsByRegion() {
 		Map<String, List<BinaryMapIndexReader>> result = new HashMap<>();
-		for (BinaryMapIndexReader r : indexes) {
-			if (r.getFile().getName().matches("[a-zA-Z_-]+([0-9]+_*{3}).+[a-z]+")) {
+        List<BinaryMapIndexReader> listCopy = new ArrayList<>(indexes);
+		for (BinaryMapIndexReader r : listCopy) {
+			if (r.getFile().getName().matches("[a-zA-Z_-]+([0-9]+_*){3}[.a-z]+")) {
 				String currRegionName = r.getRegionName();
 				if (result.containsKey(currRegionName)) {
 					result.get(currRegionName).add(r);
 				} else {
-					result.put(currRegionName, Arrays.asList(r));
+					result.put(currRegionName, new ArrayList<>(Arrays.asList(r)));
 				}
 				indexes.remove(r);
 			}
-			
 		}
 		return result;
 	}

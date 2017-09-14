@@ -404,8 +404,18 @@ public class BinaryMapIndexReader {
 			rg.add(file.getName());
 		}
 		String ls = rg.get(0);
+		// .replaceAll("[0-9]+", "").trim()
 		if (ls.lastIndexOf('_') != -1) {
-			return ls.substring(0, ls.lastIndexOf('_')).replace('_', ' ').replaceAll("[0-9]+", "").trim();
+			if (ls.matches("[A-Za-z-_]+")) {
+				return ls.substring(0, ls.lastIndexOf('_')).replace('_', ' ');
+			} else if (ls.matches("([a-zA-Z_-]){3}([0-9]+_*){3}[.a-z]+")) {
+				String[] words = ls.split("_");
+				return words[0] + " " + words[1];
+			} else if (ls.matches("([a-zA-Z_-]){2}([0-9]+_*){3}[.a-z]+")) {
+				String[] words = ls.split("_");
+				return words[0];
+			}
+
 		}
 		return ls;
 	}
