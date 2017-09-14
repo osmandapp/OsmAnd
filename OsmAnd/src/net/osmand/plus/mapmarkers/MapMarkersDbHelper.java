@@ -21,7 +21,7 @@ import java.util.Random;
 
 public class MapMarkersDbHelper {
 
-	private static final int DB_VERSION = 1;
+	private static final int DB_VERSION = 2;
 	public static final String DB_NAME = "map_markers_db";
 
 	private static final String MARKERS_TABLE_NAME = "map_markers";
@@ -213,12 +213,21 @@ public class MapMarkersDbHelper {
 		SQLiteConnection db = openConnection(true);
 		if (db != null) {
 			try {
+				db.execSQL("DELETE FROM " + GROUPS_TABLE_NAME + " WHERE " + GROUPS_COL_ID + " = ?", new Object[]{id});
+			} finally {
+				db.close();
+			}
+		}
+	}
+
+	public void removeActiveMarkersFromSyncGroup(String syncGroupId) {
+		SQLiteConnection db = openConnection(true);
+		if (db != null) {
+			try {
 				db.execSQL("DELETE FROM " + MARKERS_TABLE_NAME +
 								" WHERE " + MARKERS_COL_GROUP_KEY + " = ?" +
 								" AND " + MARKERS_COL_ACTIVE + " = ?",
-						new Object[]{id, 1});
-
-				db.execSQL("DELETE FROM " + GROUPS_TABLE_NAME + " WHERE " + GROUPS_COL_ID + " = ?", new Object[]{id});
+						new Object[]{syncGroupId, 1});
 			} finally {
 				db.close();
 			}
