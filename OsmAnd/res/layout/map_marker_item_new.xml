@@ -21,13 +21,10 @@
 
             <android.support.v7.widget.AppCompatImageView
                 android:id="@+id/map_marker_reorder_icon"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
+                android:layout_width="56dp"
+                android:layout_height="56dp"
+                android:scaleType="centerInside"
                 android:layout_gravity="center_vertical"
-                android:paddingBottom="16dp"
-                android:paddingLeft="16dp"
-                android:paddingStart="16dp"
-                android:paddingTop="16dp"
                 android:tint="?attr/secondary_icon_color"
                 tools:src="@drawable/ic_action_reorder"/>
 
@@ -36,8 +33,8 @@
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_gravity="center_vertical"
-                android:layout_marginLeft="16dp"
                 android:layout_marginRight="16dp"
+                android:layout_marginEnd="16dp"
                 tools:src="@drawable/ic_action_flag_dark"/>
 
             <LinearLayout
