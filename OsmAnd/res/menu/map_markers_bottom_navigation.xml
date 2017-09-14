@@ -3,7 +3,7 @@
     <item
         android:id="@+id/action_active"
         android:icon="@drawable/ic_map"
-        android:title="@string/osm_live_active"/>
+        android:title="@string/shared_string_list"/>
 
     <item
         android:id="@+id/action_groups"
