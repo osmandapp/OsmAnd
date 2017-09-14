@@ -14,6 +14,7 @@ import android.widget.TextView;
 import net.osmand.data.LatLon;
 import net.osmand.plus.IconsCache;
 import net.osmand.plus.MapMarkersHelper.MapMarker;
+import net.osmand.plus.OsmandSettings;
 import net.osmand.plus.R;
 import net.osmand.plus.activities.MapActivity;
 import net.osmand.plus.dashboard.DashLocationFragment;
@@ -31,6 +32,7 @@ public class MapMarkersActiveAdapter extends RecyclerView.Adapter<MapMarkerItemV
 	private List<MapMarker> markers;
 	private MapMarkersActiveAdapterListener listener;
 	private Snackbar snackbar;
+	private boolean showDirectionEnabled;
 
 	private LatLon location;
 	private Float heading;
@@ -42,6 +44,11 @@ public class MapMarkersActiveAdapter extends RecyclerView.Adapter<MapMarkerItemV
 		this.mapActivity = mapActivity;
 		markers = mapActivity.getMyApplication().getMapMarkersHelper().getMapMarkers();
 		night = !mapActivity.getMyApplication().getSettings().isLightContent();
+		showDirectionEnabled = mapActivity.getMyApplication().getSettings().MAP_MARKERS_MODE.get() != OsmandSettings.MapMarkersMode.NONE;
+	}
+
+	public void setShowDirectionEnabled(boolean showDirectionEnabled) {
+		this.showDirectionEnabled = showDirectionEnabled;
 	}
 
 	public void setAdapterListener(MapMarkersActiveAdapterListener listener) {
@@ -85,7 +92,7 @@ public class MapMarkersActiveAdapter extends RecyclerView.Adapter<MapMarkerItemV
 		int drawableResToUpdate;
 		int markerColor = MapMarker.getColorId(marker.colorIndex);
 		LatLon markerLatLon = new LatLon(marker.getLatitude(), marker.getLongitude());
-		if (pos < 2) {
+		if (showDirectionEnabled && pos < 2) {
 			holder.setIconDirectionVisibility(View.GONE);
 
 			holder.icon.setImageDrawable(iconsCache.getIcon(R.drawable.ic_arrow_marker_diretion, markerColor));
@@ -155,7 +162,7 @@ public class MapMarkersActiveAdapter extends RecyclerView.Adapter<MapMarkerItemV
 
 				mapActivity.getMyApplication().getMapMarkersHelper().moveMapMarkerToHistory(marker);
 				notifyItemRemoved(position);
-				if (position < 2 && getItemCount() > 1) {
+				if (showDirectionEnabled && position < 2 && getItemCount() > 1) {
 					notifyItemChanged(1);
 				} else if (position == getItemCount()) {
 					notifyItemChanged(position - 1);
@@ -167,7 +174,7 @@ public class MapMarkersActiveAdapter extends RecyclerView.Adapter<MapMarkerItemV
 							public void onClick(View view) {
 								mapActivity.getMyApplication().getMapMarkersHelper().restoreMarkerFromHistory(marker, position);
 								notifyItemInserted(position);
-								if (position < 2 && getItemCount() > 2) {
+								if (showDirectionEnabled && position < 2 && getItemCount() > 2) {
 									notifyItemChanged(2);
 								} else if (position == getItemCount() - 1) {
 									notifyItemChanged(position - 1);

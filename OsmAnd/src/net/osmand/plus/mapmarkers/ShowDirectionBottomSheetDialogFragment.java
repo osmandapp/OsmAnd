@@ -206,30 +206,34 @@ public class ShowDirectionBottomSheetDialogFragment extends BottomSheetDialogFra
 		public void onClick(View view) {
 			OsmandSettings.MapMarkersMode previousMode = getMyApplication().getSettings().MAP_MARKERS_MODE.get();
 			highlightSelectedItem(previousMode, false);
+			boolean showDirectionEnabled = false;
 			switch (view.getId()) {
 				case R.id.top_bar_image:
 				case R.id.top_bar_row:
 					getMyApplication().getSettings().MAP_MARKERS_MODE.set(OsmandSettings.MapMarkersMode.TOOLBAR);
 					highlightSelectedItem(OsmandSettings.MapMarkersMode.TOOLBAR, true);
+					showDirectionEnabled = true;
 					break;
 				case R.id.widget_image:
 				case R.id.widget_row:
 					getMyApplication().getSettings().MAP_MARKERS_MODE.set(OsmandSettings.MapMarkersMode.WIDGETS);
 					highlightSelectedItem(OsmandSettings.MapMarkersMode.WIDGETS, true);
+					showDirectionEnabled = true;
 					break;
 				case R.id.none_row:
 					getMyApplication().getSettings().MAP_MARKERS_MODE.set(OsmandSettings.MapMarkersMode.NONE);
 					highlightSelectedItem(OsmandSettings.MapMarkersMode.NONE, true);
+					showDirectionEnabled = false;
 					break;
 			}
 			if (listener != null) {
-				listener.onMapMarkersModeChanged();
+				listener.onMapMarkersModeChanged(showDirectionEnabled);
 			}
 			dismiss();
 		}
 	};
 
 	interface ShowDirectionFragmentListener {
-		void onMapMarkersModeChanged();
+		void onMapMarkersModeChanged(boolean showDirectionEnabled);
 	}
 }

@@ -215,8 +215,10 @@ public class MapMarkersDialogFragment extends android.support.v4.app.DialogFragm
 			final MapActivity mapActivity = getMapActivity();
 
 			@Override
-			public void onMapMarkersModeChanged() {
+			public void onMapMarkersModeChanged(boolean showDirectionEnabled) {
 				mapActivity.getMapLayers().getMapWidgetRegistry().updateMapMarkersMode(mapActivity);
+				activeFragment.setShowDirectionEnabled(showDirectionEnabled);
+				activeFragment.updateAdapter();
 			}
 		};
 	}

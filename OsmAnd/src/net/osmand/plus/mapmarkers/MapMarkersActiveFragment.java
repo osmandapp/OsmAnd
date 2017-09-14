@@ -123,6 +123,12 @@ public class MapMarkersActiveFragment extends Fragment implements OsmAndCompassL
 		return null;
 	}
 
+	void setShowDirectionEnabled(boolean showDirectionEnabled) {
+		if (adapter != null) {
+			adapter.setShowDirectionEnabled(showDirectionEnabled);
+		}
+	}
+
 	void updateAdapter() {
 		if (adapter != null) {
 			adapter.notifyDataSetChanged();
