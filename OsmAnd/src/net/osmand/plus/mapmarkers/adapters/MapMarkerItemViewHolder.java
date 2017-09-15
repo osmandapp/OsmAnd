@@ -21,7 +21,7 @@ public class MapMarkerItemViewHolder extends RecyclerView.ViewHolder {
 	final TextView point;
 	final View rightPointSpace;
 	final TextView description;
-	final ImageButton optionsBtn;
+	public final ImageButton optionsBtn;
 	final View divider;
 	final View bottomShadow;
 
@@ -41,26 +41,5 @@ public class MapMarkerItemViewHolder extends RecyclerView.ViewHolder {
 		optionsBtn = (ImageButton) view.findViewById(R.id.map_marker_options_button);
 		divider = view.findViewById(R.id.divider);
 		bottomShadow = view.findViewById(R.id.bottom_shadow);
-	}
-
-	public void setOptionsButtonVisibility(int visibility) {
-		optionsBtn.setVisibility(visibility);
-	}
-
-	public void setIconDirectionVisibility(int visibility) {
-		iconDirection.setVisibility(visibility);
-	}
-
-	public void setBottomShadowVisibility(int visibility) {
-		bottomShadow.setVisibility(visibility);
-	}
-
-	public void setPointSpaceVisibility(int visibility) {
-		leftPointSpace.setVisibility(visibility);
-		rightPointSpace.setVisibility(visibility);
-	}
-
-	public void setDividerVisibility(int visibility) {
-		divider.setVisibility(visibility);
 	}
 }

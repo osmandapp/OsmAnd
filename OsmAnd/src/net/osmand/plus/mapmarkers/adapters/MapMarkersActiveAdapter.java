@@ -93,7 +93,7 @@ public class MapMarkersActiveAdapter extends RecyclerView.Adapter<MapMarkerItemV
 		int markerColor = MapMarker.getColorId(marker.colorIndex);
 		LatLon markerLatLon = new LatLon(marker.getLatitude(), marker.getLongitude());
 		if (showDirectionEnabled && pos < 2) {
-			holder.setIconDirectionVisibility(View.GONE);
+			holder.iconDirection.setVisibility(View.GONE);
 
 			holder.icon.setImageDrawable(iconsCache.getIcon(R.drawable.ic_arrow_marker_diretion, markerColor));
 			holder.mainLayout.setBackgroundColor(ContextCompat.getColor(mapActivity, R.color.markers_top_bar_background));
@@ -107,7 +107,7 @@ public class MapMarkersActiveAdapter extends RecyclerView.Adapter<MapMarkerItemV
 			drawableResToUpdate = R.drawable.ic_arrow_marker_diretion;
 			markerImageViewToUpdate = holder.icon;
 		} else {
-			holder.setIconDirectionVisibility(View.VISIBLE);
+			holder.iconDirection.setVisibility(View.VISIBLE);
 
 			holder.icon.setImageDrawable(iconsCache.getIcon(R.drawable.ic_action_flag_dark, markerColor));
 			holder.mainLayout.setBackgroundColor(ContextCompat.getColor(mapActivity, night ? R.color.bg_color_dark : R.color.bg_color_light));
@@ -122,11 +122,11 @@ public class MapMarkersActiveAdapter extends RecyclerView.Adapter<MapMarkerItemV
 			markerImageViewToUpdate = holder.iconDirection;
 		}
 		if (pos == getItemCount() - 1) {
-			holder.setBottomShadowVisibility(View.VISIBLE);
-			holder.setDividerVisibility(View.GONE);
+			holder.bottomShadow.setVisibility(View.VISIBLE);
+			holder.divider.setVisibility(View.GONE);
 		} else {
-			holder.setBottomShadowVisibility(View.GONE);
-			holder.setDividerVisibility(View.VISIBLE);
+			holder.bottomShadow.setVisibility(View.GONE);
+			holder.divider.setVisibility(View.VISIBLE);
 		}
 
 		holder.iconReorder.setOnTouchListener(new View.OnTouchListener() {

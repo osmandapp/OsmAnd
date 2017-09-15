@@ -99,7 +99,7 @@ public class MapMarkersHistoryFragment extends Fragment implements MapMarkersHel
 			public void onChildDraw(Canvas c, RecyclerView recyclerView, RecyclerView.ViewHolder viewHolder, float dX, float dY, int actionState, boolean isCurrentlyActive) {
 				if (actionState == ItemTouchHelper.ACTION_STATE_SWIPE && viewHolder instanceof MapMarkerItemViewHolder) {
 					if (!iconHidden && isCurrentlyActive) {
-						((MapMarkerItemViewHolder) viewHolder).setOptionsButtonVisibility(View.GONE);
+						((MapMarkerItemViewHolder) viewHolder).optionsBtn.setVisibility(View.GONE);
 						iconHidden = true;
 					}
 					View itemView = viewHolder.itemView;
@@ -135,7 +135,7 @@ public class MapMarkersHistoryFragment extends Fragment implements MapMarkersHel
 			@Override
 			public void clearView(RecyclerView recyclerView, RecyclerView.ViewHolder viewHolder) {
 				if (viewHolder instanceof MapMarkerItemViewHolder) {
-					((MapMarkerItemViewHolder) viewHolder).setOptionsButtonVisibility(View.VISIBLE);
+					((MapMarkerItemViewHolder) viewHolder).optionsBtn.setVisibility(View.VISIBLE);
 					iconHidden = false;
 				}
 				super.clearView(recyclerView, viewHolder);

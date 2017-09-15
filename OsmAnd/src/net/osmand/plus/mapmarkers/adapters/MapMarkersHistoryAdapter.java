@@ -133,14 +133,15 @@ public class MapMarkersHistoryAdapter extends RecyclerView.Adapter<RecyclerView.
 				}
 			});
 			itemViewHolder.flagIconLeftSpace.setVisibility(View.VISIBLE);
-			itemViewHolder.setIconDirectionVisibility(View.GONE);
-			itemViewHolder.setPointSpaceVisibility(View.GONE);
+			itemViewHolder.iconDirection.setVisibility(View.GONE);
+			itemViewHolder.leftPointSpace.setVisibility(View.GONE);
+			itemViewHolder.rightPointSpace.setVisibility(View.GONE);
 			if (position == getItemCount() - 1) {
-				((MapMarkerItemViewHolder) holder).setBottomShadowVisibility(View.VISIBLE);
-				((MapMarkerItemViewHolder) holder).setDividerVisibility(View.GONE);
+				itemViewHolder.bottomShadow.setVisibility(View.VISIBLE);
+				itemViewHolder.divider.setVisibility(View.GONE);
 			} else {
-				((MapMarkerItemViewHolder) holder).setBottomShadowVisibility(View.GONE);
-				((MapMarkerItemViewHolder) holder).setDividerVisibility(View.VISIBLE);
+				itemViewHolder.bottomShadow.setVisibility(View.GONE);
+				itemViewHolder.divider.setVisibility(View.VISIBLE);
 			}
 		} else if (holder instanceof MapMarkerDateViewHolder) {
 			final MapMarkerDateViewHolder dateViewHolder = (MapMarkerDateViewHolder) holder;
