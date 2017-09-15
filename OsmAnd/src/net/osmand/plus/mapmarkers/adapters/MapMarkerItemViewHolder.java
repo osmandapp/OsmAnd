@@ -16,6 +16,7 @@ public class MapMarkerItemViewHolder extends RecyclerView.ViewHolder {
 	final ImageView icon;
 	final TextView title;
 	final TextView distance;
+	final View flagIconLeftSpace;
 	final View leftPointSpace;
 	final TextView point;
 	final View rightPointSpace;
@@ -32,6 +33,7 @@ public class MapMarkerItemViewHolder extends RecyclerView.ViewHolder {
 		icon = (ImageView) view.findViewById(R.id.map_marker_icon);
 		title = (TextView) view.findViewById(R.id.map_marker_title);
 		distance = (TextView) view.findViewById(R.id.map_marker_distance);
+		flagIconLeftSpace = view.findViewById(R.id.flag_icon_left_space);
 		leftPointSpace = view.findViewById(R.id.map_marker_left_point_space);
 		point = (TextView) view.findViewById(R.id.map_marker_point_text_view);
 		rightPointSpace = view.findViewById(R.id.map_marker_right_point_space);

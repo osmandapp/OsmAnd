@@ -132,6 +132,7 @@ public class MapMarkersHistoryAdapter extends RecyclerView.Adapter<RecyclerView.
 					notifyItemRemoved(position);
 				}
 			});
+			itemViewHolder.flagIconLeftSpace.setVisibility(View.VISIBLE);
 			itemViewHolder.setIconDirectionVisibility(View.GONE);
 			itemViewHolder.setPointSpaceVisibility(View.GONE);
 			if (position == getItemCount() - 1) {

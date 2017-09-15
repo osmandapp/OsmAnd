@@ -28,13 +28,20 @@
                 android:tint="?attr/secondary_icon_color"
                 tools:src="@drawable/ic_action_reorder"/>
 
+            <View
+                tools:visibility="visible"
+                android:visibility="gone"
+                android:id="@+id/flag_icon_left_space"
+                android:layout_width="16dp"
+                android:layout_height="wrap_content"/>
+
             <android.support.v7.widget.AppCompatImageView
                 android:id="@+id/map_marker_icon"
                 android:layout_width="24dp"
                 android:layout_height="24dp"
                 android:layout_gravity="center_vertical"
-                android:layout_marginLeft="16dp"
                 android:layout_marginRight="16dp"
+                android:layout_marginEnd="16dp"
                 tools:src="@drawable/ic_action_flag_dark"/>
 
             <LinearLayout
