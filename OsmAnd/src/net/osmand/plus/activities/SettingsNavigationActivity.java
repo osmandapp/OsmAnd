@@ -202,12 +202,14 @@ public class SettingsNavigationActivity extends SettingsBaseActivity {
 				speedNames[i] = speedLimitsKm[i] + " " + getString(R.string.km_h);
 			}
 			registerListPreference(settings.SPEED_LIMIT_EXCEED, screen, speedNames, speedLimitsKm);
+			registerListPreference(settings.SWITCH_MAP_DIRECTION_TO_COMPASS, screen, speedNames, speedLimitsKm);
 		} else {
 			String[] speedNames = new String[speedLimitsKm.length];
 			for (int i =0; i<speedNames.length;i++){
 				speedNames[i] = speedLimitsMiles[i] + " " + getString(R.string.mile_per_hour);
 			}
 			registerListPreference(settings.SPEED_LIMIT_EXCEED, screen, speedNames, speedLimitsKm);
+			registerListPreference(settings.SWITCH_MAP_DIRECTION_TO_COMPASS, screen, speedNames, speedLimitsKm);
 		}
 
 		PreferenceCategory category = (PreferenceCategory) screen.findPreference("guidance_preferences");

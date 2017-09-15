@@ -132,7 +132,7 @@
         <string name="poi_parking_entrance">Indgang til parkering</string>
         <string name="poi_garages">Garage</string>
 
-        <string name="poi_public_transport_platform">Stoppested</string>
+        <string name="poi_public_transport_platform">Offentligt stoppested</string>
         <string name="poi_public_transport_platform_bus">Busstoppested</string>
         <string name="poi_public_transport_platform_trolleybus">Trolleybus stoppested</string>
         <string name="poi_bus_stop">Busstoppested</string>
@@ -1830,7 +1830,7 @@
 	<string name="poi_shelter_type_wildlife_hide">Vildtskjul</string>
 	<string name="poi_shelter_type_rock_shelter">Klippehule</string>
 	<string name="poi_shelter_type_sun_shelter">Solafskærming</string>
-	<string name="poi_shelter_type_field_shelter">Dyreshelter</string>
+	<string name="poi_shelter_type_field_shelter">Friluftsshelter</string>
 	<string name="poi_shelter_type_tent">Sheltertype: telt</string>
 	<string name="poi_shelter_type_abandoned">Sheltertype: forladt</string>
 
@@ -1908,7 +1908,7 @@
 	<string name="poi_bridge_structure_aqueduct">Brokonstruktion: akvædukt</string>
 	<string name="poi_bridge_structure_log">Brokonstruktion: træstamme</string>
 	<string name="poi_bridge_type_movable">Brotype: bevægelig</string>
-	<string name="poi_bridge_movable_bascule">Bevægeligbro: klapbro</string>
+	<string name="poi_bridge_movable_bascule">Bevægelig bro: klapbro</string>
 	<string name="poi_bridge_movable_swing">Bevægeligbro: drejebro</string>
 	<string name="poi_bridge_movable_lift">Bevægeligbro: løftebro</string>
 	<string name="poi_bridge_movable_drawbridge">Bevægeligbro: vindebro</string>
@@ -2326,7 +2326,7 @@
 	<string name="poi_historic_period_dominate">Historiskperiode: Dominatet (285 e.Kr. – 476 e.Kr)</string>
 	<string name="poi_historic_period_villager">Historiskperiode: landsbyboere (epoke I, II, 1580 f.Kr. - 133 e.Kr.)</string>
 	<string name="poi_historic_period_urban">Historiskperiode: bymæssig (epoke III, 133 e.Kr. - 374 e.Kr.)</string>
-	<string name="poi_historic_period_classical">Historiskperiode: klassisk (epoke IV, 374 e.Kr. - 900 e.Kr.)</string>
+	<string name="poi_historic_period_classical">Historisk periode: klassisk (epoke IV, 374 e.Kr. - 900 e.Kr.)</string>
 	<string name="poi_historic_period_imperial">Historiskperiode: imperial (epoke V, 900 e.Kr. - 1200 e.Kr.)</string>
 
 <string name="poi_tourism_yes">Turistmæssigt objekt</string>
@@ -3570,10 +3570,10 @@
 <string name="poi_government_archive">Arkiv</string>
 	<string name="poi_government_ministry">Ministerie</string>
 	<string name="poi_government_public_service">Offentlig service</string>
-	<string name="poi_government_social_security">Social sikring</string>
+	<string name="poi_government_social_security">Socialkontor</string>
 	<string name="poi_government_social_services">Sociale ydelser</string>
 	<string name="poi_government_treasury">Finansministeriet</string>
-	<string name="poi_government_transportation">Transportministeriet</string>
+	<string name="poi_government_transportation">Transport/motorregister</string>
 	<string name="poi_government_legislative">Lovgivende institution</string>
 
 </resources>
