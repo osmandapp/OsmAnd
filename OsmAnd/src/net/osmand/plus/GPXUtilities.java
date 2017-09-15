@@ -1414,7 +1414,7 @@ public class GPXUtilities {
 							}
 							if (parser.getName().equals("wpt")) {
 								WptPt wptPt = parseWptAttributes(parser);
-								((GPXFile) parse).addPoint(wptPt);
+								((GPXFile) parse).points.add(wptPt);
 								parserState.push(wptPt);
 							}
 						} else if (parse instanceof Route) {
@@ -1590,7 +1590,7 @@ public class GPXUtilities {
 			to.showCurrentTrack = true;
 		}
 		if (from.points != null) {
-			to.addPoints(from.points);
+			to.points.addAll(from.points);
 		}
 		if (from.tracks != null) {
 			to.tracks.addAll(from.tracks);
