@@ -77,7 +77,7 @@ public class GpxSelectionHelper {
 
 	public SelectedGpxFile getSelectedGPXFile(WptPt point) {
 		for (SelectedGpxFile g : selectedGPXFiles) {
-			if (g.getGpxFile().getPoints().contains(point)) {
+			if (g.getGpxFile().containsPoint(point)) {
 				return g;
 			}
 		}
@@ -215,11 +215,11 @@ public class GpxSelectionHelper {
 			}
 		}
 
-		if (g.getPoints().size() > 0) {
+		if (!g.isPointsEmpty()) {
 			GpxDisplayGroup group = new GpxDisplayGroup(g);
 			group.gpxName = name;
 			group.setType(GpxDisplayItemType.TRACK_POINTS);
-			group.setDescription(getString(R.string.gpx_selection_number_of_points, g.getPoints().size()));
+			group.setDescription(getString(R.string.gpx_selection_number_of_points, g.getPointsSize()));
 			group.setName(getString(R.string.gpx_selection_points, name));
 			dg.add(group);
 			List<GpxDisplayItem> list = group.getModifiableList();
@@ -489,19 +489,19 @@ public class GpxSelectionHelper {
 		return sf;
 	}
 
-	public void clearPointsInGpxFile(GPXFile gpxFile) {
+	public void clearPoints(GPXFile gpxFile) {
 		gpxFile.clearPoints();
 	}
 
-	public void addPointToGpxFile(WptPt point, GPXFile gpxFile) {
+	public void addPoint(WptPt point, GPXFile gpxFile) {
 		gpxFile.addPoint(point);
 	}
 
-	public void addAllPointsToGpxFile(Collection<? extends WptPt> collection, GPXFile gpxFile) {
-		gpxFile.addAllPoints(collection);
+	public void addPoints(Collection<? extends WptPt> collection, GPXFile gpxFile) {
+		gpxFile.addPoints(collection);
 	}
 
-	public boolean removePointFromGpxFile(WptPt point, GPXFile gpxFile) {
+	public boolean removePoint(WptPt point, GPXFile gpxFile) {
 		return gpxFile.removePoint(point);
 	}
 

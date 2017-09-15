@@ -870,7 +870,7 @@ public class MapMarkerDialogHelper {
 			//wpt.link = r.getFileName();
 			//wpt.time = r.getFile().lastModified();
 			//wpt.category = r.getSearchHistoryType();
-			app.getSelectedGpxHelper().addPointToGpxFile(wpt, file);
+			file.addPoint(wpt);
 		}
 		GPXUtilities.writeGpxFile(fout, file, app);
 	}

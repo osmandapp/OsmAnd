@@ -238,7 +238,7 @@ public class RouteProvider {
 			calculateOsmAndRouteParts = builder.calculateOsmAndRouteParts;
 			useIntermediatePointsRTE = builder.useIntermediatePointsRTE;
 			builder.calculateOsmAndRoute = false; // Disabled temporary builder.calculateOsmAndRoute;
-			if (!file.getPoints().isEmpty()) {
+			if (!file.isPointsEmpty()) {
 				wpt = new ArrayList<LocationPoint>(file.getPoints());
 			}
 			if (file.isCloudmadeRouteFile() || OSMAND_ROUTER.equals(file.author)) {
@@ -1092,7 +1092,7 @@ public class RouteProvider {
 				}
 				pt.desc = pt.name;
 			}
-			ctx.getSelectedGpxHelper().addPointToGpxFile(pt, gpx);
+			gpx.addPoint(pt);
 		}
 	return gpx;
 	}

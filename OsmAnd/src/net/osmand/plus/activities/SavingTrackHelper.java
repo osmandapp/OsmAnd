@@ -252,7 +252,7 @@ public class SavingTrackHelper extends SQLiteOpenHelper {
 		distance = 0;
 		points = 0;
 		duration = 0;
-		ctx.getSelectedGpxHelper().clearPointsInGpxFile(currentTrack.getModifiableGpxFile());
+		ctx.getSelectedGpxHelper().clearPoints(currentTrack.getModifiableGpxFile());
 		currentTrack.getModifiableGpxFile().tracks.clear();
 		currentTrack.getModifiablePointsToDisplay().clear();
 		currentTrack.getModifiableGpxFile().modifiedTime = System.currentTimeMillis();
@@ -305,7 +305,7 @@ public class SavingTrackHelper extends SQLiteOpenHelper {
 					gpx  = new GPXFile();
 					dataTracks.put(date, gpx);
 				}
-				ctx.getSelectedGpxHelper().addPointToGpxFile(pt, gpx);
+				ctx.getSelectedGpxHelper().addPoint(pt, gpx);
 
 			} while (query.moveToNext());
 		}
@@ -469,7 +469,7 @@ public class SavingTrackHelper extends SQLiteOpenHelper {
 		if (color != 0) {
 			pt.setColor(color);
 		}
-		ctx.getSelectedGpxHelper().addPointToGpxFile(pt, currentTrack.getModifiableGpxFile());
+		ctx.getSelectedGpxHelper().addPoint(pt, currentTrack.getModifiableGpxFile());
 		currentTrack.getModifiableGpxFile().modifiedTime = time;
 		points++;
 		execWithClose(insertPointsScript, new Object[] { lat, lon, time, description, name, category, color });
@@ -541,7 +541,7 @@ public class SavingTrackHelper extends SQLiteOpenHelper {
 	}
 
 	public void deletePointData(WptPt pt) {
-		ctx.getSelectedGpxHelper().removePointFromGpxFile(pt, currentTrack.getModifiableGpxFile());
+		ctx.getSelectedGpxHelper().removePoint(pt, currentTrack.getModifiableGpxFile());
 		currentTrack.getModifiableGpxFile().modifiedTime = System.currentTimeMillis();
 		points--;
 
@@ -598,7 +598,7 @@ public class SavingTrackHelper extends SQLiteOpenHelper {
 		Map<String, GPXFile> files = collectRecordedData();
 		currentTrack.getModifiableGpxFile().tracks.clear();
 		for (Map.Entry<String, GPXFile> entry : files.entrySet()){
-			ctx.getSelectedGpxHelper().addAllPointsToGpxFile(entry.getValue().getPoints(), currentTrack.getModifiableGpxFile());
+			ctx.getSelectedGpxHelper().addPoints(entry.getValue().getPoints(), currentTrack.getModifiableGpxFile());
 			currentTrack.getModifiableGpxFile().tracks.addAll(entry.getValue().tracks);
 		}
 		currentTrack.processPoints();

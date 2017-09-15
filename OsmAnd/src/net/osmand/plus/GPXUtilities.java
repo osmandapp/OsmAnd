@@ -758,22 +758,34 @@ public class GPXUtilities {
 		private TrkSegment generalSegment;
 
 		public List<WptPt> getPoints() {
-			return points;
+			return new ArrayList<>(points);
+		}
+
+		public boolean isPointsEmpty() {
+			return points.isEmpty();
+		}
+
+		int getPointsSize() {
+			return points.size();
+		}
+
+		boolean containsPoint(WptPt point) {
+			return points.contains(point);
 		}
 
 		void clearPoints() {
 			points.clear();
 		}
 
-		void addPoint(WptPt point) {
+		public void addPoint(WptPt point) {
 			points.add(point);
 		}
 
-		void addAllPoints(Collection<? extends WptPt> collection) {
+		void addPoints(Collection<? extends WptPt> collection) {
 			points.addAll(collection);
 		}
 
-		boolean removePoint(WptPt point) {
+		public boolean removePoint(WptPt point) {
 			return points.remove(point);
 		}
 
@@ -1221,7 +1233,7 @@ public class GPXUtilities {
 				serializer.endTag(null, "rte"); //$NON-NLS-1$
 			}
 
-			for (WptPt l : file.getPoints()) {
+			for (WptPt l : file.points) {
 				serializer.startTag(null, "wpt"); //$NON-NLS-1$
 				writeWpt(format, serializer, l);
 				serializer.endTag(null, "wpt"); //$NON-NLS-1$
@@ -1577,8 +1589,8 @@ public class GPXUtilities {
 		if (from.showCurrentTrack) {
 			to.showCurrentTrack = true;
 		}
-		if (from.getPoints() != null) {
-			to.addAllPoints(from.getPoints());
+		if (from.points != null) {
+			to.addPoints(from.points);
 		}
 		if (from.tracks != null) {
 			to.tracks.addAll(from.tracks);

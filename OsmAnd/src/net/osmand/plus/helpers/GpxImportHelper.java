@@ -492,7 +492,7 @@ public class GpxImportHelper {
 
 	private void importFavourites(final GPXFile gpxFile, final String fileName, final boolean save,
 								  final boolean useImportDir, final boolean forceImportFavourites) {
-		if (gpxFile == null || gpxFile.getPoints() == null || gpxFile.getPoints().size() == 0) {
+		if (gpxFile == null || gpxFile.isPointsEmpty()) {
 			if (forceImportFavourites) {
 				final DialogInterface.OnClickListener importAsTrackListener = new DialogInterface.OnClickListener() {
 					@Override

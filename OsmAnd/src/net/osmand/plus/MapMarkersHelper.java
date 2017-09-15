@@ -707,7 +707,7 @@ public class MapMarkersHelper {
 			wpt.lon = marker.getLongitude();
 			wpt.setColor(ctx.getResources().getColor(MapMarker.getColorId(marker.colorIndex)));
 			wpt.name = marker.getOnlyName();
-			ctx.getSelectedGpxHelper().addPointToGpxFile(wpt, file);
+			file.addPoint(wpt);
 		}
 		GPXUtilities.writeGpxFile(fout, file, ctx);
 	}
