@@ -49,7 +49,7 @@ public class MapMarkersActiveFragment extends Fragment implements OsmAndCompassL
 
 			@Override
 			public void onItemClick(View view) {
-				int pos = recyclerView.indexOfChild(view);
+				int pos = recyclerView.getChildAdapterPosition(view);
 				MapMarker marker = adapter.getItem(pos);
 				mapActivity.getMyApplication().getSettings().setMapLocationToShow(marker.getLatitude(), marker.getLongitude(),
 						15, marker.getPointDescription(mapActivity), true, marker);
@@ -67,7 +67,9 @@ public class MapMarkersActiveFragment extends Fragment implements OsmAndCompassL
 			public void onDragEnded(RecyclerView.ViewHolder holder) {
 				toPosition = holder.getAdapterPosition();
 				if (toPosition >= 0 && fromPosition >= 0 && toPosition != fromPosition) {
-					mapActivity.getMyApplication().getMapMarkersHelper().saveMapMarkers(adapter.getItems(), null);
+					hideSnackbar();
+					mapActivity.getMyApplication().getMapMarkersHelper().checkAndFixActiveMarkersOrderIfNeeded();
+					adapter.notifyDataSetChanged();
 				}
 			}
 		});
@@ -121,15 +123,27 @@ public class MapMarkersActiveFragment extends Fragment implements OsmAndCompassL
 		return null;
 	}
 
+	void setShowDirectionEnabled(boolean showDirectionEnabled) {
+		if (adapter != null) {
+			adapter.setShowDirectionEnabled(showDirectionEnabled);
+		}
+	}
+
 	void updateAdapter() {
 		if (adapter != null) {
 			adapter.notifyDataSetChanged();
 		}
 	}
 
+	void hideSnackbar() {
+		if (adapter != null) {
+			adapter.hideSnackbar();
+		}
+	}
+
 	private void updateLocationUi() {
 		final MapActivity mapActivity = (MapActivity) getActivity();
-		if (mapActivity != null) {
+		if (mapActivity != null && adapter != null) {
 			mapActivity.getMyApplication().runInUIThread(new Runnable() {
 				@Override
 				public void run() {
@@ -141,7 +155,7 @@ public class MapMarkersActiveFragment extends Fragment implements OsmAndCompassL
 
 					adapter.setUseCenter(useCenter);
 					adapter.setLocation(useCenter ? mapActivity.getMapLocation() : new LatLon(location.getLatitude(), location.getLongitude()));
-					adapter.setHeading(useCenter ? -mapActivity.getMapRotate() : heading);
+					adapter.setHeading(useCenter ? -mapActivity.getMapRotate() : heading != null ? heading : 99);
 					adapter.notifyDataSetChanged();
 				}
 			});

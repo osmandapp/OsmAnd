@@ -9,11 +9,23 @@
          3. All your modified/created strings are in the top of the file (to make easier find what\'s translated).
     PLEASE: Have a look at http://code.google.com/p/osmand/wiki/UIConsistency, it may really improve your and our work  :-)  Thx - Hardy
     -->
+    <string name="all_markers_moved_to_history">All markers moved to History</string>
+    <string name="marker_moved_to_history">Marker moved to History</string>
+    <string name="marker_moved_to_active">Marker moved to Active</string>
+    <string name="shared_string_list">List</string>
+    <string name="shared_string_groups">Groups</string>
+    <string name="passed">Passed: %1$s</string>
+    <string name="make_active">Make active</string>
+    <string name="today">Today</string>
+    <string name="yesterday">Yesterday</string>
+    <string name="last_seven_days">Last 7 days</string>
+    <string name="this_year">This year</string>
+    <string name="widget">Widget</string>
+    <string name="top_bar">Top bar</string>
     <string name="move_all_to_history">Move all to history</string>
     <string name="build_route">Build route</string>
     <string name="show_direction">Show direction</string>
     <string name="sort_by">Sort by</string>
-    <string name="marker_options">Marker options</string>
     <string name="do_not_use_animations">Do not use animations</string>
     <string name="do_not_use_animations_descr">Disables animations in the app</string>
     <string name="keep_showing_on_map">Keep showing on map</string>

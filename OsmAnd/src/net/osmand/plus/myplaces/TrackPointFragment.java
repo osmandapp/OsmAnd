@@ -44,6 +44,7 @@ import net.osmand.plus.GpxSelectionHelper.GpxDisplayItem;
 import net.osmand.plus.GpxSelectionHelper.GpxDisplayItemType;
 import net.osmand.plus.IconsCache;
 import net.osmand.plus.MapMarkersHelper;
+import net.osmand.plus.MapMarkersHelper.MarkersSyncGroup;
 import net.osmand.plus.OsmandApplication;
 import net.osmand.plus.OsmandSettings;
 import net.osmand.plus.R;
@@ -607,7 +608,10 @@ public class TrackPointFragment extends OsmandExpandableListFragment {
 						names.add(new PointDescription(PointDescription.POINT_TYPE_MAP_MARKER, i.name));
 					}
 				}
-				markersHelper.addMapMarkers(points, names);
+				File gpx = getGpxDataItem().getFile();
+				MarkersSyncGroup syncGroup = new MarkersSyncGroup(gpx.getAbsolutePath(), trimExtension(gpx.getName()), MarkersSyncGroup.GPX_TYPE);
+				markersHelper.addMarkersSyncGroup(syncGroup);
+				markersHelper.addMapMarkers(points, names, syncGroup);
 				MapActivity.launchMapActivityMoveToTop(getActivity());
 			} else {
 				final TargetPointsHelper targetPointsHelper = getMyApplication().getTargetPointsHelper();
@@ -624,6 +628,14 @@ public class TrackPointFragment extends OsmandExpandableListFragment {
 				IntermediatePointsDialog.openIntermediatePointsDialog(getActivity(), getMyApplication(), true);
 			}
 		}
+	}
+
+	private String trimExtension(String src) {
+		int index = src.lastIndexOf('.');
+		if (index != -1) {
+			return src.substring(0, index);
+		}
+		return src;
 	}
 
 	private void enterFavoritesMode() {

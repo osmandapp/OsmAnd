@@ -1,5 +1,5 @@
 <?xml version='1.0' encoding='UTF-8'?>
-<resources><string name="poi_shop_food">חנות מזון</string>
+<resources><string name="poi_shop_food">חנות נוחות וסופרמרקט</string>
 	<string name="poi_shop">חנות</string>
 		<string name="poi_emergency">שרותי חירום</string>
 	<string name="poi_transportation">תחבורה</string>
@@ -64,7 +64,7 @@
 	<string name="poi_pastry">חנות מאפים</string>
 	<string name="poi_dairy">חלביה</string>
 	<string name="poi_vending_machine">מכונת ממכר אוטומטית</string>
-	<string name="poi_wine">חנות יין</string>
+	<string name="poi_wine">חנות יינות</string>
 
 	<string name="poi_books">חנות ספרים</string>
 	<string name="poi_bicycle">חנות אופניים</string>
@@ -114,7 +114,7 @@
 	<string name="poi_medical_supply">אספקה רפואית</string>
 	<string name="poi_mobile_phone">חנות טלפונים ניידים</string>
 	<string name="poi_motorcycle">חנות אופנועים</string>
-	<string name="poi_music">חנות מוסיקה</string>
+	<string name="poi_music">חנות מוזיקה</string>
 	<string name="poi_musical_instrument">חנות כלי נגינה</string>
 	<string name="poi_newsagent">סוכנות חדשות</string>
 	<string name="poi_optician">אופטומטריסט</string>
@@ -150,4 +150,87 @@
 	<string name="poi_information_type">סוג</string>
 	<string name="poi_resort_type">סוג</string>
 	<string name="poi_smoking">עישון</string>
-	</resources>
+	<string name="poi_payment_fuel_type">כרטיסי דלק</string>
+	<string name="poi_internet_access_type">סוג גישה לאינטרנט</string>
+	<string name="poi_clothes_type">סוג</string>
+	<string name="poi_shoes_type">סוג</string>
+	<string name="poi_fire_hydrant_type">סוג</string>
+	<string name="poi_fire_hydrant_position">מיקום</string>
+	<string name="poi_payment_toll_type">סוג התשלום</string>
+	<string name="poi_traffic_signals_sound">קול</string>
+	<string name="poi_highway_crossing_type">סוג</string>
+	<string name="poi_tactile_paving">ריצוף מובלט</string>
+	<string name="poi_brushless">בראשלס</string>
+	<string name="poi_self_service">שירות עצמי</string>
+	<string name="poi_automated">אוטומטי</string>
+	<string name="poi_parking_type">סוג</string>
+	<string name="poi_covered">מכוסה</string>
+	<string name="poi_bicycle_parking_type">סוג</string>
+	<string name="poi_telescope_type">סוג</string>
+	<string name="poi_animal_training_type">סוג</string>
+	<string name="poi_embassy_type">סוג</string>
+	<string name="poi_city_capital">בירה</string>
+	<string name="poi_healthcare_alternative_types">מומחיות</string>
+	<string name="poi_free_flying_characteristics">מאפיינים</string>
+	<string name="poi_archaeological_site_type">סוג</string>
+	<string name="poi_star_rating">דירוג בכוכבים</string>
+	<string name="poi_religion_type">דת</string>
+	<string name="poi_information_contents">תכנים</string>
+	<string name="poi_clock_option">נוסף</string>
+	<string name="poi_piste_difficulty">קושי מסלול הסקי</string>
+	<string name="poi_theatre_genre">סוגה</string>
+	<string name="poi_outdoor_seating">ישיבה בחוץ</string>
+	<string name="poi_fee">עמלה</string>
+	<string name="poi_delivery">משלוח</string>
+	<string name="poi_cocktails">קוקטיילים</string>
+	<string name="poi_microbrewery">מבשלה קטנה</string>
+	<string name="poi_beauty_salon_service">שירות</string>
+	<string name="poi_recycling_type">סוג</string>
+	<string name="poi_zoo_type">סוג</string>
+	<string name="poi_direction_n">כיוון: צפון</string>
+	<string name="poi_direction_nne">כיוון: צפון - צפון מזרח</string>
+	<string name="poi_direction_ne">כיוון: צפון מזרח</string>
+	<string name="poi_direction_ene">כיוון: מזרח - צפון מזרח</string>
+	<string name="poi_direction_e">כיוון: מזרח</string>
+	<string name="poi_direction_ese">כיוון: מזרח - דרום מזרח</string>
+	<string name="poi_direction_se">כיוון: דרום מזרח</string>
+	<string name="poi_direction_sse">כיוון: דרום - דרום מזרח</string>
+	<string name="poi_direction_s">כיוון: דרום</string>
+	<string name="poi_reservation_required">הזמנה: נדרשת</string>
+	<string name="poi_reservation_recommended">הזמנה: מומלצת</string>
+	<string name="poi_reservation_yes">הזמנה: יש</string>
+	<string name="poi_reservation_no">הזמנה: אין</string>
+	<string name="poi_reservation_members_only">הזמנה: חברים בלבד</string>
+
+	<string name="poi_beds">מיטות</string>
+
+	<string name="poi_boat_rental">סירות להשכרה</string>
+	<string name="poi_boat_motorboat_rental_yes">סירות מנוע: יש</string>
+	<string name="poi_boat_motorboat_rental_no">סירות מנוע: אין</string>
+	<string name="poi_boat_houseboat_rental_yes">בתי סירה: יש</string>
+	<string name="poi_boat_houseboat_rental_no">בתי סירה: אין</string>
+	<string name="poi_boat_pedalboat_rental_yes">סירות פדלים: יש</string>
+	<string name="poi_boat_pedalboat_rental_no">סירות פדלים: אין</string>
+	<string name="poi_boat_jetski_rental_yes">אופנועי ים: יש</string>
+	<string name="poi_boat_jetski_rental_no">אופנועי ים: אין</string>
+	<string name="poi_boat_sailboat_rental_yes">מפרשיות: יש</string>
+	<string name="poi_boat_sailboat_rental_no">מפרשיות: אין</string>
+	<string name="poi_boat_dinghy_rental_rental_yes">דוגיות: יש</string>
+	<string name="poi_boat_dinghy_rental_rental_no">דוגיות: אין</string>
+	<string name="poi_boat_kayak_rental_rental_yes">קיאקים: יש</string>
+	<string name="poi_boat_kayak_rental_rental_no">קיאקים: אין</string>
+	<string name="poi_boat_canoe_rental_rental_yes">קאנו: יש</string>
+	<string name="poi_boat_canoe_rental_rental_no">קאנו: אין</string>
+
+	<string name="poi_network">רשת</string>
+
+	<string name="poi_government_archive">ארכיון</string>
+	<string name="poi_government_ministry">משרד ממשלתי</string>
+	<string name="poi_government_public_service">שירות ציבורי</string>
+	<string name="poi_government_social_security">ביטוח לאומי</string>
+	<string name="poi_government_social_services">שירותים סוציאליים</string>
+	<string name="poi_government_treasury">אוצר</string>
+	<string name="poi_government_transportation">מוסד תעבורתי</string>
+	<string name="poi_government_legislative">מוסד חוקתי</string>
+
+</resources>

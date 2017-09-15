@@ -30,6 +30,7 @@ import net.osmand.plus.FavouritesDbHelper;
 import net.osmand.plus.FavouritesDbHelper.FavoriteGroup;
 import net.osmand.plus.IconsCache;
 import net.osmand.plus.MapMarkersHelper;
+import net.osmand.plus.MapMarkersHelper.MarkersSyncGroup;
 import net.osmand.plus.OsmandApplication;
 import net.osmand.plus.R;
 import net.osmand.plus.base.BottomSheetDialogFragment;
@@ -188,7 +189,9 @@ public class EditFavoriteGroupDialogFragment extends BottomSheetDialogFragment {
 						points.add(new LatLon(fp.getLatitude(), fp.getLongitude()));
 						names.add(new PointDescription(PointDescription.POINT_TYPE_MAP_MARKER, fp.getName()));
 					}
-					markersHelper.addMapMarkers(points, names);
+					MarkersSyncGroup syncGroup = new MarkersSyncGroup(group.name, group.name, MarkersSyncGroup.FAVORITES_TYPE);
+					markersHelper.addMarkersSyncGroup(syncGroup);
+					markersHelper.addMapMarkers(points, names, syncGroup);
 					dismiss();
 					MapActivity.launchMapActivityMoveToTop(getActivity());
 				}

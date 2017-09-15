@@ -258,5 +258,8 @@
 	<color name="map_background_color_dark">#101821</color>
 
 	<color name="fab_green">#46bd2a</color>
+	<color name="map_markers_on_map_divider_color">#0d464a</color>
+	<color name="map_markers_on_map_color">#17828a</color>
+	<color name="show_direction_menu_selected_item_bg">#f2f4ff</color>
 
 </resources>

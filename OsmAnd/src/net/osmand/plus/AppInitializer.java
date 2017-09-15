@@ -29,6 +29,7 @@ import net.osmand.plus.download.ui.AbstractLoadLocalIndexTask;
 import net.osmand.plus.helpers.AvoidSpecificRoads;
 import net.osmand.plus.helpers.WaypointHelper;
 import net.osmand.plus.liveupdates.LiveUpdatesHelper;
+import net.osmand.plus.mapmarkers.MapMarkersDbHelper;
 import net.osmand.plus.monitoring.LiveMonitoringHelper;
 import net.osmand.plus.monitoring.OsmandMonitoringPlugin;
 import net.osmand.plus.poi.PoiFiltersHelper;
@@ -373,6 +374,7 @@ public class AppInitializer implements IProgress {
 		app.rendererRegistry = startupInit(new RendererRegistry(app), RendererRegistry.class);
 		app.geocodingLookupService = startupInit(new GeocodingLookupService(app), GeocodingLookupService.class);
 		app.targetPointsHelper = startupInit(new TargetPointsHelper(app), TargetPointsHelper.class);
+		app.mapMarkersDbHelper = startupInit(new MapMarkersDbHelper(app), MapMarkersDbHelper.class);
 		app.mapMarkersHelper = startupInit(new MapMarkersHelper(app), MapMarkersHelper.class);
 		app.searchUICore = startupInit(new QuickSearchHelper(app), QuickSearchHelper.class);
 	}
@@ -499,6 +501,7 @@ public class AppInitializer implements IProgress {
 			startBgTime = System.currentTimeMillis();
 			app.favorites.loadFavorites();
 			notifyEvent(InitEvents.FAVORITES_INITIALIZED);
+			app.mapMarkersHelper.syncAllGroups();
 			// init poi types before indexes and before POI
 			initPoiTypes();
 			notifyEvent(InitEvents.POI_TYPES_INITIALIZED);

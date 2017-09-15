@@ -120,6 +120,12 @@ public abstract class DashLocationFragment extends DashBaseFragment {
 	public static void updateLocationView(boolean useCenter, LatLon fromLoc, Float h,
 										  ImageView arrow, int arrowResId, TextView txt, LatLon toLoc,
 										  int screenOrientation, OsmandApplication app, Context ctx, boolean paint) {
+		updateLocationView(useCenter, fromLoc, h, arrow, arrowResId, 0, txt, toLoc, screenOrientation, app, ctx, paint);
+	}
+
+	public static void updateLocationView(boolean useCenter, LatLon fromLoc, Float h,
+										  ImageView arrow, int arrowResId, int color, TextView txt, LatLon toLoc,
+										  int screenOrientation, OsmandApplication app, Context ctx, boolean paint) {
 		float[] mes = new float[2];
 		if (fromLoc != null && toLoc != null) {
 			Location.distanceBetween(toLoc.getLatitude(), toLoc.getLongitude(), fromLoc.getLatitude(), fromLoc.getLongitude(), mes);
@@ -136,7 +142,7 @@ public abstract class DashLocationFragment extends DashBaseFragment {
 			} else {
 				dd = (DirectionDrawable) arrow.getDrawable();
 			}
-			dd.setImage(arrowResId, useCenter ? R.color.color_distance : R.color.color_myloc_distance);
+			dd.setImage(arrowResId, color == 0 ? useCenter ? R.color.color_distance : R.color.color_myloc_distance : color);
 			if (fromLoc == null || h == null || toLoc == null) {
 				dd.setAngle(0);
 			} else {
