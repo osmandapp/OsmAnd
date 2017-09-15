@@ -87,7 +87,7 @@ public class MapMarkersDialogFragment extends android.support.v4.app.DialogFragm
 		if (showDirectionFragment != null) {
 			((ShowDirectionBottomSheetDialogFragment) showDirectionFragment).setListener(createShowDirectionFragmentListener());
 		}
-		Fragment orderByFragment = fragmentManager.findFragmentByTag(OrderByBottomSheetDialogFragment.TAG);
+		final Fragment orderByFragment = fragmentManager.findFragmentByTag(OrderByBottomSheetDialogFragment.TAG);
 		if (orderByFragment != null) {
 			((OrderByBottomSheetDialogFragment) orderByFragment).setListener(createOrderByFragmentListener());
 		}
@@ -131,6 +131,7 @@ public class MapMarkersDialogFragment extends android.support.v4.app.DialogFragm
 							activeFragment.updateAdapter();
 							historyFragment.hideSnackbar();
 						}
+						orderByModeTitle.setVisibility(View.VISIBLE);
 						viewPager.setCurrentItem(0);
 						optionsButton.setVisibility(View.VISIBLE);
 						return true;
@@ -141,6 +142,7 @@ public class MapMarkersDialogFragment extends android.support.v4.app.DialogFragm
 							activeFragment.hideSnackbar();
 							historyFragment.hideSnackbar();
 						}
+						orderByModeTitle.setVisibility(View.GONE);
 						viewPager.setCurrentItem(1);
 						optionsButton.setVisibility(View.GONE);
 						return true;
@@ -150,6 +152,7 @@ public class MapMarkersDialogFragment extends android.support.v4.app.DialogFragm
 							historyFragment.updateAdapter();
 							activeFragment.hideSnackbar();
 						}
+						orderByModeTitle.setVisibility(View.GONE);
 						viewPager.setCurrentItem(2);
 						optionsButton.setVisibility(View.GONE);
 						return true;
