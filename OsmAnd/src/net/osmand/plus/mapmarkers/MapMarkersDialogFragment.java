@@ -9,15 +9,12 @@ import android.support.v4.app.Fragment;
 import android.support.v4.app.FragmentManager;
 import android.support.v4.app.FragmentPagerAdapter;
 import android.support.v4.content.ContextCompat;
-import android.support.v4.view.ViewPager;
 import android.support.v7.widget.Toolbar;
-import android.support.v7.widget.helper.ItemTouchHelper;
 import android.view.LayoutInflater;
 import android.view.MenuItem;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.TextView;
-import android.widget.Toast;
 
 import net.osmand.plus.LockableViewPager;
 import net.osmand.plus.MapMarkersHelper;
@@ -27,12 +24,11 @@ import net.osmand.plus.R;
 import net.osmand.plus.activities.MapActivity;
 import net.osmand.plus.dashboard.DashboardOnMap;
 import net.osmand.plus.mapmarkers.ShowDirectionBottomSheetDialogFragment.ShowDirectionFragmentListener;
-import net.osmand.plus.mapmarkers.MarkerOptionsBottomSheetDialogFragment.MarkerOptionsFragmentListener;
+import net.osmand.plus.mapmarkers.OptionsBottomSheetDialogFragment.MarkerOptionsFragmentListener;
 
 import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.List;
-import java.util.Map;
 
 public class MapMarkersDialogFragment extends android.support.v4.app.DialogFragment {
 
@@ -80,9 +76,9 @@ public class MapMarkersDialogFragment extends android.support.v4.app.DialogFragm
 		}
 
 		FragmentManager fragmentManager = getChildFragmentManager();
-		Fragment markerOptionsFragment = fragmentManager.findFragmentByTag(MarkerOptionsBottomSheetDialogFragment.TAG);
-		if (markerOptionsFragment != null) {
-			((MarkerOptionsBottomSheetDialogFragment) markerOptionsFragment).setListener(createMarkerOptionsFragmentListener());
+		Fragment optionsFragment = fragmentManager.findFragmentByTag(OptionsBottomSheetDialogFragment.TAG);
+		if (optionsFragment != null) {
+			((OptionsBottomSheetDialogFragment) optionsFragment).setListener(createOptionsFragmentListener());
 		}
 		Fragment showDirectionFragment = fragmentManager.findFragmentByTag(ShowDirectionBottomSheetDialogFragment.TAG);
 		if (showDirectionFragment != null) {
@@ -103,9 +99,9 @@ public class MapMarkersDialogFragment extends android.support.v4.app.DialogFragm
 		optionsButton.setOnClickListener(new View.OnClickListener() {
 			@Override
 			public void onClick(View view) {
-				MarkerOptionsBottomSheetDialogFragment fragment = new MarkerOptionsBottomSheetDialogFragment();
-				fragment.setListener(createMarkerOptionsFragmentListener());
-				fragment.show(getChildFragmentManager(), MarkerOptionsBottomSheetDialogFragment.TAG);
+				OptionsBottomSheetDialogFragment fragment = new OptionsBottomSheetDialogFragment();
+				fragment.setListener(createOptionsFragmentListener());
+				fragment.show(getChildFragmentManager(), OptionsBottomSheetDialogFragment.TAG);
 			}
 		});
 
@@ -159,14 +155,15 @@ public class MapMarkersDialogFragment extends android.support.v4.app.DialogFragm
 		return (OsmandApplication) getActivity().getApplication();
 	}
 
-	private MarkerOptionsFragmentListener createMarkerOptionsFragmentListener() {
+	private MarkerOptionsFragmentListener createOptionsFragmentListener() {
 		return new MarkerOptionsFragmentListener() {
 
 			final MapActivity mapActivity = getMapActivity();
 
 			@Override
 			public void sortByOnClick() {
-				Toast.makeText(getContext(), "Sort by", Toast.LENGTH_SHORT).show();
+				OrderByBottomSheetDialogFragment fragment = new OrderByBottomSheetDialogFragment();
+				fragment.show(mapActivity.getSupportFragmentManager(), OrderByBottomSheetDialogFragment.TAG);
 			}
 
 			@Override

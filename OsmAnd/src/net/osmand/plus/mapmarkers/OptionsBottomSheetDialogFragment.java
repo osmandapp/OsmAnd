@@ -19,9 +19,9 @@ import net.osmand.plus.R;
 import net.osmand.plus.base.BottomSheetDialogFragment;
 import net.osmand.plus.helpers.AndroidUiHelper;
 
-public class MarkerOptionsBottomSheetDialogFragment extends BottomSheetDialogFragment {
+public class OptionsBottomSheetDialogFragment extends BottomSheetDialogFragment {
 
-	public final static String TAG = "MarkerOptionsBottomSheetDialogFragment";
+	public final static String TAG = "OptionsBottomSheetDialogFragment";
 
 	private MarkerOptionsFragmentListener listener;
 	private boolean portrait;
