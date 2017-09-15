@@ -118,7 +118,7 @@ public class QuickSearchHelper implements ResourceListener {
 			List<GpxSelectionHelper.SelectedGpxFile> list = app.getSelectedGpxHelper().getSelectedGPXFiles();
 			for (GpxSelectionHelper.SelectedGpxFile selectedGpx : list) {
 				if (selectedGpx != null) {
-					for (GPXUtilities.WptPt point : selectedGpx.getGpxFile().points) {
+					for (GPXUtilities.WptPt point : selectedGpx.getGpxFile().getPoints()) {
 						SearchResult sr = new SearchResult(phrase);
 						sr.localeName = point.getPointDescription(app).getName();
 						sr.object = point;

@@ -236,7 +236,7 @@ public class DistanceCalculatorPlugin extends OsmandPlugin {
 						LinkedList<WptPt> l = new LinkedList<WptPt>(r.points);
 						measurementPoints.add(l);
 					}
-					for (WptPt p : result.points) {
+					for (WptPt p : result.getPoints()) {
 						LinkedList<WptPt> l = new LinkedList<WptPt>();
 						l.add(p);
 						measurementPoints.add(l);
@@ -336,14 +336,14 @@ public class DistanceCalculatorPlugin extends OsmandPlugin {
 					saveTrackToRte = originalGPX.routes.size() > 0 && originalGPX.tracks.size() == 0;
 					gpx.tracks.clear();
 					gpx.routes.clear();
-					gpx.points.clear();
+					app.getSelectedGpxHelper().clearPoints(gpx);
 				} else {
 					gpx = new GPXFile();
 				}
 				for (int i = 0; i < measurementPoints.size(); i++) {
 					LinkedList<WptPt> lt = measurementPoints.get(i);
 					if (lt.size() == 1) {
-						gpx.points.add(lt.getFirst());
+						app.getSelectedGpxHelper().addPoint(lt.getFirst(), gpx);
 					} else if (lt.size() > 1) {
 						if (saveTrackToRte) {
 							Route rt = new Route();
