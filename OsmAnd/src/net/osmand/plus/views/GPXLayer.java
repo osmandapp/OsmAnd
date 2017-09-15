@@ -501,7 +501,7 @@ public class GPXLayer extends OsmandMapLayer implements ContextMenuLayer.IContex
 	}
 
 	private List<WptPt> getListStarPoints(SelectedGpxFile g) {
-		return g.getGpxFile().points;
+		return g.getGpxFile().getPoints();
 	}
 
 	private boolean calculateBelongs(int ex, int ey, int objx, int objy, int radius) {

@@ -225,7 +225,7 @@ public class GpxImportHelper {
 
 			@Override
 			protected GPXFile doInBackground(Void... nothing) {
-				final List<FavouritePoint> favourites = asFavourites(gpxFile.points, fileName, forceImportFavourites);
+				final List<FavouritePoint> favourites = asFavourites(gpxFile.getPoints(), fileName, forceImportFavourites);
 				final FavouritesDbHelper favoritesHelper = app.getFavorites();
 				for (final FavouritePoint favourite : favourites) {
 					favoritesHelper.deleteFavourite(favourite, false);
@@ -492,7 +492,7 @@ public class GpxImportHelper {
 
 	private void importFavourites(final GPXFile gpxFile, final String fileName, final boolean save,
 								  final boolean useImportDir, final boolean forceImportFavourites) {
-		if (gpxFile == null || gpxFile.points == null || gpxFile.points.size() == 0) {
+		if (gpxFile == null || gpxFile.isPointsEmpty()) {
 			if (forceImportFavourites) {
 				final DialogInterface.OnClickListener importAsTrackListener = new DialogInterface.OnClickListener() {
 					@Override
