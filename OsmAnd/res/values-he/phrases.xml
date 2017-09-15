@@ -233,4 +233,78 @@
 	<string name="poi_government_transportation">מוסד תעבורתי</string>
 	<string name="poi_government_legislative">מוסד חוקתי</string>
 
-</resources>
+<string name="poi_gambling_bingo">בינגו</string>
+
+	<string name="poi_e_cigarette">חנות סיגריות אלקטרוניות</string>
+
+	<string name="poi_photo_studio">סטודיו לצילום</string>
+
+	<string name="poi_cliff">צוק</string>
+
+	<string name="poi_resort_kids_camp">מחנה ילדים</string>
+	<string name="poi_music_school">בית ספר למוזיקה</string>
+	<string name="poi_language_school">בית ספר לשפות</string>
+
+	<string name="poi_life_ring">גלגל הצלה</string>
+
+	<string name="poi_zoo_petting_zoo">גן חיות</string>
+	<string name="poi_zoo_wildlife_park">פארק חיות בר</string>
+	<string name="poi_zoo_enclosure">בכלובים</string>
+	<string name="poi_zoo_safari_park">פארק ספארי</string>
+	<string name="poi_zoo_birds">ציפורים</string>
+	<string name="poi_zoo_aviary">כלוב בעלי כנף</string>
+	<string name="poi_zoo_falconry">בזיירות</string>
+	<string name="poi_zoo_reptile">זוחלים</string>
+
+	<string name="poi_motorcycle_sales_yes">מכירות</string>
+	<string name="poi_motorcycle_sales_no">מכירות: אין</string>
+	<string name="poi_motorcycle_sales_yes_used">מכירות: יש, בשימוש</string>
+	<string name="poi_motorcycle_sales_used">מכירות: בשימוש</string>
+	<string name="poi_motorcycle_rental_yes">השכרה</string>
+	<string name="poi_motorcycle_rental_no">השכרה: אין</string>
+	<string name="poi_motorcycle_repair_yes">תיקון</string>
+	<string name="poi_motorcycle_repair_no">תיקון: אין</string>
+	<string name="poi_motorcycle_parts_yes">חלפים</string>
+	<string name="poi_motorcycle_parts_no">חלפים: אין</string>
+	<string name="poi_motorcycle_tyres_yes">צמיגים</string>
+	<string name="poi_motorcycle_tyres_no">צמיגים: אין</string>
+	<string name="poi_motorcycle_clothes_yes">בגדי אופנוענים</string>
+	<string name="poi_motorcycle_clothes_no">בגדי אופנוענים: אין</string>
+	<string name="poi_motorcycle_type_scooter">קטנוע</string>
+	<string name="poi_motorcycle_type_sportbike">אופנוע ספורט</string>
+	<string name="poi_motorcycle_type_chopper">צ׳ופר</string>
+	<string name="poi_motorcycle_type_offroad">אופנוע שטח</string>
+	<string name="poi_motorcycle_type_dualsport">דו״ש</string>
+	<string name="poi_motorcycle_type_standard">רגיל</string>
+
+	<string name="poi_generator_output_electricity_no">פלט (חשמל): אין</string>
+
+	<string name="poi_owner">בעלות</string>
+
+	<string name="poi_animal_shelter_purpose_adoption_yes">אימוץ: יש</string>
+	<string name="poi_animal_shelter_purpose_adoption_no">אימוץ: אין</string>
+	<string name="poi_animal_shelter_purpose_release_yes">שחרור לטבע: כן</string>
+	<string name="poi_animal_shelter_purpose_release_no">שחרור לטבע: לא</string>
+
+	<string name="poi_spaceport">נמל חלל</string>
+
+	<string name="poi_direction_ssw">כיוון: דרום - דרום מערב</string>
+	<string name="poi_direction_sw">כיוון: דרום מערב</string>
+	<string name="poi_direction_wsw">כיוון: מערב - דרום מערב</string>
+	<string name="poi_direction_w">כיוון: מערב</string>
+	<string name="poi_direction_wnw">כיוון: מערב - צפון מערב</string>
+	<string name="poi_direction_nw">כיוון: צפון מערב</string>
+	<string name="poi_direction_nnw">כיוון: צפון - צפון מערב</string>
+	<string name="poi_direction_forward">כיוון: קדימה</string>
+	<string name="poi_direction_backward">כיוון: אחורה</string>
+	<string name="poi_direction_clockwise">כיוון: עם כיוון השעון</string>
+	<string name="poi_direction_anticlockwise">כיוון: נגד כיוון השעון</string>
+	<string name="poi_direction_up">כיוון: למעלה</string>
+	<string name="poi_direction_down">כיוון: למטה</string>
+	<string name="poi_direction_entrance">כיוון: כניסה</string>
+	<string name="poi_direction_exit">כיוון: יציאה</string>
+	<string name="poi_direction_all">כיוון: הכול</string>
+
+	<string name="poi_winter_room_yes">חדר חורף: יש</string>
+	<string name="poi_winter_room_no">חדר חורף: אין</string>
+	</resources>

@@ -1,4 +1,5 @@
-<?xml version="1.0" encoding="UTF-8" standalone="no"?><resources><string name="vector_maps_may_display_faster_on_some_devices">벡터 맵이 더욱 빠르게 표시됩니다. 하지만, 어떤 기기에서는 잘 작동하지 않을 수 있습니다.</string>
+<?xml version='1.0' encoding='UTF-8'?>
+<resources><string name="vector_maps_may_display_faster_on_some_devices">벡터 맵이 더욱 빠르게 표시됩니다. 하지만, 어떤 기기에서는 잘 작동하지 않을 수 있습니다.</string>
 	
 	<string name="play_commands_of_currently_selected_voice">현재 선택된 음성 명령을 재생합니다</string>
 	<string name="debugging_and_development">OsmAnd 개발</string>
@@ -1383,7 +1384,7 @@
 	<string name="osmo_settings_uuid">고유 장치 id</string>
     <string name="osmo_settings_descr">모니터링 설정을 구성하고 개인 모니터링 채널을 설정</string>
     <string name="osmo_plugin_description">"OsMosms 실시간 모니터링을 사용하도록 설정을 보여줍니다. http://osmo.mobi를 참조하세요. 다른 장치를 추적하고 추적 받을 수 있습니다. 익명 그룹을 만들고, 서로의 위치를 공유하고, 통신 할 수 있습니다. 세션 트래킹 또는 영구 트래킹을 위한 다양한 설정을 합니다. ↵\n↵\n원격 제어 및 그룹 관리자가 없는 일부 기능 때문에 익명 그룹을 제한합니다. 완전한 기능의 그룹은 웹 사이트에 생성되고 등록된 사용자만 OsMo에 액세스 할 수 있어야 합니다. "</string>
-    <string name="osmo_plugin_name">OsMo 모니터링</string>
+    <string name="osmo_plugin_name">OpenStreetMap 모니터링</string>
     <string name="osmo_settings">오스모(OsMo)</string>
    	<string name="share_route_as_gpx">루트를 GPX 파일로 공유</string>
 	<string name="share_route_subject">OsmAnd를 통해 공유된 경로</string>
@@ -1407,11 +1408,11 @@
     
     
     <string name="osmo_connected_devices">연결된 장치</string>
-    <string name="osmo_groups">OsMo 그룹/장치</string>
-    <string name="osmo_auto_send_locations_descr">자동으로 트래커 세션을 시작하고 앱 시작 후 위치를 전송</string>
-    <string name="osmo_auto_send_locations">자동으로 트래커 세션을 시작</string>
-    <string name="osmo_tracker_id">개인 트래커 ID</string>
-    <string name="osmo_tracker_id_descr">트래커 ID를 보거나 공유하려면 클릭하십시오. 트래커 ID 연결된 장치를 사용하면 이 장치의 모든 움직임을 모니터 할 수 있습니다! 선택 재생성 옵션을 분리합니다.</string>
+    <string name="osmo_groups">OsMo 그룹</string>
+    <string name="osmo_auto_send_locations_descr">자동으로 여정을 시작하고 앱 시작 후 위치를 전송</string>
+    <string name="osmo_auto_send_locations">자동으로 여정을 시작</string>
+    <string name="osmo_tracker_id">트래커 ID</string>
+    <string name="osmo_tracker_id_descr">트래커 ID를 보려면 누르십시오</string>
     <string name="osmo_session_token">세션 토큰 : %1$s</string>
     <string name="osmo_auth_pending">허가를 기다리는 중…</string>
     <string name="osmo_locations_sent">위치 전송 %1$d (in buffer %2$d) </string>
@@ -1439,7 +1440,7 @@
     <string name="osmo_connect_to_group_id">그룹 ID</string>
     <string name="osmo_group_name">그룹 이름</string>
     <string name="osmo_connect_to_group">그룹 링크</string>
-    <string name="osmo_connect">~에 연결</string>
+    <string name="osmo_connect">가입하기</string>
     <string name="osmo_create_group">그룹 만들기</string>
     <string name="osmo_server_operation_failed">OsMo 서버 작업 실패</string>
     <string name="osmo_activity">OpenStreetMap 모니터링</string>
@@ -1469,7 +1470,7 @@
     <string name="osmo_center_location">맵뷰어 중심</string>
     <string name="osmo_set_moving_target">이동 목적지로 설정</string>
     <string name="osmo_use_server_name">등록된 이름</string>
-    <string name="osmo_connect_to_my_nickname">내 별명</string>
+    <string name="osmo_connect_to_my_nickname">닉네임</string>
     <string name="osmo_user_name">사용자</string>
 	
 	
@@ -1581,7 +1582,7 @@
 	<string name="rendering_attr_coloredBuildings_name">유형별 색상 코드 건물</string>
     <string name="osmo_invite">초대…</string>
     <string name="osmo_leave_confirmation_msg">그룹 %1$s를 떠나시겠습니까?</string>
-    <string name="osmo_specify_tracker_id">Id를 지정 하십시오</string>
+    <string name="osmo_specify_tracker_id">ID를 지정하십시오</string>
     <string name="arrival_distance_factor_early">일찍</string>
     <string name="arrival_distance_factor_normally">일반</string>
     <string name="arrival_distance_factor_late">늦게</string>
@@ -1634,8 +1635,14 @@
     <string name="speed_limit_exceed">속도 제한 초과 값</string>
 	<string name="speed_limit_exceed_message">음성 안내 경고를 받아야 할 속도 제한 초과 값을 선택합니다.</string>
 	<string name="osmo_device_not_found">장치를 찾을 수 없습니다</string>
-    <string name="osmo_no_connection_msg">OsMo 서비스는 사용할 수 없습니다:\n- 연결 확인;\n- 설정 확인;\n- 체크 아웃 트위터: https://twitter.com/OsMomobi</string>
-    <string name="anonymous_user_hint">익명의 사용자는 아래 사항을 수행할 수 없습니다:\n- 그룹 생성;\n- 그룹 및 장치를 서버와 동기화;\n- 그룹 및 장치를 관리 (개인 사무실에서).</string>
+    <string name="osmo_no_connection_msg">OsMo 서비스를 사용할 수 없습니다:
+\n- 연결 확인;
+\n- 설정 확인;
+\n- 트위터를 확인하세요: https://twitter.com/OsMomobi</string>
+    <string name="anonymous_user_hint">익명의 사용자는 아래 사항을 수행할 수 없습니다:
+\n- 그룹 생성;
+\n- 그룹 및 장치를 서버와 동기화;
+\n- 그룹 및 장치를 관리 (개인 대시보드에서).</string>
     <string name="anonymous_user">익명의 사용자</string>
     <string name="logged_as">%1$s 사용자로 로그인 됨</string>
 	<string name="rendering_category_details">세부 정보</string>
@@ -1899,7 +1906,7 @@
     <string name="rendering_value_disabled_name">사용 안 함</string>
     <string name="rendering_value_walkingRoutesScopeOSMC_name">루트 범위에 따라 색상변경</string>
     <string name="rendering_value_walkingRoutesOSMC_name">OSMC에 따라 색상변경</string>
-    <string name="osmo_share_my_location">내 위치를 공유</string>
+    <string name="osmo_share_my_location">위치 전송</string>
     <string name="shared_string_logoff">로그 오프</string>
     
 	<string name="routing_attr_avoid_borders_description">타국의 국경 횡단 방지</string>
