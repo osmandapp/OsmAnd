@@ -30,8 +30,8 @@
 
             <android.support.v7.widget.AppCompatImageView
                 android:id="@+id/map_marker_icon"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
+                android:layout_width="24dp"
+                android:layout_height="24dp"
                 android:layout_gravity="center_vertical"
                 android:layout_marginLeft="16dp"
                 android:layout_marginRight="16dp"
