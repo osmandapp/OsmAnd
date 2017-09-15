@@ -182,6 +182,36 @@
                 </LinearLayout>
 
                 <LinearLayout
+                    android:id="@+id/remove_from_markers_view"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:background="?attr/selectableItemBackground"
+                    android:gravity="center_vertical"
+                    android:minHeight="@dimen/list_item_height"
+                    android:paddingLeft="@dimen/list_content_padding"
+                    android:paddingRight="@dimen/list_content_padding"
+                    android:visibility="gone"
+                    tools:visibility="visible">
+
+                    <ImageView
+                        android:id="@+id/remove_from_markers_icon"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        tools:src="@drawable/ic_action_delete_dark"/>
+
+                    <TextView
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:paddingBottom="6dp"
+                        android:paddingLeft="@dimen/list_content_padding"
+                        android:paddingTop="6dp"
+                        android:text="@string/remove_from_map_markers"
+                        android:textColor="?android:attr/textColorPrimary"
+                        android:textSize="@dimen/default_list_text_size"/>
+
+                </LinearLayout>
+
+                <LinearLayout
                     android:id="@+id/share_view"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"

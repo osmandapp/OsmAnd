@@ -287,6 +287,10 @@ public class MapMarkersHelper {
 		}
 	}
 
+	public boolean isGroupSynced(MarkersSyncGroup group) {
+		return markersDbHelper.getGroup(group.getId()) != null;
+	}
+
 	public void syncAllGroups() {
 		List<MarkersSyncGroup> groups = markersDbHelper.getAllGroups();
 		for (MarkersSyncGroup gr : groups) {
@@ -515,7 +519,8 @@ public class MapMarkersHelper {
 		if (syncGroupId != null) {
 			markersDbHelper.removeActiveMarkersFromSyncGroup(syncGroupId);
 			for (Iterator<MapMarker> iterator = mapMarkers.iterator(); iterator.hasNext(); ) {
-				if (iterator.next().groupKey.equals(syncGroupId)) {
+				String groupKey = iterator.next().groupKey;
+				if (groupKey != null && groupKey.equals(syncGroupId)) {
 					iterator.remove();
 				}
 			}

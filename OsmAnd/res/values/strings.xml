@@ -9,6 +9,7 @@
          3. All your modified/created strings are in the top of the file (to make easier find what\'s translated).
     PLEASE: Have a look at http://code.google.com/p/osmand/wiki/UIConsistency, it may really improve your and our work  :-)  Thx - Hardy
     -->
+    <string name="remove_from_map_markers">Remove from Map Markers</string>
     <string name="descendingly">Descendingly</string>
     <string name="ascendingly">Ascendingly</string>
     <string name="map_orientation_change_in_accordance_with_speed">Map orientation change in accordance with speed</string>

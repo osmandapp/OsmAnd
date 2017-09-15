@@ -175,21 +175,23 @@ public class EditFavoriteGroupDialogFragment extends BottomSheetDialogFragment {
 			}
 		});
 
+		final MapMarkersHelper markersHelper = getMyApplication().getMapMarkersHelper();
+		final MarkersSyncGroup syncGroup = new MarkersSyncGroup(group.name, group.name, MarkersSyncGroup.FAVORITES_TYPE);
+		boolean groupSyncedWithMarkers = markersHelper.isGroupSynced(syncGroup);
+
 		View addToMarkersView = view.findViewById(R.id.add_to_markers_view);
-		if (app.getSettings().USE_MAP_MARKERS.get() && group.points.size() > 0) {
+		if (app.getSettings().USE_MAP_MARKERS.get() && group.points.size() > 0 && !groupSyncedWithMarkers) {
 			((ImageView) view.findViewById(R.id.add_to_markers_icon))
 					.setImageDrawable(ic.getThemedIcon(R.drawable.ic_action_flag_dark));
 			addToMarkersView.setOnClickListener(new View.OnClickListener() {
 				@Override
 				public void onClick(View v) {
-					MapMarkersHelper markersHelper = getMyApplication().getMapMarkersHelper();
 					List<LatLon> points = new ArrayList<>(group.points.size());
 					List<PointDescription> names = new ArrayList<>(group.points.size());
 					for (FavouritePoint fp : group.points) {
 						points.add(new LatLon(fp.getLatitude(), fp.getLongitude()));
 						names.add(new PointDescription(PointDescription.POINT_TYPE_MAP_MARKER, fp.getName()));
 					}
-					MarkersSyncGroup syncGroup = new MarkersSyncGroup(group.name, group.name, MarkersSyncGroup.FAVORITES_TYPE);
 					markersHelper.addMarkersSyncGroup(syncGroup);
 					markersHelper.addMapMarkers(points, names, syncGroup);
 					dismiss();
@@ -198,6 +200,21 @@ public class EditFavoriteGroupDialogFragment extends BottomSheetDialogFragment {
 			});
 		} else {
 			addToMarkersView.setVisibility(View.GONE);
+		}
+
+		View removeFromMarkersView = view.findViewById(R.id.remove_from_markers_view);
+		if (app.getSettings().USE_MAP_MARKERS.get() && groupSyncedWithMarkers) {
+			removeFromMarkersView.setVisibility(View.VISIBLE);
+			((ImageView) view.findViewById(R.id.remove_from_markers_icon))
+					.setImageDrawable(ic.getThemedIcon(R.drawable.ic_action_delete_dark));
+			removeFromMarkersView.setOnClickListener(new View.OnClickListener() {
+				@Override
+				public void onClick(View view) {
+					markersHelper.removeMarkersSyncGroup(syncGroup.getId(), true);
+					dismiss();
+					MapActivity.launchMapActivityMoveToTop(getActivity());
+				}
+			});
 		}
 
 		View shareView = view.findViewById(R.id.share_view);
