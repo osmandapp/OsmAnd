@@ -758,7 +758,7 @@ public class GPXUtilities {
 		private TrkSegment generalSegment;
 
 		public List<WptPt> getPoints() {
-			return new ArrayList<>(points);
+			return Collections.unmodifiableList(points);
 		}
 
 		public boolean isPointsEmpty() {
