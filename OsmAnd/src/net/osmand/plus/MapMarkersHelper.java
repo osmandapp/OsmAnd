@@ -10,6 +10,8 @@ import net.osmand.data.FavouritePoint;
 import net.osmand.data.LatLon;
 import net.osmand.data.LocationPoint;
 import net.osmand.data.PointDescription;
+import net.osmand.plus.GPXUtilities.GPXFile;
+import net.osmand.plus.GPXUtilities.WptPt;
 import net.osmand.plus.mapmarkers.MapMarkersDbHelper;
 import net.osmand.util.Algorithms;
 import net.osmand.util.MapUtils;
@@ -314,19 +316,23 @@ public class MapMarkersHelper {
 		}
 	}
 
-	public boolean isGroupSynced(MarkersSyncGroup group) {
-		return markersDbHelper.getGroup(group.getId()) != null;
+	public boolean isGroupSynced(String id) {
+		return markersDbHelper.getGroup(id) != null;
 	}
 
-	public void syncAllGroups() {
+	public void syncAllGroups(boolean startupSync) {
 		List<MarkersSyncGroup> groups = markersDbHelper.getAllGroups();
 		for (MarkersSyncGroup gr : groups) {
-			syncGroup(gr);
+			syncGroup(gr, startupSync);
 		}
 	}
 
 	public void syncGroup(MarkersSyncGroup group) {
-		if (markersDbHelper.getGroup(group.getId()) == null) {
+		syncGroup(group, false);
+	}
+
+	private void syncGroup(MarkersSyncGroup group, boolean startupSync) {
+		if (!isGroupSynced(group.getId())) {
 			return;
 		}
 		List<MapMarker> dbMarkers = markersDbHelper.getMarkersFromGroup(group);
@@ -340,46 +346,79 @@ public class MapMarkersHelper {
 				removeActiveMarkersFromSyncGroup(group.id);
 				return;
 			}
-			List<FavouritePoint> favPoints = favGroup.points;
-			for (FavouritePoint fp : favPoints) {
-				LatLon fpLatLon = new LatLon(fp.getLatitude(), fp.getLongitude());
-				boolean exists = false;
 
-				for (MapMarker marker : dbMarkers) {
-					if (marker.id.equals(group.getId() + fp.getName(ctx))) {
-						exists = true;
-						if (!marker.history && !marker.point.equals(fpLatLon)) {
-							for (MapMarker m : mapMarkers) {
-								if (m.id.equals(marker.id)) {
-									m.point = fpLatLon;
-									updateMapMarker(m, true);
-									break;
-								}
-							}
+			for (FavouritePoint fp : favGroup.points) {
+				addNewMarkerIfNeeded(group, dbMarkers, new LatLon(fp.getLatitude(), fp.getLongitude()), fp.getName());
+			}
+
+			removeOldMarkersIfNeeded(dbMarkers);
+		} else if (group.getType() == MarkersSyncGroup.GPX_TYPE) {
+			GpxSelectionHelper gpxHelper = ctx.getSelectedGpxHelper();
+			File file = new File(group.getId());
+			if (!file.exists()) {
+				return;
+			}
+
+			GPXFile gpx;
+			if (startupSync) {
+				gpx = GPXUtilities.loadGPXFile(ctx, file);
+				gpxHelper.selectGpxFile(gpx, true, false);
+			} else {
+				gpx = gpxHelper.getSelectedFileByPath(group.getId()).getGpxFile();
+			}
+			if (gpx == null) {
+				return;
+			}
+
+			List<WptPt> gpxPoints = new LinkedList<>(gpx.getPoints());
+			for (WptPt pt : gpxPoints) {
+				addNewMarkerIfNeeded(group, dbMarkers, new LatLon(pt.lat, pt.lon), pt.name);
+			}
+
+			removeOldMarkersIfNeeded(dbMarkers);
+		}
+	}
+
+	private void addNewMarkerIfNeeded(MarkersSyncGroup group, List<MapMarker> markers, LatLon latLon, String name) {
+		boolean exists = false;
+
+		for (MapMarker marker : markers) {
+			if (marker.id.equals(group.getId() + name)) {
+				exists = true;
+				if (!marker.history && !marker.point.equals(latLon)) {
+					for (MapMarker m : mapMarkers) {
+						if (m.id.equals(marker.id)) {
+							m.point = latLon;
+							updateMapMarker(m, true);
+							break;
 						}
-						dbMarkers.remove(marker);
-						break;
 					}
 				}
+				markers.remove(marker);
+				break;
+			}
+		}
 
-				if (!exists) {
-					addMarkers(Collections.singletonList(fpLatLon),
-							Collections.singletonList(new PointDescription(POINT_TYPE_MAP_MARKER, fp.getName())), group);
+		if (!exists) {
+			addMarkers(Collections.singletonList(latLon),
+					Collections.singletonList(new PointDescription(POINT_TYPE_MAP_MARKER, name)), group);
+		}
+	}
+
+	private void removeOldMarkersIfNeeded(List<MapMarker> markers) {
+		if (!markers.isEmpty()) {
+			boolean needRefresh = false;
+			for (MapMarker marker : markers) {
+				if (!marker.history) {
+					markersDbHelper.removeMarker(marker, false);
+					mapMarkers.remove(marker);
+					needRefresh = true;
 				}
 			}
-
-			if (!dbMarkers.isEmpty()) {
-				for (MapMarker marker : dbMarkers) {
-					if (!marker.history) {
-						markersDbHelper.removeMarker(marker, false);
-						mapMarkers.remove(marker);
-						checkAndFixActiveMarkersOrderIfNeeded();
-						refresh();
-					}
-				}
+			if (needRefresh) {
+				checkAndFixActiveMarkersOrderIfNeeded();
+				refresh();
 			}
-		} else {
-
 		}
 	}
 
@@ -732,9 +771,9 @@ public class MapMarkersHelper {
 		while (fout.exists()) {
 			fout = new File(dir, fileName + "_" + (++ind) + ".gpx");
 		}
-		GPXUtilities.GPXFile file = new GPXUtilities.GPXFile();
+		GPXFile file = new GPXFile();
 		for (MapMarker marker : mapMarkers) {
-			GPXUtilities.WptPt wpt = new GPXUtilities.WptPt();
+			WptPt wpt = new WptPt();
 			wpt.lat = marker.getLatitude();
 			wpt.lon = marker.getLongitude();
 			wpt.setColor(ctx.getResources().getColor(MapMarker.getColorId(marker.colorIndex)));

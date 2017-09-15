@@ -501,7 +501,7 @@ public class AppInitializer implements IProgress {
 			startBgTime = System.currentTimeMillis();
 			app.favorites.loadFavorites();
 			notifyEvent(InitEvents.FAVORITES_INITIALIZED);
-			app.mapMarkersHelper.syncAllGroups();
+			app.mapMarkersHelper.syncAllGroups(true);
 			// init poi types before indexes and before POI
 			initPoiTypes();
 			notifyEvent(InitEvents.POI_TYPES_INITIALIZED);
