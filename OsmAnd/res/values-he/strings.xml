@@ -1219,7 +1219,7 @@
     <string name="import_gpx_failed_descr">ל־OsmAnd אין אפשרות לייבא את הקובץ. נא לוודא של־OsmAnd יש הרשאה לקרוא קבצים מהמיקום הזה.</string>
     <string name="distance_moving">המרחק תוקן</string>
     <string name="quick_action_resume_pause_navigation">הפסקה/המשך בניווט</string>
-    <string name="quick_action_resume_pause_navigation_descr">יש ללחוץ על כפתור זה כדי להפסיק את הניווט או כדי להמשיך אם הוא כבר הופסק.</string>
+    <string name="quick_action_resume_pause_navigation_descr">יש לגעת בכפתור זה כדי להמשיך את הניווט.</string>
     <string name="quick_action_show_navigation_finish_dialog">הצגת דו־שיח סיום הניווט</string>
     <string name="quick_action_start_stop_navigation">התחלה/סיום הניווט</string>
     <string name="quick_action_start_stop_navigation_descr">יש ללחוץ על כפתור זה כדי להתחיל בניווט או כדי לעצור אותו אם הוא כבר החל.</string>
