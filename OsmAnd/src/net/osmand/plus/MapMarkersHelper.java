@@ -701,13 +701,13 @@ public class MapMarkersHelper {
 			fout = new File(dir, fileName + "_" + (++ind) + ".gpx");
 		}
 		GPXUtilities.GPXFile file = new GPXUtilities.GPXFile();
-		for (MapMarker marker : markersDbHelper.getActiveMarkers()) {
+		for (MapMarker marker : mapMarkers) {
 			GPXUtilities.WptPt wpt = new GPXUtilities.WptPt();
 			wpt.lat = marker.getLatitude();
 			wpt.lon = marker.getLongitude();
 			wpt.setColor(ctx.getResources().getColor(MapMarker.getColorId(marker.colorIndex)));
 			wpt.name = marker.getOnlyName();
-			file.points.add(wpt);
+			file.addPoint(wpt);
 		}
 		GPXUtilities.writeGpxFile(fout, file, ctx);
 	}

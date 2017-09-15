@@ -26,6 +26,7 @@ import org.json.JSONObject;
 
 import java.io.File;
 import java.util.ArrayList;
+import java.util.Collection;
 import java.util.List;
 
 public class GpxSelectionHelper {
@@ -76,7 +77,7 @@ public class GpxSelectionHelper {
 
 	public SelectedGpxFile getSelectedGPXFile(WptPt point) {
 		for (SelectedGpxFile g : selectedGPXFiles) {
-			if (g.getGpxFile().points.contains(point)) {
+			if (g.getGpxFile().containsPoint(point)) {
 				return g;
 			}
 		}
@@ -214,16 +215,16 @@ public class GpxSelectionHelper {
 			}
 		}
 
-		if (g.points.size() > 0) {
+		if (!g.isPointsEmpty()) {
 			GpxDisplayGroup group = new GpxDisplayGroup(g);
 			group.gpxName = name;
 			group.setType(GpxDisplayItemType.TRACK_POINTS);
-			group.setDescription(getString(R.string.gpx_selection_number_of_points, g.points.size()));
+			group.setDescription(getString(R.string.gpx_selection_number_of_points, g.getPointsSize()));
 			group.setName(getString(R.string.gpx_selection_points, name));
 			dg.add(group);
 			List<GpxDisplayItem> list = group.getModifiableList();
 			int k = 0;
-			for (WptPt r : g.points) {
+			for (WptPt r : g.getPoints()) {
 				GpxDisplayItem item = new GpxDisplayItem();
 				item.group = group;
 				item.description = r.desc;
@@ -486,6 +487,22 @@ public class GpxSelectionHelper {
 		SelectedGpxFile sf = selectGpxFileImpl(gpx, show, notShowNavigationDialog);
 		saveCurrentSelections();
 		return sf;
+	}
+
+	public void clearPoints(GPXFile gpxFile) {
+		gpxFile.clearPoints();
+	}
+
+	public void addPoint(WptPt point, GPXFile gpxFile) {
+		gpxFile.addPoint(point);
+	}
+
+	public void addPoints(Collection<? extends WptPt> collection, GPXFile gpxFile) {
+		gpxFile.addPoints(collection);
+	}
+
+	public boolean removePoint(WptPt point, GPXFile gpxFile) {
+		return gpxFile.removePoint(point);
 	}
 
 

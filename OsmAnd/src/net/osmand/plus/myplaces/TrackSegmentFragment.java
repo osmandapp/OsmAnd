@@ -702,7 +702,7 @@ public class TrackSegmentFragment extends OsmAndListFragment {
 	}
 
 	private void drawPoints(Canvas canvas, RotatedTileBox tileBox, SelectedGpxFile g) {
-		List<WptPt> pts = g.getGpxFile().points;
+		List<WptPt> pts = g.getGpxFile().getPoints();
 		@ColorInt
 		int fileColor = g.getColor() == 0 ? defPointColor : g.getColor();
 		for (WptPt o : pts) {

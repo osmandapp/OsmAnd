@@ -39,6 +39,7 @@ import java.text.NumberFormat;
 import java.text.ParseException;
 import java.text.SimpleDateFormat;
 import java.util.ArrayList;
+import java.util.Collection;
 import java.util.Collections;
 import java.util.Date;
 import java.util.LinkedHashMap;
@@ -745,7 +746,7 @@ public class GPXUtilities {
 	public static class GPXFile extends GPXExtensions {
 		public String author;
 		public List<Track> tracks = new ArrayList<>();
-		public List<WptPt> points = new ArrayList<>();
+		private List<WptPt> points = new ArrayList<>();
 		public List<Route> routes = new ArrayList<>();
 
 		public String warning = null;
@@ -755,6 +756,38 @@ public class GPXUtilities {
 
 		private Track generalTrack;
 		private TrkSegment generalSegment;
+
+		public List<WptPt> getPoints() {
+			return Collections.unmodifiableList(points);
+		}
+
+		public boolean isPointsEmpty() {
+			return points.isEmpty();
+		}
+
+		int getPointsSize() {
+			return points.size();
+		}
+
+		boolean containsPoint(WptPt point) {
+			return points.contains(point);
+		}
+
+		void clearPoints() {
+			points.clear();
+		}
+
+		public void addPoint(WptPt point) {
+			points.add(point);
+		}
+
+		void addPoints(Collection<? extends WptPt> collection) {
+			points.addAll(collection);
+		}
+
+		public boolean removePoint(WptPt point) {
+			return points.remove(point);
+		}
 
 		public boolean isCloudmadeRouteFile() {
 			return "cloudmade".equalsIgnoreCase(author);
