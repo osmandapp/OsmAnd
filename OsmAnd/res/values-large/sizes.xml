@@ -91,14 +91,14 @@
 	<dimen name="my_places_empty_state_text_button_padding_right">90dp</dimen>
 	<dimen name="my_places_empty_state_text_button_padding_top">96dp</dimen>
 
-	<dimen name="measure_distance_bottom_sheet_cancel_button_height">72dp</dimen>
+	<dimen name="bottom_sheet_cancel_button_height">72dp</dimen>
 	<dimen name="landscape_bottom_sheet_dialog_fragment_width">540dp</dimen>
 
 	<dimen name="measurement_tool_select_radius">30dp</dimen>
-	<dimen name="measurement_tool_content_margin">24dp</dimen>
-	<dimen name="measurement_tool_content_margin_small">12dp</dimen>
-	<dimen name="measurement_tool_content_padding">24dp</dimen>
-	<dimen name="measurement_tool_content_padding_small">12dp</dimen>
+	<dimen name="bottom_sheet_content_margin">24dp</dimen>
+	<dimen name="bottom_sheet_content_margin_small">12dp</dimen>
+	<dimen name="bottom_sheet_content_padding">24dp</dimen>
+	<dimen name="bottom_sheet_content_padding_small">12dp</dimen>
 	<dimen name="measurement_tool_divider_margin">12dp</dimen>
 	<dimen name="measurement_tool_content_padding_medium">18dp</dimen>
 	<dimen name="measurement_tool_text_margin_small">6dp</dimen>
@@ -113,14 +113,14 @@
 	<dimen name="measurement_tool_button_margin">12dp</dimen>
 	<dimen name="measurement_tool_button_padding">12dp</dimen>
 	<dimen name="measurement_tool_button_height">54dp</dimen>
-	<dimen name="measurement_tool_bottom_title_height">78dp</dimen>
-	<dimen name="measurement_tool_bottom_descr_height">66dp</dimen>
-	<dimen name="measurement_tool_bottom_list_item_height">72dp</dimen>
-	<dimen name="measurement_tool_bottom_icon_margin">36dp</dimen>
+	<dimen name="bottom_sheet_title_height">78dp</dimen>
+	<dimen name="bottom_sheet_descr_height">66dp</dimen>
+	<dimen name="bottom_sheet_list_item_height">72dp</dimen>
+	<dimen name="bottom_sheet_icon_margin">36dp</dimen>
 	<dimen name="measurement_tool_bottom_divider_margin_top">11dp</dimen>
 	<dimen name="measurement_tool_bottom_divider_margin_bottom">12dp</dimen>
 	<dimen name="measurement_tool_bottom_divider_margin_start">96dp</dimen>
-	<dimen name="measurement_tool_bottom_image_text_margin_start">15dp</dimen>
-	<dimen name="measurement_tool_selected_point_title_height">84dp</dimen>
+	<dimen name="bottom_sheet_image_text_margin_start">15dp</dimen>
+	<dimen name="bottom_sheet_selected_item_title_height">84dp</dimen>
     
 </resources>

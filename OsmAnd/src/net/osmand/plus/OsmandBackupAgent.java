@@ -6,6 +6,8 @@ import android.app.backup.BackupAgentHelper;
 import android.app.backup.FileBackupHelper;
 import android.app.backup.SharedPreferencesBackupHelper;
 
+import net.osmand.plus.mapmarkers.MapMarkersDbHelper;
+
 /**
  * Requires android API from android-8
  */
@@ -25,7 +27,7 @@ public class OsmandBackupAgent extends BackupAgentHelper {
 		SharedPreferencesBackupHelper helper = new SharedPreferencesBackupHelper(this, prefs);
 		addHelper("osmand.settings", helper);
 
-		FileBackupHelper fileBackupHelper = new FileBackupHelper(this, FavouritesDbHelper.FILE_TO_BACKUP);
-		addHelper(FavouritesDbHelper.FILE_TO_BACKUP, fileBackupHelper);
+		FileBackupHelper fileBackupHelper = new FileBackupHelper(this, FavouritesDbHelper.FILE_TO_BACKUP, "../databases/" + MapMarkersDbHelper.DB_NAME);
+		addHelper("osmand.files", fileBackupHelper);
 	}
 }

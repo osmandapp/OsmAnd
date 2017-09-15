@@ -21,34 +21,34 @@
 
             <net.osmand.plus.widgets.TextViewEx
                 android:layout_width="match_parent"
-                android:layout_height="@dimen/measurement_tool_bottom_title_height"
+                android:layout_height="@dimen/bottom_sheet_title_height"
                 android:gravity="center_vertical"
-                android:paddingEnd="@dimen/measurement_tool_content_padding"
-                android:paddingLeft="@dimen/measurement_tool_content_padding"
-                android:paddingRight="@dimen/measurement_tool_content_padding"
-                android:paddingStart="@dimen/measurement_tool_content_padding"
-                android:text="@string/marker_options"
+                android:paddingEnd="@dimen/bottom_sheet_content_padding"
+                android:paddingLeft="@dimen/bottom_sheet_content_padding"
+                android:paddingRight="@dimen/bottom_sheet_content_padding"
+                android:paddingStart="@dimen/bottom_sheet_content_padding"
+                android:text="@string/shared_string_options"
                 android:textAppearance="@style/TextAppearance.ListItemTitle"
                 osmand:typeface="@string/font_roboto_medium"/>
 
             <LinearLayout
                 android:id="@+id/sort_by_row"
                 android:layout_width="match_parent"
-                android:layout_height="@dimen/measurement_tool_bottom_list_item_height"
+                android:layout_height="@dimen/bottom_sheet_list_item_height"
                 android:background="?attr/selectableItemBackground"
-                android:minHeight="@dimen/measurement_tool_bottom_list_item_height"
-                android:paddingEnd="@dimen/measurement_tool_content_padding"
-                android:paddingLeft="@dimen/measurement_tool_content_padding"
-                android:paddingRight="@dimen/measurement_tool_content_padding"
-                android:paddingStart="@dimen/measurement_tool_content_padding">
+                android:minHeight="@dimen/bottom_sheet_list_item_height"
+                android:paddingEnd="@dimen/bottom_sheet_content_padding"
+                android:paddingLeft="@dimen/bottom_sheet_content_padding"
+                android:paddingRight="@dimen/bottom_sheet_content_padding"
+                android:paddingStart="@dimen/bottom_sheet_content_padding">
 
                 <ImageView
                     android:id="@+id/sort_by_icon"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:layout_gravity="center_vertical"
-                    android:layout_marginEnd="@dimen/measurement_tool_bottom_icon_margin"
-                    android:layout_marginRight="@dimen/measurement_tool_bottom_icon_margin"
+                    android:layout_marginEnd="@dimen/bottom_sheet_icon_margin"
+                    android:layout_marginRight="@dimen/bottom_sheet_icon_margin"
                     tools:src="@drawable/ic_sort_waypoint_dark"/>
 
                 <TextView
@@ -63,22 +63,22 @@
             <LinearLayout
                 android:id="@+id/show_direction_row"
                 android:layout_width="match_parent"
-                android:layout_height="@dimen/measurement_tool_bottom_list_item_height"
+                android:layout_height="@dimen/bottom_sheet_list_item_height"
                 android:background="?attr/selectableItemBackground"
-                android:minHeight="@dimen/measurement_tool_bottom_list_item_height"
-                android:paddingEnd="@dimen/measurement_tool_content_padding"
-                android:paddingLeft="@dimen/measurement_tool_content_padding"
-                android:paddingRight="@dimen/measurement_tool_content_padding"
-                android:paddingStart="@dimen/measurement_tool_content_padding">
+                android:minHeight="@dimen/bottom_sheet_list_item_height"
+                android:paddingEnd="@dimen/bottom_sheet_content_padding"
+                android:paddingLeft="@dimen/bottom_sheet_content_padding"
+                android:paddingRight="@dimen/bottom_sheet_content_padding"
+                android:paddingStart="@dimen/bottom_sheet_content_padding">
 
                 <ImageView
                     android:id="@+id/show_direction_icon"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:layout_gravity="center_vertical"
-                    android:layout_marginEnd="@dimen/measurement_tool_bottom_icon_margin"
-                    android:layout_marginRight="@dimen/measurement_tool_bottom_icon_margin"
-                    tools:src="@drawable/ic_sort_waypoint_dark"/>
+                    android:layout_marginEnd="@dimen/bottom_sheet_icon_margin"
+                    android:layout_marginRight="@dimen/bottom_sheet_icon_margin"
+                    tools:background="@drawable/ic_action_device_top"/>
 
                 <TextView
                     android:layout_width="0dp"
@@ -113,21 +113,21 @@
             <LinearLayout
                 android:id="@+id/build_route_row"
                 android:layout_width="match_parent"
-                android:layout_height="@dimen/measurement_tool_bottom_list_item_height"
+                android:layout_height="@dimen/bottom_sheet_list_item_height"
                 android:background="?attr/selectableItemBackground"
-                android:minHeight="@dimen/measurement_tool_bottom_list_item_height"
-                android:paddingEnd="@dimen/measurement_tool_content_padding"
-                android:paddingLeft="@dimen/measurement_tool_content_padding"
-                android:paddingRight="@dimen/measurement_tool_content_padding"
-                android:paddingStart="@dimen/measurement_tool_content_padding">
+                android:minHeight="@dimen/bottom_sheet_list_item_height"
+                android:paddingEnd="@dimen/bottom_sheet_content_padding"
+                android:paddingLeft="@dimen/bottom_sheet_content_padding"
+                android:paddingRight="@dimen/bottom_sheet_content_padding"
+                android:paddingStart="@dimen/bottom_sheet_content_padding">
 
                 <ImageView
                     android:id="@+id/build_route_icon"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:layout_gravity="center_vertical"
-                    android:layout_marginEnd="@dimen/measurement_tool_bottom_icon_margin"
-                    android:layout_marginRight="@dimen/measurement_tool_bottom_icon_margin"
+                    android:layout_marginEnd="@dimen/bottom_sheet_icon_margin"
+                    android:layout_marginRight="@dimen/bottom_sheet_icon_margin"
                     tools:src="@drawable/map_directions"/>
 
                 <TextView
@@ -142,21 +142,21 @@
             <LinearLayout
                 android:id="@+id/save_as_new_track_row"
                 android:layout_width="match_parent"
-                android:layout_height="@dimen/measurement_tool_bottom_list_item_height"
+                android:layout_height="@dimen/bottom_sheet_list_item_height"
                 android:background="?attr/selectableItemBackground"
-                android:minHeight="@dimen/measurement_tool_bottom_list_item_height"
-                android:paddingEnd="@dimen/measurement_tool_content_padding"
-                android:paddingLeft="@dimen/measurement_tool_content_padding"
-                android:paddingRight="@dimen/measurement_tool_content_padding"
-                android:paddingStart="@dimen/measurement_tool_content_padding">
+                android:minHeight="@dimen/bottom_sheet_list_item_height"
+                android:paddingEnd="@dimen/bottom_sheet_content_padding"
+                android:paddingLeft="@dimen/bottom_sheet_content_padding"
+                android:paddingRight="@dimen/bottom_sheet_content_padding"
+                android:paddingStart="@dimen/bottom_sheet_content_padding">
 
                 <ImageView
                     android:id="@+id/save_as_new_track_icon"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:layout_gravity="center_vertical"
-                    android:layout_marginEnd="@dimen/measurement_tool_bottom_icon_margin"
-                    android:layout_marginRight="@dimen/measurement_tool_bottom_icon_margin"
+                    android:layout_marginEnd="@dimen/bottom_sheet_icon_margin"
+                    android:layout_marginRight="@dimen/bottom_sheet_icon_margin"
                     tools:src="@drawable/ic_action_polygom_dark"/>
 
                 <TextView
@@ -180,21 +180,21 @@
             <LinearLayout
                 android:id="@+id/move_all_to_history_row"
                 android:layout_width="match_parent"
-                android:layout_height="@dimen/measurement_tool_bottom_list_item_height"
+                android:layout_height="@dimen/bottom_sheet_list_item_height"
                 android:background="?attr/selectableItemBackground"
-                android:minHeight="@dimen/measurement_tool_bottom_list_item_height"
-                android:paddingEnd="@dimen/measurement_tool_content_padding"
-                android:paddingLeft="@dimen/measurement_tool_content_padding"
-                android:paddingRight="@dimen/measurement_tool_content_padding"
-                android:paddingStart="@dimen/measurement_tool_content_padding">
+                android:minHeight="@dimen/bottom_sheet_list_item_height"
+                android:paddingEnd="@dimen/bottom_sheet_content_padding"
+                android:paddingLeft="@dimen/bottom_sheet_content_padding"
+                android:paddingRight="@dimen/bottom_sheet_content_padding"
+                android:paddingStart="@dimen/bottom_sheet_content_padding">
 
                 <ImageView
                     android:id="@+id/move_all_to_history_icon"
                     android:layout_width="24dp"
                     android:layout_height="24dp"
                     android:layout_gravity="center_vertical"
-                    android:layout_marginEnd="@dimen/measurement_tool_bottom_icon_margin"
-                    android:layout_marginRight="@dimen/measurement_tool_bottom_icon_margin"
+                    android:layout_marginEnd="@dimen/bottom_sheet_icon_margin"
+                    android:layout_marginRight="@dimen/bottom_sheet_icon_margin"
                     tools:src="@drawable/ic_action_history2"/>
 
                 <TextView
@@ -218,7 +218,7 @@
     <FrameLayout
         android:id="@+id/cancel_row"
         android:layout_width="match_parent"
-        android:layout_height="@dimen/measure_distance_bottom_sheet_cancel_button_height"
+        android:layout_height="@dimen/bottom_sheet_cancel_button_height"
         android:background="?attr/selectableItemBackground">
 
         <TextView

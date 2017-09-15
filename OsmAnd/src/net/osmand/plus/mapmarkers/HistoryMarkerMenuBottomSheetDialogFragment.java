@@ -14,19 +14,28 @@ import android.widget.ImageView;
 import android.widget.TextView;
 
 import net.osmand.AndroidUtils;
-import net.osmand.plus.OsmandSettings;
+import net.osmand.plus.MapMarkersHelper.MapMarker;
 import net.osmand.plus.R;
 import net.osmand.plus.base.BottomSheetDialogFragment;
 import net.osmand.plus.helpers.AndroidUiHelper;
 
-public class MarkerOptionsBottomSheetDialogFragment extends BottomSheetDialogFragment {
+import java.text.SimpleDateFormat;
+import java.util.Date;
+import java.util.Locale;
 
-	public final static String TAG = "MarkerOptionsBottomSheetDialogFragment";
+public class HistoryMarkerMenuBottomSheetDialogFragment extends BottomSheetDialogFragment {
 
-	private MarkerOptionsFragmentListener listener;
+	public final static String TAG = "HistoryMarkerMenuBottomSheetDialogFragment";
+
+	public static final String MARKER_POSITION = "marker_position";
+	public static final String MARKER_NAME = "marker_name";
+	public static final String MARKER_COLOR_INDEX = "marker_color_index";
+	public static final String MARKER_VISITED_DATE = "marker_visited_date";
+
+	private HistoryMarkerMenuFragmentListener listener;
 	private boolean portrait;
 
-	public void setListener(MarkerOptionsFragmentListener listener) {
+	public void setListener(HistoryMarkerMenuFragmentListener listener) {
 		this.listener = listener;
 	}
 
@@ -37,82 +46,44 @@ public class MarkerOptionsBottomSheetDialogFragment extends BottomSheetDialogFra
 		boolean nightMode = getMyApplication().getDaynightHelper().isNightModeForMapControls();
 		final int themeRes = nightMode ? R.style.OsmandDarkTheme : R.style.OsmandLightTheme;
 
-		final View mainView = View.inflate(new ContextThemeWrapper(getContext(), themeRes), R.layout.fragment_marker_options_bottom_sheet_dialog, container);
+		final View mainView = View.inflate(new ContextThemeWrapper(getContext(), themeRes), R.layout.fragment_marker_history_bottom_sheet_dialog, container);
 		if (portrait) {
 			AndroidUtils.setBackground(getActivity(), mainView, nightMode, R.drawable.bg_bottom_menu_light, R.drawable.bg_bottom_menu_dark);
 		}
 
-		((ImageView) mainView.findViewById(R.id.sort_by_icon))
-				.setImageDrawable(getIcon(R.drawable.ic_sort_waypoint_dark, R.color.on_map_icon_color));
-		OsmandSettings.MapMarkersMode mode = getMyApplication().getSettings().MAP_MARKERS_MODE.get();
-		ImageView showDirectionIcon = (ImageView) mainView.findViewById(R.id.show_direction_icon);
-		int imageResId = 0;
-		switch (mode) {
-			case TOOLBAR:
-				imageResId = R.drawable.ic_action_device_topbar;
-				break;
-			case WIDGETS:
-				imageResId = R.drawable.ic_action_device_widget;
-				break;
-		}
-		showDirectionIcon.setBackgroundDrawable(getIcon(R.drawable.ic_action_device_top, R.color.on_map_icon_color));
-		if (imageResId != 0) {
-			showDirectionIcon.setImageDrawable(getIcon(imageResId, R.color.dashboard_blue));
-		}
-		((ImageView) mainView.findViewById(R.id.build_route_icon))
-				.setImageDrawable(getIcon(R.drawable.map_directions, R.color.on_map_icon_color));
-		((ImageView) mainView.findViewById(R.id.save_as_new_track_icon))
-				.setImageDrawable(getIcon(R.drawable.ic_action_polygom_dark, R.color.on_map_icon_color));
-		((ImageView) mainView.findViewById(R.id.move_all_to_history_icon))
-				.setImageDrawable(getIcon(R.drawable.ic_action_history2, R.color.on_map_icon_color));
+		Bundle arguments = getArguments();
+		if (arguments != null) {
+			final int pos = arguments.getInt(MARKER_POSITION);
+			String markerName = arguments.getString(MARKER_NAME);
+			int markerColorIndex = arguments.getInt(MARKER_COLOR_INDEX);
+			long markerVisitedDate = arguments.getLong(MARKER_VISITED_DATE);
+			((TextView) mainView.findViewById(R.id.map_marker_title)).setText(markerName);
+			((ImageView) mainView.findViewById(R.id.map_marker_icon)).setImageDrawable(getIcon(R.drawable.ic_action_flag_dark, MapMarker.getColorId(markerColorIndex)));
+			((TextView) mainView.findViewById(R.id.map_marker_passed_info)).setText(getString(R.string.passed, new SimpleDateFormat("MMM dd", Locale.getDefault()).format(new Date(markerVisitedDate))));
 
-		((TextView) mainView.findViewById(R.id.show_direction_text_view)).setText(getMyApplication().getSettings().MAP_MARKERS_MODE.get().toHumanString(getActivity()));
+			mainView.findViewById(R.id.make_active_row).setOnClickListener(new View.OnClickListener() {
+				@Override
+				public void onClick(View view) {
+					if (listener != null) {
+						listener.onMakeMarkerActive(pos);
+					}
+					dismiss();
+				}
+			});
+			mainView.findViewById(R.id.delete_row).setOnClickListener(new View.OnClickListener() {
+				@Override
+				public void onClick(View view) {
+					if (listener != null) {
+						listener.onDeleteMarker(pos);
+					}
+					dismiss();
+				}
+			});
+		}
 
-		mainView.findViewById(R.id.sort_by_row).setOnClickListener(new View.OnClickListener() {
-			@Override
-			public void onClick(View view) {
-				if (listener != null) {
-					listener.sortByOnClick();
-				}
-				dismiss();
-			}
-		});
-		mainView.findViewById(R.id.show_direction_row).setOnClickListener(new View.OnClickListener() {
-			@Override
-			public void onClick(View view) {
-				if (listener != null) {
-					listener.showDirectionOnClick();
-				}
-				dismiss();
-			}
-		});
-		mainView.findViewById(R.id.build_route_row).setOnClickListener(new View.OnClickListener() {
-			@Override
-			public void onClick(View view) {
-				if (listener != null) {
-					listener.buildRouteOnClick();
-				}
-				dismiss();
-			}
-		});
-		mainView.findViewById(R.id.save_as_new_track_row).setOnClickListener(new View.OnClickListener() {
-			@Override
-			public void onClick(View view) {
-				if (listener != null) {
-					listener.saveAsNewTrackOnClick();
-				}
-				dismiss();
-			}
-		});
-		mainView.findViewById(R.id.move_all_to_history_row).setOnClickListener(new View.OnClickListener() {
-			@Override
-			public void onClick(View view) {
-				if (listener != null) {
-					listener.moveAllToHistoryOnClick();
-				}
-				dismiss();
-			}
-		});
+		((ImageView) mainView.findViewById(R.id.make_active_icon)).setImageDrawable(getContentIcon(R.drawable.ic_action_reset_to_default_dark));
+		((ImageView) mainView.findViewById(R.id.delete_icon)).setImageDrawable(getContentIcon(R.drawable.ic_action_delete_dark));
+
 		mainView.findViewById(R.id.cancel_row).setOnClickListener(new View.OnClickListener() {
 			@Override
 			public void onClick(View view) {
@@ -127,7 +98,7 @@ public class MarkerOptionsBottomSheetDialogFragment extends BottomSheetDialogFra
 		mainView.getViewTreeObserver().addOnGlobalLayoutListener(new ViewTreeObserver.OnGlobalLayoutListener() {
 			@Override
 			public void onGlobalLayout() {
-				final View scrollView = mainView.findViewById(R.id.marker_options_scroll_view);
+				final View scrollView = mainView.findViewById(R.id.history_marker_scroll_view);
 				int scrollViewHeight = scrollView.getHeight();
 				int dividerHeight = AndroidUtils.dpToPx(getContext(), 1);
 				int cancelButtonHeight = getContext().getResources().getDimensionPixelSize(R.dimen.bottom_sheet_cancel_button_height);
@@ -171,16 +142,8 @@ public class MarkerOptionsBottomSheetDialogFragment extends BottomSheetDialogFra
 		}
 	}
 
-	interface MarkerOptionsFragmentListener {
-
-		void sortByOnClick();
-
-		void showDirectionOnClick();
-
-		void buildRouteOnClick();
-
-		void saveAsNewTrackOnClick();
-
-		void moveAllToHistoryOnClick();
+	interface HistoryMarkerMenuFragmentListener {
+		void onMakeMarkerActive(int pos);
+		void onDeleteMarker(int pos);
 	}
 }

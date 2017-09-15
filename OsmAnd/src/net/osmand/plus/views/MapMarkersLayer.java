@@ -493,16 +493,7 @@ public class MapMarkersLayer extends OsmandMapLayer implements IContextMenuProvi
 	@Override
 	public void setSelectedObject(Object o) {
 		if (o instanceof MapMarker) {
-			MapMarkersHelper markersHelper = map.getMyApplication().getMapMarkersHelper();
-			MapMarker marker = (MapMarker) o;
-			List<MapMarker> mapMarkers = markersHelper.getMapMarkers();
-			int i = mapMarkers.indexOf(marker);
-			if (i != -1) {
-				mapMarkers.remove(i);
-				mapMarkers.add(0, marker);
-				markersHelper.saveMapMarkers(mapMarkers, null);
-				marker.index = 0;
-			}
+			map.getMyApplication().getMapMarkersHelper().moveMarkerToTop((MapMarker) o);
 		}
 	}
 

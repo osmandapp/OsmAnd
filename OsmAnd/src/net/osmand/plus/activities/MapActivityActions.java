@@ -620,18 +620,6 @@ public class MapActivityActions implements DialogProvider {
 						public boolean onContextMenuClick(ArrayAdapter<ContextMenuItem> adapter, int itemId, int pos, boolean isChecked) {
 							app.logEvent(mapActivity, "drawer_markers_open");
 							MapActivity.clearPrevActivityIntent();
-							mapActivity.getDashboard().setDashboardVisibility(true, DashboardType.MAP_MARKERS);
-							return false;
-						}
-					}).createItem());
-
-			optionsMenuHelper.addItem(new ItemBuilder().setTitle("New map markers")
-					.setIcon(R.drawable.ic_action_flag_dark)
-					.setListener(new ContextMenuAdapter.ItemClickListener() {
-						@Override
-						public boolean onContextMenuClick(ArrayAdapter<ContextMenuItem> adapter, int itemId, int pos, boolean isChecked) {
-							app.logEvent(mapActivity, "drawer_markers_open");
-							MapActivity.clearPrevActivityIntent();
 							MapMarkersDialogFragment.showInstance(mapActivity);
 							return true;
 						}

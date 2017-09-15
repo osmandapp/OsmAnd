@@ -10,7 +10,6 @@ import net.osmand.plus.activities.MapActivity;
 import net.osmand.plus.helpers.MapMarkerDialogHelper;
 import net.osmand.plus.mapcontextmenu.MenuBuilder;
 import net.osmand.plus.mapcontextmenu.MenuController;
-import net.osmand.plus.mapillary.MapillaryPlugin;
 import net.osmand.util.Algorithms;
 
 public class MapMarkerMenuController extends MenuController {
@@ -25,8 +24,7 @@ public class MapMarkerMenuController extends MenuController {
 		leftTitleButtonController = new TitleButtonController() {
 			@Override
 			public void buttonPressed() {
-				markersHelper.removeMapMarker(getMapMarker().index);
-				markersHelper.addMapMarkerHistory(getMapMarker());
+				markersHelper.moveMapMarkerToHistory(getMapMarker());
 				getMapActivity().getContextMenu().close();
 			}
 		};
