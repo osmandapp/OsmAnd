@@ -302,6 +302,9 @@ public class MapMarkersHelper {
 
 		if (group.getType() == MarkersSyncGroup.FAVORITES_TYPE) {
 			FavouritesDbHelper.FavoriteGroup favGroup = ctx.getFavorites().getGroup(group.name);
+			if (favGroup == null) {
+				return;
+			}
 			if (!favGroup.visible) {
 				removeActiveMarkersFromSyncGroup(group.id);
 				return;

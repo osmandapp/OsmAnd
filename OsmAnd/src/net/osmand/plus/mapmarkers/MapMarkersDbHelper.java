@@ -117,9 +117,7 @@ public class MapMarkersDbHelper {
 	}
 
 	private void onUpgrade(SQLiteConnection db, int oldVersion, int newVersion) {
-		db.execSQL("DROP TABLE IF EXISTS " + MARKERS_TABLE_NAME);
-		db.execSQL("DROP TABLE IF EXISTS " + GROUPS_TABLE_NAME);
-		onCreate(db);
+
 	}
 
 	private void saveExistingMarkersToDb() {
