@@ -2866,4 +2866,11 @@ Tidligere destination bliver sidste mellemliggende punkt.</string>
     <string name="show_direction">Vis retning</string>
     <string name="sort_by">Sorter efter</string>
     <string name="marker_options">Markør indstillinger</string>
+    <string name="shared_string_list">Liste</string>
+    <string name="shared_string_groups">Grupper</string>
+    <string name="today">I dag</string>
+    <string name="yesterday">I går</string>
+    <string name="last_seven_days">Sidste 7 dage</string>
+    <string name="this_year">I år</string>
+    <string name="widget">Modul</string>
     </resources>
