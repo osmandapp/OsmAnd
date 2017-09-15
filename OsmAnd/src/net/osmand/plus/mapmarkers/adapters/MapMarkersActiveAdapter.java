@@ -39,6 +39,7 @@ public class MapMarkersActiveAdapter extends RecyclerView.Adapter<MapMarkerItemV
 	private boolean useCenter;
 	private int screenOrientation;
 	private boolean night;
+	private OsmandSettings.MapMarkersOrderByMode orderByMode;
 
 	public MapMarkersActiveAdapter(MapActivity mapActivity) {
 		this.mapActivity = mapActivity;
@@ -49,6 +50,10 @@ public class MapMarkersActiveAdapter extends RecyclerView.Adapter<MapMarkerItemV
 
 	public void setShowDirectionEnabled(boolean showDirectionEnabled) {
 		this.showDirectionEnabled = showDirectionEnabled;
+	}
+
+	public void setOrderByMode(OsmandSettings.MapMarkersOrderByMode orderByMode) {
+		this.orderByMode = orderByMode;
 	}
 
 	public void setAdapterListener(MapMarkersActiveAdapterListener listener) {

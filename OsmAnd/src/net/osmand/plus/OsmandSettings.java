@@ -1320,6 +1320,9 @@ public class OsmandSettings {
 	public final CommonPreference<MapMarkersMode> MAP_MARKERS_MODE =
 			new EnumIntPreference<>("map_markers_mode", MapMarkersMode.TOOLBAR, MapMarkersMode.values());
 
+	public final CommonPreference<MapMarkersOrderByMode> MAP_MARKERS_ORDER_BY_MODE =
+			new EnumIntPreference<>("map_markers_order_by_mode", MapMarkersOrderByMode.DATE_ADDED_DESCENDING, MapMarkersOrderByMode.values());
+
 	{
 		MAP_MARKERS_MODE.makeProfile().cache();
 		MAP_MARKERS_MODE.setModeDefaultValue(ApplicationMode.DEFAULT, MapMarkersMode.TOOLBAR);
@@ -3148,6 +3151,34 @@ public class OsmandSettings {
 
 		public String toHumanString(Context ctx) {
 			return ctx.getString(key);
+		}
+	}
+
+	public enum MapMarkersOrderByMode {
+		DISTANCE_DESCENDING,
+		DISTANCE_ASCENDING,
+		NAME,
+		DATE_ADDED_DESCENDING,
+		DATE_ADDED_ASCENDING;
+
+		public boolean isDistanceDescending() {
+			return this == DISTANCE_DESCENDING;
+		}
+
+		public boolean isDistanceAscending() {
+			return this == DISTANCE_ASCENDING;
+		}
+
+		public boolean isName() {
+			return this == NAME;
+		}
+
+		public boolean isDateAddedDescending() {
+			return this == DATE_ADDED_DESCENDING;
+		}
+
+		public boolean isDateAddedAscending() {
+			return this == DATE_ADDED_ASCENDING;
 		}
 	}
 

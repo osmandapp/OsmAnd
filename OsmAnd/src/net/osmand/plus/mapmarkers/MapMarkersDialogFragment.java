@@ -20,11 +20,13 @@ import net.osmand.plus.LockableViewPager;
 import net.osmand.plus.MapMarkersHelper;
 import net.osmand.plus.OsmandApplication;
 import net.osmand.plus.OsmandSettings;
+import net.osmand.plus.OsmandSettings.MapMarkersOrderByMode;
 import net.osmand.plus.R;
 import net.osmand.plus.activities.MapActivity;
 import net.osmand.plus.dashboard.DashboardOnMap;
 import net.osmand.plus.mapmarkers.ShowDirectionBottomSheetDialogFragment.ShowDirectionFragmentListener;
 import net.osmand.plus.mapmarkers.OptionsBottomSheetDialogFragment.MarkerOptionsFragmentListener;
+import net.osmand.plus.mapmarkers.OrderByBottomSheetDialogFragment.OrderByFragmentListener;
 
 import java.util.ArrayList;
 import java.util.Arrays;
@@ -40,6 +42,7 @@ public class MapMarkersDialogFragment extends android.support.v4.app.DialogFragm
 
 	private Snackbar snackbar;
 	private LockableViewPager viewPager;
+	private TextView orderByModeTitle;
 
 	@Override
 	public void onCreate(Bundle savedInstanceState) {
@@ -84,10 +87,17 @@ public class MapMarkersDialogFragment extends android.support.v4.app.DialogFragm
 		if (showDirectionFragment != null) {
 			((ShowDirectionBottomSheetDialogFragment) showDirectionFragment).setListener(createShowDirectionFragmentListener());
 		}
+		Fragment orderByFragment = fragmentManager.findFragmentByTag(OrderByBottomSheetDialogFragment.TAG);
+		if (orderByFragment != null) {
+			((OrderByBottomSheetDialogFragment) orderByFragment).setListener(createOrderByFragmentListener());
+		}
 
 		View mainView = inflater.inflate(R.layout.fragment_map_markers_dialog, container);
 
 		Toolbar toolbar = (Toolbar) mainView.findViewById(R.id.map_markers_toolbar);
+		orderByModeTitle = toolbar.findViewById(R.id.order_by_mode_text);
+		setOrderByMode(getMyApplication().getSettings().MAP_MARKERS_ORDER_BY_MODE.get());
+
 		toolbar.setNavigationIcon(getMyApplication().getIconsCache().getIcon(R.drawable.ic_arrow_back));
 		toolbar.setNavigationOnClickListener(new View.OnClickListener() {
 			@Override
@@ -163,6 +173,7 @@ public class MapMarkersDialogFragment extends android.support.v4.app.DialogFragm
 			@Override
 			public void sortByOnClick() {
 				OrderByBottomSheetDialogFragment fragment = new OrderByBottomSheetDialogFragment();
+				fragment.setListener(createOrderByFragmentListener());
 				fragment.show(mapActivity.getSupportFragmentManager(), OrderByBottomSheetDialogFragment.TAG);
 			}
 
@@ -218,6 +229,33 @@ public class MapMarkersDialogFragment extends android.support.v4.app.DialogFragm
 				activeFragment.updateAdapter();
 			}
 		};
+	}
+
+	private OrderByFragmentListener createOrderByFragmentListener() {
+		return new OrderByFragmentListener() {
+			@Override
+			public void onMapMarkersOrderByModeChanged(MapMarkersOrderByMode orderByMode) {
+				setOrderByMode(orderByMode);
+			}
+		};
+	}
+
+	private void setOrderByMode(MapMarkersOrderByMode orderByMode) {
+		String modeStr = "";
+		if (orderByMode.isDistanceDescending()) {
+			modeStr = getString(R.string.distance) + " (" + getString(R.string.descendingly) + ")";
+		} else if (orderByMode.isDistanceAscending()) {
+			modeStr = getString(R.string.distance) + " (" + getString(R.string.ascendingly) + ")";
+		} else if (orderByMode.isName()) {
+			modeStr = getString(R.string.shared_string_name);
+		} else if (orderByMode.isDateAddedDescending()) {
+			modeStr = getString(R.string.date_added) + " (" + getString(R.string.descendingly) + ")";
+		} else {
+			modeStr = getString(R.string.date_added) + " (" + getString(R.string.ascendingly) + ")";
+		}
+		orderByModeTitle.setText(modeStr);
+		activeFragment.setOrderByMode(orderByMode);
+		activeFragment.updateAdapter();
 	}
 
 	private MapActivity getMapActivity() {

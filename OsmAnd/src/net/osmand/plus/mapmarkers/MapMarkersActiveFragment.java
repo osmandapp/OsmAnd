@@ -17,6 +17,7 @@ import net.osmand.plus.MapMarkersHelper.MapMarker;
 import net.osmand.plus.OsmAndLocationProvider.OsmAndCompassListener;
 import net.osmand.plus.OsmAndLocationProvider.OsmAndLocationListener;
 import net.osmand.plus.OsmandApplication;
+import net.osmand.plus.OsmandSettings;
 import net.osmand.plus.activities.MapActivity;
 import net.osmand.plus.base.MapViewTrackingUtilities;
 import net.osmand.plus.dashboard.DashLocationFragment;
@@ -132,6 +133,12 @@ public class MapMarkersActiveFragment extends Fragment implements OsmAndCompassL
 	void updateAdapter() {
 		if (adapter != null) {
 			adapter.notifyDataSetChanged();
+		}
+	}
+
+	void setOrderByMode(OsmandSettings.MapMarkersOrderByMode mode) {
+		if (adapter != null) {
+			adapter.setOrderByMode(mode);
 		}
 	}
 
