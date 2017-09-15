@@ -1092,7 +1092,7 @@ public class RouteProvider {
 				}
 				pt.desc = pt.name;
 			}
-			gpx.addPoint(pt);
+			ctx.getSelectedGpxHelper().addPointToGpxFile(pt, gpx);
 		}
 	return gpx;
 	}

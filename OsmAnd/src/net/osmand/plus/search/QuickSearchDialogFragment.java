@@ -1887,7 +1887,7 @@ public class QuickSearchDialogFragment extends DialogFragment implements OsmAndC
 						if (hasTypeInDescription) {
 							pt.desc = h.getName().getTypeName();
 						}
-						gpx.addPoint(pt);
+						app.getSelectedGpxHelper().addPointToGpxFile(pt, gpx);
 					}
 					return gpx;
 				}

@@ -26,6 +26,7 @@ import org.json.JSONObject;
 
 import java.io.File;
 import java.util.ArrayList;
+import java.util.Collection;
 import java.util.List;
 
 public class GpxSelectionHelper {
@@ -486,6 +487,22 @@ public class GpxSelectionHelper {
 		SelectedGpxFile sf = selectGpxFileImpl(gpx, show, notShowNavigationDialog);
 		saveCurrentSelections();
 		return sf;
+	}
+
+	public void clearPointsInGpxFile(GPXFile gpxFile) {
+		gpxFile.clearPoints();
+	}
+
+	public void addPointToGpxFile(WptPt point, GPXFile gpxFile) {
+		gpxFile.addPoint(point);
+	}
+
+	public void addAllPointsToGpxFile(Collection<? extends WptPt> collection, GPXFile gpxFile) {
+		gpxFile.addAllPoints(collection);
+	}
+
+	public boolean removePointFromGpxFile(WptPt point, GPXFile gpxFile) {
+		return gpxFile.removePoint(point);
 	}
 
 

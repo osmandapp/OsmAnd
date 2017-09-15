@@ -336,14 +336,14 @@ public class DistanceCalculatorPlugin extends OsmandPlugin {
 					saveTrackToRte = originalGPX.routes.size() > 0 && originalGPX.tracks.size() == 0;
 					gpx.tracks.clear();
 					gpx.routes.clear();
-					gpx.clearPoints();
+					app.getSelectedGpxHelper().clearPointsInGpxFile(gpx);
 				} else {
 					gpx = new GPXFile();
 				}
 				for (int i = 0; i < measurementPoints.size(); i++) {
 					LinkedList<WptPt> lt = measurementPoints.get(i);
 					if (lt.size() == 1) {
-						gpx.addPoint(lt.getFirst());
+						app.getSelectedGpxHelper().addPointToGpxFile(lt.getFirst(), gpx);
 					} else if (lt.size() > 1) {
 						if (saveTrackToRte) {
 							Route rt = new Route();

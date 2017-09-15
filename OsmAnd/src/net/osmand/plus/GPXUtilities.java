@@ -761,19 +761,19 @@ public class GPXUtilities {
 			return points;
 		}
 
-		public void clearPoints() {
+		void clearPoints() {
 			points.clear();
 		}
 
-		public void addPoint(WptPt point) {
+		void addPoint(WptPt point) {
 			points.add(point);
 		}
 
-		public void addAllPoints(Collection<? extends WptPt> collection) {
+		void addAllPoints(Collection<? extends WptPt> collection) {
 			points.addAll(collection);
 		}
 
-		public boolean removePoint(WptPt point) {
+		boolean removePoint(WptPt point) {
 			return points.remove(point);
 		}
 

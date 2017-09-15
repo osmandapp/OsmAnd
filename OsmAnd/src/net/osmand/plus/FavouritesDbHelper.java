@@ -414,7 +414,7 @@ public class FavouritesDbHelper {
 			if (p.getOriginObjectName().length() > 0) {
 				pt.comment = p.getOriginObjectName();
 			}
-			gpx.addPoint(pt);
+			context.getSelectedGpxHelper().addPointToGpxFile(pt, gpx);
 		}
 		return gpx;
 	}
