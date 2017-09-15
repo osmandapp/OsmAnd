@@ -220,6 +220,16 @@ public class GeoPointParserUtil {
 		actual = GeoPointParserUtil.parse(url);
 		assertGeoPoint(actual, new GeoParsedPoint(ilat, ilon, z));
 
+		url = "http://www.openstreetmap.org/search?query=" + qlat + "%2C" + qlon;
+		System.out.println("url: " + url);
+		actual = GeoPointParserUtil.parse(url);
+		assertGeoPoint(actual, new GeoParsedPoint(qlat, qlon));
+
+		url = "http://www.openstreetmap.org/search?query=" + qlat + "%20" + qlon;
+		System.out.println("url: " + url);
+		actual = GeoPointParserUtil.parse(url);
+		assertGeoPoint(actual, new GeoParsedPoint(qlat, qlon));
+
 		// http://download.osmand.net/go?lat=34.99393&lon=-106.61568&z=11
 		url = "http://download.osmand.net/go?lat=" + dlat + "&lon=" + dlon + "&z=" + z;
 		System.out.println("url: " + url);
@@ -558,6 +568,20 @@ public class GeoPointParserUtil {
 		System.out.println("url: " + url);
 		actual = GeoPointParserUtil.parse(url);
 		assertGeoPoint(actual, new GeoParsedPoint(qstr));
+
+		// http://www.openstreetmap.org/search?query=Amsterdam
+		qstr = "Amsterdam";
+		url = "http://www.openstreetmap.org/search?query=" + URLEncoder.encode(qstr);
+		System.out.println("url: " + url);
+		actual = GeoPointParserUtil.parse(url);
+		assertGeoPoint(actual, new GeoParsedPoint(qstr));
+
+		// http://www.openstreetmap.org/search?query=Bloemstraat+51A,+Amsterdam
+		qstr = "Bloemstraat 51A, Amsterdam";
+		url = "http://www.openstreetmap.org/search?query=" + URLEncoder.encode(qstr);
+		System.out.println("url: " + url);
+		actual = GeoPointParserUtil.parse(url);
+		assertGeoPoint(actual, new GeoParsedPoint(qstr.replace(',',' ')));
 
 		// http://maps.google.com/maps?daddr=760+West+Genesee+Street+Syracuse+NY+13204
 		qstr = "760 West Genesee Street Syracuse NY 13204";
@@ -918,6 +942,7 @@ public class GeoPointParserUtil {
 						double lat = 0;
 						double lon = 0;
 						int zoom = GeoParsedPoint.NO_ZOOM;
+						Map<String, String> queryMap = getQueryParameters(uri);
 						if (fragment != null) {
 							if (fragment.startsWith("map=")) {
 								fragment = fragment.substring("map=".length());
@@ -927,6 +952,19 @@ public class GeoPointParserUtil {
 								zoom = parseZoom(vls[0]);
 								lat = parseSilentDouble(vls[1]);
 								lon = parseSilentDouble(vls[2]);
+							}
+						} else if (queryMap != null) {
+							String queryStr = queryMap.get("query");
+							if (queryStr != null) {
+								queryStr = queryStr.replace("+", " ").replace(",", " ");
+								String[] vls = queryStr.split(" ");
+								if (vls.length == 2) {
+									lat = parseSilentDouble(vls[0]);
+									lon = parseSilentDouble(vls[1]);
+								}
+								if (lat == 0 || lon == 0) {
+									return new GeoParsedPoint(queryStr);
+								}
 							}
 						}
 						// the query string sometimes has higher resolution values

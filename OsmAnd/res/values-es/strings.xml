@@ -1959,7 +1959,7 @@ Lon %2$s</string>
 <string name="no_location_permission">La aplicación no tiene permiso para acceder a los datos de ubicación.</string>
     <string name="no_camera_permission">La aplicación no tiene permiso para acceder a la cámara.</string>
     <string name="no_microphone_permission">La aplicación no tiene permiso para acceder al micrófono.</string>
-    <string name="impassable_road_desc">Selecciona las carreteras que quieres evitar durante la navegación</string>
+    <string name="impassable_road_desc">Selecciona las carreteras a evitar durante la navegación</string>
     <string name="shared_string_sound">Sonido</string>
     <string name="select_voice_provider">Selecciona indicaciones por voz</string>
     <string name="select_voice_provider_descr">Selecciona o descarga indicaciones de voz para tu idioma</string>
@@ -2661,9 +2661,9 @@ Por favor proporciona un código completo</string>
     <string name="add_point_before">Añadir punto anterior</string>
     <string name="add_point_after">Añadir punto posterior</string>
     <string name="shared_string_options">Opciones</string>
-    <string name="measurement_tool_snap_to_road_descr">OsmAnd añadirá puntos adicionales, según el tipo de navegación utilizado.</string>
+    <string name="measurement_tool_snap_to_road_descr">OsmAnd conectará los puntos con rutas para el perfil seleccionado.</string>
     <string name="measurement_tool_save_as_new_track_descr">Puede guardar los puntos, ya sea como puntos de ruta o como una línea.</string>
-    <string name="choose_navigation_type">Elegir tipo de navegación</string>
+    <string name="choose_navigation_type">Seleccionar perfil de navegación</string>
     <string name="add_route_points">Añadir puntos de ruta</string>
     <string name="add_line">Añadir línea</string>
     <string name="empty_state_my_tracks">Añadir y grabar trazas</string>

@@ -2564,7 +2564,7 @@ Pokud potřebujete pomoci s aplikací OsmAnd, prosím kontaktujte naši podporu
     <string name="do_not_send_anonymous_app_usage">Neposílat anonymní statistiky používání aplikace</string>
     <string name="do_not_send_anonymous_app_usage_desc">OsmAnd sbírá informace o tom, které části aplikace otevíráte. Nikdy se neodesílá poloha, nic co je zapisováno do aplikace nebo detaily prohlížených oblastí, hledání nebo stahování.</string>
     <string name="do_not_show_startup_messages">Nezobrazovat zprávy při spuštění</string>
-    <string name="do_not_show_startup_messages_desc">Zobrazuje slevy aplikace a mimořádné zprávy o lokálních událostech</string>
+    <string name="do_not_show_startup_messages_desc">Zakáže zobrazení slev aplikace a mimořádné zprávy lokálních událostí</string>
     <string name="parking_options">Možnosti parkování</string>
     <string name="full_version_thanks">Děkujeme vám za zakoupení plné verze OsmAnd!</string>
     <string name="routing_attr_relief_smoothness_factor_name">Zvolte kolísání výšky</string>
@@ -2717,9 +2717,9 @@ Pokud potřebujete pomoci s aplikací OsmAnd, prosím kontaktujte naši podporu
     <string name="add_point_before">Přidat bod před</string>
     <string name="add_point_after">Přidat bod za</string>
     <string name="shared_string_options">Možnosti</string>
-    <string name="measurement_tool_snap_to_road_descr">OsmAnd bude přidávat další body, dle typu navigace.</string>
+    <string name="measurement_tool_snap_to_road_descr">OsmAnd spojí body s trasami pro vybraný profil.</string>
     <string name="measurement_tool_save_as_new_track_descr">Body můžete uložit jako body trasy nebo jako čáru.</string>
-    <string name="choose_navigation_type">Zvolte typ navigace</string>
+    <string name="choose_navigation_type">Vyberte profil navigace</string>
     <string name="add_route_points">Přidat body trasy</string>
     <string name="add_line">Přidat čáru</string>
     <string name="empty_state_my_tracks">Přidat a zaznamenat trasy</string>
@@ -2730,4 +2730,13 @@ Pokud potřebujete pomoci s aplikací OsmAnd, prosím kontaktujte naši podporu
     <string name="import_track_desc">Soubor %$1s neobsahuje body trasy, importovat jako trasu?</string>
     <string name="move_point">Přesunout bod</string>
     <string name="add_segment_to_the_track">Přidat do GPX trasy</string>
-</resources>
+<string name="move_all_to_history">Přesunout vše do historie</string>
+    <string name="build_route">Vytvořit trasu</string>
+    <string name="show_direction">Zobrazit směr</string>
+    <string name="sort_by">Seřadit podle</string>
+    <string name="marker_options">Možnosti značek</string>
+    <string name="do_not_use_animations">Nepoužívat animace</string>
+    <string name="do_not_use_animations_descr">Zakáže animace v aplikaci</string>
+    <string name="keep_showing_on_map">Stále zobrazovat na mapě</string>
+    <string name="exit_without_saving">Ukončit bez uložení?</string>
+    </resources>

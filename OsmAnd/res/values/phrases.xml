@@ -3469,4 +3469,13 @@
 
 	<string name="poi_network">Network</string>
 
+	<string name="poi_government_archive">Archive</string>
+	<string name="poi_government_ministry">Ministry</string>
+	<string name="poi_government_public_service">Public service</string>
+	<string name="poi_government_social_security">Social security</string>
+	<string name="poi_government_social_services">Social services</string>
+	<string name="poi_government_treasury">Treasury</string>
+	<string name="poi_government_transportation">Transport institution</string>
+	<string name="poi_government_legislative">Legislative institution</string>
+
 </resources>

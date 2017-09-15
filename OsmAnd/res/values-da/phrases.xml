@@ -3567,4 +3567,13 @@
 
 <string name="poi_network">Netværk</string>
 
+<string name="poi_government_archive">Arkiv</string>
+	<string name="poi_government_ministry">Ministerie</string>
+	<string name="poi_government_public_service">Offentlig service</string>
+	<string name="poi_government_social_security">Social sikring</string>
+	<string name="poi_government_social_services">Sociale ydelser</string>
+	<string name="poi_government_treasury">Finansministeriet</string>
+	<string name="poi_government_transportation">Transportministeriet</string>
+	<string name="poi_government_legislative">Lovgivende institution</string>
+
 </resources>

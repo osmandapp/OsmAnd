@@ -1,0 +1,38 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+              xmlns:tools="http://schemas.android.com/tools"
+              android:orientation="vertical"
+              android:layout_width="match_parent"
+              android:layout_height="wrap_content"
+              android:descendantFocusability="blocksDescendants">
+
+    <include layout="@layout/list_item_divider"/>
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="48dp"
+        android:orientation="horizontal"
+        android:background="?attr/bg_color">
+
+        <android.support.v7.widget.AppCompatTextView
+            android:id="@+id/date_title"
+            android:layout_width="0dp"
+            android:layout_weight="1"
+            android:layout_height="match_parent"
+            android:paddingLeft="16dp"
+            android:paddingStart="16dp"
+            android:gravity="center_vertical"
+            tools:text="Today"/>
+
+        <ImageButton
+            android:id="@+id/date_options_button"
+            android:layout_width="48dp"
+            android:layout_height="48dp"
+            android:layout_gravity="center_vertical|end"
+            android:background="@null"
+            android:focusableInTouchMode="true"
+            tools:src="@drawable/ic_overflow_menu_white"/>
+
+    </LinearLayout>
+
+</LinearLayout>

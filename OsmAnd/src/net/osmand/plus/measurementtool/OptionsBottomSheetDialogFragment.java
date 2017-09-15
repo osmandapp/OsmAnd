@@ -141,7 +141,7 @@ public class OptionsBottomSheetDialogFragment extends BottomSheetDialogFragment 
 				final View scrollView = mainView.findViewById(R.id.measure_options_scroll_view);
 				int scrollViewHeight = scrollView.getHeight();
 				int dividerHeight = AndroidUtils.dpToPx(getContext(), 1);
-				int cancelButtonHeight = getContext().getResources().getDimensionPixelSize(R.dimen.measure_distance_bottom_sheet_cancel_button_height);
+				int cancelButtonHeight = getContext().getResources().getDimensionPixelSize(R.dimen.bottom_sheet_cancel_button_height);
 				int spaceForScrollView = screenHeight - statusBarHeight - navBarHeight - dividerHeight - cancelButtonHeight;
 				if (scrollViewHeight > spaceForScrollView) {
 					scrollView.getLayoutParams().height = spaceForScrollView;
