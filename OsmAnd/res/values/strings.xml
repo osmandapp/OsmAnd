@@ -9,6 +9,8 @@
          3. All your modified/created strings are in the top of the file (to make easier find what\'s translated).
     PLEASE: Have a look at http://code.google.com/p/osmand/wiki/UIConsistency, it may really improve your and our work  :-)  Thx - Hardy
     -->
+    <string name="map_orientation_change_in_accordance_with_speed">Map orientation change in accordance with speed</string>
+    <string name="map_orientation_change_in_accordance_with_speed_descr">Use built in compass instead of direction of movement to determine map orientation at low speed</string>
     <string name="all_markers_moved_to_history">All markers moved to History</string>
     <string name="marker_moved_to_history">Marker moved to History</string>
     <string name="marker_moved_to_active">Marker moved to Active</string>
