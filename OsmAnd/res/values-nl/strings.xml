@@ -1,4 +1,5 @@
-<?xml version="1.0" encoding="UTF-8" standalone="no"?><resources>
+<?xml version='1.0' encoding='UTF-8'?>
+<resources>
   
   <string name="layer_map_appearance">Configureer scherm</string>
   <string name="show_lanes">Rijstroken</string>
@@ -2863,4 +2864,21 @@ Van bijna alle landen is een kaart te downloaden: van Afghanistan tot Zimbabwe, 
     <string name="mapillary_menu_title_dates">Data</string>
     <string name="mapillary_menu_edit_text_hint">Geef gebruikersnaam</string>
     <string name="mapillary_menu_title_username">Gebruikersnaam</string>
+    <string name="move_all_to_history">Alles naar geschiedenis verplaatsen</string>
+    <string name="build_route">Route maken</string>
+    <string name="show_direction">Toon richting</string>
+    <string name="sort_by">Sorteren op</string>
+    <string name="marker_options">Opties voor Markeervlaggetjes</string>
+    <string name="do_not_use_animations">Geen animaties gebruiken</string>
+    <string name="do_not_use_animations_descr">Zet alle animaties binnen OsmAnd uit</string>
+    <string name="keep_showing_on_map">Verder wel op de kaart blijven tonen</string>
+    <string name="exit_without_saving">Afsluiten zonder op te slaan?</string>
+    <string name="line">Lijn</string>
+    <string name="save_as_route_point">Opslaan als Routepunten</string>
+    <string name="save_as_line">Als lijn opslaan</string>
+    <string name="route_point">Routepunt</string>
+    <string name="edit_line">Lijn bewerken</string>
+    <string name="add_point_before">Punt ervoor toevoegen</string>
+    <string name="add_point_after">Punt erna toevoegen</string>
+    <string name="shared_string_options">Opties</string>
     </resources>

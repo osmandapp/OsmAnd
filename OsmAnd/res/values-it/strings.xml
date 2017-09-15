@@ -2654,7 +2654,7 @@ Rappresenta l\'area: %1$s x %2$s</string>
     <string name="total_distance">Distanza totale</string>
     
     <string name="routing_attr_height_relief_smoothness_factor_description">Più piatto o più colline</string>
-    <string name="routing_attr_height_obstacles_name">Utilizza dati di quota</string>
+    <string name="routing_attr_height_obstacles_name">Utilizza dati altitudine</string>
     <string name="routing_attr_height_obstacles_description">Utilizza i dati di elevazione del terreno forniti da SRTM, ASTER e EU-DEM</string>
 
     <string name="shared_string_time_span">Intervallo di tempo</string>
@@ -2882,9 +2882,9 @@ Copertura e qualità approssimativamente:
     <string name="add_point_before">Aggiungi un punto prima</string>
     <string name="add_point_after">Aggiungi un punto dopo</string>
     <string name="shared_string_options">Opzioni</string>
-    <string name="measurement_tool_snap_to_road_descr">OsmAnd aggiungerà dei punti, in base al tipo di navigazione.</string>
+    <string name="measurement_tool_snap_to_road_descr">OsmAnd aggiungerà i punti al percorso, in base al tipo di navigazione.</string>
     <string name="measurement_tool_save_as_new_track_descr">Puoi salvare i punti sia come punti di un percorso che come linea.</string>
-    <string name="choose_navigation_type">Scegli la modalità di navigazione</string>
+    <string name="choose_navigation_type">Scegli il profilo di navigazione</string>
     <string name="exit_without_saving">Uscire senza salvare?</string>
     <string name="do_not_use_animations">Non utilizzare le animazioni</string>
     <string name="do_not_use_animations_descr">Disabilita le animazioni nell\'app</string>

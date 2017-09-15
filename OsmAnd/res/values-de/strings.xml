@@ -1592,7 +1592,7 @@ Mit Neuanmeldung fortfahren?</string>
 	<string name="gpx_tags_txt">Tags</string>
 	<string name="gpx_description_txt">Beschreibung</string>
 	<string name="gpx_monitoring_disabled_warn">Aufzeichnung mit der GPX-Taste oder unter \'Einstellungen\' → \'Streckenaufzeichnung\' aktivieren.</string>
-	<string name="gpx_navigation">GPX-Route wählen</string>
+	<string name="gpx_navigation">GPX-Route</string>
 	<string name="gpx_option_reverse_route">GPX-Route umkehren</string>
 	<string name="gpx_option_destination_point">Derzeitiges Ziel verwenden</string>
 	<string name="gpx_option_from_start_point">Gesamten Track durchlaufen</string>
@@ -1615,7 +1615,7 @@ Mit Neuanmeldung fortfahren?</string>
     <string name="targets">Ziele</string>
     <string name="way_alarms">Verkehrswarnungen</string>
     <string name="record_plugin_description">Diese Erweiterung ermöglicht es, Tracks durch Drücken der GPX-Aufnahme-Schaltfläche auf dem Kartenbildschirm aufzunehmen bzw. alle navigierten Routen automatisch zu protokollieren und sie als lokale GPX-Datei (oder auch online über Web-Dienste) abzuspeichern. 
-\n 
+\n
 \nAufgenommene Tracks können z. B. mit Bekannten geteilt oder als Beiträge zu OSM verwendet werden. Sportler können gespeicherte Tracks zur Überwachung ihres Trainings verwenden. Einige Basisauswertungen sind direkt in OsmAnd enthalten, wie Rundenzeiten, Durchschnittsgeschwindigkeit, usw.. Die Aufzeichnungen können natürlich auch mit speziellen Analyse-Tools von Drittanbietern nachbearbeitet werden.</string>
     <string name="route_descr_destination">Ziel</string>
     <string name="local_index_description">Um Einzelheiten zu einem Eintrag zu sehen, auf einen beliebigen Eintrag drücken. Um ihn zu deaktivieren oder zu löschen, lang drücken. Aktuell auf dem Gerät vorhandene Daten (%1$s frei):</string>
@@ -1655,7 +1655,7 @@ Mit Neuanmeldung fortfahren?</string>
     <string name="wake_on_voice_descr">Bildschirm bei Navigationsanweisung aktivieren (falls aus)</string>
     <string name="shared_string_never">Niemals</string>
     
-    <string name="impassable_road">Straßen vermeiden …</string>
+    <string name="impassable_road">Straßen vermeiden…</string>
     <string name="rendering_attr_tramTrainRoutes_name">Straßen- und Eisenbahnlinien</string>
     <string name="rendering_attr_trainLightrailRoutes_name">Stadtbahnlinien</string>
     <string name="rendering_attr_shareTaxiRoutes_name">Sammeltaxi-Linien</string>
@@ -2629,7 +2629,7 @@ Abgedeckte Fläche: %1$s x %2$s</string>
     <string name="routing_attr_relief_smoothness_factor_name">Steigung wählen</string>
     <string name="driving_region_automatic">Automatisch</string>
     <string name="osmand_extended_description_part1">OsmAnd (OSM Automated Navigation Directions) ist eine Karten- und Navigationsanwendung mit Zugriff auf die kostenlosen, weltweiten und qualitativ hochwertigen Daten von OpenStreetMap (OSM). Erfreuen Sie sich an der akustischen und visuellen Navigation, der Betrachtung von POIs (points of interest), der Erstellung und Verwaltung von GPX-Tracks, der Visualisierung von Höhenlinien und -angaben (über ein Erweiterungsmodul), den Auswahlmöglichkeiten zwischen Auto-, Fahrrad- und Fußgänger-Betriebsart, der Möglichkeit an OSM mitzuarbeiten und vielem mehr.</string>
-    <string name="osmand_extended_description_part2">" GPS-Navigation • Sie haben die Wahl zwischen dem Offline-Betrieb (ohne Roaming-Gebühren, wenn Sie im Ausland sind) oder dem (schnelleren) Online-Betrieb • Die Sprachführung (mit aufgenommenen oder synthetischen Stimmen) begleitet Sie Schritt für Schritt auf Ihrem Weg • Ihre Route wird neu berechnet, sobald Sie von ihr abweichen • Fahrspurassistent, Straßennamen und voraussichtliche Ankunftszeit helfen Ihnen auf der Strecke • Zur Erhöhung Ihrer Reisesicherheit erfolgt ein automatischer Wechsel zwischen Tag- und Nachtmodus • Sie können wählen, ob Tempolimits angezeigt werden sollen, und ob Sie bei deren Überschreitung darauf hingewiesen werden wollen • Die Kartenvergrößerung passt sich Ihrer Geschwindigkeit an • Sie können Ziele nach Adresse, Typ (z. B.: Parkplatz, Restaurant, Hotel, Tankstelle, Museum) oder geographischen Koordinaten suchen • Die Festlegung von Zwischenstopps entlang Ihrer Reiseroute ist möglich • Sie können Ihre GPX-Tracks aufzeichnen, einspielen und ihnen folgen "</string>
+    <string name="osmand_extended_description_part2">GPS-Navigation • Sie haben die Wahl zwischen dem Offline-Betrieb (ohne Roaming-Gebühren, wenn Sie im Ausland sind) oder dem (schnelleren) Online-Betrieb • Die Sprachführung (mit aufgenommenen oder synthetischen Stimmen) begleitet Sie Schritt für Schritt auf Ihrem Weg • Ihre Route wird neu berechnet, sobald Sie von ihr abweichen • Fahrspurassistent, Straßennamen und voraussichtliche Ankunftszeit helfen Ihnen auf der Strecke • Zur Erhöhung Ihrer Reisesicherheit erfolgt ein automatischer Wechsel zwischen Tag- und Nachtmodus • Sie können wählen, ob Tempolimits angezeigt werden sollen, und ob Sie bei deren Überschreitung darauf hingewiesen werden wollen • Die Kartenvergrößerung passt sich Ihrer Geschwindigkeit an • Sie können Ziele nach Adresse, Typ (z. B.: Parkplatz, Restaurant, Hotel, Tankstelle, Museum) oder geographischen Koordinaten suchen • Die Festlegung von Zwischenstopps entlang Ihrer Reiseroute ist möglich • Sie können Ihre GPX-Tracks aufzeichnen, einspielen und ihnen folgen</string>
     <string name="osmand_extended_description_part3">Karten • zeigen POIs (point of interests) in Ihrer Umgebung an • richten sich nach Ihrer Bewegungsrichtung (oder dem Kompass) aus • zeigen an, wo Sie sind und worauf Sie sehen • übermitteln Ihre Position, damit Ihre Freunde Sie finden können • speichern Ihre wichtigsten Orte als Favoriten • lassen Ihnen die Wahl, wie Bezeichnungen auf der Karte angezeigt werden sollen: in Englisch, Landessprache oder in phonetischer Schreibweise • stellen spezielle Online-Karten, Satellitenansichten (von Bing), verschiedene Overlays, wie GPX-Tracks zu Touren-/Routenverläufen, und zusätzliche Ebenen mit einstellbarer Transparenz dar</string>
     <string name="osmand_extended_description_part4">Ski-Sport - das OsmAnd-Skikarten-Modul ermöglicht Ihnen das Betrachten von Skirouten, deren Schwierigkeitsgrad und einiger zusätzlicher Informationen, wie die Lage von Liften und weiterer Einrichtungen.</string>
     <string name="osmand_extended_description_part5">Radfahren • Sie finden Radwege auf der Karte • Die GPS-Navigation im Fahrrad-Modus errechnet Ihre Route anhand von Radwegen • Sie können Ihre Geschwindigkeit und Höhe verfolgen • Die Möglichkeit der GPX-Aufzeichnung versetzt Sie in die Lage, Ihre Fahrt zu protokollieren und sie mit anderen zu teilen • Über ein Zusatzmodul können Sie sich Höhenlinien und das Geländerelief darstellen lassen</string>

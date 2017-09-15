@@ -1435,11 +1435,7 @@ public class MeasurementToolFragment extends Fragment {
 				builder.setPositiveButton(R.string.shared_string_ok, new DialogInterface.OnClickListener() {
 					@Override
 					public void onClick(DialogInterface dialogInterface, int i) {
-						GPXFile gpx = editingCtx.getNewGpxData().getGpxFile();
-						SelectedGpxFile selectedGpxFile = mapActivity.getMyApplication().getSelectedGpxHelper().getSelectedFileByPath(gpx.path);
-						boolean showOnMap = selectedGpxFile != null;
-						ActionType actionType = editingCtx.getNewGpxData().getActionType();
-						saveExistingGpx(gpx, showOnMap, actionType, true);
+						dismiss(mapActivity);
 					}
 				});
 			}
