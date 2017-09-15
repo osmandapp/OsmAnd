@@ -136,12 +136,6 @@ public class MapMarkersActiveFragment extends Fragment implements OsmAndCompassL
 		}
 	}
 
-	void setOrderByMode(OsmandSettings.MapMarkersOrderByMode mode) {
-		if (adapter != null) {
-			adapter.setOrderByMode(mode);
-		}
-	}
-
 	void hideSnackbar() {
 		if (adapter != null) {
 			adapter.hideSnackbar();

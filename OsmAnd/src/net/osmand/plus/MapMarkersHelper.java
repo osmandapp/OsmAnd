@@ -12,6 +12,7 @@ import net.osmand.data.LocationPoint;
 import net.osmand.data.PointDescription;
 import net.osmand.plus.mapmarkers.MapMarkersDbHelper;
 import net.osmand.util.Algorithms;
+import net.osmand.util.MapUtils;
 
 import java.io.File;
 import java.text.SimpleDateFormat;
@@ -222,7 +223,7 @@ public class MapMarkersHelper {
 		checkAndFixActiveMarkersOrderIfNeeded();
 
 		List<MapMarker> markersHistory = markersDbHelper.getMarkersHistory();
-		sortMarkers(markersHistory, true);
+		sortHistoryMarkers();
 		mapMarkersHistory.addAll(markersHistory);
 
 		if (!ctx.isApplicationInitializing()) {
@@ -250,21 +251,47 @@ public class MapMarkersHelper {
 		}
 	}
 
-	private void sortMarkers(List<MapMarker> markers, final boolean history) {
-		Collections.sort(markers, new Comparator<MapMarker>() {
+	private void sortHistoryMarkers() {
+		sortMarkers(true, null);
+	}
+
+	private void sortMarkers(final boolean history, final OsmandSettings.MapMarkersOrderByMode orderByMode) {
+		final LatLon location = ctx.getSettings().getLastKnownMapLocation();
+		Collections.sort(history ? mapMarkersHistory : mapMarkers, new Comparator<MapMarker>() {
 			@Override
 			public int compare(MapMarker mapMarker1, MapMarker mapMarker2) {
-				long firstMarkerDate = history ? mapMarker1.visitedDate : mapMarker1.creationDate;
-				long secondMarkerDate = history ? mapMarker2.visitedDate : mapMarker2.creationDate;
-				if (firstMarkerDate > secondMarkerDate) {
-					return -1;
-				} else if (firstMarkerDate == secondMarkerDate) {
-					return 0;
+				if (history || orderByMode.isDateAddedDescending() || orderByMode.isDateAddedAscending()) {
+					long t1 = history ? mapMarker1.visitedDate : mapMarker1.creationDate;
+					long t2 = history ? mapMarker2.visitedDate : mapMarker2.creationDate;
+					if (t1 > t2) {
+						return history || orderByMode.isDateAddedDescending() ? -1 : 1;
+					} else if (t1 == t2) {
+						return 0;
+					} else {
+						return history || orderByMode.isDateAddedDescending() ? 1 : -1;
+					}
+				} else if (orderByMode.isDistanceDescending() || orderByMode.isDistanceAscending()) {
+					int d1 = (int) MapUtils.getDistance(location, mapMarker1.getLatitude(), mapMarker1.getLongitude());
+					int d2 = (int) MapUtils.getDistance(location, mapMarker2.getLatitude(), mapMarker2.getLongitude());
+					if (d1 > d2) {
+						return orderByMode.isDistanceDescending() ? -1 : 1;
+					} else if (d1 == d2) {
+						return 0;
+					} else {
+						return orderByMode.isDistanceDescending() ? 1 : -1;
+					}
 				} else {
-					return 1;
+					String n1 = mapMarker1.getName(ctx);
+					String n2 = mapMarker2.getName(ctx);
+					return n1.compareToIgnoreCase(n2);
 				}
 			}
 		});
+	}
+
+	public void orderMarkers(OsmandSettings.MapMarkersOrderByMode orderByMode) {
+		sortMarkers(false, orderByMode);
+		checkAndFixActiveMarkersOrderIfNeeded();
 	}
 
 	private void lookupAddress(final MapMarker mapMarker) {
@@ -365,7 +392,7 @@ public class MapMarkersHelper {
 			marker.nextKey = MapMarkersDbHelper.HISTORY_NEXT_VALUE;
 			mapMarkersHistory.add(marker);
 			checkAndFixActiveMarkersOrderIfNeeded();
-			sortMarkers(mapMarkersHistory, true);
+			sortHistoryMarkers();
 			refresh();
 		}
 	}
@@ -375,7 +402,7 @@ public class MapMarkersHelper {
 			markersDbHelper.addMarker(marker);
 			if (marker.history) {
 				mapMarkersHistory.add(marker);
-				sortMarkers(mapMarkersHistory, true);
+				sortHistoryMarkers();
 			} else {
 				mapMarkers.add(marker);
 				checkAndFixActiveMarkersOrderIfNeeded();
@@ -391,7 +418,7 @@ public class MapMarkersHelper {
 			marker.history = false;
 			mapMarkers.add(position, marker);
 			checkAndFixActiveMarkersOrderIfNeeded();
-			sortMarkers(mapMarkersHistory, true);
+			sortHistoryMarkers();
 			refresh();
 		}
 	}
@@ -405,7 +432,7 @@ public class MapMarkersHelper {
 				mapMarkers.add(marker);
 			}
 			checkAndFixActiveMarkersOrderIfNeeded();
-			sortMarkers(mapMarkersHistory, true);
+			sortHistoryMarkers();
 			refresh();
 		}
 	}
@@ -487,7 +514,7 @@ public class MapMarkersHelper {
 		}
 		mapMarkersHistory.addAll(mapMarkers);
 		mapMarkers.clear();
-		sortMarkers(mapMarkersHistory, true);
+		sortHistoryMarkers();
 		refresh();
 	}
 

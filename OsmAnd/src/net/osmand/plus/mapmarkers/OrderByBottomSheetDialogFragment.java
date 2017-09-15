@@ -129,34 +129,28 @@ public class OrderByBottomSheetDialogFragment extends BottomSheetDialogFragment 
 			MapMarkersOrderByMode modeToSet;
 			switch (view.getId()) {
 				case R.id.distance_row:
-					if (currentOrderByMode == MapMarkersOrderByMode.DISTANCE_DESCENDING) {
-						modeToSet = MapMarkersOrderByMode.DISTANCE_ASCENDING;
+					if (currentOrderByMode == MapMarkersOrderByMode.DISTANCE_DESCENDINGLY) {
+						modeToSet = MapMarkersOrderByMode.DISTANCE_ASCENDINGLY;
 					} else {
-						modeToSet = MapMarkersOrderByMode.DISTANCE_DESCENDING;
-					}
-					settings.MAP_MARKERS_ORDER_BY_MODE.set(modeToSet);
-					if (listener != null) {
-						listener.onMapMarkersOrderByModeChanged(modeToSet);
+						modeToSet = MapMarkersOrderByMode.DISTANCE_DESCENDINGLY;
 					}
 					break;
 				case R.id.name_row:
 					modeToSet = MapMarkersOrderByMode.NAME;
-					settings.MAP_MARKERS_ORDER_BY_MODE.set(modeToSet);
-					if (listener != null) {
-						listener.onMapMarkersOrderByModeChanged(modeToSet);
-					}
 					break;
 				case R.id.date_added_row:
-					if (currentOrderByMode == MapMarkersOrderByMode.DATE_ADDED_DESCENDING) {
-						modeToSet = MapMarkersOrderByMode.DATE_ADDED_ASCENDING;
+					if (currentOrderByMode == MapMarkersOrderByMode.DATE_ADDED_DESCENDINGLY) {
+						modeToSet = MapMarkersOrderByMode.DATE_ADDED_ASCENDINGLY;
 					} else {
-						modeToSet = MapMarkersOrderByMode.DATE_ADDED_DESCENDING;
-					}
-					settings.MAP_MARKERS_ORDER_BY_MODE.set(modeToSet);
-					if (listener != null) {
-						listener.onMapMarkersOrderByModeChanged(modeToSet);
+						modeToSet = MapMarkersOrderByMode.DATE_ADDED_DESCENDINGLY;
 					}
 					break;
+				default:
+					modeToSet = currentOrderByMode;
+			}
+			settings.MAP_MARKERS_ORDER_BY_MODE.set(modeToSet);
+			if (listener != null) {
+				listener.onMapMarkersOrderByModeChanged(modeToSet);
 			}
 			dismiss();
 		}

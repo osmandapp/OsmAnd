@@ -254,7 +254,7 @@ public class MapMarkersDialogFragment extends android.support.v4.app.DialogFragm
 			modeStr = getString(R.string.date_added) + " (" + getString(R.string.ascendingly) + ")";
 		}
 		orderByModeTitle.setText(modeStr);
-		activeFragment.setOrderByMode(orderByMode);
+		getMyApplication().getMapMarkersHelper().orderMarkers(orderByMode);
 		activeFragment.updateAdapter();
 	}
 

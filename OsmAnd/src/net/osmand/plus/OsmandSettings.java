@@ -1321,7 +1321,7 @@ public class OsmandSettings {
 			new EnumIntPreference<>("map_markers_mode", MapMarkersMode.TOOLBAR, MapMarkersMode.values());
 
 	public final CommonPreference<MapMarkersOrderByMode> MAP_MARKERS_ORDER_BY_MODE =
-			new EnumIntPreference<>("map_markers_order_by_mode", MapMarkersOrderByMode.DATE_ADDED_DESCENDING, MapMarkersOrderByMode.values());
+			new EnumIntPreference<>("map_markers_order_by_mode", MapMarkersOrderByMode.DATE_ADDED_DESCENDINGLY, MapMarkersOrderByMode.values());
 
 	{
 		MAP_MARKERS_MODE.makeProfile().cache();
@@ -3155,18 +3155,18 @@ public class OsmandSettings {
 	}
 
 	public enum MapMarkersOrderByMode {
-		DISTANCE_DESCENDING,
-		DISTANCE_ASCENDING,
+		DISTANCE_DESCENDINGLY,
+		DISTANCE_ASCENDINGLY,
 		NAME,
-		DATE_ADDED_DESCENDING,
-		DATE_ADDED_ASCENDING;
+		DATE_ADDED_DESCENDINGLY,
+		DATE_ADDED_ASCENDINGLY;
 
 		public boolean isDistanceDescending() {
-			return this == DISTANCE_DESCENDING;
+			return this == DISTANCE_DESCENDINGLY;
 		}
 
 		public boolean isDistanceAscending() {
-			return this == DISTANCE_ASCENDING;
+			return this == DISTANCE_ASCENDINGLY;
 		}
 
 		public boolean isName() {
@@ -3174,11 +3174,11 @@ public class OsmandSettings {
 		}
 
 		public boolean isDateAddedDescending() {
-			return this == DATE_ADDED_DESCENDING;
+			return this == DATE_ADDED_DESCENDINGLY;
 		}
 
 		public boolean isDateAddedAscending() {
-			return this == DATE_ADDED_ASCENDING;
+			return this == DATE_ADDED_ASCENDINGLY;
 		}
 	}
 
