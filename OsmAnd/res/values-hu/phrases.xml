@@ -3491,4 +3491,14 @@
 	<string name="poi_government_transportation">Közlekedési intézmény</string>
 	<string name="poi_government_legislative">Jogalkotási intézmény</string>
 
-</resources>
+<string name="poi_stands">Parkolóhely</string>
+
+	<string name="poi_motorcycle_type_sportbike">Sportmotor</string>
+	<string name="poi_motorcycle_type_chopper">Chopper</string>
+	<string name="poi_motorcycle_type_offroad">Terepmotor</string>
+	<string name="poi_motorcycle_type_dualsport">Túramotor</string>
+	<string name="poi_motorcycle_type_standard">Standard</string>
+
+	<string name="poi_network">Hálózat</string>
+
+	</resources>
