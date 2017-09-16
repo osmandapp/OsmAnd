@@ -416,6 +416,12 @@ public class BinaryMapIndexReader {
 				return ls.substring(0, ls.lastIndexOf('_')).replace('_', ' ');
 
 			} else {
+				if (ls.contains(".")) {
+					ls = ls.substring(0, ls.indexOf("."));
+				}
+				if (ls.endsWith("_2")) {
+					ls = ls.substring(0, ls.length() - "_2".length());
+				}
 				return ls.substring(0, ls.lastIndexOf('_')).replace('_', ' ');
 			}
 
