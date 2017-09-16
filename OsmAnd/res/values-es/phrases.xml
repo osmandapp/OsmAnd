@@ -3529,4 +3529,6 @@
 	<string name="poi_government_social_services">Servicios sociales</string>
 	<string name="poi_government_treasury">Hacienda pública</string>
 	<string name="poi_government_transportation">Institución de transporte</string>
-	</resources>
+	<string name="poi_government_legislative">Institución legislativa</string>
+
+</resources>
