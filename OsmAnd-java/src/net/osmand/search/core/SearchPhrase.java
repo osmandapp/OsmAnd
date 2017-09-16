@@ -572,6 +572,8 @@ public class SearchPhrase {
                     if (diffsByRegion.get(currFile.getRegionName()) != null) {
                         finalSort.addAll(diffsByRegion.get(currFile.getRegionName()));
                         finalSort.add(currFile);
+                    } else {
+                        finalSort.add(currFile);
                     }
 				}
 				indexes.clear();
@@ -582,8 +584,9 @@ public class SearchPhrase {
 	
 	private Map<String, List<BinaryMapIndexReader>> getDiffsByRegion() {
 		Map<String, List<BinaryMapIndexReader>> result = new HashMap<>();
-        List<BinaryMapIndexReader> listCopy = new ArrayList<>(indexes);
-		for (BinaryMapIndexReader r : listCopy) {
+        Iterator<BinaryMapIndexReader> it = indexes.iterator();
+		while (it.hasNext()) {
+			BinaryMapIndexReader r = it.next();
 			if (r.getFile().getName().matches("[a-zA-Z_-]+([0-9]+_*){3}[.a-z]+")) {
 				String currRegionName = r.getRegionName();
 				if (result.containsKey(currRegionName)) {
@@ -591,7 +594,7 @@ public class SearchPhrase {
 				} else {
 					result.put(currRegionName, new ArrayList<>(Arrays.asList(r)));
 				}
-				indexes.remove(r);
+				it.remove();
 			}
 		}
 		return result;

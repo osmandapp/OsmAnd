@@ -405,13 +405,12 @@ public class BinaryMapIndexReader {
 		}
 		String ls = rg.get(0);
 		if (ls.lastIndexOf('_') != -1) {
-			if (!ls.endsWith(".obf")) {
+			if (!ls.endsWith(".obf") || !ls.matches(".*\\d+.*")) {
 				return ls.substring(0, ls.lastIndexOf('_')).replace('_', ' ');
-			} else {
+			} else if (ls.matches("[a-zA-Z_-]+([0-9]+_*){3}[.a-z]+")){
 				String res = ls.substring(0, (ls.length() - 13));
 				return res.substring(0, res.lastIndexOf('_')).replace('_', ' ');
 			}
-
 		}
 		return ls;
 	}
