@@ -3380,7 +3380,7 @@
 
 <string name="poi_zoo_type">Típus</string>
 	<string name="poi_motorcycle_services">Szolgáltatások</string>
-	<string name="poi_motorcycle_type">Motorkerékpár típus</string>
+	<string name="poi_motorcycle_type">Motorkerékpár-kategória</string>
 
 <string name="poi_zoo_petting_zoo">Állatsimogató</string>
 	<string name="poi_zoo_wildlife_park">Vadaspark</string>
@@ -3390,19 +3390,19 @@
 	<string name="poi_zoo_reptile">Hüllők</string>
 
 	<string name="poi_motorcycle_sales_yes">Értékesítés</string>
-	<string name="poi_motorcycle_sales_no">Értékesítés: nincs</string>
-	<string name="poi_motorcycle_sales_yes_used">Értékesítés: van; használt</string>
+	<string name="poi_motorcycle_sales_no">Értékesítés nincs</string>
+	<string name="poi_motorcycle_sales_yes_used">Értékesítés: új és használt</string>
 	<string name="poi_motorcycle_sales_used">Értékesítés: használt</string>
 	<string name="poi_motorcycle_rental_yes">Kölcsönzés</string>
-	<string name="poi_motorcycle_rental_no">Kölcsönzés: nincs</string>
-	<string name="poi_motorcycle_repair_yes">Szerviz</string>
-	<string name="poi_motorcycle_repair_no">Szerviz: nincs</string>
+	<string name="poi_motorcycle_rental_no">Kölcsönzés nincs</string>
+	<string name="poi_motorcycle_repair_yes">Szerelés</string>
+	<string name="poi_motorcycle_repair_no">Szerelés nincs</string>
 	<string name="poi_motorcycle_parts_yes">Alkatrész</string>
-	<string name="poi_motorcycle_parts_no">Alkatrész: nincs</string>
+	<string name="poi_motorcycle_parts_no">Alkatrész nincs</string>
 	<string name="poi_motorcycle_tyres_yes">Gumi</string>
-	<string name="poi_motorcycle_tyres_no">Gumi: nincs</string>
-	<string name="poi_motorcycle_clothes_yes">Motoros ruha</string>
-	<string name="poi_motorcycle_clothes_no">Motoros ruha: nincs</string>
+	<string name="poi_motorcycle_tyres_no">Gumi nincs</string>
+	<string name="poi_motorcycle_clothes_yes">Motorosruha</string>
+	<string name="poi_motorcycle_clothes_no">Motorosruha nincs</string>
 	<string name="poi_motorcycle_type_scooter">Robogó</string>
 	<string name="poi_zoo_enclosure">Kifutó</string>
 	<string name="poi_zoo_falconry">Solymászat</string>
@@ -3496,7 +3496,7 @@
 	<string name="poi_motorcycle_type_sportbike">Sportmotor</string>
 	<string name="poi_motorcycle_type_chopper">Chopper</string>
 	<string name="poi_motorcycle_type_offroad">Terepmotor</string>
-	<string name="poi_motorcycle_type_dualsport">Túramotor</string>
+	<string name="poi_motorcycle_type_dualsport">Túraenduró</string>
 	<string name="poi_motorcycle_type_standard">Standard</string>
 
 	<string name="poi_network">Hálózat</string>
