@@ -2758,4 +2758,27 @@
     <string name="import_track_desc">الملف %1$s لا يحتوي على نقاط وجهة، هل تود ادخاله كمسار؟</string>
     <string name="move_point">تحريك نقطة</string>
     <string name="add_segment_to_the_track">إضافة إلى مسار GPX</string>
-</resources>
+<string name="map_orientation_change_in_accordance_with_speed">اتجاه الخريطة يتغيير وفقا للسرعة</string>
+    <string name="map_orientation_change_in_accordance_with_speed_descr">استخدام بوصلة الجهاز بدل اتجاه الحركة لتحديد اتجاه الخريطة أثناء سرعة منخفضة</string>
+    <string name="all_markers_moved_to_history">كافة علامات انتقلت إلى التاريخ</string>
+    <string name="marker_moved_to_history">العلامة انتقلت إلى التاريخ</string>
+    <string name="marker_moved_to_active">العلامة انتقلت إلى نشطة</string>
+    <string name="shared_string_list">قائمة</string>
+    <string name="shared_string_groups">مجموعات</string>
+    <string name="passed">تم تجاوزه: %1$s</string>
+    <string name="make_active">جعله نشطاً</string>
+    <string name="today">اليوم</string>
+    <string name="yesterday">أمس</string>
+    <string name="last_seven_days">آخر 7 أيام</string>
+    <string name="this_year">هذه السنة</string>
+    <string name="widget">ويدجت</string>
+    <string name="top_bar">الشريط العلوي</string>
+    <string name="move_all_to_history">نقل الكل إلى التاريخ</string>
+    <string name="build_route">بناء طريق</string>
+    <string name="show_direction">إظهار الاتجاه</string>
+    <string name="sort_by">فرز حسب</string>
+    <string name="do_not_use_animations">عدم استخدام الرسوم المتحركة</string>
+    <string name="do_not_use_animations_descr">تعطيل الرسوم المتحركة في التطبيق</string>
+    <string name="keep_showing_on_map">استمرار العرض على الخريطة</string>
+    <string name="exit_without_saving">الخروج دون حفظ؟</string>
+    </resources>
