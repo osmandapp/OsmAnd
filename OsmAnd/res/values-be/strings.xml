@@ -2861,7 +2861,23 @@
     <string name="do_not_use_animations_descr">Адключэньне анімацыі ў праграме</string>
     <string name="move_all_to_history">Перамясціць усё ў гісторыю</string>
     <string name="build_route">Пабудаваць маршрут</string>
-    <string name="show_direction">Паказаць напрамак</string>
+    <string name="show_direction">Індыкацыя адлегласці</string>
     <string name="sort_by">Сартаваць па</string>
     <string name="marker_options">Налады маркера</string>
+    <string name="marker_show_distance_descr">Абраць як паказваць адлегласць і напрамак да маркераў на экране мапы:</string>
+    <string name="map_orientation_change_in_accordance_with_speed">Парог арыентацыі мапы</string>
+    <string name="map_orientation_change_in_accordance_with_speed_descr">Абярыце ніжэй, на якой хуткасцт арыентацыя мапы пераключаецца з «Напрамку руху» у «Па компасу»</string>
+    <string name="all_markers_moved_to_history">Усе маркеры перанесены ў гісторыю</string>
+    <string name="marker_moved_to_history">Маркер мапы перанесены ў гісторыю</string>
+    <string name="marker_moved_to_active">Маркер мапы стаў актыўным</string>
+    <string name="shared_string_list">Спіс</string>
+    <string name="shared_string_groups">Групы</string>
+    <string name="passed">Пройдзена: %1$s</string>
+    <string name="make_active">Актывізаваць</string>
+    <string name="today">Сёння</string>
+    <string name="yesterday">Учора</string>
+    <string name="last_seven_days">Апошнія 7 дзён</string>
+    <string name="this_year">Сёлета</string>
+    <string name="widget">Віджэт</string>
+    <string name="top_bar">Верхняя панэль</string>
     </resources>
