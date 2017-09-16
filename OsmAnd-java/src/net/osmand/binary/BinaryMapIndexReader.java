@@ -399,7 +399,7 @@ public class BinaryMapIndexReader {
 		}
 		return "";
 	}
-	
+
 	public String getRegionName() {
 		List<String> rg = getRegionNames();
 		if (rg.size() == 0) {
