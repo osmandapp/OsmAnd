@@ -9,11 +9,12 @@
          3. All your modified/created strings are in the top of the file (to make easier find what\'s translated).
     PLEASE: Have a look at http://code.google.com/p/osmand/wiki/UIConsistency, it may really improve your and our work  :-)  Thx - Hardy
     -->
-    <string name="map_orientation_change_in_accordance_with_speed">Map orientation change in accordance with speed</string>
-    <string name="map_orientation_change_in_accordance_with_speed_descr">Use built in compass instead of direction of movement to determine map orientation at low speed</string>
-    <string name="all_markers_moved_to_history">All markers moved to History</string>
-    <string name="marker_moved_to_history">Marker moved to History</string>
-    <string name="marker_moved_to_active">Marker moved to Active</string>
+    <string name="marker_show_distance_descr">Select how to indicate distance and direction to Map markers on the map screen:</string>
+    <string name="map_orientation_change_in_accordance_with_speed">Map orientation threshold</string>
+    <string name="map_orientation_change_in_accordance_with_speed_descr">Select below which speed the map orientation switches from \'To direction of movement\' to \'To compass\'</string>
+    <string name="all_markers_moved_to_history">All Map markers moved to history</string>
+    <string name="marker_moved_to_history">Map marker moved to history</string>
+    <string name="marker_moved_to_active">Map marker moved to active</string>
     <string name="shared_string_list">List</string>
     <string name="shared_string_groups">Groups</string>
     <string name="passed">Passed: %1$s</string>
@@ -26,7 +27,7 @@
     <string name="top_bar">Top bar</string>
     <string name="move_all_to_history">Move all to history</string>
     <string name="build_route">Build route</string>
-    <string name="show_direction">Show direction</string>
+    <string name="show_direction">Distance indication</string>
     <string name="sort_by">Sort by</string>
     <string name="do_not_use_animations">Do not use animations</string>
     <string name="do_not_use_animations_descr">Disables animations in the app</string>
@@ -441,7 +442,7 @@
     <string name="avoid_road">Avoid road</string>
     <string name="storage_directory_readonly_desc">Currently selected Data storage folder is readonly. The storage folder was temporarily switched to Internal memory. Please choose valid storage directory.</string>
     <string name="storage_directory_shared">Shared memory</string>
-    <string name="shared_string_topbar">Topbar</string>
+    <string name="shared_string_topbar">Top bar</string>
     <string name="full_report">Full report</string>
     <string name="recalculate_route">Recalculate route</string>
     <string name="open_street_map_login_and_pass">OpenStreetMap login and password</string>
