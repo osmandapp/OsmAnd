@@ -102,10 +102,6 @@ public class QuickSearchListItem {
 			case LOCATION:
 				LatLon latLon = searchResult.location;
 				return PointDescription.getLocationNamePlain(app, latLon.getLatitude(), latLon.getLongitude());
-			case POI:
-				if (((Amenity)searchResult.object).isClosed()) {
-					return searchResult.localeName + " (Closed)";
-				}
 		}
 		return searchResult.localeName;
 	}

@@ -26,6 +26,8 @@ import java.util.List;
 import java.util.Map;
 import java.util.Map.Entry;
 import java.util.TreeMap;
+import java.util.regex.Matcher;
+import java.util.regex.Pattern;
 
 import javax.xml.parsers.DocumentBuilder;
 import javax.xml.parsers.DocumentBuilderFactory;
@@ -405,12 +407,18 @@ public class BinaryMapIndexReader {
 		}
 		String ls = rg.get(0);
 		if (ls.lastIndexOf('_') != -1) {
-			if (!ls.endsWith(".obf") || !ls.matches(".*\\d+.*")) {
+			if (ls.matches(".*([0-9]+_*){3}\\.obf")) {
+				Pattern osmDiffDateEnding = Pattern.compile("_([0-9]+_*){3}\\.obf");
+				Matcher m = osmDiffDateEnding.matcher(ls);
+				if (m.find()) {
+					ls = ls.substring(0, m.start());
+				}
 				return ls.substring(0, ls.lastIndexOf('_')).replace('_', ' ');
-			} else if (ls.matches("[a-zA-Z_-]+([0-9]+_*){3}[.a-z]+")){
-				String res = ls.substring(0, (ls.length() - 13));
-				return res.substring(0, res.lastIndexOf('_')).replace('_', ' ');
+
+			} else {
+				return ls.substring(0, ls.lastIndexOf('_')).replace('_', ' ');
 			}
+
 		}
 		return ls;
 	}
