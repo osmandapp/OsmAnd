@@ -2220,7 +2220,7 @@ OsmAnd (Automated Navigation Directions) 是一個地圖和導航的應用程式
     <string name="show_map_markers_description">啟動地圖標記功能</string>
     <string name="clear_active_markers_q">您想要移除所有的活動標記嗎？</string>
     <string name="clear_markers_history_q">您想清除地圖標記歷史記錄嗎？</string>
-    <string name="active_markers">啟動標記</string>
+    <string name="active_markers">活動標記</string>
     <string name="map_markers">地圖標記</string>
     <string name="map_marker">地圖標記</string>
     <string name="add_points_to_map_markers_q">您想要將所有的標點都加到地圖標記嗎？</string>
@@ -2254,7 +2254,7 @@ OsmAnd (Automated Navigation Directions) 是一個地圖和導航的應用程式
     <string name="osm_live_support_region">支援地區</string>
     <string name="osm_live_month_cost">每月費用</string>
     <string name="osm_live_month_cost_desc">每月付款</string>
-    <string name="osm_live_active">有效的</string>
+    <string name="osm_live_active">活動</string>
     <string name="osm_live_not_active">失效的</string>
     <string name="osm_live_enter_email">請輸入有效的電子郵件地址</string>
     <string name="osm_live_enter_user_name">請輸入公開名稱</string>
@@ -2848,4 +2848,18 @@ OsmAnd (Automated Navigation Directions) 是一個地圖和導航的應用程式
     <string name="show_direction">顯示方向</string>
     <string name="sort_by">排序方式</string>
     <string name="marker_options">標記選項</string>
+    <string name="map_orientation_change_in_accordance_with_speed">地圖方向變化與速度一致</string>
+    <string name="all_markers_moved_to_history">所有的標記已移動到歷程記錄</string>
+    <string name="marker_moved_to_history">標記已移動到歷程記錄</string>
+    <string name="marker_moved_to_active">標記已移到活動</string>
+    <string name="shared_string_list">清單</string>
+    <string name="shared_string_groups">群組</string>
+    <string name="passed">已經過：%1$s</string>
+    <string name="make_active">進行活動</string>
+    <string name="today">今天</string>
+    <string name="yesterday">昨天</string>
+    <string name="last_seven_days">最近 7 天</string>
+    <string name="this_year">今年</string>
+    <string name="widget">小工具</string>
+    <string name="top_bar">頂欄</string>
     </resources>
