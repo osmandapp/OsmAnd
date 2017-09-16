@@ -10,11 +10,11 @@
     PLEASE: Have a look at http://code.google.com/p/osmand/wiki/UIConsistency, it may really improve your and our work  :-)  Thx - Hardy
     -->
     <string name="marker_show_distance_descr">Select how to indicate distance and direction to Map markers on the map screen:</string>
-    <string name="map_orientation_change_in_accordance_with_speed">Map orientation change in accordance with speed</string>
-    <string name="map_orientation_change_in_accordance_with_speed_descr">Use built in compass instead of direction of movement to determine map orientation at low speed</string>
-    <string name="all_markers_moved_to_history">All markers moved to History</string>
-    <string name="marker_moved_to_history">Marker moved to History</string>
-    <string name="marker_moved_to_active">Marker moved to Active</string>
+    <string name="map_orientation_change_in_accordance_with_speed">Map orientation threshold</string>
+    <string name="map_orientation_change_in_accordance_with_speed_descr">Select below which speed the map orientation switches from 'To direction of movement' to 'To compass'</string>
+    <string name="all_markers_moved_to_history">All Map markers moved to history</string>
+    <string name="marker_moved_to_history">Map marker moved to history</string>
+    <string name="marker_moved_to_active">Map marker moved to active</string>
     <string name="shared_string_list">List</string>
     <string name="shared_string_groups">Groups</string>
     <string name="passed">Passed: %1$s</string>
