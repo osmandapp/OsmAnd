@@ -428,13 +428,13 @@ public class PoiUIFilter implements SearchPoiTypeFilter, Comparable<PoiUIFilter>
 			public boolean publish(Amenity a) {
 				if (nm.accept(a)) {
 					if (matcher == null || matcher.publish(a)) {
-                        String poiID = a.getType().getKeyName() + "_" + a.getId();
-                        if(!searchedPois.add(poiID)) {
-                            return false;
-                        }
-                        if(a.isClosed()) {
-                            return false;
-                        }
+						String poiID = a.getType().getKeyName() + "_" + a.getId();
+						if (!searchedPois.add(poiID)) {
+							return false;
+						}
+						if (a.isClosed()) {
+							return false;
+						}
 						return true;
 					}
 				}
