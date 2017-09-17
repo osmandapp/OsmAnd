@@ -348,7 +348,7 @@
 		
 	
 	<string name="download_files_not_enough_space">אין די מקום כדי להוריד %1$s מ״ב (פנויים: %2$s).</string>
-	<string name="download_files_question_space">כעת ישנם {2} מ״ב פנויים! האם להוריד {0} קבצים (או קובץ) ({1} מ״ב)?</string>
+	<string name="download_files_question_space">האם להוריד {0} קבצים (או קובץ) בנפח של {1} מ״ב? (ישנם {2} מ״ב פנויים.)</string>
 	
 	 
 	
@@ -984,7 +984,7 @@
     <string name="index_srtm_parts">קטעים</string>
     <string name="index_srtm_ele">קווי הגבהה</string>
     <string name="srtm_plugin_description">תוסף זה מאפשר להוריד קווי הגבהה (הורדת מפות -&gt; תפריט -&gt; מפות אחרות) עבור קטע מסוים ולהשתמש בהם למפות בלתי מקוונות.</string>
-    <string name="srtm_plugin_name">תוסף SRTM</string>
+    <string name="srtm_plugin_name">קווי מתאר</string>
     <string name="download_select_map_types">מפות אחרות</string>
     <string name="download_srtm_maps">מפות SRTM</string>
     
@@ -1126,7 +1126,7 @@
     <string name="context_menu_item_destination_point">הגדרה כיעד</string>
     <string name="destination_point">יעד %1$s</string>
     <string name="available_maps">מפות זמינות</string>
-    <string name="item_removed">הפריט נמחק</string>
+    <string name="item_removed">הפריט הוסר</string>
     <string name="n_items_removed">פריטים נמחקו</string>
     <string name="shared_string_type">סוג</string>
     <string name="starting_point">נקודת המוצא</string>
@@ -1139,7 +1139,7 @@
     <string name="select_voice_provider_descr">יש לבחור או להוריד הנחיה קולית עבור שפתך</string>
     <string name="impassable_road_desc">בחירת דרכים מהן יש להמנע במהלך הניווט</string>
     <string name="shared_string_sound">קול</string>
-    <string name="no_location_permission">ליישום אין הרשאה להשתמש במידע מיקום.</string>
+    <string name="no_location_permission">ליישום אין הרשאה להשתמש בנתוני המיקום.</string>
     <string name="no_camera_permission">ליישום אין הרשאה להשתמש במצלמה.</string>
     <string name="no_microphone_permission">ליישום אין הרשאה להשתמש במיקרופון.</string>
     <string name="route_distance">מרחק:</string>
@@ -1221,8 +1221,8 @@
     <string name="quick_action_resume_pause_navigation">הפסקה/המשך בניווט</string>
     <string name="quick_action_resume_pause_navigation_descr">יש לגעת בכפתור זה כדי להמשיך את הניווט.</string>
     <string name="quick_action_show_navigation_finish_dialog">הצגת דו־שיח סיום הניווט</string>
-    <string name="quick_action_start_stop_navigation">התחלה/סיום הניווט</string>
-    <string name="quick_action_start_stop_navigation_descr">יש ללחוץ על כפתור זה כדי להתחיל בניווט או כדי לעצור אותו אם הוא כבר החל.</string>
+    <string name="quick_action_start_stop_navigation">התחלה/עצירת הניווט</string>
+    <string name="quick_action_start_stop_navigation_descr">יש ללחוץ על כפתור זה כדי להתחיל בניווט או כדי לסיים אותו.</string>
     <string name="store_tracks_in_monthly_directories_descrp">אחסון המסלולים המוקלטים בתת־תיקיות לפי חודש ההקלטה (למשל: 2017-01).</string>
     <string name="mapillary_image">תמונת Mapillary</string>
     <string name="open_mapillary">פתיחת Mapillary</string>
