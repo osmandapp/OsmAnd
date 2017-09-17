@@ -23,8 +23,8 @@
     <string name="yesterday">Yesterday</string>
     <string name="last_seven_days">Last 7 days</string>
     <string name="this_year">This year</string>
-    <string name="widget">Widget</string>
-    <string name="top_bar">Top bar</string>
+    <!-- string name="widget">Widget</string if needed should be shared_string_widget -->
+    <!-- string name="top_bar">Top bar</string use shared_string_topbar -->
     <string name="move_all_to_history">Move all to history</string>
     <string name="build_route">Build route</string>
     <string name="show_direction">Distance indication</string>
