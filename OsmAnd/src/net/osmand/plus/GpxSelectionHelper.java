@@ -482,6 +482,7 @@ public class GpxSelectionHelper {
 				selectedGPXFiles.remove(sf);
 			}
 		}
+		syncGpx(gpx);
 		return sf;
 	}
 

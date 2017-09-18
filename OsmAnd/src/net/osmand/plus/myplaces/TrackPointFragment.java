@@ -542,6 +542,7 @@ public class TrackPointFragment extends OsmandExpandableListFragment {
 							app.getSelectedGpxHelper().setGpxFileToDisplay(gpx);
 						}
 					}
+					syncGpx(gpx);
 				}
 				selectedItems.clear();
 				selectedGroups.clear();
@@ -549,6 +550,14 @@ public class TrackPointFragment extends OsmandExpandableListFragment {
 			}
 
 		}.execute();
+	}
+
+	private void syncGpx(GPXFile gpxFile) {
+		File gpx = new File(gpxFile.path);
+		if (gpx.exists()) {
+			app.getMapMarkersHelper().syncGroup(new MarkersSyncGroup(gpx.getAbsolutePath(),
+					AndroidUtils.trimExtension(gpx.getName()), MarkersSyncGroup.GPX_TYPE));
+		}
 	}
 
 	private void enterMapMarkersMode() {
