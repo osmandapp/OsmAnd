@@ -12,6 +12,7 @@ import net.osmand.data.LocationPoint;
 import net.osmand.data.PointDescription;
 import net.osmand.plus.GPXUtilities.GPXFile;
 import net.osmand.plus.GPXUtilities.WptPt;
+import net.osmand.plus.GpxSelectionHelper.SelectedGpxFile;
 import net.osmand.plus.mapmarkers.MapMarkersDbHelper;
 import net.osmand.util.Algorithms;
 import net.osmand.util.MapUtils;
@@ -320,18 +321,14 @@ public class MapMarkersHelper {
 		return markersDbHelper.getGroup(id) != null;
 	}
 
-	public void syncAllGroups(boolean startupSync) {
+	public void syncAllGroups() {
 		List<MarkersSyncGroup> groups = markersDbHelper.getAllGroups();
 		for (MarkersSyncGroup gr : groups) {
-			syncGroup(gr, startupSync);
+			syncGroup(gr);
 		}
 	}
 
 	public void syncGroup(MarkersSyncGroup group) {
-		syncGroup(group, false);
-	}
-
-	private void syncGroup(MarkersSyncGroup group, boolean startupSync) {
 		if (!isGroupSynced(group.getId())) {
 			return;
 		}
@@ -359,13 +356,8 @@ public class MapMarkersHelper {
 				return;
 			}
 
-			GPXFile gpx;
-			if (startupSync) {
-				gpx = GPXUtilities.loadGPXFile(ctx, file);
-				gpxHelper.selectGpxFile(gpx, true, false);
-			} else {
-				gpx = gpxHelper.getSelectedFileByPath(group.getId()).getGpxFile();
-			}
+			SelectedGpxFile selectedGpxFile = gpxHelper.getSelectedFileByPath(group.getId());
+			GPXFile gpx = selectedGpxFile == null ? null : selectedGpxFile.getGpxFile();
 			if (gpx == null) {
 				removeActiveMarkersFromSyncGroup(group.getId());
 				return;

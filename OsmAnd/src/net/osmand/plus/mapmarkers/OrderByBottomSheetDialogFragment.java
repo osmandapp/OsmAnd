@@ -129,20 +129,20 @@ public class OrderByBottomSheetDialogFragment extends BottomSheetDialogFragment 
 			MapMarkersOrderByMode modeToSet;
 			switch (view.getId()) {
 				case R.id.distance_row:
-					if (currentOrderByMode == MapMarkersOrderByMode.DISTANCE_DESCENDINGLY) {
-						modeToSet = MapMarkersOrderByMode.DISTANCE_ASCENDINGLY;
+					if (currentOrderByMode == MapMarkersOrderByMode.DISTANCE_DESC) {
+						modeToSet = MapMarkersOrderByMode.DISTANCE_ASC;
 					} else {
-						modeToSet = MapMarkersOrderByMode.DISTANCE_DESCENDINGLY;
+						modeToSet = MapMarkersOrderByMode.DISTANCE_DESC;
 					}
 					break;
 				case R.id.name_row:
 					modeToSet = MapMarkersOrderByMode.NAME;
 					break;
 				case R.id.date_added_row:
-					if (currentOrderByMode == MapMarkersOrderByMode.DATE_ADDED_DESCENDINGLY) {
-						modeToSet = MapMarkersOrderByMode.DATE_ADDED_ASCENDINGLY;
+					if (currentOrderByMode == MapMarkersOrderByMode.DATE_ADDED_DESC) {
+						modeToSet = MapMarkersOrderByMode.DATE_ADDED_ASC;
 					} else {
-						modeToSet = MapMarkersOrderByMode.DATE_ADDED_DESCENDINGLY;
+						modeToSet = MapMarkersOrderByMode.DATE_ADDED_DESC;
 					}
 					break;
 				default:

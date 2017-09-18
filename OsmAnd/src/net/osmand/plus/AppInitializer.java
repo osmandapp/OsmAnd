@@ -501,7 +501,6 @@ public class AppInitializer implements IProgress {
 			startBgTime = System.currentTimeMillis();
 			app.favorites.loadFavorites();
 			notifyEvent(InitEvents.FAVORITES_INITIALIZED);
-			app.mapMarkersHelper.syncAllGroups(true);
 			// init poi types before indexes and before POI
 			initPoiTypes();
 			notifyEvent(InitEvents.POI_TYPES_INITIALIZED);
@@ -522,6 +521,7 @@ public class AppInitializer implements IProgress {
 			notifyEvent(InitEvents.LOAD_GPX_TRACKS);
 			saveGPXTracks();
 			notifyEvent(InitEvents.SAVE_GPX_TRACKS);
+			app.mapMarkersHelper.syncAllGroups();
 			// restore backuped favorites to normal file
 			restoreBackupForFavoritesFiles();
 			notifyEvent(InitEvents.RESTORE_BACKUPS);
