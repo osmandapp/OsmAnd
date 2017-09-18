@@ -6,13 +6,14 @@ import android.support.annotation.NonNull;
 import android.support.v4.content.ContextCompat;
 
 import net.osmand.IProgress;
+import net.osmand.plus.GPXDatabase.GpxDataItem;
 import net.osmand.plus.GPXUtilities.GPXFile;
 import net.osmand.plus.GPXUtilities.GPXTrackAnalysis;
 import net.osmand.plus.GPXUtilities.Route;
 import net.osmand.plus.GPXUtilities.Track;
 import net.osmand.plus.GPXUtilities.TrkSegment;
 import net.osmand.plus.GPXUtilities.WptPt;
-import net.osmand.plus.GPXDatabase.GpxDataItem;
+import net.osmand.plus.MapMarkersHelper.MarkersSyncGroup;
 import net.osmand.plus.OsmandSettings.MetricsConstants;
 import net.osmand.plus.activities.SavingTrackHelper;
 import net.osmand.plus.helpers.GpxUiHelper;
@@ -491,18 +492,38 @@ public class GpxSelectionHelper {
 
 	public void clearPoints(GPXFile gpxFile) {
 		gpxFile.clearPoints();
+		syncGpx(gpxFile);
 	}
 
 	public void addPoint(WptPt point, GPXFile gpxFile) {
 		gpxFile.addPoint(point);
+		syncGpx(gpxFile);
 	}
 
 	public void addPoints(Collection<? extends WptPt> collection, GPXFile gpxFile) {
 		gpxFile.addPoints(collection);
+		syncGpx(gpxFile);
 	}
 
 	public boolean removePoint(WptPt point, GPXFile gpxFile) {
-		return gpxFile.removePoint(point);
+		boolean res = gpxFile.removePoint(point);
+		syncGpx(gpxFile);
+		return res;
+	}
+
+	private void syncGpx(GPXFile gpxFile) {
+		File gpx = new File(gpxFile.path);
+		if (gpx.exists()) {
+			app.getMapMarkersHelper().syncGroup(new MarkersSyncGroup(gpx.getAbsolutePath(), trimExtension(gpx.getName()), MarkersSyncGroup.GPX_TYPE));
+		}
+	}
+
+	private String trimExtension(String src) {
+		int index = src.lastIndexOf('.');
+		if (index != -1) {
+			return src.substring(0, index);
+		}
+		return src;
 	}
 
 

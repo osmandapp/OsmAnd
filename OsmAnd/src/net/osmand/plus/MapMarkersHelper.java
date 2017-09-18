@@ -338,12 +338,12 @@ public class MapMarkersHelper {
 		List<MapMarker> dbMarkers = markersDbHelper.getMarkersFromGroup(group);
 
 		if (group.getType() == MarkersSyncGroup.FAVORITES_TYPE) {
-			FavouritesDbHelper.FavoriteGroup favGroup = ctx.getFavorites().getGroup(group.name);
+			FavouritesDbHelper.FavoriteGroup favGroup = ctx.getFavorites().getGroup(group.getName());
 			if (favGroup == null) {
 				return;
 			}
 			if (!favGroup.visible) {
-				removeActiveMarkersFromSyncGroup(group.id);
+				removeActiveMarkersFromSyncGroup(group.getId());
 				return;
 			}
 
@@ -367,6 +367,7 @@ public class MapMarkersHelper {
 				gpx = gpxHelper.getSelectedFileByPath(group.getId()).getGpxFile();
 			}
 			if (gpx == null) {
+				removeActiveMarkersFromSyncGroup(group.getId());
 				return;
 			}
 
