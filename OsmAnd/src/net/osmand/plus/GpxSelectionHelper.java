@@ -5,6 +5,7 @@ import android.graphics.Matrix;
 import android.support.annotation.NonNull;
 import android.support.v4.content.ContextCompat;
 
+import net.osmand.AndroidUtils;
 import net.osmand.IProgress;
 import net.osmand.plus.GPXDatabase.GpxDataItem;
 import net.osmand.plus.GPXUtilities.GPXFile;
@@ -506,7 +507,7 @@ public class GpxSelectionHelper {
 	}
 
 	public boolean removePoint(WptPt point, GPXFile gpxFile) {
-		boolean res = gpxFile.removePoint(point);
+		boolean res = gpxFile.deleteWptPt(point);
 		syncGpx(gpxFile);
 		return res;
 	}
@@ -514,16 +515,9 @@ public class GpxSelectionHelper {
 	private void syncGpx(GPXFile gpxFile) {
 		File gpx = new File(gpxFile.path);
 		if (gpx.exists()) {
-			app.getMapMarkersHelper().syncGroup(new MarkersSyncGroup(gpx.getAbsolutePath(), trimExtension(gpx.getName()), MarkersSyncGroup.GPX_TYPE));
+			app.getMapMarkersHelper().syncGroup(new MarkersSyncGroup(gpx.getAbsolutePath(),
+					AndroidUtils.trimExtension(gpx.getName()), MarkersSyncGroup.GPX_TYPE));
 		}
-	}
-
-	private String trimExtension(String src) {
-		int index = src.lastIndexOf('.');
-		if (index != -1) {
-			return src.substring(0, index);
-		}
-		return src;
 	}
 
 
