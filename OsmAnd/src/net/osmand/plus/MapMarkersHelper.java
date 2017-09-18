@@ -1,6 +1,7 @@
 package net.osmand.plus;
 
 import android.content.Context;
+import android.graphics.Color;
 import android.support.annotation.NonNull;
 import android.support.annotation.Nullable;
 import android.text.format.DateFormat;
@@ -135,13 +136,13 @@ public class MapMarkersHelper {
 		}
 
 		public static int[] colors = new int[]{
-				R.color.marker_blue,
-				R.color.marker_green,
-				R.color.marker_orange,
-				R.color.marker_red,
-				R.color.marker_yellow,
-				R.color.marker_teal,
-				R.color.marker_purple,
+				Color.rgb(33, 150, 243), // R.color.marker_blue
+				Color.rgb(115, 184, 37), // R.color.marker_green
+				Color.rgb(255, 152, 0),  // R.color.marker_orange
+				Color.rgb(229, 57, 53),  // R.color.marker_red
+				Color.rgb(253, 216, 53), // R.color.marker_yellow
+				Color.rgb(38, 166, 154), // R.color.marker_teal
+				Color.rgb(171, 71, 188)  //R.color.marker_purple
 		};
 
 		public static int getColorId(int colorIndex) {
