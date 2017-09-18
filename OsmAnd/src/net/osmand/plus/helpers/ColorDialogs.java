@@ -3,6 +3,7 @@ package net.osmand.plus.helpers;
 import android.app.Activity;
 import android.content.Context;
 import android.content.res.Resources;
+import android.graphics.Color;
 import android.graphics.PorterDuff;
 import android.graphics.drawable.Drawable;
 import android.util.TypedValue;
@@ -38,7 +39,7 @@ public class ColorDialogs {
 			R.string.rendering_value_pink_name,
 			R.string.rendering_value_brown_name
 	};
-	
+
 	public static int[] pallette = new int[] {
 			0xb4d00d0d,
 			0xb4ff5020,
@@ -65,33 +66,41 @@ public class ColorDialogs {
 			"brown"
 	};
 
-	public static int getCorrespondingMarkerColorIndex(int paletteColor) {
-		switch (paletteColor) {
-			case 0xb4d00d0d:     // red
-				return 3;        // R.color.marker_red
+	private static double getDistanceBetweenColors(int color1, int color2) {
+		double distance;
 
-			case 0xb4ff5020:     // orange
-				return 2;        // R.color.marker_orange
+		double r1 = Color.red(color1);
+		double g1 = Color.green(color1);
+		double b1 = Color.blue(color1);
+		double a1 = Color.alpha(color1);
 
-			case 0xb4eeee10:     // yellow
-				return 4;        //R.color.marker_yellow
+		double r2 = Color.red(color2);
+		double g2 = Color.green(color2);
+		double b2 = Color.blue(color2);
+		double a2 = Color.alpha(color2);
 
-			case 0xb488e030:     // lightgreen
-			case 0xb400842b:     // green
-				return 1;        // R.color.marker_green
+		distance = Math.sqrt(Math.pow(r1 - r2, 2) + Math.pow(g1 - g2, 2) + Math.pow(b1 - b2, 2));
 
-			case 0xb410c0f0:     // lightblue
-			case 0xb41010a0:     // blue
-				return 0;        //R.color.marker_blue
-
-			case 0xb4a71de1:     // purple
-			case 0xb4e044bb:     // pink
-				return 6;        // R.color.marker_purple
-
-			case 0xb48e2512:     // brown
-			default:
-				return 5;        //R.color.marker_teal
+		if (distance == 0) {
+			distance = Math.sqrt(Math.pow(a1 - a2, 2));
 		}
+
+		return distance;
+	}
+
+	public static int getNearestColor(int source, int[] colors) {
+		double distance = Double.MAX_VALUE;
+
+		int index = 0;
+		for (int i = 0; i < colors.length; i++) {
+			double newDistance = getDistanceBetweenColors(source, colors[i]);
+			if (newDistance < distance) {
+				index = i;
+				distance = newDistance;
+			}
+		}
+
+		return colors[index];
 	}
 
 	public static int getColorByTag(String tag) {
@@ -105,7 +114,7 @@ public class ColorDialogs {
 		return 0;
 	}
 
-	public static void setupColorSpinner(Context ctx, int selectedColor, final Spinner colorSpinner, 
+	public static void setupColorSpinner(Context ctx, int selectedColor, final Spinner colorSpinner,
 			final TIntArrayList colors) {
 		 OnItemSelectedListener listener = new OnItemSelectedListener() {
 
@@ -121,7 +130,7 @@ public class ColorDialogs {
 			@Override
 			public void onNothingSelected(AdapterView<?> parent) {
 			}
-			
+
 		};
 		colors.add(pallette);
         List<String> colorNames= new ArrayList<String>();
@@ -203,7 +212,7 @@ public class ColorDialogs {
 	public static int getRandomColor() {
 		return pallette[new Random().nextInt(pallette.length)];
 	}
-	
+
 	public static String colorToString(int color) {
 		String c = "";
 		if ((0xFF000000 & color) == 0xFF000000) {

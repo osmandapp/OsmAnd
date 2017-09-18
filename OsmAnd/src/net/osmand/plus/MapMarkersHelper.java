@@ -134,34 +134,28 @@ public class MapMarkersHelper {
 			return result;
 		}
 
+		public static int[] colors = new int[]{
+				R.color.marker_blue,
+				R.color.marker_green,
+				R.color.marker_orange,
+				R.color.marker_red,
+				R.color.marker_yellow,
+				R.color.marker_teal,
+				R.color.marker_purple,
+		};
+
 		public static int getColorId(int colorIndex) {
-			int colorId;
-			switch (colorIndex) {
-				case 0:
-					colorId = R.color.marker_blue;
-					break;
-				case 1:
-					colorId = R.color.marker_green;
-					break;
-				case 2:
-					colorId = R.color.marker_orange;
-					break;
-				case 3:
-					colorId = R.color.marker_red;
-					break;
-				case 4:
-					colorId = R.color.marker_yellow;
-					break;
-				case 5:
-					colorId = R.color.marker_teal;
-					break;
-				case 6:
-					colorId = R.color.marker_purple;
-					break;
-				default:
-					colorId = R.color.marker_blue;
+			return (colorIndex >= 0 && colorIndex < colors.length) ? colors[colorIndex] : colors[0];
+		}
+
+		public static int getColorIndex(int colorId) {
+			for (int i = 0; i < colors.length; i++) {
+				int color = colors[i];
+				if (color == colorId) {
+					return i;
+				}
 			}
-			return colorId;
+			return -1;
 		}
 	}
 
@@ -393,13 +387,13 @@ public class MapMarkersHelper {
 		for (MapMarker marker : markers) {
 			if (marker.id.equals(group.getId() + name)) {
 				exists = true;
-				boolean updateColor = group.getColor() != -1
-						&& marker.colorIndex != ColorDialogs.getCorrespondingMarkerColorIndex(group.getColor());
+				int colorIndex = MapMarker.getColorIndex(ColorDialogs.getNearestColor(group.getColor(), MapMarker.colors));
+				boolean updateColor = group.getColor() != -1 && marker.colorIndex != colorIndex;
 				if (!marker.history && (!marker.point.equals(latLon) || updateColor)) {
 					for (MapMarker m : mapMarkers) {
 						if (m.id.equals(marker.id)) {
 							m.point = latLon;
-							m.colorIndex = ColorDialogs.getCorrespondingMarkerColorIndex(group.getColor());
+							m.colorIndex = colorIndex;
 							updateMapMarker(m, true);
 							break;
 						}
@@ -617,7 +611,7 @@ public class MapMarkersHelper {
 	private void addMarkers(List<LatLon> points, List<PointDescription> historyNames, @Nullable MarkersSyncGroup group) {
 		if (points.size() > 0) {
 			boolean randomColor = group == null || group.getColor() == -1;
-			int colorIndex = randomColor ? -1 : ColorDialogs.getCorrespondingMarkerColorIndex(group.getColor());
+			int colorIndex = randomColor ? -1 : MapMarker.getColorIndex(ColorDialogs.getNearestColor(group.getColor(), MapMarker.colors));
 			for (int i = 0; i < points.size(); i++) {
 				LatLon point = points.get(i);
 				PointDescription historyName = historyNames.get(i);
