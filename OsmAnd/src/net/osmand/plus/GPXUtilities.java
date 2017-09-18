@@ -775,18 +775,17 @@ public class GPXUtilities {
 
 		void clearPoints() {
 			points.clear();
+			modifiedTime = System.currentTimeMillis();
 		}
 
 		public void addPoint(WptPt point) {
 			points.add(point);
+			modifiedTime = System.currentTimeMillis();
 		}
 
 		void addPoints(Collection<? extends WptPt> collection) {
 			points.addAll(collection);
-		}
-
-		public boolean removePoint(WptPt point) {
-			return points.remove(point);
+			modifiedTime = System.currentTimeMillis();
 		}
 
 		public boolean isCloudmadeRouteFile() {

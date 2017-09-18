@@ -609,7 +609,8 @@ public class TrackPointFragment extends OsmandExpandableListFragment {
 					}
 				}
 				File gpx = getGpxDataItem().getFile();
-				MarkersSyncGroup syncGroup = new MarkersSyncGroup(gpx.getAbsolutePath(), trimExtension(gpx.getName()), MarkersSyncGroup.GPX_TYPE);
+				MarkersSyncGroup syncGroup = new MarkersSyncGroup(gpx.getAbsolutePath(),
+						AndroidUtils.trimExtension(gpx.getName()), MarkersSyncGroup.GPX_TYPE);
 				markersHelper.addMarkersSyncGroup(syncGroup);
 				markersHelper.addMapMarkers(points, names, syncGroup);
 				MapActivity.launchMapActivityMoveToTop(getActivity());
@@ -628,14 +629,6 @@ public class TrackPointFragment extends OsmandExpandableListFragment {
 				IntermediatePointsDialog.openIntermediatePointsDialog(getActivity(), getMyApplication(), true);
 			}
 		}
-	}
-
-	private String trimExtension(String src) {
-		int index = src.lastIndexOf('.');
-		if (index != -1) {
-			return src.substring(0, index);
-		}
-		return src;
 	}
 
 	private void enterFavoritesMode() {
