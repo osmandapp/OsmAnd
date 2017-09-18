@@ -3057,7 +3057,7 @@
 <string name="poi_length">Longitud</string>
 
 <string name="poi_fuel_type">Tipo de combustible</string>
-	<string name="poi_fuel_avia_type">Tipo de combustible (aviones)</string>
+	<string name="poi_fuel_avia_type">Tipo</string>
 	<string name="poi_payment_type">Forma de pago</string>
 	<string name="poi_payment_fuel_type">Tarjetas de combustible</string>
 	<string name="poi_additional_type">Adicional</string>
@@ -3521,5 +3521,14 @@
 	<string name="poi_boat_canoe_rental_rental_no">Canoas: no</string>
 
 <string name="poi_network">Red</string>
+
+<string name="poi_government_archive">Archivos gubernamentales</string>
+	<string name="poi_government_ministry">Ministerio</string>
+	<string name="poi_government_public_service">Servicio público</string>
+	<string name="poi_government_social_security">Seguridad social</string>
+	<string name="poi_government_social_services">Servicios sociales</string>
+	<string name="poi_government_treasury">Hacienda pública</string>
+	<string name="poi_government_transportation">Institución de transporte</string>
+	<string name="poi_government_legislative">Institución legislativa</string>
 
 </resources>

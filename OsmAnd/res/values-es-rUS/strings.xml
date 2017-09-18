@@ -766,8 +766,8 @@ Se aprecia la participación activa, y las contribuciones pueden hacerse directa
     <string name="av_def_action_choose">Elegir a petición</string>
     <string name="av_def_action_video">Grabar video</string>
     <string name="av_def_action_audio">Grabar audio</string>
-    <string name="av_widget_action_descr">Elige la acción predeterminada</string>
-    <string name="av_widget_action">Acción predeterminada</string>
+    <string name="av_widget_action_descr">Elige la acción predefinida</string>
+    <string name="av_widget_action">Acción predefinida</string>
     <string name="av_video_format_descr">Elige el formato de salida del video</string>
     <string name="av_video_format">Formato de salida del video</string>
     <string name="av_use_external_recorder_descr">Usa la grabadora de video del sistema</string>
@@ -2740,7 +2740,23 @@ Proporciona un código completo</string>
     <string name="do_not_use_animations_descr">Desactiva las animaciones en la aplicación</string>
     <string name="move_all_to_history">Mover todo al historial</string>
     <string name="build_route">Crear ruta</string>
-    <string name="show_direction">Mostrar dirección</string>
+    <string name="show_direction">Indicación de distancia</string>
     <string name="sort_by">Ordenar por</string>
     <string name="marker_options">Opciones del marcador</string>
+    <string name="map_orientation_change_in_accordance_with_speed">Umbral de orientación del mapa</string>
+    <string name="map_orientation_change_in_accordance_with_speed_descr">Elije la velocidad a partir de la cual la orientación del mapa cambia de «Dirección del movimiento» a «Brújula»</string>
+    <string name="all_markers_moved_to_history">Todos los marcadores del mapa movidos al historial</string>
+    <string name="marker_moved_to_history">Marcador del mapa movido al historial</string>
+    <string name="marker_moved_to_active">Marcador del mapa movido a los activos</string>
+    <string name="shared_string_list">Lista</string>
+    <string name="shared_string_groups">Grupos</string>
+    <string name="passed">Pasado: %1$s</string>
+    <string name="make_active">Activar</string>
+    <string name="today">Hoy</string>
+    <string name="yesterday">Ayer</string>
+    <string name="last_seven_days">Últimos 7 días</string>
+    <string name="this_year">Este año</string>
+    <string name="widget">Control</string>
+    <string name="top_bar">Barra superior</string>
+    <string name="marker_show_distance_descr">Elige cómo se indica la distancia y dirección a los marcadores del mapa en la pantalla del mapa:</string>
     </resources>

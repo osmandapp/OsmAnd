@@ -38,7 +38,7 @@
                 android:paddingLeft="@dimen/bottom_sheet_content_padding"
                 android:paddingRight="@dimen/bottom_sheet_content_padding"
                 android:paddingStart="@dimen/bottom_sheet_content_padding"
-                android:text="@string/measurement_tool_save_as_new_track_descr"
+                android:text="@string/marker_show_distance_descr"
                 android:textColor="?android:textColorSecondary"
                 android:textSize="@dimen/default_desc_text_size"/>
 
@@ -76,7 +76,7 @@
                         android:layout_marginLeft="@dimen/bottom_sheet_image_text_margin_start"
                         android:layout_marginStart="@dimen/bottom_sheet_image_text_margin_start"
                         android:layout_marginTop="@dimen/bottom_sheet_content_margin_small"
-                        android:text="@string/top_bar"
+                        android:text="@string/shared_string_topbar"
                         android:textColor="?android:textColorSecondary"
                         android:textSize="@dimen/default_split_segments_sub"/>
                 </RelativeLayout>
@@ -108,7 +108,7 @@
                         android:layout_marginLeft="@dimen/bottom_sheet_image_text_margin_start"
                         android:layout_marginStart="@dimen/bottom_sheet_image_text_margin_start"
                         android:layout_marginTop="@dimen/bottom_sheet_content_margin_small"
-                        android:text="@string/widget"
+                        android:text="@string/shared_string_widgets"
                         android:textColor="?android:textColorSecondary"
                         android:textSize="@dimen/default_split_segments_sub"/>
                 </RelativeLayout>
@@ -144,7 +144,7 @@
                     android:layout_toEndOf="@id/top_bar_icon"
                     android:layout_toRightOf="@id/top_bar_icon"
                     android:maxLines="1"
-                    android:text="@string/top_bar"
+                    android:text="@string/shared_string_topbar"
                     android:textAppearance="@style/TextAppearance.ListItemTitle"/>
 
                 <RadioButton
@@ -188,7 +188,7 @@
                     android:layout_toEndOf="@id/widget_icon"
                     android:layout_toRightOf="@id/widget_icon"
                     android:maxLines="1"
-                    android:text="@string/widget"
+                    android:text="@string/shared_string_widgets"
                     android:textAppearance="@style/TextAppearance.ListItemTitle"/>
 
                 <RadioButton

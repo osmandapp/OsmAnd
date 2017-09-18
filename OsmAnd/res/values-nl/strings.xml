@@ -2881,4 +2881,17 @@ Van bijna alle landen is een kaart te downloaden: van Afghanistan tot Zimbabwe, 
     <string name="add_point_before">Punt ervoor toevoegen</string>
     <string name="add_point_after">Punt erna toevoegen</string>
     <string name="shared_string_options">Opties</string>
+    <string name="today">Vandaag</string>
+    <string name="yesterday">Gisteren</string>
+    <string name="last_seven_days">Afgelopen 7 dagen</string>
+    <string name="this_year">Dit jaar</string>
+    <string name="choose_navigation_type">Selecteer navigatieprofiel</string>
+    <string name="none_point_error">Voeg minstens een punt toe.</string>
+    <string name="enter_gpx_name">GPX bestandsnaam:</string>
+    <string name="show_on_map_after_saving">Toon op kaart na opslaan</string>
+    <string name="measurement_tool">Meet afstand</string>
+    <string name="quick_action_start_stop_navigation">Start/stop navigatie</string>
+    <string name="average">Gemiddeld</string>
+    <string name="of">%1$d van de %2$d</string>
+    <string name="retry">Probeer opnieuw</string>
     </resources>

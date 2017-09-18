@@ -1567,7 +1567,7 @@
     <string name="app_modes_choose_descr">Виберіть профілі, видимі в застосунку</string>
     <string name="app_modes_choose">Профілі застосунку</string>
 	<string name="map_widget_map_rendering">Візуалізація мапи</string>
-    <string name="app_mode_hiking">Піший туризм</string>
+    <string name="app_mode_hiking">Піші прогулянки</string>
     <string name="app_mode_motorcycle">Мотоцикл</string>
     <string name="app_mode_boat">Човен</string>
     <string name="app_mode_aircraft">Літак</string>
@@ -2994,9 +2994,23 @@
     <string name="exit_without_saving">Вийти без збереження?</string>
     <string name="move_all_to_history">Перемістити усе в історію</string>
     <string name="build_route">Побудувати маршрут</string>
-    <string name="show_direction">Показати напрямок</string>
+    <string name="show_direction">Відображення відстані</string>
     <string name="sort_by">Сортувати за</string>
     <string name="marker_options">Параметри маркера</string>
     <string name="do_not_use_animations">Не застосовувати анімацію</string>
     <string name="do_not_use_animations_descr">Відключення анімації в програмі</string>
+    <string name="marker_show_distance_descr">Вибрати як показувати відстань і напрямок до маркерів на екрані мапи:</string>
+    <string name="map_orientation_change_in_accordance_with_speed">Поріг орієнтації мапи</string>
+    <string name="map_orientation_change_in_accordance_with_speed_descr">Виберіть нижче, на якій швидкості орієнтація мапи перемикається зі „за напрямком руху“ на „за компасом“</string>
+    <string name="all_markers_moved_to_history">Усі маркери перенесені в історію</string>
+    <string name="marker_moved_to_history">Маркер мапи перенесений в історію</string>
+    <string name="marker_moved_to_active">Маркер мапи став активним</string>
+    <string name="shared_string_list">Список</string>
+    <string name="shared_string_groups">Групи</string>
+    <string name="passed">Пройшло: %1$s</string>
+    <string name="make_active">Зробити активним</string>
+    <string name="today">Сьогодні</string>
+    <string name="yesterday">Вчора</string>
+    <string name="last_seven_days">Останні 7 днів</string>
+    <string name="this_year">Цього року</string>
     </resources>

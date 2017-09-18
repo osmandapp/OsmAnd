@@ -3506,4 +3506,13 @@
 
 <string name="poi_network">Sieć</string>
 
+<string name="poi_government_archive">Archiwum</string>
+	<string name="poi_government_ministry">Ministerstwo</string>
+	<string name="poi_government_public_service">Placówka publiczna</string>
+	<string name="poi_government_social_security">Bezpieczeństwo socjalne</string>
+	<string name="poi_government_social_services">Usługi socjalne</string>
+	<string name="poi_government_treasury">Skarbiec</string>
+	<string name="poi_government_transportation">Instytucja transportowa</string>
+	<string name="poi_government_legislative">Instytucja ustawodawcza</string>
+
 </resources>

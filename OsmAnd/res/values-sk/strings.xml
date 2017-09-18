@@ -2862,4 +2862,19 @@ Zodpovedá oblasti: %1$s x %2$s</string>
     <string name="show_direction">Zobraziť smer</string>
     <string name="sort_by">Zotriediť podľa</string>
     <string name="marker_options">Možnosti značiek</string>
+    <string name="map_orientation_change_in_accordance_with_speed">Zmena orientácie mapy podľa rýchlosti</string>
+    <string name="map_orientation_change_in_accordance_with_speed_descr">Pri nízkej rýchlosti použiť na zistenie orientácie mapy zabudovaný kompas namiesto smeru pohybu</string>
+    <string name="all_markers_moved_to_history">Všetky značky presunuté do histórie</string>
+    <string name="marker_moved_to_history">Značka presunutá do histórie</string>
+    <string name="marker_moved_to_active">Značka presunutá do archívu</string>
+    <string name="shared_string_list">Zoznam</string>
+    <string name="shared_string_groups">Skupiny</string>
+    <string name="passed">Prešli sme okolo: %1$s</string>
+    <string name="make_active">Aktivovať</string>
+    <string name="today">Dnes</string>
+    <string name="yesterday">Včera</string>
+    <string name="last_seven_days">Posledných 7 dní</string>
+    <string name="this_year">Tento rok</string>
+    <string name="widget">Nástroj</string>
+    <string name="top_bar">Horná lišta</string>
     </resources>
