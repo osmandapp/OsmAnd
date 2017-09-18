@@ -421,12 +421,20 @@ public class PoiUIFilter implements SearchPoiTypeFilter, Comparable<PoiUIFilter>
 	@Override
 	public ResultMatcher<Amenity> wrapResultMatcher(final ResultMatcher<Amenity> matcher) {
 		final AmenityNameFilter nm = getNameFilter(filterByName);
+		final Set<String> searchedPois = new TreeSet<>();
 		return new ResultMatcher<Amenity>() {
 
 			@Override
 			public boolean publish(Amenity a) {
 				if (nm.accept(a)) {
 					if (matcher == null || matcher.publish(a)) {
+						String poiID = a.getType().getKeyName() + "_" + a.getId();
+						if (!searchedPois.add(poiID)) {
+							return false;
+						}
+						if (a.isClosed()) {
+							return false;
+						}
 						return true;
 					}
 				}

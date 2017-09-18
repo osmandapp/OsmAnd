@@ -60,6 +60,7 @@ import java.text.MessageFormat;
 import java.util.ArrayList;
 import java.util.Collection;
 import java.util.Collections;
+import java.util.Comparator;
 import java.util.Iterator;
 import java.util.LinkedHashMap;
 import java.util.List;
@@ -715,7 +716,10 @@ public class ResourceManager {
 				int left31 = MapUtils.get31TileNumberX(leftLongitude);
 				int bottom31 = MapUtils.get31TileNumberY(bottomLatitude);
 				int right31 = MapUtils.get31TileNumberX(rightLongitude);
-				for (AmenityIndexRepository index : amenityRepositories.values()) {
+				List<String> fileNames = new ArrayList<String>(amenityRepositories.keySet());
+				Collections.sort(fileNames, Algorithms.getStringVersionComparator());
+				for (String name : fileNames) {
+					AmenityIndexRepository index = amenityRepositories.get(name);
 					if (matcher != null && matcher.isCancelled()) {
 						searchAmenitiesInProgress = false;
 						break;
@@ -734,8 +738,8 @@ public class ResourceManager {
 		}
 		return amenities;
 	}
-	
-	public List<Amenity> searchAmenitiesOnThePath(List<Location> locations, double radius, SearchPoiTypeFilter filter,
+
+    public List<Amenity> searchAmenitiesOnThePath(List<Location> locations, double radius, SearchPoiTypeFilter filter,
 			ResultMatcher<Amenity> matcher) {
 		searchAmenitiesInProgress = true;
 		final List<Amenity> amenities = new ArrayList<Amenity>();

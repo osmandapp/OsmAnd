@@ -2,6 +2,7 @@ package net.osmand.util;
 
 import net.osmand.IProgress;
 import net.osmand.PlatformUtil;
+import net.osmand.binary.BinaryMapIndexReader;
 
 import org.apache.commons.logging.Log;
 
@@ -113,28 +114,38 @@ public class Algorithms {
 				return -simplifyFileName(o1.getName()).compareTo(simplifyFileName(o2.getName()));
 			}
 
-			public String simplifyFileName(String fn) {
-				String lc = fn.toLowerCase();
-				if (lc.contains(".")) {
-					lc = lc.substring(0, lc.indexOf("."));
-				}
-				if (lc.endsWith("_2")) {
-					lc = lc.substring(0, lc.length() - "_2".length());
-				}
-				boolean hasTimestampEnd = false;
-				for (int i = 0; i < lc.length(); i++) {
-					if (lc.charAt(i) >= '0' && lc.charAt(i) <= '9') {
-						hasTimestampEnd = true;
-						break;
-					}
-				}
-				if (!hasTimestampEnd) {
-					lc += "_00_00_00";
-				}
-				return lc;
-			}
 		};
 	}
+
+    private static String simplifyFileName(String fn) {
+        String lc = fn.toLowerCase();
+        if (lc.contains(".")) {
+            lc = lc.substring(0, lc.indexOf("."));
+        }
+        if (lc.endsWith("_2")) {
+            lc = lc.substring(0, lc.length() - "_2".length());
+        }
+        boolean hasTimestampEnd = false;
+        for (int i = 0; i < lc.length(); i++) {
+            if (lc.charAt(i) >= '0' && lc.charAt(i) <= '9') {
+                hasTimestampEnd = true;
+                break;
+            }
+        }
+        if (!hasTimestampEnd) {
+            lc += "_00_00_00";
+        }
+        return lc;
+    }
+
+    public static Comparator<String> getStringVersionComparator() {
+        return new Comparator<String>() {
+            @Override
+            public int compare(String o1, String o2) {
+                return -simplifyFileName(o1).compareTo(simplifyFileName(o2));
+            }
+        };
+    }
 
 	private static final char CHAR_TOSPLIT = 0x01;
 
