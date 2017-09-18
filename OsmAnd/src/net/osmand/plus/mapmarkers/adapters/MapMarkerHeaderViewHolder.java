@@ -7,12 +7,12 @@ import android.widget.TextView;
 
 import net.osmand.plus.R;
 
-public class MapMarkerDateViewHolder extends RecyclerView.ViewHolder {
+public class MapMarkerHeaderViewHolder extends RecyclerView.ViewHolder {
 
 	final TextView date;
 	final ImageButton optionsBtn;
 
-	public MapMarkerDateViewHolder(View itemView) {
+	public MapMarkerHeaderViewHolder(View itemView) {
 		super(itemView);
 		date = itemView.findViewById(R.id.date_title);
 		optionsBtn = itemView.findViewById(R.id.date_options_button);

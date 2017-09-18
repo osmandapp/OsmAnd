@@ -27,9 +27,11 @@ import java.util.Collections;
 import java.util.Comparator;
 import java.util.Date;
 import java.util.Iterator;
+import java.util.LinkedHashMap;
 import java.util.LinkedList;
 import java.util.List;
 import java.util.Locale;
+import java.util.Map;
 
 import static net.osmand.data.PointDescription.POINT_TYPE_MAP_MARKER;
 
@@ -262,6 +264,55 @@ public class MapMarkersHelper {
 				markersDbHelper.changeActiveMarkerPosition(tail, null);
 			}
 		}
+	}
+
+	public List<MapMarker> getMarkersSortedByGroup() {
+		Map<String, MapMarkerGroup> groupsMap = new LinkedHashMap<>();
+		List<MapMarker> noGroup = new ArrayList<>();
+		for (MapMarker marker : mapMarkers) {
+			String groupName = marker.groupName;
+			if (groupName == null) {
+				noGroup.add(marker);
+			} else {
+				MapMarkerGroup group = groupsMap.get(groupName);
+				if (group == null) {
+					group = new MapMarkerGroup(groupName, marker.creationDate);
+					groupsMap.put(groupName, group);
+				} else {
+					long markerCreationDate = marker.creationDate;
+					if (markerCreationDate < group.getCreationDate()) {
+						group.setCreationDate(markerCreationDate);
+					}
+				}
+				group.getMapMarkers().add(marker);
+			}
+		}
+		List<MapMarkerGroup> groups = new ArrayList<>(groupsMap.values());
+		sortGroups(groups);
+
+		List<MapMarker> markers = new ArrayList<>();
+		markers.addAll(noGroup);
+		for (MapMarkerGroup group : groups) {
+			markers.addAll(group.getMapMarkers());
+		}
+		return markers;
+	}
+
+	private void sortGroups(List<MapMarkerGroup> groups) {
+		Collections.sort(groups, new Comparator<MapMarkerGroup>() {
+			@Override
+			public int compare(MapMarkerGroup group1, MapMarkerGroup group2) {
+				long t1 = group1.creationDate;
+				long t2 = group2.creationDate;
+				if (t1 > t2) {
+					return -1;
+				} else if (t1 == t2) {
+					return 0;
+				} else {
+					return 1;
+				}
+			}
+		});
 	}
 
 	private void sortHistoryMarkers() {
@@ -790,5 +841,40 @@ public class MapMarkersHelper {
 			file.addPoint(wpt);
 		}
 		GPXUtilities.writeGpxFile(fout, file, ctx);
+	}
+
+	public static class MapMarkerGroup {
+		private String name;
+		private List<MapMarker> mapMarkers = new ArrayList<>();
+		private long creationDate;
+
+		public MapMarkerGroup(String name, long creationDate) {
+			this.name = name;
+			this.creationDate = creationDate;
+		}
+
+		public String getName() {
+			return name;
+		}
+
+		public void setName(String name) {
+			this.name = name;
+		}
+
+		public List<MapMarker> getMapMarkers() {
+			return mapMarkers;
+		}
+
+		public void setMapMarkers(List<MapMarker> mapMarkers) {
+			this.mapMarkers = mapMarkers;
+		}
+
+		public long getCreationDate() {
+			return creationDate;
+		}
+
+		public void setCreationDate(long creationDate) {
+			this.creationDate = creationDate;
+		}
 	}
 }
