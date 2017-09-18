@@ -10,9 +10,11 @@ import net.osmand.data.FavouritePoint;
 import net.osmand.data.LatLon;
 import net.osmand.data.LocationPoint;
 import net.osmand.data.PointDescription;
+import net.osmand.plus.FavouritesDbHelper.FavoriteGroup;
 import net.osmand.plus.GPXUtilities.GPXFile;
 import net.osmand.plus.GPXUtilities.WptPt;
 import net.osmand.plus.GpxSelectionHelper.SelectedGpxFile;
+import net.osmand.plus.helpers.ColorDialogs;
 import net.osmand.plus.mapmarkers.MapMarkersDbHelper;
 import net.osmand.util.Algorithms;
 import net.osmand.util.MapUtils;
@@ -171,11 +173,20 @@ public class MapMarkersHelper {
 		private String id;
 		private String name;
 		private int type;
+		private int color;
+
+		public MarkersSyncGroup(@NonNull String id, @NonNull String name, int type, int color) {
+			this.id = id;
+			this.name = name;
+			this.type = type;
+			this.color = color;
+		}
 
 		public MarkersSyncGroup(@NonNull String id, @NonNull String name, int type) {
 			this.id = id;
 			this.name = name;
 			this.type = type;
+			this.color = -1;
 		}
 
 		public String getId() {
@@ -188,6 +199,10 @@ public class MapMarkersHelper {
 
 		public int getType() {
 			return type;
+		}
+
+		public int getColor() {
+			return color;
 		}
 	}
 
@@ -335,7 +350,7 @@ public class MapMarkersHelper {
 		List<MapMarker> dbMarkers = markersDbHelper.getMarkersFromGroup(group);
 
 		if (group.getType() == MarkersSyncGroup.FAVORITES_TYPE) {
-			FavouritesDbHelper.FavoriteGroup favGroup = ctx.getFavorites().getGroup(group.getName());
+			FavoriteGroup favGroup = ctx.getFavorites().getGroup(group.getName());
 			if (favGroup == null) {
 				return;
 			}
@@ -378,10 +393,13 @@ public class MapMarkersHelper {
 		for (MapMarker marker : markers) {
 			if (marker.id.equals(group.getId() + name)) {
 				exists = true;
-				if (!marker.history && !marker.point.equals(latLon)) {
+				boolean updateColor = group.getColor() != -1
+						&& marker.colorIndex != ColorDialogs.getCorrespondingMarkerColorIndex(group.getColor());
+				if (!marker.history && (!marker.point.equals(latLon) || updateColor)) {
 					for (MapMarker m : mapMarkers) {
 						if (m.id.equals(marker.id)) {
 							m.point = latLon;
+							m.colorIndex = ColorDialogs.getCorrespondingMarkerColorIndex(group.getColor());
 							updateMapMarker(m, true);
 							break;
 						}
@@ -598,7 +616,8 @@ public class MapMarkersHelper {
 
 	private void addMarkers(List<LatLon> points, List<PointDescription> historyNames, @Nullable MarkersSyncGroup group) {
 		if (points.size() > 0) {
-			int colorIndex = -1;
+			boolean randomColor = group == null || group.getColor() == -1;
+			int colorIndex = randomColor ? -1 : ColorDialogs.getCorrespondingMarkerColorIndex(group.getColor());
 			for (int i = 0; i < points.size(); i++) {
 				LatLon point = points.get(i);
 				PointDescription historyName = historyNames.get(i);
@@ -611,14 +630,16 @@ public class MapMarkersHelper {
 				if (pointDescription.isLocation() && Algorithms.isEmpty(pointDescription.getName())) {
 					pointDescription.setName(PointDescription.getSearchAddressStr(ctx));
 				}
-				if (colorIndex == -1) {
-					if (mapMarkers.size() > 0) {
-						colorIndex = (mapMarkers.get(mapMarkers.size() - 1).colorIndex + 1) % MAP_MARKERS_COLORS_COUNT;
+				if (randomColor) {
+					if (colorIndex == -1) {
+						if (mapMarkers.size() > 0) {
+							colorIndex = (mapMarkers.get(mapMarkers.size() - 1).colorIndex + 1) % MAP_MARKERS_COLORS_COUNT;
+						} else {
+							colorIndex = 0;
+						}
 					} else {
-						colorIndex = 0;
+						colorIndex = (colorIndex + 1) % MAP_MARKERS_COLORS_COUNT;
 					}
-				} else {
-					colorIndex = (colorIndex + 1) % MAP_MARKERS_COLORS_COUNT;
 				}
 
 				MapMarker marker = new MapMarker(point, pointDescription, colorIndex, false, 0);

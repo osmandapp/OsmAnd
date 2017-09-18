@@ -176,7 +176,8 @@ public class EditFavoriteGroupDialogFragment extends BottomSheetDialogFragment {
 		});
 
 		final MapMarkersHelper markersHelper = getMyApplication().getMapMarkersHelper();
-		final MarkersSyncGroup syncGroup = new MarkersSyncGroup(group.name, group.name, MarkersSyncGroup.FAVORITES_TYPE);
+		final MarkersSyncGroup syncGroup =
+				new MarkersSyncGroup(group.name, group.name, MarkersSyncGroup.FAVORITES_TYPE, group.color);
 		boolean groupSyncedWithMarkers = markersHelper.isGroupSynced(syncGroup.getId());
 
 		View addToMarkersView = view.findViewById(R.id.add_to_markers_view);

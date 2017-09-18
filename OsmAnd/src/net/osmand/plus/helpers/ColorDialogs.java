@@ -1,14 +1,5 @@
 package net.osmand.plus.helpers;
 
-import gnu.trove.list.array.TIntArrayList;
-
-import java.util.ArrayList;
-import java.util.List;
-import java.util.Random;
-
-import net.osmand.plus.OsmandApplication;
-import net.osmand.plus.R;
-
 import android.app.Activity;
 import android.content.Context;
 import android.content.res.Resources;
@@ -17,12 +8,20 @@ import android.graphics.drawable.Drawable;
 import android.util.TypedValue;
 import android.view.View;
 import android.view.ViewGroup;
-import android.widget.AdapterView.OnItemSelectedListener;
 import android.widget.AdapterView;
+import android.widget.AdapterView.OnItemSelectedListener;
 import android.widget.ArrayAdapter;
-import android.widget.CheckedTextView;
 import android.widget.Spinner;
 import android.widget.TextView;
+
+import net.osmand.plus.OsmandApplication;
+import net.osmand.plus.R;
+
+import java.util.ArrayList;
+import java.util.List;
+import java.util.Random;
+
+import gnu.trove.list.array.TIntArrayList;
 
 import static android.util.TypedValue.COMPLEX_UNIT_DIP;
 
@@ -65,6 +64,35 @@ public class ColorDialogs {
 			"pink",
 			"brown"
 	};
+
+	public static int getCorrespondingMarkerColorIndex(int paletteColor) {
+		switch (paletteColor) {
+			case 0xb4d00d0d:     // red
+				return 3;        // R.color.marker_red
+
+			case 0xb4ff5020:     // orange
+				return 2;        // R.color.marker_orange
+
+			case 0xb4eeee10:     // yellow
+				return 4;        //R.color.marker_yellow
+
+			case 0xb488e030:     // lightgreen
+			case 0xb400842b:     // green
+				return 1;        // R.color.marker_green
+
+			case 0xb410c0f0:     // lightblue
+			case 0xb41010a0:     // blue
+				return 0;        //R.color.marker_blue
+
+			case 0xb4a71de1:     // purple
+			case 0xb4e044bb:     // pink
+				return 6;        // R.color.marker_purple
+
+			case 0xb48e2512:     // brown
+			default:
+				return 5;        //R.color.marker_teal
+		}
+	}
 
 	public static int getColorByTag(String tag) {
 		String t = tag.toLowerCase();
