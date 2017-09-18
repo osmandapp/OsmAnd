@@ -2902,4 +2902,18 @@ Copertura e qualità approssimativamente:
     <string name="show_direction">Mostra la direzione</string>
     <string name="sort_by">Ordina per</string>
     <string name="marker_options">Opzioni marcatori</string>
+    <string name="marker_show_distance_descr">Scegli come indicare la distanza e la direzione dei marcatori della mappa nella schermata della mappa:</string>
+    <string name="map_orientation_change_in_accordance_with_speed">Soglia di orientamento della mappa</string>
+    <string name="map_orientation_change_in_accordance_with_speed_descr">Selezionare la velocità sotto la quale l\'orientamento della mappa passa da \'Nella direzione del movimento\' a \'Con bussola\'</string>
+    <string name="all_markers_moved_to_history">Tutti i marcatori della mappa sono stati archiviati nella cronologia</string>
+    <string name="marker_moved_to_history">Marcatori della mappa spostati nella cronologia</string>
+    <string name="marker_moved_to_active">Marcatori della mappa spostati negli attivi</string>
+    <string name="shared_string_list">Lista</string>
+    <string name="shared_string_groups">Gruppi</string>
+    <string name="passed">Passato: %1$s</string>
+    <string name="make_active">Attiva</string>
+    <string name="today">Oggi</string>
+    <string name="yesterday">Ieri</string>
+    <string name="last_seven_days">Ultimi 7 giorni</string>
+    <string name="this_year">Anno in corso</string>
     </resources>
