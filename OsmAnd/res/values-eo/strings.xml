@@ -25,7 +25,7 @@
  Parto de enspezo revenos al la OSM-komunumo kaj estos pagita por iu ajn kontribuaĵo al OSM.
  Se vi ŝategas OsmAnd kaj OSM kaj vi volas subteni ilin, tio ĉi estas la plej bona kielo.</string>
     
-    <string name="select_map_marker">Elekti mapmarkon</string>
+    <string name="select_map_marker">Elekti map-markon</string>
     <string name="map_markers_other">Aliaj markoj</string>
     <string name="upload_anonymously">Alŝuti anonime</string>
     <string name="share_geo">geo:</string>
@@ -218,15 +218,15 @@
     <string name="storage_directory_readonly_desc">Nuntempe elektita datum-konservada dosierujo estas nurlega. La konservada dosierujo estas provizore agordita en interna memorejo. Bonvolu elekti ĝustan konservadan dosierujon.</string>
     <string name="storage_directory_shared">Komuna memoro</string>
     <string name="osm_live_month_cost_desc">Monata elspezo</string>
-    <string name="map_marker_1st">Unua mapmarko</string>
-    <string name="map_marker_2nd">Dua mapmarko</string>
-    <string name="add_points_to_map_markers_q">Ĉu vi volas aldoni ĉiujn punktojn al mapmarkoj?</string>
-    <string name="shared_string_add_to_map_markers">Aldoni al mapmarkoj</string>
-    <string name="select_map_markers">Elekti mapmarkojn</string>
-    <string name="show_map_markers_description">Ebligi uzi mapmarkojn</string>
+    <string name="map_marker_1st">Unua map-marko</string>
+    <string name="map_marker_2nd">Dua map-marko</string>
+    <string name="add_points_to_map_markers_q">Ĉu vi volas aldoni ĉiujn punktojn al map-markoj?</string>
+    <string name="shared_string_add_to_map_markers">Aldoni al map-markoj</string>
+    <string name="select_map_markers">Elekti map-markojn</string>
+    <string name="show_map_markers_description">Ebligi uzi map-markojn</string>
     <string name="clear_active_markers_q">Ĉu vi volas forigi ĉiujn aktivajn mapmarkojn?</string>
-    <string name="map_markers">Mapmarkoj</string>
-    <string name="map_marker">Mapmarko</string>
+    <string name="map_markers">Map-markoj</string>
+    <string name="map_marker">Map-marko</string>
     <string name="clear_markers_history_q">Ĉu vi volas forviŝi historion de mapmarkoj?</string>
     <string name="active_markers">Aktivaj markoj</string>
     <string name="lang_nv">Navaha</string>
@@ -2775,7 +2775,23 @@ Indikas lokon:  %1$s x %2$s"</string>
     <string name="do_not_use_animations_descr">Malaktivigi animaciojn en la aplikaĵo</string>
     <string name="move_all_to_history">Movi ĉiujn al historio</string>
     <string name="build_route">Kalkuli kurson</string>
-    <string name="show_direction">Montri direkton</string>
+    <string name="show_direction">Distanc-vidigo</string>
     <string name="sort_by">Ordigi laŭ</string>
     <string name="marker_options">Agordo de marko</string>
+    <string name="marker_show_distance_descr">Elekti kiel vidigi distancon kaj direkton al map-markoj sur la map-ekrano:</string>
+    <string name="map_orientation_change_in_accordance_with_speed">Map-orientiĝa sojlo</string>
+    <string name="map_orientation_change_in_accordance_with_speed_descr">Elekti rapidon sube kiun map-orientiĝo ŝanĝiĝos el ‘laŭ direkto de movado’ al ‘laŭ kompaso’</string>
+    <string name="all_markers_moved_to_history">Ĉiuj map-markoj movitaj al historio</string>
+    <string name="marker_moved_to_history">Map-marko movita al historio</string>
+    <string name="marker_moved_to_active">Map-marko movita al aktivaj</string>
+    <string name="shared_string_list">Listo</string>
+    <string name="shared_string_groups">Grupoj</string>
+    <string name="passed">Pasigita: %1$s</string>
+    <string name="make_active">Aktivigi</string>
+    <string name="today">Hodiaŭ</string>
+    <string name="yesterday">Hieraŭ</string>
+    <string name="last_seven_days">Lastaj 7 tagoj</string>
+    <string name="this_year">Tiu ĉi jaro</string>
+    <string name="widget">Fenestraĵo</string>
+    <string name="top_bar">Supra breto</string>
     </resources>

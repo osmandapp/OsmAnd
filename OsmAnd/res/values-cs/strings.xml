@@ -2739,4 +2739,19 @@ Pokud potřebujete pomoci s aplikací OsmAnd, prosím kontaktujte naši podporu
     <string name="do_not_use_animations_descr">Zakáže animace v aplikaci</string>
     <string name="keep_showing_on_map">Stále zobrazovat na mapě</string>
     <string name="exit_without_saving">Ukončit bez uložení?</string>
+    <string name="map_orientation_change_in_accordance_with_speed">Změna orientace mapy v závislosti na rychlosti</string>
+    <string name="map_orientation_change_in_accordance_with_speed_descr">Při nízké rychlosti použít k určení orientace mapy vestavěný kompas namísto směru pohybu</string>
+    <string name="all_markers_moved_to_history">Všechny značky přesunuty do Historie</string>
+    <string name="marker_moved_to_history">Značka přesunuta do Historie</string>
+    <string name="marker_moved_to_active">Značka přesunuta do Aktivní</string>
+    <string name="shared_string_list">Seznam</string>
+    <string name="shared_string_groups">Skupiny</string>
+    <string name="passed">Prošlé: %1$s</string>
+    <string name="make_active">Aktivovat</string>
+    <string name="today">Dnes</string>
+    <string name="yesterday">Včera</string>
+    <string name="last_seven_days">Posledních 7 dní</string>
+    <string name="this_year">Tento rok</string>
+    <string name="widget">Nástroj</string>
+    <string name="top_bar">Horní lišta</string>
     </resources>

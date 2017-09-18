@@ -2765,4 +2765,16 @@ Pro praghere iscrie su còdighe intreu</string>
     <string name="show_direction">Ammustra sas indicatziones de diretzione</string>
     <string name="sort_by">Òrdina pro</string>
     <string name="marker_options">Optziones de sos marcadores</string>
+    <string name="map_orientation_change_in_accordance_with_speed">S\'orientamentu de sa mapa mudat cun sa lestresa</string>
+    <string name="map_orientation_change_in_accordance_with_speed_descr">Imprea sa bussola integrata imbetzes de sa diretzione de su movimentu pro determinare s\'orientamentu de sa mapa a lestresas bassas</string>
+    <string name="all_markers_moved_to_history">Totu sos marcadores postos in sa Cronologia</string>
+    <string name="marker_moved_to_history">Marcadore postu in sa Cronologia</string>
+    <string name="marker_moved_to_active">Marcadore postu in Ativos</string>
+    <string name="shared_string_list">Lista</string>
+    <string name="shared_string_groups">Grupos</string>
+    <string name="today">Oe</string>
+    <string name="yesterday">Eris</string>
+    <string name="last_seven_days">Ùrtimas 7 dies</string>
+    <string name="this_year">Cust\'annu</string>
+    <string name="top_bar">Barra superiore</string>
     </resources>

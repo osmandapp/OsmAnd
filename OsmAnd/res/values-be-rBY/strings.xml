@@ -1742,7 +1742,7 @@ Miesca parkoŭkі і čas vіdać na paneli kіravańnia OsmAnd і na vіdžecie
     <string name="avoid_road">Paźbiahać daroh</string>
     <string name="storage_directory_readonly_desc">Abrany dla zachoŭvańnia źviestak kataloh dastupny tolkі dla čytańnia. Kataloh zachoŭvańnia časova raźmieščany va ŭnutranaj pamiacі. Kali łaska, abiarycie padychodziačy kataloh dla zachoŭvańnia źviestak.</string>
     <string name="storage_directory_shared">Sumiesnaja pamiać</string>
-    <string name="shared_string_topbar">Vierchniaja panel</string>
+    <string name="shared_string_topbar">Vierchniaja paneĺ</string>
     <string name="full_report">Poŭnaja spravazdača</string>
     <string name="recalculate_route">Pieraličyć maršrut</string>
     <string name="open_street_map_login_and_pass">Іmia karystalnіka і parol OpenStreetMap</string>
@@ -2812,7 +2812,23 @@ U vypadku, kali vy lubіcie OsmAnd і OSM і chočacie padtrymać jaho, heta іd
     <string name="do_not_use_animations_descr">Adklučeńnie animacyi ŭ prahramie</string>
     <string name="move_all_to_history">Pieramiascić usio ŭ historyju</string>
     <string name="build_route">Pabudavać maršrut</string>
-    <string name="show_direction">Pakazać napramak</string>
+    <string name="show_direction">Indykacyja adliehlasci</string>
     <string name="sort_by">Sartavać pa</string>
     <string name="marker_options">Nalady markiera</string>
+    <string name="marker_show_distance_descr">Abrać jak pakazvać adliehlasć i napramak da markieraŭ na ekranie mapy:</string>
+    <string name="map_orientation_change_in_accordance_with_speed">Paroh aryjentacyi mapy</string>
+    <string name="map_orientation_change_in_accordance_with_speed_descr">Abiarycie nižej, na jakoj chutkasct aryjentacyja mapy pierakliučajecca z «Napramku ruchu» u «Pa kompasu»</string>
+    <string name="all_markers_moved_to_history">Usie markiery pieraniesieny ŭ historyju</string>
+    <string name="marker_moved_to_history">Markier mapy pieraniesieny ŭ historyju</string>
+    <string name="marker_moved_to_active">Markier mapy staŭ aktyŭnym</string>
+    <string name="shared_string_list">Spis</string>
+    <string name="shared_string_groups">Hrupy</string>
+    <string name="passed">Projdziena: %1$s</string>
+    <string name="make_active">Aktyvizavać</string>
+    <string name="today">Sionnia</string>
+    <string name="yesterday">Učora</string>
+    <string name="last_seven_days">Apošnija 7 dzion</string>
+    <string name="this_year">Siolieta</string>
+    <string name="widget">Vidžet</string>
+    <string name="top_bar">Vierchniaja paneĺ</string>
     </resources>

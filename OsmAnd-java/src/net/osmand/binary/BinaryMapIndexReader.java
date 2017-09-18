@@ -26,6 +26,8 @@ import java.util.List;
 import java.util.Map;
 import java.util.Map.Entry;
 import java.util.TreeMap;
+import java.util.regex.Matcher;
+import java.util.regex.Pattern;
 
 import javax.xml.parsers.DocumentBuilder;
 import javax.xml.parsers.DocumentBuilderFactory;
@@ -397,7 +399,7 @@ public class BinaryMapIndexReader {
 		}
 		return "";
 	}
-	
+
 	public String getRegionName() {
 		List<String> rg = getRegionNames();
 		if (rg.size() == 0) {
@@ -405,7 +407,24 @@ public class BinaryMapIndexReader {
 		}
 		String ls = rg.get(0);
 		if (ls.lastIndexOf('_') != -1) {
-			return ls.substring(0, ls.lastIndexOf('_')).replace('_', ' ');
+			if (ls.matches(".*([0-9]+_*){3}\\.obf")) {
+				Pattern osmDiffDateEnding = Pattern.compile("_([0-9]+_*){3}\\.obf");
+				Matcher m = osmDiffDateEnding.matcher(ls);
+				if (m.find()) {
+					ls = ls.substring(0, m.start());
+				}
+				return ls.substring(0, ls.lastIndexOf('_')).replace('_', ' ');
+
+			} else {
+				if (ls.contains(".")) {
+					ls = ls.substring(0, ls.indexOf("."));
+				}
+				if (ls.endsWith("_2")) {
+					ls = ls.substring(0, ls.length() - "_2".length());
+				}
+				return ls.substring(0, ls.lastIndexOf('_')).replace('_', ' ');
+			}
+
 		}
 		return ls;
 	}

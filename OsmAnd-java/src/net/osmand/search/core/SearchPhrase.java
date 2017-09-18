@@ -13,6 +13,7 @@ import net.osmand.util.Algorithms;
 import net.osmand.util.MapUtils;
 
 import java.util.ArrayList;
+import java.util.Arrays;
 import java.util.Collection;
 import java.util.Collections;
 import java.util.Comparator;
@@ -531,41 +532,74 @@ public class SearchPhrase {
 		}
 	}
 
-	public void sortFiles() {
-		if(indexes == null) {
-			indexes = new ArrayList<>(getOfflineIndexes());
-		}
-		final LatLon ll = getLastTokenLocation();
-		if(ll != null) {
-			Collections.sort(indexes, new Comparator<BinaryMapIndexReader>() {
-				Map<BinaryMapIndexReader, LatLon> locations = new HashMap<>();
+    public void sortFiles() {
+        if (indexes == null) {
+            indexes = new ArrayList<>(getOfflineIndexes());
+        }
+        Map<String, List<BinaryMapIndexReader>> diffsByRegion = getDiffsByRegion();
+        final LatLon ll = getLastTokenLocation();
+        if (ll != null) {
+            Collections.sort(indexes, new Comparator<BinaryMapIndexReader>() {
+                Map<BinaryMapIndexReader, LatLon> locations = new HashMap<>();
 
-				@Override
-				public int compare(BinaryMapIndexReader o1, BinaryMapIndexReader o2) {
- 					LatLon rc1 = o1 == null ? null : getLocation(o1);
-					LatLon rc2 = o2 == null ? null : getLocation(o2);
-					double d1 = rc1 == null ? 10000000d : MapUtils.getDistance(rc1, ll);
-					double d2 = rc2 == null ? 10000000d : MapUtils.getDistance(rc2, ll);
-					return Double.compare(d1, d2);
-				}
+                @Override
+                public int compare(BinaryMapIndexReader o1, BinaryMapIndexReader o2) {
+                    LatLon rc1 = o1 == null ? null : getLocation(o1);
+                    LatLon rc2 = o2 == null ? null : getLocation(o2);
+                    double d1 = rc1 == null ? 10000000d : MapUtils.getDistance(rc1, ll);
+                    double d2 = rc2 == null ? 10000000d : MapUtils.getDistance(rc2, ll);
+                    return Double.compare(d1, d2);
+                }
 
-				private LatLon getLocation(BinaryMapIndexReader o1) {
-					if(locations.containsKey(o1)) {
-						return locations.get(o1);
-					}
-					LatLon rc1 = null;
-					if(o1.containsMapData()) {
-						rc1 = o1.getMapIndexes().get(0).getCenterLatLon();
-					} else {
-						rc1 = o1.getRegionCenter();
-					}
-					locations.put(o1, rc1);
-					return rc1;
-				}
-			});
-		}
-	}
-	
+                private LatLon getLocation(BinaryMapIndexReader o1) {
+                    if (locations.containsKey(o1)) {
+                        return locations.get(o1);
+                    }
+                    LatLon rc1 = null;
+                    if (o1.containsMapData()) {
+                        rc1 = o1.getMapIndexes().get(0).getCenterLatLon();
+                    } else {
+                        rc1 = o1.getRegionCenter();
+                    }
+                    locations.put(o1, rc1);
+                    return rc1;
+                }
+            });
+            if (!diffsByRegion.isEmpty()) {
+                List<BinaryMapIndexReader> finalSort = new ArrayList<>();
+                for (int i = 0; i < indexes.size(); i++) {
+                    BinaryMapIndexReader currFile = indexes.get(i);
+                    if (diffsByRegion.get(currFile.getRegionName()) != null) {
+                        finalSort.addAll(diffsByRegion.get(currFile.getRegionName()));
+                        finalSort.add(currFile);
+                    } else {
+                        finalSort.add(currFile);
+                    }
+                }
+                indexes.clear();
+                indexes.addAll(finalSort);
+            }
+        }
+    }
+
+    private Map<String, List<BinaryMapIndexReader>> getDiffsByRegion() {
+        Map<String, List<BinaryMapIndexReader>> result = new HashMap<>();
+        Iterator<BinaryMapIndexReader> it = indexes.iterator();
+        while (it.hasNext()) {
+            BinaryMapIndexReader r = it.next();
+            if (r.getFile().getName().matches(".*([0-9]+_*){3}\\.obf")) {
+                String currRegionName = r.getRegionName();
+                if (result.containsKey(currRegionName)) {
+                    result.get(currRegionName).add(r);
+                } else {
+                    result.put(currRegionName, new ArrayList<>(Arrays.asList(r)));
+                }
+                it.remove();
+            }
+        }
+        return result;
+    }
+
 	public static class NameStringMatcher implements StringMatcher {
 
 		private CollatorStringMatcher sm;
