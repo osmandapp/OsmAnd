@@ -48,7 +48,7 @@
     <string name="select_search_position">Zasób:</string>
     <string name="context_menu_item_search">Szukaj w pobliżu</string>
 
-    <string name="shared_string_save_as_gpx">Zapisz jako ślad GPX</string>
+    <string name="shared_string_save_as_gpx">Zapisywanie śladu GPX</string>
     <string name="route_successfully_saved_at">Zapisano trasę jako „%1$s”.</string>
     <string name="filename_input">Nazwa pliku: </string>
     <string name="file_with_name_already_exist">Plik o takiej nazwie już istnieje.</string>
@@ -1549,8 +1549,8 @@ OsmAnd jest otwarto-źródłowym programem do nawigacji z dostępem do szerokiej
     <string name="live_monitoring_m">Śledzenie online (wymagane GPX)</string>
     <string name="live_monitoring_start">Rozpocznij śledzenie online</string>
     <string name="live_monitoring_stop">Zatrzymaj śledzenie online</string>
-    <string name="gpx_monitoring_start">Rozpocznij rejestrowanie śladu GPX</string>
-    <string name="gpx_monitoring_stop">Zatrzymaj rejestrowanie śladu GPX</string>
+    <string name="gpx_monitoring_start">Rozpocznij rejestrowanie śladu</string>
+    <string name="gpx_monitoring_stop">Zatrzymaj rejestrowanie śladu</string>
     <string name="gpx_start_new_segment">Rozpocznij nowy segment</string>
     <string name="rendering_attr_hideBuildings_name">Budynki</string>
     <string name="rendering_attr_hideNonVehicleHighways_name">Trasy niedostępne dla aut</string>
@@ -2816,11 +2816,11 @@ Reprezentuje obszar: %1$s x %2$s</string>
     <string name="route_point">Punkt trasy</string>
     <string name="shared_string_options">Opcje</string>
     <string name="measurement_tool_save_as_new_track_descr">Można zapisać punkty jako punkty trasy lub linię.</string>
-    <string name="choose_navigation_type">Wybierz profil nawigacji</string>
+    <string name="choose_navigation_type">Wybór profilu nawigacji</string>
     <string name="edit_line">Zmodyfikuj linię</string>
     <string name="add_point_before">Dodaj punkt wcześniej</string>
     <string name="add_point_after">Dodaj punkt dalej</string>
-    <string name="measurement_tool_snap_to_road_descr">OsmAnd połączy punkty z drogami w zaznaczonym profilu.</string>
+    <string name="measurement_tool_snap_to_road_descr">Punkty zostaną połączone trasą wyznaczoną na podstawie wybranego profilu.</string>
     <string name="add_route_points">Dodaj punkty trasy</string>
     <string name="add_line">Dodaj linię</string>
     <string name="empty_state_my_tracks">Dodaj i nagraj ślady</string>
@@ -2838,7 +2838,7 @@ Reprezentuje obszar: %1$s x %2$s</string>
     <string name="move_all_to_history">Przenieś wszystkie do historii</string>
     <string name="build_route">Oblicz trasę</string>
     <string name="show_direction">Wskaźnik odległości</string>
-    <string name="sort_by">Sortuj według</string>
+    <string name="sort_by">Kolejność sortowania</string>
     <string name="marker_options">Opcje znacznika</string>
     <string name="marker_show_distance_descr">Wybierz w jaki sposób wskazywać odległość i kierunek do znaczników mapy na ekranie:</string>
     <string name="map_orientation_change_in_accordance_with_speed">Zmiana orientacji mapy</string>
