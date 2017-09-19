@@ -115,6 +115,67 @@
 
             </LinearLayout>
 
+            <LinearLayout
+                android:id="@+id/show_arrows_row"
+                android:layout_width="match_parent"
+                android:layout_height="@dimen/bottom_sheet_list_item_height"
+                android:background="?attr/selectableItemBackground"
+                android:descendantFocusability="blocksDescendants"
+                android:minHeight="@dimen/bottom_sheet_list_item_height"
+                android:paddingLeft="@dimen/bottom_sheet_content_padding"
+                android:paddingRight="@dimen/bottom_sheet_content_padding">
+
+                <TextView
+                    android:layout_width="0dp"
+                    android:layout_height="wrap_content"
+                    android:layout_gravity="center_vertical"
+                    android:layout_weight="1"
+                    android:ellipsize="end"
+                    android:maxLines="1"
+                    android:text="@string/show_arrows_on_the_map"
+                    android:textAppearance="@style/TextAppearance.ListItemTitle"/>
+
+                <android.support.v7.widget.SwitchCompat
+                    android:id="@+id/show_arrows_switch"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_gravity="center_vertical|end"
+                    android:clickable="false"/>
+            </LinearLayout>
+
+            <LinearLayout
+                android:id="@+id/show_guide_line_row"
+                android:layout_width="match_parent"
+                android:layout_height="@dimen/bottom_sheet_list_item_height"
+                android:background="?attr/selectableItemBackground"
+                android:minHeight="@dimen/bottom_sheet_list_item_height"
+                android:paddingLeft="@dimen/bottom_sheet_content_padding"
+                android:paddingRight="@dimen/bottom_sheet_content_padding">
+
+                <TextView
+                    android:layout_width="0dp"
+                    android:layout_height="wrap_content"
+                    android:layout_gravity="center_vertical"
+                    android:layout_weight="1"
+                    android:ellipsize="end"
+                    android:maxLines="1"
+                    android:text="@string/show_guide_line"
+                    android:textAppearance="@style/TextAppearance.ListItemTitle"/>
+
+                <android.support.v7.widget.SwitchCompat
+                    android:id="@+id/show_guide_line_switch"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_gravity="center_vertical|end"
+                    android:clickable="false"/>
+            </LinearLayout>
+
+            <View
+                android:layout_width="match_parent"
+                android:layout_height="1dp"
+                android:layout_marginTop="@dimen/bottom_sheet_content_padding_small"
+                android:background="?attr/dashboard_divider"/>
+
             <RelativeLayout
                 android:id="@+id/top_bar_row"
                 android:layout_width="match_parent"
@@ -148,15 +209,15 @@
                     android:textAppearance="@style/TextAppearance.ListItemTitle"/>
 
                 <RadioButton
-                    android:focusable="false"
-                    android:clickable="false"
-                    android:background="@null"
                     android:id="@+id/top_bar_radio_button"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:layout_centerVertical="true"
                     android:layout_alignParentEnd="true"
-                    android:layout_alignParentRight="true"/>
+                    android:layout_alignParentRight="true"
+                    android:layout_centerVertical="true"
+                    android:background="@null"
+                    android:clickable="false"
+                    android:focusable="false"/>
             </RelativeLayout>
 
             <RelativeLayout
@@ -192,15 +253,15 @@
                     android:textAppearance="@style/TextAppearance.ListItemTitle"/>
 
                 <RadioButton
-                    android:focusable="false"
-                    android:clickable="false"
-                    android:background="@null"
                     android:id="@+id/widget_radio_button"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:layout_centerVertical="true"
                     android:layout_alignParentEnd="true"
-                    android:layout_alignParentRight="true"/>
+                    android:layout_alignParentRight="true"
+                    android:layout_centerVertical="true"
+                    android:background="@null"
+                    android:clickable="false"
+                    android:focusable="false"/>
             </RelativeLayout>
 
             <RelativeLayout
@@ -235,15 +296,15 @@
                     android:textAppearance="@style/TextAppearance.ListItemTitle"/>
 
                 <RadioButton
-                    android:focusable="false"
-                    android:clickable="false"
-                    android:background="@null"
                     android:id="@+id/none_radio_button"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:layout_centerVertical="true"
                     android:layout_alignParentEnd="true"
-                    android:layout_alignParentRight="true"/>
+                    android:layout_alignParentRight="true"
+                    android:layout_centerVertical="true"
+                    android:background="@null"
+                    android:clickable="false"
+                    android:focusable="false"/>
             </RelativeLayout>
 
         </LinearLayout>
