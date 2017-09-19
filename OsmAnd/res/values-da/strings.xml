@@ -2873,11 +2873,12 @@ Tidligere destination bliver sidste mellemliggende punkt.</string>
     <string name="last_seven_days">Sidste 7 dage</string>
     <string name="this_year">I år</string>
     <string name="widget">Modul</string>
-    <string name="map_orientation_change_in_accordance_with_speed">Kortets orientering ændres i overensstemmelse med hastigheden</string>
-    <string name="map_orientation_change_in_accordance_with_speed_descr">Brug det indbyggede kompas i stedet for bevægelsesretningen til at bestemme orienteringen af kortet ved lav hastighed</string>
+    <string name="map_orientation_change_in_accordance_with_speed">Tærskel for kortorientering</string>
+    <string name="map_orientation_change_in_accordance_with_speed_descr">Vælg nedenfor ved hvilken hastighed kortorienteringen skifter fra \'Bevægelsesretning\' til \'Kompas\"</string>
     <string name="all_markers_moved_to_history">Alle kortmarkører flyttet til historik</string>
     <string name="marker_moved_to_history">Kortmarkør flyttet til historik</string>
     <string name="marker_moved_to_active">Kortmarkør flyttet til aktiv</string>
     <string name="passed">Bestået: %1$s</string>
     <string name="make_active">Aktivér</string>
+    <string name="marker_show_distance_descr">Vælg hvordan afstanden og retningen til kortmarkører på kortet angives:</string>
     </resources>
