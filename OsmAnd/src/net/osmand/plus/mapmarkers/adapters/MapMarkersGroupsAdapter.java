@@ -70,7 +70,7 @@ public class MapMarkersGroupsAdapter extends RecyclerView.Adapter<RecyclerView.V
 				int currentMonth = currentDateCalendar.get(Calendar.MONTH);
 				int currentYear = currentDateCalendar.get(Calendar.YEAR);
 				Calendar markerCalendar = Calendar.getInstance();
-				List<MapMarker> groupMarkers = group.getMapMarkers();
+				List<MapMarker> groupMarkers = group.getActiveMarkers();
 				for (int j = 0; j < groupMarkers.size(); j++) {
 					MapMarker marker = groupMarkers.get(j);
 					markerCalendar.setTimeInMillis(marker.creationDate);
@@ -106,14 +106,13 @@ public class MapMarkersGroupsAdapter extends RecyclerView.Adapter<RecyclerView.V
 					markerGroupName = app.getString(R.string.shared_string_favorites);
 				}
 				GroupHeader header = new GroupHeader();
-				header.setTitle(markerGroupName);
-				int type = group.getType();
-				header.setIconRes(type == MapMarkersHelper.MarkersSyncGroup.FAVORITES_TYPE ? R.drawable.ic_action_fav_dark : R.drawable.ic_action_track_16);
-				header.setActiveMarkersCount(group.getMapMarkers().size());
+				header.setGroupName(markerGroupName);
+				header.setIconRes(group.getType() == MapMarkersHelper.MarkersSyncGroup.FAVORITES_TYPE ? R.drawable.ic_action_fav_dark : R.drawable.ic_action_track_16);
+				header.setActiveMarkersCount(group.getActiveMarkers().size());
 				header.setHistoryMarkersCount(group.getHistoryMarkers().size());
 				group.setGroupHeader(header);
 				items.add(header);
-				items.addAll(group.getMapMarkers());
+				items.addAll(group.getActiveMarkers());
 				if (group.getHistoryMarkers().size() > 0) {
 					ShowHideHistoryButton showHideHistoryButton = new ShowHideHistoryButton();
 					showHideHistoryButton.setShowHistory(false);
@@ -142,7 +141,7 @@ public class MapMarkersGroupsAdapter extends RecyclerView.Adapter<RecyclerView.V
 				if (marker.history) {
 					noGroup.getHistoryMarkers().add(marker);
 				} else {
-					noGroup.getMapMarkers().add(marker);
+					noGroup.getActiveMarkers().add(marker);
 				}
 			} else {
 				MapMarkersGroup group = groupsMap.get(groupName);
@@ -161,7 +160,7 @@ public class MapMarkersGroupsAdapter extends RecyclerView.Adapter<RecyclerView.V
 				if (marker.history) {
 					group.getHistoryMarkers().add(marker);
 				} else {
-					group.getMapMarkers().add(marker);
+					group.getActiveMarkers().add(marker);
 				}
 			}
 		}
@@ -169,7 +168,7 @@ public class MapMarkersGroupsAdapter extends RecyclerView.Adapter<RecyclerView.V
 		sortGroups(groups);
 
 		if (noGroup != null) {
-			app.getMapMarkersHelper().sortMarkers(noGroup.getMapMarkers(), false, OsmandSettings.MapMarkersOrderByMode.DATE_ADDED_DESC);
+			app.getMapMarkersHelper().sortMarkers(noGroup.getActiveMarkers(), false, OsmandSettings.MapMarkersOrderByMode.DATE_ADDED_DESC);
 			groups.add(0, noGroup);
 		}
 		return groups;
@@ -230,7 +229,6 @@ public class MapMarkersGroupsAdapter extends RecyclerView.Adapter<RecyclerView.V
 		if (holder instanceof MapMarkerItemViewHolder) {
 			final MapMarkerItemViewHolder itemViewHolder = (MapMarkerItemViewHolder) holder;
 			final MapMarker marker = (MapMarker) getItem(position);
-			final boolean markerInHistory = marker.history;
 
 			int color = MapMarker.getColorId(marker.colorIndex);
 			itemViewHolder.icon.setImageDrawable(iconsCache.getIcon(R.drawable.ic_action_flag_dark, color));
@@ -246,6 +244,7 @@ public class MapMarkersGroupsAdapter extends RecyclerView.Adapter<RecyclerView.V
 				itemViewHolder.description.setVisibility(View.GONE);
 			}
 
+			final boolean markerInHistory = marker.history;
 			itemViewHolder.optionsBtn.setImageDrawable(iconsCache.getThemedIcon(markerInHistory ? R.drawable.ic_action_reset_to_default_dark : R.drawable.ic_action_marker_passed));
 			itemViewHolder.optionsBtn.setOnClickListener(new View.OnClickListener() {
 				@Override
@@ -254,52 +253,46 @@ public class MapMarkersGroupsAdapter extends RecyclerView.Adapter<RecyclerView.V
 					if (position < 0) {
 						return;
 					}
+					String markerGroupName = marker.groupName;
+					boolean markerHasGroup = markerGroupName != null;
+					MapMarkersGroup group = markerHasGroup ? getMapMarkerGroupByName(markerGroupName) : null;
 					if (markerInHistory) {
 						app.getMapMarkersHelper().restoreMarkerFromHistory(marker, 0);
-						if (marker.groupName != null) {
-							MapMarkersGroup group = getMapMarkerGroupByName(marker.groupName);
-							if (group != null) {
-								restoreMarkerFromHistoryInGroup(group, marker);
-								ShowHideHistoryButton showHideHistoryButton = group.getShowHideHistoryButton();
-								if (showHideHistoryButton != null) {
-									if (group.getHistoryMarkers().size() == 0) {
-										items.remove(showHideHistoryButton);
-										group.setShowHideHistoryButton(null);
-									}
+						if (group != null) {
+							restoreMarkerFromHistoryInGroup(group, marker);
+							ShowHideHistoryButton showHideHistoryButton = group.getShowHideHistoryButton();
+							if (showHideHistoryButton != null) {
+								if (group.getHistoryMarkers().size() == 0) {
+									items.remove(showHideHistoryButton);
+									group.setShowHideHistoryButton(null);
 								}
 							}
 						}
 					} else {
 						app.getMapMarkersHelper().moveMapMarkerToHistory(marker);
-						if (marker.groupName != null) {
-							MapMarkersGroup group = getMapMarkerGroupByName(marker.groupName);
-							if (group != null) {
-								moveMarkerToHistoryInGroup(group, marker);
-								ShowHideHistoryButton showHideHistoryButton = group.getShowHideHistoryButton();
-								if (showHideHistoryButton == null) {
-									items.remove(marker);
-									showHideHistoryButton = new ShowHideHistoryButton();
-									showHideHistoryButton.setShowHistory(false);
-									showHideHistoryButton.setGroup(group);
-									int index = getLastDisplayItemIndexOfGroup(group);
-									if (index != -1) {
-										items.add(index + 1, showHideHistoryButton);
-										group.setShowHideHistoryButton(showHideHistoryButton);
-									}
-								} else if (!showHideHistoryButton.isShowHistory()) {
-									items.remove(marker);
+						if (group != null) {
+							moveMarkerToHistoryInGroup(group, marker);
+							ShowHideHistoryButton showHideHistoryButton = group.getShowHideHistoryButton();
+							if (showHideHistoryButton == null) {
+								items.remove(marker);
+								showHideHistoryButton = new ShowHideHistoryButton();
+								showHideHistoryButton.setShowHistory(false);
+								showHideHistoryButton.setGroup(group);
+								int index = getLastDisplayItemIndexOfGroup(group);
+								if (index != -1) {
+									items.add(index + 1, showHideHistoryButton);
+									group.setShowHideHistoryButton(showHideHistoryButton);
 								}
+							} else if (!showHideHistoryButton.isShowHistory()) {
+								items.remove(marker);
 							}
 						}
 					}
-					if (marker.groupName != null) {
-						MapMarkersGroup group = getMapMarkerGroupByName(marker.groupName);
-						if (group != null) {
-							GroupHeader header = group.getGroupHeader();
-							if (header != null) {
-								header.setActiveMarkersCount(group.getMapMarkers().size());
-								header.setHistoryMarkersCount(group.getHistoryMarkers().size());
-							}
+					if (group != null) {
+						GroupHeader header = group.getGroupHeader();
+						if (header != null) {
+							header.setActiveMarkersCount(group.getActiveMarkers().size());
+							header.setHistoryMarkersCount(group.getHistoryMarkers().size());
 						}
 					}
 					notifyDataSetChanged();
@@ -342,13 +335,13 @@ public class MapMarkersGroupsAdapter extends RecyclerView.Adapter<RecyclerView.V
 					headerString = String.valueOf(dateHeader);
 				}
 			} else if (header instanceof GroupHeader) {
-				headerViewHolder.icon.setVisibility(View.VISIBLE);
-				headerViewHolder.iconSpace.setVisibility(View.GONE);
 				GroupHeader groupHeader = (GroupHeader) header;
-				headerString = groupHeader.getTitle().concat(" - ")
+				headerString = groupHeader.getGroupName().concat(" - ")
 						.concat(Integer.toString(groupHeader.getActiveMarkersCount()))
 						.concat("/")
 						.concat(Integer.toString(groupHeader.getActiveMarkersCount() + groupHeader.getHistoryMarkersCount()));
+				headerViewHolder.icon.setVisibility(View.VISIBLE);
+				headerViewHolder.iconSpace.setVisibility(View.GONE);
 				headerViewHolder.icon.setImageDrawable(iconsCache.getThemedIcon(groupHeader.getIconRes()));
 			} else {
 				throw new IllegalArgumentException("Unsupported header");
@@ -417,17 +410,17 @@ public class MapMarkersGroupsAdapter extends RecyclerView.Adapter<RecyclerView.V
 	}
 
 	private void moveMarkerToHistoryInGroup(MapMarkersGroup group, MapMarker marker) {
-		group.getMapMarkers().remove(marker);
+		group.getActiveMarkers().remove(marker);
 		group.getHistoryMarkers().add(marker);
 	}
 
 	private void restoreMarkerFromHistoryInGroup(MapMarkersGroup group, MapMarker marker) {
 		group.getHistoryMarkers().remove(marker);
-		group.getMapMarkers().add(marker);
+		group.getActiveMarkers().add(marker);
 	}
 
 	private int getLastDisplayItemIndexOfGroup(MapMarkersGroup group) {
-		List<MapMarker> markers = group.getMapMarkers();
+		List<MapMarker> markers = group.getActiveMarkers();
 		int index = -1;
 		for (MapMarker marker : markers) {
 			int markerIndex = items.indexOf(marker);
@@ -442,13 +435,17 @@ public class MapMarkersGroupsAdapter extends RecyclerView.Adapter<RecyclerView.V
 		private String name;
 		private GroupHeader header;
 		private int type;
-		private List<MapMarker> mapMarkers = new ArrayList<>();
+		private List<MapMarker> activeMarkers = new ArrayList<>();
 		private List<MapMarker> historyMarkers = new ArrayList<>();
 		private long creationDate;
 		private ShowHideHistoryButton showHideHistoryButton;
 
 		public String getName() {
 			return name;
+		}
+
+		public void setName(String name) {
+			this.name = name;
 		}
 
 		public GroupHeader getGroupHeader() {
@@ -467,16 +464,12 @@ public class MapMarkersGroupsAdapter extends RecyclerView.Adapter<RecyclerView.V
 			this.type = type;
 		}
 
-		public void setName(String name) {
-			this.name = name;
+		public List<MapMarker> getActiveMarkers() {
+			return activeMarkers;
 		}
 
-		public List<MapMarker> getMapMarkers() {
-			return mapMarkers;
-		}
-
-		public void setMapMarkers(List<MapMarkersHelper.MapMarker> mapMarkers) {
-			this.mapMarkers = mapMarkers;
+		public void setActiveMarkers(List<MapMarker> activeMarkers) {
+			this.activeMarkers = activeMarkers;
 		}
 
 		public List<MapMarker> getHistoryMarkers() {
@@ -526,17 +519,17 @@ public class MapMarkersGroupsAdapter extends RecyclerView.Adapter<RecyclerView.V
 	}
 
 	private static class GroupHeader {
-		private String title;
+		private String groupName;
 		private int activeMarkersCount;
 		private int historyMarkersCount;
 		private int iconRes;
 
-		public String getTitle() {
-			return title;
+		public String getGroupName() {
+			return groupName;
 		}
 
-		public void setTitle(String title) {
-			this.title = title;
+		public void setGroupName(String groupName) {
+			this.groupName = groupName;
 		}
 
 		public int getActiveMarkersCount() {
