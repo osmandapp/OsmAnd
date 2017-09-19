@@ -467,14 +467,14 @@ public class LocalIndexesFragment extends OsmandExpandableListFragment implement
 					if (operation == DELETE_OPERATION) {
 						File f = new File(info.getPathToData());
 						successfull = Algorithms.removeAllFiles(f);
-                        if (InAppHelper.isSubscribedToLiveUpdates()) {
-                            String fileNameWithoutExtension =
-                                    Algorithms.getFileNameWithoutExtension(f);
-                            IncrementalChangesManager changesManager =
-                                    getMyApplication().getResourceManager().getChangesManager();
-                            changesManager.deleteUpdates(fileNameWithoutExtension);
-                        }
-                        if (successfull) {
+						if (InAppHelper.isSubscribedToLiveUpdates()) {
+							String fileNameWithoutExtension =
+									Algorithms.getFileNameWithoutExtension(f);
+							IncrementalChangesManager changesManager =
+									getMyApplication().getResourceManager().getChangesManager();
+							changesManager.deleteUpdates(fileNameWithoutExtension);
+						}
+						if (successfull) {
 							getMyApplication().getResourceManager().closeFile(info.getFileName());
 						}
 					} else if (operation == RESTORE_OPERATION) {
