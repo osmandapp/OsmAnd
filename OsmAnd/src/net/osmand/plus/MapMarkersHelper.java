@@ -17,6 +17,7 @@ import net.osmand.plus.GPXUtilities.WptPt;
 import net.osmand.plus.GpxSelectionHelper.SelectedGpxFile;
 import net.osmand.plus.helpers.ColorDialogs;
 import net.osmand.plus.mapmarkers.MapMarkersDbHelper;
+import net.osmand.plus.mapmarkers.MapMarkersGroup;
 import net.osmand.util.Algorithms;
 import net.osmand.util.MapUtils;
 
@@ -251,7 +252,7 @@ public class MapMarkersHelper {
 		checkAndFixActiveMarkersOrderIfNeeded();
 
 		List<MapMarker> markersHistory = markersDbHelper.getMarkersHistory();
-		sortHistoryMarkers();
+		sortMarkers(markersHistory, true, OsmandSettings.MapMarkersOrderByMode.DATE_ADDED_DESC);
 		mapMarkersHistory.addAll(markersHistory);
 
 		if (!ctx.isApplicationInitializing()) {
@@ -279,17 +280,31 @@ public class MapMarkersHelper {
 		}
 	}
 
-	public List<MapMarker> getMarkersSortedByGroup() {
-		Map<String, MapMarkerGroup> groupsMap = new LinkedHashMap<>();
-		List<MapMarker> noGroup = new ArrayList<>();
-		for (MapMarker marker : mapMarkers) {
+	public List<MapMarkersGroup> getMapMarkersGroups() {
+		List<MapMarker> markers = new ArrayList<>();
+		markers.addAll(mapMarkers);
+		markers.addAll(mapMarkersHistory);
+
+		Map<String, MapMarkersGroup> groupsMap = new LinkedHashMap<>();
+		MapMarkersGroup noGroup = null;
+		for (MapMarker marker : markers) {
 			String groupName = marker.groupName;
 			if (groupName == null) {
-				noGroup.add(marker);
+				if (noGroup == null) {
+					noGroup = new MapMarkersGroup();
+					noGroup.setCreationDate(marker.creationDate);
+				}
+				if (marker.history) {
+					noGroup.getHistoryMarkers().add(marker);
+				} else {
+					noGroup.getMapMarkers().add(marker);
+				}
 			} else {
-				MapMarkerGroup group = groupsMap.get(groupName);
+				MapMarkersGroup group = groupsMap.get(groupName);
 				if (group == null) {
-					group = new MapMarkerGroup(groupName, marker.creationDate);
+					group = new MapMarkersGroup();
+					group.setName(groupName);
+					group.setCreationDate(marker.creationDate);
 					groupsMap.put(groupName, group);
 				} else {
 					long markerCreationDate = marker.creationDate;
@@ -297,26 +312,29 @@ public class MapMarkersHelper {
 						group.setCreationDate(markerCreationDate);
 					}
 				}
-				group.getMapMarkers().add(marker);
+				if (marker.history) {
+					group.getHistoryMarkers().add(marker);
+				} else {
+					group.getMapMarkers().add(marker);
+				}
 			}
 		}
-		List<MapMarkerGroup> groups = new ArrayList<>(groupsMap.values());
+		List<MapMarkersGroup> groups = new ArrayList<>(groupsMap.values());
 		sortGroups(groups);
 
-		List<MapMarker> markers = new ArrayList<>();
-		markers.addAll(noGroup);
-		for (MapMarkerGroup group : groups) {
-			markers.addAll(group.getMapMarkers());
+		if (noGroup != null) {
+			sortMarkers(noGroup.getMapMarkers(), false, OsmandSettings.MapMarkersOrderByMode.DATE_ADDED_DESC);
+			groups.add(0, noGroup);
 		}
-		return markers;
+		return groups;
 	}
 
-	private void sortGroups(List<MapMarkerGroup> groups) {
-		Collections.sort(groups, new Comparator<MapMarkerGroup>() {
+	private void sortGroups(List<MapMarkersGroup> groups) {
+		Collections.sort(groups, new Comparator<MapMarkersGroup>() {
 			@Override
-			public int compare(MapMarkerGroup group1, MapMarkerGroup group2) {
-				long t1 = group1.creationDate;
-				long t2 = group2.creationDate;
+			public int compare(MapMarkersGroup group1, MapMarkersGroup group2) {
+				long t1 = group1.getCreationDate();
+				long t2 = group2.getCreationDate();
 				if (t1 > t2) {
 					return -1;
 				} else if (t1 == t2) {
@@ -328,24 +346,20 @@ public class MapMarkersHelper {
 		});
 	}
 
-	private void sortHistoryMarkers() {
-		sortMarkers(true, null);
-	}
-
-	private void sortMarkers(final boolean history, final OsmandSettings.MapMarkersOrderByMode orderByMode) {
+	private void sortMarkers(List<MapMarker> markers, final boolean visited, final OsmandSettings.MapMarkersOrderByMode orderByMode) {
 		final LatLon location = ctx.getSettings().getLastKnownMapLocation();
-		Collections.sort(history ? mapMarkersHistory : mapMarkers, new Comparator<MapMarker>() {
+		Collections.sort(markers, new Comparator<MapMarker>() {
 			@Override
 			public int compare(MapMarker mapMarker1, MapMarker mapMarker2) {
-				if (history || orderByMode.isDateAddedDescending() || orderByMode.isDateAddedAscending()) {
-					long t1 = history ? mapMarker1.visitedDate : mapMarker1.creationDate;
-					long t2 = history ? mapMarker2.visitedDate : mapMarker2.creationDate;
+				if (orderByMode.isDateAddedDescending() || orderByMode.isDateAddedAscending()) {
+					long t1 = visited ? mapMarker1.visitedDate : mapMarker1.creationDate;
+					long t2 = visited ? mapMarker2.visitedDate : mapMarker2.creationDate;
 					if (t1 > t2) {
-						return history || orderByMode.isDateAddedDescending() ? -1 : 1;
+						return orderByMode.isDateAddedDescending() ? -1 : 1;
 					} else if (t1 == t2) {
 						return 0;
 					} else {
-						return history || orderByMode.isDateAddedDescending() ? 1 : -1;
+						return orderByMode.isDateAddedDescending() ? 1 : -1;
 					}
 				} else if (orderByMode.isDistanceDescending() || orderByMode.isDistanceAscending()) {
 					int d1 = (int) MapUtils.getDistance(location, mapMarker1.getLatitude(), mapMarker1.getLongitude());
@@ -367,7 +381,7 @@ public class MapMarkersHelper {
 	}
 
 	public void orderMarkers(OsmandSettings.MapMarkersOrderByMode orderByMode) {
-		sortMarkers(false, orderByMode);
+		sortMarkers(getMapMarkers(), false, orderByMode);
 		checkAndFixActiveMarkersOrderIfNeeded();
 	}
 
@@ -501,7 +515,7 @@ public class MapMarkersHelper {
 			marker.nextKey = MapMarkersDbHelper.HISTORY_NEXT_VALUE;
 			mapMarkersHistory.add(marker);
 			checkAndFixActiveMarkersOrderIfNeeded();
-			sortHistoryMarkers();
+			sortMarkers(mapMarkersHistory, true, OsmandSettings.MapMarkersOrderByMode.DATE_ADDED_DESC);
 			refresh();
 		}
 	}
@@ -511,7 +525,7 @@ public class MapMarkersHelper {
 			markersDbHelper.addMarker(marker);
 			if (marker.history) {
 				mapMarkersHistory.add(marker);
-				sortHistoryMarkers();
+				sortMarkers(mapMarkersHistory, true, OsmandSettings.MapMarkersOrderByMode.DATE_ADDED_DESC);
 			} else {
 				mapMarkers.add(marker);
 				checkAndFixActiveMarkersOrderIfNeeded();
@@ -527,7 +541,7 @@ public class MapMarkersHelper {
 			marker.history = false;
 			mapMarkers.add(position, marker);
 			checkAndFixActiveMarkersOrderIfNeeded();
-			sortHistoryMarkers();
+			sortMarkers(mapMarkersHistory, true, OsmandSettings.MapMarkersOrderByMode.DATE_ADDED_DESC);
 			refresh();
 		}
 	}
@@ -541,7 +555,7 @@ public class MapMarkersHelper {
 				mapMarkers.add(marker);
 			}
 			checkAndFixActiveMarkersOrderIfNeeded();
-			sortHistoryMarkers();
+			sortMarkers(mapMarkersHistory, true, OsmandSettings.MapMarkersOrderByMode.DATE_ADDED_DESC);
 			refresh();
 		}
 	}
@@ -623,7 +637,7 @@ public class MapMarkersHelper {
 		}
 		mapMarkersHistory.addAll(mapMarkers);
 		mapMarkers.clear();
-		sortHistoryMarkers();
+		sortMarkers(mapMarkersHistory, true, OsmandSettings.MapMarkersOrderByMode.DATE_ADDED_DESC);
 		refresh();
 	}
 
@@ -854,40 +868,5 @@ public class MapMarkersHelper {
 			file.addPoint(wpt);
 		}
 		GPXUtilities.writeGpxFile(fout, file, ctx);
-	}
-
-	public static class MapMarkerGroup {
-		private String name;
-		private List<MapMarker> mapMarkers = new ArrayList<>();
-		private long creationDate;
-
-		public MapMarkerGroup(String name, long creationDate) {
-			this.name = name;
-			this.creationDate = creationDate;
-		}
-
-		public String getName() {
-			return name;
-		}
-
-		public void setName(String name) {
-			this.name = name;
-		}
-
-		public List<MapMarker> getMapMarkers() {
-			return mapMarkers;
-		}
-
-		public void setMapMarkers(List<MapMarker> mapMarkers) {
-			this.mapMarkers = mapMarkers;
-		}
-
-		public long getCreationDate() {
-			return creationDate;
-		}
-
-		public void setCreationDate(long creationDate) {
-			this.creationDate = creationDate;
-		}
 	}
 }

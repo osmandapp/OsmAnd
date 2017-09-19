@@ -11,6 +11,7 @@ import net.osmand.plus.MapMarkersHelper.MapMarker;
 import net.osmand.plus.OsmandApplication;
 import net.osmand.plus.R;
 import net.osmand.plus.activities.MapActivity;
+import net.osmand.plus.mapmarkers.MapMarkersGroup;
 
 import java.text.SimpleDateFormat;
 import java.util.ArrayList;
@@ -23,6 +24,7 @@ public class MapMarkersGroupsAdapter extends RecyclerView.Adapter<RecyclerView.V
 
 	private static final int HEADER_TYPE = 1;
 	private static final int MARKER_TYPE = 2;
+	private static final int SHOW_HIDE_HISTORY_TYPE = 3;
 
 	private static final int TODAY_HEADER = 56;
 	private static final int YESTERDAY_HEADER = 57;
@@ -46,54 +48,66 @@ public class MapMarkersGroupsAdapter extends RecyclerView.Adapter<RecyclerView.V
     public void createDisplayGroups() {
 		items.clear();
 
-		List<MapMarker> markersHistory = app.getMapMarkersHelper().getMarkersSortedByGroup();
+		List<MapMarkersGroup> groups = app.getMapMarkersHelper().getMapMarkersGroups();
 
-		int previousDateHeader = -1;
-		String previousNameHeader = "";
-		int monthsDisplayed = 0;
+		for (int i = 0; i < groups.size(); i++) {
+			MapMarkersGroup group = groups.get(i);
+			String markerGroupName = group.getName();
+			if (markerGroupName == null) {
+				int previousDateHeader = -1;
+				int monthsDisplayed = 0;
 
-		Calendar currentDateCalendar = Calendar.getInstance();
-		currentDateCalendar.setTimeInMillis(System.currentTimeMillis());
-		int currentDay = currentDateCalendar.get(Calendar.DAY_OF_YEAR);
-		int currentMonth = currentDateCalendar.get(Calendar.MONTH);
-		int currentYear = currentDateCalendar.get(Calendar.YEAR);
-		Calendar markerCalendar = Calendar.getInstance();
-		for (int i = 0; i < markersHistory.size(); i++) {
-			MapMarker marker = markersHistory.get(i);
-			markerCalendar.setTimeInMillis(marker.creationDate);
-			int markerDay = markerCalendar.get(Calendar.DAY_OF_YEAR);
-			int markerMonth = markerCalendar.get(Calendar.MONTH);
-			int markerYear = markerCalendar.get(Calendar.YEAR);
-			String markerGroupName = marker.groupName;
-			if (markerGroupName != null && markerGroupName.equals("")) {
-				markerGroupName = app.getString(R.string.shared_string_favorites);
-			}
-			if (markerGroupName == null && markerYear == currentYear) {
-				if (markerDay == currentDay && previousDateHeader != TODAY_HEADER) {
-					items.add(TODAY_HEADER);
-					previousDateHeader = TODAY_HEADER;
-				} else if (markerDay == currentDay - 1 && previousDateHeader != YESTERDAY_HEADER) {
-					items.add(YESTERDAY_HEADER);
-					previousDateHeader = YESTERDAY_HEADER;
-				} else if (currentDay - markerDay >= 2 && currentDay - markerDay <= 8 && previousDateHeader != LAST_SEVEN_DAYS_HEADER) {
-					items.add(LAST_SEVEN_DAYS_HEADER);
-					previousDateHeader = LAST_SEVEN_DAYS_HEADER;
-				} else if (currentDay - markerDay > 8 && monthsDisplayed < 3 && previousDateHeader != markerMonth) {
-					items.add(markerMonth);
-					previousDateHeader = markerMonth;
-					monthsDisplayed += 1;
-				} else if (currentMonth - markerMonth >= 4 && previousDateHeader != THIS_YEAR_HEADER) {
-					items.add(THIS_YEAR_HEADER);
-					previousDateHeader = THIS_YEAR_HEADER;
+				Calendar currentDateCalendar = Calendar.getInstance();
+				currentDateCalendar.setTimeInMillis(System.currentTimeMillis());
+				int currentDay = currentDateCalendar.get(Calendar.DAY_OF_YEAR);
+				int currentMonth = currentDateCalendar.get(Calendar.MONTH);
+				int currentYear = currentDateCalendar.get(Calendar.YEAR);
+				Calendar markerCalendar = Calendar.getInstance();
+				List<MapMarker> groupMarkers = group.getMapMarkers();
+				for (int j = 0; j < groupMarkers.size(); j++) {
+					MapMarker marker = groupMarkers.get(j);
+					markerCalendar.setTimeInMillis(marker.creationDate);
+					int markerDay = markerCalendar.get(Calendar.DAY_OF_YEAR);
+					int markerMonth = markerCalendar.get(Calendar.MONTH);
+					int markerYear = markerCalendar.get(Calendar.YEAR);
+					if (markerYear == currentYear) {
+						if (markerDay == currentDay && previousDateHeader != TODAY_HEADER) {
+							items.add(TODAY_HEADER);
+							previousDateHeader = TODAY_HEADER;
+						} else if (markerDay == currentDay - 1 && previousDateHeader != YESTERDAY_HEADER) {
+							items.add(YESTERDAY_HEADER);
+							previousDateHeader = YESTERDAY_HEADER;
+						} else if (currentDay - markerDay >= 2 && currentDay - markerDay <= 8 && previousDateHeader != LAST_SEVEN_DAYS_HEADER) {
+							items.add(LAST_SEVEN_DAYS_HEADER);
+							previousDateHeader = LAST_SEVEN_DAYS_HEADER;
+						} else if (currentDay - markerDay > 8 && monthsDisplayed < 3 && previousDateHeader != markerMonth) {
+							items.add(markerMonth);
+							previousDateHeader = markerMonth;
+							monthsDisplayed += 1;
+						} else if (currentMonth - markerMonth >= 4 && previousDateHeader != THIS_YEAR_HEADER) {
+							items.add(THIS_YEAR_HEADER);
+							previousDateHeader = THIS_YEAR_HEADER;
+						}
+					} else if (previousDateHeader != markerYear) {
+						items.add(markerYear);
+						previousDateHeader = markerYear;
+					}
+					items.add(marker);
 				}
-			} else if (markerGroupName == null && previousDateHeader != markerYear) {
-				items.add(markerYear);
-				previousDateHeader = markerYear;
-			} else if (markerGroupName != null && !previousNameHeader.equals(markerGroupName)) {
+			} else {
+				if (markerGroupName.equals("")) {
+					markerGroupName = app.getString(R.string.shared_string_favorites);
+				}
 				items.add(markerGroupName);
-				previousNameHeader = markerGroupName;
+				items.addAll(group.getMapMarkers());
+				if (group.getHistoryMarkers().size() > 0) {
+					ShowHideHistoryButton showHideHistoryButton = new ShowHideHistoryButton();
+					showHideHistoryButton.setShowHistory(false);
+					showHideHistoryButton.setGroupName(markerGroupName);
+					showHideHistoryButton.setHistoryMarkers(group.getHistoryMarkers());
+					items.add(showHideHistoryButton);
+				}
 			}
-			items.add(marker);
 		}
 	}
 
@@ -121,13 +135,16 @@ public class MapMarkersGroupsAdapter extends RecyclerView.Adapter<RecyclerView.V
 		} else if (viewType == HEADER_TYPE) {
 			View view = LayoutInflater.from(viewGroup.getContext()).inflate(R.layout.map_marker_item_header, viewGroup, false);
 			return new MapMarkerHeaderViewHolder(view);
+		} else if (viewType == SHOW_HIDE_HISTORY_TYPE) {
+			View view = LayoutInflater.from(viewGroup.getContext()).inflate(R.layout.map_marker_item_show_hide_history, viewGroup, false);
+			return new MapMarkersShowHideHistoryViewHolder(view);
 		} else {
 			throw new IllegalArgumentException("Unsupported view type");
 		}
     }
 
     @Override
-    public void onBindViewHolder(RecyclerView.ViewHolder holder, int position) {
+    public void onBindViewHolder(final RecyclerView.ViewHolder holder, int position) {
 		IconsCache iconsCache = app.getIconsCache();
 		if (holder instanceof MapMarkerItemViewHolder) {
 			final MapMarkerItemViewHolder itemViewHolder = (MapMarkerItemViewHolder) holder;
@@ -165,7 +182,7 @@ public class MapMarkersGroupsAdapter extends RecyclerView.Adapter<RecyclerView.V
 				itemViewHolder.divider.setVisibility(View.VISIBLE);
 			}
 		} else if (holder instanceof MapMarkerHeaderViewHolder) {
-			final MapMarkerHeaderViewHolder dateViewHolder = (MapMarkerHeaderViewHolder) holder;
+			final MapMarkerHeaderViewHolder headerViewHolder = (MapMarkerHeaderViewHolder) holder;
 			final Object header = getItem(position);
 			String headerString;
 			if (header instanceof Integer) {
@@ -188,7 +205,23 @@ public class MapMarkersGroupsAdapter extends RecyclerView.Adapter<RecyclerView.V
 			} else {
 				throw new IllegalArgumentException("Unsupported header");
 			}
-			dateViewHolder.date.setText(headerString);
+			headerViewHolder.date.setText(headerString);
+		} else if (holder instanceof MapMarkersShowHideHistoryViewHolder) {
+			final MapMarkersShowHideHistoryViewHolder showHideHistoryViewHolder = (MapMarkersShowHideHistoryViewHolder) holder;
+			final ShowHideHistoryButton showHideHistoryButton = (ShowHideHistoryButton) getItem(position);
+			final boolean showHistory = showHideHistoryButton.isShowHistory();
+			showHideHistoryViewHolder.title.setText(app.getString(showHistory ? R.string.hide_passed : R.string.show_passed));
+//			showHideHistoryViewHolder.itemView.setOnClickListener(new View.OnClickListener() {
+//				@Override
+//				public void onClick(View view) {
+//					if (showHistory) {
+//						items.removeAll(showHideHistoryButton.getHistoryMarkers());
+//						showHideHistoryButton.setShowHistory(false);
+//					} else {
+//						items.addAll(holder.getAdapterPosition(), showHideHistoryButton.getHistoryMarkers());
+//					}
+//				}
+//			});
 		}
     }
 
@@ -199,6 +232,8 @@ public class MapMarkersGroupsAdapter extends RecyclerView.Adapter<RecyclerView.V
 			return MARKER_TYPE;
 		} else if (item instanceof String || item instanceof Integer) {
 			return HEADER_TYPE;
+		} else if (item instanceof ShowHideHistoryButton) {
+			return SHOW_HIDE_HISTORY_TYPE;
 		} else {
 			throw new IllegalArgumentException("Unsupported view type");
 		}
@@ -218,5 +253,35 @@ public class MapMarkersGroupsAdapter extends RecyclerView.Adapter<RecyclerView.V
 		Date date = new Date();
 		date.setMonth(month);
 		return dateFormat.format(date);
+	}
+
+	private static class ShowHideHistoryButton {
+		private boolean showHistory;
+		private String groupName;
+		private List<MapMarker> historyMarkers;
+
+		public boolean isShowHistory() {
+			return showHistory;
+		}
+
+		public void setShowHistory(boolean showHistory) {
+			this.showHistory = showHistory;
+		}
+
+		public String getGroupName() {
+			return groupName;
+		}
+
+		public void setGroupName(String groupName) {
+			this.groupName = groupName;
+		}
+
+		public List<MapMarker> getHistoryMarkers() {
+			return historyMarkers;
+		}
+
+		public void setHistoryMarkers(List<MapMarker> historyMarkers) {
+			this.historyMarkers = historyMarkers;
+		}
 	}
 }
