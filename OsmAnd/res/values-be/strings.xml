@@ -258,8 +258,8 @@
 	<string name="use_compass_navigation_descr">Выкарыстоўваць компас калі інакш немагчыма вызначыць напрамак</string>
 	<string name="use_compass_navigation">Выкарыстоўваць компас</string>
 	<string name="avoid_motorway">Пазьбягаць аўтамагістраляў</string>
-	<string name="auto_zoom_map_descr">Аўтаматычна памяншаць/павялічваць мапу згодна вашай хуткасьці (калі мапа сынхранізуецца зь дзейным становішчам)</string>
-	<string name="auto_zoom_map">Аўтаматычнае памяншэньне/павелічэньне</string>
+	<string name="auto_zoom_map_descr">Аўтаматычна памяншаць/павялічваць мапу згодна вашай хуткасці (калі мапа сінхранізуецца з дзейным становішчам)</string>
+	<string name="auto_zoom_map">Аўтаматычнае памяншэнне/павелічэнне</string>
 	<string name="snap_to_road_descr">Прывязвацца да дарог падчас навігацыі</string>
 	<string name="snap_to_road">Прывязвацца да дарог</string>
 	<string name="osmand_play_title_30_chars">OsmAnd Мапы й навігацыя</string>
@@ -325,8 +325,8 @@
 	<string name="show_lanes">Палосы руху</string>
 	<string name="avoid_unpaved">Пазьбягаць дарог без пакрыцьця</string>
 	<string name="avoid_ferries">Пазьбягаць паромаў</string>
-	<string name="avoid_in_routing_title">Пазьбягаць…</string>
-	<string name="avoid_in_routing_descr">Пазьбягаць платных і дарог без пакрыцьця, паромаў</string>
+	<string name="avoid_in_routing_title">Пазбягаць…</string>
+	<string name="avoid_in_routing_descr">Пазбягаць платных і дарог без пакрыцця, паромаў</string>
 	<string name="map_widget_fluorescent">Люмінесцэнтныя маршруты</string>
 	<string name="map_widget_show_ruler">Лінейка</string>
 	
@@ -609,7 +609,7 @@
 	<string name="use_transparent_map_theme">Празрыстая тэма</string>
 	<string name="native_library_not_supported">Свойскія бібліятэкі не падтрымліваюцца гэтай прыладай.</string>
 	<string name="init_native_library">Ініцыалізацыя свойскіх бібліятэк…</string>
-	<string name="choose_auto_follow_route">Аўтаматычнае цэнтраваньне мапы</string>
+	<string name="choose_auto_follow_route">Аўтаматычнае цэнтраванне мапы</string>
 	<string name="choose_auto_follow_route_descr">Час, праз які мапа вернецца да цяперашняга становішча</string>
 	
 	<string name="auto_follow_route_navigation">Аўтаматычнае цэнтраваньне толькі падчас навігацыі</string>
@@ -1249,7 +1249,7 @@
     <string name="speech_rate">Хуткасьць вымаўленьня</string>
     <string name="disable_complex_routing">Адключыць складаную маршрутызацыю</string>
     <string name="map_widget_map_rendering">Адмалёўка мапы</string>
-    <string name="app_mode_motorcycle">матацыкл</string>
+    <string name="app_mode_motorcycle">Матацыкл</string>
     <string name="app_mode_aircraft">Самалёт</string>
     
     <string name="index_item_nation_addresses">адрасы па ўсёй краіне</string>
@@ -1276,7 +1276,7 @@
     <string name="disable_complex_routing_descr">Адключэньне дзьвюх фазнай маршрутызацыі для аўтамабільнай навігацыі</string>
     <string name="amenity_type_seamark">Навігацыйны знак</string>
     <string name="app_mode_hiking">Пешы турызм</string>
-    <string name="app_mode_boat">Судна</string>
+    <string name="app_mode_boat">Човен</string>
     
     <string name="local_osm_changes_delete_all_confirm">Вы зьбіраецеся выдаліць %1$d зьмены OSM. Вы ўпэўненыя?</string>
     <string name="animate_routing_route_not_calculated">Калі ласка, спачатку разьлічыце маршрут</string>
@@ -2880,4 +2880,9 @@
     <string name="this_year">Сёлета</string>
     <string name="widget">Віджэт</string>
     <string name="top_bar">Верхняя панэль</string>
+    <string name="remove_from_map_markers">Выдаліць з маркераў мапы</string>
+    <string name="descendingly">Па змяншэнні</string>
+    <string name="ascendingly">Па ўзрастанні</string>
+    <string name="date_added">Дата дададзеная</string>
+    <string name="order_by">Сартаваць па:</string>
     </resources>
