@@ -2749,7 +2749,7 @@ Proporciona un código completo</string>
     <string name="marker_moved_to_active">Marcador del mapa movido a los activos</string>
     <string name="shared_string_list">Lista</string>
     <string name="shared_string_groups">Grupos</string>
-    <string name="passed">Pasado: %1$s</string>
+    <string name="passed">Finalizado: %1$s</string>
     <string name="make_active">Activar</string>
     <string name="today">Hoy</string>
     <string name="yesterday">Ayer</string>
