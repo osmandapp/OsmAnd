@@ -2794,4 +2794,9 @@ Indikas lokon:  %1$s x %2$s"</string>
     <string name="this_year">Tiu ĉi jaro</string>
     <string name="widget">Fenestraĵo</string>
     <string name="top_bar">Supra breto</string>
+    <string name="remove_from_map_markers">Forigi el map-markoj</string>
+    <string name="descendingly">Malkreskante</string>
+    <string name="ascendingly">Kreskante</string>
+    <string name="date_added">Aldon-dato</string>
+    <string name="order_by">Ordigi laŭ:</string>
     </resources>
