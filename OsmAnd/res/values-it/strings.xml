@@ -2899,7 +2899,7 @@ Copertura e qualità approssimativamente:
     <string name="empty_state_my_tracks">Aggiungi e registra Tracce</string>
     <string name="move_all_to_history">Sposta tutto nella cronologia</string>
     <string name="build_route">Costruisci un percorso</string>
-    <string name="show_direction">Mostra la direzione</string>
+    <string name="show_direction">Indicazione della direzione</string>
     <string name="sort_by">Ordina per</string>
     <string name="marker_options">Opzioni marcatori</string>
     <string name="marker_show_distance_descr">Scegli come indicare la distanza e la direzione dei marcatori della mappa nella schermata della mappa:</string>
@@ -2916,4 +2916,9 @@ Copertura e qualità approssimativamente:
     <string name="yesterday">Ieri</string>
     <string name="last_seven_days">Ultimi 7 giorni</string>
     <string name="this_year">Anno in corso</string>
+    <string name="remove_from_map_markers">Rimuovi dai Marcatori Mappa</string>
+    <string name="descendingly">Discendente</string>
+    <string name="ascendingly">Ascendente</string>
+    <string name="date_added">Dato aggiunto</string>
+    <string name="order_by">Ordina per:</string>
     </resources>
