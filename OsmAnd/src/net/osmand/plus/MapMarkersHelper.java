@@ -3,6 +3,7 @@ package net.osmand.plus;
 import android.content.Context;
 import android.support.annotation.NonNull;
 import android.support.annotation.Nullable;
+import android.support.v4.content.ContextCompat;
 import android.text.format.DateFormat;
 
 import net.osmand.IndexConstants;
@@ -10,9 +11,11 @@ import net.osmand.data.FavouritePoint;
 import net.osmand.data.LatLon;
 import net.osmand.data.LocationPoint;
 import net.osmand.data.PointDescription;
+import net.osmand.plus.FavouritesDbHelper.FavoriteGroup;
 import net.osmand.plus.GPXUtilities.GPXFile;
 import net.osmand.plus.GPXUtilities.WptPt;
 import net.osmand.plus.GpxSelectionHelper.SelectedGpxFile;
+import net.osmand.plus.helpers.ColorDialogs;
 import net.osmand.plus.mapmarkers.MapMarkersDbHelper;
 import net.osmand.util.Algorithms;
 import net.osmand.util.MapUtils;
@@ -24,9 +27,11 @@ import java.util.Collections;
 import java.util.Comparator;
 import java.util.Date;
 import java.util.Iterator;
+import java.util.LinkedHashMap;
 import java.util.LinkedList;
 import java.util.List;
 import java.util.Locale;
+import java.util.Map;
 
 import static net.osmand.data.PointDescription.POINT_TYPE_MAP_MARKER;
 
@@ -48,6 +53,8 @@ public class MapMarkersHelper {
 	}
 
 	public static class MapMarker implements LocationPoint {
+		private static int[] colors;
+
 		public String id;
 		public LatLon point;
 		private PointDescription pointDescription;
@@ -132,34 +139,39 @@ public class MapMarkersHelper {
 			return result;
 		}
 
-		public static int getColorId(int colorIndex) {
-			int colorId;
-			switch (colorIndex) {
-				case 0:
-					colorId = R.color.marker_blue;
-					break;
-				case 1:
-					colorId = R.color.marker_green;
-					break;
-				case 2:
-					colorId = R.color.marker_orange;
-					break;
-				case 3:
-					colorId = R.color.marker_red;
-					break;
-				case 4:
-					colorId = R.color.marker_yellow;
-					break;
-				case 5:
-					colorId = R.color.marker_teal;
-					break;
-				case 6:
-					colorId = R.color.marker_purple;
-					break;
-				default:
-					colorId = R.color.marker_blue;
+		private static final int[] colorsIds = new int[]{
+				R.color.marker_blue,
+				R.color.marker_green,
+				R.color.marker_orange,
+				R.color.marker_red,
+				R.color.marker_yellow,
+				R.color.marker_teal,
+				R.color.marker_purple
+		};
+
+		public static int[] getColors(Context context) {
+			if (colors != null) {
+				return colors;
 			}
-			return colorId;
+			colors = new int[colorsIds.length];
+			for (int i = 0; i < colorsIds.length; i++) {
+				colors[i] = ContextCompat.getColor(context, colorsIds[i]);
+			}
+			return colors;
+		}
+
+		public static int getColorId(int colorIndex) {
+			return (colorIndex >= 0 && colorIndex < colorsIds.length) ? colorsIds[colorIndex] : colorsIds[0];
+		}
+
+		public static int getColorIndex(Context context, int color) {
+			int[] colors = getColors(context);
+			for (int i = 0; i < colors.length; i++) {
+				if (colors[i] == color) {
+					return i;
+				}
+			}
+			return -1;
 		}
 	}
 
@@ -171,11 +183,20 @@ public class MapMarkersHelper {
 		private String id;
 		private String name;
 		private int type;
+		private int color;
+
+		public MarkersSyncGroup(@NonNull String id, @NonNull String name, int type, int color) {
+			this.id = id;
+			this.name = name;
+			this.type = type;
+			this.color = color;
+		}
 
 		public MarkersSyncGroup(@NonNull String id, @NonNull String name, int type) {
 			this.id = id;
 			this.name = name;
 			this.type = type;
+			this.color = -1;
 		}
 
 		public String getId() {
@@ -188,6 +209,10 @@ public class MapMarkersHelper {
 
 		public int getType() {
 			return type;
+		}
+
+		public int getColor() {
+			return color;
 		}
 	}
 
@@ -252,6 +277,55 @@ public class MapMarkersHelper {
 				markersDbHelper.changeActiveMarkerPosition(tail, null);
 			}
 		}
+	}
+
+	public List<MapMarker> getMarkersSortedByGroup() {
+		Map<String, MapMarkerGroup> groupsMap = new LinkedHashMap<>();
+		List<MapMarker> noGroup = new ArrayList<>();
+		for (MapMarker marker : mapMarkers) {
+			String groupName = marker.groupName;
+			if (groupName == null) {
+				noGroup.add(marker);
+			} else {
+				MapMarkerGroup group = groupsMap.get(groupName);
+				if (group == null) {
+					group = new MapMarkerGroup(groupName, marker.creationDate);
+					groupsMap.put(groupName, group);
+				} else {
+					long markerCreationDate = marker.creationDate;
+					if (markerCreationDate < group.getCreationDate()) {
+						group.setCreationDate(markerCreationDate);
+					}
+				}
+				group.getMapMarkers().add(marker);
+			}
+		}
+		List<MapMarkerGroup> groups = new ArrayList<>(groupsMap.values());
+		sortGroups(groups);
+
+		List<MapMarker> markers = new ArrayList<>();
+		markers.addAll(noGroup);
+		for (MapMarkerGroup group : groups) {
+			markers.addAll(group.getMapMarkers());
+		}
+		return markers;
+	}
+
+	private void sortGroups(List<MapMarkerGroup> groups) {
+		Collections.sort(groups, new Comparator<MapMarkerGroup>() {
+			@Override
+			public int compare(MapMarkerGroup group1, MapMarkerGroup group2) {
+				long t1 = group1.creationDate;
+				long t2 = group2.creationDate;
+				if (t1 > t2) {
+					return -1;
+				} else if (t1 == t2) {
+					return 0;
+				} else {
+					return 1;
+				}
+			}
+		});
 	}
 
 	private void sortHistoryMarkers() {
@@ -335,7 +409,7 @@ public class MapMarkersHelper {
 		List<MapMarker> dbMarkers = markersDbHelper.getMarkersFromGroup(group);
 
 		if (group.getType() == MarkersSyncGroup.FAVORITES_TYPE) {
-			FavouritesDbHelper.FavoriteGroup favGroup = ctx.getFavorites().getGroup(group.getName());
+			FavoriteGroup favGroup = ctx.getFavorites().getGroup(group.getName());
 			if (favGroup == null) {
 				return;
 			}
@@ -378,10 +452,13 @@ public class MapMarkersHelper {
 		for (MapMarker marker : markers) {
 			if (marker.id.equals(group.getId() + name)) {
 				exists = true;
-				if (!marker.history && !marker.point.equals(latLon)) {
+				int colorIndex = MapMarker.getColorIndex(ctx, ColorDialogs.getNearestColor(group.getColor(), MapMarker.getColors(ctx)));
+				boolean updateColor = group.getColor() != -1 && marker.colorIndex != colorIndex;
+				if (!marker.history && (!marker.point.equals(latLon) || updateColor)) {
 					for (MapMarker m : mapMarkers) {
 						if (m.id.equals(marker.id)) {
 							m.point = latLon;
+							m.colorIndex = colorIndex;
 							updateMapMarker(m, true);
 							break;
 						}
@@ -598,7 +675,8 @@ public class MapMarkersHelper {
 
 	private void addMarkers(List<LatLon> points, List<PointDescription> historyNames, @Nullable MarkersSyncGroup group) {
 		if (points.size() > 0) {
-			int colorIndex = -1;
+			boolean randomColor = group == null || group.getColor() == -1;
+			int colorIndex = randomColor ? -1 : MapMarker.getColorIndex(ctx, ColorDialogs.getNearestColor(group.getColor(), MapMarker.getColors(ctx)));
 			for (int i = 0; i < points.size(); i++) {
 				LatLon point = points.get(i);
 				PointDescription historyName = historyNames.get(i);
@@ -611,14 +689,16 @@ public class MapMarkersHelper {
 				if (pointDescription.isLocation() && Algorithms.isEmpty(pointDescription.getName())) {
 					pointDescription.setName(PointDescription.getSearchAddressStr(ctx));
 				}
-				if (colorIndex == -1) {
-					if (mapMarkers.size() > 0) {
-						colorIndex = (mapMarkers.get(mapMarkers.size() - 1).colorIndex + 1) % MAP_MARKERS_COLORS_COUNT;
+				if (randomColor) {
+					if (colorIndex == -1) {
+						if (mapMarkers.size() > 0) {
+							colorIndex = (mapMarkers.get(mapMarkers.size() - 1).colorIndex + 1) % MAP_MARKERS_COLORS_COUNT;
+						} else {
+							colorIndex = 0;
+						}
 					} else {
-						colorIndex = 0;
+						colorIndex = (colorIndex + 1) % MAP_MARKERS_COLORS_COUNT;
 					}
-				} else {
-					colorIndex = (colorIndex + 1) % MAP_MARKERS_COLORS_COUNT;
 				}
 
 				MapMarker marker = new MapMarker(point, pointDescription, colorIndex, false, 0);
@@ -774,5 +854,40 @@ public class MapMarkersHelper {
 			file.addPoint(wpt);
 		}
 		GPXUtilities.writeGpxFile(fout, file, ctx);
+	}
+
+	public static class MapMarkerGroup {
+		private String name;
+		private List<MapMarker> mapMarkers = new ArrayList<>();
+		private long creationDate;
+
+		public MapMarkerGroup(String name, long creationDate) {
+			this.name = name;
+			this.creationDate = creationDate;
+		}
+
+		public String getName() {
+			return name;
+		}
+
+		public void setName(String name) {
+			this.name = name;
+		}
+
+		public List<MapMarker> getMapMarkers() {
+			return mapMarkers;
+		}
+
+		public void setMapMarkers(List<MapMarker> mapMarkers) {
+			this.mapMarkers = mapMarkers;
+		}
+
+		public long getCreationDate() {
+			return creationDate;
+		}
+
+		public void setCreationDate(long creationDate) {
+			this.creationDate = creationDate;
+		}
 	}
 }

@@ -407,7 +407,8 @@ public class FavoritesTreeFragment extends OsmandExpandableListFragment {
 				List<PointDescription> names = new LinkedList<>();
 				for (Map.Entry<String, Set<FavouritePoint>> entry : favoritesSelected.entrySet()) {
 					FavoriteGroup favGr = helper.getGroup(entry.getKey());
-					MarkersSyncGroup syncGr = new MarkersSyncGroup(favGr.name, favGr.name, MarkersSyncGroup.FAVORITES_TYPE);
+					MarkersSyncGroup syncGr =
+							new MarkersSyncGroup(favGr.name, favGr.name, MarkersSyncGroup.FAVORITES_TYPE, favGr.color);
 					if (entry.getValue().size() == favGr.points.size()) {
 						markersHelper.addMarkersSyncGroup(syncGr);
 					}

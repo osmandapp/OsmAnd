@@ -19,7 +19,7 @@ import java.util.Locale;
 
 public class MapMarkersHistoryAdapter extends RecyclerView.Adapter<RecyclerView.ViewHolder> {
 
-	private static final int DATE_TYPE = 1;
+	private static final int HEADER_TYPE = 1;
 	private static final int MARKER_TYPE = 2;
 
 	private static final int TODAY_HEADER = 56;
@@ -97,9 +97,9 @@ public class MapMarkersHistoryAdapter extends RecyclerView.Adapter<RecyclerView.
 				}
 			});
 			return new MapMarkerItemViewHolder(view);
-		} else if (viewType == DATE_TYPE) {
-			View view = LayoutInflater.from(viewGroup.getContext()).inflate(R.layout.map_marker_item_date, viewGroup, false);
-			return new MapMarkerDateViewHolder(view);
+		} else if (viewType == HEADER_TYPE) {
+			View view = LayoutInflater.from(viewGroup.getContext()).inflate(R.layout.map_marker_item_header, viewGroup, false);
+			return new MapMarkerHeaderViewHolder(view);
 		} else {
 			throw new IllegalArgumentException("Unsupported view type");
 		}
@@ -143,8 +143,8 @@ public class MapMarkersHistoryAdapter extends RecyclerView.Adapter<RecyclerView.
 				itemViewHolder.bottomShadow.setVisibility(View.GONE);
 				itemViewHolder.divider.setVisibility(View.VISIBLE);
 			}
-		} else if (holder instanceof MapMarkerDateViewHolder) {
-			final MapMarkerDateViewHolder dateViewHolder = (MapMarkerDateViewHolder) holder;
+		} else if (holder instanceof MapMarkerHeaderViewHolder) {
+			final MapMarkerHeaderViewHolder dateViewHolder = (MapMarkerHeaderViewHolder) holder;
 			final Integer dateHeader = (Integer) getItem(position);
 			String dateString;
 			if (dateHeader == TODAY_HEADER) {
@@ -170,7 +170,7 @@ public class MapMarkersHistoryAdapter extends RecyclerView.Adapter<RecyclerView.
 		if (item instanceof MapMarker) {
 			return MARKER_TYPE;
 		} else if (item instanceof Integer) {
-			return DATE_TYPE;
+			return HEADER_TYPE;
 		} else {
 			throw new IllegalArgumentException("Unsupported view type");
 		}

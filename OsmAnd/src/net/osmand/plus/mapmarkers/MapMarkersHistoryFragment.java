@@ -25,7 +25,7 @@ import net.osmand.plus.MapMarkersHelper.MapMarker;
 import net.osmand.plus.OsmandApplication;
 import net.osmand.plus.R;
 import net.osmand.plus.activities.MapActivity;
-import net.osmand.plus.mapmarkers.adapters.MapMarkerDateViewHolder;
+import net.osmand.plus.mapmarkers.adapters.MapMarkerHeaderViewHolder;
 import net.osmand.plus.mapmarkers.adapters.MapMarkerItemViewHolder;
 import net.osmand.plus.mapmarkers.adapters.MapMarkersHistoryAdapter;
 
@@ -84,7 +84,7 @@ public class MapMarkersHistoryFragment extends Fragment implements MapMarkersHel
 
 			@Override
 			public int getSwipeDirs(RecyclerView recyclerView, RecyclerView.ViewHolder viewHolder) {
-				if (viewHolder instanceof MapMarkerDateViewHolder) {
+				if (viewHolder instanceof MapMarkerHeaderViewHolder) {
 					return 0;
 				}
 				return super.getSwipeDirs(recyclerView, viewHolder);
