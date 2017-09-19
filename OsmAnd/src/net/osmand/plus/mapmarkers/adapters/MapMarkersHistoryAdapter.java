@@ -160,7 +160,7 @@ public class MapMarkersHistoryAdapter extends RecyclerView.Adapter<RecyclerView.
 			} else {
 				dateString = String.valueOf(dateHeader);
 			}
-			dateViewHolder.date.setText(dateString);
+			dateViewHolder.title.setText(dateString);
 		}
 	}
 

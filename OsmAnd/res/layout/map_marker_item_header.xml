@@ -14,13 +14,25 @@
         android:orientation="horizontal"
         android:background="?attr/bg_color">
 
+        <ImageView
+            android:id="@+id/icon"
+            android:scaleType="centerInside"
+            android:layout_width="56dp"
+            android:layout_height="48dp"
+            tools:src="@drawable/ic_action_fav_dark"
+            tools:visibility="visible"
+            android:visibility="gone"/>
+
+        <View
+            android:id="@+id/icon_space"
+            android:layout_width="16dp"
+            android:layout_height="match_parent"/>
+
         <android.support.v7.widget.AppCompatTextView
-            android:id="@+id/date_title"
+            android:id="@+id/title"
             android:layout_width="0dp"
             android:layout_weight="1"
             android:layout_height="match_parent"
-            android:paddingLeft="16dp"
-            android:paddingStart="16dp"
             android:gravity="center_vertical"
             tools:text="Today"/>
 
