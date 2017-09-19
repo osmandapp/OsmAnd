@@ -348,7 +348,7 @@ public class OsMoPlugin extends OsmandPlugin implements OsMoReactor {
 							for (WptPt pointInTrack : g.getPoints()) {
 								if (pointInTrack.getExtensionsToRead().get("u").equals(
 										point.getExtensionsToRead().get("u"))) {
-									g.removePoint(pointInTrack);
+									g.deleteWptPt(pointInTrack);
 								}
 							}
 						} else {

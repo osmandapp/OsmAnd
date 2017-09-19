@@ -72,6 +72,16 @@ public class AndroidUtils {
 
 	}
 
+	public static String trimExtension(String src) {
+		if (src != null) {
+			int index = src.lastIndexOf('.');
+			if (index != -1) {
+				return src.substring(0, index);
+			}
+		}
+		return src;
+	}
+
 	public static String formatDate(Context ctx, long time) {
 		return DateFormat.getDateFormat(ctx).format(new Date(time));
 	}

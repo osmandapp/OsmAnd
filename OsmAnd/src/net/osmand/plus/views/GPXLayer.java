@@ -20,6 +20,7 @@ import android.support.annotation.NonNull;
 import android.support.annotation.Nullable;
 import android.support.v4.content.ContextCompat;
 
+import net.osmand.AndroidUtils;
 import net.osmand.data.LatLon;
 import net.osmand.data.PointDescription;
 import net.osmand.data.QuadRect;
@@ -34,6 +35,7 @@ import net.osmand.plus.GpxSelectionHelper;
 import net.osmand.plus.GpxSelectionHelper.GpxDisplayGroup;
 import net.osmand.plus.GpxSelectionHelper.GpxDisplayItem;
 import net.osmand.plus.GpxSelectionHelper.SelectedGpxFile;
+import net.osmand.plus.MapMarkersHelper.MarkersSyncGroup;
 import net.osmand.plus.OsmandApplication;
 import net.osmand.plus.OsmandSettings.CommonPreference;
 import net.osmand.plus.R;
@@ -619,8 +621,17 @@ public class GPXLayer extends OsmandMapLayer implements ContextMenuLayer.IContex
 					position.getLongitude(), System.currentTimeMillis(), objectInMotion.desc,
 					objectInMotion.name, objectInMotion.category, objectInMotion.getColor());
 			new SaveGpxFileAsyncTask(view.getApplication(), callback, objectInMotion).execute(gpxFile);
+			syncGpx(gpxFile);
 		} else if (callback != null) {
 			callback.onApplyMovedObject(false, o);
+		}
+	}
+
+	private void syncGpx(GPXFile gpxFile) {
+		File gpx = new File(gpxFile.path);
+		if (gpx.exists()) {
+			view.getApplication().getMapMarkersHelper().syncGroup(new MarkersSyncGroup(gpx.getAbsolutePath(),
+					AndroidUtils.trimExtension(gpx.getName()), MarkersSyncGroup.GPX_TYPE));
 		}
 	}
 
