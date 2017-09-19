@@ -215,6 +215,10 @@ public class MapMarkersHelper {
 		public int getColor() {
 			return color;
 		}
+
+		public void setColor(int color) {
+			this.color = color;
+		}
 	}
 
 	public MapMarkersHelper(OsmandApplication ctx) {
@@ -431,6 +435,9 @@ public class MapMarkersHelper {
 				removeActiveMarkersFromSyncGroup(group.getId());
 				return;
 			}
+			if (group.getColor() == -1) {
+				group.setColor(favGroup.color);
+			}
 
 			for (FavouritePoint fp : favGroup.points) {
 				addNewMarkerIfNeeded(group, dbMarkers, new LatLon(fp.getLatitude(), fp.getLongitude()), fp.getName());
@@ -453,6 +460,7 @@ public class MapMarkersHelper {
 
 			List<WptPt> gpxPoints = new LinkedList<>(gpx.getPoints());
 			for (WptPt pt : gpxPoints) {
+				group.setColor(pt.getColor(ContextCompat.getColor(ctx, R.color.marker_red)));
 				addNewMarkerIfNeeded(group, dbMarkers, new LatLon(pt.lat, pt.lon), pt.name);
 			}
 

@@ -69,6 +69,7 @@ import java.util.HashSet;
 import java.util.Iterator;
 import java.util.LinkedHashMap;
 import java.util.LinkedHashSet;
+import java.util.LinkedList;
 import java.util.List;
 import java.util.Map;
 import java.util.Set;
@@ -90,7 +91,7 @@ public class TrackPointFragment extends OsmandExpandableListFragment {
 	final private PointGPXAdapter adapter = new PointGPXAdapter();
 	private GpxDisplayItemType[] filterTypes = { GpxDisplayItemType.TRACK_POINTS, GpxDisplayItemType.TRACK_ROUTE_POINTS };
 	private boolean selectionMode = false;
-	private Set<GpxDisplayItem> selectedItems = new LinkedHashSet<>();
+	private LinkedHashMap<GpxDisplayItemType, Set<GpxDisplayItem>> selectedItems = new LinkedHashMap<>();
 	private Set<Integer> selectedGroups = new LinkedHashSet<>();
 	private ActionMode actionMode;
 	private SearchView searchView;
@@ -211,6 +212,26 @@ public class TrackPointFragment extends OsmandExpandableListFragment {
 		setListView(listView);
 		expandAllGroups();
 		return view;
+	}
+
+	private int getSelectedItemsCount() {
+		int count = 0;
+		for (Set<GpxDisplayItem> set : selectedItems.values()) {
+			if (set != null) {
+				count += set.size();
+			}
+		}
+		return count;
+	}
+
+	private Set<GpxDisplayItem> getSelectedItems() {
+		Set<GpxDisplayItem> result = new LinkedHashSet<>();
+		for (Set<GpxDisplayItem> set : selectedItems.values()) {
+			if (set != null) {
+				result.addAll(set);
+			}
+		}
+		return result;
 	}
 
 	private void addPoint(PointDescription pointDescription) {
@@ -488,9 +509,10 @@ public class TrackPointFragment extends OsmandExpandableListFragment {
 	}
 
 	private void deleteItemsAction() {
-		if (selectedItems.size() > 0) {
+		int size = getSelectedItemsCount();
+		if (size > 0) {
 			AlertDialog.Builder b = new AlertDialog.Builder(getActivity());
-			b.setMessage(getString(R.string.points_delete_multiple, selectedItems.size()));
+			b.setMessage(getString(R.string.points_delete_multiple, size));
 			b.setPositiveButton(R.string.shared_string_delete, new DialogInterface.OnClickListener() {
 				@Override
 				public void onClick(DialogInterface dialog, int which) {
@@ -524,7 +546,7 @@ public class TrackPointFragment extends OsmandExpandableListFragment {
 				GPXFile gpx = getGpx();
 				SavingTrackHelper savingTrackHelper = app.getSavingTrackHelper();
 				if (gpx != null) {
-					for (GpxDisplayItem item : selectedItems) {
+					for (GpxDisplayItem item : getSelectedItems()) {
 						if (gpx.showCurrentTrack) {
 							savingTrackHelper.deletePointData(item.locationStart);
 						} else {
@@ -606,26 +628,32 @@ public class TrackPointFragment extends OsmandExpandableListFragment {
 	}
 
 	private void selectMapMarkersImpl() {
-		if (!selectedItems.isEmpty()) {
+		if (getSelectedItemsCount() > 0) {
 			if (getSettings().USE_MAP_MARKERS.get()) {
 				MapMarkersHelper markersHelper = app.getMapMarkersHelper();
-				List<LatLon> points = new ArrayList<>();
-				List<PointDescription> names = new ArrayList<>();
-				for(GpxDisplayItem i : selectedItems) {
-					if (i.locationStart != null) {
-						points.add(new LatLon(i.locationStart.lat, i.locationStart.lon));
-						names.add(new PointDescription(PointDescription.POINT_TYPE_MAP_MARKER, i.name));
+				List<LatLon> points = new LinkedList<>();
+				List<PointDescription> names = new LinkedList<>();
+				for (Map.Entry<GpxDisplayItemType, Set<GpxDisplayItem>> entry : selectedItems.entrySet()) {
+					if (entry.getKey() == GpxDisplayItemType.TRACK_POINTS) {
+						File gpx = getGpxDataItem().getFile();
+						MarkersSyncGroup syncGroup = new MarkersSyncGroup(gpx.getAbsolutePath(),
+								AndroidUtils.trimExtension(gpx.getName()), MarkersSyncGroup.GPX_TYPE);
+						markersHelper.addMarkersSyncGroup(syncGroup);
+						markersHelper.syncGroup(syncGroup);
+					} else {
+						for (GpxDisplayItem i : entry.getValue()) {
+							if (i.locationStart != null) {
+								points.add(new LatLon(i.locationStart.lat, i.locationStart.lon));
+								names.add(new PointDescription(PointDescription.POINT_TYPE_MAP_MARKER, i.name));
+							}
+						}
+						markersHelper.addMapMarkers(points, names, null);
 					}
 				}
-				File gpx = getGpxDataItem().getFile();
-				MarkersSyncGroup syncGroup = new MarkersSyncGroup(gpx.getAbsolutePath(),
-						AndroidUtils.trimExtension(gpx.getName()), MarkersSyncGroup.GPX_TYPE);
-				markersHelper.addMarkersSyncGroup(syncGroup);
-				markersHelper.addMapMarkers(points, names, syncGroup);
 				MapActivity.launchMapActivityMoveToTop(getActivity());
 			} else {
 				final TargetPointsHelper targetPointsHelper = getMyApplication().getTargetPointsHelper();
-				for (GpxDisplayItem i : selectedItems) {
+				for (GpxDisplayItem i : getSelectedItems()) {
 					if (i.locationStart != null) {
 						targetPointsHelper.navigateToPoint(new LatLon(i.locationStart.lat, i.locationStart.lon), false,
 								targetPointsHelper.getIntermediatePoints().size() + 1,
@@ -679,10 +707,10 @@ public class TrackPointFragment extends OsmandExpandableListFragment {
 	}
 
 	private void selectFavoritesImpl() {
-		if (!selectedItems.isEmpty()) {
+		if (getSelectedItemsCount() > 0) {
 			AlertDialog.Builder b = new AlertDialog.Builder(getTrackActivity());
 			final EditText editText = new EditText(getTrackActivity());
-			String name = selectedItems.iterator().next().group.getName();
+			String name = getSelectedItems().iterator().next().group.getName();
 			if(name.indexOf('\n') > 0) {
 				name = name.substring(0, name.indexOf('\n'));
 			}
@@ -700,7 +728,7 @@ public class TrackPointFragment extends OsmandExpandableListFragment {
 						actionMode.finish();
 					}
 					FavouritesDbHelper fdb = app.getFavorites();
-					for(GpxDisplayItem i : selectedItems) {
+					for(GpxDisplayItem i : getSelectedItems()) {
 						if (i.locationStart != null) {
 							FavouritePoint fp = new FavouritePoint(i.locationStart.lat, i.locationStart.lon, i.name, editText.getText().toString());
 							if (!Algorithms.isEmpty(i.description)) {
@@ -719,8 +747,9 @@ public class TrackPointFragment extends OsmandExpandableListFragment {
 	}
 
 	private void updateSelectionMode(ActionMode m) {
-		if (selectedItems.size() > 0) {
-			m.setTitle(selectedItems.size() + " " + getMyApplication().getString(R.string.shared_string_selected_lowercase));
+		int size = getSelectedItemsCount();
+		if (size > 0) {
+			m.setTitle(size + " " + getMyApplication().getString(R.string.shared_string_selected_lowercase));
 		} else {
 			m.setTitle("");
 		}
@@ -733,9 +762,19 @@ public class TrackPointFragment extends OsmandExpandableListFragment {
 			GpxDisplayItem item = adapter.getChild(groupPosition, childPosition);
 			ch.setChecked(!ch.isChecked());
 			if (ch.isChecked()) {
-				selectedItems.add(item);
+				Set<GpxDisplayItem> set = selectedItems.get(item.group.getType());
+				if (set != null) {
+					set.add(item);
+				} else {
+					set = new LinkedHashSet<>();
+					set.add(item);
+					selectedItems.put(item.group.getType(), set);
+				}
 			} else {
-				selectedItems.remove(item);
+				Set<GpxDisplayItem> set = selectedItems.get(item.group.getType());
+				if (set != null) {
+					set.remove(item);
+				}
 			}
 			updateSelectionMode(actionMode);
 		} else {
@@ -876,13 +915,17 @@ public class TrackPointFragment extends OsmandExpandableListFragment {
 						if (ch.isChecked()) {
 							selectedGroups.add(groupPosition);
 							if (items != null) {
-								selectedItems.addAll(items);
+								Set<GpxDisplayItem> set = selectedItems.get(group.getType());
+								if (set != null) {
+									set.addAll(items);
+								} else {
+									set = new LinkedHashSet<>(items);
+									selectedItems.put(group.getType(), set);
+								}
 							}
 						} else {
 							selectedGroups.remove(groupPosition);
-							if (items != null) {
-								selectedItems.removeAll(items);
-							}
+							selectedItems.remove(group.getType());
 						}
 						adapter.notifyDataSetInvalidated();
 						updateSelectionMode(actionMode);
@@ -979,7 +1022,7 @@ public class TrackPointFragment extends OsmandExpandableListFragment {
 			final CheckBox ch = (CheckBox) row.findViewById(R.id.toggle_item);
 			if (selectionMode) {
 				ch.setVisibility(View.VISIBLE);
-				ch.setChecked(selectedItems.contains(gpxItem));
+				ch.setChecked(selectedItems.get(gpxItem.group.getType()) != null && selectedItems.get(gpxItem.group.getType()).contains(gpxItem));
 				row.findViewById(R.id.icon).setVisibility(View.GONE);
 				options.setVisibility(View.GONE);
 				ch.setOnClickListener(new View.OnClickListener() {
@@ -987,9 +1030,19 @@ public class TrackPointFragment extends OsmandExpandableListFragment {
 					@Override
 					public void onClick(View v) {
 						if (ch.isChecked()) {
-							selectedItems.add(gpxItem);
+							Set<GpxDisplayItem> set = selectedItems.get(gpxItem.group.getType());
+							if (set != null) {
+								set.add(gpxItem);
+							} else {
+								set = new LinkedHashSet<>();
+								set.add(gpxItem);
+								selectedItems.put(gpxItem.group.getType(), set);
+							}
 						} else {
-							selectedItems.remove(gpxItem);
+							Set<GpxDisplayItem> set = selectedItems.get(gpxItem.group.getType());
+							if (set != null) {
+								set.remove(gpxItem);
+							}
 						}
 						updateSelectionMode(actionMode);
 					}
