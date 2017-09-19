@@ -55,6 +55,7 @@ import net.osmand.plus.download.DownloadActivity;
 import net.osmand.plus.download.DownloadIndexesThread.DownloadEvents;
 import net.osmand.plus.download.IndexItem;
 import net.osmand.plus.helpers.FileNameTranslationHelper;
+import net.osmand.plus.resources.IncrementalChangesManager;
 import net.osmand.util.Algorithms;
 
 import java.io.File;
@@ -465,6 +466,13 @@ public class LocalIndexesFragment extends OsmandExpandableListFragment implement
 					if (operation == DELETE_OPERATION) {
 						File f = new File(info.getPathToData());
 						successfull = Algorithms.removeAllFiles(f);
+						if (getMyApplication().getSettings().LIVE_UPDATES_PURCHASED.get()) {
+							String fileNameWithoutExtension =
+									Algorithms.getFileNameWithoutExtension(f);
+							IncrementalChangesManager changesManager =
+									getMyApplication().getResourceManager().getChangesManager();
+							changesManager.deleteUpdates(fileNameWithoutExtension);
+						}
 						if (successfull) {
 							getMyApplication().getResourceManager().closeFile(info.getFileName());
 						}
