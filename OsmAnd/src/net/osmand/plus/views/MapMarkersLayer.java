@@ -31,6 +31,8 @@ import net.osmand.plus.views.mapwidgets.MapMarkersWidgetsFactory;
 import java.util.ArrayList;
 import java.util.List;
 
+import gnu.trove.list.array.TIntArrayList;
+
 public class MapMarkersLayer extends OsmandMapLayer implements IContextMenuProvider,
 		IContextMenuProviderSelection, ContextMenuLayer.IMoveObjectProvider {
 	protected static final int DIST_TO_SHOW = 80;
@@ -63,6 +65,10 @@ public class MapMarkersLayer extends OsmandMapLayer implements IContextMenuProvi
 	private Paint paint;
 	private Path path;
 	private List<LatLon> route = new ArrayList<>();
+
+	private TIntArrayList tx = new TIntArrayList();
+	private TIntArrayList ty = new TIntArrayList();
+	private Path linePath = new Path();
 
 	private ContextMenuLayer contextMenuLayer;
 
@@ -221,13 +227,27 @@ public class MapMarkersLayer extends OsmandMapLayer implements IContextMenuProvi
 		List<MapMarker> activeMapMarkers = markersHelper.getMapMarkers();
 
 		if (settings.SHOW_LINES_TO_FIRST_MARKERS.get()) {
+			linePath.reset();
+			tx.clear();
+			ty.clear();
 			int locX = myLoc == null ? tileBox.getCenterPixelX() : tileBox.getPixXFromLonNoRot(myLoc.getLongitude());
 			int locY = myLoc == null ? tileBox.getCenterPixelY() : tileBox.getPixYFromLatNoRot(myLoc.getLatitude());
 			for (int i = 0; i < activeMapMarkers.size() && i < 2; i++) {
 				int markerX = tileBox.getPixXFromLonNoRot(activeMapMarkers.get(i).getLongitude());
 				int markerY = tileBox.getPixYFromLatNoRot(activeMapMarkers.get(i).getLatitude());
-				canvas.drawLine(locX, locY, markerX, markerY, lineAttrs.paint);
+				tx.add(markerX);
+				ty.add(markerY);
+				if (i == 0) {
+					linePath.moveTo(markerX, markerY);
+					linePath.lineTo(locX, locY);
+					tx.add(locX);
+					ty.add(locY);
+				} else {
+					linePath.lineTo(markerX, markerY);
+				}
 			}
+			calculatePath(tileBox, tx, ty, linePath);
+			canvas.drawPath(linePath, lineAttrs.paint);
 		}
 
 		for (MapMarker marker : activeMapMarkers) {
