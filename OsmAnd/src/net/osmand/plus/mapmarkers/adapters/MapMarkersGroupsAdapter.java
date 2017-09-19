@@ -144,7 +144,7 @@ public class MapMarkersGroupsAdapter extends RecyclerView.Adapter<RecyclerView.V
     }
 
     @Override
-    public void onBindViewHolder(final RecyclerView.ViewHolder holder, int position) {
+    public void onBindViewHolder(final RecyclerView.ViewHolder holder, final int position) {
 		IconsCache iconsCache = app.getIconsCache();
 		if (holder instanceof MapMarkerItemViewHolder) {
 			final MapMarkerItemViewHolder itemViewHolder = (MapMarkerItemViewHolder) holder;
@@ -211,17 +211,24 @@ public class MapMarkersGroupsAdapter extends RecyclerView.Adapter<RecyclerView.V
 			final ShowHideHistoryButton showHideHistoryButton = (ShowHideHistoryButton) getItem(position);
 			final boolean showHistory = showHideHistoryButton.isShowHistory();
 			showHideHistoryViewHolder.title.setText(app.getString(showHistory ? R.string.hide_passed : R.string.show_passed));
-//			showHideHistoryViewHolder.itemView.setOnClickListener(new View.OnClickListener() {
-//				@Override
-//				public void onClick(View view) {
-//					if (showHistory) {
-//						items.removeAll(showHideHistoryButton.getHistoryMarkers());
-//						showHideHistoryButton.setShowHistory(false);
-//					} else {
-//						items.addAll(holder.getAdapterPosition(), showHideHistoryButton.getHistoryMarkers());
-//					}
-//				}
-//			});
+			showHideHistoryViewHolder.itemView.setOnClickListener(new View.OnClickListener() {
+				@Override
+				public void onClick(View view) {
+					List<MapMarker> historyMarkers = showHideHistoryButton.getHistoryMarkers();
+					int pos = holder.getAdapterPosition();
+					if (showHistory) {
+						showHideHistoryButton.setShowHistory(false);
+						notifyItemChanged(pos);
+						items.removeAll(historyMarkers);
+						notifyItemRangeRemoved(pos - historyMarkers.size(), historyMarkers.size());
+					} else {
+						showHideHistoryButton.setShowHistory(true);
+						notifyItemChanged(pos);
+						items.addAll(pos, historyMarkers);
+						notifyItemRangeInserted(pos, historyMarkers.size());
+					}
+				}
+			});
 		}
     }
 

@@ -9,8 +9,8 @@
 
     <android.support.v7.widget.AppCompatTextView
         android:id="@+id/show_hide_history_title"
-        android:layout_width="0dp"
-        android:layout_weight="1"
+        android:background="?attr/selectableItemBackground"
+        android:layout_width="match_parent"
         android:layout_height="match_parent"
         android:paddingLeft="56dp"
         android:paddingStart="56dp"
