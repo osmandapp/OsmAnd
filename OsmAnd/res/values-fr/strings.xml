@@ -75,7 +75,7 @@
     <string name="use_transparent_map_theme">Thème de transparence</string>
     <string name="native_library_not_supported">Rendu natif non supporté sur cet appareil.</string>
     <string name="init_native_library">Chargement …</string>
-    <string name="choose_auto_follow_route">Centrer automatiquement la carte</string>
+    <string name="choose_auto_follow_route">Centrer automatiquement la vue de la carte</string>
     <string name="choose_auto_follow_route_descr">Temps avant que la carte se recentre sur la position actuelle</string>
     
     <string name="auto_follow_route_navigation">Recentrage automatique navigation</string>
@@ -313,7 +313,7 @@ Au-delà la navigation bascule automatiquement sur le service en ligne CloudMade
     <string name="shared_string_select_all">Sélectionner tout</string>
     <string name="shared_string_refresh">Recharger</string>
     <string name="fast_route_mode">Itinéraire le plus rapide</string>
-    <string name="fast_route_mode_descr">Activer pour calculer l\'itinéraire le plus rapide ou désactiver pour calculer l\'itinéraire le plus économe en carburant</string>
+    <string name="fast_route_mode_descr">Activer le calcul de l\'itinéraire le plus rapide ou désactiver le calcul de l\'itinéraire le plus économe en carburant</string>
     <string name="tiles_to_download_estimated_size">Le zoom {0} télécharge {1} carreaux ({2} Mb )</string>
     <string name="shared_string_download_map">Télécharger la carte</string>
     <string name="select_max_zoom_preload_area">Sélectionnez le zoom maximum pour précharger la zone visible</string>
@@ -540,7 +540,7 @@ Au-delà la navigation bascule automatiquement sur le service en ligne CloudMade
     <string name="data_settings">Données</string>
 
     <string name="osm_settings">Contribuer à OSM</string>
-    <string name="auto_zoom_map_descr">Zoom automatique sur la carte en fonction de la vitesse</string>
+    <string name="auto_zoom_map_descr">Zoom automatique sur la carte en fonction de la vitesse (tant que la carte est positionnée sur votre position actuelle)</string>
     <string name="auto_zoom_map">Zoom automatique de la carte</string>
     <string name="additional_settings">Paramètres supplémentaires</string>
     <string name="shared_string_settings">Paramètres</string>
@@ -881,7 +881,7 @@ Mémoire proportionnelle %4$s Mo (limite Android %5$s Mo, Dalvik %6$s Mo).</stri
     <string name="avoid_unpaved">Éviter les voies non revêtues</string>
     <string name="avoid_ferries">Éviter les ferries</string>
     <string name="avoid_in_routing_title">Éviter</string>
-    <string name="avoid_in_routing_descr">Éviter péages, voies non revêtues, ferries, autoroutes</string>
+    <string name="avoid_in_routing_descr">Éviter routes à péage, voies non revêtues, ferrys</string>
     <string name="show_warnings_title">Annonces visuelles…</string>
     <string name="show_warnings_descr">Afficher les avertissements (limitations de vitesse, stops, ralentisseurs, radars), les voies de circulation</string>
     <string name="map_widget_fluorescent">Itinéraires fluorescents</string>
