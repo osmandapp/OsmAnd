@@ -55,7 +55,6 @@ import net.osmand.plus.download.DownloadActivity;
 import net.osmand.plus.download.DownloadIndexesThread.DownloadEvents;
 import net.osmand.plus.download.IndexItem;
 import net.osmand.plus.helpers.FileNameTranslationHelper;
-import net.osmand.plus.inapp.InAppHelper;
 import net.osmand.plus.resources.IncrementalChangesManager;
 import net.osmand.util.Algorithms;
 
@@ -467,7 +466,7 @@ public class LocalIndexesFragment extends OsmandExpandableListFragment implement
 					if (operation == DELETE_OPERATION) {
 						File f = new File(info.getPathToData());
 						successfull = Algorithms.removeAllFiles(f);
-						if (InAppHelper.isSubscribedToLiveUpdates()) {
+						if (getMyApplication().getSettings().LIVE_UPDATES_PURCHASED.get()) {
 							String fileNameWithoutExtension =
 									Algorithms.getFileNameWithoutExtension(f);
 							IncrementalChangesManager changesManager =
