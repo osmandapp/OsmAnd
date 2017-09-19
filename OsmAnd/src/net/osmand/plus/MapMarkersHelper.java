@@ -3,6 +3,7 @@ package net.osmand.plus;
 import android.content.Context;
 import android.support.annotation.NonNull;
 import android.support.annotation.Nullable;
+import android.support.v4.content.ContextCompat;
 import android.text.format.DateFormat;
 
 import net.osmand.IndexConstants;
@@ -52,6 +53,8 @@ public class MapMarkersHelper {
 	}
 
 	public static class MapMarker implements LocationPoint {
+		private static int[] colors;
+
 		public String id;
 		public LatLon point;
 		private PointDescription pointDescription;
@@ -136,24 +139,35 @@ public class MapMarkersHelper {
 			return result;
 		}
 
-		public static int[] colors = new int[]{
+		private static final int[] colorsIds = new int[]{
 				R.color.marker_blue,
 				R.color.marker_green,
 				R.color.marker_orange,
 				R.color.marker_red,
 				R.color.marker_yellow,
 				R.color.marker_teal,
-				R.color.marker_purple,
+				R.color.marker_purple
 		};
 
-		public static int getColorId(int colorIndex) {
-			return (colorIndex >= 0 && colorIndex < colors.length) ? colors[colorIndex] : colors[0];
+		public static int[] getColors(Context context) {
+			if (colors != null) {
+				return colors;
+			}
+			colors = new int[colorsIds.length];
+			for (int i = 0; i < colorsIds.length; i++) {
+				colors[i] = ContextCompat.getColor(context, colorsIds[i]);
+			}
+			return colors;
 		}
 
-		public static int getColorIndex(int colorId) {
+		public static int getColorId(int colorIndex) {
+			return (colorIndex >= 0 && colorIndex < colorsIds.length) ? colorsIds[colorIndex] : colorsIds[0];
+		}
+
+		public static int getColorIndex(Context context, int color) {
+			int[] colors = getColors(context);
 			for (int i = 0; i < colors.length; i++) {
-				int color = colors[i];
-				if (color == colorId) {
+				if (colors[i] == color) {
 					return i;
 				}
 			}
@@ -438,7 +452,7 @@ public class MapMarkersHelper {
 		for (MapMarker marker : markers) {
 			if (marker.id.equals(group.getId() + name)) {
 				exists = true;
-				int colorIndex = MapMarker.getColorIndex(ColorDialogs.getNearestColor(group.getColor(), MapMarker.colors));
+				int colorIndex = MapMarker.getColorIndex(ctx, ColorDialogs.getNearestColor(group.getColor(), MapMarker.getColors(ctx)));
 				boolean updateColor = group.getColor() != -1 && marker.colorIndex != colorIndex;
 				if (!marker.history && (!marker.point.equals(latLon) || updateColor)) {
 					for (MapMarker m : mapMarkers) {
@@ -662,7 +676,7 @@ public class MapMarkersHelper {
 	private void addMarkers(List<LatLon> points, List<PointDescription> historyNames, @Nullable MarkersSyncGroup group) {
 		if (points.size() > 0) {
 			boolean randomColor = group == null || group.getColor() == -1;
-			int colorIndex = randomColor ? -1 : MapMarker.getColorIndex(ColorDialogs.getNearestColor(group.getColor(), MapMarker.colors));
+			int colorIndex = randomColor ? -1 : MapMarker.getColorIndex(ctx, ColorDialogs.getNearestColor(group.getColor(), MapMarker.getColors(ctx)));
 			for (int i = 0; i < points.size(); i++) {
 				LatLon point = points.get(i);
 				PointDescription historyName = historyNames.get(i);
