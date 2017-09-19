@@ -2758,4 +2758,9 @@ Proporciona un código completo</string>
     <string name="widget">Control</string>
     <string name="top_bar">Barra superior</string>
     <string name="marker_show_distance_descr">Elige cómo se indica la distancia y dirección a los marcadores del mapa en la pantalla del mapa:</string>
+    <string name="remove_from_map_markers">Quitar de los marcadores del mapa</string>
+    <string name="descendingly">Descendente</string>
+    <string name="ascendingly">Ascendente</string>
+    <string name="date_added">Fecha de adición</string>
+    <string name="order_by">Ordenar por:</string>
     </resources>
