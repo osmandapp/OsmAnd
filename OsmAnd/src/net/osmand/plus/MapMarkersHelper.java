@@ -53,6 +53,8 @@ public class MapMarkersHelper {
 	}
 
 	public static class MapMarker implements LocationPoint {
+		private static int[] colors;
+
 		public String id;
 		public LatLon point;
 		private PointDescription pointDescription;
@@ -137,7 +139,7 @@ public class MapMarkersHelper {
 			return result;
 		}
 
-		private static final int[] colors = new int[]{
+		private static final int[] colorsIds = new int[]{
 				R.color.marker_blue,
 				R.color.marker_green,
 				R.color.marker_orange,
@@ -148,22 +150,24 @@ public class MapMarkersHelper {
 		};
 
 		public static int[] getColors(Context context) {
-			int[] res = new int[colors.length];
-			for (int i = 0; i < colors.length; i++) {
-				res[i] = ContextCompat.getColor(context, colors[i]);
+			if (colors != null) {
+				return colors;
 			}
-			return res;
+			colors = new int[colorsIds.length];
+			for (int i = 0; i < colorsIds.length; i++) {
+				colors[i] = ContextCompat.getColor(context, colorsIds[i]);
+			}
+			return colors;
 		}
 
 		public static int getColorId(int colorIndex) {
-			return (colorIndex >= 0 && colorIndex < colors.length) ? colors[colorIndex] : colors[0];
+			return (colorIndex >= 0 && colorIndex < colorsIds.length) ? colorsIds[colorIndex] : colorsIds[0];
 		}
 
-		public static int getColorIndex(Context context, int colorId) {
+		public static int getColorIndex(Context context, int color) {
 			int[] colors = getColors(context);
 			for (int i = 0; i < colors.length; i++) {
-				int color = colors[i];
-				if (color == colorId) {
+				if (colors[i] == color) {
 					return i;
 				}
 			}
