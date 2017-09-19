@@ -1848,13 +1848,13 @@ Provizore estas uzata enreta servo CloudMade.</string>
     <string name="voice_data_unavailable">Elektitaj voĉ-datumoj ne estas disponeblaj</string>
     <string name="sd_unmounted">Memorkarto ne alirebla.\nVi ne povos vidi mapojn kaj serĉi ejojn.</string>
     <string name="sd_mounted_ro">Memorkarto estas nurlega.\nVi nur povos foliumi la antaŭ-elŝutitajn mapojn kaj ne povos elŝuti novajn el la Interreto.</string>
-    <string name="route_tr">Turnu dekstren</string>
-    <string name="route_tshr">Turnegu dekstren</string>
-    <string name="route_tslr">Turnetu dekstren</string>
-    <string name="route_tl">Turnu maldekstren</string>
-    <string name="route_tshl">Turnegu maldekstren</string>
-    <string name="route_tsll">Turnetu maldekstren</string>
-    <string name="route_tu">Faru U-forman ĝiradon</string>
+    <string name="route_tr">Turniĝu dekstren</string>
+    <string name="route_tshr">Turniĝegu dekstren</string>
+    <string name="route_tslr">Turniĝetu dekstren</string>
+    <string name="route_tl">Turniĝu maldekstren</string>
+    <string name="route_tshl">Turniĝegu maldekstren</string>
+    <string name="route_tsll">Turniĝetu maldekstren</string>
+    <string name="route_tu">Turniĝu malantaŭen</string>
     <string name="route_head">Rekten</string>
     <string name="first_time_continue">Poste</string>
     <string name="first_time_download">Elŝuti regionon</string>
@@ -2795,8 +2795,8 @@ Indikas lokon:  %1$s x %2$s"</string>
     <string name="widget">Fenestraĵo</string>
     <string name="top_bar">Supra breto</string>
     <string name="remove_from_map_markers">Forigi el map-markoj</string>
-    <string name="descendingly">Malkreskante</string>
-    <string name="ascendingly">Kreskante</string>
-    <string name="date_added">Aldon-dato</string>
+    <string name="descendingly">malkreskante</string>
+    <string name="ascendingly">kreskante</string>
+    <string name="date_added">dato de aldono</string>
     <string name="order_by">Ordigi laŭ:</string>
     </resources>
