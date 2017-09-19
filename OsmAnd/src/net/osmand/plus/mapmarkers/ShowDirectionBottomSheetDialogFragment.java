@@ -1,5 +1,6 @@
 package net.osmand.plus.mapmarkers;
 
+import android.app.Activity;
 import android.os.Build;
 import android.os.Bundle;
 import android.support.annotation.Nullable;
@@ -12,6 +13,7 @@ import android.view.ViewGroup;
 import android.view.ViewTreeObserver;
 import android.view.Window;
 import android.view.WindowManager;
+import android.widget.CompoundButton;
 import android.widget.ImageView;
 import android.widget.RadioButton;
 import android.widget.TextView;
@@ -19,6 +21,7 @@ import android.widget.TextView;
 import net.osmand.AndroidUtils;
 import net.osmand.plus.OsmandSettings;
 import net.osmand.plus.R;
+import net.osmand.plus.activities.MapActivity;
 import net.osmand.plus.base.BottomSheetDialogFragment;
 import net.osmand.plus.helpers.AndroidUiHelper;
 
@@ -38,8 +41,9 @@ public class ShowDirectionBottomSheetDialogFragment extends BottomSheetDialogFra
 	@Nullable
 	@Override
 	public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
+		final OsmandSettings settings = getMyApplication().getSettings();
 		portrait = AndroidUiHelper.isOrientationPortrait(getActivity());
-		night = !getMyApplication().getSettings().isLightContent();
+		night = !settings.isLightContent();
 		final int themeRes = night ? R.style.OsmandDarkTheme : R.style.OsmandLightTheme;
 
 		mainView = View.inflate(new ContextThemeWrapper(getContext(), themeRes), R.layout.fragment_marker_show_direction_bottom_sheet_dialog, container);
@@ -47,7 +51,7 @@ public class ShowDirectionBottomSheetDialogFragment extends BottomSheetDialogFra
 			AndroidUtils.setBackground(getActivity(), mainView, night, R.drawable.bg_bottom_menu_light, R.drawable.bg_bottom_menu_dark);
 		}
 
-		OsmandSettings.MapMarkersMode mode = getMyApplication().getSettings().MAP_MARKERS_MODE.get();
+		OsmandSettings.MapMarkersMode mode = settings.MAP_MARKERS_MODE.get();
 		highlightSelectedItem(mode, true);
 
 		if (android.os.Build.VERSION.SDK_INT < android.os.Build.VERSION_CODES.JELLY_BEAN_MR1) {
@@ -83,6 +87,32 @@ public class ShowDirectionBottomSheetDialogFragment extends BottomSheetDialogFra
 		if (night) {
 			((TextView) mainView.findViewById(R.id.show_direction_title)).setTextColor(getResources().getColor(R.color.ctx_menu_info_text_dark));
 		}
+
+		CompoundButton showArrowsToggle = (CompoundButton) mainView.findViewById(R.id.show_arrows_switch);
+		showArrowsToggle.setChecked(settings.SHOW_ARROWS_TO_FIRST_MARKERS.get());
+		mainView.findViewById(R.id.show_arrows_row).setOnClickListener(new View.OnClickListener() {
+			@Override
+			public void onClick(View view) {
+				settings.SHOW_ARROWS_TO_FIRST_MARKERS.set(!settings.SHOW_ARROWS_TO_FIRST_MARKERS.get());
+				if (getMapActivity() != null) {
+					getMapActivity().refreshMap();
+				}
+				dismiss();
+			}
+		});
+
+		CompoundButton showLinesToggle = (CompoundButton) mainView.findViewById(R.id.show_guide_line_switch);
+		showLinesToggle.setChecked(settings.SHOW_LINES_TO_FIRST_MARKERS.get());
+		mainView.findViewById(R.id.show_guide_line_row).setOnClickListener(new View.OnClickListener() {
+			@Override
+			public void onClick(View view) {
+				settings.SHOW_LINES_TO_FIRST_MARKERS.set(!settings.SHOW_LINES_TO_FIRST_MARKERS.get());
+				if (getMapActivity() != null) {
+					getMapActivity().refreshMap();
+				}
+				dismiss();
+			}
+		});
 
 		ImageView topBarIcon = (ImageView) mainView.findViewById(R.id.top_bar_icon);
 		topBarIcon.setBackgroundDrawable(getIcon(R.drawable.ic_action_device_top, R.color.on_map_icon_color));
@@ -155,6 +185,14 @@ public class ShowDirectionBottomSheetDialogFragment extends BottomSheetDialogFra
 			params.width = getActivity().getResources().getDimensionPixelSize(R.dimen.landscape_bottom_sheet_dialog_fragment_width);
 			window.setAttributes(params);
 		}
+	}
+
+	private MapActivity getMapActivity() {
+		Activity activity = getActivity();
+		if (activity != null) {
+			return (MapActivity) activity;
+		}
+		return null;
 	}
 
 	private void highlightSelectedItem(OsmandSettings.MapMarkersMode mode, boolean check) {
