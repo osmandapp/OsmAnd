@@ -173,6 +173,7 @@ public class MapMarkersHelper {
 		}
 	}
 
+	@Nullable
 	public MarkersSyncGroup getGroup(String id) {
 		return markersDbHelper.getGroup(id);
 	}
