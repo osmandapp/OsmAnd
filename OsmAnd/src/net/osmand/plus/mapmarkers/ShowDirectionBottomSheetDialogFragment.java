@@ -1,8 +1,10 @@
 package net.osmand.plus.mapmarkers;
 
 import android.app.Activity;
+import android.graphics.drawable.Drawable;
 import android.os.Build;
 import android.os.Bundle;
+import android.support.annotation.DrawableRes;
 import android.support.annotation.Nullable;
 import android.support.v4.content.ContextCompat;
 import android.view.ContextThemeWrapper;
@@ -116,14 +118,14 @@ public class ShowDirectionBottomSheetDialogFragment extends BottomSheetDialogFra
 
 		ImageView topBarIcon = (ImageView) mainView.findViewById(R.id.top_bar_icon);
 		topBarIcon.setBackgroundDrawable(getIcon(R.drawable.ic_action_device_top, R.color.on_map_icon_color));
-		topBarIcon.setImageDrawable(getIcon(R.drawable.ic_action_device_topbar, R.color.dashboard_blue));
+		topBarIcon.setImageDrawable(getContentIcon(R.drawable.ic_action_device_topbar));
 
 		ImageView widgetIcon = (ImageView) mainView.findViewById(R.id.widget_icon);
 		widgetIcon.setBackgroundDrawable(getIcon(R.drawable.ic_action_device_top, R.color.on_map_icon_color));
-		widgetIcon.setImageDrawable(getIcon(R.drawable.ic_action_device_widget, R.color.dashboard_blue));
+		widgetIcon.setImageDrawable(getContentIcon(R.drawable.ic_action_device_widget));
 
 		ImageView noneIcon = (ImageView) mainView.findViewById(R.id.none_icon);
-		noneIcon.setBackgroundDrawable(getIcon(R.drawable.ic_action_device_top, R.color.on_map_icon_color));
+		noneIcon.setBackgroundDrawable(getContentIcon(R.drawable.ic_action_device_top));
 
 		mainView.findViewById(R.id.top_bar_row).setOnClickListener(showDirectionOnClickListener);
 		mainView.findViewById(R.id.widget_row).setOnClickListener(showDirectionOnClickListener);
@@ -185,6 +187,11 @@ public class ShowDirectionBottomSheetDialogFragment extends BottomSheetDialogFra
 			params.width = getActivity().getResources().getDimensionPixelSize(R.dimen.landscape_bottom_sheet_dialog_fragment_width);
 			window.setAttributes(params);
 		}
+	}
+
+	@Override
+	protected Drawable getContentIcon(@DrawableRes int id) {
+		return getIcon(id, night ? R.color.ctx_menu_info_text_dark : R.color.on_map_icon_color);
 	}
 
 	private MapActivity getMapActivity() {
