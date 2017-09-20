@@ -226,12 +226,12 @@ public class MapMarkersLayer extends OsmandMapLayer implements IContextMenuProvi
 
 		List<MapMarker> activeMapMarkers = markersHelper.getMapMarkers();
 
-		if (settings.SHOW_LINES_TO_FIRST_MARKERS.get()) {
+		if (settings.SHOW_LINES_TO_FIRST_MARKERS.get() && myLoc != null) {
 			linePath.reset();
 			tx.clear();
 			ty.clear();
-			int locX = myLoc == null ? tileBox.getCenterPixelX() : tileBox.getPixXFromLonNoRot(myLoc.getLongitude());
-			int locY = myLoc == null ? tileBox.getCenterPixelY() : tileBox.getPixYFromLatNoRot(myLoc.getLatitude());
+			int locX = tileBox.getPixXFromLonNoRot(myLoc.getLongitude());
+			int locY = tileBox.getPixYFromLatNoRot(myLoc.getLatitude());
 			for (int i = 0; i < activeMapMarkers.size() && i < 2; i++) {
 				int markerX = tileBox.getPixXFromLonNoRot(activeMapMarkers.get(i).getLongitude());
 				int markerY = tileBox.getPixYFromLatNoRot(activeMapMarkers.get(i).getLatitude());
