@@ -112,6 +112,7 @@ public class MapMarkersGroupsAdapter extends RecyclerView.Adapter<RecyclerView.V
 				}
 				header.setActiveMarkersCount(group.getActiveMarkers().size());
 				header.setHistoryMarkersCount(group.getHistoryMarkers().size());
+				header.setColor(group.getColor());
 				group.setGroupHeader(header);
 				items.add(header);
 				items.addAll(group.getActiveMarkers());
@@ -154,6 +155,7 @@ public class MapMarkersGroupsAdapter extends RecyclerView.Adapter<RecyclerView.V
 					if (syncGroup != null) {
 						group.setType(syncGroup.getType());
 					}
+					group.setColor(MapMarker.getColorId(marker.colorIndex));
 					group.setCreationDate(marker.creationDate);
 					groupsMap.put(groupName, group);
 				} else {
@@ -346,7 +348,7 @@ public class MapMarkersGroupsAdapter extends RecyclerView.Adapter<RecyclerView.V
 						+ "/" + (groupHeader.getActiveMarkersCount() + groupHeader.getHistoryMarkersCount());
 				headerViewHolder.icon.setVisibility(View.VISIBLE);
 				headerViewHolder.iconSpace.setVisibility(View.GONE);
-				headerViewHolder.icon.setImageDrawable(iconsCache.getThemedIcon(groupHeader.getIconRes()));
+				headerViewHolder.icon.setImageDrawable(iconsCache.getIcon(groupHeader.getIconRes(), groupHeader.getColor()));
 			} else {
 				throw new IllegalArgumentException("Unsupported header");
 			}
@@ -446,6 +448,7 @@ public class MapMarkersGroupsAdapter extends RecyclerView.Adapter<RecyclerView.V
 		private List<MapMarker> historyMarkers = new ArrayList<>();
 		private long creationDate;
 		private ShowHideHistoryButton showHideHistoryButton;
+		private int color;
 
 		public String getName() {
 			return name;
@@ -502,6 +505,14 @@ public class MapMarkersGroupsAdapter extends RecyclerView.Adapter<RecyclerView.V
 		public void setShowHideHistoryButton(ShowHideHistoryButton showHideHistoryButton) {
 			this.showHideHistoryButton = showHideHistoryButton;
 		}
+
+		public int getColor() {
+			return color;
+		}
+
+		public void setColor(int color) {
+			this.color = color;
+		}
 	}
 
 	private static class ShowHideHistoryButton {
@@ -530,6 +541,7 @@ public class MapMarkersGroupsAdapter extends RecyclerView.Adapter<RecyclerView.V
 		private int activeMarkersCount;
 		private int historyMarkersCount;
 		private int iconRes;
+		private int color;
 
 		public String getGroupName() {
 			return groupName;
@@ -561,6 +573,14 @@ public class MapMarkersGroupsAdapter extends RecyclerView.Adapter<RecyclerView.V
 
 		public void setIconRes(int iconRes) {
 			this.iconRes = iconRes;
+		}
+
+		public int getColor() {
+			return color;
+		}
+
+		public void setColor(int color) {
+			this.color = color;
 		}
 	}
 }
