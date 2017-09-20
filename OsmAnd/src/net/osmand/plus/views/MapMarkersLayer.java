@@ -35,6 +35,7 @@ import gnu.trove.list.array.TIntArrayList;
 
 public class MapMarkersLayer extends OsmandMapLayer implements IContextMenuProvider,
 		IContextMenuProviderSelection, ContextMenuLayer.IMoveObjectProvider {
+
 	protected static final int DIST_TO_SHOW = 80;
 
 	private final MapActivity map;
@@ -189,7 +190,7 @@ public class MapMarkersLayer extends OsmandMapLayer implements IContextMenuProvi
 	@Override
 	public void onDraw(Canvas canvas, RotatedTileBox tileBox, DrawSettings nightMode) {
 
-		Location myLoc = map.getMyApplication().getLocationProvider().getLastKnownLocation();
+		Location myLoc = map.getMyApplication().getLocationProvider().getLastStaleKnownLocation();
 		widgetsFactory.updateInfo(myLoc == null
 				? tileBox.getCenterLatLon() : new LatLon(myLoc.getLatitude(), myLoc.getLongitude()), tileBox.getZoom());
 		OsmandSettings settings = map.getMyApplication().getSettings();
@@ -227,27 +228,26 @@ public class MapMarkersLayer extends OsmandMapLayer implements IContextMenuProvi
 		List<MapMarker> activeMapMarkers = markersHelper.getMapMarkers();
 
 		if (settings.SHOW_LINES_TO_FIRST_MARKERS.get() && myLoc != null) {
-			linePath.reset();
-			tx.clear();
-			ty.clear();
 			int locX = tileBox.getPixXFromLonNoRot(myLoc.getLongitude());
 			int locY = tileBox.getPixYFromLatNoRot(myLoc.getLatitude());
+			int[] colors = MapMarker.getColors(map);
 			for (int i = 0; i < activeMapMarkers.size() && i < 2; i++) {
-				int markerX = tileBox.getPixXFromLonNoRot(activeMapMarkers.get(i).getLongitude());
-				int markerY = tileBox.getPixYFromLatNoRot(activeMapMarkers.get(i).getLatitude());
+				MapMarker marker = activeMapMarkers.get(i);
+				int markerX = tileBox.getPixXFromLonNoRot(marker.getLongitude());
+				int markerY = tileBox.getPixYFromLatNoRot(marker.getLatitude());
+				linePath.reset();
+				tx.clear();
+				ty.clear();
+				linePath.moveTo(locX, locY);
+				linePath.lineTo(markerX, markerY);
+				tx.add(locX);
+				ty.add(locY);
 				tx.add(markerX);
 				ty.add(markerY);
-				if (i == 0) {
-					linePath.moveTo(markerX, markerY);
-					linePath.lineTo(locX, locY);
-					tx.add(locX);
-					ty.add(locY);
-				} else {
-					linePath.lineTo(markerX, markerY);
-				}
+				calculatePath(tileBox, tx, ty, linePath);
+				lineAttrs.paint.setColor(colors[marker.colorIndex]);
+				canvas.drawPath(linePath, lineAttrs.paint);
 			}
-			calculatePath(tileBox, tx, ty, linePath);
-			canvas.drawPath(linePath, lineAttrs.paint);
 		}
 
 		for (MapMarker marker : activeMapMarkers) {
