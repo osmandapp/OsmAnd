@@ -39,22 +39,22 @@ public class MapMarkersGroupsAdapter extends RecyclerView.Adapter<RecyclerView.V
 
 	private MapActivity mapActivity;
 	private OsmandApplication app;
-    private List<Object> items = new ArrayList<>();
+	private List<Object> items = new ArrayList<>();
 	private List<MapMarkersGroup> groups;
-    private boolean night;
-    private int screenOrientation;
-    private LatLon location;
-    private Float heading;
-    private boolean useCenter;
+	private boolean night;
+	private int screenOrientation;
+	private LatLon location;
+	private Float heading;
+	private boolean useCenter;
 
-    public MapMarkersGroupsAdapter(MapActivity mapActivity) {
+	public MapMarkersGroupsAdapter(MapActivity mapActivity) {
 		this.mapActivity = mapActivity;
 		app = mapActivity.getMyApplication();
-        night = !mapActivity.getMyApplication().getSettings().isLightContent();
+		night = !mapActivity.getMyApplication().getSettings().isLightContent();
 		createDisplayGroups();
-    }
+	}
 
-    public void createDisplayGroups() {
+	public void createDisplayGroups() {
 		items.clear();
 		groups = getMapMarkersGroups();
 		for (int i = 0; i < groups.size(); i++) {
@@ -191,24 +191,24 @@ public class MapMarkersGroupsAdapter extends RecyclerView.Adapter<RecyclerView.V
 		});
 	}
 
-    public void setLocation(LatLon location) {
-        this.location = location;
-    }
+	public void setLocation(LatLon location) {
+		this.location = location;
+	}
 
-    public void setHeading(Float heading) {
-        this.heading = heading;
-    }
+	public void setHeading(Float heading) {
+		this.heading = heading;
+	}
 
-    public void setUseCenter(boolean useCenter) {
-        this.useCenter = useCenter;
-    }
+	public void setUseCenter(boolean useCenter) {
+		this.useCenter = useCenter;
+	}
 
-    public void setScreenOrientation(int screenOrientation) {
-        this.screenOrientation = screenOrientation;
-    }
+	public void setScreenOrientation(int screenOrientation) {
+		this.screenOrientation = screenOrientation;
+	}
 
-    @Override
-    public RecyclerView.ViewHolder onCreateViewHolder(ViewGroup viewGroup, int viewType) {
+	@Override
+	public RecyclerView.ViewHolder onCreateViewHolder(ViewGroup viewGroup, int viewType) {
 		if (viewType == MARKER_TYPE) {
 			View view = LayoutInflater.from(viewGroup.getContext()).inflate(R.layout.map_marker_item_new, viewGroup, false);
 			return new MapMarkerItemViewHolder(view);
@@ -221,10 +221,10 @@ public class MapMarkersGroupsAdapter extends RecyclerView.Adapter<RecyclerView.V
 		} else {
 			throw new IllegalArgumentException("Unsupported view type");
 		}
-    }
+	}
 
-    @Override
-    public void onBindViewHolder(final RecyclerView.ViewHolder holder, final int position) {
+	@Override
+	public void onBindViewHolder(final RecyclerView.ViewHolder holder, final int position) {
 		IconsCache iconsCache = app.getIconsCache();
 		if (holder instanceof MapMarkerItemViewHolder) {
 			final MapMarkerItemViewHolder itemViewHolder = (MapMarkerItemViewHolder) holder;
@@ -369,7 +369,7 @@ public class MapMarkersGroupsAdapter extends RecyclerView.Adapter<RecyclerView.V
 				}
 			});
 		}
-    }
+	}
 
 	@Override
 	public int getItemViewType(int position) {
@@ -385,14 +385,14 @@ public class MapMarkersGroupsAdapter extends RecyclerView.Adapter<RecyclerView.V
 		}
 	}
 
-    @Override
-    public int getItemCount() {
-        return items.size();
-    }
+	@Override
+	public int getItemCount() {
+		return items.size();
+	}
 
-    public Object getItem(int position) {
-        return items.get(position);
-    }
+	public Object getItem(int position) {
+		return items.get(position);
+	}
 
 	private String getMonth(int month) {
 		SimpleDateFormat dateFormat = new SimpleDateFormat("LLLL", Locale.getDefault());
