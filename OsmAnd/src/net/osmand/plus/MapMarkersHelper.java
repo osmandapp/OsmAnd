@@ -27,11 +27,9 @@ import java.util.Collections;
 import java.util.Comparator;
 import java.util.Date;
 import java.util.Iterator;
-import java.util.LinkedHashMap;
 import java.util.LinkedList;
 import java.util.List;
 import java.util.Locale;
-import java.util.Map;
 
 import static net.osmand.data.PointDescription.POINT_TYPE_MAP_MARKER;
 
@@ -396,8 +394,9 @@ public class MapMarkersHelper {
 			}
 
 			List<WptPt> gpxPoints = new LinkedList<>(gpx.getPoints());
+			int defColor = ContextCompat.getColor(ctx, R.color.marker_red);
 			for (WptPt pt : gpxPoints) {
-				group.setColor(pt.getColor(ContextCompat.getColor(ctx, R.color.marker_red)));
+				group.setColor(pt.getColor(defColor));
 				addNewMarkerIfNeeded(group, dbMarkers, new LatLon(pt.lat, pt.lon), pt.name);
 			}
 
