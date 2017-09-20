@@ -265,7 +265,7 @@ public class MapMarkersLayer extends OsmandMapLayer implements IContextMenuProvi
 		}
 
 		if (settings.SHOW_ARROWS_TO_FIRST_MARKERS.get()) {
-			LatLon loc = myLoc == null ? tileBox.getCenterLatLon() : new LatLon(myLoc.getLatitude(), myLoc.getLongitude());
+			LatLon loc = tileBox.getCenterLatLon();
 			List<MapMarker> mapMarkers = markersHelper.getMapMarkers();
 			int i = 0;
 			for (MapMarker marker : mapMarkers) {
