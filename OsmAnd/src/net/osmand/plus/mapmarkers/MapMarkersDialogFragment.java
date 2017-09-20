@@ -24,9 +24,9 @@ import net.osmand.plus.OsmandSettings.MapMarkersOrderByMode;
 import net.osmand.plus.R;
 import net.osmand.plus.activities.MapActivity;
 import net.osmand.plus.dashboard.DashboardOnMap;
-import net.osmand.plus.mapmarkers.ShowDirectionBottomSheetDialogFragment.ShowDirectionFragmentListener;
 import net.osmand.plus.mapmarkers.OptionsBottomSheetDialogFragment.MarkerOptionsFragmentListener;
 import net.osmand.plus.mapmarkers.OrderByBottomSheetDialogFragment.OrderByFragmentListener;
+import net.osmand.plus.mapmarkers.ShowDirectionBottomSheetDialogFragment.ShowDirectionFragmentListener;
 
 import java.util.ArrayList;
 import java.util.Arrays;
@@ -44,12 +44,14 @@ public class MapMarkersDialogFragment extends android.support.v4.app.DialogFragm
 	private LockableViewPager viewPager;
 	private TextView orderByModeTitle;
 
+	private boolean lightTheme;
+
 	@Override
 	public void onCreate(Bundle savedInstanceState) {
 		super.onCreate(savedInstanceState);
 		OsmandApplication app = getMyApplication();
-		boolean isLightTheme = app.getSettings().OSMAND_THEME.get() == OsmandSettings.OSMAND_LIGHT_THEME;
-		int themeId = isLightTheme ? R.style.OsmandLightTheme : R.style.OsmandDarkTheme;
+		lightTheme = app.getSettings().OSMAND_THEME.get() == OsmandSettings.OSMAND_LIGHT_THEME;
+		int themeId = lightTheme ? R.style.OsmandLightTheme : R.style.OsmandDarkTheme;
 		setStyle(STYLE_NO_FRAME, themeId);
 	}
 
@@ -95,6 +97,9 @@ public class MapMarkersDialogFragment extends android.support.v4.app.DialogFragm
 		View mainView = inflater.inflate(R.layout.fragment_map_markers_dialog, container);
 
 		Toolbar toolbar = (Toolbar) mainView.findViewById(R.id.map_markers_toolbar);
+		if (!lightTheme) {
+			toolbar.setBackgroundColor(ContextCompat.getColor(getContext(), R.color.actionbar_dark_color));
+		}
 		orderByModeTitle = toolbar.findViewById(R.id.order_by_mode_text);
 		setOrderByMode(getMyApplication().getSettings().MAP_MARKERS_ORDER_BY_MODE.get());
 
@@ -121,6 +126,10 @@ public class MapMarkersDialogFragment extends android.support.v4.app.DialogFragm
 		viewPager.setAdapter(adapter);
 
 		BottomNavigationView bottomNav = mainView.findViewById(R.id.map_markers_bottom_navigation);
+		if (!lightTheme) {
+			bottomNav.setItemIconTintList(ContextCompat.getColorStateList(getContext(), R.color.bottom_navigation_color_selector_dark));
+			bottomNav.setItemTextColor(ContextCompat.getColorStateList(getContext(), R.color.bottom_navigation_color_selector_dark));
+		}
 		bottomNav.setOnNavigationItemSelectedListener(new BottomNavigationView.OnNavigationItemSelectedListener() {
 			@Override
 			public boolean onNavigationItemSelected(@NonNull MenuItem menuItem) {
