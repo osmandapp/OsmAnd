@@ -336,10 +336,9 @@ public class MapMarkersGroupsAdapter extends RecyclerView.Adapter<RecyclerView.V
 				}
 			} else if (header instanceof GroupHeader) {
 				GroupHeader groupHeader = (GroupHeader) header;
-				headerString = groupHeader.getGroupName().concat(" - ")
-						.concat(Integer.toString(groupHeader.getActiveMarkersCount()))
-						.concat("/")
-						.concat(Integer.toString(groupHeader.getActiveMarkersCount() + groupHeader.getHistoryMarkersCount()));
+				headerString = groupHeader.getGroupName() + " - "
+						+ groupHeader.getActiveMarkersCount()
+						+ "/" + (groupHeader.getActiveMarkersCount() + groupHeader.getHistoryMarkersCount());
 				headerViewHolder.icon.setVisibility(View.VISIBLE);
 				headerViewHolder.iconSpace.setVisibility(View.GONE);
 				headerViewHolder.icon.setImageDrawable(iconsCache.getThemedIcon(groupHeader.getIconRes()));
