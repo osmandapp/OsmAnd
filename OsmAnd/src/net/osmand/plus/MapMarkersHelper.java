@@ -15,7 +15,6 @@ import net.osmand.plus.FavouritesDbHelper.FavoriteGroup;
 import net.osmand.plus.GPXUtilities.GPXFile;
 import net.osmand.plus.GPXUtilities.WptPt;
 import net.osmand.plus.GpxSelectionHelper.SelectedGpxFile;
-import net.osmand.plus.helpers.ColorDialogs;
 import net.osmand.plus.mapmarkers.MapMarkersDbHelper;
 import net.osmand.util.Algorithms;
 import net.osmand.util.MapUtils;
@@ -411,13 +410,10 @@ public class MapMarkersHelper {
 		for (MapMarker marker : markers) {
 			if (marker.id.equals(group.getId() + name)) {
 				exists = true;
-				int colorIndex = MapMarker.getColorIndex(ctx, ColorDialogs.getNearestColor(group.getColor(), MapMarker.getColors(ctx)));
-				boolean updateColor = group.getColor() != -1 && marker.colorIndex != colorIndex;
-				if (!marker.history && (!marker.point.equals(latLon) || updateColor)) {
+				if (!marker.history && (!marker.point.equals(latLon))) {
 					for (MapMarker m : mapMarkers) {
 						if (m.id.equals(marker.id)) {
 							m.point = latLon;
-							m.colorIndex = colorIndex;
 							updateMapMarker(m, true);
 							break;
 						}
@@ -634,8 +630,7 @@ public class MapMarkersHelper {
 
 	private void addMarkers(List<LatLon> points, List<PointDescription> historyNames, @Nullable MarkersSyncGroup group) {
 		if (points.size() > 0) {
-			boolean randomColor = group == null || group.getColor() == -1;
-			int colorIndex = randomColor ? -1 : MapMarker.getColorIndex(ctx, ColorDialogs.getNearestColor(group.getColor(), MapMarker.getColors(ctx)));
+			int colorIndex = -1;
 			for (int i = 0; i < points.size(); i++) {
 				LatLon point = points.get(i);
 				PointDescription historyName = historyNames.get(i);
@@ -648,16 +643,14 @@ public class MapMarkersHelper {
 				if (pointDescription.isLocation() && Algorithms.isEmpty(pointDescription.getName())) {
 					pointDescription.setName(PointDescription.getSearchAddressStr(ctx));
 				}
-				if (randomColor) {
-					if (colorIndex == -1) {
-						if (mapMarkers.size() > 0) {
-							colorIndex = (mapMarkers.get(mapMarkers.size() - 1).colorIndex + 1) % MAP_MARKERS_COLORS_COUNT;
-						} else {
-							colorIndex = 0;
-						}
+				if (colorIndex == -1) {
+					if (mapMarkers.size() > 0) {
+						colorIndex = (mapMarkers.get(mapMarkers.size() - 1).colorIndex + 1) % MAP_MARKERS_COLORS_COUNT;
 					} else {
-						colorIndex = (colorIndex + 1) % MAP_MARKERS_COLORS_COUNT;
+						colorIndex = 0;
 					}
+				} else {
+					colorIndex = (colorIndex + 1) % MAP_MARKERS_COLORS_COUNT;
 				}
 
 				MapMarker marker = new MapMarker(point, pointDescription, colorIndex, false, 0);
