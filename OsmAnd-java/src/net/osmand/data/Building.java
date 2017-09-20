@@ -103,7 +103,9 @@ public class Building extends MapObject {
 	
 
 	public float interpolation(String hno) {
-		if(getInterpolationType() != null || getInterpolationInterval() > 0 || checkNameAsInterpolation()) {
+		if(getInterpolationType() != null || getInterpolationInterval() > 0 
+				//|| checkNameAsInterpolation() // disable due to situation in NL #4284 
+				) {
 			int num = Algorithms.extractFirstIntegerNumber(hno);
 			String fname = super.getName();
 			int numB = Algorithms.extractFirstIntegerNumber(fname);
@@ -139,14 +141,13 @@ public class Building extends MapObject {
 		}
 		return -1;
 	}
-	private boolean checkNameAsInterpolation() {
+	
+	protected boolean checkNameAsInterpolation() {
 		String nm = super.getName();
 		boolean interpolation = nm.contains("-");
 		if(interpolation) {
 			for(int i = 0; i < nm.length(); i++) {
-				if(nm.charAt(i) >= '0' && nm.charAt(i) <= '9' || nm.charAt(i) == '-') {
-					
-				} else {
+				if(!(nm.charAt(i) >= '0' && nm.charAt(i) <= '9') && nm.charAt(i) != '-') {
 					interpolation = false;
 					break;
 				}
