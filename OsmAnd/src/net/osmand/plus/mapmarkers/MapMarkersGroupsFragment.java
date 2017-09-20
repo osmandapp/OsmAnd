@@ -43,6 +43,8 @@ public class MapMarkersGroupsFragment extends Fragment implements OsmAndCompassL
 
 	void updateAdapter() {
 		if (adapter != null) {
+			adapter.createDisplayGroups();
+			adapter.updateShowDirectionMarkers();
 			adapter.notifyDataSetChanged();
 		}
 	}
