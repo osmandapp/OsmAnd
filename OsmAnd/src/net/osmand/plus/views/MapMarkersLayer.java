@@ -36,15 +36,12 @@ import gnu.trove.list.array.TIntArrayList;
 public class MapMarkersLayer extends OsmandMapLayer implements IContextMenuProvider,
 		IContextMenuProviderSelection, ContextMenuLayer.IMoveObjectProvider {
 
-	private static final long STALE_LOCATION_TIMEOUT = 1000 * 60 * 15; // 15 minutes
 	protected static final int DIST_TO_SHOW = 80;
 
 	private final MapActivity map;
 	private OsmandMapTileView view;
 
 	private MapMarkersWidgetsFactory widgetsFactory;
-
-	private Location myLoc;
 
 	private Paint bitmapPaint;
 	private Bitmap markerBitmapBlue;
@@ -193,14 +190,7 @@ public class MapMarkersLayer extends OsmandMapLayer implements IContextMenuProvi
 	@Override
 	public void onDraw(Canvas canvas, RotatedTileBox tileBox, DrawSettings nightMode) {
 
-		Location newloc = map.getMyApplication().getLocationProvider().getLastKnownLocation();
-		if (newloc == null) {
-			if (myLoc != null && System.currentTimeMillis() - myLoc.getTime() > STALE_LOCATION_TIMEOUT) {
-				myLoc = null;
-			}
-		} else {
-			myLoc = newloc;
-		}
+		Location myLoc = map.getMyApplication().getLocationProvider().getLastStaleKnownLocation();
 		widgetsFactory.updateInfo(myLoc == null
 				? tileBox.getCenterLatLon() : new LatLon(myLoc.getLatitude(), myLoc.getLongitude()), tileBox.getZoom());
 		OsmandSettings settings = map.getMyApplication().getSettings();

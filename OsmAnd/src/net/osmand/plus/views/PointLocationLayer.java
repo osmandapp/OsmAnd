@@ -64,8 +64,7 @@ public class PointLocationLayer extends OsmandMapLayer implements ContextMenuLay
 		aroundArea.setAntiAlias(true);
 
 		locationProvider = view.getApplication().getLocationProvider();
-		updateIcons(view.getSettings().getApplicationMode(), false,
-				isLocationOutdated(locationProvider.getLastKnownLocation()));
+		updateIcons(view.getSettings().getApplicationMode(), false, locationProvider.getLastKnownLocation() == null);
 	}
 
 	@Override
@@ -86,9 +85,9 @@ public class PointLocationLayer extends OsmandMapLayer implements ContextMenuLay
 		}
 		// draw
 		boolean nm = nightMode != null && nightMode.isNightMode();
-		Location lastKnownLocation = locationProvider.getLastKnownLocation();
+		Location lastKnownLocation = locationProvider.getLastStaleKnownLocation();
 		updateIcons(view.getSettings().getApplicationMode(), nm,
-				isLocationOutdated(lastKnownLocation));
+				view.getApplication().getLocationProvider().getLastKnownLocation() == null);
 		if(lastKnownLocation == null || view == null){
 			return;
 		}
