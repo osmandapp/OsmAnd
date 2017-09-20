@@ -457,7 +457,7 @@
   <string name="shared_string_select_all">Вибрати все</string>
   <string name="shared_string_refresh">Перезавантажити</string>
   <string name="fast_route_mode">Найшвидший маршрут</string>
-  <string name="fast_route_mode_descr">Надавати перевагу найшвидшому маршруту перед найкоротшим </string>
+  <string name="fast_route_mode_descr">Задіяти розрахунок найшвидшого маршруту, або ж вимкнути режим паливно-ощадного маршруту</string>
   <string name="tiles_to_download_estimated_size">На масштабі{0} завантажувати {1} тайли ({2} MB)</string>
   <string name="shared_string_download_map">Завантажити мапу</string>
   <string name="select_max_zoom_preload_area">Вибрати максимальний масштаб для завантаження</string>
@@ -1057,7 +1057,7 @@
 	<string name="avoid_unpaved">Уникати польових доріг</string>
 	<string name="avoid_ferries">Уникати поромів</string>
 	<string name="avoid_in_routing_title">Уникати…</string>
-	<string name="avoid_in_routing_descr">Уникати платних і польових доріг, поромів</string>
+	<string name="avoid_in_routing_descr">Уникати платних і доріг без покриття, поромів</string>
 	<string name="map_widget_fluorescent">Флуоресцентні маршрути</string>
 	<string name="map_widget_show_ruler">Лінійка</string>
 	
@@ -3013,4 +3013,9 @@
     <string name="yesterday">Вчора</string>
     <string name="last_seven_days">Останні 7 днів</string>
     <string name="this_year">Цього року</string>
+    <string name="remove_from_map_markers">Вилучити з маркерів мапи</string>
+    <string name="descendingly">По спадаючій</string>
+    <string name="ascendingly">По зростанню</string>
+    <string name="date_added">Дата додавання</string>
+    <string name="order_by">Сортувати за:</string>
     </resources>
