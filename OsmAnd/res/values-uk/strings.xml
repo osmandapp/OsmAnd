@@ -210,7 +210,7 @@
   <string name="use_transparent_map_theme">Прозора тема</string>
   <string name="native_library_not_supported">Рідна бібліотека не підтримується на цьому пристрої.</string>
   <string name="init_native_library">Ініціалізація рідної бібліотеки…</string>
-  <string name="choose_auto_follow_route">Налаштування автоорієнтації мапи</string>
+  <string name="choose_auto_follow_route">Автоматичне центрування мапи</string>
   <string name="choose_auto_follow_route_descr">Час, через який мапа повернеться до поточної позиції</string>
   
   <string name="auto_follow_route_navigation">Автоцентрування мапи тільки під час навігації</string>
@@ -681,8 +681,8 @@
   <string name="data_settings">Дані</string>
   
   <string name="osm_settings">OSM-редагування</string>
-  <string name="auto_zoom_map_descr">Автомасштабування мапи відповідно до вашої швидкості (доки мапу синхронізовано із поточним місцезнаходженням)</string>
-  <string name="auto_zoom_map">Автомасштабування</string>
+  <string name="auto_zoom_map_descr">Автоматично зменшувати/збільшувати мапу згідно Вашої швидкості (якщо мапа синхронізується з чинним положенням)</string>
+  <string name="auto_zoom_map">Автоматичне зменшення/збільшення</string>
   <string name="additional_settings">Додаткові налаштування</string>
   <string name="shared_string_settings">Налаштування</string>
   <string name="save_current_track_descr">Зберегти активний трек на SD</string>
@@ -899,7 +899,7 @@
     <string name="shared_string_map">Мапа</string>
     <string name="prefer_motorways">Надавати перевагу автомагістралям</string>
 	<string name="item_checked">відмічено</string>
-    <string name="prefer_in_routing_title">Надавати перевагу …</string>
+    <string name="prefer_in_routing_title">Надавати перевагу…</string>
 	<string name="prefer_in_routing_descr">Надавати перевагу автомагістралям</string>
     
     <string name="max_speed_none">немає</string>
@@ -1555,7 +1555,7 @@
     <string name="copying_osmand_files">Копіювання файлів даних OsmAnd…</string>
     <string name="calculate_osmand_route_gpx">Розрахувати оффлайн маршрут в OsmAnd</string>
     <string name="app_mode_truck">Вантажівка</string>
-    <string name="guidance_preferences_descr">Налаштування навігації</string>
+    <string name="guidance_preferences_descr">Навігаційні налаштування</string>
     <string name="routing_preferences_descr">Налаштування маршрутизації</string>
     <string name="speech_rate_descr">Вказати швидкість вимови для TTS</string>
     <string name="speech_rate">Швидкість вимови</string>
