@@ -106,7 +106,10 @@ public class MapMarkersGroupsAdapter extends RecyclerView.Adapter<RecyclerView.V
 				}
 				GroupHeader header = new GroupHeader();
 				header.setGroupName(markerGroupName);
-				header.setIconRes(group.getType() == MapMarkersHelper.MarkersSyncGroup.FAVORITES_TYPE ? R.drawable.ic_action_fav_dark : R.drawable.ic_action_track_16);
+				int type = group.getType();
+				if (type != -1) {
+					header.setIconRes(type == MapMarkersHelper.MarkersSyncGroup.FAVORITES_TYPE ? R.drawable.ic_action_fav_dark : R.drawable.ic_action_track_16);
+				}
 				header.setActiveMarkersCount(group.getActiveMarkers().size());
 				header.setHistoryMarkersCount(group.getHistoryMarkers().size());
 				group.setGroupHeader(header);
@@ -147,7 +150,10 @@ public class MapMarkersGroupsAdapter extends RecyclerView.Adapter<RecyclerView.V
 				if (group == null) {
 					group = new MapMarkersGroup();
 					group.setName(groupName);
-					group.setType(app.getMapMarkersHelper().getGroup(marker.groupKey).getType());
+					MapMarkersHelper.MarkersSyncGroup syncGroup = app.getMapMarkersHelper().getGroup(marker.groupKey);
+					if (syncGroup != null) {
+						group.setType(syncGroup.getType());
+					}
 					group.setCreationDate(marker.creationDate);
 					groupsMap.put(groupName, group);
 				} else {
@@ -435,7 +441,7 @@ public class MapMarkersGroupsAdapter extends RecyclerView.Adapter<RecyclerView.V
 	private static class MapMarkersGroup {
 		private String name;
 		private GroupHeader header;
-		private int type;
+		private int type = -1;
 		private List<MapMarker> activeMarkers = new ArrayList<>();
 		private List<MapMarker> historyMarkers = new ArrayList<>();
 		private long creationDate;
