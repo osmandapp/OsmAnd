@@ -90,29 +90,31 @@ public class ShowDirectionBottomSheetDialogFragment extends BottomSheetDialogFra
 			((TextView) mainView.findViewById(R.id.show_direction_title)).setTextColor(getResources().getColor(R.color.ctx_menu_info_text_dark));
 		}
 
-		CompoundButton showArrowsToggle = (CompoundButton) mainView.findViewById(R.id.show_arrows_switch);
+		final CompoundButton showArrowsToggle = (CompoundButton) mainView.findViewById(R.id.show_arrows_switch);
 		showArrowsToggle.setChecked(settings.SHOW_ARROWS_TO_FIRST_MARKERS.get());
 		mainView.findViewById(R.id.show_arrows_row).setOnClickListener(new View.OnClickListener() {
 			@Override
 			public void onClick(View view) {
-				settings.SHOW_ARROWS_TO_FIRST_MARKERS.set(!settings.SHOW_ARROWS_TO_FIRST_MARKERS.get());
+				boolean newState = !settings.SHOW_ARROWS_TO_FIRST_MARKERS.get();
+				settings.SHOW_ARROWS_TO_FIRST_MARKERS.set(newState);
+				showArrowsToggle.setChecked(newState);
 				if (getMapActivity() != null) {
 					getMapActivity().refreshMap();
 				}
-				dismiss();
 			}
 		});
 
-		CompoundButton showLinesToggle = (CompoundButton) mainView.findViewById(R.id.show_guide_line_switch);
+		final CompoundButton showLinesToggle = (CompoundButton) mainView.findViewById(R.id.show_guide_line_switch);
 		showLinesToggle.setChecked(settings.SHOW_LINES_TO_FIRST_MARKERS.get());
 		mainView.findViewById(R.id.show_guide_line_row).setOnClickListener(new View.OnClickListener() {
 			@Override
 			public void onClick(View view) {
-				settings.SHOW_LINES_TO_FIRST_MARKERS.set(!settings.SHOW_LINES_TO_FIRST_MARKERS.get());
+				boolean newState = !settings.SHOW_LINES_TO_FIRST_MARKERS.get();
+				settings.SHOW_LINES_TO_FIRST_MARKERS.set(newState);
+				showLinesToggle.setChecked(newState);
 				if (getMapActivity() != null) {
 					getMapActivity().refreshMap();
 				}
-				dismiss();
 			}
 		});
 
