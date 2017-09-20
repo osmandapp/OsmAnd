@@ -245,6 +245,9 @@ public class MapMarkersGroupsAdapter extends RecyclerView.Adapter<RecyclerView.V
 			}
 
 			final boolean markerInHistory = marker.history;
+			String markerGroupName = marker.groupName;
+			boolean markerHasGroup = markerGroupName != null;
+			final MapMarkersGroup group = markerHasGroup ? getMapMarkerGroupByName(markerGroupName) : null;
 			itemViewHolder.optionsBtn.setImageDrawable(iconsCache.getThemedIcon(markerInHistory ? R.drawable.ic_action_reset_to_default_dark : R.drawable.ic_action_marker_passed));
 			itemViewHolder.optionsBtn.setOnClickListener(new View.OnClickListener() {
 				@Override
@@ -253,9 +256,6 @@ public class MapMarkersGroupsAdapter extends RecyclerView.Adapter<RecyclerView.V
 					if (position < 0) {
 						return;
 					}
-					String markerGroupName = marker.groupName;
-					boolean markerHasGroup = markerGroupName != null;
-					MapMarkersGroup group = markerHasGroup ? getMapMarkerGroupByName(markerGroupName) : null;
 					if (markerInHistory) {
 						app.getMapMarkersHelper().restoreMarkerFromHistory(marker, 0);
 						if (group != null) {
@@ -300,13 +300,13 @@ public class MapMarkersGroupsAdapter extends RecyclerView.Adapter<RecyclerView.V
 			});
 			itemViewHolder.iconReorder.setVisibility(View.GONE);
 			itemViewHolder.flagIconLeftSpace.setVisibility(View.VISIBLE);
-			if (position == getItemCount() - 1) {
-				itemViewHolder.bottomShadow.setVisibility(View.VISIBLE);
+			boolean lastItem = position == getItemCount() - 1;
+			if ((getItemCount() > position + 1 && getItemViewType(position + 1) == HEADER_TYPE) || lastItem) {
 				itemViewHolder.divider.setVisibility(View.GONE);
 			} else {
-				itemViewHolder.bottomShadow.setVisibility(View.GONE);
 				itemViewHolder.divider.setVisibility(View.VISIBLE);
 			}
+			itemViewHolder.bottomShadow.setVisibility(lastItem ? View.VISIBLE : View.GONE);
 
 			LatLon markerLatLon = new LatLon(marker.getLatitude(), marker.getLongitude());
 			DashLocationFragment.updateLocationView(useCenter, location,
@@ -346,6 +346,8 @@ public class MapMarkersGroupsAdapter extends RecyclerView.Adapter<RecyclerView.V
 				throw new IllegalArgumentException("Unsupported header");
 			}
 			headerViewHolder.title.setText(headerString);
+			headerViewHolder.topShadowDivider.setVisibility(View.GONE);
+			headerViewHolder.topDivider.setVisibility(View.VISIBLE);
 		} else if (holder instanceof MapMarkersShowHideHistoryViewHolder) {
 			final MapMarkersShowHideHistoryViewHolder showHideHistoryViewHolder = (MapMarkersShowHideHistoryViewHolder) holder;
 			final ShowHideHistoryButton showHideHistoryButton = (ShowHideHistoryButton) getItem(position);
@@ -401,7 +403,8 @@ public class MapMarkersGroupsAdapter extends RecyclerView.Adapter<RecyclerView.V
 
 	private MapMarkersGroup getMapMarkerGroupByName(String name) {
 		for (MapMarkersGroup group : groups) {
-			if (group.getName() != null && group.getName().equals(name)) {
+			if ((name == null && group.getName() == null)
+					|| (group.getName() != null && group.getName().equals(name))) {
 				return group;
 			}
 		}
