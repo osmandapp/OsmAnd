@@ -116,7 +116,7 @@ public class MapMarkersGroupsAdapter extends RecyclerView.Adapter<RecyclerView.V
 				if (group.getHistoryMarkers().size() > 0) {
 					ShowHideHistoryButton showHideHistoryButton = new ShowHideHistoryButton();
 					showHideHistoryButton.setShowHistory(false);
-					showHideHistoryButton.setGroup(group);
+					showHideHistoryButton.setHistoryMarkers(group.getHistoryMarkers());
 					group.setShowHideHistoryButton(showHideHistoryButton);
 					items.add(showHideHistoryButton);
 				}
@@ -277,7 +277,7 @@ public class MapMarkersGroupsAdapter extends RecyclerView.Adapter<RecyclerView.V
 								items.remove(marker);
 								showHideHistoryButton = new ShowHideHistoryButton();
 								showHideHistoryButton.setShowHistory(false);
-								showHideHistoryButton.setGroup(group);
+								showHideHistoryButton.setHistoryMarkers(group.getHistoryMarkers());
 								int index = getLastDisplayItemIndexOfGroup(group);
 								if (index != -1) {
 									items.add(index + 1, showHideHistoryButton);
@@ -355,7 +355,7 @@ public class MapMarkersGroupsAdapter extends RecyclerView.Adapter<RecyclerView.V
 			showHideHistoryViewHolder.itemView.setOnClickListener(new View.OnClickListener() {
 				@Override
 				public void onClick(View view) {
-					List<MapMarker> historyMarkers = showHideHistoryButton.getGroup().getHistoryMarkers();
+					List<MapMarker> historyMarkers = showHideHistoryButton.getHistoryMarkers();
 					int pos = holder.getAdapterPosition();
 					if (showHistory) {
 						showHideHistoryButton.setShowHistory(false);
@@ -499,7 +499,7 @@ public class MapMarkersGroupsAdapter extends RecyclerView.Adapter<RecyclerView.V
 
 	private static class ShowHideHistoryButton {
 		private boolean showHistory;
-		private MapMarkersGroup group;
+		private List<MapMarker> historyMarkers;
 
 		public boolean isShowHistory() {
 			return showHistory;
@@ -509,12 +509,12 @@ public class MapMarkersGroupsAdapter extends RecyclerView.Adapter<RecyclerView.V
 			this.showHistory = showHistory;
 		}
 
-		public MapMarkersGroup getGroup() {
-			return group;
+		public List<MapMarker> getHistoryMarkers() {
+			return historyMarkers;
 		}
 
-		public void setGroup(MapMarkersGroup group) {
-			this.group = group;
+		public void setHistoryMarkers(List<MapMarker> historyMarkers) {
+			this.historyMarkers = historyMarkers;
 		}
 	}
 
