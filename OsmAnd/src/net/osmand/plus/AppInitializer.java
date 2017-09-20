@@ -288,8 +288,8 @@ public class AppInitializer implements IProgress {
 	}
 
 	private void indexRegionsBoundaries(List<String> warnings) {
+		File file = app.getAppPath("regions.ocbf");
 		try {
-			File file = app.getAppPath("regions.ocbf");
 			if (file != null) {
 				if (!file.exists()) {
 					Algorithms.streamCopy(OsmandRegions.class.getResourceAsStream("regions.ocbf"),
@@ -300,6 +300,7 @@ public class AppInitializer implements IProgress {
 			}
 		} catch (Exception e) {
 			warnings.add(e.getMessage());
+			file.delete(); // recreate file
 			LOG.error(e.getMessage(), e);
 		}
 	}
