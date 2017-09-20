@@ -54,8 +54,7 @@ public class MapMarkersGroupsAdapter extends RecyclerView.Adapter<RecyclerView.V
 		createDisplayGroups();
 	}
 
-	public void createDisplayGroups() {
-		items.clear();
+	private void createDisplayGroups() {
 		groups = getMapMarkersGroups();
 		for (int i = 0; i < groups.size(); i++) {
 			MapMarkersGroup group = groups.get(i);
