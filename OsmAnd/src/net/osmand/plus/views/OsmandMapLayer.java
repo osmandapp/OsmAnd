@@ -140,47 +140,47 @@ public abstract class OsmandMapLayer {
 
 
 	public int calculatePath(RotatedTileBox tb, TIntArrayList xs, TIntArrayList ys, Path path) {
-		path.reset();
-		boolean segmentStarted = false;
-		int prevX = xs.get(0);
-		int prevY = ys.get(0);
-		int height = tb.getPixHeight();
-		int width = tb.getPixWidth();
+		boolean start = false;
+		int px = xs.get(0);
+		int py = ys.get(0);
+		int h = tb.getPixHeight();
+		int w = tb.getPixWidth();
 		int cnt = 0;
-		boolean prevIn = isIn(prevX, prevY, 0, 0, width, height);
+		boolean pin = isIn(px, py, 0, 0, w, h);
 		for (int i = 1; i < xs.size(); i++) {
-			int currX = xs.get(i);
-			int currY = ys.get(i);
-			boolean currIn = isIn(currX, currY, 0, 0, width, height);
+			int x = xs.get(i);
+			int y = ys.get(i);
+			boolean in = isIn(x, y, 0, 0, w, h);
 			boolean draw = false;
-			if (prevIn && currIn) {
+			if (pin && in) {
 				draw = true;
 			} else {
-				long intersection = MapAlgorithms.calculateIntersection(currX, currY, prevX, prevY, 0, width, height, 0);
+				long intersection = MapAlgorithms.calculateIntersection(x, y,
+						px, py, 0, w, h, 0);
 				if (intersection != -1) {
-					if (prevIn && (i == 1)) {
+					if (pin && (i == 1)) {
 						cnt++;
-						path.moveTo(prevX, prevY);
-						segmentStarted = true;
+						path.moveTo(px, py);
+						start = true;
 					}
-					prevX = (int) (intersection >> 32);
-					prevY = (int) (intersection & 0xffffffff);
+					px = (int) (intersection >> 32);
+					py = (int) (intersection & 0xffffffff);
 					draw = true;
 				}
 			}
 			if (draw) {
-				if (!segmentStarted) {
+				if (!start) {
 					cnt++;
-					path.moveTo(prevX, prevY);
-					segmentStarted = true;
+					path.moveTo(px, py);
+					start = true;
 				}
-				path.lineTo(currX, currY);
+				path.lineTo(x, y);
 			} else {
-				segmentStarted = false;
+				start = false;
 			}
-			prevIn = currIn;
-			prevX = currX;
-			prevY = currY;
+			pin = in;
+			px = x;
+			py = y;
 		}
 		return cnt;
 	}
