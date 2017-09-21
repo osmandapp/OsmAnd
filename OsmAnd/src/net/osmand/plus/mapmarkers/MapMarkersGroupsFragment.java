@@ -83,6 +83,12 @@ public class MapMarkersGroupsFragment extends Fragment implements OsmAndCompassL
 		}
 	}
 
+	void hideSnackbar() {
+		if (adapter != null) {
+			adapter.hideSnackbar();
+		}
+	}
+
 	@Override
 	public void updateLocation(Location location) {
 		boolean newLocation = this.location == null && location != null;

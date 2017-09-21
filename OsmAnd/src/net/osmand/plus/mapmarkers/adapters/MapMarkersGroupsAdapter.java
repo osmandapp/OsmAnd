@@ -1,5 +1,6 @@
 package net.osmand.plus.mapmarkers.adapters;
 
+import android.support.design.widget.Snackbar;
 import android.support.v4.content.ContextCompat;
 import android.support.v7.widget.RecyclerView;
 import android.view.LayoutInflater;
@@ -7,6 +8,7 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.widget.CompoundButton;
 import android.widget.ImageView;
+import android.widget.TextView;
 
 import net.osmand.data.LatLon;
 import net.osmand.plus.IconsCache;
@@ -49,6 +51,7 @@ public class MapMarkersGroupsAdapter extends RecyclerView.Adapter<RecyclerView.V
 	private boolean useCenter;
 	private boolean showDirectionEnabled;
 	private List<MapMarker> showDirectionMarkers;
+	private Snackbar snackbar;
 
 	public MapMarkersGroupsAdapter(MapActivity mapActivity) {
 		this.mapActivity = mapActivity;
@@ -308,13 +311,30 @@ public class MapMarkersGroupsAdapter extends RecyclerView.Adapter<RecyclerView.V
 				headerViewHolder.disableGroupSwitch.setChecked(!groupIsDisabled);
 				headerViewHolder.disableGroupSwitch.setOnCheckedChangeListener(new CompoundButton.OnCheckedChangeListener() {
 					@Override
-					public void onCheckedChanged(CompoundButton compoundButton, boolean b) {
-						groupHeader.getGroup().setDisabled(!b);
+					public void onCheckedChanged(CompoundButton compoundButton, boolean enabled) {
+						groupHeader.getGroup().setDisabled(!enabled);
 						MapMarkersHelper.MarkersSyncGroup syncGroup = app.getMapMarkersHelper().getGroup(groupHeader.getGroup().getGroupKey());
 						if (syncGroup != null) {
-							app.getMapMarkersHelper().updateSyncGroupDisabled(syncGroup.getId(), !b);
+							app.getMapMarkersHelper().updateSyncGroupDisabled(syncGroup.getId(), !enabled);
 						}
-						notifyDataSetChanged();
+						if (!enabled) {
+							snackbar = Snackbar.make(holder.itemView, app.getString(R.string.group_will_be_removed_after_restart), Snackbar.LENGTH_LONG)
+									.setAction(R.string.shared_string_undo, new View.OnClickListener() {
+										@Override
+										public void onClick(View view) {
+											groupHeader.getGroup().setDisabled(false);
+											MapMarkersHelper.MarkersSyncGroup syncGroup = app.getMapMarkersHelper().getGroup(groupHeader.getGroup().getGroupKey());
+											if (syncGroup != null) {
+												app.getMapMarkersHelper().updateSyncGroupDisabled(syncGroup.getId(), false);
+											}
+											headerViewHolder.disableGroupSwitch.setChecked(true);
+										}
+									});
+							View snackBarView = snackbar.getView();
+							TextView tv = (TextView) snackBarView.findViewById(android.support.design.R.id.snackbar_action);
+							tv.setTextColor(ContextCompat.getColor(mapActivity, R.color.color_dialog_buttons_dark));
+							snackbar.show();
+						}
 					}
 				});
 			} else {
@@ -341,6 +361,12 @@ public class MapMarkersGroupsAdapter extends RecyclerView.Adapter<RecyclerView.V
 					notifyDataSetChanged();
 				}
 			});
+		}
+	}
+
+	public void hideSnackbar() {
+		if (snackbar != null && snackbar.isShown()) {
+			snackbar.dismiss();
 		}
 	}
 

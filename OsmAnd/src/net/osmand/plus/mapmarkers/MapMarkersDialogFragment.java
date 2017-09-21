@@ -139,6 +139,7 @@ public class MapMarkersDialogFragment extends android.support.v4.app.DialogFragm
 						if (viewPager.getCurrentItem() != 0) {
 							activeFragment.updateAdapter();
 							historyFragment.hideSnackbar();
+							groupsFragment.hideSnackbar();
 						}
 						orderByModeTitle.setVisibility(View.VISIBLE);
 						viewPager.setCurrentItem(0);
@@ -159,6 +160,7 @@ public class MapMarkersDialogFragment extends android.support.v4.app.DialogFragm
 						activeFragment.stopLocationUpdate();
 						if (viewPager.getCurrentItem() != 2) {
 							historyFragment.updateAdapter();
+							groupsFragment.hideSnackbar();
 							activeFragment.hideSnackbar();
 						}
 						orderByModeTitle.setVisibility(View.GONE);
