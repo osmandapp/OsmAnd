@@ -507,12 +507,17 @@ public class MapMarkersHelper {
 		}
 	}
 
-	public void removeMarkerFromHistory(MapMarker marker) {
+	public void removeMarker(MapMarker marker) {
 		if (marker != null) {
-			markersDbHelper.removeMarker(marker, true);
-			mapMarkersHistory.remove(marker);
-			refresh();
+			boolean history = marker.history;
+			markersDbHelper.removeMarker(marker, history);
+			if (history) {
+				mapMarkersHistory.remove(marker);
+			} else {
+				mapMarkers.remove(marker);
+			}
 			removeMarkerFromGroup(marker);
+			refresh();
 		}
 	}
 
@@ -840,15 +845,21 @@ public class MapMarkersHelper {
 				}
 			}
 			markersGroup.setMarkers(activeMarkers);
-			updateShowHideHistoryButtonInGroup(markersGroup);
+			updateGroup(markersGroup);
 		}
 	}
 
-	private void updateShowHideHistoryButtonInGroup(MapMarkersGroup mapMarkersGroup) {
+	public void updateGroup(MapMarkersGroup mapMarkersGroup) {
+		if (mapMarkersGroup.getMarkers().size() == 0) {
+			mapMarkersGroups.remove(mapMarkersGroup);
+			return;
+		}
 		int historyMarkersCount = mapMarkersGroup.getHistoryMarkers().size();
 		ShowHideHistoryButton showHideHistoryButton = mapMarkersGroup.getShowHideHistoryButton();
-		if (showHideHistoryButton != null && historyMarkersCount == 0) {
-			mapMarkersGroup.setShowHideHistoryButton(null);
+		if (showHideHistoryButton != null) {
+			if (historyMarkersCount == 0) {
+				mapMarkersGroup.setShowHideHistoryButton(null);
+			}
 		} else if (historyMarkersCount > 0) {
 			showHideHistoryButton = new ShowHideHistoryButton();
 			showHideHistoryButton.setShowHistory(false);
@@ -862,7 +873,7 @@ public class MapMarkersHelper {
 			MapMarkersGroup mapMarkersGroup = getMapMarkerGroupByName(marker.groupName);
 			if (mapMarkersGroup != null) {
 				mapMarkersGroup.getMarkers().add(marker);
-				updateShowHideHistoryButtonInGroup(mapMarkersGroup);
+				updateGroup(mapMarkersGroup);
 				if (mapMarkersGroup.getName() == null) {
 					sortMarkers(mapMarkersGroup.getMarkers(), false, OsmandSettings.MapMarkersOrderByMode.DATE_ADDED_DESC);
 				}
@@ -876,27 +887,32 @@ public class MapMarkersHelper {
 
 	private MapMarkersGroup createMapMarkerGroup(MapMarker marker) {
 		MapMarkersGroup group = new MapMarkersGroup();
-		group.setName(marker.groupName);
-		group.setGroupKey(marker.groupKey);
-		MapMarkersHelper.MarkersSyncGroup syncGroup = getGroup(marker.groupKey);
-		if (syncGroup != null) {
-			group.setType(syncGroup.getType());
+		if (marker.groupName != null) {
+			group.setName(marker.groupName);
+			group.setGroupKey(marker.groupKey);
+			MapMarkersHelper.MarkersSyncGroup syncGroup = getGroup(marker.groupKey);
+			if (syncGroup != null) {
+				group.setType(syncGroup.getType());
+			}
+			group.setColor(MapMarker.getColorId(marker.colorIndex));
 		}
-		group.setColor(MapMarker.getColorId(marker.colorIndex));
 		group.setCreationDate(marker.creationDate);
 		mapMarkersGroups.add(group);
+		sortGroups();
 		return group;
 	}
 
 	private void createHeaderAndHistoryButtonInGroup(MapMarkersGroup group) {
-		GroupHeader header = new GroupHeader();
-		int type = group.getType();
-		if (type != -1) {
-			header.setIconRes(type == MapMarkersHelper.MarkersSyncGroup.FAVORITES_TYPE ? R.drawable.ic_action_fav_dark : R.drawable.ic_action_track_16);
+		if (group.getName() != null) {
+			GroupHeader header = new GroupHeader();
+			int type = group.getType();
+			if (type != -1) {
+				header.setIconRes(type == MapMarkersHelper.MarkersSyncGroup.FAVORITES_TYPE ? R.drawable.ic_action_fav_dark : R.drawable.ic_action_track_16);
+			}
+			header.setGroup(group);
+			group.setGroupHeader(header);
+			updateGroup(group);
 		}
-		header.setGroup(group);
-		group.setGroupHeader(header);
-		updateShowHideHistoryButtonInGroup(group);
 	}
 
 	private void removeMarkerFromGroup(MapMarker marker) {
@@ -904,7 +920,7 @@ public class MapMarkersHelper {
 			MapMarkersGroup mapMarkersGroup = getMapMarkerGroupByName(marker.groupName);
 			if (mapMarkersGroup != null) {
 				mapMarkersGroup.getMarkers().remove(marker);
-				updateShowHideHistoryButtonInGroup(mapMarkersGroup);
+				updateGroup(mapMarkersGroup);
 			}
 		}
 	}
@@ -931,7 +947,15 @@ public class MapMarkersHelper {
 			} else {
 				MapMarkersGroup group = groupsMap.get(groupName);
 				if (group == null) {
-					group = createMapMarkerGroup(marker);
+					group = new MapMarkersGroup();
+					group.setName(marker.groupName);
+					group.setGroupKey(marker.groupKey);
+					MapMarkersHelper.MarkersSyncGroup syncGroup = getGroup(marker.groupKey);
+					if (syncGroup != null) {
+						group.setType(syncGroup.getType());
+					}
+					group.setColor(MapMarker.getColorId(marker.colorIndex));
+					group.setCreationDate(marker.creationDate);
 					groupsMap.put(groupName, group);
 				} else {
 					long markerCreationDate = marker.creationDate;
@@ -943,33 +967,44 @@ public class MapMarkersHelper {
 			}
 		}
 		mapMarkersGroups = new ArrayList<>(groupsMap.values());
-		sortGroups(mapMarkersGroups);
+		if (noGroup != null) {
+			mapMarkersGroups.add(noGroup);
+		}
+		sortGroups();
 
 		for (MapMarkersGroup group : mapMarkersGroups) {
 			createHeaderAndHistoryButtonInGroup(group);
 		}
-
-		if (noGroup != null) {
-			sortMarkers(noGroup.getMarkers(), false, OsmandSettings.MapMarkersOrderByMode.DATE_ADDED_DESC);
-			mapMarkersGroups.add(0, noGroup);
-		}
 	}
 
-	private void sortGroups(List<MapMarkersGroup> groups) {
-		Collections.sort(groups, new Comparator<MapMarkersGroup>() {
-			@Override
-			public int compare(MapMarkersGroup group1, MapMarkersGroup group2) {
-				long t1 = group1.getCreationDate();
-				long t2 = group2.getCreationDate();
-				if (t1 > t2) {
-					return -1;
-				} else if (t1 == t2) {
-					return 0;
-				} else {
-					return 1;
+	private void sortGroups() {
+		if (mapMarkersGroups.size() > 0) {
+			MapMarkersGroup noGroup = null;
+			for (int i = 0; i < mapMarkersGroups.size(); i++) {
+				MapMarkersGroup group = mapMarkersGroups.get(i);
+				if (group.getName() == null) {
+					sortMarkers(group.getMarkers(), false, OsmandSettings.MapMarkersOrderByMode.DATE_ADDED_DESC);
+					noGroup = mapMarkersGroups.remove(i);
 				}
 			}
-		});
+			Collections.sort(mapMarkersGroups, new Comparator<MapMarkersGroup>() {
+				@Override
+				public int compare(MapMarkersGroup group1, MapMarkersGroup group2) {
+					long t1 = group1.getCreationDate();
+					long t2 = group2.getCreationDate();
+					if (t1 > t2) {
+						return -1;
+					} else if (t1 == t2) {
+						return 0;
+					} else {
+						return 1;
+					}
+				}
+			});
+			if (noGroup != null) {
+				mapMarkersGroups.add(0, noGroup);
+			}
+		}
 	}
 
 	public MapMarkersGroup getMapMarkerGroupByName(String name) {

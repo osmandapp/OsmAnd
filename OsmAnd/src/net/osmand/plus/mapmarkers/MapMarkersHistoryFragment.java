@@ -152,7 +152,7 @@ public class MapMarkersHistoryFragment extends Fragment implements MapMarkersHel
 						app.getMapMarkersHelper().restoreMarkerFromHistory((MapMarker) item, 0);
 						snackbarStringRes = R.string.marker_moved_to_active;
 					} else {
-						app.getMapMarkersHelper().removeMarkerFromHistory((MapMarker) item);
+						app.getMapMarkersHelper().removeMarker((MapMarker) item);
 						snackbarStringRes = R.string.item_removed;
 					}
 					adapter.notifyItemRemoved(pos);
@@ -225,7 +225,7 @@ public class MapMarkersHistoryFragment extends Fragment implements MapMarkersHel
 			public void onDeleteMarker(int pos) {
 				Object item = adapter.getItem(pos);
 				if (item instanceof MapMarker) {
-					app.getMapMarkersHelper().removeMarkerFromHistory((MapMarker) item);
+					app.getMapMarkersHelper().removeMarker((MapMarker) item);
 					adapter.notifyItemRemoved(pos);
 				}
 			}
