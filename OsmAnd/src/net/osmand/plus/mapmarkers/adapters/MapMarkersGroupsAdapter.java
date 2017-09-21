@@ -303,7 +303,7 @@ public class MapMarkersGroupsAdapter extends RecyclerView.Adapter<RecyclerView.V
 						+ "/" + (groupHeader.getMarkersCount());
 				headerViewHolder.icon.setVisibility(View.VISIBLE);
 				headerViewHolder.iconSpace.setVisibility(View.GONE);
-				headerViewHolder.icon.setImageDrawable(iconsCache.getIcon(groupHeader.getIconRes(), groupHeader.getColor()));
+				headerViewHolder.icon.setImageDrawable(iconsCache.getIcon(groupHeader.getIconRes(), R.color.divider_color));
 			} else {
 				throw new IllegalArgumentException("Unsupported header");
 			}
