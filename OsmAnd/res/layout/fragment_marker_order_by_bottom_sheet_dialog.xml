@@ -90,7 +90,7 @@
             </LinearLayout>
 
             <LinearLayout
-                android:id="@+id/date_added_row"
+                android:id="@+id/date_added_asc_row"
                 android:layout_width="match_parent"
                 android:layout_height="@dimen/bottom_sheet_list_item_height"
                 android:background="?attr/selectableItemBackground"
@@ -102,7 +102,7 @@
                 android:gravity="center_vertical">
 
                 <ImageView
-                    android:id="@+id/date_added_icon"
+                    android:id="@+id/date_added_asc_icon"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:layout_marginEnd="@dimen/bottom_sheet_icon_margin"
@@ -110,11 +110,40 @@
                     tools:src="@drawable/ic_action_sort_by_date"/>
 
                 <TextView
-                    android:id="@+id/date_added_text"
+                    android:id="@+id/date_added_asc_text"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:maxLines="1"
-                    android:text="@string/date_added"
+                    tools:text="Date added (Ascendingly)"
+                    android:textAppearance="@style/TextAppearance.ListItemTitle"/>
+            </LinearLayout>
+
+            <LinearLayout
+                android:id="@+id/date_added_desc_row"
+                android:layout_width="match_parent"
+                android:layout_height="@dimen/bottom_sheet_list_item_height"
+                android:background="?attr/selectableItemBackground"
+                android:minHeight="@dimen/bottom_sheet_list_item_height"
+                android:paddingEnd="@dimen/bottom_sheet_content_padding"
+                android:paddingLeft="@dimen/bottom_sheet_content_padding"
+                android:paddingRight="@dimen/bottom_sheet_content_padding"
+                android:paddingStart="@dimen/bottom_sheet_content_padding"
+                android:gravity="center_vertical">
+
+                <ImageView
+                    android:id="@+id/date_added_desc_icon"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginEnd="@dimen/bottom_sheet_icon_margin"
+                    android:layout_marginRight="@dimen/bottom_sheet_icon_margin"
+                    tools:src="@drawable/ic_action_sort_by_date"/>
+
+                <TextView
+                    android:id="@+id/date_added_desc_text"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:maxLines="1"
+                    tools:text="Date added (Descendingly)"
                     android:textAppearance="@style/TextAppearance.ListItemTitle"/>
             </LinearLayout>
 
