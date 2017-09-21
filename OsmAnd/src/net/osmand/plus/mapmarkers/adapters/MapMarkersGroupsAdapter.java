@@ -5,6 +5,7 @@ import android.support.v7.widget.RecyclerView;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.CompoundButton;
 import android.widget.ImageView;
 
 import net.osmand.data.LatLon;
@@ -249,13 +250,6 @@ public class MapMarkersGroupsAdapter extends RecyclerView.Adapter<RecyclerView.V
 							}
 						}
 					}
-					if (group != null) {
-						GroupHeader header = group.getGroupHeader();
-						if (header != null) {
-							header.setActiveMarkersCount(group.getActiveMarkers().size());
-							header.setMarkersCount(group.getMarkers().size());
-						}
-					}
 					updateShowDirectionMarkers();
 					notifyDataSetChanged();
 				}
@@ -296,14 +290,28 @@ public class MapMarkersGroupsAdapter extends RecyclerView.Adapter<RecyclerView.V
 				} else {
 					headerString = String.valueOf(dateHeader);
 				}
+				headerViewHolder.disableGroupSwitch.setVisibility(View.GONE);
 			} else if (header instanceof GroupHeader) {
-				GroupHeader groupHeader = (GroupHeader) header;
-				headerString = groupHeader.getGroupName() + " \u2014 "
-						+ groupHeader.getActiveMarkersCount()
-						+ "/" + (groupHeader.getMarkersCount());
+				final GroupHeader groupHeader = (GroupHeader) header;
+				String groupName = groupHeader.getGroup().getName();
+				if (groupName.equals("")) {
+					groupName = app.getString(R.string.shared_string_favorites);
+				}
+				headerString = groupName + " \u2014 "
+						+ groupHeader.getGroup().getActiveMarkers().size()
+						+ "/" + groupHeader.getGroup().getMarkers().size();
 				headerViewHolder.icon.setVisibility(View.VISIBLE);
 				headerViewHolder.iconSpace.setVisibility(View.GONE);
 				headerViewHolder.icon.setImageDrawable(iconsCache.getIcon(groupHeader.getIconRes(), R.color.divider_color));
+				boolean groupIsDisabled = groupHeader.getGroup().isDisabled();
+				headerViewHolder.disableGroupSwitch.setChecked(!groupIsDisabled);
+				headerViewHolder.disableGroupSwitch.setOnCheckedChangeListener(new CompoundButton.OnCheckedChangeListener() {
+					@Override
+					public void onCheckedChanged(CompoundButton compoundButton, boolean b) {
+						groupHeader.getGroup().setDisabled(!b);
+						notifyDataSetChanged();
+					}
+				});
 			} else {
 				throw new IllegalArgumentException("Unsupported header");
 			}

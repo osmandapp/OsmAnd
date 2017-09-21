@@ -873,19 +873,12 @@ public class MapMarkersHelper {
 	}
 
 	private void createHeaderAndHistoryButtonInGroup(MapMarkersGroup group) {
-		String markerGroupName = group.getName();
-		if (markerGroupName.equals("")) {
-			markerGroupName = ctx.getString(R.string.shared_string_favorites);
-		}
 		GroupHeader header = new GroupHeader();
-		header.setGroupName(markerGroupName);
 		int type = group.getType();
 		if (type != -1) {
 			header.setIconRes(type == MapMarkersHelper.MarkersSyncGroup.FAVORITES_TYPE ? R.drawable.ic_action_fav_dark : R.drawable.ic_action_track_16);
 		}
-		header.setActiveMarkersCount(group.getActiveMarkers().size());
-		header.setMarkersCount(group.getMarkers().size());
-		header.setColor(group.getColor());
+		header.setGroup(group);
 		group.setGroupHeader(header);
 		updateShowHideHistoryButtonInGroup(group);
 	}
@@ -981,6 +974,7 @@ public class MapMarkersHelper {
 		private long creationDate;
 		private ShowHideHistoryButton showHideHistoryButton;
 		private int color;
+		private boolean disabled;
 
 		public String getName() {
 			return name;
@@ -1057,6 +1051,14 @@ public class MapMarkersHelper {
 		public void setColor(int color) {
 			this.color = color;
 		}
+
+		public boolean isDisabled() {
+			return disabled;
+		}
+
+		public void setDisabled(boolean disabled) {
+			this.disabled = disabled;
+		}
 	}
 
 	public static class ShowHideHistoryButton {
@@ -1081,35 +1083,8 @@ public class MapMarkersHelper {
 	}
 
 	public static class GroupHeader {
-		private String groupName;
-		private int activeMarkersCount;
-		private int markersCount;
 		private int iconRes;
-		private int color;
-
-		public String getGroupName() {
-			return groupName;
-		}
-
-		public void setGroupName(String groupName) {
-			this.groupName = groupName;
-		}
-
-		public int getActiveMarkersCount() {
-			return activeMarkersCount;
-		}
-
-		public void setActiveMarkersCount(int activeMarkersCount) {
-			this.activeMarkersCount = activeMarkersCount;
-		}
-
-		public int getMarkersCount() {
-			return markersCount;
-		}
-
-		public void setMarkersCount(int markersCount) {
-			this.markersCount = markersCount;
-		}
+		private MapMarkersGroup group;
 
 		public int getIconRes() {
 			return iconRes;
@@ -1119,12 +1094,12 @@ public class MapMarkersHelper {
 			this.iconRes = iconRes;
 		}
 
-		public int getColor() {
-			return color;
+		public MapMarkersGroup getGroup() {
+			return group;
 		}
 
-		public void setColor(int color) {
-			this.color = color;
+		public void setGroup(MapMarkersGroup group) {
+			this.group = group;
 		}
 	}
 }
