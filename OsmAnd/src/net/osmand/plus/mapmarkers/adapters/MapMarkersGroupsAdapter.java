@@ -10,6 +10,7 @@ import android.widget.ImageView;
 
 import net.osmand.data.LatLon;
 import net.osmand.plus.IconsCache;
+import net.osmand.plus.MapMarkersHelper;
 import net.osmand.plus.MapMarkersHelper.MapMarker;
 import net.osmand.plus.MapMarkersHelper.MapMarkersGroup;
 import net.osmand.plus.MapMarkersHelper.GroupHeader;
@@ -309,6 +310,10 @@ public class MapMarkersGroupsAdapter extends RecyclerView.Adapter<RecyclerView.V
 					@Override
 					public void onCheckedChanged(CompoundButton compoundButton, boolean b) {
 						groupHeader.getGroup().setDisabled(!b);
+						MapMarkersHelper.MarkersSyncGroup syncGroup = app.getMapMarkersHelper().getGroup(groupHeader.getGroup().getGroupKey());
+						if (syncGroup != null) {
+							app.getMapMarkersHelper().updateSyncGroupDisabled(syncGroup.getId(), !b);
+						}
 						notifyDataSetChanged();
 					}
 				});

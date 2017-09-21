@@ -230,6 +230,7 @@ public class MapMarkersHelper {
 		settings = ctx.getSettings();
 		markersDbHelper = ctx.getMapMarkersDbHelper();
 		startFromMyLocation = settings.ROUTE_MAP_MARKERS_START_MY_LOC.get();
+		removeDisabledGroups();
 		loadMarkers();
 		createMapMarkersGroups();
 	}
@@ -613,6 +614,16 @@ public class MapMarkersHelper {
 		}
 	}
 
+	public void removeDisabledGroups() {
+		markersDbHelper.removeDisabledGroups();
+	}
+
+	public void updateSyncGroupDisabled(String id, boolean disabled) {
+		if (id != null) {
+			markersDbHelper.updateSyncGroupDisabled(id, disabled);
+		}
+	}
+
 	public void removeActiveMarkersFromSyncGroup(String syncGroupId) {
 		if (syncGroupId != null) {
 			markersDbHelper.removeActiveMarkersFromSyncGroup(syncGroupId);
@@ -862,6 +873,7 @@ public class MapMarkersHelper {
 	private MapMarkersGroup createMapMarkerGroup(MapMarker marker) {
 		MapMarkersGroup group = new MapMarkersGroup();
 		group.setName(marker.groupName);
+		group.setGroupKey(marker.groupKey);
 		MapMarkersHelper.MarkersSyncGroup syncGroup = getGroup(marker.groupKey);
 		if (syncGroup != null) {
 			group.setType(syncGroup.getType());
@@ -968,6 +980,7 @@ public class MapMarkersHelper {
 
 	public static class MapMarkersGroup {
 		private String name;
+		private String groupKey;
 		private GroupHeader header;
 		private int type = -1;
 		private List<MapMarker> markers = new ArrayList<>();
@@ -982,6 +995,14 @@ public class MapMarkersHelper {
 
 		public void setName(String name) {
 			this.name = name;
+		}
+
+		public String getGroupKey() {
+			return groupKey;
+		}
+
+		public void setGroupKey(String groupKey) {
+			this.groupKey = groupKey;
 		}
 
 		public GroupHeader getGroupHeader() {

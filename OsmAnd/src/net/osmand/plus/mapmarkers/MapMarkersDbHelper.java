@@ -21,7 +21,7 @@ import java.util.Random;
 
 public class MapMarkersDbHelper {
 
-	private static final int DB_VERSION = 7;
+	private static final int DB_VERSION = 8;
 	public static final String DB_NAME = "map_markers_db";
 
 	private static final String MARKERS_TABLE_NAME = "map_markers";
@@ -36,6 +36,7 @@ public class MapMarkersDbHelper {
 	private static final String MARKERS_COL_GROUP_KEY = "group_key";
 	private static final String MARKERS_COL_COLOR = "marker_color";
 	private static final String MARKERS_COL_NEXT_KEY = "marker_next_key";
+	private static final String MARKERS_COL_DISABLED = "marker_disabled";
 
 	private static final String MARKERS_TABLE_CREATE = "CREATE TABLE IF NOT EXISTS " +
 			MARKERS_TABLE_NAME + " (" +
@@ -49,7 +50,8 @@ public class MapMarkersDbHelper {
 			MARKERS_COL_GROUP_NAME + " TEXT, " +
 			MARKERS_COL_GROUP_KEY + " TEXT, " +
 			MARKERS_COL_COLOR + " int, " +
-			MARKERS_COL_NEXT_KEY + " TEXT);";
+			MARKERS_COL_NEXT_KEY + " TEXT, " +
+			MARKERS_COL_DISABLED + " int);";
 
 	private static final String MARKERS_TABLE_SELECT = "SELECT " +
 			MARKERS_COL_ID + ", " +
@@ -62,19 +64,22 @@ public class MapMarkersDbHelper {
 			MARKERS_COL_GROUP_NAME + ", " +
 			MARKERS_COL_GROUP_KEY + ", " +
 			MARKERS_COL_COLOR + ", " +
-			MARKERS_COL_NEXT_KEY +
+			MARKERS_COL_NEXT_KEY + ", " +
+			MARKERS_COL_DISABLED +
 			" FROM " + MARKERS_TABLE_NAME;
 
 	private static final String GROUPS_TABLE_NAME = "map_markers_groups";
 	private static final String GROUPS_COL_ID = "group_id";
 	private static final String GROUPS_COL_NAME = "group_name";
 	private static final String GROUPS_COL_TYPE = "group_type";
+	private static final String GROUPS_COL_DISABLED = "group_disabled";
 
 	private static final String GROUPS_TABLE_CREATE = "CREATE TABLE IF NOT EXISTS " +
 			GROUPS_TABLE_NAME + " (" +
 			GROUPS_COL_ID + " TEXT PRIMARY KEY, " +
 			GROUPS_COL_NAME + " TEXT, " +
-			GROUPS_COL_TYPE + " int);";
+			GROUPS_COL_TYPE + " int, " +
+			GROUPS_COL_DISABLED + " int);"; // 1 = true, 0 = false
 
 	private static final String GROUPS_TABLE_SELECT = "SELECT " +
 			GROUPS_COL_ID + ", " +
@@ -158,7 +163,7 @@ public class MapMarkersDbHelper {
 		SQLiteConnection db = openConnection(false);
 		if (db != null) {
 			try {
-				db.execSQL("INSERT INTO " + GROUPS_TABLE_NAME + " VALUES (?, ?, ?)", new Object[]{id, name, type});
+				db.execSQL("INSERT INTO " + GROUPS_TABLE_NAME + " VALUES (?, ?, ?, ?)", new Object[]{id, name, type, 0});
 			} finally {
 				db.close();
 			}
@@ -235,6 +240,34 @@ public class MapMarkersDbHelper {
 		}
 	}
 
+	public void updateSyncGroupDisabled(String id, boolean disabled) {
+		SQLiteConnection db = openConnection(false);
+		if (db != null) {
+			try {
+				db.execSQL("UPDATE " + GROUPS_TABLE_NAME +
+						" SET " + GROUPS_COL_DISABLED + " = ? " +
+						"WHERE " + GROUPS_COL_ID + " = ?", new Object[]{disabled ? 1 : 0, id});
+				db.execSQL("UPDATE " + MARKERS_TABLE_NAME +
+						" SET " + MARKERS_COL_DISABLED + " = ? " +
+						"WHERE " + MARKERS_COL_GROUP_KEY + " = ?", new Object[]{disabled ? 1 : 0, id});
+			} finally {
+				db.close();
+			}
+		}
+	}
+
+	public void removeDisabledGroups() {
+		SQLiteConnection db = openConnection(false);
+		if (db != null) {
+			try {
+				db.execSQL("DELETE FROM " + GROUPS_TABLE_NAME + " WHERE " + GROUPS_COL_DISABLED + " = ? ", new Object[]{1});
+				db.execSQL("DELETE FROM " + MARKERS_TABLE_NAME + " WHERE " + MARKERS_COL_DISABLED + " = ? ", new Object[]{1});
+			} finally {
+				db.close();
+			}
+		}
+	}
+
 	public void addMarker(MapMarker marker) {
 		addMarker(marker, false);
 	}
@@ -278,10 +311,10 @@ public class MapMarkersDbHelper {
 					"WHERE " + MARKERS_COL_NEXT_KEY + " = ?", new Object[]{marker.id, TAIL_NEXT_VALUE});
 		}
 
-		db.execSQL("INSERT INTO " + MARKERS_TABLE_NAME + " VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?)",
+		db.execSQL("INSERT INTO " + MARKERS_TABLE_NAME + " VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?)",
 				new Object[]{marker.id, marker.getLatitude(), marker.getLongitude(), descr, active,
 						currentTime, visited, marker.groupName, marker.groupKey, marker.colorIndex,
-						marker.history ? HISTORY_NEXT_VALUE : TAIL_NEXT_VALUE});
+						marker.history ? HISTORY_NEXT_VALUE : TAIL_NEXT_VALUE, 0});
 	}
 
 	public List<MapMarker> getMarkersFromGroup(MarkersSyncGroup group) {
