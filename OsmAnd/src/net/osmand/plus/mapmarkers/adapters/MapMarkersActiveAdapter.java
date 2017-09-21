@@ -4,6 +4,7 @@ import android.support.design.widget.Snackbar;
 import android.support.v4.content.ContextCompat;
 import android.support.v4.view.MotionEventCompat;
 import android.support.v7.widget.RecyclerView;
+import android.support.v7.widget.helper.ItemTouchHelper;
 import android.view.LayoutInflater;
 import android.view.MotionEvent;
 import android.view.View;
@@ -13,6 +14,7 @@ import android.widget.TextView;
 
 import net.osmand.data.LatLon;
 import net.osmand.plus.IconsCache;
+import net.osmand.plus.MapMarkersHelper;
 import net.osmand.plus.MapMarkersHelper.MapMarker;
 import net.osmand.plus.OsmandSettings;
 import net.osmand.plus.R;
@@ -218,6 +220,51 @@ public class MapMarkersActiveAdapter extends RecyclerView.Adapter<MapMarkerItemV
 		Collections.swap(markers, from, to);
 		notifyItemMoved(from, to);
 		return true;
+	}
+
+	@Override
+	public void onItemSwiped(RecyclerView.ViewHolder holder, final int direction) {
+		final int pos = holder.getAdapterPosition();
+		final MapMarker marker = getItem(pos);
+		int snackbarStringRes;
+		if (direction == ItemTouchHelper.LEFT) {
+			mapActivity.getMyApplication().getMapMarkersHelper().moveMapMarkerToHistory(marker);
+			MapMarkersHelper.MapMarkersGroup group = mapActivity.getMyApplication().getMapMarkersHelper().getMapMarkerGroupByName(marker.groupName);
+			if (group != null) {
+				mapActivity.getMyApplication().getMapMarkersHelper().updateGroup(group);
+			}
+			snackbarStringRes = R.string.marker_moved_to_history;
+		} else {
+			mapActivity.getMyApplication().getMapMarkersHelper().removeMarker(marker);
+			snackbarStringRes = R.string.item_removed;
+		}
+		notifyItemRemoved(pos);
+		if (showDirectionEnabled && pos < 2 && getItemCount() > 1) {
+			notifyItemChanged(1);
+		} else if (pos == getItemCount()) {
+			notifyItemChanged(pos - 1);
+		}
+		snackbar = Snackbar.make(holder.itemView, snackbarStringRes, Snackbar.LENGTH_LONG)
+				.setAction(R.string.shared_string_undo, new View.OnClickListener() {
+					@Override
+					public void onClick(View view) {
+						if (direction == ItemTouchHelper.LEFT) {
+							mapActivity.getMyApplication().getMapMarkersHelper().restoreMarkerFromHistory(marker, pos);
+						} else {
+							mapActivity.getMyApplication().getMapMarkersHelper().addMarker(marker, pos);
+						}
+						notifyItemInserted(pos);
+						if (showDirectionEnabled && pos < 2 && getItemCount() > 2) {
+							notifyItemChanged(2);
+						} else if (pos == getItemCount() - 1) {
+							notifyItemChanged(pos - 1);
+						}
+					}
+				});
+		View snackBarView = snackbar.getView();
+		TextView tv = (TextView) snackBarView.findViewById(android.support.design.R.id.snackbar_action);
+		tv.setTextColor(ContextCompat.getColor(mapActivity, R.color.color_dialog_buttons_dark));
+		snackbar.show();
 	}
 
 	@Override

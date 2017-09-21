@@ -481,6 +481,21 @@ public class MapMarkersHelper {
 		}
 	}
 
+	public void addMarker(MapMarker marker, int position) {
+		if (marker != null) {
+			markersDbHelper.addMarker(marker);
+			if (marker.history) {
+				mapMarkersHistory.add(position, marker);
+				sortMarkers(mapMarkersHistory, true, OsmandSettings.MapMarkersOrderByMode.DATE_ADDED_DESC);
+			} else {
+				mapMarkers.add(position, marker);
+				checkAndFixActiveMarkersOrderIfNeeded();
+			}
+			addMarkerToGroup(marker);
+			refresh();
+		}
+	}
+
 	public void restoreMarkerFromHistory(MapMarker marker, int position) {
 		if (marker != null) {
 			markersDbHelper.restoreMapMarkerFromHistory(marker);

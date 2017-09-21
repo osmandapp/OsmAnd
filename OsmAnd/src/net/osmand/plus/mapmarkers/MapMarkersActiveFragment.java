@@ -41,7 +41,7 @@ public class MapMarkersActiveFragment extends Fragment implements OsmAndCompassL
 		final MapActivity mapActivity = (MapActivity) getActivity();
 
 		adapter = new MapMarkersActiveAdapter(mapActivity);
-		final ItemTouchHelper touchHelper = new ItemTouchHelper(new MapMarkersItemTouchHelperCallback(adapter));
+		final ItemTouchHelper touchHelper = new ItemTouchHelper(new MapMarkersItemTouchHelperCallback(mapActivity, adapter));
 		touchHelper.attachToRecyclerView(recyclerView);
 		adapter.setAdapterListener(new MapMarkersActiveAdapterListener() {
 
