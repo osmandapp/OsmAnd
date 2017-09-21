@@ -36,14 +36,13 @@
             android:gravity="center_vertical"
             tools:text="Today"/>
 
-        <ImageButton
-            android:id="@+id/date_options_button"
-            android:layout_width="48dp"
-            android:layout_height="48dp"
-            android:layout_gravity="center_vertical|end"
-            android:background="@null"
-            android:focusableInTouchMode="true"
-            tools:src="@drawable/ic_overflow_menu_white"/>
+        <android.support.v7.widget.SwitchCompat
+            android:id="@+id/disable_group_switch"
+            android:layout_width="wrap_content"
+            android:layout_height="match_parent"
+            android:layout_marginLeft="16dp"
+            android:layout_marginRight="16dp"
+            android:focusableInTouchMode="true"/>
 
     </LinearLayout>
 
