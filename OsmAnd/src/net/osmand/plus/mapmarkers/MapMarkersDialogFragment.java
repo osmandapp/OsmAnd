@@ -42,7 +42,6 @@ public class MapMarkersDialogFragment extends android.support.v4.app.DialogFragm
 
 	private Snackbar snackbar;
 	private LockableViewPager viewPager;
-	private TextView orderByModeTitle;
 
 	private boolean lightTheme;
 
@@ -100,7 +99,6 @@ public class MapMarkersDialogFragment extends android.support.v4.app.DialogFragm
 		if (!lightTheme) {
 			toolbar.setBackgroundColor(ContextCompat.getColor(getContext(), R.color.actionbar_dark_color));
 		}
-		orderByModeTitle = toolbar.findViewById(R.id.order_by_mode_text);
 		setOrderByMode(getMyApplication().getSettings().MAP_MARKERS_ORDER_BY_MODE.get());
 
 		toolbar.setNavigationIcon(getMyApplication().getIconsCache().getIcon(R.drawable.ic_arrow_back));
@@ -141,7 +139,6 @@ public class MapMarkersDialogFragment extends android.support.v4.app.DialogFragm
 							historyFragment.hideSnackbar();
 							groupsFragment.hideSnackbar();
 						}
-						orderByModeTitle.setVisibility(View.VISIBLE);
 						viewPager.setCurrentItem(0);
 						optionsButton.setVisibility(View.VISIBLE);
 						return true;
@@ -152,7 +149,6 @@ public class MapMarkersDialogFragment extends android.support.v4.app.DialogFragm
 							activeFragment.hideSnackbar();
 							historyFragment.hideSnackbar();
 						}
-						orderByModeTitle.setVisibility(View.GONE);
 						viewPager.setCurrentItem(1);
 						optionsButton.setVisibility(View.GONE);
 						return true;
@@ -163,7 +159,6 @@ public class MapMarkersDialogFragment extends android.support.v4.app.DialogFragm
 							groupsFragment.hideSnackbar();
 							activeFragment.hideSnackbar();
 						}
-						orderByModeTitle.setVisibility(View.GONE);
 						viewPager.setCurrentItem(2);
 						optionsButton.setVisibility(View.GONE);
 						return true;
@@ -255,19 +250,6 @@ public class MapMarkersDialogFragment extends android.support.v4.app.DialogFragm
 	}
 
 	private void setOrderByMode(MapMarkersOrderByMode orderByMode) {
-		String modeStr = "";
-		if (orderByMode.isDistanceDescending()) {
-			modeStr = getString(R.string.distance) + " (" + getString(R.string.descendingly) + ")";
-		} else if (orderByMode.isDistanceAscending()) {
-			modeStr = getString(R.string.distance) + " (" + getString(R.string.ascendingly) + ")";
-		} else if (orderByMode.isName()) {
-			modeStr = getString(R.string.shared_string_name);
-		} else if (orderByMode.isDateAddedDescending()) {
-			modeStr = getString(R.string.date_added) + " (" + getString(R.string.descendingly) + ")";
-		} else {
-			modeStr = getString(R.string.date_added) + " (" + getString(R.string.ascendingly) + ")";
-		}
-		orderByModeTitle.setText(modeStr);
 		getMyApplication().getMapMarkersHelper().orderMarkers(orderByMode);
 		activeFragment.updateAdapter();
 	}

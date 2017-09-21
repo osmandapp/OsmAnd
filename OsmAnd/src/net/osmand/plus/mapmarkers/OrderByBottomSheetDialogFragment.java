@@ -58,12 +58,19 @@ public class OrderByBottomSheetDialogFragment extends BottomSheetDialogFragment 
 		ImageView nameIcon = (ImageView) mainView.findViewById(R.id.name_icon);
 		nameIcon.setImageDrawable(getContentIcon(R.drawable.ic_action_sort_by_name));
 
-		ImageView dateAddedIcon = (ImageView) mainView.findViewById(R.id.date_added_icon);
-		dateAddedIcon.setImageDrawable(getContentIcon(R.drawable.ic_action_sort_by_date));
+		ImageView dateAddedAscIcon = (ImageView) mainView.findViewById(R.id.date_added_asc_icon);
+		dateAddedAscIcon.setImageDrawable(getContentIcon(R.drawable.ic_action_sort_by_date));
+
+		ImageView dateAddedDescIcon = (ImageView) mainView.findViewById(R.id.date_added_desc_icon);
+		dateAddedDescIcon.setImageDrawable(getContentIcon(R.drawable.ic_action_sort_by_date));
+
+		((TextView) mainView.findViewById(R.id.date_added_asc_text)).setText(getString(R.string.date_added) + " (" + getString(R.string.ascendingly) + ")");
+		((TextView) mainView.findViewById(R.id.date_added_desc_text)).setText(getString(R.string.date_added) + " (" + getString(R.string.descendingly) + ")");
 
 		mainView.findViewById(R.id.distance_row).setOnClickListener(orderByModeOnClickListener);
 		mainView.findViewById(R.id.name_row).setOnClickListener(orderByModeOnClickListener);
-		mainView.findViewById(R.id.date_added_row).setOnClickListener(orderByModeOnClickListener);
+		mainView.findViewById(R.id.date_added_asc_row).setOnClickListener(orderByModeOnClickListener);
+		mainView.findViewById(R.id.date_added_desc_row).setOnClickListener(orderByModeOnClickListener);
 
 		mainView.findViewById(R.id.close_row).setOnClickListener(new View.OnClickListener() {
 			@Override
@@ -136,21 +143,20 @@ public class OrderByBottomSheetDialogFragment extends BottomSheetDialogFragment 
 			MapMarkersOrderByMode modeToSet;
 			switch (view.getId()) {
 				case R.id.distance_row:
-					if (currentOrderByMode == MapMarkersOrderByMode.DISTANCE_DESC) {
-						modeToSet = MapMarkersOrderByMode.DISTANCE_ASC;
-					} else {
+					if (currentOrderByMode == MapMarkersOrderByMode.DISTANCE_ASC) {
 						modeToSet = MapMarkersOrderByMode.DISTANCE_DESC;
+					} else {
+						modeToSet = MapMarkersOrderByMode.DISTANCE_ASC;
 					}
 					break;
 				case R.id.name_row:
 					modeToSet = MapMarkersOrderByMode.NAME;
 					break;
-				case R.id.date_added_row:
-					if (currentOrderByMode == MapMarkersOrderByMode.DATE_ADDED_DESC) {
-						modeToSet = MapMarkersOrderByMode.DATE_ADDED_ASC;
-					} else {
-						modeToSet = MapMarkersOrderByMode.DATE_ADDED_DESC;
-					}
+				case R.id.date_added_asc_row:
+					modeToSet = MapMarkersOrderByMode.DATE_ADDED_ASC;
+					break;
+				case R.id.date_added_desc_row:
+					modeToSet = MapMarkersOrderByMode.DATE_ADDED_DESC;
 					break;
 				default:
 					modeToSet = currentOrderByMode;
