@@ -122,10 +122,10 @@ public class MapMarkersDbHelper {
 	}
 
 	private void onUpgrade(SQLiteConnection db, int oldVersion, int newVersion) {
-		// When the DB_VERSION will increase from 7, DROP TABLE must be removed. Existing markers should not be deleted.
-		db.execSQL("DROP TABLE IF EXISTS " + MARKERS_TABLE_NAME);
-		db.execSQL("DROP TABLE IF EXISTS " + GROUPS_TABLE_NAME);
-		onCreate(db);
+		if (oldVersion < 8) {
+			db.execSQL("ALTER TABLE " + MARKERS_TABLE_NAME + " ADD " + MARKERS_COL_DISABLED + " int");
+			db.execSQL("ALTER TABLE " + GROUPS_TABLE_NAME + " ADD " + GROUPS_COL_DISABLED + " int");
+		}
 	}
 
 	private void saveExistingMarkersToDb() {
