@@ -119,12 +119,12 @@ public class ShowDirectionBottomSheetDialogFragment extends BottomSheetDialogFra
 		});
 
 		ImageView topBarIcon = (ImageView) mainView.findViewById(R.id.top_bar_icon);
-		topBarIcon.setBackgroundDrawable(getIcon(R.drawable.ic_action_device_top, R.color.on_map_icon_color));
-		topBarIcon.setImageDrawable(getContentIcon(R.drawable.ic_action_device_topbar));
+		topBarIcon.setBackgroundDrawable(getContentIcon(R.drawable.ic_action_device_top));
+		topBarIcon.setImageDrawable(getIcon(R.drawable.ic_action_device_topbar, R.color.dashboard_blue));
 
 		ImageView widgetIcon = (ImageView) mainView.findViewById(R.id.widget_icon);
-		widgetIcon.setBackgroundDrawable(getIcon(R.drawable.ic_action_device_top, R.color.on_map_icon_color));
-		widgetIcon.setImageDrawable(getContentIcon(R.drawable.ic_action_device_widget));
+		widgetIcon.setBackgroundDrawable(getContentIcon(R.drawable.ic_action_device_top));
+		widgetIcon.setImageDrawable(getIcon(R.drawable.ic_action_device_widget, R.color.dashboard_blue));
 
 		ImageView noneIcon = (ImageView) mainView.findViewById(R.id.none_icon);
 		noneIcon.setBackgroundDrawable(getContentIcon(R.drawable.ic_action_device_top));
