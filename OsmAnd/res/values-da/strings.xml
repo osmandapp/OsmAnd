@@ -2881,4 +2881,9 @@ Tidligere destination bliver sidste mellemliggende punkt.</string>
     <string name="passed">Bestået: %1$s</string>
     <string name="make_active">Aktivér</string>
     <string name="marker_show_distance_descr">Vælg hvordan afstanden og retningen til kortmarkører på kortet angives:</string>
+    <string name="remove_from_map_markers">Fjern fra kortmarkører</string>
+    <string name="descendingly">Faldende</string>
+    <string name="ascendingly">Stigende</string>
+    <string name="date_added">Dato tilføjet</string>
+    <string name="order_by">Sorter efter:</string>
     </resources>
