@@ -138,9 +138,9 @@ public abstract class OsmandMapLayer {
 		return x >= lx && x <= rx && y >= ty && y <= by;
 	}
 
-	
 
 	public int calculatePath(RotatedTileBox tb, TIntArrayList xs, TIntArrayList ys, Path path) {
+		path.reset();
 		boolean start = false;
 		int px = xs.get(0);
 		int py = ys.get(0);
@@ -156,8 +156,7 @@ public abstract class OsmandMapLayer {
 			if (pin && in) {
 				draw = true;
 			} else {
-				long intersection = MapAlgorithms.calculateIntersection(x, y,
-						px, py, 0, w, h, 0);
+				long intersection = MapAlgorithms.calculateIntersection(x, y, px, py, 0, w, h, 0);
 				if (intersection != -1) {
 					if (pin && (i == 1)) {
 						cnt++;
@@ -335,7 +334,7 @@ public abstract class OsmandMapLayer {
 		public boolean isPaint_1;
 		public int defaultWidth_1 = 0;
 		private String renderingAttribute;
-		
+
 		public RenderingLineAttributes(String renderingAttribute) {
 			this.renderingAttribute = renderingAttribute;
 			paint = initPaint();
@@ -344,8 +343,8 @@ public abstract class OsmandMapLayer {
 			paint_1 = initPaint();
 			shadowPaint = initPaint();
 		}
-		
-		
+
+
 		private Paint initPaint() {
 			Paint paint = new Paint();
 			paint.setStyle(Style.STROKE);
@@ -411,11 +410,11 @@ public abstract class OsmandMapLayer {
 				paint.setColor(defaultColor);
 			}
 		}
-		
+
 		private int calculateHash(Object... o) {
 			return Arrays.hashCode(o);
 		}
-		
+
 		public void drawPath(Canvas canvas, Path path) {
 			if (isPaint_1) {
 				canvas.drawPath(path, paint_1);
