@@ -611,6 +611,10 @@ public class MapMarkersHelper {
 			if (removeActiveMarkers) {
 				removeActiveMarkersFromSyncGroup(id);
 			}
+			MapMarkersGroup group = getMapMarkerGroupByName(id);
+			if (group != null) {
+				mapMarkersGroups.remove(group);
+			}
 		}
 	}
 
