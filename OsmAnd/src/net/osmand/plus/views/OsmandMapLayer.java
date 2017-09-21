@@ -16,13 +16,11 @@ import android.os.Build;
 import android.support.annotation.NonNull;
 import android.view.MotionEvent;
 
-import net.osmand.Location;
 import net.osmand.data.LatLon;
 import net.osmand.data.QuadRect;
 import net.osmand.data.QuadTree;
 import net.osmand.data.RotatedTileBox;
 import net.osmand.plus.ContextMenuAdapter;
-import net.osmand.plus.OsmAndLocationProvider;
 import net.osmand.plus.OsmandApplication;
 import net.osmand.plus.activities.MapActivity;
 import net.osmand.plus.render.OsmandRenderer;
@@ -40,8 +38,6 @@ import gnu.trove.list.array.TIntArrayList;
 
 public abstract class OsmandMapLayer {
 
-	protected static final int UPDATES_BEFORE_CHECK_LOCATION = 40;
-
 	protected List<LatLon> fullObjectsLatLon;
 	protected List<LatLon> smallObjectsLatLon;
 
@@ -49,22 +45,6 @@ public abstract class OsmandMapLayer {
 		DOUBLE_TAP_ZOOM_IN,
 		DOUBLE_TAP_ZOOM_CHANGE,
 		TWO_POINTERS_ZOOM_OUT
-	}
-
-	private int updatesCounter;
-	private boolean locationOutdated;
-
-	boolean isLocationOutdated(Location location) {
-		if (location != null && updatesCounter == 0) {
-			locationOutdated = System.currentTimeMillis() - location.getTime() >
-					OsmAndLocationProvider.STALE_LOCATION_TIMEOUT_FOR_ICON;
-		}
-		if (updatesCounter == UPDATES_BEFORE_CHECK_LOCATION) {
-			updatesCounter = 0;
-		} else {
-			updatesCounter++;
-		}
-		return locationOutdated;
 	}
 
 	public boolean isMapGestureAllowed(MapGestureType type) {

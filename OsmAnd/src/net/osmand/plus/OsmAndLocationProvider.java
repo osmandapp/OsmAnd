@@ -38,6 +38,7 @@ import android.location.LocationManager;
 import android.os.Build;
 import android.os.Bundle;
 import android.provider.Settings;
+import android.support.annotation.Nullable;
 import android.support.v4.app.ActivityCompat;
 import android.support.v7.app.AlertDialog;
 import android.util.Log;
@@ -69,11 +70,14 @@ public class OsmAndLocationProvider implements SensorEventListener {
 	private static final int GPS_DIST_REQUEST = 0;
 	private static final int NOT_SWITCH_TO_NETWORK_WHEN_GPS_LOST_MS = 12000;
 
-	private static final long STALE_LOCATION_TIMEOUT = 1000 * 60 * 60; // 60 minutes
-	public static final long STALE_LOCATION_TIMEOUT_FOR_ICON = 1000 * 60 * 5; // 5 minutes
+	private static final long STALE_LOCATION_TIMEOUT = 1000 * 60 * 5; // 5 minutes
+	private static final long STALE_LOCATION_TIMEOUT_FOR_UI = 1000 * 60 * 15; // 15 minutes
 
 	private static final int UPDATES_BEFORE_CHECK_LOCATION = 100;
 	private int updatesCounter;
+	private int updatesCounterUi;
+
+	private net.osmand.Location cachedLocation;
 
 	private long lastTimeGPSLocationFixed = 0;
 	private boolean gpsSignalLost;
@@ -875,6 +879,26 @@ public class OsmAndLocationProvider implements SensorEventListener {
 			updatesCounter++;
 		}
 		return location;
+	}
+
+	@Nullable
+	public net.osmand.Location getLastStaleKnownLocation() {
+		if (updatesCounterUi == 0) {
+			net.osmand.Location newLoc = getLastKnownLocation();
+			if (newLoc == null) {
+				if (cachedLocation != null && System.currentTimeMillis() - cachedLocation.getTime() > STALE_LOCATION_TIMEOUT_FOR_UI) {
+					cachedLocation = null;
+				}
+			} else {
+				cachedLocation = newLoc;
+			}
+		}
+		if (updatesCounterUi == UPDATES_BEFORE_CHECK_LOCATION) {
+			updatesCounterUi = 0;
+		} else {
+			updatesCounterUi++;
+		}
+		return cachedLocation;
 	}
 
 

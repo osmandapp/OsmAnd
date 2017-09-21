@@ -55,7 +55,6 @@
                     android:layout_height="28dp">
 
                     <android.support.v7.widget.AppCompatTextView
-                        android:layout_marginBottom="2dp"
                         android:layout_gravity="bottom"
                         android:id="@+id/map_marker_title"
                         android:layout_width="match_parent"
@@ -69,7 +68,6 @@
                 </LinearLayout>
 
                 <LinearLayout
-                    android:layout_marginTop="1dp"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content">
 

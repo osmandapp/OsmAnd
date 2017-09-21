@@ -1,7 +1,9 @@
 package net.osmand.plus.mapmarkers;
 
+import android.graphics.drawable.Drawable;
 import android.os.Build;
 import android.os.Bundle;
+import android.support.annotation.DrawableRes;
 import android.support.annotation.Nullable;
 import android.view.ContextThemeWrapper;
 import android.view.LayoutInflater;
@@ -119,6 +121,11 @@ public class OrderByBottomSheetDialogFragment extends BottomSheetDialogFragment 
 			params.width = getActivity().getResources().getDimensionPixelSize(R.dimen.landscape_bottom_sheet_dialog_fragment_width);
 			window.setAttributes(params);
 		}
+	}
+
+	@Override
+	protected Drawable getContentIcon(@DrawableRes int id) {
+		return getIcon(id, settings.isLightContent() ? R.color.on_map_icon_color : R.color.ctx_menu_info_text_dark);
 	}
 
 	private View.OnClickListener orderByModeOnClickListener = new View.OnClickListener() {

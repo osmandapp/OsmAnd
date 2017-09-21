@@ -1,7 +1,9 @@
 package net.osmand.plus.mapmarkers;
 
+import android.graphics.drawable.Drawable;
 import android.os.Build;
 import android.os.Bundle;
+import android.support.annotation.DrawableRes;
 import android.support.annotation.Nullable;
 import android.view.ContextThemeWrapper;
 import android.view.LayoutInflater;
@@ -43,7 +45,7 @@ public class OptionsBottomSheetDialogFragment extends BottomSheetDialogFragment 
 		}
 
 		((ImageView) mainView.findViewById(R.id.sort_by_icon))
-				.setImageDrawable(getIcon(R.drawable.ic_sort_waypoint_dark, R.color.on_map_icon_color));
+				.setImageDrawable(getContentIcon(R.drawable.ic_sort_waypoint_dark));
 		OsmandSettings.MapMarkersMode mode = getMyApplication().getSettings().MAP_MARKERS_MODE.get();
 		ImageView showDirectionIcon = (ImageView) mainView.findViewById(R.id.show_direction_icon);
 		int imageResId = 0;
@@ -55,16 +57,16 @@ public class OptionsBottomSheetDialogFragment extends BottomSheetDialogFragment 
 				imageResId = R.drawable.ic_action_device_widget;
 				break;
 		}
-		showDirectionIcon.setBackgroundDrawable(getIcon(R.drawable.ic_action_device_top, R.color.on_map_icon_color));
+		showDirectionIcon.setBackgroundDrawable(getContentIcon(R.drawable.ic_action_device_top));
 		if (imageResId != 0) {
 			showDirectionIcon.setImageDrawable(getIcon(imageResId, R.color.dashboard_blue));
 		}
 		((ImageView) mainView.findViewById(R.id.build_route_icon))
-				.setImageDrawable(getIcon(R.drawable.map_directions, R.color.on_map_icon_color));
+				.setImageDrawable(getContentIcon(R.drawable.map_directions));
 		((ImageView) mainView.findViewById(R.id.save_as_new_track_icon))
-				.setImageDrawable(getIcon(R.drawable.ic_action_polygom_dark, R.color.on_map_icon_color));
+				.setImageDrawable(getContentIcon(R.drawable.ic_action_polygom_dark));
 		((ImageView) mainView.findViewById(R.id.move_all_to_history_icon))
-				.setImageDrawable(getIcon(R.drawable.ic_action_history2, R.color.on_map_icon_color));
+				.setImageDrawable(getContentIcon(R.drawable.ic_action_history2));
 
 		((TextView) mainView.findViewById(R.id.show_direction_text_view)).setText(getMyApplication().getSettings().MAP_MARKERS_MODE.get().toHumanString(getActivity()));
 
@@ -169,6 +171,11 @@ public class OptionsBottomSheetDialogFragment extends BottomSheetDialogFragment 
 			params.width = getActivity().getResources().getDimensionPixelSize(R.dimen.landscape_bottom_sheet_dialog_fragment_width);
 			window.setAttributes(params);
 		}
+	}
+
+	@Override
+	protected Drawable getContentIcon(@DrawableRes int id) {
+		return getIcon(id, getMyApplication().getSettings().isLightContent() ? R.color.on_map_icon_color : R.color.ctx_menu_info_text_dark);
 	}
 
 	interface MarkerOptionsFragmentListener {

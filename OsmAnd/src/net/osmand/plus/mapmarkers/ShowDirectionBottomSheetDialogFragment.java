@@ -1,7 +1,10 @@
 package net.osmand.plus.mapmarkers;
 
+import android.app.Activity;
+import android.graphics.drawable.Drawable;
 import android.os.Build;
 import android.os.Bundle;
+import android.support.annotation.DrawableRes;
 import android.support.annotation.Nullable;
 import android.support.v4.content.ContextCompat;
 import android.view.ContextThemeWrapper;
@@ -12,6 +15,7 @@ import android.view.ViewGroup;
 import android.view.ViewTreeObserver;
 import android.view.Window;
 import android.view.WindowManager;
+import android.widget.CompoundButton;
 import android.widget.ImageView;
 import android.widget.RadioButton;
 import android.widget.TextView;
@@ -19,6 +23,7 @@ import android.widget.TextView;
 import net.osmand.AndroidUtils;
 import net.osmand.plus.OsmandSettings;
 import net.osmand.plus.R;
+import net.osmand.plus.activities.MapActivity;
 import net.osmand.plus.base.BottomSheetDialogFragment;
 import net.osmand.plus.helpers.AndroidUiHelper;
 
@@ -38,8 +43,9 @@ public class ShowDirectionBottomSheetDialogFragment extends BottomSheetDialogFra
 	@Nullable
 	@Override
 	public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
+		final OsmandSettings settings = getMyApplication().getSettings();
 		portrait = AndroidUiHelper.isOrientationPortrait(getActivity());
-		night = !getMyApplication().getSettings().isLightContent();
+		night = !settings.isLightContent();
 		final int themeRes = night ? R.style.OsmandDarkTheme : R.style.OsmandLightTheme;
 
 		mainView = View.inflate(new ContextThemeWrapper(getContext(), themeRes), R.layout.fragment_marker_show_direction_bottom_sheet_dialog, container);
@@ -47,7 +53,7 @@ public class ShowDirectionBottomSheetDialogFragment extends BottomSheetDialogFra
 			AndroidUtils.setBackground(getActivity(), mainView, night, R.drawable.bg_bottom_menu_light, R.drawable.bg_bottom_menu_dark);
 		}
 
-		OsmandSettings.MapMarkersMode mode = getMyApplication().getSettings().MAP_MARKERS_MODE.get();
+		OsmandSettings.MapMarkersMode mode = settings.MAP_MARKERS_MODE.get();
 		highlightSelectedItem(mode, true);
 
 		if (android.os.Build.VERSION.SDK_INT < android.os.Build.VERSION_CODES.JELLY_BEAN_MR1) {
@@ -84,16 +90,44 @@ public class ShowDirectionBottomSheetDialogFragment extends BottomSheetDialogFra
 			((TextView) mainView.findViewById(R.id.show_direction_title)).setTextColor(getResources().getColor(R.color.ctx_menu_info_text_dark));
 		}
 
+		final CompoundButton showArrowsToggle = (CompoundButton) mainView.findViewById(R.id.show_arrows_switch);
+		showArrowsToggle.setChecked(settings.SHOW_ARROWS_TO_FIRST_MARKERS.get());
+		mainView.findViewById(R.id.show_arrows_row).setOnClickListener(new View.OnClickListener() {
+			@Override
+			public void onClick(View view) {
+				boolean newState = !settings.SHOW_ARROWS_TO_FIRST_MARKERS.get();
+				settings.SHOW_ARROWS_TO_FIRST_MARKERS.set(newState);
+				showArrowsToggle.setChecked(newState);
+				if (getMapActivity() != null) {
+					getMapActivity().refreshMap();
+				}
+			}
+		});
+
+		final CompoundButton showLinesToggle = (CompoundButton) mainView.findViewById(R.id.show_guide_line_switch);
+		showLinesToggle.setChecked(settings.SHOW_LINES_TO_FIRST_MARKERS.get());
+		mainView.findViewById(R.id.show_guide_line_row).setOnClickListener(new View.OnClickListener() {
+			@Override
+			public void onClick(View view) {
+				boolean newState = !settings.SHOW_LINES_TO_FIRST_MARKERS.get();
+				settings.SHOW_LINES_TO_FIRST_MARKERS.set(newState);
+				showLinesToggle.setChecked(newState);
+				if (getMapActivity() != null) {
+					getMapActivity().refreshMap();
+				}
+			}
+		});
+
 		ImageView topBarIcon = (ImageView) mainView.findViewById(R.id.top_bar_icon);
 		topBarIcon.setBackgroundDrawable(getIcon(R.drawable.ic_action_device_top, R.color.on_map_icon_color));
-		topBarIcon.setImageDrawable(getIcon(R.drawable.ic_action_device_topbar, R.color.dashboard_blue));
+		topBarIcon.setImageDrawable(getContentIcon(R.drawable.ic_action_device_topbar));
 
 		ImageView widgetIcon = (ImageView) mainView.findViewById(R.id.widget_icon);
 		widgetIcon.setBackgroundDrawable(getIcon(R.drawable.ic_action_device_top, R.color.on_map_icon_color));
-		widgetIcon.setImageDrawable(getIcon(R.drawable.ic_action_device_widget, R.color.dashboard_blue));
+		widgetIcon.setImageDrawable(getContentIcon(R.drawable.ic_action_device_widget));
 
 		ImageView noneIcon = (ImageView) mainView.findViewById(R.id.none_icon);
-		noneIcon.setBackgroundDrawable(getIcon(R.drawable.ic_action_device_top, R.color.on_map_icon_color));
+		noneIcon.setBackgroundDrawable(getContentIcon(R.drawable.ic_action_device_top));
 
 		mainView.findViewById(R.id.top_bar_row).setOnClickListener(showDirectionOnClickListener);
 		mainView.findViewById(R.id.widget_row).setOnClickListener(showDirectionOnClickListener);
@@ -155,6 +189,19 @@ public class ShowDirectionBottomSheetDialogFragment extends BottomSheetDialogFra
 			params.width = getActivity().getResources().getDimensionPixelSize(R.dimen.landscape_bottom_sheet_dialog_fragment_width);
 			window.setAttributes(params);
 		}
+	}
+
+	@Override
+	protected Drawable getContentIcon(@DrawableRes int id) {
+		return getIcon(id, night ? R.color.ctx_menu_info_text_dark : R.color.on_map_icon_color);
+	}
+
+	private MapActivity getMapActivity() {
+		Activity activity = getActivity();
+		if (activity != null) {
+			return (MapActivity) activity;
+		}
+		return null;
 	}
 
 	private void highlightSelectedItem(OsmandSettings.MapMarkersMode mode, boolean check) {
