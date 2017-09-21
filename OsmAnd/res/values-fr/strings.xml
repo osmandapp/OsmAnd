@@ -76,7 +76,7 @@
     <string name="native_library_not_supported">Rendu natif non supporté sur cet appareil.</string>
     <string name="init_native_library">Chargement …</string>
     <string name="choose_auto_follow_route">Centrer automatiquement la carte</string>
-    <string name="choose_auto_follow_route_descr">Temps avant que la carte se recentre sur la position actuelle</string>
+    <string name="choose_auto_follow_route_descr">Délai avant de centrer la carte sur la position actuelle</string>
     
     <string name="auto_follow_route_navigation">Recentrage automatique navigation</string>
     <string name="auto_follow_route_navigation_descr">Recentrage automatique uniquement pendant la navigation.</string>
@@ -313,8 +313,8 @@ Au-delà la navigation bascule automatiquement sur le service en ligne CloudMade
     <string name="shared_string_select_all">Sélectionner tout</string>
     <string name="shared_string_refresh">Recharger</string>
     <string name="fast_route_mode">Itinéraire le plus rapide</string>
-    <string name="fast_route_mode_descr">Activer pour calculer l\'itinéraire le plus rapide ou désactiver pour calculer l\'itinéraire le plus économe en carburant</string>
-    <string name="tiles_to_download_estimated_size">Le zoom {0} télécharge {1} carreaux ({2} Mb )</string>
+    <string name="fast_route_mode_descr">Activer pour calculer l\'itinéraire le plus rapide ou Désactiver pour calculer l\'itinéraire le plus économe en carburant</string>
+    <string name="tiles_to_download_estimated_size">Le zoom {0} télécharge {1} tuiles ({2} Mb)</string>
     <string name="shared_string_download_map">Télécharger la carte</string>
     <string name="select_max_zoom_preload_area">Sélectionnez le zoom maximum pour précharger la zone visible</string>
     <string name="maps_could_not_be_downloaded">Impossible de télécharger cette carte</string>
@@ -540,7 +540,7 @@ Au-delà la navigation bascule automatiquement sur le service en ligne CloudMade
     <string name="data_settings">Données</string>
 
     <string name="osm_settings">Contribuer à OSM</string>
-    <string name="auto_zoom_map_descr">Zoom automatique sur la carte en fonction de la vitesse</string>
+    <string name="auto_zoom_map_descr">Zoom de la carte adapté à la vitesse (lorsque que votre position figure sur la carte)</string>
     <string name="auto_zoom_map">Zoom automatique de la carte</string>
     <string name="additional_settings">Paramètres supplémentaires</string>
     <string name="shared_string_settings">Paramètres</string>
@@ -881,7 +881,7 @@ Mémoire proportionnelle %4$s Mo (limite Android %5$s Mo, Dalvik %6$s Mo).</stri
     <string name="avoid_unpaved">Éviter les voies non revêtues</string>
     <string name="avoid_ferries">Éviter les ferries</string>
     <string name="avoid_in_routing_title">Éviter</string>
-    <string name="avoid_in_routing_descr">Éviter péages, voies non revêtues, ferries, autoroutes</string>
+    <string name="avoid_in_routing_descr">Éviter les routes à péage, les voies non revêtues, les ferries</string>
     <string name="show_warnings_title">Annonces visuelles…</string>
     <string name="show_warnings_descr">Afficher les avertissements (limitations de vitesse, stops, ralentisseurs, radars), les voies de circulation</string>
     <string name="map_widget_fluorescent">Itinéraires fluorescents</string>
@@ -2927,4 +2927,12 @@ représentant la zone : %1$s x %2$s</string>
     <string name="this_year">Cette année</string>
     <string name="make_active">Marquer comme actif</string>
     <string name="top_bar">Barre supérieure</string>
+    <string name="remove_from_map_markers">Supprimer des marques</string>
+    <string name="descendingly">Ordre décroissant</string>
+    <string name="ascendingly">Ordre croissant</string>
+    <string name="date_added">Date ajoutée</string>
+    <string name="order_by">Trier par :</string>
+    <string name="marker_show_distance_descr">Sélectionnez comment indiquer sur la carte la distance et la direction des marques :</string>
+    <string name="map_orientation_change_in_accordance_with_speed_descr">Indiquez ci-dessous à quelle vitesse l\'orientation de la carte doit basculer de \'Sens du déplacement\' à \'Boussole\'</string>
+    <string name="passed">Passé : %1$s</string>
     </resources>

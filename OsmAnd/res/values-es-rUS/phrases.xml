@@ -1206,9 +1206,9 @@
 	<string name="poi_fireplace_no">Sin chimenea</string>
 	<string name="poi_covered_yes">Sí</string>
 	<string name="poi_covered_no">Al descubierto</string>
-	<string name="poi_smoking_no">Prohibido</string>
+	<string name="poi_smoking_no">No</string>
 	<string name="poi_smoking_outside">Sólo afuera</string>
-	<string name="poi_smoking_yes">Permitido</string>
+	<string name="poi_smoking_yes">Sí</string>
 	<string name="poi_smoking_separated">En sala separada</string>
 	<string name="poi_smoking_isolated">En sala aislada</string>
 	<string name="poi_smoking_dedicated">Sólo fumadores</string>
@@ -2882,7 +2882,7 @@
 	<string name="poi_theatre_genre">Género</string>
 	<string name="poi_outdoor_seating">Asientos exteriores</string>
 	<string name="poi_fee">Tarifado</string>
-	<string name="poi_smoking">Permiso para fumar</string>
+	<string name="poi_smoking">Permitido fumar</string>
 	<string name="poi_delivery">Servicio a domicilio</string>
 	<string name="poi_drive_in">Conducir por dentro</string>
 	<string name="poi_drive_through">Servicio en el automóvil</string>

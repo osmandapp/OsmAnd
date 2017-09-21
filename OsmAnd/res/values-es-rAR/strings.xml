@@ -2720,7 +2720,7 @@ Proporciona un código completo</string>
     <string name="add_point_before">Añadir punto anterior</string>
     <string name="add_point_after">Añadir punto posterior</string>
     <string name="shared_string_options">Opciones</string>
-    <string name="measurement_tool_snap_to_road_descr">OsmAnd conectará los puntos con las rutas del perfil elegido.</string>
+    <string name="measurement_tool_snap_to_road_descr">OsmAnd conectará los puntos a las rutas del perfil elegido.</string>
     <string name="measurement_tool_save_as_new_track_descr">Puedes guardar los puntos, ya sea como puntos de ruta o como una línea.</string>
     <string name="choose_navigation_type">Elegir perfil de navegación</string>
     <string name="add_route_points">Añadir puntos de ruta</string>
@@ -2749,7 +2749,7 @@ Proporciona un código completo</string>
     <string name="marker_moved_to_active">Marcador del mapa movido a los activos</string>
     <string name="shared_string_list">Lista</string>
     <string name="shared_string_groups">Grupos</string>
-    <string name="passed">Pasado: %1$s</string>
+    <string name="passed">Finalizado: %1$s</string>
     <string name="make_active">Activar</string>
     <string name="today">Hoy</string>
     <string name="yesterday">Ayer</string>
@@ -2758,4 +2758,9 @@ Proporciona un código completo</string>
     <string name="widget">Control</string>
     <string name="top_bar">Barra superior</string>
     <string name="marker_show_distance_descr">Elige cómo se indica la distancia y dirección a los marcadores del mapa en la pantalla del mapa:</string>
+    <string name="remove_from_map_markers">Quitar de los marcadores del mapa</string>
+    <string name="descendingly">Descendente</string>
+    <string name="ascendingly">Ascendente</string>
+    <string name="date_added">Fecha de adición</string>
+    <string name="order_by">Ordenar por:</string>
     </resources>

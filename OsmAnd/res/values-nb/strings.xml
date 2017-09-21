@@ -2370,4 +2370,10 @@ Representerer området: %1$s x %2$s</string>
     <string name="sort_by">Sorter etter</string>
     <string name="marker_options">Markøralternativer</string>
     <string name="shared_string_paused">I pausemodus</string>
+    <string name="shared_string_groups">Grupper</string>
+    <string name="make_active">Aktiver</string>
+    <string name="today">I dag</string>
+    <string name="yesterday">I går</string>
+    <string name="last_seven_days">Siste 7 dager</string>
+    <string name="this_year">Dette året</string>
     </resources>
