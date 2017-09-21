@@ -298,7 +298,7 @@ public class MapMarkersGroupsAdapter extends RecyclerView.Adapter<RecyclerView.V
 				}
 			} else if (header instanceof GroupHeader) {
 				GroupHeader groupHeader = (GroupHeader) header;
-				headerString = groupHeader.getGroupName() + " - "
+				headerString = groupHeader.getGroupName() + " \u2014 "
 						+ groupHeader.getActiveMarkersCount()
 						+ "/" + (groupHeader.getMarkersCount());
 				headerViewHolder.icon.setVisibility(View.VISIBLE);
