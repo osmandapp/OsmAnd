@@ -10,8 +10,6 @@ import net.osmand.plus.R;
 
 public class MapMarkerHeaderViewHolder extends RecyclerView.ViewHolder {
 
-	final View topShadowDivider;
-	final View topDivider;
 	final ImageView icon;
 	final View iconSpace;
 	final TextView title;
@@ -19,8 +17,6 @@ public class MapMarkerHeaderViewHolder extends RecyclerView.ViewHolder {
 
 	public MapMarkerHeaderViewHolder(View itemView) {
 		super(itemView);
-		topShadowDivider = itemView.findViewById(R.id.top_shadow_divider);
-		topDivider = itemView.findViewById(R.id.top_divider);
 		icon = (ImageView) itemView.findViewById(R.id.icon);
 		iconSpace = itemView.findViewById(R.id.icon_space);
 		title = (TextView) itemView.findViewById(R.id.title);

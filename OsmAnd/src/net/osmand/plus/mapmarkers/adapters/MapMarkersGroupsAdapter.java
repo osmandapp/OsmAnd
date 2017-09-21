@@ -308,8 +308,6 @@ public class MapMarkersGroupsAdapter extends RecyclerView.Adapter<RecyclerView.V
 				throw new IllegalArgumentException("Unsupported header");
 			}
 			headerViewHolder.title.setText(headerString);
-			headerViewHolder.topShadowDivider.setVisibility(View.GONE);
-			headerViewHolder.topDivider.setVisibility(View.VISIBLE);
 		} else if (holder instanceof MapMarkersShowHideHistoryViewHolder) {
 			final MapMarkersShowHideHistoryViewHolder showHideHistoryViewHolder = (MapMarkersShowHideHistoryViewHolder) holder;
 			final ShowHideHistoryButton showHideHistoryButton = (ShowHideHistoryButton) getItem(position);
