@@ -83,8 +83,9 @@ public class MapMarkersGroupsFragment extends Fragment implements OsmAndCompassL
 			@Override
 			public int getSwipeDirs(RecyclerView recyclerView, RecyclerView.ViewHolder viewHolder) {
 				boolean markerViewHolder = viewHolder instanceof MapMarkerItemViewHolder;
-				if (markerViewHolder) {
-					MapMarker marker = (MapMarker) adapter.getItem(viewHolder.getAdapterPosition());
+				int pos = viewHolder.getAdapterPosition();
+				if (markerViewHolder && pos != -1) {
+					MapMarker marker = (MapMarker) adapter.getItem(pos);
 					if (marker.history) {
 						return ItemTouchHelper.RIGHT;
 					} else {
