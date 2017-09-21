@@ -252,8 +252,7 @@ public class MapMarkersLayer extends OsmandMapLayer implements IContextMenuProvi
 				linePath.reset();
 				tx.clear();
 				ty.clear();
-				linePath.moveTo(locX, locY);
-				linePath.lineTo(markerX, markerY);
+
 				tx.add(locX);
 				ty.add(locY);
 				tx.add(markerX);
