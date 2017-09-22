@@ -2763,4 +2763,8 @@ Proporciona un código completo</string>
     <string name="ascendingly">Ascendente</string>
     <string name="date_added">Fecha de adición</string>
     <string name="order_by">Ordenar por:</string>
+    <string name="show_guide_line">Mostrar línea de guía</string>
+    <string name="show_arrows_on_the_map">Mostrar flechas en el mapa</string>
+    <string name="show_passed">Mostrar finalizados</string>
+    <string name="hide_passed">Ocultar finalizados</string>
     </resources>
