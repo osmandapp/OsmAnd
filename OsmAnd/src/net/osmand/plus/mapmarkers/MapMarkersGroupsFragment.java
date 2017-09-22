@@ -20,6 +20,7 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.widget.TextView;
 
+import net.osmand.AndroidUtils;
 import net.osmand.Location;
 import net.osmand.data.LatLon;
 import net.osmand.plus.MapMarkersHelper;
@@ -54,6 +55,10 @@ public class MapMarkersGroupsFragment extends Fragment implements OsmAndCompassL
 		final MapActivity mapActivity = (MapActivity) getActivity();
 		final boolean night = !mapActivity.getMyApplication().getSettings().isLightContent();
 		final RecyclerView recyclerView = new RecyclerView(getContext());
+		boolean isSmartphone = getResources().getConfiguration().smallestScreenWidthDp < 600;
+		recyclerView.setPadding(0, 0, 0, AndroidUtils.dpToPx(mapActivity, isSmartphone ? 72 : 108));
+		recyclerView.setClipToPadding(false);
+		recyclerView.setLayoutManager(new LinearLayoutManager(getContext()));
 
 		backgroundPaint.setColor(ContextCompat.getColor(getActivity(), night ? R.color.dashboard_divider_dark : R.color.dashboard_divider_light));
 		backgroundPaint.setStyle(Paint.Style.FILL_AND_STROKE);
@@ -73,7 +78,6 @@ public class MapMarkersGroupsFragment extends Fragment implements OsmAndCompassL
 		final int moveToHistoryStrWidth = bounds.width();
 		final int textHeight = bounds.height();
 
-		recyclerView.setLayoutManager(new LinearLayoutManager(getContext()));
 		ItemTouchHelper.SimpleCallback simpleItemTouchCallback = new ItemTouchHelper.SimpleCallback(0, ItemTouchHelper.LEFT | ItemTouchHelper.RIGHT) {
 			private float marginSides = getResources().getDimension(R.dimen.list_content_padding);
 			private Bitmap deleteBitmap = BitmapFactory.decodeResource(getResources(), R.drawable.ic_action_delete_dark);

@@ -69,13 +69,13 @@
 
                 <LinearLayout
                     android:layout_width="match_parent"
-                    android:layout_height="wrap_content">
+                    android:layout_height="wrap_content"
+                    android:gravity="center_vertical">
 
                     <ImageView
                         android:id="@+id/map_marker_direction_icon"
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
-                        android:layout_gravity="center_vertical"
                         android:layout_marginRight="4dp"
                         android:layout_marginEnd="4dp"
                         tools:src="@drawable/ic_direction_arrow"/>
@@ -84,7 +84,6 @@
                         android:id="@+id/map_marker_distance"
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
-                        android:layout_gravity="center_vertical"
                         android:maxLines="1"
                         android:textSize="@dimen/default_desc_text_size"
                         tools:text="213 m"/>
@@ -92,13 +91,12 @@
                     <View
                         android:id="@+id/map_marker_left_point_space"
                         android:layout_width="4dp"
-                        android:layout_height="wrap_content"/>
+                        android:layout_height="match_parent"/>
 
                     <android.support.v7.widget.AppCompatTextView
                         android:id="@+id/map_marker_point_text_view"
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
-                        android:layout_gravity="center_vertical"
                         android:text="•"
                         android:textColor="?android:textColorSecondary"
                         android:textSize="@dimen/default_desc_text_size"
@@ -108,13 +106,12 @@
                     <View
                         android:id="@+id/map_marker_right_point_space"
                         android:layout_width="4dp"
-                        android:layout_height="wrap_content"/>
+                        android:layout_height="match_parent"/>
 
                     <android.support.v7.widget.AppCompatTextView
                         android:id="@+id/map_marker_description"
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
-                        android:layout_gravity="center_vertical"
                         android:ellipsize="end"
                         android:maxLines="1"
                         android:textColor="?android:textColorSecondary"

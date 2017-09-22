@@ -11,6 +11,7 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 
+import net.osmand.AndroidUtils;
 import net.osmand.Location;
 import net.osmand.data.LatLon;
 import net.osmand.plus.MapMarkersHelper.MapMarker;
@@ -37,8 +38,11 @@ public class MapMarkersActiveFragment extends Fragment implements OsmAndCompassL
 	@Override
 	public View onCreateView(LayoutInflater inflater, @Nullable ViewGroup container, @Nullable Bundle savedInstanceState) {
 		final RecyclerView recyclerView = new RecyclerView(getContext());
-		recyclerView.setLayoutManager(new LinearLayoutManager(getContext()));
 		final MapActivity mapActivity = (MapActivity) getActivity();
+		boolean isSmartphone = getResources().getConfiguration().smallestScreenWidthDp < 600;
+		recyclerView.setPadding(0, 0, 0, AndroidUtils.dpToPx(mapActivity, isSmartphone ? 72 : 108));
+		recyclerView.setClipToPadding(false);
+		recyclerView.setLayoutManager(new LinearLayoutManager(getContext()));
 
 		adapter = new MapMarkersActiveAdapter(mapActivity);
 		final ItemTouchHelper touchHelper = new ItemTouchHelper(new MapMarkersItemTouchHelperCallback(mapActivity, adapter));

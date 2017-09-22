@@ -190,7 +190,8 @@ public class MapMarkersHistoryAdapter extends RecyclerView.Adapter<RecyclerView.
 		SimpleDateFormat dateFormat = new SimpleDateFormat("LLLL", Locale.getDefault());
 		Date date = new Date();
 		date.setMonth(month);
-		return dateFormat.format(date);
+		String monthStr = dateFormat.format(date);
+		return Character.toUpperCase(monthStr.charAt(0)) + monthStr.substring(1);
 	}
 
 	public interface MapMarkersHistoryAdapterListener {

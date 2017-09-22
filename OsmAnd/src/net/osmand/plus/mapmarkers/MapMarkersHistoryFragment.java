@@ -20,6 +20,7 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.widget.TextView;
 
+import net.osmand.AndroidUtils;
 import net.osmand.plus.MapMarkersHelper;
 import net.osmand.plus.MapMarkersHelper.MapMarker;
 import net.osmand.plus.OsmandApplication;
@@ -74,6 +75,9 @@ public class MapMarkersHistoryFragment extends Fragment implements MapMarkersHel
 		}
 
 		final RecyclerView recyclerView = new RecyclerView(getContext());
+		boolean isSmartphone = getResources().getConfiguration().smallestScreenWidthDp < 600;
+		recyclerView.setPadding(0, 0, 0, AndroidUtils.dpToPx(mapActivity, isSmartphone ? 72 : 108));
+		recyclerView.setClipToPadding(false);
 		recyclerView.setLayoutManager(new LinearLayoutManager(getContext()));
 
 		ItemTouchHelper.SimpleCallback simpleItemTouchCallback = new ItemTouchHelper.SimpleCallback(0, ItemTouchHelper.LEFT | ItemTouchHelper.RIGHT) {

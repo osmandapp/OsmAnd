@@ -131,6 +131,8 @@ public class MapMarkersActiveAdapter extends RecyclerView.Adapter<MapMarkerItemV
 			holder.divider.setVisibility(View.VISIBLE);
 		}
 
+		holder.point.setVisibility(View.VISIBLE);
+
 		holder.iconReorder.setOnTouchListener(new View.OnTouchListener() {
 			@Override
 			public boolean onTouch(View view, MotionEvent event) {
