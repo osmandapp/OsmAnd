@@ -264,6 +264,7 @@ public class MapMarkersLayer extends OsmandMapLayer implements IContextMenuProvi
 				float[] pos = new float[2];
 				pm.getPosTan(pm.getLength() / 2, pos, null);
 
+				lineAttrs.paint.setColor(colors[marker.colorIndex]);
 				canvas.drawPath(linePath, lineAttrs.paint);
 
 				float generalDist = (float) MapUtils.getDistance(myLoc.getLatitude(), myLoc.getLongitude(), marker.getLatitude(), marker.getLongitude());
@@ -284,7 +285,6 @@ public class MapMarkersLayer extends OsmandMapLayer implements IContextMenuProvi
 				textAttrs.paint2.getTextBounds(distanceText, 0, distanceText.length(), bounds);
 				float hOffset = pm.getLength() / 2 - bounds.width() / 2;
 
-				lineAttrs.paint.setColor(colors[marker.colorIndex]);
 				if (locX >= markerX) {
 					canvas.rotate(180, pos[0], pos[1]);
 					canvas.drawTextOnPath(distanceText, linePath, hOffset, bounds.height() + VERTICAL_OFFSET, textAttrs.paint3);
