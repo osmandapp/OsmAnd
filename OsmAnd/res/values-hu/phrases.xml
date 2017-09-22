@@ -2885,11 +2885,11 @@
 	<string name="poi_party">Partikellékek</string>
 	<string name="poi_electrical">Villamossági szaküzlet</string>
 	<string name="poi_lighting">Lámpatestek</string>
-	<string name="poi_lottery">Lottószelvények</string>
+	<string name="poi_lottery">Lottózó</string>
 	<string name="poi_gambling">Szerencsejáték-helyszín</string>
 
 	<string name="poi_gambling_type">Típus</string>
-	<string name="poi_gambling_lottery">Lottó</string>
+	<string name="poi_gambling_lottery">Lottózó</string>
 	<string name="poi_gambling_slot_machines">Játékgépek</string>
 	<string name="poi_gambling_betting">Fogadás</string>
 	<string name="poi_e_cigarette">E-cigaretta-bolt</string>
