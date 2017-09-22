@@ -2836,4 +2836,8 @@ U vypadku, kali vy lubіcie OsmAnd і OSM і chočacie padtrymać jaho, heta іd
     <string name="ascendingly">Pa ŭzrastanni</string>
     <string name="date_added">Data dadadzienaja</string>
     <string name="order_by">Sartavać pa:</string>
+    <string name="show_guide_line">Pakazać liniju kirunku</string>
+    <string name="show_arrows_on_the_map">Pakazać strelki na karcie</string>
+    <string name="show_passed">Pakazać projdzienyja</string>
+    <string name="hide_passed">Schavać projdziennyja</string>
     </resources>
