@@ -311,10 +311,10 @@ public class RulerControlLayer extends OsmandMapLayer {
 	}
 
 	private void drawDistBetweenFingerAndLocation(Canvas canvas, RotatedTileBox tb, Location currLoc, boolean night) {
-		float x = tb.getPixXFromLonNoRot(touchPointLatLon.getLongitude());
-		float y = tb.getPixYFromLatNoRot(touchPointLatLon.getLatitude());
-		int currX = tb.getPixXFromLonNoRot(currLoc.getLongitude());
-		int currY = tb.getPixYFromLatNoRot(currLoc.getLatitude());
+		float x = tb.getPixXFromLatLon(touchPointLatLon.getLatitude(), touchPointLatLon.getLongitude());
+		float y = tb.getPixYFromLatLon(touchPointLatLon.getLatitude(), touchPointLatLon.getLongitude());
+		int currX = (int) tb.getPixXFromLatLon(currLoc.getLatitude(), currLoc.getLongitude());
+		int currY = (int) tb.getPixYFromLatLon(currLoc.getLatitude(), currLoc.getLongitude());
 
 		linePath.reset();
 		tx.reset();
@@ -327,12 +327,14 @@ public class RulerControlLayer extends OsmandMapLayer {
 
 		calculatePath(tb, tx, ty, linePath);
 
-		canvas.drawPath(linePath, lineAttrs.paint);
-		drawFingerTouchIcon(canvas, x, y, night);
-
 		float dist = (float) MapUtils.getDistance(touchPointLatLon, currLoc.getLatitude(), currLoc.getLongitude());
 		String text = OsmAndFormatter.getFormattedDistance(dist, app);
+
+		canvas.rotate(-tb.getRotate(), tb.getCenterPixelX(), tb.getCenterPixelY());
+		canvas.drawPath(linePath, lineAttrs.paint);
+		drawFingerTouchIcon(canvas, x, y, night);
 		drawTextOnCenterOfPath(canvas, x, currX, linePath, text);
+		canvas.rotate(tb.getRotate(), tb.getCenterPixelX(), tb.getCenterPixelY());
 	}
 
 	private void updateData(RotatedTileBox tb, QuadPoint center) {
