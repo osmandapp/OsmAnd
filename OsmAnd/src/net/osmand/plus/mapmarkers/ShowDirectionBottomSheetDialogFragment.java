@@ -207,7 +207,7 @@ public class ShowDirectionBottomSheetDialogFragment extends BottomSheetDialogFra
 	private void highlightSelectedItem(OsmandSettings.MapMarkersMode mode, boolean check) {
 		int iconBgColor = check ? R.color.dashboard_blue : R.color.on_map_icon_color;
 		int iconColor = check ? R.color.color_dialog_buttons_dark : R.color.dashboard_blue;
-		int textColor = ContextCompat.getColor(getContext(), check ? R.color.dashboard_blue : night ? R.color.color_white : R.color.color_black);
+		int textColor = ContextCompat.getColor(getContext(), check ? (night ? R.color.color_dialog_buttons_dark : R.color.dashboard_blue) : night ? R.color.color_white : R.color.color_black);
 		switch (mode) {
 			case TOOLBAR:
 				((RadioButton) mainView.findViewById(R.id.top_bar_radio_button)).setChecked(check);

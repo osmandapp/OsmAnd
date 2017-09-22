@@ -125,7 +125,7 @@
                 android:id="@+id/map_marker_options_button"
                 android:layout_width="56dp"
                 android:layout_height="56dp"
-                android:background="@drawable/marker_circle_background_light_with_inset"
+                tools:background="@drawable/marker_circle_background_dark_with_inset"
                 android:focusableInTouchMode="true"
                 tools:src="@drawable/ic_action_marker_passed"/>
 
@@ -137,7 +137,7 @@
             android:layout_height="1dp"
             android:layout_marginLeft="56dp"
             android:layout_marginStart="56dp"
-            android:background="?attr/dashboard_divider"/>
+            tools:background="?attr/dashboard_divider"/>
 
     </LinearLayout>
 

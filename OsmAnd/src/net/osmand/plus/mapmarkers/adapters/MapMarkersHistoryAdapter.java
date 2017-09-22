@@ -35,9 +35,11 @@ public class MapMarkersHistoryAdapter extends RecyclerView.Adapter<RecyclerView.
 	private List<Object> items = new ArrayList<>();
 	private MapMarkersHistoryAdapterListener listener;
 	private Snackbar snackbar;
+	private boolean night;
 
 	public MapMarkersHistoryAdapter(OsmandApplication app) {
 		this.app = app;
+		night = !app.getSettings().isLightContent();
 		createHeaders();
 	}
 
@@ -125,6 +127,7 @@ public class MapMarkersHistoryAdapter extends RecyclerView.Adapter<RecyclerView.
 
 			itemViewHolder.description.setText(app.getString(R.string.passed, new SimpleDateFormat("MMM dd", Locale.getDefault()).format(new Date(marker.visitedDate))));
 
+			itemViewHolder.optionsBtn.setBackgroundDrawable(app.getResources().getDrawable(night ? R.drawable.marker_circle_background_dark_with_inset : R.drawable.marker_circle_background_light_with_inset));
 			itemViewHolder.optionsBtn.setImageDrawable(iconsCache.getThemedIcon(R.drawable.ic_action_reset_to_default_dark));
 			itemViewHolder.optionsBtn.setOnClickListener(new View.OnClickListener() {
 				@Override
@@ -158,6 +161,7 @@ public class MapMarkersHistoryAdapter extends RecyclerView.Adapter<RecyclerView.
 			if ((getItemCount() > position + 1 && getItemViewType(position + 1) == HEADER_TYPE) || lastItem) {
 				itemViewHolder.divider.setVisibility(View.GONE);
 			} else {
+				itemViewHolder.divider.setBackgroundColor(ContextCompat.getColor(app, night ? R.color.actionbar_dark_color : R.color.dashboard_divider_light));
 				itemViewHolder.divider.setVisibility(View.VISIBLE);
 			}
 			itemViewHolder.bottomShadow.setVisibility(lastItem ? View.VISIBLE : View.GONE);

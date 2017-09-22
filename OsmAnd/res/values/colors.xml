@@ -262,4 +262,6 @@
 	<color name="map_markers_on_map_color">#17828a</color>
 	<color name="show_direction_menu_selected_item_bg">#f2f4ff</color>
 
+	<color name="marker_circle_button_color_dark">#525e66</color>
+
 </resources>
