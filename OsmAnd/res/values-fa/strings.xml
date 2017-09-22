@@ -2175,4 +2175,5 @@
     <string name="exit_without_saving">بدون ذخیره‌کردن خارج می‌شوید؟</string>
     <string name="line">خط</string>
     <string name="shared_string_options">گزینه‌ها</string>
+    <string name="measurement_tool_save_as_new_track_descr">می‌توانید نقطه‌ها را هم به‌عنوان نقاط مسیر و هم به‌عنوان نقاط یک خط ذخیره کنید.</string>
     </resources>
