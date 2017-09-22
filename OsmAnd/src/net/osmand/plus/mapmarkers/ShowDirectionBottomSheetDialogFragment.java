@@ -213,9 +213,9 @@ public class ShowDirectionBottomSheetDialogFragment extends BottomSheetDialogFra
 				((RadioButton) mainView.findViewById(R.id.top_bar_radio_button)).setChecked(check);
 				ImageView topBarIcon = (ImageView) mainView.findViewById(R.id.top_bar_icon);
 				if (check) {
-					mainView.findViewById(R.id.top_bar_row).setBackgroundColor(ContextCompat.getColor(getContext(), R.color.show_direction_menu_selected_item_bg));
+					mainView.findViewById(R.id.top_bar_row_frame).setBackgroundColor(ContextCompat.getColor(getContext(), R.color.show_direction_menu_selected_item_bg));
 				} else {
-					mainView.findViewById(R.id.top_bar_row).setBackgroundResource(0);
+					mainView.findViewById(R.id.top_bar_row_frame).setBackgroundResource(0);
 				}
 				((TextView) mainView.findViewById(R.id.top_bar_text)).setTextColor(textColor);
 				topBarIcon.setBackgroundDrawable(getIcon(R.drawable.ic_action_device_top, iconBgColor));
@@ -225,9 +225,9 @@ public class ShowDirectionBottomSheetDialogFragment extends BottomSheetDialogFra
 				((RadioButton) mainView.findViewById(R.id.widget_radio_button)).setChecked(check);
 				ImageView widgetIcon = (ImageView) mainView.findViewById(R.id.widget_icon);
 				if (check) {
-					mainView.findViewById(R.id.widget_row).setBackgroundColor(ContextCompat.getColor(getContext(), R.color.show_direction_menu_selected_item_bg));
+					mainView.findViewById(R.id.widget_row_frame).setBackgroundColor(ContextCompat.getColor(getContext(), R.color.show_direction_menu_selected_item_bg));
 				} else {
-					mainView.findViewById(R.id.widget_row).setBackgroundResource(0);
+					mainView.findViewById(R.id.widget_row_frame).setBackgroundResource(0);
 				}
 				((TextView) mainView.findViewById(R.id.widget_text)).setTextColor(textColor);
 				widgetIcon.setBackgroundDrawable(getIcon(R.drawable.ic_action_device_top, iconBgColor));
@@ -237,9 +237,9 @@ public class ShowDirectionBottomSheetDialogFragment extends BottomSheetDialogFra
 				((RadioButton) mainView.findViewById(R.id.none_radio_button)).setChecked(check);
 				ImageView noneIcon = (ImageView) mainView.findViewById(R.id.none_icon);
 				if (check) {
-					mainView.findViewById(R.id.none_row).setBackgroundColor(ContextCompat.getColor(getContext(), R.color.show_direction_menu_selected_item_bg));
+					mainView.findViewById(R.id.none_row_frame).setBackgroundColor(ContextCompat.getColor(getContext(), R.color.show_direction_menu_selected_item_bg));
 				} else {
-					mainView.findViewById(R.id.none_row).setBackgroundResource(0);
+					mainView.findViewById(R.id.none_row_frame).setBackgroundResource(0);
 				}
 				((TextView) mainView.findViewById(R.id.none_text)).setTextColor(textColor);
 				noneIcon.setBackgroundDrawable(getIcon(R.drawable.ic_action_device_top, iconBgColor));
