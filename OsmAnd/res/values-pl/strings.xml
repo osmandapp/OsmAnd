@@ -9,7 +9,7 @@
     <string name="pref_raster_map">Zasoby mapy</string>
     <string name="pref_vector_map">Ustawienia mapy wektorowej</string>
     <string name="choose_auto_follow_route">Automatyczne środkowanie mapy</string>
-    <string name="choose_auto_follow_route_descr">Ustala opóźnienie podążania mapy za aktualnym położeniem</string>
+    <string name="choose_auto_follow_route_descr">Ustala opóźnienie synchronizacji mapy z aktualnym położeniem</string>
     
     <string name="auto_follow_route_navigation">Automatyczne podążanie za położeniem</string>
     <string name="auto_follow_route_navigation_descr">Włącz podążanie za pozycją tylko w trybie nawigacji.</string>
@@ -460,7 +460,7 @@
     <string name="error_occurred_saving_gpx">Błąd podczas zapisywania śladu GPX</string>
     <string name="error_calculating_route">Błąd wyznaczania trasy</string>
     <string name="error_calculating_route_occured">Wystąpił błąd podczas wyznaczania trasy</string>
-    <string name="empty_route_calculated">Wyznaczono pustą trasę</string>
+    <string name="empty_route_calculated">Błąd: Wyznaczono pustą trasę</string>
     <string name="new_route_calculated_dist">Obliczono nową trasę, dystans</string>
     <string name="arrived_at_destination">Osiągnięto cel</string>
     <string name="invalid_locations">Koordynaty są nieprawidłowe!</string>
@@ -483,8 +483,8 @@
     <string name="data_settings">Dane</string>
 
     <string name="osm_settings">Edytowanie OSM</string>
-    <string name="auto_zoom_map_descr">Przybliża mapę w zależności od prędkości (dopóki mapa zsynchronizowana jest z aktualnym położeniem)</string>
-    <string name="auto_zoom_map">Automatyczne przybliżanie</string>
+    <string name="auto_zoom_map_descr">Automatycznie przybliża mapę w zależności od prędkości (dopóki mapa zsynchronizowana jest z aktualnym położeniem)</string>
+    <string name="auto_zoom_map">Automatyczne przybliżanie mapy</string>
     <string name="additional_settings">Dodatkowe ustawienia</string>
     <string name="settings_preset_descr">Ustala domyślny profil widoku mapy i ustawień nawigacji</string>
     <string name="settings_preset">Domyślny profil</string>
@@ -938,7 +938,7 @@ OsmAnd jest otwarto-źródłowym programem do nawigacji z dostępem do szerokiej
     <string name="arrived_at_intermediate_point">Osiągnięto cel pośredni trasy</string>
     <string name="context_menu_item_intermediate_point">Dodaj jako cel pośredni trasy</string>
     <string name="map_widget_intermediate_distance">Cel pośredni trasy</string>
-    <string name="ending_point_too_far">Cel pośredni trasy leży zbyt daleko od najbliższej ulicy.</string>
+    <string name="ending_point_too_far">Cel końcowy trasy leży zbyt daleko od najbliższej drogi.</string>
     <string name="add_tag">Dodaj znacznik</string>
     <string name="btn_advanced_mode">Tryb zaawansowany…</string>
     <string name="poi_filter_parking">Parking</string>
@@ -1122,7 +1122,7 @@ OsmAnd jest otwarto-źródłowym programem do nawigacji z dostępem do szerokiej
     <string name="download_using_mobile_internet">Nie nawiązano połączenia za pośrednictwem Wi-Fi. Kontynuować pobieranie używając obecnego połączenia?</string>
     <string name="clear_destination">Usuń cel trasy</string>
     <string name="cancel_navigation">Zatrzymaj nawigację</string>
-    <string name="cancel_route">Odrzucanie trasy</string>
+    <string name="cancel_route">Odrzucenie trasy</string>
     <string name="install_paid">Pełna wersja</string>
     <string name="other_location">Inna</string>
     <string name="files_limit">Pozostało %1$d plików</string>
@@ -1273,7 +1273,7 @@ OsmAnd jest otwarto-źródłowym programem do nawigacji z dostępem do szerokiej
     <string name="complex_route_calculation_failed">"Nie udało się szybko wyznaczyć trasę  (%s). Przełączanie na tryb powolny."</string>
     <string name="disable_complex_routing">Wyłączenie złożonego wyznaczania trasy</string>
     <string name="guidance_preferences_descr">Ustawienia nawigacji</string>
-    <string name="routing_preferences_descr">Wyznaczanie trasy</string>
+    <string name="routing_preferences_descr">Ustawienia trasy</string>
     <string name="app_mode_truck">Ciężarówka</string>
     <string name="copying_osmand_one_file_descr">Kopiowanie pliku (%s) do nowego położenia…</string>
     <string name="copying_osmand_files_descr">Kopiowanie plików OsmAnd do nowego położenia (%s)…</string>
@@ -1297,7 +1297,7 @@ OsmAnd jest otwarto-źródłowym programem do nawigacji z dostępem do szerokiej
     <string name="routing_attr_weight_name">Ograniczenie wagi</string>
     <string name="routing_attr_weight_description">Określa maksymalną, dozwoloną masę pojazdu</string>
     <string name="select_gpx">Wybierz ślad GPX…</string>
-    <string name="route_descr_select_destination">Proszę wybrać cel trasy</string>
+    <string name="route_descr_select_destination">Wybierz cel trasy</string>
     <string name="shared_string_select_on_map">Wskaż na mapie</string>
     <string name="shared_string_favorite">Ulubione</string>
     <string name="route_preferences">Ustawienia trasy</string>
@@ -1716,7 +1716,7 @@ OsmAnd jest otwarto-źródłowym programem do nawigacji z dostępem do szerokiej
     <string name="proxy_pref_title">Proxy</string>
     <string name="proxy_pref_descr">Skonfiguruj ustawienia proxy</string>
     <string name="settings_privacy">Prywatność</string>
-    <string name="shared_string_my_location">Aktualne położenie</string>
+    <string name="shared_string_my_location">Moje położenie</string>
 
     <string name="shared_string_disabled">Wyłączone</string>
     <string name="shared_string_enabled">Włączone</string>
@@ -1831,7 +1831,7 @@ Długość %2$s</string>
 \n 
 \nWłączenie tego widoku zmienia styl mapy na „Zima i narty”, ukazujący teren pokryty śniegiem. Widok można wyłączyć przez wyłączenie wtyczki lub zmianę stylu w menu „Styl mapy” w „Konfiguracji mapy”.</string>
     <string name="shared_string_message">Wiadomość</string>
-    <string name="shared_string_do_not_use">Brak</string>
+    <string name="shared_string_do_not_use">Nie używaj</string>
     <string name="shared_string_address">Adres</string>
     <string name="shared_string_show_description">Wyświetl opis</string>
     <string name="shared_string_places">Miejsca</string>
@@ -2160,7 +2160,7 @@ Długość %2$s</string>
     <string name="missing_write_external_storage_permission">Program nie posiada uprawnień do użycia karty SD</string>
     <string name="select_voice_provider">Wybór komunikatów głosowych</string>
     <string name="select_voice_provider_descr">Proszę wybrać lub pobrać komunikaty głosowe właściwe dla danego języka</string>
-    <string name="impassable_road_desc">Wskazuje drogi, które należy unikać podczas nawigowania</string>
+    <string name="impassable_road_desc">Wskazuje drogi, których należy unikać podczas nawigowania</string>
     <string name="shared_string_sound">Dźwięk</string>
     <string name="no_location_permission">Program nie ma uprawnień dostępu do danych o położeniu.</string>
     <string name="no_camera_permission">Program nie ma uprawnień dostępu do aparatu.</string>
@@ -2712,7 +2712,7 @@ Reprezentuje obszar: %1$s x %2$s</string>
     <string name="show_from_zoom_level">Wyświetlanie od stopnia przybliżenia</string>
     <string name="routing_attr_allow_private_name">Uwzględnianie prywatnych obszarów</string>
     <string name="routing_attr_allow_private_description">Zezwala na dostęp do prywatnych obszarów</string>
-    <string name="route_is_too_long_v2">Ta trasa może być zbyt długa do wyznaczenia. Prosimy dodać punkty pośrednie, jeżeli nie dostaniesz wyniku w ciągu 10 minut.</string>
+    <string name="route_is_too_long_v2">Ta trasa może być zbyt długa do wyznaczenia. Prosimy dodać punkty pośrednie, jeżeli nie otrzymasz wyniku w ciągu 10 minut.</string>
     <string name="save_poi_too_many_uppercase">Nazwa zawiera zbyt wiele wielkich liter. Czy chcesz kontynuować?</string>
     <string name="shared_string_plugin">Wtyczka</string>
     <string name="srtm_menu_download_descr">Aby wyświetlić poziomice na mapie, należy pobrać mapę poziomic tego obszaru.</string>
@@ -2762,7 +2762,7 @@ Reprezentuje obszar: %1$s x %2$s</string>
     <string name="mapillary_menu_date_from">Od</string>
     <string name="wrong_user_name">Nieprawidłowa nazwa użytkownika!</string>
     <string name="mapillary_menu_title_tile_cache">Pamięć podręczna kafelków</string>
-    <string name="mapillary_menu_descr_dates">Wyświetla obrazy dodane w określonym czasie</string>
+    <string name="mapillary_menu_descr_dates">Wyświetla obrazy dodane w określonym czasie.</string>
     <string name="mapillary_menu_edit_text_hint">Proszę wprowadzić nazwę użytkownika</string>
     <string name="mapillary_menu_filter_description">Można filtrować obrazy według nazwy użytkownika lub daty. Filtry mają zastosowanie dla większych przybliżeń.</string>
     <string name="mapillary_menu_descr_username">Wyświetla obrazy dodane przez określonego użytkownika.</string>
