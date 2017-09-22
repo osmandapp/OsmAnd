@@ -1,11 +1,15 @@
 package net.osmand.plus.mapmarkers.adapters;
 
+import android.support.design.widget.Snackbar;
+import android.support.v4.content.ContextCompat;
 import android.support.v7.widget.RecyclerView;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.TextView;
 
 import net.osmand.plus.IconsCache;
+import net.osmand.plus.MapMarkersHelper;
 import net.osmand.plus.MapMarkersHelper.MapMarker;
 import net.osmand.plus.OsmandApplication;
 import net.osmand.plus.R;
@@ -30,6 +34,7 @@ public class MapMarkersHistoryAdapter extends RecyclerView.Adapter<RecyclerView.
 	private OsmandApplication app;
 	private List<Object> items = new ArrayList<>();
 	private MapMarkersHistoryAdapterListener listener;
+	private Snackbar snackbar;
 
 	public MapMarkersHistoryAdapter(OsmandApplication app) {
 		this.app = app;
@@ -130,6 +135,19 @@ public class MapMarkersHistoryAdapter extends RecyclerView.Adapter<RecyclerView.
 					}
 					app.getMapMarkersHelper().restoreMarkerFromHistory(marker, 0);
 					notifyItemRemoved(position);
+
+					snackbar = Snackbar.make(itemViewHolder.itemView, app.getString(R.string.marker_moved_to_active), Snackbar.LENGTH_LONG)
+							.setAction(R.string.shared_string_undo, new View.OnClickListener() {
+								@Override
+								public void onClick(View view) {
+									app.getMapMarkersHelper().moveMapMarkerToHistory(marker);
+									notifyDataSetChanged();
+								}
+							});
+					View snackBarView = snackbar.getView();
+					TextView tv = (TextView) snackBarView.findViewById(android.support.design.R.id.snackbar_action);
+					tv.setTextColor(ContextCompat.getColor(app, R.color.color_dialog_buttons_dark));
+					snackbar.show();
 				}
 			});
 			itemViewHolder.flagIconLeftSpace.setVisibility(View.VISIBLE);
@@ -162,6 +180,12 @@ public class MapMarkersHistoryAdapter extends RecyclerView.Adapter<RecyclerView.
 			}
 			dateViewHolder.disableGroupSwitch.setVisibility(View.GONE);
 			dateViewHolder.title.setText(dateString);
+		}
+	}
+
+	public void hideSnackbar() {
+		if (snackbar != null && snackbar.isShown()) {
+			snackbar.dismiss();
 		}
 	}
 

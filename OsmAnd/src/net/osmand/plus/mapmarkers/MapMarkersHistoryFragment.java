@@ -212,6 +212,9 @@ public class MapMarkersHistoryFragment extends Fragment implements MapMarkersHel
 		if (snackbar != null && snackbar.isShown()) {
 			snackbar.dismiss();
 		}
+		if (adapter != null) {
+			adapter.hideSnackbar();
+		}
 	}
 
 	private HistoryMarkerMenuBottomSheetDialogFragment.HistoryMarkerMenuFragmentListener createHistoryMarkerMenuListener() {
