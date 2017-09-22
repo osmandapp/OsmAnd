@@ -358,6 +358,7 @@ public class QuickSearchListAdapter extends ArrayAdapter<QuickSearchListItem> {
 				group.setVisibility(View.GONE);
 			}
 
+			LinearLayout timeLayout = (LinearLayout) view.findViewById(R.id.time_layout);
 			TextView timeText = (TextView) view.findViewById(R.id.time);
 			ImageView timeIcon = (ImageView) view.findViewById(R.id.time_icon);
 			if (listItem.getSearchResult().object instanceof Amenity
@@ -372,19 +373,16 @@ public class QuickSearchListAdapter extends ArrayAdapter<QuickSearchListItem> {
 					boolean worksLater = rs.isOpenedForTime(inst);
 					int colorId = worksNow ? worksLater ? R.color.color_ok : R.color.color_intermediate : R.color.color_warning;
 
-					timeIcon.setVisibility(View.VISIBLE);
-					timeText.setVisibility(View.VISIBLE);
+					timeLayout.setVisibility(View.VISIBLE);
 					timeIcon.setImageDrawable(app.getIconsCache().getIcon(R.drawable.ic_small_time, colorId));
 					timeText.setTextColor(app.getResources().getColor(colorId));
 					String rt = rs.getCurrentRuleTime(inst);
 					timeText.setText(rt == null ? "" : rt);
 				} else {
-					timeIcon.setVisibility(View.GONE);
-					timeText.setVisibility(View.GONE);
+					timeLayout.setVisibility(View.GONE);
 				}
 			} else {
-				timeIcon.setVisibility(View.GONE);
-				timeText.setVisibility(View.GONE);
+				timeLayout.setVisibility(View.GONE);
 			}
 
 			updateCompassVisibility(view, listItem);

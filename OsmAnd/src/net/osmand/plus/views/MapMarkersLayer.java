@@ -8,13 +8,9 @@ import android.graphics.Path;
 import android.graphics.PointF;
 import android.graphics.PorterDuff;
 import android.graphics.PorterDuffColorFilter;
-import android.os.Handler;
-import android.os.Message;
 import android.support.annotation.NonNull;
 import android.support.annotation.Nullable;
 import android.support.v4.content.ContextCompat;
-import android.view.GestureDetector;
-import android.view.MotionEvent;
 
 import net.osmand.Location;
 import net.osmand.data.LatLon;
@@ -23,7 +19,6 @@ import net.osmand.data.QuadPoint;
 import net.osmand.data.RotatedTileBox;
 import net.osmand.plus.MapMarkersHelper;
 import net.osmand.plus.MapMarkersHelper.MapMarker;
-import net.osmand.plus.OsmAndConstants;
 import net.osmand.plus.OsmandSettings;
 import net.osmand.plus.R;
 import net.osmand.plus.TargetPointsHelper.TargetPoint;
@@ -36,11 +31,12 @@ import net.osmand.plus.views.mapwidgets.MapMarkersWidgetsFactory;
 import java.util.ArrayList;
 import java.util.List;
 
+import gnu.trove.list.array.TIntArrayList;
+
 public class MapMarkersLayer extends OsmandMapLayer implements IContextMenuProvider,
 		IContextMenuProviderSelection, ContextMenuLayer.IMoveObjectProvider {
+
 	protected static final int DIST_TO_SHOW = 80;
-	protected static final long USE_FINGER_LOCATION_DELAY = 1000;
-	private static final int MAP_REFRESH_MESSAGE = OsmAndConstants.UI_HANDLER_MAP_VIEW + 6;
 
 	private final MapActivity map;
 	private OsmandMapTileView view;
@@ -66,16 +62,14 @@ public class MapMarkersLayer extends OsmandMapLayer implements IContextMenuProvi
 	private Bitmap arrowToDestination;
 	private float[] calculations = new float[2];
 
+	private final RenderingLineAttributes lineAttrs = new RenderingLineAttributes("measureDistanceLine");
 	private Paint paint;
 	private Path path;
 	private List<LatLon> route = new ArrayList<>();
 
-	private LatLon fingerLocation;
-	private boolean hasMoved;
-	private boolean moving;
-	private boolean useFingerLocation;
-	private GestureDetector longTapDetector;
-	private Handler handler;
+	private TIntArrayList tx = new TIntArrayList();
+	private TIntArrayList ty = new TIntArrayList();
+	private Path linePath = new Path();
 
 	private ContextMenuLayer contextMenuLayer;
 
@@ -190,49 +184,22 @@ public class MapMarkersLayer extends OsmandMapLayer implements IContextMenuProvi
 	@Override
 	public void initLayer(OsmandMapTileView view) {
 		this.view = view;
-		handler = new Handler();
 		initUI();
-		longTapDetector = new GestureDetector(view.getContext(), new GestureDetector.OnGestureListener() {
-			@Override
-			public boolean onDown(MotionEvent e) {
-				return false;
-			}
-
-			@Override
-			public void onShowPress(MotionEvent e) {
-
-			}
-
-			@Override
-			public boolean onSingleTapUp(MotionEvent e) {
-				return false;
-			}
-
-			@Override
-			public boolean onScroll(MotionEvent e1, MotionEvent e2, float distanceX, float distanceY) {
-				return false;
-			}
-
-			@Override
-			public void onLongPress(MotionEvent e) {
-				cancelFingerAction();
-			}
-
-			@Override
-			public boolean onFling(MotionEvent e1, MotionEvent e2, float velocityX, float velocityY) {
-				return false;
-			}
-		});
 	}
 
 	@Override
 	public void onDraw(Canvas canvas, RotatedTileBox tileBox, DrawSettings nightMode) {
 
-		widgetsFactory.updateInfo(useFingerLocation ? fingerLocation : null, tileBox.getZoom());
+		Location myLoc = map.getMyApplication().getLocationProvider().getLastStaleKnownLocation();
+		widgetsFactory.updateInfo(myLoc == null
+				? tileBox.getCenterLatLon() : new LatLon(myLoc.getLatitude(), myLoc.getLongitude()), tileBox.getZoom());
+		OsmandSettings settings = map.getMyApplication().getSettings();
 
-		if (tileBox.getZoom() < 3 || !map.getMyApplication().getSettings().USE_MAP_MARKERS.get()) {
+		if (tileBox.getZoom() < 3 || !settings.USE_MAP_MARKERS.get()) {
 			return;
 		}
+
+		lineAttrs.updatePaints(view, nightMode, tileBox);
 
 		MapMarkersHelper markersHelper = map.getMyApplication().getMapMarkersHelper();
 		if (route.size() > 0) {
@@ -259,6 +226,30 @@ public class MapMarkersLayer extends OsmandMapLayer implements IContextMenuProvi
 		}
 
 		List<MapMarker> activeMapMarkers = markersHelper.getMapMarkers();
+
+		if (settings.SHOW_LINES_TO_FIRST_MARKERS.get() && myLoc != null) {
+			int locX = tileBox.getPixXFromLonNoRot(myLoc.getLongitude());
+			int locY = tileBox.getPixYFromLatNoRot(myLoc.getLatitude());
+			int[] colors = MapMarker.getColors(map);
+			for (int i = 0; i < activeMapMarkers.size() && i < 2; i++) {
+				MapMarker marker = activeMapMarkers.get(i);
+				int markerX = tileBox.getPixXFromLonNoRot(marker.getLongitude());
+				int markerY = tileBox.getPixYFromLatNoRot(marker.getLatitude());
+				linePath.reset();
+				tx.clear();
+				ty.clear();
+				linePath.moveTo(locX, locY);
+				linePath.lineTo(markerX, markerY);
+				tx.add(locX);
+				ty.add(locY);
+				tx.add(markerX);
+				ty.add(markerY);
+				calculatePath(tileBox, tx, ty, linePath);
+				lineAttrs.paint.setColor(colors[marker.colorIndex]);
+				canvas.drawPath(linePath, lineAttrs.paint);
+			}
+		}
+
 		for (MapMarker marker : activeMapMarkers) {
 			if (isLocationVisible(tileBox, marker) && !overlappedByWaypoint(marker)
 					&& !isInMotion(marker)) {
@@ -273,34 +264,26 @@ public class MapMarkersLayer extends OsmandMapLayer implements IContextMenuProvi
 			}
 		}
 
-		boolean show = useFingerLocation ||
-				(map.getMyApplication().getSettings().MAP_MARKERS_MODE.get() == OsmandSettings.MapMarkersMode.WIDGETS
-				&& map.getMyApplication().getSettings().SHOW_DESTINATION_ARROW.get());
-		if (show) {
-			LatLon loc = fingerLocation;
-			if (!useFingerLocation) {
-				loc = tileBox.getCenterLatLon();
-			}
-			if (loc != null) {
-				List<MapMarker> mapMarkers = markersHelper.getMapMarkers();
-				int i = 0;
-				for (MapMarker marker : mapMarkers) {
-					if (!isLocationVisible(tileBox, marker) && !isInMotion(marker)) {
-						canvas.save();
-						net.osmand.Location.distanceBetween(loc.getLatitude(), loc.getLongitude(),
-								marker.getLatitude(), marker.getLongitude(), calculations);
-						float bearing = calculations[1] - 90;
-						float radiusBearing = DIST_TO_SHOW * tileBox.getDensity();
-						final QuadPoint cp = tileBox.getCenterPixelPoint();
-						canvas.rotate(bearing, cp.x, cp.y);
-						canvas.translate(-24 * tileBox.getDensity() + radiusBearing, -22 * tileBox.getDensity());
-						canvas.drawBitmap(arrowToDestination, cp.x, cp.y, getMarkerDestPaint(marker.colorIndex));
-						canvas.restore();
-					}
-					i++;
-					if (i > 1) {
-						break;
-					}
+		if (settings.SHOW_ARROWS_TO_FIRST_MARKERS.get()) {
+			LatLon loc = tileBox.getCenterLatLon();
+			List<MapMarker> mapMarkers = markersHelper.getMapMarkers();
+			int i = 0;
+			for (MapMarker marker : mapMarkers) {
+				if (!isLocationVisible(tileBox, marker) && !isInMotion(marker)) {
+					canvas.save();
+					net.osmand.Location.distanceBetween(loc.getLatitude(), loc.getLongitude(),
+							marker.getLatitude(), marker.getLongitude(), calculations);
+					float bearing = calculations[1] - 90;
+					float radiusBearing = DIST_TO_SHOW * tileBox.getDensity();
+					final QuadPoint cp = tileBox.getCenterPixelPoint();
+					canvas.rotate(bearing, cp.x, cp.y);
+					canvas.translate(-24 * tileBox.getDensity() + radiusBearing, -22 * tileBox.getDensity());
+					canvas.drawBitmap(arrowToDestination, cp.x, cp.y, getMarkerDestPaint(marker.colorIndex));
+					canvas.restore();
+				}
+				i++;
+				if (i > 1) {
+					break;
 				}
 			}
 		}
@@ -352,57 +335,6 @@ public class MapMarkersLayer extends OsmandMapLayer implements IContextMenuProvi
 
 	@Override
 	public void destroyLayer() {
-	}
-
-	@Override
-	public boolean onTouchEvent(MotionEvent event, RotatedTileBox tileBox) {
-		if (!longTapDetector.onTouchEvent(event)) {
-			switch (event.getAction()) {
-				case MotionEvent.ACTION_DOWN:
-					float x = event.getX();
-					float y = event.getY();
-					fingerLocation = tileBox.getLatLonFromPixel(x, y);
-					hasMoved = false;
-					moving = true;
-					break;
-
-				case MotionEvent.ACTION_MOVE:
-					if (!hasMoved) {
-						if (!handler.hasMessages(MAP_REFRESH_MESSAGE)) {
-							Message msg = Message.obtain(handler, new Runnable() {
-								@Override
-								public void run() {
-									handler.removeMessages(MAP_REFRESH_MESSAGE);
-									if (moving) {
-										if (!useFingerLocation) {
-											useFingerLocation = true;
-											map.refreshMap();
-										}
-									}
-								}
-							});
-							msg.what = MAP_REFRESH_MESSAGE;
-							handler.sendMessageDelayed(msg, USE_FINGER_LOCATION_DELAY);
-						}
-						hasMoved = true;
-					}
-					break;
-
-				case MotionEvent.ACTION_UP:
-				case MotionEvent.ACTION_CANCEL:
-					cancelFingerAction();
-					break;
-			}
-		}
-		return super.onTouchEvent(event, tileBox);
-	}
-
-	private void cancelFingerAction() {
-		handler.removeMessages(MAP_REFRESH_MESSAGE);
-		useFingerLocation = false;
-		moving = false;
-		fingerLocation = null;
-		map.refreshMap();
 	}
 
 	@Override

@@ -713,6 +713,9 @@ public class OsmandSettings {
 
 	public final CommonPreference<RulerMode> RULER_MODE = new EnumIntPreference<>("ruler_mode", RulerMode.FIRST, RulerMode.values()).makeGlobal();
 
+	public final CommonPreference<Boolean> SHOW_LINES_TO_FIRST_MARKERS = new BooleanPreference("show_lines_to_first_markers", false).makeGlobal();
+	public final CommonPreference<Boolean> SHOW_ARROWS_TO_FIRST_MARKERS = new BooleanPreference("show_arrows_to_first_markers", false).makeGlobal();
+
 	public final CommonPreference<Boolean> USE_MAPILLARY_FILTER = new BooleanPreference("use_mapillary_filters", false).makeGlobal();
 	public final CommonPreference<String> MAPILLARY_FILTER_USER_KEY = new StringPreference("mapillary_filter_user_key", "").makeGlobal();
 	public final CommonPreference<String> MAPILLARY_FILTER_USERNAME = new StringPreference("mapillary_filter_username", "").makeGlobal();

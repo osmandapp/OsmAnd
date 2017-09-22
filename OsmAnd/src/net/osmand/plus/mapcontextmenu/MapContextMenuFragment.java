@@ -16,7 +16,9 @@ import android.view.LayoutInflater;
 import android.view.MotionEvent;
 import android.view.VelocityTracker;
 import android.view.View;
+import android.view.View.OnLayoutChangeListener;
 import android.view.ViewGroup;
+import android.view.ViewParent;
 import android.view.ViewTreeObserver;
 import android.view.animation.DecelerateInterpolator;
 import android.widget.Button;
@@ -67,6 +69,7 @@ public class MapContextMenuFragment extends Fragment implements DownloadEvents {
 	ImageView fabView;
 
 	private MapContextMenu menu;
+	private OnLayoutChangeListener containerLayoutListener;
 
 	private int menuTopViewHeight;
 	private int menuTopShadowHeight;
@@ -108,10 +111,7 @@ public class MapContextMenuFragment extends Fragment implements DownloadEvents {
 	public View onCreateView(LayoutInflater inflater, ViewGroup container,
 							 Bundle savedInstanceState) {
 
-		screenHeight = AndroidUtils.getScreenHeight(getActivity());
-		skipHalfScreenStateLimit = screenHeight * SKIP_HALF_SCREEN_STATE_KOEF;
-
-		viewHeight = screenHeight - AndroidUtils.getStatusBarHeight(getMapActivity());
+		processScreenHeight(container);
 
 		fabPaddingTopPx = dpToPx(FAB_PADDING_TOP_DP);
 		markerPaddingPx = dpToPx(MARKER_PADDING_DP);
@@ -464,8 +464,32 @@ public class MapContextMenuFragment extends Fragment implements DownloadEvents {
 
 		//getMapActivity().getMapLayers().getMapControlsLayer().setControlsClickable(false);
 
+		if (Build.VERSION.SDK_INT >= 11) {
+			containerLayoutListener = new OnLayoutChangeListener() {
+				@Override
+				public void onLayoutChange(View view, int left, int top, int right, int bottom,
+										   int oldLeft, int oldTop, int oldRight, int oldBottom) {
+					if (bottom != oldBottom) {
+						processScreenHeight(view.getParent());
+						runLayoutListener();
+					}
+				}
+			};
+		}
+
 		created = true;
 		return view;
+	}
+
+	private void processScreenHeight(ViewParent parent) {
+		View container = (View)parent;
+		if (Build.VERSION.SDK_INT >= 11) {
+			screenHeight = container.getHeight() + AndroidUtils.getStatusBarHeight(getActivity());
+		} else {
+			screenHeight = AndroidUtils.getScreenHeight(getActivity());
+		}
+		skipHalfScreenStateLimit = screenHeight * SKIP_HALF_SCREEN_STATE_KOEF;
+		viewHeight = screenHeight - AndroidUtils.getStatusBarHeight(getMapActivity());
 	}
 
 	public void openMenuFullScreen() {
@@ -762,10 +786,19 @@ public class MapContextMenuFragment extends Fragment implements DownloadEvents {
 		if (!wasDrawerDisabled) {
 			getMapActivity().disableDrawer();
 		}
+		ViewParent parent = view.getParent();
+		if (parent != null && containerLayoutListener != null) {
+			((View) parent).addOnLayoutChangeListener(containerLayoutListener);
+		}
+
 	}
 
 	@Override
 	public void onPause() {
+		ViewParent parent = view.getParent();
+		if (parent != null && containerLayoutListener != null) {
+			((View) parent).removeOnLayoutChangeListener(containerLayoutListener);
+		}
 		getMapActivity().getMapViewTrackingUtilities().setContextMenu(null);
 		getMapActivity().getMapViewTrackingUtilities().setMapLinkedToLocation(false);
 		if (!wasDrawerDisabled) {

@@ -22,43 +22,45 @@ import net.osmand.util.MapUtils;
 
 public class MapMarkersGroupsFragment extends Fragment implements OsmAndCompassListener, OsmAndLocationListener {
 
-    public static final String TAG = "MapMarkersGroupsFragment";
+	public static final String TAG = "MapMarkersGroupsFragment";
 
-    private MapMarkersGroupsAdapter adapter;
+	private MapMarkersGroupsAdapter adapter;
 	private Float heading;
 	private Location location;
 	private boolean locationUpdateStarted;
 
-    @Nullable
-    @Override
-    public View onCreateView(LayoutInflater inflater, @Nullable ViewGroup container, @Nullable Bundle savedInstanceState) {
-        final RecyclerView recyclerView = new RecyclerView(getContext());
-        recyclerView.setLayoutManager(new LinearLayoutManager(getContext()));
-        final MapActivity mapActivity = (MapActivity) getActivity();
+	@Nullable
+	@Override
+	public View onCreateView(LayoutInflater inflater, @Nullable ViewGroup container, @Nullable Bundle savedInstanceState) {
+		final RecyclerView recyclerView = new RecyclerView(getContext());
+		recyclerView.setLayoutManager(new LinearLayoutManager(getContext()));
+		final MapActivity mapActivity = (MapActivity) getActivity();
 
-        adapter = new MapMarkersGroupsAdapter(mapActivity);
+		adapter = new MapMarkersGroupsAdapter(mapActivity);
 		recyclerView.setAdapter(adapter);
-        return recyclerView;
-    }
+		return recyclerView;
+	}
 
-    void updateAdapter() {
-        if (adapter != null) {
-            adapter.notifyDataSetChanged();
-        }
-    }
+	void updateAdapter() {
+		if (adapter != null) {
+			adapter.createDisplayGroups();
+			adapter.updateShowDirectionMarkers();
+			adapter.notifyDataSetChanged();
+		}
+	}
 
-    @Override
-    public void onResume() {
-        super.onResume();
-        adapter.setScreenOrientation(DashLocationFragment.getScreenOrientation(getActivity()));
-        startLocationUpdate();
-    }
+	@Override
+	public void onResume() {
+		super.onResume();
+		adapter.setScreenOrientation(DashLocationFragment.getScreenOrientation(getActivity()));
+		startLocationUpdate();
+	}
 
-    @Override
-    public void onPause() {
-        super.onPause();
-        stopLocationUpdate();
-    }
+	@Override
+	public void onPause() {
+		super.onPause();
+		stopLocationUpdate();
+	}
 
 	void startLocationUpdate() {
 		OsmandApplication app = getMyApplication();

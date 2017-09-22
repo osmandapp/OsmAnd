@@ -96,7 +96,7 @@ public class MapMarkersActiveAdapter extends RecyclerView.Adapter<MapMarkerItemV
 			holder.iconDirection.setVisibility(View.GONE);
 
 			holder.icon.setImageDrawable(iconsCache.getIcon(R.drawable.ic_arrow_marker_diretion, markerColor));
-			holder.mainLayout.setBackgroundColor(ContextCompat.getColor(mapActivity, R.color.markers_top_bar_background));
+			holder.mainLayout.setBackgroundColor(ContextCompat.getColor(mapActivity, night ? R.color.list_divider_dark : R.color.markers_top_bar_background));
 			holder.title.setTextColor(ContextCompat.getColor(mapActivity, R.color.color_white));
 			holder.divider.setBackgroundColor(ContextCompat.getColor(mapActivity, R.color.map_markers_on_map_divider_color));
 			holder.optionsBtn.setBackgroundDrawable(mapActivity.getResources().getDrawable(R.drawable.marker_circle_background_on_map_with_inset));
