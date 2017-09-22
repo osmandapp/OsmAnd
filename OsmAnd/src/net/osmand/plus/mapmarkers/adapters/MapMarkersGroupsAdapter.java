@@ -151,6 +151,7 @@ public class MapMarkersGroupsAdapter extends RecyclerView.Adapter<RecyclerView.V
 	public RecyclerView.ViewHolder onCreateViewHolder(ViewGroup viewGroup, int viewType) {
 		if (viewType == MARKER_TYPE) {
 			View view = LayoutInflater.from(viewGroup.getContext()).inflate(R.layout.map_marker_item_new, viewGroup, false);
+			view.setClickable(true);
 			return new MapMarkerItemViewHolder(view);
 		} else if (viewType == HEADER_TYPE) {
 			View view = LayoutInflater.from(viewGroup.getContext()).inflate(R.layout.map_marker_item_header, viewGroup, false);
