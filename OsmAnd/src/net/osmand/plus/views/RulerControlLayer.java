@@ -246,21 +246,23 @@ public class RulerControlLayer extends OsmandMapLayer {
 	}
 
 	private void drawTwoFingersDistance(Canvas canvas, RotatedTileBox tb, LatLon firstTouch, LatLon secondTouch, boolean nightMode) {
-		float x1 = tb.getPixXFromLonNoRot(firstTouch.getLongitude());
-		float y1 = tb.getPixYFromLatNoRot(firstTouch.getLatitude());
-		float x2 = tb.getPixXFromLonNoRot(secondTouch.getLongitude());
-		float y2 = tb.getPixYFromLatNoRot(secondTouch.getLatitude());
+		float x1 = tb.getPixXFromLatLon(firstTouch.getLatitude(), firstTouch.getLongitude());
+		float y1 = tb.getPixYFromLatLon(firstTouch.getLatitude(), firstTouch.getLongitude());
+		float x2 = tb.getPixXFromLatLon(secondTouch.getLatitude(), secondTouch.getLongitude());
+		float y2 = tb.getPixYFromLatLon(secondTouch.getLatitude(), secondTouch.getLongitude());
 
 		Path path = new Path();
 		path.moveTo(x1, y1);
 		path.lineTo(x2, y2);
 
+		String text = OsmAndFormatter.getFormattedDistance((float) MapUtils.getDistance(firstTouch, secondTouch), app);
+
+		canvas.rotate(-tb.getRotate(), tb.getCenterPixelX(), tb.getCenterPixelY());
 		canvas.drawPath(path, lineAttrs.paint);
 		drawFingerTouchIcon(canvas, x1, y1, nightMode);
 		drawFingerTouchIcon(canvas, x2, y2, nightMode);
-
-		String text = OsmAndFormatter.getFormattedDistance((float) MapUtils.getDistance(firstTouch, secondTouch), app);
 		drawTextOnCenterOfPath(canvas, x1, x2, path, text);
+		canvas.rotate(tb.getRotate(), tb.getCenterPixelX(), tb.getCenterPixelY());
 	}
 
 	private void drawTextOnCenterOfPath(Canvas canvas, float x1, float x2, Path path, String text) {
