@@ -239,9 +239,8 @@ public class LiveUpdatesSettingsDialogFragment extends DialogFragment {
 
 			final IncrementalChangesManager changesManager =
 					getMyApplication().getResourceManager().getChangesManager();
-			final File baseFile = new File(localIndexInfo);
 			final String fileNameWithoutExtension =
-					Algorithms.getFileNameWithoutExtension(baseFile);
+					Algorithms.getFileNameWithoutExtension(new File(localIndexInfo));
 			AlertDialog.Builder builder = new AlertDialog.Builder(getActivity());
 			builder.setMessage(getString(R.string.clear_updates_proposition_message)
 					+ " " + getUpdatesSize(fileNameWithoutExtension, changesManager))
