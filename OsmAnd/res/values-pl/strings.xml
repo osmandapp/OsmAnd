@@ -2643,8 +2643,8 @@ Reprezentuje obszar: %1$s x %2$s</string>
     <string name="routing_attr_relief_smoothness_factor_name">Wybierz gładkość cieniowanie rzeźby terenu</string>
     <string name="do_not_send_anonymous_app_usage">Nie wysyłaj anonimowych statystyk użytkowania</string>
     <string name="do_not_send_anonymous_app_usage_desc">OsmAnd zbiera informacje o tym, z których części aplikacji korzysta użytkownik. Twoja lokalizacja nie jest nigdy wysyłana, tak jak teksty wpisywane w aplikacji i szczegóły dotyczące przeglądanych, wyszukiwanych i pobieranych obszarów.</string>
-    <string name="do_not_show_startup_messages">Nie pokazuj wiadomości przy starcie</string>
-    <string name="do_not_show_startup_messages_desc">Wyłączenie wyświetlania rabatów na program i wiadomości specjalnych o wydarzeniach lokalnych</string>
+    <string name="do_not_show_startup_messages">Ukrywanie wiadomości podczas uruchamiania</string>
+    <string name="do_not_show_startup_messages_desc">Nie wyświetla rabatów na program i wiadomości specjalnych o wydarzeniach lokalnych</string>
     <string name="parking_options">Opcje parkowania</string>
     <string name="full_version_thanks">Dziękujemy za zakup pełnej wersji OsmAnd!</string>
     <string name="right_side_navigation">Ruch prawostronny</string>
@@ -2833,7 +2833,7 @@ Reprezentuje obszar: %1$s x %2$s</string>
     <string name="add_segment_to_the_track">Dodaj do śladu GPX</string>
 <string name="keep_showing_on_map">Wyświetlanie na mapie</string>
     <string name="exit_without_saving">Zakończyć bez zapisywania?</string>
-    <string name="do_not_use_animations">Wyłącz animacje</string>
+    <string name="do_not_use_animations">Wyłączenie animacji</string>
     <string name="do_not_use_animations_descr">Wyłącza animacje w programie</string>
     <string name="move_all_to_history">Przenieś wszystkie do historii</string>
     <string name="build_route">Oblicz trasę</string>
@@ -2842,7 +2842,7 @@ Reprezentuje obszar: %1$s x %2$s</string>
     <string name="marker_options">Opcje znacznika</string>
     <string name="marker_show_distance_descr">Wybierz w jaki sposób wskazywać odległość i kierunek do znaczników mapy na ekranie:</string>
     <string name="map_orientation_change_in_accordance_with_speed">Zmiana orientacji mapy</string>
-    <string name="map_orientation_change_in_accordance_with_speed_descr">Wybierz prędkość poniżej której orientacja mapy zmieni się z „według kierunku poruszania” na „według kompasu”</string>
+    <string name="map_orientation_change_in_accordance_with_speed_descr">Wybiera prędkość, poniżej której orientacja mapy zmieni się z „względem kierunku ruchu” na „względem kompasu”</string>
     <string name="all_markers_moved_to_history">Wszystkie znaczniki mapy przeniesiono do historii</string>
     <string name="marker_moved_to_history">Znacznik mapy przeniesiono do historii</string>
     <string name="marker_moved_to_active">Znacznik mapy przeniesiono do aktywnych</string>
@@ -2856,4 +2856,9 @@ Reprezentuje obszar: %1$s x %2$s</string>
     <string name="this_year">Ten rok</string>
     <string name="widget">Widżet</string>
     <string name="top_bar">Belka górna</string>
+    <string name="remove_from_map_markers">Usuń ze znaczników mapy</string>
+    <string name="descendingly">Malejąco</string>
+    <string name="ascendingly">Rosnąco</string>
+    <string name="date_added">Data dodania</string>
+    <string name="order_by">Porządkowanie według:</string>
     </resources>
