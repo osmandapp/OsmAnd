@@ -1484,7 +1484,7 @@ Afghanistan, Ägypten, Albanien, Algerien, Andorra, Angola, Anguilla, Antigua un
 	<string name="osmo_auto_send_locations_descr">Nach App-Start automatisch Streckenaufzeichnung starten und Positionen senden</string>
 	<string name="osmo_auto_send_locations">Automatische Streckenaufzeichnung</string>
 	<string name="osmo_tracker_id">Aufzeichnungskennung</string>
-	<string name="osmo_tracker_id_descr">Tippen, um Aufzeichnungskennung anzuzeigen</string>
+	<string name="osmo_tracker_id_descr">Tippen, um Aufzeichnungs-ID anzuzeigen</string>
 	<string name="osmo_session_token">Sitzungstoken: %1$s</string>
 	<string name="osmo_auth_pending">Auf Autorisierung warten…</string>
 	<string name="osmo_locations_sent">Gesendete Standorte %1$d (im Zwischenspeicher %2$d) </string>
@@ -2813,7 +2813,7 @@ Abgedeckte Fläche: %1$s x %2$s</string>
     <string name="exit_without_saving">Beenden ohne zu speichern?</string>
     <string name="move_all_to_history">Alles zu Historie verschieben</string>
     <string name="build_route">Route erstellen</string>
-    <string name="show_direction">Richtung anzeigen</string>
+    <string name="show_direction">Angabe der Entfernung</string>
     <string name="sort_by">Sortieren nach</string>
     <string name="marker_options">Marker-Optionen</string>
     <string name="show_guide_line">Hilfslinien zeigen</string>
