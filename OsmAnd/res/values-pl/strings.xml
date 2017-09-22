@@ -2861,4 +2861,8 @@ Reprezentuje obszar: %1$s x %2$s</string>
     <string name="ascendingly">Rosnąco</string>
     <string name="date_added">Data dodania</string>
     <string name="order_by">Porządkowanie według:</string>
+    <string name="show_guide_line">Wyświetl linię przewodnią</string>
+    <string name="show_arrows_on_the_map">Wyświetl strzałki na mapie</string>
+    <string name="show_passed">Wyświetl minione</string>
+    <string name="hide_passed">Ukryj minione</string>
     </resources>
