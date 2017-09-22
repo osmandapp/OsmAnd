@@ -369,6 +369,8 @@ public class IncrementalChangesManager {
 				resourceManager.closeFile(regionUpdate.file.getName());
 			}
 		}
+		ruf.dayUpdates.clear();
+		ruf.monthUpdates.clear();
 	}
 
 	public long getTimestamp(String fileName) {
