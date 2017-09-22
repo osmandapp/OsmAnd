@@ -239,8 +239,9 @@ public class LiveUpdatesSettingsDialogFragment extends DialogFragment {
 
 			final IncrementalChangesManager changesManager =
 					getMyApplication().getResourceManager().getChangesManager();
+			final File baseFile = new File(localIndexInfo);
 			final String fileNameWithoutExtension =
-					Algorithms.getFileNameWithoutExtension(new File(localIndexInfo));
+					Algorithms.getFileNameWithoutExtension(baseFile);
 			AlertDialog.Builder builder = new AlertDialog.Builder(getActivity());
 			builder.setMessage(getString(R.string.clear_updates_proposition_message)
 					+ " " + getUpdatesSize(fileNameWithoutExtension, changesManager))
@@ -248,6 +249,7 @@ public class LiveUpdatesSettingsDialogFragment extends DialogFragment {
 						@Override
 						public void onClick(DialogInterface dialog, int which) {
 							changesManager.deleteUpdates(fileNameWithoutExtension);
+							changesManager.removeRegionUpdateReferences(fileNameWithoutExtension);
 							preferenceLastCheck(localIndexInfo, getMyApplication().getSettings()).resetToDefault();
 						}
 					})
