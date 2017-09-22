@@ -154,13 +154,13 @@ public class MapMarkersHistoryAdapter extends RecyclerView.Adapter<RecyclerView.
 			itemViewHolder.iconDirection.setVisibility(View.GONE);
 			itemViewHolder.leftPointSpace.setVisibility(View.GONE);
 			itemViewHolder.rightPointSpace.setVisibility(View.GONE);
-			if (position == getItemCount() - 1) {
-				itemViewHolder.bottomShadow.setVisibility(View.VISIBLE);
+			boolean lastItem = position == getItemCount() - 1;
+			if ((getItemCount() > position + 1 && getItemViewType(position + 1) == HEADER_TYPE) || lastItem) {
 				itemViewHolder.divider.setVisibility(View.GONE);
 			} else {
-				itemViewHolder.bottomShadow.setVisibility(View.GONE);
 				itemViewHolder.divider.setVisibility(View.VISIBLE);
 			}
+			itemViewHolder.bottomShadow.setVisibility(lastItem ? View.VISIBLE : View.GONE);
 		} else if (holder instanceof MapMarkerHeaderViewHolder) {
 			final MapMarkerHeaderViewHolder dateViewHolder = (MapMarkerHeaderViewHolder) holder;
 			final Integer dateHeader = (Integer) getItem(position);
