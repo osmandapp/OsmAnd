@@ -97,7 +97,7 @@
                     android:layout_gravity="center_vertical|end"
                     android:maxLines="1"
                     android:textAppearance="@style/TextAppearance.ListItemTitle"
-                    android:textColor="@color/map_widget_blue_pressed"
+                    tools:textColor="@color/map_widget_blue_pressed"
                     tools:text="Top bar"/>
             </LinearLayout>
 

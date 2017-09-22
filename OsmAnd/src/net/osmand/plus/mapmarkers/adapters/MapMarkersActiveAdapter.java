@@ -114,8 +114,8 @@ public class MapMarkersActiveAdapter extends RecyclerView.Adapter<MapMarkerItemV
 			holder.icon.setImageDrawable(iconsCache.getIcon(R.drawable.ic_action_flag_dark, markerColor));
 			holder.mainLayout.setBackgroundColor(ContextCompat.getColor(mapActivity, night ? R.color.bg_color_dark : R.color.bg_color_light));
 			holder.title.setTextColor(ContextCompat.getColor(mapActivity, night ? R.color.color_white : R.color.color_black));
-			holder.divider.setBackgroundColor(ContextCompat.getColor(mapActivity, night ? R.color.dashboard_divider_dark : R.color.dashboard_divider_light));
-			holder.optionsBtn.setBackgroundDrawable(mapActivity.getResources().getDrawable(R.drawable.marker_circle_background_light_with_inset));
+			holder.divider.setBackgroundColor(ContextCompat.getColor(mapActivity, night ? R.color.actionbar_dark_color : R.color.dashboard_divider_light));
+			holder.optionsBtn.setBackgroundDrawable(mapActivity.getResources().getDrawable(night ? R.drawable.marker_circle_background_dark_with_inset : R.drawable.marker_circle_background_light_with_inset));
 			holder.optionsBtn.setImageDrawable(iconsCache.getThemedIcon(R.drawable.ic_action_marker_passed));
 			holder.iconReorder.setImageDrawable(iconsCache.getThemedIcon(R.drawable.ic_action_reorder));
 			holder.description.setTextColor(ContextCompat.getColor(mapActivity, night ? R.color.dash_search_icon_dark : R.color.icon_color));
@@ -235,7 +235,7 @@ public class MapMarkersActiveAdapter extends RecyclerView.Adapter<MapMarkerItemV
 		final int pos = holder.getAdapterPosition();
 		final MapMarker marker = getItem(pos);
 		int snackbarStringRes;
-		if (direction == ItemTouchHelper.LEFT) {
+		if (direction == ItemTouchHelper.RIGHT) {
 			mapActivity.getMyApplication().getMapMarkersHelper().moveMapMarkerToHistory(marker);
 			MapMarkersHelper.MapMarkersGroup group = mapActivity.getMyApplication().getMapMarkersHelper().getMapMarkerGroupByName(marker.groupName);
 			if (group != null) {
@@ -256,7 +256,7 @@ public class MapMarkersActiveAdapter extends RecyclerView.Adapter<MapMarkerItemV
 				.setAction(R.string.shared_string_undo, new View.OnClickListener() {
 					@Override
 					public void onClick(View view) {
-						if (direction == ItemTouchHelper.LEFT) {
+						if (direction == ItemTouchHelper.RIGHT) {
 							mapActivity.getMyApplication().getMapMarkersHelper().restoreMarkerFromHistory(marker, pos);
 						} else {
 							mapActivity.getMyApplication().getMapMarkersHelper().addMarker(marker, pos);

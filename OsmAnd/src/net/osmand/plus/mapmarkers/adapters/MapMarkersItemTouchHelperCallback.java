@@ -33,7 +33,7 @@ public class MapMarkersItemTouchHelperCallback extends ItemTouchHelper.Callback 
 	private String delStr;
 	private String moveToHistoryStr;
 
-	private int moveToHistoryStrWidth;
+	private int delStrWidth;
 	private int textHeight;
 
 	public MapMarkersItemTouchHelperCallback(MapActivity mapActivity, ItemTouchHelperAdapter adapter) {
@@ -58,8 +58,8 @@ public class MapMarkersItemTouchHelperCallback extends ItemTouchHelper.Callback 
 		moveToHistoryStr = mapActivity.getString(R.string.move_to_history).toUpperCase();
 		Rect bounds = new Rect();
 
-		textPaint.getTextBounds(moveToHistoryStr, 0, moveToHistoryStr.length(), bounds);
-		moveToHistoryStrWidth = bounds.width();
+		textPaint.getTextBounds(delStr, 0, delStr.length(), bounds);
+		delStrWidth = bounds.width();
 		textHeight = bounds.height();
 	}
 
@@ -104,15 +104,15 @@ public class MapMarkersItemTouchHelperCallback extends ItemTouchHelper.Callback 
 			float textMarginTop = ((float) itemView.getHeight() - (float) textHeight) / 2;
 			if (dX > 0) {
 				c.drawRect(itemView.getLeft(), itemView.getTop(), dX, itemView.getBottom(), backgroundPaint);
-				float iconMarginTop = ((float) itemView.getHeight() - (float) deleteBitmap.getHeight()) / 2;
-				c.drawBitmap(deleteBitmap, itemView.getLeft() + marginSides, itemView.getTop() + iconMarginTop, iconPaint);
-				c.drawText(delStr, itemView.getLeft() + 2 * marginSides + deleteBitmap.getWidth(),
+				float iconMarginTop = ((float) itemView.getHeight() - (float) resetBitmap.getHeight()) / 2;
+				c.drawBitmap(resetBitmap, itemView.getLeft() + marginSides, itemView.getTop() + iconMarginTop, iconPaint);
+				c.drawText(moveToHistoryStr, itemView.getLeft() + 2 * marginSides + resetBitmap.getWidth(),
 						itemView.getTop() + textMarginTop + textHeight, textPaint);
 			} else {
 				c.drawRect(itemView.getRight() + dX, itemView.getTop(), itemView.getRight(), itemView.getBottom(), backgroundPaint);
-				float iconMarginTop = ((float) itemView.getHeight() - (float) resetBitmap.getHeight()) / 2;
-				c.drawBitmap(resetBitmap, itemView.getRight() - resetBitmap.getWidth() - marginSides, itemView.getTop() + iconMarginTop, iconPaint);
-				c.drawText(moveToHistoryStr, itemView.getRight() - resetBitmap.getWidth() - 2 * marginSides - moveToHistoryStrWidth,
+				float iconMarginTop = ((float) itemView.getHeight() - (float) deleteBitmap.getHeight()) / 2;
+				c.drawBitmap(deleteBitmap, itemView.getRight() - deleteBitmap.getWidth() - marginSides, itemView.getTop() + iconMarginTop, iconPaint);
+				c.drawText(delStr, itemView.getRight() - deleteBitmap.getWidth() - 2 * marginSides - delStrWidth,
 						itemView.getTop() + textMarginTop + textHeight, textPaint);
 			}
 		}

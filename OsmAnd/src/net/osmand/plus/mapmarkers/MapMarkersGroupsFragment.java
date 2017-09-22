@@ -74,8 +74,8 @@ public class MapMarkersGroupsFragment extends Fragment implements OsmAndCompassL
 		final String moveToHistoryStr = getString(R.string.move_to_history).toUpperCase();
 		final Rect bounds = new Rect();
 
-		textPaint.getTextBounds(moveToHistoryStr, 0, moveToHistoryStr.length(), bounds);
-		final int moveToHistoryStrWidth = bounds.width();
+		textPaint.getTextBounds(delStr, 0, delStr.length(), bounds);
+		final int delStrWidth = bounds.width();
 		final int textHeight = bounds.height();
 
 		ItemTouchHelper.SimpleCallback simpleItemTouchCallback = new ItemTouchHelper.SimpleCallback(0, ItemTouchHelper.LEFT | ItemTouchHelper.RIGHT) {
@@ -129,15 +129,15 @@ public class MapMarkersGroupsFragment extends Fragment implements OsmAndCompassL
 					float textMarginTop = ((float) itemView.getHeight() - (float) textHeight) / 2;
 					if (dX > 0) {
 						c.drawRect(itemView.getLeft(), itemView.getTop(), dX, itemView.getBottom(), backgroundPaint);
-						float iconMarginTop = ((float) itemView.getHeight() - (float) deleteBitmap.getHeight()) / 2;
-						c.drawBitmap(deleteBitmap, itemView.getLeft() + marginSides, itemView.getTop() + iconMarginTop, iconPaint);
-						c.drawText(delStr, itemView.getLeft() + 2 * marginSides + deleteBitmap.getWidth(),
+						float iconMarginTop = ((float) itemView.getHeight() - (float) resetBitmap.getHeight()) / 2;
+						c.drawBitmap(resetBitmap, itemView.getLeft() + marginSides, itemView.getTop() + iconMarginTop, iconPaint);
+						c.drawText(moveToHistoryStr, itemView.getLeft() + 2 * marginSides + resetBitmap.getWidth(),
 								itemView.getTop() + textMarginTop + textHeight, textPaint);
 					} else {
 						c.drawRect(itemView.getRight() + dX, itemView.getTop(), itemView.getRight(), itemView.getBottom(), backgroundPaint);
-						float iconMarginTop = ((float) itemView.getHeight() - (float) resetBitmap.getHeight()) / 2;
-						c.drawBitmap(resetBitmap, itemView.getRight() - resetBitmap.getWidth() - marginSides, itemView.getTop() + iconMarginTop, iconPaint);
-						c.drawText(moveToHistoryStr, itemView.getRight() - resetBitmap.getWidth() - 2 * marginSides - moveToHistoryStrWidth,
+						float iconMarginTop = ((float) itemView.getHeight() - (float) deleteBitmap.getHeight()) / 2;
+						c.drawBitmap(deleteBitmap, itemView.getRight() - deleteBitmap.getWidth() - marginSides, itemView.getTop() + iconMarginTop, iconPaint);
+						c.drawText(delStr, itemView.getRight() - deleteBitmap.getWidth() - 2 * marginSides - delStrWidth,
 								itemView.getTop() + textMarginTop + textHeight, textPaint);
 					}
 				}
@@ -160,7 +160,7 @@ public class MapMarkersGroupsFragment extends Fragment implements OsmAndCompassL
 				if (item instanceof MapMarker) {
 					final MapMarker marker = (MapMarker) item;
 					int snackbarStringRes;
-					if (direction == ItemTouchHelper.LEFT) {
+					if (direction == ItemTouchHelper.RIGHT) {
 						mapActivity.getMyApplication().getMapMarkersHelper().moveMapMarkerToHistory((MapMarker) item);
 						MapMarkersHelper.MapMarkersGroup group = mapActivity.getMyApplication().getMapMarkersHelper().getMapMarkerGroupByName(marker.groupName);
 						if (group != null) {
@@ -176,7 +176,7 @@ public class MapMarkersGroupsFragment extends Fragment implements OsmAndCompassL
 							.setAction(R.string.shared_string_undo, new View.OnClickListener() {
 								@Override
 								public void onClick(View view) {
-									if (direction == ItemTouchHelper.LEFT) {
+									if (direction == ItemTouchHelper.RIGHT) {
 										mapActivity.getMyApplication().getMapMarkersHelper().restoreMarkerFromHistory(marker, 0);
 									} else {
 										mapActivity.getMyApplication().getMapMarkersHelper().addMarker(marker);
