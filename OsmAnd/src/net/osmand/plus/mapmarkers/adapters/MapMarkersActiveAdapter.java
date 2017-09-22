@@ -151,7 +151,13 @@ public class MapMarkersActiveAdapter extends RecyclerView.Adapter<MapMarkerItemV
 				descr = mapActivity.getString(R.string.shared_string_favorites);
 			}
 		} else {
-			descr = new SimpleDateFormat("MMM dd", Locale.getDefault()).format(new Date(marker.creationDate));
+			Date date = new Date(marker.creationDate);
+			String month = new SimpleDateFormat("MMM", Locale.getDefault()).format(date);
+			if (month.length() > 1) {
+				month = Character.toUpperCase(month.charAt(0)) + month.substring(1);
+			}
+			String day = new SimpleDateFormat("dd", Locale.getDefault()).format(date);
+			descr = month + " " + day;
 		}
 		holder.description.setText(descr);
 
