@@ -248,7 +248,6 @@ public class LiveUpdatesSettingsDialogFragment extends DialogFragment {
 						@Override
 						public void onClick(DialogInterface dialog, int which) {
 							changesManager.deleteUpdates(fileNameWithoutExtension);
-							changesManager.removeRegionUpdateReferences(fileNameWithoutExtension);
 							preferenceLastCheck(localIndexInfo, getMyApplication().getSettings()).resetToDefault();
 						}
 					})
