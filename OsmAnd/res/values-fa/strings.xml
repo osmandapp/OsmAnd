@@ -71,7 +71,7 @@
     
 	<string name="rendering_attr_noAdminboundaries_name">مخفی کردن محدوده‌ها</string>
 	<string name="map_widget_max_speed">سرعت مجاز</string>
-    <string name="route_descr_lat_lon">طول جغرافیایی %1$.3f, عرض جغرافیایی %2$.3f</string>
+    <string name="route_descr_lat_lon">عرض جغرافیایی %1$.3f, طول جغرافیایی %2$.3f</string>
     
     <string name="no_buildings_found">ساختمانی یافت نشد.</string>
     <string name="search_villages_and_postcodes">جستجوی روستاها/کد پستی</string>
@@ -1606,7 +1606,9 @@
 	
 	<string name="share_note">به اشتراک گزاری یادداشت</string>
 	
-    <string name="location_on_map">موقعیت:\n…طول %1$s\n…عرض %2$s</string>
+    <string name="location_on_map">موقعیت:
+\n عرض %1$s
+\n طول %2$s</string>
 	<string name="watch">دیدن</string>
 	<string name="notes">یادداشتها</string>
 	<string name="online_map">نقشه آنلاین</string>
@@ -1780,8 +1782,8 @@
     <string name="waypoint_visit_after"/>
     <string name="waypoint_visit_before"/>
     <string name="simulate_your_location">شبیه‌سازی موقعیت شما</string>
-    <string name="short_location_on_map">"طول %1$s
-عرض  %2$s"</string>
+    <string name="short_location_on_map">%1$s
+\n%2$s</string>
     <string name="tips_and_tricks_descr">سوالهای بیشتر پرسیده شده، تغییرات اخیر و سایر موارد</string>
     <string name="shared_string_ellipsis">…</string>
 	<string name="shared_string_selected">انتخاب شده</string>
@@ -2160,4 +2162,17 @@
     <string name="quick_action_start_stop_navigation">شروع/اتمام مسیریابی</string>
     <string name="shared_string_reset">تنظیم مجدد</string>
     <string name="shared_string_reload">بارگذاری مجدد</string>
+    <string name="remove_from_map_markers">از نشان‌های نقشه حذف شود</string>
+    <string name="ascendingly">صعودی</string>
+    <string name="date_added">تاریخ ایجاد</string>
+    <string name="order_by">ترتیب بر اساس:</string>
+    <string name="shared_string_groups">گروه‌ها</string>
+    <string name="today">امروز</string>
+    <string name="yesterday">دیروز</string>
+    <string name="last_seven_days">هفت روز گذشته</string>
+    <string name="this_year">امسال</string>
+    <string name="sort_by">ترتیب بر اساس</string>
+    <string name="exit_without_saving">بدون ذخیره‌کردن خارج می‌شوید؟</string>
+    <string name="line">خط</string>
+    <string name="shared_string_options">گزینه‌ها</string>
     </resources>
