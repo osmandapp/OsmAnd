@@ -2885,4 +2885,8 @@
     <string name="ascendingly">Па ўзрастанні</string>
     <string name="date_added">Дата дададзеная</string>
     <string name="order_by">Сартаваць па:</string>
+    <string name="show_guide_line">Паказаць лінію кірунку</string>
+    <string name="show_arrows_on_the_map">Паказаць стрэлкі на карце</string>
+    <string name="show_passed">Паказаць пройдзеныя</string>
+    <string name="hide_passed">Схаваць пройдзенныя</string>
     </resources>
