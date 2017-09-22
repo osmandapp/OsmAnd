@@ -41,7 +41,7 @@ public class MapMarkersLayer extends OsmandMapLayer implements IContextMenuProvi
 		IContextMenuProviderSelection, ContextMenuLayer.IMoveObjectProvider {
 
 	protected static final int DIST_TO_SHOW = 80;
-	private static final int TEXT_SIZE = 14;
+	private static final int TEXT_SIZE = 12;
 	private static final int VERTICAL_OFFSET = 10;
 
 	private final MapActivity map;

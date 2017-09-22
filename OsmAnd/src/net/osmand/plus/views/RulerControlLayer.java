@@ -32,10 +32,11 @@ import gnu.trove.list.array.TIntArrayList;
 
 public class RulerControlLayer extends OsmandMapLayer {
 
-	private static final int VERTICAL_OFFSET = 10;
+	private static final int VERTICAL_OFFSET = 15;
 	private static final long DRAW_TIME = 2000;
 	private static final long DELAY_BEFORE_DRAW = 500;
 	private static final int TEXT_SIZE = 14;
+	private static final int DISTANCE_TEXT_SIZE = 16;
 
 	private final MapActivity mapActivity;
 	private OsmandApplication app;
@@ -77,6 +78,8 @@ public class RulerControlLayer extends OsmandMapLayer {
 	private RenderingLineAttributes lineAttrs;
 	private RenderingLineAttributes circleAttrs;
 	private RenderingLineAttributes circleAttrsAlt;
+	private float circleTextSize;
+	private float lineTextSize;
 
 	private Handler handler;
 
@@ -119,15 +122,16 @@ public class RulerControlLayer extends OsmandMapLayer {
 
 		lineAttrs = new RenderingLineAttributes("rulerLine");
 
-		float textSize = TEXT_SIZE * mapActivity.getResources().getDisplayMetrics().density;
+		circleTextSize = TEXT_SIZE * mapActivity.getResources().getDisplayMetrics().density;
+		lineTextSize = DISTANCE_TEXT_SIZE * mapActivity.getResources().getDisplayMetrics().density;
 
 		circleAttrs = new RenderingLineAttributes("rulerCircle");
-		circleAttrs.paint2.setTextSize(textSize);
-		circleAttrs.paint3.setTextSize(textSize);
+		circleAttrs.paint2.setTextSize(circleTextSize);
+		circleAttrs.paint3.setTextSize(circleTextSize);
 
 		circleAttrsAlt = new RenderingLineAttributes("rulerCircleAlt");
-		circleAttrsAlt.paint2.setTextSize(textSize);
-		circleAttrsAlt.paint3.setTextSize(textSize);
+		circleAttrsAlt.paint2.setTextSize(circleTextSize);
+		circleAttrsAlt.paint3.setTextSize(circleTextSize);
 
 		handler = new Handler() {
 			@Override
@@ -219,6 +223,8 @@ public class RulerControlLayer extends OsmandMapLayer {
 				updateData(tb, center);
 				RenderingLineAttributes attrs;
 				if (mode == RulerMode.FIRST) {
+					circleAttrs.paint2.setTextSize(circleTextSize);
+					circleAttrs.paint3.setTextSize(circleTextSize);
 					attrs = circleAttrs;
 				} else {
 					attrs = circleAttrsAlt;
@@ -262,6 +268,9 @@ public class RulerControlLayer extends OsmandMapLayer {
 		Rect bounds = new Rect();
 		circleAttrs.paint2.getTextBounds(text, 0, text.length(), bounds);
 		float hOffset = pm.getLength() / 2 - bounds.width() / 2;
+
+		circleAttrs.paint2.setTextSize(lineTextSize);
+		circleAttrs.paint3.setTextSize(lineTextSize);
 
 		if (x1 >= x2) {
 			float[] pos = new float[2];
