@@ -2831,4 +2831,5 @@ Abgedeckte Fläche: %1$s x %2$s</string>
     <string name="yesterday">Gestern</string>
     <string name="last_seven_days">Letzte 7 Tage</string>
     <string name="this_year">Dieses Jahr</string>
+    <string name="passed">Passiert: %1$s</string>
     </resources>
