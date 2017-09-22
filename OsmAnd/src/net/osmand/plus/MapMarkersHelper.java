@@ -723,7 +723,7 @@ public class MapMarkersHelper {
 		}
 	}
 
-	public void moveMapMarker(@Nullable MapMarker marker, LatLon latLon) {
+	public void moveMapMarker(MapMarker marker, LatLon latLon) {
 		if (marker != null) {
 			LatLon point = new LatLon(latLon.getLatitude(), latLon.getLongitude());
 			int index = mapMarkers.indexOf(marker);
@@ -734,6 +734,7 @@ public class MapMarkersHelper {
 			markersDbHelper.updateMarker(marker);
 			checkAndFixActiveMarkersOrderIfNeeded();
 			refresh();
+			lookupAddress(marker);
 		}
 	}
 
