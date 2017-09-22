@@ -2816,4 +2816,19 @@ Abgedeckte Fläche: %1$s x %2$s</string>
     <string name="show_direction">Richtung anzeigen</string>
     <string name="sort_by">Sortieren nach</string>
     <string name="marker_options">Marker-Optionen</string>
+    <string name="show_guide_line">Hilfslinien zeigen</string>
+    <string name="show_arrows_on_the_map">Pfeile auf der Karte anzeigen</string>
+    <string name="remove_from_map_markers">Entfernen von Kartenmarkierungen</string>
+    <string name="descendingly">Absteigend</string>
+    <string name="ascendingly">Aufsteigend</string>
+    <string name="date_added">Hinzugefügt am</string>
+    <string name="order_by">Sortieren nach:</string>
+    <string name="all_markers_moved_to_history">Alle Kartenmarkierungen in den Verlauf verschoben</string>
+    <string name="shared_string_list">Liste</string>
+    <string name="shared_string_groups">Gruppen</string>
+    <string name="make_active">Aktivieren</string>
+    <string name="today">Heute</string>
+    <string name="yesterday">Gestern</string>
+    <string name="last_seven_days">Letzte 7 Tage</string>
+    <string name="this_year">Dieses Jahr</string>
     </resources>
