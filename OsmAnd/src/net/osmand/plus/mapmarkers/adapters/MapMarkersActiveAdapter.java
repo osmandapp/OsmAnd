@@ -235,7 +235,7 @@ public class MapMarkersActiveAdapter extends RecyclerView.Adapter<MapMarkerItemV
 		final int pos = holder.getAdapterPosition();
 		final MapMarker marker = getItem(pos);
 		int snackbarStringRes;
-		if (direction == ItemTouchHelper.LEFT) {
+		if (direction == ItemTouchHelper.RIGHT) {
 			mapActivity.getMyApplication().getMapMarkersHelper().moveMapMarkerToHistory(marker);
 			MapMarkersHelper.MapMarkersGroup group = mapActivity.getMyApplication().getMapMarkersHelper().getMapMarkerGroupByName(marker.groupName);
 			if (group != null) {
@@ -256,7 +256,7 @@ public class MapMarkersActiveAdapter extends RecyclerView.Adapter<MapMarkerItemV
 				.setAction(R.string.shared_string_undo, new View.OnClickListener() {
 					@Override
 					public void onClick(View view) {
-						if (direction == ItemTouchHelper.LEFT) {
+						if (direction == ItemTouchHelper.RIGHT) {
 							mapActivity.getMyApplication().getMapMarkersHelper().restoreMarkerFromHistory(marker, pos);
 						} else {
 							mapActivity.getMyApplication().getMapMarkersHelper().addMarker(marker, pos);
