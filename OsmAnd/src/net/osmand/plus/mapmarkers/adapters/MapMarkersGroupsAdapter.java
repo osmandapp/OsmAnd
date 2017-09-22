@@ -172,7 +172,12 @@ public class MapMarkersGroupsAdapter extends RecyclerView.Adapter<RecyclerView.V
 
 			final boolean markerInHistory = marker.history;
 
-			int color = MapMarker.getColorId(marker.colorIndex);
+			int color;
+			if (marker.history) {
+				color = R.color.icon_color_light;
+			} else {
+				color = MapMarker.getColorId(marker.colorIndex);
+			}
 			ImageView markerImageViewToUpdate;
 			int drawableResToUpdate;
 			final boolean markerToHighlight = showDirectionMarkers.contains(marker);

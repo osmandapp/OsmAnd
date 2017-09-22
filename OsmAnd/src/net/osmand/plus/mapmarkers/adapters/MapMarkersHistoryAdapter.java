@@ -120,7 +120,7 @@ public class MapMarkersHistoryAdapter extends RecyclerView.Adapter<RecyclerView.
 			final MapMarker marker = (MapMarker) getItem(position);
 			itemViewHolder.iconReorder.setVisibility(View.GONE);
 
-			int color = MapMarker.getColorId(marker.colorIndex);
+			int color = R.color.icon_color_light;
 			itemViewHolder.icon.setImageDrawable(iconsCache.getIcon(R.drawable.ic_action_flag_dark, color));
 
 			itemViewHolder.title.setText(marker.getName(app));
