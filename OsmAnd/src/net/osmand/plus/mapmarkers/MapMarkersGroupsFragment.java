@@ -81,7 +81,7 @@ public class MapMarkersGroupsFragment extends Fragment implements OsmAndCompassL
 		ItemTouchHelper.SimpleCallback simpleItemTouchCallback = new ItemTouchHelper.SimpleCallback(0, ItemTouchHelper.LEFT | ItemTouchHelper.RIGHT) {
 			private float marginSides = getResources().getDimension(R.dimen.list_content_padding);
 			private Bitmap deleteBitmap = BitmapFactory.decodeResource(getResources(), R.drawable.ic_action_delete_dark);
-			private Bitmap resetBitmap = BitmapFactory.decodeResource(getResources(), R.drawable.ic_action_reset_to_default_dark);
+			private Bitmap historyBitmap = BitmapFactory.decodeResource(getResources(), R.drawable.ic_action_marker_passed);
 			private boolean iconHidden;
 
 			@Override
@@ -129,9 +129,9 @@ public class MapMarkersGroupsFragment extends Fragment implements OsmAndCompassL
 					float textMarginTop = ((float) itemView.getHeight() - (float) textHeight) / 2;
 					if (dX > 0) {
 						c.drawRect(itemView.getLeft(), itemView.getTop(), dX, itemView.getBottom(), backgroundPaint);
-						float iconMarginTop = ((float) itemView.getHeight() - (float) resetBitmap.getHeight()) / 2;
-						c.drawBitmap(resetBitmap, itemView.getLeft() + marginSides, itemView.getTop() + iconMarginTop, iconPaint);
-						c.drawText(moveToHistoryStr, itemView.getLeft() + 2 * marginSides + resetBitmap.getWidth(),
+						float iconMarginTop = ((float) itemView.getHeight() - (float) historyBitmap.getHeight()) / 2;
+						c.drawBitmap(historyBitmap, itemView.getLeft() + marginSides, itemView.getTop() + iconMarginTop, iconPaint);
+						c.drawText(moveToHistoryStr, itemView.getLeft() + 2 * marginSides + historyBitmap.getWidth(),
 								itemView.getTop() + textMarginTop + textHeight, textPaint);
 					} else {
 						c.drawRect(itemView.getRight() + dX, itemView.getTop(), itemView.getRight(), itemView.getBottom(), backgroundPaint);

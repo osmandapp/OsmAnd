@@ -26,7 +26,7 @@ public class MapMarkersItemTouchHelperCallback extends ItemTouchHelper.Callback 
 
 	private float marginSides;
 	private Bitmap deleteBitmap;
-	private Bitmap resetBitmap;
+	private Bitmap historyBitmap;
 	private boolean iconHidden;
 	private boolean night;
 
@@ -41,7 +41,7 @@ public class MapMarkersItemTouchHelperCallback extends ItemTouchHelper.Callback 
 		this.adapter = adapter;
 		marginSides = mapActivity.getResources().getDimension(R.dimen.list_content_padding);
 		deleteBitmap = BitmapFactory.decodeResource(mapActivity.getResources(), R.drawable.ic_action_delete_dark);
-		resetBitmap = BitmapFactory.decodeResource(mapActivity.getResources(), R.drawable.ic_action_reset_to_default_dark);
+		historyBitmap = BitmapFactory.decodeResource(mapActivity.getResources(), R.drawable.ic_action_marker_passed);
 		night = !mapActivity.getMyApplication().getSettings().isLightContent();
 
 		backgroundPaint.setColor(ContextCompat.getColor(mapActivity, night ? R.color.dashboard_divider_dark : R.color.dashboard_divider_light));
@@ -104,9 +104,9 @@ public class MapMarkersItemTouchHelperCallback extends ItemTouchHelper.Callback 
 			float textMarginTop = ((float) itemView.getHeight() - (float) textHeight) / 2;
 			if (dX > 0) {
 				c.drawRect(itemView.getLeft(), itemView.getTop(), dX, itemView.getBottom(), backgroundPaint);
-				float iconMarginTop = ((float) itemView.getHeight() - (float) resetBitmap.getHeight()) / 2;
-				c.drawBitmap(resetBitmap, itemView.getLeft() + marginSides, itemView.getTop() + iconMarginTop, iconPaint);
-				c.drawText(moveToHistoryStr, itemView.getLeft() + 2 * marginSides + resetBitmap.getWidth(),
+				float iconMarginTop = ((float) itemView.getHeight() - (float) historyBitmap.getHeight()) / 2;
+				c.drawBitmap(historyBitmap, itemView.getLeft() + marginSides, itemView.getTop() + iconMarginTop, iconPaint);
+				c.drawText(moveToHistoryStr, itemView.getLeft() + 2 * marginSides + historyBitmap.getWidth(),
 						itemView.getTop() + textMarginTop + textHeight, textPaint);
 			} else {
 				c.drawRect(itemView.getRight() + dX, itemView.getTop(), itemView.getRight(), itemView.getBottom(), backgroundPaint);
