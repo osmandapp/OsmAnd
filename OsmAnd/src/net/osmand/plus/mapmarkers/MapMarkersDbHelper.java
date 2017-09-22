@@ -361,8 +361,8 @@ public class MapMarkersDbHelper {
 		SQLiteConnection db = openConnection(true);
 		if (db != null) {
 			try {
-				SQLiteCursor query = db.rawQuery(MARKERS_TABLE_SELECT + " WHERE " + MARKERS_COL_ACTIVE + " = ?",
-						new String[]{String.valueOf(1)});
+				SQLiteCursor query = db.rawQuery(MARKERS_TABLE_SELECT + " WHERE " + MARKERS_COL_ACTIVE + " = ? " + "AND " + MARKERS_COL_DISABLED + " = ?",
+						new String[]{String.valueOf(1), String.valueOf(0)});
 				if (query.moveToFirst()) {
 					do {
 						MapMarker marker = readItem(query);
@@ -502,8 +502,8 @@ public class MapMarkersDbHelper {
 		SQLiteConnection db = openConnection(true);
 		if (db != null) {
 			try {
-				SQLiteCursor query = db.rawQuery(MARKERS_TABLE_SELECT + " WHERE " + MARKERS_COL_ACTIVE + " = ?",
-						new String[]{String.valueOf(0)});
+				SQLiteCursor query = db.rawQuery(MARKERS_TABLE_SELECT + " WHERE " + MARKERS_COL_ACTIVE + " = ? " + "AND " + MARKERS_COL_DISABLED + " = ?",
+						new String[]{String.valueOf(0), String.valueOf(0)});
 				if (query.moveToFirst()) {
 					do {
 						markers.add(readItem(query));

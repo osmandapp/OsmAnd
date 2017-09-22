@@ -646,6 +646,7 @@ public class MapMarkersHelper {
 		if (id != null) {
 			markersDbHelper.updateSyncGroupDisabled(id, disabled);
 		}
+		loadMarkers();
 	}
 
 	public void removeActiveMarkersFromSyncGroup(String syncGroupId) {

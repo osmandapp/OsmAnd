@@ -313,6 +313,7 @@ public class MapMarkersGroupsAdapter extends RecyclerView.Adapter<RecyclerView.V
 				headerViewHolder.iconSpace.setVisibility(View.GONE);
 				headerViewHolder.icon.setImageDrawable(iconsCache.getIcon(groupHeader.getIconRes(), R.color.divider_color));
 				boolean groupIsDisabled = groupHeader.getGroup().isDisabled();
+				headerViewHolder.disableGroupSwitch.setVisibility(View.VISIBLE);
 				headerViewHolder.disableGroupSwitch.setChecked(!groupIsDisabled);
 				headerViewHolder.disableGroupSwitch.setOnCheckedChangeListener(new CompoundButton.OnCheckedChangeListener() {
 					@Override
