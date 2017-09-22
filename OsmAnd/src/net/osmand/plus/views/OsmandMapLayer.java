@@ -166,7 +166,7 @@ public abstract class OsmandMapLayer {
 					prevY = (int) (intersection & 0xffffffff);
 					draw = true;
 				}
-				if (xs.size() == 2 && !currIn) {
+				if (i == xs.size() - 1 && !currIn) {
 					long inter = MapAlgorithms.calculateIntersection(prevX, prevY, currX, currY, 0, width, height, 0);
 					if (inter != -1) {
 						currX = (int) (inter >> 32);
