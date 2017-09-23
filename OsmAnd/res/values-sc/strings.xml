@@ -2783,6 +2783,10 @@ Pro praghere iscrie su còdighe intreu</string>
     <string name="date_added">Data annanta</string>
     <string name="order_by">Òrdina pro:</string>
     <string name="marker_show_distance_descr">Issèbera comente indicare sa distàntzia e sa diretzione a sos marcadores in sa mapa:</string>
-    <string name="passed">Coladu: %1$s</string>
+    <string name="passed">Ùrtimu impreu: %1$s</string>
     <string name="make_active">Ativa</string>
+    <string name="show_guide_line">Ammustra sa lìnia de ghia</string>
+    <string name="show_arrows_on_the_map">Ammustra sas fritzas in sa mapa</string>
+    <string name="show_passed">Ammustra sa data de ùrtimu impreu</string>
+    <string name="hide_passed">Istichi sa data de ùrtimu impreu</string>
     </resources>
