@@ -2937,7 +2937,7 @@ représentant la zone : %1$s x %2$s</string>
     <string name="passed">Date de dernière utilisation : %1$s</string>
     <string name="show_guide_line">Afficher les lignes de guidage</string>
     <string name="show_arrows_on_the_map">Afficher les flèches sur la carte</string>
-    <string name="show_passed">Afficher date de dernière utilisation</string>
+    <string name="show_passed">Afficher Date de dernière utilisation</string>
     <string name="hide_passed">Masquer Date de dernière utilisation</string>
     <string name="marker_moved_to_active">Marque activée</string>
     </resources>
