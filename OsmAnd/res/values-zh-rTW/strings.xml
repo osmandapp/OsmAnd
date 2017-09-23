@@ -2854,7 +2854,7 @@ OsmAnd (Automated Navigation Directions) 是一個地圖和導航的應用程式
     <string name="marker_moved_to_active">地圖標記已移到活動</string>
     <string name="shared_string_list">清單</string>
     <string name="shared_string_groups">群組</string>
-    <string name="passed">已經過：%1$s</string>
+    <string name="passed">上次使用：%1$s</string>
     <string name="make_active">進行活動</string>
     <string name="today">今天</string>
     <string name="yesterday">昨天</string>
@@ -2871,6 +2871,6 @@ OsmAnd (Automated Navigation Directions) 是一個地圖和導航的應用程式
     <string name="order_by">順序依照：</string>
     <string name="show_guide_line">顯示引導線路</string>
     <string name="show_arrows_on_the_map">在地圖上顯示箭頭</string>
-    <string name="show_passed">顯示已經過的</string>
-    <string name="hide_passed">隱藏已經過的</string>
+    <string name="show_passed">顯示\'上次使用\'日期</string>
+    <string name="hide_passed">隱藏\'上次使用\'日期</string>
     </resources>
