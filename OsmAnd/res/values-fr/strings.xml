@@ -2934,10 +2934,10 @@ représentant la zone : %1$s x %2$s</string>
     <string name="order_by">Trier par :</string>
     <string name="marker_show_distance_descr">Sélectionnez comment indiquer sur la carte la distance et la direction des marques :</string>
     <string name="map_orientation_change_in_accordance_with_speed_descr">Indiquez ci-dessous à quelle vitesse l\'orientation de la carte doit basculer de \'Sens du déplacement\' à \'Boussole\'</string>
-    <string name="passed">Passé : %1$s</string>
+    <string name="passed">Date de dernière utilisation : %1$s</string>
     <string name="show_guide_line">Afficher les lignes de guidage</string>
     <string name="show_arrows_on_the_map">Afficher les flèches sur la carte</string>
-    <string name="show_passed">Afficher passé</string>
-    <string name="hide_passed">Masquer passé</string>
+    <string name="show_passed">Afficher date de dernière utilisation</string>
+    <string name="hide_passed">Masquer Date de dernière utilisation</string>
     <string name="marker_moved_to_active">Marque activée</string>
     </resources>
