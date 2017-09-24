@@ -2894,4 +2894,8 @@ Van bijna alle landen is een kaart te downloaden: van Afghanistan tot Zimbabwe, 
     <string name="average">Gemiddeld</string>
     <string name="of">%1$d van de %2$d</string>
     <string name="retry">Probeer opnieuw</string>
+    <string name="descendingly">Aflopend</string>
+    <string name="ascendingly">Oplopend</string>
+    <string name="shared_string_list">Lijst</string>
+    <string name="shared_string_groups">Groepen</string>
     </resources>
