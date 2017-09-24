@@ -2823,7 +2823,7 @@ U vypadku, kali vy lubіcie OsmAnd і OSM і chočacie padtrymać jaho, heta іd
     <string name="marker_moved_to_active">Markier mapy staŭ aktyŭnym</string>
     <string name="shared_string_list">Spis</string>
     <string name="shared_string_groups">Hrupy</string>
-    <string name="passed">Projdziena: %1$s</string>
+    <string name="passed">Apošniaje vykarystannie: %1$s</string>
     <string name="make_active">Aktyvizavać</string>
     <string name="today">Sionnia</string>
     <string name="yesterday">Učora</string>
@@ -2838,6 +2838,6 @@ U vypadku, kali vy lubіcie OsmAnd і OSM і chočacie padtrymać jaho, heta іd
     <string name="order_by">Sartavać pa:</string>
     <string name="show_guide_line">Pakazać liniju kirunku</string>
     <string name="show_arrows_on_the_map">Pakazać strelki na karcie</string>
-    <string name="show_passed">Pakazać projdzienyja</string>
-    <string name="hide_passed">Schavać projdziennyja</string>
+    <string name="show_passed">Pakazać datu apošniaha vykarystannia</string>
+    <string name="hide_passed">Schavać datu apošniaha vykarystannia</string>
     </resources>
