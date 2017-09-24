@@ -9,7 +9,6 @@ import android.view.ViewGroup;
 import android.widget.TextView;
 
 import net.osmand.plus.IconsCache;
-import net.osmand.plus.MapMarkersHelper;
 import net.osmand.plus.MapMarkersHelper.MapMarker;
 import net.osmand.plus.OsmandApplication;
 import net.osmand.plus.R;
@@ -125,7 +124,13 @@ public class MapMarkersHistoryAdapter extends RecyclerView.Adapter<RecyclerView.
 
 			itemViewHolder.title.setText(marker.getName(app));
 
-			itemViewHolder.description.setText(app.getString(R.string.passed, new SimpleDateFormat("MMM dd", Locale.getDefault()).format(new Date(marker.visitedDate))));
+			Date date = new Date(marker.visitedDate);
+			String month = new SimpleDateFormat("MMM", Locale.getDefault()).format(date);
+			if (month.length() > 1) {
+				month = Character.toUpperCase(month.charAt(0)) + month.substring(1);
+			}
+			String day = new SimpleDateFormat("dd", Locale.getDefault()).format(date);
+			itemViewHolder.description.setText(app.getString(R.string.passed, month + " " + day));
 
 			itemViewHolder.optionsBtn.setBackgroundDrawable(app.getResources().getDrawable(night ? R.drawable.marker_circle_background_dark_with_inset : R.drawable.marker_circle_background_light_with_inset));
 			itemViewHolder.optionsBtn.setImageDrawable(iconsCache.getThemedIcon(R.drawable.ic_action_reset_to_default_dark));
@@ -219,7 +224,10 @@ public class MapMarkersHistoryAdapter extends RecyclerView.Adapter<RecyclerView.
 		Date date = new Date();
 		date.setMonth(month);
 		String monthStr = dateFormat.format(date);
-		return Character.toUpperCase(monthStr.charAt(0)) + monthStr.substring(1);
+		if (monthStr.length() > 1) {
+			monthStr = Character.toUpperCase(monthStr.charAt(0)) + monthStr.substring(1);
+		}
+		return monthStr;
 	}
 
 	public interface MapMarkersHistoryAdapterListener {

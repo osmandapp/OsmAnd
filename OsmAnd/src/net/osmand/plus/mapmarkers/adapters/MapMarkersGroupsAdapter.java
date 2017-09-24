@@ -213,8 +213,8 @@ public class MapMarkersGroupsAdapter extends RecyclerView.Adapter<RecyclerView.V
 			itemViewHolder.title.setText(marker.getName(app));
 
 			boolean noGroup = marker.groupName == null;
-			boolean early = false;
-			if (noGroup) {
+			boolean createdEarly = false;
+			if (noGroup && !markerInHistory) {
 				Calendar currentDateCalendar = Calendar.getInstance();
 				currentDateCalendar.setTimeInMillis(System.currentTimeMillis());
 				int currentDay = currentDateCalendar.get(Calendar.DAY_OF_YEAR);
@@ -223,22 +223,23 @@ public class MapMarkersGroupsAdapter extends RecyclerView.Adapter<RecyclerView.V
 				markerCalendar.setTimeInMillis(System.currentTimeMillis());
 				int markerDay = markerCalendar.get(Calendar.DAY_OF_YEAR);
 				int markerYear = markerCalendar.get(Calendar.YEAR);
-				early = currentDay - markerDay >= 2 || currentYear != markerYear;
+				createdEarly = currentDay - markerDay >= 2 || currentYear != markerYear;
 			}
-			if (markerInHistory) {
+			if (markerInHistory || createdEarly) {
 				itemViewHolder.point.setVisibility(View.VISIBLE);
 				itemViewHolder.description.setVisibility(View.VISIBLE);
-				itemViewHolder.description.setText(app.getString(R.string.passed, new SimpleDateFormat("MMM dd", Locale.getDefault()).format(new Date(marker.visitedDate))));
-			} else if (noGroup && early) {
-				itemViewHolder.point.setVisibility(View.VISIBLE);
-				itemViewHolder.description.setVisibility(View.VISIBLE);
-				Date date = new Date(marker.creationDate);
+				Date date;
+				if (markerInHistory) {
+					date = new Date(marker.visitedDate);
+				} else {
+					date = new Date(marker.creationDate);
+				}
 				String month = new SimpleDateFormat("MMM", Locale.getDefault()).format(date);
 				if (month.length() > 1) {
 					month = Character.toUpperCase(month.charAt(0)) + month.substring(1);
 				}
 				String day = new SimpleDateFormat("dd", Locale.getDefault()).format(date);
-				itemViewHolder.description.setText(month + " " + day);
+				itemViewHolder.description.setText(app.getString(R.string.passed, month + " " + day));
 			} else {
 				itemViewHolder.point.setVisibility(View.GONE);
 				itemViewHolder.description.setVisibility(View.GONE);
@@ -428,7 +429,10 @@ public class MapMarkersGroupsAdapter extends RecyclerView.Adapter<RecyclerView.V
 		Date date = new Date();
 		date.setMonth(month);
 		String monthStr = dateFormat.format(date);
-		return Character.toUpperCase(monthStr.charAt(0)) + monthStr.substring(1);
+		if (monthStr.length() > 1) {
+			monthStr = Character.toUpperCase(monthStr.charAt(0)) + monthStr.substring(1);
+		}
+		return monthStr;
 	}
 
 	private int getLastDisplayItemIndexOfGroup(MapMarkersGroup group) {
