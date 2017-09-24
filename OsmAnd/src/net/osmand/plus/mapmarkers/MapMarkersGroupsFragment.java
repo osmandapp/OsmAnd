@@ -81,7 +81,7 @@ public class MapMarkersGroupsFragment extends Fragment implements OsmAndCompassL
 		ItemTouchHelper.SimpleCallback simpleItemTouchCallback = new ItemTouchHelper.SimpleCallback(0, ItemTouchHelper.LEFT | ItemTouchHelper.RIGHT) {
 			private float marginSides = getResources().getDimension(R.dimen.list_content_padding);
 			private Bitmap deleteBitmap = BitmapFactory.decodeResource(getResources(), R.drawable.ic_action_delete_dark);
-			private Bitmap historyBitmap = BitmapFactory.decodeResource(getResources(), R.drawable.ic_action_marker_passed);
+			private Bitmap historyBitmap = BitmapFactory.decodeResource(getResources(), R.drawable.ic_action_history2);
 			private boolean iconHidden;
 
 			@Override
