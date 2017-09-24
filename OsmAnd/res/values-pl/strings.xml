@@ -48,7 +48,7 @@
     <string name="select_search_position">Zasób:</string>
     <string name="context_menu_item_search">Szukaj w pobliżu</string>
 
-    <string name="shared_string_save_as_gpx">Zapisywanie śladu GPX</string>
+    <string name="shared_string_save_as_gpx">Zapisz jako ślad</string>
     <string name="route_successfully_saved_at">Zapisano trasę jako „%1$s”.</string>
     <string name="filename_input">Nazwa pliku: </string>
     <string name="file_with_name_already_exist">Plik o takiej nazwie już istnieje.</string>
@@ -495,7 +495,7 @@
     <string name="save_track_interval">Częstość rejestrowania podczas nawigacji</string>
 
     <string name="save_track_to_gpx_descrp">Ślad GPX zostanie automatycznie zapisany do katalogu śladów podczas nawigacji</string>
-    <string name="save_track_to_gpx">Automatycznie rejestruj ślad podczas nawigacji</string>
+    <string name="save_track_to_gpx">Automatyczne rejestrowanie śladu podczas nawigacji</string>
     <string name="update_tile">Uaktualnij mapę</string>
     <string name="reload_tile">Wczytaj ponownie kafelki</string>
     <string name="open_street_map_login_descr">Wprowadza dane uwierzytelniające wymagane do wysyłania zmian na openstreetmap.org</string>
@@ -2836,7 +2836,7 @@ Reprezentuje obszar: %1$s x %2$s</string>
     <string name="do_not_use_animations">Wyłączenie animacji</string>
     <string name="do_not_use_animations_descr">Wyłącza animacje w programie</string>
     <string name="move_all_to_history">Przenieś wszystkie do historii</string>
-    <string name="build_route">Oblicz trasę</string>
+    <string name="build_route">Wyznacz trasę</string>
     <string name="show_direction">Wskaźnik odległości</string>
     <string name="sort_by">Kolejność sortowania</string>
     <string name="marker_options">Opcje znacznika</string>
