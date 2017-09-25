@@ -139,7 +139,7 @@ public class SnapToRoadBottomSheetDialogFragment extends android.support.design.
 				.getIcon(id, nightMode ? R.color.ctx_menu_info_text_dark : R.color.on_map_icon_color);
 	}
 
-	interface SnapToRoadFragmentListener {
+	public interface SnapToRoadFragmentListener {
 
 		void onDestroyView(boolean snapToRoadEnabled);
 

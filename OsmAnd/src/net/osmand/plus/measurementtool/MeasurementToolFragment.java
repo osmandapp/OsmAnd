@@ -173,8 +173,8 @@ public class MeasurementToolFragment extends Fragment {
 			((SaveAsNewTrackBottomSheetDialogFragment) saveAsNewTrackFragment).setListener(createSaveAsNewTrackFragmentListener());
 		}
 		// If rotate the screen from landscape to portrait when the list of points is displayed then
-		// the PointsListFragment will exist without view. This is necessary to remove it.
-		if (portrait) {
+		// the RecyclerViewFragment will exist without view. This is necessary to remove it.
+		if (!portrait) {
 			hidePointsListFragment();
 		}
 
@@ -636,7 +636,7 @@ public class MeasurementToolFragment extends Fragment {
 		return new SnapToRoadFragmentListener() {
 			@Override
 			public void onDestroyView(boolean snapToRoadEnabled) {
-				if (!snapToRoadEnabled) {
+				if (!snapToRoadEnabled && !editingCtx.isInSnapToRoadMode()) {
 					toolBarController.setTitle(previousToolBarTitle);
 					MapActivity mapActivity = getMapActivity();
 					if (mapActivity != null) {
@@ -1029,12 +1029,12 @@ public class MeasurementToolFragment extends Fragment {
 		MapActivity mapActivity = getMapActivity();
 		if (mapActivity != null) {
 			int screenHeight = AndroidUtils.getScreenHeight(mapActivity) - AndroidUtils.getStatusBarHeight(mapActivity);
-			MeasurePointsListFragment fragment = new MeasurePointsListFragment();
+			RecyclerViewFragment fragment = new RecyclerViewFragment();
 			fragment.setRecyclerView(pointsRv);
 			fragment.setWidth(upDownRow.getWidth());
 			fragment.setHeight(screenHeight - upDownRow.getHeight());
 			mapActivity.getSupportFragmentManager().beginTransaction()
-					.add(R.id.fragmentContainer, fragment, MeasurePointsListFragment.TAG)
+					.add(R.id.fragmentContainer, fragment, RecyclerViewFragment.TAG)
 					.commitAllowingStateLoss();
 		}
 	}
@@ -1044,7 +1044,7 @@ public class MeasurementToolFragment extends Fragment {
 		if (mapActivity != null) {
 			try {
 				FragmentManager manager = mapActivity.getSupportFragmentManager();
-				Fragment fragment = manager.findFragmentByTag(MeasurePointsListFragment.TAG);
+				Fragment fragment = manager.findFragmentByTag(RecyclerViewFragment.TAG);
 				if (fragment != null) {
 					manager.beginTransaction().remove(fragment).commitAllowingStateLoss();
 				}

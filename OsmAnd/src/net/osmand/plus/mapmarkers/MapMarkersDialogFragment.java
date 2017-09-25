@@ -25,7 +25,6 @@ import net.osmand.plus.OsmandSettings.MapMarkersOrderByMode;
 import net.osmand.plus.R;
 import net.osmand.plus.activities.MapActivity;
 import net.osmand.plus.activities.TrackActivity;
-import net.osmand.plus.dashboard.DashboardOnMap;
 import net.osmand.plus.mapmarkers.OptionsBottomSheetDialogFragment.MarkerOptionsFragmentListener;
 import net.osmand.plus.mapmarkers.OrderByBottomSheetDialogFragment.OrderByFragmentListener;
 import net.osmand.plus.mapmarkers.SaveAsTrackBottomSheetDialogFragment.MarkerSaveAsTrackFragmentListener;
@@ -207,7 +206,7 @@ public class MapMarkersDialogFragment extends android.support.v4.app.DialogFragm
 
 			@Override
 			public void buildRouteOnClick() {
-				mapActivity.getDashboard().setDashboardVisibility(true, DashboardOnMap.DashboardType.MAP_MARKERS_SELECTION);
+				PlanRouteFragment.showInstance(mapActivity.getSupportFragmentManager());
 				dismiss();
 			}
 
