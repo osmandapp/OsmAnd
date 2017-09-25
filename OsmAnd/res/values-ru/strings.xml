@@ -2488,4 +2488,12 @@
     <string name="measurement_tool_save_as_new_track_descr">Вы можете сохранить точки, как точки маршрута или как линию.</string>
     <string name="choose_navigation_type">Выберите профиль навигации</string>
     <string name="of">%1$d из %2$d</string>
+    <string name="shared_string_list">Список</string>
+    <string name="shared_string_groups">Группы</string>
+    <string name="passed">Последнее использование: %1$s</string>
+    <string name="make_active">Сделать активным</string>
+    <string name="today">Сегодня</string>
+    <string name="yesterday">Вчера</string>
+    <string name="last_seven_days">За последние 7 дней</string>
+    <string name="this_year">В этом году</string>
     </resources>
