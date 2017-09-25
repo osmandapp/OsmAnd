@@ -9,6 +9,9 @@
          3. All your modified/created strings are in the top of the file (to make easier find what\'s translated).
     PLEASE: Have a look at http://code.google.com/p/osmand/wiki/UIConsistency, it may really improve your and our work  :-)  Thx - Hardy
     -->
+    <string name="is_saved">is saved</string>
+    <string name="marker_save_as_track_descr">OsmAnd will save all your markers to a separate file, you can enter filename:</string>
+    <string name="marker_save_as_track">Save as track</string>
     <string name="move_to_history">Move to history</string>
     <string name="group_will_be_removed_after_restart">Group will be removed after restart</string>
     <string name="show_guide_line">Show guide line</string>

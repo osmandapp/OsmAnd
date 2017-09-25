@@ -829,13 +829,11 @@ public class MapMarkersHelper {
 		}
 	}
 
-	public void generateGpx() {
+	public String generateGpx(String fileName) {
 		final File dir = ctx.getAppPath(IndexConstants.GPX_INDEX_DIR + "/map markers");
 		if (!dir.exists()) {
 			dir.mkdirs();
 		}
-		Date date = new Date();
-		String fileName = DateFormat.format("yyyy-MM-dd", date).toString() + "_" + new SimpleDateFormat("HH-mm_EEE", Locale.US).format(date);
 		File fout = new File(dir, fileName + ".gpx");
 		int ind = 1;
 		while (fout.exists()) {
@@ -851,6 +849,7 @@ public class MapMarkersHelper {
 			file.addPoint(wpt);
 		}
 		GPXUtilities.writeGpxFile(fout, file, ctx);
+		return fout.getAbsolutePath();
 	}
 
 	private void removeHistoryMarkersFromGroups() {

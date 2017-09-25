@@ -1,5 +1,6 @@
 package net.osmand.plus.mapmarkers;
 
+import android.content.Intent;
 import android.os.Bundle;
 import android.support.annotation.NonNull;
 import android.support.annotation.Nullable;
@@ -16,6 +17,8 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.widget.TextView;
 
+import net.osmand.IndexConstants;
+import net.osmand.plus.GPXUtilities.GPXFile;
 import net.osmand.plus.LockableViewPager;
 import net.osmand.plus.MapMarkersHelper;
 import net.osmand.plus.OsmandApplication;
@@ -23,11 +26,14 @@ import net.osmand.plus.OsmandSettings;
 import net.osmand.plus.OsmandSettings.MapMarkersOrderByMode;
 import net.osmand.plus.R;
 import net.osmand.plus.activities.MapActivity;
+import net.osmand.plus.activities.TrackActivity;
 import net.osmand.plus.dashboard.DashboardOnMap;
 import net.osmand.plus.mapmarkers.OptionsBottomSheetDialogFragment.MarkerOptionsFragmentListener;
 import net.osmand.plus.mapmarkers.OrderByBottomSheetDialogFragment.OrderByFragmentListener;
+import net.osmand.plus.mapmarkers.SaveAsTrackBottomSheetDialogFragment.MarkerSaveAsTrackFragmentListener;
 import net.osmand.plus.mapmarkers.ShowDirectionBottomSheetDialogFragment.ShowDirectionFragmentListener;
 
+import java.io.File;
 import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.List;
@@ -91,6 +97,10 @@ public class MapMarkersDialogFragment extends android.support.v4.app.DialogFragm
 		final Fragment orderByFragment = fragmentManager.findFragmentByTag(OrderByBottomSheetDialogFragment.TAG);
 		if (orderByFragment != null) {
 			((OrderByBottomSheetDialogFragment) orderByFragment).setListener(createOrderByFragmentListener());
+		}
+		Fragment saveAsTrackFragment = fragmentManager.findFragmentByTag(SaveAsTrackBottomSheetDialogFragment.TAG);
+		if (saveAsTrackFragment != null) {
+			((SaveAsTrackBottomSheetDialogFragment) saveAsTrackFragment).setListener(createSaveAsTrackFragmentListener());
 		}
 
 		View mainView = inflater.inflate(R.layout.fragment_map_markers_dialog, container);
@@ -201,7 +211,9 @@ public class MapMarkersDialogFragment extends android.support.v4.app.DialogFragm
 
 			@Override
 			public void saveAsNewTrackOnClick() {
-				mapActivity.getMyApplication().getMapMarkersHelper().generateGpx();
+				SaveAsTrackBottomSheetDialogFragment fragment = new SaveAsTrackBottomSheetDialogFragment();
+				fragment.setListener(createSaveAsTrackFragmentListener());
+				fragment.show(mapActivity.getSupportFragmentManager(), SaveAsTrackBottomSheetDialogFragment.TAG);
 			}
 
 			@Override
@@ -236,6 +248,33 @@ public class MapMarkersDialogFragment extends android.support.v4.app.DialogFragm
 				mapActivity.getMapLayers().getMapWidgetRegistry().updateMapMarkersMode(mapActivity);
 				activeFragment.setShowDirectionEnabled(showDirectionEnabled);
 				activeFragment.updateAdapter();
+			}
+		};
+	}
+
+	private MarkerSaveAsTrackFragmentListener createSaveAsTrackFragmentListener() {
+		return new MarkerSaveAsTrackFragmentListener() {
+
+			final MapActivity mapActivity = getMapActivity();
+
+			@Override
+			public void saveGpx(final String fileName) {
+				final String gpxPath = mapActivity.getMyApplication().getMapMarkersHelper().generateGpx(fileName);
+				snackbar = Snackbar.make(viewPager, fileName + " " + getString(R.string.is_saved) + ".", Snackbar.LENGTH_LONG)
+						.setAction(R.string.shared_string_show, new View.OnClickListener() {
+							@Override
+							public void onClick(View view) {
+								Intent intent = new Intent(mapActivity, getMyApplication().getAppCustomization().getTrackActivity());
+								intent.putExtra(TrackActivity.TRACK_FILE_NAME, gpxPath);
+								intent.putExtra(TrackActivity.OPEN_POINTS_TAB, true);
+								intent.setFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP);
+								startActivity(intent);
+							}
+						});
+				View snackBarView = snackbar.getView();
+				TextView tv = (TextView) snackBarView.findViewById(android.support.design.R.id.snackbar_action);
+				tv.setTextColor(ContextCompat.getColor(mapActivity, R.color.color_dialog_buttons_dark));
+				snackbar.show();
 			}
 		};
 	}
