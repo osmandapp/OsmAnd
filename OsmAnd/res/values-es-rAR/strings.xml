@@ -2749,7 +2749,7 @@ Proporciona un código completo</string>
     <string name="marker_moved_to_active">Marcador del mapa movido a los activos</string>
     <string name="shared_string_list">Lista</string>
     <string name="shared_string_groups">Grupos</string>
-    <string name="passed">Finalizado: %1$s</string>
+    <string name="passed">Último uso: %1$s</string>
     <string name="make_active">Activar</string>
     <string name="today">Hoy</string>
     <string name="yesterday">Ayer</string>
@@ -2765,6 +2765,6 @@ Proporciona un código completo</string>
     <string name="order_by">Ordenar por:</string>
     <string name="show_guide_line">Mostrar línea guía</string>
     <string name="show_arrows_on_the_map">Mostrar flechas en el mapa</string>
-    <string name="show_passed">Mostrar los finalizados</string>
-    <string name="hide_passed">Ocultar los finalizados</string>
+    <string name="show_passed">Mostrar fecha de «Últimos usados»</string>
+    <string name="hide_passed">Ocultar fecha de «Últimos usados»</string>
     </resources>
