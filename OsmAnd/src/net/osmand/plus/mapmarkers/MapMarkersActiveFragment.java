@@ -18,7 +18,6 @@ import net.osmand.plus.MapMarkersHelper.MapMarker;
 import net.osmand.plus.OsmAndLocationProvider.OsmAndCompassListener;
 import net.osmand.plus.OsmAndLocationProvider.OsmAndLocationListener;
 import net.osmand.plus.OsmandApplication;
-import net.osmand.plus.OsmandSettings;
 import net.osmand.plus.activities.MapActivity;
 import net.osmand.plus.base.MapViewTrackingUtilities;
 import net.osmand.plus.dashboard.DashLocationFragment;
@@ -33,6 +32,7 @@ public class MapMarkersActiveFragment extends Fragment implements OsmAndCompassL
 	private Location location;
 	private Float heading;
 	private boolean locationUpdateStarted;
+	private boolean compassUpdateAllowed = true;
 
 	@Nullable
 	@Override
@@ -64,12 +64,14 @@ public class MapMarkersActiveFragment extends Fragment implements OsmAndCompassL
 
 			@Override
 			public void onDragStarted(RecyclerView.ViewHolder holder) {
+				compassUpdateAllowed = false;
 				fromPosition = holder.getAdapterPosition();
 				touchHelper.startDrag(holder);
 			}
 
 			@Override
 			public void onDragEnded(RecyclerView.ViewHolder holder) {
+				compassUpdateAllowed = true;
 				toPosition = holder.getAdapterPosition();
 				if (toPosition >= 0 && fromPosition >= 0 && toPosition != fromPosition) {
 					hideSnackbar();
@@ -79,7 +81,13 @@ public class MapMarkersActiveFragment extends Fragment implements OsmAndCompassL
 			}
 		});
 		recyclerView.setAdapter(adapter);
-
+		recyclerView.addOnScrollListener(new RecyclerView.OnScrollListener() {
+			@Override
+			public void onScrollStateChanged(RecyclerView recyclerView, int newState) {
+				super.onScrollStateChanged(recyclerView, newState);
+				compassUpdateAllowed = newState == RecyclerView.SCROLL_STATE_IDLE;
+			}
+		});
 		return recyclerView;
 	}
 
@@ -147,6 +155,9 @@ public class MapMarkersActiveFragment extends Fragment implements OsmAndCompassL
 	}
 
 	private void updateLocationUi() {
+		if (!compassUpdateAllowed) {
+			return;
+		}
 		final MapActivity mapActivity = (MapActivity) getActivity();
 		if (mapActivity != null && adapter != null) {
 			mapActivity.getMyApplication().runInUIThread(new Runnable() {
