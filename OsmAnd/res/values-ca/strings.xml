@@ -13,8 +13,8 @@
     <string name="map_widget_distance">Objectiu</string>
     <string name="map_widget_altitude">Altitud</string>
     <string name="map_widget_time">Temps per arribar-hi</string>
-    <string name="show_cameras">Càmeres de velocitat</string>
-    <string name="show_traffic_warnings">Límits de velocitat</string>
+    <string name="show_cameras">Radars</string>
+    <string name="show_traffic_warnings">Notificacions de trànsit</string>
     <string name="route_updated_loc_found">La ruta es tornarà a calcular quan es determini la localització</string>
     <string name="starting_point_too_far">El punt d\'inici és massa lluny de la carretera més propera.</string>
     <string name="osmand_parking_time_limit_title">Indica el temps límit d\'aparcament</string>
@@ -990,7 +990,7 @@ Memòria proporcional %4$s MB (límit de l\'Android %5$s MB, Dalvik %6$s MB).</s
     <string name="speak_street_names">Noms de carrers (TTS)</string>
     <string name="speak_speed_limit">Límit de velocitat</string>
     <string name="speak_cameras">Radars</string>
-    <string name="speak_traffic_warnings">Avisos de trànsit</string>
+    <string name="speak_traffic_warnings">Notificacions de trànsit</string>
     <string name="osb_author_or_password_not_specified">Indiqueu l\'usuari i la contrasenya de l\'OSM a la configuració</string>
     <string name="clear_intermediate_points">Neteja les fites</string>
     <string name="keep_intermediate_points">Conserva les fites</string>
@@ -1076,13 +1076,13 @@ Memòria proporcional %4$s MB (límit de l\'Android %5$s MB, Dalvik %6$s MB).</s
     <string name="calculate_osmand_route_gpx">Calcula una ruta fora de línia amb l\'OsmAnd</string>
     <string name="app_mode_truck">Camió</string>
     <string name="routing_attr_prefer_motorway_name">Preferència per autopistes</string>
-    <string name="routing_attr_prefer_motorway_description">Es prioritza l\'ús d\'autopistes</string>
+    <string name="routing_attr_prefer_motorway_description">Preferència per autopistes</string>
     
     
     <string name="routing_attr_avoid_toll_name">Evita vies de peatge</string>
-    <string name="routing_attr_avoid_toll_description">Prioritza carreteres sense peatge</string>
+    <string name="routing_attr_avoid_toll_description">Evita vies de peatge</string>
     <string name="routing_attr_avoid_unpaved_name">Evita les vies sense pavimentar</string>
-    <string name="routing_attr_avoid_unpaved_description">Evita camins sense pavimentar</string>
+    <string name="routing_attr_avoid_unpaved_description">Evita les vies sense pavimentar</string>
     <string name="routing_attr_avoid_ferries_name">Evita transbordadors</string>
     <string name="routing_attr_avoid_ferries_description">Evita transbordadors</string>
     <string name="routing_attr_avoid_motorway_name">Evita autopistes</string>
@@ -2618,7 +2618,7 @@ Abasta l\'àrea: %1$s x %2$s</string>
     <string name="sort_by">Ordena per</string>
     <string name="marker_options">Opcions de marcador</string>
     <string name="map_orientation_change_in_accordance_with_speed">Interval d\'orientació del mapa</string>
-    <string name="map_orientation_change_in_accordance_with_speed_descr">Indica la velocitat mínima per sota de la que s\'utiilitzarà la brúixola interna per determinar l\'orientació del mapa en comptes de la direcció del moviment</string>
+    <string name="map_orientation_change_in_accordance_with_speed_descr">Indiqueu la velocitat mínima per sota de la que s\'utiilitzarà la brúixola interna per determinar l\'orientació del mapa en comptes de la direcció del moviment</string>
     <string name="all_markers_moved_to_history">Tots els marcadors de mapa s\'han mogut a historial</string>
     <string name="marker_moved_to_history">El marcador de mapa s\'ha mogut a historial</string>
     <string name="marker_moved_to_active">El marcador de mapa ara està actiu</string>
