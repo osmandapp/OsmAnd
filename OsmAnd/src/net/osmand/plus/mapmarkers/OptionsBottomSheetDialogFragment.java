@@ -64,6 +64,8 @@ public class OptionsBottomSheetDialogFragment extends BottomSheetDialogFragment 
 		if (imageResId != 0) {
 			showDirectionIcon.setImageDrawable(getIcon(imageResId, R.color.dashboard_blue));
 		}
+		((ImageView) mainView.findViewById(R.id.coordinate_input_icon))
+				.setImageDrawable(getContentIcon(R.drawable.ic_action_coordinates_longitude));
 		((ImageView) mainView.findViewById(R.id.build_route_icon))
 				.setImageDrawable(getContentIcon(R.drawable.map_directions));
 		((ImageView) mainView.findViewById(R.id.save_as_new_track_icon))
@@ -88,6 +90,15 @@ public class OptionsBottomSheetDialogFragment extends BottomSheetDialogFragment 
 			public void onClick(View view) {
 				if (listener != null) {
 					listener.showDirectionOnClick();
+				}
+				dismiss();
+			}
+		});
+		mainView.findViewById(R.id.coordinate_input_row).setOnClickListener(new View.OnClickListener() {
+			@Override
+			public void onClick(View view) {
+				if (listener != null) {
+					listener.coordinateInputOnClick();
 				}
 				dismiss();
 			}
@@ -187,6 +198,8 @@ public class OptionsBottomSheetDialogFragment extends BottomSheetDialogFragment 
 		void sortByOnClick();
 
 		void showDirectionOnClick();
+
+		void coordinateInputOnClick();
 
 		void buildRouteOnClick();
 

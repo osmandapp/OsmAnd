@@ -17,8 +17,6 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.widget.TextView;
 
-import net.osmand.IndexConstants;
-import net.osmand.plus.GPXUtilities.GPXFile;
 import net.osmand.plus.LockableViewPager;
 import net.osmand.plus.MapMarkersHelper;
 import net.osmand.plus.OsmandApplication;
@@ -33,7 +31,6 @@ import net.osmand.plus.mapmarkers.OrderByBottomSheetDialogFragment.OrderByFragme
 import net.osmand.plus.mapmarkers.SaveAsTrackBottomSheetDialogFragment.MarkerSaveAsTrackFragmentListener;
 import net.osmand.plus.mapmarkers.ShowDirectionBottomSheetDialogFragment.ShowDirectionFragmentListener;
 
-import java.io.File;
 import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.List;
@@ -201,6 +198,11 @@ public class MapMarkersDialogFragment extends android.support.v4.app.DialogFragm
 				ShowDirectionBottomSheetDialogFragment fragment = new ShowDirectionBottomSheetDialogFragment();
 				fragment.setListener(createShowDirectionFragmentListener());
 				fragment.show(mapActivity.getSupportFragmentManager(), ShowDirectionBottomSheetDialogFragment.TAG);
+			}
+
+			@Override
+			public void coordinateInputOnClick() {
+				CoordinateInputDialogFragment.showInstance(mapActivity);
 			}
 
 			@Override
