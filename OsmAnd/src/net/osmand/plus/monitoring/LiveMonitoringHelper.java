@@ -193,7 +193,7 @@ public class LiveMonitoringHelper  {
 
 			log.info("Monitor " + uri);
 
-			if (urlConnection.getResponseCode() != 200) {
+			if (urlConnection.getResponseCode()/100 != 2) {
 
 				String msg = urlConnection.getResponseCode() + " : " + //$NON-NLS-1$//$NON-NLS-2$
 						urlConnection.getResponseMessage();
