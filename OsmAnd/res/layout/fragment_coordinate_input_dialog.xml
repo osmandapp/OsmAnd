@@ -84,7 +84,7 @@
     <FrameLayout
         android:layout_gravity="bottom"
         android:layout_width="match_parent"
-        android:layout_height="200dp">
+        android:layout_height="wrap_content">
 
         <GridView
             android:id="@+id/keyboard_grid_view"
@@ -92,8 +92,8 @@
             android:layout_height="match_parent"
             android:background="?attr/dashboard_divider"
             android:horizontalSpacing="1dp"
-            android:stretchMode="spacingWidth"
             android:verticalSpacing="1dp"
+            android:stretchMode="columnWidth"
             android:numColumns="3"/>
 
     </FrameLayout>
