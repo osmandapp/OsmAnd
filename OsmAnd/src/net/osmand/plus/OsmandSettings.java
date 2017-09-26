@@ -3158,11 +3158,16 @@ public class OsmandSettings {
 	}
 
 	public enum MapMarkersOrderByMode {
+		CUSTOM,
 		DISTANCE_DESC,
 		DISTANCE_ASC,
 		NAME,
 		DATE_ADDED_DESC,
 		DATE_ADDED_ASC;
+
+		public boolean isCustom() {
+			return this == CUSTOM;
+		}
 
 		public boolean isDistanceDescending() {
 			return this == DISTANCE_DESC;

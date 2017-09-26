@@ -290,8 +290,10 @@ public class MapMarkersDialogFragment extends android.support.v4.app.DialogFragm
 	}
 
 	private void setOrderByMode(MapMarkersOrderByMode orderByMode) {
-		getMyApplication().getMapMarkersHelper().orderMarkers(orderByMode);
-		activeFragment.updateAdapter();
+		if (orderByMode != MapMarkersOrderByMode.CUSTOM) {
+			getMyApplication().getMapMarkersHelper().orderMarkers(orderByMode);
+			activeFragment.updateAdapter();
+		}
 	}
 
 	private MapActivity getMapActivity() {
