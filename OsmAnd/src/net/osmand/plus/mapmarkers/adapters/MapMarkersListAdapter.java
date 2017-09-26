@@ -135,7 +135,7 @@ public class MapMarkersListAdapter extends RecyclerView.Adapter<MapMarkerItemVie
 	}
 
 	@Override
-	public void onItemSwiped(RecyclerView.ViewHolder holder, int direction) {
+	public void onItemSwiped(RecyclerView.ViewHolder holder) {
 
 	}
 
