@@ -50,6 +50,7 @@ public class PlanRouteFragment extends Fragment {
 	private PlanRouteToolbarController toolbarController;
 	private ApplicationMode appMode;
 	private int previousMapPosition;
+	private int selectedCount = 0;
 
 	private boolean nightMode;
 	private boolean portrait;
@@ -120,7 +121,16 @@ public class PlanRouteFragment extends Fragment {
 		mainView.findViewById(R.id.select_all_button).setOnClickListener(new View.OnClickListener() {
 			@Override
 			public void onClick(View view) {
-				Toast.makeText(mapActivity, "Select all", Toast.LENGTH_SHORT).show();
+				int activeMarkersCount = markersHelper.getMapMarkers().size();
+				if (selectedCount == activeMarkersCount) {
+					markersHelper.deselectAllActiveMarkers();
+					selectedCount = 0;
+				} else {
+					markersHelper.selectAllActiveMarkers();
+					selectedCount = activeMarkersCount;
+				}
+				adapter.notifyDataSetChanged();
+				updateSelectButton();
 			}
 		});
 
@@ -167,8 +177,10 @@ public class PlanRouteFragment extends Fragment {
 			public void onItemClick(View view) {
 				int pos = markersRv.getChildAdapterPosition(view);
 				MapMarker marker = adapter.getItem(pos);
+				selectedCount = marker.selected ? selectedCount - 1 : selectedCount + 1;
 				marker.selected = !marker.selected;
 				adapter.notifyItemChanged(pos);
+				updateSelectButton();
 			}
 
 			@Override
@@ -270,6 +282,7 @@ public class PlanRouteFragment extends Fragment {
 
 			mapActivity.refreshMap();
 			updateText();
+			updateSelectButton();
 		}
 	}
 
@@ -327,6 +340,14 @@ public class PlanRouteFragment extends Fragment {
 	private void updateText() {
 		distanceTv.setText("1.39 km,");
 		timeTv.setText("~ 45 min.");
+	}
+
+	private void updateSelectButton() {
+		if (selectedCount == markersHelper.getMapMarkers().size()) {
+			((TextView) mainView.findViewById(R.id.select_all_button)).setText(getString(R.string.shared_string_deselect_all));
+		} else {
+			((TextView) mainView.findViewById(R.id.select_all_button)).setText(getString(R.string.shared_string_select_all));
+		}
 	}
 
 	private void mark(int status, int... widgets) {
@@ -427,7 +448,7 @@ public class PlanRouteFragment extends Fragment {
 		if (markersListOpened) {
 			hideMarkersList();
 		}
-		markersHelper.clearSelections();
+		markersHelper.deselectAllActiveMarkers();
 		activity.getSupportFragmentManager().beginTransaction().remove(this).commitAllowingStateLoss();
 	}
 
