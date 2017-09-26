@@ -91,9 +91,9 @@ public class MapMarkersGroupsFragment extends Fragment implements OsmAndCompassL
 				if (markerViewHolder && pos != -1) {
 					MapMarker marker = (MapMarker) adapter.getItem(pos);
 					if (marker.history) {
-						return ItemTouchHelper.RIGHT;
+						return ItemTouchHelper.LEFT;
 					} else {
-						return super.getSwipeDirs(recyclerView, viewHolder);
+						return ItemTouchHelper.RIGHT;
 					}
 				} else {
 					return 0;

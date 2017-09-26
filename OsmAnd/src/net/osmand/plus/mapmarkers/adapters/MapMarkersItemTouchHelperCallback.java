@@ -71,7 +71,7 @@ public class MapMarkersItemTouchHelperCallback extends ItemTouchHelper.Callback 
 	@Override
 	public int getMovementFlags(RecyclerView recyclerView, RecyclerView.ViewHolder viewHolder) {
 		final int dragFlags = ItemTouchHelper.UP | ItemTouchHelper.DOWN;
-		final int moveFlags = ItemTouchHelper.LEFT | ItemTouchHelper.RIGHT;
+		final int moveFlags = ItemTouchHelper.RIGHT;
 		return makeMovementFlags(dragFlags, moveFlags);
 	}
 
@@ -102,26 +102,19 @@ public class MapMarkersItemTouchHelperCallback extends ItemTouchHelper.Callback 
 			}
 			textPaint.setColor(ContextCompat.getColor(mapActivity, colorText));
 			float textMarginTop = ((float) itemView.getHeight() - (float) textHeight) / 2;
-			if (dX > 0) {
-				c.drawRect(itemView.getLeft(), itemView.getTop(), dX, itemView.getBottom(), backgroundPaint);
-				float iconMarginTop = ((float) itemView.getHeight() - (float) historyBitmap.getHeight()) / 2;
-				c.drawBitmap(historyBitmap, itemView.getLeft() + marginSides, itemView.getTop() + iconMarginTop, iconPaint);
-				c.drawText(moveToHistoryStr, itemView.getLeft() + 2 * marginSides + historyBitmap.getWidth(),
-						itemView.getTop() + textMarginTop + textHeight, textPaint);
-			} else {
-				c.drawRect(itemView.getRight() + dX, itemView.getTop(), itemView.getRight(), itemView.getBottom(), backgroundPaint);
-				float iconMarginTop = ((float) itemView.getHeight() - (float) deleteBitmap.getHeight()) / 2;
-				c.drawBitmap(deleteBitmap, itemView.getRight() - deleteBitmap.getWidth() - marginSides, itemView.getTop() + iconMarginTop, iconPaint);
-				c.drawText(delStr, itemView.getRight() - deleteBitmap.getWidth() - 2 * marginSides - delStrWidth,
-						itemView.getTop() + textMarginTop + textHeight, textPaint);
-			}
+			c.drawRect(itemView.getLeft(), itemView.getTop(), dX, itemView.getBottom(), backgroundPaint);
+			float iconMarginTop = ((float) itemView.getHeight() - (float) historyBitmap.getHeight()) / 2;
+			c.drawBitmap(historyBitmap, itemView.getLeft() + marginSides, itemView.getTop() + iconMarginTop, iconPaint);
+			c.drawText(moveToHistoryStr, itemView.getLeft() + 2 * marginSides + historyBitmap.getWidth(),
+					itemView.getTop() + textMarginTop + textHeight, textPaint);
+
 		}
 		super.onChildDraw(c, recyclerView, viewHolder, dX, dY, actionState, isCurrentlyActive);
 	}
 
 	@Override
 	public void onSwiped(RecyclerView.ViewHolder viewHolder, int i) {
-		adapter.onItemSwiped(viewHolder, i);
+		adapter.onItemSwiped(viewHolder);
 	}
 
 	@Override
@@ -136,7 +129,7 @@ public class MapMarkersItemTouchHelperCallback extends ItemTouchHelper.Callback 
 
 		boolean onItemMove(int from, int to);
 
-		void onItemSwiped(RecyclerView.ViewHolder holder, int direction);
+		void onItemSwiped(RecyclerView.ViewHolder holder);
 
 		void onItemDismiss(RecyclerView.ViewHolder holder);
 	}

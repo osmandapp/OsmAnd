@@ -231,20 +231,13 @@ public class MapMarkersActiveAdapter extends RecyclerView.Adapter<MapMarkerItemV
 	}
 
 	@Override
-	public void onItemSwiped(RecyclerView.ViewHolder holder, final int direction) {
+	public void onItemSwiped(RecyclerView.ViewHolder holder) {
 		final int pos = holder.getAdapterPosition();
 		final MapMarker marker = getItem(pos);
-		int snackbarStringRes;
-		if (direction == ItemTouchHelper.RIGHT) {
-			mapActivity.getMyApplication().getMapMarkersHelper().moveMapMarkerToHistory(marker);
-			MapMarkersHelper.MapMarkersGroup group = mapActivity.getMyApplication().getMapMarkersHelper().getMapMarkerGroupByName(marker.groupName);
-			if (group != null) {
-				mapActivity.getMyApplication().getMapMarkersHelper().updateGroup(group);
-			}
-			snackbarStringRes = R.string.marker_moved_to_history;
-		} else {
-			mapActivity.getMyApplication().getMapMarkersHelper().removeMarker(marker);
-			snackbarStringRes = R.string.item_removed;
+		mapActivity.getMyApplication().getMapMarkersHelper().moveMapMarkerToHistory(marker);
+		MapMarkersHelper.MapMarkersGroup group = mapActivity.getMyApplication().getMapMarkersHelper().getMapMarkerGroupByName(marker.groupName);
+		if (group != null) {
+			mapActivity.getMyApplication().getMapMarkersHelper().updateGroup(group);
 		}
 		notifyItemRemoved(pos);
 		if (showDirectionEnabled && pos < 2 && getItemCount() > 1) {
@@ -252,15 +245,11 @@ public class MapMarkersActiveAdapter extends RecyclerView.Adapter<MapMarkerItemV
 		} else if (pos == getItemCount()) {
 			notifyItemChanged(pos - 1);
 		}
-		snackbar = Snackbar.make(holder.itemView, snackbarStringRes, Snackbar.LENGTH_LONG)
+		snackbar = Snackbar.make(holder.itemView, R.string.marker_moved_to_history, Snackbar.LENGTH_LONG)
 				.setAction(R.string.shared_string_undo, new View.OnClickListener() {
 					@Override
 					public void onClick(View view) {
-						if (direction == ItemTouchHelper.RIGHT) {
-							mapActivity.getMyApplication().getMapMarkersHelper().restoreMarkerFromHistory(marker, pos);
-						} else {
-							mapActivity.getMyApplication().getMapMarkersHelper().addMarker(marker, pos);
-						}
+						mapActivity.getMyApplication().getMapMarkersHelper().restoreMarkerFromHistory(marker, pos);
 						notifyItemInserted(pos);
 						if (showDirectionEnabled && pos < 2 && getItemCount() > 2) {
 							notifyItemChanged(2);
