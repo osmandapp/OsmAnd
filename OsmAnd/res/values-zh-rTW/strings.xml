@@ -941,9 +941,9 @@
     <string name="item_checked">勾選</string>
     <string name="item_unchecked">取消勾選</string>
     <string name="max_speed_none">無</string>
-    <string name="prefer_in_routing_descr">高速公路優先權</string>
+    <string name="prefer_in_routing_descr">高速公路優先</string>
     <string name="prefer_in_routing_title">優先權…</string>
-    <string name="prefer_motorways">高速公路優先權</string>
+    <string name="prefer_motorways">高速公路優先</string>
 
     <string name="download_hillshade_maps">地形陰影</string>
 
@@ -1148,9 +1148,9 @@ OsmAnd (Automated Navigation Directions) 是一個地圖和導航的應用程式
     <string name="route_from">從：</string>
 
 
-    <string name="speak_speed_limit">速度限制</string>
+    <string name="speak_speed_limit">速限</string>
     <string name="speak_cameras">測速照相</string>
-    <string name="speak_traffic_warnings">交通流量警示</string>
+    <string name="speak_traffic_warnings">交通狀況警示</string>
     <string name="osb_author_dialog_password">OSM 密碼 (選項)</string>
     <string name="announce_gpx_waypoints">GPX 航點</string>
     <string name="speak_title">通報…</string>
@@ -1845,7 +1845,7 @@ OsmAnd (Automated Navigation Directions) 是一個地圖和導航的應用程式
     <string name="shared_string_copy">複製</string>
     <string name="rendering_attr_hideHouseNumbers_name">門牌號碼</string>
     
-    <string name="routing_attr_avoid_borders_description">防止越過邊界進入別國</string>
+    <string name="routing_attr_avoid_borders_description">避開越過邊界進入別國</string>
     <string name="routing_attr_height_name">高度限制</string>
     <string name="routing_attr_height_description">指定被許可在路線上行駛的車輛高度</string>
     <string name="use_fast_recalculation">智慧路線重新計算</string>
@@ -1943,8 +1943,8 @@ OsmAnd (Automated Navigation Directions) 是一個地圖和導航的應用程式
     <string name="app_name_osmand">OsmAnd</string>
     <string name="offline_maps_and_navigation">離線地圖\n和導航</string>
     <string name="commit_poi">提交興趣點</string>
-    <string name="routing_attr_avoid_shuttle_train_name">往返避開鐵路</string>
-    <string name="routing_attr_avoid_shuttle_train_description">往返避開鐵路</string>
+    <string name="routing_attr_avoid_shuttle_train_name">避開穿梭頻繁的鐵路</string>
+    <string name="routing_attr_avoid_shuttle_train_description">避開穿梭頻繁的鐵路</string>
     <string name="plugin_settings">外掛元件</string>
     <string name="tab_title_basic">基本</string>
     <string name="tab_title_advanced">展開</string>
@@ -2638,7 +2638,7 @@ OsmAnd (Automated Navigation Directions) 是一個地圖和導航的應用程式
     <string name="shared_string_slope">斜坡</string>
     <string name="lang_ber">柏柏爾語</string>
     <string name="routing_attr_relief_smoothness_factor_hills_name">丘陵</string>
-    <string name="routing_attr_relief_smoothness_factor_plains_name">小的丘陵</string>
+    <string name="routing_attr_relief_smoothness_factor_plains_name">小丘陵</string>
     <string name="routing_attr_relief_smoothness_factor_more_plains_name">平地</string>
     <string name="routing_attr_driving_style_speed_name">較短路線</string>
     <string name="routing_attr_driving_style_balance_name">均衡</string>
