@@ -187,14 +187,8 @@ public class EditFavoriteGroupDialogFragment extends BottomSheetDialogFragment {
 			addToMarkersView.setOnClickListener(new View.OnClickListener() {
 				@Override
 				public void onClick(View v) {
-					List<LatLon> points = new ArrayList<>(group.points.size());
-					List<PointDescription> names = new ArrayList<>(group.points.size());
-					for (FavouritePoint fp : group.points) {
-						points.add(new LatLon(fp.getLatitude(), fp.getLongitude()));
-						names.add(new PointDescription(PointDescription.POINT_TYPE_MAP_MARKER, fp.getName()));
-					}
 					markersHelper.addMarkersSyncGroup(syncGroup);
-					markersHelper.addMapMarkers(points, names, syncGroup);
+					markersHelper.syncGroup(syncGroup);
 					dismiss();
 					MapActivity.launchMapActivityMoveToTop(getActivity());
 				}
