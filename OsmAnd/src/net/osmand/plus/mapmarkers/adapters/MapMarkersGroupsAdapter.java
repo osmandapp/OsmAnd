@@ -245,7 +245,7 @@ public class MapMarkersGroupsAdapter extends RecyclerView.Adapter<RecyclerView.V
 				itemViewHolder.description.setVisibility(View.GONE);
 			}
 
-			String markerGroupName = marker.groupName;
+			final String markerGroupName = marker.groupName;
 			final MapMarkersGroup group = app.getMapMarkersHelper().getMapMarkerGroupByName(markerGroupName);
 			itemViewHolder.optionsBtn.setOnClickListener(new View.OnClickListener() {
 				@Override
@@ -271,13 +271,21 @@ public class MapMarkersGroupsAdapter extends RecyclerView.Adapter<RecyclerView.V
 							ShowHideHistoryButton showHideHistoryButton = group.getShowHideHistoryButton();
 							if (showHideHistoryButton == null) {
 								items.remove(marker);
-								showHideHistoryButton = new ShowHideHistoryButton();
-								showHideHistoryButton.setShowHistory(false);
-								showHideHistoryButton.setMarkerGroup(group);
-								int index = getLastDisplayItemIndexOfGroup(group);
-								if (index != -1) {
-									items.add(index + 1, showHideHistoryButton);
-									group.setShowHideHistoryButton(showHideHistoryButton);
+								if (markerGroupName != null) {
+									showHideHistoryButton = new ShowHideHistoryButton();
+									showHideHistoryButton.setShowHistory(false);
+									showHideHistoryButton.setMarkerGroup(group);
+									int index = getLastDisplayItemIndexOfGroup(group);
+									if (index != -1) {
+										items.add(index + 1, showHideHistoryButton);
+										group.setShowHideHistoryButton(showHideHistoryButton);
+									}
+								} else {
+									boolean firstItemInDisplayGroup = position - 1 != -1 && getItem(position - 1) instanceof Integer;
+									boolean lastItemInDisplayGroup = !(getItem(position) instanceof MapMarker);
+									if (firstItemInDisplayGroup && lastItemInDisplayGroup) {
+										items.remove(position - 1);
+									}
 								}
 							} else if (!showHideHistoryButton.isShowHistory()) {
 								items.remove(marker);
