@@ -21,7 +21,7 @@ import java.util.Random;
 
 public class MapMarkersDbHelper {
 
-	private static final int DB_VERSION = 8;
+	private static final int DB_VERSION = 9;
 	public static final String DB_NAME = "map_markers_db";
 
 	private static final String MARKERS_TABLE_NAME = "map_markers";
@@ -125,6 +125,14 @@ public class MapMarkersDbHelper {
 		if (oldVersion < 8) {
 			db.execSQL("ALTER TABLE " + MARKERS_TABLE_NAME + " ADD " + MARKERS_COL_DISABLED + " int");
 			db.execSQL("ALTER TABLE " + GROUPS_TABLE_NAME + " ADD " + GROUPS_COL_DISABLED + " int");
+		}
+		if (oldVersion < 9) {
+			db.execSQL("UPDATE " + GROUPS_TABLE_NAME +
+					" SET " + GROUPS_COL_DISABLED + " = ? " +
+					"WHERE " + GROUPS_COL_DISABLED + " IS NULL", new Object[]{0});
+			db.execSQL("UPDATE " + MARKERS_TABLE_NAME +
+					" SET " + MARKERS_COL_DISABLED + " = ? " +
+					"WHERE " + MARKERS_COL_DISABLED + " IS NULL", new Object[]{0});
 		}
 	}
 
