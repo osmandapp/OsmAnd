@@ -6,18 +6,21 @@
     android:layout_height="match_parent"
     xmlns:osmand="http://schemas.android.com/tools">
 
-    <FrameLayout
+    <LinearLayout
+        android:orientation="vertical"
         android:layout_width="match_parent"
-        android:layout_height="wrap_content">
+        android:layout_height="match_parent">
 
         <android.support.design.widget.AppBarLayout
+            android:orientation="vertical"
+            android:background="@color/map_widget_blue"
             android:layout_width="match_parent"
-            android:layout_height="@dimen/dashboard_map_toolbar">
+            android:layout_height="wrap_content">
 
             <android.support.v7.widget.Toolbar
                 android:id="@+id/coordinate_input_toolbar"
                 android:layout_width="match_parent"
-                android:layout_height="match_parent"
+                android:layout_height="@dimen/dashboard_map_toolbar"
                 app:contentInsetLeft="54dp"
                 app:contentInsetStart="54dp">
 
@@ -58,28 +61,75 @@
 
             </android.support.v7.widget.Toolbar>
 
+            <LinearLayout
+                android:paddingLeft="16dp"
+                android:paddingRight="16dp"
+                android:orientation="horizontal"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content">
+
+                <studio.carbonylgroup.textfieldboxes.TextFieldBoxes
+                    android:layout_width="0dp"
+                    android:layout_weight="1"
+                    android:layout_height="wrap_content">
+
+                    <studio.carbonylgroup.textfieldboxes.ExtendedEditText
+                        android:id="@+id/latitude_edit_text"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"/>
+
+                </studio.carbonylgroup.textfieldboxes.TextFieldBoxes>
+
+                <View
+                    android:layout_width="16dp"
+                    android:layout_height="match_parent"/>
+
+                <studio.carbonylgroup.textfieldboxes.TextFieldBoxes
+                    android:layout_width="0dp"
+                    android:layout_weight="1"
+                    android:layout_height="wrap_content">
+
+                    <studio.carbonylgroup.textfieldboxes.ExtendedEditText
+                        android:id="@+id/longitude_edit_text"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"/>
+
+                </studio.carbonylgroup.textfieldboxes.TextFieldBoxes>
+
+            </LinearLayout>
+
+            <LinearLayout
+                android:padding="16dp"
+                android:orientation="horizontal"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content">
+
+                <studio.carbonylgroup.textfieldboxes.TextFieldBoxes
+                    android:layout_width="0dp"
+                    android:layout_weight="1"
+                    android:layout_height="wrap_content">
+
+                    <studio.carbonylgroup.textfieldboxes.ExtendedEditText
+                        android:id="@+id/name_edit_text"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"/>
+
+                </studio.carbonylgroup.textfieldboxes.TextFieldBoxes>
+
+                <View
+                    android:layout_width="0dp"
+                    android:layout_weight="1"
+                    android:layout_height="match_parent"/>
+
+            </LinearLayout>
+
         </android.support.design.widget.AppBarLayout>
-
-    </FrameLayout>
-
-    <FrameLayout
-        android:layout_marginTop="@dimen/dashboard_map_toolbar"
-        android:layout_width="match_parent"
-        android:layout_height="match_parent"
-        android:background="?attr/ctx_menu_info_view_bg">
 
         <android.support.v7.widget.RecyclerView
             android:layout_width="match_parent"
             android:layout_height="match_parent"/>
 
-        <ImageView
-            android:layout_width="match_parent"
-            android:layout_height="5dp"
-            android:layout_gravity="bottom"
-            android:alpha="0.5"
-            android:scaleType="fitXY"
-            android:src="@drawable/bg_shadow_onmap"/>
-    </FrameLayout>
+    </LinearLayout>
 
     <FrameLayout
         android:layout_gravity="bottom"
@@ -87,6 +137,7 @@
         android:layout_height="wrap_content">
 
         <GridView
+            osmand:visibility="gone"
             android:id="@+id/keyboard_grid_view"
             android:layout_width="match_parent"
             android:layout_height="match_parent"

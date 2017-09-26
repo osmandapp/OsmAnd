@@ -7,10 +7,14 @@ import android.support.annotation.Nullable;
 import android.support.v4.app.DialogFragment;
 import android.support.v4.content.ContextCompat;
 import android.support.v7.widget.Toolbar;
+import android.text.InputType;
 import android.view.LayoutInflater;
+import android.view.MotionEvent;
 import android.view.View;
 import android.view.ViewGroup;
+import android.view.WindowManager;
 import android.widget.ArrayAdapter;
+import android.widget.EditText;
 import android.widget.GridView;
 import android.widget.TextView;
 
@@ -59,6 +63,36 @@ public class CoordinateInputDialogFragment extends DialogFragment {
 
 			}
 		});
+
+		final EditText latitudeEditText = (EditText) mainView.findViewById(R.id.latitude_edit_text);
+		final EditText longitudeEditText = (EditText) mainView.findViewById(R.id.longitude_edit_text);
+		final EditText nameEditText = (EditText) mainView.findViewById(R.id.name_edit_text);
+
+		View.OnTouchListener editTextOnTouchListener = new View.OnTouchListener() {
+			@Override
+			public boolean onTouch(View view, MotionEvent motionEvent) {
+				EditText editText = null;
+				switch (view.getId()) {
+					case R.id.latitude_edit_text:
+						editText = latitudeEditText;
+						break;
+					case R.id.longitude_edit_text:
+						editText = longitudeEditText;
+						break;
+					case R.id.name_edit_text:
+						editText = nameEditText;
+						break;
+				}
+				if (editText != null) {
+					editText.requestFocus();
+				}
+				return true;
+			}
+		};
+
+		latitudeEditText.setOnTouchListener(editTextOnTouchListener);
+		longitudeEditText.setOnTouchListener(editTextOnTouchListener);
+		nameEditText.setOnTouchListener(editTextOnTouchListener);
 
 		String[] keyboardItems = new String[] { "1", "2", "3",
 				"4", "5", "6",
