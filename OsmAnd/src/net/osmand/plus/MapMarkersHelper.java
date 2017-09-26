@@ -551,9 +551,15 @@ public class MapMarkersHelper {
 		return mapMarkersHistory;
 	}
 
-	public void clearSelections() {
+	public void deselectAllActiveMarkers() {
 		for (MapMarker m : mapMarkers) {
 			m.selected = false;
+		}
+	}
+
+	public void selectAllActiveMarkers() {
+		for (MapMarker m : mapMarkers) {
+			m.selected = true;
 		}
 	}
 
