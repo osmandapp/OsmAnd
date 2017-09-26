@@ -12,6 +12,7 @@ import net.osmand.plus.R;
 public class MapMarkerItemViewHolder extends RecyclerView.ViewHolder {
 
 	final View mainLayout;
+	final View topDivider;
 	final ImageView iconDirection;
 	final ImageView iconReorder;
 	final ImageView icon;
@@ -31,6 +32,7 @@ public class MapMarkerItemViewHolder extends RecyclerView.ViewHolder {
 	public MapMarkerItemViewHolder(View view) {
 		super(view);
 		mainLayout = view.findViewById(R.id.main_layout);
+		topDivider = view.findViewById(R.id.top_divider);
 		iconDirection = (ImageView) view.findViewById(R.id.map_marker_direction_icon);
 		iconReorder = (ImageView) view.findViewById(R.id.map_marker_reorder_icon);
 		icon = (ImageView) view.findViewById(R.id.map_marker_icon);

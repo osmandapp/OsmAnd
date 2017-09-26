@@ -7,6 +7,12 @@
     android:descendantFocusability="blocksDescendants"
     android:orientation="vertical">
 
+    <include
+        android:id="@+id/top_divider"
+        layout="@layout/list_item_divider"
+        android:visibility="gone"
+        tools:visibility="visible"/>
+
     <LinearLayout
         android:id="@+id/main_layout"
         android:layout_width="match_parent"
