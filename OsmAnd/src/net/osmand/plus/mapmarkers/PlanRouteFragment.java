@@ -14,6 +14,7 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.widget.ImageButton;
 import android.widget.ImageView;
+import android.widget.TextView;
 import android.widget.Toast;
 
 import net.osmand.AndroidUtils;
@@ -52,6 +53,8 @@ public class PlanRouteFragment extends Fragment {
 	private View mainView;
 	private RecyclerView markersRv;
 	private ImageView upDownIconIv;
+	private TextView distanceTv;
+	private TextView timeTv;
 
 	@Nullable
 	@Override
@@ -82,6 +85,9 @@ public class PlanRouteFragment extends Fragment {
 
 		mainView = view.findViewById(R.id.main_view);
 		AndroidUtils.setBackground(mapActivity, mainView, nightMode, R.drawable.bg_bottom_menu_light, R.drawable.bg_bottom_menu_dark);
+
+		distanceTv = (TextView) mainView.findViewById(R.id.markers_distance_text_view);
+		timeTv = (TextView) mainView.findViewById(R.id.markers_time_text_view);
 
 		enterPlanRouteMode();
 
@@ -279,7 +285,8 @@ public class PlanRouteFragment extends Fragment {
 	}
 
 	private void updateText() {
-
+		distanceTv.setText("1.39 km,");
+		timeTv.setText("~ 45 min.");
 	}
 
 	private void mark(int status, int... widgets) {
