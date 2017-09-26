@@ -20,12 +20,16 @@ import android.widget.TextView;
 import android.widget.Toast;
 
 import net.osmand.AndroidUtils;
+import net.osmand.Location;
+import net.osmand.data.LatLon;
 import net.osmand.plus.ApplicationMode;
 import net.osmand.plus.IconsCache;
 import net.osmand.plus.MapMarkersHelper;
 import net.osmand.plus.MapMarkersHelper.MapMarker;
+import net.osmand.plus.OsmAndLocationProvider.OsmAndLocationListener;
 import net.osmand.plus.R;
 import net.osmand.plus.activities.MapActivity;
+import net.osmand.plus.base.MapViewTrackingUtilities;
 import net.osmand.plus.helpers.AndroidUiHelper;
 import net.osmand.plus.mapmarkers.adapters.MapMarkersItemTouchHelperCallback;
 import net.osmand.plus.mapmarkers.adapters.MapMarkersListAdapter;
@@ -40,7 +44,7 @@ import net.osmand.plus.views.mapwidgets.MapInfoWidgetsFactory.TopToolbarControll
 import static net.osmand.plus.OsmandSettings.LANDSCAPE_MIDDLE_RIGHT_CONSTANT;
 import static net.osmand.plus.OsmandSettings.MIDDLE_TOP_CONSTANT;
 
-public class PlanRouteFragment extends Fragment {
+public class PlanRouteFragment extends Fragment implements OsmAndLocationListener {
 
 	public static final String TAG = "PlanRouteFragment";
 
@@ -51,6 +55,9 @@ public class PlanRouteFragment extends Fragment {
 	private ApplicationMode appMode;
 	private int previousMapPosition;
 	private int selectedCount = 0;
+
+	private Location location;
+	private boolean locationUpdateStarted;
 
 	private boolean nightMode;
 	private boolean portrait;
@@ -205,11 +212,35 @@ public class PlanRouteFragment extends Fragment {
 	}
 
 	@Override
+	public void onResume() {
+		super.onResume();
+		startLocationUpdate();
+	}
+
+	@Override
+	public void onPause() {
+		super.onPause();
+		stopLocationUpdate();
+	}
+
+	@Override
 	public void onDestroyView() {
 		super.onDestroyView();
 		exitPlanRouteMode();
 		if (markersListOpened) {
 			hideMarkersList();
+		}
+	}
+
+	@Override
+	public void updateLocation(Location location) {
+		boolean newLocation = this.location == null && location != null;
+		boolean locationChanged = this.location != null && location != null
+				&& this.location.getLatitude() != location.getLatitude()
+				&& this.location.getLongitude() != location.getLongitude();
+		if (newLocation || locationChanged) {
+			this.location = location;
+			updateLocationUi();
 		}
 	}
 
@@ -350,6 +381,27 @@ public class PlanRouteFragment extends Fragment {
 		}
 	}
 
+
+	private void updateLocationUi() {
+		final MapActivity mapActivity = (MapActivity) getActivity();
+		if (mapActivity != null && adapter != null) {
+			mapActivity.getMyApplication().runInUIThread(new Runnable() {
+				@Override
+				public void run() {
+					if (location == null) {
+						location = mapActivity.getMyApplication().getLocationProvider().getLastKnownLocation();
+					}
+					MapViewTrackingUtilities utilities = mapActivity.getMapViewTrackingUtilities();
+					boolean useCenter = !(utilities.isMapLinkedToLocation() && location != null);
+
+					adapter.setUseCenter(useCenter);
+					adapter.setLocation(useCenter ? mapActivity.getMapLocation() : new LatLon(location.getLatitude(), location.getLongitude()));
+					adapter.notifyDataSetChanged();
+				}
+			});
+		}
+	}
+
 	private void mark(int status, int... widgets) {
 		MapActivity mapActivity = getMapActivity();
 		if (mapActivity != null) {
@@ -431,6 +483,23 @@ public class PlanRouteFragment extends Fragment {
 			} catch (Exception e) {
 				// ignore
 			}
+		}
+	}
+
+	private void startLocationUpdate() {
+		MapActivity mapActivity = getMapActivity();
+		if (mapActivity != null && !locationUpdateStarted) {
+			locationUpdateStarted = true;
+			mapActivity.getMyApplication().getLocationProvider().addLocationListener(this);
+			updateLocationUi();
+		}
+	}
+
+	private void stopLocationUpdate() {
+		MapActivity mapActivity = getMapActivity();
+		if (mapActivity != null && locationUpdateStarted) {
+			locationUpdateStarted = false;
+			mapActivity.getMyApplication().getLocationProvider().removeLocationListener(this);
 		}
 	}
 
