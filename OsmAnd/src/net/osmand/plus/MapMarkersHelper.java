@@ -4,7 +4,6 @@ import android.content.Context;
 import android.support.annotation.NonNull;
 import android.support.annotation.Nullable;
 import android.support.v4.content.ContextCompat;
-import android.text.format.DateFormat;
 
 import net.osmand.IndexConstants;
 import net.osmand.data.FavouritePoint;
@@ -20,16 +19,13 @@ import net.osmand.util.Algorithms;
 import net.osmand.util.MapUtils;
 
 import java.io.File;
-import java.text.SimpleDateFormat;
 import java.util.ArrayList;
 import java.util.Collections;
 import java.util.Comparator;
-import java.util.Date;
 import java.util.Iterator;
 import java.util.LinkedHashMap;
 import java.util.LinkedList;
 import java.util.List;
-import java.util.Locale;
 import java.util.Map;
 
 import static net.osmand.data.PointDescription.POINT_TYPE_MAP_MARKER;
@@ -688,7 +684,7 @@ public class MapMarkersHelper {
 				}
 				if (colorIndex == -1) {
 					if (mapMarkers.size() > 0) {
-						colorIndex = (mapMarkers.get(mapMarkers.size() - 1).colorIndex + 1) % MAP_MARKERS_COLORS_COUNT;
+						colorIndex = (mapMarkers.get(0).colorIndex + 1) % MAP_MARKERS_COLORS_COUNT;
 					} else {
 						colorIndex = 0;
 					}
@@ -708,7 +704,7 @@ public class MapMarkersHelper {
 				marker.history = false;
 				marker.nextKey = MapMarkersDbHelper.TAIL_NEXT_VALUE;
 				markersDbHelper.addMarker(marker);
-				mapMarkers.add(marker);
+				mapMarkers.add(0, marker);
 				addMarkerToGroup(marker);
 				checkAndFixActiveMarkersOrderIfNeeded();
 			}
