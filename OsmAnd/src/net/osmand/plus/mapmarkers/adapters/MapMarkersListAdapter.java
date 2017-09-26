@@ -8,10 +8,13 @@ import android.view.MotionEvent;
 import android.view.View;
 import android.view.ViewGroup;
 
+import net.osmand.data.LatLon;
 import net.osmand.plus.IconsCache;
 import net.osmand.plus.MapMarkersHelper.MapMarker;
+import net.osmand.plus.OsmAndFormatter;
 import net.osmand.plus.R;
 import net.osmand.plus.activities.MapActivity;
+import net.osmand.util.MapUtils;
 
 import java.text.SimpleDateFormat;
 import java.util.Collections;
@@ -26,8 +29,19 @@ public class MapMarkersListAdapter extends RecyclerView.Adapter<MapMarkerItemVie
 	private List<MapMarker> markers;
 	private MapMarkersListAdapterListener listener;
 
+	private LatLon location;
+	private boolean useCenter;
+
 	public void setAdapterListener(MapMarkersListAdapterListener listener) {
 		this.listener = listener;
+	}
+
+	public void setLocation(LatLon location) {
+		this.location = location;
+	}
+
+	public void setUseCenter(boolean useCenter) {
+		this.useCenter = useCenter;
 	}
 
 	public MapMarkersListAdapter(MapActivity mapActivity) {
@@ -116,6 +130,14 @@ public class MapMarkersListAdapter extends RecyclerView.Adapter<MapMarkerItemVie
 			descr = month + " " + day;
 		}
 		holder.description.setText(descr);
+
+		if (location != null) {
+			holder.distance.setTextColor(ContextCompat.getColor(mapActivity, useCenter
+					? R.color.color_distance : R.color.color_myloc_distance));
+			float dist = (float) MapUtils.getDistance(location.getLatitude(), location.getLongitude(),
+					marker.getLatitude(), marker.getLongitude());
+			holder.distance.setText(OsmAndFormatter.getFormattedDistance(dist, mapActivity.getMyApplication()));
+		}
 	}
 
 	@Override
