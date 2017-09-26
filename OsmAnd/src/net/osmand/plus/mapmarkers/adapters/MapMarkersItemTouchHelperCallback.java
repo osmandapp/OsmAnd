@@ -19,6 +19,7 @@ public class MapMarkersItemTouchHelperCallback extends ItemTouchHelper.Callback 
 
 	private final ItemTouchHelperAdapter adapter;
 	private MapActivity mapActivity;
+	private boolean swipeEnabled = true;
 
 	private Paint backgroundPaint = new Paint();
 	private Paint iconPaint = new Paint();
@@ -35,6 +36,11 @@ public class MapMarkersItemTouchHelperCallback extends ItemTouchHelper.Callback 
 
 	private int delStrWidth;
 	private int textHeight;
+
+	public MapMarkersItemTouchHelperCallback(ItemTouchHelperAdapter adapter) {
+		this.adapter = adapter;
+		swipeEnabled = false;
+	}
 
 	public MapMarkersItemTouchHelperCallback(MapActivity mapActivity, ItemTouchHelperAdapter adapter) {
 		this.mapActivity = mapActivity;
@@ -69,10 +75,15 @@ public class MapMarkersItemTouchHelperCallback extends ItemTouchHelper.Callback 
 	}
 
 	@Override
+	public boolean isItemViewSwipeEnabled() {
+		return swipeEnabled;
+	}
+
+	@Override
 	public int getMovementFlags(RecyclerView recyclerView, RecyclerView.ViewHolder viewHolder) {
 		final int dragFlags = ItemTouchHelper.UP | ItemTouchHelper.DOWN;
 		final int moveFlags = ItemTouchHelper.LEFT | ItemTouchHelper.RIGHT;
-		return makeMovementFlags(dragFlags, moveFlags);
+		return makeMovementFlags(dragFlags, swipeEnabled ? moveFlags : 0);
 	}
 
 	@Override
