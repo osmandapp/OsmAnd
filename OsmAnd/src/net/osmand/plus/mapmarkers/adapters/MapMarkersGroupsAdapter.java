@@ -344,20 +344,15 @@ public class MapMarkersGroupsAdapter extends RecyclerView.Adapter<RecyclerView.V
 					@Override
 					public void onCheckedChanged(CompoundButton compoundButton, boolean enabled) {
 						groupHeader.getGroup().setDisabled(!enabled);
-						MapMarkersHelper.MarkersSyncGroup syncGroup = app.getMapMarkersHelper().getGroup(groupHeader.getGroup().getGroupKey());
-						if (syncGroup != null) {
-							app.getMapMarkersHelper().updateSyncGroupDisabled(syncGroup.getId(), !enabled);
-						}
+						final String groupKey = groupHeader.getGroup().getGroupKey();
+						app.getMapMarkersHelper().updateGroupDisabled(groupKey, !enabled);
 						if (!enabled) {
 							snackbar = Snackbar.make(holder.itemView, app.getString(R.string.group_will_be_removed_after_restart), Snackbar.LENGTH_LONG)
 									.setAction(R.string.shared_string_undo, new View.OnClickListener() {
 										@Override
 										public void onClick(View view) {
 											groupHeader.getGroup().setDisabled(false);
-											MapMarkersHelper.MarkersSyncGroup syncGroup = app.getMapMarkersHelper().getGroup(groupHeader.getGroup().getGroupKey());
-											if (syncGroup != null) {
-												app.getMapMarkersHelper().updateSyncGroupDisabled(syncGroup.getId(), false);
-											}
+											app.getMapMarkersHelper().updateGroupDisabled(groupKey, false);
 											headerViewHolder.disableGroupSwitch.setChecked(true);
 										}
 									});

@@ -641,7 +641,7 @@ public class MapMarkersHelper {
 		markersDbHelper.removeDisabledGroups();
 	}
 
-	public void updateSyncGroupDisabled(String id, boolean disabled) {
+	public void updateGroupDisabled(String id, boolean disabled) {
 		if (id != null) {
 			markersDbHelper.updateSyncGroupDisabled(id, disabled);
 		}
@@ -923,6 +923,8 @@ public class MapMarkersHelper {
 			MapMarkersHelper.MarkersSyncGroup syncGroup = getGroup(marker.groupKey);
 			if (syncGroup != null) {
 				group.setType(syncGroup.getType());
+			} else {
+				group.setType(MarkersSyncGroup.FAVORITES_TYPE);
 			}
 			group.setColor(MapMarker.getColorId(marker.colorIndex));
 		}
@@ -983,6 +985,8 @@ public class MapMarkersHelper {
 					MapMarkersHelper.MarkersSyncGroup syncGroup = getGroup(marker.groupKey);
 					if (syncGroup != null) {
 						group.setType(syncGroup.getType());
+					} else {
+						group.setType(MarkersSyncGroup.FAVORITES_TYPE);
 					}
 					group.setColor(MapMarker.getColorId(marker.colorIndex));
 					group.setCreationDate(marker.creationDate);
