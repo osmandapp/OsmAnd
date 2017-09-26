@@ -4,7 +4,6 @@ import android.support.design.widget.Snackbar;
 import android.support.v4.content.ContextCompat;
 import android.support.v4.view.MotionEventCompat;
 import android.support.v7.widget.RecyclerView;
-import android.support.v7.widget.helper.ItemTouchHelper;
 import android.view.LayoutInflater;
 import android.view.MotionEvent;
 import android.view.View;
@@ -224,6 +223,11 @@ public class MapMarkersActiveAdapter extends RecyclerView.Adapter<MapMarkerItemV
 	}
 
 	@Override
+	public void onSwipeStarted() {
+		listener.onSwipeStarted();
+	}
+
+	@Override
 	public boolean onItemMove(int from, int to) {
 		Collections.swap(markers, from, to);
 		notifyItemMoved(from, to);
@@ -266,7 +270,7 @@ public class MapMarkersActiveAdapter extends RecyclerView.Adapter<MapMarkerItemV
 
 	@Override
 	public void onItemDismiss(RecyclerView.ViewHolder holder) {
-		listener.onDragEnded(holder);
+		listener.onDragOrSwipeEnded(holder);
 	}
 
 	public interface MapMarkersActiveAdapterListener {
@@ -275,6 +279,8 @@ public class MapMarkersActiveAdapter extends RecyclerView.Adapter<MapMarkerItemV
 
 		void onDragStarted(RecyclerView.ViewHolder holder);
 
-		void onDragEnded(RecyclerView.ViewHolder holder);
+		void onDragOrSwipeEnded(RecyclerView.ViewHolder holder);
+
+		void onSwipeStarted();
 	}
 }

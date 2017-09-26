@@ -48,6 +48,7 @@ public class MapMarkersGroupsFragment extends Fragment implements OsmAndCompassL
 	private Paint iconPaint = new Paint();
 	private Paint textPaint = new Paint();
 	private Snackbar snackbar;
+	private boolean compassUpdateAllowed = true;
 
 	@Nullable
 	@Override
@@ -110,6 +111,7 @@ public class MapMarkersGroupsFragment extends Fragment implements OsmAndCompassL
 				if (actionState == ItemTouchHelper.ACTION_STATE_SWIPE && viewHolder instanceof MapMarkerItemViewHolder) {
 					if (!iconHidden && isCurrentlyActive) {
 						((MapMarkerItemViewHolder) viewHolder).optionsBtn.setVisibility(View.GONE);
+						compassUpdateAllowed = false;
 						iconHidden = true;
 					}
 					View itemView = viewHolder.itemView;
@@ -149,6 +151,7 @@ public class MapMarkersGroupsFragment extends Fragment implements OsmAndCompassL
 				if (viewHolder instanceof MapMarkerItemViewHolder) {
 					((MapMarkerItemViewHolder) viewHolder).optionsBtn.setVisibility(View.VISIBLE);
 					iconHidden = false;
+					compassUpdateAllowed = true;
 				}
 				super.clearView(recyclerView, viewHolder);
 			}
@@ -283,6 +286,9 @@ public class MapMarkersGroupsFragment extends Fragment implements OsmAndCompassL
 	}
 
 	private void updateLocationUi() {
+		if (!compassUpdateAllowed) {
+			return;
+		}
 		final MapActivity mapActivity = (MapActivity) getActivity();
 		if (mapActivity != null && adapter != null) {
 			mapActivity.getMyApplication().runInUIThread(new Runnable() {

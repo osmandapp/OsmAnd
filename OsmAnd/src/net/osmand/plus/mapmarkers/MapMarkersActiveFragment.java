@@ -71,7 +71,7 @@ public class MapMarkersActiveFragment extends Fragment implements OsmAndCompassL
 			}
 
 			@Override
-			public void onDragEnded(RecyclerView.ViewHolder holder) {
+			public void onDragOrSwipeEnded(RecyclerView.ViewHolder holder) {
 				compassUpdateAllowed = true;
 				toPosition = holder.getAdapterPosition();
 				if (toPosition >= 0 && fromPosition >= 0 && toPosition != fromPosition) {
@@ -80,6 +80,11 @@ public class MapMarkersActiveFragment extends Fragment implements OsmAndCompassL
 					adapter.notifyDataSetChanged();
 					mapActivity.getMyApplication().getSettings().MAP_MARKERS_ORDER_BY_MODE.set(OsmandSettings.MapMarkersOrderByMode.CUSTOM);
 				}
+			}
+
+			@Override
+			public void onSwipeStarted() {
+				compassUpdateAllowed = false;
 			}
 		});
 		recyclerView.setAdapter(adapter);

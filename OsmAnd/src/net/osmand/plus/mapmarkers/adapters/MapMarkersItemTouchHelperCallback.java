@@ -97,6 +97,7 @@ public class MapMarkersItemTouchHelperCallback extends ItemTouchHelper.Callback 
 			if (!iconHidden && isCurrentlyActive) {
 				((MapMarkerItemViewHolder) viewHolder).optionsBtn.setVisibility(View.GONE);
 				iconHidden = true;
+				adapter.onSwipeStarted();
 			}
 			View itemView = viewHolder.itemView;
 			int colorIcon;
@@ -137,6 +138,8 @@ public class MapMarkersItemTouchHelperCallback extends ItemTouchHelper.Callback 
 	}
 
 	interface ItemTouchHelperAdapter {
+
+		void onSwipeStarted();
 
 		boolean onItemMove(int from, int to);
 

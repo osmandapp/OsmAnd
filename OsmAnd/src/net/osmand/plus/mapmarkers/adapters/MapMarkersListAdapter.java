@@ -128,6 +128,11 @@ public class MapMarkersListAdapter extends RecyclerView.Adapter<MapMarkerItemVie
 	}
 
 	@Override
+	public void onSwipeStarted() {
+
+	}
+
+	@Override
 	public boolean onItemMove(int from, int to) {
 		Collections.swap(markers, from, to);
 		notifyItemMoved(from, to);
