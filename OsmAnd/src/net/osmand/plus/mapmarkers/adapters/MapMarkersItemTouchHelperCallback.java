@@ -41,7 +41,7 @@ public class MapMarkersItemTouchHelperCallback extends ItemTouchHelper.Callback 
 		this.adapter = adapter;
 		marginSides = mapActivity.getResources().getDimension(R.dimen.list_content_padding);
 		deleteBitmap = BitmapFactory.decodeResource(mapActivity.getResources(), R.drawable.ic_action_delete_dark);
-		historyBitmap = BitmapFactory.decodeResource(mapActivity.getResources(), R.drawable.ic_action_history2);
+		historyBitmap = BitmapFactory.decodeResource(mapActivity.getResources(), R.drawable.ic_action_history);
 		night = !mapActivity.getMyApplication().getSettings().isLightContent();
 
 		backgroundPaint.setColor(ContextCompat.getColor(mapActivity, night ? R.color.dashboard_divider_dark : R.color.dashboard_divider_light));
