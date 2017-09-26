@@ -12,7 +12,6 @@ import android.widget.TextView;
 
 import net.osmand.data.LatLon;
 import net.osmand.plus.IconsCache;
-import net.osmand.plus.MapMarkersHelper;
 import net.osmand.plus.MapMarkersHelper.MapMarker;
 import net.osmand.plus.MapMarkersHelper.MapMarkersGroup;
 import net.osmand.plus.MapMarkersHelper.GroupHeader;
@@ -294,6 +293,22 @@ public class MapMarkersGroupsAdapter extends RecyclerView.Adapter<RecyclerView.V
 					}
 					updateShowDirectionMarkers();
 					notifyDataSetChanged();
+					if (!markerInHistory) {
+						snackbar = Snackbar.make(itemViewHolder.itemView, R.string.marker_moved_to_history, Snackbar.LENGTH_LONG)
+								.setAction(R.string.shared_string_undo, new View.OnClickListener() {
+									@Override
+									public void onClick(View view) {
+										mapActivity.getMyApplication().getMapMarkersHelper().restoreMarkerFromHistory(marker, 0);
+										createDisplayGroups();
+										updateShowDirectionMarkers();
+										notifyDataSetChanged();
+									}
+								});
+						View snackBarView = snackbar.getView();
+						TextView tv = (TextView) snackBarView.findViewById(android.support.design.R.id.snackbar_action);
+						tv.setTextColor(ContextCompat.getColor(mapActivity, R.color.color_dialog_buttons_dark));
+						snackbar.show();
+					}
 				}
 			});
 			itemViewHolder.iconReorder.setVisibility(View.GONE);
