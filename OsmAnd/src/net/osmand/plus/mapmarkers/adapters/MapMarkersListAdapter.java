@@ -86,11 +86,15 @@ public class MapMarkersListAdapter extends RecyclerView.Adapter<MapMarkerItemVie
 
 		if (pos == 0 || pos == getItemCount() - 1) {
 			holder.firstDescription.setVisibility(View.VISIBLE);
-			holder.firstDescription.setText(pos == 0
-					? mapActivity.getString(R.string.shared_string_control_start) + " • "
-					: mapActivity.getString(R.string.shared_string_finish) + " • ");
+			if (pos == 0) {
+				holder.topDivider.setVisibility(View.VISIBLE);
+				holder.firstDescription.setText(mapActivity.getString(R.string.shared_string_control_start) + " • ");
+			} else {
+				holder.firstDescription.setText(mapActivity.getString(R.string.shared_string_finish) + " • ");
+			}
 		} else {
 			holder.firstDescription.setVisibility(View.GONE);
+			holder.topDivider.setVisibility(View.GONE);
 		}
 
 		if (pos == getItemCount() - 1) {

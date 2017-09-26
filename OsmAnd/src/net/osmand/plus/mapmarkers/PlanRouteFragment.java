@@ -205,6 +205,9 @@ public class PlanRouteFragment extends Fragment implements OsmAndLocationListene
 				}
 			}
 		});
+		boolean isSmartphone = getResources().getConfiguration().smallestScreenWidthDp < 600;
+		markersRv.setPadding(0, 0, 0, AndroidUtils.dpToPx(mapActivity, isSmartphone ? 72 : 108));
+		markersRv.setClipToPadding(false);
 		markersRv.setLayoutManager(new LinearLayoutManager(getContext()));
 		markersRv.setAdapter(adapter);
 
