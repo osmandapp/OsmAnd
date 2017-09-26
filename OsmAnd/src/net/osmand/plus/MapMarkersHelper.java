@@ -369,6 +369,7 @@ public class MapMarkersHelper {
 			}
 			if (!favGroup.visible) {
 				removeActiveMarkersFromSyncGroup(group.getId());
+				removeActiveMarkersFromGroup(group.getId());
 				return;
 			}
 			if (group.getColor() == -1) {
@@ -391,6 +392,7 @@ public class MapMarkersHelper {
 			GPXFile gpx = selectedGpxFile == null ? null : selectedGpxFile.getGpxFile();
 			if (gpx == null) {
 				removeActiveMarkersFromSyncGroup(group.getId());
+				removeActiveMarkersFromGroup(group.getId());
 				return;
 			}
 
@@ -438,6 +440,7 @@ public class MapMarkersHelper {
 				if (!marker.history) {
 					markersDbHelper.removeMarker(marker, false);
 					mapMarkers.remove(marker);
+					removeMarkerFromGroup(marker);
 					needRefresh = true;
 				}
 			}
@@ -861,6 +864,21 @@ public class MapMarkersHelper {
 		}
 	}
 
+	private void removeActiveMarkersFromGroup(String groupId) {
+		MapMarkersGroup group = getMapMarkerGroupByKey(groupId);
+		if (group != null) {
+			List<MapMarker> markers = group.getMarkers();
+			List<MapMarker> historyMarkers = new ArrayList<>();
+			for (MapMarker marker : markers) {
+				if (marker.history) {
+					historyMarkers.add(marker);
+				}
+			}
+			group.setMarkers(historyMarkers);
+			updateGroup(group);
+		}
+	}
+
 	public void updateGroup(MapMarkersGroup mapMarkersGroup) {
 		if (mapMarkersGroup.getMarkers().size() == 0) {
 			mapMarkersGroups.remove(mapMarkersGroup);
@@ -1023,6 +1041,16 @@ public class MapMarkersHelper {
 		for (MapMarkersGroup group : mapMarkersGroups) {
 			if ((name == null && group.getName() == null)
 					|| (group.getName() != null && group.getName().equals(name))) {
+				return group;
+			}
+		}
+		return null;
+	}
+
+	public MapMarkersGroup getMapMarkerGroupByKey(String key) {
+		for (MapMarkersGroup group : mapMarkersGroups) {
+			if ((key == null && group.getGroupKey() == null)
+					|| (group.getGroupKey() != null && group.getGroupKey().equals(key))) {
 				return group;
 			}
 		}
