@@ -507,8 +507,9 @@ public class MapActivity extends OsmandActionBarActivity implements DownloadEven
 			}
 		}
 		if (getPlanRouteFragment() != null) {
-			getPlanRouteFragment().quit(true);
-			MapMarkersDialogFragment.showInstance(this);
+			if (getPlanRouteFragment().quit(true)) {
+				MapMarkersDialogFragment.showInstance(this);
+			}
 			return;
 		}
 		if (getMeasurementToolFragment() != null) {

@@ -551,6 +551,12 @@ public class MapMarkersHelper {
 		return mapMarkersHistory;
 	}
 
+	public void clearSelections() {
+		for (MapMarker m : mapMarkers) {
+			m.selected = false;
+		}
+	}
+
 	public List<MapMarker> getSelectedMarkers() {
 		List<MapMarker> list = new ArrayList<>();
 		for (MapMarker m : this.mapMarkers) {

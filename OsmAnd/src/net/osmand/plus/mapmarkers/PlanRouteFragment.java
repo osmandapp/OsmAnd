@@ -7,7 +7,9 @@ import android.support.annotation.Nullable;
 import android.support.v4.app.Fragment;
 import android.support.v4.app.FragmentManager;
 import android.support.v4.content.ContextCompat;
+import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
+import android.support.v7.widget.helper.ItemTouchHelper;
 import android.view.ContextThemeWrapper;
 import android.view.LayoutInflater;
 import android.view.View;
@@ -21,9 +23,12 @@ import net.osmand.AndroidUtils;
 import net.osmand.plus.ApplicationMode;
 import net.osmand.plus.IconsCache;
 import net.osmand.plus.MapMarkersHelper;
+import net.osmand.plus.MapMarkersHelper.MapMarker;
 import net.osmand.plus.R;
 import net.osmand.plus.activities.MapActivity;
 import net.osmand.plus.helpers.AndroidUiHelper;
+import net.osmand.plus.mapmarkers.adapters.MapMarkersItemTouchHelperCallback;
+import net.osmand.plus.mapmarkers.adapters.MapMarkersListAdapter;
 import net.osmand.plus.measurementtool.RecyclerViewFragment;
 import net.osmand.plus.measurementtool.SnapToRoadBottomSheetDialogFragment;
 import net.osmand.plus.measurementtool.SnapToRoadBottomSheetDialogFragment.SnapToRoadFragmentListener;
@@ -40,6 +45,7 @@ public class PlanRouteFragment extends Fragment {
 	public static final String TAG = "PlanRouteFragment";
 
 	private MapMarkersHelper markersHelper;
+	private MapMarkersListAdapter adapter;
 	private IconsCache iconsCache;
 	private PlanRouteToolbarController toolbarController;
 	private ApplicationMode appMode;
@@ -148,6 +154,40 @@ public class PlanRouteFragment extends Fragment {
 		} else {
 			markersRv = new RecyclerView(mapActivity);
 		}
+
+		adapter = new MapMarkersListAdapter(mapActivity);
+		final ItemTouchHelper touchHelper = new ItemTouchHelper(new MapMarkersItemTouchHelperCallback(adapter));
+		touchHelper.attachToRecyclerView(markersRv);
+		adapter.setAdapterListener(new MapMarkersListAdapter.MapMarkersListAdapterListener() {
+
+			private int fromPosition;
+			private int toPosition;
+
+			@Override
+			public void onItemClick(View view) {
+				int pos = markersRv.getChildAdapterPosition(view);
+				MapMarker marker = adapter.getItem(pos);
+				marker.selected = !marker.selected;
+				adapter.notifyItemChanged(pos);
+			}
+
+			@Override
+			public void onDragStarted(RecyclerView.ViewHolder holder) {
+				fromPosition = holder.getAdapterPosition();
+				touchHelper.startDrag(holder);
+			}
+
+			@Override
+			public void onDragEnded(RecyclerView.ViewHolder holder) {
+				toPosition = holder.getAdapterPosition();
+				if (toPosition >= 0 && fromPosition >= 0 && toPosition != fromPosition) {
+					mapActivity.getMyApplication().getMapMarkersHelper().checkAndFixActiveMarkersOrderIfNeeded();
+					adapter.notifyDataSetChanged();
+				}
+			}
+		});
+		markersRv.setLayoutManager(new LinearLayoutManager(getContext()));
+		markersRv.setAdapter(adapter);
 
 		return view;
 	}
@@ -373,11 +413,13 @@ public class PlanRouteFragment extends Fragment {
 		}
 	}
 
-	public void quit(boolean hideMarkersListFirst) {
+	public boolean quit(boolean hideMarkersListFirst) {
 		if (markersListOpened && hideMarkersListFirst) {
 			hideMarkersList();
+			return false;
 		} else {
 			dismiss(getMapActivity());
+			return true;
 		}
 	}
 
@@ -385,6 +427,7 @@ public class PlanRouteFragment extends Fragment {
 		if (markersListOpened) {
 			hideMarkersList();
 		}
+		markersHelper.clearSelections();
 		activity.getSupportFragmentManager().beginTransaction().remove(this).commitAllowingStateLoss();
 	}
 

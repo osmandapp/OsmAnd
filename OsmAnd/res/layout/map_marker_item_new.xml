@@ -9,10 +9,10 @@
 
     <LinearLayout
         android:id="@+id/main_layout"
-        android:background="?attr/bg_color"
-        android:orientation="vertical"
         android:layout_width="match_parent"
-        android:layout_height="wrap_content">
+        android:layout_height="wrap_content"
+        android:background="?attr/bg_color"
+        android:orientation="vertical">
 
         <LinearLayout
             android:layout_width="match_parent"
@@ -23,25 +23,25 @@
                 android:id="@+id/map_marker_reorder_icon"
                 android:layout_width="56dp"
                 android:layout_height="56dp"
-                android:scaleType="centerInside"
                 android:layout_gravity="center_vertical"
+                android:scaleType="centerInside"
                 android:tint="?attr/secondary_icon_color"
                 tools:src="@drawable/ic_action_reorder"/>
 
             <View
-                tools:visibility="visible"
-                android:visibility="gone"
                 android:id="@+id/flag_icon_left_space"
                 android:layout_width="16dp"
-                android:layout_height="wrap_content"/>
+                android:layout_height="wrap_content"
+                android:visibility="gone"
+                tools:visibility="visible"/>
 
             <android.support.v7.widget.AppCompatImageView
                 android:id="@+id/map_marker_icon"
                 android:layout_width="24dp"
                 android:layout_height="24dp"
                 android:layout_gravity="center_vertical"
-                android:layout_marginRight="16dp"
                 android:layout_marginEnd="16dp"
+                android:layout_marginRight="16dp"
                 tools:src="@drawable/ic_action_flag_dark"/>
 
             <LinearLayout
@@ -55,16 +55,15 @@
                     android:layout_height="28dp">
 
                     <android.support.v7.widget.AppCompatTextView
-                        android:layout_gravity="bottom"
                         android:id="@+id/map_marker_title"
                         android:layout_width="match_parent"
                         android:layout_height="wrap_content"
+                        android:layout_gravity="bottom"
                         android:ellipsize="end"
                         android:maxLines="1"
                         android:textColor="?android:textColorPrimary"
                         android:textSize="@dimen/default_list_text_size"
                         tools:text="Van Gogh Museum"/>
-
                 </LinearLayout>
 
                 <LinearLayout
@@ -72,12 +71,24 @@
                     android:layout_height="wrap_content"
                     android:gravity="center_vertical">
 
+                    <android.support.v7.widget.AppCompatTextView
+                        android:id="@+id/map_marker_first_descr"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:ellipsize="end"
+                        android:maxLines="1"
+                        android:textColor="?android:textColorSecondary"
+                        android:textSize="@dimen/default_desc_text_size"
+                        android:visibility="gone"
+                        tools:text="Start • "
+                        tools:visibility="visible"/>
+
                     <ImageView
                         android:id="@+id/map_marker_direction_icon"
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
-                        android:layout_marginRight="4dp"
                         android:layout_marginEnd="4dp"
+                        android:layout_marginRight="4dp"
                         tools:src="@drawable/ic_direction_arrow"/>
 
                     <android.support.v7.widget.AppCompatTextView
@@ -125,10 +136,21 @@
                 android:id="@+id/map_marker_options_button"
                 android:layout_width="56dp"
                 android:layout_height="56dp"
-                tools:background="@drawable/marker_circle_background_dark_with_inset"
                 android:focusableInTouchMode="true"
+                tools:background="@drawable/marker_circle_background_dark_with_inset"
                 tools:src="@drawable/ic_action_marker_passed"/>
 
+            <CheckBox
+                android:id="@+id/map_marker_check_box"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginBottom="16dp"
+                android:layout_marginLeft="16dp"
+                android:layout_marginRight="16dp"
+                android:layout_marginTop="16dp"
+                android:background="@null"
+                android:visibility="gone"
+                tools:visibility="visible"/>
         </LinearLayout>
 
         <View
@@ -138,12 +160,12 @@
             android:layout_marginLeft="56dp"
             android:layout_marginStart="56dp"
             tools:background="?attr/dashboard_divider"/>
-
     </LinearLayout>
 
-    <include layout="@layout/card_bottom_divider"
-             tools:visibility="visible"
-             android:visibility="gone"
-             android:id="@+id/bottom_shadow"/>
+    <include
+        android:id="@+id/bottom_shadow"
+        layout="@layout/card_bottom_divider"
+        android:visibility="gone"
+        tools:visibility="visible"/>
 
 </LinearLayout>
