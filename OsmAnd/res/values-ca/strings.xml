@@ -2642,4 +2642,14 @@ Abasta l\'àrea: %1$s x %2$s</string>
     <string name="show_arrows_on_the_map">Mostra fletxes sobre el mapa</string>
     <string name="show_passed">Mostra la data \'Darrer ús\'</string>
     <string name="hide_passed">Amaga la data \'Darrer ús\'</string>
+    <string name="use_location">Utilitza la ubicació</string>
+    <string name="add_location_as_first_point_descr">Afegeix la vostra ubicació com el primer punt per planificar la ruta perfecta.</string>
+    <string name="my_location">La vostra posició</string>
+    <string name="shared_string_finish">Finalitza</string>
+    <string name="shared_string_sort">Ordena</string>
+    <string name="coordinate_input">Entrada de coordenades</string>
+    <string name="is_saved">s\'ha desat</string>
+    <string name="marker_save_as_track_descr">OsmAnd desarà tots els vostres marcadors en un fitxer separat, podeu introduir el nom d\'arxiu:</string>
+    <string name="marker_save_as_track">Desa com una traça</string>
+    <string name="move_to_history">Mou a l\'historial</string>
     </resources>
