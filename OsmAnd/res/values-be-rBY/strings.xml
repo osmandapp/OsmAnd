@@ -2840,4 +2840,16 @@ U vypadku, kali vy lubіcie OsmAnd і OSM і chočacie padtrymać jaho, heta іd
     <string name="show_arrows_on_the_map">Pakazać strelki na karcie</string>
     <string name="show_passed">Pakazać datu apošniaha vykarystannia</string>
     <string name="hide_passed">Schavać datu apošniaha vykarystannia</string>
+    <string name="use_location">Vykarystoŭvać miescaznachodžannie</string>
+    <string name="add_location_as_first_point_descr">Dadać vaša miescaznachodžannie jak pieršuju kropku pry planavanni maršrutu.</string>
+    <string name="my_location">Majo miescaznachodžannie</string>
+    <string name="shared_string_finish">Finiš</string>
+    <string name="plan_route">Pranavać maršrut</string>
+    <string name="shared_string_sort">Sartavać</string>
+    <string name="coordinate_input">Uvod kaardynat</string>
+    <string name="is_saved">zachavany</string>
+    <string name="marker_save_as_track_descr">OsmAnd zachavaje ŭsie vašy markiery ŭ asobny fajl. Vy možacie ŭviesci nazvu fajla:</string>
+    <string name="marker_save_as_track">Zachavać jak slied</string>
+    <string name="move_to_history">Pieramiascić u historyju</string>
+    <string name="group_will_be_removed_after_restart">Hrupa budzie vydalienaja paslia pierazapusku</string>
     </resources>
