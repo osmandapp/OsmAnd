@@ -26,8 +26,8 @@
     <string name="show_passed">Show \'Last used\' date</string>
     <string name="hide_passed">Hide \'Last used\' date</string>
     <string name="remove_from_map_markers">Remove from Map Markers</string>
-    <string name="descendingly">Descendingly</string>
-    <string name="ascendingly">Ascendingly</string>
+    <string name="descendingly">Descending</string>
+    <string name="ascendingly">Ascending</string>
     <string name="date_added">Date added</string>
     <string name="order_by">Order by:</string>
     <string name="marker_show_distance_descr">Select how to indicate distance and direction to Map markers on the map screen:</string>
