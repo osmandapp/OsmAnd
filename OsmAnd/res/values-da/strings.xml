@@ -2890,4 +2890,16 @@ Tidligere destination bliver sidste mellemliggende punkt.</string>
     <string name="show_arrows_on_the_map">Vis pile på kortet</string>
     <string name="show_passed">Vis \'sidst anvendt\' dato</string>
     <string name="hide_passed">Skjul \'sidst anvendt\' dato</string>
+    <string name="use_location">Brug placering</string>
+    <string name="add_location_as_first_point_descr">Tilføj placering som første punkt for at planlægge en perfekt rute.</string>
+    <string name="my_location">Placering</string>
+    <string name="shared_string_finish">Afslut</string>
+    <string name="plan_route">Planlæg rute</string>
+    <string name="shared_string_sort">Sorter</string>
+    <string name="coordinate_input">Koordinatindtastning</string>
+    <string name="is_saved">er gemt</string>
+    <string name="marker_save_as_track_descr">Gem alle markører til en separat fil og indtast et filnavn:</string>
+    <string name="marker_save_as_track">Gem som spor</string>
+    <string name="move_to_history">Flyt til historik</string>
+    <string name="group_will_be_removed_after_restart">Gruppen vil blive fjernet efter genstart</string>
     </resources>
