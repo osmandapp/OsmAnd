@@ -264,4 +264,6 @@
 
 	<color name="marker_circle_button_color_dark">#525e66</color>
 
+	<color name="keyboard_color">#545454</color>
+
 </resources>
