@@ -1066,7 +1066,7 @@
     <string name="current_route">الطريق الحالي</string>
     <string name="mark_to_delete">اختر للحذف</string>
 	<string name="osmo_grop_name_length_alert">اسم المجموعة ينبغي أن يكون 3 أحرف على الأقل!</string>
-	<string name="confirmation_to_clear_history">هل ترغب في حذف السجلات؟</string>
+	<string name="confirmation_to_clear_history">هل ترغب في حذف السجل الزمني؟</string>
     <string name="shared_string_go">ذهاب</string>
 	<string name="osmand_parking_overdue">تأخر</string>
 	<string name="osmand_parking_time_left">يسار</string>
@@ -1090,7 +1090,7 @@
 	<string name="shared_string_selected">محدد</string>
 	<string name="shared_string_selected_lowercase">محدد</string>
 	<string name="shared_string_never">أبداً</string>
-	<string name="shared_string_history">السجلات</string>
+	<string name="shared_string_history">السجل الزمني</string>
 	<string name="shared_string_select_on_map">حدد على الخريطة</string>
 	<string name="shared_string_select_all">تحديد الكل</string>
 	<string name="shared_string_deselect">قم بإلغاء تحديد</string>
@@ -2078,7 +2078,7 @@
     <string name="back_to_search">العودة إلى البحث</string>
     <string name="consider_turning_polygons_off">من المستحسن إيقاف عرض المضلعات.</string>
     <string name="access_from_map_description">زر القائمة يشغل لوحة التحكم و ليس القائمة بحد ذاتها</string>
-    <string name="confirmation_to_delete_history_items">هل تريد حذف العناصر المحددة من السجل؟</string>
+    <string name="confirmation_to_delete_history_items">هل تريد حذف العناصر المحددة من السجل الزمني؟</string>
     <string name="access_direction_haptic_feedback">توجيه رد فعل الهزاز</string>
     <string name="please_specify_poi_type_only_from_list">يرجى تحديد نوع POI الصحيح أو تخطيه</string>
     <string name="show_on_start_description">\'إيقاف\' تطلق مباشرة واجهة الخريطة</string>
@@ -2760,8 +2760,8 @@
     <string name="add_segment_to_the_track">إضافة إلى مسار GPX</string>
 <string name="map_orientation_change_in_accordance_with_speed">عتبة توجيه الخريطة</string>
     <string name="map_orientation_change_in_accordance_with_speed_descr">حدد أدناه على أي سرعة يتغير توجيه الخريطة من \'اتجاه الحركة\' إلى \'البوصلة\'</string>
-    <string name="all_markers_moved_to_history">كافة علامات الخريطة انتقلت إلى السجل</string>
-    <string name="marker_moved_to_history">علامة الخريطة نقلت إلى السجل</string>
+    <string name="all_markers_moved_to_history">كافة علامات الخريطة انتقلت إلى السجل الزمني</string>
+    <string name="marker_moved_to_history">علامة الخريطة نقلت إلى السجل الزمني</string>
     <string name="marker_moved_to_active">علامة الخريطة انتقلت إلى نشطة</string>
     <string name="shared_string_list">قائمة</string>
     <string name="shared_string_groups">مجموعات</string>
@@ -2773,7 +2773,7 @@
     <string name="this_year">هذه السنة</string>
     <string name="widget">ويدجت</string>
     <string name="top_bar">الشريط العلوي</string>
-    <string name="move_all_to_history">نقل الكل إلى السجل</string>
+    <string name="move_all_to_history">نقل الكل إلى السجل الزمني</string>
     <string name="build_route">بناء الطريق</string>
     <string name="show_direction">مؤشر المسافة</string>
     <string name="sort_by">فرز حسب</string>
@@ -2791,4 +2791,16 @@
     <string name="date_added">أضيف التاريخ</string>
     <string name="order_by">ترتيب حسب:</string>
     <string name="marker_show_distance_descr">حدد كيفية الإشارة إلى المسافة والاتجاه لعلامات الخريطة على شاشة الخريطة:</string>
+    <string name="use_location">استخدم الموقع</string>
+    <string name="add_location_as_first_point_descr">أضف موقعك كنقطة أولى لتخطيط طريق مثالي.</string>
+    <string name="my_location">موقعي</string>
+    <string name="shared_string_finish">إنهاء</string>
+    <string name="plan_route">تخطيط الطريق</string>
+    <string name="shared_string_sort">فرز</string>
+    <string name="coordinate_input">تنسيق الإدخال</string>
+    <string name="is_saved">تم حفظه</string>
+    <string name="marker_save_as_track_descr">أوسماند سيحفظ كافة العلامات الخاصة بك إلى ملف منفصل، يمكنك إدخال اسم الملف:</string>
+    <string name="marker_save_as_track">حفظ كمسار</string>
+    <string name="move_to_history">العودة إلى السجل الزمني</string>
+    <string name="group_will_be_removed_after_restart">ستتم إزالة المجموعة بعد إعادة التشغيل</string>
     </resources>
