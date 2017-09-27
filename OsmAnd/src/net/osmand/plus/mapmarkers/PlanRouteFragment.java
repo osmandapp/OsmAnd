@@ -27,6 +27,7 @@ import net.osmand.plus.IconsCache;
 import net.osmand.plus.MapMarkersHelper;
 import net.osmand.plus.MapMarkersHelper.MapMarker;
 import net.osmand.plus.OsmAndLocationProvider.OsmAndLocationListener;
+import net.osmand.plus.OsmandSettings;
 import net.osmand.plus.R;
 import net.osmand.plus.activities.MapActivity;
 import net.osmand.plus.base.MapViewTrackingUtilities;
@@ -161,7 +162,9 @@ public class PlanRouteFragment extends Fragment implements OsmAndLocationListene
 		toolbarController.setOnBackButtonClickListener(new View.OnClickListener() {
 			@Override
 			public void onClick(View view) {
-				quit(false);
+				if (quit(false)) {
+					MapMarkersDialogFragment.showInstance(mapActivity);
+				}
 			}
 		});
 		mapActivity.showTopToolbar(toolbarController);
@@ -201,7 +204,14 @@ public class PlanRouteFragment extends Fragment implements OsmAndLocationListene
 				toPosition = holder.getAdapterPosition();
 				if (toPosition >= 0 && fromPosition >= 0 && toPosition != fromPosition) {
 					mapActivity.getMyApplication().getMapMarkersHelper().checkAndFixActiveMarkersOrderIfNeeded();
-					adapter.notifyDataSetChanged();
+					mapActivity.getMyApplication().getSettings().MAP_MARKERS_ORDER_BY_MODE.set(OsmandSettings.MapMarkersOrderByMode.CUSTOM);
+					mapActivity.refreshMap();
+					try {
+						adapter.notifyDataSetChanged();
+					} catch (Exception e) {
+						// to avoid crash because of:
+						// java.lang.IllegalStateException: Cannot call this method while RecyclerView is computing a layout or scrolling
+					}
 				}
 			}
 		});
