@@ -2695,4 +2695,13 @@ Por favor proporciona un código completo</string>
     <string name="this_year">Este año</string>
     <string name="widget">Control</string>
     <string name="top_bar">Barra superior</string>
+    <string name="show_guide_line">Mostrar las directrices</string>
+    <string name="show_arrows_on_the_map">Mostrar las flechas en el mapa</string>
+    <string name="show_passed">Mostrar las anteriores</string>
+    <string name="hide_passed">Ocultar las anteriores</string>
+    <string name="remove_from_map_markers">Eliminar de Map Markers</string>
+    <string name="descendingly">Descendente</string>
+    <string name="ascendingly">Ascendente</string>
+    <string name="date_added">Fecha añadida</string>
+    <string name="order_by">Ordenado por:</string>
     </resources>

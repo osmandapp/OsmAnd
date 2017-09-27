@@ -1484,7 +1484,7 @@ Afghanistan, Ägypten, Albanien, Algerien, Andorra, Angola, Anguilla, Antigua un
 	<string name="osmo_auto_send_locations_descr">Nach App-Start automatisch Streckenaufzeichnung starten und Positionen senden</string>
 	<string name="osmo_auto_send_locations">Automatische Streckenaufzeichnung</string>
 	<string name="osmo_tracker_id">Aufzeichnungskennung</string>
-	<string name="osmo_tracker_id_descr">Tippen, um Aufzeichnungskennung anzuzeigen</string>
+	<string name="osmo_tracker_id_descr">Tippen, um Aufzeichnungs-ID anzuzeigen</string>
 	<string name="osmo_session_token">Sitzungstoken: %1$s</string>
 	<string name="osmo_auth_pending">Auf Autorisierung warten…</string>
 	<string name="osmo_locations_sent">Gesendete Standorte %1$d (im Zwischenspeicher %2$d) </string>
@@ -2813,7 +2813,23 @@ Abgedeckte Fläche: %1$s x %2$s</string>
     <string name="exit_without_saving">Beenden ohne zu speichern?</string>
     <string name="move_all_to_history">Alles zu Historie verschieben</string>
     <string name="build_route">Route erstellen</string>
-    <string name="show_direction">Richtung anzeigen</string>
+    <string name="show_direction">Angabe der Entfernung</string>
     <string name="sort_by">Sortieren nach</string>
     <string name="marker_options">Marker-Optionen</string>
+    <string name="show_guide_line">Hilfslinien zeigen</string>
+    <string name="show_arrows_on_the_map">Pfeile auf der Karte anzeigen</string>
+    <string name="remove_from_map_markers">Entfernen von Kartenmarkierungen</string>
+    <string name="descendingly">Absteigend</string>
+    <string name="ascendingly">Aufsteigend</string>
+    <string name="date_added">Hinzugefügt am</string>
+    <string name="order_by">Sortieren nach:</string>
+    <string name="all_markers_moved_to_history">Alle Kartenmarkierungen in den Verlauf verschoben</string>
+    <string name="shared_string_list">Liste</string>
+    <string name="shared_string_groups">Gruppen</string>
+    <string name="make_active">Aktivieren</string>
+    <string name="today">Heute</string>
+    <string name="yesterday">Gestern</string>
+    <string name="last_seven_days">Letzte 7 Tage</string>
+    <string name="this_year">Dieses Jahr</string>
+    <string name="passed">Passiert: %1$s</string>
     </resources>

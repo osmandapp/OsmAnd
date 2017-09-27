@@ -2786,7 +2786,7 @@ Indikas lokon:  %1$s x %2$s"</string>
     <string name="marker_moved_to_active">Map-marko movita al aktivaj</string>
     <string name="shared_string_list">Listo</string>
     <string name="shared_string_groups">Grupoj</string>
-    <string name="passed">Pasigita: %1$s</string>
+    <string name="passed">Laste uzita: %1$s</string>
     <string name="make_active">Aktivigi</string>
     <string name="today">Hodiaŭ</string>
     <string name="yesterday">Hieraŭ</string>
@@ -2799,4 +2799,8 @@ Indikas lokon:  %1$s x %2$s"</string>
     <string name="ascendingly">kreskante</string>
     <string name="date_added">dato de aldono</string>
     <string name="order_by">Ordigi laŭ:</string>
+    <string name="show_guide_line">Montri gvidan linion</string>
+    <string name="show_arrows_on_the_map">Montri sagetojn sur la mapo</string>
+    <string name="show_passed">Montri daton de lasta uzo</string>
+    <string name="hide_passed">Kaŝi daton de lasta uzo</string>
     </resources>

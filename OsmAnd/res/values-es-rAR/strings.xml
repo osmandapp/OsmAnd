@@ -207,7 +207,7 @@ Lon %2$s</string>
     <string name="osmo_no_connection_msg">No se pudo conectar con el servicio OsMo:\n- comprueba tu conexión a Internet;\n- comprueba los ajustes;\n- visita nuestro Twitter: https://twitter.com/OsMomobi</string>
     <string name="anonymous_user">Usuario anónimo</string>
     <string name="logged_as">Conectado como «%1$s»</string>
-    <string name="speed_limit_exceed">Tolerancia de límite de velocidad</string>
+    <string name="speed_limit_exceed">Tolerancia del límite de velocidad</string>
     <string name="print_route">Imprimir ruta</string>
     <string name="text_size">Tamaño del texto</string>
     <string name="traffic_warning_speed_limit">Límite de velocidad</string>
@@ -668,7 +668,7 @@ Se aprecia la participación activa, y las contribuciones pueden hacerse directa
     <string name="speak_title">Anunciar…</string>
     <string name="speak_descr">Configura el anuncio de nombres de calles, avisos de tráfico (paradas, lomadas), radares y límites de velocidad</string>
     <string name="speak_street_names">Nombres de calles (TTS)</string>
-    <string name="speak_speed_limit">Límites de velocidad</string>
+    <string name="speak_speed_limit">Límite de velocidad</string>
     <string name="speak_cameras">Radares de velocidad</string>
     <string name="speak_traffic_warnings">Avisos de tráfico</string>
     <string name="osb_author_or_password_not_specified">Indica el usuario y contraseña de OSM en los ajustes</string>
@@ -857,7 +857,7 @@ Se aprecia la participación activa, y las contribuciones pueden hacerse directa
     <string name="poi_filter_for_tourists">Para turistas</string>
     <string name="poi_filter_fuel">Combustible</string>
     <string name="show_warnings_title">Mostrar alertas…</string>
-    <string name="show_warnings_descr">Configura avisos de tráfico (límites de velocidad, paradas forzosas, badenes), radares de velocidad, e información de carriles</string>
+    <string name="show_warnings_descr">Configura avisos de tráfico (límites de velocidad, paradas forzosas, lomadas), radares de velocidad, e información de carriles</string>
     <string name="use_compass_navigation_descr">Usa la brújula cuando no se detecta la dirección</string>
     <string name="use_compass_navigation">Usar brújula</string>
     <string name="avoid_motorway">Evitar autopistas</string>
@@ -955,7 +955,7 @@ Se aprecia la participación activa, y las contribuciones pueden hacerse directa
     <string name="bg_service_screen_lock_toast">Pantalla bloqueada</string>
     <string name="bg_service_interval">Definir intervalo de activación:</string>
     <string name="show_cameras">Radares de velocidad</string>
-    <string name="show_traffic_warnings">Límites de velocidad</string>
+    <string name="show_traffic_warnings">Avisos de tráfico</string>
     <string name="avoid_toll_roads">Evitar peajes</string>
     <string name="continue_follow_previous_route_auto">La navegación anterior no finalizó. ¿Continuar siguiéndola? (%1$s segundos)</string>
     <string name="route_updated_loc_found">La ruta será calculada cuando se encuentre la ubicación</string>
@@ -1146,11 +1146,11 @@ Se aprecia la participación activa, y las contribuciones pueden hacerse directa
     <string name="fav_export_confirmation">Ya existe un archivo anterior con favoritos exportados. ¿Quieres sustituirlo?</string>
     <string name="profile_settings">Ajustes de perfiles específicos</string>
     <string name="routing_settings">Navegación</string>
-    <string name="routing_settings_descr">Indica los ajustes para la navegación</string>
+    <string name="routing_settings_descr">Indica las opciones de navegación</string>
     <string name="global_settings">Ajustes globales</string>
     <string name="index_settings">Gestionar mapas</string>
     <string name="general_settings">General</string>
-    <string name="general_settings_descr">Configura la presentación y otros ajustes globales</string>
+    <string name="general_settings_descr">Configura la pantalla y ajustes globales de la aplicación</string>
     <string name="global_app_settings">Ajustes globales de la aplicación</string>
     <string name="user_name">Tu usuario de OSM</string>
     <string name="open_street_map_login_descr">Necesario para envíos a OpenStreetMap.org</string>
@@ -2749,7 +2749,7 @@ Proporciona un código completo</string>
     <string name="marker_moved_to_active">Marcador del mapa movido a los activos</string>
     <string name="shared_string_list">Lista</string>
     <string name="shared_string_groups">Grupos</string>
-    <string name="passed">Finalizado: %1$s</string>
+    <string name="passed">Último uso: %1$s</string>
     <string name="make_active">Activar</string>
     <string name="today">Hoy</string>
     <string name="yesterday">Ayer</string>
@@ -2763,4 +2763,8 @@ Proporciona un código completo</string>
     <string name="ascendingly">Ascendente</string>
     <string name="date_added">Fecha de adición</string>
     <string name="order_by">Ordenar por:</string>
+    <string name="show_guide_line">Mostrar línea guía</string>
+    <string name="show_arrows_on_the_map">Mostrar flechas en el mapa</string>
+    <string name="show_passed">Mostrar fecha de «Últimos usados»</string>
+    <string name="hide_passed">Ocultar fecha de «Últimos usados»</string>
     </resources>

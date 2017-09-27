@@ -2878,7 +2878,16 @@ Tidligere destination bliver sidste mellemliggende punkt.</string>
     <string name="all_markers_moved_to_history">Alle kortmarkører flyttet til historik</string>
     <string name="marker_moved_to_history">Kortmarkør flyttet til historik</string>
     <string name="marker_moved_to_active">Kortmarkør flyttet til aktiv</string>
-    <string name="passed">Bestået: %1$s</string>
+    <string name="passed">Sidst anvendt: %1$s</string>
     <string name="make_active">Aktivér</string>
     <string name="marker_show_distance_descr">Vælg hvordan afstanden og retningen til kortmarkører på kortet angives:</string>
+    <string name="remove_from_map_markers">Fjern fra kortmarkører</string>
+    <string name="descendingly">Faldende</string>
+    <string name="ascendingly">Stigende</string>
+    <string name="date_added">Dato tilføjet</string>
+    <string name="order_by">Sorter efter:</string>
+    <string name="show_guide_line">Vis vejledningslinjer</string>
+    <string name="show_arrows_on_the_map">Vis pile på kortet</string>
+    <string name="show_passed">Vis \'sidst anvendt\' dato</string>
+    <string name="hide_passed">Skjul \'sidst anvendt\' dato</string>
     </resources>

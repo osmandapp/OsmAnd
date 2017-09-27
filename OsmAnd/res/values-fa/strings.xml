@@ -71,7 +71,7 @@
     
 	<string name="rendering_attr_noAdminboundaries_name">مخفی کردن محدوده‌ها</string>
 	<string name="map_widget_max_speed">سرعت مجاز</string>
-    <string name="route_descr_lat_lon">طول جغرافیایی %1$.3f, عرض جغرافیایی %2$.3f</string>
+    <string name="route_descr_lat_lon">عرض جغرافیایی %1$.3f, طول جغرافیایی %2$.3f</string>
     
     <string name="no_buildings_found">ساختمانی یافت نشد.</string>
     <string name="search_villages_and_postcodes">جستجوی روستاها/کد پستی</string>
@@ -1606,7 +1606,9 @@
 	
 	<string name="share_note">به اشتراک گزاری یادداشت</string>
 	
-    <string name="location_on_map">موقعیت:\n…طول %1$s\n…عرض %2$s</string>
+    <string name="location_on_map">موقعیت:
+\n عرض %1$s
+\n طول %2$s</string>
 	<string name="watch">دیدن</string>
 	<string name="notes">یادداشتها</string>
 	<string name="online_map">نقشه آنلاین</string>
@@ -1780,8 +1782,8 @@
     <string name="waypoint_visit_after"/>
     <string name="waypoint_visit_before"/>
     <string name="simulate_your_location">شبیه‌سازی موقعیت شما</string>
-    <string name="short_location_on_map">"طول %1$s
-عرض  %2$s"</string>
+    <string name="short_location_on_map">%1$s
+\n%2$s</string>
     <string name="tips_and_tricks_descr">سوالهای بیشتر پرسیده شده، تغییرات اخیر و سایر موارد</string>
     <string name="shared_string_ellipsis">…</string>
 	<string name="shared_string_selected">انتخاب شده</string>
@@ -2032,33 +2034,33 @@
     <string name="osm_live_thanks">تشکر از شما برای به اشتراک به روز رسانی آنلاین!</string>
     <string name="osm_live_region_desc">بخشی از کمکهای مالی شما پرداخت میشود به کاربرانی که در آن منطقه اصلاحات نقشه را انجام میدهند.</string>
     <string name="osm_live_subscription_settings">تنظیمات اشتراک</string>
-    <string name="quick_action_auto_zoom">زوم اتوماتیک روشن/خاموش</string>
+    <string name="quick_action_auto_zoom">زوم خودکار روشن/خاموش</string>
     <string name="select_street">انتخاب خیابان</string>
     <string name="shared_string_in_name">"در  %1$s"</string>
-    <string name="type_address">آدرس</string>
+    <string name="type_address">نشانی</string>
     <string name="type_city_town">نام شهر یا شهرستان</string>
-    <string name="type_postcode">کد پستی</string>
+    <string name="type_postcode">کدپستی</string>
     <string name="select_city">انتخاب شهر</string>
     <string name="select_postcode">انتخاب کدپستی</string>
     <string name="quick_action_auto_zoom_on">زوم اتوماتیک روشن است</string>
     <string name="quick_action_auto_zoom_off">زوم اتوماتیک خاموش است</string>
-    <string name="quick_action_add_destination">اضافه کرد مقصد</string>
+    <string name="quick_action_add_destination">افزودن مقصد</string>
     <string name="quick_action_replace_destination">تغییر مقصد</string>
     <string name="subscribe_email_error">خطا</string>
     <string name="sea_depth_thanks">از اینکه برنامه Sea Detph Contours را خریدید سپاسگذاریم</string>
     <string name="analyze_on_map">آنالیز نقشه</string>
-    <string name="shared_string_visible">قابل دیدن</string>
-    <string name="restore_purchases">برگشت به خرید</string>
-    <string name="fonts_header">فونت نقشه</string>
-    <string name="right_side_navigation">خودرو با فرمان سمت راست</string>
-    <string name="driving_region_automatic">اتوماتیک</string>
-    <string name="do_not_show_startup_messages">پیام را در هنگام شروع برنامه نشان نده</string>
+    <string name="shared_string_visible">قابل‌دیدن</string>
+    <string name="restore_purchases">بازیابی خریدها</string>
+    <string name="fonts_header">فونت‌های نقشه</string>
+    <string name="right_side_navigation">رانندگی با فرمان سمت راست</string>
+    <string name="driving_region_automatic">خودکار</string>
+    <string name="do_not_show_startup_messages">هنگام شروع برنامه پیام‌ها را نشان نده</string>
     <string name="parking_options">تنظیمات پارکینگ</string>
-    <string name="full_version_thanks">از اینکه نسخه کامل OsmAnd را خریدید سپاسگذاریم !</string>
+    <string name="full_version_thanks">سپاسگزاریم که نسخهٔ کامل OsmAnd را خریدید!</string>
     <string name="routing_attr_relief_smoothness_factor_hills_name">تپه ها</string>
     <string name="routing_attr_driving_style_speed_name">سرعت</string>
     <string name="routing_attr_driving_style_balance_name">تعادل</string>
-    <string name="add_new_folder">اضافه کردن پوشه جدید</string>
+    <string name="add_new_folder">افزودن پوشهٔ جدید</string>
     <string name="points_delete_multiple_succesful">نقطه مورد نظر پاک شد</string>
     <string name="max_speed">حداکثر سرعت</string>
     <string name="average_speed">میانگین سرعت</string>
@@ -2074,41 +2076,41 @@
     <string name="rendering_value_medium_w_name">متوسط</string>
     <string name="rendering_value_low_name">کم</string>
     <string name="rendering_attr_hideWaterPolygons_description">آب</string>
-    <string name="rendering_attr_hideWaterPolygons_name">مخفی کرد آب</string>
+    <string name="rendering_attr_hideWaterPolygons_name">مخفی‌کردن آب</string>
     <string name="shared_string_overview">نمای کلی</string>
-    <string name="nearest_cities">نزدیکترین شهرستانها</string>
+    <string name="nearest_cities">نزدیکترین شهرستان‌ها</string>
     <string name="quick_action_auto_zoom_desc">با ضربه زدن به صفحه قابلیت زوم خودکار با توجه به سرعت را روشن یا خاموش کنید</string>
     <string name="quick_action_add_first_intermediate">اضافه کردن اول حدواسط</string>
-    <string name="subscribe_email_desc">اشتراک در خبرنامه ما برای دریافت نقشه های بیشتر و تخفیفات آینده !</string>
+    <string name="subscribe_email_desc">مشترک خبرنامهٔ ایمیلی ما شوید و ۳ تا نقشهٔ دیگر دانلود کنید!</string>
     <string name="index_item_depth_contours_osmand_ext">خطوط عمقی</string>
     <string name="index_item_depth_points_southern_hemisphere">نقاط عمیق نیمکره جنوبی</string>
     <string name="index_item_depth_points_northern_hemisphere">نقاط عمیق نیمکره شمالی</string>
-    <string name="nautical_maps">نقشه دریایی</string>
+    <string name="nautical_maps">نقشهٔ دریایی</string>
     <string name="routing_attr_relief_smoothness_factor_plains_name">دشت</string>
     <string name="routing_attr_driving_style_safety_name">امنیت</string>
     <string name="relief_smoothness_factor_descr">اولویت با دشت یا تپه</string>
     <string name="shared_string_slope">شیب</string>
-    <string name="points_delete_multiple">آیا شما میخواهید %1$d نقطه (ها). حذف کنید ؟</string>
+    <string name="points_delete_multiple">دارید %1$d نقطه را حذف می‌کنید؛ مطمئنید؟</string>
     <string name="track_points_category_name">نکات مهم در این مسیر</string>
     <string name="gpx_track">مسیر</string>
     <string name="shared_string_time_span">مدت زمان</string>
-    <string name="select_gpx_folder">پوشه مسیر را انتخاب کنید</string>
+    <string name="select_gpx_folder">پوشهٔ مسیر را انتخاب کنید</string>
     <string name="shared_string_tracks">مسیرها</string>
     <string name="route_altitude">ارتفاع مسیر</string>
     <string name="altitude_descent">نزولی</string>
     <string name="altitude_ascent">صعودی</string>
-    <string name="altitude_range">دامنه ارتفاع</string>
+    <string name="altitude_range">دامنهٔ ارتفاع</string>
     <string name="average_altitude">میانگین ارتفاع</string>
     <string name="total_distance">مجموع فاصله</string>
     <string name="routing_attr_height_obstacles_name">استفاده از اطلاعات ارتفاع</string>
     <string name="routing_attr_height_obstacles_description">استفاده از اطلاعات ارتفاع زمین ارائه شده توسط SRTM، ASTER و اتحادیه اروپا-DEM</string>
 
-    <string name="rendering_attr_depthContours_description">نمایش خطوط عمقی و نقاط</string>
+    <string name="rendering_attr_depthContours_description">نمایش نقاط و خطوط تراز عمقی</string>
     <string name="rendering_attr_depthContours_name">خطوط عمقی</string>
 	<string name="rendering_attr_contourDensity_description">تراکم خطوط تراز</string>
     <string name="rendering_attr_contourDensity_name">تراکم خطوط تراز</string>
-    <string name="rendering_attr_contourWidth_description">اندازه خطوط تراز</string>
-    <string name="rendering_attr_contourWidth_name">انداه خطوط تراز</string>
+    <string name="rendering_attr_contourWidth_description">عرض خطوط تراز</string>
+    <string name="rendering_attr_contourWidth_name">عرض خطوط تراز</string>
     <string name="routing_attr_allow_motorway_name">دسترسی به بزرگراه</string>
     <string name="routing_attr_allow_motorway_description">دسترسی به بزرگراه</string>
     <string name="wiki_around">مقالات ویکیپدیا در مورد این منطقه موجود هست</string>
@@ -2152,12 +2154,26 @@
     <string name="new_filter">فیلتر جدید</string>
     <string name="new_filter_desc">لطفا یک نام برای فیلتر جدید را وارد کنید، این نام به عنوان دسته جدید اضافه میشود.</string>
     <string name="enter_gpx_name">نام فایل gpx را وارد نمایید</string>
-    <string name="show_on_map_after_saving">مشاهده بر روی نقشه پس از ذخیره شدن</string>
+    <string name="show_on_map_after_saving">مشاهده بر روی نقشه پس از ذخیره‌شدن</string>
     <string name="measurement_tool_action_bar">مرور نقشه و افزودن نقاط به خط</string>
-    <string name="measurement_tool">اندازه گیری فاصله</string>
+    <string name="measurement_tool">اندازه‌گیری فاصله</string>
     <string name="quick_action_resume_pause_navigation">ادامه/توقف مسیریابی</string>
     <string name="quick_action_show_navigation_finish_dialog">مشاهده پیغام اتمام مسیریابی</string>
     <string name="quick_action_start_stop_navigation">شروع/اتمام مسیریابی</string>
     <string name="shared_string_reset">تنظیم مجدد</string>
     <string name="shared_string_reload">بارگذاری مجدد</string>
+    <string name="remove_from_map_markers">از نشان‌های نقشه حذف شود</string>
+    <string name="ascendingly">صعودی</string>
+    <string name="date_added">تاریخ ایجاد</string>
+    <string name="order_by">ترتیب بر اساس:</string>
+    <string name="shared_string_groups">گروه‌ها</string>
+    <string name="today">امروز</string>
+    <string name="yesterday">دیروز</string>
+    <string name="last_seven_days">۷ روز گذشته</string>
+    <string name="this_year">امسال</string>
+    <string name="sort_by">ترتیب بر اساس</string>
+    <string name="exit_without_saving">بدون ذخیره‌کردن خارج می‌شوید؟</string>
+    <string name="line">خط</string>
+    <string name="shared_string_options">گزینه‌ها</string>
+    <string name="measurement_tool_save_as_new_track_descr">می‌توانید نقطه‌ها را هم به‌عنوان نقاط مسیر و هم به‌عنوان نقاط یک خط ذخیره کنید.</string>
     </resources>

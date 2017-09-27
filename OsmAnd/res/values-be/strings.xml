@@ -2872,7 +2872,7 @@
     <string name="marker_moved_to_active">Маркер мапы стаў актыўным</string>
     <string name="shared_string_list">Спіс</string>
     <string name="shared_string_groups">Групы</string>
-    <string name="passed">Пройдзена: %1$s</string>
+    <string name="passed">Апошняе выкарыстанне: %1$s</string>
     <string name="make_active">Актывізаваць</string>
     <string name="today">Сёння</string>
     <string name="yesterday">Учора</string>
@@ -2885,4 +2885,8 @@
     <string name="ascendingly">Па ўзрастанні</string>
     <string name="date_added">Дата дададзеная</string>
     <string name="order_by">Сартаваць па:</string>
+    <string name="show_guide_line">Паказаць лінію кірунку</string>
+    <string name="show_arrows_on_the_map">Паказаць стрэлкі на карце</string>
+    <string name="show_passed">Паказаць дату апошняга выкарыстання</string>
+    <string name="hide_passed">Схаваць дату апошняга выкарыстання</string>
     </resources>

@@ -1519,7 +1519,7 @@ public class QuickSearchDialogFragment extends DialogFragment implements OsmAndC
 						results.add(object);
 				}
 
-				return false;
+				return true;
 			}
 
 
