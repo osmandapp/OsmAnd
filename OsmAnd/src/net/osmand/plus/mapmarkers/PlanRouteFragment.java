@@ -216,6 +216,16 @@ public class PlanRouteFragment extends Fragment implements OsmAndLocationListene
 					}
 				}
 			}
+
+			@Override
+			public void onUseLocationClick() {
+				Toast.makeText(mapActivity, "use location", Toast.LENGTH_SHORT).show();
+			}
+
+			@Override
+			public void onDoNotUseLocationClick() {
+				Toast.makeText(mapActivity, "do not use location", Toast.LENGTH_SHORT).show();
+			}
 		});
 		boolean isSmartphone = getResources().getConfiguration().smallestScreenWidthDp < 600;
 		markersRv.setPadding(0, 0, 0, AndroidUtils.dpToPx(mapActivity, isSmartphone ? 72 : 108));

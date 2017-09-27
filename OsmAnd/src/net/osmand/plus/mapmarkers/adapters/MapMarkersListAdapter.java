@@ -87,6 +87,20 @@ public class MapMarkersListAdapter extends RecyclerView.Adapter<RecyclerView.Vie
 
 		if (holder instanceof UseLocationCardViewHolder) {
 			final UseLocationCardViewHolder locationCardHolder = (UseLocationCardViewHolder) holder;
+
+			locationCardHolder.useLocationBtn.setOnClickListener(new View.OnClickListener() {
+				@Override
+				public void onClick(View view) {
+					listener.onUseLocationClick();
+				}
+			});
+
+			locationCardHolder.doNotUseLocationBtn.setOnClickListener(new View.OnClickListener() {
+				@Override
+				public void onClick(View view) {
+					listener.onDoNotUseLocationClick();
+				}
+			});
 		} else if (holder instanceof MapMarkerItemViewHolder) {
 			MapMarker marker = getItem(pos);
 			final MapMarkerItemViewHolder itemHolder = (MapMarkerItemViewHolder) holder;
@@ -115,7 +129,7 @@ public class MapMarkersListAdapter extends RecyclerView.Adapter<RecyclerView.Vie
 			itemHolder.firstDescription.setVisibility((pos == firstMarkerPos || pos == lastMarkerPos) ? View.VISIBLE : View.GONE);
 			itemHolder.bottomShadow.setVisibility(pos == lastMarkerPos ? View.VISIBLE : View.GONE);
 			itemHolder.divider.setVisibility(pos == lastMarkerPos ? View.GONE : View.VISIBLE);
-			
+
 			if (pos == firstMarkerPos) {
 				itemHolder.firstDescription.setText(mapActivity.getString(R.string.shared_string_control_start) + " • ");
 			} else if (pos == lastMarkerPos) {
@@ -203,6 +217,10 @@ public class MapMarkersListAdapter extends RecyclerView.Adapter<RecyclerView.Vie
 		void onDragStarted(RecyclerView.ViewHolder holder);
 
 		void onDragEnded(RecyclerView.ViewHolder holder);
+
+		void onUseLocationClick();
+
+		void onDoNotUseLocationClick();
 	}
 
 	private class UseLocationCardViewHolder extends RecyclerView.ViewHolder {

@@ -69,8 +69,8 @@
         <LinearLayout
             android:layout_width="match_parent"
             android:layout_height="48dp"
-            android:layout_marginLeft="56dp"
-            android:layout_marginStart="56dp">
+            android:layout_marginLeft="44dp"
+            android:layout_marginStart="44dp">
 
             <net.osmand.plus.widgets.TextViewEx
                 android:id="@+id/use_location_button"
@@ -80,8 +80,8 @@
                 android:ellipsize="end"
                 android:gravity="center_vertical"
                 android:maxLines="1"
-                android:paddingEnd="@dimen/measurement_tool_text_button_padding_small"
-                android:paddingRight="@dimen/measurement_tool_text_button_padding_small"
+                android:paddingLeft="12dp"
+                android:paddingRight="12dp"
                 android:text="@string/use_location"
                 android:textColor="?attr/color_dialog_buttons"
                 osmand:textAllCapsCompat="true"
@@ -95,8 +95,8 @@
                 android:ellipsize="end"
                 android:gravity="center_vertical"
                 android:maxLines="1"
-                android:paddingLeft="@dimen/measurement_tool_text_button_padding_small"
-                android:paddingStart="@dimen/measurement_tool_text_button_padding_small"
+                android:paddingLeft="12dp"
+                android:paddingRight="12dp"
                 android:text="@string/shared_string_do_not_use"
                 android:textColor="?attr/color_dialog_buttons"
                 osmand:textAllCapsCompat="true"
