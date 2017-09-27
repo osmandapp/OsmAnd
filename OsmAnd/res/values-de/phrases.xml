@@ -198,7 +198,7 @@
 	<string name="poi_fast_food">Fast Food</string>
 	<string name="poi_ferry_terminal">Fährhafen</string>
 	<string name="poi_fire_extinguisher">Feuerlöscher</string>
-	<string name="poi_fire_flapper">Brandpatsche</string>
+	<string name="poi_fire_flapper">Brandschutzklappe</string>
 	<string name="poi_fire_hose">Löschschlauch</string>
 	<string name="poi_fire_hydrant">Hydrant</string>
 	<string name="poi_fire_station">Feuerwehr</string>
@@ -351,7 +351,7 @@
 	<string name="poi_pawnbroker">Pfandleiher</string>
 	<string name="poi_peak">Berggipfel</string>
 	<string name="poi_pelota">Pelota</string>
-	<string name="poi_pension_fund">Pensionskasse</string>
+	<string name="poi_pension_fund">Rentenkasse</string>
 	<string name="poi_pet">Tierhandlung</string>
 	<string name="poi_petroleum_well">Ölbohrung</string>
 	<string name="poi_pharmacy">Apotheke</string>
@@ -391,7 +391,7 @@
 	<string name="poi_public_transport_platform">ÖPNV-Haltestelle</string>
 	<string name="poi_public_transport_platform_bus">Bushaltestelle</string>
 	<string name="poi_public_transport_platform_tram">Straßenbahnhaltestelle</string>
-	<string name="poi_public_transport_platform_trolleybus">Oberleitungsbushaltestelle</string>
+	<string name="poi_public_transport_platform_trolleybus">Haltestelle für Oberleitungsbus</string>
 	<string name="poi_public_transport_station">Öff. Verkehrsmittel-Station</string>
 	<string name="poi_quarry">Steinbruch</string>
 	<string name="poi_raceway">Rennstrecke</string>
@@ -433,12 +433,12 @@
 	<string name="poi_seafood">Fischgeschäft</string>
 	<string name="poi_anchor_berth">Ankerplatz</string>
 	<string name="poi_anchorage">Ankerplatz</string>
-	<string name="poi_beacon">Bake (Seezeichen)</string>
+	<string name="poi_beacon">Signalfeuer (Schifffahrtszeichen)</string>
 	<string name="poi_beacon_cardinal">Untiefenbake (Kardinal)</string>
 	<string name="poi_beacon_lateral">Fahrrinnenbake (Lateral)</string>
 	<string name="poi_beacon_safe_water">Mitte-Fahrwasser-Bake</string>
 	<string name="poi_beacon_special_purpose">Sonderzeichen-Bake</string>
-	<string name="poi_berth">Landesteg</string>
+	<string name="poi_berth">Anlegestelle</string>
 	<string name="poi_seamark_bridge">Seezeichenbrücke</string>
 	<string name="poi_seamark_building">Seezeichengebäude</string>
 	<string name="poi_buoy_cardinal">Untiefentonne (Kardinal)</string>
@@ -647,7 +647,7 @@
 	<string name="poi_osmwiki">Wikipedia</string>
 	<string name="poi_user_defined_other">Benutzerdefiniert</string>
 	
-	<string name="poi_aerialway_transport">Seilbahntransport</string>
+	<string name="poi_aerialway_transport">Luftverkehr</string>
 	<string name="poi_wine">Weinhandlung</string>
 
 	<string name="poi_medical_supply">Medizinische Versorgung</string>
@@ -845,7 +845,7 @@
 	<string name="poi_tourism_attraction">Touristische Attraktion</string>
 	<string name="poi_lodging">Unterkunft</string>
 	<string name="poi_religious">Heilige Stätte</string>
-	<string name="poi_hanami">Kirschblütenschau</string>
+	<string name="poi_hanami">Kirschblütenfest</string>
 	<string name="poi_piste_downhill">Abfahrtspiste</string>
 	<string name="poi_piste_sleigh">Zugschlitten-Strecke</string>
 	<string name="poi_piste_sled">Schlittenbahn</string>
@@ -897,7 +897,7 @@
 	<string name="poi_enforcement_access">Kontrolle: Berechtigung</string>
 	<string name="poi_enforcement_toll">Kontrolle: Maut</string>
 
-<string name="poi_free_flying">Gleitschirmgeschäft</string>
+<string name="poi_free_flying">Gleitschirmprodukte</string>
 	<string name="poi_bollard">Poller</string>
 	<string name="poi_energy">Energieanbieter</string>
 	<string name="poi_stile">Zaunleiter</string>
@@ -1134,7 +1134,7 @@
 
 	<string name="poi_intermittent">Zeitweise</string>
 
-	<string name="poi_deadlock">toter Punkt</string>
+	<string name="poi_deadlock">Sackgasse</string>
 
 	<string name="poi_aerialway_length">Länge</string>
 
@@ -1567,7 +1567,7 @@
 	<string name="poi_denomination_iglesia_ni_cristo">Iglesia ni Cristo</string>
 	<string name="poi_denomination_mennonite">Mennoniten</string>
 	<string name="poi_denomination_quaker">Quäker</string>
-	<string name="poi_denomination_assemblies_of_god">Assemblies of God</string>
+	<string name="poi_denomination_assemblies_of_god">Vereinigung „Assemblies of God”</string>
 	<string name="poi_denomination_nondenominational">Bekenntnisfrei</string>
 	<string name="poi_denomination_nazarene">Nazaräer</string>
 	<string name="poi_denomination_united_methodist">Vereinigte Methodisten</string>
@@ -1600,7 +1600,7 @@
 	<string name="poi_megalith_type_dolmen">Megalith-Typ: Dolmen</string>
 	<string name="poi_fortification_type_hill_fort">Befestigungstyp: Wallburg</string>
 	<string name="poi_fortification_type_limes">Befestigungstyp: Limes</string>
-	<string name="poi_fortification_type_sconce">Befestigungstyp: Schanze</string>
+	<string name="poi_fortification_type_sconce">Festungsbautyp: Schanze</string>
 	<string name="poi_fortification_type_ring_ditch">Befestigungstyp: Ringgraben</string>
 
 	<string name="poi_pa">Pa (befestigte Siedlung der Maori)</string>
@@ -1814,7 +1814,7 @@
 	<string name="poi_payment_kitcard_no">KITCard nicht akzeptiert</string>
 	<string name="poi_payment_v_pay_yes">V PAY</string>
 	<string name="poi_payment_v_pay_no">V PAYKIT Karte nicht akzeptiert</string>
-	<string name="poi_payment_dogecoin_yes">Dogecoin</string>
+	<string name="poi_payment_dogecoin_yes">Dogecoin Ɖ</string>
 	<string name="poi_payment_dogecoin_no">Dogecoin nicht akzeptiert</string>
 	<string name="poi_payment_cibus_yes">Cibus</string>
 	<string name="poi_payment_cibus_no">Cibus Karte nicht akzeptiert</string>
@@ -2236,7 +2236,7 @@
 	<string name="poi_crop_tea">Anbauprodukt: Tee</string>
 	<string name="poi_crop_coffee">Anbauprodukt: Kaffee</string>
 	<string name="poi_crop_sunflower">Anbauprodukt: Sonnenblume</string>
-	<string name="poi_crop_poultry">Anbauprodukt: Geflügel</string>
+	<string name="poi_crop_poultry">Aufzucht: Geflügel</string>
 	<string name="poi_crop_raspberry">Anbauprodukt: Himbeere</string>
 	<string name="poi_crop_tobacco">Anbauprodukt: Tabak</string>
 	<string name="poi_crop_strawberry">Anbauprodukt: Erdbeere</string>
@@ -2301,7 +2301,7 @@
 	<string name="poi_theatre_genre_puppet">Marionette</string>
 	<string name="poi_theatre_genre_chamber_music">Kammermusik</string>
 	<string name="poi_bandstand">Genre: Musikpavillon</string>
-	<string name="poi_consulting">Beratung</string>
+	<string name="poi_consulting">Beratungsstelle</string>
 	<string name="poi_crop_lavender">Anbauprodukt: Lavendel</string>
 	<string name="poi_castle_type_kremlin">Burgtyp: Kreml</string>
 	<string name="poi_castle_type_castrum">Burgtyp: Römerkastell</string>
@@ -2467,7 +2467,7 @@
 	<string name="poi_health_specialty_dental_oral_maxillo_facial_surgery_yes">Zahn-, Mund-, Kiefer- und Gesichtschirurgie</string>
 	<string name="poi_health_specialty_maternity_yes">Mutterschaft</string>
 	<string name="poi_health_specialty_emergency_medicine_yes">Unfall- und Notfallmedizin</string>
-	<string name="poi_health_specialty_emergency_medicine_no">Unfall- und Notfallmedizin: nein</string>
+	<string name="poi_health_specialty_emergency_medicine_no">Fachrichtung: Unfall- und Notfallmedizin: nein</string>
 	<string name="poi_health_specialty_plastic_surgery_yes">Plastische Chirurgie</string>
 	<string name="poi_health_specialty_orthodontics_yes">Kieferorthopädie</string>
 	<string name="poi_health_specialty_physiotherapy_yes">Krankengymnastik</string>
@@ -2550,7 +2550,7 @@
 	<string name="poi_official_name">Offizieller Name</string>
 
 <string name="poi_seamark_dyke">Seezeichen Deich</string>
-	<string name="poi_dolphin">Dalbe</string>
+	<string name="poi_dolphin">Delphin</string>
 
 	<string name="poi_forestry_compartment">Wegweiser: Forstabteilung</string>
 	<string name="poi_forestry_allotment">Wegweiser: Forstparzelle</string>
@@ -2659,8 +2659,8 @@
 	<string name="poi_free_flying_rigid_yes">Strikt</string>
 	<string name="poi_free_flying_rigid_no">Freeflying starr: nein</string>
 	<string name="poi_free_flying_site_orientation_n">Freeflying Ausrichtung: N</string>
-	<string name="poi_free_flying_site_orientation_ne">Freeflying Ausrichtung: NO</string>
-	<string name="poi_free_flying_site_orientation_e">Freeflying Standort Ausrichtung: O</string>
+	<string name="poi_free_flying_site_orientation_ne">Freeflying-Platzausrichtung: NO</string>
+	<string name="poi_free_flying_site_orientation_e">Freeflying-Platzausrichtung: O</string>
 	<string name="poi_free_flying_site_orientation_se">Freeflying Ausrichtung: SO</string>
 	<string name="poi_free_flying_site_orientation_s">Freeflying Ausrichtung: S</string>
 	<string name="poi_free_flying_site_orientation_sw">Freeflying Ausrichtung: SW</string>
@@ -2964,14 +2964,14 @@
 
 	<string name="poi_display_sundial_yes">Sonnenuhr</string>
 
-	<string name="poi_support_pole">Abstützung: Mast</string>
-	<string name="poi_support_wall_mounted">Abstützung: Wand</string>
-	<string name="poi_support_tree">Abstützung: Baum</string>
-	<string name="poi_support_pedestal">Abstützung: Sockel</string>
-	<string name="poi_support_ground">Abstützung: Boden</string>
-	<string name="poi_support_ceiling">Abstützung: Decke</string>
-	<string name="poi_support_roof">Abstützung: Dach</string>
-	<string name="poi_support_tower">Abstützung: Turm</string>
+	<string name="poi_support_pole">Werbeträger: Mast</string>
+	<string name="poi_support_wall_mounted">Werbeträger: Wand</string>
+	<string name="poi_support_tree">Werbeträger: Baum</string>
+	<string name="poi_support_pedestal">Werbeträger: Sockel</string>
+	<string name="poi_support_ground">Werbeträger: Boden</string>
+	<string name="poi_support_ceiling">Werbeträger: Decke</string>
+	<string name="poi_support_roof">Werbeträger: Dach</string>
+	<string name="poi_support_tower">Werbeträger: Turm</string>
 
 	<string name="poi_aquaculture">Aquakultur</string>
 	<string name="poi_aquaculture_shrimp">Aquakultur: Garnelen</string>
@@ -2993,7 +2993,7 @@
 	<string name="poi_greenhouse_horticulture">Gewächshaus</string>
 
 	<string name="poi_generator_output_steam_yes">Ausgabe: Dampf</string>
-	<string name="poi_support_suspended">Abstützung: hängend</string>
+	<string name="poi_support_suspended">Werbeträger: hängend</string>
 	<string name="poi_diplomatic_consulate_general">Generalkonsulat</string>
 	<string name="poi_diplomatic_honorary_consulate">Honorarkonsulat</string>
 	<string name="poi_observatory_type_gravitational">Schwerkraft</string>
@@ -3001,10 +3001,10 @@
 	<string name="poi_generator_output_hot_water">Ausgangsleistung: heißes Wasser</string>
 	<string name="poi_generator_output_compressed_air">Ausgangsleistung: Druckluft</string>
 	<string name="poi_generator_output_biogas">Ausgangsleistung: Biogas</string>
-	<string name="poi_support_billboard">Reklametafel</string>
+	<string name="poi_support_billboard">Werbeträger: Plakatwand</string>
 	<string name="poi_diplomatic_high_commission">Hochkommissar</string>
 
-	<string name="poi_fire_operator">Feueroperator</string>
+	<string name="poi_fire_operator">Feuerwehrmann</string>
 
 	<string name="poi_diaper_table_count">Anzahl Wickeltische</string>
 
@@ -3093,7 +3093,7 @@
 	<string name="poi_bicycle_service">Fahrradwerkstatt</string>
 	<string name="poi_service_car">Dienstleistung</string>
 	<string name="poi_self_service">Selbstbedienung</string>
-	<string name="poi_pharmacy_dispensing">Rezepte</string>
+	<string name="poi_pharmacy_dispensing">Dosieren</string>
 	<string name="poi_archaeological_site_type">Typ</string>
 	<string name="poi_star_rating">Bewertung in Sternen</string>
 	<string name="poi_denomination">Konfession</string>
@@ -3268,7 +3268,7 @@
 	<string name="poi_cuisine_diner">Esslokal</string>
 	<string name="poi_cuisine_yakiniku">Yakiniku</string>
 	<string name="poi_cuisine_udon">Udon</string>
-	<string name="poi_cuisine_brasserie">Brasserie</string>
+	<string name="poi_cuisine_brasserie">Bierstube</string>
 	<string name="poi_cuisine_yakitori">Yakitori</string>
 	<string name="poi_cuisine_teriyaki">Teriyaki</string>
 
@@ -3294,7 +3294,7 @@
 
 	<string name="poi_diet">Speisen</string>
 	<string name="poi_social_facility_type">Typ</string>
-	<string name="poi_cuisine_sagardotegia">Sagardotegie</string>
+	<string name="poi_cuisine_sagardotegia">Apfelweinhaus</string>
 	<string name="poi_cuisine_sub">Baguetterie</string>
 	<string name="poi_cuisine_pastel">Pastel</string>
 	<string name="poi_cuisine_balkan">Balkan</string>
