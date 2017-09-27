@@ -1,5 +1,6 @@
 package net.osmand.plus.mapmarkers;
 
+import android.content.Intent;
 import android.os.Bundle;
 import android.support.annotation.NonNull;
 import android.support.annotation.Nullable;
@@ -23,9 +24,10 @@ import net.osmand.plus.OsmandSettings;
 import net.osmand.plus.OsmandSettings.MapMarkersOrderByMode;
 import net.osmand.plus.R;
 import net.osmand.plus.activities.MapActivity;
-import net.osmand.plus.dashboard.DashboardOnMap;
+import net.osmand.plus.activities.TrackActivity;
 import net.osmand.plus.mapmarkers.OptionsBottomSheetDialogFragment.MarkerOptionsFragmentListener;
 import net.osmand.plus.mapmarkers.OrderByBottomSheetDialogFragment.OrderByFragmentListener;
+import net.osmand.plus.mapmarkers.SaveAsTrackBottomSheetDialogFragment.MarkerSaveAsTrackFragmentListener;
 import net.osmand.plus.mapmarkers.ShowDirectionBottomSheetDialogFragment.ShowDirectionFragmentListener;
 
 import java.util.ArrayList;
@@ -42,7 +44,6 @@ public class MapMarkersDialogFragment extends android.support.v4.app.DialogFragm
 
 	private Snackbar snackbar;
 	private LockableViewPager viewPager;
-	private TextView orderByModeTitle;
 
 	private boolean lightTheme;
 
@@ -93,6 +94,10 @@ public class MapMarkersDialogFragment extends android.support.v4.app.DialogFragm
 		if (orderByFragment != null) {
 			((OrderByBottomSheetDialogFragment) orderByFragment).setListener(createOrderByFragmentListener());
 		}
+		Fragment saveAsTrackFragment = fragmentManager.findFragmentByTag(SaveAsTrackBottomSheetDialogFragment.TAG);
+		if (saveAsTrackFragment != null) {
+			((SaveAsTrackBottomSheetDialogFragment) saveAsTrackFragment).setListener(createSaveAsTrackFragmentListener());
+		}
 
 		View mainView = inflater.inflate(R.layout.fragment_map_markers_dialog, container);
 
@@ -100,7 +105,6 @@ public class MapMarkersDialogFragment extends android.support.v4.app.DialogFragm
 		if (!lightTheme) {
 			toolbar.setBackgroundColor(ContextCompat.getColor(getContext(), R.color.actionbar_dark_color));
 		}
-		orderByModeTitle = toolbar.findViewById(R.id.order_by_mode_text);
 		setOrderByMode(getMyApplication().getSettings().MAP_MARKERS_ORDER_BY_MODE.get());
 
 		toolbar.setNavigationIcon(getMyApplication().getIconsCache().getIcon(R.drawable.ic_arrow_back));
@@ -139,8 +143,8 @@ public class MapMarkersDialogFragment extends android.support.v4.app.DialogFragm
 						if (viewPager.getCurrentItem() != 0) {
 							activeFragment.updateAdapter();
 							historyFragment.hideSnackbar();
+							groupsFragment.hideSnackbar();
 						}
-						orderByModeTitle.setVisibility(View.VISIBLE);
 						viewPager.setCurrentItem(0);
 						optionsButton.setVisibility(View.VISIBLE);
 						return true;
@@ -151,7 +155,6 @@ public class MapMarkersDialogFragment extends android.support.v4.app.DialogFragm
 							activeFragment.hideSnackbar();
 							historyFragment.hideSnackbar();
 						}
-						orderByModeTitle.setVisibility(View.GONE);
 						viewPager.setCurrentItem(1);
 						optionsButton.setVisibility(View.GONE);
 						return true;
@@ -159,9 +162,9 @@ public class MapMarkersDialogFragment extends android.support.v4.app.DialogFragm
 						activeFragment.stopLocationUpdate();
 						if (viewPager.getCurrentItem() != 2) {
 							historyFragment.updateAdapter();
+							groupsFragment.hideSnackbar();
 							activeFragment.hideSnackbar();
 						}
-						orderByModeTitle.setVisibility(View.GONE);
 						viewPager.setCurrentItem(2);
 						optionsButton.setVisibility(View.GONE);
 						return true;
@@ -197,14 +200,21 @@ public class MapMarkersDialogFragment extends android.support.v4.app.DialogFragm
 			}
 
 			@Override
+			public void coordinateInputOnClick() {
+				CoordinateInputDialogFragment.showInstance(mapActivity);
+			}
+
+			@Override
 			public void buildRouteOnClick() {
-				mapActivity.getDashboard().setDashboardVisibility(true, DashboardOnMap.DashboardType.MAP_MARKERS_SELECTION);
+				PlanRouteFragment.showInstance(mapActivity.getSupportFragmentManager());
 				dismiss();
 			}
 
 			@Override
 			public void saveAsNewTrackOnClick() {
-				mapActivity.getMyApplication().getMapMarkersHelper().generateGpx();
+				SaveAsTrackBottomSheetDialogFragment fragment = new SaveAsTrackBottomSheetDialogFragment();
+				fragment.setListener(createSaveAsTrackFragmentListener());
+				fragment.show(mapActivity.getSupportFragmentManager(), SaveAsTrackBottomSheetDialogFragment.TAG);
 			}
 
 			@Override
@@ -243,6 +253,33 @@ public class MapMarkersDialogFragment extends android.support.v4.app.DialogFragm
 		};
 	}
 
+	private MarkerSaveAsTrackFragmentListener createSaveAsTrackFragmentListener() {
+		return new MarkerSaveAsTrackFragmentListener() {
+
+			final MapActivity mapActivity = getMapActivity();
+
+			@Override
+			public void saveGpx(final String fileName) {
+				final String gpxPath = mapActivity.getMyApplication().getMapMarkersHelper().generateGpx(fileName);
+				snackbar = Snackbar.make(viewPager, fileName + " " + getString(R.string.is_saved) + ".", Snackbar.LENGTH_LONG)
+						.setAction(R.string.shared_string_show, new View.OnClickListener() {
+							@Override
+							public void onClick(View view) {
+								Intent intent = new Intent(mapActivity, getMyApplication().getAppCustomization().getTrackActivity());
+								intent.putExtra(TrackActivity.TRACK_FILE_NAME, gpxPath);
+								intent.putExtra(TrackActivity.OPEN_POINTS_TAB, true);
+								intent.setFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP);
+								startActivity(intent);
+							}
+						});
+				View snackBarView = snackbar.getView();
+				TextView tv = (TextView) snackBarView.findViewById(android.support.design.R.id.snackbar_action);
+				tv.setTextColor(ContextCompat.getColor(mapActivity, R.color.color_dialog_buttons_dark));
+				snackbar.show();
+			}
+		};
+	}
+
 	private OrderByFragmentListener createOrderByFragmentListener() {
 		return new OrderByFragmentListener() {
 			@Override
@@ -253,21 +290,10 @@ public class MapMarkersDialogFragment extends android.support.v4.app.DialogFragm
 	}
 
 	private void setOrderByMode(MapMarkersOrderByMode orderByMode) {
-		String modeStr = "";
-		if (orderByMode.isDistanceDescending()) {
-			modeStr = getString(R.string.distance) + " (" + getString(R.string.descendingly) + ")";
-		} else if (orderByMode.isDistanceAscending()) {
-			modeStr = getString(R.string.distance) + " (" + getString(R.string.ascendingly) + ")";
-		} else if (orderByMode.isName()) {
-			modeStr = getString(R.string.shared_string_name);
-		} else if (orderByMode.isDateAddedDescending()) {
-			modeStr = getString(R.string.date_added) + " (" + getString(R.string.descendingly) + ")";
-		} else {
-			modeStr = getString(R.string.date_added) + " (" + getString(R.string.ascendingly) + ")";
+		if (orderByMode != MapMarkersOrderByMode.CUSTOM) {
+			getMyApplication().getMapMarkersHelper().orderMarkers(orderByMode);
+			activeFragment.updateAdapter();
 		}
-		orderByModeTitle.setText(modeStr);
-		getMyApplication().getMapMarkersHelper().orderMarkers(orderByMode);
-		activeFragment.updateAdapter();
 	}
 
 	private MapActivity getMapActivity() {

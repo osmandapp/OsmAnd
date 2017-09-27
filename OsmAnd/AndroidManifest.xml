@@ -40,7 +40,7 @@
 	<uses-feature android:name="com.sec.feature.spen_usp" android:required="false"/>
 
 	<uses-sdk android:targetSdkVersion="21" android:minSdkVersion="9"
-		tools:overrideLibrary="com.getkeepsafe.taptargetview"/>
+		tools:overrideLibrary="com.getkeepsafe.taptargetview, studio.carbonylgroup.textfieldboxes"/>
 
 	<supports-screens android:resizeable="true" android:smallScreens="true" android:normalScreens="true" android:largeScreens="true"
 		android:xlargeScreens="true" android:anyDensity="true" />

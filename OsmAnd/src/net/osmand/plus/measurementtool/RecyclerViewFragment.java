@@ -18,9 +18,9 @@ import net.osmand.AndroidUtils;
 import net.osmand.plus.R;
 import net.osmand.plus.activities.MapActivity;
 
-public class MeasurePointsListFragment extends Fragment {
+public class RecyclerViewFragment extends Fragment {
 
-	public static final String TAG = "MeasurePointsListFragment";
+	public static final String TAG = "RecyclerViewFragment";
 
 	private RecyclerView rv;
 	private int height;
