@@ -2940,4 +2940,16 @@ représentant la zone : %1$s x %2$s</string>
     <string name="show_passed">Afficher Date de dernière utilisation</string>
     <string name="hide_passed">Masquer Date de dernière utilisation</string>
     <string name="marker_moved_to_active">Marque activée</string>
+    <string name="use_location">Utiliser ma position</string>
+    <string name="add_location_as_first_point_descr">Ajouter ma position comme point de départ.</string>
+    <string name="my_location">Ma position</string>
+    <string name="shared_string_finish">Terminer</string>
+    <string name="plan_route">Itinéraire planifié</string>
+    <string name="shared_string_sort">Trier</string>
+    <string name="coordinate_input">Saisie des coordonnées</string>
+    <string name="is_saved">a été enregistré</string>
+    <string name="marker_save_as_track_descr">OsmAnd va enregistrer toutes vos marques dans un fichier, indiquez le nom de ce fichier :</string>
+    <string name="marker_save_as_track">Enregistrer comme trace</string>
+    <string name="move_to_history">Déplacer vers l\'historique</string>
+    <string name="group_will_be_removed_after_restart">Le groupe sera supprimé au prochain démarrage</string>
     </resources>
