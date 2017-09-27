@@ -712,7 +712,7 @@ public class MapControlsLayer extends OsmandMapLayer {
 				((app.accessibilityEnabled() || (System.currentTimeMillis() - touchEvent < TIMEOUT_TO_SHOW_BUTTONS)) && routeFollowingMode);
 		updateMyLocation(rh, routeDialogOpened || trackDialogOpened);
 		boolean showButtons = (showRouteCalculationControls || !routeFollowingMode)
-				&& !isInMovingMarkerMode() && !isInGpxDetailsMode() && !isInMeasurementToolMode();
+				&& !isInMovingMarkerMode() && !isInGpxDetailsMode() && !isInMeasurementToolMode() && !isInPlanRouteMode();
 		//routePlanningBtn.setIconResId(routeFollowingMode ? R.drawable.ic_action_gabout_dark : R.drawable.map_directions);
 		if (rh.isFollowingMode()) {
 			routePlanningBtn.setIconResId(R.drawable.map_start_navigation);
@@ -727,16 +727,16 @@ public class MapControlsLayer extends OsmandMapLayer {
 		routePlanningBtn.updateVisibility(showButtons);
 		menuControl.updateVisibility(showButtons);
 
-		mapZoomIn.updateVisibility(!routeDialogOpened);
-		mapZoomOut.updateVisibility(!routeDialogOpened);
-		compassHud.updateVisibility(!routeDialogOpened && !trackDialogOpened && shouldShowCompass() &&
-				!isInMeasurementToolMode());
+		mapZoomIn.updateVisibility(!routeDialogOpened && !isInExpandedRouteMode());
+		mapZoomOut.updateVisibility(!routeDialogOpened && !isInExpandedRouteMode());
+		compassHud.updateVisibility(!routeDialogOpened && !trackDialogOpened && shouldShowCompass()
+				&& !isInMeasurementToolMode() && !isInPlanRouteMode());
 
 		if (layersHud.setIconResId(settings.getApplicationMode().getMapIconId())) {
 			layersHud.update(app, isNight);
 		}
-		layersHud.updateVisibility(!routeDialogOpened && !trackDialogOpened && !isInMeasurementToolMode());
-		quickSearchHud.updateVisibility(!routeDialogOpened && !trackDialogOpened && !isInMeasurementToolMode());
+		layersHud.updateVisibility(!routeDialogOpened && !trackDialogOpened && !isInMeasurementToolMode() && !isInPlanRouteMode());
+		quickSearchHud.updateVisibility(!routeDialogOpened && !trackDialogOpened && !isInMeasurementToolMode() && !isInPlanRouteMode());
 
 		if (!routePlanningMode && !routeFollowingMode) {
 			if (mapView.isZooming()) {
@@ -814,7 +814,7 @@ public class MapControlsLayer extends OsmandMapLayer {
 			backToLocationControl.iv.setContentDescription(mapActivity.getString(R.string.map_widget_back_to_loc));
 		}
 		boolean visible = !(tracked && rh.isFollowingMode());
-		backToLocationControl.updateVisibility(visible && !dialogOpened);
+		backToLocationControl.updateVisibility(visible && !dialogOpened && !isInExpandedRouteMode());
 		if (app.accessibilityEnabled()) {
 			backToLocationControl.iv.setClickable(enabled && visible);
 		}
@@ -1130,6 +1130,14 @@ public class MapControlsLayer extends OsmandMapLayer {
 
 	private boolean isInMeasurementToolMode() {
 		return mapActivity.getMapLayers().getMeasurementToolLayer().isInMeasurementMode();
+	}
+
+	private boolean isInPlanRouteMode() {
+		return mapActivity.getMapLayers().getMapMarkersLayer().isInPlanRouteMode();
+	}
+
+	private boolean isInExpandedRouteMode() {
+		return mapActivity.getMapLayers().getMapMarkersLayer().isMarkersListOpened();
 	}
 
 	public static View.OnLongClickListener getOnClickMagnifierListener(final OsmandMapTileView view) {

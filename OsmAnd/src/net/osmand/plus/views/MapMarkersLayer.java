@@ -5,9 +5,11 @@ import android.graphics.BitmapFactory;
 import android.graphics.Canvas;
 import android.graphics.Paint;
 import android.graphics.Path;
+import android.graphics.PathMeasure;
 import android.graphics.PointF;
 import android.graphics.PorterDuff;
 import android.graphics.PorterDuffColorFilter;
+import android.graphics.Rect;
 import android.support.annotation.NonNull;
 import android.support.annotation.Nullable;
 import android.support.v4.content.ContextCompat;
@@ -19,6 +21,7 @@ import net.osmand.data.QuadPoint;
 import net.osmand.data.RotatedTileBox;
 import net.osmand.plus.MapMarkersHelper;
 import net.osmand.plus.MapMarkersHelper.MapMarker;
+import net.osmand.plus.OsmAndFormatter;
 import net.osmand.plus.OsmandSettings;
 import net.osmand.plus.R;
 import net.osmand.plus.TargetPointsHelper.TargetPoint;
@@ -27,6 +30,7 @@ import net.osmand.plus.views.ContextMenuLayer.ApplyMovedObjectCallback;
 import net.osmand.plus.views.ContextMenuLayer.IContextMenuProvider;
 import net.osmand.plus.views.ContextMenuLayer.IContextMenuProviderSelection;
 import net.osmand.plus.views.mapwidgets.MapMarkersWidgetsFactory;
+import net.osmand.util.MapUtils;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -37,6 +41,8 @@ public class MapMarkersLayer extends OsmandMapLayer implements IContextMenuProvi
 		IContextMenuProviderSelection, ContextMenuLayer.IMoveObjectProvider {
 
 	protected static final int DIST_TO_SHOW = 80;
+	private static final int TEXT_SIZE = 12;
+	private static final int VERTICAL_OFFSET = 10;
 
 	private final MapActivity map;
 	private OsmandMapTileView view;
@@ -63,6 +69,7 @@ public class MapMarkersLayer extends OsmandMapLayer implements IContextMenuProvi
 	private float[] calculations = new float[2];
 
 	private final RenderingLineAttributes lineAttrs = new RenderingLineAttributes("measureDistanceLine");
+	private final RenderingLineAttributes textAttrs = new RenderingLineAttributes("rulerCircle");
 	private Paint paint;
 	private Path path;
 	private List<LatLon> route = new ArrayList<>();
@@ -70,8 +77,12 @@ public class MapMarkersLayer extends OsmandMapLayer implements IContextMenuProvi
 	private TIntArrayList tx = new TIntArrayList();
 	private TIntArrayList ty = new TIntArrayList();
 	private Path linePath = new Path();
+	private String distanceText;
 
 	private ContextMenuLayer contextMenuLayer;
+
+	private boolean inPlanRouteMode;
+	private boolean markersListOpened;
 
 	public MapMarkersLayer(MapActivity map) {
 		this.map = map;
@@ -79,6 +90,22 @@ public class MapMarkersLayer extends OsmandMapLayer implements IContextMenuProvi
 
 	public MapMarkersWidgetsFactory getWidgetsFactory() {
 		return widgetsFactory;
+	}
+
+	public boolean isInPlanRouteMode() {
+		return inPlanRouteMode;
+	}
+
+	public void setInPlanRouteMode(boolean inPlanRouteMode) {
+		this.inPlanRouteMode = inPlanRouteMode;
+	}
+
+	public boolean isMarkersListOpened() {
+		return inPlanRouteMode && markersListOpened;
+	}
+
+	public void setMarkersListOpened(boolean markersListOpened) {
+		this.markersListOpened = markersListOpened;
 	}
 
 	private void initUI() {
@@ -112,6 +139,10 @@ public class MapMarkersLayer extends OsmandMapLayer implements IContextMenuProvi
 		paint.setStrokeJoin(Paint.Join.ROUND);
 		paint.setColor(ContextCompat.getColor(map, R.color.marker_red));
 		paint.setAlpha(200);
+
+		float textSize = TEXT_SIZE * map.getResources().getDisplayMetrics().density;
+		textAttrs.paint2.setTextSize(textSize);
+		textAttrs.paint3.setTextSize(textSize);
 
 		widgetsFactory = new MapMarkersWidgetsFactory(map);
 
@@ -199,8 +230,6 @@ public class MapMarkersLayer extends OsmandMapLayer implements IContextMenuProvi
 			return;
 		}
 
-		lineAttrs.updatePaints(view, nightMode, tileBox);
-
 		MapMarkersHelper markersHelper = map.getMyApplication().getMapMarkersHelper();
 		if (route.size() > 0) {
 			path.reset();
@@ -228,25 +257,66 @@ public class MapMarkersLayer extends OsmandMapLayer implements IContextMenuProvi
 		List<MapMarker> activeMapMarkers = markersHelper.getMapMarkers();
 
 		if (settings.SHOW_LINES_TO_FIRST_MARKERS.get() && myLoc != null) {
-			int locX = tileBox.getPixXFromLonNoRot(myLoc.getLongitude());
-			int locY = tileBox.getPixYFromLatNoRot(myLoc.getLatitude());
+			lineAttrs.updatePaints(view, nightMode, tileBox);
+			textAttrs.updatePaints(view, nightMode, tileBox);
+			textAttrs.paint2.setStyle(Paint.Style.FILL);
+
+			int locX = (int) tileBox.getPixXFromLatLon(myLoc.getLatitude(), myLoc.getLongitude());
+			int locY = (int) tileBox.getPixYFromLatLon(myLoc.getLatitude(), myLoc.getLongitude());
 			int[] colors = MapMarker.getColors(map);
 			for (int i = 0; i < activeMapMarkers.size() && i < 2; i++) {
 				MapMarker marker = activeMapMarkers.get(i);
-				int markerX = tileBox.getPixXFromLonNoRot(marker.getLongitude());
-				int markerY = tileBox.getPixYFromLatNoRot(marker.getLatitude());
+				int markerX = (int) tileBox.getPixXFromLatLon(marker.getLatitude(), marker.getLongitude());
+				int markerY = (int) tileBox.getPixYFromLatLon(marker.getLatitude(), marker.getLongitude());
+
 				linePath.reset();
 				tx.clear();
 				ty.clear();
-				linePath.moveTo(locX, locY);
-				linePath.lineTo(markerX, markerY);
+
 				tx.add(locX);
 				ty.add(locY);
 				tx.add(markerX);
 				ty.add(markerY);
+
 				calculatePath(tileBox, tx, ty, linePath);
+				PathMeasure pm = new PathMeasure(linePath, false);
+				float[] pos = new float[2];
+				pm.getPosTan(pm.getLength() / 2, pos, null);
+
+				float generalDist = (float) MapUtils.getDistance(myLoc.getLatitude(), myLoc.getLongitude(), marker.getLatitude(), marker.getLongitude());
+				String generalDistSt = OsmAndFormatter.getFormattedDistance(generalDist, view.getApplication());
+				boolean locationInvisible = locX < 0 || locX > tileBox.getPixWidth() || locY < 0 || locY > tileBox.getPixHeight();
+				if (locationInvisible) {
+					float centerToMarkerDist = (float) MapUtils.getDistance(tileBox.getLatLonFromPixel(pos[0], pos[1]), marker.getLatitude(), marker.getLongitude());
+					String centerToMarkerDistSt = OsmAndFormatter.getFormattedDistance(centerToMarkerDist, view.getApplication());
+					if (locX >= markerX) {
+						distanceText = centerToMarkerDistSt + " | " + generalDistSt;
+					} else {
+						distanceText = generalDistSt + " | " + centerToMarkerDistSt;
+					}
+				} else {
+					distanceText = generalDistSt;
+				}
+				Rect bounds = new Rect();
+				textAttrs.paint2.getTextBounds(distanceText, 0, distanceText.length(), bounds);
+				float hOffset = pm.getLength() / 2 - bounds.width() / 2;
 				lineAttrs.paint.setColor(colors[marker.colorIndex]);
+
+				canvas.rotate(-tileBox.getRotate(), tileBox.getCenterPixelX(), tileBox.getCenterPixelY());
 				canvas.drawPath(linePath, lineAttrs.paint);
+				if (locationInvisible && !(pos[0] == 0 && pos[1] == 0)) {
+					canvas.drawCircle(pos[0], pos[1], 5, new Paint());
+				}
+				if (locX >= markerX) {
+					canvas.rotate(180, pos[0], pos[1]);
+					canvas.drawTextOnPath(distanceText, linePath, hOffset, bounds.height() + VERTICAL_OFFSET, textAttrs.paint3);
+					canvas.drawTextOnPath(distanceText, linePath, hOffset, bounds.height() + VERTICAL_OFFSET, textAttrs.paint2);
+					canvas.rotate(-180, pos[0], pos[1]);
+				} else {
+					canvas.drawTextOnPath(distanceText, linePath, hOffset, -VERTICAL_OFFSET, textAttrs.paint3);
+					canvas.drawTextOnPath(distanceText, linePath, hOffset, -VERTICAL_OFFSET, textAttrs.paint2);
+				}
+				canvas.rotate(tileBox.getRotate(), tileBox.getCenterPixelX(), tileBox.getCenterPixelY());
 			}
 		}
 
@@ -426,6 +496,7 @@ public class MapMarkersLayer extends OsmandMapLayer implements IContextMenuProvi
 	public void setSelectedObject(Object o) {
 		if (o instanceof MapMarker) {
 			map.getMyApplication().getMapMarkersHelper().moveMarkerToTop((MapMarker) o);
+			map.getMyApplication().getSettings().MAP_MARKERS_ORDER_BY_MODE.set(OsmandSettings.MapMarkersOrderByMode.CUSTOM);
 		}
 	}
 

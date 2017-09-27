@@ -33,11 +33,9 @@
             <RelativeLayout
                 android:id="@+id/up_down_row"
                 android:layout_width="0dp"
-                android:layout_height="wrap_content"
+                android:layout_height="@dimen/measurement_tool_controls_height"
                 android:layout_weight="0.45"
-                android:background="?attr/selectableItemBackground"
-                android:paddingBottom="@dimen/measurement_tool_content_padding_medium"
-                android:paddingTop="@dimen/measurement_tool_content_padding_medium">
+                android:background="?attr/selectableItemBackground">
 
                 <ImageView
                     android:id="@+id/main_icon"
@@ -131,9 +129,9 @@
                     android:layout_marginStart="@dimen/measurement_tool_text_margin"
                     android:layout_toEndOf="@id/main_icon"
                     android:layout_toRightOf="@id/main_icon"
-                    tools:text="@string/add_point_after"
                     android:textAppearance="@style/TextAppearance.ListItemTitle"
-                    android:visibility="gone"/>
+                    android:visibility="gone"
+                    tools:text="@string/add_point_after"/>
             </RelativeLayout>
 
             <View

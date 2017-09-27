@@ -97,7 +97,7 @@
                     android:layout_gravity="center_vertical|end"
                     android:maxLines="1"
                     android:textAppearance="@style/TextAppearance.ListItemTitle"
-                    android:textColor="@color/map_widget_blue_pressed"
+                    tools:textColor="@color/map_widget_blue_pressed"
                     tools:text="Top bar"/>
             </LinearLayout>
 
@@ -109,6 +109,35 @@
                 android:layout_marginStart="@dimen/measurement_tool_bottom_divider_margin_start"
                 android:layout_marginTop="@dimen/measurement_tool_bottom_divider_margin_top"
                 android:background="?attr/dashboard_divider"/>
+
+            <LinearLayout
+                android:id="@+id/coordinate_input_row"
+                android:layout_width="match_parent"
+                android:layout_height="@dimen/bottom_sheet_list_item_height"
+                android:background="?attr/selectableItemBackground"
+                android:minHeight="@dimen/bottom_sheet_list_item_height"
+                android:paddingEnd="@dimen/bottom_sheet_content_padding"
+                android:paddingLeft="@dimen/bottom_sheet_content_padding"
+                android:paddingRight="@dimen/bottom_sheet_content_padding"
+                android:paddingStart="@dimen/bottom_sheet_content_padding">
+
+                <ImageView
+                    android:id="@+id/coordinate_input_icon"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_gravity="center_vertical"
+                    android:layout_marginEnd="@dimen/bottom_sheet_icon_margin"
+                    android:layout_marginRight="@dimen/bottom_sheet_icon_margin"
+                    tools:src="@drawable/ic_action_coordinates_longitude"/>
+
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_gravity="center_vertical"
+                    android:maxLines="1"
+                    android:text="@string/coordinate_input"
+                    android:textAppearance="@style/TextAppearance.ListItemTitle"/>
+            </LinearLayout>
 
             <LinearLayout
                 android:id="@+id/build_route_row"

@@ -1,9 +1,12 @@
 package net.osmand.plus.mapmarkers.adapters;
 
+import android.support.design.widget.Snackbar;
+import android.support.v4.content.ContextCompat;
 import android.support.v7.widget.RecyclerView;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.TextView;
 
 import net.osmand.plus.IconsCache;
 import net.osmand.plus.MapMarkersHelper.MapMarker;
@@ -30,9 +33,12 @@ public class MapMarkersHistoryAdapter extends RecyclerView.Adapter<RecyclerView.
 	private OsmandApplication app;
 	private List<Object> items = new ArrayList<>();
 	private MapMarkersHistoryAdapterListener listener;
+	private Snackbar snackbar;
+	private boolean night;
 
 	public MapMarkersHistoryAdapter(OsmandApplication app) {
 		this.app = app;
+		night = !app.getSettings().isLightContent();
 		createHeaders();
 	}
 
@@ -113,13 +119,20 @@ public class MapMarkersHistoryAdapter extends RecyclerView.Adapter<RecyclerView.
 			final MapMarker marker = (MapMarker) getItem(position);
 			itemViewHolder.iconReorder.setVisibility(View.GONE);
 
-			int color = MapMarker.getColorId(marker.colorIndex);
+			int color = R.color.icon_color_light;
 			itemViewHolder.icon.setImageDrawable(iconsCache.getIcon(R.drawable.ic_action_flag_dark, color));
 
 			itemViewHolder.title.setText(marker.getName(app));
 
-			itemViewHolder.description.setText(app.getString(R.string.passed, new SimpleDateFormat("MMM dd", Locale.getDefault()).format(new Date(marker.visitedDate))));
+			Date date = new Date(marker.visitedDate);
+			String month = new SimpleDateFormat("MMM", Locale.getDefault()).format(date);
+			if (month.length() > 1) {
+				month = Character.toUpperCase(month.charAt(0)) + month.substring(1);
+			}
+			String day = new SimpleDateFormat("dd", Locale.getDefault()).format(date);
+			itemViewHolder.description.setText(app.getString(R.string.passed, month + " " + day));
 
+			itemViewHolder.optionsBtn.setBackgroundDrawable(app.getResources().getDrawable(night ? R.drawable.marker_circle_background_dark_with_inset : R.drawable.marker_circle_background_light_with_inset));
 			itemViewHolder.optionsBtn.setImageDrawable(iconsCache.getThemedIcon(R.drawable.ic_action_reset_to_default_dark));
 			itemViewHolder.optionsBtn.setOnClickListener(new View.OnClickListener() {
 				@Override
@@ -130,19 +143,33 @@ public class MapMarkersHistoryAdapter extends RecyclerView.Adapter<RecyclerView.
 					}
 					app.getMapMarkersHelper().restoreMarkerFromHistory(marker, 0);
 					notifyItemRemoved(position);
+
+					snackbar = Snackbar.make(itemViewHolder.itemView, app.getString(R.string.marker_moved_to_active), Snackbar.LENGTH_LONG)
+							.setAction(R.string.shared_string_undo, new View.OnClickListener() {
+								@Override
+								public void onClick(View view) {
+									app.getMapMarkersHelper().moveMapMarkerToHistory(marker);
+									notifyDataSetChanged();
+								}
+							});
+					View snackBarView = snackbar.getView();
+					TextView tv = (TextView) snackBarView.findViewById(android.support.design.R.id.snackbar_action);
+					tv.setTextColor(ContextCompat.getColor(app, R.color.color_dialog_buttons_dark));
+					snackbar.show();
 				}
 			});
 			itemViewHolder.flagIconLeftSpace.setVisibility(View.VISIBLE);
 			itemViewHolder.iconDirection.setVisibility(View.GONE);
 			itemViewHolder.leftPointSpace.setVisibility(View.GONE);
 			itemViewHolder.rightPointSpace.setVisibility(View.GONE);
-			if (position == getItemCount() - 1) {
-				itemViewHolder.bottomShadow.setVisibility(View.VISIBLE);
+			boolean lastItem = position == getItemCount() - 1;
+			if ((getItemCount() > position + 1 && getItemViewType(position + 1) == HEADER_TYPE) || lastItem) {
 				itemViewHolder.divider.setVisibility(View.GONE);
 			} else {
-				itemViewHolder.bottomShadow.setVisibility(View.GONE);
+				itemViewHolder.divider.setBackgroundColor(ContextCompat.getColor(app, night ? R.color.actionbar_dark_color : R.color.dashboard_divider_light));
 				itemViewHolder.divider.setVisibility(View.VISIBLE);
 			}
+			itemViewHolder.bottomShadow.setVisibility(lastItem ? View.VISIBLE : View.GONE);
 		} else if (holder instanceof MapMarkerHeaderViewHolder) {
 			final MapMarkerHeaderViewHolder dateViewHolder = (MapMarkerHeaderViewHolder) holder;
 			final Integer dateHeader = (Integer) getItem(position);
@@ -162,6 +189,12 @@ public class MapMarkersHistoryAdapter extends RecyclerView.Adapter<RecyclerView.
 			}
 			dateViewHolder.disableGroupSwitch.setVisibility(View.GONE);
 			dateViewHolder.title.setText(dateString);
+		}
+	}
+
+	public void hideSnackbar() {
+		if (snackbar != null && snackbar.isShown()) {
+			snackbar.dismiss();
 		}
 	}
 
@@ -190,7 +223,11 @@ public class MapMarkersHistoryAdapter extends RecyclerView.Adapter<RecyclerView.
 		SimpleDateFormat dateFormat = new SimpleDateFormat("LLLL", Locale.getDefault());
 		Date date = new Date();
 		date.setMonth(month);
-		return dateFormat.format(date);
+		String monthStr = dateFormat.format(date);
+		if (monthStr.length() > 1) {
+			monthStr = Character.toUpperCase(monthStr.charAt(0)) + monthStr.substring(1);
+		}
+		return monthStr;
 	}
 
 	public interface MapMarkersHistoryAdapterListener {

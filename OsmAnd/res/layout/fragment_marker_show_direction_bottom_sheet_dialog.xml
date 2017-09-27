@@ -182,136 +182,144 @@
                 android:layout_marginTop="@dimen/bottom_sheet_content_padding_small"
                 android:background="?attr/dashboard_divider"/>
 
-            <RelativeLayout
-                android:id="@+id/top_bar_row"
+            <FrameLayout
+                android:id="@+id/top_bar_row_frame"
                 android:layout_width="match_parent"
-                android:layout_height="@dimen/bottom_sheet_list_item_height"
-                android:foreground="?attr/selectableItemBackground"
-                android:minHeight="@dimen/bottom_sheet_list_item_height"
-                android:paddingEnd="@dimen/bottom_sheet_content_padding"
-                android:paddingLeft="@dimen/bottom_sheet_content_padding"
-                android:paddingRight="@dimen/bottom_sheet_content_padding"
-                android:paddingStart="@dimen/bottom_sheet_content_padding">
+                android:layout_height="@dimen/bottom_sheet_list_item_height">
 
-                <ImageView
-                    android:id="@+id/top_bar_icon"
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:layout_centerVertical="true"
-                    android:layout_marginEnd="@dimen/bottom_sheet_icon_margin"
-                    android:layout_marginRight="@dimen/bottom_sheet_icon_margin"
-                    tools:background="@drawable/ic_action_device_top"
-                    tools:src="@drawable/ic_action_device_topbar"/>
+                <LinearLayout
+                    android:background="?attr/selectableItemBackground"
+                    android:gravity="center_vertical"
+                    android:id="@+id/top_bar_row"
+                    android:layout_width="match_parent"
+                    android:layout_height="@dimen/bottom_sheet_list_item_height"
+                    android:minHeight="@dimen/bottom_sheet_list_item_height"
+                    android:paddingEnd="@dimen/bottom_sheet_content_padding"
+                    android:paddingLeft="@dimen/bottom_sheet_content_padding"
+                    android:paddingRight="@dimen/bottom_sheet_content_padding"
+                    android:paddingStart="@dimen/bottom_sheet_content_padding">
 
-                <TextView
-                    android:id="@+id/top_bar_text"
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:layout_centerVertical="true"
-                    android:layout_toEndOf="@id/top_bar_icon"
-                    android:layout_toRightOf="@id/top_bar_icon"
-                    android:maxLines="1"
-                    android:text="@string/shared_string_topbar"
-                    android:textAppearance="@style/TextAppearance.ListItemTitle"/>
+                    <ImageView
+                        android:id="@+id/top_bar_icon"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_marginEnd="@dimen/bottom_sheet_icon_margin"
+                        android:layout_marginRight="@dimen/bottom_sheet_icon_margin"
+                        tools:background="@drawable/ic_action_device_top"
+                        tools:src="@drawable/ic_action_device_topbar"/>
 
-                <RadioButton
-                    android:id="@+id/top_bar_radio_button"
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:layout_alignParentEnd="true"
-                    android:layout_alignParentRight="true"
-                    android:layout_centerVertical="true"
-                    android:background="@null"
-                    android:clickable="false"
-                    android:focusable="false"/>
-            </RelativeLayout>
+                    <TextView
+                        android:id="@+id/top_bar_text"
+                        android:layout_width="0dp"
+                        android:layout_weight="1"
+                        android:layout_height="wrap_content"
+                        android:maxLines="1"
+                        android:text="@string/shared_string_topbar"
+                        android:textAppearance="@style/TextAppearance.ListItemTitle"/>
 
-            <RelativeLayout
-                android:id="@+id/widget_row"
+                    <RadioButton
+                        android:id="@+id/top_bar_radio_button"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:background="@null"
+                        android:clickable="false"
+                        android:focusable="false"/>
+                </LinearLayout>
+
+            </FrameLayout>
+
+            <FrameLayout
+                android:id="@+id/widget_row_frame"
                 android:layout_width="match_parent"
-                android:layout_height="@dimen/bottom_sheet_list_item_height"
-                android:foreground="?attr/selectableItemBackground"
-                android:minHeight="@dimen/bottom_sheet_list_item_height"
-                android:paddingEnd="@dimen/bottom_sheet_content_padding"
-                android:paddingLeft="@dimen/bottom_sheet_content_padding"
-                android:paddingRight="@dimen/bottom_sheet_content_padding"
-                android:paddingStart="@dimen/bottom_sheet_content_padding">
+                android:layout_height="@dimen/bottom_sheet_list_item_height">
 
-                <ImageView
-                    android:id="@+id/widget_icon"
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:layout_centerVertical="true"
-                    android:layout_marginEnd="@dimen/bottom_sheet_icon_margin"
-                    android:layout_marginRight="@dimen/bottom_sheet_icon_margin"
-                    tools:background="@drawable/ic_action_device_top"
-                    tools:src="@drawable/ic_action_device_widget"/>
+                <LinearLayout
+                    android:background="?attr/selectableItemBackground"
+                    android:gravity="center_vertical"
+                    android:id="@+id/widget_row"
+                    android:layout_width="match_parent"
+                    android:layout_height="@dimen/bottom_sheet_list_item_height"
+                    android:foreground="?attr/selectableItemBackground"
+                    android:minHeight="@dimen/bottom_sheet_list_item_height"
+                    android:paddingEnd="@dimen/bottom_sheet_content_padding"
+                    android:paddingLeft="@dimen/bottom_sheet_content_padding"
+                    android:paddingRight="@dimen/bottom_sheet_content_padding"
+                    android:paddingStart="@dimen/bottom_sheet_content_padding">
 
-                <TextView
-                    android:id="@+id/widget_text"
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:layout_centerVertical="true"
-                    android:layout_toEndOf="@id/widget_icon"
-                    android:layout_toRightOf="@id/widget_icon"
-                    android:maxLines="1"
-                    android:text="@string/shared_string_widgets"
-                    android:textAppearance="@style/TextAppearance.ListItemTitle"/>
+                    <ImageView
+                        android:id="@+id/widget_icon"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_marginEnd="@dimen/bottom_sheet_icon_margin"
+                        android:layout_marginRight="@dimen/bottom_sheet_icon_margin"
+                        tools:background="@drawable/ic_action_device_top"
+                        tools:src="@drawable/ic_action_device_widget"/>
 
-                <RadioButton
-                    android:id="@+id/widget_radio_button"
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:layout_alignParentEnd="true"
-                    android:layout_alignParentRight="true"
-                    android:layout_centerVertical="true"
-                    android:background="@null"
-                    android:clickable="false"
-                    android:focusable="false"/>
-            </RelativeLayout>
+                    <TextView
+                        android:id="@+id/widget_text"
+                        android:layout_width="0dp"
+                        android:layout_weight="1"
+                        android:layout_height="wrap_content"
+                        android:maxLines="1"
+                        android:text="@string/shared_string_widgets"
+                        android:textAppearance="@style/TextAppearance.ListItemTitle"/>
 
-            <RelativeLayout
-                android:id="@+id/none_row"
+                    <RadioButton
+                        android:id="@+id/widget_radio_button"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:background="@null"
+                        android:clickable="false"
+                        android:focusable="false"/>
+                </LinearLayout>
+
+            </FrameLayout>
+
+            <FrameLayout
+                android:id="@+id/none_row_frame"
                 android:layout_width="match_parent"
-                android:layout_height="@dimen/bottom_sheet_list_item_height"
-                android:foreground="?attr/selectableItemBackground"
-                android:minHeight="@dimen/bottom_sheet_list_item_height"
-                android:paddingEnd="@dimen/bottom_sheet_content_padding"
-                android:paddingLeft="@dimen/bottom_sheet_content_padding"
-                android:paddingRight="@dimen/bottom_sheet_content_padding"
-                android:paddingStart="@dimen/bottom_sheet_content_padding">
+                android:layout_height="@dimen/bottom_sheet_list_item_height">
 
-                <ImageView
-                    android:id="@+id/none_icon"
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:layout_centerVertical="true"
-                    android:layout_marginEnd="@dimen/bottom_sheet_icon_margin"
-                    android:layout_marginRight="@dimen/bottom_sheet_icon_margin"
-                    tools:background="@drawable/ic_action_device_top"/>
+                <LinearLayout
+                    android:background="?attr/selectableItemBackground"
+                    android:gravity="center_vertical"
+                    android:id="@+id/none_row"
+                    android:layout_width="match_parent"
+                    android:layout_height="@dimen/bottom_sheet_list_item_height"
+                    android:foreground="?attr/selectableItemBackground"
+                    android:minHeight="@dimen/bottom_sheet_list_item_height"
+                    android:paddingEnd="@dimen/bottom_sheet_content_padding"
+                    android:paddingLeft="@dimen/bottom_sheet_content_padding"
+                    android:paddingRight="@dimen/bottom_sheet_content_padding"
+                    android:paddingStart="@dimen/bottom_sheet_content_padding">
 
-                <TextView
-                    android:id="@+id/none_text"
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:layout_centerVertical="true"
-                    android:layout_toEndOf="@id/none_icon"
-                    android:layout_toRightOf="@id/none_icon"
-                    android:maxLines="1"
-                    android:text="@string/shared_string_none"
-                    android:textAppearance="@style/TextAppearance.ListItemTitle"/>
+                    <ImageView
+                        android:id="@+id/none_icon"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_marginEnd="@dimen/bottom_sheet_icon_margin"
+                        android:layout_marginRight="@dimen/bottom_sheet_icon_margin"
+                        tools:background="@drawable/ic_action_device_top"/>
 
-                <RadioButton
-                    android:id="@+id/none_radio_button"
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:layout_alignParentEnd="true"
-                    android:layout_alignParentRight="true"
-                    android:layout_centerVertical="true"
-                    android:background="@null"
-                    android:clickable="false"
-                    android:focusable="false"/>
-            </RelativeLayout>
+                    <TextView
+                        android:id="@+id/none_text"
+                        android:layout_width="0dp"
+                        android:layout_weight="1"
+                        android:layout_height="wrap_content"
+                        android:maxLines="1"
+                        android:text="@string/shared_string_none"
+                        android:textAppearance="@style/TextAppearance.ListItemTitle"/>
+
+                    <RadioButton
+                        android:id="@+id/none_radio_button"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:background="@null"
+                        android:clickable="false"
+                        android:focusable="false"/>
+                </LinearLayout>
+
+            </FrameLayout>
 
         </LinearLayout>
 

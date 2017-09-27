@@ -5,6 +5,7 @@ import android.os.Build;
 import android.os.Bundle;
 import android.support.annotation.DrawableRes;
 import android.support.annotation.Nullable;
+import android.support.v4.content.ContextCompat;
 import android.view.ContextThemeWrapper;
 import android.view.LayoutInflater;
 import android.view.View;
@@ -18,6 +19,7 @@ import android.widget.TextView;
 import net.osmand.AndroidUtils;
 import net.osmand.plus.OsmandSettings;
 import net.osmand.plus.R;
+import net.osmand.plus.activities.MapActivity;
 import net.osmand.plus.base.BottomSheetDialogFragment;
 import net.osmand.plus.helpers.AndroidUiHelper;
 
@@ -35,8 +37,9 @@ public class OptionsBottomSheetDialogFragment extends BottomSheetDialogFragment 
 	@Nullable
 	@Override
 	public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
+		MapActivity mapActivity = (MapActivity) getActivity();
 		portrait = AndroidUiHelper.isOrientationPortrait(getActivity());
-		boolean nightMode = getMyApplication().getDaynightHelper().isNightModeForMapControls();
+		boolean nightMode = !getMyApplication().getSettings().isLightContent();
 		final int themeRes = nightMode ? R.style.OsmandDarkTheme : R.style.OsmandLightTheme;
 
 		final View mainView = View.inflate(new ContextThemeWrapper(getContext(), themeRes), R.layout.fragment_marker_options_bottom_sheet_dialog, container);
@@ -61,6 +64,8 @@ public class OptionsBottomSheetDialogFragment extends BottomSheetDialogFragment 
 		if (imageResId != 0) {
 			showDirectionIcon.setImageDrawable(getIcon(imageResId, R.color.dashboard_blue));
 		}
+		((ImageView) mainView.findViewById(R.id.coordinate_input_icon))
+				.setImageDrawable(getContentIcon(R.drawable.ic_action_coordinates_longitude));
 		((ImageView) mainView.findViewById(R.id.build_route_icon))
 				.setImageDrawable(getContentIcon(R.drawable.map_directions));
 		((ImageView) mainView.findViewById(R.id.save_as_new_track_icon))
@@ -68,6 +73,7 @@ public class OptionsBottomSheetDialogFragment extends BottomSheetDialogFragment 
 		((ImageView) mainView.findViewById(R.id.move_all_to_history_icon))
 				.setImageDrawable(getContentIcon(R.drawable.ic_action_history2));
 
+		((TextView) mainView.findViewById(R.id.show_direction_text_view)).setTextColor(ContextCompat.getColor(mapActivity, nightMode ? R.color.color_dialog_buttons_dark : R.color.map_widget_blue_pressed));
 		((TextView) mainView.findViewById(R.id.show_direction_text_view)).setText(getMyApplication().getSettings().MAP_MARKERS_MODE.get().toHumanString(getActivity()));
 
 		mainView.findViewById(R.id.sort_by_row).setOnClickListener(new View.OnClickListener() {
@@ -84,6 +90,15 @@ public class OptionsBottomSheetDialogFragment extends BottomSheetDialogFragment 
 			public void onClick(View view) {
 				if (listener != null) {
 					listener.showDirectionOnClick();
+				}
+				dismiss();
+			}
+		});
+		mainView.findViewById(R.id.coordinate_input_row).setOnClickListener(new View.OnClickListener() {
+			@Override
+			public void onClick(View view) {
+				if (listener != null) {
+					listener.coordinateInputOnClick();
 				}
 				dismiss();
 			}
@@ -183,6 +198,8 @@ public class OptionsBottomSheetDialogFragment extends BottomSheetDialogFragment 
 		void sortByOnClick();
 
 		void showDirectionOnClick();
+
+		void coordinateInputOnClick();
 
 		void buildRouteOnClick();
 

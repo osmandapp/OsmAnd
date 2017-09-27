@@ -20,6 +20,7 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.widget.TextView;
 
+import net.osmand.AndroidUtils;
 import net.osmand.plus.MapMarkersHelper;
 import net.osmand.plus.MapMarkersHelper.MapMarker;
 import net.osmand.plus.OsmandApplication;
@@ -74,6 +75,9 @@ public class MapMarkersHistoryFragment extends Fragment implements MapMarkersHel
 		}
 
 		final RecyclerView recyclerView = new RecyclerView(getContext());
+		boolean isSmartphone = getResources().getConfiguration().smallestScreenWidthDp < 600;
+		recyclerView.setPadding(0, 0, 0, AndroidUtils.dpToPx(mapActivity, isSmartphone ? 72 : 108));
+		recyclerView.setClipToPadding(false);
 		recyclerView.setLayoutManager(new LinearLayoutManager(getContext()));
 
 		ItemTouchHelper.SimpleCallback simpleItemTouchCallback = new ItemTouchHelper.SimpleCallback(0, ItemTouchHelper.LEFT | ItemTouchHelper.RIGHT) {
@@ -152,7 +156,7 @@ public class MapMarkersHistoryFragment extends Fragment implements MapMarkersHel
 						app.getMapMarkersHelper().restoreMarkerFromHistory((MapMarker) item, 0);
 						snackbarStringRes = R.string.marker_moved_to_active;
 					} else {
-						app.getMapMarkersHelper().removeMarkerFromHistory((MapMarker) item);
+						app.getMapMarkersHelper().removeMarker((MapMarker) item);
 						snackbarStringRes = R.string.item_removed;
 					}
 					adapter.notifyItemRemoved(pos);
@@ -208,6 +212,9 @@ public class MapMarkersHistoryFragment extends Fragment implements MapMarkersHel
 		if (snackbar != null && snackbar.isShown()) {
 			snackbar.dismiss();
 		}
+		if (adapter != null) {
+			adapter.hideSnackbar();
+		}
 	}
 
 	private HistoryMarkerMenuBottomSheetDialogFragment.HistoryMarkerMenuFragmentListener createHistoryMarkerMenuListener() {
@@ -225,7 +232,7 @@ public class MapMarkersHistoryFragment extends Fragment implements MapMarkersHel
 			public void onDeleteMarker(int pos) {
 				Object item = adapter.getItem(pos);
 				if (item instanceof MapMarker) {
-					app.getMapMarkersHelper().removeMarkerFromHistory((MapMarker) item);
+					app.getMapMarkersHelper().removeMarker((MapMarker) item);
 					adapter.notifyItemRemoved(pos);
 				}
 			}

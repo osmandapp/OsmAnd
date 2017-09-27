@@ -5,6 +5,8 @@ import android.graphics.BitmapFactory;
 import android.graphics.Canvas;
 import android.graphics.Paint;
 import android.graphics.Paint.Style;
+import android.graphics.Path;
+import android.graphics.PathMeasure;
 import android.graphics.PointF;
 import android.graphics.Rect;
 import android.os.Handler;
@@ -22,15 +24,19 @@ import net.osmand.plus.OsmandSettings;
 import net.osmand.plus.OsmandSettings.RulerMode;
 import net.osmand.plus.R;
 import net.osmand.plus.activities.MapActivity;
+import net.osmand.util.MapUtils;
 
 import java.util.ArrayList;
 
+import gnu.trove.list.array.TIntArrayList;
+
 public class RulerControlLayer extends OsmandMapLayer {
 
+	private static final int VERTICAL_OFFSET = 15;
 	private static final long DRAW_TIME = 2000;
 	private static final long DELAY_BEFORE_DRAW = 500;
 	private static final int TEXT_SIZE = 14;
-	private static final int MAX_ITERATIONS = 50;
+	private static final int DISTANCE_TEXT_SIZE = 16;
 
 	private final MapActivity mapActivity;
 	private OsmandApplication app;
@@ -62,12 +68,18 @@ public class RulerControlLayer extends OsmandMapLayer {
 	private boolean touched;
 	private boolean wasZoom;
 
+	private TIntArrayList tx = new TIntArrayList();
+	private TIntArrayList ty = new TIntArrayList();
+	private Path linePath = new Path();
+
 	private Bitmap centerIconDay;
 	private Bitmap centerIconNight;
 	private Paint bitmapPaint;
 	private RenderingLineAttributes lineAttrs;
 	private RenderingLineAttributes circleAttrs;
 	private RenderingLineAttributes circleAttrsAlt;
+	private float circleTextSize;
+	private float lineTextSize;
 
 	private Handler handler;
 
@@ -110,15 +122,16 @@ public class RulerControlLayer extends OsmandMapLayer {
 
 		lineAttrs = new RenderingLineAttributes("rulerLine");
 
-		float textSize = TEXT_SIZE * mapActivity.getResources().getDisplayMetrics().density;
+		circleTextSize = TEXT_SIZE * mapActivity.getResources().getDisplayMetrics().density;
+		lineTextSize = DISTANCE_TEXT_SIZE * mapActivity.getResources().getDisplayMetrics().density;
 
 		circleAttrs = new RenderingLineAttributes("rulerCircle");
-		circleAttrs.paint2.setTextSize(textSize);
-		circleAttrs.paint3.setTextSize(textSize);
+		circleAttrs.paint2.setTextSize(circleTextSize);
+		circleAttrs.paint3.setTextSize(circleTextSize);
 
 		circleAttrsAlt = new RenderingLineAttributes("rulerCircleAlt");
-		circleAttrsAlt.paint2.setTextSize(textSize);
-		circleAttrsAlt.paint3.setTextSize(textSize);
+		circleAttrsAlt.paint2.setTextSize(circleTextSize);
+		circleAttrsAlt.paint3.setTextSize(circleTextSize);
 
 		handler = new Handler() {
 			@Override
@@ -202,22 +215,16 @@ public class RulerControlLayer extends OsmandMapLayer {
 			drawCenterIcon(canvas, tb, center, settings.isNightMode(), mode);
 			Location currentLoc = app.getLocationProvider().getLastKnownLocation();
 			if (showDistBetweenFingerAndLocation && currentLoc != null) {
-				float x = tb.getPixXFromLatLon(touchPointLatLon.getLatitude(), touchPointLatLon.getLongitude());
-				float y = tb.getPixYFromLatLon(touchPointLatLon.getLatitude(), touchPointLatLon.getLongitude());
-				drawDistBetweenFingerAndLocation(canvas, tb, x, y, currentLoc, settings.isNightMode());
+				drawDistBetweenFingerAndLocation(canvas, tb, currentLoc, settings.isNightMode());
 			} else if (showTwoFingersDistance) {
-				LatLon firstTouchPoint = view.getFirstTouchPointLatLon();
-				LatLon secondTouchPoint = view.getSecondTouchPointLatLon();
-				float x1 = tb.getPixXFromLonNoRot(firstTouchPoint.getLongitude());
-				float y1 = tb.getPixYFromLatNoRot(firstTouchPoint.getLatitude());
-				float x2 = tb.getPixXFromLonNoRot(secondTouchPoint.getLongitude());
-				float y2 = tb.getPixYFromLatNoRot(secondTouchPoint.getLatitude());
-				drawTwoFingersDistance(canvas, x1, y1, x2, y2, settings.isNightMode());
+				drawTwoFingersDistance(canvas, tb, view.getFirstTouchPointLatLon(), view.getSecondTouchPointLatLon(), settings.isNightMode());
 			}
 			if (mode == RulerMode.FIRST || mode == RulerMode.SECOND) {
 				updateData(tb, center);
 				RenderingLineAttributes attrs;
 				if (mode == RulerMode.FIRST) {
+					circleAttrs.paint2.setTextSize(circleTextSize);
+					circleAttrs.paint3.setTextSize(circleTextSize);
 					attrs = circleAttrs;
 				} else {
 					attrs = circleAttrsAlt;
@@ -238,10 +245,46 @@ public class RulerControlLayer extends OsmandMapLayer {
 		handler.sendEmptyMessageDelayed(0, DRAW_TIME + 50);
 	}
 
-	private void drawTwoFingersDistance(Canvas canvas, float x1, float y1, float x2, float y2, boolean nightMode) {
-		canvas.drawLine(x1, y1, x2, y2, lineAttrs.paint);
+	private void drawTwoFingersDistance(Canvas canvas, RotatedTileBox tb, LatLon firstTouch, LatLon secondTouch, boolean nightMode) {
+		float x1 = tb.getPixXFromLatLon(firstTouch.getLatitude(), firstTouch.getLongitude());
+		float y1 = tb.getPixYFromLatLon(firstTouch.getLatitude(), firstTouch.getLongitude());
+		float x2 = tb.getPixXFromLatLon(secondTouch.getLatitude(), secondTouch.getLongitude());
+		float y2 = tb.getPixYFromLatLon(secondTouch.getLatitude(), secondTouch.getLongitude());
+
+		Path path = new Path();
+		path.moveTo(x1, y1);
+		path.lineTo(x2, y2);
+
+		String text = OsmAndFormatter.getFormattedDistance((float) MapUtils.getDistance(firstTouch, secondTouch), app);
+
+		canvas.rotate(-tb.getRotate(), tb.getCenterPixelX(), tb.getCenterPixelY());
+		canvas.drawPath(path, lineAttrs.paint);
 		drawFingerTouchIcon(canvas, x1, y1, nightMode);
 		drawFingerTouchIcon(canvas, x2, y2, nightMode);
+		drawTextOnCenterOfPath(canvas, x1, x2, path, text);
+		canvas.rotate(tb.getRotate(), tb.getCenterPixelX(), tb.getCenterPixelY());
+	}
+
+	private void drawTextOnCenterOfPath(Canvas canvas, float x1, float x2, Path path, String text) {
+		PathMeasure pm = new PathMeasure(path, false);
+		Rect bounds = new Rect();
+		circleAttrs.paint2.getTextBounds(text, 0, text.length(), bounds);
+		float hOffset = pm.getLength() / 2 - bounds.width() / 2;
+
+		circleAttrs.paint2.setTextSize(lineTextSize);
+		circleAttrs.paint3.setTextSize(lineTextSize);
+
+		if (x1 >= x2) {
+			float[] pos = new float[2];
+			pm.getPosTan(pm.getLength() / 2, pos, null);
+			canvas.rotate(180, pos[0], pos[1]);
+			canvas.drawTextOnPath(text, path, hOffset, bounds.height() + VERTICAL_OFFSET, circleAttrs.paint3);
+			canvas.drawTextOnPath(text, path, hOffset, bounds.height() + VERTICAL_OFFSET, circleAttrs.paint2);
+			canvas.rotate(-180, pos[0], pos[1]);
+		} else {
+			canvas.drawTextOnPath(text, path, hOffset, -VERTICAL_OFFSET, circleAttrs.paint3);
+			canvas.drawTextOnPath(text, path, hOffset, -VERTICAL_OFFSET, circleAttrs.paint2);
+		}
 	}
 
 	private void drawFingerTouchIcon(Canvas canvas, float x, float y, boolean nightMode) {
@@ -267,41 +310,31 @@ public class RulerControlLayer extends OsmandMapLayer {
 		canvas.rotate(tb.getRotate(), center.x, center.y);
 	}
 
-	private void drawDistBetweenFingerAndLocation(Canvas canvas, RotatedTileBox tb, float x, float y,
-												  Location currentLoc, boolean nightMode) {
-		int currX = (int) tb.getPixXFromLatLon(currentLoc.getLatitude(), currentLoc.getLongitude());
-		int currY = (int) tb.getPixYFromLatLon(currentLoc.getLatitude(), currentLoc.getLongitude());
-		int width = tb.getPixWidth();
-		int height = tb.getPixHeight();
-		boolean needDraw = true;
+	private void drawDistBetweenFingerAndLocation(Canvas canvas, RotatedTileBox tb, Location currLoc, boolean night) {
+		float x = tb.getPixXFromLatLon(touchPointLatLon.getLatitude(), touchPointLatLon.getLongitude());
+		float y = tb.getPixYFromLatLon(touchPointLatLon.getLatitude(), touchPointLatLon.getLongitude());
+		int currX = (int) tb.getPixXFromLatLon(currLoc.getLatitude(), currLoc.getLongitude());
+		int currY = (int) tb.getPixYFromLatLon(currLoc.getLatitude(), currLoc.getLongitude());
 
-		if ((currX < 0 && x == 0) || (currY < 0 && y == 0)
-				|| (currX > width && x == width) || (currY > height && y == height)) {
-			needDraw = false;
-		} else if (currX < 0 || currY < 0 || currX > width || currY > height) {
-			float xNew = (currX + x) / 2;
-			float yNew = (currY + y) / 2;
-			int count = 0;
+		linePath.reset();
+		tx.reset();
+		ty.reset();
 
-			while (count < MAX_ITERATIONS) {
-				count++;
-				if (xNew < 0 || yNew < 0 || xNew > width || yNew > height) {
-					currX = (int) xNew;
-					currY = (int) yNew;
-				} else {
-					break;
-				}
-				xNew = (xNew + x) / 2;
-				yNew = (yNew + y) / 2;
-			}
-		}
+		tx.add((int) x);
+		ty.add((int) y);
+		tx.add(currX);
+		ty.add(currY);
 
-		if (needDraw) {
-			canvas.rotate(-tb.getRotate(), tb.getCenterPixelX(), tb.getCenterPixelY());
-			canvas.drawLine(currX, currY, x, y, lineAttrs.paint);
-			drawFingerTouchIcon(canvas, x, y, nightMode);
-			canvas.rotate(tb.getRotate(), tb.getCenterPixelX(), tb.getCenterPixelY());
-		}
+		calculatePath(tb, tx, ty, linePath);
+
+		float dist = (float) MapUtils.getDistance(touchPointLatLon, currLoc.getLatitude(), currLoc.getLongitude());
+		String text = OsmAndFormatter.getFormattedDistance(dist, app);
+
+		canvas.rotate(-tb.getRotate(), tb.getCenterPixelX(), tb.getCenterPixelY());
+		canvas.drawPath(linePath, lineAttrs.paint);
+		drawFingerTouchIcon(canvas, x, y, night);
+		drawTextOnCenterOfPath(canvas, x, currX, linePath, text);
+		canvas.rotate(tb.getRotate(), tb.getCenterPixelX(), tb.getCenterPixelY());
 	}
 
 	private void updateData(RotatedTileBox tb, QuadPoint center) {
