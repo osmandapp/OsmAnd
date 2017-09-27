@@ -863,8 +863,8 @@
   
   
   
-  <string name="show_cameras">Камери контролю швидкості</string>
-  <string name="show_traffic_warnings">Обмеження швидкості</string>
+  <string name="show_cameras">Камери детектування швидкості</string>
+  <string name="show_traffic_warnings">Попередження про дорожній рух</string>
   <string name="avoid_toll_roads">Платні дороги</string>
   
   <string name="map_widget_top_text">Назва вулиці</string>
@@ -1217,8 +1217,8 @@
 	
 	
     <string name="speak_speed_limit">Обмеження швидкості</string>
-    <string name="speak_cameras">Камери фіксації швидкості</string>
-	<string name="speak_traffic_warnings">Перешкоди на шляху</string>
+    <string name="speak_cameras">Камери детектування швидкості</string>
+	<string name="speak_traffic_warnings">Попередження про дорожній рух</string>
 	
 	<string name="route_descr_map_location">Мапа: </string>
     <string name="osb_author_or_password_not_specified">Введіть OSM логін і пароль в налаштуваннях</string>
@@ -1227,7 +1227,7 @@
     <string name="context_menu_item_directions_to">Маршрут до</string>
     <string name="context_menu_item_directions_from">Маршрут від</string>
     <string name="route_to">До:</string>
-    <string name="announce_gpx_waypoints">Маршрутні точки GPX</string>
+    <string name="announce_gpx_waypoints">Шляхові точки GPX</string>
     <string name="speak_title">Попереджати…</string>
 	<string name="speak_descr">Увімкніть оголошення назв вулиць, дорожніх обмежень (примусових зупинок, лежачих поліцейських); повідомленя про камери фіксації швидкості, про обмеження швидкості</string>
 	<string name="speak_street_names">Назви вулиць (TTS)</string>
@@ -1538,7 +1538,7 @@
 	
 	<string name="routing_attr_avoid_toll_name">Уникати платних доріг</string>
 	<string name="routing_attr_avoid_toll_description">Уникати платних доріг</string>
-	<string name="routing_attr_avoid_unpaved_name">Уникати ґрунтових доріг</string>
+	<string name="routing_attr_avoid_unpaved_name">Уникати грунтових доріг</string>
 	<string name="routing_attr_avoid_unpaved_description">Уникати ґрунтових доріг</string>
 	<string name="routing_attr_avoid_ferries_name">Уникати пороми</string>
 	<string name="routing_attr_avoid_ferries_description">Уникати пороми</string>
@@ -1649,8 +1649,8 @@
     <string name="waypoints">Шляхові точки</string>
     <string name="targets">Цілі</string>
     <string name="way_alarms">Перешкоди</string>
-    <string name="speak_favorites">Закладки, що є поруч</string>
-    <string name="speak_poi">POI, що є поруч</string>
+    <string name="speak_favorites">Довколишні закладки</string>
+    <string name="speak_poi">Довколишні POI</string>
     <string name="confirm_every_run">Завжди питати</string>
 	<string name="save_global_track_interval_descr">Оберіть інтервал періодичності запису треку (вмикається через віджет логування GPX)</string>
 	<string name="save_global_track_interval">Загальний інтервал запису</string>
@@ -1848,7 +1848,7 @@
 	<string name="shared_string_show_description">Показати опис</string>
 	<string name="shared_string_message">Повідомлення</string>
 	<string name="agps_data_last_downloaded">Останні завантажені дані A-GPS: %1$s</string>
-    <string name="confirm_usage_speed_cameras">У багатьох країнах (Німеччині, Франції, Італії та інших) використання попереджень про камери контролю швидкості не дозволено законом. OsmAnd не несе ніякої відповідальності, якщо Ви порушите закон. Будь ласка, натисніть „Так“, тільки якщо Ви маєте право використовувати цю функцію.</string>
+    <string name="confirm_usage_speed_cameras">У багатьох країнах (Німеччина, Франція, Італія та інші) використання детекторів камер контролю швидкості не дозволено законом. OsmAnd не несе ніякої відповідальності, якщо Ви порушите закон. Будь ласка, натисніть кнопку „Так“, тільки якщо ви маєте право використовувати цю функцію.</string>
 	<string name="welmode_download_maps">Завантажити мапи</string>
 	<string name="welcome_select_region">Щоб правильно показувати дорожні знаки та правила дорожнього руху, будь ласка, виберіть ваш регіон:</string>
 	<string name="welcome_text">OsmAnd забезпечує повністю автономний (оффлайн) перегляд мап і навігацію!</string>
@@ -3007,7 +3007,7 @@
     <string name="marker_moved_to_active">Маркер мапи став активним</string>
     <string name="shared_string_list">Список</string>
     <string name="shared_string_groups">Групи</string>
-    <string name="passed">Пройшло: %1$s</string>
+    <string name="passed">Останнє використання: %1$s</string>
     <string name="make_active">Зробити активним</string>
     <string name="today">Сьогодні</string>
     <string name="yesterday">Вчора</string>
@@ -3018,4 +3018,20 @@
     <string name="ascendingly">По зростанню</string>
     <string name="date_added">Дата додавання</string>
     <string name="order_by">Сортувати за:</string>
+    <string name="use_location">Використовувати розташування</string>
+    <string name="add_location_as_first_point_descr">Додати Ваше місце розташування як першу точку при плануванні маршруту.</string>
+    <string name="my_location">Моє місцезнаходження</string>
+    <string name="shared_string_finish">Фініш</string>
+    <string name="plan_route">Планувати маршрут</string>
+    <string name="shared_string_sort">Сортувати</string>
+    <string name="coordinate_input">Введення координат</string>
+    <string name="is_saved">збережено</string>
+    <string name="marker_save_as_track_descr">OsmAnd збереже усі Ваші маркери в окремий файл. Ви можете ввести назву файлу:</string>
+    <string name="marker_save_as_track">Зберегти як трек</string>
+    <string name="move_to_history">Перемістити в історію</string>
+    <string name="group_will_be_removed_after_restart">Група буде вилучена після перезапуску</string>
+    <string name="show_guide_line">Показати напрямну лінію</string>
+    <string name="show_arrows_on_the_map">Показати стрілки на мапі</string>
+    <string name="show_passed">Показати дату останнього використання</string>
+    <string name="hide_passed">Приховати дату останнього використання</string>
     </resources>
