@@ -138,11 +138,13 @@ public class PlanRouteFragment extends Fragment implements OsmAndLocationListene
 			@Override
 			public void onClick(View view) {
 				int activeMarkersCount = markersHelper.getMapMarkers().size();
-				if (selectedCount == activeMarkersCount) {
+				if (selectedCount == activeMarkersCount && markersHelper.isStartFromMyLocation()) {
 					markersHelper.deselectAllActiveMarkers();
+					markersHelper.setStartFromMyLocation(false);
 					selectedCount = 0;
 				} else {
 					markersHelper.selectAllActiveMarkers();
+					markersHelper.setStartFromMyLocation(true);
 					selectedCount = activeMarkersCount;
 				}
 				adapter.notifyDataSetChanged();
@@ -197,7 +199,7 @@ public class PlanRouteFragment extends Fragment implements OsmAndLocationListene
 			public void onItemClick(View view) {
 				int pos = markersRv.getChildAdapterPosition(view);
 				if (pos == 0) {
-					Toast.makeText(mapActivity, "location selected", Toast.LENGTH_SHORT).show();
+					markersHelper.setStartFromMyLocation(!mapActivity.getMyApplication().getSettings().ROUTE_MAP_MARKERS_START_MY_LOC.get());
 				} else {
 					MapMarker marker = adapter.getItem(pos);
 					selectedCount = marker.selected ? selectedCount - 1 : selectedCount + 1;
@@ -422,7 +424,7 @@ public class PlanRouteFragment extends Fragment implements OsmAndLocationListene
 	}
 
 	private void updateSelectButton() {
-		if (selectedCount == markersHelper.getMapMarkers().size()) {
+		if (selectedCount == markersHelper.getMapMarkers().size() && markersHelper.isStartFromMyLocation()) {
 			((TextView) mainView.findViewById(R.id.select_all_button)).setText(getString(R.string.shared_string_deselect_all));
 		} else {
 			((TextView) mainView.findViewById(R.id.select_all_button)).setText(getString(R.string.shared_string_select_all));
