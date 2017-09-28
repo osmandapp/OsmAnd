@@ -219,25 +219,18 @@ public class MapMarkersLayer extends OsmandMapLayer implements IContextMenuProvi
 	}
 
 	@Override
-	public void onDraw(Canvas canvas, RotatedTileBox tileBox, DrawSettings nightMode) {
-
-		Location myLoc = map.getMyApplication().getLocationProvider().getLastStaleKnownLocation();
-		widgetsFactory.updateInfo(myLoc == null
-				? tileBox.getCenterLatLon() : new LatLon(myLoc.getLatitude(), myLoc.getLongitude()), tileBox.getZoom());
+	public void onPrepareBufferImage(Canvas canvas, RotatedTileBox tileBox, DrawSettings nightMode) {
 		OsmandSettings settings = map.getMyApplication().getSettings();
-
-		if (tileBox.getZoom() < 3 || !settings.USE_MAP_MARKERS.get()) {
-			return;
-		}
-
+		Location myLoc = map.getMapViewTrackingUtilities().getMyLocation();
 		MapMarkersHelper markersHelper = map.getMyApplication().getMapMarkersHelper();
+		List<MapMarker> activeMapMarkers = markersHelper.getMapMarkers();
+
 		if (route.size() > 0) {
 			path.reset();
 			boolean first = true;
-			Location myLocation = map.getMapViewTrackingUtilities().getMyLocation();
-			if (markersHelper.isStartFromMyLocation() && myLocation != null) {
-				int locationX = tileBox.getPixXFromLonNoRot(myLocation.getLongitude());
-				int locationY = tileBox.getPixYFromLatNoRot(myLocation.getLatitude());
+			if (markersHelper.isStartFromMyLocation() && myLoc != null) {
+				int locationX = tileBox.getPixXFromLonNoRot(myLoc.getLongitude());
+				int locationY = tileBox.getPixYFromLatNoRot(myLoc.getLatitude());
 				path.moveTo(locationX, locationY);
 				first = false;
 			}
@@ -253,8 +246,6 @@ public class MapMarkersLayer extends OsmandMapLayer implements IContextMenuProvi
 			}
 			canvas.drawPath(path, paint);
 		}
-
-		List<MapMarker> activeMapMarkers = markersHelper.getMapMarkers();
 
 		if (settings.SHOW_LINES_TO_FIRST_MARKERS.get() && myLoc != null) {
 			lineAttrs.updatePaints(view, nightMode, tileBox);
@@ -319,8 +310,22 @@ public class MapMarkersLayer extends OsmandMapLayer implements IContextMenuProvi
 				canvas.rotate(tileBox.getRotate(), tileBox.getCenterPixelX(), tileBox.getCenterPixelY());
 			}
 		}
+	}
 
-		for (MapMarker marker : activeMapMarkers) {
+	@Override
+	public void onDraw(Canvas canvas, RotatedTileBox tileBox, DrawSettings nightMode) {
+		Location myLoc = map.getMyApplication().getLocationProvider().getLastStaleKnownLocation();
+		widgetsFactory.updateInfo(myLoc == null
+				? tileBox.getCenterLatLon() : new LatLon(myLoc.getLatitude(), myLoc.getLongitude()), tileBox.getZoom());
+		OsmandSettings settings = map.getMyApplication().getSettings();
+
+		if (tileBox.getZoom() < 3 || !settings.USE_MAP_MARKERS.get()) {
+			return;
+		}
+
+		MapMarkersHelper markersHelper = map.getMyApplication().getMapMarkersHelper();
+
+		for (MapMarker marker : markersHelper.getMapMarkers()) {
 			if (isLocationVisible(tileBox, marker) && !overlappedByWaypoint(marker)
 					&& !isInMotion(marker)) {
 				Bitmap bmp = getMapMarkerBitmap(marker.colorIndex);
@@ -336,9 +341,8 @@ public class MapMarkersLayer extends OsmandMapLayer implements IContextMenuProvi
 
 		if (settings.SHOW_ARROWS_TO_FIRST_MARKERS.get()) {
 			LatLon loc = tileBox.getCenterLatLon();
-			List<MapMarker> mapMarkers = markersHelper.getMapMarkers();
 			int i = 0;
-			for (MapMarker marker : mapMarkers) {
+			for (MapMarker marker : markersHelper.getMapMarkers()) {
 				if (!isLocationVisible(tileBox, marker) && !isInMotion(marker)) {
 					canvas.save();
 					net.osmand.Location.distanceBetween(loc.getLatitude(), loc.getLongitude(),
