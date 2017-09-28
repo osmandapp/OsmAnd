@@ -17,7 +17,7 @@
     <string name="shared_string_sort">Sort</string>
     <string name="coordinate_input">Coordinate input</string>
     <string name="is_saved">is saved</string>
-    <string name="marker_save_as_track_descr">OsmAnd will save your markers to a separate file, you can enter a filename:</string>
+    <string name="marker_save_as_track_descr">Export your markers to a file you can specify here:</string>
     <string name="marker_save_as_track">Save as track</string>
     <string name="move_to_history">Move to history</string>
     <string name="group_will_be_removed_after_restart">Group will be removed after restart</string>
