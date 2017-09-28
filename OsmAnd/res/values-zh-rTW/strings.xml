@@ -2881,7 +2881,7 @@ OsmAnd (Automated Navigation Directions) 是一個地圖和導航的應用程式
     <string name="shared_string_sort">分類</string>
     <string name="coordinate_input">座標輸入</string>
     <string name="is_saved">已儲存</string>
-    <string name="marker_save_as_track_descr">OsmAnd 會將您所有的標記，都儲存到個別的檔案中，您可以輸入檔案名稱：</string>
+    <string name="marker_save_as_track_descr">匯出您的標記到檔案，您可以在這裡指定：</string>
     <string name="marker_save_as_track">另存為軌跡</string>
     <string name="move_to_history">移至歷程</string>
     <string name="group_will_be_removed_after_restart">重新啟動後群組將被移除</string>
