@@ -56,6 +56,9 @@ public class CoordinateInputDialogFragment extends DialogFragment {
 		lightTheme = app.getSettings().OSMAND_THEME.get() == OsmandSettings.OSMAND_LIGHT_THEME;
 		int themeId = lightTheme ? R.style.OsmandLightTheme : R.style.OsmandDarkTheme;
 		setStyle(STYLE_NO_FRAME, themeId);
+
+		CoordinateInputBottomSheetDialogFragment fragment = new CoordinateInputBottomSheetDialogFragment();
+		fragment.show(getMapActivity().getSupportFragmentManager(), CoordinateInputBottomSheetDialogFragment.TAG);
 	}
 
 	@Nullable
