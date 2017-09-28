@@ -144,13 +144,14 @@
 
     </LinearLayout>
 
-    <FrameLayout
+    <LinearLayout
+        android:id="@+id/keyboard_layout"
         android:layout_gravity="bottom"
+        android:orientation="vertical"
         android:layout_width="match_parent"
         android:layout_height="wrap_content">
 
         <GridView
-            osmand:visibility="gone"
             android:id="@+id/keyboard_grid_view"
             android:layout_width="match_parent"
             android:layout_height="match_parent"
@@ -160,6 +161,47 @@
             android:stretchMode="columnWidth"
             android:numColumns="3"/>
 
-    </FrameLayout>
+        <View
+            android:id="@+id/keyboard_divider"
+            android:layout_width="match_parent"
+            android:layout_height="1dp"
+            android:background="?attr/dashboard_divider"/>
+
+        <LinearLayout
+            android:background="?attr/bg_color"
+            android:orientation="horizontal"
+            android:layout_width="match_parent"
+            android:layout_height="56dp">
+
+            <ImageView
+                android:id="@+id/show_hide_keyboard_icon"
+                android:padding="@dimen/bottom_sheet_content_padding"
+                android:background="?attr/selectableItemBackground"
+                android:layout_gravity="center_vertical"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                osmand:src="@drawable/ic_action_arrow_down"/>
+
+            <View
+                android:layout_width="1dp"
+                android:layout_height="match_parent"
+                android:background="?attr/dashboard_divider"/>
+
+            <net.osmand.plus.widgets.TextViewEx
+                android:maxLines="1"
+                android:ellipsize="end"
+                android:id="@+id/add_marker"
+                android:textAllCaps="true"
+                android:layout_width="0dp"
+                android:layout_weight="1"
+                android:layout_height="match_parent"
+                android:gravity="center"
+                android:textColor="@color/keyboard_color"
+                osmand:typeface="@string/font_roboto_regular"
+                android:text="@string/shared_string_add"/>
+
+        </LinearLayout>
+
+    </LinearLayout>
 
 </FrameLayout>

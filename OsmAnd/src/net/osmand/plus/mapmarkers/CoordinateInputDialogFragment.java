@@ -18,8 +18,11 @@ import android.widget.AdapterView;
 import android.widget.ArrayAdapter;
 import android.widget.EditText;
 import android.widget.GridView;
+import android.widget.ImageView;
 
+import net.osmand.AndroidUtils;
 import net.osmand.data.PointDescription;
+import net.osmand.plus.IconsCache;
 import net.osmand.plus.OsmandApplication;
 import net.osmand.plus.OsmandSettings;
 import net.osmand.plus.OsmandTextFieldBoxes;
@@ -37,6 +40,7 @@ public class CoordinateInputDialogFragment extends DialogFragment {
 	public static final String TAG = "CoordinateInputDialogFragment";
 
 	public static final String COORDINATE_FORMAT = "coordinate_format";
+	public static final String USE_OSMAND_KEYBOARD = "use_osmand_keyboard";
 
 	private static final int DELETE_BUTTON_POSITION = 9;
 	private static final int CLEAR_BUTTON_POSITION = 11;
@@ -47,10 +51,10 @@ public class CoordinateInputDialogFragment extends DialogFragment {
 	private boolean lightTheme;
 	private EditText focusedEditText;
 	private boolean useOsmandKeyboard = true;
+	private int coordinateFormat = -1;
 	private List<OsmandTextFieldBoxes> textFieldBoxes;
 	private ExtendedEditText nameEditText;
 	private List<ExtendedEditText> extendedLatLonEditTexts;
-	private int coordinateFormat = -1;
 
 	@Override
 	public void onCreate(Bundle savedInstanceState) {
@@ -60,11 +64,9 @@ public class CoordinateInputDialogFragment extends DialogFragment {
 		int themeId = lightTheme ? R.style.OsmandLightTheme : R.style.OsmandDarkTheme;
 		setStyle(STYLE_NO_FRAME, themeId);
 
-		if (coordinateFormat == -1) {
-			CoordinateInputBottomSheetDialogFragment fragment = new CoordinateInputBottomSheetDialogFragment();
-			fragment.setListener(createCoordinateInputFormatChangeListener());
-			fragment.show(getMapActivity().getSupportFragmentManager(), CoordinateInputBottomSheetDialogFragment.TAG);
-		}
+		CoordinateInputBottomSheetDialogFragment fragment = new CoordinateInputBottomSheetDialogFragment();
+		fragment.setListener(createCoordinateInputFormatChangeListener());
+		fragment.show(getMapActivity().getSupportFragmentManager(), CoordinateInputBottomSheetDialogFragment.TAG);
 	}
 
 	@Nullable
@@ -72,12 +74,11 @@ public class CoordinateInputDialogFragment extends DialogFragment {
 	public View onCreateView(LayoutInflater inflater, @Nullable ViewGroup container, @Nullable Bundle savedInstanceState) {
 		final View mainView = inflater.inflate(R.layout.fragment_coordinate_input_dialog, container);
 		final MapActivity mapActivity = getMapActivity();
+		final IconsCache ic = getMyApplication().getIconsCache();
 
-		if (coordinateFormat == -1) {
-			Fragment coordinateInputBottomSheetDialogFragment = mapActivity.getSupportFragmentManager().findFragmentByTag(CoordinateInputBottomSheetDialogFragment.TAG);
-			if (coordinateInputBottomSheetDialogFragment != null) {
-				((CoordinateInputBottomSheetDialogFragment) coordinateInputBottomSheetDialogFragment).setListener(createCoordinateInputFormatChangeListener());
-			}
+		Fragment coordinateInputBottomSheetDialogFragment = mapActivity.getSupportFragmentManager().findFragmentByTag(CoordinateInputBottomSheetDialogFragment.TAG);
+		if (coordinateInputBottomSheetDialogFragment != null) {
+			((CoordinateInputBottomSheetDialogFragment) coordinateInputBottomSheetDialogFragment).setListener(createCoordinateInputFormatChangeListener());
 		}
 
 		Toolbar toolbar = (Toolbar) mainView.findViewById(R.id.coordinate_input_toolbar);
@@ -96,6 +97,7 @@ public class CoordinateInputDialogFragment extends DialogFragment {
 				CoordinateInputBottomSheetDialogFragment fragment = new CoordinateInputBottomSheetDialogFragment();
 				Bundle args = new Bundle();
 				args.putInt(COORDINATE_FORMAT, coordinateFormat);
+				args.putBoolean(USE_OSMAND_KEYBOARD, useOsmandKeyboard);
 				fragment.setArguments(args);
 				fragment.setListener(createCoordinateInputFormatChangeListener());
 				fragment.show(getMapActivity().getSupportFragmentManager(), CoordinateInputBottomSheetDialogFragment.TAG);
@@ -208,8 +210,11 @@ public class CoordinateInputDialogFragment extends DialogFragment {
 		longitudeEditText.addTextChangedListener(textWatcher);
 		nameEditText.addTextChangedListener(textWatcher);
 
-		changeKeyboardInBoxes(useOsmandKeyboard);
-		changeKeyboardInEditTexts(useOsmandKeyboard);
+		changeKeyboardInBoxes();
+		changeKeyboardInEditTexts();
+
+		View keyboardLayout = mainView.findViewById(R.id.keyboard_layout);
+		AndroidUtils.setBackground(mapActivity, keyboardLayout, !lightTheme, R.drawable.bg_bottom_menu_light, R.drawable.bg_bottom_menu_dark);
 
 		String[] keyboardItems = new String[] { "1", "2", "3",
 				"4", "5", "6",
@@ -240,6 +245,25 @@ public class CoordinateInputDialogFragment extends DialogFragment {
 			}
 		});
 
+		final ImageView showHideKeyBoardIcon = (ImageView) mainView.findViewById(R.id.show_hide_keyboard_icon);
+		final View keyboardDivider = mainView.findViewById(R.id.keyboard_divider);
+		showHideKeyBoardIcon.setImageDrawable(ic.getThemedIcon(R.drawable.ic_action_arrow_down));
+		showHideKeyBoardIcon.setOnClickListener(new View.OnClickListener() {
+			@Override
+			public void onClick(View view) {
+				int keyboardVisibility = keyboardGrid.getVisibility();
+				if (keyboardVisibility == View.VISIBLE) {
+					keyboardGrid.setVisibility(View.GONE);
+					keyboardDivider.setVisibility(View.GONE);
+					showHideKeyBoardIcon.setImageDrawable(ic.getThemedIcon(R.drawable.ic_action_arrow_up));
+				} else {
+					keyboardGrid.setVisibility(View.VISIBLE);
+					keyboardDivider.setVisibility(View.VISIBLE);
+					showHideKeyBoardIcon.setImageDrawable(ic.getThemedIcon(R.drawable.ic_action_arrow_down));
+				}
+			}
+		});
+
 		return mainView;
 	}
 
@@ -259,6 +283,18 @@ public class CoordinateInputDialogFragment extends DialogFragment {
 				coordinateFormat = format;
 				changeEditTextLengths();
 			}
+
+			@Override
+			public void onKeyboardChanged(boolean useOsmandKeyboard) {
+				CoordinateInputDialogFragment.this.useOsmandKeyboard = useOsmandKeyboard;
+				changeKeyboardInBoxes();
+				changeKeyboardInEditTexts();
+			}
+
+			@Override
+			public void onCancel() {
+				dismiss();
+			}
 		};
 	}
 
@@ -277,13 +313,13 @@ public class CoordinateInputDialogFragment extends DialogFragment {
 		}
 	}
 
-	public void changeKeyboardInBoxes(boolean useOsmandKeyboard) {
+	public void changeKeyboardInBoxes() {
 		for (OsmandTextFieldBoxes textFieldBox : textFieldBoxes) {
 			textFieldBox.setUseOsmandKeyboard(useOsmandKeyboard);
 		}
 	}
 
-	public void changeKeyboardInEditTexts(boolean useOsmandKeyboard) {
+	public void changeKeyboardInEditTexts() {
 		for (ExtendedEditText extendedEditText : extendedLatLonEditTexts) {
 			extendedEditText.setInputType(useOsmandKeyboard ? InputType.TYPE_NULL : InputType.TYPE_CLASS_TEXT);
 		}
