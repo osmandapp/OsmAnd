@@ -1969,7 +1969,7 @@
  	<string name="app_mode_train">قطار</string>
     <string name="follow_us">ما را دنبال کنید</string>
     <string name="access_direction_audio_feedback">مسیر پیامهای صوتی</string>
-    <string name="access_direction_audio_feedback_descr">جهت نقطهٔ مقصد را با پیام صوتی اعلام می‌کند</string>
+    <string name="access_direction_audio_feedback_descr">نشان دادن مقصد به صورت صوتی</string>
     <string name="access_direction_haptic_feedback">مسیر پیام لمسی</string>
     <string name="access_direction_haptic_feedback_descr">اعلان مقصد از طریق ویبره</string>
     <string name="use_osm_live_routing_description">فعال کردن مسیریاب OSM آنلاین (بتا)</string>
