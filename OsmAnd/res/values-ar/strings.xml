@@ -2786,8 +2786,8 @@
     <string name="show_passed">إظهار \'آخر تاريخ مستخدم\'</string>
     <string name="hide_passed">إخفاء \'آخر تاريخ مستخدم\'</string>
     <string name="remove_from_map_markers">إزالة من علامات الخريطة</string>
-    <string name="descendingly">تنازليا</string>
-    <string name="ascendingly">تصاعديا</string>
+    <string name="descendingly">تنازلي</string>
+    <string name="ascendingly">تصاعدي</string>
     <string name="date_added">أضيف التاريخ</string>
     <string name="order_by">ترتيب حسب:</string>
     <string name="marker_show_distance_descr">حدد كيفية الإشارة إلى المسافة والاتجاه لعلامات الخريطة على شاشة الخريطة:</string>
@@ -2799,7 +2799,7 @@
     <string name="shared_string_sort">فرز</string>
     <string name="coordinate_input">تنسيق الإدخال</string>
     <string name="is_saved">تم حفظه</string>
-    <string name="marker_save_as_track_descr">أوسماند سيحفظ كافة العلامات الخاصة بك إلى ملف منفصل، يمكنك إدخال اسم الملف:</string>
+    <string name="marker_save_as_track_descr">تصدير علاماتك الخاصة إلى ملف يمكنك تحديده هنا:</string>
     <string name="marker_save_as_track">حفظ كمسار</string>
     <string name="move_to_history">العودة إلى السجل الزمني</string>
     <string name="group_will_be_removed_after_restart">ستتم إزالة المجموعة بعد إعادة التشغيل</string>
