@@ -196,9 +196,13 @@ public class PlanRouteFragment extends Fragment implements OsmAndLocationListene
 			@Override
 			public void onItemClick(View view) {
 				int pos = markersRv.getChildAdapterPosition(view);
-				MapMarker marker = adapter.getItem(pos);
-				selectedCount = marker.selected ? selectedCount - 1 : selectedCount + 1;
-				marker.selected = !marker.selected;
+				if (pos == 0) {
+					Toast.makeText(mapActivity, "location selected", Toast.LENGTH_SHORT).show();
+				} else {
+					MapMarker marker = adapter.getItem(pos);
+					selectedCount = marker.selected ? selectedCount - 1 : selectedCount + 1;
+					marker.selected = !marker.selected;
+				}
 				adapter.notifyItemChanged(pos);
 				updateSelectButton();
 				showMarkersRouteOnMap();
@@ -224,16 +228,6 @@ public class PlanRouteFragment extends Fragment implements OsmAndLocationListene
 						// java.lang.IllegalStateException: Cannot call this method while RecyclerView is computing a layout or scrolling
 					}
 				}
-			}
-
-			@Override
-			public void onUseLocationClick() {
-				Toast.makeText(mapActivity, "use location", Toast.LENGTH_SHORT).show();
-			}
-
-			@Override
-			public void onDoNotUseLocationClick() {
-				Toast.makeText(mapActivity, "do not use location", Toast.LENGTH_SHORT).show();
 			}
 		});
 		boolean isSmartphone = getResources().getConfiguration().smallestScreenWidthDp < 600;
