@@ -249,13 +249,14 @@ public class CoordinateInputDialogFragment extends DialogFragment {
 			if (convertView == null) {
 				convertView = LayoutInflater.from(getContext()).inflate(R.layout.input_coordinate_keyboard_item, parent, false);
 			}
+			convertView.setBackgroundResource(lightTheme ? R.drawable.keyboard_item_light_bg : R.drawable.keyboard_item_dark_bg);
 
 			TextViewEx keyboardItem = (TextViewEx) convertView.findViewById(R.id.keyboard_item);
-			if (position == DELETE_BUTTON_POSITION || position == CLEAR_BUTTON_POSITION) {
-				keyboardItem.setTextSize(getResources().getDimension(R.dimen.default_list_text_size));
-			} else {
-				keyboardItem.setTextSize(getResources().getDimension(R.dimen.map_button_text_size));
-			}
+//			if (position == DELETE_BUTTON_POSITION || position == CLEAR_BUTTON_POSITION) {
+//				keyboardItem.setTextSize(getResources().getDimension(R.dimen.default_list_text_size));
+//			} else {
+//				keyboardItem.setTextSize(getResources().getDimension(R.dimen.map_button_text_size));
+//			}
 
 			keyboardItem.setText(getItem(position));
 
