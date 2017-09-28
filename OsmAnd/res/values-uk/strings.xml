@@ -181,11 +181,11 @@
   
   
   <string name="routing_settings">Навігація</string>
-  <string name="routing_settings_descr">Налаштування навігації</string>
+  <string name="routing_settings_descr">Визначити налаштування навігації</string>
   <string name="global_settings">Загальні налаштування</string>
   <string name="index_settings">Управління мапами</string>
   <string name="general_settings">Загальні</string>
-  <string name="general_settings_descr">Налаштування екрану, локалізації, одиниці вимірювання тощо</string>
+  <string name="general_settings_descr">Налаштування екрану і загальні настройки застосунку</string>
   <string name="global_app_settings">Загальні налаштування</string>
   <string name="user_name">Ім’я користувача</string>
   <string name="open_street_map_login_descr">Вкажіть ім’я користувача для роботи з OSM</string>
@@ -534,7 +534,7 @@
   <string name="process_navigation_service">Сервіс навігації OsmAnd</string>
   <string name="network_provider">Мережа</string>
   <string name="gps_provider">GPS</string>
-  <string name="int_seconds">секунд</string>
+  <string name="int_seconds">секунд(и)</string>
   <string name="int_min">хв.</string>
   <string name="background_service_int_descr">Виберіть інтервал пробудження для фонового сервісу</string>
   <string name="background_service_int">Інтервал вмикання GPS</string>
@@ -1539,13 +1539,13 @@
 	<string name="routing_attr_avoid_toll_name">Уникати платних доріг</string>
 	<string name="routing_attr_avoid_toll_description">Уникати платних доріг</string>
 	<string name="routing_attr_avoid_unpaved_name">Уникати грунтових доріг</string>
-	<string name="routing_attr_avoid_unpaved_description">Уникати ґрунтових доріг</string>
-	<string name="routing_attr_avoid_ferries_name">Уникати пороми</string>
-	<string name="routing_attr_avoid_ferries_description">Уникати пороми</string>
-	<string name="routing_attr_avoid_motorway_name">Уникати автомагістралі</string>
-	<string name="routing_attr_avoid_motorway_description">Уникати автомагістралі</string>
-	<string name="routing_attr_weight_name">Максимальна вага</string>
-	<string name="routing_attr_weight_description">Задайте обмеження маси автівки</string>
+	<string name="routing_attr_avoid_unpaved_description">Уникати грунтових доріг</string>
+	<string name="routing_attr_avoid_ferries_name">Уникати поромних переправ</string>
+	<string name="routing_attr_avoid_ferries_description">Уникати поромних переправ</string>
+	<string name="routing_attr_avoid_motorway_name">Уникати автомагістралей</string>
+	<string name="routing_attr_avoid_motorway_description">Уникати автомагістралей</string>
+	<string name="routing_attr_weight_name">Обмеження по вазі</string>
+	<string name="routing_attr_weight_description">Задайте вагу автомобіля для прокладання маршрутів</string>
     <string name="android_19_location_disabled">"Починаючи з версії  Android 4.4 (KitKat) ви не в змозі завантажувати та оновлювати мапи у попередню теку (%s). Чи бажаєте її змінити та скопіювати всі файли в нове місце?
 \n Примітка 1: ваші старі фали залишаться недоторканими (їх можна вилучити вручну).
 \n Примітка 2: в новій теці спільне користування фалами між OsmAnd та OsmAnd+ не можливе."</string>
@@ -1583,10 +1583,10 @@
     <string name="shared_string_and">та</string>
     <string name="shared_string_or">або</string>
 	
-	<string name="auto_zoom_none">Без автомасштабування</string>
-	<string name="auto_zoom_close">До крупного плану</string>
-	<string name="auto_zoom_far">До середнього плану</string>
-	<string name="auto_zoom_farthest">До дальнього плану</string>
+	<string name="auto_zoom_none">Без автоматичного масштабування</string>
+	<string name="auto_zoom_close">Крупніше</string>
+	<string name="auto_zoom_far">Для середнього масштабу</string>
+	<string name="auto_zoom_farthest">Дрібніше</string>
 	
     
     
@@ -1597,7 +1597,7 @@
 	<string name="share_route_subject">Маршрут наданий через OsmAnd</string>
 	<string name="arrival_distance">Оголошення прибуття</string>
     <string name="arrival_distance_descr">Як швидко ви бажаєте оголосити прибуття?</string>
-    <string name="keep_informing_never">Тільки вручну (натисніть «стрілку»)</string>
+    <string name="keep_informing_never">Тільки вручну (натискати на стрілку)</string>
     <string name="keep_informing_descr">Повторювати навігаційні інструкціі регулярно</string>
     <string name="keep_informing">Повторювати навігаційні інструкціі</string>
 	
@@ -1619,7 +1619,7 @@
     <string name="rendering_attr_hikingRoutesOSMC_name">Шар символів для пішого туризму</string>
     <string name="rendering_attr_hikingRoutesOSMC_description">Візуалізація шляху відповідно до треків OSMC</string>
     
-	<string name="arrival_distance_factor_early">Завчасно</string>
+	<string name="arrival_distance_factor_early">Раніше</string>
     <string name="arrival_distance_factor_normally">Звичайно</string>
     <string name="arrival_distance_factor_late">Пізніше</string>
     <string name="arrival_distance_factor_at_last">На останніх метрах</string>
@@ -1815,7 +1815,7 @@
 Дов %2$s</string>
     <string name="tips_and_tricks_descr">Запитання та відповіді, останні зміни та інше</string>
     <string name="routing_settings_2">Налаштування навігації</string>
-    <string name="general_settings_2">Загальні налаштування</string>
+    <string name="general_settings_2">Загальні параметри</string>
 	<string name="shared_string_ellipsis">…</string>
 	<string name="shared_string_selected">Вибрані</string>
 	<string name="shared_string_deselect">Зняти виділення</string>
@@ -1892,9 +1892,9 @@
     <string name="rendering_value_highContrastRoads_name">Контрастні дороги</string>
 	<string name="index_name_netherlands">Європа - Нідерланди</string>
 	
-	<string name="routing_attr_avoid_borders_description">Уникати перетину кордону з іншою країною</string>
-	<string name="routing_attr_height_name">Обмеження висоти</string>
-	<string name="routing_attr_height_description">Вкажіть висоту автівки, щоб враховувати її під час прокладання маршрутів</string>
+	<string name="routing_attr_avoid_borders_description">Уникнути перетину кордону в іншу країну</string>
+	<string name="routing_attr_height_name">Обмеження по висоті</string>
+	<string name="routing_attr_height_description">Вкажіть висоту транспортного засобу для розрахунку маршрутів</string>
     <string name="use_fast_recalculation">Інтелектуальне переобчислення маршруту</string>
 	<string name="use_fast_recalculation_desc">Для довгих подорожей перераховувати лише початкову частину маршруту</string>
 <string name="light_theme">Світла</string>
@@ -2063,9 +2063,9 @@
     <string name="rendering_attr_currentTrackWidth_description">Товщина GPX</string>
     <string name="shared_string_wikipedia">Вікіпедія</string>
     <string name="rendering_attr_roadStyle_description">Стиль доріг</string>
-    <string name="routing_attr_avoid_stairs_name">Уникати сходи</string>
-    <string name="routing_attr_avoid_stairs_description">Уникати сходи</string>
-    <string name="routing_attr_avoid_borders_name">Уникати перетин кордону</string>
+    <string name="routing_attr_avoid_stairs_name">Уникати сходів</string>
+    <string name="routing_attr_avoid_stairs_description">Уникати сходів</string>
+    <string name="routing_attr_avoid_borders_name">Уникати перетину кордону</string>
     <string name="shared_string_others">Інші</string>
     <string name="favourites_context_menu_add">Додати закладку</string>
     <string name="poi_action_delete">видалити</string>
@@ -2476,8 +2476,8 @@
     <string name="no_update_info">Не показувати оновлення</string>
     <string name="update_all_maps_now">Ви хочете оновити усі мапи зараз?</string>
     <string name="clear_tile_data">Очистити усі кахлі</string>
-    <string name="routing_attr_short_way_name">Економічний шлях</string>
-    <string name="routing_attr_short_way_description">Використання економічного шляху (зазвичай коротше)</string>
+    <string name="routing_attr_short_way_name">Паливно-ефективний шлях</string>
+    <string name="routing_attr_short_way_description">Розраховувати паливо-ощадний маршрут (зазвичай найкоротший)</string>
     <string name="replace_favorite_confirmation">Ви впевнені, що хочете замінити закладку %1$s?</string>
     <string name="rendering_attr_hideOverground_name">Надземні об’єкти</string>
     <string name="shared_string_change">Змінити</string>
@@ -2566,7 +2566,7 @@
     <string name="file_can_not_be_moved">Файл не може бути переміщений.</string>
     <string name="shared_string_move">Перемістити</string>
     <string name="shared_string_tracks">Треки</string>
-    <string name="routing_attr_driving_style_name">Стиль кермування</string>
+    <string name="routing_attr_driving_style_name">Стиль водіння</string>
     
     <string name="route_altitude">Висота маршруту</string>
     <string name="altitude_descent">Спуск</string>
@@ -2577,8 +2577,8 @@
     <string name="total_distance">Загальна відстань</string>
     
     <string name="routing_attr_height_relief_smoothness_factor_description">Більш рівнини чи більш пагорби</string>
-    <string name="routing_attr_height_obstacles_name">Використовувати дані про висоту</string>
-    <string name="routing_attr_height_obstacles_description">Використання даних рельєфу місцевості, що надаються SRTM, ASTER та EU-DEM</string>
+    <string name="routing_attr_height_obstacles_name">Використовувати дані висоти</string>
+    <string name="routing_attr_height_obstacles_description">Використовувати дані про рельєф земної поверхні від SRTM, ASTER та EU-DEM</string>
 
     <string name="rendering_attr_depthContours_description">Показати контури глибини і точки</string>
     <string name="rendering_attr_depthContours_name">Контури морських глибин</string>
@@ -2667,8 +2667,8 @@
     <string name="lang_ber">Берберська</string>
     <string name="fonts_header">Шрифти для мапи</string>
     <string name="right_side_navigation">Правосторонній рух</string>
-    <string name="routing_attr_driving_style_balance_name">Збалансований</string>
-    <string name="routing_attr_driving_style_safety_name">Надавати перевагу путівцям</string>
+    <string name="routing_attr_driving_style_balance_name">Збалансовано</string>
+    <string name="routing_attr_driving_style_safety_name">Віддавати перевагу провулкам</string>
     <string name="routing_attr_driving_style_speed_name">Коротші маршрути</string>
     <string name="animate_my_location">Анімувати моє місце розташування</string>
     <string name="animate_my_location_desc">Задіяти анімацію мого місця розташування під час навігації</string>
@@ -2695,7 +2695,7 @@
     <string name="srtm_color_scheme">Схема кольорів</string>
     <string name="show_from_zoom_level">Відображення від рівня масштабування</string>
     <string name="routing_attr_allow_private_name">Дозволити приватний доступ</string>
-    <string name="routing_attr_allow_private_description">Дозволити доступ до приватної території</string>
+    <string name="routing_attr_allow_private_description">Дозволити доступ на приватну територію</string>
     <string name="display_zoom_level">Відображення рівня масштабування: %1$s</string>
     <string name="favorite_group_name">Назва групи</string>
     <string name="change_color">Зміна кольору</string>
@@ -2739,7 +2739,7 @@
     <string name="parking_options">Опції паркування</string>
     <string name="full_version_thanks">Дякуємо за покупку повної версії OsmAnd!</string>
     <string name="routing_attr_relief_smoothness_factor_hills_name">Горбисто</string>
-    <string name="routing_attr_relief_smoothness_factor_plains_name">Менш горбисте</string>
+    <string name="routing_attr_relief_smoothness_factor_plains_name">Менш горбисто</string>
     <string name="routing_attr_relief_smoothness_factor_more_plains_name">Рівнинно</string>
     <string name="relief_smoothness_factor_descr">Переважний рельєф: рівнинний або гористий</string>
     <string name="routing_attr_relief_smoothness_factor_name">Вибрати пересіченість місцевості</string>
