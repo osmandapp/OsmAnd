@@ -414,12 +414,12 @@ public class MapMarkersLayer extends OsmandMapLayer implements IContextMenuProvi
 
 	@Override
 	public boolean disableSingleTap() {
-		return false;
+		return inPlanRouteMode;
 	}
 
 	@Override
 	public boolean disableLongPressOnMap() {
-		return false;
+		return inPlanRouteMode;
 	}
 
 	@Override

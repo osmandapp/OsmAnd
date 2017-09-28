@@ -225,7 +225,7 @@ public class MapMarkersHelper {
 		this.ctx = ctx;
 		settings = ctx.getSettings();
 		markersDbHelper = ctx.getMapMarkersDbHelper();
-//		startFromMyLocation = settings.ROUTE_MAP_MARKERS_START_MY_LOC.get();
+		startFromMyLocation = settings.ROUTE_MAP_MARKERS_START_MY_LOC.get();
 		removeDisabledGroups();
 		loadMarkers();
 		createMapMarkersGroups();
@@ -237,7 +237,7 @@ public class MapMarkersHelper {
 
 	public void setStartFromMyLocation(boolean startFromMyLocation) {
 		this.startFromMyLocation = startFromMyLocation;
-//		settings.ROUTE_MAP_MARKERS_START_MY_LOC.set(startFromMyLocation);
+		settings.ROUTE_MAP_MARKERS_START_MY_LOC.set(startFromMyLocation);
 	}
 
 	public void lookupAddressAll() {
