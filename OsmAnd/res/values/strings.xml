@@ -17,7 +17,7 @@
     <string name="shared_string_sort">Sort</string>
     <string name="coordinate_input">Coordinate input</string>
     <string name="is_saved">is saved</string>
-    <string name="marker_save_as_track_descr">OsmAnd will save all your markers to a separate file, you can enter filename:</string>
+    <string name="marker_save_as_track_descr">Export your markers to a file you can specify here:</string>
     <string name="marker_save_as_track">Save as track</string>
     <string name="move_to_history">Move to history</string>
     <string name="group_will_be_removed_after_restart">Group will be removed after restart</string>
@@ -26,8 +26,8 @@
     <string name="show_passed">Show \'Last used\' date</string>
     <string name="hide_passed">Hide \'Last used\' date</string>
     <string name="remove_from_map_markers">Remove from Map Markers</string>
-    <string name="descendingly">Descendingly</string>
-    <string name="ascendingly">Ascendingly</string>
+    <string name="descendingly">Descending</string>
+    <string name="ascendingly">Ascending</string>
     <string name="date_added">Date added</string>
     <string name="order_by">Order by:</string>
     <string name="marker_show_distance_descr">Select how to indicate distance and direction to Map markers on the map screen:</string>

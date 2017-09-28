@@ -69,7 +69,7 @@ public class SaveAsTrackBottomSheetDialogFragment extends BottomSheetDialogFragm
 			dir.mkdirs();
 		}
 		Date date = new Date();
-		final String suggestedName = mapActivity.getString(R.string.markers) + "_" + DateFormat.format("dd_MM_yyyy", date).toString();
+		final String suggestedName = mapActivity.getString(R.string.markers) + "_" + DateFormat.format("yyyy-MM-dd", date).toString();
 		String displayedName = suggestedName;
 		File fout = new File(dir, suggestedName + GPX_SUFFIX);
 		int ind = 1;
