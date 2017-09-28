@@ -24,6 +24,7 @@ import android.widget.Toast;
 import net.osmand.AndroidUtils;
 import net.osmand.Location;
 import net.osmand.data.LatLon;
+import net.osmand.data.RotatedTileBox;
 import net.osmand.plus.ApplicationMode;
 import net.osmand.plus.IconsCache;
 import net.osmand.plus.MapMarkersHelper;
@@ -44,8 +45,9 @@ import net.osmand.plus.views.OsmandMapTileView;
 import net.osmand.plus.views.mapwidgets.MapInfoWidgetsFactory;
 import net.osmand.plus.views.mapwidgets.MapInfoWidgetsFactory.TopToolbarController;
 
+import java.util.List;
+
 import static net.osmand.plus.OsmandSettings.LANDSCAPE_MIDDLE_RIGHT_CONSTANT;
-import static net.osmand.plus.OsmandSettings.MIDDLE_TOP_CONSTANT;
 
 public class PlanRouteFragment extends Fragment implements OsmAndLocationListener {
 
@@ -58,6 +60,8 @@ public class PlanRouteFragment extends Fragment implements OsmAndLocationListene
 	private ApplicationMode appMode;
 	private int previousMapPosition;
 	private int selectedCount = 0;
+
+	private int toolbarHeight;
 
 	private Location location;
 	private boolean locationUpdateStarted;
@@ -90,6 +94,8 @@ public class PlanRouteFragment extends Fragment implements OsmAndLocationListene
 		if (!portrait) {
 			hideMarkersListFragment();
 		}
+
+		toolbarHeight = mapActivity.getResources().getDimensionPixelSize(R.dimen.dashboard_map_toolbar);
 
 		iconsCache = mapActivity.getMyApplication().getIconsCache();
 		nightMode = mapActivity.getMyApplication().getDaynightHelper().isNightModeForMapControls();
@@ -141,6 +147,8 @@ public class PlanRouteFragment extends Fragment implements OsmAndLocationListene
 				}
 				adapter.notifyDataSetChanged();
 				updateSelectButton();
+				showMarkersRouteOnMap();
+				mapActivity.refreshMap();
 			}
 		});
 
@@ -193,6 +201,7 @@ public class PlanRouteFragment extends Fragment implements OsmAndLocationListene
 				marker.selected = !marker.selected;
 				adapter.notifyItemChanged(pos);
 				updateSelectButton();
+				showMarkersRouteOnMap();
 			}
 
 			@Override
@@ -354,6 +363,7 @@ public class PlanRouteFragment extends Fragment implements OsmAndLocationListene
 			}
 			setupAppModesBtn();
 
+			showMarkersRouteOnMap();
 			mapActivity.refreshMap();
 			updateText();
 			updateSelectButton();
@@ -407,6 +417,7 @@ public class PlanRouteFragment extends Fragment implements OsmAndLocationListene
 			mapActivity.findViewById(R.id.snap_to_road_image_button).setVisibility(View.GONE);
 			mainView.findViewById(R.id.snap_to_road_progress_bar).setVisibility(View.GONE);
 
+			markersLayer.clearRoute();
 			mapActivity.refreshMap();
 		}
 	}
@@ -423,7 +434,6 @@ public class PlanRouteFragment extends Fragment implements OsmAndLocationListene
 			((TextView) mainView.findViewById(R.id.select_all_button)).setText(getString(R.string.shared_string_select_all));
 		}
 	}
-
 
 	private void updateLocationUi() {
 		final MapActivity mapActivity = (MapActivity) getActivity();
@@ -472,9 +482,7 @@ public class PlanRouteFragment extends Fragment implements OsmAndLocationListene
 			}
 			OsmandMapTileView tileView = mapActivity.getMapView();
 			previousMapPosition = tileView.getMapPosition();
-			if (portrait) {
-				tileView.setMapPosition(MIDDLE_TOP_CONSTANT);
-			} else {
+			if (!portrait) {
 				tileView.setMapPosition(LANDSCAPE_MIDDLE_RIGHT_CONSTANT);
 			}
 			mapActivity.refreshMap();
@@ -543,6 +551,55 @@ public class PlanRouteFragment extends Fragment implements OsmAndLocationListene
 		if (mapActivity != null && locationUpdateStarted) {
 			locationUpdateStarted = false;
 			mapActivity.getMyApplication().getLocationProvider().removeLocationListener(this);
+		}
+	}
+
+	private void showMarkersRouteOnMap() {
+		MapActivity mapActivity = getMapActivity();
+		if (mapActivity != null) {
+			List<LatLon> points = markersHelper.getSelectedMarkersLatLon();
+			mapActivity.getMapLayers().getMapMarkersLayer().setRoute(points);
+			showRouteOnMap(points);
+		}
+	}
+
+	private void showRouteOnMap(List<LatLon> points) {
+		MapActivity mapActivity = getMapActivity();
+		if (points.size() > 0 && mapActivity != null) {
+			OsmandMapTileView mapView = mapActivity.getMapView();
+			double left = 0, right = 0;
+			double top = 0, bottom = 0;
+			Location myLocation = mapActivity.getMyApplication().getLocationProvider().getLastKnownLocation();
+			if (mapActivity.getMyApplication().getMapMarkersHelper().isStartFromMyLocation() && myLocation != null) {
+				left = myLocation.getLongitude();
+				right = myLocation.getLongitude();
+				top = myLocation.getLatitude();
+				bottom = myLocation.getLatitude();
+			}
+			for (LatLon l : points) {
+				if (left == 0) {
+					left = l.getLongitude();
+					right = l.getLongitude();
+					top = l.getLatitude();
+					bottom = l.getLatitude();
+				} else {
+					left = Math.min(left, l.getLongitude());
+					right = Math.max(right, l.getLongitude());
+					top = Math.max(top, l.getLatitude());
+					bottom = Math.min(bottom, l.getLatitude());
+				}
+			}
+
+			RotatedTileBox tb = mapView.getCurrentRotatedTileBox().copy();
+			int tileBoxWidthPx = 0;
+			int tileBoxHeightPx = 0;
+
+			if (portrait) {
+				tileBoxHeightPx = 3 * (tb.getPixHeight() - mainView.getHeight() - toolbarHeight) / 4;
+			} else {
+				tileBoxWidthPx = tb.getPixWidth() - mainView.findViewById(R.id.up_down_row).getWidth();
+			}
+			mapView.fitRectToMap(left, right, top, bottom, tileBoxWidthPx, tileBoxHeightPx, toolbarHeight * 3 / 2);
 		}
 	}
 
