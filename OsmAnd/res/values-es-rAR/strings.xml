@@ -2767,4 +2767,16 @@ Proporciona un código completo</string>
     <string name="show_arrows_on_the_map">Mostrar flechas en el mapa</string>
     <string name="show_passed">Mostrar fecha de «Últimos usados»</string>
     <string name="hide_passed">Ocultar fecha de «Últimos usados»</string>
+    <string name="use_location">Usar ubicación</string>
+    <string name="add_location_as_first_point_descr">Añade la ubicación como primer punto para planificar la ruta perfecta.</string>
+    <string name="my_location">Mi ubicación</string>
+    <string name="shared_string_finish">Finalizar</string>
+    <string name="plan_route">Planificar ruta</string>
+    <string name="shared_string_sort">Ordenar</string>
+    <string name="coordinate_input">Ingreso de coordenadas</string>
+    <string name="is_saved">está guardado</string>
+    <string name="marker_save_as_track_descr">Exporta los marcadores a un archivo que puedes nombrar aquí:</string>
+    <string name="marker_save_as_track">Guardar como traza</string>
+    <string name="move_to_history">Mover al historial</string>
+    <string name="group_will_be_removed_after_restart">El grupo se quitará al reiniciar</string>
     </resources>
