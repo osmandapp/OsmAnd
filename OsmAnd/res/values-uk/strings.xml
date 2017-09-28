@@ -1526,7 +1526,7 @@
     <string name="gpx_option_calculate_first_last_segment">Обчислити маршрут OsmAnd для першого та останнього сегментів маршруту</string>
     <string name="use_displayed_track_for_navigation">Чи Ви хочете використовувати відображення треку для навігації?</string>
     <string name="keep_and_add_destination_point">Додати як наступний пункт призначення</string>
-    <string name="select_gpx">Обрати GPX…</string>
+    <string name="select_gpx">Виберіть GPX…</string>
     <string name="route_descr_select_destination">Виберіть пункт призначення</string>
     <string name="shared_string_select_on_map">Виберіть на мапі</string>
     <string name="shared_string_favorite">Закладки</string>
@@ -2232,7 +2232,7 @@
     <string name="clear_active_markers_q">Вилучити всі активні позначки?</string>
     <string name="clear_markers_history_q">Очистити історію позначок мапи?</string>
     <string name="active_markers">Поточні позназчки</string>
-    <string name="map_markers">Позначки мапи</string>
+    <string name="map_markers">Маркери мапи</string>
     <string name="map_marker">Позначка мапи</string>
     <string name="consider_turning_polygons_off">Рекомендується вимкнути показ полігонів.</string>
     <string name="av_locations_descr">Файл GPX з координатами нотаток</string>
