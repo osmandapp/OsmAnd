@@ -69,7 +69,7 @@ public class MapMarkersLayer extends OsmandMapLayer implements IContextMenuProvi
 	private float[] calculations = new float[2];
 
 	private final RenderingLineAttributes lineAttrs = new RenderingLineAttributes("measureDistanceLine");
-	private final RenderingLineAttributes textAttrs = new RenderingLineAttributes("rulerCircle");
+	private final RenderingLineAttributes textAttrs = new RenderingLineAttributes("rulerLineFont");
 	private Paint paint;
 	private Path path;
 	private List<LatLon> route = new ArrayList<>();
@@ -77,7 +77,6 @@ public class MapMarkersLayer extends OsmandMapLayer implements IContextMenuProvi
 	private TIntArrayList tx = new TIntArrayList();
 	private TIntArrayList ty = new TIntArrayList();
 	private Path linePath = new Path();
-	private String distanceText;
 
 	private ContextMenuLayer contextMenuLayer;
 
@@ -141,8 +140,8 @@ public class MapMarkersLayer extends OsmandMapLayer implements IContextMenuProvi
 		paint.setAlpha(200);
 
 		float textSize = TEXT_SIZE * map.getResources().getDisplayMetrics().density;
+		textAttrs.paint.setTextSize(textSize);
 		textAttrs.paint2.setTextSize(textSize);
-		textAttrs.paint3.setTextSize(textSize);
 
 		widgetsFactory = new MapMarkersWidgetsFactory(map);
 
@@ -250,7 +249,7 @@ public class MapMarkersLayer extends OsmandMapLayer implements IContextMenuProvi
 		if (settings.SHOW_LINES_TO_FIRST_MARKERS.get() && myLoc != null) {
 			lineAttrs.updatePaints(view, nightMode, tileBox);
 			textAttrs.updatePaints(view, nightMode, tileBox);
-			textAttrs.paint2.setStyle(Paint.Style.FILL);
+			textAttrs.paint.setStyle(Paint.Style.FILL);
 
 			int locX = (int) tileBox.getPixXFromLatLon(myLoc.getLatitude(), myLoc.getLongitude());
 			int locY = (int) tileBox.getPixYFromLatLon(myLoc.getLatitude(), myLoc.getLongitude());
@@ -277,6 +276,7 @@ public class MapMarkersLayer extends OsmandMapLayer implements IContextMenuProvi
 				float generalDist = (float) MapUtils.getDistance(myLoc.getLatitude(), myLoc.getLongitude(), marker.getLatitude(), marker.getLongitude());
 				String generalDistSt = OsmAndFormatter.getFormattedDistance(generalDist, view.getApplication());
 				boolean locationInvisible = locX < 0 || locX > tileBox.getPixWidth() || locY < 0 || locY > tileBox.getPixHeight();
+				String distanceText;
 				if (locationInvisible) {
 					float centerToMarkerDist = (float) MapUtils.getDistance(tileBox.getLatLonFromPixel(pos[0], pos[1]), marker.getLatitude(), marker.getLongitude());
 					String centerToMarkerDistSt = OsmAndFormatter.getFormattedDistance(centerToMarkerDist, view.getApplication());
@@ -289,7 +289,7 @@ public class MapMarkersLayer extends OsmandMapLayer implements IContextMenuProvi
 					distanceText = generalDistSt;
 				}
 				Rect bounds = new Rect();
-				textAttrs.paint2.getTextBounds(distanceText, 0, distanceText.length(), bounds);
+				textAttrs.paint.getTextBounds(distanceText, 0, distanceText.length(), bounds);
 				float hOffset = pm.getLength() / 2 - bounds.width() / 2;
 				lineAttrs.paint.setColor(colors[marker.colorIndex]);
 
@@ -300,12 +300,12 @@ public class MapMarkersLayer extends OsmandMapLayer implements IContextMenuProvi
 				}
 				if (locX >= markerX) {
 					canvas.rotate(180, pos[0], pos[1]);
-					canvas.drawTextOnPath(distanceText, linePath, hOffset, bounds.height() + VERTICAL_OFFSET, textAttrs.paint3);
 					canvas.drawTextOnPath(distanceText, linePath, hOffset, bounds.height() + VERTICAL_OFFSET, textAttrs.paint2);
+					canvas.drawTextOnPath(distanceText, linePath, hOffset, bounds.height() + VERTICAL_OFFSET, textAttrs.paint);
 					canvas.rotate(-180, pos[0], pos[1]);
 				} else {
-					canvas.drawTextOnPath(distanceText, linePath, hOffset, -VERTICAL_OFFSET, textAttrs.paint3);
 					canvas.drawTextOnPath(distanceText, linePath, hOffset, -VERTICAL_OFFSET, textAttrs.paint2);
+					canvas.drawTextOnPath(distanceText, linePath, hOffset, -VERTICAL_OFFSET, textAttrs.paint);
 				}
 				canvas.rotate(tileBox.getRotate(), tileBox.getCenterPixelX(), tileBox.getCenterPixelY());
 			}
