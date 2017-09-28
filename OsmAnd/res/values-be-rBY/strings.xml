@@ -2848,7 +2848,7 @@ U vypadku, kali vy lubіcie OsmAnd і OSM і chočacie padtrymać jaho, heta іd
     <string name="shared_string_sort">Sartavać</string>
     <string name="coordinate_input">Uvod kaardynat</string>
     <string name="is_saved">zachavany</string>
-    <string name="marker_save_as_track_descr">OsmAnd zachavaje ŭsie vašy markiery ŭ asobny fajl. Vy možacie ŭviesci nazvu fajla:</string>
+    <string name="marker_save_as_track_descr">Ekspartavać vašy markiery ŭ fajl, jaki vy možacie paznačyć tut:</string>
     <string name="marker_save_as_track">Zachavać jak slied</string>
     <string name="move_to_history">Pieramiascić u historyju</string>
     <string name="group_will_be_removed_after_restart">Hrupa budzie vydalienaja paslia pierazapusku</string>
