@@ -2,33 +2,29 @@ package net.osmand.plus.mapmarkers;
 
 import android.content.Context;
 import android.os.Bundle;
-import android.support.annotation.LayoutRes;
 import android.support.annotation.NonNull;
 import android.support.annotation.Nullable;
 import android.support.v4.app.DialogFragment;
+import android.support.v4.app.Fragment;
 import android.support.v7.widget.Toolbar;
 import android.text.Editable;
+import android.text.InputFilter;
 import android.text.InputType;
 import android.text.TextWatcher;
-import android.view.Gravity;
 import android.view.LayoutInflater;
-import android.view.MotionEvent;
 import android.view.View;
 import android.view.ViewGroup;
-import android.view.WindowManager;
-import android.view.inputmethod.InputMethodManager;
 import android.widget.AdapterView;
 import android.widget.ArrayAdapter;
 import android.widget.EditText;
 import android.widget.GridView;
-import android.widget.TextView;
 
+import net.osmand.data.PointDescription;
 import net.osmand.plus.OsmandApplication;
 import net.osmand.plus.OsmandSettings;
 import net.osmand.plus.OsmandTextFieldBoxes;
 import net.osmand.plus.R;
 import net.osmand.plus.activities.MapActivity;
-import net.osmand.plus.helpers.FontCache;
 import net.osmand.plus.widgets.TextViewEx;
 
 import java.util.ArrayList;
@@ -38,16 +34,23 @@ import studio.carbonylgroup.textfieldboxes.ExtendedEditText;
 
 public class CoordinateInputDialogFragment extends DialogFragment {
 
+	public static final String TAG = "CoordinateInputDialogFragment";
+
+	public static final String COORDINATE_FORMAT = "coordinate_format";
+
 	private static final int DELETE_BUTTON_POSITION = 9;
 	private static final int CLEAR_BUTTON_POSITION = 11;
-
-	public static final String TAG = "CoordinateInputDialogFragment";
+	private static final int DEGREES_MAX_LENGTH = 8;
+	private static final int MINUTES_MAX_LENGTH = 10;
+	private static final int SECONDS_MAX_LENGTH = 13;
 
 	private boolean lightTheme;
 	private EditText focusedEditText;
 	private boolean useOsmandKeyboard = true;
-	private List<OsmandTextFieldBoxes> textFieldBoxes = new ArrayList<>();
-	private List<ExtendedEditText> extendedEditTexts = new ArrayList<>();
+	private List<OsmandTextFieldBoxes> textFieldBoxes;
+	private ExtendedEditText nameEditText;
+	private List<ExtendedEditText> extendedLatLonEditTexts;
+	private int coordinateFormat = -1;
 
 	@Override
 	public void onCreate(Bundle savedInstanceState) {
@@ -57,8 +60,11 @@ public class CoordinateInputDialogFragment extends DialogFragment {
 		int themeId = lightTheme ? R.style.OsmandLightTheme : R.style.OsmandDarkTheme;
 		setStyle(STYLE_NO_FRAME, themeId);
 
-		CoordinateInputBottomSheetDialogFragment fragment = new CoordinateInputBottomSheetDialogFragment();
-		fragment.show(getMapActivity().getSupportFragmentManager(), CoordinateInputBottomSheetDialogFragment.TAG);
+		if (coordinateFormat == -1) {
+			CoordinateInputBottomSheetDialogFragment fragment = new CoordinateInputBottomSheetDialogFragment();
+			fragment.setListener(createCoordinateInputFormatChangeListener());
+			fragment.show(getMapActivity().getSupportFragmentManager(), CoordinateInputBottomSheetDialogFragment.TAG);
+		}
 	}
 
 	@Nullable
@@ -66,6 +72,13 @@ public class CoordinateInputDialogFragment extends DialogFragment {
 	public View onCreateView(LayoutInflater inflater, @Nullable ViewGroup container, @Nullable Bundle savedInstanceState) {
 		final View mainView = inflater.inflate(R.layout.fragment_coordinate_input_dialog, container);
 		final MapActivity mapActivity = getMapActivity();
+
+		if (coordinateFormat == -1) {
+			Fragment coordinateInputBottomSheetDialogFragment = mapActivity.getSupportFragmentManager().findFragmentByTag(CoordinateInputBottomSheetDialogFragment.TAG);
+			if (coordinateInputBottomSheetDialogFragment != null) {
+				((CoordinateInputBottomSheetDialogFragment) coordinateInputBottomSheetDialogFragment).setListener(createCoordinateInputFormatChangeListener());
+			}
+		}
 
 		Toolbar toolbar = (Toolbar) mainView.findViewById(R.id.coordinate_input_toolbar);
 
@@ -80,10 +93,16 @@ public class CoordinateInputDialogFragment extends DialogFragment {
 		optionsButton.setOnClickListener(new View.OnClickListener() {
 			@Override
 			public void onClick(View view) {
-
+				CoordinateInputBottomSheetDialogFragment fragment = new CoordinateInputBottomSheetDialogFragment();
+				Bundle args = new Bundle();
+				args.putInt(COORDINATE_FORMAT, coordinateFormat);
+				fragment.setArguments(args);
+				fragment.setListener(createCoordinateInputFormatChangeListener());
+				fragment.show(getMapActivity().getSupportFragmentManager(), CoordinateInputBottomSheetDialogFragment.TAG);
 			}
 		});
 
+		textFieldBoxes = new ArrayList<>();
 		final OsmandTextFieldBoxes latitudeBox = (OsmandTextFieldBoxes) mainView.findViewById(R.id.latitude_box);
 		textFieldBoxes.add(latitudeBox);
 		final OsmandTextFieldBoxes longitudeBox = (OsmandTextFieldBoxes) mainView.findViewById(R.id.longitude_box);
@@ -91,12 +110,12 @@ public class CoordinateInputDialogFragment extends DialogFragment {
 		final OsmandTextFieldBoxes nameBox = (OsmandTextFieldBoxes) mainView.findViewById(R.id.name_box);
 		textFieldBoxes.add(nameBox);
 
+		extendedLatLonEditTexts = new ArrayList<>();
 		final ExtendedEditText latitudeEditText = (ExtendedEditText) mainView.findViewById(R.id.latitude_edit_text);
-		extendedEditTexts.add(latitudeEditText);
+		extendedLatLonEditTexts.add(latitudeEditText);
 		final ExtendedEditText longitudeEditText = (ExtendedEditText) mainView.findViewById(R.id.longitude_edit_text);
-		extendedEditTexts.add(longitudeEditText);
-		final ExtendedEditText nameEditText = (ExtendedEditText) mainView.findViewById(R.id.name_edit_text);
-		extendedEditTexts.add(nameEditText);
+		extendedLatLonEditTexts.add(longitudeEditText);
+		nameEditText = (ExtendedEditText) mainView.findViewById(R.id.name_edit_text);
 
 		final View.OnFocusChangeListener focusChangeListener = new View.OnFocusChangeListener() {
 			@Override
@@ -147,16 +166,33 @@ public class CoordinateInputDialogFragment extends DialogFragment {
 
 			@Override
 			public void afterTextChanged(Editable editable) {
-				if (focusedEditText != null) {
+				if (focusedEditText != null && focusedEditText != nameEditText) {
 					String str = focusedEditText.getText().toString();
-					if(str.length() == 2 && len < str.length()){
-						focusedEditText.append(":");
-					} else if (str.length() == 5 && len < str.length()) {
+					int strLength = str.length();
+					if (strLength == 2 && len < strLength) {
+						String strToAppend;
+						if (coordinateFormat == PointDescription.FORMAT_DEGREES) {
+							strToAppend = ".";
+						} else {
+							strToAppend = ":";
+						}
+						focusedEditText.append(strToAppend);
+					} else if (strLength == 5 && coordinateFormat != PointDescription.FORMAT_DEGREES && len < strLength) {
+						String strToAppend;
+						if (coordinateFormat == PointDescription.FORMAT_MINUTES) {
+							strToAppend = ".";
+						} else {
+							strToAppend = ":";
+						}
+						focusedEditText.append(strToAppend);
+					} else if (strLength == 8 && coordinateFormat == PointDescription.FORMAT_SECONDS && len < strLength) {
 						focusedEditText.append(".");
-					} else if (str.length() == 10) {
+					} else if ((strLength == DEGREES_MAX_LENGTH && coordinateFormat == PointDescription.FORMAT_DEGREES)
+							|| (strLength == MINUTES_MAX_LENGTH && coordinateFormat == PointDescription.FORMAT_MINUTES)
+							|| (strLength == SECONDS_MAX_LENGTH && coordinateFormat == PointDescription.FORMAT_SECONDS)) {
 						if (focusedEditText == latitudeEditText) {
 							longitudeBox.select();
-						} else if (focusedEditText == longitudeEditText) {
+						} else {
 							nameBox.select();
 						}
 					}
@@ -207,6 +243,40 @@ public class CoordinateInputDialogFragment extends DialogFragment {
 		return mainView;
 	}
 
+	@Override
+	public void onDestroyView() {
+		focusedEditText = null;
+		if (getDialog() != null && getRetainInstance()) {
+			getDialog().setDismissMessage(null);
+		}
+		super.onDestroyView();
+	}
+
+	private CoordinateInputBottomSheetDialogFragment.CoordinateInputFormatChangeListener createCoordinateInputFormatChangeListener() {
+		return new CoordinateInputBottomSheetDialogFragment.CoordinateInputFormatChangeListener() {
+			@Override
+			public void onCoordinateFormatChanged(int format) {
+				coordinateFormat = format;
+				changeEditTextLengths();
+			}
+		};
+	}
+
+	private void changeEditTextLengths() {
+		int maxLength;
+		if (coordinateFormat == PointDescription.FORMAT_DEGREES) {
+			maxLength = DEGREES_MAX_LENGTH;
+		} else if (coordinateFormat == PointDescription.FORMAT_MINUTES) {
+			maxLength = MINUTES_MAX_LENGTH;
+		} else {
+			maxLength = SECONDS_MAX_LENGTH;
+		}
+		InputFilter[] filtersArray = new InputFilter[] {new InputFilter.LengthFilter(maxLength)};
+		for (ExtendedEditText extendedEditText : extendedLatLonEditTexts) {
+			extendedEditText.setFilters(filtersArray);
+		}
+	}
+
 	public void changeKeyboardInBoxes(boolean useOsmandKeyboard) {
 		for (OsmandTextFieldBoxes textFieldBox : textFieldBoxes) {
 			textFieldBox.setUseOsmandKeyboard(useOsmandKeyboard);
@@ -214,9 +284,10 @@ public class CoordinateInputDialogFragment extends DialogFragment {
 	}
 
 	public void changeKeyboardInEditTexts(boolean useOsmandKeyboard) {
-		for (ExtendedEditText extendedEditText : extendedEditTexts) {
+		for (ExtendedEditText extendedEditText : extendedLatLonEditTexts) {
 			extendedEditText.setInputType(useOsmandKeyboard ? InputType.TYPE_NULL : InputType.TYPE_CLASS_TEXT);
 		}
+		nameEditText.setInputType(useOsmandKeyboard ? InputType.TYPE_NULL : InputType.TYPE_CLASS_TEXT);
 	}
 
 	private MapActivity getMapActivity() {
@@ -233,6 +304,7 @@ public class CoordinateInputDialogFragment extends DialogFragment {
 				return false;
 			}
 			CoordinateInputDialogFragment fragment = new CoordinateInputDialogFragment();
+			fragment.setRetainInstance(true);
 			fragment.show(mapActivity.getSupportFragmentManager(), TAG);
 			return true;
 		} catch (RuntimeException e) {

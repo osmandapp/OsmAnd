@@ -5,6 +5,7 @@ import android.os.Build;
 import android.os.Bundle;
 import android.support.annotation.DrawableRes;
 import android.support.annotation.Nullable;
+import android.support.v4.content.ContextCompat;
 import android.view.ContextThemeWrapper;
 import android.view.LayoutInflater;
 import android.view.View;
@@ -22,8 +23,6 @@ import net.osmand.plus.activities.MapActivity;
 import net.osmand.plus.base.BottomSheetDialogFragment;
 import net.osmand.plus.helpers.AndroidUiHelper;
 
-import org.w3c.dom.Text;
-
 public class CoordinateInputBottomSheetDialogFragment extends BottomSheetDialogFragment {
 
 	public final static String TAG = "CoordinateInputBottomSheetDialogFragment";
@@ -31,15 +30,20 @@ public class CoordinateInputBottomSheetDialogFragment extends BottomSheetDialogF
 	private boolean portrait;
 	private View mainView;
 	private boolean night;
+	private int coordinateFormat = -1;
+	private CoordinateInputFormatChangeListener listener;
 
-	private Format currentFormat = Format.DEGREES;
+	public void setListener(CoordinateInputFormatChangeListener listener) {
+		this.listener = listener;
+	}
 
-	private enum Format {
-		DEGREES,
-		MINUTES,
-		SECONDS,
-		UTM,
-		OLC
+	@Override
+	public void onCreate(@Nullable Bundle savedInstanceState) {
+		super.onCreate(savedInstanceState);
+		Bundle args = getArguments();
+		if (args != null) {
+			coordinateFormat = getArguments().getInt(CoordinateInputDialogFragment.COORDINATE_FORMAT, -1);
+		}
 	}
 
 	@Nullable
@@ -61,49 +65,89 @@ public class CoordinateInputBottomSheetDialogFragment extends BottomSheetDialogF
 
 		ImageView degreesIcon = (ImageView) mainView.findViewById(R.id.degrees_icon);
 		TextView degreesText = (TextView) mainView.findViewById(R.id.degrees_text);
-		if (currentFormat == Format.DEGREES) {
+		if (coordinateFormat == PointDescription.FORMAT_DEGREES) {
 			degreesIcon.setImageDrawable(getIcon(R.drawable.ic_action_coordinates_latitude, R.color.dashboard_blue));
+			degreesText.setTextColor(ContextCompat.getColor(mapActivity, R.color.dashboard_blue));
 		} else {
 			degreesIcon.setImageDrawable(getContentIcon(R.drawable.ic_action_coordinates_latitude));
 		}
+		degreesText.setText(PointDescription.formatToHumanString(getContext(), PointDescription.FORMAT_DEGREES));
 
 		ImageView minutesIcon = (ImageView) mainView.findViewById(R.id.minutes_icon);
 		TextView minutesText = (TextView) mainView.findViewById(R.id.minutes_text);
-		if (currentFormat == Format.MINUTES) {
+		if (coordinateFormat == PointDescription.FORMAT_MINUTES) {
 			minutesIcon.setImageDrawable(getIcon(R.drawable.ic_action_coordinates_latitude, R.color.dashboard_blue));
+			minutesText.setTextColor(ContextCompat.getColor(mapActivity, R.color.dashboard_blue));
 		} else {
 			minutesIcon.setImageDrawable(getContentIcon(R.drawable.ic_action_coordinates_latitude));
 		}
+		minutesText.setText(PointDescription.formatToHumanString(getContext(), PointDescription.FORMAT_MINUTES));
 
 		ImageView secondsIcon = (ImageView) mainView.findViewById(R.id.seconds_icon);
 		TextView secondsText = (TextView) mainView.findViewById(R.id.seconds_text);
-		if (currentFormat == Format.SECONDS) {
+		if (coordinateFormat == PointDescription.FORMAT_SECONDS) {
 			secondsIcon.setImageDrawable(getIcon(R.drawable.ic_action_coordinates_latitude, R.color.dashboard_blue));
+			secondsText.setTextColor(ContextCompat.getColor(mapActivity, R.color.dashboard_blue));
 		} else {
 			secondsIcon.setImageDrawable(getContentIcon(R.drawable.ic_action_coordinates_latitude));
 		}
+		secondsText.setText(PointDescription.formatToHumanString(getContext(), PointDescription.FORMAT_SECONDS));
 
 		ImageView utmIcon = (ImageView) mainView.findViewById(R.id.utm_icon);
 		TextView utmText = (TextView) mainView.findViewById(R.id.utm_text);
-		if (currentFormat == Format.UTM) {
+		if (coordinateFormat == PointDescription.UTM_FORMAT) {
 			utmIcon.setImageDrawable(getIcon(R.drawable.ic_action_coordinates_latitude, R.color.dashboard_blue));
+			utmText.setTextColor(ContextCompat.getColor(mapActivity, R.color.dashboard_blue));
 		} else {
 			utmIcon.setImageDrawable(getContentIcon(R.drawable.ic_action_coordinates_latitude));
 		}
+		utmText.setText(PointDescription.formatToHumanString(getContext(), PointDescription.UTM_FORMAT));
 
 		ImageView olcIcon = (ImageView) mainView.findViewById(R.id.olc_icon);
 		TextView olcText = (TextView) mainView.findViewById(R.id.olc_text);
-		if (currentFormat == Format.OLC) {
+		if (coordinateFormat == PointDescription.OLC_FORMAT) {
 			olcIcon.setImageDrawable(getIcon(R.drawable.ic_action_coordinates_latitude, R.color.dashboard_blue));
+			olcText.setTextColor(ContextCompat.getColor(mapActivity, R.color.dashboard_blue));
 		} else {
 			olcIcon.setImageDrawable(getContentIcon(R.drawable.ic_action_coordinates_latitude));
 		}
+		olcText.setText(PointDescription.formatToHumanString(getContext(), PointDescription.OLC_FORMAT));
 
-		((TextView) mainView.findViewById(R.id.degrees_text)).setText(PointDescription.formatToHumanString(getContext(), PointDescription.FORMAT_DEGREES));
-		((TextView) mainView.findViewById(R.id.minutes_text)).setText(PointDescription.formatToHumanString(getContext(), PointDescription.FORMAT_MINUTES));
-		((TextView) mainView.findViewById(R.id.seconds_text)).setText(PointDescription.formatToHumanString(getContext(), PointDescription.FORMAT_SECONDS));
-		((TextView) mainView.findViewById(R.id.utm_text)).setText(PointDescription.formatToHumanString(getContext(), PointDescription.UTM_FORMAT));
-		((TextView) mainView.findViewById(R.id.olc_text)).setText(PointDescription.formatToHumanString(getContext(), PointDescription.OLC_FORMAT));
+		View.OnClickListener formatChangeListener = new View.OnClickListener() {
+			@Override
+			public void onClick(View view) {
+				int format;
+				switch (view.getId()) {
+					case R.id.degrees_row:
+						format = PointDescription.FORMAT_DEGREES;
+						break;
+					case R.id.minutes_row:
+						format = PointDescription.FORMAT_MINUTES;
+						break;
+					case R.id.seconds_row:
+						format = PointDescription.FORMAT_SECONDS;
+						break;
+					case R.id.utm_row:
+						format = PointDescription.UTM_FORMAT;
+						break;
+					case R.id.olc_row:
+						format = PointDescription.OLC_FORMAT;
+						break;
+					default:
+						throw new IllegalArgumentException("Unsupported format");
+				}
+				if (listener != null) {
+					listener.onCoordinateFormatChanged(format);
+				}
+				dismiss();
+			}
+		};
+
+		mainView.findViewById(R.id.degrees_row).setOnClickListener(formatChangeListener);
+		mainView.findViewById(R.id.minutes_row).setOnClickListener(formatChangeListener);
+		mainView.findViewById(R.id.seconds_row).setOnClickListener(formatChangeListener);
+		mainView.findViewById(R.id.utm_row).setOnClickListener(formatChangeListener);
+		mainView.findViewById(R.id.olc_row).setOnClickListener(formatChangeListener);
 
 		mainView.findViewById(R.id.cancel_row).setOnClickListener(new View.OnClickListener() {
 			@Override
@@ -119,7 +163,7 @@ public class CoordinateInputBottomSheetDialogFragment extends BottomSheetDialogF
 		mainView.getViewTreeObserver().addOnGlobalLayoutListener(new ViewTreeObserver.OnGlobalLayoutListener() {
 			@Override
 			public void onGlobalLayout() {
-				final View scrollView = mainView.findViewById(R.id.marker_show_direction_scroll_view);
+				final View scrollView = mainView.findViewById(R.id.marker_coordinate_input_scroll_view);
 				int scrollViewHeight = scrollView.getHeight();
 				int dividerHeight = AndroidUtils.dpToPx(getContext(), 1);
 				int cancelButtonHeight = getContext().getResources().getDimensionPixelSize(R.dimen.bottom_sheet_cancel_button_height);
@@ -166,5 +210,9 @@ public class CoordinateInputBottomSheetDialogFragment extends BottomSheetDialogF
 	@Override
 	protected Drawable getContentIcon(@DrawableRes int id) {
 		return getIcon(id, night ? R.color.ctx_menu_info_text_dark : R.color.on_map_icon_color);
+	}
+
+	interface CoordinateInputFormatChangeListener {
+		void onCoordinateFormatChanged(int format);
 	}
 }
