@@ -2633,8 +2633,8 @@ Abasta l\'àrea: %1$s x %2$s</string>
     <string name="widget">Giny</string>
     <string name="top_bar">Barra superior</string>
     <string name="remove_from_map_markers">Treu dels marcadors de mapa</string>
-    <string name="descendingly">Sentit descendent</string>
-    <string name="ascendingly">Sentit ascendent</string>
+    <string name="descendingly">Descendent</string>
+    <string name="ascendingly">Ascendent</string>
     <string name="date_added">S\'ha afegit la data</string>
     <string name="order_by">Ordena segons:</string>
     <string name="marker_show_distance_descr">Seleccioneu com indicar la distància i direcció vers els marcadors de mapa a la pantalla del mapa:</string>
@@ -2649,7 +2649,9 @@ Abasta l\'àrea: %1$s x %2$s</string>
     <string name="shared_string_sort">Ordena</string>
     <string name="coordinate_input">Entrada de coordenades</string>
     <string name="is_saved">s\'ha desat</string>
-    <string name="marker_save_as_track_descr">OsmAnd desarà tots els vostres marcadors en un fitxer separat, podeu introduir el nom d\'arxiu:</string>
+    <string name="marker_save_as_track_descr">Exporta els vostres marcadors a un fitxer que podeu indicar aquí:</string>
     <string name="marker_save_as_track">Desa com una traça</string>
     <string name="move_to_history">Mou a l\'historial</string>
+    <string name="plan_route">Planifica la ruta</string>
+    <string name="group_will_be_removed_after_restart">Ss\'esborrarà el grup després de reiniciar</string>
     </resources>
