@@ -703,7 +703,7 @@ public class MapContextMenu extends MenuTitleController implements StateChangedL
 				mapActivity.getDashboard().setDashboardVisibility(true, DashboardOnMap.DashboardType.MAP_MARKERS);
 			} else {
 				mapActivity.getMapActions().addMapMarker(latLon.getLatitude(), latLon.getLongitude(),
-						getPointDescriptionForTarget());
+						getPointDescriptionForMarker());
 			}
 		} else {
 			mapActivity.getMapActions().addAsTarget(latLon.getLatitude(), latLon.getLongitude(),
@@ -876,9 +876,17 @@ public class MapContextMenu extends MenuTitleController implements StateChangedL
 				&& pointDescription.getName().equals(PointDescription.getAddressNotFoundStr(mapActivity))) {
 			return new PointDescription(PointDescription.POINT_TYPE_LOCATION, "");
 		} else {
-			if (Algorithms.isEmpty(pointDescription.getName())) {
-				pointDescription.setName(nameStr);
-			}
+			return pointDescription;
+		}
+	}
+
+	public PointDescription getPointDescriptionForMarker() {
+		if (pointDescription.isLocation()
+				&& pointDescription.getName().equals(PointDescription.getAddressNotFoundStr(mapActivity))) {
+			return new PointDescription(PointDescription.POINT_TYPE_LOCATION, "");
+		} else if (Algorithms.isEmpty(pointDescription.getName())) {
+			return new PointDescription(PointDescription.POINT_TYPE_MAP_MARKER, nameStr);
+		} else {
 			return pointDescription;
 		}
 	}
