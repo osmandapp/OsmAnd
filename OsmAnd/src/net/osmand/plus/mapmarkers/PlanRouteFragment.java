@@ -29,6 +29,7 @@ import net.osmand.plus.ApplicationMode;
 import net.osmand.plus.IconsCache;
 import net.osmand.plus.MapMarkersHelper;
 import net.osmand.plus.MapMarkersHelper.MapMarker;
+import net.osmand.plus.OsmAndFormatter;
 import net.osmand.plus.OsmAndLocationProvider.OsmAndLocationListener;
 import net.osmand.plus.OsmandSettings;
 import net.osmand.plus.R;
@@ -44,6 +45,7 @@ import net.osmand.plus.views.MapMarkersLayer;
 import net.osmand.plus.views.OsmandMapTileView;
 import net.osmand.plus.views.mapwidgets.MapInfoWidgetsFactory;
 import net.osmand.plus.views.mapwidgets.MapInfoWidgetsFactory.TopToolbarController;
+import net.osmand.util.MapUtils;
 
 import java.util.List;
 
@@ -148,6 +150,7 @@ public class PlanRouteFragment extends Fragment implements OsmAndLocationListene
 					selectedCount = activeMarkersCount;
 				}
 				adapter.notifyDataSetChanged();
+				updateText();
 				updateSelectButton();
 				showMarkersRouteOnMap();
 				mapActivity.refreshMap();
@@ -207,6 +210,7 @@ public class PlanRouteFragment extends Fragment implements OsmAndLocationListene
 				}
 				adapter.notifyItemChanged(pos);
 				updateSelectButton();
+				updateText();
 				showMarkersRouteOnMap();
 			}
 
@@ -323,6 +327,7 @@ public class PlanRouteFragment extends Fragment implements OsmAndLocationListene
 			public void onApplicationModeItemClick(ApplicationMode mode) {
 				appMode = mode;
 				setupAppModesBtn();
+				updateText();
 			}
 		};
 	}
@@ -355,7 +360,7 @@ public class PlanRouteFragment extends Fragment implements OsmAndLocationListene
 			}
 
 			if (appMode == null) {
-				appMode = mapActivity.getMyApplication().getSettings().getApplicationMode();
+				appMode = ApplicationMode.DEFAULT;
 			}
 			setupAppModesBtn();
 
@@ -419,8 +424,32 @@ public class PlanRouteFragment extends Fragment implements OsmAndLocationListene
 	}
 
 	private void updateText() {
-		distanceTv.setText("1.39 km,");
-		timeTv.setText("~ 45 min.");
+		MapActivity mapActivity = getMapActivity();
+		if (mapActivity != null) {
+			boolean defaultMode = appMode.getStringKey().equals(ApplicationMode.DEFAULT.getStringKey());
+
+			float dist = 0;
+			Location myLoc = mapActivity.getMapViewTrackingUtilities().getMyLocation();
+			boolean useLocation = myLoc != null && mapActivity.getMyApplication().getSettings().ROUTE_MAP_MARKERS_START_MY_LOC.get();
+			List<LatLon> markers = markersHelper.getSelectedMarkersLatLon();
+			if (useLocation ? markers.size() > 0 : markers.size() > 1) {
+				if (useLocation) {
+					dist += MapUtils.getDistance(myLoc.getLatitude(), myLoc.getLongitude(),
+							markers.get(0).getLatitude(), markers.get(0).getLongitude());
+				}
+				for (int i = 1; i < markers.size(); i++) {
+					dist += MapUtils.getDistance(markers.get(i - 1), markers.get(i));
+				}
+			}
+			distanceTv.setText(OsmAndFormatter.getFormattedDistance(dist, mapActivity.getMyApplication()) + (defaultMode ? "" : ","));
+
+			if (defaultMode) {
+				timeTv.setText("");
+			} else {
+				int seconds = (int) (dist / appMode.getDefaultSpeed());
+				timeTv.setText("~ " + OsmAndFormatter.getFormattedDuration(seconds, mapActivity.getMyApplication()));
+			}
+		}
 	}
 
 	private void updateSelectButton() {
