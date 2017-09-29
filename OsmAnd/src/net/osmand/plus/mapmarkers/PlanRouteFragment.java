@@ -36,6 +36,7 @@ import net.osmand.plus.R;
 import net.osmand.plus.activities.MapActivity;
 import net.osmand.plus.base.MapViewTrackingUtilities;
 import net.osmand.plus.helpers.AndroidUiHelper;
+import net.osmand.plus.mapmarkers.PlanRouteSortByBottomSheetDialogFragment.PlanRouteSortByFragmentListener;
 import net.osmand.plus.mapmarkers.adapters.MapMarkersItemTouchHelperCallback;
 import net.osmand.plus.mapmarkers.adapters.MapMarkersListAdapter;
 import net.osmand.plus.measurementtool.RecyclerViewFragment;
@@ -92,6 +93,10 @@ public class PlanRouteFragment extends Fragment implements OsmAndLocationListene
 		if (snapToRoadFragment != null) {
 			((SnapToRoadBottomSheetDialogFragment) snapToRoadFragment).setListener(createSnapToRoadFragmentListener());
 		}
+		Fragment sortByFragment = fragmentManager.findFragmentByTag(PlanRouteSortByBottomSheetDialogFragment.TAG);
+		if (sortByFragment != null) {
+			((PlanRouteSortByBottomSheetDialogFragment) sortByFragment).setListener(createSortByFragmentListener());
+		}
 		// If rotate the screen from landscape to portrait when the list of markers is displayed then
 		// the RecyclerViewFragment will exist without view. This is necessary to remove it.
 		if (!portrait) {
@@ -125,7 +130,7 @@ public class PlanRouteFragment extends Fragment implements OsmAndLocationListene
 
 		upDownIconIv = (ImageView) mainView.findViewById(R.id.up_down_icon);
 		upDownIconIv.setImageDrawable(getContentIcon(R.drawable.ic_action_arrow_up));
-		((ImageView) mainView.findViewById(R.id.sort_icon)).setImageDrawable(getContentIcon(R.drawable.ic_sort_waypoint_dark));
+		((ImageView) mainView.findViewById(R.id.sort_icon)).setImageDrawable(getContentIcon(R.drawable.ic_action_list_sort));
 
 		mainView.findViewById(R.id.up_down_row).setOnClickListener(new View.OnClickListener() {
 			@Override
@@ -162,7 +167,9 @@ public class PlanRouteFragment extends Fragment implements OsmAndLocationListene
 		mainView.findViewById(R.id.sort_button).setOnClickListener(new View.OnClickListener() {
 			@Override
 			public void onClick(View view) {
-				Toast.makeText(mapActivity, "Sort", Toast.LENGTH_SHORT).show();
+				PlanRouteSortByBottomSheetDialogFragment fragment = new PlanRouteSortByBottomSheetDialogFragment();
+				fragment.setListener(createSortByFragmentListener());
+				fragment.show(mapActivity.getSupportFragmentManager(), PlanRouteSortByBottomSheetDialogFragment.TAG);
 			}
 		});
 
@@ -341,6 +348,27 @@ public class PlanRouteFragment extends Fragment implements OsmAndLocationListene
 				appMode = mode;
 				setupAppModesBtn();
 				updateText();
+			}
+		};
+	}
+
+	private PlanRouteSortByFragmentListener createSortByFragmentListener() {
+		return new PlanRouteSortByFragmentListener() {
+
+			private MapActivity mapActivity = getMapActivity();
+
+			@Override
+			public void doorByDoorOnClick() {
+				if (mapActivity != null) {
+					Toast.makeText(mapActivity, "Door to Door", Toast.LENGTH_SHORT).show();
+				}
+			}
+
+			@Override
+			public void reverseOrderOnClick() {
+				if (mapActivity != null) {
+					Toast.makeText(mapActivity, "Reverse order", Toast.LENGTH_SHORT).show();
+				}
 			}
 		};
 	}
