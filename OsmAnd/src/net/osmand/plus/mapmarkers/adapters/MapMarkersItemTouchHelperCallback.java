@@ -132,8 +132,10 @@ public class MapMarkersItemTouchHelperCallback extends ItemTouchHelper.Callback 
 	@Override
 	public void clearView(RecyclerView recyclerView, RecyclerView.ViewHolder viewHolder) {
 		super.clearView(recyclerView, viewHolder);
-		((MapMarkerItemViewHolder) viewHolder).optionsBtn.setVisibility(View.VISIBLE);
-		iconHidden = false;
+		if (iconHidden) {
+			((MapMarkerItemViewHolder) viewHolder).optionsBtn.setVisibility(View.VISIBLE);
+			iconHidden = false;
+		}
 		adapter.onItemDismiss(viewHolder);
 	}
 

@@ -41,6 +41,7 @@ public class MapQuickActionLayer extends OsmandMapLayer implements QuickActionRe
 
     private final ContextMenuLayer    contextMenuLayer;
 	private final MeasurementToolLayer measurementToolLayer;
+    private final MapMarkersLayer     mapMarkersLayer;
     private       ImageView           contextMarker;
     private final MapActivity         mapActivity;
     private final OsmandApplication   app;
@@ -66,6 +67,7 @@ public class MapQuickActionLayer extends OsmandMapLayer implements QuickActionRe
         settings = activity.getMyApplication().getSettings();
         quickActionRegistry = activity.getMapLayers().getQuickActionRegistry();
 		measurementToolLayer = mapActivity.getMapLayers().getMeasurementToolLayer();
+        mapMarkersLayer = mapActivity.getMapLayers().getMapMarkersLayer();
     }
 
 
@@ -323,6 +325,7 @@ public class MapQuickActionLayer extends OsmandMapLayer implements QuickActionRe
                 contextMenuLayer.isInChangeMarkerPositionMode() ||
 				contextMenuLayer.isInGpxDetailsMode() ||
 				measurementToolLayer.isInMeasurementMode() ||
+                mapMarkersLayer.isInPlanRouteMode() ||
                 mapActivity.getContextMenu().isVisible() && !mapActivity.getContextMenu().findMenuFragment().get().isRemoving() ||
                 mapActivity.getContextMenu().isVisible() && mapActivity.getContextMenu().findMenuFragment().get().isAdded() ||
                 mapActivity.getContextMenu().getMultiSelectionMenu().isVisible() && mapActivity.getContextMenu().getMultiSelectionMenu().getFragmentByTag().isAdded() ||

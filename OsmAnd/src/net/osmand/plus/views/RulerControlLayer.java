@@ -76,10 +76,9 @@ public class RulerControlLayer extends OsmandMapLayer {
 	private Bitmap centerIconNight;
 	private Paint bitmapPaint;
 	private RenderingLineAttributes lineAttrs;
+	private RenderingLineAttributes lineFontAttrs;
 	private RenderingLineAttributes circleAttrs;
 	private RenderingLineAttributes circleAttrsAlt;
-	private float circleTextSize;
-	private float lineTextSize;
 
 	private Handler handler;
 
@@ -122,8 +121,12 @@ public class RulerControlLayer extends OsmandMapLayer {
 
 		lineAttrs = new RenderingLineAttributes("rulerLine");
 
-		circleTextSize = TEXT_SIZE * mapActivity.getResources().getDisplayMetrics().density;
-		lineTextSize = DISTANCE_TEXT_SIZE * mapActivity.getResources().getDisplayMetrics().density;
+		float circleTextSize = TEXT_SIZE * mapActivity.getResources().getDisplayMetrics().density;
+		float lineTextSize = DISTANCE_TEXT_SIZE * mapActivity.getResources().getDisplayMetrics().density;
+
+		lineFontAttrs = new RenderingLineAttributes("rulerLineFont");
+		lineFontAttrs.paint.setTextSize(lineTextSize);
+		lineFontAttrs.paint2.setTextSize(lineTextSize);
 
 		circleAttrs = new RenderingLineAttributes("rulerCircle");
 		circleAttrs.paint2.setTextSize(circleTextSize);
@@ -179,6 +182,8 @@ public class RulerControlLayer extends OsmandMapLayer {
 	public void onDraw(Canvas canvas, RotatedTileBox tb, DrawSettings settings) {
 		if (rulerModeOn()) {
 			lineAttrs.updatePaints(view, settings, tb);
+			lineFontAttrs.updatePaints(view, settings, tb);
+			lineFontAttrs.paint.setStyle(Style.FILL);
 			circleAttrs.updatePaints(view, settings, tb);
 			circleAttrs.paint2.setStyle(Style.FILL);
 			circleAttrsAlt.updatePaints(view, settings, tb);
@@ -221,14 +226,7 @@ public class RulerControlLayer extends OsmandMapLayer {
 			}
 			if (mode == RulerMode.FIRST || mode == RulerMode.SECOND) {
 				updateData(tb, center);
-				RenderingLineAttributes attrs;
-				if (mode == RulerMode.FIRST) {
-					circleAttrs.paint2.setTextSize(circleTextSize);
-					circleAttrs.paint3.setTextSize(circleTextSize);
-					attrs = circleAttrs;
-				} else {
-					attrs = circleAttrsAlt;
-				}
+				RenderingLineAttributes attrs = mode == RulerMode.FIRST ? circleAttrs : circleAttrsAlt;
 				for (int i = 1; i <= cacheDistances.size(); i++) {
 					drawCircle(canvas, tb, i, center, attrs);
 				}
@@ -268,22 +266,19 @@ public class RulerControlLayer extends OsmandMapLayer {
 	private void drawTextOnCenterOfPath(Canvas canvas, float x1, float x2, Path path, String text) {
 		PathMeasure pm = new PathMeasure(path, false);
 		Rect bounds = new Rect();
-		circleAttrs.paint2.getTextBounds(text, 0, text.length(), bounds);
+		lineFontAttrs.paint.getTextBounds(text, 0, text.length(), bounds);
 		float hOffset = pm.getLength() / 2 - bounds.width() / 2;
-
-		circleAttrs.paint2.setTextSize(lineTextSize);
-		circleAttrs.paint3.setTextSize(lineTextSize);
 
 		if (x1 >= x2) {
 			float[] pos = new float[2];
 			pm.getPosTan(pm.getLength() / 2, pos, null);
 			canvas.rotate(180, pos[0], pos[1]);
-			canvas.drawTextOnPath(text, path, hOffset, bounds.height() + VERTICAL_OFFSET, circleAttrs.paint3);
-			canvas.drawTextOnPath(text, path, hOffset, bounds.height() + VERTICAL_OFFSET, circleAttrs.paint2);
+			canvas.drawTextOnPath(text, path, hOffset, bounds.height() + VERTICAL_OFFSET, lineFontAttrs.paint2);
+			canvas.drawTextOnPath(text, path, hOffset, bounds.height() + VERTICAL_OFFSET, lineFontAttrs.paint);
 			canvas.rotate(-180, pos[0], pos[1]);
 		} else {
-			canvas.drawTextOnPath(text, path, hOffset, -VERTICAL_OFFSET, circleAttrs.paint3);
-			canvas.drawTextOnPath(text, path, hOffset, -VERTICAL_OFFSET, circleAttrs.paint2);
+			canvas.drawTextOnPath(text, path, hOffset, -VERTICAL_OFFSET, lineFontAttrs.paint2);
+			canvas.drawTextOnPath(text, path, hOffset, -VERTICAL_OFFSET, lineFontAttrs.paint);
 		}
 	}
 
