@@ -106,28 +106,6 @@ public class CoordinateInputBottomSheetDialogFragment extends BottomSheetDialogF
 		}
 		secondsText.setText(PointDescription.formatToHumanString(getContext(), PointDescription.FORMAT_SECONDS));
 
-		ImageView utmIcon = (ImageView) mainView.findViewById(R.id.utm_icon);
-		TextView utmText = (TextView) mainView.findViewById(R.id.utm_text);
-		if (coordinateFormat == PointDescription.UTM_FORMAT) {
-			utmIcon.setImageDrawable(getIcon(R.drawable.ic_action_coordinates_latitude, R.color.dashboard_blue));
-			utmText.setTextColor(ContextCompat.getColor(mapActivity, R.color.dashboard_blue));
-			((RadioButton) mainView.findViewById(R.id.utm_radio_button)).setChecked(true);
-		} else {
-			utmIcon.setImageDrawable(getContentIcon(R.drawable.ic_action_coordinates_latitude));
-		}
-		utmText.setText(PointDescription.formatToHumanString(getContext(), PointDescription.UTM_FORMAT));
-
-		ImageView olcIcon = (ImageView) mainView.findViewById(R.id.olc_icon);
-		TextView olcText = (TextView) mainView.findViewById(R.id.olc_text);
-		if (coordinateFormat == PointDescription.OLC_FORMAT) {
-			olcIcon.setImageDrawable(getIcon(R.drawable.ic_action_coordinates_latitude, R.color.dashboard_blue));
-			olcText.setTextColor(ContextCompat.getColor(mapActivity, R.color.dashboard_blue));
-			((RadioButton) mainView.findViewById(R.id.olc_radio_button)).setChecked(true);
-		} else {
-			olcIcon.setImageDrawable(getContentIcon(R.drawable.ic_action_coordinates_latitude));
-		}
-		olcText.setText(PointDescription.formatToHumanString(getContext(), PointDescription.OLC_FORMAT));
-
 		if (coordinateFormat != -1) {
 			((CompoundButton) mainView.findViewById(R.id.use_system_keyboard_switch)).setChecked(!useOsmandKeyboard);
 			((ImageView) mainView.findViewById(R.id.use_system_keyboard_icon)).setImageDrawable(getContentIcon(R.drawable.ic_action_keyboard));
@@ -158,12 +136,6 @@ public class CoordinateInputBottomSheetDialogFragment extends BottomSheetDialogF
 					case R.id.seconds_row:
 						coordinateFormat = PointDescription.FORMAT_SECONDS;
 						break;
-					case R.id.utm_row:
-						coordinateFormat = PointDescription.UTM_FORMAT;
-						break;
-					case R.id.olc_row:
-						coordinateFormat = PointDescription.OLC_FORMAT;
-						break;
 					default:
 						throw new IllegalArgumentException("Unsupported format");
 				}
@@ -180,8 +152,6 @@ public class CoordinateInputBottomSheetDialogFragment extends BottomSheetDialogF
 		mainView.findViewById(R.id.degrees_row).setOnClickListener(formatChangeListener);
 		mainView.findViewById(R.id.minutes_row).setOnClickListener(formatChangeListener);
 		mainView.findViewById(R.id.seconds_row).setOnClickListener(formatChangeListener);
-		mainView.findViewById(R.id.utm_row).setOnClickListener(formatChangeListener);
-		mainView.findViewById(R.id.olc_row).setOnClickListener(formatChangeListener);
 
 		mainView.findViewById(R.id.cancel_row).setOnClickListener(new View.OnClickListener() {
 			@Override
@@ -275,16 +245,6 @@ public class CoordinateInputBottomSheetDialogFragment extends BottomSheetDialogF
 				((TextView) mainView.findViewById(R.id.seconds_text)).setTextColor(textColor);
 				((ImageView) mainView.findViewById(R.id.seconds_icon)).setImageDrawable((getIcon(R.drawable.ic_action_coordinates_latitude, iconColor)));
 				((RadioButton) mainView.findViewById(R.id.seconds_radio_button)).setChecked(check);
-				break;
-			case PointDescription.UTM_FORMAT:
-				((TextView) mainView.findViewById(R.id.utm_text)).setTextColor(textColor);
-				((ImageView) mainView.findViewById(R.id.utm_icon)).setImageDrawable((getIcon(R.drawable.ic_action_coordinates_latitude, iconColor)));
-				((RadioButton) mainView.findViewById(R.id.utm_radio_button)).setChecked(check);
-				break;
-			case PointDescription.OLC_FORMAT:
-				((TextView) mainView.findViewById(R.id.olc_text)).setTextColor(textColor);
-				((ImageView) mainView.findViewById(R.id.olc_icon)).setImageDrawable((getIcon(R.drawable.ic_action_coordinates_latitude, iconColor)));
-				((RadioButton) mainView.findViewById(R.id.olc_radio_button)).setChecked(check);
 				break;
 		}
 	}
