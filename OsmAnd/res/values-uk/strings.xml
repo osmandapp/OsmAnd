@@ -323,8 +323,8 @@
   <string name="gpx_option_destination_point">Використовувати поточний пункт призначення</string>
   <string name="gpx_option_from_start_point">Пройдіть по усьому треку</string>
   <string name="switch_to_vector_map_to_see">Для цього регіону доступні оффлайн векторні мапи\n\t\n\tДля їх використання виберіть пункт меню \'Налаштування Мапи\' → \'Джерело мапи…\' → \'Локальні векторні мапи\'.</string>
-  <string name="choose_audio_stream">Голосові інструкції</string>
-  <string name="choose_audio_stream_descr">Виберіть канал для голосових інструкцій</string>
+  <string name="choose_audio_stream">Вивід голосових вказівок</string>
+  <string name="choose_audio_stream_descr">Виберіть канал для голосових вказівок</string>
   <string name="voice_stream_voice_call">Голосовий канал (також призупиняє музику з динаміків)</string>
   <string name="voice_stream_notification">Повідомлення аудіо</string>
   <string name="voice_stream_music">Медіа / аудіо музика</string>
@@ -1029,15 +1029,15 @@
     <string name="poi_filter_accomodation">Житло</string>
     <string name="poi_filter_restaurants">Ресторани</string>
     <string name="poi_filter_sightseeing">Огляд визначних пам’яток</string>
-    <string name="show_warnings_title">Показати попередження…</string>
+    <string name="show_warnings_title">Показувати попередження…</string>
 	<string name="poi_filter_emergency">Аварійні служби</string>
     
     
     <string name="non_optimal_route_calculation">Швидка побудова маршруту (можливо неоптимальна)</string>
-	<string name="show_warnings_descr">Налаштування показу попереджень (обмеження швидкості, примусові зупинки, пристрої обмеження швидкості), камер контролю швидкості і інформації руху по смугах</string>
+	<string name="show_warnings_descr">Налаштувати попередження дорожнього руху (обмеження швидкості, вимушені зупинки, лежачі поліцейські), попередження про камери контролю швидкості та інформацію про рух по смугах</string>
 	<string name="avoid_motorway">Уникати автомагістралей</string>
-	<string name="snap_to_road_descr">Прив’язати поточну позицію до дороги під час навігації</string>
-	<string name="snap_to_road">Прив’язати до дороги</string>
+	<string name="snap_to_road_descr">Прив`язуватися до доріг під час навігації</string>
+	<string name="snap_to_road">Прив’язуватися до доріг</string>
 	<string name="osmand_short_description_80_chars">Перегляд та навігація в автономному та онлайн режимах мапами ОСМ</string>
 	<string name="osmand_plus_short_description_80_chars">Перегляд та навігація в автономному на онлайн режимах мапами ОСМ</string>
 	<string name="incomplete_locale">незавершена</string>
@@ -1228,8 +1228,8 @@
     <string name="context_menu_item_directions_from">Маршрут від</string>
     <string name="route_to">До:</string>
     <string name="announce_gpx_waypoints">Шляхові точки GPX</string>
-    <string name="speak_title">Попереджати…</string>
-	<string name="speak_descr">Увімкніть оголошення назв вулиць, дорожніх обмежень (примусових зупинок, лежачих поліцейських); повідомленя про камери фіксації швидкості, про обмеження швидкості</string>
+    <string name="speak_title">Оголошувати…</string>
+	<string name="speak_descr">Налаштувати оголошення назв вулиць, дорожніх обмежень (вимушені зупинки, лежачі поліцейські), попередження про камери контролю швидкості, обмеження швидкості</string>
 	<string name="speak_street_names">Назви вулиць (TTS)</string>
     
     <string name="keep_intermediate_points">Лишити проміжні точки</string>
@@ -1595,11 +1595,11 @@
 	<string name="interrupt_music">Призупинити музику</string>
 	<string name="share_route_as_gpx">Поділитись маршрутом за допомоги файлу GPX</string>
 	<string name="share_route_subject">Маршрут наданий через OsmAnd</string>
-	<string name="arrival_distance">Оголошення прибуття</string>
-    <string name="arrival_distance_descr">Як швидко ви бажаєте оголосити прибуття?</string>
+	<string name="arrival_distance">Оголошення про прибуття</string>
+    <string name="arrival_distance_descr">Як швидко Ви хочете чути повідомлення про прибуття?</string>
     <string name="keep_informing_never">Тільки вручну (натискати на стрілку)</string>
-    <string name="keep_informing_descr">Повторювати навігаційні інструкціі регулярно</string>
-    <string name="keep_informing">Повторювати навігаційні інструкціі</string>
+    <string name="keep_informing_descr">Повторювати навігаційні інструкції через регулярні проміжки часу</string>
+    <string name="keep_informing">Повторювати навігаційні інструкції</string>
 	
 	<string name="create_poi_link_to_osm_doc"><u>Онлайнова OSM</u> класифікація мапи із зображеннями</string>
 	<string name="import_file_favourites">Зберегти дані як файл GPX чи імпортувати точки маршруту в закладки?</string>
@@ -1665,8 +1665,8 @@
 	<string name="coordinates">Координати</string>
 	<string name="rendering_attr_tramTrainRoutes_name">Маршрути трамваїв та поїздів</string>
 	<string name="lock_screen_request_explanation">%1$s потрібен цей дозвіл, щоб вимкнути екран для економії енергії.</string>
-    <string name="wake_on_voice">Увімкнути екран перед поворотом</string>
-    <string name="wake_on_voice_descr">Вмикати екран телефону (якщо він вимкнутий) під час наближення до повороту</string>
+    <string name="wake_on_voice">Увімкнути екран</string>
+    <string name="wake_on_voice_descr">Увімкнути екран пристрою (якщо його вимкнено) при наближенні до повороту</string>
     <string name="shared_string_never">Ніколи</string>
     
     <string name="impassable_road">Уникати доріг…</string>
@@ -1693,8 +1693,8 @@
     <string name="anonymous_user_hint">Анонімний користувач не в змозі:\n- створювати групи;\n- синхронізувати групи та пристрої з сервером;\n- керувати групами та пристроями в персональній панелі керування на вебсайті.</string>
     <string name="anonymous_user">Анонімний користувач</string>
     <string name="logged_as">Ви увійшли як %1$s</string>
-	<string name="speed_limit_exceed">Допустиме перевищення швидкості</string>
-	<string name="speed_limit_exceed_message">Оберіть допустиме значення перевищення швидкості, після якого ви почуєте попередження.</string>
+	<string name="speed_limit_exceed">Допустиме значення перевищення швидкості</string>
+	<string name="speed_limit_exceed_message">Виберіть допустиме значення перевищення швидкості, при перевищенні якого Ви отримаєте голосове попередження.</string>
 	<string name="fav_point_emoticons_message">Назву закладки було змінено на %1$s, щоб мати можливість зберігати рядки зі смайликами у файл.</string>
     <string name="print_route">Друк маршруту</string>
     
@@ -2033,8 +2033,8 @@
     <string name="srtm_plugin_disabled">Ізолінії висот вимкнено</string>
     <string name="favorite_category_add_new">Додати нову</string>
     <string name="favorite_category_select">Виберіть категорію</string>
-    <string name="default_speed_system_descr">Визначте одиниці виміру швидкості</string>
-    <string name="default_speed_system">Одиниці виміру швидкості</string>
+    <string name="default_speed_system_descr">Визначити одиницю виміру швидкості</string>
+    <string name="default_speed_system">Одиниця виміру швидкості</string>
     <string name="si_nm">Морські милі</string>
     <string name="si_kmh">Кілометрів за годину</string>
     <string name="si_mph">Миль на годину</string>

@@ -1258,7 +1258,7 @@
     
     <string name="index_item_world_basemap">Сусьветная аглядная мапа</string>
     <string name="index_item_world_ski">Сусьветная лыжная мапа</string>
-    <string name="select_gpx">Абраць GPX …</string>
+    <string name="select_gpx">Абраць GPX…</string>
     <string name="routing_attr_prefer_motorway_description">Аддаваць перавагу аўтамагістралям</string>
 	<string name="animate_routing_route">Імітацыя з выкарыстаньнем разлічанага маршруту </string>
     <string name="animate_routing_gpx">Імітацыя з выкарыстаньнем GPX-сьледу</string>
@@ -2897,7 +2897,7 @@
     <string name="shared_string_sort">Сартаваць</string>
     <string name="coordinate_input">Увод каардынат</string>
     <string name="is_saved">захаваны</string>
-    <string name="marker_save_as_track_descr">OsmAnd захавае ўсе вашы маркеры ў асобны файл. Вы можаце ўвесці назву файла:</string>
+    <string name="marker_save_as_track_descr">Экспартаваць вашы маркеры ў файл, які вы можаце пазначыць тут:</string>
     <string name="marker_save_as_track">Захаваць як след</string>
     <string name="move_to_history">Перамясціць у гісторыю</string>
     <string name="group_will_be_removed_after_restart">Група будзе выдаленая пасля перазапуску</string>

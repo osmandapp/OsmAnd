@@ -2496,4 +2496,12 @@
     <string name="yesterday">Вчера</string>
     <string name="last_seven_days">За последние 7 дней</string>
     <string name="this_year">В этом году</string>
+    <string name="plan_route">План маршрута</string>
+    <string name="coordinate_input">Ввод координат</string>
+    <string name="marker_save_as_track">Сохранить как трек</string>
+    <string name="move_to_history">Переместить в историю</string>
+    <string name="group_will_be_removed_after_restart">Группа будет удалена после перезагрузки</string>
+    <string name="show_arrows_on_the_map">Показывать стрелки на карте</string>
+    <string name="descendingly">По убыванию</string>
+    <string name="ascendingly">По возрастанию</string>
     </resources>
