@@ -63,18 +63,22 @@ public class MapMarkersListAdapter extends RecyclerView.Adapter<MapMarkerItemVie
 
 	@Override
 	public void onBindViewHolder(final MapMarkerItemViewHolder holder, int pos) {
-		boolean night = !mapActivity.getMyApplication().getSettings().isLightContent();
+		boolean night = mapActivity.getMyApplication().getDaynightHelper().isNightModeForMapControls();
 		IconsCache iconsCache = mapActivity.getMyApplication().getIconsCache();
-		MapMarker marker = markers.get(pos);
 
-		holder.icon.setImageDrawable(iconsCache.getIcon(R.drawable.ic_action_flag_dark, MapMarker.getColorId(marker.colorIndex)));
-		holder.iconReorder.setImageDrawable(iconsCache.getThemedIcon(R.drawable.ic_action_reorder));
-		holder.iconDirection.setVisibility(View.GONE);
+		boolean locationItem = pos == 0;
+		boolean firstMarkerItem = pos == 1;
+		boolean lastMarkerItem = pos == getItemCount() - 1;
+
+		MapMarker marker = locationItem ? null : getItem(pos);
+
 		holder.mainLayout.setBackgroundColor(ContextCompat.getColor(mapActivity, night ? R.color.bg_color_dark : R.color.bg_color_light));
 		holder.title.setTextColor(ContextCompat.getColor(mapActivity, night ? R.color.color_white : R.color.color_black));
-		holder.divider.setBackgroundColor(ContextCompat.getColor(mapActivity, night ? R.color.actionbar_dark_color : R.color.dashboard_divider_light));
+		holder.title.setText(locationItem ? mapActivity.getString(R.string.shared_string_my_location) : marker.getName(mapActivity));
+		holder.iconDirection.setVisibility(View.GONE);
 		holder.optionsBtn.setVisibility(View.GONE);
-		holder.description.setTextColor(ContextCompat.getColor(mapActivity, night ? R.color.dash_search_icon_dark : R.color.icon_color));
+		holder.divider.setBackgroundColor(ContextCompat.getColor(mapActivity, night ? R.color.actionbar_dark_color : R.color.dashboard_divider_light));
+		holder.divider.setVisibility(lastMarkerItem ? View.GONE : View.VISIBLE);
 		holder.checkBox.setVisibility(View.VISIBLE);
 		holder.checkBox.setOnClickListener(new View.OnClickListener() {
 			@Override
@@ -82,75 +86,79 @@ public class MapMarkersListAdapter extends RecyclerView.Adapter<MapMarkerItemVie
 				listener.onItemClick(holder.itemView);
 			}
 		});
-		holder.checkBox.setChecked(marker.selected);
+		holder.bottomShadow.setVisibility(lastMarkerItem ? View.VISIBLE : View.GONE);
 
-		if (pos == 0 || pos == getItemCount() - 1) {
-			holder.firstDescription.setVisibility(View.VISIBLE);
-			if (pos == 0) {
-				holder.topDivider.setVisibility(View.VISIBLE);
-				holder.firstDescription.setText(mapActivity.getString(R.string.shared_string_control_start) + " • ");
-			} else {
-				holder.firstDescription.setText(mapActivity.getString(R.string.shared_string_finish) + " • ");
-			}
+		holder.firstDescription.setVisibility((firstMarkerItem || lastMarkerItem) ? View.VISIBLE : View.GONE);
+		if (firstMarkerItem) {
+			holder.firstDescription.setText(mapActivity.getString(R.string.shared_string_control_start) + " • ");
+		} else if (lastMarkerItem) {
+			holder.firstDescription.setText(mapActivity.getString(R.string.shared_string_finish) + " • ");
+		}
+
+		if (locationItem) {
+			holder.topDivider.setVisibility(View.VISIBLE);
+			holder.flagIconLeftSpace.setVisibility(View.VISIBLE);
+			holder.icon.setImageDrawable(ContextCompat.getDrawable(mapActivity, R.drawable.map_pedestrian_location));
+			holder.point.setVisibility(View.GONE);
+			holder.checkBox.setChecked(mapActivity.getMyApplication().getMapMarkersHelper().isStartFromMyLocation());
+			holder.iconReorder.setVisibility(View.GONE);
+			holder.description.setVisibility(View.GONE);
+			holder.distance.setVisibility(View.GONE);
 		} else {
-			holder.firstDescription.setVisibility(View.GONE);
 			holder.topDivider.setVisibility(View.GONE);
-		}
+			holder.flagIconLeftSpace.setVisibility(View.GONE);
+			holder.icon.setImageDrawable(iconsCache.getIcon(R.drawable.ic_action_flag_dark, MapMarker.getColorId(marker.colorIndex)));
+			holder.point.setVisibility(View.VISIBLE);
+			holder.checkBox.setChecked(marker.selected);
 
-		if (pos == getItemCount() - 1) {
-			holder.bottomShadow.setVisibility(View.VISIBLE);
-			holder.divider.setVisibility(View.GONE);
-		} else {
-			holder.bottomShadow.setVisibility(View.GONE);
-			holder.divider.setVisibility(View.VISIBLE);
-		}
-
-		holder.point.setVisibility(View.VISIBLE);
-
-		holder.iconReorder.setOnTouchListener(new View.OnTouchListener() {
-			@Override
-			public boolean onTouch(View view, MotionEvent event) {
-				if (MotionEventCompat.getActionMasked(event) == MotionEvent.ACTION_DOWN) {
-					listener.onDragStarted(holder);
+			holder.iconReorder.setVisibility(View.VISIBLE);
+			holder.iconReorder.setImageDrawable(iconsCache.getThemedIcon(R.drawable.ic_action_reorder));
+			holder.iconReorder.setOnTouchListener(new View.OnTouchListener() {
+				@Override
+				public boolean onTouch(View view, MotionEvent event) {
+					if (MotionEventCompat.getActionMasked(event) == MotionEvent.ACTION_DOWN) {
+						listener.onDragStarted(holder);
+					}
+					return false;
 				}
-				return false;
-			}
-		});
+			});
 
-		holder.title.setText(marker.getName(mapActivity));
-
-		String descr;
-		if ((descr = marker.groupName) != null) {
-			if (descr.equals("")) {
-				descr = mapActivity.getString(R.string.shared_string_favorites);
+			holder.description.setVisibility(View.VISIBLE);
+			holder.description.setTextColor(ContextCompat.getColor(mapActivity, night ? R.color.dash_search_icon_dark : R.color.icon_color));
+			String descr;
+			if ((descr = marker.groupName) != null) {
+				if (descr.equals("")) {
+					descr = mapActivity.getString(R.string.shared_string_favorites);
+				}
+			} else {
+				Date date = new Date(marker.creationDate);
+				String month = new SimpleDateFormat("MMM", Locale.getDefault()).format(date);
+				if (month.length() > 1) {
+					month = Character.toUpperCase(month.charAt(0)) + month.substring(1);
+				}
+				String day = new SimpleDateFormat("dd", Locale.getDefault()).format(date);
+				descr = month + " " + day;
 			}
-		} else {
-			Date date = new Date(marker.creationDate);
-			String month = new SimpleDateFormat("MMM", Locale.getDefault()).format(date);
-			if (month.length() > 1) {
-				month = Character.toUpperCase(month.charAt(0)) + month.substring(1);
-			}
-			String day = new SimpleDateFormat("dd", Locale.getDefault()).format(date);
-			descr = month + " " + day;
-		}
-		holder.description.setText(descr);
+			holder.description.setText(descr);
 
-		if (location != null) {
-			holder.distance.setTextColor(ContextCompat.getColor(mapActivity, useCenter
-					? R.color.color_distance : R.color.color_myloc_distance));
-			float dist = (float) MapUtils.getDistance(location.getLatitude(), location.getLongitude(),
-					marker.getLatitude(), marker.getLongitude());
-			holder.distance.setText(OsmAndFormatter.getFormattedDistance(dist, mapActivity.getMyApplication()));
+			if (location != null) {
+				holder.distance.setVisibility(View.VISIBLE);
+				holder.distance.setTextColor(ContextCompat.getColor(mapActivity, useCenter
+						? R.color.color_distance : R.color.color_myloc_distance));
+				float dist = (float) MapUtils.getDistance(location.getLatitude(), location.getLongitude(),
+						marker.getLatitude(), marker.getLongitude());
+				holder.distance.setText(OsmAndFormatter.getFormattedDistance(dist, mapActivity.getMyApplication()));
+			}
 		}
 	}
 
 	@Override
 	public int getItemCount() {
-		return markers.size();
+		return markers.size() + 1;
 	}
 
 	public MapMarker getItem(int position) {
-		return markers.get(position);
+		return markers.get(position - 1);
 	}
 
 	@Override
@@ -160,7 +168,10 @@ public class MapMarkersListAdapter extends RecyclerView.Adapter<MapMarkerItemVie
 
 	@Override
 	public boolean onItemMove(int from, int to) {
-		Collections.swap(markers, from, to);
+		if (to == 0) {
+			return false;
+		}
+		Collections.swap(markers, from - 1, to - 1);
 		notifyItemMoved(from, to);
 		return true;
 	}
