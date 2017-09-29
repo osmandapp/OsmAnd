@@ -44,9 +44,9 @@ public class CoordinateInputDialogFragment extends DialogFragment {
 
 	private static final int DELETE_BUTTON_POSITION = 9;
 	private static final int CLEAR_BUTTON_POSITION = 11;
-	private static final int DEGREES_MAX_LENGTH = 8;
-	private static final int MINUTES_MAX_LENGTH = 10;
-	private static final int SECONDS_MAX_LENGTH = 13;
+	private static final int DEGREES_MAX_LENGTH = 6;
+	private static final int MINUTES_MAX_LENGTH = 9;
+	private static final int SECONDS_MAX_LENGTH = 12;
 
 	private boolean lightTheme;
 	private EditText focusedEditText;
