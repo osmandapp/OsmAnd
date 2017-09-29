@@ -445,6 +445,7 @@ public class MapContextMenu extends MenuTitleController implements StateChangedL
 		if (fragmentRef != null) {
 			fragmentRef.get().dismissMenu();
 		}
+		mapActivity.getMapLayers().getMapControlsLayer().changeMarkersAndWidgetsVisibility(true);
 	}
 
 	// timeout in msec

@@ -1214,4 +1214,9 @@ public class MapControlsLayer extends OsmandMapLayer {
 			addDestination(requestedLatLon);
 		}
 	}
+
+	public void changeMarkersAndWidgetsVisibility(boolean visible) {
+		mapActivity.findViewById(R.id.map_markers_top_bar).setVisibility(visible ? View.VISIBLE : View.GONE);
+		mapActivity.findViewById(R.id.map_right_widgets_panel).setVisibility(visible ? View.VISIBLE : View.GONE);
+	}
 }

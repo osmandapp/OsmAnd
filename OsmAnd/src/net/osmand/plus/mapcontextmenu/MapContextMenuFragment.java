@@ -46,6 +46,7 @@ import net.osmand.plus.mapcontextmenu.MenuController.TitleButtonController;
 import net.osmand.plus.mapcontextmenu.MenuController.TitleProgressController;
 import net.osmand.plus.mapcontextmenu.other.MapRouteInfoMenu;
 import net.osmand.plus.views.AnimateDraggingMapThread;
+import net.osmand.plus.views.MapControlsLayer;
 import net.osmand.plus.views.OsmandMapTileView;
 import net.osmand.plus.views.controls.HorizontalSwipeConfirm;
 import net.osmand.plus.views.controls.SingleTapConfirm;
@@ -106,10 +107,14 @@ public class MapContextMenuFragment extends Fragment implements DownloadEvents {
 	private int screenOrientation;
 	private boolean created;
 
+	private MapControlsLayer mapControlsLayer;
+
 	@TargetApi(Build.VERSION_CODES.HONEYCOMB)
 	@Override
 	public View onCreateView(LayoutInflater inflater, ViewGroup container,
 							 Bundle savedInstanceState) {
+
+		mapControlsLayer = getMapActivity().getMapLayers().getMapControlsLayer();
 
 		processScreenHeight(container);
 
@@ -527,6 +532,8 @@ public class MapContextMenuFragment extends Fragment implements DownloadEvents {
 		if (newMenuState != oldMenuState) {
 			doBeforeMenuStateChange(oldMenuState, newMenuState);
 		}
+
+		mapControlsLayer.changeMarkersAndWidgetsVisibility(newMenuState == MenuState.HEADER_ONLY);
 
 		applyPosY(currentY, needCloseMenu, needMapAdjust, oldMenuState, newMenuState);
 	}
