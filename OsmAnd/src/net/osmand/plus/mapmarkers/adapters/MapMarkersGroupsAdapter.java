@@ -281,7 +281,7 @@ public class MapMarkersGroupsAdapter extends RecyclerView.Adapter<RecyclerView.V
 									}
 								} else {
 									boolean firstItemInDisplayGroup = position - 1 != -1 && getItem(position - 1) instanceof Integer;
-									boolean lastItemInDisplayGroup = !(getItem(position) instanceof MapMarker);
+									boolean lastItemInDisplayGroup = position == getItemCount() || !(getItem(position) instanceof MapMarker);
 									if (firstItemInDisplayGroup && lastItemInDisplayGroup) {
 										items.remove(position - 1);
 									}

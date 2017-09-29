@@ -11,7 +11,6 @@ import android.view.ContextThemeWrapper;
 import android.view.View;
 import android.view.Window;
 import android.view.WindowManager;
-import android.view.animation.Animation;
 import android.widget.FrameLayout;
 import android.widget.ImageView;
 import android.widget.LinearLayout;
@@ -36,9 +35,14 @@ public class SnapToRoadBottomSheetDialogFragment extends android.support.design.
 	private boolean nightMode;
 	private boolean portrait;
 	private boolean snapToRoadEnabled;
+	private boolean removeDefaultMode = true;
 
 	public void setListener(SnapToRoadFragmentListener listener) {
 		this.listener = listener;
+	}
+
+	public void setRemoveDefaultMode(boolean removeDefaultMode) {
+		this.removeDefaultMode = removeDefaultMode;
 	}
 
 	@Override
@@ -73,7 +77,9 @@ public class SnapToRoadBottomSheetDialogFragment extends android.support.design.
 
 		LinearLayout container = (LinearLayout) mainView.findViewById(R.id.navigation_types_container);
 		final List<ApplicationMode> modes = new ArrayList<>(ApplicationMode.values(settings));
-		modes.remove(ApplicationMode.DEFAULT);
+		if (removeDefaultMode) {
+			modes.remove(ApplicationMode.DEFAULT);
+		}
 
 		View.OnClickListener onClickListener = new View.OnClickListener() {
 			@Override
