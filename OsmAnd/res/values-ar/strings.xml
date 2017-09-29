@@ -2803,4 +2803,11 @@
     <string name="marker_save_as_track">حفظ كمسار</string>
     <string name="move_to_history">العودة إلى السجل الزمني</string>
     <string name="group_will_be_removed_after_restart">ستتم إزالة المجموعة بعد إعادة التشغيل</string>
+    <string name="shared_string_markers">علامات</string>
+    <string name="coordinates_format">نسق الإحداثيات</string>
+    <string name="use_system_keyboard">استخدم لوحة مفاتيح النظام</string>
+    <string name="fast_coordinates_input_descr">اختر نسق الأحداثيات قبل البدء. يمكنك دائماً تغييره بالنقر على خيارات.</string>
+    <string name="fast_coordinates_input">إدخال إحداثيات سريع</string>
+    <string name="routing_attr_avoid_ice_roads_fords_name">تجنب الطرق الجليدية، المعابر</string>
+    <string name="routing_attr_avoid_ice_roads_fords_description">تجنب الطرق الجليدية والمعابر</string>
     </resources>
