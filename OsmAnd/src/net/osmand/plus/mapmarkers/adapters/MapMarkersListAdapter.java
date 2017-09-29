@@ -65,18 +65,20 @@ public class MapMarkersListAdapter extends RecyclerView.Adapter<MapMarkerItemVie
 	public void onBindViewHolder(final MapMarkerItemViewHolder holder, int pos) {
 		boolean night = mapActivity.getMyApplication().getDaynightHelper().isNightModeForMapControls();
 		IconsCache iconsCache = mapActivity.getMyApplication().getIconsCache();
-		MapMarker marker = pos == 0 ? null : getItem(pos);
 
-		int firstMarkerPos = 1;
-		int lastMarkerPos = getItemCount() - 1;
+		boolean locationItem = pos == 0;
+		boolean firstMarkerItem = pos == 1;
+		boolean lastMarkerItem = pos == getItemCount() - 1;
+
+		MapMarker marker = locationItem ? null : getItem(pos);
 
 		holder.mainLayout.setBackgroundColor(ContextCompat.getColor(mapActivity, night ? R.color.bg_color_dark : R.color.bg_color_light));
 		holder.title.setTextColor(ContextCompat.getColor(mapActivity, night ? R.color.color_white : R.color.color_black));
-		holder.title.setText(pos == 0 ? mapActivity.getString(R.string.shared_string_my_location) : marker.getName(mapActivity));
+		holder.title.setText(locationItem ? mapActivity.getString(R.string.shared_string_my_location) : marker.getName(mapActivity));
 		holder.iconDirection.setVisibility(View.GONE);
 		holder.optionsBtn.setVisibility(View.GONE);
 		holder.divider.setBackgroundColor(ContextCompat.getColor(mapActivity, night ? R.color.actionbar_dark_color : R.color.dashboard_divider_light));
-		holder.divider.setVisibility(pos == lastMarkerPos ? View.GONE : View.VISIBLE);
+		holder.divider.setVisibility(lastMarkerItem ? View.GONE : View.VISIBLE);
 		holder.checkBox.setVisibility(View.VISIBLE);
 		holder.checkBox.setOnClickListener(new View.OnClickListener() {
 			@Override
@@ -84,16 +86,16 @@ public class MapMarkersListAdapter extends RecyclerView.Adapter<MapMarkerItemVie
 				listener.onItemClick(holder.itemView);
 			}
 		});
-		holder.bottomShadow.setVisibility(pos == lastMarkerPos ? View.VISIBLE : View.GONE);
+		holder.bottomShadow.setVisibility(lastMarkerItem ? View.VISIBLE : View.GONE);
 
-		holder.firstDescription.setVisibility((pos == firstMarkerPos || pos == lastMarkerPos) ? View.VISIBLE : View.GONE);
-		if (pos == firstMarkerPos) {
+		holder.firstDescription.setVisibility((firstMarkerItem || lastMarkerItem) ? View.VISIBLE : View.GONE);
+		if (firstMarkerItem) {
 			holder.firstDescription.setText(mapActivity.getString(R.string.shared_string_control_start) + " • ");
-		} else if (pos == lastMarkerPos) {
+		} else if (lastMarkerItem) {
 			holder.firstDescription.setText(mapActivity.getString(R.string.shared_string_finish) + " • ");
 		}
 
-		if (pos == 0) {
+		if (locationItem) {
 			holder.topDivider.setVisibility(View.VISIBLE);
 			holder.flagIconLeftSpace.setVisibility(View.VISIBLE);
 			holder.icon.setImageDrawable(ContextCompat.getDrawable(mapActivity, R.drawable.map_pedestrian_location));

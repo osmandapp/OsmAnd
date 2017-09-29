@@ -78,6 +78,7 @@ public class PlanRouteFragment extends Fragment implements OsmAndLocationListene
 	private ImageView upDownIconIv;
 	private TextView distanceTv;
 	private TextView timeTv;
+	private TextView countTv;
 
 	@Nullable
 	@Override
@@ -113,6 +114,7 @@ public class PlanRouteFragment extends Fragment implements OsmAndLocationListene
 
 		distanceTv = (TextView) mainView.findViewById(R.id.markers_distance_text_view);
 		timeTv = (TextView) mainView.findViewById(R.id.markers_time_text_view);
+		countTv = (TextView) mainView.findViewById(R.id.markers_count_text_view);
 
 		enterPlanRouteMode();
 
@@ -459,6 +461,8 @@ public class PlanRouteFragment extends Fragment implements OsmAndLocationListene
 				int seconds = (int) (dist / appMode.getDefaultSpeed());
 				timeTv.setText("~ " + OsmAndFormatter.getFormattedDuration(seconds, mapActivity.getMyApplication()));
 			}
+
+			countTv.setText(mapActivity.getString(R.string.shared_string_markers) + ": " + selectedCount);
 		}
 	}
 
