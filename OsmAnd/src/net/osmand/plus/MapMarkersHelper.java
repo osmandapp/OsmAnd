@@ -338,7 +338,7 @@ public class MapMarkersHelper {
 								mapMarker.pointDescription.setName(address);
 							}
 							markersDbHelper.updateMarker(mapMarker);
-							updateMarker(mapMarker);
+							refreshMarker(mapMarker);
 						}
 					}, null);
 			ctx.getGeocodingLookupService().lookupAddress(lookupRequest);
@@ -553,13 +553,19 @@ public class MapMarkersHelper {
 
 	public void deselectAllActiveMarkers() {
 		for (MapMarker m : mapMarkers) {
-			m.selected = false;
+			if (m.selected) {
+				m.selected = false;
+				markersDbHelper.updateMarker(m);
+			}
 		}
 	}
 
 	public void selectAllActiveMarkers() {
 		for (MapMarker m : mapMarkers) {
-			m.selected = true;
+			if (!m.selected) {
+				m.selected = true;
+				markersDbHelper.updateMarker(m);
+			}
 		}
 	}
 
@@ -807,20 +813,20 @@ public class MapMarkersHelper {
 		listeners.remove(l);
 	}
 
-	private void updateMarker(MapMarker marker) {
+	private void refreshMarker(MapMarker marker) {
 		for (MapMarkerChangedListener l : listeners) {
 			l.onMapMarkerChanged(marker);
 		}
 	}
 
-	private void updateMarkers() {
+	private void refreshMarkers() {
 		for (MapMarkerChangedListener l : listeners) {
 			l.onMapMarkersChanged();
 		}
 	}
 
 	public void refresh() {
-		updateMarkers();
+		refreshMarkers();
 	}
 
 	private void cancelAddressRequests() {

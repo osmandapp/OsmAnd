@@ -209,6 +209,7 @@ public class PlanRouteFragment extends Fragment implements OsmAndLocationListene
 					MapMarker marker = adapter.getItem(pos);
 					selectedCount = marker.selected ? selectedCount - 1 : selectedCount + 1;
 					marker.selected = !marker.selected;
+					markersHelper.updateMapMarker(marker, false);
 				}
 				adapter.notifyItemChanged(pos);
 				updateSelectButton();
@@ -655,7 +656,6 @@ public class PlanRouteFragment extends Fragment implements OsmAndLocationListene
 		if (markersListOpened) {
 			hideMarkersList();
 		}
-		markersHelper.deselectAllActiveMarkers();
 		activity.getSupportFragmentManager().beginTransaction().remove(this).commitAllowingStateLoss();
 	}
 
