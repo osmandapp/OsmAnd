@@ -442,7 +442,7 @@ public class PlanRouteFragment extends Fragment implements OsmAndLocationListene
 			boolean defaultMode = appMode.getStringKey().equals(ApplicationMode.DEFAULT.getStringKey());
 
 			float dist = 0;
-			Location myLoc = mapActivity.getMapViewTrackingUtilities().getMyLocation();
+			Location myLoc = mapActivity.getMyApplication().getLocationProvider().getLastStaleKnownLocation();
 			boolean useLocation = myLoc != null && mapActivity.getMyApplication().getSettings().ROUTE_MAP_MARKERS_START_MY_LOC.get();
 			List<LatLon> markers = markersHelper.getSelectedMarkersLatLon();
 			if (useLocation ? markers.size() > 0 : markers.size() > 1) {
@@ -607,7 +607,7 @@ public class PlanRouteFragment extends Fragment implements OsmAndLocationListene
 			OsmandMapTileView mapView = mapActivity.getMapView();
 			double left = 0, right = 0;
 			double top = 0, bottom = 0;
-			Location myLocation = mapActivity.getMyApplication().getLocationProvider().getLastKnownLocation();
+			Location myLocation = mapActivity.getMyApplication().getLocationProvider().getLastStaleKnownLocation();
 			if (mapActivity.getMyApplication().getMapMarkersHelper().isStartFromMyLocation() && myLocation != null) {
 				left = myLocation.getLongitude();
 				right = myLocation.getLongitude();
