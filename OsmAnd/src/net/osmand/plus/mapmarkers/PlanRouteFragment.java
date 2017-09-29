@@ -468,7 +468,6 @@ public class PlanRouteFragment extends Fragment implements OsmAndLocationListene
 		MapMarkersLayer markersLayer = getMapMarkersLayer();
 		if (mapActivity != null && markersLayer != null) {
 			markersListOpened = true;
-			markersLayer.setMarkersListOpened(true);
 			upDownIconIv.setImageDrawable(getContentIcon(R.drawable.ic_action_arrow_down));
 			View listContainer = mainView.findViewById(R.id.markers_list_container);
 			if (portrait && listContainer != null) {
@@ -490,7 +489,6 @@ public class PlanRouteFragment extends Fragment implements OsmAndLocationListene
 		MapMarkersLayer markersLayer = getMapMarkersLayer();
 		if (mapActivity != null && markersLayer != null) {
 			markersListOpened = false;
-			markersLayer.setMarkersListOpened(false);
 			upDownIconIv.setImageDrawable(getContentIcon(R.drawable.ic_action_arrow_up));
 			View listContainer = mainView.findViewById(R.id.markers_list_container);
 			if (portrait && listContainer != null) {

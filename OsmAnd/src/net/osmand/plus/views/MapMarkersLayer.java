@@ -81,7 +81,6 @@ public class MapMarkersLayer extends OsmandMapLayer implements IContextMenuProvi
 	private ContextMenuLayer contextMenuLayer;
 
 	private boolean inPlanRouteMode;
-	private boolean markersListOpened;
 
 	public MapMarkersLayer(MapActivity map) {
 		this.map = map;
@@ -97,14 +96,6 @@ public class MapMarkersLayer extends OsmandMapLayer implements IContextMenuProvi
 
 	public void setInPlanRouteMode(boolean inPlanRouteMode) {
 		this.inPlanRouteMode = inPlanRouteMode;
-	}
-
-	public boolean isMarkersListOpened() {
-		return inPlanRouteMode && markersListOpened;
-	}
-
-	public void setMarkersListOpened(boolean markersListOpened) {
-		this.markersListOpened = markersListOpened;
 	}
 
 	private void initUI() {
