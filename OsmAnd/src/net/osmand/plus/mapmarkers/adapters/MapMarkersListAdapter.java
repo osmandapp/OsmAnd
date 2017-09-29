@@ -63,7 +63,7 @@ public class MapMarkersListAdapter extends RecyclerView.Adapter<MapMarkerItemVie
 
 	@Override
 	public void onBindViewHolder(final MapMarkerItemViewHolder holder, int pos) {
-		boolean night = !mapActivity.getMyApplication().getSettings().isLightContent();
+		boolean night = mapActivity.getMyApplication().getDaynightHelper().isNightModeForMapControls();
 		IconsCache iconsCache = mapActivity.getMyApplication().getIconsCache();
 		MapMarker marker = pos == 0 ? null : getItem(pos);
 
