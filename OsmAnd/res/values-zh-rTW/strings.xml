@@ -2885,4 +2885,11 @@ OsmAnd (Automated Navigation Directions) 是一個地圖和導航的應用程式
     <string name="marker_save_as_track">另存為軌跡</string>
     <string name="move_to_history">移至歷程</string>
     <string name="group_will_be_removed_after_restart">重新啟動後群組將被移除</string>
+    <string name="shared_string_markers">標記</string>
+    <string name="coordinates_format">座標格式</string>
+    <string name="use_system_keyboard">使用系統鍵盤</string>
+    <string name="fast_coordinates_input_descr">在開始之前選擇座標格式。您可以隨時輕點選項來更改它。</string>
+    <string name="fast_coordinates_input">快速座標輸入</string>
+    <string name="routing_attr_avoid_ice_roads_fords_name">避開結冰道路、涉水</string>
+    <string name="routing_attr_avoid_ice_roads_fords_description">避開結冰和涉水的道路</string>
     </resources>
