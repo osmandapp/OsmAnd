@@ -9,6 +9,8 @@
          3. All your modified/created strings are in the top of the file (to make easier find what\'s translated).
     PLEASE: Have a look at http://code.google.com/p/osmand/wiki/UIConsistency, it may really improve your and our work  :-)  Thx - Hardy
     -->
+    <string name="routing_attr_avoid_ice_roads_fords_name">Avoid ice roads, fords</string>
+    <string name="routing_attr_avoid_ice_roads_fords_description">Avoid ice roads and fords</string>
     <string name="use_location">Use location</string>
     <string name="add_location_as_first_point_descr">Add your location as first point to plan perfect route.</string>
     <string name="my_location">My Location</string>
