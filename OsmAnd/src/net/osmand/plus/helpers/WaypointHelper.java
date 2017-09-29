@@ -339,25 +339,27 @@ public class WaypointHelper {
 					pointsProgress.set(type, kIterator);
 					while (kIterator < lp.size()) {
 						LocationPointWrapper lwp = lp.get(kIterator);
-						if (route.getDistanceToPoint(lwp.routeIndex) > LONG_ANNOUNCE_RADIUS * 2) {
-							break;
-						}
-						LocationPoint point = lwp.point;
-						double d1 = Math.max(0.0, MapUtils.getDistance(lastKnownLocation.getLatitude(), lastKnownLocation.getLongitude(),
-								point.getLatitude(), point.getLongitude()) - lwp.getDeviationDistance());
-						Integer state = locationPointsStates.get(point);
-						if (state != null && state.intValue() == ANNOUNCED_ONCE
-								&& getVoiceRouter().isDistanceLess(lastKnownLocation.getSpeed(), d1, SHORT_ANNOUNCE_RADIUS, 0f)) {
-							locationPointsStates.put(point, ANNOUNCED_DONE);
-							announcePoints.add(lwp);
-						} else if (type != ALARMS && (state == null || state == NOT_ANNOUNCED)
-								&& getVoiceRouter().isDistanceLess(lastKnownLocation.getSpeed(), d1, LONG_ANNOUNCE_RADIUS, 0f)) {
-							locationPointsStates.put(point, ANNOUNCED_ONCE);
-							approachPoints.add(lwp);
-						} else if (type == ALARMS && (state == null || state == NOT_ANNOUNCED)
-								&& getVoiceRouter().isDistanceLess(lastKnownLocation.getSpeed(), d1, ALARMS_ANNOUNCE_RADIUS, 0f)) {
-							locationPointsStates.put(point, ANNOUNCED_ONCE);
-							approachPoints.add(lwp);
+						if (lwp.announce) {
+							if (route.getDistanceToPoint(lwp.routeIndex) > LONG_ANNOUNCE_RADIUS * 2) {
+								break;
+							}
+							LocationPoint point = lwp.point;
+							double d1 = Math.max(0.0, MapUtils.getDistance(lastKnownLocation.getLatitude(), lastKnownLocation.getLongitude(),
+									point.getLatitude(), point.getLongitude()) - lwp.getDeviationDistance());
+							Integer state = locationPointsStates.get(point);
+							if (state != null && state.intValue() == ANNOUNCED_ONCE
+									&& getVoiceRouter().isDistanceLess(lastKnownLocation.getSpeed(), d1, SHORT_ANNOUNCE_RADIUS, 0f)) {
+								locationPointsStates.put(point, ANNOUNCED_DONE);
+								announcePoints.add(lwp);
+							} else if (type != ALARMS && (state == null || state == NOT_ANNOUNCED)
+									&& getVoiceRouter().isDistanceLess(lastKnownLocation.getSpeed(), d1, LONG_ANNOUNCE_RADIUS, 0f)) {
+								locationPointsStates.put(point, ANNOUNCED_ONCE);
+								approachPoints.add(lwp);
+							} else if (type == ALARMS && (state == null || state == NOT_ANNOUNCED)
+									&& getVoiceRouter().isDistanceLess(lastKnownLocation.getSpeed(), d1, ALARMS_ANNOUNCE_RADIUS, 0f)) {
+								locationPointsStates.put(point, ANNOUNCED_ONCE);
+								approachPoints.add(lwp);
+							}
 						}
 						kIterator++;
 					}
