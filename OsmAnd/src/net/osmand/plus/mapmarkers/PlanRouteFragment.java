@@ -242,23 +242,33 @@ public class PlanRouteFragment extends Fragment implements OsmAndLocationListene
 		markersRv.setLayoutManager(new LinearLayoutManager(getContext()));
 		markersRv.setAdapter(adapter);
 
-		if (portrait) {
-			showMarkersList();
-		} else {
-			mainView.getViewTreeObserver().addOnGlobalLayoutListener(new ViewTreeObserver.OnGlobalLayoutListener() {
-				@Override
-				public void onGlobalLayout() {
-					showMarkersList();
+		final int screenH = AndroidUtils.getScreenHeight(mapActivity);
+		final int statusBarH = AndroidUtils.getStatusBarHeight(mapActivity);
+		final int navBarH = AndroidUtils.getNavBarHeight(mapActivity);
+		final int availableHeight = (screenH - statusBarH - navBarH) / 2;
 
-					ViewTreeObserver obs = mainView.getViewTreeObserver();
-					if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.JELLY_BEAN) {
-						obs.removeOnGlobalLayoutListener(this);
-					} else {
-						obs.removeGlobalOnLayoutListener(this);
-					}
+		mainView.getViewTreeObserver().addOnGlobalLayoutListener(new ViewTreeObserver.OnGlobalLayoutListener() {
+			@Override
+			public void onGlobalLayout() {
+				if (portrait) {
+					int upDownRowH = mainView.findViewById(R.id.up_down_row).getHeight();
+					int buttonsRowH = mainView.findViewById(R.id.buttons_row).getHeight();
+					int listContainerH = availableHeight - upDownRowH - buttonsRowH;
+					View listContainer = mainView.findViewById(R.id.markers_list_container);
+					listContainer.getLayoutParams().height = listContainerH;
+					listContainer.requestLayout();
 				}
-			});
-		}
+
+				showMarkersList();
+
+				ViewTreeObserver obs = mainView.getViewTreeObserver();
+				if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.JELLY_BEAN) {
+					obs.removeOnGlobalLayoutListener(this);
+				} else {
+					obs.removeGlobalOnLayoutListener(this);
+				}
+			}
+		});
 
 		return view;
 	}

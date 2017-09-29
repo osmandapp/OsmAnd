@@ -123,6 +123,7 @@
         </FrameLayout>
 
         <LinearLayout
+            android:id="@+id/buttons_row"
             android:layout_width="match_parent"
             android:layout_height="@dimen/measurement_tool_controls_height">
 

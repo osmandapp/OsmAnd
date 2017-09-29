@@ -104,6 +104,7 @@
                 android:background="?attr/dashboard_divider"/>
 
             <LinearLayout
+                android:id="@+id/buttons_row"
                 android:layout_width="0dp"
                 android:layout_height="@dimen/measurement_tool_controls_height"
                 android:layout_weight="0.5">
