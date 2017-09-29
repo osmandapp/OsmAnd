@@ -221,6 +221,10 @@ public class MapInfoLayer extends OsmandMapLayer {
 		});
 	}
 
+	public void updateRightStackVisibility(boolean visible) {
+		rightStack.setVisibility(visible ? View.VISIBLE : View.GONE);
+	}
+
 	public void setTrackChartPoints(TrackChartPoints trackChartPoints) {
 		this.trackChartPoints = trackChartPoints;
 		routeLayer.setTrackChartPoints(trackChartPoints);

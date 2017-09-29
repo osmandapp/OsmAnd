@@ -36,6 +36,7 @@ public class MapMarkersWidgetsFactory {
 	private MapMarkersHelper helper;
 	private int screenOrientation;
 	private boolean portraitMode;
+	private boolean topBarCanBeShown = true;
 
 	private View topBar;
 	private View addressTopBar;
@@ -148,8 +149,12 @@ public class MapMarkersWidgetsFactory {
 		}
 	}
 
+	public void lockTopBarVisibility(boolean visible) {
+		topBarCanBeShown = visible;
+	}
+
 	public boolean updateVisibility(boolean visible) {
-		return updateVisibility(topBar, visible);
+		return (topBarCanBeShown || !visible) && updateVisibility(topBar, visible);
 	}
 
 	public boolean updateVisibility(View v, boolean visible) {

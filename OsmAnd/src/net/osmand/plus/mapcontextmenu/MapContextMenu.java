@@ -47,9 +47,11 @@ import net.osmand.plus.mapcontextmenu.other.ShareMenu;
 import net.osmand.plus.monitoring.OsmandMonitoringPlugin;
 import net.osmand.plus.routing.RoutingHelper;
 import net.osmand.plus.views.ContextMenuLayer;
+import net.osmand.plus.views.MapInfoLayer;
 import net.osmand.plus.views.OsmandMapLayer;
 import net.osmand.plus.views.mapwidgets.MapInfoWidgetsFactory.TopToolbarController;
 import net.osmand.plus.views.mapwidgets.MapInfoWidgetsFactory.TopToolbarControllerType;
+import net.osmand.plus.views.mapwidgets.MapMarkersWidgetsFactory;
 import net.osmand.util.Algorithms;
 import net.osmand.util.MapUtils;
 
@@ -63,6 +65,8 @@ public class MapContextMenu extends MenuTitleController implements StateChangedL
 	private MapActivity mapActivity;
 	private OsmandSettings settings;
 	private MapMultiSelectionMenu mapMultiSelectionMenu;
+	private MapInfoLayer mapInfoLayer;
+	private MapMarkersWidgetsFactory mapMarkersWidgetsFactory;
 
 	private FavoritePointEditor favoritePointEditor;
 	private WptPtEditor wptPtEditor;
@@ -290,6 +294,9 @@ public class MapContextMenu extends MenuTitleController implements StateChangedL
 			myLocation = mapActivity.getMyApplication().getSettings().getLastKnownMapLocation();
 		}
 
+		mapInfoLayer = mapActivity.getMapLayers().getMapInfoLayer();
+		mapMarkersWidgetsFactory = mapActivity.getMapLayers().getMapMarkersLayer().getWidgetsFactory();
+
 		if (!update && isVisible()) {
 			if (this.object == null || !this.object.equals(object)) {
 				hide();
@@ -446,7 +453,16 @@ public class MapContextMenu extends MenuTitleController implements StateChangedL
 		if (fragmentRef != null) {
 			fragmentRef.get().dismissMenu();
 		}
-		mapActivity.getMapLayers().getMapControlsLayer().changeMarkersAndWidgetsVisibility(true);
+
+		makeTopbarAndRightStackVisible();
+	}
+
+	private void makeTopbarAndRightStackVisible() {
+		mapInfoLayer.updateRightStackVisibility(true);
+		if (getMapActivity().getMyApplication().getSettings().MAP_MARKERS_MODE.get() == OsmandSettings.MapMarkersMode.TOOLBAR) {
+			mapMarkersWidgetsFactory.lockTopBarVisibility(true);
+			mapMarkersWidgetsFactory.updateVisibility(true);
+		}
 	}
 
 	// timeout in msec
