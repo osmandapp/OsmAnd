@@ -394,6 +394,7 @@ public class PlanRouteFragment extends Fragment implements OsmAndLocationListene
 				public void onClick(View view) {
 					SnapToRoadBottomSheetDialogFragment fragment = new SnapToRoadBottomSheetDialogFragment();
 					fragment.setListener(createSnapToRoadFragmentListener());
+					fragment.setRemoveDefaultMode(false);
 					fragment.show(mapActivity.getSupportFragmentManager(), SnapToRoadBottomSheetDialogFragment.TAG);
 				}
 			});
