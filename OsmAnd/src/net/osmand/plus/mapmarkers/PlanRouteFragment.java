@@ -367,7 +367,9 @@ public class PlanRouteFragment extends Fragment implements OsmAndLocationListene
 			@Override
 			public void reverseOrderOnClick() {
 				if (mapActivity != null) {
-					Toast.makeText(mapActivity, "Reverse order", Toast.LENGTH_SHORT).show();
+					markersHelper.reverseActiveMarkersOrder();
+					mapActivity.getMyApplication().getSettings().MAP_MARKERS_ORDER_BY_MODE.set(OsmandSettings.MapMarkersOrderByMode.CUSTOM);
+					adapter.reloadMarkers();
 				}
 			}
 		};
