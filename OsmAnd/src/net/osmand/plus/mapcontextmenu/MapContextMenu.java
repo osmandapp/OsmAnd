@@ -881,13 +881,10 @@ public class MapContextMenu extends MenuTitleController implements StateChangedL
 	}
 
 	public PointDescription getPointDescriptionForMarker() {
-		if (pointDescription.isLocation()
-				&& pointDescription.getName().equals(PointDescription.getAddressNotFoundStr(mapActivity))) {
-			return new PointDescription(PointDescription.POINT_TYPE_LOCATION, "");
-		} else if (Algorithms.isEmpty(pointDescription.getName())) {
+		if (Algorithms.isEmpty(pointDescription.getName())) {
 			return new PointDescription(PointDescription.POINT_TYPE_MAP_MARKER, nameStr);
 		} else {
-			return pointDescription;
+			return getPointDescriptionForTarget();
 		}
 	}
 
