@@ -2907,5 +2907,5 @@
     <string name="fast_coordinates_input_descr">Абраць фармат каардынат перад стартам. Вы заўсёды можаце змяніць яго націснуўшы налады.</string>
     <string name="fast_coordinates_input">Хуткі ўвод каардынат</string>
     <string name="routing_attr_avoid_ice_roads_fords_name">Пазбягаць лядовых дарог і бродаў</string>
-    <string name="routing_attr_avoid_ice_roads_fords_description">Пазбягаць лядовых дарог і бродаў</string>
+    <string name="routing_attr_avoid_ice_roads_fords_description">Пазбягае лядовыя дарогі і броды</string>
     </resources>
