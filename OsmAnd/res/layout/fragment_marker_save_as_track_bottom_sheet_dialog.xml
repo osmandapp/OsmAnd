@@ -17,7 +17,7 @@
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:orientation="vertical"
-            android:paddingBottom="@dimen/bottom_sheet_content_padding_small">
+            android:paddingBottom="@dimen/dialog_content_margin">
 
             <net.osmand.plus.widgets.TextViewEx
                 android:id="@+id/save_as_track_title"
