@@ -965,7 +965,7 @@ public class MapMarkersHelper {
 			GroupHeader header = new GroupHeader();
 			int type = group.getType();
 			if (type != -1) {
-				header.setIconRes(type == MapMarkersHelper.MarkersSyncGroup.FAVORITES_TYPE ? R.drawable.ic_action_fav_dark : R.drawable.ic_action_track_16);
+				header.setIconRes(type == MapMarkersHelper.MarkersSyncGroup.FAVORITES_TYPE ? R.drawable.ic_action_fav_dark : R.drawable.ic_action_polygom_dark);
 			}
 			header.setGroup(group);
 			group.setGroupHeader(header);
