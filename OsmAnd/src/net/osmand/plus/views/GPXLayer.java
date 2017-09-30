@@ -465,29 +465,39 @@ public class GPXLayer extends OsmandMapLayer implements ContextMenuLayer.IContex
 	private void drawSelectedFilesSegments(Canvas canvas, RotatedTileBox tileBox,
 										   List<SelectedGpxFile> selectedGPXFiles, DrawSettings settings) {
 
+		SelectedGpxFile currentTrack = null;
 		for (SelectedGpxFile g : selectedGPXFiles) {
-			GpxDataItem gpxDataItem = null;
-			if (!g.isShowCurrentTrack()) {
-				gpxDataItem = view.getApplication().getGpxDatabase().getItem(new File(g.getGpxFile().path));
-			}
-			List<TrkSegment> segments = g.getPointsToDisplay();
-			for (TrkSegment ts : segments) {
-				int color = gpxDataItem != null ? gpxDataItem.getColor() : 0;
-				if (g.isShowCurrentTrack()) {
-					color = currentTrackColor;
+			if (g.isShowCurrentTrack()) {
+				currentTrack = g;
+			} else {
+				List<TrkSegment> segments = g.getPointsToDisplay();
+				for (TrkSegment ts : segments) {
+					GpxDataItem gpxDataItem = view.getApplication().getGpxDatabase().getItem(new File(g.getGpxFile().path));
+					int color = gpxDataItem != null ? gpxDataItem.getColor() : 0;
+					if (color == 0) {
+						color = ts.getColor(cachedColor);
+					}
+					if (ts.renders.isEmpty()                // only do once (CODE HERE NEEDS TO BE UI INSTEAD)
+							&& !ts.points.isEmpty()) {        // hmmm. 0-point tracks happen, but.... how?
+						ts.renders.add(new Renderable.StandardTrack(ts.points, 17.2));
+					}
+					updatePaints(color, g.isRoutePoints(), false, settings, tileBox);
+					ts.drawRenderers(view.getZoom(), paint, canvas, tileBox);
 				}
+			}
+		}
+		if (currentTrack != null) {
+			List<TrkSegment> segments = currentTrack.getPointsToDisplay();
+			for (TrkSegment ts : segments) {
+				int color = currentTrackColor;
 				if (color == 0) {
 					color = ts.getColor(cachedColor);
 				}
 				if (ts.renders.isEmpty()                // only do once (CODE HERE NEEDS TO BE UI INSTEAD)
 						&& !ts.points.isEmpty()) {        // hmmm. 0-point tracks happen, but.... how?
-					if (g.isShowCurrentTrack()) {
-						ts.renders.add(new Renderable.CurrentTrack(ts.points));
-					} else {
-						ts.renders.add(new Renderable.StandardTrack(ts.points, 17.2));
-					}
+					ts.renders.add(new Renderable.CurrentTrack(ts.points));
 				}
-				updatePaints(color, g.isRoutePoints(), g.isShowCurrentTrack(), settings, tileBox);
+				updatePaints(color, currentTrack.isRoutePoints(), true, settings, tileBox);
 				ts.drawRenderers(view.getZoom(), paint, canvas, tileBox);
 			}
 		}
