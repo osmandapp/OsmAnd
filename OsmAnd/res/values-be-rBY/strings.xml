@@ -2852,4 +2852,11 @@ U vypadku, kali vy lubіcie OsmAnd і OSM і chočacie padtrymać jaho, heta іd
     <string name="marker_save_as_track">Zachavać jak slied</string>
     <string name="move_to_history">Pieramiascić u historyju</string>
     <string name="group_will_be_removed_after_restart">Hrupa budzie vydalienaja paslia pierazapusku</string>
+    <string name="shared_string_markers">Markiery</string>
+    <string name="coordinates_format">Farmat kaardynat</string>
+    <string name="use_system_keyboard">Vykarystoŭvać sistemnuju klavijaturu</string>
+    <string name="fast_coordinates_input_descr">Abrać farmat kaardynat pierad startam. Vy zaŭsiody možacie zmianić jaho nacisnuŭšy nalady.</string>
+    <string name="fast_coordinates_input">Chutki ŭvod kaardynat</string>
+    <string name="routing_attr_avoid_ice_roads_fords_name">Pazbiahać liadovych daroh i brodaŭ</string>
+    <string name="routing_attr_avoid_ice_roads_fords_description">Pazbiahaje liadovyja darohi i brody</string>
     </resources>
