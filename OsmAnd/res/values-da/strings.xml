@@ -2898,8 +2898,15 @@ Tidligere destination bliver sidste mellemliggende punkt.</string>
     <string name="shared_string_sort">Sorter</string>
     <string name="coordinate_input">Koordinatindtastning</string>
     <string name="is_saved">er gemt</string>
-    <string name="marker_save_as_track_descr">Gem alle markører til en separat fil og indtast et filnavn:</string>
+    <string name="marker_save_as_track_descr">Eksporter markører til en fil, som kan angives her:</string>
     <string name="marker_save_as_track">Gem som spor</string>
     <string name="move_to_history">Flyt til historik</string>
     <string name="group_will_be_removed_after_restart">Gruppen vil blive fjernet efter genstart</string>
+    <string name="shared_string_markers">Markører</string>
+    <string name="coordinates_format">Koordinatformat</string>
+    <string name="use_system_keyboard">Brug systemtastaturet</string>
+    <string name="fast_coordinates_input_descr">Vælg koordinatformat før start. Kan altid ændres ved at trykke på indstillinger.</string>
+    <string name="fast_coordinates_input">Hurtig koordinatindtastning</string>
+    <string name="routing_attr_avoid_ice_roads_fords_name">Undgå isglatte veje, vadesteder</string>
+    <string name="routing_attr_avoid_ice_roads_fords_description">Undgå isglatte veje og vadesteder</string>
     </resources>
