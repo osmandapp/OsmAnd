@@ -1544,7 +1544,7 @@ Proporcia memoro %4$s MB (limito de Android %5$s MB, Dalvik %6$s MB).</string>
     <string name="local_index_items_deleted">Sukcese forigis %1$d el %2$d ero(j)n.</string>
     <string name="local_index_items_restored">Sukcese aktivigis %1$d el %2$d ero(j)n.</string>
     <string name="local_index_no_items_to_do">Neniu elemento por %1$s</string>
-    <string name="local_index_action_do">Ĉu vi volas %1$s %2$s ero(j)n?</string>
+    <string name="local_index_action_do">Ĉu vi volas %1$s %2$s elemento(j)n?</string>
     <string name="local_index_descr_title">Administri map-dosierojn</string>
     <string name="local_index_mi_restore">Aktivigi</string>
     <string name="local_index_mi_backup">Malaktivigi</string>
@@ -1981,7 +1981,7 @@ Provizore estas uzata enreta servo CloudMade.</string>
     <string name="poi_edit_title">Redakti interesejon</string>
     <string name="poi_create_title">Krei interesejon</string>
     <string name="poi_error_poi_not_found">Ne povas trovi nodon aŭ servo konsistas el kelkaj nodoj, tio ĉi ne estas ankoraŭ subtenata.</string>
-    <string name="poi_remove_confirm_template">Ĉu forigi na {0} (entajpu komenton)?</string>
+    <string name="poi_remove_confirm_template">Ĉu forigi {0} (entajpu komenton)?</string>
     <string name="poi_remove_title">Forigi interesejon</string>
     <string name="poi_remove_success">Interesejo forigita sukcese</string>
     <string name="poi_action_add">aldoni</string>
@@ -2764,7 +2764,7 @@ Indikas lokon:  %1$s x %2$s"</string>
     <string name="empty_state_my_tracks">Aldoni kaj registri spurojn</string>
     <string name="empty_state_my_tracks_desc">Registri aŭ enporti spurojn por vidigi</string>
     <string name="empty_state_favourites">Aldoni ŝatatajn</string>
-    <string name="empty_state_favourites_desc">Aldoni ŝatatajn punktojn al mapo aŭ enporti ilin el memorejo</string>
+    <string name="empty_state_favourites_desc">Aldonu ŝatatajn punktojn al mapo aŭ enportu ilin el memorejo</string>
     <string name="import_track">Enporti spuron</string>
     <string name="import_track_desc">Dosiero %1$s ne enhavas navigadpunktojn, ĉe enporti ĝin kiel spuron?</string>
     <string name="move_point">Movi punkton</string>
@@ -2797,7 +2797,7 @@ Indikas lokon:  %1$s x %2$s"</string>
     <string name="remove_from_map_markers">Forigi el map-markoj</string>
     <string name="descendingly">malkreskante</string>
     <string name="ascendingly">kreskante</string>
-    <string name="date_added">dato de aldono</string>
+    <string name="date_added">Dato de aldono</string>
     <string name="order_by">Ordigi laŭ:</string>
     <string name="show_guide_line">Montri gvidan linion</string>
     <string name="show_arrows_on_the_map">Montri sagetojn sur la mapo</string>
