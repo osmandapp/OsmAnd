@@ -517,6 +517,7 @@ public class MapMarkersHelper {
 			}
 			checkAndFixActiveMarkersOrderIfNeeded();
 			sortMarkers(mapMarkersHistory, true, OsmandSettings.MapMarkersOrderByMode.DATE_ADDED_DESC);
+			updateGroups();
 			refresh();
 		}
 	}
@@ -623,6 +624,7 @@ public class MapMarkersHelper {
 		mapMarkersHistory.addAll(mapMarkers);
 		mapMarkers.clear();
 		sortMarkers(mapMarkersHistory, true, OsmandSettings.MapMarkersOrderByMode.DATE_ADDED_DESC);
+		updateGroups();
 		refresh();
 	}
 
@@ -893,6 +895,12 @@ public class MapMarkersHelper {
 				}
 			}
 			group.setMarkers(historyMarkers);
+			updateGroup(group);
+		}
+	}
+
+	public void updateGroups() {
+		for (MapMarkersGroup group : mapMarkersGroups) {
 			updateGroup(group);
 		}
 	}
