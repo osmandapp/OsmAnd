@@ -470,36 +470,39 @@ public class GPXLayer extends OsmandMapLayer implements ContextMenuLayer.IContex
 			if (g.isShowCurrentTrack()) {
 				currentTrack = g;
 			} else {
-				List<TrkSegment> segments = g.getPointsToDisplay();
-				for (TrkSegment ts : segments) {
-					GpxDataItem gpxDataItem = view.getApplication().getGpxDatabase().getItem(new File(g.getGpxFile().path));
-					int color = gpxDataItem != null ? gpxDataItem.getColor() : 0;
-					if (color == 0) {
-						color = ts.getColor(cachedColor);
-					}
-					if (ts.renders.isEmpty()                // only do once (CODE HERE NEEDS TO BE UI INSTEAD)
-							&& !ts.points.isEmpty()) {        // hmmm. 0-point tracks happen, but.... how?
-						ts.renders.add(new Renderable.StandardTrack(ts.points, 17.2));
-					}
-					updatePaints(color, g.isRoutePoints(), false, settings, tileBox);
-					ts.drawRenderers(view.getZoom(), paint, canvas, tileBox);
-				}
+				drawSelectedFileSegments(g, false, canvas, tileBox, settings);
 			}
 		}
 		if (currentTrack != null) {
-			List<TrkSegment> segments = currentTrack.getPointsToDisplay();
-			for (TrkSegment ts : segments) {
-				int color = currentTrackColor;
-				if (color == 0) {
-					color = ts.getColor(cachedColor);
-				}
-				if (ts.renders.isEmpty()                // only do once (CODE HERE NEEDS TO BE UI INSTEAD)
-						&& !ts.points.isEmpty()) {        // hmmm. 0-point tracks happen, but.... how?
-					ts.renders.add(new Renderable.CurrentTrack(ts.points));
-				}
-				updatePaints(color, currentTrack.isRoutePoints(), true, settings, tileBox);
-				ts.drawRenderers(view.getZoom(), paint, canvas, tileBox);
+			drawSelectedFileSegments(currentTrack, true, canvas, tileBox, settings);
+		}
+	}
+
+	private void drawSelectedFileSegments(SelectedGpxFile selectedGpxFile, boolean currentTrack, Canvas canvas,
+										  RotatedTileBox tileBox, DrawSettings settings) {
+		GpxDataItem gpxDataItem = null;
+		if (!currentTrack) {
+			gpxDataItem = view.getApplication().getGpxDatabase().getItem(new File(selectedGpxFile.getGpxFile().path));
+		}
+		List<TrkSegment> segments = selectedGpxFile.getPointsToDisplay();
+		for (TrkSegment ts : segments) {
+			int color = gpxDataItem != null ? gpxDataItem.getColor() : 0;
+			if (currentTrack) {
+				color = currentTrackColor;
 			}
+			if (color == 0) {
+				color = ts.getColor(cachedColor);
+			}
+			if (ts.renders.isEmpty()                // only do once (CODE HERE NEEDS TO BE UI INSTEAD)
+					&& !ts.points.isEmpty()) {        // hmmm. 0-point tracks happen, but.... how?
+				if (currentTrack) {
+					ts.renders.add(new Renderable.CurrentTrack(ts.points));
+				} else {
+					ts.renders.add(new Renderable.StandardTrack(ts.points, 17.2));
+				}
+			}
+			updatePaints(color, selectedGpxFile.isRoutePoints(), currentTrack, settings, tileBox);
+			ts.drawRenderers(view.getZoom(), paint, canvas, tileBox);
 		}
 	}
 
