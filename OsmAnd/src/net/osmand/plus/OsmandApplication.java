@@ -548,7 +548,10 @@ public class OsmandApplication extends MultiDexApplication {
 	}
 
 	public void startApplication() {
-		Thread.setDefaultUncaughtExceptionHandler(new DefaultExceptionHandler());
+		UncaughtExceptionHandler uncaughtExceptionHandler = Thread.getDefaultUncaughtExceptionHandler();
+		if (!(uncaughtExceptionHandler instanceof DefaultExceptionHandler)) {
+			Thread.setDefaultUncaughtExceptionHandler(new DefaultExceptionHandler());
+		}
 		appInitializer.startApplication();
 	}
 
