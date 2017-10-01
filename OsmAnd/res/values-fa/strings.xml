@@ -1552,7 +1552,7 @@
     <string name="osmo_specify_tracker_id">لطفا ID را وارد کنید</string>
     <string name="continue_navigation">ادامه ناوبری</string>
     <string name="pause_navigation">توقف ناوبری</string>
-    <string name="rendering_attr_subwayMode_name">مسیر مترو</string>
+    <string name="rendering_attr_subwayMode_name">مسیرهای مترو</string>
  	<string name="map_preferred_locale_descr">زبان ارجح برای علایم روی نقشه(اگر غیر فعال باشد به انگلیسی یا نام محلی تغییر می یابد)</string>
     <string name="local_map_names">نامهای محلی</string>
     <string name="live_monitoring_m_descr">مسیر را اگر ضبط GPX فعال است به یک سرویس اینترنتی مشخص ارسال کنید.</string>
@@ -1643,20 +1643,20 @@
 	<string name="map_locale">زبان نقشه</string>
     <string name="navigate_point_zone">ناحیه</string>
     <string name="download_tab_local">محلی</string>
-	<string name="no_internet_connection">دانلود امکانپذیر نیست، لطفا اتصال اینترنت‌تان را بررسی کنید.</string>
-    <string name="everything_up_to_date">همه فایلها به روز میباشند</string>
+	<string name="no_internet_connection">دانلود امکان‌پذیر نیست، لطفاً اتصال اینترنتتان را بررسی کنید.</string>
+    <string name="everything_up_to_date">همهٔ فایل‌ها به‌روز است</string>
     <string name="home_button">خانه</string>
     
     
 	
-	<string name="error_avoid_specific_road">مسیر میانبر یافت نشد</string>
-    <string name="map_update">به روز زسانی برای %1$s نقشه وجود دارد</string>
-	<string name="search_for">جستجوی</string>
+	<string name="error_avoid_specific_road">مسیر دیگری یافت نشد</string>
+    <string name="map_update">برای %1$s نقشه به‌روزرسانی وجود دارد</string>
+	<string name="search_for">جست‌وجوی</string>
 	
 	<string name="shared_string_show_all">نمایش همه</string>
 	<string name="coordinates">مختصات</string>
-	<string name="rendering_attr_tramTrainRoutes_name">مسیر تراموا و قطار</string>
-	<string name="wake_on_voice">روشن کردن صفحه</string>
+	<string name="rendering_attr_tramTrainRoutes_name">مسیرهای تراموا و قطار</string>
+	<string name="wake_on_voice">روشن‌کردن صفحه‌نمایش</string>
     <string name="dash_download_manage">مدیریت</string>
     <string name="dash_download_new_one">دانلود نقشهٔ جدید</string>
     <string name="dash_download_msg">شما %1$s نقشه دانلود کرده‌اید</string>
@@ -1665,14 +1665,14 @@
     <string name="rendering_value_americanRoadAtlas_name">اطلس راه‌های آمریکایی</string>
     
     <string name="impassable_road">اجتناب از راه‌های…</string>
-    <string name="rendering_attr_trainLightrailRoutes_name">مسیر قطار</string>
-    <string name="rendering_attr_tramRoutes_name">مسیر تراموا</string>
-    <string name="rendering_attr_shareTaxiRoutes_name">به اشتراک گزاری مسیر تاکسی</string>
-    <string name="rendering_category_hide">مخفی کردن</string>
+    <string name="rendering_attr_trainLightrailRoutes_name">مسیرهای قطار</string>
+    <string name="rendering_attr_tramRoutes_name">مسیرهای تراموا</string>
+    <string name="rendering_attr_shareTaxiRoutes_name">به‌اشتراک‌گذاری مسیرهای تاکسی</string>
+    <string name="rendering_category_hide">مخفی‌کردن</string>
     <string name="rendering_category_details">جزئیات</string>
-    <string name="rendering_category_transport">حمل و نقل</string>
+    <string name="rendering_category_transport">حمل‌ونقل</string>
     <string name="rendering_category_others">خصوصیات دیگر نقشه</string>
-    <string name="map_widget_appearance_rem">عناصر باقیمانده</string>
+    <string name="map_widget_appearance_rem">عناصر باقی‌مانده</string>
     <string name="map_widget_top">نوار وضعیت</string>
 	<string name="map_widget_right">پانل راست</string>
 	<string name="map_widget_left">پانل چپ</string>
@@ -1708,15 +1708,15 @@
 	<string name="show_pedestrian_warnings">گذرگاه‌های پیاده</string>
     <string name="routing_attr_no_new_routing_name">استفاده‌نکردن از قوائد مسیریابی نسخهٔ ۱٫۹</string>
     <string name="rendering_attr_transportStops_name">ایستگاه‌های حمل‌ونقل</string>
-    <string name="navigate_point_northing">به طرف شمال</string>
-    <string name="navigate_point_easting">به طرف شرق</string>
-    <string name="download_tab_downloads">همه دانلودها</string>
+    <string name="navigate_point_northing">به‌طرف شمال</string>
+    <string name="navigate_point_easting">به‌طرف شرق</string>
+    <string name="download_tab_downloads">همهٔ دانلودها</string>
     <string name="download_tab_updates">به‌روز‌رسانی‌ها</string>
     <string name="shared_string_dismiss">نپذیرفتن</string>
     <string name="use_opengl_render">استفاده از رندرینگ OpenGL</string>
-    <string name="use_opengl_render_descr">استفاده از رندریگ تسریع‌یافته OpenGL (بر روی برخی دستگاه‌ها کار نمیکند)</string>
-    <string name="lock_screen_request_explanation">%1$s این مجوز را نیاز دارد تا خصوصیت صرفه‌جویی انرژی صقجه نمایش را خاموش کند.</string>
-    <string name="wake_on_voice_descr">صفحه نمایش قبل از رسیدن به پیچ، روشن شود (اگر خاموش است)</string>
+    <string name="use_opengl_render_descr">از رندرینگ سرعت‌یافتهٔ OpenGL استفاده کن (روی برخی دستگاه‌ها کار نمی‌کند)</string>
+    <string name="lock_screen_request_explanation">%1$s به این مجوز نیاز دارد تا برای صرفه‌جویی انرژی، صفحه‌نمایش را خاموش کند.</string>
+    <string name="wake_on_voice_descr">هنگام رسیدن به پیچ، صفحه‌نمایش روشن شود (اگر خاموش است)</string>
     <string name="shared_string_never">هرگز</string>
     <string name="rendering_attr_trolleybusRoutes_name">مسیرهای اتوبوس برقی</string>
     <string name="rendering_attr_busRoutes_name">مسیرهای اتوبوس</string>
