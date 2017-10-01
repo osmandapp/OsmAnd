@@ -2806,7 +2806,7 @@ Indikas lokon:  %1$s x %2$s"</string>
     <string name="shared_string_markers">Markoj</string>
     <string name="coordinates_format">Formo de koordinatoj</string>
     <string name="use_system_keyboard">Uzi sisteman klavaron</string>
-    <string name="fast_coordinates_input_descr">Elektu formon de koordinatoj antaŭ starto. Vi ĉiam povas ŝanĝi ĝin per malfermi agordojn.</string>
+    <string name="fast_coordinates_input_descr">Elektu formon de koordinatoj. Vi ĉiam povas ŝanĝi ĝin per malfermi agordojn.</string>
     <string name="fast_coordinates_input">Rapida enigo de koordinatoj</string>
     <string name="routing_attr_avoid_ice_roads_fords_name">Eviti glaci-vojojn, travadejojn</string>
     <string name="routing_attr_avoid_ice_roads_fords_description">Eviti glaciajn vojojn kaj travadejojn</string>
