@@ -935,7 +935,7 @@ Se aprecia la participación activa, y las contribuciones pueden hacerse directa
     <string name="int_continuosly">Continuamente</string>
     <string name="screen_is_locked">Para desbloquear la pantalla pulsa el icono del candado</string>
     <string name="map_widget_top_text">Nombre de calle</string>
-    <string name="map_widget_config">Configuración</string>
+    <string name="map_widget_config">Configurar pantalla</string>
     <string name="map_widget_back_to_loc">Dónde estoy</string>
     <string name="map_widget_lock_screen">Bloquear pantalla</string>
     <string name="map_widget_compass">Brújula</string>
