@@ -466,7 +466,7 @@
 	
 	<string name="prefs_plugins_descr">افزونه ها، تنظیمات پیشرفته و قابلیتهای بیشتری را فعال میکنند</string>
 	<string name="prefs_plugins">افزونه ها</string>
-	<string name="debugging_and_development">توسعه OsmAnd</string>
+	<string name="debugging_and_development">توسعهٔ OsmAnd</string>
 	<string name="send_files_to_osm">فایلهای GPX به OSM ارسال شوند؟</string>
 	<string name="gpx_visibility_txt">قابلیت دید</string>
 	<string name="gpx_tags_txt">تگ ها</string>
@@ -1091,7 +1091,7 @@
 \n
 \nنقشه‌های کاشی‌مانند مستقیماً از طریق منابع آنلاین قابل‌دریافت هستند یا می‌توان آن‌ها را به‌صورت پایگاه داده SQLite برای استفادهٔ آفلاین (با قراردادن در پوشهٔ دیتای OsmAnd) آماده کرد که برنامه‌های مختلفی برای آماده‌سازی آن وجود دارد."</string>
 	
-	<string name="osmand_accessibility_description">نمایش تنظیمات برای ویژگی دسترسی خاص.</string>
+	<string name="osmand_accessibility_description">این افزونه ویژگی‌های قابلیت‌دسترسیِ دستگاهتان را مستقیماً در OsmAnd به‌کار می‌گیرد و تسهیلاتی را در اختیارتان می‌گذارد؛ مانند تنظیم‌کردن نرخ گفتار موتور صوتی، خوانش متن (مثلاً اعلام موقعیت شما)، تنظیم کلیدهای جهتی برای پیمایش صفحه و استفاده از توپک برای تنظیم بزرگ‌نمایی.</string>
 	
 	
 	
@@ -1105,7 +1105,7 @@
 	<string name="zoom_by_trackball_descr">تغییر زوم نقشه توسط حرکت افقی گوی مکان نما</string>
 	<string name="zoom_by_trackball">استفاده از گوی مکان نما برای کنترل زوم</string>
 	<string name="accessibility_preferences_descr">تنظیمات مربوط به دسترسی</string>
-	<string name="shared_string_accessibility">دسترسی</string>
+	<string name="shared_string_accessibility">قابلیت دسترسی</string>
 	
 	<string name="live_monitoring_url_descr">تعیین آدرس وب سایت با پارامترهای: lat={0}, lon={1}, timestamp={2}, hdop={3}, altitude={4}, speed={5}, bearing={6}</string>
 	<string name="live_monitoring_url">آدرس وبسایت ذخیره سازی آنلاین مسیر</string>
@@ -1601,34 +1601,34 @@
 	<string name="rename_failed">تغییر نام انجام نشد.</string>
 	<string name="days_behind">روز قبل</string>
 	<string name="shared_string_currently_recording_track">مسیر در حال ضبط</string>
-	<string name="back_to_map">برگشت به نقشه</string>
+	<string name="back_to_map">برگشتن به نقشه</string>
 	<string name="plugin_touringview_name">نمای نقشه درحال تور</string>
 	<string name="shared_string_audio">صدا</string>
 	
 	
-	<string name="share_note">به اشتراک گزاری یادداشت</string>
+	<string name="share_note">به‌اشتراک‌گذاری یادداشت</string>
 	
     <string name="location_on_map">موقعیت:
 \n عرض %1$s
 \n طول %2$s</string>
-	<string name="watch">دیدن</string>
-	<string name="notes">یادداشتها</string>
-	<string name="online_map">نقشه آنلاین</string>
+	<string name="watch">مشاهده</string>
+	<string name="notes">یادداشت‌ها</string>
+	<string name="online_map">نقشهٔ آنلاین</string>
 	<string name="roads_only">فقط راه‌ها</string>
-    <string name="rendering_attr_pisteRoutes_name">پیست‌ها</string>
-	<string name="device_memory">حافظه دستگاه</string>
-    <string name="rendering_attr_pisteGrooming_name">نظافت پیست اسکی</string>
+    <string name="rendering_attr_pisteRoutes_name">سراشیبی‌های اسکی</string>
+	<string name="device_memory">حافظهٔ دستگاه</string>
+    <string name="rendering_attr_pisteGrooming_name">آماده‌سازی پیست</string>
     <string name="plugin_ski_name">نمای نقشهٔ اسکی</string>
     <string name="plugin_nautical_name">نمای نقشهٔ دریایی</string>
-    <string name="world_ski_missing">برای نمابش نقشه‌های اسکی بایستی نقشه‌های آقلاین مورد نیاز دانلود شود</string>
+    <string name="world_ski_missing">برای نمایش نقشه‌های اسکی باید نقشهٔ آفلاین آن را دانلود کنید</string>
     <string name="edit_group">ویرایش گروه</string>
-    <string name="parking_place">محل پارک خودرو</string>
+    <string name="parking_place">جای پارک</string>
     <string name="remove_the_tag">برداشتن تگ</string>
     <string name="gps_status">وضعیت GPS</string>
     <string name="version_settings_descr">دانلود نسخه‌های آزمایشی</string>
     <string name="rendering_attr_streetLighting_name">روشنایی خیابان</string>
     <string name="proxy_pref_title">پروکسی</string>
-    <string name="proxy_pref_descr">تنظیم ارتباط پروکسی اینترنت</string>
+    <string name="proxy_pref_descr">تنظیم ارتباط اینترنتی با پروکسی</string>
     <string name="points">نقاط</string>
     
     <string name="shared_string_my_location">موقعیت من</string>
@@ -1638,8 +1638,8 @@
 	<string name="rendering_attr_roadStyle_name">ظاهر جاده</string>
     <string name="rendering_value_default_name">پیش‌فرض</string>
     <string name="rendering_value_orange_name">نارنجی</string>
-    <string name="rendering_value_germanRoadAtlas_name">اطلس راه‌های آلمانی</string>
-	<string name="traffic_warning_railways">تقاطع با راه‌آهن</string>
+    <string name="rendering_value_germanRoadAtlas_name">اطلس راه‌های آلمان</string>
+	<string name="traffic_warning_railways">تقاطع جاده با راه‌آهن</string>
 	<string name="map_locale">زبان نقشه</string>
     <string name="navigate_point_zone">ناحیه</string>
     <string name="download_tab_local">محلی</string>
@@ -1658,10 +1658,10 @@
 	<string name="rendering_attr_tramTrainRoutes_name">مسیر تراموا و قطار</string>
 	<string name="wake_on_voice">روشن کردن صفحه</string>
     <string name="dash_download_manage">مدیریت</string>
-    <string name="dash_download_new_one">دانلود نقشه جدید</string>
+    <string name="dash_download_new_one">دانلود نقشهٔ جدید</string>
     <string name="dash_download_msg">شما %1$s نقشه دانلود کرده‌اید</string>
-    <string name="dash_download_msg_none">آیا میخواهید نقشه‌های آفلاین را دانلود کنید؟</string>
-    <string name="routing_attr_no_new_routing_description">از سیستم مسیریابی نسخه 1.9 استفاده نشود</string>
+    <string name="dash_download_msg_none">آیا می‌خواهید نقشه‌های آفلاین را دانلود کنید؟</string>
+    <string name="routing_attr_no_new_routing_description">از قوائد مسیریابی معرفی‌شده در نسخهٔ ۱٫۹ استفاده نکن</string>
     <string name="rendering_value_americanRoadAtlas_name">اطلس راه‌های آمریکایی</string>
     
     <string name="impassable_road">اجتناب از راه‌های…</string>
@@ -1697,17 +1697,17 @@
 	<string name="enable_proxy_descr">پروکسی HTTP برای همه تقاضاهای شبکه پیکربندی شود</string>
 	<string name="proxy_host_title">میزبان پروکسی</string>
 	<string name="proxy_port_title">پورت پروکسی</string>
-	<string name="nautical_maps_missing">جهت نمایش نقشه‌های ناتیکال، بایستی نقشه مخصوص آن دانلود شود</string>
+	<string name="nautical_maps_missing">برای نمایش نقشه‌های دریایی باید نقشهٔ آفلاین آن را دانلود کنید</string>
 	<string name="version_settings">ویرایش</string>
-    <string name="settings_privacy">حریم</string>
+    <string name="settings_privacy">حریم خصوصی</string>
     <string name="navigation_over_track">مسیریابی بر روی مسیر شروع شود؟</string>
-	<string name="avoid_roads_msg">میتوانید مسیر دیگری را با انتخاب راه‌های اجتنابی مشاهده کنید</string>
-    <string name="speak_pedestrian">تقاطع‌های پیاده‌رو</string>
-    <string name="traffic_warning_pedestrian">تقاطع‌ پیاده‌رو</string>
-	<string name="show_railway_warnings">تقاطع‌های ریلی نشان داده شوند</string>
-	<string name="show_pedestrian_warnings">تقاطع‌های پیاده‌رو نشان داده شوند</string>
-    <string name="routing_attr_no_new_routing_name">عدم استفاده ازقوانین مسیریابی نسخه 1.9</string>
-    <string name="rendering_attr_transportStops_name">ایستگاه‌های حمل و نقل عمومی</string>
+	<string name="avoid_roads_msg">"می‌توانید با انتخاب راه‌های اجتنابی  مسیر دیگری را مشاهده کنید"</string>
+    <string name="speak_pedestrian">گذرگاه‌های پیاده</string>
+    <string name="traffic_warning_pedestrian">گذرگاه پیاده</string>
+	<string name="show_railway_warnings">تقاطع‌های ریلی</string>
+	<string name="show_pedestrian_warnings">گذرگاه‌های پیاده</string>
+    <string name="routing_attr_no_new_routing_name">استفاده‌نکردن از قوائد مسیریابی نسخهٔ ۱٫۹</string>
+    <string name="rendering_attr_transportStops_name">ایستگاه‌های حمل‌ونقل</string>
     <string name="navigate_point_northing">به طرف شمال</string>
     <string name="navigate_point_easting">به طرف شرق</string>
     <string name="download_tab_downloads">همه دانلودها</string>
@@ -1799,8 +1799,8 @@
 	<string name="track_segments">قطعات مسیر</string>
 	<string name="track_points">نقاط مسیر</string>
 	<string name="free">"آزاد %1$s… "</string>
-	<string name="rendering_value__name">پیشفرض</string>
-    <string name="rendering_value_highContrastRoads_name">جاده‌های کنتراست بالا</string>
+	<string name="rendering_value__name">پیش‌فرض</string>
+    <string name="rendering_value_highContrastRoads_name">جاده‌های با کنتراست بالا</string>
 	<string name="osmo_no_connection_msg">نمی‌توان به سرور OsMo متصل شد:
 \n- اتصال اینترنتی خود را بررسی کنید؛
 \n- تنظیمات را بررسی کنید؛
@@ -2329,4 +2329,12 @@
     <string name="osmand_parking_hour">ساعت</string>
     <string name="osmand_parking_minute">دقیقه</string>
     <string name="shared_string_collapse">جمع‌کردن</string>
+    <string name="rendering_attr_roadStyle_description">ظاهر جاده</string>
+    <string name="navigate_point_olc">کدِ مکانی باز (OLC)</string>
+    <string name="navigate_point_olc_info_invalid">OLC نامعتبر است
+\n</string>
+    <string name="navigate_point_olc_info_short">کد OLC بیش از حد کوتاه است
+\nلطفاً کد کامل را ارائه دهید</string>
+    <string name="navigate_point_olc_info_area">کد OLC معتبر
+\nمکان متناظر:‬ ‎ %1$s x %2$s</string>
     </resources>
