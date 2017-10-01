@@ -935,7 +935,7 @@ Se aprecia la participación activa, y las contribuciones pueden hacerse directa
     <string name="int_continuosly">Continuamente</string>
     <string name="screen_is_locked">Para desbloquear la pantalla pulsa el icono del candado</string>
     <string name="map_widget_top_text">Nombre de calle</string>
-    <string name="map_widget_config">Configuración</string>
+    <string name="map_widget_config">Configurar pantalla</string>
     <string name="map_widget_back_to_loc">Dónde estoy</string>
     <string name="map_widget_lock_screen">Bloquear pantalla</string>
     <string name="map_widget_compass">Brújula</string>
@@ -2782,7 +2782,7 @@ Proporciona un código completo</string>
     <string name="shared_string_markers">Marcadores</string>
     <string name="coordinates_format">Formato de coordenadas</string>
     <string name="use_system_keyboard">Usar teclado del sistema</string>
-    <string name="fast_coordinates_input_descr">Elige el formato de coordenadas. Siempre puedes cambiarlo en «Opciones».</string>
+    <string name="fast_coordinates_input_descr">Elige el formato de ingreso de las coordenadas. Siempre se puede cambiar en «Opciones».</string>
     <string name="fast_coordinates_input">Ingreso rápido de coordenadas</string>
     <string name="routing_attr_avoid_ice_roads_fords_name">Evitar caminos de hielo y vados</string>
     <string name="routing_attr_avoid_ice_roads_fords_description">Evita pasar por caminos con hielo y vados</string>
