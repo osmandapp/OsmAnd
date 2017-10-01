@@ -63,8 +63,8 @@
     <string name="map_widget_av_notes">یاداشتهای صوتی/تصویری</string>
     
     <string name="map_widget_audionotes">یادداشتهای صوتی</string>
-    <string name="audionotes_plugin_description">افزونه یادداشت صوتی/ویدئویی قابلیت یادداشت‌برداری صوتی یا عکس یا ویدئو را درحین سفرفراهم می‌کند.اینکار با استفاده از دکمه‌ای بر روی صفحه نقشه و یا مستقیماً از منوی زمینه‌ای با فشار دادن هر نقطه روی صفحه امکان‌پذیر است.</string>
-    <string name="audionotes_plugin_name">یادداشتهای صوتی/تصویری</string>
+    <string name="audionotes_plugin_description">"با استفاده از افزونهٔ یادداشت صوتی/ویدئویی در حین سفر یادداشت‌های صوتی/تصویری/ویدئویی بگذارید. این کار با استفاده از دکمه‌ای بر روی صفحهٔ نقشه امکان‌پذیر است. همچنین می‌توانید با استفاده از منوی زمینه برای هر نقطه روی نقشه  یادداشت بگذارید."</string>
+    <string name="audionotes_plugin_name">یادداشت‌های صوتی/تصویری</string>
     <string name="download_select_map_types">نقشه‌های دیگر</string>
     <string name="download_regular_maps">نقشه عادی</string>
     <string name="download_roads_only_maps">فقط نقشه جاده‌ها</string>
@@ -152,10 +152,8 @@
 	<string name="osmand_parking_pm">بعدازظهر</string>
 	<string name="osmand_parking_am">قبل ازظهر</string>
 	<string name="osmand_parking_position_name">نقطه پارک</string>
-	<string name="osmand_parking_plugin_description">با افزونه «جای پارک» محل پارک کردن خورویتان و زمان باقی‌مانده (اگر پارکینگ محدودیت زمانی دارد) را به خاطر بسپارید.
-
-هم مکان و هم زمان بر روی داشبورد OsmAnd و ویجت افزونه روی صفحه نقشه قابل رؤیت هستند. همچنین میتوان هشداری را به عنوان یادآور به تقویم اندروید اضافه کرد.</string>
-	<string name="osmand_parking_plugin_name">افزونه موقعیت پارکینگ</string>
+	<string name="osmand_parking_plugin_description">با افزونهٔ «جای پارک» محل پارک کردن خورویتان را به خاطر بسپارید و اگر پارکینگ محدودیت زمانی دارد حساب زمان باقی‌مانده را داشته باشید. هم مکان و هم زمان در پیشخوان OsmAnd و نیز در ابزارک افزونه روی صفحهٔ نقشه قابل رؤیت است. همچنین می‌توانید برای یادآوری، هشداری را به تقویم اندروید اضافه کنید.</string>
+	<string name="osmand_parking_plugin_name">جای پارک</string>
 	<string name="context_menu_item_add_parking_point">علامتگذاری به عنوان محل پارک</string>
 	<string name="context_menu_item_delete_parking_point">حذف نشانگر محل پارک</string>
 	<string name="gpxup_public">عمومی</string>
@@ -584,7 +582,7 @@
 	
 	
 	<string name="filterpoi_activity">ایجاد فیلتر POI</string>
-	<string name="osmand_distance_planning_plugin_name">محاسبه‌گر مسافت و ابزار طرحریزی سفر</string>
+	<string name="osmand_distance_planning_plugin_name">محاسبه‌گر مسافت و ابزار طرح‌ریزی سفر</string>
     <string name="distance_measurement_finish_subtrack">شروع مسیر جدید</string>
     <string name="use_kalman_filter_compass_descr">اغتشاشات قطب نما را کاهش میدهد اما اینرسی را زیاد میکند</string>
     <string name="monitoring_settings">ضبط مسیر</string>
@@ -858,7 +856,7 @@
     <string name="speak_cameras">دوربین‌های سرعت سنج</string>
 	<string name="speak_traffic_warnings">هشدارهای ترافیکی</string>
 	
-    <string name="osmand_distance_planning_plugin_description">این افزونه، یک ویجت روی صفحه نقشه دارد که با آن می‌توان با کلیک روی نقشه مسیر ایجاد کرد و یا فایل GPX موجود را تغییر داد تا یک سفر را برنامه‌ریزی کنید و مسافت بین نقاط را اندازه بگیرید. نتیجه را نیز میتوان به صورت فایل GPX ذخیره کرد تا بعداً برای راهنمایی مورد استفاده قرار گیرد.</string>
+    <string name="osmand_distance_planning_plugin_description">این افزونه، یک ابزارک روی صفحهٔ نقشه می‌گذارد که با آن می‌توانید مسیرهایی را روی نقشه رسم کنید یا فایل‌های GPX موجود را تغییر دهید تا برای سفر طرح‌ریزی کنید و مسافت بین نقاط را اندازه بگیرید. نتیجه را هم می‌توانید به‌صورت فایل GPX ذخیره کنید تا بعداً از آن برای راهنمایی استفاده کنید.</string>
     
     
     
@@ -1620,8 +1618,8 @@
     <string name="rendering_attr_pisteRoutes_name">پیست‌ها</string>
 	<string name="device_memory">حافظه دستگاه</string>
     <string name="rendering_attr_pisteGrooming_name">نظافت پیست اسکی</string>
-    <string name="plugin_ski_name">نمای نقشه اسکی</string>
-    <string name="plugin_nautical_name">نمای نقشه ناتیکال</string>
+    <string name="plugin_ski_name">نمای نقشهٔ اسکی</string>
+    <string name="plugin_nautical_name">نمای نقشهٔ دریایی</string>
     <string name="world_ski_missing">برای نمابش نقشه‌های اسکی بایستی نقشه‌های آقلاین مورد نیاز دانلود شود</string>
     <string name="edit_group">ویرایش گروه</string>
     <string name="parking_place">محل پارک خودرو</string>
@@ -2265,7 +2263,7 @@
     <string name="osn_close_dialog_success">یادداشت بسته شد</string>
     <string name="osn_close_dialog_error">خطایی رخ داد: یادداشت بسته نشد</string>
     <string name="shared_string_location">موقعیت</string>
-    <string name="lang_nds"></string>
+    <string name="lang_nds"/>
     <string name="read_more">بیشتر بخوانید</string>
     <string name="whats_new">امکانات جدید در</string>
     <string name="shared_string_update">به‌روزرسانی</string>
