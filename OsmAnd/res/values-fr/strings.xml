@@ -2955,7 +2955,7 @@ représentant la zone : %1$s x %2$s</string>
     <string name="shared_string_markers">Marques</string>
     <string name="coordinates_format">Format des coordonnées</string>
     <string name="use_system_keyboard">Utiliser le clavier système</string>
-    <string name="fast_coordinates_input_descr">Définissez le format des coordonnées avec de démarrer. Vous pourrez les modifier plus tard dans les Options.</string>
+    <string name="fast_coordinates_input_descr">Définissez le format des coordonnées (ce format est modifiable plus tard dans Options).</string>
     <string name="fast_coordinates_input">Saisie rapide des coordonnées</string>
     <string name="routing_attr_avoid_ice_roads_fords_name">Éviter les routes sur glace, les fjords</string>
     <string name="routing_attr_avoid_ice_roads_fords_description">Éviter les routes sur glace et les fjords</string>
