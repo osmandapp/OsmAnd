@@ -727,8 +727,8 @@ public class MapControlsLayer extends OsmandMapLayer {
 		routePlanningBtn.updateVisibility(showButtons);
 		menuControl.updateVisibility(showButtons);
 
-		mapZoomIn.updateVisibility(!routeDialogOpened && !isInExpandedRouteMode());
-		mapZoomOut.updateVisibility(!routeDialogOpened && !isInExpandedRouteMode());
+		mapZoomIn.updateVisibility(!routeDialogOpened);
+		mapZoomOut.updateVisibility(!routeDialogOpened);
 		compassHud.updateVisibility(!routeDialogOpened && !trackDialogOpened && shouldShowCompass()
 				&& !isInMeasurementToolMode() && !isInPlanRouteMode());
 
@@ -814,7 +814,7 @@ public class MapControlsLayer extends OsmandMapLayer {
 			backToLocationControl.iv.setContentDescription(mapActivity.getString(R.string.map_widget_back_to_loc));
 		}
 		boolean visible = !(tracked && rh.isFollowingMode());
-		backToLocationControl.updateVisibility(visible && !dialogOpened && !isInExpandedRouteMode());
+		backToLocationControl.updateVisibility(visible && !dialogOpened);
 		if (app.accessibilityEnabled()) {
 			backToLocationControl.iv.setClickable(enabled && visible);
 		}
@@ -1134,10 +1134,6 @@ public class MapControlsLayer extends OsmandMapLayer {
 
 	private boolean isInPlanRouteMode() {
 		return mapActivity.getMapLayers().getMapMarkersLayer().isInPlanRouteMode();
-	}
-
-	private boolean isInExpandedRouteMode() {
-		return mapActivity.getMapLayers().getMapMarkersLayer().isMarkersListOpened();
 	}
 
 	public static View.OnLongClickListener getOnClickMagnifierListener(final OsmandMapTileView view) {

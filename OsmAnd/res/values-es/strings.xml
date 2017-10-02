@@ -2682,7 +2682,7 @@ Por favor proporciona un código completo</string>
     <string name="marker_show_distance_descr">Elige cómo se indica la distancia y dirección a los marcadores del mapa en la pantalla del mapa:</string>
     <string name="map_orientation_change_in_accordance_with_speed">Umbral de orientación del mapa</string>
     <string name="map_orientation_change_in_accordance_with_speed_descr">Elije la velocidad a partir de la cual la orientación del mapa cambia de «Dirección del movimiento» a «Brújula»</string>
-    <string name="all_markers_moved_to_history">Todos los marcadores del mapa movido al historial</string>
+    <string name="all_markers_moved_to_history">Todos los marcadores del mapa movidos al historial</string>
     <string name="marker_moved_to_history">Marcador del mapa movido al historial</string>
     <string name="marker_moved_to_active">Marcador del mapa movido a los activos</string>
     <string name="shared_string_list">Lista</string>
@@ -2700,12 +2700,12 @@ Por favor proporciona un código completo</string>
     <string name="show_passed">Mostrar fecha de «Último uso»</string>
     <string name="hide_passed">Ocultar fecha de «Último uso»</string>
     <string name="remove_from_map_markers">Eliminar de Map Markers</string>
-    <string name="descendingly">Descendente</string>
-    <string name="ascendingly">Ascendente</string>
+    <string name="descendingly">descendente</string>
+    <string name="ascendingly">ascendente</string>
     <string name="date_added">Fecha añadida</string>
     <string name="order_by">Ordenado por:</string>
     <string name="use_location">Usar ubicación</string>
-    <string name="add_location_as_first_point_descr">Añada su ubicación como primer punto para planificar la ruta perfecta.</string>
+    <string name="add_location_as_first_point_descr">Añade tu ubicación como primer punto para planificar la ruta perfecta.</string>
     <string name="my_location">Mi ubicación</string>
     <string name="shared_string_finish">Finalizar</string>
     <string name="plan_route">Planificar ruta</string>
@@ -2716,4 +2716,11 @@ Por favor proporciona un código completo</string>
     <string name="marker_save_as_track">Guardar como traza</string>
     <string name="move_to_history">Mover al historial</string>
     <string name="group_will_be_removed_after_restart">El grupo se quitará al reiniciar</string>
+    <string name="shared_string_markers">Marcadores</string>
+    <string name="coordinates_format">Formato de coordenadas</string>
+    <string name="use_system_keyboard">Usar el teclado del sistema</string>
+    <string name="fast_coordinates_input_descr">Elige el formato de entrada de coordenadas. Siempre puedes cambiarlo pulsando en Ajustes.</string>
+    <string name="fast_coordinates_input">Entrada rápida de coordenadas</string>
+    <string name="routing_attr_avoid_ice_roads_fords_name">Evitar carreteras de hielo, vados</string>
+    <string name="routing_attr_avoid_ice_roads_fords_description">Evita carreteras de hielo y vados</string>
     </resources>

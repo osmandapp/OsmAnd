@@ -50,6 +50,7 @@ import net.osmand.plus.views.ContextMenuLayer;
 import net.osmand.plus.views.OsmandMapLayer;
 import net.osmand.plus.views.mapwidgets.MapInfoWidgetsFactory.TopToolbarController;
 import net.osmand.plus.views.mapwidgets.MapInfoWidgetsFactory.TopToolbarControllerType;
+import net.osmand.util.Algorithms;
 import net.osmand.util.MapUtils;
 
 import java.lang.ref.WeakReference;
@@ -702,7 +703,7 @@ public class MapContextMenu extends MenuTitleController implements StateChangedL
 				mapActivity.getDashboard().setDashboardVisibility(true, DashboardOnMap.DashboardType.MAP_MARKERS);
 			} else {
 				mapActivity.getMapActions().addMapMarker(latLon.getLatitude(), latLon.getLongitude(),
-						getPointDescriptionForTarget());
+						getPointDescriptionForMarker());
 			}
 		} else {
 			mapActivity.getMapActions().addAsTarget(latLon.getLatitude(), latLon.getLongitude(),
@@ -876,6 +877,15 @@ public class MapContextMenu extends MenuTitleController implements StateChangedL
 			return new PointDescription(PointDescription.POINT_TYPE_LOCATION, "");
 		} else {
 			return pointDescription;
+		}
+	}
+
+	public PointDescription getPointDescriptionForMarker() {
+		PointDescription pd = getPointDescriptionForTarget();
+		if (Algorithms.isEmpty(pd.getName()) && !nameStr.equals(PointDescription.getAddressNotFoundStr(mapActivity))) {
+			return new PointDescription(PointDescription.POINT_TYPE_MAP_MARKER, nameStr);
+		} else {
+			return pd;
 		}
 	}
 
