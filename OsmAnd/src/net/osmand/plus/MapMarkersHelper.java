@@ -255,7 +255,7 @@ public class MapMarkersHelper {
 
 		List<MapMarker> activeMarkers = markersDbHelper.getActiveMarkers();
 		mapMarkers.addAll(activeMarkers);
-		checkAndFixActiveMarkersOrderIfNeeded();
+		reorderActiveMarkersIfNeeded();
 
 		List<MapMarker> markersHistory = markersDbHelper.getMarkersHistory();
 		sortMarkers(markersHistory, true, OsmandSettings.MapMarkersOrderByMode.DATE_ADDED_DESC);
@@ -266,7 +266,7 @@ public class MapMarkersHelper {
 		}
 	}
 
-	public void checkAndFixActiveMarkersOrderIfNeeded() {
+	public void reorderActiveMarkersIfNeeded() {
 		if (!mapMarkers.isEmpty()) {
 			if (mapMarkers.size() > 1) {
 				for (int i = 0; i < mapMarkers.size() - 1; i++) {
@@ -322,7 +322,7 @@ public class MapMarkersHelper {
 
 	public void orderMarkers(OsmandSettings.MapMarkersOrderByMode orderByMode) {
 		sortMarkers(getMapMarkers(), false, orderByMode);
-		checkAndFixActiveMarkersOrderIfNeeded();
+		reorderActiveMarkersIfNeeded();
 	}
 
 	private void lookupAddress(final MapMarker mapMarker) {
@@ -445,7 +445,7 @@ public class MapMarkersHelper {
 				}
 			}
 			if (needRefresh) {
-				checkAndFixActiveMarkersOrderIfNeeded();
+				reorderActiveMarkersIfNeeded();
 				refresh();
 			}
 		}
@@ -459,7 +459,7 @@ public class MapMarkersHelper {
 			marker.history = true;
 			marker.nextKey = MapMarkersDbHelper.HISTORY_NEXT_VALUE;
 			mapMarkersHistory.add(marker);
-			checkAndFixActiveMarkersOrderIfNeeded();
+			reorderActiveMarkersIfNeeded();
 			sortMarkers(mapMarkersHistory, true, OsmandSettings.MapMarkersOrderByMode.DATE_ADDED_DESC);
 			refresh();
 		}
@@ -473,7 +473,7 @@ public class MapMarkersHelper {
 				sortMarkers(mapMarkersHistory, true, OsmandSettings.MapMarkersOrderByMode.DATE_ADDED_DESC);
 			} else {
 				mapMarkers.add(marker);
-				checkAndFixActiveMarkersOrderIfNeeded();
+				reorderActiveMarkersIfNeeded();
 			}
 			addMarkerToGroup(marker);
 			refresh();
@@ -488,7 +488,7 @@ public class MapMarkersHelper {
 				sortMarkers(mapMarkersHistory, true, OsmandSettings.MapMarkersOrderByMode.DATE_ADDED_DESC);
 			} else {
 				mapMarkers.add(position, marker);
-				checkAndFixActiveMarkersOrderIfNeeded();
+				reorderActiveMarkersIfNeeded();
 			}
 			addMarkerToGroup(marker);
 			refresh();
@@ -501,7 +501,7 @@ public class MapMarkersHelper {
 			mapMarkersHistory.remove(marker);
 			marker.history = false;
 			mapMarkers.add(position, marker);
-			checkAndFixActiveMarkersOrderIfNeeded();
+			reorderActiveMarkersIfNeeded();
 			sortMarkers(mapMarkersHistory, true, OsmandSettings.MapMarkersOrderByMode.DATE_ADDED_DESC);
 			refresh();
 		}
@@ -515,7 +515,7 @@ public class MapMarkersHelper {
 				marker.history = false;
 				mapMarkers.add(marker);
 			}
-			checkAndFixActiveMarkersOrderIfNeeded();
+			reorderActiveMarkersIfNeeded();
 			sortMarkers(mapMarkersHistory, true, OsmandSettings.MapMarkersOrderByMode.DATE_ADDED_DESC);
 			updateGroups();
 			refresh();
@@ -606,7 +606,7 @@ public class MapMarkersHelper {
 
 		mapMarkers.removeAll(markersToRemove);
 		mapMarkers.addAll(0, markers);
-		checkAndFixActiveMarkersOrderIfNeeded();
+		reorderActiveMarkersIfNeeded();
 		ctx.getSettings().MAP_MARKERS_ORDER_BY_MODE.set(OsmandSettings.MapMarkersOrderByMode.CUSTOM);
 	}
 
@@ -639,7 +639,7 @@ public class MapMarkersHelper {
 	public void reverseActiveMarkersOrder() {
 		cancelAddressRequests();
 		Collections.reverse(mapMarkers);
-		checkAndFixActiveMarkersOrderIfNeeded();
+		reorderActiveMarkersIfNeeded();
 		ctx.getSettings().MAP_MARKERS_ORDER_BY_MODE.set(OsmandSettings.MapMarkersOrderByMode.CUSTOM);
 	}
 
@@ -708,7 +708,7 @@ public class MapMarkersHelper {
 					iterator.remove();
 				}
 			}
-			checkAndFixActiveMarkersOrderIfNeeded();
+			reorderActiveMarkersIfNeeded();
 			refresh();
 		}
 	}
@@ -760,7 +760,7 @@ public class MapMarkersHelper {
 				markersDbHelper.addMarker(marker);
 				mapMarkers.add(0, marker);
 				addMarkerToGroup(marker);
-				checkAndFixActiveMarkersOrderIfNeeded();
+				reorderActiveMarkersIfNeeded();
 			}
 		}
 	}
@@ -783,7 +783,7 @@ public class MapMarkersHelper {
 			}
 			marker.point = point;
 			markersDbHelper.updateMarker(marker);
-			checkAndFixActiveMarkersOrderIfNeeded();
+			reorderActiveMarkersIfNeeded();
 			refresh();
 			lookupAddress(marker);
 		}
@@ -794,7 +794,7 @@ public class MapMarkersHelper {
 		if (i != -1 && mapMarkers.size() > 1) {
 			mapMarkers.remove(i);
 			mapMarkers.add(0, marker);
-			checkAndFixActiveMarkersOrderIfNeeded();
+			reorderActiveMarkersIfNeeded();
 			refresh();
 		}
 	}
