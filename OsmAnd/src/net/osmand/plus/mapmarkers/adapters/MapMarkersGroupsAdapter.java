@@ -394,6 +394,11 @@ public class MapMarkersGroupsAdapter extends RecyclerView.Adapter<RecyclerView.V
 			final MapMarkersShowHideHistoryViewHolder showHideHistoryViewHolder = (MapMarkersShowHideHistoryViewHolder) holder;
 			final ShowHideHistoryButton showHideHistoryButton = (ShowHideHistoryButton) getItem(position);
 			final boolean showHistory = showHideHistoryButton.isShowHistory();
+			if (position == getItemCount() - 1) {
+				showHideHistoryViewHolder.bottomShadow.setVisibility(View.VISIBLE);
+			} else {
+				showHideHistoryViewHolder.bottomShadow.setVisibility(View.GONE);
+			}
 			showHideHistoryViewHolder.title.setText(app.getString(showHistory ? R.string.hide_passed : R.string.show_passed));
 			showHideHistoryViewHolder.itemView.setOnClickListener(new View.OnClickListener() {
 				@Override
