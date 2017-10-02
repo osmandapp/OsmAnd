@@ -452,26 +452,16 @@ public class MapContextMenu extends MenuTitleController implements StateChangedL
 	}
 
 	private void updateWidgetsAndTopbarsVisibility(boolean visible) {
-		updateVisibility(mapActivity.findViewById(R.id.map_markers_top_bar_layout), visible);
+		int visibility = visible ? View.VISIBLE : View.GONE;
+		mapActivity.findViewById(R.id.map_top_bar_layout).setVisibility(visibility);
+		mapActivity.findViewById(R.id.map_markers_top_bar_layout).setVisibility(visibility);
 		TopToolbarController controller = mapActivity.getTopToolbarController();
 		if (controller != null && controller.getType() != TopToolbarControllerType.CONTEXT_MENU) {
-			updateVisibility(mapActivity.findViewById(R.id.widget_top_bar), visible);
+			mapActivity.findViewById(R.id.widget_top_bar).setVisibility(visibility);
 		}
-		updateVisibility(mapActivity.findViewById(R.id.map_left_widgets_panel), visible);
-		updateVisibility(mapActivity.findViewById(R.id.map_right_widgets_panel), visible);
-	}
-
-	public boolean updateVisibility(View v, boolean visible) {
-		if (visible != (v.getVisibility() == View.VISIBLE)) {
-			if (visible) {
-				v.setVisibility(View.VISIBLE);
-			} else {
-				v.setVisibility(View.GONE);
-			}
-			v.invalidate();
-			return true;
-		}
-		return false;
+		mapActivity.findViewById(R.id.map_center_info).setVisibility(visibility);
+		mapActivity.findViewById(R.id.map_left_widgets_panel).setVisibility(visibility);
+		mapActivity.findViewById(R.id.map_right_widgets_panel).setVisibility(visibility);
 	}
 
 	// timeout in msec
