@@ -1162,7 +1162,6 @@ public class GPXUtilities {
        }
 
 	public static String writeGpxFile(File fout, GPXFile file, OsmandApplication ctx) {
-		file.removeGeneralTrackIfExists();
 		Writer output = null;
 		try {
 			output = new OutputStreamWriter(new FileOutputStream(fout), "UTF-8"); //$NON-NLS-1$
@@ -1202,20 +1201,22 @@ public class GPXUtilities {
 					"http://www.topografix.com/GPX/1/1 http://www.topografix.com/GPX/1/1/gpx.xsd");
 
 			for (Track track : file.tracks) {
-				serializer.startTag(null, "trk"); //$NON-NLS-1$
-				writeNotNullText(serializer, "name", track.name);
-				writeNotNullText(serializer, "desc", track.desc);
-				for (TrkSegment segment : track.segments) {
-					serializer.startTag(null, "trkseg"); //$NON-NLS-1$
-					for (WptPt p : segment.points) {
-						serializer.startTag(null, "trkpt"); //$NON-NLS-1$
-						writeWpt(format, serializer, p);
-						serializer.endTag(null, "trkpt"); //$NON-NLS-1$
+				if (!track.generalTrack) {
+					serializer.startTag(null, "trk"); //$NON-NLS-1$
+					writeNotNullText(serializer, "name", track.name);
+					writeNotNullText(serializer, "desc", track.desc);
+					for (TrkSegment segment : track.segments) {
+						serializer.startTag(null, "trkseg"); //$NON-NLS-1$
+						for (WptPt p : segment.points) {
+							serializer.startTag(null, "trkpt"); //$NON-NLS-1$
+							writeWpt(format, serializer, p);
+							serializer.endTag(null, "trkpt"); //$NON-NLS-1$
+						}
+						serializer.endTag(null, "trkseg"); //$NON-NLS-1$
 					}
-					serializer.endTag(null, "trkseg"); //$NON-NLS-1$
+					writeExtensions(serializer, track);
+					serializer.endTag(null, "trk"); //$NON-NLS-1$
 				}
-				writeExtensions(serializer, track);
-				serializer.endTag(null, "trk"); //$NON-NLS-1$
 			}
 
 			for (Route track : file.routes) {
