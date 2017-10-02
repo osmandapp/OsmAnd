@@ -253,6 +253,8 @@ public class PlanRouteFragment extends Fragment implements OsmAndLocationListene
 						// to avoid crash because of:
 						// java.lang.IllegalStateException: Cannot call this method while RecyclerView is computing a layout or scrolling
 					}
+					updateText();
+					showMarkersRouteOnMap();
 				}
 				uiUpdateAllowed = true;
 			}
