@@ -56,7 +56,7 @@ public class PlanRouteSortByBottomSheetDialogFragment extends BottomSheetDialogF
 			@Override
 			public void onClick(View view) {
 				if (listener != null) {
-					listener.doorByDoorOnClick();
+					listener.doorToDoorOnClick();
 					dismiss();
 				}
 			}
@@ -135,7 +135,7 @@ public class PlanRouteSortByBottomSheetDialogFragment extends BottomSheetDialogF
 
 	interface PlanRouteSortByFragmentListener {
 
-		void doorByDoorOnClick();
+		void doorToDoorOnClick();
 
 		void reverseOrderOnClick();
 	}

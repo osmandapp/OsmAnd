@@ -210,6 +210,9 @@ public class PlanRouteFragment extends Fragment implements OsmAndLocationListene
 			@Override
 			public void onItemClick(View view) {
 				int pos = markersRv.getChildAdapterPosition(view);
+				if (pos == RecyclerView.NO_POSITION) {
+					return;
+				}
 				if (pos == 0) {
 					markersHelper.setStartFromMyLocation(!mapActivity.getMyApplication().getSettings().ROUTE_MAP_MARKERS_START_MY_LOC.get());
 				} else {
@@ -358,7 +361,7 @@ public class PlanRouteFragment extends Fragment implements OsmAndLocationListene
 			private MapActivity mapActivity = getMapActivity();
 
 			@Override
-			public void doorByDoorOnClick() {
+			public void doorToDoorOnClick() {
 				if (mapActivity != null) {
 					Toast.makeText(mapActivity, "Door to Door", Toast.LENGTH_SHORT).show();
 				}
