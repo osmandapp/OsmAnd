@@ -186,11 +186,6 @@ public class MapMarkersListAdapter extends RecyclerView.Adapter<MapMarkerItemVie
 		listener.onDragEnded(holder);
 	}
 
-	public void reloadMarkers() {
-		markers = mapActivity.getMyApplication().getMapMarkersHelper().getMapMarkers();
-		notifyDataSetChanged();
-	}
-
 	public interface MapMarkersListAdapterListener {
 
 		void onItemClick(View view);

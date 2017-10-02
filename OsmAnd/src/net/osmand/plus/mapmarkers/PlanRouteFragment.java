@@ -1,6 +1,8 @@
 package net.osmand.plus.mapmarkers;
 
+import android.app.ProgressDialog;
 import android.graphics.drawable.Drawable;
+import android.os.AsyncTask;
 import android.os.Build;
 import android.os.Bundle;
 import android.support.annotation.DrawableRes;
@@ -23,6 +25,7 @@ import android.widget.Toast;
 
 import net.osmand.AndroidUtils;
 import net.osmand.Location;
+import net.osmand.TspAnt;
 import net.osmand.data.LatLon;
 import net.osmand.data.RotatedTileBox;
 import net.osmand.plus.ApplicationMode;
@@ -31,6 +34,7 @@ import net.osmand.plus.MapMarkersHelper;
 import net.osmand.plus.MapMarkersHelper.MapMarker;
 import net.osmand.plus.OsmAndFormatter;
 import net.osmand.plus.OsmAndLocationProvider.OsmAndLocationListener;
+import net.osmand.plus.OsmandApplication;
 import net.osmand.plus.OsmandSettings;
 import net.osmand.plus.R;
 import net.osmand.plus.activities.MapActivity;
@@ -48,7 +52,10 @@ import net.osmand.plus.views.mapwidgets.MapInfoWidgetsFactory;
 import net.osmand.plus.views.mapwidgets.MapInfoWidgetsFactory.TopToolbarController;
 import net.osmand.util.MapUtils;
 
+import java.util.ArrayList;
+import java.util.HashMap;
 import java.util.List;
+import java.util.Map;
 
 import static net.osmand.plus.OsmandSettings.LANDSCAPE_MIDDLE_RIGHT_CONSTANT;
 
@@ -363,7 +370,12 @@ public class PlanRouteFragment extends Fragment implements OsmAndLocationListene
 			@Override
 			public void doorToDoorOnClick() {
 				if (mapActivity != null) {
-					Toast.makeText(mapActivity, "Door to Door", Toast.LENGTH_SHORT).show();
+					OsmandApplication app = mapActivity.getMyApplication();
+					Location myLoc = app.getLocationProvider().getLastStaleKnownLocation();
+					boolean startFromLocation = app.getMapMarkersHelper().isStartFromMyLocation() && myLoc != null;
+					if (selectedCount > (startFromLocation ? 0 : 1)) {
+						sortSelectedMarkersDoorToDoor(mapActivity, startFromLocation, myLoc);
+					}
 				}
 			}
 
@@ -371,8 +383,7 @@ public class PlanRouteFragment extends Fragment implements OsmAndLocationListene
 			public void reverseOrderOnClick() {
 				if (mapActivity != null) {
 					markersHelper.reverseActiveMarkersOrder();
-					mapActivity.getMyApplication().getSettings().MAP_MARKERS_ORDER_BY_MODE.set(OsmandSettings.MapMarkersOrderByMode.CUSTOM);
-					adapter.reloadMarkers();
+					adapter.notifyDataSetChanged();
 				}
 			}
 		};
@@ -410,6 +421,7 @@ public class PlanRouteFragment extends Fragment implements OsmAndLocationListene
 			}
 			setupAppModesBtn();
 
+			selectedCount = mapActivity.getMyApplication().getMapMarkersHelper().getSelectedMarkersCount();
 			showMarkersRouteOnMap();
 			mapActivity.refreshMap();
 			updateText();
@@ -703,6 +715,76 @@ public class PlanRouteFragment extends Fragment implements OsmAndLocationListene
 		} catch (Exception e) {
 			return false;
 		}
+	}
+
+	private void sortSelectedMarkersDoorToDoor(final MapActivity mapActivity, final boolean startFromLoc, final Location myLoc) {
+		new AsyncTask<Void, Void, List<MapMarker>>() {
+
+			private ProgressDialog dialog;
+			private long startDialogTime;
+
+			@Override
+			protected void onPreExecute() {
+				startDialogTime = System.currentTimeMillis();
+				dialog = new ProgressDialog(mapActivity);
+				dialog.setTitle("");
+				dialog.setMessage(mapActivity.getString(R.string.intermediate_items_sort_by_distance));
+				dialog.setCancelable(false);
+				dialog.show();
+			}
+
+			@Override
+			protected List<MapMarker> doInBackground(Void... voids) {
+				List<MapMarker> selectedMarkers = mapActivity.getMyApplication().getMapMarkersHelper().getSelectedMarkers();
+				List<LatLon> selectedLatLon = new ArrayList<>(selectedMarkers.size());
+				LatLon[] keys = new LatLon[selectedMarkers.size()];
+				Map<LatLon, MapMarker> markersMap = new HashMap<>(selectedMarkers.size());
+
+				for (int i = 0; i < selectedMarkers.size(); i++) {
+					MapMarker m = selectedMarkers.get(i);
+					markersMap.put(m.point, m);
+					keys[i] = m.point;
+					selectedLatLon.add(m.point);
+				}
+
+				LatLon start = startFromLoc ? new LatLon(myLoc.getLatitude(), myLoc.getLongitude()) : selectedLatLon.remove(0);
+				LatLon end = selectedLatLon.remove(selectedLatLon.size() - 1);
+
+				int[] sequence = new TspAnt().readGraph(selectedLatLon, start, end).solve();
+
+				List<MapMarker> res = new ArrayList<>();
+				for (int i = 0; i < sequence.length; i++) {
+					if (i == 0 && startFromLoc) {
+						continue;
+					}
+					int index = sequence[startFromLoc ? i - 1 : i];
+					res.add(markersMap.get(keys[index]));
+				}
+
+				return res;
+			}
+
+			@Override
+			protected void onPostExecute(List<MapMarker> res) {
+				if (dialog != null) {
+					long t = System.currentTimeMillis();
+					if (t - startDialogTime < 500) {
+						mapActivity.getMyApplication().runInUIThread(new Runnable() {
+							@Override
+							public void run() {
+								dialog.dismiss();
+							}
+						}, 500 - (t - startDialogTime));
+					} else {
+						dialog.dismiss();
+					}
+				}
+
+				mapActivity.getMyApplication().getMapMarkersHelper().addSelectedMarkersToTop(res);
+
+				adapter.notifyDataSetChanged();
+			}
+		}.execute();
 	}
 
 	private class PlanRouteToolbarController extends TopToolbarController {

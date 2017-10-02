@@ -580,6 +580,36 @@ public class MapMarkersHelper {
 		return list;
 	}
 
+	public int getSelectedMarkersCount() {
+		int res = 0;
+		for (MapMarker m : this.mapMarkers) {
+			if (m.selected) {
+				res++;
+			}
+		}
+		return res;
+	}
+
+	public void addSelectedMarkersToTop(@NonNull List<MapMarker> markers) {
+		List<MapMarker> markersToRemove = new LinkedList<>();
+		for (MapMarker m : mapMarkers) {
+			if (m.selected) {
+				if (!markers.contains(m)) {
+					return;
+				}
+				markersToRemove.add(m);
+			}
+		}
+		if (markersToRemove.size() != markers.size()) {
+			return;
+		}
+
+		mapMarkers.removeAll(markersToRemove);
+		mapMarkers.addAll(0, markers);
+		checkAndFixActiveMarkersOrderIfNeeded();
+		ctx.getSettings().MAP_MARKERS_ORDER_BY_MODE.set(OsmandSettings.MapMarkersOrderByMode.CUSTOM);
+	}
+
 	public List<LatLon> getActiveMarkersLatLon() {
 		List<LatLon> list = new ArrayList<>();
 		for (MapMarker m : this.mapMarkers) {
@@ -610,6 +640,7 @@ public class MapMarkersHelper {
 		cancelAddressRequests();
 		Collections.reverse(mapMarkers);
 		checkAndFixActiveMarkersOrderIfNeeded();
+		ctx.getSettings().MAP_MARKERS_ORDER_BY_MODE.set(OsmandSettings.MapMarkersOrderByMode.CUSTOM);
 	}
 
 	public void moveAllActiveMarkersToHistory() {
