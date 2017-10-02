@@ -1621,7 +1621,7 @@ Memòria in proportzione %4$s MB (lìmite de Android %5$s MB, Dalvik %6$s MB).</
     <string name="traffic_warning_railways">Atraessamentu de sa ferrovia</string>
     <string name="traffic_warning_pedestrian">Atraessamentu pedonale</string>
     <string name="show_railway_warnings">Rugradas ferroviàrias</string>
-    <string name="show_pedestrian_warnings">Istrìscias pedonales</string>
+    <string name="show_pedestrian_warnings">Atraessamentos pedonales</string>
     <string name="speak_pedestrian">Atraessamentos pedonales</string>
 
     <string name="navigation_over_track">Incumentzare su nàvigu in sa rasta?</string>
@@ -2405,7 +2405,7 @@ Si istimas OsmAnd e OSM e los boles suportare, custa est una manera perfeta pro 
     <string name="search_map_hint">Chirca una tzitade o una regione</string>
     <string name="wiki_around">Artìculos de Wikipedia a curtzu</string>
     <string name="routing_attr_allow_motorway_name">Inclue sas autostradas</string>
-    <string name="routing_attr_allow_motorway_description">Permiti sas àndalas in sas autostradas</string>
+    <string name="routing_attr_allow_motorway_description">Inclue sas autostradas</string>
     <string name="lang_sr_latn">Serbu (caràteres latinos)</string>
     <string name="lang_zh_hk">Tzinesu (Hong Kong)</string>
     <string name="legacy_search">Chirca betza</string>
@@ -2570,7 +2570,7 @@ Pro praghere iscrie su còdighe intreu</string>
     <string name="routing_attr_driving_style_speed_name">Àndalas prus curtzas</string>
     <string name="routing_attr_driving_style_balance_name">Bilantziadu</string>
     <string name="routing_attr_driving_style_safety_name">Privilègia sas istradas segundàrias</string>
-    <string name="routing_attr_relief_smoothness_factor_name">Valore de variatzione de s\'artària</string>
+    <string name="routing_attr_relief_smoothness_factor_name">Ischerta su valore de variatzione de s\'artària</string>
     <string name="full_version_thanks">Gràtzias pro àere comporadu sa versione intrea de OsmAnd!</string>
     <string name="do_not_send_anonymous_app_usage">No imbies informatziones anònimas a pitzu de s\'impreu de s\'aplicatzione</string>
     <string name="do_not_send_anonymous_app_usage_desc">OsmAnd imbiat informatziones generales a pitzu de sas partes de s\'aplicatzione impreadas. Non retzimus perunu datu de geolocalizatzione, chi pertochet datos insertados dae s\'impreadore o a pitzu de sas àreas chi bides, chircas o iscàrrigas.</string>
@@ -2789,4 +2789,23 @@ Pro praghere iscrie su còdighe intreu</string>
     <string name="show_arrows_on_the_map">Ammustra sas fritzas in sa mapa</string>
     <string name="show_passed">Ammustra sa data de ùrtimu impreu</string>
     <string name="hide_passed">Istichi sa data de ùrtimu impreu</string>
+    <string name="shared_string_markers">Marcadores</string>
+    <string name="coordinates_format">Formadu de sas coordinatas</string>
+    <string name="use_system_keyboard">Imprea su tecladu de sistema</string>
+    <string name="fast_coordinates_input_descr">Issèbera su formadu de sas coordinatas in antis de incumintzare. L\'as a pòdere semper cambiare dae sas Optziones.</string>
+    <string name="fast_coordinates_input">Insertada lestra de sas coordinatas</string>
+    <string name="routing_attr_avoid_ice_roads_fords_name">Istransi sas istradas de astra, sos bados</string>
+    <string name="routing_attr_avoid_ice_roads_fords_description">Istransi sas istradas de astra e sos bados</string>
+    <string name="use_location">Imprea positzione</string>
+    <string name="add_location_as_first_point_descr">Annanghe sa positzione tua comente primu puntu pro pranificare un\'àndala perfeta.</string>
+    <string name="my_location">Positzione mea</string>
+    <string name="shared_string_finish">Acabba·la</string>
+    <string name="plan_route">Pranìfica àndala</string>
+    <string name="shared_string_sort">Òrdina</string>
+    <string name="coordinate_input">Insertada de sas coordinatas</string>
+    <string name="is_saved">est istadu sarvadu</string>
+    <string name="marker_save_as_track_descr">Esporta sos marcadores tuos in unu documentu chi podes dislindare inoghe:</string>
+    <string name="marker_save_as_track">Sarva comente rasta</string>
+    <string name="move_to_history">Pone in sa cronologia</string>
+    <string name="group_will_be_removed_after_restart">Su grupu at a èssere iscantzelladu a pustis de s\'allughìngiu imbeniente</string>
     </resources>
