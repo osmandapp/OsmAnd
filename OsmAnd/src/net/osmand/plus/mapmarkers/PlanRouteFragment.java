@@ -53,9 +53,7 @@ import net.osmand.plus.views.mapwidgets.MapInfoWidgetsFactory.TopToolbarControll
 import net.osmand.util.MapUtils;
 
 import java.util.ArrayList;
-import java.util.HashMap;
 import java.util.List;
-import java.util.Map;
 
 import static net.osmand.plus.OsmandSettings.LANDSCAPE_MIDDLE_RIGHT_CONSTANT;
 
@@ -735,17 +733,9 @@ public class PlanRouteFragment extends Fragment implements OsmAndLocationListene
 
 			@Override
 			protected List<MapMarker> doInBackground(Void... voids) {
-				List<MapMarker> selectedMarkers = mapActivity.getMyApplication().getMapMarkersHelper().getSelectedMarkers();
-				List<LatLon> selectedLatLon = new ArrayList<>(selectedMarkers.size());
-				LatLon[] keys = new LatLon[selectedMarkers.size()];
-				Map<LatLon, MapMarker> markersMap = new HashMap<>(selectedMarkers.size());
-
-				for (int i = 0; i < selectedMarkers.size(); i++) {
-					MapMarker m = selectedMarkers.get(i);
-					markersMap.put(m.point, m);
-					keys[i] = m.point;
-					selectedLatLon.add(m.point);
-				}
+				MapMarkersHelper markersHelper = mapActivity.getMyApplication().getMapMarkersHelper();
+				List<MapMarker> selectedMarkers = markersHelper.getSelectedMarkers();
+				List<LatLon> selectedLatLon = markersHelper.getSelectedMarkersLatLon();
 
 				LatLon start = startFromLoc ? new LatLon(myLoc.getLatitude(), myLoc.getLongitude()) : selectedLatLon.remove(0);
 				LatLon end = selectedLatLon.remove(selectedLatLon.size() - 1);
@@ -758,7 +748,7 @@ public class PlanRouteFragment extends Fragment implements OsmAndLocationListene
 						continue;
 					}
 					int index = sequence[startFromLoc ? i - 1 : i];
-					res.add(markersMap.get(keys[index]));
+					res.add(selectedMarkers.get(index));
 				}
 
 				return res;
