@@ -1251,4 +1251,19 @@
     <string name="quick_action_showhide_osmbugs_descr">לחיצה על כפתור הפעולה תגרום להצגת או הסתרה של הערות OSM על המפה.</string>
     <string name="sorted_by_distance">מסודר לפי מרחק</string>
     <string name="search_favorites">חיפוש במועדפים</string>
+    <string name="none_selected_gpx">לא נבחרו קובצי GPX. כדי לבחור אחד, יש ללחוץ לחיצה ארוכה על מסלול זמין.</string>
+    <string name="local_index_select_gpx_file">יש לבחור כדי להציג</string>
+    <string name="gpx_split_interval">משך פיצול</string>
+    <string name="sort_by_distance">סידור לפי מרחק</string>
+    <string name="sort_by_name">סידור לפי שם</string>
+    <string name="show_zoom_buttons_navigation_descr">הצגת לחצני תקריב במהלך ניווט</string>
+    <string name="show_zoom_buttons_navigation">הצגת לחצני תקריב</string>
+    <string name="save_as_favorites_points">שמירה כקבוצת מועדפים</string>
+    <string name="select_destination_and_intermediate_points">בחירת יעדים</string>
+    <string name="layer_amenity_label">תוויות נקודות</string>
+    <string name="loading_smth">%1$s בטעינה…</string>
+    <string name="map_widget_plain_time">הזמן הנוכחי</string>
+    <string name="selected_gpx_info_show">"
+\n
+\nלחיצה ארוכה לצפייה על המפה"</string>
     </resources>
