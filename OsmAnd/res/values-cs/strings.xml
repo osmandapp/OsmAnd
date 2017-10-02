@@ -2740,7 +2740,7 @@ Pokud potřebujete pomoci s aplikací OsmAnd, prosím kontaktujte naši podporu
     <string name="keep_showing_on_map">Stále zobrazovat na mapě</string>
     <string name="exit_without_saving">Ukončit bez uložení?</string>
     <string name="map_orientation_change_in_accordance_with_speed">Práh změny orientace mapy</string>
-    <string name="map_orientation_change_in_accordance_with_speed_descr">Vyberte rychlost při které se orientace mapy přepne z \"Ve směru pohybu\" na \"Kompas\"</string>
+    <string name="map_orientation_change_in_accordance_with_speed_descr">Zvolte rychlost při které se orientace mapy změní z \"Ve směru pohybu\" na \"Podle kompasu\"</string>
     <string name="all_markers_moved_to_history">Všechny mapové značky přesunuty do historie</string>
     <string name="marker_moved_to_history">Mapová značka přesunuta do historie</string>
     <string name="marker_moved_to_active">Mapová značka přesunuta do aktivních</string>
@@ -2762,15 +2762,25 @@ Pokud potřebujete pomoci s aplikací OsmAnd, prosím kontaktujte naši podporu
     <string name="shared_string_sort">Seřadit</string>
     <string name="coordinate_input">Zadání souřadnic</string>
     <string name="is_saved">je uložen</string>
-    <string name="marker_save_as_track_descr">OsmAnd bude ukládat všechny vaše značky do samostatného souboru, můžete zadat název souboru:</string>
+    <string name="marker_save_as_track_descr">Exportovat vaše značky do souboru, který můžete určit zde:</string>
     <string name="marker_save_as_track">Uložit jako trasu</string>
     <string name="move_to_history">Přesunout do historie</string>
     <string name="group_will_be_removed_after_restart">Skupina bude odstraněna po restartu</string>
     <string name="show_guide_line">Zobrazit vodítko</string>
     <string name="show_arrows_on_the_map">Zobrazit šipky na mapě</string>
     <string name="remove_from_map_markers">Odebrat z mapových značek</string>
-    <string name="descendingly">Sestupně</string>
-    <string name="ascendingly">Vzestupně</string>
+    <string name="descendingly">sestupně</string>
+    <string name="ascendingly">vzestupně</string>
     <string name="date_added">Datum přidání</string>
     <string name="order_by">Seřadit podle:</string>
+    <string name="shared_string_markers">Značky</string>
+    <string name="coordinates_format">Formát souřadnic</string>
+    <string name="use_system_keyboard">Použít systémovou klávesnici</string>
+    <string name="fast_coordinates_input_descr">Zvolte formát souřadnicového vstupu. Můžete ho kdykoli změnit klepnutím na Možnosti.</string>
+    <string name="fast_coordinates_input">Rychlé vložení souřadnic</string>
+    <string name="routing_attr_avoid_ice_roads_fords_name">Vyhnout se ledovým cestám, brodům</string>
+    <string name="routing_attr_avoid_ice_roads_fords_description">Vyhnout se ledovým cestám a brodům</string>
+    <string name="show_passed">Zobrazit datum \'Naposledy použité\'</string>
+    <string name="hide_passed">Skrýt datum \'Naposledy použité\'</string>
+    <string name="marker_show_distance_descr">Vyberte, jak ukazovat vzdálenost a směr k mapovým značkám na obrazovce mapy:</string>
     </resources>

@@ -145,7 +145,7 @@
     <string name="shared_string_accessibility">Accessibilitat</string>
     <string name="use_fluorescent_overlays_descr">Utilitza colors fluorescents per mostrar traces i rutes</string>
     <string name="local_openstreetmap_uploading">S\'està pujant…</string>
-    <string name="show_warnings_descr">Mostra límits de velocitat, radars i bandes rugoses</string>
+    <string name="show_warnings_descr">Configureu les notificacions de trànsit (límits de velocitat, cues, bandes rugoses), avisos de radars i informació dels carrils</string>
     <string name="osmand_parking_add_event">Afegeix un avís a l\'aplicació Calendari</string>
     <string name="rendering_attr_noPolygons_description">Fes transparents totes les característiques d\'àrees de sòl al mapa</string>
     <string name="edit_filter_create_message">S\'ha creat el filtre {0}</string>
@@ -986,7 +986,7 @@ Memòria proporcional %4$s MB (límit de l\'Android %5$s MB, Dalvik %6$s MB).</s
     <string name="poi_error_io_error_template">S\'ha produït un error d\'E/S durant l\'acció {0}.</string>
     <string name="announce_gpx_waypoints">Fites GPX</string>
     <string name="speak_title">Anuncia…</string>
-    <string name="speak_descr">Configureu per anunciar noms de carrer, avisos de trànsit (cues, bandes sonores), avisos de radar, límits de velocitat</string>
+    <string name="speak_descr">Configureu la notificació dels noms de carrer, incidències de trànsit (cues, bandes sonores), avisos de radar, límits de velocitat</string>
     <string name="speak_street_names">Noms de carrers (TTS)</string>
     <string name="speak_speed_limit">Límit de velocitat</string>
     <string name="speak_cameras">Radars</string>
@@ -1191,10 +1191,10 @@ Memòria proporcional %4$s MB (límit de l\'Android %5$s MB, Dalvik %6$s MB).</s
     <string name="share_route_as_gpx">Comparteix la ruta com un fitxer GPX</string>
     <string name="share_route_subject">Ruta compartida via OsmAnd</string>
     <string name="arrival_distance">Anunci d\'arribada</string>
-    <string name="arrival_distance_descr">Quan aviat vol l\'anunci d\'arribada?</string>
+    <string name="arrival_distance_descr">Amb quina antelació voleu l\'anunci d\'arribada?</string>
     <string name="keep_informing_never">Només manualment (premeu fletxa)</string>
-    <string name="keep_informing_descr">Anunci d\'instruccions de navegació a intervals regulars</string>
-    <string name="keep_informing">Repetir instruccions de navegació</string>
+    <string name="keep_informing_descr">Repeteix les instruccions de navegació a intervals regulars</string>
+    <string name="keep_informing">Repeteix les instruccions de navegació</string>
     <string name="navigation_intent_invalid">Format no vàlid: %s</string>
     
     <string name="route_descr_destination">Destí</string>
@@ -2633,8 +2633,8 @@ Abasta l\'àrea: %1$s x %2$s</string>
     <string name="widget">Giny</string>
     <string name="top_bar">Barra superior</string>
     <string name="remove_from_map_markers">Treu dels marcadors de mapa</string>
-    <string name="descendingly">Descendent</string>
-    <string name="ascendingly">Ascendent</string>
+    <string name="descendingly">descendent</string>
+    <string name="ascendingly">ascendent</string>
     <string name="date_added">S\'ha afegit la data</string>
     <string name="order_by">Ordena segons:</string>
     <string name="marker_show_distance_descr">Seleccioneu com indicar la distància i direcció vers els marcadors de mapa a la pantalla del mapa:</string>
@@ -2654,4 +2654,11 @@ Abasta l\'àrea: %1$s x %2$s</string>
     <string name="move_to_history">Mou a l\'historial</string>
     <string name="plan_route">Planifica la ruta</string>
     <string name="group_will_be_removed_after_restart">Ss\'esborrarà el grup després de reiniciar</string>
+    <string name="shared_string_markers">Marcadors</string>
+    <string name="coordinates_format">Format de coordenades</string>
+    <string name="use_system_keyboard">Utilitza el teclat del sistema</string>
+    <string name="fast_coordinates_input_descr">Trieu el format d\'entrada de coordenades. Sempre podeu canviar-lo dins les opcions.</string>
+    <string name="fast_coordinates_input">Entrada ràpida de coordenades</string>
+    <string name="routing_attr_avoid_ice_roads_fords_name">Evita les vies amb risc de gel, guals</string>
+    <string name="routing_attr_avoid_ice_roads_fords_description">Evita les vies amb risc de gel i els guals</string>
     </resources>
