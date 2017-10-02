@@ -1052,7 +1052,7 @@
 	
 	<string name="map_widget_vector_attributes">Налаштування візуалізації</string>
 	<string name="map_widget_renderer">Стиль мапи</string>
-	<string name="layer_map_appearance">Налаштування екрану</string>
+	<string name="layer_map_appearance">Налаштувати екран</string>
 	<string name="show_lanes">Смуги руху</string>
 	<string name="avoid_unpaved">Уникати польових доріг</string>
 	<string name="avoid_ferries">Уникати поромів</string>
@@ -1683,8 +1683,8 @@
     <string name="rendering_category_others">Інші властивості мапи</string>
     <string name="map_widget_appearance_rem">Решта елементів</string>
     <string name="map_widget_top">Рядок стану</string>
-	<string name="map_widget_right">Панель праворуч</string>
-	<string name="map_widget_left">Панель ліворуч</string>
+	<string name="map_widget_right">Права панель</string>
+	<string name="map_widget_left">Ліва панель</string>
     <string name="shared_string_show">Показати</string>
 	<string name="configure_map">Налаштування мапи</string>
     <string name="search_radius_proximity">В межах</string>
@@ -3014,8 +3014,8 @@
     <string name="last_seven_days">Останні 7 днів</string>
     <string name="this_year">Цього року</string>
     <string name="remove_from_map_markers">Вилучити з маркерів мапи</string>
-    <string name="descendingly">По спадаючій</string>
-    <string name="ascendingly">По зростанню</string>
+    <string name="descendingly">за спаданням</string>
+    <string name="ascendingly">за зростанням</string>
     <string name="date_added">Дата додавання</string>
     <string name="order_by">Сортувати за:</string>
     <string name="use_location">Використовувати розташування</string>
@@ -3026,7 +3026,7 @@
     <string name="shared_string_sort">Сортувати</string>
     <string name="coordinate_input">Введення координат</string>
     <string name="is_saved">збережено</string>
-    <string name="marker_save_as_track_descr">OsmAnd збереже усі Ваші маркери в окремий файл. Ви можете ввести назву файлу:</string>
+    <string name="marker_save_as_track_descr">Експортувати Ваші маркери у файл, який Ви можете вказати тут:</string>
     <string name="marker_save_as_track">Зберегти як трек</string>
     <string name="move_to_history">Перемістити в історію</string>
     <string name="group_will_be_removed_after_restart">Група буде вилучена після перезапуску</string>
@@ -3034,4 +3034,11 @@
     <string name="show_arrows_on_the_map">Показати стрілки на мапі</string>
     <string name="show_passed">Показати дату останнього використання</string>
     <string name="hide_passed">Приховати дату останнього використання</string>
+    <string name="shared_string_markers">Маркери</string>
+    <string name="coordinates_format">Формат координат</string>
+    <string name="use_system_keyboard">Використовувати системну клавіатуру</string>
+    <string name="fast_coordinates_input_descr">Вибрати формат вводу координат. Ви завжди можете змінити його, натиснувши „Параметри“.</string>
+    <string name="fast_coordinates_input">Швидке введення координат</string>
+    <string name="routing_attr_avoid_ice_roads_fords_name">Уникати льодових доріг і бродів</string>
+    <string name="routing_attr_avoid_ice_roads_fords_description">Уникає льодових доріг і бродів</string>
     </resources>
