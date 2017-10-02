@@ -368,7 +368,7 @@ public class MapContextMenu extends MenuTitleController implements StateChangedL
 				fragmentRef.get().centerMarkerLocation();
 			}
 		}
-		updateWidgetsAndTopbarsVisibility(false);
+		updateWidgetsVisibility(false);
 	}
 
 	public void show(@NonNull LatLon latLon,
@@ -389,7 +389,7 @@ public class MapContextMenu extends MenuTitleController implements StateChangedL
 		}
 		centerMarker = false;
 		autoHide = false;
-		updateWidgetsAndTopbarsVisibility(false);
+		updateWidgetsVisibility(false);
 	}
 
 	public void update(LatLon latLon, PointDescription pointDescription, Object object) {
@@ -448,10 +448,10 @@ public class MapContextMenu extends MenuTitleController implements StateChangedL
 		if (fragmentRef != null) {
 			fragmentRef.get().dismissMenu();
 		}
-		updateWidgetsAndTopbarsVisibility(true);
+		updateWidgetsVisibility(true);
 	}
 
-	private void updateWidgetsAndTopbarsVisibility(boolean visible) {
+	private void updateWidgetsVisibility(boolean visible) {
 		int visibility = visible ? View.VISIBLE : View.GONE;
 		mapActivity.findViewById(R.id.map_center_info).setVisibility(visibility);
 		mapActivity.findViewById(R.id.map_left_widgets_panel).setVisibility(visibility);
