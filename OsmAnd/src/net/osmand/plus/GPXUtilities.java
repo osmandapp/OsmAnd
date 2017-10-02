@@ -1012,7 +1012,6 @@ public class GPXUtilities {
 		}
 
 		private void removeGeneralTrackIfExists() {
-			Track generalTrack = getGeneralTrack();
 			if (generalTrack != null) {
 				tracks.remove(generalTrack);
 				this.generalTrack = null;
@@ -1163,6 +1162,7 @@ public class GPXUtilities {
        }
 
 	public static String writeGpxFile(File fout, GPXFile file, OsmandApplication ctx) {
+		file.removeGeneralTrackIfExists();
 		Writer output = null;
 		try {
 			output = new OutputStreamWriter(new FileOutputStream(fout), "UTF-8"); //$NON-NLS-1$
