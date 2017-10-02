@@ -711,7 +711,7 @@ public class MapControlsLayer extends OsmandMapLayer {
 		boolean contextMenuOpened = mapActivity.getContextMenu().isVisible();
 		boolean showRouteCalculationControls = routePlanningMode ||
 				((app.accessibilityEnabled() || (System.currentTimeMillis() - touchEvent < TIMEOUT_TO_SHOW_BUTTONS)) && routeFollowingMode);
-		updateMyLocation(rh, routeDialogOpened || trackDialogOpened, contextMenuOpened);
+		updateMyLocation(rh, routeDialogOpened || trackDialogOpened || contextMenuOpened);
 		boolean showButtons = (showRouteCalculationControls || !routeFollowingMode)
 				&& !isInMovingMarkerMode() && !isInGpxDetailsMode() && !isInMeasurementToolMode() && !isInPlanRouteMode() && !contextMenuOpened;
 		//routePlanningBtn.setIconResId(routeFollowingMode ? R.drawable.ic_action_gabout_dark : R.drawable.map_directions);
@@ -796,7 +796,7 @@ public class MapControlsLayer extends OsmandMapLayer {
 		return new CompassDrawable(originalDrawable);
 	}
 
-	private void updateMyLocation(RoutingHelper rh, boolean dialogOpened, boolean contextMenuOpened) {
+	private void updateMyLocation(RoutingHelper rh, boolean dialogOpened) {
 		Location lastKnownLocation = mapActivity.getMyApplication().getLocationProvider().getLastKnownLocation();
 		boolean enabled = lastKnownLocation != null;
 		boolean tracked = mapActivity.getMapViewTrackingUtilities().isMapLinkedToLocation();
@@ -815,7 +815,7 @@ public class MapControlsLayer extends OsmandMapLayer {
 			backToLocationControl.iv.setContentDescription(mapActivity.getString(R.string.map_widget_back_to_loc));
 		}
 		boolean visible = !(tracked && rh.isFollowingMode());
-		backToLocationControl.updateVisibility(visible && !dialogOpened && !contextMenuOpened);
+		backToLocationControl.updateVisibility(visible && !dialogOpened);
 		if (app.accessibilityEnabled()) {
 			backToLocationControl.iv.setClickable(enabled && visible);
 		}
