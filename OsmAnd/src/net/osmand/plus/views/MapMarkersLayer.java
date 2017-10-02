@@ -210,7 +210,6 @@ public class MapMarkersLayer extends OsmandMapLayer implements IContextMenuProvi
 
 	@Override
 	public void onPrepareBufferImage(Canvas canvas, RotatedTileBox tileBox, DrawSettings nightMode) {
-		OsmandSettings settings = map.getMyApplication().getSettings();
 		Location myLoc = map.getMyApplication().getLocationProvider().getLastStaleKnownLocation();
 		MapMarkersHelper markersHelper = map.getMyApplication().getMapMarkersHelper();
 		List<MapMarker> activeMapMarkers = markersHelper.getMapMarkers();
@@ -237,7 +236,7 @@ public class MapMarkersLayer extends OsmandMapLayer implements IContextMenuProvi
 			canvas.drawPath(path, paint);
 		}
 
-		if (settings.SHOW_LINES_TO_FIRST_MARKERS.get() && myLoc != null) {
+		if (markersHelper.isStartFromMyLocation() && myLoc != null) {
 			lineAttrs.updatePaints(view, nightMode, tileBox);
 			textAttrs.updatePaints(view, nightMode, tileBox);
 			textAttrs.paint.setStyle(Paint.Style.FILL);
