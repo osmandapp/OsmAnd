@@ -1753,6 +1753,11 @@ public class MapActivity extends OsmandActionBarActivity implements DownloadEven
 		return mapInfoLayer.getTopToolbarController(type);
 	}
 
+	public TopToolbarController getTopToolbarController() {
+		MapInfoLayer mapInfoLayer = getMapLayers().getMapInfoLayer();
+		return mapInfoLayer.getTopController();
+	}
+
 	public void showTopToolbar(TopToolbarController controller) {
 		MapInfoLayer mapInfoLayer = getMapLayers().getMapInfoLayer();
 		mapInfoLayer.addTopToolbarController(controller);

@@ -126,6 +126,10 @@ public class MapInfoLayer extends OsmandMapLayer {
 		return topToolbarView.getTopController() != null;
 	}
 
+	public TopToolbarController getTopController() {
+		return topToolbarView.getTopController();
+	}
+
 	public TopToolbarController getTopToolbarController(TopToolbarControllerType type) {
 		return topToolbarView.getController(type);
 	}
@@ -219,10 +223,6 @@ public class MapInfoLayer extends OsmandMapLayer {
 				recreateControls();
 			}
 		});
-	}
-
-	public void updateRightStackVisibility(boolean visible) {
-		rightStack.setVisibility(visible ? View.VISIBLE : View.GONE);
 	}
 
 	public void setTrackChartPoints(TrackChartPoints trackChartPoints) {

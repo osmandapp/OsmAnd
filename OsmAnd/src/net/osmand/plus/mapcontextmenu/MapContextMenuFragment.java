@@ -46,11 +46,9 @@ import net.osmand.plus.mapcontextmenu.MenuController.TitleButtonController;
 import net.osmand.plus.mapcontextmenu.MenuController.TitleProgressController;
 import net.osmand.plus.mapcontextmenu.other.MapRouteInfoMenu;
 import net.osmand.plus.views.AnimateDraggingMapThread;
-import net.osmand.plus.views.MapInfoLayer;
 import net.osmand.plus.views.OsmandMapTileView;
 import net.osmand.plus.views.controls.HorizontalSwipeConfirm;
 import net.osmand.plus.views.controls.SingleTapConfirm;
-import net.osmand.plus.views.mapwidgets.MapMarkersWidgetsFactory;
 import net.osmand.util.Algorithms;
 
 import static android.util.TypedValue.COMPLEX_UNIT_DIP;
@@ -69,9 +67,6 @@ public class MapContextMenuFragment extends Fragment implements DownloadEvents {
 	private View view;
 	private View mainView;
 	ImageView fabView;
-
-	private MapInfoLayer mapInfoLayer;
-	private MapMarkersWidgetsFactory mapMarkersWidgetsFactory;
 
 	private MapContextMenu menu;
 	private OnLayoutChangeListener containerLayoutListener;
@@ -115,9 +110,6 @@ public class MapContextMenuFragment extends Fragment implements DownloadEvents {
 	@Override
 	public View onCreateView(LayoutInflater inflater, ViewGroup container,
 							 Bundle savedInstanceState) {
-
-		mapInfoLayer = getMapActivity().getMapLayers().getMapInfoLayer();
-		mapMarkersWidgetsFactory = getMapActivity().getMapLayers().getMapMarkersLayer().getWidgetsFactory();
 
 		processScreenHeight(container);
 
@@ -536,17 +528,7 @@ public class MapContextMenuFragment extends Fragment implements DownloadEvents {
 			doBeforeMenuStateChange(oldMenuState, newMenuState);
 		}
 
-		updateTopbarAndRightStackVisibility(newMenuState == MenuState.HEADER_ONLY);
-
 		applyPosY(currentY, needCloseMenu, needMapAdjust, oldMenuState, newMenuState);
-	}
-
-	private void updateTopbarAndRightStackVisibility(boolean visible) {
-		mapInfoLayer.updateRightStackVisibility(visible);
-		if (getMyApplication().getSettings().MAP_MARKERS_MODE.get() == OsmandSettings.MapMarkersMode.TOOLBAR) {
-			mapMarkersWidgetsFactory.lockTopBarVisibility(visible);
-			mapMarkersWidgetsFactory.updateVisibility(visible);
-		}
 	}
 
 	private void applyPosY(final int currentY, final boolean needCloseMenu, boolean needMapAdjust,

@@ -47,11 +47,9 @@ import net.osmand.plus.mapcontextmenu.other.ShareMenu;
 import net.osmand.plus.monitoring.OsmandMonitoringPlugin;
 import net.osmand.plus.routing.RoutingHelper;
 import net.osmand.plus.views.ContextMenuLayer;
-import net.osmand.plus.views.MapInfoLayer;
 import net.osmand.plus.views.OsmandMapLayer;
 import net.osmand.plus.views.mapwidgets.MapInfoWidgetsFactory.TopToolbarController;
 import net.osmand.plus.views.mapwidgets.MapInfoWidgetsFactory.TopToolbarControllerType;
-import net.osmand.plus.views.mapwidgets.MapMarkersWidgetsFactory;
 import net.osmand.util.Algorithms;
 import net.osmand.util.MapUtils;
 
@@ -65,8 +63,6 @@ public class MapContextMenu extends MenuTitleController implements StateChangedL
 	private MapActivity mapActivity;
 	private OsmandSettings settings;
 	private MapMultiSelectionMenu mapMultiSelectionMenu;
-	private MapInfoLayer mapInfoLayer;
-	private MapMarkersWidgetsFactory mapMarkersWidgetsFactory;
 
 	private FavoritePointEditor favoritePointEditor;
 	private WptPtEditor wptPtEditor;
@@ -294,9 +290,6 @@ public class MapContextMenu extends MenuTitleController implements StateChangedL
 			myLocation = mapActivity.getMyApplication().getSettings().getLastKnownMapLocation();
 		}
 
-		mapInfoLayer = mapActivity.getMapLayers().getMapInfoLayer();
-		mapMarkersWidgetsFactory = mapActivity.getMapLayers().getMapMarkersLayer().getWidgetsFactory();
-
 		if (!update && isVisible()) {
 			if (this.object == null || !this.object.equals(object)) {
 				hide();
@@ -375,6 +368,7 @@ public class MapContextMenu extends MenuTitleController implements StateChangedL
 				fragmentRef.get().centerMarkerLocation();
 			}
 		}
+		updateWidgetsAndTopbarsVisibility(false);
 	}
 
 	public void show(@NonNull LatLon latLon,
@@ -395,6 +389,7 @@ public class MapContextMenu extends MenuTitleController implements StateChangedL
 		}
 		centerMarker = false;
 		autoHide = false;
+		updateWidgetsAndTopbarsVisibility(false);
 	}
 
 	public void update(LatLon latLon, PointDescription pointDescription, Object object) {
@@ -453,16 +448,30 @@ public class MapContextMenu extends MenuTitleController implements StateChangedL
 		if (fragmentRef != null) {
 			fragmentRef.get().dismissMenu();
 		}
-
-		makeTopbarAndRightStackVisible();
+		updateWidgetsAndTopbarsVisibility(true);
 	}
 
-	private void makeTopbarAndRightStackVisible() {
-		mapInfoLayer.updateRightStackVisibility(true);
-		if (getMapActivity().getMyApplication().getSettings().MAP_MARKERS_MODE.get() == OsmandSettings.MapMarkersMode.TOOLBAR) {
-			mapMarkersWidgetsFactory.lockTopBarVisibility(true);
-			mapMarkersWidgetsFactory.updateVisibility(true);
+	private void updateWidgetsAndTopbarsVisibility(boolean visible) {
+		updateVisibility(mapActivity.findViewById(R.id.map_markers_top_bar_layout), visible);
+		TopToolbarController controller = mapActivity.getTopToolbarController();
+		if (controller != null && controller.getType() != TopToolbarControllerType.CONTEXT_MENU) {
+			updateVisibility(mapActivity.findViewById(R.id.widget_top_bar), visible);
 		}
+		updateVisibility(mapActivity.findViewById(R.id.map_left_widgets_panel), visible);
+		updateVisibility(mapActivity.findViewById(R.id.map_right_widgets_panel), visible);
+	}
+
+	public boolean updateVisibility(View v, boolean visible) {
+		if (visible != (v.getVisibility() == View.VISIBLE)) {
+			if (visible) {
+				v.setVisibility(View.VISIBLE);
+			} else {
+				v.setVisibility(View.GONE);
+			}
+			v.invalidate();
+			return true;
+		}
+		return false;
 	}
 
 	// timeout in msec
@@ -655,15 +664,15 @@ public class MapContextMenu extends MenuTitleController implements StateChangedL
 		}
 
 		if (searchDoneAction != null) {
-				if (searchDoneAction.dlg != null) {
-					try {
-						searchDoneAction.dlg.dismiss();
-					} catch (Exception e) {
-						// ignore
-					} finally {
-						searchDoneAction.dlg = null;
-					}
+			if (searchDoneAction.dlg != null) {
+				try {
+					searchDoneAction.dlg.dismiss();
+				} catch (Exception e) {
+					// ignore
+				} finally {
+					searchDoneAction.dlg = null;
 				}
+			}
 			searchDoneAction.run();
 			searchDoneAction = null;
 		}
@@ -728,7 +737,6 @@ public class MapContextMenu extends MenuTitleController implements StateChangedL
 		}
 		close();
 	}
-
 
 
 	public void buttonFavoritePressed() {
@@ -832,7 +840,7 @@ public class MapContextMenu extends MenuTitleController implements StateChangedL
 		}
 	}
 
-	public void addWptPt(LatLon latLon, String  title, String categoryName, int categoryColor, boolean skipDialog){
+	public void addWptPt(LatLon latLon, String title, String categoryName, int categoryColor, boolean skipDialog) {
 
 		final List<SelectedGpxFile> list
 				= mapActivity.getMyApplication().getSelectedGpxHelper().getSelectedGPXFiles();
@@ -850,7 +858,7 @@ public class MapContextMenu extends MenuTitleController implements StateChangedL
 		}
 	}
 
-	public AlertDialog addNewWptToGPXFile(final LatLon latLon, final String  title,
+	public AlertDialog addNewWptToGPXFile(final LatLon latLon, final String title,
 										  final String categoryName,
 										  final int categoryColor, final boolean skipDialog) {
 		CallbackWithObject<GPXFile[]> callbackWithObject = new CallbackWithObject<GPXFile[]>() {
