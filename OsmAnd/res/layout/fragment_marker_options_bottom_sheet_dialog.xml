@@ -165,7 +165,7 @@
                     android:layout_height="wrap_content"
                     android:layout_gravity="center_vertical"
                     android:maxLines="1"
-                    android:text="@string/build_route"
+                    android:text="@string/plan_route"
                     android:textAppearance="@style/TextAppearance.ListItemTitle"/>
             </LinearLayout>
 

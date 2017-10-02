@@ -54,7 +54,6 @@
     <!-- string name="widget">Widget</string if needed should be shared_string_widget -->
     <!-- string name="top_bar">Top bar</string use shared_string_topbar -->
     <string name="move_all_to_history">Move all to history</string>
-    <string name="build_route">Build route</string>
     <string name="show_direction">Distance indication</string>
     <string name="sort_by">Sort by</string>
     <string name="do_not_use_animations">Do not use animations</string>
