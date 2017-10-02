@@ -9,6 +9,7 @@ import net.osmand.data.FavouritePoint;
 import net.osmand.data.QuadRect;
 import net.osmand.data.TransportStop;
 import net.osmand.osm.PoiCategory;
+import net.osmand.plus.R;
 import net.osmand.plus.activities.MapActivity;
 import net.osmand.plus.mapcontextmenu.MenuBuilder;
 import net.osmand.plus.mapillary.MapillaryPlugin;
@@ -48,6 +49,14 @@ public class FavouritePointMenuBuilder extends MenuBuilder {
 	protected void buildNearestWikiRow(View view) {
 		if (originObject == null || !(originObject instanceof Amenity)) {
 			super.buildNearestWikiRow(view);
+		}
+	}
+
+	@Override
+	protected void buildTitleRow(View view) {
+		String title = mapActivity.getContextMenu().getTitleStr();
+		if (title.length() > 60) {
+			buildRow(view, R.drawable.ic_action_note_dark, title, 0, false, null, false, 0, false, null);
 		}
 	}
 

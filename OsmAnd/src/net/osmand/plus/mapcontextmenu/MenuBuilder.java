@@ -232,6 +232,7 @@ public class MenuBuilder {
 	public void build(View view) {
 		firstRow = true;
 		hidden = false;
+		buildTitleRow(view);
 		buildNearestWikiRow(view);
 		if (needBuildPlainMenuItems()) {
 			buildPlainMenuItems(view);
@@ -279,6 +280,9 @@ public class MenuBuilder {
 		for (OsmandPlugin plugin : menuPlugins) {
 			plugin.clearContextMenuRows();
 		}
+	}
+
+	protected void buildTitleRow(View view) {
 	}
 
 	protected void buildNearestWikiRow(View view) {
