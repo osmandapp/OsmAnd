@@ -78,6 +78,7 @@ public class PlanRouteFragment extends Fragment implements OsmAndLocationListene
 	private boolean portrait;
 	private boolean markersListOpened;
 	private boolean wasCollapseButtonVisible;
+	private boolean uiUpdateAllowed = true;
 
 	private View mainView;
 	private RecyclerView markersRv;
@@ -234,6 +235,7 @@ public class PlanRouteFragment extends Fragment implements OsmAndLocationListene
 
 			@Override
 			public void onDragStarted(RecyclerView.ViewHolder holder) {
+				uiUpdateAllowed = false;
 				fromPosition = holder.getAdapterPosition();
 				touchHelper.startDrag(holder);
 			}
@@ -252,6 +254,7 @@ public class PlanRouteFragment extends Fragment implements OsmAndLocationListene
 						// java.lang.IllegalStateException: Cannot call this method while RecyclerView is computing a layout or scrolling
 					}
 				}
+				uiUpdateAllowed = true;
 			}
 		});
 		boolean isSmartphone = getResources().getConfiguration().smallestScreenWidthDp < 600;
@@ -259,6 +262,13 @@ public class PlanRouteFragment extends Fragment implements OsmAndLocationListene
 		markersRv.setClipToPadding(false);
 		markersRv.setLayoutManager(new LinearLayoutManager(getContext()));
 		markersRv.setAdapter(adapter);
+		markersRv.addOnScrollListener(new RecyclerView.OnScrollListener() {
+			@Override
+			public void onScrollStateChanged(RecyclerView recyclerView, int newState) {
+				super.onScrollStateChanged(recyclerView, newState);
+				uiUpdateAllowed = newState == RecyclerView.SCROLL_STATE_IDLE;
+			}
+		});
 
 		final int screenH = AndroidUtils.getScreenHeight(mapActivity);
 		final int statusBarH = AndroidUtils.getStatusBarHeight(mapActivity);
@@ -520,6 +530,9 @@ public class PlanRouteFragment extends Fragment implements OsmAndLocationListene
 	}
 
 	private void updateLocationUi() {
+		if (!uiUpdateAllowed) {
+			return;
+		}
 		final MapActivity mapActivity = (MapActivity) getActivity();
 		if (mapActivity != null && adapter != null) {
 			mapActivity.getMyApplication().runInUIThread(new Runnable() {
