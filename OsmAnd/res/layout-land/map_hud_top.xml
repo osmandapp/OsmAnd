@@ -7,11 +7,6 @@
               android:orientation="vertical">
 
     <FrameLayout
-        android:id="@+id/map_markers_top_bar_layout"
-        android:layout_width="fill_parent"
-        android:layout_height="wrap_content">
-
-        <FrameLayout
             android:id="@+id/map_markers_top_bar"
             android:layout_width="fill_parent"
             android:layout_height="wrap_content"
@@ -193,8 +188,6 @@
 
         </FrameLayout>
 
-    </FrameLayout>
-
     <LinearLayout
         android:layout_width="match_parent"
         android:layout_height="match_parent"
@@ -239,11 +232,6 @@
         android:orientation="vertical">
 
         <FrameLayout
-            android:id="@+id/map_top_bar_layout"
-            android:layout_width="fill_parent"
-            android:layout_height="wrap_content">
-
-            <FrameLayout
                 android:id="@+id/map_top_bar"
                 android:layout_width="fill_parent"
                 android:layout_height="wrap_content"
@@ -383,8 +371,6 @@
                         android:src="@drawable/ic_action_test_light"/>
                 </LinearLayout>
             </FrameLayout>
-
-        </FrameLayout>
 
         <FrameLayout
             android:id="@+id/widget_top_bar"

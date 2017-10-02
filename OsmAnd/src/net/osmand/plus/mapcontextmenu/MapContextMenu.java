@@ -453,15 +453,10 @@ public class MapContextMenu extends MenuTitleController implements StateChangedL
 
 	private void updateWidgetsAndTopbarsVisibility(boolean visible) {
 		int visibility = visible ? View.VISIBLE : View.GONE;
-		mapActivity.findViewById(R.id.map_top_bar_layout).setVisibility(visibility);
-		mapActivity.findViewById(R.id.map_markers_top_bar_layout).setVisibility(visibility);
-		TopToolbarController controller = mapActivity.getTopToolbarController();
-		if (controller != null && controller.getType() != TopToolbarControllerType.CONTEXT_MENU) {
-			mapActivity.findViewById(R.id.widget_top_bar).setVisibility(visibility);
-		}
 		mapActivity.findViewById(R.id.map_center_info).setVisibility(visibility);
 		mapActivity.findViewById(R.id.map_left_widgets_panel).setVisibility(visibility);
 		mapActivity.findViewById(R.id.map_right_widgets_panel).setVisibility(visibility);
+		mapActivity.refreshMap();
 	}
 
 	// timeout in msec

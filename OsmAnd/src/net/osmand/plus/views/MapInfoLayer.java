@@ -126,10 +126,6 @@ public class MapInfoLayer extends OsmandMapLayer {
 		return topToolbarView.getTopController() != null;
 	}
 
-	public TopToolbarController getTopController() {
-		return topToolbarView.getTopController();
-	}
-
 	public TopToolbarController getTopToolbarController(TopToolbarControllerType type) {
 		return topToolbarView.getController(type);
 	}
