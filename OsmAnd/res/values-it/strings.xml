@@ -899,27 +899,7 @@ Memoria in proporzione %4$s MB (limite di Android %5$s MB, Dalvik %6$s MB).</str
 →
  "</string>
     <string name="osmand_plus_short_description_80_chars">Visualizzazione &amp; navigazione mobile con le mappe mondiali OSM online e offline</string>
-    <string name="osmand_plus_long_description_1000_chars">"
- OsmAnd+ (OSM Automatizzate Navigazione e Direzioni)
-
- OsmAnd+ è un\'applicazione di navigazione open source con accesso a una grande varietà di dati mondiali di OpenStreetMap (OSM). Tutte le mappe (vettoriali o a mattonelle) possono essere memorizzate nella scheda di memoria del telefono per essere utilizzate offline. OsmAnd offre anche la funzionalità di calcolo dell\'itinerario sia online che offline, compresa la voce guida svolta per svolta. 
-
- OsmAnd+ è la versione a pagamento, tramite l\'acquisto dell\'applicazione sostieni il progetto, finanzi lo sviluppo di nuove funzionalità, e ricevi gli ultimi aggiornamenti. 
-
- Alcune delle caratteristiche principali:
- - Funzionalità completa anche disconnessi dalla rete (conserva le mappe vettoriali o a mattonelle in una cartella selezionabile)
- - Mappe vettoriali offline compatte per tutto il mondo a disposizione
- - Scarica le mappe delle nazioni o delle regioni direttamente dall\'applicazione, senza limiti
- - Wikipedia Offline (scarica i PDI Wikipedia), ottimo per i giri turistici
- - Possibilità di sovrapposizione di diversi strati, come tracce GPX o di navigazione, punti di interesse, preferiti, curve di livello, fermate dei mezzi pubblici, mappe aggiuntive con trasparenza personalizzabile
- - Ricerca offline per indirizzi e luoghi (PDI)
- - Calcolo del percorso per brevi distanze (sperimentale)
- - Modalità automobile, bicicletta e pedonale con: 
-- commutazione opzionale automatica della vista giorno/notte
- - zoom automatico opzionale in base alla velocità
- - allineamento della mappa in base alla direzione o alla bussola
- - opzionali: indicazione di corsia indicazione del limite di velocità voci registrate e TTS
- "</string>
+    <string name="osmand_plus_long_description_1000_chars">OsmAnd+ (OSM Automatizzate Navigazione e Direzioni) OsmAnd+ è un\'applicazione di navigazione open source con accesso a una grande varietà di dati mondiali di OpenStreetMap (OSM). Tutte le mappe (vettoriali o a mattonelle) possono essere memorizzate nella scheda di memoria del telefono per essere utilizzate offline. OsmAnd offre anche la funzionalità di calcolo dell\'itinerario sia online che offline, compresa la voce guida svolta per svolta. OsmAnd+ è la versione a pagamento, tramite l\'acquisto dell\'applicazione sostieni il progetto, finanzi lo sviluppo di nuove funzionalità, e ricevi gli ultimi aggiornamenti. Alcune delle caratteristiche principali: - Funzionalità completa anche disconnessi dalla rete (conserva le mappe vettoriali o a mattonelle in una cartella selezionabile) - Mappe vettoriali offline compatte per tutto il mondo a disposizione - Scarica le mappe delle nazioni o delle regioni direttamente dall\'applicazione, senza limiti - Wikipedia Offline (scarica i PDI Wikipedia), ottimo per i giri turistici - Possibilità di sovrapposizione di diversi strati, come tracce GPX o di navigazione, punti di interesse, preferiti, curve di livello, fermate dei mezzi pubblici, mappe aggiuntive con trasparenza personalizzabile - Ricerca offline per indirizzi e luoghi (PDI) - Calcolo del percorso per brevi distanze (sperimentale) - Modalità automobile, bicicletta e pedonale con: - commutazione opzionale automatica della vista giorno/notte - zoom automatico opzionale in base alla velocità - allineamento della mappa in base alla direzione o alla bussola - opzionali: indicazione di corsia indicazione del limite di velocità voci registrate e TTS</string>
 
     <string name="snap_to_road_descr">Blocca la posizione sulle strade durante la navigazione</string>
     <string name="snap_to_road">Blocca sulle strade</string>
@@ -1100,7 +1080,7 @@ Facilita il download delle linee di elevazione e l\'ombreggiamento dei rilievi (
     <string name="files_limit">hai ancora %1$d file</string>
     <string name="available_downloads_left">Disponibili %1$d file da scaricare</string>
     <string name="install_paid">Versione completa</string>
-    <string name="use_magnetic_sensor_descr">Utilizza il sensore magnetico per determinare il valore della bussola invece del sensore di orientamento</string>
+    <string name="use_magnetic_sensor_descr">Per per determinare il valore della bussola invece del sensore di orientamento utilizza il utilizza il sensore magnetico</string>
     <string name="use_magnetic_sensor">Utilizza il sensore magnetico (bussola)</string>
     <string name="local_indexes_cat_srtm">Linee isoipse</string>
     <string name="use_kalman_filter_compass_descr">Riduce il rumore delle letture della bussola ma introduce dell\'inerzia</string>
@@ -1321,7 +1301,7 @@ Facilita il download delle linee di elevazione e l\'ombreggiamento dei rilievi (
     <string name="misc_pref_title">Varie</string>
     <string name="localization_pref_title">Localizzazione</string>
     <string name="interrupt_music">Metti in pausa la musica</string>
-    <string name="interrupt_music_descr">Interrompi la musica per fare gli annunci (non semplicemente abbassarne il volume)</string>
+    <string name="interrupt_music_descr">Interrompi la musica per fare gli annunci, non semplicemente abbassarne il volume</string>
     <string name="share_route_as_gpx">Condividi il percorso come file GPX</string>
     <string name="share_route_subject">Percorso condiviso tramite OsmAnd</string>
     <string name="navigation_intent_invalid">Formato non valido: %s</string>
@@ -1431,7 +1411,7 @@ Facilita il download delle linee di elevazione e l\'ombreggiamento dei rilievi (
     <string name="gpx_info_maximum_speed">Velocità massima: %1$s </string>
     <string name="gpx_info_avg_altitude">Altitudine media: %1$s</string>
     <string name="gpx_info_subtracks">Sottotracce: %1$s </string>
-    <string name="gpx_info_waypoints">"Tappe del percorso: %1$s "</string>
+    <string name="gpx_info_waypoints">Tappe del percorso: %1$s</string>
     <string name="gpx_info_distance">Distanza: %1$s (%2$s punti) </string>
     <string name="gpx_info_end_time">Orario di arrivo: %1$tF, %1$tT </string>
     <string name="gpx_info_diff_altitude">Gamma altitudini: %1$s</string>
@@ -2779,28 +2759,8 @@ Rappresenta l\'area: %1$s x %2$s</string>
  • Registrazione opzionale del viaggio anche in modalità background (mentre il dispositivo è in modalità sleep)
  OsmAnd è open-source e attivamente in fase di sviluppo. Chiunque può contribuire all\'applicazione riportando degli errori, migliorando la traduzione o programmando nuove funzionalità. Il progetto è in una vitale fase di continuo sviluppo tramite tutte queste forme di interazione fra sviluppatori e utilizzatori. L\'avanzamento del progetto si basa anche nei contributi finanziari per finanziare la programmazione e il test di nuove funzionalità.
  "</string>
-    <string name="osmand_extended_description_part8">"
- OsmAnd è open-source e attivamente in fase di sviluppo. Chiunque può contribuire all\'applicazione riportando degli errori, migliorando la traduzione o programmando nuove funzionalità. Il progetto è in una vitale fase di continuo sviluppo tramite tutte queste forme di interazione fra sviluppatori e utilizzatori. L\'avanzamento del progetto si basa anche nei contributi finanziari per finanziare la programmazione e il test di nuove funzionalità.
-Copertura e qualità approssimativamente:
- • Ovest Europa: ****
- • Este Europa: ***
- • Russia: ***
- • Nord America: ***
- • Sud America: **
- • Asia: **
- • Giappone e Korea: ***
- • Medio Oriente: **
- • Africa: **
- • Antartide: *
- Molte nazioni del mondo disponibili come download!
- Ottieni un affidabile navigatore nella tuo paese - sia che sia Francia, Germania, Messico, UK, Spagna, Olanda, USA, Russia, Brasile o qualunque altro.
- "</string>
-    <string name="osmand_extended_description_part7">"
- Contribuisci a OSM
- • Segnala errori nei dati
- • Carica tracce GPX in OSM direttamente dall\'app
- • Aggiungi PDI e caricali direttamente in OSM (o successivamente se sei offline)
- "</string>
+    <string name="osmand_extended_description_part8">OsmAnd è open-source e attivamente in fase di sviluppo. Chiunque può contribuire all\'applicazione riportando degli errori, migliorando la traduzione o programmando nuove funzionalità. Il progetto è in una vitale fase di continuo sviluppo tramite tutte queste forme di interazione fra sviluppatori e utilizzatori. L\'avanzamento del progetto si basa anche nei contributi finanziari per finanziare la programmazione e il test di nuove funzionalità. Copertura e qualità approssimativamente: • Ovest Europa: **** • Este Europa: *** • Russia: *** • Nord America: *** • Sud America: ** • Asia: ** • Giappone e Korea: *** • Medio Oriente: ** • Africa: ** • Antartide: * Molte nazioni del mondo disponibili come download! Ottieni un affidabile navigatore nella tuo paese - sia che sia Francia, Germania, Messico, UK, Spagna, Olanda, USA, Russia, Brasile o qualunque altro.</string>
+    <string name="osmand_extended_description_part7">Contribuisci a OSM • Segnala errori nei dati • Carica tracce GPX in OSM direttamente dall\'app • Aggiungi PDI e caricali direttamente in OSM (o successivamente se sei offline)</string>
     <string name="mapillary">Mapillary</string>
     <string name="osmand_extended_description_part1">"
 \n OsmAnd (OSM Automatica Navigazione Direzioni ) è un\'app di navigazione e mappe con accesso ai dati gratuiti, mondiali e di alta qualità di OpenStreetMap (OSM).
@@ -2910,15 +2870,40 @@ Copertura e qualità approssimativamente:
     <string name="marker_moved_to_active">Marcatori della mappa spostati negli attivi</string>
     <string name="shared_string_list">Lista</string>
     <string name="shared_string_groups">Gruppi</string>
-    <string name="passed">Passato: %1$s</string>
+    <string name="passed">Ultimo utilizzato: %1$s</string>
     <string name="make_active">Attiva</string>
     <string name="today">Oggi</string>
     <string name="yesterday">Ieri</string>
     <string name="last_seven_days">Ultimi 7 giorni</string>
     <string name="this_year">Anno in corso</string>
     <string name="remove_from_map_markers">Rimuovi dai Marcatori Mappa</string>
-    <string name="descendingly">Discendente</string>
-    <string name="ascendingly">Ascendente</string>
+    <string name="descendingly">discendente</string>
+    <string name="ascendingly">ascendente</string>
     <string name="date_added">Dato aggiunto</string>
     <string name="order_by">Ordina per:</string>
+    <string name="coordinates_format">Formato coordinate</string>
+    <string name="use_system_keyboard">Utilizza la tastiera di sistema</string>
+    <string name="fast_coordinates_input_descr">Scegli il formato di immissione delle coordinate. Puoi sempre cambiarlo tappando su Opzioni.</string>
+    <string name="fast_coordinates_input">Immissione rapida delle coordinate</string>
+    <string name="routing_attr_avoid_ice_roads_fords_name">Evita strade di ghiaccio e guadi</string>
+    <string name="routing_attr_avoid_ice_roads_fords_description">Evita strade di ghiaccio e guadi</string>
+    <string name="use_location">Utilizza la posizione</string>
+    <string name="add_location_as_first_point_descr">Aggiungo la tua posizione come primo punto per pianificare un percorso perfetto.</string>
+    <string name="my_location">Mia posizione</string>
+    <string name="shared_string_finish">Fine</string>
+    <string name="plan_route">Pianifica percorso</string>
+    <string name="shared_string_sort">Ordina</string>
+    <string name="coordinate_input">Coordinate di immissione</string>
+    <string name="is_saved">è salvato</string>
+    <string name="marker_save_as_track_descr">Esporta i marcatori in un file, puoi indicarlo qui:</string>
+    <string name="marker_save_as_track">Salva come traccia</string>
+    <string name="move_to_history">Sposta nella cronologia</string>
+    <string name="group_will_be_removed_after_restart">Il gruppo verrà rimosso al riavvio</string>
+    <string name="show_guide_line">Mostra le linee guida</string>
+    <string name="show_arrows_on_the_map">Mostra le frecce nella mappa</string>
+    <string name="show_passed">Mostra la data dell\'Ultimo utilizzato\'</string>
+    <string name="hide_passed">Nascondi la data \'Ultimo utilizzato\'</string>
+    <string name="osmand_extended_description_part2">Navigazione GPS • Puoi scegliere fra la modalità offline (nessun costo di roaming quando sei all\'estero) oppure online (più veloce) • La guida vocale svolta per svolta ti guida lungo il percorso (voci registrate e sintetizzate) • Il percorso viene ricalcolato quando devii • Indicazioni di corsia, nomi delle strade e tempo di arrivo stimato saranno d\'aiuto lungo il percorso • Per rendere il percorso più veloce il passaggio dalla modalità diurna/notturna automatico •Puoi scegliere di visualizzare i limiti di velocità, ed essere avvisato quando li superi • Lo zoom della mappa si adegua alla velocità • Puoi cercare le destinazioni per indirizzo, per categoria (es.: parcheggio, ristorante, hotel, stazione di rifornimento, museo), oppure tramite le coordinate geografiche • Supporta i punti intermedi nel tuo itinerario • Puoi registrare la tua traccia GPX oppure caricarne una e seguirla</string>
+    <string name="osmand_extended_description_part3">Mappa • Mostra i PDI (punti di interesse) vicino a te • Disponi la mappa nella direzione del movimento (o della bussola) • Mostra dove sei e dove stai andando • Condividi la tua posizione perché i tuoi amici possano trovarti • Raccogli i luoghi più importanti nei Favoriti • Ti permette di scegliere come visualizzare i nomi nella mappa: in inglese, locale, oppure la pronuncia • Visualizza mattonelle online speciali, vista satellitare (di Bing), diverse sovrapposizioni come turistico/navigazione tracce GPX e strati aggiuntivi con trasparenze personalizzabili</string>
+    <string name="osmand_plus_extended_description_part1">OsmAnd+ (OSM Automatizzata Navigazione Direzioni) è un\'applicazione di navigazione con l\'accesso ai dati delle mappe mondiali, gratuite e di grande qualità OpenStreetMap (OSM). Goditi la navigazione con indicazioni visive e vocali, la visualizzazione dei PDI (punti di interesse), creando e gestendo le tracce GPX, usando visualizzazione delle linee isoipse e dell\'altitudine, scegliendo fra le modalità auto, bici, pedone, modifiche OSM e molto altro. OsmAnd+ è la versione dell\'app a pagamento. Acquistandola supporti il progetto, finanzi lo sviluppo di nuove funzionalità e ricevi gli ultimi aggiornamenti. Alcune delle maggiori caratteristiche:</string>
     </resources>
