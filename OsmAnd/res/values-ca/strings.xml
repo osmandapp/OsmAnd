@@ -2633,8 +2633,8 @@ Abasta l\'àrea: %1$s x %2$s</string>
     <string name="widget">Giny</string>
     <string name="top_bar">Barra superior</string>
     <string name="remove_from_map_markers">Treu dels marcadors de mapa</string>
-    <string name="descendingly">Descendent</string>
-    <string name="ascendingly">Ascendent</string>
+    <string name="descendingly">descendent</string>
+    <string name="ascendingly">ascendent</string>
     <string name="date_added">S\'ha afegit la data</string>
     <string name="order_by">Ordena segons:</string>
     <string name="marker_show_distance_descr">Seleccioneu com indicar la distància i direcció vers els marcadors de mapa a la pantalla del mapa:</string>
@@ -2657,7 +2657,7 @@ Abasta l\'àrea: %1$s x %2$s</string>
     <string name="shared_string_markers">Marcadors</string>
     <string name="coordinates_format">Format de coordenades</string>
     <string name="use_system_keyboard">Utilitza el teclat del sistema</string>
-    <string name="fast_coordinates_input_descr">Trieu el format de les coordenades abans de començar. Sempre podeu canviar-lo dins les opcions.</string>
+    <string name="fast_coordinates_input_descr">Trieu el format d\'entrada de coordenades. Sempre podeu canviar-lo dins les opcions.</string>
     <string name="fast_coordinates_input">Entrada ràpida de coordenades</string>
     <string name="routing_attr_avoid_ice_roads_fords_name">Evita les vies amb risc de gel, guals</string>
     <string name="routing_attr_avoid_ice_roads_fords_description">Evita les vies amb risc de gel i els guals</string>
