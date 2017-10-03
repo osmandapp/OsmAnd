@@ -36,7 +36,7 @@
     <string name="osmand_parking_position_description">Localització del vostre cotxe aparcat. %1$s</string>
     <string name="gpxup_public">Públic</string>
     <string name="gpxup_private">Privat</string>
-    <string name="layer_map_appearance">Configura l\'aparença</string>
+    <string name="layer_map_appearance">Configura la pantalla</string>
     <string name="screen_is_locked">Per desbloquejar la pantalla premeu la icona de bloqueig</string>
     <string name="map_widget_lock_screen">Bloqueja la pantalla</string>
     <string name="map_widget_next_turn">Proper gir</string>
