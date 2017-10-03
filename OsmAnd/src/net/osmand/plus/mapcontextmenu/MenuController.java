@@ -121,6 +121,7 @@ public abstract class MenuController extends BaseMenuController {
 
 	public void setMapContextMenu(MapContextMenu mapContextMenu) {
 		this.mapContextMenu = mapContextMenu;
+		builder.setMapContextMenu(mapContextMenu);
 	}
 
 	public void build(View rootView) {

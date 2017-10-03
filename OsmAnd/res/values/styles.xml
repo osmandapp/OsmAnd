@@ -486,7 +486,7 @@
     <style name="TextAppearance.ContextMenuTitle" parent="TextAppearance.AppCompat">
         <item name="android:textColor">?android:textColorPrimary</item>
         <item name="android:textSize">@dimen/default_list_text_size_large</item>
-        <item name="android:maxLines">6</item>
+        <item name="android:maxLines">3</item>
         <item name="android:ellipsize">end</item>
     </style>
 
