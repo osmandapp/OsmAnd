@@ -10,5 +10,7 @@ public interface OsmBugsUtil {
 	}
 	
 	public OsmBugResult commit(OsmNotesPoint bug, String text, Action action);
+
+	OsmBugResult modify(OsmNotesPoint bug, String text);
 	
 }

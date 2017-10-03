@@ -32,7 +32,19 @@ public class OsmBugsLocalUtil implements OsmBugsUtil {
 		}
 		return wrap(point, db.addOsmbugs(point));
 	}
-	
+
+	@Override
+	public OsmBugResult modify(OsmNotesPoint point, String text) {
+		OsmNotesPoint pnt = new OsmNotesPoint();
+		pnt.setId(point.getId());
+		pnt.setLatitude(point.getLatitude());
+		pnt.setLongitude(point.getLongitude());
+		pnt.setAction(Action.MODIFY);
+		pnt.setText(text);
+		point = pnt;
+		return wrap(point, db.updateOsmBug(point.getId(), text));
+	}
+
 	private OsmBugResult wrap(OsmNotesPoint p, boolean success) {
 		OsmBugResult s = new OsmBugResult();
 		s.local = p;
