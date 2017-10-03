@@ -58,10 +58,8 @@ public class AmenityMenuBuilder extends MenuBuilder {
 
 	@Override
 	protected void buildTitleRow(View view) {
-		String title = mapActivity.getContextMenu().getTitleStr();
-		if (title.length() > 60) {
-			buildRow(view, R.drawable.ic_action_note_dark, title, 0, false, null, false, 0, false, null);
-		}
+		String title = amenity.getName();
+		buildTitleRow(view, title);
 	}
 
 	private void buildRow(View view, int iconId, String text, String textPrefix,

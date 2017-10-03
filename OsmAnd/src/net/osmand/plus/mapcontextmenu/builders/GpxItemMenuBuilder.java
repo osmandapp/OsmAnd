@@ -40,10 +40,8 @@ public class GpxItemMenuBuilder extends MenuBuilder {
 
 	@Override
 	protected void buildTitleRow(View view) {
-		String title = mapActivity.getContextMenu().getTitleStr();
-		if (title.length() > 60) {
-			buildRow(view, R.drawable.ic_action_note_dark, title, 0, false, null, false, 0, false, null);
-		}
+		String title = item.name;
+		buildTitleRow(view, title);
 	}
 
 	@Override

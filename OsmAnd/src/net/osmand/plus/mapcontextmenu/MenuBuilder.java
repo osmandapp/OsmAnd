@@ -59,6 +59,7 @@ import static android.util.TypedValue.COMPLEX_UNIT_DIP;
 public class MenuBuilder {
 
 	public static final float SHADOW_HEIGHT_TOP_DP = 17f;
+	public static final int TITLE_LIMIT = 60;
 
 	protected MapActivity mapActivity;
 	protected OsmandApplication app;
@@ -283,6 +284,12 @@ public class MenuBuilder {
 	}
 
 	protected void buildTitleRow(View view) {
+	}
+
+	public void buildTitleRow(View view, String title) {
+		if (title != null && title.length() > TITLE_LIMIT) {
+			buildRow(view, R.drawable.ic_action_note_dark, title, 0, false, null, false, 0, false, null);
+		}
 	}
 
 	protected void buildNearestWikiRow(View view) {
