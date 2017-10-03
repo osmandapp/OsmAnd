@@ -304,43 +304,23 @@ public class OsmBugsLayer extends OsmandMapLayer implements IContextMenuProvider
 		return bugs;
 	}
 
-	private void asyncActionTask(final OsmNotesPoint point, final String text) {
-		AsyncTask<Void, Void, OsmBugResult> task = new AsyncTask<Void, Void, OsmBugResult>() {
-
-			@Override
-			protected OsmBugResult doInBackground(Void... params) {
-				return local.modify(point, text);
-			}
-
-			protected void onPostExecute(OsmBugResult obj) {
-				if (obj != null && obj.warning == null) {
-					Toast.makeText(activity, R.string.osm_changes_added_to_local_edits, Toast.LENGTH_LONG).show();
-					if (obj.local != null) {
-						PointDescription pd = new PointDescription(PointDescription.POINT_TYPE_OSM_BUG, obj.local.getText());
-						activity.getContextMenu().show(new LatLon(obj.local.getLatitude(), obj.local.getLongitude()), pd, obj.local);
-					}
-					clearCache();
-				} else {
-					modifyBug(point);
-					Toast.makeText(activity, activity.getResources().getString(R.string.osn_modify_dialog_error) + "\n" + obj, Toast.LENGTH_LONG).show();
-				}
-			}
-		};
-		executeTaskInBackground(task);
-	}
-
-	private void asyncActionTask(final OpenStreetNote bug, final String text, final Action action) {
+	private void asyncActionTask(final OpenStreetNote bug, final OsmNotesPoint point, final String text, final Action action) {
 		AsyncTask<Void, Void, OsmBugResult> task = new AsyncTask<Void, Void, OsmBugResult>() {
 			private OsmBugsUtil osmbugsUtil;
 
 			@Override
 			protected OsmBugResult doInBackground(Void... params) {
-				osmbugsUtil = getOsmbugsUtil(bug);
-				OsmNotesPoint pnt = new OsmNotesPoint();
-				pnt.setId(bug.getId());
-				pnt.setLatitude(bug.getLatitude());
-				pnt.setLongitude(bug.getLongitude());
-				return osmbugsUtil.commit(pnt, text, action);
+				if (bug != null) {
+					osmbugsUtil = getOsmbugsUtil(bug);
+					OsmNotesPoint pnt = new OsmNotesPoint();
+					pnt.setId(bug.getId());
+					pnt.setLatitude(bug.getLatitude());
+					pnt.setLongitude(bug.getLongitude());
+					return osmbugsUtil.commit(pnt, text, action);
+				} else {
+					osmbugsUtil = local;
+					return osmbugsUtil.modify(point, text);
+				}
 			}
 
 			protected void onPostExecute(OsmBugResult obj) {
@@ -375,6 +355,9 @@ public class OsmBugsLayer extends OsmandMapLayer implements IContextMenuProvider
 					} else if (action == Action.CREATE) {
 						r = R.string.osn_add_dialog_error;
 						openBug(bug.getLatitude(), bug.getLongitude(), text);
+					} else if (action == null) {
+						r = R.string.osn_modify_dialog_error;
+						modifyBug(point);
 					} else {
 						commentBug(bug, text);
 					}
@@ -398,7 +381,7 @@ public class OsmBugsLayer extends OsmandMapLayer implements IContextMenuProvider
 		bug.setLatitude(latitude);
 		bug.setLongitude(longitude);
 
-		if (autofill) asyncActionTask(bug, message, Action.CREATE);
+		if (autofill) asyncActionTask(bug, null, message, Action.CREATE);
 		else showBugDialog(bug, Action.CREATE, message);
 	}
 
@@ -419,30 +402,8 @@ public class OsmBugsLayer extends OsmandMapLayer implements IContextMenuProvider
 	}
 
 	private void showBugDialog(final OsmNotesPoint point) {
-		final View view = LayoutInflater.from(activity).inflate(R.layout.open_bug, null);
-		view.findViewById(R.id.user_name_field).setVisibility(View.GONE);
-		view.findViewById(R.id.userNameEditTextLabel).setVisibility(View.GONE);
-		view.findViewById(R.id.password_field).setVisibility(View.GONE);
-		view.findViewById(R.id.passwordEditTextLabel).setVisibility(View.GONE);
 		String text = point.getText();
-		if (!Algorithms.isEmpty(text)) {
-			((EditText) view.findViewById(R.id.message_field)).setText(text);
-		}
-		AndroidUtils.softKeyboardDelayed(view.findViewById(R.id.message_field));
-
-		final AlertDialog.Builder builder = new AlertDialog.Builder(activity);
-		builder.setTitle(R.string.shared_string_commit);
-		builder.setView(view);
-		builder.setPositiveButton(R.string.osn_modify_dialog_title, new DialogInterface.OnClickListener() {
-			@Override
-			public void onClick(DialogInterface dialog, int which) {
-				String text = getMessageText(view);
-				activity.getContextMenu().close();
-				asyncActionTask(point, text);
-			}
-		});
-		builder.setNegativeButton(R.string.shared_string_cancel, null);
-		builder.create().show();
+		createBugDialog(true, text, R.string.osn_modify_dialog_title, null, null, point);
 	}
 
 	private void showBugDialog(final OpenStreetNote bug, final Action action, String text) {
@@ -460,6 +421,10 @@ public class OsmBugsLayer extends OsmandMapLayer implements IContextMenuProvider
 		OsmBugsUtil util = getOsmbugsUtil(bug);
 		final boolean offline = util instanceof OsmBugsLocalUtil;
 
+		createBugDialog(offline, text, title, action, bug, null);
+	}
+
+	private void createBugDialog(final boolean offline, String text, int posButtonTitleRes, final Action action, final OpenStreetNote bug, final OsmNotesPoint point) {
 		@SuppressLint("InflateParams")
 		final View view = LayoutInflater.from(activity).inflate(R.layout.open_bug, null);
 		if (offline) {
@@ -479,13 +444,15 @@ public class OsmBugsLayer extends OsmandMapLayer implements IContextMenuProvider
 		final AlertDialog.Builder builder = new AlertDialog.Builder(activity);
 		builder.setTitle(R.string.shared_string_commit);
 		builder.setView(view);
-		builder.setPositiveButton(title, new DialogInterface.OnClickListener() {
+		builder.setPositiveButton(posButtonTitleRes, new DialogInterface.OnClickListener() {
 			@Override
 			public void onClick(DialogInterface dialog, int which) {
+				String text = offline ? getMessageText(view) : getTextAndUpdateUserPwd(view);
+				activity.getContextMenu().close();
 				if (bug != null) {
-					String text = offline ? getMessageText(view) : getTextAndUpdateUserPwd(view);
-					activity.getContextMenu().close();
-					asyncActionTask(bug, text, action);
+					asyncActionTask(bug, null, text, action);
+				} else if (point != null) {
+					asyncActionTask(null, point, text, null);
 				}
 			}
 		});
