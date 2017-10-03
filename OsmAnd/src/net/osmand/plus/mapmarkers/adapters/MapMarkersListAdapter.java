@@ -12,6 +12,7 @@ import net.osmand.data.LatLon;
 import net.osmand.plus.IconsCache;
 import net.osmand.plus.MapMarkersHelper.MapMarker;
 import net.osmand.plus.OsmAndFormatter;
+import net.osmand.plus.OsmandApplication;
 import net.osmand.plus.R;
 import net.osmand.plus.activities.MapActivity;
 import net.osmand.util.MapUtils;
@@ -31,6 +32,9 @@ public class MapMarkersListAdapter extends RecyclerView.Adapter<MapMarkerItemVie
 
 	private LatLon location;
 	private boolean useCenter;
+
+	private int startPos = -1;
+	private int finishPos = -1;
 
 	public void setAdapterListener(MapMarkersListAdapterListener listener) {
 		this.listener = listener;
@@ -63,12 +67,14 @@ public class MapMarkersListAdapter extends RecyclerView.Adapter<MapMarkerItemVie
 
 	@Override
 	public void onBindViewHolder(final MapMarkerItemViewHolder holder, int pos) {
-		boolean night = mapActivity.getMyApplication().getDaynightHelper().isNightModeForMapControls();
-		IconsCache iconsCache = mapActivity.getMyApplication().getIconsCache();
+		OsmandApplication app = mapActivity.getMyApplication();
+		boolean night = app.getDaynightHelper().isNightModeForMapControls();
+		IconsCache iconsCache = app.getIconsCache();
 
 		boolean locationItem = pos == 0;
-		boolean firstMarkerItem = pos == 1;
 		boolean lastMarkerItem = pos == getItemCount() - 1;
+		boolean start = pos == startPos;
+		boolean finish = pos == finishPos && startPos != finishPos;
 
 		MapMarker marker = locationItem ? null : getItem(pos);
 
@@ -88,10 +94,10 @@ public class MapMarkersListAdapter extends RecyclerView.Adapter<MapMarkerItemVie
 		});
 		holder.bottomShadow.setVisibility(lastMarkerItem ? View.VISIBLE : View.GONE);
 
-		holder.firstDescription.setVisibility((firstMarkerItem || lastMarkerItem) ? View.VISIBLE : View.GONE);
-		if (firstMarkerItem) {
-			holder.firstDescription.setText(mapActivity.getString(R.string.shared_string_control_start) + " • ");
-		} else if (lastMarkerItem) {
+		holder.firstDescription.setVisibility((start || finish) ? View.VISIBLE : View.GONE);
+		if (start) {
+			holder.firstDescription.setText(mapActivity.getString(R.string.shared_string_control_start) + (locationItem ? "" : " • "));
+		} else if (finish) {
 			holder.firstDescription.setText(mapActivity.getString(R.string.shared_string_finish) + " • ");
 		}
 
@@ -100,7 +106,7 @@ public class MapMarkersListAdapter extends RecyclerView.Adapter<MapMarkerItemVie
 			holder.flagIconLeftSpace.setVisibility(View.VISIBLE);
 			holder.icon.setImageDrawable(ContextCompat.getDrawable(mapActivity, R.drawable.map_pedestrian_location));
 			holder.point.setVisibility(View.GONE);
-			holder.checkBox.setChecked(mapActivity.getMyApplication().getMapMarkersHelper().isStartFromMyLocation());
+			holder.checkBox.setChecked(app.getMapMarkersHelper().isStartFromMyLocation());
 			holder.iconReorder.setVisibility(View.GONE);
 			holder.description.setVisibility(View.GONE);
 			holder.distance.setVisibility(View.GONE);
@@ -147,7 +153,7 @@ public class MapMarkersListAdapter extends RecyclerView.Adapter<MapMarkerItemVie
 						? R.color.color_distance : R.color.color_myloc_distance));
 				float dist = (float) MapUtils.getDistance(location.getLatitude(), location.getLongitude(),
 						marker.getLatitude(), marker.getLongitude());
-				holder.distance.setText(OsmAndFormatter.getFormattedDistance(dist, mapActivity.getMyApplication()));
+				holder.distance.setText(OsmAndFormatter.getFormattedDistance(dist, app));
 			}
 		}
 	}
@@ -184,6 +190,47 @@ public class MapMarkersListAdapter extends RecyclerView.Adapter<MapMarkerItemVie
 	@Override
 	public void onItemDismiss(RecyclerView.ViewHolder holder) {
 		listener.onDragEnded(holder);
+	}
+
+	public void updateStartAndFinish() {
+		int startP = startPos;
+		int finishP = finishPos;
+		calculateStartAndFinishPos();
+		notifyItemChanged(startP);
+		notifyItemChanged(finishP);
+		notifyItemChanged(startPos);
+		notifyItemChanged(finishPos);
+	}
+
+	public void calculateStartAndFinishPos() {
+		OsmandApplication app = mapActivity.getMyApplication();
+		boolean startCalculated = false;
+		boolean finishCalculated = false;
+		if (app.getMapMarkersHelper().isStartFromMyLocation() && app.getLocationProvider().getLastStaleKnownLocation() != null) {
+			startPos = 0;
+			startCalculated = true;
+		} else {
+			for (int i = 0; i < markers.size(); i++) {
+				if (markers.get(i).selected) {
+					startPos = i + 1;
+					startCalculated = true;
+					break;
+				}
+			}
+		}
+		for (int i = markers.size() - 1; i >= 0; i--) {
+			if (markers.get(i).selected) {
+				finishPos = i + 1;
+				finishCalculated = true;
+				break;
+			}
+		}
+		if (!startCalculated) {
+			startPos = -1;
+		}
+		if (!finishCalculated) {
+			finishPos = -1;
+		}
 	}
 
 	public interface MapMarkersListAdapterListener {

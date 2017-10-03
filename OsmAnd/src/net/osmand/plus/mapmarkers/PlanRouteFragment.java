@@ -162,6 +162,7 @@ public class PlanRouteFragment extends Fragment implements OsmAndLocationListene
 					markersHelper.setStartFromMyLocation(true);
 					selectedCount = activeMarkersCount;
 				}
+				adapter.calculateStartAndFinishPos();
 				adapter.notifyDataSetChanged();
 				updateText();
 				updateSelectButton();
@@ -206,6 +207,7 @@ public class PlanRouteFragment extends Fragment implements OsmAndLocationListene
 		}
 
 		adapter = new MapMarkersListAdapter(mapActivity);
+		adapter.calculateStartAndFinishPos();
 		final ItemTouchHelper touchHelper = new ItemTouchHelper(new MapMarkersItemTouchHelperCallback(adapter));
 		touchHelper.attachToRecyclerView(markersRv);
 		adapter.setAdapterListener(new MapMarkersListAdapter.MapMarkersListAdapterListener() {
@@ -227,6 +229,7 @@ public class PlanRouteFragment extends Fragment implements OsmAndLocationListene
 					marker.selected = !marker.selected;
 					markersHelper.updateMapMarker(marker, false);
 				}
+				adapter.updateStartAndFinish();
 				adapter.notifyItemChanged(pos);
 				updateSelectButton();
 				updateText();
@@ -247,6 +250,7 @@ public class PlanRouteFragment extends Fragment implements OsmAndLocationListene
 					mapActivity.getMyApplication().getMapMarkersHelper().reorderActiveMarkersIfNeeded();
 					mapActivity.getMyApplication().getSettings().MAP_MARKERS_ORDER_BY_MODE.set(OsmandSettings.MapMarkersOrderByMode.CUSTOM);
 					mapActivity.refreshMap();
+					adapter.calculateStartAndFinishPos();
 					try {
 						adapter.notifyDataSetChanged();
 					} catch (Exception e) {
@@ -393,6 +397,7 @@ public class PlanRouteFragment extends Fragment implements OsmAndLocationListene
 			public void reverseOrderOnClick() {
 				if (mapActivity != null) {
 					markersHelper.reverseActiveMarkersOrder();
+					adapter.calculateStartAndFinishPos();
 					adapter.notifyDataSetChanged();
 				}
 			}
@@ -786,6 +791,7 @@ public class PlanRouteFragment extends Fragment implements OsmAndLocationListene
 				}
 
 				mapActivity.getMyApplication().getMapMarkersHelper().addSelectedMarkersToTop(res);
+				adapter.calculateStartAndFinishPos();
 				adapter.notifyDataSetChanged();
 				updateText();
 				showMarkersRouteOnMap();
