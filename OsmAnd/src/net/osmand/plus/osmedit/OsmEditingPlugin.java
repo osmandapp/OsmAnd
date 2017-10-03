@@ -223,10 +223,15 @@ public class OsmEditingPlugin extends OsmandPlugin {
 					.setListener(listener)
 					.createItem());
 		}
-		adapter.addItem(new ContextMenuItem.ItemBuilder().setTitleId(selectedObj instanceof OsmNotesPoint ? R.string.context_menu_item_modify_note :
-				R.string.context_menu_item_open_note, mapActivity)
-				.setIcon(R.drawable.ic_action_bug_dark)
-				.setListener(listener).createItem());
+		if (selectedObj instanceof OsmNotesPoint) {
+			adapter.addItem(new ContextMenuItem.ItemBuilder().setTitleId(R.string.context_menu_item_modify_note, mapActivity)
+					.setIcon(R.drawable.ic_action_edit_dark)
+					.setListener(listener).createItem());
+		} else {
+			adapter.addItem(new ContextMenuItem.ItemBuilder().setTitleId(R.string.context_menu_item_open_note, mapActivity)
+					.setIcon(R.drawable.ic_action_bug_dark)
+					.setListener(listener).createItem());
+		}
 	}
 
 	public void openOsmNote(MapActivity mapActivity, double latitude, double longitude) {
