@@ -317,10 +317,11 @@ public class OsmBugsLayer extends OsmandMapLayer implements IContextMenuProvider
 					pnt.setLatitude(bug.getLatitude());
 					pnt.setLongitude(bug.getLongitude());
 					return osmbugsUtil.commit(pnt, text, action);
-				} else {
+				} else if (point != null) {
 					osmbugsUtil = local;
 					return osmbugsUtil.modify(point, text);
 				}
+				return null;
 			}
 
 			protected void onPostExecute(OsmBugResult obj) {
