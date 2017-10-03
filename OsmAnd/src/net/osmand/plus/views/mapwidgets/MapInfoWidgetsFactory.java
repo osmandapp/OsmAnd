@@ -577,7 +577,7 @@ public class MapInfoWidgetsFactory {
 				initToolbar(defaultController);
 				defaultController.updateToolbar(this);
 			}
-			updateVisibility(controller != null);
+			updateVisibility(controller != null && (!map.getContextMenu().isVisible() || controller.getType() == TopToolbarControllerType.CONTEXT_MENU));
 		}
 
 		public void updateColors(TopToolbarController controller) {
@@ -801,7 +801,7 @@ public class MapInfoWidgetsFactory {
 					}
 				}
 			}
-			if (map.isTopToolbarActive()) {
+			if (map.isTopToolbarActive() || map.getContextMenu().isVisible()) {
 				updateVisibility(false);
 			} else if (!showNextTurn && updateWaypoint()) {
 				updateVisibility(true);

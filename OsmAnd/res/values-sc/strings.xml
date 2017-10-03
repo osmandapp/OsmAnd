@@ -2778,8 +2778,8 @@ Pro praghere iscrie su còdighe intreu</string>
     <string name="this_year">Cust\'annu</string>
     <string name="top_bar">Barra superiore</string>
     <string name="remove_from_map_markers">Boga dae sos Marcadores Mapa</string>
-    <string name="descendingly">In falada</string>
-    <string name="ascendingly">In artiada</string>
+    <string name="descendingly">in falada</string>
+    <string name="ascendingly">in artiada</string>
     <string name="date_added">Data annanta</string>
     <string name="order_by">Òrdina pro:</string>
     <string name="marker_show_distance_descr">Issèbera comente indicare sa distàntzia e sa diretzione a sos marcadores in sa mapa:</string>
@@ -2792,7 +2792,7 @@ Pro praghere iscrie su còdighe intreu</string>
     <string name="shared_string_markers">Marcadores</string>
     <string name="coordinates_format">Formadu de sas coordinatas</string>
     <string name="use_system_keyboard">Imprea su tecladu de sistema</string>
-    <string name="fast_coordinates_input_descr">Issèbera su formadu de sas coordinatas in antis de incumintzare. L\'as a pòdere semper cambiare dae sas Optziones.</string>
+    <string name="fast_coordinates_input_descr">Issèbera su formadu de sas coordinatas. L\'as a pòdere semper cambiare dae sas Optziones.</string>
     <string name="fast_coordinates_input">Insertada lestra de sas coordinatas</string>
     <string name="routing_attr_avoid_ice_roads_fords_name">Istransi sas istradas de astra, sos bados</string>
     <string name="routing_attr_avoid_ice_roads_fords_description">Istransi sas istradas de astra e sos bados</string>

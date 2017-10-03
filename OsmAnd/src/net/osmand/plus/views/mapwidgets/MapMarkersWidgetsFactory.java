@@ -197,7 +197,8 @@ public class MapMarkersWidgetsFactory {
 				|| map.getMyApplication().getRoutingHelper().isRoutePlanningMode()
 				|| MapRouteInfoMenu.isVisible()
 				|| addressTopBar.getVisibility() == View.VISIBLE
-				|| map.isTopToolbarActive()) {
+				|| map.isTopToolbarActive()
+				|| map.getContextMenu().isVisible()) {
 			updateVisibility(false);
 			return;
 		}
