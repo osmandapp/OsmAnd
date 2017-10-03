@@ -62,6 +62,7 @@ public class MenuBuilder {
 	public static final int TITLE_LIMIT = 60;
 
 	protected MapActivity mapActivity;
+	protected MapContextMenu mapContextMenu;
 	protected OsmandApplication app;
 	protected LinkedList<PlainMenuItem> plainMenuItems;
 	private boolean firstRow;
@@ -69,6 +70,7 @@ public class MenuBuilder {
 	private long objectId;
 	private LatLon latLon;
 	private boolean hidden;
+	private boolean showTitleIfTruncated = true;
 	private boolean showNearestWiki = false;
 	private boolean showOnlinePhotos = true;
 	protected List<Amenity> nearestWiki = new ArrayList<>();
@@ -201,12 +203,20 @@ public class MenuBuilder {
 		this.latLon = objectLocation;
 	}
 
+	public void setMapContextMenu(MapContextMenu mapContextMenu) {
+		this.mapContextMenu = mapContextMenu;
+	}
+
 	public boolean isShowNearestWiki() {
 		return showNearestWiki;
 	}
 
 	public void setShowNearestWiki(boolean showNearestWiki) {
 		this.showNearestWiki = showNearestWiki;
+	}
+
+	public void setShowTitleIfTruncated(boolean showTitleIfTruncated) {
+		this.showTitleIfTruncated = showTitleIfTruncated;
 	}
 
 	public boolean isShowOnlinePhotos() {
@@ -233,7 +243,9 @@ public class MenuBuilder {
 	public void build(View view) {
 		firstRow = true;
 		hidden = false;
-		buildTitleRow(view);
+		if (showTitleIfTruncated) {
+			buildTitleRow(view);
+		}
 		buildNearestWikiRow(view);
 		if (needBuildPlainMenuItems()) {
 			buildPlainMenuItems(view);
@@ -283,11 +295,9 @@ public class MenuBuilder {
 		}
 	}
 
-	protected void buildTitleRow(View view) {
-	}
-
-	public void buildTitleRow(View view, String title) {
-		if (title != null && title.length() > TITLE_LIMIT) {
+	public void buildTitleRow(View view) {
+		String title = mapContextMenu.getTitleStr();
+		if (title.length() > TITLE_LIMIT) {
 			buildRow(view, R.drawable.ic_action_note_dark, title, 0, false, null, false, 0, false, null);
 		}
 	}

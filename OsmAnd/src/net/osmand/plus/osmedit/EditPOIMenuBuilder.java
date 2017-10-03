@@ -26,14 +26,6 @@ public class EditPOIMenuBuilder extends MenuBuilder {
 	}
 
 	@Override
-	protected void buildTitleRow(View view) {
-		if (osmPoint instanceof OpenstreetmapPoint) {
-			String title = ((OpenstreetmapPoint) osmPoint).getName();
-			buildTitleRow(view, title);
-		}
-	}
-
-	@Override
 	public void buildInternal(View view) {
 		if (osmPoint instanceof OsmNotesPoint) {
 			OsmNotesPoint notes = (OsmNotesPoint) osmPoint;

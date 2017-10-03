@@ -39,12 +39,6 @@ public class GpxItemMenuBuilder extends MenuBuilder {
 	}
 
 	@Override
-	protected void buildTitleRow(View view) {
-		String title = item.name;
-		buildTitleRow(view, title);
-	}
-
-	@Override
 	public boolean hasCustomAddressLine() {
 		return true;
 	}

@@ -30,12 +30,6 @@ public class WptPtMenuBuilder extends MenuBuilder {
 	}
 
 	@Override
-	protected void buildTitleRow(View view) {
-		String title = wpt.name;
-		buildTitleRow(view, title);
-	}
-
-	@Override
 	public void buildInternal(View view) {
 		if (wpt.time > 0) {
 			DateFormat dateFormat = android.text.format.DateFormat.getMediumDateFormat(view.getContext());

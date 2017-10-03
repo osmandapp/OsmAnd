@@ -53,12 +53,6 @@ public class FavouritePointMenuBuilder extends MenuBuilder {
 	}
 
 	@Override
-	protected void buildTitleRow(View view) {
-		String title = fav.getName();
-		buildTitleRow(view, title);
-	}
-
-	@Override
 	public void buildInternal(View view) {
 		if (originObject != null && originObject instanceof Amenity) {
 			AmenityMenuBuilder builder = new AmenityMenuBuilder(mapActivity, (Amenity) originObject);

@@ -56,12 +56,6 @@ public class AmenityMenuBuilder extends MenuBuilder {
 	protected void buildNearestWikiRow(View view) {
 	}
 
-	@Override
-	protected void buildTitleRow(View view) {
-		String title = amenity.getName();
-		buildTitleRow(view, title);
-	}
-
 	private void buildRow(View view, int iconId, String text, String textPrefix,
 						  boolean collapsable, final CollapsableView collapsableView,
 						  int textColor, boolean isWiki, boolean isText, boolean needLinks,
