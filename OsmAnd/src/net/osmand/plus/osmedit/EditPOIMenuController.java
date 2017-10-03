@@ -23,6 +23,9 @@ public class EditPOIMenuController extends MenuController {
 		super(new EditPOIMenuBuilder(mapActivity, osmPoint), pointDescription, mapActivity);
 		this.osmPoint = osmPoint;
 		plugin = OsmandPlugin.getPlugin(OsmEditingPlugin.class);
+		if (osmPoint instanceof OsmNotesPoint) {
+			builder.setShowTitleIfTruncated(false);
+		}
 
 		leftTitleButtonController = new TitleButtonController() {
 			@Override
