@@ -1175,7 +1175,7 @@
     <string name="shared_string_history">Historikk</string>
     <string name="shared_string_select_on_map">Velg på kart</string>
     <string name="shared_string_save">Lagre</string>
-    <string name="shared_string_save_as_gpx">Lagre som nytt GPX-spor</string>
+    <string name="shared_string_save_as_gpx">Lagre som ny GPX-tur</string>
     <string name="shared_string_rename">Endre navn</string>
     <string name="shared_string_delete">Slett</string>
     <string name="shared_string_share">Del</string>
@@ -1935,7 +1935,7 @@
     <string name="whats_new">Hva er nytt i</string>
     <string name="si_nm_h">Sjømil i timen (knop)</string>
     <string name="simulate_your_location_stop_descr">Slutt å simulere din posisjon</string>
-    <string name="simulate_your_location_descr">Simuler din posisjon ved bruk av en kalkulert rute eller et GPX-spor som er tatt opp</string>
+    <string name="simulate_your_location_descr">Simuler din posisjon ved bruk av en kalkulert rute eller en GPX-tur som er tatt opp</string>
     <string name="av_locations_descr">GPX-fil med notiser om plasser</string>
     <string name="rendering_attr_currentTrackColor_description">GPX-farge</string>
     <string name="archive_wikipedia_data">Du har gammel, inkompatibel Wikipediadata nedlastet. Ønsker du å arkivere den?</string>
@@ -1952,7 +1952,7 @@
     <string name="share_note">Del notis</string>
     <string name="notes">Notiser</string>
     <string name="nautical_maps_missing">For å vise sjøkart, må spesielle frakoblede kart lastes ned</string>
-    <string name="navigation_over_track">Start navigasjon langs spor?</string>
+    <string name="navigation_over_track">Start navigasjon langs turspor?</string>
     <string name="avoid_roads_msg">Du kan endre til alternativ rute ved å velge hvilke veier du vil unngå</string>
     <string name="routing_attr_no_new_routing_name">Ingen v1.9-regler for ruting</string>
     <string name="routing_attr_no_new_routing_description">Ikke bruk rutingsregler innført i v1.9</string>
@@ -1967,7 +1967,7 @@ Representerer området: %1$s x %2$s</string>
     <string name="navigate_point_easting">Østverdi</string>
     <string name="fav_point_emoticons_message">Navn på favorittpunkt endret til %1$s for å støtte lagring av streng med smilefjes til fil.</string>
     <string name="save_global_track_interval_descr">Velg logginsintervall for det generelle sporingsopptaket (aktivert via GPX-skjermelementet for logging på kartet)</string>
-    <string name="save_track_to_gpx_globally_headline">Sporingslogging på forespørsel</string>
+    <string name="save_track_to_gpx_globally_headline">Turlogging på forespørsel</string>
     <string name="proxy_port_descr">Sett opp din mellomtjeners portnummer (f.eks. 8118)</string>
     <string name="live_monitoring_m_descr">Send sporingsdata til en angitt vevtjener hvis GPX-logging er påskrudd.</string>
     <string name="live_monitoring_m">Nettbasert sporing (GPX kreves)</string>
@@ -2272,7 +2272,7 @@ Representerer området: %1$s x %2$s</string>
     <string name="routing_attr_relief_smoothness_factor_more_plains_name">Flatt</string>
     <string name="relief_smoothness_factor_descr">Foretrukket terreng: flatt eller kupert</string>
     <string name="add_new_folder">Legg til ny mappe</string>
-    <string name="gpx_track">Spor</string>
+    <string name="gpx_track">Tur</string>
     <string name="routing_attr_height_obstacles_name">Bruk høydedata</string>
     <string name="routing_attr_height_obstacles_description">Bruk terrenghøydedata fra SRTM, ASTER og EU-DEM</string>
     <string name="quick_action_bug_message">Melding</string>
@@ -2329,10 +2329,10 @@ Representerer området: %1$s x %2$s</string>
     <string name="empty_state_my_tracks_desc">Ta opp eller importer spor som skal vises</string>
     <string name="empty_state_favourites">Legg til favoritter</string>
     <string name="empty_state_favourites_desc">Legg til favoritter på kart eller importer dem fra filsystem</string>
-    <string name="import_track">Importer spor</string>
-    <string name="import_track_desc">Filen %1$s inneholder ingen rutepunkter, importere den som et spor?</string>
+    <string name="import_track">Importer tur</string>
+    <string name="import_track_desc">Filen %1$s inneholder ingen rutepunkter, importere den som en tur?</string>
     <string name="move_point">Flytt punkt</string>
-    <string name="add_segment_to_the_track">Legg til i et GPX-spor</string>
+    <string name="add_segment_to_the_track">Legg til i en GPX-tur</string>
 <string name="add_route_points">Legg til rutepunkter</string>
     <string name="add_line">Legg til linje</string>
     <string name="do_not_use_animations">Ikke bruk animasjoner</string>
@@ -2376,4 +2376,64 @@ Representerer området: %1$s x %2$s</string>
     <string name="yesterday">I går</string>
     <string name="last_seven_days">Siste 7 dager</string>
     <string name="this_year">Dette året</string>
+    <string name="shared_string_markers">Markører</string>
+    <string name="coordinates_format">Koordinatformat</string>
+    <string name="use_system_keyboard">Bruk systemets tastatur</string>
+    <string name="fast_coordinates_input_descr">Velg format for koordinatinntasting. Du kan alltid endre det ved å trykke Valg.</string>
+    <string name="fast_coordinates_input">Rask koordinatinntasting</string>
+    <string name="routing_attr_avoid_ice_roads_fords_name">Unngå isette veier, vadesteder</string>
+    <string name="routing_attr_avoid_ice_roads_fords_description">Unngå isete veier og vadesteder</string>
+    <string name="use_location">Bruk posisjon</string>
+    <string name="add_location_as_first_point_descr">Legg til din posisjon som første punkt for planlegging av den perfekte ruten.</string>
+    <string name="my_location">Min posisjon</string>
+    <string name="shared_string_finish">Fullfør</string>
+    <string name="plan_route">Planlegg rute</string>
+    <string name="shared_string_sort">Sorter</string>
+    <string name="coordinate_input">Koordinatinntasting</string>
+    <string name="is_saved">blir lagret</string>
+    <string name="marker_save_as_track_descr">Eksporter dine markører til ei fil du kan spesifisere her:</string>
+    <string name="marker_save_as_track">Lagre som tur</string>
+    <string name="all_markers_moved_to_history">Alle kartmarkører flyttet til historikk</string>
+    <string name="marker_moved_to_history">Kartmarkør flyttet til historikk</string>
+    <string name="marker_moved_to_active">Kartmarkør flyttet til aktive</string>
+    <string name="shared_string_list">Liste</string>
+    <string name="passed">Sist brukt: %1$s</string>
+    <string name="mapillary_menu_filter_description">Du kan filtrere bilder etter innsender og dato. Filter innvirker bare for nært forstørrelsesnivå.</string>
+    <string name="improve_coverage_install_mapillary_desc">Du kan ta dine egne bilder eller billedserier og tilknytte dem denne kartplasseringen.
+\n
+\nAlt du trenger å gjøre er å installere Mapillary-programmet fra Google Play Store.</string>
+    <string name="plugin_mapillary_descr">Foto på gatenivå for alle. Oppdag plasser, samarbeid, fang inn verden.</string>
+    <string name="quick_action_showhide_osmbugs_title">Vis/skjul OSM-notater</string>
+    <string name="quick_action_osmbugs_show">Vis OSM-notater</string>
+    <string name="quick_action_osmbugs_hide">Skjul OSM-notater</string>
+    <string name="quick_action_showhide_osmbugs_descr">Å trykke på handlingsknappen vil vise eller skjule OSM-notater på kartet.</string>
+    <string name="sea_depth_thanks">Takk for at du kjøpte nautiske dybdekonturer.</string>
+    <string name="index_item_depth_contours_osmand_ext">Havdybdekonturer</string>
+    <string name="download_depth_countours">Havdybdekonturer</string>
+    <string name="route_points_category_name">Svinger å passere langs ruten</string>
+    <string name="rendering_attr_depthContours_description">Vis havdybdekonturer og punkter</string>
+    <string name="rendering_attr_depthContours_name">Nautiske dybdekonturer</string>
+    <string name="auto_split_recording_title">Del opp opptak automatisk etter opphold</string>
+    <string name="auto_split_recording_descr">Start et nytt segment etter en pause på seks min., en ny tur etter en pause på to timer, eller ei ny fil etter et lengre opphold, hvis datoen har endret seg.</string>
+    <string name="osmo_no_connection_msg">Kan ikke koble til OsMo-tjeneren:
+\n- sjekk din internettilknytning;
+\n- sjekk innstillingene;
+\n- sjekk oss ut på Twitter: https://twitter.com/OsMomobi</string>
+    <string name="anonymous_user_hint">En anonym gruppe kan ikke:
+\n- opprette grupper;
+\n- synkronisere grupper og enheter med tjeneren;
+\n- behandle grupper og enheter i en personlig oversikt på nettsiden.</string>
+    <string name="simulate_initial_startup">Simuler første programstart</string>
+    <string name="audionotes_plugin_description">Audio/video-notatprogramtillegget tilbyr funksjonalitet for å ta opp lyd, eller video, eller ta bilder på en tur, enten ved bruk av en knapp på skjermen, eller direkte i bindeleddsmenyen for enhver posisjon på kartet.</string>
+    <string name="average">Gjennomsnitt</string>
+    <string name="of">%1$d av %2$d</string>
+    <string name="ascent_descent">Stigning/fall</string>
+    <string name="moving_time">Tid i bevegelse</string>
+    <string name="max_min">Maks./min.</string>
+    <string name="min_max">Min./maks.</string>
+    <string name="osmo_auth_error">Støtte på OsMo-identitetsbekreftelsesfeil: %1$s.
+\n Det kan være et tjenesten er nede for øyeblikket, eller at din registrering har utløpt.
+\n
+\n Ønsker du å fortsette med ny registrering?</string>
+    <string name="layer_osm_bugs">OSM-notater (på nett)</string>
     </resources>
