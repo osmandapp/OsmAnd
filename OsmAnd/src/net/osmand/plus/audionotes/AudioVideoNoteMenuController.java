@@ -26,6 +26,7 @@ public class AudioVideoNoteMenuController extends MenuController {
 		this.mRecording = recording;
 		mPlugin = OsmandPlugin.getPlugin(AudioVideoNotesPlugin.class);
 		mIsFileAvailable = mRecording.getFile().exists();
+		builder.setShowTitleIfTruncated(false);
 
 		if (mIsFileAvailable) {
 			leftTitleButtonController = new TitleButtonController() {

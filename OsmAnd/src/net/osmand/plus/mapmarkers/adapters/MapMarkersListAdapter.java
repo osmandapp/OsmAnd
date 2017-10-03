@@ -8,10 +8,12 @@ import android.view.MotionEvent;
 import android.view.View;
 import android.view.ViewGroup;
 
+import net.osmand.Location;
 import net.osmand.data.LatLon;
 import net.osmand.plus.IconsCache;
 import net.osmand.plus.MapMarkersHelper.MapMarker;
 import net.osmand.plus.OsmAndFormatter;
+import net.osmand.plus.OsmandApplication;
 import net.osmand.plus.R;
 import net.osmand.plus.activities.MapActivity;
 import net.osmand.util.MapUtils;
@@ -25,23 +27,18 @@ import java.util.Locale;
 public class MapMarkersListAdapter extends RecyclerView.Adapter<MapMarkerItemViewHolder>
 		implements MapMarkersItemTouchHelperCallback.ItemTouchHelperAdapter {
 
+	private static final int LOCATION_ITEM_ID = 0;
+
 	private MapActivity mapActivity;
 	private List<MapMarker> markers;
 	private MapMarkersListAdapterListener listener;
 
-	private LatLon location;
-	private boolean useCenter;
+	private int startPos = -1;
+	private int finishPos = -1;
+	private int firstSelectedMarkerPos = -1;
 
 	public void setAdapterListener(MapMarkersListAdapterListener listener) {
 		this.listener = listener;
-	}
-
-	public void setLocation(LatLon location) {
-		this.location = location;
-	}
-
-	public void setUseCenter(boolean useCenter) {
-		this.useCenter = useCenter;
 	}
 
 	public MapMarkersListAdapter(MapActivity mapActivity) {
@@ -63,12 +60,19 @@ public class MapMarkersListAdapter extends RecyclerView.Adapter<MapMarkerItemVie
 
 	@Override
 	public void onBindViewHolder(final MapMarkerItemViewHolder holder, int pos) {
-		boolean night = mapActivity.getMyApplication().getDaynightHelper().isNightModeForMapControls();
-		IconsCache iconsCache = mapActivity.getMyApplication().getIconsCache();
+		OsmandApplication app = mapActivity.getMyApplication();
+		boolean night = app.getDaynightHelper().isNightModeForMapControls();
+		IconsCache iconsCache = app.getIconsCache();
 
 		boolean locationItem = pos == 0;
 		boolean firstMarkerItem = pos == 1;
 		boolean lastMarkerItem = pos == getItemCount() - 1;
+		boolean start = pos == startPos;
+		boolean finish = pos == finishPos && startPos != finishPos;
+		boolean firstSelectedMarker = pos == firstSelectedMarkerPos;
+
+		Location myLoc = app.getLocationProvider().getLastStaleKnownLocation();
+		boolean useLocation = app.getMapMarkersHelper().isStartFromMyLocation() && myLoc != null;
 
 		MapMarker marker = locationItem ? null : getItem(pos);
 
@@ -88,10 +92,10 @@ public class MapMarkersListAdapter extends RecyclerView.Adapter<MapMarkerItemVie
 		});
 		holder.bottomShadow.setVisibility(lastMarkerItem ? View.VISIBLE : View.GONE);
 
-		holder.firstDescription.setVisibility((firstMarkerItem || lastMarkerItem) ? View.VISIBLE : View.GONE);
-		if (firstMarkerItem) {
-			holder.firstDescription.setText(mapActivity.getString(R.string.shared_string_control_start) + " • ");
-		} else if (lastMarkerItem) {
+		holder.firstDescription.setVisibility((start || finish) ? View.VISIBLE : View.GONE);
+		if (start) {
+			holder.firstDescription.setText(mapActivity.getString(R.string.shared_string_control_start) + (locationItem && !useLocation ? "" : " • "));
+		} else if (finish) {
 			holder.firstDescription.setText(mapActivity.getString(R.string.shared_string_finish) + " • ");
 		}
 
@@ -100,7 +104,7 @@ public class MapMarkersListAdapter extends RecyclerView.Adapter<MapMarkerItemVie
 			holder.flagIconLeftSpace.setVisibility(View.VISIBLE);
 			holder.icon.setImageDrawable(ContextCompat.getDrawable(mapActivity, R.drawable.map_pedestrian_location));
 			holder.point.setVisibility(View.GONE);
-			holder.checkBox.setChecked(mapActivity.getMyApplication().getMapMarkersHelper().isStartFromMyLocation());
+			holder.checkBox.setChecked(app.getMapMarkersHelper().isStartFromMyLocation());
 			holder.iconReorder.setVisibility(View.GONE);
 			holder.description.setVisibility(View.GONE);
 			holder.distance.setVisibility(View.GONE);
@@ -140,16 +144,28 @@ public class MapMarkersListAdapter extends RecyclerView.Adapter<MapMarkerItemVie
 				descr = month + " " + day;
 			}
 			holder.description.setText(descr);
-
-			if (location != null) {
-				holder.distance.setVisibility(View.VISIBLE);
-				holder.distance.setTextColor(ContextCompat.getColor(mapActivity, useCenter
-						? R.color.color_distance : R.color.color_myloc_distance));
-				float dist = (float) MapUtils.getDistance(location.getLatitude(), location.getLongitude(),
-						marker.getLatitude(), marker.getLongitude());
-				holder.distance.setText(OsmAndFormatter.getFormattedDistance(dist, mapActivity.getMyApplication()));
-			}
 		}
+
+		boolean showDistance = locationItem ? useLocation : marker.selected;
+		boolean showPoint = showDistance && !locationItem;
+		holder.distance.setVisibility(showDistance ? View.VISIBLE : View.GONE);
+		holder.point.setVisibility(showPoint ? View.VISIBLE : View.GONE);
+		if (showDistance) {
+			holder.distance.setTextColor(ContextCompat.getColor(mapActivity, night ? R.color.color_distance : R.color.color_myloc_distance));
+			LatLon first = firstSelectedMarker && useLocation
+					? new LatLon(myLoc.getLatitude(), myLoc.getLongitude())
+					: getPreviousSelectedMarkerLatLon(pos - 1);
+			float dist = 0;
+			if (first != null && marker != null) {
+				dist = (float) MapUtils.getDistance(first, marker.point);
+			}
+			holder.distance.setText(OsmAndFormatter.getFormattedDistance(dist, app));
+		}
+	}
+
+	@Override
+	public long getItemId(int position) {
+		return position == 0 ? LOCATION_ITEM_ID : getItem(position).hashCode();
 	}
 
 	@Override
@@ -184,6 +200,54 @@ public class MapMarkersListAdapter extends RecyclerView.Adapter<MapMarkerItemVie
 	@Override
 	public void onItemDismiss(RecyclerView.ViewHolder holder) {
 		listener.onDragEnded(holder);
+	}
+
+	private LatLon getPreviousSelectedMarkerLatLon(int currentMarkerPos) {
+		for (int i = currentMarkerPos - 1; i >= 0; i--) {
+			MapMarker m = markers.get(i);
+			if (m.selected) {
+				return m.point;
+			}
+		}
+		return null;
+	}
+
+	public void calculateStartAndFinishPos() {
+		OsmandApplication app = mapActivity.getMyApplication();
+		boolean startCalculated = false;
+		boolean finishCalculated = false;
+		boolean firstSelectedMarkerCalculated = false;
+		if (app.getMapMarkersHelper().isStartFromMyLocation() && app.getLocationProvider().getLastStaleKnownLocation() != null) {
+			startPos = 0;
+			startCalculated = true;
+		}
+		for (int i = 0; i < markers.size(); i++) {
+			if (markers.get(i).selected) {
+				if (!startCalculated) {
+					startPos = i + 1;
+					startCalculated = true;
+				}
+				firstSelectedMarkerPos = i + 1;
+				firstSelectedMarkerCalculated = true;
+				break;
+			}
+		}
+		for (int i = markers.size() - 1; i >= 0; i--) {
+			if (markers.get(i).selected) {
+				finishPos = i + 1;
+				finishCalculated = true;
+				break;
+			}
+		}
+		if (!startCalculated) {
+			startPos = -1;
+		}
+		if (!finishCalculated) {
+			finishPos = -1;
+		}
+		if (!firstSelectedMarkerCalculated) {
+			firstSelectedMarkerPos = -1;
+		}
 	}
 
 	public interface MapMarkersListAdapterListener {
