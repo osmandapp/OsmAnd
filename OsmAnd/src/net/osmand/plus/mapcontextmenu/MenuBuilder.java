@@ -296,9 +296,11 @@ public class MenuBuilder {
 	}
 
 	public void buildTitleRow(View view) {
-		String title = mapContextMenu.getTitleStr();
-		if (title.length() > TITLE_LIMIT) {
-			buildRow(view, R.drawable.ic_action_note_dark, title, 0, false, null, false, 0, false, null);
+		if (mapContextMenu != null) {
+			String title = mapContextMenu.getTitleStr();
+			if (title.length() > TITLE_LIMIT) {
+				buildRow(view, R.drawable.ic_action_note_dark, title, 0, false, null, false, 0, false, null);
+			}
 		}
 	}
 
