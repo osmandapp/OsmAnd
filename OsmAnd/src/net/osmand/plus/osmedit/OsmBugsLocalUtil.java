@@ -39,7 +39,6 @@ public class OsmBugsLocalUtil implements OsmBugsUtil {
 		pnt.setId(point.getId());
 		pnt.setLatitude(point.getLatitude());
 		pnt.setLongitude(point.getLongitude());
-		pnt.setAction(Action.MODIFY);
 		pnt.setText(text);
 		point = pnt;
 		return wrap(point, db.updateOsmBug(point.getId(), text));
