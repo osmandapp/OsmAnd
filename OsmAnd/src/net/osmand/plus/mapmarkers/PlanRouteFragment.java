@@ -762,8 +762,8 @@ public class PlanRouteFragment extends Fragment implements OsmAndLocationListene
 					if (i == 0 && startFromLoc) {
 						continue;
 					}
-					int index = sequence[startFromLoc ? i - 1 : i];
-					res.add(selectedMarkers.get(index));
+					int index = sequence[i];
+					res.add(selectedMarkers.get(startFromLoc ? index - 1 : index));
 				}
 
 				return res;
@@ -786,8 +786,9 @@ public class PlanRouteFragment extends Fragment implements OsmAndLocationListene
 				}
 
 				mapActivity.getMyApplication().getMapMarkersHelper().addSelectedMarkersToTop(res);
-
 				adapter.notifyDataSetChanged();
+				updateText();
+				showMarkersRouteOnMap();
 			}
 		}.execute();
 	}
