@@ -71,6 +71,7 @@ import static net.osmand.plus.OsmandSettings.LANDSCAPE_MIDDLE_RIGHT_CONSTANT;
 public class PlanRouteFragment extends Fragment {
 
 	public static final String TAG = "PlanRouteFragment";
+	private static final int MAX_DIST_FOR_SNAP_TO_ROAD = 500 * 1000; // 500 km
 
 	private MapMarkersHelper markersHelper;
 	private MapMarkersListAdapter adapter;
@@ -775,7 +776,10 @@ public class PlanRouteFragment extends Fragment {
 		for (int i = 0; i < points.size() - 1; i++) {
 			Pair<WptPt, WptPt> pair = new Pair<>(points.get(i), points.get(i + 1));
 			if (snappedToRoadPoints.get(pair) == null) {
-				snapToRoadPairsToCalculate.add(pair);
+				double dist = MapUtils.getDistance(pair.first.lat, pair.first.lon, pair.second.lat, pair.second.lon);
+				if (dist < MAX_DIST_FOR_SNAP_TO_ROAD) {
+					snapToRoadPairsToCalculate.add(pair);
+				}
 			}
 		}
 	}
