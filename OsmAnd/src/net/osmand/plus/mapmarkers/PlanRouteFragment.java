@@ -604,11 +604,13 @@ public class PlanRouteFragment extends Fragment {
 		}
 	}
 
-	private void showMarkersRouteOnMap() {
+	private void showMarkersRouteOnMap(boolean adjustMap) {
 		MapActivity mapActivity = getMapActivity();
 		if (mapActivity != null) {
 			mapActivity.getMapLayers().getMapMarkersLayer().setRoute(snapTrkSegment);
-			showRouteOnMap(snapTrkSegment.points);
+			if (adjustMap) {
+				showRouteOnMap(snapTrkSegment.points);
+			}
 		}
 	}
 
@@ -786,6 +788,10 @@ public class PlanRouteFragment extends Fragment {
 	}
 
 	private void recreateSnapTrkSegment() {
+		recreateSnapTrkSegment(true);
+	}
+
+	private void recreateSnapTrkSegment(boolean adjustMap) {
 		snapTrkSegment.points.clear();
 		List<WptPt> points = getPointsToCalculate();
 		if (appMode.getStringKey().equals(ApplicationMode.DEFAULT.getStringKey())) {
@@ -802,7 +808,7 @@ public class PlanRouteFragment extends Fragment {
 				}
 			}
 		}
-		showMarkersRouteOnMap();
+		showMarkersRouteOnMap(adjustMap);
 		MapActivity mapActivity = getMapActivity();
 		if (mapActivity != null) {
 			mapActivity.getMyApplication().runInUIThread(new Runnable() {
@@ -914,7 +920,7 @@ public class PlanRouteFragment extends Fragment {
 				}
 				calculatedPairs++;
 				snappedToRoadPoints.put(currentPair, pts);
-				recreateSnapTrkSegment();
+				recreateSnapTrkSegment(false);
 				app.runInUIThread(new Runnable() {
 					@Override
 					public void run() {
