@@ -3033,7 +3033,7 @@
 	<string name="poi_payment_ep_minicash_yes">MiniCash</string>
 	<string name="poi_payment_ep_monedero4b_yes">Monedero 4B</string>
 	<string name="poi_payment_ep_monedero_yes">Monedero</string>
-	<string name="poi_brushless_no">Sans brosse : non</string>
+	<string name="poi_brushless_no">Sans balai</string>
 	<string name="poi_boat_rental_type">Location bateaux</string>
 
 <string name="poi_toilets_access_community">Accès toilettes : communauté</string>
