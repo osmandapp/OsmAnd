@@ -65,7 +65,6 @@ public class MapMarkersListAdapter extends RecyclerView.Adapter<MapMarkerItemVie
 		IconsCache iconsCache = app.getIconsCache();
 
 		boolean locationItem = pos == 0;
-		boolean firstMarkerItem = pos == 1;
 		boolean lastMarkerItem = pos == getItemCount() - 1;
 		boolean start = pos == startPos;
 		boolean finish = pos == finishPos && startPos != finishPos;
@@ -99,6 +98,13 @@ public class MapMarkersListAdapter extends RecyclerView.Adapter<MapMarkerItemVie
 			holder.firstDescription.setText(mapActivity.getString(R.string.shared_string_finish) + " • ");
 		}
 
+		boolean iconSettled = false;
+		if ((start || finish) && !locationItem) {
+			int res = start ? R.drawable.ic_action_point_start : R.drawable.ic_action_point_destination;
+			holder.icon.setImageDrawable(iconsCache.getIcon(res, MapMarker.getColorId(marker.colorIndex)));
+			iconSettled = true;
+		}
+
 		if (locationItem) {
 			holder.topDivider.setVisibility(View.VISIBLE);
 			holder.flagIconLeftSpace.setVisibility(View.VISIBLE);
@@ -111,7 +117,9 @@ public class MapMarkersListAdapter extends RecyclerView.Adapter<MapMarkerItemVie
 		} else {
 			holder.topDivider.setVisibility(View.GONE);
 			holder.flagIconLeftSpace.setVisibility(View.GONE);
-			holder.icon.setImageDrawable(iconsCache.getIcon(R.drawable.ic_action_flag_dark, MapMarker.getColorId(marker.colorIndex)));
+			if (!iconSettled) {
+				holder.icon.setImageDrawable(iconsCache.getIcon(R.drawable.ic_action_flag_dark, MapMarker.getColorId(marker.colorIndex)));
+			}
 			holder.point.setVisibility(View.VISIBLE);
 			holder.checkBox.setChecked(marker.selected);
 
