@@ -1,4 +1,5 @@
-<?xml version="1.0" encoding="UTF-8" standalone="no"?><resources><string name="background_service_is_enabled_question">Serviciul sleep încă rulează în background. Doriți să-l opriți?</string>
+<?xml version='1.0' encoding='UTF-8'?>
+<resources><string name="background_service_is_enabled_question">Serviciul sleep încă rulează în background. Doriți să-l opriți?</string>
     
 	
     <string name="close_changeset">Închide setul de modificări</string>
@@ -1633,10 +1634,10 @@
     <string name="world_map_download_descr">Harta de bază a lumii (ce acoperă întreaga lume fără detalii) lipsește sau învechită. Luați în considerare descărcarea completă a hărții de bază(World basemap).</string>
     <string name="shared_string_qr_code">Cod QR</string>
     <string name="map_downloaded">Hartă descărcată</string>
-    <string name="map_downloaded_descr">Harta pentru %1$s a fost descărcată. Navigați înapoi la hartă pentru a o folosi.</string>
-    <string name="go_to_map">Mergi la hartă</string>
+    <string name="map_downloaded_descr">Harta pentru %1$s a fost descărcată, acum puteți începe să o utilizați.</string>
+    <string name="go_to_map">Afișează harta</string>
     <string name="shared_string_send">Trimite</string>
-    <string name="favorite_category_dublicate_message">Numele categoriei specificate există deja. Definiți alt nume.</string>
+    <string name="favorite_category_dublicate_message">Numele categoriei specificate există deja. Vă rugăm folosiți un alt nume.</string>
     <string name="simulate_initial_startup_descr">Simulează ca și când aplicația ar fi pentru prima oară lansată, celelalte setari rămân neschimbate</string>
     <string name="simulate_initial_startup">Simulează lansarea inițială</string>
     <string name="share_menu_location">Împărtășește locația</string>
@@ -1851,4 +1852,32 @@
     <string name="route_points">Puncte pe traseu</string>
     <string name="track_segments">Segmente de traseu</string>
     <string name="track_points">Puncte pe traseu</string>
+    <string name="shared_string_markers">Marcatori</string>
+    <string name="use_location">Utilizați poziția</string>
+    <string name="my_location">Poziția mea</string>
+    <string name="shared_string_finish">Sfârşit</string>
+    <string name="shared_string_sort">Sortează</string>
+    <string name="move_to_history">Mută în istoric</string>
+    <string name="order_by">Ordonează după:</string>
+    <string name="shared_string_groups">Grupuri</string>
+    <string name="today">Azi</string>
+    <string name="yesterday">Ieri</string>
+    <string name="last_seven_days">Ultimele 7 zile</string>
+    <string name="this_year">Anul acesta</string>
+    <string name="sort_by">Sortează după</string>
+    <string name="do_not_use_animations">Nu utiliza animații</string>
+    <string name="do_not_use_animations_descr">Dezactivează animațiile în această app</string>
+    <string name="line">Linie</string>
+    <string name="edit_line">Editează linia</string>
+    <string name="shared_string_options">Opțiuni</string>
+    <string name="measurement_tool">Măsoară distanța</string>
+    <string name="quick_action_start_stop_navigation">Pornește/oprește navigația</string>
+    <string name="shared_string_reset">Resetează</string>
+    <string name="shared_string_reload">Reîncarcă</string>
+    <string name="shared_string_to">Spre</string>
+    <string name="mapillary_menu_date_from">De la</string>
+    <string name="mapillary_menu_title_username">Nume de utilizator</string>
+    <string name="shared_string_permissions">Permisiuni</string>
+    <string name="shared_string_install">Instalare</string>
+    <string name="shared_string_add_photos">Adaugă poze</string>
     </resources>
