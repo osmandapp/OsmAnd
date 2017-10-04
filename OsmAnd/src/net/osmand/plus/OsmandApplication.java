@@ -364,6 +364,9 @@ public class OsmandApplication extends MultiDexApplication {
 	public void checkApplicationIsBeingInitialized(Activity activity, AppInitializeListener listener) {
 		// start application if it was previously closed
 		startApplication();
+		if (NetworkUtils.getProxy() == null && osmandSettings.ENABLE_PROXY.get()) {
+			NetworkUtils.setProxy(osmandSettings.PROXY_HOST.get(), osmandSettings.PROXY_PORT.get());
+		}
 		if(listener != null) {
 			appInitializer.addListener(listener);
 		}
