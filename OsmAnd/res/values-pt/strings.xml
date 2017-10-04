@@ -1993,7 +1993,7 @@ Clique no widget de medição para ver mais ações.</string>
     <string name="upload_anonymously">Enviar anonimamente</string>
     <string name="download_files_error_not_enough_space">Espaço insuficiente! São precisos {3} MB temporariamente e {1} MB permanentemente. Actualmente, apenas existem {2} MB disponíveis.</string>
     <string name="download_files_question_space_with_temp">Descarregar mesmo {0} ficheiro(s)? Isso precisa de {3} MB temporariamente e {1} MB permanentemente. Actualmente, existem {2} MB disponíveis.</string>
-    <string name="upload_osm_note_description">Pode enviar anonimamente a sua Nota OSM se utilizar o seu perfil do OpenStreetMap.org.</string>
+    <string name="upload_osm_note_description">Pode enviar a sua Nota OSM anonimamente ou utilizando o seu perfil do OpenStreetMap.org.</string>
     <string name="upload_osm_note">Enviar a Nota OSM</string>
     <string name="map_marker_1st">Primeiro marcador de mapa</string>
     <string name="map_marker_2nd">Segundo marcador de mapa</string>
@@ -2300,4 +2300,64 @@ Clique no widget de medição para ver mais ações.</string>
     <string name="show_transparency_seekbar">Mostra a transparência da barra de navegação</string>
     <string name="shared_string_widgets">Widgets</string>
     <string name="rendering_attr_hideUnderground_name">Objectos subterrâneos</string>
+    <string name="release_2_7">\\022 Plugin Mapillary com imagens ao nível da rua
+\n
+\n • Widget de régua para medição da distância
+\n
+\n • Intervalos GPX com informação detalhada sobre o seu percurso
+\n
+\n • Outras melhores e correção de erros
+\n
+\n</string>
+    <string name="auto_split_recording_title">Divisão automática de gravações após separação</string>
+    <string name="auto_split_recording_descr">Iniciar novo segmento após uma quebra de 6 min, novo percurso após quebra de 2 h, ou novo arquivo após quebra mais longa se a data se tiver alterado.</string>
+    <string name="rendering_attr_contourDensity_description">Densidade de linhas de contorno</string>
+    <string name="rendering_attr_contourDensity_name">Densidade de linhas de contorno</string>
+    <string name="rendering_value_high_name">Alto</string>
+    <string name="rendering_value_medium_w_name">Médio</string>
+    <string name="rendering_value_low_name">Baixo</string>
+    <string name="rendering_attr_contourWidth_description">Largura das linhas de contorno</string>
+    <string name="rendering_attr_contourWidth_name">Largura das linhas de contorno</string>
+    <string name="rendering_attr_hideWaterPolygons_description">Água</string>
+    <string name="rendering_attr_hideWaterPolygons_name">Esconder água</string>
+    <string name="legacy_search">Pesquisa antiga</string>
+    <string name="show_legacy_search">Mostrar pesquisa antiga</string>
+    <string name="show_legacy_search_desc">Adicionar pesquisa antiga à lista da gaveta</string>
+    <string name="routing_attr_allow_motorway_name">Permitir vias de motociclos</string>
+    <string name="routing_attr_allow_motorway_description">Permitir vias de motociclos</string>
+    <string name="wiki_around">Artigos de Wikipedia próximos</string>
+    <string name="search_map_hint">Procurar cidade ou região</string>
+    <string name="route_roundabout_short">Use a saída %1$d e continue</string>
+    <string name="upload_poi">Enviar Pontos de Interesse (POI)</string>
+    <string name="route_calculation">Cálculo da rota</string>
+    <string name="gpx_no_tracks_title">Não tem ainda nenhum percurso</string>
+    <string name="gpx_no_tracks_title_folder">Também pode adicionar percursos ao diretório</string>
+    <string name="gpx_add_track">Adicionar percurso</string>
+    <string name="gpx_appearance">Aparência</string>
+    <string name="osmo_share_location">Partilhar</string>
+    <string name="osmo_pause_location">Pausa</string>
+    <string name="osmo_service_running">Serviço OsMo está em funcionamento</string>
+    <string name="trip_rec_notification_settings">Gravação da viagem (sem dados)</string>
+    <string name="trip_rec_notification_settings_desc">Mostrar uma notificação de sistema que permite iniciar a gravação da viagem</string>
+    <string name="shared_string_notifications">Notificações</string>
+    <string name="shared_string_continue">Continuar</string>
+    <string name="shared_string_pause">Pausa</string>
+    <string name="shared_string_paused">Em pausa</string>
+    <string name="shared_string_trip">Viagem</string>
+    <string name="shared_string_recorded">Gravado</string>
+    <string name="shared_string_record">Registo</string>
+    <string name="gpx_logging_no_data">Sem dados</string>
+    <string name="release_2_5">\\022 Icones selecionáveis no mapa
+\n
+\n • Pesquisa poderosa filtrada por pontos de interesse (POI): Pesquise, ex. restaurantes por cozinha, ou campgrounds with specific facilities 
+\n
+\n • Novo estilo de Mapa Topo para ciclistas e montanhistas 
+\n
+\n • Gravação de viagem melhorada
+\n
+\n • Notificações de navegação melhoradas (Android Wear)
+\n
+\n • Muitas outras melhorias e correção de erros
+\n
+\n e muitos mais…</string>
     </resources>
