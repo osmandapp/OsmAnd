@@ -3,6 +3,7 @@ package net.osmand.plus.mapmarkers.adapters;
 import android.support.v4.content.ContextCompat;
 import android.support.v4.view.MotionEventCompat;
 import android.support.v7.widget.RecyclerView;
+import android.util.Pair;
 import android.view.LayoutInflater;
 import android.view.MotionEvent;
 import android.view.View;
@@ -10,6 +11,7 @@ import android.view.ViewGroup;
 
 import net.osmand.Location;
 import net.osmand.data.LatLon;
+import net.osmand.plus.GPXUtilities.WptPt;
 import net.osmand.plus.IconsCache;
 import net.osmand.plus.MapMarkersHelper.MapMarker;
 import net.osmand.plus.OsmAndFormatter;
@@ -23,6 +25,7 @@ import java.util.Collections;
 import java.util.Date;
 import java.util.List;
 import java.util.Locale;
+import java.util.Map;
 
 public class MapMarkersListAdapter extends RecyclerView.Adapter<MapMarkerItemViewHolder>
 		implements MapMarkersItemTouchHelperCallback.ItemTouchHelperAdapter {
@@ -37,8 +40,14 @@ public class MapMarkersListAdapter extends RecyclerView.Adapter<MapMarkerItemVie
 	private int finishPos = -1;
 	private int firstSelectedMarkerPos = -1;
 
+	private Map<Pair<WptPt, WptPt>, List<WptPt>> snappedToRoadPoints;
+
 	public void setAdapterListener(MapMarkersListAdapterListener listener) {
 		this.listener = listener;
+	}
+
+	public void setSnappedToRoadPoints(Map<Pair<WptPt, WptPt>, List<WptPt>> snappedToRoadPoints) {
+		this.snappedToRoadPoints = snappedToRoadPoints;
 	}
 
 	public MapMarkersListAdapter(MapActivity mapActivity) {
@@ -165,7 +174,21 @@ public class MapMarkersListAdapter extends RecyclerView.Adapter<MapMarkerItemVie
 					: getPreviousSelectedMarkerLatLon(pos - 1);
 			float dist = 0;
 			if (first != null && marker != null) {
-				dist = (float) MapUtils.getDistance(first, marker.point);
+				WptPt pt1 = new WptPt();
+				pt1.lat = first.getLatitude();
+				pt1.lon = first.getLongitude();
+				WptPt pt2 = new WptPt();
+				pt2.lat = marker.getLatitude();
+				pt2.lon = marker.getLongitude();
+				List<WptPt> points = snappedToRoadPoints.get(new Pair<>(pt1, pt2));
+				if (points != null) {
+					for (int i = 0; i < points.size() - 1; i++) {
+						dist += (float) MapUtils.getDistance(points.get(i).lat, points.get(i).lon,
+								points.get(i + 1).lat, points.get(i + 1).lon);
+					}
+				} else {
+					dist = (float) MapUtils.getDistance(pt1.lat, pt1.lon, pt2.lat, pt2.lon);
+				}
 			}
 			holder.distance.setText(OsmAndFormatter.getFormattedDistance(dist, app));
 		}

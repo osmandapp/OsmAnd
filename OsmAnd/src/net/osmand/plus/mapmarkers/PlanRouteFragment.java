@@ -223,6 +223,7 @@ public class PlanRouteFragment extends Fragment {
 		adapter = new MapMarkersListAdapter(mapActivity);
 		adapter.setHasStableIds(true);
 		adapter.calculateStartAndFinishPos();
+		adapter.setSnappedToRoadPoints(snappedToRoadPoints);
 		final ItemTouchHelper touchHelper = new ItemTouchHelper(new MapMarkersItemTouchHelperCallback(adapter));
 		touchHelper.attachToRecyclerView(markersRv);
 		adapter.setAdapterListener(new MapMarkersListAdapter.MapMarkersListAdapterListener() {
@@ -917,6 +918,7 @@ public class PlanRouteFragment extends Fragment {
 				app.runInUIThread(new Runnable() {
 					@Override
 					public void run() {
+						adapter.notifyDataSetChanged();
 						refresh();
 					}
 				});
