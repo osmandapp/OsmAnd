@@ -1971,7 +1971,7 @@ Clique no widget de medição para ver mais ações.</string>
     <string name="access_no_destination">Destino não definido</string>
     <string name="map_widget_magnetic_bearing">Rumo magnético</string>
     <string name="access_autoannounce_period">Período do anúncio automático</string>
-    <string name="access_tree_list">Lista em árvore</string>
+    <string name="access_tree_list">Lista ramificada</string>
     <string name="free_downloads_used_description">Mostra os carregamentos gratuitos utilizados</string>
 
     <string name="access_smart_autoannounce">Anúncio automático inteligente</string>
@@ -2276,4 +2276,28 @@ Clique no widget de medição para ver mais ações.</string>
     <string name="routing_attr_height_obstacles_description">Utilizar dados de elevação de terreno provenientes de SRTM, ASTER e EU-DEM</string>
     <string name="rendering_attr_depthContours_description">Mostrar pontos e contornos de profundidade</string>
     <string name="rendering_attr_depthContours_name">Contornos de profundidade náuticos</string>
+    <string name="release_2_6">\\022 Nova funcionaldiade: Botão de ação rápida
+\n
+\n• Resposta melhorada a gestos do ecrã touch (ex. panorâmico e aproximação em simultâneo)
+\n
+\n• Novas fontes de mapas com mais localizações
+\n
+\n• Suporte de TTS para variantes de linguagem regionais (e sotaques)
+\n
+\n• Melhoria de visibilidade em múltiplos estilos de mapa e wikipedia
+\n
+\n• Suporte para Open Location Code (OLC)
+\n
+\n• Mostrar elevação, encosta, e perfil de velocidade para percursos GPX gravados e percursos calculados
+\n
+\n• Configuração \"Estilo de condução\" e melhorias lógicas em percursos de bicicleta
+\n
+\n• Definições para utilizar dados de altitude em rotas de bicicleta
+\n
+\n• Várias outras melhorias e correção de erros
+\n
+\ne muito mais…</string>
+    <string name="show_transparency_seekbar">Mostra a transparência da barra de navegação</string>
+    <string name="shared_string_widgets">Widgets</string>
+    <string name="rendering_attr_hideUnderground_name">Objectos subterrâneos</string>
     </resources>
