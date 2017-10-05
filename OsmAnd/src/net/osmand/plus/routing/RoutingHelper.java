@@ -1008,6 +1008,12 @@ public class RoutingHelper {
 		}
 	}
 
+	public static void applyApplicationSettings(RouteCalculationParams params, OsmandSettings settings, ApplicationMode mode) {
+		params.leftSide = settings.DRIVING_REGION.get().leftHandDriving;
+		params.fast = settings.FAST_ROUTE_MODE.getModeValue(mode);
+		params.type = settings.ROUTER_SERVICE.getModeValue(mode);
+	}
+
 	public void setProgressBar(RouteCalculationProgressCallback progressRoute) {
 		this.progressRoute = progressRoute;
 	}

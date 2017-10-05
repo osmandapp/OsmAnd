@@ -889,8 +889,6 @@ public class PlanRouteFragment extends Fragment {
 	}
 
 	private RouteCalculationParams getParams(final OsmandApplication app) {
-		OsmandSettings settings = app.getSettings();
-
 		final Pair<WptPt, WptPt> currentPair = snapToRoadPairsToCalculate.poll();
 
 		Location start = new Location("");
@@ -903,9 +901,7 @@ public class PlanRouteFragment extends Fragment {
 		params.inSnapToRoadMode = true;
 		params.start = start;
 		params.end = end;
-		params.leftSide = settings.DRIVING_REGION.get().leftHandDriving;
-		params.fast = settings.FAST_ROUTE_MODE.getModeValue(appMode);
-		params.type = settings.ROUTER_SERVICE.getModeValue(appMode);
+		RoutingHelper.applyApplicationSettings(params, app.getSettings(), appMode);
 		params.mode = appMode;
 		params.ctx = app;
 		params.calculationProgress = calculationProgress = new RouteCalculationProgress();

@@ -8,7 +8,6 @@ import net.osmand.plus.ApplicationMode;
 import net.osmand.plus.GPXUtilities.TrkSegment;
 import net.osmand.plus.GPXUtilities.WptPt;
 import net.osmand.plus.OsmandApplication;
-import net.osmand.plus.OsmandSettings;
 import net.osmand.plus.measurementtool.command.MeasurementCommandManager;
 import net.osmand.plus.routing.RouteCalculationParams;
 import net.osmand.plus.routing.RoutingHelper;
@@ -259,8 +258,6 @@ public class MeasurementEditingContext {
 	}
 
 	private RouteCalculationParams getParams() {
-		OsmandSettings settings = application.getSettings();
-
 		final Pair<WptPt, WptPt> currentPair = snapToRoadPairsToCalculate.poll();
 
 		Location start = new Location("");
@@ -273,9 +270,7 @@ public class MeasurementEditingContext {
 		params.inSnapToRoadMode = true;
 		params.start = start;
 		params.end = end;
-		params.leftSide = settings.DRIVING_REGION.get().leftHandDriving;
-		params.fast = settings.FAST_ROUTE_MODE.getModeValue(snapToRoadAppMode);
-		params.type = settings.ROUTER_SERVICE.getModeValue(snapToRoadAppMode);
+		RoutingHelper.applyApplicationSettings(params, application.getSettings(), snapToRoadAppMode);
 		params.mode = snapToRoadAppMode;
 		params.ctx = application;
 		params.calculationProgress = calculationProgress = new RouteCalculationProgress();
