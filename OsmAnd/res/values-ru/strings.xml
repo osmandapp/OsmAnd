@@ -2504,4 +2504,14 @@
     <string name="show_arrows_on_the_map">Показывать стрелки на карте</string>
     <string name="descendingly">По убыванию</string>
     <string name="ascendingly">По возрастанию</string>
+    <string name="coordinates_format">Формат координат</string>
+    <string name="use_system_keyboard">Использовать системную клавиатуру</string>
+    <string name="fast_coordinates_input_descr">Выбор формата координат для ввода. Вы всегда можете изменить его, нажав опции.</string>
+    <string name="fast_coordinates_input">Быстрый ввод координат</string>
+    <string name="routing_attr_avoid_ice_roads_fords_name">Избегать ледовых дорог, бродов</string>
+    <string name="routing_attr_avoid_ice_roads_fords_description">Избегать ледовых дорог и бродов</string>
+    <string name="my_location">Моя позиция</string>
+    <string name="shared_string_finish">Финиш</string>
+    <string name="shared_string_sort">Сортировать</string>
+    <string name="marker_save_as_track_descr">Экспорт маркеров в файл можно задать здесь:</string>
     </resources>

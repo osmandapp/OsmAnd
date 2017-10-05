@@ -220,9 +220,9 @@ public class SendPoiDialogFragment extends DialogFragment {
 						modifiedItemsOutOfLimit += quantity;
 					} else {
 						if (pos == 0) {
-							comment = comment.concat(comment.length() == 0 ? "" : "; ").concat(action).concat(" ").concat(quantity == 1 ? "" : quantity + "").concat(type);
+							comment = comment.concat(comment.length() == 0 ? "" : "; ").concat(action).concat(" ").concat(quantity == 1 ? "" : quantity + " ").concat(type);
 						} else {
-							comment = comment.concat(", ").concat(quantity == 1 ? "" : quantity + "").concat(type);
+							comment = comment.concat(", ").concat(quantity == 1 ? "" : quantity + " ").concat(type);
 						}
 					}
 					pos++;

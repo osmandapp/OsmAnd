@@ -1085,6 +1085,11 @@
 	<string name="poi_seamark_rock">Rock, seamark</string>
 	<string name="poi_seamark_wreck">Wreck, seamark</string>
 
+	<string name="poi_seamark_clearance_height">Clearance height</string>
+	<string name="poi_seamark_clearance_height_closed">Clearance height (closed)</string>
+	<string name="poi_seamark_clearance_height_open">Clearance height (open)</string>
+	<string name="poi_seamark_clearance_width">Clearance width</string>
+
 	<string name="poi_military_landuse">Military zone</string>
 	<string name="poi_military_airfield">Military airfield</string>
 	<string name="poi_military_bunker">Military bunker</string>
@@ -3477,5 +3482,7 @@
 	<string name="poi_government_treasury">Treasury</string>
 	<string name="poi_government_transportation">Transport institution</string>
 	<string name="poi_government_legislative">Legislative institution</string>
+
+	<string name="poi_vhf">VHF channel</string>
 
 </resources>
