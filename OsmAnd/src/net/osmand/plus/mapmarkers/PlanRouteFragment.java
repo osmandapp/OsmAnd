@@ -367,7 +367,7 @@ public class PlanRouteFragment extends Fragment {
 
 			@Override
 			public void onApplicationModeItemClick(ApplicationMode mode) {
-				if (appMode != null && !appMode.getStringKey().equals(mode.getStringKey())) {
+				if (appMode != null && appMode != mode) {
 					appMode = mode;
 					snappedToRoadPoints.clear();
 					markersHelper.setSnappedMode(mode);
@@ -517,7 +517,7 @@ public class PlanRouteFragment extends Fragment {
 	private void updateText() {
 		MapActivity mapActivity = getMapActivity();
 		if (mapActivity != null) {
-			boolean defaultMode = appMode.getStringKey().equals(ApplicationMode.DEFAULT.getStringKey());
+			boolean defaultMode = appMode == ApplicationMode.DEFAULT;
 
 			float dist = 0;
 			for (int i = 1; i < snapTrkSegment.points.size(); i++) {
@@ -816,7 +816,7 @@ public class PlanRouteFragment extends Fragment {
 	private void recreateSnapTrkSegment(boolean adjustMap) {
 		snapTrkSegment.points.clear();
 		List<WptPt> points = getPointsToCalculate();
-		if (appMode.getStringKey().equals(ApplicationMode.DEFAULT.getStringKey())) {
+		if (appMode == ApplicationMode.DEFAULT) {
 			snapTrkSegment.points.addAll(points);
 		} else if (points.size() > 1) {
 			for (int i = 0; i < points.size() - 1; i++) {
