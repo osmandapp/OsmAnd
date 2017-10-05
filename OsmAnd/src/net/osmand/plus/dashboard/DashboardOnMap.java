@@ -788,9 +788,9 @@ public class DashboardOnMap implements ObservableScrollViewCallbacks, DynamicLis
 		mapActivity.enableDrawer();
 
 		getMyApplication().getMapMarkersHelper().removeListener(this);
-		if (mapActivity.getMapLayers().getMapMarkersLayer().clearRoute()) {
-			mapActivity.refreshMap();
-		}
+//		if (mapActivity.getMapLayers().getMapMarkersLayer().clearRoute()) {
+//			mapActivity.refreshMap();
+//		}
 		if (swipeDismissListener != null) {
 			swipeDismissListener.discardUndo();
 		}
@@ -1691,7 +1691,7 @@ public class DashboardOnMap implements ObservableScrollViewCallbacks, DynamicLis
 	public void showMarkersRouteOnMap() {
 		MapMarkersHelper helper = getMyApplication().getMapMarkersHelper();
 		List<LatLon> points = helper.getSelectedMarkersLatLon();
-		mapActivity.getMapLayers().getMapMarkersLayer().setRoute(points);
+//		mapActivity.getMapLayers().getMapMarkersLayer().setRoute(points);
 		showRouteOnMap(points);
 	}
 
