@@ -2426,7 +2426,7 @@
     <string name="translit_names">Транслітарацыя назваў</string>
     <string name="osmo_share_location">Падзяліцца</string>
     <string name="osmo_pause_location">Прыпыніць</string>
-    <string name="trip_rec_notification_settings">Запіс падарожжа (няма зьвестак)</string>
+    <string name="trip_rec_notification_settings">Уключыць хуткі запуск запісу</string>
     <string name="shared_string_notifications">Паведамленьні</string>
     <string name="shared_string_continue">Працягнуць</string>
     <string name="shared_string_pause">Перапыніць</string>
@@ -2872,7 +2872,7 @@
     <string name="marker_moved_to_active">Маркер мапы стаў актыўным</string>
     <string name="shared_string_list">Спіс</string>
     <string name="shared_string_groups">Групы</string>
-    <string name="passed">Апошняе выкарыстанне: %1$s</string>
+    <string name="passed">Пройдзена: %1$s</string>
     <string name="make_active">Актывізаваць</string>
     <string name="today">Сёння</string>
     <string name="yesterday">Учора</string>
@@ -2887,8 +2887,8 @@
     <string name="order_by">Сартаваць па:</string>
     <string name="show_guide_line">Паказаць лінію кірунку</string>
     <string name="show_arrows_on_the_map">Паказаць стрэлкі на карце</string>
-    <string name="show_passed">Паказаць дату апошняга выкарыстання</string>
-    <string name="hide_passed">Схаваць дату апошняга выкарыстання</string>
+    <string name="show_passed">Паказаць пройдзенныя</string>
+    <string name="hide_passed">Схаваць пройдзенныя</string>
     <string name="use_location">Выкарыстоўваць становішча</string>
     <string name="add_location_as_first_point_descr">Дадаць ваша становішча як першую кропку пры планаванні маршруту.</string>
     <string name="my_location">Маё становішча</string>
@@ -2908,4 +2908,7 @@
     <string name="fast_coordinates_input">Хуткі ўвод каардынат</string>
     <string name="routing_attr_avoid_ice_roads_fords_name">Пазбягаць лядовых дарог і бродаў</string>
     <string name="routing_attr_avoid_ice_roads_fords_description">Пазбягае лядовыя дарогі і броды</string>
+    <string name="make_round_trip_descr">Дадаць копію пачатковай кропкі як месца прызначэння.</string>
+    <string name="make_round_trip">Зрабіць кругавое падарожжа</string>
+    <string name="shared_string_navigate">Пачаць навігацыю</string>
     </resources>
