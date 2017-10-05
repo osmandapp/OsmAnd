@@ -63,7 +63,6 @@ import java.util.LinkedList;
 import java.util.List;
 import java.util.Map;
 import java.util.Queue;
-import java.util.concurrent.ConcurrentHashMap;
 import java.util.concurrent.ConcurrentLinkedQueue;
 
 import static net.osmand.plus.OsmandSettings.LANDSCAPE_MIDDLE_RIGHT_CONSTANT;
@@ -96,7 +95,7 @@ public class PlanRouteFragment extends Fragment {
 	private TextView countTv;
 
 	private final Queue<Pair<WptPt, WptPt>> snapToRoadPairsToCalculate = new ConcurrentLinkedQueue<>();
-	private final Map<Pair<WptPt, WptPt>, List<WptPt>> snappedToRoadPoints = new ConcurrentHashMap<>();
+	private Map<Pair<WptPt, WptPt>, List<WptPt>> snappedToRoadPoints;
 	private TrkSegment snapTrkSegment = new TrkSegment();
 	private RouteCalculationProgress calculationProgress;
 	private int calculatedPairs;
@@ -107,6 +106,7 @@ public class PlanRouteFragment extends Fragment {
 	public View onCreateView(LayoutInflater inflater, @Nullable ViewGroup container, @Nullable Bundle savedInstanceState) {
 		final MapActivity mapActivity = getMapActivity();
 		markersHelper = mapActivity.getMyApplication().getMapMarkersHelper();
+		snappedToRoadPoints = markersHelper.getSnappedToRoadPoints();
 
 		// Handling screen rotation
 		FragmentManager fragmentManager = mapActivity.getSupportFragmentManager();
@@ -363,6 +363,7 @@ public class PlanRouteFragment extends Fragment {
 				if (appMode != null && !appMode.getStringKey().equals(mode.getStringKey())) {
 					appMode = mode;
 					snappedToRoadPoints.clear();
+					markersHelper.setSnappedMode(mode);
 					recreateSnapTrkSegment();
 					setupAppModesBtn();
 				}
@@ -426,7 +427,7 @@ public class PlanRouteFragment extends Fragment {
 				wasCollapseButtonVisible = false;
 			}
 
-			if (appMode == null) {
+			if ((appMode = markersHelper.getSnappedMode()) == null) {
 				appMode = ApplicationMode.DEFAULT;
 			}
 			setupAppModesBtn();
