@@ -21,15 +21,15 @@ import net.osmand.plus.R;
 import net.osmand.plus.base.BottomSheetDialogFragment;
 import net.osmand.plus.helpers.AndroidUiHelper;
 
-public class PlanRouteSortByBottomSheetDialogFragment extends BottomSheetDialogFragment {
+public class PlanRouteOptionsBottomSheetDialogFragment extends BottomSheetDialogFragment {
 
-	public final static String TAG = "PlanRouteSortByBottomSheetDialogFragment";
+	public final static String TAG = "PlanRouteOptionsBottomSheetDialogFragment";
 
 	private boolean portrait;
 	private boolean night;
-	private PlanRouteSortByFragmentListener listener;
+	private PlanRouteOptionsFragmentListener listener;
 
-	public void setListener(PlanRouteSortByFragmentListener listener) {
+	public void setListener(PlanRouteOptionsFragmentListener listener) {
 		this.listener = listener;
 	}
 
@@ -40,7 +40,7 @@ public class PlanRouteSortByBottomSheetDialogFragment extends BottomSheetDialogF
 		night = getMyApplication().getDaynightHelper().isNightModeForMapControls();
 		final int themeRes = night ? R.style.OsmandDarkTheme : R.style.OsmandLightTheme;
 
-		final View mainView = View.inflate(new ContextThemeWrapper(getContext(), themeRes), R.layout.fragment_plan_route_sort_by_bottom_sheet_dialog, container);
+		final View mainView = View.inflate(new ContextThemeWrapper(getContext(), themeRes), R.layout.fragment_plan_route_options_bottom_sheet_dialog, container);
 		if (portrait) {
 			AndroidUtils.setBackground(getActivity(), mainView, night, R.drawable.bg_bottom_menu_light, R.drawable.bg_bottom_menu_dark);
 		}
@@ -49,9 +49,29 @@ public class PlanRouteSortByBottomSheetDialogFragment extends BottomSheetDialogF
 			((TextView) mainView.findViewById(R.id.title)).setTextColor(ContextCompat.getColor(getActivity(), R.color.ctx_menu_info_text_dark));
 		}
 
+		((ImageView) mainView.findViewById(R.id.navigate_icon)).setImageDrawable(getContentIcon(R.drawable.map_directions));
+		((ImageView) mainView.findViewById(R.id.make_round_trip_icon)).setImageDrawable(getContentIcon(R.drawable.ic_action_trip_round));
 		((ImageView) mainView.findViewById(R.id.door_to_door_icon)).setImageDrawable(getContentIcon(R.drawable.ic_action_sort_door_to_door));
 		((ImageView) mainView.findViewById(R.id.reverse_icon)).setImageDrawable(getContentIcon(R.drawable.ic_action_sort_reverse_order));
 
+		mainView.findViewById(R.id.navigate_row).setOnClickListener(new View.OnClickListener() {
+			@Override
+			public void onClick(View view) {
+				if (listener != null) {
+					listener.navigateOnClick();
+					dismiss();
+				}
+			}
+		});
+		mainView.findViewById(R.id.make_round_trip_row).setOnClickListener(new View.OnClickListener() {
+			@Override
+			public void onClick(View view) {
+				if (listener != null) {
+					listener.makeRoundTripOnClick();
+					dismiss();
+				}
+			}
+		});
 		mainView.findViewById(R.id.door_to_door_row).setOnClickListener(new View.OnClickListener() {
 			@Override
 			public void onClick(View view) {
@@ -133,7 +153,11 @@ public class PlanRouteSortByBottomSheetDialogFragment extends BottomSheetDialogF
 		return getIcon(id, night ? R.color.ctx_menu_info_text_dark : R.color.on_map_icon_color);
 	}
 
-	interface PlanRouteSortByFragmentListener {
+	interface PlanRouteOptionsFragmentListener {
+
+		void navigateOnClick();
+
+		void makeRoundTripOnClick();
 
 		void doorToDoorOnClick();
 

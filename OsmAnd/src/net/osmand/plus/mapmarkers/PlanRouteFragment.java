@@ -42,7 +42,7 @@ import net.osmand.plus.OsmandSettings;
 import net.osmand.plus.R;
 import net.osmand.plus.activities.MapActivity;
 import net.osmand.plus.helpers.AndroidUiHelper;
-import net.osmand.plus.mapmarkers.PlanRouteSortByBottomSheetDialogFragment.PlanRouteSortByFragmentListener;
+import net.osmand.plus.mapmarkers.PlanRouteOptionsBottomSheetDialogFragment.PlanRouteOptionsFragmentListener;
 import net.osmand.plus.mapmarkers.adapters.MapMarkersItemTouchHelperCallback;
 import net.osmand.plus.mapmarkers.adapters.MapMarkersListAdapter;
 import net.osmand.plus.measurementtool.RecyclerViewFragment;
@@ -114,9 +114,9 @@ public class PlanRouteFragment extends Fragment {
 		if (snapToRoadFragment != null) {
 			((SnapToRoadBottomSheetDialogFragment) snapToRoadFragment).setListener(createSnapToRoadFragmentListener());
 		}
-		Fragment sortByFragment = fragmentManager.findFragmentByTag(PlanRouteSortByBottomSheetDialogFragment.TAG);
+		Fragment sortByFragment = fragmentManager.findFragmentByTag(PlanRouteOptionsBottomSheetDialogFragment.TAG);
 		if (sortByFragment != null) {
-			((PlanRouteSortByBottomSheetDialogFragment) sortByFragment).setListener(createSortByFragmentListener());
+			((PlanRouteOptionsBottomSheetDialogFragment) sortByFragment).setListener(createOptionsFragmentListener());
 		}
 		// If rotate the screen from landscape to portrait when the list of markers is displayed then
 		// the RecyclerViewFragment will exist without view. This is necessary to remove it.
@@ -188,9 +188,7 @@ public class PlanRouteFragment extends Fragment {
 		mainView.findViewById(R.id.sort_button).setOnClickListener(new View.OnClickListener() {
 			@Override
 			public void onClick(View view) {
-				PlanRouteSortByBottomSheetDialogFragment fragment = new PlanRouteSortByBottomSheetDialogFragment();
-				fragment.setListener(createSortByFragmentListener());
-				fragment.show(mapActivity.getSupportFragmentManager(), PlanRouteSortByBottomSheetDialogFragment.TAG);
+				Toast.makeText(mapActivity, "Sort", Toast.LENGTH_SHORT).show();
 			}
 		});
 
@@ -210,6 +208,15 @@ public class PlanRouteFragment extends Fragment {
 				if (quit(false)) {
 					MapMarkersDialogFragment.showInstance(mapActivity);
 				}
+			}
+		});
+		toolbarController.setSaveViewTextId(R.string.shared_string_options);
+		toolbarController.setOnSaveViewClickListener(new View.OnClickListener() {
+			@Override
+			public void onClick(View view) {
+				PlanRouteOptionsBottomSheetDialogFragment fragment = new PlanRouteOptionsBottomSheetDialogFragment();
+				fragment.setListener(createOptionsFragmentListener());
+				fragment.show(mapActivity.getSupportFragmentManager(), PlanRouteOptionsBottomSheetDialogFragment.TAG);
 			}
 		});
 		mapActivity.showTopToolbar(toolbarController);
@@ -371,10 +378,24 @@ public class PlanRouteFragment extends Fragment {
 		};
 	}
 
-	private PlanRouteSortByFragmentListener createSortByFragmentListener() {
-		return new PlanRouteSortByFragmentListener() {
+	private PlanRouteOptionsFragmentListener createOptionsFragmentListener() {
+		return new PlanRouteOptionsFragmentListener() {
 
 			private MapActivity mapActivity = getMapActivity();
+
+			@Override
+			public void navigateOnClick() {
+				if (mapActivity != null) {
+					Toast.makeText(mapActivity, "navigate", Toast.LENGTH_SHORT).show();
+				}
+			}
+
+			@Override
+			public void makeRoundTripOnClick() {
+				if (mapActivity != null) {
+					Toast.makeText(mapActivity, "mare round trip", Toast.LENGTH_SHORT).show();
+				}
+			}
 
 			@Override
 			public void doorToDoorOnClick() {
@@ -955,6 +976,7 @@ public class PlanRouteFragment extends Fragment {
 			setBgIds(R.drawable.gradient_toolbar, R.drawable.gradient_toolbar,
 					R.drawable.gradient_toolbar, R.drawable.gradient_toolbar);
 			setCloseBtnVisible(false);
+			setSaveViewVisible(true);
 		}
 
 		@Override
