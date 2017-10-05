@@ -2480,7 +2480,7 @@ Hvis du  ønsker at støtte OsmAnd og OSM, er dette en god måde at gøre det p�
 \n  • Mange andre forbedringer og fejlrettelser 
 \n 
 \n  og mere…</string>
-    <string name="trip_rec_notification_settings">Tur optagelse (ingen data)</string>
+    <string name="trip_rec_notification_settings">Aktiver hurtig start af optagelse</string>
     <string name="trip_rec_notification_settings_desc">Vis en systemmeddelelse, der giver mulighed for at starte optagelse af turen</string>
     <string name="shared_string_notifications">Meddelelser</string>
     <string name="osmo_share_location">Del</string>
@@ -2878,7 +2878,7 @@ Tidligere destination bliver sidste mellemliggende punkt.</string>
     <string name="all_markers_moved_to_history">Alle kortmarkører flyttet til historik</string>
     <string name="marker_moved_to_history">Kortmarkør flyttet til historik</string>
     <string name="marker_moved_to_active">Kortmarkør flyttet til aktiv</string>
-    <string name="passed">Sidst anvendt: %1$s</string>
+    <string name="passed">Passeret: %1$s</string>
     <string name="make_active">Aktivér</string>
     <string name="marker_show_distance_descr">Vælg hvordan afstanden og retningen til kortmarkører på kortet angives:</string>
     <string name="remove_from_map_markers">Fjern fra kortmarkører</string>
@@ -2888,8 +2888,8 @@ Tidligere destination bliver sidste mellemliggende punkt.</string>
     <string name="order_by">Sorter efter:</string>
     <string name="show_guide_line">Vis vejledningslinjer</string>
     <string name="show_arrows_on_the_map">Vis pile på kortet</string>
-    <string name="show_passed">Vis \'sidst anvendt\' dato</string>
-    <string name="hide_passed">Skjul \'sidst anvendt\' dato</string>
+    <string name="show_passed">Vis passeret</string>
+    <string name="hide_passed">Skjul passeret</string>
     <string name="use_location">Brug position</string>
     <string name="add_location_as_first_point_descr">Tilføj position som første punkt for at planlægge en perfekt rute.</string>
     <string name="my_location">Position</string>
@@ -2909,4 +2909,7 @@ Tidligere destination bliver sidste mellemliggende punkt.</string>
     <string name="fast_coordinates_input">Hurtig koordinatindtastning</string>
     <string name="routing_attr_avoid_ice_roads_fords_name">Undgå isglatte veje, vadesteder</string>
     <string name="routing_attr_avoid_ice_roads_fords_description">Undgå isglatte veje og vadesteder</string>
+    <string name="make_round_trip_descr">Tilføj kopi af startpunktet som destination.</string>
+    <string name="make_round_trip">Foretag rundtur</string>
+    <string name="shared_string_navigate">Naviger</string>
     </resources>
