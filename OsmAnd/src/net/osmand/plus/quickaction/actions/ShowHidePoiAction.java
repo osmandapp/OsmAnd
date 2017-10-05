@@ -277,10 +277,6 @@ public class ShowHidePoiAction extends QuickAction {
 		final PoiFiltersHelper poiFilters = app.getPoiFilters();
 		final ContextMenuAdapter adapter = new ContextMenuAdapter();
 
-		adapter.addItem(new ContextMenuItem.ItemBuilder()
-				.setTitleId(R.string.shared_string_search, app)
-				.setIcon(R.drawable.ic_action_search_dark).createItem());
-
 		final List<PoiUIFilter> list = new ArrayList<>();
 		list.add(poiFilters.getCustomPOIFilter());
 
