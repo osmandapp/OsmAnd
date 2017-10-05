@@ -12,6 +12,7 @@ import android.support.v4.app.FragmentManager;
 import android.support.v4.content.ContextCompat;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
+import android.support.v7.widget.Toolbar;
 import android.support.v7.widget.helper.ItemTouchHelper;
 import android.util.Pair;
 import android.view.ContextThemeWrapper;
@@ -45,7 +46,6 @@ import net.osmand.plus.helpers.AndroidUiHelper;
 import net.osmand.plus.mapmarkers.PlanRouteOptionsBottomSheetDialogFragment.PlanRouteOptionsFragmentListener;
 import net.osmand.plus.mapmarkers.adapters.MapMarkersItemTouchHelperCallback;
 import net.osmand.plus.mapmarkers.adapters.MapMarkersListAdapter;
-import net.osmand.plus.measurementtool.RecyclerViewFragment;
 import net.osmand.plus.measurementtool.SnapToRoadBottomSheetDialogFragment;
 import net.osmand.plus.measurementtool.SnapToRoadBottomSheetDialogFragment.SnapToRoadFragmentListener;
 import net.osmand.plus.routing.RouteCalculationParams;
@@ -64,8 +64,6 @@ import java.util.List;
 import java.util.Map;
 import java.util.Queue;
 import java.util.concurrent.ConcurrentLinkedQueue;
-
-import static net.osmand.plus.OsmandSettings.LANDSCAPE_MIDDLE_RIGHT_CONSTANT;
 
 public class PlanRouteFragment extends Fragment {
 
@@ -89,7 +87,6 @@ public class PlanRouteFragment extends Fragment {
 
 	private View mainView;
 	private RecyclerView markersRv;
-	private ImageView upDownIconIv;
 	private TextView distanceTv;
 	private TextView timeTv;
 	private TextView countTv;
@@ -118,11 +115,6 @@ public class PlanRouteFragment extends Fragment {
 		if (sortByFragment != null) {
 			((PlanRouteOptionsBottomSheetDialogFragment) sortByFragment).setListener(createOptionsFragmentListener());
 		}
-		// If rotate the screen from landscape to portrait when the list of markers is displayed then
-		// the RecyclerViewFragment will exist without view. This is necessary to remove it.
-		if (!portrait) {
-			hideMarkersListFragment();
-		}
 
 		toolbarHeight = mapActivity.getResources().getDimensionPixelSize(R.dimen.dashboard_map_toolbar);
 
@@ -136,7 +128,9 @@ public class PlanRouteFragment extends Fragment {
 		View view = View.inflate(new ContextThemeWrapper(getContext(), themeRes), R.layout.fragment_plan_route, null);
 
 		mainView = view.findViewById(R.id.main_view);
-		AndroidUtils.setBackground(mapActivity, mainView, nightMode, R.drawable.bg_bottom_menu_light, R.drawable.bg_bottom_menu_dark);
+		if (portrait) {
+			AndroidUtils.setBackground(mapActivity, mainView, nightMode, R.drawable.bg_bottom_menu_light, R.drawable.bg_bottom_menu_dark);
+		}
 
 		distanceTv = (TextView) mainView.findViewById(R.id.markers_distance_text_view);
 		timeTv = (TextView) mainView.findViewById(R.id.markers_time_text_view);
@@ -145,72 +139,113 @@ public class PlanRouteFragment extends Fragment {
 		enterPlanRouteMode();
 
 		View markersListContainer = mainView.findViewById(R.id.markers_list_container);
-		if (portrait && markersListContainer != null) {
+		if (markersListContainer != null) {
 			markersListContainer.setBackgroundColor(backgroundColor);
 		}
 
-		upDownIconIv = (ImageView) mainView.findViewById(R.id.up_down_icon);
-		upDownIconIv.setImageDrawable(getContentIcon(R.drawable.ic_action_arrow_up));
-
-		mainView.findViewById(R.id.up_down_row).setOnClickListener(new View.OnClickListener() {
-			@Override
-			public void onClick(View view) {
-				if (!markersListOpened) {
-					showMarkersList();
-				} else {
-					hideMarkersList();
-				}
-			}
-		});
-
-		mainView.findViewById(R.id.select_all_button).setOnClickListener(new View.OnClickListener() {
-			@Override
-			public void onClick(View view) {
-				int activeMarkersCount = markersHelper.getMapMarkers().size();
-				if (selectedCount == activeMarkersCount && markersHelper.isStartFromMyLocation()) {
-					markersHelper.deselectAllActiveMarkers();
-					markersHelper.setStartFromMyLocation(false);
-					selectedCount = 0;
-				} else {
-					markersHelper.selectAllActiveMarkers();
-					markersHelper.setStartFromMyLocation(true);
-					selectedCount = activeMarkersCount;
-				}
-				adapter.calculateStartAndFinishPos();
-				adapter.notifyDataSetChanged();
-				updateSelectButton();
-				recreateSnapTrkSegment();
-				mapActivity.refreshMap();
-			}
-		});
-
-		toolbarController = new PlanRouteToolbarController();
-		toolbarController.setBackBtnIconIds(R.drawable.ic_action_mode_back, R.drawable.ic_action_mode_back);
-		toolbarController.setTitle(getString(R.string.plan_route));
-		toolbarController.setOnBackButtonClickListener(new View.OnClickListener() {
-			@Override
-			public void onClick(View view) {
-				if (quit(false)) {
-					MapMarkersDialogFragment.showInstance(mapActivity);
-				}
-			}
-		});
-		toolbarController.setSaveViewTextId(R.string.shared_string_options);
-		toolbarController.setOnSaveViewClickListener(new View.OnClickListener() {
-			@Override
-			public void onClick(View view) {
-				PlanRouteOptionsBottomSheetDialogFragment fragment = new PlanRouteOptionsBottomSheetDialogFragment();
-				fragment.setListener(createOptionsFragmentListener());
-				fragment.show(mapActivity.getSupportFragmentManager(), PlanRouteOptionsBottomSheetDialogFragment.TAG);
-			}
-		});
-		mapActivity.showTopToolbar(toolbarController);
-
 		if (portrait) {
-			markersRv = mainView.findViewById(R.id.markers_recycler_view);
+			((ImageView) mainView.findViewById(R.id.up_down_icon)).setImageDrawable(getContentIcon(R.drawable.ic_action_arrow_up));
+
+			mainView.findViewById(R.id.up_down_row).setOnClickListener(new View.OnClickListener() {
+				@Override
+				public void onClick(View view) {
+					if (!markersListOpened) {
+						showMarkersList();
+					} else {
+						hideMarkersList();
+					}
+				}
+			});
+
+			mainView.findViewById(R.id.select_all_button).setOnClickListener(new View.OnClickListener() {
+				@Override
+				public void onClick(View view) {
+					int activeMarkersCount = markersHelper.getMapMarkers().size();
+					if (selectedCount == activeMarkersCount && markersHelper.isStartFromMyLocation()) {
+						markersHelper.deselectAllActiveMarkers();
+						markersHelper.setStartFromMyLocation(false);
+						selectedCount = 0;
+					} else {
+						markersHelper.selectAllActiveMarkers();
+						markersHelper.setStartFromMyLocation(true);
+						selectedCount = activeMarkersCount;
+					}
+					adapter.calculateStartAndFinishPos();
+					adapter.notifyDataSetChanged();
+					updateSelectButton();
+					recreateSnapTrkSegment();
+					mapActivity.refreshMap();
+				}
+			});
+
+			toolbarController = new PlanRouteToolbarController();
+			toolbarController.setBackBtnIconIds(R.drawable.ic_action_mode_back, R.drawable.ic_action_mode_back);
+			toolbarController.setTitle(getString(R.string.plan_route));
+			toolbarController.setOnBackButtonClickListener(new View.OnClickListener() {
+				@Override
+				public void onClick(View view) {
+					if (quit(false)) {
+						MapMarkersDialogFragment.showInstance(mapActivity);
+					}
+				}
+			});
+			toolbarController.setSaveViewTextId(R.string.shared_string_options);
+			toolbarController.setOnSaveViewClickListener(new View.OnClickListener() {
+				@Override
+				public void onClick(View view) {
+					optionsOnClick();
+				}
+			});
+			mapActivity.showTopToolbar(toolbarController);
+
+			final int screenH = AndroidUtils.getScreenHeight(mapActivity);
+			final int statusBarH = AndroidUtils.getStatusBarHeight(mapActivity);
+			final int navBarH = AndroidUtils.getNavBarHeight(mapActivity);
+			final int availableHeight = (screenH - statusBarH - navBarH) / 2;
+
+			mainView.getViewTreeObserver().addOnGlobalLayoutListener(new ViewTreeObserver.OnGlobalLayoutListener() {
+				@Override
+				public void onGlobalLayout() {
+					int upDownRowH = mainView.findViewById(R.id.up_down_row).getHeight();
+					int listContainerH = availableHeight - upDownRowH;
+					View listContainer = mainView.findViewById(R.id.markers_list_container);
+					listContainer.getLayoutParams().height = listContainerH;
+					listContainer.requestLayout();
+
+					showMarkersList();
+
+					ViewTreeObserver obs = mainView.getViewTreeObserver();
+					if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.JELLY_BEAN) {
+						obs.removeOnGlobalLayoutListener(this);
+					} else {
+						obs.removeGlobalOnLayoutListener(this);
+					}
+				}
+			});
 		} else {
-			markersRv = new RecyclerView(mapActivity);
+			Toolbar toolbar = (Toolbar) mainView.findViewById(R.id.plan_route_toolbar);
+			if (nightMode) {
+				toolbar.setBackgroundColor(ContextCompat.getColor(getContext(), R.color.actionbar_dark_color));
+			}
+			toolbar.setNavigationIcon(iconsCache.getIcon(R.drawable.ic_arrow_back));
+			toolbar.setNavigationOnClickListener(new View.OnClickListener() {
+				@Override
+				public void onClick(View view) {
+					if (quit(false)) {
+						MapMarkersDialogFragment.showInstance(mapActivity);
+					}
+				}
+			});
+
+			mainView.findViewById(R.id.options_button).setOnClickListener(new View.OnClickListener() {
+				@Override
+				public void onClick(View view) {
+					optionsOnClick();
+				}
+			});
 		}
+
+		markersRv = mainView.findViewById(R.id.markers_recycler_view);
 
 		adapter = new MapMarkersListAdapter(mapActivity);
 		adapter.setHasStableIds(true);
@@ -272,45 +307,21 @@ public class PlanRouteFragment extends Fragment {
 		markersRv.setClipToPadding(false);
 		markersRv.setLayoutManager(new LinearLayoutManager(getContext()));
 		markersRv.setAdapter(adapter);
-		markersRv.addOnScrollListener(new RecyclerView.OnScrollListener() {
-			@Override
-			public void onScrollStateChanged(RecyclerView recyclerView, int newState) {
-				super.onScrollStateChanged(recyclerView, newState);
-			}
-		});
-
-		final int screenH = AndroidUtils.getScreenHeight(mapActivity);
-		final int statusBarH = AndroidUtils.getStatusBarHeight(mapActivity);
-		final int navBarH = AndroidUtils.getNavBarHeight(mapActivity);
-		final int availableHeight = (screenH - statusBarH - navBarH) / 2;
-
-		mainView.getViewTreeObserver().addOnGlobalLayoutListener(new ViewTreeObserver.OnGlobalLayoutListener() {
-			@Override
-			public void onGlobalLayout() {
-				if (portrait) {
-					int upDownRowH = mainView.findViewById(R.id.up_down_row).getHeight();
-					int listContainerH = availableHeight - upDownRowH;
-					View listContainer = mainView.findViewById(R.id.markers_list_container);
-					listContainer.getLayoutParams().height = listContainerH;
-					listContainer.requestLayout();
-				}
-
-				showMarkersList();
-
-				ViewTreeObserver obs = mainView.getViewTreeObserver();
-				if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.JELLY_BEAN) {
-					obs.removeOnGlobalLayoutListener(this);
-				} else {
-					obs.removeGlobalOnLayoutListener(this);
-				}
-			}
-		});
 
 		if (progressBarVisible) {
 			showProgressBar();
 		}
 
 		return view;
+	}
+
+	private void optionsOnClick() {
+		MapActivity mapActivity = getMapActivity();
+		if (mapActivity != null) {
+			PlanRouteOptionsBottomSheetDialogFragment fragment = new PlanRouteOptionsBottomSheetDialogFragment();
+			fragment.setListener(createOptionsFragmentListener());
+			fragment.show(mapActivity.getSupportFragmentManager(), PlanRouteOptionsBottomSheetDialogFragment.TAG);
+		}
 	}
 
 	@Override
@@ -523,10 +534,12 @@ public class PlanRouteFragment extends Fragment {
 	}
 
 	private void updateSelectButton() {
-		if (selectedCount == markersHelper.getMapMarkers().size() && markersHelper.isStartFromMyLocation()) {
-			((TextView) mainView.findViewById(R.id.select_all_button)).setText(getString(R.string.shared_string_deselect_all));
-		} else {
-			((TextView) mainView.findViewById(R.id.select_all_button)).setText(getString(R.string.shared_string_select_all));
+		if (portrait) {
+			if (selectedCount == markersHelper.getMapMarkers().size() && markersHelper.isStartFromMyLocation()) {
+				((TextView) mainView.findViewById(R.id.select_all_button)).setText(getString(R.string.shared_string_deselect_all));
+			} else {
+				((TextView) mainView.findViewById(R.id.select_all_button)).setText(getString(R.string.shared_string_select_all));
+			}
 		}
 	}
 
@@ -542,70 +555,29 @@ public class PlanRouteFragment extends Fragment {
 		}
 	}
 
+	//todo create one method
 	private void showMarkersList() {
 		MapActivity mapActivity = getMapActivity();
 		MapMarkersLayer markersLayer = getMapMarkersLayer();
-		if (mapActivity != null && markersLayer != null) {
+		if (mapActivity != null && markersLayer != null && portrait) {
 			markersListOpened = true;
-			upDownIconIv.setImageDrawable(getContentIcon(R.drawable.ic_action_arrow_down));
+			((ImageView) mainView.findViewById(R.id.up_down_icon)).setImageDrawable(getContentIcon(R.drawable.ic_action_arrow_down));
 			View listContainer = mainView.findViewById(R.id.markers_list_container);
-			if (portrait && listContainer != null) {
+			if (listContainer != null) {
 				listContainer.setVisibility(View.VISIBLE);
-			} else {
-				showMarkersListFragment();
 			}
-			OsmandMapTileView tileView = mapActivity.getMapView();
-			previousMapPosition = tileView.getMapPosition();
-			if (!portrait) {
-				tileView.setMapPosition(LANDSCAPE_MIDDLE_RIGHT_CONSTANT);
-			}
-			mapActivity.refreshMap();
 		}
 	}
 
 	private void hideMarkersList() {
 		MapActivity mapActivity = getMapActivity();
 		MapMarkersLayer markersLayer = getMapMarkersLayer();
-		if (mapActivity != null && markersLayer != null) {
+		if (mapActivity != null && markersLayer != null && portrait) {
 			markersListOpened = false;
-			upDownIconIv.setImageDrawable(getContentIcon(R.drawable.ic_action_arrow_up));
+			((ImageView) mainView.findViewById(R.id.up_down_icon)).setImageDrawable(getContentIcon(R.drawable.ic_action_arrow_up));
 			View listContainer = mainView.findViewById(R.id.markers_list_container);
-			if (portrait && listContainer != null) {
+			if (listContainer != null) {
 				listContainer.setVisibility(View.GONE);
-			} else {
-				hideMarkersListFragment();
-			}
-			mapActivity.getMapView().setMapPosition(previousMapPosition);
-			mapActivity.refreshMap();
-		}
-	}
-
-	private void showMarkersListFragment() {
-		MapActivity mapActivity = getMapActivity();
-		if (mapActivity != null) {
-			View upDownRow = mainView.findViewById(R.id.up_down_row);
-			int screenHeight = AndroidUtils.getScreenHeight(mapActivity) - AndroidUtils.getStatusBarHeight(mapActivity);
-			RecyclerViewFragment fragment = new RecyclerViewFragment();
-			fragment.setRecyclerView(markersRv);
-			fragment.setWidth(upDownRow.getWidth());
-			fragment.setHeight(screenHeight - upDownRow.getHeight());
-			mapActivity.getSupportFragmentManager().beginTransaction()
-					.add(R.id.fragmentContainer, fragment, RecyclerViewFragment.TAG)
-					.commitAllowingStateLoss();
-		}
-	}
-
-	private void hideMarkersListFragment() {
-		MapActivity mapActivity = getMapActivity();
-		if (mapActivity != null) {
-			try {
-				FragmentManager manager = mapActivity.getSupportFragmentManager();
-				Fragment fragment = manager.findFragmentByTag(RecyclerViewFragment.TAG);
-				if (fragment != null) {
-					manager.beginTransaction().remove(fragment).commitNowAllowingStateLoss();
-				}
-			} catch (Exception e) {
-				// ignore
 			}
 		}
 	}
@@ -654,7 +626,7 @@ public class PlanRouteFragment extends Fragment {
 			if (portrait) {
 				tileBoxHeightPx = 3 * (tb.getPixHeight() - mainView.getHeight() - toolbarHeight) / 4;
 			} else {
-				tileBoxWidthPx = tb.getPixWidth() - mainView.findViewById(R.id.up_down_row).getWidth();
+				tileBoxWidthPx = tb.getPixWidth() - mapActivity.getResources().getDimensionPixelSize(R.dimen.dashboard_land_width);
 			}
 			mapView.fitRectToMap(left, right, top, bottom, tileBoxWidthPx, tileBoxHeightPx, toolbarHeight * 3 / 2);
 		}
@@ -677,12 +649,12 @@ public class PlanRouteFragment extends Fragment {
 		activity.getSupportFragmentManager().beginTransaction().remove(this).commitAllowingStateLoss();
 	}
 
-	public static boolean showInstance(FragmentManager fragmentManager) {
+	public static boolean showInstance(FragmentManager fragmentManager, boolean portrait) {
 		try {
 			PlanRouteFragment fragment = new PlanRouteFragment();
 			fragment.setRetainInstance(true);
 			fragmentManager.beginTransaction()
-					.add(R.id.bottomFragmentContainer, fragment, PlanRouteFragment.TAG)
+					.add(portrait ? R.id.bottomFragmentContainer : R.id.topFragmentContainer, fragment, PlanRouteFragment.TAG)
 					.commitAllowingStateLoss();
 			return true;
 		} catch (Exception e) {
