@@ -270,7 +270,7 @@
     <string name="osmo_share_location">Share</string>
     <string name="osmo_pause_location">Pause</string>
     <string name="osmo_service_running">OsMo service is running</string>
-    <string name="trip_rec_notification_settings">Trip recording (no data)</string>
+    <string name="trip_rec_notification_settings">Enable recording quick start</string>
     <string name="trip_rec_notification_settings_desc">Display a system notification allowing to start trip recording</string>
     <string name="shared_string_notifications">Notifications</string>
     <string name="shared_string_continue">Continue</string>
