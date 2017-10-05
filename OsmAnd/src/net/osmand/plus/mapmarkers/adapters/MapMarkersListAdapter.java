@@ -3,6 +3,7 @@ package net.osmand.plus.mapmarkers.adapters;
 import android.support.v4.content.ContextCompat;
 import android.support.v4.view.MotionEventCompat;
 import android.support.v7.widget.RecyclerView;
+import android.util.Pair;
 import android.view.LayoutInflater;
 import android.view.MotionEvent;
 import android.view.View;
@@ -10,6 +11,7 @@ import android.view.ViewGroup;
 
 import net.osmand.Location;
 import net.osmand.data.LatLon;
+import net.osmand.plus.GPXUtilities.WptPt;
 import net.osmand.plus.IconsCache;
 import net.osmand.plus.MapMarkersHelper.MapMarker;
 import net.osmand.plus.OsmAndFormatter;
@@ -23,6 +25,7 @@ import java.util.Collections;
 import java.util.Date;
 import java.util.List;
 import java.util.Locale;
+import java.util.Map;
 
 public class MapMarkersListAdapter extends RecyclerView.Adapter<MapMarkerItemViewHolder>
 		implements MapMarkersItemTouchHelperCallback.ItemTouchHelperAdapter {
@@ -37,8 +40,14 @@ public class MapMarkersListAdapter extends RecyclerView.Adapter<MapMarkerItemVie
 	private int finishPos = -1;
 	private int firstSelectedMarkerPos = -1;
 
+	private Map<Pair<WptPt, WptPt>, List<WptPt>> snappedToRoadPoints;
+
 	public void setAdapterListener(MapMarkersListAdapterListener listener) {
 		this.listener = listener;
+	}
+
+	public void setSnappedToRoadPoints(Map<Pair<WptPt, WptPt>, List<WptPt>> snappedToRoadPoints) {
+		this.snappedToRoadPoints = snappedToRoadPoints;
 	}
 
 	public MapMarkersListAdapter(MapActivity mapActivity) {
@@ -65,7 +74,6 @@ public class MapMarkersListAdapter extends RecyclerView.Adapter<MapMarkerItemVie
 		IconsCache iconsCache = app.getIconsCache();
 
 		boolean locationItem = pos == 0;
-		boolean firstMarkerItem = pos == 1;
 		boolean lastMarkerItem = pos == getItemCount() - 1;
 		boolean start = pos == startPos;
 		boolean finish = pos == finishPos && startPos != finishPos;
@@ -99,6 +107,13 @@ public class MapMarkersListAdapter extends RecyclerView.Adapter<MapMarkerItemVie
 			holder.firstDescription.setText(mapActivity.getString(R.string.shared_string_finish) + " • ");
 		}
 
+		boolean iconSettled = false;
+		if ((start || finish) && !locationItem) {
+			int res = start ? R.drawable.ic_action_point_start : R.drawable.ic_action_point_destination;
+			holder.icon.setImageDrawable(iconsCache.getIcon(res, MapMarker.getColorId(marker.colorIndex)));
+			iconSettled = true;
+		}
+
 		if (locationItem) {
 			holder.topDivider.setVisibility(View.VISIBLE);
 			holder.flagIconLeftSpace.setVisibility(View.VISIBLE);
@@ -111,7 +126,9 @@ public class MapMarkersListAdapter extends RecyclerView.Adapter<MapMarkerItemVie
 		} else {
 			holder.topDivider.setVisibility(View.GONE);
 			holder.flagIconLeftSpace.setVisibility(View.GONE);
-			holder.icon.setImageDrawable(iconsCache.getIcon(R.drawable.ic_action_flag_dark, MapMarker.getColorId(marker.colorIndex)));
+			if (!iconSettled) {
+				holder.icon.setImageDrawable(iconsCache.getIcon(R.drawable.ic_action_flag_dark, MapMarker.getColorId(marker.colorIndex)));
+			}
 			holder.point.setVisibility(View.VISIBLE);
 			holder.checkBox.setChecked(marker.selected);
 
@@ -157,7 +174,21 @@ public class MapMarkersListAdapter extends RecyclerView.Adapter<MapMarkerItemVie
 					: getPreviousSelectedMarkerLatLon(pos - 1);
 			float dist = 0;
 			if (first != null && marker != null) {
-				dist = (float) MapUtils.getDistance(first, marker.point);
+				WptPt pt1 = new WptPt();
+				pt1.lat = first.getLatitude();
+				pt1.lon = first.getLongitude();
+				WptPt pt2 = new WptPt();
+				pt2.lat = marker.getLatitude();
+				pt2.lon = marker.getLongitude();
+				List<WptPt> points = snappedToRoadPoints.get(new Pair<>(pt1, pt2));
+				if (points != null) {
+					for (int i = 0; i < points.size() - 1; i++) {
+						dist += (float) MapUtils.getDistance(points.get(i).lat, points.get(i).lon,
+								points.get(i + 1).lat, points.get(i + 1).lon);
+					}
+				} else {
+					dist = (float) MapUtils.getDistance(pt1.lat, pt1.lon, pt2.lat, pt2.lon);
+				}
 			}
 			holder.distance.setText(OsmAndFormatter.getFormattedDistance(dist, app));
 		}

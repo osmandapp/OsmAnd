@@ -249,6 +249,8 @@ public class MapInfoWidgetsFactory {
 		String title = "";
 		String description = null;
 
+		int saveViewTextId = -1;
+
 		OnClickListener onBackButtonClickListener;
 		OnClickListener onTitleClickListener;
 		OnClickListener onCloseButtonClickListener;
@@ -335,6 +337,10 @@ public class MapInfoWidgetsFactory {
 
 		public void setSaveViewVisible(boolean visible) {
 			this.saveViewVisible = visible;
+		}
+
+		public void setSaveViewTextId(int id) {
+			this.saveViewTextId = id;
 		}
 
 		public void setTopBarSwitchVisible(boolean visible) {
@@ -649,6 +655,10 @@ public class MapInfoWidgetsFactory {
 				refreshButton.setVisibility(View.GONE);
 			}
 			if (controller.saveViewVisible) {
+				if (controller.saveViewTextId != -1) {
+					saveView.setText(map.getString(controller.saveViewTextId));
+					saveView.setContentDescription(map.getString(controller.saveViewTextId));
+				}
 				if (saveView.getVisibility() == View.GONE) {
 					saveView.setVisibility(View.VISIBLE);
 				}
@@ -749,7 +759,7 @@ public class MapInfoWidgetsFactory {
 						if (text == null) {
 							text = "";
 						} else {
-							if(type[0] == null){
+							if (type[0] == null) {
 								showMarker = true;
 							} else {
 								turnDrawable.setColor(R.color.nav_arrow);
@@ -784,16 +794,16 @@ public class MapInfoWidgetsFactory {
 							rt.getName(settings.MAP_PREFERRED_LOCALE.get(), settings.MAP_TRANSLITERATE_NAMES.get()),
 							rt.getRef(settings.MAP_PREFERRED_LOCALE.get(), settings.MAP_TRANSLITERATE_NAMES.get(), rt.bearingVsRouteDirection(lastKnownLocation)),
 							rt.getDestinationName(settings.MAP_PREFERRED_LOCALE.get(), settings.MAP_TRANSLITERATE_NAMES.get(), rt.bearingVsRouteDirection(lastKnownLocation)),
-									"»");
+							"»");
 				}
 				if (text == null) {
 					text = "";
 				} else {
 					Location lastKnownLocation = locationProvider.getLastKnownLocation();
-					if(!Algorithms.isEmpty(text) && lastKnownLocation != null) {
+					if (!Algorithms.isEmpty(text) && lastKnownLocation != null) {
 						double dist =
 								CurrentPositionHelper.getOrthogonalDistance(rt, lastKnownLocation);
-						if(dist < 50) {
+						if (dist < 50) {
 							showMarker = true;
 						} else {
 							text = map.getResources().getString(R.string.shared_string_near) + " " + text;
