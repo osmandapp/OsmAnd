@@ -30,8 +30,8 @@
     <string name="group_will_be_removed_after_restart">Group will be removed after restart</string>
     <string name="show_guide_line">Show guide line</string>
     <string name="show_arrows_on_the_map">Show arrows on the map</string>
-    <string name="show_passed">Show \'Last used\' date</string>
-    <string name="hide_passed">Hide \'Last used\' date</string>
+    <string name="show_passed">Show passed</string>
+    <string name="hide_passed">Hide passed</string>
     <string name="remove_from_map_markers">Remove from Map Markers</string>
     <string name="descendingly">descending</string>
     <string name="ascendingly">ascending</string>
@@ -45,7 +45,7 @@
     <string name="marker_moved_to_active">Map marker moved to active</string>
     <string name="shared_string_list">List</string>
     <string name="shared_string_groups">Groups</string>
-    <string name="passed">Last used: %1$s</string>
+    <string name="passed">Passed: %1$s</string>
     <string name="make_active">Make active</string>
     <string name="today">Today</string>
     <string name="yesterday">Yesterday</string>
