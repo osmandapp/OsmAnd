@@ -151,7 +151,6 @@ public class PlanRouteFragment extends Fragment {
 
 		upDownIconIv = (ImageView) mainView.findViewById(R.id.up_down_icon);
 		upDownIconIv.setImageDrawable(getContentIcon(R.drawable.ic_action_arrow_up));
-		((ImageView) mainView.findViewById(R.id.sort_icon)).setImageDrawable(getContentIcon(R.drawable.ic_action_list_sort));
 
 		mainView.findViewById(R.id.up_down_row).setOnClickListener(new View.OnClickListener() {
 			@Override
@@ -182,20 +181,6 @@ public class PlanRouteFragment extends Fragment {
 				updateSelectButton();
 				recreateSnapTrkSegment();
 				mapActivity.refreshMap();
-			}
-		});
-
-		mainView.findViewById(R.id.sort_button).setOnClickListener(new View.OnClickListener() {
-			@Override
-			public void onClick(View view) {
-				Toast.makeText(mapActivity, "Sort", Toast.LENGTH_SHORT).show();
-			}
-		});
-
-		mainView.findViewById(R.id.save_button).setOnClickListener(new View.OnClickListener() {
-			@Override
-			public void onClick(View view) {
-				Toast.makeText(mapActivity, "Save", Toast.LENGTH_SHORT).show();
 			}
 		});
 
@@ -304,8 +289,7 @@ public class PlanRouteFragment extends Fragment {
 			public void onGlobalLayout() {
 				if (portrait) {
 					int upDownRowH = mainView.findViewById(R.id.up_down_row).getHeight();
-					int buttonsRowH = mainView.findViewById(R.id.buttons_row).getHeight();
-					int listContainerH = availableHeight - upDownRowH - buttonsRowH;
+					int listContainerH = availableHeight - upDownRowH;
 					View listContainer = mainView.findViewById(R.id.markers_list_container);
 					listContainer.getLayoutParams().height = listContainerH;
 					listContainer.requestLayout();
