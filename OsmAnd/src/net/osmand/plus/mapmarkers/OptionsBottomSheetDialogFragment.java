@@ -39,7 +39,7 @@ public class OptionsBottomSheetDialogFragment extends BottomSheetDialogFragment 
 	public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
 		MapActivity mapActivity = (MapActivity) getActivity();
 		portrait = AndroidUiHelper.isOrientationPortrait(getActivity());
-		boolean nightMode = !getMyApplication().getSettings().isLightContent();
+		final boolean nightMode = !getMyApplication().getSettings().isLightContent();
 		final int themeRes = nightMode ? R.style.OsmandDarkTheme : R.style.OsmandLightTheme;
 
 		final View mainView = View.inflate(new ContextThemeWrapper(getContext(), themeRes), R.layout.fragment_marker_options_bottom_sheet_dialog, container);
@@ -157,10 +157,10 @@ public class OptionsBottomSheetDialogFragment extends BottomSheetDialogFragment 
 				if (!portrait) {
 					if (screenHeight - statusBarHeight - mainView.getHeight()
 							>= AndroidUtils.dpToPx(getActivity(), 8)) {
-						AndroidUtils.setBackground(getActivity(), mainView, false,
+						AndroidUtils.setBackground(getActivity(), mainView, nightMode,
 								R.drawable.bg_bottom_sheet_topsides_landscape_light, R.drawable.bg_bottom_sheet_topsides_landscape_dark);
 					} else {
-						AndroidUtils.setBackground(getActivity(), mainView, false,
+						AndroidUtils.setBackground(getActivity(), mainView, nightMode,
 								R.drawable.bg_bottom_sheet_sides_landscape_light, R.drawable.bg_bottom_sheet_sides_landscape_dark);
 					}
 				}

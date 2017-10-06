@@ -4,7 +4,6 @@ import android.content.Context;
 import android.support.annotation.NonNull;
 import android.support.annotation.Nullable;
 import android.support.v4.content.ContextCompat;
-import android.util.Pair;
 
 import net.osmand.IndexConstants;
 import net.osmand.data.FavouritePoint;
@@ -16,6 +15,7 @@ import net.osmand.plus.GPXUtilities.GPXFile;
 import net.osmand.plus.GPXUtilities.WptPt;
 import net.osmand.plus.GpxSelectionHelper.SelectedGpxFile;
 import net.osmand.plus.mapmarkers.MapMarkersDbHelper;
+import net.osmand.plus.mapmarkers.MarkersPlanRouteContext;
 import net.osmand.util.Algorithms;
 import net.osmand.util.MapUtils;
 
@@ -28,7 +28,6 @@ import java.util.LinkedHashMap;
 import java.util.LinkedList;
 import java.util.List;
 import java.util.Map;
-import java.util.concurrent.ConcurrentHashMap;
 
 import static net.osmand.data.PointDescription.POINT_TYPE_MAP_MARKER;
 
@@ -44,8 +43,7 @@ public class MapMarkersHelper {
 	private MapMarkersDbHelper markersDbHelper;
 	private boolean startFromMyLocation;
 
-	private final Map<Pair<WptPt, WptPt>, List<WptPt>> snappedToRoadPoints = new ConcurrentHashMap<>();
-	private ApplicationMode snappedMode;
+	private MarkersPlanRouteContext planRouteContext;
 
 	public interface MapMarkerChangedListener {
 		void onMapMarkerChanged(MapMarker mapMarker);
@@ -230,22 +228,15 @@ public class MapMarkersHelper {
 		this.ctx = ctx;
 		settings = ctx.getSettings();
 		markersDbHelper = ctx.getMapMarkersDbHelper();
+		planRouteContext = new MarkersPlanRouteContext(ctx);
 		startFromMyLocation = settings.ROUTE_MAP_MARKERS_START_MY_LOC.get();
 		removeDisabledGroups();
 		loadMarkers();
 		createMapMarkersGroups();
 	}
 
-	public Map<Pair<WptPt, WptPt>, List<WptPt>> getSnappedToRoadPoints() {
-		return snappedToRoadPoints;
-	}
-
-	public ApplicationMode getSnappedMode() {
-		return snappedMode;
-	}
-
-	public void setSnappedMode(ApplicationMode snappedMode) {
-		this.snappedMode = snappedMode;
+	public MarkersPlanRouteContext getPlanRouteContext() {
+		return planRouteContext;
 	}
 
 	public boolean isStartFromMyLocation() {

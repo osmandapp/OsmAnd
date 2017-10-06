@@ -43,7 +43,7 @@ public class HistoryMarkerMenuBottomSheetDialogFragment extends BottomSheetDialo
 	@Override
 	public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
 		portrait = AndroidUiHelper.isOrientationPortrait(getActivity());
-		boolean nightMode = getMyApplication().getDaynightHelper().isNightModeForMapControls();
+		final boolean nightMode = getMyApplication().getDaynightHelper().isNightModeForMapControls();
 		final int themeRes = nightMode ? R.style.OsmandDarkTheme : R.style.OsmandLightTheme;
 
 		final View mainView = View.inflate(new ContextThemeWrapper(getContext(), themeRes), R.layout.fragment_marker_history_bottom_sheet_dialog, container);
@@ -111,10 +111,10 @@ public class HistoryMarkerMenuBottomSheetDialogFragment extends BottomSheetDialo
 				if (!portrait) {
 					if (screenHeight - statusBarHeight - mainView.getHeight()
 							>= AndroidUtils.dpToPx(getActivity(), 8)) {
-						AndroidUtils.setBackground(getActivity(), mainView, false,
+						AndroidUtils.setBackground(getActivity(), mainView, nightMode,
 								R.drawable.bg_bottom_sheet_topsides_landscape_light, R.drawable.bg_bottom_sheet_topsides_landscape_dark);
 					} else {
-						AndroidUtils.setBackground(getActivity(), mainView, false,
+						AndroidUtils.setBackground(getActivity(), mainView, nightMode,
 								R.drawable.bg_bottom_sheet_sides_landscape_light, R.drawable.bg_bottom_sheet_sides_landscape_dark);
 					}
 				}

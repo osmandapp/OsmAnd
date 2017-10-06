@@ -28,9 +28,14 @@ public class PlanRouteOptionsBottomSheetDialogFragment extends BottomSheetDialog
 	private boolean portrait;
 	private boolean night;
 	private PlanRouteOptionsFragmentListener listener;
+	private boolean selectAll;
 
 	public void setListener(PlanRouteOptionsFragmentListener listener) {
 		this.listener = listener;
+	}
+
+	public void setSelectAll(boolean selectAll) {
+		this.selectAll = selectAll;
 	}
 
 	@Nullable
@@ -54,6 +59,23 @@ public class PlanRouteOptionsBottomSheetDialogFragment extends BottomSheetDialog
 		((ImageView) mainView.findViewById(R.id.door_to_door_icon)).setImageDrawable(getContentIcon(R.drawable.ic_action_sort_door_to_door));
 		((ImageView) mainView.findViewById(R.id.reverse_icon)).setImageDrawable(getContentIcon(R.drawable.ic_action_sort_reverse_order));
 
+		if (!portrait) {
+			((ImageView) mainView.findViewById(R.id.select_icon))
+					.setImageDrawable(getContentIcon(selectAll ? R.drawable.ic_action_select_all : R.drawable.ic_action_deselect_all));
+
+			((TextView) mainView.findViewById(R.id.select_title))
+					.setText(getString(selectAll ? R.string.shared_string_select_all : R.string.shared_string_deselect_all));
+
+			View selectRow = mainView.findViewById(R.id.select_row);
+			selectRow.setVisibility(View.VISIBLE);
+			selectRow.setOnClickListener(new View.OnClickListener() {
+				@Override
+				public void onClick(View view) {
+					listener.selectOnClick();
+					dismiss();
+				}
+			});
+		}
 		mainView.findViewById(R.id.navigate_row).setOnClickListener(new View.OnClickListener() {
 			@Override
 			public void onClick(View view) {
@@ -117,10 +139,10 @@ public class PlanRouteOptionsBottomSheetDialogFragment extends BottomSheetDialog
 
 				if (!portrait) {
 					if (screenHeight - statusBarHeight - mainView.getHeight() >= AndroidUtils.dpToPx(getActivity(), 8)) {
-						AndroidUtils.setBackground(getActivity(), mainView, false,
+						AndroidUtils.setBackground(getActivity(), mainView, night,
 								R.drawable.bg_bottom_sheet_topsides_landscape_light, R.drawable.bg_bottom_sheet_topsides_landscape_dark);
 					} else {
-						AndroidUtils.setBackground(getActivity(), mainView, false,
+						AndroidUtils.setBackground(getActivity(), mainView, night,
 								R.drawable.bg_bottom_sheet_sides_landscape_light, R.drawable.bg_bottom_sheet_sides_landscape_dark);
 					}
 				}
@@ -154,6 +176,8 @@ public class PlanRouteOptionsBottomSheetDialogFragment extends BottomSheetDialog
 	}
 
 	interface PlanRouteOptionsFragmentListener {
+
+		void selectOnClick();
 
 		void navigateOnClick();
 

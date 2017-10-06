@@ -4,7 +4,6 @@ import android.os.Build;
 import android.os.Bundle;
 import android.support.annotation.Nullable;
 import android.text.format.DateFormat;
-import android.util.Log;
 import android.view.ContextThemeWrapper;
 import android.view.Gravity;
 import android.view.LayoutInflater;
@@ -25,11 +24,7 @@ import net.osmand.plus.base.BottomSheetDialogFragment;
 import net.osmand.plus.helpers.AndroidUiHelper;
 
 import java.io.File;
-import java.text.SimpleDateFormat;
 import java.util.Date;
-import java.util.Locale;
-
-import studio.carbonylgroup.textfieldboxes.ExtendedEditText;
 
 import static net.osmand.plus.helpers.GpxImportHelper.GPX_SUFFIX;
 
@@ -49,7 +44,7 @@ public class SaveAsTrackBottomSheetDialogFragment extends BottomSheetDialogFragm
 	public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
 		MapActivity mapActivity = (MapActivity) getActivity();
 		portrait = AndroidUiHelper.isOrientationPortrait(getActivity());
-		boolean nightMode = !getMyApplication().getSettings().isLightContent();
+		final boolean nightMode = !getMyApplication().getSettings().isLightContent();
 		final int themeRes = nightMode ? R.style.OsmandDarkTheme : R.style.OsmandLightTheme;
 
 		final View mainView = View.inflate(new ContextThemeWrapper(getContext(), themeRes), R.layout.fragment_marker_save_as_track_bottom_sheet_dialog, container);
@@ -126,10 +121,10 @@ public class SaveAsTrackBottomSheetDialogFragment extends BottomSheetDialogFragm
 					if (!portrait) {
 						if (screenHeight - statusBarHeight - mainView.getHeight()
 								>= AndroidUtils.dpToPx(getActivity(), 8)) {
-							AndroidUtils.setBackground(getActivity(), mainView, false,
+							AndroidUtils.setBackground(getActivity(), mainView, nightMode,
 									R.drawable.bg_bottom_sheet_topsides_landscape_light, R.drawable.bg_bottom_sheet_topsides_landscape_dark);
 						} else {
-							AndroidUtils.setBackground(getActivity(), mainView, false,
+							AndroidUtils.setBackground(getActivity(), mainView, nightMode,
 									R.drawable.bg_bottom_sheet_sides_landscape_light, R.drawable.bg_bottom_sheet_sides_landscape_dark);
 						}
 					}

@@ -33,6 +33,38 @@
                 osmand:typeface="@string/font_roboto_medium"/>
 
             <LinearLayout
+                android:id="@+id/select_row"
+                android:layout_width="match_parent"
+                android:layout_height="@dimen/bottom_sheet_list_item_height"
+                android:background="?attr/selectableItemBackground"
+                android:gravity="center_vertical"
+                android:minHeight="@dimen/bottom_sheet_list_item_height"
+                android:paddingEnd="@dimen/bottom_sheet_content_padding"
+                android:paddingLeft="@dimen/bottom_sheet_content_padding"
+                android:paddingRight="@dimen/bottom_sheet_content_padding"
+                android:paddingStart="@dimen/bottom_sheet_content_padding"
+                android:visibility="gone"
+                tools:visibility="visible">
+
+                <ImageView
+                    android:id="@+id/select_icon"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginEnd="@dimen/bottom_sheet_icon_margin"
+                    android:layout_marginRight="@dimen/bottom_sheet_icon_margin"
+                    tools:src="@drawable/ic_action_select_all"/>
+
+                <TextView
+                    android:id="@+id/select_title"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:ellipsize="end"
+                    android:maxLines="1"
+                    android:textAppearance="@style/TextAppearance.ListItemTitle"
+                    tools:text="Select all"/>
+            </LinearLayout>
+
+            <LinearLayout
                 android:id="@+id/navigate_row"
                 android:layout_width="match_parent"
                 android:layout_height="@dimen/bottom_sheet_list_item_height"
@@ -216,7 +248,7 @@
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_gravity="center"
-            android:text="@string/shared_string_cancel"
+            android:text="@string/shared_string_close"
             android:textAllCaps="true"
             android:textColor="?attr/color_dialog_buttons"
             android:textSize="@dimen/default_desc_text_size"
