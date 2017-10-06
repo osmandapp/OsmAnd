@@ -2514,4 +2514,5 @@
     <string name="shared_string_finish">Финиш</string>
     <string name="shared_string_sort">Сортировать</string>
     <string name="marker_save_as_track_descr">Экспорт маркеров в файл можно задать здесь:</string>
+    <string name="shared_string_markers">Маркеры</string>
     </resources>

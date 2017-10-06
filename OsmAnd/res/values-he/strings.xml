@@ -63,7 +63,7 @@
 \nשקיעה : %2$s</string>
 	<string name="day_night_info">פרטי יום/לילה</string>
 	
-	<string name="map_widget_vector_attributes">מאפייני עיבוד תמונה:</string>
+	<string name="map_widget_vector_attributes">מאפייני עיבוד תמונה</string>
 	<string name="map_widget_renderer">סגנון עיבוד התמונה</string>
 	
 	
@@ -161,7 +161,7 @@
 	<string name="osmand_parking_am">AM</string>
 	<string name="osmand_parking_position_name">נקודת החנייה</string>
 	<string name="osmand_parking_plugin_description">תוסף זה מאפשר לך לאחסן את מיקום הרכב שחנית.</string>
-	<string name="osmand_parking_plugin_name">תוסף מיקום החנייה</string>
+	<string name="osmand_parking_plugin_name">מיקום החנייה</string>
 	<string name="context_menu_item_add_parking_point">סימון כמיקום החנייה</string>
 	<string name="context_menu_item_delete_parking_point">מחיקת סימון חנייה</string>
 	<string name="gpxup_public">ציבורי</string>
@@ -399,7 +399,7 @@
 	<string name="select_search_position">חיפוש ליד :</string>
 	<string name="context_menu_item_search">חיפוש באזור הזה</string>
 	
-	<string name="shared_string_save_as_gpx">שמירת מסלול כדרך GPX</string>
+	<string name="shared_string_save_as_gpx">שמירה כמסלול GPX חדש</string>
 	<string name="route_successfully_saved_at">המסלול נשמר בהצלחה בתור \'%1$s\'.</string>
 	<string name="filename_input">"שם הקובץ : "</string>
 	<string name="file_with_name_already_exist">כבר קיים קובץ השם הזה.</string>
@@ -421,7 +421,9 @@
 	<string name="shared_string_no_thanks">לא, תודה</string>
 	<string name="basemap_missing">מפת העולם הבסיסית (המכסה את כל העולם ברמות תקריב נמוכות) חסרה. כדאי לשקול להוריד את World_basemap_x.obf לקבלת סביבה שלמה.</string>
 	<string name="vector_data_missing">נתונים מקומיים („בלתי מקוונים“) חסרים בכרטיס ה־SD. נא לשקול להוריד אותם כדי להשתמש במפות באופן בלתי מקוון.</string>
-	<string name="local_index_gpx_info_show">\n\nיש ללחוץ ולהחזיק כדי להגיע לאפשרויות</string>
+	<string name="local_index_gpx_info_show">"
+\n
+\nיש ללחוץ לחיצה ארוכה כדי להגיע לאפשרויות"</string>
 	
 	
 	
@@ -571,11 +573,11 @@
 	<string name="safe_mode_description">הפעלת היישום במצב בטוח (על ידי שימוש בקוד אנדרויד במקום טבעי).</string>
     <string name="safe_mode">מצב בטוח</string>
     <string name="native_library_not_running">היישום פועל כעת במצב בטוח (ניתן לנטרל זאת בהגדרות).</string>
-    <string name="background_service_is_enabled_question">שירות הרקע עדיין פעיל. האם לבטל אותו?</string>
+    <string name="background_service_is_enabled_question">שירות הרקע של OsmAnd עדיין פעיל. לבטל גם אותו?</string>
     
     <string name="osmand_routing_experimental">ניווט בלתי מקוון ב־OsmAnd הנו תכונה ניסיונית ואינה פועלת למרחקים של למעלה מ־20 ק״מ.\n\nשירות הניווט הוחלף זמנית ל־CloudMade.</string>
 	<string name="specified_dir_doesnt_exist">לא ניתן למצוא את התיקייה שצוינה.</string>
-	<string name="application_dir">תיקיית האחסון</string>
+	<string name="application_dir">תיקיית אחסון הנתונים</string>
 	
 	<string name="osmand_net_previously_installed">מותקנת גרסה קודמת של OsmAnd. כל הנתונים הבלתי מקוונים יתמכו על ידי היישום החדש. אך את הנקודות המועדפות יש לייצא ביישום הישן ולייבא לאחר מכן ליישום החדש.</string>
 	<string name="build_installed">הבנייה {0} הותקנה בהצלחה ({1}).</string>
@@ -830,8 +832,8 @@
 	<string name="save_current_track">שמירת דרך ה־GPX הנוכחית</string>
 	<string name="save_track_interval">מרווח בין השמירות ליומן</string>
 	<string name="save_track_interval_descr">נא לבחור את הפרש בין הצבת המיקום בטוויית דרכים</string>
-	<string name="save_track_to_gpx_descrp">המסלולים ישמרו לתיקיית הדרכים בקבוצות לפי ימים</string>
-	<string name="save_track_to_gpx">שמירת הדרך לקובץ GPX</string>
+	<string name="save_track_to_gpx_descrp">מסלול GPX יישמר אוטומטית לתיקיית המסלולים במהלך הניווט</string>
+	<string name="save_track_to_gpx">הקלטת המסלול אוטומטית במהלך הניווט</string>
 	<string name="update_tile">עדכון המפה</string>
 	<string name="reload_tile">רעניון האריח</string>
 	<string name="mark_point">מטרה</string>
@@ -1025,8 +1027,8 @@
     <string name="av_use_external_recorder_descr">להשתמש במקליט המערכת עבור וידאו</string>
     <string name="av_use_external_recorder">להשתמש במקליט חיצוני</string>
     <string name="av_settings_descr">הגדרת תצורת השמע והווידאו</string>
-    <string name="av_settings">"הגדרות שמע/וידאו "</string>
-    <string name="recording_error">"אירעה שגיאה בזמן ההקלטה "</string>
+    <string name="av_settings">הגדרות שמע/וידאו</string>
+    <string name="recording_error">אירעה שגיאה בזמן ההקלטה</string>
     <string name="recording_camera_not_available">המצלמה אינה זמינה</string>
     <string name="osmand_srtm_long_description_1000_chars">תוסף זה מספק קווי מתאר שניתן להציג על המפות הבלתי מקוונות של OsmAnd. הנתונים הגלובליים (בין 70 מעלות צפון ל־70 מעלות דרום) מבוססת על מדידות שבוצעו על ידי ה־SRTM (משימת הטופוגרפיה של מעבורת המכ״ם) ו־ASTER (רדיומטר חלל מתקדם לגילוי פליטה תרמית והשתקפות), התקן דימות על סיפונה של Terra, לוויין הדגל של מערכת ההשפעה על כדור הארץ של NASA.‏ ASTER הנו שיתוף פעולה בין NASA, משרד התמ״ת היפני (METI) ומערכות החלל היפניות (J-spacesystems).</string>
     <string name="srtm_paid_version_msg">נא לשקול לקנות את תוסף קווי המתאר מהחנות כדי לתמוך בפיתוח עתידי.</string>
@@ -1068,7 +1070,7 @@
 	<string name="osmand_plus_play_title_30_chars">מפות וניווט עם OsmAnd+‎</string>
 	
 	
-    <string name="street_name">רחוב</string>
+    <string name="street_name">שם רחוב</string>
 	<string name="hno">מספר הבית</string>
     
     <string name="monitoring_settings">שירותי רישום ומצב שינה</string>
@@ -1082,7 +1084,7 @@
     <string name="favourites_list_activity">נא לבחור במועדף</string>
     <string name="local_openstreetmap_act_title">שינויים ב־OSM</string>
     <string name="shared_string_more_actions">פעולות אחרות</string>
-    <string name="download_using_mobile_internet">הרשת האלחוטית אינה מחוברת כרגע. האם להמשיך ולהוריד עם חיבור האינטרנט הנוכחי?</string>
+    <string name="download_using_mobile_internet">הרשת האלחוטית אינה מחוברת כרגע. להמשיך ולהוריד עם חיבור האינטרנט הנוכחי?</string>
     <string name="cancel_route">התעלמות מהמסלול</string>
     <string name="cancel_navigation">הפסקת הניווט</string>
     <string name="clear_destination">מחיקת היעד</string>
@@ -1090,11 +1092,11 @@
     <string name="files_limit">נותרו %1$d קבצים</string>
     <string name="available_downloads_left">%1$d קבצים זמינים להורדה</string>
     <string name="install_paid">גרסה מלאה</string>
-    <string name="use_magnetic_sensor_descr">שימוש בחיישן מגנטי כדי לזהות את ערך המצפן במקום חיישן הכיוון</string>
+    <string name="use_magnetic_sensor_descr">לקריאת מצפן, יש להשתמש בחיישן המגנטי במקום בחיישן הכיוון</string>
     <string name="use_magnetic_sensor">שימוש בחיישן מגנטי (מצפן)</string>
     <string name="use_kalman_filter_compass">שימוש במסנן קלמן</string>
     <string name="use_kalman_filter_compass_descr">ניתן להשתמש במסנן קלמן למניעת סטיות מצפן</string>
-    <string name="local_indexes_cat_srtm">נתוני קווי מתאר</string>
+    <string name="local_indexes_cat_srtm">קווי מתאר</string>
     <string name="wait_current_task_finished">נא להמתין להשלמת המשימה הנוכחית</string>
     <string name="shared_string_downloading">בהורדה</string>
 	<string name="delete_point">מחיקת נקודה</string>
@@ -1140,8 +1142,8 @@
     <string name="impassable_road_desc">בחירת דרכים מהן יש להמנע במהלך הניווט</string>
     <string name="shared_string_sound">קול</string>
     <string name="no_location_permission">ליישום אין הרשאה להשתמש בנתוני המיקום.</string>
-    <string name="no_camera_permission">ליישום אין הרשאה להשתמש במצלמה.</string>
-    <string name="no_microphone_permission">ליישום אין הרשאה להשתמש במיקרופון.</string>
+    <string name="no_camera_permission">ליישומון אין הרשאה להשתמש במצלמה.</string>
+    <string name="no_microphone_permission">ליישומון אין הרשאה להשתמש במיקרופון.</string>
     <string name="route_distance">מרחק:</string>
     <string name="route_duration">זמן:</string>
     <string name="shared_string_near">ליד</string>

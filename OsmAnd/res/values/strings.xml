@@ -9,6 +9,9 @@
          3. All your modified/created strings are in the top of the file (to make easier find what\'s translated).
     PLEASE: Have a look at http://code.google.com/p/osmand/wiki/UIConsistency, it may really improve your and our work  :-)  Thx - Hardy
     -->
+    <string name="osn_modify_dialog_error">Exception occurred: note was not modified</string>
+    <string name="osn_modify_dialog_title">Modify note</string>
+    <string name="context_menu_item_modify_note">Modify OSM note</string>
     <string name="make_round_trip_descr">Add copy of start point as destination.</string>
     <string name="make_round_trip">Make round trip</string>
     <string name="shared_string_navigate">Navigate</string>

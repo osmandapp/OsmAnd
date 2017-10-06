@@ -2448,7 +2448,7 @@ Si vous appréciez OsmAnd et OSM et que vous souhaitez soutenir ces projets, c\'
 \n 
 \n et bien plus…</string>
     <string name="shared_string_notifications">Notifications</string>
-    <string name="trip_rec_notification_settings">Enregistrement de l\'itinéraire (aucune donnée)</string>
+    <string name="trip_rec_notification_settings">Activer le démarrage rapide d\'enregistrement d\'itinéraire</string>
     <string name="trip_rec_notification_settings_desc">Afficher une notification permettant de débuter l’Enregistrement de l\'itinéraire</string>
     <string name="osmo_share_location">Partager</string>
     <string name="osmo_service_running">Le service OsMo est actif</string>
@@ -2959,4 +2959,10 @@ représentant la zone : %1$s x %2$s</string>
     <string name="fast_coordinates_input">Saisie rapide des coordonnées</string>
     <string name="routing_attr_avoid_ice_roads_fords_name">Éviter les routes sur glace, les fjords</string>
     <string name="routing_attr_avoid_ice_roads_fords_description">Éviter les routes sur glace et les fjords</string>
+    <string name="make_round_trip">Faire une boucle</string>
+    <string name="shared_string_navigate">Naviguer</string>
+    <string name="osn_modify_dialog_error">Une erreur s\'est produite : la note n\'a pas été enregistrée</string>
+    <string name="osn_modify_dialog_title">Modifier la note</string>
+    <string name="context_menu_item_modify_note">Modifier la note OSM</string>
+    <string name="make_round_trip_descr">Copie le point de départ en tant que destination.</string>
     </resources>

@@ -3485,4 +3485,11 @@
 	<string name="poi_government_transportation">Транспортна установа</string>
 	<string name="poi_government_legislative">Законодавчі установи</string>
 
+<string name="poi_seamark_clearance_height">Габаритна висота</string>
+	<string name="poi_seamark_clearance_height_closed">Габаритна висота (закрита)</string>
+	<string name="poi_seamark_clearance_height_open">Габаритна висота (відкрита)</string>
+	<string name="poi_seamark_clearance_width">Габаритна ширина</string>
+
+	<string name="poi_vhf">УКХ-канал</string>
+
 </resources>
