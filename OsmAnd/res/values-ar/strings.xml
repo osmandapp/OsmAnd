@@ -2813,4 +2813,7 @@
     <string name="make_round_trip_descr">إضافة نسخة نقطة البداية كوجهة.</string>
     <string name="make_round_trip">القيام برحلة ذهاب وإياب</string>
     <string name="shared_string_navigate">التنقل</string>
+    <string name="osn_modify_dialog_error">حدث استثناء: لم يتم تعديل الملاحظة</string>
+    <string name="osn_modify_dialog_title">تعديل ملاحظة</string>
+    <string name="context_menu_item_modify_note">تعديل ملاحظة OSM</string>
     </resources>
