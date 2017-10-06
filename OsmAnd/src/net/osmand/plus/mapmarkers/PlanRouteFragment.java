@@ -73,10 +73,11 @@ public class PlanRouteFragment extends Fragment {
 	private int previousMapPosition;
 	private int selectedCount = 0;
 	private int toolbarHeight;
+	private int closedListContainerHeight;
 
 	private boolean nightMode;
 	private boolean portrait;
-	private boolean markersListOpened = true;
+	private boolean markersListOpened;
 	private boolean wasCollapseButtonVisible;
 
 	private View mainView;
@@ -158,7 +159,7 @@ public class PlanRouteFragment extends Fragment {
 		if (portrait) {
 			AndroidUtils.setBackground(mapActivity, mainView, nightMode, R.drawable.bg_bottom_menu_light, R.drawable.bg_bottom_menu_dark);
 
-			((ImageView) mainView.findViewById(R.id.up_down_icon)).setImageDrawable(getContentIcon(R.drawable.ic_action_arrow_down));
+			((ImageView) mainView.findViewById(R.id.up_down_icon)).setImageDrawable(getContentIcon(R.drawable.ic_action_arrow_up));
 
 			mainView.findViewById(R.id.up_down_row).setOnClickListener(new View.OnClickListener() {
 				@Override
@@ -208,9 +209,9 @@ public class PlanRouteFragment extends Fragment {
 				@Override
 				public void onGlobalLayout() {
 					int upDownRowH = mainView.findViewById(R.id.up_down_row).getHeight();
-					int listContainerH = availableHeight - upDownRowH;
+					closedListContainerHeight = availableHeight - upDownRowH;
 					View listContainer = mainView.findViewById(R.id.markers_list_container);
-					listContainer.getLayoutParams().height = listContainerH;
+					listContainer.getLayoutParams().height = closedListContainerHeight;
 					listContainer.requestLayout();
 
 					ViewTreeObserver obs = mainView.getViewTreeObserver();
@@ -606,26 +607,26 @@ public class PlanRouteFragment extends Fragment {
 	//todo create one method
 	private void showMarkersList() {
 		MapActivity mapActivity = getMapActivity();
-		MapMarkersLayer markersLayer = getMapMarkersLayer();
-		if (mapActivity != null && markersLayer != null && portrait) {
+		if (mapActivity != null && portrait) {
 			markersListOpened = true;
+			mapActivity.findViewById(R.id.bottom_controls_container).setVisibility(View.GONE);
 			((ImageView) mainView.findViewById(R.id.up_down_icon)).setImageDrawable(getContentIcon(R.drawable.ic_action_arrow_down));
 			View listContainer = mainView.findViewById(R.id.markers_list_container);
 			if (listContainer != null) {
-				listContainer.setVisibility(View.VISIBLE);
+				listContainer.getLayoutParams().height = ViewGroup.LayoutParams.MATCH_PARENT;
 			}
 		}
 	}
 
 	private void hideMarkersList() {
 		MapActivity mapActivity = getMapActivity();
-		MapMarkersLayer markersLayer = getMapMarkersLayer();
-		if (mapActivity != null && markersLayer != null && portrait) {
+		if (mapActivity != null && portrait) {
 			markersListOpened = false;
+			mapActivity.findViewById(R.id.bottom_controls_container).setVisibility(View.VISIBLE);
 			((ImageView) mainView.findViewById(R.id.up_down_icon)).setImageDrawable(getContentIcon(R.drawable.ic_action_arrow_up));
 			View listContainer = mainView.findViewById(R.id.markers_list_container);
 			if (listContainer != null) {
-				listContainer.setVisibility(View.GONE);
+				listContainer.getLayoutParams().height = closedListContainerHeight;
 			}
 		}
 	}
