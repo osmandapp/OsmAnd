@@ -3044,4 +3044,7 @@
     <string name="make_round_trip_descr">Додати копію початкової точки як місце призначення.</string>
     <string name="make_round_trip">Зробити кругову подорож</string>
     <string name="shared_string_navigate">Почати навігацію</string>
+    <string name="osn_modify_dialog_error">Виняткова ситуація: примітку не було змінено</string>
+    <string name="osn_modify_dialog_title">Змінити примітку</string>
+    <string name="context_menu_item_modify_note">Змінити OSM-примітку</string>
     </resources>
