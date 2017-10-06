@@ -2376,7 +2376,7 @@
     <string name="gpx_logging_no_data">لا توجد بيانات</string>
     <string name="osmo_pause_location">إيقاف مؤقت</string>
     <string name="osmo_service_running">خدمة OsMo مشغلة</string>
-    <string name="trip_rec_notification_settings">تسجيل الرحلة (لا توجد بيانات)</string>
+    <string name="trip_rec_notification_settings">تفعيل تسجيل البدء السريع</string>
     <string name="trip_rec_notification_settings_desc">عرض اشعار نظامي للسماح ببدء تسجيل الرحلة</string>
     <string name="shared_string_notifications">الإشعارات</string>
     <string name="gpx_no_tracks_title_folder">يمكنك أيضا إضافة مسارات إلى المجلد</string>
@@ -2765,7 +2765,7 @@
     <string name="marker_moved_to_active">علامة الخريطة انتقلت إلى نشطة</string>
     <string name="shared_string_list">قائمة</string>
     <string name="shared_string_groups">مجموعات</string>
-    <string name="passed">آخر استخدام: %1$s</string>
+    <string name="passed">تم تجاوز: %1$s</string>
     <string name="make_active">تنشيط</string>
     <string name="today">اليوم</string>
     <string name="yesterday">أمس</string>
@@ -2783,8 +2783,8 @@
     <string name="exit_without_saving">الخروج دون حفظ؟</string>
     <string name="show_guide_line">إظهار خط التوجيه</string>
     <string name="show_arrows_on_the_map">إظهار الأسهم على الخريطة</string>
-    <string name="show_passed">إظهار \'آخر تاريخ مستخدم\'</string>
-    <string name="hide_passed">إخفاء \'آخر تاريخ مستخدم\'</string>
+    <string name="show_passed">إظهار المتجاوز</string>
+    <string name="hide_passed">إخفاء المتجاوز</string>
     <string name="remove_from_map_markers">إزالة من علامات الخريطة</string>
     <string name="descendingly">تنازلي</string>
     <string name="ascendingly">تصاعدي</string>
@@ -2810,4 +2810,7 @@
     <string name="fast_coordinates_input">إدخال إحداثيات سريع</string>
     <string name="routing_attr_avoid_ice_roads_fords_name">تجنب الطرق الجليدية، المعابر</string>
     <string name="routing_attr_avoid_ice_roads_fords_description">تجنب الطرق الجليدية والمعابر</string>
+    <string name="make_round_trip_descr">إضافة نسخة نقطة البداية كوجهة.</string>
+    <string name="make_round_trip">القيام برحلة ذهاب وإياب</string>
+    <string name="shared_string_navigate">التنقل</string>
     </resources>
