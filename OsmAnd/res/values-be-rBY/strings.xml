@@ -2862,4 +2862,7 @@ U vypadku, kali vy lubіcie OsmAnd і OSM і chočacie padtrymać jaho, heta іd
     <string name="make_round_trip_descr">Dadać kopiju pačatkovaj kropki jak miesca pryznačennia.</string>
     <string name="make_round_trip">Zrabić kruhavoje padarožža</string>
     <string name="shared_string_navigate">Pačać navihacyju</string>
+    <string name="osn_modify_dialog_error">Adbylosia vykliučennie: natatka nie byla zmienienaja</string>
+    <string name="osn_modify_dialog_title">Zmianić natatku</string>
+    <string name="context_menu_item_modify_note">Zmianić OSM-natatku</string>
     </resources>
