@@ -65,6 +65,8 @@ import java.util.Map;
 import java.util.Queue;
 import java.util.concurrent.ConcurrentLinkedQueue;
 
+import static net.osmand.plus.OsmandSettings.LANDSCAPE_MIDDLE_RIGHT_CONSTANT;
+
 public class PlanRouteFragment extends Fragment {
 
 	public static final String TAG = "PlanRouteFragment";
@@ -436,6 +438,12 @@ public class PlanRouteFragment extends Fragment {
 			}
 			setupAppModesBtn();
 
+			OsmandMapTileView tileView = mapActivity.getMapView();
+			previousMapPosition = tileView.getMapPosition();
+			if (!portrait) {
+				tileView.setMapPosition(LANDSCAPE_MIDDLE_RIGHT_CONSTANT);
+			}
+
 			selectedCount = mapActivity.getMyApplication().getMapMarkersHelper().getSelectedMarkersCount();
 			recreateSnapTrkSegment();
 			mapActivity.refreshMap();
@@ -490,6 +498,8 @@ public class PlanRouteFragment extends Fragment {
 
 			mapActivity.findViewById(R.id.snap_to_road_image_button).setVisibility(View.GONE);
 			mainView.findViewById(R.id.snap_to_road_progress_bar).setVisibility(View.GONE);
+
+			mapActivity.getMapView().setMapPosition(previousMapPosition);
 
 			cancelSnapToRoad();
 			markersLayer.setRoute(null);
