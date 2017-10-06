@@ -233,10 +233,7 @@ public class PlanRouteFragment extends Fragment {
 			});
 		} else {
 			Toolbar toolbar = (Toolbar) mainView.findViewById(R.id.plan_route_toolbar);
-			if (nightMode) {
-				toolbar.setBackgroundColor(ContextCompat.getColor(getContext(), R.color.actionbar_dark_color));
-			}
-			toolbar.setNavigationIcon(iconsCache.getIcon(R.drawable.ic_arrow_back));
+			toolbar.setNavigationIcon(getContentIcon(R.drawable.ic_arrow_back));
 			toolbar.setNavigationOnClickListener(new View.OnClickListener() {
 				@Override
 				public void onClick(View view) {
