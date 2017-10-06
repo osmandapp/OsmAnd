@@ -3007,7 +3007,7 @@
     <string name="marker_moved_to_active">Маркер мапи став активним</string>
     <string name="shared_string_list">Список</string>
     <string name="shared_string_groups">Групи</string>
-    <string name="passed">Останнє використання: %1$s</string>
+    <string name="passed">Проходження: %1$s</string>
     <string name="make_active">Зробити активним</string>
     <string name="today">Сьогодні</string>
     <string name="yesterday">Вчора</string>
@@ -3032,8 +3032,8 @@
     <string name="group_will_be_removed_after_restart">Група буде вилучена після перезапуску</string>
     <string name="show_guide_line">Показати напрямну лінію</string>
     <string name="show_arrows_on_the_map">Показати стрілки на мапі</string>
-    <string name="show_passed">Показати дату останнього використання</string>
-    <string name="hide_passed">Приховати дату останнього використання</string>
+    <string name="show_passed">Показати проходження</string>
+    <string name="hide_passed">Приховати проходження</string>
     <string name="shared_string_markers">Маркери</string>
     <string name="coordinates_format">Формат координат</string>
     <string name="use_system_keyboard">Використовувати системну клавіатуру</string>
@@ -3041,4 +3041,7 @@
     <string name="fast_coordinates_input">Швидке введення координат</string>
     <string name="routing_attr_avoid_ice_roads_fords_name">Уникати льодових доріг і бродів</string>
     <string name="routing_attr_avoid_ice_roads_fords_description">Уникає льодових доріг і бродів</string>
+    <string name="make_round_trip_descr">Додати копію початкової точки як місце призначення.</string>
+    <string name="make_round_trip">Зробити кругову подорож</string>
+    <string name="shared_string_navigate">Почати навігацію</string>
     </resources>
