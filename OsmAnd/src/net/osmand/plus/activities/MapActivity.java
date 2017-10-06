@@ -11,7 +11,6 @@ import android.content.DialogInterface;
 import android.content.Intent;
 import android.content.IntentFilter;
 import android.content.pm.PackageManager;
-import android.graphics.Rect;
 import android.media.AudioManager;
 import android.net.Uri;
 import android.os.AsyncTask;
@@ -59,7 +58,6 @@ import net.osmand.plus.AppInitializer;
 import net.osmand.plus.AppInitializer.AppInitializeListener;
 import net.osmand.plus.AppInitializer.InitEvents;
 import net.osmand.plus.ApplicationMode;
-import net.osmand.plus.GPXUtilities;
 import net.osmand.plus.GpxSelectionHelper.GpxDisplayItem;
 import net.osmand.plus.MapMarkersHelper.MapMarker;
 import net.osmand.plus.MapMarkersHelper.MapMarkerChangedListener;
@@ -315,6 +313,18 @@ public class MapActivity extends OsmandActionBarActivity implements DownloadEven
 		mIsDestroyed = false;
 	}
 
+	@Override
+	protected void onSaveInstanceState(Bundle outState) {
+		FragmentManager fm = getSupportFragmentManager();
+		Fragment planRouteFragment = fm.findFragmentByTag(PlanRouteFragment.TAG);
+		if (planRouteFragment != null) {
+			fm.beginTransaction()
+					.remove(planRouteFragment)
+					.commitNowAllowingStateLoss();
+			app.getMapMarkersHelper().getPlanRouteContext().setFragmentShowed(true);
+		}
+		super.onSaveInstanceState(outState);
+	}
 
 	private void checkAppInitialization() {
 		if (app.isApplicationInitializing()) {
@@ -447,7 +457,7 @@ public class MapActivity extends OsmandActionBarActivity implements DownloadEven
 	private void changeKeyguardFlags() {
 		if (settings.WAKE_ON_VOICE_INT.get() > 0) {
 			getWindow().setFlags(WindowManager.LayoutParams.FLAG_DISMISS_KEYGUARD | WindowManager.LayoutParams.FLAG_SHOW_WHEN_LOCKED,
-							WindowManager.LayoutParams.FLAG_DISMISS_KEYGUARD | WindowManager.LayoutParams.FLAG_SHOW_WHEN_LOCKED);
+					WindowManager.LayoutParams.FLAG_DISMISS_KEYGUARD | WindowManager.LayoutParams.FLAG_SHOW_WHEN_LOCKED);
 		} else {
 			getWindow().clearFlags(WindowManager.LayoutParams.FLAG_DISMISS_KEYGUARD | WindowManager.LayoutParams.FLAG_SHOW_WHEN_LOCKED);
 		}
@@ -557,6 +567,10 @@ public class MapActivity extends OsmandActionBarActivity implements DownloadEven
 	protected void onResume() {
 		super.onResume();
 		long tm = System.currentTimeMillis();
+
+		if (app.getMapMarkersHelper().getPlanRouteContext().isFragmentShowed()) {
+			PlanRouteFragment.showInstance(getSupportFragmentManager(), AndroidUiHelper.isOrientationPortrait(this));
+		}
 
 		if (app.isApplicationInitializing() || DashboardOnMap.staticVisible) {
 			if (!dashboardOnMap.isVisible()) {
@@ -1321,7 +1335,7 @@ public class MapActivity extends OsmandActionBarActivity implements DownloadEven
 		Intent intent = getIntent();
 		if (intent != null && intent.getData() != null) {
 			Uri data = intent.getData();
-			if (("http".equalsIgnoreCase(data.getScheme()) || "https".equalsIgnoreCase(data.getScheme()))&& data.getHost() != null && data.getHost().contains("osmand.net") &&
+			if (("http".equalsIgnoreCase(data.getScheme()) || "https".equalsIgnoreCase(data.getScheme())) && data.getHost() != null && data.getHost().contains("osmand.net") &&
 					data.getPath() != null && data.getPath().startsWith("/go")) {
 				String lat = data.getQueryParameter("lat");
 				String lon = data.getQueryParameter("lon");
@@ -1730,7 +1744,7 @@ public class MapActivity extends OsmandActionBarActivity implements DownloadEven
 
 	public QuickSearchDialogFragment getQuickSearchDialogFragment() {
 		Fragment fragment = getSupportFragmentManager().findFragmentByTag(QuickSearchDialogFragment.TAG);
-		return fragment!= null && !fragment.isDetached() && !fragment.isRemoving() ? (QuickSearchDialogFragment) fragment : null;
+		return fragment != null && !fragment.isDetached() && !fragment.isRemoving() ? (QuickSearchDialogFragment) fragment : null;
 	}
 
 	public PlanRouteFragment getPlanRouteFragment() {
