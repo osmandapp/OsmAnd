@@ -1922,7 +1922,7 @@
     <string name="shared_string_commit">انجام شده</string>
 
     <string name="share_geo">جغرافیایی:</string>
-    <string name="nm_h"></string>
+    <string name="nm_h"/>
     <string name="action_create">ساخت اکشن</string>
     <string name="action_modify">اصلاح اکشن</string>
     <string name="action_delete">حذف اکشن</string>
@@ -1937,12 +1937,12 @@
     <string name="get_for">پرداخت برای %1$s</string>
     <string name="get_for_month">پرداخت ماهانه %1$s</string>
     <string name="osm_live_banner_desc">دانلود نامحدود نقشه‌ها و به‌روزرسانی آن‌ها بیش از یک بار در ماه: هفتگی، روزانه یا ساعتی.</string>
-    <string name="osmand_plus_banner_desc">"ورژن نهایی OSMAnd  به همراه دانلود نامحدود نقشه ها و آپدیت ماهانه نقشه ها."</string>
+    <string name="osmand_plus_banner_desc">دانلود نامحدود نقشه‌ها، به‌روزرسانی‌های نامحدود و افزونهٔ ویکی‌پدیا.</string>
     <string name="si_mi_meters">مایل/متر</string>
     <string name="skip_map_downloading">صرف‌نظر از دانلود نقشه‌ها</string>
     <string name="skip_map_downloading_desc">شما نقشه‌های آفلاین را نصب نکرده‌اید. نقشه‌ای را از لیست انتخاب کنید یا اینکه بعداً از طریق منوی %1$s نقشه‌ها را دانلود کنید.</string>
     <string name="search_another_country">انتخاب منطقهٔ دیگری</string>
-    <string name="search_map">جستجوی نقشه…</string>
+    <string name="search_map">جست‌وجوی نقشه…</string>
     <string name="first_usage_wizard_desc">اجازه دهید برنامه موقعیت شما را پیدا کند تا نقشهٔ آنجا را دانلود کنید.</string>
     <string name="location_not_found">موقعیت پیدا نشد</string>
     <string name="no_inet_connection">اتصال اینترنت برقرار نیست</string>
@@ -1953,9 +1953,9 @@
     <string name="give_permission">اجازهٔ دسترسی</string>
     <string name="allow_access_location">اجازهٔ دسترسی به موقعیتتان را بدهید</string>
     <string name="first_usage_greeting">مسیریابی و کشف جاهای تازه بدون اتصال به اینترنت</string>
-    <string name="search_my_location">جستجوی موقعیت من</string>
-    <string name="no_update_info_desc">نیازی به پیدا کردن آپدیت جدید نیست، تخفیف ویژه OsmAnd</string>
-    <string name="no_update_info">آپدیت نشان داده نشود</string>
+    <string name="search_my_location">موقعیت من را پیدا کن</string>
+    <string name="no_update_info_desc">بررسی خودکار برای به‌روزرسانی‌های برنامه یا تخفیف‌های مربوط به OsmAnd را غیرفعال کنید</string>
+    <string name="no_update_info">به‌روزرسانی‌ها را نشان نده</string>
     <string name="update_all_maps_now">آیا می‌خواهید همهٔ نقشه‌ها را به‌روز کنید؟</string>
     <string name="clear_tile_data">پاک‌کردن همهٔ کاشی‌ها</string>
     <string name="routing_attr_short_way_name">راه صرفه‌جویی سوخت</string>
@@ -2123,7 +2123,7 @@
     <string name="routing_attr_height_obstacles_description">استفاده از اطلاعات ارتفاع زمین ارائه‌شده توسط SRTM،‏ ASTER و EU-DEM</string>
 
     <string name="rendering_attr_depthContours_description">نمایش نقاط و خطوط تراز عمقی</string>
-    <string name="rendering_attr_depthContours_name">خطوط عمقی</string>
+    <string name="rendering_attr_depthContours_name">منحنی‌های تراز عمق دریا</string>
 	<string name="rendering_attr_contourDensity_description">تراکم خطوط تراز</string>
     <string name="rendering_attr_contourDensity_name">تراکم خطوط تراز</string>
     <string name="rendering_attr_contourWidth_description">عرض خطوط تراز</string>
@@ -2139,7 +2139,7 @@
     <string name="osmo_share_location">اشتراک‌گذاری</string>
     <string name="osmo_pause_location">مکث</string>
     <string name="osmo_service_running">خدمات OSM در حال اجراست</string>
-    <string name="trip_rec_notification_settings">ضبط سفر (اطلاعات موجود نیست)</string>
+    <string name="trip_rec_notification_settings">فعال‌کردن شروع فوری ضبط</string>
     <string name="shared_string_notifications">اطلاعیه‌ها</string>
     <string name="shared_string_continue">ادامه</string>
     <string name="shared_string_pause">مکث</string>
@@ -2670,4 +2670,7 @@
     <string name="find_parking">پیداکردن پارکینگ</string>
     <string name="add_time_span">افزودن بازهٔ زمانی</string>
     <string name="shared_string_undo_all">خنثی‌کردن همه</string>
+    <string name="auto_split_recording_title">قطعه‌کردن ضبط‌ها پس از وقفه</string>
+    <string name="save_track_min_distance">حداقل جابه‌جایی برای ثبت</string>
+    <string name="translit_names">نویسه‌گردانی نام‌ها</string>
     </resources>
