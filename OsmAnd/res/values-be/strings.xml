@@ -2911,4 +2911,7 @@
     <string name="make_round_trip_descr">Дадаць копію пачатковай кропкі як месца прызначэння.</string>
     <string name="make_round_trip">Зрабіць кругавое падарожжа</string>
     <string name="shared_string_navigate">Пачаць навігацыю</string>
+    <string name="osn_modify_dialog_error">Адбылося выключэнне: нататка не была змененая</string>
+    <string name="osn_modify_dialog_title">Змяніць нататку</string>
+    <string name="context_menu_item_modify_note">Змяніць OSM-нататку</string>
     </resources>
