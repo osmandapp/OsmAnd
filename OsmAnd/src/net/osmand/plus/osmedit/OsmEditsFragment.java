@@ -24,11 +24,13 @@ import android.widget.AdapterView;
 import android.widget.AdapterView.OnItemClickListener;
 import android.widget.ArrayAdapter;
 import android.widget.CheckBox;
+import android.widget.EditText;
 import android.widget.ImageView;
 import android.widget.ListView;
 import android.widget.TextView;
 import android.widget.Toast;
 
+import net.osmand.AndroidUtils;
 import net.osmand.data.PointDescription;
 import net.osmand.osm.edit.Node;
 import net.osmand.plus.OsmandApplication;
@@ -46,6 +48,7 @@ import net.osmand.plus.myplaces.FavoritesActivity;
 import net.osmand.plus.osmedit.OsmPoint.Action;
 import net.osmand.plus.osmedit.dialogs.SendPoiDialogFragment;
 import net.osmand.plus.osmedit.dialogs.SendPoiDialogFragment.PoiUploaderType;
+import net.osmand.util.Algorithms;
 
 import org.xmlpull.v1.XmlSerializer;
 
@@ -351,6 +354,33 @@ public class OsmEditsFragment extends OsmAndListFragment
 
 	}
 
+	private void showBugDialog(final OsmNotesPoint point) {
+		final View view = LayoutInflater.from(getActivity()).inflate(R.layout.open_bug, null);
+		view.findViewById(R.id.user_name_field).setVisibility(View.GONE);
+		view.findViewById(R.id.userNameEditTextLabel).setVisibility(View.GONE);
+		view.findViewById(R.id.password_field).setVisibility(View.GONE);
+		view.findViewById(R.id.passwordEditTextLabel).setVisibility(View.GONE);
+		String text = point.getText();
+		if (!Algorithms.isEmpty(text)) {
+			((EditText) view.findViewById(R.id.message_field)).setText(text);
+		}
+
+		final AlertDialog.Builder builder = new AlertDialog.Builder(getActivity());
+		builder.setTitle(R.string.shared_string_commit);
+		builder.setView(view);
+		builder.setPositiveButton(R.string.osn_modify_dialog_title, new DialogInterface.OnClickListener() {
+			@Override
+			public void onClick(DialogInterface dialog, int which) {
+				String text = ((EditText) view.findViewById(R.id.message_field)).getText().toString();
+				plugin.getDBBug().updateOsmBug(point.getId(), text);
+				point.setText(text);
+				notifyDataSetChanged();
+			}
+		});
+		builder.setNegativeButton(R.string.shared_string_cancel, null);
+		builder.create().show();
+	}
+
 	public static void getOsmEditView(View v, OsmPoint child, OsmandApplication app) {
 		TextView viewName = ((TextView) v.findViewById(R.id.name));
 		ImageView icon = (ImageView) v.findViewById(R.id.icon);
@@ -499,6 +529,18 @@ public class OsmEditsFragment extends OsmAndListFragment
 					refreshId = entity.getId();
 					EditPoiDialogFragment.createInstance(entity, false)
 							.show(getActivity().getSupportFragmentManager(), "edit_poi");
+					return true;
+				}
+			});
+		}
+		if (info instanceof OsmNotesPoint) {
+			item = optionsMenu.getMenu().add(R.string.context_menu_item_modify_note)
+					.setIcon(app.getIconsCache().getThemedIcon(R.drawable.ic_action_edit_dark));
+			item.setOnMenuItemClickListener(new MenuItem.OnMenuItemClickListener() {
+
+				@Override
+				public boolean onMenuItemClick(MenuItem item) {
+					showBugDialog((OsmNotesPoint) info);
 					return true;
 				}
 			});

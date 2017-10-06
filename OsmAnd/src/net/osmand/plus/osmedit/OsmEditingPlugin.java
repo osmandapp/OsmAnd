@@ -40,6 +40,7 @@ import net.osmand.util.Algorithms;
 import org.apache.commons.logging.Log;
 
 import java.util.List;
+import java.util.Map;
 
 
 public class OsmEditingPlugin extends OsmandPlugin {
@@ -181,6 +182,8 @@ public class OsmEditingPlugin extends OsmandPlugin {
 							EditPoiDialogFragment.TAG);
 				} else if (resId == R.string.context_menu_item_open_note) {
 					openOsmNote(mapActivity, latitude, longitude);
+				} else if (resId == R.string.context_menu_item_modify_note) {
+					modifyOsmNote(mapActivity, (OsmNotesPoint) selectedObj);
 				} else if (resId == R.string.poi_context_menu_delete) {
 					new EditPoiDialogFragment.ShowDeleteDialogAsyncTask(mapActivity)
 							.execute((Amenity) selectedObj);
@@ -220,9 +223,15 @@ public class OsmEditingPlugin extends OsmandPlugin {
 					.setListener(listener)
 					.createItem());
 		}
-		adapter.addItem(new ContextMenuItem.ItemBuilder().setTitleId(R.string.context_menu_item_open_note, mapActivity)
-				.setIcon(R.drawable.ic_action_bug_dark)
-				.setListener(listener).createItem());
+		if (selectedObj instanceof OsmNotesPoint) {
+			adapter.addItem(new ContextMenuItem.ItemBuilder().setTitleId(R.string.context_menu_item_modify_note, mapActivity)
+					.setIcon(R.drawable.ic_action_edit_dark)
+					.setListener(listener).createItem());
+		} else {
+			adapter.addItem(new ContextMenuItem.ItemBuilder().setTitleId(R.string.context_menu_item_open_note, mapActivity)
+					.setIcon(R.drawable.ic_action_bug_dark)
+					.setListener(listener).createItem());
+		}
 	}
 
 	public void openOsmNote(MapActivity mapActivity, double latitude, double longitude) {
@@ -237,6 +246,13 @@ public class OsmEditingPlugin extends OsmandPlugin {
 			registerLayers(mapActivity);
 		}
 		osmBugsLayer.openBug(latitude, longitude, message, autofill);
+	}
+
+	public void modifyOsmNote(MapActivity mapActivity, OsmNotesPoint point) {
+		if (osmBugsLayer == null) {
+			registerLayers(mapActivity);
+		}
+		osmBugsLayer.modifyBug(point);
 	}
 
 	@Override

@@ -304,19 +304,24 @@ public class OsmBugsLayer extends OsmandMapLayer implements IContextMenuProvider
 		return bugs;
 	}
 
-
-	private void asyncActionTask(final OpenStreetNote bug, final String text, final Action action) {
+	private void asyncActionTask(final OpenStreetNote bug, final OsmNotesPoint point, final String text, final Action action) {
 		AsyncTask<Void, Void, OsmBugResult> task = new AsyncTask<Void, Void, OsmBugResult>() {
 			private OsmBugsUtil osmbugsUtil;
 
 			@Override
 			protected OsmBugResult doInBackground(Void... params) {
-				osmbugsUtil = getOsmbugsUtil(bug);
-				OsmNotesPoint pnt = new OsmNotesPoint();
-				pnt.setId(bug.getId());
-				pnt.setLatitude(bug.getLatitude());
-				pnt.setLongitude(bug.getLongitude());
-				return osmbugsUtil.commit(pnt, text, action);
+				if (bug != null) {
+					osmbugsUtil = getOsmbugsUtil(bug);
+					OsmNotesPoint pnt = new OsmNotesPoint();
+					pnt.setId(bug.getId());
+					pnt.setLatitude(bug.getLatitude());
+					pnt.setLongitude(bug.getLongitude());
+					return osmbugsUtil.commit(pnt, text, action);
+				} else if (point != null) {
+					osmbugsUtil = local;
+					return osmbugsUtil.modify(point, text);
+				}
+				return null;
 			}
 
 			protected void onPostExecute(OsmBugResult obj) {
@@ -351,6 +356,9 @@ public class OsmBugsLayer extends OsmandMapLayer implements IContextMenuProvider
 					} else if (action == Action.CREATE) {
 						r = R.string.osn_add_dialog_error;
 						openBug(bug.getLatitude(), bug.getLongitude(), text);
+					} else if (action == null) {
+						r = R.string.osn_modify_dialog_error;
+						modifyBug(point);
 					} else {
 						commentBug(bug, text);
 					}
@@ -374,10 +382,9 @@ public class OsmBugsLayer extends OsmandMapLayer implements IContextMenuProvider
 		bug.setLatitude(latitude);
 		bug.setLongitude(longitude);
 
-		if (autofill) asyncActionTask(bug, message, Action.CREATE);
+		if (autofill) asyncActionTask(bug, null, message, Action.CREATE);
 		else showBugDialog(bug, Action.CREATE, message);
 	}
-
 
 	public void closeBug(final OpenStreetNote bug, String txt) {
 		showBugDialog(bug, Action.DELETE, txt);
@@ -389,6 +396,15 @@ public class OsmBugsLayer extends OsmandMapLayer implements IContextMenuProvider
 
 	public void commentBug(final OpenStreetNote bug, String txt) {
 		showBugDialog(bug, Action.MODIFY, txt);
+	}
+
+	public void modifyBug(final OsmNotesPoint point) {
+		showBugDialog(point);
+	}
+
+	private void showBugDialog(final OsmNotesPoint point) {
+		String text = point.getText();
+		createBugDialog(true, text, R.string.osn_modify_dialog_title, null, null, point);
 	}
 
 	private void showBugDialog(final OpenStreetNote bug, final Action action, String text) {
@@ -406,6 +422,10 @@ public class OsmBugsLayer extends OsmandMapLayer implements IContextMenuProvider
 		OsmBugsUtil util = getOsmbugsUtil(bug);
 		final boolean offline = util instanceof OsmBugsLocalUtil;
 
+		createBugDialog(offline, text, title, action, bug, null);
+	}
+
+	private void createBugDialog(final boolean offline, String text, int posButtonTitleRes, final Action action, final OpenStreetNote bug, final OsmNotesPoint point) {
 		@SuppressLint("InflateParams")
 		final View view = LayoutInflater.from(activity).inflate(R.layout.open_bug, null);
 		if (offline) {
@@ -425,13 +445,15 @@ public class OsmBugsLayer extends OsmandMapLayer implements IContextMenuProvider
 		final AlertDialog.Builder builder = new AlertDialog.Builder(activity);
 		builder.setTitle(R.string.shared_string_commit);
 		builder.setView(view);
-		builder.setPositiveButton(title, new DialogInterface.OnClickListener() {
+		builder.setPositiveButton(posButtonTitleRes, new DialogInterface.OnClickListener() {
 			@Override
 			public void onClick(DialogInterface dialog, int which) {
+				String text = offline ? getMessageText(view) : getTextAndUpdateUserPwd(view);
+				activity.getContextMenu().close();
 				if (bug != null) {
-					String text = offline ? getMessageText(view) : getTextAndUpdateUserPwd(view);
-					activity.getContextMenu().close();
-					asyncActionTask(bug, text, action);
+					asyncActionTask(bug, null, text, action);
+				} else if (point != null) {
+					asyncActionTask(null, point, text, null);
 				}
 			}
 		});
