@@ -2664,4 +2664,7 @@ Abasta l\'àrea: %1$s x %2$s</string>
     <string name="make_round_trip_descr">Afegeix una còpia de punt d\'inici com a destinació.</string>
     <string name="make_round_trip">Fes un trajecte tancat</string>
     <string name="shared_string_navigate">Navega</string>
+    <string name="osn_modify_dialog_error">S\'ha produït una excepció: la nota no s\'ha modificat</string>
+    <string name="osn_modify_dialog_title">Modifica nota</string>
+    <string name="context_menu_item_modify_note">Modifica nota d\'OSM</string>
     </resources>
