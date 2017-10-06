@@ -17,6 +17,7 @@ import net.osmand.plus.activities.MapActivity;
 import net.osmand.plus.dashboard.DashLocationFragment;
 import net.osmand.plus.dashboard.DashboardOnMap;
 import net.osmand.plus.helpers.AndroidUiHelper;
+import net.osmand.plus.mapcontextmenu.MenuController;
 import net.osmand.plus.mapcontextmenu.other.MapRouteInfoMenu;
 import net.osmand.plus.views.AnimateDraggingMapThread;
 import net.osmand.plus.views.DirectionDrawable;
@@ -198,7 +199,7 @@ public class MapMarkersWidgetsFactory {
 				|| MapRouteInfoMenu.isVisible()
 				|| addressTopBar.getVisibility() == View.VISIBLE
 				|| map.isTopToolbarActive()
-				|| map.getContextMenu().isVisible()) {
+				|| (map.getContextMenu().isVisible() && map.getContextMenu().getCurrentMenuState() == MenuController.MenuState.HALF_SCREEN)) {
 			updateVisibility(false);
 			return;
 		}

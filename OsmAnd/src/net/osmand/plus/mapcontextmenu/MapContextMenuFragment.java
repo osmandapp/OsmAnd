@@ -525,6 +525,7 @@ public class MapContextMenuFragment extends Fragment implements DownloadEvents {
 		boolean needMapAdjust = oldMenuState != newMenuState && newMenuState != MenuState.FULL_SCREEN;
 
 		if (newMenuState != oldMenuState) {
+			menu.updateWidgetsVisibility(newMenuState != MenuState.HALF_SCREEN);
 			doBeforeMenuStateChange(oldMenuState, newMenuState);
 		}
 
