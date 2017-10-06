@@ -128,9 +128,11 @@ public class PlanRouteFragment extends Fragment {
 		if (snapToRoadFragment != null) {
 			((SnapToRoadBottomSheetDialogFragment) snapToRoadFragment).setListener(createSnapToRoadFragmentListener());
 		}
-		Fragment sortByFragment = fragmentManager.findFragmentByTag(PlanRouteOptionsBottomSheetDialogFragment.TAG);
-		if (sortByFragment != null) {
-			((PlanRouteOptionsBottomSheetDialogFragment) sortByFragment).setListener(createOptionsFragmentListener());
+		Fragment optionsFragment = fragmentManager.findFragmentByTag(PlanRouteOptionsBottomSheetDialogFragment.TAG);
+		if (optionsFragment != null) {
+			PlanRouteOptionsBottomSheetDialogFragment fragment = (PlanRouteOptionsBottomSheetDialogFragment) optionsFragment;
+			fragment.setSelectAll(!(selectedCount == markersHelper.getMapMarkers().size() && markersHelper.isStartFromMyLocation()));
+			fragment.setListener(createOptionsFragmentListener());
 		}
 
 		toolbarHeight = mapActivity.getResources().getDimensionPixelSize(R.dimen.dashboard_map_toolbar);
@@ -172,21 +174,8 @@ public class PlanRouteFragment extends Fragment {
 			mainView.findViewById(R.id.select_all_button).setOnClickListener(new View.OnClickListener() {
 				@Override
 				public void onClick(View view) {
-					int activeMarkersCount = markersHelper.getMapMarkers().size();
-					if (selectedCount == activeMarkersCount && markersHelper.isStartFromMyLocation()) {
-						markersHelper.deselectAllActiveMarkers();
-						markersHelper.setStartFromMyLocation(false);
-						selectedCount = 0;
-					} else {
-						markersHelper.selectAllActiveMarkers();
-						markersHelper.setStartFromMyLocation(true);
-						selectedCount = activeMarkersCount;
-					}
-					adapter.calculateStartAndFinishPos();
-					adapter.notifyDataSetChanged();
+					selectAllOnClick();
 					updateSelectButton();
-					planRouteContext.recreateSnapTrkSegment();
-					mapActivity.refreshMap();
 				}
 			});
 
@@ -322,6 +311,26 @@ public class PlanRouteFragment extends Fragment {
 		return view;
 	}
 
+	private void selectAllOnClick() {
+		int activeMarkersCount = markersHelper.getMapMarkers().size();
+		if (selectedCount == activeMarkersCount && markersHelper.isStartFromMyLocation()) {
+			markersHelper.deselectAllActiveMarkers();
+			markersHelper.setStartFromMyLocation(false);
+			selectedCount = 0;
+		} else {
+			markersHelper.selectAllActiveMarkers();
+			markersHelper.setStartFromMyLocation(true);
+			selectedCount = activeMarkersCount;
+		}
+		adapter.calculateStartAndFinishPos();
+		adapter.notifyDataSetChanged();
+		planRouteContext.recreateSnapTrkSegment();
+		MapActivity mapActivity = getMapActivity();
+		if (mapActivity != null) {
+			mapActivity.refreshMap();
+		}
+	}
+
 	@Override
 	public void onDestroyView() {
 		super.onDestroyView();
@@ -376,6 +385,11 @@ public class PlanRouteFragment extends Fragment {
 			private MapActivity mapActivity = getMapActivity();
 
 			@Override
+			public void selectOnClick() {
+				selectAllOnClick();
+			}
+
+			@Override
 			public void navigateOnClick() {
 				if (mapActivity != null) {
 					Toast.makeText(mapActivity, "navigate", Toast.LENGTH_SHORT).show();
@@ -385,7 +399,7 @@ public class PlanRouteFragment extends Fragment {
 			@Override
 			public void makeRoundTripOnClick() {
 				if (mapActivity != null) {
-					Toast.makeText(mapActivity, "mare round trip", Toast.LENGTH_SHORT).show();
+					Toast.makeText(mapActivity, "make round trip", Toast.LENGTH_SHORT).show();
 				}
 			}
 
@@ -531,6 +545,7 @@ public class PlanRouteFragment extends Fragment {
 		MapActivity mapActivity = getMapActivity();
 		if (mapActivity != null) {
 			PlanRouteOptionsBottomSheetDialogFragment fragment = new PlanRouteOptionsBottomSheetDialogFragment();
+			fragment.setSelectAll(!(selectedCount == markersHelper.getMapMarkers().size() && markersHelper.isStartFromMyLocation()));
 			fragment.setListener(createOptionsFragmentListener());
 			fragment.show(mapActivity.getSupportFragmentManager(), PlanRouteOptionsBottomSheetDialogFragment.TAG);
 		}
