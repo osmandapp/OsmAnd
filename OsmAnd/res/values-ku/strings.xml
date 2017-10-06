@@ -100,4 +100,13 @@
     <string name="exit_without_saving">Derkeve û qeyd neke?</string>
     <string name="line">Xet</string>
     <string name="save_as_line">Wekê xetekê qeyd bike</string>
+    <string name="shared_string_markers">Hêmaker</string>
+    <string name="coordinates_format">Formata koordînatan</string>
+    <string name="use_system_keyboard">Klavyeya amûrê bi kar bîne</string>
+    <string name="fast_coordinates_input_descr">Formata koordînatan hilbijêre. Tu hertim dikarî li “Eyar”an biguherînî.</string>
+    <string name="use_location">Cihê bi kar bîne</string>
+    <string name="add_location_as_first_point_descr">Bo rêgeha herî baş cihê xwe wekî cihê destpêkê hilbijêre.</string>
+    <string name="my_location">Cihê min</string>
+    <string name="shared_string_finish">Xilasek</string>
+    <string name="plan_route">Plana rêgehê</string>
     </resources>

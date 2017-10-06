@@ -2864,7 +2864,7 @@ Zodpovedá oblasti: %1$s x %2$s</string>
     <string name="marker_options">Možnosti značiek</string>
     <string name="map_orientation_change_in_accordance_with_speed">Citlivosť zmeny orientácie mapy</string>
     <string name="map_orientation_change_in_accordance_with_speed_descr">Zvoľte pod akou rýchlosťou sa orientácia mapy zmení zo \"v smere pohybu\" na \"podľa kompasu\"</string>
-    <string name="all_markers_moved_to_history">Všetky značky presunuté do histórie</string>
+    <string name="all_markers_moved_to_history">Všetky mapové značky presunuté do histórie</string>
     <string name="marker_moved_to_history">Mapová značka presunutá do histórie</string>
     <string name="marker_moved_to_active">Mapová značka presunutá do archívu</string>
     <string name="shared_string_list">Zoznam</string>
@@ -2880,7 +2880,7 @@ Zodpovedá oblasti: %1$s x %2$s</string>
     <string name="shared_string_markers">Značky</string>
     <string name="coordinates_format">Formát súradníc</string>
     <string name="use_system_keyboard">Použiť systémovú klávesnicu</string>
-    <string name="fast_coordinates_input_descr">Zvoľte formát súradníc pred štartom. Môžete ich potom zmeniť v Nastaveniach.</string>
+    <string name="fast_coordinates_input_descr">Zvoľte formát zadávania súradníc. Môžete ich potom zmeniť v Nastaveniach.</string>
     <string name="fast_coordinates_input">Rýchle zadávanie súradníc</string>
     <string name="routing_attr_avoid_ice_roads_fords_name">Vyhnúť sa ľadovým cestám, brodom</string>
     <string name="routing_attr_avoid_ice_roads_fords_description">Vyhnúť sa ľadovým cestám a brodom</string>
@@ -2901,8 +2901,8 @@ Zodpovedá oblasti: %1$s x %2$s</string>
     <string name="show_passed">Zobraziť dátum \'naposledy použité\'</string>
     <string name="hide_passed">Skryť dátum \'naposledy použité\'</string>
     <string name="remove_from_map_markers">Odstrániť z Mapových značiek</string>
-    <string name="descendingly">Zostupne</string>
-    <string name="ascendingly">Vzostupne</string>
+    <string name="descendingly">zostupne</string>
+    <string name="ascendingly">vzostupne</string>
     <string name="date_added">Dátum pridania</string>
     <string name="order_by">Zoradiť podľa:</string>
     <string name="marker_show_distance_descr">Zvoľte ako sa bude zobrazovať vzdialenosť a smer k mapovým značkám na mape:</string>

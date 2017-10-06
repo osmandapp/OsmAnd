@@ -4,6 +4,7 @@ import android.content.Context;
 import android.support.annotation.NonNull;
 import android.support.annotation.Nullable;
 import android.support.v4.content.ContextCompat;
+import android.util.Pair;
 
 import net.osmand.IndexConstants;
 import net.osmand.data.FavouritePoint;
@@ -27,6 +28,7 @@ import java.util.LinkedHashMap;
 import java.util.LinkedList;
 import java.util.List;
 import java.util.Map;
+import java.util.concurrent.ConcurrentHashMap;
 
 import static net.osmand.data.PointDescription.POINT_TYPE_MAP_MARKER;
 
@@ -41,6 +43,9 @@ public class MapMarkersHelper {
 	private OsmandApplication ctx;
 	private MapMarkersDbHelper markersDbHelper;
 	private boolean startFromMyLocation;
+
+	private final Map<Pair<WptPt, WptPt>, List<WptPt>> snappedToRoadPoints = new ConcurrentHashMap<>();
+	private ApplicationMode snappedMode;
 
 	public interface MapMarkerChangedListener {
 		void onMapMarkerChanged(MapMarker mapMarker);
@@ -229,6 +234,18 @@ public class MapMarkersHelper {
 		removeDisabledGroups();
 		loadMarkers();
 		createMapMarkersGroups();
+	}
+
+	public Map<Pair<WptPt, WptPt>, List<WptPt>> getSnappedToRoadPoints() {
+		return snappedToRoadPoints;
+	}
+
+	public ApplicationMode getSnappedMode() {
+		return snappedMode;
+	}
+
+	public void setSnappedMode(ApplicationMode snappedMode) {
+		this.snappedMode = snappedMode;
 	}
 
 	public boolean isStartFromMyLocation() {

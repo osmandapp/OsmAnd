@@ -2898,7 +2898,7 @@ Tidligere destination bliver sidste mellemliggende punkt.</string>
     <string name="shared_string_sort">Sorter</string>
     <string name="coordinate_input">Koordinatindtastning</string>
     <string name="is_saved">er gemt</string>
-    <string name="marker_save_as_track_descr">Eksporter markører til en fil, som kan angives her:</string>
+    <string name="marker_save_as_track_descr">Eksporter markører til den angivne fil:</string>
     <string name="marker_save_as_track">Gem som spor</string>
     <string name="move_to_history">Flyt til historik</string>
     <string name="group_will_be_removed_after_restart">Gruppen vil blive fjernet efter genstart</string>

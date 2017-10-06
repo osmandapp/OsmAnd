@@ -2857,8 +2857,8 @@ Koda predstavlja območje: %1$s x %2$s</string>
     <string name="show_passed">Pokaži datum »nazadnje uporabljeno«</string>
     <string name="hide_passed">Skrij datum »nazadnje uporabljeno«</string>
     <string name="remove_from_map_markers">Odstrani iz seznama Oznak zemljevida</string>
-    <string name="descendingly">Padajoče</string>
-    <string name="ascendingly">Naraščajoče</string>
+    <string name="descendingly">padajoče</string>
+    <string name="ascendingly">naraščajoče</string>
     <string name="date_added">Datum dodajanja</string>
     <string name="order_by">Razvrščeno po:</string>
     <string name="shared_string_list">Seznam</string>
@@ -2867,4 +2867,25 @@ Koda predstavlja območje: %1$s x %2$s</string>
     <string name="yesterday">Včeraj</string>
     <string name="last_seven_days">Zadnjih 7 dni</string>
     <string name="this_year">Letos</string>
+    <string name="shared_string_markers">Označbe</string>
+    <string name="coordinates_format">Zapis koordinat</string>
+    <string name="use_system_keyboard">Uporabi sistemsko tipkovnico</string>
+    <string name="fast_coordinates_input_descr">Izberite zapis koordinat za vnos. Nastavitev je vedno mogoče spremeniti med možnostmi.</string>
+    <string name="fast_coordinates_input">Hitro vpisovanje koordinat</string>
+    <string name="routing_attr_avoid_ice_roads_fords_name">Izogni se zaledenelim cestam in plitvinam</string>
+    <string name="routing_attr_avoid_ice_roads_fords_description">Izogni se zaledenelim cestam in plitvinam</string>
+    <string name="use_location">Uporabi položaj</string>
+    <string name="add_location_as_first_point_descr">Dodajte trenutno mesto kot prvo točko za načrtovanje poti.</string>
+    <string name="my_location">Moja trenutna točka</string>
+    <string name="shared_string_finish">Cilj</string>
+    <string name="plan_route">Planiraj pot</string>
+    <string name="shared_string_sort">Razvrsti</string>
+    <string name="coordinate_input">Vpis koordinat</string>
+    <string name="is_saved">je shranjeno</string>
+    <string name="marker_save_as_track">Shrani kot sled</string>
+    <string name="move_to_history">Premakni v zgodovino</string>
+    <string name="group_will_be_removed_after_restart">Skupina bo po ponovnem zagonu odstranjena</string>
+    <string name="map_orientation_change_in_accordance_with_speed">Prag usmerjenosti zemljevida</string>
+    <string name="all_markers_moved_to_history">Vse označbe zemljevida so premaknjene med zgodovino</string>
+    <string name="marker_moved_to_history">Označbe zemljevida so premaknjene med zgodovino</string>
     </resources>

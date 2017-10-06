@@ -2470,7 +2470,7 @@ OsmAnd (Automated Navigation Directions) 是一個地圖和導航的應用程式
     <string name="gpx_add_track">增加軌跡</string>
     <string name="gpx_appearance">外表</string>
     <string name="osmo_share_location">分享</string>
-    <string name="trip_rec_notification_settings">旅程記錄（無資料）</string>
+    <string name="trip_rec_notification_settings">啟用錄製快速開始</string>
     <string name="trip_rec_notification_settings_desc">顯示允許行程開始錄製的系統通知</string>
     <string name="rendering_value_fine_name">精細</string>
     <string name="route_calculation">路線估算</string>
@@ -2854,7 +2854,7 @@ OsmAnd (Automated Navigation Directions) 是一個地圖和導航的應用程式
     <string name="marker_moved_to_active">地圖標記已移到活動</string>
     <string name="shared_string_list">清單</string>
     <string name="shared_string_groups">群組</string>
-    <string name="passed">上次使用：%1$s</string>
+    <string name="passed">已經過的：%1$s</string>
     <string name="make_active">進行活動</string>
     <string name="today">今天</string>
     <string name="yesterday">昨天</string>
@@ -2871,8 +2871,8 @@ OsmAnd (Automated Navigation Directions) 是一個地圖和導航的應用程式
     <string name="order_by">順序依照：</string>
     <string name="show_guide_line">顯示引導線路</string>
     <string name="show_arrows_on_the_map">在地圖上顯示箭頭</string>
-    <string name="show_passed">顯示\'上次使用\'日期</string>
-    <string name="hide_passed">隱藏\'上次使用\'日期</string>
+    <string name="show_passed">顯示已經過的</string>
+    <string name="hide_passed">隱藏已經過的</string>
     <string name="use_location">使用位置</string>
     <string name="add_location_as_first_point_descr">將您的位置增加為第一個標點，來計劃完美路線。</string>
     <string name="my_location">我的位置</string>
@@ -2892,4 +2892,7 @@ OsmAnd (Automated Navigation Directions) 是一個地圖和導航的應用程式
     <string name="fast_coordinates_input">快速座標輸入</string>
     <string name="routing_attr_avoid_ice_roads_fords_name">避開結冰道路、涉水</string>
     <string name="routing_attr_avoid_ice_roads_fords_description">避開結冰和涉水的道路</string>
+    <string name="make_round_trip_descr">增加複製的起始點為目的地。</string>
+    <string name="make_round_trip">作成往返行程</string>
+    <string name="shared_string_navigate">導航</string>
     </resources>

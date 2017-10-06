@@ -1,4 +1,5 @@
-<?xml version="1.0" encoding="UTF-8" standalone="no"?><resources><string name="amenity_type_administrative">Administrativo</string>
+<?xml version='1.0' encoding='UTF-8'?>
+<resources><string name="amenity_type_administrative">Administrativo</string>
   <string name="amenity_type_barrier">Barreira</string>
   <string name="amenity_type_education">Educação</string>
   <string name="amenity_type_emergency">Emergência</string>
@@ -997,7 +998,7 @@
     <string name="av_use_external_recorder">Usar gravador externo</string>
     <string name="av_settings_descr">Configurar definições de áudio e vídeo</string>
     <string name="av_settings">"Definições de áudio e vídeo " </string>
-    <string name="recording_error">"Ocorreu um erro durante a gravação…" </string>
+    <string name="recording_error">Ocorreu um erro durante a gravação</string>
     <string name="recording_camera_not_available">Câmera não está disponível</string>
     <string name="recording_is_recorded">Áudio/vídeo está a ser gravado. Para parar pressione o botão de stop no widget.</string>
     <string name="recording_open_external_player">Abrir leitor externo</string>
@@ -1318,7 +1319,7 @@ Clique no widget de medição para ver mais ações.</string>
     <string name="osmo_auth_pending">Aguardando autorização…</string>
     <string name="osmo_locations_sent">Localização enviada %1$d (in buffer %2$d) </string>
     <string name="osmo_conn_successfull">Ligação estabelecida : %1$s </string>
-    <string name="osmo_io_error">Problema de ligação OsMo </string>
+    <string name="osmo_io_error">Problema de ligação OsMo:</string>
     <string name="osmo_settings_uuid">Identificação exclusiva do aparelho</string>
     <string name="use_points_as_intermediates">Calcular rota entre pontos</string>
     
@@ -1970,7 +1971,7 @@ Clique no widget de medição para ver mais ações.</string>
     <string name="access_no_destination">Destino não definido</string>
     <string name="map_widget_magnetic_bearing">Rumo magnético</string>
     <string name="access_autoannounce_period">Período do anúncio automático</string>
-    <string name="access_tree_list">Lista em árvore</string>
+    <string name="access_tree_list">Lista ramificada</string>
     <string name="free_downloads_used_description">Mostra os carregamentos gratuitos utilizados</string>
 
     <string name="access_smart_autoannounce">Anúncio automático inteligente</string>
@@ -1992,7 +1993,7 @@ Clique no widget de medição para ver mais ações.</string>
     <string name="upload_anonymously">Enviar anonimamente</string>
     <string name="download_files_error_not_enough_space">Espaço insuficiente! São precisos {3} MB temporariamente e {1} MB permanentemente. Actualmente, apenas existem {2} MB disponíveis.</string>
     <string name="download_files_question_space_with_temp">Descarregar mesmo {0} ficheiro(s)? Isso precisa de {3} MB temporariamente e {1} MB permanentemente. Actualmente, existem {2} MB disponíveis.</string>
-    <string name="upload_osm_note_description">Pode enviar anonimamente a sua Nota OSM se utilizar o seu perfil do OpenStreetMap.org.</string>
+    <string name="upload_osm_note_description">Pode enviar a sua Nota OSM anonimamente ou utilizando o seu perfil do OpenStreetMap.org.</string>
     <string name="upload_osm_note">Enviar a Nota OSM</string>
     <string name="map_marker_1st">Primeiro marcador de mapa</string>
     <string name="map_marker_2nd">Segundo marcador de mapa</string>
@@ -2056,10 +2057,371 @@ Clique no widget de medição para ver mais ações.</string>
     <!-- string name="lat_lon_pattern">Lat: %1$.5f Lon: %2$.5f</string -->
     <string name="follow_us">Siga-nos</string>
     <string name="skip_map_downloading">Ir download de mapas</string>
-    <string name="first_usage_greeting">Obter instruções e descobrir novos lugares sem conexão com a internet</string>
+    <string name="first_usage_greeting">Obter direções e descobrir novos lugares sem ligação à Internet</string>
     <string name="shared_string_skip">Pular</string>
     <string name="search_another_country">Selecione outra região</string>
     <string name="shared_string_change">Alterar</string>
     <string name="storage_directory_card">Cartão de memória</string>
     <string name="skip_map_downloading_desc">Você não tem o mapa offline instalado. Você pode escolher um mapa na lista ou fazer download de mapas mais tarde através do menu - %1$s.</string>
+    <string name="shared_string_markers">Marcadores</string>
+    <string name="coordinates_format">Formato de coordenadas</string>
+    <string name="use_system_keyboard">Usar teclado do sistema</string>
+    <string name="fast_coordinates_input_descr">Escolher formato de introdução de coordenada. Poderá sempre alterá-lo ao selecionar Opções.</string>
+    <string name="fast_coordinates_input">Introdução rápida de coordenadas</string>
+    <string name="routing_attr_avoid_ice_roads_fords_name">Evitar estradas com gelo, vales</string>
+    <string name="routing_attr_avoid_ice_roads_fords_description">Evitar estradas com gelo e vales</string>
+    <string name="use_location">Usar posição</string>
+    <string name="add_location_as_first_point_descr">Adicione a sua posição como primeiro ponto para planear o percurso perfeito.</string>
+    <string name="my_location">A minha posição</string>
+    <string name="shared_string_finish">Terminar</string>
+    <string name="plan_route">Planear percurso</string>
+    <string name="shared_string_sort">Classificar</string>
+    <string name="coordinate_input">Introdução de coordenada</string>
+    <string name="is_saved">é gravado</string>
+    <string name="marker_save_as_track_descr">Exportar os seus marcadores para um arquivo que pode especificar aqui:</string>
+    <string name="marker_save_as_track">Gravar como faixa</string>
+    <string name="move_to_history">Mover para histórico</string>
+    <string name="group_will_be_removed_after_restart">Grupo será removido após reinício</string>
+    <string name="show_guide_line">Mostrar linha guia</string>
+    <string name="show_arrows_on_the_map">Mostrar setas no mapa</string>
+    <string name="show_passed">Mostrar data \'Último uso\'</string>
+    <string name="hide_passed">Esconder data \'Último uso\'</string>
+    <string name="remove_from_map_markers">Remover a partir de Marcadores do Mapa</string>
+    <string name="descendingly">descendente</string>
+    <string name="ascendingly">ascendente</string>
+    <string name="date_added">Data adicionada</string>
+    <string name="order_by">Ordenar por:</string>
+    <string name="marker_show_distance_descr">Selecionar como indicar a distância e direção aos marcadores do mapa no ecrã do mapa:</string>
+    <string name="map_orientation_change_in_accordance_with_speed">Limiar de orientação do mapa</string>
+    <string name="map_orientation_change_in_accordance_with_speed_descr">Selecionar abaixo qual a velocidade que a orientação do mapa altera de \'Para a direção do movimento\' para \'Para bússola\'</string>
+    <string name="all_markers_moved_to_history">Todos os marcadores do mapa movidos para histórico</string>
+    <string name="marker_moved_to_history">Marcador do mapa movido para histórico</string>
+    <string name="marker_moved_to_active">Marcador do mapa movido para ativo</string>
+    <string name="shared_string_list">Lista</string>
+    <string name="shared_string_groups">Grupos</string>
+    <string name="passed">Última utilização: %1$s</string>
+    <string name="make_active">Tornar ativo</string>
+    <string name="today">Hoje</string>
+    <string name="yesterday">Ontem</string>
+    <string name="last_seven_days">Últimos 7 dias</string>
+    <string name="this_year">Este ano</string>
+    <string name="move_all_to_history">Mover tudo para histórico</string>
+    <string name="show_direction">Indicação da distância</string>
+    <string name="sort_by">Ordenar por</string>
+    <string name="do_not_use_animations">Não usar animações</string>
+    <string name="do_not_use_animations_descr">Desativar animações na aplicação</string>
+    <string name="keep_showing_on_map">Mantém observável no mapa</string>
+    <string name="exit_without_saving">Sair sem guardar?</string>
+    <string name="line">Linha</string>
+    <string name="save_as_route_point">Guardar como pontos do percurso</string>
+    <string name="save_as_line">Guardar como linha</string>
+    <string name="route_point">Ponto de percurso</string>
+    <string name="edit_line">Editar linha</string>
+    <string name="add_point_before">Adicionar ponto antes</string>
+    <string name="add_point_after">Adicionar ponto depois</string>
+    <string name="shared_string_options">Opções</string>
+    <string name="measurement_tool_snap_to_road_descr">OsmAnd irá ligar os pontos com percursos para o perfil selecionado.</string>
+    <string name="measurement_tool_save_as_new_track_descr">Pode gravar os pontos como pontos de percurso ou como uma linha.</string>
+    <string name="choose_navigation_type">Selecionar perfil de navegação</string>
+    <string name="none_point_error">Por favor adicione pelo menos um ponto.</string>
+    <string name="enter_gpx_name">Nome de arquivo GPX:</string>
+    <string name="show_on_map_after_saving">Mostrar no mapa após guardar</string>
+    <string name="measurement_tool_action_bar">Explorar o mapa e adicionar pontos</string>
+    <string name="measurement_tool">Medir distância</string>
+    <string name="quick_action_resume_pause_navigation">Retomar/Pausa navegação</string>
+    <string name="quick_action_resume_pause_navigation_descr">Selecionar este botão para pausa ou retomar a navegação.</string>
+    <string name="quick_action_show_navigation_finish_dialog">Mostrar diálogo final de Navegação</string>
+    <string name="quick_action_start_stop_navigation">Iniciar/parar navegação</string>
+    <string name="quick_action_start_stop_navigation_descr">Selecionar este botão para parar ou terminar a navegação.</string>
+    <string name="store_tracks_in_monthly_directories">Armazenar percursos gravados em diretórios mensais</string>
+    <string name="store_tracks_in_monthly_directories_descrp">Armazenar percursos gravados em subdiretórios por mês de gravação (como 2017-01).</string>
+    <string name="shared_string_reset">Reiniciar</string>
+    <string name="shared_string_reload">Recarregar</string>
+    <string name="mapillary_menu_descr_tile_cache">Recarregar tiles para ver dados atualizados.</string>
+    <string name="mapillary_menu_title_tile_cache">Cache de tile</string>
+    <string name="wrong_user_name">Nome de utilizador incorreto!</string>
+    <string name="shared_string_to">Para</string>
+    <string name="mapillary_menu_date_from">A partir de</string>
+    <string name="mapillary_menu_descr_dates">Visualizar imagens adicionadas durante um período específico.</string>
+    <string name="mapillary_menu_title_dates">Datas</string>
+    <string name="mapillary_menu_edit_text_hint">Introduza nome de utilizador</string>
+    <string name="mapillary_menu_descr_username">Ver imagens adicionados por um utilizador específico.</string>
+    <string name="mapillary_menu_title_username">Nome de utilizador</string>
+    <string name="mapillary_menu_filter_description">Pode filtrar imagens por quem submeteu ou por data. Filtros aplicáveis apenas para zoom de proximidade.</string>
+    <string name="map_widget_ruler_control">Régua de raio</string>
+    <string name="shared_string_permissions">Permissões</string>
+    <string name="import_gpx_failed_descr">OsmAnd não pode importar o arquivo. Por favor confirme se OsmAnd tem permissão para ler o arquivo a partir da sua localização.</string>
+    <string name="distance_moving">Distância corrigida</string>
+    <string name="mapillary_image">Imagem Mapillary</string>
+    <string name="open_mapillary">Abrir Mapillary</string>
+    <string name="shared_string_install">Instalar</string>
+    <string name="improve_coverage_mapillary">Melhorar cobertura fotográfica com Mapillary</string>
+    <string name="improve_coverage_install_mapillary_desc">Pode tirar as suas próprias fotos ou conjunto de fotos e anexá-las a este localização do mapa.
+\n
+\nPara fazer isto precisa de instalar a aplicação Mapillary a partir da Google Play Store.</string>
+    <string name="online_photos">Fotos online</string>
+    <string name="shared_string_add_photos">Adicionar fotos</string>
+    <string name="no_photos_descr">Não temos fotos para esta localização</string>
+    <string name="mapillary_action_descr">Contribui com as suas fotos ao nível da rua desta localização a partir do Mapillary.</string>
+    <string name="mapillary_widget">Widget Mapillary</string>
+    <string name="mapillary_widget_descr">Permite-lhe contribuir rapidamente para Mapillary</string>
+    <string name="mapillary_descr">Fotos online ao nível da rua para todos. Descubra locais, colabore, capture o mundo.</string>
+    <string name="mapillary">Mapillary</string>
+    <string name="plugin_mapillary_descr">Fotos ao nível da rua para todos. Descubra locais, colabore, capture o mundo.</string>
+    <string name="private_access_routing_req">O seu destino está localizado numa área de acesso privado. Gostaria de permitir o acesso a estradas privadas para esta viagem?</string>
+    <string name="restart_search">Reiniciar pesquisa</string>
+    <string name="increase_search_radius">Aumentar raio de pesquisa</string>
+    <string name="nothing_found">Nada encontrado :(</string>
+    <string name="nothing_found_descr">Modifique termo de pesquisa ou aumente raio de pesquisa</string>
+    <string name="quick_action_showhide_osmbugs_title">Mostrar/esconder Notas OSM</string>
+    <string name="quick_action_osmbugs_show">Mostrar Notas OSM</string>
+    <string name="quick_action_osmbugs_hide">Esconder Notas OSM</string>
+    <string name="quick_action_showhide_osmbugs_descr">Tocar no botão de ação irá mostrar ou esconder as Notas OSM no mapa.</string>
+    <string name="sorted_by_distance">Ordenar por distância</string>
+    <string name="search_favorites">Favoritos de pesquisa</string>
+    <string name="hillshade_menu_download_descr">Para observar relief hillshading no mapa, precisa de descarregar o mapa de hillshade overlay desta região.</string>
+    <string name="hillshade_purchase_header">Para ver relief hillshading no mapa, precisa de comprar e instalar o plugin Contour Lines</string>
+    <string name="hide_from_zoom_level">Esconder do nível de zoom</string>
+    <string name="srtm_menu_download_descr">Para ver linhas de contorno deste mapa, precisa de descarregar o mapa de linha de contorno para esta região.</string>
+    <string name="shared_string_plugin">Plugin</string>
+    <string name="srtm_purchase_header">Para ver as linhas de contorno no mapa, precisa de comprar e instalar o plugin de Linhas de Contorno</string>
+    <string name="srtm_color_scheme">Esquema de cores</string>
+    <string name="show_from_zoom_level">Mostrar a partir do nível de zoom</string>
+    <string name="routing_attr_allow_private_name">Permitir acesso privado</string>
+    <string name="routing_attr_allow_private_description">Permitir acesso a áreas privadas</string>
+    <string name="display_zoom_level">Mostrar nível de zoom: %1$s</string>
+    <string name="favorite_group_name">Nome de grupo</string>
+    <string name="change_color">Mudar cor</string>
+    <string name="edit_name">Editar nome</string>
+    <string name="animate_my_location">Animar Minha Posição</string>
+    <string name="animate_my_location_desc">Ativar animação panorâmica do mapa da Minha Posição durante navegação</string>
+    <string name="shared_string_overview">Visão Geral</string>
+    <string name="select_street">Selecionar rua</string>
+    <string name="shared_string_in_name">em %1$s</string>
+    <string name="type_address">Escreva morada</string>
+    <string name="type_city_town">Escreva cidade ou município</string>
+    <string name="type_postcode">Escreva código postal</string>
+    <string name="nearest_cities">Cidades próximas</string>
+    <string name="select_city">Selecionar cidade</string>
+    <string name="select_postcode">Selecionar código postal</string>
+    <string name="quick_action_auto_zoom">Auto zoom do mapa ativado/desativado</string>
+    <string name="quick_action_auto_zoom_desc">Selecionar o botão de ação irá ativar/desativar o auto zoom do mapa de acordo com a sua velocidade.</string>
+    <string name="quick_action_auto_zoom_on">Ativar auto zoom do mapa</string>
+    <string name="quick_action_auto_zoom_off">Desativar auto zoom do mapa</string>
+    <string name="quick_action_add_destination">Adicionar destino</string>
+    <string name="quick_action_replace_destination">Substituir destino</string>
+    <string name="quick_action_add_first_intermediate">Adicionar primeiro intermediário</string>
+    <string name="quick_action_add_destination_desc">Selecionar o botão de ação irá adicionar um destino ao localização do centro do ecrã. Destino definidos anteriormente tornam-se o último ponto intermediário.</string>
+    <string name="quick_action_replace_destination_desc">Selecionar o botão de ação irá substituir o destino com o localização do centro do ecrã.</string>
+    <string name="quick_action_add_first_intermediate_desc">Selecionar o botão de ação irá adicionar um primeiro ponto intermédio na localização no centro do ecrã.</string>
+    <string name="no_overlay">Sem sobreposição</string>
+    <string name="no_underlay">Sem subposição</string>
+    <string name="subscribe_email_error">Erro</string>
+    <string name="subscribe_email_desc">Subscreva à nossa lista de e-mail sobre descontos da aplicação e ganhe 3 mapas adicionais!</string>
+    <string name="depth_contour_descr">Conjunto de mapas que contém os pontos e linhas de contorno de profundidade marítima.</string>
+    <string name="sea_depth_thanks">Muito obrigado por comprar contornos de profundidade náutica!</string>
+    <string name="index_item_depth_contours_osmand_ext">Contornos de profundidade náutica</string>
+    <string name="index_item_depth_points_southern_hemisphere">Pontos de profundidade náutica do hemisfério sul</string>
+    <string name="index_item_depth_points_northern_hemisphere">Pontos de profundidade náutica do hemisfério norte</string>
+    <string name="download_depth_countours">Contornos de profundidade náutica</string>
+    <string name="nautical_maps">Mapas náuticos</string>
+    <string name="analyze_on_map">Analise no mapa</string>
+    <string name="shared_string_visible">Visível</string>
+    <string name="restore_purchases">Restaurar compras</string>
+    <string name="fonts_header">Fontes para mapa</string>
+    <string name="right_side_navigation">Condução destra</string>
+    <string name="driving_region_automatic">Automático</string>
+    <string name="do_not_send_anonymous_app_usage">Não envie estatísticas anónimas de utilização da aplicação</string>
+    <string name="do_not_send_anonymous_app_usage_desc">OsmAnd coleta informação sobre quais porções da aplicação estão abertas. A sua localização nunca é enviada, nem é nada que introduza na aplicação ou detalhes de áreas que observe, procure ou descarregue.</string>
+    <string name="do_not_show_startup_messages">Não mostres mensagens ao iniciar</string>
+    <string name="do_not_show_startup_messages_desc">Suprime mostrar descontos da aplicação e mensagens de eventos locais especiais</string>
+    <string name="parking_options">Opções de estacionamento</string>
+    <string name="full_version_thanks">Muito obrigado por comprar a versão completa de OsmAnd!</string>
+    <string name="routing_attr_relief_smoothness_factor_hills_name">Inclinado</string>
+    <string name="routing_attr_relief_smoothness_factor_plains_name">Menos inclinado</string>
+    <string name="routing_attr_relief_smoothness_factor_more_plains_name">Plano</string>
+    <string name="routing_attr_driving_style_speed_name">Percursos mais curtos</string>
+    <string name="routing_attr_driving_style_balance_name">Balanceado</string>
+    <string name="routing_attr_driving_style_safety_name">Preferir ramais</string>
+    <string name="relief_smoothness_factor_descr">Terreno preferido: plano ou inclinado</string>
+    <string name="shared_string_slope">Encosta</string>
+    <string name="add_new_folder">Adicionar nova pasta</string>
+    <string name="points_delete_multiple_succesful">Ponto(s) eliminados com sucesso.</string>
+    <string name="points_delete_multiple">Vai apagar %1$d ponto(s). Tem a certeza?</string>
+    <string name="route_points_category_name">Mudanças de direção a passar neste percurso</string>
+    <string name="track_points_category_name">Pontos proeminentes neste percurso</string>
+    <string name="gpx_track">Percurso</string>
+    <string name="max_speed">Velocidade máxima</string>
+    <string name="average_speed">Velocidade média</string>
+    <string name="shared_string_time_moving">Tempo em movimento</string>
+    <string name="shared_string_time_span">Período de tempo</string>
+    <string name="shared_string_max">Máximo</string>
+    <string name="shared_string_start_time">Tempo início</string>
+    <string name="shared_string_end_time">Tempo final</string>
+    <string name="shared_string_color">Cor</string>
+    <string name="select_gpx_folder">Selecionar diretório do percurso</string>
+    <string name="file_can_not_be_moved">Ficheiro não pode ser movido.</string>
+    <string name="shared_string_move">Mover</string>
+    <string name="shared_string_tracks">Percursos</string>
+    <string name="routing_attr_driving_style_name">Estilo de condução</string>
+    <string name="route_altitude">Elevação do percurso</string>
+    <string name="altitude_descent">Descida</string>
+    <string name="altitude_ascent">Subida</string>
+    <string name="altitude_range">Alcance de altitude</string>
+    <string name="average_altitude">Altitude média</string>
+    <string name="shared_string_time">Tempo</string>
+    <string name="total_distance">Distância total</string>
+    <string name="routing_attr_relief_smoothness_factor_name">Selecionar flutuação de elevação</string>
+    <string name="routing_attr_height_obstacles_name">Utilizar dados de elevação</string>
+    <string name="routing_attr_height_obstacles_description">Utilizar dados de elevação de terreno provenientes de SRTM, ASTER e EU-DEM</string>
+    <string name="rendering_attr_depthContours_description">Mostrar pontos e contornos de profundidade</string>
+    <string name="rendering_attr_depthContours_name">Contornos de profundidade náuticos</string>
+    <string name="release_2_6">\\022 Nova funcionaldiade: Botão de ação rápida
+\n
+\n• Resposta melhorada a gestos do ecrã touch (ex. panorâmico e aproximação em simultâneo)
+\n
+\n• Novas fontes de mapas com mais localizações
+\n
+\n• Suporte de TTS para variantes de linguagem regionais (e sotaques)
+\n
+\n• Melhoria de visibilidade em múltiplos estilos de mapa e wikipedia
+\n
+\n• Suporte para Open Location Code (OLC)
+\n
+\n• Mostrar elevação, encosta, e perfil de velocidade para percursos GPX gravados e percursos calculados
+\n
+\n• Configuração \"Estilo de condução\" e melhorias lógicas em percursos de bicicleta
+\n
+\n• Definições para utilizar dados de altitude em rotas de bicicleta
+\n
+\n• Várias outras melhorias e correção de erros
+\n
+\ne muito mais…</string>
+    <string name="show_transparency_seekbar">Mostra a transparência da barra de navegação</string>
+    <string name="shared_string_widgets">Widgets</string>
+    <string name="rendering_attr_hideUnderground_name">Objectos subterrâneos</string>
+    <string name="release_2_7">\\022 Plugin Mapillary com imagens ao nível da rua
+\n
+\n • Widget de régua para medição da distância
+\n
+\n • Intervalos GPX com informação detalhada sobre o seu percurso
+\n
+\n • Outras melhores e correção de erros
+\n
+\n</string>
+    <string name="auto_split_recording_title">Divisão automática de gravações após separação</string>
+    <string name="auto_split_recording_descr">Iniciar novo segmento após uma quebra de 6 min, novo percurso após quebra de 2 h, ou novo arquivo após quebra mais longa se a data se tiver alterado.</string>
+    <string name="rendering_attr_contourDensity_description">Densidade de linhas de contorno</string>
+    <string name="rendering_attr_contourDensity_name">Densidade de linhas de contorno</string>
+    <string name="rendering_value_high_name">Alto</string>
+    <string name="rendering_value_medium_w_name">Médio</string>
+    <string name="rendering_value_low_name">Baixo</string>
+    <string name="rendering_attr_contourWidth_description">Largura das linhas de contorno</string>
+    <string name="rendering_attr_contourWidth_name">Largura das linhas de contorno</string>
+    <string name="rendering_attr_hideWaterPolygons_description">Água</string>
+    <string name="rendering_attr_hideWaterPolygons_name">Esconder água</string>
+    <string name="legacy_search">Pesquisa antiga</string>
+    <string name="show_legacy_search">Mostrar pesquisa antiga</string>
+    <string name="show_legacy_search_desc">Adicionar pesquisa antiga à lista da gaveta</string>
+    <string name="routing_attr_allow_motorway_name">Permitir vias de motociclos</string>
+    <string name="routing_attr_allow_motorway_description">Permitir vias de motociclos</string>
+    <string name="wiki_around">Artigos de Wikipedia próximos</string>
+    <string name="search_map_hint">Procurar cidade ou região</string>
+    <string name="route_roundabout_short">Use a saída %1$d e continue</string>
+    <string name="upload_poi">Enviar Pontos de Interesse (POI)</string>
+    <string name="route_calculation">Cálculo da rota</string>
+    <string name="gpx_no_tracks_title">Não tem ainda nenhum percurso</string>
+    <string name="gpx_no_tracks_title_folder">Também pode adicionar percursos ao diretório</string>
+    <string name="gpx_add_track">Adicionar percurso</string>
+    <string name="gpx_appearance">Aparência</string>
+    <string name="osmo_share_location">Partilhar</string>
+    <string name="osmo_pause_location">Pausa</string>
+    <string name="osmo_service_running">Serviço OsMo está em funcionamento</string>
+    <string name="trip_rec_notification_settings">Gravação da viagem (sem dados)</string>
+    <string name="trip_rec_notification_settings_desc">Mostrar uma notificação de sistema que permite iniciar a gravação da viagem</string>
+    <string name="shared_string_notifications">Notificações</string>
+    <string name="shared_string_continue">Continuar</string>
+    <string name="shared_string_pause">Pausa</string>
+    <string name="shared_string_paused">Em pausa</string>
+    <string name="shared_string_trip">Viagem</string>
+    <string name="shared_string_recorded">Gravado</string>
+    <string name="shared_string_record">Registo</string>
+    <string name="gpx_logging_no_data">Sem dados</string>
+    <string name="release_2_5">\\022 Icones selecionáveis no mapa
+\n
+\n • Pesquisa poderosa filtrada por pontos de interesse (POI): Pesquise, ex. restaurantes por cozinha, ou campgrounds with specific facilities 
+\n
+\n • Novo estilo de Mapa Topo para ciclistas e montanhistas 
+\n
+\n • Gravação de viagem melhorada
+\n
+\n • Notificações de navegação melhoradas (Android Wear)
+\n
+\n • Muitas outras melhorias e correção de erros
+\n
+\n e muitos mais…</string>
+    <string name="rendering_attr_contourColorScheme_description">Esquema de cores das linhas de contorno</string>
+    <string name="save_track_min_speed">Velocidade mínima para registo</string>
+    <string name="save_track_min_speed_descr">Filtro: Definir velocidade mínima para um ponto poder ser registado</string>
+    <string name="save_track_min_distance">Deslocalmente mínimo para registo</string>
+    <string name="save_track_min_distance_descr">Filtro: Definir distância mínima da última posição para um ponto poder ser registado</string>
+    <string name="save_track_precision">Acuidade mínima para registo</string>
+    <string name="save_track_precision_descr">Filtro: Definir acuidade mínima para um ponto poder ser registado</string>
+    <string name="christmas_poi">Pontos de interesse (POI) de Natal</string>
+    <string name="christmas_desc">Antes do Natal e Ano Novo, pode escolher mostrar pontos de interesse (POI) relacionados com o Natal: Árvores de Natal, mercados, etc.</string>
+    <string name="christmas_desc_q">Mostrar pontos de interesse (POI) de Natal?</string>
+    <string name="rendering_value_light_brown_name">Castanho claro</string>
+    <string name="rendering_value_dark_brown_name">Castanho escuro</string>
+    <string name="rendering_attr_contourColorScheme_name">Esquema de cores das linhas de contorno</string>
+    <string name="rendering_attr_surfaceIntegrity_name">Integridade da superfície da estrada</string>
+    <string name="search_hint">Escreva cidade, morada, nome do ponto de interesse (POI)</string>
+    <string name="translit_name_if_miss">Transliterar se %1$s nome está ausente</string>
+    <string name="translit_names">Nomes transliterados</string>
+    <string name="edit_filter">Editar categorias</string>
+    <string name="subcategories">Subcategorias</string>
+    <string name="selected_categories">Categorias selecionadas</string>
+    <string name="create_custom_poi">Criar filtro personalizado</string>
+    <string name="custom_search">Pesquisa personalizada</string>
+    <string name="shared_string_filters">Filtros</string>
+    <string name="apply_filters">Aplicar filtros</string>
+    <string name="save_filter">Guardar filtros</string>
+    <string name="delete_filter">Apagar filtros</string>
+    <string name="new_filter">Novo filtro</string>
+    <string name="new_filter_desc">Por favor introduza o nome do novo filtro, este vai ser adicionado ao seu separador Categorias.</string>
+    <string name="osm_live_payment_desc">Valor de subscrição vai ser taxada a cada mês. Pode cancelar a subscrição no Google Play a qualquer altura.</string>
+    <string name="donation_to_osm">Doação para a comunidade OpenStreetMap</string>
+    <string name="donation_to_osm_desc">Parte da sua doação irá ser enviada para utilizadores OSM que submetem alterações ao OpenStreetMap. O custo da subscrição continua a ser o mesmo.</string>
+    <string name="osm_live_subscription_desc">Subscrição permite atualizações a cada hora, diárias, semanais, e descarregamentos ilimitados de todos os mapas globalmente.</string>
+    <string name="get_it">Comprá-lo</string>
+    <string name="get_for">Comprar por %1$s</string>
+    <string name="get_for_month">Comprar por %1$s mês</string>
+    <string name="osm_live_banner_desc">Obter descarregamentos ilimitados de mapas, e atualizações de mapas mais do que uma vez por mês: semanal, diário, ou a cada hora.</string>
+    <string name="osmand_plus_banner_desc">Descarregamentos ilimitados de mapas, atualizações, e plugin Wikipedia.</string>
+    <string name="si_mi_meters">Milhas/metros</string>
+    <string name="search_map">À procura de mapas…</string>
+    <string name="first_usage_wizard_desc">Deixe OsmAnd determinar a sua localização e sugerir mapas para descarregar para essa região.</string>
+    <string name="location_not_found">Localização não encontrada</string>
+    <string name="no_inet_connection">Sem ligação à Internet</string>
+    <string name="no_inet_connection_desc_map">Necessário para descarregar mapas.</string>
+    <string name="search_location">À procura de localização…</string>
+    <string name="storage_free_space">Espaço livre</string>
+    <string name="storage_place_description">Armazenamento de dados de OsmAnd (para mapas, percursos, etc.): %1$s.</string>
+    <string name="give_permission">Dê permissão</string>
+    <string name="allow_access_location">Permitir acesso a localização</string>
+    <string name="search_my_location">Encontrar a minha posição</string>
+    <string name="no_update_info_desc">Não verifique atualizações de versão ou descontos relacionados com OsmAnd</string>
+    <string name="no_update_info">Não mostrar atualizações</string>
+    <string name="update_all_maps_now">Quer atualizar todos os mapas agora?</string>
+    <string name="clear_tile_data">Apagar todos os tiles</string>
+    <string name="routing_attr_short_way_name">Percurso económico</string>
+    <string name="routing_attr_short_way_description">Utilizar percurso económico (geralmente mais curto)</string>
+    <string name="replace_favorite_confirmation">Tem a certeza que quer substituir %1$s favorito?</string>
+    <string name="rendering_attr_hideOverground_name">Objetos à superfície</string>
+    <string name="get_started">Começar</string>
+    <string name="route_stops_before">%1$s paragens antes</string>
+    <string name="coords_search">Pesquisa de coordenadas</string>
+    <string name="advanced_coords_search">Pesquisa avançada de coordenadas</string>
+    <string name="back_to_search">Retroceder para pesquisa</string>
+    <string name="confirmation_to_delete_history_items">Pretende remover os itens selecionados do histórico?</string>
+    <string name="show_something_on_map">Mostrar %1$s no mapa</string>
     </resources>

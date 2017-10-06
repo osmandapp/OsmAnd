@@ -19,6 +19,7 @@ import net.osmand.data.LatLon;
 import net.osmand.data.PointDescription;
 import net.osmand.data.QuadPoint;
 import net.osmand.data.RotatedTileBox;
+import net.osmand.plus.GPXUtilities.TrkSegment;
 import net.osmand.plus.MapMarkersHelper;
 import net.osmand.plus.MapMarkersHelper.MapMarker;
 import net.osmand.plus.OsmAndFormatter;
@@ -71,8 +72,7 @@ public class MapMarkersLayer extends OsmandMapLayer implements IContextMenuProvi
 	private final RenderingLineAttributes lineAttrs = new RenderingLineAttributes("measureDistanceLine");
 	private final RenderingLineAttributes textAttrs = new RenderingLineAttributes("rulerLineFont");
 	private Paint paint;
-	private Path path;
-	private List<LatLon> route = new ArrayList<>();
+	private TrkSegment route;
 
 	private TIntArrayList tx = new TIntArrayList();
 	private TIntArrayList ty = new TIntArrayList();
@@ -120,7 +120,6 @@ public class MapMarkersLayer extends OsmandMapLayer implements IContextMenuProvi
 		bitmapPaintDestTeal = createPaintDest(R.color.marker_teal);
 		bitmapPaintDestPurple = createPaintDest(R.color.marker_purple);
 
-		path = new Path();
 		paint = new Paint();
 		paint.setStyle(Paint.Style.STROKE);
 		paint.setStrokeWidth(7 * view.getDensity());
@@ -191,15 +190,8 @@ public class MapMarkersLayer extends OsmandMapLayer implements IContextMenuProvi
 		}
 	}
 
-	public void setRoute(List<LatLon> points) {
-		route.clear();
-		route.addAll(points);
-	}
-
-	public boolean clearRoute() {
-		boolean res = route.size() > 0;
-		route.clear();
-		return res;
+	public void setRoute(TrkSegment route) {
+		this.route = route;
 	}
 
 	@Override
@@ -214,26 +206,10 @@ public class MapMarkersLayer extends OsmandMapLayer implements IContextMenuProvi
 		MapMarkersHelper markersHelper = map.getMyApplication().getMapMarkersHelper();
 		List<MapMarker> activeMapMarkers = markersHelper.getMapMarkers();
 
-		if (route.size() > 0) {
-			path.reset();
-			boolean first = true;
-			if (markersHelper.isStartFromMyLocation() && myLoc != null) {
-				int locationX = tileBox.getPixXFromLonNoRot(myLoc.getLongitude());
-				int locationY = tileBox.getPixYFromLatNoRot(myLoc.getLatitude());
-				path.moveTo(locationX, locationY);
-				first = false;
-			}
-			for (LatLon point : route) {
-				int locationX = tileBox.getPixXFromLonNoRot(point.getLongitude());
-				int locationY = tileBox.getPixYFromLatNoRot(point.getLatitude());
-				if (first) {
-					path.moveTo(locationX, locationY);
-					first = false;
-				} else {
-					path.lineTo(locationX, locationY);
-				}
-			}
-			canvas.drawPath(path, paint);
+		if (route != null && route.points.size() > 0) {
+			route.renders.clear();
+			route.renders.add(new Renderable.StandardTrack(new ArrayList<>(route.points), 17.2));
+			route.drawRenderers(view.getZoom(), paint, canvas, tileBox);
 		}
 
 		if (markersHelper.isStartFromMyLocation() && myLoc != null) {

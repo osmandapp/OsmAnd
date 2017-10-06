@@ -300,7 +300,7 @@
 	<string name="poi_shoes">Magasin de chaussures</string>
 	<string name="poi_religion_sikh">Sikhisme</string>
 	<string name="poi_sinkhole">Doline</string>
-	<string name="poi_skateboard">Skateboard</string>
+	<string name="poi_skateboard">Planche à roulettes</string>
 	<string name="poi_skating">Patin à glace</string>
 	<string name="poi_skiing">Ski</string>
 	<string name="poi_slipway">Cale de lancement</string>
@@ -967,7 +967,7 @@
 	<string name="poi_seasonal_summer">Eté</string>
 	<string name="poi_seasonal_autumn">Automne</string>
 	<string name="poi_seasonal_winter">Hiver</string>
-	<string name="poi_animal_shelter_dog">Refuge pour chiens</string>
+	<string name="poi_animal_shelter_dog">Chiens</string>
 	<string name="poi_animal_shelter_cat">Refuge pour chats</string>
 	<string name="poi_animal_shelter_dog_cat">Refuge pour chiens et chats</string>
 	<string name="poi_animal_shelter_bird">Refuge pour oiseaux</string>
@@ -1820,7 +1820,7 @@
 	<string name="poi_microwave_oven_no">Four micro-ondes : non</string>
 	<string name="poi_parking_carports">Abri pour véhicules</string>
 
-	<string name="poi_parking_garage_boxes">Type : garages fermés</string>
+	<string name="poi_parking_garage_boxes">Garages fermés</string>
 	<string name="poi_node_networks">Réseaux de randonnée/de cyclisme</string>
 		<string name="poi_ford_stepping_stones">Pierres de gué</string>
 	<string name="poi_traffic_calming_island">Îlot central</string>
@@ -2088,9 +2088,9 @@
 	<string name="poi_aerodrome_type_private">Privé</string>
 
 	<string name="poi_telescope">Télescope</string>
-	<string name="poi_telescope_type_optical">Télescope : optique</string>
-	<string name="poi_telescope_type_radio">Télescope : radio</string>
-	<string name="poi_telescope_type_gamma">Télescope : gamma</string>
+	<string name="poi_telescope_type_optical">Optique</string>
+	<string name="poi_telescope_type_radio">Radio</string>
+	<string name="poi_telescope_type_gamma">Gamma</string>
 	<string name="poi_telescope_diameter">Diamètre</string>
 	<string name="poi_telescope_spectrum">Spectre</string>
 	<string name="poi_telescope_usage_education">Usage : enseignement</string>
@@ -3003,8 +3003,8 @@
 	<string name="poi_vending_water">Vente d\'eau</string>
 	<string name="poi_fuel_autogas">GPL/LPG</string>
 	<string name="poi_crop_rape">Culture : colza</string>
-	<string name="poi_animal_shelter_type">Animaux acceptés</string>
-	<string name="poi_animal_shelter_purpose">Objet</string>
+	<string name="poi_animal_shelter_type">Animaux accepté</string>
+	<string name="poi_animal_shelter_purpose">Objectif</string>
 
 <string name="poi_seamark_dyke">Digue marine</string>
 	<string name="poi_lock_basin">Bassin fermé</string>
@@ -3033,7 +3033,7 @@
 	<string name="poi_payment_ep_minicash_yes">MiniCash</string>
 	<string name="poi_payment_ep_monedero4b_yes">Monedero 4B</string>
 	<string name="poi_payment_ep_monedero_yes">Monedero</string>
-	<string name="poi_brushless_no">Sans brosse : non</string>
+	<string name="poi_brushless_no">Sans balai</string>
 	<string name="poi_boat_rental_type">Location bateaux</string>
 
 <string name="poi_toilets_access_community">Accès toilettes : communauté</string>
