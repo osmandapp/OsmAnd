@@ -2912,4 +2912,7 @@ Tidligere destination bliver sidste mellemliggende punkt.</string>
     <string name="make_round_trip_descr">Tilføj kopi af startpunktet som destination.</string>
     <string name="make_round_trip">Foretag rundtur</string>
     <string name="shared_string_navigate">Naviger</string>
+    <string name="osn_modify_dialog_error">Der opstod en undtagelse: noten blev ikke ændret</string>
+    <string name="osn_modify_dialog_title">Ændre note</string>
+    <string name="context_menu_item_modify_note">Ændre OSM note</string>
     </resources>
