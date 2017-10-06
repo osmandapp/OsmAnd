@@ -1458,10 +1458,10 @@ public class GPXUtilities {
 											WptPt wptPt = new WptPt();
 											wptPt.lon = Double.parseDouble(pointAttrs[0]);
 											wptPt.lat = Double.parseDouble(pointAttrs[1]);
+											((TrkSegment) parse).points.add(wptPt);
 											if (arrLength > 2) {
 												wptPt.ele = Double.parseDouble(pointAttrs[2]);
 											}
-											((TrkSegment) parse).points.add(wptPt);
 										}
 									} catch (NumberFormatException e) {
 									}
