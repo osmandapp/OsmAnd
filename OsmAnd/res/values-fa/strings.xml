@@ -323,7 +323,7 @@
 	<string name="shared_string_close">بستن</string>
 	<string name="loading_data">در حال بارگیری اطلاعات…</string>
 	<string name="reading_indexes">در حال خواندن اطلاعات محلی…</string>
-	<string name="previous_run_crashed">آخرین اجرای OsmAnd با خطا متوقف شد. فایل گزارش در {0} است. لطفاً مشکل را گزارش و فایل وقایع (log) را به آن ضمیمه کنید.</string>
+	<string name="previous_run_crashed">آخرین اجرای OsmAnd با خطا متوقف شد. فایل گزارش {0} ساخته شد. لطفاً مشکل را گزارش و فایل log را ضمیمهٔ آن کنید.</string>
 	<string name="saving_gpx_tracks">در حال ذخیره‌کردن مسیر GPX در کارت حافظه…</string>
 	<string name="finished_task">تمام شد</string>
 	
@@ -1360,9 +1360,11 @@
     <string name="index_name_gb">اروپا - بریتانیای کبیر</string>
     <string name="osmo_settings_uuid">شناسهٔ یکتای دستگاه</string>
     <string name="osmo_settings_descr">تنظیمات نظارتی را پیکربندی و کانال نظارتیِ شخصی را راه‌اندازی کنید</string>
-    <string name="osmo_plugin_description">"نظارت -OpenStreetMap- فراهم آوردن امکان پیگیری افراد از طریق دستگاه اشتراک اطلاعات مکانشان، ایجاد گروه های ناشناس و مخابره و به اشتراک گذاری مکان های مختلف، دارای امکان تنظیم ردیابی موقت و دائم، ایجاد گروه های ناشناس برای چند روز دارای برخی از ویژگی های محدود، یعنی مدیر گروه هیچ کنترلی از راه دور بر روی اعضای گروه ندارد. همچنین کاربران با ثبت نام قابلیت دسترسی به گروه های کاملا کاربردی با بسیاری از امکانات برای مشاهده و نظارت از راه دور را بدست می آورند. لطفا برای ادامه مطلب به این آدرس بروید.
- http://osmo.mobi
- "</string>
+    <string name="osmo_plugin_description">"این افزونه امکان نظارت زندهٔ OsMo را فراهم می‌کند؛ اینجا را ببینید: https://osmo.mobi  
+\n
+\nبه‌وسیلهٔ این افزونه دستگاه‌های دیگر را ردیابی کنید و خودتان را نیز ردگیری کنید. گروه‌های ناشناس بسازید و به‌طور همزمان موقعیتتان را با هم به‌اشتراک بگذارید. 
+\n
+\nعمر گروه‌های ناشناس چند روز است و امکانات محدودی دارند بنابراین نمی‌توانید بر آن مدیریت کنید؛ اما با عضویت در وبسایت osmo.mobi و ایجاد گروه با نام کاربری خود از تمامی امکانات آن بهره‌مند می‌شوید."</string>
     <string name="osmo_settings">OsMo</string>
    	<string name="always_center_position_on_map">موقعیت را همیشه وسط صفحه نشان بده</string>
     <string name="voice_pref_title">صدا</string>
@@ -1794,8 +1796,8 @@
 	<string name="parking_place_limited">حداکثر زمان پارک</string>
 	<string name="osmand_parking_time_left">باقی مانده</string>
 	<string name="your_edits">ویرایش‌های شما</string>
-    <string name="waypoint_visit_after"/>
-    <string name="waypoint_visit_before"/>
+    <string name="waypoint_visit_after">بازدیدکردن بعد از</string>
+    <string name="waypoint_visit_before">بازدیدکردن قبل از</string>
     <string name="simulate_your_location">شبیه‌سازی موقعیت شما</string>
     <string name="short_location_on_map">عرض %1$s 
 \nطول %2$s</string>
@@ -2278,7 +2280,7 @@
     <string name="osn_close_dialog_success">یادداشت بسته شد</string>
     <string name="osn_close_dialog_error">خطایی رخ داد: یادداشت بسته نشد</string>
     <string name="shared_string_location">موقعیت</string>
-    <string name="lang_nds"/>
+    <string name="lang_nds">آلمانی فرودین</string>
     <string name="read_more">بیشتر بخوانید</string>
     <string name="whats_new">امکانات جدید در</string>
     <string name="shared_string_update">به‌روزرسانی</string>
@@ -2673,4 +2675,27 @@
     <string name="auto_split_recording_title">قطعه‌کردن ضبط‌ها پس از وقفه</string>
     <string name="save_track_min_distance">حداقل جابه‌جایی برای ثبت</string>
     <string name="translit_names">نویسه‌گردانی نام‌ها</string>
+    <string name="rec_split_clip_length">مدت کلیپ</string>
+    <string name="shared_string_sound">صدا</string>
+    <string name="show_on_start_description">گزینهٔ «خاموش» مستقیماً صفحهٔ نقشه را برایتان می‌آورد</string>
+    <string name="osm_edit_modified_poi">POI اصلاح‌شده</string>
+    <string name="osm_edit_commented_note">یادداشت OSM دارای توضیح</string>
+    <string name="lang_mk">مقدونی</string>
+    <string name="lang_fy">فریسی غربی</string>
+    <string name="lang_als">آلبانیایی (تُسک)</string>
+    <string name="hillshade_layer_disabled">لایهٔ تپه‌سایه غیرفعال شد</string>
+    <string name="srtm_plugin_disabled">منحنی‌های تراز غیرفعال شد</string>
+    <string name="av_locations">مکان‌ها</string>
+    <string name="routing_attr_avoid_shuttle_train_name">اجتناب از قطار خطی</string>
+    <string name="routing_attr_avoid_shuttle_train_description">از قطار خطی اجتناب کن</string>
+    <string name="traffic_warning_hazard">خطر</string>
+    <string name="rendering_value_boldOutline_name">لبهٔ برجسته</string>
+    <string name="lang_ceb">سِبوانو</string>
+    <string name="lang_ast">آستوری</string>
+    <string name="lang_hsb">سوربی (بالایی)</string>
+    <string name="lang_kab">بربری</string>
+    <string name="lang_ber">بربری</string>
+    <string name="osm_edit_context_menu_delete">حذف ویرایش OSM</string>
+    <string name="shared_string_logoff">خروج</string>
+    <string name="shared_string_action_template">عملیات {0}</string>
     </resources>
