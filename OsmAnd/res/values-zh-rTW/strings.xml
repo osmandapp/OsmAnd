@@ -2895,4 +2895,7 @@ OsmAnd (Automated Navigation Directions) 是一個地圖和導航的應用程式
     <string name="make_round_trip_descr">增加複製的起始點為目的地。</string>
     <string name="make_round_trip">作成往返行程</string>
     <string name="shared_string_navigate">導航</string>
+    <string name="osn_modify_dialog_error">發生異常：註解未被修改</string>
+    <string name="osn_modify_dialog_title">修改註解</string>
+    <string name="context_menu_item_modify_note">修改 OSM 註解</string>
     </resources>
