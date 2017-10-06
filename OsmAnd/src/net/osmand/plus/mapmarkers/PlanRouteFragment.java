@@ -128,9 +128,6 @@ public class PlanRouteFragment extends Fragment {
 		View view = View.inflate(new ContextThemeWrapper(getContext(), themeRes), R.layout.fragment_plan_route, null);
 
 		mainView = view.findViewById(R.id.main_view);
-		if (portrait) {
-			AndroidUtils.setBackground(mapActivity, mainView, nightMode, R.drawable.bg_bottom_menu_light, R.drawable.bg_bottom_menu_dark);
-		}
 
 		distanceTv = (TextView) mainView.findViewById(R.id.markers_distance_text_view);
 		timeTv = (TextView) mainView.findViewById(R.id.markers_time_text_view);
@@ -144,6 +141,8 @@ public class PlanRouteFragment extends Fragment {
 		}
 
 		if (portrait) {
+			AndroidUtils.setBackground(mapActivity, mainView, nightMode, R.drawable.bg_bottom_menu_light, R.drawable.bg_bottom_menu_dark);
+
 			((ImageView) mainView.findViewById(R.id.up_down_icon)).setImageDrawable(getContentIcon(R.drawable.ic_action_arrow_up));
 
 			mainView.findViewById(R.id.up_down_row).setOnClickListener(new View.OnClickListener() {
@@ -211,8 +210,6 @@ public class PlanRouteFragment extends Fragment {
 					View listContainer = mainView.findViewById(R.id.markers_list_container);
 					listContainer.getLayoutParams().height = listContainerH;
 					listContainer.requestLayout();
-
-					showMarkersList();
 
 					ViewTreeObserver obs = mainView.getViewTreeObserver();
 					if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.JELLY_BEAN) {
@@ -313,15 +310,6 @@ public class PlanRouteFragment extends Fragment {
 		}
 
 		return view;
-	}
-
-	private void optionsOnClick() {
-		MapActivity mapActivity = getMapActivity();
-		if (mapActivity != null) {
-			PlanRouteOptionsBottomSheetDialogFragment fragment = new PlanRouteOptionsBottomSheetDialogFragment();
-			fragment.setListener(createOptionsFragmentListener());
-			fragment.show(mapActivity.getSupportFragmentManager(), PlanRouteOptionsBottomSheetDialogFragment.TAG);
-		}
 	}
 
 	@Override
@@ -506,6 +494,15 @@ public class PlanRouteFragment extends Fragment {
 			cancelSnapToRoad();
 			markersLayer.setRoute(null);
 			mapActivity.refreshMap();
+		}
+	}
+
+	private void optionsOnClick() {
+		MapActivity mapActivity = getMapActivity();
+		if (mapActivity != null) {
+			PlanRouteOptionsBottomSheetDialogFragment fragment = new PlanRouteOptionsBottomSheetDialogFragment();
+			fragment.setListener(createOptionsFragmentListener());
+			fragment.show(mapActivity.getSupportFragmentManager(), PlanRouteOptionsBottomSheetDialogFragment.TAG);
 		}
 	}
 
