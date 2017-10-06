@@ -2397,7 +2397,7 @@
     <string name="osmo_share_location">Поділитися</string>
     <string name="osmo_pause_location">Пауза</string>
     <string name="osmo_service_running">Сервіс OsMo запущений</string>
-    <string name="trip_rec_notification_settings">Запис подорожі (немає даних)</string>
+    <string name="trip_rec_notification_settings">Включити швидкий запуск запису</string>
     <string name="trip_rec_notification_settings_desc">Показувати сповіщення, яке дозволить почати запис подорожі</string>
     <string name="shared_string_notifications">Повідомлення</string>
     <string name="shared_string_continue">Продовжити</string>
