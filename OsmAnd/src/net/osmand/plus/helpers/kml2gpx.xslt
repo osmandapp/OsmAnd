@@ -108,7 +108,7 @@
 				<xsl:if test="kml:MultiGeometry/kml:LineString/kml:coordinates">
 					<trk>
 						<trkseg>
-							<trkptsattrs><xsl:value-of select="kml:MultiGeometry/kml:LineString/kml:coordinates"/></trkptsattrs>
+							<csvattributes><xsl:value-of select="kml:MultiGeometry/kml:LineString/kml:coordinates"/></csvattributes>
 						</trkseg>
 					</trk>
 				</xsl:if>

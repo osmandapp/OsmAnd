@@ -1447,27 +1447,24 @@ public class GPXUtilities {
 								((TrkSegment) parse).points.add(wptPt);
 								parserState.push(wptPt);
 							}
-							if (parser.getName().equals("trkptsattrs")) {
-								String segmentPoints = readText(parser, "trkptsattrs");
+							if (parser.getName().equals("csvattributes")) {
+								String segmentPoints = readText(parser, "csvattributes");
 								String[] pointsArr = segmentPoints.split("\n");
 								for (int i = 0; i < pointsArr.length; i++) {
 									String[] pointAttrs = pointsArr[i].split(",");
-									WptPt wptPt = new WptPt();
 									try {
 										int arrLength = pointsArr.length;
-										if (arrLength > 0) {
+										if (arrLength > 1) {
+											WptPt wptPt = new WptPt();
 											wptPt.lon = Double.parseDouble(pointAttrs[0]);
-											if (arrLength > 1) {
-												wptPt.lat = Double.parseDouble(pointAttrs[1]);
-												if (arrLength > 2) {
-													wptPt.ele = Double.parseDouble(pointAttrs[2]);
-												}
+											wptPt.lat = Double.parseDouble(pointAttrs[1]);
+											if (arrLength > 2) {
+												wptPt.ele = Double.parseDouble(pointAttrs[2]);
 											}
+											((TrkSegment) parse).points.add(wptPt);
 										}
 									} catch (NumberFormatException e) {
 									}
-									((TrkSegment) parse).points.add(wptPt);
-									parserState.push(wptPt);
 								}
 							}
 							// main object to parse
