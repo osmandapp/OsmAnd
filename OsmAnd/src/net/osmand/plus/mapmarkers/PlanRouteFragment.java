@@ -695,14 +695,13 @@ public class PlanRouteFragment extends Fragment {
 		if (portrait && markersListOpened) {
 			hideMarkersList();
 		}
-		planRouteContext.setFragmentShowed(false);
+		planRouteContext.setFragmentVisible(false);
 		activity.getSupportFragmentManager().beginTransaction().remove(this).commitAllowingStateLoss();
 	}
 
 	public static boolean showInstance(FragmentManager fragmentManager, boolean portrait) {
 		try {
 			PlanRouteFragment fragment = new PlanRouteFragment();
-			fragment.setRetainInstance(true);
 			fragmentManager.beginTransaction()
 					.add(portrait ? R.id.bottomFragmentContainer : R.id.topFragmentContainer, fragment, PlanRouteFragment.TAG)
 					.commitAllowingStateLoss();

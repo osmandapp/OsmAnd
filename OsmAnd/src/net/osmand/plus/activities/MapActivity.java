@@ -321,7 +321,7 @@ public class MapActivity extends OsmandActionBarActivity implements DownloadEven
 			fm.beginTransaction()
 					.remove(planRouteFragment)
 					.commitNowAllowingStateLoss();
-			app.getMapMarkersHelper().getPlanRouteContext().setFragmentShowed(true);
+			app.getMapMarkersHelper().getPlanRouteContext().setFragmentVisible(true);
 		}
 		super.onSaveInstanceState(outState);
 	}
@@ -568,7 +568,7 @@ public class MapActivity extends OsmandActionBarActivity implements DownloadEven
 		super.onResume();
 		long tm = System.currentTimeMillis();
 
-		if (app.getMapMarkersHelper().getPlanRouteContext().isFragmentShowed()) {
+		if (app.getMapMarkersHelper().getPlanRouteContext().isFragmentVisible()) {
 			PlanRouteFragment.showInstance(getSupportFragmentManager(), AndroidUiHelper.isOrientationPortrait(this));
 		}
 

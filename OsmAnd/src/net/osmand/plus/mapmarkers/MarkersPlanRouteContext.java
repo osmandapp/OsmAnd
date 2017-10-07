@@ -39,7 +39,7 @@ public class MarkersPlanRouteContext {
 
 	private PlanRouteProgressListener listener;
 	private boolean progressBarVisible;
-	private boolean fragmentShowed;
+	private boolean fragmentVisible;
 
 	Map<Pair<WptPt, WptPt>, List<WptPt>> getSnappedToRoadPoints() {
 		return snappedToRoadPoints;
@@ -73,12 +73,12 @@ public class MarkersPlanRouteContext {
 		this.progressBarVisible = progressBarVisible;
 	}
 
-	public boolean isFragmentShowed() {
-		return fragmentShowed;
+	public boolean isFragmentVisible() {
+		return fragmentVisible;
 	}
 
-	public void setFragmentShowed(boolean fragmentShowed) {
-		this.fragmentShowed = fragmentShowed;
+	public void setFragmentVisible(boolean fragmentVisible) {
+		this.fragmentVisible = fragmentVisible;
 	}
 
 	public MarkersPlanRouteContext(OsmandApplication app) {
