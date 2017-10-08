@@ -69,7 +69,7 @@
     <string name="quick_action_auto_zoom_on">Автомасштаб включен</string>
     <string name="quick_action_auto_zoom_off">Автомасштаб выключен</string>
     <string name="quick_action_add_destination">Добавить пункт назначения</string>
-    <string name="quick_action_replace_destination">Установить пункт назначения</string>
+    <string name="quick_action_replace_destination">Заменить пункт назначения</string>
     <string name="quick_action_add_first_intermediate">Добавить первую промежуточную точку</string>
     <string name="quick_action_add_destination_desc">Нажатие на кнопку действия добавит пункт назначения в центр экрана. Ранее установленный пункт становится последней промежуточной точкой.</string>
     <string name="quick_action_replace_destination_desc">Нажатие на кнопку действия установит пункт назначения в центр экрана.</string>
