@@ -765,7 +765,7 @@
 	<string name="route_general_information">סך כל המרחק: %1$s, זמן הנסיעה: %2$d שע׳ %3$d דק׳.</string>
 	<string name="router_service_descr">נא לבחור בשירות ניווט מקוון או בלתי מקוון</string>
 	<string name="router_service">שירות ניווט</string>
-	<string name="sd_dir_not_accessible">תיקיית השמירה בכרטיס ה־SD אינה נגישה</string>
+	<string name="sd_dir_not_accessible">תיקיית אחסון הנתונים בכרטיס ה־SD אינה נגישה!</string>
 	<string name="download_question">האם להוריד {0} - {1} ?</string>
 	<string name="download_question_exist">הנתונים הבלתי מקוונים עבור {0} כבר קיימים ({1}). האם לעדכן אותם ({2}) ?</string>
 	<string name="address">כתובת</string>
@@ -847,7 +847,7 @@
 	<string name="search_address">חיפוש אחר כתובת</string>
 	<string name="choose_building">נא לבחור בבניין</string>
 	<string name="choose_street">נא לבחור ברחוב</string>
-	<string name="choose_city">נא לבחור בעיר</string>
+	<string name="choose_city">נא לבחור בעיר או במיקוד</string>
 	<string name="ChooseCountry">נא לבחור במדינה</string>
 	<string name="show_view_angle">הצגת כיוון הצפייה</string>
 	<string name="map_view_3d_descr">הפעלת הצגה תלת־ממדית של המפה</string>
@@ -858,7 +858,7 @@
 	<string name="map_tile_source">מקור אריחי המפה</string>
 	<string name="map_source">מקור המפה</string>
 	<string name="use_internet">להשתמש באינטרנט</string>
-	<string name="show_location">הצגת המיקום</string>
+	<string name="show_location">הצגת המיקום שלך</string>
 	
 	
 	<string name="show_gps_coordinates_text">הצגת קואורדינטות איכון במפה</string>
@@ -912,7 +912,7 @@
 	<string name="add_favorite_dialog_favourite_added_template">הנקודה המועדפת „{0}“ נוספה בהצלחה.</string>
 	<string name="favourites_context_menu_edit">עריכת המועדף</string>
 	<string name="favourites_context_menu_delete">מחיקת המועדף</string>
-	<string name="favourites_remove_dialog_msg">האם להסיר את הנקודה המועדפת ‚%s‘?</string>
+	<string name="favourites_remove_dialog_msg">להסיר את הנקודה המועדפת ‚%s‘?</string>
 	<string name="favourites_remove_dialog_success">הנקודה המועדפת {0} הוסרה בהצלחה.</string>
 	
 	
@@ -1442,4 +1442,16 @@
     <string name="disable_complex_routing">השבתת ניתוב מורכב</string>
     <string name="app_modes_choose">פרופילי יישומון</string>
     <string name="map_widget_map_rendering">עיבוד מפה</string>
+    <string name="make_round_trip_descr">הוספת עותק של נקודת ההתחלה כיעד.</string>
+    <string name="shared_string_navigate">ניווט</string>
+    <string name="shared_string_markers">סמנים</string>
+    <string name="use_system_keyboard">שימוש במקלדת המערכת</string>
+    <string name="use_location">שימוש במיקום</string>
+    <string name="my_location">המיקום שלי</string>
+    <string name="shared_string_finish">סיום</string>
+    <string name="plan_route">תכנון נתיב</string>
+    <string name="shared_string_sort">מיון</string>
+    <string name="marker_save_as_track">שמירה כמסלול</string>
+    <string name="move_to_history">העברה להיסטוריה</string>
+    <string name="disable_complex_routing_descr">השבתת ניתוב דו־שלבי לניווט הרכב</string>
     </resources>
