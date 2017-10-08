@@ -2279,7 +2279,7 @@ Pokud máte rádi OsmAnd a OSM a chcete je podpořit, toto je výborný způsob,
     <string name="osmo_share_location">Sdílet</string>
     <string name="osmo_pause_location">Pozastavit</string>
     <string name="osmo_service_running">Služba OsMo běží</string>
-    <string name="trip_rec_notification_settings">Záznam cesty (žádná data)</string>
+    <string name="trip_rec_notification_settings">Povolit rychlý start zánamu</string>
     <string name="trip_rec_notification_settings_desc">Zobrazit systémové oznámení, které umožňuje spustit nahrávání</string>
     <string name="shared_string_notifications">Oznámení</string>
     <string name="shared_string_continue">Pokračovat</string>
@@ -2746,7 +2746,7 @@ Pokud potřebujete pomoci s aplikací OsmAnd, prosím kontaktujte naši podporu
     <string name="marker_moved_to_active">Mapová značka přesunuta do aktivních</string>
     <string name="shared_string_list">Seznam</string>
     <string name="shared_string_groups">Skupiny</string>
-    <string name="passed">Poslední použité: %1$s</string>
+    <string name="passed">Prošlé: %1$s</string>
     <string name="make_active">Aktivovat</string>
     <string name="today">Dnes</string>
     <string name="yesterday">Včera</string>
@@ -2755,7 +2755,7 @@ Pokud potřebujete pomoci s aplikací OsmAnd, prosím kontaktujte naši podporu
     <string name="widget">Nástroj</string>
     <string name="top_bar">Horní lišta</string>
     <string name="use_location">Použít umístění</string>
-    <string name="add_location_as_first_point_descr">Přidejte vaši polohu jako první bod do plánu ideální trasy.</string>
+    <string name="add_location_as_first_point_descr">Přidat svou polohu jako první bod do plánu ideální trasy.</string>
     <string name="my_location">Moje poloha</string>
     <string name="shared_string_finish">Dokončit</string>
     <string name="plan_route">Naplánovat trasu</string>
@@ -2780,7 +2780,13 @@ Pokud potřebujete pomoci s aplikací OsmAnd, prosím kontaktujte naši podporu
     <string name="fast_coordinates_input">Rychlé vložení souřadnic</string>
     <string name="routing_attr_avoid_ice_roads_fords_name">Vyhnout se ledovým cestám, brodům</string>
     <string name="routing_attr_avoid_ice_roads_fords_description">Vyhnout se ledovým cestám a brodům</string>
-    <string name="show_passed">Zobrazit datum \'Naposledy použité\'</string>
-    <string name="hide_passed">Skrýt datum \'Naposledy použité\'</string>
+    <string name="show_passed">Zobrazit prošlé</string>
+    <string name="hide_passed">Skrýt prošlé</string>
     <string name="marker_show_distance_descr">Vyberte, jak ukazovat vzdálenost a směr k mapovým značkám na obrazovce mapy:</string>
+    <string name="osn_modify_dialog_error">Došlo k výjimce: poznámka nebyla změněna</string>
+    <string name="osn_modify_dialog_title">Upravit poznámku</string>
+    <string name="context_menu_item_modify_note">Upravit poznámku OSM</string>
+    <string name="make_round_trip_descr">Přidat kopii počátečního bodu jako cíl.</string>
+    <string name="make_round_trip">Vytvořit cestu</string>
+    <string name="shared_string_navigate">Navigovat</string>
     </resources>
