@@ -947,11 +947,17 @@ Puntos</string>
     <string name="group_will_be_removed_after_restart">El grupu desaniciaráse al reaniciar</string>
     <string name="show_guide_line">Ver la llinia guia</string>
     <string name="show_arrows_on_the_map">Ver fleches nel mapa</string>
-    <string name="show_passed">Ver la data del \'Últimu usu\'</string>
-    <string name="hide_passed">Tapecer la data del \'Últimu usu\'</string>
+    <string name="show_passed">Ver pasaos</string>
+    <string name="hide_passed">Tapecer pasaos</string>
     <string name="remove_from_map_markers">Quitar de los Marcadores de mapa</string>
     <string name="descendingly">descendiente</string>
     <string name="ascendingly">ascendiente</string>
     <string name="date_added">Añadióse la data</string>
     <string name="order_by">Ordenar per:</string>
+    <string name="osn_modify_dialog_title">Cambiar nota</string>
+    <string name="context_menu_item_modify_note">Cambiar nota d\'OSM</string>
+    <string name="make_round_trip_descr">Añadir una copia del puntu de partida como destín.</string>
+    <string name="make_round_trip">Facer un trayectu circular</string>
+    <string name="shared_string_navigate">Navegar</string>
+    <string name="marker_show_distance_descr">Seleiciona como indicar la distancia i dirección a los marcadores de mapa na pantalla:</string>
     </resources>
