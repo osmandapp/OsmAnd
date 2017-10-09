@@ -3517,4 +3517,14 @@
 	<string name="poi_government_social_security">社會安全</string>
 	<string name="poi_government_social_services">社會服務</string>
 	<string name="poi_government_treasury">國庫</string>
-	</resources>
+	<string name="poi_seamark_clearance_height">可視高度</string>
+	<string name="poi_seamark_clearance_height_closed">可視高度 (關閉)</string>
+	<string name="poi_seamark_clearance_height_open">可視高度 (開放)</string>
+	<string name="poi_seamark_clearance_width">可視寬度</string>
+
+	<string name="poi_government_transportation">交通運輸機構</string>
+	<string name="poi_government_legislative">議會機構</string>
+
+	<string name="poi_vhf">VHF頻道</string>
+
+</resources>
