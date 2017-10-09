@@ -368,7 +368,7 @@ public class MapContextMenu extends MenuTitleController implements StateChangedL
 				fragmentRef.get().centerMarkerLocation();
 			}
 		}
-		updateWidgetsVisibility(false);
+		updateControlsVisibility();
 	}
 
 	public void show(@NonNull LatLon latLon,
@@ -377,6 +377,7 @@ public class MapContextMenu extends MenuTitleController implements StateChangedL
 		if (init(latLon, pointDescription, object)) {
 			showInternal();
 		}
+		updateControlsVisibility();
 	}
 
 	private void showInternal() {
@@ -389,7 +390,6 @@ public class MapContextMenu extends MenuTitleController implements StateChangedL
 		}
 		centerMarker = false;
 		autoHide = false;
-		updateWidgetsVisibility(false);
 	}
 
 	public void update(LatLon latLon, PointDescription pointDescription, Object object) {
@@ -450,15 +450,19 @@ public class MapContextMenu extends MenuTitleController implements StateChangedL
 		if (fragmentRef != null) {
 			fragmentRef.get().dismissMenu();
 		}
-		updateWidgetsVisibility(true);
+		updateControlsVisibility();
 	}
 
-	private void updateWidgetsVisibility(boolean visible) {
-		int visibility = visible ? View.VISIBLE : View.GONE;
+	public void updateControlsVisibility() {
+		int visibility = shouldShowControls() ? View.VISIBLE : View.GONE;
 		mapActivity.findViewById(R.id.map_center_info).setVisibility(visibility);
 		mapActivity.findViewById(R.id.map_left_widgets_panel).setVisibility(visibility);
 		mapActivity.findViewById(R.id.map_right_widgets_panel).setVisibility(visibility);
 		mapActivity.refreshMap();
+	}
+
+	public boolean shouldShowControls() {
+		return !isVisible() || isLandscapeLayout() || getCurrentMenuState() == MenuController.MenuState.HEADER_ONLY;
 	}
 
 	// timeout in msec
