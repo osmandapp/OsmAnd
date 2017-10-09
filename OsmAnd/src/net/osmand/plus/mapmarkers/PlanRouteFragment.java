@@ -157,18 +157,14 @@ public class PlanRouteFragment extends Fragment {
 		}
 
 		if (portrait) {
-			AndroidUtils.setBackground(mapActivity, mainView, nightMode, R.drawable.bg_bottom_menu_light, R.drawable.bg_bottom_menu_dark);
+			mainView.findViewById(R.id.background_view).setBackgroundResource(nightMode ? R.color.bg_color_dark : R.color.bg_color_light);
 
 			((ImageView) mainView.findViewById(R.id.up_down_icon)).setImageDrawable(getContentIcon(R.drawable.ic_action_arrow_up));
 
 			mainView.findViewById(R.id.up_down_row).setOnClickListener(new View.OnClickListener() {
 				@Override
 				public void onClick(View view) {
-					if (!markersListOpened) {
-						showMarkersList();
-					} else {
-						hideMarkersList();
-					}
+					showHideMarkersList();
 				}
 			});
 
@@ -337,7 +333,7 @@ public class PlanRouteFragment extends Fragment {
 		super.onDestroyView();
 		exitPlanRouteMode();
 		if (markersListOpened) {
-			hideMarkersList();
+			showHideMarkersList();
 		}
 	}
 
@@ -604,30 +600,22 @@ public class PlanRouteFragment extends Fragment {
 		}
 	}
 
-	//todo create one method
-	private void showMarkersList() {
+	private void showHideMarkersList() {
 		MapActivity mapActivity = getMapActivity();
 		if (mapActivity != null && portrait) {
-			markersListOpened = true;
-			mapActivity.findViewById(R.id.bottom_controls_container).setVisibility(View.GONE);
-			((ImageView) mainView.findViewById(R.id.up_down_icon)).setImageDrawable(getContentIcon(R.drawable.ic_action_arrow_down));
-			View listContainer = mainView.findViewById(R.id.markers_list_container);
-			if (listContainer != null) {
-				listContainer.getLayoutParams().height = ViewGroup.LayoutParams.MATCH_PARENT;
-			}
-		}
-	}
+			markersListOpened = !markersListOpened;
+			int height = markersListOpened ? ViewGroup.LayoutParams.MATCH_PARENT : ViewGroup.LayoutParams.WRAP_CONTENT;
+			int listHeight = markersListOpened ? ViewGroup.LayoutParams.MATCH_PARENT : closedListContainerHeight;
+			int visibility = markersListOpened ? View.GONE : View.VISIBLE;
+			Drawable arrow = getContentIcon(markersListOpened ? R.drawable.ic_action_arrow_down : R.drawable.ic_action_arrow_up);
 
-	private void hideMarkersList() {
-		MapActivity mapActivity = getMapActivity();
-		if (mapActivity != null && portrait) {
-			markersListOpened = false;
-			mapActivity.findViewById(R.id.bottom_controls_container).setVisibility(View.VISIBLE);
-			((ImageView) mainView.findViewById(R.id.up_down_icon)).setImageDrawable(getContentIcon(R.drawable.ic_action_arrow_up));
-			View listContainer = mainView.findViewById(R.id.markers_list_container);
-			if (listContainer != null) {
-				listContainer.getLayoutParams().height = closedListContainerHeight;
-			}
+			((ImageView) mainView.findViewById(R.id.up_down_icon)).setImageDrawable(arrow);
+			mapActivity.findViewById(R.id.bottom_controls_container).setVisibility(visibility);
+			mapActivity.findViewById(R.id.map_hud_bottom_container).getLayoutParams().height = height;
+			mapActivity.findViewById(R.id.fragments_container).getLayoutParams().height = height;
+			mainView.findViewById(R.id.markers_list_container).getLayoutParams().height = listHeight;
+			mainView.findViewById(R.id.plan_route_shadow).setVisibility(visibility);
+			mainView.getLayoutParams().height = height;
 		}
 	}
 
@@ -682,8 +670,8 @@ public class PlanRouteFragment extends Fragment {
 	}
 
 	public boolean quit(boolean hideMarkersListFirst) {
-		if (portrait && markersListOpened && hideMarkersListFirst) {
-			hideMarkersList();
+		if (markersListOpened && hideMarkersListFirst) {
+			showHideMarkersList();
 			return false;
 		} else {
 			dismiss(getMapActivity());
@@ -692,8 +680,8 @@ public class PlanRouteFragment extends Fragment {
 	}
 
 	private void dismiss(MapActivity activity) {
-		if (portrait && markersListOpened) {
-			hideMarkersList();
+		if (markersListOpened) {
+			showHideMarkersList();
 		}
 		planRouteContext.setFragmentVisible(false);
 		activity.getSupportFragmentManager().beginTransaction().remove(this).commitAllowingStateLoss();
