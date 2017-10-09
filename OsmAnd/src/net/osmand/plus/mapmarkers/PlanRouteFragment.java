@@ -618,6 +618,7 @@ public class PlanRouteFragment extends Fragment {
 			mainView.findViewById(R.id.markers_list_container).getLayoutParams().height = listHeight;
 			mainView.findViewById(R.id.plan_route_shadow).setVisibility(visibility);
 			mainView.findViewById(R.id.plan_route_toolbar).setVisibility(markersListOpened ? View.VISIBLE : View.GONE);
+			mainView.findViewById(R.id.toolbar_divider).setVisibility(markersListOpened ? View.VISIBLE : View.GONE);
 			mainView.getLayoutParams().height = height;
 		}
 	}
