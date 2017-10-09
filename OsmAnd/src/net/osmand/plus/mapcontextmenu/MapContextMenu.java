@@ -398,6 +398,13 @@ public class MapContextMenu extends MenuTitleController implements StateChangedL
 		if (fragmentRef != null) {
 			fragmentRef.get().rebuildMenu(centerMarker);
 		}
+		ContextMenuLayer contextMenuLayer = mapActivity.getMapLayers().getContextMenuLayer();
+		for (OsmandMapLayer layer : mapActivity.getMapView().getLayers()) {
+			if (layer instanceof ContextMenuLayer.IMoveObjectProvider && ((ContextMenuLayer.IMoveObjectProvider) layer).isObjectMovable(object)) {
+				contextMenuLayer.setSelectedObjectContextMenuProvider((ContextMenuLayer.IContextMenuProvider) layer);
+				break;
+			}
+		}
 		centerMarker = false;
 	}
 
