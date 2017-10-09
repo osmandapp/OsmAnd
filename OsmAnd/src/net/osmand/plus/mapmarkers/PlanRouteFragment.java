@@ -159,6 +159,8 @@ public class PlanRouteFragment extends Fragment {
 		if (portrait) {
 			mainView.findViewById(R.id.background_view).setBackgroundResource(nightMode ? R.color.bg_color_dark : R.color.bg_color_light);
 
+			mainView.findViewById(R.id.toolbar_divider).setBackgroundColor(ContextCompat.getColor(mapActivity, nightMode ? R.color.actionbar_dark_color : R.color.dashboard_divider_light));
+
 			((ImageView) mainView.findViewById(R.id.up_down_icon)).setImageDrawable(getContentIcon(R.drawable.ic_action_arrow_up));
 
 			mainView.findViewById(R.id.up_down_row).setOnClickListener(new View.OnClickListener() {
@@ -218,25 +220,25 @@ public class PlanRouteFragment extends Fragment {
 					}
 				}
 			});
-		} else {
-			Toolbar toolbar = (Toolbar) mainView.findViewById(R.id.plan_route_toolbar);
-			toolbar.setNavigationIcon(getContentIcon(R.drawable.ic_arrow_back));
-			toolbar.setNavigationOnClickListener(new View.OnClickListener() {
-				@Override
-				public void onClick(View view) {
-					if (quit(false)) {
-						MapMarkersDialogFragment.showInstance(mapActivity);
-					}
-				}
-			});
-
-			mainView.findViewById(R.id.options_button).setOnClickListener(new View.OnClickListener() {
-				@Override
-				public void onClick(View view) {
-					optionsOnClick();
-				}
-			});
 		}
+
+		Toolbar toolbar = (Toolbar) mainView.findViewById(R.id.plan_route_toolbar);
+		toolbar.setNavigationIcon(getContentIcon(R.drawable.ic_arrow_back));
+		toolbar.setNavigationOnClickListener(new View.OnClickListener() {
+			@Override
+			public void onClick(View view) {
+				if (quit(false)) {
+					MapMarkersDialogFragment.showInstance(mapActivity);
+				}
+			}
+		});
+
+		mainView.findViewById(R.id.options_button).setOnClickListener(new View.OnClickListener() {
+			@Override
+			public void onClick(View view) {
+				optionsOnClick();
+			}
+		});
 
 		markersRv = mainView.findViewById(R.id.markers_recycler_view);
 
@@ -615,6 +617,7 @@ public class PlanRouteFragment extends Fragment {
 			mapActivity.findViewById(R.id.fragments_container).getLayoutParams().height = height;
 			mainView.findViewById(R.id.markers_list_container).getLayoutParams().height = listHeight;
 			mainView.findViewById(R.id.plan_route_shadow).setVisibility(visibility);
+			mainView.findViewById(R.id.plan_route_toolbar).setVisibility(markersListOpened ? View.VISIBLE : View.GONE);
 			mainView.getLayoutParams().height = height;
 		}
 	}
