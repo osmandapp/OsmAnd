@@ -803,8 +803,7 @@ public class MapInfoWidgetsFactory {
 					}
 				}
 			}
-			MapContextMenu contextMenu = map.getContextMenu();
-			if (map.isTopToolbarActive() || (contextMenu.isVisible() && !contextMenu.isLandscapeLayout() && contextMenu.getCurrentMenuState() != MenuController.MenuState.HEADER_ONLY)) {
+			if (map.isTopToolbarActive() || !map.getContextMenu().shouldShowControls()) {
 				updateVisibility(false);
 			} else if (!showNextTurn && updateWaypoint()) {
 				updateVisibility(true);

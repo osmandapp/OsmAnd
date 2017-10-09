@@ -46,7 +46,6 @@ import net.osmand.plus.activities.MapActivity.ShowQuickSearchMode;
 import net.osmand.plus.dashboard.DashboardOnMap.DashboardType;
 import net.osmand.plus.dialogs.DirectionsDialogs;
 import net.osmand.plus.mapcontextmenu.MapContextMenu;
-import net.osmand.plus.mapcontextmenu.MenuController;
 import net.osmand.plus.mapcontextmenu.other.MapRouteInfoMenu;
 import net.osmand.plus.mapcontextmenu.other.TrackDetailsMenu;
 import net.osmand.plus.routing.RoutingHelper;
@@ -709,14 +708,12 @@ public class MapControlsLayer extends OsmandMapLayer {
 		boolean routeFollowingMode = !routePlanningMode && rh.isFollowingMode();
 		boolean routeDialogOpened = MapRouteInfoMenu.isVisible();
 		boolean trackDialogOpened = TrackDetailsMenu.isVisible();
-		boolean contextMenuOpened = mapActivity.getContextMenu().isVisible();
-		boolean contextMenuInLandscape = mapActivity.getContextMenu().isLandscapeLayout();
-		int contextMenuState = mapActivity.getContextMenu().getCurrentMenuState();
+		boolean showControlsDueToContextMenu = mapActivity.getContextMenu().shouldShowControls();
 		boolean showRouteCalculationControls = routePlanningMode ||
 				((app.accessibilityEnabled() || (System.currentTimeMillis() - touchEvent < TIMEOUT_TO_SHOW_BUTTONS)) && routeFollowingMode);
-		updateMyLocation(rh, routeDialogOpened || trackDialogOpened || (contextMenuOpened && !contextMenuInLandscape && contextMenuState != MenuController.MenuState.HEADER_ONLY));
+		updateMyLocation(rh, routeDialogOpened || trackDialogOpened || !showControlsDueToContextMenu);
 		boolean showButtons = (showRouteCalculationControls || !routeFollowingMode)
-				&& !isInMovingMarkerMode() && !isInGpxDetailsMode() && !isInMeasurementToolMode() && !isInPlanRouteMode() && (!contextMenuOpened || contextMenuInLandscape || contextMenuState == MenuController.MenuState.HEADER_ONLY);
+				&& !isInMovingMarkerMode() && !isInGpxDetailsMode() && !isInMeasurementToolMode() && !isInPlanRouteMode() && showControlsDueToContextMenu;
 		//routePlanningBtn.setIconResId(routeFollowingMode ? R.drawable.ic_action_gabout_dark : R.drawable.map_directions);
 		if (rh.isFollowingMode()) {
 			routePlanningBtn.setIconResId(R.drawable.map_start_navigation);
@@ -731,19 +728,18 @@ public class MapControlsLayer extends OsmandMapLayer {
 		routePlanningBtn.updateVisibility(showButtons);
 		menuControl.updateVisibility(showButtons);
 
-		mapZoomIn.updateVisibility(!routeDialogOpened && (!contextMenuOpened || contextMenuInLandscape || contextMenuState == MenuController.MenuState.HEADER_ONLY));
-		mapZoomOut.updateVisibility(!routeDialogOpened && (!contextMenuOpened || contextMenuInLandscape || contextMenuState == MenuController.MenuState.HEADER_ONLY));
+		mapZoomIn.updateVisibility(!routeDialogOpened && showControlsDueToContextMenu);
+		mapZoomOut.updateVisibility(!routeDialogOpened && showControlsDueToContextMenu);
 		compassHud.updateVisibility(!routeDialogOpened && !trackDialogOpened && shouldShowCompass()
-				&& !isInMeasurementToolMode() && !isInPlanRouteMode()
-				&& (!contextMenuOpened || contextMenuInLandscape || contextMenuState == MenuController.MenuState.HEADER_ONLY));
+				&& !isInMeasurementToolMode() && !isInPlanRouteMode() && showControlsDueToContextMenu);
 
 		if (layersHud.setIconResId(settings.getApplicationMode().getMapIconId())) {
 			layersHud.update(app, isNight);
 		}
 		layersHud.updateVisibility(!routeDialogOpened && !trackDialogOpened && !isInMeasurementToolMode() && !isInPlanRouteMode()
-				&& (!contextMenuOpened || contextMenuInLandscape || contextMenuState == MenuController.MenuState.HEADER_ONLY));
+				&& showControlsDueToContextMenu);
 		quickSearchHud.updateVisibility(!routeDialogOpened && !trackDialogOpened && !isInMeasurementToolMode() && !isInPlanRouteMode()
-				&& (!contextMenuOpened || contextMenuInLandscape || contextMenuState == MenuController.MenuState.HEADER_ONLY));
+				&& showControlsDueToContextMenu);
 
 		if (!routePlanningMode && !routeFollowingMode) {
 			if (mapView.isZooming()) {

@@ -192,7 +192,6 @@ public class MapMarkersWidgetsFactory {
 			}
 		}
 
-		MapContextMenu contextMenu = map.getContextMenu();
 		List<MapMarker> markers = helper.getMapMarkers();
 		if (zoom < 3 || markers.size() == 0
 				|| !map.getMyApplication().getSettings().MAP_MARKERS_MODE.get().isToolbar()
@@ -201,7 +200,7 @@ public class MapMarkersWidgetsFactory {
 				|| MapRouteInfoMenu.isVisible()
 				|| addressTopBar.getVisibility() == View.VISIBLE
 				|| map.isTopToolbarActive()
-				|| (contextMenu.isVisible() && !contextMenu.isLandscapeLayout() && contextMenu.getCurrentMenuState() != MenuController.MenuState.HEADER_ONLY)) {
+				|| !map.getContextMenu().shouldShowControls()) {
 			updateVisibility(false);
 			return;
 		}
