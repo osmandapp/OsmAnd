@@ -663,7 +663,7 @@ La memoria utilizzata è  {1} MB.
     <string name="osm_editing_plugin_description">"Tramite questo plugin OsmAnd può essere utilizzato per contribuire a OSM con la creazione  o modifica dei PDI di OSM, aprendo o commentando le Note di OSM oppure inviando i file GPX registrati. OSM è un progetto comunitario di mappatura di pubblico dominio globale. Per maggiori informazioni visita https://openstreetmap.org. La partecipazione attiva è apprezzata e si può contribuire direttamente da OsmAnd specificando nell\'app le proprie credenziali di accesso OSM."</string>
     <string name="vector_maps_may_display_faster_on_some_devices">Le mappe vettoriali dovrebbero apparire più velocemente. Su certi dispositivi potrebbero non funzionare bene.</string>
 
-    <string name="play_commands_of_currently_selected_voice">Riproduci i comandi della voce selezionata</string>
+    <string name="play_commands_of_currently_selected_voice">Seleziona una voce e provane gli annunci vocali.</string>
     <string name="debugging_and_development">Sviluppo di OsmAnd</string>
     <string name="native_rendering">Disegno nativo</string>
 
@@ -1004,7 +1004,7 @@ Facilita il download delle linee di elevazione e l\'ombreggiamento dei rilievi (
     <string name="av_settings">Impostazioni audio/video </string>
     <string name="recording_error">Errore durante la registrazione </string>
     <string name="recording_camera_not_available">La fotocamera non è disponibile</string>
-    <string name="recording_is_recorded">L\'audio/video sta per essere registrato. Per fermarlo seleziona il widget AV.</string>
+    <string name="recording_is_recorded">L\'audio/video sta per essere registrato. Per fermarlo tocca il widget AV.</string>
     <string name="recording_playing">L\'audio della registrazione specificata sta per essere riprodotto.\n%1$s</string>
     <string name="recording_open_external_player">Apri riproduttore esterno</string>
     <string name="recording_delete_confirm">Vuoi cancellare questa registrazione?</string>
@@ -1565,7 +1565,7 @@ Vuoi procedere con una nuova registrazione?</string>
     <string name="traffic_warning_calming">Moderatore del traffico</string>
     <string name="traffic_warning_speed_camera">Autovelox</string>
     <string name="traffic_warning">Avviso di traffico</string>
-    <string name="local_index_description">Clicca su un oggetto per visualizzare maggiori dettagli, tieni premuto per disattivarlo o cancellarlo. Dati attualmente nel dispositivo (%1$s liberi):</string>
+    <string name="local_index_description">Tocca qualsiasi oggetto esistente per visualizzare maggiori dettagli, tieni premuto per disattivarlo o cancellarlo. Dati attualmente nel dispositivo (%1$s liberi):</string>
     <string name="text_size_descr">Imposta la dimensione del testo sulla mappa.</string>
     <string name="text_size">Dimensione del testo</string>
     <string name="fav_point_dublicate">Duplicato del nome del punto preferito</string>
@@ -2485,7 +2485,7 @@ Se ami OsmAnd e OSM e vuoi sostenerli, questo è un modo perfetto per farlo.</st
     <string name="rendering_attr_contourColorScheme_description">Schema del colore dei contorni</string>
     <string name="save_track_min_speed">Velocità minima di registrazione</string>
     <string name="translit_name_if_miss">Traslittera se manca il nome in %1$s</string>
-    <string name="trip_rec_notification_settings">Registrazione viaggio (nessun dato)</string>
+    <string name="trip_rec_notification_settings">Abilita l\'avvio veloce della registrazione</string>
     <string name="trip_rec_notification_settings_desc">Mostra una notifica che permette di iniziare a registrare il viaggio</string>
     <string name="shared_string_notifications">Notifiche</string>
     <string name="route_calculation">Calcolo del percorso</string>
@@ -2662,7 +2662,7 @@ Rappresenta l\'area: %1$s x %2$s</string>
     <string name="routing_attr_relief_smoothness_factor_more_plains_name">Pianeggiante</string>
     <string name="routing_attr_driving_style_speed_name">Percorsi più brevi</string>
     <string name="routing_attr_driving_style_balance_name">Bilanciato</string>
-    <string name="routing_attr_driving_style_safety_name">Preferisci byways</string>
+    <string name="routing_attr_driving_style_safety_name">Preferisci strade secondarie</string>
     <string name="relief_smoothness_factor_descr">Terreno preferito: pianeggiante o collinoso</string>
     <string name="routing_attr_relief_smoothness_factor_name">Seleziona la fluttuazione della quota</string>
     <string name="driving_region_automatic">Automatica</string>
@@ -2870,7 +2870,7 @@ Rappresenta l\'area: %1$s x %2$s</string>
     <string name="marker_moved_to_active">Marcatori della mappa spostati negli attivi</string>
     <string name="shared_string_list">Lista</string>
     <string name="shared_string_groups">Gruppi</string>
-    <string name="passed">Ultimo utilizzato: %1$s</string>
+    <string name="passed">Precedenti: %1$s</string>
     <string name="make_active">Attiva</string>
     <string name="today">Oggi</string>
     <string name="yesterday">Ieri</string>
@@ -2901,9 +2901,24 @@ Rappresenta l\'area: %1$s x %2$s</string>
     <string name="group_will_be_removed_after_restart">Il gruppo verrà rimosso al riavvio</string>
     <string name="show_guide_line">Mostra le linee guida</string>
     <string name="show_arrows_on_the_map">Mostra le frecce nella mappa</string>
-    <string name="show_passed">Mostra la data dell\'Ultimo utilizzato\'</string>
-    <string name="hide_passed">Nascondi la data \'Ultimo utilizzato\'</string>
+    <string name="show_passed">Mostra i precedenti</string>
+    <string name="hide_passed">Nascondi i precedenti</string>
     <string name="osmand_extended_description_part2">Navigazione GPS • Puoi scegliere fra la modalità offline (nessun costo di roaming quando sei all\'estero) oppure online (più veloce) • La guida vocale svolta per svolta ti guida lungo il percorso (voci registrate e sintetizzate) • Il percorso viene ricalcolato quando devii • Indicazioni di corsia, nomi delle strade e tempo di arrivo stimato saranno d\'aiuto lungo il percorso • Per rendere il percorso più veloce il passaggio dalla modalità diurna/notturna automatico •Puoi scegliere di visualizzare i limiti di velocità, ed essere avvisato quando li superi • Lo zoom della mappa si adegua alla velocità • Puoi cercare le destinazioni per indirizzo, per categoria (es.: parcheggio, ristorante, hotel, stazione di rifornimento, museo), oppure tramite le coordinate geografiche • Supporta i punti intermedi nel tuo itinerario • Puoi registrare la tua traccia GPX oppure caricarne una e seguirla</string>
     <string name="osmand_extended_description_part3">Mappa • Mostra i PDI (punti di interesse) vicino a te • Disponi la mappa nella direzione del movimento (o della bussola) • Mostra dove sei e dove stai andando • Condividi la tua posizione perché i tuoi amici possano trovarti • Raccogli i luoghi più importanti nei Favoriti • Ti permette di scegliere come visualizzare i nomi nella mappa: in inglese, locale, oppure la pronuncia • Visualizza mattonelle online speciali, vista satellitare (di Bing), diverse sovrapposizioni come turistico/navigazione tracce GPX e strati aggiuntivi con trasparenze personalizzabili</string>
     <string name="osmand_plus_extended_description_part1">OsmAnd+ (OSM Automatizzata Navigazione Direzioni) è un\'applicazione di navigazione con l\'accesso ai dati delle mappe mondiali, gratuite e di grande qualità OpenStreetMap (OSM). Goditi la navigazione con indicazioni visive e vocali, la visualizzazione dei PDI (punti di interesse), creando e gestendo le tracce GPX, usando visualizzazione delle linee isoipse e dell\'altitudine, scegliendo fra le modalità auto, bici, pedone, modifiche OSM e molto altro. OsmAnd+ è la versione dell\'app a pagamento. Acquistandola supporti il progetto, finanzi lo sviluppo di nuove funzionalità e ricevi gli ultimi aggiornamenti. Alcune delle maggiori caratteristiche:</string>
-    </resources>
+    <string name="osn_modify_dialog_title">Modifica la nota</string>
+    <string name="context_menu_item_modify_note">Modifica la nota OSM</string>
+    <string name="make_round_trip_descr">Aggiungi una copia del punto di partenza come destinazione</string>
+    <string name="make_round_trip">Costruisci un percorso circolare</string>
+    <string name="shared_string_navigate">Naviga</string>
+    <string name="shared_string_markers">Marcatori</string>
+    <string name="osmand_extended_description_part4">Skiing OsmAnd mappe sciistiche è un componente aggiuntivo che ti permette di vedere le piste da sci con il livello di difficoltà e alcune altre informazioni come la localizzazione degli skilift e altri servizi.</string>
+    <string name="osmand_extended_description_part5">Bicicletta • Puoi individuare sulla mappa i percorsi ciclabili • La navigazione GPS nella modalità bicicletta crea percorsi utilizzando i percorsi ciclabili • Puoi vedere velocità e altitudine • L\'opzione registrazione del GPX ti permette di registrare il tuo percorso e di condividerlo • Con un componente aggiuntivo puoi abilitare la visualizzazione delle isoipse e dell\'ombreggiatura dei rilievi</string>
+    <string name="empty_state_my_tracks_desc">Registra o importa le tracce per visualizzarle</string>
+    <string name="empty_state_favourites">Aggiungi Luoghi preferiti</string>
+    <string name="empty_state_favourites_desc">Aggiungi dei luoghi favoriti sulla mappa o importali dal filesystem</string>
+    <string name="import_track">Importa traccia</string>
+    <string name="import_track_desc">Il file %1$s non contiene punti intermedi, importarlo come traccia?</string>
+    <string name="move_point">Sposta il punto</string>
+    <string name="add_segment_to_the_track">Aggiungi a una traccia GPX</string>
+</resources>
