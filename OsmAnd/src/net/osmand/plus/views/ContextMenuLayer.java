@@ -228,6 +228,15 @@ public class ContextMenuLayer extends OsmandMapLayer {
 		this.selectOnMap = selectOnMap;
 	}
 
+	public void updateContextMenu() {
+		for (OsmandMapLayer layer : view.getLayers()) {
+			if (layer instanceof ContextMenuLayer.IMoveObjectProvider && ((ContextMenuLayer.IMoveObjectProvider) layer).isObjectMovable(selectedObject)) {
+				selectedObjectContextMenuProvider = (IContextMenuProvider) layer;
+				break;
+			}
+		}
+	}
+
 	@Override
 	public void populateObjectContextMenu(LatLon latLon, Object o, ContextMenuAdapter adapter, MapActivity mapActivity) {
 		if (menu.hasHiddenBottomInfo()) {
