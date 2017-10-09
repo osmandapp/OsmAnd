@@ -670,7 +670,7 @@ public class PlanRouteFragment extends Fragment {
 	}
 
 	public boolean quit(boolean hideMarkersListFirst) {
-		if (planRouteContext.isMarkersListOpened() && hideMarkersListFirst) {
+		if (portrait && planRouteContext.isMarkersListOpened() && hideMarkersListFirst) {
 			showHideMarkersList();
 			return false;
 		} else {
