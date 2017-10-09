@@ -146,9 +146,6 @@ public class OsmandApplication extends MultiDexApplication {
 		appCustomization.setup(this);
 		osmandSettings = appCustomization.getOsmandSettings();
 		appInitializer.initVariables();
-		if (osmandSettings.ENABLE_PROXY.get()) {
-			NetworkUtils.setProxy(osmandSettings.PROXY_HOST.get(), osmandSettings.PROXY_PORT.get());
-		}
 		if (appInitializer.isAppVersionChanged() && appInitializer.getPrevAppVersion() < AppInitializer.VERSION_2_3) {
 			osmandSettings.freezeExternalStorageDirectory();
 		} else if (appInitializer.isFirstTime()) {
@@ -364,9 +361,6 @@ public class OsmandApplication extends MultiDexApplication {
 	public void checkApplicationIsBeingInitialized(Activity activity, AppInitializeListener listener) {
 		// start application if it was previously closed
 		startApplication();
-		if (NetworkUtils.getProxy() == null && osmandSettings.ENABLE_PROXY.get()) {
-			NetworkUtils.setProxy(osmandSettings.PROXY_HOST.get(), osmandSettings.PROXY_PORT.get());
-		}
 		if(listener != null) {
 			appInitializer.addListener(listener);
 		}
@@ -554,6 +548,9 @@ public class OsmandApplication extends MultiDexApplication {
 		UncaughtExceptionHandler uncaughtExceptionHandler = Thread.getDefaultUncaughtExceptionHandler();
 		if (!(uncaughtExceptionHandler instanceof DefaultExceptionHandler)) {
 			Thread.setDefaultUncaughtExceptionHandler(new DefaultExceptionHandler());
+		}
+		if (NetworkUtils.getProxy() == null && osmandSettings.ENABLE_PROXY.get()) {
+			NetworkUtils.setProxy(osmandSettings.PROXY_HOST.get(), osmandSettings.PROXY_PORT.get());
 		}
 		appInitializer.startApplication();
 	}
