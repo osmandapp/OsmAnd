@@ -3,14 +3,14 @@
     <string name="download_hillshade_maps">Տարածքի մգեցված ռելիեֆով քարտեզներ</string>
     
     <string name="local_indexes_cat_av">Ձայնա/Տեսանյութեր</string>
-    <string name="clear_dest_confirm">"Վստահ ե՞ք, որ ցանկանում եք մաքրել ձեր նշանակման կետը․ "</string>
+    <string name="clear_dest_confirm">Վստահ ե՞ք, որ ցանկանում եք ջնջել ձեր նպատակակետը(և միջանկյալ նպատակակետը)?</string>
     <string name="stop_routing_confirm">Վստահ ե՞ք որ ցանկանում եք դադարեցնել նավիգացիան?</string>
     <string name="precise_routing_mode">Ճշգրիտ ճանապարհ (ալֆա)</string>
     <string name="recording_context_menu_show">Ցույց տալ</string>
-    <string name="recording_photo_description">Նկար %1$s %2$s-ից</string>
+    <string name="recording_photo_description">Նկար %1$s %2$s</string>
     <string name="av_def_action_picture">Նկարել</string>
     <string name="recording_context_menu_precord">Նկարել</string>
-    <string name="dropbox_plugin_description">Dropbox plugin-ը թույլ է տալիս սինխրոնիզացնել թրեքերը և Աուդիո/վիդեո նշումները է ձեր dropbox-ի հետ:</string>
+    <string name="dropbox_plugin_description">Dropbox plugin-ը թույլ է տալիս սինխրոնիզացնել տրեքերը և Աուդիո/վիդեո նշումները ձեր dropbox-ի հետ:</string>
     
     <string name="intermediate_points_change_order">Փոխել հերթականությունը</string>
     <string name="srtm_paid_version_msg">Рассмотрите пожалуйста покупку плагина \"Линии высот\" на Market, чтобы поддержать последующую разработку.</string>
@@ -25,12 +25,12 @@
     <string name="av_use_external_camera">Օգտագործել Camera ծրագիրը</string>
     <string name="av_settings_descr">Տեսա/Ձայնա-գրման պարամետրեր</string>
     <string name="av_settings">"Աուդիո/վիդեո պարամետրեր" </string>
-    <string name="recording_error">"Սխալ ձայնագրման ընթացքում "</string>
+    <string name="recording_error">"Սխալ է տեղի ունեցել  արձանագրության ժամանակ"</string>
     <string name="recording_camera_not_available">Վիդեո/Ֆոտո-խցիկը անհասանելի է</string>
     <string name="email">էլ-փոստ</string>
 <string name="use_kalman_filter_compass_descr">Օգտագործել Կալմանի ֆիլտրը կողմնացույցի սխելներից խուսափելու համար</string>
     <string name="use_kalman_filter_compass">Օգտագործել Կալմանի ֆիլտրը</string>
-    <string name="use_magnetic_sensor_descr">Օգտագործեք մագնիսական սենսորը որոշելու կողմնացույցի ուղղությունը</string>
+    <string name="use_magnetic_sensor_descr">Օգտագործել մագնիսական սենսորը որոշելու կողմնացույցի ուղղությունը</string>
     <string name="use_magnetic_sensor">Օգտագործել մագնիսական սենսորը</string>
     <string name="other_location">Այլ</string>
     <string name="files_limit">Մնացել է %1$d ֆայլ</string>
@@ -39,12 +39,12 @@
     <string name="cancel_navigation">Վերջացնել նավիգացիան</string>
     <string name="clear_destination">Մաքրել նպատակակետը</string>
     <string name="download_using_mobile_internet">Ներկայումս WiFi կապ չկա. Դուք ցանկանու՞մ եք շարունակել ներբեռնել ընթացիկ ինտերնետ կապով?</string>
-    <string name="street_name">Փողոց</string>
+    <string name="street_name">Փողոցի անունը</string>
 	<string name="hno">Տան համարը</string>
     <string name="website">Վեբ կայք</string>
 	<string name="phone">Հեռախոս</string>
     
-    <string name="monitoring_settings">Գրանցման ծառայություն և քնած ռեժիմ</string>
+    <string name="monitoring_settings">Ուղևորության գրանցում</string>
     
     <string name="choose_osmand_theme_descr">Ընտրեք ծրագրի դիզայնի թեման</string>
     <string name="select_address_activity">Ընտրել հասցեն</string>
@@ -57,7 +57,7 @@
     <string name="local_osm_changes_backup_successful">OSM փոփոխության ֆայլը հաջողությամբ գեներացվել %1$s</string>
     <string name="delete_point">Ջնջել կետը</string>
     <string name="plugin_distance_point_time">Ժամանակ</string>
-    <string name="plugin_distance_point_hdop">Ճշգրտություն</string>
+    <string name="plugin_distance_point_hdop">ճշգրտություն</string>
     <string name="plugin_distance_point_speed">արագություն</string>
     <string name="plugin_distance_point_ele">բարձրություն</string>
     <string name="plugin_distance_point">Կետ</string>
@@ -71,7 +71,7 @@
     <string name="distance_measurement_load_gpx">Բացել գոյուցյուն ունեցող GPX ֆայլը</string>
     <string name="wait_current_task_finished">Խնդրում ենք սպասել մինջև տվյալ պրոցեսը կվերջանա</string>
     <string name="distance_measurement_finish_subtrack">Սկսել նոր ենթաճանապարհ</string>
-    <string name="osmand_distance_planning_plugin_name">Հեռավորությունը չափող և Պլանավորող Գործիք</string>
+    <string name="osmand_distance_planning_plugin_name">Հեռավորության հաշվիչ և Պլանավորման Գործիք</string>
     <string name="edit_filter_create_message">{0} Ֆիլտրը ստեղծված է</string>
 	<string name="edit_filter_delete_message">{0} Ֆիլտրը ջնջված է</string>
 	<string name="edit_filter_delete_dialog_title">Ջնջե՞լ տվյալ ֆիլտրը?</string>
@@ -79,11 +79,11 @@
 	
 	<string name="poi_action_change">փոփոխություն</string>
 	<string name="poi_action_add">ավելացում</string>
-	<string name="use_distance_measurement_help">* Դիպչեք կետը նշելու համար\n
-        * Սեխմեք և պահեք քարտեզի վրա նախորց կետը ջնջելու համար\n
-        * Սեխմեք և պահեք կետը բացատրությունը տեսնելու և ավելացնելու համար\n
-        * Սեխմեք չափման վիդջետի վրա այլ հնարավորությունների համար։</string>
-    <string name="monitoring_settings_descr">Կարգավորել ճանապարհորդությունների գրանցումը և քնած ռեժիմը</string>
+	<string name="use_distance_measurement_help">* Դիպչեք կետը նշելու համար։
+\n * Սեխմեք և պահեք քարտեզի վրա նախորդ կետը ջնջելու համար։
+\n * Սեխմեք և պահեք կետը վրա բացատրությունը տեսնելու և ավելացնելու համար։
+\n * Սեխմեք չափման վիդջետի վրա այլ հնարավորությունների համար։</string>
+    <string name="monitoring_settings_descr">Ուղևորության գրանցոման կարգավորում</string>
     <string name="choose_osmand_theme">Ծրագրի դիզայնի թեման</string>
     <string name="accessibility_options">Հատուկ հնարավորությունների կարգավորումներ</string>
     <string name="layer_hillshade">Տարածքի ռելիոֆի շերտ</string>
@@ -103,10 +103,10 @@
     <string name="av_def_action_choose">Ընտրել ըստ հարցման</string>
     <string name="av_widget_action_descr">Ընտրել default Widget գործողություն</string>
     <string name="av_widget_action">Default վիդջետի գործողություն</string>
-    <string name="recording_is_recorded">Կատարվում է Աուդիո/վիդեո ձայնագրում, դադարեցնելու համար սեխմեք \"Վերջ\"</string>
+    <string name="recording_is_recorded">Կատարվում է Աուդիո/վիդեո ձայնագրում, դադարեցնելու համար սեխմեք \"Վերջ\"։</string>
     <string name="recording_playing">Նվագում է ձայնագրությունը\n%1$s</string>
     <string name="recording_open_external_player">Բացել արտաքին նվագարկիչով</string>
-    <string name="recording_delete_confirm">Դուք ուզու՞մ եք ջնջել ձայնագրությունը</string>
+    <string name="recording_delete_confirm">Դուք ուզու՞մ եք ջնջել ձայնագրությունը\\գրառումը</string>
     <string name="recording_unavailable">անհասանելի է</string>
     <string name="recording_context_menu_arecord">Կատարել աուդիո նշում</string>
     <string name="recording_context_menu_vrecord">Կատարել վիդեո նշում</string>
@@ -115,7 +115,7 @@
     <string name="recording_context_menu_delete">Ջնջել ձայնագրությունը</string>
     <string name="recording_context_menu_play">Նվագել</string>
     <string name="recording_description">Ձայնագրություն %1$s %2$s - %3$s</string>
-    <string name="recording_default_name">ձայնագրություն</string>
+    <string name="recording_default_name">ձայնագրություն\\գրառում</string>
     <string name="shared_string_control_stop">Կանգնել</string>
     <string name="shared_string_control_start">ձայնագրել</string>
     <string name="map_widget_av_notes">Աուդիո/Վիդեո նշումներ</string>
@@ -123,13 +123,13 @@
 	<string name="about_version">Տարբերակ :</string>
     
     <string name="local_index_tile_data_downloadable">Բեռնվող: %1$s</string>
-    <string name="select_gpx">Ընտրել GPX …</string>
+    <string name="select_gpx">Ընտրել GPX-…</string>
     <string name="route_descr_select_destination">Ընտրել Նպատակակետը</string>
     <string name="shared_string_select_on_map">Ընտրել քարտեզի վրա</string>
     <string name="shared_string_favorite">Սիրված</string>
     
 	
-	<string name="routing_attr_avoid_toll_name">Խուսափել վճարովի ճանապարհները</string>
+	<string name="routing_attr_avoid_toll_name">Խուսափել վճարովի ճանապարհներից</string>
 	<string name="please_select_address">Առաջինը ընտրեք քաղաք կամ փողոց</string>
     <string name="context_menu_item_destination_point">Սահմանել որպես նպատակակետ</string>
     <string name="route_preferences">ուղու նախապատվություններ</string>
@@ -137,14 +137,14 @@
     <string name="routing_attr_prefer_motorway_name">Նախընտրելի ավտոճանապարհ</string>
 	<string name="routing_attr_prefer_motorway_description">Նախընտրելի ավտոճանապարհ</string>
 	<string name="routing_attr_avoid_toll_description">Խուսափել վճարովի ճանապարհները</string>
-	<string name="routing_attr_avoid_unpaved_name">Խուսափել հողածածկ ճանապարհները</string>
+	<string name="routing_attr_avoid_unpaved_name">Խուսափել հողածածկ ճանապարհներից</string>
 	<string name="routing_attr_avoid_unpaved_description">Խուսափել հողածածկ ճանապարհները</string>
-	<string name="routing_attr_avoid_ferries_name">Խուսափել լաստանավերը</string>
+	<string name="routing_attr_avoid_ferries_name">Խուսափել լաստանավերից</string>
 	<string name="routing_attr_avoid_ferries_description">Խուսափել լաստանավերը</string>
-	<string name="routing_attr_avoid_motorway_name">Խուսափել ավտոճանապարհները</string>
+	<string name="routing_attr_avoid_motorway_name">Խուսափել ավտոմայրուղիներից</string>
 	<string name="routing_attr_avoid_motorway_description">Խուսափել ավտոճանապարհները</string>
-	<string name="routing_attr_weight_name">Կշիռ</string>
-	<string name="routing_attr_weight_description">Կշռի սահմանափակման նշում</string>
+	<string name="routing_attr_weight_name">Առավելագույն քաշը</string>
+	<string name="routing_attr_weight_description">Նշել մեքենայի քաշը երթուղին հաշվառկելու համար</string>
     <string name="osmand_distance_planning_plugin_description">Ստեղծել ուղիներ (կամ օգտագործել/փոփոխել առկա GPX ֆայլերը) կետեռի միջև հեռավորության չափման համար։ Պահպանել որպես GPX, որը կարող է օգտագործվել GPX ուղիների պլանավորման համար։</string>
     <string name="shared_string_no">Ոչ</string>
 	<string name="shared_string_yes">Այո</string>
@@ -157,7 +157,7 @@
     <string name="shared_string_markers">Մարկերներ</string>
     <string name="coordinates_format">Կոորդինատների ձեւաչափը</string>
     <string name="use_system_keyboard">Օգտագործել համակարգի ստեղնաշարը</string>
-    <string name="fast_coordinates_input_descr">Ընտրեք կոորդինատների մուտքագրման ձեւաչափը: Դուք միշտ կարող եք փոխել այն, սեղմելով Տարբերակ։</string>
+    <string name="fast_coordinates_input_descr">Ընտրեք կոորդինատների մուտքագրման ձեւաչափը: Դուք միշտ կարող եք փոխել այն սեղմելով Հատկություններ։</string>
     <string name="fast_coordinates_input">Կոորդինատների արագ մուտքագրումը</string>
     <string name="routing_attr_avoid_ice_roads_fords_name">Խուսափել սառույցի ճանապարհներից, ծանծաղուտ</string>
     <string name="routing_attr_avoid_ice_roads_fords_description">Խուսափել սառույցի ճանապարհներից և ծանծաղուտներից</string>
@@ -256,7 +256,7 @@
     <string name="mapillary_widget">Mapillary վիջեթը</string>
     <string name="mapillary_widget_descr">Թույլ է տալիս արագորեն նպաստել Mapillary-ին</string>
     <string name="mapillary_descr">Առցանց փողոցային նկարներ բոլորի համար: Բացահայտեք վայրերը, համագործակցեք, նկարեք աշխարհը:</string>
-    <string name="mapillary">Մապիլարի(Mapillary)</string>
+    <string name="mapillary">Մափիլարի(Mapillary)</string>
     <string name="plugin_mapillary_descr">Փողոցային նկարներ բոլորի համար: Բացահայտեք վայրերը, համագործակցեք, նկարեք աշխարհը:</string>
     <string name="private_access_routing_req">"Նպատակակետը գտնվում է մասնավորի տարածքում: Ցանկանում եք թույլատրել այս ուղեւորությանը  մասնավոր ճանապարհներ մուտք գործել?"</string>
     <string name="restart_search">Նորից որոնեք</string>
@@ -352,7 +352,7 @@
     <string name="altitude_descent">Վայրեջք</string>
     <string name="altitude_ascent">Վերելք</string>
     <string name="altitude_range">Բարձրությունների շարք</string>
-    <string name="average_altitude">Միջին բարձրությունը</string>
+    <string name="average_altitude">Միջին բարձրություն</string>
     <string name="shared_string_time">Ժամանակ</string>
     <string name="total_distance">Ընդհանուր հեռավորությունը</string>
     <string name="routing_attr_relief_smoothness_factor_name">Ընտրել բարձունքների տատանումը</string>
@@ -371,4 +371,61 @@
     <string name="rendering_attr_hideWaterPolygons_name">Թաքցնել ջուրը</string>
     <string name="legacy_search">Հին որոնման տեսակը</string>
     <string name="show_legacy_search">Ցույց տալ հին որոնման տեսակը</string>
+    <string name="routing_attr_allow_motorway_name">Թույլատրել ավտոմայրուղիներ</string>
+    <string name="routing_attr_allow_motorway_description">Թույլատրել ավտոմայրուղիներ</string>
+    <string name="upload_osm_note_description">Դուք կարող եք վերբեռնել ձեր OSM Նշումը անանուն կամ ձեր OpenStreetMap.org պրոֆիլի միջոցով:</string>
+    <string name="wiki_around">Վիքիպեդիայի հոդվածներ</string>
+    <string name="search_map_hint">Որոնել քաղաք կամ երկիր</string>
+    <string name="route_roundabout_short">Վերցրեք %1$d ելքը</string>
+    <string name="upload_poi">Վերբեռնեք POI</string>
+    <string name="route_calculation">Ուղևորության հաշվարկ</string>
+    <string name="gpx_no_tracks_title">Դուք դեռ չունեք տրեկներ</string>
+    <string name="gpx_no_tracks_title_folder">Դուք նաև կարող եք ավելացնել տրեկները թղթապանակ</string>
+    <string name="gpx_add_track">Ավելացնել տրեկը</string>
+    <string name="gpx_appearance">Տեսակ</string>
+    <string name="osmo_share_location">Կիսվել</string>
+    <string name="osmo_pause_location">Դադար</string>
+    <string name="osmo_service_running">OsMo աշխատում է</string>
+    <string name="shared_string_notifications">Ծանուցումներ</string>
+    <string name="shared_string_continue">Շարունակել</string>
+    <string name="shared_string_pause">Դադար</string>
+    <string name="shared_string_trip">Ուղևորություն</string>
+    <string name="gpx_logging_no_data">Տվյալներ չկա</string>
+    <string name="christmas_poi">Սուրբ Ծնունդ POI</string>
+    <string name="christmas_desc_q">Ցույց տալ Սուրբ Ծնունդ POI?</string>
+    <string name="rendering_attr_surfaceIntegrity_name">Ճանապարհային ծածկույթի որակը</string>
+    <string name="search_hint">Մուտքագրել քաղաքի անունը, հասցեն, POI</string>
+    <string name="edit_filter">Խմբագրել կատեգորիաները</string>
+    <string name="subcategories">Ենթակատեգորիաներ</string>
+    <string name="selected_categories">Ընտրված կատեգորիաները</string>
+    <string name="create_custom_poi">Ստեղծել custom ֆիլտր</string>
+    <string name="custom_search">Ստեղծել որոնում</string>
+    <string name="shared_string_filters">Ֆիլտրեր</string>
+    <string name="apply_filters">Կիրառել ֆիլտրերը</string>
+    <string name="save_filter">Պահպանել ֆիլտրը</string>
+    <string name="delete_filter">Ջնջել ֆիլտրը</string>
+    <string name="new_filter">Նոր ֆիլտր</string>
+    <string name="new_filter_desc">Մուտքագրեք նոր ֆիլտրի անունը: Դուք կարող եք գտնել այն Կատեգորիաների ցանկում:</string>
+    <string name="osm_live_payment_desc">"Բաժանորդային վճարը գանձվում է ամսական կտրվածքով:Դուք կարող եք չեղարկել բաժանորդագրությունը   Google Play- յում ցանկացած պահի:"</string>
+    <string name="donation_to_osm">Նվիրատվություն OpenStreetMap համայնքին</string>
+    <string name="donation_to_osm_desc">Ձեր նվիրատվության մի մասը կուղարկվի OSM մասնակիցներին, որոնք փոփոխություններ են մտցմում OpenStreetMap-ուն: Բաժանորդագրության արժեքը մնում է նույնը:</string>
+    <string name="osm_live_subscription_desc">Բաժանորդագրությունը հնարավորութուն է տալիս անսահմանափակ թարմացումներ ներբեռնել աշխարհի ցանկացած քարտեզներ ամեն ժամ, ամենօրյա, շաբաթական:</string>
+    <string name="get_it">Ստանալ այն</string>
+    <string name="get_for">Ստանալ %1$s</string>
+    <string name="get_for_month">Ստանալ %1$s ամիսը</string>
+    <string name="osm_live_banner_desc">Ստացեք քարտեզի անսահմանափակ ներբեռնման հնարավորութուն ինչպես նաև քարտեզների թարմացում ավելի հաճախ, քան ամիսը մեկ անգամ`շաբաթական, ամենօրյա կամ ամեն ժամ:</string>
+    <string name="osmand_plus_banner_desc">Անսահմանափակ քարտեզների ներբեռնում , թարմացումներ, եւ Wikipedia plugin։</string>
+    <string name="si_mi_meters">Մղոններ/մետր</string>
+    <string name="skip_map_downloading">Բաց թողնել քարտեզների ներբեռնումը</string>
+    <string name="skip_map_downloading_desc">Դուք չունեք անցանց քարտեզներ: Դուք կարող եք ընտրել քարտեզը ցուցակից կամ ներբեռնել քարտեզները հետագայում Menu - %1$s միջոցով:</string>
+    <string name="search_another_country">Ընտրեք այլ տարածաշրջան</string>
+    <string name="search_map">Քարտեզների որոնում…</string>
+    <string name="first_usage_wizard_desc">OsmAnd-ը կորոշի ձեր դիրքը և առաջարկի քարտեզներ ներբեռնման համար այդ տարածաշրջանի համար:</string>
+    <string name="location_not_found">Չհաջողվեց բացահայտել դիրքը</string>
+    <string name="no_inet_connection">Ինտերնետ կապ չկա</string>
+    <string name="no_inet_connection_desc_map">Պահանջվում է ներբեռնել քարտեզներ։</string>
+    <string name="search_location">Դիրքի որոնմում…</string>
+    <string name="storage_free_space">Ազատ տեղ</string>
+    <string name="storage_place_description">OsmAnd-ը կպահպանի տվյալները (քարտեզներ, երթուղիներ և այլն) %1$s։</string>
+    <string name="give_permission">Տալ թույլտվություն</string>
     </resources>
