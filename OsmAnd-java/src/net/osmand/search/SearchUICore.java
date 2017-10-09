@@ -540,6 +540,10 @@ public class SearchUICore {
 					}
 				}
 			}
+			if (Algorithms.isEmpty(object.localeName) && object.alternateName != null) {
+				object.localeName = object.alternateName;
+				object.alternateName = null;
+			}
 			if (matcher == null || matcher.publish(object)) {
 				count++;
 				object.parentSearchResult = parentSearchResult;
