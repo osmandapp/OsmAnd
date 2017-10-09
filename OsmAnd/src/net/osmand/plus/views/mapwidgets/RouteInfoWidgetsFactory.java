@@ -26,6 +26,7 @@ import android.view.ViewGroup;
 import android.widget.ImageView;
 import android.widget.TextView;
 
+import net.osmand.AndroidUtils;
 import net.osmand.Location;
 import net.osmand.binary.RouteDataObject;
 import net.osmand.data.LatLon;
@@ -902,10 +903,28 @@ public class RouteInfoWidgetsFactory {
 		}
 
 		public void updateBounds() {
-			int w = (int) (72 * scaleCoefficient / miniCoeff);
-			int cnt = lanes != null ? lanes.length : 0 ;
-			width = w * cnt;
-			height = w;
+			float w = 0;
+			float coef = scaleCoefficient / miniCoeff;
+			if (lanes != null) {
+				for (int i = 0; i < lanes.length; i++) {
+					int turnType = TurnType.getPrimaryTurn(lanes[i]);
+					int secondTurnType = TurnType.getSecondaryTurn(lanes[i]);
+					int thirdTurnType = TurnType.getTertiaryTurn(lanes[i]);
+					Bitmap b = TurnPathHelper.getBitmapFromTurnType(ctx.getResources(), bitmapCache, turnType,
+							secondTurnType, thirdTurnType, TurnPathHelper.FIRST_TURN, coef, leftSide);
+					if (b != null) {
+						if (secondTurnType == 0 && thirdTurnType == 0) {
+							int arrowWidth = AndroidUtils.dpToPx(ctx, TurnType.getArrowWidthInDp(turnType));
+							int emptyWidth = b.getWidth() - arrowWidth;
+							w += emptyWidth / 2 + arrowWidth;
+						} else {
+							w += b.getWidth();
+						}
+					}
+				}
+			}
+			width = (int) w;
+			height = (int) (54 * coef);
 		}
 		
 		@Override
@@ -921,8 +940,6 @@ public class RouteInfoWidgetsFactory {
 
 		@Override
 		public void draw(Canvas canvas) {
-			float w = 72 * scaleCoefficient / miniCoeff;
-
 			Bitmap src = Bitmap.createBitmap(canvas.getWidth(), canvas.getHeight(), Bitmap.Config.ARGB_8888);
 			// setup canvas for painting
 			Canvas srcCanvas = new Canvas(src);
@@ -967,8 +984,14 @@ public class RouteInfoWidgetsFactory {
 							secondTurnType, thirdTurnType, TurnPathHelper.FIRST_TURN, coef, leftSide);
 					if(b != null) {
 						paintRouteDirection.setColorFilter(new PorterDuffColorFilter(paintRouteDirection.getColor(), PorterDuff.Mode.SRC_ATOP));
-						srcCanvas.drawBitmap(b, 0f, 0f, paintRouteDirection);
-						srcCanvas.translate(w, 0);
+						Bitmap bitmap;
+						if (secondTurnType == 0 && thirdTurnType == 0) {
+							bitmap = applyCrop(b, turnType);
+						} else {
+							bitmap = b;
+						}
+						srcCanvas.drawBitmap(bitmap, 0f, 0f, paintRouteDirection);
+						srcCanvas.translate(bitmap.getWidth(), 0);
 					}
 				}
 				srcCanvas.restore();
@@ -991,6 +1014,13 @@ public class RouteInfoWidgetsFactory {
 
 			// paint the image source
 			canvas.drawBitmap(src, 0, 0, null);
+		}
+
+		private Bitmap applyCrop(Bitmap bitmap, int turnType) {
+			int arrowWidth = AndroidUtils.dpToPx(ctx, TurnType.getArrowWidthInDp(turnType));
+			int emptyWidth = bitmap.getWidth() - arrowWidth;
+			int widthToCrop = emptyWidth / 4;
+			return Bitmap.createBitmap(bitmap, widthToCrop, 0, bitmap.getWidth() - 2 * widthToCrop, bitmap.getHeight());
 		}
 
 		//@Override
