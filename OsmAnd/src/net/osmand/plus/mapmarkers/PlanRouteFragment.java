@@ -143,12 +143,12 @@ public class PlanRouteFragment extends Fragment {
 		final int backgroundColor = ContextCompat.getColor(mapActivity,
 				nightMode ? R.color.ctx_menu_info_view_bg_dark : R.color.ctx_menu_info_view_bg_light);
 		portrait = AndroidUiHelper.isOrientationPortrait(mapActivity);
-		boolean listFullscreen = portrait && planRouteContext.isMarkersListOpened();
-		int layoutRes = listFullscreen ? R.layout.fragment_plan_route_full_screen : R.layout.fragment_plan_route_half_screen;
+		boolean fullScreen = portrait && planRouteContext.isMarkersListOpened();
+		int layoutRes = fullScreen ? R.layout.fragment_plan_route_full_screen : R.layout.fragment_plan_route_half_screen;
 
 		View view = View.inflate(new ContextThemeWrapper(getContext(), themeRes), layoutRes, null);
 
-		mainView = listFullscreen ? view : view.findViewById(R.id.main_view);
+		mainView = fullScreen ? view : view.findViewById(R.id.main_view);
 
 		enterPlanRouteMode();
 
@@ -161,7 +161,7 @@ public class PlanRouteFragment extends Fragment {
 			mainView.findViewById(R.id.toolbar_divider).setBackgroundColor(ContextCompat.getColor(mapActivity,
 					nightMode ? R.color.actionbar_dark_color : R.color.dashboard_divider_light));
 
-			Drawable arrow = getContentIcon(listFullscreen ? R.drawable.ic_action_arrow_down : R.drawable.ic_action_arrow_up);
+			Drawable arrow = getContentIcon(fullScreen ? R.drawable.ic_action_arrow_down : R.drawable.ic_action_arrow_up);
 			((ImageView) mainView.findViewById(R.id.up_down_icon)).setImageDrawable(arrow);
 
 			mainView.findViewById(R.id.up_down_row).setOnClickListener(new View.OnClickListener() {
@@ -199,7 +199,7 @@ public class PlanRouteFragment extends Fragment {
 			});
 			mapActivity.showTopToolbar(toolbarController);
 
-			if (listFullscreen) {
+			if (fullScreen) {
 				mapActivity.findViewById(R.id.bottom_controls_container).setVisibility(View.GONE);
 				mainView.findViewById(R.id.plan_route_toolbar).setVisibility(View.VISIBLE);
 				mainView.findViewById(R.id.toolbar_divider).setVisibility(View.VISIBLE);
