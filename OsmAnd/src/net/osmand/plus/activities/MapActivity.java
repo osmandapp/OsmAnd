@@ -569,7 +569,7 @@ public class MapActivity extends OsmandActionBarActivity implements DownloadEven
 		long tm = System.currentTimeMillis();
 
 		if (app.getMapMarkersHelper().getPlanRouteContext().isFragmentVisible()) {
-			PlanRouteFragment.showInstance(getSupportFragmentManager(), AndroidUiHelper.isOrientationPortrait(this));
+			PlanRouteFragment.showInstance(this);
 		}
 
 		if (app.isApplicationInitializing() || DashboardOnMap.staticVisible) {
