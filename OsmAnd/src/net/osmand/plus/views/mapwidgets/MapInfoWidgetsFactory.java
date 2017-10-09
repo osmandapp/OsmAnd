@@ -28,6 +28,7 @@ import net.osmand.plus.helpers.AndroidUiHelper;
 import net.osmand.plus.helpers.WaypointDialogHelper;
 import net.osmand.plus.helpers.WaypointHelper;
 import net.osmand.plus.helpers.WaypointHelper.LocationPointWrapper;
+import net.osmand.plus.mapcontextmenu.MapContextMenu;
 import net.osmand.plus.mapcontextmenu.MenuController;
 import net.osmand.plus.mapcontextmenu.other.MapRouteInfoMenu;
 import net.osmand.plus.routing.RouteDirectionInfo;
@@ -802,7 +803,8 @@ public class MapInfoWidgetsFactory {
 					}
 				}
 			}
-			if (map.isTopToolbarActive() || (map.getContextMenu().isVisible() && map.getContextMenu().getCurrentMenuState() == MenuController.MenuState.HALF_SCREEN)) {
+			MapContextMenu contextMenu = map.getContextMenu();
+			if (map.isTopToolbarActive() || (contextMenu.isVisible() && !contextMenu.isLandscapeLayout() && contextMenu.getCurrentMenuState() != MenuController.MenuState.HEADER_ONLY)) {
 				updateVisibility(false);
 			} else if (!showNextTurn && updateWaypoint()) {
 				updateVisibility(true);

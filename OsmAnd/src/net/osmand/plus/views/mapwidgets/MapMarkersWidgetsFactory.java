@@ -17,6 +17,7 @@ import net.osmand.plus.activities.MapActivity;
 import net.osmand.plus.dashboard.DashLocationFragment;
 import net.osmand.plus.dashboard.DashboardOnMap;
 import net.osmand.plus.helpers.AndroidUiHelper;
+import net.osmand.plus.mapcontextmenu.MapContextMenu;
 import net.osmand.plus.mapcontextmenu.MenuController;
 import net.osmand.plus.mapcontextmenu.other.MapRouteInfoMenu;
 import net.osmand.plus.views.AnimateDraggingMapThread;
@@ -191,6 +192,7 @@ public class MapMarkersWidgetsFactory {
 			}
 		}
 
+		MapContextMenu contextMenu = map.getContextMenu();
 		List<MapMarker> markers = helper.getMapMarkers();
 		if (zoom < 3 || markers.size() == 0
 				|| !map.getMyApplication().getSettings().MAP_MARKERS_MODE.get().isToolbar()
@@ -199,7 +201,7 @@ public class MapMarkersWidgetsFactory {
 				|| MapRouteInfoMenu.isVisible()
 				|| addressTopBar.getVisibility() == View.VISIBLE
 				|| map.isTopToolbarActive()
-				|| (map.getContextMenu().isVisible() && map.getContextMenu().getCurrentMenuState() == MenuController.MenuState.HALF_SCREEN)) {
+				|| (contextMenu.isVisible() && !contextMenu.isLandscapeLayout() && contextMenu.getCurrentMenuState() != MenuController.MenuState.HEADER_ONLY)) {
 			updateVisibility(false);
 			return;
 		}
