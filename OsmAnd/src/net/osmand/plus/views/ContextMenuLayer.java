@@ -97,10 +97,6 @@ public class ContextMenuLayer extends OsmandMapLayer {
 		mAddGpxPointBottomSheetHelper = new AddGpxPointBottomSheetHelper(activity, this);
 	}
 
-	public void setSelectedObjectContextMenuProvider(IContextMenuProvider provider) {
-		this.selectedObjectContextMenuProvider = provider;
-	}
-
 	public AddGpxPointBottomSheetHelper getAddGpxPointBottomSheetHelper() {
 		return mAddGpxPointBottomSheetHelper;
 	}
