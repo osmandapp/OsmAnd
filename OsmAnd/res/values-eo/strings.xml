@@ -2825,4 +2825,7 @@ Indikas lokon:  %1$s x %2$s"</string>
     <string name="make_round_trip_descr">Aldoni kopion de komenc-punkto kiel celon.</string>
     <string name="make_round_trip">Fermita ekskurso</string>
     <string name="shared_string_navigate">Navigi</string>
+    <string name="osn_modify_dialog_error">Eraro okazis: rimarko ne estis ŝanĝita</string>
+    <string name="osn_modify_dialog_title">Redakti rimarkon</string>
+    <string name="context_menu_item_modify_note">Redakti OSM-rimarkon</string>
     </resources>

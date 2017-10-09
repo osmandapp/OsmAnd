@@ -2376,7 +2376,7 @@
     <string name="gpx_logging_no_data">لا توجد بيانات</string>
     <string name="osmo_pause_location">إيقاف مؤقت</string>
     <string name="osmo_service_running">خدمة OsMo مشغلة</string>
-    <string name="trip_rec_notification_settings">تفعيل تسجيل البدء السريع</string>
+    <string name="trip_rec_notification_settings">تفعيل تسجيل بداية سريعة</string>
     <string name="trip_rec_notification_settings_desc">عرض اشعار نظامي للسماح ببدء تسجيل الرحلة</string>
     <string name="shared_string_notifications">الإشعارات</string>
     <string name="gpx_no_tracks_title_folder">يمكنك أيضا إضافة مسارات إلى المجلد</string>
@@ -2812,7 +2812,7 @@
     <string name="routing_attr_avoid_ice_roads_fords_description">تجنب الطرق الجليدية والمعابر</string>
     <string name="make_round_trip_descr">إضافة نسخة نقطة البداية كوجهة.</string>
     <string name="make_round_trip">القيام برحلة ذهاب وإياب</string>
-    <string name="shared_string_navigate">التنقل</string>
+    <string name="shared_string_navigate">تنقل</string>
     <string name="osn_modify_dialog_error">حدث استثناء: لم يتم تعديل الملاحظة</string>
     <string name="osn_modify_dialog_title">تعديل ملاحظة</string>
     <string name="context_menu_item_modify_note">تعديل ملاحظة OSM</string>

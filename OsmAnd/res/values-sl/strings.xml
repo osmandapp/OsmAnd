@@ -316,7 +316,7 @@
     <string name="day_night_info_description">Sončni vzhod: %1$s\nSončni zahod: %2$s</string>
 
 
-    <string name="layer_map_appearance">Nastavitve zaslona</string>
+    <string name="layer_map_appearance">Nastavite zaslona</string>
     <string name="show_lanes">Vozni pasovi</string>
     <string name="avoid_in_routing_title">Izogibanje …</string>
     <string name="avoid_ferries">Izogni se trajektom</string>
@@ -1264,7 +1264,7 @@ Afganistan, Albanija, Alžirija, Andora, Angola, Angvila, Antigva in Barbuda, Ar
 
     <string name="app_mode_hiking">Pohodništvo</string>
     <string name="app_mode_motorcycle">Motorno kolo</string>
-    <string name="app_mode_boat">Čoln</string>
+    <string name="app_mode_boat">Plovilo</string>
     <string name="app_mode_aircraft">Letalo</string>
 
 
@@ -1391,7 +1391,7 @@ Afganistan, Albanija, Alžirija, Andora, Angola, Angvila, Antigva in Barbuda, Ar
     <string name="keep_informing">Ponavljanje navigacijskih navodil</string>
     <string name="osmo_settings">OsMo</string>
     <string name="arrival_distance_descr">Kako hitro naj se najavi napovedan čas prihoda?</string>
-    <string name="arrival_distance">Napoved prihoda</string>
+    <string name="arrival_distance">Najava prihoda</string>
 
     <string name="osmo_io_error">Povezava s storitvijo OsMo je spodletela:</string>
     <string name="osmo_mode_on">Končaj sejo OsMo</string>
@@ -2456,7 +2456,7 @@ Del prihodka se vrne skupnosti OSM in se izplačuje za vsako opravljeno dejavnos
     <string name="search_hint">Vpišite mesto, naslov ali ime točke</string>
     <string name="osmo_pause_location">Premor</string>
     <string name="osmo_service_running">Storitev OsMo je zagnana</string>
-    <string name="trip_rec_notification_settings">Beleženje potovanja (brez podatkov)</string>
+    <string name="trip_rec_notification_settings">Omogoči hitro beleženje potovanja</string>
     <string name="shared_string_notifications">Obvestila</string>
     <string name="save_track_min_speed">Najmanjša hitrost beleženja</string>
     <string name="save_track_min_speed_descr">Filter: nastavitev najmanjše hitrosti beleženja točk na zemljevidu</string>
@@ -2888,4 +2888,12 @@ Koda predstavlja območje: %1$s x %2$s</string>
     <string name="map_orientation_change_in_accordance_with_speed">Prag usmerjenosti zemljevida</string>
     <string name="all_markers_moved_to_history">Vse označbe zemljevida so premaknjene med zgodovino</string>
     <string name="marker_moved_to_history">Označbe zemljevida so premaknjene med zgodovino</string>
+    <string name="osn_modify_dialog_error">Prišlo je do napake: sporočilo ni spremenjeno</string>
+    <string name="osn_modify_dialog_title">Spremeni sporočilo</string>
+    <string name="context_menu_item_modify_note">Spremeni sporočilo OSM</string>
+    <string name="make_round_trip_descr">Dodaj kopijo začetne točke kot ciljno.</string>
+    <string name="make_round_trip">Ustvari krožno potovanje</string>
+    <string name="shared_string_navigate">Začni z navigacijo</string>
+    <string name="marker_save_as_track_descr">Izvozi oznake v datoteko:</string>
+    <string name="make_active">Označi kot dejavno</string>
     </resources>

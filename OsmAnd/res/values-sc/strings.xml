@@ -2391,7 +2391,7 @@ Si istimas OsmAnd e OSM e los boles suportare, custa est una manera perfeta pro 
     <string name="osmo_share_location">Cumpartzi</string>
     <string name="osmo_pause_location">Pone in pàusa</string>
     <string name="osmo_service_running">Su servìtziu OsMo est allutu</string>
-    <string name="trip_rec_notification_settings">Registratzione biàgios (datu perunu)</string>
+    <string name="trip_rec_notification_settings">Abìlita sa registratzione biàgios lestra</string>
     <string name="trip_rec_notification_settings_desc">Ammustra una notìfica chi permitit de incumintzare a registrare su biàgiu</string>
     <string name="shared_string_notifications">Notìficas</string>
     <string name="gpx_no_tracks_title">Non tenes galu rastas registradas</string>
@@ -2808,4 +2808,10 @@ Pro praghere iscrie su còdighe intreu</string>
     <string name="marker_save_as_track">Sarva comente rasta</string>
     <string name="move_to_history">Pone in sa cronologia</string>
     <string name="group_will_be_removed_after_restart">Su grupu at a èssere iscantzelladu a pustis de s\'allughìngiu imbeniente</string>
+    <string name="osn_modify_dialog_error">B\'est istadu un\'errore: sa nota no est istada modificada</string>
+    <string name="osn_modify_dialog_title">Modìfica sa nota</string>
+    <string name="context_menu_item_modify_note">Modìfica sa nota OSM</string>
+    <string name="make_round_trip_descr">Annanghe una còpia de su puntu de incumintzu comente destinatzione.</string>
+    <string name="make_round_trip">Faghe unu biàgiu tzirculare</string>
+    <string name="shared_string_navigate">Nàviga</string>
     </resources>
