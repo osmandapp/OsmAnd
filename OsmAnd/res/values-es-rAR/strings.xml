@@ -2790,6 +2790,6 @@ Proporciona un código completo</string>
     <string name="make_round_trip">Viaje de ida y vuelta</string>
     <string name="shared_string_navigate">Navegar</string>
     <string name="osn_modify_dialog_error">Excepción ocurrida: el informe de problema no se modificó</string>
-    <string name="osn_modify_dialog_title">Modificar informe de problema</string>
+    <string name="osn_modify_dialog_title">Modificar informe</string>
     <string name="context_menu_item_modify_note">Modificar informe de problema OSM</string>
     </resources>
