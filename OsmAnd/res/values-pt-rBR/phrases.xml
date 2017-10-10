@@ -2785,4 +2785,8 @@
 
 	<string name="poi_wiki_link">Wikipedia</string>
 
+	<string name="poi_brushless">Sem bucha</string>
+	<string name="poi_pump">Bomba</string>
+	<string name="poi_scout_camp">Acampamento de escoteiros</string>
+	<string name="poi_backcountry">Interior</string>
 	</resources>
