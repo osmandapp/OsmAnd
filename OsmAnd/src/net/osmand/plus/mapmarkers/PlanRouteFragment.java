@@ -41,6 +41,8 @@ import net.osmand.plus.OsmAndFormatter;
 import net.osmand.plus.OsmandApplication;
 import net.osmand.plus.OsmandSettings;
 import net.osmand.plus.R;
+import net.osmand.plus.TargetPointsHelper;
+import net.osmand.plus.TargetPointsHelper.TargetPoint;
 import net.osmand.plus.activities.MapActivity;
 import net.osmand.plus.helpers.AndroidUiHelper;
 import net.osmand.plus.mapmarkers.PlanRouteOptionsBottomSheetDialogFragment.PlanRouteOptionsFragmentListener;
@@ -48,6 +50,7 @@ import net.osmand.plus.mapmarkers.adapters.MapMarkersItemTouchHelperCallback;
 import net.osmand.plus.mapmarkers.adapters.MapMarkersListAdapter;
 import net.osmand.plus.measurementtool.SnapToRoadBottomSheetDialogFragment;
 import net.osmand.plus.measurementtool.SnapToRoadBottomSheetDialogFragment.SnapToRoadFragmentListener;
+import net.osmand.plus.routing.RoutingHelper;
 import net.osmand.plus.views.MapMarkersLayer;
 import net.osmand.plus.views.OsmandMapTileView;
 import net.osmand.plus.views.mapwidgets.MapInfoWidgetsFactory;
@@ -380,7 +383,35 @@ public class PlanRouteFragment extends Fragment {
 			@Override
 			public void navigateOnClick() {
 				if (mapActivity != null) {
-					Toast.makeText(mapActivity, "navigate", Toast.LENGTH_SHORT).show();
+					boolean hasTargets = false;
+					TargetPointsHelper targetPointsHelper = mapActivity.getMyApplication().getTargetPointsHelper();
+					List<MapMarker> markers = markersHelper.getSelectedMarkers();
+					if (markers.size() > 0) {
+						int i = 0;
+						if (markersHelper.isStartFromMyLocation()) {
+							targetPointsHelper.clearStartPoint(false);
+						} else {
+							MapMarker m = markers.get(i++);
+							targetPointsHelper.setStartPoint(new LatLon(m.getLatitude(), m.getLongitude()),
+									false, m.getPointDescription(mapActivity));
+						}
+						List<TargetPoint> targetPoints = new ArrayList<>();
+						for (int k = i; k < markers.size(); k++) {
+							MapMarker m = markers.get(k);
+							TargetPoint t = new TargetPoint(new LatLon(m.getLatitude(), m.getLongitude()),
+									m.getPointDescription(mapActivity));
+							targetPoints.add(t);
+						}
+						RoutingHelper routingHelper = mapActivity.getRoutingHelper();
+						boolean updateRoute = routingHelper.isFollowingMode() || routingHelper.isRoutePlanningMode();
+						targetPointsHelper.reorderAllTargetPoints(targetPoints, updateRoute);
+						hasTargets = true;
+					} else {
+						targetPointsHelper.clearStartPoint(false);
+						targetPointsHelper.clearPointToNavigate(false);
+					}
+					dismiss();
+					mapActivity.getMapLayers().getMapControlsLayer().doRoute(hasTargets);
 				}
 			}
 
@@ -682,14 +713,17 @@ public class PlanRouteFragment extends Fragment {
 			showHideMarkersList();
 			return false;
 		} else {
-			dismiss(getMapActivity());
+			dismiss();
 			return true;
 		}
 	}
 
-	private void dismiss(MapActivity activity) {
-		planRouteContext.setFragmentVisible(false);
-		activity.getSupportFragmentManager().beginTransaction().remove(this).commitAllowingStateLoss();
+	private void dismiss() {
+		MapActivity activity = getMapActivity();
+		if (activity != null) {
+			planRouteContext.setFragmentVisible(false);
+			activity.getSupportFragmentManager().beginTransaction().remove(this).commitAllowingStateLoss();
+		}
 	}
 
 	public static boolean showInstance(MapActivity mapActivity) {
