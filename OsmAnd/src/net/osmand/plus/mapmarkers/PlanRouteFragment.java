@@ -24,12 +24,12 @@ import android.widget.ImageView;
 import android.widget.LinearLayout;
 import android.widget.ProgressBar;
 import android.widget.TextView;
-import android.widget.Toast;
 
 import net.osmand.AndroidUtils;
 import net.osmand.Location;
 import net.osmand.TspAnt;
 import net.osmand.data.LatLon;
+import net.osmand.data.PointDescription;
 import net.osmand.data.RotatedTileBox;
 import net.osmand.plus.ApplicationMode;
 import net.osmand.plus.GPXUtilities.TrkSegment;
@@ -402,6 +402,20 @@ public class PlanRouteFragment extends Fragment {
 									m.getPointDescription(mapActivity));
 							targetPoints.add(t);
 						}
+						if (mapActivity.getMyApplication().getSettings().ROUTE_MAP_MARKERS_ROUND_TRIP.get()) {
+							TargetPoint end = targetPointsHelper.getPointToStart();
+							if (end == null) {
+								Location loc = mapActivity.getMyApplication().getLocationProvider().getLastKnownLocation();
+								if (loc != null) {
+									end = TargetPoint.createStartPoint(new LatLon(loc.getLatitude(), loc.getLongitude()),
+											new PointDescription(PointDescription.POINT_TYPE_MY_LOCATION,
+													getString(R.string.shared_string_my_location)));
+								}
+							}
+							if (end != null) {
+								targetPoints.add(end);
+							}
+						}
 						RoutingHelper routingHelper = mapActivity.getRoutingHelper();
 						boolean updateRoute = routingHelper.isFollowingMode() || routingHelper.isRoutePlanningMode();
 						targetPointsHelper.reorderAllTargetPoints(targetPoints, updateRoute);
@@ -418,7 +432,9 @@ public class PlanRouteFragment extends Fragment {
 			@Override
 			public void makeRoundTripOnClick() {
 				if (mapActivity != null) {
-					Toast.makeText(mapActivity, "make round trip", Toast.LENGTH_SHORT).show();
+					OsmandSettings settings = mapActivity.getMyApplication().getSettings();
+					settings.ROUTE_MAP_MARKERS_ROUND_TRIP.set(!settings.ROUTE_MAP_MARKERS_ROUND_TRIP.get());
+					planRouteContext.recreateSnapTrkSegment();
 				}
 			}
 
