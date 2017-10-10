@@ -2175,7 +2175,7 @@
     <string name="quick_action_btn_tutorial_descr">Ekrandaki konumunu değiştirmek için düğmeye uzun dokunun ve sürükleyin.</string>
     <string name="restart_search">Aramayı yeniden başlatın</string>
     <string name="increase_search_radius">Arama yarıçapını artır</string>
-    <string name="nothing_found">Hiçbirşey Bulunamadı :(</string>
+    <string name="nothing_found">Hiçbir şey bulunamadı :(</string>
     <string name="nothing_found_descr">Arama sorgusunu değiştirmeyi veya aramanın yarıçapını arttırmayı deneyin</string>
     <string name="search_favorites">Favorileri ara</string>
     <string name="hillshade_menu_download_descr">Ressamın dağınık tonlamasını harita üzerinde görmek için, bu bölgenin tepe çıkıntı yerpaylaşım haritasını indirmeniz gerekir.</string>
@@ -2196,7 +2196,7 @@
     <string name="animate_my_location_desc">Geçici konum kaybı düzeltmesi sırasında konumum dışa değerini kaldırmayı etkinleştir</string>
     <string name="shared_string_overview">Genel bakış</string>
     <string name="select_street">Sokağı seçin</string>
-    <string name="type_address">Adres yazın</string>
+    <string name="type_address">Adresi yazın</string>
     <string name="quick_action_btn_tutorial_title">Düğme konumunu değiştir</string>
     <string name="store_tracks_in_monthly_directories_descrp">Kayıtlı parçaları, kayıt ayına (2017-01 gibi) alt klasörler halinde depolayın.</string>
     <string name="shared_string_reset">Reset</string>
@@ -2214,7 +2214,7 @@
     <string name="select_city">Şehir seç</string>
     <string name="select_postcode">Posta kodu seç</string>
     <string name="quick_action_add_destination">Hedef ekle</string>
-    <string name="quick_action_replace_destination"></string>
+    <string name="quick_action_replace_destination"/>
     <string name="sea_depth_thanks">Denizel derinlik konturlarını satın aldığınız için teşekkür ederiz!</string>
     <string name="index_item_depth_contours_osmand_ext">Denizel derinlik konturları</string>
     <string name="index_item_depth_points_southern_hemisphere">Güney yarı küre denizel derinlik noktaları</string>
