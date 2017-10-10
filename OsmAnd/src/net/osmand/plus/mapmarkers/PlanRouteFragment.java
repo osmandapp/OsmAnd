@@ -78,6 +78,7 @@ public class PlanRouteFragment extends Fragment {
 	private boolean nightMode;
 	private boolean portrait;
 	private boolean wasCollapseButtonVisible;
+	private boolean cancelSnapToRoad = true;
 
 	private View mainView;
 	private RecyclerView markersRv;
@@ -305,7 +306,7 @@ public class PlanRouteFragment extends Fragment {
 			}
 		});
 		boolean isSmartphone = getResources().getConfiguration().smallestScreenWidthDp < 600;
-		markersRv.setPadding(0, 0, 0, AndroidUtils.dpToPx(mapActivity, isSmartphone ? 72 : 108));
+		markersRv.setPadding(0, 0, 0, AndroidUtils.dpToPx(mapActivity, isSmartphone ? 8 : 12));
 		markersRv.setClipToPadding(false);
 		markersRv.setLayoutManager(new LinearLayoutManager(getContext()));
 		markersRv.setAdapter(adapter);
@@ -539,7 +540,9 @@ public class PlanRouteFragment extends Fragment {
 
 			mapActivity.getMapView().setMapPosition(previousMapPosition);
 
-			planRouteContext.cancelSnapToRoad();
+			if (cancelSnapToRoad) {
+				planRouteContext.cancelSnapToRoad();
+			}
 			markersLayer.setRoute(null);
 			mapActivity.refreshMap();
 		}
@@ -610,6 +613,7 @@ public class PlanRouteFragment extends Fragment {
 	private void showHideMarkersList() {
 		MapActivity mapActivity = getMapActivity();
 		if (mapActivity != null && portrait) {
+			cancelSnapToRoad = false;
 			planRouteContext.setMarkersListOpened(!planRouteContext.isMarkersListOpened());
 			int containerRes = planRouteContext.isMarkersListOpened() ? R.id.fragmentContainer : R.id.bottomFragmentContainer;
 			mapActivity.getSupportFragmentManager().beginTransaction()
