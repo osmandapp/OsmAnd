@@ -212,7 +212,7 @@ public class MapMarkersLayer extends OsmandMapLayer implements IContextMenuProvi
 			route.drawRenderers(view.getZoom(), paint, canvas, tileBox);
 		}
 
-		if (markersHelper.isStartFromMyLocation() && myLoc != null) {
+		if (map.getMyApplication().getSettings().SHOW_LINES_TO_FIRST_MARKERS.get() && myLoc != null) {
 			lineAttrs.updatePaints(view, nightMode, tileBox);
 			textAttrs.updatePaints(view, nightMode, tileBox);
 			textAttrs.paint.setStyle(Paint.Style.FILL);
@@ -247,9 +247,9 @@ public class MapMarkersLayer extends OsmandMapLayer implements IContextMenuProvi
 					float centerToMarkerDist = (float) MapUtils.getDistance(tileBox.getLatLonFromPixel(pos[0], pos[1]), marker.getLatitude(), marker.getLongitude());
 					String centerToMarkerDistSt = OsmAndFormatter.getFormattedDistance(centerToMarkerDist, view.getApplication());
 					if (locX >= markerX) {
-						distanceText = centerToMarkerDistSt + " | " + generalDistSt;
+						distanceText = centerToMarkerDistSt + " • " + generalDistSt;
 					} else {
-						distanceText = generalDistSt + " | " + centerToMarkerDistSt;
+						distanceText = generalDistSt + " • " + centerToMarkerDistSt;
 					}
 				} else {
 					distanceText = generalDistSt;
