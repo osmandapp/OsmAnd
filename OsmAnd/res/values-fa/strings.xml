@@ -126,7 +126,7 @@
 	<string name="show_cameras">دوربین‌های کنترل سرعت</string>
 	<string name="show_traffic_warnings">هشدارهای ترافیکی</string>
 	<string name="avoid_toll_roads">اجتناب از جاد‌ه‌های دارای عوارضی</string>
-	<string name="continue_follow_previous_route_auto">مسیریابی قبلی ناتمام مانده بود. آن را ادامه می‌دهید؟ (%1$s ثانیه)</string>
+	<string name="continue_follow_previous_route_auto">راهبری قبلی ناتمام ماند. آن را ادامه می‌دهید؟ (%1$s ثانیه)</string>
 	<string name="route_updated_loc_found">به‌محض پیداشدن موقعیت کنونی، مسیر محاسبه می‌شود</string>
 	<string name="osmand_parking_hours">ساعت</string>
 	<string name="osmand_parking_minutes">دقیقه</string>
@@ -469,7 +469,7 @@
 	<string name="prefs_plugins">افزونه‌ها</string>
 	<string name="debugging_and_development">توسعهٔ OsmAnd</string>
 	<string name="send_files_to_osm">فایل‌های GPX به OSM ارسال شوند؟</string>
-	<string name="gpx_visibility_txt">قابلیت دید</string>
+	<string name="gpx_visibility_txt">محرمانگی</string>
 	<string name="gpx_tags_txt">برچسب‌ها</string>
 	<string name="gpx_description_txt">توضیحات</string>
 	<string name="validate_gpx_upload_name_pwd">برای آپلودکردن فایل‌های GPX لطفاً نام کاربری و رمز عبور OSM خود را وارد کنید.</string>
@@ -657,8 +657,8 @@
 	<string name="settings_preset_descr">نمای نقشه و تنظیمات مسیریابی برای هر پروفایل جداگانه ذخیره می‌شود. پروفایل پیش‌فرض خود را اینجا تنظیم کنید.</string>
     <string name="osmand_background_plugin_description">تنظیمات مربوط به فعال‌سازی ردگیری و مسیریابی در حالت پس‌زمینه (صفحه خاموش) را نشان می‌دهد که با ارسال بیدارباش‌های متناوب به جی‌پی‌اس دستگاه این کار را انجام می‌دهد.</string>
     <string name="av_def_action_choose">انتخاب برحسب تقاضا</string>
-    <string name="audionotes_location_not_defined">مکانی برای ثبت یادداشت تعیین نشده است.
-\nیک مکان را مشخص و سپس از طریق منوی زمینه اقدام کنید.</string>
+    <string name="audionotes_location_not_defined">مکانی برای یادداشت‌گذاری تعیین نشده است.
+\nمکانی را مشخص و از طریق منوی زمینه اقدام کنید.</string>
     <string name="rendering_attr_showRoadMaps_description">انتخاب کنید چه زمانی نقشه‌های فقط-جاده‌ای نشان داده شود:</string>
 	<string name="target_points">مقصدها</string>
     <string name="ending_point_too_far">نقطهٔ پایانی از نزدیک‌ترین جاده خیلی دور است.</string>
@@ -1091,7 +1091,9 @@
 	
 	<string name="asap">دراسرع‌وقت</string>
 	<string name="osmand_rastermaps_plugin_description">با استفاده از این افزونه به انواع مختلفی از نقشه‌های آنلاین (نقشه‌های کاشی‌مانند یا رَستر) دسترسی پیدا می‌کنید. این نقشه‌ها از کاشی‌های پیش‌فرض OpenStreetMap (مانند مَپنیک) تا تصاویر ماهواره‌ای و لایه‌های خاص مانند نقشه‌های آب‌و‌هوایی، هواشناسی، جغرافیایی و لایه‌های تپه‌ماهوری و... را در بر می‌گیرد. 
+\n
 \nهرکدام از این نقشه‌ها هم به‌عنوان نقشهٔ اصلی (یا پایه) و هم به‌عنوان لایهٔ رو یا زیر لایهٔ اصلی (مثلاً نقشه‌های آفلاین و استاندارد OsmAnd) قابل‌نمایش هستند. برای اینکه لایهٔ زیری را نمایان‌تر کنید می‌توانید اجزای خاصی را در نقشه‌های بُرداری OsmAnd از طریق منوی «پیکربندی نقشه» مخفی کنید. 
+\n
 \nنقشه‌های کاشی‌مانند مستقیماً از طریق منابع آنلاین قابل‌دریافت هستند یا می‌توان آن‌ها را به‌صورت پایگاه داده SQLite برای استفادهٔ آفلاین (با قراردادن در پوشهٔ دیتای OsmAnd) آماده کرد که برنامه‌های مختلفی برای آماده‌سازی آن وجود دارد.</string>
 	
 	<string name="osmand_accessibility_description">این افزونه امکانات قابلیت‌دسترسی (accessibility) در دستگاهتان را مستقیماً در OsmAnd به‌کار می‌گیرد و تسهیلاتی را در اختیارتان می‌گذارد؛ مانند تنظیم‌کردن سرعت گفتار موتور صوتی، خوانش متن (مثل اعلام موقعیت شما)، تنظیم صفحهٔ جهتی برای پیمایش صفحه و استفاده از توپک برای تنظیم بزرگ‌نمایی.</string>
@@ -1139,7 +1141,7 @@
 	<string name="local_index_items_deleted">%1$d مورد از %2$d مورد حذف شد.</string>
 	<string name="local_index_items_restored">%1$d مورد از %2$d مورد فعال شد.</string>
 	<string name="local_index_no_items_to_do">هیچ‌موردی برای %1$s وجود ندارد</string>
-	<string name="local_index_action_do">دارید %1$s مورد را %2$s می‌کنید. ادامه می‌دهید؟</string>
+	<string name="local_index_action_do">دارید %2$s مورد را %1$s می‌کنید. ادامه می‌دهید؟</string>
 	
 	<string name="trace_rendering">اطلاعات عیب‌یابی رندرینگ</string>
 	<string name="trace_rendering_descr">عملکرد رندرینگ را نمایش می‌دهد</string>
@@ -1306,7 +1308,7 @@
     <string name="route_preferences">ترجیحات مسیر</string>
     <string name="route_info">اطلاعات مسیر</string>
     <string name="use_displayed_track_for_navigation">آیا از مسیر نمایش‌داده‌شده برای مسیریابی استفاده می‌کنید؟</string>
-    <string name="keep_and_add_destination_point">افزودن به‌عنوان مقصد نهایی</string>
+    <string name="keep_and_add_destination_point">افزودن به‌عنوان مقصد آخر</string>
     
     <string name="calculate_osmand_route_without_internet">محاسبهٔ مسیر بدون استفاده از اینترنت</string>
     <string name="gpx_option_calculate_first_last_segment">برای قطعهٔ ابتدایی و قطعهٔ انتهای مسیر، مسیریابی کن</string>
@@ -1596,6 +1598,7 @@
 	<string name="save_track_to_gpx_globally_descr">می‌توانید ثبت موقعیت در فایل GPX را با استفاده از ابزارک ضبط GPX روی صفحهٔ نقشه، خاموش یا روشن کنید</string>
 	<string name="save_track_interval_globally">فاصلهٔ زمانی ورود</string>
 	<string name="record_plugin_description">با این افزونه می‌توانید همهٔ مسیرهایتان را ضبط و ذخیره کنید؛ چه آن مسیرهایی که خودتان می‌روید و چه مسیرهایی که با مسیریابی خواهید پیمود. برای این منظور ابزارک ضبط جی‌پی‌ایکس را بر روی صفحهٔ نقشه لمس کنید. 
+\n
 \nمی‌توانید مسیرهای ضبط‌شده را با دوستان یا برای استفاده در مشارکت‌های OSM به‌اشتراک بگذارید. ورزشکاران می‌توانند برای کنترل تمرین‌هایشان از مسیرهای ضبط‌شده استفاده کنند. برنامهٔ OsmAnd آنالیزهای ساده‌ای مانند مدت مسیر، سرعت متوسط و... را انجام می‌دهد و البته می‌توان این مسیرها را به سایر برنامه‌های تجزیه‌وتحلیل هم داد.</string>
     <string name="lang_al">آلبانیایی</string>
 	<string name="lang_ar">عربی</string>
@@ -2115,7 +2118,7 @@
     <string name="gpx_track">مسیر</string>
     <string name="shared_string_time_span">مدت زمان</string>
     <string name="select_gpx_folder">پوشهٔ مسیر را انتخاب کنید</string>
-    <string name="shared_string_tracks">مسیرها</string>
+    <string name="shared_string_tracks">Tracks</string>
     <string name="route_altitude">ارتفاع مسیر</string>
     <string name="altitude_descent">نزول</string>
     <string name="altitude_ascent">صعود</string>
@@ -2757,4 +2760,9 @@
     <string name="osmand_extended_description_part1">OsmAnd (مخفف OSM Automated Navigation Directions به‌معنی راهبری خودکار با نقشهٔ OSM) یک نرم‌افزار نقشه و راهبری است که به گسترهٔ وسیعی از داده‌های نقشهٔ باز شهری (OpenStreetMap یا به‌صورت خلاصه OSM) دسترسی دارد. این داده‌های رایگان و جهانی با بالاترین کیفیت ارائه می‌شوند.
 \nراهبر دیداری و شنیداری، مشاهدهٔ مکان‌های محبوب (POIها یا Ponts of interest)، ایجاد و مدیریت ردهای GPX، استفاده از تصویرسازی‌های منحنی‌های تراز و اطلاعات ارتفاع (با استفاده از افزونه)، انتخاب حالت‌های پیاده، دوچرخه، خودرو، امکان ویرایش مکان‌ها و... چیزهایی هستند که تجربهٔ مؤثر و لذت‌بخشی در کار با نقشه را برایتان به ارمغان می‌آورند.</string>
     <string name="osmand_extended_description_part2">راهبری با GPS • امکان انتخاب بین حالت آنلاین و آفلاین دارید؛ در حالت آفلاین هزینهٔ دیگری بابت اینترنت نمی‌پردازید و در حالت آنلاین عملکرد سریع‌تری را تجربه می‌کنید • راهنمای گام‌به‌گام صوتی که در پیمودن مسیر راهنمایی‌تان می‌کند (با پیام‌های صوتی انسانی و ماشینی) • اگر از مسیر منحرف شوید، مسیر جدیدی برایتان پیدا می‌کند • راهنمای خطوط عبوری، نام خیابان‌ها و زمان تخمینی رسیدن را دریافت می‌کنید که در طول مسیر راهنمای شماست • برای داشتن سفری ایمن‌تر، حالات شب/روز به‌صورت خودکار انتخاب می‌شود • اعلام محدودیت‌های سرعت را فعال کنید تا در صورت تجاوز از سرعت مجاز به شما هشدار دهد • بزرگ‌نمایی نقشه متناسب با سرعتتان تنظیم می‌شود • با استفاده از نشانی، نوع مکان (مثلاً پارکینگ، رستوران، هتل، پمپ گاز، موزه) یا مختصات جغرافیایی به جست‌وجو بپردازید • نقاط بین‌راهی مسیرتان را مشخص کنید • رد خودتان را ثبت کنید یا یک رد GPX را بارگیری و آن را دنبال کنید</string>
+    <string name="distance_moving">مسافت اصلاح‌شده</string>
+    <string name="legacy_search">جست‌وجوی موروثی</string>
+    <string name="show_legacy_search">نمایش جست‌وجوی موروثی</string>
+    <string name="show_legacy_search_desc">جست‌وجوی موروثی را به منو اضافه می‌کند</string>
+    <string name="osmand_extended_description_part3">نقشه • نقاط محبوب (POI یا Points of interest) اطرافتان را نشان می‌دهد • نقشه را در راستای حرکتتان (یا قطب‌نما) تنظیم می‌کند • موقعیتتان یا جایی را که جست‌وجو کرده‌اید، نشانتان می‌دهد • موقعیتتان را با دوستانتان به‌اشتراک بگذارید تا شما را پیدا کنند • جاهایی را که دوست دارید در قسمت نقاط برگزیده ذخیره کنید • شیوهٔ نمایش نام‌های روی نقشه را انتخاب کنید: انگلیسی، محلی یا نویسه‌گردانی‌شده • نمایش نقشه‌های تخصصی آنلاین، تصاویر ماهواره‌ای (بینگ) و رولایه‌های مختلف مانند مسیرهای گردشگردی یا راهبری GPX با امکان تنظیم شفافیت</string>
     </resources>
