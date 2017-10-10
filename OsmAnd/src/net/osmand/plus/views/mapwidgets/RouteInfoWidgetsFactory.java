@@ -904,6 +904,7 @@ public class RouteInfoWidgetsFactory {
 
 		public void updateBounds() {
 			float w = 0;
+			int h = 0;
 			float coef = scaleCoefficient / miniCoeff;
 			if (lanes != null) {
 				for (int i = 0; i < lanes.length; i++) {
@@ -920,11 +921,15 @@ public class RouteInfoWidgetsFactory {
 						} else {
 							w += b.getWidth();
 						}
+						int bitmapHeight = b.getHeight();
+						if (bitmapHeight > h) {
+							h = bitmapHeight;
+						}
 					}
 				}
 			}
 			width = (int) w;
-			height = (int) (54 * coef);
+			height = h;
 		}
 		
 		@Override
