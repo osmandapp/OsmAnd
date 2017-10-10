@@ -2921,4 +2921,5 @@ Rappresenta l\'area: %1$s x %2$s</string>
     <string name="import_track_desc">Il file %1$s non contiene punti intermedi, importarlo come traccia?</string>
     <string name="move_point">Sposta il punto</string>
     <string name="add_segment_to_the_track">Aggiungi a una traccia GPX</string>
-</resources>
+<string name="osn_modify_dialog_error">Si é verificato un errore: la nota non è stata modificata</string>
+    </resources>
