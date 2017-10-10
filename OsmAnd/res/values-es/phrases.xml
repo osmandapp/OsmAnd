@@ -3531,4 +3531,11 @@
 	<string name="poi_government_transportation">Institución de transporte</string>
 	<string name="poi_government_legislative">Institución legislativa</string>
 
+<string name="poi_seamark_clearance_height">Altura de seguridad</string>
+	<string name="poi_seamark_clearance_height_closed">Altura de seguridad (cerrado)</string>
+	<string name="poi_seamark_clearance_height_open">Altura de seguridad (abierto)</string>
+	<string name="poi_seamark_clearance_width">Anchura de seguridad</string>
+
+	<string name="poi_vhf">Canal VHF</string>
+
 </resources>
