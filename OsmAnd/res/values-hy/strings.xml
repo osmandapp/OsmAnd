@@ -190,7 +190,7 @@
     <string name="marker_moved_to_active">Քարտեզի Մարկերները տեղափոխվեցին ակտիվ</string>
     <string name="shared_string_list">Ցուցակ</string>
     <string name="shared_string_groups">Խմբեր</string>
-    <string name="passed">Անցավ `% 1 $ s</string>
+    <string name="passed">Անցավ `%1$s</string>
     <string name="make_active">Ակտիվացնել</string>
     <string name="today">Այսօր</string>
     <string name="yesterday">Երեկ</string>
