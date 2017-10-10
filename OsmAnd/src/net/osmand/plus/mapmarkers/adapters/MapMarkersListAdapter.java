@@ -99,6 +99,8 @@ public class MapMarkersListAdapter extends RecyclerView.Adapter<MapMarkerItemVie
 			}
 		});
 		holder.bottomShadow.setVisibility(lastMarkerItem ? View.VISIBLE : View.GONE);
+		holder.iconReorder.setVisibility(View.VISIBLE);
+		holder.iconReorder.setImageDrawable(iconsCache.getThemedIcon(R.drawable.ic_action_reorder));
 
 		holder.firstDescription.setVisibility((start || finish) ? View.VISIBLE : View.GONE);
 		if (start) {
@@ -116,11 +118,11 @@ public class MapMarkersListAdapter extends RecyclerView.Adapter<MapMarkerItemVie
 
 		if (locationItem) {
 			holder.topDivider.setVisibility(View.VISIBLE);
-			holder.flagIconLeftSpace.setVisibility(View.VISIBLE);
 			holder.icon.setImageDrawable(ContextCompat.getDrawable(mapActivity, R.drawable.map_pedestrian_location));
 			holder.point.setVisibility(View.GONE);
 			holder.checkBox.setChecked(app.getMapMarkersHelper().isStartFromMyLocation());
-			holder.iconReorder.setVisibility(View.GONE);
+			holder.iconReorder.setAlpha(.5f);
+			holder.iconReorder.setOnTouchListener(null);
 			holder.description.setVisibility(View.GONE);
 			holder.distance.setVisibility(View.GONE);
 		} else {
@@ -132,8 +134,7 @@ public class MapMarkersListAdapter extends RecyclerView.Adapter<MapMarkerItemVie
 			holder.point.setVisibility(View.VISIBLE);
 			holder.checkBox.setChecked(marker.selected);
 
-			holder.iconReorder.setVisibility(View.VISIBLE);
-			holder.iconReorder.setImageDrawable(iconsCache.getThemedIcon(R.drawable.ic_action_reorder));
+			holder.iconReorder.setAlpha(1f);
 			holder.iconReorder.setOnTouchListener(new View.OnTouchListener() {
 				@Override
 				public boolean onTouch(View view, MotionEvent event) {
