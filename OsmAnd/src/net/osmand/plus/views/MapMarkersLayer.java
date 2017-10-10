@@ -71,7 +71,7 @@ public class MapMarkersLayer extends OsmandMapLayer implements IContextMenuProvi
 
 	private final RenderingLineAttributes lineAttrs = new RenderingLineAttributes("measureDistanceLine");
 	private final RenderingLineAttributes textAttrs = new RenderingLineAttributes("rulerLineFont");
-	private Paint paint;
+	private final RenderingLineAttributes planRouteAttrs = new RenderingLineAttributes("markerPlanRouteline");
 	private TrkSegment route;
 
 	private TIntArrayList tx = new TIntArrayList();
@@ -81,6 +81,7 @@ public class MapMarkersLayer extends OsmandMapLayer implements IContextMenuProvi
 	private ContextMenuLayer contextMenuLayer;
 
 	private boolean inPlanRouteMode;
+	private boolean defaultAppMode = true;
 
 	public MapMarkersLayer(MapActivity map) {
 		this.map = map;
@@ -96,6 +97,10 @@ public class MapMarkersLayer extends OsmandMapLayer implements IContextMenuProvi
 
 	public void setInPlanRouteMode(boolean inPlanRouteMode) {
 		this.inPlanRouteMode = inPlanRouteMode;
+	}
+
+	public void setDefaultAppMode(boolean defaultAppMode) {
+		this.defaultAppMode = defaultAppMode;
 	}
 
 	private void initUI() {
@@ -119,15 +124,6 @@ public class MapMarkersLayer extends OsmandMapLayer implements IContextMenuProvi
 		bitmapPaintDestYellow = createPaintDest(R.color.marker_yellow);
 		bitmapPaintDestTeal = createPaintDest(R.color.marker_teal);
 		bitmapPaintDestPurple = createPaintDest(R.color.marker_purple);
-
-		paint = new Paint();
-		paint.setStyle(Paint.Style.STROKE);
-		paint.setStrokeWidth(7 * view.getDensity());
-		paint.setAntiAlias(true);
-		paint.setStrokeCap(Paint.Cap.ROUND);
-		paint.setStrokeJoin(Paint.Join.ROUND);
-		paint.setColor(ContextCompat.getColor(map, R.color.marker_red));
-		paint.setAlpha(200);
 
 		float textSize = TEXT_SIZE * map.getResources().getDisplayMetrics().density;
 		textAttrs.paint.setTextSize(textSize);
@@ -207,9 +203,10 @@ public class MapMarkersLayer extends OsmandMapLayer implements IContextMenuProvi
 		List<MapMarker> activeMapMarkers = markersHelper.getMapMarkers();
 
 		if (route != null && route.points.size() > 0) {
+			planRouteAttrs.updatePaints(view, nightMode, tileBox);
 			route.renders.clear();
 			route.renders.add(new Renderable.StandardTrack(new ArrayList<>(route.points), 17.2));
-			route.drawRenderers(view.getZoom(), paint, canvas, tileBox);
+			route.drawRenderers(view.getZoom(), defaultAppMode ? planRouteAttrs.paint : planRouteAttrs.paint2, canvas, tileBox);
 		}
 
 		if (map.getMyApplication().getSettings().SHOW_LINES_TO_FIRST_MARKERS.get() && myLoc != null) {

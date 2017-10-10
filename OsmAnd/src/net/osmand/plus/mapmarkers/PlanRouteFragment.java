@@ -354,6 +354,10 @@ public class PlanRouteFragment extends Fragment {
 			@Override
 			public void onApplicationModeItemClick(ApplicationMode mode) {
 				if (planRouteContext.getSnappedMode() != mode) {
+					MapMarkersLayer layer = getMapMarkersLayer();
+					if (layer != null) {
+						layer.setDefaultAppMode(mode == ApplicationMode.DEFAULT);
+					}
 					planRouteContext.getSnappedToRoadPoints().clear();
 					planRouteContext.setSnappedMode(mode);
 					planRouteContext.recreateSnapTrkSegment();
