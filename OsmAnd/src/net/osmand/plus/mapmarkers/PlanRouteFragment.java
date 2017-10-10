@@ -270,10 +270,11 @@ public class PlanRouteFragment extends Fragment {
 				if (pos == RecyclerView.NO_POSITION) {
 					return;
 				}
-				if (pos == 0) {
+				Object item = adapter.getItem(pos);
+				if (item instanceof Location) {
 					markersHelper.setStartFromMyLocation(!mapActivity.getMyApplication().getSettings().ROUTE_MAP_MARKERS_START_MY_LOC.get());
-				} else {
-					MapMarker marker = adapter.getItem(pos);
+				} else if (item instanceof MapMarker) {
+					MapMarker marker = (MapMarker) item;
 					selectedCount = marker.selected ? selectedCount - 1 : selectedCount + 1;
 					marker.selected = !marker.selected;
 					markersHelper.updateMapMarker(marker, false);
@@ -454,6 +455,7 @@ public class PlanRouteFragment extends Fragment {
 			public void reverseOrderOnClick() {
 				if (mapActivity != null) {
 					markersHelper.reverseActiveMarkersOrder();
+					adapter.reloadData();
 					adapter.calculateStartAndFinishPos();
 					adapter.notifyDataSetChanged();
 					planRouteContext.recreateSnapTrkSegment();
@@ -813,6 +815,7 @@ public class PlanRouteFragment extends Fragment {
 				}
 
 				mapActivity.getMyApplication().getMapMarkersHelper().addSelectedMarkersToTop(res);
+				adapter.reloadData();
 				adapter.calculateStartAndFinishPos();
 				adapter.notifyDataSetChanged();
 				planRouteContext.recreateSnapTrkSegment();

@@ -23,6 +23,7 @@ import net.osmand.util.MapUtils;
 import java.text.SimpleDateFormat;
 import java.util.Collections;
 import java.util.Date;
+import java.util.LinkedList;
 import java.util.List;
 import java.util.Locale;
 import java.util.Map;
@@ -33,12 +34,15 @@ public class MapMarkersListAdapter extends RecyclerView.Adapter<MapMarkerItemVie
 	private static final int LOCATION_ITEM_ID = 0;
 
 	private MapActivity mapActivity;
-	private List<MapMarker> markers;
+	private List<Object> items = new LinkedList<>();
 	private MapMarkersListAdapterListener listener;
 
 	private int startPos = -1;
 	private int finishPos = -1;
 	private int firstSelectedMarkerPos = -1;
+
+	private boolean showLocationItem;
+	private Location myLoc;
 
 	private Map<Pair<WptPt, WptPt>, List<WptPt>> snappedToRoadPoints;
 
@@ -52,7 +56,7 @@ public class MapMarkersListAdapter extends RecyclerView.Adapter<MapMarkerItemVie
 
 	public MapMarkersListAdapter(MapActivity mapActivity) {
 		this.mapActivity = mapActivity;
-		markers = mapActivity.getMyApplication().getMapMarkersHelper().getMapMarkers();
+		reloadData();
 	}
 
 	@Override
@@ -73,16 +77,16 @@ public class MapMarkersListAdapter extends RecyclerView.Adapter<MapMarkerItemVie
 		boolean night = app.getDaynightHelper().isNightModeForMapControls();
 		IconsCache iconsCache = app.getIconsCache();
 
-		boolean locationItem = pos == 0;
+		boolean locationItem = showLocationItem && pos == 0;
+		boolean firstMarkerItem = showLocationItem ? pos == 1 : pos == 0;
 		boolean lastMarkerItem = pos == getItemCount() - 1;
 		boolean start = pos == startPos;
 		boolean finish = pos == finishPos && startPos != finishPos;
 		boolean firstSelectedMarker = pos == firstSelectedMarkerPos;
 
-		Location myLoc = app.getLocationProvider().getLastStaleKnownLocation();
 		boolean useLocation = app.getMapMarkersHelper().isStartFromMyLocation() && myLoc != null;
 
-		MapMarker marker = locationItem ? null : getItem(pos);
+		MapMarker marker = locationItem ? null : (MapMarker) getItem(pos);
 
 		holder.mainLayout.setBackgroundColor(ContextCompat.getColor(mapActivity, night ? R.color.bg_color_dark : R.color.bg_color_light));
 		holder.title.setTextColor(ContextCompat.getColor(mapActivity, night ? R.color.color_white : R.color.color_black));
@@ -126,8 +130,7 @@ public class MapMarkersListAdapter extends RecyclerView.Adapter<MapMarkerItemVie
 			holder.description.setVisibility(View.GONE);
 			holder.distance.setVisibility(View.GONE);
 		} else {
-			holder.topDivider.setVisibility(View.GONE);
-			holder.flagIconLeftSpace.setVisibility(View.GONE);
+			holder.topDivider.setVisibility((!showLocationItem && firstMarkerItem) ? View.VISIBLE : View.GONE);
 			if (!iconSettled) {
 				holder.icon.setImageDrawable(iconsCache.getIcon(R.drawable.ic_action_flag_dark, MapMarker.getColorId(marker.colorIndex)));
 			}
@@ -197,16 +200,16 @@ public class MapMarkersListAdapter extends RecyclerView.Adapter<MapMarkerItemVie
 
 	@Override
 	public long getItemId(int position) {
-		return position == 0 ? LOCATION_ITEM_ID : getItem(position).hashCode();
+		return position == 0 && showLocationItem ? LOCATION_ITEM_ID : getItem(position).hashCode();
 	}
 
 	@Override
 	public int getItemCount() {
-		return markers.size() + 1;
+		return items.size();
 	}
 
-	public MapMarker getItem(int position) {
-		return markers.get(position - 1);
+	public Object getItem(int position) {
+		return items.get(position);
 	}
 
 	@Override
@@ -216,10 +219,12 @@ public class MapMarkersListAdapter extends RecyclerView.Adapter<MapMarkerItemVie
 
 	@Override
 	public boolean onItemMove(int from, int to) {
-		if (to == 0) {
+		if (showLocationItem && to == 0) {
 			return false;
 		}
-		Collections.swap(markers, from - 1, to - 1);
+		int offset = showLocationItem ? 1 : 0;
+		Collections.swap(mapActivity.getMyApplication().getMapMarkersHelper().getMapMarkers(), from - offset, to - offset);
+		Collections.swap(items, from, to);
 		notifyItemMoved(from, to);
 		return true;
 	}
@@ -236,12 +241,25 @@ public class MapMarkersListAdapter extends RecyclerView.Adapter<MapMarkerItemVie
 
 	private LatLon getPreviousSelectedMarkerLatLon(int currentMarkerPos) {
 		for (int i = currentMarkerPos - 1; i >= 0; i--) {
-			MapMarker m = markers.get(i);
-			if (m.selected) {
-				return m.point;
+			Object item = items.get(i);
+			if (item instanceof MapMarker) {
+				MapMarker m = (MapMarker) item;
+				if (m.selected) {
+					return m.point;
+				}
 			}
 		}
 		return null;
+	}
+
+	public void reloadData() {
+		items.clear();
+		myLoc = mapActivity.getMyApplication().getLocationProvider().getLastStaleKnownLocation();
+		showLocationItem = myLoc != null;
+		if (showLocationItem) {
+			items.add(myLoc);
+		}
+		items.addAll(mapActivity.getMyApplication().getMapMarkersHelper().getMapMarkers());
 	}
 
 	public void calculateStartAndFinishPos() {
@@ -249,26 +267,34 @@ public class MapMarkersListAdapter extends RecyclerView.Adapter<MapMarkerItemVie
 		boolean startCalculated = false;
 		boolean finishCalculated = false;
 		boolean firstSelectedMarkerCalculated = false;
-		if (app.getMapMarkersHelper().isStartFromMyLocation() && app.getLocationProvider().getLastStaleKnownLocation() != null) {
+		if (app.getMapMarkersHelper().isStartFromMyLocation() && showLocationItem) {
 			startPos = 0;
 			startCalculated = true;
 		}
-		for (int i = 0; i < markers.size(); i++) {
-			if (markers.get(i).selected) {
-				if (!startCalculated) {
-					startPos = i + 1;
-					startCalculated = true;
+		for (int i = 0; i < items.size(); i++) {
+			Object item = items.get(i);
+			if (item instanceof MapMarker) {
+				MapMarker m = (MapMarker) item;
+				if (m.selected) {
+					if (!startCalculated) {
+						startPos = i;
+						startCalculated = true;
+					}
+					firstSelectedMarkerPos = i + 1;
+					firstSelectedMarkerCalculated = true;
+					break;
 				}
-				firstSelectedMarkerPos = i + 1;
-				firstSelectedMarkerCalculated = true;
-				break;
 			}
 		}
-		for (int i = markers.size() - 1; i >= 0; i--) {
-			if (markers.get(i).selected) {
-				finishPos = i + 1;
-				finishCalculated = true;
-				break;
+		for (int i = items.size() - 1; i >= 0; i--) {
+			Object item = items.get(i);
+			if (item instanceof MapMarker) {
+				MapMarker m = (MapMarker) item;
+				if (m.selected) {
+					finishPos = i;
+					finishCalculated = true;
+					break;
+				}
 			}
 		}
 		if (!startCalculated) {
