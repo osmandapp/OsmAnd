@@ -695,6 +695,7 @@
     <string name="rendering_attr_currentTrackColor_description">GPX color</string>
     <string name="rendering_attr_currentTrackWidth_name">GPX width</string>
     <string name="rendering_attr_currentTrackWidth_description">GPX width</string>
+    <string name="rendering_value_darkyellow_name">Dark yellow</string>
     <string name="rendering_value_red_name">Red</string>
     <string name="rendering_value_translucent_red_name">Translucent red</string>
     <string name="rendering_value_orange_name">Orange</string>
