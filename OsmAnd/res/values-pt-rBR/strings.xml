@@ -2205,4 +2205,16 @@ Pôr do Sol: %2$s</string>
     <string name="mapillary_widget_descr">Permite que você contribua rapidamente ao Mapillary</string>
     <string name="mapillary_descr">Fotos ao nível da rua, online, para todos. Descobrir lugares, colaborar, capturar o mundo.</string>
     <string name="mapillary">Mapillary</string>
+    <string name="plugin_mapillary_descr">Fotos ao nível da rua para todos. Descubra lugares, colabore, capture o mundo.</string>
+    <string name="private_access_routing_req">Seu destino está localizado em uma área de acesso privado. Você quer permitir acesso à estradas privadas para esta viagem?</string>
+    <string name="restart_search">Reiniciar pesquisa</string>
+    <string name="increase_search_radius">Aumentar o raio de busca</string>
+    <string name="nothing_found">Não encontrou nada :(</string>
+    <string name="nothing_found_descr">Modificar o texto da pesquisa ou aumentar o raio de busca</string>
+    <string name="quick_action_showhide_osmbugs_title">Mostrar/ocultar Anotações do OSM</string>
+    <string name="quick_action_osmbugs_show">Mostrar Anotações do OSM</string>
+    <string name="quick_action_osmbugs_hide">Ocultar Anotações do OSM</string>
+    <string name="quick_action_showhide_osmbugs_descr">Tocar o botão de ação irá mostrar ou ocultar as Anotações do OSM no mapa.</string>
+    <string name="sorted_by_distance">Classificado por distância</string>
+    <string name="search_favorites">Pesquisar favoritos</string>
     </resources>
