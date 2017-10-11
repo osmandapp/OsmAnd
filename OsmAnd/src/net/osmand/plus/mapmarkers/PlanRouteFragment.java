@@ -66,6 +66,7 @@ import static net.osmand.plus.OsmandSettings.LANDSCAPE_MIDDLE_RIGHT_CONSTANT;
 public class PlanRouteFragment extends Fragment implements OsmAndLocationListener {
 
 	public static final String TAG = "PlanRouteFragment";
+	private static final int MIN_DISTANCE_FOR_RECALCULATE = 50; // in meters
 
 	private MapMarkersHelper markersHelper;
 	private MarkersPlanRouteContext planRouteContext;
@@ -352,20 +353,27 @@ public class PlanRouteFragment extends Fragment implements OsmAndLocationListene
 	public void updateLocation(Location loc) {
 		MapActivity mapActivity = getMapActivity();
 		if (mapActivity != null) {
-			Location location = mapActivity.getMyApplication().getLocationProvider().getLastStaleKnownLocation();
+			final Location location = mapActivity.getMyApplication().getLocationProvider().getLastStaleKnownLocation();
 			boolean newLocation = (this.location == null && location != null) || location == null;
 			boolean locationChanged = this.location != null && location != null
 					&& this.location.getLatitude() != location.getLatitude()
 					&& this.location.getLongitude() != location.getLongitude();
-			if (newLocation || locationChanged) {
-				this.location = location;
-				adapter.reloadData();
-				try {
-					adapter.notifyDataSetChanged();
-				} catch (Exception e) {
-					// to avoid crash because of:
-					// java.lang.IllegalStateException: Cannot call this method while RecyclerView is computing a layout or scrolling
-				}
+			boolean farEnough = locationChanged && MapUtils.getDistance(this.location.getLatitude(), this.location.getLongitude(),
+					location.getLatitude(), location.getLongitude()) >= MIN_DISTANCE_FOR_RECALCULATE;
+			if (newLocation || farEnough) {
+				mapActivity.getMyApplication().runInUIThread(new Runnable() {
+					@Override
+					public void run() {
+						PlanRouteFragment.this.location = location;
+						adapter.reloadData();
+						try {
+							adapter.notifyDataSetChanged();
+						} catch (Exception e) {
+							// to avoid crash because of:
+							// java.lang.IllegalStateException: Cannot call this method while RecyclerView is computing a layout or scrolling
+						}
+					}
+				});
 			}
 		}
 	}
