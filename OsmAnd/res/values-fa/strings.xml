@@ -758,7 +758,7 @@
 	<string name="tts_language_not_supported_title">زبان پشتیبانی نمی‌شود</string>
 	<string name="tts_language_not_supported">موتور تبدیل متن به گفتار (TTS) که روی دستگاهتان نصب است از زبان انتخاب‌شده پشتیبانی نمی‌کند. آیا می‌خواهید در فروشگاه اندروید دنبال موتور TTS دیگری بگردید؟ اگر نه، زبان پیش‌فرض استفاده خواهد شد.</string>
 	<string name="tts_missing_language_data">برای زبان انتخاب‌شده هیچ داده‌ای نصب نشده است. آیا برای نصب به فروشگاه می‌روید؟</string>
-	<string name="preferred_locale_descr">زبان برنامه را انتخاب کنید (لطفاً بعد از تغییر، برنامهٔ OsmAnd را مجدداً راه‌اندازی کنید)</string>
+	<string name="preferred_locale_descr">زبان برنامه را انتخاب کنید (بعد از تغییر، برنامه را مجدداً راه‌اندازی کنید)</string>
 	<string name="preferred_locale">زبان برنامه</string>
 	<string name="rotate_map_none_opt">بدون چرخش نقشه (بالا به‌طرف شمال است)</string>
 	<string name="rotate_map_compass_opt">در جهت قطب‌نما</string>
@@ -959,7 +959,7 @@
 	<string name="background_service_int">فاصلهٔ زمانی بیدارباش GPS</string>
 	<string name="background_service_provider_descr">مشخص کنید سرویس پس‌زمینه، اطلاعات مکانی را چگونه دریافت کند</string>
 	<string name="background_service_provider">ارائه‌دهندهٔ موقعیت</string>
-	<string name="background_router_service_descr">برنامهٔ OsmAnd در پس‌زمینه اجرا می‌ماند تا زمانی‌که صفحه خاموش است موقعیت شما را ردگیری کند</string>
+	<string name="background_router_service_descr">برنامهٔ OsmAnd در پس‌زمینه اجرا می‌ماند تا در زمانی‌که صفحه خاموش است موقعیت شما را ردگیری کند</string>
 	<string name="background_router_service">اجرای OsmAnd در پس‌زمینه</string>
 	<string name="off_router_service_no_gps_available">برای مسیریابی در حالت پس‌زمینه لازم است موقعیت مکانی روشن باشد.</string>
 	<string name="hide_poi_filter">مخفی‌کردن فیلتر</string>
@@ -1574,7 +1574,7 @@
     <string name="rendering_attr_subwayMode_name">مسیرهای مترو</string>
  	<string name="map_preferred_locale_descr">زبان ارجح برای نام‌های روی نقشه (اگر نام به این زبان وجود نداشته باشد، به‌جایش نام انگلیسی یا محلی نشان داده می‌شود)</string>
     <string name="local_map_names">نام‌های محلی</string>
-    <string name="live_monitoring_m_descr">اگر ثبت داده‌های GPX فعال باشد اطلاعات مسیر به یک سرویس اینترنتی مشخص ارسال می‌شود.</string>
+    <string name="live_monitoring_m_descr">اگر ضبط‌کردن GPX فعال باشد اطلاعات مسیر به سرویس اینترنتی مشخص‌شده ارسال می‌شود.</string>
 	<string name="live_monitoring_m">ردیابی آنلاین (GPX لازم است)</string>
     <string name="live_monitoring_start">شروع ردیابی آنلاین</string>
 	<string name="live_monitoring_stop">توقف ردیابی آنلاین</string>
@@ -2146,7 +2146,7 @@
     <string name="osmo_pause_location">مکث</string>
     <string name="osmo_service_running">خدمات OSM در حال اجراست</string>
     <string name="trip_rec_notification_settings">فعال‌کردن شروع فوری ضبط</string>
-    <string name="shared_string_notifications">اطلاعیه‌ها</string>
+    <string name="shared_string_notifications">اعلان‌ها</string>
     <string name="shared_string_continue">ادامه</string>
     <string name="shared_string_pause">مکث</string>
     <string name="shared_string_paused">مکث</string>
@@ -2728,7 +2728,7 @@
     <string name="quick_action_add_create_items">دکمه‌هایی را اضافه کنید</string>
     <string name="quick_action_page_list_descr">با هر بار لمس دکمهٔ عملیاتی، یکی از موارد موجود در لیست زیر را فعال می‌کنید.</string>
     <string name="quick_action_map_style_action">افزودن یک سبک نقشه</string>
-    <string name="empty_state_my_tracks">مسیرها را اضافه و ذخیره کنید</string>
+    <string name="empty_state_my_tracks">مسیرها را اضافه کنید یا ضبط کنید</string>
     <string name="empty_state_my_tracks_desc">برای مشاهده مسیری را وارد کنید یا ضبط کنید</string>
     <string name="import_track">واردکردن مسیر</string>
     <string name="fast_coordinates_input">ورود فوری مختصات</string>
