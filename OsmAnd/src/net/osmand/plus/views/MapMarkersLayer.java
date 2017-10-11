@@ -125,10 +125,6 @@ public class MapMarkersLayer extends OsmandMapLayer implements IContextMenuProvi
 		bitmapPaintDestTeal = createPaintDest(R.color.marker_teal);
 		bitmapPaintDestPurple = createPaintDest(R.color.marker_purple);
 
-		float textSize = TEXT_SIZE * map.getResources().getDisplayMetrics().density;
-		textAttrs.paint.setTextSize(textSize);
-		textAttrs.paint2.setTextSize(textSize);
-
 		widgetsFactory = new MapMarkersWidgetsFactory(map);
 
 		contextMenuLayer = view.getLayerByClass(ContextMenuLayer.class);
@@ -210,6 +206,10 @@ public class MapMarkersLayer extends OsmandMapLayer implements IContextMenuProvi
 		}
 
 		if (map.getMyApplication().getSettings().SHOW_LINES_TO_FIRST_MARKERS.get() && myLoc != null) {
+			float textSize = TEXT_SIZE * map.getResources().getDisplayMetrics().density * map.getMyApplication().getSettings().TEXT_SCALE.get();
+			textAttrs.paint.setTextSize(textSize);
+			textAttrs.paint2.setTextSize(textSize);
+
 			lineAttrs.updatePaints(view, nightMode, tileBox);
 			textAttrs.updatePaints(view, nightMode, tileBox);
 			textAttrs.paint.setStyle(Paint.Style.FILL);

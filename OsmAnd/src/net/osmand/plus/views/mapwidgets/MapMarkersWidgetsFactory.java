@@ -110,7 +110,7 @@ public class MapMarkersWidgetsFactory {
 				@Override
 				public void onClick(View v) {
 					MapActivity.clearPrevActivityIntent();
-					map.getDashboard().setDashboardVisibility(true, DashboardOnMap.DashboardType.MAP_MARKERS);
+					MapMarkersDialogFragment.showInstance(map);
 				}
 			});
 		}
