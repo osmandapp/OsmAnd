@@ -91,6 +91,7 @@ public class TrackPointFragment extends OsmandExpandableListFragment {
 	final private PointGPXAdapter adapter = new PointGPXAdapter();
 	private GpxDisplayItemType[] filterTypes = { GpxDisplayItemType.TRACK_POINTS, GpxDisplayItemType.TRACK_ROUTE_POINTS };
 	private boolean selectionMode = false;
+	private boolean addToMapMarkersMode = false;
 	private LinkedHashMap<GpxDisplayItemType, Set<GpxDisplayItem>> selectedItems = new LinkedHashMap<>();
 	private Set<Integer> selectedGroups = new LinkedHashSet<>();
 	private ActionMode actionMode;
@@ -468,6 +469,10 @@ public class TrackPointFragment extends OsmandExpandableListFragment {
 		this.selectionMode = selectionMode;
 	}
 
+	private void enableAddToMapMarkersMode(boolean addToMapMarkersMode) {
+		this.addToMapMarkersMode = addToMapMarkersMode;
+	}
+
 	private void enterDeleteMode() {
 
 		actionMode = getActionBarActivity().startSupportActionMode(new ActionMode.Callback() {
@@ -587,12 +592,13 @@ public class TrackPointFragment extends OsmandExpandableListFragment {
 
 			@Override
 			public boolean onCreateActionMode(ActionMode mode, Menu menu) {
-				enableSelectionMode(true);
 				if (getSettings().USE_MAP_MARKERS.get()) {
+					enableAddToMapMarkersMode(true);
 					createMenuItem(menu, SELECT_MAP_MARKERS_ACTION_MODE_ID, R.string.shared_string_add_to_map_markers,
 							R.drawable.ic_action_flag_dark, R.drawable.ic_action_flag_dark,
 							MenuItemCompat.SHOW_AS_ACTION_IF_ROOM);
 				} else {
+					enableSelectionMode(true);
 					createMenuItem(menu, SELECT_MAP_MARKERS_ACTION_MODE_ID, R.string.select_destination_and_intermediate_points,
 							R.drawable.ic_action_intermediate, R.drawable.ic_action_intermediate,
 							MenuItemCompat.SHOW_AS_ACTION_IF_ROOM);
@@ -612,6 +618,7 @@ public class TrackPointFragment extends OsmandExpandableListFragment {
 			@Override
 			public void onDestroyActionMode(ActionMode mode) {
 				enableSelectionMode(false);
+				enableAddToMapMarkersMode(false);
 				adapter.notifyDataSetInvalidated();
 			}
 
@@ -777,7 +784,7 @@ public class TrackPointFragment extends OsmandExpandableListFragment {
 				}
 			}
 			updateSelectionMode(actionMode);
-		} else {
+		} else if (!addToMapMarkersMode) {
 			final GpxDisplayItem item = adapter.getChild(groupPosition, childPosition);
 			if (item != null) {
 				if (item.group.getGpx() != null) {
@@ -884,14 +891,15 @@ public class TrackPointFragment extends OsmandExpandableListFragment {
 		@Override
 		public View getGroupView(final int groupPosition, boolean isExpanded, View convertView, ViewGroup parent) {
 			View row = convertView;
+			final GpxDisplayGroup group = getGroup(groupPosition);
 			boolean checkBox = row != null && row.findViewById(R.id.toggle_item) instanceof CheckBox;
-			boolean same = (selectionMode && checkBox) || (!selectionMode && !checkBox);
+			boolean showCheckBox = selectionMode || (addToMapMarkersMode && group.getType() == GpxDisplayItemType.TRACK_POINTS);
+			boolean same = (showCheckBox && checkBox) || (!showCheckBox && !checkBox);
 			if (row == null || !same) {
 				LayoutInflater inflater = getActivity().getLayoutInflater();
 				row = inflater.inflate(R.layout.wpt_list_item_category, parent, false);
 			}
 			row.setOnClickListener(null);
-			final GpxDisplayGroup group = getGroup(groupPosition);
 			row.findViewById(R.id.group_divider).setVisibility(groupPosition == 0 ? View.GONE : View.VISIBLE);
 			TextView label = (TextView) row.findViewById(R.id.category_name);
 			TextView description = (TextView) row.findViewById(R.id.category_desc);
@@ -903,7 +911,7 @@ public class TrackPointFragment extends OsmandExpandableListFragment {
 				description.setText(getString(R.string.route_points_category_name));
 			}
 
-			if (selectionMode) {
+			if (showCheckBox) {
 				final CheckBox ch = (CheckBox) row.findViewById(R.id.toggle_item);
 				ch.setVisibility(View.VISIBLE);
 				ch.setChecked(selectedGroups.contains(groupPosition));
@@ -1049,7 +1057,9 @@ public class TrackPointFragment extends OsmandExpandableListFragment {
 				});
 			} else {
 				row.findViewById(R.id.icon).setVisibility(View.VISIBLE);
-				ch.setVisibility(View.GONE);
+				if (addToMapMarkersMode) {
+					ch.setVisibility(View.GONE);
+				}
 			}
 			return row;
 		}
