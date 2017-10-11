@@ -2217,4 +2217,11 @@ Pôr do Sol: %2$s</string>
     <string name="quick_action_showhide_osmbugs_descr">Tocar o botão de ação irá mostrar ou ocultar as Anotações do OSM no mapa.</string>
     <string name="sorted_by_distance">Classificado por distância</string>
     <string name="search_favorites">Pesquisar favoritos</string>
+    <string name="hillshade_menu_download_descr">Para ver o sombreamento do relevo no mapa, você precisa baixar a camada de mapa de sombreamento de relevo desta região.</string>
+    <string name="hillshade_purchase_header">Para ver o sombreamento de relevo no mapa, você precisa comprar e instalar o plugin de Curvas de Nível</string>
+    <string name="hide_from_zoom_level">Ocultar deste nível de ampliação</string>
+    <string name="srtm_menu_download_descr">Para ver as curvas de nível no mapa, você precisa baixar o mapa de curvas de nível desta região.</string>
+    <string name="shared_string_plugin">Complemento</string>
+    <string name="srtm_purchase_header">Para ver as curvas de nível no mapa, você precisa comprar e instalar o complemento Curvas de Nível</string>
+    <string name="srtm_color_scheme">Esquema de cores</string>
     </resources>
