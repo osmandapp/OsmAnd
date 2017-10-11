@@ -11,7 +11,10 @@ import android.view.ViewGroup;
 
 import net.osmand.Location;
 import net.osmand.data.LatLon;
+import net.osmand.data.PointDescription;
 import net.osmand.plus.GPXUtilities.WptPt;
+import net.osmand.plus.GeocodingLookupService.AddressLookupRequest;
+import net.osmand.plus.GeocodingLookupService.OnAddressLookupResult;
 import net.osmand.plus.IconsCache;
 import net.osmand.plus.MapMarkersHelper.MapMarker;
 import net.osmand.plus.OsmAndFormatter;
@@ -43,6 +46,8 @@ public class MapMarkersListAdapter extends RecyclerView.Adapter<MapMarkerItemVie
 
 	private boolean showLocationItem;
 	private Location myLoc;
+	private AddressLookupRequest locRequest;
+	private PointDescription locDescription;
 
 	private Map<Pair<WptPt, WptPt>, List<WptPt>> snappedToRoadPoints;
 
@@ -55,6 +60,8 @@ public class MapMarkersListAdapter extends RecyclerView.Adapter<MapMarkerItemVie
 	}
 
 	public MapMarkersListAdapter(MapActivity mapActivity) {
+		locDescription = new PointDescription(PointDescription.POINT_TYPE_MY_LOCATION,
+				mapActivity.getString(R.string.shared_string_location));
 		this.mapActivity = mapActivity;
 		reloadData();
 	}
@@ -84,7 +91,7 @@ public class MapMarkersListAdapter extends RecyclerView.Adapter<MapMarkerItemVie
 		boolean finish = pos == finishPos && startPos != finishPos;
 		boolean firstSelectedMarker = pos == firstSelectedMarkerPos;
 
-		boolean useLocation = app.getMapMarkersHelper().isStartFromMyLocation() && myLoc != null;
+		boolean useLocation = app.getMapMarkersHelper().isStartFromMyLocation() && showLocationItem;
 
 		MapMarker marker = locationItem ? null : (MapMarker) getItem(pos);
 
@@ -105,10 +112,11 @@ public class MapMarkersListAdapter extends RecyclerView.Adapter<MapMarkerItemVie
 		holder.bottomShadow.setVisibility(lastMarkerItem ? View.VISIBLE : View.GONE);
 		holder.iconReorder.setVisibility(View.VISIBLE);
 		holder.iconReorder.setImageDrawable(iconsCache.getThemedIcon(R.drawable.ic_action_reorder));
+		holder.description.setTextColor(ContextCompat.getColor(mapActivity, night ? R.color.dash_search_icon_dark : R.color.icon_color));
 
 		holder.firstDescription.setVisibility((start || finish) ? View.VISIBLE : View.GONE);
 		if (start) {
-			holder.firstDescription.setText(mapActivity.getString(R.string.shared_string_control_start) + (locationItem && !useLocation ? "" : " • "));
+			holder.firstDescription.setText(mapActivity.getString(R.string.shared_string_control_start) + " • ");
 		} else if (finish) {
 			holder.firstDescription.setText(mapActivity.getString(R.string.shared_string_finish) + " • ");
 		}
@@ -123,18 +131,16 @@ public class MapMarkersListAdapter extends RecyclerView.Adapter<MapMarkerItemVie
 		if (locationItem) {
 			holder.topDivider.setVisibility(View.VISIBLE);
 			holder.icon.setImageDrawable(ContextCompat.getDrawable(mapActivity, R.drawable.map_pedestrian_location));
-			holder.point.setVisibility(View.GONE);
 			holder.checkBox.setChecked(app.getMapMarkersHelper().isStartFromMyLocation());
 			holder.iconReorder.setAlpha(.5f);
 			holder.iconReorder.setOnTouchListener(null);
-			holder.description.setVisibility(View.GONE);
 			holder.distance.setVisibility(View.GONE);
+			holder.description.setText(locDescription.getName());
 		} else {
 			holder.topDivider.setVisibility((!showLocationItem && firstMarkerItem) ? View.VISIBLE : View.GONE);
 			if (!iconSettled) {
 				holder.icon.setImageDrawable(iconsCache.getIcon(R.drawable.ic_action_flag_dark, MapMarker.getColorId(marker.colorIndex)));
 			}
-			holder.point.setVisibility(View.VISIBLE);
 			holder.checkBox.setChecked(marker.selected);
 
 			holder.iconReorder.setAlpha(1f);
@@ -148,8 +154,6 @@ public class MapMarkersListAdapter extends RecyclerView.Adapter<MapMarkerItemVie
 				}
 			});
 
-			holder.description.setVisibility(View.VISIBLE);
-			holder.description.setTextColor(ContextCompat.getColor(mapActivity, night ? R.color.dash_search_icon_dark : R.color.icon_color));
 			String descr;
 			if ((descr = marker.groupName) != null) {
 				if (descr.equals("")) {
@@ -168,14 +172,16 @@ public class MapMarkersListAdapter extends RecyclerView.Adapter<MapMarkerItemVie
 		}
 
 		boolean showDistance = locationItem ? useLocation : marker.selected;
-		boolean showPoint = showDistance && !locationItem;
-		holder.distance.setVisibility(showDistance ? View.VISIBLE : View.GONE);
-		holder.point.setVisibility(showPoint ? View.VISIBLE : View.GONE);
+		int visibility = showDistance ? View.VISIBLE : View.GONE;
+		holder.distance.setVisibility(visibility);
+		holder.point.setVisibility(visibility);
+		holder.leftPointSpace.setVisibility(visibility);
+		holder.rightPointSpace.setVisibility(visibility);
 		if (showDistance) {
 			holder.distance.setTextColor(ContextCompat.getColor(mapActivity, night ? R.color.color_distance : R.color.color_myloc_distance));
 			LatLon first = firstSelectedMarker && useLocation
 					? new LatLon(myLoc.getLatitude(), myLoc.getLongitude())
-					: getPreviousSelectedMarkerLatLon(pos - 1);
+					: getPreviousSelectedMarkerLatLon(pos);
 			float dist = 0;
 			if (first != null && marker != null) {
 				WptPt pt1 = new WptPt();
@@ -254,12 +260,34 @@ public class MapMarkersListAdapter extends RecyclerView.Adapter<MapMarkerItemVie
 
 	public void reloadData() {
 		items.clear();
-		myLoc = mapActivity.getMyApplication().getLocationProvider().getLastStaleKnownLocation();
+		OsmandApplication app = mapActivity.getMyApplication();
+		myLoc = app.getLocationProvider().getLastStaleKnownLocation();
 		showLocationItem = myLoc != null;
 		if (showLocationItem) {
+			lookupLocationAddress(app);
 			items.add(myLoc);
 		}
 		items.addAll(mapActivity.getMyApplication().getMapMarkersHelper().getMapMarkers());
+	}
+
+	private void lookupLocationAddress(OsmandApplication app) {
+		LatLon loc = new LatLon(myLoc.getLatitude(), myLoc.getLongitude());
+		if (locRequest == null || !locRequest.getLatLon().equals(loc)) {
+			if (locRequest != null) {
+				app.getGeocodingLookupService().cancel(locRequest);
+			}
+			locRequest = new AddressLookupRequest(loc, new OnAddressLookupResult() {
+				@Override
+				public void geocodingDone(String address) {
+					locRequest = null;
+					locDescription.setName(address);
+					if (showLocationItem) {
+						notifyItemChanged(0);
+					}
+				}
+			}, null);
+			app.getGeocodingLookupService().lookupAddress(locRequest);
+		}
 	}
 
 	public void calculateStartAndFinishPos() {
@@ -280,7 +308,7 @@ public class MapMarkersListAdapter extends RecyclerView.Adapter<MapMarkerItemVie
 						startPos = i;
 						startCalculated = true;
 					}
-					firstSelectedMarkerPos = i + 1;
+					firstSelectedMarkerPos = i;
 					firstSelectedMarkerCalculated = true;
 					break;
 				}
