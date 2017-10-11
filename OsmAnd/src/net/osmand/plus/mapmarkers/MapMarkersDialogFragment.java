@@ -149,7 +149,6 @@ public class MapMarkersDialogFragment extends android.support.v4.app.DialogFragm
 							groupsFragment.hideSnackbar();
 						}
 						viewPager.setCurrentItem(0);
-						optionsButton.setVisibility(View.VISIBLE);
 						return true;
 					case R.id.action_groups:
 						activeFragment.stopLocationUpdate();
@@ -161,7 +160,6 @@ public class MapMarkersDialogFragment extends android.support.v4.app.DialogFragm
 							historyFragment.hideSnackbar();
 						}
 						viewPager.setCurrentItem(1);
-						optionsButton.setVisibility(View.GONE);
 						return true;
 					case R.id.action_history:
 						activeFragment.stopLocationUpdate();
@@ -173,7 +171,6 @@ public class MapMarkersDialogFragment extends android.support.v4.app.DialogFragm
 							activeFragment.hideSnackbar();
 						}
 						viewPager.setCurrentItem(2);
-						optionsButton.setVisibility(View.GONE);
 						return true;
 				}
 				return false;
@@ -245,12 +242,16 @@ public class MapMarkersDialogFragment extends android.support.v4.app.DialogFragm
 					final List<MapMarkersHelper.MapMarker> markers = new ArrayList<>(helper.getMapMarkers());
 					helper.moveAllActiveMarkersToHistory();
 					activeFragment.updateAdapter();
+					groupsFragment.updateAdapter();
+					historyFragment.updateAdapter();
 					snackbar = Snackbar.make(viewPager, R.string.all_markers_moved_to_history, Snackbar.LENGTH_LONG)
 							.setAction(R.string.shared_string_undo, new View.OnClickListener() {
 								@Override
 								public void onClick(View view) {
 									helper.restoreMarkersFromHistory(markers);
 									activeFragment.updateAdapter();
+									groupsFragment.updateAdapter();
+									historyFragment.updateAdapter();
 								}
 							});
 					View snackBarView = snackbar.getView();
@@ -272,6 +273,8 @@ public class MapMarkersDialogFragment extends android.support.v4.app.DialogFragm
 				mapActivity.getMapLayers().getMapWidgetRegistry().updateMapMarkersMode(mapActivity);
 				activeFragment.setShowDirectionEnabled(showDirectionEnabled);
 				activeFragment.updateAdapter();
+				groupsFragment.updateAdapter();
+				historyFragment.updateAdapter();
 			}
 		};
 	}
@@ -316,6 +319,8 @@ public class MapMarkersDialogFragment extends android.support.v4.app.DialogFragm
 		if (orderByMode != MapMarkersOrderByMode.CUSTOM) {
 			getMyApplication().getMapMarkersHelper().orderMarkers(orderByMode);
 			activeFragment.updateAdapter();
+			groupsFragment.updateAdapter();
+			historyFragment.updateAdapter();
 		}
 	}
 
