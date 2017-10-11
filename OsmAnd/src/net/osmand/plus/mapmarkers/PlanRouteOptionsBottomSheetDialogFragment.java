@@ -13,6 +13,7 @@ import android.view.ViewGroup;
 import android.view.ViewTreeObserver;
 import android.view.Window;
 import android.view.WindowManager;
+import android.widget.CompoundButton;
 import android.widget.ImageView;
 import android.widget.TextView;
 
@@ -58,6 +59,8 @@ public class PlanRouteOptionsBottomSheetDialogFragment extends BottomSheetDialog
 		((ImageView) mainView.findViewById(R.id.make_round_trip_icon)).setImageDrawable(getContentIcon(R.drawable.ic_action_trip_round));
 		((ImageView) mainView.findViewById(R.id.door_to_door_icon)).setImageDrawable(getContentIcon(R.drawable.ic_action_sort_door_to_door));
 		((ImageView) mainView.findViewById(R.id.reverse_icon)).setImageDrawable(getContentIcon(R.drawable.ic_action_sort_reverse_order));
+
+		((CompoundButton) mainView.findViewById(R.id.make_round_trip_switch)).setChecked(getMyApplication().getSettings().ROUTE_MAP_MARKERS_ROUND_TRIP.get());
 
 		if (!portrait) {
 			((ImageView) mainView.findViewById(R.id.select_icon))

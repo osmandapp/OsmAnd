@@ -24,12 +24,12 @@ import android.widget.ImageView;
 import android.widget.LinearLayout;
 import android.widget.ProgressBar;
 import android.widget.TextView;
-import android.widget.Toast;
 
 import net.osmand.AndroidUtils;
 import net.osmand.Location;
 import net.osmand.TspAnt;
 import net.osmand.data.LatLon;
+import net.osmand.data.PointDescription;
 import net.osmand.data.RotatedTileBox;
 import net.osmand.plus.ApplicationMode;
 import net.osmand.plus.GPXUtilities.TrkSegment;
@@ -38,9 +38,12 @@ import net.osmand.plus.IconsCache;
 import net.osmand.plus.MapMarkersHelper;
 import net.osmand.plus.MapMarkersHelper.MapMarker;
 import net.osmand.plus.OsmAndFormatter;
+import net.osmand.plus.OsmAndLocationProvider.OsmAndLocationListener;
 import net.osmand.plus.OsmandApplication;
 import net.osmand.plus.OsmandSettings;
 import net.osmand.plus.R;
+import net.osmand.plus.TargetPointsHelper;
+import net.osmand.plus.TargetPointsHelper.TargetPoint;
 import net.osmand.plus.activities.MapActivity;
 import net.osmand.plus.helpers.AndroidUiHelper;
 import net.osmand.plus.mapmarkers.PlanRouteOptionsBottomSheetDialogFragment.PlanRouteOptionsFragmentListener;
@@ -48,6 +51,7 @@ import net.osmand.plus.mapmarkers.adapters.MapMarkersItemTouchHelperCallback;
 import net.osmand.plus.mapmarkers.adapters.MapMarkersListAdapter;
 import net.osmand.plus.measurementtool.SnapToRoadBottomSheetDialogFragment;
 import net.osmand.plus.measurementtool.SnapToRoadBottomSheetDialogFragment.SnapToRoadFragmentListener;
+import net.osmand.plus.routing.RoutingHelper;
 import net.osmand.plus.views.MapMarkersLayer;
 import net.osmand.plus.views.OsmandMapTileView;
 import net.osmand.plus.views.mapwidgets.MapInfoWidgetsFactory;
@@ -59,9 +63,10 @@ import java.util.List;
 
 import static net.osmand.plus.OsmandSettings.LANDSCAPE_MIDDLE_RIGHT_CONSTANT;
 
-public class PlanRouteFragment extends Fragment {
+public class PlanRouteFragment extends Fragment implements OsmAndLocationListener {
 
 	public static final String TAG = "PlanRouteFragment";
+	private static final int MIN_DISTANCE_FOR_RECALCULATE = 50; // in meters
 
 	private MapMarkersHelper markersHelper;
 	private MarkersPlanRouteContext planRouteContext;
@@ -78,6 +83,9 @@ public class PlanRouteFragment extends Fragment {
 	private boolean nightMode;
 	private boolean portrait;
 	private boolean wasCollapseButtonVisible;
+	private boolean cancelSnapToRoad = true;
+
+	private Location location;
 
 	private View mainView;
 	private RecyclerView markersRv;
@@ -251,7 +259,6 @@ public class PlanRouteFragment extends Fragment {
 
 		adapter = new MapMarkersListAdapter(mapActivity);
 		adapter.setHasStableIds(true);
-		adapter.calculateStartAndFinishPos();
 		adapter.setSnappedToRoadPoints(planRouteContext.getSnappedToRoadPoints());
 		final ItemTouchHelper touchHelper = new ItemTouchHelper(new MapMarkersItemTouchHelperCallback(adapter));
 		touchHelper.attachToRecyclerView(markersRv);
@@ -266,10 +273,11 @@ public class PlanRouteFragment extends Fragment {
 				if (pos == RecyclerView.NO_POSITION) {
 					return;
 				}
-				if (pos == 0) {
+				Object item = adapter.getItem(pos);
+				if (item instanceof Location) {
 					markersHelper.setStartFromMyLocation(!mapActivity.getMyApplication().getSettings().ROUTE_MAP_MARKERS_START_MY_LOC.get());
-				} else {
-					MapMarker marker = adapter.getItem(pos);
+				} else if (item instanceof MapMarker) {
+					MapMarker marker = (MapMarker) item;
 					selectedCount = marker.selected ? selectedCount - 1 : selectedCount + 1;
 					marker.selected = !marker.selected;
 					markersHelper.updateMapMarker(marker, false);
@@ -305,7 +313,7 @@ public class PlanRouteFragment extends Fragment {
 			}
 		});
 		boolean isSmartphone = getResources().getConfiguration().smallestScreenWidthDp < 600;
-		markersRv.setPadding(0, 0, 0, AndroidUtils.dpToPx(mapActivity, isSmartphone ? 72 : 108));
+		markersRv.setPadding(0, AndroidUtils.dpToPx(mapActivity, isSmartphone ? 10 : 15), 0, AndroidUtils.dpToPx(mapActivity, isSmartphone ? 8 : 12));
 		markersRv.setClipToPadding(false);
 		markersRv.setLayoutManager(new LinearLayoutManager(getContext()));
 		markersRv.setAdapter(adapter);
@@ -318,9 +326,56 @@ public class PlanRouteFragment extends Fragment {
 	}
 
 	@Override
+	public void onResume() {
+		super.onResume();
+		MapActivity mapActivity = getMapActivity();
+		if (mapActivity != null) {
+			mapActivity.getMyApplication().getLocationProvider().addLocationListener(this);
+		}
+	}
+
+	@Override
+	public void onPause() {
+		super.onPause();
+		MapActivity mapActivity = getMapActivity();
+		if (mapActivity != null) {
+			mapActivity.getMyApplication().getLocationProvider().removeLocationListener(this);
+		}
+	}
+
+	@Override
 	public void onDestroyView() {
 		super.onDestroyView();
 		exitPlanRouteMode();
+	}
+
+	@Override
+	public void updateLocation(Location loc) {
+		MapActivity mapActivity = getMapActivity();
+		if (mapActivity != null) {
+			final Location location = mapActivity.getMyApplication().getLocationProvider().getLastStaleKnownLocation();
+			boolean newLocation = (this.location == null && location != null) || location == null;
+			boolean locationChanged = this.location != null && location != null
+					&& this.location.getLatitude() != location.getLatitude()
+					&& this.location.getLongitude() != location.getLongitude();
+			boolean farEnough = locationChanged && MapUtils.getDistance(this.location.getLatitude(), this.location.getLongitude(),
+					location.getLatitude(), location.getLongitude()) >= MIN_DISTANCE_FOR_RECALCULATE;
+			if (newLocation || farEnough) {
+				mapActivity.getMyApplication().runInUIThread(new Runnable() {
+					@Override
+					public void run() {
+						PlanRouteFragment.this.location = location;
+						adapter.reloadData();
+						try {
+							adapter.notifyDataSetChanged();
+						} catch (Exception e) {
+							// to avoid crash because of:
+							// java.lang.IllegalStateException: Cannot call this method while RecyclerView is computing a layout or scrolling
+						}
+					}
+				});
+			}
+		}
 	}
 
 	private MapActivity getMapActivity() {
@@ -353,6 +408,10 @@ public class PlanRouteFragment extends Fragment {
 			@Override
 			public void onApplicationModeItemClick(ApplicationMode mode) {
 				if (planRouteContext.getSnappedMode() != mode) {
+					MapMarkersLayer layer = getMapMarkersLayer();
+					if (layer != null) {
+						layer.setDefaultAppMode(mode == ApplicationMode.DEFAULT);
+					}
 					planRouteContext.getSnappedToRoadPoints().clear();
 					planRouteContext.setSnappedMode(mode);
 					planRouteContext.recreateSnapTrkSegment();
@@ -375,14 +434,58 @@ public class PlanRouteFragment extends Fragment {
 			@Override
 			public void navigateOnClick() {
 				if (mapActivity != null) {
-					Toast.makeText(mapActivity, "navigate", Toast.LENGTH_SHORT).show();
+					boolean hasTargets = false;
+					TargetPointsHelper targetPointsHelper = mapActivity.getMyApplication().getTargetPointsHelper();
+					List<MapMarker> markers = markersHelper.getSelectedMarkers();
+					if (markers.size() > 0) {
+						int i = 0;
+						if (markersHelper.isStartFromMyLocation()) {
+							targetPointsHelper.clearStartPoint(false);
+						} else {
+							MapMarker m = markers.get(i++);
+							targetPointsHelper.setStartPoint(new LatLon(m.getLatitude(), m.getLongitude()),
+									false, m.getPointDescription(mapActivity));
+						}
+						List<TargetPoint> targetPoints = new ArrayList<>();
+						for (int k = i; k < markers.size(); k++) {
+							MapMarker m = markers.get(k);
+							TargetPoint t = new TargetPoint(new LatLon(m.getLatitude(), m.getLongitude()),
+									m.getPointDescription(mapActivity));
+							targetPoints.add(t);
+						}
+						if (mapActivity.getMyApplication().getSettings().ROUTE_MAP_MARKERS_ROUND_TRIP.get()) {
+							TargetPoint end = targetPointsHelper.getPointToStart();
+							if (end == null) {
+								Location loc = mapActivity.getMyApplication().getLocationProvider().getLastKnownLocation();
+								if (loc != null) {
+									end = TargetPoint.createStartPoint(new LatLon(loc.getLatitude(), loc.getLongitude()),
+											new PointDescription(PointDescription.POINT_TYPE_MY_LOCATION,
+													getString(R.string.shared_string_my_location)));
+								}
+							}
+							if (end != null) {
+								targetPoints.add(end);
+							}
+						}
+						RoutingHelper routingHelper = mapActivity.getRoutingHelper();
+						boolean updateRoute = routingHelper.isFollowingMode() || routingHelper.isRoutePlanningMode();
+						targetPointsHelper.reorderAllTargetPoints(targetPoints, updateRoute);
+						hasTargets = true;
+					} else {
+						targetPointsHelper.clearStartPoint(false);
+						targetPointsHelper.clearPointToNavigate(false);
+					}
+					dismiss();
+					mapActivity.getMapLayers().getMapControlsLayer().doRoute(hasTargets);
 				}
 			}
 
 			@Override
 			public void makeRoundTripOnClick() {
 				if (mapActivity != null) {
-					Toast.makeText(mapActivity, "make round trip", Toast.LENGTH_SHORT).show();
+					OsmandSettings settings = mapActivity.getMyApplication().getSettings();
+					settings.ROUTE_MAP_MARKERS_ROUND_TRIP.set(!settings.ROUTE_MAP_MARKERS_ROUND_TRIP.get());
+					planRouteContext.recreateSnapTrkSegment();
 				}
 			}
 
@@ -402,7 +505,7 @@ public class PlanRouteFragment extends Fragment {
 			public void reverseOrderOnClick() {
 				if (mapActivity != null) {
 					markersHelper.reverseActiveMarkersOrder();
-					adapter.calculateStartAndFinishPos();
+					adapter.reloadData();
 					adapter.notifyDataSetChanged();
 					planRouteContext.recreateSnapTrkSegment();
 				}
@@ -539,7 +642,9 @@ public class PlanRouteFragment extends Fragment {
 
 			mapActivity.getMapView().setMapPosition(previousMapPosition);
 
-			planRouteContext.cancelSnapToRoad();
+			if (cancelSnapToRoad) {
+				planRouteContext.cancelSnapToRoad();
+			}
 			markersLayer.setRoute(null);
 			mapActivity.refreshMap();
 		}
@@ -610,6 +715,7 @@ public class PlanRouteFragment extends Fragment {
 	private void showHideMarkersList() {
 		MapActivity mapActivity = getMapActivity();
 		if (mapActivity != null && portrait) {
+			cancelSnapToRoad = false;
 			planRouteContext.setMarkersListOpened(!planRouteContext.isMarkersListOpened());
 			int containerRes = planRouteContext.isMarkersListOpened() ? R.id.fragmentContainer : R.id.bottomFragmentContainer;
 			mapActivity.getSupportFragmentManager().beginTransaction()
@@ -670,18 +776,21 @@ public class PlanRouteFragment extends Fragment {
 	}
 
 	public boolean quit(boolean hideMarkersListFirst) {
-		if (planRouteContext.isMarkersListOpened() && hideMarkersListFirst) {
+		if (portrait && planRouteContext.isMarkersListOpened() && hideMarkersListFirst) {
 			showHideMarkersList();
 			return false;
 		} else {
-			dismiss(getMapActivity());
+			dismiss();
 			return true;
 		}
 	}
 
-	private void dismiss(MapActivity activity) {
-		planRouteContext.setFragmentVisible(false);
-		activity.getSupportFragmentManager().beginTransaction().remove(this).commitAllowingStateLoss();
+	private void dismiss() {
+		MapActivity activity = getMapActivity();
+		if (activity != null) {
+			planRouteContext.setFragmentVisible(false);
+			activity.getSupportFragmentManager().beginTransaction().remove(this).commitAllowingStateLoss();
+		}
 	}
 
 	public static boolean showInstance(MapActivity mapActivity) {
@@ -755,7 +864,7 @@ public class PlanRouteFragment extends Fragment {
 				}
 
 				mapActivity.getMyApplication().getMapMarkersHelper().addSelectedMarkersToTop(res);
-				adapter.calculateStartAndFinishPos();
+				adapter.reloadData();
 				adapter.notifyDataSetChanged();
 				planRouteContext.recreateSnapTrkSegment();
 			}
