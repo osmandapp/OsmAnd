@@ -106,7 +106,13 @@ public class MapMarkersListAdapter extends RecyclerView.Adapter<MapMarkerItemVie
 		holder.checkBox.setOnClickListener(new View.OnClickListener() {
 			@Override
 			public void onClick(View view) {
-				listener.onItemClick(holder.itemView);
+				listener.onCheckBoxClick(holder.itemView);
+			}
+		});
+		holder.checkBoxContainer.setOnClickListener(new View.OnClickListener() {
+			@Override
+			public void onClick(View view) {
+				holder.checkBox.performClick();
 			}
 		});
 		holder.bottomShadow.setVisibility(lastMarkerItem ? View.VISIBLE : View.GONE);
@@ -338,6 +344,8 @@ public class MapMarkersListAdapter extends RecyclerView.Adapter<MapMarkerItemVie
 	}
 
 	public interface MapMarkersListAdapterListener {
+
+		void onCheckBoxClick(View view);
 
 		void onItemClick(View view);
 
