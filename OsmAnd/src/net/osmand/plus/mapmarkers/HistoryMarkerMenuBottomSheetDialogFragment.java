@@ -59,7 +59,14 @@ public class HistoryMarkerMenuBottomSheetDialogFragment extends BottomSheetDialo
 			long markerVisitedDate = arguments.getLong(MARKER_VISITED_DATE);
 			((TextView) mainView.findViewById(R.id.map_marker_title)).setText(markerName);
 			((ImageView) mainView.findViewById(R.id.map_marker_icon)).setImageDrawable(getIcon(R.drawable.ic_action_flag_dark, MapMarker.getColorId(markerColorIndex)));
-			((TextView) mainView.findViewById(R.id.map_marker_passed_info)).setText(getString(R.string.passed, new SimpleDateFormat("MMM dd", Locale.getDefault()).format(new Date(markerVisitedDate))));
+			Date date = new Date(markerVisitedDate);
+			String month = new SimpleDateFormat("MMM", Locale.getDefault()).format(date);
+			if (month.length() > 1) {
+				month = Character.toUpperCase(month.charAt(0)) + month.substring(1);
+			}
+			month = month.replaceAll("\\.", "");
+			String day = new SimpleDateFormat("d", Locale.getDefault()).format(date);
+			((TextView) mainView.findViewById(R.id.map_marker_passed_info)).setText(getString(R.string.passed, month + " " + day));
 
 			mainView.findViewById(R.id.make_active_row).setOnClickListener(new View.OnClickListener() {
 				@Override

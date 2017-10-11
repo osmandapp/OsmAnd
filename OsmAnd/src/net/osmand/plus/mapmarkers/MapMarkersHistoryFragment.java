@@ -76,7 +76,7 @@ public class MapMarkersHistoryFragment extends Fragment implements MapMarkersHel
 
 		final RecyclerView recyclerView = new RecyclerView(getContext());
 		boolean isSmartphone = getResources().getConfiguration().smallestScreenWidthDp < 600;
-		recyclerView.setPadding(0, 0, 0, AndroidUtils.dpToPx(mapActivity, isSmartphone ? 8 : 12));
+		recyclerView.setPadding(0, 0, 0, AndroidUtils.dpToPx(mapActivity, isSmartphone ? 52 : 78));
 		recyclerView.setClipToPadding(false);
 		recyclerView.setLayoutManager(new LinearLayoutManager(getContext()));
 

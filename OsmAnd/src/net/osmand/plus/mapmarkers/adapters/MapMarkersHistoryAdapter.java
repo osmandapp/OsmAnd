@@ -129,7 +129,8 @@ public class MapMarkersHistoryAdapter extends RecyclerView.Adapter<RecyclerView.
 			if (month.length() > 1) {
 				month = Character.toUpperCase(month.charAt(0)) + month.substring(1);
 			}
-			String day = new SimpleDateFormat("dd", Locale.getDefault()).format(date);
+			month = month.replaceAll("\\.", "");
+			String day = new SimpleDateFormat("d", Locale.getDefault()).format(date);
 			String desc = app.getString(R.string.passed, month + " " + day);
 			String markerGroupName = marker.groupName;
 			if (markerGroupName != null) {

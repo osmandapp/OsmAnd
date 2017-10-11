@@ -57,7 +57,7 @@ public class MapMarkersGroupsFragment extends Fragment implements OsmAndCompassL
 		final boolean night = !mapActivity.getMyApplication().getSettings().isLightContent();
 		final RecyclerView recyclerView = new RecyclerView(getContext());
 		boolean isSmartphone = getResources().getConfiguration().smallestScreenWidthDp < 600;
-		recyclerView.setPadding(0, 0, 0, AndroidUtils.dpToPx(mapActivity, isSmartphone ? 8 : 12));
+		recyclerView.setPadding(0, 0, 0, AndroidUtils.dpToPx(mapActivity, isSmartphone ? 52 : 78));
 		recyclerView.setClipToPadding(false);
 		recyclerView.setLayoutManager(new LinearLayoutManager(getContext()));
 		recyclerView.addOnScrollListener(new RecyclerView.OnScrollListener() {

@@ -237,7 +237,8 @@ public class MapMarkersGroupsAdapter extends RecyclerView.Adapter<RecyclerView.V
 				if (month.length() > 1) {
 					month = Character.toUpperCase(month.charAt(0)) + month.substring(1);
 				}
-				String day = new SimpleDateFormat("dd", Locale.getDefault()).format(date);
+				month = month.replaceAll("\\.", "");
+				String day = new SimpleDateFormat("d", Locale.getDefault()).format(date);
 				itemViewHolder.description.setText(app.getString(R.string.passed, month + " " + day));
 			} else {
 				itemViewHolder.point.setVisibility(View.GONE);
