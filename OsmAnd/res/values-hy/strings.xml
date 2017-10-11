@@ -617,4 +617,10 @@
     <string name="select_voice_provider_descr">Ընտրեք կամ ներբեռնեք ձեր ձայնային ուղեցույցի լեզոոն</string>
     <string name="impassable_road_desc">Ընտրեք ճանապարհներ, որոնք ցանկանում եք խուսափել նավարկության ժամանակ</string>
     <string name="shared_string_sound">Ձայն</string>
+    <string name="consider_turning_polygons_off">Ցանկալի է անջատել պոլիգենների ցուցադրումը։</string>
+    <string name="rec_split_clip_length">"Clip  երկարությունը"</string>
+    <string name="rec_split_clip_length_desc">Յուրաքանչյուր ձայնագրված տեսահոլովակի(clip) երկարությունը չի նշանակվի ավելի երկար ընտրված ժամանակահատվածից</string>
+    <string name="rec_split_storage_size_desc">Հիշողության ծավալը, որը կարող է զբաղեցված լինի բոլոր clips-ներով</string>
+    <string name="route_distance">Հեռավորություն՜</string>
+    <string name="route_duration">Ժամանակ՝</string>
     </resources>
