@@ -7,21 +7,14 @@
     android:descendantFocusability="blocksDescendants"
     android:orientation="vertical">
 
-    <LinearLayout
+    <ImageView
         android:id="@+id/top_divider"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:orientation="vertical"
+        android:scaleType="fitXY"
+        android:src="@drawable/bg_shadow_list_top"
         android:visibility="gone"
-        tools:visibility="visible">
-
-        <View
-            android:layout_width="match_parent"
-            android:layout_height="4dp"/>
-
-        <include layout="@layout/card_top_divider"/>
-
-    </LinearLayout>
+        tools:visibility="visible"/>
 
     <LinearLayout
         android:id="@+id/main_layout"

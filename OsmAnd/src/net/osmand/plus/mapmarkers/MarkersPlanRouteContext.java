@@ -172,6 +172,10 @@ public class MarkersPlanRouteContext {
 		for (LatLon l : markersHelper.getSelectedMarkersLatLon()) {
 			addWptPt(points, l.getLatitude(), l.getLongitude());
 		}
+		if (app.getSettings().ROUTE_MAP_MARKERS_ROUND_TRIP.get() && !points.isEmpty()) {
+			WptPt l = points.get(0);
+			addWptPt(points, l.getLatitude(), l.getLongitude());
+		}
 		return points;
 	}
 
