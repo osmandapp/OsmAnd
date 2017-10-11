@@ -408,9 +408,13 @@ public class PlanRouteFragment extends Fragment implements OsmAndLocationListene
 			@Override
 			public void onApplicationModeItemClick(ApplicationMode mode) {
 				if (planRouteContext.getSnappedMode() != mode) {
+					boolean defaultMode = mode == ApplicationMode.DEFAULT;
 					MapMarkersLayer layer = getMapMarkersLayer();
 					if (layer != null) {
-						layer.setDefaultAppMode(mode == ApplicationMode.DEFAULT);
+						layer.setDefaultAppMode(defaultMode);
+					}
+					if (defaultMode) {
+						planRouteContext.cancelSnapToRoad();
 					}
 					planRouteContext.getSnappedToRoadPoints().clear();
 					planRouteContext.setSnappedMode(mode);
@@ -731,6 +735,7 @@ public class PlanRouteFragment extends Fragment implements OsmAndLocationListene
 		MapActivity mapActivity = getMapActivity();
 		if (mapActivity != null) {
 			mapActivity.getMapLayers().getMapMarkersLayer().setRoute(planRouteContext.getSnapTrkSegment());
+			mapActivity.refreshMap();
 			if (adjustMap) {
 				showRouteOnMap(planRouteContext.getSnapTrkSegment().points);
 			}
