@@ -41,6 +41,7 @@ public class MarkersPlanRouteContext {
 	private boolean progressBarVisible;
 	private boolean fragmentVisible;
 	private boolean markersListOpened;
+	private boolean adjustMapOnStart = true;
 
 	Map<Pair<WptPt, WptPt>, List<WptPt>> getSnappedToRoadPoints() {
 		return snappedToRoadPoints;
@@ -88,6 +89,14 @@ public class MarkersPlanRouteContext {
 
 	public void setMarkersListOpened(boolean markersListOpened) {
 		this.markersListOpened = markersListOpened;
+	}
+
+	public boolean isAdjustMapOnStart() {
+		return adjustMapOnStart;
+	}
+
+	public void setAdjustMapOnStart(boolean adjustMapOnStart) {
+		this.adjustMapOnStart = adjustMapOnStart;
 	}
 
 	public MarkersPlanRouteContext(OsmandApplication app) {

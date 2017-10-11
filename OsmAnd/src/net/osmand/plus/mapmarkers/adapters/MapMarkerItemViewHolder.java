@@ -25,6 +25,7 @@ public class MapMarkerItemViewHolder extends RecyclerView.ViewHolder {
 	final View rightPointSpace;
 	final TextView description;
 	public final ImageButton optionsBtn;
+	final View checkBoxContainer;
 	final CheckBox checkBox;
 	final View divider;
 	final View bottomShadow;
@@ -45,6 +46,7 @@ public class MapMarkerItemViewHolder extends RecyclerView.ViewHolder {
 		rightPointSpace = view.findViewById(R.id.map_marker_right_point_space);
 		description = (TextView) view.findViewById(R.id.map_marker_description);
 		optionsBtn = (ImageButton) view.findViewById(R.id.map_marker_options_button);
+		checkBoxContainer = view.findViewById(R.id.check_box_container);
 		checkBox = (CheckBox) view.findViewById(R.id.map_marker_check_box);
 		divider = view.findViewById(R.id.divider);
 		bottomShadow = view.findViewById(R.id.bottom_shadow);

@@ -62,6 +62,7 @@ import java.util.ArrayList;
 import java.util.List;
 
 import static net.osmand.plus.OsmandSettings.LANDSCAPE_MIDDLE_RIGHT_CONSTANT;
+import static net.osmand.plus.OsmandSettings.MIDDLE_TOP_CONSTANT;
 
 public class PlanRouteFragment extends Fragment implements OsmAndLocationListener {
 
@@ -268,7 +269,7 @@ public class PlanRouteFragment extends Fragment implements OsmAndLocationListene
 			private int toPosition;
 
 			@Override
-			public void onItemClick(View view) {
+			public void onCheckBoxClick(View view) {
 				int pos = markersRv.getChildAdapterPosition(view);
 				if (pos == RecyclerView.NO_POSITION) {
 					return;
@@ -286,6 +287,22 @@ public class PlanRouteFragment extends Fragment implements OsmAndLocationListene
 				adapter.notifyDataSetChanged();
 				updateSelectButton();
 				planRouteContext.recreateSnapTrkSegment(false);
+			}
+
+			@Override
+			public void onItemClick(View v) {
+				int pos = markersRv.getChildAdapterPosition(v);
+				if (pos == RecyclerView.NO_POSITION) {
+					return;
+				}
+				Object item = adapter.getItem(pos);
+				if (item instanceof Location) {
+					Location loc = (Location) item;
+					moveMapToPosition(loc.getLatitude(), loc.getLongitude());
+				} else if (item instanceof MapMarker) {
+					MapMarker marker = (MapMarker) item;
+					moveMapToPosition(marker.getLatitude(), marker.getLongitude());
+				}
 			}
 
 			@Override
@@ -396,6 +413,18 @@ public class PlanRouteFragment extends Fragment implements OsmAndLocationListene
 
 	private Drawable getActiveIcon(@DrawableRes int id) {
 		return iconsCache.getIcon(id, nightMode ? R.color.osmand_orange : R.color.color_myloc_distance);
+	}
+
+	private void moveMapToPosition(double lat, double lon) {
+		MapActivity mapActivity = getMapActivity();
+		if (mapActivity != null) {
+			OsmandMapTileView view = mapActivity.getMapView();
+			view.getAnimatedDraggingThread().startMoving(lat, lon, view.getZoom(), true);
+			if (planRouteContext.isMarkersListOpened()) {
+				planRouteContext.setAdjustMapOnStart(false);
+				showHideMarkersList();
+			}
+		}
 	}
 
 	private SnapToRoadFragmentListener createSnapToRoadFragmentListener() {
@@ -581,12 +610,11 @@ public class PlanRouteFragment extends Fragment implements OsmAndLocationListene
 
 			OsmandMapTileView tileView = mapActivity.getMapView();
 			previousMapPosition = tileView.getMapPosition();
-			if (!portrait) {
-				tileView.setMapPosition(LANDSCAPE_MIDDLE_RIGHT_CONSTANT);
-			}
+			tileView.setMapPosition(portrait ? MIDDLE_TOP_CONSTANT : LANDSCAPE_MIDDLE_RIGHT_CONSTANT);
 
 			selectedCount = mapActivity.getMyApplication().getMapMarkersHelper().getSelectedMarkersCount();
-			planRouteContext.recreateSnapTrkSegment(true);
+			planRouteContext.recreateSnapTrkSegment(planRouteContext.isAdjustMapOnStart());
+			planRouteContext.setAdjustMapOnStart(true);
 			mapActivity.refreshMap();
 			updateSelectButton();
 		}
