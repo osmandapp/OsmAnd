@@ -268,6 +268,7 @@ public class MapMarkersListAdapter extends RecyclerView.Adapter<MapMarkerItemVie
 			items.add(myLoc);
 		}
 		items.addAll(mapActivity.getMyApplication().getMapMarkersHelper().getMapMarkers());
+		calculateStartAndFinishPos();
 	}
 
 	private void lookupLocationAddress(OsmandApplication app) {

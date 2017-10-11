@@ -38,6 +38,7 @@ import net.osmand.plus.IconsCache;
 import net.osmand.plus.MapMarkersHelper;
 import net.osmand.plus.MapMarkersHelper.MapMarker;
 import net.osmand.plus.OsmAndFormatter;
+import net.osmand.plus.OsmAndLocationProvider.OsmAndLocationListener;
 import net.osmand.plus.OsmandApplication;
 import net.osmand.plus.OsmandSettings;
 import net.osmand.plus.R;
@@ -62,9 +63,10 @@ import java.util.List;
 
 import static net.osmand.plus.OsmandSettings.LANDSCAPE_MIDDLE_RIGHT_CONSTANT;
 
-public class PlanRouteFragment extends Fragment {
+public class PlanRouteFragment extends Fragment implements OsmAndLocationListener {
 
 	public static final String TAG = "PlanRouteFragment";
+	private static final int MIN_DISTANCE_FOR_RECALCULATE = 50; // in meters
 
 	private MapMarkersHelper markersHelper;
 	private MarkersPlanRouteContext planRouteContext;
@@ -82,6 +84,8 @@ public class PlanRouteFragment extends Fragment {
 	private boolean portrait;
 	private boolean wasCollapseButtonVisible;
 	private boolean cancelSnapToRoad = true;
+
+	private Location location;
 
 	private View mainView;
 	private RecyclerView markersRv;
@@ -255,7 +259,6 @@ public class PlanRouteFragment extends Fragment {
 
 		adapter = new MapMarkersListAdapter(mapActivity);
 		adapter.setHasStableIds(true);
-		adapter.calculateStartAndFinishPos();
 		adapter.setSnappedToRoadPoints(planRouteContext.getSnappedToRoadPoints());
 		final ItemTouchHelper touchHelper = new ItemTouchHelper(new MapMarkersItemTouchHelperCallback(adapter));
 		touchHelper.attachToRecyclerView(markersRv);
@@ -323,9 +326,56 @@ public class PlanRouteFragment extends Fragment {
 	}
 
 	@Override
+	public void onResume() {
+		super.onResume();
+		MapActivity mapActivity = getMapActivity();
+		if (mapActivity != null) {
+			mapActivity.getMyApplication().getLocationProvider().addLocationListener(this);
+		}
+	}
+
+	@Override
+	public void onPause() {
+		super.onPause();
+		MapActivity mapActivity = getMapActivity();
+		if (mapActivity != null) {
+			mapActivity.getMyApplication().getLocationProvider().removeLocationListener(this);
+		}
+	}
+
+	@Override
 	public void onDestroyView() {
 		super.onDestroyView();
 		exitPlanRouteMode();
+	}
+
+	@Override
+	public void updateLocation(Location loc) {
+		MapActivity mapActivity = getMapActivity();
+		if (mapActivity != null) {
+			final Location location = mapActivity.getMyApplication().getLocationProvider().getLastStaleKnownLocation();
+			boolean newLocation = (this.location == null && location != null) || location == null;
+			boolean locationChanged = this.location != null && location != null
+					&& this.location.getLatitude() != location.getLatitude()
+					&& this.location.getLongitude() != location.getLongitude();
+			boolean farEnough = locationChanged && MapUtils.getDistance(this.location.getLatitude(), this.location.getLongitude(),
+					location.getLatitude(), location.getLongitude()) >= MIN_DISTANCE_FOR_RECALCULATE;
+			if (newLocation || farEnough) {
+				mapActivity.getMyApplication().runInUIThread(new Runnable() {
+					@Override
+					public void run() {
+						PlanRouteFragment.this.location = location;
+						adapter.reloadData();
+						try {
+							adapter.notifyDataSetChanged();
+						} catch (Exception e) {
+							// to avoid crash because of:
+							// java.lang.IllegalStateException: Cannot call this method while RecyclerView is computing a layout or scrolling
+						}
+					}
+				});
+			}
+		}
 	}
 
 	private MapActivity getMapActivity() {
@@ -456,7 +506,6 @@ public class PlanRouteFragment extends Fragment {
 				if (mapActivity != null) {
 					markersHelper.reverseActiveMarkersOrder();
 					adapter.reloadData();
-					adapter.calculateStartAndFinishPos();
 					adapter.notifyDataSetChanged();
 					planRouteContext.recreateSnapTrkSegment();
 				}
@@ -816,7 +865,6 @@ public class PlanRouteFragment extends Fragment {
 
 				mapActivity.getMyApplication().getMapMarkersHelper().addSelectedMarkersToTop(res);
 				adapter.reloadData();
-				adapter.calculateStartAndFinishPos();
 				adapter.notifyDataSetChanged();
 				planRouteContext.recreateSnapTrkSegment();
 			}
