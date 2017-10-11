@@ -156,8 +156,8 @@ public class OsmandMonitoringPlugin extends OsmandPlugin {
 				}
 				String txt = map.getString(R.string.monitoring_control_start);
 				String subtxt = null;
-				int dn = R.drawable.widget_monitoring_rec_inactive_night;
-				int d = R.drawable.widget_monitoring_rec_inactive_day;
+				int dn;
+				int d;
 				long last = lastUpdateTime;
 				final boolean globalRecord = settings.SAVE_GLOBAL_TRACK_TO_GPX.get();
 				final boolean isRecording = app.getSavingTrackHelper().getIsRecording();
@@ -176,14 +176,25 @@ public class OsmandMonitoringPlugin extends OsmandPlugin {
 					}
 				}
 
+				final boolean liveMonitoringEnabled = liveMonitoringHelper.isLiveMonitoringEnabled();
 				if(globalRecord) {
 					//indicates global recording (+background recording)
-					dn = R.drawable.widget_monitoring_rec_big_night;
-					d = R.drawable.widget_monitoring_rec_big_day;
+					if (liveMonitoringEnabled) {
+						dn = R.drawable.widget_live_monitoring_rec_big_night;
+						d = R.drawable.widget_live_monitoring_rec_big_day;
+					} else {
+						dn = R.drawable.widget_monitoring_rec_big_night;
+						d = R.drawable.widget_monitoring_rec_big_day;
+					}
 				} else if (isRecording) {
 					//indicates (profile-based, configured in settings) recording (looks like is only active during nav in follow mode)
-					dn = R.drawable.widget_monitoring_rec_small_night;
-					d = R.drawable.widget_monitoring_rec_small_day;
+					if (liveMonitoringEnabled) {
+						dn = R.drawable.widget_live_monitoring_rec_small_night;
+						d = R.drawable.widget_live_monitoring_rec_small_day;
+					} else {
+						dn = R.drawable.widget_monitoring_rec_small_night;
+						d = R.drawable.widget_monitoring_rec_small_day;
+					}
 				} else {
 					dn = R.drawable.widget_monitoring_rec_inactive_night;
 					d = R.drawable.widget_monitoring_rec_inactive_day;
@@ -194,24 +205,38 @@ public class OsmandMonitoringPlugin extends OsmandPlugin {
 				if ((last != lastUpdateTime) && (globalRecord || isRecording)) {
 					lastUpdateTime = last;
 					//blink implementation with 2 indicator states (global logging + profile/navigation logging)
-					if (globalRecord) {
-						setIcons(R.drawable.widget_monitoring_rec_small_day,
-							R.drawable.widget_monitoring_rec_small_night);
+					if (liveMonitoringEnabled) {
+						dn = R.drawable.widget_live_monitoring_rec_small_night;
+						d = R.drawable.widget_live_monitoring_rec_small_day;
 					} else {
-						setIcons(R.drawable.widget_monitoring_rec_small_day,
-								R.drawable.widget_monitoring_rec_small_night);
+						dn = R.drawable.widget_monitoring_rec_small_night;
+						d = R.drawable.widget_monitoring_rec_small_day;
 					}
-					
+					setIcons(d, dn);
+
 					map.getMyApplication().runInUIThread(new Runnable() {
 						@Override
 						public void run() {
+							int dn;
+							int d;
 							if (globalRecord) {
-								setIcons(R.drawable.widget_monitoring_rec_big_day,
-										R.drawable.widget_monitoring_rec_big_night);
+								if (liveMonitoringEnabled) {
+									dn = R.drawable.widget_live_monitoring_rec_big_night;
+									d = R.drawable.widget_live_monitoring_rec_big_day;
+								} else {
+									dn = R.drawable.widget_monitoring_rec_big_night;
+									d = R.drawable.widget_monitoring_rec_big_day;
+								}
 							} else {
-								setIcons(R.drawable.widget_monitoring_rec_small_day,
-										R.drawable.widget_monitoring_rec_small_night);
+								if (liveMonitoringEnabled) {
+									dn = R.drawable.widget_live_monitoring_rec_small_night;
+									d = R.drawable.widget_live_monitoring_rec_small_day;
+								} else {
+									dn = R.drawable.widget_monitoring_rec_small_night;
+									d = R.drawable.widget_monitoring_rec_small_day;
+								}
 							}
+							setIcons(d, dn);
 						}
 					}, 500);
 				}
