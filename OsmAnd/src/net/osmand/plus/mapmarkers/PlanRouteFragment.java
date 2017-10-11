@@ -66,6 +66,7 @@ import static net.osmand.plus.OsmandSettings.LANDSCAPE_MIDDLE_RIGHT_CONSTANT;
 public class PlanRouteFragment extends Fragment implements OsmAndLocationListener {
 
 	public static final String TAG = "PlanRouteFragment";
+	private static final int MIN_DISTANCE_FOR_RECALCULATE = 50; // in meters
 
 	private MapMarkersHelper markersHelper;
 	private MarkersPlanRouteContext planRouteContext;
@@ -357,7 +358,9 @@ public class PlanRouteFragment extends Fragment implements OsmAndLocationListene
 			boolean locationChanged = this.location != null && location != null
 					&& this.location.getLatitude() != location.getLatitude()
 					&& this.location.getLongitude() != location.getLongitude();
-			if (newLocation || locationChanged) {
+			boolean farEnough = locationChanged && MapUtils.getDistance(this.location.getLatitude(), this.location.getLongitude(),
+					location.getLatitude(), location.getLongitude()) >= MIN_DISTANCE_FOR_RECALCULATE;
+			if (newLocation || farEnough) {
 				this.location = location;
 				adapter.reloadData();
 				try {
