@@ -2490,7 +2490,7 @@
     <string name="of">%1$d из %2$d</string>
     <string name="shared_string_list">Список</string>
     <string name="shared_string_groups">Группы</string>
-    <string name="passed">Последнее использование: %1$s</string>
+    <string name="passed">Пройдено: %1$s</string>
     <string name="make_active">Сделать активным</string>
     <string name="today">Сегодня</string>
     <string name="yesterday">Вчера</string>
