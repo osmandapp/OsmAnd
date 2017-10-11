@@ -140,6 +140,7 @@ public class MapMarkersDialogFragment extends android.support.v4.app.DialogFragm
 				switch (menuItem.getItemId()) {
 					case R.id.action_active:
 						activeFragment.startLocationUpdate();
+						groupsFragment.stopLocationUpdate();
 						if (viewPager.getCurrentItem() != 0) {
 							hideSnackbar();
 							activeFragment.updateAdapter();
@@ -151,6 +152,7 @@ public class MapMarkersDialogFragment extends android.support.v4.app.DialogFragm
 						return true;
 					case R.id.action_groups:
 						activeFragment.stopLocationUpdate();
+						groupsFragment.startLocationUpdate();
 						if (viewPager.getCurrentItem() != 1) {
 							hideSnackbar();
 							groupsFragment.updateAdapter();
@@ -162,6 +164,7 @@ public class MapMarkersDialogFragment extends android.support.v4.app.DialogFragm
 						return true;
 					case R.id.action_history:
 						activeFragment.stopLocationUpdate();
+						groupsFragment.stopLocationUpdate();
 						if (viewPager.getCurrentItem() != 2) {
 							hideSnackbar();
 							historyFragment.updateAdapter();
