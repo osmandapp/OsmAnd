@@ -353,7 +353,7 @@ public class PlanRouteFragment extends Fragment implements OsmAndLocationListene
 	public void updateLocation(Location loc) {
 		MapActivity mapActivity = getMapActivity();
 		if (mapActivity != null) {
-			Location location = mapActivity.getMyApplication().getLocationProvider().getLastStaleKnownLocation();
+			final Location location = mapActivity.getMyApplication().getLocationProvider().getLastStaleKnownLocation();
 			boolean newLocation = (this.location == null && location != null) || location == null;
 			boolean locationChanged = this.location != null && location != null
 					&& this.location.getLatitude() != location.getLatitude()
@@ -361,14 +361,19 @@ public class PlanRouteFragment extends Fragment implements OsmAndLocationListene
 			boolean farEnough = locationChanged && MapUtils.getDistance(this.location.getLatitude(), this.location.getLongitude(),
 					location.getLatitude(), location.getLongitude()) >= MIN_DISTANCE_FOR_RECALCULATE;
 			if (newLocation || farEnough) {
-				this.location = location;
-				adapter.reloadData();
-				try {
-					adapter.notifyDataSetChanged();
-				} catch (Exception e) {
-					// to avoid crash because of:
-					// java.lang.IllegalStateException: Cannot call this method while RecyclerView is computing a layout or scrolling
-				}
+				mapActivity.getMyApplication().runInUIThread(new Runnable() {
+					@Override
+					public void run() {
+						PlanRouteFragment.this.location = location;
+						adapter.reloadData();
+						try {
+							adapter.notifyDataSetChanged();
+						} catch (Exception e) {
+							// to avoid crash because of:
+							// java.lang.IllegalStateException: Cannot call this method while RecyclerView is computing a layout or scrolling
+						}
+					}
+				});
 			}
 		}
 	}
