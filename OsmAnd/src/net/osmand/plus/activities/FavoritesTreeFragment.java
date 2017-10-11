@@ -114,7 +114,7 @@ public class FavoritesTreeFragment extends OsmandExpandableListFragment {
 	}
 
 	private void deleteFavorites() {
-		new AsyncTask<Void, Object, String>() {
+		new AsyncTask<Void, Object, Void>() {
 
 			@Override
 			protected void onPreExecute() {
@@ -122,17 +122,17 @@ public class FavoritesTreeFragment extends OsmandExpandableListFragment {
 			}
 
 			@Override
-			protected void onPostExecute(String result) {
+			protected void onPostExecute(Void result) {
 				hideProgressBar();
 				favouritesAdapter.synchronizeGroups();
 			}
 
 			@Override
-			protected String doInBackground(Void... params) {
+			protected Void doInBackground(Void... params) {
 				helper.delete(groupsToDelete, getSelectedFavorites());
 				favoritesSelected.clear();
 				groupsToDelete.clear();
-				return getString(R.string.favourites_delete_multiple_succesful);
+				return null;
 			}
 
 		}.execute();
