@@ -285,7 +285,7 @@ public class PlanRouteFragment extends Fragment implements OsmAndLocationListene
 				adapter.calculateStartAndFinishPos();
 				adapter.notifyDataSetChanged();
 				updateSelectButton();
-				planRouteContext.recreateSnapTrkSegment();
+				planRouteContext.recreateSnapTrkSegment(false);
 			}
 
 			@Override
@@ -308,7 +308,7 @@ public class PlanRouteFragment extends Fragment implements OsmAndLocationListene
 						// to avoid crash because of:
 						// java.lang.IllegalStateException: Cannot call this method while RecyclerView is computing a layout or scrolling
 					}
-					planRouteContext.recreateSnapTrkSegment();
+					planRouteContext.recreateSnapTrkSegment(false);
 				}
 			}
 		});
@@ -414,7 +414,7 @@ public class PlanRouteFragment extends Fragment implements OsmAndLocationListene
 					}
 					planRouteContext.getSnappedToRoadPoints().clear();
 					planRouteContext.setSnappedMode(mode);
-					planRouteContext.recreateSnapTrkSegment();
+					planRouteContext.recreateSnapTrkSegment(false);
 					setupAppModesBtn();
 				}
 			}
@@ -485,7 +485,7 @@ public class PlanRouteFragment extends Fragment implements OsmAndLocationListene
 				if (mapActivity != null) {
 					OsmandSettings settings = mapActivity.getMyApplication().getSettings();
 					settings.ROUTE_MAP_MARKERS_ROUND_TRIP.set(!settings.ROUTE_MAP_MARKERS_ROUND_TRIP.get());
-					planRouteContext.recreateSnapTrkSegment();
+					planRouteContext.recreateSnapTrkSegment(false);
 				}
 			}
 
@@ -507,13 +507,14 @@ public class PlanRouteFragment extends Fragment implements OsmAndLocationListene
 					markersHelper.reverseActiveMarkersOrder();
 					adapter.reloadData();
 					adapter.notifyDataSetChanged();
-					planRouteContext.recreateSnapTrkSegment();
+					planRouteContext.recreateSnapTrkSegment(false);
 				}
 			}
 		};
 	}
 
 	private void selectAllOnClick() {
+		boolean adjustMap = false;
 		int activeMarkersCount = markersHelper.getMapMarkers().size();
 		if (selectedCount == activeMarkersCount && markersHelper.isStartFromMyLocation()) {
 			markersHelper.deselectAllActiveMarkers();
@@ -523,10 +524,11 @@ public class PlanRouteFragment extends Fragment implements OsmAndLocationListene
 			markersHelper.selectAllActiveMarkers();
 			markersHelper.setStartFromMyLocation(true);
 			selectedCount = activeMarkersCount;
+			adjustMap = true;
 		}
 		adapter.calculateStartAndFinishPos();
 		adapter.notifyDataSetChanged();
-		planRouteContext.recreateSnapTrkSegment();
+		planRouteContext.recreateSnapTrkSegment(adjustMap);
 		MapActivity mapActivity = getMapActivity();
 		if (mapActivity != null) {
 			mapActivity.refreshMap();
@@ -580,7 +582,7 @@ public class PlanRouteFragment extends Fragment implements OsmAndLocationListene
 			}
 
 			selectedCount = mapActivity.getMyApplication().getMapMarkersHelper().getSelectedMarkersCount();
-			planRouteContext.recreateSnapTrkSegment();
+			planRouteContext.recreateSnapTrkSegment(true);
 			mapActivity.refreshMap();
 			updateSelectButton();
 		}
@@ -866,7 +868,7 @@ public class PlanRouteFragment extends Fragment implements OsmAndLocationListene
 				mapActivity.getMyApplication().getMapMarkersHelper().addSelectedMarkersToTop(res);
 				adapter.reloadData();
 				adapter.notifyDataSetChanged();
-				planRouteContext.recreateSnapTrkSegment();
+				planRouteContext.recreateSnapTrkSegment(false);
 			}
 		}.execute();
 	}

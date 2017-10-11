@@ -132,11 +132,7 @@ public class MarkersPlanRouteContext {
 		}
 	}
 
-	void recreateSnapTrkSegment() {
-		recreateSnapTrkSegment(true);
-	}
-
-	private void recreateSnapTrkSegment(boolean adjustMap) {
+	void recreateSnapTrkSegment(boolean adjustMap) {
 		snapTrkSegment.points.clear();
 		List<WptPt> points = getPointsToCalculate();
 		if (snappedMode == ApplicationMode.DEFAULT) {
