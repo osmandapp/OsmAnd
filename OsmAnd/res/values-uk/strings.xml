@@ -2361,7 +2361,7 @@
     <string name="access_direction_audio_feedback_descr">Ініціювати звуком напрям на цільову точку</string>
     <string name="access_direction_haptic_feedback">Тактильна індикація напрямку</string>
     <string name="access_direction_haptic_feedback_descr">Показати вібрацією напрям на цільову точку</string>
-    <string name="map_widget_battery">Заряд батареї</string>
+    <string name="map_widget_battery">Рівень заряду батареї</string>
     <string name="move_marker_bottom_sheet_title">Пересуньте мапу, щоб змінити положення позначки</string>
     <!-- string name="lat_lon_pattern">Шир: %1$.5f Дов: %2$.5f</string -->
     <string name="current_track">Поточний шлях</string>
