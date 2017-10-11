@@ -104,7 +104,7 @@ public class MarkersPlanRouteContext {
 	}
 
 	void cancelSnapToRoad() {
-		listener.hideProgressBar();
+		listener.hideProgressBar(true);
 		snapToRoadPairsToCalculate.clear();
 		if (calculationProgress != null) {
 			calculationProgress.isCancelled = true;
@@ -254,7 +254,7 @@ public class MarkersPlanRouteContext {
 					app.runInUIThread(new Runnable() {
 						@Override
 						public void run() {
-							listener.hideProgressBar();
+							listener.hideProgressBar(false);
 						}
 					});
 				}
@@ -270,7 +270,7 @@ public class MarkersPlanRouteContext {
 
 		void updateProgress(int progress);
 
-		void hideProgressBar();
+		void hideProgressBar(boolean canceled);
 
 		void refresh();
 

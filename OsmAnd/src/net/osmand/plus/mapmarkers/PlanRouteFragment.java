@@ -24,6 +24,7 @@ import android.widget.ImageView;
 import android.widget.LinearLayout;
 import android.widget.ProgressBar;
 import android.widget.TextView;
+import android.widget.Toast;
 
 import net.osmand.AndroidUtils;
 import net.osmand.Location;
@@ -109,9 +110,13 @@ public class PlanRouteFragment extends Fragment implements OsmAndLocationListene
 			}
 
 			@Override
-			public void hideProgressBar() {
+			public void hideProgressBar(boolean canceled) {
 				mainView.findViewById(R.id.snap_to_road_progress_bar).setVisibility(View.GONE);
 				planRouteContext.setProgressBarVisible(false);
+				if (!canceled && portrait && planRouteContext.isMarkersListOpened()) {
+					Toast.makeText(mapActivity, getString(R.string.route_calculated_toast), Toast.LENGTH_SHORT).show();
+					showHideMarkersList();
+				}
 			}
 
 			@Override
