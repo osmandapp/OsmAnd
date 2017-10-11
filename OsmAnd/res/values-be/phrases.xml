@@ -3538,4 +3538,14 @@
 
 	<string name="poi_vhf">VHF-канал</string>
 
+<string name="poi_gorge">Цясніна</string>
+	<string name="poi_couloir">Кулуар</string>
+	<string name="poi_mountain_area">Горная вобласць</string>
+
+	<string name="poi_surface_clay">Гліна</string>
+	<string name="poi_surface_tartan">Тартан</string>
+	<string name="poi_surface_artificial_turf">Штучная трава</string>
+	<string name="poi_surface_decoturf">Дэкараратыўны дзёран</string>
+	<string name="poi_surface_metal_grid">Металічная сетка</string>
+
 </resources>
