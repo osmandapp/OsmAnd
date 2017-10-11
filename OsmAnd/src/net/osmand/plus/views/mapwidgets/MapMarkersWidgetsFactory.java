@@ -17,9 +17,8 @@ import net.osmand.plus.activities.MapActivity;
 import net.osmand.plus.dashboard.DashLocationFragment;
 import net.osmand.plus.dashboard.DashboardOnMap;
 import net.osmand.plus.helpers.AndroidUiHelper;
-import net.osmand.plus.mapcontextmenu.MapContextMenu;
-import net.osmand.plus.mapcontextmenu.MenuController;
 import net.osmand.plus.mapcontextmenu.other.MapRouteInfoMenu;
+import net.osmand.plus.mapmarkers.MapMarkersDialogFragment;
 import net.osmand.plus.views.AnimateDraggingMapThread;
 import net.osmand.plus.views.DirectionDrawable;
 import net.osmand.plus.views.OsmandMapLayer.DrawSettings;
@@ -75,7 +74,7 @@ public class MapMarkersWidgetsFactory {
 		addressText = (TextView) map.findViewById(R.id.map_marker_address);
 		addressText2nd = (TextView) map.findViewById(R.id.map_marker_address_2nd);
 		okButton = (ImageButton) map.findViewById(R.id.marker_btn_ok);
-		okButton2nd = (ImageButton) map.findViewById(R.id.marker_btn_ok_2dn);
+		okButton2nd = (ImageButton) map.findViewById(R.id.marker_btn_ok_2nd);
 		moreButton = (ImageButton) map.findViewById(R.id.marker_btn_more);
 		moreButton2nd = (ImageButton) map.findViewById(R.id.marker_btn_more_2nd);
 
@@ -96,17 +95,17 @@ public class MapMarkersWidgetsFactory {
 		if (isLandscapeLayout() && helper.getMapMarkers().size() > 1) {
 			moreButton.setVisibility(View.GONE);
 		} else {
-			moreButton.setImageDrawable(iconsCache.getIcon(R.drawable.ic_overflow_menu_white, R.color.marker_top_2nd_line_color));
+			moreButton.setImageDrawable(iconsCache.getIcon(R.drawable.ic_action_markers_list, R.color.marker_top_2nd_line_color));
 			moreButton.setOnClickListener(new View.OnClickListener() {
 				@Override
 				public void onClick(View v) {
 					MapActivity.clearPrevActivityIntent();
-					map.getDashboard().setDashboardVisibility(true, DashboardOnMap.DashboardType.MAP_MARKERS);
+					MapMarkersDialogFragment.showInstance(map);
 				}
 			});
 		}
 		if (moreButton2nd != null) {
-			moreButton2nd.setImageDrawable(iconsCache.getIcon(R.drawable.ic_overflow_menu_white, R.color.marker_top_2nd_line_color));
+			moreButton2nd.setImageDrawable(iconsCache.getIcon(R.drawable.ic_action_markers_list, R.color.marker_top_2nd_line_color));
 			moreButton2nd.setOnClickListener(new View.OnClickListener() {
 				@Override
 				public void onClick(View v) {
@@ -115,12 +114,14 @@ public class MapMarkersWidgetsFactory {
 				}
 			});
 		}
+		okButton.setImageDrawable(iconsCache.getIcon(R.drawable.ic_action_marker_passed, R.color.color_white));
 		okButton.setOnClickListener(new View.OnClickListener() {
 			@Override
 			public void onClick(View v) {
 				removeMarker(0);
 			}
 		});
+		okButton2nd.setImageDrawable(iconsCache.getIcon(R.drawable.ic_action_marker_passed, R.color.color_white));
 		okButton2nd.setOnClickListener(new View.OnClickListener() {
 			@Override
 			public void onClick(View v) {
@@ -270,7 +271,7 @@ public class MapMarkersWidgetsFactory {
 		if (txt != null) {
 			distText.setText(txt);
 		}
-		updateVisibility(okButton, !customLocation && loc != null && dist < MIN_DIST_OK_VISIBLE);
+//		updateVisibility(okButton, !customLocation && loc != null && dist < MIN_DIST_OK_VISIBLE);
 
 		String descr;
 		PointDescription pd = marker.getPointDescription(map);
