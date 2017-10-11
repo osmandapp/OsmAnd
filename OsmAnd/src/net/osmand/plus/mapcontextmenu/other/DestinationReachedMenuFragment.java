@@ -16,6 +16,7 @@ import net.osmand.AndroidUtils;
 import net.osmand.data.LatLon;
 import net.osmand.plus.ApplicationMode;
 import net.osmand.plus.IconsCache;
+import net.osmand.plus.OsmandSettings;
 import net.osmand.plus.R;
 import net.osmand.plus.TargetPointsHelper;
 import net.osmand.plus.TargetPointsHelper.TargetPoint;
@@ -50,7 +51,7 @@ public class DestinationReachedMenuFragment extends Fragment {
 		view.setOnClickListener(new View.OnClickListener() {
 			@Override
 			public void onClick(View v) {
-				dismissMenu();
+				dismissMenu(true);
 			}
 		});
 
@@ -61,7 +62,7 @@ public class DestinationReachedMenuFragment extends Fragment {
 		closeImageButton.setOnClickListener(new View.OnClickListener() {
 			@Override
 			public void onClick(View v) {
-				dismissMenu();
+				dismissMenu(true);
 			}
 		});
 
@@ -81,7 +82,7 @@ public class DestinationReachedMenuFragment extends Fragment {
 						getMapActivity().getContextMenu().close();
 					}
 				}
-				dismissMenu();
+				dismissMenu(true);
 			}
 		});
 
@@ -95,7 +96,7 @@ public class DestinationReachedMenuFragment extends Fragment {
 				TargetPointsHelper helper = getMapActivity().getMyApplication().getTargetPointsHelper();
 				TargetPoint target = helper.getPointToNavigate();
 
-				dismissMenu();
+				dismissMenu(false);
 
 				if (target != null) {
 					helper.navigateToPoint(new LatLon(target.getLatitude(), target.getLongitude()),
@@ -129,7 +130,7 @@ public class DestinationReachedMenuFragment extends Fragment {
 					newIntent.putExtra(SearchActivity.SEARCH_NEARBY, true);
 					startActivityForResult(newIntent, 0);
 				}
-				dismissMenu();
+				dismissMenu(false);
 			}
 		});
 
@@ -181,7 +182,11 @@ public class DestinationReachedMenuFragment extends Fragment {
 				.addToBackStack(TAG).commitAllowingStateLoss();
 	}
 
-	public void dismissMenu() {
+	public void dismissMenu(boolean restoreAppMode) {
+		if (restoreAppMode) {
+			OsmandSettings settings = getMapActivity().getMyApplication().getSettings();
+			settings.APPLICATION_MODE.set(settings.DEFAULT_APPLICATION_MODE.get());
+		}
 		getMapActivity().getMapActions().stopNavigationWithoutConfirm();
 		getMapActivity().getSupportFragmentManager().popBackStack();
 	}
