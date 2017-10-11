@@ -41,7 +41,7 @@ public class MapMarkersActiveFragment extends Fragment implements OsmAndCompassL
 		final RecyclerView recyclerView = new RecyclerView(getContext());
 		final MapActivity mapActivity = (MapActivity) getActivity();
 		boolean isSmartphone = getResources().getConfiguration().smallestScreenWidthDp < 600;
-		recyclerView.setPadding(0, 0, 0, AndroidUtils.dpToPx(mapActivity, isSmartphone ? 72 : 108));
+		recyclerView.setPadding(0, 0, 0, AndroidUtils.dpToPx(mapActivity, isSmartphone ? 8 : 12));
 		recyclerView.setClipToPadding(false);
 		recyclerView.setLayoutManager(new LinearLayoutManager(getContext()));
 

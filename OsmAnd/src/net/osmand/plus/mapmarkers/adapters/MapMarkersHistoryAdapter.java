@@ -130,7 +130,15 @@ public class MapMarkersHistoryAdapter extends RecyclerView.Adapter<RecyclerView.
 				month = Character.toUpperCase(month.charAt(0)) + month.substring(1);
 			}
 			String day = new SimpleDateFormat("dd", Locale.getDefault()).format(date);
-			itemViewHolder.description.setText(app.getString(R.string.passed, month + " " + day));
+			String desc = app.getString(R.string.passed, month + " " + day);
+			String markerGroupName = marker.groupName;
+			if (markerGroupName != null) {
+				if (markerGroupName.equals("")) {
+					markerGroupName = app.getString(R.string.shared_string_favorites);
+				}
+				desc += " • " + markerGroupName;
+			}
+			itemViewHolder.description.setText(desc);
 
 			itemViewHolder.optionsBtn.setBackgroundDrawable(app.getResources().getDrawable(night ? R.drawable.marker_circle_background_dark_with_inset : R.drawable.marker_circle_background_light_with_inset));
 			itemViewHolder.optionsBtn.setImageDrawable(iconsCache.getThemedIcon(R.drawable.ic_action_reset_to_default_dark));
