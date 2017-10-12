@@ -288,7 +288,7 @@ La memoria utilizzata è  {1} MB.
     <string name="items_were_selected">{0} oggetto(i) selezionati</string>
     <string name="filter_existing_indexes">Filtro download</string>
     <string name="fast_route_mode">Percorso più veloce</string>
-    <string name="fast_route_mode_descr">"Abilita per calcolare il percorso più veloce o disabilita per il percorso dal minor consumo "</string>
+    <string name="fast_route_mode_descr">Abilita per calcolare il percorso più veloce o disabilita per il percorso dal minor consumo</string>
     <string name="tiles_to_download_estimated_size">Per lo zoom {0} scarica {1} tasselli ({2} MB)</string>
     <string name="shared_string_download_map">Download mappa</string>
     <string name="select_max_zoom_preload_area">Seleziona lo zoom massimo da precaricare</string>
@@ -2908,7 +2908,7 @@ Rappresenta l\'area: %1$s x %2$s</string>
     <string name="osmand_plus_extended_description_part1">OsmAnd+ (OSM Automatizzata Navigazione Direzioni) è un\'applicazione di navigazione con l\'accesso ai dati delle mappe mondiali, gratuite e di grande qualità OpenStreetMap (OSM). Goditi la navigazione con indicazioni visive e vocali, la visualizzazione dei PDI (punti di interesse), creando e gestendo le tracce GPX, usando visualizzazione delle linee isoipse e dell\'altitudine, scegliendo fra le modalità auto, bici, pedone, modifiche OSM e molto altro. OsmAnd+ è la versione dell\'app a pagamento. Acquistandola supporti il progetto, finanzi lo sviluppo di nuove funzionalità e ricevi gli ultimi aggiornamenti. Alcune delle maggiori caratteristiche:</string>
     <string name="osn_modify_dialog_title">Modifica la nota</string>
     <string name="context_menu_item_modify_note">Modifica la nota OSM</string>
-    <string name="make_round_trip_descr">Aggiungi una copia del punto di partenza come destinazione</string>
+    <string name="make_round_trip_descr">Aggiungi una copia del punto di partenza come destinazione.</string>
     <string name="make_round_trip">Costruisci un percorso circolare</string>
     <string name="shared_string_navigate">Naviga</string>
     <string name="shared_string_markers">Marcatori</string>

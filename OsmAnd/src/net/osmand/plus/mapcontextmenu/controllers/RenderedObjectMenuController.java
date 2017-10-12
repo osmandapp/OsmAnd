@@ -55,7 +55,7 @@ public class RenderedObjectMenuController extends MenuController {
 
 	@Override
 	public String getNameStr() {
-		if (!Algorithms.isEmpty(renderedObject.getName())) {
+		if (!Algorithms.isEmpty(renderedObject.getName()) && !isStartingWithRTLChar(renderedObject.getName())) {
 			return renderedObject.getName();
 		} else if (renderedObject.getTags().size() > 0) {
 			String lang = getMapActivity().getMyApplication().getSettings().MAP_PREFERRED_LOCALE.get().toLowerCase();
@@ -67,6 +67,8 @@ public class RenderedObjectMenuController extends MenuController {
 				name = renderedObject.getTags().get("name");
 			}
 			return name;
+		} else if (!Algorithms.isEmpty(renderedObject.getName())) {
+			return renderedObject.getName();
 		}
 		return "";
 	}
@@ -97,4 +99,13 @@ public class RenderedObjectMenuController extends MenuController {
 		}
 		addMyLocationToPlainItems(latLon);
 	}
+
+	private boolean isStartingWithRTLChar(String s) {
+		byte directionality = Character.getDirectionality(s.charAt(0));
+		return directionality == Character.DIRECTIONALITY_RIGHT_TO_LEFT
+				|| directionality == Character.DIRECTIONALITY_RIGHT_TO_LEFT_ARABIC
+				|| directionality == Character.DIRECTIONALITY_RIGHT_TO_LEFT_EMBEDDING
+				|| directionality == Character.DIRECTIONALITY_RIGHT_TO_LEFT_OVERRIDE;
+	}
+
 }

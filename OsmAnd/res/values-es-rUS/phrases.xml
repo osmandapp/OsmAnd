@@ -446,7 +446,7 @@
 	<string name="poi_fountain">Fuente</string>
 	<string name="poi_historic_ruins">Ruinas históricas</string>
 	<string name="poi_rune_stone">Piedra rúnica</string>
-	<string name="poi_wreck">Pecio/naufragio</string>
+	<string name="poi_wreck">Naufragio (pecio)</string>
 	<string name="poi_historic_ship">Barco histórico</string>
 	<string name="poi_historic_mine">Mina histórica</string>
 	<string name="poi_monument">Monumento</string>
@@ -3310,5 +3310,15 @@
 	<string name="poi_seamark_clearance_width">Anchura de seguridad</string>
 
 	<string name="poi_vhf">Canal VHF</string>
+
+<string name="poi_gorge">Cañón (desfiladero)</string>
+	<string name="poi_couloir">Barranco estrecho</string>
+	<string name="poi_mountain_area">Área montañosa</string>
+
+	<string name="poi_surface_clay">Polvo de ladrillo (arcilla)</string>
+	<string name="poi_surface_tartan">Tartán</string>
+	<string name="poi_surface_artificial_turf">Césped artificial</string>
+	<string name="poi_surface_decoturf">Decoturf (superficie dura para tenis)</string>
+	<string name="poi_surface_metal_grid">Rejilla metálica</string>
 
 </resources>

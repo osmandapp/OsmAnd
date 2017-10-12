@@ -1440,7 +1440,7 @@ public class GpxUiHelper {
 			calculatedH[k] = ph + (values.get(nextW).getY() - ph) / (values.get(nextW).getX() - pd) * (calculatedDist[k] - pd);
 		}
 
-		double SLOPE_PROXIMITY = 150;
+		double SLOPE_PROXIMITY = 100;
 
 		if (totalDistance - SLOPE_PROXIMITY < 0) {
 			if (useRightAxis) {

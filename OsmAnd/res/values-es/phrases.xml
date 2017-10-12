@@ -3538,4 +3538,11 @@
 
 	<string name="poi_vhf">Canal VHF</string>
 
+<string name="poi_gorge">Cañón (desfiladero)</string>
+	<string name="poi_mountain_area">Área montañosa</string>
+
+	<string name="poi_surface_tartan">Tartán</string>
+	<string name="poi_surface_artificial_turf">Césped artificial</string>
+	<string name="poi_surface_metal_grid">Rejilla metálica</string>
+
 </resources>

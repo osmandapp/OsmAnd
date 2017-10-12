@@ -3024,7 +3024,7 @@
 	<string name="poi_payment_ep_cash_no">carte de paiement non acceptée</string>
 	<string name="poi_full_service_yes">Service complet</string>
 	<string name="poi_resource_dimension_stone">Pierre de taille</string>
-	<string name="poi_artwork_type_relief">Type d\'oeuvre : secours</string>
+	<string name="poi_artwork_type_relief">Type d’œuvre : secours</string>
 	<string name="poi_architecture_timber_frame">Architecture : Cadre en bois</string>
 	<string name="poi_architecture_oldrussian">Architecture : russe ancien</string>
 	<string name="poi_architecture_wilhelminian_style">Architecture : Style wilhelminien</string>
