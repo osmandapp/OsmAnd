@@ -271,7 +271,7 @@ public class MapMarkersWidgetsFactory {
 		if (txt != null) {
 			distText.setText(txt);
 		}
-//		updateVisibility(okButton, !customLocation && loc != null && dist < MIN_DIST_OK_VISIBLE);
+		updateVisibility(okButton, !customLocation && loc != null && dist < MIN_DIST_OK_VISIBLE);
 
 		String descr;
 		PointDescription pd = marker.getPointDescription(map);
