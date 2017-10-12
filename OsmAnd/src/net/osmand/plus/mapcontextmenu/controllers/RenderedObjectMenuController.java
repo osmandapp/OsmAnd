@@ -3,6 +3,8 @@ package net.osmand.plus.mapcontextmenu.controllers;
 import net.osmand.NativeLibrary.RenderedObject;
 import net.osmand.data.LatLon;
 import net.osmand.data.PointDescription;
+import net.osmand.osm.AbstractPoiType;
+import net.osmand.osm.MapPoiTypes;
 import net.osmand.plus.OsmandPlugin;
 import net.osmand.plus.R;
 import net.osmand.plus.activities.MapActivity;
@@ -11,6 +13,8 @@ import net.osmand.plus.mapcontextmenu.MenuController;
 import net.osmand.plus.osmedit.OsmEditingPlugin;
 import net.osmand.plus.render.RenderingIcons;
 import net.osmand.util.Algorithms;
+
+import java.util.Map;
 
 public class RenderedObjectMenuController extends MenuController {
 
@@ -85,6 +89,17 @@ public class RenderedObjectMenuController extends MenuController {
 
 	@Override
 	public void addPlainMenuItems(String typeStr, PointDescription pointDescription, final LatLon latLon) {
+
+		MapPoiTypes poiTypes = getMapActivity().getMyApplication().getPoiTypes();
+		for (Map.Entry<String, String> entry : renderedObject.getTags().entrySet()) {
+			if (entry.getKey().equalsIgnoreCase("maxheight")) {
+				AbstractPoiType pt = poiTypes.getAnyPoiAdditionalTypeByKey(entry.getKey());
+				if (pt != null) {
+					addPlainMenuItem(R.drawable.ic_action_note_dark, pt.getTranslation() + ": " + entry.getValue(), false, false, null);
+				}
+			}
+		}
+
 		boolean osmEditingEnabled = OsmandPlugin.getEnabledPlugin(OsmEditingPlugin.class) != null;
 		if (osmEditingEnabled && renderedObject.getId() != null
 				&& renderedObject.getId() > 0 && 
