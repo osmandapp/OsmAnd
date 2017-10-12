@@ -863,7 +863,7 @@ Mémoire proportionnelle %4$s Mo (limite Android %5$s Mo, Dalvik %6$s Mo).</stri
     <string name="map_widget_speed">Vitesse</string>
     <string name="map_widget_distance">Destination</string>
     <string name="map_widget_altitude">Altitude</string>
-    <string name="map_widget_time">Temps de parcours</string>
+    <string name="map_widget_time">Durée restante</string>
     <string name="map_widget_next_turn">Prochaine bifurcation</string>
     <string name="map_widget_next_turn_small">Prochaine bifurcation (petit)</string>
     <string name="map_widget_next_next_turn">Bifurcation suivante (2e)</string>
@@ -2934,11 +2934,11 @@ représentant la zone : %1$s x %2$s</string>
     <string name="order_by">Trier par :</string>
     <string name="marker_show_distance_descr">Sélectionnez comment indiquer sur la carte la distance et la direction des marques :</string>
     <string name="map_orientation_change_in_accordance_with_speed_descr">Indiquez ci-dessous à quelle vitesse l\'orientation de la carte doit basculer de \'Sens du déplacement\' à \'Boussole\'</string>
-    <string name="passed">Date de dernière utilisation : %1$s</string>
+    <string name="passed">Visités : %1$s</string>
     <string name="show_guide_line">Afficher les lignes de guidage</string>
     <string name="show_arrows_on_the_map">Afficher les flèches sur la carte</string>
-    <string name="show_passed">Afficher Date de dernière utilisation</string>
-    <string name="hide_passed">Masquer Date de dernière utilisation</string>
+    <string name="show_passed">Afficher les visités</string>
+    <string name="hide_passed">Masquer les visités</string>
     <string name="marker_moved_to_active">Marque activée</string>
     <string name="use_location">Utiliser ma position</string>
     <string name="add_location_as_first_point_descr">Ajouter ma position comme point de départ.</string>
