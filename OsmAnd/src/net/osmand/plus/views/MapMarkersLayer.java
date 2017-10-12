@@ -66,7 +66,9 @@ public class MapMarkersLayer extends OsmandMapLayer implements IContextMenuProvi
 	private Paint bitmapPaintDestYellow;
 	private Paint bitmapPaintDestTeal;
 	private Paint bitmapPaintDestPurple;
+	private Bitmap arrowLight;
 	private Bitmap arrowToDestination;
+	private Bitmap arrowShadow;
 	private float[] calculations = new float[2];
 
 	private final RenderingLineAttributes lineAttrs = new RenderingLineAttributes("measureDistanceLine");
@@ -116,7 +118,9 @@ public class MapMarkersLayer extends OsmandMapLayer implements IContextMenuProvi
 		markerBitmapTeal = BitmapFactory.decodeResource(view.getResources(), R.drawable.map_marker_teal);
 		markerBitmapPurple = BitmapFactory.decodeResource(view.getResources(), R.drawable.map_marker_purple);
 
-		arrowToDestination = BitmapFactory.decodeResource(view.getResources(), R.drawable.map_arrow_to_destination);
+		arrowLight = BitmapFactory.decodeResource(view.getResources(), R.drawable.map_marker_direction_arrow_p1_light);
+		arrowToDestination = BitmapFactory.decodeResource(view.getResources(), R.drawable.map_marker_direction_arrow_p2_color);
+		arrowShadow = BitmapFactory.decodeResource(view.getResources(), R.drawable.map_marker_direction_arrow_p3_shadow);
 		bitmapPaintDestBlue = createPaintDest(R.color.marker_blue);
 		bitmapPaintDestGreen = createPaintDest(R.color.marker_green);
 		bitmapPaintDestOrange = createPaintDest(R.color.marker_orange);
@@ -315,7 +319,9 @@ public class MapMarkersLayer extends OsmandMapLayer implements IContextMenuProvi
 					final QuadPoint cp = tileBox.getCenterPixelPoint();
 					canvas.rotate(bearing, cp.x, cp.y);
 					canvas.translate(-24 * tileBox.getDensity() + radiusBearing, -22 * tileBox.getDensity());
+					canvas.drawBitmap(arrowShadow, cp.x, cp.y, bitmapPaint);
 					canvas.drawBitmap(arrowToDestination, cp.x, cp.y, getMarkerDestPaint(marker.colorIndex));
+					canvas.drawBitmap(arrowLight, cp.x, cp.y, bitmapPaint);
 					canvas.restore();
 				}
 				i++;
