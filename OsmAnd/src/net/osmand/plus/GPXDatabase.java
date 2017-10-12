@@ -1,5 +1,7 @@
 package net.osmand.plus;
 
+import android.support.annotation.Nullable;
+
 import net.osmand.IndexConstants;
 import net.osmand.plus.GPXUtilities.GPXTrackAnalysis;
 import net.osmand.plus.api.SQLiteAPI.SQLiteConnection;
@@ -491,6 +493,7 @@ public class GPXDatabase {
 		return items;
 	}
 
+	@Nullable
 	public GpxDataItem getItem(File file) {
 		GpxDataItem result = null;
 		SQLiteConnection db = openConnection(true);

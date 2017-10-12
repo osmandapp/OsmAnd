@@ -282,7 +282,7 @@ public class GPXLayer extends OsmandMapLayer implements ContextMenuLayer.IContex
 				List<GpxDisplayGroup> groups = g.getDisplayGroups();
 				if (groups != null && !groups.isEmpty()) {
 					GpxDataItem gpxDataItem = view.getApplication().getGpxDatabase().getItem(new File(g.getGpxFile().path));
-					int color = gpxDataItem.getColor();
+					int color = gpxDataItem != null ? gpxDataItem.getColor() : 0;
 					if (color == 0) {
 						color = g.getModifiableGpxFile().getColor(0);
 					}
