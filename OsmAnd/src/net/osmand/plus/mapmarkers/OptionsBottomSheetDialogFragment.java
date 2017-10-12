@@ -42,8 +42,8 @@ public class OptionsBottomSheetDialogFragment extends BottomSheetDialogFragment 
 	public void onCreate(@Nullable Bundle savedInstanceState) {
 		super.onCreate(savedInstanceState);
 		Bundle args = getArguments();
-		showSortBy = args.getBoolean(SHOW_SORT_BY_ROW, true);
-		showMoveAllToHistory = args.getBoolean(SHOW_MOVE_ALL_TO_HISTORY_ROW, true);
+		showSortBy = args == null || args.getBoolean(SHOW_SORT_BY_ROW, true);
+		showMoveAllToHistory = args == null || args.getBoolean(SHOW_MOVE_ALL_TO_HISTORY_ROW, true);
 	}
 
 	@Nullable
