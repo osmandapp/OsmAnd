@@ -1716,4 +1716,8 @@
     <string name="add_route_points">Marşrut nöqtələri əlavə et</string>
     <string name="add_waypoint">Yol nöqtəsi əlavə et</string>
     <string name="empty_state_favourites">Favoritlər əlavə et</string>
+    <string name="today">Bu gün</string>
+    <string name="yesterday">Dünən</string>
+    <string name="last_seven_days">Son 7 gün</string>
+    <string name="this_year">Bu il</string>
     </resources>
