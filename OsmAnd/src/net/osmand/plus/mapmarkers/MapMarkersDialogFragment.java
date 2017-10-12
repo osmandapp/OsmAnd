@@ -229,9 +229,13 @@ public class MapMarkersDialogFragment extends android.support.v4.app.DialogFragm
 			@Override
 			public void saveAsNewTrackOnClick() {
 				if (mapActivity != null) {
-					SaveAsTrackBottomSheetDialogFragment fragment = new SaveAsTrackBottomSheetDialogFragment();
-					fragment.setListener(createSaveAsTrackFragmentListener());
-					fragment.show(mapActivity.getSupportFragmentManager(), SaveAsTrackBottomSheetDialogFragment.TAG);
+					if (mapActivity.getMyApplication().getMapMarkersHelper().getMapMarkers().isEmpty()) {
+						Toast.makeText(mapActivity, getString(R.string.plan_route_no_markers_toast), Toast.LENGTH_SHORT).show();
+					} else {
+						SaveAsTrackBottomSheetDialogFragment fragment = new SaveAsTrackBottomSheetDialogFragment();
+						fragment.setListener(createSaveAsTrackFragmentListener());
+						fragment.show(mapActivity.getSupportFragmentManager(), SaveAsTrackBottomSheetDialogFragment.TAG);
+					}
 				}
 			}
 
