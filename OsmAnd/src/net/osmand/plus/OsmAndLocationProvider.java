@@ -73,9 +73,9 @@ public class OsmAndLocationProvider implements SensorEventListener {
 	private static final long STALE_LOCATION_TIMEOUT = 1000 * 60 * 5; // 5 minutes
 	private static final long STALE_LOCATION_TIMEOUT_FOR_UI = 1000 * 60 * 15; // 15 minutes
 
-	private static final int UPDATES_BEFORE_CHECK_LOCATION = 100;
-	private int updatesCounter;
-	private int updatesCounterUi;
+	private static final int REQUESTS_BEFORE_CHECK_LOCATION = 100;
+	private int locationRequestsCounter;
+	private int staleLocationRequestsCounter;
 
 	private net.osmand.Location cachedLocation;
 
@@ -868,35 +868,33 @@ public class OsmAndLocationProvider implements SensorEventListener {
 	}
 
 	public net.osmand.Location getLastKnownLocation() {
-		if (location != null && updatesCounter == 0) {
-			if ((System.currentTimeMillis() - location.getTime()) > STALE_LOCATION_TIMEOUT) {
-				location = null;
-			}
+		if (location != null && locationRequestsCounter == 0
+				&& System.currentTimeMillis() - location.getTime() > STALE_LOCATION_TIMEOUT) {
+			location = null;
 		}
-		if (updatesCounter == UPDATES_BEFORE_CHECK_LOCATION) {
-			updatesCounter = 0;
+		if (locationRequestsCounter == REQUESTS_BEFORE_CHECK_LOCATION) {
+			locationRequestsCounter = 0;
 		} else {
-			updatesCounter++;
+			locationRequestsCounter++;
 		}
 		return location;
 	}
 
 	@Nullable
 	public net.osmand.Location getLastStaleKnownLocation() {
-		if (updatesCounterUi == 0) {
-			net.osmand.Location newLoc = getLastKnownLocation();
-			if (newLoc == null) {
-				if (cachedLocation != null && System.currentTimeMillis() - cachedLocation.getTime() > STALE_LOCATION_TIMEOUT_FOR_UI) {
-					cachedLocation = null;
-				}
-			} else {
-				cachedLocation = newLoc;
+		net.osmand.Location newLoc = getLastKnownLocation();
+		if (newLoc == null) {
+			if (staleLocationRequestsCounter == 0 && cachedLocation != null
+					&& System.currentTimeMillis() - cachedLocation.getTime() > STALE_LOCATION_TIMEOUT_FOR_UI) {
+				cachedLocation = null;
 			}
-		}
-		if (updatesCounterUi == UPDATES_BEFORE_CHECK_LOCATION) {
-			updatesCounterUi = 0;
 		} else {
-			updatesCounterUi++;
+			cachedLocation = newLoc;
+		}
+		if (staleLocationRequestsCounter == REQUESTS_BEFORE_CHECK_LOCATION) {
+			staleLocationRequestsCounter = 0;
+		} else {
+			staleLocationRequestsCounter++;
 		}
 		return cachedLocation;
 	}
