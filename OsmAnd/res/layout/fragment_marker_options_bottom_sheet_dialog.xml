@@ -200,6 +200,7 @@
             </LinearLayout>
 
             <View
+                android:id="@+id/move_all_to_history_divider"
                 android:layout_width="wrap_content"
                 android:layout_height="1dp"
                 android:layout_marginBottom="@dimen/measurement_tool_bottom_divider_margin_bottom"
