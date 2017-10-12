@@ -249,6 +249,11 @@
 	\u2022 GPX split intervals with detailed info about your track\n\n
 	\u2022 Other improvements and bug fixes\n\n
 	</string>
+    <string name="release_2_8">
+	\u2022 Completely reworked map markers with guidelines and route planning\n\n
+	\u2022 Measure distance tool offering snap to road feature and saving points as track\n\n
+	\u2022 OSM Live: bug fixes, fresh data on the server every 30 minutes, updates implemented into the navigation\n\n
+	</string>
     <string name="auto_split_recording_title">Auto-split recordings after gap</string>
     <string name="auto_split_recording_descr">Start new segment after gap of 6 min, new track after gap of 2 h, or new file after longer gap if date has changed.</string>
     <string name="rendering_attr_contourDensity_description">Contour lines density</string>
