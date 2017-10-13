@@ -274,6 +274,11 @@ public class PlanRouteFragment extends Fragment implements OsmAndLocationListene
 			private int toPosition;
 
 			@Override
+			public void onDisableRoundTripClick() {
+				roundTripOnClick();
+			}
+
+			@Override
 			public void onCheckBoxClick(View view) {
 				int pos = markersRv.getChildAdapterPosition(view);
 				if (pos == RecyclerView.NO_POSITION) {
@@ -288,7 +293,7 @@ public class PlanRouteFragment extends Fragment implements OsmAndLocationListene
 					marker.selected = !marker.selected;
 					markersHelper.updateMapMarker(marker, false);
 				}
-				adapter.calculateStartAndFinishPos();
+				adapter.reloadData();
 				adapter.notifyDataSetChanged();
 				updateSelectButton();
 				planRouteContext.recreateSnapTrkSegment(false);
@@ -319,11 +324,11 @@ public class PlanRouteFragment extends Fragment implements OsmAndLocationListene
 			@Override
 			public void onDragEnded(RecyclerView.ViewHolder holder) {
 				toPosition = holder.getAdapterPosition();
-				if (toPosition >= 0 && fromPosition >= 0 && toPosition != fromPosition) {
+				if (toPosition >= 0 && fromPosition >= 0) {
 					mapActivity.getMyApplication().getMapMarkersHelper().reorderActiveMarkersIfNeeded();
 					mapActivity.getMyApplication().getSettings().MAP_MARKERS_ORDER_BY_MODE.set(OsmandSettings.MapMarkersOrderByMode.CUSTOM);
 					mapActivity.refreshMap();
-					adapter.calculateStartAndFinishPos();
+					adapter.reloadData();
 					try {
 						adapter.notifyDataSetChanged();
 					} catch (Exception e) {
@@ -520,11 +525,7 @@ public class PlanRouteFragment extends Fragment implements OsmAndLocationListene
 
 			@Override
 			public void makeRoundTripOnClick() {
-				if (mapActivity != null) {
-					OsmandSettings settings = mapActivity.getMyApplication().getSettings();
-					settings.ROUTE_MAP_MARKERS_ROUND_TRIP.set(!settings.ROUTE_MAP_MARKERS_ROUND_TRIP.get());
-					planRouteContext.recreateSnapTrkSegment(false);
-				}
+				roundTripOnClick();
 			}
 
 			@Override
@@ -551,6 +552,17 @@ public class PlanRouteFragment extends Fragment implements OsmAndLocationListene
 		};
 	}
 
+	private void roundTripOnClick() {
+		MapActivity mapActivity = getMapActivity();
+		if (mapActivity != null) {
+			OsmandSettings settings = mapActivity.getMyApplication().getSettings();
+			settings.ROUTE_MAP_MARKERS_ROUND_TRIP.set(!settings.ROUTE_MAP_MARKERS_ROUND_TRIP.get());
+			adapter.reloadData();
+			adapter.notifyDataSetChanged();
+			planRouteContext.recreateSnapTrkSegment(false);
+		}
+	}
+
 	private void selectAllOnClick() {
 		boolean adjustMap = false;
 		int activeMarkersCount = markersHelper.getMapMarkers().size();
@@ -564,7 +576,7 @@ public class PlanRouteFragment extends Fragment implements OsmAndLocationListene
 			selectedCount = activeMarkersCount;
 			adjustMap = true;
 		}
-		adapter.calculateStartAndFinishPos();
+		adapter.reloadData();
 		adapter.notifyDataSetChanged();
 		planRouteContext.recreateSnapTrkSegment(adjustMap);
 		MapActivity mapActivity = getMapActivity();
