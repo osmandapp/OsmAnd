@@ -2792,4 +2792,11 @@ Proporciona un código completo</string>
     <string name="osn_modify_dialog_error">Excepción ocurrida: el informe de problema no se modificó</string>
     <string name="osn_modify_dialog_title">Modificar informe</string>
     <string name="context_menu_item_modify_note">Modificar informe de problema OSM</string>
+    <string name="release_2_8">• Marcadores del mapa totalmente rediseñados con directrices y planificación de rutas
+\n
+\n • La herramienta de medición de distancias permite el ajuste al camino y guardar puntos como una traza
+\n
+\n • OSM Live: corrección de errores, nuevos datos en el servidor cada 30 minutos, actualizaciones implementadas en la navegación
+\n
+\n</string>
     </resources>

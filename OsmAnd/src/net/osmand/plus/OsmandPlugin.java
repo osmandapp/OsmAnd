@@ -86,6 +86,10 @@ public abstract class OsmandPlugin {
 		return active;
 	}
 
+	public boolean isVisible() {
+		return true;
+	}
+
 	public boolean needsInstallation() {
 		return installURL != null;
 	}
@@ -127,7 +131,10 @@ public abstract class OsmandPlugin {
 	public static void initPlugins(OsmandApplication app) {
 		OsmandSettings settings = app.getSettings();
 		Set<String> enabledPlugins = settings.getEnabledPlugins();
+
 		allPlugins.add(new MapillaryPlugin(app));
+		enabledPlugins.add(MapillaryPlugin.ID);
+
 		allPlugins.add(new OsmandRasterMapsPlugin(app));
 		allPlugins.add(new OsmandMonitoringPlugin(app));
 		// allPlugins.add(new OsMoPlugin(app));
@@ -141,7 +148,7 @@ public abstract class OsmandPlugin {
 //		checkMarketPlugin(app, new RoutePointsPlugin(app), false /*FIXME*/, RoutePointsPlugin.ROUTE_POINTS_PLUGIN_COMPONENT, null);
 		allPlugins.add(new AudioVideoNotesPlugin(app));
 		checkMarketPlugin(app, new ParkingPositionPlugin(app), false, ParkingPositionPlugin.PARKING_PLUGIN_COMPONENT, null);
-		allPlugins.add(new DistanceCalculatorPlugin(app));
+		//allPlugins.add(new DistanceCalculatorPlugin(app));
 		allPlugins.add(new AccessibilityPlugin(app));
 		allPlugins.add(new OsmEditingPlugin(app));
 		allPlugins.add(new OsmandDevelopmentPlugin(app));
@@ -303,6 +310,16 @@ public abstract class OsmandPlugin {
 		return allPlugins;
 	}
 
+	public static List<OsmandPlugin> getVisiblePlugins() {
+		List<OsmandPlugin> list = new ArrayList<>(allPlugins.size());
+		for (OsmandPlugin p : allPlugins) {
+			if (p.isVisible()) {
+				list.add(p);
+			}
+		}
+		return list;
+	}
+
 	public static List<OsmandPlugin> getEnabledPlugins() {
 		ArrayList<OsmandPlugin> lst = new ArrayList<OsmandPlugin>(allPlugins.size());
 		for (OsmandPlugin p : allPlugins) {
@@ -313,10 +330,30 @@ public abstract class OsmandPlugin {
 		return lst;
 	}
 
+	public static List<OsmandPlugin> getEnabledVisiblePlugins() {
+		ArrayList<OsmandPlugin> lst = new ArrayList<OsmandPlugin>(allPlugins.size());
+		for (OsmandPlugin p : allPlugins) {
+			if (p.isActive() && p.isVisible()) {
+				lst.add(p);
+			}
+		}
+		return lst;
+	}
+
 	public static List<OsmandPlugin> getNotEnabledPlugins() {
 		ArrayList<OsmandPlugin> lst = new ArrayList<OsmandPlugin>(allPlugins.size());
 		for (OsmandPlugin p : allPlugins) {
 			if (!p.isActive()) {
+				lst.add(p);
+			}
+		}
+		return lst;
+	}
+
+	public static List<OsmandPlugin> getNotEnabledVisiblePlugins() {
+		ArrayList<OsmandPlugin> lst = new ArrayList<OsmandPlugin>(allPlugins.size());
+		for (OsmandPlugin p : allPlugins) {
+			if (!p.isActive() && p.isVisible()) {
 				lst.add(p);
 			}
 		}

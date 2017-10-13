@@ -3492,4 +3492,21 @@
 	<string name="poi_government_transportation">Transportministerium</string>
 	<string name="poi_government_legislative">Gesetzgebende Institution</string>
 
+<string name="poi_seamark_clearance_height">Durchfahrtshöhe</string>
+	<string name="poi_seamark_clearance_height_closed">Durchfahrtshöhe (geschlossen)</string>
+	<string name="poi_seamark_clearance_height_open">Durchfahrtshöhe (geöffnet)</string>
+	<string name="poi_seamark_clearance_width">Durchfahrtsbreite</string>
+
+	<string name="poi_vhf">VHF-Band</string>
+
+	<string name="poi_gorge">Schlucht</string>
+	<string name="poi_couloir">Felsschlucht</string>
+	<string name="poi_mountain_area">Berggebiet</string>
+
+	<string name="poi_surface_clay">Sand</string>
+	<string name="poi_surface_tartan">Tartan</string>
+	<string name="poi_surface_artificial_turf">Kunstrasen</string>
+	<string name="poi_surface_decoturf">Zierrasen</string>
+	<string name="poi_surface_metal_grid">Metallgitter</string>
+
 </resources>

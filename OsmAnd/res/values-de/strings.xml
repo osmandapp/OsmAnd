@@ -2854,4 +2854,12 @@ Abgedeckte Fläche: %1$s x %2$s</string>
     <string name="map_orientation_change_in_accordance_with_speed">Kartenausrichtungsgrenzwert</string>
     <string name="map_orientation_change_in_accordance_with_speed_descr">Auswahl der Geschwindigkeit, unter der die Kartenausrichtung von \'Nach Bewegungsrichtung\' auf \'Nach Kompass\' schaltet.</string>
     <string name="marker_moved_to_history">Kartenmarkierung in den Verlauf verschoben</string>
+    <string name="osn_modify_dialog_error">Ausnahmefehler: Notiz wurde nicht verändert</string>
+    <string name="osn_modify_dialog_title">Notiz verändern</string>
+    <string name="context_menu_item_modify_note">OSM-Notiz ändern</string>
+    <string name="make_round_trip_descr">Kopie des Startpunkts als Ziel hinzufügen.</string>
+    <string name="make_round_trip">Rundreise erstellen</string>
+    <string name="shared_string_navigate">Navigieren</string>
+    <string name="my_location">Meine Position</string>
+    <string name="shared_string_finish">Abschließen</string>
     </resources>

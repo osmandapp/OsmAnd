@@ -1342,11 +1342,11 @@ Wil je een nieuwe map maken op de toegestane locatie en de OsmAnd-bestanden daar
 	<string name="navigation_intent_invalid">Ongeldig formaat: %s</string>
 <string name="osmo_settings_uuid">Uniek device-ID</string>
     <string name="osmo_settings_descr">Configureer monitor instellingen en maak een persoonlijk monitor-kanaal</string>
-    <string name="osmo_plugin_description">"Deze plug-in is voor OpenStreetMap Monitoring, zie https://osmo.mobi.
-\n
-\nJe kunt alle toestellen van een groep deelnemers volgen. Er zijn mogelijkheden voor het permanent of tijdelijk volgen.
-\n
-\nAnonieme groepen kunnen makkelijk gemaakt worden, bestaan maar een beperkt aantal dagen en zijn beperkt in de mogelijkheden, zoals het ontbreken van beheer op afstand en een groepsbeheerder. Volledig functionele groepen moeten worden aangemaakt op de website en alleen geregistreerde leden kunnen ze gebruiken. "</string>
+    <string name="osmo_plugin_description">Met deze plug-in kunt u real-time gevolgd worden met OpenStreetMap Monitoring, zie https://osmo.mobi. 
+\n 
+\nJe kunt alle toestellen van een groep deelnemers volgen. Er zijn mogelijkheden voor het permanent of tijdelijk volgen. 
+\n 
+\nAnonieme groepen kunnen makkelijk gemaakt worden, bestaan maar een beperkt aantal dagen en zijn beperkt in de mogelijkheden, zoals het ontbreken van beheer op afstand en een groepsbeheerder. Volledig functionele groepen moeten worden aangemaakt op de website en alleen geregistreerde leden kunnen ze gebruiken.</string>
     <string name="osmo_plugin_name">OsMo (OSM monitoring)</string>
     <string name="osmo_settings">OsMo</string>
    	<string name="keep_informing_never">Alleen handmatig (druk op de pijl)</string>
@@ -2396,7 +2396,7 @@ Er is nu {2} MB beschikbaar</string>
 \n en nog meer…</string>
     <string name="dist_away_from_my_location">Zoek tot %1$s ver weg</string>
     
-    <string name="share_history_subject">" gedeeld via OsmAnd"</string>
+    <string name="share_history_subject">gedeeld via OsmAnd</string>
     <string name="lang_hsb">Oppersorbisch</string>
     <string name="route_stops_before">nog %1$s haltes</string>
     <string name="coords_search">Zoeken met coördinaten</string>
@@ -2420,7 +2420,7 @@ Er is nu {2} MB beschikbaar</string>
     <string name="give_permission">Geef toestemming</string>
     <string name="allow_access_location">Locatiegegevens toestaan</string>
     <string name="first_usage_greeting">"Krijg routebeschrijvingen en ontdek nieuwe plaatsen,  zonder Internetverbinding"</string>
-    <string name="search_my_location">Zoek mijn positie</string>
+    <string name="search_my_location">Vind mijn positie</string>
     <string name="no_update_info">Geen updates tonen</string>
     <string name="clear_tile_data">Alle opgeslagen kaarttegels wissen</string>
     <string name="osm_live_payment_desc">Het abonnementsgeld is maandelijks. Het abonnement kan elk moment via Google Play worden gestopt.</string>
@@ -2690,7 +2690,7 @@ We slaan geen locatiegegevens, zoektermen of andere gebruikersgegevens op.</stri
     <string name="shared_string_visible">Zichtbaar</string>
     <string name="restore_purchases">Aankopen herstellen</string>
     <string name="fonts_header">Lettertypes voor de kaart</string>
-    <string name="do_not_show_startup_messages_desc">Meldingen van app-aanbiedingen en speciale lokale gebeurtenissen</string>
+    <string name="do_not_show_startup_messages_desc">Onderdruk meldingen van app-aanbiedingen en speciale lokale gebeurtenissen</string>
     <string name="parking_options">Parkeermogelijkheden</string>
     <string name="full_version_thanks">Dank voor het aanschaffen van de volledige versie van OsmAnd!</string>
     <string name="routing_attr_relief_smoothness_factor_hills_name">Heuvelachtige wegen</string>
@@ -2753,7 +2753,7 @@ We slaan geen locatiegegevens, zoektermen of andere gebruikersgegevens op.</stri
 • Toon extra informatie, zoals satellietfoto (van Bing), GPX-sporen, andere kaartstijlen en extra informatielagen
  "</string>
     <string name="osmand_extended_description_part4">Skiën - Met de OsmAnd Ski plugin ziet u pistes met hun moeilijkheidsgraad, en extra informatie zoals liften en andere faciliteiten.</string>
-    <string name="osmand_extended_description_part5">Fietsen • Vind fietspaden op de kaart • Routeberekening met gebruik van fietspaden • Toon snelheid en hoogte • Neem de rit op als GPX-spoor en deel deze • Geef, met een extra plugin, hoogteverschillen weer als hoogtelijnen of reliëfschaduw.</string>
+    <string name="osmand_extended_description_part5">Fietsen • Vind fietspaden op de kaart • Routeberekening met gebruik van fietspaden • Toon snelheid en hoogte • Neem de rit op als GPX-spoor en deel deze • Geef, met een extra plugin, hoogteverschillen weer als hoogtelijnen of reliëfschaduw</string>
     <string name="osmand_extended_description_part6">Wandelen • De kaart toont voetpaden, bergpaden, routes door parken • Wikipedia vertelt u meer over uw omgeving • OV-haltes (tram, bus, trein, metro), inclusief lijnnummers, helpen u te navigeren • Navigatie gebruikt voetpaden • Neem uw weg op als GPX-route of volg een gedownloade route</string>
     <string name="osmand_extended_description_part7">Werk mee aan OpenStreetMap (OSM) • Meld fouten • Upload sporen naar OSM, direct vanuit de app • Voeg POI toe aan de kaart en upload deze</string>
     <string name="osmand_extended_description_part8">OsmAnd is open-source en wordt steeds verder ontwikkeld. Iedereen kan helpen door bugs te melden, vertalingen te verbeteren of nieuwe functies te programmeren. Door deze interactie wordt het steeds beter. De voortgang is mede afhankelijk van betalingen om programmeurs en testers voor nieuwe functies te betalen.
@@ -2833,7 +2833,7 @@ Van bijna alle landen is een kaart te downloaden: van Afghanistan tot Zimbabwe, 
     <string name="mapillary_menu_title_username">Gebruikersnaam</string>
     <string name="move_all_to_history">Alles naar geschiedenis verplaatsen</string>
     <string name="build_route">Route maken</string>
-    <string name="show_direction">Toon richting</string>
+    <string name="show_direction">Toon afstand</string>
     <string name="sort_by">Sorteren op</string>
     <string name="marker_options">Opties voor Markeervlaggetjes</string>
     <string name="do_not_use_animations">Geen animaties gebruiken</string>
@@ -2861,8 +2861,8 @@ Van bijna alle landen is een kaart te downloaden: van Afghanistan tot Zimbabwe, 
     <string name="average">Gemiddeld</string>
     <string name="of">%1$d van de %2$d</string>
     <string name="retry">Probeer opnieuw</string>
-    <string name="descendingly">Aflopend</string>
-    <string name="ascendingly">Oplopend</string>
+    <string name="descendingly">van hoog naar laag</string>
+    <string name="ascendingly">van laag naar hoog</string>
     <string name="shared_string_list">Lijst</string>
     <string name="shared_string_groups">Groepen</string>
     <string name="osn_modify_dialog_title">Wijzig opmerking</string>
@@ -2945,8 +2945,9 @@ Van bijna alle landen is een kaart te downloaden: van Afghanistan tot Zimbabwe, 
     <string name="empty_state_my_tracks_desc">Registreer of of importeer tracks om weer te geven</string>
     <string name="empty_state_favourites">Favorieten toevoegen</string>
     <string name="empty_state_favourites_desc">Voeg favorieten toe op de kaart of importeer ze vanuit een bestand</string>
-    <string name="import_track">Import track</string>
+    <string name="import_track">Importeer track</string>
     <string name="import_track_desc">Bestand %1$s bevat geen waypoints. Importeren als een track?</string>
     <string name="move_point">Verplaats punt</string>
     <string name="add_segment_to_the_track">Voeg toe aan GPX-track</string>
-</resources>
+<string name="mapillary_menu_filter_description">Afbeeldingen kunnen worden gefilterd op gebruikersnaam of datum. Filters werken alleen bij inzoomen.</string>
+    </resources>

@@ -621,6 +621,18 @@
     <string name="rec_split_clip_length">"Clip  երկարությունը"</string>
     <string name="rec_split_clip_length_desc">Յուրաքանչյուր ձայնագրված տեսահոլովակի(clip) երկարությունը չի նշանակվի ավելի երկար ընտրված ժամանակահատվածից</string>
     <string name="rec_split_storage_size_desc">Հիշողության ծավալը, որը կարող է զբաղեցված լինի բոլոր clips-ներով</string>
-    <string name="route_distance">Հեռավորություն՜</string>
+    <string name="route_distance">Հեռավորություն։</string>
     <string name="route_duration">Ժամանակ՝</string>
+    <string name="rendering_attr_horseRoutes_name">Ձիոյու երթուղիներ</string>
+    <string name="no_address_found">Հասցեն որոշված չէ</string>
+    <string name="shared_string_near">Մոտ</string>
+    <string name="shared_string_hide">Թաքցնել</string>
+    <string name="av_video_quality_low">Ցածր որակ</string>
+    <string name="av_video_quality_high">Բարձր որակ</string>
+    <string name="av_video_quality">Տեսանյութի որակը</string>
+    <string name="av_video_quality_descr">Ընտրեք տեսանյութի որակը</string>
+    <string name="av_audio_format">Ձայնի ձևաչափ</string>
+    <string name="av_audio_format_descr">Ընտրեք ձայնի ձևաչափ</string>
+    <string name="av_audio_bitrate">Ձայնի bitrate</string>
+    <string name="av_audio_bitrate_descr">Ընտրեք ձայնի bitrate</string>
     </resources>

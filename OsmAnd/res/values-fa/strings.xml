@@ -139,7 +139,7 @@
 	<string name="starting_point_too_far">نقطهٔ شروع از نزدیک‌ترین جاده خیلی دور است.</string>
 	<string name="osmand_parking_event">خودرو را از پارکینگ بردارید</string>
 	<string name="osmand_parking_warning">هشدار</string>
-	<string name="osmand_parking_warning_text">برای برداشتن خودرو از پارکینگ یک یادآور به تقویم افزوده شد. تا زمانی که به‌صورت دستی پاکش نکنید همان‌جا خواهد ماند.</string>    
+	<string name="osmand_parking_warning_text">برای برداشتن خودرو از پارکینگ یک یادآور به تقویم افزوده شده است. تا زمانی که خودتان پاکش نکنید همان‌جا خواهد ماند.</string>    
 	<string name="osmand_parking_time_limit_title">محدودیت زمانی پارکینگ را مشخص کنید</string>
 	<string name="osmand_parking_delete_confirm">آیا محل پارک خودرو را حذف می‌کنید؟</string>
 	<string name="osmand_parking_choose_type">انتخاب نوع پارکینگ</string>
@@ -1922,7 +1922,9 @@
     <string name="access_sort">مرتب‌سازی</string>
     <string name="number_of_gpx_files_selected_pattern">%s فایل GPX انتخاب شده است</string>
     <string name="osm_live_email_desc">برای اینکه اطلاعاتی دربارهٔ مشارکت‌ها را برایتان ارسال کنیم، نوشتن آن لازم است</string>
-    <string name="download_files_question_space_with_temp">آیا {0} فایل را دانلود می‌کنید؟ {3} مگابایت برای ذخیره‌سازی موقت و {1} مگابایت برای ذخیره‌سازی دائمی صرف شده است. (فضای موجود {2} مگابایت است.)</string>
+    <string name="download_files_question_space_with_temp">آیا {0} فایل را دانلود می‌کنید؟
+\n{3} مگابایت برای ذخیره‌سازی موقت و {1} مگابایت برای ذخیره‌سازی دائمی لازم دارید.
+\nاکنون فضای آزاد {2} مگابایت است.</string>
     <string name="shared_string_type">نوع</string>
     <string name="rec_split">تقسیمگر ضبط‌کننده</string>
     <string name="shared_string_commit">ارسال</string>

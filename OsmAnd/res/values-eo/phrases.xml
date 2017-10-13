@@ -3501,4 +3501,16 @@
 
 	<string name="poi_vhf">VHF-kanalo</string>
 
+<string name="poi_memorial_jizo">Kŝitigarbo</string>
+	<string name="poi_memorial_prasat">Prasat (adorejo)</string>
+	<string name="poi_gorge">Kanjono</string>
+	<string name="poi_couloir">Akvosulko</string>
+	<string name="poi_mountain_area">Montara areo</string>
+
+	<string name="poi_surface_clay">argilo</string>
+	<string name="poi_surface_tartan">tartano</string>
+	<string name="poi_surface_artificial_turf">artefarita herbo</string>
+	<string name="poi_surface_decoturf">DecoTurf</string>
+	<string name="poi_surface_metal_grid">metala krado</string>
+
 </resources>

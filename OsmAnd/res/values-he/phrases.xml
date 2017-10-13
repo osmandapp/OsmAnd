@@ -307,4 +307,11 @@
 
 	<string name="poi_winter_room_yes">חדר חורף: יש</string>
 	<string name="poi_winter_room_no">חדר חורף: אין</string>
+	<string name="poi_scout_camp">מחנה צופים</string>
+	<string name="poi_piste_grooming">פילוס שלג</string>
+	<string name="poi_recycling_accepted_waste">פסולת תקפה</string>
+	<string name="poi_shelter_type">סוג</string>
+	<string name="poi_fireplace">אח</string>
+	<string name="poi_seasonal">עונתי</string>
+	<string name="poi_beach_surface_type">פני השטח</string>
 	</resources>
