@@ -2220,7 +2220,7 @@ Aktuell sind nur {2} MB verfügbar.</string>
     <string name="number_of_recipients">Anzahl der Empfänger</string>
     <string name="osm_user_stat">Bearbeitungen %1$s, Rang %2$s, Gesamtbearbeitungen %3$s</string>
     <string name="osm_editors_ranking">OSM-Bearbeiter-Rangliste</string>
-    <string name="osm_live_subscription">OSM-Live-Abonnement</string>
+    <string name="osm_live_subscription">OsmAnd-Live-Abonnement</string>
     <string name="osm_live_subscribe_btn">Abonnieren</string>
     <string name="osm_live_user_public_name">Öffentlicher Name</string>
     <string name="osm_live_hide_user_name">Meinen Namen nicht in Berichten anzeigen</string>
@@ -2232,7 +2232,7 @@ Aktuell sind nur {2} MB verfügbar.</string>
     <string name="osm_live_enter_user_name">Bitte einen öffentlichen Namen eingeben</string>
     <string name="osm_live_thanks">Vielen Dank für Ihr Abonnement von Live Aktualisierungen!</string>
     <string name="osm_live_subscription_settings">Abonnementeinstellungen</string>
-    <string name="osm_live_ask_for_purchase">Bitte kaufen Sie zuerst ein OSM-Live-Abonnement</string>
+    <string name="osm_live_ask_for_purchase">Bitte kaufen Sie zuerst ein OsmAnd-Live-Abonnement</string>
 
     <string name="osm_live_region_desc">Teile Ihrer Spende werden an OSM-Mitwirkende weitergegeben, die diese Region bearbeiten</string>
     <string name="osm_live_header">Dieses Abonnement schaltet stündliche Updates für die gesamten weltweiten Karten frei. 
@@ -2297,7 +2297,7 @@ Wenn Sie OsmAnd und OSM lieben und unterstützen wollen, so ist dies die perfekt
     <string name="access_autoannounce_period">Zeit zwischen automatischen Ansagen</string>
     <string name="map_widget_magnetic_bearing">Magnetische Peilung</string>
     <string name="access_no_destination">Ziel ist nicht festgelegt</string>
-    <string name="use_osm_live_routing">OSM Live Navigation</string>
+    <string name="use_osm_live_routing">OsmAnd Live Navigation</string>
 	<string name="map_widget_battery">Akkustand</string>
 <string name="move_marker_bottom_sheet_title">Karte bewegen, um die Position der Markierung zu verändern</string>
     <!-- string name="lat_lon_pattern">Lat: %1$.5f Lon: %2$.5f</string -->

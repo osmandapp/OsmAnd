@@ -52,6 +52,13 @@ public class PrecalculatedRouteDirection {
 	private PrecalculatedRouteDirection(PrecalculatedRouteDirection parent, int s1, int s2) {
 		this.minSpeed = parent.minSpeed;
 		this.maxSpeed = parent.maxSpeed;
+		boolean inverse = false;
+		if (s1 > s2) {
+			int tmp = s1;
+			s1 = s2;
+			s2 = tmp;
+			inverse = true;
+		}
 		tms = new float[s2 - s1 + 1];
 		pointsX = new int[s2 - s1 + 1];
 		pointsY = new int[s2 - s1 + 1];
@@ -61,7 +68,7 @@ public class PrecalculatedRouteDirection {
 			pointsY[shiftInd] = parent.pointsY[i];
 //			indexedPoints.registerObjectXY(parent.pointsX.get(i), parent.pointsY.get(i), pointsX.size() - 1);
 			quadTree.insert(shiftInd, parent.pointsX[i], parent.pointsY[i]);
-			tms[shiftInd] = parent.tms[i] - parent.tms[s2];
+			tms[shiftInd] = parent.tms[i] - parent.tms[inverse ? s1 : s2];
 		}
 	}
 	

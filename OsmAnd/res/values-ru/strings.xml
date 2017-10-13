@@ -224,7 +224,7 @@
     <string name="number_of_gpx_files_selected_pattern">%s GPX трека(ов) выбрано</string>
     <string name="change_markers_position">Переместить курсор</string>
     <string name="current_track">Текущий путь</string>
-    <string name="use_osm_live_routing">Навигация OSM Live</string>
+    <string name="use_osm_live_routing">Навигация OsmAnd Live</string>
     <string name="map_widget_battery">Заряд батареи</string>
     <string name="move_marker_bottom_sheet_title">Переместите карту чтобы изменить положение курсора</string>
     <!-- string name="lat_lon_pattern">Широта: %1$.5f Долгота: %2$.5f</string -->
@@ -2151,7 +2151,7 @@
     <string name="osm_live_enter_email">Пожалуйста, введите корректный адрес электронной почты</string>
     <string name="osm_live_thanks">Благодарим вас за подписку на автообновления!</string>
     <string name="osm_live_subscription_settings">Параметры подписки</string>
-    <string name="osm_live_ask_for_purchase">Пожалуйста сначала приобретите подписку OSM Live</string>
+    <string name="osm_live_ask_for_purchase">Пожалуйста сначала приобретите подписку OsmAnd Live</string>
 
     <string name="osm_live_header">Эта подписка позволяет получать ежечасное обновление для всех карт мира.
 Часть доходов переводится сообществу OSM и выплачивается за каждый вклад в OSM.
@@ -2242,8 +2242,8 @@
     <string name="access_direction_audio_feedback_descr">Индицировать звуком направление на целевую точку</string>
     <string name="access_direction_haptic_feedback">Тактильная индикация направления</string>
     <string name="access_direction_haptic_feedback_descr">Индицировать вибрацией направление на целевую точку</string>
-<string name="osm_live_subscription">Подписка OSM Live</string>
-    <string name="use_osm_live_routing_description">Включить навигацию с учетом автообновлений OSM Live (Beta)</string>
+<string name="osm_live_subscription">Подписка OsmAnd Live</string>
+    <string name="use_osm_live_routing_description">Включить навигацию с учетом автообновлений OsmAnd Live</string>
 	<string name="lang_es_us">Испанский (американский)</string>
     <string name="lang_en_gb">Английский (Соединенное Королевство)</string>
     <string name="lang_hu_formal">Венгерский (официальный)</string>

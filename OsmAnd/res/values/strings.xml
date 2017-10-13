@@ -250,7 +250,7 @@
     <string name="release_2_8">
 	\u2022 Completely reworked map markers with guidelines and route planning\n\n
 	\u2022 Measure distance tool offering snap to road feature and saving points as track\n\n
-	\u2022 OSM Live: bug fixes, fresh data on the server every 30 minutes, updates implemented into the navigation\n\n
+	\u2022 OsmAnd Live: bug fixes, fresh data on the server every 30 minutes, updates implemented into the navigation\n\n
 	</string>
     <string name="auto_split_recording_title">Auto-split recordings after gap</string>
     <string name="auto_split_recording_descr">Start new segment after gap of 6 min, new track after gap of 2 h, or new file after longer gap if date has changed.</string>
@@ -402,8 +402,8 @@
     <string name="access_direction_audio_feedback_descr">Indicate target point direction by sound</string>
     <string name="access_direction_haptic_feedback">Direction haptic feedback</string>
     <string name="access_direction_haptic_feedback_descr">Indicate target point direction by vibration</string>
-    <string name="use_osm_live_routing_description">Enable navigation for OSM Live changes (Beta)</string>
-    <string name="use_osm_live_routing">OSM Live navigation</string>
+    <string name="use_osm_live_routing_description">Enable navigation for OsmAnd Live changes</string>
+    <string name="use_osm_live_routing">OsmAnd Live navigation</string>
     <string name="access_no_destination">Destination is not set</string>
     <string name="map_widget_magnetic_bearing">Magnetic bearing</string>
     <string name="map_widget_bearing">Relative bearing</string>
@@ -488,7 +488,7 @@
     <string name="number_of_recipients">Number of recipients</string>
     <string name="osm_user_stat">Edits %1$s, rank %2$s, total edits %3$s</string>
     <string name="osm_editors_ranking">OSM Editors ranking</string>
-    <string name="osm_live_subscription">OSM Live subscription</string>
+    <string name="osm_live_subscription">OsmAnd Live subscription</string>
     <string name="osm_live_subscribe_btn">Subscribe</string>
     <string name="osm_live_email_desc">We need it to provide you information about contributions</string>
     <string name="osm_live_user_public_name">Public Name</string>
@@ -503,7 +503,7 @@
     <string name="osm_live_thanks">Thank you for subscribing to live updates!</string>
     <string name="osm_live_region_desc">Part of your donation will be sent to OSM users who submit changes to the map in that region</string>
     <string name="osm_live_subscription_settings">Subscription settings</string>
-    <string name="osm_live_ask_for_purchase">Please purchase OSM Live subscription first</string>
+    <string name="osm_live_ask_for_purchase">Please purchase OsmAnd Live subscription first</string>
     <string name="osm_live_header">This subscription enables hourly updates for all maps around the world.
         Part of the income goes back to the OSM community and is paid for each OSM contribution. 
         If you love OsmAnd and OSM and want to support them, this is the perfect way to do it.</string>
@@ -700,6 +700,7 @@
     <string name="rendering_attr_currentTrackColor_description">GPX color</string>
     <string name="rendering_attr_currentTrackWidth_name">GPX width</string>
     <string name="rendering_attr_currentTrackWidth_description">GPX width</string>
+    <string name="rendering_value_darkyellow_name">Dark yellow</string>
     <string name="rendering_value_red_name">Red</string>
     <string name="rendering_value_translucent_red_name">Translucent red</string>
     <string name="rendering_value_orange_name">Orange</string>

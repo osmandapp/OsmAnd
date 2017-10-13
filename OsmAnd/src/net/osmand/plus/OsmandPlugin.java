@@ -330,10 +330,30 @@ public abstract class OsmandPlugin {
 		return lst;
 	}
 
+	public static List<OsmandPlugin> getEnabledVisiblePlugins() {
+		ArrayList<OsmandPlugin> lst = new ArrayList<OsmandPlugin>(allPlugins.size());
+		for (OsmandPlugin p : allPlugins) {
+			if (p.isActive() && p.isVisible()) {
+				lst.add(p);
+			}
+		}
+		return lst;
+	}
+
 	public static List<OsmandPlugin> getNotEnabledPlugins() {
 		ArrayList<OsmandPlugin> lst = new ArrayList<OsmandPlugin>(allPlugins.size());
 		for (OsmandPlugin p : allPlugins) {
 			if (!p.isActive()) {
+				lst.add(p);
+			}
+		}
+		return lst;
+	}
+
+	public static List<OsmandPlugin> getNotEnabledVisiblePlugins() {
+		ArrayList<OsmandPlugin> lst = new ArrayList<OsmandPlugin>(allPlugins.size());
+		for (OsmandPlugin p : allPlugins) {
+			if (!p.isActive() && p.isVisible()) {
 				lst.add(p);
 			}
 		}
