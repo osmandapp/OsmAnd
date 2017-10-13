@@ -2224,7 +2224,7 @@
     <string name="osm_live_month_cost_desc">Штомесячны плацёж</string>
     <string name="osm_live_enter_email">Калі ласка, увядзіце сапраўдны адрас электроннай пошты</string>
     <string name="osm_live_subscription_settings">Парамэтры падпіскі</string>
-    <string name="osm_live_ask_for_purchase">Калі ласка, спачатку набудзьце падпіску OSM Live</string>
+    <string name="osm_live_ask_for_purchase">Калі ласка, спачатку набудзьце падпіску OsmAnd Live</string>
 
     <string name="osm_live_header">Гэтая падпіска дазваляе атрымліваць штогадзіннае абнаўленьне для ўсіх мапаў сьвету.
 Частка даходаў перадаецца ў OSM-супольнасьць і выплачваецца за кожны ўнёсак у OSM.
@@ -2250,7 +2250,7 @@
     <string name="map_markers">Маркеры</string>
     <string name="map_marker">Маркер</string>
     <string name="consider_turning_polygons_off">Рэкамэндуецца адключыць паказ палігонаў.</string>
-    <string name="osm_live_subscription">Падпіска OSM Live</string>
+    <string name="osm_live_subscription">Падпіска OsmAnd Live</string>
     <string name="osm_live_active">Актыўны</string>
     <string name="osm_live_not_active">Не актыўны</string>
     <string name="show_transparency_seekbar">Паказаць празрыстую пошукавую панэль</string>
@@ -2321,7 +2321,7 @@
     <string name="access_autoannounce_period_descr">Мінімальны час паміж абвяшчэньнямі</string>
     <string name="map_widget_bearing">Адносны азімут</string>
     <string name="map_widget_magnetic_bearing">Магнітны азімут</string>
-    <string name="use_osm_live_routing">Навігацыя OSM Live</string>
+    <string name="use_osm_live_routing">Навігацыя OsmAnd Live</string>
     <string name="access_no_destination">Пункт прызначэньня не зададзены</string>
     <string name="follow_us">Сачыце за намі</string>
     <string name="access_direction_audio_feedback">Гукавая індыкацыя кірунку</string>
@@ -2338,7 +2338,7 @@
     <string name="lang_en_gb">ангельская (Вялікабрытанія)</string>
     <string name="current_track">Дзейны трэк</string>
     <string name="lang_kn">канада (Індыя)</string>
-    <string name="use_osm_live_routing_description">Уключыць навігацыю для зьмен OSM Live (Beta)</string>
+    <string name="use_osm_live_routing_description">Уключыць навігацыю для змен OsmAnd Live</string>
 	<string name="lang_ast">астурыйская</string>
     <string name="app_mode_bus">Аўтобус</string>
  	<string name="app_mode_train">Цягнік</string>
@@ -2914,4 +2914,12 @@
     <string name="osn_modify_dialog_error">Адбылося выключэнне: нататка не была змененая</string>
     <string name="osn_modify_dialog_title">Змяніць нататку</string>
     <string name="context_menu_item_modify_note">Змяніць OSM-нататку</string>
+    <string name="release_2_8">\\022 Цалкам перапрацаваныя маркеры з рэкамендацыямі і планаваннем маршрута
+\n
+\n • Інструмент вымярэння адлегласцей з прывязкай да дарогі і з захаваннем кропак у след
+\n
+\n • OsmAnd Live: выпраўленне хібаў, абнаўленне даных на серверы кожныя 30 хвіль, абнаўленні рэалізаваныя ў навігацыі
+\n
+\n</string>
+    <string name="rendering_value_darkyellow_name">Цёмна-жоўты</string>
     </resources>
