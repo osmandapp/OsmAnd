@@ -825,7 +825,7 @@ public class PlanRouteFragment extends Fragment implements OsmAndLocationListene
 			int tileBoxHeightPx = 0;
 
 			if (portrait) {
-				tileBoxHeightPx = 3 * (tb.getPixHeight() - mainView.getHeight() - toolbarHeight) / 4;
+				tileBoxHeightPx = 3 * (tb.getPixHeight() - toolbarHeight) / 4;
 			} else {
 				tileBoxWidthPx = tb.getPixWidth() - mapActivity.getResources().getDimensionPixelSize(R.dimen.dashboard_land_width);
 			}
