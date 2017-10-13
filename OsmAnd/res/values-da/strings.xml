@@ -2915,4 +2915,11 @@ Tidligere destination bliver sidste mellemliggende punkt.</string>
     <string name="osn_modify_dialog_error">Der opstod en undtagelse: noten blev ikke ændret</string>
     <string name="osn_modify_dialog_title">Ændre note</string>
     <string name="context_menu_item_modify_note">Ændre OSM note</string>
+    <string name="release_2_8">"•  Helt omarbejdet kortmarkører med retningslinjer og ruteplanlægning
+\n
+\n • Afstand måleværktøj tilbyder en fastgør til vejen funktion samt at gemmme punkter som spor
+\n
+\n  •  OSM Live: fejlrettelser, nye data på serveren hvert 30. minut, opdateringer implementeres i navigationen
+\n
+\n"</string>
     </resources>
