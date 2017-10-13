@@ -195,7 +195,7 @@
     <string name="save_track_min_speed">Минимальная скорость для записи</string>
     <string name="save_track_min_speed_descr">Выберите минимальную скорость, при превышении которой точка будет записана в трек</string>
     <string name="save_track_min_distance">Минимальная дистанция для записи</string>
-    <string name="save_track_min_distance_descr">Выберите расстояние, при превышении которого точка будет записана в трек</string>
+    <string name="save_track_min_distance_descr">Фильтр: выберите минимальное расстояние от последней позиции для записи точки</string>
     <string name="save_track_precision">Минимально допустимая точность</string>
     <string name="save_track_precision_descr">Выберите минимально допустимую точность определения координат</string>
     <string name="christmas_poi">Рождественские POI</string>
@@ -1007,7 +1007,7 @@
     <string name="animate_route">Начать моделирование</string>
     <string name="file_can_not_be_renamed">Файл не может быть переименован.</string>
     <string name="file_with_name_already_exists">Файл с таким именем уже существует.</string>
-    <string name="shared_string_name">Имя</string>
+    <string name="shared_string_name">Имени</string>
     <string name="favourites_edit_dialog_category">Категория</string>
     <string name="contribution_activity">Установка версии</string>
     <string name="process_navigation_service">Навигационный сервис OsmAnd</string>
@@ -1620,7 +1620,7 @@
     <string name="speak_poi">Близлежащие POI</string>
     <string name="index_tours">Туры</string>
     <string name="shared_string_all">Все</string>
-    <string name="distance">Расстояние</string>
+    <string name="distance">Расстоянию</string>
     <string name="gpx_info_subtracks">"Подтрек: %1$s "</string>
     <string name="route_descr_destination">Пункт назначения</string>
     <string name="record_plugin_name">Запись поездки</string>
@@ -2515,4 +2515,26 @@
     <string name="shared_string_sort">Сортировать</string>
     <string name="marker_save_as_track_descr">Экспорт маркеров в файл можно задать здесь:</string>
     <string name="shared_string_markers">Маркеры</string>
+    <string name="osn_modify_dialog_title">Изменить заметку</string>
+    <string name="context_menu_item_modify_note">Изменить заметку OSM</string>
+    <string name="make_round_trip_descr">Добавить копию начальной точки в качестве пункта назначения.</string>
+    <string name="make_round_trip">Сделать маршрут круговым</string>
+    <string name="shared_string_navigate">Навигация</string>
+    <string name="use_location">Использовать позицию</string>
+    <string name="date_added">Дате добавления</string>
+    <string name="order_by">Сортировать по:</string>
+    <string name="marker_show_distance_descr">Выберите способ указания расстояния и направления до маркеров на экране карты:</string>
+    <string name="map_orientation_change_in_accordance_with_speed">Смена ориентации карты</string>
+    <string name="map_orientation_change_in_accordance_with_speed_descr">Выберите скорость с которой ориентация карты переключится с \"По направлению движения\" на \"По направлению компаса\"</string>
+    <string name="all_markers_moved_to_history">Все маркеры перемещены в историю</string>
+    <string name="marker_moved_to_history">Маркер перемещен в историю</string>
+    <string name="marker_moved_to_active">Маркер перемещен в действующие</string>
+    <string name="show_direction">Указатель расстояния</string>
+    <string name="release_2_8">• Полностью переработанные маркеры с рекомендациями и планированием маршрута 
+\n
+\n• Инструмент измерения расстояния, предлагающий привязку к дороге и сохранение точек в качестве трека
+\n
+\n• OSM Live: исправления ошибок, обновление данных на сервере каждые 30 минут, обновления вносимые в навигацию
+\n
+\n</string>
     </resources>
