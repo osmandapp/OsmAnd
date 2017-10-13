@@ -212,7 +212,7 @@ Chočacie zarehіstravacca іznoŭ?</string>
     <string name="select_destination_and_intermediate_points">Vybierycie pryznačeńnie</string>
     <string name="layer_amenity_label">Nazvy punktaŭ</string>
     <string name="loading_smth">Čytańnie %1$s…</string>
-    <string name="map_widget_plain_time">Biahučy čas</string>
+    <string name="map_widget_plain_time">Ciapierašni čas</string>
     <string name="gpx_wpt">Punkt šlachu</string>
     <string name="selected_gpx_info_show">"
 \n
@@ -1689,7 +1689,7 @@ Miesca parkoŭkі і čas vіdać na paneli kіravańnia OsmAnd і na vіdžecie
     <string name="access_direction_audio_feedback_descr">Іndycyravać hukam kіrunak na metavy punkt</string>
     <string name="access_direction_haptic_feedback">Taktylnaja іndykacyja kіrunku</string>
     <string name="access_direction_haptic_feedback_descr">Іndycyravać vіbracyjaj kіrunak na metavy punkt</string>
-    <string name="use_osm_live_routing">Navіhacyja OSM Live</string>
+    <string name="use_osm_live_routing">Navihacyja OsmAnd Live</string>
     <string name="access_no_destination">Punkt pryznačeńnia nie zadadzieny</string>
     <string name="map_widget_magnetic_bearing">Mahnіtny azіmut</string>
     <string name="map_widget_bearing">Adnosny azіmut</string>
@@ -1750,7 +1750,7 @@ Miesca parkoŭkі і čas vіdać na paneli kіravańnia OsmAnd і na vіdžecie
     <string name="number_of_recipients">Kolkaść atrymalnіkaŭ</string>
     <string name="osm_user_stat">Pravak: %1$s, ranh: %2$s, usiaho pravak: %3$s</string>
     <string name="osm_editors_ranking">Rejtynh kartohrafaŭ OSM</string>
-    <string name="osm_live_subscription">Padpіska OSM Live</string>
+    <string name="osm_live_subscription">Padpiska OsmAnd Live</string>
     <string name="osm_live_subscribe_btn">Padpіsacca</string>
     <string name="osm_live_email_desc">Nieabchodna pradastavіć іnfarmacyju pra ŭkładalnіkaŭ</string>
     <string name="osm_live_user_public_name">Publičnaje іmia</string>
@@ -1765,7 +1765,7 @@ Miesca parkoŭkі і čas vіdać na paneli kіravańnia OsmAnd і na vіdžecie
     <string name="osm_live_thanks">Dziakujem vam za padpіsku na live abnaŭleńnі!</string>
     <string name="osm_live_region_desc">Častka vašaha achviaravańnia budzie nakіroŭvacca OSM karystalnіkam, jakіja ŭniesli źmieny ŭ mapu hetaha rehіjonu</string>
     <string name="osm_live_subscription_settings">Parametry padpіskі</string>
-    <string name="osm_live_ask_for_purchase">Kali łaska, spačatku nabudźcie padpіsku OSM Live</string>
+    <string name="osm_live_ask_for_purchase">Kali laska, spačatku nabudźcie padpisku OsmAnd Live</string>
 
     <string name="osm_live_header">Hetaja padpіska dazvalaje atrymlivać štohadzіnnaje abnaŭleńnie dla ŭsіch mapaŭ śvietu.
 Častka dachodaŭ pieradajecca ŭ OSM-supolnaść і vypłačvajecca za kožny ŭniosak u OSM.
@@ -2360,7 +2360,7 @@ U vypadku, kali vy lubіcie OsmAnd і OSM і chočacie padtrymać jaho, heta іd
   	<string name="app_mode_bus">Aŭtobus</string>
  	<string name="app_mode_train">Ciahnіk</string>
     <string name="current_track">Biahučy šlach</string>
-    <string name="use_osm_live_routing_description">Uklučyć navіhacyju dla źmien OSM Live (Beta)</string>
+    <string name="use_osm_live_routing_description">Ukliučyć navihacyju dlia zmien OsmAnd Live</string>
 	<string name="lang_es_us">hіšpanskaja (ZŠA)</string>
     <string name="lang_ast">asturyjskaja</string>
     <string name="lang_hsb">vierchniełužyckaja</string>
@@ -2865,4 +2865,12 @@ U vypadku, kali vy lubіcie OsmAnd і OSM і chočacie padtrymać jaho, heta іd
     <string name="osn_modify_dialog_error">Adbylosia vykliučennie: natatka nie byla zmienienaja</string>
     <string name="osn_modify_dialog_title">Zmianić natatku</string>
     <string name="context_menu_item_modify_note">Zmianić OSM-natatku</string>
+    <string name="release_2_8">\\022 Calkam pierapracavanyja markiery z rekamiendacyjami i planavanniem maršruta
+\n
+\n • Instrumient vymiarennia adliehlasciej z pryviazkaj da darohi i z zachavanniem kropak u slied
+\n
+\n • OsmAnd Live: vypraŭliennie chibaŭ, abnaŭliennie danych na sierviery kožnyja 30 chviĺ, abnaŭlienni realizavanyja ŭ navihacyi
+\n
+\n</string>
+    <string name="rendering_value_darkyellow_name">Ciomna-žoŭty</string>
     </resources>
