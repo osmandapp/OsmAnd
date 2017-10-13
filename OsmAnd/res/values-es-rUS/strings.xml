@@ -2063,7 +2063,7 @@ Se aprecia la participación activa, y las contribuciones pueden hacerse directa
     <string name="number_of_recipients">Número de destinatarios</string>
     <string name="osm_user_stat">Ediciones %1$s de %3$s, posición %2$s</string>
     <string name="osm_editors_ranking">Clasificación de editores OSM</string>
-    <string name="osm_live_subscription">Suscripción de OSM Live</string>
+    <string name="osm_live_subscription">Suscripción de OsmAnd Live</string>
     <string name="osm_live_subscribe_btn">Suscribir</string>
     <string name="osm_live_email_desc">Necesario para proporcionarte información sobre las contribuciones</string>
     <string name="osm_live_user_public_name">Nombre público</string>
@@ -2078,7 +2078,7 @@ Se aprecia la participación activa, y las contribuciones pueden hacerse directa
     <string name="osm_live_thanks">¡Gracias por suscribirte a las actualizaciones en vivo!</string>
     <string name="osm_live_region_desc">Parte de tu donación se enviará a los usuarios de OSM que realicen cambios en el mapa de esa región</string>
     <string name="osm_live_subscription_settings">Ajustes de suscripción</string>
-    <string name="osm_live_ask_for_purchase">Primero compra la suscripción de OSM Live</string>
+    <string name="osm_live_ask_for_purchase">Primero compra la suscripción de OsmAnd Live</string>
 
     <string name="osm_live_header">Esta suscripción, permite actualizaciones cada hora para todos los mapa del mundo.
  Parte de los ingresos vuelven a la comunidad de OSM y se paga por cada contribución OSM.
@@ -2146,8 +2146,8 @@ Si amas a OsmAnd, OSM y quieres apoyarlos, esta es una perfecta manera de hacerl
     <string name="map_widget_bearing">Rumbo relativo</string>
     <string name="map_widget_magnetic_bearing">Rumbo magnético</string>
     <string name="access_no_destination">No se fijó el destino</string>
-    <string name="use_osm_live_routing_description">Activa la navegación para cambios con OSM Live (Beta)</string>
-	<string name="use_osm_live_routing">Navegación OSM Live</string>
+    <string name="use_osm_live_routing_description">Activa la navegación para cambios en vivo de OsmAnd</string>
+	<string name="use_osm_live_routing">Navegación con OsmAnd Live</string>
     <string name="follow_us">Síguenos</string>
     <string name="access_direction_audio_feedback">Retroalimentación auditiva de la dirección</string>
     <string name="access_direction_audio_feedback_descr">Indica la dirección del destino mediante sonido</string>
@@ -2800,4 +2800,5 @@ Proporciona un código completo</string>
 \n • OSM Live: corrección de errores, nuevos datos en el servidor cada 30 minutos, actualizaciones implementadas en la navegación
 \n
 \n</string>
+    <string name="rendering_value_darkyellow_name">Amarillo oscuro</string>
     </resources>
