@@ -375,7 +375,7 @@
 <string name="poi_castle">قلعه</string>
 <string name="poi_city_gate">دروازه شهرستان</string>
 <string name="poi_fort">برج و بارو</string>
-<string name="poi_fountain">چشمه</string>
+<string name="poi_fountain">فواره</string>
 <string name="poi_historic_ruins">خرابه های تاریخی</string>
 <string name="poi_rune_stone">سنگ نوشته ها</string>
 <string name="poi_wreck">کشتی شکسته</string>
@@ -667,4 +667,6 @@
 	<string name="poi_toilets_wheelchair_no">دسترسی به سرویس‌های بهداشتی با ویلچر: خیر</string>
 	<string name="poi_wheelchair_description">توضیحات برای استفاده‌کنندگان ویلچر</string>
 	<string name="poi_wheelchair_designated">ویژه</string>
+	<string name="poi_artwork_type_fountain">نوع اثر هنری: فواره</string>
+
 	</resources>
