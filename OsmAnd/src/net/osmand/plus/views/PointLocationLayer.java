@@ -113,10 +113,9 @@ public class PointLocationLayer extends OsmandMapLayer implements ContextMenuLay
 		}
 		// draw bearing/direction/location
 		if (isLocationVisible(box, lastKnownLocation)) {
-			boolean isBearing = lastKnownLocation.hasBearing();
 
 			Float heading = locationProvider.getHeading();
-			if (heading != null && mapViewTrackingUtilities.isShowViewAngle()) {
+			if (!locationOutdated && heading != null && mapViewTrackingUtilities.isShowViewAngle()) {
 
 				canvas.save();
 				canvas.rotate(heading - 180, locationX, locationY);
@@ -125,7 +124,8 @@ public class PointLocationLayer extends OsmandMapLayer implements ContextMenuLay
 				canvas.restore();
 
 			}
-			if (isBearing) {
+			boolean isBearing = lastKnownLocation.hasBearing();
+			if (!locationOutdated && isBearing) {
 				float bearing = lastKnownLocation.getBearing();
 				canvas.rotate(bearing - 90, locationX, locationY);
 				canvas.drawBitmap(bearingIcon, locationX - bearingIcon.getWidth() / 2,
