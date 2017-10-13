@@ -42,6 +42,7 @@ public class MarkersPlanRouteContext {
 	private boolean fragmentVisible;
 	private boolean markersListOpened;
 	private boolean adjustMapOnStart = true;
+	private boolean navigationFromMarkers;
 
 	Map<Pair<WptPt, WptPt>, List<WptPt>> getSnappedToRoadPoints() {
 		return snappedToRoadPoints;
@@ -51,7 +52,7 @@ public class MarkersPlanRouteContext {
 		return snapTrkSegment;
 	}
 
-	ApplicationMode getSnappedMode() {
+	public ApplicationMode getSnappedMode() {
 		return snappedMode;
 	}
 
@@ -97,6 +98,14 @@ public class MarkersPlanRouteContext {
 
 	public void setAdjustMapOnStart(boolean adjustMapOnStart) {
 		this.adjustMapOnStart = adjustMapOnStart;
+	}
+
+	public boolean isNavigationFromMarkers() {
+		return navigationFromMarkers;
+	}
+
+	public void setNavigationFromMarkers(boolean navigationFromMarkers) {
+		this.navigationFromMarkers = navigationFromMarkers;
 	}
 
 	public MarkersPlanRouteContext(OsmandApplication app) {
