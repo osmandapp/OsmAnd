@@ -208,7 +208,7 @@ public class MapMarkersListAdapter extends RecyclerView.Adapter<MapMarkerItemVie
 				if (month.length() > 1) {
 					month = Character.toUpperCase(month.charAt(0)) + month.substring(1);
 				}
-				String day = new SimpleDateFormat("dd", Locale.getDefault()).format(date);
+				String day = new SimpleDateFormat("d", Locale.getDefault()).format(date);
 				descr = month + " " + day;
 			}
 			holder.description.setText(descr);
