@@ -7,6 +7,7 @@ import android.os.Build;
 import android.os.Bundle;
 import android.support.annotation.DrawableRes;
 import android.support.annotation.Nullable;
+import android.support.design.widget.Snackbar;
 import android.support.v4.app.Fragment;
 import android.support.v4.app.FragmentManager;
 import android.support.v4.content.ContextCompat;
@@ -24,7 +25,6 @@ import android.widget.ImageView;
 import android.widget.LinearLayout;
 import android.widget.ProgressBar;
 import android.widget.TextView;
-import android.widget.Toast;
 
 import net.osmand.AndroidUtils;
 import net.osmand.Location;
@@ -114,8 +114,14 @@ public class PlanRouteFragment extends Fragment implements OsmAndLocationListene
 				mainView.findViewById(R.id.snap_to_road_progress_bar).setVisibility(View.GONE);
 				planRouteContext.setProgressBarVisible(false);
 				if (!canceled && portrait && planRouteContext.isMarkersListOpened()) {
-					Toast.makeText(mapActivity, getString(R.string.route_calculated_toast), Toast.LENGTH_SHORT).show();
-					showHideMarkersList();
+					Snackbar.make(mainView, getString(R.string.route_is_calculated) + ":", Snackbar.LENGTH_LONG)
+							.setAction(R.string.show_map, new View.OnClickListener() {
+								@Override
+								public void onClick(View view) {
+									showHideMarkersList();
+								}
+							})
+							.show();
 				}
 			}
 
