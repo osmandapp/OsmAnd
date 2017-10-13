@@ -1218,7 +1218,7 @@ public class LocalIndexesFragment extends OsmandExpandableListFragment implement
 		}
 		final IndexItem update = filesToUpdate.get(info.getFileName());
 		if (update != null) {
-			item = optionsMenu.getMenu().add(R.string.shared_string_download)
+			item = optionsMenu.getMenu().add(R.string.update_tile)
 					.setIcon(iconsCache.getThemedIcon(R.drawable.ic_action_import));
 			item.setOnMenuItemClickListener(new MenuItem.OnMenuItemClickListener() {
 				@Override
