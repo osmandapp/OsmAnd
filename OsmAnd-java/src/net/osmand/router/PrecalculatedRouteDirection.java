@@ -52,6 +52,13 @@ public class PrecalculatedRouteDirection {
 	private PrecalculatedRouteDirection(PrecalculatedRouteDirection parent, int s1, int s2) {
 		this.minSpeed = parent.minSpeed;
 		this.maxSpeed = parent.maxSpeed;
+		if (s1 > s2) {
+			tms = parent.tms;
+			pointsX = parent.pointsX;
+			pointsY =parent.pointsY;
+			quadTree = parent.quadTree;
+			return;
+		}
 		tms = new float[s2 - s1 + 1];
 		pointsX = new int[s2 - s1 + 1];
 		pointsY = new int[s2 - s1 + 1];
