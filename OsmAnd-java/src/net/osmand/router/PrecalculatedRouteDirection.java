@@ -54,9 +54,9 @@ public class PrecalculatedRouteDirection {
 		this.maxSpeed = parent.maxSpeed;
 		boolean inverse = false;
 		if (s1 > s2) {
-			s1 = s1 + s2;
-			s2 = s1 - s2;
-			s1 = s1 - s2;
+			int tmp = s1;
+			s1 = s2;
+			s2 = tmp;
 			inverse = true;
 		}
 		tms = new float[s2 - s1 + 1];
