@@ -80,11 +80,11 @@
 
                             <ImageButton
                                 android:id="@+id/marker_btn_ok"
-                                android:contentDescription="@string/shared_string_remove"
+                                android:contentDescription="@string/move_to_history"
                                 android:layout_width="50dp"
-                                android:layout_height="48dp"
-                                android:background="?attr/selectableItemBackgroundBorderless"
-                                android:src="@drawable/ic_action_done"/>
+                                android:layout_height="50dp"
+                                android:background="@drawable/marker_circle_background_top_bar_with_inset"
+                                tools:src="@drawable/ic_action_marker_passed"/>
 
                             <ImageButton
                                 android:id="@+id/marker_btn_more"
@@ -92,7 +92,7 @@
                                 android:layout_width="50dp"
                                 android:layout_height="48dp"
                                 android:background="?attr/selectableItemBackgroundBorderless"
-                                android:src="@drawable/ic_overflow_menu_white"/>
+                                android:src="@drawable/ic_action_markers_list"/>
 
                         </LinearLayout>
 
@@ -157,12 +157,12 @@
                             </LinearLayout>
 
                             <ImageButton
-                                android:id="@+id/marker_btn_ok_2dn"
-                                android:contentDescription="@string/shared_string_remove"
+                                android:id="@+id/marker_btn_ok_2nd"
+                                android:contentDescription="@string/move_to_history"
                                 android:layout_width="50dp"
-                                android:layout_height="48dp"
-                                android:background="?attr/selectableItemBackgroundBorderless"
-                                android:src="@drawable/ic_action_done"/>
+                                android:layout_height="50dp"
+                                android:background="@drawable/marker_circle_background_top_bar_with_inset"
+                                tools:src="@drawable/ic_action_marker_passed"/>
 
                             <ImageButton
                                 android:id="@+id/marker_btn_more_2nd"
@@ -170,7 +170,7 @@
                                 android:layout_width="50dp"
                                 android:layout_height="48dp"
                                 android:background="?attr/selectableItemBackgroundBorderless"
-                                android:src="@drawable/ic_overflow_menu_white"/>
+                                android:src="@drawable/ic_action_markers_list"/>
 
                         </LinearLayout>
 
