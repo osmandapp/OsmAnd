@@ -524,6 +524,7 @@ public class PlanRouteFragment extends Fragment implements OsmAndLocationListene
 						targetPointsHelper.clearStartPoint(false);
 						targetPointsHelper.clearPointToNavigate(false);
 					}
+					planRouteContext.setNavigationFromMarkers(true);
 					dismiss();
 					mapActivity.getMapLayers().getMapControlsLayer().doRoute(hasTargets);
 				}
