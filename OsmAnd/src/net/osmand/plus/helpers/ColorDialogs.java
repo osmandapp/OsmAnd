@@ -28,6 +28,7 @@ import static android.util.TypedValue.COMPLEX_UNIT_DIP;
 
 public class ColorDialogs {
 	public static int[] paletteColors = new int[] {
+			R.string.rendering_value_darkyellow_name,
 			R.string.rendering_value_red_name,
 			R.string.rendering_value_orange_name,
 			R.string.rendering_value_yellow_name,
@@ -41,6 +42,7 @@ public class ColorDialogs {
 	};
 
 	public static int[] pallette = new int[] {
+			0xb4eecc22,
 			0xb4d00d0d,
 			0xb4ff5020,
 			0xb4eeee10,
@@ -54,6 +56,7 @@ public class ColorDialogs {
 	};
 
 	public static String[] paletteColorTags = new String[] {
+			"darkyellow",
 			"red",
 			"orange",
 			"yellow",
