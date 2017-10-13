@@ -323,6 +323,10 @@ public class OsmEditsFragment extends OsmAndListFragment
 	@Override
 	public void onResume() {
 		super.onResume();
+		fetchData();
+	}
+
+	private void fetchData() {
 		ArrayList<OsmPoint> dataPoints = new ArrayList<>();
 		List<OpenstreetmapPoint> l1 = plugin.getDBPOI().getOpenstreetmapPoints();
 		List<OsmNotesPoint> l2 = plugin.getDBBug().getOsmbugsPoints();
@@ -351,7 +355,6 @@ public class OsmEditsFragment extends OsmAndListFragment
 		} else {
 			listAdapter.setNewList(dataPoints);
 		}
-
 	}
 
 	private void showBugDialog(final OsmNotesPoint point) {
@@ -527,8 +530,12 @@ public class OsmEditsFragment extends OsmAndListFragment
 					OpenstreetmapPoint i = (OpenstreetmapPoint) getPointAfterModify(info);
 					final Node entity = i.getEntity();
 					refreshId = entity.getId();
-					EditPoiDialogFragment.createInstance(entity, false)
-							.show(getActivity().getSupportFragmentManager(), "edit_poi");
+					EditPoiDialogFragment.createInstance(entity, false, new EditPoiDialogFragment.OnPoiChangedListener() {
+						@Override
+						public void onPoiChanged() {
+							fetchData();
+						}
+					}).show(getActivity().getSupportFragmentManager(), "edit_poi");
 					return true;
 				}
 			});
