@@ -2862,5 +2862,6 @@ Abgedeckte Fläche: %1$s x %2$s</string>
     <string name="shared_string_navigate">Navigieren</string>
     <string name="my_location">Meine Position</string>
     <string name="shared_string_finish">Abschließen</string>
-    <string name="use_system_keyboard">System Tastatur verwenden</string>
+    <string name="use_system_keyboard">Gerätetastatur verwenden</string>
+    <string name="marker_moved_to_active">Kartenmarkierung auf Karte verschoben</string>
     </resources>
