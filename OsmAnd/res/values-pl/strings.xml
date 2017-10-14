@@ -1716,7 +1716,7 @@ OsmAnd jest otwarto-źródłowym programem do nawigacji z dostępem do szerokiej
     <string name="proxy_pref_title">Proxy</string>
     <string name="proxy_pref_descr">Skonfiguruj ustawienia proxy</string>
     <string name="settings_privacy">Prywatność</string>
-    <string name="shared_string_my_location">Moje położenie</string>
+    <string name="shared_string_my_location">Aktualne położenie</string>
 
     <string name="shared_string_disabled">Wyłączone</string>
     <string name="shared_string_enabled">Włączone</string>
