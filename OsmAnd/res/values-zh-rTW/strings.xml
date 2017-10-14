@@ -2259,10 +2259,10 @@ OsmAnd (Automated Navigation Directions) 是一個地圖和導航的應用程式
     <string name="osm_live_enter_email">請輸入有效的電子郵件地址</string>
     <string name="osm_live_enter_user_name">請輸入公開名稱</string>
     <string name="osm_live_subscription_settings">認捐設定</string>
-    <string name="osm_live_subscription">OSM 即時捐助</string>
+    <string name="osm_live_subscription">OsmAnd Live 會費</string>
     <string name="osm_live_thanks">感謝您的捐款，即時更新！</string>
     <string name="osm_live_region_desc">您捐助的一部分會發送到 OSM，使用者將送交更改到該地區的地圖</string>
-    <string name="osm_live_ask_for_purchase">請先購買 OSM 即時捐助</string>
+    <string name="osm_live_ask_for_purchase">請先購買 OsmAnd Live 的會費</string>
 
     <string name="osm_live_header">此捐助能夠為世界各地所有的地圖每小時更新一次。
 部分收入又回到了 OSM 社群和支付每個 OSM 的貢獻。
@@ -2324,8 +2324,8 @@ OsmAnd (Automated Navigation Directions) 是一個地圖和導航的應用程式
     <string name="map_widget_bearing">相對方位</string>
     <string name="map_widget_magnetic_bearing">磁力方位</string>
     <string name="access_no_destination">未設定目的地</string>
-    <string name="use_osm_live_routing_description">為 OSM 即時兌換啟用導引 (Beta)</string>
-	<string name="use_osm_live_routing">OSM 即時導引</string>
+    <string name="use_osm_live_routing_description">為 OsmAnd Live 變更啟用導航</string>
+	<string name="use_osm_live_routing">OsmAnd Live 導航</string>
     <string name="follow_us">追蹤我們</string>
     <string name="access_direction_audio_feedback">方向音訊反饋</string>
     <string name="access_direction_audio_feedback_descr">用聲音指示目標點方向</string>
@@ -2905,4 +2905,5 @@ OsmAnd (Automated Navigation Directions) 是一個地圖和導航的應用程式
 \n • OSM 現況：修復錯誤，每30分鐘伺服器上最新的資料，更新應用到導航裡
 \n
 \n</string>
+    <string name="rendering_value_darkyellow_name">暗黃色</string>
     </resources>
