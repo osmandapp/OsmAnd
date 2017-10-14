@@ -321,7 +321,7 @@ public class POIMapLayer extends OsmandMapLayer implements ContextMenuLayer.ICon
 				app.getSettings().isLightContent() ?
 						R.style.OsmandLightTheme :
 						R.style.OsmandDarkTheme);
-		final String title = Algorithms.isEmpty(lang) ? a.getName() : a.getName(lang);
+		final String title = Algorithms.isEmpty(preferredLang) ? a.getName() : a.getName(preferredLang);
 		LinearLayout ll = new LinearLayout(ctx);
 		ll.setOrientation(LinearLayout.VERTICAL);
 
@@ -519,9 +519,17 @@ public class POIMapLayer extends OsmandMapLayer implements ContextMenuLayer.ICon
 	@Override
 	public PointDescription getObjectName(Object o) {
 		if (o instanceof Amenity) {
-			return new PointDescription(PointDescription.POINT_TYPE_POI, ((Amenity) o).getName(
-					view.getSettings().MAP_PREFERRED_LOCALE.get(),
-					view.getSettings().MAP_TRANSLITERATE_NAMES.get()));
+			Amenity a = (Amenity) o;
+			String preferredMapLang = app.getSettings().MAP_PREFERRED_LOCALE.get();
+			String preferredMapAppLang = preferredMapLang;
+			if (Algorithms.isEmpty(preferredMapAppLang)) {
+				preferredMapAppLang = app.getLanguage();
+			}
+			boolean transliterateNames = app.getSettings().MAP_TRANSLITERATE_NAMES.get();
+
+			return new PointDescription(PointDescription.POINT_TYPE_POI, a.getName(
+					a.getType().isWiki() ? preferredMapAppLang : preferredMapLang,
+					transliterateNames));
 		}
 		return null;
 	}
