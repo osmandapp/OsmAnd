@@ -49,6 +49,7 @@ import net.osmand.plus.dialogs.FavoriteDialogs;
 import net.osmand.plus.download.IndexItem;
 import net.osmand.plus.liveupdates.OsmLiveActivity;
 import net.osmand.plus.mapmarkers.MapMarkersDialogFragment;
+import net.osmand.plus.mapmarkers.MarkersPlanRouteContext;
 import net.osmand.plus.measurementtool.MeasurementToolFragment;
 import net.osmand.plus.monitoring.OsmandMonitoringPlugin;
 import net.osmand.plus.routing.RouteProvider.GPXRouteParamsBuilder;
@@ -365,12 +366,14 @@ public class MapActivityActions implements DialogProvider {
 			mapActivity.getRoutingHelper().setGpxParams(params);
 			settings.FOLLOW_THE_GPX_ROUTE.set(result.path);
 			if (!ps.isEmpty()) {
-				Location loc = ps.get(ps.size() - 1);
+				Location startLoc = ps.get(0);
+				Location finishLoc = ps.get(ps.size() - 1);
 				TargetPointsHelper tg = mapActivity.getMyApplication().getTargetPointsHelper();
-				tg.navigateToPoint(new LatLon(loc.getLatitude(), loc.getLongitude()), false, -1);
-				if (tg.getPointToStart() == null) {
-					loc = ps.get(0);
-					tg.setStartPoint(new LatLon(loc.getLatitude(), loc.getLongitude()), false, null);
+				tg.navigateToPoint(new LatLon(finishLoc.getLatitude(), finishLoc.getLongitude()), false, -1);
+				if (startLoc != finishLoc) {
+					tg.setStartPoint(new LatLon(startLoc.getLatitude(), startLoc.getLongitude()), false, null);
+				} else {
+					tg.clearStartPoint(false);
 				}
 			}
 		}
@@ -496,6 +499,11 @@ public class MapActivityActions implements DialogProvider {
 	}
 
 	public ApplicationMode getRouteMode(LatLon from) {
+		MarkersPlanRouteContext planRouteContext = mapActivity.getMyApplication().getMapMarkersHelper().getPlanRouteContext();
+		if (planRouteContext.isNavigationFromMarkers() && planRouteContext.getSnappedMode() != ApplicationMode.DEFAULT) {
+			planRouteContext.setNavigationFromMarkers(false);
+			return planRouteContext.getSnappedMode();
+		}
 		ApplicationMode mode = settings.DEFAULT_APPLICATION_MODE.get();
 		ApplicationMode selected = settings.APPLICATION_MODE.get();
 		if (selected != ApplicationMode.DEFAULT) {

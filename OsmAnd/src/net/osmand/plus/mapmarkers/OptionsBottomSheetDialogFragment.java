@@ -26,12 +26,24 @@ import net.osmand.plus.helpers.AndroidUiHelper;
 public class OptionsBottomSheetDialogFragment extends BottomSheetDialogFragment {
 
 	public final static String TAG = "OptionsBottomSheetDialogFragment";
+	public final static String SHOW_SORT_BY_ROW = "show_sort_by_row";
+	public final static String SHOW_MOVE_ALL_TO_HISTORY_ROW = "show_move_to_history_row";
 
 	private MarkerOptionsFragmentListener listener;
 	private boolean portrait;
+	private boolean showSortBy;
+	private boolean showMoveAllToHistory;
 
 	public void setListener(MarkerOptionsFragmentListener listener) {
 		this.listener = listener;
+	}
+
+	@Override
+	public void onCreate(@Nullable Bundle savedInstanceState) {
+		super.onCreate(savedInstanceState);
+		Bundle args = getArguments();
+		showSortBy = args == null || args.getBoolean(SHOW_SORT_BY_ROW, true);
+		showMoveAllToHistory = args == null || args.getBoolean(SHOW_MOVE_ALL_TO_HISTORY_ROW, true);
 	}
 
 	@Nullable
@@ -76,15 +88,20 @@ public class OptionsBottomSheetDialogFragment extends BottomSheetDialogFragment 
 		((TextView) mainView.findViewById(R.id.show_direction_text_view)).setTextColor(ContextCompat.getColor(mapActivity, nightMode ? R.color.color_dialog_buttons_dark : R.color.map_widget_blue_pressed));
 		((TextView) mainView.findViewById(R.id.show_direction_text_view)).setText(getMyApplication().getSettings().MAP_MARKERS_MODE.get().toHumanString(getActivity()));
 
-		mainView.findViewById(R.id.sort_by_row).setOnClickListener(new View.OnClickListener() {
-			@Override
-			public void onClick(View view) {
-				if (listener != null) {
-					listener.sortByOnClick();
+		View sortByRow = mainView.findViewById(R.id.sort_by_row);
+		if (!showSortBy) {
+			sortByRow.setVisibility(View.GONE);
+		} else {
+			sortByRow.setOnClickListener(new View.OnClickListener() {
+				@Override
+				public void onClick(View view) {
+					if (listener != null) {
+						listener.sortByOnClick();
+					}
+					dismiss();
 				}
-				dismiss();
-			}
-		});
+			});
+		}
 		mainView.findViewById(R.id.show_direction_row).setOnClickListener(new View.OnClickListener() {
 			@Override
 			public void onClick(View view) {
@@ -121,15 +138,21 @@ public class OptionsBottomSheetDialogFragment extends BottomSheetDialogFragment 
 				dismiss();
 			}
 		});
-		mainView.findViewById(R.id.move_all_to_history_row).setOnClickListener(new View.OnClickListener() {
-			@Override
-			public void onClick(View view) {
-				if (listener != null) {
-					listener.moveAllToHistoryOnClick();
+		View moveAllToHistoryRow = mainView.findViewById(R.id.move_all_to_history_row);
+		if (!showMoveAllToHistory) {
+			mainView.findViewById(R.id.move_all_to_history_divider).setVisibility(View.GONE);
+			moveAllToHistoryRow.setVisibility(View.GONE);
+		} else {
+			moveAllToHistoryRow.setOnClickListener(new View.OnClickListener() {
+				@Override
+				public void onClick(View view) {
+					if (listener != null) {
+						listener.moveAllToHistoryOnClick();
+					}
+					dismiss();
 				}
-				dismiss();
-			}
-		});
+			});
+		}
 		mainView.findViewById(R.id.cancel_row).setOnClickListener(new View.OnClickListener() {
 			@Override
 			public void onClick(View view) {

@@ -149,17 +149,23 @@
                 tools:background="@drawable/marker_circle_background_dark_with_inset"
                 tools:src="@drawable/ic_action_marker_passed"/>
 
-            <CheckBox
-                android:id="@+id/map_marker_check_box"
+            <FrameLayout
+                android:id="@+id/check_box_container"
                 android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:layout_marginBottom="16dp"
-                android:layout_marginLeft="16dp"
-                android:layout_marginRight="16dp"
-                android:layout_marginTop="16dp"
-                android:background="@null"
-                android:visibility="gone"
-                tools:visibility="visible"/>
+                android:layout_height="wrap_content">
+
+                <CheckBox
+                    android:id="@+id/map_marker_check_box"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginBottom="16dp"
+                    android:layout_marginLeft="16dp"
+                    android:layout_marginRight="16dp"
+                    android:layout_marginTop="16dp"
+                    android:visibility="gone"
+                    tools:visibility="visible"/>
+            </FrameLayout>
+
         </LinearLayout>
 
         <View

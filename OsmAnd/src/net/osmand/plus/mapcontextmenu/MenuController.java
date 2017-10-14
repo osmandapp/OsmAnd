@@ -119,6 +119,18 @@ public abstract class MenuController extends BaseMenuController {
 		this.builder.setLight(isLight());
 	}
 
+	public String getPreferredMapLang() {
+		return builder.getPreferredMapLang();
+	}
+
+	public String getPreferredMapAppLang() {
+		return builder.getPreferredMapAppLang();
+	}
+
+	public boolean isTransliterateNames() {
+		return builder.isTransliterateNames();
+	}
+
 	public void setMapContextMenu(MapContextMenu mapContextMenu) {
 		this.mapContextMenu = mapContextMenu;
 		builder.setMapContextMenu(mapContextMenu);

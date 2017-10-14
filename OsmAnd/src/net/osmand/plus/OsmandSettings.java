@@ -1280,13 +1280,6 @@ public class OsmandSettings {
 	// this value string is synchronized with settings_pref.xml preference name
 	public final CommonPreference<Boolean> MAP_ONLINE_DATA = new BooleanPreference("map_online_data", false).makeGlobal();
 
-	// this value string is synchronized with settings_pref.xml preference name
-	public final CommonPreference<Boolean> SHOW_DESTINATION_ARROW = new BooleanPreference("show_destination_arrow", false).makeProfile();
-
-	{
-		SHOW_DESTINATION_ARROW.setModeDefaultValue(ApplicationMode.PEDESTRIAN, true);
-	}
-
 	public final CommonPreference<String> CONTOUR_LINES_ZOOM = new StringPreference("contour_lines_zoom", null).makeGlobal().cache();
 
 	// this value string is synchronized with settings_pref.xml preference name

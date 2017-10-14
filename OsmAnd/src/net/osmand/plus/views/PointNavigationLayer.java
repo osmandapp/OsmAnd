@@ -38,7 +38,6 @@ public class PointNavigationLayer extends OsmandMapLayer implements
 	private Bitmap mStartPoint;
 	private Bitmap mTargetPoint;
 	private Bitmap mIntermediatePoint;
-	private Bitmap mArrowToDestination;
 
 	private Paint mTextPaint;
 
@@ -68,7 +67,6 @@ public class PointNavigationLayer extends OsmandMapLayer implements
 		mStartPoint = BitmapFactory.decodeResource(mView.getResources(), R.drawable.map_start_point);
 		mTargetPoint = BitmapFactory.decodeResource(mView.getResources(), R.drawable.map_target_point);
 		mIntermediatePoint = BitmapFactory.decodeResource(mView.getResources(), R.drawable.map_intermediate_point);
-		mArrowToDestination = BitmapFactory.decodeResource(mView.getResources(), R.drawable.map_arrow_to_destination);
 	}
 
 	@Override
@@ -124,27 +122,6 @@ public class PointNavigationLayer extends OsmandMapLayer implements
 			canvas.rotate(-tb.getRotate(), locationX, locationY);
 			canvas.drawBitmap(mTargetPoint, locationX - marginX, locationY - marginY, mBitmapPaint);
 			canvas.rotate(tb.getRotate(), locationX, locationY);
-		}
-
-		Iterator<TargetPoint> it = targetPoints.getIntermediatePoints().iterator();
-		if (it.hasNext()) {
-			pointToNavigate = it.next();
-		}
-		if (pointToNavigate != null && !isLocationVisible(tb, pointToNavigate)) {
-			boolean show = !mView.getApplication().getRoutingHelper().isRouteCalculated();
-			if (mView.getSettings().SHOW_DESTINATION_ARROW.isSet()) {
-				show = mView.getSettings().SHOW_DESTINATION_ARROW.get();
-			}
-			if (show) {
-				net.osmand.Location.distanceBetween(mView.getLatitude(), mView.getLongitude(),
-						pointToNavigate.getLatitude(), pointToNavigate.getLongitude(), mCalculations);
-				float bearing = mCalculations[1] - 90;
-				float radiusBearing = DIST_TO_SHOW * tb.getDensity();
-				final QuadPoint cp = tb.getCenterPixelPoint();
-				canvas.rotate(bearing, cp.x, cp.y);
-				canvas.translate(-24 * tb.getDensity() + radiusBearing, -22 * tb.getDensity());
-				canvas.drawBitmap(mArrowToDestination, cp.x, cp.y, mBitmapPaint);
-			}
 		}
 
 	}
