@@ -80,12 +80,14 @@ public class NavStartStopAction extends QuickAction {
 	@Override
 	public int getIconRes(Context context) {
 		if (context instanceof MapActivity) {
-			RoutingHelper helper = ((MapActivity) context).getRoutingHelper();
-			if (helper.isPauseNavigation() || helper.isFollowingMode()) {
-				return R.drawable.ic_action_target;
-			}
-			return R.drawable.ic_action_start_navigation;
+			return ((MapActivity) context).getMyApplication().getSettings().getApplicationMode().getMapIconId();
 		}
 		return super.getIconRes(context);
+	}
+
+	@Override
+	public boolean isActionWithSlash(OsmandApplication application) {
+		RoutingHelper helper = application.getRoutingHelper();
+		return helper.isPauseNavigation() || helper.isFollowingMode();
 	}
 }
