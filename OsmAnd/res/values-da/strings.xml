@@ -2916,11 +2916,19 @@ Tidligere destination bliver sidste mellemliggende punkt.</string>
     <string name="osn_modify_dialog_title">Ændre note</string>
     <string name="context_menu_item_modify_note">Ændre OSM note</string>
     <string name="release_2_8">"•  Helt omarbejdelse af kortmarkører med retningslinjer og ruteplanlægning 
+\n
 \n 
+\n
 \n • Afstand måleværktøj tilbyder en fastgør til vejen funktion samt at gemmme punkter som spor 
+\n
 \n 
+\n
 \n  •  OSM Live: fejlrettelser, nye data på serveren hvert 30. minut, opdateringer implementeres i navigationen
 \n
 \n"</string>
     <string name="rendering_value_darkyellow_name">Mørkegul</string>
+    <string name="show_map">Vis kort</string>
+    <string name="route_is_calculated">Ruten er beregnet</string>
+    <string name="round_trip">Rundtur</string>
+    <string name="plan_route_no_markers_toast">Tilføj mindst én markør for at bruge denne funktion.</string>
     </resources>
