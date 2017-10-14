@@ -2801,4 +2801,8 @@ Proporciona un código completo</string>
 \n
 \n</string>
     <string name="rendering_value_darkyellow_name">Amarillo oscuro</string>
+    <string name="show_map">Mostrar mapa</string>
+    <string name="route_is_calculated">Ruta calculada</string>
+    <string name="round_trip">Viaje de ida y vuelta</string>
+    <string name="plan_route_no_markers_toast">Debes añadir al menos un marcador para usar esta función.</string>
     </resources>
