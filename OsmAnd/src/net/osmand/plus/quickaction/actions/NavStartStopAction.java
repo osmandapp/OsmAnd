@@ -80,7 +80,7 @@ public class NavStartStopAction extends QuickAction {
 	@Override
 	public int getIconRes(Context context) {
 		if (context instanceof MapActivity) {
-			RoutingHelper helper = ((MapActivity) context).getMyApplication().getRoutingHelper();
+			RoutingHelper helper = ((MapActivity) context).getRoutingHelper();
 			if (!helper.isRoutePlanningMode() && !helper.isFollowingMode()) {
 				return ((MapActivity) context).getMapActions().getRouteMode(null).getSmallIconDark();
 			}
