@@ -2898,11 +2898,11 @@ OsmAnd (Automated Navigation Directions) 是一個地圖和導航的應用程式
     <string name="osn_modify_dialog_error">發生異常：註解未被修改</string>
     <string name="osn_modify_dialog_title">修改註解</string>
     <string name="context_menu_item_modify_note">修改 OSM 註解</string>
-    <string name="release_2_8">\\022 完全重做地圖標記偕同指標和路線規劃
-\n
-\n • 測量距離工具嵌入快照於道路樣貌和儲存標點為軌跡
-\n
-\n • OSM 現況：修復錯誤，每30分鐘伺服器上最新的資料，更新應用到導航裡
+    <string name="release_2_8">\\022 完全重做地圖標記偕同指標和路線規劃 
+\n 
+\n • 測量距離工具嵌入快照於道路樣貌和儲存標點為軌跡 
+\n 
+\n • OsmAnd Live：修復錯誤，每30分鐘伺服器上最新的資料，更新應用到導航裡
 \n
 \n</string>
     <string name="rendering_value_darkyellow_name">暗黃色</string>
