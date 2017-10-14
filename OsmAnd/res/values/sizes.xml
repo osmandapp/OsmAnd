@@ -188,4 +188,7 @@
 	<dimen name="measurement_tool_bottom_divider_margin_start">64dp</dimen>
 	<dimen name="bottom_sheet_image_text_margin_start">10dp</dimen>
 	<dimen name="bottom_sheet_selected_item_title_height">56dp</dimen>
+	
+	<dimen name="map_markers_recycler_view_padding_bottom">52dp</dimen>
+	<dimen name="map_markers_recycler_view_padding_top">10dp</dimen>
 </resources>

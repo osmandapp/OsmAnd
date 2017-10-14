@@ -78,6 +78,10 @@ public class MenuBuilder {
 	private CardsRowBuilder onlinePhotoCardsRow;
 	private List<AbstractCard> onlinePhotoCards;
 
+	private String preferredMapLang;
+	private String preferredMapAppLang;
+	private boolean transliterateNames;
+
 	public class PlainMenuItem {
 		private int iconId;
 		private String text;
@@ -185,6 +189,25 @@ public class MenuBuilder {
 		this.mapActivity = mapActivity;
 		this.app = mapActivity.getMyApplication();
 		this.plainMenuItems = new LinkedList<>();
+
+		preferredMapLang = app.getSettings().MAP_PREFERRED_LOCALE.get();
+		preferredMapAppLang = preferredMapLang;
+		if (Algorithms.isEmpty(preferredMapAppLang)) {
+			preferredMapAppLang = app.getLanguage();
+		}
+		transliterateNames = app.getSettings().MAP_TRANSLITERATE_NAMES.get();
+	}
+
+	public String getPreferredMapLang() {
+		return preferredMapLang;
+	}
+
+	public String getPreferredMapAppLang() {
+		return preferredMapAppLang;
+	}
+
+	public boolean isTransliterateNames() {
+		return transliterateNames;
 	}
 
 	public MapActivity getMapActivity() {
@@ -661,7 +684,7 @@ public class MenuBuilder {
 			wikiButton.setPadding(dpToPx(14f), 0, dpToPx(14f), 0);
 			wikiButton.setTextColor(app.getResources()
 					.getColor(light ? R.color.color_dialog_buttons_light : R.color.color_dialog_buttons_dark));
-			wikiButton.setText(wiki.getName());
+			wikiButton.setText(wiki.getName(preferredMapAppLang, transliterateNames));
 
 			wikiButton.setGravity(Gravity.LEFT | Gravity.CENTER_VERTICAL);
 			wikiButton.setSingleLine(true);
@@ -683,10 +706,6 @@ public class MenuBuilder {
 
 	protected boolean processNearstWiki() {
 		if (showNearestWiki && latLon != null) {
-			String preferredLang = app.getSettings().MAP_PREFERRED_LOCALE.get();
-			if (Algorithms.isEmpty(preferredLang)) {
-				preferredLang = app.getLanguage();
-			}
 			QuadRect rect = MapUtils.calculateLatLonBbox(
 					latLon.getLatitude(), latLon.getLongitude(), 250);
 			nearestWiki = app.getResourceManager().searchAmenities(
@@ -711,16 +730,14 @@ public class MenuBuilder {
 				}
 			});
 			Long id = objectId;
-			if (id != 0) {
-				List<Amenity> wikiList = new ArrayList<>();
-				for (Amenity wiki : nearestWiki) {
-					String lng = wiki.getContentLanguage("content", preferredLang, "en");
-					if (wiki.getId().equals(id) || (!lng.equals("en") && !lng.equals(preferredLang))) {
-						wikiList.add(wiki);
-					}
+			List<Amenity> wikiList = new ArrayList<>();
+			for (Amenity wiki : nearestWiki) {
+				String lng = wiki.getContentLanguage("content", preferredMapAppLang, "en");
+				if (wiki.getId().equals(id) || (!lng.equals("en") && !lng.equals(preferredMapAppLang))) {
+					wikiList.add(wiki);
 				}
-				nearestWiki.removeAll(wikiList);
 			}
+			nearestWiki.removeAll(wikiList);
 			return true;
 		}
 		return false;

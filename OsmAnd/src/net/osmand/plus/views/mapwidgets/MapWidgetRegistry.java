@@ -311,8 +311,7 @@ public class MapWidgetRegistry {
 	}
 
 	private void resetDefaultAppearance(ApplicationMode appMode) {
-//		settings.SHOW_RULER.resetToDefault();		
-		settings.SHOW_DESTINATION_ARROW.resetToDefault();
+//		settings.SHOW_RULER.resetToDefault();
 		settings.TRANSPARENT_MAP_THEME.resetToDefault();
 		settings.SHOW_STREET_NAME.resetToDefault();
 		settings.CENTER_POSITION_ON_MAP.resetToDefault();
@@ -320,7 +319,6 @@ public class MapWidgetRegistry {
 	}
 
 	public void addControlsAppearance(final MapActivity map, final ContextMenuAdapter cm, ApplicationMode mode) {
-		addControlId(map, cm, R.string.map_widget_show_destination_arrow, settings.SHOW_DESTINATION_ARROW);
 		addControlId(map, cm, R.string.map_widget_transparent, settings.TRANSPARENT_MAP_THEME);
 		addControlId(map, cm, R.string.always_center_position_on_map, settings.CENTER_POSITION_ON_MAP);
 		if (mode != ApplicationMode.DEFAULT) {

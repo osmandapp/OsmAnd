@@ -66,7 +66,9 @@ public class MapMarkersLayer extends OsmandMapLayer implements IContextMenuProvi
 	private Paint bitmapPaintDestYellow;
 	private Paint bitmapPaintDestTeal;
 	private Paint bitmapPaintDestPurple;
+	private Bitmap arrowLight;
 	private Bitmap arrowToDestination;
+	private Bitmap arrowShadow;
 	private float[] calculations = new float[2];
 
 	private final RenderingLineAttributes lineAttrs = new RenderingLineAttributes("measureDistanceLine");
@@ -116,7 +118,9 @@ public class MapMarkersLayer extends OsmandMapLayer implements IContextMenuProvi
 		markerBitmapTeal = BitmapFactory.decodeResource(view.getResources(), R.drawable.map_marker_teal);
 		markerBitmapPurple = BitmapFactory.decodeResource(view.getResources(), R.drawable.map_marker_purple);
 
-		arrowToDestination = BitmapFactory.decodeResource(view.getResources(), R.drawable.map_arrow_to_destination);
+		arrowLight = BitmapFactory.decodeResource(view.getResources(), R.drawable.map_marker_direction_arrow_p1_light);
+		arrowToDestination = BitmapFactory.decodeResource(view.getResources(), R.drawable.map_marker_direction_arrow_p2_color);
+		arrowShadow = BitmapFactory.decodeResource(view.getResources(), R.drawable.map_marker_direction_arrow_p3_shadow);
 		bitmapPaintDestBlue = createPaintDest(R.color.marker_blue);
 		bitmapPaintDestGreen = createPaintDest(R.color.marker_green);
 		bitmapPaintDestOrange = createPaintDest(R.color.marker_orange);
@@ -124,10 +128,6 @@ public class MapMarkersLayer extends OsmandMapLayer implements IContextMenuProvi
 		bitmapPaintDestYellow = createPaintDest(R.color.marker_yellow);
 		bitmapPaintDestTeal = createPaintDest(R.color.marker_teal);
 		bitmapPaintDestPurple = createPaintDest(R.color.marker_purple);
-
-		float textSize = TEXT_SIZE * map.getResources().getDisplayMetrics().density;
-		textAttrs.paint.setTextSize(textSize);
-		textAttrs.paint2.setTextSize(textSize);
 
 		widgetsFactory = new MapMarkersWidgetsFactory(map);
 
@@ -210,6 +210,10 @@ public class MapMarkersLayer extends OsmandMapLayer implements IContextMenuProvi
 		}
 
 		if (map.getMyApplication().getSettings().SHOW_LINES_TO_FIRST_MARKERS.get() && myLoc != null) {
+			float textSize = TEXT_SIZE * map.getResources().getDisplayMetrics().density * map.getMyApplication().getSettings().TEXT_SCALE.get();
+			textAttrs.paint.setTextSize(textSize);
+			textAttrs.paint2.setTextSize(textSize);
+
 			lineAttrs.updatePaints(view, nightMode, tileBox);
 			textAttrs.updatePaints(view, nightMode, tileBox);
 			textAttrs.paint.setStyle(Paint.Style.FILL);
@@ -315,7 +319,9 @@ public class MapMarkersLayer extends OsmandMapLayer implements IContextMenuProvi
 					final QuadPoint cp = tileBox.getCenterPixelPoint();
 					canvas.rotate(bearing, cp.x, cp.y);
 					canvas.translate(-24 * tileBox.getDensity() + radiusBearing, -22 * tileBox.getDensity());
+					canvas.drawBitmap(arrowShadow, cp.x, cp.y, bitmapPaint);
 					canvas.drawBitmap(arrowToDestination, cp.x, cp.y, getMarkerDestPaint(marker.colorIndex));
+					canvas.drawBitmap(arrowLight, cp.x, cp.y, bitmapPaint);
 					canvas.restore();
 				}
 				i++;
@@ -461,10 +467,6 @@ public class MapMarkersLayer extends OsmandMapLayer implements IContextMenuProvi
 
 	@Override
 	public void setSelectedObject(Object o) {
-		if (o instanceof MapMarker) {
-			map.getMyApplication().getMapMarkersHelper().moveMarkerToTop((MapMarker) o);
-			map.getMyApplication().getSettings().MAP_MARKERS_ORDER_BY_MODE.set(OsmandSettings.MapMarkersOrderByMode.CUSTOM);
-		}
 	}
 
 	@Override

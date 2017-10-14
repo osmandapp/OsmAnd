@@ -1,6 +1,7 @@
 package net.osmand.plus.mapmarkers;
 
 import android.app.Activity;
+import android.graphics.Typeface;
 import android.graphics.drawable.Drawable;
 import android.os.Build;
 import android.os.Bundle;
@@ -26,6 +27,7 @@ import net.osmand.plus.R;
 import net.osmand.plus.activities.MapActivity;
 import net.osmand.plus.base.BottomSheetDialogFragment;
 import net.osmand.plus.helpers.AndroidUiHelper;
+import net.osmand.plus.helpers.FontCache;
 
 public class ShowDirectionBottomSheetDialogFragment extends BottomSheetDialogFragment {
 
@@ -208,6 +210,7 @@ public class ShowDirectionBottomSheetDialogFragment extends BottomSheetDialogFra
 		int iconBgColor = check ? R.color.dashboard_blue : R.color.on_map_icon_color;
 		int iconColor = check ? R.color.color_dialog_buttons_dark : R.color.dashboard_blue;
 		int textColor = ContextCompat.getColor(getContext(), check ? (night ? R.color.color_dialog_buttons_dark : R.color.dashboard_blue) : night ? R.color.color_white : R.color.color_black);
+		Typeface typeface = FontCache.getFont(getContext(), check ? "fonts/Roboto-Medium.ttf" : "fonts/Roboto-Regular.ttf");
 		switch (mode) {
 			case TOOLBAR:
 				((RadioButton) mainView.findViewById(R.id.top_bar_radio_button)).setChecked(check);
@@ -217,7 +220,9 @@ public class ShowDirectionBottomSheetDialogFragment extends BottomSheetDialogFra
 				} else {
 					mainView.findViewById(R.id.top_bar_row_frame).setBackgroundResource(0);
 				}
-				((TextView) mainView.findViewById(R.id.top_bar_text)).setTextColor(textColor);
+				TextView topBarText = (TextView) mainView.findViewById(R.id.top_bar_text);
+				topBarText.setTextColor(textColor);
+				topBarText.setTypeface(typeface);
 				topBarIcon.setBackgroundDrawable(getIcon(R.drawable.ic_action_device_top, iconBgColor));
 				topBarIcon.setImageDrawable(getIcon(R.drawable.ic_action_device_topbar, iconColor));
 				break;
@@ -229,7 +234,9 @@ public class ShowDirectionBottomSheetDialogFragment extends BottomSheetDialogFra
 				} else {
 					mainView.findViewById(R.id.widget_row_frame).setBackgroundResource(0);
 				}
-				((TextView) mainView.findViewById(R.id.widget_text)).setTextColor(textColor);
+				TextView widgetText = (TextView) mainView.findViewById(R.id.widget_text);
+				widgetText.setTextColor(textColor);
+				widgetText.setTypeface(typeface);
 				widgetIcon.setBackgroundDrawable(getIcon(R.drawable.ic_action_device_top, iconBgColor));
 				widgetIcon.setImageDrawable(getIcon(R.drawable.ic_action_device_widget, iconColor));
 				break;
@@ -241,7 +248,9 @@ public class ShowDirectionBottomSheetDialogFragment extends BottomSheetDialogFra
 				} else {
 					mainView.findViewById(R.id.none_row_frame).setBackgroundResource(0);
 				}
-				((TextView) mainView.findViewById(R.id.none_text)).setTextColor(textColor);
+				TextView noneText = (TextView) mainView.findViewById(R.id.none_text);
+				noneText.setTextColor(textColor);
+				noneText.setTypeface(typeface);
 				noneIcon.setBackgroundDrawable(getIcon(R.drawable.ic_action_device_top, iconBgColor));
 				break;
 		}

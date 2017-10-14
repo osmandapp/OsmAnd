@@ -278,10 +278,7 @@ public class AmenityMenuBuilder extends MenuBuilder {
 	public void buildInternal(View view) {
 		boolean hasWiki = false;
 		MapPoiTypes poiTypes = app.getPoiTypes();
-		String preferredLang = app.getSettings().MAP_PREFERRED_LOCALE.get();
-		if (Algorithms.isEmpty(preferredLang)) {
-			preferredLang = app.getLanguage();
-		}
+		String preferredLang = getPreferredMapAppLang();
 		List<AmenityInfoRow> infoRows = new LinkedList<>();
 		List<AmenityInfoRow> descriptions = new LinkedList<>();
 

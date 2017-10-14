@@ -4,6 +4,7 @@ import android.support.v4.content.ContextCompat;
 import android.support.v4.view.MotionEventCompat;
 import android.support.v7.widget.RecyclerView;
 import android.util.Pair;
+import android.util.TypedValue;
 import android.view.LayoutInflater;
 import android.view.MotionEvent;
 import android.view.View;
@@ -35,6 +36,7 @@ public class MapMarkersListAdapter extends RecyclerView.Adapter<MapMarkerItemVie
 		implements MapMarkersItemTouchHelperCallback.ItemTouchHelperAdapter {
 
 	private static final int LOCATION_ITEM_ID = 0;
+	private static final int ROUND_TRIP_FINISH_ITEM_ID = 1;
 
 	private MapActivity mapActivity;
 	private List<Object> items = new LinkedList<>();
@@ -51,6 +53,10 @@ public class MapMarkersListAdapter extends RecyclerView.Adapter<MapMarkerItemVie
 
 	private Map<Pair<WptPt, WptPt>, List<WptPt>> snappedToRoadPoints;
 
+	private boolean inRoundTrip;
+	private boolean showRoundTripItem;
+	private boolean inDragAndDrop;
+
 	public void setAdapterListener(MapMarkersListAdapterListener listener) {
 		this.listener = listener;
 	}
@@ -63,6 +69,7 @@ public class MapMarkersListAdapter extends RecyclerView.Adapter<MapMarkerItemVie
 		locDescription = new PointDescription(PointDescription.POINT_TYPE_MY_LOCATION,
 				mapActivity.getString(R.string.shared_string_location));
 		this.mapActivity = mapActivity;
+		inRoundTrip = mapActivity.getMyApplication().getSettings().ROUTE_MAP_MARKERS_ROUND_TRIP.get();
 		reloadData();
 	}
 
@@ -88,27 +95,55 @@ public class MapMarkersListAdapter extends RecyclerView.Adapter<MapMarkerItemVie
 		boolean firstMarkerItem = showLocationItem ? pos == 1 : pos == 0;
 		boolean lastMarkerItem = pos == getItemCount() - 1;
 		boolean start = pos == startPos;
-		boolean finish = pos == finishPos && startPos != finishPos;
+		final boolean finish = pos == finishPos && startPos != finishPos;
 		boolean firstSelectedMarker = pos == firstSelectedMarkerPos;
+		boolean roundTripFinishItem = finish && showRoundTripItem;
 
 		boolean useLocation = app.getMapMarkersHelper().isStartFromMyLocation() && showLocationItem;
 
-		MapMarker marker = locationItem ? null : (MapMarker) getItem(pos);
+		MapMarker marker = null;
+		Location location = null;
+		Object item = getItem(pos);
+		if (item instanceof Location) {
+			location = (Location) item;
+		} else {
+			marker = (MapMarker) item;
+		}
 
 		holder.mainLayout.setBackgroundColor(ContextCompat.getColor(mapActivity, night ? R.color.bg_color_dark : R.color.bg_color_light));
 		holder.title.setTextColor(ContextCompat.getColor(mapActivity, night ? R.color.color_white : R.color.color_black));
-		holder.title.setText(locationItem ? mapActivity.getString(R.string.shared_string_my_location) : marker.getName(mapActivity));
+		holder.title.setText(location != null ? mapActivity.getString(R.string.shared_string_my_location) : marker.getName(mapActivity));
 		holder.iconDirection.setVisibility(View.GONE);
-		holder.optionsBtn.setVisibility(View.GONE);
+		holder.optionsBtn.setVisibility(roundTripFinishItem ? View.VISIBLE : View.GONE);
+		if (roundTripFinishItem) {
+			holder.optionsBtn.setImageDrawable(iconsCache.getThemedIcon(R.drawable.ic_action_remove_dark));
+			TypedValue outValue = new TypedValue();
+			mapActivity.getTheme().resolveAttribute(android.R.attr.selectableItemBackground, outValue, true);
+			holder.optionsBtn.setBackgroundResource(outValue.resourceId);
+			holder.optionsBtn.setOnClickListener(new View.OnClickListener() {
+				@Override
+				public void onClick(View view) {
+					listener.onDisableRoundTripClick();
+				}
+			});
+		}
 		holder.divider.setBackgroundColor(ContextCompat.getColor(mapActivity, night ? R.color.actionbar_dark_color : R.color.dashboard_divider_light));
 		holder.divider.setVisibility(lastMarkerItem ? View.GONE : View.VISIBLE);
-		holder.checkBox.setVisibility(View.VISIBLE);
-		holder.checkBox.setOnClickListener(new View.OnClickListener() {
-			@Override
-			public void onClick(View view) {
-				listener.onItemClick(holder.itemView);
-			}
-		});
+		holder.checkBox.setVisibility(roundTripFinishItem ? View.GONE : View.VISIBLE);
+		if (!roundTripFinishItem) {
+			holder.checkBox.setOnClickListener(new View.OnClickListener() {
+				@Override
+				public void onClick(View view) {
+					listener.onCheckBoxClick(holder.itemView);
+				}
+			});
+			holder.checkBoxContainer.setOnClickListener(new View.OnClickListener() {
+				@Override
+				public void onClick(View view) {
+					holder.checkBox.performClick();
+				}
+			});
+		}
 		holder.bottomShadow.setVisibility(lastMarkerItem ? View.VISIBLE : View.GONE);
 		holder.iconReorder.setVisibility(View.VISIBLE);
 		holder.iconReorder.setImageDrawable(iconsCache.getThemedIcon(R.drawable.ic_action_reorder));
@@ -121,26 +156,28 @@ public class MapMarkersListAdapter extends RecyclerView.Adapter<MapMarkerItemVie
 			holder.firstDescription.setText(mapActivity.getString(R.string.shared_string_finish) + " • ");
 		}
 
-		boolean iconSettled = false;
-		if ((start || finish) && !locationItem) {
-			int res = start ? R.drawable.ic_action_point_start : R.drawable.ic_action_point_destination;
+		if (location != null) {
+			holder.icon.setImageDrawable(ContextCompat.getDrawable(mapActivity, R.drawable.map_pedestrian_location));
+		} else {
+			int res = start ? R.drawable.ic_action_point_start : (finish ? R.drawable.ic_action_point_destination : R.drawable.ic_action_flag_dark);
 			holder.icon.setImageDrawable(iconsCache.getIcon(res, MapMarker.getColorId(marker.colorIndex)));
-			iconSettled = true;
+		}
+
+		if (locationItem || roundTripFinishItem) {
+			holder.iconReorder.setAlpha(.5f);
+			holder.iconReorder.setOnTouchListener(null);
 		}
 
 		if (locationItem) {
 			holder.topDivider.setVisibility(View.VISIBLE);
-			holder.icon.setImageDrawable(ContextCompat.getDrawable(mapActivity, R.drawable.map_pedestrian_location));
 			holder.checkBox.setChecked(app.getMapMarkersHelper().isStartFromMyLocation());
-			holder.iconReorder.setAlpha(.5f);
-			holder.iconReorder.setOnTouchListener(null);
 			holder.distance.setVisibility(View.GONE);
 			holder.description.setText(locDescription.getName());
+		} else if (roundTripFinishItem) {
+			holder.topDivider.setVisibility(View.GONE);
+			holder.description.setText(mapActivity.getString(R.string.round_trip));
 		} else {
 			holder.topDivider.setVisibility((!showLocationItem && firstMarkerItem) ? View.VISIBLE : View.GONE);
-			if (!iconSettled) {
-				holder.icon.setImageDrawable(iconsCache.getIcon(R.drawable.ic_action_flag_dark, MapMarker.getColorId(marker.colorIndex)));
-			}
 			holder.checkBox.setChecked(marker.selected);
 
 			holder.iconReorder.setAlpha(1f);
@@ -148,6 +185,12 @@ public class MapMarkersListAdapter extends RecyclerView.Adapter<MapMarkerItemVie
 				@Override
 				public boolean onTouch(View view, MotionEvent event) {
 					if (MotionEventCompat.getActionMasked(event) == MotionEvent.ACTION_DOWN) {
+						inDragAndDrop = true;
+						if (showRoundTripItem) {
+							int roundTripItemPos = finishPos;
+							reloadData();
+							notifyItemRemoved(roundTripItemPos);
+						}
 						listener.onDragStarted(holder);
 					}
 					return false;
@@ -165,13 +208,13 @@ public class MapMarkersListAdapter extends RecyclerView.Adapter<MapMarkerItemVie
 				if (month.length() > 1) {
 					month = Character.toUpperCase(month.charAt(0)) + month.substring(1);
 				}
-				String day = new SimpleDateFormat("dd", Locale.getDefault()).format(date);
+				String day = new SimpleDateFormat("d", Locale.getDefault()).format(date);
 				descr = month + " " + day;
 			}
 			holder.description.setText(descr);
 		}
 
-		boolean showDistance = locationItem ? useLocation : marker.selected;
+		boolean showDistance = !roundTripFinishItem && (locationItem ? useLocation : marker != null && marker.selected);
 		int visibility = showDistance ? View.VISIBLE : View.GONE;
 		holder.distance.setVisibility(visibility);
 		holder.point.setVisibility(visibility);
@@ -206,7 +249,13 @@ public class MapMarkersListAdapter extends RecyclerView.Adapter<MapMarkerItemVie
 
 	@Override
 	public long getItemId(int position) {
-		return position == 0 && showLocationItem ? LOCATION_ITEM_ID : getItem(position).hashCode();
+		if (showLocationItem && position == 0) {
+			return LOCATION_ITEM_ID;
+		}
+		if (showRoundTripItem && position == finishPos) {
+			return ROUND_TRIP_FINISH_ITEM_ID;
+		}
+		return getItem(position).hashCode();
 	}
 
 	@Override
@@ -242,6 +291,7 @@ public class MapMarkersListAdapter extends RecyclerView.Adapter<MapMarkerItemVie
 
 	@Override
 	public void onItemDismiss(RecyclerView.ViewHolder holder) {
+		inDragAndDrop = false;
 		listener.onDragEnded(holder);
 	}
 
@@ -263,12 +313,17 @@ public class MapMarkersListAdapter extends RecyclerView.Adapter<MapMarkerItemVie
 		OsmandApplication app = mapActivity.getMyApplication();
 		myLoc = app.getLocationProvider().getLastStaleKnownLocation();
 		showLocationItem = myLoc != null;
+		inRoundTrip = app.getSettings().ROUTE_MAP_MARKERS_ROUND_TRIP.get();
 		if (showLocationItem) {
 			lookupLocationAddress(app);
 			items.add(myLoc);
 		}
 		items.addAll(mapActivity.getMyApplication().getMapMarkersHelper().getMapMarkers());
 		calculateStartAndFinishPos();
+		showRoundTripItem = inRoundTrip && !inDragAndDrop && startPos != -1;
+		if (showRoundTripItem) {
+			items.add(finishPos, items.get(startPos));
+		}
 	}
 
 	private void lookupLocationAddress(OsmandApplication app) {
@@ -291,7 +346,7 @@ public class MapMarkersListAdapter extends RecyclerView.Adapter<MapMarkerItemVie
 		}
 	}
 
-	public void calculateStartAndFinishPos() {
+	private void calculateStartAndFinishPos() {
 		OsmandApplication app = mapActivity.getMyApplication();
 		boolean startCalculated = false;
 		boolean finishCalculated = false;
@@ -299,6 +354,10 @@ public class MapMarkersListAdapter extends RecyclerView.Adapter<MapMarkerItemVie
 		if (app.getMapMarkersHelper().isStartFromMyLocation() && showLocationItem) {
 			startPos = 0;
 			startCalculated = true;
+			if (inRoundTrip && !inDragAndDrop) {
+				finishPos = 1;
+				finishCalculated = true;
+			}
 		}
 		for (int i = 0; i < items.size(); i++) {
 			Object item = items.get(i);
@@ -320,7 +379,7 @@ public class MapMarkersListAdapter extends RecyclerView.Adapter<MapMarkerItemVie
 			if (item instanceof MapMarker) {
 				MapMarker m = (MapMarker) item;
 				if (m.selected) {
-					finishPos = i;
+					finishPos = i + (inRoundTrip && !inDragAndDrop ? 1 : 0);
 					finishCalculated = true;
 					break;
 				}
@@ -338,6 +397,10 @@ public class MapMarkersListAdapter extends RecyclerView.Adapter<MapMarkerItemVie
 	}
 
 	public interface MapMarkersListAdapterListener {
+
+		void onDisableRoundTripClick();
+
+		void onCheckBoxClick(View view);
 
 		void onItemClick(View view);
 

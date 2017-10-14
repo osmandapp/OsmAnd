@@ -61,7 +61,7 @@ import java.util.List;
 import java.util.Map;
 
 public class OsmEditsFragment extends OsmAndListFragment
-		implements SendPoiDialogFragment.ProgressDialogPoiUploader {
+		implements SendPoiDialogFragment.ProgressDialogPoiUploader, OpenstreetmapLocalUtil.OnNodeCommittedListener {
 	OsmEditingPlugin plugin;
 
 	private OsmEditsAdapter listAdapter;
@@ -98,10 +98,16 @@ public class OsmEditsFragment extends OsmAndListFragment
 				updateSelectionTitle(actionMode);
 			}
 		});
+		plugin.getPoiModificationLocalUtil().addNodeCommittedListener(this);
 		return view;
 	}
 
-	
+	@Override
+	public void onDestroyView() {
+		plugin.getPoiModificationLocalUtil().removeNodeCommittedListener(this);
+		super.onDestroyView();
+	}
+
 	public android.widget.ArrayAdapter<?> getAdapter() {
 		return listAdapter;
 	}
@@ -323,6 +329,10 @@ public class OsmEditsFragment extends OsmAndListFragment
 	@Override
 	public void onResume() {
 		super.onResume();
+		fetchData();
+	}
+
+	private void fetchData() {
 		ArrayList<OsmPoint> dataPoints = new ArrayList<>();
 		List<OpenstreetmapPoint> l1 = plugin.getDBPOI().getOpenstreetmapPoints();
 		List<OsmNotesPoint> l2 = plugin.getDBBug().getOsmbugsPoints();
@@ -351,7 +361,6 @@ public class OsmEditsFragment extends OsmAndListFragment
 		} else {
 			listAdapter.setNewList(dataPoints);
 		}
-
 	}
 
 	private void showBugDialog(final OsmNotesPoint point) {
@@ -404,6 +413,16 @@ public class OsmEditsFragment extends OsmAndListFragment
 		} else if (child.getAction() == OsmPoint.Action.REOPEN) {
 			descr.setText(R.string.action_modify);
 		}
+	}
+
+	@Override
+	public void onNoteCommitted() {
+		getMyApplication().runInUIThread(new Runnable() {
+			@Override
+			public void run() {
+				fetchData();
+			}
+		});
 	}
 
 	protected class OsmEditsAdapter extends ArrayAdapter<OsmPoint> {

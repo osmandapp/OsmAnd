@@ -1610,13 +1610,13 @@
     <string name="recalculate_route">إعادة حساب المسار</string>
     <string name="number_of_recipients">عدد المستلمين</string>
     <string name="osm_editors_ranking">ترتيب المحررين OSM</string>
-    <string name="osm_live_subscription">إشتراك OSM مُباشر</string>
+    <string name="osm_live_subscription">اشتراك لايف أوسماند</string>
     <string name="osm_live_subscribe_btn">إشترك الآن</string>
     <string name="osm_live_support_region">دعم المنطقة</string>
     <string name="osm_live_month_cost">تكلفة الشهر</string>
     <string name="osm_live_month_cost_desc">الدفع الشهري</string>
     <string name="osm_live_region_desc">سيتم إرسال جزء من التبرع إلى مستخدمي OSM الذين يقومون بإرسال التغييرات إلى الخريطة في تلك المنطقة</string>
-    <string name="osm_live_ask_for_purchase">يرجى شراء اشتراك OSM مُباشر أولاً</string>
+    <string name="osm_live_ask_for_purchase">يرجى شراء اشتراك OsmAnd Live أولا</string>
 
     <string name="osm_live_header">يُتيحُ لك هذا الاشتراك الحصول على التحديثات كُلَّ ساعةٍ لجميع الخرائط حَوْلَ العالم. 
 جزءٌ من الدخل سيعود إلى مجتمع OSM ويُدفَع لكل مساهمة.
@@ -2816,4 +2816,12 @@
     <string name="osn_modify_dialog_error">حدث استثناء: لم يتم تعديل الملاحظة</string>
     <string name="osn_modify_dialog_title">تعديل ملاحظة</string>
     <string name="context_menu_item_modify_note">تعديل ملاحظة OSM</string>
+    <string name="release_2_8">\\022 علامات خريطة معاد صياغتها بالكامل مع القواعد الارشادية وتخطيط الطريق
+\n
+\n • أداة قياس المسافة عرض الأداة الإضافية لميزة الطريق وحفظ النقاط كما تتبع
+\n
+\n • أوسماند مباشر: إصلاحات الشوائب، بيانات جديدة على السرفر كل 30 دقيقة، التحديثات مدرجة في الملاحة
+\n
+\n</string>
+    <string name="rendering_value_darkyellow_name">أصفر داكن</string>
     </resources>

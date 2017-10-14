@@ -2040,12 +2040,12 @@ L\'ús de memòria serà de {3} MB temporalment i {1} MB permanentment.
 \n • Moltes millores al menú contextual de mapa, com la cerca contextual d\'adreces .
 \n
 \n i encara més…</string>
-    <string name="osm_live_subscription">Subscripció a OSM en directe</string>
+    <string name="osm_live_subscription">Subscripció a OsmAnd Live</string>
     <string name="osm_live_email_desc">Ens cal per proporcionar-vos informació d\'aportacions</string>
     <string name="osm_live_support_region">Zona de suport</string>
     <string name="osm_live_thanks">Us agraïm haver-vos subscrit a les actualitzacions en directe!</string>
     <string name="osm_live_region_desc">Una part del vostre donatiu s\'enviarà als usuaris d\'OSM que enviïn modificacions del mapa a aquesta regió</string>
-    <string name="osm_live_ask_for_purchase">Primer hauríeu de subscriure-os a OSM en directe</string>
+    <string name="osm_live_ask_for_purchase">Primer us hauríeu de subscriure a OsmAnd Live</string>
 
     <string name="select_map_marker">Seleccioneu un marcador de mapa</string>
     <string name="map_markers_other">Altres marcadors</string>
@@ -2097,8 +2097,8 @@ L\'ús de memòria serà de {3} MB temporalment i {1} MB permanentment.
     <string name="map_widget_bearing">Desviació relativa</string>
     <string name="access_no_destination">No s\'ha fixat la destinació</string>
     <string name="map_widget_magnetic_bearing">Desviació respecte el Nord magnètic</string>
-    <string name="use_osm_live_routing_description">Activa els canvis en temps real a OSM en la navegació (Beta)</string>
-	<string name="use_osm_live_routing">Navegació amb OSM actualitzat</string>
+    <string name="use_osm_live_routing_description">Activa la navegació pels canvis a OsmAnd Live</string>
+	<string name="use_osm_live_routing">Navegació OsmAnd Live</string>
     <string name="access_direction_haptic_feedback_descr">Indica la direcció al punt de destinació amb vibracions</string>
     <string name="access_direction_audio_feedback_descr">Indica la direcció al punt de destinació amb só</string>
     <string name="access_direction_audio_feedback">Resposta acústica segons direcció</string>
@@ -2667,4 +2667,12 @@ Abasta l\'àrea: %1$s x %2$s</string>
     <string name="osn_modify_dialog_error">S\'ha produït una excepció: la nota no s\'ha modificat</string>
     <string name="osn_modify_dialog_title">Modifica nota</string>
     <string name="context_menu_item_modify_note">Modifica nota d\'OSM</string>
+    <string name="release_2_8">\\022 Marcadors revisats totalment amb orientacions i planificació de la ruta
+\n
+\n • Eina de mesura de distàncies amb capacitat per resseguir les vies i desar els punts com una traça
+\n
+\n • OsmAnd Live: correcció d\'errors, actualització de dades al servidor cada 30 minuts, implementació d\'actualitzacions durant la navegació
+\n
+\n</string>
+    <string name="rendering_value_darkyellow_name">Groc fosc</string>
     </resources>

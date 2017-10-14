@@ -62,7 +62,7 @@ public class RenderedObjectMenuController extends MenuController {
 		if (!Algorithms.isEmpty(renderedObject.getName()) && !isStartingWithRTLChar(renderedObject.getName())) {
 			return renderedObject.getName();
 		} else if (renderedObject.getTags().size() > 0) {
-			String lang = getMapActivity().getMyApplication().getSettings().MAP_PREFERRED_LOCALE.get().toLowerCase();
+			String lang = getPreferredMapLang().toLowerCase();
 			String name = "";
 			if (!Algorithms.isEmpty(lang)) {
 				name = renderedObject.getTags().get("name:" + lang);

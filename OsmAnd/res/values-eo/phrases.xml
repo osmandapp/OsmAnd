@@ -1240,8 +1240,8 @@
 	<string name="poi_animal_shelter_bird">birdoj</string>
 
 	<string name="poi_seats">Seĝoj</string>
-	<string name="poi_backrest_yes">Seĝodorsoj: jes</string>
-	<string name="poi_backrest_no">Seĝodorsoj: ne</string>
+	<string name="poi_backrest_yes">Seĝodorso(j): jes</string>
+	<string name="poi_backrest_no">Seĝodorso(j): ne</string>
 
 	<string name="poi_intermittent">Sezona</string>
 
@@ -1770,7 +1770,7 @@
 	<string name="poi_beach_shingle">Ŝtoneta</string>
 	<string name="poi_beach_rocky">Ŝtona</string>
 
-	<string name="poi_bench_yes">Jes</string>
+	<string name="poi_bench_yes">jes</string>
 	<string name="poi_bench_no">Sen benko</string>
 	<string name="poi_bin_yes">Kun rubujo</string>
 	<string name="poi_bin_no">Sen rubujo</string>
