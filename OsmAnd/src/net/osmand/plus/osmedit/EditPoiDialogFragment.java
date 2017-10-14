@@ -93,8 +93,6 @@ public class EditPoiDialogFragment extends BaseOsmAndDialogFragment {
 		BASIC_TAGS.add(OSMSettings.OSMTagKey.OPENING_HOURS.getValue());
 	}
 
-	private OnPoiChangedListener onPoiChangedListener;
-
 	private EditPoiData editPoiData;
 	private ViewPager viewPager;
 	private AutoCompleteTextView poiTypeEditText;
@@ -102,10 +100,6 @@ public class EditPoiDialogFragment extends BaseOsmAndDialogFragment {
 	private OpenstreetmapUtil mOpenstreetmapUtil;
 	private TextInputLayout poiTypeTextInputLayout;
 	private View view;
-
-	public void setOnPoiChangedListener(OnPoiChangedListener listener) {
-		this.onPoiChangedListener = listener;
-	}
 
 	@Override
 	public void onAttach(Activity activity) {
@@ -479,9 +473,6 @@ public class EditPoiDialogFragment extends BaseOsmAndDialogFragment {
 							if (getActivity() instanceof MapActivity) {
 								((MapActivity) getActivity()).getMapView().refreshMap(true);
 							}
-							if (onPoiChangedListener != null) {
-								onPoiChangedListener.onPoiChanged();
-							}
 							dismiss();
 						} else {
 							OsmEditingPlugin plugin = OsmandPlugin.getPlugin(OsmEditingPlugin.class);
@@ -627,16 +618,11 @@ public class EditPoiDialogFragment extends BaseOsmAndDialogFragment {
 	}
 
 	public static EditPoiDialogFragment createInstance(Node node, boolean isAddingPoi) {
-		return createInstance(node, isAddingPoi, (OnPoiChangedListener) null);
-	}
-
-	public static EditPoiDialogFragment createInstance(Node node, boolean isAddingPoi, OnPoiChangedListener listener) {
 		EditPoiDialogFragment editPoiDialogFragment = new EditPoiDialogFragment();
 		Bundle args = new Bundle();
 		args.putSerializable(KEY_AMENITY_NODE, node);
 		args.putBoolean(IS_ADDING_POI, isAddingPoi);
 		editPoiDialogFragment.setArguments(args);
-		editPoiDialogFragment.setOnPoiChangedListener(listener);
 		return editPoiDialogFragment;
 	}
 

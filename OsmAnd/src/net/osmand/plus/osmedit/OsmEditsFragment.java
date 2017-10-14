@@ -61,7 +61,7 @@ import java.util.List;
 import java.util.Map;
 
 public class OsmEditsFragment extends OsmAndListFragment
-		implements SendPoiDialogFragment.ProgressDialogPoiUploader {
+		implements SendPoiDialogFragment.ProgressDialogPoiUploader, OpenstreetmapLocalUtil.OnNodeCommittedListener {
 	OsmEditingPlugin plugin;
 
 	private OsmEditsAdapter listAdapter;
@@ -98,10 +98,22 @@ public class OsmEditsFragment extends OsmAndListFragment
 				updateSelectionTitle(actionMode);
 			}
 		});
+		if (getMyApplication().getSettings().OFFLINE_EDITION.get()
+				|| !getMyApplication().getSettings().isInternetConnectionAvailable(true)) {
+			plugin.getPoiModificationLocalUtil().setOnNodeCommittedListener(this);
+		}
 		return view;
 	}
 
-	
+	@Override
+	public void onDestroyView() {
+		if (getMyApplication().getSettings().OFFLINE_EDITION.get()
+				|| !getMyApplication().getSettings().isInternetConnectionAvailable(true)) {
+			plugin.getPoiModificationLocalUtil().setOnNodeCommittedListener(null);
+		}
+		super.onDestroyView();
+	}
+
 	public android.widget.ArrayAdapter<?> getAdapter() {
 		return listAdapter;
 	}
@@ -409,6 +421,16 @@ public class OsmEditsFragment extends OsmAndListFragment
 		}
 	}
 
+	@Override
+	public void onNoteCommitted() {
+		getMyApplication().runInUIThread(new Runnable() {
+			@Override
+			public void run() {
+				fetchData();
+			}
+		});
+	}
+
 	protected class OsmEditsAdapter extends ArrayAdapter<OsmPoint> {
 		private List<OsmPoint> dataPoints;
 
@@ -530,12 +552,8 @@ public class OsmEditsFragment extends OsmAndListFragment
 					OpenstreetmapPoint i = (OpenstreetmapPoint) getPointAfterModify(info);
 					final Node entity = i.getEntity();
 					refreshId = entity.getId();
-					EditPoiDialogFragment.createInstance(entity, false, new EditPoiDialogFragment.OnPoiChangedListener() {
-						@Override
-						public void onPoiChanged() {
-							fetchData();
-						}
-					}).show(getActivity().getSupportFragmentManager(), "edit_poi");
+					EditPoiDialogFragment.createInstance(entity, false)
+							.show(getActivity().getSupportFragmentManager(), "edit_poi");
 					return true;
 				}
 			});

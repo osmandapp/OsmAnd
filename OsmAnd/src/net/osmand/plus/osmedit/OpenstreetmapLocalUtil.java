@@ -21,6 +21,12 @@ public class OpenstreetmapLocalUtil implements OpenstreetmapUtil {
 		this.plugin = plugin;
 	}
 
+	private OnNodeCommittedListener listener;
+
+	public void setOnNodeCommittedListener(OnNodeCommittedListener listener) {
+		this.listener = listener;
+	}
+
 	@Override
 	public EntityInfo getEntityInfo(long id) {
 		return null;
@@ -40,6 +46,9 @@ public class OpenstreetmapLocalUtil implements OpenstreetmapUtil {
 			plugin.getDBPOI().deletePOI(p);
 		} else {
 			plugin.getDBPOI().addOpenstreetmap(p);
+		}
+		if (listener != null) {
+			listener.onNoteCommitted();
 		}
 		return newNode;
 	}
@@ -77,6 +86,10 @@ public class OpenstreetmapLocalUtil implements OpenstreetmapUtil {
 
 	@Override
 	public void closeChangeSet() {
+	}
+
+	public interface OnNodeCommittedListener {
+		void onNoteCommitted();
 	}
 	
 }
