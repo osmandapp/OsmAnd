@@ -752,11 +752,11 @@ Ehhez {1} MB helyre van szükség.
     <string name="online_map_settings_descr">Internetes és tárolt raszteres térképek beállításai</string>
 
 
-    <string name="osmand_rastermaps_plugin_description">"Ezzel a bővítménnyel az online (úgynevezett csempés vagy raszteres) térképek több típusához is hozzáférhet az előre meghatározott OpenStreetMap csempéktől kezdve (mint például a Mapnik) a műholdképekig és a speciális célú rétegekig, úgymint időjárási térképek, éghajlati térképek, földtani térképek, domborzatárnyékolási rétegek, stb.
-\n
-\nEzen térképek bármelyike használható az OsmAnd térkép képernyőjén megjelenítendő fő (alap) térképként, vagy egy másik alaptérkép fedvényeként vagy alátétjeként (mint például az OsmAnd normál offline térképei). Bármely alátét térkép jobban láthatóbbá tételének érdekében az OsmAnd vektoros térképeinek bizonyos elemei igény szerint könnyedén elrejthetők a „Térkép beállítása” menün keresztül.
-\n
-\nA csempés térképek internetes forrásokon keresztül szerezhetők be, vagy előkészíthetők kapcsolat nélküli használathoz (és kézzel átmásolva az OsmAnd adatmappájába) egy olyan SQLite adatbázisként, amelyet különféle harmadik féltől származó térkép-előkészítő eszközök állíthatnak elő. "</string>
+    <string name="osmand_rastermaps_plugin_description">Ezzel a bővítménnyel az online (úgynevezett csempés vagy raszteres) térképek több típusához is hozzáférhetsz az előre meghatározott OpenStreetMap csempéktől kezdve (mint például a Mapnik) a műholdképekig és a speciális célú rétegekig, úgymint időjárási térképek, éghajlati térképek, földtani térképek, domborzatárnyékolási rétegek, stb. 
+\n 
+\nEzen térképek bármelyike használható az OsmAnd térkép képernyőjén megjelenítendő fő (alap) térképként, vagy egy másik alaptérkép fedvényeként vagy alátétjeként (mint például az OsmAnd normál offline térképei). Bármely alátét térkép jobban láthatóbbá tételének érdekében az OsmAnd vektoros térképeinek bizonyos elemei igény szerint könnyedén elrejthetők a „Térkép beállítása” menün keresztül. 
+\n 
+\nA csempés térképek internetes forrásokon keresztül szerezhetők be, vagy előkészíthetők kapcsolat nélküli használathoz (és kézzel átmásolva az OsmAnd adatmappájába) egy olyan SQLite adatbázisként, amelyet különféle harmadik féltől származó térkép-előkészítő eszközök állíthatnak elő.</string>
     <string name="osmand_background_plugin_description">"Megjeleníti a háttér üzemmódban  (kikapcsolt képernyővel) való útvonalrögzítéshez és navigációhoz tartozó beállításokat. (A készülék bizonyos időközönként felébreszti a GPS-t.)"</string>
     <string name="osmand_accessibility_description">Ez a bővítmény elérhetővé teszi az eszköz akadálymentesítési lehetőségeit közvetlenül az OsmAnd programban. Ez megkönnyíti például a TTS hangok beszédsebességének állítását, az irányító gombok képernyő navigációjának beállítását, egy görgető használatát a nagyítás vezérléséhez, vagy szövegfelolvasó visszajelzés használatát, például a pozíció automatikus bejelentésénél.</string>
 
@@ -979,9 +979,9 @@ Proporcionális memória %4$s MB (Android korlát %5$s MB, Dalvik %6$s MB).</str
     <string name="map_widget_audionotes">Hangjegyzetek</string>
     <string name="audionotes_plugin_name">Hang- és videojegyzetek</string>
 
-    <string name="srtm_plugin_description">"Ez a bővítmény egy szintvonal borítást és egy domborzatárnyékolás réteget biztosít, amelyek az OsmAnd normál térképein jelennek meg. Ezt a funkcionalitást nagyon fogják értékelni a sportolók, túrázók, nyomvonalrögzítők és mindenki, akiket a táj domborzati szerkezete érdekel.
-\n
-\nA globális adatok (az északi 70° és déli 70° szélesség között) az SRTM (Shuttle Radar Topography Mission) és az ASTER (Advanced Spaceborne Thermal Emission and Reflection Radiometer) mérésein alapulnak, amely a NASA Earsh Observing System zászlóshajójának, a Terra műholdnak a képalkotó berendezése. Az ASTER a NASA, a Japán Gazdasági, Kereskedelmi és Ipari Minisztérium (METI), valamint a Japán Űrügynökség (J-spacesystems) közös projektje. "</string>
+    <string name="srtm_plugin_description">"Ez a bővítmény egy szintvonal fedvényt és egy domborzatárnyékolás réteget biztosít, amelyek az OsmAnd normál térképein jelennek meg. Ezt a funkcionalitást nagyon fogják értékelni a sportolók, túrázók, nyomvonalrögzítők és mindenki, akiket a táj domborzati szerkezete érdekel.  (Vedd figyelembe, hogy a szintvonalak és a domborzatárnyékolás külön, további letöltés után érhető el a bővítmény engedélyezése után.) 
+\n 
+\nA globális adatok (az északi 70° és déli 70° szélesség között) az SRTM (Shuttle Radar Topography Mission) és az ASTER (Advanced Spaceborne Thermal Emission and Reflection Radiometer) mérésein alapulnak, amely a NASA Earsh Observing System zászlóshajójának, a Terra műholdnak a képalkotó berendezése. Az ASTER a NASA, a Japán Gazdasági, Kereskedelmi és Ipari Minisztérium (METI), valamint a Japán Űrügynökség (J-spacesystems) közös projektje."</string>
 
 
     <string name="recording_is_recorded">Hang/videofelvétel elindult. Leállításhoz nyomd meg az A/V vezérlő stop gombját.</string>
@@ -1015,9 +1015,9 @@ Proporcionális memória %4$s MB (Android korlát %5$s MB, Dalvik %6$s MB).</str
     <string name="recording_error">A felvétel közben hiba történt </string>
     <string name="recording_camera_not_available">A kamera nem elérhető</string>
     <string name="shared_string_control_stop">Leállítás</string>
-    <string name="osmand_srtm_long_description_1000_chars">"Ez a bővítmény egy szintvonal borítást és egy (domborzati) árnyékolás réteget biztosít, amelyek az OsmAnd normál térképein jelennek meg. Ezt a funkcionalitást nagyon fogják értékelni a sportolók, túrázók, nyomvonalrögzítők és mindenki, akiket a táj domborzati szerkezete érdekel.
-\n
-\nA globális adatok (az északi 70° és déli 70° szélesség között) az SRTM (Shuttle Radar Topography Mission) és az ASTER (Advanced Spaceborne Thermal Emission and Reflection Radiometer) mérésein alapulnak, amely a NASA Earsh Observing System zászlóshajójának, a Terra műholdnak a képalkotó berendezése. Az ASTER a NASA, a Japán Gazdasági, Kereskedelmi és Ipari Minisztérium (METI), valamint a Japán Űrügynökség (J-spacesystems) közös projektje. "</string>
+    <string name="osmand_srtm_long_description_1000_chars">Ez a bővítmény egy szintvonal fedvényt és egy domborzatárnyékolás réteget biztosít, amelyek az OsmAnd normál térképein jelennek meg. Ezt a funkcionalitást nagyon fogják értékelni a sportolók, túrázók, nyomvonalrögzítők és mindenki, akiket a táj domborzati szerkezete érdekel. 
+\n 
+\nA globális adatok (az északi 70° és déli 70° szélesség között) az SRTM (Shuttle Radar Topography Mission) és az ASTER (Advanced Spaceborne Thermal Emission and Reflection Radiometer) mérésein alapulnak, amely a NASA Earsh Observing System zászlóshajójának, a Terra műholdnak a képalkotó berendezése. Az ASTER a NASA, a Japán Gazdasági, Kereskedelmi és Ipari Minisztérium (METI), valamint a Japán Űrügynökség (J-spacesystems) közös projektje.</string>
     <string name="av_widget_action_descr">Válaszd ki a vezérlőgomb alapértelmezett működési módját</string>
     <string name="av_widget_action">Alapértelmezett mód</string>
     <string name="recording_description">Felvétel %1$s %3$s %2$s</string>
@@ -1098,13 +1098,10 @@ Proporcionális memória %4$s MB (Android korlát %5$s MB, Dalvik %6$s MB).</str
     <string name="gpx_saved_sucessfully">GPX fájl sikeresen elmentve ide: {0}</string>
     <string name="osmand_distance_planning_plugin_description">Ez a bővítmény lehetővé teszi útvonalak létrehozását a térképen való koppintással, vagy meglévő GPX fájlok használatát, módosítását egy út megtervezéséhez és a pontok közötti távolság méréséhez. Az eszközt a térkép képernyőn elhelyezett gombbal lehet indítani. Az eredmény elmenthető GPX fájlként, amely később használható a vezetéshez.</string>
     <string name="osmand_distance_planning_plugin_name">Távolságszámító és tervezőeszköz</string>
-    <string name="use_distance_measurement_help">* Pont lerakásához koppints.
-
-* Nyomd meg hosszan a térképet az előző pont törléséhez.
-
-* Nyomd meg hosszan a pontot leírás csatolásához és megtekintéséhez.
-
-* További műveletekért kattints a vezérlőgombra.</string>
+    <string name="use_distance_measurement_help">* Pont lerakásához koppints. 
+\n* Nyomd meg hosszan a térképet az előző pont törléséhez. 
+\n* Nyomd meg hosszan a pontot leírás csatolásához és megtekintéséhez. 
+\n* További műveletekért nyomj a vezérlőgombra.</string>
     <string name="shared_string_do_not_show_again">Ne jelenjen meg újra</string>
     <string name="distance_measurement_start_editing">Szerkesztés indítása</string>
     <string name="distance_measurement_finish_editing">Szerkesztés befejezése</string>
@@ -1550,9 +1547,9 @@ Proporcionális memória %4$s MB (Android korlát %5$s MB, Dalvik %6$s MB).</str
     <string name="rendering_value_car_name">Autó</string>
     <string name="rendering_value_bicycle_name">Kerékpár</string>
     <string name="rendering_value_pedestrian_name">Gyalogos</string>
-    <string name="record_plugin_description">"Ez a bővítmény aktiválja a nyomvonalak rögzítésének és mentésének lehetőségét, ha kézzel megérinti a GPX naplózó felületi elemet a térkép képernyőn, valamint minden navigációs útvonalat automatikusan egy GPX fájlba naplóz.
-\n
-\nA rögzített nyomvonalak megoszthatók az ismerősökkel, vagy használhatók az OSM hozzájárulásoknál. A sportolók a rögzített nyomvonalakat az edzéseik megfigyeléséhez használhatják. Néhány alapvető nyomvonalelemzés közvetlenül az OsmAnd programon belül is végrehajtható, mint például köridők, átlagsebesség, stb., és természetesen a nyomvonalak később speciális harmadik féltől származó elemzőeszközökkel is elemezhetők. "</string>
+    <string name="record_plugin_description">Ez a bővítmény aktiválja a nyomvonalak rögzítésének és mentésének lehetőségét, ha megnyomod a GPX naplózó gombot a térkép képernyőn, valamint képes minden navigációs útvonalat automatikusan egy GPX fájlba naplózni.
+\n 
+\nA rögzített nyomvonalak megoszthatók az ismerősökkel, vagy használhatók az OSM hozzájárulásoknál. A sportolók a rögzített nyomvonalakat az edzéseik megfigyeléséhez használhatják. Néhány alapvető nyomvonalelemzés közvetlenül az OsmAnd programon belül is végrehajtható, mint például köridők, átlagsebesség, stb., és természetesen a nyomvonalak később harmadik féltől származó elemzőeszközökkel is elemezhetők.</string>
     <string name="record_plugin_name">Útvonal rögzítése</string>
     <string name="int_hour">ó</string>
     <string name="duration">Időtartam</string>
@@ -1851,25 +1848,25 @@ Hosszúság: %2$s</string>
     <string name="shared_string_is_open">Nyitva van</string>
     <string name="shared_string_manage">Kezelés</string>
     <string name="shared_string_edit">Szerkesztés</string>
-    <string name="plugin_touringview_descr">"A nézet aktiválása megváltoztatja az OsmAnd térképstílusát „Túra nézet”-re, amely egy speciális, nagy részletezettségű nézet az utazóknak és a hivatásos sofőröknek.
-\n
-\nEz a nézet bármely megadott térképnagyításon a térképadatokban elérhető utazási részletek legnagyobb mennyiségét biztosítja (főként utak, ösvények, csapások és tájékozódási pontok).
-\n
-\nÉrthetően ábrázolja az utak minden típusát is egyértelmű színkódolásokkal, amely annak hasznos, aki például nagy járműveket vezet.
-\n
-\nTovábbá speciális túralehetőségeket is biztosít, úgymint kerékpárutak vagy az Alpok hegyi útjainak megjelenítése.
-\n
-\nNem szükséges speciális térképet letölteni, a nézet a szabványos térképeinkből kerül előállításra.
-\n
-\nEz a nézet visszaállítható, ha újra kikapcsolja az aktiválást itt, vagy a „Térképstílus” megváltoztatásával a „Térkép beállítása” alatt igény szerint. "</string>
-    <string name="plugin_nautical_descr">"Ez a bővítmény az OsmAnd térképet és a navigációs alkalmazást gazdagítja hajózási térképek készítésével csónakázáshoz, vitorlázáshoz és a vízi sportok egyéb típusaihoz.
-\n
-\nEgy speciális térkép-kiegészítő az OsmAnd alkalmazáshoz biztosítani fogja az összes hajózási navigációs jelzést és szimbólumot a belvízi, valamint a partközeli navigációhoz. Minden egyes navigációs jelzés leírása olyan részleteket biztosít, amely azok azonosításához és a jelentésükhöz szükségesek (kategória, alak, szín, sorozat, hivatkozás, stb.).
-\n
-\nAz OsmAnd hagyományos térképstílusainak egyikéhez való visszatéréshez egyszerűen kapcsolja ki ezen bővítmény aktiválást újra, vagy változtassa meg a „Térképstílust” a „Térkép beállítása” alatt igény szerint. "</string>
-    <string name="plugin_ski_descr">"Az OsmAnd ezen bővítménye a kezedbe adja a globális lesikló pályák, a sífutópályák, az alpesi síutak, kabinok és sífelvonók minden részletét. Az utak és a pályák nehézség szerinti színkódokkal vannak megjelenítve, és egy speciális „Téli” térképstílussal vannak ábrázolva hószínű alapon.
-\n
-\nA nézet aktiválása megváltoztatja a térképstílust „Tél és síelésre”, megjelenítve a táj minden elemét a téli körülmények szerint. Ez a nézet visszaállítható, ha újra kikapcsolja az aktiválást itt, vagy a „Térképstílus” megváltoztatásával a „Térkép beállítása” alatt igény szerint. "</string>
+    <string name="plugin_touringview_descr">A nézet aktiválása megváltoztatja az OsmAnd térképstílusát „Túra nézet”-re, amely egy speciális, nagy részletezettségű nézet az utazóknak és a hivatásos sofőröknek. 
+\n 
+\nEz a nézet bármely megadott térképnagyításon a térképadatokban elérhető utazási részletek legnagyobb mennyiségét biztosítja (főként utak, ösvények, csapások és tájékozódási pontok). 
+\n 
+\nÉrthetően ábrázolja az utak minden típusát is egyértelmű színkódolásokkal, amely annak hasznos, aki például nagy járműveket vezet. 
+\n 
+\nTovábbá speciális túralehetőségeket is biztosít, úgymint kerékpárutak vagy az Alpok hegyi útjainak megjelenítése. 
+\n 
+\nNem szükséges speciális térképet letölteni, a nézet a szabványos térképeinkből kerül előállításra. 
+\n 
+\nEz a nézet visszaállítható, ha újra kikapcsolja az aktiválást itt, vagy a „Térképstílus” megváltoztatásával a „Térkép beállítása” alatt igény szerint.</string>
+    <string name="plugin_nautical_descr">Ez a bővítmény az OsmAnd térképet és a navigációs alkalmazást gazdagítja hajózási térképek készítésével csónakázáshoz, vitorlázáshoz és a vízi sportok egyéb típusaihoz. 
+\n 
+\nEgy speciális térkép-kiegészítő az OsmAnd alkalmazáshoz biztosítani fogja az összes hajózási navigációs jelzést és szimbólumot a belvízi, valamint a partközeli navigációhoz. Minden egyes navigációs jelzés leírása olyan részleteket biztosít, amely azok azonosításához és a jelentésükhöz szükségesek (kategória, alak, szín, sorozat, hivatkozás, stb.). 
+\n 
+\nAz OsmAnd hagyományos térképstílusainak egyikéhez való visszatéréshez egyszerűen kapcsolja ki ezen bővítmény aktiválást újra, vagy változtassa meg a „Térképstílust” a „Térkép beállítása” alatt igény szerint.</string>
+    <string name="plugin_ski_descr">Az OsmAnd ezen bővítménye a kezedbe adja a globális lesikló pályák, a sífutópályák, az alpesi síutak, kabinok és sífelvonók minden részletét. Az utak és a pályák nehézség szerinti színkódokkal vannak megjelenítve, és egy speciális „Téli” térképstílussal vannak ábrázolva hószínű alapon. 
+\n 
+\nA nézet aktiválása megváltoztatja a térképstílust „Tél és síelésre”, megjelenítve a táj minden elemét a téli körülmények szerint. Ez a nézet visszaállítható, ha újra kikapcsolja az aktiválást itt, vagy a „Térképstílus” megváltoztatásával a „Térkép beállítása” alatt igény szerint.</string>
     <string name="filter_poi_hint">Szűrés név szerint</string>
     <string name="search_poi_category_hint">Gépelj az összes kereséséhez</string>
     <string name="specified_directiory_not_writeable">A térképeket nem sikerült létrehozni a megadott könyvtárban</string>
@@ -2219,7 +2216,7 @@ Hosszúság: %2$s</string>
     <string name="number_of_recipients">Kedvezményezettek száma</string>
     <string name="osm_user_stat">Szerkesztések: %1$s, helyezés: %2$s, összes szerkesztés: %3$s</string>
     <string name="osm_editors_ranking">OSM szerkesztők rangsora</string>
-    <string name="osm_live_subscription">OSM Live előfizetés</string>
+    <string name="osm_live_subscription">OsmAnd Live előfizetés</string>
     <string name="osm_live_subscribe_btn">Előfizetés</string>
     <string name="osm_live_user_public_name">Nyilvános név</string>
     <string name="osm_live_hide_user_name">Ne jelenjen meg a nevem a jelentésekben</string>
@@ -2233,7 +2230,7 @@ Hosszúság: %2$s</string>
     <string name="osm_live_thanks">Köszönjük, hogy előfizettél a folyamatos frissítésre!</string>
     <string name="osm_live_region_desc">Az adományod egy részét a megadott régióban tevékenykedő OSM szerkesztőknek továbbítjuk</string>
     <string name="osm_live_subscription_settings">Előfizetési beállítások</string>
-    <string name="osm_live_ask_for_purchase">Előbb kérlek vásárolj OSM Live előfizetést</string>
+    <string name="osm_live_ask_for_purchase">Előbb kérlek vásárolj OsmAnd Live előfizetést</string>
 
     <string name="osm_live_header">Ez az előfizetés a világ bármely térképének óránkénti frissítését teszi lehetővé.
 A bevételek egy része az OSM közösségnek jut vissza, és OSM szerkesztésenként kerül kifizetésre.
@@ -2343,8 +2340,8 @@ Jelenleg csak {2} MB érhető el.</string>
     <string name="rendering_value_bold_name">Vastag</string>
     <string name="shared_string_widgets">Vezérlőgomb</string>
     <string name="follow_us">Kövess minket</string>
-    <string name="use_osm_live_routing">OSM Live navigáció</string>
-    <string name="use_osm_live_routing_description">Navigáció engedélyezése az OSM Live módosításainál (Beta)</string>
+    <string name="use_osm_live_routing">OsmAnd Live navigáció</string>
+    <string name="use_osm_live_routing_description">OsmAnd Live frissítések használata navigációnál</string>
 	<string name="map_widget_magnetic_bearing">Mágneses irány</string>
     <string name="access_disable_offroute_recalc">Ne tervezzen újra, ha letérsz az útvonalról</string>
     <string name="access_disable_wrong_direction_recalc">Ne tervezzen újra, ha ellenkező irányba mész</string>
@@ -2490,7 +2487,7 @@ Jelenleg csak {2} MB érhető el.</string>
     <string name="translit_name_if_miss">Átírás, ha a(z) %1$s név hiányzik</string>
     <string name="translit_names">Nevek átírása</string>
     <string name="rendering_value_fine_name">Finom</string>
-    <string name="release_2_5">\\022 Kattintható ikonok a térképen 
+    <string name="release_2_5">• Kattintható ikonok a térképen 
 \n 
 \n • Hatékony POI szűrő: pl. keress éttermeket konyha szerint, vagy kempingeket egy adott szolgáltatással 
 \n 
@@ -2724,7 +2721,7 @@ Kérlek adj meg egy teljes kódot</string>
     <string name="srtm_purchase_header">A szintvonalak térképen való megtekintéséhez meg kell vásárolni és telepíteni kell a szintvonal-plugint</string>
     <string name="srtm_color_scheme">Színséma</string>
     <string name="show_from_zoom_level">Megjelenítés a következő nagyítási fokozattól</string>
-    <string name="routing_attr_allow_private_name">Magántulajdon használatának engedélyezése</string>
+    <string name="routing_attr_allow_private_name">Magánutak használatának engedélyezése</string>
     <string name="routing_attr_allow_private_description">Magánterület használatának engedélyezése</string>
     <string name="display_zoom_level">Kijelző nagyítási szintje: %1$s</string>
     <string name="favorite_group_name">Csoport megnevezése</string>
@@ -2821,7 +2818,7 @@ Kérlek adj meg egy teljes kódot</string>
     <string name="marker_save_as_track">Mentés nyomvonalként</string>
     <string name="move_to_history">Áthelyezés az előzményekbe</string>
     <string name="group_will_be_removed_after_restart">A csoport el lesz távolítva újraindítás után</string>
-    <string name="show_guide_line">Útmutató mutatása</string>
+    <string name="show_guide_line">Irányjelző vonal megjelenítése</string>
     <string name="show_arrows_on_the_map">Nyilak mutatása a térképen</string>
     <string name="show_passed">\'Legutóbb használt\' dátum mutatása</string>
     <string name="hide_passed">\'Legutóbb használt\' dátum elrejtése</string>
@@ -2833,7 +2830,7 @@ Kérlek adj meg egy teljes kódot</string>
     <string name="marker_show_distance_descr">Válaszd ki, hogyan mutassa a távolságot és az irányt a térképjelölők felé a képernyőn:</string>
     <string name="map_orientation_change_in_accordance_with_speed_descr">Válaszd ki, hogy mekkora sebességnél váltson a térkép forgatása \'Mozgás iránya\'-ról \'Iránytű\'-re</string>
     <string name="all_markers_moved_to_history">Minden térképjelölő az előzményekbe mozgatva</string>
-    <string name="marker_moved_to_history">Térképjelölő az előzményekbe mozgatva</string>
+    <string name="marker_moved_to_history">Térképjelölő áthelyezve az előzményekhez</string>
     <string name="shared_string_list">Lista</string>
     <string name="shared_string_groups">Csoportok</string>
     <string name="passed">Legutóbb használt: %1$s</string>
@@ -2848,9 +2845,9 @@ Kérlek adj meg egy teljes kódot</string>
     <string name="do_not_use_animations_descr">Animációk kikapcsolása az alkalmazásban</string>
     <string name="keep_showing_on_map">Mutassa a térképen</string>
     <string name="exit_without_saving">Kilépsz mentés nélkül?</string>
-    <string name="line">Sor</string>
-    <string name="save_as_line">Mentés sorként</string>
-    <string name="edit_line">Sor szerkesztése</string>
+    <string name="line">Vonal</string>
+    <string name="save_as_line">Mentés vonalként</string>
+    <string name="edit_line">Vonal szerkesztése</string>
     <string name="shared_string_options">Opciók</string>
     <string name="choose_navigation_type">Válassz navigációs profilt</string>
     <string name="none_point_error">Adj hozzá legalább egy pontot.</string>
@@ -2864,4 +2861,42 @@ Kérlek adj meg egy teljes kódot</string>
     <string name="make_round_trip_descr">Kiindulási pont másolatának hozzáadása célpontként</string>
     <string name="make_round_trip">Körút készítése</string>
     <string name="shared_string_navigate">Navigáció</string>
-    </resources>
+    <string name="show_map">Térkép megjelenítése</string>
+    <string name="route_is_calculated">Útvonal kiszámítva</string>
+    <string name="round_trip">Körtúra</string>
+    <string name="plan_route_no_markers_toast">A funkció használatához legalább egy jelölőt el kell helyezned.</string>
+    <string name="map_orientation_change_in_accordance_with_speed">Térkép tájolás küszöb</string>
+    <string name="marker_moved_to_active">Térképjelölő áthelyezve az aktívakhoz</string>
+    <string name="move_all_to_history">Összes áthelyezése az előzményekbe</string>
+    <string name="save_as_route_point">Mentés útvonalpontokként</string>
+    <string name="route_point">Útvonalpont</string>
+    <string name="add_point_before">Pont hozzáadása előtte</string>
+    <string name="add_point_after">Pont hozzáadása utána</string>
+    <string name="measurement_tool_snap_to_road_descr">Az OsmAnd össze fogja kötni a pontokat a kiválasztott profilnak megfelelő útvonallal.</string>
+    <string name="measurement_tool_save_as_new_track_descr">"A pontokat útvonal pontként vagy  vonalként is mentheted."</string>
+    <string name="release_2_8">• Teljesen átalakított térképjelölők, irányjelző vonalakkal és útvonaltervezéssel
+\n
+\n • A távolságmérő eszköz tud úthoz rögzítetten is mérni és el tudja menteni a pontokat útvonalként
+\n
+\n • OsmAnd Live: hibajavítások, friss adatok a szerveren 30 percenként, a frissítéseket figyelembe veszi a navigáció is
+\n
+\n</string>
+    <string name="rendering_value_darkyellow_name">Sötétsárga</string>
+    <string name="mappilary_no_internet_desc">A Mapillary fényképek megtekintéséhez internetre van szükség</string>
+    <string name="retry">Újra</string>
+    <string name="add_route_points">Hozzáadás útvonalpontokként</string>
+    <string name="add_waypoint">Hozzáadás útpontként</string>
+    <string name="add_line">Vonal hozzáadása</string>
+    <string name="save_gpx_waypoint">GPX útpont mentése</string>
+    <string name="save_route_point">Útvonalpont mentése</string>
+    <string name="waypoint_one">Útpont 1</string>
+    <string name="route_point_one">Útvonalpont 1</string>
+    <string name="empty_state_my_tracks">Nyomvonalak hozzáadása és rögzítése</string>
+    <string name="empty_state_my_tracks_desc">Nyomvonalak rögzítése vagy importálása megtekintésre</string>
+    <string name="empty_state_favourites">Kedvencek hozzáadása</string>
+    <string name="empty_state_favourites_desc">Kedvencek hozzáadása a térképen vagy importálása a fájlrendszerből</string>
+    <string name="import_track">Nyomvonal importálása</string>
+    <string name="import_track_desc">%1$s fájl nem tartalmaz útpontot. Importálod nyomvonalként?</string>
+    <string name="move_point">Pont mozgatása</string>
+    <string name="add_segment_to_the_track">Hozzáadás egy GPX nyomvonalhoz</string>
+</resources>
