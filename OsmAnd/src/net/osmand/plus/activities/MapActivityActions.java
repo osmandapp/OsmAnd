@@ -366,12 +366,14 @@ public class MapActivityActions implements DialogProvider {
 			mapActivity.getRoutingHelper().setGpxParams(params);
 			settings.FOLLOW_THE_GPX_ROUTE.set(result.path);
 			if (!ps.isEmpty()) {
-				Location loc = ps.get(ps.size() - 1);
+				Location startLoc = ps.get(0);
+				Location finishLoc = ps.get(ps.size() - 1);
 				TargetPointsHelper tg = mapActivity.getMyApplication().getTargetPointsHelper();
-				tg.navigateToPoint(new LatLon(loc.getLatitude(), loc.getLongitude()), false, -1);
-				if (tg.getPointToStart() == null) {
-					loc = ps.get(0);
-					tg.setStartPoint(new LatLon(loc.getLatitude(), loc.getLongitude()), false, null);
+				tg.navigateToPoint(new LatLon(finishLoc.getLatitude(), finishLoc.getLongitude()), false, -1);
+				if (startLoc != finishLoc) {
+					tg.setStartPoint(new LatLon(startLoc.getLatitude(), startLoc.getLongitude()), false, null);
+				} else {
+					tg.clearStartPoint(false);
 				}
 			}
 		}
