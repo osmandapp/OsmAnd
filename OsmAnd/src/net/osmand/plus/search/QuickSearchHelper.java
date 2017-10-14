@@ -11,6 +11,7 @@ import net.osmand.plus.OsmandApplication;
 import net.osmand.plus.R;
 import net.osmand.plus.helpers.SearchHistoryHelper;
 import net.osmand.plus.poi.PoiFiltersHelper;
+import net.osmand.plus.poi.PoiUIFilter;
 import net.osmand.plus.resources.ResourceManager.ResourceListener;
 import net.osmand.search.SearchUICore;
 import net.osmand.search.SearchUICore.SearchResultCollection;
@@ -86,7 +87,10 @@ public class QuickSearchHelper implements ResourceListener {
 		for(CustomSearchPoiFilter udf : poiFilters.getUserDefinedPoiFilters()) {
 			core.addCustomSearchPoiFilter(udf, 0);
 		}
-		core.addCustomSearchPoiFilter(poiFilters.getLocalWikiPOIFilter(), 1);
+		PoiUIFilter localWikiPoiFilter = poiFilters.getLocalWikiPOIFilter();
+		if (localWikiPoiFilter != null) {
+			core.addCustomSearchPoiFilter(localWikiPoiFilter, 1);
+		}
 		core.addCustomSearchPoiFilter(poiFilters.getShowAllPOIFilter(), 1);
 	}
 
