@@ -104,7 +104,7 @@ public class OsmEditsFragment extends OsmAndListFragment
 
 	@Override
 	public void onDestroyView() {
-		plugin.getPoiModificationLocalUtil().removeNodeCommittedListener(null);
+		plugin.getPoiModificationLocalUtil().removeNodeCommittedListener(this);
 		super.onDestroyView();
 	}
 
