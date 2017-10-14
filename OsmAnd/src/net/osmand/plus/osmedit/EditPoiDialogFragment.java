@@ -835,8 +835,4 @@ public class EditPoiDialogFragment extends BaseOsmAndDialogFragment {
 	public interface OnFragmentActivatedListener {
 		void onFragmentActivated();
 	}
-
-	public interface OnPoiChangedListener {
-		void onPoiChanged();
-	}
 }

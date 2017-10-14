@@ -27,7 +27,9 @@ public class OpenstreetmapLocalUtil implements OpenstreetmapUtil {
 	private List<OnNodeCommittedListener> listeners = new ArrayList<>();
 
 	public void addNodeCommittedListener(OnNodeCommittedListener listener) {
-		listeners.add(listener);
+		if (!listeners.contains(listener)) {
+			listeners.add(listener);
+		}
 	}
 
 	public void removeNodeCommittedListener(OnNodeCommittedListener listener) {
