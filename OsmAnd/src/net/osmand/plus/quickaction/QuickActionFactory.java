@@ -377,13 +377,13 @@ public class QuickActionFactory {
 				return R.drawable.ic_layer_bottom_dark;
 
 			case NavAddDestinationAction.TYPE:
-				return R.drawable.ic_action_target;
+				return R.drawable.ic_action_point_add_destination;
 
 			case NavAddFirstIntermediateAction.TYPE:
 				return R.drawable.ic_action_intermediate;
 
 			case NavReplaceDestinationAction.TYPE:
-				return R.drawable.ic_action_target;
+				return R.drawable.ic_action_point_add_destination;
 
 			case NavAutoZoomMapAction.TYPE:
 				return R.drawable.ic_action_search_dark;
