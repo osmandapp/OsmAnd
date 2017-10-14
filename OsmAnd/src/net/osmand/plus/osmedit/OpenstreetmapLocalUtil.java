@@ -11,6 +11,9 @@ import net.osmand.util.MapUtils;
 
 import org.apache.commons.logging.Log;
 
+import java.util.ArrayList;
+import java.util.List;
+
 public class OpenstreetmapLocalUtil implements OpenstreetmapUtil {
 
 	public final static Log LOG = PlatformUtil.getLog(OpenstreetmapLocalUtil.class);
@@ -21,10 +24,14 @@ public class OpenstreetmapLocalUtil implements OpenstreetmapUtil {
 		this.plugin = plugin;
 	}
 
-	private OnNodeCommittedListener listener;
+	private List<OnNodeCommittedListener> listeners = new ArrayList<>();
 
-	public void setOnNodeCommittedListener(OnNodeCommittedListener listener) {
-		this.listener = listener;
+	public void addNodeCommittedListener(OnNodeCommittedListener listener) {
+		listeners.add(listener);
+	}
+
+	public void removeNodeCommittedListener(OnNodeCommittedListener listener) {
+		listeners.remove(listener);
 	}
 
 	@Override
@@ -47,7 +54,7 @@ public class OpenstreetmapLocalUtil implements OpenstreetmapUtil {
 		} else {
 			plugin.getDBPOI().addOpenstreetmap(p);
 		}
-		if (listener != null) {
+		for (OnNodeCommittedListener listener : listeners) {
 			listener.onNoteCommitted();
 		}
 		return newNode;

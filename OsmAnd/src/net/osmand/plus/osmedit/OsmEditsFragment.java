@@ -98,19 +98,13 @@ public class OsmEditsFragment extends OsmAndListFragment
 				updateSelectionTitle(actionMode);
 			}
 		});
-		if (getMyApplication().getSettings().OFFLINE_EDITION.get()
-				|| !getMyApplication().getSettings().isInternetConnectionAvailable(true)) {
-			plugin.getPoiModificationLocalUtil().setOnNodeCommittedListener(this);
-		}
+		plugin.getPoiModificationLocalUtil().addNodeCommittedListener(this);
 		return view;
 	}
 
 	@Override
 	public void onDestroyView() {
-		if (getMyApplication().getSettings().OFFLINE_EDITION.get()
-				|| !getMyApplication().getSettings().isInternetConnectionAvailable(true)) {
-			plugin.getPoiModificationLocalUtil().setOnNodeCommittedListener(null);
-		}
+		plugin.getPoiModificationLocalUtil().removeNodeCommittedListener(null);
 		super.onDestroyView();
 	}
 
