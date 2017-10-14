@@ -345,8 +345,8 @@ public class PlanRouteFragment extends Fragment implements OsmAndLocationListene
 				}
 			}
 		});
-		boolean isSmartphone = getResources().getConfiguration().smallestScreenWidthDp < 600;
-		markersRv.setPadding(0, AndroidUtils.dpToPx(mapActivity, isSmartphone ? 10 : 15), 0, AndroidUtils.dpToPx(mapActivity, isSmartphone ? 52 : 78));
+		markersRv.setPadding(0, (int) mapActivity.getResources().getDimension(R.dimen.map_markers_recycler_view_padding_top),
+				0, (int) mapActivity.getResources().getDimension(R.dimen.map_markers_recycler_view_padding_bottom));
 		markersRv.setClipToPadding(false);
 		markersRv.setLayoutManager(new LinearLayoutManager(getContext()));
 		markersRv.setAdapter(adapter);
