@@ -105,8 +105,8 @@
 	<string name="rendering_attr_roadColors_description">Auswahl eines Straßenfarbschemas:</string>
 	<string name="rendering_attr_roadColors_name">Straßenfarbschema</string>
 	<string name="show_warnings_title">Warnungen anzeigen …</string>
-	<string name="show_warnings_descr">Verkehrswarnungen (Tempolimits, Stoppzeichen, Rüttelschwellen), stationäre Radarkontrollen und Fahrspuranzeige</string>
-	<string name="use_compass_navigation_descr">Kompass verwenden, wenn keine andere Richtungsbestimmung möglich</string>
+	<string name="show_warnings_descr">Verkehrswarnungen (Tempolimits, Stoppzeichen, Rüttelschwellen), stationäre Radarkontrollen und Fahrspuranzeige konfigurieren</string>
+	<string name="use_compass_navigation_descr">Kompass verwenden, wenn keine andere Richtungsbestimmung möglich ist</string>
 	<string name="use_compass_navigation">Kompass verwenden</string>
 	<string name="avoid_motorway">Autobahnen vermeiden</string>
 	<string name="auto_zoom_map_descr">Kartenvergrößerung automatisch der Geschwindigkeit anpassen (während Kartennachführung)</string>
@@ -314,7 +314,7 @@
 
 	<string name="routing_settings">Navigation</string>
 	<string name="routing_settings_2">Navigationseinstellungen</string>
-	<string name="routing_settings_descr">Nutzungsabhängige Einstellungen (Autofahrer, Radfahrer, Fußgänger)</string>
+	<string name="routing_settings_descr">Optionen für die Navigation festlegen</string>
 	<string name="global_settings">Globale Einstellungen</string>
 	<string name="index_settings">Kartenverwaltung</string>
 	<string name="index_settings_descr">Herunterladen und Verwalten von auf Ihrem Gerät gespeicherten Offline-Kartendateien</string>
@@ -336,7 +336,7 @@
 	<string name="use_transparent_map_theme">Transparentes Layout</string>
 	<string name="native_library_not_supported">Native Bibliothek wird auf diesem Gerät nicht unterstützt.</string>
 	<string name="init_native_library">Native Bibliothek wird initialisiert…</string>
-	<string name="choose_auto_follow_route">Kartenanzeige nachführen</string>
+	<string name="choose_auto_follow_route">Kartenansicht automatisch zentrieren</string>
 	<string name="choose_auto_follow_route_descr">Wartezeit für Rückkehr zur Kartennachführung</string>
 	
 	<string name="auto_follow_route_navigation">Nachführung nur bei aktiver Navigation</string>
@@ -445,7 +445,7 @@
 		\n\t
 		\n\tZur Verwendung aktivieren: \'Menu\' → \'Karte konfigurieren\' → \'Kartenquelle…\' → \'Offline-Vektor-Karten\'.</string>
 	<string name="choose_audio_stream">Navi-Sprachausgabe</string>
-	<string name="choose_audio_stream_descr">Lautsprecher für Sprachansagen wählen</string>
+	<string name="choose_audio_stream_descr">Lautsprecher für Sprachansagen auswählen</string>
 	<string name="voice_stream_voice_call">Wie Anrufe (über Bluetooth auch zur Stereoanlage im Auto)</string>
 	<string name="voice_stream_notification">Wie Benachrichtigungen</string>
 	<string name="voice_stream_music">Wie Medien/Musik</string>
@@ -568,7 +568,7 @@
 	<string name="shared_string_select_all">Alle markieren</string>
 	<string name="shared_string_refresh">Aktualisieren</string>
 	<string name="fast_route_mode">Schnellste Route</string>
-	<string name="fast_route_mode_descr">Zur Berechnung der schnellsten Route aktivieren, für eine kraftstoffsparende Route deaktivieren</string>
+	<string name="fast_route_mode_descr">Zur Berechnung der schnellsten Route aktivieren oder für eine kraftstoffsparende Route deaktivieren</string>
 	<string name="tiles_to_download_estimated_size">Bei Zoomlevel {0} lade {1} Kacheln\n ({2} MB)</string>
 	<string name="shared_string_download_map">Karte herunterladen</string>
 	<string name="select_max_zoom_preload_area">Größte zu ladende Vergrößerung wählen</string>
@@ -987,10 +987,10 @@ Proportionaler Speicher %4$s MB (Android Limit %5$s MB, Dalvik %6$s MB).</string
 
 	<string name="layer_map_appearance">Anzeige konfigurieren</string>
 	<string name="show_lanes">Fahrspuren</string>
-	<string name="avoid_unpaved">Vermeide unbefestigte Straßen</string>
-	<string name="avoid_ferries">Vermeide Fähren</string>
-	<string name="avoid_in_routing_title">Vermeide …</string>
-	<string name="avoid_in_routing_descr">Bestimmte Straßentypen von der Routenberechnung ausschließen</string>
+	<string name="avoid_unpaved">Unbefestigte Wege vermeiden</string>
+	<string name="avoid_ferries">Fähren vermeiden</string>
+	<string name="avoid_in_routing_title">Vermeiden von …</string>
+	<string name="avoid_in_routing_descr">Mautstraßen, unbefestigte Straßen, Fähren vermeiden</string>
 	<string name="map_widget_fluorescent">Routen in Leuchtfarbe</string>
 	<string name="map_widget_show_ruler">Maßstab</string>
 	
@@ -1048,8 +1048,8 @@ Proportionaler Speicher %4$s MB (Android Limit %5$s MB, Dalvik %6$s MB).</string
 	<string name="av_camera_pic_size_descr">Bildgröße der internen Kamera auswählen</string>
 	<string name="av_def_action_video">Video aufzeichnen</string>
 	<string name="av_def_action_audio">Audio aufnehmen</string>
-	<string name="av_widget_action_descr">Legt fest, welche Aktion das Widget standardmäßig ausführt</string>
-	<string name="av_widget_action">Standard-Widget-Aktion</string>
+	<string name="av_widget_action_descr">Standard-Steuerelement-Aktion auswählen</string>
+	<string name="av_widget_action">Standard-Steuerelement-Aktion</string>
 	<string name="av_video_format_descr">Wählen Sie ein Video-Ausgabeformat</string>
 	<string name="av_video_format">Video-Ausgabeformat</string>
 	<string name="av_use_external_recorder_descr">Systemintegrierte Video-App für Videos verwenden</string>
@@ -1073,7 +1073,7 @@ Proportionaler Speicher %4$s MB (Android Limit %5$s MB, Dalvik %6$s MB).</string
 	<string name="recording_context_menu_play">Wiedergabe</string>
 	<string name="recording_default_name">Aufnahme</string>
 	<string name="recording_error">Fehler bei der Aufnahme</string>
-	<string name="recording_is_recorded">Audio/Video wird aufgenommen. Zum Stoppen drücken Sie das A/V-Widget.</string>
+	<string name="recording_is_recorded">Audio/Video wird aufgenommen. Drücken Sie das A/V-Steuerelement zum Stoppen.</string>
 	<string name="recording_playing">Aus der angegebenen Aufnahme wird abgespielt.\n%1$s</string>
 	<string name="recording_context_menu_arecord">Audio-Notiz aufnehmen</string>
 	<string name="recording_context_menu_vrecord">Video-Notiz aufnehmen</string>
@@ -1150,17 +1150,17 @@ Proportionaler Speicher %4$s MB (Android Limit %5$s MB, Dalvik %6$s MB).</string
 	<string name="distance_measurement_clear_route">Alle Punkte löschen</string>
 	<string name="intermediate_items_sort_return">Die Anordnung der Zwischenziele auf der Route zum Ziel wurde optimiert.</string>
 	<string name="plugin_distance_point">Punkt</string>
-	<string name="osmand_distance_planning_plugin_description">Diese Erweiterung beinhaltet ein Kartenbildschirm-Widget, über das Wege erstellt werden können. Entweder durch Auswahl von Punkten auf der Karte oder durch Verwendung/Veränderung bereits vorhandener GPX-Dateien kann so die Streckenplanung und Entfernungsmessung zwischen Punkten erfolgen. Die Ergebnisse können als GPX-Datei gespeichert und für eine Navigation verwendet werden.</string>
+	<string name="osmand_distance_planning_plugin_description">Diese Erweiterung beinhaltet ein Kartenbildschirm-Steuerelement, über das Wege erstellt werden können. Entweder durch Auswahl von Punkten auf der Karte oder durch Verwendung/Veränderung bereits vorhandener GPX-Dateien kann so die Streckenplanung und Entfernungsmessung zwischen Punkten erfolgen. Die Ergebnisse können als GPX-Datei gespeichert und für eine Navigation verwendet werden.</string>
 	<string name="osmand_distance_planning_plugin_name">Entfernungsmesser &amp; Streckenplaner</string>
 	<string name="shared_string_do_not_show_again">Nicht erneut anzeigen</string>
 	
 	<string name="distance_measurement_load_gpx">Vorhandene GPX-Datei öffnen</string>
 	<string name="search_street_in_neighborhood_cities">Straßennamen in benachbarten Orten suchen</string>
 	<string name="intermediate_items_sort_by_distance">Tür-zu-Tür sortieren</string>
-	<string name="use_distance_measurement_help">* Tippen, um einen Punkt zu setzen.
-\n * Lange auf die Karte tippen, um einen vorigen Punkt zu löschen.
-\n * Lange auf einen Punkt tippen, um eine Beschreibung zu lesen oder hinzuzufügen.
-\n * Mehr Aktionen durch Tippen auf das Entfernungsmesser-Widget.</string>
+	<string name="use_distance_measurement_help">* Tippen, um einen Punkt zu setzen. 
+\n * Lange auf die Karte tippen, um einen vorherigen Punkt zu löschen. 
+\n * Lange auf einen Punkt tippen, um eine Beschreibung zu lesen oder hinzuzufügen. 
+\n * Mehr Aktionen durch Tippen auf das Entfernungsmesser-Steuerelement.</string>
 	<string name="distance_measurement_start_editing">Messung beginnen</string>
 	<string name="distance_measurement_finish_editing">Messung beenden</string>
 	<string name="distance_measurement_finish_subtrack">Weitere Messung anlegen</string>
@@ -1192,7 +1192,7 @@ Proportionaler Speicher %4$s MB (Android Limit %5$s MB, Dalvik %6$s MB).</string
 	<string name="av_camera_focus_edof">Erweiterte Schärfentiefe (EDOF)</string>
 	<string name="av_camera_focus_macro">Makro-Fokusmodus (Nahaufnahme)</string>
 	<string name="speak_title">Ansagen …</string>
-	<string name="speak_descr">Einstellungen für Ansagen zu Straßennamen, Verkehrswarnungen, Blitzern oder Tempolimits</string>
+	<string name="speak_descr">Ansagen zu Straßennamen, Verkehrswarnungen (Stoppzeichen, Rüttelschwellen), stationäre Radarkontrollen, Tempolimits konfigurieren</string>
 	<string name="speak_street_names">Straßennamen (TTS)</string>
 	<string name="map_widget_fps_info">FPS-Debug-Info</string>
 	<string name="driving_region_descr">Fahrregion wählen: Europa, USA, GB, etc.</string>
@@ -1599,7 +1599,7 @@ Mit Neuanmeldung fortfahren?</string>
 	<string name="gpx_files_not_found">Keine GPX-Dateien gefunden in /tracks-Ordner</string>
 	<string name="gpx_file_name">GPX-Dateiname</string>
 	<string name="gpx_saved_sucessfully">GPX-Datei erfolgreich gespeichert unter {0}</string>
-	<string name="gpx_option_calculate_first_last_segment">Berechnen des ersten und letzten Abschnitts der OsmAnd-Route</string>
+	<string name="gpx_option_calculate_first_last_segment">OsmAnd-Route für ersten und letzten Abschnitt berechnen</string>
 <string name="download_additional_maps">Fehlende Karten herunterladen: %1$s (%2$d MB)?</string>
     <string name="shared_string_more">Mehr…</string>
     <string name="osmo_specify_tracker_id">Bitte Kennung angeben</string>
@@ -1614,8 +1614,8 @@ Mit Neuanmeldung fortfahren?</string>
     <string name="waypoints">Wegpunkte</string>
     <string name="targets">Ziele</string>
     <string name="way_alarms">Verkehrswarnungen</string>
-    <string name="record_plugin_description">Diese Erweiterung ermöglicht es, Tracks durch Drücken der GPX-Aufnahme-Schaltfläche auf dem Kartenbildschirm aufzunehmen bzw. alle navigierten Routen automatisch zu protokollieren und sie als lokale GPX-Datei (oder auch online über Web-Dienste) abzuspeichern. 
-\n
+    <string name="record_plugin_description">Diese Erweiterung ermöglicht es, Tracks durch Drücken des GPX-Aufnahme-Steuerelements auf dem Kartenbildschirm aufzunehmen bzw. alle navigierten Routen automatisch zu protokollieren und sie als lokale GPX-Datei (oder auch online über Web-Dienste) abzuspeichern. 
+\n 
 \nAufgenommene Tracks können z. B. mit Bekannten geteilt oder als Beiträge zu OSM verwendet werden. Sportler können gespeicherte Tracks zur Überwachung ihres Trainings verwenden. Einige Basisauswertungen sind direkt in OsmAnd enthalten, wie Rundenzeiten, Durchschnittsgeschwindigkeit, usw.. Die Aufzeichnungen können natürlich auch mit speziellen Analyse-Tools von Drittanbietern nachbearbeitet werden.</string>
     <string name="route_descr_destination">Ziel</string>
     <string name="local_index_description">Um Einzelheiten zu einem Eintrag zu sehen, auf einen beliebigen Eintrag drücken. Um ihn zu deaktivieren oder zu löschen, lang drücken. Aktuell auf dem Gerät vorhandene Daten (%1$s frei):</string>
@@ -1626,7 +1626,7 @@ Mit Neuanmeldung fortfahren?</string>
     <string name="fav_point_emoticons_message">Der Name des Favoriten wurde auf %1$s geändert, denn Zeichenketten mit Emoticons können nicht gespeichert werden.</string>
     <string name="print_route">Route drucken</string>
     <string name="speed_limit_exceed">Toleranz für Tempolimit</string>
-	<string name="speed_limit_exceed_message">Schwellenwert für Warnung bei Überschreiten der Höchstgeschwindigkeit.</string>
+	<string name="speed_limit_exceed_message">Toleranzgrenze für Tempolimit auswählen, oberhalb derer Sie eine Sprachwarnung erhalten.</string>
 	<string name="osmo_device_not_found">Gerät wurde nicht gefunden</string>
     <string name="osmo_no_connection_msg">Keine Verbindung zum OsMo-Server:
 - Internetverbindung prüfen;
@@ -2202,7 +2202,7 @@ Lon %2$s</string>
     <string name="map_marker">Kartenmarkierung</string>
     <string name="consider_turning_polygons_off">Es wird empfohlen, das Rendern von Polygonen zu deaktivieren.</string>
     
-    <string name="shared_string_widgets">Widgets</string>
+    <string name="shared_string_widgets">Steuerelemente</string>
     <string name="download_files_error_not_enough_space">Nicht genug Speicher!
 Es werden vorübergehend {3} MB und dauerhaft {1} MB Speicherplatz benötigt.
 Aktuell sind nur {2} MB verfügbar.</string>
@@ -2302,7 +2302,7 @@ Wenn Sie OsmAnd und OSM lieben und unterstützen wollen, so ist dies die perfekt
 <string name="move_marker_bottom_sheet_title">Karte bewegen, um die Position der Markierung zu verändern</string>
     <!-- string name="lat_lon_pattern">Lat: %1$.5f Lon: %2$.5f</string -->
     <string name="follow_us">Folge uns</string>
-    <string name="use_osm_live_routing_description">Navigation für OSM-Live Änderungen aktivieren (Beta)</string>
+    <string name="use_osm_live_routing_description">Navigation für OsmAnd-Live-Änderungen aktivieren</string>
 	<string name="access_direction_audio_feedback">Akustische Rückmeldung zur Richtung</string>
     <string name="access_direction_audio_feedback_descr">Zielpunktrichtung durch Ton kenntlich machen</string>
     <string name="access_direction_haptic_feedback">Haptische Rückmeldung zur Richtung</string>
@@ -2434,7 +2434,7 @@ Wenn Sie OsmAnd und OSM lieben und unterstützen wollen, so ist dies die perfekt
 \n• viele weitere Verbesserungen und Fehlerbehebungen 
 \n 
 \nund vieles mehr …</string>
-    <string name="trip_rec_notification_settings">Streckenaufzeichnung (keine Daten)</string>
+    <string name="trip_rec_notification_settings">Aufnahme-Schnellstart aktivieren</string>
     <string name="trip_rec_notification_settings_desc">Anzeige einer Systembenachrichtigung mit der die Streckenaufzeichnung gestartet werden kann</string>
     <string name="shared_string_notifications">Benachrichtigungen</string>
     <string name="osmo_service_running">OsMo-Dienst wird ausgeführt</string>
@@ -2452,7 +2452,7 @@ Wenn Sie OsmAnd und OSM lieben und unterstützen wollen, so ist dies die perfekt
     <string name="show_legacy_search">Alte Suche einblenden</string>
     <string name="show_legacy_search_desc">Alte Suche im Seitenmenü hinzufügen</string>
     <string name="routing_attr_allow_motorway_name">Autobahnen erlauben</string>
-    <string name="routing_attr_allow_motorway_description">Autobahnen in Berechnung mit einbeziehen</string>
+    <string name="routing_attr_allow_motorway_description">Autobahnen erlauben</string>
     <string name="lang_sr_latn">Serbisch (lateinisch)</string>
     <string name="lang_zh_hk">Chinesisch (Hong Kong)</string>
     <string name="rendering_attr_hideWaterPolygons_description">Wasser</string>
@@ -2626,7 +2626,7 @@ Abgedeckte Fläche: %1$s x %2$s</string>
     <string name="routing_attr_driving_style_speed_name">Kürzere Routen</string>
     <string name="routing_attr_driving_style_balance_name">Ausgewogen</string>
     <string name="routing_attr_driving_style_safety_name">Nebenstraßen bevorzugen</string>
-    <string name="routing_attr_relief_smoothness_factor_name">Steigung wählen</string>
+    <string name="routing_attr_relief_smoothness_factor_name">Höhenschwankung auswählen</string>
     <string name="driving_region_automatic">Automatisch</string>
     <string name="osmand_extended_description_part1">OsmAnd (OSM Automated Navigation Directions) ist eine Karten- und Navigationsanwendung mit Zugriff auf die kostenlosen, weltweiten und qualitativ hochwertigen Daten von OpenStreetMap (OSM). Erfreuen Sie sich an der akustischen und visuellen Navigation, der Betrachtung von POIs (points of interest), der Erstellung und Verwaltung von GPX-Tracks, der Visualisierung von Höhenlinien und -angaben (über ein Erweiterungsmodul), den Auswahlmöglichkeiten zwischen Auto-, Fahrrad- und Fußgänger-Betriebsart, der Möglichkeit an OSM mitzuarbeiten und vielem mehr.</string>
     <string name="osmand_extended_description_part2">GPS-Navigation • Sie haben die Wahl zwischen dem Offline-Betrieb (ohne Roaming-Gebühren, wenn Sie im Ausland sind) oder dem (schnelleren) Online-Betrieb • Die Sprachführung (mit aufgenommenen oder synthetischen Stimmen) begleitet Sie Schritt für Schritt auf Ihrem Weg • Ihre Route wird neu berechnet, sobald Sie von ihr abweichen • Fahrspurassistent, Straßennamen und voraussichtliche Ankunftszeit helfen Ihnen auf der Strecke • Zur Erhöhung Ihrer Reisesicherheit erfolgt ein automatischer Wechsel zwischen Tag- und Nachtmodus • Sie können wählen, ob Tempolimits angezeigt werden sollen, und ob Sie bei deren Überschreitung darauf hingewiesen werden wollen • Die Kartenvergrößerung passt sich Ihrer Geschwindigkeit an • Sie können Ziele nach Adresse, Typ (z. B.: Parkplatz, Restaurant, Hotel, Tankstelle, Museum) oder geographischen Koordinaten suchen • Die Festlegung von Zwischenstopps entlang Ihrer Reiseroute ist möglich • Sie können Ihre GPX-Tracks aufzeichnen, einspielen und ihnen folgen</string>
@@ -2690,8 +2690,8 @@ Abgedeckte Fläche: %1$s x %2$s</string>
     <string name="route_is_too_long_v2">Diese Route könnte zu lang sein, um berechnet zu werden. Bitte fügen Sie Zwischenziele hinzu, wenn innerhalb von 10 Minuten kein Ergebnis gefunden wird.</string>
     <string name="save_poi_too_many_uppercase">Der Name enthält zu viele Großbuchstaben. Möchten Sie den Vorgang fortsetzen?</string>
     <string name="display_zoom_level">Darstellung ab Zoomstufe: %1$s</string>
-    <string name="routing_attr_allow_private_name">Privatwege erlauben</string>
-    <string name="routing_attr_allow_private_description">Zufahrten zu Privatgrund erlauben</string>
+    <string name="routing_attr_allow_private_name">Privatzugang erlauben</string>
+    <string name="routing_attr_allow_private_description">Zugang zu Privatgrund erlauben</string>
     <string name="srtm_color_scheme">Farbschema</string>
     <string name="quick_action_showhide_osmbugs_title">OSM-Notizen ein-/ausblenden</string>
     <string name="quick_action_osmbugs_show">OSM-Notizen einblenden</string>
@@ -2712,7 +2712,7 @@ Abgedeckte Fläche: %1$s x %2$s</string>
     <string name="hide_from_zoom_level">Ausblenden ab Zoomstufe</string>
     <string name="show_from_zoom_level">Darstellen ab Zoomstufe</string>
     <string name="shared_string_add_photos">Fotos hinzufügen</string>
-    <string name="mapillary_widget">Mapillary-Widget</string>
+    <string name="mapillary_widget">Mapillary-Steuerelement</string>
     <string name="mapillary_widget_descr">Ermöglicht einen schnellen Zugriff auf Mapillary</string>
     <string name="mapillary_descr">Fotos von der Straße aus dem Netz für jeden. Orte entdecken, mitwirken und die Welt in Bildern festhalten.</string>
     <string name="mapillary">Mapillary</string>
@@ -2757,12 +2757,12 @@ Abgedeckte Fläche: %1$s x %2$s</string>
     <string name="quick_action_start_stop_navigation_descr">Taste drücken, um Navigation zu starten oder zu beenden.</string>
     <string name="quick_action_start_stop_navigation">Navigation starten/beenden</string>
     <string name="quick_action_resume_pause_navigation">Navigation fortsetzen/pausieren</string>
-    <string name="release_2_7">• Mapillary-Erweiterung mit Vor-Ort-Bildern
-\n
-\n • Lineal-Widget zur Entfernungsmessung
-\n
-\n • GPX-Teilabschnitte mit detaillierten Informationen zum Track
-\n
+    <string name="release_2_7">• Mapillary-Erweiterung mit Vor-Ort-Bildern 
+\n 
+\n • Lineal-Steuerelement zur Entfernungsmessung 
+\n 
+\n • GPX-Teilabschnitte mit detaillierten Informationen zum Track 
+\n 
 \n • Weitere Verbesserungen und Fehlerkorrekturen
 \n
 \n</string>
@@ -2811,7 +2811,7 @@ Abgedeckte Fläche: %1$s x %2$s</string>
     <string name="do_not_use_animations_descr">Deaktiviert Animationen in der App</string>
     <string name="keep_showing_on_map">Weiterhin auf der Karte anzeigen</string>
     <string name="exit_without_saving">Beenden ohne zu speichern?</string>
-    <string name="move_all_to_history">Alles zu Historie verschieben</string>
+    <string name="move_all_to_history">Alles in den Verlauf verschieben</string>
     <string name="build_route">Route erstellen</string>
     <string name="show_direction">Angabe der Entfernung</string>
     <string name="sort_by">Sortieren nach</string>
@@ -2819,8 +2819,8 @@ Abgedeckte Fläche: %1$s x %2$s</string>
     <string name="show_guide_line">Hilfslinien zeigen</string>
     <string name="show_arrows_on_the_map">Pfeile auf der Karte anzeigen</string>
     <string name="remove_from_map_markers">Entfernen von Kartenmarkierungen</string>
-    <string name="descendingly">Absteigend</string>
-    <string name="ascendingly">Aufsteigend</string>
+    <string name="descendingly">absteigend</string>
+    <string name="ascendingly">aufsteigend</string>
     <string name="date_added">Hinzugefügt am</string>
     <string name="order_by">Sortieren nach:</string>
     <string name="all_markers_moved_to_history">Alle Kartenmarkierungen in den Verlauf verschoben</string>
@@ -2848,14 +2848,14 @@ Abgedeckte Fläche: %1$s x %2$s</string>
     <string name="marker_save_as_track">Als Track speichern</string>
     <string name="move_to_history">In den Verlauf verschieben</string>
     <string name="group_will_be_removed_after_restart">Gruppe wird bei einem Neustart entfernt</string>
-    <string name="show_passed">Datum für \'Zuletzt verwendet\' anzeigen</string>
-    <string name="hide_passed">Datum für \'Zuletzt verwendet\' verbergen</string>
+    <string name="show_passed">Passierte anzeigen</string>
+    <string name="hide_passed">Passierte ausblenden</string>
     <string name="marker_show_distance_descr">Auswahl der Anzeige für Entfernungen und Richtungen zu Kartenmarkierungen in der Kartenansicht:</string>
     <string name="map_orientation_change_in_accordance_with_speed">Kartenausrichtungsgrenzwert</string>
     <string name="map_orientation_change_in_accordance_with_speed_descr">Auswählen, bei welcher Geschwindigkeit die Kartenausrichtung von \'Nach Bewegungsrichtung\' auf \'Nach Kompass\' umschaltet</string>
     <string name="marker_moved_to_history">Kartenmarkierung in den Verlauf verschoben</string>
     <string name="osn_modify_dialog_error">Ausnahmefehler: Notiz wurde nicht verändert</string>
-    <string name="osn_modify_dialog_title">Notiz verändern</string>
+    <string name="osn_modify_dialog_title">Notiz ändern</string>
     <string name="context_menu_item_modify_note">OSM-Notiz ändern</string>
     <string name="make_round_trip_descr">Kopie des Startpunkts als Ziel hinzufügen.</string>
     <string name="make_round_trip">Rundreise erstellen</string>
@@ -2872,4 +2872,8 @@ Abgedeckte Fläche: %1$s x %2$s</string>
 \n
 \n</string>
     <string name="rendering_value_darkyellow_name">Dunkelgelb</string>
+    <string name="show_map">Karte anzeigen</string>
+    <string name="route_is_calculated">Route wird berechnet</string>
+    <string name="round_trip">Rundfahrt</string>
+    <string name="plan_route_no_markers_toast">Um diese Funktion nutzen zu können, müssen Sie mindestens eine Markierung hinzufügen.</string>
     </resources>
