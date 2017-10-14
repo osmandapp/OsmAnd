@@ -414,7 +414,7 @@ public class MapMarkerDialogHelper {
 			v = mapActivity.getLayoutInflater().inflate(R.layout.map_marker_item, null);
 		}
 		updateMapMarkerInfo(mapActivity, v, loc, heading, useCenter, nightMode, screenOrientation,
-				selectionMode, helperCallbacks, marker);
+				selectionMode, helperCallbacks, marker, false);
 		final View more = v.findViewById(R.id.all_points);
 		final View move = v.findViewById(R.id.info_move);
 		final View remove = v.findViewById(R.id.info_close);
@@ -467,7 +467,7 @@ public class MapMarkerDialogHelper {
 										   Float heading, boolean useCenter, boolean nightMode,
 										   int screenOrientation, boolean selectionMode,
 										   final MapMarkersDialogHelperCallbacks helperCallbacks,
-										   final MapMarker marker) {
+										   final MapMarker marker, boolean showDateAndGroup) {
 		TextView text = (TextView) localView.findViewById(R.id.waypoint_text);
 		TextView textShadow = (TextView) localView.findViewById(R.id.waypoint_text_shadow);
 		TextView textDist = (TextView) localView.findViewById(R.id.waypoint_dist);
@@ -476,6 +476,7 @@ public class MapMarkerDialogHelper {
 		TextView waypointDeviation = (TextView) localView.findViewById(R.id.waypoint_deviation);
 		TextView descText = (TextView) localView.findViewById(R.id.waypoint_desc_text);
 		final CheckBox checkBox = (CheckBox) localView.findViewById(R.id.checkbox);
+		TextView dateGroupText = (TextView) localView.findViewById(R.id.date_group_text);
 
 		if (text == null || textDist == null || arrow == null || waypointIcon == null
 				|| waypointDeviation == null || descText == null) {
@@ -537,6 +538,26 @@ public class MapMarkerDialogHelper {
 		text.setText(descr);
 
 		descText.setVisibility(View.GONE);
+
+		if (showDateAndGroup) {
+			Date date = new Date(marker.creationDate);
+			String month = new SimpleDateFormat("MMM", Locale.getDefault()).format(date);
+			if (month.length() > 1) {
+				month = Character.toUpperCase(month.charAt(0)) + month.substring(1);
+			}
+			month = month.replaceAll("\\.", "");
+			String day = new SimpleDateFormat("d", Locale.getDefault()).format(date);
+			String desc = month + " " + day;
+			String markerGroupName = marker.groupName;
+			if (markerGroupName != null) {
+				if (markerGroupName.equals("")) {
+					markerGroupName = app.getString(R.string.shared_string_favorites);
+				}
+				desc += " • " + markerGroupName;
+			}
+			dateGroupText.setVisibility(View.VISIBLE);
+			dateGroupText.setText(desc);
+		}
 
 		if (selectionMode) {
 			checkBox.setChecked(marker.selected);
@@ -824,7 +845,7 @@ public class MapMarkerDialogHelper {
 				View v = listView.getChildAt(i - listView.getFirstVisiblePosition());
 				if (obj == marker) {
 					updateMapMarkerInfo(mapActivity, v, loc, heading, useCenter, nightMode,
-							screenOrientation, selectionMode, helperCallbacks, marker);
+							screenOrientation, selectionMode, helperCallbacks, marker, false);
 				}
 			}
 		} catch (Exception e) {

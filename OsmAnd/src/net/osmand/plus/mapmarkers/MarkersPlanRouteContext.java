@@ -41,6 +41,8 @@ public class MarkersPlanRouteContext {
 	private boolean progressBarVisible;
 	private boolean fragmentVisible;
 	private boolean markersListOpened;
+	private boolean adjustMapOnStart = true;
+	private boolean navigationFromMarkers;
 
 	Map<Pair<WptPt, WptPt>, List<WptPt>> getSnappedToRoadPoints() {
 		return snappedToRoadPoints;
@@ -50,7 +52,7 @@ public class MarkersPlanRouteContext {
 		return snapTrkSegment;
 	}
 
-	ApplicationMode getSnappedMode() {
+	public ApplicationMode getSnappedMode() {
 		return snappedMode;
 	}
 
@@ -90,12 +92,28 @@ public class MarkersPlanRouteContext {
 		this.markersListOpened = markersListOpened;
 	}
 
+	public boolean isAdjustMapOnStart() {
+		return adjustMapOnStart;
+	}
+
+	public void setAdjustMapOnStart(boolean adjustMapOnStart) {
+		this.adjustMapOnStart = adjustMapOnStart;
+	}
+
+	public boolean isNavigationFromMarkers() {
+		return navigationFromMarkers;
+	}
+
+	public void setNavigationFromMarkers(boolean navigationFromMarkers) {
+		this.navigationFromMarkers = navigationFromMarkers;
+	}
+
 	public MarkersPlanRouteContext(OsmandApplication app) {
 		this.app = app;
 	}
 
 	void cancelSnapToRoad() {
-		listener.hideProgressBar();
+		listener.hideProgressBar(true);
 		snapToRoadPairsToCalculate.clear();
 		if (calculationProgress != null) {
 			calculationProgress.isCancelled = true;
@@ -132,11 +150,7 @@ public class MarkersPlanRouteContext {
 		}
 	}
 
-	void recreateSnapTrkSegment() {
-		recreateSnapTrkSegment(true);
-	}
-
-	private void recreateSnapTrkSegment(boolean adjustMap) {
+	void recreateSnapTrkSegment(boolean adjustMap) {
 		snapTrkSegment.points.clear();
 		List<WptPt> points = getPointsToCalculate();
 		if (snappedMode == ApplicationMode.DEFAULT) {
@@ -249,7 +263,7 @@ public class MarkersPlanRouteContext {
 					app.runInUIThread(new Runnable() {
 						@Override
 						public void run() {
-							listener.hideProgressBar();
+							listener.hideProgressBar(false);
 						}
 					});
 				}
@@ -265,7 +279,7 @@ public class MarkersPlanRouteContext {
 
 		void updateProgress(int progress);
 
-		void hideProgressBar();
+		void hideProgressBar(boolean canceled);
 
 		void refresh();
 
