@@ -1167,13 +1167,13 @@
 	
 	
 	<string name="send_location_email_pattern">برای مشاهدهٔ مکان، لینک %1$s (مرورگر) یا لینک %2$s (اندروید) را ببینید</string>
-	<string name="amenity_type_geocache">مکانهای ذخیره شده جغرافیایی</string>
+	<string name="amenity_type_geocache">Geocache</string>
 	<string name="continuous_rendering_descr">به‌جای نمایش یکبارهٔ تصویر از رندرینگ مستمر استفاده کن</string>
 	<string name="renderer_load_sucess">رندرکننده با موفقیت بارگیری شد</string>
 	<string name="renderer_load_exception">خطایی رخ داد: رندرکننده بارگیری نشد</string>
 	<string name="renderers">رندرکنندهٔ بُرداری</string>
 	<string name="renderers_descr">شکل‌وشمایل رندر را انتخاب نمایید</string>
-	<string name="download_type_to_filter">نوشتن برای فیلتر کردن</string>
+	<string name="download_type_to_filter">فیلتر</string>
 	<string name="transport_context_menu">جست‌وجوی ایستگاه حمل و نقل عمومی</string>
 	<string name="rotate_map_to_bearing_descr">نحوهٔ چرخش نقشه را انتخاب کنید</string>
 	<string name="layer_poi">POI…</string>
@@ -1255,7 +1255,7 @@
 	<string name="auto_zoom_farthest">نمای دور</string>
 	
     <string name="shared_string_delete_all">حذف همه</string>
-    <string name="local_osm_changes_delete_all_confirm">دارید %1$d تا از ویرایش‌های OSM را حذف می‌کنید. آیا مطمئنید؟</string>
+    <string name="local_osm_changes_delete_all_confirm">در حال حذف %1$d تغییر OSM هستید. آیا مطمئنید؟</string>
     
     
     <string name="route_descr_destination">مقصد</string>
@@ -2273,8 +2273,8 @@
     <string name="av_audio_bitrate_descr">بیت‌رِیت صدا را انتخاب کنید</string>
     <string name="show_on_start">هنگام شروع نشانش بده</string>
     <string name="copied_to_clipboard">کپی شد</string>
-    <string name="osm_edit_deleted_poi">مکان POI حذف‌شده</string>
-    <string name="osm_edit_removed_note">توضیح ویرایشی حذف‌شدهٔ OSM</string>
+    <string name="osm_edit_deleted_poi">حذف POI</string>
+    <string name="osm_edit_removed_note">حذف توضیح ویرایشی OSM</string>
     <string name="osn_bug_name">توضیح ویرایشی OSM</string>
     <string name="osn_add_dialog_title">نوشتن یادداشت</string>
     <string name="osn_comment_dialog_title">افزودن توضیح</string>
@@ -2683,7 +2683,7 @@
     <string name="rec_split_clip_length">مدت کلیپ</string>
     <string name="shared_string_sound">صدا</string>
     <string name="show_on_start_description">اگر خاموش باشد، مستقیماً صفحهٔ نقشه را برایتان می‌آورد</string>
-    <string name="osm_edit_modified_poi">مکان POI اصلاح‌شده</string>
+    <string name="osm_edit_modified_poi">اصلاح POI</string>
     <string name="osm_edit_commented_note">توضیح ویرایشی دارای نظر</string>
     <string name="lang_mk">مقدونی</string>
     <string name="lang_fy">فریسی غربی</string>
@@ -2719,10 +2719,10 @@
     <string name="gpx_no_tracks_title_folder">همچنین می‌توانید مسیرها را در این پوشه قرار دهید</string>
     <string name="rec_split_title">استفاده از تقسیمگر ضبط‌کننده</string>
     <string name="context_menu_item_open_note">ایجاد توضیحات ویرایشی OSM</string>
-    <string name="osm_edit_reopened_note">توضیح ویرایشی بازشدهٔ OSM</string>
-    <string name="osm_edit_created_note">توضیح ویرایشی ایجادشدهٔ OSM</string>
+    <string name="osm_edit_reopened_note">توضیح ویرایشی بازگشوده</string>
+    <string name="osm_edit_created_note">ایجاد توضیح ویرایشی</string>
     <string name="rendering_attr_hideProposed_name">مکان‌های در حد پیشنهاد</string>
-    <string name="osm_edit_created_poi">مکان POI ایجادشده</string>
+    <string name="osm_edit_created_poi">ایجاد POI</string>
     <string name="logged_as">واردشده با عنوان %1$s</string>
     <string name="moving_time">مدت حرکت</string>
     <string name="saved_at_time">در %1$s ذخیره شد</string>
@@ -2783,4 +2783,8 @@
     <string name="save_gpx_waypoint">ذخیره‌کردن نقطهٔ بین‌راهی GPX</string>
     <string name="waypoint_one">نقطهٔ بین‌راهی ۱</string>
     <string name="import_track_desc">در فایل %1$s هیچ نقطهٔ بین‌راهی وجود ندارد. به‌عنوان مسیر وارد شود؟</string>
+    <string name="show_map">نشان‌دادن نقشه</string>
+    <string name="route_is_calculated">مسیر محاسبه شد</string>
+    <string name="round_trip">سفر رفت‌وبرگشتی</string>
+    <string name="plan_route_no_markers_toast">برای استفاده از این قابلیت باید حداقل یک نشانه اضافه کنید.</string>
     </resources>
