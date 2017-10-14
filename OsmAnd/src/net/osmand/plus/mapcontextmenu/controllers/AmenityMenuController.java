@@ -11,7 +11,6 @@ import net.osmand.data.TransportStop;
 import net.osmand.osm.PoiCategory;
 import net.osmand.osm.PoiFilter;
 import net.osmand.osm.PoiType;
-import net.osmand.plus.OsmandSettings;
 import net.osmand.plus.R;
 import net.osmand.plus.activities.MapActivity;
 import net.osmand.plus.mapcontextmenu.MapContextMenu;
@@ -84,7 +83,7 @@ public class AmenityMenuController extends MenuController {
 		return getLeftIconId(amenity);
 	}
 
-	public static int getLeftIconId(Amenity amenity) {
+	private static int getLeftIconId(Amenity amenity) {
 		String id = null;
 		PoiType st = amenity.getType().getPoiTypeByKeyName(amenity.getSubType());
 		if (st != null) {
@@ -107,8 +106,9 @@ public class AmenityMenuController extends MenuController {
 
 	@Override
 	public String getNameStr() {
-		OsmandSettings settings = getMapActivity().getMyApplication().getSettings();
-		return amenity.getName(settings.MAP_PREFERRED_LOCALE.get(), settings.MAP_TRANSLITERATE_NAMES.get());
+		return amenity.getName(
+				amenity.getType().isWiki() ? getPreferredMapAppLang() : getPreferredMapLang(),
+				isTransliterateNames());
 	}
 
 	@Override
