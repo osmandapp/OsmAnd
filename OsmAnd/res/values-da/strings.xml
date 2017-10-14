@@ -2252,7 +2252,7 @@ OSM er et i fællesskab drevet, globalt offentligt domæne kortlægningsprojekt.
     <string name="number_of_recipients">Antal modtagere</string>
     <string name="osm_user_stat">Redigeringer %1$s, rang %2$s, redigeringer totalt %3$s</string>
     <string name="osm_editors_ranking">Rangering af OSM bidragsydere</string>
-    <string name="osm_live_subscription">OSM Live-abonnement</string>
+    <string name="osm_live_subscription">OsmAnd Live-abonnement</string>
     <string name="osm_live_subscribe_btn">Tilmeld</string>
     <string name="osm_live_email_desc">Skal bruges til at give oplysninger om bidrag</string>
     <string name="osm_live_user_public_name">Offentligt navn</string>
@@ -2267,7 +2267,7 @@ OSM er et i fællesskab drevet, globalt offentligt domæne kortlægningsprojekt.
     <string name="osm_live_thanks">Tak for at abonnere på live opdateringer!</string>
     <string name="osm_live_region_desc">En del af donationen vil blive sendt til OSM brugere, som indsender ændringer til kortet i det pågældende område</string>
     <string name="osm_live_subscription_settings">Indstillinger for abonnement</string>
-    <string name="osm_live_ask_for_purchase">Køb først OSM Live-abonnement</string>
+    <string name="osm_live_ask_for_purchase">Køb først OsnAnd Live-abonnement</string>
 
     <string name="osm_live_header">"Abonnementet giver timebaserede opdateringer til alle kort i hele verden. 
 En del af indtægten går tilbage til OSM fællesskabet og udbetales for hvert OSM bidrag. 
@@ -2329,8 +2329,8 @@ Hvis du  ønsker at støtte OsmAnd og OSM, er dette en god måde at gøre det p�
     <string name="map_widget_bearing">Relativ pejling</string>
     <string name="map_widget_magnetic_bearing">Magnetisk pejling</string>
     <string name="access_no_destination">Destination er ikke angivet</string>
-    <string name="use_osm_live_routing_description">Aktiver navigation for OSM Live ændringer (Beta)</string>
-	<string name="use_osm_live_routing">OSM Live navigation</string>
+    <string name="use_osm_live_routing_description">Aktiver navigation for OsmAnd Live ændringer</string>
+	<string name="use_osm_live_routing">OsmAnd Live navigation</string>
     <string name="access_direction_audio_feedback">Retning med lyd-indikation</string>
     <string name="access_direction_audio_feedback_descr">"Indikerer retning til målpunkt  med lyd"</string>
     <string name="access_direction_haptic_feedback">Retning med haptisk indikation</string>
@@ -2915,11 +2915,12 @@ Tidligere destination bliver sidste mellemliggende punkt.</string>
     <string name="osn_modify_dialog_error">Der opstod en undtagelse: noten blev ikke ændret</string>
     <string name="osn_modify_dialog_title">Ændre note</string>
     <string name="context_menu_item_modify_note">Ændre OSM note</string>
-    <string name="release_2_8">"•  Helt omarbejdet kortmarkører med retningslinjer og ruteplanlægning
-\n
-\n • Afstand måleværktøj tilbyder en fastgør til vejen funktion samt at gemmme punkter som spor
-\n
+    <string name="release_2_8">"•  Helt omarbejdelse af kortmarkører med retningslinjer og ruteplanlægning 
+\n 
+\n • Afstand måleværktøj tilbyder en fastgør til vejen funktion samt at gemmme punkter som spor 
+\n 
 \n  •  OSM Live: fejlrettelser, nye data på serveren hvert 30. minut, opdateringer implementeres i navigationen
 \n
 \n"</string>
+    <string name="rendering_value_darkyellow_name">Mørkegul</string>
     </resources>
