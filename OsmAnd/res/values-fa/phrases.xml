@@ -669,4 +669,12 @@
 	<string name="poi_wheelchair_designated">ویژه</string>
 	<string name="poi_artwork_type_fountain">نوع اثر هنری: فواره</string>
 
+	<string name="poi_fuel_type">نوع</string>
+	<string name="poi_fire_hydrant_type">نوع</string>
+	<string name="poi_highway_crossing_type">نوع</string>
+	<string name="poi_tactile_paving">کفپوش برجسته</string>
+	<string name="poi_automated">خودکار</string>
+	<string name="poi_parking_type">نوع</string>
+	<string name="poi_covered">سرپوشیده</string>
+	<string name="poi_bicycle_parking_type">نوع</string>
 	</resources>
