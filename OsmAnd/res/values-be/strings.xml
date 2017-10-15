@@ -2926,4 +2926,5 @@
     <string name="route_is_calculated">Маршрут разлічаны</string>
     <string name="round_trip">Падарожжа</string>
     <string name="plan_route_no_markers_toast">Вам неабходна дадаць па меншай меры адзін маркер каб выкарыстать гэтую функцыю.</string>
+    <string name="shared_string_road">Дарога</string>
     </resources>
