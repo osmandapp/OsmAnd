@@ -11,12 +11,14 @@ import android.widget.ImageButton;
 import android.widget.ImageView;
 import android.widget.TextView;
 import android.widget.Toast;
+
 import net.osmand.CallbackWithObject;
 import net.osmand.Location;
 import net.osmand.ResultMatcher;
 import net.osmand.binary.RouteDataObject;
 import net.osmand.data.LatLon;
 import net.osmand.data.PointDescription;
+import net.osmand.plus.ApplicationMode;
 import net.osmand.plus.OsmAndFormatter;
 import net.osmand.plus.OsmandApplication;
 import net.osmand.plus.R;
@@ -25,8 +27,7 @@ import net.osmand.plus.mapcontextmenu.MapContextMenu;
 import net.osmand.plus.routing.RoutingHelper;
 import net.osmand.plus.views.AnimateDraggingMapThread;
 import net.osmand.plus.views.ContextMenuLayer;
-import net.osmand.router.RoutingConfiguration;
-import net.osmand.router.RoutingConfiguration.Builder;
+import net.osmand.util.Algorithms;
 import net.osmand.util.MapUtils;
 
 import java.util.ArrayList;
@@ -107,11 +108,13 @@ public class AvoidSpecificRoads {
 
 
 	protected String getText(RouteDataObject obj) {
-		return RoutingHelper.formatStreetName(obj.getName(app.getSettings().MAP_PREFERRED_LOCALE.get(),
+		String name = RoutingHelper.formatStreetName(obj.getName(app.getSettings().MAP_PREFERRED_LOCALE.get(),
 				app.getSettings().MAP_TRANSLITERATE_NAMES.get()), 
 				obj.getRef(app.getSettings().MAP_PREFERRED_LOCALE.get(), app.getSettings().MAP_TRANSLITERATE_NAMES.get(), true), 
 				obj.getDestinationName(app.getSettings().MAP_PREFERRED_LOCALE.get(), app.getSettings().MAP_TRANSLITERATE_NAMES.get(), true), 
 				app.getString(R.string.towards));
+
+		return Algorithms.isEmpty(name) ? app.getString(R.string.shared_string_road) : name;
 	}
 
 	public void showDialog(@NonNull final MapActivity mapActivity) {
@@ -165,7 +168,9 @@ public class AvoidSpecificRoads {
 		final Location ll = new Location("");
 		ll.setLatitude(loc.getLatitude());
 		ll.setLongitude(loc.getLongitude());
-		app.getLocationProvider().getRouteSegment(ll, new ResultMatcher<RouteDataObject>() {
+		ApplicationMode appMode = app.getRoutingHelper().getAppMode();
+
+		app.getLocationProvider().getRouteSegment(ll, appMode, new ResultMatcher<RouteDataObject>() {
 
 			@Override
 			public boolean publish(RouteDataObject object) {
@@ -207,7 +212,9 @@ public class AvoidSpecificRoads {
 		final Location ll = new Location("");
 		ll.setLatitude(loc.getLatitude());
 		ll.setLongitude(loc.getLongitude());
-		app.getLocationProvider().getRouteSegment(ll, new ResultMatcher<RouteDataObject>() {
+		ApplicationMode appMode = app.getRoutingHelper().getAppMode();
+
+		app.getLocationProvider().getRouteSegment(ll, appMode, new ResultMatcher<RouteDataObject>() {
 
 			@Override
 			public boolean publish(RouteDataObject object) {
