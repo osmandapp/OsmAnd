@@ -2876,4 +2876,5 @@ Abgedeckte Fläche: %1$s x %2$s</string>
     <string name="route_is_calculated">Route wird berechnet</string>
     <string name="round_trip">Rundfahrt</string>
     <string name="plan_route_no_markers_toast">Um diese Funktion nutzen zu können, müssen Sie mindestens eine Markierung hinzufügen.</string>
+    <string name="shared_string_road">Straße</string>
     </resources>
