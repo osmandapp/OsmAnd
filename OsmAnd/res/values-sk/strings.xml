@@ -2906,4 +2906,22 @@ Zodpovedá oblasti: %1$s x %2$s</string>
     <string name="date_added">Dátum pridania</string>
     <string name="order_by">Zoradiť podľa:</string>
     <string name="marker_show_distance_descr">Zvoľte ako sa bude zobrazovať vzdialenosť a smer k mapovým značkám na mape:</string>
+    <string name="show_map">Zobraziť mapu</string>
+    <string name="route_is_calculated">Trasa je vypočítaná</string>
+    <string name="round_trip">Okružná jazda</string>
+    <string name="plan_route_no_markers_toast">Pre použitie tejto funkcie musíte pridať aspoň jednu mapovú značku.</string>
+    <string name="osn_modify_dialog_error">Nastala výnimka: poznámka nebola zmenená</string>
+    <string name="osn_modify_dialog_title">Upraviť poznámku</string>
+    <string name="context_menu_item_modify_note">Upraviť OSM poznámku</string>
+    <string name="make_round_trip_descr">Pridať kópiu počiatočného bodu ako cieľ.</string>
+    <string name="make_round_trip">Vytvoriť okružnú trasu</string>
+    <string name="shared_string_navigate">Navigovať</string>
+    <string name="release_2_8">\\022 Prepracované mapové značky s usmerneniami a plánovaním trasy
+\n
+\n • Nástroj na meranie vzdialeností má funkciu prichytenia k ceste a uloženie bodov ako stopu
+\n
+\n • OsmAnd Live: opravy chýb, nové dáta na serveri každých 30 minút, aktualizácie začlenené do navigácie
+\n
+\n</string>
+    <string name="rendering_value_darkyellow_name">Tmavožltá</string>
     </resources>
