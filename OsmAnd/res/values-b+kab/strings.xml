@@ -1,9 +1,10 @@
-<?xml version="1.0" encoding="UTF-8" standalone="no"?><resources><string name="rendering_value_car_name">Takeṛṛust</string>
+<?xml version='1.0' encoding='UTF-8'?>
+<resources><string name="rendering_value_car_name">Takeṛṛust</string>
     <string name="osmo_leave_confirmation_msg">Tebɣiḍ ad teffɣeḍ seg ugraw %1$s?</string>
     <string name="osmo_invite">Nced…</string>
     <string name="rendering_value_bicycle_name">Azlalam</string>
     <string name="rendering_value_pedestrian_name">amsebrid</string>
-    <string name="shared_string_from">sɣur</string>
+    <string name="shared_string_from">sγur</string>
     <string name="access_hint_enter_name">Ger isem</string>
     <string name="access_hint_enter_category">Ger taggayt</string>
     <string name="access_hint_enter_description">Ger aglam</string>
@@ -11,14 +12,14 @@
     <string name="rendering_value_medium_name">alemmas</string>
     <string name="rendering_value_bold_name">azuran</string>
     <string name="shared_string_status">addad</string>
-    <string name="shared_string_read_more">ɣer uggar</string>
+    <string name="shared_string_read_more">Γer uggar</string>
     <string name="shared_string_hide">Ffer</string>
     <string name="route_stops_before">%1$s ad yahbes uqbel</string>
     <string name="coords_search">Asemmezdi n unadi</string>
     <string name="advanced_coords_search">Asemmezdi asurif n unadi</string>
     <string name="back_to_search">Tuɣalin γer unadi</string>
     <string name="shared_string_location">adɣar</string>
-    <string name="read_more">ɣer uggar</string>
+    <string name="read_more">Γer uggar</string>
     <string name="whats_new">dacu i d amaynut deg</string>
     <string name="shared_string_update">sedɣi</string>
     <string name="share_menu_location">bḍu adɣar</string>
@@ -35,7 +36,7 @@
     <string name="shared_string_wikipedia">Wikipedia</string>
     <string name="local_indexes_cat_wiki">Wikipedia</string>
     <string name="shared_string_is_open">Ldi tura</string>
-    <string name="welcome_header">Ansuf</string>
+    <string name="welcome_header">Ansuf yiswen</string>
     <string name="current_route">Abrid amiran</string>
     <string name="shared_string_ellipsis">…</string>
     <string name="shared_string_ok">Ɣas</string>
@@ -102,7 +103,7 @@
     <string name="lang_tr">Taṭerkit</string>
     <string name="index_name_italy">Turuft - Ṭelyan</string>
     <string name="driving_region_canada">Kanada</string>
-    <string name="route_to">Ɣer:</string>
+    <string name="route_to">Γer:</string>
     <string name="route_via"/>
     <string name="route_from">Seg:</string>
 
@@ -135,10 +136,10 @@
     <string name="north_west">agafa-utaram</string>
     <string name="north_north_west">agafa-ugafa-utaram</string>
     <string name="front">s dat</string>
-    <string name="right">ɣer tama tayeffust</string>
+    <string name="right">γer tama tayeffust</string>
     <string name="back">s deffir</string>
-    <string name="left">ɣer tama taẓelmaṭt</string>
-    <string name="towards">ɣer</string>
+    <string name="left">γer tama taẓelmaṭt</string>
+    <string name="towards">γer</string>
     <string name="i_am_here">aqliyi da</string>
     <string name="index_name_north_america">Marikan n ugafa</string>
     <string name="index_name_central_america">Marikan Talemmast</string>
@@ -234,4 +235,15 @@
     <string name="poi_filter_by_name">Anadi s yisem</string>
     <string name="search_offline_clear_search">Anadi Ajdid</string>
     <string name="searching_address">Anadi n tansa …</string>
+    <string name="shared_string_plugin">Azegrar</string>
+    <string name="type_address">Nadi tansa</string>
+    <string name="type_city_town">Sekcem tiγremt neγ tamdint</string>
+    <string name="type_postcode">Sekcem angal n tesreqqest</string>
+    <string name="select_city">Ffren tamdint</string>
+    <string name="select_postcode">Ffren angal n tesreqqest</string>
+    <string name="rendering_attr_hideWaterPolygons_description">Aman</string>
+    <string name="rendering_attr_hideWaterPolygons_name">Ffer aman</string>
+    <string name="route_kr">Ttef tama tayeffust t defred</string>
+    <string name="show_route">Ttfaṣil n webrid</string>
+    <string name="route_head">Edfar</string>
     </resources>
