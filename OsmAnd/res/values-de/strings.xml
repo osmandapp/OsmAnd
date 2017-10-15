@@ -2800,7 +2800,7 @@ Abgedeckte Fläche: %1$s x %2$s</string>
     <string name="add_route_points">Routenpunkte hinzufügen</string>
     <string name="add_line">Strecke hinzufügen</string>
     <string name="empty_state_my_tracks">Tracks hinzufügen und aufzeichnen</string>
-    <string name="empty_state_my_tracks_desc">Tracks zur Ansicht aufzeichnen oder importieren</string>
+    <string name="empty_state_my_tracks_desc">Tracks aufzeichnen oder importieren zur Ansicht</string>
     <string name="empty_state_favourites">Favoriten hinzufügen</string>
     <string name="empty_state_favourites_desc">Favoriten auf der Karte hinzufügen oder sie aus einer Datei importieren</string>
     <string name="import_track">Track importieren</string>
