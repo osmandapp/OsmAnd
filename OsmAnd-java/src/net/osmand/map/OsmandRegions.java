@@ -93,7 +93,7 @@ public class OsmandRegions {
 	}
 
 
-	public void prepareFile(String fileName) throws IOException {
+	public BinaryMapIndexReader prepareFile(String fileName) throws IOException {
 		reader = new BinaryMapIndexReader(new RandomAccessFile(fileName, "r"), new File(fileName));
 //		final Collator clt = OsmAndCollator.primaryCollator();
 		final Map<String, String> parentRelations = new LinkedHashMap<String, String>();
@@ -138,6 +138,7 @@ public class OsmandRegions {
 			}
 		}
 		structureWorldRegions(new ArrayList<WorldRegion>(fullNamesToRegionData.values()));
+		return reader;
 	}
 
 	public boolean containsCountry(String name) {

@@ -952,14 +952,14 @@ public class RoutingHelper {
 	}
 
 	public void startRouteCalculationThread(RouteCalculationParams params, boolean paramsChanged, boolean updateProgress) {
-		if (updateProgress) {
-			updateProgress(params);
-		}
 		synchronized (this) {
 			final Thread prevRunningJob = currentRunningJob;
 			RouteRecalculationThread newThread = new RouteRecalculationThread(
 					"Calculating route", params, paramsChanged); //$NON-NLS-1$
 			currentRunningJob = newThread;
+			if (updateProgress) {
+				updateProgress(params);
+			}
 			if (prevRunningJob != null) {
 				newThread.setWaitPrevJob(prevRunningJob);
 			}
@@ -974,7 +974,7 @@ public class RoutingHelper {
 		} else {
 			progressRoute = this.progressRoute;
 		}
-		if(progressRoute != null ) {
+		if (progressRoute != null ) {
 			app.runInUIThread(new Runnable() {
 
 				@Override
@@ -986,6 +986,8 @@ public class RoutingHelper {
 						if (all > 0) {
 							int t = (int) Math.min(p * p / (all * all) * 100f, 99);
 							progressRoute.updateProgress(t);
+						} else {
+							progressRoute.updateProgress(0);
 						}
 						Thread t = currentRunningJob;
 						if(t instanceof RouteRecalculationThread && ((RouteRecalculationThread) t).params != params) {

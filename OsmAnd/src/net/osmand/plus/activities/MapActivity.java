@@ -403,14 +403,24 @@ public class MapActivity extends OsmandActionBarActivity implements DownloadEven
 			@Override
 			public void updateProgress(int progress) {
 				if (findViewById(R.id.MapHudButtonsOverlay).getVisibility() == View.VISIBLE) {
-					pbExtView.setVisibility(View.GONE);
-					pb.setVisibility(View.VISIBLE);
+					if (pbExtView.getVisibility() == View.VISIBLE) {
+						pbExtView.setVisibility(View.GONE);
+					}
+					if (pb.getVisibility() == View.GONE) {
+						pb.setVisibility(View.VISIBLE);
+					}
 					pb.setProgress(progress);
+					pb.invalidate();
 					pb.requestLayout();
 				} else {
-					pb.setVisibility(View.GONE);
-					pbExtView.setVisibility(View.VISIBLE);
+					if (pb.getVisibility() == View.VISIBLE) {
+						pb.setVisibility(View.GONE);
+					}
+					if (pbExtView.getVisibility() == View.GONE) {
+						pbExtView.setVisibility(View.VISIBLE);
+					}
 					pbExt.setProgress(progress);
+					pbExt.invalidate();
 					pbExt.requestLayout();
 				}
 			}

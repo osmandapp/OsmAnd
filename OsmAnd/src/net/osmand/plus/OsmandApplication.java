@@ -758,7 +758,7 @@ public class OsmandApplication extends MultiDexApplication {
 		return lang;
 	}
 	
-	public RoutingConfiguration.Builder getDefaultRoutingConfig() {
+	public synchronized RoutingConfiguration.Builder getDefaultRoutingConfig() {
 		if(defaultRoutingConfig == null) {
 			defaultRoutingConfig = appInitializer.getLazyDefaultRoutingConfig();
 		}
