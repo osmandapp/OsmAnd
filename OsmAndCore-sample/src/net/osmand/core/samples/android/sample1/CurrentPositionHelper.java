@@ -148,7 +148,7 @@ public class CurrentPositionHelper {
 			}
 		}
 		try {
-			return new GeocodingUtilities().reverseGeocodingSearch(defCtx, lat, lon);
+			return new GeocodingUtilities().reverseGeocodingSearch(defCtx, lat, lon, false);
 		} catch (Exception e) {
 			e.printStackTrace();
 			return null;
