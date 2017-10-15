@@ -119,7 +119,7 @@
 	<string name="map_widget_next_next_turn">دومین پیچ بعدی</string>
 	<string name="map_widget_mini_route">نقشه مسیر کوچک</string>
 	<string name="avoid_in_routing_title">اجتناب از…</string>
-	<string name="avoid_in_routing_descr">اجتناب از جاده‌های دارای عوارضی، جاده‌های روسازی‌نشده، حمل با کشتی</string>
+	<string name="avoid_in_routing_descr">از جاده‌های دارای عوارضی، جاده‌های روسازی‌نشده و گذرگاه‌های آبی اجتناب شود</string>
 	
 	
 	<string name="bg_service_screen_lock_toast">صفحه قفل شد</string>
@@ -690,7 +690,7 @@
     <string name="safe_mode">حالت ایمن</string>
     <string name="show_lanes">خطوط عبوری</string>
 	<string name="avoid_unpaved">اجتناب از راه‌های روسازی‌نشده</string>
-	<string name="avoid_ferries">اجتناب از حمل با کشتی</string>
+	<string name="avoid_ferries">اجتناب از گذرگاه‌های آبی</string>
 	
 	<string name="map_widget_fluorescent">مسیرهای فلورسنت</string>
 	<string name="bg_service_sleep_mode_off">اجراکردن
@@ -1295,8 +1295,8 @@
 	<string name="routing_attr_avoid_toll_description">اجتناب از مسیرهای دارای عوارضی</string>
 	<string name="routing_attr_avoid_unpaved_name">اجتناب از مسیرهای روسازی‌نشده</string>
 	<string name="routing_attr_avoid_unpaved_description">از راه‌های روسازی‌نشده اجتناب کن</string>
-	<string name="routing_attr_avoid_ferries_name">اجتناب از گذرگاه آبی</string>
-	<string name="routing_attr_avoid_ferries_description">اجتناب از گذرگاه آبی</string>
+	<string name="routing_attr_avoid_ferries_name">اجتناب از گذرگاه‌های آبی</string>
+	<string name="routing_attr_avoid_ferries_description">از گذرگاه‌های آبی اجتناب شود</string>
 	<string name="routing_attr_avoid_motorway_name">اجتناب از آزادراه‌ها</string>
 	<string name="routing_attr_avoid_motorway_description">از آزادراه‌ها اجتناب کن</string>
 	<string name="routing_attr_weight_name">وزن مجاز</string>
@@ -2787,4 +2787,5 @@
     <string name="route_is_calculated">مسیر محاسبه شد</string>
     <string name="round_trip">سفر رفت‌وبرگشتی</string>
     <string name="plan_route_no_markers_toast">برای استفاده از این قابلیت باید حداقل یک نشانه اضافه کنید.</string>
+    <string name="shared_string_road">جاده</string>
     </resources>
