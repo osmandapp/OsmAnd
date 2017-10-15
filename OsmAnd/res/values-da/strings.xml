@@ -2931,4 +2931,5 @@ Tidligere destination bliver sidste mellemliggende punkt.</string>
     <string name="route_is_calculated">Ruten er beregnet</string>
     <string name="round_trip">Rundtur</string>
     <string name="plan_route_no_markers_toast">Tilføj mindst én markør for at bruge denne funktion.</string>
+    <string name="shared_string_road">Vej</string>
     </resources>
