@@ -3559,4 +3559,22 @@
 	<string name="poi_surface_decoturf">Decoturf (superficie dura para tenis)</string>
 	<string name="poi_surface_metal_grid">Rejilla metálica</string>
 
+<string name="poi_location_underground">Ubicación: Subterráneo</string>
+	<string name="poi_location_underwater">Ubicación: Subacuático</string>
+	<string name="poi_location_overground">Ubicación: Sobre la superficie</string>
+	<string name="poi_location_overhead">Ubicación: Aéreo</string>
+	<string name="poi_location_roof">Ubicación: En techo</string>
+	<string name="poi_location_rooftop">Ubicación: En azotea</string>
+	<string name="poi_location_outdoor">Ubicación: Al aire libre</string>
+	<string name="poi_location_indoor">Ubicación: En el interior</string>
+	<string name="poi_location_platform">Ubicación: En plataforma</string>
+	<string name="poi_location_kiosk">Ubicación: En quiosco</string>
+	<string name="poi_location_bridge">Ubicación: En puente</string>
+	<string name="poi_location_wall">Ubicación: En muro</string>
+	<string name="poi_location_entrance">Ubicación: En entrada</string>
+
+	<string name="poi_visibility_house">Visibilidad: Casa</string>
+	<string name="poi_visibility_street">Visibilidad: Calle</string>
+	<string name="poi_visibility_area">Visibilidad: Área</string>
+
 </resources>
