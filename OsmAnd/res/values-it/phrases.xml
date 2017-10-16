@@ -2390,4 +2390,12 @@
 	<string name="poi_female_no">Vietato alle donne</string>
 	<string name="poi_indoor_yes">Interno</string>
 	<string name="poi_toilets_no">Senza bagno</string>
+	<string name="poi_piste_grooming">Finitura della pista</string>
+	<string name="poi_recycling_white_goods">Elettrodomestici</string>
+	<string name="poi_recycling_sheet_metal">Lamiera</string>
+	<string name="poi_recycling_styrofoam">Polistirolo</string>
+	<string name="poi_brownfield">Sito dismesso</string>
+	<string name="poi_storage_tank">Serbatoio</string>
+
+	<string name="poi_training">Centro di formazione</string>
 	</resources>
