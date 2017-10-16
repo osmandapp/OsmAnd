@@ -1402,7 +1402,7 @@ Se aprecia la participación activa, y las contribuciones pueden hacerse directa
     
     <string name="poi_context_menu_modify">Modificar PDI</string>
     <string name="poi_context_menu_delete">Borrar PDI</string>
-    <string name="rotate_map_compass_opt">A la brújula</string>
+    <string name="rotate_map_compass_opt">Según la brújula</string>
     <string name="rotate_map_bearing_opt">En dirección al movimiento</string>
     <string name="rotate_map_none_opt">No rotar (norte arriba)</string>
     <string name="rotate_map_to_bearing_descr">Elige la alineación del mapa</string>
@@ -2804,4 +2804,5 @@ Proporciona un código completo</string>
     <string name="route_is_calculated">Ruta calculada</string>
     <string name="round_trip">Viaje de ida y vuelta</string>
     <string name="plan_route_no_markers_toast">Debes añadir al menos un marcador para usar esta función.</string>
+    <string name="shared_string_road">Carretera</string>
     </resources>
