@@ -2537,4 +2537,7 @@
 \n• OSM Live: исправления ошибок, обновление данных на сервере каждые 30 минут, обновления вносимые в навигацию
 \n
 \n</string>
+    <string name="show_map">Показать карту</string>
+    <string name="plan_route_no_markers_toast">Вы должны добавить по крайней мере один маркер, чтобы использовать эту функцию.</string>
+    <string name="osn_modify_dialog_error">Произошло исключение: заметка не изменена</string>
     </resources>
