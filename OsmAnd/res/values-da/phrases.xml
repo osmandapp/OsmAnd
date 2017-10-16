@@ -3593,4 +3593,22 @@
 	<string name="poi_surface_decoturf">DecoTurf</string>
 	<string name="poi_surface_metal_grid">Metalgitter</string>
 
+<string name="poi_location_underground">Beliggenhed: underjorden</string>
+	<string name="poi_location_underwater">Beliggenhed: undersøiske</string>
+	<string name="poi_location_overground">Beliggenhed: overjorden</string>
+	<string name="poi_location_overhead">Beliggenhed: overjorden</string>
+	<string name="poi_location_roof">Beliggenhed: tag</string>
+	<string name="poi_location_rooftop">Beliggenhed: tagterrasse</string>
+	<string name="poi_location_outdoor">Placering: udendørs</string>
+	<string name="poi_location_indoor">Beliggenhed: indendørs</string>
+	<string name="poi_location_platform">Beliggenhed: platform</string>
+	<string name="poi_location_kiosk">Beliggenhed: kiosk</string>
+	<string name="poi_location_bridge">Beliggenhed: bro</string>
+	<string name="poi_location_wall">Beliggenhed: væg</string>
+	<string name="poi_location_entrance">Beliggenhed: indgang</string>
+
+	<string name="poi_visibility_house">Synlighed: hus</string>
+	<string name="poi_visibility_street">Synlighed: gaden</string>
+	<string name="poi_visibility_area">Synlighed: område</string>
+
 </resources>
