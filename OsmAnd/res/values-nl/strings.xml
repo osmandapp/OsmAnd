@@ -1740,7 +1740,7 @@ Wilt u verder gaan met een nieuwe registratie?</string>
 	<string name="notes">AV-Notities</string>
 	<string name="online_map">Online kaart</string>
 	<string name="roads_only">Alleen wegen</string>
-    <string name="free">"Vrij %1$s "</string>
+    <string name="free">%1$s beschikbaar</string>
 	<string name="device_memory">Apparaatgeheugen</string>
  	<string name="route_points">Route punten</string>
 	<string name="days_behind">dagen oud</string>
@@ -2244,7 +2244,7 @@ Lengtegraad:\t\t%2$s</string>
     <string name="number_of_recipients">Aantal ontvangers</string>
     <string name="osm_user_stat">%1$s bewerkingen, rang %2$s, wereldwijd: %3$s bewerkingen</string>
     <string name="osm_editors_ranking">OSM-Bijdragers Ranglijst</string>
-    <string name="osm_live_subscription">OSM Live abonnement</string>
+    <string name="osm_live_subscription">OsmAnd Live abonnement</string>
     <string name="osm_live_subscribe_btn">Abonneren</string>
     <string name="osm_live_email_desc">Dit is nodig om je informatie te geven over bijdragen</string>
     <string name="osm_live_user_public_name">Openbare Naam</string>
@@ -2348,8 +2348,8 @@ Er is nu {2} MB beschikbaar</string>
     <string name="access_autoannounce_period_descr">Minimale tijd tussen aankondigingen</string>
     <string name="access_no_destination">Bestemming is niet ingesteld</string>
     <string name="map_widget_magnetic_bearing">Magnetische koers</string>
-    <string name="use_osm_live_routing_description">OSM Live Updates gebruiken bij navigatie (Beta)</string>
-	<string name="use_osm_live_routing">OSM Live navigatie</string>
+    <string name="use_osm_live_routing_description">OsmAnd Live Updates gebruiken bij navigatie (Beta)</string>
+	<string name="use_osm_live_routing">OsmAnd Live navigatie</string>
     <string name="follow_us">Volg ons</string>
     <string name="access_direction_audio_feedback">Richting aangeven met geluid</string>
     <string name="access_direction_audio_feedback_descr">Geef de richting van de bestemming aan met geluid</string>
@@ -2742,16 +2742,7 @@ We slaan geen locatiegegevens, zoektermen of andere gebruikersgegevens op.</stri
 • Maak tussenpunten op een reis
 • Neem uw reis op als GPX-spoor of volg een GPX-spoor
  "</string>
-    <string name="osmand_extended_description_part3">"
- Kaart
-• Toon POI (Points Of Interest)
-• Draai in de bewegingsrichting (of kompasrichting)
-• Toont uw positie en waar u naar kijkt
-• Deel uw lokatie met vrienden
-• Bewaar belangrijke plaatsen in Favorieten
-• Toon namen in Engelse, lokale, of fonetische schrijfwijze
-• Toon extra informatie, zoals satellietfoto (van Bing), GPX-sporen, andere kaartstijlen en extra informatielagen
- "</string>
+    <string name="osmand_extended_description_part3">Kaart • Toon POI (Points Of Interest) • Draai in de bewegingsrichting (of kompasrichting) • Toont uw positie en waar u naar kijkt • Deel uw lokatie met vrienden • Bewaar belangrijke plaatsen in Favorieten • Toon namen in Engelse, lokale, of fonetische schrijfwijze • Toon extra informatie, zoals satellietfoto (van Bing), GPX-sporen, andere kaartstijlen en extra informatielagen</string>
     <string name="osmand_extended_description_part4">Skiën - Met de OsmAnd Ski plugin ziet u pistes met hun moeilijkheidsgraad, en extra informatie zoals liften en andere faciliteiten.</string>
     <string name="osmand_extended_description_part5">Fietsen • Vind fietspaden op de kaart • Routeberekening met gebruik van fietspaden • Toon snelheid en hoogte • Neem de rit op als GPX-spoor en deel deze • Geef, met een extra plugin, hoogteverschillen weer als hoogtelijnen of reliëfschaduw</string>
     <string name="osmand_extended_description_part6">Wandelen • De kaart toont voetpaden, bergpaden, routes door parken • Wikipedia vertelt u meer over uw omgeving • OV-haltes (tram, bus, trein, metro), inclusief lijnnummers, helpen u te navigeren • Navigatie gebruikt voetpaden • Neem uw weg op als GPX-route of volg een gedownloade route</string>
@@ -2770,20 +2761,17 @@ We slaan geen locatiegegevens, zoektermen of andere gebruikersgegevens op.</stri
 \n • Afrika: **
 \n • Antarctica: *
 \n De meeste landen ter wereld hebben een kaart die u kunt downloaden!</string>
-    <string name="osmand_plus_extended_description_part8">"
- Indicatie van compleetheid en kwaliteit van de kaart:
- • West-Europa: ****
- • Oost-Europa: ***
- • Rusland: ***
- • Noord-Amerika: ***
- • Zuid-Amerika: **
- • Azië: **
- • Japan &amp; Korea: ***
- • Midden-Oosten: **
- • Afrika: **
- • Antarctica: *
-Van bijna alle landen is een kaart te downloaden: van Afghanistan tot Zimbabwe, Australie tot de VS, Nederland, Duitsland, Spanje, Japan, ...
- "</string>
+    <string name="osmand_plus_extended_description_part8">Indicatie van compleetheid en kwaliteit van de kaart:
+\n • West-Europa: ****
+\n • Oost-Europa: ***
+\n • Rusland: ***
+\n • Noord-Amerika: ***
+\n • Zuid-Amerika: **
+\n • Azië: **
+\n • Japan &amp; Korea: ***
+\n • Midden-Oosten: **
+\n • Afrika: **
+\n • Antarctica: * Van bijna alle landen is een kaart te downloaden: van Afghanistan tot Zimbabwe, Australie tot de VS, Nederland, Duitsland, Spanje, Japan, …</string>
     <string name="save_poi_too_many_uppercase">Naam bevat erg veel hoofdletters, toch doorgaan?</string>
     <string name="search_favorites">Zoek favorieten</string>
     <string name="quick_action_showhide_osmbugs_title">Toon/verberg OSM-opmerkingen</string>
@@ -2950,4 +2938,16 @@ Van bijna alle landen is een kaart te downloaden: van Afghanistan tot Zimbabwe, 
     <string name="move_point">Verplaats punt</string>
     <string name="add_segment_to_the_track">Voeg toe aan GPX-track</string>
 <string name="mapillary_menu_filter_description">Afbeeldingen kunnen worden gefilterd op gebruikersnaam of datum. Filters werken alleen bij inzoomen.</string>
+    <string name="show_map">Kaart weergeven</string>
+    <string name="route_is_calculated">Route wordt berekend</string>
+    <string name="round_trip">Retour</string>
+    <string name="osn_modify_dialog_error">Er was een probleem: notitie is niet opgeslagen</string>
+    <string name="release_2_8">\\022 Geheel vernieuwde kaartmarkeringen met lijnen en routeplanning
+\n
+\n• Afstandmeter kan vastklikken aan wegen en als track opslaan
+\n
+\n• OmsAnd Live: bugfixes, data op de server elke 30 minuten ververst, en updates van de navigatie
+\n
+\n</string>
+    <string name="rendering_value_darkyellow_name">Donkergeel</string>
     </resources>
