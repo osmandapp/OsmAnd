@@ -971,8 +971,8 @@
     <string name="loading_postcodes">Laster postnummer…</string>
     <string name="loading_data">Laster data…</string>
 	
-	<string name="srtm_plugin_description">Dette programtillegget gir både et lag med koter og et lag med relieffskygger som kan vises oppå standardkartene til OsmAnd. Denne funksjonen vil bli satt stor pris på av idrettsutøvere, turgåere og enhver som er interessert i relieff-strukturen til et landskap. (Merk at koter og/eller relieff-data er separate tilleggsnedlastinger tilgjengelige etter aktivering av programtillegget.) 
-\n
+	<string name="srtm_plugin_description">Dette programtillegget gir både et overlaglag med koter og et lag med relieffskygger som kan vises oppå standardkartene til OsmAnd. Denne funksjonen vil bli satt stor pris på av idrettsutøvere, turgåere og enhver som er interessert i relieff-strukturen til et landskap. (Merk at koter og/eller relieff-data er separate tilleggsnedlastinger tilgjengelige etter aktivering av programtillegget.) 
+\n 
 \nDe globale dataene (mellom 70 grader nord og 70 grader sør) er basert på målinger av SRTM (Shuttle Radar Topography Mission) og ASTER (Advanced Spaceborne Thermal Emission and Reflection Radiometer), et bildeinstrument ombord på Terra, flaggskipsatellitten til NASA\'s Earth Observing System. ASTER er et samarbeid mellom NASA, Japans finansdepartement, Trade and Industry (METI), og Japan Space Systems (J-spacesystems).</string>
 
     <string name="first_time_msg">Takk for at du bruker OsmAnd. For mange funksjoner i dette programmet trenger du noen regionale offline-data som du kan laste ned via \'Innstillinger\' → \'Karthåndtering\'. Etterpå vil du være i stand til å se kart, finne adresser, lete etter interessepunkter og finne offentlig transport.</string>
@@ -1126,8 +1126,8 @@
     <string name="map_overlay_descr">Velg overleggskart</string>
     <string name="audionotes_plugin_name">Audio/video-notater</string>
     <string name="osm_settings">OSM-redigering</string>
-	<string name="osmand_srtm_long_description_1000_chars">Dette programtillegget gir både et lag med koter og et lag med relieffskygger som kan vises oppå standardkartene til OsmAnd. Denne funksjonen vil bli satt stor pris på av idrettsutøvere, turgåere og enhver som er interessert i relieff-strukturen til et landskap. 
-\n
+	<string name="osmand_srtm_long_description_1000_chars">Dette programtillegget gir både et overlag med koter og et lag med relieffskygger som kan vises oppå standardkartene til OsmAnd. Denne funksjonen vil bli satt stor pris på av idrettsutøvere, turgåere og enhver som er interessert i relieff-strukturen til et landskap. 
+\n 
 \nDe globale dataene (mellom 70 grader nord og 70 grader sør) er basert på målinger av SRTM (Shuttle Radar Topography Mission) og ASTER (Advanced Spaceborne Thermal Emission and Reflection Radiometer), et bildeinstrument ombord på Terra, flaggskipsatellitten til NASA\'s Earth Observing System. ASTER er et samarbeid mellom NASA, Japans finansdepartement, Trade and Industry (METI), og Japan Space Systems (J-spacesystems).</string>
     <string name="plugin_ski_name">Skikartvisning</string>
     <string name="osmand_accessibility_description">Dette programtillegget gjør enhetens tilgjengelighetsfunksjoner tilgjengelige direkte i OsmAnd. Det muliggjør f.eks justering av talehastigheten for TTS-tale, innstilling av styrekors-skjermnavigering ved hjelp av en styrekule for zoomkontroll, eller bruke tekst-til-tale-tilbakemelding, f.eks auto-annonsering av din posisjon.</string>
@@ -2181,7 +2181,7 @@ Representerer området: %1$s x %2$s</string>
     <string name="quick_action_add_destination">Legg til reisemål</string>
     <string name="quick_action_replace_destination">Erstatt reisemål</string>
     <string name="quick_action_add_first_intermediate">Legg til første mellomliggende punkt</string>
-    <string name="no_overlay">Ingen overlegg</string>
+    <string name="no_overlay">Ingen overlag</string>
     <string name="no_underlay">Ingen underlag</string>
     <string name="quick_action_map_underlay_switch">Kartunderlaget er endret til \"%s\".</string>
     <string name="quick_action_map_underlay">Endre kartunderlag</string>
@@ -2544,4 +2544,6 @@ Representerer området: %1$s x %2$s</string>
     <string name="quick_action_fav_name_descr">La stå tomt for å automatisk bruke adressen eller stedsnavnet</string>
     <string name="quick_action_bug_descr">Denne meldingen vil bli auto-fullført i kommentarfeltet.</string>
     <string name="mappilary_no_internet_desc">Du trenger internettilknytning for å vise bilder fra Mapillary</string>
+    <string name="hillshade_menu_download_descr">For å se relieffskygger på kartet, må du laste ned relieffskyggeoverlagskartet for denne regionen.</string>
+    <string name="hillshade_purchase_header">For å se relieffskygger på kartet, må du kjøpe og installere kotelinje-programtillegget</string>
     </resources>
