@@ -1602,7 +1602,7 @@ Vuoi procedere con una nuova registrazione?</string>
     <string name="rendering_attr_busRoutes_name">Percorsi in bus</string>
     <string name="rendering_attr_tramTrainRoutes_name">Percorsi tram e treno</string>
 
-    <string name="impassable_road">Evita strade …</string>
+    <string name="impassable_road">Evita strade…</string>
     <string name="rendering_category_hide">Nascondi</string>
     <string name="wake_on_voice">Accendi lo schermo</string>
     <string name="wake_on_voice_descr">Accendi lo schermo (se spento) all\'approssimarsi di una svolta</string>
