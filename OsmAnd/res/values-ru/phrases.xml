@@ -3522,4 +3522,8 @@
 	<string name="poi_location_wall">Местонахождение: на стене</string>
 	<string name="poi_location_entrance">Местонахождение: у входа</string>
 
+	<string name="poi_visibility_house">Видимость: дом</string>
+	<string name="poi_visibility_street">Видимость: улица</string>
+	<string name="poi_visibility_area">Видимость: площадь</string>
+
 </resources>

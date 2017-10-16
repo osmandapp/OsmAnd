@@ -3509,4 +3509,8 @@
 	<string name="poi_location_wall">Location: wall</string>
 	<string name="poi_location_entrance">Location: entrance</string>
 
+	<string name="poi_visibility_house">Visibility: house</string>
+	<string name="poi_visibility_street">Visibility: street</string>
+	<string name="poi_visibility_area">Visibility: area</string>
+
 </resources>
