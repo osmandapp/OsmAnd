@@ -3495,4 +3495,18 @@
 	<string name="poi_surface_decoturf">DecoTurf</string>
 	<string name="poi_surface_metal_grid">Metal grid</string>
 
+	<string name="poi_location_underground">Location: underground</string>
+	<string name="poi_location_underwater">Location: underwater</string>
+	<string name="poi_location_overground">Location: overground</string>
+	<string name="poi_location_overhead">Location: overhead</string>
+	<string name="poi_location_roof">Location: roof</string>
+	<string name="poi_location_rooftop">Location: rooftop</string>
+	<string name="poi_location_outdoor">Location: outdoor</string>
+	<string name="poi_location_indoor">Location: indoor</string>
+	<string name="poi_location_platform">Location: platform</string>
+	<string name="poi_location_kiosk">Location: kiosk</string>
+	<string name="poi_location_bridge">Location: bridge</string>
+	<string name="poi_location_wall">Location: wall</string>
+	<string name="poi_location_entrance">Location: entrance</string>
+
 </resources>
