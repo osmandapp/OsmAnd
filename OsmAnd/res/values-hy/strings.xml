@@ -635,4 +635,18 @@
     <string name="av_audio_format_descr">Ընտրեք ձայնի ձևաչափ</string>
     <string name="av_audio_bitrate">Ձայնի bitrate</string>
     <string name="av_audio_bitrate_descr">Ընտրեք ձայնի bitrate</string>
+    <string name="shared_string_road">Ճանապարհ</string>
+    <string name="show_map">Ցույց տալ քարտեզը</string>
+    <string name="route_is_calculated">Երթուղին հաշվարկված է</string>
+    <string name="round_trip">Շրջագայություն</string>
+    <string name="plan_route_no_markers_toast">Այս գործառույթն օգտագործելու համար պետք է ավելացնեք առնվազն մեկ մարկեր:</string>
+    <string name="trip_rec_notification_settings">Միացնել արագ գրանցումը</string>
+    <string name="trip_rec_notification_settings_desc">Ցուցադրել համակարգի ծանուցումը, որը թույլ կտա սկսել ուղեւորության գրանցումը</string>
+    <string name="shared_string_paused">Դադարեցվել է</string>
+    <string name="shared_string_recorded">Գրանցված է</string>
+    <string name="shared_string_record">Գրանցում</string>
+    <string name="osm_live_header">Այս բաժանորդագրությունը հնարավորություն է տալիս ամեն ժամյա թարմացումներ ստանալ աշխարհի բոլոր քարտեզների համար: Եկամտի մի մասը վերադառնում է OSM համայնքին և վճարվում է յուրաքանչյուր OSM ներդրման համար: Եթե սիրում եք OsmAnd- ը և OSM- ը և ուզում եք աջակցել նրանց, սա կատարյալ ճանապարհն է դա անել:</string>
+    <string name="no_location_permission">Ծրագիրը թույլտվություն չունի մուտք գործի տվյալները պահպանման վայրը:</string>
+    <string name="no_camera_permission">Ծրագիրը թույլտվություն չունի տեսախցիկի օգտագործման համար։</string>
+    <string name="no_microphone_permission">Ծրագիրը թույլտվություն չունի խոսափողի օգտագործման համար։</string>
     </resources>
