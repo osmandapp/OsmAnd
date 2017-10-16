@@ -2805,4 +2805,5 @@ Proporciona un código completo</string>
     <string name="round_trip">Viaje de ida y vuelta</string>
     <string name="plan_route_no_markers_toast">Debes añadir al menos un marcador para usar esta función.</string>
     <string name="shared_string_road">Carretera</string>
+    <string name="wrong_format">Formato incorrecto</string>
     </resources>
