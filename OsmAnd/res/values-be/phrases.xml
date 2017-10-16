@@ -3548,4 +3548,22 @@
 	<string name="poi_surface_decoturf">Дэкараратыўны дзёран</string>
 	<string name="poi_surface_metal_grid">Металічная сетка</string>
 
+<string name="poi_location_underground">Знаходжанне: пад зямлёй</string>
+	<string name="poi_location_underwater">Знаходжанне: пад вадой</string>
+	<string name="poi_location_overground">Знаходжанне: над зямлёй</string>
+	<string name="poi_location_overhead">Знаходжанне: зверху</string>
+	<string name="poi_location_roof">Знаходжанне: дах</string>
+	<string name="poi_location_rooftop">Знаходжанне: на даху</string>
+	<string name="poi_location_outdoor">Знаходжанне: на адкрытым паветры</string>
+	<string name="poi_location_indoor">Знаходжанне: у памяшканні</string>
+	<string name="poi_location_platform">Знаходжанне: на пратформе</string>
+	<string name="poi_location_kiosk">Знаходжанне: шапік</string>
+	<string name="poi_location_bridge">Знаходжанне: на мосце</string>
+	<string name="poi_location_wall">Знаходжанне: на сцяне</string>
+	<string name="poi_location_entrance">Знаходжанне: каля ўвахода</string>
+
+	<string name="poi_visibility_house">Бачнасць: дом</string>
+	<string name="poi_visibility_street">Бачнасць: вуліца</string>
+	<string name="poi_visibility_area">Бачнасць: плошча</string>
+
 </resources>
