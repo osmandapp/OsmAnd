@@ -1904,7 +1904,7 @@ U vypadku, kali vy lubіcie OsmAnd і OSM і chočacie padtrymać jaho, heta іd
     <string name="whats_new">Što novaha ŭ</string>
     <string name="rendering_attr_hideProposed_name">Płanujemyja abjekty</string>
     <string name="shared_string_update">Abnavіć</string>
-    <string name="shared_string_upload">Adasłać</string>
+    <string name="shared_string_upload">Zahruzić</string>
     <string name="osm_edit_created_poi">Stvorana OSM POI</string>
 
     <string name="world_map_download_descr">Bazavaja mapa śvietu (jakaja pakryvaje ŭvieś śviet pry małym pavieličeńnі) adsutnіčaje abo sastareła. Kali łaska, zahruzіcie jaje kab mieć ahlad usiaho śvietu.</string>
@@ -2229,7 +2229,7 @@ U vypadku, kali vy lubіcie OsmAnd і OSM і chočacie padtrymać jaho, heta іd
     <string name="roads">Darohі</string>
     <string name="downloading_number_of_files">Ściahvajecca - %1$d fajł</string>
     <string name="show_free_version_banner">Pakazvać baner biaspłatnaj versіі</string>
-    <string name="show_free_version_banner_description">Pakazvać banier biasplatnaj viersii navat u platnaj viersii</string>
+    <string name="show_free_version_banner_description">Pakazvać banier biaspłatnaj viersii navat u płatnaj viersii</string>
     <string name="buy">NABYĆ</string>
     <string name="activate_seamarks_plugin">Kali łaska, aktyvujcie modul Navіhacyjnyja znakі</string>
     <string name="activate_srtm_plugin">Kali łaska, aktyvujcie modul SRTM</string>
@@ -2376,7 +2376,7 @@ U vypadku, kali vy lubіcie OsmAnd і OSM і chočacie padtrymać jaho, heta іd
     <string name="quick_action_showhide_osmbugs_descr">Nacisk na knopky dziejańnia pakaža/schavaje natatki OSM na mapie.</string>
     <string name="sorted_by_distance">Adsartavana pa adlehłaści</string>
     <string name="search_favorites">Pošuk u abranych</string>
-    <string name="srtm_menu_download_descr">Kab ubačyć konturnyja linii, vam nieabchodna spampavać admyslovuju mapu dlia hetaha rehijona.</string>
+    <string name="srtm_menu_download_descr">Kab ubačyć konturnyja linii, vam nieabchodna spampavać admyslovuju mapu dla hetaha rehijona.</string>
     <string name="shared_string_plugin">Dadatak</string>
     <string name="srtm_purchase_header">Dla prahladu konturnych linij na mapie, vam nieabchodna nabyć i ŭstalavać dadatak «Contour Lines»</string>
     <string name="srtm_color_scheme">Kalarovaja schiema</string>
@@ -2401,7 +2401,7 @@ U vypadku, kali vy lubіcie OsmAnd і OSM і chočacie padtrymać jaho, heta іd
     <string name="quick_action_auto_zoom_off">Adkliučyć aŭtamaštab mapy</string>
     <string name="quick_action_add_destination">Dadać miesca pryznačeńnia</string>
     <string name="quick_action_replace_destination">Zamianić punkt pryznačeńnia</string>
-    <string name="private_access_routing_req">Vaš punkt pryznačennia znachodzicca na pryvatnaj terytoryi. Vy chočacie dazvolić dostup da pryvatnych daroh dlia hetaj pajezdki?</string>
+    <string name="private_access_routing_req">Vaš punkt pryznačeńnia znachodzicca na pryvatnaj terytoryi. Vy chočacie dazvolić dostup da pryvatnych daroh dla hetaj pajezdki?</string>
     <string name="subscribe_email_error">Pamyłka</string>
     <string name="depth_contour_descr">Nabor map, jakija zmiaščajuć kontury i kropki marskich hlybiń.</string>
     <string name="sea_depth_thanks">Dziakuj za pakupku konuraŭ marskich hłybiń!</string>
@@ -2498,7 +2498,7 @@ U vypadku, kali vy lubіcie OsmAnd і OSM і chočacie padtrymać jaho, heta іd
     <string name="quick_action_add_osm_bug">Dadać OSM natatku</string>
     <string name="quick_action_navigation_voice">Holas ukl/adkl</string>
     <string name="shared_string_add_photos">Dadać fatahrafii</string>
-    <string name="no_photos_descr">My nie majem fatahrafij dlia hetaha miesca</string>
+    <string name="no_photos_descr">My nie majem fatahrafij dla hetaha miesca</string>
     <string name="mapillary_widget">Vidžet Mapillary</string>
     <string name="mapillary">Мapillary</string>
     <string name="quick_action_map_underlay_action">Dadać padkladku</string>
@@ -2543,8 +2543,8 @@ U vypadku, kali vy lubіcie OsmAnd і OSM і chočacie padtrymać jaho, heta іd
 \n 
 \nKab zrabić tak, nieabchodna ŭstaliavać Mapillary z Google Play.</string>
     <string name="mapillary_action_descr">Padzialicca svaimi vuličnymi vidami hetaj miascovasci praz Mapillary.</string>
-    <string name="mapillary_descr">Vuličnyja fota anlajn dlia kožnaha. Adkryvajcie dlia siabie miescy, dapamahajcie, zdymajcie sviet.</string>
-    <string name="plugin_mapillary_descr">Vuličnyja fatahrafii dlia ŭsich. Adkryvajcie dlia siabie miescy, dapamahajcie, zdymajcie sviet.</string>
+    <string name="mapillary_descr">Vuličnyja fota anlajn dla kožnaha. Adkryvajcie dla siabie miescy, dapamahajcie, zdymajcie sviet.</string>
+    <string name="plugin_mapillary_descr">Vuličnyja fatahrafii dla ŭsich. Adkryvajcie dla siabie miescy, dapamahajcie, zdymajcie sviet.</string>
     <string name="mapillary_image">Vyjava Mapillary</string>
     <string name="mapillary_widget_descr">Dazvaliaje vam chutki ŭniosak ŭ Mapillary</string>
     <string name="relief_smoothness_factor_descr">Pieravažny reljef: raŭninny abo ŭzhorysty</string>
@@ -2554,8 +2554,8 @@ U vypadku, kali vy lubіcie OsmAnd і OSM і chočacie padtrymać jaho, heta іd
     <string name="rendering_attr_contourWidth_description">Šyrynia haryzantalaŭ</string>
     <string name="rendering_attr_hideWaterPolygons_description">Vadu</string>
     <string name="rendering_attr_contourColorScheme_description">Koleravaja schema haryzantalaŭ</string>
-    <string name="hillshade_menu_download_descr">Dlia taho, kab ubačyć zacianiennie reĺjefu, vam nieabchodna spampavać admyslovuju mapu dlia hetaha rehijona.</string>
-    <string name="hillshade_purchase_header">Dlia taho, kab ubačyć zacianiennie reĺjefu, vam nieabchodna nabyć i ŭstaliavać dadatak «Contour Lines»</string>
+    <string name="hillshade_menu_download_descr">Dla taho, kab ubačyć zacianieńnie reljefu, vam nieabchodna spampavać admyslovuju mapu dla hetaha rehijona.</string>
+    <string name="hillshade_purchase_header">Dla taho, kab ubačyć zacianieńnie reljefu, vam nieabchodna nabyć i ŭstalavać dadatak «Contour Lines»</string>
     <string name="hide_from_zoom_level">Schavać ad uzroŭniu maštabavannia</string>
     <string name="show_from_zoom_level">Pakazvać ad uzroŭniu maštabavannia</string>
     <string name="animate_my_location_desc">Ukliučaje animacyju majoj pazicyi padčas navihacyi</string>
@@ -2736,7 +2736,7 @@ U vypadku, kali vy lubіcie OsmAnd і OSM і chočacie padtrymać jaho, heta іd
     <string name="mapillary_menu_edit_text_hint">Uviadzicie imia karystaĺnika</string>
     <string name="mapillary_menu_descr_username">Pahliadzieć vyjavy dadanyja peŭnym karystaĺnikam.</string>
     <string name="mapillary_menu_title_username">Imia karystaĺnika</string>
-    <string name="mapillary_menu_filter_description">Vy možacie fiĺtravać vyjavy pa adpraŭniku ci dacie. Fiĺtry ŭžyvajucca toĺki dlia bujnoha pavieličennia.</string>
+    <string name="mapillary_menu_filter_description">Vy možacie filtravać vyjavy pa adpraŭniku ci dacie. Filtry ŭžyvajucca tolki dla bujnoha pavieličeńnia.</string>
     <string name="shared_string_reload">Abnavić</string>
     <string name="mapillary_menu_descr_tile_cache">Abnavić frahmienty, kab ubačyć aktuaĺnyja danyja.</string>
     <string name="mapillary_menu_title_tile_cache">Keš frahmientaŭ</string>
@@ -2755,7 +2755,7 @@ U vypadku, kali vy lubіcie OsmAnd і OSM і chočacie padtrymać jaho, heta іd
 \n 
 \n • Vidžet-liniejka dla vymiareńniaŭ dystancyj 
 \n 
-\n • Razdzielienyja GPX-intervaly z padrabiaznaj infarmacyjaj ab vašym treku 
+\n • Razdzielenyja GPX-intervaly z padrabiaznaj infarmacyjaj ab vašym treku 
 \n 
 \n • Inšyja palapšeńni i vypraŭleńni chibaŭ
 \n
@@ -2793,13 +2793,13 @@ U vypadku, kali vy lubіcie OsmAnd і OSM і chočacie padtrymać jaho, heta іd
     <string name="add_point_before">Dadać kropku pierad</string>
     <string name="add_point_after">Dadać kropku paslia</string>
     <string name="shared_string_options">Opcyi</string>
-    <string name="measurement_tool_snap_to_road_descr">OsmAnd zlučyć kropki z maršrutam dlia abranaha profilia.</string>
+    <string name="measurement_tool_snap_to_road_descr">OsmAnd zlučyć kropki z maršrutam dla abranaha profila.</string>
     <string name="measurement_tool_save_as_new_track_descr">Vy možać zachavać kropki, jak kropki maršrutu ci jak liniju.</string>
     <string name="choose_navigation_type">Abrać profiĺ navihacyi</string>
     <string name="add_route_points">Dadać kropki maršrutu</string>
     <string name="add_line">Dadać liniju</string>
-    <string name="empty_state_my_tracks">Dadact i zapisać sliady</string>
-    <string name="empty_state_my_tracks_desc">Zapisać ci impartavać sliady dlia prahliadu</string>
+    <string name="empty_state_my_tracks">Dadać i zapisać slady</string>
+    <string name="empty_state_my_tracks_desc">Zapisać ci impartavać ślady dla prahladu</string>
     <string name="empty_state_favourites">Dadać u abranaje</string>
     <string name="empty_state_favourites_desc">Dadać abranaje na mapie ci impartavać z fajlavaj sistemy</string>
     <string name="import_track">Impartavać slied</string>
@@ -2865,11 +2865,11 @@ U vypadku, kali vy lubіcie OsmAnd і OSM і chočacie padtrymać jaho, heta іd
     <string name="osn_modify_dialog_error">Adbylosia vykliučennie: natatka nie byla zmienienaja</string>
     <string name="osn_modify_dialog_title">Zmianić natatku</string>
     <string name="context_menu_item_modify_note">Zmianić OSM-natatku</string>
-    <string name="release_2_8">\\022 Calkam pierapracavanyja markiery z rekamiendacyjami i planavanniem maršruta
-\n
-\n • Instrumient vymiarennia adliehlasciej z pryviazkaj da darohi i z zachavanniem kropak u slied
-\n
-\n • OsmAnd Live: vypraŭliennie chibaŭ, abnaŭliennie danych na sierviery kožnyja 30 chviĺ, abnaŭlienni realizavanyja ŭ navihacyi
+    <string name="release_2_8">• Calkam pierapracavanyja markiery z rekamendacyjami i planavańniem maršruta 
+\n 
+\n • Instrument vymiarennia adlehłaściej z pryviazkaj da darohi i z zachavańniem kropak u śled 
+\n 
+\n • OsmAnd Live: vypraŭleńnie chibaŭ, abnaŭleńnie dadzienych na sierviery kožnyja 30 chvilin, abnaŭleńni realizavanyja ŭ navihacyi
 \n
 \n</string>
     <string name="rendering_value_darkyellow_name">Ciomna-žoŭty</string>
