@@ -3510,4 +3510,20 @@
 
 	<string name="poi_surface_clay">Глина</string>
 
+	<string name="poi_location_underground">Местонахождение: под землёй</string>
+	<string name="poi_location_underwater">Местонахождение: под водой</string>
+	<string name="poi_location_overground">Местонахождение: над землёй</string>
+	<string name="poi_location_overhead">Местонахождение: наверху</string>
+	<string name="poi_location_roof">Местонахождение: крыша</string>
+	<string name="poi_location_outdoor">Местонахождение: на открытом воздухе</string>
+	<string name="poi_location_indoor">Местонахождение: в помещении</string>
+	<string name="poi_location_platform">Местонахождение: на платформе</string>
+	<string name="poi_location_bridge">Местонахождение: на мосту</string>
+	<string name="poi_location_wall">Местонахождение: на стене</string>
+	<string name="poi_location_entrance">Местонахождение: у входа</string>
+
+	<string name="poi_visibility_house">Видимость: дом</string>
+	<string name="poi_visibility_street">Видимость: улица</string>
+	<string name="poi_visibility_area">Видимость: площадь</string>
+
 </resources>
