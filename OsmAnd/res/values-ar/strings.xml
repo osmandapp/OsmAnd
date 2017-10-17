@@ -1579,7 +1579,7 @@
     <string name="change_markers_position">تغيير موضع العلامة</string>
     <string name="follow_us">تابعنا</string>
     <string name="access_direction_audio_feedback">اتجاه صدى الصوت</string>
-    <string name="use_osm_live_routing">الملاحة عبر OSM Live</string>
+    <string name="use_osm_live_routing">ملاحة OsmAnd Live</string>
     <string name="access_no_destination">لم يتم تعيين الوجهة</string>
     <string name="access_disable_wrong_direction_recalc_descr">يمنع إعادة الحساب التلقائي للطريق أثناء الانتقال للاتجاه المعاكس</string>
     <string name="access_default_color">اللون الافتراضي</string>
@@ -1666,7 +1666,7 @@
     <!-- string name="lat_lon_pattern">خط العرض: %1$.5f خط الطول: %2$.5f</string -->
     <string name="access_direction_audio_feedback_descr">اشر صوتيا عن اتجاه نقطة الوصول</string>
     <string name="access_direction_haptic_feedback_descr">اشر عن اتجاه نقطة الهدف بالاهتزاز</string>
-    <string name="use_osm_live_routing_description">تمكين الملاحة لتغييرات OSM Live (تجريبي)</string>
+    <string name="use_osm_live_routing_description">تفعيل الملاحة بتحديثات OsmAnd Live</string>
 	<string name="access_disable_offroute_recalc">عدم اعادة حساب الطريق بعد مغادرته</string>
     <string name="access_disable_offroute_recalc_descr">يمنع إعادة الحساب التلقائي للطريق بعدما تكون قد غادرته</string>
     <string name="access_disable_wrong_direction_recalc">عدم إعادة حساب الطريق للاتجاه المعاكس</string>
@@ -2824,4 +2824,9 @@
 \n
 \n</string>
     <string name="rendering_value_darkyellow_name">أصفر داكن</string>
+    <string name="shared_string_road">طريق</string>
+    <string name="show_map">اظهر الخريطة</string>
+    <string name="route_is_calculated">تم حساب المسار</string>
+    <string name="round_trip">رحلة ذهاب وإياب</string>
+    <string name="plan_route_no_markers_toast">يجب إضافة علامة واحدة على الأقل لاستخدام هذه الوظيفة.</string>
     </resources>
