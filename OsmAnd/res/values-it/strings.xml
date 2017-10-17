@@ -2272,7 +2272,7 @@ Parte degli incassi ritornano alla comunità OSM ed è corrisposto per ogni cont
 Se ami OsmAnd e OSM e vuoi sostenerli, questo è un modo perfetto per farlo.</string>
     
     <string name="upload_anonymously">Carica anonimamente</string>
-    <string name="show_transparency_seekbar">Mostra la barra di ricerca trasparente</string>
+    <string name="show_transparency_seekbar">Mostra la barra di regolazione della trasparenza</string>
     <string name="shared_string_topbar">Barra superiore</string>
     <string name="recalculate_route">Ricalcola il percorso</string>
     <string name="shared_string_move_up">Sposta in alto</string>
@@ -2664,7 +2664,7 @@ Rappresenta l\'area: %1$s x %2$s</string>
     <string name="routing_attr_driving_style_balance_name">Bilanciato</string>
     <string name="routing_attr_driving_style_safety_name">Preferisci strade secondarie</string>
     <string name="relief_smoothness_factor_descr">Terreno preferito: pianeggiante o collinoso</string>
-    <string name="routing_attr_relief_smoothness_factor_name">Seleziona la fluttuazione della quota</string>
+    <string name="routing_attr_relief_smoothness_factor_name">Seleziona la variabilità della quota</string>
     <string name="driving_region_automatic">Automatica</string>
     <string name="do_not_send_anonymous_app_usage">Non inviare statistiche anonime sull\'utilizzo dell\'app</string>
     <string name="do_not_send_anonymous_app_usage_desc">OsmAnd raccoglie informazioni su quale parti dell\'applicazione tu utilizzi. La tua geolocalizzazione non viene mai inviata, nemmeno qualsiasi dato che tu immetti nell\'app o dettagli sulle aree che visualizzi cerchi o scarichi.</string>
@@ -2922,4 +2922,9 @@ Rappresenta l\'area: %1$s x %2$s</string>
     <string name="move_point">Sposta il punto</string>
     <string name="add_segment_to_the_track">Aggiungi a una traccia GPX</string>
 <string name="osn_modify_dialog_error">Si é verificato un errore: la nota non è stata modificata</string>
+    <string name="shared_string_road">Strada</string>
+    <string name="show_map">Mostra la mappa</string>
+    <string name="route_is_calculated">Percorso ricalcolato</string>
+    <string name="round_trip">Percorso circolare</string>
+    <string name="plan_route_no_markers_toast">Devi aggiungere almeno un marcatore per utilizzare questa funzionalità.</string>
     </resources>
