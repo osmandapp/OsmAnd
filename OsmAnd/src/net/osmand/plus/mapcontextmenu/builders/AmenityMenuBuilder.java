@@ -38,6 +38,7 @@ import net.osmand.util.OpeningHoursParser;
 import java.util.Calendar;
 import java.util.Collections;
 import java.util.Comparator;
+import java.util.HashMap;
 import java.util.LinkedList;
 import java.util.List;
 import java.util.Map;
@@ -289,9 +290,13 @@ public class AmenityMenuBuilder extends MenuBuilder {
 			String key = e.getKey();
 			String vl = e.getValue();
 
+			if (key.equals("image") || key.equals("mapillary")) {
+				continue;
+			}
+
 			String textPrefix = "";
 			CollapsableView collapsableView = null;
-			boolean collapsable  = false;
+			boolean collapsable = false;
 			boolean isWiki = false;
 			boolean isText = false;
 			boolean isDescription = false;
@@ -465,7 +470,7 @@ public class AmenityMenuBuilder extends MenuBuilder {
 
 		if (processNearstWiki() && nearestWiki.size() > 0) {
 			AmenityInfoRow wikiInfo = new AmenityInfoRow(
-					"nearest_wiki", R.drawable.ic_action_wikipedia, null, app.getString(R.string.wiki_around) + " (" + nearestWiki.size()+")", true,
+					"nearest_wiki", R.drawable.ic_action_wikipedia, null, app.getString(R.string.wiki_around) + " (" + nearestWiki.size() + ")", true,
 					getCollapsableWikiView(view.getContext(), true),
 					0, false, false, false, 1000, null, false, false);
 			buildAmenityRow(view, wikiInfo);
@@ -475,7 +480,7 @@ public class AmenityMenuBuilder extends MenuBuilder {
 
 		boolean osmEditingEnabled = OsmandPlugin.getEnabledPlugin(OsmEditingPlugin.class) != null;
 		if (osmEditingEnabled && amenity.getId() != null
-				&& amenity.getId() > 0 && 
+				&& amenity.getId() > 0 &&
 				(amenity.getId() % 2 == 0 || (amenity.getId() >> 1) < Integer.MAX_VALUE)) {
 			String link;
 			if (amenity.getId() % 2 == 0) {
@@ -504,6 +509,21 @@ public class AmenityMenuBuilder extends MenuBuilder {
 			buildRow(view, info.iconId, info.text, info.textPrefix, info.collapsable, info.collapsableView,
 					info.textColor, info.isWiki, info.isText, info.needLinks, info.isPhoneNumber, info.isUrl);
 		}
+	}
+
+	@Override
+	protected Map<String, String> getAdditionalCardParams() {
+		Map<String, String> params = new HashMap<>();
+		Map<String, String> additionalInfo =  amenity.getAdditionalInfo();
+		String imageValue = additionalInfo.get("image");
+		String mapillaryValue = additionalInfo.get("mapillary");
+		if (!Algorithms.isEmpty(imageValue)) {
+			params.put("osm_image", imageValue);
+		}
+		if (!Algorithms.isEmpty(mapillaryValue)) {
+			params.put("osm_mapillary_key", mapillaryValue);
+		}
+		return params;
 	}
 
 	private static class AmenityInfoRow {

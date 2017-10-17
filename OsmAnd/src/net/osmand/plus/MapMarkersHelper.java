@@ -769,6 +769,7 @@ public class MapMarkersHelper {
 				mapMarkers.add(0, marker);
 				addMarkerToGroup(marker);
 				reorderActiveMarkersIfNeeded();
+				lookupAddress(marker);
 			}
 		}
 	}
