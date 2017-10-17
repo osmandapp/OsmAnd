@@ -665,7 +665,7 @@ public class MeasurementToolFragment extends Fragment {
 		return new SaveAsNewTrackFragmentListener() {
 			@Override
 			public void saveAsRoutePointOnClick() {
-				saveAsGpx(SaveType.ROUTE_POINT);
+				saveAsGpx(editingCtx.isInSnapToRoadMode() ? SaveType.SNAP_TO_ROAD : SaveType.ROUTE_POINT);
 			}
 
 			@Override
