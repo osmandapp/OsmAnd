@@ -407,14 +407,18 @@ public class BinaryMapIndexReader {
 		}
 		String ls = rg.get(0);
 		if (ls.lastIndexOf('_') != -1) {
-			if (ls.matches(".*([0-9]+_*){3}\\.obf")) {
-				Pattern osmDiffDateEnding = Pattern.compile("_([0-9]+_*){3}\\.obf");
+			if (ls.matches("([a-zA-Z-]+_)+([0-9]+_){2}[0-9]+\\.obf")) {
+				Pattern osmDiffDateEnding = Pattern.compile("_([0-9]+_){2}[0-9]+\\.obf");
 				Matcher m = osmDiffDateEnding.matcher(ls);
 				if (m.find()) {
 					ls = ls.substring(0, m.start());
+					if (ls.lastIndexOf('_') != -1) {
+						return ls.substring(0, ls.lastIndexOf('_')).replace('_', ' ');
+					} else {
+						return ls;
+					}
+					
 				}
-				return ls.substring(0, ls.lastIndexOf('_')).replace('_', ' ');
-
 			} else {
 				if (ls.contains(".")) {
 					ls = ls.substring(0, ls.indexOf("."));
