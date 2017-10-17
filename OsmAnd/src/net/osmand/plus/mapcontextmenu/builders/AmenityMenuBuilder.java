@@ -518,10 +518,10 @@ public class AmenityMenuBuilder extends MenuBuilder {
 		String imageValue = additionalInfo.get("image");
 		String mapillaryValue = additionalInfo.get("mapillary");
 		if (!Algorithms.isEmpty(imageValue)) {
-			params.put("image", imageValue);
+			params.put("osm_image", imageValue);
 		}
 		if (!Algorithms.isEmpty(mapillaryValue)) {
-			params.put("mapillary", mapillaryValue);
+			params.put("osm_mapillary_key", mapillaryValue);
 		}
 		return params;
 	}

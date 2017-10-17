@@ -16,6 +16,7 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.webkit.WebSettings;
 import android.webkit.WebView;
+import android.webkit.WebViewClient;
 import android.widget.LinearLayout;
 
 import net.osmand.plus.OsmandApplication;
@@ -89,6 +90,13 @@ public abstract class AbstractCard {
 		});
 
 		final WebView wv = new WebView(ctx);
+		wv.setWebViewClient(new WebViewClient() {
+			@Override
+			public boolean shouldOverrideUrlLoading(WebView view, String url) {
+				return false;
+			}
+		});
+
 		WebSettings settings = wv.getSettings();
 
 		if (hasImageUrl) {

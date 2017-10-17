@@ -13,21 +13,13 @@ public class UrlImageCard extends ImageCard {
 	public UrlImageCard(MapActivity mapActivity, JSONObject imageObject) {
 		super(mapActivity, imageObject);
 
-		final String url;
-		final boolean hasImageUrl;
-		if (Algorithms.isEmpty(getImageHiresUrl())) {
-			url = getUrl();
-			hasImageUrl = false;
-		} else {
-			url = getImageHiresUrl();
-			hasImageUrl = true;
-		}
-
-		if (!Algorithms.isEmpty(url)) {
+		if (!Algorithms.isEmpty(getSuitableUrl())) {
 			OnClickListener onClickListener = new OnClickListener() {
 				@Override
 				public void onClick(View v) {
-					openUrl(getMapActivity(), getMyApplication(), getTitle(), url, isExternalLink(), hasImageUrl);
+					openUrl(getMapActivity(), getMyApplication(), getTitle(), getSuitableUrl(),
+							isExternalLink() || Algorithms.isEmpty(getImageHiresUrl()),
+							!Algorithms.isEmpty(getImageHiresUrl()));
 				}
 			};
 			if (!Algorithms.isEmpty(buttonText)) {
@@ -36,5 +28,15 @@ public class UrlImageCard extends ImageCard {
 				this.onClickListener = onClickListener;
 			}
 		}
+	}
+
+	private String getSuitableUrl() {
+		final String url;
+		if (Algorithms.isEmpty(getImageHiresUrl())) {
+			url = getUrl();
+		} else {
+			url = getImageHiresUrl();
+		}
+		return url;
 	}
 }

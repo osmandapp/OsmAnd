@@ -42,7 +42,6 @@ import net.osmand.plus.mapcontextmenu.builders.cards.AbstractCard;
 import net.osmand.plus.mapcontextmenu.builders.cards.CardsRowBuilder;
 import net.osmand.plus.mapcontextmenu.builders.cards.ImageCard;
 import net.osmand.plus.mapcontextmenu.builders.cards.ImageCard.GetImageCardsTask;
-import net.osmand.plus.mapcontextmenu.builders.cards.ImageCard.GetImageCardsTask.GetImageCardsListener;
 import net.osmand.plus.mapcontextmenu.builders.cards.NoImagesCard;
 import net.osmand.plus.render.RenderingIcons;
 import net.osmand.util.Algorithms;
@@ -56,6 +55,7 @@ import java.util.List;
 import java.util.Map;
 
 import static android.util.TypedValue.COMPLEX_UNIT_DIP;
+import static net.osmand.plus.mapcontextmenu.builders.cards.ImageCard.GetImageCardsTask.*;
 
 public class MenuBuilder {
 
@@ -350,7 +350,7 @@ public class MenuBuilder {
 			@Override
 			public void onCollapseExpand(boolean collapsed) {
 				if (!collapsed && onlinePhotoCards == null) {
-					startLoadingImages(MenuBuilder.this);
+					startLoadingImages();
 				}
 			}
 		});
@@ -360,14 +360,14 @@ public class MenuBuilder {
 		if (needUpdateOnly && onlinePhotoCards != null) {
 			onlinePhotoCardsRow.setCards(onlinePhotoCards);
 		} else if (!collapsableView.isCollapsed()) {
-			startLoadingImages(this);
+			startLoadingImages();
 		}
 	}
 
-	private void startLoadingImages(final MenuBuilder menuBuilder) {
+	private void startLoadingImages() {
 		onlinePhotoCards = new ArrayList<>();
 		onlinePhotoCardsRow.setProgressCard();
-		execute(new GetImageCardsTask(mapActivity, menuBuilder.getLatLon(), getAdditionalCardParams(),
+		execute(new GetImageCardsTask(mapActivity, getLatLon(), getAdditionalCardParams(),
 				new GetImageCardsListener() {
 					@Override
 					public void onPostProcess(List<ImageCard> cardList) {
@@ -376,7 +376,7 @@ public class MenuBuilder {
 
 					@Override
 					public void onFinish(List<ImageCard> cardList) {
-						if (!menuBuilder.isHidden()) {
+						if (!isHidden()) {
 							List<AbstractCard> cards = new ArrayList<>();
 							cards.addAll(cardList);
 							if (cardList.size() == 0) {
