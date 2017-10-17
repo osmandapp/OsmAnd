@@ -1940,7 +1940,7 @@ Pôr do Sol: %2$s</string>
     <string name="av_audio_bitrate_descr">Selecionar o bitrate de áudio</string>
     <string name="shared_string_near">Perto</string>
     <string name="no_address_found">Sem endereço determinado</string>
-	<string name="looking_up_address">Endereço procurado</string>
+	<string name="looking_up_address">Procurando endereço</string>
     <string name="rendering_attr_horseRoutes_name">Rotas a cavalo</string>
     <string name="update">Atualizar tudo</string>
     <string name="only_download_over_wifi">Somente baixar via Wi-Fi</string>
@@ -1996,7 +1996,7 @@ Pôr do Sol: %2$s</string>
     <string name="rendering_attr_hideUnderground_name">Ocultar objetos subterrâneos</string>
     <string name="shared_string_read_more">Leia mais</string>
     
-    <string name="shared_string_email_address">Endereço de email</string>
+    <string name="shared_string_email_address">Endereço de e-mail</string>
     <string name="shared_string_status">Estado</string>
     <string name="shared_string_save_changes">Salvar alterações</string>
     <string name="find_parking">Encontrar estacionamento</string>
@@ -2047,7 +2047,7 @@ Pôr do Sol: %2$s</string>
     <string name="skip_map_downloading">Pular download de mapas</string>
     <string name="skip_map_downloading_desc">Você não possui mapas offlines. Você deve escolher um mapa da lista ou baixar mapas mais tarde pelo Menu - %1$s.</string>
     <string name="search_another_country">Selecione um outro local</string>
-    <string name="search_map">Procurando mapa…</string>
+    <string name="search_map">Procurando mapas…</string>
     <string name="first_usage_wizard_desc">Deixe OsmAnd determinar seu local e sugerir mapas da região para baixar .</string>
     <string name="location_not_found">Local não encontrado</string>
     <string name="no_inet_connection">Sem conexão à internet</string>
