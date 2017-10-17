@@ -2878,4 +2878,5 @@ U vypadku, kali vy lubіcie OsmAnd і OSM і chočacie padtrymać jaho, heta іd
     <string name="route_is_calculated">Maršrut različany</string>
     <string name="round_trip">Padarožža</string>
     <string name="plan_route_no_markers_toast">Vam nieabchodna dadać pa mienšaj miery adzin markier kab vykarystat hetuju funkcyju.</string>
+    <string name="wrong_format">Drenny farmat</string>
     </resources>
