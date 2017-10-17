@@ -142,7 +142,7 @@
 
 
     <string name="local_index_installed">Version locale</string>
-    <string name="local_index_items_backuped">%1$d sur %2$d élément(s) désactivé(s).</string>
+    <string name="local_index_items_backuped">%1$d sur %2$d élément(s) désactivé(s) avec succès.</string>
     <string name="local_index_items_deleted">%1$d sur %2$d éléments supprimés.</string>
     <string name="local_index_items_restored">%1$d sur %2$d éléments restaurés.</string>
     <string name="local_index_no_items_to_do">Aucun élément à %1$s</string>
@@ -2971,4 +2971,11 @@ représentant la zone : %1$s x %2$s</string>
     <string name="round_trip">Boucle</string>
     <string name="plan_route_no_markers_toast">Vous devez ajouter au minimum une marque pour utiliser cette fonction.</string>
     <string name="shared_string_road">Route</string>
+    <string name="release_2_8">\\022 Marqueurs de carte complètement retravaillés avec lignes directrices et itinéraire
+\n
+\n • Outil de mesure de distance permettant un alignement sur la route et une sauvegarde en tant que trace
+\n
+\n • OsmAnd Live: corrections de bugs, données actualisées toutes les 30 minutes, mises à jour implémentées dans la navigation
+\n
+\n</string>
     </resources>
