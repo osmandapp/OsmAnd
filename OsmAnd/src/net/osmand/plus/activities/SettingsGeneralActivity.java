@@ -42,6 +42,7 @@ import net.osmand.plus.OsmandSettings.DrivingRegion;
 import net.osmand.plus.OsmandSettings.MetricsConstants;
 import net.osmand.plus.R;
 import net.osmand.plus.Version;
+import net.osmand.plus.base.MapViewTrackingUtilities;
 import net.osmand.plus.dashboard.DashChooseAppDirFragment;
 import net.osmand.plus.dashboard.DashChooseAppDirFragment.ChooseAppDirFragment;
 import net.osmand.plus.dashboard.DashChooseAppDirFragment.MoveFilesToDifferentDirectory;
@@ -166,7 +167,10 @@ public class SettingsGeneralActivity extends SettingsBaseActivity implements OnR
 					public void onClick(DialogInterface dialog, int which) {
 						if (drs.get(which) == null) {
 							settings.DRIVING_REGION_AUTOMATIC.set(true);
-							MapActivity.getSingleMapViewTrackingUtilities().resetDrivingRegionUpdate();
+							MapViewTrackingUtilities mapViewTrackingUtilities = MapActivity.getSingleMapViewTrackingUtilities();
+							if (mapViewTrackingUtilities != null) {
+								mapViewTrackingUtilities.resetDrivingRegionUpdate();
+							}
 						} else {
 							settings.DRIVING_REGION_AUTOMATIC.set(false);
 							settings.DRIVING_REGION.set(drs.get(which));
