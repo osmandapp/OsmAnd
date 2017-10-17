@@ -2829,4 +2829,5 @@
     <string name="route_is_calculated">تم حساب المسار</string>
     <string name="round_trip">رحلة ذهاب وإياب</string>
     <string name="plan_route_no_markers_toast">يجب إضافة علامة واحدة على الأقل لاستخدام هذه الوظيفة.</string>
+    <string name="wrong_format">تنسيق خاطئ</string>
     </resources>
