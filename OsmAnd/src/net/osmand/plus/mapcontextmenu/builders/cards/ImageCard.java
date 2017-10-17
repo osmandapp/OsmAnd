@@ -98,7 +98,8 @@ public abstract class ImageCard extends AbstractCard {
 				if (imageObject.has("ca") && !imageObject.isNull("ca")) {
 					this.ca = imageObject.getDouble("ca");
 				}
-				if (imageObject.has("lat") && imageObject.has("lon")) {
+				if (imageObject.has("lat") && imageObject.has("lon")
+						&& !imageObject.isNull("lat") && !imageObject.isNull("lon")) {
 					double latitude = imageObject.getDouble("lat");
 					double longitude = imageObject.getDouble("lon");
 					this.location = new LatLon(latitude, longitude);
@@ -113,19 +114,19 @@ public abstract class ImageCard extends AbstractCard {
 				if (imageObject.has("key")) {
 					this.key = imageObject.getString("key");
 				}
-				if (imageObject.has("title")) {
+				if (imageObject.has("title") && !imageObject.isNull("title")) {
 					this.title = imageObject.getString("title");
 				}
-				if (imageObject.has("username")) {
+				if (imageObject.has("username") && !imageObject.isNull("username")) {
 					this.userName = imageObject.getString("username");
 				}
-				if (imageObject.has("url")) {
+				if (imageObject.has("url") && !imageObject.isNull("url")) {
 					this.url = imageObject.getString("url");
 				}
-				if (imageObject.has("imageUrl")) {
+				if (imageObject.has("imageUrl") && !imageObject.isNull("imageUrl")) {
 					this.imageUrl = imageObject.getString("imageUrl");
 				}
-				if (imageObject.has("imageHiresUrl")) {
+				if (imageObject.has("imageHiresUrl") && !imageObject.isNull("imageHiresUrl")) {
 					this.imageHiresUrl = imageObject.getString("imageHiresUrl");
 				}
 				if (imageObject.has("externalLink") && !imageObject.isNull("externalLink")) {
@@ -498,6 +499,9 @@ public abstract class ImageCard extends AbstractCard {
 			downloading = false;
 			downloaded = true;
 			ImageCard.this.bitmap = bitmap;
+			if (bitmap != null && Algorithms.isEmpty(getImageHiresUrl())) {
+				ImageCard.this.imageHiresUrl = getUrl();
+			}
 			update();
 		}
 	}
