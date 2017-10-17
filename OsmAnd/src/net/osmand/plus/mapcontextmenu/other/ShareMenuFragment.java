@@ -4,6 +4,7 @@ import android.annotation.SuppressLint;
 import android.os.Bundle;
 import android.support.annotation.Nullable;
 import android.support.v4.app.Fragment;
+import android.support.v4.app.FragmentManager;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -121,10 +122,9 @@ public class ShareMenuFragment extends Fragment implements OnItemClickListener {
 	}
 
 	public void dismissMenu() {
+		menu.getMapActivity().getSupportFragmentManager().popBackStackImmediate(TAG, FragmentManager.POP_BACK_STACK_INCLUSIVE);
 		if (menu.getMapActivity().getContextMenu().isVisible()) {
 			menu.getMapActivity().getContextMenu().hide();
-		} else {
-			menu.getMapActivity().getSupportFragmentManager().popBackStack();
 		}
 	}
 }
