@@ -163,7 +163,7 @@
     <string name="context_menu_item_delete_waypoint">Ĉu forigi GPX-navigadpunkton?</string>
     <string name="context_menu_item_edit_waypoint">Redakti GPX-navigadpunkton</string>
     <string name="shared_string_location">Loko</string>
-    <string name="share_osm_edits_subject">OSM-aj redaktoj kunhavataj per OsmAnd</string>
+    <string name="share_osm_edits_subject">OSM-redaktoj kunhavataj per OsmAnd</string>
     <string name="lang_nds">Platgermana</string>
     <string name="lang_mk">Makedona</string>
     <string name="lang_fy">Okcidentfrisa</string>
@@ -484,7 +484,7 @@
     <string name="welcome_select_region">Por korekte prezenti trafiksignojn kaj regulojn, bonvolu elekti vian trafikan regionon:</string>
     <string name="welcome_text">OsmAnd ebligas uzi tutmondajn mapojn kaj navigadon eksterrete!</string>
     <string name="current_route">Nuna kurso</string>
-    <string name="osm_changes_added_to_local_edits">OSM-aj ŝanĝoj aldonitaj al loka ŝanĝaro</string>
+    <string name="osm_changes_added_to_local_edits">OSM-ŝanĝoj aldonitaj al loka ŝanĝaro</string>
     <string name="mark_to_delete">Marki por forigi</string>
     <string name="osmo_grop_name_length_alert">Grupa nomo devas enhavi almenaŭ 3 signojn!</string>
     <string name="local_recordings_delete_all_confirm">Ĉu vi certe volas forigi %1$d notojn?</string>
@@ -497,7 +497,7 @@
     <string name="action_create">Krei</string>
     <string name="action_modify">Modifi</string>
     <string name="action_delete">Forigi</string>
-    <string name="osm_edits">OSM-aj redaktoj</string>
+    <string name="osm_edits">OSM-redaktoj</string>
     <string name="parking_place_limited">Parkumada tempo limigita ĝis</string>
     <string name="osmand_parking_time_left">ankoraŭ</string>
     <string name="your_edits">Viaj redaktoj</string>
@@ -978,7 +978,7 @@ Lon: %2$s</string>
     <string name="app_mode_motorcycle">Motorciklo</string>
     <string name="app_mode_boat">Boato</string>
     <string name="app_mode_aircraft">Aviadilo</string>
-    <string name="local_osm_changes_delete_all_confirm">Ĉu vi certe volas forigi %1$d OSM-ajn ŝanĝojn?</string>
+    <string name="local_osm_changes_delete_all_confirm">Ĉu vi certe volas forigi %1$d OSM-ŝanĝojn?</string>
     <string name="animate_routing_route_not_calculated">Bonvolu antaŭe kalkuli la kurson</string>
     <string name="follow_us">Observi nin</string>
     <string name="animate_routing_route">Simuli uzante kalkulitan kurson</string>
@@ -1036,7 +1036,7 @@ Lon: %2$s</string>
     <string name="intermediate_items_sort_return">Interceloj estas reordigitaj de nuna pozicio al la celo.</string>
     <string name="intermediate_items_sort_by_distance">Ordigi de celo ĝis celo (laŭ la plej malgranda distanco)</string>
     <string name="local_osm_changes_backup_successful">OSM-a ŝanĝodosiero kreita sukcese %1$s</string>
-    <string name="local_osm_changes_backup_failed">Eraro dum kreado de sekurkopio de OSM-aj ŝanĝoj</string>
+    <string name="local_osm_changes_backup_failed">Eraro dum kreado de sekurkopio de OSM-ŝanĝoj</string>
     <string name="local_osm_changes_backup">Krei sekurkopion kiel OSM-an ŝanĝon</string>
     <string name="delete_point">Forigi punkton</string>
     <string name="plugin_distance_point_time">tempo</string>
@@ -1446,7 +1446,7 @@ Proporcia memoro %4$s MB (limito de Android %5$s MB, Dalvik %6$s MB).</string>
     <string name="local_openstreetmap_delete">Forigi modifaĵojn</string>
     <string name="local_openstreetmap_descr_title">Neunutempa (nesinkrona) redakto de OSM:</string>
     <string name="local_openstreetmap_settings">Lokaj konservitaj OSM-aj interesejoj/rimarkoj</string>
-    <string name="local_openstreetmap_settings_descr">Vidi kaj administri OSM-ajn interesejojn/notojn konservitajn en loka datumbazo</string>
+    <string name="local_openstreetmap_settings_descr">Vidi kaj administri OSM-ajn interesejojn/rimarkojn konservitajn en loka datumbazo</string>
     <string name="live_monitoring_interval">Intervalo de enreta kurs-registrado</string>
     <string name="live_monitoring_interval_descr">Difini intervalon de enreta kurs-registrado</string>
     <string name="live_monitoring_url">Adreso de enreta kurs-registrado</string>
