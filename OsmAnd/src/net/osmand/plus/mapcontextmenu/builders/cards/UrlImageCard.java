@@ -12,22 +12,11 @@ public class UrlImageCard extends ImageCard {
 
 	public UrlImageCard(MapActivity mapActivity, JSONObject imageObject) {
 		super(mapActivity, imageObject);
-<<<<<<< HEAD
 		if (!Algorithms.isEmpty(getUrl())) {
 			OnClickListener onClickListener = new OnClickListener() {
 				@Override
 				public void onClick(View v) {
 					openUrl(getMapActivity(), getMyApplication(), "", getUrl(), isExternalLink());
-=======
-
-		if (!Algorithms.isEmpty(getSuitableUrl())) {
-			OnClickListener onClickListener = new OnClickListener() {
-				@Override
-				public void onClick(View v) {
-					openUrl(getMapActivity(), getMyApplication(), getTitle(), getSuitableUrl(),
-							isExternalLink() || Algorithms.isEmpty(getImageHiresUrl()),
-							!Algorithms.isEmpty(getImageHiresUrl()));
->>>>>>> dbb72952c7... Fix osm image/mapillary processing
 				}
 			};
 			if (!Algorithms.isEmpty(buttonText)) {
@@ -36,15 +25,5 @@ public class UrlImageCard extends ImageCard {
 				this.onClickListener = onClickListener;
 			}
 		}
-	}
-
-	private String getSuitableUrl() {
-		final String url;
-		if (Algorithms.isEmpty(getImageHiresUrl())) {
-			url = getUrl();
-		} else {
-			url = getImageHiresUrl();
-		}
-		return url;
 	}
 }

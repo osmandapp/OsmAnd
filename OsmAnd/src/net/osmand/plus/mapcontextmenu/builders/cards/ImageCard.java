@@ -85,7 +85,6 @@ public abstract class ImageCard extends AbstractCard {
 
 	public ImageCard(MapActivity mapActivity, JSONObject imageObject) {
 		super(mapActivity);
-<<<<<<< HEAD
 		try {
 			if (imageObject.has("type")) {
 				this.type = imageObject.getString("type");
@@ -103,58 +102,6 @@ public abstract class ImageCard extends AbstractCard {
 					this.timestamp = DATE_FORMAT.parse(imageObject.getString("timestamp"));
 				} catch (ParseException e) {
 					e.printStackTrace();
-=======
-		if (imageObject != null) {
-			try {
-				if (imageObject.has("type")) {
-					this.type = imageObject.getString("type");
-				}
-				if (imageObject.has("ca") && !imageObject.isNull("ca")) {
-					this.ca = imageObject.getDouble("ca");
-				}
-				if (imageObject.has("lat") && imageObject.has("lon")
-						&& !imageObject.isNull("lat") && !imageObject.isNull("lon")) {
-					double latitude = imageObject.getDouble("lat");
-					double longitude = imageObject.getDouble("lon");
-					this.location = new LatLon(latitude, longitude);
-				}
-				if (imageObject.has("timestamp")) {
-					try {
-						this.timestamp = DATE_FORMAT.parse(imageObject.getString("timestamp"));
-					} catch (ParseException e) {
-						e.printStackTrace();
-					}
-				}
-				if (imageObject.has("key")) {
-					this.key = imageObject.getString("key");
-				}
-				if (imageObject.has("title") && !imageObject.isNull("title")) {
-					this.title = imageObject.getString("title");
-				}
-				if (imageObject.has("username") && !imageObject.isNull("username")) {
-					this.userName = imageObject.getString("username");
-				}
-				if (imageObject.has("url") && !imageObject.isNull("url")) {
-					this.url = imageObject.getString("url");
-				}
-				if (imageObject.has("imageUrl") && !imageObject.isNull("imageUrl")) {
-					this.imageUrl = imageObject.getString("imageUrl");
-				}
-				if (imageObject.has("imageHiresUrl") && !imageObject.isNull("imageHiresUrl")) {
-					this.imageHiresUrl = imageObject.getString("imageHiresUrl");
-				}
-				if (imageObject.has("externalLink") && !imageObject.isNull("externalLink")) {
-					this.externalLink = imageObject.getBoolean("externalLink");
-				}
-				if (imageObject.has("topIcon") && !imageObject.isNull("topIcon")) {
-					this.topIconId = getDrawableId(imageObject.getString("topIcon"));
-				}
-				if (imageObject.has("buttonIcon") && !imageObject.isNull("buttonIcon")) {
-					this.buttonIconId = getDrawableId(imageObject.getString("buttonIcon"));
-				}
-				if (imageObject.has("buttonText") && !imageObject.isNull("buttonText")) {
-					this.buttonText = imageObject.getString("buttonText");
->>>>>>> dbb72952c7... Fix osm image/mapillary processing
 				}
 			}
 			if (imageObject.has("key")) {
@@ -518,9 +465,6 @@ public abstract class ImageCard extends AbstractCard {
 			downloading = false;
 			downloaded = true;
 			ImageCard.this.bitmap = bitmap;
-			if (bitmap != null && Algorithms.isEmpty(getImageHiresUrl())) {
-				ImageCard.this.imageHiresUrl = getUrl();
-			}
 			update();
 		}
 	}

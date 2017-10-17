@@ -506,24 +506,6 @@ public class AmenityMenuBuilder extends MenuBuilder {
 		}
 	}
 
-<<<<<<< HEAD
-=======
-	@Override
-	protected Map<String, String> getAdditionalCardParams() {
-		Map<String, String> params = new HashMap<>();
-		Map<String, String> additionalInfo =  amenity.getAdditionalInfo();
-		String imageValue = additionalInfo.get("image");
-		String mapillaryValue = additionalInfo.get("mapillary");
-		if (!Algorithms.isEmpty(imageValue)) {
-			params.put("osm_image", imageValue);
-		}
-		if (!Algorithms.isEmpty(mapillaryValue)) {
-			params.put("osm_mapillary_key", mapillaryValue);
-		}
-		return params;
-	}
-
->>>>>>> dbb72952c7... Fix osm image/mapillary processing
 	private static class AmenityInfoRow {
 		private String key;
 		private Drawable icon;

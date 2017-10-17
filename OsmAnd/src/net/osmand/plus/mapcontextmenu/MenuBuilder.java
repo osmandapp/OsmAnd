@@ -42,6 +42,7 @@ import net.osmand.plus.mapcontextmenu.builders.cards.AbstractCard;
 import net.osmand.plus.mapcontextmenu.builders.cards.CardsRowBuilder;
 import net.osmand.plus.mapcontextmenu.builders.cards.ImageCard;
 import net.osmand.plus.mapcontextmenu.builders.cards.ImageCard.GetImageCardsTask;
+import net.osmand.plus.mapcontextmenu.builders.cards.ImageCard.GetImageCardsTask.GetImageCardsListener;
 import net.osmand.plus.mapcontextmenu.builders.cards.NoImagesCard;
 import net.osmand.plus.render.RenderingIcons;
 import net.osmand.util.Algorithms;
@@ -54,7 +55,6 @@ import java.util.LinkedList;
 import java.util.List;
 
 import static android.util.TypedValue.COMPLEX_UNIT_DIP;
-import static net.osmand.plus.mapcontextmenu.builders.cards.ImageCard.GetImageCardsTask.*;
 
 public class MenuBuilder {
 
@@ -349,7 +349,7 @@ public class MenuBuilder {
 			@Override
 			public void onCollapseExpand(boolean collapsed) {
 				if (!collapsed && onlinePhotoCards == null) {
-					startLoadingImages();
+					startLoadingImages(MenuBuilder.this);
 				}
 			}
 		});
@@ -359,22 +359,18 @@ public class MenuBuilder {
 		if (needUpdateOnly && onlinePhotoCards != null) {
 			onlinePhotoCardsRow.setCards(onlinePhotoCards);
 		} else if (!collapsableView.isCollapsed()) {
-			startLoadingImages();
+			startLoadingImages(this);
 		}
 	}
 
-	private void startLoadingImages() {
+	private void startLoadingImages(final MenuBuilder menuBuilder) {
 		onlinePhotoCards = new ArrayList<>();
 		onlinePhotoCardsRow.setProgressCard();
-<<<<<<< HEAD
 		execute(new GetImageCardsTask(mapActivity, menuBuilder.getLatLon(),
-=======
-		execute(new GetImageCardsTask(mapActivity, getLatLon(), getAdditionalCardParams(),
->>>>>>> dbb72952c7... Fix osm image/mapillary processing
 				new GetImageCardsListener() {
 					@Override
 					public void onFinish(List<ImageCard> cardList) {
-						if (!isHidden()) {
+						if (!menuBuilder.isHidden()) {
 							List<AbstractCard> cards = new ArrayList<>();
 							cards.addAll(cardList);
 							if (cardList.size() == 0) {
