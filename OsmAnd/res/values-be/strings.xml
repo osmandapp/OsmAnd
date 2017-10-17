@@ -2811,7 +2811,7 @@
 \n
 \n</string>
     <string name="measurement_tool_action_bar">Прагляд мапы і даданне кропак</string>
-    <string name="measurement_tool">Вымяраць адлегласць</string>
+    <string name="measurement_tool">Вымяраць адлегласьць</string>
     <string name="quick_action_resume_pause_navigation">Аднавіць/прыпыніць навігацыю</string>
     <string name="quick_action_resume_pause_navigation_descr">Націсніце гэтую кнопку, каб прыпыніць ці аднавіць навігацыю.</string>
     <string name="quick_action_show_navigation_finish_dialog">Паказаць дыялог завяршэння навігацыі</string>
