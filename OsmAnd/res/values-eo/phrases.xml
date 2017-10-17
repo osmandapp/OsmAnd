@@ -3513,4 +3513,22 @@
 	<string name="poi_surface_decoturf">DecoTurf</string>
 	<string name="poi_surface_metal_grid">metala krado</string>
 
+<string name="poi_location_underground">Pozicio: subtere</string>
+	<string name="poi_location_underwater">Pozicio: subakve</string>
+	<string name="poi_location_overground">Pozicio: supertere</string>
+	<string name="poi_location_overhead">Pozicio: superkape</string>
+	<string name="poi_location_roof">Pozicio: tegmento</string>
+	<string name="poi_location_rooftop">Pozicio: supra tegmento</string>
+	<string name="poi_location_outdoor">Pozicio: eksterdome</string>
+	<string name="poi_location_indoor">Pozicio: ene</string>
+	<string name="poi_location_platform">Pozicio: platformo</string>
+	<string name="poi_location_kiosk">Pozicio: budo</string>
+	<string name="poi_location_bridge">Pozicio: ponto</string>
+	<string name="poi_location_wall">Pozicio: muro</string>
+	<string name="poi_location_entrance">Pozicio: enirejo</string>
+
+	<string name="poi_visibility_house">Videbleco: de domo</string>
+	<string name="poi_visibility_street">Videbleco: de strato</string>
+	<string name="poi_visibility_area">Videbleco: de malproksime</string>
+
 </resources>
