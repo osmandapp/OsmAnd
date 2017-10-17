@@ -7,6 +7,8 @@ import android.content.Intent;
 import android.graphics.Color;
 import android.graphics.drawable.Drawable;
 import android.net.Uri;
+import android.support.annotation.NonNull;
+import android.support.annotation.Nullable;
 import android.support.v4.content.ContextCompat;
 import android.support.v7.widget.Toolbar;
 import android.util.TypedValue;
@@ -51,8 +53,12 @@ public abstract class AbstractCard {
 
 	@SuppressLint("SetJavaScriptEnabled")
 	@SuppressWarnings("deprecation")
-	protected static void openUrl(Context ctx, OsmandApplication app,
-								  String title, String url, boolean externalLink) {
+	protected static void openUrl(@NonNull Context ctx,
+								  @NonNull OsmandApplication app,
+								  @Nullable String title,
+								  @NonNull String url,
+								  boolean externalLink,
+								  boolean hasImageUrl) {
 		if (externalLink) {
 			Intent intent = new Intent(Intent.ACTION_VIEW);
 			intent.setData(Uri.parse(url));
@@ -84,12 +90,14 @@ public abstract class AbstractCard {
 
 		final WebView wv = new WebView(ctx);
 		WebSettings settings = wv.getSettings();
-		/*
-		settings.setDefaultTextEncodingName("utf-8");
-		settings.setBuiltInZoomControls(true);
-		settings.setDisplayZoomControls(false);
-		settings.setSupportZoom(true);
 
+		if (hasImageUrl) {
+			settings.setDefaultTextEncodingName("utf-8");
+			settings.setBuiltInZoomControls(true);
+			settings.setDisplayZoomControls(false);
+			settings.setSupportZoom(true);
+		}
+		/*
 		//Scale web view font size with system font size
 		float scale = ctx.getResources().getConfiguration().fontScale;
 		if (android.os.Build.VERSION.SDK_INT >= 14) {
@@ -111,7 +119,11 @@ public abstract class AbstractCard {
 		wv.setBackgroundColor(Color.argb(1, 0, 0, 0));
 		//wv.setScrollContainer(false);
 		wv.getSettings().setJavaScriptEnabled(true);
-		wv.loadUrl(url);
+		if (hasImageUrl) {
+			wv.loadData("<html><body style='margin:0;padding:0'><img style='max-width:100%;max-height:100%;' src='" + url + "'/></body></html>", "text/html", "UTF-8");
+		} else {
+			wv.loadUrl(url);
+		}
 
 		ll.addView(topBar);
 		LinearLayout.LayoutParams lp = new LinearLayout.LayoutParams(LinearLayout.LayoutParams.MATCH_PARENT, 0);
