@@ -107,7 +107,6 @@ public class MapMarkersLayer extends OsmandMapLayer implements IContextMenuProvi
 
 	private void initUI() {
 		bitmapPaint = new Paint();
-		bitmapPaint.setDither(true);
 		bitmapPaint.setAntiAlias(true);
 		bitmapPaint.setFilterBitmap(true);
 		markerBitmapBlue = BitmapFactory.decodeResource(view.getResources(), R.drawable.map_marker_blue);
