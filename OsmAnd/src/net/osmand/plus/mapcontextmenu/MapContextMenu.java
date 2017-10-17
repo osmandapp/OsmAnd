@@ -30,7 +30,6 @@ import net.osmand.plus.R;
 import net.osmand.plus.TargetPointsHelper.TargetPoint;
 import net.osmand.plus.TargetPointsHelper.TargetPointChangedListener;
 import net.osmand.plus.activities.MapActivity;
-import net.osmand.plus.dashboard.DashboardOnMap;
 import net.osmand.plus.helpers.GpxUiHelper;
 import net.osmand.plus.mapcontextmenu.MenuController.ContextMenuToolbarController;
 import net.osmand.plus.mapcontextmenu.MenuController.MenuState;
@@ -44,6 +43,7 @@ import net.osmand.plus.mapcontextmenu.editors.RtePtEditor;
 import net.osmand.plus.mapcontextmenu.editors.WptPtEditor;
 import net.osmand.plus.mapcontextmenu.other.MapMultiSelectionMenu;
 import net.osmand.plus.mapcontextmenu.other.ShareMenu;
+import net.osmand.plus.mapmarkers.MapMarkersDialogFragment;
 import net.osmand.plus.monitoring.OsmandMonitoringPlugin;
 import net.osmand.plus.routing.RoutingHelper;
 import net.osmand.plus.views.ContextMenuLayer;
@@ -717,7 +717,7 @@ public class MapContextMenu extends MenuTitleController implements StateChangedL
 			if (pointDescription.isMapMarker()) {
 				hide();
 				MapActivity.clearPrevActivityIntent();
-				mapActivity.getDashboard().setDashboardVisibility(true, DashboardOnMap.DashboardType.MAP_MARKERS);
+				MapMarkersDialogFragment.showInstance(mapActivity);
 			} else {
 				mapActivity.getMapActions().addMapMarker(latLon.getLatitude(), latLon.getLongitude(),
 						getPointDescriptionForMarker());
@@ -898,7 +898,8 @@ public class MapContextMenu extends MenuTitleController implements StateChangedL
 
 	public PointDescription getPointDescriptionForMarker() {
 		PointDescription pd = getPointDescriptionForTarget();
-		if (Algorithms.isEmpty(pd.getName()) && !nameStr.equals(PointDescription.getAddressNotFoundStr(mapActivity))) {
+		if (Algorithms.isEmpty(pd.getName()) && !Algorithms.isEmpty(nameStr)
+				&& !nameStr.equals(PointDescription.getAddressNotFoundStr(mapActivity))) {
 			return new PointDescription(PointDescription.POINT_TYPE_MAP_MARKER, nameStr);
 		} else {
 			return pd;
