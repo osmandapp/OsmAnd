@@ -2841,4 +2841,5 @@ Indikas lokon:  %1$s x %2$s"</string>
     <string name="route_is_calculated">Kurso estas kalkulata</string>
     <string name="round_trip">Fermita ekskurso</string>
     <string name="plan_route_no_markers_toast">Vi devas aldoni almenaŭ unu markon por uzi tiun ĉi eblon.</string>
+    <string name="wrong_format">Malĝusta formo</string>
     </resources>
