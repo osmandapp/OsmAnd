@@ -2978,4 +2978,5 @@ représentant la zone : %1$s x %2$s</string>
 \n • OsmAnd Live: corrections de bugs, actualisation des données toutes les 30 minutes, prises en compte des mises à jour dans la navigation
 \n
 \n</string>
+    <string name="wrong_format">Format incorrect</string>
     </resources>
