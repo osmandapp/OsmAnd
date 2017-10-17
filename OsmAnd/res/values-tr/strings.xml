@@ -1052,7 +1052,7 @@
     <string name="app_mode_truck">kamyon</string>
     
 	
-    <string name="copying_osmand_one_file_descr">Şimdidosya ($1%s ) Yeni Geliş kopyalamak …</string>
+    <string name="copying_osmand_one_file_descr">Şimdidosya (%s) Yeni Geliş kopyalamak …</string>
     <string name="copying_osmand_files_descr">Yeni hedef (%s) için Osmand veri dosyaları kopyalanıyor …</string>
     <string name="guidance_preferences_descr">Yolbul tercihleri</string>
     <string name="routing_preferences_descr">Öncelikli yönlendirme</string>
@@ -2008,7 +2008,7 @@
     <string name="rec_split_clip_length_desc">Kaydedilen her klibin uzunluğunu artık bu belirtilen zaman aralığı olmayacak</string>
     <string name="rec_split_storage_size">Depolama boyutu</string>
     <string name="rec_split_storage_size_desc">Tüm kaydedilen kliplerin tarafından işgal edilebilir alan miktarı</string>
-    <string name="last_map_change">Son harita değişikliği:% s</string>
+    <string name="last_map_change">Son harita değişikliği: %s</string>
     <string name="hourly">Saatlik</string>
     <string name="daily">Günlük</string>
     <string name="weekly">Haftalık</string>
