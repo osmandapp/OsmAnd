@@ -182,7 +182,7 @@ public class AvailableGPXFragment extends OsmandExpandableListFragment {
 		if (!importing) {
 			if (asyncLoader == null || asyncLoader.getResult() == null) {
 				asyncLoader = new LoadGpxTask();
-				asyncLoader.execute(getActivity());
+				asyncLoader.executeOnExecutor(AsyncTask.THREAD_POOL_EXECUTOR);
 			} else {
 				allGpxAdapter.refreshSelected();
 				allGpxAdapter.notifyDataSetChanged();
