@@ -140,7 +140,7 @@ public class MapMarkersDbHelper {
 		if (oldVersion < 10) {
 			db.execSQL("ALTER TABLE " + MARKERS_TABLE_NAME + " ADD " + MARKERS_COL_SELECTED + " int");
 			db.execSQL("UPDATE " + MARKERS_TABLE_NAME +
-					" SET" + MARKERS_COL_SELECTED + " = ? " +
+					" SET " + MARKERS_COL_SELECTED + " = ? " +
 					"WHERE " + MARKERS_COL_SELECTED + " IS NULL", new Object[]{0});
 		}
 	}
