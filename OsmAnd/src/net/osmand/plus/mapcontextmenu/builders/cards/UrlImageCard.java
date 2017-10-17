@@ -12,11 +12,22 @@ public class UrlImageCard extends ImageCard {
 
 	public UrlImageCard(MapActivity mapActivity, JSONObject imageObject) {
 		super(mapActivity, imageObject);
-		if (!Algorithms.isEmpty(getUrl())) {
+
+		final String url;
+		final boolean hasImageUrl;
+		if (Algorithms.isEmpty(getImageHiresUrl())) {
+			url = getUrl();
+			hasImageUrl = false;
+		} else {
+			url = getImageHiresUrl();
+			hasImageUrl = true;
+		}
+
+		if (!Algorithms.isEmpty(url)) {
 			OnClickListener onClickListener = new OnClickListener() {
 				@Override
 				public void onClick(View v) {
-					openUrl(getMapActivity(), getMyApplication(), "", getUrl(), isExternalLink());
+					openUrl(getMapActivity(), getMyApplication(), getTitle(), url, isExternalLink(), hasImageUrl);
 				}
 			};
 			if (!Algorithms.isEmpty(buttonText)) {

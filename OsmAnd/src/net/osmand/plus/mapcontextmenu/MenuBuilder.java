@@ -53,6 +53,7 @@ import java.util.Collections;
 import java.util.Comparator;
 import java.util.LinkedList;
 import java.util.List;
+import java.util.Map;
 
 import static android.util.TypedValue.COMPLEX_UNIT_DIP;
 
@@ -344,7 +345,7 @@ public class MenuBuilder {
 		onlinePhotoCardsRow = new CardsRowBuilder(this, view, false);
 		onlinePhotoCardsRow.build();
 		CollapsableView collapsableView = new CollapsableView(onlinePhotoCardsRow.getContentView(),
-				app.getSettings().MAPILLARY_MENU_COLLAPSED);
+				app.getSettings().ONLINE_PHOTOS_ROW_COLLAPSED);
 		collapsableView.setOnCollExpListener(new CollapsableView.OnCollExpListener() {
 			@Override
 			public void onCollapseExpand(boolean collapsed) {
@@ -366,8 +367,13 @@ public class MenuBuilder {
 	private void startLoadingImages(final MenuBuilder menuBuilder) {
 		onlinePhotoCards = new ArrayList<>();
 		onlinePhotoCardsRow.setProgressCard();
-		execute(new GetImageCardsTask(mapActivity, menuBuilder.getLatLon(),
+		execute(new GetImageCardsTask(mapActivity, menuBuilder.getLatLon(), getAdditionalCardParams(),
 				new GetImageCardsListener() {
+					@Override
+					public void onPostProcess(List<ImageCard> cardList) {
+						processOnlinePhotosCards(cardList);
+					}
+
 					@Override
 					public void onFinish(List<ImageCard> cardList) {
 						if (!menuBuilder.isHidden()) {
@@ -381,6 +387,13 @@ public class MenuBuilder {
 						}
 					}
 				}));
+	}
+
+	protected Map<String, String> getAdditionalCardParams() {
+		return null;
+	}
+
+	protected void processOnlinePhotosCards(List<ImageCard> cardList) {
 	}
 
 	protected void buildInternal(View view) {
