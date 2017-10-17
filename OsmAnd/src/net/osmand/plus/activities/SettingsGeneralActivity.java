@@ -58,6 +58,12 @@ import java.util.List;
 
 public class SettingsGeneralActivity extends SettingsBaseActivity implements OnRequestPermissionsResultCallback {
 
+	private static final String IP_ADDRESS_PATTERN =
+			"^([01]?\\d\\d?|2[0-4]\\d|25[0-5])\\." +
+					"([01]?\\d\\d?|2[0-4]\\d|25[0-5])\\." +
+					"([01]?\\d\\d?|2[0-4]\\d|25[0-5])\\." +
+					"([01]?\\d\\d?|2[0-4]\\d|25[0-5])$";
+
 	private Preference applicationDir;
 	private ListPreference applicationModePreference;
 	private Preference drivingRegionPreference;
@@ -366,9 +372,15 @@ public class SettingsGeneralActivity extends SettingsBaseActivity implements OnR
 		hostPref.setOnPreferenceChangeListener(new OnPreferenceChangeListener() {
 			@Override
 			public boolean onPreferenceChange(Preference preference, Object newValue) {
-				settings.PROXY_HOST.set((String) newValue);
-				enableProxy(NetworkUtils.getProxy() != null);
-				return true;
+				String ipAddress = (String) newValue;
+				if (ipAddress.matches(IP_ADDRESS_PATTERN)) {
+					settings.PROXY_HOST.set(ipAddress);
+					enableProxy(NetworkUtils.getProxy() != null);
+					return true;
+				} else {
+					Toast.makeText(SettingsGeneralActivity.this, getString(R.string.wrong_format), Toast.LENGTH_SHORT).show();
+					return false;
+				}
 			}
 		});
 
