@@ -234,7 +234,7 @@ public class RulerControlLayer extends OsmandMapLayer {
 		}
 	}
 
-	private boolean rulerModeOn() {
+	public boolean rulerModeOn() {
 		return mapActivity.getMapLayers().getMapWidgetRegistry().isVisible("ruler") &&
 				rightWidgetsPanel.getVisibility() == View.VISIBLE;
 	}
