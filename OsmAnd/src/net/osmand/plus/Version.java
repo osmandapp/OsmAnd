@@ -26,11 +26,20 @@ public class Version {
 	public static boolean isMarketEnabled(OsmandApplication ctx) {
 		return isGooglePlayEnabled(ctx) || isAmazonEnabled(ctx);
 	}
+
+	public static boolean isGooglePlayInstalled(OsmandApplication ctx) {
+		try {
+			ctx.getPackageManager().getPackageInfo("com.android.vending", 0);
+		} catch (PackageManager.NameNotFoundException e) {
+			return false;
+		}
+		return true;
+	}
 	
 	public static String marketPrefix(OsmandApplication ctx) {
 		if (isAmazonEnabled(ctx)) {
 			return "amzn://apps/android?p=";
-		} else if (isGooglePlayEnabled(ctx)) {
+		} else if (isGooglePlayEnabled(ctx) && isGooglePlayInstalled(ctx)) {
 			return "market://details?id=";
 		} 
 		return "https://osmand.net/apps?id=";
