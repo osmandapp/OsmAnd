@@ -221,7 +221,7 @@
     <string name="rendering_attr_transportStops_name">Paradas de transporte</string>
     
     <string name="navigate_point_zone">Zona</string>
-    <string name="download_tab_downloads">Todas as transferências</string>
+    <string name="download_tab_downloads">Todos downloads</string>
     <string name="download_tab_updates">Atualizações</string>
     <string name="download_tab_local">Local</string>
 	<string name="no_internet_connection">Não foi possível baixar, por favor, verifique sua conexão com a Internet.</string>
@@ -312,7 +312,7 @@
 	<string name="save_track_to_gpx_globally_descr">Posição geral de registro para um arquivo GPX pode ser ativada ou desativada usando o widget de registro de GPX na tela do mapa</string>
 	<string name="save_current_track_descr">Salvar a trilha atual no SD agora</string>
 	<string name="save_current_track">Salvar a trilha GPX atual</string>
-	<string name="save_track_to_gpx">Registrar a trilha para arquivo GPX durante a navegação</string>
+	<string name="save_track_to_gpx">Auto-registrar a trilha durante a navegação</string>
 	<string name="save_track_to_gpx_descrp">trilha serão salvas no diretório de trilhas durante a navegação</string>
 	<string name="save_track_interval_globally">Intervalo de registro</string>
 	<string name="save_track_interval">Intervalo de registro durante a navegação</string>
@@ -452,7 +452,7 @@
     <string name="osmo_show_group_notifications_descr">Mostrar mensagens quando usuário entra ou sai do grupo</string>
     <string name="osmo_follow">Seguir</string>
     <string name="osmo_sign_in">Entrar</string>
-    <string name="osmo_create_groups_confirm">Para poder criar grupos é preciso ser um usuário registado do OsMo.</string>
+    <string name="osmo_create_groups_confirm">Para poder criar grupos é preciso ser um usuário registrado do OsMo.</string>
     <string name="osmo_regenerate_login_ids_confirm">Tem certeza que quer restaurar os identificadores pessoais? Todos os aparelhos conectados a você não serão capazes de continuar a segui-lo.</string>
     <string name="osmo_regenerate_login_ids">Restaurar identificador do usuário</string>
     <string name="osmo_cancel_moving_target">Cancelar destino móvel</string>
@@ -501,7 +501,7 @@
     <string name="seconds_ago">segundos atrás</string>
     <string name="osmo_connected_devices">Aparelhos conectados</string>
     <string name="osmo_groups">Grupos OsMo</string>
-    <string name="osmo_auto_send_locations_descr">Iniciar automaticamente a sessão de rastreio e envie posição após o início do aplicativo</string>
+    <string name="osmo_auto_send_locations_descr">Iniciar automaticamente a viagem e enviar posições após o início do aplicativo</string>
     <string name="osmo_auto_send_locations">Iniciar automaticamente a sessão de rastreio</string>
     <string name="osmo_tracker_id">Identificador de rastreio</string>
     <string name="osmo_tracker_id_descr">Toque para ver ou compartilhar id de rastreio. Ao usar id de rastreio, aparelhos conectados poderão ver todos os movimentos deste aparelho! Para desconectar-se selecione a opção restaurar.</string>
@@ -706,7 +706,7 @@ Pôr do Sol: %2$s</string>
     <string name="distance_measurement_clear_route">Apagar todos os pontos</string>
     <string name="distance_measurement_load_gpx">Abrir GPX</string>
     <string name="wait_current_task_finished">Aguarde até que a tarefa seja concluída</string>
-    <string name="use_kalman_filter_compass_descr">Reduzir o ruído em leituras da bússola, mas acrescenta a inércia</string>
+    <string name="use_kalman_filter_compass_descr">Reduz o ruído em leituras da bússola, mas acrescenta inércia</string>
     <string name="use_kalman_filter_compass">Usar filtro de Kalman</string>
     <string name="use_magnetic_sensor_descr">Usar o sensor magnético para determinar a direção da bússola em vez do sensor de orientação</string>
     <string name="use_magnetic_sensor">Usar sensor magnético</string>
@@ -883,7 +883,7 @@ Pôr do Sol: %2$s</string>
 	<string name="front">em frente</string>
 	<string name="oclock">em ponto</string>
 	<string name="direction_style_sidewise">Lateralmente (8 setores)</string>
-	<string name="auto_announce_on">Iniciar anúncio automaticamente</string>
+	<string name="auto_announce_on">Iniciar anúncio automático</string>
 	<string name="auto_announce_off">Parar anúncios automáticos</string>
 	<string name="local_openstreetmap_upload">Enviar modificação para OSM</string>
 	<string name="local_openstreetmap_delete">Apagar modificação</string>
@@ -1184,7 +1184,7 @@ Pôr do Sol: %2$s</string>
 	<string name="first_time_download">Baixar regiões</string>
 	<string name="map_screen_orientation">Orientação do mapa</string>
 	<string name="transport_finish_search">Finalizar pesquisa</string>
-	<string name="map_screen_orientation_descr">Vertical, horizontal ou mesma do aparelho</string>
+	<string name="map_screen_orientation_descr">Vertical, horizontal ou a mesma do aparelho</string>
 	<string name="opening_hours_not_supported">O formato do horário de funcionamento não é suportado para edição</string>
 	<string name="add_new_rule">Adicionar nova regra</string>
 	<string name="transport_Routes">Rotas</string>
@@ -1683,7 +1683,7 @@ Pôr do Sol: %2$s</string>
     <string name="local_recordings_delete_all_confirm">Você vai apagar %1$d notas. Tem certeza?</string>
 	<string name="disable_recording_once_app_killed">Impedir o registro autônomo</string>
     <string name="gps_network_not_enabled">Serviço de posição está desativado. Você quer ativá-lo?</string>
-    <string name="disable_recording_once_app_killed_descrp">"Pausará o registro de GPX após o encerramento do app  (via apps recentes). (Indicação de OsmAnd em segundo plano desaparecerá da barra de notificação do Android.)"</string>
+    <string name="disable_recording_once_app_killed_descrp">Pausará o registro de GPX após o encerramento do app (via apps recentes). (Indicação de OsmAnd em segundo plano desaparecerá da barra de notificação do Android.)</string>
 	<string name="archive_wikipedia_data">Você tem dados baixados da Wikipédia antigos e incompatíveis. Quer arquivá-los?</string>
     <string name="download_wikipedia_files">Você quer baixar dados adicionais da wikipédia (%1$s MB)?</string>
     <string name="lang_vo">Volapuque</string>
@@ -1961,7 +1961,7 @@ Pôr do Sol: %2$s</string>
     <string name="last_update">Última atualização: %s</string>
 
     <string name="update_time">Tempo de atualização</string>
-<string name="updates_size">Atualizações: %s</string>
+<string name="updates_size">Tamanho da atualização</string>
 <string name="rec_split">Dividir gravação</string>
     <string name="rec_split_title">Usar o separador de gravação</string>
     <string name="rec_split_desc">Sobrescrever clipes quando o espaço usado exceder o limite de armazenamento</string>
@@ -2042,7 +2042,7 @@ Pôr do Sol: %2$s</string>
     <string name="new_filter">Novo filtro</string>
     <string name="new_filter_desc">Por favor, informe um nome para o novo filtro. Você irá encontrá-lo na lista de Categorias.</string>
     <string name="donation_to_osm">Doação para a comunidade OpenStreetMap</string>
-    <string name="osmand_plus_banner_desc">Versão completa do OsmAnd com download ilimitado de mapas e atualizações mensais de mapas.</string>
+    <string name="osmand_plus_banner_desc">Download ilimitado de mapas, atualizações e plugin para Wikipedia.</string>
     <string name="si_mi_meters">Milhas/metros</string>
     <string name="skip_map_downloading">Pular download de mapas</string>
     <string name="skip_map_downloading_desc">Você não possui mapas offlines. Você deve escolher um mapa da lista ou baixar mapas mais tarde pelo Menu - %1$s.</string>
@@ -2076,7 +2076,7 @@ Pôr do Sol: %2$s</string>
     <string name="city_type_neighbourhood">Vizinhança</string>
     <string name="map_widget_search">Procurar</string>
 	<string name="storage_directory_card">Cartão de memória</string>
-    <string name="coords_format">Formado de coordenada</string>
+    <string name="coords_format">Formato de coordenada</string>
     <string name="app_mode_bus">Ônibus</string>
  	<string name="app_mode_train">Trem</string>
     <string name="change_markers_position">Mudar posição do marcador</string>
@@ -2256,4 +2256,12 @@ Pôr do Sol: %2$s</string>
     <string name="quick_action_add_destination">Adicionar destino</string>
     <string name="quick_action_replace_destination">Substituir destino</string>
     <string name="quick_action_add_first_intermediate">Adicione o primeiro intermediário</string>
+    <string name="show_map">Exibir mapa</string>
+    <string name="route_is_calculated">Rota calculada</string>
+    <string name="do_not_show_startup_messages">Não exibir mensagens ao iniciar</string>
+    <string name="do_not_show_startup_messages_desc">Suprime a exibição de descontos do aplicativo e mensagens de eventos locais especiais</string>
+    <string name="shared_string_record">Registro</string>
+    <string name="save_track_min_speed">Velocidade mínima para registro</string>
+    <string name="save_track_precision">Acuidade mínima para registro</string>
+    <string name="coords_format_descr">Formato para as coordenadas geográficas</string>
     </resources>
