@@ -200,7 +200,7 @@ public class MapMarkersWidgetsFactory {
 				|| MapRouteInfoMenu.isVisible()
 				|| addressTopBar.getVisibility() == View.VISIBLE
 				|| map.isTopToolbarActive()
-				|| !map.getContextMenu().shouldShowControls()
+				|| !map.getContextMenu().shouldShowTopControls()
 				|| map.getMapLayers().getMapMarkersLayer().isInPlanRouteMode()) {
 			updateVisibility(false);
 			return;

@@ -1,11 +1,9 @@
 package net.osmand.plus.views.mapwidgets;
 
 import android.content.Context;
-import android.content.DialogInterface;
 import android.support.annotation.DrawableRes;
 import android.support.annotation.NonNull;
 import android.support.annotation.StringRes;
-import android.support.v7.app.AlertDialog;
 import android.view.Menu;
 import android.view.MenuInflater;
 import android.view.MenuItem;
@@ -19,16 +17,15 @@ import net.osmand.plus.ContextMenuItem;
 import net.osmand.plus.IconsCache;
 import net.osmand.plus.OsmandApplication;
 import net.osmand.plus.OsmandSettings;
-import net.osmand.plus.OsmandSettings.MapMarkersMode;
 import net.osmand.plus.OsmandSettings.OsmandPreference;
 import net.osmand.plus.R;
 import net.osmand.plus.activities.MapActivity;
 import net.osmand.plus.dialogs.ConfigureMapMenu;
+import net.osmand.plus.mapmarkers.ShowDirectionBottomSheetDialogFragment;
 import net.osmand.plus.quickaction.QuickActionListFragment;
 import net.osmand.plus.views.MapInfoLayer;
 import net.osmand.plus.views.MapQuickActionLayer;
 import net.osmand.plus.views.OsmandMapLayer.DrawSettings;
-import net.osmand.plus.views.OsmandMapTileView;
 import net.osmand.plus.widgets.IconPopupMenu;
 
 import java.util.Collections;
@@ -329,27 +326,17 @@ public class MapWidgetRegistry {
 					.setDescription(settings.MAP_MARKERS_MODE.get().toHumanString(map))
 					.setListener(new ContextMenuAdapter.ItemClickListener() {
 						@Override
-						public boolean onContextMenuClick(final ArrayAdapter<ContextMenuItem> ad,
-														  int itemId, final int pos, boolean isChecked) {
-							final OsmandMapTileView view = map.getMapView();
-							AlertDialog.Builder bld = new AlertDialog.Builder(view.getContext());
-							bld.setTitle(R.string.map_markers);
-							final String[] items = new String[MapMarkersMode.values().length];
-							for (int i = 0; i < items.length; i++) {
-								items[i] = MapMarkersMode.values()[i].toHumanString(map);
-							}
-							int i = settings.MAP_MARKERS_MODE.get().ordinal();
-							bld.setSingleChoiceItems(items, i, new DialogInterface.OnClickListener() {
+						public boolean onContextMenuClick(final ArrayAdapter<ContextMenuItem> adapter, int itemId, final int position, boolean isChecked) {
+							ShowDirectionBottomSheetDialogFragment fragment = new ShowDirectionBottomSheetDialogFragment();
+							fragment.setListener(new ShowDirectionBottomSheetDialogFragment.ShowDirectionFragmentListener() {
 								@Override
-								public void onClick(DialogInterface dialog, int which) {
-									settings.MAP_MARKERS_MODE.set(MapMarkersMode.values()[which]);
+								public void onMapMarkersModeChanged(boolean showDirectionEnabled) {
 									updateMapMarkersMode(map);
-									dialog.dismiss();
-									cm.getItem(pos).setDescription(settings.MAP_MARKERS_MODE.get().toHumanString(map));
-									ad.notifyDataSetChanged();
+									cm.getItem(position).setDescription(settings.MAP_MARKERS_MODE.get().toHumanString(map));
+									adapter.notifyDataSetChanged();
 								}
 							});
-							bld.show();
+							fragment.show(map.getSupportFragmentManager(), ShowDirectionBottomSheetDialogFragment.TAG);
 							return false;
 						}
 					}).setLayout(R.layout.list_item_text_button).createItem());

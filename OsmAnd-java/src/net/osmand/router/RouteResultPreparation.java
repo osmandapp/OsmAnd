@@ -1429,16 +1429,16 @@ public class RouteResultPreparation {
 				}
 			}
 		}
-		// remove all non-slight turns
-		if(possibleTurns.size() > 1) {
-			TIntIterator it = possibleTurns.iterator();
-			while(it.hasNext()) {
-				int nxt = it.next();
-				if(!TurnType.isSlightTurn(nxt)) {
-					it.remove();
-				}
-			}
-		}
+		// remove all non-slight turns // TEST don't pass 
+//		if(possibleTurns.size() > 1) {
+//			TIntIterator it = possibleTurns.iterator();
+//			while(it.hasNext()) {
+//				int nxt = it.next();
+//				if(!TurnType.isSlightTurn(nxt)) {
+//					it.remove();
+//				}
+//			}
+//		}
 		int infer = 0;
 		if (possibleTurns.size() == 1) {
 			infer = possibleTurns.iterator().next();

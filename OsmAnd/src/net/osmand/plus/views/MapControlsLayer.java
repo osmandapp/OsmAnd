@@ -48,6 +48,7 @@ import net.osmand.plus.dialogs.DirectionsDialogs;
 import net.osmand.plus.mapcontextmenu.MapContextMenu;
 import net.osmand.plus.mapcontextmenu.other.MapRouteInfoMenu;
 import net.osmand.plus.mapcontextmenu.other.TrackDetailsMenu;
+import net.osmand.plus.measurementtool.MeasurementToolFragment;
 import net.osmand.plus.routing.RoutingHelper;
 import net.osmand.plus.views.corenative.NativeCoreContext;
 
@@ -628,12 +629,14 @@ public class MapControlsLayer extends OsmandMapLayer {
 		zoomInButton.setOnClickListener(new View.OnClickListener() {
 			@Override
 			public void onClick(View v) {
+				if (mapActivity.getContextMenu().zoomInPressed()) {
+					return;
+				}
 				if (view.isZooming()) {
 					mapActivity.changeZoom(2, System.currentTimeMillis());
 				} else {
 					mapActivity.changeZoom(1, System.currentTimeMillis());
 				}
-
 			}
 		});
 		final View.OnLongClickListener listener = MapControlsLayer.getOnClickMagnifierListener(view);
@@ -645,10 +648,42 @@ public class MapControlsLayer extends OsmandMapLayer {
 		zoomOutButton.setOnClickListener(new View.OnClickListener() {
 			@Override
 			public void onClick(View v) {
+				if (mapActivity.getContextMenu().zoomOutPressed()) {
+					return;
+				}
 				mapActivity.changeZoom(-1, System.currentTimeMillis());
 			}
 		});
 		zoomOutButton.setOnLongClickListener(listener);
+	}
+
+	public void showMapControls() {
+		mapActivity.findViewById(R.id.MapHudButtonsOverlay).setVisibility(View.VISIBLE);
+	}
+	public void hideMapControls() {
+		mapActivity.findViewById(R.id.MapHudButtonsOverlay).setVisibility(View.INVISIBLE);
+	}
+
+	public void setMapControlsVisibility(boolean visible) {
+		View mapHudButtonsOverlay = mapActivity.findViewById(R.id.MapHudButtonsOverlay);
+		mapHudButtonsOverlay.setVisibility(visible ? View.VISIBLE : View.INVISIBLE);
+	}
+
+	public boolean isMapControlsVisible() {
+		return mapActivity.findViewById(R.id.MapHudButtonsOverlay).getVisibility() == View.VISIBLE;
+	}
+
+	public void switchMapControlsVisibility() {
+		if (app.getRoutingHelper().isFollowingMode() || app.getRoutingHelper().isPauseNavigation()
+				|| mapActivity.getMeasurementToolFragment() != null
+				|| mapActivity.getPlanRouteFragment() != null) {
+			return;
+		}
+		if (isMapControlsVisible()) {
+			hideMapControls();
+		} else {
+			showMapControls();
+		}
 	}
 
 	public void startNavigation() {
@@ -708,7 +743,7 @@ public class MapControlsLayer extends OsmandMapLayer {
 		boolean routeFollowingMode = !routePlanningMode && rh.isFollowingMode();
 		boolean routeDialogOpened = MapRouteInfoMenu.isVisible();
 		boolean trackDialogOpened = TrackDetailsMenu.isVisible();
-		boolean contextMenuOpened = mapActivity.getContextMenu().shouldShowControls();
+		boolean contextMenuOpened = mapActivity.getContextMenu().shouldShowTopControls();
 		boolean showRouteCalculationControls = routePlanningMode ||
 				((app.accessibilityEnabled() || (System.currentTimeMillis() - touchEvent < TIMEOUT_TO_SHOW_BUTTONS)) && routeFollowingMode);
 		updateMyLocation(rh, routeDialogOpened || trackDialogOpened || !contextMenuOpened);
@@ -790,8 +825,8 @@ public class MapControlsLayer extends OsmandMapLayer {
 	private boolean shouldShowCompass() {
 		float mapRotate = mapActivity.getMapView().getRotate();
 		return forceShowCompass || mapRotate != 0
-					|| settings.ROTATE_MAP.get() != OsmandSettings.ROTATE_MAP_NONE
-					|| mapActivity.getMapLayers().getMapInfoLayer().getMapInfoControls().isVisible("compass");
+				|| settings.ROTATE_MAP.get() != OsmandSettings.ROTATE_MAP_NONE
+				|| mapActivity.getMapLayers().getMapInfoLayer().getMapInfoControls().isVisible("compass");
 	}
 
 	public CompassDrawable getCompassDrawable(Drawable originalDrawable) {
@@ -1122,8 +1157,8 @@ public class MapControlsLayer extends OsmandMapLayer {
 		this.mapQuickActionLayer = mapQuickActionLayer;
 	}
 
-	private boolean isInMovingMarkerMode(){
-		return mapQuickActionLayer == null ? contextMenuLayer.isInChangeMarkerPositionMode() || contextMenuLayer.isInAddGpxPointMode():
+	private boolean isInMovingMarkerMode() {
+		return mapQuickActionLayer == null ? contextMenuLayer.isInChangeMarkerPositionMode() || contextMenuLayer.isInAddGpxPointMode() :
 				mapQuickActionLayer.isInMovingMarkerMode() || contextMenuLayer.isInChangeMarkerPositionMode() || contextMenuLayer.isInAddGpxPointMode();
 	}
 

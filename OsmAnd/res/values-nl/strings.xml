@@ -2946,7 +2946,7 @@ We slaan geen locatiegegevens, zoektermen of andere gebruikersgegevens op.</stri
 \n
 \n• Afstandmeter kan vastklikken aan wegen en als track opslaan
 \n
-\n• OmsAnd Live: bugfixes, data op de server elke 30 minuten ververst, en updates van de navigatie
+\n• OsmAnd Live: bugfixes, data op de server elke 15 minuten ververst, en updates van de navigatie
 \n
 \n</string>
     <string name="rendering_value_darkyellow_name">Donkergeel</string>

@@ -458,6 +458,12 @@ public class MeasurementToolFragment extends Fragment {
 	}
 
 	@Override
+	public void onResume() {
+		super.onResume();
+		getMapActivity().getMapLayers().getMapControlsLayer().showMapControls();
+	}
+
+	@Override
 	public void onDestroyView() {
 		super.onDestroyView();
 		cancelModes();
@@ -665,7 +671,7 @@ public class MeasurementToolFragment extends Fragment {
 		return new SaveAsNewTrackFragmentListener() {
 			@Override
 			public void saveAsRoutePointOnClick() {
-				saveAsGpx(SaveType.ROUTE_POINT);
+				saveAsGpx(editingCtx.isInSnapToRoadMode() ? SaveType.SNAP_TO_ROAD : SaveType.ROUTE_POINT);
 			}
 
 			@Override
