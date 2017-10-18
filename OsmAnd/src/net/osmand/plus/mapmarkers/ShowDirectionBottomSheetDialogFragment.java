@@ -282,6 +282,10 @@ public class ShowDirectionBottomSheetDialogFragment extends BottomSheetDialogFra
 					showDirectionEnabled = false;
 					break;
 			}
+			MapActivity mapActivity = getMapActivity();
+			if (mapActivity != null) {
+				mapActivity.refreshMap();
+			}
 			if (listener != null) {
 				listener.onMapMarkersModeChanged(showDirectionEnabled);
 			}
@@ -289,7 +293,7 @@ public class ShowDirectionBottomSheetDialogFragment extends BottomSheetDialogFra
 		}
 	};
 
-	interface ShowDirectionFragmentListener {
+	public interface ShowDirectionFragmentListener {
 		void onMapMarkersModeChanged(boolean showDirectionEnabled);
 	}
 }
