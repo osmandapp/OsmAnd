@@ -2732,7 +2732,7 @@ Pro praghere iscrie su còdighe intreu</string>
     <string name="save_gpx_waypoint">Sarva puntu de coladòrgiu GPX</string>
     <string name="save_route_point">Sarva puntu de s\'àndala</string>
     <string name="waypoint_one">Puntu de coladòrgiu 1</string>
-    <string name="route_point_one">Puntu de s\'àndala 1</string>
+    <string name="route_point_one">Puntu 1 de s\'àndala</string>
 <string name="measurement_tool_altitude">Artària: %1$s</string>
     <string name="measurement_tool_speed">Lestresa: %1$s</string>
     <string name="line">Lìnia</string>
@@ -2827,4 +2827,5 @@ Pro praghere iscrie su còdighe intreu</string>
 \n
 \n</string>
     <string name="rendering_value_darkyellow_name">Grogu iscuru</string>
+    <string name="wrong_format">Formatu isballiadu</string>
     </resources>
