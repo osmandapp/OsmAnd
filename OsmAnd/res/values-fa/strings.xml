@@ -853,8 +853,8 @@
 	<string name="indexing_poi">در حال نمایه‌کردن POI…</string>
 	<string name="indexing_transport">در حال نمایه‌کردن حمل‌ونقل…</string>
 	<string name="shared_string_io_error">خطای ورودی/خروجی رخ داد</string>
-	<string name="km">km</string>
-	<string name="m">m</string>
+	<string name="km">ک‌م</string>
+	<string name="m">متر</string>
 	<string name="map_tile_source">منبع نقشهٔ کاشی‌مانند</string>
 	<string name="mark_point">هدف</string>
 	
@@ -2366,7 +2366,7 @@
     <string name="shared_string_wikipedia">ویکیپدیا</string>
     <string name="local_recordings_delete_all_confirm">دارید %1$d یادداشت را پاک می‌کنید. آیا مطمئن هستید؟</string>
     <string name="osmand_parking_hour">س</string>
-    <string name="osmand_parking_minute">د</string>
+    <string name="osmand_parking_minute">دق‍</string>
     <string name="shared_string_collapse">جمع‌شونده</string>
     <string name="rendering_attr_roadStyle_description">ظاهر جاده</string>
     <string name="navigate_point_olc">کدِ مکانی باز (OLC)</string>
