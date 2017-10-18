@@ -1661,7 +1661,7 @@
 	<string name="poi_service_bicycle_pump_no">Pompa biciclette: no</string>
 	<string name="poi_service_bicycle_cleaning_yes">Pulizia</string>
 	<string name="poi_service_bicycle_cleaning_no">Pulizia biciclette: no</string>
-	<string name="poi_service_bicycle_charging_yes">Ricarica bmiciclette: Sì</string>
+	<string name="poi_service_bicycle_charging_yes">Ricarica biciclette: Sì</string>
 	<string name="poi_service_bicycle_charging_no">Ricarica biciclette: no</string>
 	<string name="poi_wildlife_hide">Posto per osservare la fauna selvatica</string>
 
@@ -2398,4 +2398,28 @@
 	<string name="poi_storage_tank">Serbatoio</string>
 
 	<string name="poi_training">Centro di formazione</string>
+	<string name="poi_boat_rental_type">Barche a noleggio</string>
+
+<string name="poi_aeroway_fuel">Stazione rifornimento aerei</string>
+	<string name="poi_recycling_diapers">Pannolini</string>
+	<string name="poi_piste_ice_skate">Pista pattinaggio sul ghiaccio</string>
+	<string name="poi_craft_computer">Riparatore di computer</string>
+	<string name="poi_piste_grooming_skating">Pattinaggio</string>
+	<string name="poi_aerialway_duration">Tempo medio di arrivo, minuti</string>
+	<string name="poi_payment_laser_no">Carte Laser non accettate</string>
+	<string name="poi_payment_v_pay_no">Carte V PAY non accettate</string>
+	<string name="poi_delivery_yes">Consegna</string>
+	<string name="poi_delivery_no">No consegna</string>
+	<string name="poi_delivery_only">Solo consegna</string>
+
+	<string name="poi_outdoor_seating_patio">Posti a sedere all\'aperto: patio</string>
+
+	<string name="poi_second_hand_yes">Usato</string>
+	<string name="poi_second_hand_no">Non usato</string>
+	<string name="poi_second_hand_only">Solo usato</string>
+
+	<string name="poi_diaper_yes">Tavolo cambio pannolino</string>
+	<string name="poi_diaper_no">Tavolo cambio pannolino non presente</string>
+	<string name="poi_diaper_room">Locale cambio pannolino</string>
+
 	</resources>
