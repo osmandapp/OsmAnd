@@ -2170,10 +2170,10 @@ Lon %2$s</string>
     <string name="osm_live_thanks">Gràtzias pro s\'abbonamentu tuo a sos agiornamentos in tempus reale!</string>
     <string name="osm_live_region_desc">Parte de sa donatzione tua at a èssere imbiada a impitadores chi faghent modìficas in cussa regione</string>
     <string name="osm_live_subscription_settings">Impostatziones de s’abbonamentu</string>
-    <string name="osm_live_ask_for_purchase">Pro praghere in antis còmpora s’abbonamentu OSM Live</string>
+    <string name="osm_live_ask_for_purchase">Pro praghere in antis còmpora s’abbonamentu OsmAnd Live</string>
 
     <string name="osm_editors_ranking">Classìfica Editores OSM</string>
-    <string name="osm_live_subscription">abbonamentu OSM LIve</string>
+    <string name="osm_live_subscription">Abbonamentu OsmAnd LIve</string>
     <string name="osm_live_email_desc">Nde tenimus bisòngiu pro ti imbiare informatziones a pitzu de sas contributziones</string>
     <string name="osm_live_support_region">Regione de suportu</string>
     <string name="osm_live_header">Custu abbonamentu abilitat agiornamentos ora pro ora pro totu sas mapas de su mundu.
@@ -2241,8 +2241,8 @@ Si istimas OsmAnd e OSM e los boles suportare, custa est una manera perfeta pro 
     <string name="access_shared_string_navigate_up">Nàviga in subra</string>
     <string name="access_sort">Òrdina</string>
     <string name="follow_us">Sighi·nos</string>
-    <string name="use_osm_live_routing_description">Allue su nàvigu OSM Live cun sas mòdìficas in tempus reale (Beta)</string>
-	<string name="use_osm_live_routing">Nàvigu OSM Live</string>
+    <string name="use_osm_live_routing_description">Allughe su nàvigu OsmAnd Live cun sas mòdìficas in tempus reale</string>
+	<string name="use_osm_live_routing">Nàvigu OsmAnd Live</string>
     <string name="access_no_destination">Destinatzione non definida</string>
     <string name="map_widget_magnetic_bearing">Bùssola magnètica</string>
     <string name="map_widget_bearing">Bùssola relativa</string>
@@ -2783,12 +2783,12 @@ Pro praghere iscrie su còdighe intreu</string>
     <string name="date_added">Data annanta</string>
     <string name="order_by">Òrdina pro:</string>
     <string name="marker_show_distance_descr">Issèbera comente indicare sa distàntzia e sa diretzione a sos marcadores in sa mapa:</string>
-    <string name="passed">Ùrtimu impreu: %1$s</string>
+    <string name="passed">Colados: %1$s</string>
     <string name="make_active">Ativa</string>
     <string name="show_guide_line">Ammustra sa lìnia de ghia</string>
     <string name="show_arrows_on_the_map">Ammustra sas fritzas in sa mapa</string>
-    <string name="show_passed">Ammustra sa data de ùrtimu impreu</string>
-    <string name="hide_passed">Istichi sa data de ùrtimu impreu</string>
+    <string name="show_passed">Ammustra sos colados</string>
+    <string name="hide_passed">Istichi sos colados</string>
     <string name="shared_string_markers">Marcadores</string>
     <string name="coordinates_format">Formadu de sas coordinatas</string>
     <string name="use_system_keyboard">Imprea su tecladu de sistema</string>
@@ -2814,4 +2814,17 @@ Pro praghere iscrie su còdighe intreu</string>
     <string name="make_round_trip_descr">Annanghe una còpia de su puntu de incumintzu comente destinatzione.</string>
     <string name="make_round_trip">Faghe unu biàgiu tzirculare</string>
     <string name="shared_string_navigate">Nàviga</string>
+    <string name="shared_string_road">Istrada</string>
+    <string name="show_map">Ammustra sa mapa</string>
+    <string name="route_is_calculated">Àndala torrada a calculare</string>
+    <string name="round_trip">Àndala tzirculare</string>
+    <string name="plan_route_no_markers_toast">Depes annànghere a su mancu unu marcadore pro impreare custa funtzionalidade.</string>
+    <string name="release_2_8">\\022 Marcadores de mapa noos cun lìnias de ghia e càlculu de s\'àndala
+\n
+\n • Aina pro sa medidura de sas distàntzias chi permitit de ischertare puntos particulares de sa mapa e de sarvare puntos comente una rasta
+\n
+\n • OsmAnd Live: curretzione de errores, agiornamentu de sos datos in su server cada 30 minutos, agiornamentos impostados in su mentres de su nàvigu
+\n
+\n</string>
+    <string name="rendering_value_darkyellow_name">Grogu iscuru</string>
     </resources>
