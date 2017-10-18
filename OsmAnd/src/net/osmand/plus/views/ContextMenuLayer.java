@@ -809,8 +809,11 @@ public class ContextMenuLayer extends OsmandMapLayer {
 			}
 		}
 
-		hideVisibleMenues();
-		menu.onSingleTapOnMap();
+		boolean processed = hideVisibleMenues();
+		processed |= menu.onSingleTapOnMap();
+		if (!processed) {
+			activity.getMapLayers().getMapControlsLayer().switchMapControlsVisibility();
+		}
 		return false;
 	}
 
@@ -854,10 +857,12 @@ public class ContextMenuLayer extends OsmandMapLayer {
 		return res;
 	}
 
-	private void hideVisibleMenues() {
+	private boolean hideVisibleMenues() {
 		if (multiSelectionMenu.isVisible()) {
 			multiSelectionMenu.hide();
+			return true;
 		}
+		return false;
 	}
 
 	private void showContextMenuForSelectedObjects(final LatLon latLon, final Map<Object, IContextMenuProvider> selectedObjects) {

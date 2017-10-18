@@ -458,6 +458,12 @@ public class MeasurementToolFragment extends Fragment {
 	}
 
 	@Override
+	public void onResume() {
+		super.onResume();
+		getMapActivity().getMapLayers().getMapControlsLayer().showMapControls();
+	}
+
+	@Override
 	public void onDestroyView() {
 		super.onDestroyView();
 		cancelModes();

@@ -55,6 +55,7 @@ public class MapRouteInfoMenuFragment extends Fragment {
 		if (menu == null) {
 			dismiss();
 		}
+		getMapActivity().getMapLayers().getMapControlsLayer().showMapControls();
 	}
 
 	@Override
