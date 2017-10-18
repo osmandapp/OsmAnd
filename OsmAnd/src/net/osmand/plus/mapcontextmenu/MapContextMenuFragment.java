@@ -853,6 +853,7 @@ public class MapContextMenuFragment extends Fragment implements DownloadEvents {
 			((View) parent).addOnLayoutChangeListener(containerLayoutListener);
 		}
 		menu.updateControlsVisibility(true);
+		getMapActivity().getMapLayers().getMapControlsLayer().showMapControls();
 	}
 
 	@Override

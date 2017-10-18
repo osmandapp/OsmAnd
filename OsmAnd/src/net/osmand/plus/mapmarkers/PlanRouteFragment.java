@@ -365,6 +365,7 @@ public class PlanRouteFragment extends Fragment implements OsmAndLocationListene
 		if (mapActivity != null) {
 			mapActivity.getMyApplication().getLocationProvider().addLocationListener(this);
 		}
+		getMapActivity().getMapLayers().getMapControlsLayer().showMapControls();
 	}
 
 	@Override

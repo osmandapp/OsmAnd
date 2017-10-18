@@ -48,6 +48,7 @@ import net.osmand.plus.dialogs.DirectionsDialogs;
 import net.osmand.plus.mapcontextmenu.MapContextMenu;
 import net.osmand.plus.mapcontextmenu.other.MapRouteInfoMenu;
 import net.osmand.plus.mapcontextmenu.other.TrackDetailsMenu;
+import net.osmand.plus.measurementtool.MeasurementToolFragment;
 import net.osmand.plus.routing.RoutingHelper;
 import net.osmand.plus.views.corenative.NativeCoreContext;
 
@@ -654,6 +655,35 @@ public class MapControlsLayer extends OsmandMapLayer {
 			}
 		});
 		zoomOutButton.setOnLongClickListener(listener);
+	}
+
+	public void showMapControls() {
+		mapActivity.findViewById(R.id.MapHudButtonsOverlay).setVisibility(View.VISIBLE);
+	}
+	public void hideMapControls() {
+		mapActivity.findViewById(R.id.MapHudButtonsOverlay).setVisibility(View.INVISIBLE);
+	}
+
+	public void setMapControlsVisibility(boolean visible) {
+		View mapHudButtonsOverlay = mapActivity.findViewById(R.id.MapHudButtonsOverlay);
+		mapHudButtonsOverlay.setVisibility(visible ? View.VISIBLE : View.INVISIBLE);
+	}
+
+	public boolean isMapControlsVisible() {
+		return mapActivity.findViewById(R.id.MapHudButtonsOverlay).getVisibility() == View.VISIBLE;
+	}
+
+	public void switchMapControlsVisibility() {
+		if (app.getRoutingHelper().isFollowingMode() || app.getRoutingHelper().isPauseNavigation()
+				|| mapActivity.getMeasurementToolFragment() != null
+				|| mapActivity.getPlanRouteFragment() != null) {
+			return;
+		}
+		if (isMapControlsVisible()) {
+			hideMapControls();
+		} else {
+			showMapControls();
+		}
 	}
 
 	public void startNavigation() {

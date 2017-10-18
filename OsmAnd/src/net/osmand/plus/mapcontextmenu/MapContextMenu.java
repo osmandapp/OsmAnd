@@ -413,7 +413,8 @@ public class MapContextMenu extends MenuTitleController implements StateChangedL
 		init(latLon, pointDescription, object);
 	}
 
-	public void close() {
+	public boolean close() {
+		boolean result = false;
 		if (active) {
 			active = false;
 			if (object instanceof MapMarker) {
@@ -428,15 +429,17 @@ public class MapContextMenu extends MenuTitleController implements StateChangedL
 			if (this.object != null) {
 				clearSelectedObject(this.object);
 			}
-			hide();
+			result = hide();
 			if (menuController != null) {
 				menuController.setActive(false);
 			}
 			mapActivity.refreshMap();
 		}
+		return result;
 	}
 
-	public void hide() {
+	public boolean hide() {
+		boolean result = false;
 		if (mapPosition != 0) {
 			mapActivity.getMapView().setMapPosition(mapPosition);
 			mapPosition = 0;
@@ -447,7 +450,9 @@ public class MapContextMenu extends MenuTitleController implements StateChangedL
 		WeakReference<MapContextMenuFragment> fragmentRef = findMenuFragment();
 		if (fragmentRef != null) {
 			fragmentRef.get().dismissMenu();
+			result = true;
 		}
+		return result;
 	}
 
 	public void updateControlsVisibility(boolean menuVisible) {
@@ -642,18 +647,20 @@ public class MapContextMenu extends MenuTitleController implements StateChangedL
 		}
 	}
 
-	public void onSingleTapOnMap() {
+	public boolean onSingleTapOnMap() {
+		boolean result = false;
 		if (menuController == null || !menuController.handleSingleTapOnMap()) {
 			if (menuController != null && !menuController.isClosable()) {
-				hide();
+				result = hide();
 			} else {
 				updateMapCenter(null);
-				close();
+				result = close();
 			}
 			if (mapActivity.getMapLayers().getMapQuickActionLayer().isLayerOn()) {
 				mapActivity.getMapLayers().getMapQuickActionLayer().refreshLayer();
 			}
 		}
+		return result;
 	}
 
 	@Override
