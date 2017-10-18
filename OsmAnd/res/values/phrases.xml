@@ -92,6 +92,7 @@
 	<string name="poi_animal_shelter_type">Animals accepted</string>
 	<string name="poi_animal_shelter_purpose">Purpose</string>
 	<string name="poi_boat_rental_type">Rented boats</string>
+	<string name="poi_operational_status">Operational status</string>
 
 <!--  categories -->
 	<string name="poi_shop">Store</string>
@@ -3512,5 +3513,11 @@
 	<string name="poi_visibility_house">Visibility: house</string>
 	<string name="poi_visibility_street">Visibility: street</string>
 	<string name="poi_visibility_area">Visibility: area</string>
+
+	<string name="poi_operational_status_open">Open</string>
+	<string name="poi_operational_status_closed">Closed</string>
+	<string name="poi_operational_status_restricted">Restricted</string>
+	<string name="poi_operational_status_broken">Broken</string>
+	<string name="poi_operational_status_needs_maintenance">Needs maintenance</string>
 
 </resources>

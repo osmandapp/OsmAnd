@@ -3526,4 +3526,11 @@
 	<string name="poi_visibility_street">Видимость: улица</string>
 	<string name="poi_visibility_area">Видимость: площадь</string>
 
+	<string name="poi_operational_status">Рабочее состояние</string>
+	<string name="poi_operational_status_open">Открыто</string>
+	<string name="poi_operational_status_closed">Закрыто</string>
+	<string name="poi_operational_status_restricted">Ограничено</string>
+	<string name="poi_operational_status_broken">Сломано</string>
+	<string name="poi_operational_status_needs_maintenance">Требуется обслуживание</string>
+
 </resources>
