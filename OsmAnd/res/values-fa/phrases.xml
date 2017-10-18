@@ -677,4 +677,26 @@
 	<string name="poi_parking_type">نوع</string>
 	<string name="poi_covered">سرپوشیده</string>
 	<string name="poi_bicycle_parking_type">نوع</string>
+	<string name="poi_service_car">خدمات خودرو</string>
+	<string name="poi_brushless">بدون فرچه</string>
+	<string name="poi_self_service">سلف‌سرویس</string>
+	<string name="poi_subway_station_filter">ایستگاه مترو</string>
+	<string name="poi_ferry_terminal_cargo">باری</string>
+	<string name="poi_telescope_type">نوع</string>
+	<string name="poi_animal_training_type">نوع</string>
+	<string name="poi_embassy_type">نوع</string>
+	<string name="poi_city_capital">پایتخت</string>
+	<string name="poi_healthcare_alternative_types">تخصص</string>
+	<string name="poi_free_flying_characteristics">مشخصات</string>
+	<string name="poi_archaeological_site_type">نوع</string>
+	<string name="poi_religion_type">دین</string>
+	<string name="poi_denomination">مذهب</string>
+	<string name="poi_information_type">نوع</string>
+	<string name="poi_information_contents">محتوا</string>
+	<string name="poi_resort_type">نوع</string>
+	<string name="poi_piste_difficulty">دشواری پیست</string>
+	<string name="poi_theatre_genre">ژانر</string>
+	<string name="poi_fee">بها</string>
+	<string name="poi_recycling_type">نوع</string>
+	<string name="poi_shelter_type">نوع</string>
 	</resources>
