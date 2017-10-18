@@ -353,6 +353,10 @@ public abstract class MenuController extends BaseMenuController {
 		return true;
 	}
 
+	public boolean zoomButtonsVisible() {
+		return !isLandscapeLayout();
+	}
+
 	public boolean buttonsVisible() {
 		return true;
 	}

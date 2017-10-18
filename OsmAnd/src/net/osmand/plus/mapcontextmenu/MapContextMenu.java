@@ -368,7 +368,6 @@ public class MapContextMenu extends MenuTitleController implements StateChangedL
 				fragmentRef.get().centerMarkerLocation();
 			}
 		}
-		updateControlsVisibility();
 	}
 
 	public void show(@NonNull LatLon latLon,
@@ -377,7 +376,6 @@ public class MapContextMenu extends MenuTitleController implements StateChangedL
 		if (init(latLon, pointDescription, object)) {
 			showInternal();
 		}
-		updateControlsVisibility();
 	}
 
 	private void showInternal() {
@@ -450,19 +448,30 @@ public class MapContextMenu extends MenuTitleController implements StateChangedL
 		if (fragmentRef != null) {
 			fragmentRef.get().dismissMenu();
 		}
-		updateControlsVisibility();
 	}
 
-	public void updateControlsVisibility() {
-		int visibility = shouldShowControls() ? View.VISIBLE : View.GONE;
-		mapActivity.findViewById(R.id.map_center_info).setVisibility(visibility);
-		mapActivity.findViewById(R.id.map_left_widgets_panel).setVisibility(visibility);
-		mapActivity.findViewById(R.id.map_right_widgets_panel).setVisibility(visibility);
+	public void updateControlsVisibility(boolean menuVisible) {
+		int topControlsVisibility = shouldShowTopControls(menuVisible) ? View.VISIBLE : View.GONE;
+		mapActivity.findViewById(R.id.map_center_info).setVisibility(topControlsVisibility);
+		mapActivity.findViewById(R.id.map_left_widgets_panel).setVisibility(topControlsVisibility);
+		mapActivity.findViewById(R.id.map_right_widgets_panel).setVisibility(topControlsVisibility);
+
+		int bottomControlsVisibility = shouldShowBottomControls(menuVisible) ? View.VISIBLE : View.GONE;
+		mapActivity.findViewById(R.id.bottom_controls_container).setVisibility(bottomControlsVisibility);
+
 		mapActivity.refreshMap();
 	}
 
-	public boolean shouldShowControls() {
-		return !isVisible() || isLandscapeLayout() || getCurrentMenuState() == MenuController.MenuState.HEADER_ONLY;
+	public boolean shouldShowTopControls() {
+		return shouldShowTopControls(isVisible());
+	}
+
+	public boolean shouldShowTopControls(boolean menuVisible) {
+		return !menuVisible || isLandscapeLayout() || getCurrentMenuState() == MenuController.MenuState.HEADER_ONLY;
+	}
+
+	public boolean shouldShowBottomControls(boolean menuVisible) {
+		return !menuVisible || isLandscapeLayout();
 	}
 
 	// timeout in msec
@@ -708,6 +717,24 @@ public class MapContextMenu extends MenuTitleController implements StateChangedL
 
 	public void fabPressed() {
 		mapActivity.getMapLayers().getMapControlsLayer().navigateFab();
+	}
+
+	public boolean zoomInPressed() {
+		WeakReference<MapContextMenuFragment> fragmentRef = findMenuFragment();
+		if (fragmentRef != null) {
+			fragmentRef.get().doZoomIn();
+			return true;
+		}
+		return false;
+	}
+
+	public boolean zoomOutPressed() {
+		WeakReference<MapContextMenuFragment> fragmentRef = findMenuFragment();
+		if (fragmentRef != null) {
+			fragmentRef.get().doZoomOut();
+			return true;
+		}
+		return false;
 	}
 
 	public void buttonWaypointPressed() {
@@ -1031,6 +1058,10 @@ public class MapContextMenu extends MenuTitleController implements StateChangedL
 
 	public boolean fabVisible() {
 		return menuController == null || menuController.fabVisible();
+	}
+
+	public boolean zoomButtonsVisible() {
+		return menuController == null || menuController.zoomButtonsVisible();
 	}
 
 	public boolean isClosable() {
