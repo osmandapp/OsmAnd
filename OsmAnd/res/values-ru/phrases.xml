@@ -3526,4 +3526,37 @@
 	<string name="poi_visibility_street">Видимость: улица</string>
 	<string name="poi_visibility_area">Видимость: площадь</string>
 
+	<string name="poi_operational_status">Рабочее состояние</string>
+	<string name="poi_operational_status_open">Открыто</string>
+	<string name="poi_operational_status_closed">Закрыто</string>
+	<string name="poi_operational_status_restricted">Ограничено</string>
+	<string name="poi_operational_status_broken">Сломано</string>
+	<string name="poi_operational_status_needs_maintenance">Требуется обслуживание</string>
+
+	<string name="poi_water_place_durability_durable">Прочность водостока: прочный</string>
+	<string name="poi_water_place_durability_emergency">Прочность водостока: для экстренного использования</string>
+
+	<string name="poi_water_supply_type">Тип водоснабжения</string>
+	<string name="poi_water_purification">Очистка воды</string>
+
+	<string name="poi_water_purification_none">Нет</string>
+	<string name="poi_water_purification_chlorine">Хлорирование</string>
+	<string name="poi_water_purification_reverse_osmosis">Обратный осмос</string>
+	<string name="poi_water_purification_aquatabs">Таблетки для дезинфекции воды</string>
+
+	<string name="poi_water_supply_water_well">Колодец</string>
+	<string name="poi_water_supply_pipeline">Трубопровод</string>
+	<string name="poi_water_supply_running_water">Проточная вода</string>
+	<string name="poi_water_supply_pump">Насос</string>
+	<string name="poi_water_supply_borehole">Скважина</string>
+	<string name="poi_water_supply_water_trucking">Доставка воды</string>
+	<string name="poi_water_supply_water_tank">Резервуар для воды</string>
+	<string name="poi_water_supply_bottled_water">Бутилированная вода</string>
+
+	<string name="poi_water_place_access">Доступ к водоснабжению</string>
+	<string name="poi_water_place_access_community">Сообщество</string>
+	<string name="poi_water_place_access_family">Семья</string>
+	<string name="poi_water_place_access_multifamilies">Несколько семей</string>
+
+
 </resources>
