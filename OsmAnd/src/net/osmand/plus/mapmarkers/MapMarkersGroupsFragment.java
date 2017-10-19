@@ -10,6 +10,7 @@ import android.graphics.Rect;
 import android.os.Bundle;
 import android.support.annotation.Nullable;
 import android.support.design.widget.Snackbar;
+import android.support.v4.app.DialogFragment;
 import android.support.v4.app.Fragment;
 import android.support.v4.content.ContextCompat;
 import android.support.v7.widget.LinearLayoutManager;
@@ -203,6 +204,24 @@ public class MapMarkersGroupsFragment extends Fragment implements OsmAndCompassL
 		itemTouchHelper.attachToRecyclerView(recyclerView);
 
 		adapter = new MapMarkersGroupsAdapter(mapActivity);
+		adapter.setListener(new MapMarkersGroupsAdapter.MapMarkersGroupsAdapterListener() {
+			@Override
+			public void onItemClick(View view) {
+				int pos = recyclerView.getChildAdapterPosition(view);
+				if (pos == RecyclerView.NO_POSITION) {
+					return;
+				}
+				Object item = adapter.getItem(pos);
+				if (item instanceof MapMarker) {
+					MapMarker marker = (MapMarker) item;
+					mapActivity.getMyApplication().getSettings()
+							.setMapLocationToShow(marker.getLatitude(), marker.getLongitude(), 15, null, false, null);
+					MapActivity.launchMapActivityMoveToTop(mapActivity);
+					MarkerMenuOnMapFragment.showInstance(mapActivity, marker);
+					((DialogFragment) getParentFragment()).dismiss();
+				}
+			}
+		});
 		recyclerView.setAdapter(adapter);
 		return recyclerView;
 	}
