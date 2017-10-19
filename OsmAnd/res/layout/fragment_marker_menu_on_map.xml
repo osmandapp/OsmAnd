@@ -55,8 +55,10 @@
                         android:id="@+id/marker_direction_icon"
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
+                        android:layout_gravity="center_vertical"
                         android:layout_marginEnd="4dp"
                         android:layout_marginRight="4dp"
+                        android:layout_marginTop="1sp"
                         tools:src="@drawable/ic_direction_arrow"/>
 
                     <android.support.v7.widget.AppCompatTextView
@@ -68,6 +70,7 @@
                         tools:text="213 m"/>
 
                     <android.support.v7.widget.AppCompatTextView
+                        android:id="@+id/marker_divider_point"
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
                         android:text=" • "
