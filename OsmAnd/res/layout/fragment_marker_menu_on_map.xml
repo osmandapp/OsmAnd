@@ -91,7 +91,6 @@
                 android:id="@+id/marker_visited_button"
                 android:layout_width="56dp"
                 android:layout_height="56dp"
-                android:focusableInTouchMode="true"
                 tools:background="@drawable/marker_circle_background_dark_with_inset"
                 tools:src="@drawable/ic_action_marker_passed"/>
         </LinearLayout>
