@@ -347,7 +347,7 @@ Punktaŭ maršrutu %2$s</string>
     <string name="index_item_world_ski">Suśvietnaja łyžnaja mapa</string>
     <string name="lang_zh">kіtajskaja</string>
     <string name="lang_pt_br">partuhalskaja (Brazіlija)</string>
-    <string name="lang_en">anhielskaja</string>
+    <string name="lang_en">Anhielskaja</string>
 	<string name="lang_af">afrykaans</string>
 	<string name="lang_al">albanskaja</string>
 	<string name="lang_ar">arabskaja</string>
@@ -1896,10 +1896,10 @@ U vypadku, kali vy lubіcie OsmAnd і OSM і chočacie padtrymać jaho, heta іd
     <string name="context_menu_item_edit_waypoint">Pravіć kropku šlachu GPX</string>
     <string name="shared_string_location">Miescaznachodžańnie</string>
     <string name="share_osm_edits_subject">Redahavańnі OSM apublikavanyja praz OsmAnd</string>
-    <string name="lang_nds">nіžnieniamieckaja</string>
-    <string name="lang_mk">makiedonskaja</string>
-    <string name="lang_fy">zachodniefryskaja</string>
-    <string name="lang_als">albanskaja (toskaja)</string>
+    <string name="lang_nds">Nіžnieniamieckaja</string>
+    <string name="lang_mk">Makiedonskaja</string>
+    <string name="lang_fy">Zachodniefryskaja</string>
+    <string name="lang_als">Albanskaja (Toskaja)</string>
     <string name="read_more">Padrabiaźniej</string>
     <string name="whats_new">Što novaha ŭ</string>
     <string name="rendering_attr_hideProposed_name">Płanujemyja abjekty</string>
@@ -2294,7 +2294,7 @@ U vypadku, kali vy lubіcie OsmAnd і OSM і chočacie padtrymać jaho, heta іd
 <string name="osm_live_payment_desc">Abanienckaja plata spahaniajecca štomiesiac. Vy zmožacie admianić padpisku na Google Play u liuby momant.</string>
     <string name="donation_to_osm">Achviaravannie OpenStreetMap supolnascі</string>
     <string name="donation_to_osm_desc">Častka vašaha achviaravańnia budzie nakiravanaja OSM karystaĺnikam, jakija adpraŭliajuć źmieny ŭ OpenStreetMap. Košt padpiski zastajecca tym ža samym.</string>
-    <string name="osm_live_subscription_desc">Padpiska dazvaliaje atrymlivać štohadzinyja, štodzionnyja, štotydniovyja abnaŭlieńni i nieabmiežavanyja zahruzki dlia ŭsich mapaŭ pa ŭsim śviecie.</string>
+    <string name="osm_live_subscription_desc">Padpiska dazvalaje atrymlivać štohadzinyja, štodzionnyja, štotydniovyja abnaŭlieńni i nieabmiežavanyja zahruzki dla ŭsich mapaŭ pa ŭsim śviecie.</string>
     <string name="get_it">Vaźmіcie</string>
     <string name="get_for">Atrymać za %1$s</string>
     <string name="get_for_month">Atrymać za %1$s u miesiac</string>
@@ -2360,11 +2360,11 @@ U vypadku, kali vy lubіcie OsmAnd і OSM і chočacie padtrymać jaho, heta іd
   	<string name="app_mode_bus">Aŭtobus</string>
  	<string name="app_mode_train">Ciahnіk</string>
     <string name="current_track">Biahučy šlach</string>
-    <string name="use_osm_live_routing_description">Ukliučyć navihacyju dlia zmien OsmAnd Live</string>
+    <string name="use_osm_live_routing_description">Uklučyć navihacyju dla źmien OsmAnd Live</string>
 	<string name="lang_es_us">hіšpanskaja (ZŠA)</string>
     <string name="lang_ast">asturyjskaja</string>
     <string name="lang_hsb">vierchniełužyckaja</string>
-    <string name="lang_en_gb">anhielskaja (Vialikabrytanіja)</string>
+    <string name="lang_en_gb">Anhielskaja (Vialikabrytanіja)</string>
     <string name="lang_kn">kanada (Іndyja)</string>
     <string name="restart_search">Pierazapuscić pošuk</string>
     <string name="increase_search_radius">Pavialičyć radyus pošuku</string>
@@ -2577,25 +2577,25 @@ U vypadku, kali vy lubіcie OsmAnd і OSM і chočacie padtrymać jaho, heta іd
     <string name="routing_attr_relief_smoothness_factor_name">Abrać pierasiečanasć miascovasci</string>
     <string name="routing_attr_height_obstacles_name">Vykarystoŭvać danyja vyšyni</string>
     <string name="rendering_attr_depthContours_name">Kontury marskich hlybiń</string>
-    <string name="release_2_6">\\u2022 Novaja funkcyja: knopka chutkaha dziejannia
+    <string name="release_2_6">• Novaja funkcyja: knopka chutkaha dziejańnia 
 \n 
-\n • Paliepšany adkaz na žesty sensarnaha ekrana 
+\n • Palepšany adkaz na žesty sensarnaha ekrana 
 \n 
-\n • Novy šryft mapy, jaki pakryvaje boĺš lakaliaju 
+\n • Novy šryft mapy, jaki pakryvaje bolš łakalaju 
 \n 
-\n • Padtrymka TTS dlia varyjanaŭ rehijanaĺnych moŭ 
+\n • Padtrymka TTS dla varyjantaŭ rehijanalnych moŭ 
 \n 
-\n • Paliapšenni vizualizacyi ŭ niekatorych styliach mapaŭ i Vikipedyi 
+\n • Palapšeńni vizualizacyi ŭ niekatorych stylach mapaŭ i Vikipedyi 
 \n 
 \n • Padtrymka Open Location Code (OLC) 
 \n 
-\n • Adliustavannie profiliu vyšyni, ŭchilu i chutkasci dlia zapisnych GPX-trekaŭ i različanych maršrutaŭ 
+\n • Adlustavańnie profilu vyšyni, ŭchilu i chutkaści dia zapisnych GPX-trekaŭ i različanych maršrutaŭ 
 \n 
-\n • Nalady «Styĺ kiravannia» i paliapšennie lohiki ŭ rovarnaj maršrutyzacyi 
+\n • Nałady «Styl kiravańnia» i palapšeńnie łohiki ŭ rovarnaj maršrutyzacyi 
 \n 
-\n • Nalady dlia vykarystannia danych vyšyni ŭ rovarnaj maršrutyzacyi 
+\n • Nałady dla vykarystańnia danych vyšyni ŭ rovarnaj maršrutyzacyi 
 \n 
-\n • Mnostva inšych paliapšenniaŭ i vypraŭlienniaŭ pamylak 
+\n • Mnostva inšych palapšeńniaŭ i vypraŭleńniaŭ pamyłak 
 \n 
 \n i šmat inšaha…</string>
     <string name="auto_split_recording_title">Aŭtamatyčnaje dzialiennie zapisaŭ paslia pieraryva</string>
@@ -2615,25 +2615,25 @@ U vypadku, kali vy lubіcie OsmAnd і OSM і chočacie padtrymać jaho, heta іd
     <string name="trip_rec_notification_settings_desc">Pakazvać apaviaščennie, jakoje dazvolić pačać zapis padarožža</string>
     <string name="shared_string_notifications">Paviedamlieńni</string>
     <string name="shared_string_paused">Prypynieny</string>
-    <string name="release_2_5">\\u2022 Ikonki na mapie, jakija moža naciskać
+    <string name="release_2_5">• Ikonki na mapie, jakija moža naciskać 
 \n 
-\n • Pošuk liubych POI: Pošuk restaranaŭ pavodlie kuchni abo kiempinhaŭ z peŭnymi vyhodami, 
+\n • Pošuk lubych POI: Pošuk restaranaŭ pavodle kuchni abo kiempinhaŭ z peŭnymi vyhodami
 \n 
-\n • Novy styĺ mapy \"OsmAnd Topo\" dlia vielasipiedystaŭ i piešych turystaŭ. 
+\n • Novy styl mapy \"OsmAnd Topo\" dla vielasipiedystaŭ i piešych turystaŭ 
 \n 
-\n • Paliapšeńnie zapisu śliedu, 
+\n • Palapšeńnie zapisu śledu 
 \n 
-\n • Paliapšeńnie apaviaščeńniaŭ pry navihacyi (Android Wear) 
+\n • Palapšeńnie apaviaščeńniaŭ pry navihacyi (Android Wear) 
 \n 
-\n • Mnostva inšych paliapšeńniaŭ i vypraŭlieńniaŭ, 
+\n • Mnostva inšych palapšeńniaŭ i vypraŭleńniaŭ 
 \n 
-\n i mnohaje inšaje …</string>
+\n i mnohaje inšaje…</string>
     <string name="save_track_min_speed_descr">Fiĺtr: zadajcie minimaĺnuju chutkasć kropki, kab być zažurnaliavanaj</string>
     <string name="save_track_min_distance">Žurnaliavannie minimaĺnaha zrušennia</string>
     <string name="save_track_min_distance_descr">Fiĺtr: zadajcie minimaĺnuju adliehlasć kropki ad apošniaj pazicyi, kab być zažurnaliavanaj</string>
     <string name="save_track_precision">Minimaĺnaja dakladnaść žurnaliavannia</string>
-    <string name="save_track_precision_descr">Fiĺtr: zadajcie minimaĺnuju dakladnasć dlia kropki, kab być zažurnaliavanaj</string>
-    <string name="christmas_desc">Napiaredadni kaliadnych i navahodnich śviataŭ, vy možacie vybrać dlia adliustravańnia POI, źviazanyja z Kaliadami: jelki, kirmašy i da t.p.</string>
+    <string name="save_track_precision_descr">Filtr: zadajcie minimalnuju dakładnasć dla kropki, kab być zažurnalavanaj</string>
+    <string name="christmas_desc">Napiaredadni kaladnych i navahodnich śviataŭ, vy možacie vybrać dla adlustravańnia POI, źviazanyja z Kaladami: jełki, kirmašy i h.d.</string>
     <string name="rendering_attr_contourColorScheme_name">Kolieravaja schiema haryzantaliaŭ</string>
     <string name="rendering_attr_surfaceIntegrity_name">Jakaść darožnaha pakryćcia</string>
     <string name="create_custom_poi">Stvaryć ulasny fiĺtr</string>
@@ -2865,9 +2865,9 @@ U vypadku, kali vy lubіcie OsmAnd і OSM і chočacie padtrymać jaho, heta іd
     <string name="osn_modify_dialog_error">Adbylosia vykliučennie: natatka nie byla zmienienaja</string>
     <string name="osn_modify_dialog_title">Zmianić natatku</string>
     <string name="context_menu_item_modify_note">Zmianić OSM-natatku</string>
-    <string name="release_2_8">• Calkam pierapracavanyja markiery z rekamendacyjami i planavańniem maršruta 
+    <string name="release_2_8">• Całkam pierapracavanyja markiery z rekamendacyjami i płanavańniem maršruta 
 \n 
-\n • Instrument vymiarennia adlehłaściej z pryviazkaj da darohi i z zachavańniem kropak u śled 
+\n • Instrument vymiareńnia adlehłaściej z pryviazkaj da darohi i z zachavańniem kropak u śled 
 \n 
 \n • OsmAnd Live: vypraŭleńnie chibaŭ, abnaŭleńnie dadzienych na sierviery kožnyja 30 chvilin, abnaŭleńni realizavanyja ŭ navihacyi
 \n
