@@ -3536,7 +3536,7 @@
 	<string name="poi_water_purification">Purigo de akvo</string>
 	<string name="poi_water_place_access">Aliro al akvo</string>
 
-<string name="poi_operational_status_open">malfermita</string>
+<string name="poi_operational_status_open">funkcianta</string>
 	<string name="poi_operational_status_closed">fermita</string>
 	<string name="poi_operational_status_restricted">limigita</string>
 	<string name="poi_operational_status_broken">difektita</string>
@@ -3546,7 +3546,7 @@
 	<string name="poi_water_place_durability_emergency">Persisto de akvofonto: kriokaza</string>
 
 	<string name="poi_water_purification_none">neniu</string>
-	<string name="poi_water_purification_chlorine">per ĥlorat(I)o</string>
+	<string name="poi_water_purification_chlorine">per ĥlorato(I)</string>
 	<string name="poi_water_purification_reverse_osmosis">renversa osmozo</string>
 	<string name="poi_water_purification_aquatabs">per purig-premaĵoj (aquatabs)</string>
 
