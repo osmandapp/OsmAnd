@@ -5,6 +5,7 @@ import android.os.Bundle;
 import android.support.annotation.DrawableRes;
 import android.support.annotation.NonNull;
 import android.support.annotation.Nullable;
+import android.support.design.widget.Snackbar;
 import android.support.v4.app.Fragment;
 import android.support.v4.app.FragmentManager;
 import android.support.v4.content.ContextCompat;
@@ -113,6 +114,17 @@ public class MarkerMenuOnMapFragment extends Fragment implements OsmAndCompassLi
 			@Override
 			public void onClick(View view) {
 				app.getMapMarkersHelper().moveMapMarkerToHistory(marker);
+				MapActivity mapActivity = getMapActivity();
+				if (mapActivity != null) {
+					Snackbar.make(mapActivity.findViewById(R.id.bottomFragmentContainer), R.string.marker_moved_to_history, Snackbar.LENGTH_LONG)
+							.setAction(R.string.shared_string_undo, new View.OnClickListener() {
+								@Override
+								public void onClick(View view) {
+									app.getMapMarkersHelper().restoreMarkerFromHistory(marker, 0);
+								}
+							})
+							.show();
+				}
 				dismiss();
 			}
 		});
@@ -128,6 +140,17 @@ public class MarkerMenuOnMapFragment extends Fragment implements OsmAndCompassLi
 			@Override
 			public void onClick(View view) {
 				app.getMapMarkersHelper().removeMarker(marker);
+				MapActivity mapActivity = getMapActivity();
+				if (mapActivity != null) {
+					Snackbar.make(mapActivity.findViewById(R.id.bottomFragmentContainer), R.string.item_removed, Snackbar.LENGTH_LONG)
+							.setAction(R.string.shared_string_undo, new View.OnClickListener() {
+								@Override
+								public void onClick(View view) {
+									app.getMapMarkersHelper().addMarker(marker);
+								}
+							})
+							.show();
+				}
 				dismiss();
 			}
 		});
