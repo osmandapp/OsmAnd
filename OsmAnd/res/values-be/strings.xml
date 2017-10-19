@@ -1181,7 +1181,7 @@
 <string name="lang_hr">харвацкая</string>
     <string name="lang_zh">кітайская</string>
     <string name="lang_pt_br">партугальская (Бразілія)</string>
-    <string name="lang_en">ангельская</string>
+    <string name="lang_en">Ангельская</string>
 	<string name="lang_af">афрыкаанс</string>
 	<string name="lang_hy">армянская</string>
 	<string name="lang_eu">баскская</string>
@@ -2338,7 +2338,7 @@
     <string name="lang_en_gb">ангельская (Вялікабрытанія)</string>
     <string name="current_track">Дзейны трэк</string>
     <string name="lang_kn">канада (Індыя)</string>
-    <string name="use_osm_live_routing_description">Уключыць навігацыю для змен OsmAnd Live</string>
+    <string name="use_osm_live_routing_description">Уключыць навігацыю для зьмен OsmAnd Live</string>
 	<string name="lang_ast">астурыйская</string>
     <string name="app_mode_bus">Аўтобус</string>
  	<string name="app_mode_train">Цягнік</string>
