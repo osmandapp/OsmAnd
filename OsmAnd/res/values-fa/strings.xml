@@ -132,7 +132,7 @@
 	<string name="osmand_parking_minutes">دقیقه</string>
 	<string name="osmand_parking_position_description_add_time">ساعت پارک‌کردن خودرو</string>
 	<string name="global_app_allocated_memory">حافظهٔ اختصاص‌یافته</string>
-	<string name="native_app_allocated_memory">حافظه کل سیستم</string>
+	<string name="native_app_allocated_memory">حافظهٔ کل سیستم</string>
 	
 	
 	
@@ -169,7 +169,7 @@
 	
 	<string name="offline_navigation_not_available">مسیریابی آفلاین OsmAnd موقتاً در دسترس نیست.</string>
 	<string name="left_side_navigation">رانندگی با فرمان سمت چپ</string>
-	<string name="left_side_navigation_descr">برای کشورهای با رانندگی دست چپ انتخاب کنید</string>
+	<string name="left_side_navigation_descr">برای کشورهایی که در سمت چپ می‌رانند</string>
 	<string name="unknown_from_location">نقطهٔ شروع هنوز مشخص نیست</string>
 	<string name="unknown_location">موقعیت هنوز مشخص نیست</string>
 	<string name="modify_transparency">تغییر شفافیت (0 - شفاف، 255 - مات)</string>
@@ -421,13 +421,13 @@
 	<string name="north_west">شمال-غرب</string>
 	<string name="north_north_west">شمال-شمال-غرب</string>
 	<string name="front">جلو</string>
-	<string name="front_right">جلو-راست</string>
+	<string name="front_right">راست-جلو</string>
 	<string name="right">به سمت راست</string>
-	<string name="back_right">عقب-راست</string>
+	<string name="back_right">راست-عقب</string>
 	<string name="back">عقب</string>
-	<string name="back_left">عقب-چپ</string>
+	<string name="back_left">چپ-عقب</string>
 	<string name="left">به سمت چپ</string>
-	<string name="front_left">جلو-چپ</string>
+	<string name="front_left">چپ-جلو</string>
 	<string name="oclock">ساعت</string>
 	<string name="towards">به سمت</string>
 	<string name="accuracy">دقت</string>
@@ -606,7 +606,7 @@
     <string name="recording_playing">صدایی از فایل ضبط‌شدهٔ موردنظر در حال پخش است. 
 \n%1$s</string>
     <string name="recording_delete_confirm">آیا این مورد ضبط‌شده را پاک می‌کنید؟</string>
-    <string name="recording_description">ضبط %1$s %3$s %2$s</string>
+    <string name="recording_description">در حال ضبط %1$s %3$s %2$s</string>
     <string name="osmand_srtm_short_description_80_chars">افزونهٔ OsmAnd برای منحنی‌های تراز آفلاین</string>
     <string name="use_magnetic_sensor_descr">برای مقدار قطب‌نما به‌جای حسگر جهتی از حسگر مغناطیسی استفاده کن</string>
     <string name="show_poi_over_map">نشان‌دادن POI</string>
@@ -692,7 +692,7 @@
 	<string name="avoid_unpaved">اجتناب از راه‌های روسازی‌نشده</string>
 	<string name="avoid_ferries">اجتناب از گذرگاه‌های آبی</string>
 	
-	<string name="map_widget_fluorescent">مسیرهای فلورسنت</string>
+	<string name="map_widget_fluorescent">مسیرهای شب‌نما</string>
 	<string name="bg_service_sleep_mode_off">اجراکردن
 \n برنامه در پس‌زمینه</string>
 	<string name="bg_service_sleep_mode_on">پایان‌دادن 
@@ -706,7 +706,7 @@
 	<string name="select_animate_speedup">انتخاب سرعت شبیه‌سازی مسیر</string>
     	<string name="native_app_allocated_memory_descr">کل حافظهٔ اختصاص‌یافته به برنامه %1$s مگابایت (دالویک %2$s مگابایت، بقیه %3$s مگابایت).
 \nحافظهٔ نسبی %4$s مگابایت (حد آندروئید %5$s مگابایت، دالویک %6$s مگابایت).</string>
-	<string name="global_app_allocated_memory_descr">حافظهٔ اختصاص‌یافته %1$s مگابایت (حد آندروئید %2$s مگابایت، دالویک %3$s مگابایت).</string>
+	<string name="global_app_allocated_memory_descr">حافظهٔ اختصاص‌یافته %1$s مگابایت (حد اندروید %2$s مگابایت، دالویک %3$s مگابایت).</string>
 	<string name="shared_location">مکان اشتراک‌گذاری‌شده</string>
 	<string name="gpxup_trackable">قابل‌ردگیری</string>
 	<string name="gpxup_identifiable">قابل‌شناسایی</string>
@@ -728,7 +728,7 @@
 	<string name="settings_direction_style_descr">در هنگام حرکت، جهت‌ها به چه شیوه‌ای بیان شوند؟</string>
 	<string name="auto_announce_on">شروع اعلام خودکار</string>
 	<string name="auto_announce_off">توقف اعلام خودکار</string>
-	<string name="use_fluorescent_overlays_descr">برای نمایش مسیرها و جاده‌ها از رنگهای فلوروسنت استفاده شود</string>
+	<string name="use_fluorescent_overlays_descr">برای نمایش مسیرها و جاده‌ها از رنگ‌های شب‌نما استفاده شود</string>
 	<string name="offline_edition">ویرایش آفلاین</string>
 	<string name="offline_edition_descr">ویرایش‌ها را همیشه آفلاین انجام می‌دهم</string>
 	<string name="local_openstreetmap_uploading">در حال آپلود…</string>
@@ -773,7 +773,7 @@
 	
 	<string name="use_transparent_map_theme">پوستهٔ شفاف</string>
 	<string name="native_library_not_supported">کتابخانه بومی بر روی این دستگاه پشتیبانی نمیشود.</string>
-	<string name="init_native_library">مقداردهی اولیه کتابخانه بومی…</string>
+	<string name="init_native_library">مقداردهی اولیهٔ کتابخانهٔ بومی…</string>
 	<string name="choose_auto_follow_route">نمای نقشه خودکار-مرکز</string>
 	<string name="choose_auto_follow_route_descr">زمان لازم برای اینکه نقشه موقعیت فعلی را نشان دهد</string>
 	
@@ -1047,7 +1047,7 @@
 	
 	<string name="first_time_msg">از شما به‌خاطر استفاده از OsmAnd متشکریم. برای بیشتر امکانات این برنامه به داده‌های آفلاین منطقه‌ای نیاز دارید که می‌توانید آن‌ها را از طریق «تنظیمات» ← «مدیریت فایل‌های نقشه» دانلود کنید. سپس قادر خواهید بود نقشه‌ها را نگاه کنید، نشانی‌ها را پیدا کنید، مکان‌ها را جست‌وجو کنید و مسیرهای حمل‌ونقل عمومی را بیابید.</string>    
 	<string name="rendering_out_of_memory">برای نشان‌دادن ناحیهٔ انتخابی حافظهٔ اجرایی کافی وجود ندارد</string>
-	<string name="use_fluorescent_overlays">لایه های فلورسنت</string>
+	<string name="use_fluorescent_overlays">لایه‌های شب‌نما</string>
 	<string name="local_openstreetmap_settings">یادداشت‌ها/POIهای ذخیره‌شدهٔ محلی</string>
 	<string name="local_openstreetmap_settings_descr">نشان‌دادن و مدیریت POIها/یادداشت‌هایی که در پایگاه دادهٔ محلی نوشته شده‌اند</string>
 	
@@ -1199,8 +1199,8 @@
 	<string name="opening_hours_not_supported">قالب ساعات کاری برای ویرایش پشتیبانی نمی‌شود</string>
 	<string name="add_new_rule">افزودن قانون جدید</string>
 	<string name="transport_Routes">مسیرها</string>
-	<string name="transport_search_after">گردش بعدی</string>	
-	<string name="transport_search_before">گردش قبلی</string>
+	<string name="transport_search_after">طرح سفر بعدی</string>	
+	<string name="transport_search_before">طرح سفر قبلی</string>
 	<string name="transport_finish_search">پایان جست‌وجو</string>
 	<string name="transport_stop_to_go_out">ایستگاهی را که پیاده می‌شوید انتخاب کنید</string>
 	<string name="transport_to_go_after">مسافت قبلی</string>
@@ -1413,7 +1413,7 @@
     <string name="minutes_ago">دقیقه قبل</string>
     <string name="seconds_ago">ثانیه قبل</string>
     <string name="osmo_connect_to_device_name">نام کاربری</string>
-    <string name="osmo_connect_to_device_tracker_id">ID ردیاب</string>
+    <string name="osmo_connect_to_device_tracker_id">شناسهٔ ردیاب</string>
     <string name="osmo_connect_to_device">پیوند با دستگاه</string>
     
     
@@ -1421,7 +1421,7 @@
     <string name="osmo_groups">گروه‌های OsMo</string>
     <string name="osmo_auto_send_locations_descr">پس از راه‌اندازی برنامه، به‌صورت خودکار سفر را شروع کن و مکان‌ها را ارسال کن</string>
     <string name="osmo_auto_send_locations">شروع خودکار سفر</string>
-    <string name="osmo_tracker_id">شناسه شخصی ردیاب</string>
+    <string name="osmo_tracker_id">شناسهٔ ردیاب</string>
     <string name="osmo_tracker_id_descr">برای مشاهدهٔ شناسهٔ ردیاب لمس کنید</string>
     <string name="osmo_session_token">توکن نشست: %1$s</string>
     <string name="osmo_auth_pending">در انتظار اعتبارسنجی…</string>
@@ -1449,7 +1449,7 @@
 	
 	
     <string name="osmo_edit_device">تغییر تنظیمات کاربر</string>
-    <string name="osmo_edit_color">نمایش رنگ</string>
+    <string name="osmo_edit_color">رنگ نمایش</string>
     <string name="osmo_group_info">اطلاعات</string>
     <string name="osmo_group">گروه OsMo</string>
     <string name="osmo_group_share">برای اتصال به گروه %2$s، شناسهٔ گروه را مشخص کنید (%1$s) یا اینجا را لمس کنید %3$s.</string>
@@ -1457,7 +1457,7 @@
     <string name="osmo_share_current_session">به‌اشتراک‌گذاشتن نشست جاری در مرورگر</string>
     <string name="osmo_cancel_moving_target">لغو جابه‌جایی مقصد</string>
     <string name="osmo_center_location">در مرکز صفحه قرار بده</string>
-    <string name="osmo_set_moving_target">تنظیم به عنوان مقصد</string>
+    <string name="osmo_set_moving_target">تنظیم به عنوان هدف متحرک</string>
     <string name="osmo_regenerate_login_ids_confirm">آیا دربارهٔ بازتولید شناسه‌های شخصی خود مطمئنید؟ تمام دستگاه‌های متصل، دیگر قادر به ردیابی شما نخواهند بود.</string>
     <string name="osmo_session_not_available">نشست در دسترس نیست. لطفاً ببینید «ارسال مکان‌ها» فعال باشد.</string>
     <string name="osmo_share_session">اشتراک‌گذاری نشست</string>
@@ -1476,7 +1476,7 @@
     <string name="osmo_connect">پیوستن</string>
     <string name="osmo_create_group">ساخت گروه</string>
     <string name="osmo_server_operation_failed">عملیات سرور OsMo ناموفق بود</string>
-    <string name="osmo_activity">مونیتورینگ OpenStreetMap</string>
+    <string name="osmo_activity">نظارت OpenStreetMap</string>
     <string name="osmo_enable_tracker">ارسال موقعیت من</string>
     <string name="osmo_control">دسترسی سریع OsMo</string>
     
