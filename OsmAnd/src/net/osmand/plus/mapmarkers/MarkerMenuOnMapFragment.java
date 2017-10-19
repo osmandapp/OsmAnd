@@ -16,7 +16,6 @@ import android.view.ViewGroup;
 import android.widget.ImageButton;
 import android.widget.ImageView;
 import android.widget.TextView;
-import android.widget.Toast;
 
 import net.osmand.Location;
 import net.osmand.data.LatLon;
@@ -133,7 +132,13 @@ public class MarkerMenuOnMapFragment extends Fragment implements OsmAndCompassLi
 		mainView.findViewById(R.id.rename_row).setOnClickListener(new View.OnClickListener() {
 			@Override
 			public void onClick(View view) {
-				Toast.makeText(getContext(), "Rename", Toast.LENGTH_SHORT).show();
+				MapActivity mapActivity = getMapActivity();
+				if (mapActivity != null) {
+					RenameMarkerBottomSheetDialogFragment fragment = new RenameMarkerBottomSheetDialogFragment();
+					fragment.setMarker(marker);
+					fragment.setRetainInstance(true);
+					fragment.show(mapActivity.getSupportFragmentManager(), RenameMarkerBottomSheetDialogFragment.TAG);
+				}
 			}
 		});
 
