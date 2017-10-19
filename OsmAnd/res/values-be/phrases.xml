@@ -3566,4 +3566,36 @@
 	<string name="poi_visibility_street">Бачнасць: вуліца</string>
 	<string name="poi_visibility_area">Бачнасць: плошча</string>
 
+<string name="poi_operational_status">Працоўны стан</string>
+	<string name="poi_water_supply_type">Тып водазабеспячэння</string>
+	<string name="poi_water_purification">Ачыстка вады</string>
+	<string name="poi_water_place_access">Доступ да водазабеспячэння</string>
+
+<string name="poi_operational_status_open">Адчынена</string>
+	<string name="poi_operational_status_closed">Зачынена</string>
+	<string name="poi_operational_status_restricted">Абмежавана</string>
+	<string name="poi_operational_status_broken">Зломана</string>
+	<string name="poi_operational_status_needs_maintenance">Патрабуе абслугоўвання</string>
+
+	<string name="poi_water_place_durability_durable">Трываласць вадасцёку: трывалы</string>
+	<string name="poi_water_place_durability_emergency">Трываласць вадасцёку: надзвычайнае карыстанне</string>
+
+	<string name="poi_water_purification_none">Няма</string>
+	<string name="poi_water_purification_chlorine">Хлараванне</string>
+	<string name="poi_water_purification_reverse_osmosis">Зваротны осмас</string>
+	<string name="poi_water_purification_aquatabs">Aquatabs</string>
+
+	<string name="poi_water_supply_water_well">Калодзеж</string>
+	<string name="poi_water_supply_pipeline">Трубаправод</string>
+	<string name="poi_water_supply_running_water">Праточная вада</string>
+	<string name="poi_water_supply_pump">Помпа</string>
+	<string name="poi_water_supply_borehole">Свідравіна</string>
+	<string name="poi_water_supply_water_trucking">Дастаўка вады</string>
+	<string name="poi_water_supply_water_tank">Рэзервуар для вады</string>
+	<string name="poi_water_supply_bottled_water">Вада ў бутэльках</string>
+
+	<string name="poi_water_place_access_community">Абшчына</string>
+	<string name="poi_water_place_access_family">Сям\'я</string>
+	<string name="poi_water_place_access_multifamilies">Некалькі сямей</string>
+
 </resources>
