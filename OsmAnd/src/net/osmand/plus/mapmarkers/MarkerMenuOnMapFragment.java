@@ -64,7 +64,7 @@ public class MarkerMenuOnMapFragment extends Fragment implements OsmAndCompassLi
 	@Nullable
 	@Override
 	public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
-		OsmandApplication app = (OsmandApplication) getActivity().getApplication();
+		final OsmandApplication app = (OsmandApplication) getActivity().getApplication();
 		night = app.getDaynightHelper().isNightModeForMapControls();
 		iconsCache = app.getIconsCache();
 		portrait = AndroidUiHelper.isOrientationPortrait(getActivity());
@@ -112,7 +112,8 @@ public class MarkerMenuOnMapFragment extends Fragment implements OsmAndCompassLi
 		visitedBtn.setOnClickListener(new View.OnClickListener() {
 			@Override
 			public void onClick(View view) {
-				Toast.makeText(getContext(), "Passed", Toast.LENGTH_SHORT).show();
+				app.getMapMarkersHelper().moveMapMarkerToHistory(marker);
+				dismiss();
 			}
 		});
 
@@ -126,7 +127,8 @@ public class MarkerMenuOnMapFragment extends Fragment implements OsmAndCompassLi
 		mainView.findViewById(R.id.delete_row).setOnClickListener(new View.OnClickListener() {
 			@Override
 			public void onClick(View view) {
-				Toast.makeText(getContext(), "Delete", Toast.LENGTH_SHORT).show();
+				app.getMapMarkersHelper().removeMarker(marker);
+				dismiss();
 			}
 		});
 
