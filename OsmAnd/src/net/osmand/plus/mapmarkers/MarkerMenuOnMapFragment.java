@@ -27,7 +27,6 @@ import net.osmand.plus.OsmAndLocationProvider.OsmAndLocationListener;
 import net.osmand.plus.OsmandApplication;
 import net.osmand.plus.R;
 import net.osmand.plus.activities.MapActivity;
-import net.osmand.plus.base.MapViewTrackingUtilities;
 import net.osmand.plus.dashboard.DashLocationFragment;
 import net.osmand.plus.helpers.AndroidUiHelper;
 import net.osmand.plus.views.OsmandMapTileView;
@@ -57,6 +56,7 @@ public class MarkerMenuOnMapFragment extends Fragment implements OsmAndCompassLi
 
 	private ImageView arrowIv;
 	private TextView distanceTv;
+	private View dividerPoint;
 
 	public void setMarker(MapMarker marker) {
 		this.marker = marker;
@@ -88,6 +88,7 @@ public class MarkerMenuOnMapFragment extends Fragment implements OsmAndCompassLi
 
 		arrowIv = (ImageView) mainView.findViewById(R.id.marker_direction_icon);
 		distanceTv = (TextView) mainView.findViewById(R.id.marker_distance);
+		dividerPoint = mainView.findViewById(R.id.marker_divider_point);
 
 		String descr;
 		if ((descr = marker.groupName) != null) {
@@ -251,17 +252,29 @@ public class MarkerMenuOnMapFragment extends Fragment implements OsmAndCompassLi
 					if (location == null) {
 						location = mapActivity.getMyApplication().getLocationProvider().getLastKnownLocation();
 					}
-					MapViewTrackingUtilities utilities = mapActivity.getMapViewTrackingUtilities();
-
-					boolean useCenter = !(utilities.isMapLinkedToLocation() && location != null);
-					LatLon loc = useCenter ? mapActivity.getMapLocation() : new LatLon(location.getLatitude(), location.getLongitude());
-					float head = useCenter ? -mapActivity.getMapRotate() : heading != null ? heading : 99;
-
-					DashLocationFragment.updateLocationView(useCenter, loc, head, arrowIv,
-							R.drawable.ic_direction_arrow, 0, distanceTv, marker.point,
-							DashLocationFragment.getScreenOrientation(mapActivity), mapActivity.getMyApplication(), mapActivity, true);
+					if (location != null) {
+						mark(View.VISIBLE, arrowIv, distanceTv, dividerPoint);
+						DashLocationFragment.updateLocationView(false,
+								new LatLon(location.getLatitude(), location.getLongitude()),
+								heading != null ? heading : 0f,
+								arrowIv,
+								distanceTv,
+								marker.getLatitude(),
+								marker.getLongitude(),
+								DashLocationFragment.getScreenOrientation(mapActivity),
+								mapActivity.getMyApplication(),
+								mapActivity);
+					} else {
+						mark(View.GONE, arrowIv, distanceTv, dividerPoint);
+					}
 				}
 			});
+		}
+	}
+
+	private void mark(int visibility, View... views) {
+		for (View v : views) {
+			v.setVisibility(visibility);
 		}
 	}
 
