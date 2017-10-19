@@ -3515,4 +3515,71 @@
 	<string name="poi_government_transportation">Instytucja transportowa</string>
 	<string name="poi_government_legislative">Instytucja ustawodawcza</string>
 
+<string name="poi_operational_status">Stan działania</string>
+	<string name="poi_water_supply_type">Rodzaj źródła wody</string>
+	<string name="poi_water_purification">Oczyszczanie wody</string>
+	<string name="poi_water_place_access">Dostęp do wody</string>
+
+<string name="poi_seamark_clearance_height">Maksymalna wysokość</string>
+	<string name="poi_seamark_clearance_height_closed">Maksymalna wysokość (zamknięta)</string>
+	<string name="poi_seamark_clearance_height_open">Maksymalna wysokość (otwarta)</string>
+	<string name="poi_seamark_clearance_width">Maksymalna szerokość</string>
+
+	<string name="poi_vhf">Kanał VHF</string>
+
+	<string name="poi_gorge">Przełom</string>
+	<string name="poi_couloir">Żleb</string>
+	<string name="poi_mountain_area">Obszar górski</string>
+
+	<string name="poi_surface_clay">glina</string>
+	<string name="poi_surface_tartan">tartan</string>
+	<string name="poi_surface_artificial_turf">sztuczna trawa</string>
+	<string name="poi_surface_decoturf">DecoTurf</string>
+	<string name="poi_surface_metal_grid">metalowa siatka</string>
+
+	<string name="poi_location_underground">Położenie: pod ziemią</string>
+	<string name="poi_location_underwater">Położenie: pod wodą</string>
+	<string name="poi_location_overground">Położenie: nad ziemią</string>
+	<string name="poi_location_overhead">Położenie: wysokość głowy</string>
+	<string name="poi_location_roof">Położenie: dach</string>
+	<string name="poi_location_rooftop">Położenie: szczyt dachu</string>
+	<string name="poi_location_outdoor">Położenie: na dworze</string>
+	<string name="poi_location_indoor">Położenie: wewnątrz</string>
+	<string name="poi_location_platform">Położenie: platforma</string>
+	<string name="poi_location_kiosk">Położenie: kiosk</string>
+	<string name="poi_location_bridge">Położenie: most</string>
+	<string name="poi_location_wall">Położenie: ściana</string>
+	<string name="poi_location_entrance">Położenie: wejście</string>
+
+	<string name="poi_visibility_house">Widoczność: z domu</string>
+	<string name="poi_visibility_street">Widoczność: z ulicy</string>
+	<string name="poi_visibility_area">Widoczność: z oddali</string>
+
+	<string name="poi_operational_status_open">działający</string>
+	<string name="poi_operational_status_closed">zamknięty</string>
+	<string name="poi_operational_status_restricted">ograniczony</string>
+	<string name="poi_operational_status_broken">uszkodzony</string>
+	<string name="poi_operational_status_needs_maintenance">wymaga konserwacji</string>
+
+	<string name="poi_water_place_durability_durable">Trwałość źródła wody: dobra</string>
+	<string name="poi_water_place_durability_emergency">Trwałość źródła wody: awaryjne</string>
+
+	<string name="poi_water_purification_none">brak</string>
+	<string name="poi_water_purification_chlorine">chlorowana</string>
+	<string name="poi_water_purification_reverse_osmosis">odwrócona osmoza</string>
+	<string name="poi_water_purification_aquatabs">Aquatabs</string>
+
+	<string name="poi_water_supply_water_well">studnia</string>
+	<string name="poi_water_supply_pipeline">wodociąg</string>
+	<string name="poi_water_supply_running_water">bieżąca woda</string>
+	<string name="poi_water_supply_pump">pompa</string>
+	<string name="poi_water_supply_borehole">odwiert</string>
+	<string name="poi_water_supply_water_trucking">cysterna</string>
+	<string name="poi_water_supply_water_tank">zbiornik</string>
+	<string name="poi_water_supply_bottled_water">woda butelkowana</string>
+
+	<string name="poi_water_place_access_community">społeczność</string>
+	<string name="poi_water_place_access_family">rodzina</string>
+	<string name="poi_water_place_access_multifamilies">dla wielu rodzin</string>
+
 </resources>
