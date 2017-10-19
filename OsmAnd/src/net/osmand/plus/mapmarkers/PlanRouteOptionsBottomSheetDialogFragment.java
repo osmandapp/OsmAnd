@@ -141,7 +141,7 @@ public class PlanRouteOptionsBottomSheetDialogFragment extends BottomSheetDialog
 				}
 
 				if (!portrait) {
-					if (screenHeight - statusBarHeight - mainView.getHeight() >= AndroidUtils.dpToPx(getActivity(), 8)) {
+					if (screenHeight - statusBarHeight - mainView.getHeight() >= getResources().getDimension(R.dimen.bottom_sheet_content_padding_small)) {
 						AndroidUtils.setBackground(getActivity(), mainView, night,
 								R.drawable.bg_bottom_sheet_topsides_landscape_light, R.drawable.bg_bottom_sheet_topsides_landscape_dark);
 					} else {

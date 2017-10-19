@@ -117,7 +117,7 @@ public class HistoryMarkerMenuBottomSheetDialogFragment extends BottomSheetDialo
 
 				if (!portrait) {
 					if (screenHeight - statusBarHeight - mainView.getHeight()
-							>= AndroidUtils.dpToPx(getActivity(), 8)) {
+							>= getResources().getDimension(R.dimen.bottom_sheet_content_padding_small)) {
 						AndroidUtils.setBackground(getActivity(), mainView, nightMode,
 								R.drawable.bg_bottom_sheet_topsides_landscape_light, R.drawable.bg_bottom_sheet_topsides_landscape_dark);
 					} else {
