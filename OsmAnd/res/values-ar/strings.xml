@@ -1610,7 +1610,7 @@
     <string name="recalculate_route">إعادة حساب المسار</string>
     <string name="number_of_recipients">عدد المستلمين</string>
     <string name="osm_editors_ranking">ترتيب المحررين OSM</string>
-    <string name="osm_live_subscription">اشتراك لايف أوسماند</string>
+    <string name="osm_live_subscription">اشتراك OsmAnd Live</string>
     <string name="osm_live_subscribe_btn">إشترك الآن</string>
     <string name="osm_live_support_region">دعم المنطقة</string>
     <string name="osm_live_month_cost">تكلفة الشهر</string>
