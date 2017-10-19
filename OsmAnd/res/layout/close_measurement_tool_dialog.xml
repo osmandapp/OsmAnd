@@ -4,7 +4,7 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:orientation="horizontal"
-    android:padding="@dimen/bottom_sheet_content_padding">
+    android:padding="@dimen/content_padding">
 
     <TextView
         android:layout_width="0dp"

@@ -45,8 +45,8 @@
                     android:ellipsize="end"
                     android:gravity="center_vertical"
                     android:maxLines="1"
-                    android:paddingLeft="16dp"
-                    android:paddingRight="16dp"
+                    android:paddingLeft="@dimen/content_padding"
+                    android:paddingRight="@dimen/content_padding"
                     android:text="@string/shared_string_options"
                     android:textAllCaps="true"
                     android:textColor="@color/color_white"
@@ -77,7 +77,7 @@
 
         <ImageView
             android:layout_width="match_parent"
-            android:layout_height="5dp"
+            android:layout_height="@dimen/shadow_height"
             android:layout_gravity="bottom"
             android:alpha="0.5"
             android:scaleType="fitXY"
