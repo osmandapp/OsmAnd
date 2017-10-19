@@ -1262,7 +1262,7 @@
 
 	<string name="poi_water_characteristic_mineral">minerala</string>
 	<string name="poi_water_characteristic_mud">Akvospeco: sediment-riĉa</string>
-	<string name="poi_water_characteristic_sulfuric">sulfat(6)-oza</string>
+	<string name="poi_water_characteristic_sulfuric">sulfat(VI)-oza</string>
 
 	<string name="poi_water_point">Akvoĉerpejo</string>
 
@@ -3530,5 +3530,37 @@
 	<string name="poi_visibility_house">Videbleco: de domo</string>
 	<string name="poi_visibility_street">Videbleco: de strato</string>
 	<string name="poi_visibility_area">Videbleco: de malproksime</string>
+
+<string name="poi_operational_status">Stato de funkcio</string>
+	<string name="poi_water_supply_type">Speco de akvofonto</string>
+	<string name="poi_water_purification">Purigo de akvo</string>
+	<string name="poi_water_place_access">Aliro al akvo</string>
+
+<string name="poi_operational_status_open">malfermita</string>
+	<string name="poi_operational_status_closed">fermita</string>
+	<string name="poi_operational_status_restricted">limigita</string>
+	<string name="poi_operational_status_broken">difektita</string>
+	<string name="poi_operational_status_needs_maintenance">riparenda</string>
+
+	<string name="poi_water_place_durability_durable">Persisto de akvofonto: bona</string>
+	<string name="poi_water_place_durability_emergency">Persisto de akvofonto: kriokaza</string>
+
+	<string name="poi_water_purification_none">neniu</string>
+	<string name="poi_water_purification_chlorine">per ĥlorat(I)o</string>
+	<string name="poi_water_purification_reverse_osmosis">renversa osmozo</string>
+	<string name="poi_water_purification_aquatabs">per purig-premaĵoj (aquatabs)</string>
+
+	<string name="poi_water_supply_water_well">puto</string>
+	<string name="poi_water_supply_pipeline">akvokonduktilo</string>
+	<string name="poi_water_supply_running_water">fluakvo</string>
+	<string name="poi_water_supply_pump">pumpilo</string>
+	<string name="poi_water_supply_borehole">boraĵo</string>
+	<string name="poi_water_supply_water_trucking">akvokamiono</string>
+	<string name="poi_water_supply_water_tank">akvujego</string>
+	<string name="poi_water_supply_bottled_water">botela akvo</string>
+
+	<string name="poi_water_place_access_community">komunuma</string>
+	<string name="poi_water_place_access_family">familia</string>
+	<string name="poi_water_place_access_multifamilies">plurfamilia</string>
 
 </resources>
