@@ -144,6 +144,8 @@ public class MapActivity extends OsmandActionBarActivity implements DownloadEven
 		MapMarkerChangedListener, OnDismissDialogFragmentListener, OnDrawMapListener {
 	public static final String INTENT_KEY_PARENT_MAP_ACTIVITY = "intent_parent_map_activity_key";
 
+	public static final String OPEN_MAP_MARKERS_GROUPS = "open_map_markers_groups";
+
 	private static final int SHOW_POSITION_MSG_ID = OsmAndConstants.UI_HANDLER_MAP_VIEW + 1;
 	private static final int LONG_KEYPRESS_MSG_ID = OsmAndConstants.UI_HANDLER_MAP_VIEW + 2;
 	private static final int LONG_KEYPRESS_DELAY = 500;
@@ -679,6 +681,9 @@ public class MapActivity extends OsmandActionBarActivity implements DownloadEven
 						}
 					}
 				}
+			}
+			if (intent.hasExtra(OPEN_MAP_MARKERS_GROUPS)) {
+				MapMarkersDialogFragment.showInstance(this, true);
 			}
 		}
 		mapView.refreshMap(true);
@@ -1378,7 +1383,7 @@ public class MapActivity extends OsmandActionBarActivity implements DownloadEven
 		return mapLayers;
 	}
 
-	public static void launchMapActivityMoveToTop(Context activity) {
+	public static void launchMapActivityMoveToTop(Context activity, String openMarkersAction) {
 		if (activity instanceof MapActivity) {
 			if (((MapActivity) activity).getDashboard().isVisible()) {
 				((MapActivity) activity).getDashboard().hideDashboard();
@@ -1400,8 +1405,15 @@ public class MapActivity extends OsmandActionBarActivity implements DownloadEven
 			Intent newIntent = new Intent(activity, ((OsmandApplication) activity.getApplicationContext())
 					.getAppCustomization().getMapActivity());
 			newIntent.addFlags(Intent.FLAG_ACTIVITY_REORDER_TO_FRONT | Intent.FLAG_ACTIVITY_CLEAR_TOP);
+			if (openMarkersAction != null) {
+				newIntent.putExtra(openMarkersAction, true);
+			}
 			activity.startActivity(newIntent);
 		}
+	}
+
+	public static void launchMapActivityMoveToTop(Context activity) {
+		launchMapActivityMoveToTop(activity, null);
 	}
 
 	public static void clearPrevActivityIntent() {

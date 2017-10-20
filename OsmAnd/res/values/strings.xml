@@ -9,10 +9,12 @@
          3. All your modified/created strings are in the top of the file (to make easier find what\'s translated).
     PLEASE: Have a look at http://code.google.com/p/osmand/wiki/UIConsistency, it may really improve your and our work  :-)  Thx - Hardy
     -->
-    <string name="wrong_input">Wrong input</string>
-    <string name="enter_new_name">Enter new name</string>
-    <string name="shared_string_back">Back</string>
-    <string name="wrong_format">Wrong format</string>
+	<string name="wrong_input">Wrong input</string>
+	<string name="enter_new_name">Enter new name</string>
+	<string name="shared_string_back">Back</string>
+	<string name="view">View</string>
+	<string name="waypoints_added_to_map_markers">Waypoints added to map markers</string>
+	<string name="wrong_format">Wrong format</string>
     <string name="shared_string_road">Road</string>
     <string name="show_map">Show map</string>
     <string name="route_is_calculated">Route is calculated</string>
