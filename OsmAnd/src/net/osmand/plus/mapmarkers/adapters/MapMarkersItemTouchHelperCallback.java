@@ -88,7 +88,12 @@ public class MapMarkersItemTouchHelperCallback extends ItemTouchHelper.Callback 
 
 	@Override
 	public boolean onMove(RecyclerView recyclerView, RecyclerView.ViewHolder source, RecyclerView.ViewHolder target) {
-		return adapter.onItemMove(source.getAdapterPosition(), target.getAdapterPosition());
+		int from = source.getAdapterPosition();
+		int to = target.getAdapterPosition();
+		if (from == RecyclerView.NO_POSITION || to == RecyclerView.NO_POSITION) {
+			return false;
+		}
+		return adapter.onItemMove(from, to);
 	}
 
 	@Override
