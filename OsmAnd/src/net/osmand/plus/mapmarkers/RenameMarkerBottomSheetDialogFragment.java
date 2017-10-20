@@ -71,14 +71,18 @@ public class RenameMarkerBottomSheetDialogFragment extends BottomSheetDialogFrag
 			@Override
 			public void onClick(View view) {
 				String name = nameEditText.getText().toString();
-				marker.setName(name);
-				mapActivity.getMyApplication().getMapMarkersHelper().updateMapMarker(marker, true);
-				FragmentManager fm = mapActivity.getSupportFragmentManager();
-				Fragment fragment = fm.findFragmentByTag(MarkerMenuOnMapFragment.TAG);
-				if (fragment != null) {
-					((MarkerMenuOnMapFragment) fragment).dismiss();
+				if (name.replaceAll("\\s", "").length() > 0) {
+					marker.setName(name);
+					mapActivity.getMyApplication().getMapMarkersHelper().updateMapMarker(marker, true);
+					FragmentManager fm = mapActivity.getSupportFragmentManager();
+					Fragment fragment = fm.findFragmentByTag(MarkerMenuOnMapFragment.TAG);
+					if (fragment != null) {
+						((MarkerMenuOnMapFragment) fragment).dismiss();
+					}
+					dismiss();
+				} else {
+					nameEditText.setError(getString(R.string.wrong_input));
 				}
-				dismiss();
 			}
 		});
 
