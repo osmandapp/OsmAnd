@@ -3597,4 +3597,84 @@
 
 <string name="poi_surface_clay">Tierra batida</string>
 	<string name="poi_surface_decoturf">DecoTurf</string>
-	</resources>
+	<string name="poi_socket_cee_blue">Conector: CEE azul</string>
+	<string name="poi_socket_cee_blue_current">Conector: CEE azul: corriente</string>
+	<string name="poi_socket_cee_blue_output">Conector: CEE azul: salida</string>
+	<string name="poi_socket_cee_red_16a">Conector: CEE rojo 16A</string>
+	<string name="poi_socket_cee_red_16a_current">Conector: CEE rojo 16A: corriente</string>
+	<string name="poi_socket_cee_red_16a_output">Conector: CEE rojo 16A: salida</string>
+	<string name="poi_socket_cee_red_32a">"Conector: CEE  rojo 32A"</string>
+	<string name="poi_socket_cee_red_32a_current">Conector: CEE rojo 32A: corriente</string>
+	<string name="poi_socket_cee_red_32a_output">Conector: CEE rojo 32A: salida</string>
+	<string name="poi_socket_cee_red_64a">Conector: CEE rojo 64A</string>
+	<string name="poi_socket_cee_red_64a_current">Conector: CEE rojo 64A: corriente</string>
+	<string name="poi_socket_cee_red_64a_output">Conector: CEE rojo 64A: salida</string>
+	<string name="poi_socket_cee_red_125a">Conector: CEE rojo 125A</string>
+	<string name="poi_socket_cee_red_125a_current">Conector: CEE rojo 125A: corriente</string>
+	<string name="poi_socket_cee_red_125a_output">Conector: CEE rojo 125A: salida</string>
+	<string name="poi_socket_type1">Conector: Tipo 1</string>
+	<string name="poi_socket_type1_current">Conector: Tipo 1: corriente</string>
+	<string name="poi_socket_type1_output">Conector: Tipo 1: salida</string>
+	<string name="poi_socket_type1_combo">Conector: Tipo 1 combinado</string>
+	<string name="poi_socket_type1_combo_current">Conector: Tipo 1 combinado: corriente</string>
+	<string name="poi_socket_type1_combo_output">Conector: Tipo 1 combinado: salida</string>
+	<string name="poi_socket_type2">Conector: Tipo 2</string>
+	<string name="poi_socket_type2_current">Conector: Tipo 2: corriente</string>
+	<string name="poi_socket_type2_output">Conector: Tipo 2: salida</string>
+	<string name="poi_socket_type2_combo">Conector: Tipo 2 combinado</string>
+	<string name="poi_socket_type2_combo_current">Conector: Tipo 2 combinado: corriente</string>
+	<string name="poi_socket_type2_combo_output">Conector: Tipo 2 combinado: salida</string>
+	<string name="poi_socket_type3">Conector: Tipo 3</string>
+	<string name="poi_socket_type3_current">Conector: Tipo 3: corriente</string>
+	<string name="poi_socket_type3_output">Conector: Tipo 3: salida</string>
+	<string name="poi_socket_chademo">Conector: CHAdeMO</string>
+	<string name="poi_socket_chademo_current">Conector: CHAdeMO: corriente</string>
+	<string name="poi_socket_chademo_output">Conector: CHAdeMO: salida</string>
+	<string name="poi_socket_tesla_standard">Conector: Tesla estándar</string>
+	<string name="poi_socket_tesla_standard_current">Conector: Tesla estándar: corriente</string>
+	<string name="poi_socket_tesla_standard_output">Conector: Tesla estándar: salida</string>
+	<string name="poi_socket_tesla_supercharger">Conector: Supercargador Tesla</string>
+	<string name="poi_socket_tesla_supercharger_current">Conector: Supercargador Tesla: corriente</string>
+	<string name="poi_socket_tesla_supercharger_output">Conector: Supercargador Tesla: salida</string>
+	<string name="poi_socket_tesla_roadster">Conector: Tesla Roadster</string>
+	<string name="poi_socket_tesla_roadster_current">Conector: Tesla Roadster: corriente</string>
+	<string name="poi_socket_tesla_roadster_output">Conector: Tesla Roadster: salida</string>
+	<string name="poi_socket_nema_5_15">Conector: NEMA 5-15R</string>
+	<string name="poi_socket_nema_5_15_current">Conector: NEMA 5-15R: corriente</string>
+	<string name="poi_socket_nema_5_15_output">Conector: NEMA 5-15R: salida</string>
+	<string name="poi_socket_nema_5_20">Conector: NEMA 5-20</string>
+	<string name="poi_socket_nema_5_20_current">Conector: NEMA 5-20: corriente</string>
+	<string name="poi_socket_nema_5_20_output">Conector: NEMA 5-20: salida</string>
+	<string name="poi_socket_nema_14_30">Conector: NEMA 14-30</string>
+	<string name="poi_socket_nema_14_30_current">Conector: NEMA 14-30: corriente</string>
+	<string name="poi_socket_nema_14_30_output">Conector: NEMA 14-30: salida</string>
+	<string name="poi_socket_nema_14_50">Conector: NEMA 14-50</string>
+	<string name="poi_socket_nema_14_50_current">Conector: NEMA 14-50: corriente</string>
+	<string name="poi_socket_nema_14_50_output">Conector: NEMA 14-50: salida</string>
+	<string name="poi_socket_schuko">Conector: Schuko</string>
+	<string name="poi_socket_schuko_current">Conector: Schuko: corriente</string>
+	<string name="poi_socket_schuko_output">Conector: Schuko: salida</string>
+	<string name="poi_socket_bs1363">Conector: BS 1363</string>
+	<string name="poi_socket_bs1363_current">Conector: BS 1363: corriente</string>
+	<string name="poi_socket_bs1363_output">Conector: BS 1363: salida</string>
+	<string name="poi_socket_as3112">Conector: AS/NZS 3112</string>
+	<string name="poi_socket_as3112_current">Conector: AS/NZS 3112: corriente</string>
+	<string name="poi_socket_as3112_output">Conector: AS/NZS 3112: salida</string>
+
+	<string name="poi_car_yes">Automóvil: Sí</string>
+	<string name="poi_car_no">Automóvil: No</string>
+	<string name="poi_bicycle_yes">Bicicleta: Sí</string>
+	<string name="poi_bicycle_no">Bicicleta: No</string>
+	<string name="poi_scooter_yes">Motoneta (scooter): Sí</string>
+	<string name="poi_scooter_no">Motoneta (scooter): No</string>
+	<string name="poi_truck_yes">Camión: Sí</string>
+	<string name="poi_truck_no">Camión: No</string>
+
+	<string name="poi_parking_fee_yes">Tarifa de estacionamiento: Sí</string>
+	<string name="poi_parking_fee_no">Tarifa de estacionamiento: No</string>
+	<string name="poi_parking_fee">Tarifa de estacionamiento</string>
+
+	<string name="poi_amperage">Amperaje</string>
+	<string name="poi_charging_station_output">Salida de la estación de carga</string>
+
+</resources>
