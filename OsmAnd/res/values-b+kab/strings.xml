@@ -46,7 +46,7 @@
     <string name="shared_string_none">Ulac</string>
     <string name="shared_string_and">d</string>
     <string name="shared_string_or">naɣ</string>
-    <string name="shared_string_history">Amezruy</string>
+    <string name="shared_string_history">Amezray</string>
     <string name="shared_string_share">Bḍu</string>
     <string name="shared_string_more">Uggar…</string>
     <string name="shared_string_show">Sken</string>
@@ -153,7 +153,7 @@
     <string name="city_type_town">Tiɣremt</string>
     <string name="gpx_navigation">Abrid n GPX</string>
     <string name="button_upgrade_osmandplus">Sedɣi OsmAnd+</string>
-    <string name="search_position_address">Tansa…</string>
+    <string name="search_position_address">Tansa …</string>
     <string name="filename_input">"Isem n ufaylu: "</string>
     <string name="favorite_home_category">Axxam</string>
     <string name="favorite_friends_category">Imddukkal</string>
@@ -178,7 +178,7 @@
     <string name="network_provider">Aẓeṭṭa</string>
     <string name="gps_provider">GPS</string>
     <string name="add_new_rule">Rnu aslugen amaynut</string>
-    <string name="search_history_city">Tiɣremt:{0}</string>
+    <string name="search_history_city">Tamdint : {0}</string>
     <string name="address">Tansa</string>
     <string name="data_settings">Isefka</string>
     <string name="ChooseCountry">Fren tamurt</string>
@@ -186,7 +186,7 @@
     <string name="app_mode_pedestrian">Amsebrid</string>
     <string name="position_on_map_center">Talemmast</string>
     <string name="position_on_map_bottom">DDaw</string>
-    <string name="search_address_city">Tiɣremt</string>
+    <string name="search_address_city">Tamdint</string>
     <string name="search_address_building">Uṭṭun</string>
     <string name="search_address_street_option">Ger iberdan</string>
     <string name="poi_action_add">Rnu</string>
@@ -236,7 +236,7 @@
     <string name="search_offline_clear_search">Anadi Ajdid</string>
     <string name="searching_address">Anadi n tansa …</string>
     <string name="shared_string_plugin">Azegrar</string>
-    <string name="type_address">Nadi tansa</string>
+    <string name="type_address">Gred tansa</string>
     <string name="type_city_town">Sekcem tiγremt neγ tamdint</string>
     <string name="type_postcode">Sekcem angal n tesreqqest</string>
     <string name="select_city">Ffren tamdint</string>
@@ -246,4 +246,20 @@
     <string name="route_kr">Ttef tama tayeffust t defred</string>
     <string name="show_route">Ttfaṣil n webrid</string>
     <string name="route_head">Edfar</string>
+    <string name="shared_string_email_address">Tansa imayl</string>
+    <string name="looking_up_address">Anadi γef tansa</string>
+    <string name="plugin_settings">Izegrar</string>
+    <string name="shared_string_settings">Iγewwaṛen</string>
+    <string name="shared_string_address">Tansa</string>
+    <string name="favourites_edit_dialog_category">Taggayt</string>
+    <string name="search_history_street">Abrid : {0}, {1}</string>
+    <string name="search_offline_address">Anadi mebla tuqna</string>
+    <string name="search_online_address">Anadi s tuqna</string>
+    <string name="search_address">Nadi γef tansa</string>
+    <string name="search_address_region">tamnaḍt</string>
+    <string name="search_address_street">Abrid</string>
+    <string name="add_favorite_dialog_default_favourite_name">Menyif</string>
+    <string name="favourites_context_menu_add">Rnu d amenyaf</string>
+    <string name="favourites">Imenyafen</string>
+    <string name="empty_state_favourites">Rnu γer imenyafen</string>
     </resources>
