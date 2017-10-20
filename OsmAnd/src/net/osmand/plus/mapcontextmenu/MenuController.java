@@ -440,7 +440,9 @@ public abstract class MenuController extends BaseMenuController {
 			leftDownloadButtonController.visible = !downloaded;
 			leftDownloadButtonController.leftIconId = R.drawable.ic_action_import;
 
-			boolean downloadIndexes = getMapActivity().getMyApplication().getSettings().isInternetConnectionAvailable()
+			boolean internetConnectionAvailable =
+					getMapActivity().getMyApplication().getSettings().isInternetConnectionAvailable();
+			boolean downloadIndexes = internetConnectionAvailable
 					&& !downloadThread.getIndexes().isDownloadedFromInternet
 					&& !downloadThread.getIndexes().downloadFromInternetFailed;
 
@@ -469,6 +471,9 @@ public abstract class MenuController extends BaseMenuController {
 				titleProgressController.visible = true;
 			} else if (downloadIndexes) {
 				titleProgressController.setIndexesDownloadMode();
+				titleProgressController.visible = true;
+			} else if (!internetConnectionAvailable) {
+				titleProgressController.setNoInternetConnectionMode();
 				titleProgressController.visible = true;
 			} else {
 				titleProgressController.visible = false;
@@ -507,16 +512,25 @@ public abstract class MenuController extends BaseMenuController {
 		public int progress = 0;
 		public boolean indeterminate;
 		public boolean visible;
+		public boolean progressVisible;
 		public boolean buttonVisible;
 
 		public void setIndexesDownloadMode() {
 			caption = getMapActivity().getString(R.string.downloading_list_indexes);
 			indeterminate = true;
+			progressVisible = true;
+			buttonVisible = false;
+		}
+
+		public void setNoInternetConnectionMode() {
+			caption = getMapActivity().getString(R.string.no_index_file_to_download);
+			progressVisible = false;
 			buttonVisible = false;
 		}
 
 		public void setMapDownloadMode() {
 			indeterminate = false;
+			progressVisible = true;
 			buttonVisible = true;
 		}
 
