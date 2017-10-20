@@ -3492,4 +3492,64 @@
 
 	<string name="poi_vhf">УКХ-канал</string>
 
+<string name="poi_operational_status">Робочий стан</string>
+	<string name="poi_water_supply_type">Тип водопостачання</string>
+	<string name="poi_water_purification">Очищення води</string>
+	<string name="poi_water_place_access">Доступ до водопостачання</string>
+
+<string name="poi_gorge">Ущелина</string>
+	<string name="poi_couloir">Кулуар</string>
+	<string name="poi_mountain_area">Гірська місцевість</string>
+
+	<string name="poi_surface_clay">Глина</string>
+	<string name="poi_surface_tartan">Тартан</string>
+	<string name="poi_surface_artificial_turf">Штучна дерновина</string>
+	<string name="poi_surface_decoturf">Декораративна дерновина</string>
+	<string name="poi_surface_metal_grid">Металева сітка</string>
+
+	<string name="poi_location_underground">Розташування: під землею</string>
+	<string name="poi_location_underwater">Розташування: під водою</string>
+	<string name="poi_location_overground">Розташування: над землею</string>
+	<string name="poi_location_overhead">Розташування: зверху</string>
+	<string name="poi_location_roof">Розташування: дах</string>
+	<string name="poi_location_rooftop">Розташування: на даху</string>
+	<string name="poi_location_outdoor">Розташування: на відкритому повітрі</string>
+	<string name="poi_location_indoor">Розташування: в приміщенні</string>
+	<string name="poi_location_platform">Розташування: на платформі</string>
+	<string name="poi_location_kiosk">Розташування: кіоск</string>
+	<string name="poi_location_bridge">Розташування: на мості</string>
+	<string name="poi_location_wall">Розташування: на стіні</string>
+	<string name="poi_location_entrance">Розташування: біля входу</string>
+
+	<string name="poi_visibility_house">Видимість: будинок</string>
+	<string name="poi_visibility_street">Видимість: вулиця</string>
+	<string name="poi_visibility_area">Видимість: площа</string>
+
+	<string name="poi_operational_status_open">Відкрито</string>
+	<string name="poi_operational_status_closed">Закрито</string>
+	<string name="poi_operational_status_restricted">Обмежено</string>
+	<string name="poi_operational_status_broken">Зламано</string>
+	<string name="poi_operational_status_needs_maintenance">Потребує обслуговування</string>
+
+	<string name="poi_water_place_durability_durable">Міцність водостоку: міцний</string>
+	<string name="poi_water_place_durability_emergency">Міцність водостоку: для екстреного використання</string>
+
+	<string name="poi_water_purification_none">Немає</string>
+	<string name="poi_water_purification_chlorine">Хлорування</string>
+	<string name="poi_water_purification_reverse_osmosis">Зворотний осмос</string>
+	<string name="poi_water_purification_aquatabs">Таблетки для дезінфекції води</string>
+
+	<string name="poi_water_supply_water_well">Колодязь</string>
+	<string name="poi_water_supply_pipeline">Трубопровід</string>
+	<string name="poi_water_supply_running_water">Проточна вода</string>
+	<string name="poi_water_supply_pump">Насос</string>
+	<string name="poi_water_supply_borehole">Свердловина</string>
+	<string name="poi_water_supply_water_trucking">Доставка води</string>
+	<string name="poi_water_supply_water_tank">Резервуар для води</string>
+	<string name="poi_water_supply_bottled_water">Бутильована вода</string>
+
+	<string name="poi_water_place_access_community">Спільнота</string>
+	<string name="poi_water_place_access_family">Сім\'я</string>
+	<string name="poi_water_place_access_multifamilies">Декілька сімей</string>
+
 </resources>

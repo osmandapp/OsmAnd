@@ -2281,8 +2281,8 @@
     <string name="upload_anonymously">Вивантажено анонімно</string>
     <string name="show_transparency_seekbar">Показати прозору пошукову панель</string>
     <string name="report">Звіт</string>
-    <string name="use_osm_live_routing_description">Увімкнути навігацію для змін OSM Live (бета)</string>
-	<string name="use_osm_live_routing">Навігація OSM Live</string>
+    <string name="use_osm_live_routing_description">Увімкнути навігацію з урахуванням автооновлень OsmAnd Live</string>
+	<string name="use_osm_live_routing">Навігація OsmAnd Live</string>
     <string name="access_no_destination">Пункт призначення не встановлено</string>
     <string name="map_widget_magnetic_bearing">Магнітний пеленг</string>
     <string name="map_widget_bearing">Курсовий кут</string>
@@ -2340,14 +2340,14 @@
     <string name="number_of_recipients">Кількість одержувачів</string>
     <string name="osm_user_stat">Правки %1$s, ранг %2$s, всього правок %3$s</string>
     <string name="osm_editors_ranking">Рейтинг маперів OSM</string>
-    <string name="osm_live_subscription">Підписка OSM Live</string>
+    <string name="osm_live_subscription">Підписка OsmAnd Live</string>
     <string name="osm_live_email_desc">Це потрібно, щоб надавати вам інформацію про зміни на мапі</string>
     <string name="osm_live_user_public_name">Публічне імʼя</string>
     <string name="osm_live_support_region">Територія</string>
     <string name="osm_live_enter_user_name">Додайте Публічне Імʼя</string>
     <string name="osm_live_thanks">Дякуємо за підписку на оновлення!</string>
     <string name="osm_live_region_desc">Частина коштів буде спрямована маперам OSM, що внесли зміни до мапи в цьому місці</string>
-    <string name="osm_live_ask_for_purchase">Будь ласка, оформіть передплату на OSM Live</string>
+    <string name="osm_live_ask_for_purchase">Будь ласка, оформіть передплату на OsmAnd Live</string>
 
     <string name="osm_live_header">Передплата дозволяє щогодини отримувати оновлення для мап по всьому світу.
 Частина від передплати спрямовується до спільноти OSM та виплачується кожному маперу за його внесок.
@@ -3047,4 +3047,19 @@
     <string name="osn_modify_dialog_error">Виняткова ситуація: примітку не було змінено</string>
     <string name="osn_modify_dialog_title">Змінити примітку</string>
     <string name="context_menu_item_modify_note">Змінити OSM-примітку</string>
+    <string name="wrong_input">Неправильний ввід</string>
+    <string name="wrong_format">Неправильний формат</string>
+    <string name="shared_string_road">Дорога</string>
+    <string name="show_map">Показати мапу</string>
+    <string name="route_is_calculated">Маршрут розраховується</string>
+    <string name="round_trip">Подорож туди і назад</string>
+    <string name="plan_route_no_markers_toast">Ви повинні додати принаймні один маркер, щоб використовувати цю функцію.</string>
+    <string name="release_2_8">• Повністю перероблені маркери мапи, з направляючими лініями і плануванням маршруту
+\n• Інструмент вимірювання відстані, з прив’язкою до дороги і збереженням точок в якості треку
+\n• OsmAnd Live: виправлення помилок, оновлення даних на сервері кожні 30 хвилин, поновлення враховуються в навігації
+\n
+\n</string>
+    <string name="rendering_value_darkyellow_name">Темно-жовтий</string>
+    <string name="enter_new_name">Введіть нове ім’я</string>
+    <string name="shared_string_back">Назад</string>
     </resources>

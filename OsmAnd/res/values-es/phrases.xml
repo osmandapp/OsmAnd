@@ -3545,4 +3545,56 @@
 	<string name="poi_surface_artificial_turf">Césped artificial</string>
 	<string name="poi_surface_metal_grid">Rejilla metálica</string>
 
-</resources>
+<string name="poi_operational_status">Estado operativo</string>
+	<string name="poi_water_supply_type">Tipo de suministro de agua</string>
+	<string name="poi_water_purification">Depuración del agua</string>
+	<string name="poi_water_place_access">Acceso a la fuente de agua</string>
+
+<string name="poi_location_underground">Ubicación: subterráneo</string>
+	<string name="poi_location_underwater">Ubicación: subacuático</string>
+	<string name="poi_location_overground">Ubicación: sobre la superficie</string>
+	<string name="poi_location_overhead">Ubicación: aéreo</string>
+	<string name="poi_location_roof">Ubicación: en techo</string>
+	<string name="poi_location_rooftop">Ubicación: en azotea</string>
+	<string name="poi_location_outdoor">Ubicación: al aire libre</string>
+	<string name="poi_location_indoor">Ubicación: en el interior</string>
+	<string name="poi_location_platform">Ubicación: en plataforma</string>
+	<string name="poi_location_kiosk">Ubicación: en quiosco</string>
+	<string name="poi_location_bridge">Ubicación: en puente</string>
+	<string name="poi_location_wall">Ubicación: en muro</string>
+	<string name="poi_location_entrance">Ubicación: en entrada</string>
+
+	<string name="poi_visibility_house">Visibilidad: casa</string>
+	<string name="poi_visibility_street">Visibilidad: calle</string>
+	<string name="poi_visibility_area">Visibilidad: área</string>
+
+	<string name="poi_operational_status_open">Abierto</string>
+	<string name="poi_operational_status_closed">Cerrado</string>
+	<string name="poi_operational_status_restricted">Restringido</string>
+	<string name="poi_operational_status_broken">Roto</string>
+	<string name="poi_operational_status_needs_maintenance">Necesita mantenimiento</string>
+
+	<string name="poi_water_place_durability_durable">Durabilidad de la fuente de agua: duradero</string>
+	<string name="poi_water_place_durability_emergency">Durabilidad de la fuente de agua: emergencia</string>
+
+	<string name="poi_water_purification_none">Nada</string>
+	<string name="poi_water_purification_chlorine">Cloro</string>
+	<string name="poi_water_purification_reverse_osmosis">Ósmosis inversa</string>
+	<string name="poi_water_purification_aquatabs">Aquatabs</string>
+
+	<string name="poi_water_supply_water_well">Pozo de agua</string>
+	<string name="poi_water_supply_pipeline">Tubería</string>
+	<string name="poi_water_supply_running_water">Agua corriente</string>
+	<string name="poi_water_supply_pump">Bomba</string>
+	<string name="poi_water_supply_borehole">Perforación</string>
+	<string name="poi_water_supply_water_trucking">Camión de agua</string>
+	<string name="poi_water_supply_water_tank">Tanque de agua</string>
+	<string name="poi_water_supply_bottled_water">Botella de agua</string>
+
+	<string name="poi_water_place_access_community">Comunidad</string>
+	<string name="poi_water_place_access_family">Familia</string>
+	<string name="poi_water_place_access_multifamilies">Múltiples familias</string>
+
+<string name="poi_surface_clay">Tierra batida</string>
+	<string name="poi_surface_decoturf">DecoTurf</string>
+	</resources>

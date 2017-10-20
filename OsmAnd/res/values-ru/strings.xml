@@ -2558,4 +2558,5 @@
     <string name="quick_action_add_parking_descr">Нажатие на кнопку действия добавит место парковки по центру экрана.</string>
     <string name="quick_action_interim_dialog">Показывать промежуточный диалог</string>
     <string name="mappilary_no_internet_desc">Вам нужен Интернет для просмотра фотографий с Mapillary</string>
+    <string name="wrong_format">Неправильный формат</string>
     </resources>

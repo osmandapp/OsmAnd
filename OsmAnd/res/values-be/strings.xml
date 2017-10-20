@@ -1184,11 +1184,11 @@
     <string name="lang_en">Ангельская</string>
 	<string name="lang_af">афрыкаанс</string>
 	<string name="lang_hy">армянская</string>
-	<string name="lang_eu">баскская</string>
+	<string name="lang_eu">Басконская</string>
 	<string name="lang_be">беларуская</string>
-	<string name="lang_bs">баснійская</string>
+	<string name="lang_bs">Басьнійская</string>
 	<string name="lang_bg">баўгарская</string>
-	<string name="lang_ca">каталонская</string>
+	<string name="lang_ca">Каталёнская</string>
 	<string name="lang_cs">чэская</string>
 	<string name="lang_da">дацкая</string>
 	<string name="lang_nl">галяндзкая</string>
@@ -1218,7 +1218,7 @@
 	<string name="lang_sv">швэдзкая</string>
 	<string name="lang_tr">турэцкая</string>
 	<string name="lang_uk">украінская</string>
-	<string name="lang_vi">в\'етнамская</string>
+	<string name="lang_vi">Віетнамская</string>
 	<string name="lang_cy">валійская</string>
 	<string name="index_name_canada">Паўночная Амэрыка - Канада</string>
     <string name="index_name_italy">Эўропа - Італія</string>
@@ -1495,7 +1495,7 @@
     <string name="lang_he">іўрыт</string>
     <string name="gpx_monitoring_start">Пачаць запіс GPX</string>
 	<string name="gpx_start_new_segment">Пачаць новы адрэзак</string>
-    <string name="lang_fa">пэрсідзкая</string>
+    <string name="lang_fa">Пэрсыдзкая</string>
 	<string name="sleep_mode_stop_dialog">Спыніць фонавы рэжым GPS?</string>
 	<string name="map_preferred_locale_descr">Пажаданая мова надпісаў на мапе (калі не даступна, то будуць выкарыстны ангельскія ці мясцовыя назвы)</string>
     <string name="map_preferred_locale">Пажаданая мова мапы</string>
@@ -1887,7 +1887,7 @@
     <string name="lang_ht">гаіцянская</string>
     <string name="lang_gl">галіцкая</string>
     <string name="lang_et">эстонская</string>
-    <string name="lang_ceb">cебуанская</string>
+    <string name="lang_ceb">Сэбуанская</string>
     <string name="lang_ms">малазійская</string>
     <string name="lang_eo">эспэранта</string>
     <string name="lang_es_ar">гішпанская (Аргентына)</string>

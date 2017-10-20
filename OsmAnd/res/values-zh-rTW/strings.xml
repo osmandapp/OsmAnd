@@ -2912,4 +2912,7 @@ OsmAnd (Automated Navigation Directions) 是一個地圖和導航的應用程式
     <string name="plan_route_no_markers_toast">您至少要增加一個標記才能使用此功能。</string>
     <string name="shared_string_road">道路</string>
     <string name="wrong_format">格式錯誤</string>
+    <string name="wrong_input">輸入錯誤</string>
+    <string name="enter_new_name">輸入新名稱</string>
+    <string name="shared_string_back">返回</string>
     </resources>
