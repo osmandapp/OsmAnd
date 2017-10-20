@@ -39,6 +39,8 @@ public class MapMarkersDialogFragment extends android.support.v4.app.DialogFragm
 
 	public static final String TAG = "MapMarkersDialogFragment";
 
+	public static final String OPEN_MAP_MARKERS_GROUPS = "open_map_markers_groups";
+
 	private static final int ACTIVE_MARKERS_POSITION = 0;
 	private static final int GROUPS_POSITION = 1;
 	private static final int HISTORY_MARKERS_POSITION = 2;
@@ -64,6 +66,11 @@ public class MapMarkersDialogFragment extends android.support.v4.app.DialogFragm
 	@Nullable
 	@Override
 	public View onCreateView(LayoutInflater inflater, @Nullable ViewGroup container, Bundle savedInstanceState) {
+		Bundle args = getArguments();
+		boolean openGroups = false;
+		if (args != null && args.getBoolean(OPEN_MAP_MARKERS_GROUPS)) {
+			openGroups = true;
+		}
 		List<Fragment> fragments = getChildFragmentManager().getFragments();
 		if (fragments != null) {
 			for (Fragment fragment : fragments) {
@@ -143,6 +150,12 @@ public class MapMarkersDialogFragment extends android.support.v4.app.DialogFragm
 		if (!lightTheme) {
 			bottomNav.setItemIconTintList(ContextCompat.getColorStateList(getContext(), R.color.bottom_navigation_color_selector_dark));
 			bottomNav.setItemTextColor(ContextCompat.getColorStateList(getContext(), R.color.bottom_navigation_color_selector_dark));
+		}
+		if (openGroups) {
+			activeFragment.stopLocationUpdate();
+			groupsFragment.startLocationUpdate();
+			groupsFragment.updateAdapter();
+			viewPager.setCurrentItem(GROUPS_POSITION, false);
 		}
 		bottomNav.setOnNavigationItemSelectedListener(new BottomNavigationView.OnNavigationItemSelectedListener() {
 			@Override
@@ -350,11 +363,20 @@ public class MapMarkersDialogFragment extends android.support.v4.app.DialogFragm
 	}
 
 	public static boolean showInstance(@NonNull MapActivity mapActivity) {
+		return showInstance(mapActivity, false);
+	}
+
+	public static boolean showInstance(@NonNull MapActivity mapActivity, boolean openGroups) {
 		try {
 			if (mapActivity.isActivityDestroyed()) {
 				return false;
 			}
 			MapMarkersDialogFragment fragment = new MapMarkersDialogFragment();
+			if (openGroups) {
+				Bundle args = new Bundle();
+				args.putBoolean(OPEN_MAP_MARKERS_GROUPS, true);
+				fragment.setArguments(args);
+			}
 			fragment.show(mapActivity.getSupportFragmentManager(), TAG);
 			return true;
 		} catch (RuntimeException e) {
