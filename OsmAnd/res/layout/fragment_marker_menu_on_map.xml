@@ -18,7 +18,7 @@
         <View
             android:layout_width="match_parent"
             android:layout_height="1dp"
-            android:layout_marginTop="@dimen/measurement_tool_bottom_divider_margin_top"
+            android:layout_marginTop="@dimen/bottom_sheet_divider_margin_top"
             android:background="?attr/dashboard_divider"/>
 
         <FrameLayout
