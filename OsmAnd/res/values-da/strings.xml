@@ -2929,7 +2929,9 @@ Tidligere destination bliver sidste mellemliggende punkt.</string>
     <string name="plan_route_no_markers_toast">Tilføj mindst én markør for at bruge denne funktion.</string>
     <string name="shared_string_road">Vej</string>
     <string name="wrong_format">Forkert format</string>
-    <string name="wrong_input">Forkerte inddata</string>
+    <string name="wrong_input">Forkert indtastning</string>
     <string name="enter_new_name">Indtast nyt navn</string>
     <string name="shared_string_back">Tilbage</string>
-    </resources>
+    <string name="view">Vis</string>
+	<string name="waypoints_added_to_map_markers">Rutepunkter tilføjet markørerne på kortet</string>
+	</resources>
