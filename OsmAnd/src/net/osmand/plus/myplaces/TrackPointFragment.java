@@ -59,6 +59,7 @@ import net.osmand.plus.activities.TrackActivity;
 import net.osmand.plus.base.FavoriteImageDrawable;
 import net.osmand.plus.base.OsmandExpandableListFragment;
 import net.osmand.plus.dialogs.DirectionsDialogs;
+import net.osmand.plus.mapmarkers.MapMarkersDialogFragment;
 import net.osmand.plus.measurementtool.NewGpxData;
 import net.osmand.util.Algorithms;
 
@@ -644,7 +645,7 @@ public class TrackPointFragment extends OsmandExpandableListFragment {
 				.setAction(getResources().getString(R.string.view), new View.OnClickListener() {
 					@Override
 					public void onClick(View v) {
-						MapActivity.launchMapActivityMoveToTop(getTrackActivity(), MapActivity.OPEN_MAP_MARKERS_GROUPS);
+						MapActivity.launchMapActivityMoveToTop(getTrackActivity(), MapMarkersDialogFragment.OPEN_MAP_MARKERS_GROUPS);
 					}
 				});
 		snackbar.addCallback(new Snackbar.Callback() {

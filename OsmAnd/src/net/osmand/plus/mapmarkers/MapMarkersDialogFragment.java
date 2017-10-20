@@ -39,6 +39,8 @@ public class MapMarkersDialogFragment extends android.support.v4.app.DialogFragm
 
 	public static final String TAG = "MapMarkersDialogFragment";
 
+	public static final String OPEN_MAP_MARKERS_GROUPS = "open_map_markers_groups";
+
 	private static final int ACTIVE_MARKERS_POSITION = 0;
 	private static final int GROUPS_POSITION = 1;
 	private static final int HISTORY_MARKERS_POSITION = 2;
@@ -66,7 +68,7 @@ public class MapMarkersDialogFragment extends android.support.v4.app.DialogFragm
 	public View onCreateView(LayoutInflater inflater, @Nullable ViewGroup container, Bundle savedInstanceState) {
 		Bundle args = getArguments();
 		boolean openGroups = false;
-		if (args != null && args.getBoolean(MapActivity.OPEN_MAP_MARKERS_GROUPS)) {
+		if (args != null && args.getBoolean(OPEN_MAP_MARKERS_GROUPS)) {
 			openGroups = true;
 		}
 		List<Fragment> fragments = getChildFragmentManager().getFragments();
@@ -372,7 +374,7 @@ public class MapMarkersDialogFragment extends android.support.v4.app.DialogFragm
 			MapMarkersDialogFragment fragment = new MapMarkersDialogFragment();
 			if (openGroups) {
 				Bundle args = new Bundle();
-				args.putBoolean(MapActivity.OPEN_MAP_MARKERS_GROUPS, true);
+				args.putBoolean(OPEN_MAP_MARKERS_GROUPS, true);
 				fragment.setArguments(args);
 			}
 			fragment.show(mapActivity.getSupportFragmentManager(), TAG);
