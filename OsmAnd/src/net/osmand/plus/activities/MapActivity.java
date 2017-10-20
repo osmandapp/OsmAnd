@@ -144,8 +144,6 @@ public class MapActivity extends OsmandActionBarActivity implements DownloadEven
 		MapMarkerChangedListener, OnDismissDialogFragmentListener, OnDrawMapListener {
 	public static final String INTENT_KEY_PARENT_MAP_ACTIVITY = "intent_parent_map_activity_key";
 
-	public static final String OPEN_MAP_MARKERS_GROUPS = "open_map_markers_groups";
-
 	private static final int SHOW_POSITION_MSG_ID = OsmAndConstants.UI_HANDLER_MAP_VIEW + 1;
 	private static final int LONG_KEYPRESS_MSG_ID = OsmAndConstants.UI_HANDLER_MAP_VIEW + 2;
 	private static final int LONG_KEYPRESS_DELAY = 500;
@@ -682,7 +680,7 @@ public class MapActivity extends OsmandActionBarActivity implements DownloadEven
 					}
 				}
 			}
-			if (intent.hasExtra(OPEN_MAP_MARKERS_GROUPS)) {
+			if (intent.hasExtra(MapMarkersDialogFragment.OPEN_MAP_MARKERS_GROUPS)) {
 				MapMarkersDialogFragment.showInstance(this, true);
 			}
 		}
