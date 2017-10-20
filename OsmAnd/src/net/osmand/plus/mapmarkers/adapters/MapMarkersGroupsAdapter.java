@@ -12,9 +12,9 @@ import android.widget.TextView;
 
 import net.osmand.data.LatLon;
 import net.osmand.plus.IconsCache;
+import net.osmand.plus.MapMarkersHelper.GroupHeader;
 import net.osmand.plus.MapMarkersHelper.MapMarker;
 import net.osmand.plus.MapMarkersHelper.MapMarkersGroup;
-import net.osmand.plus.MapMarkersHelper.GroupHeader;
 import net.osmand.plus.MapMarkersHelper.ShowHideHistoryButton;
 import net.osmand.plus.OsmandApplication;
 import net.osmand.plus.OsmandSettings;
@@ -51,6 +51,12 @@ public class MapMarkersGroupsAdapter extends RecyclerView.Adapter<RecyclerView.V
 	private boolean showDirectionEnabled;
 	private List<MapMarker> showDirectionMarkers;
 	private Snackbar snackbar;
+
+	private MapMarkersGroupsAdapterListener listener;
+
+	public void setListener(MapMarkersGroupsAdapterListener listener) {
+		this.listener = listener;
+	}
 
 	public MapMarkersGroupsAdapter(MapActivity mapActivity) {
 		this.mapActivity = mapActivity;
@@ -151,7 +157,12 @@ public class MapMarkersGroupsAdapter extends RecyclerView.Adapter<RecyclerView.V
 	public RecyclerView.ViewHolder onCreateViewHolder(ViewGroup viewGroup, int viewType) {
 		if (viewType == MARKER_TYPE) {
 			View view = LayoutInflater.from(viewGroup.getContext()).inflate(R.layout.map_marker_item_new, viewGroup, false);
-			view.setClickable(true);
+			view.setOnClickListener(new View.OnClickListener() {
+				@Override
+				public void onClick(View view) {
+					listener.onItemClick(view);
+				}
+			});
 			return new MapMarkerItemViewHolder(view);
 		} else if (viewType == HEADER_TYPE) {
 			View view = LayoutInflater.from(viewGroup.getContext()).inflate(R.layout.map_marker_item_header, viewGroup, false);
@@ -476,5 +487,10 @@ public class MapMarkersGroupsAdapter extends RecyclerView.Adapter<RecyclerView.V
 			}
 		}
 		return index;
+	}
+
+	public interface MapMarkersGroupsAdapterListener {
+
+		void onItemClick(View view);
 	}
 }
