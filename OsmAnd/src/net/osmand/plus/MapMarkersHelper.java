@@ -492,21 +492,6 @@ public class MapMarkersHelper {
 		}
 	}
 
-	public void addMarker(MapMarker marker, int position) {
-		if (marker != null) {
-			markersDbHelper.addMarker(marker);
-			if (marker.history) {
-				mapMarkersHistory.add(position, marker);
-				sortMarkers(mapMarkersHistory, true, OsmandSettings.MapMarkersOrderByMode.DATE_ADDED_DESC);
-			} else {
-				mapMarkers.add(position, marker);
-				reorderActiveMarkersIfNeeded();
-			}
-			addMarkerToGroup(marker);
-			refresh();
-		}
-	}
-
 	public void restoreMarkerFromHistory(MapMarker marker, int position) {
 		if (marker != null) {
 			markersDbHelper.restoreMapMarkerFromHistory(marker);
@@ -704,11 +689,34 @@ public class MapMarkersHelper {
 		markersDbHelper.removeDisabledGroups();
 	}
 
-	public void updateGroupDisabled(String id, boolean disabled) {
+	public void updateGroupDisabled(MapMarkersGroup group, boolean disabled) {
+		String id = group.getGroupKey();
 		if (id != null) {
 			markersDbHelper.updateSyncGroupDisabled(id, disabled);
+			updateSyncGroupDisabled(group, disabled);
 		}
-		loadMarkers();
+	}
+
+	private void updateSyncGroupDisabled(MapMarkersGroup group, boolean disabled) {
+		List<MapMarker> groupMarkers = group.getMarkers();
+		for (MapMarker marker : groupMarkers) {
+			if (marker.history) {
+				if (disabled) {
+					mapMarkersHistory.remove(marker);
+				} else {
+					mapMarkersHistory.add(marker);
+				}
+			} else {
+				if (disabled) {
+					mapMarkers.remove(marker);
+				} else {
+					mapMarkers.add(marker);
+				}
+			}
+		}
+		reorderActiveMarkersIfNeeded();
+		sortMarkers(mapMarkersHistory, true, OsmandSettings.MapMarkersOrderByMode.DATE_ADDED_DESC);
+		refresh();
 	}
 
 	public void removeActiveMarkersFromSyncGroup(String syncGroupId) {
@@ -799,16 +807,6 @@ public class MapMarkersHelper {
 			reorderActiveMarkersIfNeeded();
 			refresh();
 			lookupAddress(marker);
-		}
-	}
-
-	public void moveMarkerToTop(MapMarker marker) {
-		int i = mapMarkers.indexOf(marker);
-		if (i != -1 && mapMarkers.size() > 1) {
-			mapMarkers.remove(i);
-			mapMarkers.add(0, marker);
-			reorderActiveMarkersIfNeeded();
-			refresh();
 		}
 	}
 

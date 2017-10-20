@@ -75,6 +75,7 @@ public class MapMarkersGroupsAdapter extends RecyclerView.Adapter<RecyclerView.V
 
 	public void createDisplayGroups() {
 		items.clear();
+		app.getMapMarkersHelper().updateGroups();
 		List<MapMarkersGroup> groups = app.getMapMarkersHelper().getMapMarkersGroups();
 		for (int i = 0; i < groups.size(); i++) {
 			MapMarkersGroup group = groups.get(i);
@@ -362,32 +363,32 @@ public class MapMarkersGroupsAdapter extends RecyclerView.Adapter<RecyclerView.V
 				headerViewHolder.disableGroupSwitch.setVisibility(View.GONE);
 			} else if (header instanceof GroupHeader) {
 				final GroupHeader groupHeader = (GroupHeader) header;
-				String groupName = groupHeader.getGroup().getName();
+				final MapMarkersGroup group = groupHeader.getGroup();
+				String groupName = group.getName();
 				if (groupName.equals("")) {
 					groupName = app.getString(R.string.shared_string_favorites);
 				}
 				headerString = groupName + " \u2014 "
-						+ groupHeader.getGroup().getActiveMarkers().size()
-						+ "/" + groupHeader.getGroup().getMarkers().size();
+						+ group.getActiveMarkers().size()
+						+ "/" + group.getMarkers().size();
 				headerViewHolder.icon.setVisibility(View.VISIBLE);
 				headerViewHolder.iconSpace.setVisibility(View.GONE);
 				headerViewHolder.icon.setImageDrawable(iconsCache.getIcon(groupHeader.getIconRes(), R.color.divider_color));
-				boolean groupIsDisabled = groupHeader.getGroup().isDisabled();
+				boolean groupIsDisabled = group.isDisabled();
 				headerViewHolder.disableGroupSwitch.setVisibility(View.VISIBLE);
 				headerViewHolder.disableGroupSwitch.setChecked(!groupIsDisabled);
 				headerViewHolder.disableGroupSwitch.setOnCheckedChangeListener(new CompoundButton.OnCheckedChangeListener() {
 					@Override
 					public void onCheckedChanged(CompoundButton compoundButton, boolean enabled) {
-						groupHeader.getGroup().setDisabled(!enabled);
-						final String groupKey = groupHeader.getGroup().getGroupKey();
-						app.getMapMarkersHelper().updateGroupDisabled(groupKey, !enabled);
+						group.setDisabled(!enabled);
+						app.getMapMarkersHelper().updateGroupDisabled(group, !enabled);
 						if (!enabled) {
 							snackbar = Snackbar.make(holder.itemView, app.getString(R.string.group_will_be_removed_after_restart), Snackbar.LENGTH_LONG)
 									.setAction(R.string.shared_string_undo, new View.OnClickListener() {
 										@Override
 										public void onClick(View view) {
-											groupHeader.getGroup().setDisabled(false);
-											app.getMapMarkersHelper().updateGroupDisabled(groupKey, false);
+											group.setDisabled(false);
+											app.getMapMarkersHelper().updateGroupDisabled(group, false);
 											headerViewHolder.disableGroupSwitch.setChecked(true);
 										}
 									});

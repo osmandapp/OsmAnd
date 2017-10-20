@@ -175,7 +175,7 @@
 
             <ImageView
                 android:id="@+id/show_hide_keyboard_icon"
-                android:padding="@dimen/bottom_sheet_content_padding"
+                android:padding="@dimen/content_padding"
                 android:background="?attr/selectableItemBackground"
                 android:layout_gravity="center_vertical"
                 android:layout_width="wrap_content"

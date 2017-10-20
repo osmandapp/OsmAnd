@@ -161,7 +161,7 @@ public class ShowDirectionBottomSheetDialogFragment extends BottomSheetDialogFra
 
 				if (!portrait) {
 					if (screenHeight - statusBarHeight - mainView.getHeight()
-							>= AndroidUtils.dpToPx(getActivity(), 8)) {
+							>= getResources().getDimension(R.dimen.bottom_sheet_content_padding_small)) {
 						AndroidUtils.setBackground(getActivity(), mainView, night,
 								R.drawable.bg_bottom_sheet_topsides_landscape_light, R.drawable.bg_bottom_sheet_topsides_landscape_dark);
 					} else {
