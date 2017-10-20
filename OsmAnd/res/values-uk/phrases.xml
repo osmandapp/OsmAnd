@@ -3492,4 +3492,19 @@
 
 	<string name="poi_vhf">УКХ-канал</string>
 
-</resources>
+<string name="poi_operational_status">Робочий стан</string>
+	<string name="poi_water_supply_type">Тип водопостачання</string>
+	<string name="poi_water_purification">Очищення води</string>
+	<string name="poi_water_place_access">Доступ до водопостачання</string>
+
+<string name="poi_gorge">Ущелина</string>
+	<string name="poi_couloir">Кулуар</string>
+	<string name="poi_mountain_area">Гірська місцевість</string>
+
+	<string name="poi_surface_clay">Глина</string>
+	<string name="poi_surface_tartan">Тартан</string>
+	<string name="poi_surface_artificial_turf">Штучна дерновина</string>
+	<string name="poi_surface_decoturf">Декораративна дерновина</string>
+	<string name="poi_surface_metal_grid">Металева сітка</string>
+
+	</resources>
