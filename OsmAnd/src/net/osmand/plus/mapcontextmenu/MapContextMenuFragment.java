@@ -565,6 +565,7 @@ public class MapContextMenuFragment extends Fragment implements DownloadEvents {
 		boolean needMapAdjust = oldMenuState != newMenuState && newMenuState != MenuState.FULL_SCREEN;
 
 		if (newMenuState != oldMenuState) {
+			restoreCustomMapRatio();
 			menu.updateControlsVisibility(true);
 			doBeforeMenuStateChange(oldMenuState, newMenuState);
 		}
@@ -572,20 +573,39 @@ public class MapContextMenuFragment extends Fragment implements DownloadEvents {
 		applyPosY(currentY, needCloseMenu, needMapAdjust, oldMenuState, newMenuState, 0);
 	}
 
-	public void doZoomIn() {
-		if (!centered) {
-			centered = true;
-			calculateCenterLatLon(menu.getLatLon(), getZoom() + 1, true);
+	private void restoreCustomMapRatio() {
+		if (map.hasCustomMapRatio()) {
+			map.restoreMapRatio();
 		}
-		applyPosY(getViewY(), false, true, 0, 0, 1);
+	}
+
+	private void setCustomMapRatio() {
+		LatLon latLon = menu.getLatLon();
+		RotatedTileBox tb = map.getCurrentRotatedTileBox().copy();
+		float px = tb.getPixXFromLatLon(latLon.getLatitude(), latLon.getLongitude());
+		float py = tb.getPixYFromLatLon(latLon.getLatitude(), latLon.getLongitude());
+		float ratioX = px / tb.getPixWidth();
+		float ratioY = py / tb.getPixHeight();
+		map.setCustomMapRatio(ratioX, ratioY);
+		map.setLatLon(latLon.getLatitude(), latLon.getLongitude());
+	}
+
+	public void doZoomIn() {
+		if (map.isZooming() && map.hasCustomMapRatio()) {
+			getMapActivity().changeZoom(2, System.currentTimeMillis());
+		} else {
+			if (!map.hasCustomMapRatio()) {
+				setCustomMapRatio();
+			}
+			getMapActivity().changeZoom(1, System.currentTimeMillis());
+		}
 	}
 
 	public void doZoomOut() {
-		if (!centered) {
-			centered = true;
-			calculateCenterLatLon(menu.getLatLon(), getZoom() - 1, true);
+		if (!map.hasCustomMapRatio()) {
+			setCustomMapRatio();
 		}
-		applyPosY(getViewY(), false, true, 0, 0, -1);
+		getMapActivity().changeZoom(-1, System.currentTimeMillis());
 	}
 
 	private void applyPosY(final int currentY, final boolean needCloseMenu, boolean needMapAdjust,
@@ -859,6 +879,8 @@ public class MapContextMenuFragment extends Fragment implements DownloadEvents {
 
 	@Override
 	public void onPause() {
+		restoreCustomMapRatio();
+
 		ViewParent parent = view.getParent();
 		if (parent != null && containerLayoutListener != null) {
 			((View) parent).removeOnLayoutChangeListener(containerLayoutListener);
