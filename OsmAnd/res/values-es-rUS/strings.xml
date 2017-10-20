@@ -2810,4 +2810,6 @@ Proporciona un código completo</string>
     <string name="enter_new_name">Ingresar nuevo nombre</string>
     <string name="shared_string_back">Atrás</string>
     <string name="wrong_format">Formato incorrecto</string>
-    </resources>
+    <string name="view">Vista</string>
+	<string name="waypoints_added_to_map_markers">Puntos de referencia añadidos a los marcadores del mapa</string>
+	</resources>
