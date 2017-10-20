@@ -1,6 +1,7 @@
 package net.osmand.plus.mapmarkers;
 
 import android.app.Dialog;
+import android.content.Context;
 import android.os.Build;
 import android.os.Bundle;
 import android.support.annotation.Nullable;
@@ -12,6 +13,7 @@ import android.view.ViewGroup;
 import android.view.ViewTreeObserver;
 import android.view.Window;
 import android.view.WindowManager;
+import android.view.inputmethod.InputMethodManager;
 import android.widget.EditText;
 import android.widget.LinearLayout;
 
@@ -55,6 +57,8 @@ public class RenameMarkerBottomSheetDialogFragment extends BottomSheetDialogFrag
 
 		final EditText nameEditText = (EditText) mainView.findViewById(R.id.name_edit_text);
 		nameEditText.setText(marker.getName(mapActivity));
+		final InputMethodManager imm = (InputMethodManager) getActivity().getSystemService(Context.INPUT_METHOD_SERVICE);
+		imm.toggleSoftInput(InputMethodManager.SHOW_FORCED, InputMethodManager.HIDE_IMPLICIT_ONLY);
 		View textBox = mainView.findViewById(R.id.name_text_box);
 		if (textBox instanceof OsmandTextFieldBoxes) {
 			((OsmandTextFieldBoxes) textBox).activate(true);
@@ -63,6 +67,7 @@ public class RenameMarkerBottomSheetDialogFragment extends BottomSheetDialogFrag
 		mainView.findViewById(R.id.save_button).setOnClickListener(new View.OnClickListener() {
 			@Override
 			public void onClick(View view) {
+				imm.hideSoftInputFromWindow(nameEditText.getWindowToken(), 0);
 				dismiss();
 			}
 		});
@@ -70,6 +75,7 @@ public class RenameMarkerBottomSheetDialogFragment extends BottomSheetDialogFrag
 		mainView.findViewById(R.id.close_button).setOnClickListener(new View.OnClickListener() {
 			@Override
 			public void onClick(View view) {
+				imm.hideSoftInputFromWindow(nameEditText.getWindowToken(), 0);
 				dismiss();
 			}
 		});
