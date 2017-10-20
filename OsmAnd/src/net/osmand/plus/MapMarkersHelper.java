@@ -101,6 +101,10 @@ public class MapMarkersHelper {
 			return pointDescription == null ? "" : pointDescription.getName();
 		}
 
+		public void setName(String name) {
+			pointDescription.setName(name);
+		}
+
 		public double getLatitude() {
 			return point.getLatitude();
 		}

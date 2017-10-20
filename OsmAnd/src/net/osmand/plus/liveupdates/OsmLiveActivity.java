@@ -34,6 +34,7 @@ public class OsmLiveActivity extends AbstractDownloadActivity implements Downloa
 	private LiveUpdatesFragmentPagerAdapter pagerAdapter;
 	private InAppHelper inAppHelper;
 	private boolean openSubscription;
+	private GetLastUpdateDateTask getLastUpdateDateTask;
 	private static final String URL = "https://osmand.net/api/osmlive_status";
 
 	public InAppHelper getInAppHelper() {
@@ -53,42 +54,6 @@ public class OsmLiveActivity extends AbstractDownloadActivity implements Downloa
 			inAppHelper = null;
 		}
 
-		new AsyncTask<Void, Void, String>() {
-
-			@Override
-			protected void onPreExecute() {
-			}
-
-			@Override
-			protected String doInBackground(Void... params) {
-				try {
-					return AndroidNetworkUtils.sendRequest(getMyApplication(), URL, null, "Requesting map updates info...", false, false);
-				} catch (Exception e) {
-					LOG.error("Error: " + "Requesting map updates info error", e);
-					return null;
-				}
-			}
-
-			@Override
-			protected void onPostExecute(String response) {
-				if (response != null) {
-					ActionBar actionBar = getSupportActionBar();
-					if (actionBar != null) {
-						SimpleDateFormat source = new SimpleDateFormat("yyyy-MM-dd HH:mm", Locale.US);
-						source.setTimeZone(TimeZone.getTimeZone("UTC"));
-						SimpleDateFormat dest = new SimpleDateFormat("yyyy-MM-dd HH:mm", Locale.US);
-						dest.setTimeZone(TimeZone.getDefault());
-						try {
-							Date parsed = source.parse(response);
-							actionBar.setSubtitle(dest.format(parsed));
-						} catch (ParseException e) {
-							e.printStackTrace();
-						}
-					}
-				}
-			}
-		}.execute();
-
 		Intent intent = getIntent();
 		if (intent != null && intent.getExtras() != null) {
 			openSubscription = intent.getExtras().getBoolean(OPEN_SUBSCRIPTION_INTENT_PARAM, false);
@@ -101,6 +66,9 @@ public class OsmLiveActivity extends AbstractDownloadActivity implements Downloa
 		final TabLayout tabLayout = (TabLayout) findViewById(R.id.tab_layout);
 		tabLayout.setTabMode(TabLayout.MODE_SCROLLABLE);
 		tabLayout.setupWithViewPager(viewPager);
+
+		getLastUpdateDateTask = new GetLastUpdateDateTask();
+		getLastUpdateDateTask.executeOnExecutor(AsyncTask.THREAD_POOL_EXECUTOR);
 	}
 
 	@Override
@@ -137,6 +105,9 @@ public class OsmLiveActivity extends AbstractDownloadActivity implements Downloa
 		if (inAppHelper != null) {
 			inAppHelper.stop();
 		}
+		if (getLastUpdateDateTask != null) {
+			getLastUpdateDateTask.cancel(true);
+		}
 	}
 
 	@Override
@@ -156,6 +127,38 @@ public class OsmLiveActivity extends AbstractDownloadActivity implements Downloa
 
 	public boolean shouldOpenSubscription() {
 		return openSubscription;
+	}
+
+	private class GetLastUpdateDateTask extends AsyncTask<Void, Void, String> {
+
+		@Override
+		protected String doInBackground(Void... params) {
+			try {
+				return AndroidNetworkUtils.sendRequest(getMyApplication(), URL, null, "Requesting map updates info...", false, false);
+			} catch (Exception e) {
+				LOG.error("Error: " + "Requesting map updates info error", e);
+				return null;
+			}
+		}
+
+		@Override
+		protected void onPostExecute(String response) {
+			if (response != null) {
+				ActionBar actionBar = getSupportActionBar();
+				if (actionBar != null) {
+					SimpleDateFormat source = new SimpleDateFormat("yyyy-MM-dd HH:mm", Locale.US);
+					source.setTimeZone(TimeZone.getTimeZone("UTC"));
+					SimpleDateFormat dest = new SimpleDateFormat("yyyy-MM-dd HH:mm", Locale.US);
+					dest.setTimeZone(TimeZone.getDefault());
+					try {
+						Date parsed = source.parse(response);
+						actionBar.setSubtitle(dest.format(parsed));
+					} catch (ParseException e) {
+						e.printStackTrace();
+					}
+				}
+			}
+		}
 	}
 
 	public static class LiveUpdatesFragmentPagerAdapter extends FragmentPagerAdapter {
