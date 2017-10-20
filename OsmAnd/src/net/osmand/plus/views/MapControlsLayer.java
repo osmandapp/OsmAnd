@@ -676,7 +676,8 @@ public class MapControlsLayer extends OsmandMapLayer {
 	public void switchMapControlsVisibility() {
 		if (app.getRoutingHelper().isFollowingMode() || app.getRoutingHelper().isPauseNavigation()
 				|| mapActivity.getMeasurementToolFragment() != null
-				|| mapActivity.getPlanRouteFragment() != null) {
+				|| mapActivity.getPlanRouteFragment() != null
+				|| mapActivity.getMapLayers().getRulerControlLayer().rulerModeOn()) {
 			return;
 		}
 		if (isMapControlsVisible()) {

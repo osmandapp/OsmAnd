@@ -55,6 +55,9 @@ public class MapMarkersActiveFragment extends Fragment implements OsmAndCompassL
 			@Override
 			public void onItemClick(View view) {
 				int pos = recyclerView.getChildAdapterPosition(view);
+				if (pos == RecyclerView.NO_POSITION) {
+					return;
+				}
 				MapMarker marker = adapter.getItem(pos);
 				mapActivity.getMyApplication().getSettings()
 						.setMapLocationToShow(marker.getLatitude(), marker.getLongitude(), 15, null, false, null);
