@@ -16,9 +16,9 @@
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_marginEnd="@dimen/bottom_sheet_icon_margin"
-            android:layout_marginLeft="@dimen/bottom_sheet_content_padding"
+            android:layout_marginLeft="@dimen/content_padding"
             android:layout_marginRight="@dimen/bottom_sheet_icon_margin"
-            android:layout_marginStart="@dimen/bottom_sheet_content_padding"
+            android:layout_marginStart="@dimen/content_padding"
             tools:src="@drawable/ic_action_flag_dark"/>
 
         <LinearLayout
@@ -93,7 +93,7 @@
     <View
         android:layout_width="match_parent"
         android:layout_height="1dp"
-        android:layout_marginBottom="@dimen/measurement_tool_bottom_divider_margin_bottom"
+        android:layout_marginBottom="@dimen/bottom_sheet_divider_margin_bottom"
         android:background="?attr/dashboard_divider"/>
 
     <LinearLayout
@@ -108,9 +108,9 @@
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_marginEnd="@dimen/bottom_sheet_icon_margin"
-            android:layout_marginLeft="@dimen/bottom_sheet_content_padding"
+            android:layout_marginLeft="@dimen/content_padding"
             android:layout_marginRight="@dimen/bottom_sheet_icon_margin"
-            android:layout_marginStart="@dimen/bottom_sheet_content_padding"
+            android:layout_marginStart="@dimen/content_padding"
             tools:src="@drawable/ic_action_edit_dark"/>
 
         <TextView
@@ -125,10 +125,10 @@
     <View
         android:layout_width="match_parent"
         android:layout_height="1dp"
-        android:layout_marginBottom="@dimen/measurement_tool_bottom_divider_margin_bottom"
-        android:layout_marginLeft="@dimen/measurement_tool_bottom_divider_margin_start"
-        android:layout_marginStart="@dimen/measurement_tool_bottom_divider_margin_start"
-        android:layout_marginTop="@dimen/measurement_tool_bottom_divider_margin_top"
+        android:layout_marginBottom="@dimen/bottom_sheet_divider_margin_bottom"
+        android:layout_marginLeft="@dimen/bottom_sheet_divider_margin_start"
+        android:layout_marginStart="@dimen/bottom_sheet_divider_margin_start"
+        android:layout_marginTop="@dimen/bottom_sheet_divider_margin_top"
         android:background="?attr/dashboard_divider"/>
 
     <LinearLayout
@@ -143,9 +143,9 @@
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_marginEnd="@dimen/bottom_sheet_icon_margin"
-            android:layout_marginLeft="@dimen/bottom_sheet_content_padding"
+            android:layout_marginLeft="@dimen/content_padding"
             android:layout_marginRight="@dimen/bottom_sheet_icon_margin"
-            android:layout_marginStart="@dimen/bottom_sheet_content_padding"
+            android:layout_marginStart="@dimen/content_padding"
             tools:src="@drawable/ic_action_delete_dark"/>
 
         <TextView
