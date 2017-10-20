@@ -2729,4 +2729,18 @@ Por favor proporciona un código completo</string>
     <string name="make_round_trip_descr">Duplica el punto de inicio y lo añade como destino.</string>
     <string name="make_round_trip">Viaje de ida y vuelta</string>
     <string name="shared_string_navigate">Navegar</string>
+    <string name="wrong_format">Formato incorrecto</string>
+    <string name="shared_string_road">Carretera</string>
+    <string name="show_map">Mostrar mapa</string>
+    <string name="route_is_calculated">Ruta calculada</string>
+    <string name="round_trip">Viaje de ida y vuelta</string>
+    <string name="plan_route_no_markers_toast">Debes añadir al menos un marcador para usar esta función.</string>
+    <string name="release_2_8">• Marcadores del mapa totalmente rediseñados con directrices y planificación de rutas 
+\n 
+\n • La herramienta de medición de distancias permite el ajuste al camino y guardar puntos como una traza 
+\n 
+\n • OSM Live: corrección de errores, nuevos datos en el servidor cada 30 minutos, actualizaciones implementadas en la navegación 
+\n 
+\n</string>
+    <string name="rendering_value_darkyellow_name">Amarillo oscuro</string>
     </resources>
