@@ -787,6 +787,7 @@ public class MapContextMenuFragment extends Fragment implements DownloadEvents {
 				progressTitle.setText(titleProgressController.caption);
 				progressBar.setIndeterminate(titleProgressController.indeterminate);
 				progressBar.setProgress(titleProgressController.progress);
+				progressBar.setVisibility(titleProgressController.progressVisible ? View.VISIBLE : View.GONE);
 
 				final ImageView progressButton = (ImageView) view.findViewById(R.id.progressButton);
 				progressButton.setVisibility(titleProgressController.buttonVisible ? View.VISIBLE : View.GONE);
