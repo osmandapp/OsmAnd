@@ -23,10 +23,10 @@
                 android:layout_width="match_parent"
                 android:layout_height="@dimen/bottom_sheet_title_height"
                 android:gravity="center_vertical"
-                android:paddingEnd="@dimen/bottom_sheet_content_padding"
-                android:paddingLeft="@dimen/bottom_sheet_content_padding"
-                android:paddingRight="@dimen/bottom_sheet_content_padding"
-                android:paddingStart="@dimen/bottom_sheet_content_padding"
+                android:paddingEnd="@dimen/content_padding"
+                android:paddingLeft="@dimen/content_padding"
+                android:paddingRight="@dimen/content_padding"
+                android:paddingStart="@dimen/content_padding"
                 android:text="@string/shared_string_options"
                 android:textAppearance="@style/TextAppearance.ListItemTitle"
                 osmand:typeface="@string/font_roboto_medium"/>
@@ -38,8 +38,8 @@
                 android:background="?attr/selectableItemBackground"
                 android:descendantFocusability="blocksDescendants"
                 android:minHeight="@dimen/bottom_sheet_list_item_height"
-                android:paddingLeft="@dimen/bottom_sheet_content_padding"
-                android:paddingRight="@dimen/bottom_sheet_content_padding">
+                android:paddingLeft="@dimen/content_padding"
+                android:paddingRight="@dimen/content_padding">
 
                 <ImageView
                     android:layout_gravity="center_vertical"
@@ -83,8 +83,8 @@
                 android:textAllCaps="true"
                 android:paddingTop="@dimen/bottom_sheet_content_padding_small"
                 android:paddingBottom="@dimen/bottom_sheet_content_padding_small"
-                android:paddingLeft="@dimen/bottom_sheet_content_padding"
-                android:paddingRight="@dimen/bottom_sheet_content_padding"
+                android:paddingLeft="@dimen/content_padding"
+                android:paddingRight="@dimen/content_padding"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:text="@string/coordinates_format"/>

@@ -23,20 +23,20 @@
                 android:layout_width="match_parent"
                 android:layout_height="@dimen/bottom_sheet_title_height"
                 android:gravity="center_vertical"
-                android:paddingEnd="@dimen/bottom_sheet_content_padding"
-                android:paddingLeft="@dimen/bottom_sheet_content_padding"
-                android:paddingRight="@dimen/bottom_sheet_content_padding"
-                android:paddingStart="@dimen/bottom_sheet_content_padding"
+                android:paddingEnd="@dimen/content_padding"
+                android:paddingLeft="@dimen/content_padding"
+                android:paddingRight="@dimen/content_padding"
+                android:paddingStart="@dimen/content_padding"
                 android:text="@string/choose_navigation_type"
                 android:textAppearance="@style/TextAppearance.ListItemTitle"/>
 
             <TextView
                 android:layout_width="match_parent"
                 android:layout_height="@dimen/bottom_sheet_descr_height"
-                android:paddingEnd="@dimen/bottom_sheet_content_padding"
-                android:paddingLeft="@dimen/bottom_sheet_content_padding"
-                android:paddingRight="@dimen/bottom_sheet_content_padding"
-                android:paddingStart="@dimen/bottom_sheet_content_padding"
+                android:paddingEnd="@dimen/content_padding"
+                android:paddingLeft="@dimen/content_padding"
+                android:paddingRight="@dimen/content_padding"
+                android:paddingStart="@dimen/content_padding"
                 android:text="@string/measurement_tool_snap_to_road_descr"
                 android:textColor="?android:textColorSecondary"
                 android:textSize="@dimen/default_desc_text_size"/>

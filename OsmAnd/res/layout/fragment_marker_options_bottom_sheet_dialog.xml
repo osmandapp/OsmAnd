@@ -17,16 +17,16 @@
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:orientation="vertical"
-            android:paddingBottom="8dp">
+            android:paddingBottom="@dimen/bottom_sheet_content_padding_small">
 
             <net.osmand.plus.widgets.TextViewEx
                 android:layout_width="match_parent"
                 android:layout_height="@dimen/bottom_sheet_title_height"
                 android:gravity="center_vertical"
-                android:paddingEnd="@dimen/bottom_sheet_content_padding"
-                android:paddingLeft="@dimen/bottom_sheet_content_padding"
-                android:paddingRight="@dimen/bottom_sheet_content_padding"
-                android:paddingStart="@dimen/bottom_sheet_content_padding"
+                android:paddingEnd="@dimen/content_padding"
+                android:paddingLeft="@dimen/content_padding"
+                android:paddingRight="@dimen/content_padding"
+                android:paddingStart="@dimen/content_padding"
                 android:text="@string/shared_string_options"
                 android:textAppearance="@style/TextAppearance.ListItemTitle"
                 osmand:typeface="@string/font_roboto_medium"/>
@@ -37,15 +37,15 @@
                 android:layout_height="@dimen/bottom_sheet_list_item_height"
                 android:background="?attr/selectableItemBackground"
                 android:minHeight="@dimen/bottom_sheet_list_item_height"
-                android:paddingEnd="@dimen/bottom_sheet_content_padding"
-                android:paddingLeft="@dimen/bottom_sheet_content_padding"
-                android:paddingRight="@dimen/bottom_sheet_content_padding"
-                android:paddingStart="@dimen/bottom_sheet_content_padding">
+                android:paddingEnd="@dimen/content_padding"
+                android:paddingLeft="@dimen/content_padding"
+                android:paddingRight="@dimen/content_padding"
+                android:paddingStart="@dimen/content_padding">
 
                 <ImageView
                     android:id="@+id/sort_by_icon"
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
+                    android:layout_width="@dimen/standard_icon_size"
+                    android:layout_height="@dimen/standard_icon_size"
                     android:layout_gravity="center_vertical"
                     android:layout_marginEnd="@dimen/bottom_sheet_icon_margin"
                     android:layout_marginRight="@dimen/bottom_sheet_icon_margin"
@@ -66,15 +66,15 @@
                 android:layout_height="@dimen/bottom_sheet_list_item_height"
                 android:background="?attr/selectableItemBackground"
                 android:minHeight="@dimen/bottom_sheet_list_item_height"
-                android:paddingEnd="@dimen/bottom_sheet_content_padding"
-                android:paddingLeft="@dimen/bottom_sheet_content_padding"
-                android:paddingRight="@dimen/bottom_sheet_content_padding"
-                android:paddingStart="@dimen/bottom_sheet_content_padding">
+                android:paddingEnd="@dimen/content_padding"
+                android:paddingLeft="@dimen/content_padding"
+                android:paddingRight="@dimen/content_padding"
+                android:paddingStart="@dimen/content_padding">
 
                 <ImageView
                     android:id="@+id/show_direction_icon"
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
+                    android:layout_width="@dimen/standard_icon_size"
+                    android:layout_height="@dimen/standard_icon_size"
                     android:layout_gravity="center_vertical"
                     android:layout_marginEnd="@dimen/bottom_sheet_icon_margin"
                     android:layout_marginRight="@dimen/bottom_sheet_icon_margin"
@@ -105,10 +105,10 @@
             <View
                 android:layout_width="wrap_content"
                 android:layout_height="1dp"
-                android:layout_marginBottom="@dimen/measurement_tool_bottom_divider_margin_bottom"
-                android:layout_marginLeft="@dimen/measurement_tool_bottom_divider_margin_start"
-                android:layout_marginStart="@dimen/measurement_tool_bottom_divider_margin_start"
-                android:layout_marginTop="@dimen/measurement_tool_bottom_divider_margin_top"
+                android:layout_marginBottom="@dimen/bottom_sheet_divider_margin_bottom"
+                android:layout_marginLeft="@dimen/bottom_sheet_divider_margin_start"
+                android:layout_marginStart="@dimen/bottom_sheet_divider_margin_start"
+                android:layout_marginTop="@dimen/bottom_sheet_divider_margin_top"
                 android:background="?attr/dashboard_divider"/>
 
             <LinearLayout
@@ -118,15 +118,15 @@
                 android:layout_height="@dimen/bottom_sheet_list_item_height"
                 android:background="?attr/selectableItemBackground"
                 android:minHeight="@dimen/bottom_sheet_list_item_height"
-                android:paddingEnd="@dimen/bottom_sheet_content_padding"
-                android:paddingLeft="@dimen/bottom_sheet_content_padding"
-                android:paddingRight="@dimen/bottom_sheet_content_padding"
-                android:paddingStart="@dimen/bottom_sheet_content_padding">
+                android:paddingEnd="@dimen/content_padding"
+                android:paddingLeft="@dimen/content_padding"
+                android:paddingRight="@dimen/content_padding"
+                android:paddingStart="@dimen/content_padding">
 
                 <ImageView
                     android:id="@+id/coordinate_input_icon"
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
+                    android:layout_width="@dimen/standard_icon_size"
+                    android:layout_height="@dimen/standard_icon_size"
                     android:layout_gravity="center_vertical"
                     android:layout_marginEnd="@dimen/bottom_sheet_icon_margin"
                     android:layout_marginRight="@dimen/bottom_sheet_icon_margin"
@@ -147,15 +147,15 @@
                 android:layout_height="@dimen/bottom_sheet_list_item_height"
                 android:background="?attr/selectableItemBackground"
                 android:minHeight="@dimen/bottom_sheet_list_item_height"
-                android:paddingEnd="@dimen/bottom_sheet_content_padding"
-                android:paddingLeft="@dimen/bottom_sheet_content_padding"
-                android:paddingRight="@dimen/bottom_sheet_content_padding"
-                android:paddingStart="@dimen/bottom_sheet_content_padding">
+                android:paddingEnd="@dimen/content_padding"
+                android:paddingLeft="@dimen/content_padding"
+                android:paddingRight="@dimen/content_padding"
+                android:paddingStart="@dimen/content_padding">
 
                 <ImageView
                     android:id="@+id/build_route_icon"
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
+                    android:layout_width="@dimen/standard_icon_size"
+                    android:layout_height="@dimen/standard_icon_size"
                     android:layout_gravity="center_vertical"
                     android:layout_marginEnd="@dimen/bottom_sheet_icon_margin"
                     android:layout_marginRight="@dimen/bottom_sheet_icon_margin"
@@ -176,15 +176,15 @@
                 android:layout_height="@dimen/bottom_sheet_list_item_height"
                 android:background="?attr/selectableItemBackground"
                 android:minHeight="@dimen/bottom_sheet_list_item_height"
-                android:paddingEnd="@dimen/bottom_sheet_content_padding"
-                android:paddingLeft="@dimen/bottom_sheet_content_padding"
-                android:paddingRight="@dimen/bottom_sheet_content_padding"
-                android:paddingStart="@dimen/bottom_sheet_content_padding">
+                android:paddingEnd="@dimen/content_padding"
+                android:paddingLeft="@dimen/content_padding"
+                android:paddingRight="@dimen/content_padding"
+                android:paddingStart="@dimen/content_padding">
 
                 <ImageView
                     android:id="@+id/save_as_new_track_icon"
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
+                    android:layout_width="@dimen/standard_icon_size"
+                    android:layout_height="@dimen/standard_icon_size"
                     android:layout_gravity="center_vertical"
                     android:layout_marginEnd="@dimen/bottom_sheet_icon_margin"
                     android:layout_marginRight="@dimen/bottom_sheet_icon_margin"
@@ -203,10 +203,10 @@
                 android:id="@+id/move_all_to_history_divider"
                 android:layout_width="wrap_content"
                 android:layout_height="1dp"
-                android:layout_marginBottom="@dimen/measurement_tool_bottom_divider_margin_bottom"
-                android:layout_marginLeft="@dimen/measurement_tool_bottom_divider_margin_start"
-                android:layout_marginStart="@dimen/measurement_tool_bottom_divider_margin_start"
-                android:layout_marginTop="@dimen/measurement_tool_bottom_divider_margin_top"
+                android:layout_marginBottom="@dimen/bottom_sheet_divider_margin_bottom"
+                android:layout_marginLeft="@dimen/bottom_sheet_divider_margin_start"
+                android:layout_marginStart="@dimen/bottom_sheet_divider_margin_start"
+                android:layout_marginTop="@dimen/bottom_sheet_divider_margin_top"
                 android:background="?attr/dashboard_divider"/>
 
             <LinearLayout
@@ -215,15 +215,15 @@
                 android:layout_height="@dimen/bottom_sheet_list_item_height"
                 android:background="?attr/selectableItemBackground"
                 android:minHeight="@dimen/bottom_sheet_list_item_height"
-                android:paddingEnd="@dimen/bottom_sheet_content_padding"
-                android:paddingLeft="@dimen/bottom_sheet_content_padding"
-                android:paddingRight="@dimen/bottom_sheet_content_padding"
-                android:paddingStart="@dimen/bottom_sheet_content_padding">
+                android:paddingEnd="@dimen/content_padding"
+                android:paddingLeft="@dimen/content_padding"
+                android:paddingRight="@dimen/content_padding"
+                android:paddingStart="@dimen/content_padding">
 
                 <ImageView
                     android:id="@+id/move_all_to_history_icon"
-                    android:layout_width="24dp"
-                    android:layout_height="24dp"
+                    android:layout_width="@dimen/standard_icon_size"
+                    android:layout_height="@dimen/standard_icon_size"
                     android:layout_gravity="center_vertical"
                     android:layout_marginEnd="@dimen/bottom_sheet_icon_margin"
                     android:layout_marginRight="@dimen/bottom_sheet_icon_margin"
