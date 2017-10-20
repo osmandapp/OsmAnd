@@ -2746,4 +2746,5 @@ Por favor proporciona un código completo</string>
     <string name="wrong_input">Entrada incorrecta</string>
     <string name="enter_new_name">Ingresar nombre nuevo</string>
     <string name="shared_string_back">Atrás</string>
-    </resources>
+    <string name="view">Ver</string>
+	</resources>
