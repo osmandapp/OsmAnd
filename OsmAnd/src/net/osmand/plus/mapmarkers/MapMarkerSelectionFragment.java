@@ -72,7 +72,11 @@ public class MapMarkerSelectionFragment extends BaseOsmAndDialogFragment {
 				LatLon myLoc = l == null ? null : new LatLon(l.getLatitude(), l.getLongitude());
 				useCenter = !mapLinked;
 				loc = (useCenter ? mw : myLoc);
-				heading = useCenter ? -mapRotation : head;
+				if (useCenter) {
+					heading = -mapRotation;
+				} else {
+					heading = head;
+				}
 			}
 		}
 		nightMode = !app.getSettings().isLightContent();
