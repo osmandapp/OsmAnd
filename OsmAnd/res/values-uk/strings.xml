@@ -3047,4 +3047,17 @@
     <string name="osn_modify_dialog_error">Виняткова ситуація: примітку не було змінено</string>
     <string name="osn_modify_dialog_title">Змінити примітку</string>
     <string name="context_menu_item_modify_note">Змінити OSM-примітку</string>
+    <string name="wrong_input">Неправильний ввід</string>
+    <string name="wrong_format">Неправильний формат</string>
+    <string name="shared_string_road">Дорога</string>
+    <string name="show_map">Показати мапу</string>
+    <string name="route_is_calculated">Маршрут розраховується</string>
+    <string name="round_trip">Подорож туди і назад</string>
+    <string name="plan_route_no_markers_toast">Ви повинні додати принаймні один маркер, щоб використовувати цю функцію.</string>
+    <string name="release_2_8">• Повністю перероблені маркери мапи, з направляючими лініями і плануванням маршруту
+\n• Інструмент вимірювання відстані, з прив’язкою до дороги і збереженням точок в якості треку
+\n• OsmAnd Live: виправлення помилок, оновлення даних на сервері кожні 30 хвилин, поновлення враховуються в навігації
+\n
+\n</string>
+    <string name="rendering_value_darkyellow_name">Темно-жовтий</string>
     </resources>
