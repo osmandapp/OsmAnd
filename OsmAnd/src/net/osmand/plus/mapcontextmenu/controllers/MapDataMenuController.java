@@ -353,7 +353,9 @@ public class MapDataMenuController extends MenuController {
 		topRightTitleButtonController.visible = (otherIndexItems != null && otherIndexItems.size() > 0)
 				|| (otherLocalIndexInfos != null && otherLocalIndexInfos.size() > 0);
 
-		boolean downloadIndexes = getMapActivity().getMyApplication().getSettings().isInternetConnectionAvailable()
+		boolean internetConnectionAvailable =
+				getMapActivity().getMyApplication().getSettings().isInternetConnectionAvailable();
+		boolean downloadIndexes = internetConnectionAvailable
 				&& !downloadThread.getIndexes().isDownloadedFromInternet
 				&& !downloadThread.getIndexes().downloadFromInternetFailed;
 
@@ -382,6 +384,9 @@ public class MapDataMenuController extends MenuController {
 			titleProgressController.visible = true;
 		} else if (downloadIndexes) {
 			titleProgressController.setIndexesDownloadMode();
+			titleProgressController.visible = true;
+		} else if (!internetConnectionAvailable) {
+			titleProgressController.setNoInternetConnectionMode();
 			titleProgressController.visible = true;
 		} else {
 			titleProgressController.visible = false;
