@@ -89,7 +89,7 @@ public class TrackPointFragment extends OsmandExpandableListFragment {
 
 	private OsmandApplication app;
 	final private PointGPXAdapter adapter = new PointGPXAdapter();
-	private GpxDisplayItemType[] filterTypes = { GpxDisplayItemType.TRACK_POINTS, GpxDisplayItemType.TRACK_ROUTE_POINTS };
+	private GpxDisplayItemType[] filterTypes = {GpxDisplayItemType.TRACK_POINTS, GpxDisplayItemType.TRACK_ROUTE_POINTS};
 	private boolean selectionMode = false;
 	private boolean addToMapMarkersMode = false;
 	private LinkedHashMap<GpxDisplayItemType, Set<GpxDisplayItem>> selectedItems = new LinkedHashMap<>();
@@ -350,7 +350,7 @@ public class TrackPointFragment extends OsmandExpandableListFragment {
 
 	protected List<GpxDisplayItem> flatten(List<GpxDisplayGroup> groups) {
 		ArrayList<GpxDisplayItem> list = new ArrayList<>();
-		for(GpxDisplayGroup g : groups) {
+		for (GpxDisplayGroup g : groups) {
 			list.addAll(g.getModifiableList());
 		}
 		return list;
@@ -647,6 +647,10 @@ public class TrackPointFragment extends OsmandExpandableListFragment {
 								AndroidUtils.trimExtension(gpx.getName()), MarkersSyncGroup.GPX_TYPE);
 						markersHelper.addMarkersSyncGroup(syncGroup);
 						markersHelper.syncGroup(syncGroup);
+						GPXFile gpxFile = getTrackActivity().getGpx();
+						if (gpxFile != null) {
+							app.getSelectedGpxHelper().selectGpxFile(gpxFile, true, false);
+						}
 					} else {
 						for (GpxDisplayItem i : entry.getValue()) {
 							if (i.locationStart != null) {
@@ -718,7 +722,7 @@ public class TrackPointFragment extends OsmandExpandableListFragment {
 			AlertDialog.Builder b = new AlertDialog.Builder(getTrackActivity());
 			final EditText editText = new EditText(getTrackActivity());
 			String name = getSelectedItems().iterator().next().group.getName();
-			if(name.indexOf('\n') > 0) {
+			if (name.indexOf('\n') > 0) {
 				name = name.substring(0, name.indexOf('\n'));
 			}
 			editText.setText(name);
@@ -735,7 +739,7 @@ public class TrackPointFragment extends OsmandExpandableListFragment {
 						actionMode.finish();
 					}
 					FavouritesDbHelper fdb = app.getFavorites();
-					for(GpxDisplayItem i : getSelectedItems()) {
+					for (GpxDisplayItem i : getSelectedItems()) {
 						if (i.locationStart != null) {
 							FavouritePoint fp = new FavouritePoint(i.locationStart.lat, i.locationStart.lon, i.name, editText.getText().toString());
 							if (!Algorithms.isEmpty(i.description)) {
