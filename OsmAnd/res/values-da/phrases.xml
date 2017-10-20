@@ -3593,10 +3593,10 @@
 	<string name="poi_surface_decoturf">DecoTurf</string>
 	<string name="poi_surface_metal_grid">Metalgitter</string>
 
-<string name="poi_location_underground">Beliggenhed: underjorden</string>
-	<string name="poi_location_underwater">Beliggenhed: undersøiske</string>
-	<string name="poi_location_overground">Beliggenhed: overjorden</string>
-	<string name="poi_location_overhead">Beliggenhed: overjorden</string>
+<string name="poi_location_underground">Beliggenhed: under jorden</string>
+	<string name="poi_location_underwater">Beliggenhed: under vandet</string>
+	<string name="poi_location_overground">Beliggenhed: over jorden</string>
+	<string name="poi_location_overhead">Beliggenhed: overliggende</string>
 	<string name="poi_location_roof">Beliggenhed: tag</string>
 	<string name="poi_location_rooftop">Beliggenhed: tagterrasse</string>
 	<string name="poi_location_outdoor">Placering: udendørs</string>
@@ -3610,5 +3610,37 @@
 	<string name="poi_visibility_house">Synlighed: hus</string>
 	<string name="poi_visibility_street">Synlighed: gaden</string>
 	<string name="poi_visibility_area">Synlighed: område</string>
+
+<string name="poi_operational_status">Driftsstatus</string>
+	<string name="poi_water_supply_type">Vandforsyningstype</string>
+	<string name="poi_water_purification">Vandrensning</string>
+	<string name="poi_water_place_access">Adgang til vandforsyning</string>
+
+<string name="poi_operational_status_open">Åben</string>
+	<string name="poi_operational_status_closed">Lukket</string>
+	<string name="poi_operational_status_restricted">Begrænset</string>
+	<string name="poi_operational_status_broken">I stykker</string>
+	<string name="poi_operational_status_needs_maintenance">Behøver vedligeholdelse</string>
+
+	<string name="poi_water_place_durability_durable">Holdbarhed af vandkilde: holdbar</string>
+	<string name="poi_water_place_durability_emergency">Holdbarhed af vandkilde: nødsituation</string>
+
+	<string name="poi_water_purification_none">Ingen</string>
+	<string name="poi_water_purification_chlorine">Klor</string>
+	<string name="poi_water_purification_reverse_osmosis">Omvendt osmose</string>
+	<string name="poi_water_purification_aquatabs">Aquatabs</string>
+
+	<string name="poi_water_supply_water_well">Vandbrønd</string>
+	<string name="poi_water_supply_pipeline">Rørledning</string>
+	<string name="poi_water_supply_running_water">Rindende vand</string>
+	<string name="poi_water_supply_pump">Pumpe</string>
+	<string name="poi_water_supply_borehole">Boring</string>
+	<string name="poi_water_supply_water_trucking">Vand med lastbil</string>
+	<string name="poi_water_supply_water_tank">Vandtank</string>
+	<string name="poi_water_supply_bottled_water">Flaskevand</string>
+
+	<string name="poi_water_place_access_community">Fællesskab</string>
+	<string name="poi_water_place_access_family">Familie</string>
+	<string name="poi_water_place_access_multifamilies">Flere familier</string>
 
 </resources>
