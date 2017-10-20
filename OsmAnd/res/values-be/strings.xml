@@ -2928,4 +2928,9 @@
     <string name="plan_route_no_markers_toast">Вам неабходна дадаць па меншай меры адзін маркер каб выкарыстать гэтую функцыю.</string>
     <string name="shared_string_road">Дарога</string>
     <string name="wrong_format">Дрэнны фармат</string>
-    </resources>
+    <string name="wrong_input">Дрэнны ўвод</string>
+	<string name="enter_new_name">Увядзіце новае імя</string>
+	<string name="shared_string_back">Назад</string>
+	<string name="view">Паглядзець</string>
+	<string name="waypoints_added_to_map_markers">Кропкі маршрута дададзеныя ў маркеры мапы</string>
+	</resources>
