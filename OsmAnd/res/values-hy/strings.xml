@@ -1043,4 +1043,9 @@
 \nԹե տեղը, թե ժամանակը տեսանելի են OsmAnd-ի վահանակի վրա, ինչպես նաև քարտեզի էկրանին ինչպես նաև վիդժետի մեջ: Android օրացույցին կարելի է միացնել որպես հիշեցում:</string>
     <string name="shared_string_accessibility">Հատուկ հնարավորություններ</string>
     <string name="osmand_accessibility_description">The plugin-ն սարքի համար ավելացնում հատուկ հնարավորությունների աջակցում ուղղակիորեն OsmAnd-ում: Սա հեշտացնում է, օրինակ, TTS-ի ձայնի ելքային արագությունը հարմարեցնելու համար, կարգավորել նավիգացիայի ուղղվածությունը էկրանի վրա, վերահսկեք սանդղակը կամ օգտագործեք ձայնային հետադարձ կապի հրամանները ավտո անոտացիաներ անելու դեպքում ձեր դիրքի վերաբերյալ:</string>
+    <string name="wrong_input">Սխալ մուտքագրում</string>
+	<string name="enter_new_name">Մուտքագրեք նոր անուն</string>
+	<string name="shared_string_back">Վերադառնալ</string>
+	<string name="view">Դիտել</string>
+	<string name="osm_settings">OSM-ի խմբագրում</string>
     </resources>
