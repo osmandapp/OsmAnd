@@ -2806,4 +2806,7 @@ Proporciona un código completo</string>
     <string name="plan_route_no_markers_toast">Debes añadir al menos un marcador para usar esta función.</string>
     <string name="shared_string_road">Carretera</string>
     <string name="wrong_format">Formato incorrecto</string>
+    <string name="wrong_input">Entrada incorrecta</string>
+    <string name="enter_new_name">Ingresar nuevo nombre</string>
+    <string name="shared_string_back">Atrás</string>
     </resources>
