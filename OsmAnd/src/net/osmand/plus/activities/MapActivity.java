@@ -1383,7 +1383,7 @@ public class MapActivity extends OsmandActionBarActivity implements DownloadEven
 		return mapLayers;
 	}
 
-	public static void launchMapActivityMoveToTop(Context activity, String openMarkersAction) {
+	public static void launchMapActivityMoveToTop(Context activity, String intentExtraActionName) {
 		if (activity instanceof MapActivity) {
 			if (((MapActivity) activity).getDashboard().isVisible()) {
 				((MapActivity) activity).getDashboard().hideDashboard();
@@ -1405,8 +1405,8 @@ public class MapActivity extends OsmandActionBarActivity implements DownloadEven
 			Intent newIntent = new Intent(activity, ((OsmandApplication) activity.getApplicationContext())
 					.getAppCustomization().getMapActivity());
 			newIntent.addFlags(Intent.FLAG_ACTIVITY_REORDER_TO_FRONT | Intent.FLAG_ACTIVITY_CLEAR_TOP);
-			if (openMarkersAction != null) {
-				newIntent.putExtra(openMarkersAction, true);
+			if (intentExtraActionName != null) {
+				newIntent.putExtra(intentExtraActionName, true);
 			}
 			activity.startActivity(newIntent);
 		}
