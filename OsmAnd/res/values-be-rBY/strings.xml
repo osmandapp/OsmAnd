@@ -2879,4 +2879,9 @@ U vypadku, kali vy lubіcie OsmAnd і OSM і chočacie padtrymać jaho, heta іd
     <string name="round_trip">Padarožža</string>
     <string name="plan_route_no_markers_toast">Vam nieabchodna dadać pa mienšaj miery adzin markier kab vykarystat hetuju funkcyju.</string>
     <string name="wrong_format">Drenny farmat</string>
-    </resources>
+    <string name="wrong_input">Drenny ŭvod</string>
+	<string name="enter_new_name">Uviadzicie novaje imia</string>
+	<string name="shared_string_back">Nazad</string>
+	<string name="view">Pahliadzieć</string>
+	<string name="waypoints_added_to_map_markers">Kropki maršruta dadadzienyja ŭ markiery mapy</string>
+	</resources>
