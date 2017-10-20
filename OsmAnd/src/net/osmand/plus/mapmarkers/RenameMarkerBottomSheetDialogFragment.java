@@ -5,6 +5,8 @@ import android.content.Context;
 import android.os.Build;
 import android.os.Bundle;
 import android.support.annotation.Nullable;
+import android.support.v4.app.Fragment;
+import android.support.v4.app.FragmentManager;
 import android.view.ContextThemeWrapper;
 import android.view.Gravity;
 import android.view.LayoutInflater;
@@ -38,7 +40,7 @@ public class RenameMarkerBottomSheetDialogFragment extends BottomSheetDialogFrag
 	@Nullable
 	@Override
 	public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
-		MapActivity mapActivity = (MapActivity) getActivity();
+		final MapActivity mapActivity = (MapActivity) getActivity();
 		final boolean portrait = AndroidUiHelper.isOrientationPortrait(getActivity());
 		final boolean nightMode = mapActivity.getMyApplication().getDaynightHelper().isNightModeForMapControls();
 		final int themeRes = nightMode ? R.style.OsmandDarkTheme : R.style.OsmandLightTheme;
@@ -57,8 +59,9 @@ public class RenameMarkerBottomSheetDialogFragment extends BottomSheetDialogFrag
 
 		final EditText nameEditText = (EditText) mainView.findViewById(R.id.name_edit_text);
 		nameEditText.setText(marker.getName(mapActivity));
+		nameEditText.requestFocus();
 		final InputMethodManager imm = (InputMethodManager) getActivity().getSystemService(Context.INPUT_METHOD_SERVICE);
-		imm.toggleSoftInput(InputMethodManager.SHOW_FORCED, InputMethodManager.HIDE_IMPLICIT_ONLY);
+		imm.toggleSoftInput(InputMethodManager.SHOW_IMPLICIT, InputMethodManager.HIDE_IMPLICIT_ONLY);
 		View textBox = mainView.findViewById(R.id.name_text_box);
 		if (textBox instanceof OsmandTextFieldBoxes) {
 			((OsmandTextFieldBoxes) textBox).activate(true);
@@ -67,7 +70,14 @@ public class RenameMarkerBottomSheetDialogFragment extends BottomSheetDialogFrag
 		mainView.findViewById(R.id.save_button).setOnClickListener(new View.OnClickListener() {
 			@Override
 			public void onClick(View view) {
-				imm.hideSoftInputFromWindow(nameEditText.getWindowToken(), 0);
+				String name = nameEditText.getText().toString();
+				marker.setName(name);
+				mapActivity.getMyApplication().getMapMarkersHelper().updateMapMarker(marker, true);
+				FragmentManager fm = mapActivity.getSupportFragmentManager();
+				Fragment fragment = fm.findFragmentByTag(MarkerMenuOnMapFragment.TAG);
+				if (fragment != null) {
+					((MarkerMenuOnMapFragment) fragment).dismiss();
+				}
 				dismiss();
 			}
 		});
@@ -75,7 +85,6 @@ public class RenameMarkerBottomSheetDialogFragment extends BottomSheetDialogFrag
 		mainView.findViewById(R.id.close_button).setOnClickListener(new View.OnClickListener() {
 			@Override
 			public void onClick(View view) {
-				imm.hideSoftInputFromWindow(nameEditText.getWindowToken(), 0);
 				dismiss();
 			}
 		});
@@ -138,6 +147,11 @@ public class RenameMarkerBottomSheetDialogFragment extends BottomSheetDialogFrag
 
 	@Override
 	public void onDestroyView() {
+		View view = getView();
+		if (view != null) {
+			InputMethodManager imm = (InputMethodManager) getActivity().getSystemService(Context.INPUT_METHOD_SERVICE);
+			imm.hideSoftInputFromWindow(view.getWindowToken(), 0);
+		}
 		Dialog dialog = getDialog();
 		if (dialog != null && getRetainInstance()) {
 			dialog.setDismissMessage(null);
