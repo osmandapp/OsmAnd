@@ -124,8 +124,11 @@ public class OsmandMapTileView implements IMapDownloaderCallback {
 	private float rotate; // accumulate
 
 	private int mapPosition;
-
 	private int mapPositionX;
+
+	private float mapRatioX;
+	private float mapRatioY;
+	private LatLon originalRatioCenterLatLon;
 
 	private boolean showMapPosition = true;
 
@@ -488,6 +491,25 @@ public class OsmandMapTileView implements IMapDownloaderCallback {
 		this.mapPositionX = type;
 	}
 
+	public void setCustomMapRatio(float ratioX, float ratioY) {
+		this.mapRatioX = ratioX;
+		this.mapRatioY = ratioY;
+		originalRatioCenterLatLon = currentViewport.getCenterLatLon();
+	}
+
+	public void restoreMapRatio() {
+		mapRatioX = 0;
+		mapRatioY = 0;
+		if (originalRatioCenterLatLon != null) {
+			setLatLon(originalRatioCenterLatLon.getLatitude(), originalRatioCenterLatLon.getLongitude());
+			originalRatioCenterLatLon = null;
+		}
+	}
+
+	public boolean hasCustomMapRatio() {
+		return mapRatioX != 0 && mapRatioY != 0;
+	}
+
 	public OsmandSettings getSettings() {
 		return settings;
 	}
@@ -576,7 +598,9 @@ public class OsmandMapTileView implements IMapDownloaderCallback {
 			return;
 		}
 		final float ratioy;
-		if (mapPosition == OsmandSettings.BOTTOM_CONSTANT) {
+		if (mapRatioY != 0) {
+			ratioy = mapRatioY;
+		} else if (mapPosition == OsmandSettings.BOTTOM_CONSTANT) {
 			ratioy = 0.85f;
 		} else if (mapPosition == OsmandSettings.MIDDLE_BOTTOM_CONSTANT) {
 			ratioy = 0.70f;
@@ -586,7 +610,9 @@ public class OsmandMapTileView implements IMapDownloaderCallback {
 			ratioy = 0.5f;
 		}
 		final float ratiox;
-		if (mapPosition == OsmandSettings.LANDSCAPE_MIDDLE_RIGHT_CONSTANT) {
+		if (mapRatioX != 0) {
+			ratiox = mapRatioX;
+		} else if (mapPosition == OsmandSettings.LANDSCAPE_MIDDLE_RIGHT_CONSTANT) {
 			ratiox = 0.7f;
 		} else {
 			ratiox = mapPositionX == 0 ? 0.5f : 0.75f;
