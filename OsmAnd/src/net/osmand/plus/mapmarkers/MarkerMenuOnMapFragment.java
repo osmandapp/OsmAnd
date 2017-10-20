@@ -305,7 +305,7 @@ public class MarkerMenuOnMapFragment extends Fragment implements OsmAndCompassLi
 		}
 	}
 
-	private void dismiss() {
+	public void dismiss() {
 		MapActivity mapActivity = getMapActivity();
 		if (mapActivity != null) {
 			mapActivity.getSupportFragmentManager().popBackStackImmediate(TAG, FragmentManager.POP_BACK_STACK_INCLUSIVE);
