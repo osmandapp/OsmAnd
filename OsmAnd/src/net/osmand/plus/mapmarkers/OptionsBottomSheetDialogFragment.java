@@ -79,7 +79,7 @@ public class OptionsBottomSheetDialogFragment extends BottomSheetDialogFragment 
 		((ImageView) mainView.findViewById(R.id.coordinate_input_icon))
 				.setImageDrawable(getContentIcon(R.drawable.ic_action_coordinates_longitude));
 		((ImageView) mainView.findViewById(R.id.build_route_icon))
-				.setImageDrawable(getContentIcon(R.drawable.map_directions));
+				.setImageDrawable(getContentIcon(R.drawable.ic_action_gdirections_dark));
 		((ImageView) mainView.findViewById(R.id.save_as_new_track_icon))
 				.setImageDrawable(getContentIcon(R.drawable.ic_action_polygom_dark));
 		((ImageView) mainView.findViewById(R.id.move_all_to_history_icon))
@@ -179,7 +179,7 @@ public class OptionsBottomSheetDialogFragment extends BottomSheetDialogFragment 
 
 				if (!portrait) {
 					if (screenHeight - statusBarHeight - mainView.getHeight()
-							>= AndroidUtils.dpToPx(getActivity(), 8)) {
+							>= getResources().getDimension(R.dimen.bottom_sheet_content_padding_small)) {
 						AndroidUtils.setBackground(getActivity(), mainView, nightMode,
 								R.drawable.bg_bottom_sheet_topsides_landscape_light, R.drawable.bg_bottom_sheet_topsides_landscape_dark);
 					} else {

@@ -55,7 +55,7 @@ public class PlanRouteOptionsBottomSheetDialogFragment extends BottomSheetDialog
 			((TextView) mainView.findViewById(R.id.title)).setTextColor(ContextCompat.getColor(getActivity(), R.color.ctx_menu_info_text_dark));
 		}
 
-		((ImageView) mainView.findViewById(R.id.navigate_icon)).setImageDrawable(getContentIcon(R.drawable.map_directions));
+		((ImageView) mainView.findViewById(R.id.navigate_icon)).setImageDrawable(getContentIcon(R.drawable.ic_action_gdirections_dark));
 		((ImageView) mainView.findViewById(R.id.make_round_trip_icon)).setImageDrawable(getContentIcon(R.drawable.ic_action_trip_round));
 		((ImageView) mainView.findViewById(R.id.door_to_door_icon)).setImageDrawable(getContentIcon(R.drawable.ic_action_sort_door_to_door));
 		((ImageView) mainView.findViewById(R.id.reverse_icon)).setImageDrawable(getContentIcon(R.drawable.ic_action_sort_reverse_order));
@@ -141,7 +141,7 @@ public class PlanRouteOptionsBottomSheetDialogFragment extends BottomSheetDialog
 				}
 
 				if (!portrait) {
-					if (screenHeight - statusBarHeight - mainView.getHeight() >= AndroidUtils.dpToPx(getActivity(), 8)) {
+					if (screenHeight - statusBarHeight - mainView.getHeight() >= getResources().getDimension(R.dimen.bottom_sheet_content_padding_small)) {
 						AndroidUtils.setBackground(getActivity(), mainView, night,
 								R.drawable.bg_bottom_sheet_topsides_landscape_light, R.drawable.bg_bottom_sheet_topsides_landscape_dark);
 					} else {

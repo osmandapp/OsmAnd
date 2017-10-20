@@ -10,22 +10,22 @@
 
     <LinearLayout
         android:layout_width="match_parent"
-        android:layout_height="48dp"
+        android:layout_height="@dimen/bottom_sheet_list_item_height"
         android:orientation="horizontal"
         android:background="?attr/bg_color">
 
         <ImageView
             android:id="@+id/icon"
             android:scaleType="centerInside"
-            android:layout_width="56dp"
-            android:layout_height="48dp"
+            android:layout_width="@dimen/map_button_shadow_width"
+            android:layout_height="match_parent"
             tools:src="@drawable/ic_action_fav_dark"
             tools:visibility="visible"
             android:visibility="gone"/>
 
         <View
             android:id="@+id/icon_space"
-            android:layout_width="16dp"
+            android:layout_width="@dimen/content_padding"
             android:layout_height="match_parent"/>
 
         <android.support.v7.widget.AppCompatTextView
@@ -40,8 +40,8 @@
             android:id="@+id/disable_group_switch"
             android:layout_width="wrap_content"
             android:layout_height="match_parent"
-            android:layout_marginLeft="16dp"
-            android:layout_marginRight="16dp"
+            android:layout_marginLeft="@dimen/bottom_sheet_content_margin"
+            android:layout_marginRight="@dimen/bottom_sheet_content_margin"
             android:focusableInTouchMode="true"/>
 
     </LinearLayout>
