@@ -3596,7 +3596,7 @@
 <string name="poi_location_underground">Beliggenhed: under jorden</string>
 	<string name="poi_location_underwater">Beliggenhed: under vandet</string>
 	<string name="poi_location_overground">Beliggenhed: over jorden</string>
-	<string name="poi_location_overhead">Beliggenhed: overliggende</string>
+	<string name="poi_location_overhead">Beliggenhed: over hovedhøjde</string>
 	<string name="poi_location_roof">Beliggenhed: tag</string>
 	<string name="poi_location_rooftop">Beliggenhed: tagterrasse</string>
 	<string name="poi_location_outdoor">Placering: udendørs</string>
