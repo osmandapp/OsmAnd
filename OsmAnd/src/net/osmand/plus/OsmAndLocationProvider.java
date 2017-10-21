@@ -869,6 +869,7 @@ public class OsmAndLocationProvider implements SensorEventListener {
 	}
 
 	public net.osmand.Location getLastKnownLocation() {
+		net.osmand.Location location = this.location;
 		if (location != null && locationRequestsCounter == 0
 				&& System.currentTimeMillis() - location.getTime() > STALE_LOCATION_TIMEOUT) {
 			location = null;
