@@ -1,13 +1,13 @@
 <?xml version='1.0' encoding='UTF-8'?>
 <resources>
 
-<string name="poi_palaeontological_site">مرکز دیرینه شناسی</string>
+<string name="poi_palaeontological_site">محوطه دیرینه شناسی</string>
 
 <string name="poi_bakery">نانوایی</string>
-<string name="poi_alcohol">کافی شاپ</string>
-<string name="poi_convenience">فروشگاه</string>
+<string name="poi_alcohol">فروشگاه نوشیدنی‌های الکلی</string>
+<string name="poi_convenience">خواربارفروشی</string>
 <string name="poi_mall">مرکز خرید</string>
-<string name="poi_beverages">فروشگاه محصولات غذایی</string>
+<string name="poi_beverages">فروشگاه نوشیدنی</string>
 <string name="poi_butcher">قصابی</string>
 <string name="poi_deli">بقالی</string>
 <string name="poi_farm">فروشگاه محصولات دامی</string>
@@ -143,7 +143,7 @@
 <string name="poi_public_transport_platform_tram">ایستگاه تراموا</string>
 <string name="poi_tram_stop">ایستگاه تراموا (منسوخ)</string>
 <string name="poi_public_transport_station">ایستگاه حمل و نقل عمومی</string>
-<string name="poi_bus_station">ایستگاه اتوبوس (منسوخ)</string>
+<string name="poi_bus_station">پایانه اتوبوس</string>
 <string name="poi_railway_station">ایستگاه راه آهن (منسوخ)</string>
 <string name="poi_railway_platform">پلت فرم راه آهن (منسوخ)</string>
 <string name="poi_halt">ایستگاه راه آهن (منسوخ)</string>
@@ -678,8 +678,8 @@
 	<string name="poi_covered">سرپوشیده</string>
 	<string name="poi_bicycle_parking_type">نوع</string>
 	<string name="poi_service_car">خدمات خودرو</string>
-	<string name="poi_brushless">بدون فرچه</string>
-	<string name="poi_self_service">سلف‌سرویس</string>
+	<string name="poi_brushless">بدون برس</string>
+	<string name="poi_self_service">سلف سرویس</string>
 	<string name="poi_subway_station_filter">ایستگاه مترو</string>
 	<string name="poi_ferry_terminal_cargo">باری</string>
 	<string name="poi_telescope_type">نوع</string>
