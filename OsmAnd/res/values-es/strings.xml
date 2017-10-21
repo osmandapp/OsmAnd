@@ -226,7 +226,7 @@ El espacio de almacenamiento usado es {1} MB.
     <string name="send_location">Enviar ubicación</string>
     <string name="context_menu_item_share_location">Compartir ubicación</string>
     <string name="add_waypoint_dialog_added">El punto GPX «{0}» fue añadido correctamente</string>
-    <string name="add_waypoint_dialog_title">Añadir el punto de referencia a la traza GPX grabada</string>
+    <string name="add_waypoint_dialog_title">Añadir punto de referencia a la traza GPX grabada</string>
     <string name="context_menu_item_add_waypoint">Añadir punto GPX</string>
     <string name="amenity_type_administrative">Administrativo</string>
     <string name="amenity_type_barrier">Barrera</string>
@@ -2747,4 +2747,5 @@ Por favor proporciona un código completo</string>
     <string name="enter_new_name">Ingresar nombre nuevo</string>
     <string name="shared_string_back">Atrás</string>
     <string name="view">Ver</string>
+	<string name="waypoints_added_to_map_markers">Puntos de referencia añadidos a marcadores de mapa</string>
 	</resources>
