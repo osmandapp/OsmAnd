@@ -3633,7 +3633,6 @@
 	<string name="poi_parking_fee_yes">Оплата за парковку: да</string>
 	<string name="poi_parking_fee_no">Оплата за парковку: нет</string>
 	<string name="poi_amperage">Ток</string>
-	<string name="poi_voltage">Напряжение</string>
 	<string name="poi_charging_station_output">Мощность зарядной станции</string>
 
 </resources>
