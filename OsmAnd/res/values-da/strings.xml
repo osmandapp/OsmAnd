@@ -2918,8 +2918,8 @@ Tidligere destination bliver sidste mellemliggende punkt.</string>
     <string name="release_2_8">"•  Helt omarbejdelse af kortmarkører med retningslinjer og ruteplanlægning 
 \n
 \n • Værktøj til afstandsmåling tilbyder en fastgør til vejen funktion samt at gemmme punkter som spor 
-\n 
-\n  •  OSM Live: fejlrettelser, nye data på serveren hvert 30. minut, opdateringer implementeres i navigationen
+\n
+\n •  OSM Live: fejlrettelser, nye data på serveren hvert 30. minut, opdateringer implementeres i navigationen
 \n
 \n"</string>
     <string name="rendering_value_darkyellow_name">Mørkegul</string>
