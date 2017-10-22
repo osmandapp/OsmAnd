@@ -296,4 +296,5 @@
     <string name="transport">Amesni</string>
     <string name="plugin_description_title">Aglam</string>
     <string name="description">Aglam</string>
-    </resources>
+    <string name="enter_new_name">Saisir un nouveau nom</string>
+	</resources>
