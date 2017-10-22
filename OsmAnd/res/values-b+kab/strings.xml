@@ -33,13 +33,13 @@
     <string name="rendering_value_lightblue_name">azegzaw afessas</string>
     <string name="rendering_value_blue_name">azegzaw</string>
     <string name="dark_theme">aberkan</string>
-    <string name="shared_string_wikipedia">Wikipedia</string>
-    <string name="local_indexes_cat_wiki">Wikipedia</string>
+    <string name="shared_string_wikipedia">Wikipidya</string>
+    <string name="local_indexes_cat_wiki">Wikipidya</string>
     <string name="shared_string_is_open">Ldi tura</string>
     <string name="welcome_header">Ansuf yiswen</string>
     <string name="current_route">Abrid amiran</string>
     <string name="shared_string_ellipsis">…</string>
-    <string name="shared_string_ok">Ɣas</string>
+    <string name="shared_string_ok">IH</string>
     <string name="shared_string_yes">Ih</string>
     <string name="shared_string_no">Ala</string>
     <string name="shared_string_never">Warǧin</string>
@@ -109,7 +109,7 @@
 
     <string name="plugin_distance_point_time">akud</string>
     <string name="max_speed_none">ulac</string>
-    <string name="download_wikipedia_maps">Wikipedia</string>
+    <string name="download_wikipedia_maps">Wikipidya</string>
     <string name="recording_context_menu_show">Sken</string>
     <string name="index_srtm_parts">Amuren</string>
     <string name="monitoring_control_start">GPX</string>
@@ -189,7 +189,7 @@
     <string name="search_address_city">Tamdint</string>
     <string name="search_address_building">Uṭṭun</string>
     <string name="search_address_street_option">Ger iberdan</string>
-    <string name="poi_action_add">Rnu</string>
+    <string name="poi_action_add">rnu</string>
     <string name="poi_action_change">Senfel</string>
     <string name="poi_action_delete">Kkes</string>
     <string name="poi_dialog_opening_hours">Ldi</string>
@@ -263,4 +263,37 @@
     <string name="favourites">Imenyafen</string>
     <string name="empty_state_favourites">Rnu γer imenyafen</string>
     <string name="wrong_input">Yir anekcam</string>
-	</resources>
+	<string name="shared_string_options">Tinefrunin</string>
+    <string name="mapillary_menu_title_username">Isem n useqdac</string>
+    <string name="nearest_cities">Timdinin ig qarben</string>
+    <string name="shared_string_add_to_map_markers">Rnu ar ticṛaḍ</string>
+    <string name="map_markers">Ticṛaḍ</string>
+    <string name="lang_kab">Taqbaylit</string>
+    <string name="lang_ber">Tifinaγ</string>
+    <string name="shared_string_cancel">Kkes</string>
+    <string name="shared_string_help">Tallalt</string>
+    <string name="shared_string_save">Kles</string>
+    <string name="shared_string_apply">Snes</string>
+    <string name="shared_string_show_all">Sekned kulec</string>
+    <string name="map_locale">Tutlayt n tgertilt</string>
+    <string name="download_tab_updates">Tirarasin</string>
+    <string name="rendering_category_details">Ttfaṣil</string>
+    <string name="rendering_category_transport">Amesni</string>
+    <string name="text_size">Tiddi n waḍris</string>
+    <string name="osmo_group_description">Aglam</string>
+    <string name="speak_street_names">Ismawen n iberdan (TTS)</string>
+    <string name="context_menu_item_directions_to">Tinilwin γer</string>
+    <string name="context_menu_item_directions_from">Tinilwin seg</string>
+    <string name="street_name">Isem n webrid</string>
+    <string name="phone">Asawal</string>
+    <string name="map_widget_renderer">Aγanib n tgertilt</string>
+    <string name="gpx_description_txt">Aglam</string>
+    <string name="user_password">Awal-ik uffir n OSM</string>
+    <string name="city_type_hamlet">Taddart tabestuḥt</string>
+    <string name="amenity_type_tourism">Tamerrit</string>
+    <string name="amenity_type_transportation">Amesni</string>
+    <string name="transport_Routes">Iberdan</string>
+    <string name="transport">Amesni</string>
+    <string name="plugin_description_title">Aglam</string>
+    <string name="description">Aglam</string>
+    </resources>
