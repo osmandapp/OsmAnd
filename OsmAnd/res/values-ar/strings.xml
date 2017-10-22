@@ -2834,4 +2834,5 @@
 	<string name="shared_string_back">العودة</string>
 	<string name="view">عرض</string>
 	<string name="waypoints_added_to_map_markers">تمت إضافة نقاط الطريق إلى علامات الخريطة</string>
+	<string name="wrong_input">إدخال خاطئ</string>
 	</resources>
