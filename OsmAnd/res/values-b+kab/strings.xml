@@ -262,4 +262,5 @@
     <string name="favourites_context_menu_add">Rnu d amenyaf</string>
     <string name="favourites">Imenyafen</string>
     <string name="empty_state_favourites">Rnu γer imenyafen</string>
-    </resources>
+    <string name="wrong_input">Yir anekcam</string>
+	</resources>
