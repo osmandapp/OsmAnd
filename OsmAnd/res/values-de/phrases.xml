@@ -3268,7 +3268,7 @@
 	<string name="poi_cuisine_diner">Esslokal</string>
 	<string name="poi_cuisine_yakiniku">Yakiniku</string>
 	<string name="poi_cuisine_udon">Udon</string>
-	<string name="poi_cuisine_brasserie">Brasserie</string>
+	<string name="poi_cuisine_brasserie">Brauhaus</string>
 	<string name="poi_cuisine_yakitori">Yakitori</string>
 	<string name="poi_cuisine_teriyaki">Teriyaki</string>
 
@@ -3531,4 +3531,104 @@
 	<string name="poi_visibility_street">Sichtbarkeit: Straße</string>
 	<string name="poi_visibility_area">Sichtbarkeit: Bereich</string>
 
+	<string name="poi_operational_status_open">Offen</string>
+	<string name="poi_operational_status_closed">Geschlossen</string>
+	<string name="poi_operational_status_restricted">Eingeschränkt</string>
+	<string name="poi_operational_status_broken">Beschädigt</string>
+	<string name="poi_operational_status_needs_maintenance">Wartung benötigt</string>
+
+	<string name="poi_water_purification_none">Keine</string>
+	<string name="poi_water_purification_chlorine">Chlor</string>
+	<string name="poi_water_purification_reverse_osmosis">Umkehrosmose</string>
+	<string name="poi_water_purification_aquatabs">Aquatabs</string>
+
+	<string name="poi_water_supply_water_well">Brunnen</string>
+	<string name="poi_water_supply_pipeline">Pipeline</string>
+	<string name="poi_water_supply_running_water">Fließendes Wasser</string>
+	<string name="poi_water_supply_pump">Pumpe</string>
+	<string name="poi_water_supply_borehole">Bohrloch</string>
+	<string name="poi_water_supply_water_trucking">Wasser-LKW</string>
+	<string name="poi_water_supply_water_tank">Wassertank</string>
+	<string name="poi_water_supply_bottled_water">Wasser in Flaschen</string>
+
+	<string name="poi_water_place_access_community">Gemeinschaft</string>
+	<string name="poi_water_place_access_family">Familie</string>
+	<string name="poi_socket_cee_blue">Sockel: CEE blau</string>
+	<string name="poi_socket_cee_blue_current">Sockel: CEE blau: Strom</string>
+	<string name="poi_socket_cee_blue_output">Sockel: CEE blau: Leistung</string>
+	<string name="poi_socket_cee_red_16a">Sockel: CEE rot 16A</string>
+	<string name="poi_socket_cee_red_16a_current">Sockel: CEE rot 16A: Strom</string>
+	<string name="poi_socket_cee_red_16a_output">Sockel: CEE rot 16A: Leistung</string>
+	<string name="poi_socket_cee_red_32a">Sockel: CEE rot 32A</string>
+	<string name="poi_socket_cee_red_32a_current">Sockel: CEE rot 32A: Strom</string>
+	<string name="poi_socket_cee_red_32a_output">Sockel: CEE rot 32A: Leistung</string>
+	<string name="poi_socket_cee_red_64a">Sockel: CEE rot 64A</string>
+	<string name="poi_socket_cee_red_64a_current">Sockel: CEE rot 64A: Strom</string>
+	<string name="poi_socket_cee_red_64a_output">Sockel: CEE rot 64A: Leistung</string>
+	<string name="poi_socket_cee_red_125a">Sockel: CEE rot 125A</string>
+	<string name="poi_socket_cee_red_125a_current">Sockel: CEE rot 125A: Strom</string>
+	<string name="poi_socket_cee_red_125a_output">Sockel: CEE rot 125A: Leistung</string>
+	<string name="poi_socket_type1">Sockel: Typ 1</string>
+	<string name="poi_socket_type1_current">Sockel: Typ 1: Strom</string>
+	<string name="poi_socket_type1_output">Sockel: Typ 1: Leistung</string>
+	<string name="poi_socket_type1_combo">Sockel: Typ 1 Combo</string>
+	<string name="poi_socket_type1_combo_current">Sockel: Typ 1 Combo: Strom</string>
+	<string name="poi_socket_type1_combo_output">Sockel: Typ 1 Combo: Leistung</string>
+	<string name="poi_socket_type2">Sockel: Typ 2</string>
+	<string name="poi_socket_type2_current">Sockel: Typ 2: Strom</string>
+	<string name="poi_socket_type2_output">Sockel: Typ 2: Leistung</string>
+	<string name="poi_socket_type2_combo">Sockel: Typ 2 Combo</string>
+	<string name="poi_socket_type2_combo_current">Sockel: Typ 2 Combo: Strom</string>
+	<string name="poi_socket_type2_combo_output">Sockel: Typ 2 Combo: Leistung</string>
+	<string name="poi_socket_type3">Sockel: Typ 3</string>
+	<string name="poi_socket_type3_current">Sockel: Typ 3: Strom</string>
+	<string name="poi_socket_type3_output">Sockel: Typ 3: Leistung</string>
+	<string name="poi_socket_chademo">Sockel: CHAdeMO</string>
+	<string name="poi_socket_chademo_current">Sockel: CHAdeMO: Strom</string>
+	<string name="poi_socket_chademo_output">Sockel: CHAdeMO: Leistung</string>
+	<string name="poi_socket_tesla_standard">Sockel: Tesla Standard</string>
+	<string name="poi_socket_tesla_standard_current">Sockel: Tesla Standard: Strom</string>
+	<string name="poi_socket_tesla_standard_output">Sockel: Tesla Standard: Leistung</string>
+	<string name="poi_socket_tesla_supercharger">Sockel: Tesla Supercharger</string>
+	<string name="poi_socket_tesla_supercharger_current">Sockel: Tesla Supercharger: Strom</string>
+	<string name="poi_socket_tesla_supercharger_output">Sockel: Tesla Supercharger: Leistung</string>
+	<string name="poi_socket_tesla_roadster">Sockel: Tesla Roadster</string>
+	<string name="poi_socket_tesla_roadster_current">Sockel: Tesla Roadster: Strom</string>
+	<string name="poi_socket_tesla_roadster_output">Sockel: Tesla Roadster: Leistung</string>
+	<string name="poi_socket_nema_5_15">Sockel: NEMA 5-15R</string>
+	<string name="poi_socket_nema_5_15_current">Sockel: NEMA 5-15R: Strom</string>
+	<string name="poi_socket_nema_5_15_output">Sockel: NEMA 5-15R: Leistung</string>
+	<string name="poi_socket_nema_5_20">Sockel: NEMA 5-20</string>
+	<string name="poi_socket_nema_5_20_current">Sockel: NEMA 5-20: Strom</string>
+	<string name="poi_socket_nema_5_20_output">Sockel: NEMA 5-20: Leistung</string>
+	<string name="poi_socket_nema_14_30">Sockel: NEMA 14-30</string>
+	<string name="poi_socket_nema_14_30_current">Sockel: NEMA 14-30: Strom</string>
+	<string name="poi_socket_nema_14_30_output">Sockel: NEMA 14-30: Leistung</string>
+	<string name="poi_socket_nema_14_50">Sockel: NEMA 14-50</string>
+	<string name="poi_socket_nema_14_50_current">Sockel: NEMA 14-50: Strom</string>
+	<string name="poi_socket_nema_14_50_output">Sockel: NEMA 14-50: Leistung</string>
+	<string name="poi_socket_schuko">Sockel: Schuko</string>
+	<string name="poi_socket_schuko_current">Steckdose: Schuko: Strom</string>
+	<string name="poi_socket_schuko_output">Sockel: Schuko: Leistung</string>
+	<string name="poi_socket_bs1363">Sockel: BS 1363</string>
+	<string name="poi_socket_bs1363_current">Sockel: BS 1363: Strom</string>
+	<string name="poi_socket_bs1363_output">Buchse: BS 1363: Leistung</string>
+	<string name="poi_socket_as3112">Sockel: AS/NZS 3112</string>
+	<string name="poi_socket_as3112_current">Sockel: AS / NZS 3112: Strom</string>
+	<string name="poi_socket_as3112_output">Sockel: AS / NZS 3112: Leistung</string>
+
+	<string name="poi_car_yes">Auto: Ja</string>
+	<string name="poi_car_no">Auto: Nein</string>
+	<string name="poi_bicycle_yes">Fahrrad: Ja</string>
+	<string name="poi_bicycle_no">Fahrrad: Nein</string>
+	<string name="poi_scooter_yes">Roller: Ja</string>
+	<string name="poi_scooter_no">Roller: Nein</string>
+	<string name="poi_truck_yes">LKW: Ja</string>
+	<string name="poi_truck_no">LKW: Nein</string>
+
+	<string name="poi_parking_fee_yes">Parkgebühr: Ja</string>
+	<string name="poi_parking_fee_no">Parkgebühr: Nein</string>
+	<string name="poi_parking_fee">Parkgebühr</string>
+
+	<string name="poi_amperage">Stromstärke</string>
 	</resources>
