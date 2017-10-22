@@ -3,7 +3,7 @@
 	<string name="shared_string_no">לא</string>
 	<string name="shared_string_yes">כן</string>
 	<string name="close_changeset">סגירת ערכת השינויים</string>
-	<string name="zxing_barcode_scanner_not_found">יישום סריקת הברקודים ZXing אינו מותקן. לחפש בחנות?</string>
+	<string name="zxing_barcode_scanner_not_found">יישום סריקת הברקודים ZXing אינו מותקן. לחפש ב־Google Play?</string>
 	<string name="rendering_attr_roadColors_description">בחירת ערכת צבעי דרך:</string>
 	<string name="rendering_attr_roadColors_name">ערכת צבעי דרך</string>
     <string name="map_widget_show_destination_arrow">הצגת הכיוון ליעד</string>
@@ -14,10 +14,10 @@
     
 	<string name="map_widget_monitoring_services">שירותי רישום</string>
 	<string name="no_route">אין מסלול</string>
-	<string name="delete_target_point">הסרת נקודת ציון</string>
-	<string name="target_point">נקודת הציון %1$s</string>
-    <string name="intermediate_point">נקודת הציון %1$s</string>
-    <string name="context_menu_item_last_intermediate_point">הוספת כנקודת הציון הסופית</string>
+	<string name="delete_target_point">הסרת יעד</string>
+	<string name="target_point">יעד %1$s</string>
+    <string name="intermediate_point">יעד ביניים %1$s</string>
+    <string name="context_menu_item_last_intermediate_point">הוספה כיעד הביניים הסופי</string>
     <string name="context_menu_item_first_intermediate_point">הוספה כנקודת הציון ההתחלתית</string>
     <string name="add_as_last_destination_point">הוספה כנקודת הציון הסופית</string>
     <string name="add_as_first_destination_point">הוספה כנקודת הציון ההתחלתית</string>
@@ -757,7 +757,7 @@
 	<string name="searching">מתבצע חיפוש…</string>
 	<string name="searching_address">הכתובת בחיפוש…</string>
 	<string name="search_osm_nominatim">חיפוש כתובת בעזרת Nominatim מבית OSM</string>
-	<string name="hint_search_online">מספר בית, רחוב, עיר</string>
+	<string name="hint_search_online">חיפוש מקוון: מספר בית, רחוב, עיר</string>
 	<string name="search_offline_address">בלתי מקוון</string>
 	<string name="search_online_address">אינטרנט</string>
 	<string name="max_level_download_tile">תקריב מרבי מקוון</string>
@@ -965,10 +965,10 @@
 	<string name="rendering_attr_showRoadMaps_description">נא לבחור מתי להציג מפות לדרכים בלבד:</string>
 	<string name="rendering_attr_showRoadMaps_name">מפות לדרכים בלבד</string>
     <string name="download_roads_only_item">דרכים בלבד</string>
-    <string name="download_regular_maps">מפות רגילות</string>
-    <string name="download_roads_only_maps">מפות עם דרכים בלבד</string>
+    <string name="download_regular_maps">מפה תקנית</string>
+    <string name="download_roads_only_maps">מפה עם דרכים בלבד</string>
     <string name="incomplete_locale">חלקי</string>
-	<string name="search_villages_and_postcodes">חיפוש כפרים/מיקוד</string>
+	<string name="search_villages_and_postcodes">חיפוש עוד כפרים/מיקוד</string>
 	<string name="no_buildings_found">לא נמצאו בניינים.</string>
     <string name="route_descr_lat_lon">רוחב %1$.3f אורך %2$.3f</string>
     
@@ -977,7 +977,7 @@
     <string name="map_widget_max_speed">מהירות מותרת</string>
     
 	<string name="monitoring_control_start">התחלה</string>
-    <string name="rendering_attr_noAdminboundaries_name">הסתרת הגבולות</string>
+    <string name="rendering_attr_noAdminboundaries_name">גבולות</string>
 	<string name="rendering_attr_noAdminboundaries_description">הסתרת דרגות ניהול 5-9</string>
 	
     
@@ -1001,10 +1001,10 @@
     
     <string name="map_widget_distancemeasurement">מדידת מרחק</string>
     
-    <string name="recording_is_recorded">השמע/וידאו מוקלטים. כדי להפסיק זאת יש ללחוץ על לחצן העצירה בווידג׳ט.</string>
+    <string name="recording_is_recorded">שמע/וידאו מוקלטים. כדי להפסיק זאת יש לגעת בלחצן העצירה בווידג׳ט.</string>
     <string name="recording_playing">השמע מההקלטה שצוינה מושמע.\n%1$s</string>
     <string name="recording_open_external_player">פתיחת נגן חיצוני</string>
-    <string name="recording_delete_confirm">האם ברצונך להסיר הקלטה זו?</string>
+    <string name="recording_delete_confirm">למחוק הקלטה זו?</string>
     
     <string name="recording_unavailable">לא זמין</string>
     <string name="recording_context_menu_arecord">הקלטת הערה קולית</string>
@@ -1035,15 +1035,15 @@
     <string name="srtm_paid_version_title">תוסף קווי מתאר</string>
     
     <string name="intermediate_points_change_order">שינוי הסדר</string>
-    <string name="dropbox_plugin_description">תוסף Dropbox מאפשר לסנכרן מסלולים והערות שמע/וידאו עם חשבון ה־dropbox שלך.</string>
+    <string name="dropbox_plugin_description">תוסף Dropbox מאפשר לך לסנכרן מסלולים והערות שמע/וידאו עם חשבון ה־Dropbox שלך.</string>
     <string name="dropbox_plugin_name">תוסף Dropbox</string>
     <string name="recording_context_menu_show">הצגה</string>
-    <string name="recording_photo_description">תמונה %1$s במיקום %2$s</string>
+    <string name="recording_photo_description">תמונה %1$s %2$s</string>
     <string name="av_def_action_picture">צילום תמונה</string>
     <string name="recording_context_menu_precord">צילום תמונה</string>
     <string name="stop_routing_confirm">האם אכן לעצור את הניווט?</string>
     <string name="clear_dest_confirm">האם אכן למחוק את נקודת היעד?</string>
-    <string name="precise_routing_mode_descr">יש להפעיל ניתוב מדויק כדי לחשב נתיבים מדויקים ללא סטיות. התכונה מוגבלת מאוד במרחק ואין לה ספרייה פנימית.</string>
+    <string name="precise_routing_mode_descr">יש להפעיל כדי לחשב נתיבים מדויקים ללא סטיות. עדיין קיימת הגבלת מרחק ואטיות.</string>
     <string name="precise_routing_mode">ניתוב מדויק (אלפא)</string>
     <string name="local_indexes_cat_av">נתוני שמע/וידאו</string>
     
