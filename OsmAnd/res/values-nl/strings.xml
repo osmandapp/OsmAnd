@@ -2259,7 +2259,7 @@ Lengtegraad:\t\t%2$s</string>
     <string name="osm_live_thanks">Bedankt voor je OSM Live Abonnement!</string>
     <string name="osm_live_region_desc">Een gedeelte van je betaling gaat naar OSM-Bijdragers in deze regio</string>
     <string name="osm_live_subscription_settings">Abonnementsgegevens</string>
-    <string name="osm_live_ask_for_purchase">Neem alsjeblieft eerst een OSM Live Abonnement</string>
+    <string name="osm_live_ask_for_purchase">Neem alsjeblieft eerst een OsmAnd Live Abonnement</string>
 
     <string name="osm_live_header">"Met dit abonnement ontvang je dagelijks updates voor kaarten over de hele wereld. 
 Een  gedeelte van uw bijdrage gaat naar de OSM-gemeenschap en wordt uitbetaald naar het aantal OSM-bewerkingen.
@@ -2747,20 +2747,20 @@ We slaan geen locatiegegevens, zoektermen of andere gebruikersgegevens op.</stri
     <string name="osmand_extended_description_part5">Fietsen • Vind fietspaden op de kaart • Routeberekening met gebruik van fietspaden • Toon snelheid en hoogte • Neem de rit op als GPX-spoor en deel deze • Geef, met een extra plugin, hoogteverschillen weer als hoogtelijnen of reliëfschaduw</string>
     <string name="osmand_extended_description_part6">Wandelen • De kaart toont voetpaden, bergpaden, routes door parken • Wikipedia vertelt u meer over uw omgeving • OV-haltes (tram, bus, trein, metro), inclusief lijnnummers, helpen u te navigeren • Navigatie gebruikt voetpaden • Neem uw weg op als GPX-route of volg een gedownloade route</string>
     <string name="osmand_extended_description_part7">Werk mee aan OpenStreetMap (OSM) • Meld fouten • Upload sporen naar OSM, direct vanuit de app • Voeg POI toe aan de kaart en upload deze</string>
-    <string name="osmand_extended_description_part8">OsmAnd is open-source en wordt steeds verder ontwikkeld. Iedereen kan helpen door bugs te melden, vertalingen te verbeteren of nieuwe functies te programmeren. Door deze interactie wordt het steeds beter. De voortgang is mede afhankelijk van betalingen om programmeurs en testers voor nieuwe functies te betalen.
-\n
-\nIndicatie van compleetheid en kwaliteit van de kaart:
-\n • West-Europa: ****
-\n • Oost-Europa: ***
-\n • Rusland: ***
-\n • Noord-Amerika: ***
-\n • Zuid-Amerika: **
-\n • Azië: **
-\n • Japan &amp; Korea: ***
-\n • Midden-Oosten: **
-\n • Afrika: **
-\n • Antarctica: *
-\n De meeste landen ter wereld hebben een kaart die u kunt downloaden!</string>
+    <string name="osmand_extended_description_part8">OsmAnd is open-source en wordt steeds verder ontwikkeld. Iedereen kan helpen door bugs te melden, vertalingen te verbeteren of nieuwe functies te programmeren. Door deze interactie wordt het steeds beter. De voortgang is mede afhankelijk van betalingen om programmeurs en testers voor nieuwe functies te betalen. 
+\n 
+\nIndicatie van compleetheid en kwaliteit van de kaart: 
+\n • West-Europa: **** 
+\n • Oost-Europa: *** 
+\n • Rusland: *** 
+\n • Noord-Amerika: *** 
+\n • Zuid-Amerika: ** 
+\n • Azië: ** 
+\n • Japan &amp; Korea: *** 
+\n • Midden-Oosten: ** 
+\n • Afrika: ** 
+\n • Antarctica: * 
+\n Voor bijna elk land ter wereld kunt u de kaart downloaden.</string>
     <string name="osmand_plus_extended_description_part8">Indicatie van compleetheid en kwaliteit van de kaart:
 \n • West-Europa: ****
 \n • Oost-Europa: ***
@@ -2950,4 +2950,10 @@ We slaan geen locatiegegevens, zoektermen of andere gebruikersgegevens op.</stri
 \n
 \n</string>
     <string name="rendering_value_darkyellow_name">Donkergeel</string>
+    <string name="wrong_input">Foutieve invoer</string>
+	<string name="enter_new_name">Kies een nieuwe naam</string>
+	<string name="shared_string_back">Vorige</string>
+	<string name="view">Bekijk</string>
+	<string name="wrong_format">Verkeerd format</string>
+    <string name="shared_string_road">Weg</string>
     </resources>
