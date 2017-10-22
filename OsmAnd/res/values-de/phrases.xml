@@ -3631,5 +3631,12 @@
 	<string name="poi_parking_fee">Parkgebühr</string>
 
 	<string name="poi_amperage">Stromstärke</string>
-	<string name="poi_location_overhead">Lage: oben</string>
-	</resources>
+	<string name="poi_location_overhead">Lage: Oben</string>
+	<string name="poi_water_place_durability_durable">Wasserstelle Haltbarkeit: Dauerhaft</string>
+	<string name="poi_water_place_durability_emergency">Wasserstelle Haltbarkeit: Notfall</string>
+
+	<string name="poi_water_place_access_multifamilies">Mehrfamilien</string>
+
+	<string name="poi_charging_station_output">Ladestation Ausgang</string>
+
+</resources>
