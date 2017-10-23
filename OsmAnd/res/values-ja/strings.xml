@@ -2988,4 +2988,26 @@ OsmAndとOSMをサポートする方法として現状最適な方法である�
     <string name="marker_show_distance_descr">マップ画面でマーカーへの方向と距離を示す方法を選択します:</string>
     <string name="do_not_use_animations">アニメーションを使用しない</string>
     <string name="do_not_use_animations_descr">アプリ内で使用される画面のアニメ効果を無効化します</string>
+    <string name="map_orientation_change_in_accordance_with_speed">マップ向きのしきい値</string>
+    <string name="map_orientation_change_in_accordance_with_speed_descr">マップの向きが「移動方向」から「方位」に切り替わる速度を選択します</string>
+    <string name="all_markers_moved_to_history">すべてのマップマーカーを履歴に移動</string>
+    <string name="marker_moved_to_history">マップマーカーを履歴に移動させました</string>
+    <string name="marker_moved_to_active">マップマーカーをアクティブ化させました</string>
+    <string name="shared_string_list">リスト</string>
+    <string name="shared_string_groups">グループ</string>
+    <string name="make_active">アクティブにします</string>
+    <string name="today">今日</string>
+    <string name="yesterday">昨日</string>
+    <string name="last_seven_days">直近の7日間</string>
+    <string name="this_year">今年</string>
+    <string name="move_all_to_history">全て履歴に移動します</string>
+    <string name="show_direction">距離表示</string>
+    <string name="sort_by">並び順:</string>
+    <string name="keep_showing_on_map">マップ上に表示し続ける</string>
+    <string name="exit_without_saving">保存せずに終了しますか？</string>
+    <string name="line">直線</string>
+    <string name="save_as_route_point">ルートポイントとして保存</string>
+    <string name="save_as_line">直線として保存</string>
+    <string name="route_point">ルートポイント</string>
+    <string name="edit_line">線の編集</string>
     </resources>
