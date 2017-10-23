@@ -1,6 +1,7 @@
 package net.osmand.plus.search;
 
 import net.osmand.binary.BinaryMapIndexReader;
+import net.osmand.data.Amenity;
 import net.osmand.data.FavouritePoint;
 import net.osmand.data.LatLon;
 import net.osmand.plus.FavouritesDbHelper;
@@ -10,6 +11,7 @@ import net.osmand.plus.GpxSelectionHelper;
 import net.osmand.plus.OsmandApplication;
 import net.osmand.plus.R;
 import net.osmand.plus.helpers.SearchHistoryHelper;
+import net.osmand.plus.poi.NominatimPoiFilter;
 import net.osmand.plus.poi.PoiFiltersHelper;
 import net.osmand.plus.poi.PoiUIFilter;
 import net.osmand.plus.resources.ResourceManager.ResourceListener;
@@ -36,6 +38,7 @@ public class QuickSearchHelper implements ResourceListener {
 	public static final int SEARCH_WPT_OBJECT_PRIORITY = 52;
 	public static final int SEARCH_HISTORY_API_PRIORITY = 50;
 	public static final int SEARCH_HISTORY_OBJECT_PRIORITY = 53;
+	public static final int SEARCH_ONLINE_PRIORITY = 53;
 	private OsmandApplication app;
 	private SearchUICore core;
 	private SearchResultCollection resultCollection;
@@ -77,6 +80,8 @@ public class QuickSearchHelper implements ResourceListener {
 		// Register WptPt search api
 		core.registerAPI(new SearchWptAPI(app));
 		core.registerAPI(new SearchHistoryAPI(app));
+
+		core.registerAPI(new SearchOnlineApi(app));
 
 		refreshCustomPoiFilters();
 	}
@@ -264,6 +269,40 @@ public class QuickSearchHelper implements ResourceListener {
 			}
 			return SEARCH_FAVORITE_API_PRIORITY;
 		}
+	}
+
+	public static class SearchOnlineApi extends SearchBaseAPI {
+
+		private NominatimPoiFilter nominatimPoiFilter;
+		private OsmandApplication app;
+
+		public SearchOnlineApi(OsmandApplication app) {
+			super(ObjectType.ONLINE_POI);
+			this.nominatimPoiFilter = app.getPoiFilters().getNominatimPOIFilter();
+			this.app = app;
+		}
+
+		@Override
+		public boolean search(SearchPhrase phrase, SearchUICore.SearchResultMatcher resultMatcher) throws IOException {
+			List<Amenity> amenities = nominatimPoiFilter.initializeNewSearch(app.getSettings().getLastKnownMapLocation().getLatitude(), app.getSettings().getLastKnownMapLocation().getLongitude(), -1, null);
+			int p = 0;
+			for (Amenity amenity : amenities) {
+				SearchResult sr = new SearchResult(phrase);
+				sr.localeName = amenity.getName();
+				sr.object = amenity;
+				sr.priority = SEARCH_HISTORY_OBJECT_PRIORITY + (p++);
+				sr.objectType = ObjectType.RECENT_OBJ;
+				sr.location = amenity.getLocation();
+				sr.preferredZoom = 17;
+				if (phrase.getUnknownSearchWordLength() <= 1 && phrase.isNoSelectedType()) {
+					resultMatcher.publish(sr);
+				} else if (phrase.getNameStringMatcher().matches(sr.localeName)) {
+					resultMatcher.publish(sr);
+				}
+			}
+			return true;
+		}
+
 	}
 
 	public static class SearchHistoryAPI extends SearchBaseAPI {
