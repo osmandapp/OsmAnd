@@ -856,13 +856,52 @@ public class GpxUiHelper {
 				if (res != 0) {
 					return res;
 				}
+
 				String name1 = i1.getFileName();
 				String name2 = i2.getFileName();
-				if (name1.length() > 0 && name2.length() > 0
-						&& Character.isDigit(name1.charAt(0)) && Character.isDigit(name2.charAt(0))) {
+				int d1 = depth(name1);
+				int d2 = depth(name2);
+				if (d1 != d2) {
+					return d1 - d2;
+				}
+				int lastSame = 0;
+				for (int i = 0; i < name1.length() && i < name2.length(); i++) {
+					if (name1.charAt(i) != name2.charAt(i)) {
+						break;
+					}
+					if (name1.charAt(i) == '/') {
+						lastSame = i + 1;
+					}
+				}
+
+				boolean isDigitStarts1 = isLastSameStartsWithDigit(name1, lastSame);
+				boolean isDigitStarts2 = isLastSameStartsWithDigit(name2, lastSame);
+				res = isDigitStarts1 == isDigitStarts2 ? 0 : isDigitStarts1 ? -1 : 1;
+				if (res != 0) {
+					return res;
+				}
+				if (isDigitStarts1) {
 					return -name1.compareToIgnoreCase(name2);
 				}
 				return name1.compareToIgnoreCase(name2);
+			}
+
+			private int depth(String name1) {
+				int d = 0;
+				for (int i = 0; i < name1.length(); i++) {
+					if (name1.charAt(i) == '/') {
+						d++;
+					}
+				}
+				return d;
+			}
+
+			private boolean isLastSameStartsWithDigit(String name1, int lastSame) {
+				if (name1.length() > lastSame) {
+					return Character.isDigit(name1.charAt(lastSame));
+				}
+
+				return false;
 			}
 		});
 		return list;
