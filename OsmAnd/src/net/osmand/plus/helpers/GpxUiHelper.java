@@ -856,7 +856,13 @@ public class GpxUiHelper {
 				if (res != 0) {
 					return res;
 				}
-				return -i1.getFileName().toLowerCase().compareTo(i2.getFileName().toLowerCase());
+				String name1 = i1.getFileName();
+				String name2 = i2.getFileName();
+				if (name1.length() > 0 && name2.length() > 0
+						&& Character.isDigit(name1.charAt(0)) && Character.isDigit(name2.charAt(0))) {
+					return -name1.compareToIgnoreCase(name2);
+				}
+				return name1.compareToIgnoreCase(name2);
 			}
 		});
 		return list;
