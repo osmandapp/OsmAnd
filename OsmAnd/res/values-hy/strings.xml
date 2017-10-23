@@ -1436,4 +1436,32 @@
     <string name="routing_attr_avoid_borders_description">Խուսափել սահմանի հատման մեկ այլ երկրի հետ</string>
     <string name="routing_attr_height_name">Բարձրության սահմանափակում</string>
     <string name="routing_attr_height_description">Նշեք մեքենայի բարձրությունը երթուղու հաշվարկի համար</string>
+    <string name="hillshade_layer_disabled">Տեղանքի ռելիեֆի(Hillshade) շերտը անջատված է</string>
+    <string name="android_19_location_disabled">Android 4.4 (KitKat) տարբերակից սկսած քարտը չեք կարող բեռնել և թարմացնել հին պահեստային ֆոլդերում (% s): Ցանկանում եք փոխել գտնվելու վայրը վավեր վայրով և պատճենել բոլոր OsmAnd ֆայլերը?
+\n…Ծանոթագրություն 1. Ձեր հին ֆայլերը կմնան անփոփոխ (բայց կարող են ջնջվել ձեռքով):
+\n…Ծանոթագրություն 2. Երբ ֆայլերը փոխանցեք նոր պահպանման վայր, «OsmAnd»-ի և «OsmAnd+» ֆայլերի համատեղ օգտագործումը հնարավոր չի լինի:</string>
+    <string name="copying_osmand_one_file_descr">"Ֆայլի պատճենում  (%s) նոր վայր…"</string>
+    <string name="copying_osmand_files_descr">"OsmAnd-ի տվյալների Ֆայլերի պատճենում նոր վայր  (%s)…"</string>
+    <string name="copying_osmand_files">Պատճենահանում OsmAnd-ի տվյալների ֆայլերը…</string>
+    <string name="calculate_osmand_route_gpx">Հաշվարկել անցանց երթուղին</string>
+    <string name="app_mode_truck">Բեռնատար</string>
+    <string name="guidance_preferences_descr">Նավարկության կարգավորումները</string>
+    <string name="routing_preferences_descr">Երթուղու կարգավորումները</string>
+    <string name="speech_rate_descr">Որոշեք արտասանության արագությունը TTS համար</string>
+    <string name="speech_rate">Արտասանության արագությունը</string>
+    <string name="complex_route_calculation_failed">Արագ երթուղու կառուծումը չհաջողվեծ (%s), չեղյալ համարեք դանդաղ հաշվարկին վերադառնալու համար։</string>
+    <string name="disable_complex_routing_descr">Անջատեք 2 փուլային երթուղին ավտոմեքենայի նավարկության համար</string>
+    <string name="disable_complex_routing">Անջատել բարդ երթուղին</string>
+    <string name="amenity_type_seamark">Նավիգացիոն նշաններ (լճակներ)</string>
+    <string name="app_modes_choose_descr">"Ընտրեք օգտվողի պրոֆիլները  հավելվածում տեսանելի լինելու համար"</string>
+    <string name="app_modes_choose">Հավելվածի պրոֆիլներ</string>
+    <string name="map_widget_map_rendering">Քարտեզի ցուցադրումը</string>
+    <string name="app_mode_hiking">Ոտքով զբոսնելն (Hiking)</string>
+    <string name="app_mode_motorcycle">Մոտոցիկլ</string>
+    <string name="app_mode_boat">Նավակ</string>
+    <string name="app_mode_aircraft">Ինքնաթիռ</string>
+    <string name="local_osm_changes_delete_all_confirm">Դուք պատրաստվում եք ջնջել %1$d OSM փոփոխություններ: Համոզված եք?</string>
+    <string name="animate_routing_route_not_calculated">Խնդրում ենք սկզբից հաշվարկել երթուղին</string>
+    <string name="animate_routing_route">Կիրառել հաշվարկված երթուղու օգտագործումը</string>
+    <string name="animate_routing_gpx">Կիրառեք օգտագործվող GPX տրեկը</string>
     </resources>
