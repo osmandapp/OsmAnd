@@ -888,7 +888,7 @@ public class TrackSegmentFragment extends OsmAndListFragment {
 	}
 
 	private void updateSplit(List<GpxDisplayGroup> groups, SelectedGpxFile sf) {
-		new SplitTrackAsyncTask(sf, groups).execute((Void) null);
+		new SplitTrackAsyncTask(sf, groups).executeOnExecutor(AsyncTask.THREAD_POOL_EXECUTOR, (Void) null);
 	}
 
 	private void addOptionSplit(int value, boolean distance, List<GpxDisplayGroup> model) {
@@ -1378,7 +1378,7 @@ public class TrackSegmentFragment extends OsmAndListFragment {
 																	GPXFile gpx = getGpx();
 																	if (gpx != null) {
 																		SelectedGpxFile sf = app.getSelectedGpxHelper().selectGpxFile(gpx, vis.isChecked(), false);
-																		new SaveGpxAsyncTask(gpx, vis.isChecked() ? sf : null).execute();
+																		new SaveGpxAsyncTask(gpx, vis.isChecked() ? sf : null).executeOnExecutor(AsyncTask.THREAD_POOL_EXECUTOR);
 																	}
 																}
 															}
@@ -1476,7 +1476,7 @@ public class TrackSegmentFragment extends OsmAndListFragment {
 															GPXFile gpx = getGpx();
 															if (gpx != null) {
 																SelectedGpxFile sf = app.getSelectedGpxHelper().selectGpxFile(gpx, vis.isChecked(), false);
-																new SaveGpxAsyncTask(gpx, vis.isChecked() ? sf : null).execute();
+																new SaveGpxAsyncTask(gpx, vis.isChecked() ? sf : null).executeOnExecutor(AsyncTask.THREAD_POOL_EXECUTOR);
 															}
 														}
 														return true;
@@ -1569,7 +1569,7 @@ public class TrackSegmentFragment extends OsmAndListFragment {
 															GPXFile gpx = getGpx();
 															if (gpx != null) {
 																SelectedGpxFile sf = app.getSelectedGpxHelper().selectGpxFile(gpx, vis.isChecked(), false);
-																new SaveGpxAsyncTask(gpx, vis.isChecked() ? sf : null).execute();
+																new SaveGpxAsyncTask(gpx, vis.isChecked() ? sf : null).executeOnExecutor(AsyncTask.THREAD_POOL_EXECUTOR);
 															}
 														}
 														return true;

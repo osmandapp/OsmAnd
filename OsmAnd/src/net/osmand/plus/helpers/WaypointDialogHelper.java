@@ -794,7 +794,7 @@ public class WaypointDialogHelper {
 					reloadListAdapter(listAdapter);
 				}
 			}
-		}.execute((Void) null);
+		}.executeOnExecutor(AsyncTask.THREAD_POOL_EXECUTOR, (Void) null);
 	}
 
 	public AdapterView.OnItemClickListener getDrawerItemClickListener(final FragmentActivity ctx, final int[] running,
@@ -861,7 +861,7 @@ public class WaypointDialogHelper {
 					reloadListAdapter(listAdapter);
 				}
 			}
-		}.execute((Void) null);
+		}.executeOnExecutor(AsyncTask.THREAD_POOL_EXECUTOR, (Void) null);
 	}
 
 	public void reloadListAdapter(ArrayAdapter<Object> listAdapter) {
@@ -1049,6 +1049,6 @@ public class WaypointDialogHelper {
 				updateRouteInfoMenu(activity);
 			}
 
-		}.execute();
+		}.executeOnExecutor(AsyncTask.THREAD_POOL_EXECUTOR);
 	}
 }

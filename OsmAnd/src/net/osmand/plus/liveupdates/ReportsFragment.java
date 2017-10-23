@@ -238,7 +238,7 @@ public class ReportsFragment extends BaseOsmAndFragment implements CountrySelect
 		totalChangesByMontAsyncTask.setOnResponseListener(onResponseListener);
 		totalChangesByMontAsyncTask.setOnErrorListener(onErrorListener);
 		String finalUrl = String.format(TOTAL_CHANGES_BY_MONTH_URL_PATTERN, monthUrlString, regionUrlString);
-		totalChangesByMontAsyncTask.execute(finalUrl);
+		totalChangesByMontAsyncTask.executeOnExecutor(AsyncTask.THREAD_POOL_EXECUTOR, finalUrl);
 		
 		GetJsonAsyncTask<Protocol.RecipientsByMonth> recChangesByMontAsyncTask =
 				new GetJsonAsyncTask<>(Protocol.RecipientsByMonth.class);
@@ -266,7 +266,7 @@ public class ReportsFragment extends BaseOsmAndFragment implements CountrySelect
 			donationsTextView.setText("-");
 		}
 		String recfinalUrl = String.format(RECIPIENTS_BY_MONTH, monthUrlString, regionUrlString);
-		recChangesByMontAsyncTask.execute(recfinalUrl);
+		recChangesByMontAsyncTask.executeOnExecutor(AsyncTask.THREAD_POOL_EXECUTOR, recfinalUrl);
 	}
 
 	@Override

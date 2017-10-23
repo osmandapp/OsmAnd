@@ -970,7 +970,7 @@ public class OsmandAidlApi {
 						}
 					}
 
-				}.execute(destination);
+				}.executeOnExecutor(AsyncTask.THREAD_POOL_EXECUTOR, destination);
 			} else {
 				helper.selectGpxFile(selectedGpx.getGpxFile(), false, false);
 				refreshMap();
@@ -991,7 +991,7 @@ public class OsmandAidlApi {
 					}
 				}
 
-			}.execute(destination);
+			}.executeOnExecutor(AsyncTask.THREAD_POOL_EXECUTOR, destination);
 		}
 	}
 
@@ -1098,7 +1098,7 @@ public class OsmandAidlApi {
 						}
 					}
 
-				}.execute(f);
+				}.executeOnExecutor(AsyncTask.THREAD_POOL_EXECUTOR, f);
 
 				return true;
 			}
