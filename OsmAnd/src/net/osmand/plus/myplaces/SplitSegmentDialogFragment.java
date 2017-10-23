@@ -237,7 +237,7 @@ public class SplitSegmentDialogFragment extends DialogFragment {
 	}
 
 	private void updateSplit(List<GpxDisplayGroup> groups, GpxSelectionHelper.SelectedGpxFile sf) {
-		new SplitTrackAsyncTask(sf, groups).execute((Void) null);
+		new SplitTrackAsyncTask(sf, groups).executeOnExecutor(AsyncTask.THREAD_POOL_EXECUTOR, (Void) null);
 	}
 
 	private void setupSplitIntervalView(View view) {

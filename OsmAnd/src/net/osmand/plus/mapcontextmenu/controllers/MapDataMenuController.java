@@ -421,7 +421,7 @@ public class MapDataMenuController extends MenuController {
 							getMapActivity().refreshMap();
 						}
 
-					}.execute((Void) null);
+					}.executeOnExecutor(AsyncTask.THREAD_POOL_EXECUTOR, (Void) null);
 				}
 			});
 			confirm.setNegativeButton(R.string.shared_string_no, null);
@@ -465,7 +465,7 @@ public class MapDataMenuController extends MenuController {
 				getMapActivity().refreshMap();
 			}
 
-		}.execute((Void) null);
+		}.executeOnExecutor(AsyncTask.THREAD_POOL_EXECUTOR, (Void) null);
 	}
 
 	private boolean move(File from, File to) {

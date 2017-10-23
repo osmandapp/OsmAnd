@@ -182,7 +182,7 @@ public class IntermediatePointsDialog {
 								originalPositions.addAll(newOriginalPositions);
 								listadapter.notifyDataSetChanged();
 							};
-						}.execute(new Void[0]);
+						}.executeOnExecutor(AsyncTask.THREAD_POOL_EXECUTOR, new Void[0]);
 
 					}
 				});

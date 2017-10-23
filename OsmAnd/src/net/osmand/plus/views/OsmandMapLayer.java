@@ -80,11 +80,7 @@ public abstract class OsmandMapLayer {
 
 
 	public <Params> void executeTaskInBackground(AsyncTask<Params, ?, ?> task, Params... params) {
-		if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.HONEYCOMB) {
-			task.executeOnExecutor(AsyncTask.THREAD_POOL_EXECUTOR, params);
-		} else {
-			task.execute(params);
-		}
+		task.executeOnExecutor(AsyncTask.THREAD_POOL_EXECUTOR, params);
 	}
 
 	public boolean isPresentInFullObjects(LatLon latLon) {

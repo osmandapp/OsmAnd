@@ -66,7 +66,7 @@ public class AndroidNetworkUtils {
 				}
 			}
 
-		}.execute((Void) null);
+		}.executeOnExecutor(AsyncTask.THREAD_POOL_EXECUTOR, (Void) null);
 	}
 
 

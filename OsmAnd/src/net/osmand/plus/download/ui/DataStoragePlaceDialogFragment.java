@@ -2,6 +2,7 @@ package net.osmand.plus.download.ui;
 
 import android.app.Activity;
 import android.content.DialogInterface;
+import android.os.AsyncTask;
 import android.os.Build;
 import android.os.Bundle;
 import android.os.StatFs;
@@ -259,7 +260,7 @@ public class DataStoragePlaceDialogFragment extends BottomSheetDialogFragment {
 	}
 
 	private void reloadData() {
-		new DashChooseAppDirFragment.ReloadData(getActivity(), getMyApplication()).execute((Void) null);
+		new DashChooseAppDirFragment.ReloadData(getActivity(), getMyApplication()).executeOnExecutor(AsyncTask.THREAD_POOL_EXECUTOR, (Void) null);
 	}
 
 	public static void showInstance(FragmentManager fragmentManager, boolean storageReadOnly) {

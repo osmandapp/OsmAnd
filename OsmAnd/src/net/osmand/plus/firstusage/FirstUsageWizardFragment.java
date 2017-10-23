@@ -376,7 +376,7 @@ public class FirstUsageWizardFragment extends Fragment implements OsmAndLocation
 							showNoLocationFragment(getActivity());
 						}
 					}
-				}.execute();
+				}.executeOnExecutor(AsyncTask.THREAD_POOL_EXECUTOR);
 
 			} else {
 					FragmentActivity activity = getActivity();

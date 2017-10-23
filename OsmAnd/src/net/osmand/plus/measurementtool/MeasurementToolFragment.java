@@ -1283,7 +1283,7 @@ public class MeasurementToolFragment extends Fragment {
 					}
 				}
 			}
-		}.execute();
+		}.executeOnExecutor(AsyncTask.THREAD_POOL_EXECUTOR);
 	}
 
 	private void enable(View... views) {

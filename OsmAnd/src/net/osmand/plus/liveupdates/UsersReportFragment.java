@@ -10,6 +10,7 @@ import net.osmand.plus.liveupdates.ReportsFragment.GetJsonAsyncTask;
 import net.osmand.plus.liveupdates.ReportsFragment.GetJsonAsyncTask.OnResponseListener;
 import android.content.res.Resources;
 import android.graphics.drawable.Drawable;
+import android.os.AsyncTask;
 import android.os.Bundle;
 import android.support.annotation.ColorInt;
 import android.support.annotation.DrawableRes;
@@ -49,7 +50,7 @@ public class UsersReportFragment extends BaseOsmAndDialogFragment {
 				view.findViewById(R.id.progress).setVisibility(View.GONE);
 			}
 		});
-		task.execute(url);
+		task.executeOnExecutor(AsyncTask.THREAD_POOL_EXECUTOR, url);
 		listView.setAdapter(adapter);
 		
 		ImageButton clearButton = (ImageButton) view.findViewById(R.id.closeButton);

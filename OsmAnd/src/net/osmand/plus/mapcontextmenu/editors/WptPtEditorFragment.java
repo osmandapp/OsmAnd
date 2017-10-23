@@ -203,7 +203,7 @@ public class WptPtEditorFragment extends PointEditorFragment {
 				}
 			} else {
 				addWpt(gpx, description, name, category, color);
-				new SaveGpxAsyncTask(getMyApplication(), gpx, editor.isGpxSelected()).execute();
+				new SaveGpxAsyncTask(getMyApplication(), gpx, editor.isGpxSelected()).executeOnExecutor(AsyncTask.THREAD_POOL_EXECUTOR);
 			}
 			syncGpx(gpx);
 		}
@@ -227,7 +227,7 @@ public class WptPtEditorFragment extends PointEditorFragment {
 			} else {
 				gpx.updateWptPt(wpt, wpt.getLatitude(), wpt.getLongitude(),
 						System.currentTimeMillis(), description, name, category, color);
-				new SaveGpxAsyncTask(getMyApplication(), gpx, editor.isGpxSelected()).execute();
+				new SaveGpxAsyncTask(getMyApplication(), gpx, editor.isGpxSelected()).executeOnExecutor(AsyncTask.THREAD_POOL_EXECUTOR);
 			}
 			syncGpx(gpx);
 		}
@@ -248,7 +248,7 @@ public class WptPtEditorFragment extends PointEditorFragment {
 						savingTrackHelper.deletePointData(wpt);
 					} else {
 						gpx.deleteWptPt(wpt);
-						new SaveGpxAsyncTask(getMyApplication(), gpx, editor.isGpxSelected()).execute();
+						new SaveGpxAsyncTask(getMyApplication(), gpx, editor.isGpxSelected()).executeOnExecutor(AsyncTask.THREAD_POOL_EXECUTOR);
 					}
 					syncGpx(gpx);
 				}

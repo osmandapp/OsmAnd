@@ -322,11 +322,7 @@ public class DownloadIndexesThread {
 
 	@SuppressWarnings("unchecked")
 	private <P> void execute(BasicProgressAsyncTask<?, P, ?, ?> task, P... indexItems) {
-		if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.HONEYCOMB) {
-			task.executeOnExecutor(AsyncTask.THREAD_POOL_EXECUTOR, indexItems);
-		} else {
-			task.execute(indexItems);
-		}
+		task.executeOnExecutor(AsyncTask.THREAD_POOL_EXECUTOR, indexItems);
 	}
 
 

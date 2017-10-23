@@ -4,6 +4,7 @@ import android.app.Activity;
 import android.app.Dialog;
 import android.app.ProgressDialog;
 import android.content.DialogInterface;
+import android.os.AsyncTask;
 import android.os.Bundle;
 import android.support.annotation.MainThread;
 import android.support.annotation.NonNull;
@@ -102,7 +103,7 @@ public class OsmEditsUploadListenerHelper implements OsmEditsUploadListener {
 		dialog.show(activity.getSupportFragmentManager(), ProgressDialogFragment.TAG);
 		UploadOpenstreetmapPointAsyncTask uploadTask = new UploadOpenstreetmapPointAsyncTask(
 				dialog, helper, plugin, toUpload.length, false, false);
-		uploadTask.execute(toUpload);
+		uploadTask.executeOnExecutor(AsyncTask.THREAD_POOL_EXECUTOR, toUpload);
 	}
 
 	public static final class UploadingErrorDialogFragment extends DialogFragment {

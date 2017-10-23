@@ -149,7 +149,7 @@ public class LocalIndexesFragment extends OsmandExpandableListFragment implement
 		if (current == null || current.getStatus() == AsyncTask.Status.FINISHED ||
 				current.isCancelled() || current.getResult() != null) {
 			asyncLoader = new LoadLocalIndexTask();
-			asyncLoader.execute();
+			asyncLoader.executeOnExecutor(AsyncTask.THREAD_POOL_EXECUTOR);
 		}
 	}
 
@@ -224,7 +224,7 @@ public class LocalIndexesFragment extends OsmandExpandableListFragment implement
 			confirm.setPositiveButton(R.string.shared_string_yes, new DialogInterface.OnClickListener() {
 				@Override
 				public void onClick(DialogInterface dialog, int which) {
-					new LocalIndexOperationTask(getDownloadActivity(), listAdapter, LocalIndexOperationTask.CLEAR_TILES_OPERATION).execute(info);
+					new LocalIndexOperationTask(getDownloadActivity(), listAdapter, LocalIndexOperationTask.CLEAR_TILES_OPERATION).executeOnExecutor(AsyncTask.THREAD_POOL_EXECUTOR, info);
 				}
 			});
 			confirm.setNegativeButton(R.string.shared_string_no, null);
@@ -234,13 +234,13 @@ public class LocalIndexesFragment extends OsmandExpandableListFragment implement
 			confirm.setMessage(getString(R.string.delete_confirmation_msg, fn));
 			confirm.show();
 		} else if (resId == R.string.local_index_mi_restore) {
-			new LocalIndexOperationTask(getDownloadActivity(), listAdapter, LocalIndexOperationTask.RESTORE_OPERATION).execute(info);
+			new LocalIndexOperationTask(getDownloadActivity(), listAdapter, LocalIndexOperationTask.RESTORE_OPERATION).executeOnExecutor(AsyncTask.THREAD_POOL_EXECUTOR, info);
 		} else if (resId == R.string.shared_string_delete) {
 			AlertDialog.Builder confirm = new AlertDialog.Builder(getActivity());
 			confirm.setPositiveButton(R.string.shared_string_yes, new DialogInterface.OnClickListener() {
 				@Override
 				public void onClick(DialogInterface dialog, int which) {
-					new LocalIndexOperationTask(getDownloadActivity(), listAdapter, LocalIndexOperationTask.DELETE_OPERATION).execute(info);
+					new LocalIndexOperationTask(getDownloadActivity(), listAdapter, LocalIndexOperationTask.DELETE_OPERATION).executeOnExecutor(AsyncTask.THREAD_POOL_EXECUTOR, info);
 				}
 			});
 			confirm.setNegativeButton(R.string.shared_string_no, null);
@@ -250,7 +250,7 @@ public class LocalIndexesFragment extends OsmandExpandableListFragment implement
 			confirm.setMessage(getString(R.string.delete_confirmation_msg, fn));
 			confirm.show();
 		} else if (resId == R.string.local_index_mi_backup) {
-			new LocalIndexOperationTask(getDownloadActivity(), listAdapter, LocalIndexOperationTask.BACKUP_OPERATION).execute(info);
+			new LocalIndexOperationTask(getDownloadActivity(), listAdapter, LocalIndexOperationTask.BACKUP_OPERATION).executeOnExecutor(AsyncTask.THREAD_POOL_EXECUTOR, info);
 		}
 		return true;
 	}
@@ -699,7 +699,7 @@ public class LocalIndexesFragment extends OsmandExpandableListFragment implement
 			operationTask = null;
 		}
 		if (operationTask != null) {
-			operationTask.execute(selectedItems.toArray(new LocalIndexInfo[selectedItems.size()]));
+			operationTask.executeOnExecutor(AsyncTask.THREAD_POOL_EXECUTOR, selectedItems.toArray(new LocalIndexInfo[selectedItems.size()]));
 		}
 		if (actionMode != null) {
 			actionMode.finish();

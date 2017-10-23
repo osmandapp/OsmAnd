@@ -574,7 +574,7 @@ public class TrackPointFragment extends OsmandExpandableListFragment {
 				return getString(R.string.points_delete_multiple_succesful);
 			}
 
-		}.execute();
+		}.executeOnExecutor(AsyncTask.THREAD_POOL_EXECUTOR);
 	}
 
 	private void syncGpx(GPXFile gpxFile) {

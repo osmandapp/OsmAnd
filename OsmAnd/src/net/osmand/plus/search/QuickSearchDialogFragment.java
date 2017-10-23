@@ -1918,7 +1918,7 @@ public class QuickSearchDialogFragment extends DialogFragment implements OsmAndC
 					startActivity(sendIntent);
 				}
 			};
-			exportTask.execute();
+			exportTask.executeOnExecutor(AsyncTask.THREAD_POOL_EXECUTOR);
 		}
 	}
 

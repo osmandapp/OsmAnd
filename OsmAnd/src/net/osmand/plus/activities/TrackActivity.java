@@ -309,7 +309,7 @@ public class TrackActivity extends TabActivity {
 						}
 					}
 				}
-			}.execute((Void) null);
+			}.executeOnExecutor(AsyncTask.THREAD_POOL_EXECUTOR, (Void) null);
 		}
 	}
 
