@@ -50,13 +50,17 @@ public class AndroidUtils {
 			@Override
 			public void run() {
 				if (!isHardwareKeyboardAvailable(view.getContext())) {
-					InputMethodManager imm = (InputMethodManager) view.getContext().getSystemService(Context.INPUT_METHOD_SERVICE);
-					if (imm != null) {
-						imm.showSoftInput(view, InputMethodManager.SHOW_IMPLICIT);
-					}
+					showSoftKeyboard(view);
 				}
 			}
 		});
+	}
+
+	public static void showSoftKeyboard(final View view) {
+		InputMethodManager imm = (InputMethodManager) view.getContext().getSystemService(Context.INPUT_METHOD_SERVICE);
+		if (imm != null) {
+			imm.showSoftInput(view, InputMethodManager.SHOW_IMPLICIT);
+		}
 	}
 
 	public static void hideSoftKeyboard(final Activity activity, final View input) {

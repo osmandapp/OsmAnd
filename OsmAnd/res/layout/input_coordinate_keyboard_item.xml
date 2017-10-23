@@ -1,19 +1,21 @@
 <?xml version="1.0" encoding="utf-8"?>
 <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
               xmlns:tools="http://schemas.android.com/tools"
-              xmlns:osmand="http://schemas.android.com/apk/res-auto"
+              xmlns:app="http://schemas.android.com/apk/res-auto"
               android:layout_width="match_parent"
               android:layout_height="56dp"
               android:orientation="vertical">
 
-    <net.osmand.plus.widgets.TextViewEx
+    <android.support.v7.widget.AppCompatTextView
+        android:layout_marginTop="6dp"
+        android:layout_marginBottom="6dp"
         android:id="@+id/keyboard_item"
         android:textAllCaps="true"
         android:layout_width="match_parent"
         android:layout_height="match_parent"
         android:gravity="center"
-        android:textColor="@color/keyboard_color"
-        osmand:typeface="@string/font_roboto_regular"
+        android:textColor="?attr/keyboard_item_text_color"
+        app:autoSizeTextType="uniform"
         tools:text="3"/>
 
 </LinearLayout>

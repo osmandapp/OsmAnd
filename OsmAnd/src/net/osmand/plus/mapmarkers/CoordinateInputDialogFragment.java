@@ -19,6 +19,7 @@ import android.widget.ArrayAdapter;
 import android.widget.EditText;
 import android.widget.GridView;
 import android.widget.ImageView;
+import android.widget.TextView;
 
 import net.osmand.AndroidUtils;
 import net.osmand.data.PointDescription;
@@ -28,7 +29,6 @@ import net.osmand.plus.OsmandSettings;
 import net.osmand.plus.OsmandTextFieldBoxes;
 import net.osmand.plus.R;
 import net.osmand.plus.activities.MapActivity;
-import net.osmand.plus.widgets.TextViewEx;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -55,6 +55,8 @@ public class CoordinateInputDialogFragment extends DialogFragment {
 	private List<OsmandTextFieldBoxes> textFieldBoxes;
 	private ExtendedEditText nameEditText;
 	private List<ExtendedEditText> extendedLatLonEditTexts;
+	private View mainView;
+	private IconsCache iconsCache;
 
 	@Override
 	public void onCreate(Bundle savedInstanceState) {
@@ -72,9 +74,9 @@ public class CoordinateInputDialogFragment extends DialogFragment {
 	@Nullable
 	@Override
 	public View onCreateView(LayoutInflater inflater, @Nullable ViewGroup container, @Nullable Bundle savedInstanceState) {
-		final View mainView = inflater.inflate(R.layout.fragment_coordinate_input_dialog, container);
+		mainView = inflater.inflate(R.layout.fragment_coordinate_input_dialog, container);
 		final MapActivity mapActivity = getMapActivity();
-		final IconsCache ic = getMyApplication().getIconsCache();
+		iconsCache = getMyApplication().getIconsCache();
 
 		Fragment coordinateInputBottomSheetDialogFragment = mapActivity.getSupportFragmentManager().findFragmentByTag(CoordinateInputBottomSheetDialogFragment.TAG);
 		if (coordinateInputBottomSheetDialogFragment != null) {
@@ -94,6 +96,9 @@ public class CoordinateInputDialogFragment extends DialogFragment {
 		optionsButton.setOnClickListener(new View.OnClickListener() {
 			@Override
 			public void onClick(View view) {
+				if (!useOsmandKeyboard) {
+					AndroidUtils.hideSoftKeyboard(getMapActivity(), focusedEditText);
+				}
 				CoordinateInputBottomSheetDialogFragment fragment = new CoordinateInputBottomSheetDialogFragment();
 				Bundle args = new Bundle();
 				args.putInt(COORDINATE_FORMAT, coordinateFormat);
@@ -178,7 +183,8 @@ public class CoordinateInputDialogFragment extends DialogFragment {
 						} else {
 							strToAppend = ":";
 						}
-						focusedEditText.append(strToAppend);
+						focusedEditText.setText(str + strToAppend);
+						focusedEditText.setSelection(strLength + 1);
 					} else if (strLength == 5 && coordinateFormat != PointDescription.FORMAT_DEGREES && len < strLength) {
 						String strToAppend;
 						if (coordinateFormat == PointDescription.FORMAT_MINUTES) {
@@ -186,9 +192,11 @@ public class CoordinateInputDialogFragment extends DialogFragment {
 						} else {
 							strToAppend = ":";
 						}
-						focusedEditText.append(strToAppend);
+						focusedEditText.setText(str + strToAppend);
+						focusedEditText.setSelection(strLength + 1);
 					} else if (strLength == 8 && coordinateFormat == PointDescription.FORMAT_SECONDS && len < strLength) {
-						focusedEditText.append(".");
+						focusedEditText.setText(str + ".");
+						focusedEditText.setSelection(strLength + 1);
 					} else if ((strLength == DEGREES_MAX_LENGTH && coordinateFormat == PointDescription.FORMAT_DEGREES)
 							|| (strLength == MINUTES_MAX_LENGTH && coordinateFormat == PointDescription.FORMAT_MINUTES)
 							|| (strLength == SECONDS_MAX_LENGTH && coordinateFormat == PointDescription.FORMAT_SECONDS)) {
@@ -245,21 +253,14 @@ public class CoordinateInputDialogFragment extends DialogFragment {
 			}
 		});
 
-		final ImageView showHideKeyBoardIcon = (ImageView) mainView.findViewById(R.id.show_hide_keyboard_icon);
-		final View keyboardDivider = mainView.findViewById(R.id.keyboard_divider);
-		showHideKeyBoardIcon.setImageDrawable(ic.getThemedIcon(R.drawable.ic_action_arrow_down));
-		showHideKeyBoardIcon.setOnClickListener(new View.OnClickListener() {
+		final ImageView showHideKeyboardIcon = (ImageView) mainView.findViewById(R.id.show_hide_keyboard_icon);
+		showHideKeyboardIcon.setImageDrawable(iconsCache.getThemedIcon(R.drawable.ic_action_arrow_down));
+		showHideKeyboardIcon.setOnClickListener(new View.OnClickListener() {
 			@Override
 			public void onClick(View view) {
-				int keyboardVisibility = keyboardGrid.getVisibility();
-				if (keyboardVisibility == View.VISIBLE) {
-					keyboardGrid.setVisibility(View.GONE);
-					keyboardDivider.setVisibility(View.GONE);
-					showHideKeyBoardIcon.setImageDrawable(ic.getThemedIcon(R.drawable.ic_action_arrow_up));
-				} else {
-					keyboardGrid.setVisibility(View.VISIBLE);
-					keyboardDivider.setVisibility(View.VISIBLE);
-					showHideKeyBoardIcon.setImageDrawable(ic.getThemedIcon(R.drawable.ic_action_arrow_down));
+				if (useOsmandKeyboard) {
+					boolean isCurrentlyVisible = isOsmandKeyboardCurrentlyVisible();
+					changeOsmandKeyboardVisibility(!isCurrentlyVisible);
 				}
 			}
 		});
@@ -287,6 +288,9 @@ public class CoordinateInputDialogFragment extends DialogFragment {
 			@Override
 			public void onKeyboardChanged(boolean useOsmandKeyboard) {
 				CoordinateInputDialogFragment.this.useOsmandKeyboard = useOsmandKeyboard;
+				if (!useOsmandKeyboard && isOsmandKeyboardCurrentlyVisible()) {
+					changeOsmandKeyboardVisibility(false);
+				}
 				changeKeyboardInBoxes();
 				changeKeyboardInEditTexts();
 			}
@@ -296,6 +300,18 @@ public class CoordinateInputDialogFragment extends DialogFragment {
 				dismiss();
 			}
 		};
+	}
+
+	private boolean isOsmandKeyboardCurrentlyVisible() {
+		return mainView.findViewById(R.id.keyboard_grid_view).getVisibility() == View.VISIBLE;
+	}
+
+	private void changeOsmandKeyboardVisibility(boolean show) {
+		int visibility = show ? View.VISIBLE : View.GONE;
+		mainView.findViewById(R.id.keyboard_grid_view).setVisibility(visibility);
+		mainView.findViewById(R.id.keyboard_divider).setVisibility(visibility);
+		((ImageView) mainView.findViewById(R.id.show_hide_keyboard_icon))
+				.setImageDrawable(iconsCache.getThemedIcon(show ? R.drawable.ic_action_arrow_down : R.drawable.ic_action_arrow_up));
 	}
 
 	private void changeEditTextLengths() {
@@ -321,7 +337,7 @@ public class CoordinateInputDialogFragment extends DialogFragment {
 
 	public void changeKeyboardInEditTexts() {
 		for (ExtendedEditText extendedEditText : extendedLatLonEditTexts) {
-			extendedEditText.setInputType(useOsmandKeyboard ? InputType.TYPE_NULL : InputType.TYPE_CLASS_TEXT);
+			extendedEditText.setInputType(useOsmandKeyboard ? InputType.TYPE_NULL : InputType.TYPE_CLASS_NUMBER);
 		}
 		nameEditText.setInputType(useOsmandKeyboard ? InputType.TYPE_NULL : InputType.TYPE_CLASS_TEXT);
 	}
@@ -359,17 +375,9 @@ public class CoordinateInputDialogFragment extends DialogFragment {
 		public View getView(int position, @Nullable View convertView, @NonNull ViewGroup parent) {
 			if (convertView == null) {
 				convertView = LayoutInflater.from(getContext()).inflate(R.layout.input_coordinate_keyboard_item, parent, false);
+				convertView.setBackgroundResource(lightTheme ? R.drawable.keyboard_item_light_bg : R.drawable.keyboard_item_dark_bg);
 			}
-			convertView.setBackgroundResource(lightTheme ? R.drawable.keyboard_item_light_bg : R.drawable.keyboard_item_dark_bg);
-
-			TextViewEx keyboardItem = (TextViewEx) convertView.findViewById(R.id.keyboard_item);
-//			if (position == DELETE_BUTTON_POSITION || position == CLEAR_BUTTON_POSITION) {
-//				keyboardItem.setTextSize(getResources().getDimension(R.dimen.default_list_text_size));
-//			} else {
-//				keyboardItem.setTextSize(getResources().getDimension(R.dimen.map_button_text_size));
-//			}
-
-			keyboardItem.setText(getItem(position));
+			((TextView) convertView.findViewById(R.id.keyboard_item)).setText(getItem(position));
 
 			return convertView;
 		}
