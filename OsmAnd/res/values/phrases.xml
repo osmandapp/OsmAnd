@@ -3624,4 +3624,12 @@
 	<string name="poi_amperage">Amperage</string>
 	<string name="poi_charging_station_output">Сharging station output</string>
 
+	<string name="poi_map_type_topo">Map type: topo</string>
+	<string name="poi_map_type_street">Map type: street</string>
+	<string name="poi_map_type_scheme">Map type: scheme</string>
+	<string name="poi_map_type_toposcope">Map type: toposcope</string>
+	<string name="poi_map_size_site">Map size: site</string>
+	<string name="poi_map_size_city">Map size: city</string>
+	<string name="poi_map_size_region">Map size: region</string>
+
 </resources>
