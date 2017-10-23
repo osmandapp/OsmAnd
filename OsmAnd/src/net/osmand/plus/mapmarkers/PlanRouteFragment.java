@@ -928,7 +928,7 @@ public class PlanRouteFragment extends Fragment implements OsmAndLocationListene
 				adapter.notifyDataSetChanged();
 				planRouteContext.recreateSnapTrkSegment(false);
 			}
-		}.execute();
+		}.executeOnExecutor(AsyncTask.THREAD_POOL_EXECUTOR);
 	}
 
 	private class PlanRouteToolbarController extends TopToolbarController {

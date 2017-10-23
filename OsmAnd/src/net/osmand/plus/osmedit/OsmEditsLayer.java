@@ -207,13 +207,13 @@ public class OsmEditsLayer extends OsmandMapLayer implements ContextMenuLayer.IC
 				Node node = objectInMotion.getEntity();
 				node.setLatitude(position.getLatitude());
 				node.setLongitude(position.getLongitude());
-				new SaveOsmChangeAsyncTask(mOsmChangeUtil, callback, objectInMotion).execute();
+				new SaveOsmChangeAsyncTask(mOsmChangeUtil, callback, objectInMotion).executeOnExecutor(AsyncTask.THREAD_POOL_EXECUTOR);
 			} else if (o instanceof OsmNotesPoint) {
 				OsmNotesPoint objectInMotion = (OsmNotesPoint) o;
 				objectInMotion.setLatitude(position.getLatitude());
 				objectInMotion.setLongitude(position.getLongitude());
 				new SaveOsmNoteAsyncTask(objectInMotion.getText(), activity, callback, plugin, mOsmBugsUtil)
-						.execute(objectInMotion);
+						.executeOnExecutor(AsyncTask.THREAD_POOL_EXECUTOR, objectInMotion);
 			}
 		}
 	}

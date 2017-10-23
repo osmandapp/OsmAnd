@@ -73,7 +73,7 @@ public class LiveMonitoringHelper  {
 		}
 		if (isLiveMonitoringEnabled()) {
 			if (!started) {
-				new LiveSender().execute(queue);
+				new LiveSender().executeOnExecutor(AsyncTask.THREAD_POOL_EXECUTOR, queue);
 				started = true;
 			}
 		} else {

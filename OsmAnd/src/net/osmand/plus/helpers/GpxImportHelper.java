@@ -173,7 +173,7 @@ public class GpxImportHelper {
 				progress.dismiss();
 				handleResult(result, fileName, save, useImportDir, false);
 			}
-		}.execute();
+		}.executeOnExecutor(AsyncTask.THREAD_POOL_EXECUTOR);
 	}
 
 	private void handleFavouritesImport(final Uri gpxFile, final String fileName, final boolean save, final boolean useImportDir, final boolean forceImportFavourites) {
@@ -211,7 +211,7 @@ public class GpxImportHelper {
 				progress.dismiss();
 				importFavourites(result, fileName, save, useImportDir, forceImportFavourites);
 			}
-		}.execute();
+		}.executeOnExecutor(AsyncTask.THREAD_POOL_EXECUTOR);
 	}
 
 	private void importFavoritesImpl(final GPXFile gpxFile, final String fileName, final boolean forceImportFavourites) {
@@ -245,7 +245,7 @@ public class GpxImportHelper {
 				newIntent.putExtra(FavoritesActivity.OPEN_FAVOURITES_TAB, true);
 				activity.startActivity(newIntent);
 			}
-		}.execute();
+		}.executeOnExecutor(AsyncTask.THREAD_POOL_EXECUTOR);
 	}
 
 	private void handleKmzImport(final Uri kmzFile, final String name, final boolean save, final boolean useImportDir) {
@@ -298,7 +298,7 @@ public class GpxImportHelper {
 				handleResult(result, name, save, useImportDir, false);
 			}
 
-		}.execute();
+		}.executeOnExecutor(AsyncTask.THREAD_POOL_EXECUTOR);
 	}
 
 	private void handleKmlImport(final Uri kmlFile, final String name, final boolean save, final boolean useImportDir) {
@@ -342,7 +342,7 @@ public class GpxImportHelper {
 				progress.dismiss();
 				handleResult(result, name, save, useImportDir, false);
 			}
-		}.execute();
+		}.executeOnExecutor(AsyncTask.THREAD_POOL_EXECUTOR);
 	}
 
 	private void handleResult(final GPXFile result, final String name, final boolean save,
@@ -355,7 +355,7 @@ public class GpxImportHelper {
 				}
 			} else {
 				if (save) {
-					new SaveAsyncTask(result, name, useImportDir).execute();
+					new SaveAsyncTask(result, name, useImportDir).executeOnExecutor(AsyncTask.THREAD_POOL_EXECUTOR);
 				} else {
 					showGpxOnMap(result);
 				}

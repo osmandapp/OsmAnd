@@ -107,7 +107,7 @@ public class SearchPoiFilterFragment extends OsmAndListFragment implements Searc
 					currentTask.cancel(true);
 				}
 				currentTask = new SearchPoiByNameTask();
-				currentTask.execute(s.toString().trim());
+				currentTask.executeOnExecutor(AsyncTask.THREAD_POOL_EXECUTOR, s.toString().trim());
 			}
 		});
 		searchEditText.setOnEditorActionListener(new TextView.OnEditorActionListener() {

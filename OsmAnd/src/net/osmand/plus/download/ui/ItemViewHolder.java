@@ -6,6 +6,7 @@ import android.content.Intent;
 import android.content.res.Resources;
 import android.graphics.drawable.Drawable;
 import android.net.Uri;
+import android.os.AsyncTask;
 import android.support.v4.view.ViewCompat;
 import android.support.v7.app.AlertDialog;
 import android.support.v7.widget.PopupMenu;
@@ -416,7 +417,7 @@ public class ItemViewHolder {
 						@Override
 						public void onClick(DialogInterface dialog, int which) {
 							new LocalIndexOperationTask(context, null, LocalIndexOperationTask.DELETE_OPERATION)
-									.execute(info);
+									.executeOnExecutor(AsyncTask.THREAD_POOL_EXECUTOR, info);
 						}
 					});
 					confirm.setNegativeButton(R.string.shared_string_no, null);

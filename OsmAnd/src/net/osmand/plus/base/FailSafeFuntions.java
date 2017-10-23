@@ -149,7 +149,7 @@ public class FailSafeFuntions {
 
 						
 					};
-					task.execute(gpxPath);
+					task.executeOnExecutor(AsyncTask.THREAD_POOL_EXECUTOR, gpxPath);
 
 				}
 			};

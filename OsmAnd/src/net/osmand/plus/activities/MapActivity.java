@@ -1234,7 +1234,7 @@ public class MapActivity extends OsmandActionBarActivity implements DownloadEven
 
 			protected void onPostExecute(Void result) {
 			}
-		}.execute((Void) null);
+		}.executeOnExecutor(AsyncTask.THREAD_POOL_EXECUTOR, (Void) null);
 
 	}
 

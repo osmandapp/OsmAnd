@@ -2,6 +2,7 @@ package net.osmand.plus.views;
 
 import android.graphics.Canvas;
 import android.graphics.Paint;
+import android.os.AsyncTask;
 
 import net.osmand.data.QuadRect;
 import net.osmand.data.RotatedTileBox;
@@ -137,7 +138,7 @@ public class Renderable {
 
                 double cullDistance = Math.pow(2.0, segmentSize - zoom);    // segmentSize == epsilon
                 culler = new AsynchronousResampler.RamerDouglasPeucer(this, cullDistance);
-                culler.execute("");
+                culler.executeOnExecutor(AsyncTask.THREAD_POOL_EXECUTOR, "");
             }
         }
 

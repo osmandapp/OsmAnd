@@ -544,7 +544,7 @@ public class RoutePointsPlugin extends OsmandPlugin {
 					saveFile();
 					return null;
 				}
-			}.execute(getCurrentRoute());
+			}.executeOnExecutor(AsyncTask.THREAD_POOL_EXECUTOR, getCurrentRoute());
 		}
 	}
 	

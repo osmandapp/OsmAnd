@@ -628,7 +628,7 @@ public class QuickSearchCoordinatesFragment extends DialogFragment implements Os
 						subtitleView.setText(country == null ? "" : country);
 					}
 				}
-			}.execute(latLon);
+			}.executeOnExecutor(AsyncTask.THREAD_POOL_EXECUTOR, latLon);
 			updateLocationUI(latLon, heading);
 			errorView.setVisibility(View.GONE);
 			coordsView.setVisibility(View.VISIBLE);

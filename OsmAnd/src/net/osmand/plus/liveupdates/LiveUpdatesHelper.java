@@ -4,6 +4,7 @@ import android.app.AlarmManager;
 import android.app.PendingIntent;
 import android.content.Context;
 import android.content.Intent;
+import android.os.AsyncTask;
 import android.support.annotation.NonNull;
 
 import net.osmand.plus.OsmandSettings;
@@ -160,6 +161,6 @@ public class LiveUpdatesHelper {
 
 	public static void runLiveUpdate(Context context, final String fileName, boolean forceUpdate) {
 		final String fnExt = Algorithms.getFileNameWithoutExtension(new File(fileName));
-		new PerformLiveUpdateAsyncTask(context, fileName, forceUpdate).execute(fnExt);
+		new PerformLiveUpdateAsyncTask(context, fileName, forceUpdate).executeOnExecutor(AsyncTask.THREAD_POOL_EXECUTOR, fnExt);
 	}
 }

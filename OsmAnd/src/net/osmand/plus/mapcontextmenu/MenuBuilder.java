@@ -758,10 +758,6 @@ public class MenuBuilder {
 
 	@SuppressWarnings("unchecked")
 	public static <P> void execute(AsyncTask<P, ?, ?> task, P... requests) {
-		if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.HONEYCOMB) {
-			task.executeOnExecutor(AsyncTask.THREAD_POOL_EXECUTOR, requests);
-		} else {
-			task.execute(requests);
-		}
+		task.executeOnExecutor(AsyncTask.THREAD_POOL_EXECUTOR, requests);
 	}
 }
