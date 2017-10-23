@@ -2459,21 +2459,21 @@ Se ami OsmAnd e OSM e vuoi sostenerli, questo è un modo perfetto per farlo.</st
     <string name="shared_string_recorded">Registrato</string>
     <string name="shared_string_record">Registra</string>
     <string name="gpx_logging_no_data">Nessun dato</string>
-    <string name="release_2_5">\\u2022 Icone sulla mappa cliccabili
+    <string name="release_2_5">\\022 Icone sulla mappa cliccabili 
 \n 
-\n • Potente filtro di ricerca dei PDI: ricerca dei ristoranti per tipo di cucina, campeggi per esigenze specifiche
-\n 
-\n 
-\n • Nuovo stile Topo per ciclisti ed escursionisti
+\n • Potente filtro di ricerca dei PDI: ricerca dei ristoranti per tipo di cucina, campeggi per esigenze specifiche 
 \n 
 \n 
-\n • Registrazione viaggio migliorata
+\n • Nuovo stile Topo per ciclisti ed escursionisti 
 \n 
 \n 
-\n • Notifiche di navigazione migliorate (Android Wear)
+\n • Registrazione viaggio migliorata 
 \n 
 \n 
-\n • Molti altri miglioramenti e correzioni di bug
+\n • Notifiche di navigazione migliorate (Android Wear) 
+\n 
+\n 
+\n • Molti altri miglioramenti e correzioni di bug 
 \n 
 \n 
 \n e altro…</string>
