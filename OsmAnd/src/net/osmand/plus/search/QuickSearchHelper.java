@@ -25,6 +25,7 @@ import net.osmand.search.core.SearchResult;
 import net.osmand.util.Algorithms;
 
 import java.io.IOException;
+import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.List;
 
@@ -274,24 +275,28 @@ public class QuickSearchHelper implements ResourceListener {
 	public static class SearchOnlineApi extends SearchBaseAPI {
 
 		private NominatimPoiFilter nominatimPoiFilter;
+		private NominatimPoiFilter nominatimAddressFilter;
 		private OsmandApplication app;
 
 		public SearchOnlineApi(OsmandApplication app) {
 			super(ObjectType.ONLINE_POI);
 			this.nominatimPoiFilter = app.getPoiFilters().getNominatimPOIFilter();
+			this.nominatimAddressFilter = app.getPoiFilters().getNominatimAddressFilter();
 			this.app = app;
 		}
 
 		@Override
 		public boolean search(SearchPhrase phrase, SearchUICore.SearchResultMatcher resultMatcher) throws IOException {
-			List<Amenity> amenities = nominatimPoiFilter.initializeNewSearch(app.getSettings().getLastKnownMapLocation().getLatitude(), app.getSettings().getLastKnownMapLocation().getLongitude(), -1, null);
+			List<Amenity> amenities = new ArrayList<>();
+			amenities.addAll(nominatimPoiFilter.initializeNewSearch(app.getSettings().getLastKnownMapLocation().getLatitude(), app.getSettings().getLastKnownMapLocation().getLongitude(), -1, null));
+			amenities.addAll(nominatimAddressFilter.initializeNewSearch(app.getSettings().getLastKnownMapLocation().getLatitude(), app.getSettings().getLastKnownMapLocation().getLongitude(), -1, null));
 			int p = 0;
 			for (Amenity amenity : amenities) {
 				SearchResult sr = new SearchResult(phrase);
 				sr.localeName = amenity.getName();
 				sr.object = amenity;
-				sr.priority = SEARCH_HISTORY_OBJECT_PRIORITY + (p++);
-				sr.objectType = ObjectType.RECENT_OBJ;
+				sr.priority = SEARCH_ONLINE_PRIORITY + (p++);
+				sr.objectType = ObjectType.ONLINE_POI;
 				sr.location = amenity.getLocation();
 				sr.preferredZoom = 17;
 				if (phrase.getUnknownSearchWordLength() <= 1 && phrase.isNoSelectedType()) {
