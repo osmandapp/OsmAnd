@@ -436,7 +436,7 @@ public class OsmandRasterMapsPlugin extends OsmandPlugin {
 				builder.show();
 			}
 		};
-		t.execute();
+		t.executeOnExecutor(AsyncTask.THREAD_POOL_EXECUTOR);
 	}
 
 	public static void defineNewEditLayer(final Activity activity, final ResultMatcher<TileSourceTemplate> resultMatcher) {

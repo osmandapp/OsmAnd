@@ -8,4 +8,21 @@
 	<string name="poi_fire_hydrant_type">Ṣṣenf</string>
 	<string name="poi_highway_crossing_type">Ṣṣenf</string>
 	<string name="poi_zoo_type">Ṣṣenf</string>
+	<string name="poi_traffic_signals_sound">Imesli</string>
+	<string name="poi_shop">Tazenzut</string>
+	<string name="poi_sport">Addal</string>
+	<string name="poi_tourism">Tamerrit</string>
+	<string name="poi_sustenance">Učči</string>
+	<string name="poi_finance">Tadrimt</string>
+	<string name="poi_wine">Tazenzut n crab</string>
+	<string name="poi_shoes">Tazenzut u sebbaḍ</string>
+	<string name="poi_candles">Tazenzut n cmaɛ</string>
+	<string name="poi_computer">Tazenzut u selkim</string>
+	<string name="poi_school">Aγerbaz</string>
+	<string name="poi_pharmacy">Tansafart</string>
+	<string name="poi_hospital">Sbiṭaṛ</string>
+	<string name="poi_clothes_schoolwear">Aγerbaz</string>
+	<string name="poi_music_school">Aγerbaz n cna</string>
+	<string name="poi_language_school">Aγerbaz n tutlayin</string>
+
 	</resources>

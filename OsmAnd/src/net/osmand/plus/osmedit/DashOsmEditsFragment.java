@@ -2,6 +2,7 @@ package net.osmand.plus.osmedit;
 
 import android.app.ProgressDialog;
 import android.content.DialogInterface;
+import android.os.AsyncTask;
 import android.os.Bundle;
 import android.support.v7.app.AlertDialog;
 import android.view.LayoutInflater;
@@ -179,7 +180,7 @@ public class DashOsmEditsFragment extends DashBaseFragment
 		dialog.show(getChildFragmentManager(), ProgressDialogFragment.TAG);
 		UploadOpenstreetmapPointAsyncTask uploadTask = new UploadOpenstreetmapPointAsyncTask(dialog,
 				listener, plugin, toUpload.length, closeChangeSet, anonymously);
-		uploadTask.execute(toUpload);
+		uploadTask.executeOnExecutor(AsyncTask.THREAD_POOL_EXECUTOR, toUpload);
 	}
 
 	private void getOsmPoints(ArrayList<OsmPoint> dataPoints) {

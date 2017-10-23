@@ -155,7 +155,7 @@ public class OsmEditsFragment extends OsmAndListFragment
 		item.setOnMenuItemClickListener(new MenuItem.OnMenuItemClickListener() {
 			@Override
 			public boolean onMenuItemClick(MenuItem item) {
-				new BackupOpenstreetmapPointAsyncTask().execute(
+				new BackupOpenstreetmapPointAsyncTask().executeOnExecutor(AsyncTask.THREAD_POOL_EXECUTOR,
 						listAdapter.dataPoints.toArray(new OsmPoint[listAdapter.dataPoints.size()]));
 				return true;
 			}
@@ -632,7 +632,7 @@ public class OsmEditsFragment extends OsmAndListFragment
 		dialog.show(getActivity().getSupportFragmentManager(), ProgressDialogFragment.TAG);
 		UploadOpenstreetmapPointAsyncTask uploadTask = new UploadOpenstreetmapPointAsyncTask(
 				dialog, listener, plugin, points.length, closeChangeSet, anonymously);
-		uploadTask.execute(points);
+		uploadTask.executeOnExecutor(AsyncTask.THREAD_POOL_EXECUTOR, points);
 	}
 
 

@@ -588,7 +588,7 @@ public class SettingsGeneralActivity extends SettingsBaseActivity implements OnR
 						updateSettingsToNewDir(path.getParentFile().getAbsolutePath());
 					}
 				});
-				task.execute();
+				task.executeOnExecutor(AsyncTask.THREAD_POOL_EXECUTOR);
 			}
 		});
 		builder.setNeutralButton(R.string.shared_string_no, new OnClickListener() {
@@ -630,7 +630,7 @@ public class SettingsGeneralActivity extends SettingsBaseActivity implements OnR
 				setProgressVisibility(false);
 			}
 
-		}.execute();
+		}.executeOnExecutor(AsyncTask.THREAD_POOL_EXECUTOR);
 	}
 
 	public void loadNativeLibrary() {
@@ -656,7 +656,7 @@ public class SettingsGeneralActivity extends SettingsBaseActivity implements OnR
 						Toast.makeText(SettingsGeneralActivity.this, R.string.native_library_not_supported, Toast.LENGTH_LONG).show();
 					}
 				}
-			}.execute();
+			}.executeOnExecutor(AsyncTask.THREAD_POOL_EXECUTOR);
 		}
 	}
 

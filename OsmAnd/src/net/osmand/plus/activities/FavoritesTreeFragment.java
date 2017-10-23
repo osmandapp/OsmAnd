@@ -135,7 +135,7 @@ public class FavoritesTreeFragment extends OsmandExpandableListFragment {
 				return null;
 			}
 
-		}.execute();
+		}.executeOnExecutor(AsyncTask.THREAD_POOL_EXECUTOR);
 
 	}
 
@@ -599,7 +599,7 @@ public class FavoritesTreeFragment extends OsmandExpandableListFragment {
 			}
 		};
 
-		exportTask.execute();
+		exportTask.executeOnExecutor(AsyncTask.THREAD_POOL_EXECUTOR);
 	}
 
 	protected void export() {
@@ -639,14 +639,14 @@ public class FavoritesTreeFragment extends OsmandExpandableListFragment {
 				bld.setPositiveButton(R.string.shared_string_yes, new DialogInterface.OnClickListener() {
 					@Override
 					public void onClick(DialogInterface dialog, int which) {
-						exportTask.execute();
+						exportTask.executeOnExecutor(AsyncTask.THREAD_POOL_EXECUTOR);
 					}
 				});
 				bld.setNegativeButton(R.string.shared_string_no, null);
 				bld.setMessage(R.string.fav_export_confirmation);
 				bld.show();
 			} else {
-				exportTask.execute();
+				exportTask.executeOnExecutor(AsyncTask.THREAD_POOL_EXECUTOR);
 			}
 		}
 	}

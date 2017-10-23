@@ -2830,4 +2830,8 @@
     <string name="round_trip">رحلة ذهاب وإياب</string>
     <string name="plan_route_no_markers_toast">يجب إضافة علامة واحدة على الأقل لاستخدام هذه الوظيفة.</string>
     <string name="wrong_format">تنسيق خاطئ</string>
-    </resources>
+    <string name="enter_new_name">قم بإدخال إسم جديد</string>
+	<string name="shared_string_back">العودة</string>
+	<string name="view">عرض</string>
+	<string name="waypoints_added_to_map_markers">تمت إضافة نقاط الطريق إلى علامات الخريطة</string>
+	</resources>

@@ -2110,7 +2110,7 @@ Délka %2$s</string>
     <string name="number_of_recipients">Počet příjemců</string>
     <string name="osm_user_stat">Počet úprav %1$s, pořadí %2$s, celkový počet úprav %3$s</string>
     <string name="osm_editors_ranking">Pořadí OSM editorů</string>
-    <string name="osm_live_subscription">Předplatné OSM Live</string>
+    <string name="osm_live_subscription">Předplatné OsmAnd Live</string>
     <string name="osm_live_subscribe_btn">Předplatit</string>
     <string name="osm_live_email_desc">Potřebujeme jej, abychm vám mohli poskytovat informace o příspěvcích</string>
     <string name="osm_live_user_public_name">Veřejné jméno</string>
@@ -2125,7 +2125,7 @@ Délka %2$s</string>
     <string name="osm_live_thanks">Děkujeme za registraci do okamžitých aktualizací!</string>
     <string name="osm_live_region_desc">Část vašeho příspěvku bude zaslána uživatelům OSM, kteří upravují mapu ve zvolené oblasti</string>
     <string name="osm_live_subscription_settings">Nastavení předplatného</string>
-    <string name="osm_live_ask_for_purchase">Prosím nejprve zakupte předplatné OSM Live</string>
+    <string name="osm_live_ask_for_purchase">Prosím nejprve zakupte předplatné OsmAnd Live</string>
 
     <string name="osm_live_header">Předplatné umožní hodinové aktualizace pro všechny mapy světa.
 Část příjmu jde zpět do OSM komunity a za každý příspěvek do OSM je vyplacena odměna.
@@ -2188,11 +2188,11 @@ Pokud máte rádi OsmAnd a OSM a chcete je podpořit, toto je výborný způsob,
     <string name="access_direction_audio_feedback_descr">Indikovat směr cílového bodu zvukem</string>
     <string name="access_direction_haptic_feedback">Hmatová indikace směru</string>
     <string name="access_direction_haptic_feedback_descr">Indikovat směr cílového bodu vibracemi</string>
-    <string name="use_osm_live_routing">OSM Live navigace</string>
+    <string name="use_osm_live_routing">OsmAnd Live navigace</string>
     <string name="map_widget_battery">Stav baterie</string>
     <!-- string name="lat_lon_pattern">Šíř: %1$.5f Dél: %2$.5f</string -->
     <string name="access_direction_audio_feedback">Zvuková zpětná vazba směru</string>
-    <string name="use_osm_live_routing_description">Povolit navigaci pro OSM Live changes (Beta)</string>
+    <string name="use_osm_live_routing_description">Povolit navigaci pro OsmAnd Live changes</string>
 	<string name="change_markers_position">Změnit umístění značky</string>
     <string name="move_marker_bottom_sheet_title">Posuňte mapu pro změnu umístění značky</string>
     <string name="lang_hu_formal">Maďarština (formální)</string>

@@ -384,7 +384,7 @@ public class DistanceCalculatorPlugin extends OsmandPlugin {
 				}
 			};
 		};
-		exportTask.execute();
+		exportTask.executeOnExecutor(AsyncTask.THREAD_POOL_EXECUTOR);
 	}
 	private void startEditingHelp(MapActivity ctx) {
 		final CommonPreference<Boolean> pref = app.getSettings().registerBooleanPreference("show_measurement_help_first_time", true);

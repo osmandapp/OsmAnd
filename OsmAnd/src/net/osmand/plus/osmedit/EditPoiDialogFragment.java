@@ -539,7 +539,7 @@ public class EditPoiDialogFragment extends BaseOsmAndDialogFragment {
 					postExecute.processResult(result);
 				}
 			}
-		}.execute();
+		}.executeOnExecutor(AsyncTask.THREAD_POOL_EXECUTOR);
 	}
 
 	public void setPoiCategory(PoiCategory type) {
@@ -667,7 +667,7 @@ public class EditPoiDialogFragment extends BaseOsmAndDialogFragment {
 							Toast.LENGTH_LONG).show();
 				}
 			}
-		}.execute();
+		}.executeOnExecutor(AsyncTask.THREAD_POOL_EXECUTOR);
 	}
 
 	public static class MyAdapter extends FragmentPagerAdapter {

@@ -231,7 +231,7 @@ public class RoutePointsActivity extends OsmandListActivity {
 				//getSherlock().setProgressBarIndeterminateVisibility(false);
 
 			}
-		}.execute(plugin.getCurrentRoute());
+		}.executeOnExecutor(AsyncTask.THREAD_POOL_EXECUTOR, plugin.getCurrentRoute());
 	}
 
 
