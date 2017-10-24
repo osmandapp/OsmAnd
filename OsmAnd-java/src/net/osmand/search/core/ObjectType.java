@@ -10,7 +10,7 @@ public enum ObjectType {
 	// UI OBJECTS
 	FAVORITE(true), FAVORITE_GROUP(false), WPT(true), RECENT_OBJ(true),
 	// ONLINE
-	ONLINE_POI(true), ONLINE_ADDRESS(true),
+	ONLINE_SEARCH(true), ONLINE_ADDRESS(true),
 	
 	REGION(true),
 
