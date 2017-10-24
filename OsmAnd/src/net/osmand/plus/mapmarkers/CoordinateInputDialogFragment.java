@@ -6,12 +6,15 @@ import android.support.annotation.NonNull;
 import android.support.annotation.Nullable;
 import android.support.v4.app.DialogFragment;
 import android.support.v4.app.Fragment;
+import android.support.v4.widget.TextViewCompat;
 import android.support.v7.widget.Toolbar;
 import android.text.Editable;
 import android.text.InputFilter;
 import android.text.InputType;
 import android.text.TextWatcher;
+import android.util.TypedValue;
 import android.view.LayoutInflater;
+import android.view.MotionEvent;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.AdapterView;
@@ -49,12 +52,10 @@ public class CoordinateInputDialogFragment extends DialogFragment {
 	private static final int SECONDS_MAX_LENGTH = 12;
 
 	private boolean lightTheme;
-	private EditText focusedEditText;
 	private boolean useOsmandKeyboard = true;
 	private int coordinateFormat = -1;
 	private List<OsmandTextFieldBoxes> textFieldBoxes;
-	private ExtendedEditText nameEditText;
-	private List<ExtendedEditText> extendedLatLonEditTexts;
+	private List<ExtendedEditText> extendedEditTexts;
 	private View mainView;
 	private IconsCache iconsCache;
 
@@ -96,8 +97,10 @@ public class CoordinateInputDialogFragment extends DialogFragment {
 		optionsButton.setOnClickListener(new View.OnClickListener() {
 			@Override
 			public void onClick(View view) {
-				if (!useOsmandKeyboard) {
-					AndroidUtils.hideSoftKeyboard(getMapActivity(), focusedEditText);
+				View focusedView = getDialog().getCurrentFocus();
+				if (focusedView != null && focusedView instanceof ExtendedEditText) {
+					focusedView.clearFocus();
+					AndroidUtils.hideSoftKeyboard(getMapActivity(), focusedView);
 				}
 				CoordinateInputBottomSheetDialogFragment fragment = new CoordinateInputBottomSheetDialogFragment();
 				Bundle args = new Bundle();
@@ -115,53 +118,120 @@ public class CoordinateInputDialogFragment extends DialogFragment {
 		final OsmandTextFieldBoxes longitudeBox = (OsmandTextFieldBoxes) mainView.findViewById(R.id.longitude_box);
 		textFieldBoxes.add(longitudeBox);
 		final OsmandTextFieldBoxes nameBox = (OsmandTextFieldBoxes) mainView.findViewById(R.id.name_box);
+		nameBox.setEndIcon(iconsCache.getThemedIcon(R.drawable.ic_action_keyboard));
+		nameBox.getEndIconImageButton().setOnClickListener(new View.OnClickListener() {
+			@Override
+			public void onClick(View view) {
+				View focusedView = getDialog().getCurrentFocus();
+				if (focusedView != null) {
+					if (isOsmandKeyboardCurrentlyVisible()) {
+						changeOsmandKeyboardVisibility(false);
+					}
+					AndroidUtils.showSoftKeyboard(focusedView);
+				}
+			}
+		});
 		textFieldBoxes.add(nameBox);
 
-		extendedLatLonEditTexts = new ArrayList<>();
-		final ExtendedEditText latitudeEditText = (ExtendedEditText) mainView.findViewById(R.id.latitude_edit_text);
-		extendedLatLonEditTexts.add(latitudeEditText);
-		final ExtendedEditText longitudeEditText = (ExtendedEditText) mainView.findViewById(R.id.longitude_edit_text);
-		extendedLatLonEditTexts.add(longitudeEditText);
-		nameEditText = (ExtendedEditText) mainView.findViewById(R.id.name_edit_text);
+		registerTextFieldBoxes();
 
-		final View.OnFocusChangeListener focusChangeListener = new View.OnFocusChangeListener() {
+		extendedEditTexts = new ArrayList<>();
+		final ExtendedEditText latitudeEditText = (ExtendedEditText) mainView.findViewById(R.id.latitude_edit_text);
+		extendedEditTexts.add(latitudeEditText);
+		final ExtendedEditText longitudeEditText = (ExtendedEditText) mainView.findViewById(R.id.longitude_edit_text);
+		extendedEditTexts.add(longitudeEditText);
+		final ExtendedEditText nameEditText = (ExtendedEditText) mainView.findViewById(R.id.name_edit_text);
+		extendedEditTexts.add(nameEditText);
+
+		registerEditTexts();
+
+		changeKeyboardInBoxes();
+
+		View keyboardLayout = mainView.findViewById(R.id.keyboard_layout);
+		AndroidUtils.setBackground(mapActivity, keyboardLayout, !lightTheme, R.drawable.bg_bottom_menu_light, R.drawable.bg_bottom_menu_dark);
+
+		String[] keyboardItems = new String[] { "1", "2", "3",
+				"4", "5", "6",
+				"7", "8", "9",
+				getString(R.string.shared_string_delete), "0", getString(R.string.shared_string_clear) };
+		final GridView keyboardGrid = (GridView) mainView.findViewById(R.id.keyboard_grid_view);
+		final KeyboardAdapter keyboardAdapter = new KeyboardAdapter(mapActivity, keyboardItems);
+		keyboardGrid.setAdapter(keyboardAdapter);
+		keyboardGrid.setOnItemClickListener(new AdapterView.OnItemClickListener() {
 			@Override
-			public void onFocusChange(View view, boolean b) {
-				ExtendedEditText editText = null;
-				OsmandTextFieldBoxes fieldBox = null;
-				switch (view.getId()) {
-					case R.id.latitude_edit_text:
-						editText = latitudeEditText;
-						fieldBox = latitudeBox;
-						break;
-					case R.id.longitude_edit_text:
-						editText = longitudeEditText;
-						fieldBox = longitudeBox;
-						break;
-					case R.id.name_edit_text:
-						editText = nameEditText;
-						fieldBox = nameBox;
-						break;
-				}
-				if (fieldBox != null) {
-					if (b) {
-						fieldBox.setHasFocus(true);
-						focusedEditText = editText;
-					} else {
-						fieldBox.setHasFocus(false);
-						focusedEditText = null;
+			public void onItemClick(AdapterView<?> adapterView, View view, int i, long l) {
+				View focusedView = getDialog().getCurrentFocus();
+				if (focusedView != null && focusedView instanceof ExtendedEditText) {
+					ExtendedEditText extendedEditText = (ExtendedEditText) focusedView;
+					switch (i) {
+						case DELETE_BUTTON_POSITION:
+							String str = extendedEditText.getText().toString();
+							if (str.length() > 0) {
+								str = str.substring(0, str.length() - 1);
+								extendedEditText.setText(str);
+								extendedEditText.setSelection(str.length());
+							}
+							break;
+						case CLEAR_BUTTON_POSITION:
+							extendedEditText.setText("");
+							break;
+						default:
+							extendedEditText.append(keyboardAdapter.getItem(i));
 					}
 				}
 			}
+		});
+
+		final ImageView showHideKeyboardIcon = (ImageView) mainView.findViewById(R.id.show_hide_keyboard_icon);
+		showHideKeyboardIcon.setImageDrawable(iconsCache.getThemedIcon(R.drawable.ic_action_arrow_down));
+		showHideKeyboardIcon.setOnClickListener(new View.OnClickListener() {
+			@Override
+			public void onClick(View view) {
+				boolean isCurrentlyVisible = isOsmandKeyboardCurrentlyVisible();
+				View focusedView = getDialog().getCurrentFocus();
+				if (focusedView != null && !isCurrentlyVisible) {
+					AndroidUtils.hideSoftKeyboard(getActivity(), focusedView);
+				}
+				changeOsmandKeyboardVisibility(!isCurrentlyVisible);
+			}
+		});
+
+		return mainView;
+	}
+
+	@Override
+	public void onDestroyView() {
+		if (getDialog() != null && getRetainInstance()) {
+			getDialog().setDismissMessage(null);
+		}
+		super.onDestroyView();
+	}
+
+	private void registerTextFieldBoxes() {
+		View.OnTouchListener textFieldBoxOnTouchListener = new View.OnTouchListener() {
+			@Override
+			public boolean onTouch(View view, MotionEvent motionEvent) {
+				if (!useOsmandKeyboard && isOsmandKeyboardCurrentlyVisible()) {
+					changeOsmandKeyboardVisibility(false);
+				}
+				return false;
+			}
 		};
 
+		for (OsmandTextFieldBoxes textFieldBox : textFieldBoxes) {
+			textFieldBox.getPanel().setOnTouchListener(textFieldBoxOnTouchListener);
+		}
+	}
+
+	private void registerEditTexts() {
 		TextWatcher textWatcher = new TextWatcher() {
 			int len = 0;
 
 			@Override
 			public void beforeTextChanged(CharSequence charSequence, int i, int i1, int i2) {
-				if (focusedEditText != null) {
-					String str = focusedEditText.getText().toString();
+				View focusedView = getDialog().getCurrentFocus();
+				if (focusedView != null && focusedView instanceof ExtendedEditText) {
+					String str = ((ExtendedEditText) focusedView).getText().toString();
 					len = str.length();
 				}
 			}
@@ -173,7 +243,9 @@ public class CoordinateInputDialogFragment extends DialogFragment {
 
 			@Override
 			public void afterTextChanged(Editable editable) {
-				if (focusedEditText != null && focusedEditText != nameEditText) {
+				View focusedView = getDialog().getCurrentFocus();
+				if (focusedView != null) {
+					ExtendedEditText focusedEditText = (ExtendedEditText) focusedView;
 					String str = focusedEditText.getText().toString();
 					int strLength = str.length();
 					if (strLength == 2 && len < strLength) {
@@ -200,81 +272,79 @@ public class CoordinateInputDialogFragment extends DialogFragment {
 					} else if ((strLength == DEGREES_MAX_LENGTH && coordinateFormat == PointDescription.FORMAT_DEGREES)
 							|| (strLength == MINUTES_MAX_LENGTH && coordinateFormat == PointDescription.FORMAT_MINUTES)
 							|| (strLength == SECONDS_MAX_LENGTH && coordinateFormat == PointDescription.FORMAT_SECONDS)) {
-						if (focusedEditText == latitudeEditText) {
-							longitudeBox.select();
+						if (focusedEditText.getId() == R.id.latitude_edit_text) {
+							((OsmandTextFieldBoxes) mainView.findViewById(R.id.longitude_box)).select();
 						} else {
-							nameBox.select();
+							((OsmandTextFieldBoxes) mainView.findViewById(R.id.name_box)).select();
 						}
 					}
 				}
 			}
 		};
 
-		latitudeEditText.setOnFocusChangeListener(focusChangeListener);
-		longitudeEditText.setOnFocusChangeListener(focusChangeListener);
-		nameEditText.setOnFocusChangeListener(focusChangeListener);
-
-		latitudeEditText.addTextChangedListener(textWatcher);
-		longitudeEditText.addTextChangedListener(textWatcher);
-		nameEditText.addTextChangedListener(textWatcher);
-
-		changeKeyboardInBoxes();
-		changeKeyboardInEditTexts();
-
-		View keyboardLayout = mainView.findViewById(R.id.keyboard_layout);
-		AndroidUtils.setBackground(mapActivity, keyboardLayout, !lightTheme, R.drawable.bg_bottom_menu_light, R.drawable.bg_bottom_menu_dark);
-
-		String[] keyboardItems = new String[] { "1", "2", "3",
-				"4", "5", "6",
-				"7", "8", "9",
-				getString(R.string.shared_string_delete), "0", getString(R.string.shared_string_clear) };
-		final GridView keyboardGrid = (GridView) mainView.findViewById(R.id.keyboard_grid_view);
-		final KeyboardAdapter keyboardAdapter = new KeyboardAdapter(mapActivity, keyboardItems);
-		keyboardGrid.setAdapter(keyboardAdapter);
-		keyboardGrid.setOnItemClickListener(new AdapterView.OnItemClickListener() {
+		View.OnTouchListener editTextOnTouchListener = new View.OnTouchListener() {
 			@Override
-			public void onItemClick(AdapterView<?> adapterView, View view, int i, long l) {
-				if (focusedEditText != null) {
-					switch (i) {
-						case DELETE_BUTTON_POSITION:
-							String str = focusedEditText.getText().toString();
-							if (str.length() > 0) {
-								str = str.substring(0, str.length() - 1);
-								focusedEditText.setText(str);
-							}
-							break;
-						case CLEAR_BUTTON_POSITION:
-							focusedEditText.setText("");
-							break;
-						default:
-							focusedEditText.append(keyboardAdapter.getItem(i));
+			public boolean onTouch(View view, MotionEvent motionEvent) {
+				if (useOsmandKeyboard) {
+					EditText editText = (EditText) view;
+					int inType = editText.getInputType();       // Backup the input type
+					editText.setInputType(InputType.TYPE_NULL); // Disable standard keyboard
+					editText.onTouchEvent(motionEvent);               // Call native handler
+					editText.setInputType(inType);              // Restore input type
+					return true; // Consume touch event
+				} else {
+					if (isOsmandKeyboardCurrentlyVisible()) {
+						changeOsmandKeyboardVisibility(false);
+					}
+					return false;
+				}
+			}
+		};
+
+		View.OnLongClickListener editTextOnLongClickListener = new View.OnLongClickListener() {
+			@Override
+			public boolean onLongClick(View view) {
+				return useOsmandKeyboard;
+			}
+		};
+
+		View.OnFocusChangeListener focusChangeListener = new View.OnFocusChangeListener() {
+			@Override
+			public void onFocusChange(View view, boolean b) {
+				int resId;
+				switch (view.getId()) {
+					case R.id.latitude_edit_text:
+						resId = R.id.latitude_box;
+						break;
+					case R.id.longitude_edit_text:
+						resId = R.id.longitude_box;
+						break;
+					case R.id.name_edit_text:
+						resId = R.id.name_box;
+						break;
+					default:
+						resId = 0;
+				}
+				if (resId != 0) {
+					OsmandTextFieldBoxes textFieldBox = mainView.findViewById(resId);
+					if (b) {
+						AndroidUtils.hideSoftKeyboard(getActivity(), view);
+						textFieldBox.setHasFocus(true);
+					} else {
+						textFieldBox.setHasFocus(false);
 					}
 				}
 			}
-		});
+		};
 
-		final ImageView showHideKeyboardIcon = (ImageView) mainView.findViewById(R.id.show_hide_keyboard_icon);
-		showHideKeyboardIcon.setImageDrawable(iconsCache.getThemedIcon(R.drawable.ic_action_arrow_down));
-		showHideKeyboardIcon.setOnClickListener(new View.OnClickListener() {
-			@Override
-			public void onClick(View view) {
-				if (useOsmandKeyboard) {
-					boolean isCurrentlyVisible = isOsmandKeyboardCurrentlyVisible();
-					changeOsmandKeyboardVisibility(!isCurrentlyVisible);
-				}
+		for (ExtendedEditText editText : extendedEditTexts) {
+			if (editText.getId() != R.id.name_edit_text) {
+				editText.addTextChangedListener(textWatcher);
 			}
-		});
-
-		return mainView;
-	}
-
-	@Override
-	public void onDestroyView() {
-		focusedEditText = null;
-		if (getDialog() != null && getRetainInstance()) {
-			getDialog().setDismissMessage(null);
+			editText.setOnTouchListener(editTextOnTouchListener);
+			editText.setOnLongClickListener(editTextOnLongClickListener);
+			editText.setOnFocusChangeListener(focusChangeListener);
 		}
-		super.onDestroyView();
 	}
 
 	private CoordinateInputBottomSheetDialogFragment.CoordinateInputFormatChangeListener createCoordinateInputFormatChangeListener() {
@@ -292,7 +362,6 @@ public class CoordinateInputDialogFragment extends DialogFragment {
 					changeOsmandKeyboardVisibility(false);
 				}
 				changeKeyboardInBoxes();
-				changeKeyboardInEditTexts();
 			}
 
 			@Override
@@ -324,8 +393,10 @@ public class CoordinateInputDialogFragment extends DialogFragment {
 			maxLength = SECONDS_MAX_LENGTH;
 		}
 		InputFilter[] filtersArray = new InputFilter[] {new InputFilter.LengthFilter(maxLength)};
-		for (ExtendedEditText extendedEditText : extendedLatLonEditTexts) {
-			extendedEditText.setFilters(filtersArray);
+		for (ExtendedEditText extendedEditText : extendedEditTexts) {
+			if (extendedEditText.getId() != R.id.name_edit_text) {
+				extendedEditText.setFilters(filtersArray);
+			}
 		}
 	}
 
@@ -333,13 +404,6 @@ public class CoordinateInputDialogFragment extends DialogFragment {
 		for (OsmandTextFieldBoxes textFieldBox : textFieldBoxes) {
 			textFieldBox.setUseOsmandKeyboard(useOsmandKeyboard);
 		}
-	}
-
-	public void changeKeyboardInEditTexts() {
-		for (ExtendedEditText extendedEditText : extendedLatLonEditTexts) {
-			extendedEditText.setInputType(useOsmandKeyboard ? InputType.TYPE_NULL : InputType.TYPE_CLASS_NUMBER);
-		}
-		nameEditText.setInputType(useOsmandKeyboard ? InputType.TYPE_NULL : InputType.TYPE_CLASS_TEXT);
 	}
 
 	private MapActivity getMapActivity() {
@@ -377,7 +441,14 @@ public class CoordinateInputDialogFragment extends DialogFragment {
 				convertView = LayoutInflater.from(getContext()).inflate(R.layout.input_coordinate_keyboard_item, parent, false);
 				convertView.setBackgroundResource(lightTheme ? R.drawable.keyboard_item_light_bg : R.drawable.keyboard_item_dark_bg);
 			}
-			((TextView) convertView.findViewById(R.id.keyboard_item)).setText(getItem(position));
+			TextView keyboardItem = (TextView) convertView.findViewById(R.id.keyboard_item);
+			if (position == DELETE_BUTTON_POSITION || position == CLEAR_BUTTON_POSITION) {
+				TextViewCompat.setAutoSizeTextTypeWithDefaults(keyboardItem, TextViewCompat.AUTO_SIZE_TEXT_TYPE_NONE);
+				keyboardItem.setTextSize(TypedValue.COMPLEX_UNIT_PX, getResources().getDimension(R.dimen.default_list_text_size));
+			} else {
+				TextViewCompat.setAutoSizeTextTypeWithDefaults(keyboardItem, TextViewCompat.AUTO_SIZE_TEXT_TYPE_UNIFORM);
+			}
+			keyboardItem.setText(getItem(position));
 
 			return convertView;
 		}

@@ -76,6 +76,7 @@
                     osmand:labelText="@string/navigate_point_latitude">
 
                     <studio.carbonylgroup.textfieldboxes.ExtendedEditText
+                        android:inputType="number"
                         android:hint="50:00.0000"
                         android:id="@+id/latitude_edit_text"
                         android:layout_width="match_parent"
@@ -95,6 +96,7 @@
                     osmand:labelText="@string/navigate_point_longitude">
 
                     <studio.carbonylgroup.textfieldboxes.ExtendedEditText
+                        android:inputType="number"
                         android:hint="50:00.0000"
                         android:id="@+id/longitude_edit_text"
                         android:layout_width="match_parent"
@@ -118,6 +120,7 @@
                     osmand:labelText="@string/shared_string_name">
 
                     <studio.carbonylgroup.textfieldboxes.ExtendedEditText
+                        android:inputType="text"
                         android:hint="@string/access_hint_enter_name"
                         android:id="@+id/name_edit_text"
                         android:layout_width="match_parent"
@@ -200,7 +203,7 @@
                 android:layout_height="match_parent"
                 android:gravity="center"
                 android:textColor="?attr/keyboard_item_text_color"
-                osmand:autoSizeTextType="uniform"
+                android:textSize="@dimen/default_list_text_size"
                 android:text="@string/shared_string_add"/>
 
         </LinearLayout>
