@@ -3005,9 +3005,15 @@ OsmAndとOSMをサポートする方法として現状最適な方法である�
     <string name="sort_by">並び順:</string>
     <string name="keep_showing_on_map">マップ上に表示し続ける</string>
     <string name="exit_without_saving">保存せずに終了しますか？</string>
-    <string name="line">直線</string>
+    <string name="line">線</string>
     <string name="save_as_route_point">ルートポイントとして保存</string>
-    <string name="save_as_line">直線として保存</string>
+    <string name="save_as_line">線として保存</string>
     <string name="route_point">ルートポイント</string>
     <string name="edit_line">線の編集</string>
+    <string name="add_point_before">その前にポイントを追加する</string>
+    <string name="add_point_after">その後にポイントを追加する</string>
+    <string name="shared_string_options">オプション</string>
+    <string name="measurement_tool_snap_to_road_descr">OsmAndは、選択したプロファイルのルートにポイントを接続します。</string>
+    <string name="measurement_tool_save_as_new_track_descr">そのルートポイントを点または線として保存できます。</string>
+    <string name="add_line">線の追加</string>
     </resources>

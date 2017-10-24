@@ -2772,7 +2772,7 @@
     <string name="add_route_points">افزودن نقاط مسیر</string>
     <string name="save_route_point">ذخیره‌کردن نقطهٔ مسیر</string>
     <string name="route_point_one">نقطهٔ مسیر 1</string>
-    <string name="shared_string_navigate">راهبری</string>
+    <string name="shared_string_navigate">مسیریابی کن</string>
     <string name="animate_my_location_desc">در هنگام راهبری نقشه بتواند برای نشان‌دادن موقعیت من جابه‌جا شود</string>
     <string name="rendering_value_fine_name">خوب</string>
     <string name="plugin_nautical_descr">این افزونه قابلیت ارائهٔ نقشه‌های دریایی را به OsmAnd اضافه می‌کند. این نقشه‌ها برای قایقرانی، بادبانی‌رانی و دیگر انواع ورزش‌های آبی مفید است. 

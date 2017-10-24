@@ -2925,4 +2925,10 @@ Zodpovedá oblasti: %1$s x %2$s</string>
 \n</string>
     <string name="rendering_value_darkyellow_name">Tmavožltá</string>
     <string name="shared_string_road">Cesta</string>
+    <string name="wrong_input">Nesprávny vstup</string>
+	<string name="enter_new_name">Zadajte nový názov</string>
+	<string name="shared_string_back">Späť</string>
+	<string name="view">Zobraziť</string>
+	<string name="waypoints_added_to_map_markers">Body trasy pridané k mapovým značkám</string>
+	<string name="wrong_format">Nesprávny formát</string>
     </resources>

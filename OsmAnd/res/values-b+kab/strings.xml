@@ -54,12 +54,12 @@
     <string name="share_note">Bḍu tazmilt</string>
     <string name="notes">Tizmilin</string>
     <string name="gps_status">Addad n GPS</string>
-    <string name="home_button">Axxam</string>
+    <string name="home_button">Tinefrent tagejdant</string>
     <string name="rendering_category_hide">Ffer</string>
     <string name="rendering_category_routes">Iberdan</string>
     <string name="shared_string_all">Meṛṛa</string>
     <string name="lang_sw">Taswaḥilit</string>
-    <string name="lang_he">Taêbrit</string>
+    <string name="lang_he">Taɛbrit</string>
     <string name="rendering_attr_hideText_name">Aḍris</string>
     <string name="int_days">ussan</string>
     <string name="osmo_connect_menu">Qqen</string>
@@ -73,7 +73,7 @@
     <string name="lang_en_gb">Tagnizit (Tagldit i ddukklen)</string>
     <string name="lang_af">Afrikanz</string>
     <string name="lang_al">Talbanit</string>
-    <string name="lang_ar">Taêrabt</string>
+    <string name="lang_ar">Taɛrabt</string>
     <string name="lang_hy">Tarmanit</string>
     <string name="lang_be">Tabilarusit</string>
     <string name="lang_be_by">Tabilarusit (Talatinit)</string>
@@ -86,7 +86,7 @@
     <string name="lang_ka">Taǧiorǧit</string>
     <string name="lang_de">Talmanit</string>
     <string name="lang_el">Tagrigit</string>
-    <string name="lang_iw">Taêbrit</string>
+    <string name="lang_iw">Taɛbrit</string>
     <string name="lang_hi">Tahendit</string>
     <string name="lang_hu">Tahungrit</string>
     <string name="lang_id">Tandunizit</string>
@@ -334,7 +334,7 @@
     <string name="shared_string_end_time">Asrag n tagara</string>
     <string name="shared_string_color">Ini</string>
     <string name="shared_string_move">Senkez</string>
-    <string name="shared_string_tracks">Yeṭṭafaṛ</string>
+    <string name="shared_string_tracks">Iberdan</string>
     <string name="shared_string_time">Akud</string>
     <string name="rendering_value_high_name">Awriran</string>
     <string name="rendering_value_medium_w_name">D alemmas</string>
@@ -357,8 +357,8 @@
     <string name="app_mode_bus">Taɣsert n yisakacen</string>
     <string name="access_shared_string_not_installed">Ur yebdid ara</string>
     <string name="access_widget_expand">Snefli</string>
-    <string name="report">Aneqqis</string>
-    <string name="osmo_connect_to_group_id"></string>
+    <string name="report">Aṛabul</string>
+    <string name="osmo_connect_to_group_id"/>
     <string name="osmo_connect">Asemlil</string>
     <string name="donations">Tiwsiwin</string>
     <string name="osm_live_subscribe_btn">Jerred</string>
@@ -374,7 +374,7 @@
     <string name="shared_string_not_selected">Ur yettwafren ara</string>
     <string name="shared_string_sound">Imesli</string>
     <string name="route_distance">Ameccaq n tamsalt :</string>
-    <string name="shared_string_near">Uqrib</string>
+    <string name="shared_string_near">Rrif n</string>
     <string name="copied_to_clipboard">Aḍris yettwanγel γef afus</string>
     <string name="osn_comment_dialog_title">Rnu awennit</string>
     <string name="osb_comment_dialog_message">Izen</string>
@@ -407,7 +407,7 @@
     <string name="lang_ml">Tamalayalamt</string>
     <string name="lang_eo">Taspirantit</string>
     <string name="lang_es_us">Taspenyulit (Marikan)</string>
-    <string name="lang_es_ar">Taspanit (Arjuntin)</string>
+    <string name="lang_es_ar">Taspenyulit (Arjuntin)</string>
     <string name="lang_et">Tastunit</string>
     <string name="lang_ast">Tasturyant</string>
     <string name="shared_string_show_details">Sken talqayt</string>
@@ -429,7 +429,7 @@
     <string name="shared_string_previous">Ar deffir</string>
     <string name="shared_string_next">Ar zdat</string>
     <string name="shared_string_enable">Rmed</string>
-    <string name="shared_string_disable"></string>
+    <string name="shared_string_disable"/>
     <string name="shared_string_enabled">Urmid</string>
     <string name="shared_string_disabled">Yensa</string>
     <string name="shared_string_selected">Yettwafren</string>
@@ -461,7 +461,7 @@
     <string name="shared_string_video">Ividyuten</string>
     <string name="shared_string_accessibility">Ittuseblel i tuffart</string>
     <string name="watch">Ɛass</string>
-    <string name="version_settings"></string>
+    <string name="version_settings"/>
     <string name="proxy_pref_title">Apṛuksi</string>
     <string name="settings_privacy">Tabaḍnit</string>
     <string name="points">Tineqqiḍin</string>
@@ -469,7 +469,7 @@
     <string name="rendering_value_default_name">Amezwer</string>
     <string name="dash_download_manage">Sefrek</string>
     <string name="navigate_point_zone">Tamnaḍt</string>
-    <string name="download_tab_local">Local</string>
+    <string name="download_tab_local">Adigan</string>
     <string name="coordinates">Asemmezdi asurif n unadi</string>
     <string name="map_widget_top">Afeggag n waddad</string>
     <string name="anonymous_user">Aseqdac udrig</string>
@@ -491,7 +491,7 @@
     <string name="local_index_gpx_info_show">"
 \n
 \nIɣewwaṛen n usiti ɣezzifen"</string>
-    <string name="gpx_selection_segment_title"></string>
+    <string name="gpx_selection_segment_title"/>
     <string name="osmo_follow">Ḍfer</string>
     <string name="osmo_sign_in">Qqen</string>
     <string name="osmo_user_name">Amseqdac</string>
@@ -633,4 +633,11 @@
     <string name="quick_action_add_navigation">Assilel</string>
     <string name="quick_action_bug_message">Izen</string>
     <string name="retry">Ɛref̣ tikelt-nniḍen</string>
+    <string name="add_point_before">Rnu tanqiḍt γer sdeffir</string>
+    <string name="add_point_after">Rnu tanqiḍt γer sdat</string>
+    <string name="search_map_hint">Nadi γef tiγremt naγ tama</string>
+    <string name="lang_lb">Taluksumburgit</string>
+    <string name="shared_string_show_description">Sekned aglam-is</string>
+    <string name="lang_vi">Tabyatnamit</string>
+    <string name="context_menu_item_search">Nadi di liqrib</string>
     </resources>
