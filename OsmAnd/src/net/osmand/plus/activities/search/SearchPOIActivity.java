@@ -685,7 +685,7 @@ public class SearchPOIActivity extends OsmandListActivity implements OsmAndCompa
 			if (searchLocation != null) {
 				if (requestType == NEW_SEARCH_INIT) {
 					return filter.initializeNewSearch(searchLocation.getLatitude(), searchLocation.getLongitude(),
-							-1, this);
+							-1, this, -1);
 				} else if (requestType == SEARCH_FURTHER) {
 					return filter.searchFurther(searchLocation.getLatitude(), searchLocation.getLongitude(), this);
 				} else if (requestType == SEARCH_AGAIN) {

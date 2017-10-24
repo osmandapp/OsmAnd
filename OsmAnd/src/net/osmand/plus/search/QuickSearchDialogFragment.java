@@ -1079,6 +1079,16 @@ public class QuickSearchDialogFragment extends DialogFragment implements OsmAndC
 				for (SearchResult sr : res.getCurrentSearchResults()) {
 					rows.add(new QuickSearchListItem(app, sr));
 				}
+				rows.add(new QuickSearchButtonListItem(app, R.drawable.ic_world_globe_dark,
+						app.getString(R.string.search_online_address), new OnClickListener() {
+					@Override
+					public void onClick(View view) {
+						startOnlinePoiSearch();
+						mainSearchFragment.getAdapter().clear();
+						updateTabbarVisibility(false);
+						openKeyboard();
+					}
+				}));
 				rows.add(new QuickSearchButtonListItem(app, R.drawable.ic_action_search_dark,
 						app.getString(R.string.custom_search), new OnClickListener() {
 					@Override
@@ -1318,6 +1328,17 @@ public class QuickSearchDialogFragment extends DialogFragment implements OsmAndC
 			searchUICore.updateSettings(searchUICore.getSearchSettings().setOriginalLocation(storedOriginalLocation));
 			storedOriginalLocation = null;
 		}
+	}
+
+	private void startOnlinePoiSearch() {
+		SearchSettings settings = searchUICore.getSearchSettings()
+				.setSearchTypes(ObjectType.ONLINE_SEARCH)
+				.setEmptyQueryAllowed(false)
+				.setAddressSearch(false)
+				.setSortByName(true)
+				.setRadiusLevel(1);
+
+		searchUICore.updateSettings(settings);
 	}
 
 	private void startAddressSearch() {
