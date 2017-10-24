@@ -574,7 +574,7 @@ public class MapContextMenuFragment extends Fragment implements DownloadEvents {
 	}
 
 	private void restoreCustomMapRatio() {
-		if (map.hasCustomMapRatio()) {
+		if (map != null && map.hasCustomMapRatio()) {
 			map.restoreMapRatio();
 		}
 	}
@@ -881,16 +881,18 @@ public class MapContextMenuFragment extends Fragment implements DownloadEvents {
 	public void onPause() {
 		restoreCustomMapRatio();
 
-		ViewParent parent = view.getParent();
-		if (parent != null && containerLayoutListener != null) {
-			((View) parent).removeOnLayoutChangeListener(containerLayoutListener);
+		if (view != null) {
+			ViewParent parent = view.getParent();
+			if (parent != null && containerLayoutListener != null) {
+				((View) parent).removeOnLayoutChangeListener(containerLayoutListener);
+			}
+			getMapActivity().getMapViewTrackingUtilities().setContextMenu(null);
+			getMapActivity().getMapViewTrackingUtilities().setMapLinkedToLocation(false);
+			if (!wasDrawerDisabled) {
+				getMapActivity().enableDrawer();
+			}
+			menu.updateControlsVisibility(false);
 		}
-		getMapActivity().getMapViewTrackingUtilities().setContextMenu(null);
-		getMapActivity().getMapViewTrackingUtilities().setMapLinkedToLocation(false);
-		if (!wasDrawerDisabled) {
-			getMapActivity().enableDrawer();
-		}
-		menu.updateControlsVisibility(false);
 		super.onPause();
 	}
 

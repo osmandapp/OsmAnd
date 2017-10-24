@@ -268,7 +268,9 @@ public class EditPoiDialogFragment extends BaseOsmAndDialogFragment {
 			public void afterTextChanged(Editable s) {
 				if (!getEditPoiData().isInEdit()) {
 					getEditPoiData().updateTypeTag(s.toString());
-					poiTypeTextInputLayout.setHint(editPoiData.getPoiCategory().getTranslation());
+					if (!getMyApplication().isApplicationInitializing()) {
+						poiTypeTextInputLayout.setHint(editPoiData.getPoiCategory().getTranslation());
+					}
 				}
 			}
 		});
