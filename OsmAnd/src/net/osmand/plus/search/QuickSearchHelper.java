@@ -17,6 +17,7 @@ import net.osmand.plus.poi.PoiUIFilter;
 import net.osmand.plus.resources.ResourceManager.ResourceListener;
 import net.osmand.search.SearchUICore;
 import net.osmand.search.SearchUICore.SearchResultCollection;
+import net.osmand.search.SearchUICore.SearchResultMatcher;
 import net.osmand.search.core.CustomSearchPoiFilter;
 import net.osmand.search.core.ObjectType;
 import net.osmand.search.core.SearchCoreFactory.SearchBaseAPI;
@@ -25,7 +26,6 @@ import net.osmand.search.core.SearchResult;
 import net.osmand.util.Algorithms;
 
 import java.io.IOException;
-import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.List;
 
@@ -120,7 +120,7 @@ public class QuickSearchHelper implements ResourceListener {
 		}
 
 		@Override
-		public boolean search(SearchPhrase phrase, SearchUICore.SearchResultMatcher resultMatcher) throws IOException {
+		public boolean search(SearchPhrase phrase, SearchResultMatcher resultMatcher) throws IOException {
 			if (phrase.isEmpty()) {
 				return false;
 			}
@@ -175,7 +175,7 @@ public class QuickSearchHelper implements ResourceListener {
 		}
 
 		@Override
-		public boolean search(SearchPhrase phrase, SearchUICore.SearchResultMatcher resultMatcher) throws IOException {
+		public boolean search(SearchPhrase phrase, SearchResultMatcher resultMatcher) throws IOException {
 			String baseGroupName = app.getString(R.string.shared_string_favorites);
 			List<FavoriteGroup> groups = app.getFavorites().getFavoriteGroups();
 			for (FavoriteGroup group : groups) {
@@ -231,7 +231,7 @@ public class QuickSearchHelper implements ResourceListener {
 		}
 
 		@Override
-		public boolean search(SearchPhrase phrase, SearchUICore.SearchResultMatcher resultMatcher) throws IOException {
+		public boolean search(SearchPhrase phrase, SearchResultMatcher resultMatcher) throws IOException {
 			List<FavouritePoint> favList = app.getFavorites().getFavouritePoints();
 			for (FavouritePoint point : favList) {
 				if (!point.isVisible()) {
@@ -274,43 +274,44 @@ public class QuickSearchHelper implements ResourceListener {
 
 	public static class SearchOnlineApi extends SearchBaseAPI {
 
-		private NominatimPoiFilter nominatimPoiFilter;
-		private NominatimPoiFilter nominatimAddressFilter;
-		private OsmandApplication app;
+		private NominatimPoiFilter poiFilter;
+		private NominatimPoiFilter addressFilter;
+		private int p;
 
 		public SearchOnlineApi(OsmandApplication app) {
-			super(ObjectType.ONLINE_POI);
-			this.nominatimPoiFilter = app.getPoiFilters().getNominatimPOIFilter();
-			this.nominatimAddressFilter = app.getPoiFilters().getNominatimAddressFilter();
-			this.app = app;
+			super(ObjectType.ONLINE_SEARCH);
+			this.poiFilter = app.getPoiFilters().getNominatimPOIFilter();
+			this.addressFilter = app.getPoiFilters().getNominatimAddressFilter();
 		}
 
 		@Override
-		public boolean search(SearchPhrase phrase, SearchUICore.SearchResultMatcher resultMatcher) throws IOException {
-			List<Amenity> amenities = new ArrayList<>();
-			double lat = app.getSettings().getLastKnownMapLocation().getLatitude();
-			double lon = app.getSettings().getLastKnownMapLocation().getLongitude();
+		public boolean search(SearchPhrase phrase, SearchResultMatcher matcher) throws IOException {
+			double lat = phrase.getSettings().getOriginalLocation().getLatitude();
+			double lon = phrase.getSettings().getOriginalLocation().getLongitude();
 			String text = phrase.getUnknownSearchPhrase();
-			nominatimPoiFilter.setFilterByName(text);
-			nominatimAddressFilter.setFilterByName(text);
-			amenities.addAll(nominatimPoiFilter.initializeNewSearch(lat, lon, -1, null));
-			amenities.addAll(nominatimAddressFilter.initializeNewSearch(lat, lon, -1, null));
-			int p = 0;
+			poiFilter.setFilterByName(text);
+			addressFilter.setFilterByName(text);
+			p = 0;
+			publishAmenities(phrase, matcher, poiFilter.initializeNewSearch(lat, lon, -1, null, phrase.getRadiusLevel()), true);
+			publishAmenities(phrase, matcher, addressFilter.initializeNewSearch(lat, lon, -1, null, -1), false);
+			return true;
+		}
+
+		private void publishAmenities(SearchPhrase phrase, SearchResultMatcher matcher, List<Amenity> amenities, boolean poi) {
 			for (Amenity amenity : amenities) {
 				SearchResult sr = new SearchResult(phrase);
 				sr.localeName = amenity.getName();
 				sr.object = amenity;
 				sr.priority = SEARCH_ONLINE_PRIORITY + (p++);
-				sr.objectType = ObjectType.ONLINE_POI;
+				sr.objectType = poi ? ObjectType.POI : ObjectType.POI; // todo
 				sr.location = amenity.getLocation();
 				sr.preferredZoom = 17;
 				if (phrase.getUnknownSearchWordLength() <= 1 && phrase.isNoSelectedType()) {
-					resultMatcher.publish(sr);
+					matcher.publish(sr);
 				} else if (phrase.getNameStringMatcher().matches(sr.localeName)) {
-					resultMatcher.publish(sr);
+					matcher.publish(sr);
 				}
 			}
-			return true;
 		}
 	}
 
@@ -329,7 +330,7 @@ public class QuickSearchHelper implements ResourceListener {
 		}
 
 		@Override
-		public boolean search(SearchPhrase phrase, SearchUICore.SearchResultMatcher resultMatcher) throws IOException {
+		public boolean search(SearchPhrase phrase, SearchResultMatcher resultMatcher) throws IOException {
 			SearchHistoryHelper helper = SearchHistoryHelper.getInstance(app);
 			List<SearchHistoryHelper.HistoryEntry> points = helper.getHistoryEntries();
 			int p = 0;

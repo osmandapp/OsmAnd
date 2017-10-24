@@ -1332,7 +1332,7 @@ public class QuickSearchDialogFragment extends DialogFragment implements OsmAndC
 
 	private void startOnlinePoiSearch() {
 		SearchSettings settings = searchUICore.getSearchSettings()
-				.setSearchTypes(ObjectType.ONLINE_POI)
+				.setSearchTypes(ObjectType.ONLINE_SEARCH)
 				.setEmptyQueryAllowed(false)
 				.setAddressSearch(false)
 				.setSortByName(true)

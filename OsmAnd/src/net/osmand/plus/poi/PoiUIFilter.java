@@ -202,15 +202,19 @@ public class PoiUIFilter implements SearchPoiTypeFilter, Comparable<PoiUIFilter>
 	public void clearPreviousZoom() {
 		distanceInd = 0;
 	}
-	
+
 	public void clearCurrentResults() {
 		if (currentSearchResult != null) {
 			currentSearchResult = new ArrayList<>();
 		}
 	}
 
-	public List<Amenity> initializeNewSearch(double lat, double lon, int firstTimeLimit, ResultMatcher<Amenity> matcher) {
-		clearPreviousZoom();
+	public List<Amenity> initializeNewSearch(double lat, double lon, int firstTimeLimit, ResultMatcher<Amenity> matcher, int radius) {
+		if (radius < 0) {
+			clearPreviousZoom();
+		} else if (radius < distanceToSearchValues.length) {
+			distanceInd = radius;
+		}
 		List<Amenity> amenityList = searchAmenities(lat, lon, matcher);
 		MapUtils.sortListOfMapObject(amenityList, lat, lon);
 		if (firstTimeLimit > 0) {
@@ -272,7 +276,7 @@ public class PoiUIFilter implements SearchPoiTypeFilter, Comparable<PoiUIFilter>
 
 	protected List<Amenity> searchAmenitiesInternal(double lat, double lon, double topLatitude,
 			double bottomLatitude, double leftLongitude, double rightLongitude, int zoom, final ResultMatcher<Amenity> matcher) {
-		return app.getResourceManager().searchAmenities(this, 
+		return app.getResourceManager().searchAmenities(this,
 				topLatitude, leftLongitude, bottomLatitude, rightLongitude, zoom, wrapResultMatcher(matcher));
 	}
 
@@ -314,7 +318,7 @@ public class PoiUIFilter implements SearchPoiTypeFilter, Comparable<PoiUIFilter>
 		return getNameFilterInternal(nmFilter, allTime, open, poiAdditionalsFilter);
 	}
 
-	private AmenityNameFilter getNameFilterInternal(StringBuilder nmFilter, 
+	private AmenityNameFilter getNameFilterInternal(StringBuilder nmFilter,
 			final boolean allTime, final boolean open, final List<PoiType> poiAdditionals) {
 		final CollatorStringMatcher sm =
 				nmFilter.length() > 0 ?
@@ -324,7 +328,7 @@ public class PoiUIFilter implements SearchPoiTypeFilter, Comparable<PoiUIFilter>
 			@Override
 			public boolean accept(Amenity a) {
 				if (sm != null) {
-					String lower = OsmAndFormatter.getPoiStringWithoutType(a, 
+					String lower = OsmAndFormatter.getPoiStringWithoutType(a,
 							app.getSettings().MAP_PREFERRED_LOCALE.get(), app.getSettings().MAP_TRANSLITERATE_NAMES.get());
 					if (!sm.matches(lower)) {
 						return false;
@@ -417,7 +421,7 @@ public class PoiUIFilter implements SearchPoiTypeFilter, Comparable<PoiUIFilter>
 	public Object getIconResource() {
 		return getIconId();
 	}
-	
+
 	@Override
 	public ResultMatcher<Amenity> wrapResultMatcher(final ResultMatcher<Amenity> matcher) {
 		final AmenityNameFilter nm = getNameFilter(filterByName);
@@ -699,7 +703,7 @@ public class PoiUIFilter implements SearchPoiTypeFilter, Comparable<PoiUIFilter>
 		}
 		return set.contains(subtype);
 	}
-	
+
 	@Override
 	public boolean isEmpty() {
 		return acceptedTypes.isEmpty() &&
