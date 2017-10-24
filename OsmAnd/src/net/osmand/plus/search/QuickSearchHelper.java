@@ -326,7 +326,6 @@ public class QuickSearchHelper implements ResourceListener {
 		OsmandApplication app;
 		private NominatimPoiFilter poiFilter;
 		private NominatimPoiFilter addressFilter;
-		private int p;
 
 		public SearchOnlineApi(OsmandApplication app) {
 			super(ObjectType.ONLINE_SEARCH);
@@ -342,7 +341,6 @@ public class QuickSearchHelper implements ResourceListener {
 			String text = phrase.getUnknownSearchPhrase();
 			poiFilter.setFilterByName(text);
 			addressFilter.setFilterByName(text);
-			p = 0;
 			publishAmenities(phrase, matcher, poiFilter.initializeNewSearch(lat, lon, -1, null, phrase.getRadiusLevel()), true);
 			publishAmenities(phrase, matcher, addressFilter.initializeNewSearch(lat, lon, -1, null, -1), false);
 			return true;
@@ -370,7 +368,7 @@ public class QuickSearchHelper implements ResourceListener {
 			SearchResult sr = new SearchResult(phrase);
 			sr.localeName = amenity.getName();
 			sr.object = amenity;
-			sr.priority = poi ? SEARCH_ONLINE_AMENITY_PRIORITY : SEARCH_ONLINE_ADDRESS_PRIORITY + (p++);
+			sr.priority = poi ? SEARCH_ONLINE_AMENITY_PRIORITY : SEARCH_ONLINE_ADDRESS_PRIORITY;
 			sr.objectType = poi ? ObjectType.POI : ObjectType.ONLINE_ADDRESS;
 			sr.location = amenity.getLocation();
 			sr.preferredZoom = 17;
