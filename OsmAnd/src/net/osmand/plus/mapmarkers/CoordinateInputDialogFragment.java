@@ -1,5 +1,6 @@
 package net.osmand.plus.mapmarkers;
 
+import android.content.ClipboardManager;
 import android.content.Context;
 import android.os.Bundle;
 import android.support.annotation.NonNull;
@@ -14,6 +15,8 @@ import android.text.InputType;
 import android.text.TextWatcher;
 import android.util.TypedValue;
 import android.view.LayoutInflater;
+import android.view.Menu;
+import android.view.MenuItem;
 import android.view.MotionEvent;
 import android.view.View;
 import android.view.ViewGroup;
@@ -32,11 +35,14 @@ import net.osmand.plus.OsmandSettings;
 import net.osmand.plus.OsmandTextFieldBoxes;
 import net.osmand.plus.R;
 import net.osmand.plus.activities.MapActivity;
+import net.osmand.plus.widgets.IconPopupMenu;
 
 import java.util.ArrayList;
 import java.util.List;
 
 import studio.carbonylgroup.textfieldboxes.ExtendedEditText;
+
+import static android.content.Context.CLIPBOARD_SERVICE;
 
 public class CoordinateInputDialogFragment extends DialogFragment {
 
@@ -307,7 +313,33 @@ public class CoordinateInputDialogFragment extends DialogFragment {
 		View.OnLongClickListener editTextOnLongClickListener = new View.OnLongClickListener() {
 			@Override
 			public boolean onLongClick(View view) {
-				return useOsmandKeyboard;
+				if (useOsmandKeyboard) {
+					View focusedView = getDialog().getCurrentFocus();
+					if (focusedView != null) {
+						IconPopupMenu popupMenu = new IconPopupMenu(getContext(), focusedView);
+						Menu menu = popupMenu.getMenu();
+						popupMenu.getMenuInflater().inflate(R.menu.copy_paste_menu, menu);
+						popupMenu.setOnMenuItemClickListener(new IconPopupMenu.OnMenuItemClickListener() {
+							@Override
+							public boolean onMenuItemClick(MenuItem item) {
+								ClipboardManager clipboardManager = ((ClipboardManager) getContext().getSystemService(CLIPBOARD_SERVICE));
+								switch (item.getItemId()) {
+									case R.id.action_copy:
+
+										return true;
+									case R.id.action_paste:
+
+										return true;
+								}
+								return false;
+							}
+						});
+						popupMenu.show();
+					}
+					return true;
+				} else {
+					return false;
+				}
 			}
 		};
 
