@@ -1,13 +1,21 @@
 package net.osmand.plus.search;
 
+import android.support.annotation.NonNull;
+
 import net.osmand.binary.BinaryMapIndexReader;
+import net.osmand.binary.BinaryMapIndexReader.SearchPoiTypeFilter;
 import net.osmand.data.Amenity;
 import net.osmand.data.FavouritePoint;
 import net.osmand.data.LatLon;
+import net.osmand.data.QuadRect;
+import net.osmand.osm.AbstractPoiType;
+import net.osmand.osm.MapPoiTypes;
+import net.osmand.osm.PoiCategory;
 import net.osmand.plus.FavouritesDbHelper;
 import net.osmand.plus.FavouritesDbHelper.FavoriteGroup;
 import net.osmand.plus.GPXUtilities;
 import net.osmand.plus.GpxSelectionHelper;
+import net.osmand.plus.OsmAndFormatter;
 import net.osmand.plus.OsmandApplication;
 import net.osmand.plus.R;
 import net.osmand.plus.helpers.SearchHistoryHelper;
@@ -24,6 +32,7 @@ import net.osmand.search.core.SearchCoreFactory.SearchBaseAPI;
 import net.osmand.search.core.SearchPhrase;
 import net.osmand.search.core.SearchResult;
 import net.osmand.util.Algorithms;
+import net.osmand.util.MapUtils;
 
 import java.io.IOException;
 import java.util.Arrays;
@@ -104,6 +113,45 @@ public class QuickSearchHelper implements ResourceListener {
 	public void setRepositoriesForSearchUICore(final OsmandApplication app) {
 		BinaryMapIndexReader[] binaryMapIndexReaderArray = app.getResourceManager().getQuickSearchFiles();
 		core.getSearchSettings().setOfflineIndexes(Arrays.asList(binaryMapIndexReaderArray));
+	}
+
+	public Amenity findAmenity(String name, double lat, double lon, String lang, boolean transliterate) {
+		QuadRect rect = MapUtils.calculateLatLonBbox(lat, lon, 15);
+		List<Amenity> amenities = app.getResourceManager().searchAmenities(
+				new SearchPoiTypeFilter() {
+					@Override
+					public boolean accept(PoiCategory type, String subcategory) {
+						return true;
+					}
+
+					@Override
+					public boolean isEmpty() {
+						return false;
+					}
+				}, rect.top, rect.left, rect.bottom, rect.right, -1, null);
+
+		MapPoiTypes types = app.getPoiTypes();
+		for (Amenity amenity : amenities) {
+			String poiSimpleFormat = OsmAndFormatter.getPoiStringWithoutType(amenity, lang, transliterate);
+			if (poiSimpleFormat.equals(name)) {
+				return amenity;
+			}
+		}
+		for (Amenity amenity : amenities) {
+			String amenityName = amenity.getName(lang, transliterate);
+			if (Algorithms.isEmpty(amenityName)) {
+				AbstractPoiType st = types.getAnyPoiTypeByKey(amenity.getSubType());
+				if (st != null) {
+					amenityName = st.getTranslation();
+				} else {
+					amenityName = amenity.getSubType();
+				}
+			}
+			if (name.contains(amenityName)) {
+				return amenity;
+			}
+		}
+		return null;
 	}
 
 	public static class SearchWptAPI extends SearchBaseAPI {
@@ -275,12 +323,14 @@ public class QuickSearchHelper implements ResourceListener {
 
 	public static class SearchOnlineApi extends SearchBaseAPI {
 
+		OsmandApplication app;
 		private NominatimPoiFilter poiFilter;
 		private NominatimPoiFilter addressFilter;
 		private int p;
 
 		public SearchOnlineApi(OsmandApplication app) {
 			super(ObjectType.ONLINE_SEARCH);
+			this.app = app;
 			this.poiFilter = app.getPoiFilters().getNominatimPOIFilter();
 			this.addressFilter = app.getPoiFilters().getNominatimAddressFilter();
 		}
@@ -300,15 +350,31 @@ public class QuickSearchHelper implements ResourceListener {
 
 		private void publishAmenities(SearchPhrase phrase, SearchResultMatcher matcher, List<Amenity> amenities, boolean poi) {
 			for (Amenity amenity : amenities) {
-				SearchResult sr = new SearchResult(phrase);
-				sr.localeName = amenity.getName();
-				sr.object = amenity;
-				sr.priority = poi ? SEARCH_ONLINE_AMENITY_PRIORITY : SEARCH_ONLINE_ADDRESS_PRIORITY + (p++);
-				sr.objectType = poi ? ObjectType.POI : ObjectType.POI; // todo
-				sr.location = amenity.getLocation();
-				sr.preferredZoom = 17;
+				SearchResult sr = getSearchResult(phrase, poi, amenity);
+				if (poi) {
+					LatLon latLon = amenity.getLocation();
+					String lang = sr.requiredSearchPhrase.getSettings().getLang();
+					boolean transliterate = sr.requiredSearchPhrase.getSettings().isTransliterate();
+					Amenity a = app.getSearchUICore().findAmenity(amenity.getName(), latLon.getLatitude(),
+							latLon.getLongitude(), lang, transliterate);
+					if (a != null) {
+						sr = getSearchResult(phrase, true, a);
+					}
+				}
 				matcher.publish(sr);
 			}
+		}
+
+		@NonNull
+		private SearchResult getSearchResult(SearchPhrase phrase, boolean poi, Amenity amenity) {
+			SearchResult sr = new SearchResult(phrase);
+			sr.localeName = amenity.getName();
+			sr.object = amenity;
+			sr.priority = poi ? SEARCH_ONLINE_AMENITY_PRIORITY : SEARCH_ONLINE_ADDRESS_PRIORITY + (p++);
+			sr.objectType = poi ? ObjectType.POI : ObjectType.ONLINE_ADDRESS;
+			sr.location = amenity.getLocation();
+			sr.preferredZoom = 17;
+			return sr;
 		}
 	}
 

@@ -242,6 +242,8 @@ public class QuickSearchListItem {
 					sb.append(new File(gpx.path).getName());
 				}
 				return sb.toString();
+			case ONLINE_ADDRESS:
+				return app.getString(R.string.shared_string_address);
 			case UNKNOWN_NAME_FILTER:
 				break;
 		}
@@ -287,8 +289,11 @@ public class QuickSearchListItem {
 		return null;
 	}
 
-	public static String getAmenityIconName(Amenity amenity) {
+	public static String getAmenityIconName(OsmandApplication app, Amenity amenity) {
 		PoiType st = amenity.getType().getPoiTypeByKeyName(amenity.getSubType());
+		if (st == null) {
+			st = app.getPoiTypes().getPoiTypeByKey(amenity.getSubType());
+		}
 		if (st != null) {
 			if (RenderingIcons.containsBigIcon(st.getIconKeyName())) {
 				return st.getIconKeyName();
@@ -344,7 +349,7 @@ public class QuickSearchListItem {
 				}
 			case POI:
 				Amenity amenity = (Amenity) searchResult.object;
-				String id = getAmenityIconName(amenity);
+				String id = getAmenityIconName(app, amenity);
 				if (id != null) {
 					iconId = RenderingIcons.getBigIconResourceId(id);
 					if (iconId > 0) {
@@ -392,6 +397,9 @@ public class QuickSearchListItem {
 			case WPT:
 				WptPt wpt = (WptPt) searchResult.object;
 				return FavoriteImageDrawable.getOrCreate(app, wpt.getColor(), false);
+			case ONLINE_ADDRESS:
+				return app.getIconsCache().getIcon(R.drawable.ic_action_search_dark,
+						app.getSettings().isLightContent() ? R.color.osmand_orange : R.color.osmand_orange_dark);
 			case UNKNOWN_NAME_FILTER:
 				break;
 		}
