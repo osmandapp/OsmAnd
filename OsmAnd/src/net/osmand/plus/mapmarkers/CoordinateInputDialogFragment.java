@@ -50,6 +50,9 @@ public class CoordinateInputDialogFragment extends DialogFragment {
 	private static final int DEGREES_MAX_LENGTH = 6;
 	private static final int MINUTES_MAX_LENGTH = 9;
 	private static final int SECONDS_MAX_LENGTH = 12;
+	private static final String DEGREES_HINT = "50.000";
+	private static final String MINUTES_HINT = "50:00.000";
+	private static final String SECONDS_HINT = "50:00:00.000";
 
 	private boolean lightTheme;
 	private boolean useOsmandKeyboard = true;
@@ -328,9 +331,11 @@ public class CoordinateInputDialogFragment extends DialogFragment {
 				if (resId != 0) {
 					OsmandTextFieldBoxes textFieldBox = mainView.findViewById(resId);
 					if (b) {
-						AndroidUtils.hideSoftKeyboard(getActivity(), view);
 						textFieldBox.setHasFocus(true);
 					} else {
+						if (useOsmandKeyboard) {
+							AndroidUtils.hideSoftKeyboard(getActivity(), view);
+						}
 						textFieldBox.setHasFocus(false);
 					}
 				}
@@ -345,6 +350,7 @@ public class CoordinateInputDialogFragment extends DialogFragment {
 			editText.setOnLongClickListener(editTextOnLongClickListener);
 			editText.setOnFocusChangeListener(focusChangeListener);
 		}
+		changeEditTextHints();
 	}
 
 	private CoordinateInputBottomSheetDialogFragment.CoordinateInputFormatChangeListener createCoordinateInputFormatChangeListener() {
@@ -352,7 +358,7 @@ public class CoordinateInputDialogFragment extends DialogFragment {
 			@Override
 			public void onCoordinateFormatChanged(int format) {
 				coordinateFormat = format;
-				changeEditTextLengths();
+				changeEditTextHints();
 			}
 
 			@Override
@@ -383,26 +389,25 @@ public class CoordinateInputDialogFragment extends DialogFragment {
 				.setImageDrawable(iconsCache.getThemedIcon(show ? R.drawable.ic_action_arrow_down : R.drawable.ic_action_arrow_up));
 	}
 
-	private void changeEditTextLengths() {
-		int maxLength;
-		if (coordinateFormat == PointDescription.FORMAT_DEGREES) {
-			maxLength = DEGREES_MAX_LENGTH;
-		} else if (coordinateFormat == PointDescription.FORMAT_MINUTES) {
-			maxLength = MINUTES_MAX_LENGTH;
-		} else {
-			maxLength = SECONDS_MAX_LENGTH;
-		}
-		InputFilter[] filtersArray = new InputFilter[] {new InputFilter.LengthFilter(maxLength)};
-		for (ExtendedEditText extendedEditText : extendedEditTexts) {
-			if (extendedEditText.getId() != R.id.name_edit_text) {
-				extendedEditText.setFilters(filtersArray);
-			}
-		}
-	}
-
 	public void changeKeyboardInBoxes() {
 		for (OsmandTextFieldBoxes textFieldBox : textFieldBoxes) {
 			textFieldBox.setUseOsmandKeyboard(useOsmandKeyboard);
+		}
+	}
+
+	private void changeEditTextHints() {
+		String hint;
+		if (coordinateFormat == PointDescription.FORMAT_DEGREES) {
+			hint = DEGREES_HINT;
+		} else if (coordinateFormat == PointDescription.FORMAT_MINUTES) {
+			hint = MINUTES_HINT;
+		} else {
+			hint = SECONDS_HINT;
+		}
+		for (ExtendedEditText editText : extendedEditTexts) {
+			if (editText.getId() != R.id.name_edit_text) {
+				editText.setHint(hint);
+			}
 		}
 	}
 
