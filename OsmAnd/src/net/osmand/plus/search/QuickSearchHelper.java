@@ -47,11 +47,11 @@ public class QuickSearchHelper implements ResourceListener {
 
 	public QuickSearchHelper(OsmandApplication app) {
 		this.app = app;
-		core = new SearchUICore(app.getPoiTypes(), app.getSettings().MAP_PREFERRED_LOCALE.get(), 
+		core = new SearchUICore(app.getPoiTypes(), app.getSettings().MAP_PREFERRED_LOCALE.get(),
 				app.getSettings().MAP_TRANSLITERATE_NAMES.get());
 		app.getResourceManager().addResourceListener(this);
 	}
-	
+
 	public SearchUICore getCore() {
 		if (mapsIndexed) {
 			mapsIndexed = false;
@@ -90,7 +90,7 @@ public class QuickSearchHelper implements ResourceListener {
 	public void refreshCustomPoiFilters() {
 		core.clearCustomSearchPoiFilters();
 		PoiFiltersHelper poiFilters = app.getPoiFilters();
-		for(CustomSearchPoiFilter udf : poiFilters.getUserDefinedPoiFilters()) {
+		for (CustomSearchPoiFilter udf : poiFilters.getUserDefinedPoiFilters()) {
 			core.addCustomSearchPoiFilter(udf, 0);
 		}
 		PoiUIFilter localWikiPoiFilter = poiFilters.getLocalWikiPOIFilter();
@@ -113,7 +113,7 @@ public class QuickSearchHelper implements ResourceListener {
 			super(ObjectType.WPT);
 			this.app = app;
 		}
-		
+
 		@Override
 		public boolean isSearchMoreAvailable(SearchPhrase phrase) {
 			return false;
@@ -151,7 +151,7 @@ public class QuickSearchHelper implements ResourceListener {
 
 		@Override
 		public int getSearchPriority(SearchPhrase p) {
-			if(!p.isNoSelectedType()) {
+			if (!p.isNoSelectedType()) {
 				return -1;
 			}
 			return SEARCH_WPT_API_PRIORITY;
@@ -265,7 +265,7 @@ public class QuickSearchHelper implements ResourceListener {
 			if (p.isLastWord(ObjectType.FAVORITE_GROUP)) {
 				return SEARCH_FAVORITE_API_PRIORITY;
 			}
-			if(!p.isNoSelectedType() || !p.isUnknownSearchWordPresent()) {
+			if (!p.isNoSelectedType() || !p.isUnknownSearchWordPresent()) {
 				return -1;
 			}
 			return SEARCH_FAVORITE_API_PRIORITY;
@@ -288,8 +288,13 @@ public class QuickSearchHelper implements ResourceListener {
 		@Override
 		public boolean search(SearchPhrase phrase, SearchUICore.SearchResultMatcher resultMatcher) throws IOException {
 			List<Amenity> amenities = new ArrayList<>();
-			amenities.addAll(nominatimPoiFilter.initializeNewSearch(app.getSettings().getLastKnownMapLocation().getLatitude(), app.getSettings().getLastKnownMapLocation().getLongitude(), -1, null));
-			amenities.addAll(nominatimAddressFilter.initializeNewSearch(app.getSettings().getLastKnownMapLocation().getLatitude(), app.getSettings().getLastKnownMapLocation().getLongitude(), -1, null));
+			double lat = app.getSettings().getLastKnownMapLocation().getLatitude();
+			double lon = app.getSettings().getLastKnownMapLocation().getLongitude();
+			String text = phrase.getUnknownSearchPhrase();
+			nominatimPoiFilter.setFilterByName(text);
+			nominatimAddressFilter.setFilterByName(text);
+			amenities.addAll(nominatimPoiFilter.initializeNewSearch(lat, lon, -1, null));
+			amenities.addAll(nominatimAddressFilter.initializeNewSearch(lat, lon, -1, null));
 			int p = 0;
 			for (Amenity amenity : amenities) {
 				SearchResult sr = new SearchResult(phrase);
@@ -307,7 +312,6 @@ public class QuickSearchHelper implements ResourceListener {
 			}
 			return true;
 		}
-
 	}
 
 	public static class SearchHistoryAPI extends SearchBaseAPI {
@@ -318,7 +322,7 @@ public class QuickSearchHelper implements ResourceListener {
 			super(ObjectType.RECENT_OBJ);
 			this.app = app;
 		}
-		
+
 		@Override
 		public boolean isSearchMoreAvailable(SearchPhrase phrase) {
 			return false;
@@ -333,7 +337,7 @@ public class QuickSearchHelper implements ResourceListener {
 				SearchResult sr = new SearchResult(phrase);
 				sr.localeName = point.getName().getName();
 				sr.object = point;
-				sr.priority = SEARCH_HISTORY_OBJECT_PRIORITY + (p++);  
+				sr.priority = SEARCH_HISTORY_OBJECT_PRIORITY + (p++);
 				sr.objectType = ObjectType.RECENT_OBJ;
 				sr.location = new LatLon(point.getLat(), point.getLon());
 				sr.preferredZoom = 17;
@@ -350,7 +354,7 @@ public class QuickSearchHelper implements ResourceListener {
 		public int getSearchPriority(SearchPhrase p) {
 			if (!p.isEmpty()) {
 				return -1;
-			} 
+			}
 			return SEARCH_HISTORY_API_PRIORITY;
 		}
 	}
