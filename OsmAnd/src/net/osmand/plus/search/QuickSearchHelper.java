@@ -39,7 +39,8 @@ public class QuickSearchHelper implements ResourceListener {
 	public static final int SEARCH_WPT_OBJECT_PRIORITY = 52;
 	public static final int SEARCH_HISTORY_API_PRIORITY = 50;
 	public static final int SEARCH_HISTORY_OBJECT_PRIORITY = 53;
-	public static final int SEARCH_ONLINE_PRIORITY = 53;
+	public static final int SEARCH_ONLINE_AMENITY_PRIORITY = 700;
+	public static final int SEARCH_ONLINE_ADDRESS_PRIORITY = 500;
 	private OsmandApplication app;
 	private SearchUICore core;
 	private SearchResultCollection resultCollection;
@@ -302,15 +303,11 @@ public class QuickSearchHelper implements ResourceListener {
 				SearchResult sr = new SearchResult(phrase);
 				sr.localeName = amenity.getName();
 				sr.object = amenity;
-				sr.priority = SEARCH_ONLINE_PRIORITY + (p++);
+				sr.priority = poi ? SEARCH_ONLINE_AMENITY_PRIORITY : SEARCH_ONLINE_ADDRESS_PRIORITY + (p++);
 				sr.objectType = poi ? ObjectType.POI : ObjectType.POI; // todo
 				sr.location = amenity.getLocation();
 				sr.preferredZoom = 17;
-				if (phrase.getUnknownSearchWordLength() <= 1 && phrase.isNoSelectedType()) {
-					matcher.publish(sr);
-				} else if (phrase.getNameStringMatcher().matches(sr.localeName)) {
-					matcher.publish(sr);
-				}
+				matcher.publish(sr);
 			}
 		}
 	}
