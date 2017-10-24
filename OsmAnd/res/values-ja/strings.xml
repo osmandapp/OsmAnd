@@ -3016,4 +3016,10 @@ OsmAndとOSMをサポートする方法として現状最適な方法である�
     <string name="measurement_tool_snap_to_road_descr">OsmAndは、選択したプロファイルのルートにポイントを接続します。</string>
     <string name="measurement_tool_save_as_new_track_descr">そのルートポイントを点または線として保存できます。</string>
     <string name="add_line">線の追加</string>
+    <string name="wrong_input">入力が間違っています</string>
+	<string name="enter_new_name">新しい名前を入力</string>
+	<string name="shared_string_back">戻る</string>
+	<string name="view">表示</string>
+	<string name="waypoints_added_to_map_markers">経由地点をマップマーカーとして追加</string>
+	<string name="shared_string_navigate">ナビゲート</string>
     </resources>
