@@ -3643,4 +3643,12 @@
 	<string name="poi_amperage">Elektroforto</string>
 	<string name="poi_charging_station_output">Povo de ŝargostacio</string>
 
+<string name="poi_map_type_topo">Speco de mapo: topografia</string>
+	<string name="poi_map_type_street">Speco de mapo: plano</string>
+	<string name="poi_map_type_scheme">Speco de mapo: skizo</string>
+	<string name="poi_map_type_toposcope">Speco de mapo: panoramtablo</string>
+	<string name="poi_map_size_site">Grando de mapo: loka</string>
+	<string name="poi_map_size_city">Grando de mapo: urba</string>
+	<string name="poi_map_size_region">Grando de mapo: regiona</string>
+
 </resources>
