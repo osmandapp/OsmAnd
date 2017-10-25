@@ -2681,4 +2681,9 @@ Abasta l\'àrea: %1$s x %2$s</string>
     <string name="plan_route_no_markers_toast">Cal que afegiu un marcador com a mínim per utilitzar aquesta funció.</string>
     <string name="shared_string_road">Carretera</string>
     <string name="wrong_format">Format incorrecte</string>
-    </resources>
+    <string name="wrong_input">Entrada incorrecta</string>
+	<string name="enter_new_name">Introduïu un nou nom</string>
+	<string name="shared_string_back">Enrere</string>
+	<string name="view">Visualització</string>
+	<string name="waypoints_added_to_map_markers">Fites afegides als marcadors</string>
+	</resources>
