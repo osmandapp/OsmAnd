@@ -94,18 +94,6 @@ public class CoordinateInputDialogFragment extends DialogFragment implements Osm
 	private boolean compassUpdateAllowed = true;
 	private MapMarkersHelper mapMarkersHelper;
 
-	@NonNull
-	@Override
-	public Dialog onCreateDialog(Bundle savedInstanceState) {
-		return new Dialog(getContext(), getTheme()) {
-			@Override
-			public void onBackPressed() {
-				saveMarkers();
-				super.onBackPressed();
-			}
-		};
-	}
-
 	@Override
 	public void onCreate(Bundle savedInstanceState) {
 		super.onCreate(savedInstanceState);
@@ -119,6 +107,18 @@ public class CoordinateInputDialogFragment extends DialogFragment implements Osm
 		CoordinateInputBottomSheetDialogFragment fragment = new CoordinateInputBottomSheetDialogFragment();
 		fragment.setListener(createCoordinateInputFormatChangeListener());
 		fragment.show(getMapActivity().getSupportFragmentManager(), CoordinateInputBottomSheetDialogFragment.TAG);
+	}
+
+	@NonNull
+	@Override
+	public Dialog onCreateDialog(Bundle savedInstanceState) {
+		return new Dialog(getContext(), getTheme()) {
+			@Override
+			public void onBackPressed() {
+				saveMarkers();
+				super.onBackPressed();
+			}
+		};
 	}
 
 	@Nullable
