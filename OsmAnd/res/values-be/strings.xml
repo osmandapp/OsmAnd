@@ -1758,8 +1758,8 @@
 	<string name="shared_string_show_on_map">Паказаць на мапе</string>
 	<string name="shared_string_map">Мапа</string>
 	<string name="shared_string_favorite">Упадабанае</string>
-	<string name="shared_string_favorites">Упадабаныя</string>
-	<string name="shared_string_add_to_favorites">Дадаць да ўпадабаных</string>
+	<string name="shared_string_favorites">Улюбёныя</string>
+	<string name="shared_string_add_to_favorites">Дадаць да ўлюбёных</string>
 	
 	<string name="shared_string_my_places">Мае мясьціны</string>
 	
@@ -2612,9 +2612,9 @@
     <string name="quick_action_take_photo_note_descr">Пры націсканні на кнопку дадасць фотанататку на мапу ў цэнтры экрана.</string>
     <string name="quick_action_add_osm_bug_descr">Пры націсканні на кнопку дадасць OSM-нататку на мапу ў цэнтры экрана.</string>
     <string name="quick_action_add_poi_descr">Пры націсканні на кнопку дадасць POI на мапу ў цэнтры экрана.</string>
-    <string name="quick_action_navigation_voice_descr">Пры націсканні на кнопку адключыць ці ўключыць галасавыя падказкі пад час навігацыі.</string>
-    <string name="quick_action_add_parking_descr">Пры націсканні на кнопку дадасць месца паркоўкі ў цэнтры экрана.</string>
-    <string name="quick_action_interim_dialog">Паказаць прамежкавы дыялог</string>
+    <string name="quick_action_navigation_voice_descr">Пры націсканьні на кнопку адключыць ці ўключыць галасавыя падказкі пад час навігацыі.</string>
+    <string name="quick_action_add_parking_descr">Націск на кнопку дзеяньня дадасьць месца паркоўкі ў цэнтры экрана.</string>
+    <string name="quick_action_interim_dialog">Паказаць прамежкавы дыялёг</string>
     <string name="favorite_autofill_toast_text">" было захавана ў "</string>
     <string name="quick_action_duplicates">Назва для хуткага дзеяньня ўжо існуе. Дзеяньне будзе захована як %1$s каб пазбавіцца дубляваньня.</string>
     <string name="quick_action_duplicate">Знойдзены дублікат назвы</string>
@@ -2715,7 +2715,7 @@
     <string name="quick_action_osmbugs_hide">Схаваць нататкі OSM</string>
     <string name="quick_action_showhide_osmbugs_descr">Націск на кнопку дзеяння пакажа/схавае нататкі OSM на мапе.</string>
     <string name="sorted_by_distance">Адсартавана па адлегласці</string>
-    <string name="search_favorites">Пошук ва ўлюблёных</string>
+    <string name="search_favorites">Пошук улюбёных</string>
     <string name="shared_string_plugin">Дадатак</string>
     <string name="srtm_purchase_header">Для прагляду контурных ліній на мапе, вам неабходна набыць і ўсталяваць дадатак «Contour Lines»</string>
     <string name="srtm_color_scheme">Каляровая схема</string>
