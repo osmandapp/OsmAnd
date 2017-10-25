@@ -54,8 +54,8 @@ public class CoordinateInputDialogFragment extends DialogFragment {
 	public static final String COORDINATE_FORMAT = "coordinate_format";
 	public static final String USE_OSMAND_KEYBOARD = "use_osmand_keyboard";
 
-	private static final int DELETE_BUTTON_POSITION = 9;
-	private static final int CLEAR_BUTTON_POSITION = 11;
+	private static final int CLEAR_BUTTON_POSITION = 9;
+	private static final int DELETE_BUTTON_POSITION = 11;
 	private static final int DEGREES_MAX_LENGTH = 6;
 	private static final int MINUTES_MAX_LENGTH = 9;
 	private static final int SECONDS_MAX_LENGTH = 12;
@@ -168,7 +168,7 @@ public class CoordinateInputDialogFragment extends DialogFragment {
 		String[] keyboardItems = new String[] { "1", "2", "3",
 				"4", "5", "6",
 				"7", "8", "9",
-				getString(R.string.shared_string_delete), "0", getString(R.string.shared_string_clear) };
+				getString(R.string.shared_string_clear), "0", "\u21e6" };
 		final GridView keyboardGrid = (GridView) mainView.findViewById(R.id.keyboard_grid_view);
 		final KeyboardAdapter keyboardAdapter = new KeyboardAdapter(mapActivity, keyboardItems);
 		keyboardGrid.setAdapter(keyboardAdapter);
@@ -179,6 +179,9 @@ public class CoordinateInputDialogFragment extends DialogFragment {
 				if (focusedView != null && focusedView instanceof ExtendedEditText) {
 					ExtendedEditText extendedEditText = (ExtendedEditText) focusedView;
 					switch (i) {
+						case CLEAR_BUTTON_POSITION:
+							extendedEditText.setText("");
+							break;
 						case DELETE_BUTTON_POSITION:
 							String str = extendedEditText.getText().toString();
 							if (str.length() > 0) {
@@ -186,9 +189,6 @@ public class CoordinateInputDialogFragment extends DialogFragment {
 								extendedEditText.setText(str);
 								extendedEditText.setSelection(str.length());
 							}
-							break;
-						case CLEAR_BUTTON_POSITION:
-							extendedEditText.setText("");
 							break;
 						default:
 							extendedEditText.append(keyboardAdapter.getItem(i));
@@ -513,7 +513,7 @@ public class CoordinateInputDialogFragment extends DialogFragment {
 				convertView.setBackgroundResource(lightTheme ? R.drawable.keyboard_item_light_bg : R.drawable.keyboard_item_dark_bg);
 			}
 			TextView keyboardItem = (TextView) convertView.findViewById(R.id.keyboard_item);
-			if (position == DELETE_BUTTON_POSITION || position == CLEAR_BUTTON_POSITION) {
+			if (position == CLEAR_BUTTON_POSITION) {
 				TextViewCompat.setAutoSizeTextTypeWithDefaults(keyboardItem, TextViewCompat.AUTO_SIZE_TEXT_TYPE_NONE);
 				keyboardItem.setTextSize(TypedValue.COMPLEX_UNIT_PX, getResources().getDimension(R.dimen.default_list_text_size));
 			} else {
