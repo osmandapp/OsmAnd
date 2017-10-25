@@ -102,7 +102,9 @@
         android:layout_height="wrap_content"
         android:background="?attr/selectableItemBackground"
         android:minHeight="48dp"
-        android:orientation="vertical">
+        android:orientation="vertical"
+        android:visibility="gone"
+        tools:visibility="visible">
 
         <View
             android:layout_width="match_parent"
