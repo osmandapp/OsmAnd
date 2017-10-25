@@ -1,21 +1,19 @@
 package net.osmand.plus.search.listitems;
 
-import android.view.View.OnClickListener;
-
 import net.osmand.plus.OsmandApplication;
 import net.osmand.plus.R;
 
 public class QuickSearchMoreListItem extends QuickSearchListItem {
 
 	private String name;
-	private OnClickListener onClickListener;
+	private SearchMoreItemOnClickListener onClickListener;
 	private boolean emptySearch;
 	private boolean interruptedSearch;
 	private String findMore;
 	private String restartSearch;
 	private String increaseRadius;
 
-	public QuickSearchMoreListItem(OsmandApplication app, String name, OnClickListener onClickListener) {
+	public QuickSearchMoreListItem(OsmandApplication app, String name, SearchMoreItemOnClickListener onClickListener) {
 		super(app, null);
 		this.name = name;
 		this.onClickListener = onClickListener;
@@ -59,7 +57,18 @@ public class QuickSearchMoreListItem extends QuickSearchListItem {
 		this.emptySearch = emptySearch;
 	}
 
-	public OnClickListener getOnClickListener() {
-		return onClickListener;
+	public void increaseRadiusOnClick() {
+		onClickListener.increaseRadiusOnClick();
+	}
+
+	public void onlineSearchOnClick() {
+		onClickListener.onlineSearchOnClick();
+	}
+
+	public interface SearchMoreItemOnClickListener {
+
+		void increaseRadiusOnClick();
+
+		void onlineSearchOnClick();
 	}
 }

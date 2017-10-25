@@ -28,7 +28,6 @@ import net.osmand.plus.search.listitems.QuickSearchBottomShadowListItem;
 import net.osmand.plus.search.listitems.QuickSearchButtonListItem;
 import net.osmand.plus.search.listitems.QuickSearchListItem;
 import net.osmand.plus.search.listitems.QuickSearchListItemType;
-import net.osmand.plus.search.listitems.QuickSearchMoreListItem;
 import net.osmand.plus.search.listitems.QuickSearchTopShadowListItem;
 import net.osmand.search.core.ObjectType;
 import net.osmand.search.core.SearchResult;
@@ -83,9 +82,7 @@ public abstract class QuickSearchListFragment extends OsmAndListFragment {
 		if (index < listAdapter.getCount()) {
 			QuickSearchListItem item = listAdapter.getItem(index);
 			if (item != null) {
-				if (item.getType() == QuickSearchListItemType.SEARCH_MORE) {
-					((QuickSearchMoreListItem) item).getOnClickListener().onClick(view);
-				} else if (item.getType() == QuickSearchListItemType.BUTTON) {
+				if (item.getType() == QuickSearchListItemType.BUTTON) {
 					((QuickSearchButtonListItem) item).getOnClickListener().onClick(view);
 				} else if (item.getType() == QuickSearchListItemType.SEARCH_RESULT) {
 					SearchResult sr = item.getSearchResult();

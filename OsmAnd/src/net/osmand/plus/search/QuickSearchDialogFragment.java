@@ -77,6 +77,7 @@ import net.osmand.plus.search.listitems.QuickSearchButtonListItem;
 import net.osmand.plus.search.listitems.QuickSearchHeaderListItem;
 import net.osmand.plus.search.listitems.QuickSearchListItem;
 import net.osmand.plus.search.listitems.QuickSearchMoreListItem;
+import net.osmand.plus.search.listitems.QuickSearchMoreListItem.SearchMoreItemOnClickListener;
 import net.osmand.plus.views.mapwidgets.MapInfoWidgetsFactory.TopToolbarController;
 import net.osmand.plus.views.mapwidgets.MapInfoWidgetsFactory.TopToolbarControllerType;
 import net.osmand.search.SearchUICore;
@@ -1709,13 +1710,21 @@ public class QuickSearchDialogFragment extends DialogFragment implements OsmAndC
 	private void addMoreButton() {
 		if (!paused && !cancelPrev && mainSearchFragment != null) {
 			QuickSearchMoreListItem moreListItem =
-					new QuickSearchMoreListItem(app, null, new OnClickListener() {
+					new QuickSearchMoreListItem(app, null, new SearchMoreItemOnClickListener() {
 						@Override
-						public void onClick(View v) {
+						public void increaseRadiusOnClick() {
 							if (!interruptedSearch) {
 								SearchSettings settings = searchUICore.getSearchSettings();
 								searchUICore.updateSettings(settings.setRadiusLevel(settings.getRadiusLevel() + 1));
 							}
+							runCoreSearch(searchQuery, false, true);
+						}
+
+						@Override
+						public void onlineSearchOnClick() {
+							startOnlinePoiSearch();
+							mainSearchFragment.getAdapter().clear();
+							updateTabbarVisibility(false);
 							runCoreSearch(searchQuery, false, true);
 						}
 					});
