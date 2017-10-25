@@ -472,7 +472,7 @@
 	<string name="poi_hostel">Hostel</string>
 	<string name="poi_motel">Motel</string>
 	<string name="poi_alpine_hut">Cabaña alpina</string>
-	<string name="poi_chalet">Chalé</string>
+	<string name="poi_chalet">Cabaña vacacional</string>
 	<string name="poi_apartment">Departamento</string>
 	<string name="poi_wilderness_hut">Cabaña aislada</string>
 	<string name="poi_cabin">Cabaña</string>
@@ -3450,5 +3450,13 @@
 
 	<string name="poi_amperage">Amperaje</string>
 	<string name="poi_charging_station_output">Salida de la estación de carga</string>
+
+<string name="poi_map_type_topo">Tipo de mapa: Topográfico</string>
+	<string name="poi_map_type_street">Tipo de mapa: Callejero</string>
+	<string name="poi_map_type_scheme">Tipo de mapa: Esquemático</string>
+	<string name="poi_map_type_toposcope">Tipo de mapa: Toposcópico</string>
+	<string name="poi_map_size_site">Tamaño de mapa: Sitio</string>
+	<string name="poi_map_size_city">Tamaño de mapa: Ciudad</string>
+	<string name="poi_map_size_region">Tamaño de mapa: Región</string>
 
 </resources>
