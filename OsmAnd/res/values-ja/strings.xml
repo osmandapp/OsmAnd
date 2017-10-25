@@ -2529,7 +2529,7 @@ OsmAndとOSMをサポートする方法として現状最適な方法である�
 \n等々…</string>
     <string name="search_hint">市町村名、住所、POI名称を入力</string>
     <string name="osm_live_banner_desc">マップのダウンロード数は無制限になり、設定した更新頻度(月、週、日、時間)での自動ダウンロードが可能になります。</string>
-    <string name="osmand_plus_banner_desc">有料バージョンのOsmAndはマップのダウンロード数制限はなく、月毎のマップ自動更新も使用できます。</string>
+    <string name="osmand_plus_banner_desc">マップの無制限ダウンロード、アップデート、Wikipediaプラグインも使用可能。</string>
     <string name="location_not_found">場所が見つかりません</string>
     <string name="no_inet_connection_desc_map">マップのダウンロードにはインターネット接続が必要です。</string>
     <string name="search_my_location">現在地取得</string>
