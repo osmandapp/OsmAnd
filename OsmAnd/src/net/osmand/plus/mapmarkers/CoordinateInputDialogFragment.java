@@ -113,6 +113,8 @@ public class CoordinateInputDialogFragment extends DialogFragment implements Osm
 		lightTheme = app.getSettings().OSMAND_THEME.get() == OsmandSettings.OSMAND_LIGHT_THEME;
 		int themeId = lightTheme ? R.style.OsmandLightTheme : R.style.OsmandDarkTheme;
 		setStyle(STYLE_NO_FRAME, themeId);
+		iconsCache = app.getIconsCache();
+		mapMarkersHelper = app.getMapMarkersHelper();
 
 		CoordinateInputBottomSheetDialogFragment fragment = new CoordinateInputBottomSheetDialogFragment();
 		fragment.setListener(createCoordinateInputFormatChangeListener());
@@ -124,8 +126,6 @@ public class CoordinateInputDialogFragment extends DialogFragment implements Osm
 	public View onCreateView(LayoutInflater inflater, @Nullable ViewGroup container, @Nullable Bundle savedInstanceState) {
 		mainView = inflater.inflate(R.layout.fragment_coordinate_input_dialog, container);
 		final MapActivity mapActivity = getMapActivity();
-		iconsCache = getMyApplication().getIconsCache();
-		mapMarkersHelper = getMyApplication().getMapMarkersHelper();
 
 		Fragment coordinateInputBottomSheetDialogFragment = mapActivity.getSupportFragmentManager().findFragmentByTag(CoordinateInputBottomSheetDialogFragment.TAG);
 		if (coordinateInputBottomSheetDialogFragment != null) {
@@ -340,7 +340,7 @@ public class CoordinateInputDialogFragment extends DialogFragment implements Osm
 			@Override
 			public void afterTextChanged(Editable editable) {
 				View focusedView = getDialog().getCurrentFocus();
-				if (focusedView != null) {
+				if (focusedView != null && focusedView instanceof EditText) {
 					ExtendedEditText focusedEditText = (ExtendedEditText) focusedView;
 					String str = focusedEditText.getText().toString();
 					int strLength = str.length();
