@@ -30,6 +30,7 @@ import android.widget.EditText;
 import android.widget.GridView;
 import android.widget.ImageView;
 import android.widget.TextView;
+import android.widget.Toast;
 
 import net.osmand.AndroidUtils;
 import net.osmand.Location;
@@ -195,8 +196,14 @@ public class CoordinateInputDialogFragment extends DialogFragment implements Osm
 			public void onClick(View view) {
 				String latitude = latitudeEditText.getText().toString();
 				String longitude = longitudeEditText.getText().toString();
-				String name = nameEditText.getText().toString();
-				adapter.addMapMarker(latitude, longitude, name);
+				String locPhrase = latitude + ", " + longitude;
+				LatLon latLon = MapUtils.parseLocation(locPhrase);
+				if (latLon != null) {
+					String name = nameEditText.getText().toString();
+					adapter.addMapMarker(latLon, name);
+				} else {
+					Toast.makeText(getContext(), getString(R.string.wrong_format), Toast.LENGTH_SHORT).show();
+				}
 			}
 		});
 

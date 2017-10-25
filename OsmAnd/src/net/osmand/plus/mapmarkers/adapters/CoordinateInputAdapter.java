@@ -109,9 +109,8 @@ public class CoordinateInputAdapter extends RecyclerView.Adapter<MapMarkerItemVi
 		return mapMarkers.get(position);
 	}
 
-	public void addMapMarker(String latitude, String longitude, String name) {
+	public void addMapMarker(LatLon latLon, String name) {
 		PointDescription pointDescription = new PointDescription(PointDescription.POINT_TYPE_MAP_MARKER, name);
-		LatLon latLon = new LatLon(30.537020, 50.443477);
 		int colorIndex = mapMarkers.size() > 0 ? mapMarkers.get(mapMarkers.size() - 1).colorIndex : -1;
 		if (colorIndex == -1) {
 			colorIndex = 0;
