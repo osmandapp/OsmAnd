@@ -60,8 +60,8 @@ public class CoordinateInputAdapter extends RecyclerView.Adapter<MapMarkerItemVi
 	}
 
 	@Override
-	public void onBindViewHolder(MapMarkerItemViewHolder holder, int position) {
-		MapMarker mapMarker = getItem(position);
+	public void onBindViewHolder(final MapMarkerItemViewHolder holder, int position) {
+		final MapMarker mapMarker = getItem(position);
 		holder.iconDirection.setVisibility(View.VISIBLE);
 		holder.icon.setImageDrawable(iconsCache.getIcon(R.drawable.ic_action_flag_dark, MapMarker.getColorId(mapMarker.colorIndex)));
 		holder.mainLayout.setBackgroundColor(ContextCompat.getColor(mapActivity, nightTheme ? R.color.bg_color_dark : R.color.bg_color_light));
@@ -73,6 +73,18 @@ public class CoordinateInputAdapter extends RecyclerView.Adapter<MapMarkerItemVi
 		holder.numberText.setVisibility(View.VISIBLE);
 		holder.numberText.setText(Integer.toString(position + 1));
 		holder.description.setVisibility(View.GONE);
+
+		holder.optionsBtn.setOnClickListener(new View.OnClickListener() {
+			@Override
+			public void onClick(View view) {
+				int position = holder.getAdapterPosition();
+				if (position != RecyclerView.NO_POSITION) {
+					MapMarker mapMarker = getItem(position);
+					mapMarkers.remove(mapMarker);
+					notifyDataSetChanged();
+				}
+			}
+		});
 
 		boolean fistItem = position == 0;
 		boolean lastItem = position == getItemCount() - 1;
