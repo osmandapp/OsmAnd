@@ -774,4 +774,13 @@
 	<string name="poi_visibility_street">מיקום: רחוב</string>
 	<string name="poi_visibility_area">מיקום: איזור</string>
 
-</resources>
+<string name="poi_takeaway">איסוף עצמי</string>
+	<string name="poi_dish">מנה</string>
+	<string name="poi_operational_status">מצב תפעולי</string>
+	<string name="poi_water_supply_type">סוג אספקת מים</string>
+	<string name="poi_water_purification">טיהור מים</string>
+	<string name="poi_water_place_access">גישה למקום מים</string>
+
+<string name="poi_ford">מעבר על שפך נחל</string>
+	<string name="poi_fuel_1_25">דלק 1:25</string>
+	</resources>
