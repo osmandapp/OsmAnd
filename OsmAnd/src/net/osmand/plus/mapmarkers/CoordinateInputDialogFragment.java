@@ -416,7 +416,6 @@ public class CoordinateInputDialogFragment extends DialogFragment {
 			editText.setOnLongClickListener(editTextOnLongClickListener);
 			editText.setOnFocusChangeListener(focusChangeListener);
 		}
-		changeEditTextHints();
 	}
 
 	private CoordinateInputBottomSheetDialogFragment.CoordinateInputFormatChangeListener createCoordinateInputFormatChangeListener() {
@@ -425,6 +424,7 @@ public class CoordinateInputDialogFragment extends DialogFragment {
 			public void onCoordinateFormatChanged(int format) {
 				coordinateFormat = format;
 				changeEditTextHints();
+				changeEditTextLengths();
 			}
 
 			@Override
@@ -458,6 +458,23 @@ public class CoordinateInputDialogFragment extends DialogFragment {
 	public void changeKeyboardInBoxes() {
 		for (OsmandTextFieldBoxes textFieldBox : textFieldBoxes) {
 			textFieldBox.setUseOsmandKeyboard(useOsmandKeyboard);
+		}
+	}
+
+	private void changeEditTextLengths() {
+		int maxLength;
+		if (coordinateFormat == PointDescription.FORMAT_DEGREES) {
+			maxLength = DEGREES_MAX_LENGTH;
+		} else if (coordinateFormat == PointDescription.FORMAT_MINUTES) {
+			maxLength = MINUTES_MAX_LENGTH;
+		} else {
+			maxLength = SECONDS_MAX_LENGTH;
+		}
+		InputFilter[] filtersArray = new InputFilter[] {new InputFilter.LengthFilter(maxLength)};
+		for (ExtendedEditText extendedEditText : extendedEditTexts) {
+			if (extendedEditText.getId() != R.id.name_edit_text) {
+				extendedEditText.setFilters(filtersArray);
+			}
 		}
 	}
 
