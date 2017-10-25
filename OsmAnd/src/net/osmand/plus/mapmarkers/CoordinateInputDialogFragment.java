@@ -9,7 +9,9 @@ import android.support.annotation.Nullable;
 import android.support.v4.app.DialogFragment;
 import android.support.v4.app.Fragment;
 import android.support.v4.widget.TextViewCompat;
+import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.PopupMenu;
+import android.support.v7.widget.RecyclerView;
 import android.support.v7.widget.Toolbar;
 import android.text.Editable;
 import android.text.InputFilter;
@@ -30,14 +32,21 @@ import android.widget.ImageView;
 import android.widget.TextView;
 
 import net.osmand.AndroidUtils;
+import net.osmand.Location;
+import net.osmand.data.LatLon;
 import net.osmand.data.PointDescription;
 import net.osmand.plus.IconsCache;
+import net.osmand.plus.OsmAndLocationProvider.OsmAndCompassListener;
+import net.osmand.plus.OsmAndLocationProvider.OsmAndLocationListener;
 import net.osmand.plus.OsmandApplication;
 import net.osmand.plus.OsmandSettings;
 import net.osmand.plus.OsmandTextFieldBoxes;
 import net.osmand.plus.R;
 import net.osmand.plus.activities.MapActivity;
-import net.osmand.plus.widgets.IconPopupMenu;
+import net.osmand.plus.base.MapViewTrackingUtilities;
+import net.osmand.plus.dashboard.DashLocationFragment;
+import net.osmand.plus.mapmarkers.adapters.CoordinateInputAdapter;
+import net.osmand.util.MapUtils;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -47,7 +56,7 @@ import studio.carbonylgroup.textfieldboxes.ExtendedEditText;
 import static android.content.ClipDescription.MIMETYPE_TEXT_PLAIN;
 import static android.content.Context.CLIPBOARD_SERVICE;
 
-public class CoordinateInputDialogFragment extends DialogFragment {
+public class CoordinateInputDialogFragment extends DialogFragment implements OsmAndCompassListener, OsmAndLocationListener {
 
 	public static final String TAG = "CoordinateInputDialogFragment";
 
@@ -66,6 +75,7 @@ public class CoordinateInputDialogFragment extends DialogFragment {
 	private static final String LONGITUDE_LABEL = "longitude";
 	private static final String NAME_LABEL = "name";
 
+	private CoordinateInputAdapter adapter;
 	private boolean lightTheme;
 	private boolean useOsmandKeyboard = true;
 	private int coordinateFormat = -1;
@@ -73,6 +83,10 @@ public class CoordinateInputDialogFragment extends DialogFragment {
 	private List<ExtendedEditText> extendedEditTexts;
 	private View mainView;
 	private IconsCache iconsCache;
+	private Location location;
+	private Float heading;
+	private boolean locationUpdateStarted;
+	private boolean compassUpdateAllowed = true;
 
 	@Override
 	public void onCreate(Bundle savedInstanceState) {
@@ -162,6 +176,30 @@ public class CoordinateInputDialogFragment extends DialogFragment {
 
 		changeKeyboardInBoxes();
 
+		RecyclerView recyclerView = (RecyclerView) mainView.findViewById(R.id.markers_recycler_view);
+		recyclerView.setLayoutManager(new LinearLayoutManager(getContext()));
+		adapter = new CoordinateInputAdapter(mapActivity);
+		recyclerView.setAdapter(adapter);
+		recyclerView.addOnScrollListener(new RecyclerView.OnScrollListener() {
+			@Override
+			public void onScrollStateChanged(RecyclerView recyclerView, int newState) {
+				super.onScrollStateChanged(recyclerView, newState);
+				compassUpdateAllowed = newState == RecyclerView.SCROLL_STATE_IDLE;
+			}
+		});
+
+		TextView addMarkerButton = (TextView) mainView.findViewById(R.id.add_marker_button);
+		addMarkerButton.setBackgroundResource(lightTheme ? R.drawable.keyboard_item_light_bg : R.drawable.keyboard_item_dark_bg);
+		addMarkerButton.setOnClickListener(new View.OnClickListener() {
+			@Override
+			public void onClick(View view) {
+				String latitude = latitudeEditText.getText().toString();
+				String longitude = longitudeEditText.getText().toString();
+				String name = nameEditText.getText().toString();
+				adapter.addMapMarker(latitude, longitude, name);
+			}
+		});
+
 		View keyboardLayout = mainView.findViewById(R.id.keyboard_layout);
 		AndroidUtils.setBackground(mapActivity, keyboardLayout, !lightTheme, R.drawable.bg_bottom_menu_light, R.drawable.bg_bottom_menu_dark);
 
@@ -212,6 +250,19 @@ public class CoordinateInputDialogFragment extends DialogFragment {
 		});
 
 		return mainView;
+	}
+
+	@Override
+	public void onResume() {
+		super.onResume();
+		adapter.setScreenOrientation(DashLocationFragment.getScreenOrientation(getActivity()));
+		startLocationUpdate();
+	}
+
+	@Override
+	public void onPause() {
+		super.onPause();
+		stopLocationUpdate();
 	}
 
 	@Override
@@ -513,6 +564,76 @@ public class CoordinateInputDialogFragment extends DialogFragment {
 			return true;
 		} catch (RuntimeException e) {
 			return false;
+		}
+	}
+
+	@Override
+	public void updateLocation(Location location) {
+		boolean newLocation = this.location == null && location != null;
+		boolean locationChanged = this.location != null && location != null
+				&& this.location.getLatitude() != location.getLatitude()
+				&& this.location.getLongitude() != location.getLongitude();
+		if (newLocation || locationChanged) {
+			this.location = location;
+			updateLocationUi();
+		}
+	}
+
+	@Override
+	public void updateCompassValue(float value) {
+		// 99 in next line used to one-time initialize arrows (with reference vs. fixed-north direction)
+		// on non-compass devices
+		float lastHeading = heading != null ? heading : 99;
+		heading = value;
+		if (Math.abs(MapUtils.degreesDiff(lastHeading, heading)) > 5) {
+			updateLocationUi();
+		} else {
+			heading = lastHeading;
+		}
+	}
+
+	private void updateLocationUi() {
+		if (!compassUpdateAllowed) {
+			return;
+		}
+		final MapActivity mapActivity = (MapActivity) getActivity();
+		if (mapActivity != null && adapter != null) {
+			mapActivity.getMyApplication().runInUIThread(new Runnable() {
+				@Override
+				public void run() {
+					if (location == null) {
+						location = mapActivity.getMyApplication().getLocationProvider().getLastKnownLocation();
+					}
+					MapViewTrackingUtilities utilities = mapActivity.getMapViewTrackingUtilities();
+					boolean useCenter = !(utilities.isMapLinkedToLocation() && location != null);
+
+					adapter.setUseCenter(useCenter);
+					adapter.setLocation(useCenter ? mapActivity.getMapLocation() : new LatLon(location.getLatitude(), location.getLongitude()));
+					adapter.setHeading(useCenter ? -mapActivity.getMapRotate() : heading != null ? heading : 99);
+					adapter.notifyDataSetChanged();
+				}
+			});
+		}
+	}
+
+	private void startLocationUpdate() {
+		OsmandApplication app = getMyApplication();
+		if (app != null && !locationUpdateStarted) {
+			locationUpdateStarted = true;
+			app.getLocationProvider().removeCompassListener(app.getLocationProvider().getNavigationInfo());
+			app.getLocationProvider().addCompassListener(this);
+			app.getLocationProvider().addLocationListener(this);
+			updateLocationUi();
+		}
+	}
+
+	private void stopLocationUpdate() {
+		OsmandApplication app = getMyApplication();
+		if (app != null && locationUpdateStarted) {
+			locationUpdateStarted = false;
+			app.getLocationProvider().removeLocationListener(this);
+			app.getLocationProvider().removeCompassListener(this);
+			app.getLocationProvider().addCompassListener(app.getLocationProvider().getNavigationInfo());
 		}
 	}
 

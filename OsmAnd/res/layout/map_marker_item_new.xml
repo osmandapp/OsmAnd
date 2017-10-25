@@ -28,6 +28,17 @@
             android:layout_height="@dimen/map_button_shadow_width"
             android:background="?attr/selectableItemBackground">
 
+            <android.support.v7.widget.AppCompatTextView
+                android:textSize="@dimen/default_list_text_size"
+                tools:text="3"
+                android:gravity="center"
+                android:id="@+id/map_marker_number_text_view"
+                android:layout_width="@dimen/map_button_shadow_width"
+                android:layout_height="@dimen/map_button_shadow_width"
+                android:layout_gravity="center_vertical"
+                android:visibility="gone"
+                tools:visibility="visible"/>
+
             <android.support.v7.widget.AppCompatImageView
                 android:id="@+id/map_marker_reorder_icon"
                 android:layout_width="@dimen/map_button_shadow_width"

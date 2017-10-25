@@ -140,6 +140,10 @@
         </android.support.design.widget.AppBarLayout>
 
         <android.support.v7.widget.RecyclerView
+            android:paddingTop="16dp"
+            android:paddingBottom="72dp"
+            android:id="@+id/markers_recycler_view"
+            android:clipToPadding="false"
             android:layout_width="match_parent"
             android:layout_height="match_parent"/>
 
@@ -190,11 +194,11 @@
                 android:background="?attr/dashboard_divider"/>
 
             <android.support.v7.widget.AppCompatTextView
-                android:layout_marginTop="6dp"
-                android:layout_marginBottom="6dp"
+                android:paddingTop="6dp"
+                android:paddingBottom="6dp"
                 android:maxLines="1"
                 android:ellipsize="end"
-                android:id="@+id/add_marker"
+                android:id="@+id/add_marker_button"
                 android:textAllCaps="true"
                 android:layout_width="0dp"
                 android:layout_weight="1"
