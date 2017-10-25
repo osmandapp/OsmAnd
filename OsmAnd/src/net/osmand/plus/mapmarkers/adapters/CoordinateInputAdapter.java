@@ -9,13 +9,12 @@ import android.view.ViewGroup;
 import net.osmand.data.LatLon;
 import net.osmand.data.PointDescription;
 import net.osmand.plus.IconsCache;
-import net.osmand.plus.MapMarkersHelper;
 import net.osmand.plus.MapMarkersHelper.MapMarker;
 import net.osmand.plus.R;
 import net.osmand.plus.activities.MapActivity;
 import net.osmand.plus.dashboard.DashLocationFragment;
+import net.osmand.plus.mapmarkers.MapMarkersDbHelper;
 
-import java.util.ArrayList;
 import java.util.List;
 
 import static net.osmand.plus.MapMarkersHelper.MAP_MARKERS_COLORS_COUNT;
@@ -119,6 +118,8 @@ public class CoordinateInputAdapter extends RecyclerView.Adapter<MapMarkerItemVi
 			colorIndex = (colorIndex + 1) % MAP_MARKERS_COLORS_COUNT;
 		}
 		MapMarker mapMarker = new MapMarker(latLon, pointDescription, colorIndex, false, 0);
+		mapMarker.history = false;
+		mapMarker.nextKey = MapMarkersDbHelper.TAIL_NEXT_VALUE;
 		mapMarkers.add(mapMarker);
 		notifyDataSetChanged();
 	}

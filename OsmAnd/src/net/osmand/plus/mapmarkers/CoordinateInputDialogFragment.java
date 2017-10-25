@@ -1,5 +1,6 @@
 package net.osmand.plus.mapmarkers;
 
+import android.app.Dialog;
 import android.content.ClipData;
 import android.content.ClipboardManager;
 import android.content.Context;
@@ -93,6 +94,18 @@ public class CoordinateInputDialogFragment extends DialogFragment implements Osm
 	private boolean compassUpdateAllowed = true;
 	private MapMarkersHelper mapMarkersHelper;
 
+	@NonNull
+	@Override
+	public Dialog onCreateDialog(Bundle savedInstanceState) {
+		return new Dialog(getContext(), getTheme()) {
+			@Override
+			public void onBackPressed() {
+				saveMarkers();
+				super.onBackPressed();
+			}
+		};
+	}
+
 	@Override
 	public void onCreate(Bundle savedInstanceState) {
 		super.onCreate(savedInstanceState);
@@ -125,6 +138,7 @@ public class CoordinateInputDialogFragment extends DialogFragment implements Osm
 		toolbar.setNavigationOnClickListener(new View.OnClickListener() {
 			@Override
 			public void onClick(View view) {
+				saveMarkers();
 				dismiss();
 			}
 		});
@@ -283,6 +297,10 @@ public class CoordinateInputDialogFragment extends DialogFragment implements Osm
 			getDialog().setDismissMessage(null);
 		}
 		super.onDestroyView();
+	}
+
+	private void saveMarkers() {
+		mapMarkersHelper.addMarkers(mapMarkers);
 	}
 
 	private void registerTextFieldBoxes() {
