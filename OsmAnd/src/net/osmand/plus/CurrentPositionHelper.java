@@ -99,7 +99,7 @@ public class CurrentPositionHelper {
 					}
 					return null;
 				}
-			}.executeOnExecutor(AsyncTask.THREAD_POOL_EXECUTOR, (Void) null);
+			}.execute((Void) null);
 			res = true;
 		}
 		return res;
