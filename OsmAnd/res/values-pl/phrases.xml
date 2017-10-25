@@ -3662,4 +3662,12 @@
 	<string name="poi_amperage">Natężenie prądu</string>
 	<string name="poi_charging_station_output">Moc stacji ładowania</string>
 
+<string name="poi_map_type_topo">Rodzaj mapy: topograficzna</string>
+	<string name="poi_map_type_street">Rodzaj mapy: plan</string>
+	<string name="poi_map_type_scheme">Rodzaj mapy: szkic</string>
+	<string name="poi_map_type_toposcope">Rodzaj mapy: panorama</string>
+	<string name="poi_map_size_site">Rozmiar mapy: lokalna</string>
+	<string name="poi_map_size_city">Rozmiar mapy: miasto</string>
+	<string name="poi_map_size_region">Rozmiar mapy: region</string>
+
 </resources>
