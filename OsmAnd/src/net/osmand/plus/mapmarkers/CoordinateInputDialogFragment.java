@@ -1,5 +1,6 @@
 package net.osmand.plus.mapmarkers;
 
+import android.content.ClipData;
 import android.content.ClipboardManager;
 import android.content.Context;
 import android.os.Bundle;
@@ -8,6 +9,7 @@ import android.support.annotation.Nullable;
 import android.support.v4.app.DialogFragment;
 import android.support.v4.app.Fragment;
 import android.support.v4.widget.TextViewCompat;
+import android.support.v7.widget.PopupMenu;
 import android.support.v7.widget.Toolbar;
 import android.text.Editable;
 import android.text.InputFilter;
@@ -42,6 +44,7 @@ import java.util.List;
 
 import studio.carbonylgroup.textfieldboxes.ExtendedEditText;
 
+import static android.content.ClipDescription.MIMETYPE_TEXT_PLAIN;
 import static android.content.Context.CLIPBOARD_SERVICE;
 
 public class CoordinateInputDialogFragment extends DialogFragment {
@@ -59,6 +62,9 @@ public class CoordinateInputDialogFragment extends DialogFragment {
 	private static final String DEGREES_HINT = "50.000";
 	private static final String MINUTES_HINT = "50:00.000";
 	private static final String SECONDS_HINT = "50:00:00.000";
+	private static final String LATITUDE_LABEL = "latitude";
+	private static final String LONGITUDE_LABEL = "longitude";
+	private static final String NAME_LABEL = "name";
 
 	private boolean lightTheme;
 	private boolean useOsmandKeyboard = true;
@@ -312,30 +318,58 @@ public class CoordinateInputDialogFragment extends DialogFragment {
 
 		View.OnLongClickListener editTextOnLongClickListener = new View.OnLongClickListener() {
 			@Override
-			public boolean onLongClick(View view) {
+			public boolean onLongClick(final View view) {
 				if (useOsmandKeyboard) {
-					View focusedView = getDialog().getCurrentFocus();
-					if (focusedView != null) {
-						IconPopupMenu popupMenu = new IconPopupMenu(getContext(), focusedView);
-						Menu menu = popupMenu.getMenu();
-						popupMenu.getMenuInflater().inflate(R.menu.copy_paste_menu, menu);
-						popupMenu.setOnMenuItemClickListener(new IconPopupMenu.OnMenuItemClickListener() {
-							@Override
-							public boolean onMenuItemClick(MenuItem item) {
-								ClipboardManager clipboardManager = ((ClipboardManager) getContext().getSystemService(CLIPBOARD_SERVICE));
-								switch (item.getItemId()) {
-									case R.id.action_copy:
-
-										return true;
-									case R.id.action_paste:
-
-										return true;
-								}
-								return false;
-							}
-						});
-						popupMenu.show();
+					final EditText editText = (EditText) view;
+					PopupMenu popupMenu = new PopupMenu(getContext(), editText);
+					Menu menu = popupMenu.getMenu();
+					popupMenu.getMenuInflater().inflate(R.menu.copy_paste_menu, menu);
+					final ClipboardManager clipboardManager = ((ClipboardManager) getContext().getSystemService(CLIPBOARD_SERVICE));
+					MenuItem pasteMenuItem = menu.findItem(R.id.action_paste);
+					if (!(clipboardManager.hasPrimaryClip())) {
+						pasteMenuItem.setEnabled(false);
+					} else if (!(clipboardManager.getPrimaryClipDescription().hasMimeType(MIMETYPE_TEXT_PLAIN))) {
+						pasteMenuItem.setEnabled(false);
+					} else {
+						pasteMenuItem.setEnabled(true);
 					}
+					popupMenu.setOnMenuItemClickListener(new PopupMenu.OnMenuItemClickListener() {
+						@Override
+						public boolean onMenuItemClick(MenuItem item) {
+							switch (item.getItemId()) {
+								case R.id.action_copy:
+									String labelText;
+									switch (view.getId()) {
+										case R.id.latitude_edit_text:
+											labelText = LATITUDE_LABEL;
+											break;
+										case R.id.longitude_edit_text:
+											labelText = LONGITUDE_LABEL;
+											break;
+										case R.id.name_edit_text:
+											labelText = NAME_LABEL;
+											break;
+										default:
+											labelText = "";
+											break;
+									}
+									ClipData clip = ClipData.newPlainText(labelText, editText.getText().toString());
+									clipboardManager.setPrimaryClip(clip);
+									return true;
+								case R.id.action_paste:
+									ClipData.Item pasteItem = clipboardManager.getPrimaryClip().getItemAt(0);
+									CharSequence pasteData = pasteItem.getText();
+									if (pasteData != null) {
+										String str = editText.getText().toString();
+										editText.setText(str + pasteData.toString());
+										editText.setSelection(editText.getText().length());
+									}
+									return true;
+							}
+							return false;
+						}
+					});
+					popupMenu.show();
 					return true;
 				} else {
 					return false;
