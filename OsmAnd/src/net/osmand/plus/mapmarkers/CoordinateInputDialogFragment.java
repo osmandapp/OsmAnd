@@ -37,6 +37,8 @@ import net.osmand.Location;
 import net.osmand.data.LatLon;
 import net.osmand.data.PointDescription;
 import net.osmand.plus.IconsCache;
+import net.osmand.plus.MapMarkersHelper;
+import net.osmand.plus.MapMarkersHelper.MapMarker;
 import net.osmand.plus.OsmAndLocationProvider.OsmAndCompassListener;
 import net.osmand.plus.OsmAndLocationProvider.OsmAndLocationListener;
 import net.osmand.plus.OsmandApplication;
@@ -76,6 +78,7 @@ public class CoordinateInputDialogFragment extends DialogFragment implements Osm
 	private static final String LONGITUDE_LABEL = "longitude";
 	private static final String NAME_LABEL = "name";
 
+	private List<MapMarker> mapMarkers = new ArrayList<>();
 	private CoordinateInputAdapter adapter;
 	private boolean lightTheme;
 	private boolean useOsmandKeyboard = true;
@@ -88,6 +91,7 @@ public class CoordinateInputDialogFragment extends DialogFragment implements Osm
 	private Float heading;
 	private boolean locationUpdateStarted;
 	private boolean compassUpdateAllowed = true;
+	private MapMarkersHelper mapMarkersHelper;
 
 	@Override
 	public void onCreate(Bundle savedInstanceState) {
@@ -108,6 +112,7 @@ public class CoordinateInputDialogFragment extends DialogFragment implements Osm
 		mainView = inflater.inflate(R.layout.fragment_coordinate_input_dialog, container);
 		final MapActivity mapActivity = getMapActivity();
 		iconsCache = getMyApplication().getIconsCache();
+		mapMarkersHelper = getMyApplication().getMapMarkersHelper();
 
 		Fragment coordinateInputBottomSheetDialogFragment = mapActivity.getSupportFragmentManager().findFragmentByTag(CoordinateInputBottomSheetDialogFragment.TAG);
 		if (coordinateInputBottomSheetDialogFragment != null) {
@@ -179,7 +184,7 @@ public class CoordinateInputDialogFragment extends DialogFragment implements Osm
 
 		RecyclerView recyclerView = (RecyclerView) mainView.findViewById(R.id.markers_recycler_view);
 		recyclerView.setLayoutManager(new LinearLayoutManager(getContext()));
-		adapter = new CoordinateInputAdapter(mapActivity);
+		adapter = new CoordinateInputAdapter(mapActivity, mapMarkers);
 		recyclerView.setAdapter(adapter);
 		recyclerView.addOnScrollListener(new RecyclerView.OnScrollListener() {
 			@Override

@@ -25,16 +25,17 @@ public class CoordinateInputAdapter extends RecyclerView.Adapter<MapMarkerItemVi
 	private MapActivity mapActivity;
 	private boolean nightTheme;
 	private IconsCache iconsCache;
-	private List<MapMarker> mapMarkers = new ArrayList<>();
+	private List<MapMarker> mapMarkers;
 	private LatLon location;
 	private Float heading;
 	private boolean useCenter;
 	private int screenOrientation;
 
-	public CoordinateInputAdapter (MapActivity mapActivity) {
+	public CoordinateInputAdapter (MapActivity mapActivity, List<MapMarker> mapMarkers) {
 		this.mapActivity = mapActivity;
 		nightTheme = !mapActivity.getMyApplication().getSettings().isLightContent();
 		iconsCache = mapActivity.getMyApplication().getIconsCache();
+		this.mapMarkers = mapMarkers;
 	}
 
 	public void setLocation(LatLon location) {
