@@ -1,5 +1,7 @@
 package net.osmand.plus.search.listitems;
 
+import android.support.annotation.Nullable;
+
 import net.osmand.plus.OsmandApplication;
 import net.osmand.plus.R;
 
@@ -13,7 +15,7 @@ public class QuickSearchMoreListItem extends QuickSearchListItem {
 	private String restartSearch;
 	private String increaseRadius;
 
-	public QuickSearchMoreListItem(OsmandApplication app, String name, SearchMoreItemOnClickListener onClickListener) {
+	public QuickSearchMoreListItem(OsmandApplication app, String name, @Nullable SearchMoreItemOnClickListener onClickListener) {
 		super(app, null);
 		this.name = name;
 		this.onClickListener = onClickListener;
@@ -58,11 +60,15 @@ public class QuickSearchMoreListItem extends QuickSearchListItem {
 	}
 
 	public void increaseRadiusOnClick() {
-		onClickListener.increaseRadiusOnClick();
+		if (onClickListener != null) {
+			onClickListener.increaseRadiusOnClick();
+		}
 	}
 
 	public void onlineSearchOnClick() {
-		onClickListener.onlineSearchOnClick();
+		if (onClickListener != null) {
+			onClickListener.onlineSearchOnClick();
+		}
 	}
 
 	public interface SearchMoreItemOnClickListener {

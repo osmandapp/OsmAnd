@@ -530,10 +530,6 @@ public abstract class OsmandPlugin {
 		return getEnabledPlugin(OsmandDevelopmentPlugin.class) != null;
 	}
 
-	public static boolean isOnlineMapsTurnedOn() {
-		return getEnabledPlugin(OsmandRasterMapsPlugin.class) != null;
-	}
-
 	public static void addMyPlacesTabPlugins(FavoritesActivity favoritesActivity, List<TabItem> mTabs, Intent intent) {
 		for (OsmandPlugin p : getEnabledPlugins()) {
 			p.addMyPlacesTab(favoritesActivity, mTabs, intent);

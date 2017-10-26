@@ -23,12 +23,12 @@ import net.osmand.plus.OsmandApplication;
 import net.osmand.plus.OsmandPlugin;
 import net.osmand.plus.R;
 import net.osmand.plus.dashboard.DashLocationFragment;
+import net.osmand.plus.rastermaps.OsmandRasterMapsPlugin;
 import net.osmand.plus.search.listitems.QuickSearchHeaderListItem;
 import net.osmand.plus.search.listitems.QuickSearchListItem;
 import net.osmand.plus.search.listitems.QuickSearchListItemType;
 import net.osmand.plus.search.listitems.QuickSearchMoreListItem;
 import net.osmand.plus.search.listitems.QuickSearchSelectAllListItem;
-import net.osmand.search.core.ObjectType;
 import net.osmand.search.core.SearchPhrase;
 import net.osmand.util.Algorithms;
 import net.osmand.util.OpeningHoursParser;
@@ -235,7 +235,8 @@ public class QuickSearchListAdapter extends ArrayAdapter<QuickSearchListItem> {
 				view.findViewById(R.id.empty_search).setVisibility(View.GONE);
 				view.findViewById(R.id.more_divider).setVisibility(View.GONE);
 			}
-			if (!alreadyInOnlineSearch() && OsmandPlugin.isOnlineMapsTurnedOn()) {
+			if (!app.getSearchUICore().getCore().getSearchSettings().alreadyInOnlineSearch()
+					&& OsmandPlugin.getEnabledPlugin(OsmandRasterMapsPlugin.class) != null) {
 				view.findViewById(R.id.online_search_row).setVisibility(View.VISIBLE);
 				view.findViewById(R.id.increase_radius_row).setOnClickListener(new View.OnClickListener() {
 					@Override
@@ -428,18 +429,6 @@ public class QuickSearchListAdapter extends ArrayAdapter<QuickSearchListItem> {
 		}
 		ViewCompat.setAccessibilityDelegate(view, accessibilityAssistant);
 		return view;
-	}
-
-	private boolean alreadyInOnlineSearch() {
-		ObjectType[] types = app.getSearchUICore().getCore().getSearchSettings().getSearchTypes();
-		if (types != null) {
-			for (ObjectType type : types) {
-				if (type == ObjectType.ONLINE_SEARCH) {
-					return true;
-				}
-			}
-		}
-		return false;
 	}
 
 	public void toggleCheckbox(int position, CheckBox ch) {
