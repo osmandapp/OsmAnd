@@ -3125,4 +3125,9 @@
 	<string name="poi_water_heater_yes">Escalfador d\'aigua: sí</string>
 	<string name="poi_water_heater_no">Escalfador d\'aigua: no</string>
 
-	</resources>
+	<string name="poi_operational_status">Estat operacional</string>
+	<string name="poi_water_supply_type">Tipus de subministrament d\'aigua</string>
+	<string name="poi_water_purification">Depuració d\'aigües</string>
+	<string name="poi_water_place_access">Accés del lloc aquàtic</string>
+
+</resources>
