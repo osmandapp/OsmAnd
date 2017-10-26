@@ -340,6 +340,10 @@ public class SearchPhrase {
 		return getSearchTypes() != null;
 	}
 
+	public boolean hasCustomSearchType(ObjectType type) {
+		return settings.hasCustomSearchType(type);
+	}
+
 	public boolean isSearchTypeAllowed(ObjectType searchType) {
 		if (getSearchTypes() == null) {
 			return true;
@@ -359,10 +363,6 @@ public class SearchPhrase {
 
 	public boolean isSortByName() {
 		return settings.isSortByName();
-	}
-
-	public boolean isInAddressSearch() {
-		return settings.isInAddressSearch();
 	}
 
 	public SearchPhrase selectWord(SearchResult res) {
