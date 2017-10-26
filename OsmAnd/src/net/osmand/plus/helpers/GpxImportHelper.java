@@ -1,18 +1,34 @@
 package net.osmand.plus.helpers;
 
-import android.app.Activity;
 import android.app.ProgressDialog;
 import android.content.DialogInterface;
 import android.content.Intent;
 import android.database.Cursor;
+import android.graphics.drawable.Drawable;
 import android.net.Uri;
 import android.os.AsyncTask;
+import android.os.Build;
+import android.os.Bundle;
 import android.os.ParcelFileDescriptor;
 import android.provider.OpenableColumns;
 import android.provider.Settings;
+import android.support.annotation.DrawableRes;
+import android.support.annotation.Nullable;
+import android.support.v4.content.ContextCompat;
 import android.support.v7.app.AlertDialog;
+import android.support.v7.app.AppCompatActivity;
+import android.view.ContextThemeWrapper;
+import android.view.LayoutInflater;
+import android.view.View;
+import android.view.ViewGroup;
+import android.view.ViewTreeObserver;
+import android.view.Window;
+import android.view.WindowManager;
+import android.widget.ImageView;
+import android.widget.TextView;
 import android.widget.Toast;
 
+import net.osmand.AndroidUtils;
 import net.osmand.IndexConstants;
 import net.osmand.data.FavouritePoint;
 import net.osmand.plus.FavouritesDbHelper;
@@ -21,6 +37,7 @@ import net.osmand.plus.GPXUtilities.GPXFile;
 import net.osmand.plus.OsmandApplication;
 import net.osmand.plus.R;
 import net.osmand.plus.activities.MapActivity;
+import net.osmand.plus.base.BottomSheetDialogFragment;
 import net.osmand.plus.myplaces.FavoritesActivity;
 import net.osmand.plus.views.OsmandMapTileView;
 
@@ -47,7 +64,7 @@ public class GpxImportHelper {
 	public static final String KML_SUFFIX = ".kml";
 	public static final String KMZ_SUFFIX = ".kmz";
 	public static final String GPX_SUFFIX = ".gpx";
-	private final Activity activity;
+	private final AppCompatActivity activity;
 	private final OsmandApplication app;
 	private final OsmandMapTileView mapView;
 	private OnGpxImportCompleteListener gpxImportCompleteListener;
@@ -56,7 +73,7 @@ public class GpxImportHelper {
 		void onComplete(boolean success);
 	}
 
-	public GpxImportHelper(final Activity activity, final OsmandApplication app, final OsmandMapTileView mapView) {
+	public GpxImportHelper(final AppCompatActivity activity, final OsmandApplication app, final OsmandMapTileView mapView) {
 		this.activity = activity;
 		this.app = app;
 		this.mapView = mapView;
@@ -538,12 +555,15 @@ public class GpxImportHelper {
 				}
 			};
 
-			new AlertDialog.Builder(activity)
-					.setTitle(R.string.shared_string_import2osmand)
-					.setMessage(R.string.import_file_favourites)
-					.setPositiveButton(R.string.shared_string_import, importFavouritesListener)
-					.setNegativeButton(R.string.shared_string_save, importFavouritesListener)
-					.show();
+			ImportGpxBottomSheetDialogFragment fragment = new ImportGpxBottomSheetDialogFragment();
+			fragment.show(activity.getSupportFragmentManager(), ImportGpxBottomSheetDialogFragment.TAG);
+
+//			new AlertDialog.Builder(activity)
+//					.setTitle(R.string.shared_string_import2osmand)
+//					.setMessage(R.string.import_file_favourites)
+//					.setPositiveButton(R.string.shared_string_import, importFavouritesListener)
+//					.setNegativeButton(R.string.shared_string_save, importFavouritesListener)
+//					.show();
 		}
 	}
 
@@ -596,5 +616,107 @@ public class GpxImportHelper {
 			return false;
 		}
 		return false;
+	}
+
+	public static class ImportGpxBottomSheetDialogFragment extends BottomSheetDialogFragment {
+
+		public static final String TAG = "ImportGpxBottomSheetDialogFragment";
+
+		private boolean portrait;
+		private boolean night;
+
+		@Nullable
+		@Override
+		public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
+			portrait = AndroidUiHelper.isOrientationPortrait(getActivity());
+			night = getMyApplication().getDaynightHelper().isNightModeForMapControls();
+			final int themeRes = night ? R.style.OsmandDarkTheme : R.style.OsmandLightTheme;
+
+			final View mainView = View.inflate(new ContextThemeWrapper(getContext(), themeRes), R.layout.fragment_import_gpx_bottom_sheet_dialog, container);
+			if (portrait) {
+				AndroidUtils.setBackground(getActivity(), mainView, night, R.drawable.bg_bottom_menu_light, R.drawable.bg_bottom_menu_dark);
+			}
+
+			if (night) {
+				((TextView) mainView.findViewById(R.id.title)).setTextColor(ContextCompat.getColor(getActivity(), R.color.ctx_menu_info_text_dark));
+			}
+
+			((ImageView) mainView.findViewById(R.id.import_as_favorites_icon)).setImageDrawable(getContentIcon(R.drawable.ic_action_fav_dark));
+			((ImageView) mainView.findViewById(R.id.import_as_gpx_icon)).setImageDrawable(getContentIcon(R.drawable.ic_action_polygom_dark));
+
+			mainView.findViewById(R.id.import_as_favorites_row).setOnClickListener(new View.OnClickListener() {
+				@Override
+				public void onClick(View view) {
+					Toast.makeText(getActivity(), "Imropt as Favorites", Toast.LENGTH_SHORT).show();
+				}
+			});
+			mainView.findViewById(R.id.import_as_gpx_row).setOnClickListener(new View.OnClickListener() {
+				@Override
+				public void onClick(View view) {
+					Toast.makeText(getActivity(), "Imropt as GPX", Toast.LENGTH_SHORT).show();
+				}
+			});
+
+			mainView.findViewById(R.id.cancel_row).setOnClickListener(new View.OnClickListener() {
+				@Override
+				public void onClick(View view) {
+					dismiss();
+				}
+			});
+
+			final int screenHeight = AndroidUtils.getScreenHeight(getActivity());
+			final int statusBarHeight = AndroidUtils.getStatusBarHeight(getActivity());
+			final int navBarHeight = AndroidUtils.getNavBarHeight(getActivity());
+
+			mainView.getViewTreeObserver().addOnGlobalLayoutListener(new ViewTreeObserver.OnGlobalLayoutListener() {
+				@Override
+				public void onGlobalLayout() {
+					final View scrollView = mainView.findViewById(R.id.import_gpx_scroll_view);
+					int scrollViewHeight = scrollView.getHeight();
+					int dividerHeight = AndroidUtils.dpToPx(getContext(), 1);
+					int cancelButtonHeight = getContext().getResources().getDimensionPixelSize(R.dimen.bottom_sheet_cancel_button_height);
+					int spaceForScrollView = screenHeight - statusBarHeight - navBarHeight - dividerHeight - cancelButtonHeight;
+					if (scrollViewHeight > spaceForScrollView) {
+						scrollView.getLayoutParams().height = spaceForScrollView;
+						scrollView.requestLayout();
+					}
+
+					if (!portrait) {
+						if (screenHeight - statusBarHeight - mainView.getHeight() >= getResources().getDimension(R.dimen.bottom_sheet_content_padding_small)) {
+							AndroidUtils.setBackground(getActivity(), mainView, night,
+									R.drawable.bg_bottom_sheet_topsides_landscape_light, R.drawable.bg_bottom_sheet_topsides_landscape_dark);
+						} else {
+							AndroidUtils.setBackground(getActivity(), mainView, night,
+									R.drawable.bg_bottom_sheet_sides_landscape_light, R.drawable.bg_bottom_sheet_sides_landscape_dark);
+						}
+					}
+
+					ViewTreeObserver obs = mainView.getViewTreeObserver();
+					if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.JELLY_BEAN) {
+						obs.removeOnGlobalLayoutListener(this);
+					} else {
+						obs.removeGlobalOnLayoutListener(this);
+					}
+				}
+			});
+
+			return mainView;
+		}
+
+		@Override
+		public void onStart() {
+			super.onStart();
+			if (!portrait) {
+				final Window window = getDialog().getWindow();
+				WindowManager.LayoutParams params = window.getAttributes();
+				params.width = getActivity().getResources().getDimensionPixelSize(R.dimen.landscape_bottom_sheet_dialog_fragment_width);
+				window.setAttributes(params);
+			}
+		}
+
+		@Override
+		protected Drawable getContentIcon(@DrawableRes int id) {
+			return getIcon(id, night ? R.color.ctx_menu_info_text_dark : R.color.on_map_icon_color);
+		}
 	}
 }

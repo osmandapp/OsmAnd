@@ -9,6 +9,9 @@
          3. All your modified/created strings are in the top of the file (to make easier find what\'s translated).
     PLEASE: Have a look at http://code.google.com/p/osmand/wiki/UIConsistency, it may really improve your and our work  :-)  Thx - Hardy
     -->
+    <string name="import_as_gpx">Import as GPX file</string>
+    <string name="import_as_favorites">Import as Favorites</string>
+    <string name="import_file">Import file</string>
 	<string name="wrong_input">Wrong input</string>
 	<string name="enter_new_name">Enter new name</string>
 	<string name="shared_string_back">Back</string>
