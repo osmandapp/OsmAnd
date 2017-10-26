@@ -72,6 +72,7 @@ import net.osmand.plus.activities.MapActivity.ShowQuickSearchMode;
 import net.osmand.plus.helpers.SearchHistoryHelper;
 import net.osmand.plus.helpers.SearchHistoryHelper.HistoryEntry;
 import net.osmand.plus.poi.PoiUIFilter;
+import net.osmand.plus.rastermaps.OsmandRasterMapsPlugin;
 import net.osmand.plus.resources.RegionAddressRepository;
 import net.osmand.plus.search.QuickSearchHelper.SearchHistoryAPI;
 import net.osmand.plus.search.listitems.QuickSearchButtonListItem;
@@ -1081,7 +1082,7 @@ public class QuickSearchDialogFragment extends DialogFragment implements OsmAndC
 				for (SearchResult sr : res.getCurrentSearchResults()) {
 					rows.add(new QuickSearchListItem(app, sr));
 				}
-				if (OsmandPlugin.isOnlineMapsTurnedOn()) {
+				if (OsmandPlugin.getEnabledPlugin(OsmandRasterMapsPlugin.class) != null) {
 					rows.add(new QuickSearchButtonListItem(app, R.drawable.ic_world_globe_dark,
 							app.getString(R.string.search_online_address), new OnClickListener() {
 						@Override

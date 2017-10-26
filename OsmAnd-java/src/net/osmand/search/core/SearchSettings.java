@@ -142,4 +142,15 @@ public class SearchSettings {
 		s.addressSearch = addressSearch;
 		return s;
 	}
+
+	public boolean alreadyInOnlineSearch() {
+		if (searchTypes != null) {
+			for (ObjectType type : searchTypes) {
+				if (type == ObjectType.ONLINE_SEARCH) {
+					return true;
+				}
+			}
+		}
+		return false;
+	}
 }
