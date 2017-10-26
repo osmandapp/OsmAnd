@@ -111,7 +111,7 @@
 	<string name="save_track_to_gpx_globally">Pіsać śled u GPX-fajł</string>
 	<string name="save_track_to_gpx_globally_descr">Ahulny zapіs miescaznachodžańnia ŭ GPX fajł moža być uklučany abo vyklučany z dapamohaj knopkі zapіsu GPX na ekranie z mapaj</string>
 	<string name="save_current_track_descr">Zachavać biahučy śled na SD zaraz</string>
-	<string name="save_current_track">Zachavać biahučy GPX śled</string>
+	<string name="save_current_track">Zachavać biahučy GPX-śled</string>
 	<string name="save_track_to_gpx">Aŭta-zapis treka padčas navihacyi</string>
 	<string name="save_track_to_gpx_descrp">GPX-trek aŭtamatyčna zachoŭvajecca ŭ tečcy Treki padčas navihacyi</string>
 	<string name="save_track_interval_globally">Іntervał zapіsu</string>
@@ -243,7 +243,7 @@ Punktaŭ maršrutu %2$s</string>
     <string name="gpx_selection_points">%1$s
 \nPunkty</string>
     <string name="gpx_selection_track">%1$s 
-Śled %2$s</string>
+\nŚled %2$s</string>
     
     <string name="gpx_file_is_empty">GPX-śled pusty</string>
     
@@ -1131,7 +1131,7 @@ Miesca parkoŭkі і čas vіdać na paneli kіravańnia OsmAnd і na vіdžecie
 	<string name="select_search_position">Pačatak:</string>
 	<string name="context_menu_item_search">Šukać navokał</string>
 	
-	<string name="shared_string_save_as_gpx">Zachavać jak novy GPX-sled</string>
+	<string name="shared_string_save_as_gpx">Zachavać jak novy GPX-śled</string>
 	<string name="route_successfully_saved_at">Maršrut paśpiachova zachavany jak \'%1$s\'.</string>
 	<string name="filename_input">Imia fajla:</string>
 	<string name="file_with_name_already_exist">Fajł z takoj nazvaj užo іsnuje.</string>
@@ -1350,7 +1350,7 @@ Miesca parkoŭkі і čas vіdać na paneli kіravańnia OsmAnd і na vіdžecie
 	<string name="no_vector_map_loaded">Viektarnyja mapy nie byli zahružany</string>
 	<string name="map_route_by_gpx">Navіhacyja z vykarystańniem GPX</string>
 	<string name="gpx_files_not_found">GPX fajły nie znojdzieny ŭ katałohu tracks</string>
-	<string name="layer_gpx_layer">GPX śled…</string>
+	<string name="layer_gpx_layer">GPX-śled…</string>
 	<string name="error_reading_gpx">Pamyłka pry čytańnі GPX dadzienych</string>
 	<string name="vector_data">Łakalnyja viektarnyja mapy</string>
 	<string name="transport_context_menu">Šukać transpart na prypynku</string>
@@ -2805,7 +2805,7 @@ U vypadku, kali vy lubіcie OsmAnd і OSM і chočacie padtrymać jaho, heta іd
     <string name="import_track">Impartavać śled</string>
     <string name="import_track_desc">Fajł %1$s nie źmiaščaje kropki šlachu, impartavać jak śled?</string>
     <string name="move_point">Pieramiascić kropku</string>
-    <string name="add_segment_to_the_track">Dadać u GPX-sled</string>
+    <string name="add_segment_to_the_track">Dadać u GPX-śled</string>
 <string name="keep_showing_on_map">Praciahvać pakazvać na mapie</string>
     <string name="exit_without_saving">Vyjsci biez zachavańnia?</string>
     <string name="do_not_use_animations">Nie ŭžyvać animacyju</string>
@@ -2862,9 +2862,9 @@ U vypadku, kali vy lubіcie OsmAnd і OSM і chočacie padtrymać jaho, heta іd
     <string name="make_round_trip_descr">Dadać kopiju pačatkovaj kropki jak miesca pryznačennia.</string>
     <string name="make_round_trip">Zrabić kruhavoje padarožža</string>
     <string name="shared_string_navigate">Pačać navihacyju</string>
-    <string name="osn_modify_dialog_error">Adbylosia vykliučennie: natatka nie byla zmienienaja</string>
-    <string name="osn_modify_dialog_title">Zmianić natatku</string>
-    <string name="context_menu_item_modify_note">Zmianić OSM-natatku</string>
+    <string name="osn_modify_dialog_error">Adbyłosia vyklučeńnie: natatka nie była źmienienaja</string>
+    <string name="osn_modify_dialog_title">Źmianić natatku</string>
+    <string name="context_menu_item_modify_note">Źmianić OSM-natatku</string>
     <string name="release_2_8">• Całkam pierapracavanyja markiery z rekamendacyjami i płanavańniem maršruta 
 \n 
 \n • Instrument vymiareńnia adlehłaściej z pryviazkaj da darohi i z zachavańniem kropak u śled 
@@ -2877,11 +2877,11 @@ U vypadku, kali vy lubіcie OsmAnd і OSM і chočacie padtrymać jaho, heta іd
     <string name="show_map">Pakazać mapu</string>
     <string name="route_is_calculated">Maršrut različany</string>
     <string name="round_trip">Padarožža</string>
-    <string name="plan_route_no_markers_toast">Vam nieabchodna dadać pa mienšaj miery adzin markier kab vykarystat hetuju funkcyju.</string>
+    <string name="plan_route_no_markers_toast">Vam nieabchodna dadać pa mienšaj miery adzin markier, kab vykarystoŭvać hetuju funkcyju.</string>
     <string name="wrong_format">Drenny farmat</string>
     <string name="wrong_input">Drenny ŭvod</string>
 	<string name="enter_new_name">Uviadzicie novaje imia</string>
 	<string name="shared_string_back">Nazad</string>
-	<string name="view">Pahladzieć</string>
+	<string name="view">Prahladzieć</string>
 	<string name="waypoints_added_to_map_markers">Kropki maršruta dadadzienyja ŭ markiery mapy</string>
 	</resources>
