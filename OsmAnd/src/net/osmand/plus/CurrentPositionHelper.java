@@ -99,7 +99,7 @@ public class CurrentPositionHelper {
 					}
 					return null;
 				}
-			}.execute((Void) null);
+			}.executeOnExecutor(AsyncTask.SERIAL_EXECUTOR, (Void) null);
 			res = true;
 		}
 		return res;
