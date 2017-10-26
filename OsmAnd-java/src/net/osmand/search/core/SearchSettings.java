@@ -143,10 +143,10 @@ public class SearchSettings {
 		return s;
 	}
 
-	public boolean alreadyInOnlineSearch() {
+	public boolean hasCustomSearchType(ObjectType type) {
 		if (searchTypes != null) {
-			for (ObjectType type : searchTypes) {
-				if (type == ObjectType.ONLINE_SEARCH) {
+			for (ObjectType t : searchTypes) {
+				if (t == type) {
 					return true;
 				}
 			}

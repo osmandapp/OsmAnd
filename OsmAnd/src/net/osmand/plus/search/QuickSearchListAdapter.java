@@ -29,6 +29,7 @@ import net.osmand.plus.search.listitems.QuickSearchListItem;
 import net.osmand.plus.search.listitems.QuickSearchListItemType;
 import net.osmand.plus.search.listitems.QuickSearchMoreListItem;
 import net.osmand.plus.search.listitems.QuickSearchSelectAllListItem;
+import net.osmand.search.core.ObjectType;
 import net.osmand.search.core.SearchPhrase;
 import net.osmand.util.Algorithms;
 import net.osmand.util.OpeningHoursParser;
@@ -241,7 +242,7 @@ public class QuickSearchListAdapter extends ArrayAdapter<QuickSearchListItem> {
 					((QuickSearchMoreListItem) listItem).increaseRadiusOnClick();
 				}
 			});
-			if (!app.getSearchUICore().getCore().getSearchSettings().alreadyInOnlineSearch()
+			if (!app.getSearchUICore().getCore().getSearchSettings().hasCustomSearchType(ObjectType.ONLINE_SEARCH)
 					&& OsmandPlugin.getEnabledPlugin(OsmandRasterMapsPlugin.class) != null) {
 				view.findViewById(R.id.online_search_row).setVisibility(View.VISIBLE);
 				view.findViewById(R.id.online_search_row).setOnClickListener(new View.OnClickListener() {
