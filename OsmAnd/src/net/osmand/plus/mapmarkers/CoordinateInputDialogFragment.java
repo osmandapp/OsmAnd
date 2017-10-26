@@ -79,6 +79,7 @@ public class CoordinateInputDialogFragment extends DialogFragment implements Osm
 	private static final String LONGITUDE_LABEL = "longitude";
 	private static final String NAME_LABEL = "name";
 
+	private OnMapMarkersSavedListener listener;
 	private List<MapMarker> mapMarkers = new ArrayList<>();
 	private CoordinateInputAdapter adapter;
 	private boolean lightTheme;
@@ -93,6 +94,10 @@ public class CoordinateInputDialogFragment extends DialogFragment implements Osm
 	private boolean locationUpdateStarted;
 	private boolean compassUpdateAllowed = true;
 	private MapMarkersHelper mapMarkersHelper;
+
+	public void setListener(OnMapMarkersSavedListener listener) {
+		this.listener = listener;
+	}
 
 	@Override
 	public void onCreate(Bundle savedInstanceState) {
@@ -301,6 +306,9 @@ public class CoordinateInputDialogFragment extends DialogFragment implements Osm
 
 	private void saveMarkers() {
 		mapMarkersHelper.addMarkers(mapMarkers);
+		if (listener != null) {
+			listener.onMapMarkersSaved();
+		}
 	}
 
 	private void registerTextFieldBoxes() {
@@ -583,20 +591,6 @@ public class CoordinateInputDialogFragment extends DialogFragment implements Osm
 		return (OsmandApplication) getActivity().getApplication();
 	}
 
-	public static boolean showInstance(@NonNull MapActivity mapActivity) {
-		try {
-			if (mapActivity.isActivityDestroyed()) {
-				return false;
-			}
-			CoordinateInputDialogFragment fragment = new CoordinateInputDialogFragment();
-			fragment.setRetainInstance(true);
-			fragment.show(mapActivity.getSupportFragmentManager(), TAG);
-			return true;
-		} catch (RuntimeException e) {
-			return false;
-		}
-	}
-
 	@Override
 	public void updateLocation(Location location) {
 		boolean newLocation = this.location == null && location != null;
@@ -691,6 +685,10 @@ public class CoordinateInputDialogFragment extends DialogFragment implements Osm
 
 			return convertView;
 		}
+	}
+
+	public interface OnMapMarkersSavedListener {
+		void onMapMarkersSaved();
 	}
 
 }
