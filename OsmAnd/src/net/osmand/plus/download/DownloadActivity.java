@@ -784,7 +784,7 @@ public class DownloadActivity extends AbstractDownloadActivity implements Downlo
 				newDownloadIndexes();
 			}
 		};
-		task.executeOnExecutor(AsyncTask.THREAD_POOL_EXECUTOR);
+		task.executeOnExecutor(AsyncTask.SERIAL_EXECUTOR);
 	}
 
 	
