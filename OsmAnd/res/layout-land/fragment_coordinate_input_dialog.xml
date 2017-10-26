@@ -1,0 +1,157 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout
+	xmlns:android="http://schemas.android.com/apk/res/android"
+	xmlns:osmand="http://schemas.android.com/apk/res-auto"
+	android:layout_width="match_parent"
+	android:layout_height="match_parent"
+	android:orientation="vertical">
+
+	<android.support.design.widget.AppBarLayout
+		android:layout_width="match_parent"
+		android:layout_height="wrap_content"
+		android:background="@color/map_widget_blue"
+		android:orientation="vertical">
+
+		<android.support.v7.widget.Toolbar
+			android:id="@+id/coordinate_input_toolbar"
+			android:layout_width="match_parent"
+			android:layout_height="wrap_content"
+			android:paddingBottom="12dp"
+			android:paddingTop="12dp"
+			osmand:contentInsetLeft="54dp"
+			osmand:contentInsetStart="54dp">
+
+			<LinearLayout
+				android:layout_width="match_parent"
+				android:layout_height="wrap_content"
+				android:orientation="horizontal"
+				android:paddingLeft="16dp"
+				android:paddingRight="16dp">
+
+				<net.osmand.plus.OsmandTextFieldBoxes
+					android:id="@+id/latitude_box"
+					android:layout_width="0dp"
+					android:layout_height="wrap_content"
+					android:layout_weight="1"
+					osmand:labelText="@string/navigate_point_latitude">
+
+					<studio.carbonylgroup.textfieldboxes.ExtendedEditText
+						android:id="@+id/latitude_edit_text"
+						android:layout_width="match_parent"
+						android:layout_height="wrap_content"
+						android:inputType="number"/>
+
+				</net.osmand.plus.OsmandTextFieldBoxes>
+
+				<View
+					android:layout_width="12dp"
+					android:layout_height="match_parent"/>
+
+				<net.osmand.plus.OsmandTextFieldBoxes
+					android:id="@+id/longitude_box"
+					android:layout_width="0dp"
+					android:layout_height="wrap_content"
+					android:layout_weight="1"
+					osmand:labelText="@string/navigate_point_longitude">
+
+					<studio.carbonylgroup.textfieldboxes.ExtendedEditText
+						android:id="@+id/longitude_edit_text"
+						android:layout_width="match_parent"
+						android:layout_height="wrap_content"
+						android:inputType="number"/>
+
+				</net.osmand.plus.OsmandTextFieldBoxes>
+
+				<View
+					android:layout_width="12dp"
+					android:layout_height="match_parent"/>
+
+				<net.osmand.plus.OsmandTextFieldBoxes
+					android:id="@+id/name_box"
+					android:layout_width="0dp"
+					android:layout_height="wrap_content"
+					android:layout_weight="1"
+					osmand:labelText="@string/shared_string_name">
+
+					<studio.carbonylgroup.textfieldboxes.ExtendedEditText
+						android:id="@+id/name_edit_text"
+						android:layout_width="match_parent"
+						android:layout_height="wrap_content"
+						android:hint="@string/access_hint_enter_name"
+						android:inputType="text"/>
+
+				</net.osmand.plus.OsmandTextFieldBoxes>
+
+				<View
+					android:layout_width="10dp"
+					android:layout_height="match_parent"/>
+
+				<ImageButton
+					android:id="@+id/options_button"
+					style="@style/Widget.AppCompat.ActionButton"
+					android:layout_width="48dp"
+					android:layout_height="48dp"
+					android:src="@drawable/ic_overflow_menu_white"/>
+
+			</LinearLayout>
+
+		</android.support.v7.widget.Toolbar>
+
+	</android.support.design.widget.AppBarLayout>
+
+	<LinearLayout
+		android:layout_width="match_parent"
+		android:layout_height="match_parent"
+		android:orientation="horizontal">
+
+		<android.support.v7.widget.RecyclerView
+			android:id="@+id/markers_recycler_view"
+			android:layout_weight="0.55"
+			android:layout_width="0dp"
+			android:layout_height="match_parent"
+			android:clipToPadding="false"
+			android:padding="8dp"/>
+
+		<LinearLayout
+			android:layout_weight="0.45"
+			android:id="@+id/keyboard_layout"
+			android:layout_width="0dp"
+			android:layout_height="match_parent"
+			android:orientation="vertical">
+
+			<GridView
+				android:id="@+id/keyboard_grid_view"
+				android:layout_width="match_parent"
+				android:layout_height="0dp"
+				android:layout_weight="1"
+				android:background="?attr/dashboard_divider"
+				android:horizontalSpacing="1dp"
+				android:numColumns="3"
+				android:stretchMode="columnWidth"
+				android:verticalSpacing="1dp"/>
+
+			<View
+				android:id="@+id/keyboard_divider"
+				android:layout_width="match_parent"
+				android:layout_height="1dp"
+				android:background="?attr/dashboard_divider"/>
+
+			<android.support.v7.widget.AppCompatTextView
+				android:id="@+id/add_marker_button"
+				android:layout_width="match_parent"
+				android:layout_height="52dp"
+				android:ellipsize="end"
+				android:gravity="center"
+				android:maxLines="1"
+				android:paddingBottom="6dp"
+				android:paddingTop="6dp"
+				android:text="@string/shared_string_add"
+				android:textAllCaps="true"
+				android:textColor="?attr/keyboard_item_text_color"
+				android:textSize="@dimen/default_list_text_size"/>
+
+		</LinearLayout>
+
+	</LinearLayout>
+
+</LinearLayout>

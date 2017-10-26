@@ -49,6 +49,7 @@ import net.osmand.plus.R;
 import net.osmand.plus.activities.MapActivity;
 import net.osmand.plus.base.MapViewTrackingUtilities;
 import net.osmand.plus.dashboard.DashLocationFragment;
+import net.osmand.plus.helpers.AndroidUiHelper;
 import net.osmand.plus.mapmarkers.adapters.CoordinateInputAdapter;
 import net.osmand.util.MapUtils;
 
@@ -94,6 +95,7 @@ public class CoordinateInputDialogFragment extends DialogFragment implements Osm
 	private boolean locationUpdateStarted;
 	private boolean compassUpdateAllowed = true;
 	private MapMarkersHelper mapMarkersHelper;
+	private boolean orientationPortrait;
 
 	public void setListener(OnMapMarkersSavedListener listener) {
 		this.listener = listener;
@@ -106,8 +108,6 @@ public class CoordinateInputDialogFragment extends DialogFragment implements Osm
 		lightTheme = app.getSettings().OSMAND_THEME.get() == OsmandSettings.OSMAND_LIGHT_THEME;
 		int themeId = lightTheme ? R.style.OsmandLightTheme : R.style.OsmandDarkTheme;
 		setStyle(STYLE_NO_FRAME, themeId);
-		iconsCache = app.getIconsCache();
-		mapMarkersHelper = app.getMapMarkersHelper();
 
 		CoordinateInputBottomSheetDialogFragment fragment = new CoordinateInputBottomSheetDialogFragment();
 		fragment.setListener(createCoordinateInputFormatChangeListener());
@@ -131,6 +131,9 @@ public class CoordinateInputDialogFragment extends DialogFragment implements Osm
 	public View onCreateView(LayoutInflater inflater, @Nullable ViewGroup container, @Nullable Bundle savedInstanceState) {
 		mainView = inflater.inflate(R.layout.fragment_coordinate_input_dialog, container);
 		final MapActivity mapActivity = getMapActivity();
+		iconsCache = getMyApplication().getIconsCache();
+		mapMarkersHelper = getMyApplication().getMapMarkersHelper();
+		orientationPortrait = AndroidUiHelper.isOrientationPortrait(mapActivity);
 
 		Fragment coordinateInputBottomSheetDialogFragment = mapActivity.getSupportFragmentManager().findFragmentByTag(CoordinateInputBottomSheetDialogFragment.TAG);
 		if (coordinateInputBottomSheetDialogFragment != null) {
@@ -178,7 +181,7 @@ public class CoordinateInputDialogFragment extends DialogFragment implements Osm
 			public void onClick(View view) {
 				View focusedView = getDialog().getCurrentFocus();
 				if (focusedView != null) {
-					if (isOsmandKeyboardCurrentlyVisible()) {
+					if (orientationPortrait && isOsmandKeyboardCurrentlyVisible()) {
 						changeOsmandKeyboardVisibility(false);
 					}
 					AndroidUtils.showSoftKeyboard(focusedView);
@@ -232,7 +235,9 @@ public class CoordinateInputDialogFragment extends DialogFragment implements Osm
 		});
 
 		View keyboardLayout = mainView.findViewById(R.id.keyboard_layout);
-		AndroidUtils.setBackground(mapActivity, keyboardLayout, !lightTheme, R.drawable.bg_bottom_menu_light, R.drawable.bg_bottom_menu_dark);
+		if (orientationPortrait) {
+			AndroidUtils.setBackground(mapActivity, keyboardLayout, !lightTheme, R.drawable.bg_bottom_menu_light, R.drawable.bg_bottom_menu_dark);
+		}
 
 		String[] keyboardItems = new String[] { "1", "2", "3",
 				"4", "5", "6",
@@ -266,19 +271,23 @@ public class CoordinateInputDialogFragment extends DialogFragment implements Osm
 			}
 		});
 
-		final ImageView showHideKeyboardIcon = (ImageView) mainView.findViewById(R.id.show_hide_keyboard_icon);
-		showHideKeyboardIcon.setImageDrawable(iconsCache.getThemedIcon(R.drawable.ic_action_arrow_down));
-		showHideKeyboardIcon.setOnClickListener(new View.OnClickListener() {
-			@Override
-			public void onClick(View view) {
-				boolean isCurrentlyVisible = isOsmandKeyboardCurrentlyVisible();
-				View focusedView = getDialog().getCurrentFocus();
-				if (focusedView != null && !isCurrentlyVisible) {
-					AndroidUtils.hideSoftKeyboard(getActivity(), focusedView);
+		if (orientationPortrait) {
+			final ImageView showHideKeyboardIcon = (ImageView) mainView.findViewById(R.id.show_hide_keyboard_icon);
+			showHideKeyboardIcon.setImageDrawable(iconsCache.getThemedIcon(R.drawable.ic_action_arrow_down));
+			showHideKeyboardIcon.setOnClickListener(new View.OnClickListener() {
+				@Override
+				public void onClick(View view) {
+					boolean isCurrentlyVisible = isOsmandKeyboardCurrentlyVisible();
+					View focusedView = getDialog().getCurrentFocus();
+					if (focusedView != null && !isCurrentlyVisible) {
+						AndroidUtils.hideSoftKeyboard(getActivity(), focusedView);
+					}
+					if (orientationPortrait) {
+						changeOsmandKeyboardVisibility(!isCurrentlyVisible);
+					}
 				}
-				changeOsmandKeyboardVisibility(!isCurrentlyVisible);
-			}
-		});
+			});
+		}
 
 		return mainView;
 	}
@@ -315,7 +324,7 @@ public class CoordinateInputDialogFragment extends DialogFragment implements Osm
 		View.OnTouchListener textFieldBoxOnTouchListener = new View.OnTouchListener() {
 			@Override
 			public boolean onTouch(View view, MotionEvent motionEvent) {
-				if (!useOsmandKeyboard && isOsmandKeyboardCurrentlyVisible()) {
+				if (orientationPortrait && !useOsmandKeyboard && isOsmandKeyboardCurrentlyVisible()) {
 					changeOsmandKeyboardVisibility(false);
 				}
 				return false;
@@ -397,7 +406,7 @@ public class CoordinateInputDialogFragment extends DialogFragment implements Osm
 					editText.setInputType(inType);              // Restore input type
 					return true; // Consume touch event
 				} else {
-					if (isOsmandKeyboardCurrentlyVisible()) {
+					if (orientationPortrait && isOsmandKeyboardCurrentlyVisible()) {
 						changeOsmandKeyboardVisibility(false);
 					}
 					return false;
@@ -519,7 +528,7 @@ public class CoordinateInputDialogFragment extends DialogFragment implements Osm
 			@Override
 			public void onKeyboardChanged(boolean useOsmandKeyboard) {
 				CoordinateInputDialogFragment.this.useOsmandKeyboard = useOsmandKeyboard;
-				if (!useOsmandKeyboard && isOsmandKeyboardCurrentlyVisible()) {
+				if (orientationPortrait && !useOsmandKeyboard && isOsmandKeyboardCurrentlyVisible()) {
 					changeOsmandKeyboardVisibility(false);
 				}
 				changeKeyboardInBoxes();
@@ -674,6 +683,12 @@ public class CoordinateInputDialogFragment extends DialogFragment implements Osm
 				convertView = LayoutInflater.from(getContext()).inflate(R.layout.input_coordinate_keyboard_item, parent, false);
 				convertView.setBackgroundResource(lightTheme ? R.drawable.keyboard_item_light_bg : R.drawable.keyboard_item_dark_bg);
 			}
+			if (!orientationPortrait) {
+				int keyboardViewHeight = mainView.findViewById(R.id.keyboard_grid_view).getMeasuredHeight();
+				int dividerHeight = AndroidUtils.dpToPx(getContext(), 1);
+				int spaceForKeys = keyboardViewHeight - 3 * dividerHeight;
+				convertView.setMinimumHeight(spaceForKeys / 4);
+			}
 			TextView keyboardItem = (TextView) convertView.findViewById(R.id.keyboard_item);
 			if (position == CLEAR_BUTTON_POSITION) {
 				TextViewCompat.setAutoSizeTextTypeWithDefaults(keyboardItem, TextViewCompat.AUTO_SIZE_TEXT_TYPE_NONE);
@@ -687,7 +702,7 @@ public class CoordinateInputDialogFragment extends DialogFragment implements Osm
 		}
 	}
 
-	public interface OnMapMarkersSavedListener {
+	interface OnMapMarkersSavedListener {
 		void onMapMarkersSaved();
 	}
 
