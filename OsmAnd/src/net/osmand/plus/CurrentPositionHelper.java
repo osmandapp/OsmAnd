@@ -25,6 +25,8 @@ import java.util.ArrayList;
 import java.util.Collections;
 import java.util.HashMap;
 import java.util.List;
+import java.util.concurrent.ExecutorService;
+import java.util.concurrent.Executors;
 
 public class CurrentPositionHelper {
 	
@@ -36,6 +38,7 @@ public class CurrentPositionHelper {
 	private ApplicationMode am;
 	private List<BinaryMapReaderResource> usedReaders = new ArrayList<>();
 	private static final org.apache.commons.logging.Log log = PlatformUtil.getLog(CurrentPositionHelper.class);
+	private ExecutorService singleThreadExecutor = Executors.newSingleThreadExecutor();
 
 	public CurrentPositionHelper(OsmandApplication app) {
 		this.app = app;
@@ -99,7 +102,7 @@ public class CurrentPositionHelper {
 					}
 					return null;
 				}
-			}.executeOnExecutor(AsyncTask.SERIAL_EXECUTOR, (Void) null);
+			}.executeOnExecutor(singleThreadExecutor, (Void) null);
 			res = true;
 		}
 		return res;
