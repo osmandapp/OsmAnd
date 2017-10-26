@@ -327,10 +327,17 @@ public class QuickSearchDialogFragment extends DialogFragment implements OsmAndC
 						} else if (searchPhrase.isNoSelectedType() || searchPhrase.isLastWord(POI_TYPE)) {
 							PoiUIFilter filter;
 							if (searchPhrase.isNoSelectedType()) {
-								filter = app.getPoiFilters().getSearchByNamePOIFilter();
-								if (!Algorithms.isEmpty(searchPhrase.getUnknownSearchWord())) {
+								if (isOnlineSearch() && !Algorithms.isEmpty(searchPhrase.getUnknownSearchWord())) {
+									app.getPoiFilters().resetNominatimFilters();
+									filter = app.getPoiFilters().getNominatimPOIFilter();
 									filter.setFilterByName(searchPhrase.getUnknownSearchWord());
 									filter.clearCurrentResults();
+								} else {
+									filter = app.getPoiFilters().getSearchByNamePOIFilter();
+									if (!Algorithms.isEmpty(searchPhrase.getUnknownSearchWord())) {
+										filter.setFilterByName(searchPhrase.getUnknownSearchWord());
+										filter.clearCurrentResults();
+									}
 								}
 							} else if (searchPhrase.getLastSelectedWord().getResult().object instanceof AbstractPoiType) {
 								if (searchPhrase.isNoSelectedType()) {
@@ -527,15 +534,19 @@ public class QuickSearchDialogFragment extends DialogFragment implements OsmAndC
 						updateClearButtonVisibility(true);
 						boolean textEmpty = newQueryText.length() == 0;
 						updateTabbarVisibility(textEmpty);
-						if (textEmpty && addressSearch) {
-							startAddressSearch();
-						}
-						if (textEmpty && poiFilterApplied) {
-							poiFilterApplied = false;
-							reloadCategories();
-							if (fabVisible) {
-								fabVisible = false;
-								updateFab();
+						if (textEmpty) {
+							if (addressSearch) {
+								startAddressSearch();
+							} else if (isOnlineSearch()) {
+								restoreSearch();
+							}
+							if (poiFilterApplied) {
+								poiFilterApplied = false;
+								reloadCategories();
+								if (fabVisible) {
+									fabVisible = false;
+									updateFab();
+								}
 							}
 						}
 						if (!searchQuery.equalsIgnoreCase(newQueryText)) {
@@ -980,18 +991,23 @@ public class QuickSearchDialogFragment extends DialogFragment implements OsmAndC
 	}
 
 	private void updateTabbarVisibility(boolean show) {
-		if (show && tabsView.getVisibility() == View.GONE) {
+		if (show) {
 			tabToolbarView.setVisibility(View.VISIBLE);
 			buttonToolbarView.setVisibility(View.GONE);
 			tabsView.setVisibility(View.VISIBLE);
 			searchView.setVisibility(View.GONE);
-		} else if (!show && tabsView.getVisibility() == View.VISIBLE) {
+		} else {
 			tabToolbarView.setVisibility(View.GONE);
-			buttonToolbarView.setVisibility(searchUICore.getSearchSettings().isCustomSearch()
-					? View.GONE : View.VISIBLE);
+			buttonToolbarView.setVisibility(
+					(isOnlineSearch() && getText().length() > 0)
+							|| !searchUICore.getSearchSettings().isCustomSearch() ? View.VISIBLE : View.GONE);
 			tabsView.setVisibility(View.GONE);
 			searchView.setVisibility(View.VISIBLE);
 		}
+	}
+
+	private boolean isOnlineSearch() {
+		return searchUICore.getSearchSettings().hasCustomSearchType(ObjectType.ONLINE_SEARCH);
 	}
 
 	private boolean isSearchViewVisible() {
@@ -1087,7 +1103,7 @@ public class QuickSearchDialogFragment extends DialogFragment implements OsmAndC
 							app.getString(R.string.search_online_address), new OnClickListener() {
 						@Override
 						public void onClick(View view) {
-							startOnlinePoiSearch();
+							startOnlineSearch();
 							mainSearchFragment.getAdapter().clear();
 							updateTabbarVisibility(false);
 							openKeyboard();
@@ -1335,21 +1351,20 @@ public class QuickSearchDialogFragment extends DialogFragment implements OsmAndC
 		}
 	}
 
-	private void startOnlinePoiSearch() {
+	private void startOnlineSearch() {
 		SearchSettings settings = searchUICore.getSearchSettings()
 				.setSearchTypes(ObjectType.ONLINE_SEARCH)
 				.setEmptyQueryAllowed(false)
-				.setAddressSearch(false)
-				.setSortByName(true)
+				.setSortByName(false)
 				.setRadiusLevel(1);
 
 		searchUICore.updateSettings(settings);
+		setResultCollection(null);
 	}
 
 	private void startAddressSearch() {
 		SearchSettings settings = searchUICore.getSearchSettings()
 				.setEmptyQueryAllowed(true)
-				.setAddressSearch(true)
 				.setSortByName(false)
 				.setSearchTypes(ObjectType.CITY, ObjectType.VILLAGE, ObjectType.POSTCODE,
 						ObjectType.HOUSE, ObjectType.STREET_INTERSECTION, ObjectType.STREET,
@@ -1362,7 +1377,6 @@ public class QuickSearchDialogFragment extends DialogFragment implements OsmAndC
 	private void startCitySearch() {
 		SearchSettings settings = searchUICore.getSearchSettings()
 				.setEmptyQueryAllowed(true)
-				.setAddressSearch(true)
 				.setSortByName(true)
 				.setSearchTypes(ObjectType.CITY, ObjectType.VILLAGE)
 				.setRadiusLevel(1);
@@ -1373,7 +1387,6 @@ public class QuickSearchDialogFragment extends DialogFragment implements OsmAndC
 	private void startNearestCitySearch() {
 		SearchSettings settings = searchUICore.getSearchSettings()
 				.setEmptyQueryAllowed(true)
-				.setAddressSearch(true)
 				.setSortByName(false)
 				.setSearchTypes(ObjectType.CITY)
 				.setRadiusLevel(1);
@@ -1385,7 +1398,6 @@ public class QuickSearchDialogFragment extends DialogFragment implements OsmAndC
 		SearchSettings settings = searchUICore.getSearchSettings();
 		storedOriginalLocation = settings.getOriginalLocation();
 		settings = settings.setEmptyQueryAllowed(true)
-				.setAddressSearch(true)
 				.setSortByName(false)
 				.setSearchTypes(ObjectType.CITY)
 				.setOriginalLocation(latLon)
@@ -1398,7 +1410,6 @@ public class QuickSearchDialogFragment extends DialogFragment implements OsmAndC
 		SearchSettings settings = searchUICore.getSearchSettings()
 				.setSearchTypes(ObjectType.POSTCODE)
 				.setEmptyQueryAllowed(false)
-				.setAddressSearch(true)
 				.setSortByName(true)
 				.setRadiusLevel(1);
 
@@ -1410,7 +1421,6 @@ public class QuickSearchDialogFragment extends DialogFragment implements OsmAndC
 				.resetSearchTypes()
 				.setEmptyQueryAllowed(false)
 				.setSortByName(false)
-				.setAddressSearch(false)
 				.setRadiusLevel(1);
 
 		searchUICore.updateSettings(settings);
@@ -1726,7 +1736,7 @@ public class QuickSearchDialogFragment extends DialogFragment implements OsmAndC
 
 						@Override
 						public void onlineSearchOnClick() {
-							startOnlinePoiSearch();
+							startOnlineSearch();
 							mainSearchFragment.getAdapter().clear();
 							updateTabbarVisibility(false);
 							runCoreSearch(searchQuery, false, true);
