@@ -344,8 +344,8 @@ public class GPXUtilities {
 			double totalSpeedSum = 0;
 			points = 0;
 
-			double channelThresMin = 5;            // Minimum oscillation amplitude considered as noise for Up/Down analysis
-			double channelThres = channelThresMin; // Actual oscillation amplitude considered as noise, try depedency on current hdop/getAccuracy
+			double channelThresMin = 10;           // Minimum oscillation amplitude considered as relevant or as above noise for accumulated Ascent/Descent analysis
+			double channelThres = channelThresMin; // Actual oscillation amplitude considered as above noise (accomodates depedency on current VDOP/getAccuracy if desired)
 			double channelBase;
 			double channelTop;
 			double channelBottom;
@@ -424,8 +424,11 @@ public class GPXUtilities {
 						hasSpeedInTrack = true;
 					}
 
-					// Trend channel approach for elevation gain/loss, Hardy 2015-09-22
-					// Self-adjusting turnarund threshold added for testing 2015-09-25: Current rule is now: "All up/down trends of amplitude <X are ignored to smooth the noise, where X is the maximum observed DOP value of any point which contributed to the current trend (but at least 5 m as the minimum noise threshold)".
+					// Trend channel analysis for elevation gain/loss, Hardy 2015-09-22:
+					// - Detect consecutive trend channels: Only net elevation changes per each trend channel (i.e. between turnarounds) are used to accumulate the Ascent/Descent values.
+					// - Trend turnaround detection: Ignore oscillations of amplitude < channelThresMin, this sests the relevance threshold, and masks what is considered as noise
+					// - REMOVED for now: To supress marginal measurements, relax from channelThresMin to channelThres based on the maximum VDOP of any point which contributed to the current trend. Good assumption is VDOP=2*HSOP (accounts for invisibility of lower hemisphere satellites).
+					// - TODO: Perform the channel evaluation with Low Pass Filter (LPF) smoothed ele data instead of with the raw ele data
 					if (!Double.isNaN(point.ele)) {
 						// Init channel
 						if (channelBase == 99999) {
@@ -437,14 +440,14 @@ public class GPXUtilities {
 						// Channel maintenance
 						if (point.ele > channelTop) {
 							channelTop = point.ele;
-							if (!Double.isNaN(point.hdop)) {
-								channelThres = Math.max(channelThres, 2.0 * point.hdop);  //Use empirical 2*getAccuracy(vertical), this better serves very flat tracks or high dop tracks
-							}
+							//if (!Double.isNaN(point.hdop)) {
+							//	channelThres = Math.max(channelThres, 2.0 * point.hdop);  //Use empirical 2*getAccuracy(vertical), this better serves very flat tracks or high dop tracks
+							//}
 						} else if (point.ele < channelBottom) {
 							channelBottom = point.ele;
-							if (!Double.isNaN(point.hdop)) {
-								channelThres = Math.max(channelThres, 2.0 * point.hdop);
-							}
+							//if (!Double.isNaN(point.hdop)) {
+							//	channelThres = Math.max(channelThres, 2.0 * point.hdop);
+							//}
 						}
 						// Turnaround (breakout) detection
 						if ((point.ele <= (channelTop - channelThres)) && (climb == true)) {
