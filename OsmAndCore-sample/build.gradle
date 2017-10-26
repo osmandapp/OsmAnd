@@ -2,7 +2,7 @@ apply plugin: 'com.android.application'
 
 android {
     compileSdkVersion 26
-    buildToolsVersion "26.0.1"
+    buildToolsVersion "26.0.2"
 
     dexOptions {
         jumboMode true
@@ -38,28 +38,36 @@ android {
         }
     }
 
+    flavorDimensions "abi"
+
     productFlavors {
         x86 {
+            dimension "abi"
             ndk {
                 abiFilter "x86"
             }
         }
         mips {
+            dimension "abi"
             ndk {
                 abiFilter "mips"
             }
         }
         armv7 {
+            dimension "abi"
             ndk {
                 abiFilter "armeabi-v7a"
             }
         }
         armv5 {
+            dimension "abi"
             ndk {
                 abiFilter "armeabi"
             }
         }
-        fat
+        fat {
+            dimension "abi"
+        }
     }
 
     buildTypes {
