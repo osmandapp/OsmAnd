@@ -971,7 +971,7 @@
     <string name="loading_postcodes">Laster postnummer…</string>
     <string name="loading_data">Laster data…</string>
 	
-	<string name="srtm_plugin_description">Dette programtillegget gir både et overlaglag med koter og et lag med relieffskygger som kan vises oppå standardkartene til OsmAnd. Denne funksjonen vil bli satt stor pris på av idrettsutøvere, turgåere og enhver som er interessert i relieff-strukturen til et landskap. (Merk at koter og/eller relieff-data er separate tilleggsnedlastinger tilgjengelige etter aktivering av programtillegget.) 
+	<string name="srtm_plugin_description">Dette programtillegget gir både et lag med koter og et lag med relieffskygger som kan vises oppå standardkartene til OsmAnd. Denne funksjonen vil bli satt stor pris på av idrettsutøvere, turgåere og enhver som er interessert i relieff-strukturen til et landskap. (Merk at koter og/eller relieff-data er separate tilleggsnedlastinger tilgjengelige etter aktivering av programtillegget.) 
 \n 
 \nDe globale dataene (mellom 70 grader nord og 70 grader sør) er basert på målinger av SRTM (Shuttle Radar Topography Mission) og ASTER (Advanced Spaceborne Thermal Emission and Reflection Radiometer), et bildeinstrument ombord på Terra, flaggskipsatellitten til NASA\'s Earth Observing System. ASTER er et samarbeid mellom NASA, Japans finansdepartement, Trade and Industry (METI), og Japan Space Systems (J-spacesystems).</string>
 
@@ -1126,7 +1126,7 @@
     <string name="map_overlay_descr">Velg overleggskart</string>
     <string name="audionotes_plugin_name">Audio/video-notater</string>
     <string name="osm_settings">OSM-redigering</string>
-	<string name="osmand_srtm_long_description_1000_chars">Dette programtillegget gir både et overlag med koter og et lag med relieffskygger som kan vises oppå standardkartene til OsmAnd. Denne funksjonen vil bli satt stor pris på av idrettsutøvere, turgåere og enhver som er interessert i relieff-strukturen til et landskap. 
+	<string name="osmand_srtm_long_description_1000_chars">Dette programtillegget gir både et lag med koter og et lag med relieffskygger som kan vises oppå standardkartene til OsmAnd. Denne funksjonen vil bli satt stor pris på av idrettsutøvere, turgåere og enhver som er interessert i relieff-strukturen til et landskap. 
 \n 
 \nDe globale dataene (mellom 70 grader nord og 70 grader sør) er basert på målinger av SRTM (Shuttle Radar Topography Mission) og ASTER (Advanced Spaceborne Thermal Emission and Reflection Radiometer), et bildeinstrument ombord på Terra, flaggskipsatellitten til NASA\'s Earth Observing System. ASTER er et samarbeid mellom NASA, Japans finansdepartement, Trade and Industry (METI), og Japan Space Systems (J-spacesystems).</string>
     <string name="plugin_ski_name">Skikartvisning</string>
@@ -1871,7 +1871,7 @@
     <string name="gpx_no_tracks_title">Du har ingen spor enda</string>
     <string name="gpx_no_tracks_title_folder">Legg til spor i mappen</string>
     <string name="gpx_add_track">Legg til spor</string>
-    <string name="trip_rec_notification_settings">Turopptak (ingen data)</string>
+    <string name="trip_rec_notification_settings">Aktiver hurtigstart av opptak</string>
     <string name="trip_rec_notification_settings_desc">Vis et systemvarsel slik at du kan starte turopptak</string>
     <string name="save_track_min_speed">Minimumshastighet for logging</string>
     <string name="save_track_min_speed_descr">Filter: Still inn minimumshastighet for at et punkt skal logges</string>
@@ -2181,7 +2181,7 @@ Representerer området: %1$s x %2$s</string>
     <string name="quick_action_add_destination">Legg til reisemål</string>
     <string name="quick_action_replace_destination">Erstatt reisemål</string>
     <string name="quick_action_add_first_intermediate">Legg til første mellomliggende punkt</string>
-    <string name="no_overlay">Ingen overlag</string>
+    <string name="no_overlay">Ingen overlegg</string>
     <string name="no_underlay">Ingen underlag</string>
     <string name="quick_action_map_underlay_switch">Kartunderlaget er endret til \"%s\".</string>
     <string name="quick_action_map_underlay">Endre kartunderlag</string>
@@ -2289,7 +2289,7 @@ Representerer området: %1$s x %2$s</string>
     <string name="shared_string_reset">Tilbakestill</string>
     <string name="show_on_map_after_saving">Vis på kart etter lagring</string>
     <string name="measurement_tool_action_bar">Se gjennom kartet og legg til punkter</string>
-    <string name="measurement_tool">Mål avstand</string>
+    <string name="measurement_tool">Avstandsmåler</string>
     <string name="quick_action_show_navigation_finish_dialog">Vis dialog ved navigeringsslutt</string>
     <string name="quick_action_start_stop_navigation">Start/stopp navigering</string>
     <string name="map_widget_ruler_control">Radiusmåler</string>
@@ -2366,7 +2366,7 @@ Representerer området: %1$s x %2$s</string>
     <string name="routing_attr_relief_smoothness_factor_name">Velg preferanse for høydeforskjeller</string>
     <string name="move_all_to_history">Flytt alle til historikk</string>
     <string name="build_route">Lag rute</string>
-    <string name="show_direction">Vis retning</string>
+    <string name="show_direction">Avstandsangivelse</string>
     <string name="sort_by">Sorter etter</string>
     <string name="marker_options">Markøralternativer</string>
     <string name="shared_string_paused">I pausemodus</string>
@@ -2379,7 +2379,7 @@ Representerer området: %1$s x %2$s</string>
     <string name="shared_string_markers">Markører</string>
     <string name="coordinates_format">Koordinatformat</string>
     <string name="use_system_keyboard">Bruk systemets tastatur</string>
-    <string name="fast_coordinates_input_descr">Velg format for koordinatinntasting. Du kan alltid endre det ved å trykke Valg.</string>
+    <string name="fast_coordinates_input_descr">Velg format for koordinatinntasting. Du kan alltid endre det ved å trykke Alternativer.</string>
     <string name="fast_coordinates_input">Rask koordinatinntasting</string>
     <string name="routing_attr_avoid_ice_roads_fords_name">Unngå isette veier, vadesteder</string>
     <string name="routing_attr_avoid_ice_roads_fords_description">Unngå isete veier og vadesteder</string>
@@ -2397,7 +2397,7 @@ Representerer området: %1$s x %2$s</string>
     <string name="marker_moved_to_history">Kartmarkør flyttet til historikk</string>
     <string name="marker_moved_to_active">Kartmarkør flyttet til aktive</string>
     <string name="shared_string_list">Liste</string>
-    <string name="passed">Sist brukt: %1$s</string>
+    <string name="passed">Passert: %1$s</string>
     <string name="mapillary_menu_filter_description">Du kan filtrere bilder etter innsender og dato. Filter innvirker bare for nært forstørrelsesnivå.</string>
     <string name="improve_coverage_install_mapillary_desc">Du kan ta dine egne bilder eller billedserier og tilknytte dem denne kartplasseringen.
 \n
@@ -2439,16 +2439,16 @@ Representerer området: %1$s x %2$s</string>
     <string name="group_will_be_removed_after_restart">Gruppe vil bli fjernet etter omstart</string>
     <string name="show_guide_line">Vis veiledningslinje</string>
     <string name="show_arrows_on_the_map">Vis piler på kartet</string>
-    <string name="show_passed">Vis \"Sist brukt\"-dato</string>
-    <string name="hide_passed">Skjul \"Sist brukt\"-dato</string>
+    <string name="show_passed">Vis passerte</string>
+    <string name="hide_passed">Skjul passerte</string>
     <string name="remove_from_map_markers">Fjern fra kartmarkører</string>
-    <string name="descendingly">fall</string>
-    <string name="ascendingly">stigning</string>
+    <string name="descendingly">fallende</string>
+    <string name="ascendingly">stigende</string>
     <string name="date_added">Dato lagt til:</string>
     <string name="order_by">Sorter etter:</string>
     <string name="map_orientation_change_in_accordance_with_speed">Kartorienteringsterskel</string>
     <string name="map_orientation_change_in_accordance_with_speed_descr">Velg når farten er lav nok til å bytte kartorientering fra \"Bevegelsesretning\" til \"Kompass\"</string>
-    <string name="srtm_purchase_header">For å se konturlinjer på kartet, må du kjøpe og installere konturlinjeprogrammet</string>
+    <string name="srtm_purchase_header">For å se koter på kartet, må du kjøpe og installere programtillegget for koter</string>
     <string name="native_app_allocated_memory">Totalt innebygget minne</string>
     <string name="starting_point_too_far">Startpunkt for langt unna nærmeste vei.</string>
     <string name="shared_location">Delt plassering</string>
@@ -2544,6 +2544,14 @@ Representerer området: %1$s x %2$s</string>
     <string name="quick_action_fav_name_descr">La stå tomt for å automatisk bruke adressen eller stedsnavnet</string>
     <string name="quick_action_bug_descr">Denne meldingen vil bli auto-fullført i kommentarfeltet.</string>
     <string name="mappilary_no_internet_desc">Du trenger internettilknytning for å vise bilder fra Mapillary</string>
-    <string name="hillshade_menu_download_descr">For å se relieffskygger på kartet, må du laste ned relieffskyggeoverlagskartet for denne regionen.</string>
-    <string name="hillshade_purchase_header">For å se relieffskygger på kartet, må du kjøpe og installere kotelinje-programtillegget</string>
+    <string name="hillshade_menu_download_descr">For å se relieffskygger på kartet, må du laste ned relieffskyggeoverleggskartet for denne regionen.</string>
+    <string name="hillshade_purchase_header">For å se relieffskygger på kartet, må du kjøpe og installere programtillegget for koter</string>
+    <string name="enter_new_name">Oppfør nytt navn</string>
+	<string name="shared_string_back">Tilbake</string>
+	<string name="waypoints_added_to_map_markers">Rutepunkter lagt til kartmarkører</string>
+	<string name="wrong_format">Feil format</string>
+    <string name="shared_string_road">Vei</string>
+    <string name="show_map">Vis kart</string>
+    <string name="route_is_calculated">Rute blir beregnet</string>
+    <string name="shared_string_navigate">Naviger</string>
     </resources>
