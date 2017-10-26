@@ -506,7 +506,7 @@
     <string name="menu_layers">لایه‌های نقشه</string>
 	<string name="layer_map_appearance">چینش صفحه</string>
 	<string name="map_widget_config">چینش صفحه</string>
-	<string name="map_widget_intermediate_distance">مقصد بین‌راهی</string>
+	<string name="map_widget_intermediate_distance">مقصد میانی</string>
     <string name="delete_target_point">حذف مقصد</string>
 	<string name="target_point">مقصد %1$s</string>
     <string name="intermediate_point">مقصد میانی %1$s</string>
@@ -516,7 +516,7 @@
     <string name="add_as_first_destination_point">افزودن به‌عنوان اولین مقصد میانی</string>
     <string name="intermediate_point_too_far">مقصد میانی %1$s با نزدیک‌ترین جاده فاصلهٔ زیادی دارد.</string>
     <string name="arrived_at_intermediate_point">به مقصد میانی خود رسیده‌اید</string>
-    <string name="context_menu_item_intermediate_point">افزودن به‌عنوان مقصد بین‌راهی</string>
+    <string name="context_menu_item_intermediate_point">افزودن به‌عنوان مقصد میانی</string>
     <string name="add_waypoint_dialog_added">نقطهٔ بین‌راهی GPX، ‏«{0}»، افزوده شد</string>
 	<string name="add_waypoint_dialog_title">افزودن نقطهٔ بین‌راهی به مسیر GPX ضبط‌شده</string>
 	<string name="amenity_type_administrative">اداری</string>
