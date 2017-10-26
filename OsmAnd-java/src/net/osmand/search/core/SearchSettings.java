@@ -142,4 +142,15 @@ public class SearchSettings {
 		s.addressSearch = addressSearch;
 		return s;
 	}
+
+	public boolean hasCustomSearchType(ObjectType type) {
+		if (searchTypes != null) {
+			for (ObjectType t : searchTypes) {
+				if (t == type) {
+					return true;
+				}
+			}
+		}
+		return false;
+	}
 }

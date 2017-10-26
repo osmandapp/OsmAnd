@@ -64,6 +64,7 @@ import net.osmand.plus.OsmAndFormatter;
 import net.osmand.plus.OsmAndLocationProvider.OsmAndCompassListener;
 import net.osmand.plus.OsmAndLocationProvider.OsmAndLocationListener;
 import net.osmand.plus.OsmandApplication;
+import net.osmand.plus.OsmandPlugin;
 import net.osmand.plus.OsmandSettings;
 import net.osmand.plus.R;
 import net.osmand.plus.activities.MapActivity;
@@ -71,12 +72,14 @@ import net.osmand.plus.activities.MapActivity.ShowQuickSearchMode;
 import net.osmand.plus.helpers.SearchHistoryHelper;
 import net.osmand.plus.helpers.SearchHistoryHelper.HistoryEntry;
 import net.osmand.plus.poi.PoiUIFilter;
+import net.osmand.plus.rastermaps.OsmandRasterMapsPlugin;
 import net.osmand.plus.resources.RegionAddressRepository;
 import net.osmand.plus.search.QuickSearchHelper.SearchHistoryAPI;
 import net.osmand.plus.search.listitems.QuickSearchButtonListItem;
 import net.osmand.plus.search.listitems.QuickSearchHeaderListItem;
 import net.osmand.plus.search.listitems.QuickSearchListItem;
 import net.osmand.plus.search.listitems.QuickSearchMoreListItem;
+import net.osmand.plus.search.listitems.QuickSearchMoreListItem.SearchMoreItemOnClickListener;
 import net.osmand.plus.views.mapwidgets.MapInfoWidgetsFactory.TopToolbarController;
 import net.osmand.plus.views.mapwidgets.MapInfoWidgetsFactory.TopToolbarControllerType;
 import net.osmand.search.SearchUICore;
@@ -1079,16 +1082,18 @@ public class QuickSearchDialogFragment extends DialogFragment implements OsmAndC
 				for (SearchResult sr : res.getCurrentSearchResults()) {
 					rows.add(new QuickSearchListItem(app, sr));
 				}
-				rows.add(new QuickSearchButtonListItem(app, R.drawable.ic_world_globe_dark,
-						app.getString(R.string.search_online_address), new OnClickListener() {
-					@Override
-					public void onClick(View view) {
-						startOnlinePoiSearch();
-						mainSearchFragment.getAdapter().clear();
-						updateTabbarVisibility(false);
-						openKeyboard();
-					}
-				}));
+				if (OsmandPlugin.getEnabledPlugin(OsmandRasterMapsPlugin.class) != null) {
+					rows.add(new QuickSearchButtonListItem(app, R.drawable.ic_world_globe_dark,
+							app.getString(R.string.search_online_address), new OnClickListener() {
+						@Override
+						public void onClick(View view) {
+							startOnlinePoiSearch();
+							mainSearchFragment.getAdapter().clear();
+							updateTabbarVisibility(false);
+							openKeyboard();
+						}
+					}));
+				}
 				rows.add(new QuickSearchButtonListItem(app, R.drawable.ic_action_search_dark,
 						app.getString(R.string.custom_search), new OnClickListener() {
 					@Override
@@ -1709,13 +1714,21 @@ public class QuickSearchDialogFragment extends DialogFragment implements OsmAndC
 	private void addMoreButton() {
 		if (!paused && !cancelPrev && mainSearchFragment != null) {
 			QuickSearchMoreListItem moreListItem =
-					new QuickSearchMoreListItem(app, null, new OnClickListener() {
+					new QuickSearchMoreListItem(app, null, new SearchMoreItemOnClickListener() {
 						@Override
-						public void onClick(View v) {
+						public void increaseRadiusOnClick() {
 							if (!interruptedSearch) {
 								SearchSettings settings = searchUICore.getSearchSettings();
 								searchUICore.updateSettings(settings.setRadiusLevel(settings.getRadiusLevel() + 1));
 							}
+							runCoreSearch(searchQuery, false, true);
+						}
+
+						@Override
+						public void onlineSearchOnClick() {
+							startOnlinePoiSearch();
+							mainSearchFragment.getAdapter().clear();
+							updateTabbarVisibility(false);
 							runCoreSearch(searchQuery, false, true);
 						}
 					});

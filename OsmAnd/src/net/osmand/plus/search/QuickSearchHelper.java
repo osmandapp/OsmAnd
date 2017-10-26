@@ -50,6 +50,7 @@ public class QuickSearchHelper implements ResourceListener {
 	public static final int SEARCH_HISTORY_OBJECT_PRIORITY = 53;
 	public static final int SEARCH_ONLINE_AMENITY_PRIORITY = 700;
 	public static final int SEARCH_ONLINE_ADDRESS_PRIORITY = 500;
+	public static final int SEARCH_ONLINE_API_PRIORITY = 500;
 	private OsmandApplication app;
 	private SearchUICore core;
 	private SearchResultCollection resultCollection;
@@ -323,7 +324,7 @@ public class QuickSearchHelper implements ResourceListener {
 
 	public static class SearchOnlineApi extends SearchBaseAPI {
 
-		OsmandApplication app;
+		private OsmandApplication app;
 		private NominatimPoiFilter poiFilter;
 		private NominatimPoiFilter addressFilter;
 
@@ -344,6 +345,15 @@ public class QuickSearchHelper implements ResourceListener {
 			publishAmenities(phrase, matcher, poiFilter.initializeNewSearch(lat, lon, -1, null, phrase.getRadiusLevel()), true);
 			publishAmenities(phrase, matcher, addressFilter.initializeNewSearch(lat, lon, -1, null, -1), false);
 			return true;
+		}
+
+		@Override
+		public int getSearchPriority(SearchPhrase p) {
+			ObjectType[] types = p.getSearchTypes();
+			if (types != null && types.length == 1 && types[0] == ObjectType.ONLINE_SEARCH) {
+				return SEARCH_ONLINE_API_PRIORITY;
+			}
+			return -1;
 		}
 
 		private void publishAmenities(SearchPhrase phrase, SearchResultMatcher matcher, List<Amenity> amenities, boolean poi) {
