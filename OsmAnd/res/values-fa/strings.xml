@@ -506,7 +506,7 @@
     <string name="menu_layers">لایه‌های نقشه</string>
 	<string name="layer_map_appearance">چینش صفحه</string>
 	<string name="map_widget_config">چینش صفحه</string>
-	<string name="map_widget_intermediate_distance">مقصد بین‌راهی</string>
+	<string name="map_widget_intermediate_distance">مقصد میانی</string>
     <string name="delete_target_point">حذف مقصد</string>
 	<string name="target_point">مقصد %1$s</string>
     <string name="intermediate_point">مقصد میانی %1$s</string>
@@ -516,7 +516,7 @@
     <string name="add_as_first_destination_point">افزودن به‌عنوان اولین مقصد میانی</string>
     <string name="intermediate_point_too_far">مقصد میانی %1$s با نزدیک‌ترین جاده فاصلهٔ زیادی دارد.</string>
     <string name="arrived_at_intermediate_point">به مقصد میانی خود رسیده‌اید</string>
-    <string name="context_menu_item_intermediate_point">افزودن به‌عنوان مقصد بین‌راهی</string>
+    <string name="context_menu_item_intermediate_point">افزودن به‌عنوان مقصد میانی</string>
     <string name="add_waypoint_dialog_added">نقطهٔ بین‌راهی GPX، ‏«{0}»، افزوده شد</string>
 	<string name="add_waypoint_dialog_title">افزودن نقطهٔ بین‌راهی به مسیر GPX ضبط‌شده</string>
 	<string name="amenity_type_administrative">اداری</string>
@@ -877,19 +877,15 @@
     
     <string name="osmand_srtm_long_description_1000_chars">این افزونه دو لایهٔ منحنی‌های تراز و سایه‌تپه (عوارض زمین) را روی نقشه‌‌های استاندارد OsmAnd نمایش می‌دهد. 
 \nورزشکاران، راه‌پیمایان، کوله‌گردان و همهٔ کسانی که به ساختار پستی‌وبلندی‌های زمین علاقه‌مند هستند از این ویژگی بهره می‌برند. 
-\nمبنای داده‌های جهانی یعنی بین ۷۰ درجهٔ شمالی و ۷۰ درجهٔ جنوبی اندازه‌گیری‌های SRTM و ASTER است.
+\nمبنای داده‌های جهانی یعنی بین ۷۰ درجهٔ شمالی و ۷۰ درجهٔ جنوبی اندازه‌گیری‌های SRTM (مأموریت توپوگرافی رادار شاتل) و ASTER (رادیومتر پیشرفتهٔ فضابرد بازتاب و گسیل حرارتی) است.
 \n
-\nSRTM: مأموریت توپوگرافی رادار شاتل
-\nASRER: رادیومتر پیشرفتهٔ فضابرد بازتاب و گسیل حرارتی
-\nاَستِر یک ابزار تصویربرداری است که بر روی ماهوارهٔ Terra نصب است. تِرا ماهوارهٔ فوق‌پیشرفتهٔ سامانهٔ دیده‌بانی زمینِ ناساست. 
+\nاَستِر یک ابزار تصویربرداری است که بر روی ماهوارهٔ Terra نصب است و تِرا ماهوار‌ه‌ای فوق‌پیشرفت برای سامانهٔ دیده‌بانی زمینِ ناساست. 
 \nاَستِر محصول تلاش مشترک ناسا، وزارت اقتصاد، صنعت و تجارت ژاپن و سامانه‌های فضایی ژاپن است.</string>
     <string name="srtm_plugin_description">این افزونه دو لایهٔ منحنی‌های تراز و سایه‌تپه (عوارض زمین) را روی نقشه‌‌های استاندارد OsmAnd نمایش می‌دهد. 
 \nورزشکاران، راه‌پیمایان، کوله‌گردان و همهٔ کسانی که به ساختار پستی‌وبلندی‌های زمین علاقه‌مند هستند از این ویژگی بهره می‌برند. 
-\nمبنای داده‌های جهانی یعنی بین ۷۰ درجهٔ شمالی و ۷۰ درجهٔ جنوبی اندازه‌گیری‌های SRTM و ASTER است.
+\nمبنای داده‌های جهانی یعنی بین ۷۰ درجهٔ شمالی و ۷۰ درجهٔ جنوبی اندازه‌گیری‌های SRTM (مأموریت توپوگرافی رادار شاتل) و ASTER (رادیومتر پیشرفتهٔ فضابرد بازتاب و گسیل حرارتی) است.
 \n
-\nSRTM: مأموریت توپوگرافی رادار شاتل
-\nASRER: رادیومتر پیشرفتهٔ فضابرد بازتاب و گسیل حرارتی
-\nاَستِر یک ابزار تصویربرداری است که بر روی ماهوارهٔ Terra نصب است. تِرا ماهوارهٔ فوق‌پیشرفتهٔ سامانهٔ دیده‌بانی زمینِ ناساست. 
+\nاَستِر یک ابزار تصویربرداری است که بر روی ماهوارهٔ Terra نصب است و تِرا ماهوار‌ه‌ای فوق‌پیشرفت برای سامانهٔ دیده‌بانی زمینِ ناساست. 
 \nاَستِر محصول تلاش مشترک ناسا، وزارت اقتصاد، صنعت و تجارت ژاپن و سامانه‌های فضایی ژاپن است.</string>
     <string name="monitoring_control_start">جی‌پی‌ایکس</string>
     <string name="rendering_attr_noPolygons_description">همهٔ عوارض زمین را روی نقشه محو کن</string>
@@ -2398,7 +2394,7 @@
     <string name="lang_kn">کانادا</string>
     <string name="lang_sr_latn">صربی (لاتین)</string>
     <string name="lang_zh_hk">چینی (هنگ‌کنگ)</string>
-    <string name="route_is_too_long_v2">این مسیر برای محاسبه‌شدن خیلی طولانی است. اگر تا ۱۰ دقیقه مسیری پیدا نشد لطفاً چند مقصد میانی اضافه کنید.</string>
+    <string name="route_is_too_long_v2">انگار این مسیر خیلی طولانی است. اگر تا ۱۰ دقیقه مسیری پیدا نشد لطفاً چند تا مقصد میانی اضافه کنید.</string>
     <string name="driving_region_australia">استرالیا</string>
     <string name="add_segment_to_the_track">افزودن به مسیر GPX</string>
 <string name="shared_string_markers">نشانه‌ها</string>

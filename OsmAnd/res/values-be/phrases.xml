@@ -3678,4 +3678,12 @@
 	<string name="poi_amperage">Сіла току</string>
 	<string name="poi_charging_station_output">Магутнасць зараднай станцыі</string>
 
+<string name="poi_map_type_topo">Тып мапы: тапаграфічная</string>
+	<string name="poi_map_type_street">Тып мапы: вулічная сетка</string>
+	<string name="poi_map_type_scheme">Тып мапы: схематычная</string>
+	<string name="poi_map_type_toposcope">Тып мапы: панарама</string>
+	<string name="poi_map_size_site">Памер мапы: лакальная</string>
+	<string name="poi_map_size_city">Памер мапы: горад</string>
+	<string name="poi_map_size_region">Памер мапы: рэгіён</string>
+
 </resources>

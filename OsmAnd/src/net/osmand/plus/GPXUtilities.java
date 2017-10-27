@@ -345,7 +345,7 @@ public class GPXUtilities {
 			points = 0;
 
 			double channelThresMin = 10;           // Minimum oscillation amplitude considered as relevant or as above noise for accumulated Ascent/Descent analysis
-			double channelThres = channelThresMin; // Actual oscillation amplitude considered as above noise (accomodates depedency on current VDOP/getAccuracy if desired)
+			double channelThres = channelThresMin; // Actual oscillation amplitude considered as above noise (dynamic channel adjustment, accomodates depedency on current VDOP/getAccuracy if desired)
 			double channelBase;
 			double channelTop;
 			double channelBottom;
@@ -360,7 +360,7 @@ public class GPXUtilities {
 				channelBase = 99999;
 				channelTop = channelBase;
 				channelBottom = channelBase;
-				channelThres = channelThresMin;
+				//channelThres = channelThresMin; //only for dynamic channel adjustment
 
 				float segmentDistance = 0f;
 				metricEnd += s.metricEnd;
@@ -424,48 +424,69 @@ public class GPXUtilities {
 						hasSpeedInTrack = true;
 					}
 
-					// Trend channel analysis for elevation gain/loss, Hardy 2015-09-22:
-					// - Detect consecutive trend channels: Only net elevation changes per each trend channel (i.e. between turnarounds) are used to accumulate the Ascent/Descent values.
-					// - Trend turnaround detection: Ignore oscillations of amplitude < channelThresMin, this sests the relevance threshold, and masks what is considered as noise
-					// - REMOVED for now: To supress marginal measurements, relax from channelThresMin to channelThres based on the maximum VDOP of any point which contributed to the current trend. Good assumption is VDOP=2*HSOP (accounts for invisibility of lower hemisphere satellites).
-					// - TODO: Perform the channel evaluation with Low Pass Filter (LPF) smoothed ele data instead of with the raw ele data
-					if (!Double.isNaN(point.ele)) {
+					// Trend channel analysis for elevation gain/loss, Hardy 2015-09-22, LPF filtering added 2017-10-26:
+					// - Detect the consecutive elevation trend channels: Only use the net elevation changes of each trend channel (i.e. between the turnarounds) to accumulate the Ascent/Descent values.
+					// - Perform the channel evaluation on Low Pass Filter (LPF) smoothed ele data instead of on the raw ele data
+					// Parameters:
+					// - channelThresMin (in meters): defines the channel turnaround detection, i.e. oscillations smaller than this are ignored as irrelevant or noise.
+					// - smoothWindow (number of points): is the LPF window
+					// NOW REMOVED, as no relevant examples found: Dynamic channel adjustment: To suppress unreliable measurement points, could relax the turnaround detection from the constant channelThresMin to channelThres which is e.g. based on the maximum VDOP of any point which contributed to the current trend. (Good assumption is VDOP=2*HDOP, which accounts for invisibility of lower hemisphere satellites.)
+
+					// LPF smooting of ele data, usually smooth over odd number of values like 5
+					final int smoothWindow = 5;
+					double eleSmoothed = Double.NaN;
+					int j2 = 0;
+					for (int j1 = - smoothWindow + 1; j1 <= 0; j1++) {
+						if ((j + j1 >= 0) && !Double.isNaN(s.get(j + j1).ele)) {
+							j2++;
+							if (!Double.isNaN(eleSmoothed)) {
+								eleSmoothed = eleSmoothed + s.get(j + j1).ele;
+							} else {
+								eleSmoothed = s.get(j + j1).ele;
+							}
+						}
+					}
+					if (!Double.isNaN(eleSmoothed)) {
+						eleSmoothed = eleSmoothed / j2;
+					}
+
+					if (!Double.isNaN(eleSmoothed)) {
 						// Init channel
 						if (channelBase == 99999) {
-							channelBase = point.ele;
+							channelBase = eleSmoothed;
 							channelTop = channelBase;
 							channelBottom = channelBase;
-							channelThres = channelThresMin;
+							//channelThres = channelThresMin; //only for dynamic channel adjustment
 						}
 						// Channel maintenance
-						if (point.ele > channelTop) {
-							channelTop = point.ele;
+						if (eleSmoothed > channelTop) {
+							channelTop = eleSmoothed;
 							//if (!Double.isNaN(point.hdop)) {
-							//	channelThres = Math.max(channelThres, 2.0 * point.hdop);  //Use empirical 2*getAccuracy(vertical), this better serves very flat tracks or high dop tracks
+							//	channelThres = Math.max(channelThres, 2.0 * point.hdop); //only for dynamic channel adjustment
 							//}
-						} else if (point.ele < channelBottom) {
-							channelBottom = point.ele;
+						} else if (eleSmoothed < channelBottom) {
+							channelBottom = eleSmoothed;
 							//if (!Double.isNaN(point.hdop)) {
-							//	channelThres = Math.max(channelThres, 2.0 * point.hdop);
+							//	channelThres = Math.max(channelThres, 2.0 * point.hdop); //only for dynamic channel adjustment
 							//}
 						}
 						// Turnaround (breakout) detection
-						if ((point.ele <= (channelTop - channelThres)) && (climb == true)) {
+						if ((eleSmoothed <= (channelTop - channelThres)) && (climb == true)) {
 							if ((channelTop - channelBase) >= channelThres) {
 								diffElevationUp += channelTop - channelBase;
 							}
 							channelBase = channelTop;
-							channelBottom = point.ele;
+							channelBottom = eleSmoothed;
 							climb = false;
-							channelThres = channelThresMin;
-						} else if ((point.ele >= (channelBottom + channelThres)) && (climb == false)) {
+							//channelThres = channelThresMin; //only for dynamic channel adjustment
+						} else if ((eleSmoothed >= (channelBottom + channelThres)) && (climb == false)) {
 							if ((channelBase - channelBottom) >= channelThres) {
 								diffElevationDown += channelBase - channelBottom;
 							}
 							channelBase = channelBottom;
-							channelTop = point.ele;
+							channelTop = eleSmoothed;
 							climb = true;
-							channelThres = channelThresMin;
+							//channelThres = channelThresMin; //only for dynamic channel adjustment
 						}
 						// End detection without breakout
 						if (j == (numberOfPoints - 1)) {

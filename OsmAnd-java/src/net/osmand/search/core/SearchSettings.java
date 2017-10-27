@@ -19,7 +19,6 @@ public class SearchSettings {
 	private ObjectType[] searchTypes;
 	private boolean emptyQueryAllowed;
 	private boolean sortByName;
-	private boolean addressSearch;
 
 	public SearchSettings(SearchSettings s) {
 		if(s != null) {
@@ -31,7 +30,6 @@ public class SearchSettings {
 			this.searchTypes = s.searchTypes;
 			this.emptyQueryAllowed = s.emptyQueryAllowed;
 			this.sortByName = s.sortByName;
-			this.addressSearch = s.addressSearch;
 		}
 	}
 	
@@ -130,16 +128,6 @@ public class SearchSettings {
 	public SearchSettings setSortByName(boolean sortByName) {
 		SearchSettings s = new SearchSettings(this);
 		s.sortByName = sortByName;
-		return s;
-	}
-
-	public boolean isInAddressSearch() {
-		return addressSearch;
-	}
-
-	public SearchSettings setAddressSearch(boolean addressSearch) {
-		SearchSettings s = new SearchSettings(this);
-		s.addressSearch = addressSearch;
 		return s;
 	}
 

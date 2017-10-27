@@ -48,9 +48,8 @@ public class QuickSearchHelper implements ResourceListener {
 	public static final int SEARCH_WPT_OBJECT_PRIORITY = 52;
 	public static final int SEARCH_HISTORY_API_PRIORITY = 50;
 	public static final int SEARCH_HISTORY_OBJECT_PRIORITY = 53;
-	public static final int SEARCH_ONLINE_AMENITY_PRIORITY = 700;
-	public static final int SEARCH_ONLINE_ADDRESS_PRIORITY = 500;
 	public static final int SEARCH_ONLINE_API_PRIORITY = 500;
+	public static final int SEARCH_ONLINE_AMENITY_PRIORITY = 500;
 	private OsmandApplication app;
 	private SearchUICore core;
 	private SearchResultCollection resultCollection;
@@ -325,14 +324,12 @@ public class QuickSearchHelper implements ResourceListener {
 	public static class SearchOnlineApi extends SearchBaseAPI {
 
 		private OsmandApplication app;
-		private NominatimPoiFilter poiFilter;
-		private NominatimPoiFilter addressFilter;
+		private NominatimPoiFilter filter;
 
 		public SearchOnlineApi(OsmandApplication app) {
 			super(ObjectType.ONLINE_SEARCH);
 			this.app = app;
-			this.poiFilter = app.getPoiFilters().getNominatimPOIFilter();
-			this.addressFilter = app.getPoiFilters().getNominatimAddressFilter();
+			this.filter = app.getPoiFilters().getNominatimPOIFilter();
 		}
 
 		@Override
@@ -340,46 +337,41 @@ public class QuickSearchHelper implements ResourceListener {
 			double lat = phrase.getSettings().getOriginalLocation().getLatitude();
 			double lon = phrase.getSettings().getOriginalLocation().getLongitude();
 			String text = phrase.getUnknownSearchPhrase();
-			poiFilter.setFilterByName(text);
-			addressFilter.setFilterByName(text);
-			publishAmenities(phrase, matcher, poiFilter.initializeNewSearch(lat, lon, -1, null, phrase.getRadiusLevel()), true);
-			publishAmenities(phrase, matcher, addressFilter.initializeNewSearch(lat, lon, -1, null, -1), false);
+			filter.setFilterByName(text);
+			publishAmenities(phrase, matcher, filter.initializeNewSearch(lat, lon, -1, null, phrase.getRadiusLevel()));
 			return true;
 		}
 
 		@Override
 		public int getSearchPriority(SearchPhrase p) {
-			ObjectType[] types = p.getSearchTypes();
-			if (types != null && types.length == 1 && types[0] == ObjectType.ONLINE_SEARCH) {
+			if (p.hasCustomSearchType(ObjectType.ONLINE_SEARCH)) {
 				return SEARCH_ONLINE_API_PRIORITY;
 			}
 			return -1;
 		}
 
-		private void publishAmenities(SearchPhrase phrase, SearchResultMatcher matcher, List<Amenity> amenities, boolean poi) {
+		private void publishAmenities(SearchPhrase phrase, SearchResultMatcher matcher, List<Amenity> amenities) {
 			for (Amenity amenity : amenities) {
-				SearchResult sr = getSearchResult(phrase, poi, amenity);
-				if (poi) {
-					LatLon latLon = amenity.getLocation();
-					String lang = sr.requiredSearchPhrase.getSettings().getLang();
-					boolean transliterate = sr.requiredSearchPhrase.getSettings().isTransliterate();
-					Amenity a = app.getSearchUICore().findAmenity(amenity.getName(), latLon.getLatitude(),
-							latLon.getLongitude(), lang, transliterate);
-					if (a != null) {
-						sr = getSearchResult(phrase, true, a);
-					}
+				SearchResult sr = getSearchResult(phrase, amenity);
+				LatLon latLon = amenity.getLocation();
+				String lang = sr.requiredSearchPhrase.getSettings().getLang();
+				boolean transliterate = sr.requiredSearchPhrase.getSettings().isTransliterate();
+				Amenity a = app.getSearchUICore().findAmenity(amenity.getName(), latLon.getLatitude(),
+						latLon.getLongitude(), lang, transliterate);
+				if (a != null) {
+					sr = getSearchResult(phrase, a);
 				}
 				matcher.publish(sr);
 			}
 		}
 
 		@NonNull
-		private SearchResult getSearchResult(SearchPhrase phrase, boolean poi, Amenity amenity) {
+		private SearchResult getSearchResult(SearchPhrase phrase, Amenity amenity) {
 			SearchResult sr = new SearchResult(phrase);
 			sr.localeName = amenity.getName();
 			sr.object = amenity;
-			sr.priority = poi ? SEARCH_ONLINE_AMENITY_PRIORITY : SEARCH_ONLINE_ADDRESS_PRIORITY;
-			sr.objectType = poi ? ObjectType.POI : ObjectType.ONLINE_ADDRESS;
+			sr.priority = SEARCH_ONLINE_AMENITY_PRIORITY;
+			sr.objectType = ObjectType.POI;
 			sr.location = amenity.getLocation();
 			sr.preferredZoom = 17;
 			return sr;

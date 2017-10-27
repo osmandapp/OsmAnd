@@ -555,7 +555,7 @@
 	<string name="live_monitoring_url_descr">Задайце вэб-адрас з наступнымі парамэтрамі: lat={0}, lon={1}, timestamp={2}, hdop={3}, altitude={4}, speed={5}, bearing={6}</string>
 	<string name="live_monitoring_url">Вэб-адрас для сеткавага сачэньня</string>
 	<string name="gpx_monitoring_disabled_warn">Запісвайце сьлед выкарыстоўваючы GPX-віджэт ці пункт мэню \"Запіс падарожжа\".</string>
-	<string name="show_current_gpx_title">Паказаць дзейны трэк</string>
+	<string name="show_current_gpx_title">Паказаць бягучы сьлед</string>
 	    
 	<string name="free_version_message">Гэтая бясплатная вэрсія OsmAnd абмяжоўваецца %1$s cьцягваньнямі і не падтрымлівае аўтаномныя артыкулы Вікіпэдыі.</string>
 	<string name="free_version_title">Бясплатная вэрсія</string>
@@ -864,7 +864,7 @@
 	<string name="no_vector_map_loaded">Вектарныя мапы не былі загружаны</string>
 	<string name="map_route_by_gpx">Навігацыя з выкарыстаньнем GPX</string>
 	<string name="gpx_files_not_found">GPX файлы не знойдзены ў каталогу tracks</string>
-	<string name="layer_gpx_layer">GPX сьлед…</string>
+	<string name="layer_gpx_layer">GPX-сьлед…</string>
 	<string name="error_reading_gpx">Памылка пры чытаньні GPX дадзеных</string>
 	<string name="vector_data">Лакальныя вектарныя мапы</string>
 	<string name="transport_context_menu">Шукаць транспарт на прыпынку</string>
@@ -1730,7 +1730,7 @@
 	<string name="shared_string_clear">Ачысьціць</string>
 	
 	<string name="shared_string_save">Захаваць</string>
-	<string name="shared_string_save_as_gpx">Захаваць як новы GPX-след</string>
+	<string name="shared_string_save_as_gpx">Захаваць як новы GPX-сьлед</string>
 	<string name="shared_string_rename">Пераназваць</string>
 	<string name="shared_string_delete">Выдаліць</string>
 	<string name="shared_string_delete_all">Выдаліць усё</string>
@@ -2854,7 +2854,7 @@
     <string name="import_track">Імпартаваць сьлед</string>
     <string name="import_track_desc">Файл %1$s не зьмяшчае кропкі шляху, імпартаваць як сьлед?</string>
     <string name="move_point">Перамясціць кропку</string>
-    <string name="add_segment_to_the_track">Дадаць у GPX-след</string>
+    <string name="add_segment_to_the_track">Дадаць у GPX-сьлед</string>
 <string name="keep_showing_on_map">Працягваць паказваць на мапе</string>
     <string name="exit_without_saving">Выйсці без захавання?</string>
     <string name="do_not_use_animations">Не ўжываць анімацыю</string>
@@ -2893,7 +2893,7 @@
     <string name="add_location_as_first_point_descr">Дадаць ваша становішча як першую кропку пры планаванні маршруту.</string>
     <string name="my_location">Маё становішча</string>
     <string name="shared_string_finish">Фініш</string>
-    <string name="plan_route">Пранаваць маршрут</string>
+    <string name="plan_route">Плянаваць маршрут</string>
     <string name="shared_string_sort">Сартаваць</string>
     <string name="coordinate_input">Увод каардынат</string>
     <string name="is_saved">захаваны</string>
@@ -2903,17 +2903,17 @@
     <string name="group_will_be_removed_after_restart">Група будзе выдаленая пасля перазапуску</string>
     <string name="shared_string_markers">Маркеры</string>
     <string name="coordinates_format">Фармат каардынат</string>
-    <string name="use_system_keyboard">Выкарыстоўваць сістэмную клавіятуру</string>
-    <string name="fast_coordinates_input_descr">Абраць фармат уводу каардынат. Вы заўсёды можаце змяніць яго, націснуўшы налады.</string>
+    <string name="use_system_keyboard">Выкарыстоўваць сыстэмную клявіятуру</string>
+    <string name="fast_coordinates_input_descr">Абраць фармат уводу каардынат. Вы заўсёды можаце зьмяніць яго, націснуўшы Налады.</string>
     <string name="fast_coordinates_input">Хуткі ўвод каардынат</string>
-    <string name="routing_attr_avoid_ice_roads_fords_name">Пазбягаць лядовых дарог і бродаў</string>
-    <string name="routing_attr_avoid_ice_roads_fords_description">Пазбягае лядовыя дарогі і броды</string>
-    <string name="make_round_trip_descr">Дадаць копію пачатковай кропкі як месца прызначэння.</string>
+    <string name="routing_attr_avoid_ice_roads_fords_name">Пазьбягаць лядовых дарог і брадоў</string>
+    <string name="routing_attr_avoid_ice_roads_fords_description">Пазьбягае лядовыя дарогі і брады</string>
+    <string name="make_round_trip_descr">Дадаць копію пачатковай кропкі як месца прызначэньня.</string>
     <string name="make_round_trip">Зрабіць кругавое падарожжа</string>
     <string name="shared_string_navigate">Пачаць навігацыю</string>
-    <string name="osn_modify_dialog_error">Адбылося выключэнне: нататка не была змененая</string>
-    <string name="osn_modify_dialog_title">Змяніць нататку</string>
-    <string name="context_menu_item_modify_note">Змяніць OSM-нататку</string>
+    <string name="osn_modify_dialog_error">Адбылося выключэньне: нататка не была зьмененая</string>
+    <string name="osn_modify_dialog_title">Зьмяніць нататку</string>
+    <string name="context_menu_item_modify_note">Зьмяніць OSM-нататку</string>
     <string name="release_2_8">• Цалкам перапрацаваныя маркеры з рэкамэндацыямі і плянаваньнем маршрута 
 \n 
 \n • Інструмэнт вымярэньня адлегласьцей з прывязкай да дарогі і з захаваньнем кропак у сьлед 
@@ -2925,12 +2925,12 @@
     <string name="show_map">Паказаць мапу</string>
     <string name="route_is_calculated">Маршрут разлічаны</string>
     <string name="round_trip">Падарожжа</string>
-    <string name="plan_route_no_markers_toast">Вам неабходна дадаць па меншай меры адзін маркер каб выкарыстать гэтую функцыю.</string>
+    <string name="plan_route_no_markers_toast">Вам неабходна дадаць па меншай меры адзін маркер, каб выкарыстоўваць гэтую функцыю.</string>
     <string name="shared_string_road">Дарога</string>
     <string name="wrong_format">Дрэнны фармат</string>
     <string name="wrong_input">Дрэнны ўвод</string>
 	<string name="enter_new_name">Увядзіце новае імя</string>
 	<string name="shared_string_back">Назад</string>
-	<string name="view">Паглядзець</string>
+	<string name="view">Праглядзець</string>
 	<string name="waypoints_added_to_map_markers">Кропкі маршрута дададзеныя ў маркеры мапы</string>
 	</resources>

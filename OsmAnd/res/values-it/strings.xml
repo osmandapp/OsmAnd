@@ -2928,7 +2928,7 @@ Rappresenta l\'area: %1$s x %2$s</string>
 	<string name="view">Vista</string>
 	<string name="waypoints_added_to_map_markers">Punti intermedi aggiunti ai marcatori della mappa</string>
 	<string name="wrong_format">Formato errato</string>
-    <string name="release_2_8">\\022 Rivisti completamenti i marcatori, le indicazioni e la pianificazione del percorso 
+    <string name="release_2_8">\\022 Rivisti completamente i marcatori, le indicazioni e la pianificazione del percorso 
 \n
 \n • Lo strumento di misura della distanza offre l\'aderisci alle strade e il salvataggio come traccia
 \n

@@ -1518,4 +1518,66 @@
     <string name="settings_preset_descr">Ընտրեք ծրագրերի պրոֆիլը (յուրաքանչյուր պրոֆիլի պարամետրերը պահպանվում են առանձին)։</string>
     <string name="destination_point">Նպատակակետ %1$s</string>
     <string name="search_street_in_neighborhood_cities">Որոնել փողոցը մոտակա բնակավայրերում</string>
+    <string name="release_2_4">"\\022 Նոր շատ հզոր տեքստային որոնում
+\n
+\n• Ավտոմոբիլային աուդիո համակարգ / speaker phone ինտեգրացման  Bluetooth միջոցով
+\n
+\n• Բարելավված երթուղիների ուղղորդում, ձայնային հուշում և շրջադարձի ցուցիչ
+\n
+\n• Տրանսպորտային շերտի բարելավված երթուղիների ցուցադրում
+\n
+\n• Ավելացվել է նոր լեզուների և այժմ աջակցում են տարածաշրջանային լեզուներ
+\n
+\n• Բազմաթիվ այլ բարելավումներ և սխալների ուղղում
+\n
+\nև ավելին…"</string>
+    <string name="release_2_3">"\\022 OSM Live. Աջակցում քարտեզի ներդրողներին և մշակողներին և  ժամյա քարտեզի թարմացումներ:
+\n
+\n• Քարտեզների մարկերներ:Նոր եղանակ քարտեզի վրա արագ տեղ ընտրել:
+\n
+\n• Ավելի մանրամասն OSM քարտեզներ երկրի հատուկ ճանապարհային վահաններով և շատ նոր քարտեզային հատկանիշներով:
+\n
+\n• Բարելավված Look and Feel of Route պատրաստում:
+\n
+\n• Քարտեզի համատեքստում շատ բարելավումներ, ինչպիսիք են համատեքստային հասցեի որոնումը:
+\n
+\nև ավելին…"</string>
+    <string name="intermediate_items_sort_return">Միջանկյալ նպատակակետերը տեղադրված են օպտիմալ երթուղով ընթացիկ դիրքից դեպի նպատակակետը:</string>
+    <string name="intermediate_items_sort_by_distance">Դասավորել ըստ հեռավորության</string>
+    <string name="local_osm_changes_backup_failed">OSM-ի փոփոխությունների կրկնօրինակումը ձախողվել է</string>
+    <string name="local_osm_changes_backup">Կրկնօրինակել OSM-ի փոփոխությունները</string>
+    <string name="osmand_background_plugin_description">Այս plugin-նը ապահովում է էներգախնայողության ռեժիմում նավարկություն և երթուղիների գրանցում: Plugin-նը գործարկում է ֆոնային ռեժիմում և պարբերաբար ակտիվացնում GPS-ը երթուղին գրանցելու կամ ձայնային հրամանները նվագելու համար:</string>
+    <string name="contribution_activity">Տեղադրել տարբերակը</string>
+    <string name="download_wikipedia_maps">Վիքիպեդիա</string>
+    <string name="map_widget_distancemeasurement">Հեռավորության չափում</string>
+    <string name="audionotes_location_not_defined">"Դիրքը դեռ հայտնի չէ, որպեսզի կապել նշումի հետ:\"Օգտագործեք դիրղը ...\" նշումը  նշված դիրքին նշանակելու համար։"</string>
+    <string name="map_widget_audionotes">Աուդիո նշումներ</string>
+    <string name="index_srtm_parts">մասեր</string>
+    <string name="index_srtm_ele">Բարձունքների գծեր</string>
+    <string name="download_select_map_types">Այլ քարտեզներ</string>
+    <string name="download_roads_only_item">Միայն ճանապարհները</string>
+    <string name="download_srtm_maps">Քարտեզ SRTM (բարձունքների գծեր)</string>
+    <string name="download_regular_maps">Ստանդարտ քարտեզ</string>
+    <string name="download_roads_only_maps">Ճանապարհների քարտեզը</string>
+    <string name="rendering_attr_alpineHiking_name">Լեռնաշղթայի զբոսնում մասշտաբով (SAC)</string>
+    <string name="rendering_attr_alpineHiking_description">Պատկերացնել ճանապարհը SAC մասշտաբով</string>
+    <string name="rendering_attr_hikingRoutesOSMC_name">Ճանապարհի արտացոլումը ըստ OSMC երթուղիների</string>
+    <string name="rendering_attr_hikingRoutesOSMC_description">Ճանապարհի արտացոլումը ըստ OSMC երթուղիների</string>
+    <string name="rendering_attr_noAdminboundaries_name">Սահմանները</string>
+    <string name="rendering_attr_noAdminboundaries_description">Թաքցնել տարածաշրջանային սահմանները (admin levels 5–9)</string>
+    <string name="map_widget_max_speed">Արագության սահմանափակումը</string>
+    <string name="monitoring_control_start">GPX</string>
+    <string name="no_buildings_found">Շենքեր չեն գտնվել:</string>
+    <string name="incremental_search_city">Ընտրեք քաղաք</string>
+    <string name="search_villages_and_postcodes">Որոնել ըստ գյուղի և փոստային բաժանմունքի(ինդեքսի)</string>
+    <string name="rendering_attr_showRoadMaps_description">Ընտրեք, թե ինչպես ցույց տալ միայն ճանապարհային քարտեզները՝</string>
+    <string name="rendering_attr_showRoadMaps_name">Միայն ճանապարհների քարտեզները</string>
+    <string name="safe_mode_description">"Գործարկել  անվտանգ ռեժիմում (դանդաղեցնում է հավելվածի աշխատանքը, օգտագործելով միայն Android գործառույթները):"</string>
+    <string name="safe_mode">Անվտանգ ռեժիմ</string>
+    <string name="native_library_not_running">Հավելվածը գործարկվել է անվտանգ ռեժիմով (անջատել «Կարգավորումներ»-ում):</string>
+    <string name="close_changeset">Փոխել «changeset»</string>
+    <string name="zxing_barcode_scanner_not_found">Հավելված ZXing Barcode Scanner չգտնվեց: Որոնել Google Play-ում?</string>
+    <string name="rendering_attr_roadColors_description">Ընտրեք ճանապարհների գունավորման սխեման՝</string>
+    <string name="rendering_attr_roadColors_name">Ճանապարհների գունավորման սխեման</string>
+    <string name="map_widget_show_destination_arrow">Ցուցադրել ուղղությունը դեպի նպատակակետը</string>
     </resources>
