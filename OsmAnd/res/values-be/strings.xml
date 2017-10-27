@@ -2893,7 +2893,7 @@
     <string name="add_location_as_first_point_descr">Дадаць ваша становішча як першую кропку пры планаванні маршруту.</string>
     <string name="my_location">Маё становішча</string>
     <string name="shared_string_finish">Фініш</string>
-    <string name="plan_route">Пранаваць маршрут</string>
+    <string name="plan_route">Плянаваць маршрут</string>
     <string name="shared_string_sort">Сартаваць</string>
     <string name="coordinate_input">Увод каардынат</string>
     <string name="is_saved">захаваны</string>
@@ -2903,12 +2903,12 @@
     <string name="group_will_be_removed_after_restart">Група будзе выдаленая пасля перазапуску</string>
     <string name="shared_string_markers">Маркеры</string>
     <string name="coordinates_format">Фармат каардынат</string>
-    <string name="use_system_keyboard">Выкарыстоўваць сістэмную клавіятуру</string>
-    <string name="fast_coordinates_input_descr">Абраць фармат уводу каардынат. Вы заўсёды можаце змяніць яго, націснуўшы налады.</string>
+    <string name="use_system_keyboard">Выкарыстоўваць сыстэмную клявіятуру</string>
+    <string name="fast_coordinates_input_descr">Абраць фармат уводу каардынат. Вы заўсёды можаце зьмяніць яго, націснуўшы Налады.</string>
     <string name="fast_coordinates_input">Хуткі ўвод каардынат</string>
-    <string name="routing_attr_avoid_ice_roads_fords_name">Пазбягаць лядовых дарог і бродаў</string>
-    <string name="routing_attr_avoid_ice_roads_fords_description">Пазбягае лядовыя дарогі і броды</string>
-    <string name="make_round_trip_descr">Дадаць копію пачатковай кропкі як месца прызначэння.</string>
+    <string name="routing_attr_avoid_ice_roads_fords_name">Пазьбягаць лядовых дарог і брадоў</string>
+    <string name="routing_attr_avoid_ice_roads_fords_description">Пазьбягае лядовыя дарогі і брады</string>
+    <string name="make_round_trip_descr">Дадаць копію пачатковай кропкі як месца прызначэньня.</string>
     <string name="make_round_trip">Зрабіць кругавое падарожжа</string>
     <string name="shared_string_navigate">Пачаць навігацыю</string>
     <string name="osn_modify_dialog_error">Адбылося выключэньне: нататка не была зьмененая</string>
