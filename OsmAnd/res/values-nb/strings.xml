@@ -2286,7 +2286,7 @@ Representerer området: %1$s x %2$s</string>
     <string name="shared_string_reset">Tilbakestill</string>
     <string name="show_on_map_after_saving">Vis på kart etter lagring</string>
     <string name="measurement_tool_action_bar">Se gjennom kartet og legg til punkter</string>
-    <string name="measurement_tool">Avstandsmåler</string>
+    <string name="measurement_tool">Avstandsmåling</string>
     <string name="quick_action_show_navigation_finish_dialog">Vis dialog ved navigeringsslutt</string>
     <string name="quick_action_start_stop_navigation">Start/stopp navigering</string>
     <string name="map_widget_ruler_control">Radiusmåler</string>
@@ -2556,4 +2556,5 @@ Representerer området: %1$s x %2$s</string>
     <string name="make_round_trip_descr">Legg til kopi av startpunktet som reisemål.</string>
     <string name="make_round_trip">Gjør rundtur</string>
     <string name="srtm_menu_download_descr">For å vise koter på kartet, må du laste ned kotekartet for denne regionen.</string>
-    </resources>
+    <string name="view">Vis</string>
+	</resources>
