@@ -199,8 +199,6 @@
                 android:background="?attr/dashboard_divider"/>
 
             <android.support.v7.widget.AppCompatTextView
-                android:paddingTop="6dp"
-                android:paddingBottom="6dp"
                 android:maxLines="1"
                 android:ellipsize="end"
                 android:id="@+id/add_marker_button"

@@ -146,8 +146,6 @@
 				android:ellipsize="end"
 				android:gravity="center"
 				android:maxLines="1"
-				android:paddingBottom="6dp"
-				android:paddingTop="6dp"
 				android:text="@string/shared_string_add"
 				android:textAllCaps="true"
 				android:textColor="?attr/keyboard_item_text_color"

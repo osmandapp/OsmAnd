@@ -5,12 +5,9 @@
               android:layout_height="56dp"
               android:orientation="vertical">
 
-    <View
-        android:layout_width="match_parent"
-        android:layout_weight="0.1"
-        android:layout_height="0dp"/>
-
     <android.support.v7.widget.AppCompatTextView
+        android:paddingTop="6dp"
+        android:paddingBottom="6dp"
         android:id="@+id/keyboard_item"
         android:textAllCaps="true"
         android:layout_width="match_parent"
@@ -19,10 +16,5 @@
         android:gravity="center"
         android:textColor="?attr/keyboard_item_text_color"
         tools:text="3"/>
-
-    <View
-        android:layout_width="match_parent"
-        android:layout_weight="0.1"
-        android:layout_height="0dp"/>
 
 </LinearLayout>
