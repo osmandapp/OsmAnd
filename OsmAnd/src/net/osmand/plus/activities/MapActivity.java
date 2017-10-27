@@ -87,6 +87,7 @@ import net.osmand.plus.helpers.AndroidUiHelper;
 import net.osmand.plus.helpers.DiscountHelper;
 import net.osmand.plus.helpers.ExternalApiHelper;
 import net.osmand.plus.helpers.GpxImportHelper;
+import net.osmand.plus.helpers.GpxImportHelper.ImportGpxBottomSheetDialogFragment;
 import net.osmand.plus.helpers.WakeLockHelper;
 import net.osmand.plus.inapp.InAppHelper;
 import net.osmand.plus.mapcontextmenu.MapContextMenu;
@@ -319,15 +320,23 @@ public class MapActivity extends OsmandActionBarActivity implements DownloadEven
 
 	@Override
 	protected void onSaveInstanceState(Bundle outState) {
-		FragmentManager fm = getSupportFragmentManager();
-		Fragment planRouteFragment = fm.findFragmentByTag(PlanRouteFragment.TAG);
-		if (planRouteFragment != null) {
-			fm.beginTransaction()
-					.remove(planRouteFragment)
-					.commitNowAllowingStateLoss();
+		if (removeFragment(PlanRouteFragment.TAG)) {
 			app.getMapMarkersHelper().getPlanRouteContext().setFragmentVisible(true);
 		}
+		removeFragment(ImportGpxBottomSheetDialogFragment.TAG);
 		super.onSaveInstanceState(outState);
+	}
+
+	private boolean removeFragment(String tag) {
+		FragmentManager fm = getSupportFragmentManager();
+		Fragment fragment = fm.findFragmentByTag(tag);
+		if (fragment != null) {
+			fm.beginTransaction()
+					.remove(fragment)
+					.commitNowAllowingStateLoss();
+			return true;
+		}
+		return false;
 	}
 
 	private void checkAppInitialization() {
