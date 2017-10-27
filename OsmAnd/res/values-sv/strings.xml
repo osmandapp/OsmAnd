@@ -2043,23 +2043,23 @@ Long %2$s</string>
     <string name="access_from_map">Tillgång från kartan</string>
     <string name="rendering_attr_currentTrackColor_description">GPX-färg</string>
     <string name="rendering_attr_currentTrackWidth_description">GPX-bredd</string>
-    <string name="release_2_2">" • Nytt kontextkänsligt gränssnitt för att peta på platser på kartan och på andra skärmar
-\n
-\n • Kartskärmen startar nu automatiskt om inte \'Visa panelen vid appstart\' är vald
-\n
-\n • Konfigurera vilka kort och hur de ska visas i panelen
-\n
-\n • Gå förbi panelen om du föredrar en menybaserad kontroll över appen
-\n
-\n • För att hämta kartor kan regioner väljas direkt genom att peta på världskartan
-\n
-\n • Sökning efter intressepunkter (POI) understöder nu mer specifika frågor
-\n
-\n • Förbättrad funktion för POI- och OSM-redigering
-\n
-\n • Strukturen för hämtning av kartdata och gränssnittet har omarbetats
-\n
-\n och mer … "</string>
+    <string name="release_2_2">•\\022 Nytt kontextkänsligt gränssnitt för att peta på platser på kartan och på andra skärmar 
+\n 
+\n • Kartskärmen startar nu automatiskt om inte \'Visa panelen vid appstart\' är vald 
+\n 
+\n • Konfigurera vilka kort och hur de ska visas i panelen 
+\n 
+\n • Gå förbi panelen om du föredrar en menybaserad kontroll över appen 
+\n 
+\n • För att hämta kartor kan regioner väljas direkt genom att peta på världskartan 
+\n 
+\n • Sökning efter intressepunkter (POI) understöder nu mer specifika frågor 
+\n 
+\n • Förbättrad funktion för POI- och OSM-redigering 
+\n 
+\n • Strukturen för hämtning av kartdata och gränssnittet har omarbetats 
+\n 
+\n och mer …</string>
     <string name="dashboard_or_drawer_description">Det finns ett nytt val att primärt kontrollera appen via den flexibla panelen eller via en statisk meny. Detta val kan du alltid ändra på under inställningarna i panelen.</string>
 <string name="use_dashboard_btn">Använd panelen</string>
     <string name="use_drawer_btn">Använd menyn</string>
@@ -2206,9 +2206,17 @@ Detta kräver {3} MB temporärt och {1} MB permanent.
     <string name="open_street_map_login_and_pass">OpenStreetMap inloggning och lösenord</string>
     <string name="no_map_markers_found">Lägg till kartmarkörer via kartan</string>
     <string name="no_waypoints_found">Hittar inga waypoints</string>
-    <string name="release_2_3">" • OSM Live. Stöd bidragsgivare och utvecklare av kartor och erhåll kartuppdateringar varje timme.
-\n\n • Kartmarkörer: ett nytt sätt att snabbt välja platser på kartan.\n\n • Mer detaljerade OSM-kartor med landsspecifika vägmärken samt massor av nya kartfunktioner.\n\n • Förbättrat utseende för ruttförberedelse.
-\n\n • Många förbättringar i kartans kontextmeny såsom kontextuell adressökning.\n\n och ännu mer … "</string>
+    <string name="release_2_3">•\\022 OSM Live. Stöd bidragsgivare och utvecklare av kartor och erhåll kartuppdateringar varje timme. 
+\n
+\n • Kartmarkörer: ett nytt sätt att snabbt välja platser på kartan.
+\n
+\n • Mer detaljerade OSM-kartor med landsspecifika vägmärken samt massor av nya kartfunktioner.
+\n
+\n • Förbättrat utseende för ruttförberedelse. 
+\n
+\n • Många förbättringar i kartans kontextmeny såsom kontextuell adressökning.
+\n
+\n och ännu mer …</string>
     <string name="map_widget_bearing">Relativ bäring</string>
     <string name="access_disable_offroute_recalc">Räkna inte om rutten när du lämnat den</string>
     <string name="access_disable_offroute_recalc_descr">Förhindrar automatiskt omberäkning av rutten när du lämnat den</string>
@@ -2541,7 +2549,7 @@ Vänligen tillhandahåll fullständig kod</string>
     <string name="nothing_found">Hittade ingenting :(</string>
     <string name="nothing_found_descr">Ändra sökord eller utöka sökradien</string>
     <string name="sorted_by_distance">Sorterat efter avstånd</string>
-    <string name="search_favorites">Sökfavoriter</string>
+    <string name="search_favorites">Sök favoriter</string>
     <string name="shared_string_plugin">Insticksmodul</string>
     <string name="srtm_color_scheme">Färgschema</string>
     <string name="favorite_group_name">Gruppnamn</string>
@@ -2648,4 +2656,15 @@ Vänligen tillhandahåll fullständig kod</string>
     <string name="open_mapillary">Öppna Mapillary</string>
     <string name="improve_coverage_mapillary">Förbättra fototäckning med Mapillary</string>
     <string name="mapillary_widget_descr">Gör så att du snabbt kan bidraga till Mapillary</string>
+    <string name="descendingly">nedåt</string>
+    <string name="ascendingly">uppåt</string>
+    <string name="marker_moved_to_active">Kartmarkören flyttad till aktiva</string>
+    <string name="move_all_to_history">Flytta alla till historiken</string>
+    <string name="keep_showing_on_map">Fortsätt att visa på kartan</string>
+    <string name="measurement_tool_action_bar">Titta på kartan och lägg till punkter</string>
+    <string name="quick_action_show_navigation_finish_dialog">Visa dialogen Navigation avslutad</string>
+    <string name="store_tracks_in_monthly_directories">Spara inspelade spår i mappar efter månad</string>
+    <string name="store_tracks_in_monthly_directories_descrp">Spara inspelade spår i undermappar efter inspelad månad (typ 2017-01).</string>
+    <string name="mapillary_menu_descr_dates">Visa bilder tillagda under en speciell period.</string>
+    <string name="mapillary_menu_descr_username">Visa bilder tillagda av en speciell användare.</string>
     </resources>
