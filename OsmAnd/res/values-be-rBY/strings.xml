@@ -2844,7 +2844,7 @@ U vypadku, kali vy lubіcie OsmAnd і OSM і chočacie padtrymać jaho, heta іd
     <string name="add_location_as_first_point_descr">Dadać vaša stanovišča jak pieršuju kropku pry planavanni maršrutu.</string>
     <string name="my_location">Majo stanovišča</string>
     <string name="shared_string_finish">Finiš</string>
-    <string name="plan_route">Pranavać maršrut</string>
+    <string name="plan_route">Planavać maršrut</string>
     <string name="shared_string_sort">Sartavać</string>
     <string name="coordinate_input">Uvod kaardynat</string>
     <string name="is_saved">zachavany</string>
@@ -2854,12 +2854,12 @@ U vypadku, kali vy lubіcie OsmAnd і OSM і chočacie padtrymać jaho, heta іd
     <string name="group_will_be_removed_after_restart">Hrupa budzie vydalienaja paslia pierazapusku</string>
     <string name="shared_string_markers">Markiery</string>
     <string name="coordinates_format">Farmat kaardynat</string>
-    <string name="use_system_keyboard">Vykarystoŭvać sistemnuju klavijaturu</string>
-    <string name="fast_coordinates_input_descr">Abrać farmat uvodu kaardynat. Vy zaŭsiody možacie zmianić jaho, nacisnuŭšy nalady.</string>
+    <string name="use_system_keyboard">Vykarystoŭvać systemnuju klavijaturu</string>
+    <string name="fast_coordinates_input_descr">Abrać farmat uvodu kaardynat. Vy zaŭsiody možacie źmianić jaho, nacisnuŭšy Nałady.</string>
     <string name="fast_coordinates_input">Chutki ŭvod kaardynat</string>
-    <string name="routing_attr_avoid_ice_roads_fords_name">Pazbiahać liadovych daroh i brodaŭ</string>
-    <string name="routing_attr_avoid_ice_roads_fords_description">Pazbiahaje liadovyja darohi i brody</string>
-    <string name="make_round_trip_descr">Dadać kopiju pačatkovaj kropki jak miesca pryznačennia.</string>
+    <string name="routing_attr_avoid_ice_roads_fords_name">Pazbiahać ladovych daroh i bradoŭ</string>
+    <string name="routing_attr_avoid_ice_roads_fords_description">Pazbiahaje ladovyja darohi i brady</string>
+    <string name="make_round_trip_descr">Dadać kopiju pačatkovaj kropki jak miesca pryznačeńnia.</string>
     <string name="make_round_trip">Zrabić kruhavoje padarožža</string>
     <string name="shared_string_navigate">Pačać navihacyju</string>
     <string name="osn_modify_dialog_error">Adbyłosia vyklučeńnie: natatka nie była źmienienaja</string>
