@@ -275,7 +275,7 @@ public class WaypointHelper {
 					// Check if stop has directional info
 					if (info != null && info.getType() != null && info.getType() == AlarmInfoType.STOP) {
 						// TODO: better than bearingVsRouteDirection would be routeVsWayDirection analysis
-						if (ro.isStopForward(ro.bearingVsRouteDirection(loc) == -1)) {
+						if (ro.isStopForward(ro.bearingVsRouteDirection(loc)) == -1) {
 							info = null;
 						}
 						// TODO: Could add some analysis here if a stop without directional tagging is shortly _behind_ an intersection
