@@ -648,7 +648,7 @@ public class GpxImportHelper {
 			}
 
 			if (night) {
-				((TextView) mainView.findViewById(R.id.title)).setTextColor(ContextCompat.getColor(getActivity(), R.color.ctx_menu_info_text_dark));
+				((TextView) mainView.findViewById(R.id.import_gpx_title)).setTextColor(ContextCompat.getColor(getActivity(), R.color.ctx_menu_info_text_dark));
 			}
 
 			((ImageView) mainView.findViewById(R.id.import_as_favorites_icon)).setImageDrawable(getContentIcon(R.drawable.ic_action_fav_dark));
