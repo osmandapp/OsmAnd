@@ -692,9 +692,9 @@ public class RouteDataObject {
 				for (int j = 0; j < types.length; j++) {
 					if (r.getTag().equals("direction")) {
 						String dv = r.getValue();
-						if ((dv.equals("forward") && direction = true) || (dv.equals("backward") && direction = false)) {
+						if ((dv.equals("forward") && direction == true) || (dv.equals("backward") && direction == false)) {
 							return 1;
-						} else if ((dv.equals("forward") && direction = false) || (dv.equals("backward") && direction = true)) {
+						} else if ((dv.equals("forward") && direction == false) || (dv.equals("backward") && direction == true)) {
 							return -1;
 						}
 					}
