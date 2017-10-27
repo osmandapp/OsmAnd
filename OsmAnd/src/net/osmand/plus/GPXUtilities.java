@@ -345,7 +345,7 @@ public class GPXUtilities {
 			points = 0;
 
 			double channelThresMin = 10;           // Minimum oscillation amplitude considered as relevant or as above noise for accumulated Ascent/Descent analysis
-			double channelThres = channelThresMin; // Actual oscillation amplitude considered as above noise (accomodates depedency on current VDOP/getAccuracy if desired)
+			double channelThres = channelThresMin; // Actual oscillation amplitude considered as above noise (dynamic channel adjustment, accomodates depedency on current VDOP/getAccuracy if desired)
 			double channelBase;
 			double channelTop;
 			double channelBottom;
@@ -360,7 +360,7 @@ public class GPXUtilities {
 				channelBase = 99999;
 				channelTop = channelBase;
 				channelBottom = channelBase;
-				//channelThres = channelThresMin;
+				//channelThres = channelThresMin; //only for dynamic channel adjustment
 
 				float segmentDistance = 0f;
 				metricEnd += s.metricEnd;
@@ -428,9 +428,9 @@ public class GPXUtilities {
 					// - Detect the consecutive elevation trend channels: Only use the net elevation changes of each trend channel (i.e. between the turnarounds) to accumulate the Ascent/Descent values.
 					// - Perform the channel evaluation on Low Pass Filter (LPF) smoothed ele data instead of on the raw ele data
 					// Parameters:
-					// - channelMinThres (in meters): defines the channel turnaround detection, i.e. oscillations smaller than this are ignored as irrelevant or noise.
+					// - channelThresMin (in meters): defines the channel turnaround detection, i.e. oscillations smaller than this are ignored as irrelevant or noise.
 					// - smoothWindow (number of points): is the LPF window
-					// REMOVED, as no relevant examples found: To suppress unreliable measurement points, relax the turnaround detection from the constant channelThresMin to channelThres which is based on the maximum VDOP of any point which contributed to the current trend. (Good assumption is VDOP=2*HDOP, which accounts for invisibility of lower hemisphere satellites.)
+					// NOW REMOVED, as no relevant examples found: Dynamic channel adjustment: To suppress unreliable measurement points, could relax the turnaround detection from the constant channelThresMin to channelThres which is e.g. based on the maximum VDOP of any point which contributed to the current trend. (Good assumption is VDOP=2*HDOP, which accounts for invisibility of lower hemisphere satellites.)
 
 					// LPF smooting of ele data, usually smooth over odd number of values like 5
 					final int smoothWindow = 5;
@@ -456,18 +456,18 @@ public class GPXUtilities {
 							channelBase = eleSmoothed;
 							channelTop = channelBase;
 							channelBottom = channelBase;
-							//channelThres = channelThresMin;
+							//channelThres = channelThresMin; //only for dynamic channel adjustment
 						}
 						// Channel maintenance
 						if (eleSmoothed > channelTop) {
 							channelTop = eleSmoothed;
 							//if (!Double.isNaN(point.hdop)) {
-							//	channelThres = Math.max(channelThres, 2.0 * point.hdop);
+							//	channelThres = Math.max(channelThres, 2.0 * point.hdop); //only for dynamic channel adjustment
 							//}
 						} else if (eleSmoothed < channelBottom) {
 							channelBottom = eleSmoothed;
 							//if (!Double.isNaN(point.hdop)) {
-							//	channelThres = Math.max(channelThres, 2.0 * point.hdop);
+							//	channelThres = Math.max(channelThres, 2.0 * point.hdop); //only for dynamic channel adjustment
 							//}
 						}
 						// Turnaround (breakout) detection
@@ -478,7 +478,7 @@ public class GPXUtilities {
 							channelBase = channelTop;
 							channelBottom = eleSmoothed;
 							climb = false;
-							//channelThres = channelThresMin;
+							//channelThres = channelThresMin; //only for dynamic channel adjustment
 						} else if ((eleSmoothed >= (channelBottom + channelThres)) && (climb == false)) {
 							if ((channelBase - channelBottom) >= channelThres) {
 								diffElevationDown += channelBase - channelBottom;
@@ -486,7 +486,7 @@ public class GPXUtilities {
 							channelBase = channelBottom;
 							channelTop = eleSmoothed;
 							climb = true;
-							//channelThres = channelThresMin;
+							//channelThres = channelThresMin; //only for dynamic channel adjustment
 						}
 						// End detection without breakout
 						if (j == (numberOfPoints - 1)) {
