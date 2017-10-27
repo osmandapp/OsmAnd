@@ -685,21 +685,27 @@ public class RouteDataObject {
 		return direction;
 	}
 
-	public boolean isStopDirectionOpposite(boolean direction) {
-		for(int i=0; i<types.length; i++) {
+	public int isStopForward(boolean direction) {
+		for (int i = 0; i < types.length; i++) {
 			RouteTypeRule r = region.quickGetEncodingRule(types[i]);
 			if (r.getTag().equals("highway") && r.getValue().equals("stop")) {
-				for (int j=0; j<types.length; j++) {
-					if (direction = true && r.getTag().equals("direction") && r.getValue().equals("backward")) {
-						return true;
+				for (int j = 0; j < types.length; j++) {
+					if (r.getTag().equals("direction")) {
+						string dv = r.getValue();
+						if ((dv.equals("forward") && direction = true) || (dv.equals("backward") && direction = false)) {
+							return 1;
+						} else if ((dv.equals("forward") && direction = false) || (dv.equals("backward") && direction = true)) {
+							return -1;
+						}
 					}
-					if (direction = false && r.getTag().equals("direction") && r.getValue().equals("forward")) {
-						return true;
-					}
+					// stop=all usually tagged on conflicting node itself, so not needed here
+					//if (r.getTag().equals("stop") && r.getValue().equals("all")) {
+					//	return 1;
+					//}
 				}
 			}
 		}
-		return false;
+		return 0; //no directional info detected
 	}
 
 	public double distance(int startPoint, int endPoint) {
