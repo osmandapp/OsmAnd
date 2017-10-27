@@ -17,6 +17,9 @@ import android.support.annotation.Nullable;
 import android.support.v4.content.ContextCompat;
 import android.support.v7.app.AlertDialog;
 import android.support.v7.app.AppCompatActivity;
+import android.text.SpannableStringBuilder;
+import android.text.Spanned;
+import android.text.style.ForegroundColorSpan;
 import android.view.ContextThemeWrapper;
 import android.view.LayoutInflater;
 import android.view.View;
@@ -654,7 +657,13 @@ public class GpxImportHelper {
 			((ImageView) mainView.findViewById(R.id.import_as_favorites_icon)).setImageDrawable(getContentIcon(R.drawable.ic_action_fav_dark));
 			((ImageView) mainView.findViewById(R.id.import_as_gpx_icon)).setImageDrawable(getContentIcon(R.drawable.ic_action_polygom_dark));
 
-			((TextView) mainView.findViewById(R.id.import_gpx_file_name_tv)).setText(fileName);
+			int nameColor = ContextCompat.getColor(getContext(), night ? R.color.osmand_orange : R.color.dashboard_blue);
+			int descrColor = ContextCompat.getColor(getContext(), night ? R.color.dashboard_subheader_text_dark : R.color.dashboard_subheader_text_light);
+			String descr = getString(R.string.import_gpx_file_description);
+			SpannableStringBuilder text = new SpannableStringBuilder(fileName).append(" ").append(descr);
+			text.setSpan(new ForegroundColorSpan(nameColor), 0, fileName.length(), Spanned.SPAN_EXCLUSIVE_EXCLUSIVE);
+			text.setSpan(new ForegroundColorSpan(descrColor), fileName.length() + 1, text.length(), Spanned.SPAN_EXCLUSIVE_EXCLUSIVE);
+			((TextView) mainView.findViewById(R.id.import_gpx_description)).setText(text);
 
 			mainView.findViewById(R.id.import_as_favorites_row).setOnClickListener(new View.OnClickListener() {
 				@Override
