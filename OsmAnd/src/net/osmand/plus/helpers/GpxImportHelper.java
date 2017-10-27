@@ -541,29 +541,13 @@ public class GpxImportHelper {
 		if (forceImportFavourites) {
 			importFavoritesImpl(gpxFile, fileName, true);
 		} else {
-			final DialogInterface.OnClickListener importFavouritesListener = new DialogInterface.OnClickListener() {
-				@Override
-				public void onClick(DialogInterface dialog, int which) {
-					switch (which) {
-						case DialogInterface.BUTTON_POSITIVE:
-							importFavoritesImpl(gpxFile, fileName, false);
-							break;
-						case DialogInterface.BUTTON_NEGATIVE:
-							handleResult(gpxFile, fileName, save, useImportDir, false);
-							break;
-					}
-				}
-			};
-
 			ImportGpxBottomSheetDialogFragment fragment = new ImportGpxBottomSheetDialogFragment();
+			fragment.setGpxImportHelper(this);
+			fragment.setGpxFile(gpxFile);
+			fragment.setFileName(fileName);
+			fragment.setSave(save);
+			fragment.setUseImportDir(useImportDir);
 			fragment.show(activity.getSupportFragmentManager(), ImportGpxBottomSheetDialogFragment.TAG);
-
-//			new AlertDialog.Builder(activity)
-//					.setTitle(R.string.shared_string_import2osmand)
-//					.setMessage(R.string.import_file_favourites)
-//					.setPositiveButton(R.string.shared_string_import, importFavouritesListener)
-//					.setNegativeButton(R.string.shared_string_save, importFavouritesListener)
-//					.show();
 		}
 	}
 
@@ -622,8 +606,34 @@ public class GpxImportHelper {
 
 		public static final String TAG = "ImportGpxBottomSheetDialogFragment";
 
+		private GpxImportHelper gpxImportHelper;
 		private boolean portrait;
 		private boolean night;
+
+		private GPXFile gpxFile;
+		private String fileName;
+		private boolean save;
+		private boolean useImportDir;
+
+		public void setGpxImportHelper(GpxImportHelper gpxImportHelper) {
+			this.gpxImportHelper = gpxImportHelper;
+		}
+
+		public void setGpxFile(GPXFile gpxFile) {
+			this.gpxFile = gpxFile;
+		}
+
+		public void setFileName(String fileName) {
+			this.fileName = fileName;
+		}
+
+		public void setSave(boolean save) {
+			this.save = save;
+		}
+
+		public void setUseImportDir(boolean useImportDir) {
+			this.useImportDir = useImportDir;
+		}
 
 		@Nullable
 		@Override
@@ -644,16 +654,20 @@ public class GpxImportHelper {
 			((ImageView) mainView.findViewById(R.id.import_as_favorites_icon)).setImageDrawable(getContentIcon(R.drawable.ic_action_fav_dark));
 			((ImageView) mainView.findViewById(R.id.import_as_gpx_icon)).setImageDrawable(getContentIcon(R.drawable.ic_action_polygom_dark));
 
+			((TextView) mainView.findViewById(R.id.import_gpx_file_name_tv)).setText(fileName);
+
 			mainView.findViewById(R.id.import_as_favorites_row).setOnClickListener(new View.OnClickListener() {
 				@Override
 				public void onClick(View view) {
-					Toast.makeText(getActivity(), "Imropt as Favorites", Toast.LENGTH_SHORT).show();
+					gpxImportHelper.importFavoritesImpl(gpxFile, fileName, false);
+					dismiss();
 				}
 			});
 			mainView.findViewById(R.id.import_as_gpx_row).setOnClickListener(new View.OnClickListener() {
 				@Override
 				public void onClick(View view) {
-					Toast.makeText(getActivity(), "Imropt as GPX", Toast.LENGTH_SHORT).show();
+					gpxImportHelper.handleResult(gpxFile, fileName, save, useImportDir, false);
+					dismiss();
 				}
 			});
 
