@@ -201,9 +201,18 @@ public class CoordinateInputDialogFragment extends DialogFragment implements Osm
 
 		changeKeyboardInBoxes();
 
+		final View mapMarkersLayout = mainView.findViewById(R.id.map_markers_layout);
+
 		RecyclerView recyclerView = (RecyclerView) mainView.findViewById(R.id.markers_recycler_view);
 		recyclerView.setLayoutManager(new LinearLayoutManager(getContext()));
 		adapter = new CoordinateInputAdapter(mapActivity, mapMarkers);
+		adapter.registerAdapterDataObserver(new RecyclerView.AdapterDataObserver() {
+			@Override
+			public void onChanged() {
+				super.onChanged();
+				mapMarkersLayout.setVisibility(adapter.isEmpty() ? View.GONE : View.VISIBLE);
+			}
+		});
 		recyclerView.setAdapter(adapter);
 		recyclerView.addOnScrollListener(new RecyclerView.OnScrollListener() {
 			@Override
@@ -304,8 +313,9 @@ public class CoordinateInputDialogFragment extends DialogFragment implements Osm
 
 	@Override
 	public void onDestroyView() {
-		if (getDialog() != null && getRetainInstance()) {
-			getDialog().setDismissMessage(null);
+		Dialog dialog = getDialog();
+		if (dialog != null && getRetainInstance()) {
+			dialog.setDismissMessage(null);
 		}
 		super.onDestroyView();
 	}
