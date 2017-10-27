@@ -207,9 +207,11 @@ public class CoordinateInputBottomSheetDialogFragment extends BottomSheetDialogF
 		super.onStart();
 		if (!portrait) {
 			final Window window = getDialog().getWindow();
-			WindowManager.LayoutParams params = window.getAttributes();
-			params.width = getActivity().getResources().getDimensionPixelSize(R.dimen.landscape_bottom_sheet_dialog_fragment_width);
-			window.setAttributes(params);
+			if (window != null) {
+				WindowManager.LayoutParams params = window.getAttributes();
+				params.width = getActivity().getResources().getDimensionPixelSize(R.dimen.landscape_bottom_sheet_dialog_fragment_width);
+				window.setAttributes(params);
+			}
 		}
 	}
 

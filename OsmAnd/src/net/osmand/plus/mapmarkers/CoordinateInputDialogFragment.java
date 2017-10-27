@@ -13,7 +13,6 @@ import android.support.v4.widget.TextViewCompat;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.PopupMenu;
 import android.support.v7.widget.RecyclerView;
-import android.support.v7.widget.Toolbar;
 import android.text.Editable;
 import android.text.InputFilter;
 import android.text.InputType;
@@ -60,6 +59,7 @@ import studio.carbonylgroup.textfieldboxes.ExtendedEditText;
 
 import static android.content.ClipDescription.MIMETYPE_TEXT_PLAIN;
 import static android.content.Context.CLIPBOARD_SERVICE;
+import static net.osmand.plus.MapMarkersHelper.MAP_MARKERS_COLORS_COUNT;
 
 public class CoordinateInputDialogFragment extends DialogFragment implements OsmAndCompassListener, OsmAndLocationListener {
 
@@ -199,8 +199,6 @@ public class CoordinateInputDialogFragment extends DialogFragment implements Osm
 
 		registerEditTexts();
 
-		changeKeyboardInBoxes();
-
 		final View mapMarkersLayout = mainView.findViewById(R.id.map_markers_layout);
 
 		RecyclerView recyclerView = (RecyclerView) mainView.findViewById(R.id.markers_recycler_view);
@@ -233,7 +231,7 @@ public class CoordinateInputDialogFragment extends DialogFragment implements Osm
 				LatLon latLon = MapUtils.parseLocation(locPhrase);
 				if (latLon != null) {
 					String name = nameEditText.getText().toString();
-					adapter.addMapMarker(latLon, name);
+					addMapMarker(latLon, name);
 				} else {
 					Toast.makeText(getContext(), getString(R.string.wrong_format), Toast.LENGTH_SHORT).show();
 				}
@@ -312,6 +310,10 @@ public class CoordinateInputDialogFragment extends DialogFragment implements Osm
 	}
 
 	@Override
+	public void onSaveInstanceState(Bundle outState) {
+	}
+
+	@Override
 	public void onDestroyView() {
 		Dialog dialog = getDialog();
 		if (dialog != null && getRetainInstance()) {
@@ -341,6 +343,7 @@ public class CoordinateInputDialogFragment extends DialogFragment implements Osm
 		for (OsmandTextFieldBoxes textFieldBox : textFieldBoxes) {
 			textFieldBox.getPanel().setOnTouchListener(textFieldBoxOnTouchListener);
 		}
+		changeKeyboardInBoxes();
 	}
 
 	private void registerEditTexts() {
@@ -431,50 +434,51 @@ public class CoordinateInputDialogFragment extends DialogFragment implements Osm
 					popupMenu.getMenuInflater().inflate(R.menu.copy_paste_menu, menu);
 					final ClipboardManager clipboardManager = ((ClipboardManager) getContext().getSystemService(CLIPBOARD_SERVICE));
 					MenuItem pasteMenuItem = menu.findItem(R.id.action_paste);
-					if (!(clipboardManager.hasPrimaryClip())) {
-						pasteMenuItem.setEnabled(false);
-					} else if (!(clipboardManager.getPrimaryClipDescription().hasMimeType(MIMETYPE_TEXT_PLAIN))) {
+					if (clipboardManager == null || !clipboardManager.hasPrimaryClip() ||
+							!clipboardManager.getPrimaryClipDescription().hasMimeType(MIMETYPE_TEXT_PLAIN)) {
 						pasteMenuItem.setEnabled(false);
 					} else {
 						pasteMenuItem.setEnabled(true);
 					}
-					popupMenu.setOnMenuItemClickListener(new PopupMenu.OnMenuItemClickListener() {
-						@Override
-						public boolean onMenuItemClick(MenuItem item) {
-							switch (item.getItemId()) {
-								case R.id.action_copy:
-									String labelText;
-									switch (view.getId()) {
-										case R.id.latitude_edit_text:
-											labelText = LATITUDE_LABEL;
-											break;
-										case R.id.longitude_edit_text:
-											labelText = LONGITUDE_LABEL;
-											break;
-										case R.id.name_edit_text:
-											labelText = NAME_LABEL;
-											break;
-										default:
-											labelText = "";
-											break;
-									}
-									ClipData clip = ClipData.newPlainText(labelText, editText.getText().toString());
-									clipboardManager.setPrimaryClip(clip);
-									return true;
-								case R.id.action_paste:
-									ClipData.Item pasteItem = clipboardManager.getPrimaryClip().getItemAt(0);
-									CharSequence pasteData = pasteItem.getText();
-									if (pasteData != null) {
-										String str = editText.getText().toString();
-										editText.setText(str + pasteData.toString());
-										editText.setSelection(editText.getText().length());
-									}
-									return true;
+					if (clipboardManager != null) {
+						popupMenu.setOnMenuItemClickListener(new PopupMenu.OnMenuItemClickListener() {
+							@Override
+							public boolean onMenuItemClick(MenuItem item) {
+								switch (item.getItemId()) {
+									case R.id.action_copy:
+										String labelText;
+										switch (view.getId()) {
+											case R.id.latitude_edit_text:
+												labelText = LATITUDE_LABEL;
+												break;
+											case R.id.longitude_edit_text:
+												labelText = LONGITUDE_LABEL;
+												break;
+											case R.id.name_edit_text:
+												labelText = NAME_LABEL;
+												break;
+											default:
+												labelText = "";
+												break;
+										}
+										ClipData clip = ClipData.newPlainText(labelText, editText.getText().toString());
+										clipboardManager.setPrimaryClip(clip);
+										return true;
+									case R.id.action_paste:
+										ClipData.Item pasteItem = clipboardManager.getPrimaryClip().getItemAt(0);
+										CharSequence pasteData = pasteItem.getText();
+										if (pasteData != null) {
+											String str = editText.getText().toString();
+											editText.setText(str + pasteData.toString());
+											editText.setSelection(editText.getText().length());
+										}
+										return true;
+								}
+								return false;
 							}
-							return false;
-						}
-					});
-					popupMenu.show();
+						});
+						popupMenu.show();
+					}
 					return true;
 				} else {
 					return false;
@@ -597,6 +601,21 @@ public class CoordinateInputDialogFragment extends DialogFragment implements Osm
 				editText.setHint(hint);
 			}
 		}
+	}
+
+	public void addMapMarker(LatLon latLon, String name) {
+		PointDescription pointDescription = new PointDescription(PointDescription.POINT_TYPE_MAP_MARKER, name);
+		int colorIndex = mapMarkers.size() > 0 ? mapMarkers.get(mapMarkers.size() - 1).colorIndex : -1;
+		if (colorIndex == -1) {
+			colorIndex = 0;
+		} else {
+			colorIndex = (colorIndex + 1) % MAP_MARKERS_COLORS_COUNT;
+		}
+		MapMarker mapMarker = new MapMarker(latLon, pointDescription, colorIndex, false, 0);
+		mapMarker.history = false;
+		mapMarker.nextKey = MapMarkersDbHelper.TAIL_NEXT_VALUE;
+		mapMarkers.add(mapMarker);
+		adapter.notifyDataSetChanged();
 	}
 
 	private MapActivity getMapActivity() {

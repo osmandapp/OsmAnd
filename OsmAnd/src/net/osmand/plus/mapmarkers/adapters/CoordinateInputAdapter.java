@@ -7,18 +7,14 @@ import android.view.View;
 import android.view.ViewGroup;
 
 import net.osmand.data.LatLon;
-import net.osmand.data.PointDescription;
 import net.osmand.plus.IconsCache;
 import net.osmand.plus.MapMarkersHelper.MapMarker;
 import net.osmand.plus.R;
 import net.osmand.plus.activities.MapActivity;
 import net.osmand.plus.dashboard.DashLocationFragment;
 import net.osmand.plus.helpers.AndroidUiHelper;
-import net.osmand.plus.mapmarkers.MapMarkersDbHelper;
 
 import java.util.List;
-
-import static net.osmand.plus.MapMarkersHelper.MAP_MARKERS_COLORS_COUNT;
 
 public class CoordinateInputAdapter extends RecyclerView.Adapter<MapMarkerItemViewHolder> {
 
@@ -117,20 +113,5 @@ public class CoordinateInputAdapter extends RecyclerView.Adapter<MapMarkerItemVi
 
 	public MapMarker getItem(int position) {
 		return mapMarkers.get(position);
-	}
-
-	public void addMapMarker(LatLon latLon, String name) {
-		PointDescription pointDescription = new PointDescription(PointDescription.POINT_TYPE_MAP_MARKER, name);
-		int colorIndex = mapMarkers.size() > 0 ? mapMarkers.get(mapMarkers.size() - 1).colorIndex : -1;
-		if (colorIndex == -1) {
-			colorIndex = 0;
-		} else {
-			colorIndex = (colorIndex + 1) % MAP_MARKERS_COLORS_COUNT;
-		}
-		MapMarker mapMarker = new MapMarker(latLon, pointDescription, colorIndex, false, 0);
-		mapMarker.history = false;
-		mapMarker.nextKey = MapMarkersDbHelper.TAIL_NEXT_VALUE;
-		mapMarkers.add(mapMarker);
-		notifyDataSetChanged();
 	}
 }

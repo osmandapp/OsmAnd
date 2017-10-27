@@ -35,14 +35,7 @@ public class OsmandTextFieldBoxes extends TextFieldBoxes {
 			this.panel.setOnClickListener(new OnClickListener() {
 				@Override
 				public void onClick(View view) {
-					if(!OsmandTextFieldBoxes.this.isActivated()) {
-						OsmandTextFieldBoxes.this.activate(true);
-					}
-
-					OsmandTextFieldBoxes.this.setHasFocus(true);
-					if (!useOsmandKeyboard) {
-						OsmandTextFieldBoxes.this.inputMethodManager.showSoftInput(OsmandTextFieldBoxes.this.editText, InputMethodManager.SHOW_IMPLICIT);
-					}
+					select();
 				}
 			});
 
@@ -71,7 +64,7 @@ public class OsmandTextFieldBoxes extends TextFieldBoxes {
 	}
 
 	@Override
-	protected void deactivate() {
+	public void deactivate() {
 		if(this.editText.getText().toString().isEmpty()) {
 			ViewCompat.animate(this.floatingLabel).alpha(1.0F).scaleX(1.0F).scaleY(1.0F).translationY(0.0F).setDuration((long)this.ANIMATION_DURATION);
 			this.editTextLayout.setVisibility(View.INVISIBLE);
