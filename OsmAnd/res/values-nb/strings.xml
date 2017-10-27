@@ -2035,7 +2035,7 @@ Representerer området: %1$s x %2$s</string>
     <string name="distance_measurement_finish_subtrack">Begynn nytt underspor</string>
     <string name="distance_measurement_load_gpx">Åpne eksisterende GPX</string>
     <string name="use_magnetic_sensor_descr">For kompassavlesningen, bruk den magnetiske sensoren istedenfor orienteringssensoren</string>
-    <string name="download_using_mobile_internet">Wi-Fi er i øyeblikket ikke tilkoblet. Vil du å bruke gjeldende internettforbindelse for nedlasting?</string>
+    <string name="download_using_mobile_internet">Wi-Fi er i øyeblikket ikke tilkoblet. Vil du bruke gjeldende internettforbindelse for nedlasting?</string>
     <string name="contribution_activity">Installasjonsversjon</string>
     <string name="item_checked">valgt</string>
     <string name="item_unchecked">fravalgt</string>
