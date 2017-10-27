@@ -10,6 +10,7 @@ public class QuickSearchMoreListItem extends QuickSearchListItem {
 	private String name;
 	private SearchMoreItemOnClickListener onClickListener;
 	private boolean emptySearch;
+	private boolean onlineSearch;
 	private boolean interruptedSearch;
 	private String findMore;
 	private String restartSearch;
@@ -57,6 +58,14 @@ public class QuickSearchMoreListItem extends QuickSearchListItem {
 
 	public void setEmptySearch(boolean emptySearch) {
 		this.emptySearch = emptySearch;
+	}
+
+	public boolean isOnlineSearch() {
+		return onlineSearch;
+	}
+
+	public void setOnlineSearch(boolean onlineSearch) {
+		this.onlineSearch = onlineSearch;
 	}
 
 	public void increaseRadiusOnClick() {

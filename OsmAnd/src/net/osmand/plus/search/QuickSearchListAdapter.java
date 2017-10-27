@@ -242,9 +242,7 @@ public class QuickSearchListAdapter extends ArrayAdapter<QuickSearchListItem> {
 					((QuickSearchMoreListItem) listItem).increaseRadiusOnClick();
 				}
 			});
-			if (OsmandPlugin.getEnabledPlugin(OsmandRasterMapsPlugin.class) != null
-					&& !app.getSearchUICore().getCore().getSearchSettings().isCustomSearch()
-					&& !app.getSearchUICore().getCore().getSearchSettings().hasCustomSearchType(ObjectType.ONLINE_SEARCH)) {
+			if (!searchMoreListItem.isOnlineSearch()) {
 				view.findViewById(R.id.online_search_row).setVisibility(View.VISIBLE);
 				view.findViewById(R.id.online_search_row).setOnClickListener(new View.OnClickListener() {
 					@Override

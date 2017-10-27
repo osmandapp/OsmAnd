@@ -338,7 +338,8 @@ public class QuickSearchHelper implements ResourceListener {
 			double lon = phrase.getSettings().getOriginalLocation().getLongitude();
 			String text = phrase.getUnknownSearchPhrase();
 			filter.setFilterByName(text);
-			publishAmenities(phrase, matcher, filter.initializeNewSearch(lat, lon, -1, null, phrase.getRadiusLevel()));
+			publishAmenities(phrase, matcher, filter.initializeNewSearch(lat, lon,
+					-1, null, phrase.getRadiusLevel() + 3));
 			return true;
 		}
 
