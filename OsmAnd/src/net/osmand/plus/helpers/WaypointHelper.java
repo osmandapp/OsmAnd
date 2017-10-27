@@ -272,23 +272,14 @@ public class WaypointHelper {
 					RouteTypeRule typeRule = reg.quickGetEncodingRule(pointTypes[r]);
 					AlarmInfo info = AlarmInfo.createAlarmInfo(typeRule, 0, loc);
 
-					// Check if stop has directional info
+					// For STOP first check if it has directional info
+					// Issue #2885: This seems to fail
 					if (info != null && info.getType() != null && info.getType() == AlarmInfoType.STOP) {
-						// TODO: better than bearingVsRouteDirection would be routeVsWayDirection analysis
 						if (ro.isStopForward(ro.bearingVsRouteDirection(loc)) == -1) {
 							info = null;
 						}
-						// TODO: Could add some analysis here if a stop without directional tagging is shortly _behind_ an intersection
+						//Toast.makeText(app.getApplicationContext(), Double.toString(ro.directionRoute(0, true)) + ",\n" + Double.toString(loc.getBearing()) + ",\n" + Double.toString(MapUtils.alignAngleDifference(ro.directionRoute(0, true) - loc.getBearing() / 180f * Math.PI))), Toast.LENGTH_LONG).show();
 					}
-
-					// Issue #2873 may indicate we need some sort of check here if Alarm is in forward direction
-					// But cannot reproduce the issue for now
-					//if (loc.hasBearing()) {
-					//	if (Math.abs(MapUtils.alignAngleDifference(bearingTo("actual alarm location") - loc.getBearing() / 180f * Math.PI)) >= Math.PI / 2f) {
-					//		info = null;
-					//	}
-					//Toast.makeText(app.getApplicationContext(), Double.toString(ro.directionRoute(0, true)) + ",\n" + Double.toString(loc.getBearing()) + ",\n" + Double.toString(MapUtils.alignAngleDifference(ro.directionRoute(0, true) - loc.getBearing() / 180f * Math.PI))), Toast.LENGTH_LONG).show();
-					//}
 
 					if (info != null) {
 						if (info.getType() != AlarmInfoType.SPEED_CAMERA || showCameras) {
