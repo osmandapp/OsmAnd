@@ -691,7 +691,7 @@ public class RouteDataObject {
 			if (r.getTag().equals("highway") && r.getValue().equals("stop")) {
 				for (int j = 0; j < types.length; j++) {
 					if (r.getTag().equals("direction")) {
-						string dv = r.getValue();
+						String dv = r.getValue();
 						if ((dv.equals("forward") && direction = true) || (dv.equals("backward") && direction = false)) {
 							return 1;
 						} else if ((dv.equals("forward") && direction = false) || (dv.equals("backward") && direction = true)) {
