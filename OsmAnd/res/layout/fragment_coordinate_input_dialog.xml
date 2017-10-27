@@ -21,14 +21,25 @@
                 android:id="@+id/coordinate_input_toolbar"
                 android:layout_width="match_parent"
                 android:layout_height="@dimen/dashboard_map_toolbar"
-                osmand:contentInsetLeft="54dp"
-                osmand:contentInsetStart="54dp">
+                osmand:contentInsetLeft="4dp"
+                osmand:contentInsetStart="4dp"
+                osmand:contentInsetRight="16dp"
+                osmand:contentInsetEnd="16dp">
 
                 <LinearLayout
                     android:orientation="horizontal"
                     android:layout_width="match_parent"
                     android:layout_height="match_parent"
                     android:gravity="center_vertical">
+
+                    <ImageButton
+                        android:id="@+id/back_button"
+                        style="@style/Widget.AppCompat.ActionButton"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:src="@drawable/ic_arrow_back"
+                        android:layout_marginRight="16dp"
+                        android:layout_marginEnd="16dp"/>
 
                     <net.osmand.plus.widgets.TextViewEx
                         android:layout_width="0dp"
@@ -49,8 +60,6 @@
                         android:gravity="center_vertical"
                         android:ellipsize="end"
                         android:maxLines="1"
-                        android:paddingRight="16dp"
-                        android:paddingLeft="16dp"
                         android:text="@string/shared_string_options"
                         osmand:typeface="@string/font_roboto_regular"
                         android:textAllCaps="true"
@@ -73,7 +82,9 @@
                     android:layout_width="0dp"
                     android:layout_weight="1"
                     android:layout_height="wrap_content"
-                    osmand:labelText="@string/navigate_point_latitude">
+                    osmand:labelText="@string/navigate_point_latitude"
+                    android:layout_marginRight="16dp"
+                    android:layout_marginEnd="16dp">
 
                     <studio.carbonylgroup.textfieldboxes.ExtendedEditText
                         android:inputType="number"
@@ -82,10 +93,6 @@
                         android:layout_height="wrap_content"/>
 
                 </net.osmand.plus.OsmandTextFieldBoxes>
-
-                <View
-                    android:layout_width="16dp"
-                    android:layout_height="match_parent"/>
 
                 <net.osmand.plus.OsmandTextFieldBoxes
                     android:id="@+id/longitude_box"
@@ -115,7 +122,9 @@
                     android:layout_width="0dp"
                     android:layout_weight="1"
                     android:layout_height="wrap_content"
-                    osmand:labelText="@string/shared_string_name">
+                    osmand:labelText="@string/shared_string_name"
+                    android:layout_marginEnd="16dp"
+                    android:layout_marginRight="16dp">
 
                     <studio.carbonylgroup.textfieldboxes.ExtendedEditText
                         android:inputType="text"
@@ -125,10 +134,6 @@
                         android:layout_height="wrap_content"/>
 
                 </net.osmand.plus.OsmandTextFieldBoxes>
-
-                <View
-                    android:layout_width="16dp"
-                    android:layout_height="match_parent"/>
 
                 <View
                     android:layout_width="0dp"

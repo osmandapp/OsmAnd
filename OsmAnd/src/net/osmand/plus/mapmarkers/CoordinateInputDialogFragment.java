@@ -140,10 +140,7 @@ public class CoordinateInputDialogFragment extends DialogFragment implements Osm
 			((CoordinateInputBottomSheetDialogFragment) coordinateInputBottomSheetDialogFragment).setListener(createCoordinateInputFormatChangeListener());
 		}
 
-		Toolbar toolbar = (Toolbar) mainView.findViewById(R.id.coordinate_input_toolbar);
-
-		toolbar.setNavigationIcon(getMyApplication().getIconsCache().getIcon(R.drawable.ic_arrow_back));
-		toolbar.setNavigationOnClickListener(new View.OnClickListener() {
+		mainView.findViewById(R.id.back_button).setOnClickListener(new View.OnClickListener() {
 			@Override
 			public void onClick(View view) {
 				saveMarkers();
