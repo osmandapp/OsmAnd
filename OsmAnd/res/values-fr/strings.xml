@@ -2984,4 +2984,8 @@ représentant la zone : %1$s x %2$s</string>
 	<string name="shared_string_back">Précédent</string>
 	<string name="view">Afficher</string>
 	<string name="waypoints_added_to_map_markers">Étapes ajoutées comme marques</string>
+	<string name="import_gpx_file_description">peut être importé comme Favoris ou comme Itinéraire.</string>
+    <string name="import_as_gpx">Importer comme fichier GPX</string>
+    <string name="import_as_favorites">Importer comme Favoris</string>
+    <string name="import_file">Importer fichier</string>
 	</resources>
