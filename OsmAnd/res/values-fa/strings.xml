@@ -2920,4 +2920,8 @@
 	<string name="shared_string_back">عقب</string>
 	<string name="view">نما</string>
 	<string name="waypoints_added_to_map_markers">نقاط بین‌راهی به نشانه‌های نقشه اضافه شد</string>
+	<string name="import_gpx_file_description">را می‌توانید به‌عنوان یک مسیر یا نقاط برگزیده وارد کنید.</string>
+    <string name="import_as_gpx">ورود به‌عنوان فایل GPX</string>
+    <string name="import_as_favorites">ورود به‌عنوان نقاط برگزیده</string>
+    <string name="import_file">واردکردن فایل</string>
 	</resources>
