@@ -2917,4 +2917,8 @@ OsmAnd (Automated Navigation Directions) 是一個地圖和導航的應用程式
     <string name="shared_string_back">返回</string>
     <string name="view">檢視</string>
 	<string name="waypoints_added_to_map_markers">航點已加入到地圖標記</string>
+	<string name="import_gpx_file_description">可以匯入為我的收藏標點，或作為軌跡檔案。</string>
+    <string name="import_as_gpx">匯入為 GPX 檔案</string>
+    <string name="import_as_favorites">匯入為我的收藏</string>
+    <string name="import_file">匯入檔案</string>
 	</resources>
