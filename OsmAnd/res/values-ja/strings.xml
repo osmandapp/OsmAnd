@@ -1194,7 +1194,7 @@ POIの更新は利用できません</string>
 	<string name="search_position_map_view">マップ画面中心</string>
 	<string name="select_search_position">検索基点:</string>
 	<string name="context_menu_item_search">近隣を検索</string>
-	<string name="shared_string_save_as_gpx">GPXファイルにルートを保存</string>
+	<string name="shared_string_save_as_gpx">新規としてGPX経路を保存</string>
 	<string name="route_successfully_saved_at">ルートを「%1$s」として保存しました。</string>
 	<string name="filename_input">ファイル名: </string>
 	<string name="file_with_name_already_exist">同じ名前のファイルが既に存在します。</string>
@@ -1546,7 +1546,7 @@ POIの更新は利用できません</string>
     <string name="osmo_auto_send_locations_descr">アプリケーション起動後に自動的に旅行中の場所を送信します</string>
     <string name="osmo_auto_send_locations">自動的に旅行を開始</string>
     <string name="osmo_tracker_id">トラッカーID</string>
-    <string name="osmo_tracker_id_descr">クリックでトラッカーIDを表示</string>
+    <string name="osmo_tracker_id_descr">タップでトラッカーIDを表示</string>
     <string name="osmo_session_token">セッショントークン: %1$s</string>
     <string name="osmo_auth_pending">認証を待っています…</string>
     <string name="osmo_locations_sent">"位置の送信 %1$d (バッファ内 %2$d) "</string>
@@ -1898,7 +1898,7 @@ POIの更新は利用できません</string>
     <string name="current_route">現在のルート</string>
     <string name="agps_info">A-GPS情報</string>
 	<string name="agps_data_last_downloaded">最後にダウンロードしたA-GPSデータ: %1$s</string>
-    <string name="confirm_usage_speed_cameras">多くの国(ドイツ、フランス、イタリア、その他)ではスピードカメラ警告の使用が法律で許可されていません。あなたが法律に違反した場合OsmAndは一切の責任を負いません。この機能を使用する事ができる国の場合のみ、[はい]をクリックしてください。</string>
+    <string name="confirm_usage_speed_cameras">多くの国(ドイツ、フランス、イタリア、その他)ではスピードカメラ警告の使用が法律で許可されていません。あなたが法律に違反した場合OsmAndは一切の責任を負いません。この機能を使用する事ができる国の場合のみ、[はい]をタップしてください。</string>
 	<string name="shared_string_message">メッセージ</string>
 	<string name="shared_string_do_not_use">使用しない</string>
 	<string name="shared_string_show_description">詳細表示</string>
@@ -2342,10 +2342,10 @@ POIの更新は利用できません</string>
     <string name="select_month_and_country">月と国を選択</string>
     <string name="file_name_containes_illegal_char">ファイル名に使用できない文字が含まれています</string>
 <string name="number_of_recipients">受信者数</string>
-    <string name="osm_live_subscription">OSM Live購読</string>
+    <string name="osm_live_subscription">OsmAnd Liveのサブスクリプション</string>
     <string name="osm_live_subscribe_btn">購読</string>
     <string name="osm_live_subscription_settings">購読設定</string>
-    <string name="osm_live_ask_for_purchase">最初にOSM Live購読の手続きをしてください</string>
+    <string name="osm_live_ask_for_purchase">最初にOsmAnd Liveの購読手続きをしてください</string>
 
     <string name="osm_live_header">この購読により世界中のマップを時間毎更新することが可能です。
 購読収入の一部はOSMコミュニティに還元され、OSMに貢献した各ユーザーにも支払われます。
@@ -2367,12 +2367,12 @@ OsmAndとOSMをサポートする方法として現状最適な方法である�
     <!-- string name="lat_lon_pattern">"緯度:%1$.5f  経度:%2$.5f"</string -->
     <string name="access_direction_audio_feedback_descr">進行方向をビープ音で示して案内します</string>
     <string name="access_direction_haptic_feedback_descr">進行方向を振動で示して案内します</string>
-    <string name="use_osm_live_routing_description">OSMライブ更新(ベータ版)でのナビゲーションを有効化</string>
-	<string name="use_osm_live_routing">OSMライブナビゲーション</string>
+    <string name="use_osm_live_routing_description">OSMライブ更新でのナビゲーションを有効化</string>
+	<string name="use_osm_live_routing">OsmAnd Live ナビゲーション</string>
     <string name="access_no_destination">目的地が設定されていません</string>
-    <string name="access_disable_offroute_recalc">道を外れてもルートを変更しない</string>
+    <string name="access_disable_offroute_recalc">指定の道を外れた後にルート再計算を行わない</string>
     <string name="access_disable_wrong_direction_recalc">反対方向へ向かった場合ルートを変更しない</string>
-    <string name="access_disable_wrong_direction_recalc_descr">目的地の方向と逆進した場合、自動的にルートの再計算をしないようにします</string>
+    <string name="access_disable_wrong_direction_recalc_descr">ルートと反対方向に移動しても、自動的にルートの再計算をしないようにします</string>
     <string name="access_smart_autoannounce">スマート音声案内</string>
     <string name="access_smart_autoannounce_descr">目的地への方向が変更されたときのみ通知します</string>
     <string name="access_autoannounce_period">自動音声案内間隔</string>
@@ -2406,19 +2406,19 @@ OsmAndとOSMをサポートする方法として現状最適な方法である�
     <string name="back_to_search">検索に戻る</string>
     <string name="confirmation_to_delete_history_items">選択された履歴を削除しますか？</string>
     <string name="show_something_on_map">マップ上に%1$sを表示</string>
-    <string name="release_2_4">" • 新しくなって、より強化されたフリーワード検索
-\n
-\n • Bluetooth関連の改善多数
-\n
-\n • 音声案内とターン及びレーン指示等のルート案内の改善
-\n
-\n • ルートレンダリング時のトランスポートレイヤの改善
+    <string name="release_2_4">• 新しくなって、より強化されたフリーワード検索 
 \n 
-\n • 新たな言語と対象地域の追加
-\n
-\n • 他、多くの改善とバグ修正
-\n
-\n等々… "</string>
+\n • Bluetooth関連の改善多数 
+\n 
+\n • 音声案内とターン及びレーン指示等のルート案内の改善 
+\n 
+\n • ルートレンダリング時のトランスポートレイヤの改善 
+\n 
+\n • 新たな言語と対象地域の追加 
+\n 
+\n • 他、多くの改善とバグ修正 
+\n 
+\n等々…</string>
     <string name="dist_away_from_my_location">%1$s離れた場所を検索</string>
     
     <string name="share_history_subject">OsmAnd経由で共有</string>
@@ -2430,7 +2430,7 @@ OsmAndとOSMをサポートする方法として現状最適な方法である�
     <string name="map_widget_search">検索</string>
 	<string name="shared_string_is_open_24_7">24時間営業</string>
     <string name="storage_directory_card">メモリーカード</string>
-    <string name="shared_string_topbar">画面上部</string>
+    <string name="shared_string_topbar">画面上部のバー</string>
     <string name="lang_hsb">ソルビア語(Upper)</string>
     <string name="lang_hu_formal">ハンガリー語(フォーマル)</string>
     <string name="map_widget_bearing">相対方位</string>
@@ -3049,4 +3049,7 @@ OsmAndとOSMをサポートする方法として現状最適な方法である�
 \n • OsmAnd Liveのバグ修正、30分ごとに提供される新しいデータ、ナビゲーション内に実装された機能の更新
 \n
 \n</string>
+    <string name="access_map_linked_to_location">マップの場所にリンクされています</string>
+    <string name="rendering_value_darkyellow_name">ダークイエロー</string>
+    <string name="rendering_value_translucent_pink_name">半透明ピンク</string>
     </resources>
