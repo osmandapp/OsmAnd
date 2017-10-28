@@ -1216,7 +1216,9 @@ POIの更新は利用できません</string>
 	<string name="shared_string_no_thanks">遠慮します</string>
 	<string name="basemap_missing">基本世界地図(小さなズームでのみ全世界をカバーします)が欠落しています。概要地図であるWorld_basemap_x.obfをダウンロードしてみてください。</string>
 	<string name="vector_data_missing">オンボード(オフライン)データがSDカード上に見つかりません。オフラインマップを使用するにはそれらをダウンロードしてください。</string>
-	<string name="local_index_gpx_info_show">\n\nオプションを表示するには長押しして下さい</string>
+	<string name="local_index_gpx_info_show">"
+\n
+\nオプションを表示するにはロングタップして下さい"</string>
 	
 	
 	
@@ -1438,7 +1440,7 @@ POIの更新は利用できません</string>
     <string name="osmo_start_service">OsMoサービス</string>
     <string name="osmo_gpx_track_downloaded">OsMoトラック %1$s ダウンロードしました。</string>
     <string name="no_index_file_to_download">ダウンロードできるものが見つかりません、インターネットの接続を確認して下さい。</string>
-    <string name="none_selected_gpx">GPXファイルが選択されていません。利用可能なトラックを選択してください。</string>
+    <string name="none_selected_gpx">GPXファイルが選択されていません。利用可能な経路をロングタップで選択してください。</string>
     
     <string name="local_index_select_gpx_file">選択して表示</string>
     <string name="gpx_split_interval">区間を分割</string>
@@ -1453,7 +1455,9 @@ POIの更新は利用できません</string>
     <string name="loading_smth">ロード中 %1$s …</string>
     <string name="map_widget_plain_time">現在時刻</string>
     <string name="gpx_wpt">経由地点</string>
-    <string name="selected_gpx_info_show">\n\nマップ上に表示するには長押ししてください</string>
+    <string name="selected_gpx_info_show">"
+\n
+\nマップ上に表示するにはロングタップしてください"</string>
     <string name="delay_navigation_start">ターン・バイ・ターン形式誘導を自動起動</string>
     <string name="shared_string_selected_lowercase">選択済み</string>
     <string name="gpx_info_subtracks">"サブトラック: %1$s "</string>
@@ -3052,4 +3056,8 @@ OsmAndとOSMをサポートする方法として現状最適な方法である�
     <string name="access_map_linked_to_location">マップの場所にリンクされています</string>
     <string name="rendering_value_darkyellow_name">ダークイエロー</string>
     <string name="rendering_value_translucent_pink_name">半透明ピンク</string>
+    <string name="ascent_descent">昇順/降順</string>
+    <string name="moving_time">移動時間</string>
+    <string name="max_min">最大/最小</string>
+    <string name="min_max">最小/最大</string>
     </resources>
