@@ -14,6 +14,7 @@ import net.osmand.plus.OsmandApplication;
 import net.osmand.plus.R;
 import net.osmand.router.RouteSegmentResult;
 import net.osmand.router.TurnType;
+import net.osmand.plus.routing.AlarmInfo.AlarmInfoType;
 import net.osmand.util.Algorithms;
 import net.osmand.util.MapUtils;
 import android.content.Context;
@@ -189,7 +190,8 @@ public class RouteCalculationResult {
 				loc.setLatitude(MapUtils.get31LatitudeY(y31));
 				loc.setLongitude(MapUtils.get31LongitudeX(x31));
 				AlarmInfo info = AlarmInfo.createAlarmInfo(typeRule, locInd, loc);
-				if(info != null) {
+				// For STOP first check if it has directional info
+				if ((info != null) && !((info.getType() == AlarmInfoType.STOP) && (res.getObject().isStopApplicable(res.isForwardDirection()) == -1))) {
 					alarms.add(info);
 				}
 			}

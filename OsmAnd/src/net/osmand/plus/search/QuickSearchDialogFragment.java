@@ -533,12 +533,10 @@ public class QuickSearchDialogFragment extends DialogFragment implements OsmAndC
 						updateClearButtonAndHint();
 						updateClearButtonVisibility(true);
 						boolean textEmpty = newQueryText.length() == 0;
-						updateTabbarVisibility(textEmpty);
+						updateTabbarVisibility(textEmpty && !isOnlineSearch());
 						if (textEmpty) {
 							if (addressSearch) {
 								startAddressSearch();
-							} else if (isOnlineSearch()) {
-								restoreSearch();
 							}
 							if (poiFilterApplied) {
 								poiFilterApplied = false;
@@ -552,7 +550,10 @@ public class QuickSearchDialogFragment extends DialogFragment implements OsmAndC
 						if (!searchQuery.equalsIgnoreCase(newQueryText)) {
 							searchQuery = newQueryText;
 							if (Algorithms.isEmpty(searchQuery)) {
+								cancelSearch();
+								setResultCollection(null);
 								searchUICore.resetPhrase();
+								mainSearchFragment.getAdapter().clear();
 							} else {
 								runSearch();
 							}
@@ -710,6 +711,10 @@ public class QuickSearchDialogFragment extends DialogFragment implements OsmAndC
 
 	public String getText() {
 		return searchEditText.getText().toString();
+	}
+
+	public boolean isTextEmpty() {
+		return Algorithms.isEmpty(getText());
 	}
 
 	public AccessibilityAssistant getAccessibilityAssistant() {
@@ -999,7 +1004,7 @@ public class QuickSearchDialogFragment extends DialogFragment implements OsmAndC
 		} else {
 			tabToolbarView.setVisibility(View.GONE);
 			buttonToolbarView.setVisibility(
-					(isOnlineSearch() && getText().length() > 0)
+					(isOnlineSearch() && !isTextEmpty())
 							|| !searchUICore.getSearchSettings().isCustomSearch() ? View.VISIBLE : View.GONE);
 			tabsView.setVisibility(View.GONE);
 			searchView.setVisibility(View.VISIBLE);
@@ -1426,6 +1431,13 @@ public class QuickSearchDialogFragment extends DialogFragment implements OsmAndC
 		searchUICore.updateSettings(settings);
 	}
 
+	private void cancelSearch() {
+		cancelPrev = true;
+		if (!paused) {
+			hideProgressBar();
+		}
+	}
+
 	private void runSearch() {
 		runSearch(searchQuery);
 	}
@@ -1511,7 +1523,7 @@ public class QuickSearchDialogFragment extends DialogFragment implements OsmAndC
 						app.runInUIThread(new Runnable() {
 							@Override
 							public void run() {
-								if(paused) {
+								if (paused) {
 									return;
 								}
 								searching = false;
@@ -1722,7 +1734,7 @@ public class QuickSearchDialogFragment extends DialogFragment implements OsmAndC
 	}
 
 	private void addMoreButton() {
-		if (!paused && !cancelPrev && mainSearchFragment != null) {
+		if (!paused && !cancelPrev && mainSearchFragment != null && !isTextEmpty()) {
 			QuickSearchMoreListItem moreListItem =
 					new QuickSearchMoreListItem(app, null, new SearchMoreItemOnClickListener() {
 						@Override
@@ -1744,6 +1756,7 @@ public class QuickSearchDialogFragment extends DialogFragment implements OsmAndC
 					});
 			moreListItem.setInterruptedSearch(interruptedSearch);
 			moreListItem.setEmptySearch(isResultEmpty());
+			moreListItem.setOnlineSearch(isOnlineSearch());
 			mainSearchFragment.addListItem(moreListItem);
 		}
 	}

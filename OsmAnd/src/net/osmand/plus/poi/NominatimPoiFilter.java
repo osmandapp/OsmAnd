@@ -95,8 +95,8 @@ public class NominatimPoiFilter extends PoiUIFilter {
 				urlq = NOMINATIM_API + "?format=xml&addressdetails=0&accept-language="+ Locale.getDefault().getLanguage() 
 						+ "&q=" + URLEncoder.encode(getFilterByName());	
 			} else {
-				urlq = NOMINATIM_API + URLEncoder.encode(getFilterByName()) + "?format=xml&addressdetails=1&limit=" + LIMIT
-						+ "&bounded=1&" + viewbox;	
+				urlq = NOMINATIM_API + "?format=xml&addressdetails=1&limit=" + LIMIT
+						+ "&bounded=1&" + viewbox + "&q=" + URLEncoder.encode(getFilterByName());
 			}
 			log.info(urlq);
 			URLConnection connection = NetworkUtils.getHttpURLConnection(urlq); //$NON-NLS-1$
