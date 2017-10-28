@@ -2558,5 +2558,5 @@ Representerer området: %1$s x %2$s</string>
     <string name="srtm_menu_download_descr">For å vise koter på kartet, må du laste ned kotekartet for denne regionen.</string>
     <string name="view">Vis</string>
 	<string name="import_as_gpx">Importer som GPX-fil</string>
-    <string name="import_as_favorites">Importer som favoritter</string>
+    <string name="import_as_favorites">Importer som Favoritter</string>
     </resources>
