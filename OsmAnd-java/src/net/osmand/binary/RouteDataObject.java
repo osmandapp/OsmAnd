@@ -705,8 +705,10 @@ public class RouteDataObject {
 			//}
 		}
 		// Experimental: Distance analysis for STOP with no recognized directional tagging
-		if (((direction == true) && (distance(0, intId) < distance(intId, getPointsLength() - 1)))
-				|| ((direction == false) && (distance(0, intId) > distance(intId, getPointsLength() - 1)))) {
+		double d1 = distance(0, intId);
+		double d2 = distance(intId, getPointsLength() - 1);
+		if (((direction == true) && (d1 < d2))
+				|| ((direction == false) && (d1 > d2)) && (d1 != 0) && (d2 != 0)) {
 			return false;
 		}
 		// No directional info detected
