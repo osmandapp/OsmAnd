@@ -685,30 +685,32 @@ public class RouteDataObject {
 		return direction;
 	}
 
-	public int isStopApplicable(boolean direction, int intId) {
+	public boolean isStopApplicable(boolean direction, int intId) {
 		int[] pt = getPointTypes(intId);
 		int sz = pt.length;
 		for (int i = 0; i < sz; i++) {
 			RouteTypeRule r = region.quickGetEncodingRule(pt[i]);
+			// Evaluate direction tag if present
 			if (r.getTag().equals("direction")) {
 				String dv = r.getValue();
 				if ((dv.equals("forward") && direction == true) || (dv.equals("backward") && direction == false)) {
-					return 1;
+					return true;
 				} else if ((dv.equals("forward") && direction == false) || (dv.equals("backward") && direction == true)) {
-					return -1;
+					return false;
 				}
 			}
-			// stop=all usually tagged on conflicting node itself, so not needed here
+			// Tagging stop=all should be ok anyway, usually tagged on conflicting node itself, so not needed here
 			//if (r.getTag().equals("stop") && r.getValue().equals("all")) {
-			//	return 1;
+			//	return true;
 			//}
 		}
 		// Experimental: Distance analysis for STOP with no recognized directional tagging
 		if (((direction == true) && (distance(0, intId) < distance(intId, getPointsLength() - 1)))
 				|| ((direction == false) && (distance(0, intId) > distance(intId, getPointsLength() - 1)))) {
-			return -1;
+			return false;
 		}
-		return 0; //no directional info detected
+		// No directional info detected
+		return true;
 	}
 
 	public double distance(int startPoint, int endPoint) {
