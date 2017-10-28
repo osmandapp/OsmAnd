@@ -322,7 +322,7 @@
 	<string name="invalid_locations">مختصات معتبر نیست!</string>
 	<string name="go_back_to_osmand">به نقشهٔ OsmAnd برگرد</string>
 	<string name="shared_string_close">بستن</string>
-	<string name="loading_data">در حال بارگیری اطلاعات…</string>
+	<string name="loading_data">بارگیری اطلاعات…</string>
 	<string name="reading_indexes">در حال خواندن اطلاعات محلی…</string>
 	<string name="previous_run_crashed">آخرین اجرای OsmAnd با خطا متوقف شد. فایل گزارش {0} ساخته شد. لطفاً مشکل را گزارش و فایل log را ضمیمهٔ آن کنید.</string>
 	<string name="saving_gpx_tracks">در حال ذخیره‌کردن مسیر GPX در کارت حافظه…</string>
@@ -620,10 +620,10 @@
 	<string name="use_online_routing_descr">برای محاسبهٔ مسیر از اینترنت استفاده کن</string>
 	<string name="use_online_routing">استفاده از مسیریابی آنلاین</string>
 	<string name="error_occurred_saving_gpx">خطا در هنگام ذخیره‌کردن GPX</string>
-	<string name="loading_poi_obj">در حال بارگیری POI…</string>
-	<string name="loading_streets_buildings">در حال بارگیری خیابان‌ها/ساختمان‌ها…</string>
-	<string name="loading_streets">در حال بارگیری خیابان‌ها…</string>
-	<string name="loading_cities">در حال بارگیری شهرها…</string>
+	<string name="loading_poi_obj">بارگیری POI…</string>
+	<string name="loading_streets_buildings">بارگیری خیابان‌ها/ساختمان‌ها…</string>
+	<string name="loading_streets">بارگیری خیابان‌ها…</string>
+	<string name="loading_cities">بارگیری شهرها…</string>
 	
 	<string name="error_calculating_route">خطا در محاسبهٔ مسیر</string>
 	<string name="hint_search_online">جست‌وجوی آنلاین: شهر، خیابان، پلاک</string>
@@ -903,12 +903,12 @@
 	<string name="reload_tile">بارگیری مجدد کاشی</string>
 	<string name="save_track_to_gpx">ضبط‌کردن خودکار مسیر هنگام راهبری</string>
 	
-	<string name="loading_postcodes">در حال بارگیری کدهای پستی…</string>
+	<string name="loading_postcodes">بارگیری کدهای پستی…</string>
 	<string name="converting_names">در حال تبدیل اسامی بومی/انگلیسی…</string>
 	<string name="failed_op">ناموفق</string>
 	<string name="auth_failed">اجازهٔ دسترسی احراز نشد</string>
 	<string name="closing_changeset">در حال بستن بستهٔ تغییرات…</string>
-	<string name="opening_changeset">در حال بازکردن بستهٔ تغییرات…</string>
+	<string name="opening_changeset">بازکردن بستهٔ تغییرات…</string>
 	<string name="list_index_files_was_not_loaded">لیست منطقه‌ها از osmand.net بازیابی نشد.</string>
 	<string name="downloading_list_indexes">در حال دانلود لیست مناطق موجود…</string>
 	<string name="download_question_exist">داده‌های آفلاین برای {0} از قبل وجود دارد ({1}). آیا آن را به‌روز می‌کنید ({2})؟</string>
@@ -1495,7 +1495,7 @@
     <string name="osmo_user_left">کاربر %1$s گروه را ترک کرد %2$s</string>
     <string name="osmo_show_group_notifications">نمایش اطلاعیه‌های گروه</string>
     <string name="osmo_show_group_notifications_descr">زمانی که کاربر به گروه می‌پیوندد یا گروه را ترک می‌کند، پیام محوشونده نشان بده</string>
-    <string name="loading_smth">در حال بارگیری %1$s…</string>
+    <string name="loading_smth">بارگیری %1$s…</string>
     <string name="map_widget_plain_time">زمان جاری</string>
     <string name="gpx_wpt">نقطهٔ بین‌راهی</string>
     <string name="selected_gpx_info_show">"
@@ -2419,7 +2419,7 @@
     <string name="user_hates_app_get_feedback_long">لطفاً به ما بگویید دوست دارید چه چیزی در این برنامه تغییر بکند.</string>
     <string name="failed_to_upload">آپلود نشد</string>
     <string name="delete_change">حذف تغییر</string>
-    <string name="successfully_uploaded_pattern">آپلود شد {0}/{1}</string>
+    <string name="successfully_uploaded_pattern">{0} مورد از {1} مورد آپلود شد</string>
     <string name="try_again">تلاش مجدد</string>
     <string name="error_message_pattern">خطا: {0}</string>
     <string name="dahboard_options_dialog_title">پیکربندی پیشخوان</string>
