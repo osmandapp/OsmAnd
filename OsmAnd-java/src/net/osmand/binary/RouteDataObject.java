@@ -685,10 +685,11 @@ public class RouteDataObject {
 		return direction;
 	}
 
-	public int isStopApplicable(boolean direction) {
-		int sz = types.length;
+	public int isStopApplicable(boolean direction, int intId) {
+		int[] pt = getPointTypes(intId);
+		int sz = pt.length;
 		for (int i = 0; i < sz; i++) {
-			RouteTypeRule r = region.quickGetEncodingRule(types[i]);
+			RouteTypeRule r = region.quickGetEncodingRule(pt[i]);
 			if (r.getTag().equals("direction")) {
 				String dv = r.getValue();
 				if ((dv.equals("forward") && direction == true) || (dv.equals("backward") && direction == false)) {

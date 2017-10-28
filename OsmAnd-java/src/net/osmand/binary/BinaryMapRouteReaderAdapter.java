@@ -52,7 +52,6 @@ public class BinaryMapRouteReaderAdapter {
 		public final static int TRAFFIC_SIGNALS = 6;
 		public final static int RAILWAY_CROSSING = 7;
 		private final static int LANES = 8;
-		private final static int STOP = 9;
 		private final String t;
 		private final String v;
 		private int intValue;
@@ -151,8 +150,6 @@ public class BinaryMapRouteReaderAdapter {
 				}
 			} else if(t.equalsIgnoreCase("highway") && "traffic_signals".equals(v)){
 				type = TRAFFIC_SIGNALS;
-			} else if(t.equalsIgnoreCase("highway") && "stop".equals(v)){
-				type = STOP;
 			} else if(t.equalsIgnoreCase("railway") && ("crossing".equals(v) || "level_crossing".equals(v))){
 				type = RAILWAY_CROSSING;
 			} else if(t.equalsIgnoreCase("roundabout") && v != null){
