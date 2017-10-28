@@ -2835,4 +2835,8 @@
 	<string name="view">عرض</string>
 	<string name="waypoints_added_to_map_markers">تمت إضافة نقاط الطريق إلى علامات الخريطة</string>
 	<string name="wrong_input">إدخال خاطئ</string>
+	<string name="import_gpx_file_description">يمكن استيرادها كنقاط مفضلة، أو كملف مسار.</string>
+    <string name="import_as_gpx">استيراد كملف GPX</string>
+    <string name="import_as_favorites">استيراد كمفضلة</string>
+    <string name="import_file">استيراد ملف</string>
 	</resources>
