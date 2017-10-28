@@ -1796,7 +1796,7 @@
     <string name="access_disable_wrong_direction_recalc_descr">Forhindre automatisk omregning av rute når du beveger deg i feil retning</string>
     <string name="access_smart_autoannounce">Smart auto-meddelelse</string>
     <string name="rendering_value_fine_name">Fin</string>
-    <string name="report">Raporter</string>
+    <string name="report">Rapport</string>
     <string name="osmo_connect">Ta del i</string>
     <string name="live_updates">Sanntidsoppdateringer</string>
     <string name="av_video_quality">Videokvalitet</string>
@@ -2559,4 +2559,6 @@ Representerer området: %1$s x %2$s</string>
     <string name="view">Vis</string>
 	<string name="import_as_gpx">Importer som GPX-fil</string>
     <string name="import_as_favorites">Importer som Favoritter</string>
+    <string name="import_file">Importer fil</string>
+	<string name="marker_show_distance_descr">Velg hvordan avstand og retning til kartmarkører på kartskjermen angis:</string>
     </resources>
