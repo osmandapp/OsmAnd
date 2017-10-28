@@ -274,7 +274,7 @@ public class WaypointHelper {
 
 					// For STOP first check if it has directional info
 					if (info != null && info.getType() != null && info.getType() == AlarmInfoType.STOP) {
-						if (ro.isStopApplicable(ro.bearingVsRouteDirection(loc), i)) {
+						if (!ro.isStopApplicable(ro.bearingVsRouteDirection(loc), i)) {
 							info = null;
 						}
 					}
