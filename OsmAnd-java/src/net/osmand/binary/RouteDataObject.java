@@ -703,7 +703,11 @@ public class RouteDataObject {
 			//	return 1;
 			//}
 		}
-		// Open: Could add some analysis if a STOP without directional tagging is shortly _behind_ an intersection
+		// Experimental: Distance analysis for STOP with no recognized directional tagging
+		if (((direction == true) && (distance(0, intId) < distance(intId, getPointsLength() - 1)))
+				|| ((direction == false) && (distance(0, intId) > distance(intId, getPointsLength() - 1)))) {
+			return -1;
+		}
 		return 0; //no directional info detected
 	}
 
