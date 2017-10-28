@@ -699,16 +699,16 @@ public class RouteDataObject {
 					return false;
 				}
 			}
-			// Tagging stop=all should be ok anyway, usually tagged on conflicting node itself, so not needed here
+			// Tagging stop=all should be ok anyway, usually tagged on intersection node itself, so not needed here
 			//if (r.getTag().equals("stop") && r.getValue().equals("all")) {
 			//	return true;
 			//}
 		}
-		// Experimental: Distance analysis for STOP with no recognized directional tagging
+		// Experimental: Distance analysis for STOP with no recognized directional tagging (but exclude those mapped on intersection node)
 		double d1 = distance(0, intId);
 		double d2 = distance(intId, getPointsLength() - 1);
-		if (((direction == true) && (d1 < d2))
-				|| ((direction == false) && (d1 > d2)) && (d1 != 0) && (d2 != 0)) {
+		if (((direction == true) && (d1 < d2) && (d1 != 0))
+					|| ((direction == false) && (d1 > d2) && (d2 != 0))) {
 			return false;
 		}
 		// No directional info detected
