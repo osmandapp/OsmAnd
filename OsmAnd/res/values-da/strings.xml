@@ -2934,4 +2934,8 @@ Tidligere destination bliver sidste mellemliggende punkt.</string>
     <string name="shared_string_back">Tilbage</string>
     <string name="view">Vis</string>
 	<string name="waypoints_added_to_map_markers">Rutepunkter tilføjet markørerne på kortet</string>
+	<string name="import_gpx_file_description">kan importeres som favoritpunkter, eller som spor.</string>
+    <string name="import_as_gpx">Importer som GPX-fil</string>
+    <string name="import_as_favorites">Importer som favoritter</string>
+    <string name="import_file">Importer fil</string>
 	</resources>
