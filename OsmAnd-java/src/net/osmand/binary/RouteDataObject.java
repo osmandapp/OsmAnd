@@ -685,26 +685,24 @@ public class RouteDataObject {
 		return direction;
 	}
 
-	public int isStopForward(boolean direction) {
-		for (int i = 0; i < types.length; i++) {
+	public int isStopApplicable(boolean direction) {
+		int sz = types.length;
+		for (int i = 0; i < sz; i++) {
 			RouteTypeRule r = region.quickGetEncodingRule(types[i]);
-			if (r.getTag().equals("highway") && r.getValue().equals("stop")) {
-				for (int j = 0; j < types.length; j++) {
-					if (r.getTag().equals("direction")) {
-						String dv = r.getValue();
-						if ((dv.equals("forward") && direction == true) || (dv.equals("backward") && direction == false)) {
-							return 1;
-						} else if ((dv.equals("forward") && direction == false) || (dv.equals("backward") && direction == true)) {
-							return -1;
-						}
-					}
-					// stop=all usually tagged on conflicting node itself, so not needed here
-					//if (r.getTag().equals("stop") && r.getValue().equals("all")) {
-					//	return 1;
-					//}
+			if (r.getTag().equals("direction")) {
+				String dv = r.getValue();
+				if ((dv.equals("forward") && direction == true) || (dv.equals("backward") && direction == false)) {
+					return 1;
+				} else if ((dv.equals("forward") && direction == false) || (dv.equals("backward") && direction == true)) {
+					return -1;
 				}
 			}
+			// stop=all usually tagged on conflicting node itself, so not needed here
+			//if (r.getTag().equals("stop") && r.getValue().equals("all")) {
+			//	return 1;
+			//}
 		}
+		// Open: Could add some analysis if a STOP without directional tagging is shortly _behind_ an intersection
 		return 0; //no directional info detected
 	}
 

@@ -273,9 +273,9 @@ public class WaypointHelper {
 					AlarmInfo info = AlarmInfo.createAlarmInfo(typeRule, 0, loc);
 
 					// For STOP first check if it has directional info
-					// Issue #2885: This seems to fail
+					// TODO: Check if this is needed here
 					if (info != null && info.getType() != null && info.getType() == AlarmInfoType.STOP) {
-						if (ro.isStopForward(ro.bearingVsRouteDirection(loc)) == -1) {
+						if (ro.isStopApplicable(ro.bearingVsRouteDirection(loc)) == -1) {
 							info = null;
 						}
 						//Toast.makeText(app.getApplicationContext(), Double.toString(ro.directionRoute(0, true)) + ",\n" + Double.toString(loc.getBearing()) + ",\n" + Double.toString(MapUtils.alignAngleDifference(ro.directionRoute(0, true) - loc.getBearing() / 180f * Math.PI))), Toast.LENGTH_LONG).show();

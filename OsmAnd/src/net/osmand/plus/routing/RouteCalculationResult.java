@@ -191,9 +191,7 @@ public class RouteCalculationResult {
 				loc.setLongitude(MapUtils.get31LongitudeX(x31));
 				AlarmInfo info = AlarmInfo.createAlarmInfo(typeRule, locInd, loc);
 				// For STOP first check if it has directional info
-				// Issue #2885: This seems to fail
-				// Open: Could also add some analysis if a STOP without directional tagging is shortly _behind_ an intersection
-				if ((info != null) && !((info.getType() == AlarmInfoType.STOP) && (res.getObject().isStopForward(res.isForwardDirection()) == -1))) {
+				if ((info != null) && !((info.getType() == AlarmInfoType.STOP) && (res.getObject().isStopApplicable(res.isForwardDirection()) == -1))) {
 					alarms.add(info);
 				}
 			}
