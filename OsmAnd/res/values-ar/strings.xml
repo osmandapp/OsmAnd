@@ -1579,7 +1579,7 @@
     <string name="change_markers_position">تغيير موضع العلامة</string>
     <string name="follow_us">تابعنا</string>
     <string name="access_direction_audio_feedback">اتجاه صدى الصوت</string>
-    <string name="use_osm_live_routing">ملاحة OsmAnd Live</string>
+    <string name="use_osm_live_routing">ملاحة OsmAnd مباشرة</string>
     <string name="access_no_destination">لم يتم تعيين الوجهة</string>
     <string name="access_disable_wrong_direction_recalc_descr">يمنع إعادة الحساب التلقائي للطريق أثناء الانتقال للاتجاه المعاكس</string>
     <string name="access_default_color">اللون الافتراضي</string>
