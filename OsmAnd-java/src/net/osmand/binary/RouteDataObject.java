@@ -704,10 +704,11 @@ public class RouteDataObject {
 			//	return true;
 			//}
 		}
-		// Experimental: Distance analysis for STOP with no recognized directional tagging (but exclude those mapped on intersection node)
+		// Heuristic fallback: Distance analysis for STOP with no recognized directional tagging:
+		// Mask STOPs closer to the start than to the end of the routing segment if it is within 50m of start, but do not mask STOPs mapped directly on start/end (likely intersection node)
 		double d2Start = distance(startPointInd, intId);
 		double d2End = distance(intId, endPointInd);
-		if ((d2Start < d2End) && d2Start != 0 && d2End != 0) {
+		if ((d2Start < d2End) && d2Start != 0 && d2End != 0 && d2Start < 50) {
 			return false;
 		}
 		// No directional info detected
