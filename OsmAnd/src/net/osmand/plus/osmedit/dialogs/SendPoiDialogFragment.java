@@ -204,7 +204,7 @@ public class SendPoiDialogFragment extends DialogFragment {
 					group = deleteGroup;
 					break;
 				case 3:
-					action = getString(R.string.default_changeset_reopen);;
+					action = getString(R.string.default_changeset_reopen);
 					group = reopenGroup;
 					break;
 				default:
