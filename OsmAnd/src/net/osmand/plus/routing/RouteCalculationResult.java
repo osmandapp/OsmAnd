@@ -191,7 +191,7 @@ public class RouteCalculationResult {
 				loc.setLongitude(MapUtils.get31LongitudeX(x31));
 				AlarmInfo info = AlarmInfo.createAlarmInfo(typeRule, locInd, loc);
 				// For STOP first check if it has directional info
-				if ((info != null) && !((info.getType() == AlarmInfoType.STOP) && !res.getObject().isStopApplicable(res.isForwardDirection(), intId))) {
+				if ((info != null) && !((info.getType() == AlarmInfoType.STOP) && !res.getObject().isStopApplicable(res.isForwardDirection(), intId, res.getStartPointIndex(), res.getEndPointIndex()))) {
 					alarms.add(info);
 				}
 			}

@@ -273,11 +273,12 @@ public class WaypointHelper {
 					AlarmInfo info = AlarmInfo.createAlarmInfo(typeRule, 0, loc);
 
 					// For STOP first check if it has directional info
-					if (info != null && info.getType() != null && info.getType() == AlarmInfoType.STOP) {
-						if (!ro.isStopApplicable(ro.bearingVsRouteDirection(loc), i)) {
-							info = null;
-						}
-					}
+					// Looks like has no effect here
+					//if (info != null && info.getType() != null && info.getType() == AlarmInfoType.STOP) {
+					//	if (!ro.isStopApplicable(ro.bearingVsRouteDirection(loc), i)) {
+					//		info = null;
+					//	}
+					//}
 
 					if (info != null) {
 						if (info.getType() != AlarmInfoType.SPEED_CAMERA || showCameras) {
