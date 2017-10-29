@@ -2667,4 +2667,14 @@ Vänligen tillhandahåll fullständig kod</string>
     <string name="store_tracks_in_monthly_directories_descrp">Spara inspelade spår i undermappar efter inspelad månad (typ 2017-01).</string>
     <string name="mapillary_menu_descr_dates">Visa bilder tillagda under en speciell period.</string>
     <string name="mapillary_menu_descr_username">Visa bilder tillagda av en speciell användare.</string>
+    <string name="import_gpx_file_description">kan importeras som favoritpunkter eller som spårfil.</string>
+    <string name="import_as_gpx">Importera som GPX-fil</string>
+    <string name="import_as_favorites">Importera som favorit</string>
+    <string name="import_file">Importera fil</string>
+	<string name="wrong_input">Felaktig inmatning</string>
+	<string name="waypoints_added_to_map_markers">Waypoints tillagda i kartmarkörer</string>
+	<string name="make_round_trip_descr">Lägg till kopia av startpunkten som destination.</string>
+    <string name="fast_coordinates_input">Snabbinmatning av koordinater</string>
+    <string name="add_location_as_first_point_descr">Lägg till din position som första punkt för att planera en perfekt rutt.</string>
+    <string name="coordinate_input">Koordinatinmatning</string>
     </resources>
