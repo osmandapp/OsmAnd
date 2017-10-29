@@ -2933,4 +2933,8 @@
 	<string name="shared_string_back">Назад</string>
 	<string name="view">Праглядзець</string>
 	<string name="waypoints_added_to_map_markers">Кропкі маршрута дададзеныя ў маркеры мапы</string>
+	<string name="import_gpx_file_description">могуць быць імпартаваныя як Улюблёныя кропкі ці як файл следу.</string>
+    <string name="import_as_gpx">Імпартаваць як GPX-файл</string>
+    <string name="import_as_favorites">Імпартаваць як Улюблёныя</string>
+    <string name="import_file">Імпартаваць файл</string>
 	</resources>
