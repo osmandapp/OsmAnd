@@ -2884,4 +2884,8 @@ U vypadku, kali vy lubіcie OsmAnd і OSM і chočacie padtrymać jaho, heta іd
 	<string name="shared_string_back">Nazad</string>
 	<string name="view">Prahladzieć</string>
 	<string name="waypoints_added_to_map_markers">Kropki maršruta dadadzienyja ŭ markiery mapy</string>
+	<string name="import_gpx_file_description">mohuć być impartavanyja jak Uliublionyja kropki ci jak fajl sliedu.</string>
+    <string name="import_as_gpx">Impartavać jak GPX-fajl</string>
+    <string name="import_as_favorites">Impartavać jak Uliublionyja</string>
+    <string name="import_file">Impartavać fajl</string>
 	</resources>
