@@ -2789,4 +2789,27 @@ Pokud potřebujete pomoci s aplikací OsmAnd, prosím kontaktujte naši podporu
     <string name="make_round_trip_descr">Přidat kopii počátečního bodu jako cíl.</string>
     <string name="make_round_trip">Vytvořit cestu</string>
     <string name="shared_string_navigate">Navigovat</string>
+    <string name="import_gpx_file_description">může být importováno jako Oblíbené body nebo trasa.</string>
+    <string name="import_as_gpx">Importovat jako soubor GPX</string>
+    <string name="import_as_favorites">Importovat jako Oblíbené</string>
+    <string name="import_file">Importovat soubor</string>
+	<string name="wrong_input">Chybný vstup</string>
+	<string name="enter_new_name">Zadejte nový název</string>
+	<string name="shared_string_back">Zpět</string>
+	<string name="view">Zobrazit</string>
+	<string name="waypoints_added_to_map_markers">Body trasy přidané k mapovým značkám</string>
+	<string name="wrong_format">Chybný formát</string>
+    <string name="shared_string_road">Cesta</string>
+    <string name="show_map">Zobrazit mapu</string>
+    <string name="route_is_calculated">Trasa je vypočítaná</string>
+    <string name="round_trip">Okružní trasa</string>
+    <string name="plan_route_no_markers_toast">Pro použití této funkce musíte přidat alespoň jednu značku .</string>
+    <string name="release_2_8">\\022 Zcela přepracované mapové značky s pokyny a plánováním trasy
+\n
+\n• Nástroj měření vzdálenosti nabízí funkci přichycení k cestě a uložení bodů jako trasu
+\n
+\n• OsmAnd Live: opravy chyb, nová data na serveru každých 30 minut, aktualizace začleněné do navigace
+\n
+\n</string>
+    <string name="rendering_value_darkyellow_name">Tmavě žlutá</string>
     </resources>
