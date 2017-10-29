@@ -685,26 +685,34 @@ public class RouteDataObject {
 		return direction;
 	}
 
-	public int isStopApplicable(boolean direction, int intId) {
+	public boolean isStopApplicable(boolean direction, int intId) {
 		int[] pt = getPointTypes(intId);
 		int sz = pt.length;
 		for (int i = 0; i < sz; i++) {
 			RouteTypeRule r = region.quickGetEncodingRule(pt[i]);
+			// Evaluate direction tag if present
 			if (r.getTag().equals("direction")) {
 				String dv = r.getValue();
 				if ((dv.equals("forward") && direction == true) || (dv.equals("backward") && direction == false)) {
-					return 1;
+					return true;
 				} else if ((dv.equals("forward") && direction == false) || (dv.equals("backward") && direction == true)) {
-					return -1;
+					return false;
 				}
 			}
-			// stop=all usually tagged on conflicting node itself, so not needed here
+			// Tagging stop=all should be ok anyway, usually tagged on intersection node itself, so not needed here
 			//if (r.getTag().equals("stop") && r.getValue().equals("all")) {
-			//	return 1;
+			//	return true;
 			//}
 		}
-		// Open: Could add some analysis if a STOP without directional tagging is shortly _behind_ an intersection
-		return 0; //no directional info detected
+		// Experimental: Distance analysis for STOP with no recognized directional tagging (but exclude those mapped on intersection node)
+		double d1 = distance(0, intId);
+		double d2 = distance(intId, getPointsLength() - 1);
+		if (((direction == true) && (d1 < d2) && (d1 != 0))
+					|| ((direction == false) && (d1 > d2) && (d2 != 0))) {
+			return false;
+		}
+		// No directional info detected
+		return true;
 	}
 
 	public double distance(int startPoint, int endPoint) {
