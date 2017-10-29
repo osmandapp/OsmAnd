@@ -170,8 +170,8 @@
     <string name="favourites_search_desc">我的收藏查尋</string>
 
     <string name="offline_navigation_not_available">OsmAnd 離線導航，暫時不能使用。</string>
-    <string name="left_side_navigation">左駕</string>
-    <string name="left_side_navigation_descr">選擇左駕的國家</string>
+    <string name="left_side_navigation">靠左行駛</string>
+    <string name="left_side_navigation_descr">選擇靠左行駛的國家</string>
 
     <string name="unknown_from_location">起始標點尚未決定</string>
     <string name="unknown_location">未知地理位置</string>
@@ -2676,7 +2676,7 @@ OsmAnd (Automated Navigation Directions) 是一個地圖和導航的應用程式
     <string name="analyze_on_map">在地圖上分析</string>
     <string name="restore_purchases">恢復購買</string>
     <string name="fonts_header">地圖字體</string>
-    <string name="right_side_navigation">右側駕駛</string>
+    <string name="right_side_navigation">靠右行駛</string>
     <string name="driving_region_automatic">自動</string>
     <string name="shared_string_paused">暫停</string>
     <string name="osmand_plus_extended_description_part8">大概的地圖覆蓋區域和品質： • 西歐： **** • 東歐： *** • 俄羅斯： *** • 北美洲： *** • 南美洲： ** • 亞洲：** • 日本和韓國： *** • 中東： ** • 非洲： ** • 南極洲： * 全球大多數國家都可以下載！ 從阿富汗到辛巴威，從澳大利亞到美國。 阿根廷、巴西、加拿大、法國、德國、墨西哥、英國、 西班牙 …</string>
