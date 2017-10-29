@@ -938,7 +938,7 @@
 	<string name="route_tslr">کمی به راست بپیچید و بروید</string>
 	<string name="route_tshl">کاملاً به چپ بپیچید و بروید</string>
 	<string name="route_tsll">کمی به چپ بپیچید و بروید</string>
-	<string name="route_tu">دوربرگردان را دور بزنید و بروید</string>
+	<string name="route_tu">دورِ برگردان بزنید و بروید</string>
 	<string name="first_time_continue">بعداً</string>
 	<string name="first_time_download">دانلود منطقه‌ها</string>
 	<string name="search_poi_location">در حال جست‌وجوی سیگنال…</string>
