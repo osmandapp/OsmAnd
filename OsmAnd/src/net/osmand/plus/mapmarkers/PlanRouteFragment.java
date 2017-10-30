@@ -713,6 +713,7 @@ public class PlanRouteFragment extends Fragment implements OsmAndLocationListene
 		MapActivity mapActivity = getMapActivity();
 		if (mapActivity != null) {
 			PlanRouteOptionsBottomSheetDialogFragment fragment = new PlanRouteOptionsBottomSheetDialogFragment();
+			fragment.setUsedOnMap(true);
 			fragment.setSelectAll(!(selectedCount == markersHelper.getMapMarkers().size() && markersHelper.isStartFromMyLocation()));
 			fragment.setListener(createOptionsFragmentListener());
 			fragment.show(mapActivity.getSupportFragmentManager(), PlanRouteOptionsBottomSheetDialogFragment.TAG);

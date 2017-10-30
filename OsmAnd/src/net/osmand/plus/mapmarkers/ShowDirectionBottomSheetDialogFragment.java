@@ -2,10 +2,7 @@ package net.osmand.plus.mapmarkers;
 
 import android.app.Activity;
 import android.graphics.Typeface;
-import android.graphics.drawable.Drawable;
-import android.os.Build;
 import android.os.Bundle;
-import android.support.annotation.DrawableRes;
 import android.support.annotation.Nullable;
 import android.support.v4.content.ContextCompat;
 import android.view.ContextThemeWrapper;
@@ -13,30 +10,23 @@ import android.view.LayoutInflater;
 import android.view.MotionEvent;
 import android.view.View;
 import android.view.ViewGroup;
-import android.view.ViewTreeObserver;
-import android.view.Window;
-import android.view.WindowManager;
 import android.widget.CompoundButton;
 import android.widget.ImageView;
 import android.widget.RadioButton;
 import android.widget.TextView;
 
-import net.osmand.AndroidUtils;
 import net.osmand.plus.OsmandSettings;
 import net.osmand.plus.R;
 import net.osmand.plus.activities.MapActivity;
-import net.osmand.plus.base.BottomSheetDialogFragment;
-import net.osmand.plus.helpers.AndroidUiHelper;
+import net.osmand.plus.base.MenuBottomSheetDialogFragment;
 import net.osmand.plus.helpers.FontCache;
 
-public class ShowDirectionBottomSheetDialogFragment extends BottomSheetDialogFragment {
+public class ShowDirectionBottomSheetDialogFragment extends MenuBottomSheetDialogFragment {
 
 	public final static String TAG = "ShowDirectionBottomSheetDialogFragment";
 
 	private ShowDirectionFragmentListener listener;
-	private boolean portrait;
 	private View mainView;
-	private boolean night;
 
 	public void setListener(ShowDirectionFragmentListener listener) {
 		this.listener = listener;
@@ -46,14 +36,9 @@ public class ShowDirectionBottomSheetDialogFragment extends BottomSheetDialogFra
 	@Override
 	public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
 		final OsmandSettings settings = getMyApplication().getSettings();
-		portrait = AndroidUiHelper.isOrientationPortrait(getActivity());
-		night = !settings.isLightContent();
-		final int themeRes = night ? R.style.OsmandDarkTheme : R.style.OsmandLightTheme;
+		final int themeRes = nightMode ? R.style.OsmandDarkTheme : R.style.OsmandLightTheme;
 
 		mainView = View.inflate(new ContextThemeWrapper(getContext(), themeRes), R.layout.fragment_marker_show_direction_bottom_sheet_dialog, container);
-		if (portrait) {
-			AndroidUtils.setBackground(getActivity(), mainView, night, R.drawable.bg_bottom_menu_light, R.drawable.bg_bottom_menu_dark);
-		}
 
 		OsmandSettings.MapMarkersMode mode = settings.MAP_MARKERS_MODE.get();
 		highlightSelectedItem(mode, true);
@@ -63,7 +48,7 @@ public class ShowDirectionBottomSheetDialogFragment extends BottomSheetDialogFra
 		} else {
 			ImageView topBarImage = (ImageView) mainView.findViewById(R.id.top_bar_image);
 			ImageView widgetImage = (ImageView) mainView.findViewById(R.id.widget_image);
-			if (night) {
+			if (nightMode) {
 				topBarImage.setImageResource(R.drawable.img_help_markers_topbar_night);
 				widgetImage.setImageResource(R.drawable.img_help_markers_widgets_night);
 			} else {
@@ -88,7 +73,7 @@ public class ShowDirectionBottomSheetDialogFragment extends BottomSheetDialogFra
 			widgetImage.setOnClickListener(showDirectionOnClickListener);
 		}
 
-		if (night) {
+		if (nightMode) {
 			((TextView) mainView.findViewById(R.id.show_direction_title)).setTextColor(getResources().getColor(R.color.ctx_menu_info_text_dark));
 		}
 
@@ -142,60 +127,9 @@ public class ShowDirectionBottomSheetDialogFragment extends BottomSheetDialogFra
 			}
 		});
 
-		final int screenHeight = AndroidUtils.getScreenHeight(getActivity());
-		final int statusBarHeight = AndroidUtils.getStatusBarHeight(getActivity());
-		final int navBarHeight = AndroidUtils.getNavBarHeight(getActivity());
-
-		mainView.getViewTreeObserver().addOnGlobalLayoutListener(new ViewTreeObserver.OnGlobalLayoutListener() {
-			@Override
-			public void onGlobalLayout() {
-				final View scrollView = mainView.findViewById(R.id.marker_show_direction_scroll_view);
-				int scrollViewHeight = scrollView.getHeight();
-				int dividerHeight = AndroidUtils.dpToPx(getContext(), 1);
-				int cancelButtonHeight = getContext().getResources().getDimensionPixelSize(R.dimen.bottom_sheet_cancel_button_height);
-				int spaceForScrollView = screenHeight - statusBarHeight - navBarHeight - dividerHeight - cancelButtonHeight;
-				if (scrollViewHeight > spaceForScrollView) {
-					scrollView.getLayoutParams().height = spaceForScrollView;
-					scrollView.requestLayout();
-				}
-
-				if (!portrait) {
-					if (screenHeight - statusBarHeight - mainView.getHeight()
-							>= getResources().getDimension(R.dimen.bottom_sheet_content_padding_small)) {
-						AndroidUtils.setBackground(getActivity(), mainView, night,
-								R.drawable.bg_bottom_sheet_topsides_landscape_light, R.drawable.bg_bottom_sheet_topsides_landscape_dark);
-					} else {
-						AndroidUtils.setBackground(getActivity(), mainView, night,
-								R.drawable.bg_bottom_sheet_sides_landscape_light, R.drawable.bg_bottom_sheet_sides_landscape_dark);
-					}
-				}
-
-				ViewTreeObserver obs = mainView.getViewTreeObserver();
-				if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.JELLY_BEAN) {
-					obs.removeOnGlobalLayoutListener(this);
-				} else {
-					obs.removeGlobalOnLayoutListener(this);
-				}
-			}
-		});
+		setupHeightAndBackground(mainView, R.id.marker_show_direction_scroll_view);
 
 		return mainView;
-	}
-
-	@Override
-	public void onStart() {
-		super.onStart();
-		if (!portrait) {
-			final Window window = getDialog().getWindow();
-			WindowManager.LayoutParams params = window.getAttributes();
-			params.width = getActivity().getResources().getDimensionPixelSize(R.dimen.landscape_bottom_sheet_dialog_fragment_width);
-			window.setAttributes(params);
-		}
-	}
-
-	@Override
-	protected Drawable getContentIcon(@DrawableRes int id) {
-		return getIcon(id, night ? R.color.ctx_menu_info_text_dark : R.color.on_map_icon_color);
 	}
 
 	private MapActivity getMapActivity() {
@@ -209,7 +143,7 @@ public class ShowDirectionBottomSheetDialogFragment extends BottomSheetDialogFra
 	private void highlightSelectedItem(OsmandSettings.MapMarkersMode mode, boolean check) {
 		int iconBgColor = check ? R.color.dashboard_blue : R.color.on_map_icon_color;
 		int iconColor = check ? R.color.color_dialog_buttons_dark : R.color.dashboard_blue;
-		int textColor = ContextCompat.getColor(getContext(), check ? (night ? R.color.color_dialog_buttons_dark : R.color.dashboard_blue) : night ? R.color.color_white : R.color.color_black);
+		int textColor = ContextCompat.getColor(getContext(), check ? (nightMode ? R.color.color_dialog_buttons_dark : R.color.dashboard_blue) : nightMode ? R.color.color_white : R.color.color_black);
 		Typeface typeface = FontCache.getFont(getContext(), check ? "fonts/Roboto-Medium.ttf" : "fonts/Roboto-Regular.ttf");
 		switch (mode) {
 			case TOOLBAR:

@@ -274,6 +274,7 @@ public class MeasurementToolFragment extends Fragment {
 			@Override
 			public void onClick(View view) {
 				OptionsBottomSheetDialogFragment fragment = new OptionsBottomSheetDialogFragment();
+				fragment.setUsedOnMap(true);
 				fragment.setSnapToRoadEnabled(editingCtx.isInSnapToRoadMode());
 				fragment.setListener(createOptionsFragmentListener());
 				fragment.setAddLineMode(newGpxData != null);
@@ -807,12 +808,14 @@ public class MeasurementToolFragment extends Fragment {
 
 	private void openSelectedPointMenu(MapActivity mapActivity) {
 		SelectedPointBottomSheetDialogFragment fragment = new SelectedPointBottomSheetDialogFragment();
+		fragment.setUsedOnMap(true);
 		fragment.setListener(createSelectedPointFragmentListener());
 		fragment.show(mapActivity.getSupportFragmentManager(), SelectedPointBottomSheetDialogFragment.TAG);
 	}
 
 	private void openSaveAsNewTrackMenu(MapActivity mapActivity) {
 		SaveAsNewTrackBottomSheetDialogFragment fragment = new SaveAsNewTrackBottomSheetDialogFragment();
+		fragment.setUsedOnMap(true);
 		fragment.setListener(createSaveAsNewTrackFragmentListener());
 		fragment.show(mapActivity.getSupportFragmentManager(), SaveAsNewTrackBottomSheetDialogFragment.TAG);
 	}
