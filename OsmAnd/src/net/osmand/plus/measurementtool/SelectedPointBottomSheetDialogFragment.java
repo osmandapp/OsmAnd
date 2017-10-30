@@ -35,7 +35,6 @@ public class SelectedPointBottomSheetDialogFragment extends MenuBottomSheetDialo
 	@Override
 	public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
 		final MapActivity mapActivity = (MapActivity) getActivity();
-		boolean nightMode = isNightMode();
 		final MeasurementToolLayer measurementLayer = mapActivity.getMapLayers().getMeasurementToolLayer();
 		final int themeRes = nightMode ? R.style.OsmandDarkTheme : R.style.OsmandLightTheme;
 

@@ -23,7 +23,6 @@ public class CoordinateInputBottomSheetDialogFragment extends MenuBottomSheetDia
 	public final static String TAG = "CoordinateInputBottomSheetDialogFragment";
 
 	private View mainView;
-	private boolean night;
 	private int coordinateFormat = -1;
 	private boolean useOsmandKeyboard = true;
 	private CoordinateInputFormatChangeListener listener;
@@ -49,13 +48,12 @@ public class CoordinateInputBottomSheetDialogFragment extends MenuBottomSheetDia
 	@Override
 	public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
 		final MapActivity mapActivity = (MapActivity) getActivity();
-		night = isNightMode();
-		final int themeRes = night ? R.style.OsmandDarkTheme : R.style.OsmandLightTheme;
+		final int themeRes = nightMode ? R.style.OsmandDarkTheme : R.style.OsmandLightTheme;
 
 		mainView = View.inflate(new ContextThemeWrapper(getContext(), themeRes), coordinateFormat == -1 ?
 				R.layout.fragment_marker_coordinate_input_bottom_sheet_dialog : R.layout.fragment_marker_coordinate_input_options_bottom_sheet_helper, container);
 
-		if (night) {
+		if (nightMode) {
 			((TextView) mainView.findViewById(R.id.coordinate_input_title)).setTextColor(getResources().getColor(R.color.ctx_menu_info_text_dark));
 		}
 
@@ -163,8 +161,8 @@ public class CoordinateInputBottomSheetDialogFragment extends MenuBottomSheetDia
 	}
 
 	private void highlightSelectedItem(boolean check) {
-		int iconColor = check ? R.color.dashboard_blue : night ? R.color.ctx_menu_info_text_dark : R.color.on_map_icon_color;
-		int textColor = ContextCompat.getColor(getContext(), check ? (night ? R.color.color_dialog_buttons_dark : R.color.dashboard_blue) : night ? R.color.color_white : R.color.color_black);
+		int iconColor = check ? R.color.dashboard_blue : nightMode ? R.color.ctx_menu_info_text_dark : R.color.on_map_icon_color;
+		int textColor = ContextCompat.getColor(getContext(), check ? (nightMode ? R.color.color_dialog_buttons_dark : R.color.dashboard_blue) : nightMode ? R.color.color_white : R.color.color_black);
 		switch (coordinateFormat) {
 			case PointDescription.FORMAT_DEGREES:
 				((TextView) mainView.findViewById(R.id.degrees_text)).setTextColor(textColor);

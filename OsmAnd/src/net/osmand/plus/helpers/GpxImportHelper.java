@@ -633,20 +633,19 @@ public class GpxImportHelper {
 		@Nullable
 		@Override
 		public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
-			boolean night = isNightMode();
-			final int themeRes = night ? R.style.OsmandDarkTheme : R.style.OsmandLightTheme;
+			final int themeRes = nightMode ? R.style.OsmandDarkTheme : R.style.OsmandLightTheme;
 
 			final View mainView = View.inflate(new ContextThemeWrapper(getContext(), themeRes), R.layout.fragment_import_gpx_bottom_sheet_dialog, container);
 
-			if (night) {
+			if (nightMode) {
 				((TextView) mainView.findViewById(R.id.import_gpx_title)).setTextColor(ContextCompat.getColor(getActivity(), R.color.ctx_menu_info_text_dark));
 			}
 
 			((ImageView) mainView.findViewById(R.id.import_as_favorites_icon)).setImageDrawable(getContentIcon(R.drawable.ic_action_fav_dark));
 			((ImageView) mainView.findViewById(R.id.import_as_gpx_icon)).setImageDrawable(getContentIcon(R.drawable.ic_action_polygom_dark));
 
-			int nameColor = ContextCompat.getColor(getContext(), night ? R.color.osmand_orange : R.color.dashboard_blue);
-			int descrColor = ContextCompat.getColor(getContext(), night ? R.color.dashboard_subheader_text_dark : R.color.dashboard_subheader_text_light);
+			int nameColor = ContextCompat.getColor(getContext(), nightMode ? R.color.osmand_orange : R.color.dashboard_blue);
+			int descrColor = ContextCompat.getColor(getContext(), nightMode ? R.color.dashboard_subheader_text_dark : R.color.dashboard_subheader_text_light);
 			String descr = getString(R.string.import_gpx_file_description);
 			SpannableStringBuilder text = new SpannableStringBuilder(fileName).append(" ").append(descr);
 			text.setSpan(new ForegroundColorSpan(nameColor), 0, fileName.length(), Spanned.SPAN_EXCLUSIVE_EXCLUSIVE);

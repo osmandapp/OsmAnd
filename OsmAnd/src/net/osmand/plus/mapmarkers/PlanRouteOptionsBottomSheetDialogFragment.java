@@ -34,12 +34,11 @@ public class PlanRouteOptionsBottomSheetDialogFragment extends MenuBottomSheetDi
 	@Override
 	public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
 		boolean portrait = AndroidUiHelper.isOrientationPortrait(getActivity());
-		boolean night = isNightMode();
-		final int themeRes = night ? R.style.OsmandDarkTheme : R.style.OsmandLightTheme;
+		final int themeRes = nightMode ? R.style.OsmandDarkTheme : R.style.OsmandLightTheme;
 
 		final View mainView = View.inflate(new ContextThemeWrapper(getContext(), themeRes), R.layout.fragment_plan_route_options_bottom_sheet_dialog, container);
 
-		if (night) {
+		if (nightMode) {
 			((TextView) mainView.findViewById(R.id.title)).setTextColor(ContextCompat.getColor(getActivity(), R.color.ctx_menu_info_text_dark));
 		}
 

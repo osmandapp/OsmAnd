@@ -18,18 +18,20 @@ public abstract class MenuBottomSheetDialogFragment extends BottomSheetDialogFra
 
 	private static final String USED_ON_MAP_KEY = "used_on_map";
 
-	protected boolean usedOnMap;
+	protected boolean usedOnMap = true;
+	protected boolean nightMode;
 
 	public void setUsedOnMap(boolean usedOnMap) {
 		this.usedOnMap = usedOnMap;
 	}
 
 	@Override
-	public void onActivityCreated(Bundle savedInstanceState) {
-		super.onActivityCreated(savedInstanceState);
+	public void onCreate(Bundle savedInstanceState) {
+		super.onCreate(savedInstanceState);
 		if (savedInstanceState != null) {
 			usedOnMap = savedInstanceState.getBoolean(USED_ON_MAP_KEY);
 		}
+		nightMode = isNightMode();
 	}
 
 	@Override
@@ -51,16 +53,15 @@ public abstract class MenuBottomSheetDialogFragment extends BottomSheetDialogFra
 
 	@Override
 	protected Drawable getContentIcon(@DrawableRes int id) {
-		return getIcon(id, isNightMode() ? R.color.ctx_menu_info_text_dark : R.color.on_map_icon_color);
+		return getIcon(id, nightMode ? R.color.ctx_menu_info_text_dark : R.color.on_map_icon_color);
 	}
 
 	protected Drawable getActiveIcon(@DrawableRes int id) {
-		return getIcon(id, isNightMode() ? R.color.osmand_orange : R.color.color_myloc_distance);
+		return getIcon(id, nightMode ? R.color.osmand_orange : R.color.color_myloc_distance);
 	}
 
 	protected void setupHeightAndBackground(final View mainView, final int scrollViewId) {
 		final Activity activity = getActivity();
-		final boolean night = isNightMode();
 		final int screenHeight = AndroidUtils.getScreenHeight(activity);
 		final int statusBarHeight = AndroidUtils.getStatusBarHeight(activity);
 		final int navBarHeight = AndroidUtils.getNavBarHeight(activity);
@@ -79,13 +80,13 @@ public abstract class MenuBottomSheetDialogFragment extends BottomSheetDialogFra
 				}
 
 				if (AndroidUiHelper.isOrientationPortrait(activity)) {
-					AndroidUtils.setBackground(activity, mainView, night, R.drawable.bg_bottom_menu_light, R.drawable.bg_bottom_menu_dark);
+					AndroidUtils.setBackground(activity, mainView, nightMode, R.drawable.bg_bottom_menu_light, R.drawable.bg_bottom_menu_dark);
 				} else {
 					if (screenHeight - statusBarHeight - mainView.getHeight() >= getResources().getDimension(R.dimen.bottom_sheet_content_padding_small)) {
-						AndroidUtils.setBackground(activity, mainView, night,
+						AndroidUtils.setBackground(activity, mainView, nightMode,
 								R.drawable.bg_bottom_sheet_topsides_landscape_light, R.drawable.bg_bottom_sheet_topsides_landscape_dark);
 					} else {
-						AndroidUtils.setBackground(activity, mainView, night,
+						AndroidUtils.setBackground(activity, mainView, nightMode,
 								R.drawable.bg_bottom_sheet_sides_landscape_light, R.drawable.bg_bottom_sheet_sides_landscape_dark);
 					}
 				}

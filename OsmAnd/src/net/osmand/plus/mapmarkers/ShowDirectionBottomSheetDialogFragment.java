@@ -27,7 +27,6 @@ public class ShowDirectionBottomSheetDialogFragment extends MenuBottomSheetDialo
 
 	private ShowDirectionFragmentListener listener;
 	private View mainView;
-	private boolean night;
 
 	public void setListener(ShowDirectionFragmentListener listener) {
 		this.listener = listener;
@@ -37,8 +36,7 @@ public class ShowDirectionBottomSheetDialogFragment extends MenuBottomSheetDialo
 	@Override
 	public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
 		final OsmandSettings settings = getMyApplication().getSettings();
-		night = isNightMode();
-		final int themeRes = night ? R.style.OsmandDarkTheme : R.style.OsmandLightTheme;
+		final int themeRes = nightMode ? R.style.OsmandDarkTheme : R.style.OsmandLightTheme;
 
 		mainView = View.inflate(new ContextThemeWrapper(getContext(), themeRes), R.layout.fragment_marker_show_direction_bottom_sheet_dialog, container);
 
@@ -50,7 +48,7 @@ public class ShowDirectionBottomSheetDialogFragment extends MenuBottomSheetDialo
 		} else {
 			ImageView topBarImage = (ImageView) mainView.findViewById(R.id.top_bar_image);
 			ImageView widgetImage = (ImageView) mainView.findViewById(R.id.widget_image);
-			if (night) {
+			if (nightMode) {
 				topBarImage.setImageResource(R.drawable.img_help_markers_topbar_night);
 				widgetImage.setImageResource(R.drawable.img_help_markers_widgets_night);
 			} else {
@@ -75,7 +73,7 @@ public class ShowDirectionBottomSheetDialogFragment extends MenuBottomSheetDialo
 			widgetImage.setOnClickListener(showDirectionOnClickListener);
 		}
 
-		if (night) {
+		if (nightMode) {
 			((TextView) mainView.findViewById(R.id.show_direction_title)).setTextColor(getResources().getColor(R.color.ctx_menu_info_text_dark));
 		}
 
@@ -145,7 +143,7 @@ public class ShowDirectionBottomSheetDialogFragment extends MenuBottomSheetDialo
 	private void highlightSelectedItem(OsmandSettings.MapMarkersMode mode, boolean check) {
 		int iconBgColor = check ? R.color.dashboard_blue : R.color.on_map_icon_color;
 		int iconColor = check ? R.color.color_dialog_buttons_dark : R.color.dashboard_blue;
-		int textColor = ContextCompat.getColor(getContext(), check ? (night ? R.color.color_dialog_buttons_dark : R.color.dashboard_blue) : night ? R.color.color_white : R.color.color_black);
+		int textColor = ContextCompat.getColor(getContext(), check ? (nightMode ? R.color.color_dialog_buttons_dark : R.color.dashboard_blue) : nightMode ? R.color.color_white : R.color.color_black);
 		Typeface typeface = FontCache.getFont(getContext(), check ? "fonts/Roboto-Medium.ttf" : "fonts/Roboto-Regular.ttf");
 		switch (mode) {
 			case TOOLBAR:

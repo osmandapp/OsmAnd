@@ -29,12 +29,11 @@ public class OrderByBottomSheetDialogFragment extends MenuBottomSheetDialogFragm
 	@Override
 	public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
 		settings = getMyApplication().getSettings();
-		final boolean night = isNightMode();
-		final int themeRes = night ? R.style.OsmandDarkTheme : R.style.OsmandLightTheme;
+		final int themeRes = nightMode ? R.style.OsmandDarkTheme : R.style.OsmandLightTheme;
 
 		final View mainView = View.inflate(new ContextThemeWrapper(getContext(), themeRes), R.layout.fragment_marker_order_by_bottom_sheet_dialog, container);
 
-		if (night) {
+		if (nightMode) {
 			((TextView) mainView.findViewById(R.id.order_by_title)).setTextColor(getResources().getColor(R.color.ctx_menu_info_text_dark));
 		}
 		((TextView) mainView.findViewById(R.id.order_by_title)).setText(getString(R.string.order_by));
