@@ -872,7 +872,7 @@ public class MeasurementToolFragment extends Fragment {
 	private void cancelModes() {
 		if (editingCtx.getOriginalPointToMove() != null) {
 			cancelMovePointMode();
-		} else if (editingCtx.getSelectedPointPosition() != -1) {
+		} else if (!isSelectedPointMenuOpened() && editingCtx.getSelectedPointPosition() != -1) {
 			cancelAddPointBeforeOrAfterMode();
 		}
 	}
@@ -1475,6 +1475,15 @@ public class MeasurementToolFragment extends Fragment {
 		} catch (Exception e) {
 			// ignore
 		}
+	}
+
+	private boolean isSelectedPointMenuOpened() {
+		MapActivity mapActivity = getMapActivity();
+		if (mapActivity != null) {
+			Fragment fragment = mapActivity.getSupportFragmentManager().findFragmentByTag(SelectedPointBottomSheetDialogFragment.TAG);
+			return fragment != null;
+		}
+		return false;
 	}
 
 	public static boolean showInstance(FragmentManager fragmentManager, MeasurementEditingContext editingCtx) {
