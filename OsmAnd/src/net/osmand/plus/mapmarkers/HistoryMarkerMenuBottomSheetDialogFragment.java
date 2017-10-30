@@ -35,7 +35,6 @@ public class HistoryMarkerMenuBottomSheetDialogFragment extends MenuBottomSheetD
 	@Nullable
 	@Override
 	public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
-		usedOnMap = true;
 		final boolean nightMode = isNightMode();
 		final int themeRes = nightMode ? R.style.OsmandDarkTheme : R.style.OsmandLightTheme;
 

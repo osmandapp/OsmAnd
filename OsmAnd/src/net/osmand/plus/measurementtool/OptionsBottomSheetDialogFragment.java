@@ -36,7 +36,6 @@ public class OptionsBottomSheetDialogFragment extends MenuBottomSheetDialogFragm
 	@Nullable
 	@Override
 	public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
-		usedOnMap = true;
 		boolean nightMode = isNightMode();
 		final int themeRes = nightMode ? R.style.OsmandDarkTheme : R.style.OsmandLightTheme;
 

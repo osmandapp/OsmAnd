@@ -33,7 +33,6 @@ public class PlanRouteOptionsBottomSheetDialogFragment extends MenuBottomSheetDi
 	@Nullable
 	@Override
 	public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
-		usedOnMap = true;
 		boolean portrait = AndroidUiHelper.isOrientationPortrait(getActivity());
 		boolean night = isNightMode();
 		final int themeRes = night ? R.style.OsmandDarkTheme : R.style.OsmandLightTheme;

@@ -191,6 +191,7 @@ public class MapMarkersHistoryFragment extends Fragment implements MapMarkersHel
 				if (item instanceof MapMarker) {
 					MapMarker marker = (MapMarker) item;
 					HistoryMarkerMenuBottomSheetDialogFragment fragment = new HistoryMarkerMenuBottomSheetDialogFragment();
+					fragment.setUsedOnMap(true);
 					Bundle arguments = new Bundle();
 					arguments.putInt(HistoryMarkerMenuBottomSheetDialogFragment.MARKER_POSITION, pos);
 					arguments.putString(HistoryMarkerMenuBottomSheetDialogFragment.MARKER_NAME, marker.getName(mapActivity));

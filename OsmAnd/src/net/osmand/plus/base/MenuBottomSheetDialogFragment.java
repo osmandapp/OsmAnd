@@ -20,6 +20,10 @@ public abstract class MenuBottomSheetDialogFragment extends BottomSheetDialogFra
 
 	protected boolean usedOnMap;
 
+	public void setUsedOnMap(boolean usedOnMap) {
+		this.usedOnMap = usedOnMap;
+	}
+
 	@Override
 	public void onActivityCreated(Bundle savedInstanceState) {
 		super.onActivityCreated(savedInstanceState);

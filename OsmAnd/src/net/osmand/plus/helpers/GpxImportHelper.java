@@ -538,6 +538,7 @@ public class GpxImportHelper {
 			importFavoritesImpl(gpxFile, fileName, true);
 		} else {
 			ImportGpxBottomSheetDialogFragment fragment = new ImportGpxBottomSheetDialogFragment();
+			fragment.setUsedOnMap(true);
 			fragment.setGpxImportHelper(this);
 			fragment.setGpxFile(gpxFile);
 			fragment.setFileName(fileName);
@@ -632,7 +633,6 @@ public class GpxImportHelper {
 		@Nullable
 		@Override
 		public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
-			usedOnMap = true;
 			boolean night = isNightMode();
 			final int themeRes = night ? R.style.OsmandDarkTheme : R.style.OsmandLightTheme;
 

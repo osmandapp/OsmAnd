@@ -34,7 +34,6 @@ public class SelectedPointBottomSheetDialogFragment extends MenuBottomSheetDialo
 	@Nullable
 	@Override
 	public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
-		usedOnMap = true;
 		final MapActivity mapActivity = (MapActivity) getActivity();
 		boolean nightMode = isNightMode();
 		final MeasurementToolLayer measurementLayer = mapActivity.getMapLayers().getMeasurementToolLayer();
