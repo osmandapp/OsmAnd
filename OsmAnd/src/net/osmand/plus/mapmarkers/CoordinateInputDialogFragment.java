@@ -278,7 +278,6 @@ public class CoordinateInputDialogFragment extends DialogFragment implements Osm
 							if (str.length() > 0) {
 								str = str.substring(0, str.length() - 1);
 								extendedEditText.setText(str);
-								extendedEditText.setSelection(str.length());
 							}
 							break;
 						default:
@@ -362,14 +361,12 @@ public class CoordinateInputDialogFragment extends DialogFragment implements Osm
 	private void registerEditTexts() {
 		TextWatcher textWatcher = new TextWatcher() {
 			int len = 0;
+			String strBeforeChanging = "";
 
 			@Override
 			public void beforeTextChanged(CharSequence charSequence, int i, int i1, int i2) {
-				View focusedView = getDialog().getCurrentFocus();
-				if (focusedView != null && focusedView instanceof ExtendedEditText) {
-					String str = ((ExtendedEditText) focusedView).getText().toString();
-					len = str.length();
-				}
+				len = charSequence.length();
+				strBeforeChanging = charSequence.toString();
 			}
 
 			@Override
@@ -384,28 +381,37 @@ public class CoordinateInputDialogFragment extends DialogFragment implements Osm
 					ExtendedEditText focusedEditText = (ExtendedEditText) focusedView;
 					String str = focusedEditText.getText().toString();
 					int strLength = str.length();
-					if (strLength == 2 && len < strLength) {
-						String strToAppend;
-						if (coordinateFormat == PointDescription.FORMAT_DEGREES) {
-							strToAppend = ".";
-						} else {
-							strToAppend = ":";
+					if (len < strLength) {
+						String strAfterChanging = str.substring(len);
+						String strDivider = null;
+						if (strLength == 3) {
+							if (coordinateFormat == PointDescription.FORMAT_DEGREES) {
+								strDivider = ".";
+							} else {
+								strDivider = ":";
+							}
+						} else if (strLength == 6 && coordinateFormat != PointDescription.FORMAT_DEGREES) {
+							if (coordinateFormat == PointDescription.FORMAT_MINUTES) {
+								strDivider = ".";
+							} else {
+								strDivider = ":";
+							}
+						} else if (strLength == 9 && coordinateFormat == PointDescription.FORMAT_SECONDS) {
+							strDivider = ".";
 						}
-						focusedEditText.setText(str + strToAppend);
-						focusedEditText.setSelection(strLength + 1);
-					} else if (strLength == 5 && coordinateFormat != PointDescription.FORMAT_DEGREES && len < strLength) {
-						String strToAppend;
-						if (coordinateFormat == PointDescription.FORMAT_MINUTES) {
-							strToAppend = ".";
-						} else {
-							strToAppend = ":";
+						if (strDivider != null) {
+							String textToSet = strBeforeChanging + strDivider + strAfterChanging;
+							focusedEditText.setText(textToSet);
+							focusedEditText.setSelection(textToSet.length());
 						}
-						focusedEditText.setText(str + strToAppend);
-						focusedEditText.setSelection(strLength + 1);
-					} else if (strLength == 8 && coordinateFormat == PointDescription.FORMAT_SECONDS && len < strLength) {
-						focusedEditText.setText(str + ".");
-						focusedEditText.setSelection(strLength + 1);
-					} else if ((strLength == DEGREES_MAX_LENGTH && coordinateFormat == PointDescription.FORMAT_DEGREES)
+					} else if (len > strLength) {
+						if (strLength > 0 && (".:").contains(str.substring(strLength - 1))) {
+							focusedEditText.setText(str.substring(0, str.length() - 1));
+						}
+						focusedEditText.setSelection(focusedEditText.getText().length());
+					}
+
+					if ((strLength == DEGREES_MAX_LENGTH && coordinateFormat == PointDescription.FORMAT_DEGREES)
 							|| (strLength == MINUTES_MAX_LENGTH && coordinateFormat == PointDescription.FORMAT_MINUTES)
 							|| (strLength == SECONDS_MAX_LENGTH && coordinateFormat == PointDescription.FORMAT_SECONDS)) {
 						if (focusedEditText.getId() == R.id.latitude_edit_text) {
