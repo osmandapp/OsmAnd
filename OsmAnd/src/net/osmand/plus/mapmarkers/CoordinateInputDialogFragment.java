@@ -128,9 +128,10 @@ public class CoordinateInputDialogFragment extends DialogFragment implements Osm
 				super.onBackPressed();
 			}
 		};
-		if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.LOLLIPOP) {
-			Window window = dialog.getWindow();
-			if (window != null) {
+		Window window = dialog.getWindow();
+		if (window != null) {
+			window.setSoftInputMode(WindowManager.LayoutParams.SOFT_INPUT_STATE_HIDDEN);
+			if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.LOLLIPOP) {
 				window.clearFlags(WindowManager.LayoutParams.FLAG_TRANSLUCENT_STATUS);
 				window.addFlags(WindowManager.LayoutParams.FLAG_DRAWS_SYSTEM_BAR_BACKGROUNDS);
 				window.setStatusBarColor(ContextCompat.getColor(getContext(), R.color.coordinate_input_status_bar_color));
@@ -211,6 +212,10 @@ public class CoordinateInputDialogFragment extends DialogFragment implements Osm
 		extendedEditTexts.add(nameEditText);
 
 		registerEditTexts();
+
+		if (savedInstanceState == null) {
+			latitudeBox.select();
+		}
 
 		final View mapMarkersLayout = mainView.findViewById(R.id.map_markers_layout);
 
@@ -319,10 +324,6 @@ public class CoordinateInputDialogFragment extends DialogFragment implements Osm
 	public void onPause() {
 		super.onPause();
 		stopLocationUpdate();
-	}
-
-	@Override
-	public void onSaveInstanceState(Bundle outState) {
 	}
 
 	@Override
@@ -529,7 +530,7 @@ public class CoordinateInputDialogFragment extends DialogFragment implements Osm
 					} else {
 						if (useOsmandKeyboard) {
 							AndroidUtils.hideSoftKeyboard(getActivity(), view);
-						} else if (isOsmandKeyboardCurrentlyVisible()) {
+						} else if (orientationPortrait && isOsmandKeyboardCurrentlyVisible()) {
 							changeOsmandKeyboardVisibility(false);
 						}
 						textFieldBox.setHasFocus(false);
