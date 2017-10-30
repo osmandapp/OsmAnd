@@ -434,7 +434,7 @@ public class CoordinateInputDialogFragment extends DialogFragment implements Osm
 		View.OnTouchListener editTextOnTouchListener = new View.OnTouchListener() {
 			@Override
 			public boolean onTouch(View view, MotionEvent motionEvent) {
-				if (useOsmandKeyboard) {
+				if (useOsmandKeyboard || !orientationPortrait) {
 					if (orientationPortrait && !isOsmandKeyboardCurrentlyVisible()) {
 						changeOsmandKeyboardVisibility(true);
 					}
