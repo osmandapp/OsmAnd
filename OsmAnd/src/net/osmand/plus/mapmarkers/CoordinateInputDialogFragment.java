@@ -222,13 +222,15 @@ public class CoordinateInputDialogFragment extends DialogFragment implements Osm
 		RecyclerView recyclerView = (RecyclerView) mainView.findViewById(R.id.markers_recycler_view);
 		recyclerView.setLayoutManager(new LinearLayoutManager(getContext()));
 		adapter = new CoordinateInputAdapter(mapActivity, mapMarkers);
-		adapter.registerAdapterDataObserver(new RecyclerView.AdapterDataObserver() {
-			@Override
-			public void onChanged() {
-				super.onChanged();
-				mapMarkersLayout.setVisibility(adapter.isEmpty() ? View.GONE : View.VISIBLE);
-			}
-		});
+		if (mapMarkersLayout != null) {
+			adapter.registerAdapterDataObserver(new RecyclerView.AdapterDataObserver() {
+				@Override
+				public void onChanged() {
+					super.onChanged();
+					mapMarkersLayout.setVisibility(adapter.isEmpty() ? View.GONE : View.VISIBLE);
+				}
+			});
+		}
 		recyclerView.setAdapter(adapter);
 		recyclerView.addOnScrollListener(new RecyclerView.OnScrollListener() {
 			@Override

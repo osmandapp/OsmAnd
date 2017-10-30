@@ -152,20 +152,13 @@
 
         </android.support.design.widget.AppBarLayout>
 
-        <FrameLayout
-            android:id="@+id/map_markers_layout"
+        <android.support.v7.widget.RecyclerView
+            android:paddingTop="16dp"
+            android:paddingBottom="72dp"
+            android:id="@+id/markers_recycler_view"
+            android:clipToPadding="false"
             android:layout_width="match_parent"
-            android:layout_height="match_parent">
-
-            <android.support.v7.widget.RecyclerView
-                android:paddingTop="16dp"
-                android:paddingBottom="72dp"
-                android:id="@+id/markers_recycler_view"
-                android:clipToPadding="false"
-                android:layout_width="match_parent"
-                android:layout_height="match_parent"/>
-
-        </FrameLayout>
+            android:layout_height="match_parent"/>
 
     </LinearLayout>
 
