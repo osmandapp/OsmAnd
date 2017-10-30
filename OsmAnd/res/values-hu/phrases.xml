@@ -3577,7 +3577,7 @@
 	<string name="poi_map_size_region">Térképterület: térség</string>
 
 <string name="poi_socket_cee_blue">Konnektor: kék CEE</string>
-	<string name="poi_socket_cee_blue_current">Konnektor: kék CEE – áramerősség (A):</string>
+	<string name="poi_socket_cee_blue_current">Konnektor: kék CEE – áramerősség (A)</string>
 	<string name="poi_socket_cee_blue_output">Konnektor: kék CEE – teljesítmény (W)</string>
 	<string name="poi_socket_cee_red_16a">Konnektor: vörös CEE 16A</string>
 	<string name="poi_socket_cee_red_16a_current">Konnektor: vörös CEE 16A – áramerősség (A)</string>
