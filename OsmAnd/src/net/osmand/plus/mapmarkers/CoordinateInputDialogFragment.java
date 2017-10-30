@@ -529,6 +529,8 @@ public class CoordinateInputDialogFragment extends DialogFragment implements Osm
 					} else {
 						if (useOsmandKeyboard) {
 							AndroidUtils.hideSoftKeyboard(getActivity(), view);
+						} else if (isOsmandKeyboardCurrentlyVisible()) {
+							changeOsmandKeyboardVisibility(false);
 						}
 						textFieldBox.setHasFocus(false);
 					}
