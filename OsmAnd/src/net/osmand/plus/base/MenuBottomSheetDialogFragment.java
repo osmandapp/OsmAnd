@@ -98,7 +98,7 @@ public abstract class MenuBottomSheetDialogFragment extends BottomSheetDialogFra
 
 	protected boolean isNightMode() {
 		if (usedOnMap) {
-			getMyApplication().getDaynightHelper().isNightModeForMapControls();
+			return getMyApplication().getDaynightHelper().isNightModeForMapControls();
 		}
 		return !getMyApplication().getSettings().isLightContent();
 	}
