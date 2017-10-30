@@ -346,8 +346,12 @@ public class CoordinateInputDialogFragment extends DialogFragment implements Osm
 		View.OnTouchListener textFieldBoxOnTouchListener = new View.OnTouchListener() {
 			@Override
 			public boolean onTouch(View view, MotionEvent motionEvent) {
-				if (orientationPortrait && !useOsmandKeyboard && isOsmandKeyboardCurrentlyVisible()) {
-					changeOsmandKeyboardVisibility(false);
+				if (orientationPortrait) {
+					if (!useOsmandKeyboard && isOsmandKeyboardCurrentlyVisible()) {
+						changeOsmandKeyboardVisibility(false);
+					} else if (useOsmandKeyboard && !isOsmandKeyboardCurrentlyVisible()) {
+						changeOsmandKeyboardVisibility(true);
+					}
 				}
 				return false;
 			}
@@ -429,6 +433,9 @@ public class CoordinateInputDialogFragment extends DialogFragment implements Osm
 			@Override
 			public boolean onTouch(View view, MotionEvent motionEvent) {
 				if (useOsmandKeyboard) {
+					if (orientationPortrait && !isOsmandKeyboardCurrentlyVisible()) {
+						changeOsmandKeyboardVisibility(true);
+					}
 					EditText editText = (EditText) view;
 					int inType = editText.getInputType();       // Backup the input type
 					editText.setInputType(InputType.TYPE_NULL); // Disable standard keyboard
