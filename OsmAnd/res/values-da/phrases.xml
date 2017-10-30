@@ -3726,7 +3726,7 @@
 <string name="poi_map_type_topo">Korttype: topografisk</string>
 	<string name="poi_map_type_street">Korttype: gadekort</string>
 	<string name="poi_map_type_scheme">Korttype: skematisk</string>
-	<string name="poi_map_type_toposcope">Korttype: topografisk</string>
+	<string name="poi_map_type_toposcope">Korttype: panoramakort</string>
 	<string name="poi_map_size_site">Kortdækning: sted</string>
 	<string name="poi_map_size_city">Kortdækning: by</string>
 	<string name="poi_map_size_region">Kortdækning: region</string>
