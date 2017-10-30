@@ -685,7 +685,7 @@ public class RouteDataObject {
 		return direction;
 	}
 
-	public boolean isStopApplicable(boolean direction, int intId) {
+	public boolean isStopApplicable(boolean direction, int intId, int startPointInd, int endPointInd) {
 		int[] pt = getPointTypes(intId);
 		int sz = pt.length;
 		for (int i = 0; i < sz; i++) {
@@ -704,11 +704,11 @@ public class RouteDataObject {
 			//	return true;
 			//}
 		}
-		// Experimental: Distance analysis for STOP with no recognized directional tagging (but exclude those mapped on intersection node)
-		double d1 = distance(0, intId);
-		double d2 = distance(intId, getPointsLength() - 1);
-		if (((direction == true) && (d1 < d2) && (d1 != 0))
-					|| ((direction == false) && (d1 > d2) && (d2 != 0))) {
+		// Heuristic fallback: Distance analysis for STOP with no recognized directional tagging:
+		// Mask STOPs closer to the start than to the end of the routing segment if it is within 50m of start, but do not mask STOPs mapped directly on start/end (likely intersection node)
+		double d2Start = distance(startPointInd, intId);
+		double d2End = distance(intId, endPointInd);
+		if ((d2Start < d2End) && d2Start != 0 && d2End != 0 && d2Start < 50) {
 			return false;
 		}
 		// No directional info detected
