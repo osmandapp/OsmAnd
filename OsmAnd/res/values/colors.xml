@@ -269,4 +269,6 @@
 
 	<color name="keyboard_text_color_dark">#ffffff</color>
 
+	<color name="coordinate_input_status_bar_color">#4257c9</color>
+
 </resources>
