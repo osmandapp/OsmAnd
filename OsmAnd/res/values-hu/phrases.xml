@@ -2825,7 +2825,7 @@
 
 	<string name="poi_greenhouse_horticulture">Üvegházi kertészet</string>
 
-	<string name="poi_voltage">Feszültség</string>
+	<string name="poi_voltage">Feszültség (V)</string>
 	<string name="poi_generator_output_electricity_yes">Kimenet: villamos energia</string>
 	<string name="poi_generator_output_hot_water_yes">Kimenet: forró víz</string>
 	<string name="poi_generator_output_steam_yes">Kimenet: gőz</string>
@@ -3077,7 +3077,7 @@
 	<string name="poi_bicycle_parking_lockers">Zárható szekrény</string>
 	<string name="poi_emergency_infrastructure">Vészhelyzeti infrastruktúra</string>
 	<string name="poi_wiki_lang_bpy">Bisnupria Wikipédia</string>
-	<string name="poi_power_supply_cee_17_blue">Elektromos csatlakozó (konnektor): CEE 17 kék</string>
+	<string name="poi_power_supply_cee_17_blue">Elektromos csatlakozó (konnektor): kék CEE 17</string>
 	<string name="poi_power_supply_cee_7_4">Elektromos csatlakozó (konnektor): CEE 7/4</string>
 	<string name="poi_power_supply_cee_7_5">Elektromos csatlakozó (konnektor): CEE 7/5</string>
 	<string name="poi_power_supply_nema_5_15">Elektromos csatlakozó (konnektor): NEMA 5-15</string>
@@ -3576,4 +3576,84 @@
 	<string name="poi_map_size_city">Térképterület: város</string>
 	<string name="poi_map_size_region">Térképterület: térség</string>
 
-</resources>
+<string name="poi_socket_cee_blue">Konnektor: kék CEE</string>
+	<string name="poi_socket_cee_blue_current">Konnektor: kék CEE – áramerősség (A):</string>
+	<string name="poi_socket_cee_blue_output">Konnektor: kék CEE – teljesítmény (W)</string>
+	<string name="poi_socket_cee_red_16a">Konnektor: vörös CEE 16A</string>
+	<string name="poi_socket_cee_red_16a_current">Konnektor: vörös CEE 16A – áramerősség (A)</string>
+	<string name="poi_socket_cee_red_16a_output">Konnektor: vörös CEE 16A – teljesítmény (W)</string>
+	<string name="poi_socket_cee_red_32a">Konnektor: vörös CEE 32A</string>
+	<string name="poi_socket_cee_red_32a_current">Konnektor: vörös CEE 32A – áramerősség (A)</string>
+	<string name="poi_socket_cee_red_32a_output">Konnektor: vörös CEE 32A – teljesítmény (W)</string>
+	<string name="poi_socket_cee_red_64a">Konnektor: vörös CEE 64A</string>
+	<string name="poi_socket_cee_red_64a_current">Konnektor: vörös CEE 64A – áramerősség (A)</string>
+	<string name="poi_socket_cee_red_64a_output">Konnektor: vörös CEE 64A – teljesítmény (W)</string>
+	<string name="poi_socket_cee_red_125a">Konnektor: vörös CEE 125A</string>
+	<string name="poi_socket_cee_red_125a_current">Konnektor: vörös CEE 125A – áramerősség (A)</string>
+	<string name="poi_socket_cee_red_125a_output">Konnektor: vörös CEE 125A – teljesítmény (W)</string>
+	<string name="poi_socket_type1">Konnektor: 1. típusú</string>
+	<string name="poi_socket_type1_current">Konnektor: 1. típusú – áramerősség (A)</string>
+	<string name="poi_socket_type1_output">Konnektor: 1. típusú – teljesítmény (W)</string>
+	<string name="poi_socket_type1_combo">Konnektor: 1. típusú kombinált</string>
+	<string name="poi_socket_type1_combo_current">Konnektor: 1. típusú kombinált – áramerősség (A)</string>
+	<string name="poi_socket_type1_combo_output">Konnektor: 1. típusú kombinált – teljesítmény (W)</string>
+	<string name="poi_socket_type2">Konnektor: 2. típusú</string>
+	<string name="poi_socket_type2_current">Konnektor: 2. típusú – áramerősség (A)</string>
+	<string name="poi_socket_type2_output">Konnektor: 2. típusú – teljesítmény (W)</string>
+	<string name="poi_socket_type2_combo">Konnektor: 2. típusú kombinált</string>
+	<string name="poi_socket_type2_combo_current">Konnektor: 2. típusú kombinált – áramerősség (A)</string>
+	<string name="poi_socket_type2_combo_output">Konnektor: 2. típusú kombinált – teljesítmény (W)</string>
+	<string name="poi_socket_type3">Konnektor: 3. típusú</string>
+	<string name="poi_socket_type3_current">Konnektor: 3. típusú – áramerősség (A)</string>
+	<string name="poi_socket_type3_output">Konnektor: 3. típusú – teljesítmény (W)</string>
+	<string name="poi_socket_chademo">Konnektor: CHAdeMO</string>
+	<string name="poi_socket_chademo_current">Konnektor: CHAdeMO – áramerősség (A)</string>
+	<string name="poi_socket_chademo_output">Konnektor: CHAdeMO – teljesítmény (W)</string>
+	<string name="poi_socket_tesla_standard">Konnektor: Tesla Standard</string>
+	<string name="poi_socket_tesla_standard_current">Konnektor: Tesla Standard – áramerősség (A)</string>
+	<string name="poi_socket_tesla_standard_output">Konnektor: Tesla Standard – teljesítmény (W)</string>
+	<string name="poi_socket_tesla_supercharger">Konnektor: Tesla Supercharger</string>
+	<string name="poi_socket_tesla_supercharger_current">Konnektor: Tesla Supercharger – áramerősség (A)</string>
+	<string name="poi_socket_tesla_supercharger_output">Konnektor: Tesla Supercharger – teljesítmény (W)</string>
+	<string name="poi_socket_tesla_roadster">Konnektor: Tesla Roadster</string>
+	<string name="poi_socket_tesla_roadster_current">Konnektor: Tesla Roadster – áramerősség (A)</string>
+	<string name="poi_socket_tesla_roadster_output">Konnektor: Tesla Roadster – teljesítmény (W)</string>
+	<string name="poi_socket_nema_5_15">Konnektor: NEMA 5-15R</string>
+	<string name="poi_socket_nema_5_15_current">Konnektor: NEMA 5-15R – áramerősség (A)</string>
+	<string name="poi_socket_nema_5_15_output">Konnektor: NEMA 5-15R – teljesítmény (W)</string>
+	<string name="poi_socket_nema_5_20">Konnektor: NEMA 5-20</string>
+	<string name="poi_socket_nema_5_20_current">Konnektor: NEMA 5-20 – áramerősség (A)</string>
+	<string name="poi_socket_nema_5_20_output">Konnektor: NEMA 5-20 – teljesítmény (W)</string>
+	<string name="poi_socket_nema_14_30">Konnektor: NEMA 14-30</string>
+	<string name="poi_socket_nema_14_30_current">Konnektor: NEMA 14-30 – áramerősség (A)</string>
+	<string name="poi_socket_nema_14_30_output">Konnektor: NEMA 14-30 – teljesítmény (W)</string>
+	<string name="poi_socket_nema_14_50">Konnektor: NEMA 14-50</string>
+	<string name="poi_socket_nema_14_50_current">Konnektor: NEMA 14-50 – áramerősség (A)</string>
+	<string name="poi_socket_nema_14_50_output">Konnektor: NEMA 14-50 – teljesítmény (W)</string>
+	<string name="poi_socket_schuko">Konnektor: Schuko</string>
+	<string name="poi_socket_schuko_current">Konnektor: Schuko – áramerősség (A)</string>
+	<string name="poi_socket_schuko_output">Konnektor: Schuko – teljesítmény (W)</string>
+	<string name="poi_socket_bs1363">Konnektor: BS 1363</string>
+	<string name="poi_socket_bs1363_current">Konnektor: BS 1363 – áramerősség (A)</string>
+	<string name="poi_socket_bs1363_output">Konnektor: BS 1363 – teljesítmény (W)</string>
+	<string name="poi_socket_as3112">Konnektor: AS/NZS 3112</string>
+	<string name="poi_socket_as3112_current">Konnektor: AS/NZS 3112 – áramerősség (A)</string>
+	<string name="poi_socket_as3112_output">Konnektor: AS/NZS 3112 – teljesítmény (W)</string>
+
+	<string name="poi_car_yes">Személyautó</string>
+	<string name="poi_car_no">Személyautó nem</string>
+	<string name="poi_bicycle_yes">Kerékpár</string>
+	<string name="poi_bicycle_no">Kerékpár nem</string>
+	<string name="poi_scooter_yes">Roller</string>
+	<string name="poi_scooter_no">Roller nem</string>
+	<string name="poi_truck_yes">Teherautó</string>
+	<string name="poi_truck_no">Teherautó nem</string>
+
+	<string name="poi_parking_fee_yes">Parkolási díj</string>
+	<string name="poi_parking_fee_no">Parkolási díj nincs</string>
+	<string name="poi_parking_fee">Parkolási díj</string>
+
+	<string name="poi_amperage">Áramerősség (A)</string>
+	<string name="poi_charging_station_output">Töltőállomás teljesítménye (kW)</string>
+
+	</resources>
