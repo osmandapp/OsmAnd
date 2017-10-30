@@ -225,7 +225,7 @@
     <string name="change_markers_position">Переместить курсор</string>
     <string name="current_track">Текущий путь</string>
     <string name="use_osm_live_routing">Навигация OsmAnd Live</string>
-    <string name="map_widget_battery">Заряд батареи</string>
+    <string name="map_widget_battery">Уровень заряда батареи</string>
     <string name="move_marker_bottom_sheet_title">Переместите карту чтобы изменить положение курсора</string>
     <!-- string name="lat_lon_pattern">Широта: %1$.5f Долгота: %2$.5f</string -->
     <string name="map_widget_magnetic_bearing">Магнитный пеленг</string>
@@ -1099,7 +1099,7 @@
     <string name="bg_service_sleep_mode_on">Выключить\nфоновый режим</string>
     <string name="bg_service_screen_lock_toast">Экран заблокирован</string>
     <string name="bg_service_interval">Установить интервал пробуждения:</string>
-    <string name="layer_map_appearance">Настройка экрана</string>
+    <string name="layer_map_appearance">Настроить экран</string>
     <string name="show_lanes">Показывать полосы движения</string>
     <string name="avoid_unpaved">Избегать просёлочных дорог</string>
     <string name="avoid_ferries">Избегать паромов</string>
@@ -1847,7 +1847,7 @@
     <string name="mark_to_delete">Отметить для удаления</string>
     <string name="welcome_text">OsmAnd обеспечивает полностью автономный (оффлайн) просмотр карт и автономную навигацию!</string>
     <string name="osm_changes_added_to_local_edits">OSM изменения добавлены в локальную базу данных</string>
-    <string name="confirm_usage_speed_cameras">Во многих странах (Германии, Франции, Италии и других) использование предупреждений о камерах контроля скорости не разрешено законом. OsmAnd не несет никакой ответственности, если вы нарушите закон. Пожалуйста, нажмите \"Да\", только если вы имеете право использовать эту функцию.</string>
+    <string name="confirm_usage_speed_cameras">Во многих странах (Германия, Франция, Италия и другие) использование предупреждения о камерах контроля скорости не допускается законом. Османд не несет никакой ответственности, если Вы нарушите закон. Пожалуйста, нажмите \" Да \" только если вы имеете право использовать эту функцию.</string>
     <string name="agps_info">Информация A-GPS</string>
     <string name="agps_data_last_downloaded">Последние загруженные данные A-GPS от: %1$s</string>
     <string name="shared_string_message">Сообщение</string>
