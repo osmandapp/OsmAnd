@@ -213,7 +213,11 @@ public class DownloadFileHelper {
 			}
 			unzipFile(de, progress, downloadInputStreams);
 			if(!de.targetFile.getAbsolutePath().equals(de.fileToDownload.getAbsolutePath())){
-				Algorithms.removeAllFiles(de.targetFile);
+				boolean successfull = Algorithms.removeAllFiles(de.targetFile);
+				if (successfull) {
+					ctx.getResourceManager().closeFile(de.targetFile.getName());
+				}
+				
 				boolean renamed = de.fileToDownload.renameTo(de.targetFile);
 				if(!renamed) {
 					showWarningCallback.showWarning(ctx.getString(R.string.shared_string_io_error) + ": old file can't be deleted");
