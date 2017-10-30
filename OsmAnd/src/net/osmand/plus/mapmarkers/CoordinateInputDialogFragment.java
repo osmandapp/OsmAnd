@@ -65,6 +65,7 @@ public class CoordinateInputDialogFragment extends DialogFragment {
 		setStyle(STYLE_NO_FRAME, themeId);
 
 		CoordinateInputBottomSheetDialogFragment fragment = new CoordinateInputBottomSheetDialogFragment();
+		fragment.setUsedOnMap(false);
 		fragment.setListener(createCoordinateInputFormatChangeListener());
 		fragment.show(getMapActivity().getSupportFragmentManager(), CoordinateInputBottomSheetDialogFragment.TAG);
 	}
@@ -95,6 +96,7 @@ public class CoordinateInputDialogFragment extends DialogFragment {
 			@Override
 			public void onClick(View view) {
 				CoordinateInputBottomSheetDialogFragment fragment = new CoordinateInputBottomSheetDialogFragment();
+				fragment.setUsedOnMap(false);
 				Bundle args = new Bundle();
 				args.putInt(COORDINATE_FORMAT, coordinateFormat);
 				args.putBoolean(USE_OSMAND_KEYBOARD, useOsmandKeyboard);

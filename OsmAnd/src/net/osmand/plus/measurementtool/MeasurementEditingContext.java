@@ -36,6 +36,7 @@ public class MeasurementEditingContext {
 	private int selectedPointPosition = -1;
 	private WptPt originalPointToMove;
 
+	private boolean inAddPointMode;
 	private boolean inSnapToRoadMode;
 	private boolean needUpdateCacheForSnap;
 	private int calculatedPairs;
@@ -51,6 +52,10 @@ public class MeasurementEditingContext {
 
 	MeasurementCommandManager getCommandManager() {
 		return commandManager;
+	}
+
+	boolean isInAddPointMode() {
+		return inAddPointMode;
 	}
 
 	boolean isInSnapToRoadMode() {
@@ -80,6 +85,10 @@ public class MeasurementEditingContext {
 
 	void setOriginalPointToMove(WptPt originalPointToMove) {
 		this.originalPointToMove = originalPointToMove;
+	}
+
+	void setInAddPointMode(boolean inAddPointMode) {
+		this.inAddPointMode = inAddPointMode;
 	}
 
 	void setInSnapToRoadMode(boolean inSnapToRoadMode) {

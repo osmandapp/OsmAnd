@@ -328,6 +328,7 @@ public class MapWidgetRegistry {
 						@Override
 						public boolean onContextMenuClick(final ArrayAdapter<ContextMenuItem> adapter, int itemId, final int position, boolean isChecked) {
 							ShowDirectionBottomSheetDialogFragment fragment = new ShowDirectionBottomSheetDialogFragment();
+							fragment.setUsedOnMap(true);
 							fragment.setListener(new ShowDirectionBottomSheetDialogFragment.ShowDirectionFragmentListener() {
 								@Override
 								public void onMapMarkersModeChanged(boolean showDirectionEnabled) {

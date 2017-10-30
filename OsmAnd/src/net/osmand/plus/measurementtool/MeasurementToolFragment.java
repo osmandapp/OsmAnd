@@ -274,6 +274,7 @@ public class MeasurementToolFragment extends Fragment {
 			@Override
 			public void onClick(View view) {
 				OptionsBottomSheetDialogFragment fragment = new OptionsBottomSheetDialogFragment();
+				fragment.setUsedOnMap(true);
 				fragment.setSnapToRoadEnabled(editingCtx.isInSnapToRoadMode());
 				fragment.setListener(createOptionsFragmentListener());
 				fragment.setAddLineMode(newGpxData != null);
@@ -608,6 +609,7 @@ public class MeasurementToolFragment extends Fragment {
 			public void addPointAfterOnClick() {
 				if (measurementLayer != null) {
 					measurementLayer.moveMapToPoint(editingCtx.getSelectedPointPosition());
+					editingCtx.setInAddPointMode(true);
 					editingCtx.splitSegments(editingCtx.getSelectedPointPosition() + 1);
 				}
 				((TextView) mainView.findViewById(R.id.add_point_before_after_text)).setText(mainView.getResources().getString(R.string.add_point_after));
@@ -619,6 +621,7 @@ public class MeasurementToolFragment extends Fragment {
 			public void addPointBeforeOnClick() {
 				if (measurementLayer != null) {
 					measurementLayer.moveMapToPoint(editingCtx.getSelectedPointPosition());
+					editingCtx.setInAddPointMode(true);
 					editingCtx.splitSegments(editingCtx.getSelectedPointPosition());
 				}
 				((TextView) mainView.findViewById(R.id.add_point_before_after_text)).setText(mainView.getResources().getString(R.string.add_point_before));
@@ -807,12 +810,14 @@ public class MeasurementToolFragment extends Fragment {
 
 	private void openSelectedPointMenu(MapActivity mapActivity) {
 		SelectedPointBottomSheetDialogFragment fragment = new SelectedPointBottomSheetDialogFragment();
+		fragment.setUsedOnMap(true);
 		fragment.setListener(createSelectedPointFragmentListener());
 		fragment.show(mapActivity.getSupportFragmentManager(), SelectedPointBottomSheetDialogFragment.TAG);
 	}
 
 	private void openSaveAsNewTrackMenu(MapActivity mapActivity) {
 		SaveAsNewTrackBottomSheetDialogFragment fragment = new SaveAsNewTrackBottomSheetDialogFragment();
+		fragment.setUsedOnMap(true);
 		fragment.setListener(createSaveAsNewTrackFragmentListener());
 		fragment.show(mapActivity.getSupportFragmentManager(), SaveAsNewTrackBottomSheetDialogFragment.TAG);
 	}
@@ -872,7 +877,7 @@ public class MeasurementToolFragment extends Fragment {
 	private void cancelModes() {
 		if (editingCtx.getOriginalPointToMove() != null) {
 			cancelMovePointMode();
-		} else if (editingCtx.getSelectedPointPosition() != -1) {
+		} else if (editingCtx.isInAddPointMode()) {
 			cancelAddPointBeforeOrAfterMode();
 		}
 	}
@@ -897,6 +902,7 @@ public class MeasurementToolFragment extends Fragment {
 		switchAddPointBeforeAfterMode(false);
 		editingCtx.splitSegments(editingCtx.getBeforePoints().size() + editingCtx.getAfterPoints().size());
 		editingCtx.setSelectedPointPosition(-1);
+		editingCtx.setInAddPointMode(false);
 		MeasurementToolLayer measurementLayer = getMeasurementLayer();
 		if (measurementLayer != null) {
 			measurementLayer.refreshMap();
@@ -908,6 +914,7 @@ public class MeasurementToolFragment extends Fragment {
 		switchAddPointBeforeAfterMode(false);
 		editingCtx.splitSegments(editingCtx.getBeforePoints().size() + editingCtx.getAfterPoints().size());
 		editingCtx.setSelectedPointPosition(-1);
+		editingCtx.setInAddPointMode(false);
 		MeasurementToolLayer measurementToolLayer = getMeasurementLayer();
 		if (measurementToolLayer != null) {
 			measurementToolLayer.refreshMap();
@@ -1394,7 +1401,7 @@ public class MeasurementToolFragment extends Fragment {
 		if (editingCtx.getOriginalPointToMove() != null) {
 			cancelMovePointMode();
 			return;
-		} else if (editingCtx.getSelectedPointPosition() != -1) {
+		} else if (editingCtx.isInAddPointMode()) {
 			cancelAddPointBeforeOrAfterMode();
 			return;
 		}

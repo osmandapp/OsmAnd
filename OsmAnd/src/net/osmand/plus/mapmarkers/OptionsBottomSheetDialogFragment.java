@@ -1,36 +1,27 @@
 package net.osmand.plus.mapmarkers;
 
-import android.graphics.drawable.Drawable;
-import android.os.Build;
 import android.os.Bundle;
-import android.support.annotation.DrawableRes;
 import android.support.annotation.Nullable;
 import android.support.v4.content.ContextCompat;
 import android.view.ContextThemeWrapper;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
-import android.view.ViewTreeObserver;
-import android.view.Window;
-import android.view.WindowManager;
 import android.widget.ImageView;
 import android.widget.TextView;
 
-import net.osmand.AndroidUtils;
 import net.osmand.plus.OsmandSettings;
 import net.osmand.plus.R;
 import net.osmand.plus.activities.MapActivity;
-import net.osmand.plus.base.BottomSheetDialogFragment;
-import net.osmand.plus.helpers.AndroidUiHelper;
+import net.osmand.plus.base.MenuBottomSheetDialogFragment;
 
-public class OptionsBottomSheetDialogFragment extends BottomSheetDialogFragment {
+public class OptionsBottomSheetDialogFragment extends MenuBottomSheetDialogFragment {
 
 	public final static String TAG = "OptionsBottomSheetDialogFragment";
 	public final static String SHOW_SORT_BY_ROW = "show_sort_by_row";
 	public final static String SHOW_MOVE_ALL_TO_HISTORY_ROW = "show_move_to_history_row";
 
 	private MarkerOptionsFragmentListener listener;
-	private boolean portrait;
 	private boolean showSortBy;
 	private boolean showMoveAllToHistory;
 
@@ -50,17 +41,11 @@ public class OptionsBottomSheetDialogFragment extends BottomSheetDialogFragment 
 	@Override
 	public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
 		MapActivity mapActivity = (MapActivity) getActivity();
-		portrait = AndroidUiHelper.isOrientationPortrait(getActivity());
-		final boolean nightMode = !getMyApplication().getSettings().isLightContent();
 		final int themeRes = nightMode ? R.style.OsmandDarkTheme : R.style.OsmandLightTheme;
 
 		final View mainView = View.inflate(new ContextThemeWrapper(getContext(), themeRes), R.layout.fragment_marker_options_bottom_sheet_dialog, container);
-		if (portrait) {
-			AndroidUtils.setBackground(getActivity(), mainView, nightMode, R.drawable.bg_bottom_menu_light, R.drawable.bg_bottom_menu_dark);
-		}
 
-		((ImageView) mainView.findViewById(R.id.sort_by_icon))
-				.setImageDrawable(getContentIcon(R.drawable.ic_sort_waypoint_dark));
+		((ImageView) mainView.findViewById(R.id.sort_by_icon)).setImageDrawable(getContentIcon(R.drawable.ic_sort_waypoint_dark));
 		OsmandSettings.MapMarkersMode mode = getMyApplication().getSettings().MAP_MARKERS_MODE.get();
 		ImageView showDirectionIcon = (ImageView) mainView.findViewById(R.id.show_direction_icon);
 		int imageResId = 0;
@@ -76,14 +61,10 @@ public class OptionsBottomSheetDialogFragment extends BottomSheetDialogFragment 
 		if (imageResId != 0) {
 			showDirectionIcon.setImageDrawable(getIcon(imageResId, R.color.dashboard_blue));
 		}
-		((ImageView) mainView.findViewById(R.id.coordinate_input_icon))
-				.setImageDrawable(getContentIcon(R.drawable.ic_action_coordinates_longitude));
-		((ImageView) mainView.findViewById(R.id.build_route_icon))
-				.setImageDrawable(getContentIcon(R.drawable.ic_action_gdirections_dark));
-		((ImageView) mainView.findViewById(R.id.save_as_new_track_icon))
-				.setImageDrawable(getContentIcon(R.drawable.ic_action_polygom_dark));
-		((ImageView) mainView.findViewById(R.id.move_all_to_history_icon))
-				.setImageDrawable(getContentIcon(R.drawable.ic_action_history2));
+		((ImageView) mainView.findViewById(R.id.coordinate_input_icon)).setImageDrawable(getContentIcon(R.drawable.ic_action_coordinates_longitude));
+		((ImageView) mainView.findViewById(R.id.build_route_icon)).setImageDrawable(getContentIcon(R.drawable.ic_action_gdirections_dark));
+		((ImageView) mainView.findViewById(R.id.save_as_new_track_icon)).setImageDrawable(getContentIcon(R.drawable.ic_action_polygom_dark));
+		((ImageView) mainView.findViewById(R.id.move_all_to_history_icon)).setImageDrawable(getContentIcon(R.drawable.ic_action_history2));
 
 		((TextView) mainView.findViewById(R.id.show_direction_text_view)).setTextColor(ContextCompat.getColor(mapActivity, nightMode ? R.color.color_dialog_buttons_dark : R.color.map_widget_blue_pressed));
 		((TextView) mainView.findViewById(R.id.show_direction_text_view)).setText(getMyApplication().getSettings().MAP_MARKERS_MODE.get().toHumanString(getActivity()));
@@ -160,60 +141,9 @@ public class OptionsBottomSheetDialogFragment extends BottomSheetDialogFragment 
 			}
 		});
 
-		final int screenHeight = AndroidUtils.getScreenHeight(getActivity());
-		final int statusBarHeight = AndroidUtils.getStatusBarHeight(getActivity());
-		final int navBarHeight = AndroidUtils.getNavBarHeight(getActivity());
-
-		mainView.getViewTreeObserver().addOnGlobalLayoutListener(new ViewTreeObserver.OnGlobalLayoutListener() {
-			@Override
-			public void onGlobalLayout() {
-				final View scrollView = mainView.findViewById(R.id.marker_options_scroll_view);
-				int scrollViewHeight = scrollView.getHeight();
-				int dividerHeight = AndroidUtils.dpToPx(getContext(), 1);
-				int cancelButtonHeight = getContext().getResources().getDimensionPixelSize(R.dimen.bottom_sheet_cancel_button_height);
-				int spaceForScrollView = screenHeight - statusBarHeight - navBarHeight - dividerHeight - cancelButtonHeight;
-				if (scrollViewHeight > spaceForScrollView) {
-					scrollView.getLayoutParams().height = spaceForScrollView;
-					scrollView.requestLayout();
-				}
-
-				if (!portrait) {
-					if (screenHeight - statusBarHeight - mainView.getHeight()
-							>= getResources().getDimension(R.dimen.bottom_sheet_content_padding_small)) {
-						AndroidUtils.setBackground(getActivity(), mainView, nightMode,
-								R.drawable.bg_bottom_sheet_topsides_landscape_light, R.drawable.bg_bottom_sheet_topsides_landscape_dark);
-					} else {
-						AndroidUtils.setBackground(getActivity(), mainView, nightMode,
-								R.drawable.bg_bottom_sheet_sides_landscape_light, R.drawable.bg_bottom_sheet_sides_landscape_dark);
-					}
-				}
-
-				ViewTreeObserver obs = mainView.getViewTreeObserver();
-				if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.JELLY_BEAN) {
-					obs.removeOnGlobalLayoutListener(this);
-				} else {
-					obs.removeGlobalOnLayoutListener(this);
-				}
-			}
-		});
+		setupHeightAndBackground(mainView, R.id.marker_options_scroll_view);
 
 		return mainView;
-	}
-
-	@Override
-	public void onStart() {
-		super.onStart();
-		if (!portrait) {
-			final Window window = getDialog().getWindow();
-			WindowManager.LayoutParams params = window.getAttributes();
-			params.width = getActivity().getResources().getDimensionPixelSize(R.dimen.landscape_bottom_sheet_dialog_fragment_width);
-			window.setAttributes(params);
-		}
-	}
-
-	@Override
-	protected Drawable getContentIcon(@DrawableRes int id) {
-		return getIcon(id, getMyApplication().getSettings().isLightContent() ? R.color.on_map_icon_color : R.color.ctx_menu_info_text_dark);
 	}
 
 	interface MarkerOptionsFragmentListener {
