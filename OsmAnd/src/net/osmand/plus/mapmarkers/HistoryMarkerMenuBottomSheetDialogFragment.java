@@ -35,6 +35,7 @@ public class HistoryMarkerMenuBottomSheetDialogFragment extends MenuBottomSheetD
 	@Nullable
 	@Override
 	public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
+		usedOnMap = true;
 		final boolean nightMode = isNightMode();
 		final int themeRes = nightMode ? R.style.OsmandDarkTheme : R.style.OsmandLightTheme;
 
@@ -90,11 +91,6 @@ public class HistoryMarkerMenuBottomSheetDialogFragment extends MenuBottomSheetD
 		setupHeightAndBackground(mainView, R.id.history_marker_scroll_view);
 
 		return mainView;
-	}
-
-	@Override
-	protected boolean isNightMode() {
-		return getMyApplication().getDaynightHelper().isNightModeForMapControls();
 	}
 
 	interface HistoryMarkerMenuFragmentListener {

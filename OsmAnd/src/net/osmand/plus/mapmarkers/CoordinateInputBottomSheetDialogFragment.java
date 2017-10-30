@@ -162,11 +162,6 @@ public class CoordinateInputBottomSheetDialogFragment extends MenuBottomSheetDia
 		}
 	}
 
-	@Override
-	protected boolean isNightMode() {
-		return !getMyApplication().getSettings().isLightContent();
-	}
-
 	private void highlightSelectedItem(boolean check) {
 		int iconColor = check ? R.color.dashboard_blue : night ? R.color.ctx_menu_info_text_dark : R.color.on_map_icon_color;
 		int textColor = ContextCompat.getColor(getContext(), check ? (night ? R.color.color_dialog_buttons_dark : R.color.dashboard_blue) : night ? R.color.color_white : R.color.color_black);

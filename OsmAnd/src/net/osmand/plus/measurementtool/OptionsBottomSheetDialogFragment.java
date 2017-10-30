@@ -36,6 +36,7 @@ public class OptionsBottomSheetDialogFragment extends MenuBottomSheetDialogFragm
 	@Nullable
 	@Override
 	public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
+		usedOnMap = true;
 		boolean nightMode = isNightMode();
 		final int themeRes = nightMode ? R.style.OsmandDarkTheme : R.style.OsmandLightTheme;
 
@@ -120,11 +121,6 @@ public class OptionsBottomSheetDialogFragment extends MenuBottomSheetDialogFragm
 		setupHeightAndBackground(mainView, R.id.measure_options_scroll_view);
 
 		return mainView;
-	}
-
-	@Override
-	protected boolean isNightMode() {
-		return getMyApplication().getDaynightHelper().isNightModeForMapControls();
 	}
 
 	interface OptionsFragmentListener {

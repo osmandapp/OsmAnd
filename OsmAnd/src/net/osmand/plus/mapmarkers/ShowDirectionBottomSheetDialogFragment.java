@@ -134,11 +134,6 @@ public class ShowDirectionBottomSheetDialogFragment extends MenuBottomSheetDialo
 		return mainView;
 	}
 
-	@Override
-	protected boolean isNightMode() {
-		return !getMyApplication().getSettings().isLightContent();
-	}
-
 	private MapActivity getMapActivity() {
 		Activity activity = getActivity();
 		if (activity != null) {

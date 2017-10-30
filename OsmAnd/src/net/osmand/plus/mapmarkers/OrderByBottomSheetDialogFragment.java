@@ -64,11 +64,6 @@ public class OrderByBottomSheetDialogFragment extends MenuBottomSheetDialogFragm
 		return mainView;
 	}
 
-	@Override
-	protected boolean isNightMode() {
-		return !getMyApplication().getSettings().isLightContent();
-	}
-
 	private View.OnClickListener orderByModeOnClickListener = new View.OnClickListener() {
 
 		@Override

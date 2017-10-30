@@ -33,8 +33,9 @@ public class PlanRouteOptionsBottomSheetDialogFragment extends MenuBottomSheetDi
 	@Nullable
 	@Override
 	public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
+		usedOnMap = true;
 		boolean portrait = AndroidUiHelper.isOrientationPortrait(getActivity());
-		boolean night = getMyApplication().getDaynightHelper().isNightModeForMapControls();
+		boolean night = isNightMode();
 		final int themeRes = night ? R.style.OsmandDarkTheme : R.style.OsmandLightTheme;
 
 		final View mainView = View.inflate(new ContextThemeWrapper(getContext(), themeRes), R.layout.fragment_plan_route_options_bottom_sheet_dialog, container);
@@ -114,11 +115,6 @@ public class PlanRouteOptionsBottomSheetDialogFragment extends MenuBottomSheetDi
 		setupHeightAndBackground(mainView, R.id.sort_by_scroll_view);
 
 		return mainView;
-	}
-
-	@Override
-	protected boolean isNightMode() {
-		return getMyApplication().getDaynightHelper().isNightModeForMapControls();
 	}
 
 	interface PlanRouteOptionsFragmentListener {

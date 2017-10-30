@@ -632,6 +632,7 @@ public class GpxImportHelper {
 		@Nullable
 		@Override
 		public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
+			usedOnMap = true;
 			boolean night = isNightMode();
 			final int themeRes = night ? R.style.OsmandDarkTheme : R.style.OsmandLightTheme;
 
@@ -677,11 +678,6 @@ public class GpxImportHelper {
 			setupHeightAndBackground(mainView, R.id.import_gpx_scroll_view);
 
 			return mainView;
-		}
-
-		@Override
-		protected boolean isNightMode() {
-			return getMyApplication().getDaynightHelper().isNightModeForMapControls();
 		}
 	}
 }

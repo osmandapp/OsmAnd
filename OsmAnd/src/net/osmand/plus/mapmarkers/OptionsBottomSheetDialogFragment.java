@@ -147,11 +147,6 @@ public class OptionsBottomSheetDialogFragment extends MenuBottomSheetDialogFragm
 		return mainView;
 	}
 
-	@Override
-	protected boolean isNightMode() {
-		return !getMyApplication().getSettings().isLightContent();
-	}
-
 	interface MarkerOptionsFragmentListener {
 
 		void sortByOnClick();

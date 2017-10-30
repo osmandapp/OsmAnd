@@ -34,6 +34,7 @@ public class SelectedPointBottomSheetDialogFragment extends MenuBottomSheetDialo
 	@Nullable
 	@Override
 	public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
+		usedOnMap = true;
 		final MapActivity mapActivity = (MapActivity) getActivity();
 		boolean nightMode = isNightMode();
 		final MeasurementToolLayer measurementLayer = mapActivity.getMapLayers().getMeasurementToolLayer();
@@ -143,11 +144,6 @@ public class SelectedPointBottomSheetDialogFragment extends MenuBottomSheetDialo
 		setupHeightAndBackground(mainView, R.id.selected_point_options_scroll_view);
 
 		return mainView;
-	}
-
-	@Override
-	protected boolean isNightMode() {
-		return getMyApplication().getDaynightHelper().isNightModeForMapControls();
 	}
 
 	@Override

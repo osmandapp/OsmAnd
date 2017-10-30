@@ -26,6 +26,7 @@ public class SaveAsNewTrackBottomSheetDialogFragment extends MenuBottomSheetDial
 	@Nullable
 	@Override
 	public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
+		usedOnMap = true;
 		boolean nightMode = isNightMode();
 		final int themeRes = nightMode ? R.style.OsmandDarkTheme : R.style.OsmandLightTheme;
 
@@ -102,11 +103,6 @@ public class SaveAsNewTrackBottomSheetDialogFragment extends MenuBottomSheetDial
 			dismiss();
 		}
 	};
-
-	@Override
-	protected boolean isNightMode() {
-		return getMyApplication().getDaynightHelper().isNightModeForMapControls();
-	}
 
 	interface SaveAsNewTrackFragmentListener {
 

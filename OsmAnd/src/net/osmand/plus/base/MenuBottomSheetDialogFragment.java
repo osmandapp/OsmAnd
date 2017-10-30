@@ -3,6 +3,7 @@ package net.osmand.plus.base;
 import android.app.Activity;
 import android.graphics.drawable.Drawable;
 import android.os.Build;
+import android.os.Bundle;
 import android.support.annotation.DrawableRes;
 import android.view.View;
 import android.view.ViewTreeObserver;
@@ -15,6 +16,18 @@ import net.osmand.plus.helpers.AndroidUiHelper;
 
 public abstract class MenuBottomSheetDialogFragment extends BottomSheetDialogFragment {
 
+	private static final String USED_ON_MAP_KEY = "used_on_map";
+
+	protected boolean usedOnMap;
+
+	@Override
+	public void onActivityCreated(Bundle savedInstanceState) {
+		super.onActivityCreated(savedInstanceState);
+		if (savedInstanceState != null) {
+			usedOnMap = savedInstanceState.getBoolean(USED_ON_MAP_KEY);
+		}
+	}
+
 	@Override
 	public void onStart() {
 		super.onStart();
@@ -24,6 +37,12 @@ public abstract class MenuBottomSheetDialogFragment extends BottomSheetDialogFra
 			params.width = getActivity().getResources().getDimensionPixelSize(R.dimen.landscape_bottom_sheet_dialog_fragment_width);
 			window.setAttributes(params);
 		}
+	}
+
+	@Override
+	public void onSaveInstanceState(Bundle outState) {
+		super.onSaveInstanceState(outState);
+		outState.putBoolean(USED_ON_MAP_KEY, usedOnMap);
 	}
 
 	@Override
@@ -77,5 +96,10 @@ public abstract class MenuBottomSheetDialogFragment extends BottomSheetDialogFra
 		});
 	}
 
-	protected abstract boolean isNightMode();
+	protected boolean isNightMode() {
+		if (usedOnMap) {
+			getMyApplication().getDaynightHelper().isNightModeForMapControls();
+		}
+		return !getMyApplication().getSettings().isLightContent();
+	}
 }
