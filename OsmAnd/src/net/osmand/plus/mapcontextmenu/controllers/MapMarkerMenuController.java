@@ -28,8 +28,9 @@ public class MapMarkerMenuController extends MenuController {
 				getMapActivity().getContextMenu().close();
 			}
 		};
-		leftTitleButtonController.caption = getMapActivity().getString(R.string.shared_string_remove);
-		leftTitleButtonController.leftIconId = R.drawable.ic_action_delete_dark;
+		leftTitleButtonController.needColorizeIcon = false;
+		leftTitleButtonController.caption = getMapActivity().getString(R.string.mark_passed);
+		leftTitleButtonController.leftIconId = isLight() ? R.drawable.passed_icon_light : R.drawable.passed_icon_dark;
 	}
 
 	@Override

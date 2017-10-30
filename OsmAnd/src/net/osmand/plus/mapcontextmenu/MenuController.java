@@ -3,6 +3,7 @@ package net.osmand.plus.mapcontextmenu;
 import android.graphics.drawable.Drawable;
 import android.os.AsyncTask;
 import android.support.annotation.NonNull;
+import android.support.v4.content.ContextCompat;
 import android.view.View;
 import android.view.View.OnClickListener;
 import android.widget.LinearLayout;
@@ -495,10 +496,14 @@ public abstract class MenuController extends BaseMenuController {
 		public boolean needRightText = false;
 		public String rightTextCaption = "";
 		public boolean visible = true;
+		public boolean needColorizeIcon = true;
 
 		public Drawable getLeftIcon() {
 			if (leftIconId != 0) {
-				return getIcon(leftIconId, isLight() ? R.color.map_widget_blue : R.color.osmand_orange);
+				if (needColorizeIcon) {
+					return getIcon(leftIconId, isLight() ? R.color.map_widget_blue : R.color.osmand_orange);
+				}
+				return ContextCompat.getDrawable(getMapActivity(), leftIconId);
 			} else {
 				return null;
 			}
