@@ -12,9 +12,11 @@ import net.osmand.PlatformUtil;
 import net.osmand.ResultMatcher;
 import net.osmand.data.Amenity;
 import net.osmand.osm.MapPoiTypes;
+import net.osmand.osm.PoiType;
 import net.osmand.osm.io.NetworkUtils;
 import net.osmand.plus.OsmandApplication;
 import net.osmand.plus.R;
+import net.osmand.util.Algorithms;
 import net.osmand.util.MapUtils;
 import net.sf.junidecode.Junidecode;
 
@@ -82,6 +84,9 @@ public class NominatimPoiFilter extends PoiUIFilter {
 			NOMINATIM_API = "http://nominatim.openstreetmap.org/search/";
 		}
 		currentSearchResult = new ArrayList<Amenity>();
+		if (Algorithms.isEmpty(getFilterByName())) {
+			return currentSearchResult;
+		}
 		String viewbox = "viewboxlbrt="+((float) leftLongitude)+","+((float) bottomLatitude)+","+((float) rightLongitude)+","+((float) topLatitude);
 		try {
 			lastError = "";
@@ -90,8 +95,8 @@ public class NominatimPoiFilter extends PoiUIFilter {
 				urlq = NOMINATIM_API + "?format=xml&addressdetails=0&accept-language="+ Locale.getDefault().getLanguage() 
 						+ "&q=" + URLEncoder.encode(getFilterByName());	
 			} else {
-				urlq = NOMINATIM_API + URLEncoder.encode(getFilterByName()) + "?format=xml&addressdetails=1&limit=" + LIMIT
-						+ "&bounded=1&" + viewbox;	
+				urlq = NOMINATIM_API + "?format=xml&addressdetails=1&limit=" + LIMIT
+						+ "&bounded=1&" + viewbox + "&q=" + URLEncoder.encode(getFilterByName());
 			}
 			log.info(urlq);
 			URLConnection connection = NetworkUtils.getHttpURLConnection(urlq); //$NON-NLS-1$
@@ -123,8 +128,9 @@ public class NominatimPoiFilter extends PoiUIFilter {
 								String name = parser.getAttributeValue("", "display_name"); //$NON-NLS-1$//$NON-NLS-2$
 								a.setName(name);
 								a.setEnName(Junidecode.unidecode(name));
-								a.setType(poiTypes.getOtherPoiCategory());
 								a.setSubType(parser.getAttributeValue("", "type")); //$NON-NLS-1$//$NON-NLS-2$
+								PoiType pt = poiTypes.getPoiTypeByKey(a.getSubType());
+								a.setType(pt != null ? pt.getCategory() : poiTypes.getOtherPoiCategory());
 								if (matcher == null || matcher.publish(a)) {
 									currentSearchResult.add(a);
 								}

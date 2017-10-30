@@ -9,6 +9,9 @@ public enum ObjectType {
 	LOCATION(true), PARTIAL_LOCATION(false),
 	// UI OBJECTS
 	FAVORITE(true), FAVORITE_GROUP(false), WPT(true), RECENT_OBJ(true),
+
+	// ONLINE SEARCH
+	ONLINE_SEARCH(true),
 	
 	REGION(true),
 

@@ -20,13 +20,16 @@ import net.osmand.access.AccessibilityAssistant;
 import net.osmand.data.Amenity;
 import net.osmand.data.LatLon;
 import net.osmand.plus.OsmandApplication;
+import net.osmand.plus.OsmandPlugin;
 import net.osmand.plus.R;
 import net.osmand.plus.dashboard.DashLocationFragment;
+import net.osmand.plus.rastermaps.OsmandRasterMapsPlugin;
 import net.osmand.plus.search.listitems.QuickSearchHeaderListItem;
 import net.osmand.plus.search.listitems.QuickSearchListItem;
 import net.osmand.plus.search.listitems.QuickSearchListItemType;
 import net.osmand.plus.search.listitems.QuickSearchMoreListItem;
 import net.osmand.plus.search.listitems.QuickSearchSelectAllListItem;
+import net.osmand.search.core.ObjectType;
 import net.osmand.search.core.SearchPhrase;
 import net.osmand.util.Algorithms;
 import net.osmand.util.OpeningHoursParser;
@@ -190,7 +193,8 @@ public class QuickSearchListAdapter extends ArrayAdapter<QuickSearchListItem> {
 		QuickSearchListItemType type = getItem(position).getType();
 		return type != QuickSearchListItemType.HEADER
 				&& type != QuickSearchListItemType.TOP_SHADOW
-				&& type != QuickSearchListItemType.BOTTOM_SHADOW;
+				&& type != QuickSearchListItemType.BOTTOM_SHADOW
+				&& type != QuickSearchListItemType.SEARCH_MORE;
 	}
 
 	@Override
@@ -231,6 +235,21 @@ public class QuickSearchListAdapter extends ArrayAdapter<QuickSearchListItem> {
 			} else {
 				view.findViewById(R.id.empty_search).setVisibility(View.GONE);
 				view.findViewById(R.id.more_divider).setVisibility(View.GONE);
+			}
+			view.findViewById(R.id.increase_radius_row).setOnClickListener(new View.OnClickListener() {
+				@Override
+				public void onClick(View view) {
+					((QuickSearchMoreListItem) listItem).increaseRadiusOnClick();
+				}
+			});
+			if (!searchMoreListItem.isOnlineSearch()) {
+				view.findViewById(R.id.online_search_row).setVisibility(View.VISIBLE);
+				view.findViewById(R.id.online_search_row).setOnClickListener(new View.OnClickListener() {
+					@Override
+					public void onClick(View view) {
+						((QuickSearchMoreListItem) listItem).onlineSearchOnClick();
+					}
+				});
 			}
 		} else if (type == QuickSearchListItemType.BUTTON) {
 			if (convertView == null) {

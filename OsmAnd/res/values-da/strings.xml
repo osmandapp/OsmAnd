@@ -2886,7 +2886,7 @@ Tidligere destination bliver sidste mellemliggende punkt.</string>
     <string name="ascendingly">stigende</string>
     <string name="date_added">Dato tilføjet</string>
     <string name="order_by">Sorter efter:</string>
-    <string name="show_guide_line">Vis vejledningslinjer</string>
+    <string name="show_guide_line">Vis vejledningslinje</string>
     <string name="show_arrows_on_the_map">Vis pile på kortet</string>
     <string name="show_passed">Vis passeret</string>
     <string name="hide_passed">Skjul passeret</string>
@@ -2917,19 +2917,25 @@ Tidligere destination bliver sidste mellemliggende punkt.</string>
     <string name="context_menu_item_modify_note">Ændre OSM note</string>
     <string name="release_2_8">"•  Helt omarbejdelse af kortmarkører med retningslinjer og ruteplanlægning 
 \n
-\n 
+\n • Værktøj til afstandsmåling tilbyder en fastgør til vejen funktion samt at gemmme punkter som spor 
 \n
-\n • Afstand måleværktøj tilbyder en fastgør til vejen funktion samt at gemmme punkter som spor 
-\n
-\n 
-\n
-\n  •  OSM Live: fejlrettelser, nye data på serveren hvert 30. minut, opdateringer implementeres i navigationen
+\n •  OSM Live: fejlrettelser, nye data på serveren hvert 30. minut, opdateringer implementeres i navigationen
 \n
 \n"</string>
     <string name="rendering_value_darkyellow_name">Mørkegul</string>
     <string name="show_map">Vis kort</string>
-    <string name="route_is_calculated">Ruten er beregnet</string>
+    <string name="route_is_calculated">Rute beregnes</string>
     <string name="round_trip">Rundtur</string>
     <string name="plan_route_no_markers_toast">Tilføj mindst én markør for at bruge denne funktion.</string>
     <string name="shared_string_road">Vej</string>
-    </resources>
+    <string name="wrong_format">Forkert format</string>
+    <string name="wrong_input">Forkert indtastning</string>
+    <string name="enter_new_name">Indtast nyt navn</string>
+    <string name="shared_string_back">Tilbage</string>
+    <string name="view">Vis</string>
+	<string name="waypoints_added_to_map_markers">Rutepunkter tilføjet kortmarkører</string>
+	<string name="import_gpx_file_description">kan importeres som favoritpunkter, eller som spor.</string>
+    <string name="import_as_gpx">Importer som GPX-fil</string>
+    <string name="import_as_favorites">Importer som favoritter</string>
+    <string name="import_file">Importer fil</string>
+	</resources>

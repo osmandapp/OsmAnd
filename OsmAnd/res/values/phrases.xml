@@ -92,6 +92,10 @@
 	<string name="poi_animal_shelter_type">Animals accepted</string>
 	<string name="poi_animal_shelter_purpose">Purpose</string>
 	<string name="poi_boat_rental_type">Rented boats</string>
+	<string name="poi_operational_status">Operational status</string>
+	<string name="poi_water_supply_type">Water supply type</string>
+	<string name="poi_water_purification">Water purification</string>
+	<string name="poi_water_place_access">Water place access</string>
 
 <!--  categories -->
 	<string name="poi_shop">Store</string>
@@ -3494,5 +3498,138 @@
 	<string name="poi_surface_artificial_turf">Artificial turf</string>
 	<string name="poi_surface_decoturf">DecoTurf</string>
 	<string name="poi_surface_metal_grid">Metal grid</string>
+
+	<string name="poi_location_underground">Location: underground</string>
+	<string name="poi_location_underwater">Location: underwater</string>
+	<string name="poi_location_overground">Location: overground</string>
+	<string name="poi_location_overhead">Location: overhead</string>
+	<string name="poi_location_roof">Location: roof</string>
+	<string name="poi_location_rooftop">Location: rooftop</string>
+	<string name="poi_location_outdoor">Location: outdoor</string>
+	<string name="poi_location_indoor">Location: indoor</string>
+	<string name="poi_location_platform">Location: platform</string>
+	<string name="poi_location_kiosk">Location: kiosk</string>
+	<string name="poi_location_bridge">Location: bridge</string>
+	<string name="poi_location_wall">Location: wall</string>
+	<string name="poi_location_entrance">Location: entrance</string>
+
+	<string name="poi_visibility_house">Visibility: house</string>
+	<string name="poi_visibility_street">Visibility: street</string>
+	<string name="poi_visibility_area">Visibility: area</string>
+
+	<string name="poi_operational_status_open">Open</string>
+	<string name="poi_operational_status_closed">Closed</string>
+	<string name="poi_operational_status_restricted">Restricted</string>
+	<string name="poi_operational_status_broken">Broken</string>
+	<string name="poi_operational_status_needs_maintenance">Needs maintenance</string>
+
+	<string name="poi_water_place_durability_durable">Water place durability: durable</string>
+	<string name="poi_water_place_durability_emergency">Water place durability: emergency</string>
+
+	<string name="poi_water_purification_none">None</string>
+	<string name="poi_water_purification_chlorine">Chlorine</string>
+	<string name="poi_water_purification_reverse_osmosis">Reverse osmosis</string>
+	<string name="poi_water_purification_aquatabs">Aquatabs</string>
+
+	<string name="poi_water_supply_water_well">Water well</string>
+	<string name="poi_water_supply_pipeline">Pipeline</string>
+	<string name="poi_water_supply_running_water">Running water</string>
+	<string name="poi_water_supply_pump">Pump</string>
+	<string name="poi_water_supply_borehole">Borehole</string>
+	<string name="poi_water_supply_water_trucking">Water trucking</string>
+	<string name="poi_water_supply_water_tank">Water tank</string>
+	<string name="poi_water_supply_bottled_water">Bottled water</string>
+
+	<string name="poi_water_place_access_community">Community</string>
+	<string name="poi_water_place_access_family">Family</string>
+	<string name="poi_water_place_access_multifamilies">Multifamilies</string>
+
+	<string name="poi_socket_cee_blue">Socket: CEE blue</string>
+	<string name="poi_socket_cee_blue_current">Socket: CEE blue: current</string>
+	<string name="poi_socket_cee_blue_output">Socket: CEE blue: output</string>
+	<string name="poi_socket_cee_red_16a">Socket: CEE red 16A</string>
+	<string name="poi_socket_cee_red_16a_current">Socket: CEE red 16A: current</string>
+	<string name="poi_socket_cee_red_16a_output">Socket: CEE red 16A: output</string>
+	<string name="poi_socket_cee_red_32a">Socket: CEE red 32A</string>
+	<string name="poi_socket_cee_red_32a_current">Socket: CEE red 32A: current</string>
+	<string name="poi_socket_cee_red_32a_output">Socket: CEE red 32A: output</string>
+	<string name="poi_socket_cee_red_64a">Socket: CEE red 64A</string>
+	<string name="poi_socket_cee_red_64a_current">Socket: CEE red 64A: current</string>
+	<string name="poi_socket_cee_red_64a_output">Socket: CEE red 64A: output</string>
+	<string name="poi_socket_cee_red_125a">Socket: CEE red 125A</string>
+	<string name="poi_socket_cee_red_125a_current">Socket: CEE red 125A: current</string>
+	<string name="poi_socket_cee_red_125a_output">Socket: CEE red 125A: output</string>
+	<string name="poi_socket_type1">Socket: Type 1</string>
+	<string name="poi_socket_type1_current">Socket: Type 1: current</string>
+	<string name="poi_socket_type1_output">Socket: Type 1: output</string>
+	<string name="poi_socket_type1_combo">Socket: Type 1 combo</string>
+	<string name="poi_socket_type1_combo_current">Socket: Type 1 combo: current</string>
+	<string name="poi_socket_type1_combo_output">Socket: Type 1 combo: output</string>
+	<string name="poi_socket_type2">Socket: Type 2</string>
+	<string name="poi_socket_type2_current">Socket: Type 2: current</string>
+	<string name="poi_socket_type2_output">Socket: Type 2: output</string>
+	<string name="poi_socket_type2_combo">Socket: Type 2 combo</string>
+	<string name="poi_socket_type2_combo_current">Socket: Type 2 combo: current</string>
+	<string name="poi_socket_type2_combo_output">Socket: Type 2 combo: output</string>
+	<string name="poi_socket_type3">Socket: Type 3</string>
+	<string name="poi_socket_type3_current">Socket: Type 3: current</string>
+	<string name="poi_socket_type3_output">Socket: Type 3: output</string>
+	<string name="poi_socket_chademo">Socket: CHAdeMO</string>
+	<string name="poi_socket_chademo_current">Socket: CHAdeMO: current</string>
+	<string name="poi_socket_chademo_output">Socket: CHAdeMO: output</string>
+	<string name="poi_socket_tesla_standard">Socket: Tesla standard</string>
+	<string name="poi_socket_tesla_standard_current">Socket: Tesla standard: current</string>
+	<string name="poi_socket_tesla_standard_output">Socket: Tesla standard: output</string>
+	<string name="poi_socket_tesla_supercharger">Socket: Tesla Supercharger</string>
+	<string name="poi_socket_tesla_supercharger_current">Socket: Tesla Supercharger: current</string>
+	<string name="poi_socket_tesla_supercharger_output">Socket: Tesla Supercharger: output</string>
+	<string name="poi_socket_tesla_roadster">Socket: Tesla Roadster</string>
+	<string name="poi_socket_tesla_roadster_current">Socket: Tesla Roadster: current</string>
+	<string name="poi_socket_tesla_roadster_output">Socket: Tesla Roadster: output</string>
+	<string name="poi_socket_nema_5_15">Socket: NEMA 5-15R</string>
+	<string name="poi_socket_nema_5_15_current">Socket: NEMA 5-15R: current</string>
+	<string name="poi_socket_nema_5_15_output">Socket: NEMA 5-15R: output</string>
+	<string name="poi_socket_nema_5_20">Socket: NEMA 5-20</string>
+	<string name="poi_socket_nema_5_20_current">Socket: NEMA 5-20: current</string>
+	<string name="poi_socket_nema_5_20_output">Socket: NEMA 5-20: output</string>
+	<string name="poi_socket_nema_14_30">Socket: NEMA 14-30</string>
+	<string name="poi_socket_nema_14_30_current">Socket: NEMA 14-30: current</string>
+	<string name="poi_socket_nema_14_30_output">Socket: NEMA 14-30: output</string>
+	<string name="poi_socket_nema_14_50">Socket: NEMA 14-50</string>
+	<string name="poi_socket_nema_14_50_current">Socket: NEMA 14-50: current</string>
+	<string name="poi_socket_nema_14_50_output">Socket: NEMA 14-50: output</string>
+	<string name="poi_socket_schuko">Socket: Schuko</string>
+	<string name="poi_socket_schuko_current">Socket: Schuko: current</string>
+	<string name="poi_socket_schuko_output">Socket: Schuko: output</string>
+	<string name="poi_socket_bs1363">Socket: BS 1363</string>
+	<string name="poi_socket_bs1363_current">Socket: BS 1363: current</string>
+	<string name="poi_socket_bs1363_output">Socket: BS 1363: output</string>
+	<string name="poi_socket_as3112">Socket: AS/NZS 3112</string>
+	<string name="poi_socket_as3112_current">Socket: AS/NZS 3112: current</string>
+	<string name="poi_socket_as3112_output">Socket: AS/NZS 3112: output</string>
+
+	<string name="poi_car_yes">Car: yes</string>
+	<string name="poi_car_no">Car: no</string>
+	<string name="poi_bicycle_yes">Bicycle: yes</string>
+	<string name="poi_bicycle_no">Bicycle: no</string>
+	<string name="poi_scooter_yes">Scooter: yes</string>
+	<string name="poi_scooter_no">Scooter: no</string>
+	<string name="poi_truck_yes">Truck: yes</string>
+	<string name="poi_truck_no">Truck: no</string>
+
+	<string name="poi_parking_fee_yes">Parking fee: yes</string>
+	<string name="poi_parking_fee_no">Parking fee: no</string>
+	<string name="poi_parking_fee">Parking fee</string>
+
+	<string name="poi_amperage">Amperage</string>
+	<string name="poi_charging_station_output">Сharging station output</string>
+
+	<string name="poi_map_type_topo">Map type: topo</string>
+	<string name="poi_map_type_street">Map type: street</string>
+	<string name="poi_map_type_scheme">Map type: scheme</string>
+	<string name="poi_map_type_toposcope">Map type: toposcope</string>
+	<string name="poi_map_size_site">Map size: site</string>
+	<string name="poi_map_size_city">Map size: city</string>
+	<string name="poi_map_size_region">Map size: region</string>
 
 </resources>

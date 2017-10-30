@@ -3593,4 +3593,142 @@
 	<string name="poi_surface_decoturf">DecoTurf</string>
 	<string name="poi_surface_metal_grid">Metalgitter</string>
 
+<string name="poi_location_underground">Beliggenhed: under jorden</string>
+	<string name="poi_location_underwater">Beliggenhed: under vandet</string>
+	<string name="poi_location_overground">Beliggenhed: over jorden</string>
+	<string name="poi_location_overhead">Beliggenhed: over hovedhøjde</string>
+	<string name="poi_location_roof">Beliggenhed: tag</string>
+	<string name="poi_location_rooftop">Beliggenhed: på taget</string>
+	<string name="poi_location_outdoor">Placering: udendørs</string>
+	<string name="poi_location_indoor">Beliggenhed: indendørs</string>
+	<string name="poi_location_platform">Beliggenhed: platform</string>
+	<string name="poi_location_kiosk">Beliggenhed: kiosk</string>
+	<string name="poi_location_bridge">Beliggenhed: bro</string>
+	<string name="poi_location_wall">Beliggenhed: væg</string>
+	<string name="poi_location_entrance">Beliggenhed: indgang</string>
+
+	<string name="poi_visibility_house">Synlighed: hus</string>
+	<string name="poi_visibility_street">Synlighed: gaden</string>
+	<string name="poi_visibility_area">Synlighed: område</string>
+
+<string name="poi_operational_status">Driftsstatus</string>
+	<string name="poi_water_supply_type">Vandforsyningstype</string>
+	<string name="poi_water_purification">Vandrensning</string>
+	<string name="poi_water_place_access">Adgang til vandforsyning</string>
+
+<string name="poi_operational_status_open">Åben</string>
+	<string name="poi_operational_status_closed">Lukket</string>
+	<string name="poi_operational_status_restricted">Begrænset</string>
+	<string name="poi_operational_status_broken">I stykker</string>
+	<string name="poi_operational_status_needs_maintenance">Behøver vedligeholdelse</string>
+
+	<string name="poi_water_place_durability_durable">Holdbarhed af vandkilde: holdbar</string>
+	<string name="poi_water_place_durability_emergency">Holdbarhed af vandkilde: nødsituation</string>
+
+	<string name="poi_water_purification_none">Ingen</string>
+	<string name="poi_water_purification_chlorine">Klor</string>
+	<string name="poi_water_purification_reverse_osmosis">Omvendt osmose</string>
+	<string name="poi_water_purification_aquatabs">Aquatabs</string>
+
+	<string name="poi_water_supply_water_well">Vandbrønd</string>
+	<string name="poi_water_supply_pipeline">Rørledning</string>
+	<string name="poi_water_supply_running_water">Rindende vand</string>
+	<string name="poi_water_supply_pump">Pumpe</string>
+	<string name="poi_water_supply_borehole">Boring</string>
+	<string name="poi_water_supply_water_trucking">Vand med lastbil</string>
+	<string name="poi_water_supply_water_tank">Vandtank</string>
+	<string name="poi_water_supply_bottled_water">Flaskevand</string>
+
+	<string name="poi_water_place_access_community">Fællesskab</string>
+	<string name="poi_water_place_access_family">Familie</string>
+	<string name="poi_water_place_access_multifamilies">Flere familier</string>
+
+<string name="poi_socket_cee_blue">Stikkontakt: CEE blå</string>
+	<string name="poi_socket_cee_blue_current">Stikkontakt: CEE blå: strøm</string>
+	<string name="poi_socket_cee_blue_output">Stikkontakt: CEE blå: ydelse</string>
+	<string name="poi_socket_cee_red_16a">Stikkontakt: CEE rød 16A</string>
+	<string name="poi_socket_cee_red_16a_current">Stikkontakt: CEE rød 16A: strøm</string>
+	<string name="poi_socket_cee_red_16a_output">Stikkontakt: CEE rød 16A: ydelse</string>
+	<string name="poi_socket_cee_red_32a">Stikkontakt: CEE rød 32A</string>
+	<string name="poi_socket_cee_red_32a_current">Stikkontakt: CEE rød 32A: strøm</string>
+	<string name="poi_socket_cee_red_32a_output">Stikkontakt: CEE rød 32A: ydelse</string>
+	<string name="poi_socket_cee_red_64a">Stikkontakt: CEE rød 64A</string>
+	<string name="poi_socket_cee_red_64a_current">Stikkontakt: CEE rød 64A: strøm</string>
+	<string name="poi_socket_cee_red_64a_output">Stikkontakt: CEE rød 64A: ydelse</string>
+	<string name="poi_socket_cee_red_125a">Stikkontakt: CEE rød 125A</string>
+	<string name="poi_socket_cee_red_125a_current">Stikkontakt: CEE rød 125A: strøm</string>
+	<string name="poi_socket_cee_red_125a_output">Stikkontakt: CEE rød 125A: ydelse</string>
+	<string name="poi_socket_type1">Stikkontakt: Type 1</string>
+	<string name="poi_socket_type1_current">Stikkontakt: Type 1: strøm</string>
+	<string name="poi_socket_type1_output">Stikkontakt: Type 1: ydelse</string>
+	<string name="poi_socket_type1_combo">Stikkontakt: Type 1 combo</string>
+	<string name="poi_socket_type1_combo_current">Stikkontakt: Type 1 combo: strøm</string>
+	<string name="poi_socket_type1_combo_output">Stikkontakt: Type 1 combo: ydelse</string>
+	<string name="poi_socket_type2">Stikkontakt: Type 2</string>
+	<string name="poi_socket_type2_current">Stikkontakt: Type 2: strøm</string>
+	<string name="poi_socket_type2_output">Stikkontakt: Type 2: ydelse</string>
+	<string name="poi_socket_type2_combo">Stikkontakt: Type 2 combo</string>
+	<string name="poi_socket_type2_combo_current">Stikkontakt: Type 2 combo: strøm</string>
+	<string name="poi_socket_type2_combo_output">Stikkontakt: Type 2 combo: ydelse</string>
+	<string name="poi_socket_type3">Stikkontakt: Type 3</string>
+	<string name="poi_socket_type3_current">Stikkontakt: Type 3: strøm</string>
+	<string name="poi_socket_type3_output">Stikkontakt: Type 3: ydelse</string>
+	<string name="poi_socket_chademo">Stikkontakt: CHAdeMO</string>
+	<string name="poi_socket_chademo_current">Stikkontakt: CHAdeMO: strøm</string>
+	<string name="poi_socket_chademo_output">Stikkontakt: CHAdeMO: ydelse</string>
+	<string name="poi_socket_tesla_standard">Stikkontakt: Tesla standard</string>
+	<string name="poi_socket_tesla_standard_current">Stikkontakt: Tesla standard: strøm</string>
+	<string name="poi_socket_tesla_standard_output">Stikkontakt: Tesla standard: ydelse</string>
+	<string name="poi_socket_tesla_supercharger">Stikkontakt: Tesla Supercharger</string>
+	<string name="poi_socket_tesla_supercharger_current">Stikkontakt: Tesla Supercharger: strøm</string>
+	<string name="poi_socket_tesla_supercharger_output">Stikkontakt: Tesla Supercharger: ydelse</string>
+	<string name="poi_socket_tesla_roadster">Stikkontakt: Tesla Roadster</string>
+	<string name="poi_socket_tesla_roadster_current">Stikkontakt: Tesla Roadster: strøm</string>
+	<string name="poi_socket_tesla_roadster_output">Stikkontakt: Tesla Roadster: ydelse</string>
+	<string name="poi_socket_nema_5_15">Stikkontakt: NEMA 5-15R</string>
+	<string name="poi_socket_nema_5_15_current">Stikkontakt: NEMA 5-15R: strøm</string>
+	<string name="poi_socket_nema_5_15_output">Stikkontakt: NEMA 5-15R: ydelse</string>
+	<string name="poi_socket_nema_5_20">Stikkontakt: NEMA 5-20</string>
+	<string name="poi_socket_nema_5_20_current">Stikkontakt: NEMA 5-20: strøm</string>
+	<string name="poi_socket_nema_5_20_output">Stikkontakt: NEMA 5-20: ydelse</string>
+	<string name="poi_socket_nema_14_30">Stikkontakt: NEMA 14-30</string>
+	<string name="poi_socket_nema_14_30_current">Stikkontakt: NEMA 14-30: strøm</string>
+	<string name="poi_socket_nema_14_30_output">Stikkontakt: NEMA 14-30: ydelse</string>
+	<string name="poi_socket_nema_14_50">Stikkontakt: NEMA 14-50</string>
+	<string name="poi_socket_nema_14_50_current">Stikkontakt: NEMA 14-50: strøm</string>
+	<string name="poi_socket_nema_14_50_output">Stikkontakt: NEMA 14-50: ydelse</string>
+	<string name="poi_socket_schuko">Stikkontakt: Schuko</string>
+	<string name="poi_socket_schuko_current">Stikkontakt: Schuko: strøm</string>
+	<string name="poi_socket_schuko_output">Stikkontakt: Schuko: ydelse</string>
+	<string name="poi_socket_bs1363">Stikkontakt: BS 1363</string>
+	<string name="poi_socket_bs1363_current">Stikkontakt: BS 1363: strøm</string>
+	<string name="poi_socket_bs1363_output">Stikkontakt: BS 1363: ydelse</string>
+	<string name="poi_socket_as3112">Stikkontakt: AS/NZS 3112</string>
+	<string name="poi_socket_as3112_current">Stikkontakt: AS/NZS 3112: strøm</string>
+	<string name="poi_socket_as3112_output">Stikkontakt: AS/NZS 3112: ydelse</string>
+
+	<string name="poi_car_yes">Bil: ja</string>
+	<string name="poi_car_no">Bil: nej</string>
+	<string name="poi_bicycle_yes">Cykel: ja</string>
+	<string name="poi_bicycle_no">Cykel: nej</string>
+	<string name="poi_scooter_yes">Scooter: ja</string>
+	<string name="poi_scooter_no">Scooter: nej</string>
+	<string name="poi_truck_yes">Lastbil: ja</string>
+	<string name="poi_truck_no">Lastbil: nej</string>
+
+	<string name="poi_parking_fee_yes">Parkeringsafgift: ja</string>
+	<string name="poi_parking_fee_no">Parkeringsafgift: nej</string>
+	<string name="poi_parking_fee">Parkeringsafgift</string>
+
+	<string name="poi_amperage">Strømstyrke</string>
+	<string name="poi_charging_station_output">Ladestation-udgang</string>
+
+<string name="poi_map_type_topo">Korttype: topografisk</string>
+	<string name="poi_map_type_street">Korttype: gadekort</string>
+	<string name="poi_map_type_scheme">Korttype: skematisk</string>
+	<string name="poi_map_type_toposcope">Korttype: panoramakort</string>
+	<string name="poi_map_size_site">Kortdækning: sted</string>
+	<string name="poi_map_size_city">Kortdækning: by</string>
+	<string name="poi_map_size_region">Kortdækning: region</string>
+
 </resources>

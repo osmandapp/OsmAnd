@@ -463,7 +463,7 @@
 	<string name="map_overlay">Overlay-Karte</string>
 	<string name="map_overlay_descr">Karte als Überlagerung auswählen</string>
 	<string name="tile_source_already_installed">Karte schon installiert, Einstellungen werden aktualisiert</string>
-	<string name="select_tile_source_to_install">Kartenauswahl (Installation oder Aktualisierung)</string>
+	<string name="select_tile_source_to_install">Wähle Karten(Kacheln) zu installieren oder aktualisieren</string>
 	<string name="internet_not_available">Internet Verbindung erforderlich, aber nicht verfügbar!</string>
 	<string name="install_more">Weitere installieren…</string>
 
@@ -551,7 +551,7 @@
 	<string name="loading_builds_failed">Laden der Liste von OsmAnd-Builds ist fehlgeschlagen</string>
 	<string name="loading_builds">Lade OsmAnd-Builds…</string>
 	<string name="select_build_to_install">OsmAnd-Build zur Installation auswählen</string>
-	<string name="contribution_activity">Installationsversion</string>
+	<string name="contribution_activity">Versionen zur Installation</string>
 	<string name="gps_status_app_not_found">Anwendung \'GPS Status\' ist nicht installiert. Soll diese installiert werden?</string>
 	<string name="voice_is_not_available_msg">Keine Sprachansage verfügbar. Bitte unter \'Einstellungen\' → \'Allgemeine Einstellungen\' → \'Sprachansagen\' ein Sprachpaket auswählen oder herunterladen.</string>
 	<string name="voice_is_not_available_title">Keine Sprachansage ausgewählt</string>
@@ -2864,11 +2864,11 @@ Abgedeckte Fläche: %1$s x %2$s</string>
     <string name="shared_string_finish">Beenden</string>
     <string name="use_system_keyboard">Gerätetastatur verwenden</string>
     <string name="marker_moved_to_active">Kartenmarkierung auf Karte verschoben</string>
-    <string name="release_2_8">• Vollständig überarbeitete Kartenmarkierungen mit Richtlinien und Routenplanung
+    <string name="release_2_8">• Komplett überarbeitete Kartenmarkierungen mit Linien und Routenplanung
 \n
-\n• Entfernungsmesser-Tool, mit Funktionen zum Einrasten auf Straßen und Punkte als Track Speichern
+\n• Entfernungsmesser bietet ausrichten auf Straße Funktion und speichern als Track
 \n
-\n• OsmAnd Live: Bugfixes, neue Daten auf dem Server alle 30 Minuten, in die Navigation implementierte Updates
+\n• Bug-Fixes, neue Daten auf dem Server alle 30 Minuten, Updates implementiert in der Navigation
 \n
 \n</string>
     <string name="rendering_value_darkyellow_name">Dunkelgelb</string>
@@ -2877,4 +2877,10 @@ Abgedeckte Fläche: %1$s x %2$s</string>
     <string name="round_trip">Rundfahrt</string>
     <string name="plan_route_no_markers_toast">Um diese Funktion nutzen zu können, müssen Sie mindestens eine Markierung hinzufügen.</string>
     <string name="shared_string_road">Straße</string>
+    <string name="wrong_input">Falsche Eingabe</string>
+	<string name="enter_new_name">Neuen Namen eingeben</string>
+	<string name="shared_string_back">Zurück</string>
+	<string name="view">Ansicht</string>
+	<string name="waypoints_added_to_map_markers">Wegpunkte zu Kartenmarkierung hinzugefügt</string>
+	<string name="wrong_format">Falsches Format</string>
     </resources>

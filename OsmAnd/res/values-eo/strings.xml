@@ -163,7 +163,7 @@
     <string name="context_menu_item_delete_waypoint">Ĉu forigi GPX-navigadpunkton?</string>
     <string name="context_menu_item_edit_waypoint">Redakti GPX-navigadpunkton</string>
     <string name="shared_string_location">Loko</string>
-    <string name="share_osm_edits_subject">OSM-aj redaktoj kunhavataj per OsmAnd</string>
+    <string name="share_osm_edits_subject">OSM-redaktoj kunhavataj per OsmAnd</string>
     <string name="lang_nds">Platgermana</string>
     <string name="lang_mk">Makedona</string>
     <string name="lang_fy">Okcidentfrisa</string>
@@ -264,7 +264,7 @@
     <string name="min_mile">min/m</string>
     <string name="min_km">min/km</string>
     <string name="shared_string_trip_recording">Registrado de kurso</string>
-    <string name="shared_string_navigation">Navigado</string>
+    <string name="shared_string_navigation">Navigi</string>
     <string name="osmand_running_in_background">Laboranta fone</string>
     <string name="gps_wake_up_timer">Vek-intervalo de GPS</string>
     <string name="favourites_edit_dialog_title">Ŝatataj informoj</string>
@@ -484,7 +484,7 @@
     <string name="welcome_select_region">Por korekte prezenti trafiksignojn kaj regulojn, bonvolu elekti vian trafikan regionon:</string>
     <string name="welcome_text">OsmAnd ebligas uzi tutmondajn mapojn kaj navigadon eksterrete!</string>
     <string name="current_route">Nuna kurso</string>
-    <string name="osm_changes_added_to_local_edits">OSM-aj ŝanĝoj aldonitaj al loka ŝanĝaro</string>
+    <string name="osm_changes_added_to_local_edits">OSM-ŝanĝoj aldonitaj al loka ŝanĝaro</string>
     <string name="mark_to_delete">Marki por forigi</string>
     <string name="osmo_grop_name_length_alert">Grupa nomo devas enhavi almenaŭ 3 signojn!</string>
     <string name="local_recordings_delete_all_confirm">Ĉu vi certe volas forigi %1$d notojn?</string>
@@ -497,7 +497,7 @@
     <string name="action_create">Krei</string>
     <string name="action_modify">Modifi</string>
     <string name="action_delete">Forigi</string>
-    <string name="osm_edits">OSM-aj redaktoj</string>
+    <string name="osm_edits">OSM-redaktoj</string>
     <string name="parking_place_limited">Parkumada tempo limigita ĝis</string>
     <string name="osmand_parking_time_left">ankoraŭ</string>
     <string name="your_edits">Viaj redaktoj</string>
@@ -978,7 +978,7 @@ Lon: %2$s</string>
     <string name="app_mode_motorcycle">Motorciklo</string>
     <string name="app_mode_boat">Boato</string>
     <string name="app_mode_aircraft">Aviadilo</string>
-    <string name="local_osm_changes_delete_all_confirm">Ĉu vi certe volas forigi %1$d OSM-ajn ŝanĝojn?</string>
+    <string name="local_osm_changes_delete_all_confirm">Ĉu vi certe volas forigi %1$d OSM-ŝanĝojn?</string>
     <string name="animate_routing_route_not_calculated">Bonvolu antaŭe kalkuli la kurson</string>
     <string name="follow_us">Observi nin</string>
     <string name="animate_routing_route">Simuli uzante kalkulitan kurson</string>
@@ -1036,7 +1036,7 @@ Lon: %2$s</string>
     <string name="intermediate_items_sort_return">Interceloj estas reordigitaj de nuna pozicio al la celo.</string>
     <string name="intermediate_items_sort_by_distance">Ordigi de celo ĝis celo (laŭ la plej malgranda distanco)</string>
     <string name="local_osm_changes_backup_successful">OSM-a ŝanĝodosiero kreita sukcese %1$s</string>
-    <string name="local_osm_changes_backup_failed">Eraro dum kreado de sekurkopio de OSM-aj ŝanĝoj</string>
+    <string name="local_osm_changes_backup_failed">Eraro dum kreado de sekurkopio de OSM-ŝanĝoj</string>
     <string name="local_osm_changes_backup">Krei sekurkopion kiel OSM-an ŝanĝon</string>
     <string name="delete_point">Forigi punkton</string>
     <string name="plugin_distance_point_time">tempo</string>
@@ -1446,7 +1446,7 @@ Proporcia memoro %4$s MB (limito de Android %5$s MB, Dalvik %6$s MB).</string>
     <string name="local_openstreetmap_delete">Forigi modifaĵojn</string>
     <string name="local_openstreetmap_descr_title">Neunutempa (nesinkrona) redakto de OSM:</string>
     <string name="local_openstreetmap_settings">Lokaj konservitaj OSM-aj interesejoj/rimarkoj</string>
-    <string name="local_openstreetmap_settings_descr">Vidi kaj administri OSM-ajn interesejojn/notojn konservitajn en loka datumbazo</string>
+    <string name="local_openstreetmap_settings_descr">Vidi kaj administri OSM-ajn interesejojn/rimarkojn konservitajn en loka datumbazo</string>
     <string name="live_monitoring_interval">Intervalo de enreta kurs-registrado</string>
     <string name="live_monitoring_interval_descr">Difini intervalon de enreta kurs-registrado</string>
     <string name="live_monitoring_url">Adreso de enreta kurs-registrado</string>
@@ -1620,7 +1620,7 @@ Proporcia memoro %4$s MB (limito de Android %5$s MB, Dalvik %6$s MB).</string>
     <string name="fast_route_mode">Plej rapida kurso</string>
     <string name="fast_route_mode_descr">Aktivigu por kalkuli la plej rapidan kurson, aŭ malaktivigu por brulaĵ-ŝpareman kurson</string>
     <string name="layer_route">Kurso</string>
-    <string name="layer_osm_bugs">OSM notoj (enrete)</string>
+    <string name="layer_osm_bugs">OSM-rimarkoj (enrete)</string>
     
     <string name="layer_poi">Interesejoj…</string>
     <string name="context_menu_item_search_poi">Serĉi interesejon</string>
@@ -1672,7 +1672,7 @@ Kaj la loko kaj tempo estas montrataj en la OsmAnd-a stirpanelo, kaj sur la fene
     <string name="osmand_distance_planning_plugin_description">Tiu ĉi kromprogramo liveras mapekranan fenestraĵon por krei kursojn tuŝante sur la mapo, aŭ por uzi aŭ modifi ekzistajn GPX-dosierojn por plani ekskurson aŭ mezuri distancon inter punktoj. Rezultoj povas esti konservitaj kiel GPX-dosieroj, kiuj oni povas estonte uzi por gvidado.</string>
     <string name="osm_settings">OSM-redaktilo</string>
     <string name="osm_editing_plugin_description">Per tiu ĉi kromprogramo OsmAnd povas esti uzata por kontribui al OSM per krei aŭ redakti OSM-interesejojn, per raporti aŭ komenti OSM-rimarkojn, per aldoni registritajn GPX-dosierojn. OSM estas komunuma, tutmonda, publika map-projekto. Por detaloj, legu: https://openstreetmap.org. Aktiva kontribuado estas laŭdinda, kaj vi povas kontribui senpere per OsmAnd, se vi entajpos viajn OSM-ajn ensalutilojn en la aplikaĵo.</string>
-    <string name="debugging_and_development">OsmAnd programado</string>
+    <string name="debugging_and_development">OsmAnd-programistilo</string>
     <string name="osmand_development_plugin_description">Montras agordojn por programado kaj senerarigado kiel testado aŭ simulado de kurso, efikeco de ekran-bildigado, aŭ voĉaj sciigoj. Tiuj ĉi agordoj taŭgas por programistoj kaj ne estas bezonataj por norma uzanto.</string>
     <string name="lang_en_gb">Angla (Brita)</string>
     <string name="level_to_switch_vector_raster_descr">Minimuma skal-nivelo por uzi ĉe vektoraj mapoj</string>
@@ -1739,7 +1739,7 @@ Provizore estas uzata enreta servo CloudMade.</string>
     <string name="loading_builds_failed">Elŝutado de listo de OsmAnd kompilaĵoj malsukcesis</string>
     <string name="loading_builds">Ŝargado de listo de OsmAnd kompilaĵoj…</string>
     <string name="select_build_to_install">Elekti kompilaĵon de OsmAnd por instali</string>
-    <string name="gps_status_app_not_found">Aplikaĵo por GPS-stato ne instalita. Ĉu serĉi ĝin en Market?</string>
+    <string name="gps_status_app_not_found">Aplikaĵo por stato de GPS ne estas instalita. Ĉu serĉi ĝin en la vendejo?</string>
     <string name="unzipping_file">Elarĥivigado de dosiero…</string>
     <string name="voice_is_not_available_title">Gvidada voĉo ne elektita</string>
     <string name="voice_is_not_available_msg">Neniu gvidada voĉo elektita, bonvolu iri al \'Agordoj\' → \'Ĝeneralaj\' → \'Gvidada voĉo\' kaj elektu kaj elŝutu pakaĵon de voĉaj sciigoj.</string>
@@ -1805,7 +1805,7 @@ Provizore estas uzata enreta servo CloudMade.</string>
     <string name="faq_item_description">Oftaj demandoj</string>
     <string name="dahboard_options_dialog_title">Agordi stirpanelon</string>
 
-    <string name="get_directions">Navigado</string>
+    <string name="get_directions">Navigi</string>
     <string name="layer_map">Map-fontoj…</string>
     <string name="app_mode_train">Vagonaro</string>
     <string name="app_mode_bus">Aŭtobuso</string>
@@ -2386,7 +2386,7 @@ Se vi bezonas helpon pri OsmAnd aplikaĵo, bonvolu kontakti nian helpantaron: su
     <string name="quick_action_add_category">Aldoni kategorion</string>
     <string name="quick_action_add_create_items">Krei elementojn</string>
     <string name="quick_action_add_configure_map">Agordi mapon</string>
-    <string name="quick_action_add_navigation">Navigado</string>
+    <string name="quick_action_add_navigation">Navigi</string>
     <string name="quick_action_fav_name_descr">Lasu kampon malplenan por aŭtomate uzi adreson aŭ nomon de ejo</string>
     <string name="quick_action_bug_descr">Tiu ĉi mesaĝo mem-kompletiĝos en komenta kampo.</string>
     <string name="quick_action_bug_message">Mesaĝo</string>
@@ -2786,7 +2786,7 @@ Indikas lokon:  %1$s x %2$s"</string>
     <string name="marker_moved_to_active">Map-marko movita al aktivaj</string>
     <string name="shared_string_list">Listo</string>
     <string name="shared_string_groups">Grupoj</string>
-    <string name="passed">Pasigita je: %1$s</string>
+    <string name="passed">Malaktivigita je: %1$s</string>
     <string name="make_active">Aktivigi</string>
     <string name="today">Hodiaŭ</string>
     <string name="yesterday">Hieraŭ</string>
@@ -2801,8 +2801,8 @@ Indikas lokon:  %1$s x %2$s"</string>
     <string name="order_by">Ordigi laŭ:</string>
     <string name="show_guide_line">Montri gvidan linion</string>
     <string name="show_arrows_on_the_map">Montri sagetojn sur la mapo</string>
-    <string name="show_passed">Montri pasigitajn</string>
-    <string name="hide_passed">Kaŝi pasigitajn</string>
+    <string name="show_passed">Montri malaktivajn</string>
+    <string name="hide_passed">Kaŝi malaktivajn</string>
     <string name="shared_string_markers">Markoj</string>
     <string name="coordinates_format">Formo de koordinatoj</string>
     <string name="use_system_keyboard">Uzi sisteman klavaron</string>
@@ -2828,12 +2828,27 @@ Indikas lokon:  %1$s x %2$s"</string>
     <string name="osn_modify_dialog_error">Eraro okazis: rimarko ne estis ŝanĝita</string>
     <string name="osn_modify_dialog_title">Redakti rimarkon</string>
     <string name="context_menu_item_modify_note">Redakti OSM-rimarkon</string>
-    <string name="release_2_8">• Tute refaritaj map-markiloj kun helpo pri planado de vojaĝo
-\n
-\n• Ilo por mezuri distancoj kun ebloj proksimumigi pozicion al vojo kaj konservi punktojn kiel kurson
-\n
+    <string name="release_2_8">• Tute refaritaj map-markoj kun helpo pri planado de vojaĝo 
+\n 
+\n• Ilo por mezuri distancoj kun ebloj proksimumigi pozicion al vojo kaj konservi punktojn kiel kurson 
+\n 
 \n• OSM Live: erar-riparoj, freŝaj datumoj ĉe servilo je ĉiu 30 minutoj, ĝisdatigoj funkcias kun navigado
 \n
 \n</string>
     <string name="rendering_value_darkyellow_name">Flava malhela</string>
-    </resources>
+    <string name="shared_string_road">Vojo</string>
+    <string name="show_map">Montri mapon</string>
+    <string name="route_is_calculated">Kurso estas kalkulata</string>
+    <string name="round_trip">Fermita ekskurso</string>
+    <string name="plan_route_no_markers_toast">Vi devas aldoni almenaŭ unu markon por uzi tiun ĉi eblon.</string>
+    <string name="wrong_format">Malĝusta formo</string>
+    <string name="wrong_input">Malĝusta enigo</string>
+    <string name="enter_new_name">Entajpu novan nomon</string>
+    <string name="shared_string_back">Reen</string>
+    <string name="view">Montri</string>
+	<string name="waypoints_added_to_map_markers">Aldonis intercelojn al mapmarkoj</string>
+	<string name="import_gpx_file_description">povas esti enportita kiel ŝatataj punktoj aŭ kiel dosieron de kurso GPX.</string>
+    <string name="import_as_gpx">Enporti kiel GPX-dosieron</string>
+    <string name="import_as_favorites">Enporti kiel ŝatatajn</string>
+    <string name="import_file">Enporti dosieron</string>
+	</resources>

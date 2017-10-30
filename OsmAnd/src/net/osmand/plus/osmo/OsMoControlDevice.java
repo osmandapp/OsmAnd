@@ -18,6 +18,7 @@ import org.json.JSONObject;
 import android.content.Context;
 import android.content.Intent;
 import android.content.IntentFilter;
+import android.os.AsyncTask;
 import android.os.BatteryManager;
 import android.os.Vibrator;
 
@@ -112,7 +113,7 @@ public class OsMoControlDevice implements OsMoReactor {
 			}
 			return true;
 		} else if(command.equals("TP")) {
-			plugin.getDownloadGpxTask(true).execute(obj);
+			plugin.getDownloadGpxTask(true).executeOnExecutor(AsyncTask.THREAD_POOL_EXECUTOR, obj);
 		} else if (command.equals("PP")) {
 			service.pushCommand("PP");
 		}

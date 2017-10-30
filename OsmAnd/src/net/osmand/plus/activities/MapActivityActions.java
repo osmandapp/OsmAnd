@@ -222,7 +222,7 @@ public class MapActivityActions implements DialogProvider {
 					dlg.findViewById(R.id.DuplicateFileName).setVisibility(View.VISIBLE);
 				} else {
 					dlg.dismiss();
-					new SaveDirectionsAsyncTask(app).execute(toSave);
+					new SaveDirectionsAsyncTask(app).executeOnExecutor(AsyncTask.THREAD_POOL_EXECUTOR, toSave);
 				}
 			}
 		});

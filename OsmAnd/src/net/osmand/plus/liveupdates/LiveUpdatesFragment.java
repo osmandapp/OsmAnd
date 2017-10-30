@@ -153,11 +153,7 @@ public class LiveUpdatesFragment extends BaseOsmAndFragment implements InAppList
 		}
 		listView.setAdapter(adapter);
 
-		if(Build.VERSION.SDK_INT >= 11) {
-			loadLocalIndexesTask = new LoadLocalIndexTask(adapter, this).executeOnExecutor(AsyncTask.THREAD_POOL_EXECUTOR);
-		} else {
-			loadLocalIndexesTask = new LoadLocalIndexTask(adapter, this).execute();
-		}
+		loadLocalIndexesTask = new LoadLocalIndexTask(adapter, this).executeOnExecutor(AsyncTask.THREAD_POOL_EXECUTOR);
 		return view;
 	}
 

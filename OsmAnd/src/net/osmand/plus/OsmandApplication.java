@@ -201,7 +201,7 @@ public class OsmandApplication extends MultiDexApplication {
 
 			protected void onPostExecute(Void result) {
 			}
-		}.execute();
+		}.executeOnExecutor(AsyncTask.THREAD_POOL_EXECUTOR);
 	}
 	
 	public IconsCache getIconsCache() {

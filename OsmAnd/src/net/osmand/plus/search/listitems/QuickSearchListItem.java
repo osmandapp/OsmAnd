@@ -108,7 +108,7 @@ public class QuickSearchListItem {
 
 	public String getTypeName() {
 		String typeName = getTypeName(app, searchResult);
-		return (searchResult.alternateName != null ? searchResult.alternateName  + " • " : "") + typeName;
+		return (searchResult.alternateName != null ? searchResult.alternateName + " • " : "") + typeName;
 	}
 
 	public static String getTypeName(OsmandApplication app, SearchResult searchResult) {
@@ -287,7 +287,7 @@ public class QuickSearchListItem {
 		return null;
 	}
 
-	public static String getAmenityIconName(Amenity amenity) {
+	public static String getAmenityIconName(OsmandApplication app, Amenity amenity) {
 		PoiType st = amenity.getType().getPoiTypeByKeyName(amenity.getSubType());
 		if (st != null) {
 			if (RenderingIcons.containsBigIcon(st.getIconKeyName())) {
@@ -307,21 +307,16 @@ public class QuickSearchListItem {
 		int iconId = -1;
 		switch (searchResult.objectType) {
 			case CITY:
-				return app.getIconsCache().getIcon(R.drawable.ic_action_building_number,
-						app.getSettings().isLightContent() ? R.color.osmand_orange : R.color.osmand_orange_dark);
+				return getIcon(app, R.drawable.ic_action_building_number);
 			case VILLAGE:
-				return app.getIconsCache().getIcon(R.drawable.ic_action_home_dark,
-						app.getSettings().isLightContent() ? R.color.osmand_orange : R.color.osmand_orange_dark);
+				return getIcon(app, R.drawable.ic_action_home_dark);
 			case POSTCODE:
 			case STREET:
-				return app.getIconsCache().getIcon(R.drawable.ic_action_street_name,
-						app.getSettings().isLightContent() ? R.color.osmand_orange : R.color.osmand_orange_dark);
+				return getIcon(app, R.drawable.ic_action_street_name);
 			case HOUSE:
-				return app.getIconsCache().getIcon(R.drawable.ic_action_building,
-						app.getSettings().isLightContent() ? R.color.osmand_orange : R.color.osmand_orange_dark);
+				return getIcon(app, R.drawable.ic_action_building);
 			case STREET_INTERSECTION:
-				return app.getIconsCache().getIcon(R.drawable.ic_action_intersection,
-						app.getSettings().isLightContent() ? R.color.osmand_orange : R.color.osmand_orange_dark);
+				return getIcon(app, R.drawable.ic_action_intersection);
 			case POI_TYPE:
 				if (searchResult.object instanceof AbstractPoiType) {
 					String iconName = getPoiTypeIconName((AbstractPoiType) searchResult.object);
@@ -337,28 +332,27 @@ public class QuickSearchListItem {
 					}
 				}
 				if (iconId > 0) {
-					return app.getIconsCache().getIcon(iconId,
-							app.getSettings().isLightContent() ? R.color.osmand_orange : R.color.osmand_orange_dark);
+					return getIcon(app, iconId);
 				} else {
-					return null;
+					return getIcon(app, R.drawable.ic_action_search_dark);
 				}
 			case POI:
 				Amenity amenity = (Amenity) searchResult.object;
-				String id = getAmenityIconName(amenity);
+				String id = getAmenityIconName(app, amenity);
+				Drawable icon = null;
 				if (id != null) {
 					iconId = RenderingIcons.getBigIconResourceId(id);
 					if (iconId > 0) {
-						return app.getIconsCache().getIcon(iconId,
-								app.getSettings().isLightContent() ? R.color.osmand_orange : R.color.osmand_orange_dark);
-					} else {
-						return null;
+						icon = getIcon(app, iconId);
 					}
+				}
+				if (icon == null) {
+					return getIcon(app, R.drawable.ic_action_search_dark);
 				} else {
-					return null;
+					return icon;
 				}
 			case LOCATION:
-				return app.getIconsCache().getIcon(R.drawable.ic_action_world_globe,
-						app.getSettings().isLightContent() ? R.color.osmand_orange : R.color.osmand_orange_dark);
+				return getIcon(app, R.drawable.ic_action_world_globe);
 			case FAVORITE:
 				FavouritePoint fav = (FavouritePoint) searchResult.object;
 				return FavoriteImageDrawable.getOrCreate(app, fav.getColor(), false);
@@ -367,8 +361,7 @@ public class QuickSearchListItem {
 				int color = group.color == 0 || group.color == Color.BLACK ? app.getResources().getColor(R.color.color_favorite) : group.color;
 				return app.getIconsCache().getPaintedIcon(R.drawable.ic_action_fav_dark, color | 0xff000000);
 			case REGION:
-				return app.getIconsCache().getIcon(R.drawable.ic_world_globe_dark,
-						app.getSettings().isLightContent() ? R.color.osmand_orange : R.color.osmand_orange_dark);
+				return getIcon(app, R.drawable.ic_world_globe_dark);
 			case RECENT_OBJ:
 				HistoryEntry entry = (HistoryEntry) searchResult.object;
 				if (entry.getName() != null && !Algorithms.isEmpty(entry.getName().getIconName())) {
@@ -383,11 +376,9 @@ public class QuickSearchListItem {
 					iconId = SearchHistoryFragment.getItemIcon(entry.getName());
 				}
 				try {
-					return app.getIconsCache().getIcon(iconId,
-							app.getSettings().isLightContent() ? R.color.osmand_orange : R.color.osmand_orange_dark);
+					return getIcon(app, iconId);
 				} catch (Exception e) {
-					return app.getIconsCache().getIcon(SearchHistoryFragment.getItemIcon(entry.getName()),
-							app.getSettings().isLightContent() ? R.color.osmand_orange : R.color.osmand_orange_dark);
+					return getIcon(app, SearchHistoryFragment.getItemIcon(entry.getName()));
 				}
 			case WPT:
 				WptPt wpt = (WptPt) searchResult.object;
@@ -396,5 +387,10 @@ public class QuickSearchListItem {
 				break;
 		}
 		return null;
+	}
+
+	private static Drawable getIcon(OsmandApplication app, int iconId) {
+		return app.getIconsCache().getIcon(iconId,
+				app.getSettings().isLightContent() ? R.color.osmand_orange : R.color.osmand_orange_dark);
 	}
 }

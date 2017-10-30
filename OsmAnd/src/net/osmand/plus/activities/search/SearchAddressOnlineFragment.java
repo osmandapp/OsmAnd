@@ -223,7 +223,7 @@ public class SearchAddressOnlineFragment extends Fragment implements SearchActiv
 					adapter.setPlaces(places);
 				}
 			};
-		}.execute((Void) null);
+		}.executeOnExecutor(AsyncTask.THREAD_POOL_EXECUTOR, (Void) null);
 		
 	}
 	

@@ -559,7 +559,7 @@ public class InAppHelper {
 					}
 				}
 			}
-		}.execute((Void) null);
+		}.executeOnExecutor(AsyncTask.THREAD_POOL_EXECUTOR, (Void) null);
 	}
 
 	public boolean onActivityResultHandled(int requestCode, int resultCode, Intent data) {

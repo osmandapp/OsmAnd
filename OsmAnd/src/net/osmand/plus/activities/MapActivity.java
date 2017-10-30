@@ -87,6 +87,7 @@ import net.osmand.plus.helpers.AndroidUiHelper;
 import net.osmand.plus.helpers.DiscountHelper;
 import net.osmand.plus.helpers.ExternalApiHelper;
 import net.osmand.plus.helpers.GpxImportHelper;
+import net.osmand.plus.helpers.GpxImportHelper.ImportGpxBottomSheetDialogFragment;
 import net.osmand.plus.helpers.WakeLockHelper;
 import net.osmand.plus.inapp.InAppHelper;
 import net.osmand.plus.mapcontextmenu.MapContextMenu;
@@ -136,6 +137,8 @@ import java.util.List;
 import java.util.Map;
 import java.util.Timer;
 import java.util.TimerTask;
+import java.util.concurrent.ExecutorService;
+import java.util.concurrent.Executors;
 import java.util.regex.Matcher;
 import java.util.regex.Pattern;
 
@@ -199,6 +202,8 @@ public class MapActivity extends OsmandActionBarActivity implements DownloadEven
 	private boolean mIsDestroyed = false;
 	private InAppHelper inAppHelper;
 	private Timer splashScreenTimer;
+
+	private ExecutorService singleThreadExecutor = Executors.newSingleThreadExecutor();
 
 	@Override
 	public void onCreate(Bundle savedInstanceState) {
@@ -315,15 +320,23 @@ public class MapActivity extends OsmandActionBarActivity implements DownloadEven
 
 	@Override
 	protected void onSaveInstanceState(Bundle outState) {
-		FragmentManager fm = getSupportFragmentManager();
-		Fragment planRouteFragment = fm.findFragmentByTag(PlanRouteFragment.TAG);
-		if (planRouteFragment != null) {
-			fm.beginTransaction()
-					.remove(planRouteFragment)
-					.commitNowAllowingStateLoss();
+		if (removeFragment(PlanRouteFragment.TAG)) {
 			app.getMapMarkersHelper().getPlanRouteContext().setFragmentVisible(true);
 		}
+		removeFragment(ImportGpxBottomSheetDialogFragment.TAG);
 		super.onSaveInstanceState(outState);
+	}
+
+	private boolean removeFragment(String tag) {
+		FragmentManager fm = getSupportFragmentManager();
+		Fragment fragment = fm.findFragmentByTag(tag);
+		if (fragment != null) {
+			fm.beginTransaction()
+					.remove(fragment)
+					.commitNowAllowingStateLoss();
+			return true;
+		}
+		return false;
 	}
 
 	private void checkAppInitialization() {
@@ -1234,7 +1247,7 @@ public class MapActivity extends OsmandActionBarActivity implements DownloadEven
 
 			protected void onPostExecute(Void result) {
 			}
-		}.execute((Void) null);
+		}.executeOnExecutor(singleThreadExecutor, (Void) null);
 
 	}
 

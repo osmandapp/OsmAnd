@@ -2135,7 +2135,7 @@ Dĺžka %2$s</string>
     <string name="number_of_recipients">Počet príjemcov</string>
     <string name="osm_user_stat">Počet úprav %1$s, pozícia %2$s, celkový počet úprav %3$s</string>
     <string name="osm_editors_ranking">Pozícia medzi editormi OSM</string>
-    <string name="osm_live_subscription">Predplatné v OSM Live</string>
+    <string name="osm_live_subscription">Predplatné v OsmAnd Live</string>
     <string name="osm_live_subscribe_btn">Registrovať</string>
     <string name="osm_live_email_desc">Potrebujeme to na poskytnutie informácií o príspevkoch</string>
     <string name="osm_live_user_public_name">Verejné meno</string>
@@ -2150,7 +2150,7 @@ Dĺžka %2$s</string>
     <string name="osm_live_thanks">Ďakujeme za registrovanie na okamžité aktualizácie!</string>
     <string name="osm_live_region_desc">Časť z príspevku bude zaslaná používateľom OSM, ktorí upravujú mapu v danom regióne</string>
     <string name="osm_live_subscription_settings">Nastavenia registrácie</string>
-    <string name="osm_live_ask_for_purchase">Prosím zakúpte si najprv OSM Live</string>
+    <string name="osm_live_ask_for_purchase">Prosím zakúpte si najprv OsmAnd Live</string>
 
     <string name="osm_live_header">Registrácia umožní hodinové aktualizácie všetkých máp sveta.
 Časť príjmu ide späť do OSM komunity a za každý príspevok do OSM je vyplatená odmena.
@@ -2214,8 +2214,8 @@ Ak máte radi OsmAnd a OSM a chcete ich podporiť, toto je výborný spôsob ako
     <string name="access_autoannounce_period_descr">Minimálny čas medzi oznamami</string>
     <string name="access_no_destination">Cieľ nie je určený</string>
     <string name="map_widget_magnetic_bearing">Magnetické smerovanie</string>
-    <string name="use_osm_live_routing_description">Povoliť navigácii použiť zmeny z OSM Live (beta test)</string>
-	<string name="use_osm_live_routing">Navigácia OSM Live</string>
+    <string name="use_osm_live_routing_description">Povoliť navigácii použiť zmeny z OsmAnd Live</string>
+	<string name="use_osm_live_routing">Navigácia OsmAnd Live</string>
     <string name="follow_us">Sledujte nás</string>
     <string name="access_direction_audio_feedback">Zvuková indikácia smeru</string>
     <string name="access_direction_audio_feedback_descr">Indikovať smer k cieľu pomocou zvuku</string>
@@ -2339,7 +2339,7 @@ Ak máte radi OsmAnd a OSM a chcete ich podporiť, toto je výborný spôsob ako
     <string name="shared_string_recorded">Zaznamenané</string>
     <string name="shared_string_record">Záznam</string>
     <string name="gpx_logging_no_data">Žiadne údaje</string>
-    <string name="trip_rec_notification_settings">Záznam výletu (žiadne dáta)</string>
+    <string name="trip_rec_notification_settings">Povoliť rýchly štart záznamu</string>
     <string name="trip_rec_notification_settings_desc">Zobraziť systémové oznámenie, ktoré umožňuje spustiť nahrávanie</string>
     <string name="shared_string_notifications">Oznámenia</string>
     <string name="release_2_5">\\u2022 Aktivovateľné ikony na mape
@@ -2869,7 +2869,7 @@ Zodpovedá oblasti: %1$s x %2$s</string>
     <string name="marker_moved_to_active">Mapová značka presunutá do archívu</string>
     <string name="shared_string_list">Zoznam</string>
     <string name="shared_string_groups">Skupiny</string>
-    <string name="passed">Naposledy použité: %1$s</string>
+    <string name="passed">Prešlé: %1$s</string>
     <string name="make_active">Aktivovať</string>
     <string name="today">Dnes</string>
     <string name="yesterday">Včera</string>
@@ -2898,8 +2898,8 @@ Zodpovedá oblasti: %1$s x %2$s</string>
     <string name="group_will_be_removed_after_restart">Skupina bude odstránená po reštarte</string>
     <string name="show_guide_line">Zobraziť vodiacu čiaru</string>
     <string name="show_arrows_on_the_map">Zobraziť šípky na mape</string>
-    <string name="show_passed">Zobraziť dátum \'naposledy použité\'</string>
-    <string name="hide_passed">Skryť dátum \'naposledy použité\'</string>
+    <string name="show_passed">Zobraziť prešlé</string>
+    <string name="hide_passed">Skryť prešlé</string>
     <string name="remove_from_map_markers">Odstrániť z Mapových značiek</string>
     <string name="descendingly">zostupne</string>
     <string name="ascendingly">vzostupne</string>
@@ -2924,4 +2924,15 @@ Zodpovedá oblasti: %1$s x %2$s</string>
 \n
 \n</string>
     <string name="rendering_value_darkyellow_name">Tmavožltá</string>
-    </resources>
+    <string name="shared_string_road">Cesta</string>
+    <string name="wrong_input">Nesprávny vstup</string>
+	<string name="enter_new_name">Zadajte nový názov</string>
+	<string name="shared_string_back">Späť</string>
+	<string name="view">Zobraziť</string>
+	<string name="waypoints_added_to_map_markers">Body trasy pridané k mapovým značkám</string>
+	<string name="wrong_format">Nesprávny formát</string>
+    <string name="import_gpx_file_description">môže byť importovaný ako Obľúbené body alebo stopa.</string>
+    <string name="import_as_gpx">Importovať ako súbor GPX</string>
+    <string name="import_as_favorites">Importovať ako Obľúbené</string>
+    <string name="import_file">Importovať súbor</string>
+	</resources>

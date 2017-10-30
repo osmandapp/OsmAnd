@@ -261,7 +261,7 @@
 	<string name="osm_live_user_public_name">Nome públicu</string>
 	<string name="osm_live_month_cost">Costu mensual</string>
 	<string name="osm_live_month_cost_desc">Pagu mensual</string>
-	<string name="osm_live_ask_for_purchase">Primero merca una soscripción d\'OSM Live, por favor</string>
+	<string name="osm_live_ask_for_purchase">Primero tendríes de soscribite a OsmAnd Live</string>
 	<string name="shared_string_toolbar">Barra de ferramientes</string>
 	<string name="upload_osm_note_description">Pues xubir la nota d\'OSM anónimamente o usando\'l perfil d\'OpenStreetMap.org.</string>
 	<string name="consider_turning_polygons_off">Aconséyase desactivar el renderizáu de polígonos.</string>
@@ -565,7 +565,7 @@ L\'allugamientu y tiempu son visibles nel cuadru de mandos d\'OsmAnd tamién nel
     <string name="map_widget_search">Guetar</string>
 	<string name="coords_format">Formatu de coordenaes</string>
     <string name="follow_us">Síguimos</string>
-    <string name="use_osm_live_routing">Navegación d\'OSM Live</string>
+    <string name="use_osm_live_routing">Navegación d\'OsmAnd Live</string>
     <string name="access_category_choice">Escoyer estaya</string>
     <string name="osmo_specify_tracker_id">Especifica la ID, por favor</string>
     <string name="osmo_connect_to_group_id">ID de grupu</string>
@@ -578,7 +578,7 @@ L\'allugamientu y tiempu son visibles nel cuadru de mandos d\'OsmAnd tamién nel
     <string name="finish_navigation">Finar navegación</string>
     <string name="storage_directory_shared">Memoria compartida</string>
     <string name="full_report">Informe completu</string>
-    <string name="osm_live_subscription">Soscripción d\'OSM Live</string>
+    <string name="osm_live_subscription">Soscripción d\'OsmAnd Live</string>
     <string name="osm_live_hide_user_name">Nun amosar el mio nome nos informes</string>
     <string name="osm_live_subscribe_btn">Soscribise</string>
     <string name="osm_live_subscription_settings">Axustes de soscripción</string>
@@ -713,7 +713,7 @@ Puntos</string>
     <string name="install_selected_build">¿Quies instalar OsmAnd - {0} of {1} {2} MB?</string>
     <string name="shared_string_topbar">Barra superior</string>
     <string name="text_size_descr">Afita\'l tamañu\'l testu nel mapa.</string>
-    <string name="use_osm_live_routing_description">Habilita la navegación pa camudancies d\'OSM Live (Beta)</string>
+    <string name="use_osm_live_routing_description">Activa la navegación pa camudancies d\'OsmAnd Live</string>
 	<string name="access_disable_offroute_recalc_descr">Evita\'l recálculu automáticu de la ruta después d\'abandonala</string>
     <string name="access_disable_wrong_direction_recalc_descr">Evita\'l recálculu automáticu de la ruta cuando sólo te muevas en direición contraria</string>
     <string name="osmo_tracker_id_descr">Toca pa ver la ID del rastrexador</string>
@@ -960,4 +960,13 @@ Puntos</string>
     <string name="make_round_trip">Facer un trayectu circular</string>
     <string name="shared_string_navigate">Navegar</string>
     <string name="marker_show_distance_descr">Seleiciona como indicar la distancia i dirección a los marcadores de mapa na pantalla:</string>
+    <string name="wrong_input">Entrada incorreuta</string>
+	<string name="enter_new_name">Escribir un nome nuevu</string>
+	<string name="shared_string_back">Anterior</string>
+	<string name="view">Ver</string>
+	<string name="wrong_format">Formatu incorreutu</string>
+    <string name="shared_string_road">Estrada</string>
+    <string name="show_map">Ver el mapa</string>
+    <string name="route_is_calculated">Calculóse la ruta</string>
+    <string name="round_trip">Trayectu circular</string>
     </resources>

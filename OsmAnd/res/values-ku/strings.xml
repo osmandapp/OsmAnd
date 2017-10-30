@@ -116,4 +116,18 @@
     <string name="display_zoom_level">Nêzîkbûn: %1$s</string>
     <string name="favorite_group_name">Navê komê</string>
     <string name="change_color">Reng biguherîne</string>
-    </resources>
+    <string name="wrong_format">Awayê çewt</string>
+    <string name="shared_string_road">Rê</string>
+    <string name="show_map">Nexşêyê nîşan bide</string>
+    <string name="route_is_calculated">Rêgeh amade ye</string>
+    <string name="plan_route_no_markers_toast">Ji bo ev taybetiyê divê herî kêm hêmakereke bi kar bînî.</string>
+    <string name="osn_modify_dialog_title">Notê biguherîne</string>
+    <string name="context_menu_item_modify_note">Nota OSM\'ê biguherîne</string>
+    <string name="make_round_trip_descr">Cihê destpêkê bike cihê amanc</string>
+    <string name="shared_string_navigate">Here</string>
+    <string name="shared_string_sort">Tesnîf bike</string>
+    <string name="is_saved">hat tomarkirin.</string>
+    <string name="enter_new_name">Navê nû binivîse</string>
+	<string name="shared_string_back">Paşve</string>
+	<string name="view">Dîtin</string>
+	</resources>

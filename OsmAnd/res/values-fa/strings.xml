@@ -20,7 +20,7 @@
     <string name="files_limit">%1$d فایل باقی مانده است</string>
     <string name="available_downloads_left">%1$d فایل برای دانلود موجود است</string>
     <string name="install_paid">نسخهٔ کامل</string>
-    <string name="cancel_navigation">پایان مسیریابی</string>
+    <string name="cancel_navigation">پایان راهبری</string>
     <string name="clear_destination">پاک‌کردن مقصد</string>
     <string name="street_name">نام خیابان</string>
 	<string name="hno">پلاک خانه</string>
@@ -132,7 +132,7 @@
 	<string name="osmand_parking_minutes">دقیقه</string>
 	<string name="osmand_parking_position_description_add_time">ساعت پارک‌کردن خودرو</string>
 	<string name="global_app_allocated_memory">حافظهٔ اختصاص‌یافته</string>
-	<string name="native_app_allocated_memory">حافظه کل سیستم</string>
+	<string name="native_app_allocated_memory">حافظهٔ کل سیستم</string>
 	
 	
 	
@@ -169,7 +169,7 @@
 	
 	<string name="offline_navigation_not_available">مسیریابی آفلاین OsmAnd موقتاً در دسترس نیست.</string>
 	<string name="left_side_navigation">رانندگی با فرمان سمت چپ</string>
-	<string name="left_side_navigation_descr">برای کشورهای با رانندگی دست چپ انتخاب کنید</string>
+	<string name="left_side_navigation_descr">برای کشورهایی که در سمت چپ می‌رانند</string>
 	<string name="unknown_from_location">نقطهٔ شروع هنوز مشخص نیست</string>
 	<string name="unknown_location">موقعیت هنوز مشخص نیست</string>
 	<string name="modify_transparency">تغییر شفافیت (0 - شفاف، 255 - مات)</string>
@@ -181,7 +181,7 @@
 	<string name="local_osm_changes_backup">پشتیبان‌گیری به‌عنوان تغییر OSM</string>
     <string name="delete_point">حذف نقطه</string>
     <string name="use_kalman_filter_compass">استفاده از فیلتر کالمن</string>
-    <string name="cancel_route">رهاکردن مسیر</string>
+    <string name="cancel_route">کنارگذاشتن مسیر</string>
     <string name="max_speed_none">هیچ‌کدام</string>
     <string name="dropbox_plugin_name">افزونهٔ دراپ‌باکس</string>
     
@@ -221,11 +221,11 @@
 	
 	<string name="poi_dialog_other_tags_message">همهٔ برچسب‌های دیگر حفظ شد</string>
 	<string name="poi_dialog_opening_hours">باز است</string>
-	<string name="poi_dialog_comment">توضیحات</string>
+	<string name="poi_dialog_comment">توضیح</string>
 	<string name="poi_create_title">ایجاد POI</string>
 	<string name="poi_remove_title">حذف POI</string>
 	<string name="shared_string_delete">حذف</string>
-	<string name="poi_remove_success">POI حذف شد</string>
+	<string name="poi_remove_success">نقطهٔ POI حذف شد</string>
 	<string name="poi_action_add">افزودن</string>
 	<string name="poi_action_change">تغییردادن</string>
 	<string name="poi_action_succeded_template">عملیات {0} انجام شد.</string>
@@ -291,7 +291,7 @@
 	
 	<string name="show_gps_coordinates_text">مختصات GPS را روی نقشه نمایش بده</string>
 	<string name="use_internet_to_download_tile">کاشی‌های ناموجود را از طریق اینترنت دانلود کن</string>
-	<string name="app_description">برنامهٔ مسیریابی</string>
+	<string name="app_description">برنامهٔ راهبری</string>
 	<string name="shared_string_exit">خروج</string>
 	
 	
@@ -322,7 +322,7 @@
 	<string name="invalid_locations">مختصات معتبر نیست!</string>
 	<string name="go_back_to_osmand">به نقشهٔ OsmAnd برگرد</string>
 	<string name="shared_string_close">بستن</string>
-	<string name="loading_data">در حال بارگیری اطلاعات…</string>
+	<string name="loading_data">بارگیری اطلاعات…</string>
 	<string name="reading_indexes">در حال خواندن اطلاعات محلی…</string>
 	<string name="previous_run_crashed">آخرین اجرای OsmAnd با خطا متوقف شد. فایل گزارش {0} ساخته شد. لطفاً مشکل را گزارش و فایل log را ضمیمهٔ آن کنید.</string>
 	<string name="saving_gpx_tracks">در حال ذخیره‌کردن مسیر GPX در کارت حافظه…</string>
@@ -368,8 +368,8 @@
 	<string name="local_index_transport_data">اطلاعات حمل‌ونقل عمومی</string>
 	<string name="local_index_map_data">اطلاعات نقشه</string>
 	<string name="local_indexes_cat_backup">غیرفعال</string>
-	<string name="local_indexes_cat_tts">پیام‌های صوتی (TTS)</string>
-	<string name="local_indexes_cat_voice">پیام‌های صوتی (ضبط‌شده)</string>
+	<string name="local_indexes_cat_tts">پیام‌های صوتی (ماشینی؛ TTS)</string>
+	<string name="local_indexes_cat_voice">پیام‌های صوتی (ضبطی)</string>
 	
 	<string name="local_indexes_cat_poi">اطلاعات POI</string>
 	<string name="ttsvoice">صدای TTS</string>
@@ -421,13 +421,13 @@
 	<string name="north_west">شمال-غرب</string>
 	<string name="north_north_west">شمال-شمال-غرب</string>
 	<string name="front">جلو</string>
-	<string name="front_right">جلو-راست</string>
+	<string name="front_right">راست-جلو</string>
 	<string name="right">به سمت راست</string>
-	<string name="back_right">عقب-راست</string>
+	<string name="back_right">راست-عقب</string>
 	<string name="back">عقب</string>
-	<string name="back_left">عقب-چپ</string>
+	<string name="back_left">چپ-عقب</string>
 	<string name="left">به سمت چپ</string>
-	<string name="front_left">جلو-چپ</string>
+	<string name="front_left">چپ-جلو</string>
 	<string name="oclock">ساعت</string>
 	<string name="towards">به سمت</string>
 	<string name="accuracy">دقت</string>
@@ -453,11 +453,11 @@
 	<string name="index_name_asia">آسیا</string>
 	<string name="index_name_oceania">استرالیا و اقیانوسیه</string>
 	<string name="index_name_other">نقشه‌های جهانی و بالادستی</string>
-	<string name="index_name_voice">پیام‌های صوتی (ضبط‌شده، قابلیت‌های محدود)</string>
-	<string name="index_name_tts_voice">پیام‌های صوتی (موتور صوتی TTS، ارجح)</string>
+	<string name="index_name_voice">پیام‌های صوتی (ضبطی، قابلیت محدود)</string>
+	<string name="index_name_tts_voice">پیام‌های صوتی (ماشینی؛ TTS - ارجح)</string>
 	<string name="amenity_type_osmwiki">ویکی‌پدیا (آفلاین)</string>
-	<string name="routing_settings">مسیریابی</string>
-	<string name="routing_settings_descr">گزینه‌های مسیریابی را تعریف کنید</string>
+	<string name="routing_settings">راهبری</string>
+	<string name="routing_settings_descr">گزینه‌های راهبری را تعریف کنید</string>
 	<string name="global_settings">تنظیمات کلی</string>
 	<string name="osmand_parking_delete">حذف نشانگر پارکینگ</string>
 	
@@ -506,17 +506,17 @@
     <string name="menu_layers">لایه‌های نقشه</string>
 	<string name="layer_map_appearance">چینش صفحه</string>
 	<string name="map_widget_config">چینش صفحه</string>
-	<string name="map_widget_intermediate_distance">مقصد بین‌راهی</string>
+	<string name="map_widget_intermediate_distance">مقصد میانی</string>
     <string name="delete_target_point">حذف مقصد</string>
 	<string name="target_point">مقصد %1$s</string>
-    <string name="intermediate_point">مقصد بین‌راهی %1$s</string>
-    <string name="context_menu_item_last_intermediate_point">افزودن به‌عنوان آخرین مقصد بین‌راهی</string>
-    <string name="context_menu_item_first_intermediate_point">افزودن به‌عنوان اولین مقصد بین‌راهی</string>
-    <string name="add_as_last_destination_point">افزودن به‌عنوان آخرین مقصد بین‌راهی</string>
-    <string name="add_as_first_destination_point">افزودن به‌عنوان اولین مقصد بین‌راهی</string>
-    <string name="intermediate_point_too_far">مقصد بین‌راهی %1$s از نزدیک‌ترین جاده خیلی دور است.</string>
-    <string name="arrived_at_intermediate_point">به مقصد بین‌راهی خود رسیده‌اید</string>
-    <string name="context_menu_item_intermediate_point">افزودن به‌عنوان مقصد بین‌راهی</string>
+    <string name="intermediate_point">مقصد میانی %1$s</string>
+    <string name="context_menu_item_last_intermediate_point">افزودن به‌عنوان آخرین مقصد میانی</string>
+    <string name="context_menu_item_first_intermediate_point">افزودن به‌عنوان اولین مقصد میانی</string>
+    <string name="add_as_last_destination_point">افزودن به‌عنوان آخرین مقصد میانی</string>
+    <string name="add_as_first_destination_point">افزودن به‌عنوان اولین مقصد میانی</string>
+    <string name="intermediate_point_too_far">مقصد میانی %1$s با نزدیک‌ترین جاده فاصلهٔ زیادی دارد.</string>
+    <string name="arrived_at_intermediate_point">به مقصد میانی خود رسیده‌اید</string>
+    <string name="context_menu_item_intermediate_point">افزودن به‌عنوان مقصد میانی</string>
     <string name="add_waypoint_dialog_added">نقطهٔ بین‌راهی GPX، ‏«{0}»، افزوده شد</string>
 	<string name="add_waypoint_dialog_title">افزودن نقطهٔ بین‌راهی به مسیر GPX ضبط‌شده</string>
 	<string name="amenity_type_administrative">اداری</string>
@@ -574,12 +574,12 @@
     <string name="show_warnings_descr">پیکربندی‌های مربوط به هشدارهای ترافیکی (مانند محدودیت‌های سرعت، توقف‌های اجباری، سرعتگیرها)، هشدارهای دوربین کنترل سرعت و اطلاعات خط عبوری را انجام دهید</string>
 	<string name="use_compass_navigation_descr">اگر جهت شناسایی نمی‌شود از قطب‌نما استفاده کن</string>
 	<string name="avoid_motorway">اجتناب از آزادراه‌ها</string>
-	<string name="snap_to_road_descr">در طول مسیریابی، موقعیت را به جاده‌ها بچسبان</string>
+	<string name="snap_to_road_descr">در طول راهبری، موقعیت را به جاده‌ها بچسبان</string>
 	<string name="snap_to_road">چسبیدن به جاده</string>
 	<string name="osmand_play_title_30_chars">نقشه و مسیریابی با OsmAnd</string>
-	<string name="osmand_short_description_80_chars">برنامه همراه برای مشاهده نقشه جهانی و مسیریابی با نقشه‌های آفلاین و آنلاین OSM</string>
-	<string name="osmand_plus_play_title_30_chars">نقشه و مسیریابی با OsmAnd</string>
-	<string name="osmand_plus_short_description_80_chars">برنامه همراه برای مشاهده نقشه جهانی و مسیریابی با نقشه‌های آفلاین و آنلاین OSM</string>
+	<string name="osmand_short_description_80_chars">برنامهٔ همراه برای مشاهدهٔ نقشه جهانی و راهبری با نقشه‌های آفلاین و آنلاین OSM</string>
+	<string name="osmand_plus_play_title_30_chars">نقشه و مسیریابی با OsmAnd+‎</string>
+	<string name="osmand_plus_short_description_80_chars">برنامهٔ همراه برای مشاهدهٔ نقشهٔ جهانی و راهبری با نقشه‌های آفلاین و آنلاین OSM</string>
 	
 	
 	<string name="filterpoi_activity">ایجاد فیلتر برای POI</string>
@@ -606,7 +606,7 @@
     <string name="recording_playing">صدایی از فایل ضبط‌شدهٔ موردنظر در حال پخش است. 
 \n%1$s</string>
     <string name="recording_delete_confirm">آیا این مورد ضبط‌شده را پاک می‌کنید؟</string>
-    <string name="recording_description">ضبط %1$s %3$s %2$s</string>
+    <string name="recording_description">در حال ضبط %1$s %3$s %2$s</string>
     <string name="osmand_srtm_short_description_80_chars">افزونهٔ OsmAnd برای منحنی‌های تراز آفلاین</string>
     <string name="use_magnetic_sensor_descr">برای مقدار قطب‌نما به‌جای حسگر جهتی از حسگر مغناطیسی استفاده کن</string>
     <string name="show_poi_over_map">نشان‌دادن POI</string>
@@ -620,10 +620,10 @@
 	<string name="use_online_routing_descr">برای محاسبهٔ مسیر از اینترنت استفاده کن</string>
 	<string name="use_online_routing">استفاده از مسیریابی آنلاین</string>
 	<string name="error_occurred_saving_gpx">خطا در هنگام ذخیره‌کردن GPX</string>
-	<string name="loading_poi_obj">در حال بارگیری POI…</string>
-	<string name="loading_streets_buildings">در حال بارگیری خیابان‌ها/ساختمان‌ها…</string>
-	<string name="loading_streets">در حال بارگیری خیابان‌ها…</string>
-	<string name="loading_cities">در حال بارگیری شهرها…</string>
+	<string name="loading_poi_obj">بارگیری POI…</string>
+	<string name="loading_streets_buildings">بارگیری خیابان‌ها/ساختمان‌ها…</string>
+	<string name="loading_streets">بارگیری خیابان‌ها…</string>
+	<string name="loading_cities">بارگیری شهرها…</string>
 	
 	<string name="error_calculating_route">خطا در محاسبهٔ مسیر</string>
 	<string name="hint_search_online">جست‌وجوی آنلاین: شهر، خیابان، پلاک</string>
@@ -654,8 +654,8 @@
 	
 	
 	<string name="settings_preset">پروفایل پیش‌فرض</string>
-	<string name="settings_preset_descr">نمای نقشه و تنظیمات مسیریابی برای هر پروفایل جداگانه ذخیره می‌شود. پروفایل پیش‌فرض خود را اینجا تنظیم کنید.</string>
-    <string name="osmand_background_plugin_description">تنظیمات مربوط به فعال‌سازی ردگیری و مسیریابی در حالت پس‌زمینه (صفحه خاموش) را نشان می‌دهد که با ارسال بیدارباش‌های متناوب به جی‌پی‌اس دستگاه این کار را انجام می‌دهد.</string>
+	<string name="settings_preset_descr">نمای نقشه و تنظیمات راهبری برای هر پروفایل جداگانه ذخیره می‌شود. پروفایل پیش‌فرض خود را اینجا تنظیم کنید.</string>
+    <string name="osmand_background_plugin_description">تنظیمات مربوط به فعال‌سازی ردگیری و راهبری در حالت پس‌زمینه (صفحه خاموش) را نشان می‌دهد که با ارسال بیدارباش‌های متناوب به جی‌پی‌اس دستگاه این کار را انجام می‌دهد.</string>
     <string name="av_def_action_choose">انتخاب برحسب تقاضا</string>
     <string name="audionotes_location_not_defined">مکانی برای یادداشت‌گذاری تعیین نشده است.
 \nمکانی را مشخص و از طریق منوی زمینه اقدام کنید.</string>
@@ -678,9 +678,9 @@
 	<string name="osm_settings">ویرایش نقشهٔ OSM</string>
 	<string name="save_current_track_descr">مسیر جاری را الآن روی کارت حافظه ذخیره کن</string>
 	<string name="save_current_track">ذخیرهٔ مسیر GPX جاری</string>
-	<string name="save_track_interval">فاصلهٔ زمانی ثبت داده‌ها در هنگام مسیریابی</string>
-	<string name="save_track_interval_descr">فاصلهٔ زمانی ورود داده‌ها برای ضبط مسیر در حین مسیریابی را انتخاب کنید</string>
-	<string name="save_track_to_gpx_descrp">هنگام مسیریابی، مسیر GPX به‌صورت خودکار ضبط می‌شود و می‌توانید آن را در پوشهٔ مسیرها (tracks) ذخیره کنید</string>
+	<string name="save_track_interval">فاصلهٔ زمانی ثبت داده‌ها در هنگام راهبری</string>
+	<string name="save_track_interval_descr">مشخص کنید فاصلهٔ زمانی ورود داده‌ها برای ضبط مسیر در هنگام راهبری چقدر باشد</string>
+	<string name="save_track_to_gpx_descrp">هنگام راهبری، مسیر GPX به‌صورت خودکار ضبط می‌شود و در پوشهٔ مسیرها (tracks) ذخیره می‌گردد</string>
 	
 	<string name="osm_settings_descr">تنظیمات لازم برای ارتباط با (Openstreetmap.org (OSM را مشخص کنید</string>
 	<string name="data_settings_descr">زبان را مشخص، داده‌ها را دانلود یا مجدداً بارگیری کنید</string>
@@ -692,11 +692,11 @@
 	<string name="avoid_unpaved">اجتناب از راه‌های روسازی‌نشده</string>
 	<string name="avoid_ferries">اجتناب از گذرگاه‌های آبی</string>
 	
-	<string name="map_widget_fluorescent">مسیرهای فلورسنت</string>
+	<string name="map_widget_fluorescent">مسیرهای شب‌نما</string>
 	<string name="bg_service_sleep_mode_off">اجراکردن
 \n برنامه در پس‌زمینه</string>
-	<string name="bg_service_sleep_mode_on">پایان‌دادن
-\n به اجرای برنامه در پس‌زمینه</string>
+	<string name="bg_service_sleep_mode_on">پایان‌دادن 
+\n به اجرا در پس‌زمینه</string>
 	<string name="gps_wakeup_interval">بازهٔ بیدارباش GPS:‏ %s</string>
 	<string name="screen_is_locked">برای بازکردن قفل صفحه روی آیکن قفل بزنید</string>
 	<string name="map_widget_lock_screen">قفل صفحه</string>
@@ -706,7 +706,7 @@
 	<string name="select_animate_speedup">انتخاب سرعت شبیه‌سازی مسیر</string>
     	<string name="native_app_allocated_memory_descr">کل حافظهٔ اختصاص‌یافته به برنامه %1$s مگابایت (دالویک %2$s مگابایت، بقیه %3$s مگابایت).
 \nحافظهٔ نسبی %4$s مگابایت (حد آندروئید %5$s مگابایت، دالویک %6$s مگابایت).</string>
-	<string name="global_app_allocated_memory_descr">حافظهٔ اختصاص‌یافته %1$s مگابایت (حد آندروئید %2$s مگابایت، دالویک %3$s مگابایت).</string>
+	<string name="global_app_allocated_memory_descr">حافظهٔ اختصاص‌یافته %1$s مگابایت (حد اندروید %2$s مگابایت، دالویک %3$s مگابایت).</string>
 	<string name="shared_location">مکان اشتراک‌گذاری‌شده</string>
 	<string name="gpxup_trackable">قابل‌ردگیری</string>
 	<string name="gpxup_identifiable">قابل‌شناسایی</string>
@@ -728,7 +728,7 @@
 	<string name="settings_direction_style_descr">در هنگام حرکت، جهت‌ها به چه شیوه‌ای بیان شوند؟</string>
 	<string name="auto_announce_on">شروع اعلام خودکار</string>
 	<string name="auto_announce_off">توقف اعلام خودکار</string>
-	<string name="use_fluorescent_overlays_descr">برای نمایش مسیرها و جاده‌ها از رنگهای فلوروسنت استفاده شود</string>
+	<string name="use_fluorescent_overlays_descr">برای نمایش مسیرها و جاده‌ها از رنگ‌های شب‌نما استفاده شود</string>
 	<string name="offline_edition">ویرایش آفلاین</string>
 	<string name="offline_edition_descr">ویرایش‌ها را همیشه آفلاین انجام می‌دهم</string>
 	<string name="local_openstreetmap_uploading">در حال آپلود…</string>
@@ -773,9 +773,9 @@
 	
 	<string name="use_transparent_map_theme">پوستهٔ شفاف</string>
 	<string name="native_library_not_supported">کتابخانه بومی بر روی این دستگاه پشتیبانی نمیشود.</string>
-	<string name="init_native_library">مقداردهی اولیه کتابخانه بومی…</string>
+	<string name="init_native_library">مقداردهی اولیهٔ کتابخانهٔ بومی…</string>
 	<string name="choose_auto_follow_route">نمای نقشه خودکار-مرکز</string>
-	<string name="choose_auto_follow_route_descr">زمان لازم برای اینکه نقشه موقعیت فعلی را نشان دهد</string>
+	<string name="choose_auto_follow_route_descr">مدت‌زمانی که طول می‌کشد تا نقشه با موقعیت کنونی همگام شود</string>
 	
 	<string name="auto_follow_route_navigation">راهبری فقط با حالت خودکار-مرکز</string>
 	<string name="auto_follow_route_navigation_descr">نمای خودکار-مرکز برای نقشه فقط در زمان مسیریابی فعال باشد.</string>
@@ -877,15 +877,15 @@
     
     <string name="osmand_srtm_long_description_1000_chars">این افزونه دو لایهٔ منحنی‌های تراز و سایه‌تپه (عوارض زمین) را روی نقشه‌‌های استاندارد OsmAnd نمایش می‌دهد. 
 \nورزشکاران، راه‌پیمایان، کوله‌گردان و همهٔ کسانی که به ساختار پستی‌وبلندی‌های زمین علاقه‌مند هستند از این ویژگی بهره می‌برند. 
-\n 
-\nاندازه‌گیری‌های SRTM (مأموریت توپوگرافی رادار شاتل) و ASTER (رادیومتر پیشرفتهٔ فضابرد بازتاب و گسیل حرارتی) مبنای داده‌های جهانی (بین ۷۰ درجهٔ شمالی و ۷۰ درجهٔ جنوبی) است. 
-\nاَستِر یک ابزار تصویربرداری است که بر روی ماهوارهٔ Terra نصب است. تِرا ماهوارهٔ فوق‌پیشرفتهٔ سامانهٔ دیده‌بانی زمینِ ناساست. 
+\nمبنای داده‌های جهانی یعنی بین ۷۰ درجهٔ شمالی و ۷۰ درجهٔ جنوبی اندازه‌گیری‌های SRTM (مأموریت توپوگرافی رادار شاتل) و ASTER (رادیومتر پیشرفتهٔ فضابرد بازتاب و گسیل حرارتی) است.
+\n
+\nاَستِر یک ابزار تصویربرداری است که بر روی ماهوارهٔ Terra نصب است و تِرا ماهوار‌ه‌ای فوق‌پیشرفت برای سامانهٔ دیده‌بانی زمینِ ناساست. 
 \nاَستِر محصول تلاش مشترک ناسا، وزارت اقتصاد، صنعت و تجارت ژاپن و سامانه‌های فضایی ژاپن است.</string>
     <string name="srtm_plugin_description">این افزونه دو لایهٔ منحنی‌های تراز و سایه‌تپه (عوارض زمین) را روی نقشه‌‌های استاندارد OsmAnd نمایش می‌دهد. 
 \nورزشکاران، راه‌پیمایان، کوله‌گردان و همهٔ کسانی که به ساختار پستی‌وبلندی‌های زمین علاقه‌مند هستند از این ویژگی بهره می‌برند. 
-\nاندازه‌گیری‌های SRTM (مأموریت توپوگرافی رادار شاتل) و ASTER (رادیومتر پیشرفتهٔ فضابرد بازتاب و گسیل حرارتی) مبنای داده‌های جهانی (بین ۷۰ درجهٔ شمالی و ۷۰ درجهٔ جنوبی) 
-\nاست. 
-\nاَستِر یک ابزار تصویربرداری است که بر روی ماهوارهٔ Terra نصب است. تِرا ماهوارهٔ فوق‌پیشرفتهٔ سامانهٔ دیده‌بانی زمینِ ناساست. 
+\nمبنای داده‌های جهانی یعنی بین ۷۰ درجهٔ شمالی و ۷۰ درجهٔ جنوبی اندازه‌گیری‌های SRTM (مأموریت توپوگرافی رادار شاتل) و ASTER (رادیومتر پیشرفتهٔ فضابرد بازتاب و گسیل حرارتی) است.
+\n
+\nاَستِر یک ابزار تصویربرداری است که بر روی ماهوارهٔ Terra نصب است و تِرا ماهوار‌ه‌ای فوق‌پیشرفت برای سامانهٔ دیده‌بانی زمینِ ناساست. 
 \nاَستِر محصول تلاش مشترک ناسا، وزارت اقتصاد، صنعت و تجارت ژاپن و سامانه‌های فضایی ژاپن است.</string>
     <string name="monitoring_control_start">جی‌پی‌ایکس</string>
     <string name="rendering_attr_noPolygons_description">همهٔ عوارض زمین را روی نقشه محو کن</string>
@@ -901,20 +901,20 @@
     <string name="incremental_search_building">جست‌وجوی حرف‌به‌حرف نام ساختمان‌ها</string>
 	<string name="incremental_search_street">جست‌وجوی حرف‌به‌حرف نام خیابان‌ها</string>
 	<string name="reload_tile">بارگیری مجدد کاشی</string>
-	<string name="save_track_to_gpx">ضبط‌کردن خودکار مسیر هنگام مسیریابی</string>
+	<string name="save_track_to_gpx">ضبط‌کردن خودکار مسیر هنگام راهبری</string>
 	
-	<string name="loading_postcodes">در حال بارگیری کدهای پستی…</string>
+	<string name="loading_postcodes">بارگیری کدهای پستی…</string>
 	<string name="converting_names">در حال تبدیل اسامی بومی/انگلیسی…</string>
 	<string name="failed_op">ناموفق</string>
 	<string name="auth_failed">اجازهٔ دسترسی احراز نشد</string>
 	<string name="closing_changeset">در حال بستن بستهٔ تغییرات…</string>
-	<string name="opening_changeset">در حال بازکردن بستهٔ تغییرات…</string>
+	<string name="opening_changeset">بازکردن بستهٔ تغییرات…</string>
 	<string name="list_index_files_was_not_loaded">لیست منطقه‌ها از osmand.net بازیابی نشد.</string>
 	<string name="downloading_list_indexes">در حال دانلود لیست مناطق موجود…</string>
 	<string name="download_question_exist">داده‌های آفلاین برای {0} از قبل وجود دارد ({1}). آیا آن را به‌روز می‌کنید ({2})؟</string>
 	<string name="router_service">سرویس مسیریابی</string>
 	<string name="sd_dir_not_accessible">پوشهٔ ذخیره‌سازی روی کارت SD قابل‌دسترسی نیست!</string>
-	<string name="router_service_descr">یکی از سرویس مسیریابی آنلاین یا آفلاین را انتخاب کنید</string>
+	<string name="router_service_descr">یکی از سرویس‌های مسیریابی آنلاین یا آفلاین را انتخاب کنید</string>
 	<string name="max_level_download_tile_descr">حداکثر زوم را برای دانلود کاشی‌های نقشهٔ آنلاین انتخاب کنید</string>
 	<string name="search_osm_nominatim">جست‌وجوی آنلاین با استفاده از OSM Nominatim</string>
 	<string name="uploading">در حال آپلود…</string>
@@ -928,7 +928,7 @@
 	<string name="context_menu_item_update_map_confirm">داده‌های محلی از طریق اینترنت به‌روز شود؟</string>
 	<string name="update_poi_error_loading">بروز خطا در هنگام بارگیری داده از سرور</string>
 	<string name="update_poi_no_offline_poi_index">برای این ناحیه هیچ POIای به‌صورت آفلاین موجود نیست</string>
-	<string name="hello">برنامهٔ مسیریابی OsmAnd</string>
+	<string name="hello">برنامهٔ راهبری OsmAnd</string>
 	<string name="update_poi_success">داده‌های POI با موفقیت به‌روز شد ({0} مورد بارگیری شد)</string>
 	<string name="update_poi_error_local">خطا در هنگام به‌روزرسانی لیست POI محلی</string>
 	<string name="shared_string_ok">خُب</string>
@@ -938,7 +938,7 @@
 	<string name="route_tslr">کمی به راست بپیچید و بروید</string>
 	<string name="route_tshl">کاملاً به چپ بپیچید و بروید</string>
 	<string name="route_tsll">کمی به چپ بپیچید و بروید</string>
-	<string name="route_tu">دوربرگردان را دور بزنید و بروید</string>
+	<string name="route_tu">دورِ برگردان بزنید و بروید</string>
 	<string name="first_time_continue">بعداً</string>
 	<string name="first_time_download">دانلود منطقه‌ها</string>
 	<string name="search_poi_location">در حال جست‌وجوی سیگنال…</string>
@@ -947,21 +947,21 @@
 	<string name="voice_provider">راهنمای صوتی</string>
 	<string name="menu_mute_off">صدا روشن است</string>
 	<string name="menu_mute_on">صدا خاموش است</string>
-	<string name="voice_provider_descr">راهنمای صوتی مسیریابی را انتخاب کنید</string>
+	<string name="voice_provider_descr">راهنمای صوتی راهبری را انتخاب کنید</string>
 	<string name="voice_data_initializing">در حال آماده‌سازی داده‌های صوتی…</string>
 	<string name="voice_data_not_supported">این نسخه از دادهٔ صوتی پشتیبانی نمی‌شود</string>
 	<string name="voice_data_corrupted">دادهٔ صوتی انتخاب‌شده خراب است</string>
 	<string name="voice_data_unavailable">دادهٔ صوتی انتخاب‌شده موجود نیست</string>
 	<string name="sd_mounted_ro">کارت SD در حالت فقط‌خواندنی است.
 \nتنها می‌توانید نقشه‌های ازپیش‌بارگیری‌شده را ببینید و نمی‌توانید از اینترنت دانلود کنید.</string>
-	<string name="process_navigation_service">سرویس مسیریابی OsmAnd</string>
+	<string name="process_navigation_service">سرویس راهبری OsmAnd</string>
 	<string name="background_service_int_descr">بازهٔ بیدارباش سرویس پس‌زمینه را تنظیم کنید</string>
 	<string name="background_service_int">فاصلهٔ زمانی بیدارباش GPS</string>
-	<string name="background_service_provider_descr">مشخص کنید سرویس پس‌زمینه، اطلاعات مکانی را چگونه دریافت کند</string>
+	<string name="background_service_provider_descr">مشخص کنید سرویس پس‌زمینه اطلاعات مکانی را چگونه دریافت کند</string>
 	<string name="background_service_provider">ارائه‌دهندهٔ موقعیت</string>
 	<string name="background_router_service_descr">برنامهٔ OsmAnd در پس‌زمینه اجرا می‌ماند تا در زمانی‌که صفحه خاموش است موقعیت شما را ردگیری کند</string>
 	<string name="background_router_service">اجرای OsmAnd در پس‌زمینه</string>
-	<string name="off_router_service_no_gps_available">برای مسیریابی در حالت پس‌زمینه لازم است موقعیت مکانی روشن باشد.</string>
+	<string name="off_router_service_no_gps_available">برای سرویس راهبری در پس‌زمینه موقعیت مکانی را روشن کنید.</string>
 	<string name="hide_poi_filter">مخفی‌کردن فیلتر</string>
 	<string name="show_poi_filter">نمایش فیلتر</string>
 	<string name="search_poi_filter">فیلتر</string>
@@ -1039,7 +1039,7 @@
 	
 	<string name="osmand_net_previously_installed">یک نسخهٔ قدیمی از OsmAnd نصب است. همهٔ داده‌های آفلاین در این نسخهٔ جدید هم پشتیبانی می‌شوند. اما باید نقاط برگزیده را ابتدا با نسخهٔ قبلی صادر کنید و سپس در این نسخه وارد کنید.</string>
 	<string name="build_installed">ساخت {0} با موفقیت نصب شد ({1}).</string>
-	<string name="km_h">کیلومتر/ساعت</string>
+	<string name="km_h">km/h</string>
 	<string name="old_map_index_is_not_supported">قالب دادهٔ «{0}» ازرده‌خارج است و پشتیبانی نمی‌شود</string>
 	<string name="context_menu_item_add_waypoint">افزودن نقطهٔ بین‌راهی GPX</string>
 	<string name="mile_per_hour">mph</string>
@@ -1048,7 +1048,7 @@
 	
 	<string name="first_time_msg">از شما به‌خاطر استفاده از OsmAnd متشکریم. برای بیشتر امکانات این برنامه به داده‌های آفلاین منطقه‌ای نیاز دارید که می‌توانید آن‌ها را از طریق «تنظیمات» ← «مدیریت فایل‌های نقشه» دانلود کنید. سپس قادر خواهید بود نقشه‌ها را نگاه کنید، نشانی‌ها را پیدا کنید، مکان‌ها را جست‌وجو کنید و مسیرهای حمل‌ونقل عمومی را بیابید.</string>    
 	<string name="rendering_out_of_memory">برای نشان‌دادن ناحیهٔ انتخابی حافظهٔ اجرایی کافی وجود ندارد</string>
-	<string name="use_fluorescent_overlays">لایه های فلورسنت</string>
+	<string name="use_fluorescent_overlays">لایه‌های شب‌نما</string>
 	<string name="local_openstreetmap_settings">یادداشت‌ها/POIهای ذخیره‌شدهٔ محلی</string>
 	<string name="local_openstreetmap_settings_descr">نشان‌دادن و مدیریت POIها/یادداشت‌هایی که در پایگاه دادهٔ محلی نوشته شده‌اند</string>
 	
@@ -1060,48 +1060,68 @@
     
     
 	
-	<string name="osmand_long_description_1000_chars">OsmAnd (مخفف OSM Automated Navigation Directions به‌معنی راهبری خودکار برای OSM) یک نرم‌افزار مسیریابی متن‌باز است که به گسترهٔ وسیعی از داده‌های OSM دسترسی دارد.
-\n
-\nتمام داده‌های نقشه (بُرداری یا کاشی) را می‌توانید برای استفادهٔ آفلاین روی کارت حافظه ذخیره کنید.
-\nهمچنین OsmAnd می‌تواند به‌صورت آنلاین و آفلاین و با راهنمای صوتیِ گام‌به‌گام، برایتان مسیریابی کند.
-\n
-\n* از ویژگی‌های مهم:
-\n- کارایی کامل در حالت آفلاین (قابلیت ذخیره‌سازی نقشه‌های بُرداری یا کاشی در حافظهٔ دستگاه)
+	<string name="osmand_long_description_1000_chars">برنامهٔ OsmAnd (مخفف OSM Automated Navigation Directions به‌معنی راهبری خودکار برای OSM) یک نرم‌افزار مسیریابی متن‌باز است که به گسترهٔ وسیعی از داده‌های OSM دسترسی دارد. 
+\n 
+\nتمام داده‌های نقشه (بُرداری یا کاشی) را می‌توانید برای استفادهٔ آفلاین روی کارت حافظه ذخیره کنید. 
+\nهمچنین OsmAnd می‌تواند به‌صورت آنلاین و آفلاین و با راهنمای صوتیِ گام‌به‌گام، برایتان مسیریابی کند. 
+\n 
+\n* از ویژگی‌های مهم: 
+\n- کارایی کامل در حالت آفلاین (قابلیت ذخیره‌سازی نقشه‌های بُرداری یا کاشی در حافظهٔ دستگاه) 
 \n- وجود نقشه‌های برداری و آفلاینِ سراسر جهان به‌صورت فشرده 
-\n- امکان دانلود نقشهٔ یک کشور یا منطقه مستقیماً از طریق برنامه
-\n- امکان قراردادن نقشه‌های مختلف بر روی هم در چند لایه؛ مانند ردهای GPX یا مسیریابی، مکان‌های محبوب یا POI، نقاط برگزیده، منحنی‌های تراز، ایستگاه‌های حمل‌ونقل عمومی، نقشه‌های دیگر با درصد شفافیت دلخواه
-\n- جست‌وجوی آفلاین مکان‌ها (POIها) و نشانی‌ها
-\n- مسیریابی آفلاین برای مسافت‌های متوسط
-\n- نمایه‌های خودرو، دوچرخه و پیاده با قابلیت اختیاری:
-\n. نمای خودکار شب یا روز؛
-\n. زوم وابسته به سرعت؛
-\n. میزان‌کردن نقشه در جهت قطب‌نما یا در جهت حرکت؛
-\n. راهنمای خط عبوری، نمایش محدودیت سرعت، راهنمای صوتی انسانی یا ماشینی.
-\n
-\n* محدودیت‌های این نسخهٔ رایگان از OsmAnd:
-\n- تعداد نقشه‌های قابل‌دانلود محدود است.
-\n- به نقاط ویکی‌پدیایی دسترسی ندارید.
-\n
-\n* ما فعالانه در حال توسعهٔ OsmAnd هستیم و این پروژه و پیشرفت آن به کمک‌های مالی شما نیازمند است تا برای توسعه و افزودن قابلیت‌های تازه سرمایه‌گذاری شود.
-\n
+\n- امکان دانلود نقشهٔ یک کشور یا منطقه مستقیماً از طریق برنامه 
+\n- امکان قراردادن نقشه‌های مختلف بر روی هم در چند لایه؛ مانند ردهای GPX یا مسیریابی، مکان‌های محبوب یا POI، نقاط برگزیده، منحنی‌های تراز، ایستگاه‌های حمل‌ونقل عمومی، نقشه‌های دیگر با درصد شفافیت دلخواه 
+\n- جست‌وجوی آفلاین مکان‌ها (POIها) و نشانی‌ها 
+\n- مسیریابی آفلاین برای مسافت‌های متوسط 
+\n- نمایه‌های خودرو، دوچرخه و پیاده با قابلیت اختیاری: 
+\n. نمای خودکار شب یا روز؛ 
+\n. زوم وابسته به سرعت؛ 
+\n. میزان‌کردن نقشه در جهت قطب‌نما یا در جهت حرکت؛ 
+\n. راهنمای خط عبوری، نمایش محدودیت سرعت، راهنمای صوتی انسانی یا ماشینی. 
+\n 
+\n* محدودیت‌های این نسخهٔ رایگان از OsmAnd: 
+\n- تعداد نقشه‌های قابل‌دانلود محدود است. 
+\n- به نقاط ویکی‌پدیایی دسترسی ندارید. 
+\n 
+\n* ما فعالانه در حال توسعهٔ OsmAnd هستیم و این پروژه و پیشرفت آن به کمک‌های مالی شما نیازمند است تا برای توسعه و افزودن قابلیت‌های تازه سرمایه‌گذاری شود. 
+\n 
 \n* لطفاً OsmAnd+‎ را بخرید یا برای ویژگی‌های تازه و خاص سرمایه‌گذاری کنید. همچنین می‌توانید از طریق سایت osmand.net مبلغی هدیه کنید.</string>
 	
-	<string name="osmand_plus_long_description_1000_chars">OsmAnd+ (مسیریابی خودکار OSM) +OsmAnd نرم افزار ناوبری منبع باز با دسترسی به طیف گسترده ای از داده های نقشه شهری باز جهانی (OSM) است. تمام داده های نقشه (نقشه های بُرداری و یا کاشی) بر روی کارت حافظه برای استفاده آفلاین ذخیره میشوند. همچنین OsmAnd قابلیتهای مسیریابی آفلاین و آنلاین از جمله هدایت صوتی گام به گام را ارائه میدهد. +OsmAnd نسخه پولی نرم افزار است، که با خرید آن از این پروژه حمایت میکنید، تأمین مالی ایجاد ویژگی های جدید و دریافت آخرین به روز رسانی ها خواهید داشت. برخی از ویژگی های اصلی: -قابلیت های آنلاین کامل (فروشگاه دریافت نقشه های بُرداری یا کاشی در یک پوشه قابل انتخاب) -نقشه های بُرداری آفلاین فشرده برای تمام جهان -دانلود نامحدود نقشه کشور یا منطقه ها بطور مستقیم از درون برنامه -ویژگی ویکیپدیا آفلاین (ویکیپدیای POIهای دانلود کنید) که برای گشت و گذار عالی است -روکش چند لایه نقشه مانند مسیرهای GPX یا ناوبری، مکانهای مهم، علاقمندیها، خطوط همتراز، ایستگاههای حمل و نقل عمومی، نقشه های اضافی با شفافیت قابل تنظیم -جست‌وجوی آفلاین آدرسها و مکانهای مهم (POIها) -مسیریابی آفلاین برای مسافت های کوتاه (تجربی) -حالت های خودرو، دوچرخه و عابر پیاده با: - تغییر خودکار حالت شب/روز به صورت اختیاری -زوم نقشه بسته به سرعت - چرخش نقشه با توجه به قطب نما یا جهت حرکت - هدایت اختیاری خط، نمایش سرعت مجاز، راهنمای صوتی ضبط شده یا TTS</string>
+	<string name="osmand_plus_long_description_1000_chars">برنامهٔ OsmAnd+‎ (مخفف OSM Automated Navigation Directions به‌معنی راهبری خودکار برای OSM) یک نرم‌افزار مسیریابی متن‌باز است که به گسترهٔ وسیعی از داده‌های OSM دسترسی دارد. 
+\n 
+\nتمام داده‌های نقشه (بُرداری یا کاشی) را می‌توانید برای استفادهٔ آفلاین روی کارت حافظه ذخیره کنید. 
+\nهمچنین OsmAnd می‌تواند به‌صورت آنلاین و آفلاین و با راهنمای صوتیِ گام‌به‌گام، برایتان مسیریابی کند. 
+\n‏OsmAnd+‎ نسخهٔ پولی این برنامه است. با خریدن آن از این پروژه حمایت می‌کنید، سرمایه‌ای برای توسعهٔ قابلیت‌های جدید فراهم می‌کنید و آخرین به‌روزرسانی‌ها در اختیارتان قرار می‌گیرد.
+\n
+\n* از ویژگی‌های مهم: 
+\n- کارایی کامل در حالت آفلاین (قابلیت ذخیره‌سازی نقشه‌های بُرداری یا کاشی در حافظهٔ دستگاه) 
+\n- وجود نقشه‌های برداری و آفلاینِ سراسر جهان به‌صورت فشرده 
+\n- امکان دانلود نامحدود نقشه‌های کشوری یا منطقه‌ای مستقیماً از طریق برنامه 
+\n- دسترسی به ویکی‌پدیا به‌صورت آفلاین (دانلود POIهای ویکی‌پدیا) که برای گردشگری بسیار مفید است
+\n- امکان قراردادن نقشه‌های مختلف بر روی هم در چند لایه؛ مانند ردهای GPX یا مسیریابی، مکان‌های محبوب یا POI، نقاط برگزیده، منحنی‌های تراز، ایستگاه‌های حمل‌ونقل عمومی، نقشه‌های دیگر با درصد شفافیت دلخواه 
+\n- جست‌وجوی آفلاین مکان‌ها (POIها) و نشانی‌ها 
+\n- مسیریابی آفلاین برای مسافت‌های متوسط 
+\n- نمایه‌های خودرو، دوچرخه و پیاده با قابلیت اختیاری: 
+\n. نمای خودکار شب یا روز؛ 
+\n. زوم وابسته به سرعت؛ 
+\n. میزان‌کردن نقشه در جهت قطب‌نما یا در جهت حرکت؛ 
+\n. راهنمای خط عبوری، نمایش محدودیت سرعت، راهنمای صوتی انسانی یا ماشینی</string>
 	
 	
 	<string name="asap">دراسرع‌وقت</string>
-	<string name="osmand_rastermaps_plugin_description">با استفاده از این افزونه به انواع مختلفی از نقشه‌های آنلاین (نقشه‌های کاشی‌مانند یا رَستر) دسترسی پیدا می‌کنید. این نقشه‌ها از کاشی‌های پیش‌فرض OpenStreetMap (مانند مَپنیک) تا تصاویر ماهواره‌ای و لایه‌های خاص مانند نقشه‌های آب‌و‌هوایی، هواشناسی، جغرافیایی و لایه‌های تپه‌ماهوری و... را در بر می‌گیرد. 
-\n
-\nهرکدام از این نقشه‌ها هم به‌عنوان نقشهٔ اصلی (یا پایه) و هم به‌عنوان لایهٔ رو یا زیر لایهٔ اصلی (مثلاً نقشه‌های آفلاین و استاندارد OsmAnd) قابل‌نمایش هستند. برای اینکه لایهٔ زیری را نمایان‌تر کنید می‌توانید اجزای خاصی را در نقشه‌های بُرداری OsmAnd از طریق منوی «پیکربندی نقشه» مخفی کنید. 
-\n
-\nنقشه‌های کاشی‌مانند مستقیماً از طریق منابع آنلاین قابل‌دریافت هستند یا می‌توان آن‌ها را به‌صورت پایگاه داده SQLite برای استفادهٔ آفلاین (با قراردادن در پوشهٔ دیتای OsmAnd) آماده کرد که برنامه‌های مختلفی برای آماده‌سازی آن وجود دارد.</string>
+	<string name="osmand_rastermaps_plugin_description">با استفاده از این افزونه به انواع مختلفی از نقشه‌های آنلاین (کاشی‌مانند یا رَستر) دسترسی پیدا می‌کنید. این نقشه‌ها از کاشی‌های پیش‌فرض OpenStreetMap (مانند مَپنیک) تا تصاویر ماهواره‌ای و لایه‌های خاص مانند نقشه‌های آب‌و‌هوایی، هواشناسی، جغرافیایی و لایه‌های تپه‌ماهوری و... را در بر می‌گیرد. 
+\n 
+\nهرکدام از این نقشه‌ها هم به‌عنوان نقشهٔ پایه و هم به‌عنوان لایهٔ رویی یا زیری برای لایهٔ پایه (مثلاً نقشه‌های آفلاین و استاندارد OsmAnd) قابل‌نمایش هستند. برای اینکه لایهٔ زیری را نمایان‌تر کنید می‌توانید اجزای خاصی را در نقشه‌های بُرداری OsmAnd از طریق منوی «پیکربندی نقشه» مخفی کنید. 
+\n 
+\nنقشه‌های کاشی‌مانند مستقیماً از طریق منابع آنلاین قابل‌دریافت هستند. همچنین می‌توانید آن‌ها را به‌صورت پایگاه داده SQLite برای استفادهٔ آفلاین آماده کنید و سپس در پوشهٔ دیتای OsmAnd قرار دهید. نرم‌افزارهای مختلفی برای انجام این کار وجود دارد.</string>
 	
 	<string name="osmand_accessibility_description">"این افزونه امکانات قابلیت‌دسترسی (accessibility) در دستگاهتان را مستقیماً در OsmAnd به‌کار می‌گیرد و تسهیلاتی را در اختیارتان می‌گذارد؛ مانند تنظیم‌کردن سرعت گفتار موتور صوتی، خوانش متن (مثل اعلام موقعیت شما)، پیمایش صفحه با صفحهٔ جهتی  و استفاده از توپک برای تنظیم بزرگ‌نمایی."</string>
 	
 	
 	
-	<string name="osm_editing_plugin_description">به‌وسیلهٔ این افزونه در تکمیل نقشهٔ OSM مشارکت کنید. مثلاً با ایجاد یا اصلاح مکان‌های POI، ارسال فایل‌های GPX ضبط‌شده و گذاشتن توضیحات ویرایشی OSM. در مورد توضیحات ویرایشی یا Noteها اینجا را ملاحظه کنید: https://wiki.openstreetmap.org/wiki/Fa:Notes
-\nجامعهٔ OSM در راستای پیشبرد پروژهٔ نقشه‌کشی تلاش می‌کند؛ برای ایجاد نقشه‌ای که آزادانه در اختیار همه باشد. برای اطلاع از جزئیات بیشتر به این وبسایت مراجعه کنید: https://openstreetmap.org .
+	<string name="osm_editing_plugin_description">به‌وسیلهٔ این افزونه در تکمیل نقشهٔ OSM مشارکت کنید. مثلاً با ایجاد یا اصلاح مکان‌های پرکاربرد (POI)، ارسال فایل‌های GPXای که ضبط کرده‌اید و نوشتن توضیحات ویرایشی. در مورد توضیحات ویرایشی یا اینجا را ملاحظه کنید:
+\nhttps://wiki.openstreetmap.org/wiki/Fa:Notes 
+\nجامعهٔ OSM در راستای پیشبرد پروژهٔ نقشه‌کشی تلاش می‌کند؛ برای ایجاد نقشه‌ای که آزادانه در اختیار همه باشد. برای اطلاع از جزئیات بیشتر به وبسایت آن مراجعه کنید:
+\nhttps://openstreetmap.org
 \nشما هم می‌توانید مستقیماً از طریق برنامهٔ OsmAnd در تکمیل نقشه مشارکت کنید. برای این منظور لازم است اطلاعات عضویت در سایت OSM را در برنامه وارد کنید.</string>
 	<string name="play_commands_of_currently_selected_voice">صدایی را انتخاب کنید و با پخش پیام‌ها، آن را امتحان کنید</string>
 	<string name="native_rendering">رندر بومی</string>
@@ -1128,7 +1148,7 @@
 	
 	<string name="update_poi_file_not_found">فایل محلی برای نگهداری تغییرات POI وجود ندارد و قابل‌ایجاد نیست.</string>
 	<string name="map_version_changed_info">فایل‌های نقشهٔ موجود در سایت با نسخهٔ فعلی نرم‌افزار سازگار نیست. لطفاً برای دانلود و استفاده از نقشه‌ها، نرم‌افزار را به نسخهٔ جدیدتر ارتقا دهید.</string>
-	<string name="poi_filter_nominatim">Nominatim آنلاین</string>
+	<string name="poi_filter_nominatim">جست‌وجو با نامی‌ناتیم</string>
 	
 	<string name="vector_data_missing">داده‌های آفلاین نقشه روی کارت حافظه وجود ندارد. لطفاً برای استفاده از نقشه‌های آفلاین، آن را دانلود کنید.</string>
 	<string name="local_index_gpx_info_show">"
@@ -1174,7 +1194,7 @@
 	<string name="renderers">رندرکنندهٔ بُرداری</string>
 	<string name="renderers_descr">شکل‌وشمایل رندر را انتخاب نمایید</string>
 	<string name="download_type_to_filter">فیلتر</string>
-	<string name="transport_context_menu">جست‌وجوی ایستگاه حمل و نقل عمومی</string>
+	<string name="transport_context_menu">جست‌وجوی ایستگاه حمل‌و‌نقل</string>
 	<string name="rotate_map_to_bearing_descr">نحوهٔ چرخش نقشه را انتخاب کنید</string>
 	<string name="layer_poi">POI…</string>
 	<string name="gps_provider">GPS</string>
@@ -1182,8 +1202,8 @@
 	<string name="opening_hours_not_supported">قالب ساعات کاری برای ویرایش پشتیبانی نمی‌شود</string>
 	<string name="add_new_rule">افزودن قانون جدید</string>
 	<string name="transport_Routes">مسیرها</string>
-	<string name="transport_search_after">گردش بعدی</string>	
-	<string name="transport_search_before">گردش قبلی</string>
+	<string name="transport_search_after">طرح سفر بعدی</string>	
+	<string name="transport_search_before">طرح سفر قبلی</string>
 	<string name="transport_finish_search">پایان جست‌وجو</string>
 	<string name="transport_stop_to_go_out">ایستگاهی را که پیاده می‌شوید انتخاب کنید</string>
 	<string name="transport_to_go_after">مسافت قبلی</string>
@@ -1272,7 +1292,7 @@
     <string name="routing_preferences_descr">ترجیحات مسیریابی</string>
     <string name="speech_rate_descr">سرعت گفتار موتور صوتی را مشخص کنید</string>
     <string name="speech_rate">سرعت گفتار</string>
-    <string name="guidance_preferences_descr">ترجیحات مسیریابی</string>
+    <string name="guidance_preferences_descr">ترجیحات راهبری</string>
     <string name="disable_complex_routing_descr">مسیریابی ۲مرحله‌ای را برای راهبری خودرویی غیرفعال کن</string>
     <string name="disable_complex_routing">غیرفعال‌کردن مسیریابی پیچیده</string>
     
@@ -1307,7 +1327,7 @@
     <string name="shared_string_favorite">برگزیده</string>
     <string name="route_preferences">ترجیحات مسیر</string>
     <string name="route_info">اطلاعات مسیر</string>
-    <string name="use_displayed_track_for_navigation">آیا از مسیر نمایش‌داده‌شده برای مسیریابی استفاده می‌کنید؟</string>
+    <string name="use_displayed_track_for_navigation">آیا از مسیر نمایش‌داده‌شده برای راهبری استفاده می‌کنید؟</string>
     <string name="keep_and_add_destination_point">افزودن به‌عنوان مقصد آخر</string>
     
     <string name="calculate_osmand_route_without_internet">محاسبهٔ مسیر بدون استفاده از اینترنت</string>
@@ -1374,15 +1394,15 @@
    	<string name="always_center_position_on_map">موقعیت را همیشه وسط صفحه نشان بده</string>
     <string name="voice_pref_title">صدا</string>
     <string name="misc_pref_title">متفرقه</string>
-    <string name="localization_pref_title">محلی‌سازی</string>
+    <string name="localization_pref_title">بومی‌سازی</string>
     <string name="osmo_plugin_name">مونیتورینگ OSM</string>
     <string name="interrupt_music_descr">هنگام اعلام پیام‌های صوتی، پخش موسیقی نگه داشته شود، نه اینکه فقط آهسته شود</string>
 	<string name="interrupt_music">مکث موسیقی</string>
 	<string name="share_route_as_gpx">اشتراک‌گذاری مسیر در قالب فایل GPX</string>
 	<string name="share_route_subject">مسیر از طریق OsmAnd به‌اشتراک گذاشته شد</string>
 	<string name="keep_informing_never">دستی (روی فِلِش بزنید)</string>
-    <string name="keep_informing_descr">دستورات مسیریابی در فواصل منظم دوباره اعلام می‌شود</string>
-    <string name="keep_informing">تکرار دستورات مسیریابی</string>
+    <string name="keep_informing_descr">دستورات راهبری در فواصل منظم دوباره اعلام می‌شود</string>
+    <string name="keep_informing">تکرار دستورات راهبری</string>
 	<string name="navigation_intent_invalid">قالب نامعتبر: %s</string>
 <string name="arrival_distance">اعلام رسیدن</string>
     
@@ -1396,7 +1416,7 @@
     <string name="minutes_ago">دقیقه قبل</string>
     <string name="seconds_ago">ثانیه قبل</string>
     <string name="osmo_connect_to_device_name">نام کاربری</string>
-    <string name="osmo_connect_to_device_tracker_id">ID ردیاب</string>
+    <string name="osmo_connect_to_device_tracker_id">شناسهٔ ردیاب</string>
     <string name="osmo_connect_to_device">پیوند با دستگاه</string>
     
     
@@ -1404,7 +1424,7 @@
     <string name="osmo_groups">گروه‌های OsMo</string>
     <string name="osmo_auto_send_locations_descr">پس از راه‌اندازی برنامه، به‌صورت خودکار سفر را شروع کن و مکان‌ها را ارسال کن</string>
     <string name="osmo_auto_send_locations">شروع خودکار سفر</string>
-    <string name="osmo_tracker_id">شناسه شخصی ردیاب</string>
+    <string name="osmo_tracker_id">شناسهٔ ردیاب</string>
     <string name="osmo_tracker_id_descr">برای مشاهدهٔ شناسهٔ ردیاب لمس کنید</string>
     <string name="osmo_session_token">توکن نشست: %1$s</string>
     <string name="osmo_auth_pending">در انتظار اعتبارسنجی…</string>
@@ -1432,7 +1452,7 @@
 	
 	
     <string name="osmo_edit_device">تغییر تنظیمات کاربر</string>
-    <string name="osmo_edit_color">نمایش رنگ</string>
+    <string name="osmo_edit_color">رنگ نمایش</string>
     <string name="osmo_group_info">اطلاعات</string>
     <string name="osmo_group">گروه OsMo</string>
     <string name="osmo_group_share">برای اتصال به گروه %2$s، شناسهٔ گروه را مشخص کنید (%1$s) یا اینجا را لمس کنید %3$s.</string>
@@ -1440,7 +1460,7 @@
     <string name="osmo_share_current_session">به‌اشتراک‌گذاشتن نشست جاری در مرورگر</string>
     <string name="osmo_cancel_moving_target">لغو جابه‌جایی مقصد</string>
     <string name="osmo_center_location">در مرکز صفحه قرار بده</string>
-    <string name="osmo_set_moving_target">تنظیم به عنوان مقصد</string>
+    <string name="osmo_set_moving_target">تنظیم به عنوان هدف متحرک</string>
     <string name="osmo_regenerate_login_ids_confirm">آیا دربارهٔ بازتولید شناسه‌های شخصی خود مطمئنید؟ تمام دستگاه‌های متصل، دیگر قادر به ردیابی شما نخواهند بود.</string>
     <string name="osmo_session_not_available">نشست در دسترس نیست. لطفاً ببینید «ارسال مکان‌ها» فعال باشد.</string>
     <string name="osmo_share_session">اشتراک‌گذاری نشست</string>
@@ -1459,7 +1479,7 @@
     <string name="osmo_connect">پیوستن</string>
     <string name="osmo_create_group">ساخت گروه</string>
     <string name="osmo_server_operation_failed">عملیات سرور OsMo ناموفق بود</string>
-    <string name="osmo_activity">مونیتورینگ OpenStreetMap</string>
+    <string name="osmo_activity">نظارت OpenStreetMap</string>
     <string name="osmo_enable_tracker">ارسال موقعیت من</string>
     <string name="osmo_control">دسترسی سریع OsMo</string>
     
@@ -1475,7 +1495,7 @@
     <string name="osmo_user_left">کاربر %1$s گروه را ترک کرد %2$s</string>
     <string name="osmo_show_group_notifications">نمایش اطلاعیه‌های گروه</string>
     <string name="osmo_show_group_notifications_descr">زمانی که کاربر به گروه می‌پیوندد یا گروه را ترک می‌کند، پیام محوشونده نشان بده</string>
-    <string name="loading_smth">در حال بارگیری %1$s…</string>
+    <string name="loading_smth">بارگیری %1$s…</string>
     <string name="map_widget_plain_time">زمان جاری</string>
     <string name="gpx_wpt">نقطهٔ بین‌راهی</string>
     <string name="selected_gpx_info_show">"
@@ -1510,7 +1530,7 @@
     <string name="select_destination_and_intermediate_points">انتخاب ایستگاه‌ها</string>
     <string name="layer_amenity_label">عنوان نقطه‌ها</string>
     
-    <string name="show_zoom_buttons_navigation_descr">دکمه‌های زوم را در حین مسیریابی نشان بده</string>
+    <string name="show_zoom_buttons_navigation_descr">دکمه‌های زوم را در حین راهبری نشان بده</string>
     <string name="show_zoom_buttons_navigation">نمایش دکمه‌های زوم</string>
     <string name="sort_by_distance">ترتیب براساس مسافت</string>
     <string name="sort_by_name">ترتیب براساس نام</string>
@@ -1518,11 +1538,12 @@
     
     <string name="local_index_select_gpx_file">برای نمایش انتخاب کنید</string>
     <string name="osmo_group_by_invite">ورود با دعوت</string>
-    <string name="osmo_group_information_desc">" - تمامی گروه های ایجاد شده عمومی می باشد! اگر می خواهید به صورت ناشناس وارد شوید، باید دستگاه را به طور مستقیم از طریق شناسه های آنلاین متصل نمایید. ↵
-\n  - گروه را می توان با 16 نفر ثبت کرد ↵.
-\n  - در صورت عدم فعالیت و یا تنها فعالیت 1 نفر به مدت 2 هفته، گروه حذف خواهد شد ↵.
-\n  - شما می توانید عضویت در گروه را تنها توسط دعوت محدود نمایید ، اما برای این کار نیاز به تغییر تنظیمات کنترل دارد ↵.
-\n  - اگر شما نیاز به ایجاد یک گروه دارید، با شرایط ما آشنا شوید http://osmo.mobi"</string>
+    <string name="osmo_group_information_desc">- تمامی گروه‌ها عمومی هستند! اگر می‌خواهید به‌صورت ناشناس وارد شوید، باید دستگاه را به‌طور مستقیم از طریق شناسهٔ ردگیری متصل نمایید.
+\n - گروه‌های خصوصی محدود به ۸ نفر هستند.
+\n - اگر تا ۲ هفته حداقل ۱ نفر فعالیتی نکند، گروه حذف خواهد شد.
+\n - می‌توانید عضویت در گروه را به عضویت از طریق دعوت محدود کنید، اما برای مدیرت گروه باید از طریق بخش مدیریت اقدام کنید.
+\n - قوانین و شرایط فعالیت را در وبسایت OsMo.mobi ببینید.
+\n - اگر به امکانات خاصی نیاز دارید، لطفاً با ما تماس بگیرید: osmo.mobi@gmail.com</string>
     <string name="osmo_group_information">لطفاً قبل از ایجاد گروه مطالعه نمایید!</string>
     <string name="osmo_not_signed_in">ورود به OsMo ناموفق بود</string>
     <string name="osmo_gpx_points_downloaded">نقاط OsMo %1$s دانلود شد.</string>
@@ -1530,7 +1551,7 @@
     <string name="osmo_auto_connect">اتصال خودکار</string>
     <string name="osmo_start_service">سرویس OsMo</string>
     <string name="osmo_gpx_track_downloaded">OsMo مسیر %1$s دانلود شد.</string>
-    <string name="no_index_file_to_download">فایلی برای دانلود پیدا نشد. لطفاً اتصال اینترنتتان را بررسی کنید.</string>
+    <string name="no_index_file_to_download">فایلی برای دانلود پیدا نشد. لطفاً اتصال اینترنت را بررسی کنید.</string>
     <string name="osmo_auth_error_short">اجازهٔ دسترسی احراز نشد</string>
     <string name="osmo_auth_error">تأیید مجوز OsMo با خطا مواجه شد: %1$s.
 \n شاید سرویس موقتاً پایین باشد یا اینکه اعتبار ثبت‌نامتان تمام شده است.
@@ -1558,7 +1579,7 @@
     <string name="targets">مقصدها</string>
     <string name="way_alarms">هشدارهای ترافیکی</string>
     <string name="speak_favorites">نقاط برگزیدهٔ اطراف</string>
-    <string name="speak_poi">POIهای اطراف</string>
+    <string name="speak_poi">مکان‌های POI نزدیک</string>
     <string name="download_additional_maps">آیا نقشه‌هایی را که ندارید، دانلود می‌کنید %1$s ‏(%2$d مگابایت)؟</string>
     <string name="shared_string_more">بیشتر…</string>
     <string name="rendering_value_browse_map_name">مرور نقشه</string>  
@@ -1569,8 +1590,8 @@
     <string name="osmo_invite">دعوت‌کردن…</string>
     <string name="osmo_leave_confirmation_msg">آیا گروه %1$s را ترک می‌کنید؟</string>
     <string name="osmo_specify_tracker_id">لطفا ID را وارد کنید</string>
-    <string name="continue_navigation">ادامهٔ مسیریابی</string>
-    <string name="pause_navigation">توقف مسیریابی</string>
+    <string name="continue_navigation">ادامهٔ راهبری</string>
+    <string name="pause_navigation">مکث‌کردن در راهبری</string>
     <string name="rendering_attr_subwayMode_name">مسیرهای مترو</string>
  	<string name="map_preferred_locale_descr">زبان ارجح برای نام‌های روی نقشه (اگر نام به این زبان وجود نداشته باشد، به‌جایش نام انگلیسی یا محلی نشان داده می‌شود)</string>
     <string name="local_map_names">نام‌های محلی</string>
@@ -1662,7 +1683,7 @@
 	<string name="map_locale">زبان نقشه</string>
     <string name="navigate_point_zone">ناحیه</string>
     <string name="download_tab_local">محلی</string>
-	<string name="no_internet_connection">دانلود امکان‌پذیر نیست، لطفاً اتصال اینترنتتان را بررسی کنید.</string>
+	<string name="no_internet_connection">دانلود امکان‌پذیر نیست، لطفاً اتصال اینترنت را بررسی کنید.</string>
     <string name="everything_up_to_date">همهٔ فایل‌ها به‌روز است</string>
     <string name="home_button">خانه</string>
     
@@ -1793,7 +1814,7 @@
     <string name="shared_string_go">برو</string>
 	<string name="osmand_parking_overdue">تأخیر دارید</string>
 	<string name="general_settings_2">تنظیمات کلی</string>
-	<string name="routing_settings_2">تنظیمات مسیریابی</string>
+	<string name="routing_settings_2">تنظیمات راهبری</string>
     <string name="shared_string_do_not_use">استفاده نشود</string>
 	<string name="rendering_attr_OSMMapperAssistant_name">همکار نقشه‌کش OSM</string>
 	<string name="osm_edits">ویرایش‌های OSM</string>
@@ -1898,7 +1919,7 @@
     <string name="contact_us">تماس با ما</string>
     <string name="map_legend">علائم نقشه</string>
     <string name="save_poi_without_poi_type_message">آیا واقعاً POI را بدون ذکر نوع آن ذخیره می‌کنید؟</string>
-    <string name="navigation_item_description">تنظیم مسیریابی</string>
+    <string name="navigation_item_description">تنظیم راهبری</string>
     <string name="planning_trip_item">طرح‌ریزی سفر</string>
     <string name="faq_item">سؤالات رایج</string>
     <string name="faq_item_description">سؤالاتی که زیاد پرسیده شده است</string>
@@ -1921,7 +1942,7 @@
     <!-- string name="lat_lon_pattern">طول: %1$.5f عرض: %2$.5f</string -->
     <string name="access_sort">مرتب‌سازی</string>
     <string name="number_of_gpx_files_selected_pattern">%s فایل GPX انتخاب شده است</string>
-    <string name="osm_live_email_desc">برای اینکه اطلاعاتی دربارهٔ مشارکت‌ها را برایتان ارسال کنیم، نوشتن آن لازم است</string>
+    <string name="osm_live_email_desc">برای اینکه دربارهٔ مشارکت‌ها اطلاعاتی برایتان ارسال کنیم، نوشتن آن لازم است</string>
     <string name="download_files_question_space_with_temp">آیا {0} فایل را دانلود می‌کنید؟ 
 \n{3} مگابایت برای ذخیره‌سازی موقت و {1} مگابایت برای ذخیره‌سازی دائمی لازم دارید. 
 \n{2} مگابایت فضای آزاد وجود دارد.</string>
@@ -1939,7 +1960,7 @@
     <string name="closing_at">بستن در</string>
     <string name="osm_live_payment_desc">هزینهٔ اشتراک ماهانه است. هر زمان که بخواهید می‌توانید اشتراک خود را در گوگل‌پلی لغو کنید.</string>
     <string name="donation_to_osm">کمک مالی به OpenStreetMap</string>
-    <string name="donation_to_osm_desc">بخشی از کمک‌های مالی به مشترکین OpenStreetMap که به تغییرات کمک می‌کنند ارسال می‌شود.هزینهٔ اشتراک ثابت می‌ماند.</string>
+    <string name="donation_to_osm_desc">بخشی از کمک‌های مالی به مشترکین OpenStreetMap که به تغییرات کمک می‌کنند ارسال می‌شود. هزینهٔ اشتراک ثابت می‌ماند.</string>
     <string name="osm_live_subscription_desc">این اشتراک، به‌روزرسانی‌های ساعتی، روزانه و هفتگی و همچنین دانلود نامحدود همهٔ نقشه‌ها در سراسر دنیا را فعال می‌کند.</string>
     <string name="get_it">انجام بده</string>
     <string name="get_for">پرداخت برای %1$s</string>
@@ -1999,7 +2020,7 @@
     <string name="access_direction_haptic_feedback_descr">نشان‌دادن جهت مقصد از طریق لرزاندن</string>
     <string name="use_osm_live_routing_description">مسیریابی از روی به‌روزرسانی‌های پویا فعال شود</string>
 	<string name="use_osm_live_routing">مسیریابی از روی داده‌های به‌روزرسانی پویا</string>
-    <string name="access_no_destination">مقصد مشخص نیست</string>
+    <string name="access_no_destination">مقصد تنظیم نشده است</string>
     <string name="map_widget_magnetic_bearing">سمت مغناطیسی</string>
     <string name="map_widget_bearing">سمت نسبی</string>
     <string name="access_disable_offroute_recalc">با خارج‌شدن از مسیر، مسیر تازه‌ای پیدا نکن</string>
@@ -2033,8 +2054,8 @@
     <string name="storage_permission_restart_is_required">اکنون برنامه اجازهٔ ذخیره‌سازی در کارت حافظه را دارد. برنامه را ببندید و دوباره اجرا کنید.</string>
     <string name="shared_string_move_up">برو بالا</string>
     <string name="shared_string_move_down">برو پایین</string>
-    <string name="finish_navigation">پایان مسیریابی</string>
-    <string name="avoid_road">اجتناب از جادهٔ</string>
+    <string name="finish_navigation">پایان راهبری</string>
+    <string name="avoid_road">اجتناب از این جاده</string>
     <string name="storage_directory_readonly_desc">"پوشهٔ ذخیره‌سازی فقط‌خواندنی است. پوشهٔ ذخیره‌سازی به‌طور موقت به حافظهٔ داخلی تغییر  کرد. لطفاً مکان ذخیره‌سازی معتبر را انتخاب نمایید."</string>
     <string name="storage_directory_shared">حافظهٔ مورداستفاده</string>
     <string name="shared_string_topbar">نوار بالا</string>
@@ -2151,7 +2172,7 @@
     <string name="shared_string_notifications">اعلان‌ها</string>
     <string name="shared_string_continue">ادامه</string>
     <string name="shared_string_pause">مکث</string>
-    <string name="shared_string_paused">مکث</string>
+    <string name="shared_string_paused">مکث‌کرده</string>
     <string name="shared_string_trip">سفر</string>
     <string name="shared_string_recorded">ضبط‌شده</string>
     <string name="shared_string_record">ضبط‌کردن</string>
@@ -2159,9 +2180,9 @@
     <string name="rendering_attr_contourColorScheme_description">رنگ‌بندی منحنی‌های تراز</string>
     <string name="save_track_min_speed">کمترین سرعت برای ورود به سیستم</string>
     <string name="save_track_precision">حداقل دقت برای ثبت</string>
-    <string name="christmas_poi">POI کریسمس</string>
+    <string name="christmas_poi">نقطهٔ POI کریسمس</string>
     <string name="christmas_desc">پیش‌بینی کریسمس و تعطیلات سال نو. برای نمایش POIهای مرتبط با کریسمس: درخت کریسمس، فروشگاه‌ها و غیره.</string>
-    <string name="christmas_desc_q">POIهای مربوط به کریسمس نمایش داده شود؟</string>
+    <string name="christmas_desc_q">آیا POIهای مربوط به کریسمس نمایش داده شود؟</string>
     <string name="rendering_value_light_brown_name">قهوه‌ای روشن</string>
     <string name="rendering_value_dark_brown_name">قهوه‌ای تیره</string>
     <string name="rendering_attr_contourColorScheme_name">رنگ‌بندی منحنی‌های تراز</string>
@@ -2182,9 +2203,9 @@
     <string name="show_on_map_after_saving">مشاهده بر روی نقشه پس از ذخیره‌شدن</string>
     <string name="measurement_tool_action_bar">نقشه را بپیمایید و نقاط را اضافه کنید</string>
     <string name="measurement_tool">اندازه‌گیری فاصله</string>
-    <string name="quick_action_resume_pause_navigation">ادامه/مکث مسیریابی</string>
-    <string name="quick_action_show_navigation_finish_dialog">نمایش پیغام پایان راهبری</string>
-    <string name="quick_action_start_stop_navigation">شروع/پایان مسیریابی</string>
+    <string name="quick_action_resume_pause_navigation">ادامه/مکث راهبری</string>
+    <string name="quick_action_show_navigation_finish_dialog">نمایش پیغام پایان‌یافتن راهبری</string>
+    <string name="quick_action_start_stop_navigation">شروع/اتمام راهبری</string>
     <string name="shared_string_reset">تنظیم مجدد</string>
     <string name="shared_string_reload">بارگیری مجدد</string>
     <string name="remove_from_map_markers">از نشانه‌های نقشه حذف شود</string>
@@ -2320,7 +2341,7 @@
     <string name="min_km">min/km</string>
     <string name="m_s">m/s</string>
     <string name="shared_string_trip_recording">ضبط سفر</string>
-    <string name="shared_string_navigation">مسیریابی</string>
+    <string name="shared_string_navigation">راهبری</string>
     <string name="osmand_running_in_background">درحال اجرا در پس‌زمینه</string>
     <string name="favourites_edit_dialog_title">اطلاعات علاقه‌مندی</string>
     <string name="simulate_your_location_stop_descr">شبیه‌سازی موقعیتتان را پایان دهید</string>
@@ -2349,11 +2370,11 @@
     <string name="shared_string_wikipedia">ویکیپدیا</string>
     <string name="local_recordings_delete_all_confirm">دارید %1$d یادداشت را پاک می‌کنید. آیا مطمئن هستید؟</string>
     <string name="osmand_parking_hour">س</string>
-    <string name="osmand_parking_minute">د</string>
+    <string name="osmand_parking_minute">دق‍</string>
     <string name="shared_string_collapse">جمع‌شونده</string>
     <string name="rendering_attr_roadStyle_description">ظاهر جاده</string>
     <string name="navigate_point_olc">کدِ مکانی باز (OLC)</string>
-    <string name="navigate_point_olc_info_invalid">OLC نامعتبر است
+    <string name="navigate_point_olc_info_invalid">کد OLC نامعتبر است
 \n</string>
     <string name="navigate_point_olc_info_short">کد OLC بیش از حد کوتاه است
 \nلطفاً کد کامل را ارائه دهید</string>
@@ -2373,7 +2394,7 @@
     <string name="lang_kn">کانادا</string>
     <string name="lang_sr_latn">صربی (لاتین)</string>
     <string name="lang_zh_hk">چینی (هنگ‌کنگ)</string>
-    <string name="route_is_too_long_v2">انگار این مسیر خیلی طولانی است. اگر تا ۱۰ دقیقهٔ دیگر مسیری پیدا نشد لطفاً چند تا مقصد بین‌راهی اضافه کنید.</string>
+    <string name="route_is_too_long_v2">انگار این مسیر خیلی طولانی است. اگر تا ۱۰ دقیقه مسیری پیدا نشد لطفاً چند تا مقصد میانی اضافه کنید.</string>
     <string name="driving_region_australia">استرالیا</string>
     <string name="add_segment_to_the_track">افزودن به مسیر GPX</string>
 <string name="shared_string_markers">نشانه‌ها</string>
@@ -2398,7 +2419,7 @@
     <string name="user_hates_app_get_feedback_long">لطفاً به ما بگویید دوست دارید چه چیزی در این برنامه تغییر بکند.</string>
     <string name="failed_to_upload">آپلود نشد</string>
     <string name="delete_change">حذف تغییر</string>
-    <string name="successfully_uploaded_pattern">آپلود شد {0}/{1}</string>
+    <string name="successfully_uploaded_pattern">{0} مورد از {1} مورد آپلود شد</string>
     <string name="try_again">تلاش مجدد</string>
     <string name="error_message_pattern">خطا: {0}</string>
     <string name="dahboard_options_dialog_title">پیکربندی پیشخوان</string>
@@ -2591,7 +2612,7 @@
     <string name="measurement_tool_snap_to_road_descr">برای پروفایل انتخابی، OsmAnd نقطه‌ها را به مسیرها متصل می‌کند.</string>
     <string name="choose_navigation_type">پروفایل راهبری را انتخاب کنید</string>
     <string name="none_point_error">لطفاً حداقل یک نقطه اضافه کنید.</string>
-    <string name="quick_action_resume_pause_navigation_descr">این دکمه را لمس کنید تا راهبری را متوقف کنید یا ادامه دهید.</string>
+    <string name="quick_action_resume_pause_navigation_descr">برای مکث‌کردن در/ادامه‌دادن به راهبری این دکمه را لمس کنید.</string>
     <string name="quick_action_start_stop_navigation_descr">این دکمه را لمس کنید تا راهبری را شروع کنید یا پایان دهید.</string>
     <string name="mapillary_menu_descr_tile_cache">کاشی‌ها را مجدداً بارگیری کنید تا اطلاعات به‌روز را ببینید.</string>
     <string name="mapillary_menu_title_tile_cache">حافظهٔ کاشی‌ها</string>
@@ -2606,7 +2627,7 @@
     <string name="mapillary_menu_filter_description">می‌توانید تصاویر را بر اساس تاریخ یا ارسال‌کنندهٔ آن فیلتر کنید. فیلترها فقط برای زوم نزدیک کار می‌کند.</string>
     <string name="map_widget_ruler_control">خط‌کش شعاعی</string>
     <string name="shared_string_permissions">مجوزها</string>
-    <string name="import_gpx_failed_descr">OsmAnd نمی‌تواند فایل را وارد کند. لطفاً بررسی کنید OsmAnd اجازهٔ خواندن فایل را داشته باشد.</string>
+    <string name="import_gpx_failed_descr">‏OsmAnd نمی‌تواند فایل را وارد کند. لطفاً بررسی کنید OsmAnd اجازهٔ خواندن فایل را داشته باشد.</string>
     <string name="mapillary_image">تصویر مپیلاری</string>
     <string name="open_mapillary">بازکردن مپیلاری</string>
     <string name="shared_string_install">نصب</string>
@@ -2635,7 +2656,7 @@
     <string name="hillshade_menu_download_descr">برای دیدن سایه‌تپهٔ پستی‌وبلندی‌ها روی نقشه باید نقشهٔ تپه‌سایه را برای این منطقه دانلود کنید.</string>
     <string name="hillshade_purchase_header">برای دیدن سایه‌تپهٔ پستی‌وبلندی‌ها روی نقشه باید افزونهٔ منحنی‌های تراز را بخرید و نصب کنید</string>
     <string name="hide_from_zoom_level">از این زوم پنهان شود</string>
-    <string name="srtm_menu_download_descr">برای دیدن منحنی‌های تراز روی نقشه باید نقشهٔ منحنی‌های تراز را برای این منطقه دانلود کنید.</string>
+    <string name="srtm_menu_download_descr">نقشهٔ منحنی تراز این منطقه را دانلود کنید تا منحنی‌های تراز را روی نقشه ببینید.</string>
     <string name="shared_string_plugin">افزونه</string>
     <string name="srtm_purchase_header">برای دیدن منحنی‌ها تراز روی نقشه باید افزونهٔ منحنی‌های تراز را بخرید و نصب کنید</string>
     <string name="srtm_color_scheme">رنگ‌بندی</string>
@@ -2653,7 +2674,7 @@
     <string name="depth_contour_descr">مجموعه‌نقشه‌های دارای نقاط و منحنی‌های تراز عمقی.</string>
     <string name="download_depth_countours">منحنی‌های تراز عمق دریا</string>
     <string name="do_not_send_anonymous_app_usage">آمار ناشناس مربوط به کارکرد برنامه را ارسال نکن</string>
-    <string name="do_not_send_anonymous_app_usage_desc">OsmAnd دربارهٔ قسمت‌هایی از برنامه که باز می‌کنید، اطلاعاتی جمع‌آوری می‌کند. موقعیت شما هرگز ارسال نمی‌شود و همچنین هر چیزی که در برنامه بنویسید یا جزئیات مناطقی که مشاهده، جست‌وجو یا دانلود می‌کنید، ارسال نمی‌شود.</string>
+    <string name="do_not_send_anonymous_app_usage_desc">‏OsmAnd دربارهٔ قسمت‌هایی از برنامه که باز می‌کنید، اطلاعاتی جمع‌آوری می‌کند. موقعیت شما هرگز ارسال نمی‌شود و همچنین هر چیزی که در برنامه بنویسید یا جزئیات مناطقی که مشاهده، جست‌وجو یا دانلود می‌کنید، ارسال نمی‌شود.</string>
     <string name="do_not_show_startup_messages_desc">نمایش تخفیف‌های برنامه و پیام‌های مربوط به اتفاقاتِ بخصوصِ محلی را لغو می‌کند</string>
     <string name="routing_attr_relief_smoothness_factor_more_plains_name">هموار</string>
     <string name="route_points_category_name">نقاطی که در این مسیر بر سر راهتان است</string>
@@ -2669,7 +2690,7 @@
 \n</string>
     <string name="auto_split_recording_descr">بعد از ۶ دقیقه وقفه، بخش جدید شروع می‌شود. بعد از ۲ ساعت وقفه، مسیر جدید شروع می‌شود. بعد از وقفهٔ طولانی‌تر درصورتی‌که تاریخ تغییر کند فایل جدید ایجاد می‌شود.</string>
     <string name="upload_osm_note_description">می‌توانید توضیحات ویرایشی OSM خود را به‌صورت ناشناس یا با نام کاربری سایت OpenStreetMap.org آپلود کنید.</string>
-    <string name="route_roundabout_short">به %1$d خروجی بروید و سپس به</string>
+    <string name="route_roundabout_short">خروجی %1$d را بگیرید و بروید</string>
     <string name="trip_rec_notification_settings_desc">در نوار اعلان دستگاه یک اعلان نشان می‌دهد که بتوانید ضبط سفر را شروع کنید</string>
     <string name="save_track_min_speed_descr">حداقل سرعتی که یک نقطه باید داشته باشد تا ثبت شود</string>
     <string name="save_track_min_distance_descr">فیلتر: حداقل فاصله‌ای که یک نقطه باید از موقعیت قبلی داشته باشد تا ثبت شود</string>
@@ -2747,30 +2768,30 @@
     <string name="add_route_points">افزودن نقاط مسیر</string>
     <string name="save_route_point">ذخیره‌کردن نقطهٔ مسیر</string>
     <string name="route_point_one">نقطهٔ مسیر 1</string>
-    <string name="shared_string_navigate">راهبری</string>
+    <string name="shared_string_navigate">مسیریابی کن</string>
     <string name="animate_my_location_desc">در هنگام راهبری نقشه بتواند برای نشان‌دادن موقعیت من جابه‌جا شود</string>
     <string name="rendering_value_fine_name">خوب</string>
-    <string name="plugin_nautical_descr">این افزونه قابلیت ارائهٔ نقشه‌های دریایی را به OsmAnd اضافه می‌کند. این نقشه‌ها برای قایقرانی، بادبانی‌رانی و دیگر انواع ورزش‌های آبی مفید است.
-\n
-\nاین افزونه همهٔ نشانگرهای ناوبری دریایی و جدول نمادها را ارائه می‌کند؛ هم برای بیرون دریا و هم کنارهٔ ساحل. توضیحات هر نشانگر جزئیات لازم برای شناخت مفهوم آن‌ها را فراهم می‌کند (دسته، شکل، رنگ، ترتیب، مراجعه و...).
-\n
-\nبرای برگشتن به یکی از سبک‌های قراردادی OsmAnd به‌راحتی این افزونه را غیرفعال کنید یا اینکه «سبک نقشه» را از طریق منوی «پیکربندی نقشه» به‌دلخواه خود تغییر دهید.</string>
+    <string name="plugin_nautical_descr">این افزونه قابلیت ارائهٔ نقشه‌های دریایی را به OsmAnd اضافه می‌کند. این نقشه‌ها برای قایقرانی، بادبانی‌رانی و دیگر انواع ورزش‌های آبی مفید است. 
+\n 
+\nاین افزونه همهٔ نشانگرهای ناوبری دریایی و جدول نمادها را ارائه می‌کند؛ هم برای ناوبری درون‌سرزمینی و هم کنارهٔ ساحل. همچنین با ارائهٔ جزئیات لازم، هر نشانگر معرفی و مفهومش شرح داده می‌شود (دسته، شکل، رنگ، ترتیب و توالی، ارجاع و...). 
+\n 
+\nبرای برگشتن به سبک‌های عادی OsmAnd، این افزونه را غیرفعال کنید یا اینکه «سبک نقشه» را از طریق منوی «پیکربندی نقشه» به‌دلخواه خود تغییر دهید.</string>
     <string name="plugin_ski_descr">با این افزونه اطلاعات جهانی سراشیبی‌های اسکی، مسابقات اسکی صحرایی، مسیرهای اسکی آلپاین، تله‌کابین‌ها و نقاله‌های اسکی کاملاً در اختیارتان است. مسیرها و پیست‌ها بر اساس دشواری رنگ‌بندی شده‌اند که در یک سبک زمستانی (Winter) ارائه می‌شوند تا نمایی همگون با محیط زمستانی را برایتان ایجاد کند.
 \n
 \nبا فعال‌کردن این نما، سبک نقشه به «Winter and ski» تغییر می‌کند که همهٔ خصوصیات زمین را با ظاهر زمستانی نشان می‌دهد. برای غیرفعال‌کردن این نما این افزونه را غیرفعال کنید یا اینکه از طریق منو ← پیکربندی نقشه ← سبک نقشه، سبک دلخواهتان را انتخاب کنید.</string>
-    <string name="osmand_extended_description_part1">OsmAnd (مخفف OSM Automated Navigation Directions به‌معنی راهبری خودکار با نقشهٔ OSM) یک نرم‌افزار نقشه و راهبری است که به گسترهٔ وسیعی از داده‌های نقشهٔ باز شهری (OpenStreetMap یا به‌صورت خلاصه OSM) دسترسی دارد. این داده‌های رایگان و جهانی با بالاترین کیفیت ارائه می‌شوند.
-\nراهبر دیداری و شنیداری، مشاهدهٔ مکان‌های محبوب (POIها یا Ponts of interest)، ایجاد و مدیریت ردهای GPX، استفاده از تصویرسازی‌های منحنی‌های تراز و اطلاعات ارتفاع (با استفاده از افزونه)، انتخاب حالت‌های پیاده، دوچرخه، خودرو، امکان ویرایش مکان‌ها و... چیزهایی هستند که تجربهٔ مؤثر و لذت‌بخشی در کار با نقشه را برایتان به ارمغان می‌آورند.</string>
+    <string name="osmand_extended_description_part1">برنامهٔ OsmAnd (مخفف OSM Automated Navigation Directions به‌معنی راهبری خودکار با نقشهٔ OSM) یک نرم‌افزار نقشه و راهبری است که به گسترهٔ وسیعی از داده‌های نقشهٔ باز شهری (OpenStreetMap یا به‌صورت خلاصه OSM) دسترسی دارد. این داده‌های رایگان و جهانی با بالاترین کیفیت ارائه می‌شوند. 
+\nراهبر دیداری و شنیداری، مشاهدهٔ مکان‌های محبوب (POIها یا Points of interest)، ایجاد و مدیریت ردهای GPX، استفاده از تصویرسازی منحنی‌های تراز و اطلاعات ارتفاع (با استفاده از افزونه)، انتخاب حالت‌های پیاده، دوچرخه، خودرو، امکان ویرایش مکان‌ها و... چیزهایی هستند که تجربهٔ مؤثر و لذت‌بخشی در کار با نقشه را برایتان به ارمغان می‌آورند.</string>
     <string name="osmand_extended_description_part2">راهبری با GPS • امکان انتخاب بین حالت آنلاین و آفلاین دارید؛ در حالت آفلاین هزینهٔ دیگری بابت اینترنت نمی‌پردازید و در حالت آنلاین عملکرد سریع‌تری را تجربه می‌کنید • راهنمای گام‌به‌گام صوتی که در پیمودن مسیر راهنمایی‌تان می‌کند (با پیام‌های صوتی انسانی و ماشینی) • اگر از مسیر منحرف شوید، مسیر جدیدی برایتان پیدا می‌کند • راهنمای خطوط عبوری، نام خیابان‌ها و زمان تخمینی رسیدن را دریافت می‌کنید که در طول مسیر راهنمای شماست • برای داشتن سفری ایمن‌تر، حالات شب/روز به‌صورت خودکار انتخاب می‌شود • اعلام محدودیت‌های سرعت را فعال کنید تا در صورت تجاوز از سرعت مجاز به شما هشدار دهد • بزرگ‌نمایی نقشه متناسب با سرعتتان تنظیم می‌شود • با استفاده از نشانی، نوع مکان (مثلاً پارکینگ، رستوران، هتل، پمپ گاز، موزه) یا مختصات جغرافیایی به جست‌وجو بپردازید • نقاط بین‌راهی مسیرتان را مشخص کنید • رد خودتان را ثبت کنید یا یک رد GPX را بارگیری و آن را دنبال کنید</string>
     <string name="distance_moving">مسافت اصلاح‌شده</string>
     <string name="legacy_search">جست‌وجوی موروثی</string>
     <string name="show_legacy_search">نمایش جست‌وجوی موروثی</string>
     <string name="show_legacy_search_desc">جست‌وجوی موروثی را به منو اضافه می‌کند</string>
     <string name="osmand_extended_description_part3">نقشه • نقاط محبوب (POI یا Points of interest) اطرافتان را نشان می‌دهد • نقشه را در راستای حرکتتان (یا قطب‌نما) تنظیم می‌کند • موقعیتتان یا جایی را که جست‌وجو کرده‌اید، نشانتان می‌دهد • موقعیتتان را با دوستانتان به‌اشتراک بگذارید تا شما را پیدا کنند • جاهایی را که دوست دارید در قسمت نقاط برگزیده ذخیره کنید • شیوهٔ نمایش نام‌های روی نقشه را انتخاب کنید: انگلیسی، محلی یا نویسه‌گردانی‌شده • نمایش نقشه‌های تخصصی آنلاین، تصاویر ماهواره‌ای (بینگ) و رولایه‌های مختلف مانند مسیرهای گردشگردی یا راهبری GPX با امکان تنظیم شفافیت</string>
-    <string name="release_2_8">• بازسازی کامل نشانه‌های نقشه همراه با خطوط راهنما و طرح‌ریزی مسیر 
-\n
-\n • قابلیت چسبیدن به جاده و ذخیره‌کردن نقاط به‌عنوان مسیر به ابزار اندازه‌گیری فاصله اضافه شد 
-\n
-\n • به‌روزرسانی پویا (OsmAnd Live): رفع ایرادات؛ داده‌های سرور هر ۳۰ دقیقه به‌روز می‌شود؛ به‌روزرسانی‌ها در راهبری به‌کار گرفته می‌شود
+    <string name="release_2_8">• نشانه‌های نقشه ضمن اضافه‌شدن قابلیت‌های خطوط راهنما و طرح‌ریزی مسیر به‌صورت کامل بازسازی شد
+\n 
+\n • قابلیت چسبیدن به جاده و ذخیره‌کردن نقاط به‌عنوان مسیر، به ابزار اندازه‌گیری فاصله اضافه شد 
+\n 
+\n • به‌روزرسانی پویا (OsmAnd Live): رفع ایرادات - داده‌های سرور هر ۳۰ دقیقه به‌روز می‌شود - به‌روزرسانی‌ها در مسیریابی استفاده می‌شود
 \n
 \n</string>
     <string name="context_menu_item_delete_waypoint">نقطهٔ بین‌راهی GPX را حذف می‌کنید؟</string>
@@ -2788,4 +2809,119 @@
     <string name="round_trip">سفر رفت‌وبرگشتی</string>
     <string name="plan_route_no_markers_toast">برای استفاده از این قابلیت باید حداقل یک نشانه اضافه کنید.</string>
     <string name="shared_string_road">جاده</string>
-    </resources>
+    <string name="release_2_6">• قابلیت جدید: دکمهٔ عملیات فوری
+\n
+\n • بهبود عملکرد و پاسخگویی عملیات لمسی (مثلاً بزرگ‌نمایی و حرکت همزمان)
+\n
+\n • فونت‌های جدید برای پشتیبانی از زبان‌های بیشتر
+\n
+\n • پشتیبانی از TTS برای گویش‌ها و لهجه‌های زبانی
+\n
+\n • بهبود نمایش سبک‌های نقشه و اطلاعات ویکی‌پدیا
+\n
+\n • پشتیبانی از کد مکانی باز (OLC)
+\n
+\n • نمایش ارتفاع، شیب و سرعت برای مسیرهای GPX ضبط‌شده و مسیرهای محاسبه‌شده
+\n
+\n • تنظیمات «حالت رانندگی» و بهبود مسیریابی برای دوچرخه
+\n
+\n • تنظیماتی برای بهره‌گیری از داده‌های ارتفاع در مسیریابی برای دوچرخه
+\n
+\n • رفع بسیاری از مشکلات دیگر و بهبود عملکرد برنامه 
+\n
+\n و…</string>
+    <string name="release_2_5">• نمادهای روی نقشه با یک‌بار لمس‌کردن انتخاب می‌شوند
+\n
+\n • جست‌وجوی قوی برای نقاط محبوب (POI): مثلاً جست‌وجوی رستوران‌ها بر اساس نوع غذا یا جست‌وجوی مکان‌های اسکان بر اساس امکاناتشان
+\n
+\n • سبک جدید Topo برای نقشه، مناسب برای دوچرخه‌سواران و پیاده‌گردان
+\n
+\n • بهبود ضبط سفر
+\n
+\n • بهبود اعلان‌های مسیریابی (اندروید پوشیدنی)
+\n
+\n • پشتیبانی از کد مکانی باز (OLC)
+\n
+\n • رفع بسیاری از مشکلات دیگر و بهبود عملکرد برنامه 
+\n
+\n و…</string>
+    <string name="release_2_3">• OSM Live یا به‌روزرسانی پویا (برای نقشه‌های آفلاین): حمایت از مشارکت‌کنندگان و توسعه‌دهندگان با ارائهٔ به‌روزرسانی‌های ساعتی برای نقشه.
+\n
+\n • نشانه‌های نقشه: شیوه‌ای نو برای انتخاب سریع مکان‌های روی نقشه.
+\n
+\n • جزئیات بیشتر در نقشه‌های OSM با شماره‌گذاری جاده‌های هر کشور (به شکل خاص آن کشور) و خیلی امکانات دیگر برای نقشه.
+\n
+\n • بهبود ظاهر آماده‌سازی مسیر.
+\n
+\n • بهبودهای بسیار در منوی زمینه‌ای نقشه مانند جست‌وجوی نشانی‌های اطراف.
+\n
+\n و…</string>
+    <string name="release_2_2">• رابط کاربری جدید که به لمس‌های کاربر بر روی نقشه و سایر نقاط صفحه واکنش نشان می‌دهد
+\n
+\n • صفحهٔ نقشه مستقیماً نشان داده می‌شود مگر اینکه «نمایش پیشخوان با شروع برنامه» انتخاب شده باشد
+\n
+\n • مشخص کنید کدام کارت‌ها و چگونه در پیشخوان نشان داده شود
+\n
+\n • اگر مایلید نقشه را از طریق منوی ثابت کنترل کنید، می‌توانید پیشخوان را کنار بگذارید
+\n
+\n • برای دانلود نقشه‌ها، اگر نقشهٔ جهانی را انتخاب کنید نقشهٔ هر منطقه مستقیماً برای دانلود در اختیارتان قرار خواهد داشت
+\n
+\n • می‌توانید در جست‌وجوی POIها از پرسش‌های خاص‌تر استفاده کنید
+\n
+\n • قابلیت ویرایش POIها بهبود یافته است
+\n
+\n • رابط کاربری و شیوهٔ دانلود اطلاعات نقشه‌ها بازسازی شده است
+\n
+\n و…</string>
+    <string name="av_locations_descr">فایل GPX با مکان‌های یادداشت‌دار</string>
+    <string name="osmand_plus_extended_description_part1">برنامهٔ OsmAnd+‎ (مخفف OSM Automated Navigation Directions به‌معنی راهبری خودکار با نقشهٔ OSM) یک نرم‌افزار نقشه و راهبری است که به گسترهٔ وسیعی از داده‌های نقشهٔ باز شهری (OpenStreetMap یا به‌صورت خلاصه OSM) دسترسی دارد. این داده‌های رایگان و جهانی با بالاترین کیفیت ارائه می‌شوند. 
+\nراهبر دیداری و شنیداری، مشاهدهٔ مکان‌های محبوب (POIها یا Points of interest)، ایجاد و مدیریت ردهای GPX، استفاده از تصویرسازی منحنی‌های تراز و اطلاعات ارتفاع، انتخاب حالت‌های پیاده، دوچرخه، خودرو، امکان ویرایش مکان‌ها و... چیزهایی هستند که تجربهٔ مؤثر و لذت‌بخشی را در کار با نقشه برایتان به ارمغان می‌آورد.
+\n‏OsmAnd+‎ نسخهٔ پولی این برنامه است. با خریدن آن از این پروژه حمایت می‌کنید، سرمایه‌ای برای توسعهٔ قابلیت‌های جدید فراهم می‌کنید و آخرین به‌روزرسانی‌ها در اختیارتان قرار می‌گیرد.
+\nاز ویژگی‌های مهم برنامه:</string>
+    <string name="plugin_touringview_descr">با فعال‌کردن این نما سبک نقشهٔ OsmAnd به نمای گردشگری (Touring view) تغییر می‌کند که سبکی با جزئیات فراوان و مناسب برای مسافران و رانندگان حرفه‌ای است.
+\n
+\nدر این نما و با هر سطحی از بزرگ‌نمایی، بیشترین مقدار جزئیات نقشه نمایش داده می‌شود (به‌خصوص جاده‌ها، مسیرها، راه‌ها و نشان‌های جهت‌نما).
+\n
+\nهمچنین همهٔ انواع جاده‌ها با رنگ‌بندی مناسب و بی‌ابهام نشان داده می‌شوند که مخصوصاً برای رانندگی با ماشین‌های سنگین مفید است.
+\n
+\nاین نما همچنین گزینه‌های گردشگری خاص مانند مسیرهای دوچرخه یا مسیرهای کوهستانی آلپاین را در اختیارتان می‌گذارد.
+\n
+\nبرای استفاده از این نما لازم نیست نقشهٔ خاصی را دانلود کنید. این نما بر اساس نقشه‌های استاندارد ایجاد می‌شود.
+\n
+\nبرای غیرفعال‌کردن این نما دو راه دارید: از همین‌جا غیرفعالش کنید یا اینکه به این قسمت بروید: منو ← پیکربندی نقشه ← سبک نقشه؛ سپس سبک دیگری را انتخاب کنید.</string>
+    <string name="osmand_extended_description_part4">اسکی
+\nبا استفاده از افزونهٔ نقشه‌های اسکی می‌توانید مسیرهای اسکی و میزان دشواری آن‌ها و یک‌سری اطلاعات دیگر را دربارهٔ آن‌ها ببینید؛ مانند نقاله‌ها و سایر امکانات.</string>
+    <string name="osmand_extended_description_part5">دوچرخه‌سواری • مسیرهای دوچرخه‌سواری را روی نقشه بیابید • در حالت دوچرخه، مسیریابی GPS بر اساس مسیرهای دوچرخه انجام می‌شود • ارتفاع و سرعتتان را مشاهده کنید • با استفاده از ضبط GPX مسیر سفرتان را ضبط کنید و به‌اشتراک بگذارید • با فعال‌کردن افزونه‌های دیگر می‌توانید منحنی‌های تراز و تپه‌سایه‌ها را ببینید</string>
+    <string name="osmand_extended_description_part6">پیاده‌روی، پیاده‌گردی و گردش در شهر • نقشه مسیرهای پیاده‌روی و پیاده‌گردی را نشانتان می‌دهد • هنگام گشت‌زدن در شهر، از طریق ویکی‌پدیا اطلاعات مفیدی در مورد مکان‌ها به‌دست آورید (به زبان خودتان) • ایستگاه‌های حمل‌ونقل عمومی (اتوبوس، تراموا، قطار)، همراه با نام خطوط، در شهرهای جدید کمک‌دست شما خواهند بود • راهبری GPS در حالت پیاده مسیرتان را بر اساس راه‌های پیاده محاسبه می‌کند • می‌توانید یک مسیر GPX را دنبال کنید یا اینکه مسیر خودتان را ضبط کنید و به‌اشتراک بگذارید</string>
+    <string name="osmand_extended_description_part7">مشارکت در نقشهٔ باز شهری (OSM) • گزارش مشکل در داده‌ها • آپلود مسیرهای GPX به OSM مستقیماً از طریق برنامه • افزودن مکان‌ها (POI) و آپلود مستقیم آن‌ها در نقشه</string>
+    <string name="wrong_format">قالب نادرست</string>
+    <string name="osmand_extended_description_part8">نرم‌افزار OsmAnd متن‌باز است و فعالانه در حال توسعهٔ آن هستیم. راه مشارکت در توسعهٔ OsmAnd هم به‌روی همه باز است؛ از طریق گزارش مشکلات برنامه، بهترکردن ترجمهٔ برنامه یا کدنویسی برای قابلیت‌های جدید. هم‌اکنون این پروژه با بهبودهای مستمرِ توسعه‌دهندگان و کاربران در همهٔ این زمینه‌ها، در وضعیت پویایی قرار دارد.
+\nهمچنین بخشی از پیشرفت پروژه متکی به هدایای مالی شماست که در راستای سرمایه‌گذاری برای توسعه و آزمایش قابلیت‌های جدید نرم‌افزار صرف می‌شود.
+\n
+\nپوشش و کیفیت تقریبی نقشه:
+\nاروپای غربی: **** • اروپای شرقی: *** • روسیه: *** • آمریکای شمالی: *** • آمریکای جنوبی: ** • آسیا: ** • ژاپن و کره: *** • آسیای غربی: ** • آفریقا: ** • جنوبگان: *
+\nبا این نرم‌افزار نقشهٔ بیشتر مناطق جهان را خواهید یافت!
+\nاز یک مسیریاب معتبر و قابل‌اعتماد استفاده کنید. هر کجا که هستید؛ در فرانسه، آلمان، انگلستان، مکزیک، آمریکا، هلند، ایران، روسیه، برزیل یا هر جای دیگر، فرقی نمی‌کند.</string>
+    <string name="osmand_plus_extended_description_part2">راهبری • امکان انتخاب بین حالت آنلاین (سریع) و آفلاین (بدون هزینهٔ اضافی بابت اینترنت) • راهنمای گام‌به‌گام صوتی (پیام‌های صوتی انسانی و ماشینی) • راهنمای خطوط عبوری، نام خیابان‌ها و زمان تخمینی رسیدن • پشتیبانی از نقاط بین‌راهی مسیر • اگر از مسیر منحرف شوید، مسیر جدیدی برایتان پیدا می‌کند • جست‌وجو با استفاده از نشانی، نوع مکان (مثلاً پارکینگ، رستوران، هتل، پمپ گاز، موزه) یا مختصات جغرافیایی</string>
+    <string name="osmand_plus_extended_description_part8">پوشش و کیفیت تقریبی نقشه:
+\nاروپای غربی: **** • اروپای شرقی: *** • روسیه: *** • آمریکای شمالی: *** • آمریکای جنوبی: ** • آسیا: ** • ژاپن و کره: *** • آسیای غربی: ** • آفریقا: ** • جنوبگان: *
+\nبا این نرم‌افزار نقشهٔ بیشتر مناطق جهان را خواهید یافت!
+\nهر کجا که هستید؛ در فرانسه، آلمان، انگلستان، مکزیک، آمریکا، هلند، ایران، روسیه، برزیل یا هر جای دیگر، فرقی نمی‌کند.</string>
+    <string name="osmand_plus_extended_description_part3">نمایش نقشه • نمایش موقعیت و جهت قرارگیری شما • نقشه را در راستای حرکتتان (یا قطب‌نما) تنظیم می‌کند • جاهایی را که دوست دارید در قسمت نقاط برگزیده ذخیره کنید • نقاط محبوب (POI یا Points of interest) اطرافتان را نشان می‌دهد • نمایش نقشه‌های تخصصی آنلاین، تصاویر ماهواره‌ای (بینگ) و رولایه‌های مختلف مانند مسیرهای گردشگردی یا راهبری GPX با امکان تنظیم شفافیت • شیوهٔ نمایش نام‌های روی نقشه را انتخاب کنید: انگلیسی، محلی یا نویسه‌گردانی‌شده</string>
+    <string name="osmand_plus_extended_description_part4">استفاده از اطلاعات ویکی‌پدیا و OSM • ارائهٔ اطلاعات درجه‌یک از طریق بهترین پروژه‌های گروهی در سرتاسر جهان • دسترسی به اطلاعات OSM بر اساس منطقه یا کشور • - POIهای ویکی‌پدیا که برای گردشگری بسیار مفید است • دانلود نامحدود مستقیماً از طریق برنامه • نقشه‌های بُرداری فشرده که حداقل ماهی یک بار به‌روز می‌شود • امکان انتخاب میان نقشهٔ کامل یا فقط شبکهٔ راه‌های یک منطقه (مثلاً نقشهٔ کامل ژاپن ۷۰۰ مگابایت است و نقشهٔ راه‌های ژاپن ۲۰۰ مگابایت است)</string>
+    <string name="osmand_plus_extended_description_part5">امکانات ایمنی • تغییر خودکار بین حالت شب یا روز • نمایش اختیاری محدودیت سرعت، با امکان هشدار در صورت تجاوز از سرعت مجاز • قابلیت اختیاری زوم وابسته به سرعت • مکانتان را با دوستانتان به‌اشتراک بگذارید تا شما را پیدا کنند</string>
+    <string name="osmand_plus_extended_description_part6">قابلیت‌های مخصوص به دوچرخه و پیاده • نمایش مسیرهای عبور پیاده، پیاده‌گردی و دوچرخه‌سواری؛ مناسب برای گشت و گذار • مسیریابی و حالت‌های نمایش اختصاصی برای دوچرخه و پیاده • ایستگاه‌های حمل‌ونقل عمومی (اتوبوس، تراموا، قطار) همراه با نام خطوط • قابلیت ضبط سفر و ذخیره‌کردن مسیر در فایل GPX یا فرستادن به سرویس‌های آنلاین • قابلیت نمایش سرعت و ارتفاع • امکان نمایش منحنی‌های تراز و سایه‌تپه‌ها (با نصب افزونه)</string>
+    <string name="osmand_plus_extended_description_part7">مشارکت مستقیم در نقشهٔ باز شهری (OSM) • گزارش مشکل در داده‌ها • آپلود مسیرهای GPX به OSM مستقیماً از طریق برنامه • افزودن مکان‌ها (POI) و آپلود مستقیم آن‌ها در نقشه • ضبط اختیاری سفر حتی در پس‌زمینه (هنگامی که دستگاه در حالت خواب است)
+\nنرم‌افزار OsmAnd متن‌باز است و فعالانه در حال توسعهٔ آن هستیم. راه مشارکت در توسعهٔ OsmAnd هم به‌روی همه باز است؛ از طریق گزارش مشکلات برنامه، بهترکردن ترجمهٔ برنامه یا کدنویسی برای قابلیت‌های جدید. هم‌اکنون این پروژه با بهبودهای مستمرِ توسعه‌دهندگان و کاربران در همهٔ این زمینه‌ها، در وضعیت پویایی قرار دارد.
+\nهمچنین بخشی از پیشرفت پروژه متکی به هدایای مالی شماست که در راستای سرمایه‌گذاری برای توسعه و آزمایش قابلیت‌های جدید نرم‌افزار صرف می‌شود.</string>
+    <string name="number_of_rows_in_dash">تعداد ردیف‌ها در هر صفحه %1$s</string>
+    <string name="wrong_input">ورودی نادرست</string>
+	<string name="enter_new_name">نام جدیدی بنویسید</string>
+	<string name="shared_string_back">عقب</string>
+	<string name="view">نما</string>
+	<string name="waypoints_added_to_map_markers">نقاط بین‌راهی به نشانه‌های نقشه اضافه شد</string>
+	<string name="import_gpx_file_description">را می‌توانید به‌عنوان یک مسیر یا نقاط برگزیده وارد کنید.</string>
+    <string name="import_as_gpx">ورود به‌عنوان فایل GPX</string>
+    <string name="import_as_favorites">ورود به‌عنوان نقاط برگزیده</string>
+    <string name="import_file">واردکردن فایل</string>
+	</resources>

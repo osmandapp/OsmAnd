@@ -78,6 +78,8 @@ import java.util.HashSet;
 import java.util.List;
 import java.util.Locale;
 import java.util.Set;
+import java.util.concurrent.ExecutorService;
+import java.util.concurrent.Executors;
 
 import static net.osmand.plus.OsmandApplication.SHOW_PLUS_VERSION_INAPP_PARAM;
 
@@ -124,6 +126,8 @@ public class DownloadActivity extends AbstractDownloadActivity implements Downlo
 	private boolean srtmNeedsInstallation;
 	private boolean nauticalPluginDisabled;
 	private boolean freeVersion;
+
+	private ExecutorService singleThreadExecutor = Executors.newSingleThreadExecutor();
 
 	@Override
 	protected void onCreate(Bundle savedInstanceState) {
@@ -784,7 +788,7 @@ public class DownloadActivity extends AbstractDownloadActivity implements Downlo
 				newDownloadIndexes();
 			}
 		};
-		task.execute();
+		task.executeOnExecutor(singleThreadExecutor);
 	}
 
 	

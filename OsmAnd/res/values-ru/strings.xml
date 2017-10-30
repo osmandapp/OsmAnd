@@ -19,8 +19,8 @@
     <string name="srtm_purchase_header">Для того, чтобы отобразить линии контуров рельефа, вам нужно купить и установить плагин</string>
     <string name="srtm_color_scheme">Цветовая схема</string>
     <string name="show_from_zoom_level">Отображать с масштаба</string>
-    <string name="animate_my_location">Анимация моего местоположения</string>
-    <string name="animate_my_location_desc">Разрешить анимацию моего местоположения на карте</string>
+    <string name="animate_my_location">Анимация моей позиции</string>
+    <string name="animate_my_location_desc">Включить анимацию прокрутки карты с моей позицией во время навигации</string>
     <string name="display_zoom_level">Масштаб: %1$s</string>
     <string name="favorite_group_name">Имя группы</string>
     <string name="change_color">Изменить цвет</string>
@@ -57,17 +57,17 @@
     <string name="fonts_header">Доп.шрифты для карты</string>
     <string name="analyze_on_map">Посмотреть на карте</string>
     <string name="nautical_maps">Морские карты</string>
-    <string name="download_depth_countours">Контуры глубин</string>
-    <string name="index_item_depth_contours_osmand_ext">Контуры глубин</string>
-    <string name="index_item_depth_points_southern_hemisphere">Точки глубин (южное полушарие)</string>
-    <string name="index_item_depth_points_northern_hemisphere">Точки глубин (северное полушарие)</string>
+    <string name="download_depth_countours">Морские контуры глубин</string>
+    <string name="index_item_depth_contours_osmand_ext">Морские контуры глубин</string>
+    <string name="index_item_depth_points_southern_hemisphere">Морские отметки глубин южного полушария</string>
+    <string name="index_item_depth_points_northern_hemisphere">Морские отметки глубин северного полушария</string>
     <string name="depth_contour_descr">Контуры и точки глубин.</string>
     <string name="subscribe_email_desc">Подпишитесь на нашу email рассылку про скидки на OsmAnd и получите 3 дополнительные загрузки карт!</string>
     <string name="subscribe_email_error">Ошибка</string>
     <string name="quick_action_auto_zoom">Автомасштаб карты вкл/выкл</string>
     <string name="quick_action_auto_zoom_desc">Нажатие на кнопку действия переключит автомасштаб карты.</string>
-    <string name="quick_action_auto_zoom_on">Автомасштаб включен</string>
-    <string name="quick_action_auto_zoom_off">Автомасштаб выключен</string>
+    <string name="quick_action_auto_zoom_on">Включение автомасштаба</string>
+    <string name="quick_action_auto_zoom_off">Отключение автомасштаба</string>
     <string name="quick_action_add_destination">Добавить пункт назначения</string>
     <string name="quick_action_replace_destination">Заменить пункт назначения</string>
     <string name="quick_action_add_first_intermediate">Добавить первую промежуточную точку</string>
@@ -773,8 +773,8 @@
     <string name="searching_address">Поиск адреса…</string>
     <string name="search_osm_nominatim">Поиск адреса в OSM Nominatim</string>
     <string name="hint_search_online">Онлайн поиск: Номер дома, улица, Город</string>
-    <string name="search_offline_address">Локальный</string>
-    <string name="search_online_address">Интернет</string>
+    <string name="search_offline_address">Офлайн поиск</string>
+    <string name="search_online_address">Онлайн поиск</string>
     <string name="max_level_download_tile">Уровень детализации</string>
     <string name="max_level_download_tile_descr">Выберите максимальный уровень для загрузки из Интернета</string>
     <string name="route_general_information">Общая протяженность = %1$s, время в пути = %2$d ч %3$d мин.</string>
@@ -2389,7 +2389,7 @@
     <string name="quick_action_navigation_voice_off">Голос выключен</string>
     <string name="quick_action_navigation_voice_on">Голос включен</string>
     <string name="file_can_not_be_moved">Файл не может быть перемещен.</string>
-    <string name="sea_depth_thanks">Спасибо за покупку контуров глубин!</string>
+    <string name="sea_depth_thanks">Благодарим вас за покупку морских контуров глубин!</string>
     <string name="shared_string_add_photos">Добавить фотографии</string>
     <string name="shared_string_permissions">Разрешения</string>
     <string name="online_photos">Онлайн фото</string>
@@ -2502,8 +2502,8 @@
     <string name="move_to_history">Переместить в историю</string>
     <string name="group_will_be_removed_after_restart">Группа будет удалена после перезагрузки</string>
     <string name="show_arrows_on_the_map">Показывать стрелки на карте</string>
-    <string name="descendingly">По убыванию</string>
-    <string name="ascendingly">По возрастанию</string>
+    <string name="descendingly">по убыванию</string>
+    <string name="ascendingly">по возрастанию</string>
     <string name="coordinates_format">Формат координат</string>
     <string name="use_system_keyboard">Использовать системную клавиатуру</string>
     <string name="fast_coordinates_input_descr">Выбор формата координат для ввода. Вы всегда можете изменить его, нажав опции.</string>
@@ -2530,11 +2530,33 @@
     <string name="marker_moved_to_history">Маркер перемещен в историю</string>
     <string name="marker_moved_to_active">Маркер перемещен в действующие</string>
     <string name="show_direction">Указатель расстояния</string>
-    <string name="release_2_8">• Полностью переработанные маркеры с рекомендациями и планированием маршрута 
+    <string name="release_2_8">• Полностью переработанные маркеры карты, с направляющими линиями и планированием маршрута 
 \n
-\n• Инструмент измерения расстояния, предлагающий привязку к дороге и сохранение точек в качестве трека
+\n• Инструмент измерения расстояния, с привязкой к дороге и сохранением точек в качестве трека
 \n
-\n• OSM Live: исправления ошибок, обновление данных на сервере каждые 30 минут, обновления вносимые в навигацию
+\n• OsmAnd Live: исправления ошибок, обновление данных на сервере каждые 30 минут, обновления учитываются в навигации
 \n
 \n</string>
+    <string name="show_map">Показать карту</string>
+    <string name="plan_route_no_markers_toast">Вы должны добавить по крайней мере один маркер, чтобы использовать эту функцию.</string>
+    <string name="osn_modify_dialog_error">Произошло исключение: заметка не изменена</string>
+    <string name="shared_string_road">Дорога</string>
+    <string name="show_guide_line">Показывать направляющую линию</string>
+    <string name="rendering_value_darkyellow_name">Темно-желтый</string>
+    <string name="osmand_extended_description_part8">Osmand это активно развивающийся проект с открытым исходным кодом. Благодаря открытости каждый может внести свой вклад в приложение сообщая об ошибках, улучшая перевод или кодируя новые функции. Проект находится в оживленном состоянии непрерывного совершенствования всеми этими формами взаимодействия разработчиков и пользователей. Прогресс проекта также зависит от денежных взносов для финансирования написания и тестирования новых функций. Примерная карта покрытия и качество: • Западная Европа: **** • Восточная Европа: *** • Россия: *** • Северная Америка: *** • Южная Америка: ** • Азия ** • Япония &amp; Корея: *** • Ближний Восток: ** • Африка: ** • Антарктида: * Большинство стран по всему миру доступны для скачивания! Получите надежный навигатор в вашей стране - будь то Франция, Германия, Мексика, Великобритания, Испания, Нидерланды, США, Россия, Бразилия или любая другая.</string>
+    <string name="osmand_plus_extended_description_part8">Примерная карта покрытия и качество: • Западная Европа: **** • Восточная Европа: *** • Россия: *** • Северная Америка: *** • Южная Америка: ** • Азия ** • Япония &amp; Корея: *** • Ближний Восток: ** • Африка: ** • Антарктида: * Большинство стран по всему миру доступны в виде загрузок! От Афганистана до Зимбабве, от Австралии до США. Аргентина, Бразилия, Канада, Франция, Германия, Мексика, Великобритания, Испания, …</string>
+    <string name="live_monitoring_max_interval_to_send">Временной буфер для онлайн слежения</string>
+    <string name="live_monitoring_max_interval_to_send_desrc">Укажите временной буфер для хранения местоположений при отсутствии подключения к сети</string>
+    <string name="quick_action_add_marker_descr">Нажатие на кнопку действия добавит маркер по центру экрана.</string>
+    <string name="quick_action_add_gpx_descr">Нажатие на кнопку действия добавит путевую точку GPX по центру экрана.</string>
+    <string name="quick_action_take_audio_note_descr">Нажатие на кнопку действия добавит аудио заметку по центру экрана.</string>
+    <string name="quick_action_take_video_note_descr">Нажатие на кнопку действия добавит видео заметку по центру экрана.</string>
+    <string name="quick_action_take_photo_note_descr">Нажатие на кнопку действия добавит фото заметку по центру экрана.</string>
+    <string name="quick_action_add_osm_bug_descr">Нажатие на кнопку действия добавит заметку OSM по центру экрана.</string>
+    <string name="quick_action_add_poi_descr">Нажатие на кнопку действия добавит POI по центру экрана.</string>
+    <string name="quick_action_navigation_voice_descr">Нажатие на кнопку действия выключит или включит голосовые подсказки во время навигации.</string>
+    <string name="quick_action_add_parking_descr">Нажатие на кнопку действия добавит место парковки по центру экрана.</string>
+    <string name="quick_action_interim_dialog">Показывать промежуточный диалог</string>
+    <string name="mappilary_no_internet_desc">Вам нужен Интернет для просмотра фотографий с Mapillary</string>
+    <string name="wrong_format">Неправильный формат</string>
     </resources>

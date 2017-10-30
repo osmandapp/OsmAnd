@@ -18,7 +18,7 @@ apply plugin: 'com.android.application'
 
 android {
 	compileSdkVersion 26
-	buildToolsVersion "26.0.1"
+	buildToolsVersion "26.0.2"
 
 	signingConfigs {
 		development {
@@ -39,10 +39,10 @@ android {
 	defaultConfig {
 		minSdkVersion System.getenv("MIN_SDK_VERSION") ? System.getenv("MIN_SDK_VERSION").toInteger() : 14
 		targetSdkVersion 23
-		versionCode 280
+		versionCode 300
 		versionCode System.getenv("APK_NUMBER_VERSION") ? System.getenv("APK_NUMBER_VERSION").toInteger() : versionCode
 		multiDexEnabled true
-		versionName "2.8.0"
+		versionName "3.0.0"
 		versionName System.getenv("APK_VERSION")? System.getenv("APK_VERSION").toString(): versionName
 		versionName System.getenv("APK_VERSION_SUFFIX")? versionName + System.getenv("APK_VERSION_SUFFIX").toString(): versionName
 	}
@@ -399,7 +399,7 @@ dependencies {
 		exclude group: 'com.android.support'
 	}
 	compile 'com.github.PhilJay:MPAndroidChart:v3.0.1'
-	compile ("com.github.HITGIF:TextFieldBoxes:1.3.4"){
+	compile ("com.github.HITGIF:TextFieldBoxes:1.3.2"){
 		exclude group: 'com.android.support'
 	}
 }

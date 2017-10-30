@@ -90,7 +90,7 @@ public class SettingsOsmEditingActivity extends SettingsBaseActivity {
 			if (positiveResult) {
 				settings.USER_NAME.set(userNameEditText.getText().toString());
 				settings.USER_PASSWORD.set(passwordEditText.getText().toString());
-				new ValidateOsmLoginDetailsTask(SettingsOsmEditingActivity.this).execute();
+				new ValidateOsmLoginDetailsTask(SettingsOsmEditingActivity.this).executeOnExecutor(AsyncTask.THREAD_POOL_EXECUTOR);
 			}
 		}
 	}

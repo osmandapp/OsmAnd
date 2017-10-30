@@ -663,7 +663,7 @@ La memoria utilizzata è  {1} MB.
     <string name="osm_editing_plugin_description">"Tramite questo plugin OsmAnd può essere utilizzato per contribuire a OSM con la creazione  o modifica dei PDI di OSM, aprendo o commentando le Note di OSM oppure inviando i file GPX registrati. OSM è un progetto comunitario di mappatura di pubblico dominio globale. Per maggiori informazioni visita https://openstreetmap.org. La partecipazione attiva è apprezzata e si può contribuire direttamente da OsmAnd specificando nell\'app le proprie credenziali di accesso OSM."</string>
     <string name="vector_maps_may_display_faster_on_some_devices">Le mappe vettoriali dovrebbero apparire più velocemente. Su certi dispositivi potrebbero non funzionare bene.</string>
 
-    <string name="play_commands_of_currently_selected_voice">Seleziona una voce e provane gli annunci vocali.</string>
+    <string name="play_commands_of_currently_selected_voice">Seleziona una voce e provane gli annunci vocali</string>
     <string name="debugging_and_development">Sviluppo di OsmAnd</string>
     <string name="native_rendering">Disegno nativo</string>
 
@@ -968,14 +968,9 @@ Memoria in proporzione %4$s MB (limite di Android %5$s MB, Dalvik %6$s MB).</str
     <string name="download_select_map_types">Altre mappe</string>
     <string name="download_srtm_maps">Linee isoipse</string>
     <string name="srtm_plugin_name">Linee isoipse</string>
-    <string name="srtm_plugin_description">"Questo plugin fornisce sia le curve di livello che lo strato ombreggiamento dei rilievi che possono essere visualizzati sopra alle mappe standard di OsmAnd. Questa funzionalità sarà molto apprezzata dagli atleti, dagli escursionisti, e tutti coloro che sono interessati all\'orografia e al paesaggio. (Per favore notare che linee isoipse e dati elevazione sono separati, una volta attivato il componente aggiuntivo saranno disponibili altri file scaricare.)
-
-I dati globali (fra i 70 gradi nord e 70 gradi sud) sono basati su misurazioni del SRTM (Shuttle Radar Topography Mission) e ASTER (Advanced Spaceborne Thermal Emission and Reflection Radiometer), lo strumento misuratore a bordo Terra, il satellite della NASA del sistema di osservazione della terra. ASTER è uno sforzo di cooperazione tra NASA, il Ministero dell\'Economia del Giappone, Commercio e Industria (METI) e sistema spaziale giapponese (J-spacesystems).
-
-
-
-Facilita il download delle linee di elevazione e l\'ombreggiamento dei rilievi (Impostazioni → Gestione file mappe → Download → Seleziona il tipo di mappa desiderato).
- "</string>
+    <string name="srtm_plugin_description">Questo plugin fornisce sia le curve di livello che lo strato ombreggiamento dei rilievi che possono essere visualizzati sopra alle mappe standard di OsmAnd. Questa funzionalità sarà molto apprezzata dagli atleti, dagli escursionisti, e tutti coloro che sono interessati all\'orografia del paesaggio. (Per favore notare che linee isoipse e dati elevazione sono separati, una volta attivato il componente aggiuntivo saranno disponibili altri file scaricare.)
+\n
+\nI dati globali (fra i 70 gradi nord e 70 gradi sud) sono basati su misurazioni del SRTM (Shuttle Radar Topography Mission) e ASTER (Advanced Spaceborne Thermal Emission and Reflection Radiometer), lo strumento per raccogliere immagini a bordo Terra, il satellite fiore all\'occhiello del Sistema Nasa di Osservazione della Terra . ASTER è uno sforzo di cooperazione tra NASA, il Ministero dell\'Economia del Giappone, Commercio e Industria (METI) e sistema spaziale giapponese (J-spacesystems).</string>
     <string name="index_srtm_ele">Linee isoipse</string>
     <string name="audionotes_plugin_description">Il componente aggiuntivo note Audio/video fornisce la funzionalità per prendere note audio/video/foto durante il viaggio, usando pulsante sulla schermata della mappa, oppure direttamente nel menù contestuale per ogni posizione sulla mappa.</string>
     <string name="audionotes_plugin_name">Note audio/video</string>
@@ -1602,7 +1597,7 @@ Vuoi procedere con una nuova registrazione?</string>
     <string name="rendering_attr_busRoutes_name">Percorsi in bus</string>
     <string name="rendering_attr_tramTrainRoutes_name">Percorsi tram e treno</string>
 
-    <string name="impassable_road">Evita strade …</string>
+    <string name="impassable_road">Evita strade…</string>
     <string name="rendering_category_hide">Nascondi</string>
     <string name="wake_on_voice">Accendi lo schermo</string>
     <string name="wake_on_voice_descr">Accendi lo schermo (se spento) all\'approssimarsi di una svolta</string>
@@ -2250,7 +2245,7 @@ Sono disponibili solo {2} MB.</string>
     <string name="number_of_recipients">Numero di destinatari</string>
     <string name="osm_user_stat">Modifiche %1$s, posizione %2$s, modifiche totali %3$s</string>
     <string name="osm_editors_ranking">Classifica contributori OSM</string>
-    <string name="osm_live_subscription">Sottoscrizione OSM Live</string>
+    <string name="osm_live_subscription">Sottoscrizione OsmAnd Live</string>
     <string name="osm_live_subscribe_btn">Sottoscrivi</string>
     <string name="osm_live_email_desc">Ne abbiamo bisogno per fornirti informazioni sui contributi</string>
     <string name="osm_live_user_public_name">Nome pubblico</string>
@@ -2265,14 +2260,14 @@ Sono disponibili solo {2} MB.</string>
     <string name="osm_live_thanks">Grazie per aver sottoscritto gli aggiornamenti live!</string>
     <string name="osm_live_region_desc">Parte della tua donazione sarà inviata agli utenti OSM che sottopongono modifiche alla mappa in quella regione</string>
     <string name="osm_live_subscription_settings">Impostazioni della sottoscrizione</string>
-    <string name="osm_live_ask_for_purchase">Per favore acquista prima la sottoscrizione a OSM Live</string>
+    <string name="osm_live_ask_for_purchase">Per favore acquista prima la sottoscrizione a OsmAnd Live</string>
 
     <string name="osm_live_header">La sottoscrizione abilita gli aggiornamenti orari per tutte le mappe del mondo.
 Parte degli incassi ritornano alla comunità OSM ed è corrisposto per ogni contributo OSM.
 Se ami OsmAnd e OSM e vuoi sostenerli, questo è un modo perfetto per farlo.</string>
     
     <string name="upload_anonymously">Carica anonimamente</string>
-    <string name="show_transparency_seekbar">Mostra la barra di ricerca trasparente</string>
+    <string name="show_transparency_seekbar">Mostra la barra di regolazione della trasparenza</string>
     <string name="shared_string_topbar">Barra superiore</string>
     <string name="recalculate_route">Ricalcola il percorso</string>
     <string name="shared_string_move_up">Sposta in alto</string>
@@ -2343,8 +2338,8 @@ Se ami OsmAnd e OSM e vuoi sostenerli, questo è un modo perfetto per farlo.</st
     <string name="access_direction_audio_feedback_descr">Indica la direzione di destinazione con il suono</string>
     <string name="access_direction_haptic_feedback">Feedback tattile di direzione</string>
     <string name="access_direction_haptic_feedback_descr">Indica la direzione di destinazione con la vibrazione</string>
-    <string name="use_osm_live_routing_description">Abilita la navigazione delle modifiche di OSM Live (Beta)</string>
-	<string name="use_osm_live_routing">Navigazione OSM Live</string>
+    <string name="use_osm_live_routing_description">Abilita la navigazione delle modifiche di OsmAnd Live</string>
+	<string name="use_osm_live_routing">Navigazione OsmAnd Live</string>
     <string name="map_widget_battery">Livello della batteria</string>
     <string name="lang_hu_formal">Ungherese (formale)</string>
     <string name="current_track">Tracciato attuale</string>
@@ -2464,21 +2459,21 @@ Se ami OsmAnd e OSM e vuoi sostenerli, questo è un modo perfetto per farlo.</st
     <string name="shared_string_recorded">Registrato</string>
     <string name="shared_string_record">Registra</string>
     <string name="gpx_logging_no_data">Nessun dato</string>
-    <string name="release_2_5">\\u2022 Icone sulla mappa cliccabili
+    <string name="release_2_5">\\022 Icone sulla mappa cliccabili 
 \n 
-\n • Potente filtro di ricerca dei PDI: ricerca dei ristoranti per tipo di cucina, campeggi per esigenze specifiche
-\n 
-\n 
-\n • Nuovo stile Topo per ciclisti ed escursionisti
+\n • Potente filtro di ricerca dei PDI: ricerca dei ristoranti per tipo di cucina, campeggi per esigenze specifiche 
 \n 
 \n 
-\n • Registrazione viaggio migliorata
+\n • Nuovo stile Topo per ciclisti ed escursionisti 
 \n 
 \n 
-\n • Notifiche di navigazione migliorate (Android Wear)
+\n • Registrazione viaggio migliorata 
 \n 
 \n 
-\n • Molti altri miglioramenti e correzioni di bug
+\n • Notifiche di navigazione migliorate (Android Wear) 
+\n 
+\n 
+\n • Molti altri miglioramenti e correzioni di bug 
 \n 
 \n 
 \n e altro…</string>
@@ -2664,7 +2659,7 @@ Rappresenta l\'area: %1$s x %2$s</string>
     <string name="routing_attr_driving_style_balance_name">Bilanciato</string>
     <string name="routing_attr_driving_style_safety_name">Preferisci strade secondarie</string>
     <string name="relief_smoothness_factor_descr">Terreno preferito: pianeggiante o collinoso</string>
-    <string name="routing_attr_relief_smoothness_factor_name">Seleziona la fluttuazione della quota</string>
+    <string name="routing_attr_relief_smoothness_factor_name">Seleziona la variabilità della quota</string>
     <string name="driving_region_automatic">Automatica</string>
     <string name="do_not_send_anonymous_app_usage">Non inviare statistiche anonime sull\'utilizzo dell\'app</string>
     <string name="do_not_send_anonymous_app_usage_desc">OsmAnd raccoglie informazioni su quale parti dell\'applicazione tu utilizzi. La tua geolocalizzazione non viene mai inviata, nemmeno qualsiasi dato che tu immetti nell\'app o dettagli sulle aree che visualizzi cerchi o scarichi.</string>
@@ -2922,4 +2917,23 @@ Rappresenta l\'area: %1$s x %2$s</string>
     <string name="move_point">Sposta il punto</string>
     <string name="add_segment_to_the_track">Aggiungi a una traccia GPX</string>
 <string name="osn_modify_dialog_error">Si é verificato un errore: la nota non è stata modificata</string>
+    <string name="shared_string_road">Strada</string>
+    <string name="show_map">Mostra la mappa</string>
+    <string name="route_is_calculated">Percorso ricalcolato</string>
+    <string name="round_trip">Percorso circolare</string>
+    <string name="plan_route_no_markers_toast">Devi aggiungere almeno un marcatore per utilizzare questa funzionalità.</string>
+    <string name="wrong_input">Dati immessi errati</string>
+	<string name="enter_new_name">Inserisci il nuovo nome</string>
+	<string name="shared_string_back">Indietro</string>
+	<string name="view">Vista</string>
+	<string name="waypoints_added_to_map_markers">Punti intermedi aggiunti ai marcatori della mappa</string>
+	<string name="wrong_format">Formato errato</string>
+    <string name="release_2_8">\\022 Rivisti completamente i marcatori, le indicazioni e la pianificazione del percorso 
+\n
+\n • Lo strumento di misura della distanza offre l\'aderisci alle strade e il salvataggio come traccia
+\n
+\n • OsmAnd Live: correzione di errori, dati aggiornati sul server ogni 30 minuti, aggiornamenti implementati nella navigazione
+\n
+\n</string>
+    <string name="rendering_value_darkyellow_name">Giallo scuro</string>
     </resources>

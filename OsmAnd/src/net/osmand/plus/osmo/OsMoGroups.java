@@ -1,5 +1,7 @@
 package net.osmand.plus.osmo;
 
+import android.os.AsyncTask;
+
 import com.google.gson.Gson;
 
 import net.osmand.Location;
@@ -381,7 +383,7 @@ public class OsMoGroups implements OsMoReactor, OsmoTrackerListener {
 						a.add(trackJson);
 					}
 				}
-				plugin.getDownloadGpxTask(true).execute(a.toArray(new JSONObject[a.size()]));
+				plugin.getDownloadGpxTask(true).executeOnExecutor(AsyncTask.THREAD_POOL_EXECUTOR, a.toArray(new JSONObject[a.size()]));
 				disableGroupTracks(gr, toDeleteT);
 			}
 
@@ -422,7 +424,7 @@ public class OsMoGroups implements OsMoReactor, OsmoTrackerListener {
 				}
 				if (points.size() > 0) {
 					plugin.getSaveGpxTask(gr.name + " points", modify, false, isGroupConnect)
-							.execute(points.toArray(new WptPt[points.size()]));
+							.executeOnExecutor(AsyncTask.THREAD_POOL_EXECUTOR, points.toArray(new WptPt[points.size()]));
 				}
 			}
 			if (deleteUsers) {

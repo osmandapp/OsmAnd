@@ -24,6 +24,7 @@ import android.graphics.Path;
 import android.graphics.Typeface;
 import android.graphics.drawable.Drawable;
 import android.net.Uri;
+import android.os.AsyncTask;
 import android.os.Build;
 import android.os.Bundle;
 import android.os.Handler;
@@ -167,7 +168,7 @@ public class OsMoGroupsActivity extends OsmandExpandableListActivity implements 
 		}
 		if (getIntent() != null) {
 			if ("http".equals(getIntent().getScheme())) {
-				new OsMoIntentHandler(app, osMoPlugin).execute(getIntent());
+				new OsMoIntentHandler(app, osMoPlugin).executeOnExecutor(AsyncTask.THREAD_POOL_EXECUTOR, getIntent());
 			}
 		}
 		setContentView(R.layout.osmo_group_list);

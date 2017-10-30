@@ -226,7 +226,7 @@ El espacio de almacenamiento usado es {1} MB.
     <string name="send_location">Enviar ubicación</string>
     <string name="context_menu_item_share_location">Compartir ubicación</string>
     <string name="add_waypoint_dialog_added">El punto GPX «{0}» fue añadido correctamente</string>
-    <string name="add_waypoint_dialog_title">Añadir el punto de referencia a la traza GPX grabada</string>
+    <string name="add_waypoint_dialog_title">Añadir punto de referencia a la traza GPX grabada</string>
     <string name="context_menu_item_add_waypoint">Añadir punto GPX</string>
     <string name="amenity_type_administrative">Administrativo</string>
     <string name="amenity_type_barrier">Barrera</string>
@@ -2044,7 +2044,7 @@ El espacio de almacenamiento usado es {3} MB temporalmente y {1} MB permanenteme
     <string name="number_of_recipients">Número de receptores</string>
     <string name="osm_user_stat">Ediciones %1$s, posición %2$s, total de ediciones %3$s</string>
     <string name="osm_editors_ranking">Valoración de editores OSM</string>
-    <string name="osm_live_subscription">Suscripción a OSM en directo</string>
+    <string name="osm_live_subscription">Suscripción a OsmAnd Live</string>
     <string name="osm_live_subscribe_btn">Suscribirse</string>
     <string name="osm_live_email_desc">Lo necesitamos para proporcionarte información sobre contribuciones</string>
     <string name="osm_live_user_public_name">Nombre público</string>
@@ -2059,7 +2059,7 @@ El espacio de almacenamiento usado es {3} MB temporalmente y {1} MB permanenteme
     <string name="osm_live_thanks">Gracias por suscribirte a actualizaciones en directo!</string>
     <string name="osm_live_region_desc">"Parte de tu donación se enviará a los usuarios OSM que  realicen cambios en el mapa en esa región"</string>
     <string name="osm_live_subscription_settings">Configuración de la suscripción</string>
-    <string name="osm_live_ask_for_purchase">Por favor adquiere primero una suscripción a OSM en directo</string>
+    <string name="osm_live_ask_for_purchase">Por favor adquiere primero una suscripción a OsmAnd Live</string>
 
     <string name="osm_live_header">"Esta suscripción permite actualizaciones cada hora para  los mapas de todo el mundo. Parte de los ingresos va a la comunidad OSM y se paga por cada contribución a OSM. Si te gustan OsmAnd y OSM y quieres apoyarlos, ésta es la manera perfecta de hacerlo."</string>
     
@@ -2122,8 +2122,8 @@ El espacio de almacenamiento usado es {3} MB temporalmente y {1} MB permanenteme
     <string name="access_direction_audio_feedback_descr">Indica la dirección del punto objetivo mediante sonido</string>
     <string name="access_direction_haptic_feedback">Realimentación háptica de la dirección</string>
     <string name="access_direction_haptic_feedback_descr">Indica la dirección del punto destino mediante vibración</string>
-    <string name="use_osm_live_routing_description">Habilita la navegación para los cambios de OSM en vivo (Beta)</string>
-	<string name="use_osm_live_routing">Navegación de OSM en vivo</string>
+    <string name="use_osm_live_routing_description">Habilita la navegación para los cambios en vivo de OsmAnd</string>
+	<string name="use_osm_live_routing">Navegación de OsmAnd Live</string>
     <string name="access_no_destination">El destino no está fijado</string>
     <string name="map_widget_magnetic_bearing">Rumbo magnético</string>
     <string name="map_widget_bearing">Rumbo relativo</string>
@@ -2729,4 +2729,23 @@ Por favor proporciona un código completo</string>
     <string name="make_round_trip_descr">Duplica el punto de inicio y lo añade como destino.</string>
     <string name="make_round_trip">Viaje de ida y vuelta</string>
     <string name="shared_string_navigate">Navegar</string>
-    </resources>
+    <string name="wrong_format">Formato incorrecto</string>
+    <string name="shared_string_road">Carretera</string>
+    <string name="show_map">Mostrar mapa</string>
+    <string name="route_is_calculated">Ruta calculada</string>
+    <string name="round_trip">Viaje de ida y vuelta</string>
+    <string name="plan_route_no_markers_toast">Debes añadir al menos un marcador para usar esta función.</string>
+    <string name="release_2_8">• Marcadores del mapa totalmente rediseñados con directrices y planificación de rutas 
+\n 
+\n • La herramienta de medición de distancias permite el ajuste al camino y guardar puntos como una traza 
+\n 
+\n • OSM Live: corrección de errores, nuevos datos en el servidor cada 30 minutos, actualizaciones implementadas en la navegación 
+\n 
+\n</string>
+    <string name="rendering_value_darkyellow_name">Amarillo oscuro</string>
+    <string name="wrong_input">Entrada incorrecta</string>
+    <string name="enter_new_name">Ingresar nombre nuevo</string>
+    <string name="shared_string_back">Atrás</string>
+    <string name="view">Ver</string>
+	<string name="waypoints_added_to_map_markers">Puntos de referencia añadidos a marcadores de mapa</string>
+	</resources>

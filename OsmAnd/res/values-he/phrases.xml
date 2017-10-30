@@ -752,4 +752,39 @@
 	<string name="poi_mountain_area">אזור הררי</string>
 
 	<string name="poi_surface_clay">חימר</string>
+	<string name="poi_electrical">חנות חשמל</string>
+	<string name="poi_locksmith">חנות מנעולים</string>
+	<string name="poi_gambling_lottery">לוטו</string>
+	<string name="poi_gambling_pachinko">פצ׳ינקו</string>
+	<string name="poi_location_underground">מיקום: מתחת לאדמה</string>
+	<string name="poi_location_underwater">מיקום: מתחת לפני המים</string>
+	<string name="poi_location_overground">מיקום: מעל הקרקע</string>
+	<string name="poi_location_overhead">מיקום: ממעל</string>
+	<string name="poi_location_roof">מיקום: גג</string>
+	<string name="poi_location_rooftop">מיקום: על גג בניין</string>
+	<string name="poi_location_outdoor">מיקום: בחוץ</string>
+	<string name="poi_location_indoor">מיקום: בפנים</string>
+	<string name="poi_location_platform">מיקום: רציף</string>
+	<string name="poi_location_kiosk">מיקום: פיצוציה</string>
+	<string name="poi_location_bridge">מיקום: גשר</string>
+	<string name="poi_location_wall">מיקום: קיר</string>
+	<string name="poi_location_entrance">מיקום: כניסה</string>
+
+	<string name="poi_visibility_house">מיקום: בית</string>
+	<string name="poi_visibility_street">מיקום: רחוב</string>
+	<string name="poi_visibility_area">מיקום: איזור</string>
+
+<string name="poi_takeaway">איסוף עצמי</string>
+	<string name="poi_dish">מנה</string>
+	<string name="poi_operational_status">מצב תפעולי</string>
+	<string name="poi_water_supply_type">סוג אספקת מים</string>
+	<string name="poi_water_purification">טיהור מים</string>
+	<string name="poi_water_place_access">גישה למקום מים</string>
+
+<string name="poi_ford">מעבר על שפך נחל</string>
+	<string name="poi_fuel_1_25">דלק 1:25</string>
+	<string name="poi_slipway">ממשה</string>
+	<string name="poi_aerialway_chair_lift">מעלית סקי בישיבה</string>
+	<string name="poi_aerialway_drag_lift">מעלית סקי בגרירה</string>
+	<string name="poi_wastewater_plant">מפעל לטיהור שופכין</string>
 	</resources>

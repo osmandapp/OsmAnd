@@ -1368,7 +1368,6 @@
 	<string name="poi_payment_bancomat_no">Bancomat не принимается</string>
 	<string name="poi_payment_icsf_yes">Карты IC Stored Fare</string>
 	<string name="poi_payment_icsf_no">Карты IC Stored Fare не принимаются</string>
-	<string name="poi_payment_prepaid_ticket_yes">Prepaid tickets</string>
 	<string name="poi_payment_jcb_yes">JCB</string>
 	<string name="poi_payment_jcb_no">Карты JCB не принимаются</string>
 	<string name="poi_payment_laser_yes">Laser</string>
@@ -3509,5 +3508,138 @@
 	<string name="poi_government_legislative">Законодательное учреждение</string>
 
 	<string name="poi_surface_clay">Глина</string>
+
+	<string name="poi_location_underground">Местонахождение: под землёй</string>
+	<string name="poi_location_underwater">Местонахождение: под водой</string>
+	<string name="poi_location_overground">Местонахождение: над землёй</string>
+	<string name="poi_location_overhead">Местонахождение: наверху</string>
+	<string name="poi_location_roof">Местонахождение: крыша</string>
+	<string name="poi_location_outdoor">Местонахождение: на открытом воздухе</string>
+	<string name="poi_location_indoor">Местонахождение: в помещении</string>
+	<string name="poi_location_platform">Местонахождение: на платформе</string>
+	<string name="poi_location_bridge">Местонахождение: на мосту</string>
+	<string name="poi_location_wall">Местонахождение: на стене</string>
+	<string name="poi_location_entrance">Местонахождение: у входа</string>
+
+	<string name="poi_visibility_house">Видимость: дом</string>
+	<string name="poi_visibility_street">Видимость: улица</string>
+	<string name="poi_visibility_area">Видимость: площадь</string>
+
+	<string name="poi_operational_status">Рабочее состояние</string>
+	<string name="poi_operational_status_open">Открыто</string>
+	<string name="poi_operational_status_closed">Закрыто</string>
+	<string name="poi_operational_status_restricted">Ограничено</string>
+	<string name="poi_operational_status_broken">Сломано</string>
+	<string name="poi_operational_status_needs_maintenance">Требуется обслуживание</string>
+
+	<string name="poi_water_place_durability_durable">Прочность водостока: прочный</string>
+	<string name="poi_water_place_durability_emergency">Прочность водостока: для экстренного использования</string>
+
+	<string name="poi_water_supply_type">Тип водоснабжения</string>
+	<string name="poi_water_purification">Очистка воды</string>
+
+	<string name="poi_water_purification_none">Нет</string>
+	<string name="poi_water_purification_chlorine">Хлорирование</string>
+	<string name="poi_water_purification_reverse_osmosis">Обратный осмос</string>
+	<string name="poi_water_purification_aquatabs">Таблетки для дезинфекции воды</string>
+
+	<string name="poi_water_supply_water_well">Колодец</string>
+	<string name="poi_water_supply_pipeline">Трубопровод</string>
+	<string name="poi_water_supply_running_water">Проточная вода</string>
+	<string name="poi_water_supply_pump">Насос</string>
+	<string name="poi_water_supply_borehole">Скважина</string>
+	<string name="poi_water_supply_water_trucking">Доставка воды</string>
+	<string name="poi_water_supply_water_tank">Резервуар для воды</string>
+	<string name="poi_water_supply_bottled_water">Бутилированная вода</string>
+
+	<string name="poi_water_place_access">Доступ к водоснабжению</string>
+	<string name="poi_water_place_access_community">Сообщество</string>
+	<string name="poi_water_place_access_family">Семья</string>
+	<string name="poi_water_place_access_multifamilies">Несколько семей</string>
+
+	<string name="poi_socket_cee_blue">Разъём: CEE blue</string>
+	<string name="poi_socket_cee_blue_current">Разъём: CEE blue: ток</string>
+	<string name="poi_socket_cee_blue_output">Разъём: CEE blue: мощность</string>
+	<string name="poi_socket_cee_red_16a">Разъём: CEE red 16A</string>
+	<string name="poi_socket_cee_red_16a_current">Разъём: CEE red 16A: ток</string>
+	<string name="poi_socket_cee_red_16a_output">Разъём: CEE red 16A: мощность</string>
+	<string name="poi_socket_cee_red_32a">Разъём: CEE red 32A</string>
+	<string name="poi_socket_cee_red_32a_current">Разъём: CEE red 32A: ток</string>
+	<string name="poi_socket_cee_red_32a_output">Разъём: CEE red 32A: мощность</string>
+	<string name="poi_socket_cee_red_64a">Разъём: CEE red 64A</string>
+	<string name="poi_socket_cee_red_64a_current">Разъём: CEE red 64A: ток</string>
+	<string name="poi_socket_cee_red_64a_output">Разъём: CEE red 64A: мощность</string>
+	<string name="poi_socket_cee_red_125a">Разъём: CEE red 125A</string>
+	<string name="poi_socket_cee_red_125a_current">Разъём: CEE red 125A: ток</string>
+	<string name="poi_socket_cee_red_125a_output">Разъём: CEE red 125A: мощность</string>
+	<string name="poi_socket_type1">Разъём: Type 1</string>
+	<string name="poi_socket_type1_current">Разъём: Type 1: ток</string>
+	<string name="poi_socket_type1_output">Разъём: Type 1: мощность</string>
+	<string name="poi_socket_type1_combo">Разъём: Type 1 combo</string>
+	<string name="poi_socket_type1_combo_current">Разъём: Type 1 combo: ток</string>
+	<string name="poi_socket_type1_combo_output">Разъём: Type 1 combo: мощность</string>
+	<string name="poi_socket_type2">Разъём: Type 2</string>
+	<string name="poi_socket_type2_current">Разъём: Type 2: ток</string>
+	<string name="poi_socket_type2_output">Разъём: Type 2: мощность</string>
+	<string name="poi_socket_type2_combo">Разъём: Type 2 combo</string>
+	<string name="poi_socket_type2_combo_current">Разъём: Type 2 combo: ток</string>
+	<string name="poi_socket_type2_combo_output">Разъём: Type 2 combo: мощность</string>
+	<string name="poi_socket_type3">Разъём: Type 3</string>
+	<string name="poi_socket_type3_current">Разъём: Type 3: ток</string>
+	<string name="poi_socket_type3_output">Разъём: Type 3: мощность</string>
+	<string name="poi_socket_chademo">Разъём: CHAdeMO</string>
+	<string name="poi_socket_chademo_current">Разъём: CHAdeMO: ток</string>
+	<string name="poi_socket_chademo_output">Разъём: CHAdeMO: мощность</string>
+	<string name="poi_socket_tesla_standard">Разъём: Tesla standard</string>
+	<string name="poi_socket_tesla_standard_current">Разъём: Tesla standard: ток</string>
+	<string name="poi_socket_tesla_standard_output">Разъём: Tesla standard: мощность</string>
+	<string name="poi_socket_tesla_supercharger">Разъём: Tesla Supercharger</string>
+	<string name="poi_socket_tesla_supercharger_current">Разъём: Tesla Supercharger: ток</string>
+	<string name="poi_socket_tesla_supercharger_output">Разъём: Tesla Supercharger: мощность</string>
+	<string name="poi_socket_tesla_roadster">Разъём: Tesla Roadster</string>
+	<string name="poi_socket_tesla_roadster_current">Разъём: Tesla Roadster: ток</string>
+	<string name="poi_socket_tesla_roadster_output">Разъём: Tesla Roadster: мощность</string>
+	<string name="poi_socket_nema_5_15">Разъём: NEMA 5-15R</string>
+	<string name="poi_socket_nema_5_15_current">Разъём: NEMA 5-15R: ток</string>
+	<string name="poi_socket_nema_5_15_output">Разъём: NEMA 5-15R: мощность</string>
+	<string name="poi_socket_nema_5_20">Разъём: NEMA 5-20</string>
+	<string name="poi_socket_nema_5_20_current">Разъём: NEMA 5-20: ток</string>
+	<string name="poi_socket_nema_5_20_output">Разъём: NEMA 5-20: мощность</string>
+	<string name="poi_socket_nema_14_30">Разъём: NEMA 14-30</string>
+	<string name="poi_socket_nema_14_30_current">Разъём: NEMA 14-30: ток</string>
+	<string name="poi_socket_nema_14_30_output">Разъём: NEMA 14-30: мощность</string>
+	<string name="poi_socket_nema_14_50">Разъём: NEMA 14-50</string>
+	<string name="poi_socket_nema_14_50_current">Разъём: NEMA 14-50: ток</string>
+	<string name="poi_socket_nema_14_50_output">Разъём: NEMA 14-50: мощность</string>
+	<string name="poi_socket_schuko">Разъём: Schuko</string>
+	<string name="poi_socket_schuko_current">Разъём: Schuko: ток</string>
+	<string name="poi_socket_schuko_output">Разъём: Schuko: мощность</string>
+	<string name="poi_socket_bs1363">Разъём: BS 1363</string>
+	<string name="poi_socket_bs1363_current">Разъём: BS 1363: ток</string>
+	<string name="poi_socket_bs1363_output">Разъём: BS 1363: мощность</string>
+	<string name="poi_socket_as3112">Разъём: AS/NZS 3112</string>
+	<string name="poi_socket_as3112_current">Разъём: AS/NZS 3112: ток</string>
+	<string name="poi_socket_as3112_output">Разъём: AS/NZS 3112: мощность</string>
+
+	<string name="poi_car_yes">Автомобиль: да</string>
+	<string name="poi_car_no">Автомобиль: нет</string>
+	<string name="poi_bicycle_yes">Велосипед: да</string>
+	<string name="poi_bicycle_no">Велосипед: нет</string>
+	<string name="poi_scooter_yes">Скутер: да</string>
+	<string name="poi_scooter_no">Скутер: нет</string>
+	<string name="poi_truck_yes">Грузовик: да</string>
+	<string name="poi_truck_no">Грузовик: нет</string>
+
+	<string name="poi_parking_fee_yes">Оплата за парковку: да</string>
+	<string name="poi_parking_fee_no">Оплата за парковку: нет</string>
+	<string name="poi_amperage">Ток</string>
+	<string name="poi_charging_station_output">Мощность зарядной станции</string>
+
+	<string name="poi_map_type_topo">Тип карты: топографическая</string>
+	<string name="poi_map_type_street">Тип карты: карта улиц</string>
+	<string name="poi_map_type_scheme">Тип карты: схематическая</string>
+	<string name="poi_map_size_site">Охват карты: место</string>
+	<string name="poi_map_size_city">Охват карты: город</string>
+	<string name="poi_map_size_region">Охват карты: регион</string>
 
 </resources>

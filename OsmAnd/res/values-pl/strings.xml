@@ -2271,7 +2271,7 @@ Długość %2$s</string>
     <string name="finish_navigation">Zakończ nawigację</string>
     <string name="shared_string_topbar">Belka górna</string>
     <string name="osm_user_stat">Edycji %1$s, range %2$s, zmian łącznie %3$s</string>
-    <string name="osm_live_subscription">Subskrypcja OSM Live</string>
+    <string name="osm_live_subscription">Subskrypcja OsmAnd Live</string>
     <string name="osm_live_email_desc">Wymagany, aby dostarczyć informacje o wkładzie</string>
     <string name="osm_live_user_public_name">Nazwa publiczna</string>
     <string name="osm_live_hide_user_name">Ukrywanie nazwy w raportach</string>
@@ -2282,7 +2282,7 @@ Długość %2$s</string>
     <string name="osm_live_not_active">Nieaktywny</string>
     <string name="osm_live_enter_user_name">Proszę wprowadź nazwę publiczną</string>
     <string name="osm_live_region_desc">Część wpłat zostanie wysłana do użytkowników OSM, którzy prześlą zmiany na mapie w tym regionie</string>
-    <string name="osm_live_ask_for_purchase">Należy najpierw zakupić subskrypcję OSM Live</string>
+    <string name="osm_live_ask_for_purchase">Należy najpierw zakupić subskrypcję OsmAnd Live</string>
 
     <string name="osm_live_header">Ten abonament umożliwia cogodzinną aktualizację dla map z całego świata.
  Część dochodów powraca do społeczności OSM i jest wypłacana za każdą edycję OSM.
@@ -2314,7 +2314,7 @@ Długość %2$s</string>
     <string name="map_widget_magnetic_bearing">Orientacja magnetyczna</string>
     <string name="map_widget_bearing">Orientacja względna</string>
     <string name="access_disable_wrong_direction_recalc">Utrzymywanie trasy po obraniu niewłaściwego kierunku</string>
-    <string name="use_osm_live_routing_description">Włącza nawigację dla bieżących aktualizacji mapy (beta)</string>
+    <string name="use_osm_live_routing_description">Włącza nawigację dla bieżących aktualizacji mapy</string>
 	<string name="access_disable_wrong_direction_recalc_descr">Zapobiega automatycznemu wyznaczaniu nowej trasy podczas poruszania się w niewłaściwym kierunku</string>
     <string name="map_widget_battery">Stan akumulatora</string>
     <string name="access_direction_audio_feedback_descr">Wskazuje kierunek do celu używając dźwięku</string>
@@ -2332,7 +2332,7 @@ Długość %2$s</string>
     <string name="follow_us">Śledź nas</string>
     <string name="access_direction_haptic_feedback">Haptyczne powiadomienia o kierunku</string>
     <string name="access_direction_haptic_feedback_descr">Wskazuje kierunek do celu używając wibracji</string>
-    <string name="use_osm_live_routing">Nawigacja OSM Live</string>
+    <string name="use_osm_live_routing">Nawigacja OsmAnd Live</string>
     <string name="lang_es_us">Hiszpański (Ameryka)</string>
     <string name="lang_ast">Asturyjski</string>
     <string name="lang_en_gb">Angielski (Wielka Brytania)</string>
@@ -2458,7 +2458,7 @@ Długość %2$s</string>
 \n • mnóstwo innych ulepszeń i poprawek błędów 
 \n 
 \n i więcej…</string>
-    <string name="trip_rec_notification_settings">Rejestrowanie śladu (brak danych)</string>
+    <string name="trip_rec_notification_settings">Aktywuj szybkie rejestrowanie</string>
     <string name="trip_rec_notification_settings_desc">Wyświetl powiadomienie systemowe z opcję rozpoczęcia rejestrowania śladu</string>
     <string name="shared_string_notifications">Powiadomienia</string>
     <string name="osmo_share_location">Udostępnij</string>
@@ -2882,4 +2882,31 @@ Reprezentuje obszar: %1$s x %2$s</string>
     <string name="group_will_be_removed_after_restart">Grupa zostanie usunięta po ponownym uruchomieniu</string>
     <string name="use_system_keyboard">Użyj klawiatury systemowej</string>
     <string name="is_saved">jest zapisany</string>
-    </resources>
+    <string name="wrong_format">Błędny format</string>
+    <string name="shared_string_road">Droga</string>
+    <string name="show_map">Wyświetl mapę</string>
+    <string name="route_is_calculated">Trasa jest wyznaczana</string>
+    <string name="round_trip">Zamknięta trasa</string>
+    <string name="plan_route_no_markers_toast">Należy dodać co najmniej jeden znacznik, aby skorzystać z tej funkcji.</string>
+    <string name="osn_modify_dialog_error">Wystąpił błąd: nie zmieniono uwagi</string>
+    <string name="osn_modify_dialog_title">Zmodyfikuj uwagę</string>
+    <string name="context_menu_item_modify_note">Edytuj uwagę OSM</string>
+    <string name="make_round_trip_descr">Dodaj kopię punktu początkowego jako punkt końcowy.</string>
+    <string name="make_round_trip">Zamknięta trasa</string>
+    <string name="shared_string_navigate">Nawiguj</string>
+    <string name="fast_coordinates_input">Szybkie wprowadzanie współrzędnych</string>
+    <string name="add_location_as_first_point_descr">Dodaj swoje położenie jako pierwszy punkt, aby zaplanować idealną trasę.</string>
+    <string name="release_2_8">• Całkowicie odświeżone znaczniki mapy ze wskazówkami odnośnie planowania trasy
+\n
+\n• Narzędzie do pomiaru odległości z opcją przybliżania do drogi i zapisu punktów jako trasy
+\n
+\n• OsmAnd Live: poprawki błędów, świeże dane na serwerze co 30 minut, aktualizacje uwzględniane przy nawigacji
+\n
+\n</string>
+    <string name="rendering_value_darkyellow_name">Ciemno żółty</string>
+    <string name="wrong_input">Nieprawidłowe dane</string>
+	<string name="enter_new_name">Wprowadź nową nazwę</string>
+	<string name="shared_string_back">Wróć</string>
+	<string name="view">Wyświetl</string>
+	<string name="waypoints_added_to_map_markers">Dodano punkty pośrednie do znaczników mapy</string>
+	</resources>

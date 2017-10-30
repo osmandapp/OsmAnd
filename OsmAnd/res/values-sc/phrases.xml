@@ -2674,4 +2674,9 @@
 
 <string name="poi_government_legislative">Istitutzione legislativa</string>
 
-</resources>
+<string name="poi_visibility_house">Visibilidade: domo</string>
+	<string name="poi_visibility_street">Visibilidade: istrada</string>
+	<string name="poi_visibility_area">Visibilidade: àrea</string>
+
+<string name="poi_operational_status">Istadu operativu</string>
+	</resources>

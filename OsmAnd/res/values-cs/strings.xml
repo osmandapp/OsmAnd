@@ -2110,7 +2110,7 @@ Délka %2$s</string>
     <string name="number_of_recipients">Počet příjemců</string>
     <string name="osm_user_stat">Počet úprav %1$s, pořadí %2$s, celkový počet úprav %3$s</string>
     <string name="osm_editors_ranking">Pořadí OSM editorů</string>
-    <string name="osm_live_subscription">Předplatné OSM Live</string>
+    <string name="osm_live_subscription">Předplatné OsmAnd Live</string>
     <string name="osm_live_subscribe_btn">Předplatit</string>
     <string name="osm_live_email_desc">Potřebujeme jej, abychm vám mohli poskytovat informace o příspěvcích</string>
     <string name="osm_live_user_public_name">Veřejné jméno</string>
@@ -2125,7 +2125,7 @@ Délka %2$s</string>
     <string name="osm_live_thanks">Děkujeme za registraci do okamžitých aktualizací!</string>
     <string name="osm_live_region_desc">Část vašeho příspěvku bude zaslána uživatelům OSM, kteří upravují mapu ve zvolené oblasti</string>
     <string name="osm_live_subscription_settings">Nastavení předplatného</string>
-    <string name="osm_live_ask_for_purchase">Prosím nejprve zakupte předplatné OSM Live</string>
+    <string name="osm_live_ask_for_purchase">Prosím nejprve zakupte předplatné OsmAnd Live</string>
 
     <string name="osm_live_header">Předplatné umožní hodinové aktualizace pro všechny mapy světa.
 Část příjmu jde zpět do OSM komunity a za každý příspěvek do OSM je vyplacena odměna.
@@ -2188,11 +2188,11 @@ Pokud máte rádi OsmAnd a OSM a chcete je podpořit, toto je výborný způsob,
     <string name="access_direction_audio_feedback_descr">Indikovat směr cílového bodu zvukem</string>
     <string name="access_direction_haptic_feedback">Hmatová indikace směru</string>
     <string name="access_direction_haptic_feedback_descr">Indikovat směr cílového bodu vibracemi</string>
-    <string name="use_osm_live_routing">OSM Live navigace</string>
+    <string name="use_osm_live_routing">OsmAnd Live navigace</string>
     <string name="map_widget_battery">Stav baterie</string>
     <!-- string name="lat_lon_pattern">Šíř: %1$.5f Dél: %2$.5f</string -->
     <string name="access_direction_audio_feedback">Zvuková zpětná vazba směru</string>
-    <string name="use_osm_live_routing_description">Povolit navigaci pro OSM Live changes (Beta)</string>
+    <string name="use_osm_live_routing_description">Povolit navigaci pro OsmAnd Live changes</string>
 	<string name="change_markers_position">Změnit umístění značky</string>
     <string name="move_marker_bottom_sheet_title">Posuňte mapu pro změnu umístění značky</string>
     <string name="lang_hu_formal">Maďarština (formální)</string>
@@ -2789,4 +2789,27 @@ Pokud potřebujete pomoci s aplikací OsmAnd, prosím kontaktujte naši podporu
     <string name="make_round_trip_descr">Přidat kopii počátečního bodu jako cíl.</string>
     <string name="make_round_trip">Vytvořit cestu</string>
     <string name="shared_string_navigate">Navigovat</string>
+    <string name="import_gpx_file_description">může být importováno jako Oblíbené body nebo trasa.</string>
+    <string name="import_as_gpx">Importovat jako soubor GPX</string>
+    <string name="import_as_favorites">Importovat jako Oblíbené</string>
+    <string name="import_file">Importovat soubor</string>
+	<string name="wrong_input">Chybný vstup</string>
+	<string name="enter_new_name">Zadejte nový název</string>
+	<string name="shared_string_back">Zpět</string>
+	<string name="view">Zobrazit</string>
+	<string name="waypoints_added_to_map_markers">Body trasy přidané k mapovým značkám</string>
+	<string name="wrong_format">Chybný formát</string>
+    <string name="shared_string_road">Cesta</string>
+    <string name="show_map">Zobrazit mapu</string>
+    <string name="route_is_calculated">Trasa je vypočítaná</string>
+    <string name="round_trip">Okružní trasa</string>
+    <string name="plan_route_no_markers_toast">Pro použití této funkce musíte přidat alespoň jednu značku .</string>
+    <string name="release_2_8">\\022 Zcela přepracované mapové značky s pokyny a plánováním trasy
+\n
+\n• Nástroj měření vzdálenosti nabízí funkci přichycení k cestě a uložení bodů jako trasu
+\n
+\n• OsmAnd Live: opravy chyb, nová data na serveru každých 30 minut, aktualizace začleněné do navigace
+\n
+\n</string>
+    <string name="rendering_value_darkyellow_name">Tmavě žlutá</string>
     </resources>

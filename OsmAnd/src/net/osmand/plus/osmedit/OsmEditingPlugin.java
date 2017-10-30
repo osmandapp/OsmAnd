@@ -5,6 +5,7 @@ import android.content.Context;
 import android.content.DialogInterface;
 import android.content.DialogInterface.OnClickListener;
 import android.content.Intent;
+import android.os.AsyncTask;
 import android.support.v4.app.Fragment;
 import android.support.v7.app.AlertDialog;
 import android.view.LayoutInflater;
@@ -186,7 +187,7 @@ public class OsmEditingPlugin extends OsmandPlugin {
 					modifyOsmNote(mapActivity, (OsmNotesPoint) selectedObj);
 				} else if (resId == R.string.poi_context_menu_delete) {
 					new EditPoiDialogFragment.ShowDeleteDialogAsyncTask(mapActivity)
-							.execute((Amenity) selectedObj);
+							.executeOnExecutor(AsyncTask.THREAD_POOL_EXECUTOR, (Amenity) selectedObj);
 				} else if (resId == R.string.poi_context_menu_modify) {
 					EditPoiDialogFragment.showEditInstance((Amenity) selectedObj, mapActivity);
 				} else if (resId == R.string.poi_context_menu_modify_osm_change) {
@@ -392,7 +393,7 @@ public class OsmEditingPlugin extends OsmandPlugin {
 			public void onClick(DialogInterface dialog, int which) {
 				new UploadGPXFilesTask(la, descr.getText().toString(), tags.getText().toString(),
 						(UploadVisibility) visibility.getItemAtPosition(visibility.getSelectedItemPosition())
-				).execute(info);
+				).executeOnExecutor(AsyncTask.THREAD_POOL_EXECUTOR, info);
 			}
 		});
 		bldr.show();

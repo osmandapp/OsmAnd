@@ -68,6 +68,7 @@ import net.osmand.plus.views.mapwidgets.MapInfoWidgetsFactory.TopToolbarControll
 import java.io.File;
 import java.text.MessageFormat;
 import java.text.SimpleDateFormat;
+import java.util.ArrayList;
 import java.util.Date;
 import java.util.List;
 import java.util.Locale;
@@ -112,8 +113,7 @@ public class MeasurementToolFragment extends Fragment {
 
 	private enum SaveType {
 		ROUTE_POINT,
-		LINE,
-		SNAP_TO_ROAD
+		LINE
 	}
 
 	private void setEditingCtx(MeasurementEditingContext editingCtx) {
@@ -1182,34 +1182,36 @@ public class MeasurementToolFragment extends Fragment {
 			protected String doInBackground(Void... voids) {
 				MeasurementToolLayer measurementLayer = getMeasurementLayer();
 				MapActivity activity = getMapActivity();
+				List<WptPt> points = editingCtx.getPoints();
+				TrkSegment before = editingCtx.getBeforeTrkSegmentLine();
+				TrkSegment after = editingCtx.getAfterTrkSegmentLine();
 				if (gpx == null) {
 					toSave = new File(dir, fileName);
 					GPXFile gpx = new GPXFile();
 					if (measurementLayer != null) {
-						List<WptPt> points = editingCtx.getPoints();
 						if (saveType == SaveType.LINE) {
 							TrkSegment segment = new TrkSegment();
-							segment.points.addAll(points);
+							if (editingCtx.isInSnapToRoadMode()) {
+								segment.points.addAll(before.points);
+								segment.points.addAll(after.points);
+							} else {
+								segment.points.addAll(points);
+							}
 							Track track = new Track();
 							track.segments.add(segment);
 							gpx.tracks.add(track);
 						} else if (saveType == SaveType.ROUTE_POINT) {
+							if (editingCtx.isInSnapToRoadMode()) {
+								TrkSegment segment = new TrkSegment();
+								segment.points.addAll(before.points);
+								segment.points.addAll(after.points);
+								Track track = new Track();
+								track.segments.add(segment);
+								gpx.tracks.add(track);
+							}
 							Route rt = new Route();
 							gpx.routes.add(rt);
 							rt.points.addAll(points);
-						} else if (saveType == SaveType.SNAP_TO_ROAD) {
-							TrkSegment segmentToSave = new TrkSegment();
-							TrkSegment before = editingCtx.getBeforeTrkSegmentLine();
-							TrkSegment after = editingCtx.getAfterTrkSegmentLine();
-							segmentToSave.points.addAll(before.points);
-							segmentToSave.points.addAll(after.points);
-							Track track = new Track();
-							track.segments.add(segmentToSave);
-							gpx.tracks.add(track);
-
-							Route rt = new Route();
-							rt.points.addAll(points);
-							gpx.routes.add(rt);
 						}
 					}
 					if (activity != null) {
@@ -1223,11 +1225,17 @@ public class MeasurementToolFragment extends Fragment {
 				} else {
 					toSave = new File(gpx.path);
 					if (measurementLayer != null) {
-						List<WptPt> points = editingCtx.getPoints();
 						if (actionType != null) {
 							switch (actionType) {
 								case ADD_SEGMENT:
-									gpx.addTrkSegment(points);
+									if (editingCtx.isInSnapToRoadMode()) {
+										List<WptPt> snappedPoints = new ArrayList<>();
+										snappedPoints.addAll(before.points);
+										snappedPoints.addAll(after.points);
+										gpx.addTrkSegment(snappedPoints);
+									} else {
+										gpx.addTrkSegment(points);
+									}
 									break;
 								case ADD_ROUTE_POINTS:
 									gpx.replaceRoutePoints(points);
@@ -1283,7 +1291,7 @@ public class MeasurementToolFragment extends Fragment {
 					}
 				}
 			}
-		}.execute();
+		}.executeOnExecutor(AsyncTask.THREAD_POOL_EXECUTOR);
 	}
 
 	private void enable(View... views) {
@@ -1425,13 +1433,7 @@ public class MeasurementToolFragment extends Fragment {
 								fileName = name + "_" + (++ind) + GPX_SUFFIX;
 								fout = new File(dir, fileName);
 							}
-							SaveType saveType;
-							if (editingCtx.isInSnapToRoadMode()) {
-								saveType = SaveType.SNAP_TO_ROAD;
-							} else {
-								saveType = SaveType.LINE;
-							}
-							saveNewGpx(dir, fileName, true, saveType, true);
+							saveNewGpx(dir, fileName, true, SaveType.LINE, true);
 						} else {
 							dismiss(mapActivity);
 						}
