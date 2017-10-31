@@ -241,7 +241,6 @@ public class MapMarkersLayer extends OsmandMapLayer implements IContextMenuProvi
 
 				float dist = (float) MapUtils.getDistance(myLoc.getLatitude(), myLoc.getLongitude(), marker.getLatitude(), marker.getLongitude());
 				String distSt = OsmAndFormatter.getFormattedDistance(dist, view.getApplication());
-				boolean locationInvisible = locX < 0 || locX > tileBox.getPixWidth() || locY < 0 || locY > tileBox.getPixHeight();
 				String text = distSt + " • " + marker.getName(map);
 				Rect bounds = new Rect();
 				textAttrs.paint.getTextBounds(text, 0, text.length(), bounds);
@@ -250,9 +249,6 @@ public class MapMarkersLayer extends OsmandMapLayer implements IContextMenuProvi
 
 				canvas.rotate(-tileBox.getRotate(), tileBox.getCenterPixelX(), tileBox.getCenterPixelY());
 				canvas.drawPath(linePath, lineAttrs.paint);
-				if (locationInvisible && !(pos[0] == 0 && pos[1] == 0)) {
-					canvas.drawCircle(pos[0], pos[1], 5, new Paint());
-				}
 				if (locX >= markerX) {
 					canvas.rotate(180, pos[0], pos[1]);
 					canvas.drawTextOnPath(text, linePath, hOffset, bounds.height() + VERTICAL_OFFSET, textAttrs.paint2);
