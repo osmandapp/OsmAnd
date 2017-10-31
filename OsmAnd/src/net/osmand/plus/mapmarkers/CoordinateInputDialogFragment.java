@@ -20,6 +20,7 @@ import android.text.InputFilter;
 import android.text.InputType;
 import android.text.TextWatcher;
 import android.util.TypedValue;
+import android.view.KeyEvent;
 import android.view.LayoutInflater;
 import android.view.Menu;
 import android.view.MenuItem;
@@ -28,6 +29,7 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.view.Window;
 import android.view.WindowManager;
+import android.view.inputmethod.EditorInfo;
 import android.widget.AdapterView;
 import android.widget.ArrayAdapter;
 import android.widget.EditText;
@@ -245,16 +247,7 @@ public class CoordinateInputDialogFragment extends DialogFragment implements Osm
 		addMarkerButton.setOnClickListener(new View.OnClickListener() {
 			@Override
 			public void onClick(View view) {
-				String latitude = latitudeEditText.getText().toString();
-				String longitude = longitudeEditText.getText().toString();
-				String locPhrase = latitude + ", " + longitude;
-				LatLon latLon = MapUtils.parseLocation(locPhrase);
-				if (latLon != null) {
-					String name = nameEditText.getText().toString();
-					addMapMarker(latLon, name);
-				} else {
-					Toast.makeText(getContext(), getString(R.string.wrong_format), Toast.LENGTH_SHORT).show();
-				}
+				addMapMarker();
 			}
 		});
 
@@ -421,11 +414,7 @@ public class CoordinateInputDialogFragment extends DialogFragment implements Osm
 					if ((strLength == DEGREES_MAX_LENGTH && coordinateFormat == PointDescription.FORMAT_DEGREES)
 							|| (strLength == MINUTES_MAX_LENGTH && coordinateFormat == PointDescription.FORMAT_MINUTES)
 							|| (strLength == SECONDS_MAX_LENGTH && coordinateFormat == PointDescription.FORMAT_SECONDS)) {
-						if (focusedEditText.getId() == R.id.latitude_edit_text) {
-							((OsmandTextFieldBoxes) mainView.findViewById(R.id.longitude_box)).select();
-						} else {
-							((OsmandTextFieldBoxes) mainView.findViewById(R.id.name_box)).select();
-						}
+						switchToNextInput(focusedEditText.getId());
 					}
 				}
 			}
@@ -445,7 +434,7 @@ public class CoordinateInputDialogFragment extends DialogFragment implements Osm
 					editText.setInputType(inType);              // Restore input type
 					return true; // Consume touch event
 				} else {
-					if (orientationPortrait && isOsmandKeyboardCurrentlyVisible()) {
+					if (isOsmandKeyboardCurrentlyVisible()) {
 						changeOsmandKeyboardVisibility(false);
 					}
 					return false;
@@ -548,6 +537,18 @@ public class CoordinateInputDialogFragment extends DialogFragment implements Osm
 			}
 		};
 
+		TextView.OnEditorActionListener editTextOnEditorActionListener = new TextView.OnEditorActionListener() {
+			@Override
+			public boolean onEditorAction(TextView textView, int i, KeyEvent keyEvent) {
+				if (i == EditorInfo.IME_ACTION_NEXT) {
+					switchToNextInput(textView.getId());
+				} else if (i == EditorInfo.IME_ACTION_DONE) {
+					addMapMarker();
+				}
+				return false;
+			}
+		};
+
 		for (ExtendedEditText editText : extendedEditTexts) {
 			if (editText.getId() != R.id.name_edit_text) {
 				editText.addTextChangedListener(textWatcher);
@@ -555,6 +556,7 @@ public class CoordinateInputDialogFragment extends DialogFragment implements Osm
 			editText.setOnTouchListener(editTextOnTouchListener);
 			editText.setOnLongClickListener(editTextOnLongClickListener);
 			editText.setOnFocusChangeListener(focusChangeListener);
+			editText.setOnEditorActionListener(editTextOnEditorActionListener);
 		}
 	}
 
@@ -634,7 +636,28 @@ public class CoordinateInputDialogFragment extends DialogFragment implements Osm
 		}
 	}
 
-	public void addMapMarker(LatLon latLon, String name) {
+	private void switchToNextInput(int id) {
+		if (id == R.id.latitude_edit_text) {
+			((OsmandTextFieldBoxes) mainView.findViewById(R.id.longitude_box)).select();
+		} else {
+			((OsmandTextFieldBoxes) mainView.findViewById(R.id.name_box)).select();
+		}
+	}
+
+	private void addMapMarker() {
+		String latitude = ((EditText) mainView.findViewById(R.id.latitude_edit_text)).getText().toString();
+		String longitude = ((EditText) mainView.findViewById(R.id.longitude_edit_text)).getText().toString();
+		String locPhrase = latitude + ", " + longitude;
+		LatLon latLon = MapUtils.parseLocation(locPhrase);
+		if (latLon != null) {
+			String name = ((EditText) mainView.findViewById(R.id.name_edit_text)).getText().toString();
+			addMapMarker(latLon, name);
+		} else {
+			Toast.makeText(getContext(), getString(R.string.wrong_format), Toast.LENGTH_SHORT).show();
+		}
+	}
+
+	private void addMapMarker(LatLon latLon, String name) {
 		PointDescription pointDescription = new PointDescription(PointDescription.POINT_TYPE_MAP_MARKER, name);
 		int colorIndex = mapMarkers.size() > 0 ? mapMarkers.get(mapMarkers.size() - 1).colorIndex : -1;
 		if (colorIndex == -1) {
