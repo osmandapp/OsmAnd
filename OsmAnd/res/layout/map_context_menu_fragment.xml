@@ -166,20 +166,71 @@
 
             <LinearLayout
                 android:id="@+id/title_button_container"
-                android:layout_width="fill_parent"
+                android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:minHeight="@dimen/context_menu_action_buttons_h"
                 android:layout_marginTop="@dimen/context_menu_buttons_top_margin"
                 android:clickable="true"
-                android:orientation="horizontal"
+                android:minHeight="@dimen/context_menu_action_buttons_h"
+                android:orientation="vertical"
                 android:paddingBottom="@dimen/context_menu_buttons_padding_bottom"
                 android:paddingLeft="62dp"
                 android:paddingRight="2dp"
                 android:visibility="gone"
                 tools:visibility="visible">
 
+                <LinearLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content">
+
+                    <Button
+                        android:id="@+id/title_button"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:background="?attr/selectableItemBackground"
+                        android:gravity="left|center_vertical"
+                        android:paddingLeft="@dimen/context_menu_button_padding_x"
+                        android:paddingRight="@dimen/context_menu_button_padding_x"
+                        android:text="@string/recording_context_menu_play"
+                        android:textColor="?attr/contextMenuButtonColor"
+                        android:textSize="@dimen/default_desc_text_size"/>
+
+                    <TextView
+                        android:id="@+id/title_button_right_text"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_marginLeft="-4dp"
+                        android:clickable="true"
+                        android:gravity="center_vertical"
+                        android:textColor="?android:textColorSecondary"
+                        android:textSize="@dimen/default_desc_text_size"
+                        tools:text="— 00:26"/>
+
+                    <Button
+                        android:id="@+id/title_button_right"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:background="?attr/selectableItemBackground"
+                        android:gravity="center"
+                        android:paddingLeft="@dimen/context_menu_button_padding_x"
+                        android:paddingRight="@dimen/context_menu_button_padding_x"
+                        android:text="@string/shared_string_delete"
+                        android:textColor="?attr/contextMenuButtonColor"
+                        android:textSize="@dimen/default_desc_text_size"/>
+                </LinearLayout>
+
+                <View
+                    android:id="@+id/title_divider"
+                    android:layout_width="match_parent"
+                    android:layout_height="1dp"
+                    android:layout_marginBottom="@dimen/bottom_sheet_divider_margin_bottom"
+                    android:layout_marginLeft="10dp"
+                    android:layout_marginTop="@dimen/bottom_sheet_divider_margin_top"
+                    android:background="?attr/dashboard_divider"
+                    android:visibility="gone"
+                    tools:visibility="visible"/>
+
                 <Button
-                    android:id="@+id/title_button"
+                    android:id="@+id/subtitle_button"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:background="?attr/selectableItemBackground"
@@ -187,29 +238,6 @@
                     android:paddingLeft="@dimen/context_menu_button_padding_x"
                     android:paddingRight="@dimen/context_menu_button_padding_x"
                     android:text="@string/recording_context_menu_play"
-                    android:textColor="?attr/contextMenuButtonColor"
-                    android:textSize="@dimen/default_desc_text_size"/>
-
-                <TextView
-                    android:id="@+id/title_button_right_text"
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:layout_marginLeft="-4dp"
-                    android:clickable="true"
-                    android:gravity="center_vertical"
-                    tools:text="— 00:26"
-                    android:textColor="?android:textColorSecondary"
-                    android:textSize="@dimen/default_desc_text_size"/>
-
-                <Button
-                    android:id="@+id/title_button_right"
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:background="?attr/selectableItemBackground"
-                    android:gravity="center"
-                    android:paddingLeft="@dimen/context_menu_button_padding_x"
-                    android:paddingRight="@dimen/context_menu_button_padding_x"
-                    android:text="@string/shared_string_delete"
                     android:textColor="?attr/contextMenuButtonColor"
                     android:textSize="@dimen/default_desc_text_size"/>
 

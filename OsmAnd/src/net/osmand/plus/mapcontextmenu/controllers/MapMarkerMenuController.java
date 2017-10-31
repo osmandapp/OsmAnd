@@ -21,6 +21,7 @@ public class MapMarkerMenuController extends MenuController {
 		this.mapMarker = mapMarker;
 		builder.setShowNearestWiki(true);
 		final MapMarkersHelper markersHelper = mapActivity.getMyApplication().getMapMarkersHelper();
+
 		leftTitleButtonController = new TitleButtonController() {
 			@Override
 			public void buttonPressed() {
@@ -31,6 +32,16 @@ public class MapMarkerMenuController extends MenuController {
 		leftTitleButtonController.needColorizeIcon = false;
 		leftTitleButtonController.caption = getMapActivity().getString(R.string.mark_passed);
 		leftTitleButtonController.leftIconId = isLight() ? R.drawable.passed_icon_light : R.drawable.passed_icon_dark;
+
+		leftSubtitleButtonController = new TitleButtonController() {
+			@Override
+			public void buttonPressed() {
+				markersHelper.moveMarkerToTop(getMapMarker());
+				getMapActivity().getContextMenu().close();
+			}
+		};
+		leftSubtitleButtonController.needColorizeIcon = false;
+		leftSubtitleButtonController.caption = getMapActivity().getString(R.string.show_on_top_bar);
 	}
 
 	@Override
