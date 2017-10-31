@@ -997,7 +997,7 @@
     <string name="audionotes_location_not_defined">Поточне місцезнаходження для нотатки не визначено. Використовуйте контекстне меню для прив\'язки нотатки до даної точки.</string>
     
     
-    <string name="monitoring_control_start">старт</string>
+    <string name="monitoring_control_start">GPX</string>
     <string name="background_service_is_enabled_question">Фоновий режим запущений. Ви хочете зупинити його роботу також?</string>
     <string name="close_changeset">Закрити набір змін</string>
 	<string name="zxing_barcode_scanner_not_found">Програму \'Сканер штрих-кодів\' не знайдено. Шукати в Google Play?</string>
@@ -3064,4 +3064,8 @@
     <string name="shared_string_back">Назад</string>
     <string name="view">Перегляд</string>
 	<string name="waypoints_added_to_map_markers">Шляхові точки додані в маркери мапи</string>
+	<string name="import_gpx_file_description">може бути імпортовано як точки Закладок або як файл треку.</string>
+    <string name="import_as_gpx">Імпортувати як GPX-файл</string>
+    <string name="import_as_favorites">Імпортувати як закладки</string>
+    <string name="import_file">Імпортувати файл</string>
 	</resources>
