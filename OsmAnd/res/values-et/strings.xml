@@ -173,5 +173,5 @@
     <string name="improve_coverage_install_mapillary_desc">Sa võid lisada oma fotod või foto seeriad siia asukohta.
 \n
 \nSelleks, paigalda Mapillary rakendus Google Play veebipoest.</string>
-    <string name="no_photos_descr">Meil puuduvad fotod sellest asukohast</string>
+    <string name="no_photos_descr">Sellest asukohast meil fotosid ei ole</string>
     </resources>
