@@ -170,4 +170,7 @@
     <string name="mapillary_menu_title_dates">Kuupäevad</string>
     <string name="mapillary_menu_edit_text_hint">Sisesta kasutajatunnus</string>
     <string name="mapillary_menu_title_username">Kasutajatunnus</string>
+    <string name="improve_coverage_install_mapillary_desc">Sa võid lisada oma fotod või foto seeriad siia asukohta.
+\n
+\nSelleks, paigalda Mapillary rakendus Google Play veebipoest.</string>
     </resources>
