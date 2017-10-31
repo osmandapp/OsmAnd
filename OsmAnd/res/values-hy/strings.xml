@@ -2165,4 +2165,42 @@
     <string name="context_menu_item_search_poi">Որոնել POI</string>
     <string name="use_trackball_descr">Քարտեզը շարժելու համար օգտագործեք trackball</string>
     <string name="use_trackball">Օգտագործել trackball</string>
+    <string name="import_file_favourites">Պահպանել տվյալները որպես GPX ֆայլ թե պահպանել որպես «Սիրված» կետեր?</string>
+    <string name="fav_file_to_load_not_found">Կետեր պարունակող GPX ֆայլ չի գտնվել {0} մեջ</string>
+    <string name="fav_saved_sucessfully">«Սիրված» կետերը պահպանվեցին {0} մեջ</string>
+    <string name="none_region_found">"Տեղական վեկտորային(offline) քարտեզներ  չեն գտնվել: Ներբեռնեք դրանք Ինտերնետից:"</string>
+    <string name="background_service_wait_int_descr">Ընտրեք առավելագույն ժամանակը դիրքի որոնման համար</string>
+    <string name="background_service_wait_int">Սպասման ժամանակը</string>
+    <string name="where_am_i">Որտեղ եմ ես?</string>
+    <string name="process_navigation_service">OsmAnd նավիգացիոն ծառայությունը</string>
+    <string name="network_provider">Ցանց</string>
+    <string name="gps_provider">GPS</string>
+    <string name="int_seconds">վայրկյան</string>
+    <string name="int_min">րոպ․</string>
+    <string name="background_service_int_descr">Ընտրեք արթնացման ժամանակի ընդմիջումը ֆոնային ծառայության համար</string>
+    <string name="background_service_provider_descr">Ֆոնային ծառայության համար ընտրել դիրքորոշման աղբյուր</string>
+    <string name="background_service_provider">Դիրքորոշման աղբյուր</string>
+    <string name="background_router_service_descr">Միացնում է OsmAnd-ը ֆոնային ռեժիմում, ձեր գտնվելու վայրը հետեւելու համար, երբ էկրանը անջատված է</string>
+    <string name="background_router_service">Միացնում է OsmAnd-ը ֆոնին ռեժիմում</string>
+    <string name="off_router_service_no_gps_available">OsmAnd-ի երթուղայնացման ծառայությունը միացված է, եթե անջատեք դիրքավորումը, այն կդադարի երթուղով շարժվել:</string>
+    <string name="hide_poi_filter">Թաքցնել ֆիլտր</string>
+    <string name="show_poi_filter">Ցուցադրել ֆիլտր</string>
+    <string name="search_poi_filter">Ֆիլտր</string>
+    <string name="menu_mute_off">Ձայնը միացված է</string>
+    <string name="menu_mute_on">Առանց ձայնի</string>
+    <string name="voice_data_initializing">Ձայնային տվյալները Initializing…</string>
+    <string name="voice_data_not_supported">Ձայնային տվյալները չեն ապահովվում հավելվածի ընթացիկ տարբերակով</string>
+    <string name="voice_data_corrupted">Ընտրված ձայնային տվյալները սխալ ձևաչափի են</string>
+    <string name="voice_data_unavailable">Ընտրված ձայնային տվյալները հասանելի չեն</string>
+    <string name="sd_unmounted">SD քարտը հասանելի չէ:
+\nԴուք չեք կարողանա աշխատել քարտի հետ:</string>
+    <string name="sd_mounted_ro">SD քարտը հասանելի է միայն կարդալու համար:
+\nԴուք չեք կարողանա ներբեռնել քարտեզներ Ինտերնետից:</string>
+    <string name="unzipping_file">Ֆայլը արդյունահանվում է…</string>
+    <string name="route_tr">Աջ թեքվեք և շարժվեք</string>
+    <string name="route_tshr">Կտրուկ աջ թեքվեք և շարժվեք</string>
+    <string name="route_tslr">Սահուն աջ պահեք և շարժվեք</string>
+    <string name="route_tl">Ձախ թեկվեք և շարժվեք</string>
+    <string name="route_tshl">Կտրուկ ձախ թեքվեք և շարժվեք</string>
+    <string name="route_tsll">Սահուն ձախ պահեք և շարժվեք</string>
     </resources>
