@@ -85,7 +85,7 @@
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content">
 
-                <net.osmand.plus.OsmandTextFieldBoxes
+                <net.osmand.plus.widgets.OsmandTextViewFieldBoxes
                     android:id="@+id/latitude_box"
                     android:layout_width="0dp"
                     android:layout_weight="1"
@@ -94,30 +94,30 @@
                     android:layout_marginRight="16dp"
                     android:layout_marginEnd="16dp">
 
-                    <studio.carbonylgroup.textfieldboxes.ExtendedEditText
+                    <net.osmand.plus.widgets.CursorTextView
                         android:imeOptions="actionNext"
                         android:inputType="number"
                         android:id="@+id/latitude_edit_text"
                         android:layout_width="match_parent"
                         android:layout_height="wrap_content"/>
 
-                </net.osmand.plus.OsmandTextFieldBoxes>
+                </net.osmand.plus.widgets.OsmandTextViewFieldBoxes>
 
-                <net.osmand.plus.OsmandTextFieldBoxes
+                <net.osmand.plus.widgets.OsmandTextViewFieldBoxes
                     android:id="@+id/longitude_box"
                     android:layout_width="0dp"
                     android:layout_weight="1"
                     android:layout_height="wrap_content"
                     osmand:labelText="@string/navigate_point_longitude">
 
-                    <studio.carbonylgroup.textfieldboxes.ExtendedEditText
+                    <net.osmand.plus.widgets.CursorTextView
                         android:imeOptions="actionNext"
                         android:inputType="number"
                         android:id="@+id/longitude_edit_text"
                         android:layout_width="match_parent"
                         android:layout_height="wrap_content"/>
 
-                </net.osmand.plus.OsmandTextFieldBoxes>
+                </net.osmand.plus.widgets.OsmandTextViewFieldBoxes>
 
             </LinearLayout>
 
@@ -127,7 +127,7 @@
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content">
 
-                <net.osmand.plus.OsmandTextFieldBoxes
+                <net.osmand.plus.widgets.OsmandTextViewFieldBoxes
                     android:id="@+id/name_box"
                     android:layout_width="0dp"
                     android:layout_weight="1"
@@ -136,7 +136,7 @@
                     android:layout_marginEnd="16dp"
                     android:layout_marginRight="16dp">
 
-                    <studio.carbonylgroup.textfieldboxes.ExtendedEditText
+                    <net.osmand.plus.widgets.CursorTextView
                         android:imeOptions="actionDone"
                         android:inputType="text"
                         android:hint="@string/access_hint_enter_name"
@@ -144,7 +144,7 @@
                         android:layout_width="match_parent"
                         android:layout_height="wrap_content"/>
 
-                </net.osmand.plus.OsmandTextFieldBoxes>
+                </net.osmand.plus.widgets.OsmandTextViewFieldBoxes>
 
                 <View
                     android:layout_width="0dp"

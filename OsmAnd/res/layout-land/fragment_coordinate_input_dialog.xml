@@ -43,7 +43,7 @@
 					android:focusable="true"
 					android:focusableInTouchMode="true"/>
 
-				<net.osmand.plus.OsmandTextFieldBoxes
+				<net.osmand.plus.widgets.OsmandTextViewFieldBoxes
 					android:id="@+id/latitude_box"
 					android:layout_width="0dp"
 					android:layout_height="wrap_content"
@@ -52,16 +52,16 @@
 					android:layout_marginEnd="12dp"
 					android:layout_marginRight="12dp">
 
-					<studio.carbonylgroup.textfieldboxes.ExtendedEditText
+					<net.osmand.plus.widgets.CursorTextView
 						android:imeOptions="actionNext"
 						android:id="@+id/latitude_edit_text"
 						android:layout_width="match_parent"
 						android:layout_height="wrap_content"
 						android:inputType="number"/>
 
-				</net.osmand.plus.OsmandTextFieldBoxes>
+				</net.osmand.plus.widgets.OsmandTextViewFieldBoxes>
 
-				<net.osmand.plus.OsmandTextFieldBoxes
+				<net.osmand.plus.widgets.OsmandTextViewFieldBoxes
 					android:id="@+id/longitude_box"
 					android:layout_width="0dp"
 					android:layout_height="wrap_content"
@@ -70,16 +70,16 @@
 					android:layout_marginEnd="12dp"
 					android:layout_marginRight="12dp">
 
-					<studio.carbonylgroup.textfieldboxes.ExtendedEditText
+					<net.osmand.plus.widgets.CursorTextView
 						android:imeOptions="actionNext"
 						android:id="@+id/longitude_edit_text"
 						android:layout_width="match_parent"
 						android:layout_height="wrap_content"
 						android:inputType="number"/>
 
-				</net.osmand.plus.OsmandTextFieldBoxes>
+				</net.osmand.plus.widgets.OsmandTextViewFieldBoxes>
 
-				<net.osmand.plus.OsmandTextFieldBoxes
+				<net.osmand.plus.widgets.OsmandTextViewFieldBoxes
 					android:id="@+id/name_box"
 					android:layout_width="0dp"
 					android:layout_height="wrap_content"
@@ -88,7 +88,7 @@
 					android:layout_marginEnd="10dp"
 					android:layout_marginRight="10dp">
 
-					<studio.carbonylgroup.textfieldboxes.ExtendedEditText
+					<net.osmand.plus.widgets.CursorTextView
 						android:imeOptions="actionDone"
 						android:id="@+id/name_edit_text"
 						android:layout_width="match_parent"
@@ -96,7 +96,7 @@
 						android:hint="@string/access_hint_enter_name"
 						android:inputType="text"/>
 
-				</net.osmand.plus.OsmandTextFieldBoxes>
+				</net.osmand.plus.widgets.OsmandTextViewFieldBoxes>
 
 				<ImageButton
 					android:id="@+id/options_button"

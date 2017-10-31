@@ -49,7 +49,7 @@ import net.osmand.plus.OsmAndLocationProvider.OsmAndCompassListener;
 import net.osmand.plus.OsmAndLocationProvider.OsmAndLocationListener;
 import net.osmand.plus.OsmandApplication;
 import net.osmand.plus.OsmandSettings;
-import net.osmand.plus.OsmandTextFieldBoxes;
+import net.osmand.plus.widgets.OsmandTextViewFieldBoxes;
 import net.osmand.plus.R;
 import net.osmand.plus.activities.MapActivity;
 import net.osmand.plus.base.MapViewTrackingUtilities;
@@ -60,8 +60,6 @@ import net.osmand.util.MapUtils;
 
 import java.util.ArrayList;
 import java.util.List;
-
-import studio.carbonylgroup.textfieldboxes.ExtendedEditText;
 
 import static android.content.ClipDescription.MIMETYPE_TEXT_PLAIN;
 import static android.content.Context.CLIPBOARD_SERVICE;
@@ -92,8 +90,8 @@ public class CoordinateInputDialogFragment extends DialogFragment implements Osm
 	private boolean lightTheme;
 	private boolean useOsmandKeyboard = true;
 	private int coordinateFormat = -1;
-	private List<OsmandTextFieldBoxes> textFieldBoxes;
-	private List<ExtendedEditText> extendedEditTexts;
+	private List<OsmandTextViewFieldBoxes> textFieldBoxes;
+	private List<TextView> inputTextViews;
 	private View mainView;
 	private IconsCache iconsCache;
 	private Location location;
@@ -168,7 +166,7 @@ public class CoordinateInputDialogFragment extends DialogFragment implements Osm
 			@Override
 			public void onClick(View view) {
 				View focusedView = getDialog().getCurrentFocus();
-				if (focusedView != null && focusedView instanceof ExtendedEditText) {
+				if (focusedView != null && focusedView instanceof TextView) {
 					focusedView.clearFocus();
 					AndroidUtils.hideSoftKeyboard(getMapActivity(), focusedView);
 				}
@@ -183,11 +181,11 @@ public class CoordinateInputDialogFragment extends DialogFragment implements Osm
 		});
 
 		textFieldBoxes = new ArrayList<>();
-		final OsmandTextFieldBoxes latitudeBox = (OsmandTextFieldBoxes) mainView.findViewById(R.id.latitude_box);
+		final OsmandTextViewFieldBoxes latitudeBox = (OsmandTextViewFieldBoxes) mainView.findViewById(R.id.latitude_box);
 		textFieldBoxes.add(latitudeBox);
-		final OsmandTextFieldBoxes longitudeBox = (OsmandTextFieldBoxes) mainView.findViewById(R.id.longitude_box);
+		final OsmandTextViewFieldBoxes longitudeBox = (OsmandTextViewFieldBoxes) mainView.findViewById(R.id.longitude_box);
 		textFieldBoxes.add(longitudeBox);
-		final OsmandTextFieldBoxes nameBox = (OsmandTextFieldBoxes) mainView.findViewById(R.id.name_box);
+		final OsmandTextViewFieldBoxes nameBox = (OsmandTextViewFieldBoxes) mainView.findViewById(R.id.name_box);
 		nameBox.setEndIcon(iconsCache.getThemedIcon(R.drawable.ic_action_keyboard));
 		nameBox.getEndIconImageButton().setOnClickListener(new View.OnClickListener() {
 			@Override
@@ -205,13 +203,13 @@ public class CoordinateInputDialogFragment extends DialogFragment implements Osm
 
 		registerTextFieldBoxes();
 
-		extendedEditTexts = new ArrayList<>();
-		final ExtendedEditText latitudeEditText = (ExtendedEditText) mainView.findViewById(R.id.latitude_edit_text);
-		extendedEditTexts.add(latitudeEditText);
-		final ExtendedEditText longitudeEditText = (ExtendedEditText) mainView.findViewById(R.id.longitude_edit_text);
-		extendedEditTexts.add(longitudeEditText);
-		final ExtendedEditText nameEditText = (ExtendedEditText) mainView.findViewById(R.id.name_edit_text);
-		extendedEditTexts.add(nameEditText);
+		inputTextViews = new ArrayList<>();
+		final TextView latitudeEditText = (TextView) mainView.findViewById(R.id.latitude_edit_text);
+		inputTextViews.add(latitudeEditText);
+		final TextView longitudeEditText = (TextView) mainView.findViewById(R.id.longitude_edit_text);
+		inputTextViews.add(longitudeEditText);
+		final TextView nameEditText = (TextView) mainView.findViewById(R.id.name_edit_text);
+		inputTextViews.add(nameEditText);
 
 		registerEditTexts();
 
@@ -267,21 +265,21 @@ public class CoordinateInputDialogFragment extends DialogFragment implements Osm
 			@Override
 			public void onItemClick(AdapterView<?> adapterView, View view, int i, long l) {
 				View focusedView = getDialog().getCurrentFocus();
-				if (focusedView != null && focusedView instanceof ExtendedEditText) {
-					ExtendedEditText extendedEditText = (ExtendedEditText) focusedView;
+				if (focusedView != null && focusedView instanceof TextView) {
+					TextView focusedTextView = (TextView) focusedView;
 					switch (i) {
 						case CLEAR_BUTTON_POSITION:
-							extendedEditText.setText("");
+							focusedTextView.setText("");
 							break;
 						case DELETE_BUTTON_POSITION:
-							String str = extendedEditText.getText().toString();
+							String str = focusedTextView.getText().toString();
 							if (str.length() > 0) {
 								str = str.substring(0, str.length() - 1);
-								extendedEditText.setText(str);
+								focusedTextView.setText(str);
 							}
 							break;
 						default:
-							extendedEditText.append(keyboardAdapter.getItem(i));
+							focusedTextView.append(keyboardAdapter.getItem(i));
 					}
 				}
 			}
@@ -352,7 +350,7 @@ public class CoordinateInputDialogFragment extends DialogFragment implements Osm
 			}
 		};
 
-		for (OsmandTextFieldBoxes textFieldBox : textFieldBoxes) {
+		for (OsmandTextViewFieldBoxes textFieldBox : textFieldBoxes) {
 			textFieldBox.getPanel().setOnTouchListener(textFieldBoxOnTouchListener);
 		}
 		changeKeyboardInBoxes();
@@ -378,8 +376,8 @@ public class CoordinateInputDialogFragment extends DialogFragment implements Osm
 			public void afterTextChanged(Editable editable) {
 				View focusedView = getDialog().getCurrentFocus();
 				if (focusedView != null && focusedView instanceof EditText) {
-					ExtendedEditText focusedEditText = (ExtendedEditText) focusedView;
-					String str = focusedEditText.getText().toString();
+					TextView focusedTextView = (TextView) focusedView;
+					String str = focusedTextView.getText().toString();
 					int strLength = str.length();
 					if (len < strLength) {
 						String strAfterChanging = str.substring(len);
@@ -401,20 +399,18 @@ public class CoordinateInputDialogFragment extends DialogFragment implements Osm
 						}
 						if (strDivider != null) {
 							String textToSet = strBeforeChanging + strDivider + strAfterChanging;
-							focusedEditText.setText(textToSet);
-							focusedEditText.setSelection(textToSet.length());
+							focusedTextView.setText(textToSet);
 						}
 					} else if (len > strLength) {
 						if (strLength > 0 && (".:").contains(str.substring(strLength - 1))) {
-							focusedEditText.setText(str.substring(0, str.length() - 1));
+							focusedTextView.setText(str.substring(0, str.length() - 1));
 						}
-						focusedEditText.setSelection(focusedEditText.getText().length());
 					}
 
 					if ((strLength == DEGREES_MAX_LENGTH && coordinateFormat == PointDescription.FORMAT_DEGREES)
 							|| (strLength == MINUTES_MAX_LENGTH && coordinateFormat == PointDescription.FORMAT_MINUTES)
 							|| (strLength == SECONDS_MAX_LENGTH && coordinateFormat == PointDescription.FORMAT_SECONDS)) {
-						switchToNextInput(focusedEditText.getId());
+						switchToNextInput(focusedTextView.getId());
 					}
 				}
 			}
@@ -522,7 +518,7 @@ public class CoordinateInputDialogFragment extends DialogFragment implements Osm
 						resId = 0;
 				}
 				if (resId != 0) {
-					OsmandTextFieldBoxes textFieldBox = mainView.findViewById(resId);
+					OsmandTextViewFieldBoxes textFieldBox = mainView.findViewById(resId);
 					if (b) {
 						textFieldBox.setHasFocus(true);
 					} else {
@@ -549,14 +545,14 @@ public class CoordinateInputDialogFragment extends DialogFragment implements Osm
 			}
 		};
 
-		for (ExtendedEditText editText : extendedEditTexts) {
-			if (editText.getId() != R.id.name_edit_text) {
-				editText.addTextChangedListener(textWatcher);
+		for (TextView textView : inputTextViews) {
+			if (textView.getId() != R.id.name_edit_text) {
+				textView.addTextChangedListener(textWatcher);
 			}
-			editText.setOnTouchListener(editTextOnTouchListener);
-			editText.setOnLongClickListener(editTextOnLongClickListener);
-			editText.setOnFocusChangeListener(focusChangeListener);
-			editText.setOnEditorActionListener(editTextOnEditorActionListener);
+			textView.setOnTouchListener(editTextOnTouchListener);
+			textView.setOnLongClickListener(editTextOnLongClickListener);
+			textView.setOnFocusChangeListener(focusChangeListener);
+			textView.setOnEditorActionListener(editTextOnEditorActionListener);
 		}
 	}
 
@@ -598,7 +594,7 @@ public class CoordinateInputDialogFragment extends DialogFragment implements Osm
 	}
 
 	public void changeKeyboardInBoxes() {
-		for (OsmandTextFieldBoxes textFieldBox : textFieldBoxes) {
+		for (OsmandTextViewFieldBoxes textFieldBox : textFieldBoxes) {
 			textFieldBox.setUseOsmandKeyboard(useOsmandKeyboard);
 		}
 	}
@@ -613,9 +609,9 @@ public class CoordinateInputDialogFragment extends DialogFragment implements Osm
 			maxLength = SECONDS_MAX_LENGTH;
 		}
 		InputFilter[] filtersArray = new InputFilter[] {new InputFilter.LengthFilter(maxLength)};
-		for (ExtendedEditText extendedEditText : extendedEditTexts) {
-			if (extendedEditText.getId() != R.id.name_edit_text) {
-				extendedEditText.setFilters(filtersArray);
+		for (TextView textView : inputTextViews) {
+			if (textView.getId() != R.id.name_edit_text) {
+				textView.setFilters(filtersArray);
 			}
 		}
 	}
@@ -629,18 +625,18 @@ public class CoordinateInputDialogFragment extends DialogFragment implements Osm
 		} else {
 			hint = SECONDS_HINT;
 		}
-		for (ExtendedEditText editText : extendedEditTexts) {
-			if (editText.getId() != R.id.name_edit_text) {
-				editText.setHint(hint);
+		for (TextView textView : inputTextViews) {
+			if (textView.getId() != R.id.name_edit_text) {
+				textView.setHint(hint);
 			}
 		}
 	}
 
 	private void switchToNextInput(int id) {
 		if (id == R.id.latitude_edit_text) {
-			((OsmandTextFieldBoxes) mainView.findViewById(R.id.longitude_box)).select();
+			((OsmandTextViewFieldBoxes) mainView.findViewById(R.id.longitude_box)).select();
 		} else {
-			((OsmandTextFieldBoxes) mainView.findViewById(R.id.name_box)).select();
+			((OsmandTextViewFieldBoxes) mainView.findViewById(R.id.name_box)).select();
 		}
 	}
 
@@ -671,14 +667,14 @@ public class CoordinateInputDialogFragment extends DialogFragment implements Osm
 		mapMarkers.add(mapMarker);
 		adapter.notifyDataSetChanged();
 		clearInputs();
-		((OsmandTextFieldBoxes) mainView.findViewById(R.id.latitude_box)).select();
+		((OsmandTextViewFieldBoxes) mainView.findViewById(R.id.latitude_box)).select();
 	}
 
 	private void clearInputs() {
-		for (ExtendedEditText editText : extendedEditTexts) {
-			editText.setText("");
+		for (TextView inputTextView : inputTextViews) {
+			inputTextView.setText("");
 		}
-		for (OsmandTextFieldBoxes osmandTextFieldBox : textFieldBoxes) {
+		for (OsmandTextViewFieldBoxes osmandTextFieldBox : textFieldBoxes) {
 			osmandTextFieldBox.deactivate();
 		}
 	}

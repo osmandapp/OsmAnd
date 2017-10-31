@@ -17,7 +17,7 @@ import android.widget.LinearLayout;
 
 import net.osmand.AndroidUtils;
 import net.osmand.IndexConstants;
-import net.osmand.plus.OsmandTextFieldBoxes;
+import net.osmand.plus.widgets.OsmandEditTextFieldBoxes;
 import net.osmand.plus.R;
 import net.osmand.plus.activities.MapActivity;
 import net.osmand.plus.base.BottomSheetDialogFragment;
@@ -76,8 +76,8 @@ public class SaveAsTrackBottomSheetDialogFragment extends BottomSheetDialogFragm
 		final EditText nameEditText = (EditText) mainView.findViewById(R.id.name_edit_text);
 		nameEditText.setText(displayedName);
 		View textBox = mainView.findViewById(R.id.name_text_box);
-		if (textBox instanceof OsmandTextFieldBoxes) {
-			((OsmandTextFieldBoxes) textBox).activate(true);
+		if (textBox instanceof OsmandEditTextFieldBoxes) {
+			((OsmandEditTextFieldBoxes) textBox).activate(true);
 		}
 
 		mainView.findViewById(R.id.save_button).setOnClickListener(new View.OnClickListener() {

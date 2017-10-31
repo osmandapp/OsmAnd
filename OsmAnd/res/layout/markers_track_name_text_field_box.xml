@@ -11,7 +11,7 @@
 		android:focusable="true"
 		android:focusableInTouchMode="true"/>
 
-	<net.osmand.plus.OsmandTextFieldBoxes
+	<net.osmand.plus.widgets.OsmandEditTextFieldBoxes
 		android:id="@+id/name_text_box"
 		android:layout_width="match_parent"
 		android:layout_height="wrap_content"
@@ -26,6 +26,6 @@
 			android:layout_width="match_parent"
 			android:layout_height="wrap_content"/>
 
-	</net.osmand.plus.OsmandTextFieldBoxes>
+	</net.osmand.plus.widgets.OsmandEditTextFieldBoxes>
 
 </LinearLayout>
