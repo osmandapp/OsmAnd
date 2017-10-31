@@ -2833,4 +2833,8 @@ Pro praghere iscrie su còdighe intreu</string>
 	<string name="shared_string_back">In dae segus</string>
 	<string name="view">Abbàida</string>
 	<string name="waypoints_added_to_map_markers">Puntos de coladòrgiu annantos a sos marcadores de sa mapa</string>
+	<string name="import_gpx_file_description">podet èssere importadu comente Preferidu o comente documentu de rasta.</string>
+    <string name="import_as_gpx">Importa comente documentu GPX</string>
+    <string name="import_as_favorites">Importa comente Preferidu</string>
+    <string name="import_file">Importa documentu</string>
 	</resources>
