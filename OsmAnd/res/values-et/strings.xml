@@ -110,7 +110,7 @@
     <string name="use_osm_live_routing_description">Aktiveeri OsmAnd Live muutuste navigeerimine</string>
 	<string name="use_osm_live_routing">OsmAnd Live navigeerimine</string>
     <string name="access_no_destination">Sihtkoht pole määratud</string>
-    <string name="map_widget_magnetic_bearing">Magnetlaager</string>
+    <string name="map_widget_magnetic_bearing">Asimuut</string>
     <string name="map_widget_bearing">Suhteline kurss</string>
     <string name="access_disable_offroute_recalc">Ära otsi uut marsruuti, kui eelmiselt lahkuti</string>
     <string name="access_disable_offroute_recalc_descr">Väldib automaatset uue marsruudi otsimist, kui eelmiselt marsruudilt lahkuti</string>
@@ -174,4 +174,8 @@
 \n
 \nSelleks, paigalda Mapillary rakendus Google Play veebipoest.</string>
     <string name="no_photos_descr">Sellest asukohast meil fotosid ei ole</string>
+    <string name="restart_search">Taaskäivita otsing</string>
+    <string name="quick_action_showhide_osmbugs_title">Näita/peida OSM Notes</string>
+    <string name="quick_action_osmbugs_show">Näita OSM Notes</string>
+    <string name="quick_action_osmbugs_hide">Peida OSM Notes</string>
     </resources>
