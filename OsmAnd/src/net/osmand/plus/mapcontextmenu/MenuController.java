@@ -502,8 +502,12 @@ public abstract class MenuController extends BaseMenuController {
 		public String rightTextCaption = "";
 		public boolean visible = true;
 		public boolean needColorizeIcon = true;
+		public Drawable leftIcon;
 
 		public Drawable getLeftIcon() {
+			if (leftIcon != null) {
+				return leftIcon;
+			}
 			if (leftIconId != 0) {
 				if (needColorizeIcon) {
 					return getIcon(leftIconId, isLight() ? R.color.map_widget_blue : R.color.osmand_orange);

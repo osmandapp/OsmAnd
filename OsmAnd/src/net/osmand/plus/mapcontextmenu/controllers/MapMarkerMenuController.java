@@ -1,8 +1,10 @@
 package net.osmand.plus.mapcontextmenu.controllers;
 
 import android.graphics.drawable.Drawable;
+import android.graphics.drawable.LayerDrawable;
 
 import net.osmand.data.PointDescription;
+import net.osmand.plus.IconsCache;
 import net.osmand.plus.MapMarkersHelper;
 import net.osmand.plus.MapMarkersHelper.MapMarker;
 import net.osmand.plus.R;
@@ -40,8 +42,16 @@ public class MapMarkerMenuController extends MenuController {
 				getMapActivity().getContextMenu().close();
 			}
 		};
-		leftSubtitleButtonController.needColorizeIcon = false;
 		leftSubtitleButtonController.caption = getMapActivity().getString(R.string.show_on_top_bar);
+		leftSubtitleButtonController.leftIcon = createShowOnTopbarIcon();
+	}
+
+	private Drawable createShowOnTopbarIcon() {
+		IconsCache ic = getMapActivity().getMyApplication().getIconsCache();
+		Drawable background = ic.getIcon(R.drawable.ic_action_device_top,
+				isLight() ? R.color.on_map_icon_color : R.color.ctx_menu_info_text_dark);
+		Drawable topbar = ic.getIcon(R.drawable.ic_action_device_topbar, R.color.dashboard_blue);
+		return new LayerDrawable(new Drawable[]{background, topbar});
 	}
 
 	@Override

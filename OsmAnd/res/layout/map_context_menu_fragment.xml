@@ -222,9 +222,7 @@
                     android:id="@+id/title_divider"
                     android:layout_width="match_parent"
                     android:layout_height="1dp"
-                    android:layout_marginBottom="@dimen/bottom_sheet_divider_margin_bottom"
                     android:layout_marginLeft="10dp"
-                    android:layout_marginTop="@dimen/bottom_sheet_divider_margin_top"
                     android:background="?attr/dashboard_divider"
                     android:visibility="gone"
                     tools:visibility="visible"/>
