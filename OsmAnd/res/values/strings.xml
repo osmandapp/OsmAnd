@@ -9,6 +9,8 @@
          3. All your modified/created strings are in the top of the file (to make easier find what\'s translated).
     PLEASE: Have a look at http://code.google.com/p/osmand/wiki/UIConsistency, it may really improve your and our work  :-)  Thx - Hardy
     -->
+    <string name="show_on_top_bar">Show on Top Bar</string>
+    <string name="mark_passed">Mark passed</string>
     <string name="import_gpx_file_description">can be imported as Favorites points, or as track file.</string>
     <string name="import_as_gpx">Import as GPX file</string>
     <string name="import_as_favorites">Import as Favorites</string>
