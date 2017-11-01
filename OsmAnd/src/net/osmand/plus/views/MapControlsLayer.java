@@ -48,7 +48,6 @@ import net.osmand.plus.dialogs.DirectionsDialogs;
 import net.osmand.plus.mapcontextmenu.MapContextMenu;
 import net.osmand.plus.mapcontextmenu.other.MapRouteInfoMenu;
 import net.osmand.plus.mapcontextmenu.other.TrackDetailsMenu;
-import net.osmand.plus.measurementtool.MeasurementToolFragment;
 import net.osmand.plus.routing.RoutingHelper;
 import net.osmand.plus.views.corenative.NativeCoreContext;
 
@@ -685,6 +684,20 @@ public class MapControlsLayer extends OsmandMapLayer {
 		} else {
 			showMapControls();
 		}
+	}
+
+	public void switchStatusbarAndNavbarVisibility() {
+		int uiOptions = mapActivity.getWindow().getDecorView().getSystemUiVisibility();
+		if (Build.VERSION.SDK_INT >= 14) {
+			uiOptions ^= View.SYSTEM_UI_FLAG_HIDE_NAVIGATION;
+		}
+		if (Build.VERSION.SDK_INT >= 16) {
+			uiOptions ^= View.SYSTEM_UI_FLAG_FULLSCREEN;
+		}
+		if (Build.VERSION.SDK_INT >= 19) {
+			uiOptions ^= View.SYSTEM_UI_FLAG_IMMERSIVE_STICKY;
+		}
+		mapActivity.getWindow().getDecorView().setSystemUiVisibility(uiOptions);
 	}
 
 	public void startNavigation() {
