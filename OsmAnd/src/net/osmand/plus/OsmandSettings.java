@@ -1042,8 +1042,8 @@ public class OsmandSettings {
 	public final CommonPreference<Boolean> SAVE_TRACK_TO_GPX = new BooleanPreference("save_track_to_gpx", false).makeProfile().cache();
 
 	{
-		SAVE_TRACK_TO_GPX.setModeDefaultValue(ApplicationMode.CAR, true);
-		SAVE_TRACK_TO_GPX.setModeDefaultValue(ApplicationMode.BICYCLE, true);
+		SAVE_TRACK_TO_GPX.setModeDefaultValue(ApplicationMode.CAR, false);
+		SAVE_TRACK_TO_GPX.setModeDefaultValue(ApplicationMode.BICYCLE, false);
 		SAVE_TRACK_TO_GPX.setModeDefaultValue(ApplicationMode.PEDESTRIAN, false);
 	}
 
