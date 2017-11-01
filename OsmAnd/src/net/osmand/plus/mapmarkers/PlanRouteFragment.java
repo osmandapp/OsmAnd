@@ -53,6 +53,7 @@ import net.osmand.plus.mapmarkers.adapters.MapMarkersListAdapter;
 import net.osmand.plus.measurementtool.SnapToRoadBottomSheetDialogFragment;
 import net.osmand.plus.measurementtool.SnapToRoadBottomSheetDialogFragment.SnapToRoadFragmentListener;
 import net.osmand.plus.routing.RoutingHelper;
+import net.osmand.plus.views.MapControlsLayer;
 import net.osmand.plus.views.MapMarkersLayer;
 import net.osmand.plus.views.OsmandMapTileView;
 import net.osmand.plus.views.mapwidgets.MapInfoWidgetsFactory;
@@ -362,10 +363,10 @@ public class PlanRouteFragment extends Fragment implements OsmAndLocationListene
 	public void onResume() {
 		super.onResume();
 		MapActivity mapActivity = getMapActivity();
-		if (mapActivity != null) {
-			mapActivity.getMyApplication().getLocationProvider().addLocationListener(this);
-		}
-		getMapActivity().getMapLayers().getMapControlsLayer().showMapControls();
+		mapActivity.getMyApplication().getLocationProvider().addLocationListener(this);
+		MapControlsLayer controlsLayer = mapActivity.getMapLayers().getMapControlsLayer();
+		controlsLayer.showMapControls();
+		controlsLayer.showSystemUI();
 	}
 
 	@Override

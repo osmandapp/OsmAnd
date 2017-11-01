@@ -656,9 +656,17 @@ public class MapControlsLayer extends OsmandMapLayer {
 		zoomOutButton.setOnLongClickListener(listener);
 	}
 
+	private boolean switchMapControlsAndSystemUiVisibilityNotAllowed() {
+		return app.getRoutingHelper().isFollowingMode() || app.getRoutingHelper().isPauseNavigation()
+				|| mapActivity.getMeasurementToolFragment() != null
+				|| mapActivity.getPlanRouteFragment() != null
+				|| mapActivity.getMapLayers().getRulerControlLayer().rulerModeOn();
+	}
+
 	public void showMapControls() {
 		mapActivity.findViewById(R.id.MapHudButtonsOverlay).setVisibility(View.VISIBLE);
 	}
+
 	public void hideMapControls() {
 		mapActivity.findViewById(R.id.MapHudButtonsOverlay).setVisibility(View.INVISIBLE);
 	}
@@ -673,10 +681,7 @@ public class MapControlsLayer extends OsmandMapLayer {
 	}
 
 	public void switchMapControlsVisibility() {
-		if (app.getRoutingHelper().isFollowingMode() || app.getRoutingHelper().isPauseNavigation()
-				|| mapActivity.getMeasurementToolFragment() != null
-				|| mapActivity.getPlanRouteFragment() != null
-				|| mapActivity.getMapLayers().getRulerControlLayer().rulerModeOn()) {
+		if (switchMapControlsAndSystemUiVisibilityNotAllowed()) {
 			return;
 		}
 		if (isMapControlsVisible()) {
@@ -686,15 +691,36 @@ public class MapControlsLayer extends OsmandMapLayer {
 		}
 	}
 
-	public void switchStatusbarAndNavbarVisibility() {
-		if (Build.VERSION.SDK_INT >= 19) {
-			View decorView = mapActivity.getWindow().getDecorView();
-			int uiOptions = decorView.getSystemUiVisibility();
-			uiOptions ^= View.SYSTEM_UI_FLAG_HIDE_NAVIGATION;
-			uiOptions ^= View.SYSTEM_UI_FLAG_FULLSCREEN;
-			uiOptions ^= View.SYSTEM_UI_FLAG_IMMERSIVE_STICKY;
-			decorView.setSystemUiVisibility(uiOptions);
+	public void showSystemUI() {
+		if (Build.VERSION.SDK_INT >= 19 && !isSystemUiVisible()) {
+			switchSystemUiVisibility();
 		}
+	}
+
+	public void hideSystemUI() {
+		if (Build.VERSION.SDK_INT >= 19 && isSystemUiVisible()) {
+			switchSystemUiVisibility();
+		}
+	}
+
+	public boolean isSystemUiVisible() {
+		if (Build.VERSION.SDK_INT >= 19) {
+			int uiOptions = mapActivity.getWindow().getDecorView().getSystemUiVisibility();
+			return !((uiOptions | View.SYSTEM_UI_FLAG_FULLSCREEN) == uiOptions);
+		}
+		return true;
+	}
+
+	public void switchSystemUiVisibility() {
+		if (switchMapControlsAndSystemUiVisibilityNotAllowed() || Build.VERSION.SDK_INT < 19) {
+			return;
+		}
+		View decorView = mapActivity.getWindow().getDecorView();
+		int uiOptions = decorView.getSystemUiVisibility();
+		uiOptions ^= View.SYSTEM_UI_FLAG_HIDE_NAVIGATION;
+		uiOptions ^= View.SYSTEM_UI_FLAG_FULLSCREEN;
+		uiOptions ^= View.SYSTEM_UI_FLAG_IMMERSIVE_STICKY;
+		decorView.setSystemUiVisibility(uiOptions);
 	}
 
 	public void startNavigation() {

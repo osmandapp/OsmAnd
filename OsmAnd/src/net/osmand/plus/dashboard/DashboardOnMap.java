@@ -85,6 +85,7 @@ import net.osmand.plus.srtmplugin.ContourLinesMenu;
 import net.osmand.plus.srtmplugin.HillshadeMenu;
 import net.osmand.plus.srtmplugin.SRTMPlugin;
 import net.osmand.plus.views.DownloadedRegionsLayer;
+import net.osmand.plus.views.MapControlsLayer;
 import net.osmand.plus.views.MapInfoLayer;
 import net.osmand.plus.views.OsmandMapTileView;
 import net.osmand.plus.views.controls.DynamicListView;
@@ -875,7 +876,9 @@ public class DashboardOnMap implements ObservableScrollViewCallbacks, DynamicLis
 				mapActivity.getMapView().refreshMap();
 			}
 
-			mapActivity.getMapLayers().getMapControlsLayer().showMapControls();
+			MapControlsLayer controlsLayer = mapActivity.getMapLayers().getMapControlsLayer();
+			controlsLayer.showMapControls();
+			controlsLayer.showSystemUI();
 			hideActionButton();
 			for (WeakReference<DashBaseFragment> df : fragList) {
 				if (df.get() != null) {
