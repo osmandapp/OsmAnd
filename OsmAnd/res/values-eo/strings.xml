@@ -560,8 +560,8 @@ Lon: %2$s</string>
     <string name="version_settings">Kompilaĵoj</string>
     <string name="version_settings_descr">Elŝutas antaŭ-alfajn versiojn</string>
     <string name="rendering_attr_streetLighting_name">Stratlumigado</string>
-    <string name="proxy_pref_title">Prokurilo</string>
-    <string name="proxy_pref_descr">Agordi prokurilan servilon (ang. proxy server)</string>
+    <string name="proxy_pref_title">Retperanto</string>
+    <string name="proxy_pref_descr">Agordi retperantan servilon (ang. proxy server)</string>
     <string name="points">Punktoj</string>
     <string name="navigation_over_track">Ĉu ekigi navigadon laŭlonge de spuro?</string>
     <string name="avoid_roads_msg">Vi povas vidi alternativan kurson per elekti vojojn evitindajn</string>
@@ -668,12 +668,12 @@ Lon: %2$s</string>
     <string name="voice_provider_descr">Elekti gvidadan voĉon por navigado</string>
     <string name="voice_provider">Gvidada voĉo</string>
 
-    <string name="enable_proxy_title">Aktivigi HTTP-prokurilon</string>
-    <string name="enable_proxy_descr">Agordi HTTP-prokurilon por ĉiuj retpetoj</string>
-    <string name="proxy_host_title">Prokurila komputil-nomo</string>
-    <string name="proxy_host_descr">Agordi komputil-nomon de via prokurilo (ekz. 127.0.0.1)</string>
-    <string name="proxy_port_title">Prokurila pordo</string>
-    <string name="proxy_port_descr">Agordi pordan numeron de via prokurilo (ekz. 8118)</string>
+    <string name="enable_proxy_title">Aktivigi HTTP-retperanton</string>
+    <string name="enable_proxy_descr">Agordi HTTP-retperanton por ĉiuj retpetoj</string>
+    <string name="proxy_host_title">Komputil-nomo de retperanto</string>
+    <string name="proxy_host_descr">Agordi komputil-nomon de via retperanta servilo (ekz. 127.0.0.1)</string>
+    <string name="proxy_port_title">Pordo de retperanto</string>
+    <string name="proxy_port_descr">Agordi pordan numeron de via retperanto (ekz. 8118)</string>
     <string name="monitoring_settings">Registrado de spuro</string>
     <string name="monitoring_settings_descr">Agordi kiel registri spurojn</string>
     <string name="duration">Daŭro</string>
