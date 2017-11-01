@@ -16,7 +16,6 @@ import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.PopupMenu;
 import android.support.v7.widget.RecyclerView;
 import android.text.Editable;
-import android.text.InputFilter;
 import android.text.InputType;
 import android.text.TextWatcher;
 import android.util.TypedValue;
@@ -69,17 +68,12 @@ public class CoordinateInputDialogFragment extends DialogFragment implements Osm
 
 	public static final String TAG = "CoordinateInputDialogFragment";
 
-	public static final String COORDINATE_FORMAT = "coordinate_format";
 	public static final String USE_OSMAND_KEYBOARD = "use_osmand_keyboard";
+	public static final String GO_TO_NEXT_FIELD = "go_to_next_field";
+	public static final String ACCURACY = "accuracy";
 
 	private static final int CLEAR_BUTTON_POSITION = 9;
 	private static final int DELETE_BUTTON_POSITION = 11;
-	private static final int DEGREES_MAX_LENGTH = 6;
-	private static final int MINUTES_MAX_LENGTH = 9;
-	private static final int SECONDS_MAX_LENGTH = 12;
-	private static final String DEGREES_HINT = "50.000";
-	private static final String MINUTES_HINT = "50:00.000";
-	private static final String SECONDS_HINT = "50:00:00.000";
 	private static final String LATITUDE_LABEL = "latitude";
 	private static final String LONGITUDE_LABEL = "longitude";
 	private static final String NAME_LABEL = "name";
@@ -89,7 +83,8 @@ public class CoordinateInputDialogFragment extends DialogFragment implements Osm
 	private CoordinateInputAdapter adapter;
 	private boolean lightTheme;
 	private boolean useOsmandKeyboard = true;
-	private int coordinateFormat = -1;
+	private boolean goToNextField;
+	private int accuracy = 4;
 	private List<OsmandTextFieldBoxes> textFieldBoxes;
 	private List<EditText> inputEditTexts;
 	private View mainView;
@@ -112,10 +107,6 @@ public class CoordinateInputDialogFragment extends DialogFragment implements Osm
 		lightTheme = app.getSettings().OSMAND_THEME.get() == OsmandSettings.OSMAND_LIGHT_THEME;
 		int themeId = lightTheme ? R.style.OsmandLightTheme : R.style.OsmandDarkTheme;
 		setStyle(STYLE_NO_FRAME, themeId);
-
-		CoordinateInputBottomSheetDialogFragment fragment = new CoordinateInputBottomSheetDialogFragment();
-		fragment.setListener(createCoordinateInputFormatChangeListener());
-		fragment.show(getMapActivity().getSupportFragmentManager(), CoordinateInputBottomSheetDialogFragment.TAG);
 	}
 
 	@NonNull
@@ -172,8 +163,9 @@ public class CoordinateInputDialogFragment extends DialogFragment implements Osm
 				}
 				CoordinateInputBottomSheetDialogFragment fragment = new CoordinateInputBottomSheetDialogFragment();
 				Bundle args = new Bundle();
-				args.putInt(COORDINATE_FORMAT, coordinateFormat);
 				args.putBoolean(USE_OSMAND_KEYBOARD, useOsmandKeyboard);
+				args.putBoolean(GO_TO_NEXT_FIELD, goToNextField);
+				args.putInt(ACCURACY, accuracy);
 				fragment.setArguments(args);
 				fragment.setListener(createCoordinateInputFormatChangeListener());
 				fragment.show(getMapActivity().getSupportFragmentManager(), CoordinateInputBottomSheetDialogFragment.TAG);
@@ -215,10 +207,6 @@ public class CoordinateInputDialogFragment extends DialogFragment implements Osm
 
 		if (savedInstanceState == null) {
 			latitudeBox.select();
-		} else {
-			changeInputEditTextHints();
-			changeInputEditTextsLengths();
-			changeKeyboardInEditTexts();
 		}
 
 		final View mapMarkersLayout = mainView.findViewById(R.id.map_markers_layout);
@@ -382,42 +370,6 @@ public class CoordinateInputDialogFragment extends DialogFragment implements Osm
 				if (focusedView != null && focusedView instanceof EditText) {
 					EditText focusedEditText = (EditText) focusedView;
 					String str = focusedEditText.getText().toString();
-					int strLength = str.length();
-					if (len < strLength) {
-						String strAfterChanging = str.substring(len);
-						String strDivider = null;
-						if (strLength == 3) {
-							if (coordinateFormat == PointDescription.FORMAT_DEGREES) {
-								strDivider = ".";
-							} else {
-								strDivider = ":";
-							}
-						} else if (strLength == 6 && coordinateFormat != PointDescription.FORMAT_DEGREES) {
-							if (coordinateFormat == PointDescription.FORMAT_MINUTES) {
-								strDivider = ".";
-							} else {
-								strDivider = ":";
-							}
-						} else if (strLength == 9 && coordinateFormat == PointDescription.FORMAT_SECONDS) {
-							strDivider = ".";
-						}
-						if (strDivider != null) {
-							String textToSet = strBeforeChanging + strDivider + strAfterChanging;
-							focusedEditText.setText(textToSet);
-							focusedEditText.setSelection(textToSet.length());
-						}
-					} else if (len > strLength) {
-						if (strLength > 0 && (".:").contains(str.substring(strLength - 1))) {
-							focusedEditText.setText(str.substring(0, str.length() - 1));
-						}
-						focusedEditText.setSelection(focusedEditText.getText().length());
-					}
-
-					if ((strLength == DEGREES_MAX_LENGTH && coordinateFormat == PointDescription.FORMAT_DEGREES)
-							|| (strLength == MINUTES_MAX_LENGTH && coordinateFormat == PointDescription.FORMAT_MINUTES)
-							|| (strLength == SECONDS_MAX_LENGTH && coordinateFormat == PointDescription.FORMAT_SECONDS)) {
-						switchToNextInput(focusedEditText.getId());
-					}
 				}
 			}
 		};
@@ -429,13 +381,16 @@ public class CoordinateInputDialogFragment extends DialogFragment implements Osm
 					if (orientationPortrait && !isOsmandKeyboardCurrentlyVisible()) {
 						changeOsmandKeyboardVisibility(true);
 					}
-					AndroidUtils.hideSoftKeyboard(getActivity(), view);
-					return false;
+					EditText editText = (EditText) view;
+					int inType = editText.getInputType();       // Backup the input type
+					editText.setInputType(InputType.TYPE_NULL); // Disable standard keyboard
+					editText.onTouchEvent(motionEvent);               // Call native handler
+					editText.setInputType(inType);              // Restore input type
+					return true; // Consume touch event
 				} else {
 					if (isOsmandKeyboardCurrentlyVisible()) {
 						changeOsmandKeyboardVisibility(false);
 					}
-					AndroidUtils.showSoftKeyboard(view);
 					return false;
 				}
 			}
@@ -554,17 +509,14 @@ public class CoordinateInputDialogFragment extends DialogFragment implements Osm
 			textView.setOnFocusChangeListener(focusChangeListener);
 			textView.setOnEditorActionListener(inputTextViewOnEditorActionListener);
 		}
+
+		changeInputEditTextHints();
+		changeInputEditTextLengths();
+		changeKeyboardInEditTexts();
 	}
 
 	private CoordinateInputBottomSheetDialogFragment.CoordinateInputFormatChangeListener createCoordinateInputFormatChangeListener() {
 		return new CoordinateInputBottomSheetDialogFragment.CoordinateInputFormatChangeListener() {
-			@Override
-			public void onCoordinateFormatChanged(int format) {
-				coordinateFormat = format;
-				changeInputEditTextHints();
-				changeInputEditTextsLengths();
-			}
-
 			@Override
 			public void onKeyboardChanged(boolean useOsmandKeyboard) {
 				CoordinateInputDialogFragment.this.useOsmandKeyboard = useOsmandKeyboard;
@@ -576,8 +528,15 @@ public class CoordinateInputDialogFragment extends DialogFragment implements Osm
 			}
 
 			@Override
-			public void onCancel() {
-				dismiss();
+			public void onGoToNextFieldChanged(boolean goToNextField) {
+				CoordinateInputDialogFragment.this.goToNextField = goToNextField;
+			}
+
+			@Override
+			public void onAccuracyChanged(int accuracy) {
+				CoordinateInputDialogFragment.this.accuracy = accuracy;
+				changeInputEditTextHints();
+				changeInputEditTextLengths();
 			}
 		};
 	}
@@ -608,37 +567,37 @@ public class CoordinateInputDialogFragment extends DialogFragment implements Osm
 //		}
   	}
 
-	private void changeInputEditTextsLengths() {
-		int maxLength;
-		if (coordinateFormat == PointDescription.FORMAT_DEGREES) {
-			maxLength = DEGREES_MAX_LENGTH;
-		} else if (coordinateFormat == PointDescription.FORMAT_MINUTES) {
-			maxLength = MINUTES_MAX_LENGTH;
-		} else {
-			maxLength = SECONDS_MAX_LENGTH;
-		}
-		InputFilter[] filtersArray = new InputFilter[] {new InputFilter.LengthFilter(maxLength)};
-		for (EditText editText : inputEditTexts) {
-			if (editText.getId() != R.id.name_edit_text) {
-				editText.setFilters(filtersArray);
-			}
-		}
+	private void changeInputEditTextLengths() {
+//		int maxLength;
+//		if (accuracy == PointDescription.FORMAT_DEGREES) {
+//			maxLength = DEGREES_MAX_LENGTH;
+//		} else if (accuracy == PointDescription.FORMAT_MINUTES) {
+//			maxLength = MINUTES_MAX_LENGTH;
+//		} else {
+//			maxLength = SECONDS_MAX_LENGTH;
+//		}
+//		InputFilter[] filtersArray = new InputFilter[] {new InputFilter.LengthFilter(maxLength)};
+//		for (EditText editText : inputEditTexts) {
+//			if (editText.getId() != R.id.name_edit_text) {
+//				editText.setFilters(filtersArray);
+//			}
+//		}
 	}
 
 	private void changeInputEditTextHints() {
-		String hint;
-		if (coordinateFormat == PointDescription.FORMAT_DEGREES) {
-			hint = DEGREES_HINT;
-		} else if (coordinateFormat == PointDescription.FORMAT_MINUTES) {
-			hint = MINUTES_HINT;
-		} else {
-			hint = SECONDS_HINT;
-		}
-		for (EditText editText : inputEditTexts) {
-			if (editText.getId() != R.id.name_edit_text) {
-				editText.setHint(hint);
-			}
-		}
+//		String hint;
+//		if (accuracy == PointDescription.FORMAT_DEGREES) {
+//			hint = DEGREES_HINT;
+//		} else if (accuracy == PointDescription.FORMAT_MINUTES) {
+//			hint = MINUTES_HINT;
+//		} else {
+//			hint = SECONDS_HINT;
+//		}
+//		for (EditText editText : inputEditTexts) {
+//			if (editText.getId() != R.id.name_edit_text) {
+//				editText.setHint(hint);
+//			}
+//		}
 	}
 
 	private void switchToNextInput(int id) {

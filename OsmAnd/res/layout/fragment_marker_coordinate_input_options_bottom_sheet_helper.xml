@@ -1,120 +1,289 @@
 <?xml version="1.0" encoding="utf-8"?>
 <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
-              xmlns:osmand="http://schemas.android.com/apk/res-auto"
-              xmlns:tools="http://schemas.android.com/tools"
-              android:layout_width="match_parent"
-              android:layout_height="wrap_content"
-              android:background="?attr/bg_color"
-              android:orientation="vertical">
+			  xmlns:osmand="http://schemas.android.com/apk/res-auto"
+			  xmlns:tools="http://schemas.android.com/tools"
+			  android:layout_width="match_parent"
+			  android:layout_height="wrap_content"
+			  android:background="?attr/bg_color"
+			  android:orientation="vertical">
 
-    <ScrollView
-        android:id="@+id/marker_coordinate_input_scroll_view"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content">
+	<ScrollView
+		android:id="@+id/marker_coordinate_input_scroll_view"
+		android:layout_width="match_parent"
+		android:layout_height="wrap_content">
 
-        <LinearLayout
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:orientation="vertical"
-            android:paddingBottom="@dimen/bottom_sheet_content_padding_small">
+		<LinearLayout
+			android:layout_width="match_parent"
+			android:layout_height="wrap_content"
+			android:orientation="vertical"
+			android:paddingBottom="@dimen/bottom_sheet_content_padding_small">
 
-            <net.osmand.plus.widgets.TextViewEx
-                android:id="@+id/coordinate_input_title"
-                android:layout_width="match_parent"
-                android:layout_height="@dimen/bottom_sheet_title_height"
-                android:gravity="center_vertical"
-                android:paddingEnd="@dimen/content_padding"
-                android:paddingLeft="@dimen/content_padding"
-                android:paddingRight="@dimen/content_padding"
-                android:paddingStart="@dimen/content_padding"
-                android:text="@string/shared_string_options"
-                android:textAppearance="@style/TextAppearance.ListItemTitle"
-                osmand:typeface="@string/font_roboto_medium"/>
+			<net.osmand.plus.widgets.TextViewEx
+				android:id="@+id/coordinate_input_title"
+				android:layout_width="match_parent"
+				android:layout_height="@dimen/bottom_sheet_title_height"
+				android:gravity="center_vertical"
+				android:paddingEnd="@dimen/content_padding"
+				android:paddingLeft="@dimen/content_padding"
+				android:paddingRight="@dimen/content_padding"
+				android:paddingStart="@dimen/content_padding"
+				android:text="@string/shared_string_options"
+				android:textAppearance="@style/TextAppearance.ListItemTitle"
+				osmand:typeface="@string/font_roboto_medium"/>
 
-            <LinearLayout
-                android:id="@+id/use_system_keyboard_row"
-                android:layout_width="match_parent"
-                android:layout_height="@dimen/bottom_sheet_list_item_height"
-                android:background="?attr/selectableItemBackground"
-                android:descendantFocusability="blocksDescendants"
-                android:minHeight="@dimen/bottom_sheet_list_item_height"
-                android:paddingLeft="@dimen/content_padding"
-                android:paddingRight="@dimen/content_padding">
+			<LinearLayout
+				android:id="@+id/use_system_keyboard_row"
+				android:layout_width="match_parent"
+				android:layout_height="@dimen/bottom_sheet_list_item_height"
+				android:background="?attr/selectableItemBackground"
+				android:descendantFocusability="blocksDescendants"
+				android:minHeight="@dimen/bottom_sheet_list_item_height"
+				android:paddingLeft="@dimen/content_padding"
+				android:paddingRight="@dimen/content_padding">
 
-                <ImageView
-                    android:layout_gravity="center_vertical"
-                    android:id="@+id/use_system_keyboard_icon"
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:layout_marginEnd="@dimen/bottom_sheet_icon_margin"
-                    android:layout_marginRight="@dimen/bottom_sheet_icon_margin"
-                    tools:src="@drawable/ic_action_keyboard"/>
+				<ImageView
+					android:id="@+id/use_system_keyboard_icon"
+					android:layout_width="wrap_content"
+					android:layout_height="wrap_content"
+					android:layout_gravity="center_vertical"
+					android:layout_marginEnd="@dimen/bottom_sheet_icon_margin"
+					android:layout_marginRight="@dimen/bottom_sheet_icon_margin"
+					tools:src="@drawable/ic_action_keyboard"/>
 
-                <TextView
-                    android:layout_width="0dp"
-                    android:layout_height="wrap_content"
-                    android:layout_gravity="center_vertical"
-                    android:layout_weight="1"
-                    android:ellipsize="end"
-                    android:maxLines="1"
-                    android:text="@string/use_system_keyboard"
-                    android:textAppearance="@style/TextAppearance.ListItemTitle"/>
+				<TextView
+					android:layout_width="0dp"
+					android:layout_height="wrap_content"
+					android:layout_gravity="center_vertical"
+					android:layout_weight="1"
+					android:ellipsize="end"
+					android:maxLines="1"
+					android:text="@string/use_system_keyboard"
+					android:textAppearance="@style/TextAppearance.ListItemTitle"/>
 
-                <android.support.v7.widget.SwitchCompat
-                    android:id="@+id/use_system_keyboard_switch"
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:layout_gravity="center_vertical|end"
-                    android:background="@null"
-                    android:clickable="false"
-                    android:focusable="false"
-                    android:focusableInTouchMode="false"/>
-            </LinearLayout>
+				<android.support.v7.widget.SwitchCompat
+					android:id="@+id/use_system_keyboard_switch"
+					android:layout_width="wrap_content"
+					android:layout_height="wrap_content"
+					android:layout_gravity="center_vertical|end"
+					android:background="@null"
+					android:clickable="false"
+					android:focusable="false"
+					android:focusableInTouchMode="false"/>
+			</LinearLayout>
 
-            <View
-                android:layout_width="match_parent"
-                android:layout_height="1dp"
-                android:background="?attr/dashboard_divider"/>
+			<View
+				android:layout_width="match_parent"
+				android:layout_height="1dp"
+				android:background="?attr/dashboard_divider"/>
 
-            <TextView
-                android:textColor="?android:textColorSecondary"
-                android:ellipsize="end"
-                android:maxLines="1"
-                android:textAllCaps="true"
-                android:paddingTop="@dimen/bottom_sheet_content_padding_small"
-                android:paddingBottom="@dimen/bottom_sheet_content_padding_small"
-                android:paddingLeft="@dimen/content_padding"
-                android:paddingRight="@dimen/content_padding"
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:text="@string/coordinates_format"/>
+			<LinearLayout
+				android:id="@+id/go_to_next_field_row"
+				android:layout_width="match_parent"
+				android:layout_height="@dimen/bottom_sheet_list_item_height"
+				android:background="?attr/selectableItemBackground"
+				android:descendantFocusability="blocksDescendants"
+				android:minHeight="@dimen/bottom_sheet_list_item_height"
+				android:paddingLeft="@dimen/content_padding"
+				android:paddingRight="@dimen/content_padding">
 
-            <include layout="@layout/marker_coordinate_formats"/>
+				<ImageView
+					android:id="@+id/go_to_next_field_icon"
+					android:layout_width="wrap_content"
+					android:layout_height="wrap_content"
+					android:layout_gravity="center_vertical"
+					android:layout_marginEnd="@dimen/bottom_sheet_icon_margin"
+					android:layout_marginRight="@dimen/bottom_sheet_icon_margin"
+					tools:src="@drawable/ic_action_keyboard"/>
 
-        </LinearLayout>
+				<TextView
+					android:layout_width="0dp"
+					android:layout_height="wrap_content"
+					android:layout_gravity="center_vertical"
+					android:layout_weight="1"
+					android:ellipsize="end"
+					android:maxLines="1"
+					android:text="@string/go_to_next_field"
+					android:textAppearance="@style/TextAppearance.ListItemTitle"/>
 
-    </ScrollView>
+				<android.support.v7.widget.SwitchCompat
+					android:id="@+id/go_to_next_field_switch"
+					android:layout_width="wrap_content"
+					android:layout_height="wrap_content"
+					android:layout_gravity="center_vertical|end"
+					android:background="@null"
+					android:clickable="false"
+					android:focusable="false"
+					android:focusableInTouchMode="false"/>
+			</LinearLayout>
 
-    <View
-        android:layout_width="match_parent"
-        android:layout_height="1dp"
-        android:background="?attr/dashboard_divider"/>
+			<TextView
+				android:id="@+id/coordinate_input_accuracy_descr"
+				android:layout_width="match_parent"
+				android:layout_height="@dimen/bottom_sheet_descr_height"
+				android:paddingEnd="@dimen/content_padding"
+				android:paddingLeft="@dimen/bottom_sheet_divider_margin_start"
+				android:paddingRight="@dimen/content_padding"
+				android:paddingStart="@dimen/bottom_sheet_divider_margin_start"
+				android:textColor="?android:textColorSecondary"
+				android:textSize="@dimen/default_desc_text_size"
+				tools:text="@string/coordinate_input_accuracy_description"/>
 
-    <FrameLayout
-        android:id="@+id/cancel_row"
-        android:layout_width="match_parent"
-        android:layout_height="@dimen/bottom_sheet_cancel_button_height"
-        android:background="?attr/selectableItemBackground">
+			<LinearLayout
+				android:id="@+id/four_digits_row"
+				android:layout_width="match_parent"
+				android:layout_height="@dimen/bottom_sheet_list_item_height"
+				android:background="?attr/selectableItemBackground"
+				android:gravity="center_vertical"
+				android:minHeight="@dimen/bottom_sheet_list_item_height"
+				android:paddingEnd="@dimen/content_padding"
+				android:paddingLeft="@dimen/bottom_sheet_divider_margin_start"
+				android:paddingRight="@dimen/content_padding"
+				android:paddingStart="@dimen/bottom_sheet_divider_margin_start">
 
-        <TextView
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_gravity="center"
-            android:text="@string/shared_string_close"
-            android:textAllCaps="true"
-            android:textColor="?attr/color_dialog_buttons"
-            android:textSize="@dimen/default_desc_text_size"
-            android:textStyle="bold"/>
-    </FrameLayout>
+				<LinearLayout
+					android:layout_width="0dp"
+					android:layout_height="match_parent"
+					android:layout_weight="1"
+					android:gravity="center_vertical"
+					android:orientation="vertical">
+
+					<TextView
+						android:id="@+id/four_digits_title"
+						android:layout_width="wrap_content"
+						android:layout_height="wrap_content"
+						android:maxLines="1"
+						android:textAppearance="@style/TextAppearance.ListItemTitle"
+						tools:text="4 digits"/>
+
+					<TextView
+						android:id="@+id/four_digits_description"
+						android:layout_width="wrap_content"
+						android:layout_height="wrap_content"
+						tools:text="00:00.0000"/>
+
+				</LinearLayout>
+
+				<RadioButton
+					android:id="@+id/four_digits_radio_button"
+					android:layout_width="wrap_content"
+					android:layout_height="wrap_content"
+					android:background="@null"
+					android:clickable="false"
+					android:focusable="false"/>
+			</LinearLayout>
+
+			<LinearLayout
+				android:id="@+id/three_digits_row"
+				android:layout_width="match_parent"
+				android:layout_height="@dimen/bottom_sheet_list_item_height"
+				android:background="?attr/selectableItemBackground"
+				android:gravity="center_vertical"
+				android:minHeight="@dimen/bottom_sheet_list_item_height"
+				android:paddingEnd="@dimen/content_padding"
+				android:paddingLeft="@dimen/bottom_sheet_divider_margin_start"
+				android:paddingRight="@dimen/content_padding"
+				android:paddingStart="@dimen/bottom_sheet_divider_margin_start">
+
+				<LinearLayout
+					android:layout_width="0dp"
+					android:layout_height="match_parent"
+					android:layout_weight="1"
+					android:gravity="center_vertical"
+					android:orientation="vertical">
+
+					<TextView
+						android:id="@+id/three_digits_title"
+						android:layout_width="wrap_content"
+						android:layout_height="wrap_content"
+						android:maxLines="1"
+						android:textAppearance="@style/TextAppearance.ListItemTitle"
+						tools:text="3 digits"/>
+
+					<TextView
+						android:id="@+id/three_digits_description"
+						android:layout_width="wrap_content"
+						android:layout_height="wrap_content"
+						tools:text="00:00.000"/>
+
+				</LinearLayout>
+
+				<RadioButton
+					android:id="@+id/three_digits_radio_button"
+					android:layout_width="wrap_content"
+					android:layout_height="wrap_content"
+					android:background="@null"
+					android:clickable="false"
+					android:focusable="false"/>
+			</LinearLayout>
+
+			<LinearLayout
+				android:id="@+id/two_digits_row"
+				android:layout_width="match_parent"
+				android:layout_height="@dimen/bottom_sheet_list_item_height"
+				android:background="?attr/selectableItemBackground"
+				android:gravity="center_vertical"
+				android:minHeight="@dimen/bottom_sheet_list_item_height"
+				android:paddingEnd="@dimen/content_padding"
+				android:paddingLeft="@dimen/bottom_sheet_divider_margin_start"
+				android:paddingRight="@dimen/content_padding"
+				android:paddingStart="@dimen/bottom_sheet_divider_margin_start">
+
+				<LinearLayout
+					android:layout_width="0dp"
+					android:layout_height="match_parent"
+					android:layout_weight="1"
+					android:gravity="center_vertical"
+					android:orientation="vertical">
+
+					<TextView
+						android:id="@+id/two_digits_title"
+						android:layout_width="wrap_content"
+						android:layout_height="wrap_content"
+						android:maxLines="1"
+						android:textAppearance="@style/TextAppearance.ListItemTitle"
+						tools:text="2 digits"/>
+
+					<TextView
+						android:id="@+id/two_digits_description"
+						android:layout_width="wrap_content"
+						android:layout_height="wrap_content"
+						tools:text="00:00.00"/>
+
+				</LinearLayout>
+
+				<RadioButton
+					android:id="@+id/two_digits_radio_button"
+					android:layout_width="wrap_content"
+					android:layout_height="wrap_content"
+					android:background="@null"
+					android:clickable="false"
+					android:focusable="false"/>
+			</LinearLayout>
+
+		</LinearLayout>
+
+	</ScrollView>
+
+	<View
+		android:layout_width="match_parent"
+		android:layout_height="1dp"
+		android:background="?attr/dashboard_divider"/>
+
+	<FrameLayout
+		android:id="@+id/cancel_row"
+		android:layout_width="match_parent"
+		android:layout_height="@dimen/bottom_sheet_cancel_button_height"
+		android:background="?attr/selectableItemBackground">
+
+		<TextView
+			android:layout_width="wrap_content"
+			android:layout_height="wrap_content"
+			android:layout_gravity="center"
+			android:text="@string/shared_string_close"
+			android:textAllCaps="true"
+			android:textColor="?attr/color_dialog_buttons"
+			android:textSize="@dimen/default_desc_text_size"
+			android:textStyle="bold"/>
+	</FrameLayout>
 
 </LinearLayout>
