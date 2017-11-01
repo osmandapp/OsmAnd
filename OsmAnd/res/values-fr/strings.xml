@@ -2934,7 +2934,7 @@ représentant la zone : %1$s x %2$s</string>
     <string name="order_by">Trier par :</string>
     <string name="marker_show_distance_descr">Sélectionnez comment indiquer sur la carte la distance et la direction des marques :</string>
     <string name="map_orientation_change_in_accordance_with_speed_descr">Indiquez ci-dessous à quelle vitesse l\'orientation de la carte doit basculer de \'Sens du déplacement\' à \'Boussole\'</string>
-    <string name="passed">Visités : %1$s</string>
+    <string name="passed">Dernière utilisation : %1$s</string>
     <string name="show_guide_line">Afficher les lignes de guidage</string>
     <string name="show_arrows_on_the_map">Afficher les flèches sur la carte</string>
     <string name="show_passed">Afficher les visités</string>
@@ -2988,4 +2988,8 @@ représentant la zone : %1$s x %2$s</string>
     <string name="import_as_gpx">Importer comme fichier GPX</string>
     <string name="import_as_favorites">Importer comme Favoris</string>
     <string name="import_file">Importer fichier</string>
-	</resources>
+	<string name="tap_on_map_to_hide_interface_descr">Une tape n\'importe où sur la carte masque l\'interface et bascule en mode plein écran.</string>
+    <string name="tap_on_map_to_hide_interface">Taper sur la carte masque l\'interface</string>
+    <string name="show_on_top_bar">Afficher dans la barre supérieure</string>
+    <string name="mark_passed">Marqué comme passé</string>
+    </resources>
