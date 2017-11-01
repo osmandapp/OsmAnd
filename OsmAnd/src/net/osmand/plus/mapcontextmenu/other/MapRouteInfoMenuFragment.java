@@ -13,7 +13,6 @@ import net.osmand.AndroidUtils;
 import net.osmand.plus.R;
 import net.osmand.plus.activities.MapActivity;
 import net.osmand.plus.helpers.AndroidUiHelper;
-import net.osmand.plus.views.MapControlsLayer;
 
 public class MapRouteInfoMenuFragment extends Fragment {
 	public static final String TAG = "MapRouteInfoMenuFragment";
@@ -55,9 +54,7 @@ public class MapRouteInfoMenuFragment extends Fragment {
 		if (menu == null) {
 			dismiss();
 		}
-		MapControlsLayer controlsLayer = getMapActivity().getMapLayers().getMapControlsLayer();
-		controlsLayer.showMapControls();
-		controlsLayer.showSystemUI();
+		getMapActivity().getMapLayers().getMapControlsLayer().showMapControls();
 	}
 
 	@Override

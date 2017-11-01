@@ -930,7 +930,6 @@ public class MapActivity extends OsmandActionBarActivity implements DownloadEven
 
 	public void readLocationToShow() {
 		mapLayers.getMapControlsLayer().showMapControls();
-		mapLayers.getMapControlsLayer().showSystemUI();
 
 		LatLon cur = new LatLon(mapView.getLatitude(), mapView.getLongitude());
 		LatLon latLonToShow = settings.getAndClearMapLocationToShow();

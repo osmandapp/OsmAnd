@@ -46,7 +46,6 @@ import net.osmand.plus.mapcontextmenu.MenuController.TitleButtonController;
 import net.osmand.plus.mapcontextmenu.MenuController.TitleProgressController;
 import net.osmand.plus.mapcontextmenu.other.MapRouteInfoMenu;
 import net.osmand.plus.views.AnimateDraggingMapThread;
-import net.osmand.plus.views.MapControlsLayer;
 import net.osmand.plus.views.OsmandMapTileView;
 import net.osmand.plus.views.controls.HorizontalSwipeConfirm;
 import net.osmand.plus.views.controls.SingleTapConfirm;
@@ -905,9 +904,7 @@ public class MapContextMenuFragment extends Fragment implements DownloadEvents {
 			((View) parent).addOnLayoutChangeListener(containerLayoutListener);
 		}
 		menu.updateControlsVisibility(true);
-		MapControlsLayer controlsLayer = getMapActivity().getMapLayers().getMapControlsLayer();
-		controlsLayer.showMapControls();
-		controlsLayer.showSystemUI();
+		getMapActivity().getMapLayers().getMapControlsLayer().showMapControls();
 	}
 
 	@Override

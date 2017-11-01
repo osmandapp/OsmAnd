@@ -656,15 +656,16 @@ public class MapControlsLayer extends OsmandMapLayer {
 		zoomOutButton.setOnLongClickListener(listener);
 	}
 
-	private boolean switchMapControlsAndSystemUiVisibilityNotAllowed() {
-		return app.getRoutingHelper().isFollowingMode() || app.getRoutingHelper().isPauseNavigation()
+	private boolean isFullscreenModeAllowed() {
+		return !(app.getRoutingHelper().isFollowingMode() || app.getRoutingHelper().isPauseNavigation()
 				|| mapActivity.getMeasurementToolFragment() != null
 				|| mapActivity.getPlanRouteFragment() != null
-				|| mapActivity.getMapLayers().getRulerControlLayer().rulerModeOn();
+				|| mapActivity.getMapLayers().getRulerControlLayer().rulerModeOn());
 	}
 
 	public void showMapControls() {
 		mapActivity.findViewById(R.id.MapHudButtonsOverlay).setVisibility(View.VISIBLE);
+		showSystemUI();
 	}
 
 	public void hideMapControls() {
@@ -681,7 +682,7 @@ public class MapControlsLayer extends OsmandMapLayer {
 	}
 
 	public void switchMapControlsVisibility() {
-		if (switchMapControlsAndSystemUiVisibilityNotAllowed()) {
+		if (!isFullscreenModeAllowed()) {
 			return;
 		}
 		if (isMapControlsVisible()) {
@@ -712,7 +713,7 @@ public class MapControlsLayer extends OsmandMapLayer {
 	}
 
 	public void switchSystemUiVisibility() {
-		if (switchMapControlsAndSystemUiVisibilityNotAllowed() || Build.VERSION.SDK_INT < 19) {
+		if (!isFullscreenModeAllowed() || Build.VERSION.SDK_INT < 19) {
 			return;
 		}
 		View decorView = mapActivity.getWindow().getDecorView();

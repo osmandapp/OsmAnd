@@ -61,7 +61,6 @@ import net.osmand.plus.measurementtool.command.ClearPointsCommand;
 import net.osmand.plus.measurementtool.command.MovePointCommand;
 import net.osmand.plus.measurementtool.command.RemovePointCommand;
 import net.osmand.plus.measurementtool.command.ReorderPointCommand;
-import net.osmand.plus.views.MapControlsLayer;
 import net.osmand.plus.views.OsmandMapTileView;
 import net.osmand.plus.views.mapwidgets.MapInfoWidgetsFactory;
 import net.osmand.plus.views.mapwidgets.MapInfoWidgetsFactory.TopToolbarController;
@@ -462,9 +461,7 @@ public class MeasurementToolFragment extends Fragment {
 	@Override
 	public void onResume() {
 		super.onResume();
-		MapControlsLayer controlsLayer = getMapActivity().getMapLayers().getMapControlsLayer();
-		controlsLayer.showMapControls();
-		controlsLayer.showSystemUI();
+		getMapActivity().getMapLayers().getMapControlsLayer().showMapControls();
 	}
 
 	@Override
