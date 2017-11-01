@@ -2823,7 +2823,7 @@ U vypadku, kali vy lubіcie OsmAnd і OSM і chočacie padtrymać jaho, heta іd
     <string name="marker_moved_to_active">Markier mapy staŭ aktyŭnym</string>
     <string name="shared_string_list">Śpis</string>
     <string name="shared_string_groups">Hrupy</string>
-    <string name="passed">Projdziena: %1$s</string>
+    <string name="passed">Apošniaje vykarystannie: %1$s</string>
     <string name="make_active">Aktyvizavać</string>
     <string name="today">Siońnia</string>
     <string name="yesterday">Učora</string>
@@ -2888,4 +2888,8 @@ U vypadku, kali vy lubіcie OsmAnd і OSM і chočacie padtrymać jaho, heta іd
     <string name="import_as_gpx">Impartavać jak GPX-fajł</string>
     <string name="import_as_favorites">Impartavać jak Ulubionyja</string>
     <string name="import_file">Impartavać fajł</string>
-	</resources>
+	<string name="tap_on_map_to_hide_interface_descr">Dotyk u liubym miescy na mapie chavaje interfiejs i pieramykaje režym poŭnaha ekrana.</string>
+    <string name="tap_on_map_to_hide_interface">Dotyk na mapie chavaje interfiejs</string>
+    <string name="show_on_top_bar">Pakazać na vierchniaj paneli</string>
+    <string name="mark_passed">Adznačyć prajdzienyja</string>
+    </resources>
