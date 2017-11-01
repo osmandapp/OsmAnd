@@ -812,9 +812,7 @@ public class ContextMenuLayer extends OsmandMapLayer {
 		boolean processed = hideVisibleMenues();
 		processed |= menu.onSingleTapOnMap();
 		if (!processed) {
-			MapControlsLayer controlsLayer = activity.getMapLayers().getMapControlsLayer();
-			controlsLayer.switchMapControlsVisibility();
-			controlsLayer.switchSystemUiVisibility();
+			activity.getMapLayers().getMapControlsLayer().switchMapControlsVisibility(true);
 		}
 		return false;
 	}

@@ -656,16 +656,9 @@ public class MapControlsLayer extends OsmandMapLayer {
 		zoomOutButton.setOnLongClickListener(listener);
 	}
 
-	private boolean isFullscreenModeAllowed() {
-		return !(app.getRoutingHelper().isFollowingMode() || app.getRoutingHelper().isPauseNavigation()
-				|| mapActivity.getMeasurementToolFragment() != null
-				|| mapActivity.getPlanRouteFragment() != null
-				|| mapActivity.getMapLayers().getRulerControlLayer().rulerModeOn());
-	}
-
 	public void showMapControls() {
 		mapActivity.findViewById(R.id.MapHudButtonsOverlay).setVisibility(View.VISIBLE);
-		showSystemUI();
+		AndroidUtils.showSystemUI(mapActivity);
 	}
 
 	public void hideMapControls() {
@@ -681,47 +674,21 @@ public class MapControlsLayer extends OsmandMapLayer {
 		return mapActivity.findViewById(R.id.MapHudButtonsOverlay).getVisibility() == View.VISIBLE;
 	}
 
-	public void switchMapControlsVisibility() {
-		if (!isFullscreenModeAllowed()) {
+	public void switchMapControlsVisibility(boolean switchSystemUiVisibility) {
+		if (app.getRoutingHelper().isFollowingMode() || app.getRoutingHelper().isPauseNavigation()
+				|| mapActivity.getMeasurementToolFragment() != null
+				|| mapActivity.getPlanRouteFragment() != null
+				|| mapActivity.getMapLayers().getRulerControlLayer().rulerModeOn()) {
 			return;
 		}
 		if (isMapControlsVisible()) {
-			hideMapControls();
+			AndroidUtils.hideSystemUI(mapActivity);
+			if (switchSystemUiVisibility) {
+				hideMapControls();
+			}
 		} else {
 			showMapControls();
 		}
-	}
-
-	public void showSystemUI() {
-		if (Build.VERSION.SDK_INT >= 19 && !isSystemUiVisible()) {
-			switchSystemUiVisibility();
-		}
-	}
-
-	public void hideSystemUI() {
-		if (Build.VERSION.SDK_INT >= 19 && isSystemUiVisible()) {
-			switchSystemUiVisibility();
-		}
-	}
-
-	public boolean isSystemUiVisible() {
-		if (Build.VERSION.SDK_INT >= 19) {
-			int uiOptions = mapActivity.getWindow().getDecorView().getSystemUiVisibility();
-			return !((uiOptions | View.SYSTEM_UI_FLAG_FULLSCREEN) == uiOptions);
-		}
-		return true;
-	}
-
-	public void switchSystemUiVisibility() {
-		if (!isFullscreenModeAllowed() || Build.VERSION.SDK_INT < 19) {
-			return;
-		}
-		View decorView = mapActivity.getWindow().getDecorView();
-		int uiOptions = decorView.getSystemUiVisibility();
-		uiOptions ^= View.SYSTEM_UI_FLAG_HIDE_NAVIGATION;
-		uiOptions ^= View.SYSTEM_UI_FLAG_FULLSCREEN;
-		uiOptions ^= View.SYSTEM_UI_FLAG_IMMERSIVE_STICKY;
-		decorView.setSystemUiVisibility(uiOptions);
 	}
 
 	public void startNavigation() {
