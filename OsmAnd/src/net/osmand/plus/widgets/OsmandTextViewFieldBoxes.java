@@ -350,21 +350,6 @@ public class OsmandTextViewFieldBoxes extends FrameLayout {
 		this.activated = true;
 	}
 
-	protected void makeCursorBlink() {
-		int cursorPos = this.inputText.getSelectionStart();
-		if(cursorPos == 0) {
-			if(this.inputText.getText().toString().isEmpty()) {
-				if(this.onError) {
-					this.doNotRemoveError = true;
-					this.inputText.setText(" ");
-					this.inputText.setText("");
-					this.doNotRemoveError = false;
-				}
-			}
-		}
-
-	}
-
 	protected void setHighlightColor(int colorRes) {
 		this.floatingLabel.setTextColor(colorRes);
 		setCursorDrawableColor(this.inputText, colorRes);
@@ -460,8 +445,6 @@ public class OsmandTextViewFieldBoxes extends FrameLayout {
 			if(giveFocus) {
 				this.setHasFocus(true);
 			}
-
-			this.makeCursorBlink();
 		}
 
 	}
@@ -615,7 +598,6 @@ public class OsmandTextViewFieldBoxes extends FrameLayout {
 		if(this.hasFocus) {
 			this.activate(true);
 			this.inputText.requestFocus();
-			this.makeCursorBlink();
 			if(!this.onError && this.enabled) {
 				this.setHighlightColor(this.primaryColor);
 			}
