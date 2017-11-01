@@ -359,7 +359,7 @@
 	<string name="map_widget_next_next_turn">Паварот праз адзін</string>
 	<string name="map_widget_mini_route">Малая мапа маршруту</string>
 	<string name="bg_service_screen_lock">Блякаваць экран</string>
-	<string name="bg_service_screen_unlock">Разблакаваць экран</string>
+	<string name="bg_service_screen_unlock">Разблякіраваць экран</string>
 	<string name="bg_service_screen_lock_toast">Экран заблакаваны</string>
 	<string name="bg_service_interval">Задайце інтэрвал абуджэньня:</string>
 	<string name="show_cameras">Камеры хуткасці</string>
@@ -2570,7 +2570,7 @@
     <string name="points_delete_multiple_succesful">Кропка(і) паспяхова выдалена.</string>
     <string name="points_delete_multiple">Вы збіраецеся выдаліць %1$d кропак. Вы ўпэўнены?</string>
     <string name="track_points_category_name">Значныя кропкі маршрута</string>
-    <string name="gpx_track">Трэк</string>
+    <string name="gpx_track">Сьлед</string>
     <string name="max_speed">Макс. хуткасць</string>
     <string name="average_speed">Сярэдняя хуткасць</string>
     <string name="shared_string_time_moving">Час руху</string>
@@ -2790,8 +2790,8 @@
     <string name="mapillary_menu_descr_tile_cache">Абнавіць фрагменты, каб убачыць актуальныя даныя.</string>
     <string name="mapillary_menu_title_tile_cache">Кэш фрагментаў</string>
     <string name="shared_string_reset">Скінуць</string>
-    <string name="store_tracks_in_monthly_directories">Захаваць запісаныя трэкі ў месячных тэчках</string>
-    <string name="store_tracks_in_monthly_directories_descrp">Захаваць запісаныя трэкі ў падтэчкі на аснове месяца запісу (як 2017-01).</string>
+    <string name="store_tracks_in_monthly_directories">Захаваць запісаныя сьляды ў месячных тэчках</string>
+    <string name="store_tracks_in_monthly_directories_descrp">Захаваць запісаныя сьляды ў падтэчкі на аснове месяца запісу (напрыклад, 2017-01).</string>
     <string name="average">Сярэдняя</string>
     <string name="of">%1$d з %2$d</string>
     <string name="ascent_descent">Пад\'ём/Cпуск</string>
