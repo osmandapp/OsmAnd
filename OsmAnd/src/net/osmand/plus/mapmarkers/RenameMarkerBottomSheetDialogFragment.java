@@ -21,7 +21,7 @@ import android.widget.LinearLayout;
 
 import net.osmand.AndroidUtils;
 import net.osmand.plus.MapMarkersHelper.MapMarker;
-import net.osmand.plus.widgets.OsmandEditTextFieldBoxes;
+import net.osmand.plus.widgets.OsmandTextFieldBoxes;
 import net.osmand.plus.R;
 import net.osmand.plus.activities.MapActivity;
 import net.osmand.plus.base.BottomSheetDialogFragment;
@@ -57,14 +57,14 @@ public class RenameMarkerBottomSheetDialogFragment extends BottomSheetDialogFrag
 			AndroidUtils.setBackground(getActivity(), mainView, nightMode, R.drawable.bg_bottom_menu_light, R.drawable.bg_bottom_menu_dark);
 		}
 
-		final EditText nameEditText = (EditText) mainView.findViewById(R.id.name_input_text_view);
+		final EditText nameEditText = (EditText) mainView.findViewById(R.id.name_edit_text);
 		nameEditText.setText(marker.getName(mapActivity));
 		nameEditText.requestFocus();
 		final InputMethodManager imm = (InputMethodManager) getActivity().getSystemService(Context.INPUT_METHOD_SERVICE);
 		imm.toggleSoftInput(InputMethodManager.SHOW_IMPLICIT, InputMethodManager.HIDE_IMPLICIT_ONLY);
 		View textBox = mainView.findViewById(R.id.name_text_box);
-		if (textBox instanceof OsmandEditTextFieldBoxes) {
-			((OsmandEditTextFieldBoxes) textBox).activate(true);
+		if (textBox instanceof OsmandTextFieldBoxes) {
+			((OsmandTextFieldBoxes) textBox).activate(true);
 		}
 
 		mainView.findViewById(R.id.save_button).setOnClickListener(new View.OnClickListener() {
