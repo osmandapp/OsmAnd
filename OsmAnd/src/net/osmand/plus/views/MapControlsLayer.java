@@ -687,17 +687,14 @@ public class MapControlsLayer extends OsmandMapLayer {
 	}
 
 	public void switchStatusbarAndNavbarVisibility() {
-		int uiOptions = mapActivity.getWindow().getDecorView().getSystemUiVisibility();
-		if (Build.VERSION.SDK_INT >= 14) {
-			uiOptions ^= View.SYSTEM_UI_FLAG_HIDE_NAVIGATION;
-		}
-		if (Build.VERSION.SDK_INT >= 16) {
-			uiOptions ^= View.SYSTEM_UI_FLAG_FULLSCREEN;
-		}
 		if (Build.VERSION.SDK_INT >= 19) {
+			View decorView = mapActivity.getWindow().getDecorView();
+			int uiOptions = decorView.getSystemUiVisibility();
+			uiOptions ^= View.SYSTEM_UI_FLAG_HIDE_NAVIGATION;
+			uiOptions ^= View.SYSTEM_UI_FLAG_FULLSCREEN;
 			uiOptions ^= View.SYSTEM_UI_FLAG_IMMERSIVE_STICKY;
+			decorView.setSystemUiVisibility(uiOptions);
 		}
-		mapActivity.getWindow().getDecorView().setSystemUiVisibility(uiOptions);
 	}
 
 	public void startNavigation() {
