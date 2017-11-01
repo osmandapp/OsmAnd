@@ -9,6 +9,10 @@
          3. All your modified/created strings are in the top of the file (to make easier find what\'s translated).
     PLEASE: Have a look at http://code.google.com/p/osmand/wiki/UIConsistency, it may really improve your and our work  :-)  Thx - Hardy
     -->
+    <string name="tap_on_map_to_hide_interface_descr">Tapping anywhere on the map hides the interface and toggles the full screen mode.</string>
+    <string name="tap_on_map_to_hide_interface">Tap on map hides interface</string>
+    <string name="show_on_top_bar">Show on Top Bar</string>
+    <string name="mark_passed">Mark passed</string>
     <string name="import_gpx_file_description">can be imported as Favorites points, or as track file.</string>
     <string name="import_as_gpx">Import as GPX file</string>
     <string name="import_as_favorites">Import as Favorites</string>
@@ -66,7 +70,7 @@
     <string name="marker_moved_to_active">Map marker moved to active</string>
     <string name="shared_string_list">List</string>
     <string name="shared_string_groups">Groups</string>
-    <string name="passed">Passed: %1$s</string>
+    <string name="passed">Last used: %1$s</string>
     <string name="make_active">Make active</string>
     <string name="today">Today</string>
     <string name="yesterday">Yesterday</string>

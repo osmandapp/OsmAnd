@@ -48,7 +48,6 @@ import net.osmand.plus.dialogs.DirectionsDialogs;
 import net.osmand.plus.mapcontextmenu.MapContextMenu;
 import net.osmand.plus.mapcontextmenu.other.MapRouteInfoMenu;
 import net.osmand.plus.mapcontextmenu.other.TrackDetailsMenu;
-import net.osmand.plus.measurementtool.MeasurementToolFragment;
 import net.osmand.plus.routing.RoutingHelper;
 import net.osmand.plus.views.corenative.NativeCoreContext;
 
@@ -659,7 +658,9 @@ public class MapControlsLayer extends OsmandMapLayer {
 
 	public void showMapControls() {
 		mapActivity.findViewById(R.id.MapHudButtonsOverlay).setVisibility(View.VISIBLE);
+		AndroidUtils.showSystemUI(mapActivity);
 	}
+
 	public void hideMapControls() {
 		mapActivity.findViewById(R.id.MapHudButtonsOverlay).setVisibility(View.INVISIBLE);
 	}
@@ -673,7 +674,7 @@ public class MapControlsLayer extends OsmandMapLayer {
 		return mapActivity.findViewById(R.id.MapHudButtonsOverlay).getVisibility() == View.VISIBLE;
 	}
 
-	public void switchMapControlsVisibility() {
+	public void switchMapControlsVisibility(boolean switchSystemUiVisibility) {
 		if (app.getRoutingHelper().isFollowingMode() || app.getRoutingHelper().isPauseNavigation()
 				|| mapActivity.getMeasurementToolFragment() != null
 				|| mapActivity.getPlanRouteFragment() != null
@@ -682,6 +683,9 @@ public class MapControlsLayer extends OsmandMapLayer {
 		}
 		if (isMapControlsVisible()) {
 			hideMapControls();
+			if (switchSystemUiVisibility) {
+				AndroidUtils.hideSystemUI(mapActivity);
+			}
 		} else {
 			showMapControls();
 		}
