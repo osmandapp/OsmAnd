@@ -682,9 +682,9 @@ public class MapControlsLayer extends OsmandMapLayer {
 			return;
 		}
 		if (isMapControlsVisible()) {
-			AndroidUtils.hideSystemUI(mapActivity);
+			hideMapControls();
 			if (switchSystemUiVisibility) {
-				hideMapControls();
+				AndroidUtils.hideSystemUI(mapActivity);
 			}
 		} else {
 			showMapControls();
