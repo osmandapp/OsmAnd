@@ -2765,7 +2765,7 @@
     <string name="marker_moved_to_active">علامة الخريطة انتقلت إلى نشطة</string>
     <string name="shared_string_list">قائمة</string>
     <string name="shared_string_groups">مجموعات</string>
-    <string name="passed">تم تجاوز: %1$s</string>
+    <string name="passed">آخر استخدام: %1$s</string>
     <string name="make_active">تنشيط</string>
     <string name="today">اليوم</string>
     <string name="yesterday">أمس</string>
@@ -2839,4 +2839,8 @@
     <string name="import_as_gpx">استيراد كملف GPX</string>
     <string name="import_as_favorites">استيراد كمفضلة</string>
     <string name="import_file">استيراد ملف</string>
-	</resources>
+	<string name="tap_on_map_to_hide_interface_descr">النقر على أي مكان على الخريطة سيخفي الواجهة ويفعل وضع ملء الشاشة.</string>
+    <string name="tap_on_map_to_hide_interface">الضغط على الخريطة يخفي الواجهة</string>
+    <string name="show_on_top_bar">اظهار في الشريط العلوي</string>
+    <string name="mark_passed">تعيين كمتجاوز</string>
+    </resources>
