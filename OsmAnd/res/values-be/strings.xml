@@ -2391,14 +2391,14 @@
     <string name="search_map">Пошук мапаў…</string>
     <string name="first_usage_wizard_desc">OsmAnd вызначыць ваша месцазнаходжанне і прапануе спампаваць мапы для гэтага рэгіёну.</string>
     <string name="location_not_found">Не атрымалася вызначыць месцазнаходжанне</string>
-    <string name="no_inet_connection">Няма Інтэрнэт-злучэння</string>
-    <string name="no_inet_connection_desc_map">Трэба спампаваць мапы.</string>
+    <string name="no_inet_connection">Няма Інтэрнэт-злучэньня</string>
+    <string name="no_inet_connection_desc_map">Патрабуецца для сьцягваньня мапаў.</string>
     <string name="search_location">Вызначэнне месцазнаходжання…</string>
     <string name="storage_free_space">Вольнае месца</string>
     <string name="storage_place_description">Сховішча зьвестак OsmAnd (для мапаў, сьлядоў і г.д.): %1$s.</string>
     <string name="give_permission">Дазволіць</string>
     <string name="allow_access_location">Дазволіць доступ да месцазнаходжаньня</string>
-    <string name="first_usage_greeting">Пракладвайце маршруты і адкрывайце новыя месцы без Інтэрнэт-злучэння</string>
+    <string name="first_usage_greeting">Пракладвайце маршруты і адкрывайце новыя месцы без Інтэрнэт-злучэньня</string>
     <string name="search_my_location">Знайсці маю пазіцыю</string>
     <string name="get_for">Атрымаць за %1$s</string>
     <string name="get_for_month">Атрымаць за %1$s у месяц</string>
@@ -2423,7 +2423,7 @@
     <string name="selected_categories">Абраныя катэгорыі</string>
     <string name="create_custom_poi">Стварыць уласны фільтр</string>
     <string name="custom_search">Уласны пошук</string>
-    <string name="translit_names">Транслітарацыя назваў</string>
+    <string name="translit_names">Трансьлітарацыя назваў</string>
     <string name="osmo_share_location">Падзяліцца</string>
     <string name="osmo_pause_location">Прыпыніць</string>
     <string name="trip_rec_notification_settings">Уключыць хуткі запуск запісу</string>
@@ -2444,7 +2444,7 @@
     <string name="rendering_value_dark_brown_name">Цёмна-карычневы</string>
     <string name="rendering_attr_surfaceIntegrity_name">Якасьць дарожнага пакрыцьця</string>
     <string name="search_hint">Увядзіце назву горада, адрас, POI</string>
-    <string name="translit_name_if_miss">Транслітарацыя калі назва на %1$s адсутнічае</string>
+    <string name="translit_name_if_miss">Трансьлітарыраваць калі назва на %1$s адсутнічае</string>
     <string name="route_calculation">Разлік шляху</string>
     <string name="gpx_no_tracks_title">У вас яшчэ няма сьлядоў</string>
     <string name="gpx_no_tracks_title_folder">Вы таксама можаце дадаць сьляды ў каталёг</string>
@@ -2933,8 +2933,8 @@
 	<string name="shared_string_back">Назад</string>
 	<string name="view">Праглядзець</string>
 	<string name="waypoints_added_to_map_markers">Кропкі маршрута дададзеныя ў маркеры мапы</string>
-	<string name="import_gpx_file_description">могуць быць імпартаваныя як Улюблёныя кропкі ці як файл следу.</string>
+	<string name="import_gpx_file_description">могуць быць імпартаваныя як Улюбёныя кропкі ці як файл сьледу.</string>
     <string name="import_as_gpx">Імпартаваць як GPX-файл</string>
-    <string name="import_as_favorites">Імпартаваць як Улюблёныя</string>
+    <string name="import_as_favorites">Імпартаваць як Улюбёныя</string>
     <string name="import_file">Імпартаваць файл</string>
 	</resources>
