@@ -2991,5 +2991,5 @@ représentant la zone : %1$s x %2$s</string>
 	<string name="tap_on_map_to_hide_interface_descr">Une tape n\'importe où sur la carte masque l\'interface et bascule en mode plein écran.</string>
     <string name="tap_on_map_to_hide_interface">Taper sur la carte masque l\'interface</string>
     <string name="show_on_top_bar">Afficher dans la barre supérieure</string>
-    <string name="mark_passed">Marqué comme passé</string>
+    <string name="mark_passed">Marquer comme passé</string>
     </resources>
