@@ -496,7 +496,7 @@ public class SettingsGeneralActivity extends SettingsBaseActivity implements OnR
 		misc.addPreference(createCheckBoxPreference(settings.DO_NOT_SHOW_STARTUP_MESSAGES, R.string.do_not_show_startup_messages, R.string.do_not_show_startup_messages_desc));
 		misc.addPreference(createCheckBoxPreference(settings.DO_NOT_USE_ANIMATIONS, R.string.do_not_use_animations, R.string.do_not_use_animations_descr));
 		misc.addPreference(createCheckBoxPreference(settings.USE_MAGNETIC_FIELD_SENSOR_COMPASS, R.string.use_magnetic_sensor, R.string.use_magnetic_sensor_descr));
-		misc.addPreference(createCheckBoxPreference(settings.MAP_EMPTY_STATE_ENABLED, R.string.tap_on_map_to_hide_interface, R.string.tap_on_map_to_hide_interface_descr));
+		misc.addPreference(createCheckBoxPreference(settings.MAP_EMPTY_STATE_ALLOWED, R.string.tap_on_map_to_hide_interface, R.string.tap_on_map_to_hide_interface_descr));
 	}
 
 
