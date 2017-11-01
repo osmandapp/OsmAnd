@@ -2924,8 +2924,8 @@
     <string name="import_as_gpx">ورود به‌عنوان فایل GPX</string>
     <string name="import_as_favorites">ورود به‌عنوان نقاط برگزیده</string>
     <string name="import_file">واردکردن فایل</string>
-	<string name="tap_on_map_to_hide_interface_descr">با لمس‌کردن نقطه‌ای روی نقشه رابط کاربری را پنهان/آشکار و حالت تمام‌صفحه را فعال/غیرفعال کنید.</string>
-    <string name="tap_on_map_to_hide_interface">با لمس نقشه رابط کاربری پنهان می‌شود</string>
-    <string name="show_on_top_bar">نمایش در نوار بالا</string>
+	<string name="tap_on_map_to_hide_interface_descr">با لمس‌کردن نقطه‌ای بر روی نقشه، رابط کاربری را پنهان/آشکار و حالت تمام‌صفحه را فعال/غیرفعال کنید.</string>
+    <string name="tap_on_map_to_hide_interface">با لمس نقشه رابط کاربری پنهان شود</string>
+    <string name="show_on_top_bar">در نوار بالا نشان بده</string>
     <string name="mark_passed">از این عبور کردم</string>
     </resources>
