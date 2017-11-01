@@ -115,13 +115,13 @@ public class OsmandTextViewFieldBoxes extends FrameLayout {
 		themeArray.recycle();
 	}
 
-	protected AppCompatTextView findEditTextChild() {
+	protected AppCompatTextView findTextViewChild() {
 		return this.getChildCount() > 0 && this.getChildAt(0) instanceof AppCompatTextView?(AppCompatTextView) this.getChildAt(0):null;
 	}
 
 	protected void onFinishInflate() {
 		super.onFinishInflate();
-		this.inputText = this.findEditTextChild();
+		this.inputText = this.findTextViewChild();
 		if(this.inputText != null) {
 			this.addView(LayoutInflater.from(this.getContext()).inflate(studio.carbonylgroup.textfieldboxes.R.layout.text_field_boxes_layout, this, false));
 			this.removeView(this.inputText);

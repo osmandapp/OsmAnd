@@ -73,7 +73,7 @@ public class SaveAsTrackBottomSheetDialogFragment extends BottomSheetDialogFragm
 			displayedName = suggestedName + "_" + (++ind);
 			fout = new File(dir, displayedName + GPX_SUFFIX);
 		}
-		final EditText nameEditText = (EditText) mainView.findViewById(R.id.name_edit_text);
+		final EditText nameEditText = (EditText) mainView.findViewById(R.id.name_input_text_view);
 		nameEditText.setText(displayedName);
 		View textBox = mainView.findViewById(R.id.name_text_box);
 		if (textBox instanceof OsmandEditTextFieldBoxes) {

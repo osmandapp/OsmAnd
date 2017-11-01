@@ -96,8 +96,7 @@
 
                     <net.osmand.plus.widgets.CursorTextView
                         android:imeOptions="actionNext"
-                        android:inputType="number"
-                        android:id="@+id/latitude_edit_text"
+                        android:id="@+id/latitude_input_text_view"
                         android:layout_width="match_parent"
                         android:layout_height="wrap_content"/>
 
@@ -112,8 +111,7 @@
 
                     <net.osmand.plus.widgets.CursorTextView
                         android:imeOptions="actionNext"
-                        android:inputType="number"
-                        android:id="@+id/longitude_edit_text"
+                        android:id="@+id/longitude_input_text_view"
                         android:layout_width="match_parent"
                         android:layout_height="wrap_content"/>
 
@@ -138,9 +136,8 @@
 
                     <net.osmand.plus.widgets.CursorTextView
                         android:imeOptions="actionDone"
-                        android:inputType="text"
                         android:hint="@string/access_hint_enter_name"
-                        android:id="@+id/name_edit_text"
+                        android:id="@+id/name_input_text_view"
                         android:layout_width="match_parent"
                         android:layout_height="wrap_content"/>
 

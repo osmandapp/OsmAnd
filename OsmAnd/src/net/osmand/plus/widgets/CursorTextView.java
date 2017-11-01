@@ -34,6 +34,13 @@ public class CursorTextView extends AppCompatTextView {
 		linePaint.setFilterBitmap(true);
 		linePaint.setColor(Color.RED);
 		bounds = new Rect();
+		setFocusable(true);
+		setFocusableInTouchMode(true);
+	}
+
+	@Override
+	public boolean getFreezesText() {
+		return true;
 	}
 
 	@Override
