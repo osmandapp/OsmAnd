@@ -351,7 +351,7 @@
 	<string name="map_widget_parking">Паркоўка</string>
 	<string name="map_widget_monitoring">Запіс GPX</string>
 	<string name="map_widget_speed">Хуткасьць</string>
-	<string name="map_widget_distance">Месца прызначэньня</string>
+	<string name="map_widget_distance">Пункт прызначэньня</string>
 	<string name="map_widget_altitude">Вышыня</string>
 	<string name="map_widget_time">Час у дарозе</string>
 	<string name="map_widget_next_turn">Наступны паварот</string>
