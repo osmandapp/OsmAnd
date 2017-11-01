@@ -2872,7 +2872,7 @@
     <string name="marker_moved_to_active">Маркер мапы стаў актыўным</string>
     <string name="shared_string_list">Сьпіс</string>
     <string name="shared_string_groups">Групы</string>
-    <string name="passed">Пройдзена: %1$s</string>
+    <string name="passed">Апошняе выкарыстанне: %1$s</string>
     <string name="make_active">Актывізаваць</string>
     <string name="today">Сёньня</string>
     <string name="yesterday">Учора</string>
@@ -2937,4 +2937,8 @@
     <string name="import_as_gpx">Імпартаваць як GPX-файл</string>
     <string name="import_as_favorites">Імпартаваць як Улюбёныя</string>
     <string name="import_file">Імпартаваць файл</string>
-	</resources>
+	<string name="tap_on_map_to_hide_interface_descr">Дотык у любым месцы на мапе хавае інтэрфейс і перамыкае рэжым поўнага экрана.</string>
+    <string name="tap_on_map_to_hide_interface">Дотык на мапе хавае інтэрфейс</string>
+    <string name="show_on_top_bar">Паказаць на верхняй панэлі</string>
+    <string name="mark_passed">Адзначыць прайдзеныя</string>
+    </resources>
