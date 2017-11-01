@@ -828,7 +828,7 @@ Zachod: %2$s</string>
 	<string name="map_widget_next_next_turn">Pavarot praz adzіn</string>
 	<string name="map_widget_mini_route">Małaja mapa maršrutu</string>
 	<string name="bg_service_screen_lock">Blakavać ekran</string>
-	<string name="bg_service_screen_unlock">Razbłakavać ekran</string>
+	<string name="bg_service_screen_unlock">Razblakiravać ekran</string>
 	<string name="bg_service_screen_lock_toast">Ekran zabłakavany</string>
 	<string name="bg_service_interval">Zadajcie іntervał abudžeńnia:</string>
 	<string name="show_cameras">Kamery chutkaścі</string>
@@ -2427,7 +2427,7 @@ U vypadku, kali vy lubіcie OsmAnd і OSM і chočacie padtrymać jaho, heta іd
     <string name="add_new_folder">Dadać novuju tečku</string>
     <string name="points_delete_multiple_succesful">Kropka(i) paspiachova vydaleny.</string>
     <string name="points_delete_multiple">Vy źbirajeciesia vydalić %1$d kropku(i). Vy ŭpeŭnieny?</string>
-    <string name="gpx_track">Trek</string>
+    <string name="gpx_track">Śled</string>
     <string name="max_speed">Maks. chutkaść</string>
     <string name="average_speed">Siaredniaja chutkaść</string>
     <string name="shared_string_max">Maks.</string>
@@ -2741,8 +2741,8 @@ U vypadku, kali vy lubіcie OsmAnd і OSM і chočacie padtrymać jaho, heta іd
     <string name="mapillary_menu_descr_tile_cache">Abnavić frahmienty, kab ubačyć aktuaĺnyja danyja.</string>
     <string name="mapillary_menu_title_tile_cache">Keš frahmientaŭ</string>
     <string name="shared_string_reset">Skinuć</string>
-    <string name="store_tracks_in_monthly_directories">Zachavać zapisanyja treki ŭ miesiačnych tečkach</string>
-    <string name="store_tracks_in_monthly_directories_descrp">Zachavać zapisanyja treki ŭ padtečki na asnovie miesiaca zapisu (jak 2017-01).</string>
+    <string name="store_tracks_in_monthly_directories">Zachavać zapisanyja ślady ŭ miesiačnych tečkach</string>
+    <string name="store_tracks_in_monthly_directories_descrp">Zachavać zapisanyja ślady ŭ padtečki na asnovie miesiaca zapisu (naprykład, 2017-01).</string>
     <string name="average">Siaredniaja</string>
     <string name="of">%1$d z %2$d</string>
     <string name="ascent_descent">Pad\'jom/Cpusk</string>
