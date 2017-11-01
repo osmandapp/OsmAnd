@@ -2307,14 +2307,14 @@ U vypadku, kali vy lubіcie OsmAnd і OSM і chočacie padtrymać jaho, heta іd
     <string name="search_map">Pošuk mapaŭ…</string>
     <string name="first_usage_wizard_desc">Dazvolcie OsmAnd vyznačyć vaša miescaznachodžańnie і prapanavać ściahnuć mapy dla hetaha rehіjonu.</string>
     <string name="location_not_found">Nie atrymałasia vyznačyć miescaznachodžańnie</string>
-    <string name="no_inet_connection">Niama Internet-zlučennia</string>
-    <string name="no_inet_connection_desc_map">Treba ściahnuć mapy.</string>
+    <string name="no_inet_connection">Niama Internet-zlučeńnia</string>
+    <string name="no_inet_connection_desc_map">Patrabujecca dla ściahvańnia mapaŭ.</string>
     <string name="search_location">Vyznačeńnie miescaznachodžańnia …</string>
     <string name="storage_free_space">Volnaje miesca</string>
     <string name="storage_place_description">Schovіšča źviestak OsmAnd (dla mapaŭ, śladoŭ і h.d.): %1$s.</string>
     <string name="give_permission">Dazvolić</string>
     <string name="allow_access_location">Dazvolić dostup da miescaznachodžańnia</string>
-    <string name="first_usage_greeting">Prakladvajcie maršruty i adkryvajcie novyja miescy biez Internet-zlučennia</string>
+    <string name="first_usage_greeting">Prakładvajcie maršruty i adkryvajcie novyja miescy biez Internet-zlučeńnia</string>
     <string name="search_my_location">Znajsci maju pazicyju</string>
     <string name="no_update_info_desc">Nie praviarać abnaŭlienni viersij i znižki ad OsmAnd</string>
     <string name="no_update_info">Nie pakazvać abnaŭlienni</string>
@@ -2470,8 +2470,8 @@ U vypadku, kali vy lubіcie OsmAnd і OSM і chočacie padtrymać jaho, heta іd
     <string name="rendering_value_light_brown_name">Svetla-karyčnievy</string>
     <string name="rendering_value_dark_brown_name">Ciomna-karyčnievy</string>
     <string name="search_hint">Uviadzicie nazvu horada, adras, POI</string>
-    <string name="translit_name_if_miss">Tranślitaravać kali nazva na %1$s adsutničaje</string>
-    <string name="translit_names">Translitaracyja nazvaŭ</string>
+    <string name="translit_name_if_miss">Tranślitaryravać kali nazva na %1$s adsutničaje</string>
+    <string name="translit_names">Tranślitaracyja nazvaŭ</string>
     <string name="edit_filter">Redahavać katehoryi</string>
     <string name="subcategories">Padkatehoryi</string>
     <string name="selected_categories">Abranyja katehoryi</string>
@@ -2884,8 +2884,8 @@ U vypadku, kali vy lubіcie OsmAnd і OSM і chočacie padtrymać jaho, heta іd
 	<string name="shared_string_back">Nazad</string>
 	<string name="view">Prahladzieć</string>
 	<string name="waypoints_added_to_map_markers">Kropki maršruta dadadzienyja ŭ markiery mapy</string>
-	<string name="import_gpx_file_description">mohuć być impartavanyja jak Uliublionyja kropki ci jak fajl sliedu.</string>
-    <string name="import_as_gpx">Impartavać jak GPX-fajl</string>
-    <string name="import_as_favorites">Impartavać jak Uliublionyja</string>
-    <string name="import_file">Impartavać fajl</string>
+	<string name="import_gpx_file_description">mohuć być impartavanyja jak Ulubionyja kropki ci jak fajł śledu.</string>
+    <string name="import_as_gpx">Impartavać jak GPX-fajł</string>
+    <string name="import_as_favorites">Impartavać jak Ulubionyja</string>
+    <string name="import_file">Impartavać fajł</string>
 	</resources>
