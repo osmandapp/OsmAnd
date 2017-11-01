@@ -9,8 +9,8 @@
          3. All your modified/created strings are in the top of the file (to make easier find what\'s translated).
     PLEASE: Have a look at http://code.google.com/p/osmand/wiki/UIConsistency, it may really improve your and our work  :-)  Thx - Hardy
     -->
-    <string name="tap_on_map_to_hide_interface_descr">Tapping anywhere on the map hides the interface and toggles the full screen mode.</string>
-    <string name="tap_on_map_to_hide_interface">Tap on map hides interface</string>
+    <string name="tap_on_map_to_hide_interface_descr">A tap on the map toggles the control buttons and widgets.</string>
+    <string name="tap_on_map_to_hide_interface">Full screen mode</string>
     <string name="show_on_top_bar">Show on Top Bar</string>
     <string name="mark_passed">Mark passed</string>
     <string name="import_gpx_file_description">can be imported as Favorites points, or as track file.</string>
