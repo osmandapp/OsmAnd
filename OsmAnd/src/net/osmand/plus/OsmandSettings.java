@@ -902,6 +902,8 @@ public class OsmandSettings {
 	public final OsmandPreference<Boolean> DO_NOT_USE_ANIMATIONS = new BooleanPreference("do_not_use_animations", false).makeGlobal().cache();
 	public final OsmandPreference<Boolean> DO_NOT_SEND_ANONYMOUS_APP_USAGE = new BooleanPreference("do_not_send_anonymous_app_usage", false).makeGlobal().cache();
 
+	public final OsmandPreference<Boolean> MAP_EMPTY_STATE_ALLOWED = new BooleanPreference("map_empty_state_allowed", true).makeGlobal().cache();
+
 
 	public final CommonPreference<Float> TEXT_SCALE = new FloatPreference("text_scale", 1f).makeProfile().cache();
 
