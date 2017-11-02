@@ -43,7 +43,6 @@ public class CoordinateInputBottomSheetDialogFragment extends MenuBottomSheetDia
 	@Nullable
 	@Override
 	public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
-		final MapActivity mapActivity = (MapActivity) getActivity();
 		final int themeRes = nightMode ? R.style.OsmandDarkTheme : R.style.OsmandLightTheme;
 
 		mainView = View.inflate(new ContextThemeWrapper(getContext(), themeRes), R.layout.fragment_marker_coordinate_input_options_bottom_sheet_helper, container);
@@ -61,6 +60,10 @@ public class CoordinateInputBottomSheetDialogFragment extends MenuBottomSheetDia
 			public void onClick(View view) {
 				goToNextField = !goToNextField;
 				((CompoundButton) mainView.findViewById(R.id.go_to_next_field_switch)).setChecked(goToNextField);
+				Bundle args = getArguments();
+				if (args != null) {
+					args.putBoolean(CoordinateInputDialogFragment.GO_TO_NEXT_FIELD, goToNextField);
+				}
 				if (listener != null) {
 					listener.onGoToNextFieldChanged(goToNextField);
 				}
@@ -92,6 +95,10 @@ public class CoordinateInputBottomSheetDialogFragment extends MenuBottomSheetDia
 			public void onClick(View view) {
 				useOsmandKeyboard = !useOsmandKeyboard;
 				((CompoundButton) mainView.findViewById(R.id.use_system_keyboard_switch)).setChecked(!useOsmandKeyboard);
+				Bundle args = getArguments();
+				if (args != null) {
+					args.putBoolean(CoordinateInputDialogFragment.USE_OSMAND_KEYBOARD, useOsmandKeyboard);
+				}
 				if (listener != null) {
 					listener.onKeyboardChanged(useOsmandKeyboard);
 				}
@@ -115,6 +122,10 @@ public class CoordinateInputBottomSheetDialogFragment extends MenuBottomSheetDia
 						break;
 					default:
 						throw new IllegalArgumentException("Unsupported accuracy");
+				}
+				Bundle args = getArguments();
+				if (args != null) {
+					args.putInt(CoordinateInputDialogFragment.ACCURACY, accuracy);
 				}
 				highlightSelectedItem(true);
 				if (listener != null) {
