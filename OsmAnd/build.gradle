@@ -61,6 +61,7 @@ android {
 	}
 
 	dexOptions {
+		incremental true
 		javaMaxHeapSize "4g"
 	}
 
@@ -384,7 +385,6 @@ dependencies {
 	// compile project(':eclipse-compile:design')
 	// compile project(':eclipse-compile:cardview')
 	// compile project(':eclipse-compile:gridlayout')
-	compile 'com.android.support:multidex:1.0.1'
 	compile 'com.android.support:gridlayout-v7:26.1.0'
 	compile 'com.android.support:cardview-v7:26.1.0'
 	compile 'com.android.support:appcompat-v7:26.1.0'
