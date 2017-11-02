@@ -3,12 +3,12 @@
     <string name="srtm_paid_version_msg">Overvej at købe Højdekurve udvidelsen (\'Contour lines\') på Google Play for at støtte den videre udvikling.</string>
     <string name="av_def_action_video">Optag video</string>
     <string name="av_def_action_audio">Optag audio</string>
-    <string name="av_widget_action_descr">Vælg standard modulhandling</string>
+    <string name="av_widget_action_descr">Vælg standard modulhandling.</string>
     <string name="av_widget_action">Standard modulhandling</string>
-    <string name="av_video_format_descr">Vælg videoformat</string>
-    <string name="av_use_external_recorder_descr">Brug systemoptager for video</string>
+    <string name="av_video_format_descr">Vælg videoformat.</string>
+    <string name="av_use_external_recorder_descr">Brug systemoptager for video.</string>
     <string name="av_use_external_recorder">Brug systemoptager</string>
-    <string name="av_settings_descr">Konfigurer audio- og videoindstillinger</string>
+    <string name="av_settings_descr">Konfigurer audio- og videoindstillinger.</string>
     <string name="av_settings">Indstillinger for audio og video </string>
     <string name="recording_error">Fejl opstod under optagelse </string>
     <string name="recording_camera_not_available">Kameraet er ikke tilgængeligt</string>
@@ -55,7 +55,7 @@
 
     <string name="intermediate_points_change_order">Ændre rækkefølge</string>
     <string name="av_video_format">Videoformat</string>
-    <string name="rendering_attr_noAdminboundaries_description">Undertryk visning af regionalegrænser (niveau 5–9)</string>
+    <string name="rendering_attr_noAdminboundaries_description">Undertryk visning af regionalegrænser (niveau 5–9).</string>
 
 
     <string name="map_widget_max_speed">Hastighedsgrænse</string>
@@ -65,7 +65,7 @@
     <string name="no_buildings_found">Ingen bygninger fundet.</string>
     <string name="incremental_search_city">Søg efter by trinvist</string>
     <string name="search_villages_and_postcodes">Søg flere landsbyer/postnummer</string>
-    <string name="dropbox_plugin_description">Dropbox udvidelse gør det muligt at synkronisere spor og audio-/videonoter med en Dropbox-konto.</string>
+    <string name="dropbox_plugin_description">Dropbox udvidelsen gør det muligt at synkronisere spor og audio-/videonoter med en Dropbox-konto.</string>
     <string name="rendering_attr_showRoadMaps_description">Vælg, hvornår der skal vises kort kun med veje:</string>
     <string name="rendering_attr_showRoadMaps_name">Kort kun med veje</string>
     <string name="safe_mode_description">Kør program i fejlsikret tilstand (for langsommere Android i stedet for oprindelige kode).</string>
@@ -118,31 +118,31 @@
     <string name="poi_filter_for_tourists">For turister</string>
     <string name="poi_filter_fuel">Brændstof</string>
     <string name="show_warnings_title">Vis advarsler…</string>
-    <string name="show_warnings_descr">Konfigurer trafikadvarsler (hastighedsgrænser, tvungne stop, vejbump), fartkameraadvarsler og vognbane oplysninger</string>
-    <string name="use_compass_navigation_descr">Brug kompasset, når ingen retning er registret</string>
+    <string name="show_warnings_descr">Konfigurer trafikadvarsler (hastighedsgrænser, tvungne stop, vejbump), fartkameraadvarsler og vognbane oplysninger.</string>
+    <string name="use_compass_navigation_descr">Brug kompasset, når ingen retning er registret.</string>
     <string name="use_compass_navigation">Kompas</string>
     <string name="avoid_motorway">Undgå motorveje</string>
-    <string name="auto_zoom_map_descr">Auto-zoom kort efter hastighed (mens kort er synkroniseret med aktuel position)</string>
+    <string name="auto_zoom_map_descr">Auto-zoom kort efter hastighed (mens kort er synkroniseret med aktuel position).</string>
     <string name="auto_zoom_map">Automatisk kortzoom</string>
     <string name="access_arrival_time">Ankomsttid</string>
     <string name="item_checked">Valgt</string>
     <string name="item_unchecked">Fravalgt</string>
     <string name="prefer_motorways">Foretræk motorveje</string>
     <string name="prefer_in_routing_title">Foretræk…</string>
-    <string name="prefer_in_routing_descr">Foretræk motorveje</string>
+    <string name="prefer_in_routing_descr">Foretræk motorveje.</string>
 
     <string name="max_speed_none">Ingen</string>
     <string name="index_name_openmaps">OpenMaps EU</string>
 
     <string name="dropbox_plugin_name">Dropbox udvidelse</string>
     <string name="av_def_action_choose">Vælg ved forespørgsel</string>
-    <string name="av_use_external_camera_descr">Brug systemprogram til foto</string>
+    <string name="av_use_external_camera_descr">Brug systemprogram til foto.</string>
     <string name="av_use_external_camera">Brug kamera</string>
 
     <string name="monitoring_control_start">GPX</string>
     <string name="route_descr_lat_lon">Lat %1$.3f, Lon %2$.3f</string>
     <string name="intermediate_point">Mellemliggende destination %1$s</string>
-    <string name="snap_to_road_descr">Hold position på vejen under navigation</string>
+    <string name="snap_to_road_descr">Hold position på vejen under navigation.</string>
     <string name="snap_to_road">Fastgør til vejen</string>
     <string name="osmand_short_description_80_chars">Globale mobilkort &amp; navigation til offline og online OSM kort</string>
     <string name="osmand_plus_short_description_80_chars">Global mobilkort visning &amp; navigation til offline og online OSM kort</string>
@@ -164,7 +164,7 @@
     <string name="avoid_unpaved">Undgå grusveje</string>
     <string name="avoid_ferries">Undgå færger</string>
     <string name="avoid_in_routing_title">Undgå…</string>
-    <string name="avoid_in_routing_descr">Undgå betalingsveje, grusveje, færger</string>
+    <string name="avoid_in_routing_descr">Undgå betalingsveje, grusveje, færger.</string>
     <string name="map_widget_fluorescent">Fluorescerende ruter</string>
     <string name="map_widget_show_ruler">Lineal</string>
 
@@ -259,13 +259,13 @@ Proportional hukommelse %4$s MB (Android grænse %5$s MB, Dalvik %6$s MB).</stri
     <string name="osmand_play_title_30_chars">OsmAnd kort &amp; navigation</string>
     <string name="osmand_plus_play_title_30_chars">OsmAnd+ kort &amp; navigation</string>
     <string name="show_traffic_warnings">Trafikadvarsler</string>
-    <string name="rendering_attr_noPolygons_description">Gør alle overflader på kortet transparent</string>
+    <string name="rendering_attr_noPolygons_description">Gør alle overflader på kortet transparent.</string>
     <string name="rendering_attr_noPolygons_name">Polygoner</string>
     <string name="rendering_attr_appMode_name">Optegningsmåde</string>
     <string name="rendering_attr_appMode_description">Optimer kort til</string>
     <string name="rendering_attr_contourLines_description">Vis fra zoom-niveau (kræver højdekurvedata):</string>
     <string name="rendering_attr_contourLines_name">Vis højdekurver</string>
-    <string name="rendering_attr_hmRendered_description">Øg mængden af kortdetaljer, der vises</string>
+    <string name="rendering_attr_hmRendered_description">Øg mængden af kortdetaljer, der vises.</string>
     <string name="rendering_attr_hmRendered_name">Vis flere kortdetaljer</string>
     <string name="local_index_routing_data">Ruteplanlægningsdata</string>
     <string name="poi_search_desc">Søgning efter interessepunkt (IP)</string>
@@ -276,7 +276,7 @@ Proportional hukommelse %4$s MB (Android grænse %5$s MB, Dalvik %6$s MB).</stri
 
     <string name="offline_navigation_not_available">Offline navigation er midlertidig utilgængelig.</string>
     <string name="left_side_navigation">Venstrekørsel</string>
-    <string name="left_side_navigation_descr">Vælg for lande med venstrekørsel</string>
+    <string name="left_side_navigation_descr">Vælg for lande med venstrekørsel.</string>
 
     <string name="unknown_from_location">Startpunkt er endnu ikke fastlagt</string>
     <string name="unknown_location">Position endnu ikke kendt</string>
@@ -288,12 +288,12 @@ Proportional hukommelse %4$s MB (Android grænse %5$s MB, Dalvik %6$s MB).</stri
     <string name="local_indexes_cat_tile">Onlinekort og cachelagrede kortbrikker</string>
     <string name="local_indexes_cat_map">Standardkort (vektor)</string>
 
-    <string name="index_settings_descr">Hent og administrer offline kortfiler gemt på enheden</string>
+    <string name="index_settings_descr">Hent og administrer offline kortfiler gemt på enheden.</string>
     <string name="map_online_plugin_is_not_installed">Aktiver onlinekort udvidelsen for at vælge andre kortkilder</string>
     <string name="map_online_data">Onlinekort og kortbrikker</string>
-    <string name="map_online_data_descr">Brug onlinekort (hent og gem midlertidig kortbrikker på SD-kort)</string>
+    <string name="map_online_data_descr">Brug onlinekort (hent og gem midlertidig kortbrikker på SD-kort).</string>
     <string name="shared_string_online_maps">Onlinekort</string>
-    <string name="online_map_settings_descr">Konfigurer online- eller cachelagrede kilder til kortbrikker</string>
+    <string name="online_map_settings_descr">Konfigurer online- eller cachelagrede kilder til kortbrikker.</string>
 
 
     <string name="osmand_background_plugin_description">"Viser indstillinger til at aktivere sporing og navigation i baggrunden (slukket skærm)  via periodisk at vække GPS-enheden."</string>
@@ -309,7 +309,7 @@ Proportional hukommelse %4$s MB (Android grænse %5$s MB, Dalvik %6$s MB).</stri
     <string name="osmand_development_plugin_description">Viser indstillinger for udviklings- og fejlretningsfunktioner som rutesimulering eller optegningsydeevne indikation, eller talevejledning.\nIndstillinger er beregnet til udviklere og er ikke nødvendig for den almindelige bruger.</string>
     <string name="plugins_screen">Udvidelser</string>
 
-    <string name="prefs_plugins_descr">Udvidelser aktiverer avancerede indstillinger og ekstra funktionalitet</string>
+    <string name="prefs_plugins_descr">Udvidelser aktiverer avancerede indstillinger og ekstra funktionalitet,.</string>
     <string name="prefs_plugins">Udvidelser</string>
     <string name="osm_editing_plugin_description">Udvidelsen giver OsmAnd mulighed for at lave OSM bidrag såsom at oprette eller ændre OSM interessepunkter (IP), åbne eller kommentere OSM noter, og bidrage med optagede GPX-filer.
 
@@ -325,7 +325,7 @@ OSM er et i fællesskab drevet, globalt offentligt domæne kortlægningsprojekt.
     <string name="gpx_description_txt">Beskrivelse</string>
     <string name="validate_gpx_upload_name_pwd">Angiv OSM brugernavn og kodeord til at sende GPX-filer.</string>
     <string name="support_new_features">Støt nye funktioner</string>
-    <string name="support_new_features_descr">Doner for at få nye funktioner i programmet</string>
+    <string name="support_new_features_descr">Doner for at få nye funktioner i programmet.</string>
     <string name="show_ruler_level">Vis målestok</string>
     <string name="back_to_location">Tilbage til placering</string>
 
@@ -335,7 +335,7 @@ OSM er et i fællesskab drevet, globalt offentligt domæne kortlægningsprojekt.
     <string name="info_button">Information</string>
     <string name="map_widget_gps_info">GPS-information</string>
     <string name="gpx_tags_txt">Mærker</string>
-    <string name="accessibility_mode_descr">Slå tilgængeligheds funktionerne til</string>
+    <string name="accessibility_mode_descr">Slå tilgængelighedsfunktionerne til.</string>
     <string name="accessibility_default">Ifølge de globale systemindstillinger</string>
     <string name="backToMenu">Tilbage til menuen</string>
     <string name="zoomOut">Zoom ud</string>
@@ -373,19 +373,19 @@ OSM er et i fællesskab drevet, globalt offentligt domæne kortlægningsprojekt.
     <string name="direction_style_sidewise">Sidelæns (8 sektorer)</string>
     <string name="direction_style_clockwise">Med uret (12 sektioner)</string>
     <string name="settings_direction_style">Retningsstil</string>
-    <string name="settings_direction_style_descr">Vælg stil til at udtrykke relative retninger under bevægelse</string>
+    <string name="settings_direction_style_descr">Vælg stil til at udtrykke relative retninger under bevægelse.</string>
     <string name="auto_announce_on">Begynd autoannoncering</string>
     <string name="auto_announce_off">Stop autoannoncering</string>
     <string name="i_am_here">Jeg er her</string>
-    <string name="zoom_by_trackball_descr">Skift kortzoom via vandrette trackball bevægelser</string>
+    <string name="zoom_by_trackball_descr">Skift kortzoom via vandrette trackball bevægelser.</string>
     <string name="zoom_by_trackball">Brug trackball til zoom</string>
-    <string name="accessibility_preferences_descr">Tilgængelighedsrelaterede indstillinger</string>
+    <string name="accessibility_preferences_descr">Tilgængelighedsrelaterede indstillinger.</string>
     <string name="shared_string_accessibility">Tilgængelighed</string>
     <string name="rendering_out_of_memory">Ikke nok proceshukommelse til at vise det valgte område</string>
     <string name="use_fluorescent_overlays">Fluorescerende overlejringer</string>
-    <string name="use_fluorescent_overlays_descr">Brug fluorescerende farver til at vise spor og ruter</string>
+    <string name="use_fluorescent_overlays_descr">Brug fluorescerende farver til at vise spor og ruter.</string>
     <string name="offline_edition">Offline redigering</string>
-    <string name="offline_edition_descr">Brug altid offline redigering</string>
+    <string name="offline_edition_descr">Brug altid offline redigering.</string>
     <string name="update_poi_does_not_change_indexes">Interessepunkt ændringer lavet i programmet påvirker ikke hentede kort. Ændringer gemmes i lokal fil i stedet.</string>
     <string name="local_openstreetmap_uploading">Overfører …</string>
     <string name="local_openstreetmap_were_uploaded">{0} interessepunkt/noter blev overført</string>
@@ -395,18 +395,18 @@ OSM er et i fællesskab drevet, globalt offentligt domæne kortlægningsprojekt.
     <string name="local_openstreetmap_delete">Slet ændringer</string>
     <string name="local_openstreetmap_descr_title">Asynkron OSM redigering:</string>
     <string name="local_openstreetmap_settings">Lokalt gemt OSM interessepunkter/noter</string>
-    <string name="local_openstreetmap_settings_descr">Vis og administrer OSM interessepunkter/noter registreret i lokal database</string>
+    <string name="local_openstreetmap_settings_descr">Vis og administrer OSM interessepunkter/noter registreret i lokal database.</string>
 
 
-    <string name="live_monitoring_interval_descr">Indstil interval for onlinesporing</string>
+    <string name="live_monitoring_interval_descr">Indstil interval for onlinesporing.</string>
     <string name="live_monitoring_interval">Interval for online sporing</string>
-    <string name="live_monitoring_url_descr">Angiv webadressen med parametersyntaks: lat={0}, lon={1}, tidspunkt={2}, hdop={3}, højde={4}, hastighed={5}, kurs={6}</string>
+    <string name="live_monitoring_url_descr">Angiv webadressen med parametersyntaks: lat={0}, lon={1}, tidspunkt={2}, hdop={3}, højde={4}, hastighed={5}, kurs={6}.</string>
     <string name="live_monitoring_url">Webadresse for online sporing</string>
     <string name="gpx_monitoring_disabled_warn">Log spor med GPX modul eller via indstillinger \'Tur optagelse\'.</string>
     <string name="show_current_gpx_title">Vis aktuelt spor</string>
     <string name="free_version_message">Den gratis version af OsmAnd er begrænset til at hente %1$s kort og understøtter ikke offline Wikipedia artikler.</string>
     <string name="free_version_title">Gratisversion</string>
-    <string name="poi_context_menu_showdescription">Vis IP beskrivelse</string>
+    <string name="poi_context_menu_showdescription">Vis IP beskrivelse.</string>
     <string name="index_name_north_america">Nordamerika</string>
     <string name="index_name_us">Nordamerika - USA</string>
     <string name="index_name_central_america">Mellemamerika</string>
@@ -427,14 +427,14 @@ OSM er et i fællesskab drevet, globalt offentligt domæne kortlægningsprojekt.
     <string name="profile_settings">Profilspecifikke indstillinger</string>
     <string name="settings_preset">Standardprofil</string>
     <string name="settings_preset_descr">Kortvisnings- og navigationsindstillinger gemmes på hver profil. Indstil standardprofilen her.</string>
-    <string name="routing_settings_descr">Indstillinger for navigation</string>
+    <string name="routing_settings_descr">Indstillinger for navigation.</string>
     <string name="global_settings">Globale indstillinger</string>
     <string name="index_settings">Administrer kortfiler</string>
     <string name="general_settings">Generelt</string>
-    <string name="general_settings_descr">Konfigurer visning og generelle indstillinger</string>
+    <string name="general_settings_descr">Konfigurer visning og generelle indstillinger.</string>
     <string name="global_app_settings">Globale programindstillinger</string>
     <string name="user_name">OSM-brugernavn</string>
-    <string name="open_street_map_login_descr">Nødvendige for ændringer i openstreetmap.org</string>
+    <string name="open_street_map_login_descr">Nødvendig for ændringer i openstreetmap.org.</string>
     <string name="user_password">OSM-kodeord</string>
     
     <string name="osmand_service">Baggrundstilstand</string>
@@ -547,7 +547,7 @@ OSM er et i fællesskab drevet, globalt offentligt domæne kortlægningsprojekt.
 
     <string name="map_version_changed_info">Serveren har kort-filer, der ikke er kompatible med den nuværende version af programmet. For at hente og bruge dem skal programmet opdateres til en nyere version.</string>
 
-    <string name="show_more_map_detail_descr">Vis nogle vektor-kortdetaljer (f.eks. veje) allerede ved lavere zoom</string>
+    <string name="show_more_map_detail_descr">Vis nogle vektor-kortdetaljer (f.eks. veje) allerede ved lavere zoom.</string>
     <string name="favourites_delete_multiple_succesful">Favoritter er slettet.</string>
     <string name="favorite_delete_multiple">%1$d favoritter og %2$d favoritgrupper slettes. Forsæt?</string>
     <string name="basemap_missing">Verdensgrundkort (dækker hele verden ved lave zoomniveauer) mangler. Overvej at hente World_basemap_x.obf for en global oversigt.</string>
@@ -560,7 +560,7 @@ OSM er et i fællesskab drevet, globalt offentligt domæne kortlægningsprojekt.
     <string name="local_index_items_restored">%1$d af %2$d emner aktiveret.</string>
     <string name="local_index_no_items_to_do">Ingen emner at %1$s</string>
     <string name="local_index_action_do">%1$s %2$s emner slettes. Fortsæt?</string>
-    <string name="local_index_descr_title">Administrer kortfiler</string>
+    <string name="local_index_descr_title">Administrer kortfiler.</string>
     <string name="local_index_mi_restore">Aktiver</string>
     <string name="local_index_mi_backup">Deaktiver</string>
 
@@ -574,10 +574,10 @@ OSM er et i fællesskab drevet, globalt offentligt domæne kortlægningsprojekt.
     <string name="local_indexes_cat_poi">Interessepunkt-data</string>
     <string name="ttsvoice">TTS stemme</string>
     <string name="search_offline_clear_search">Ny søgning</string>
-    <string name="map_text_size_descr">Vælg tekststørrelse for navne på kortet</string>
+    <string name="map_text_size_descr">Vælg tekststørrelsen for navne på kortet.</string>
     <string name="map_text_size">Tekststørrelse</string>
     <string name="trace_rendering">Optegningsfejlfinding</string>
-    <string name="trace_rendering_descr">Vis optegningsydeevne</string>
+    <string name="trace_rendering_descr">Vis optegningsydeevne.</string>
 
 
     <string name="installing_new_resources">Udpakker nye data…</string>
@@ -607,27 +607,27 @@ OSM er et i fællesskab drevet, globalt offentligt domæne kortlægningsprojekt.
     <string name="layer_overlay">Overlejringskort…</string>
     <string name="map_overlay">Overlejringskort</string>
     <string name="map_overlay_descr">Vælg kort til overlejring</string>
-    <string name="tile_source_already_installed">Kort er allerede installeret, indstillinger bliver opdateret</string>
-    <string name="select_tile_source_to_install">Vælg kort/kortbrikker der skal installeres eller opdateres</string>
-    <string name="internet_not_available">En internetforbindelse er nødvendig for handlingen, men er ikke tilgængelig</string>
+    <string name="tile_source_already_installed">Kort er allerede installeret, indstillinger bliver opdateret.</string>
+    <string name="select_tile_source_to_install">Vælg kort/kortbrikker der skal installeres eller opdateres.</string>
+    <string name="internet_not_available">En internetforbindelse er nødvendig for handlingen, men er ikke tilgængelig.</string>
     <string name="install_more">Installer flere…</string>
-    <string name="level_to_switch_vector_raster_descr">Minimum zoomniveau for at bruge vektorkort</string>
+    <string name="level_to_switch_vector_raster_descr">Minimum zoomniveau for at bruge vektorkort.</string>
     <string name="level_to_switch_vector_raster">Min. vektor zoomniveau</string>
 
 
     <string name="poi_filter_nominatim">Online Nominatim</string>
     <string name="local_index_poi_data">Interessepunkt-data</string>
 
-    <string name="error_doing_search">Der skete en fejl under offline søgning</string>
-    <string name="search_offline_geo_error">Kunne ikke fortolke geografisk hensigt \'%s\'</string>
+    <string name="error_doing_search">Der skete en fejl under offline søgning.</string>
+    <string name="search_offline_geo_error">Kunne ikke fortolke geografisk hensigt \'%s\'.</string>
     <string name="search_osm_offline">Søg geografisk placering</string>
     <string name="system_locale">System</string>
-    <string name="preferred_locale_descr">Vælg sprog (genstart OsmAnd efter skift)</string>
+    <string name="preferred_locale_descr">Vælg sprog (genstart efter skift).</string>
     <string name="preferred_locale">Sprog</string>
     <string name="incomplete_locale">ufuldstændig</string>
 
 
-    <string name="unit_of_length_descr">Ændre enhed for længde</string>
+    <string name="unit_of_length_descr">Ændre enhed for længde.</string>
     <string name="unit_of_length">Længdeenheder</string>
     <string name="si_mi_feet">Mil/fod</string>
     <string name="si_mi_yard">Mil/yards</string>
@@ -704,13 +704,13 @@ OSM er et i fællesskab drevet, globalt offentligt domæne kortlægningsprojekt.
     <string name="items_were_selected">{0} emner valgt</string>
     <string name="filter_existing_indexes">Hentet</string>
     <string name="fast_route_mode">Hurtigste rute</string>
-    <string name="fast_route_mode_descr">"Aktiver for at beregne den hurtigste rute eller deaktiver for  brændstofbesparende rute"</string>
+    <string name="fast_route_mode_descr">"Aktiver for at beregne den hurtigste rute eller deaktiver for  brændstofbesparende rute."</string>
     <string name="tiles_to_download_estimated_size">Ved zoom {0} hent {1} kortbrikker ({2} MB)</string>
     <string name="shared_string_download_map">Hent kort</string>
     <string name="select_max_zoom_preload_area">Vælg maksimal zoom der skal indlæses på forhånd</string>
     <string name="maps_could_not_be_downloaded">Kortet kunne ikke hentes</string>
     <string name="continuous_rendering">Kontinuerlig kortoptegning</string>
-    <string name="continuous_rendering_descr">Vis kontinuerlig optegning i stedet for hele kortet på en gang</string>
+    <string name="continuous_rendering_descr">Vis kontinuerlig optegning i stedet for hele kortet på en gang.</string>
     <string name="rendering_exception">Det skete en fejl under optegning af det valgte område</string>
     <string name="show_point_options">Brug placeringer …</string>
     <string name="renderer_load_sucess">Kortgenerator indlæst</string>
@@ -723,7 +723,7 @@ OSM er et i fællesskab drevet, globalt offentligt domæne kortlægningsprojekt.
     <string name="phone">Telefon</string>
     <string name="download_type_to_filter">skriv for at filtrere</string>
     <string name="use_high_res_maps">Højopløseligt visning</string>
-    <string name="use_high_res_maps_descr">Stræk (og slør) ikke kortbrikker på skærme med stor opløsning</string>
+    <string name="use_high_res_maps_descr">Stræk (og slør) ikke kortbrikker på skærme med stor opløsning.</string>
 
     <string name="context_menu_item_search_transport">Søg kollektivtrafik</string>
     <string name="transport_searching_transport">Transportresultater (ingen destination):</string>
@@ -781,7 +781,7 @@ OSM er et i fællesskab drevet, globalt offentligt domæne kortlægningsprojekt.
     <string name="background_service_int">GPS vågn-op interval</string>
     <string name="background_service_provider_descr">Vælg placeringsudbyder som bruges af baggrundstjenesten</string>
     <string name="background_service_provider">Placeringsudbyder</string>
-    <string name="background_router_service_descr">Kør OsmAnd i baggrunden for at spore positionen, mens skærmen er slukket</string>
+    <string name="background_router_service_descr">Kør OsmAnd i baggrunden for at spore positionen, mens skærmen er slukket.</string>
     <string name="background_router_service">Kør OsmAnd i baggrunden</string>
     <string name="off_router_service_no_gps_available">Baggrund navigationstjenesten kræver en placeringsudbyder for kunne aktiveres.</string>
     <string name="hide_poi_filter">Skjul filter</string>
@@ -844,7 +844,7 @@ OSM er et i fællesskab drevet, globalt offentligt domæne kortlægningsprojekt.
     <string name="map_orientation_portrait">Stående</string>
     <string name="map_orientation_landscape">Liggende</string>
     <string name="map_screen_orientation">Skærmretning</string>
-    <string name="map_screen_orientation_descr">Stående, liggende eller som enhed</string>
+    <string name="map_screen_orientation_descr">Stående, liggende eller som enhed.</string>
     <string name="add_new_rule">Tilføj ny regel</string>
     <string name="transport_Routes">Ruter</string>
     <string name="transport_search_after">Efterfølgende ruteplan</string>
@@ -870,7 +870,7 @@ OSM er et i fællesskab drevet, globalt offentligt domæne kortlægningsprojekt.
     <string name="search_address_street">Gade</string>
     <string name="search_address_city">By</string>
     <string name="search_address_top_text">Vælg adresse</string>
-    <string name="voice_provider_descr">Vælg talevejledning til navigation</string>
+    <string name="voice_provider_descr">Vælg talevejledning til navigation.</string>
     <string name="transport_Stop">Stoppested</string>
     <string name="transport_stops">Stoppesteder</string>
 
@@ -884,7 +884,7 @@ OSM er et i fællesskab drevet, globalt offentligt domæne kortlægningsprojekt.
     <string name="opening_hours_not_supported">Åbningstider format understøtter ikke redigering</string>
     <string name="transport_stop_to_go_out">Vælg stoppestedet for afstigning</string>
     <string name="transport_stops_to_pass">stoppesteder der skal passeres</string>
-    <string name="show_transport_over_map_description">Vis stoppesteder for kollektivtrafik på kortet</string>
+    <string name="show_transport_over_map_description">Vis stoppesteder for kollektivtrafik på kortet.</string>
     <string name="show_transport_over_map">Vis stoppesteder</string>
     <string name="hello">Navigationsprogram OsmAnd</string>
     <string name="update_poi_success">Interessepunkt-data blev opdateret ({0} blev indlæst)</string>
@@ -967,24 +967,24 @@ OSM er et i fællesskab drevet, globalt offentligt domæne kortlægningsprojekt.
 
     <string name="use_online_routing_descr">Brug internettet til at beregne rute</string>
     <string name="use_online_routing">Brug online-navigation</string>
-    <string name="osm_settings_descr">Indstillinger for OpenStreetMap.org (OSM), som kræves for bidrag til OSM</string>
-    <string name="data_settings_descr">Angiv sprog, hent/genindlæs data</string>
+    <string name="osm_settings_descr">Indstillinger for OpenStreetMap.org (OSM), som kræves for bidrag til OSM.</string>
+    <string name="data_settings_descr">Angiv sprog, hent/genindlæs data.</string>
     <string name="data_settings">Data</string>
 
     <string name="osm_settings">OSM redigering</string>
     <string name="additional_settings">Yderligere indstillinger</string>
-    <string name="save_current_track_descr">Gem aktuelle spor til SD-kort nu</string>
+    <string name="save_current_track_descr">Gem aktuelle spor til SD-kort nu.</string>
     <string name="save_current_track">Gem aktuelle GPX-spor</string>
     <string name="save_track_interval">Logningsinterval under navigation</string>
-    <string name="save_track_interval_descr">Vælg logningsinterval for optagelse af spor under navigation</string>
-    <string name="save_track_to_gpx_descrp">GPX spor gemmes automatisk i \'/track\' mappen under navigation</string>
+    <string name="save_track_interval_descr">Vælg logningsinterval for optagelse af spor under navigation.</string>
+    <string name="save_track_to_gpx_descrp">GPX spor gemmes automatisk i \'/track\' mappen under navigation.</string>
     <string name="save_track_to_gpx">Automatisk optagelse af spor under navigation</string>
     <string name="update_tile">Opdater kort</string>
     <string name="reload_tile">Genindlæs kortbrikker</string>
     <string name="mark_point">Mål</string>
 
 
-    <string name="use_english_names_descr">Vælg mellem oprindelige eller engelske navne</string>
+    <string name="use_english_names_descr">Vælg mellem oprindelige eller engelske navne.</string>
     <string name="use_english_names">Engelske navne</string>
     <string name="app_settings">Programindstillinger</string>
     <string name="search_address">Søg adresse</string>
@@ -993,11 +993,11 @@ OSM er et i fællesskab drevet, globalt offentligt domæne kortlægningsprojekt.
     <string name="choose_city">Vælg by eller postnummer</string>
     <string name="ChooseCountry">Vælg land</string>
     <string name="show_view_angle">Vis synsretning</string>
-    <string name="map_view_3d_descr">Aktiver 3D-visning af kortet</string>
+    <string name="map_view_3d_descr">Aktiver 3D-visning af kortet.</string>
     <string name="map_view_3d">3D-kortvisning</string>
-    <string name="show_poi_over_map_description">Vis interessepunkt ovenpå kortet (brug det sidst valgte filter)</string>
+    <string name="show_poi_over_map_description">Vis interessepunkter på kortet (brug det sidst valgte filter).</string>
     <string name="show_poi_over_map">Vis interessepunkt</string>
-    <string name="map_tile_source_descr">Vælg kilden til onlinekort eller cachelagrede kortbrikker</string>
+    <string name="map_tile_source_descr">Vælg kilden til onlinekort eller cachelagrede kortbrikker.</string>
     <string name="map_tile_source">Kilde til kortbrikker</string>
     <string name="map_source">Kortkilde</string>
     <string name="use_internet">Brug internettet</string>
@@ -1054,12 +1054,12 @@ OSM er et i fællesskab drevet, globalt offentligt domæne kortlægningsprojekt.
     <string name="select_address_activity">Vælg adresse</string>
     <string name="favourites_list_activity">Vælg favorit</string>
     <string name="hno">Husnummer</string>
-    <string name="choose_osmand_theme_descr">Vælg tema</string>
+    <string name="choose_osmand_theme_descr">Vælg tema.</string>
     <string name="choose_osmand_theme">Tema</string>
     <string name="accessibility_options">Indstillinger for tilgængelighed</string>
 
     <string name="monitoring_settings">Optag ture</string>
-    <string name="monitoring_settings_descr">Indstil hvordan ture optages</string>
+    <string name="monitoring_settings_descr">Indstil hvordan ture optages.</string>
 
     <string name="local_openstreetmap_act_title">OSM modifikationer</string>
 
@@ -1073,8 +1073,8 @@ OSM er et i fællesskab drevet, globalt offentligt domæne kortlægningsprojekt.
     <string name="available_downloads_left">%1$d filer kan hentes</string>
     <string name="use_magnetic_sensor">Magnetisk sensor</string>
     <string name="local_indexes_cat_srtm">Højdekurver</string>
-    <string name="use_magnetic_sensor_descr">For kompaslæsning, brug den magnetiskesensor i stedet for orienteringssensoren</string>
-    <string name="use_kalman_filter_compass_descr">Reducerer støj i kompasaflæsninger, men tilføjer inerti</string>
+    <string name="use_magnetic_sensor_descr">For kompaslæsning, brug den magnetiskesensor i stedet for orienteringssensoren.</string>
+    <string name="use_kalman_filter_compass_descr">Reducerer støj i kompasaflæsninger, men tilføjer inerti.</string>
     <string name="use_kalman_filter_compass">Kalman filter</string>
     <string name="wait_current_task_finished">Vent - mens aktuel opgave bliver færdig</string>
     <string name="plugin_distance_point_hdop">nøjagtighed</string>
@@ -1117,7 +1117,7 @@ OSM er et i fællesskab drevet, globalt offentligt domæne kortlægningsprojekt.
     <string name="av_camera_focus_macro">Makrofokustilstand (nærbillede)</string>
     <string name="av_camera_focus_edof">Udvidet dybdeskarphed (EDOF)</string>
     <string name="av_camera_focus_continuous">Kameraet forsøger løbende at fokusere</string>
-    <string name="av_photo_play_sound_descr">Spil lyd når der optages fotos</string>
+    <string name="av_photo_play_sound_descr">Spil lyd når der optages fotos.</string>
     <string name="av_photo_play_sound">Kameralyd</string>
     <string name="speak_traffic_warnings">Trafikadvarsler</string>
     <string name="speak_cameras">Fartkameraer</string>
@@ -1137,7 +1137,7 @@ OSM er et i fællesskab drevet, globalt offentligt domæne kortlægningsprojekt.
     <string name="context_menu_item_directions_to">Rutevejledning til</string>
     <string name="context_menu_item_directions_from">Rutevejledning fra</string>
     <string name="speak_title">Meddel…</string>
-    <string name="speak_descr">Konfigurer til at meddele gadenavne, trafikadvarsler (tvungne stop, vejbump), fartkameraadvarsler, hastighedsgrænser</string>
+    <string name="speak_descr">Konfigurer til at meddele gadenavne, trafikadvarsler (tvungne stop, vejbump), fartkameraadvarsler, hastighedsgrænser.</string>
     <string name="speak_street_names">Gadenavne (TTS)</string>
     <string name="announce_gpx_waypoints">GPX-rutepunkter</string>
 
@@ -1148,7 +1148,7 @@ OSM er et i fællesskab drevet, globalt offentligt domæne kortlægningsprojekt.
     <string name="driving_region_europe_asia">Europa, Asien, Latinamerika og og tilsvarende</string>
     <string name="driving_region_uk">Storbritannien, Indien og lignende</string>
     <string name="driving_region">Region</string>
-    <string name="driving_region_descr">Vælg region: USA, Europa, Storbritannien, Asien og andre</string>
+    <string name="driving_region_descr">Vælg region: USA, Europa, Storbritannien, Asien og andre.</string>
     <string name="map_widget_fps_info">FPS-fejlsøgningssinfo</string>
     <string name="local_index_tile_data_expire">Udløber (minutter): %1$s</string>
     <string name="local_index_tile_data_maxzoom">Maks zoomniveau: %1$s</string>
@@ -1194,16 +1194,16 @@ OSM er et i fællesskab drevet, globalt offentligt domæne kortlægningsprojekt.
     <string name="app_mode_boat">Båd</string>
     <string name="app_mode_aircraft">Fly</string>
     <string name="map_widget_map_rendering">Kortoptegning</string>
-    <string name="app_modes_choose_descr">Vælg, at brugsprofilerne skal være synlige i programmet</string>
+    <string name="app_modes_choose_descr">Vælg at brugsprofilerne skal være synlige i programmet.</string>
     <string name="app_modes_choose">Programprofiler</string>
     <string name="amenity_type_seamark">Sømærke</string>
 
 
-    <string name="speech_rate_descr">Angiv talehastighed for TTS</string>
+    <string name="speech_rate_descr">Angiv talehastighed for TTS.</string>
     <string name="speech_rate">Talehastighed</string>
 
     <string name="complex_route_calculation_failed">Hurtig ruteberegning mislykkedes (%s), går tilbage til langsom beregning.</string>
-    <string name="disable_complex_routing_descr">Deaktiver 2-faset ruteplanlægning til bilnavigation</string>
+    <string name="disable_complex_routing_descr">Deaktiver 2-faset ruteplanlægning til bilnavigation.</string>
     <string name="disable_complex_routing">Deaktiver kompleks ruteplanlægning</string>
     <string name="guidance_preferences_descr">Indstillinger for navigation</string>
     <string name="routing_preferences_descr">Indstillinger for ruteplanlægning</string>
@@ -1217,17 +1217,17 @@ OSM er et i fællesskab drevet, globalt offentligt domæne kortlægningsprojekt.
 \n Note 1: De gamle datafiler forbliver urørt. (men kan slettes manuelt). 
 \n Note 2: På den nye placering vil det ikke være muligt at dele filer mellem OsmAnd og OsmAnd+."</string>
     <string name="routing_attr_prefer_motorway_name">Foretræk motorveje</string>
-    <string name="routing_attr_prefer_motorway_description">Foretræk motorveje</string>
+    <string name="routing_attr_prefer_motorway_description">Foretræk motorveje.</string>
     <string name="routing_attr_avoid_toll_name">Undgå betalingsveje</string>
-    <string name="routing_attr_avoid_toll_description">Undgå betalingsveje</string>
+    <string name="routing_attr_avoid_toll_description">Undgå betalingsveje.</string>
     <string name="routing_attr_avoid_unpaved_name">Undgå grusveje</string>
-    <string name="routing_attr_avoid_unpaved_description">Undgå grusveje</string>
+    <string name="routing_attr_avoid_unpaved_description">Undgå grusveje.</string>
     <string name="routing_attr_avoid_ferries_name">Undgå færger</string>
-    <string name="routing_attr_avoid_ferries_description">Undgå færger</string>
+    <string name="routing_attr_avoid_ferries_description">Undgå færger.</string>
     <string name="routing_attr_avoid_motorway_name">Undgå motorveje</string>
-    <string name="routing_attr_avoid_motorway_description">Undgå motorveje</string>
+    <string name="routing_attr_avoid_motorway_description">Undgå motorveje.</string>
     <string name="routing_attr_weight_name">Vægtgrænse</string>
-    <string name="routing_attr_weight_description">Køretøjets vægt der tillades på ruter</string>
+    <string name="routing_attr_weight_description">Køretøjets vægt der tillades på ruter.</string>
     
     
     <string name="route_info">Ruteinformation</string>
@@ -1294,13 +1294,13 @@ OSM er et i fællesskab drevet, globalt offentligt domæne kortlægningsprojekt.
     <string name="voice_pref_title">Tale</string>
     <string name="misc_pref_title">Diverse</string>
     <string name="localization_pref_title">Lokalisering</string>
-    <string name="interrupt_music_descr">Stemmemeddelelser pause, ikke bare dæmpe musikafspilning</string>
+    <string name="interrupt_music_descr">Stemmemeddelelser pause, ikke bare dæmpe musikafspilning.</string>
     <string name="interrupt_music">Pause musik</string>
     <string name="share_route_as_gpx">Del rute som GPX-fil</string>
     <string name="share_route_subject">Ruten deles via OsmAnd</string>
     <string name="navigation_intent_invalid">Ugyldigt format: %s</string>
     <string name="osmo_settings_uuid">Unik enheds-id</string>
-    <string name="osmo_settings_descr">Konfigurer indstillinger for overvågning og opsætning af personlig overvågningskanal</string>
+    <string name="osmo_settings_descr">Konfigurer indstillinger for overvågning og opsætning af personlig overvågningskanal.</string>
     <string name="osmo_plugin_description">Udvidelsen giver delvis funktionalitet af OpenStreetMap ovetvågning, se http://osmo.mobi. 
 \n 
 \nSpor alle enheder i en deltagende gruppe tidstro. Se punkt og spor overført til den gruppe, du tilhører. 
@@ -1309,7 +1309,7 @@ OSM er et i fællesskab drevet, globalt offentligt domæne kortlægningsprojekt.
     <string name="osmo_plugin_name">OpenStreetMap monitorering</string>
     <string name="osmo_settings">OsMo</string>
     <string name="keep_informing_never">Kun manuelt (tryk på pilen)</string>
-    <string name="keep_informing_descr">Gentag navigationsinstruktioner med jævne mellemrum</string>
+    <string name="keep_informing_descr">Gentag navigationsinstruktioner med jævne mellemrum.</string>
     <string name="keep_informing">Gentag navigationsinstruktioner</string>
     <string name="arrival_distance">Meddel ankomst</string>
     <string name="arrival_distance_descr">Hvornår skal ankomst meddeles?</string>
@@ -1330,10 +1330,10 @@ OSM er et i fællesskab drevet, globalt offentligt domæne kortlægningsprojekt.
 
     <string name="osmo_connected_devices">Tilsluttede enheder</string>
     <string name="osmo_groups">OsMo grupper</string>
-    <string name="osmo_auto_send_locations_descr">Start tur automatisk og send placeringer efter start af programmet</string>
+    <string name="osmo_auto_send_locations_descr">Start tur automatisk og send placeringer efter start af programmet.</string>
     <string name="osmo_auto_send_locations">Start tur automatisk</string>
     <string name="osmo_tracker_id">Sporings-ID</string>
-    <string name="osmo_tracker_id_descr">Tryk for at se tracker-ID</string>
+    <string name="osmo_tracker_id_descr">Tryk for at se tracker-ID.</string>
     <string name="osmo_session_token">Sessiontoken: %1$s</string>
     <string name="osmo_auth_pending">Venter på autorisation…</string>
     <string name="osmo_locations_sent">Placeringer sendt %1$d (i buffer %2$d) </string>
@@ -1394,7 +1394,7 @@ OSM er et i fællesskab drevet, globalt offentligt domæne kortlægningsprojekt.
 
     <string name="osmo_follow">Følg</string>
     <string name="osmo_show_group_notifications">Vis gruppemeddelelser</string>
-    <string name="osmo_show_group_notifications_descr">Vis popup-meddelelser, når brugeren slutter sig til gruppen eller forlader den</string>
+    <string name="osmo_show_group_notifications_descr">Vis popup-meddelelser, når brugeren slutter sig til gruppen eller forlader den.</string>
     <string name="osmo_user_joined">Bruger %1$s sluttede sig til  gruppen %2$s</string>
     <string name="osmo_user_left">Bruger %1$s forlod gruppen %2$s</string>
 
@@ -1431,8 +1431,8 @@ OSM er et i fællesskab drevet, globalt offentligt domæne kortlægningsprojekt.
     <string name="save_as_favorites_points">Gem som en gruppe af favoritter</string>
     <string name="select_destination_and_intermediate_points">Vælg destinationer</string>
     <string name="layer_amenity_label">Punktetiketter</string>
-    <string name="create_poi_link_to_osm_doc"><u>Online OSM</u> kort klassificering med billeder</string>
-    <string name="show_zoom_buttons_navigation_descr">Vis zoom-knapperne under navigation</string>
+    <string name="create_poi_link_to_osm_doc"><u>Online OSM</u> kort klassificering med billeder.</string>
+    <string name="show_zoom_buttons_navigation_descr">Vis zoom-knapperne under navigation.</string>
     <string name="show_zoom_buttons_navigation">Vis zoom-knapperne</string>
 
     <string name="sort_by_distance">Sorter efter afstand</string>
@@ -1442,7 +1442,7 @@ OSM er et i fællesskab drevet, globalt offentligt domæne kortlægningsprojekt.
 
     <string name="no_index_file_to_download">Ingenting at hente, kontroller internetforbindelsen.</string>
     <string name="osmo_gpx_points_downloaded">OsMo punkter %1$s hentet.</string>
-    <string name="osmo_auto_connect_descr">Forbind automatisk til tjenesten efter start af programmet</string>
+    <string name="osmo_auto_connect_descr">Forbind automatisk til tjenesten efter start af programmet.</string>
     <string name="osmo_auto_connect">Automatisk forbindelse</string>
     <string name="osmo_start_service">OsMo tjeneste</string>
     <string name="osmo_gpx_track_downloaded">OsMo spor %1$s hentet.</string>
@@ -1502,9 +1502,9 @@ OSM er et i fællesskab drevet, globalt offentligt domæne kortlægningsprojekt.
     <string name="continue_navigation">Fortsæt navigation</string>
     <string name="pause_navigation">Pause navigation</string>
     <string name="rendering_attr_alpineHiking_name">Alpin vandreskala (SAC)</string>
-    <string name="rendering_attr_alpineHiking_description">Generer stier efter SAC skala</string>
+    <string name="rendering_attr_alpineHiking_description">Generer stier efter SAC skalaen.</string>
     <string name="rendering_attr_hikingRoutesOSMC_name">Vandresymbol overlejring</string>
-    <string name="rendering_attr_hikingRoutesOSMC_description">Generer stier efter OSMC spor</string>
+    <string name="rendering_attr_hikingRoutesOSMC_description">Generer stier efter OSMC spor.</string>
 
     <string name="osmo_invite">Inviter…</string>
     <string name="osmo_leave_confirmation_msg">Forlad gruppen %1$s?</string>
@@ -1541,9 +1541,9 @@ OSM er et i fællesskab drevet, globalt offentligt domæne kortlægningsprojekt.
     <string name="rendering_attr_publicTransportMode_name">Bus-, trolleybus-, shuttlebusruter</string>
     <string name="save_track_to_gpx_globally">Log spor til GPX-fil</string>
     <string name="save_track_interval_globally">Logningsinterval</string>
-    <string name="save_track_to_gpx_globally_descr">Generel positionsslogning til en GPX-fil kan slås til/fra med \'GPX logning\' på hovedskærmen</string>
+    <string name="save_track_to_gpx_globally_descr">Generel positionsslogning til en GPX-fil kan slås til/fra med \'GPX logning\' på hovedskærmen.</string>
     <string name="confirm_every_run">Spørg altid</string>
-    <string name="save_global_track_interval_descr">Vælg logningsinterval for den almindelige optagelse af spor (aktiveres via \'GPX logning\' på hovedskærmen)</string>
+    <string name="save_global_track_interval_descr">Vælg logningsinterval for den almindelige optagelse af spor (aktiveres via \'GPX logning\' på hovedskærmen).</string>
     <string name="save_global_track_interval">Generelt logningsinterval</string>
     <string name="traffic_warning_speed_limit">Hastighedsgrænse</string>
     <string name="traffic_warning_border_control">Grænsekontrol</string>
@@ -1595,7 +1595,7 @@ OSM er et i fællesskab drevet, globalt offentligt domæne kortlægningsprojekt.
     <string name="impassable_road">Undgå veje…</string>
     <string name="rendering_category_hide">Skjul</string>
     <string name="wake_on_voice">Tænd for skærmen</string>
-    <string name="wake_on_voice_descr">Tænd for skærmen (hvis slukket) ved navigationsinstruktioner</string>
+    <string name="wake_on_voice_descr">Tænd for skærmen (hvis slukket) ved navigationsinstruktioner.</string>
     <string name="lock_screen_request_explanation">%1$s behøver denne tilladelse til at slukke for skærmen for strømbesparende funktion.</string>
 
     
@@ -1607,7 +1607,7 @@ OSM er et i fællesskab drevet, globalt offentligt domæne kortlægningsprojekt.
     <string name="map_update">Der er %1$s opdateringer</string>
     <string name="error_avoid_specific_road">Ingen omfartsvej fundet</string>
     <string name="use_opengl_render">Brug OpenGL optegning</string>
-    <string name="use_opengl_render_descr">Brug hardware accelereret OpenGL optegning (virker muligvis ikke på alle enheder)</string>
+    <string name="use_opengl_render_descr">Brug hardware accelereret OpenGL optegning (virker muligvis ikke på alle enheder).</string>
     <string name="everything_up_to_date">Alt er opdateret</string>
     <string name="no_internet_connection">Ikke muligt at hente, kontroller internetforbindelsen.</string>
     <string name="download_tab_downloads">Alle filhentninger</string>
@@ -1629,7 +1629,7 @@ OSM er et i fællesskab drevet, globalt offentligt domæne kortlægningsprojekt.
     <string name="rendering_value_germanRoadAtlas_name">Tysk vejkort</string>
     <string name="rendering_value_americanRoadAtlas_name">Amerikansk vejkort</string>
     <string name="routing_attr_no_new_routing_name">Ingen v1.9 routing regler</string>
-    <string name="routing_attr_no_new_routing_description">Brug ikke routing regler indført i v1.9</string>
+    <string name="routing_attr_no_new_routing_description">Brug ikke routing regler indført i v1.9.</string>
     <string name="traffic_warning_railways">Jernbaneoverskæring</string>
     <string name="traffic_warning_pedestrian">Fodgængerovergang</string>
     <string name="show_railway_warnings">Jernbaneoverskæringer</string>
@@ -1646,13 +1646,13 @@ OSM er et i fællesskab drevet, globalt offentligt domæne kortlægningsprojekt.
     <string name="enable_proxy_title">Aktiver HTTP proxy</string>
     <string name="enable_proxy_descr">Konfigurer HTTP-proxy for alle netværksanmodninger</string>
     <string name="proxy_host_title">Proxy vært</string>
-    <string name="proxy_host_descr">Konfigurer proxy værtsnavn (f.eks. 127.0.0.1)</string>
+    <string name="proxy_host_descr">Konfigurer proxy værtsnavn (f.eks. 127.0.0.1).</string>
     <string name="proxy_port_title">Proxy port</string>
-    <string name="proxy_port_descr">Konfigurer proxy portnummer (f.eks. 8118)</string>
+    <string name="proxy_port_descr">Konfigurer proxy portnummer (f.eks. 8118).</string>
     <string name="rendering_attr_streetLighting_name">Gadebelysning</string>
 
 
-    <string name="version_settings_descr">Hent aktuelle udviklingsversioner</string>
+    <string name="version_settings_descr">Hent aktuelle udviklingsversioner.</string>
     <string name="version_settings">Versioner</string>
     <string name="points">Punkter</string>
     <string name="gps_status">GPS status</string>
@@ -1783,7 +1783,7 @@ OSM er et i fællesskab drevet, globalt offentligt domæne kortlægningsprojekt.
     <string name="drawer">Enkel liste</string>
     <string name="short_location_on_map">Lat %1$s 
 \nLon %2$s</string>
-    <string name="tips_and_tricks_descr">Ofte stillede spørgsmål, de seneste ændringer og andre oplysninger</string>
+    <string name="tips_and_tricks_descr">Ofte stillede spørgsmål, de seneste ændringer og andre oplysninger.</string>
     <string name="routing_settings_2">Navigationsindstillinger</string>
     <string name="general_settings_2">Generelle indstillinger</string>
     <string name="shared_string_clear_all">Slet alle</string>
@@ -1804,7 +1804,7 @@ OSM er et i fællesskab drevet, globalt offentligt domæne kortlægningsprojekt.
     <string name="parking_place_limited">Tidsbegrænset parkering til</string>
     <string name="your_edits">Redigeringer</string>
     <string name="osmand_parking_overdue">Udløbet</string>
-    <string name="delay_to_start_navigation_descr">Angiv ventetiden til at forblive på skærmen for ruteplanlægning</string>
+    <string name="delay_to_start_navigation_descr">Angiv ventetiden til at forblive på skærmen for ruteplanlægning.</string>
     <string name="delay_to_start_navigation">Start sving-for-sving navigation efter…</string>
     <string name="shared_string_go">Udfør</string>
 
@@ -1824,7 +1824,7 @@ OSM er et i fællesskab drevet, globalt offentligt domæne kortlægningsprojekt.
     <string name="shared_string_message">Meddelelse</string>
     <string name="shared_string_do_not_use">Brug ikke</string>
     <string name="shared_string_address">Adresse</string>
-    <string name="shared_string_show_description">Vis beskrivelse</string>
+    <string name="shared_string_show_description">Vis beskrivelse.</string>
     <string name="shared_string_search">Søg</string>
     <string name="shared_string_places">Steder</string>
     <string name="rendering_attr_OSMMapperAssistant_name">OSM kortassistent</string>
@@ -1846,12 +1846,12 @@ OSM er et i fællesskab drevet, globalt offentligt domæne kortlægningsprojekt.
     <string name="shared_string_copy">Kopier</string>
     <string name="application_dir_change_warning3">Skal OsmAnd også kopiere datafilerne til den nye placering?</string>
     <string name="rendering_attr_hideHouseNumbers_name">Husnumre</string>
-    <string name="routing_attr_avoid_borders_description">Undgå at krydse landegrænser</string>
+    <string name="routing_attr_avoid_borders_description">Undgå at krydse landegrænser.</string>
     <string name="routing_attr_height_name">Højdegrænse</string>
     
-    <string name="routing_attr_height_description">Køretøjets højde der tillades på ruter</string>
+    <string name="routing_attr_height_description">Køretøjets højde der tillades på ruter.</string>
     <string name="use_fast_recalculation">Smart rutegenberegning</string>
-    <string name="use_fast_recalculation_desc">For lange ture, genberegn kun den indledende del af ruten</string>
+    <string name="use_fast_recalculation_desc">For lange ture, genberegn kun den indledende del af ruten.</string>
     <string name="osmo_share_my_location">Overfør placering</string>
     <string name="shared_string_logoff">Log af</string>
     <string name="rendering_value_disabled_name">Deaktiveret</string>
@@ -1954,7 +1954,7 @@ OSM er et i fællesskab drevet, globalt offentligt domæne kortlægningsprojekt.
     <string name="opening_at">Åbner</string>
     <string name="closing_at">Lukker</string>
 
-    <string name="av_locations_descr">GPX-fil med placeringsnoter</string>
+    <string name="av_locations_descr">GPX-fil med placeringsnoter.</string>
     <string name="av_locations">Placeringer</string>
     <string name="tab_title_basic">Grundlæggende</string>
 
@@ -1976,8 +1976,8 @@ OSM er et i fællesskab drevet, globalt offentligt domæne kortlægningsprojekt.
     <string name="show_on_start">Vis ved start</string>
     <string name="unsaved_changes_will_be_lost">Eventuelle ikke-gemte ændringer vil gå tabt. Fortsæt?</string>
     <string name="are_you_sure">Sikker?</string>
-    <string name="simulate_your_location_stop_descr">Stop simulering af position</string>
-    <string name="simulate_your_location_descr">Simuler position ved brug af beregnet rute eller optaget GPX-spor</string>
+    <string name="simulate_your_location_stop_descr">Stop simulering af position.</string>
+    <string name="simulate_your_location_descr">Simuler position ved brug af beregnet rute eller optaget GPX-spor.</string>
     <string name="downloads_left_template">%1$s filhentninger tilbage</string>
     <string name="roads">Veje</string>
     <string name="favourites_edit_dialog_title">Favoritinformation</string>
@@ -1999,13 +1999,13 @@ OSM er et i fællesskab drevet, globalt offentligt domæne kortlægningsprojekt.
     <string name="min_km">min/km</string>
     <string name="m_s">m/s</string>
 
-    <string name="default_speed_system_descr">Vælg enhed for hastighed</string>
+    <string name="default_speed_system_descr">Vælg enhed for hastighed.</string>
     <string name="favorite_category_add_new">Tilføj ny</string>
     <string name="favorite_category_select">Vælg kategori</string>
 
     <string name="srtm_plugin_disabled">Højdekurver er deaktiveret</string>
     <string name="show_free_version_banner">Vis banner for gratis version</string>
-    <string name="show_free_version_banner_description">Vis banneret for den gratis version selv for den betalte version</string>
+    <string name="show_free_version_banner_description">Vis banneret for den gratis version selv for den betalte version.</string>
     <string name="downloading_number_of_files">Henter - %1$d fil</string>
     <string name="buy">KØB</string>
     <string name="hillshade_layer_disabled">Reliefskygger er deaktiveret</string>
@@ -2026,18 +2026,18 @@ OSM er et i fællesskab drevet, globalt offentligt domæne kortlægningsprojekt.
     <string name="value_downloaded_of_max">%1$.1f af %2$.1f MB</string>
     <string name="file_size_in_mb">%.1f MB</string>
     <string name="update_all">Opdater alle (%1$s MB)</string>
-    <string name="free_downloads_used_description">Viser de anvendte gratis filhentninger</string>
+    <string name="free_downloads_used_description">Viser de anvendte gratis filhentninger.</string>
     <string name="free_downloads_used">Gratis filhentninger brugt</string>
 
     <string name="share_geo">geo:</string>
 
-    <string name="simulate_initial_startup_descr">Sætter flag, der angiver første programstart, beholder alle andre indstillinger uændret</string>
+    <string name="simulate_initial_startup_descr">Sætter flag, der angiver første programstart, beholder alle andre indstillinger uændret.</string>
     <string name="simulate_initial_startup">Simuler første programstart</string>
     <string name="share_menu_location">Del placering</string>
     <string name="shared_string_send">Send</string>
 
     <string name="application_dir_description">Vælg hvor kort- og andre datafiler skal gemmes.</string>
-    <string name="show_on_start_description">\'Fra\' starter direkte på kortet</string>
+    <string name="show_on_start_description">\'Fra\' starter direkte på kortet.</string>
     <string name="map_downloaded">Kort hentet</string>
     <string name="map_downloaded_descr">Kortet over %1$s er nu hentet og kan anvendes.</string>
     <string name="go_to_map">Vis kortet</string>
@@ -2051,8 +2051,8 @@ OSM er et i fællesskab drevet, globalt offentligt domæne kortlægningsprojekt.
     <string name="other_menu_group">Andet</string>
     <string name="plugins_menu_group">Udvidelser</string>
     <string name="first_usage_item">Første anvendelse</string>
-    <string name="first_usage_item_description">Sådan hentes kort og angives grundlæggende indstillinger</string>
-    <string name="navigation_item_description">Opsætning af navigation</string>
+    <string name="first_usage_item_description">Sådan hentes kort og angives grundlæggende indstillinger.</string>
+    <string name="navigation_item_description">Opsætning af navigation.</string>
     <string name="faq_item">OSS</string>
     <string name="faq_item_description">Ofte stillede spørgsmål</string>
     <string name="map_viewing_item">Kortvisning</string>
@@ -2135,11 +2135,11 @@ OSM er et i fællesskab drevet, globalt offentligt domæne kortlægningsprojekt.
     <string name="dashboard_or_drawer_description">Der er et nyt valg til kontrol af OsmAnd via det fleksibel betjeningspanel eller en statisk menu. Valget kan ændres i indstillinger for betjeningspanel .</string>
     <string name="use_dashboard_btn">Brug betjeningspanel</string>
     <string name="use_drawer_btn">Brug menuen</string>
-    <string name="access_from_map_description">Menuknappen viser betjeningspanel, ikke menuen</string>
+    <string name="access_from_map_description">Menuknappen viser betjeningspanel, ikke menuen.</string>
     <string name="access_from_map">Adgang fra kort</string>
-    <string name="please_specify_poi_type_only_from_list">Angiv den korrekte IP-type eller spring over</string>
+    <string name="please_specify_poi_type_only_from_list">Angiv den korrekte IP-type eller spring over.</string>
     <string name="routing_attr_avoid_stairs_name">Undgå trapper</string>
-	<string name="routing_attr_avoid_stairs_description">Undgå trapper</string>
+	<string name="routing_attr_avoid_stairs_description">Undgå trapper.</string>
 	<string name="routing_attr_avoid_borders_name">Undgå grænseovergang</string>
 	
 	
@@ -2147,11 +2147,11 @@ OSM er et i fællesskab drevet, globalt offentligt domæne kortlægningsprojekt.
     <string name="av_video_quality_low">Laveste kvalitet</string>
     <string name="av_video_quality_high">Højeste kvalitet</string>
     <string name="av_video_quality">Videokvalitet</string>
-    <string name="av_video_quality_descr">Vælg videokvalitet</string>
+    <string name="av_video_quality_descr">Vælg videokvalitet.</string>
     <string name="av_audio_format">Audioformat</string>
-    <string name="av_audio_format_descr">Vælg audioformat</string>
+    <string name="av_audio_format_descr">Vælg audioformat.</string>
     <string name="av_audio_bitrate">Audio bitrate</string>
-    <string name="av_audio_bitrate_descr">Vælg audio bitrate</string>
+    <string name="av_audio_bitrate_descr">Vælg audio bitrate.</string>
     <string name="shared_string_near">I nærheden af</string>
     <string name="no_address_found">Kan ikke bestemme adresse</string>
 	<string name="looking_up_address">Søger efter adressen</string>
@@ -2166,10 +2166,10 @@ OSM er et i fællesskab drevet, globalt offentligt domæne kortlægningsprojekt.
 <string name="no_location_permission">OsmAnd har ikke tilladelse til at bruge lokaliseringsdata.</string>
     <string name="no_camera_permission">OsmAnd har ikke tilladelse til at bruge kameraet.</string>
     <string name="no_microphone_permission">OsmAnd har ikke tilladelse til at bruge mikrofonen.</string>
-    <string name="impassable_road_desc">Vælg veje, der skal undgås under navigation</string>
+    <string name="impassable_road_desc">Vælg veje, der skal undgås under navigation.</string>
     <string name="shared_string_sound">Lyd</string>
     <string name="select_voice_provider">Vælg talevejledning</string>
-    <string name="select_voice_provider_descr">Vælg eller hent talevejledning på eget sprog</string>
+    <string name="select_voice_provider_descr">Vælg eller hent talevejledning på eget sprog.</string>
     <string name="live_updates">Realtidsopdateringer</string>
     <string name="available_maps">Tilgængelige kort</string>
     <string name="last_update">Sidst opdateret: %s</string>
@@ -2180,11 +2180,11 @@ OSM er et i fællesskab drevet, globalt offentligt domæne kortlægningsprojekt.
 <string name="last_map_change">Sidste kortændring: %s</string>
 <string name="rec_split">Optagelse automatisk opdelt</string>
     <string name="rec_split_title">"Brug  automatisk opdeling"</string>
-    <string name="rec_split_desc">Overskriv klip når lagerpladsen er fuld</string>
+    <string name="rec_split_desc">Overskriv klip når lagerpladsen er fuld.</string>
     <string name="rec_split_clip_length">Kliplængde</string>
     <string name="rec_split_clip_length_desc">Længden af hver optaget klip bliver ikke længere end det angivne tidsinterval</string>
     <string name="rec_split_storage_size">Lagerplads</string>
-    <string name="rec_split_storage_size_desc">Lagerplads, der kan bruges af alle optagede klip</string>
+    <string name="rec_split_storage_size_desc">Lagerplads, der kan bruges af alle optagede klip.</string>
     <string name="hourly">Time</string>
     <string name="daily">Daglig</string>
     <string name="weekly">Ugentlig</string>
@@ -2220,7 +2220,7 @@ OSM er et i fællesskab drevet, globalt offentligt domæne kortlægningsprojekt.
     
     <string name="rendering_attr_showMtbRoutes_name">Vis MTB ruter</string>
     
-    <string name="show_map_markers_description">Aktivér kortmarkører</string>
+    <string name="show_map_markers_description">Aktivér kortmarkør funktionen.</string>
     <string name="clear_active_markers_q">Fjern alle aktive markører?</string>
     <string name="clear_markers_history_q">Slet kortmarkørhistoriken?</string>
     <string name="active_markers">Aktive markører</string>
@@ -2259,13 +2259,13 @@ OSM er et i fællesskab drevet, globalt offentligt domæne kortlægningsprojekt.
     <string name="osm_live_hide_user_name">Vis ikke navn i rapporter</string>
     <string name="osm_live_support_region">Understøttet område</string>
     <string name="osm_live_month_cost">Månedlige omkostninger</string>
-    <string name="osm_live_month_cost_desc">Månedlig betaling</string>
+    <string name="osm_live_month_cost_desc">Månedlig betaling.</string>
     <string name="osm_live_active">Aktiv</string>
     <string name="osm_live_not_active">Inaktiv</string>
     <string name="osm_live_enter_email">Angiv en gyldig e-mail adresse</string>
     <string name="osm_live_enter_user_name">Angiv offentligt navn</string>
     <string name="osm_live_thanks">Tak for at abonnere på live opdateringer!</string>
-    <string name="osm_live_region_desc">En del af donationen vil blive sendt til OSM brugere, som indsender ændringer til kortet i det pågældende område</string>
+    <string name="osm_live_region_desc">En del af donationen vil blive sendt til OSM brugere, som indsender ændringer til kortet i det pågældende område.</string>
     <string name="osm_live_subscription_settings">Indstillinger for abonnement</string>
     <string name="osm_live_ask_for_purchase">Køb først OsnAnd Live-abonnement</string>
 
@@ -2308,7 +2308,7 @@ Hvis du  ønsker at støtte OsmAnd og OSM, er dette en god måde at gøre det p�
     <string name="access_category_choice">Vælg kategori</string>
     <string name="access_hint_enter_name">Angiv navn</string>
     <string name="access_hint_enter_category">Angiv kategori</string>
-    <string name="access_hint_enter_description">Angiv beskrivelse</string>
+    <string name="access_hint_enter_description">Angiv beskrivelse.</string>
     <string name="access_map_linked_to_location">Kort er forbundet til placering</string>
     <string name="access_collapsed_list">Minineret liste</string>
     <string name="access_expanded_list">Udvidet liste</string>
@@ -2319,22 +2319,22 @@ Hvis du  ønsker at støtte OsmAnd og OSM, er dette en god måde at gøre det p�
     <string name="access_shared_string_navigate_up">Navigere op</string>
     <string name="access_sort">Sorter</string>
     <string name="access_disable_offroute_recalc">Ingen rutegenberegning ved afvigelse fra ruten</string>
-    <string name="access_disable_offroute_recalc_descr">Forhindrer automatisk rutegenberegning ved afvigelse fra ruten</string>
+    <string name="access_disable_offroute_recalc_descr">Forhindrer automatisk rutegenberegning ved afvigelse fra ruten.</string>
     <string name="access_disable_wrong_direction_recalc">Ingen rutegenberegning ved modsat retning</string>
-    <string name="access_disable_wrong_direction_recalc_descr">Forhindrer automatisk genberegning af ruten, bare ved bevægelse i den modsatte retning</string>
-    <string name="access_smart_autoannounce_descr">Underret kun når retning til målpunktet ændres</string>
+    <string name="access_disable_wrong_direction_recalc_descr">Forhindrer automatisk genberegning af ruten, bare ved bevægelse i den modsatte retning.</string>
+    <string name="access_smart_autoannounce_descr">Underret kun når retning til målpunktet ændres.</string>
     <string name="access_autoannounce_period">Autoannonceringsperiode</string>
-    <string name="access_autoannounce_period_descr">Mindste tidsinterval mellem annonceringer</string>
+    <string name="access_autoannounce_period_descr">Mindste tidsinterval mellem meddelelser.</string>
     <string name="access_smart_autoannounce">Smart autoannoncering</string>
     <string name="map_widget_bearing">Relativ pejling</string>
     <string name="map_widget_magnetic_bearing">Magnetisk pejling</string>
     <string name="access_no_destination">Destination er ikke angivet</string>
-    <string name="use_osm_live_routing_description">Aktiver navigation for OsmAnd Live ændringer</string>
+    <string name="use_osm_live_routing_description">Aktiver navigation for OsmAnd Live ændringer.</string>
 	<string name="use_osm_live_routing">OsmAnd Live navigation</string>
     <string name="access_direction_audio_feedback">Retning med lyd-indikation</string>
-    <string name="access_direction_audio_feedback_descr">"Indikerer retning til målpunkt  med lyd"</string>
+    <string name="access_direction_audio_feedback_descr">"Indikerer retning til målpunkt  med lyd."</string>
     <string name="access_direction_haptic_feedback">Retning med haptisk indikation</string>
-    <string name="access_direction_haptic_feedback_descr">"Indikerer retning til målpunkt  med vibrationer"</string>
+    <string name="access_direction_haptic_feedback_descr">"Indikerer retning til målpunkt  med vibrationer."</string>
     <string name="follow_us">Følg os</string>
     <string name="move_marker_bottom_sheet_title">Flyt kortet for at ændre markørens position</string>
     <!-- string name="lat_lon_pattern">Lat: %1$.5f Lon: %2$.5f</string -->
@@ -2350,7 +2350,7 @@ Hvis du  ønsker at støtte OsmAnd og OSM, er dette en god måde at gøre det p�
     <string name="app_mode_bus">Bus</string>
  	<string name="app_mode_train">Tog</string>
     <string name="coords_format">Koordinatformat</string>
-    <string name="coords_format_descr">Format for geografiske koordinater</string>
+    <string name="coords_format_descr">Format for geografiske koordinater.</string>
   	<string name="storage_directory_card">Hukommelseskort</string>
 	
     <string name="shared_string_is_open">Åben nu</string>
@@ -2398,13 +2398,13 @@ Hvis du  ønsker at støtte OsmAnd og OSM, er dette en god måde at gøre det p�
     <string name="rendering_attr_hideOverground_name">Objekter over jorden</string>
 
     <string name="routing_attr_short_way_name">Brændstofbesparende rute</string>
-    <string name="routing_attr_short_way_description">Brug brændstofbesparende rute (normalt kortere)</string>
+    <string name="routing_attr_short_way_description">Brug brændstofbesparende rute (normalt kortere).</string>
     <string name="replace_favorite_confirmation">Erstat favorit %1$s?</string>
     <string name="shared_string_change">Skift</string>
     <string name="get_started">Kom i gang</string>
     <string name="update_all_maps_now">Opdater alle kort nu?</string>
     <string name="clear_tile_data">Ryd alle kortbrikker</string>
-    <string name="no_update_info_desc">Kontroller ikke for opdateringer eller rabatter</string>
+    <string name="no_update_info_desc">Kontroller ikke for opdateringer eller rabatter.</string>
     <string name="no_update_info">Vis ikke opdateringer</string>
     <string name="search_my_location">Find position</string>
     <string name="skip_map_downloading">Spring over hentning af kort</string>
@@ -2455,11 +2455,11 @@ Hvis du  ønsker at støtte OsmAnd og OSM, er dette en god måde at gøre det p�
     <string name="christmas_desc">I anledning af jul og nytår, vælg at få vist interessepunkter tilknyttet jul: juletræer, markeder, mm.</string>
     <string name="christmas_desc_q">Vis jule-interessepunkter (IP)?</string>
     <string name="save_track_min_speed">Minimumshastighed for logning</string>
-    <string name="save_track_min_speed_descr">Filter: Angiv minimumshastighed før et punkt logges</string>
+    <string name="save_track_min_speed_descr">Filter: Angiv minimumshastighed før et punkt logges.</string>
     <string name="save_track_min_distance">Logning ved minimum forskydning</string>
-    <string name="save_track_min_distance_descr">Filter: Indstil minimumsafstand fra sidste position før et punkt logges</string>
+    <string name="save_track_min_distance_descr">Filter: Indstil minimumsafstand fra sidste position før et punkt logges.</string>
     <string name="save_track_precision">Mindste nøjagtighed for logning</string>
-    <string name="save_track_precision_descr">Filter: Indstil minimum nøjagtighed før et punkt logges</string>
+    <string name="save_track_precision_descr">Filter: Indstil minimum nøjagtighed før et punkt logges.</string>
     <string name="rendering_attr_contourColorScheme_description">Farveskema for højdekurver</string>
     <string name="shared_string_continue">Fortsæt</string>
     <string name="shared_string_pause">Pause</string>
@@ -2481,7 +2481,7 @@ Hvis du  ønsker at støtte OsmAnd og OSM, er dette en god måde at gøre det p�
 \n 
 \n  og mere…</string>
     <string name="trip_rec_notification_settings">Aktiver hurtig start af optagelse</string>
-    <string name="trip_rec_notification_settings_desc">Vis en systemmeddelelse, der giver mulighed for at starte optagelse af turen</string>
+    <string name="trip_rec_notification_settings_desc">Vis en systemmeddelelse, der giver mulighed for at starte optagelse af turen.</string>
     <string name="shared_string_notifications">Meddelelser</string>
     <string name="osmo_share_location">Del</string>
     <string name="osmo_pause_location">Pause</string>
@@ -2497,10 +2497,10 @@ Hvis du  ønsker at støtte OsmAnd og OSM, er dette en god måde at gøre det p�
     <string name="search_map_hint">Søg efter by eller område</string>
     <string name="wiki_around">Wikipedia artikler i nærheden</string>
     <string name="routing_attr_allow_motorway_name">Tillad motorveje</string>
-    <string name="routing_attr_allow_motorway_description">Tillad motorveje</string>
+    <string name="routing_attr_allow_motorway_description">Tillad motorveje.</string>
     <string name="legacy_search">Legacy søgning</string>
     <string name="show_legacy_search">Vis legacy søgning</string>
-    <string name="show_legacy_search_desc">Tilføj legacy søgning til sidemenuen</string>
+    <string name="show_legacy_search_desc">Tilføj legacy søgning til sidemenuen.</string>
     <string name="lang_sr_latn">Serbisk (Latin)</string>
     <string name="lang_zh_hk">Kinesisk (Hong Kong)</string>
     <string name="rendering_attr_hideWaterPolygons_description">Vand</string>
@@ -2562,11 +2562,11 @@ Hvis du  ønsker at støtte OsmAnd og OSM, er dette en god måde at gøre det p�
     <string name="quick_action_add_create_items">Opret elementer</string>
     <string name="quick_action_add_configure_map">Konfigurer kort</string>
     <string name="quick_action_add_navigation">Navigation</string>
-    <string name="quick_action_fav_name_descr">Lad stå tomt for automatisk at bruge adressen eller stedets navn</string>
+    <string name="quick_action_fav_name_descr">Lad stå tomt for automatisk at bruge adressen eller stedets navn.</string>
     <string name="quick_action_bug_descr">Denne meddelelse vil blive auto-udfyldt i kommentarfeltet.</string>
     <string name="quick_action_bug_message">Meddelelse</string>
-    <string name="quick_action_category_descr">Vælg den kategori, som favoritten skal gemmes i</string>
-    <string name="quick_action_gpx_category_descr">Vælg en valgfri kategori</string>
+    <string name="quick_action_category_descr">Vælg den kategori, som favoritten skal gemmes i.</string>
+    <string name="quick_action_gpx_category_descr">Vælg en valgfri kategori.</string>
     <string name="quick_action_poi_list">IP-liste</string>
     <string name="quick_action_sh_poi_descr">Tilføj en eller flere IP kategorier der skal vises på kortet.</string>
     <string name="quick_action_map_style_action">Tilføj kortformat</string>
@@ -2583,7 +2583,7 @@ Hvis du  ønsker at støtte OsmAnd og OSM, er dette en god måde at gøre det p�
     <string name="quick_action_map_source_action">Tilføj en kortkilde</string>
     <string name="quick_action_map_source_switch">Kortkilde er ændret til \"%s\".</string>
     <string name="quick_action_btn_tutorial_title">Ændre knap placering</string>
-    <string name="quick_action_btn_tutorial_descr">Langt tryk og træk på knappen for at ændre placering på skærmen</string>
+    <string name="quick_action_btn_tutorial_descr">Langt tryk og træk på knappen for at ændre placering på skærmen.</string>
 <string name="quick_action_interim_dialog">Vis en midlertidig dialogboks</string>
     <string name="shared_string_action_name">Genvejsnavn</string>
 <string name="navigate_point_olc">Open Location Code (OLC)</string>
@@ -2619,11 +2619,11 @@ Repræsenterer område: %1$s x %2$s</string>
 \n  • Flere andre forbedringer og fejlrettelser 
 \n 
 \n  og mere…</string>
-	<string name="rendering_attr_depthContours_description">Vis dybdekonturer og -punkter</string>
+	<string name="rendering_attr_depthContours_description">Vis dybdekonturer og -punkter.</string>
     <string name="rendering_attr_depthContours_name">Havdybdekonturer</string>
 	
     <string name="routing_attr_height_obstacles_name">Brug højdedata</string>
-    <string name="routing_attr_height_obstacles_description">Brug terrænhøjdedata fra SRTM, ASTER og EU-DEM</string>
+    <string name="routing_attr_height_obstacles_description">Brug terrænhøjdedata fra SRTM, ASTER og EU-DEM.</string>
 
     
     <string name="route_altitude">Rutehøjde</string>
@@ -2661,14 +2661,14 @@ Repræsenterer område: %1$s x %2$s</string>
     <string name="routing_attr_driving_style_speed_name">Kortere ruter</string>
     <string name="routing_attr_driving_style_balance_name">Balanceret</string>
     <string name="routing_attr_driving_style_safety_name">Foretrækk biveje</string>
-    <string name="relief_smoothness_factor_descr">Foretruknet terræn: fladt eller kuperet</string>
+    <string name="relief_smoothness_factor_descr">Foretruknet terræn: fladt eller kuperet.</string>
     <string name="routing_attr_relief_smoothness_factor_name">Vælg terræntype</string>
     <string name="full_version_thanks">Tak for købet af den fulde version af OsmAnd!</string>
     <string name="parking_options">Parkeringsmuligheder</string>
     <string name="do_not_send_anonymous_app_usage">Send ikke anonyme brugsstatistikker</string>
     <string name="do_not_send_anonymous_app_usage_desc">Der indsamles oplysninger om hvilke dele der åbnes. Placering bliver aldrig sendt, heller ikke noget der indtastes eller oplysninger om områder der søges eller hentes.</string>
     <string name="do_not_show_startup_messages">Vis ikke meddelelser ved opstart</string>
-    <string name="do_not_show_startup_messages_desc">Undertrykker visning af rabatter &amp; særlige lokale hændelsesmeddelelser</string>
+    <string name="do_not_show_startup_messages_desc">Undertrykker visning af rabatter &amp; særlige lokale hændelsesmeddelelser.</string>
     <string name="right_side_navigation">Højrekørsel</string>
     <string name="driving_region_automatic">Automatisk</string>
     <string name="osmand_extended_description_part1">OsmAnd (OSM Automated Navigation Directions) er et kort- og navigationsprogram med adgang til gratis, verdensomspændende og af høj kvalitet OpenStreetMap (OSM) data. 
@@ -2730,7 +2730,7 @@ Tidligere destination bliver sidste mellemliggende punkt.</string>
     <string name="shared_string_in_name">i %1$s</string>
     <string name="shared_string_overview">Oversigt</string>
     <string name="animate_my_location">Animér position</string>
-    <string name="animate_my_location_desc">Aktiver panorering af positionen under navigation</string>
+    <string name="animate_my_location_desc">Aktiver panorering af positionen under navigation.</string>
     <string name="favorite_group_name">Gruppenavn</string>
     <string name="change_color">Skift farve</string>
     <string name="edit_name">Rediger navn</string>
@@ -2740,7 +2740,7 @@ Tidligere destination bliver sidste mellemliggende punkt.</string>
     <string name="srtm_color_scheme">Farveskema</string>
     <string name="show_from_zoom_level">Vis fra zoomniveau</string>
     <string name="routing_attr_allow_private_name">Tillad privat adgang</string>
-    <string name="routing_attr_allow_private_description">Tillad adgang til private områder</string>
+    <string name="routing_attr_allow_private_description">Tillad adgang til private områder.</string>
     <string name="srtm_menu_download_descr">For se højdekurver på kortet, hent højdekurvekort over området.</string>
     <string name="shared_string_plugin">Udvidelse</string>
     <string name="srtm_purchase_header">For at se højdekurver på kortet, køb og installer højdekurveudvidelsen</string>
@@ -2756,17 +2756,17 @@ Tidligere destination bliver sidste mellemliggende punkt.</string>
     <string name="restart_search">Start søgning igen</string>
     <string name="increase_search_radius">Øg søgeradius</string>
     <string name="nothing_found">Fandt intet :(</string>
-    <string name="nothing_found_descr">Ændre søgeningen eller øg søgeradius</string>
+    <string name="nothing_found_descr">Ændre søgningen eller øg søgeradius.</string>
     <string name="private_access_routing_req">Destination ligger i et område med privat adgang. Giv adgang til de private veje for turen?</string>
     <string name="mapillary">Mapillary</string>
     <string name="mapillary_widget">Mapillary modul</string>
-    <string name="mapillary_widget_descr">Giver mulighed for hurtigt at bidrage til Mapillary</string>
+    <string name="mapillary_widget_descr">Giver mulighed for hurtigt at bidrage til Mapillary.</string>
     <string name="mapillary_descr">Online fotos for alle på gadenivea. Oplev steder, samarbejd, indfang verden.</string>
     <string name="shared_string_add_photos">Tilføj fotos</string>
     <string name="mapillary_action_descr">Bidrag med visninger af placeringen på gadeniveau via Mapillary.</string>
     <string name="plugin_mapillary_descr">Fotos på gadeniveau for alle. Opdag steder, samarbejd, indfang verden.</string>
     <string name="online_photos">Online fotos</string>
-    <string name="no_photos_descr">Ingen fotos til denne placering</string>
+    <string name="no_photos_descr">Ingen fotos til denne placering.</string>
     <string name="shared_string_install">Installer</string>
     <string name="improve_coverage_mapillary">Forbedre fotodækningen med Mapillary</string>
     <string name="improve_coverage_install_mapillary_desc">Tag egne fotos eller serier af fotos og føj dem til denne placering. 
@@ -2820,7 +2820,7 @@ Tidligere destination bliver sidste mellemliggende punkt.</string>
     <string name="live_monitoring_max_interval_to_send">Tidsbuffer til online sporing</string>
     <string name="live_monitoring_max_interval_to_send_desrc">Angiv en buffer for hvor lang tid positioner skal gemmes, når der ingen internetforbindelse er</string>
     <string name="retry">Prøv igen</string>
-<string name="mappilary_no_internet_desc">Internetforbindelse er nødvendig for at se fotos fra Mapillary</string>
+<string name="mappilary_no_internet_desc">Internetforbindelse er nødvendig for at se fotos fra Mapillary.</string>
     <string name="measurement_tool">Mål afstand</string>
     <string name="measurement_tool_action_bar">Gennemse kortet og tilføj punkter</string>
     <string name="add_gpx_waypoint_bottom_sheet_title">Tilføj gpx rutepunkt</string>
@@ -2850,7 +2850,7 @@ Tidligere destination bliver sidste mellemliggende punkt.</string>
     <string name="add_route_points">Tilføj rutepunkter</string>
     <string name="add_line">Tilføj linje</string>
     <string name="empty_state_my_tracks">Tilføj og optag spor</string>
-    <string name="empty_state_my_tracks_desc">Gem eller importer spor, der skal vises</string>
+    <string name="empty_state_my_tracks_desc">Gem eller importer spor, der skal vises.</string>
     <string name="empty_state_favourites">Tilføj favoritter</string>
     <string name="empty_state_favourites_desc">Tilføj favoritter til kortet, eller importer dem fra en fil</string>
     <string name="import_track">Importer spor</string>
@@ -2860,7 +2860,7 @@ Tidligere destination bliver sidste mellemliggende punkt.</string>
 <string name="keep_showing_on_map">Fortsæt med at vise på kortet</string>
     <string name="exit_without_saving">Afslut uden at gemme?</string>
     <string name="do_not_use_animations">Brug ikke animationer</string>
-    <string name="do_not_use_animations_descr">Deaktiverer animationer i programmet</string>
+    <string name="do_not_use_animations_descr">Deaktiverer animationer i programmet.</string>
     <string name="move_all_to_history">Flyt alle til historik</string>
     <string name="build_route">Beregn rute</string>
     <string name="show_direction">Afstandsangivelse</string>
@@ -2874,7 +2874,7 @@ Tidligere destination bliver sidste mellemliggende punkt.</string>
     <string name="this_year">I år</string>
     <string name="widget">Modul</string>
     <string name="map_orientation_change_in_accordance_with_speed">Tærskel for kortorientering</string>
-    <string name="map_orientation_change_in_accordance_with_speed_descr">Vælg nedenfor ved hvilken hastighed kortorienteringen skifter fra \'Bevægelsesretning\' til \'Kompas\"</string>
+    <string name="map_orientation_change_in_accordance_with_speed_descr">Vælg nedenfor ved hvilken hastighed kortorienteringen skifter fra \'Bevægelsesretning\' til \'Kompas\'.</string>
     <string name="all_markers_moved_to_history">Alle kortmarkører flyttet til historik</string>
     <string name="marker_moved_to_history">Kortmarkør flyttet til historik</string>
     <string name="marker_moved_to_active">Kortmarkør flyttet til aktiv</string>
@@ -2908,7 +2908,7 @@ Tidligere destination bliver sidste mellemliggende punkt.</string>
     <string name="fast_coordinates_input_descr">Vælg format for koordinatindtastning. Kan altid ændres ved at trykke på indstillinger.</string>
     <string name="fast_coordinates_input">Hurtig koordinatindtastning</string>
     <string name="routing_attr_avoid_ice_roads_fords_name">Undgå isglatte veje, vadesteder</string>
-    <string name="routing_attr_avoid_ice_roads_fords_description">Undgå isglatte veje og vadesteder</string>
+    <string name="routing_attr_avoid_ice_roads_fords_description">Undgå isglatte veje og vadesteder.</string>
     <string name="make_round_trip_descr">Tilføj kopi af startpunktet som destination.</string>
     <string name="make_round_trip">Foretag rundtur</string>
     <string name="shared_string_navigate">Naviger</string>
@@ -2938,8 +2938,8 @@ Tidligere destination bliver sidste mellemliggende punkt.</string>
     <string name="import_as_gpx">Importer som GPX-fil</string>
     <string name="import_as_favorites">Importer som favoritter</string>
     <string name="import_file">Importer fil</string>
-	<string name="tap_on_map_to_hide_interface_descr">Tryk et vilkårligt sted på kortet skjuler grænsefladen og skifter mellem fuld skærm-tilstand.</string>
-    <string name="tap_on_map_to_hide_interface">Tryk på kortet skjuler grænseflade</string>
+	<string name="tap_on_map_to_hide_interface_descr">Tryk et vilkårligt sted på kortet skjuler grænsefladen og skifter mellem fuldskærmstilstand.</string>
+    <string name="tap_on_map_to_hide_interface">Tryk på kortet for at skjule grænsefladen</string>
     <string name="show_on_top_bar">Vis på topbjælke</string>
     <string name="mark_passed">Marker som passeret</string>
     </resources>
