@@ -2858,7 +2858,7 @@ représentant la zone : %1$s x %2$s</string>
     <string name="add_route_points">Ajouter des points à la route</string>
     <string name="add_line">Ajouter une ligne</string>
     <string name="empty_state_my_tracks">Ajouter et enregistrer la trace</string>
-    <string name="empty_state_my_tracks_desc">Enregistrer ou importer les traces à afficher</string>
+    <string name="empty_state_my_tracks_desc">Enregistrer ou importer les traces à afficher.</string>
     <string name="empty_state_favourites">Ajouter des favoris</string>
     <string name="empty_state_favourites_desc">Ajouter des favoris sur le carte ou importer les depuis un fichier</string>
     <string name="import_track">Importer la trace</string>
