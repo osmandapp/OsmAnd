@@ -527,6 +527,7 @@ public class CoordinateInputDialogFragment extends DialogFragment implements Osm
 		changeInputEditTextHints();
 		changeInputEditTextLengths();
 		changeKeyboardInEditTexts();
+		changeEditTextSelections();
 	}
 
 	private CoordinateInputBottomSheetDialogFragment.CoordinateInputFormatChangeListener createCoordinateInputFormatChangeListener() {
