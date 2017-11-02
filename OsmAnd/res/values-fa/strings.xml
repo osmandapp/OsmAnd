@@ -772,7 +772,7 @@
 	<string name="download_files_question_space">آیا {0} فایل را دانلود می‌کنید؟ حافظهٔ استفاده شده {1} مگابایت است. (حافظهٔ قابل‌استفاده {2} مگابایت است.)</string>
 	
 	<string name="use_transparent_map_theme">پوستهٔ شفاف</string>
-	<string name="native_library_not_supported">کتابخانه بومی بر روی این دستگاه پشتیبانی نمیشود.</string>
+	<string name="native_library_not_supported">کتابخانهٔ بومی بر روی این دستگاه پشتیبانی نمی‌شود.</string>
 	<string name="init_native_library">مقداردهی اولیهٔ کتابخانهٔ بومی…</string>
 	<string name="choose_auto_follow_route">نمای نقشه خودکار-مرکز</string>
 	<string name="choose_auto_follow_route_descr">مدت‌زمانی که طول می‌کشد تا نقشه با موقعیت کنونی همگام شود.</string>
@@ -961,7 +961,7 @@
 	<string name="background_service_provider">ارائه‌دهندهٔ موقعیت</string>
 	<string name="background_router_service_descr">برنامهٔ OsmAnd در پس‌زمینه اجرا می‌ماند تا در زمانی‌که صفحه خاموش است موقعیت شما را ردگیری کند.</string>
 	<string name="background_router_service">اجرای OsmAnd در پس‌زمینه</string>
-	<string name="off_router_service_no_gps_available">برای سرویس راهبری در پس‌زمینه موقعیت مکانی را روشن کنید.</string>
+	<string name="off_router_service_no_gps_available">برای استفاده از سرویس راهبری موقعیت مکانی را روشن کنید.</string>
 	<string name="hide_poi_filter">مخفی‌کردن فیلتر</string>
 	<string name="show_poi_filter">نمایش فیلتر</string>
 	<string name="search_poi_filter">فیلتر</string>
@@ -1194,7 +1194,7 @@
 	<string name="renderers">رندرکنندهٔ بُرداری</string>
 	<string name="renderers_descr">شکل‌وشمایل رندر را انتخاب نمایید.</string>
 	<string name="download_type_to_filter">فیلتر</string>
-	<string name="transport_context_menu">جست‌وجوی ایستگاه حمل‌و‌نقل</string>
+	<string name="transport_context_menu">جست‌وجوی وسیلهٔ حمل‌ونقل در ایستگاه</string>
 	<string name="rotate_map_to_bearing_descr">نحوهٔ چرخش نقشه را انتخاب کنید.</string>
 	<string name="layer_poi">POI…</string>
 	<string name="gps_provider">GPS</string>
@@ -1209,7 +1209,7 @@
 	<string name="transport_to_go_after">مسافت قبلی</string>
 	<string name="transport_to_go_before">مسافت بعدی</string>
 	<string name="update_poi_is_not_available_for_zoom">به‌روزرسانی POIها برای سطح زوم کم وجود ندارد</string>
-	<string name="commiting_node">قراردادن نقطه…</string>
+	<string name="commiting_node">ثبت نقطه…</string>
 	<string name="poi">POI</string>
 	<string name="navigate_point_format_D">DDD.DD</string>
 	<string name="navigate_point_format_DM">DDD MM.MM</string>
@@ -1962,7 +1962,7 @@
     <string name="donation_to_osm">کمک مالی به OpenStreetMap</string>
     <string name="donation_to_osm_desc">بخشی از کمک‌های مالی به مشترکین OpenStreetMap که به تغییرات کمک می‌کنند ارسال می‌شود. هزینهٔ اشتراک ثابت می‌ماند.</string>
     <string name="osm_live_subscription_desc">این اشتراک، به‌روزرسانی‌های ساعتی، روزانه و هفتگی و همچنین دانلود نامحدود همهٔ نقشه‌ها در سراسر دنیا را فعال می‌کند.</string>
-    <string name="get_it">انجام بده</string>
+    <string name="get_it">تهیه می‌کنم</string>
     <string name="get_for">پرداخت برای %1$s</string>
     <string name="get_for_month">پرداخت ماهانه %1$s</string>
     <string name="osm_live_banner_desc">دانلود نامحدود نقشه‌ها و به‌روزرسانی آن‌ها بیش از یک بار در ماه: هفتگی، روزانه یا ساعتی.</string>
