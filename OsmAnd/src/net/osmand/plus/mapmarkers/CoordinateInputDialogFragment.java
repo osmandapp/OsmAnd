@@ -539,6 +539,7 @@ public class CoordinateInputDialogFragment extends DialogFragment implements Osm
 				}
 				changeKeyboardInBoxes();
 				changeKeyboardInEditTexts();
+				changeEditTextSelections();
 			}
 
 			@Override
@@ -553,6 +554,12 @@ public class CoordinateInputDialogFragment extends DialogFragment implements Osm
 				changeInputEditTextLengths();
 			}
 		};
+	}
+
+	private void changeEditTextSelections() {
+		for (EditText inputEditText : inputEditTexts) {
+			inputEditText.setSelection(inputEditText.getText().length());
+		}
 	}
 
 	private boolean isOsmandKeyboardCurrentlyVisible() {
