@@ -1668,7 +1668,7 @@
     <string name="version_settings_descr">دانلود نسخه‌های شبانه.</string>
     <string name="rendering_attr_streetLighting_name">روشنایی خیابان</string>
     <string name="proxy_pref_title">پروکسی</string>
-    <string name="proxy_pref_descr">تنظیم پروکسی</string>
+    <string name="proxy_pref_descr">یک پروکسی اینترنتی تنظیم کنید.</string>
     <string name="points">نقاط</string>
     
     <string name="shared_string_my_location">موقعیت من</string>
