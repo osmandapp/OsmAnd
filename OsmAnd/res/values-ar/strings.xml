@@ -2547,7 +2547,7 @@
     <string name="routing_attr_height_obstacles_name">إستعمل بيانات الإرتفاع</string>
     <string name="do_not_show_startup_messages">لا تعرض الرسائل عند بدء التشغيل</string>
     <string name="routing_attr_allow_private_name">السماح بالدخول الخاص</string>
-    <string name="routing_attr_allow_private_description">السماح بالوصول إلى المساحات الخاصة</string>
+    <string name="routing_attr_allow_private_description">السماح بالوصول إلى المناطق الخاصة.</string>
     <string name="type_address">اكتب عنواناً</string>
     <string name="select_city">إختر مدينةً</string>
     <string name="select_postcode">إختر رمزاً بريدياً</string>
@@ -2586,7 +2586,7 @@
 \n • الإبلاغ عن الأخطاء في البيانات
 \n • تحميل مسارات GPX إلى الموقع مباشرة بالتطبيق
 \n • إضافة POI ورفعها مباشرة إلى الموقع (أو في وقت لاحق إن كنت غير متصل بالشبكة)</string>
-    <string name="nothing_found_descr">حاول تغيير طلب البحث أو وسع دائرة البحث</string>
+    <string name="nothing_found_descr">حاول تغيير طلب البحث أو وسع دائرة البحث.</string>
     <string name="quick_action_showhide_osmbugs_title">إظهار أو إخفاء ملاحظات الخريطة</string>
     <string name="quick_action_osmbugs_show">أظهر ملاحظات الخريطة</string>
     <string name="quick_action_osmbugs_hide">اخفي ملاحظات الخريطة</string>
@@ -2615,10 +2615,10 @@
     <string name="improve_coverage_mapillary">تحسين التغطية بالصور بمابيلاري</string>
     <string name="online_photos">صور على الإنترنت</string>
     <string name="shared_string_add_photos">إضافة صور</string>
-    <string name="no_photos_descr">ليس لدينا صور لهذا الموقع</string>
+    <string name="no_photos_descr">ليس لدينا صور لهذا الموقع.</string>
     <string name="mapillary_action_descr">ساهم بصور الشوارع الخاصة بك لهذا الموقع عن طريق مابيلاري.</string>
     <string name="mapillary_widget">ويدجت مابيلاري</string>
-    <string name="mapillary_widget_descr">يسمح لك بالمساهمة بسرعة لمابيلاري</string>
+    <string name="mapillary_widget_descr">يسمح لك بالمساهمة بسرعة لمابيلاري.</string>
     <string name="mapillary_descr">صور شوارع متاحة على الإنترنت للجميع. اكتشف أماكن، تعاون، والتقط صورا للعالم.</string>
     <string name="mapillary">مابيلاري</string>
     <string name="plugin_mapillary_descr">صور شوارع متاحة للجميع. اكتشف أماكن، تعاون، والتقط صورا للعالم.</string>
@@ -2630,7 +2630,7 @@
     <string name="display_zoom_level">عرض مستوى التكبير/التصغير: %1$s</string>
     <string name="animate_my_location">قم بتحريك موقعي</string>
     <string name="srtm_purchase_header">لمشاهدة الخطوط الكنتورية على الخريطة، أنت بحاجة لشراء وتثبيت البرنامج المساعد للخطوط الكنتورية</string>
-    <string name="animate_my_location_desc">تفعيل حركة تعديل مجال رؤية الخريطة بالنسبة لموقعي أثناء الملاحة</string>
+    <string name="animate_my_location_desc">تفعيل حركة تعديل مجال رؤية الخريطة بالنسبة لموقعي أثناء الملاحة.</string>
     <string name="quick_action_auto_zoom_desc">النقر على زر الإجراء سوف يقوم بتشغيل/إيقاف تكبير الخريطة وفقا لسرعتك.</string>
     <string name="quick_action_add_destination_desc">النقر على زر الإجراء سيقوم بإضافة وجهة في مركز الشاشة. الوجهة المعينة مسبقا تصبح النقطة الوسيطة الأخيرة.</string>
     <string name="quick_action_replace_destination_desc">النقر على زر الإجراء سيحل محل الوجهة بالموقع الظاهر على مركز الشاشة.</string>
@@ -2778,7 +2778,7 @@
     <string name="show_direction">مؤشر المسافة</string>
     <string name="sort_by">فرز حسب</string>
     <string name="do_not_use_animations">عدم استخدام الرسوم المتحركة</string>
-    <string name="do_not_use_animations_descr">تعطيل الرسوم المتحركة في التطبيق</string>
+    <string name="do_not_use_animations_descr">تعطيل الرسوم المتحركة في التطبيق.</string>
     <string name="keep_showing_on_map">استمرار العرض على الخريطة</string>
     <string name="exit_without_saving">الخروج دون حفظ؟</string>
     <string name="show_guide_line">إظهار خط التوجيه</string>
@@ -2839,8 +2839,8 @@
     <string name="import_as_gpx">استيراد كملف GPX</string>
     <string name="import_as_favorites">استيراد كمفضلة</string>
     <string name="import_file">استيراد ملف</string>
-	<string name="tap_on_map_to_hide_interface_descr">النقر على أي مكان على الخريطة سيخفي الواجهة ويفعل وضع ملء الشاشة.</string>
-    <string name="tap_on_map_to_hide_interface">الضغط على الخريطة يخفي الواجهة</string>
+	<string name="tap_on_map_to_hide_interface_descr">نقرة على الخريطة ستفعل أزرار التحكم والويدجت.</string>
+    <string name="tap_on_map_to_hide_interface">وضع الشاشة الكاملة</string>
     <string name="show_on_top_bar">اظهار في الشريط العلوي</string>
     <string name="mark_passed">تعيين كمتجاوز</string>
     </resources>
