@@ -250,8 +250,8 @@ public class CoordinateInputDialogFragment extends DialogFragment implements Osm
 
 		Object[] keyboardItems = new Object[] { "1", "2", "3", getString(R.string.shared_string_clear),
 				"4", "5", "6", "-",
-				"7", "8", "9", "\u21e6",
-				".", "0", ":", R.drawable.input_coordinate_keyboard_backspace };
+				"7", "8", "9", R.drawable.ic_keyboard_backspace,
+				".", "0", ":", R.drawable.ic_keyboard_next_field};
 		final GridView keyboardGrid = (GridView) mainView.findViewById(R.id.keyboard_grid_view);
 		final KeyboardAdapter keyboardAdapter = new KeyboardAdapter(mapActivity, keyboardItems);
 		keyboardGrid.setAdapter(keyboardAdapter);
