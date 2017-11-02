@@ -1122,7 +1122,7 @@ Se aprecia la participación activa, y las contribuciones pueden hacerse directa
     <string name="live_monitoring_url">Dirección web de registro en vivo</string>
     <string name="gpx_monitoring_disabled_warn">Registra trazas usando el control GPX o mediante la opción «Grabar viaje».</string>
     <string name="show_current_gpx_title">Mostrar traza actual</string>
-    <string name="free_version_message">Esta versión gratuita de OsmAnd está limitada a %1$s descargas y no soporta artículos de Wikipedia sin conexión.</string>
+    <string name="free_version_message">Esta versión gratuita de OsmAnd está limitada a %1$s descargas de mapas (incluyendo sus actualizaciones) y no soporta artículos de Wikipedia sin conexión.</string>
     <string name="free_version_title">Versión gratuita</string>
     <string name="poi_context_menu_showdescription">Detalles del PDI.</string>
     <string name="index_name_north_america">Norteamérica</string>
