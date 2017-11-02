@@ -1560,7 +1560,7 @@ Se aprecia la participación activa, y las contribuciones pueden hacerse directa
     <string name="finished_task">Terminado</string>
     <string name="use_online_routing_descr">Usa Internet para calcular la ruta.</string>
     <string name="use_online_routing">Usar navegación en línea</string>
-    <string name="osm_settings_descr">Indica los ajustes de openstreetmap.org (OSM) necesarios para envíos a OSM.</string>
+    <string name="osm_settings_descr">Indica los ajustes de OpenStreetMap.org (OSM) necesarios para envíos a OSM.</string>
     <string name="data_settings_descr">Indica el idioma, descargar/recargar datos.</string>
     <string name="data_settings">Datos</string>
     <string name="additional_settings">Ajustes adicionales</string>
