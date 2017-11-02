@@ -164,6 +164,7 @@ public class CoordinateInputDialogFragment extends DialogFragment implements Osm
 					AndroidUtils.hideSoftKeyboard(getMapActivity(), focusedView);
 				}
 				CoordinateInputBottomSheetDialogFragment fragment = new CoordinateInputBottomSheetDialogFragment();
+				fragment.setUsedOnMap(false);
 				Bundle args = new Bundle();
 				args.putBoolean(USE_OSMAND_KEYBOARD, useOsmandKeyboard);
 				args.putBoolean(GO_TO_NEXT_FIELD, goToNextField);
