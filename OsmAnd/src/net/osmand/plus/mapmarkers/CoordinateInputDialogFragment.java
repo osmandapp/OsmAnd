@@ -19,6 +19,7 @@ import android.text.Editable;
 import android.text.InputType;
 import android.text.TextWatcher;
 import android.util.TypedValue;
+import android.view.GestureDetector;
 import android.view.KeyEvent;
 import android.view.LayoutInflater;
 import android.view.Menu;
@@ -206,7 +207,7 @@ public class CoordinateInputDialogFragment extends DialogFragment implements Osm
 		final EditText nameEditText = (EditText) mainView.findViewById(R.id.name_edit_text);
 		inputEditTexts.add(nameEditText);
 
-		registerInputTextViews();
+		registerInputEditTexts();
 
 		if (savedInstanceState == null) {
 			latitudeBox.select();
@@ -353,7 +354,7 @@ public class CoordinateInputDialogFragment extends DialogFragment implements Osm
 		changeKeyboardInBoxes();
 	}
 
-	private void registerInputTextViews() {
+	private void registerInputEditTexts() {
 		TextWatcher textWatcher = new TextWatcher() {
 
 			@Override
@@ -385,6 +386,13 @@ public class CoordinateInputDialogFragment extends DialogFragment implements Osm
 			}
 		};
 
+		final GestureDetector gestureDetector = new GestureDetector(getContext(), new GestureDetector.SimpleOnGestureListener() {
+			@Override
+			public boolean onDoubleTap(MotionEvent e) {
+				return true;
+			}
+		});
+
 		View.OnTouchListener inputEditTextOnTouchListener = new View.OnTouchListener() {
 			@Override
 			public boolean onTouch(View view, MotionEvent motionEvent) {
@@ -393,11 +401,15 @@ public class CoordinateInputDialogFragment extends DialogFragment implements Osm
 						changeOsmandKeyboardVisibility(true);
 					}
 					EditText editText = (EditText) view;
-					int inType = editText.getInputType();       // Backup the input type
-					editText.setInputType(InputType.TYPE_NULL); // Disable standard keyboard
-					editText.onTouchEvent(motionEvent);               // Call native handler
-					editText.setInputType(inType);              // Restore input type
-					return true; // Consume touch event
+					int inputType = editText.getInputType();
+					editText.setInputType(InputType.TYPE_NULL);
+					boolean doubleTap = gestureDetector.onTouchEvent(motionEvent);
+					if (!doubleTap) {
+						editText.onTouchEvent(motionEvent);
+						editText.setSelection(editText.getText().length());
+					}
+					editText.setInputType(inputType);
+					return true;
 				} else {
 					if (isOsmandKeyboardCurrentlyVisible()) {
 						changeOsmandKeyboardVisibility(false);
@@ -514,14 +526,14 @@ public class CoordinateInputDialogFragment extends DialogFragment implements Osm
 			}
 		};
 
-		for (TextView textView : inputEditTexts) {
-			if (textView.getId() != R.id.name_edit_text) {
-				textView.addTextChangedListener(textWatcher);
+		for (EditText inputEditText : inputEditTexts) {
+			if (inputEditText.getId() != R.id.name_edit_text) {
+				inputEditText.addTextChangedListener(textWatcher);
 			}
-			textView.setOnTouchListener(inputEditTextOnTouchListener);
-			textView.setOnLongClickListener(inputEditTextOnLongClickListener);
-			textView.setOnFocusChangeListener(focusChangeListener);
-			textView.setOnEditorActionListener(inputTextViewOnEditorActionListener);
+			inputEditText.setOnTouchListener(inputEditTextOnTouchListener);
+			inputEditText.setOnLongClickListener(inputEditTextOnLongClickListener);
+			inputEditText.setOnFocusChangeListener(focusChangeListener);
+			inputEditText.setOnEditorActionListener(inputTextViewOnEditorActionListener);
 		}
 
 		changeInputEditTextHints();
