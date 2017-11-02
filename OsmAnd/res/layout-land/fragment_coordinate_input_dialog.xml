@@ -53,7 +53,7 @@
 					android:layout_marginRight="12dp">
 
 					<studio.carbonylgroup.textfieldboxes.ExtendedEditText
-						android:inputType="numberSigned"
+						android:inputType="numberSigned|numberDecimal"
 						android:imeOptions="actionNext"
 						android:id="@+id/latitude_edit_text"
 						android:layout_width="match_parent"
@@ -71,7 +71,7 @@
 					android:layout_marginRight="12dp">
 
 					<studio.carbonylgroup.textfieldboxes.ExtendedEditText
-						android:inputType="numberSigned"
+						android:inputType="numberSigned|numberDecimal"
 						android:imeOptions="actionNext"
 						android:id="@+id/longitude_edit_text"
 						android:layout_width="match_parent"
