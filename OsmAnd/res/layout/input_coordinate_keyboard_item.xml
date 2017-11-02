@@ -22,6 +22,6 @@
 		android:layout_height="match_parent"
 		android:scaleType="center"
 		android:layout_gravity="center"
-		tools:src="@drawable/ic_action_aircraft"/>
+		tools:src="@drawable/ic_action_backspace_fill"/>
 
 </FrameLayout>
