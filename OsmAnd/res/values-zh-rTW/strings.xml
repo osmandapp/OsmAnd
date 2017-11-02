@@ -648,7 +648,7 @@
     <string name="search_poi_filter">篩選</string>
     <string name="menu_mute_off">語音已開啟</string>
     <string name="menu_mute_on">語音已關閉</string>
-    <string name="voice_provider_descr">選擇導航語音導引</string>
+    <string name="voice_provider_descr">選擇導航語音導引。</string>
     <string name="voice_provider">語音指引</string>
     <string name="voice_data_initializing">初始化語音資料…</string>
     <string name="voice_data_not_supported">不支援的語音資料版本</string>
@@ -772,11 +772,11 @@
 
     <string name="osm_settings">OSM 編輯</string>
     <string name="additional_settings">額外設定</string>
-    <string name="save_current_track_descr">現在就將目前的軌跡存到 SD 卡</string>
+    <string name="save_current_track_descr">現在就將目前的軌跡存到 SD 卡。</string>
     <string name="save_current_track">儲存目前的 GPX 軌跡</string>
     <string name="save_track_interval">在導航期間的記錄間隔</string>
-    <string name="save_track_interval_descr">在整個導航期間，為軌跡錄製選取記錄間隔</string>
-    <string name="save_track_to_gpx_descrp">在導航期間時，GPX 軌跡會自動儲存在 track 資料夾</string>
+    <string name="save_track_interval_descr">在整個導航期間，為軌跡錄製選取記錄間隔。</string>
+    <string name="save_track_to_gpx_descrp">在導航期間時，GPX 軌跡會自動儲存在 track 資料夾。</string>
     <string name="save_track_to_gpx">導航期間自動記錄軌跡</string>
     <string name="update_tile">更新地圖</string>
     <string name="reload_tile">重新載入圖磚</string>
@@ -924,7 +924,7 @@
     <string name="street_name">街道名稱</string>
     <string name="hno">門牌號碼</string>
     <string name="monitoring_settings">旅程錄製</string>
-    <string name="monitoring_settings_descr">組態如何錄製您的旅程</string>
+    <string name="monitoring_settings_descr">組態如何錄製您的旅程。</string>
 
 
     <string name="choose_osmand_theme_descr">挑選應用程式主題</string>
@@ -1232,13 +1232,13 @@ OsmAnd (Automated Navigation Directions) 是一個地圖和導航的應用程式
 \n注意 1：您舊的檔案將保持不變（但可以手動刪除）。
 \n注意 2：在新的存儲位置，它不可能在 OsmAnd 和 OsmAnd+ 兩者之間共用檔案。</string>
     <string name="routing_attr_prefer_motorway_name">高速公路優先</string>
-    <string name="routing_attr_prefer_motorway_description">高速公路優先</string>
+    <string name="routing_attr_prefer_motorway_description">高速公路優先。</string>
     
     
     <string name="routing_attr_avoid_toll_name">避開收費道路</string>
-    <string name="routing_attr_avoid_toll_description">避開收費道路</string>
+    <string name="routing_attr_avoid_toll_description">避開收費道路。</string>
     <string name="routing_attr_avoid_unpaved_name">避開未鋪設路面</string>
-    <string name="routing_attr_avoid_unpaved_description">避開未鋪路面</string>
+    <string name="routing_attr_avoid_unpaved_description">避開未鋪路面。</string>
     <string name="routing_attr_avoid_ferries_name">避開渡輪</string>
     <string name="routing_attr_avoid_ferries_description">避開渡輪</string>
     <string name="routing_attr_avoid_motorway_name">避開高速公路</string>
@@ -1319,7 +1319,7 @@ OsmAnd (Automated Navigation Directions) 是一個地圖和導航的應用程式
     <string name="osmo_settings_uuid">專有的裝置 ID</string>
     <string name="osmo_plugin_name">OpenStreetMap 監控</string>
     <string name="osmo_settings">OsMo</string>
-    <string name="osmo_settings_descr">組態監控設定值和安裝個人監控頻道</string>
+    <string name="osmo_settings_descr">組態監控設定值和安裝個人監控頻道。</string>
     <string name="osmo_plugin_description">"這個外掛元件部分提供了 OpenStreetMap 監控功能，請參閱 http://osmo.mobi。 
 \n  
 \n您可以即時追蹤所有參與群組的裝置。具有各種選項用於連線期間追蹤或持續的追蹤。您還可以查看上傳到您所屬群組的航點和軌跡。 
@@ -1412,7 +1412,7 @@ OsmAnd (Automated Navigation Directions) 是一個地圖和導航的應用程式
     <string name="osmo_user_joined">使用者 %1$s 已加入群組 %2$s</string>
     <string name="osmo_user_left">使用者 %1$s 離開群組 %2$s</string>
     <string name="osmo_show_group_notifications">顯示群組通知</string>
-    <string name="osmo_show_group_notifications_descr">在使用者加入或離開群組時顯示提示訊息</string>
+    <string name="osmo_show_group_notifications_descr">在使用者加入或離開群組時顯示提示訊息。</string>
     <string name="gpx_file_is_empty">GPX 軌跡是空的</string>
     <string name="gpx_info_distance">距離：%1$s (%2$s 個標點) </string>
     <string name="gpx_info_start_time">開始時間：%1$tF,  %1$tT </string>
@@ -1445,7 +1445,7 @@ OsmAnd (Automated Navigation Directions) 是一個地圖和導航的應用程式
     <string name="save_as_favorites_points">另存群組為我的收藏</string>
     <string name="select_destination_and_intermediate_points">選擇目的地</string>
     <string name="layer_amenity_label">標點標籤</string>
-    <string name="show_zoom_buttons_navigation_descr">在導航期間顯示縮放按鈕</string>
+    <string name="show_zoom_buttons_navigation_descr">在導航期間顯示縮放按鈕。</string>
     <string name="show_zoom_buttons_navigation">顯示縮放按鈕</string>
     <string name="create_poi_link_to_osm_doc"><u>線上 OSM</u> 地圖的分類與影像</string>
 
@@ -1457,7 +1457,7 @@ OsmAnd (Automated Navigation Directions) 是一個地圖和導航的應用程式
     <string name="route_descr_destination">目的地</string>
     <string name="no_index_file_to_download">下載未找到，請檢查您的網路連線。</string>
     <string name="osmo_gpx_points_downloaded">OsMo 標點 %1$s 已下載。</string>
-    <string name="osmo_auto_connect_descr">自動連線至服務，隨後啟動應用程式</string>
+    <string name="osmo_auto_connect_descr">自動連線至服務，隨後啟動應用程式。</string>
     <string name="osmo_auto_connect">自動連線</string>
     <string name="osmo_start_service">OsMo 服務</string>
     <string name="osmo_gpx_track_downloaded">OsMo 軌跡 %1$s 已下載。</string>
@@ -1503,7 +1503,7 @@ OsmAnd (Automated Navigation Directions) 是一個地圖和導航的應用程式
     <string name="gpx_monitoring_stop">停止 GPX 記錄</string>
     <string name="gpx_start_new_segment">開始新區段</string>
     <string name="lang_fa">波斯</string>
-    <string name="map_preferred_locale_descr">在地圖標簽上優先的語言(如果優先的語言無法使用，將會切換成英文或當地名稱)</string>
+    <string name="map_preferred_locale_descr">在地圖標簽上優先的語言(如果優先的語言無法使用，將會切換成英文或當地名稱)。</string>
     <string name="live_monitoring_m_descr">如果已啟用了 GPX 記錄，傳送軌跡資料到指定的 web 服務。</string>
     <string name="keep_navigation_service">保持</string>
     <string name="stop_navigation_service">中止</string>
@@ -1560,9 +1560,9 @@ OsmAnd (Automated Navigation Directions) 是一個地圖和導航的應用程式
     <string name="rendering_attr_publicTransportMode_name">公車、無軌電車，班車路線</string>
     <string name="save_track_to_gpx_globally">記錄軌跡成 GPX 檔案</string>
     <string name="save_track_interval_globally">記錄間隔</string>
-    <string name="save_track_to_gpx_globally_descr">通常位置記錄到一個 GPX 檔案，在地圖畫面上使用 GPX 記錄小工具，可以開啟或關閉</string>
+    <string name="save_track_to_gpx_globally_descr">通常位置記錄到一個 GPX 檔案，在地圖畫面上使用 GPX 記錄小工具，可以開啟或關閉。</string>
     <string name="confirm_every_run">始終詢問</string>
-    <string name="save_global_track_interval_descr">為通常的軌跡記錄選擇錄製間隔（透過在地圖上的 GPX 記錄小工具啟用）</string>
+    <string name="save_global_track_interval_descr">為通常的軌跡記錄選擇錄製間隔（透過在地圖上的 GPX 記錄小工具啟用）。</string>
     <string name="save_global_track_interval">通常的記錄間隔</string>
     <string name="traffic_warning_speed_limit">速限</string>
     <string name="traffic_warning_border_control">邊境管制</string>
@@ -1611,7 +1611,7 @@ OsmAnd (Automated Navigation Directions) 是一個地圖和導航的應用程式
     <string name="rendering_attr_tramTrainRoutes_name">有軌電車和火車路線</string>
     <string name="rendering_category_hide">隱藏</string>
     <string name="wake_on_voice">將螢幕開啟</string>
-    <string name="wake_on_voice_descr">當接近轉彎時，開啟裝置螢幕 (螢幕關閉時)</string>
+    <string name="wake_on_voice_descr">當接近轉彎時，開啟裝置螢幕 (螢幕關閉時)。</string>
     <string name="lock_screen_request_explanation">為了節電作用 %1$s 需要此許可權才能關閉螢幕。</string>
     
     
@@ -1623,7 +1623,7 @@ OsmAnd (Automated Navigation Directions) 是一個地圖和導航的應用程式
     <string name="error_avoid_specific_road">沒發現支道</string>
     <string name="everything_up_to_date">全部都是最新的檔案</string>
     <string name="use_opengl_render">使用 OpenGL 著色演算</string>
-    <string name="use_opengl_render_descr">使用硬體加速 OpenGL 著色演算（可能在某些裝置上無法工作）</string>
+    <string name="use_opengl_render_descr">使用硬體加速 OpenGL 著色演算（可能在某些裝置上無法工作）。</string>
     <string name="no_internet_connection">不能下載，請檢查您的網路連線。</string>
     <string name="download_tab_downloads">全部下載</string>
     <string name="download_tab_updates">可更新</string>
@@ -1639,7 +1639,7 @@ OsmAnd (Automated Navigation Directions) 是一個地圖和導航的應用程式
     <string name="dash_download_new_one">下載新的地圖</string>
     <string name="dash_download_manage">管理</string>
     <string name="routing_attr_no_new_routing_name">不用 v1.9 的路徑規則</string>
-    <string name="routing_attr_no_new_routing_description">在 v1.9 不使用路徑規則引導</string>
+    <string name="routing_attr_no_new_routing_description">在 v1.9 不使用路徑規則引導。</string>
     <string name="rendering_attr_roadStyle_name">道路樣式</string>
     <string name="rendering_value_default_name">預設</string>
     <string name="rendering_value_orange_name">橙色</string>
@@ -1662,10 +1662,10 @@ OsmAnd (Automated Navigation Directions) 是一個地圖和導航的應用程式
     <string name="enable_proxy_title">啟用 HTTP 代理伺服器</string>
     <string name="enable_proxy_descr">對所有的網路請求，組態 HTTP 代理伺服器</string>
     <string name="proxy_host_title">代理伺服器主機</string>
-    <string name="proxy_host_descr">組態您代理伺服器的主機名稱 (例如 127.0.0.1)</string>
+    <string name="proxy_host_descr">組態您代理伺服器的主機名稱 (例如 127.0.0.1)。</string>
     <string name="proxy_port_title">代理伺服器埠</string>
-    <string name="proxy_port_descr">組態您代理伺服器的埠號 (例如 8118)</string>
-    <string name="version_settings_descr">下載 nightly builds 版</string>
+    <string name="proxy_port_descr">組態您代理伺服器的埠號 (例如 8118)。</string>
+    <string name="version_settings_descr">下載 nightly builds 版。</string>
     <string name="version_settings">建構</string>
     <string name="points">點</string>
 
@@ -1783,7 +1783,7 @@ OsmAnd (Automated Navigation Directions) 是一個地圖和導航的應用程式
     <string name="simulate_your_location">模擬您的位置</string>
     <string name="short_location_on_map">緯度 %1$s
 經度 %2$s</string>
-    <string name="tips_and_tricks_descr">常見的問題，最近的更改以及其它</string>
+    <string name="tips_and_tricks_descr">常見的問題，最近的更改以及其它。</string>
     <string name="routing_settings_2">導航設定</string>
     <string name="general_settings_2">一般設定</string>
     <string name="waypoint_visit_after">隨後造訪</string>
@@ -1801,7 +1801,7 @@ OsmAnd (Automated Navigation Directions) 是一個地圖和導航的應用程式
     <string name="action_modify">修改動作</string>
     <string name="action_delete">刪除動作</string>
     <string name="osmand_parking_overdue">已過時</string>
-    <string name="delay_to_start_navigation_descr">在導航規劃螢幕上，指示剩餘等待時間</string>
+    <string name="delay_to_start_navigation_descr">在導航規劃螢幕上，指示剩餘等待時間。</string>
     <string name="delay_to_start_navigation">導航後開始轉向建議…</string>
     <string name="shared_string_go">執行</string>
 
@@ -1821,7 +1821,7 @@ OsmAnd (Automated Navigation Directions) 是一個地圖和導航的應用程式
     <string name="shared_string_message">訊息</string>
     <string name="shared_string_do_not_use">不使用</string>
     <string name="shared_string_address">地址</string>
-    <string name="shared_string_show_description">顯示記述</string>
+    <string name="shared_string_show_description">顯示記述。</string>
     <string name="shared_string_search">查詢</string>
     <string name="shared_string_places">地點</string>
     <string name="shared_string_is_open">開啓</string>
@@ -1952,7 +1952,7 @@ OsmAnd (Automated Navigation Directions) 是一個地圖和導航的應用程式
     <string name="opening_at">營業於</string>
     <string name="closing_at">結束於</string>
     <string name="next_proceed">下頁</string>
-    <string name="av_locations_descr">GPX 檔案加上地點附註</string>
+    <string name="av_locations_descr">GPX 檔案加上地點附註。</string>
     <string name="av_locations">地點</string>
 
     
@@ -1973,8 +1973,8 @@ OsmAnd (Automated Navigation Directions) 是一個地圖和導航的應用程式
     <string name="show_on_start">在起始時顯示</string>
     <string name="are_you_sure">您確定嗎？</string>
     <string name="unsaved_changes_will_be_lost">任何未儲存的變更將會失去。要繼續嗎?</string>
-    <string name="simulate_your_location_stop_descr">停止模擬您的位置</string>
-    <string name="simulate_your_location_descr">模擬您的位置使用在計算路線或記錄成一個 GPX 軌跡</string>
+    <string name="simulate_your_location_stop_descr">停止模擬您的位置。</string>
+    <string name="simulate_your_location_descr">模擬您的位置使用在計算路線或記錄成一個 GPX 軌跡。</string>
     <string name="downloads_left_template">%1$s 次下載剩餘</string>
     <string name="favourites_edit_dialog_title">我的收藏資訊</string>
     <string name="favourites_context_menu_add">增加到我的收藏</string>
@@ -1982,7 +1982,7 @@ OsmAnd (Automated Navigation Directions) 是一個地圖和導航的應用程式
     <string name="shared_string_trip_recording">旅程錄製</string>
     <string name="shared_string_navigation">導航</string>
     <string name="osmand_running_in_background">在背景執行</string>
-    <string name="default_speed_system_descr">定義速度的單位</string>
+    <string name="default_speed_system_descr">定義速度的單位。</string>
     <string name="default_speed_system">速度的單位</string>
     <string name="si_nm">浬</string>
     <string name="nm">浬</string>
@@ -2025,14 +2025,14 @@ OsmAnd (Automated Navigation Directions) 是一個地圖和導航的應用程式
     <string name="update_all">全部更新 (%1$s MB)</string>
     <string name="free_downloads_used">免費下載使用</string>
     <string name="free_downloads_used_description">顯示已使用的免費下載</string>
-    <string name="simulate_initial_startup_descr">設定標誌指示第一次應用程式啟動，而保持著所有其它設定不變</string>
+    <string name="simulate_initial_startup_descr">設定標誌指示第一次應用程式啟動，而保持著所有其它設定不變。</string>
     <string name="simulate_initial_startup">模擬第一次應用程式啟動</string>
     <string name="share_geo">地理：</string>
     <string name="share_menu_location">分享位置</string>
     <string name="shared_string_send">發送</string>
 
     <string name="application_dir_description">選擇您想要在何處儲存地圖和其它資料。</string>
-    <string name="show_on_start_description">\'關閉\' 直接啟動地圖螢幕</string>
+    <string name="show_on_start_description">\'關閉\' 直接啟動地圖螢幕。</string>
     <string name="map_downloaded">地圖已下載</string>
     <string name="map_downloaded_descr">已下載了 %1$s 地圖，您現在可以開始使用了。</string>
     <string name="go_to_map">顯示地圖</string>
@@ -2130,11 +2130,11 @@ OsmAnd (Automated Navigation Directions) 是一個地圖和導航的應用程式
     
     <string name="dashboard_or_drawer_title">儀表板或選單控制</string>
     <string name="dashboard_or_drawer_description">還有一種新的選擇，透過具彈性的儀表板或固定的選單優先控制應用程式。在儀表板中也可以更改您的選擇。</string>
-    <string name="access_from_map_description">選單按鈕啟動儀表板，無選單</string>
+    <string name="access_from_map_description">選單按鈕啟動儀表板，而非選單。</string>
     <string name="access_from_map">從地圖進入</string>
     <string name="use_dashboard_btn">使用儀表板</string>
     <string name="use_drawer_btn">使用地圖</string>
-    <string name="please_specify_poi_type_only_from_list">請指定正確的興趣點類型或跳過它</string>
+    <string name="please_specify_poi_type_only_from_list">請指定正確的興趣點類型或跳過它。</string>
     <string name="routing_attr_avoid_stairs_name">避開樓梯</string>
 	<string name="routing_attr_avoid_stairs_description">避開樓梯</string>
 	<string name="routing_attr_avoid_borders_name">避開跨越邊界</string>
@@ -2142,11 +2142,11 @@ OsmAnd (Automated Navigation Directions) 是一個地圖和導航的應用程式
     <string name="av_video_quality_low">最低品質</string>
     <string name="av_video_quality_high">最高品質</string>
     <string name="av_video_quality">視訊輸出品質</string>
-    <string name="av_video_quality_descr">選擇視訊輸出品質</string>
+    <string name="av_video_quality_descr">選擇視訊品質。</string>
     <string name="av_audio_format">音訊輸出格式</string>
-    <string name="av_audio_format_descr">選擇音訊輸出格式</string>
+    <string name="av_audio_format_descr">選擇音訊輸出格式。</string>
     <string name="av_audio_bitrate">音訊位元傳輸速率</string>
-    <string name="av_audio_bitrate_descr">選擇音訊位元傳輸速率</string>
+    <string name="av_audio_bitrate_descr">選擇音訊位元傳輸速率。</string>
     <string name="shared_string_near">附近</string>
     <string name="no_address_found">沒有確定地址</string>
 	<string name="looking_up_address">查尋地址</string>
@@ -2161,10 +2161,10 @@ OsmAnd (Automated Navigation Directions) 是一個地圖和導航的應用程式
 <string name="no_location_permission">應用程式沒有權限存取所在位置資料。</string>
     <string name="no_camera_permission">應用程式沒有權限存取相機。</string>
     <string name="no_microphone_permission">應用程式沒有權限存取麥克風。</string>
-    <string name="impassable_road_desc">選擇在導航期間您想要避開的道路</string>
+    <string name="impassable_road_desc">選擇在導航期間您想要避開的道路。</string>
     <string name="shared_string_sound">語音</string>
     <string name="select_voice_provider">選擇語音指引</string>
-    <string name="select_voice_provider_descr">為您的語言選擇或下載語音指引</string>
+    <string name="select_voice_provider_descr">為您的語言選擇或下載語音指引。</string>
     <string name="live_updates">即時更新</string>
     <string name="available_maps">可用地圖</string>
     <string name="last_update">最近的更新：%s</string>
@@ -2177,8 +2177,8 @@ OsmAnd (Automated Navigation Directions) 是一個地圖和導航的應用程式
     <string name="rec_split_title">使用錄製分割</string>
     <string name="rec_split_clip_length">剪輯長度</string>
     <string name="rec_split_storage_size">存儲大小</string>
-    <string name="rec_split_desc">當重寫剪輯時，使用的空間超過記憶體大小</string>
-    <string name="rec_split_storage_size_desc">被所有錄製的剪輯可以佔用的空間總量</string>
+    <string name="rec_split_desc">當重寫剪輯時，使用的空間超過記憶體大小。</string>
+    <string name="rec_split_storage_size_desc">被所有錄製的剪輯可以佔用的空間總量。</string>
     <string name="rec_split_clip_length_desc">每個錄製的剪輯長度不會更長於指定的時間間隔</string>
     <string name="hourly">每小時</string>
     <string name="daily">每日</string>
@@ -2217,7 +2217,7 @@ OsmAnd (Automated Navigation Directions) 是一個地圖和導航的應用程式
     <string name="select_map_markers">選擇地圖標記</string>
     <string name="shared_string_reverse_order">順序相反</string>
     
-    <string name="show_map_markers_description">啟動地圖標記功能</string>
+    <string name="show_map_markers_description">啟動地圖標記功能。</string>
     <string name="clear_active_markers_q">您想要移除所有的活動標記嗎？</string>
     <string name="clear_markers_history_q">您想清除地圖標記歷史記錄嗎？</string>
     <string name="active_markers">活動標記</string>
@@ -2248,12 +2248,12 @@ OsmAnd (Automated Navigation Directions) 是一個地圖和導航的應用程式
     <string name="osm_user_stat">編輯 %1$s，等級 %2$s，合計編輯 %3$s</string>
     <string name="osm_editors_ranking">OSM 編輯排名</string>
     <string name="osm_live_subscribe_btn">捐助</string>
-    <string name="osm_live_email_desc">我們需要它來為您提供關於捐款的資訊</string>
+    <string name="osm_live_email_desc">需要為您提供關於捐款的資訊。</string>
     <string name="osm_live_user_public_name">公開名稱</string>
     <string name="osm_live_hide_user_name">不要在報告中顯示我的名稱</string>
     <string name="osm_live_support_region">支援地區</string>
     <string name="osm_live_month_cost">每月費用</string>
-    <string name="osm_live_month_cost_desc">每月付款</string>
+    <string name="osm_live_month_cost_desc">每月付款。</string>
     <string name="osm_live_active">活動</string>
     <string name="osm_live_not_active">失效的</string>
     <string name="osm_live_enter_email">請輸入有效的電子郵件地址</string>
@@ -2261,7 +2261,7 @@ OsmAnd (Automated Navigation Directions) 是一個地圖和導航的應用程式
     <string name="osm_live_subscription_settings">認捐設定</string>
     <string name="osm_live_subscription">OsmAnd Live 會費</string>
     <string name="osm_live_thanks">感謝您的捐款，即時更新！</string>
-    <string name="osm_live_region_desc">您捐助的一部分會發送到 OSM，使用者將送交更改到該地區的地圖</string>
+    <string name="osm_live_region_desc">您捐助的一部分會發送到 OSM，使用者將送交更改到該地區的地圖。</string>
     <string name="osm_live_ask_for_purchase">請先購買 OsmAnd Live 的會費</string>
 
     <string name="osm_live_header">此捐助能夠為世界各地所有的地圖每小時更新一次。
