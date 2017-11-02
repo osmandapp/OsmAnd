@@ -1,30 +1,19 @@
 package net.osmand.plus.mapmarkers;
 
-import android.content.DialogInterface;
-import android.graphics.drawable.Drawable;
-import android.os.Build;
 import android.os.Bundle;
-import android.support.annotation.DrawableRes;
 import android.support.annotation.Nullable;
-import android.support.v4.content.ContextCompat;
 import android.view.ContextThemeWrapper;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
-import android.view.ViewTreeObserver;
-import android.view.Window;
-import android.view.WindowManager;
 import android.widget.CompoundButton;
 import android.widget.ImageView;
 import android.widget.RadioButton;
 import android.widget.TextView;
 
-import net.osmand.AndroidUtils;
-import net.osmand.data.PointDescription;
 import net.osmand.plus.R;
 import net.osmand.plus.activities.MapActivity;
-import net.osmand.plus.base.BottomSheetDialogFragment;
-import net.osmand.plus.helpers.AndroidUiHelper;
+import net.osmand.plus.base.MenuBottomSheetDialogFragment;
 
 public class CoordinateInputBottomSheetDialogFragment extends MenuBottomSheetDialogFragment {
 
@@ -58,9 +47,6 @@ public class CoordinateInputBottomSheetDialogFragment extends MenuBottomSheetDia
 		final int themeRes = nightMode ? R.style.OsmandDarkTheme : R.style.OsmandLightTheme;
 
 		mainView = View.inflate(new ContextThemeWrapper(getContext(), themeRes), R.layout.fragment_marker_coordinate_input_options_bottom_sheet_helper, container);
-		if (portrait) {
-			AndroidUtils.setBackground(getActivity(), mainView, night, R.drawable.bg_bottom_menu_light, R.drawable.bg_bottom_menu_dark);
-		}
 
 		if (nightMode) {
 			((TextView) mainView.findViewById(R.id.coordinate_input_title)).setTextColor(getResources().getColor(R.color.ctx_menu_info_text_dark));
@@ -151,11 +137,6 @@ public class CoordinateInputBottomSheetDialogFragment extends MenuBottomSheetDia
 		setupHeightAndBackground(mainView, R.id.marker_coordinate_input_scroll_view);
 
 		return mainView;
-	}
-
-	@Override
-	protected Drawable getContentIcon(@DrawableRes int id) {
-		return getIcon(id, night ? R.color.ctx_menu_info_text_dark : R.color.on_map_icon_color);
 	}
 
 	private void highlightSelectedItem(boolean check) {
