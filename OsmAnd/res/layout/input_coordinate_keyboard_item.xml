@@ -1,20 +1,26 @@
 <?xml version="1.0" encoding="utf-8"?>
-<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
-              xmlns:tools="http://schemas.android.com/tools"
-              android:layout_width="match_parent"
-              android:layout_height="56dp"
-              android:orientation="vertical">
+<FrameLayout xmlns:android="http://schemas.android.com/apk/res/android"
+			 xmlns:tools="http://schemas.android.com/tools"
+			 android:layout_width="match_parent"
+			 android:layout_height="56dp">
 
-    <android.support.v7.widget.AppCompatTextView
-        android:paddingTop="6dp"
-        android:paddingBottom="6dp"
-        android:id="@+id/keyboard_item"
-        android:textAllCaps="true"
-        android:layout_width="match_parent"
-        android:layout_weight="0.8"
-        android:layout_height="0dp"
-        android:gravity="center"
-        android:textColor="?attr/keyboard_item_text_color"
-        tools:text="3"/>
+	<android.support.v7.widget.AppCompatTextView
+		android:id="@+id/keyboard_item_text"
+		android:layout_width="match_parent"
+		android:layout_height="match_parent"
+		android:gravity="center"
+		android:paddingBottom="6dp"
+		android:paddingTop="6dp"
+		android:textAllCaps="true"
+		android:textColor="?attr/keyboard_item_text_color"
+		tools:text="3"/>
 
-</LinearLayout>
+	<ImageView
+		android:id="@+id/keyboard_item_image"
+		android:layout_width="match_parent"
+		android:layout_height="match_parent"
+		android:scaleType="center"
+		android:layout_gravity="center"
+		tools:src="@drawable/ic_action_aircraft"/>
+
+</FrameLayout>

@@ -72,8 +72,10 @@ public class CoordinateInputDialogFragment extends DialogFragment implements Osm
 	public static final String GO_TO_NEXT_FIELD = "go_to_next_field";
 	public static final String ACCURACY = "accuracy";
 
-	private static final int CLEAR_BUTTON_POSITION = 9;
-	private static final int DELETE_BUTTON_POSITION = 11;
+	private static final int CLEAR_BUTTON_POSITION = 3;
+	private static final int MINUS_BUTTON_POSITION = 7;
+	private static final int BACKSPACE_BUTTON_POSITION = 11;
+	private static final int SWITCH_TO_NEXT_INPUT_BUTTON_POSITION = 15;
 	private static final String LATITUDE_LABEL = "latitude";
 	private static final String LONGITUDE_LABEL = "longitude";
 	private static final String NAME_LABEL = "name";
@@ -246,10 +248,10 @@ public class CoordinateInputDialogFragment extends DialogFragment implements Osm
 			AndroidUtils.setBackground(mapActivity, keyboardLayout, !lightTheme, R.drawable.bg_bottom_menu_light, R.drawable.bg_bottom_menu_dark);
 		}
 
-		String[] keyboardItems = new String[] { "1", "2", "3",
-				"4", "5", "6",
-				"7", "8", "9",
-				getString(R.string.shared_string_clear), "0", "\u21e6" };
+		Object[] keyboardItems = new Object[] { "1", "2", "3", getString(R.string.shared_string_clear),
+				"4", "5", "6", "-",
+				"7", "8", "9", "\u21e6",
+				".", "0", ":", R.drawable.input_coordinate_keyboard_backspace };
 		final GridView keyboardGrid = (GridView) mainView.findViewById(R.id.keyboard_grid_view);
 		final KeyboardAdapter keyboardAdapter = new KeyboardAdapter(mapActivity, keyboardItems);
 		keyboardGrid.setAdapter(keyboardAdapter);
@@ -263,7 +265,7 @@ public class CoordinateInputDialogFragment extends DialogFragment implements Osm
 						case CLEAR_BUTTON_POSITION:
 							focusedEditText.setText("");
 							break;
-						case DELETE_BUTTON_POSITION:
+						case BACKSPACE_BUTTON_POSITION:
 							String str = focusedEditText.getText().toString();
 							if (str.length() > 0) {
 								str = str.substring(0, str.length() - 1);
@@ -271,8 +273,11 @@ public class CoordinateInputDialogFragment extends DialogFragment implements Osm
 								focusedEditText.setSelection(str.length());
 							}
 							break;
+						case SWITCH_TO_NEXT_INPUT_BUTTON_POSITION:
+							switchToNextInput(focusedEditText.getId());
+							break;
 						default:
-							focusedEditText.append(keyboardAdapter.getItem(i));
+							focusedEditText.append((String) keyboardAdapter.getItem(i));
 					}
 				}
 			}
@@ -726,9 +731,9 @@ public class CoordinateInputDialogFragment extends DialogFragment implements Osm
 		}
 	}
 
-	private class KeyboardAdapter extends ArrayAdapter<String> {
+	private class KeyboardAdapter extends ArrayAdapter<Object> {
 
-		KeyboardAdapter(@NonNull Context context, @NonNull String[] objects) {
+		KeyboardAdapter(@NonNull Context context, @NonNull Object[] objects) {
 			super(context, 0, objects);
 		}
 
@@ -737,7 +742,6 @@ public class CoordinateInputDialogFragment extends DialogFragment implements Osm
 		public View getView(int position, @Nullable View convertView, @NonNull ViewGroup parent) {
 			if (convertView == null) {
 				convertView = LayoutInflater.from(getContext()).inflate(R.layout.input_coordinate_keyboard_item, parent, false);
-				convertView.setBackgroundResource(lightTheme ? R.drawable.keyboard_item_light_bg : R.drawable.keyboard_item_dark_bg);
 			}
 			if (!orientationPortrait) {
 				int keyboardViewHeight = mainView.findViewById(R.id.keyboard_grid_view).getMeasuredHeight();
@@ -745,14 +749,33 @@ public class CoordinateInputDialogFragment extends DialogFragment implements Osm
 				int spaceForKeys = keyboardViewHeight - 3 * dividerHeight;
 				convertView.setMinimumHeight(spaceForKeys / 4);
 			}
-			TextView keyboardItem = (TextView) convertView.findViewById(R.id.keyboard_item);
-			if (position == CLEAR_BUTTON_POSITION) {
-				TextViewCompat.setAutoSizeTextTypeWithDefaults(keyboardItem, TextViewCompat.AUTO_SIZE_TEXT_TYPE_NONE);
-				keyboardItem.setTextSize(TypedValue.COMPLEX_UNIT_PX, getResources().getDimension(R.dimen.default_list_text_size));
+			boolean controlButton = position == CLEAR_BUTTON_POSITION
+					|| position == MINUS_BUTTON_POSITION
+					|| position == BACKSPACE_BUTTON_POSITION
+					|| position == SWITCH_TO_NEXT_INPUT_BUTTON_POSITION;
+			if (controlButton) {
+				convertView.setBackgroundResource(lightTheme ? R.drawable.keyboard_item_control_light_bg : R.drawable.keyboard_item_control_dark_bg);
 			} else {
-				TextViewCompat.setAutoSizeTextTypeWithDefaults(keyboardItem, TextViewCompat.AUTO_SIZE_TEXT_TYPE_UNIFORM);
+				convertView.setBackgroundResource(lightTheme ? R.drawable.keyboard_item_light_bg : R.drawable.keyboard_item_dark_bg);
 			}
-			keyboardItem.setText(getItem(position));
+			TextView keyboardItemText = (TextView) convertView.findViewById(R.id.keyboard_item_text);
+			ImageView keyboardItemImage = (ImageView) convertView.findViewById(R.id.keyboard_item_image);
+			Object item = getItem(position);
+			if (item instanceof String) {
+				if (position == CLEAR_BUTTON_POSITION) {
+					TextViewCompat.setAutoSizeTextTypeWithDefaults(keyboardItemText, TextViewCompat.AUTO_SIZE_TEXT_TYPE_NONE);
+					keyboardItemText.setTextSize(TypedValue.COMPLEX_UNIT_PX, getResources().getDimension(R.dimen.default_list_text_size));
+				} else {
+					TextViewCompat.setAutoSizeTextTypeWithDefaults(keyboardItemText, TextViewCompat.AUTO_SIZE_TEXT_TYPE_UNIFORM);
+				}
+				keyboardItemImage.setVisibility(View.GONE);
+				keyboardItemText.setVisibility(View.VISIBLE);
+				keyboardItemText.setText((String) getItem(position));
+			} else if (item instanceof Integer) {
+				keyboardItemText.setVisibility(View.GONE);
+				keyboardItemImage.setVisibility(View.VISIBLE);
+				keyboardItemImage.setImageResource((Integer) item);
+			}
 
 			return convertView;
 		}

@@ -344,7 +344,7 @@
 
         <item name="popupMenuStyle">@style/PopupMenuDark</item>
 
-        <item name="keyboard_item_text_color">@color/keyboard_text_color_dark</item>
+        <item name="keyboard_item_text_color">@color/keyboard_item_text_color_dark</item>
     </style>
 
     <style name="FreeVersionBanner" parent="OsmandDarkTheme">

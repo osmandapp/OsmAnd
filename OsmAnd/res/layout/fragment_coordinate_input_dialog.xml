@@ -166,7 +166,6 @@
     </LinearLayout>
 
     <LinearLayout
-        tools:visibility="gone"
         android:id="@+id/keyboard_layout"
         android:layout_gravity="bottom"
         android:orientation="vertical"
@@ -181,7 +180,7 @@
             android:horizontalSpacing="1dp"
             android:verticalSpacing="1dp"
             android:stretchMode="columnWidth"
-            android:numColumns="3"/>
+            android:numColumns="4"/>
 
         <View
             android:id="@+id/keyboard_divider"
@@ -195,32 +194,33 @@
             android:layout_width="match_parent"
             android:layout_height="56dp">
 
-            <ImageView
-                android:id="@+id/show_hide_keyboard_icon"
-                android:padding="@dimen/content_padding"
-                android:background="?attr/selectableItemBackground"
-                android:layout_gravity="center_vertical"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                tools:src="@drawable/ic_action_arrow_down"/>
-
-            <View
-                android:layout_width="1dp"
-                android:layout_height="match_parent"
-                android:background="?attr/dashboard_divider"/>
-
             <android.support.v7.widget.AppCompatTextView
                 android:maxLines="1"
                 android:ellipsize="end"
                 android:id="@+id/add_marker_button"
                 android:textAllCaps="true"
                 android:layout_width="0dp"
-                android:layout_weight="1"
+                android:layout_weight="3"
                 android:layout_height="match_parent"
                 android:gravity="center"
                 android:textColor="?attr/keyboard_item_text_color"
                 android:textSize="@dimen/default_list_text_size"
                 android:text="@string/shared_string_add"/>
+
+            <View
+                android:layout_width="1dp"
+                android:layout_height="match_parent"
+                android:background="?attr/dashboard_divider"/>
+
+            <ImageView
+                android:id="@+id/show_hide_keyboard_icon"
+                android:background="?attr/selectableItemBackground"
+                android:layout_gravity="center_vertical"
+                android:layout_width="0dp"
+                android:layout_weight="1"
+                android:layout_height="match_parent"
+                android:scaleType="center"
+                tools:src="@drawable/ic_action_arrow_down"/>
 
         </LinearLayout>
 

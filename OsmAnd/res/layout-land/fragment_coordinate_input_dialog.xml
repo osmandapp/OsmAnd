@@ -169,7 +169,7 @@
 				android:layout_weight="1"
 				android:background="?attr/dashboard_divider"
 				android:horizontalSpacing="1dp"
-				android:numColumns="3"
+				android:numColumns="4"
 				android:stretchMode="columnWidth"
 				android:verticalSpacing="1dp"/>
 
