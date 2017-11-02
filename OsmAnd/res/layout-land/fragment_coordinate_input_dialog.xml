@@ -177,9 +177,10 @@
 				android:id="@+id/keyboard_divider"
 				android:layout_width="match_parent"
 				android:layout_height="1dp"
-				android:background="?attr/dashboard_divider"/>
+				android:background="@color/keyboard_item_add_button_bg_pressed"/>
 
 			<android.support.v7.widget.AppCompatTextView
+				android:background="@drawable/keyboard_item_add_button_bg"
 				android:id="@+id/add_marker_button"
 				android:layout_width="match_parent"
 				android:layout_height="52dp"

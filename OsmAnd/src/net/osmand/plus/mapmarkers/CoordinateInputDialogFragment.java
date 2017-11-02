@@ -234,9 +234,7 @@ public class CoordinateInputDialogFragment extends DialogFragment implements Osm
 			}
 		});
 
-		TextView addMarkerButton = (TextView) mainView.findViewById(R.id.add_marker_button);
-		addMarkerButton.setBackgroundResource(lightTheme ? R.drawable.keyboard_item_light_bg : R.drawable.keyboard_item_dark_bg);
-		addMarkerButton.setOnClickListener(new View.OnClickListener() {
+		mainView.findViewById(R.id.add_marker_button).setOnClickListener(new View.OnClickListener() {
 			@Override
 			public void onClick(View view) {
 				addMapMarker();

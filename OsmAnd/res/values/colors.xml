@@ -271,6 +271,8 @@
 	<color name="keyboard_item_control_light_bg_pressed">#536dfe</color>
 	<color name="keyboard_item_control_dark_bg">#f2f2f2</color>
 	<color name="keyboard_item_control_dark_bg_pressed">#536dfe</color>
+	<color name="keyboard_item_add_button_bg">#536dfe</color>
+	<color name="keyboard_item_add_button_bg_pressed">#4b62e3</color>
 
 	<color name="coordinate_input_status_bar_color">#4257c9</color>
 

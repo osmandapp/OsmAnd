@@ -186,15 +186,15 @@
             android:id="@+id/keyboard_divider"
             android:layout_width="match_parent"
             android:layout_height="1dp"
-            android:background="?attr/dashboard_divider"/>
+            android:background="@color/keyboard_item_add_button_bg_pressed"/>
 
         <LinearLayout
-            android:background="?attr/bg_color"
             android:orientation="horizontal"
             android:layout_width="match_parent"
             android:layout_height="56dp">
 
             <android.support.v7.widget.AppCompatTextView
+                android:background="@drawable/keyboard_item_add_button_bg"
                 android:maxLines="1"
                 android:ellipsize="end"
                 android:id="@+id/add_marker_button"
@@ -210,11 +210,11 @@
             <View
                 android:layout_width="1dp"
                 android:layout_height="match_parent"
-                android:background="?attr/dashboard_divider"/>
+                android:background="@color/keyboard_item_add_button_bg_pressed"/>
 
             <ImageView
                 android:id="@+id/show_hide_keyboard_icon"
-                android:background="?attr/selectableItemBackground"
+                android:background="@drawable/keyboard_item_add_button_bg"
                 android:layout_gravity="center_vertical"
                 android:layout_width="0dp"
                 android:layout_weight="1"
