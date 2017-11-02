@@ -454,7 +454,7 @@ OSM er et i fællesskab drevet, globalt offentligt domæne kortlægningsprojekt.
     <string name="native_library_not_supported">Indbygget bibliotek er ikke understøttet på enheden.</string>
     <string name="init_native_library">Initialisere indbygget bibliotek…</string>
     <string name="choose_auto_follow_route">Autocentrer kortvisning</string>
-    <string name="choose_auto_follow_route_descr">Tid indtil kortvisning synkroniseres med aktuel position</string>
+    <string name="choose_auto_follow_route_descr">Tid indtil kortvisning synkroniseres med den aktuel position.</string>
     
     <string name="auto_follow_route_navigation">Autocentrer kun navigation</string>
     <string name="auto_follow_route_navigation_descr">Autocentrer kun kortvisning under navigation.</string>
@@ -493,7 +493,7 @@ OSM er et i fællesskab drevet, globalt offentligt domæne kortlægningsprojekt.
     <string name="filename_input">Filnavn: </string>
     <string name="file_with_name_already_exist">Der eksisterer allerede en fil med samme navn.</string>
 
-    <string name="local_index_upload_gpx_description">Send GPX-filer til OSM netværket. De vil blive brugt til at forbedre kort.</string>
+    <string name="local_index_upload_gpx_description">Send GPX-filer til OSM netværket. De vil blive brugt til at forbedre kortet.</string>
     <string name="local_index_items_uploaded">%1$d af %2$d emner overført.</string>
     <string name="local_index_mi_upload_gpx">Send til OSM</string>
     <string name="show_more_map_detail">Vis flere kortdetaljer</string>
@@ -597,16 +597,16 @@ OSM er et i fællesskab drevet, globalt offentligt domæne kortlægningsprojekt.
     <string name="voice_stream_notification">Meddelelselyd</string>
     <string name="voice_stream_music">Medie-/musiklyd</string>
     <string name="warning_tile_layer_not_downloadable">Programmet kan ikke hente kortlaget %1$s, prøv at installere igen.</string>
-    <string name="overlay_transparency_descr">Ændre gennemsigtighed for overlejring</string>
+    <string name="overlay_transparency_descr">Ændre gennemsigtigheden for overlejring.</string>
     <string name="overlay_transparency">Overlejrings-gennemsigtighed</string>
-    <string name="map_transparency_descr">Ændre gennemsigtighed for basiskort</string>
+    <string name="map_transparency_descr">Ændre gennemsigtigheden for grundkort.</string>
     <string name="map_transparency">Gennemsigtighed for basiskort</string>
     <string name="layer_underlay">Underlejringskort…</string>
     <string name="map_underlay">Underlejringskort</string>
-    <string name="map_underlay_descr">Vælg kort til underlejring</string>
+    <string name="map_underlay_descr">Vælg kortet til underlejring.</string>
     <string name="layer_overlay">Overlejringskort…</string>
     <string name="map_overlay">Overlejringskort</string>
-    <string name="map_overlay_descr">Vælg kort til overlejring</string>
+    <string name="map_overlay_descr">Vælg kortet til overlejring.</string>
     <string name="tile_source_already_installed">Kort er allerede installeret, indstillinger bliver opdateret.</string>
     <string name="select_tile_source_to_install">Vælg kort/kortbrikker der skal installeres eller opdateres.</string>
     <string name="internet_not_available">En internetforbindelse er nødvendig for handlingen, men er ikke tilgængelig.</string>
@@ -693,7 +693,7 @@ OSM er et i fællesskab drevet, globalt offentligt domæne kortlægningsprojekt.
     <string name="daynight_mode_night">Nat</string>
     <string name="daynight_mode_auto">Solopgang/-nedgang</string>
     <string name="daynight_mode_sensor">Lysføler</string>
-    <string name="daynight_descr">Vælg regel for dag/nat skift</string>
+    <string name="daynight_descr">Vælg regel for dag/nat skift.</string>
     <string name="daynight">Dag-/nattilstand</string>
     <string name="download_files_question">Hent {0} filer ({1} MB)?</string>
 
@@ -716,7 +716,7 @@ OSM er et i fællesskab drevet, globalt offentligt domæne kortlægningsprojekt.
     <string name="renderer_load_sucess">Kortgenerator indlæst</string>
     <string name="renderer_load_exception">Der opstod en undtagelse: kortgeneratoren blev ikke indlæst</string>
     <string name="renderers">Vektor-optegning</string>
-    <string name="renderers_descr">Vælg udseende på optegning</string>
+    <string name="renderers_descr">Vælg udseende på optegning.</string>
     <string name="poi_context_menu_website">Vis hjemmeside (IP)</string>
     <string name="poi_context_menu_call">Vis telefon (IP)</string>
     <string name="website">Websted</string>
@@ -746,7 +746,7 @@ OSM er et i fællesskab drevet, globalt offentligt domæne kortlægningsprojekt.
     <string name="rotate_map_compass_opt">Efter kompas</string>
     <string name="rotate_map_bearing_opt">Efter bevægelsesretningen</string>
     <string name="rotate_map_none_opt">Ingen rotation (nord er op)</string>
-    <string name="rotate_map_to_bearing_descr">Vælg justering af skærmen</string>
+    <string name="rotate_map_to_bearing_descr">Vælg justering af skærmen.</string>
     <string name="rotate_map_to_bearing">Kortorientering</string>
     <string name="show_route">Rutedetaljer</string>
     <string name="fav_imported_sucessfully">Favoritter er importeret</string>
@@ -769,9 +769,9 @@ OSM er et i fællesskab drevet, globalt offentligt domæne kortlægningsprojekt.
     <string name="menu_layers">Kortlag</string>
     <string name="context_menu_item_search_poi">Søg interessepunkt</string>
 
-    <string name="use_trackball_descr">Brug trackball for at flytte kortet</string>
+    <string name="use_trackball_descr">Brug trackball for at flytte kortet.</string>
     <string name="use_trackball">Brug trackball</string>
-    <string name="background_service_wait_int_descr">Indstil maksimal ventetid mellem hver positionssøgning i baggrunden</string>
+    <string name="background_service_wait_int_descr">Indstil den maksimale ventetid mellem hver positionssøgning i baggrunden.</string>
     <string name="background_service_wait_int">Maks ventetid på låsning</string>
 
     <string name="where_am_i">Hvor er jeg?</string>
@@ -779,7 +779,7 @@ OSM er et i fællesskab drevet, globalt offentligt domæne kortlægningsprojekt.
     <string name="int_seconds">sekunder</string>
     <string name="background_service_int_descr">Indstil vågn-op interval som anvendes ved kørsel i baggrunden</string>
     <string name="background_service_int">GPS vågn-op interval</string>
-    <string name="background_service_provider_descr">Vælg placeringsudbyder som bruges af baggrundstjenesten</string>
+    <string name="background_service_provider_descr">Vælg placeringsudbyder som bruges af baggrundstjenesten.</string>
     <string name="background_service_provider">Placeringsudbyder</string>
     <string name="background_router_service_descr">Kør OsmAnd i baggrunden for at spore positionen, mens skærmen er slukket.</string>
     <string name="background_router_service">Kør OsmAnd i baggrunden</string>
@@ -908,7 +908,7 @@ OSM er et i fællesskab drevet, globalt offentligt domæne kortlægningsprojekt.
     <string name="hint_search_online">Online-søgning: husnummer, gade, by</string>
     <string name="search_online_address">Online søgning</string>
     <string name="max_level_download_tile">Maks online zoom</string>
-    <string name="max_level_download_tile_descr">Vælg maks zoomniveau der skal hentes for online kortbrikker</string>
+    <string name="max_level_download_tile_descr">Vælg maks zoomniveau der skal hentes for online kortbrikker.</string>
 	
 	
 	
@@ -918,7 +918,7 @@ OSM er et i fællesskab drevet, globalt offentligt domæne kortlægningsprojekt.
 \nNavigationstjenesten skiftes midlertidig til online CloudMade.</string>
     <string name="search_offline_address">Offline søgning</string>
     <string name="route_general_information">Total afstand %1$s, rejsetid %2$d t %3$d m.</string>
-    <string name="router_service_descr">Vælg en online eller offline navigationstjeneste</string>
+    <string name="router_service_descr">Vælg en online eller offline navigationstjeneste.</string>
     <string name="router_service">Navigationstjeneste</string>
     <string name="sd_dir_not_accessible">Datalagringsmappen på SD-kortet er ikke tilgængelig!</string>
     <string name="download_question_exist">Offline-data for {0} eksisterer allerede ({1}). Opdater ({2})?</string>
@@ -965,7 +965,7 @@ OSM er et i fællesskab drevet, globalt offentligt domæne kortlægningsprojekt.
     <string name="finished_task">Færdig</string>
 
 
-    <string name="use_online_routing_descr">Brug internettet til at beregne rute</string>
+    <string name="use_online_routing_descr">Brug internettet til at beregne rute.</string>
     <string name="use_online_routing">Brug online-navigation</string>
     <string name="osm_settings_descr">Indstillinger for OpenStreetMap.org (OSM), som kræves for bidrag til OSM.</string>
     <string name="data_settings_descr">Angiv sprog, hent/genindlæs data.</string>
@@ -1110,7 +1110,7 @@ OSM er et i fællesskab drevet, globalt offentligt domæne kortlægningsprojekt.
 
 
     <string name="av_camera_focus">Kameraets fokustype</string>
-    <string name="av_camera_focus_descr">Vælg fokustype på intern kamera</string>
+    <string name="av_camera_focus_descr">Vælg fokustypen for det interne kamera.</string>
     <string name="av_camera_focus_auto">Autofokus</string>
     <string name="av_camera_focus_hiperfocal">Hyperfocal fokus</string>
     <string name="av_camera_focus_infinity">Uendelig fokus</string>
@@ -1350,7 +1350,7 @@ OSM er et i fællesskab drevet, globalt offentligt domæne kortlægningsprojekt.
     <string name="osmo_session_id_share">Session url til at spore enhed (%1$s)</string>
     <string name="osmo_tracker_id_share">For at oprette forbindelse til målenheden %2$s, tryk på linket %3$s eller angiv sporings-id (%1$s)</string>
     <string name="osmo_track_interval">Logningsinterval</string>
-    <string name="osmo_track_interval_descr">Vælg tidsinterval til at sende placering</string>
+    <string name="osmo_track_interval_descr">Vælg tidsinterval for afsendelse af positionsdata.</string>
     <string name="int_days">dage</string>
     <string name="osmo_connect_menu">Forbind</string>
     <string name="osmo_expire_group">Udløber om</string>
@@ -1485,7 +1485,7 @@ OSM er et i fællesskab drevet, globalt offentligt domæne kortlægningsprojekt.
     <string name="gpx_monitoring_stop">Stop GPX logning</string>
     <string name="gpx_start_new_segment">Start nyt segment</string>
     <string name="lang_fa">Persisk</string>
-    <string name="map_preferred_locale_descr">Foretrukket sprog for etiketter på kortet (hvis sproget ikke findes skiftes til engelsk eller lokale navne)</string>
+    <string name="map_preferred_locale_descr">Foretrukket sprog for etiketter på kortet (hvis ikke tilgængelig skiftes til engelsk eller lokale navne).</string>
     <string name="map_preferred_locale">Foretrukket sprog på kort</string>
     <string name="stop_navigation_service">Stop</string>
     <string name="enable_sleep_mode">Aktiver GPS baggrundstilstand</string>
@@ -1516,7 +1516,7 @@ OSM er et i fællesskab drevet, globalt offentligt domæne kortlægningsprojekt.
     <string name="rendering_attr_coloredBuildings_name">Farvekod bygninger efter type</string>
 
     <string name="av_camera_pic_size">Kamera billedstørrelse</string>
-    <string name="av_camera_pic_size_descr">Vælg billedstørrelse for intern kamera</string>
+    <string name="av_camera_pic_size_descr">Vælg billedstørrelsen for det interne kamera.</string>
 
     <string name="rendering_value_car_name">Bil</string>
     <string name="rendering_value_bicycle_name">Cykel</string>
@@ -1641,10 +1641,10 @@ OSM er et i fællesskab drevet, globalt offentligt domæne kortlægningsprojekt.
     <string name="avoid_roads_msg">Generere en alternativ rute ved at vælge veje der skal undgås</string>
 
     <string name="proxy_pref_title">Proxy</string>
-    <string name="proxy_pref_descr">Opsæt en proxy til Internetkommunikation</string>
+    <string name="proxy_pref_descr">Angiv en Internet-proxy.</string>
     <string name="settings_privacy">Privatliv</string>
     <string name="enable_proxy_title">Aktiver HTTP proxy</string>
-    <string name="enable_proxy_descr">Konfigurer HTTP-proxy for alle netværksanmodninger</string>
+    <string name="enable_proxy_descr">Konfigurer en HTTP-proxy for alle netværksanmodninger.</string>
     <string name="proxy_host_title">Proxy vært</string>
     <string name="proxy_host_descr">Konfigurer proxy værtsnavn (f.eks. 127.0.0.1).</string>
     <string name="proxy_port_title">Proxy port</string>
@@ -2182,7 +2182,7 @@ OSM er et i fællesskab drevet, globalt offentligt domæne kortlægningsprojekt.
     <string name="rec_split_title">"Brug  automatisk opdeling"</string>
     <string name="rec_split_desc">Overskriv klip når lagerpladsen er fuld.</string>
     <string name="rec_split_clip_length">Kliplængde</string>
-    <string name="rec_split_clip_length_desc">Længden af hver optaget klip bliver ikke længere end det angivne tidsinterval</string>
+    <string name="rec_split_clip_length_desc">Øvre tidsgrænse for optagede videoklip.</string>
     <string name="rec_split_storage_size">Lagerplads</string>
     <string name="rec_split_storage_size_desc">Lagerplads, der kan bruges af alle optagede klip.</string>
     <string name="hourly">Time</string>
@@ -2254,7 +2254,7 @@ OSM er et i fællesskab drevet, globalt offentligt domæne kortlægningsprojekt.
     <string name="osm_editors_ranking">Rangering af OSM bidragsydere</string>
     <string name="osm_live_subscription">OsmAnd Live-abonnement</string>
     <string name="osm_live_subscribe_btn">Tilmeld</string>
-    <string name="osm_live_email_desc">Skal bruges til at give oplysninger om bidrag</string>
+    <string name="osm_live_email_desc">Nødvendig for at at give oplysninger om bidrag.</string>
     <string name="osm_live_user_public_name">Offentligt navn</string>
     <string name="osm_live_hide_user_name">Vis ikke navn i rapporter</string>
     <string name="osm_live_support_region">Understøttet område</string>
@@ -2597,7 +2597,7 @@ Repræsenterer område: %1$s x %2$s</string>
     <string name="quick_action_map_underlay_switch">Kortunderlejring ændret til \"%s\".</string>
     <string name="quick_action_page_list_descr">Tryk på genvejen vil gennemløbe nedenstående liste.</string>
     <string name="auto_split_recording_title">Opdel automatisk optagelser efter et ophold</string>
-	<string name="auto_split_recording_descr">Start et nyt segment efter ophold på 6 min., et nyt spor efter 2 t, eller en ny fil efter længere ophold, hvis datoen er ændret.</string>
+	<string name="auto_split_recording_descr">Start et nyt segment efter ophold på 6 min., et nyt spor efter 2 t eller en ny fil efter let ængere ophold, hvis datoen er ændret.</string>
     <string name="release_2_6">• Ny funktion: Genvejsknap 
 \n 
 \n  • Forbedret respons på berøringsskærm (fx. samtidig panorering og zoom) 
@@ -2703,7 +2703,7 @@ Repræsenterer område: %1$s x %2$s</string>
     <string name="index_item_depth_points_northern_hemisphere">Havdybdepunkter for den nordlige halvkugle</string>
     <string name="download_depth_countours">Havdybdekonturer</string>
     <string name="nautical_maps">Søkort</string>
-    <string name="depth_contour_descr">Kortsæt der indeholder dybdekonturlinjer og -punkter.</string>
+    <string name="depth_contour_descr">Kortsæt der indeholder havdybdekonturlinjer og -punkter.</string>
     <string name="subscribe_email_error">Fejl</string>
     <string name="subscribe_email_desc">Abonner på e-mail listen om rabatter og hent yderligere 3 kort!</string>
     <string name="no_overlay">Ingen overleejring</string>
@@ -2711,8 +2711,7 @@ Repræsenterer område: %1$s x %2$s</string>
     <string name="quick_action_add_destination">Tilføj destination</string>
     <string name="quick_action_replace_destination">Udskift destination</string>
     <string name="quick_action_add_first_intermediate">Tilføj første mellemliggende punkt</string>
-    <string name="quick_action_add_destination_desc">Tryk på genvejen vil tilføje en destination på skærmens centrum.
-Tidligere destination bliver sidste mellemliggende punkt.</string>
+    <string name="quick_action_add_destination_desc">Tryk på genvejen vil tilføje en destination på skærmens centrum. Den tidligere destination bliver den sidste mellemliggende destination.</string>
     <string name="quick_action_replace_destination_desc">Tryk på genvejen vil erstatte destinationen med skærmens centrum.</string>
     <string name="quick_action_add_first_intermediate_desc">Tryk på genvejen vil tilføje et første mellemliggende punkt på skærmens centrum.</string>
     <string name="quick_action_auto_zoom">Auto kortzoom til/fra</string>
@@ -2852,7 +2851,7 @@ Tidligere destination bliver sidste mellemliggende punkt.</string>
     <string name="empty_state_my_tracks">Tilføj og optag spor</string>
     <string name="empty_state_my_tracks_desc">Gem eller importer spor, der skal vises.</string>
     <string name="empty_state_favourites">Tilføj favoritter</string>
-    <string name="empty_state_favourites_desc">Tilføj favoritter til kortet, eller importer dem fra en fil</string>
+    <string name="empty_state_favourites_desc">Tilføj favoritter til kortet eller importer dem fra en fil.</string>
     <string name="import_track">Importer spor</string>
     <string name="import_track_desc">Filen %1$s indeholder ingen rutepunkter, importer den som et spor?</string>
     <string name="move_point">Flyt punkt</string>
@@ -2939,7 +2938,7 @@ Tidligere destination bliver sidste mellemliggende punkt.</string>
     <string name="import_as_favorites">Importer som favoritter</string>
     <string name="import_file">Importer fil</string>
 	<string name="tap_on_map_to_hide_interface_descr">Tryk et vilkårligt sted på kortet skjuler grænsefladen og skifter mellem fuldskærmstilstand.</string>
-    <string name="tap_on_map_to_hide_interface">Tryk på kortet for at skjule grænsefladen</string>
+    <string name="tap_on_map_to_hide_interface">Fuldskærmstilstand</string>
     <string name="show_on_top_bar">Vis på topbjælke</string>
     <string name="mark_passed">Marker som passeret</string>
     </resources>
