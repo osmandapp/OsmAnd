@@ -546,7 +546,7 @@ Au-delà la navigation bascule automatiquement sur le service en ligne CloudMade
     <string name="shared_string_settings">Paramètres</string>
     <string name="save_current_track_descr">Enregistrer la trace courante sur la carte SD</string>
     <string name="save_current_track">Enregistrer la trace GPX</string>
-    <string name="save_track_interval_descr">Sélectionnez l\'intervalle d\'enregistrement de la trace pendant la navigation</string>
+    <string name="save_track_interval_descr">Sélectionnez l\'intervalle d\'enregistrement de la trace pendant l\'itinéraire</string>
     <string name="save_track_interval">Intervalle d\'enregistrement pendant la navigation</string>
     <string name="save_track_to_gpx_descrp">Une trace GPX est enregistrée automatiquement dans le dossier des traces pendant l\'itinéraire</string>
     <string name="save_track_to_gpx">Enregistrer automatiquement la trace en cours de navigation</string>
@@ -1187,7 +1187,7 @@ Mémoire proportionnelle %4$s Mo (limite Android %5$s Mo, Dalvik %6$s Mo).</stri
     <string name="destination_point">Destination %1$s</string>
     <string name="osb_author_dialog_password">Mot de passe OSM (optionnel)</string>
     <string name="av_camera_focus">Mise au point de l\'appareil photo</string>
-    <string name="av_camera_focus_descr">Sélectionnez le type de mise au point pour l\'appareil photo</string>
+    <string name="av_camera_focus_descr">Sélectionnez le type de mise au point de l\'appareil photo</string>
     <string name="av_camera_focus_auto">Mise au point automatique</string>
     <string name="av_camera_focus_hiperfocal">Hyperfocale</string>
     <string name="av_camera_focus_edof">Profondeur de champ étendue (EDOF)</string>
@@ -1195,7 +1195,7 @@ Mémoire proportionnelle %4$s Mo (limite Android %5$s Mo, Dalvik %6$s Mo).</stri
     <string name="av_camera_focus_macro">Mode macro</string>
     <string name="av_camera_focus_continuous">L\'appareil photo essaie de faire la mise au point en continu</string>
     <string name="av_photo_play_sound">Émettre un son lors de la prise de photos</string>
-    <string name="av_photo_play_sound_descr">Choisir d\'émettre un son lors de la prise de photos</string>
+    <string name="av_photo_play_sound_descr">Émettre un son lors de la prise de photos</string>
 
 
     <string name="map_magnifier">Zoom de la carte</string>
@@ -1346,7 +1346,7 @@ Mémoire proportionnelle %4$s Mo (limite Android %5$s Mo, Dalvik %6$s Mo).</stri
     <string name="osmo_mode_restart">Redémarrer la session OsMo</string>
     <string name="osmo_settings_debug">Informations de débogage</string>
     <string name="osmo_tracker_id">Identifiant de suivi</string>
-	<string name="osmo_tracker_id_descr">Cliquez pour afficher l\'identifiant de suivi</string>
+	<string name="osmo_tracker_id_descr">Appuyez pour afficher l\'identifiant de suivi</string>
     <string name="osmo_session_token">Jeton de session : %1$s</string>
     <string name="osmo_auth_pending">En attente d\'autorisation…</string>
     <string name="osmo_locations_sent">Positions envoyées : %1$d (en attente : %2$d)</string>
@@ -1509,7 +1509,7 @@ Voulez-vous effectuer à une nouvelle inscription ?</string>
     <string name="enable_sleep_mode">Démarrer l’exécution de la tâche de fond GPS ?</string>
     <string name="gps_wake_up_timer">Intervalle de réveil du GPS</string>
     <string name="sleep_mode_stop_dialog">Arrêter l’exécution de la tâche de fond GPS ?</string>
-    <string name="map_preferred_locale_descr">Langue préférée pour les libellés sur la carte (en cas d\'indisponibilité affiche les noms anglais ou locaux)</string>
+    <string name="map_preferred_locale_descr">Langue préférée des libellés sur la carte (en cas d\'indisponibilité affiche les noms anglais ou locaux)</string>
     <string name="map_preferred_locale">Langue préférée pour la carte</string>
     <string name="local_map_names">Noms locaux</string>
     <string name="lang_sw">swahili</string>
@@ -2041,7 +2041,7 @@ Voulez-vous effectuer à une nouvelle inscription ?</string>
     <string name="plugins_menu_group">Greffons</string>
     <string name="first_usage_item">Premiers pas</string>
     <string name="first_usage_item_description">Comment télécharger des cartes et définir les paramètres de base</string>
-    <string name="navigation_item_description">Configurer la navigation</string>
+    <string name="navigation_item_description">Paramétrer la navigation</string>
     <string name="faq_item">FAQ</string>
     <string name="faq_item_description">Foire Aux Questions</string>
     <string name="map_viewing_item">Affichage de la carte</string>
@@ -2106,7 +2106,7 @@ Voulez-vous effectuer à une nouvelle inscription ?</string>
     <string name="dashboard_or_drawer_description">Nouvelle option permettant de définir le comportement du bouton Menu : lancement du Tableau de bord ou du Menu statique ? Ce paramètre peut être modifié par la suite dans les préférences.</string>
     <string name="access_from_map_description">Le bouton Menu lance le tableau de bord (plutôt que le Menu)</string>
     <string name="access_from_map">Accès depuis la carte</string>
-    <string name="please_specify_poi_type_only_from_list">Merci d\'indiquer un type pour ce point d\'intérêt ou l\'ignorer</string>
+    <string name="please_specify_poi_type_only_from_list">Indiquez un type pour ce point d\'intérêt ou ignorez</string>
     <string name="routing_attr_avoid_stairs_name">Éviter les escaliers</string>
 	<string name="routing_attr_avoid_borders_name">Éviter le franchissement de frontières</string>
 	<string name="routing_attr_avoid_stairs_description">Éviter les escaliers</string>
@@ -2133,7 +2133,7 @@ Voulez-vous effectuer à une nouvelle inscription ?</string>
     <string name="av_video_quality_low">Qualité la plus basse</string>
     <string name="av_video_quality_high">Qualité la plus élevée</string>
     <string name="av_video_quality">Qualité de la sortie vidéo</string>
-    <string name="av_video_quality_descr">Sélectionnez la qualité de la sortie vidéo</string>
+    <string name="av_video_quality_descr">Sélectionnez la qualité de la vidéo</string>
     <string name="av_audio_format">Format de la sortie audio</string>
     <string name="av_audio_format_descr">Sélectionnez le format de la sortie audio</string>
     <string name="av_audio_bitrate">Bitrate audio</string>
@@ -2154,7 +2154,7 @@ Voulez-vous effectuer à une nouvelle inscription ?</string>
     <string name="impassable_road_desc">Sélectionnez les routes à éviter</string>
     <string name="shared_string_sound">Son</string>
     <string name="select_voice_provider">Sélectionnez la voix de guidage</string>
-    <string name="select_voice_provider_descr">Sélectionnez et téléchargez la voix de guidage pour votre langue</string>
+    <string name="select_voice_provider_descr">Sélectionnez ou téléchargez la voix de guidage dans votre langue</string>
     <string name="live_updates">Mises à jour en temps réel</string>
     <string name="available_maps">Cartes disponibles</string>
     <string name="last_update">Dernière mise à jour : %s</string>
@@ -2178,9 +2178,9 @@ Voulez-vous effectuer à une nouvelle inscription ?</string>
     <string name="rec_split_title">Définir un intervalle d\'enregistrement</string>
     <string name="rec_split_desc">Écraser les enregistrements quand l\'espace utilisé dépasse la capacité de stockage</string>
     <string name="rec_split_clip_length">Durée de l\'enregistrement</string>
-    <string name="rec_split_clip_length_desc">La longueur de chaque enregistrement ne dépassera pas l’intervalle de temps défini</string>
+    <string name="rec_split_clip_length_desc">Durée maximale d\'enregistrement.</string>
     <string name="rec_split_storage_size">Taille de l\'espace de stockage</string>
-    <string name="rec_split_storage_size_desc">Espace maximum alloué pour tous les enregistrements</string>
+    <string name="rec_split_storage_size_desc">Espace maximum autorisé pour tous les enregistrements</string>
     <string name="shared_string_type">Type</string>
     <string name="switch_start_finish">Inverser Départ et Destination</string>
     <string name="rendering_attr_hideIcons_name">Icônes des points d\'intérêt</string>
@@ -2300,15 +2300,15 @@ Si vous appréciez OsmAnd et OSM et que vous souhaitez soutenir ces projets, c\'
     <string name="access_smart_autoannounce">Annonces intelligentes</string>
     <string name="access_smart_autoannounce_descr">Annoncer uniquement lorsque la direction de la destination est modifiée</string>
     <string name="access_autoannounce_period">Fréquence des annonces</string>
-    <string name="access_autoannounce_period_descr">Temps minimum entre deux annonces</string>
+    <string name="access_autoannounce_period_descr">Durée minimum entre deux annonces</string>
     <string name="access_no_destination">La destination n\'est pas définie</string>
     <string name="map_widget_magnetic_bearing">Cap magnétique</string>
     <string name="map_widget_bearing">Cap relatif</string>
     <string name="access_disable_offroute_recalc">Ne pas recalculer l\'itinéraire après l\'avoir quitté</string>
-    <string name="access_disable_offroute_recalc_descr">Permet de ne pas recalculer un nouvel itinéraire lorsque vous quittez l\'itinéraire prévu</string>
-    <string name="access_disable_wrong_direction_recalc_descr">Permet de ne pas recalculer un nouvel itinéraire lorsque vous faites demi-tour</string>
+    <string name="access_disable_offroute_recalc_descr">Évite de calculer un nouvel itinéraire lorsque vous quittez l\'itinéraire prévu</string>
+    <string name="access_disable_wrong_direction_recalc_descr">Évite de calculer un nouvel itinéraire lorsque vous faites demi-tour</string>
     <string name="access_disable_wrong_direction_recalc">Ne pas recalculer l\'itinéraire lors d\'un demi-tour</string>
-    <string name="use_osm_live_routing_description">Activer la navigation OsmAnd Live intégrant les modifications en temps réel</string>
+    <string name="use_osm_live_routing_description">Activer la navigation OsmAnd Live</string>
 	<string name="use_osm_live_routing">Navigation OsmAnd Live</string>
     <string name="follow_us">Suivez-nous</string>
     <!-- string name="lat_lon_pattern">Lat. : %1$.5f Lon. : %2$.5f</string -->
@@ -2369,7 +2369,7 @@ Si vous appréciez OsmAnd et OSM et que vous souhaitez soutenir ces projets, c\'
     <string name="shared_string_change">Modifier</string>
     <string name="get_started">Démarrer</string>
     <string name="routing_attr_short_way_name">Trajet économe en carburant</string>
-    <string name="routing_attr_short_way_description">Suivre un trajet économe en carburant (trajet habituellement plus court)</string>
+    <string name="routing_attr_short_way_description">Suivre un trajet économe en carburant (habituellement plus court)</string>
     <string name="no_update_info_desc">Ne pas vérifier les mises à jour ni les offres promotionnelles OsmAnd</string>
     <string name="no_update_info">Ne pas afficher les mises à jour</string>
     <string name="skip_map_downloading">Ignorer le téléchargement des cartes</string>
@@ -2449,7 +2449,7 @@ Si vous appréciez OsmAnd et OSM et que vous souhaitez soutenir ces projets, c\'
 \n et bien plus…</string>
     <string name="shared_string_notifications">Notifications</string>
     <string name="trip_rec_notification_settings">Activer le démarrage rapide d\'enregistrement d\'itinéraire</string>
-    <string name="trip_rec_notification_settings_desc">Afficher une notification permettant de débuter l’Enregistrement de l\'itinéraire</string>
+    <string name="trip_rec_notification_settings_desc">Afficher une notification permettant d’enregistrer l\'itinéraire</string>
     <string name="osmo_share_location">Partager</string>
     <string name="osmo_service_running">Le service OsMo est actif</string>
     <string name="osmo_pause_location">Mettre en pause</string>
@@ -2463,7 +2463,7 @@ Si vous appréciez OsmAnd et OSM et que vous souhaitez soutenir ces projets, c\'
     <string name="upload_poi">Télécharger les points d\'intérêt</string>
     <string name="route_roundabout_short">Prenez la sortie %1$d</string>
     <string name="search_map_hint">Rechercher une ville ou une région</string>
-    <string name="routing_attr_allow_motorway_description">Autoriser les trajets sur autoroutes</string>
+    <string name="routing_attr_allow_motorway_description">Autoriser les trajets sur autoroute</string>
     <string name="routing_attr_allow_motorway_name">Autoriser les autoroutes</string>
     <string name="wiki_around">Articles Wikipédia à proximité</string>
     <string name="lang_sr_latn">Serbe (Latin)</string>
@@ -2522,7 +2522,7 @@ Si vous appréciez OsmAnd et OSM et que vous souhaitez soutenir ces projets, c\'
     <string name="quick_action_fav_name_descr">Si cette zone est vide, OsmAnd utilisera l\'adresse ou le nom du lieu.</string>
     <string name="quick_action_bug_message">Message</string>
     <string name="quick_action_category_descr">Vous pouvez indiquer une catégorie pour ce favori.</string>
-    <string name="quick_action_gpx_category_descr">Vous pouvez indiquer une catégorie pour ce point GPX.</string>
+    <string name="quick_action_gpx_category_descr">Vous pouvez indiquer une catégorie optionnelle</string>
     <string name="quick_action_poi_list">Liste des points d\'intérêt</string>
     <string name="quick_action_sh_poi_descr">Vous pouvez indiquer les catégories de points d\'intérêt à afficher sur la carte.</string>
     <string name="quick_action_map_style_action">Ajouter un style de carte</string>
@@ -2564,7 +2564,7 @@ Merci d\'indiquer un code long</string>
     <string name="navigate_point_olc_info_area">Code d\'emplacement valide
 représentant la zone : %1$s x %2$s</string>
     <string name="auto_split_recording_title">Découper automatiquement les enregistrements</string>
-	<string name="auto_split_recording_descr">Débuter un nouveau segment après une interruption de 6 min, une nouvelle trace après 2 h ou un nouveau fichier si l\'interruption est plus longue.</string>
+	<string name="auto_split_recording_descr">Débuter un nouveau segment après une interruption de 6 min, une nouvelle trace après 2 h ou un nouveau fichier en cas de changement de date.</string>
     <string name="quick_action_page_list_descr">Appuyez sur le bouton d\'action pour faire défiler la liste ci-dessous.</string>
     <string name="release_2_6">\\022 Nouvelle fonctionnalité : Bouton d\'action rapide 
 \n 
@@ -2583,7 +2583,7 @@ représentant la zone : %1$s x %2$s</string>
 \n • Améliorations des itinéraires à vélo : paramétrage du style de \"conduite\", possibilité d\'utiliser les données d\'altitude 
 \n 
 \n • Et de nombreuses autres améliorations et corrections d\'anomalies…</string>
-	<string name="rendering_attr_depthContours_description">Afficher les lignes de sonde</string>
+	<string name="rendering_attr_depthContours_description">Afficher les lignes et points de sonde.</string>
     <string name="rendering_attr_depthContours_name">Lignes de sonde maritimes</string>
 	<string name="routing_attr_height_obstacles_name">Utiliser les données d\'altitude</string>
     <string name="routing_attr_height_obstacles_description">Utiliser les données d\'altitude fournies par SRTM, ASTER et EU-DEM</string>
@@ -2770,7 +2770,7 @@ représentant la zone : %1$s x %2$s</string>
 \n • Un greffon additionnel permet d\'afficher les courbes de niveaux et les ombres du relief</string>
     <string name="shared_string_add_photos">Ajouter des photos</string>
     <string name="online_photos">Photos en ligne</string>
-    <string name="no_photos_descr">Aucune photo pour ce lieu</string>
+    <string name="no_photos_descr">Aucune photo pour ce lieu.</string>
     <string name="shared_string_install">Installer</string>
     <string name="mapillary">Mapillary</string>
     <string name="open_mapillary">Ouvrir Mapillary</string>
@@ -2780,7 +2780,7 @@ représentant la zone : %1$s x %2$s</string>
 \nPour cela, installez l\'application Mapillary depuis Google Play.</string>
     <string name="mapillary_action_descr">Participez en ajoutant vos photos détaillées sur Mapillary.</string>
     <string name="mapillary_widget">Gadget Mapillary</string>
-    <string name="mapillary_widget_descr">Vous permet de contribuer facilement à Mapillary</string>
+    <string name="mapillary_widget_descr">Vous permet de contribuer facilement à Mapillary.</string>
     <string name="mapillary_descr">Des photos en-ligne détaillées pour tous. Découvrez des lieux, collaborez ... capturez le monde.</string>
     <string name="plugin_mapillary_descr">Des photos détaillées pour tous. Découvrez des lieux, collaborez ... capturez le monde.</string>
     <string name="mapillary_image">Image Mapillary</string>
@@ -2868,7 +2868,7 @@ représentant la zone : %1$s x %2$s</string>
 <string name="keep_showing_on_map">Toujours afficher sur la carte</string>
     <string name="exit_without_saving">Quitter sans enregistrer ?</string>
     <string name="do_not_use_animations">Ne pas utiliser les animations</string>
-    <string name="do_not_use_animations_descr">Désactive les animations dans l\'application</string>
+    <string name="do_not_use_animations_descr">Désactive les animations dans l\'application.</string>
     <string name="osmand_extended_description_part6">Marche, randonnée, visite guidée
 \n• Carte des sentiers pédestres et de randonnée
 \n• Articles Wikipedia dans la langue de votre choix pour découvrir les lieux visités
@@ -2933,7 +2933,7 @@ représentant la zone : %1$s x %2$s</string>
     <string name="date_added">Date ajoutée</string>
     <string name="order_by">Trier par :</string>
     <string name="marker_show_distance_descr">Sélectionnez comment indiquer sur la carte la distance et la direction des marques :</string>
-    <string name="map_orientation_change_in_accordance_with_speed_descr">Indiquez ci-dessous à quelle vitesse l\'orientation de la carte doit basculer de \'Sens du déplacement\' à \'Boussole\'</string>
+    <string name="map_orientation_change_in_accordance_with_speed_descr">Indiquez ci-dessous à quelle vitesse l\'orientation de la carte doit basculer de \'Sens du déplacement\' à \'Boussole\'.</string>
     <string name="passed">Dernière utilisation : %1$s</string>
     <string name="show_guide_line">Afficher les lignes de guidage</string>
     <string name="show_arrows_on_the_map">Afficher les flèches sur la carte</string>
@@ -2958,7 +2958,7 @@ représentant la zone : %1$s x %2$s</string>
     <string name="fast_coordinates_input_descr">Définissez le format des coordonnées (ce format est modifiable plus tard dans Options).</string>
     <string name="fast_coordinates_input">Saisie rapide des coordonnées</string>
     <string name="routing_attr_avoid_ice_roads_fords_name">Éviter les routes sur glace, les fjords</string>
-    <string name="routing_attr_avoid_ice_roads_fords_description">Éviter les routes sur glace et les fjords</string>
+    <string name="routing_attr_avoid_ice_roads_fords_description">Éviter les routes sur glace et les fjords.</string>
     <string name="make_round_trip">Faire une boucle</string>
     <string name="shared_string_navigate">Naviguer</string>
     <string name="osn_modify_dialog_error">Une erreur s\'est produite : la note n\'a pas été enregistrée</string>
@@ -2989,7 +2989,7 @@ représentant la zone : %1$s x %2$s</string>
     <string name="import_as_favorites">Importer comme Favoris</string>
     <string name="import_file">Importer fichier</string>
 	<string name="tap_on_map_to_hide_interface_descr">Une tape n\'importe où sur la carte masque l\'interface et bascule en mode plein écran.</string>
-    <string name="tap_on_map_to_hide_interface">Taper sur la carte masque l\'interface</string>
+    <string name="tap_on_map_to_hide_interface">Mode plein écran</string>
     <string name="show_on_top_bar">Afficher dans la barre supérieure</string>
     <string name="mark_passed">Marquer comme passé</string>
     </resources>
