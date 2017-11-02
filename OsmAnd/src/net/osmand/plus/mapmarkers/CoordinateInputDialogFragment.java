@@ -609,7 +609,7 @@ public class CoordinateInputDialogFragment extends DialogFragment implements Osm
 	private void switchToNextInput(int id) {
 		if (id == R.id.latitude_edit_text) {
 			((OsmandTextFieldBoxes) mainView.findViewById(R.id.longitude_box)).select();
-		} else {
+		} else if (id == R.id.longitude_edit_text) {
 			((OsmandTextFieldBoxes) mainView.findViewById(R.id.name_box)).select();
 		}
 	}
