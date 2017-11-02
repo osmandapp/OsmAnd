@@ -828,7 +828,7 @@ Zachod: %2$s</string>
 	<string name="map_widget_next_next_turn">Pavarot praz adzіn</string>
 	<string name="map_widget_mini_route">Małaja mapa maršrutu</string>
 	<string name="bg_service_screen_lock">Blakavać ekran</string>
-	<string name="bg_service_screen_unlock">Razbłakavać ekran</string>
+	<string name="bg_service_screen_unlock">Razblakiravać ekran</string>
 	<string name="bg_service_screen_lock_toast">Ekran zabłakavany</string>
 	<string name="bg_service_interval">Zadajcie іntervał abudžeńnia:</string>
 	<string name="show_cameras">Kamery chutkaścі</string>
@@ -2307,14 +2307,14 @@ U vypadku, kali vy lubіcie OsmAnd і OSM і chočacie padtrymać jaho, heta іd
     <string name="search_map">Pošuk mapaŭ…</string>
     <string name="first_usage_wizard_desc">Dazvolcie OsmAnd vyznačyć vaša miescaznachodžańnie і prapanavać ściahnuć mapy dla hetaha rehіjonu.</string>
     <string name="location_not_found">Nie atrymałasia vyznačyć miescaznachodžańnie</string>
-    <string name="no_inet_connection">Niama Internet-zlučennia</string>
-    <string name="no_inet_connection_desc_map">Treba ściahnuć mapy.</string>
+    <string name="no_inet_connection">Niama Internet-zlučeńnia</string>
+    <string name="no_inet_connection_desc_map">Patrabujecca dla ściahvańnia mapaŭ.</string>
     <string name="search_location">Vyznačeńnie miescaznachodžańnia …</string>
     <string name="storage_free_space">Volnaje miesca</string>
     <string name="storage_place_description">Schovіšča źviestak OsmAnd (dla mapaŭ, śladoŭ і h.d.): %1$s.</string>
     <string name="give_permission">Dazvolić</string>
     <string name="allow_access_location">Dazvolić dostup da miescaznachodžańnia</string>
-    <string name="first_usage_greeting">Prakladvajcie maršruty i adkryvajcie novyja miescy biez Internet-zlučennia</string>
+    <string name="first_usage_greeting">Prakładvajcie maršruty i adkryvajcie novyja miescy biez Internet-zlučeńnia</string>
     <string name="search_my_location">Znajsci maju pazicyju</string>
     <string name="no_update_info_desc">Nie praviarać abnaŭlienni viersij i znižki ad OsmAnd</string>
     <string name="no_update_info">Nie pakazvać abnaŭlienni</string>
@@ -2427,7 +2427,7 @@ U vypadku, kali vy lubіcie OsmAnd і OSM і chočacie padtrymać jaho, heta іd
     <string name="add_new_folder">Dadać novuju tečku</string>
     <string name="points_delete_multiple_succesful">Kropka(i) paspiachova vydaleny.</string>
     <string name="points_delete_multiple">Vy źbirajeciesia vydalić %1$d kropku(i). Vy ŭpeŭnieny?</string>
-    <string name="gpx_track">Trek</string>
+    <string name="gpx_track">Śled</string>
     <string name="max_speed">Maks. chutkaść</string>
     <string name="average_speed">Siaredniaja chutkaść</string>
     <string name="shared_string_max">Maks.</string>
@@ -2470,8 +2470,8 @@ U vypadku, kali vy lubіcie OsmAnd і OSM і chočacie padtrymać jaho, heta іd
     <string name="rendering_value_light_brown_name">Svetla-karyčnievy</string>
     <string name="rendering_value_dark_brown_name">Ciomna-karyčnievy</string>
     <string name="search_hint">Uviadzicie nazvu horada, adras, POI</string>
-    <string name="translit_name_if_miss">Tranślitaravać kali nazva na %1$s adsutničaje</string>
-    <string name="translit_names">Translitaracyja nazvaŭ</string>
+    <string name="translit_name_if_miss">Tranślitaryravać kali nazva na %1$s adsutničaje</string>
+    <string name="translit_names">Tranślitaracyja nazvaŭ</string>
     <string name="edit_filter">Redahavać katehoryi</string>
     <string name="subcategories">Padkatehoryi</string>
     <string name="selected_categories">Abranyja katehoryi</string>
@@ -2741,8 +2741,8 @@ U vypadku, kali vy lubіcie OsmAnd і OSM і chočacie padtrymać jaho, heta іd
     <string name="mapillary_menu_descr_tile_cache">Abnavić frahmienty, kab ubačyć aktuaĺnyja danyja.</string>
     <string name="mapillary_menu_title_tile_cache">Keš frahmientaŭ</string>
     <string name="shared_string_reset">Skinuć</string>
-    <string name="store_tracks_in_monthly_directories">Zachavać zapisanyja treki ŭ miesiačnych tečkach</string>
-    <string name="store_tracks_in_monthly_directories_descrp">Zachavać zapisanyja treki ŭ padtečki na asnovie miesiaca zapisu (jak 2017-01).</string>
+    <string name="store_tracks_in_monthly_directories">Zachavać zapisanyja ślady ŭ miesiačnych tečkach</string>
+    <string name="store_tracks_in_monthly_directories_descrp">Zachavać zapisanyja ślady ŭ padtečki na asnovie miesiaca zapisu (naprykład, 2017-01).</string>
     <string name="average">Siaredniaja</string>
     <string name="of">%1$d z %2$d</string>
     <string name="ascent_descent">Pad\'jom/Cpusk</string>
@@ -2823,7 +2823,7 @@ U vypadku, kali vy lubіcie OsmAnd і OSM і chočacie padtrymać jaho, heta іd
     <string name="marker_moved_to_active">Markier mapy staŭ aktyŭnym</string>
     <string name="shared_string_list">Śpis</string>
     <string name="shared_string_groups">Hrupy</string>
-    <string name="passed">Projdziena: %1$s</string>
+    <string name="passed">Apošniaje vykarystannie: %1$s</string>
     <string name="make_active">Aktyvizavać</string>
     <string name="today">Siońnia</string>
     <string name="yesterday">Učora</string>
@@ -2884,8 +2884,12 @@ U vypadku, kali vy lubіcie OsmAnd і OSM і chočacie padtrymać jaho, heta іd
 	<string name="shared_string_back">Nazad</string>
 	<string name="view">Prahladzieć</string>
 	<string name="waypoints_added_to_map_markers">Kropki maršruta dadadzienyja ŭ markiery mapy</string>
-	<string name="import_gpx_file_description">mohuć być impartavanyja jak Uliublionyja kropki ci jak fajl sliedu.</string>
-    <string name="import_as_gpx">Impartavać jak GPX-fajl</string>
-    <string name="import_as_favorites">Impartavać jak Uliublionyja</string>
-    <string name="import_file">Impartavać fajl</string>
-	</resources>
+	<string name="import_gpx_file_description">mohuć być impartavanyja jak Ulubionyja kropki ci jak fajł śledu.</string>
+    <string name="import_as_gpx">Impartavać jak GPX-fajł</string>
+    <string name="import_as_favorites">Impartavać jak Ulubionyja</string>
+    <string name="import_file">Impartavać fajł</string>
+	<string name="tap_on_map_to_hide_interface_descr">Dotyk u liubym miescy na mapie chavaje interfiejs i pieramykaje režym poŭnaha ekrana.</string>
+    <string name="tap_on_map_to_hide_interface">Dotyk na mapie chavaje interfiejs</string>
+    <string name="show_on_top_bar">Pakazać na vierchniaj paneli</string>
+    <string name="mark_passed">Adznačyć prajdzienyja</string>
+    </resources>

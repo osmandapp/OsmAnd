@@ -9,19 +9,23 @@
          3. All your modified/created strings are in the top of the file (to make easier find what\'s translated).
     PLEASE: Have a look at http://code.google.com/p/osmand/wiki/UIConsistency, it may really improve your and our work  :-)  Thx - Hardy
     -->
+    <string name="shared_string_paste">Paste</string>
     <string name="coordinate_input_accuracy_description">Automatically switch to the next field after entering %1$d digits after the decimal point</string>
     <string name="coordinate_input_accuracy">%1$d digits</string>
     <string name="go_to_next_field">Go to next field</string>
-	<string name="import_gpx_file_description">can be imported as Favorites points, or as track file.</string>
-	<string name="import_as_gpx">Import as GPX file</string>
-	<string name="import_as_favorites">Import as Favorites</string>
-	<string name="import_file">Import file</string>
-	<string name="shared_string_paste">Paste</string>
-	<string name="view">View</string>
-	<string name="waypoints_added_to_map_markers">Waypoints added to map markers</string>
+    <string name="tap_on_map_to_hide_interface_descr">A tap on the map toggles the control buttons and widgets.</string>
+    <string name="tap_on_map_to_hide_interface">Full screen mode</string>
+    <string name="show_on_top_bar">Show on Top Bar</string>
+    <string name="mark_passed">Mark passed</string>
+    <string name="import_gpx_file_description">can be imported as Favorites points, or as track file.</string>
+    <string name="import_as_gpx">Import as GPX file</string>
+    <string name="import_as_favorites">Import as Favorites</string>
+    <string name="import_file">Import file</string>
 	<string name="wrong_input">Wrong input</string>
 	<string name="enter_new_name">Enter new name</string>
 	<string name="shared_string_back">Back</string>
+	<string name="view">View</string>
+	<string name="waypoints_added_to_map_markers">Waypoints added to map markers</string>
 	<string name="wrong_format">Wrong format</string>
     <string name="shared_string_road">Road</string>
     <string name="show_map">Show map</string>
@@ -40,7 +44,7 @@
     <string name="fast_coordinates_input_descr">Choose coordinate input format. You can always change it by tapping Options.</string>
     <string name="fast_coordinates_input">Fast coordinates input</string>
     <string name="routing_attr_avoid_ice_roads_fords_name">Avoid ice roads, fords</string>
-    <string name="routing_attr_avoid_ice_roads_fords_description">Avoid ice roads and fords</string>
+    <string name="routing_attr_avoid_ice_roads_fords_description">Avoid ice roads and fords.</string>
     <string name="use_location">Use position</string>
     <string name="add_location_as_first_point_descr">Add your position as first point to plan perfect route.</string>
     <string name="my_location">My position</string>

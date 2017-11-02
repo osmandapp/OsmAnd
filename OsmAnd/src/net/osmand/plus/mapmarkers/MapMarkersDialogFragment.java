@@ -136,6 +136,7 @@ public class MapMarkersDialogFragment extends android.support.v4.app.DialogFragm
 			@Override
 			public void onClick(View view) {
 				OptionsBottomSheetDialogFragment fragment = new OptionsBottomSheetDialogFragment();
+				fragment.setUsedOnMap(false);
 				fragment.setListener(createOptionsFragmentListener());
 				Bundle args = new Bundle();
 				int pos = viewPager.getCurrentItem();
@@ -235,6 +236,7 @@ public class MapMarkersDialogFragment extends android.support.v4.app.DialogFragm
 			public void sortByOnClick() {
 				if (mapActivity != null) {
 					OrderByBottomSheetDialogFragment fragment = new OrderByBottomSheetDialogFragment();
+					fragment.setUsedOnMap(false);
 					fragment.setListener(createOrderByFragmentListener());
 					fragment.show(mapActivity.getSupportFragmentManager(), OrderByBottomSheetDialogFragment.TAG);
 				}
@@ -244,6 +246,7 @@ public class MapMarkersDialogFragment extends android.support.v4.app.DialogFragm
 			public void showDirectionOnClick() {
 				if (mapActivity != null) {
 					ShowDirectionBottomSheetDialogFragment fragment = new ShowDirectionBottomSheetDialogFragment();
+					fragment.setUsedOnMap(false);
 					fragment.setListener(createShowDirectionFragmentListener());
 					fragment.show(mapActivity.getSupportFragmentManager(), ShowDirectionBottomSheetDialogFragment.TAG);
 				}

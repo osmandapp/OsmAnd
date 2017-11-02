@@ -239,39 +239,24 @@ public class MapMarkersLayer extends OsmandMapLayer implements IContextMenuProvi
 				float[] pos = new float[2];
 				pm.getPosTan(pm.getLength() / 2, pos, null);
 
-				float generalDist = (float) MapUtils.getDistance(myLoc.getLatitude(), myLoc.getLongitude(), marker.getLatitude(), marker.getLongitude());
-				String generalDistSt = OsmAndFormatter.getFormattedDistance(generalDist, view.getApplication());
-				boolean locationInvisible = locX < 0 || locX > tileBox.getPixWidth() || locY < 0 || locY > tileBox.getPixHeight();
-				String distanceText;
-				if (locationInvisible) {
-					float centerToMarkerDist = (float) MapUtils.getDistance(tileBox.getLatLonFromPixel(pos[0], pos[1]), marker.getLatitude(), marker.getLongitude());
-					String centerToMarkerDistSt = OsmAndFormatter.getFormattedDistance(centerToMarkerDist, view.getApplication());
-					if (locX >= markerX) {
-						distanceText = centerToMarkerDistSt + " • " + generalDistSt;
-					} else {
-						distanceText = generalDistSt + " • " + centerToMarkerDistSt;
-					}
-				} else {
-					distanceText = generalDistSt;
-				}
+				float dist = (float) MapUtils.getDistance(myLoc.getLatitude(), myLoc.getLongitude(), marker.getLatitude(), marker.getLongitude());
+				String distSt = OsmAndFormatter.getFormattedDistance(dist, view.getApplication());
+				String text = distSt + " • " + marker.getName(map);
 				Rect bounds = new Rect();
-				textAttrs.paint.getTextBounds(distanceText, 0, distanceText.length(), bounds);
+				textAttrs.paint.getTextBounds(text, 0, text.length(), bounds);
 				float hOffset = pm.getLength() / 2 - bounds.width() / 2;
 				lineAttrs.paint.setColor(colors[marker.colorIndex]);
 
 				canvas.rotate(-tileBox.getRotate(), tileBox.getCenterPixelX(), tileBox.getCenterPixelY());
 				canvas.drawPath(linePath, lineAttrs.paint);
-				if (locationInvisible && !(pos[0] == 0 && pos[1] == 0)) {
-					canvas.drawCircle(pos[0], pos[1], 5, new Paint());
-				}
 				if (locX >= markerX) {
 					canvas.rotate(180, pos[0], pos[1]);
-					canvas.drawTextOnPath(distanceText, linePath, hOffset, bounds.height() + VERTICAL_OFFSET, textAttrs.paint2);
-					canvas.drawTextOnPath(distanceText, linePath, hOffset, bounds.height() + VERTICAL_OFFSET, textAttrs.paint);
+					canvas.drawTextOnPath(text, linePath, hOffset, bounds.height() + VERTICAL_OFFSET, textAttrs.paint2);
+					canvas.drawTextOnPath(text, linePath, hOffset, bounds.height() + VERTICAL_OFFSET, textAttrs.paint);
 					canvas.rotate(-180, pos[0], pos[1]);
 				} else {
-					canvas.drawTextOnPath(distanceText, linePath, hOffset, -VERTICAL_OFFSET, textAttrs.paint2);
-					canvas.drawTextOnPath(distanceText, linePath, hOffset, -VERTICAL_OFFSET, textAttrs.paint);
+					canvas.drawTextOnPath(text, linePath, hOffset, -VERTICAL_OFFSET, textAttrs.paint2);
+					canvas.drawTextOnPath(text, linePath, hOffset, -VERTICAL_OFFSET, textAttrs.paint);
 				}
 				canvas.rotate(tileBox.getRotate(), tileBox.getCenterPixelX(), tileBox.getCenterPixelY());
 			}

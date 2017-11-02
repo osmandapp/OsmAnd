@@ -175,6 +175,18 @@ public class MapContextMenuFragment extends Fragment implements DownloadEvents {
 			}
 		});
 
+		// Left subtitle button
+		final Button leftSubtitleButton = (Button) view.findViewById(R.id.subtitle_button);
+		leftSubtitleButton.setOnClickListener(new View.OnClickListener() {
+			@Override
+			public void onClick(View v) {
+				TitleButtonController leftSubtitleButtonController = menu.getLeftSubtitleButtonController();
+				if (leftSubtitleButtonController != null) {
+					leftSubtitleButtonController.buttonPressed();
+				}
+			}
+		});
+
 		// Left download button
 		final Button leftDownloadButton = (Button) view.findViewById(R.id.download_button_left);
 		leftDownloadButton.setOnClickListener(new View.OnClickListener() {
@@ -686,14 +698,17 @@ public class MapContextMenuFragment extends Fragment implements DownloadEvents {
 			TitleButtonController leftTitleButtonController = menu.getLeftTitleButtonController();
 			TitleButtonController rightTitleButtonController = menu.getRightTitleButtonController();
 			TitleButtonController topRightTitleButtonController = menu.getTopRightTitleButtonController();
+			TitleButtonController leftSubtitleButtonController = menu.getLeftSubtitleButtonController();
 			TitleButtonController leftDownloadButtonController = menu.getLeftDownloadButtonController();
 			TitleButtonController rightDownloadButtonController = menu.getRightDownloadButtonController();
 			TitleProgressController titleProgressController = menu.getTitleProgressController();
 
 			// Title buttons
 			boolean showTitleButtonsContainer = (leftTitleButtonController != null || rightTitleButtonController != null);
+			boolean showTitleDivider = leftSubtitleButtonController != null;
 			final View titleButtonsContainer = view.findViewById(R.id.title_button_container);
 			titleButtonsContainer.setVisibility(showTitleButtonsContainer ? View.VISIBLE : View.GONE);
+			view.findViewById(R.id.title_divider).setVisibility(showTitleDivider ? View.VISIBLE : View.GONE);
 
 			// Left title button
 			final Button leftTitleButton = (Button) view.findViewById(R.id.title_button);
@@ -705,7 +720,7 @@ public class MapContextMenuFragment extends Fragment implements DownloadEvents {
 				Drawable leftIcon = leftTitleButtonController.getLeftIcon();
 				if (leftIcon != null) {
 					leftTitleButton.setCompoundDrawablesWithIntrinsicBounds(leftIcon, null, null, null);
-					leftTitleButton.setCompoundDrawablePadding(dpToPx(4f));
+					leftTitleButton.setCompoundDrawablePadding(dpToPx(8f));
 				}
 
 				if (leftTitleButtonController.needRightText) {
@@ -727,7 +742,7 @@ public class MapContextMenuFragment extends Fragment implements DownloadEvents {
 
 				Drawable leftIcon = rightTitleButtonController.getLeftIcon();
 				rightTitleButton.setCompoundDrawablesWithIntrinsicBounds(leftIcon, null, null, null);
-				rightTitleButton.setCompoundDrawablePadding(dpToPx(4f));
+				rightTitleButton.setCompoundDrawablePadding(dpToPx(8f));
 			} else {
 				rightTitleButton.setVisibility(View.GONE);
 			}
@@ -740,9 +755,24 @@ public class MapContextMenuFragment extends Fragment implements DownloadEvents {
 
 				Drawable leftIcon = topRightTitleButtonController.getLeftIcon();
 				topRightTitleButton.setCompoundDrawablesWithIntrinsicBounds(leftIcon, null, null, null);
-				topRightTitleButton.setCompoundDrawablePadding(dpToPx(4f));
+				topRightTitleButton.setCompoundDrawablePadding(dpToPx(8f));
 			} else {
 				topRightTitleButton.setVisibility(View.GONE);
+			}
+
+			// Left subtitle button
+			final Button leftSubtitleButton = (Button) view.findViewById(R.id.subtitle_button);
+			if (leftSubtitleButtonController != null) {
+				leftSubtitleButton.setText(leftSubtitleButtonController.caption);
+				leftSubtitleButton.setVisibility(leftSubtitleButtonController.visible ? View.VISIBLE : View.GONE);
+
+				Drawable leftIcon = leftSubtitleButtonController.getLeftIcon();
+				if (leftIcon != null) {
+					leftSubtitleButton.setCompoundDrawablesWithIntrinsicBounds(leftIcon, null, null, null);
+					leftSubtitleButton.setCompoundDrawablePadding(dpToPx(8f));
+				}
+			} else {
+				leftSubtitleButton.setVisibility(View.GONE);
 			}
 
 			// Download buttons
@@ -772,7 +802,7 @@ public class MapContextMenuFragment extends Fragment implements DownloadEvents {
 				Drawable leftIcon = leftDownloadButtonController.getLeftIcon();
 				if (leftIcon != null) {
 					leftDownloadButton.setCompoundDrawablesWithIntrinsicBounds(leftIcon, null, null, null);
-					leftDownloadButton.setCompoundDrawablePadding(dpToPx(4f));
+					leftDownloadButton.setCompoundDrawablePadding(dpToPx(8f));
 				}
 			} else {
 				leftDownloadButton.setVisibility(View.GONE);
@@ -786,7 +816,7 @@ public class MapContextMenuFragment extends Fragment implements DownloadEvents {
 
 				Drawable leftIcon = rightDownloadButtonController.getLeftIcon();
 				rightDownloadButton.setCompoundDrawablesWithIntrinsicBounds(leftIcon, null, null, null);
-				rightDownloadButton.setCompoundDrawablePadding(dpToPx(4f));
+				rightDownloadButton.setCompoundDrawablePadding(dpToPx(8f));
 			} else {
 				rightDownloadButton.setVisibility(View.GONE);
 			}

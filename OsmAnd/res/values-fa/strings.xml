@@ -760,7 +760,7 @@
 	<string name="tts_missing_language_data">برای زبان انتخاب‌شده هیچ داده‌ای نصب نشده است. آیا برای نصب به فروشگاه می‌روید؟</string>
 	<string name="preferred_locale_descr">زبان برنامه را انتخاب کنید (بعد از تغییر، برنامه را مجدداً راه‌اندازی کنید)</string>
 	<string name="preferred_locale">زبان برنامه</string>
-	<string name="rotate_map_none_opt">بدون چرخش نقشه (بالا به‌طرف شمال است)</string>
+	<string name="rotate_map_none_opt">بدون چرخش (بالا به‌طرف شمال است)</string>
 	<string name="rotate_map_compass_opt">در جهت قطب‌نما</string>
 	<string name="rotate_map_bearing_opt">در جهت حرکت</string>
 	<string name="amenity_type_user_defined">تعریف کاربر</string>
@@ -877,15 +877,15 @@
     
     <string name="osmand_srtm_long_description_1000_chars">این افزونه دو لایهٔ منحنی‌های تراز و سایه‌تپه (عوارض زمین) را روی نقشه‌‌های استاندارد OsmAnd نمایش می‌دهد. 
 \nورزشکاران، راه‌پیمایان، کوله‌گردان و همهٔ کسانی که به ساختار پستی‌وبلندی‌های زمین علاقه‌مند هستند از این ویژگی بهره می‌برند. 
-\nمبنای داده‌های جهانی یعنی بین ۷۰ درجهٔ شمالی و ۷۰ درجهٔ جنوبی اندازه‌گیری‌های SRTM (مأموریت توپوگرافی رادار شاتل) و ASTER (رادیومتر پیشرفتهٔ فضابرد بازتاب و گسیل حرارتی) است.
-\n
-\nاَستِر یک ابزار تصویربرداری است که بر روی ماهوارهٔ Terra نصب است و تِرا ماهوار‌ه‌ای فوق‌پیشرفت برای سامانهٔ دیده‌بانی زمینِ ناساست. 
+\nمبنای داده‌های جهانی یعنی بین ۷۰ درجهٔ شمالی و ۷۰ درجهٔ جنوبی اندازه‌گیری‌های SRTM (مأموریت توپوگرافی رادار شاتل) و ASTER (رادیومتر پیشرفتهٔ فضابرد بازتاب و گسیل حرارتی) است. 
+\n 
+\nاَستِر یک ابزار تصویربرداری است که بر روی ماهوارهٔ Terra نصب است و تِرا ماهوار‌ه‌ای فوق‌پیشرفته برای سامانهٔ دیده‌بانی زمینِ ناساست. 
 \nاَستِر محصول تلاش مشترک ناسا، وزارت اقتصاد، صنعت و تجارت ژاپن و سامانه‌های فضایی ژاپن است.</string>
     <string name="srtm_plugin_description">این افزونه دو لایهٔ منحنی‌های تراز و سایه‌تپه (عوارض زمین) را روی نقشه‌‌های استاندارد OsmAnd نمایش می‌دهد. 
 \nورزشکاران، راه‌پیمایان، کوله‌گردان و همهٔ کسانی که به ساختار پستی‌وبلندی‌های زمین علاقه‌مند هستند از این ویژگی بهره می‌برند. 
-\nمبنای داده‌های جهانی یعنی بین ۷۰ درجهٔ شمالی و ۷۰ درجهٔ جنوبی اندازه‌گیری‌های SRTM (مأموریت توپوگرافی رادار شاتل) و ASTER (رادیومتر پیشرفتهٔ فضابرد بازتاب و گسیل حرارتی) است.
-\n
-\nاَستِر یک ابزار تصویربرداری است که بر روی ماهوارهٔ Terra نصب است و تِرا ماهوار‌ه‌ای فوق‌پیشرفت برای سامانهٔ دیده‌بانی زمینِ ناساست. 
+\nمبنای داده‌های جهانی یعنی بین ۷۰ درجهٔ شمالی و ۷۰ درجهٔ جنوبی اندازه‌گیری‌های SRTM (مأموریت توپوگرافی رادار شاتل) و ASTER (رادیومتر پیشرفتهٔ فضابرد بازتاب و گسیل حرارتی) است. 
+\n 
+\nاَستِر یک ابزار تصویربرداری است که بر روی ماهوارهٔ Terra نصب است و تِرا ماهوار‌ه‌ای فوق‌پیشرفته برای سامانهٔ دیده‌بانی زمینِ ناساست. 
 \nاَستِر محصول تلاش مشترک ناسا، وزارت اقتصاد، صنعت و تجارت ژاپن و سامانه‌های فضایی ژاپن است.</string>
     <string name="monitoring_control_start">جی‌پی‌ایکس</string>
     <string name="rendering_attr_noPolygons_description">همهٔ عوارض زمین را روی نقشه محو کن</string>
@@ -2596,7 +2596,7 @@
     <string name="descendingly">نزولی</string>
     <string name="marker_show_distance_descr">فاصله تا نشانه‌ها و جهت‌گیری به‌سمت آن‌ها چگونه روی نقشه نشان داده شود:</string>
     <string name="map_orientation_change_in_accordance_with_speed">آستانهٔ تغییر جهت نقشه</string>
-    <string name="map_orientation_change_in_accordance_with_speed_descr">به‌وسیلهٔ گزینه‌های زیر مشخص کنید که در چه سرعتی جهت نقشه از «در جهت حرکت» به «در جهت قطب‌نما» تغییر کند</string>
+    <string name="map_orientation_change_in_accordance_with_speed_descr">مشخص کنید که در چه سرعتی جهت نقشه از «در جهت حرکت» به «در جهت قطب‌نما» تغییر کند</string>
     <string name="all_markers_moved_to_history">همهٔ نشانه‌های نقشه به سابقه منتقل شد</string>
     <string name="marker_moved_to_history">نشانهٔ نقشه به سابقه منتقل شد</string>
     <string name="marker_moved_to_active">نشانهٔ نقشه به قسمت فعال منتقل شد</string>
@@ -2731,7 +2731,7 @@
     <string name="show_arrows_on_the_map">فلش‌ها را روی نقشه نشان بده</string>
     <string name="show_passed">ردشده‌ها را نشان بده</string>
     <string name="hide_passed">ردشده‌ها را مخفی کن</string>
-    <string name="passed">زمان عبور: %1$s</string>
+    <string name="passed">آخرین استفاده: %1$s</string>
     <string name="save_as_line">ذخیره‌کردن به‌عنوان خط</string>
     <string name="store_tracks_in_monthly_directories">ذخیرهٔ مسیرهای ضبط‌شده در پوشه‌های ماهانه</string>
     <string name="store_tracks_in_monthly_directories_descrp">"مسیرهای ضبط‌شده در هر ماه را در پوشهٔ همان ماه ذخیره کن (مثلاً  2017-1)."</string>
@@ -2924,4 +2924,8 @@
     <string name="import_as_gpx">ورود به‌عنوان فایل GPX</string>
     <string name="import_as_favorites">ورود به‌عنوان نقاط برگزیده</string>
     <string name="import_file">واردکردن فایل</string>
-	</resources>
+	<string name="tap_on_map_to_hide_interface_descr">با لمس‌کردن نقطه‌ای روی نقشه رابط کاربری را پنهان/آشکار و حالت تمام‌صفحه را فعال/غیرفعال کنید.</string>
+    <string name="tap_on_map_to_hide_interface">با لمس نقشه رابط کاربری پنهان می‌شود</string>
+    <string name="show_on_top_bar">نمایش در نوار بالا</string>
+    <string name="mark_passed">از این عبور کردم</string>
+    </resources>

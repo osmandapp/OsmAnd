@@ -807,6 +807,16 @@ public class MapMarkersHelper {
 		}
 	}
 
+	public void moveMarkerToTop(MapMarker marker) {
+		int i = mapMarkers.indexOf(marker);
+		if (i != -1 && mapMarkers.size() > 1) {
+			mapMarkers.remove(i);
+			mapMarkers.add(0, marker);
+			reorderActiveMarkersIfNeeded();
+			refresh();
+		}
+	}
+
 	public void moveMapMarker(MapMarker marker, LatLon latLon) {
 		if (marker != null) {
 			LatLon point = new LatLon(latLon.getLatitude(), latLon.getLongitude());

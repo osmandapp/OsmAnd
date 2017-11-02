@@ -247,6 +247,38 @@ public class AndroidUtils {
 		return new PointF(centroidX, centroidY);
 	}
 
+	public static void showSystemUI(Activity activity) {
+		if (Build.VERSION.SDK_INT >= 19 && !isSystemUiVisible(activity)) {
+			switchSystemUiVisibility(activity);
+		}
+	}
+
+	public static void hideSystemUI(Activity activity) {
+		if (Build.VERSION.SDK_INT >= 19 && isSystemUiVisible(activity)) {
+			switchSystemUiVisibility(activity);
+		}
+	}
+
+	public static boolean isSystemUiVisible(Activity activity) {
+		if (Build.VERSION.SDK_INT >= 19) {
+			int uiOptions = activity.getWindow().getDecorView().getSystemUiVisibility();
+			return !((uiOptions | View.SYSTEM_UI_FLAG_FULLSCREEN) == uiOptions);
+		}
+		return true;
+	}
+
+	public static void switchSystemUiVisibility(Activity activity) {
+		if (Build.VERSION.SDK_INT < 19) {
+			return;
+		}
+		View decorView = activity.getWindow().getDecorView();
+		int uiOptions = decorView.getSystemUiVisibility();
+		uiOptions ^= View.SYSTEM_UI_FLAG_HIDE_NAVIGATION;
+		uiOptions ^= View.SYSTEM_UI_FLAG_FULLSCREEN;
+		uiOptions ^= View.SYSTEM_UI_FLAG_IMMERSIVE_STICKY;
+		decorView.setSystemUiVisibility(uiOptions);
+	}
+
 	public static <K, V extends Comparable<? super V>> Map<K, V> sortByValue(Map<K, V> map) {
 		List<Map.Entry<K, V>> list = new LinkedList<>(map.entrySet());
 		Collections.sort(list, new Comparator<Map.Entry<K, V>>() {

@@ -1,8 +1,10 @@
 package net.osmand.plus.mapcontextmenu.controllers;
 
 import android.graphics.drawable.Drawable;
+import android.graphics.drawable.LayerDrawable;
 
 import net.osmand.data.PointDescription;
+import net.osmand.plus.IconsCache;
 import net.osmand.plus.MapMarkersHelper;
 import net.osmand.plus.MapMarkersHelper.MapMarker;
 import net.osmand.plus.R;
@@ -21,6 +23,7 @@ public class MapMarkerMenuController extends MenuController {
 		this.mapMarker = mapMarker;
 		builder.setShowNearestWiki(true);
 		final MapMarkersHelper markersHelper = mapActivity.getMyApplication().getMapMarkersHelper();
+
 		leftTitleButtonController = new TitleButtonController() {
 			@Override
 			public void buttonPressed() {
@@ -28,8 +31,27 @@ public class MapMarkerMenuController extends MenuController {
 				getMapActivity().getContextMenu().close();
 			}
 		};
-		leftTitleButtonController.caption = getMapActivity().getString(R.string.shared_string_remove);
-		leftTitleButtonController.leftIconId = R.drawable.ic_action_delete_dark;
+		leftTitleButtonController.needColorizeIcon = false;
+		leftTitleButtonController.caption = getMapActivity().getString(R.string.mark_passed);
+		leftTitleButtonController.leftIconId = isLight() ? R.drawable.passed_icon_light : R.drawable.passed_icon_dark;
+
+		leftSubtitleButtonController = new TitleButtonController() {
+			@Override
+			public void buttonPressed() {
+				markersHelper.moveMarkerToTop(getMapMarker());
+				getMapActivity().getContextMenu().close();
+			}
+		};
+		leftSubtitleButtonController.caption = getMapActivity().getString(R.string.show_on_top_bar);
+		leftSubtitleButtonController.leftIcon = createShowOnTopbarIcon();
+	}
+
+	private Drawable createShowOnTopbarIcon() {
+		IconsCache ic = getMapActivity().getMyApplication().getIconsCache();
+		Drawable background = ic.getIcon(R.drawable.ic_action_device_top,
+				isLight() ? R.color.on_map_icon_color : R.color.ctx_menu_info_text_dark);
+		Drawable topbar = ic.getIcon(R.drawable.ic_action_device_topbar, R.color.dashboard_blue);
+		return new LayerDrawable(new Drawable[]{background, topbar});
 	}
 
 	@Override

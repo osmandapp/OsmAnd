@@ -2812,4 +2812,8 @@ Proporciona un código completo</string>
     <string name="wrong_format">Formato incorrecto</string>
     <string name="view">Vista</string>
 	<string name="waypoints_added_to_map_markers">Puntos de referencia añadidos a los marcadores del mapa</string>
+	<string name="import_gpx_file_description">puede importarse como puntos de favoritos, o como un archivo de trazas.</string>
+    <string name="import_as_gpx">Importar como archivo GPX</string>
+    <string name="import_as_favorites">Importar como favoritos</string>
+    <string name="import_file">Importar archivo</string>
 	</resources>

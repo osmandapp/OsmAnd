@@ -26,13 +26,11 @@ import net.osmand.plus.activities.MapActivity;
 import net.osmand.plus.base.BottomSheetDialogFragment;
 import net.osmand.plus.helpers.AndroidUiHelper;
 
-public class CoordinateInputBottomSheetDialogFragment extends BottomSheetDialogFragment {
+public class CoordinateInputBottomSheetDialogFragment extends MenuBottomSheetDialogFragment {
 
 	public final static String TAG = "CoordinateInputBottomSheetDialogFragment";
 
-	private boolean portrait;
 	private View mainView;
-	private boolean night;
 	private boolean useOsmandKeyboard = true;
 	private boolean goToNextField;
 	private int accuracy = -1;
@@ -57,16 +55,14 @@ public class CoordinateInputBottomSheetDialogFragment extends BottomSheetDialogF
 	@Override
 	public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
 		final MapActivity mapActivity = (MapActivity) getActivity();
-		portrait = AndroidUiHelper.isOrientationPortrait(getActivity());
-		night = !mapActivity.getMyApplication().getSettings().isLightContent();
-		final int themeRes = night ? R.style.OsmandDarkTheme : R.style.OsmandLightTheme;
+		final int themeRes = nightMode ? R.style.OsmandDarkTheme : R.style.OsmandLightTheme;
 
 		mainView = View.inflate(new ContextThemeWrapper(getContext(), themeRes), R.layout.fragment_marker_coordinate_input_options_bottom_sheet_helper, container);
 		if (portrait) {
 			AndroidUtils.setBackground(getActivity(), mainView, night, R.drawable.bg_bottom_menu_light, R.drawable.bg_bottom_menu_dark);
 		}
 
-		if (night) {
+		if (nightMode) {
 			((TextView) mainView.findViewById(R.id.coordinate_input_title)).setTextColor(getResources().getColor(R.color.ctx_menu_info_text_dark));
 		}
 
@@ -152,57 +148,9 @@ public class CoordinateInputBottomSheetDialogFragment extends BottomSheetDialogF
 			}
 		});
 
-		final int screenHeight = AndroidUtils.getScreenHeight(getActivity());
-		final int statusBarHeight = AndroidUtils.getStatusBarHeight(getActivity());
-		final int navBarHeight = AndroidUtils.getNavBarHeight(getActivity());
-
-		mainView.getViewTreeObserver().addOnGlobalLayoutListener(new ViewTreeObserver.OnGlobalLayoutListener() {
-			@Override
-			public void onGlobalLayout() {
-				final View scrollView = mainView.findViewById(R.id.marker_coordinate_input_scroll_view);
-				int scrollViewHeight = scrollView.getHeight();
-				int dividerHeight = AndroidUtils.dpToPx(getContext(), 1);
-				int cancelButtonHeight = getContext().getResources().getDimensionPixelSize(R.dimen.bottom_sheet_cancel_button_height);
-				int spaceForScrollView = screenHeight - statusBarHeight - navBarHeight - dividerHeight - cancelButtonHeight;
-				if (scrollViewHeight > spaceForScrollView) {
-					scrollView.getLayoutParams().height = spaceForScrollView;
-					scrollView.requestLayout();
-				}
-
-				if (!portrait) {
-					if (screenHeight - statusBarHeight - mainView.getHeight()
-							>= AndroidUtils.dpToPx(getActivity(), 8)) {
-						AndroidUtils.setBackground(getActivity(), mainView, night,
-								R.drawable.bg_bottom_sheet_topsides_landscape_light, R.drawable.bg_bottom_sheet_topsides_landscape_dark);
-					} else {
-						AndroidUtils.setBackground(getActivity(), mainView, night,
-								R.drawable.bg_bottom_sheet_sides_landscape_light, R.drawable.bg_bottom_sheet_sides_landscape_dark);
-					}
-				}
-
-				ViewTreeObserver obs = mainView.getViewTreeObserver();
-				if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.JELLY_BEAN) {
-					obs.removeOnGlobalLayoutListener(this);
-				} else {
-					obs.removeGlobalOnLayoutListener(this);
-				}
-			}
-		});
+		setupHeightAndBackground(mainView, R.id.marker_coordinate_input_scroll_view);
 
 		return mainView;
-	}
-
-	@Override
-	public void onStart() {
-		super.onStart();
-		if (!portrait) {
-			final Window window = getDialog().getWindow();
-			if (window != null) {
-				WindowManager.LayoutParams params = window.getAttributes();
-				params.width = getActivity().getResources().getDimensionPixelSize(R.dimen.landscape_bottom_sheet_dialog_fragment_width);
-				window.setAttributes(params);
-			}
-		}
 	}
 
 	@Override
