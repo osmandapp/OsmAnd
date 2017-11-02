@@ -12,8 +12,11 @@ import android.widget.RadioButton;
 import android.widget.TextView;
 
 import net.osmand.plus.R;
-import net.osmand.plus.activities.MapActivity;
 import net.osmand.plus.base.MenuBottomSheetDialogFragment;
+
+import static net.osmand.plus.mapmarkers.CoordinateInputDialogFragment.ACCURACY;
+import static net.osmand.plus.mapmarkers.CoordinateInputDialogFragment.GO_TO_NEXT_FIELD;
+import static net.osmand.plus.mapmarkers.CoordinateInputDialogFragment.USE_OSMAND_KEYBOARD;
 
 public class CoordinateInputBottomSheetDialogFragment extends MenuBottomSheetDialogFragment {
 
@@ -32,11 +35,17 @@ public class CoordinateInputBottomSheetDialogFragment extends MenuBottomSheetDia
 	@Override
 	public void onCreate(@Nullable Bundle savedInstanceState) {
 		super.onCreate(savedInstanceState);
-		Bundle args = getArguments();
-		if (args != null) {
-			useOsmandKeyboard = args.getBoolean(CoordinateInputDialogFragment.USE_OSMAND_KEYBOARD);
-			goToNextField = args.getBoolean(CoordinateInputDialogFragment.GO_TO_NEXT_FIELD);
-			accuracy = args.getInt(CoordinateInputDialogFragment.ACCURACY);
+		if (savedInstanceState == null) {
+			Bundle args = getArguments();
+			if (args != null) {
+				useOsmandKeyboard = args.getBoolean(USE_OSMAND_KEYBOARD);
+				goToNextField = args.getBoolean(GO_TO_NEXT_FIELD);
+				accuracy = args.getInt(ACCURACY);
+			}
+		} else {
+			useOsmandKeyboard = savedInstanceState.getBoolean(USE_OSMAND_KEYBOARD);
+			goToNextField = savedInstanceState.getBoolean(GO_TO_NEXT_FIELD);
+			accuracy = savedInstanceState.getInt(ACCURACY);
 		}
 	}
 
@@ -60,10 +69,6 @@ public class CoordinateInputBottomSheetDialogFragment extends MenuBottomSheetDia
 			public void onClick(View view) {
 				goToNextField = !goToNextField;
 				((CompoundButton) mainView.findViewById(R.id.go_to_next_field_switch)).setChecked(goToNextField);
-				Bundle args = getArguments();
-				if (args != null) {
-					args.putBoolean(CoordinateInputDialogFragment.GO_TO_NEXT_FIELD, goToNextField);
-				}
 				if (listener != null) {
 					listener.onGoToNextFieldChanged(goToNextField);
 				}
@@ -95,10 +100,6 @@ public class CoordinateInputBottomSheetDialogFragment extends MenuBottomSheetDia
 			public void onClick(View view) {
 				useOsmandKeyboard = !useOsmandKeyboard;
 				((CompoundButton) mainView.findViewById(R.id.use_system_keyboard_switch)).setChecked(!useOsmandKeyboard);
-				Bundle args = getArguments();
-				if (args != null) {
-					args.putBoolean(CoordinateInputDialogFragment.USE_OSMAND_KEYBOARD, useOsmandKeyboard);
-				}
 				if (listener != null) {
 					listener.onKeyboardChanged(useOsmandKeyboard);
 				}
@@ -123,10 +124,6 @@ public class CoordinateInputBottomSheetDialogFragment extends MenuBottomSheetDia
 					default:
 						throw new IllegalArgumentException("Unsupported accuracy");
 				}
-				Bundle args = getArguments();
-				if (args != null) {
-					args.putInt(CoordinateInputDialogFragment.ACCURACY, accuracy);
-				}
 				highlightSelectedItem(true);
 				if (listener != null) {
 					listener.onAccuracyChanged(accuracy);
@@ -148,6 +145,14 @@ public class CoordinateInputBottomSheetDialogFragment extends MenuBottomSheetDia
 		setupHeightAndBackground(mainView, R.id.marker_coordinate_input_scroll_view);
 
 		return mainView;
+	}
+
+	@Override
+	public void onSaveInstanceState(Bundle outState) {
+		outState.putBoolean(USE_OSMAND_KEYBOARD, useOsmandKeyboard);
+		outState.putBoolean(GO_TO_NEXT_FIELD, goToNextField);
+		outState.putInt(ACCURACY, accuracy);
+		super.onSaveInstanceState(outState);
 	}
 
 	private void highlightSelectedItem(boolean check) {
