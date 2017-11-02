@@ -203,7 +203,7 @@
                 android:layout_weight="3"
                 android:layout_height="match_parent"
                 android:gravity="center"
-                android:textColor="?attr/keyboard_item_text_color"
+                android:textColor="@color/keyboard_item_add_button_text_color"
                 android:textSize="@dimen/default_list_text_size"
                 android:text="@string/shared_string_add"/>
 
