@@ -2938,8 +2938,8 @@ Tidligere destination bliver sidste mellemliggende punkt.</string>
     <string name="import_as_gpx">Importer som GPX-fil</string>
     <string name="import_as_favorites">Importer som favoritter</string>
     <string name="import_file">Importer fil</string>
-	<string name="tap_on_map_to_hide_interface_descr">Tryk et vilkårligt sted på kortet skjuler grænsefladen og skifter mellem fuld skærm-tilstand.</string>
-    <string name="tap_on_map_to_hide_interface">Tryk på kortet skjuler grænseflade</string>
+	<string name="tap_on_map_to_hide_interface_descr">Tryk et vilkårligt sted på kortet skjuler grænsefladen og skifter mellem fuldskærmstilstand.</string>
+    <string name="tap_on_map_to_hide_interface">Tryk på kortet for at skjule grænsefladen</string>
     <string name="show_on_top_bar">Vis på topbjælke</string>
     <string name="mark_passed">Marker som passeret</string>
     </resources>
