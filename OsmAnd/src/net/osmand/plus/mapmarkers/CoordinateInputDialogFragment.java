@@ -70,6 +70,7 @@ public class CoordinateInputDialogFragment extends DialogFragment implements Osm
 	public static final String TAG = "CoordinateInputDialogFragment";
 
 	public static final String USE_OSMAND_KEYBOARD = "use_osmand_keyboard";
+	public static final String RIGHT_HAND = "right_hand";
 	public static final String GO_TO_NEXT_FIELD = "go_to_next_field";
 	public static final String ACCURACY = "accuracy";
 
@@ -86,6 +87,7 @@ public class CoordinateInputDialogFragment extends DialogFragment implements Osm
 	private CoordinateInputAdapter adapter;
 	private boolean lightTheme;
 	private boolean useOsmandKeyboard = true;
+	private boolean rightHand = true;
 	private boolean goToNextField;
 	private int accuracy = 4;
 	private List<OsmandTextFieldBoxes> textFieldBoxes;
@@ -168,6 +170,7 @@ public class CoordinateInputDialogFragment extends DialogFragment implements Osm
 				fragment.setUsedOnMap(false);
 				Bundle args = new Bundle();
 				args.putBoolean(USE_OSMAND_KEYBOARD, useOsmandKeyboard);
+				args.putBoolean(RIGHT_HAND, rightHand);
 				args.putBoolean(GO_TO_NEXT_FIELD, goToNextField);
 				args.putInt(ACCURACY, accuracy);
 				fragment.setArguments(args);
@@ -556,6 +559,12 @@ public class CoordinateInputDialogFragment extends DialogFragment implements Osm
 			}
 
 			@Override
+			public void onHandChanged(boolean rightHand) {
+				CoordinateInputDialogFragment.this.rightHand = rightHand;
+				changeHand();
+			}
+
+			@Override
 			public void onGoToNextFieldChanged(boolean goToNextField) {
 				CoordinateInputDialogFragment.this.goToNextField = goToNextField;
 			}
@@ -567,6 +576,10 @@ public class CoordinateInputDialogFragment extends DialogFragment implements Osm
 				changeInputEditTextLengths();
 			}
 		};
+	}
+
+	private void changeHand() {
+
 	}
 
 	private void changeEditTextSelections() {

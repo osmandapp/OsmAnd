@@ -11,11 +11,14 @@ import android.widget.ImageView;
 import android.widget.RadioButton;
 import android.widget.TextView;
 
+import net.osmand.AndroidUtils;
 import net.osmand.plus.R;
 import net.osmand.plus.base.MenuBottomSheetDialogFragment;
+import net.osmand.plus.helpers.AndroidUiHelper;
 
 import static net.osmand.plus.mapmarkers.CoordinateInputDialogFragment.ACCURACY;
 import static net.osmand.plus.mapmarkers.CoordinateInputDialogFragment.GO_TO_NEXT_FIELD;
+import static net.osmand.plus.mapmarkers.CoordinateInputDialogFragment.RIGHT_HAND;
 import static net.osmand.plus.mapmarkers.CoordinateInputDialogFragment.USE_OSMAND_KEYBOARD;
 
 public class CoordinateInputBottomSheetDialogFragment extends MenuBottomSheetDialogFragment {
@@ -23,9 +26,10 @@ public class CoordinateInputBottomSheetDialogFragment extends MenuBottomSheetDia
 	public final static String TAG = "CoordinateInputBottomSheetDialogFragment";
 
 	private View mainView;
-	private boolean useOsmandKeyboard = true;
+	private boolean useOsmandKeyboard;
+	private boolean rightHand;
 	private boolean goToNextField;
-	private int accuracy = -1;
+	private int accuracy;
 	private CoordinateInputFormatChangeListener listener;
 
 	public void setListener(CoordinateInputFormatChangeListener listener) {
@@ -39,11 +43,13 @@ public class CoordinateInputBottomSheetDialogFragment extends MenuBottomSheetDia
 			Bundle args = getArguments();
 			if (args != null) {
 				useOsmandKeyboard = args.getBoolean(USE_OSMAND_KEYBOARD);
+				rightHand = args.getBoolean(RIGHT_HAND);
 				goToNextField = args.getBoolean(GO_TO_NEXT_FIELD);
 				accuracy = args.getInt(ACCURACY);
 			}
 		} else {
 			useOsmandKeyboard = savedInstanceState.getBoolean(USE_OSMAND_KEYBOARD);
+			rightHand = savedInstanceState.getBoolean(RIGHT_HAND);
 			goToNextField = savedInstanceState.getBoolean(GO_TO_NEXT_FIELD);
 			accuracy = savedInstanceState.getInt(ACCURACY);
 		}
@@ -53,6 +59,7 @@ public class CoordinateInputBottomSheetDialogFragment extends MenuBottomSheetDia
 	@Override
 	public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
 		final int themeRes = nightMode ? R.style.OsmandDarkTheme : R.style.OsmandLightTheme;
+		boolean portrait = AndroidUiHelper.isOrientationPortrait(getActivity());
 
 		mainView = View.inflate(new ContextThemeWrapper(getContext(), themeRes), R.layout.fragment_marker_coordinate_input_options_bottom_sheet_helper, container);
 
@@ -61,6 +68,10 @@ public class CoordinateInputBottomSheetDialogFragment extends MenuBottomSheetDia
 		}
 
 		((TextView) mainView.findViewById(R.id.coordinate_input_accuracy_descr)).setText(getString(R.string.coordinate_input_accuracy_description, accuracy));
+
+		if (portrait) {
+			mainView.findViewById(R.id.hand_row).setVisibility(View.GONE);
+		}
 
 		((CompoundButton) mainView.findViewById(R.id.go_to_next_field_switch)).setChecked(goToNextField);
 		((ImageView) mainView.findViewById(R.id.go_to_next_field_icon)).setImageDrawable(getContentIcon(R.drawable.ic_action_keyboard));
@@ -150,6 +161,7 @@ public class CoordinateInputBottomSheetDialogFragment extends MenuBottomSheetDia
 	@Override
 	public void onSaveInstanceState(Bundle outState) {
 		outState.putBoolean(USE_OSMAND_KEYBOARD, useOsmandKeyboard);
+		outState.putBoolean(RIGHT_HAND, rightHand);
 		outState.putBoolean(GO_TO_NEXT_FIELD, goToNextField);
 		outState.putInt(ACCURACY, accuracy);
 		super.onSaveInstanceState(outState);
@@ -172,6 +184,8 @@ public class CoordinateInputBottomSheetDialogFragment extends MenuBottomSheetDia
 	interface CoordinateInputFormatChangeListener {
 
 		void onKeyboardChanged(boolean useOsmandKeyboard);
+
+		void onHandChanged(boolean rightHand);
 
 		void onGoToNextFieldChanged(boolean goToNextField);
 
