@@ -25,6 +25,7 @@ import android.support.v4.app.ActivityCompat.OnRequestPermissionsResultCallback;
 import android.support.v4.app.DialogFragment;
 import android.support.v4.app.Fragment;
 import android.support.v4.app.FragmentManager;
+import android.support.v4.content.ContextCompat;
 import android.support.v4.widget.DrawerLayout;
 import android.support.v7.app.AlertDialog;
 import android.util.DisplayMetrics;
@@ -66,6 +67,7 @@ import net.osmand.plus.OsmAndConstants;
 import net.osmand.plus.OsmandApplication;
 import net.osmand.plus.OsmandPlugin;
 import net.osmand.plus.OsmandSettings;
+import net.osmand.plus.OsmandSettings.MapMarkersMode;
 import net.osmand.plus.R;
 import net.osmand.plus.TargetPointsHelper;
 import net.osmand.plus.TargetPointsHelper.TargetPoint;
@@ -185,6 +187,7 @@ public class MapActivity extends OsmandActionBarActivity implements DownloadEven
 
 	private List<DialogProvider> dialogProviders = new ArrayList<>(2);
 	private StateChangedListener<ApplicationMode> applicationModeListener;
+	private StateChangedListener<MapMarkersMode> markersModeListener;
 	private GpxImportHelper gpxImportHelper;
 	private WakeLockHelper wakeLockHelper;
 	private boolean intentLocation = false;
@@ -224,6 +227,13 @@ public class MapActivity extends OsmandActionBarActivity implements DownloadEven
 		// Full screen is not used here
 		// getWindow().setFlags(WindowManager.LayoutParams.FLAG_FULLSCREEN, WindowManager.LayoutParams.FLAG_FULLSCREEN);
 		setContentView(R.layout.main);
+
+		if (Build.VERSION.SDK_INT >= 21) {
+			getWindow().getDecorView().setSystemUiVisibility(View.SYSTEM_UI_FLAG_LAYOUT_STABLE | View.SYSTEM_UI_FLAG_LAYOUT_FULLSCREEN);
+			updateStatusBarColor();
+			// Navigation Drawer:
+			AndroidUtils.addStatusBarPadding21v(this, findViewById(R.id.menuItems));
+		}
 
 		int statusBarHeight = 0;
 		int resourceId = getResources().getIdentifier("status_bar_height", "dimen", "android");
@@ -631,6 +641,14 @@ public class MapActivity extends OsmandActionBarActivity implements DownloadEven
 
 		changeKeyguardFlags();
 
+		markersModeListener = new StateChangedListener<MapMarkersMode>() {
+			@Override
+			public void stateChanged(MapMarkersMode change) {
+				updateStatusBarColor();
+			}
+		};
+		settings.MAP_MARKERS_MODE.addListener(markersModeListener);
+
 		applicationModeListener = new StateChangedListener<ApplicationMode>() {
 			@Override
 			public void stateChanged(ApplicationMode change) {
@@ -789,6 +807,21 @@ public class MapActivity extends OsmandActionBarActivity implements DownloadEven
 			if (settings.MAP_SCREEN_ORIENTATION.get() != getRequestedOrientation()) {
 				setRequestedOrientation(settings.MAP_SCREEN_ORIENTATION.get());
 			}
+		}
+	}
+
+	public void updateStatusBarColor() {
+		if (Build.VERSION.SDK_INT >= 21) {
+			boolean night = app.getDaynightHelper().isNightModeForMapControls();
+			boolean markerTopBar = !app.getMapMarkersHelper().getMapMarkers().isEmpty()
+					&& settings.MAP_MARKERS_MODE.get() == MapMarkersMode.TOOLBAR;
+			int colorId;
+			if (markerTopBar) {
+				colorId = R.color.status_bar_dark;
+			} else {
+				colorId = night ? R.color.status_bar_transparent_dark : R.color.status_bar_transparent_light;
+			}
+			getWindow().setStatusBarColor(ContextCompat.getColor(this, colorId));
 		}
 	}
 
@@ -1177,6 +1210,7 @@ public class MapActivity extends OsmandActionBarActivity implements DownloadEven
 		app.getLocationProvider().pauseAllUpdates();
 		app.getDaynightHelper().stopSensorIfNeeded();
 		settings.APPLICATION_MODE.removeListener(applicationModeListener);
+		settings.MAP_MARKERS_MODE.removeListener(markersModeListener);
 
 		settings.setLastKnownMapLocation((float) mapView.getLatitude(), (float) mapView.getLongitude());
 		AnimateDraggingMapThread animatedThread = mapView.getAnimatedDraggingThread();

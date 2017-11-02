@@ -1,18 +1,23 @@
 package net.osmand.plus.mapcontextmenu.builders.cards.dialogs;
 
+import android.app.Activity;
+import android.os.Build;
 import android.os.Bundle;
 import android.support.annotation.Nullable;
 import android.support.v4.app.Fragment;
 import android.support.v4.app.FragmentManager;
+import android.support.v4.content.ContextCompat;
 import android.support.v7.widget.AppCompatImageView;
 import android.support.v7.widget.PopupMenu;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.view.Window;
 import android.webkit.WebView;
 import android.widget.LinearLayout;
 import android.widget.TextView;
 
+import net.osmand.AndroidUtils;
 import net.osmand.plus.OsmandPlugin;
 import net.osmand.plus.R;
 import net.osmand.plus.activities.MapActivity;
@@ -27,6 +32,8 @@ public class ContextMenuCardDialogFragment extends Fragment {
 	private LinearLayout contentLayout;
 	private View contentView;
 
+	private int statusBarColor = -1;
+
 	@Override
 	public void onCreate(Bundle savedInstanceState) {
 		super.onCreate(savedInstanceState);
@@ -39,6 +46,16 @@ public class ContextMenuCardDialogFragment extends Fragment {
 	@Override
 	public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
 		View view = inflater.inflate(R.layout.context_menu_card_dialog, container, false);
+		AndroidUtils.addStatusBarPadding21v(getActivity(), view);
+		if (dialog.getType() == ContextMenuCardDialog.CardDialogType.MAPILLARY) {
+			view.findViewById(R.id.dialog_layout)
+					.setBackgroundColor(ContextCompat.getColor(getActivity(), R.color.mapillary_action_bar));
+			if (Build.VERSION.SDK_INT >= 21) {
+				Window window = getActivity().getWindow();
+				statusBarColor = window.getStatusBarColor();
+				window.setStatusBarColor(ContextCompat.getColor(getActivity(), R.color.status_bar_mapillary));
+			}
+		}
 		contentLayout = (LinearLayout) view.findViewById(R.id.content);
 		contentView = dialog.getContentView();
 		if (contentView != null) {
@@ -97,6 +114,12 @@ public class ContextMenuCardDialogFragment extends Fragment {
 			contentLayout.removeView(contentView);
 			if (contentView instanceof WebView) {
 				((WebView) contentView).loadUrl("about:blank");
+			}
+		}
+		if (Build.VERSION.SDK_INT >= 21 && statusBarColor != -1) {
+			Activity activity = getActivity();
+			if (activity != null) {
+				activity.getWindow().setStatusBarColor(statusBarColor);
 			}
 		}
 	}

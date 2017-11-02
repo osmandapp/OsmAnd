@@ -225,6 +225,7 @@ public class DashboardOnMap implements ObservableScrollViewCallbacks, DynamicLis
 		mapMarkerDialogHelper.setHelperCallbacks(this);
 		landscape = !AndroidUiHelper.isOrientationPortrait(mapActivity);
 		dashboardView = (FrameLayout) mapActivity.findViewById(R.id.dashboard);
+		AndroidUtils.addStatusBarPadding21v(mapActivity, dashboardView);
 		final View.OnClickListener listener = new View.OnClickListener() {
 			@Override
 			public void onClick(View v) {

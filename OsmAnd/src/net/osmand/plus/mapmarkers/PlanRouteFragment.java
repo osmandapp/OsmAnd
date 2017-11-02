@@ -1,5 +1,6 @@
 package net.osmand.plus.mapmarkers;
 
+import android.app.Activity;
 import android.app.ProgressDialog;
 import android.graphics.drawable.Drawable;
 import android.os.AsyncTask;
@@ -20,6 +21,7 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.view.ViewTreeObserver;
+import android.view.Window;
 import android.widget.ImageButton;
 import android.widget.ImageView;
 import android.widget.LinearLayout;
@@ -91,6 +93,8 @@ public class PlanRouteFragment extends Fragment implements OsmAndLocationListene
 
 	private View mainView;
 	private RecyclerView markersRv;
+
+	private int statusBarColor = -1;
 
 	@Nullable
 	@Override
@@ -167,6 +171,17 @@ public class PlanRouteFragment extends Fragment implements OsmAndLocationListene
 		int layoutRes = fullScreen ? R.layout.fragment_plan_route_full_screen : R.layout.fragment_plan_route_half_screen;
 
 		View view = View.inflate(new ContextThemeWrapper(getContext(), themeRes), layoutRes, null);
+
+		if (fullScreen || !portrait) {
+			AndroidUtils.addStatusBarPadding21v(getActivity(), view);
+		}
+		if (fullScreen) {
+			if (Build.VERSION.SDK_INT >= 21) {
+				Window window = getActivity().getWindow();
+				statusBarColor = window.getStatusBarColor();
+				window.setStatusBarColor(ContextCompat.getColor(getActivity(), R.color.status_bar_route_light));
+			}
+		}
 
 		mainView = fullScreen ? view : view.findViewById(R.id.main_view);
 
@@ -379,6 +394,12 @@ public class PlanRouteFragment extends Fragment implements OsmAndLocationListene
 	public void onDestroyView() {
 		super.onDestroyView();
 		exitPlanRouteMode();
+		if (Build.VERSION.SDK_INT >= 21 && statusBarColor != -1) {
+			Activity activity = getActivity();
+			if (activity != null) {
+				activity.getWindow().setStatusBarColor(statusBarColor);
+			}
+		}
 	}
 
 	@Override
