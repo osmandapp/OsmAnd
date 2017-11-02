@@ -557,7 +557,7 @@
 	<string name="gpx_monitoring_disabled_warn">Запісвайце сьлед выкарыстоўваючы GPX-віджэт ці пункт мэню \"Запіс падарожжа\".</string>
 	<string name="show_current_gpx_title">Паказаць бягучы сьлед</string>
 	    
-	<string name="free_version_message">Гэтая бясплатная вэрсія OsmAnd абмяжоўваецца %1$s cьцягваньнямі і не падтрымлівае аўтаномныя артыкулы Вікіпэдыі.</string>
+	<string name="free_version_message">Гэтая бясплатная версія OsmAnd абмяжоўваецца %1$s cцягваннямі мап (уключаючы абнаўленні) і не падтрымлівае аўтаномныя артыкулы Вікіпедыі.</string>
 	<string name="free_version_title">Бясплатная вэрсія</string>
 	<string name="poi_context_menu_showdescription">Паказваць апісанні POI.</string>
 	<string name="index_name_north_america">Паўночная Амэрыка</string>
