@@ -403,59 +403,62 @@ public class CoordinateInputDialogFragment extends DialogFragment implements Osm
 		View.OnLongClickListener inputEditTextOnLongClickListener = new View.OnLongClickListener() {
 			@Override
 			public boolean onLongClick(final View view) {
-				final EditText inputEditText = (EditText) view;
-				PopupMenu popupMenu = new PopupMenu(getContext(), inputEditText);
-				Menu menu = popupMenu.getMenu();
-				popupMenu.getMenuInflater().inflate(R.menu.copy_paste_menu, menu);
-				final ClipboardManager clipboardManager = ((ClipboardManager) getContext().getSystemService(CLIPBOARD_SERVICE));
-				MenuItem pasteMenuItem = menu.findItem(R.id.action_paste);
-				if (clipboardManager == null || !clipboardManager.hasPrimaryClip() ||
-						!clipboardManager.getPrimaryClipDescription().hasMimeType(MIMETYPE_TEXT_PLAIN)) {
-					pasteMenuItem.setEnabled(false);
-				} else {
-					pasteMenuItem.setEnabled(true);
-				}
-				if (clipboardManager != null) {
-					popupMenu.setOnMenuItemClickListener(new PopupMenu.OnMenuItemClickListener() {
-						@Override
-						public boolean onMenuItemClick(MenuItem item) {
-							switch (item.getItemId()) {
-								case R.id.action_copy:
-									String labelText;
-									switch (view.getId()) {
-										case R.id.latitude_edit_text:
-											labelText = LATITUDE_LABEL;
-											break;
-										case R.id.longitude_edit_text:
-											labelText = LONGITUDE_LABEL;
-											break;
-										case R.id.name_edit_text:
-											labelText = NAME_LABEL;
-											break;
-										default:
-											labelText = "";
-											break;
-									}
-									ClipData clip = ClipData.newPlainText(labelText, inputEditText.getText().toString());
-									clipboardManager.setPrimaryClip(clip);
-									return true;
-								case R.id.action_paste:
-									ClipData.Item pasteItem = clipboardManager.getPrimaryClip().getItemAt(0);
-									CharSequence pasteData = pasteItem.getText();
-									if (pasteData != null) {
-										String str = inputEditText.getText().toString();
-										inputEditText.setText(str + pasteData.toString());
-										inputEditText.setSelection(inputEditText.getText().length());
-									}
-									return true;
+				if (useOsmandKeyboard || !orientationPortrait) {
+					final EditText inputEditText = (EditText) view;
+					PopupMenu popupMenu = new PopupMenu(getContext(), inputEditText);
+					Menu menu = popupMenu.getMenu();
+					popupMenu.getMenuInflater().inflate(R.menu.copy_paste_menu, menu);
+					final ClipboardManager clipboardManager = ((ClipboardManager) getContext().getSystemService(CLIPBOARD_SERVICE));
+					MenuItem pasteMenuItem = menu.findItem(R.id.action_paste);
+					if (clipboardManager == null || !clipboardManager.hasPrimaryClip() ||
+							!clipboardManager.getPrimaryClipDescription().hasMimeType(MIMETYPE_TEXT_PLAIN)) {
+						pasteMenuItem.setEnabled(false);
+					} else {
+						pasteMenuItem.setEnabled(true);
+					}
+					if (clipboardManager != null) {
+						popupMenu.setOnMenuItemClickListener(new PopupMenu.OnMenuItemClickListener() {
+							@Override
+							public boolean onMenuItemClick(MenuItem item) {
+								switch (item.getItemId()) {
+									case R.id.action_copy:
+										String labelText;
+										switch (view.getId()) {
+											case R.id.latitude_edit_text:
+												labelText = LATITUDE_LABEL;
+												break;
+											case R.id.longitude_edit_text:
+												labelText = LONGITUDE_LABEL;
+												break;
+											case R.id.name_edit_text:
+												labelText = NAME_LABEL;
+												break;
+											default:
+												labelText = "";
+												break;
+										}
+										ClipData clip = ClipData.newPlainText(labelText, inputEditText.getText().toString());
+										clipboardManager.setPrimaryClip(clip);
+										return true;
+									case R.id.action_paste:
+										ClipData.Item pasteItem = clipboardManager.getPrimaryClip().getItemAt(0);
+										CharSequence pasteData = pasteItem.getText();
+										if (pasteData != null) {
+											String str = inputEditText.getText().toString();
+											inputEditText.setText(str + pasteData.toString());
+											inputEditText.setSelection(inputEditText.getText().length());
+										}
+										return true;
+								}
+								return false;
 							}
-							return false;
-						}
-					});
-					popupMenu.show();
+						});
+						popupMenu.show();
+					}
+					return true;
+				} else {
+					return false;
 				}
-				return true;
-
 			}
 		};
 
