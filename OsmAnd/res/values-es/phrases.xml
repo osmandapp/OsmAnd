@@ -3596,7 +3596,7 @@
 	<string name="poi_water_place_access_multifamilies">Múltiples familias</string>
 
 <string name="poi_surface_clay">Tierra batida</string>
-	<string name="poi_surface_decoturf">DecoTurf</string>
+	<string name="poi_surface_decoturf">DecoTurf (para canchas de tenis duras)</string>
 	<string name="poi_socket_cee_blue">Conector: CEE azul</string>
 	<string name="poi_socket_cee_blue_current">Conector: CEE azul: corriente</string>
 	<string name="poi_socket_cee_blue_output">Conector: CEE azul: salida</string>
@@ -3685,4 +3685,5 @@
 	<string name="poi_map_size_city">Tamaño del mapa: Ciudad</string>
 	<string name="poi_map_size_region">Tamaño del mapa: Región</string>
 
-</resources>
+<string name="poi_couloir">Barranco estrecho</string>
+	</resources>
