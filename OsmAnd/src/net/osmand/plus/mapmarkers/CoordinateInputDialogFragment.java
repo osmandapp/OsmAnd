@@ -284,7 +284,8 @@ public class CoordinateInputDialogFragment extends DialogFragment implements Osm
 							switchToNextInput(focusedEditText.getId());
 							break;
 						default:
-							focusedEditText.append((String) keyboardAdapter.getItem(i));
+							focusedEditText.setText(focusedEditText.getText().toString() + keyboardAdapter.getItem(i));
+							focusedEditText.setSelection(focusedEditText.getText().length());
 					}
 				}
 			}
