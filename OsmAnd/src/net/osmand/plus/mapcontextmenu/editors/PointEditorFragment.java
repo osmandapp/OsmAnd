@@ -8,7 +8,6 @@ import android.os.Build;
 import android.os.Bundle;
 import android.os.IBinder;
 import android.support.v4.app.DialogFragment;
-import android.support.v4.app.Fragment;
 import android.support.v7.widget.Toolbar;
 import android.util.TypedValue;
 import android.view.LayoutInflater;
@@ -28,10 +27,11 @@ import net.osmand.plus.IconsCache;
 import net.osmand.plus.OsmandApplication;
 import net.osmand.plus.R;
 import net.osmand.plus.activities.MapActivity;
+import net.osmand.plus.base.ColoredStatusBarFragment;
 import net.osmand.plus.widgets.AutoCompleteTextViewEx;
 import net.osmand.util.Algorithms;
 
-public abstract class PointEditorFragment extends Fragment {
+public abstract class PointEditorFragment extends ColoredStatusBarFragment {
 
 	private View view;
 	private EditText nameEdit;
@@ -43,6 +43,7 @@ public abstract class PointEditorFragment extends Fragment {
 							 Bundle savedInstanceState) {
 
 		view = inflater.inflate(R.layout.point_editor_fragment, container, false);
+		AndroidUtils.addStatusBarPadding21v(getContext(), view);
 
 		getEditor().updateLandscapePortrait();
 		getEditor().updateNightMode();
@@ -215,6 +216,11 @@ public abstract class PointEditorFragment extends Fragment {
 			save(false);
 		}
 		super.onDestroyView();
+	}
+
+	@Override
+	protected int getStatusBarColor() {
+		return getEditor().isLight() ? R.color.status_bar_light : R.color.status_bar_dark;
 	}
 
 	private void hideKeyboard() {
