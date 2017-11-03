@@ -106,6 +106,7 @@
         android:layout_height="match_parent"
         android:layout_gravity="left"
         android:background="?attr/bg_color"
+        android:clipToPadding="false"
         android:drawSelectorOnTop="true"/>
 
 </android.support.v4.widget.DrawerLayout>
