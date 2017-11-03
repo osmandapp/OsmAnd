@@ -9,13 +9,13 @@
         android:id="@+id/keyboard_item_top_spacing"
         android:layout_width="match_parent"
         android:layout_height="0dp"
-        android:layout_weight="0.3"/>
+        android:layout_weight="0.35"/>
 
     <android.support.v7.widget.AppCompatTextView
         android:id="@+id/keyboard_item_text"
         android:layout_width="match_parent"
         android:layout_height="0dp"
-        android:layout_weight="0.4"
+        android:layout_weight="0.3"
         android:gravity="center"
         android:textAllCaps="true"
         android:textColor="?attr/keyboard_item_text_color"
@@ -25,7 +25,7 @@
         android:id="@+id/keyboard_item_bottom_spacing"
         android:layout_width="match_parent"
         android:layout_height="0dp"
-        android:layout_weight="0.3"/>
+        android:layout_weight="0.35"/>
 
     <ImageView
         android:id="@+id/keyboard_item_image"
