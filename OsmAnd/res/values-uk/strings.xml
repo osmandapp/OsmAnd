@@ -1287,10 +1287,10 @@
     <string name="seconds_ago">секунд тому</string>
     <string name="osmo_connected_devices">Під’єднані пристрої</string>
     <string name="osmo_groups">OsMo Групи</string>
-    <string name="osmo_auto_send_locations_descr">Автоматичний початок подорожі та надсилання місцезнаходження після запуска застосунка</string>
+    <string name="osmo_auto_send_locations_descr">Автоматичний початок подорожі та надсилання місцезнаходження після запуска застосунка.</string>
     <string name="osmo_auto_send_locations">Автоматичний запуск подорожі</string>
     <string name="osmo_tracker_id">ID трекера</string>
-    <string name="osmo_tracker_id_descr">Натисніть, щоб подивитися ідентифікатор трекера</string>
+    <string name="osmo_tracker_id_descr">Натисніть, щоб подивитися ідентифікатор трекера.</string>
     <string name="osmo_server_operation_failed">OsMo Server збій виконання операції</string>
     <string name="osmo_activity">OpenStreetMap Моніторинг</string>
     <string name="osmo_control">OsMo швидкий доступ</string>
@@ -2293,12 +2293,12 @@
     <string name="access_smart_autoannounce">Інтелектуальне оповіщення</string>
     <string name="access_smart_autoannounce_descr">Сповіщати тільки якщо напрямок до цільової точки змінюється.</string>
     <string name="access_autoannounce_period">Період сповіщеннь</string>
-    <string name="access_autoannounce_period_descr">Мінімальний час між сповіщеннями</string>
+    <string name="access_autoannounce_period_descr">Мінімальний час між оголошеннями.</string>
     <string name="access_default_color">Типовий колір</string>
     <string name="access_category_choice">Оберіть категорію</string>
     <string name="access_hint_enter_name">Додайте назву</string>
     <string name="access_hint_enter_category">Додайте категорію</string>
-    <string name="access_hint_enter_description">Додайте опис</string>
+    <string name="access_hint_enter_description">Додайте опис.</string>
     <string name="access_map_linked_to_location">Мапа повʼязана з місцевістю</string>
     <string name="access_collapsed_list">Згорнутий перелік</string>
     <string name="access_expanded_list">Розгорнутий перелік</string>
