@@ -256,6 +256,7 @@ public class CoordinateInputDialogFragment extends DialogFragment implements Osm
 				"7", "8", "9", R.drawable.ic_keyboard_backspace,
 				".", "0", ":", R.drawable.ic_keyboard_next_field};
 		final GridView keyboardGrid = (GridView) mainView.findViewById(R.id.keyboard_grid_view);
+		keyboardGrid.setBackgroundColor(ContextCompat.getColor(getContext(), lightTheme ? R.color.keyboard_divider_light : R.color.keyboard_divider_dark));
 		final KeyboardAdapter keyboardAdapter = new KeyboardAdapter(mapActivity, keyboardItems);
 		keyboardGrid.setAdapter(keyboardAdapter);
 		keyboardGrid.setOnItemClickListener(new AdapterView.OnItemClickListener() {
