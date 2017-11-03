@@ -2852,7 +2852,7 @@ Indikas lokon:  %1$s x %2$s"</string>
     <string name="import_as_favorites">Enporti kiel ŝatatajn</string>
     <string name="import_file">Enporti dosieron</string>
 	<string name="tap_on_map_to_hide_interface_descr">Premi ie ajn sur la mapo por kaŝi la fasadon kaj baskuli plen-ekranan reĝimon.</string>
-    <string name="tap_on_map_to_hide_interface">Frapeti mapon por kaŝi la fasadon</string>
+    <string name="tap_on_map_to_hide_interface">Plenekrana reĝimo</string>
     <string name="show_on_top_bar">Montri en supra breto</string>
     <string name="mark_passed">Marki pasigitajn</string>
     </resources>
