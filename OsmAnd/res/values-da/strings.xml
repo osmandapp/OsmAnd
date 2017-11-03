@@ -404,7 +404,7 @@ OSM er et i fællesskab drevet, globalt offentligt domæne kortlægningsprojekt.
     <string name="live_monitoring_url">Webadresse for online sporing</string>
     <string name="gpx_monitoring_disabled_warn">Log spor med GPX modul eller via indstillinger \'Tur optagelse\'.</string>
     <string name="show_current_gpx_title">Vis aktuelt spor</string>
-    <string name="free_version_message">Den gratis version af OsmAnd er begrænset til at hente %1$s kort og understøtter ikke offline Wikipedia artikler.</string>
+    <string name="free_version_message">Den gratis version af OsmAnd er begrænset til at hente %1$s kort (herunder opdateringer) og understøtter ikke offline Wikipedia artikler.</string>
     <string name="free_version_title">Gratisversion</string>
     <string name="poi_context_menu_showdescription">Vis IP beskrivelse.</string>
     <string name="index_name_north_america">Nordamerika</string>
@@ -592,7 +592,7 @@ OSM er et i fællesskab drevet, globalt offentligt domæne kortlægningsprojekt.
 	<string name="switch_to_vector_map_to_see">Offline vektor-kort er tilgængelig for denne placering.
 \n\nFor at anvende aktiver \'Menu\' → \'Konfigurer kort\' → \'Vælg kortkilde…\' → \'Offline vektor-kort\'.</string>
     <string name="choose_audio_stream">Audiokanal for talevejledning</string>
-    <string name="choose_audio_stream_descr">Vælg højttaler til at afspille talevejledning</string>
+    <string name="choose_audio_stream_descr">Vælg højttaler til at afspille talevejledning.</string>
     <string name="voice_stream_voice_call">Telefonopkald lyd (afbryder også Bluetooth bilradio)</string>
     <string name="voice_stream_notification">Meddelelselyd</string>
     <string name="voice_stream_music">Medie-/musiklyd</string>
@@ -777,7 +777,7 @@ OSM er et i fællesskab drevet, globalt offentligt domæne kortlægningsprojekt.
     <string name="where_am_i">Hvor er jeg?</string>
     <string name="network_provider">Netværk</string>
     <string name="int_seconds">sekunder</string>
-    <string name="background_service_int_descr">Indstil vågn-op interval som anvendes ved kørsel i baggrunden</string>
+    <string name="background_service_int_descr">Indstil vågn-op interval som anvendes af baggrundstjenesten.</string>
     <string name="background_service_int">GPS vågn-op interval</string>
     <string name="background_service_provider_descr">Vælg placeringsudbyder som bruges af baggrundstjenesten.</string>
     <string name="background_service_provider">Placeringsudbyder</string>
@@ -908,7 +908,7 @@ OSM er et i fællesskab drevet, globalt offentligt domæne kortlægningsprojekt.
     <string name="hint_search_online">Online-søgning: husnummer, gade, by</string>
     <string name="search_online_address">Online søgning</string>
     <string name="max_level_download_tile">Maks online zoom</string>
-    <string name="max_level_download_tile_descr">Vælg maks zoomniveau der skal hentes for online kortbrikker.</string>
+    <string name="max_level_download_tile_descr">Angiv det maksimale zoomniveau der skal hentes for online kortbrikker.</string>
 	
 	
 	
@@ -2937,7 +2937,7 @@ Repræsenterer område: %1$s x %2$s</string>
     <string name="import_as_gpx">Importer som GPX-fil</string>
     <string name="import_as_favorites">Importer som favoritter</string>
     <string name="import_file">Importer fil</string>
-	<string name="tap_on_map_to_hide_interface_descr">Tryk et vilkårligt sted på kortet skjuler grænsefladen og skifter mellem fuldskærmstilstand.</string>
+	<string name="tap_on_map_to_hide_interface_descr">Et tryk på kortet skifter kontrolknapper og moduler.</string>
     <string name="tap_on_map_to_hide_interface">Fuldskærmstilstand</string>
     <string name="show_on_top_bar">Vis på topbjælke</string>
     <string name="mark_passed">Marker som passeret</string>
